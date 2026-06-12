@@ -41,6 +41,7 @@ declare function generateAutoCTA(title: string, keywords?: string): any;
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
+declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string } };
 declare function parseLocalFolderImages(folderPath: string, headings: any[]): Promise<any[]>;
 declare function isFullAutoStopRequested(modal: any): boolean;
 declare function getProgressModal(): any;
@@ -226,8 +227,10 @@ async function generateImagesForAutomationSafely(
   options?: any,
 ): Promise<any[]> {
   try {
+    // [Phase 7.1-a] Defaults come from the single resolver — callers may
+    // override via options until full config threading lands (7.1-d).
     const resolvedOptions = {
-      headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+      headingImageMode: resolvePipelineConfig('full-auto').image.headingImageMode,
       fallbackProvider: resolveImageProviderFallback(),
       ...(options || {}),
     };
@@ -260,6 +263,9 @@ export async function handleFullAutoPublish(): Promise<void> {
   }
 
   // 1개 계정 모드: 기존 로직
+  // [Phase 7.1-a] Resolve pipeline settings ONCE at flow entry — all image
+  // cluster reads below use this snapshot instead of scattered localStorage.
+  const pipelineCfg = resolvePipelineConfig('full-auto');
   const urls = getUnifiedUrls();
   const title = (document.getElementById('unified-title') as HTMLInputElement)?.value?.trim();
   const keywords = (document.getElementById('unified-keywords') as HTMLInputElement)?.value?.trim();
@@ -278,7 +284,7 @@ export async function handleFullAutoPublish(): Promise<void> {
   // 가드 실패 시 발행을 *중단*해야 silent 우회로 인한 과금 차단됨.
   try {
     const guardImageSource = UnifiedDOMCache.getImageSource();
-    const skipImagesForGuard = localStorage.getItem('textOnlyPublish') === 'true'
+    const skipImagesForGuard = pipelineCfg.image.textOnlyPublish
       || ((document.getElementById('unified-skip-images') as HTMLInputElement | null)?.checked === true);
     if (!skipImagesForGuard) {
       const passed = await runOpenAIImageGuard(guardImageSource);
@@ -474,7 +480,7 @@ export async function handleFullAutoPublish(): Promise<void> {
     console.log(`[FullAutoPublish] 🔍🔍🔍 선택된 버튼 data-source = "${selectedBtnDiag?.dataset?.source || '(없음)'}"`);
 
     // ✅ [2026-01-28 FIX] 이미지 모달의 'textOnlyPublish' 설정 우선 적용
-    const skipImagesFromStorage = localStorage.getItem('textOnlyPublish') === 'true';
+    const skipImagesFromStorage = pipelineCfg.image.textOnlyPublish;
     const skipImagesFromDom = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
     const skipImages = skipImagesFromStorage || skipImagesFromDom;
     console.log(`[FullAutoPublish] 이미지 건너뛰기 설정 - Storage: ${skipImagesFromStorage}, DOM: ${skipImagesFromDom}, 최종: ${skipImages}`);
@@ -550,7 +556,7 @@ export async function handleFullAutoPublish(): Promise<void> {
     }
 
     // ✅ [2026-03-10 CLEANUP] full-auto-thumbnail-text 유령 참조 제거 → localStorage 단일 소스
-    const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true' ||
+    const includeThumbnailText = pipelineCfg.image.thumbnailTextInclude ||
       (document.getElementById('thumbnail-text-include') as HTMLInputElement)?.checked || false;
     console.log(`[FullAutoPublish] 썸네일 텍스트 포함: ${includeThumbnailText}`);
 
@@ -592,11 +598,12 @@ export async function handleFullAutoPublish(): Promise<void> {
       // ✅ [2026-02-19] 쇼핑커넥트 모드 자동 감지: affiliateLink가 있거나 URL이 제휴 URL이면 affiliate 모드
       contentMode: resolvedContentModeForPublish,
       // ✅ [2026-03-23 FIX] 이미지 설정 명시적 전달 (localStorage 폴백 의존 제거)
-      imageStyle: localStorage.getItem('imageStyle') || 'realistic',
-      headingImageMode: localStorage.getItem('headingImageMode') || 'all',
-      imageRatio: localStorage.getItem('imageRatio') || '1:1',
-      thumbnailImageRatio: localStorage.getItem('thumbnailImageRatio') || '1:1',
-      subheadingImageRatio: localStorage.getItem('subheadingImageRatio') || '1:1',
+      // [Phase 7.1-a] 진입점 1회 해석 스냅샷 사용
+      imageStyle: pipelineCfg.image.imageStyle,
+      headingImageMode: pipelineCfg.image.headingImageMode,
+      imageRatio: pipelineCfg.image.imageRatio,
+      thumbnailImageRatio: pipelineCfg.image.thumbnailImageRatio,
+      subheadingImageRatio: pipelineCfg.image.subheadingImageRatio,
     };
 
     // ✅ [2026-02-16 DEBUG] categoryName 전달 상태 진단 (터미널에 출력)

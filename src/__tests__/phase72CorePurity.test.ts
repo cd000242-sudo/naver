@@ -24,7 +24,8 @@ describe('Phase 7.2 코어 순수화 — generateImagesForAutomation headingImag
     const passPattern = /headingImageMode: localStorage\.getItem\('headingImageMode'\) \|\| 'all'/g;
     expect((mam.match(passPattern) || []).length).toBeGreaterThanOrEqual(3);
     expect((cp.match(passPattern) || []).length).toBeGreaterThanOrEqual(2);
-    expect((ph.match(passPattern) || []).length).toBeGreaterThanOrEqual(1);
+    // [Phase 7.1-a] 풀오토 래퍼는 단일 해석처(resolvePipelineConfig) 경유로 전환
+    expect(ph).toContain("headingImageMode: resolvePipelineConfig('full-auto').image.headingImageMode");
   });
 });
 

@@ -312,6 +312,7 @@ try {
     //   renderer 인라인 빌드에서 .js 파일이 없어 404 → catch silent fail → OpenAI 가드 우회 → 과금 위험.
     //   수정: 정적 inline + 호출지점에서 동적 import 제거 (static import로 변경).
     'openaiImageGuard.js',
+    'pipelineConfig.js',  // [Phase 7.1] 발행 파이프라인 설정 단일 해석처 (publishingHandlers/continuousPublishing/multiAccountManager보다 먼저 로드)
     'continuousPublishModeHelpers.js',  // ✅ 연속발행 publishMode 해석 헬퍼 (continuousPublishing보다 먼저 로드)
     'continuousPublishing.js',
     'thumbnailGenerator.js',
