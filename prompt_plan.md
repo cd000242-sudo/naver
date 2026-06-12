@@ -18,6 +18,16 @@
 - 매트릭스 일괄 "완료" 마감은 라이브 증거 없이는 불가 — 3점 잠금 원칙 유지 (전 행 "라이브 대기")
 - 게이트 상태: vitest 3,002/3,002 GREEN · tsc 0 · lint 0 errors · build PASS · self-test PASS
 
+## Phase 7 진행 상태 (6/12 시작)
+- ✅ 7.2 R13 1차: generateImagesForAutomation headingImageMode 명시 입력화 (c2a9b845)
+  — 코어 options 우선 + 폴백 경고, 진입점 4곳(연속1/다중2/풀오토 래퍼1) 명시 전달
+- 다음 7.2 후보: ① 코어 invalid-provider localStorage 폴백 → options.fallbackProvider화
+  ② richTextPaste pick* 테마의 전역 의존 점검 ③ editorHelpers 내 localStorage 직독 전수 감사
+- 7.1 PipelineConfig: 7.2가 충분히 진행된 뒤 (입력이 명시화되어야 Config로 묶을 수 있음)
+- 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
+  분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
+- 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert
+
 ## 다음 세션 순서
 1. **라이브 검증 1세션** (사용자): 연속발행 2건(카테고리 지정·이전글·CTA·해시태그) + 풀오토 1건
    → 매트릭스 "라이브 대기" 일괄 마감 + R6 진입 조건(오탐 데이터) 확보
