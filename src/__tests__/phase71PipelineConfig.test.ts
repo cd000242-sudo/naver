@@ -94,3 +94,16 @@ describe('직독 래칫 — continuousPublishing (7.1-b)', () => {
     expect(cp).toContain("const pipelineCfg = resolvePipelineConfig('continuous')");
   });
 });
+
+describe('직독 래칫 — multiAccountManager (7.1-c)', () => {
+  it('다중계정 이미지 모드 클러스터 직독이 단일 해석처로 이관되었다', () => {
+    const mam = read('src', 'renderer', 'modules', 'multiAccountManager.ts');
+    const count = (key: string) =>
+      (mam.match(new RegExp(`localStorage\\.getItem\\('${key}'\\)`, 'g')) || []).length;
+    // 코어의 경고 동반 전환기 폴백 1곳만 허용 (R13 1차)
+    expect(count('headingImageMode')).toBeLessThanOrEqual(1);
+    expect(count('thumbnailTextInclude')).toBe(0);
+    // 큐 루프 per-item 해석이 존재
+    expect(mam).toContain("const itemPipelineCfg = resolvePipelineConfig('multi-account')");
+  });
+});

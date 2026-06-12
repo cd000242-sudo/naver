@@ -2953,6 +2953,9 @@ async function initMultiAccountPublishModal() {
         try {
             for (let i = 0; i < queueSnapshot.length && !stopRequested && !window.stopFullAutoPublish; i++) {
                 const queueItem = queueSnapshot[i];
+                // [Phase 7.1-c] Per-item snapshot — settings changed mid-run
+                // apply from the NEXT account/post (design §2.2).
+                const itemPipelineCfg = resolvePipelineConfig('multi-account');
                 let generatedPostId = null;
                 const TOTAL_SUB_STEPS = 4;
                 resetMASteps();
@@ -3276,11 +3279,11 @@ async function initMultiAccountPublishModal() {
                                 },
                                 aiFallbackFn: generateImagesForAutomation,
                                 aiOptions: {
-                                    headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                                    headingImageMode: itemPipelineCfg.image.headingImageMode,
                                     fallbackProvider: resolveImageProviderFallback(),
                                     stopCheck: () => stopRequested || window.stopFullAutoPublish,
-                                    allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true',
-                                    thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',
+                                    allowThumbnailText: itemPipelineCfg.image.thumbnailTextInclude,
+                                    thumbnailTextInclude: itemPipelineCfg.image.thumbnailTextInclude,
                                 },
                             });
                             generatedImages = lfResult.images;
@@ -3291,10 +3294,10 @@ async function initMultiAccountPublishModal() {
                         else if (imageSource === 'naver') {
                             addMALog(`🔍 네이버 이미지 검색 시작 (키워드: ${structuredContent.keywords?.[0] || structuredContent.selectedTitle})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
-                                headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                                headingImageMode: itemPipelineCfg.image.headingImageMode,
                                 fallbackProvider: resolveImageProviderFallback(),
-                                allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
-                                thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
+                                allowThumbnailText: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
+                                thumbnailTextInclude: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
                                 stopCheck: () => stopRequested || window.stopFullAutoPublish,
                                 onProgress: (msg) => {
                                     addMALog(msg, 'info');
@@ -3310,10 +3313,10 @@ async function initMultiAccountPublishModal() {
                             };
                             addMALog(`🎨 AI 이미지 생성 시작 (엔진: ${_maSourceNames[imageSource] || imageSource})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
-                                headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                                headingImageMode: itemPipelineCfg.image.headingImageMode,
                                 fallbackProvider: resolveImageProviderFallback(),
-                                allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
-                                thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true' || queueItem.includeThumbnailText,
+                                allowThumbnailText: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
+                                thumbnailTextInclude: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
                                 stopCheck: () => stopRequested || window.stopFullAutoPublish,
                                 onProgress: (msg) => {
                                     addMALog(msg, 'info');

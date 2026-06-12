@@ -21,11 +21,10 @@ describe('Phase 7.2 코어 순수화 — generateImagesForAutomation headingImag
     const mam = read('src', 'renderer', 'modules', 'multiAccountManager.ts');
     const cp = read('src', 'renderer', 'modules', 'continuousPublishing.ts');
     const ph = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
-    const passPattern = /headingImageMode: localStorage\.getItem\('headingImageMode'\) \|\| 'all'/g;
-    expect((mam.match(passPattern) || []).length).toBeGreaterThanOrEqual(3);
-    // [Phase 7.1-b] 연속발행은 per-item 스냅샷 경유로 전환
-    const cpCfgPattern = /headingImageMode: itemPipelineCfg\.image\.headingImageMode/g;
-    expect((cp.match(cpCfgPattern) || []).length).toBeGreaterThanOrEqual(2);
+    // [Phase 7.1-b/c] 연속/다중계정은 per-item 스냅샷 경유로 전환
+    const cfgPassPattern = /headingImageMode: itemPipelineCfg\.image\.headingImageMode/g;
+    expect((mam.match(cfgPassPattern) || []).length).toBeGreaterThanOrEqual(3);
+    expect((cp.match(cfgPassPattern) || []).length).toBeGreaterThanOrEqual(2);
     // [Phase 7.1-a] 풀오토 래퍼는 단일 해석처(resolvePipelineConfig) 경유로 전환
     expect(ph).toContain("headingImageMode: resolvePipelineConfig('full-auto').image.headingImageMode");
   });
