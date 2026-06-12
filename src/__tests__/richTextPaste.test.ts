@@ -406,3 +406,51 @@ describe('orphan pipe-row handling (2026-06-12)', () => {
     expect(result.html).toContain('<table');
   });
 });
+
+// 2026-06-12 라이브 2차 실측: 블록 단위 검사로는 못 잡는 두 형태가 발행물에
+// 파이프 원문으로 노출 — ① 산문 줄과 같은 블록에 붙은 고아 헤더 행,
+// ② 행 마지막 파이프 뒤에 산문이 이어지는 줄. 줄 단위 정규화 계약.
+describe('orphan pipe-line normalization (2026-06-12 live round 2)', () => {
+  it('converts a pipe row that shares a block with prose lines', () => {
+    const result = buildMobileRichHtml(
+      '하나라도 비면 결과가 달라질 수 있습니다.\n| 항목 | 정리 |',
+      { highlight: false }
+    );
+    expect(result.plainText).not.toContain('|');
+    expect(result.plainText.replace(/\s+/g, ' ')).toContain('항목 — 정리');
+    expect(result.plainText).toContain('하나라도 비면');
+  });
+
+  it('converts a pipe row with trailing prose after the last pipe', () => {
+    const result = buildMobileRichHtml(
+      '| 시기 확인 | 예산과 신청시기에 따라 안내가 달라질 수 있습니다 | 막상 이 표만 저장해두면 다시 보기 편하더라고요.',
+      { highlight: false }
+    );
+    const flat = result.plainText.replace(/\s+/g, ' ');
+    expect(result.plainText).not.toContain('|');
+    expect(flat).toContain('시기 확인 — 예산과 신청시기에 따라 안내가 달라질 수 있습니다');
+    expect(flat).toContain('막상 이 표만 저장해두면');
+  });
+
+  it('replaces inline pipes inside prose with a readable separator', () => {
+    const result = buildMobileRichHtml('이 표 | 보기 편하게 정리했습니다.', { highlight: false });
+    expect(result.plainText).not.toContain('|');
+    expect(result.plainText).toContain('보기 편하게');
+  });
+
+  it('still renders a valid table next to an orphan header row', () => {
+    const result = buildMobileRichHtml(
+      [
+        '| 항목 | 정리 |',
+        '',
+        '| 인증 상태 | 정부24 로그인이 먼저입니다 |',
+        '| --- | --- |',
+        '| 가족 정보 | 맞춤안내 설정에서 추가합니다 |',
+      ].join('\n'),
+      { highlight: false }
+    );
+    expect(result.tableCount).toBe(1);
+    expect(result.plainText).not.toContain('|');
+    expect(result.plainText.replace(/\s+/g, ' ')).toContain('항목 — 정리');
+  });
+});

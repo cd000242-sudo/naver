@@ -490,6 +490,30 @@ function isTableDivider(line: string): boolean {
   return /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(line);
 }
 
+// [2026-06-12] Pipe characters must NEVER reach the published post. Block
+// detection alone missed two live cases: an orphan header row sharing a block
+// with prose, and a row with trailing prose after its last pipe. Normalize
+// per line — full rows become "first — rest · rest" sentences, dividers are
+// dropped, and stray inline pipes become a readable separator.
+function normalizeOrphanPipeLine(line: string): string | null {
+  if (!line.includes('|')) return line;
+  if (isTableDivider(line)) return null;
+  const rowMatch = line.match(/^\s*(\|.+\|)(.*)$/);
+  if (rowMatch) {
+    const cells = splitTableCells(rowMatch[1]).filter(
+      (cell) => cell.length > 0 && !/^:?-{3,}:?$/.test(cell),
+    );
+    const trailing = rowMatch[2].trim();
+    if (cells.length === 0) return trailing || null;
+    const sentence = cells.length >= 2
+      ? `${cells[0]} — ${cells.slice(1).join(' · ')}`
+      : cells[0];
+    return trailing ? `${sentence} ${trailing}` : sentence;
+  }
+  const replaced = line.replace(/\s*\|+\s*/g, ' · ').replace(/^\s*·\s*/, '').replace(/\s*·\s*$/, '').trim();
+  return replaced || null;
+}
+
 function tableStyle(theme: SoftTableTheme): string {
   return [
     'width:100%',
@@ -1118,10 +1142,10 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
   let pendingAnswerNumber: number | null = null;
 
   for (const block of blocks) {
-    const lines = block.split('\n').map(line => line.trim()).filter(Boolean);
+    const rawLines = block.split('\n').map(line => line.trim()).filter(Boolean);
 
-    if (isMarkdownTableBlock(lines)) {
-      const table = markdownTableToHtml(lines, tableTheme);
+    if (isMarkdownTableBlock(rawLines)) {
+      const table = markdownTableToHtml(rawLines, tableTheme);
       if (table.html) {
         nodes.push({ type: 'table', html: table.html, plain: table.plain });
         tableCount += 1;
@@ -1129,32 +1153,12 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
       }
     }
 
-    // [2026-06-12] Orphan pipe rows: LLMs sometimes append a standalone
-    // callout row ("| 판단 | ... |", no header/divider) after a table. The
-    // table detector rightly rejects it, but raw pipe characters must never
-    // reach the published post (live screenshot) — strip the cells into a
-    // readable sentence, and silently drop stray divider-only rows.
-    const isPipeOnlyBlock = lines.every((line) => /^\s*\|.*\|\s*$/.test(line));
-    if (isPipeOnlyBlock) {
-      const contentRows = lines.filter((line) => !isTableDivider(line));
-      for (const row of contentRows) {
-        const cells = splitTableCells(row).filter(Boolean);
-        if (cells.length === 0) continue;
-        const sentence = cells.length >= 2
-          ? `${cells[0]} — ${cells.slice(1).join(' · ')}`
-          : cells[0];
-        for (const chunk of buildReadableParagraphs(sentence, maxChunkChars)) {
-          nodes.push({
-            type: 'paragraph',
-            text: chunk,
-            plain: stripInlineMarkdown(chunk),
-            score: scoreImportantSentence(chunk),
-            sectionIndex: currentSectionIndex,
-          });
-        }
-      }
-      continue;
-    }
+    // Not a valid table — neutralize any leftover pipe fragments per line
+    // (orphan header rows, rows with trailing prose, stray dividers).
+    const lines = rawLines
+      .map((line) => normalizeOrphanPipeLine(line))
+      .filter((line): line is string => line !== null && line.length > 0);
+    if (lines.length === 0) continue;
 
     if (isReadableListBlock(lines)) {
       const list = readableListBlockToHtml(lines, terms, highlightTheme);
