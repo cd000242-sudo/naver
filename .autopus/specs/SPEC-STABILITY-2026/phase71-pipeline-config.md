@@ -71,9 +71,9 @@ R13 1~3차에서 만든 options 통로를 그대로 사용. `aiOptions`/`options
 
 | 단계 | 내용 | 위험 |
 |---|---|---|
-| 7.1-a | pipelineConfig.ts 신설 + 풀오토 진입점(publishingHandlers) 이미지 모드 클러스터 배선 | local |
-| 7.1-b | 연속발행 진입점 배선 (동일 클러스터) | local |
-| 7.1-c | 다중계정 진입점 배선 (동일 클러스터) | local |
+| 7.1-a | ✅ (02def1cd) pipelineConfig.ts 신설 + 풀오토 진입점 이미지 모드+포맷 클러스터 배선 | local |
+| 7.1-b | ✅ (09a204ea) 연속발행 배선 — V2 per-item + Enhanced per-publish | local |
+| 7.1-c | ✅ (f2be7386) 다중계정 배선 — 큐 루프 per-item | local |
 | 7.1-d | 공유 헬퍼(headingImageGen/costAndAutoGen)의 직독 → config 수신 전환 (경고 폴백) | module |
 | 7.1-e | 이미지 포맷 클러스터 (imageStyle/Ratio 4종) 동일 절차 | module |
 | 7.1-f | 프로바이더 클러스터 흡수 (resolveImageProviderFallback → config) | local |
@@ -90,3 +90,13 @@ R13 1~3차에서 만든 options 통로를 그대로 사용. `aiOptions`/`options
 - **스냅샷 동작 변화**: §2.2 명기 — 의도된 개선이나 릴리즈 노트에 기록.
 - **이중 전달 기간**: config + 개별 키 공존으로 전환기 코드가 일시적으로 늘어남
   — 7.1-h에서 개별 키 전달 제거로 정리.
+
+## 5. 진행 기록
+
+- 6/13 7.1-a~c 완료 (02def1cd·09a204ea·f2be7386). 게이트: vitest 3,072 GREEN ·
+  lint 0 errors · build PASS(식별자 충돌 0·번들 인라인 확인) — 커밋별 실측.
+- 멀티에이전트 회귀 리뷰(5차원 리뷰어 + 발견별 적대 검증 2인, 에이전트 7):
+  **확정 결함 0건**. 기각 1건 — "mam 래칫 7키 전체 잠금" 제안은 결함 아닌
+  하드닝으로 판정 → 7.1-h에서 3개 모듈 × 7키 전체 toBe(0) 래칫으로 흡수 예정.
+- 남은 단계: 7.1-d(공유 헬퍼 headingImageGen/costAndAutoGen) → e~h.
+- 라이브 일괄 검증(3플로우)은 7.1-d 이후 또는 다음 릴리즈 전 1회.
