@@ -486,3 +486,23 @@ describe('boilerplate example-header drop (2026-06-12 live round 3)', () => {
     expect(result.html).toContain('항목');
   });
 });
+
+// 2026-06-12 라이브 4차: 수집 파이프라인이 과거 오염 발행물("· 항목 · 정리")을
+// 참고자료로 흡수 → LLM이 파이프 없는 변형을 문자 그대로 재생산. 파이프
+// 유무와 무관하게 항목/정리 보일러플레이트는 제거한다.
+describe('boilerplate drop without pipes (2026-06-12 live round 4)', () => {
+  it('drops a middot-form "· 항목 · 정리" line (no pipes)', () => {
+    const result = buildMobileRichHtml(
+      '저는 이런 유형은 한 번에 정리해두는 게 편했어요.\n\n· 항목 · 정리\n\n| 전입일 | 전입신고 반영 날짜를 먼저 확인해요 |\n| --- | --- |\n| 조건 | 충족 여부가 자격과 직결돼요 |',
+      { highlight: false }
+    );
+    expect(result.tableCount).toBe(1);
+    expect(result.plainText).not.toMatch(/항목\s*[·—-]\s*정리/);
+    expect(result.plainText.replace(/\s+/g, ' ')).toContain('한 번에 정리해두는 게 편했어요');
+  });
+
+  it('keeps normal prose mentioning 항목 and 정리 in a sentence', () => {
+    const result = buildMobileRichHtml('신청 항목을 미리 정리해두면 접수가 빨라요.', { highlight: false });
+    expect(result.plainText).toContain('신청 항목을 미리 정리해두면');
+  });
+});

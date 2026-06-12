@@ -496,11 +496,14 @@ function isTableDivider(line: string): boolean {
 // per line — full rows become "first — rest · rest" sentences, dividers are
 // dropped, and stray inline pipes become a readable separator.
 function normalizeOrphanPipeLine(line: string): string | null {
-  if (!line.includes('|')) return line;
-  if (isTableDivider(line)) return null;
   // The prompt's format example "| 항목 | 정리 |" gets copied verbatim by the
   // LLM as a stray header outside the real table — boilerplate, not content.
+  // Pipeless variants ("· 항목 · 정리") also occur: the crawler feeds the
+  // model previously contaminated posts and it reproduces them literally, so
+  // this check must run BEFORE the pipe gate.
   if (/^[\s|·—–-]*항목[\s|·—–-]+정리[\s|·—–-]*$/.test(line)) return null;
+  if (!line.includes('|')) return line;
+  if (isTableDivider(line)) return null;
   const rowMatch = line.match(/^\s*(\|.+\|)(.*)$/);
   if (rowMatch) {
     const cells = splitTableCells(rowMatch[1]).filter(
