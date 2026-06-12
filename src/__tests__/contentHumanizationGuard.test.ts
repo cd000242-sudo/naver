@@ -118,3 +118,17 @@ describe('회귀방지 net: 사람다움/AI탐지 분별력', () => {
     });
   });
 });
+
+// 2026-06-12 S18-3: markdown table rows must survive humanization — sentence
+// joining / ending transforms would shred "| a | b |" rows into prose.
+describe('humanizer table shield (S18-3)', () => {
+  it('keeps markdown table rows byte-identical through strong humanization', async () => {
+    const { humanizeContent } = await import('../aiHumanizer');
+    const table = ['| 항목 | 정리 |', '| --- | --- |', '| 지급 조건 | 압류방지통장 등록이 먼저입니다 |'].join('\n');
+    const content = ['주거급여 지급 조건을 확인했습니다. 계좌가 먼저입니다.', '', table, '', '이 표만 저장해두면 다시 보기 편합니다. 추가 서류도 같이 확인합니다.'].join('\n');
+    const out = humanizeContent(content, 'strong', true);
+    expect(out).toContain('| 항목 | 정리 |');
+    expect(out).toContain('| --- | --- |');
+    expect(out).toContain('| 지급 조건 | 압류방지통장 등록이 먼저입니다 |');
+  });
+});

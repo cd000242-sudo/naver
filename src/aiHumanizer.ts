@@ -252,7 +252,14 @@ export function humanizeContent(content: string, intensity: 'light' | 'medium' |
     _humanizerLogShown = true;
   }
 
-  let result = content;
+  // [2026-06-12 S18-3] Markdown table rows must survive humanization —
+  // sentence joining / ending transforms shred "| a | b |" rows into prose.
+  // Shield them behind placeholder tokens, restore after all transforms.
+  const shieldedTables: string[] = [];
+  let result = content.replace(/^[ \t]*\|.*\|[ \t]*$/gm, (line) => {
+    shieldedTables.push(line);
+    return `⟦TBL${shieldedTables.length - 1}⟧`;
+  });
 
   // 0. 한국어 맞춤법 교정 (모든 톤 공통)
   result = correctSpelling(result);
@@ -306,6 +313,14 @@ export function humanizeContent(content: string, intensity: 'light' | 'medium' |
 
   // 11. 숫자/날짜 자연화 (모든 톤 공통)
   result = naturalizeNumbers(result);
+
+  // Restore shielded table rows (own line, transforms never touched them).
+  if (shieldedTables.length > 0) {
+    result = result.replace(/⟦TBL(\d+)⟧/g, (token, idx) => {
+      const original = shieldedTables[Number(idx)];
+      return original !== undefined ? original : token;
+    });
+  }
 
   return result;
 }
