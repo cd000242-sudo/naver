@@ -1099,10 +1099,21 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
   const fontSizePx = options.fontSizePx ?? 19;
   const enableHighlight = options.highlight !== false;
   const terms: string[] = [];
-  const articleThemes = pickRichArticleThemes();
-  const tableTheme = options.tableTheme ?? articleThemes.tableTheme;
-  const highlightTheme = options.highlightTheme ?? articleThemes.highlightTheme;
-  const headingTheme = options.headingTheme ?? articleThemes.headingTheme;
+  // [Phase 7.2 / R13] The theme set is resolved ONCE per post by the flow
+  // entry (__richPasteThemes) and passed via options. The lazy pick below is
+  // a warned fallback for un-migrated callers only — an eager per-call pick
+  // could mix theme sets within one post when pasting in multiple chunks.
+  let lazyThemes: RichArticleThemes | null = null;
+  const fallbackThemes = (): RichArticleThemes => {
+    if (!lazyThemes) {
+      lazyThemes = pickRichArticleThemes();
+      console.warn('[buildMobileRichHtml] ⚠️ 테마 미전달 — per-call 랜덤 폴백 (R13: 호출자가 pickRichArticleThemes 1회 해석 후 전달)');
+    }
+    return lazyThemes;
+  };
+  const tableTheme = options.tableTheme ?? fallbackThemes().tableTheme;
+  const highlightTheme = options.highlightTheme ?? fallbackThemes().highlightTheme;
+  const headingTheme = options.headingTheme ?? fallbackThemes().headingTheme;
   const enableToc = options.toc === true;
   const boxedHeadings = options.boxedHeadings !== false;
   const centerAlign = options.centerAlign !== false;

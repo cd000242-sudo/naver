@@ -49,3 +49,24 @@ describe('Phase 7.2 코어 순수화 — invalid-provider fallbackProvider (R13 
     expect((ph.match(passPattern) || []).length).toBeGreaterThanOrEqual(1);
   });
 });
+
+describe('Phase 7.2 코어 순수화 — richTextPaste 테마 (R13 3차)', () => {
+  it('buildMobileRichHtml은 eager 랜덤 없이, 테마 미전달 시에만 lazy 폴백 + 경고를 남긴다', () => {
+    const src = read('src', 'automation', 'richTextPaste.ts');
+    expect(src).not.toMatch(/const articleThemes = pickRichArticleThemes\(\)/);
+    expect(src).toContain('테마 미전달 — per-call 랜덤 폴백');
+  });
+
+  it('프로덕션 호출자(editorHelpers/naverBlogAutomation)는 테마 3종을 명시 전달한다', () => {
+    const eh = read('src', 'automation', 'editorHelpers.ts');
+    const nba = read('src', 'naverBlogAutomation.ts');
+    for (const pass of [
+      'tableTheme: richThemes.tableTheme',
+      'highlightTheme: richThemes.highlightTheme',
+      'headingTheme: richThemes.headingTheme',
+    ]) {
+      expect(eh).toContain(pass);
+      expect(nba).toContain(pass);
+    }
+  });
+});
