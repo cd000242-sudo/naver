@@ -168,3 +168,59 @@ describe('normalizeImageForStorage', () => {
     });
   });
 });
+
+// SPEC-STABILITY-2026 Phase 8 — localStorage quota explosion (live 실측:
+// 핵 정리 후에도 naver_blog_generated_posts setItem 쿼터 초과 → 글 목록
+// 저장 실패). 원인: 메가바이트급 base64(data:) 미리보기가 글 목록에 영구
+// 저장됨. 계약: 재유도 가능한 식별자(filePath/blobId/http url)가 있으면
+// base64는 버리고, 식별자가 없을 때만 소형 base64에 한해 유지.
+describe('base64 quota guard (Phase 8)', () => {
+  const bigData = 'data:image/png;base64,' + 'A'.repeat(200_000);
+  const smallData = 'data:image/png;base64,' + 'A'.repeat(1_000);
+
+  it('drops data: preview/url when filePath exists (display falls back to filePath)', () => {
+    const out = normalizeImageForStorage({
+      filePath: 'C:\images\img1.png',
+      previewDataUrl: bigData,
+      url: bigData,
+    });
+    expect(out.previewDataUrl).toBe('');
+    expect(out.url).toBe('');
+    expect(out.filePath).toBe('C:\images\img1.png');
+  });
+
+  it('drops data: fields when blobId exists', () => {
+    const out = normalizeImageForStorage({
+      blobId: 'blob-123',
+      previewDataUrl: bigData,
+      url: bigData,
+    });
+    expect(out.previewDataUrl).toBe('');
+    expect(out.url).toBe('');
+    expect(out.blobId).toBe('blob-123');
+  });
+
+  it('keeps http url and drops only the base64 twin', () => {
+    const out = normalizeImageForStorage({
+      url: 'https://shop-phinf.pstatic.net/a.jpg',
+      previewDataUrl: bigData,
+    });
+    expect(out.url).toBe('https://shop-phinf.pstatic.net/a.jpg');
+    expect(out.previewDataUrl).toBe('');
+  });
+
+  it('keeps a SMALL data: preview only when no identifier exists at all', () => {
+    const out = normalizeImageForStorage({ previewDataUrl: smallData });
+    expect(out.previewDataUrl).toBe(smallData);
+  });
+
+  it('drops a HUGE data: preview even without identifiers (quota over display)', () => {
+    const out = normalizeImageForStorage({ previewDataUrl: bigData });
+    expect(out.previewDataUrl).toBe('');
+  });
+
+  it('thumbnail field never persists data: urls when filePath exists', () => {
+    const out = normalizeImageForStorage({ filePath: 'C:\images\t.png', thumbnail: bigData });
+    expect(out.thumbnail).toBe('');
+  });
+});

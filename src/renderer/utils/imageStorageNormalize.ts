@@ -40,25 +40,47 @@ function safeDisplayUrl(s: unknown): string {
  * Display fields (previewDataUrl, url) are restricted to safe URLs only.
  * Blob fields from SPEC Phase 2 are preserved when present.
  */
+// [SPEC-STABILITY-2026 Phase 8] Megabyte base64 previews persisted into the
+// posts list blew the localStorage quota even after nuclear cleanup (live
+// 실측: naver_blog_generated_posts setItem 실패 → 글 목록 유실). A data: URL
+// may be persisted ONLY as a last resort: no re-derivable identifier
+// (filePath / blobId / http url) AND small enough to be quota-harmless.
+const MAX_PERSISTED_DATA_URL_CHARS = 100_000; // ~75KB image
+
+function persistableDataUrl(s: string, hasIdentifier: boolean): string {
+  if (!s.startsWith('data:image/')) return s; // http(s) — always fine
+  if (hasIdentifier) return '';
+  return s.length <= MAX_PERSISTED_DATA_URL_CHARS ? s : '';
+}
+
 export function normalizeImageForStorage(img: any): NormalizedStorageImage {
+  const filePath = typeof img?.filePath === 'string' ? img.filePath : '';
+  const httpUrl =
+    [img?.url, img?.link].map(safeDisplayUrl).find(u => u.startsWith('http')) || '';
+  const hasIdentifier = Boolean(
+    filePath || (typeof img?.blobId === 'string' && img.blobId) || httpUrl
+  );
+
   // Display fields: only safe URLs (data: or http(s):). NEVER absolute paths.
-  const previewDataUrl =
-    safeDisplayUrl(img?.previewDataUrl) ||
-    safeDisplayUrl(img?.url) ||
-    '';
+  // data: URLs additionally pass the quota guard above.
+  const previewDataUrl = persistableDataUrl(
+    safeDisplayUrl(img?.previewDataUrl) || safeDisplayUrl(img?.url) || '',
+    hasIdentifier,
+  );
   const url =
-    safeDisplayUrl(img?.url) ||
-    safeDisplayUrl(img?.link) ||
-    safeDisplayUrl(img?.previewDataUrl) ||
-    '';
+    httpUrl ||
+    persistableDataUrl(
+      safeDisplayUrl(img?.url) || safeDisplayUrl(img?.link) || safeDisplayUrl(img?.previewDataUrl) || '',
+      hasIdentifier,
+    );
 
   const out: NormalizedStorageImage = {
     heading: String(img?.heading || ''),
     provider: String(img?.provider || img?.source || img?.engine || 'unknown'),
-    filePath: typeof img?.filePath === 'string' ? img.filePath : '',
+    filePath,
     previewDataUrl,
     url,
-    thumbnail: String(img?.thumbnail || ''),
+    thumbnail: persistableDataUrl(String(img?.thumbnail || ''), hasIdentifier),
     savedToLocal: !!img?.savedToLocal,
   };
 
