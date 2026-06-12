@@ -106,6 +106,7 @@ import { checkGoldenZone } from './publishingStrategy.js';
 import { filterDuplicateAndLowQualityImages } from './main/utils/imageFilters.js';
 // [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — 사용자 저장 다이얼로그 data URL
 import { decodeBase64Async } from './main/utils/base64Async.js';
+import { attachSelfTest } from './main/selfTest.js';
 import { ThumbnailGenerator } from './content/thumbnailGenerator.js';
 import { canConsume as canConsumeQuota, consume as consumeQuota, refund as refundQuota, getStatus as getQuotaStatus, resetAll as resetAllQuota, type QuotaLimits, type QuotaType } from './quotaManager.js';
 import { BlogAccountManager } from './account/blogAccountManager.js';
@@ -1682,6 +1683,10 @@ async function createWindow(): Promise<void> {
 
     // ✅ [v2.10.34] 메인 윈도우 생성 시 splash close (로그인 우회 경로 보호)
     closeSplash();
+
+    // SPEC-STABILITY-2026 6.3: SELF_TEST=1 only — attach before loadFile so
+    // renderer init errors are counted from the first console message.
+    attachSelfTest(mainWindow);
 
     // Content Security Policy 설정 (개발 모드에서는 완화된 정책 사용)
     // 참고: 앱이 패키징되면 이 경고는 나타나지 않습니다

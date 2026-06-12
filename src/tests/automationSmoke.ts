@@ -28,6 +28,11 @@ async function runSmokeTest(): Promise<void> {
   mock.closePopups = async () => {
     console.log('🧪 [MOCK] 팝업 닫기 생략');
   };
+  // run() now calls closeDraftPopup separately from closePopups; without this
+  // stub the smoke dies on getAttachedFrame (no real frame in mock mode).
+  mock.closeDraftPopup = async () => {
+    console.log('🧪 [MOCK] 임시저장 팝업 닫기 생략');
+  };
   mock.applyStructuredContent = async () => {
     console.log('🧪 [MOCK] 구조화 콘텐츠 적용 생략');
   };
@@ -36,6 +41,19 @@ async function runSmokeTest(): Promise<void> {
   };
   mock.saveBlogPost = async () => {
     console.log('🧪 [MOCK] 포스팅 저장 생략');
+  };
+  // run() publishes via publishBlogPost; the real one needs an editor frame.
+  mock.publishBlogPost = async () => {
+    console.log('🧪 [MOCK] 발행 단계 생략');
+    return { success: true, url: 'https://blog.naver.com/mock/123' };
+  };
+  // Immediate-publish verification reads page URL/DOM — no page in mock mode.
+  mock.verifyImmediatePublishOutcome = () => {
+    console.log('🧪 [MOCK] 발행 결과 검증 생략');
+  };
+  // Post-publish editor reactivation also needs the real frame.
+  mock.activateEditorForEditing = async () => {
+    console.log('🧪 [MOCK] 에디터 재활성화 생략');
   };
   mock.browser = undefined;
 

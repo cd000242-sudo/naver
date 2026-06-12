@@ -33,7 +33,7 @@
     "dist:universal": "node scripts/build-mac.js --arch universal",
     "release:mac": "node scripts/build-mac.js --arch both --publish",
     "release:mac:unsigned": "node scripts/build-mac.js --arch both --unsigned",
-    "self-test": "npm run build && node dist/tests/automationSmoke.js",
+    "self-test": "npm run build && node scripts/self-test.mjs",
     "start:daily": "npm run build && node dist/scheduler/daily.js",
     "start:monitor": "npm run build && node dist/monitor/realtime.js",
     "start:learning": "npm run build && node dist/learning/analyzer.js",
