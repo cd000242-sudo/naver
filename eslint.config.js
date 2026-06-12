@@ -42,6 +42,13 @@ module.exports = tseslint.config(
         },
     },
 
+    // ━━━ .cjs 파일 — CommonJS by definition, require()가 유일한 임포트 ━━━
+    {
+        files: ['**/*.cjs'],
+        rules: {
+            '@typescript-eslint/no-require-imports': 'off',
+        },
+    },
     // ━━━ TypeScript 파일 전용 규칙 완화 ━━━
     // 기존 god-file 4개(contentGenerator/main/naverBlogAutomation/renderer)에
     // 린트가 갑자기 수천 개 에러 터지는 것을 방지. 점진 강화 전략.

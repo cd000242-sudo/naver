@@ -14,6 +14,7 @@
     "dev": "node scripts/run-electron-dev.mjs",
     "cli": "ts-node src/index.ts",
     "lint": "eslint \"src/**/*.ts\"",
+    "harness:tail": "node scripts/harness/flow-tail-harness.cjs",
     "hooks:install": "node scripts/install-git-hooks.mjs",
     "lint:ipc": "node scripts/lint-ipc.mjs",
     "prepack": "npm run build && node scripts/reset-config-for-pack.js",
