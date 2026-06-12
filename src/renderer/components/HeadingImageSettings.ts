@@ -775,57 +775,6 @@ export function createHeadingImageModal(): void {
             <button type="button" id="test-imagefx-connection-btn" style="display: none;"></button>
           </div>
 
-          <!-- ✅ [v2.10.226] ImageFX 실패 케이스 안내 카드 — 사용자가 "왜 실패했는지" 사전 학습 -->
-          <details style="margin-bottom: 16px; padding: 14px 16px; border-radius: 12px; background: linear-gradient(135deg, #1e1e2e 0%, #2a2a3e 100%); border: 1px solid rgba(139,92,246,0.3); cursor: pointer;">
-            <summary style="display: flex; align-items: center; gap: 8px; font-weight: 600; color: #c4b5fd; font-size: 13px; list-style: none; outline: none;">
-              <span style="font-size: 1.1rem;">❓</span>
-              <span>ImageFX가 안 되는 5가지 경우 (펼치기)</span>
-            </summary>
-            <div style="margin-top: 12px; font-size: 12px; line-height: 1.6; color: #cbd5e1;">
-              <div style="margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: rgba(245,158,11,0.08); border-left: 3px solid #f59e0b;">
-                <div style="font-weight: 700; color: #fbbf24; margin-bottom: 4px;">⏰ 1. 시간당 한도 초과 (HTTP_429)</div>
-                <div style="color: #94a3b8;">
-                  Google ImageFX는 <b>공개된 일일 한도가 없고</b>, 30~60분 사이에 10~15장 정도 연속 생성하면 동적으로 차단됩니다.
-                  <br><b>해결:</b> 약 1시간 대기 또는 "Google 계정 변경"으로 다른 계정 사용.
-                </div>
-              </div>
-              <div style="margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: rgba(59,130,246,0.08); border-left: 3px solid #3b82f6;">
-                <div style="font-weight: 700; color: #60a5fa; margin-bottom: 4px;">🔑 2. 세션 토큰 만료 (HTTP_401)</div>
-                <div style="color: #94a3b8;">
-                  ImageFX 로그인 세션은 약 <b>50분</b>이면 만료됩니다. 앱을 오래 켜놓고 다시 쓰면
-                  "한 번도 안 썼는데 실패" 처럼 보일 수 있습니다.
-                  <br><b>해결:</b> "Google 계정 변경" 한 번 누르고 로그인 → 토큰 갱신.
-                </div>
-              </div>
-              <div style="margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: rgba(239,68,68,0.08); border-left: 3px solid #ef4444;">
-                <div style="font-weight: 700; color: #f87171; margin-bottom: 4px;">🚫 3. IP/AdsPower 프로필 공유 차단 (HTTP_403)</div>
-                <div style="color: #94a3b8;">
-                  같은 가정용 IP나 AdsPower 프로필에서 <b>다른 사람/다른 세션이 이미 한도를 소진</b>한 상태.
-                  본인 기준 첫 사용이어도 Google이 같은 핑거프린트로 보고 차단합니다.
-                  <br><b>해결:</b> 테더링으로 IP 변경 또는 다른 Google 계정 사용.
-                </div>
-              </div>
-              <div style="margin-bottom: 12px; padding: 10px 12px; border-radius: 8px; background: rgba(168,85,247,0.08); border-left: 3px solid #a855f7;">
-                <div style="font-weight: 700; color: #c084fc; margin-bottom: 4px;">🛡️ 4. 안전 필터 차단</div>
-                <div style="color: #94a3b8;">
-                  정부지원금/금융/의료/정치 키워드는 Google 안전 필터가 자주 차단합니다.
-                  프롬프트 자체가 문제 — 한도와 무관.
-                  <br><b>해결:</b> 본문 키워드를 우회 표현으로 바꾸거나 DeepInfra/Pollinations로 전환.
-                </div>
-              </div>
-              <div style="margin-bottom: 4px; padding: 10px 12px; border-radius: 8px; background: rgba(148,163,184,0.08); border-left: 3px solid #94a3b8;">
-                <div style="font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">🆕 5. 신규/의심 계정 즉시 차단</div>
-                <div style="color: #94a3b8;">
-                  새로 만든 Google 계정 + ImageFX부터 호출하면 "자동화 의심"으로 분류돼
-                  첫 시도부터 차단됩니다.
-                  <br><b>해결:</b> 평소 Gmail/검색에 쓰는 <b>일상용 Google 계정</b>으로 변경 또는 며칠 사용 후 재시도.
-                </div>
-              </div>
-              <div style="margin-top: 10px; padding: 8px 10px; border-radius: 6px; background: rgba(16,185,129,0.08); color: #6ee7b7; font-size: 11px;">
-                💡 어느 경우든 안 풀리면 <b>이미지 엔진 변경</b>(DeepInfra/Pollinations)이 가장 빠른 우회로입니다.
-              </div>
-            </div>
-          </details>
 
 
           <!-- ✅ 체크박스 옵션 -->

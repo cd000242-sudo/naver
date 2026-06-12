@@ -46,3 +46,15 @@ describe('unstable engine removal from selection UI (imagefx + flow)', () => {
     expect(code).not.toMatch(/\|\| 'flow'/);
   });
 });
+
+// 2026-06-12: 라인업 제거 후 남아있던 죽은 안내 카드("ImageFX가 안 되는
+// 5가지 경우")도 제거 — 미노출 엔진의 트러블슈팅 UI는 혼란만 준다.
+describe('ImageFX 잔존 안내 카드 제거', () => {
+  it('HeadingImageSettings에 5가지 경우 카드가 없다', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const src = fs.readFileSync(path.join(process.cwd(), 'src', 'renderer', 'components', 'HeadingImageSettings.ts'), 'utf-8');
+    expect(src).not.toContain('5가지 경우');
+    expect(src).not.toContain('ImageFX 실패 케이스 안내 카드');
+  });
+});
