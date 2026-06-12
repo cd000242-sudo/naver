@@ -822,7 +822,9 @@
                             </div>
                             <div id="content-mode-description-business" style="display: none;">
                                 <strong>🏢 업체 홍보 모드:</strong> 시공/철거/인테리어/전문서비스/지역매장 업체의 견적·문의 유도 글을 생성합니다. 8가지 강조 각도(가격/사례/A/S/속도/무료/전문/친절/트렌드)를 매번 다르게 적용하여 같은 업체로 반복 발행해도 다른 글이 나옵니다. 광고법 준수 + 의료광고법 자동 경고.
-                            </div>
+                            
+                                <button type="button" id="open-business-info-btn" style="margin-top: 0.6rem; padding: 0.5rem 1rem; background: linear-gradient(135deg, #f59e0b, #ea580c); color: white; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">🏢 업체 정보 설정 열기 (홍보 대상·리서치 URL 포함)</button>
+</div>
                         </div>
 
                         <!-- ✅ [v1.4.26] 업체 홍보 모드 — 업체 정보 입력 패널 (모드 선택 시 표시) -->
@@ -12970,6 +12972,32 @@
             <div style="margin-bottom: 0.75rem;">
                 <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">✨ 특징/경력/자격증</label>
                 <textarea id="bgm-extra" placeholder="예: 시공 15년차, A/S 1년 보장, 평수별 견적 가이드 제공, 전국 시공 사례 200건+" rows="3" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; resize: vertical; box-sizing: border-box; font-family: inherit;"></textarea>
+            </div>
+
+            <!-- [2026-06-12] 홍보 대상 선택 — 업체 자체 vs 취급 상품 -->
+            <div style="margin-bottom: 0.75rem; padding: 0.6rem; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(251, 191, 36, 0.35); border-radius: 6px;">
+                <label style="display: block; margin-bottom: 0.4rem; font-size: 0.78rem; color: #fbbf24; font-weight: 600;">🎯 홍보 대상 (글의 주인공)</label>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                    <label style="display: flex; flex-direction: column; gap: 0.2rem; padding: 0.5rem; background: rgba(0,0,0,0.25); border-radius: 6px; cursor: pointer;">
+                        <span style="display: flex; align-items: center; gap: 0.4rem; color: #fff; font-size: 0.82rem; font-weight: 600;">
+                            <input type="radio" name="bgm-promo-target" id="bgm-promo-business" value="business" checked style="cursor: pointer;" /> 🏢 업체 자체 홍보
+                        </span>
+                        <span style="font-size: 0.68rem; color: #9ca3af; padding-left: 1.4rem;">전문성·신뢰·서비스 중심 → 상담 문의 유도</span>
+                    </label>
+                    <label style="display: flex; flex-direction: column; gap: 0.2rem; padding: 0.5rem; background: rgba(0,0,0,0.25); border-radius: 6px; cursor: pointer;">
+                        <span style="display: flex; align-items: center; gap: 0.4rem; color: #fff; font-size: 0.82rem; font-weight: 600;">
+                            <input type="radio" name="bgm-promo-target" id="bgm-promo-product" value="product" style="cursor: pointer;" /> 🛍️ 취급 상품 판매
+                        </span>
+                        <span style="font-size: 0.68rem; color: #9ca3af; padding-left: 1.4rem;">상품 혜택·장점 중심 → 구매·문의 전환</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- [2026-06-12] 심층 리서치 URL -->
+            <div style="margin-bottom: 0.75rem;">
+                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.75rem; color: #d1d5db; font-weight: 600;">🔍 심층 리서치 URL (홈페이지/상품 페이지, 선택)</label>
+                <input type="text" id="bgm-research-url" placeholder="예: https://내업체.imweb.me/shop/?idx=14" style="width: 100%; padding: 0.6rem; background: rgba(0,0,0,0.3); border: 1px solid #374151; border-radius: 6px; color: #fff; font-size: 0.9rem; box-sizing: border-box;" />
+                <p style="margin: 0.3rem 0 0 0; font-size: 0.68rem; color: #9ca3af;">💡 키워드 발행 시 이 페이지의 실제 정보(가격/조건/혜택)를 자동 수집해 글 재료로 사용합니다. 자료 URL을 따로 입력하면 그쪽이 우선됩니다.</p>
             </div>
 
             <!-- 키워드 가이드 -->

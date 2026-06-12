@@ -6743,9 +6743,22 @@ function initUnifiedModeSelection(): void {
     } else {
       (document.getElementById('bgm-service-regional') as HTMLInputElement).checked = true;
     }
+    // ✅ [2026-06-12] 홍보 대상 + 심층 리서치 URL 복원
+    if (saved.promoTarget === 'product') {
+      const productRadio = document.getElementById('bgm-promo-product') as HTMLInputElement | null;
+      if (productRadio) productRadio.checked = true;
+    } else {
+      const businessRadio = document.getElementById('bgm-promo-business') as HTMLInputElement | null;
+      if (businessRadio) businessRadio.checked = true;
+    }
+    const researchUrlInput = document.getElementById('bgm-research-url') as HTMLInputElement | null;
+    if (researchUrlInput) researchUrlInput.value = saved.researchUrl || '';
     modal.style.display = 'flex';
   };
   (window as any).openBusinessGlobalModal = openBusinessGlobalModal;
+
+  // ✅ [2026-06-12] 업체 정보 재오픈 버튼 — 기존엔 _businessInfo가 차면 다시 열 방법이 없었음
+  document.getElementById('open-business-info-btn')?.addEventListener('click', () => openBusinessGlobalModal());
 
   const closeBusinessGlobalModal = () => {
     const modal = document.getElementById('business-global-modal');
@@ -6813,6 +6826,9 @@ function initUnifiedModeSelection(): void {
       region: serviceArea === 'nationwide' ? undefined : region,
       serviceArea,
       extra: get('bgm-extra'),
+      // [2026-06-12] 홍보 대상(업체 자체/취급 상품) + 심층 리서치 URL
+      promoTarget: (document.getElementById('bgm-promo-product') as HTMLInputElement)?.checked ? 'product' : 'business',
+      researchUrl: get('bgm-research-url'),
     };
     console.log('[BusinessGlobalModal] ✅ 업체 정보 저장:', (window as any)._businessInfo);
     if ((window as any).toastManager) {

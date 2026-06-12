@@ -1925,11 +1925,16 @@ async function generateFullAutoContent(formData) {
     else {
         window._keywordTitleOptions = undefined;
     }
+    // [2026-06-12] 업체홍보 심층 리서치: 자료 URL이 없으면 업체 정보의
+    // researchUrl(홈페이지/상품 페이지)을 수집 파이프라인에 주입한다.
+    const businessResearchUrl = formData.contentMode === 'business'
+        ? String(businessInfo?.researchUrl || '').trim()
+        : '';
     const payload = {
         assembly: {
             generator: formData.generator,
             keywords: keywordList,
-            rssUrl: urls.length > 0 ? urls[0] : undefined,
+            rssUrl: urls.length > 0 ? urls[0] : (businessResearchUrl || undefined),
             title: titleStr || undefined,
             draftText,
             targetAge: formData.targetAge,
