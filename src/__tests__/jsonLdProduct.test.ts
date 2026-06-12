@@ -85,3 +85,35 @@ describe('쇼핑커넥트 풀스펙 배선 가드 (dead-wiring 방지)', () => {
     expect(src).toContain('=== 실제 구매자 리뷰');
   });
 });
+
+// 라이브 실측 2: 갤러리 썸네일 클릭 셀렉터도 부패 — 갤러리 11장 중 1장만
+// 수집되고 나머지가 리뷰 사진으로 채워짐. JSON-LD image[]가 갤러리 전체를
+// 담고 있으므로 파서가 이미지도 추출해야 한다.
+describe('parseProductJsonLd images', () => {
+  it('extracts gallery images from string array', () => {
+    const script = JSON.stringify({
+      '@type': 'Product',
+      name: 'N',
+      image: [
+        'https://shop-phinf.pstatic.net/a.jpg',
+        'https://shop-phinf.pstatic.net/b.jpg',
+        'https://shop-phinf.pstatic.net/a.jpg',
+      ],
+    });
+    const info = parseProductJsonLd([script]);
+    expect(info.images).toEqual([
+      'https://shop-phinf.pstatic.net/a.jpg',
+      'https://shop-phinf.pstatic.net/b.jpg',
+    ]);
+  });
+
+  it('extracts images from single string and ImageObject forms', () => {
+    const single = JSON.stringify({ '@type': 'Product', name: 'N', image: 'https://shop-phinf.pstatic.net/one.jpg' });
+    const objForm = JSON.stringify({
+      '@type': 'Product', name: 'M',
+      image: [{ '@type': 'ImageObject', url: 'https://shop-phinf.pstatic.net/obj.jpg' }],
+    });
+    expect(parseProductJsonLd([single]).images).toEqual(['https://shop-phinf.pstatic.net/one.jpg']);
+    expect(parseProductJsonLd([objForm]).images).toEqual(['https://shop-phinf.pstatic.net/obj.jpg']);
+  });
+});

@@ -2598,8 +2598,53 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             }, revSels);
           } catch {}
 
+          // [2026-06-12] Full gallery from __PRELOADED_STATE__ — the
+          // thumbnail-click selectors are rotted obfuscated classes (live
+          // 실측: 갤러리 11장 중 1장만 수집, 나머지가 리뷰 사진으로 채워짐)
+          // and JSON-LD often carries only the representative image. The SPA
+          // keeps the complete gallery (shop-phinf urls) in preloaded state.
+          // [2026-06-12] Full gallery via stable alt attribute — gallery
+          // thumbnails carry alt="추가이미지N" / "대표이미지" (user-confirmed
+          // DOM), which survives Naver's obfuscated-class rotations that
+          // rotted the click selectors (live 실측: 갤러리 11장 중 1장만 수집).
+          let altImages: string[] = [];
+          try {
+            altImages = await bcPage.evaluate(() => {
+              const out: string[] = [];
+              const seen = new Set<string>();
+              document.querySelectorAll('img[alt^="추가이미지"], img[alt^="대표이미지"]').forEach((el) => {
+                const img = el as HTMLImageElement;
+                const src = img.src || img.getAttribute('data-src') || '';
+                if (!/^https?:\/\//.test(src)) return;
+                const base = src.split('?')[0];
+                if (seen.has(base)) return;
+                seen.add(base);
+                out.push(base);
+              });
+              return out;
+            });
+          } catch { /* alt markup changed — click/JSON-LD results still apply */ }
+
           await releasePage(bcPage);
           bcPage = null;
+
+          // Merge order: clicked (render-confirmed) → alt-gallery → JSON-LD.
+          // Gallery shots stay ahead of review pics; review images only fill
+          // in AFTER the full gallery (allImages order below).
+          {
+            const seenBases = new Set(galleryImages.map((u) => u.split('?')[0]));
+            let recovered = 0;
+            for (const url of [...altImages, ...jsonLdInfo.images]) {
+              const base = url.split('?')[0];
+              if (seenBases.has(base)) continue;
+              seenBases.add(base);
+              galleryImages.push(base + '?type=m1000_pd');
+              recovered += 1;
+            }
+            if (recovered > 0) {
+              console.log(`[AffiliateCrawler] 🧬 갤러리 복구: +${recovered}장 (alt ${altImages.length} · json-ld ${jsonLdInfo.images.length} · 클릭 ${galleryImages.length - recovered})`);
+            }
+          }
 
           const allImages = [...galleryImages, ...reviewImages];
           const priceNum = parseInt((productData.price || '').replace(/[^0-9]/g, '')) || 0;

@@ -13,6 +13,8 @@ export interface JsonLdProductInfo {
   reviewTexts: string[];
   reviewCount?: number;
   rating?: string;
+  /** Product gallery images — string, string[] and ImageObject forms. */
+  images: string[];
 }
 
 const MAX_REVIEW_TEXTS = 5;
@@ -36,6 +38,22 @@ function collectNodes(root: unknown, out: Record<string, unknown>[]): void {
   const obj = root as Record<string, unknown>;
   if (isProductNode(obj)) out.push(obj);
   if (Array.isArray(obj['@graph'])) collectNodes(obj['@graph'], out);
+}
+
+function extractImageUrls(image: unknown): string[] {
+  const items = Array.isArray(image) ? image : image ? [image] : [];
+  const urls: string[] = [];
+  for (const item of items) {
+    let url = '';
+    if (typeof item === 'string') url = item;
+    else if (item && typeof item === 'object') {
+      const obj = item as Record<string, unknown>;
+      url = typeof obj.url === 'string' ? obj.url : typeof obj.contentUrl === 'string' ? obj.contentUrl : '';
+    }
+    url = url.trim();
+    if (url.startsWith('http')) urls.push(url);
+  }
+  return urls;
 }
 
 function extractReviewTexts(review: unknown): string[] {
@@ -62,8 +80,11 @@ export function parseProductJsonLd(rawScripts: ReadonlyArray<string | null | und
     } catch { /* malformed script block — ignore, others may parse */ }
   }
 
-  const result: JsonLdProductInfo = { reviewTexts: [] };
+  const result: JsonLdProductInfo = { reviewTexts: [], images: [] };
   for (const product of products) {
+    for (const url of extractImageUrls(product.image)) {
+      if (!result.images.includes(url)) result.images.push(url);
+    }
     if (!result.name && typeof product.name === 'string' && product.name.trim().length > 2) {
       result.name = product.name.trim();
     }
