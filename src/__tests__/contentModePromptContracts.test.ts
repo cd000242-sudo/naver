@@ -67,3 +67,19 @@ describe('콘텐츠 모드 프롬프트 계약', () => {
     expect(src).toContain('모바일 가독성');
   });
 });
+
+// 2026-06-12 라이브 실측: 기준/증빙/지급기준 4연속 발행에서 표 0개 — "가능하면"
+// 재량 문구를 LLM이 인용구로 회피. 항목화 가능한 주제는 표를 필수로 강제한다.
+describe('표 생성 강제 계약 (2026-06-12)', () => {
+  const source = read('contentGenerator.ts');
+
+  it('항목화 가능한 주제(기준·금액·서류·절차·비교)는 표 1개 필수를 명시한다', () => {
+    expect(source).toContain('기준·금액·서류·절차·비교처럼 항목화 가능한 주제면 2열 마크다운 표 1개를 반드시 작성');
+    expect(source).not.toContain('가능하면 마크다운 표를 실제로 작성한다');
+  });
+
+  it('jsonOutputFormat 요약 블록에도 동일 필수 조건이 들어간다', () => {
+    expect(source).toContain('정보형 글은 기준·금액·서류·절차·비교 주제면 2열 마크다운 표 1개 필수');
+    expect(source).not.toContain('정보형 글은 최대 2열 마크다운 표를 실제 본문에 작성');
+  });
+});
