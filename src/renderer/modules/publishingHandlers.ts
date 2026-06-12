@@ -1149,6 +1149,30 @@ export async function handleFullAutoPublish(): Promise<void> {
               modal.addLog(`⚠️ "${h.title?.substring(0, 15)}..." 이미지 부족 - 건너뛰기`);
             }
           }
+
+          // [2026-06-12] 갤러리 전량 배치 — 소제목당 1장 배치 후 남은 갤러리
+          // 이미지(리뷰 사진 제외)를 소제목들에 라운드로빈으로 추가 배치한다.
+          // 에디터 삽입부(insertImagesAtCurrentCursor)는 소제목당 다중 이미지를
+          // 이미 지원함. 리뷰 사진은 갤러리 부족분 채움 용도라 추가 배치 제외.
+          const isReviewPic = (u: string) => /image\.nmv|checkout\.phinf/.test(u);
+          const leftoverGallery = headingImages
+            .map((c: any) => typeof c === 'string' ? c : (c?.filePath || c?.url || ''))
+            .filter((p: string) => p && !usedImagePaths.has(p) && !isReviewPic(p))
+            .slice(0, headingsArray.length * 2); // 소제목당 추가 2장 상한 (이미지 폭주 방지)
+          if (headingsArray.length > 0 && leftoverGallery.length > 0) {
+            leftoverGallery.forEach((path: string, i: number) => {
+              const h = headingsArray[i % headingsArray.length];
+              usedImagePaths.add(path);
+              generatedImgs.push({
+                heading: h.title || h.heading || '',
+                filePath: path,
+                provider: 'manual',
+                savedToLocal: path,
+                isThumbnail: false
+              });
+            });
+            modal.addLog(`📚 남은 갤러리 ${leftoverGallery.length}장 추가 배치 (소제목당 최대 3장)`);
+          }
         }
 
         if (isFullAutoStopRequested(modal)) {

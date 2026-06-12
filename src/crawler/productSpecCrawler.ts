@@ -2636,6 +2636,10 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             let recovered = 0;
             for (const url of [...altImages, ...jsonLdInfo.images]) {
               const base = url.split('?')[0];
+              // dthumb proxy urls carry their source in the query string —
+              // stripping it 404s (live 실측: 발행물 빈 이미지 슬롯). Only
+              // direct image files survive the ?type= re-append.
+              if (!/\.(jpe?g|png|webp)$/i.test(base)) continue;
               if (seenBases.has(base)) continue;
               seenBases.add(base);
               galleryImages.push(base + '?type=m1000_pd');
