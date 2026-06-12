@@ -38,3 +38,14 @@ describe('업체홍보 홍보 대상 + 리서치 URL + 재오픈 (2026-06-12)', 
     expect(src).toContain('promoTarget');
   });
 });
+
+// 2026-06-12 라이브 실측(224314042809): 디지털 상품인데 전국구 지시가
+// "전국 어디서 쓰든" 류 지역 표현을 반복 생산 — 디지털/온라인 상품은
+// 지역 프레임 자체를 금지하고 사용 환경·라이선스 중심으로 전환.
+describe('디지털 상품 지역 프레임 금지', () => {
+  it('전국구 분기에 디지털 상품 예외 지시가 있다', () => {
+    const src = fs.readFileSync(path.join(process.cwd(), 'src', 'contentGenerator.ts'), 'utf-8');
+    expect(src).toContain('디지털·온라인 상품');
+    expect(src).toMatch(/디지털·온라인 상품[\s\S]{0,160}전국/);
+  });
+});
