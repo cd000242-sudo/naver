@@ -40,12 +40,15 @@ describe('image fallback policy contract', () => {
     expect(src).toMatch(/imageFallbackPolicy:\s*'guarantee'/);
   });
 
-  it('main image settings UI lets users choose fixed, ask, or guarantee behavior', () => {
+  // [2026-06-12 사용자 결정] "엔진 실패 시 동작" UI는 제거 — 정책 저장소와
+  // 기본값(engine-only, 자동 폴백 금지)은 유지된다. UI가 부활하거나 저장소가
+  // 사라지면 여기서 잡는다.
+  it('main image settings has NO fallback policy UI, but the policy store stays (engine-only default)', () => {
     const src = read('renderer/components/HeadingImageSettings.ts');
     expect(src).toMatch(/export type ImageFallbackPolicy\s*=\s*'engine-only'\s*\|\s*'ask'\s*\|\s*'guarantee'/);
     expect(src).toMatch(/FALLBACK_POLICY_NAMES/);
-    expect(src).toMatch(/open-image-fallback-policy-btn/);
-    expect(src).toMatch(/image-fallback-policy-submodal/);
+    expect(src).not.toMatch(/open-image-fallback-policy-btn/);
+    expect(src).not.toMatch(/image-fallback-policy-submodal/);
     expect(src).toMatch(/getImageFallbackPolicy/);
     expect(src).toMatch(/setImageFallbackPolicy/);
     expect(src).toMatch(/safeLocalStorageGet\('imageFallbackPolicy'\)/);

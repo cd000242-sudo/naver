@@ -700,16 +700,6 @@ export function createHeadingImageModal(): void {
               <span class="arrow">›</span>
             </button>
 
-            <button type="button" class="premium-setting-btn" id="open-image-fallback-policy-btn">
-              <div style="display: flex; align-items: center; gap: 14px;">
-                <div class="btn-icon" style="background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);">🧭</div>
-                <div>
-                  <div class="btn-text">엔진 실패 시 동작</div>
-                  <div class="btn-value" id="current-image-fallback-policy-display">선택 엔진만 사용</div>
-                </div>
-              </div>
-              <span class="arrow">›</span>
-            </button>
 
             <!-- ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 선택 시 로그인/확인 (엔진 선택 바로 아래) -->
             <div id="hsettings-dropshot-login" style="display:none; margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: #fef3c7; border: 1px solid #f59e0b;">
@@ -1000,41 +990,6 @@ export function createHeadingImageModal(): void {
       </div>
     </div>
 
-    <!-- ✅ 엔진 실패 시 동작 서브 모달 -->
-    <div id="image-fallback-policy-submodal" style="
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(8px);
-      z-index: 10030;
-      justify-content: center;
-      align-items: center;
-    ">
-      <div style="max-width: 420px; width: 92%; padding: 20px; border-radius: 16px; background: white; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-        <h4 style="margin: 0 0 8px 0; font-size: 16px; font-weight: 700; color: #0f172a;">🧭 엔진 실패 시 동작</h4>
-        <div style="font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 12px;">선택한 이미지 엔진의 의미를 보존할지, 결과 생성을 우선할지 정합니다.</div>
-        <div style="display: grid; gap: 8px;">
-          <label class="fallback-policy-option" data-value="engine-only" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #0ea5e9; background: #e0f2fe; transition: all 0.2s;">
-            <div style="font-size: 13px; font-weight: 800; color: #075985;">선택 엔진만 사용</div>
-            <div style="font-size: 11px; color: #0369a1; margin-top: 3px;">ImageFX를 고르면 ImageFX만 시도합니다. 자동 대체 없음.</div>
-          </label>
-          <label class="fallback-policy-option" data-value="ask" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: #f8fafc; transition: all 0.2s;">
-            <div style="font-size: 13px; font-weight: 800; color: #334155;">선택 엔진 우선, 실패 시 묻기</div>
-            <div style="font-size: 11px; color: #64748b; margin-top: 3px;">대체가 필요하면 확인창을 띄운 뒤 한 번만 대체합니다.</div>
-          </label>
-          <label class="fallback-policy-option" data-value="guarantee" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: #f8fafc; transition: all 0.2s;">
-            <div style="font-size: 13px; font-weight: 800; color: #166534;">결과 보장 우선, 자동 대체</div>
-            <div style="font-size: 11px; color: #15803d; margin-top: 3px;">선택 엔진이 부적합하면 수집 이미지/대체 엔진을 자동 사용합니다.</div>
-          </label>
-        </div>
-        <button id="image-fallback-policy-confirm" style="width: 100%; margin-top: 14px; padding: 12px; background: #0ea5e9; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer;">확인</button>
-      </div>
-    </div>
-    
     <!-- ✅ [2026-01-27] 이미지 스타일 선택 서브 모달 (넓은 레이아웃 + 우측 미리보기) -->
     <div id="image-style-submodal" style="
       display: none;
@@ -1650,43 +1605,6 @@ export function createHeadingImageModal(): void {
         });
       }
     }
-  });
-
-  document.getElementById('open-image-fallback-policy-btn')?.addEventListener('click', () => {
-    const subModal = document.getElementById('image-fallback-policy-submodal');
-    if (subModal) {
-      subModal.style.display = 'flex';
-      const currentPolicy = getImageFallbackPolicy();
-      selectedFallbackPolicyValue = currentPolicy;
-      document.querySelectorAll('.fallback-policy-option').forEach(opt => {
-        const value = opt.getAttribute('data-value');
-        (opt as HTMLElement).style.borderColor = value === currentPolicy ? '#0ea5e9' : '#e5e7eb';
-        (opt as HTMLElement).style.transform = value === currentPolicy ? 'scale(1.02)' : 'scale(1)';
-      });
-    }
-  });
-
-  let selectedFallbackPolicyValue: ImageFallbackPolicy = getImageFallbackPolicy();
-  const fallbackPolicyOptions = document.querySelectorAll('.fallback-policy-option');
-  fallbackPolicyOptions.forEach(opt => {
-    opt.addEventListener('click', () => {
-      const value = opt.getAttribute('data-value') as ImageFallbackPolicy;
-      selectedFallbackPolicyValue = value;
-      fallbackPolicyOptions.forEach(o => {
-        (o as HTMLElement).style.borderColor = '#e5e7eb';
-        (o as HTMLElement).style.transform = 'scale(1)';
-      });
-      (opt as HTMLElement).style.borderColor = '#0ea5e9';
-      (opt as HTMLElement).style.transform = 'scale(1.02)';
-    });
-  });
-
-  document.getElementById('image-fallback-policy-confirm')?.addEventListener('click', () => {
-    setImageFallbackPolicy(selectedFallbackPolicyValue);
-    const display = document.getElementById('current-image-fallback-policy-display');
-    if (display) display.textContent = FALLBACK_POLICY_NAMES[selectedFallbackPolicyValue];
-    const subModal = document.getElementById('image-fallback-policy-submodal');
-    if (subModal) subModal.style.display = 'none';
   });
 
   // ✅ [2026-01-26] 이미지 스타일 버튼 클릭 → 서브 모달 열기
