@@ -1,0 +1,94 @@
+// SPEC-STABILITY-2026 (쇼핑커넥트 크롤 보강) — JSON-LD Product parser.
+//
+// Smartstore/brand pages rotate obfuscated CSS classes on every deploy, so
+// DOM selectors rot silently (live 실측 2026-06-12: 상품명이 스토어 인사말로
+// 오염, 리뷰/스펙 0). The price fallback already proved JSON-LD survives those
+// rotations — this module extends the same source to name/reviews/rating.
+// Pure function over raw <script type="application/ld+json"> contents so it
+// is unit-testable without a browser.
+
+export interface JsonLdProductInfo {
+  name?: string;
+  description?: string;
+  reviewTexts: string[];
+  reviewCount?: number;
+  rating?: string;
+}
+
+const MAX_REVIEW_TEXTS = 5;
+const MIN_REVIEW_LEN = 20;
+const MAX_REVIEW_LEN = 500;
+
+function isProductNode(node: unknown): node is Record<string, unknown> {
+  if (!node || typeof node !== 'object') return false;
+  const type = (node as Record<string, unknown>)['@type'];
+  if (typeof type === 'string') return type.toLowerCase() === 'product';
+  if (Array.isArray(type)) return type.some((t) => String(t).toLowerCase() === 'product');
+  return false;
+}
+
+function collectNodes(root: unknown, out: Record<string, unknown>[]): void {
+  if (!root || typeof root !== 'object') return;
+  if (Array.isArray(root)) {
+    for (const item of root) collectNodes(item, out);
+    return;
+  }
+  const obj = root as Record<string, unknown>;
+  if (isProductNode(obj)) out.push(obj);
+  if (Array.isArray(obj['@graph'])) collectNodes(obj['@graph'], out);
+}
+
+function extractReviewTexts(review: unknown): string[] {
+  const items = Array.isArray(review) ? review : review ? [review] : [];
+  const texts: string[] = [];
+  for (const item of items) {
+    if (texts.length >= MAX_REVIEW_TEXTS) break;
+    if (!item || typeof item !== 'object') continue;
+    const body = (item as Record<string, unknown>).reviewBody
+      ?? (item as Record<string, unknown>).description;
+    const text = typeof body === 'string' ? body.trim() : '';
+    if (text.length >= MIN_REVIEW_LEN && text.length <= MAX_REVIEW_LEN) texts.push(text);
+  }
+  return texts;
+}
+
+/** Parse raw ld+json script contents into product info. Malformed JSON is skipped. */
+export function parseProductJsonLd(rawScripts: ReadonlyArray<string | null | undefined>): JsonLdProductInfo {
+  const products: Record<string, unknown>[] = [];
+  for (const raw of rawScripts) {
+    if (!raw || typeof raw !== 'string') continue;
+    try {
+      collectNodes(JSON.parse(raw), products);
+    } catch { /* malformed script block — ignore, others may parse */ }
+  }
+
+  const result: JsonLdProductInfo = { reviewTexts: [] };
+  for (const product of products) {
+    if (!result.name && typeof product.name === 'string' && product.name.trim().length > 2) {
+      result.name = product.name.trim();
+    }
+    if (!result.description && typeof product.description === 'string' && product.description.trim()) {
+      result.description = product.description.trim();
+    }
+    if (result.reviewTexts.length < MAX_REVIEW_TEXTS) {
+      const more = extractReviewTexts(product.review);
+      for (const text of more) {
+        if (result.reviewTexts.length >= MAX_REVIEW_TEXTS) break;
+        if (!result.reviewTexts.includes(text)) result.reviewTexts.push(text);
+      }
+    }
+    const agg = product.aggregateRating;
+    if (agg && typeof agg === 'object') {
+      const aggObj = agg as Record<string, unknown>;
+      const count = Number(aggObj.reviewCount ?? aggObj.ratingCount);
+      if (result.reviewCount === undefined && Number.isFinite(count) && count > 0) {
+        result.reviewCount = count;
+      }
+      const rating = aggObj.ratingValue;
+      if (!result.rating && (typeof rating === 'string' || typeof rating === 'number')) {
+        result.rating = String(rating);
+      }
+    }
+  }
+  return result;
+}

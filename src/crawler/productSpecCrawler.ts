@@ -650,6 +650,11 @@ export interface AffiliateProductInfo {
     detailImages: string[];         // 상세페이지(본문) 사진 리스트
     // ✅ [2026-01-21] 제품 상세 설명 추가 (AI 리뷰 작성용)
     description?: string;           // 제품 설명, 특징, 스펙 등 전체 텍스트
+    // [2026-06-12] JSON-LD 기반 리뷰/평점 — P0 리뷰 가드(SPEC-REVIEW-001) 입력.
+    // 난독화 클래스 부패와 무관하게 생존하는 소스 (가격 폴백에서 검증).
+    reviewTexts?: string[];
+    reviewCount?: number;
+    rating?: string;
 }
 
 /**
@@ -2487,7 +2492,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             const ogDesc = document.querySelector('meta[property="og:description"]')?.getAttribute('content') || '';
 
             const nameEl = document.querySelector(s.productName);
-            const productName = nameEl?.textContent?.trim() || ogTitle;
+            const productName = nameEl?.textContent?.trim() || '';
 
             const discountPrice = document.querySelector(s.discountPrice)?.textContent?.trim() || '';
             const originalPrice = document.querySelector(s.originalPrice)?.textContent?.trim() || '';
@@ -2501,8 +2506,31 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
               if (th && td) specs += `${th}: ${td}\n`;
             });
 
-            return { productName, price, ogImage, ogDesc, specs };
+            // Raw ld+json blocks — parsed in Node where it is unit-testable.
+            const jsonLdRaw = Array.from(
+              document.querySelectorAll('script[type="application/ld+json"]')
+            ).map((el) => el.textContent || '');
+
+            return { productName, price, ogTitle, ogImage, ogDesc, specs, jsonLdRaw };
           }, sels);
+
+          // [2026-06-12] Name priority: DOM selector → JSON-LD Product.name →
+          // og:title. The DOM selectors are obfuscated classes that rot on
+          // Naver deploys, and og:title on an unrendered SPA shell is the
+          // STORE greeting, not the product (live 실측: "삼성공식파트너
+          // 평강프라자 입니다." 가 제목으로 발행됨). JSON-LD survives both.
+          const { parseProductJsonLd } = await import('./shopping/utils/jsonLdProduct.js');
+          const jsonLdInfo = parseProductJsonLd(productData.jsonLdRaw || []);
+          if (!productData.productName && jsonLdInfo.name) {
+            console.log(`[AffiliateCrawler] 🧬 상품명 JSON-LD 복구: "${jsonLdInfo.name.substring(0, 50)}"`);
+            productData.productName = jsonLdInfo.name;
+          }
+          if (!productData.productName) {
+            productData.productName = productData.ogTitle || '';
+          }
+          if (jsonLdInfo.reviewTexts.length > 0 || jsonLdInfo.reviewCount) {
+            console.log(`[AffiliateCrawler] 🧬 JSON-LD 리뷰: 텍스트 ${jsonLdInfo.reviewTexts.length}건, 총 ${jsonLdInfo.reviewCount ?? '?'}개, 평점 ${jsonLdInfo.rating ?? '?'}`);
+          }
 
           // ✅ [2026-04-21] 가격 5단 폴백 (공통 헬퍼 사용)
           productData.price = await applyPriceFallback(bcPage, productData.price, 'AffiliateCrawler');
@@ -2581,7 +2609,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
           ].filter(Boolean).join('\n').trim();
 
           if (productData.productName && productData.productName.length > 2) {
-            console.log(`[AffiliateCrawler] ✅ brandconnect 크롤링 성공! "${productData.productName}" (${priceNum.toLocaleString()}원, 이미지 ${allImages.length}장)`);
+            console.log(`[AffiliateCrawler] ✅ brandconnect 크롤링 성공! "${productData.productName}" (${priceNum.toLocaleString()}원, 이미지 ${allImages.length}장, 리뷰 ${jsonLdInfo.reviewTexts.length}건)`);
             return {
               name: productData.productName,
               price: priceNum,
@@ -2591,7 +2619,10 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
               mainImage: allImages[0] || null,
               galleryImages: allImages,
               detailImages: [],
-              description: description || `${productData.productName} 상품입니다.`,
+              description: description || jsonLdInfo.description || `${productData.productName} 상품입니다.`,
+              reviewTexts: jsonLdInfo.reviewTexts,
+              reviewCount: jsonLdInfo.reviewCount,
+              rating: jsonLdInfo.rating,
             };
           }
         }

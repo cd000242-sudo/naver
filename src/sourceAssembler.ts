@@ -6202,6 +6202,15 @@ export async function assembleContentSource(input: SourceAssemblyInput): Promise
           const productDescription = productInfo.description || '';
           console.log(`   📝 제품 설명: ${productDescription.length}자`);
 
+          // [2026-06-12] JSON-LD 리뷰 → P0 리뷰 가드(SPEC-REVIEW-001) 입력 배선.
+          // productReviews/productSpec/productPrice 필드는 2026-01-30 설계 후
+          // 생산자가 0곳이라 가드가 항상 reviews=0으로 발동, 글이 2섹션으로
+          // 축소되던 dead-wiring (라이브 실측).
+          const crawledReviews = Array.isArray(productInfo.reviewTexts) ? productInfo.reviewTexts : [];
+          const reviewSection = crawledReviews.length > 0
+            ? `\n=== 실제 구매자 리뷰 (${productInfo.reviewCount ?? crawledReviews.length}건 중 발췌${productInfo.rating ? `, 평점 ${productInfo.rating}` : ''}) ===\n${crawledReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n`
+            : '';
+
           // 즉시 source 객체 반환 (크롤링 없이!)
           const source: ContentSource = {
             sourceType: 'custom_text',
@@ -6215,13 +6224,16 @@ ${priceLine}브랜드: ${brand}
 
 === 제품 상세 정보 ===
 ${productDescription || `${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.`}
-
+${reviewSection}
 === 제품 특징 ===
 ${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
 ${salesLine}
 이 제품의 주요 특징은 품질과 가격 대비 만족도가 높은 것으로 알려져 있습니다.
 실제 구매자들의 리뷰를 참고하면 더욱 현명한 구매 결정을 내릴 수 있습니다.
 `,
+            productPrice: priceNum !== null ? `${priceNum.toLocaleString()}원` : undefined,
+            productSpec: productDescription.length >= 80 ? productDescription : undefined,
+            productReviews: crawledReviews.length > 0 ? crawledReviews : undefined,
             crawledTime: new Date().toISOString(),
             categoryHint: 'shopping_review',
             metadata: {
@@ -6265,11 +6277,15 @@ ${salesLine}
                 : '네이버 스마트스토어에서 판매 중인 상품입니다.\n';
               const retryDesc = retryInfo.description || '';
               console.log(`   🎯 재시도 성공: "${retryName}" (${retryPriceNum !== null ? retryPriceNum.toLocaleString() + '원' : '가격 미수집'})`);
+              const retryReviews = Array.isArray(retryInfo.reviewTexts) ? retryInfo.reviewTexts : [];
               const retrySource: ContentSource = {
                 sourceType: 'custom_text',
                 url: rssUrlInput,
                 title: retryName,
-                rawText: `\n상품명: ${retryName}\n${retryPriceLine}브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc || `${retryName}은(는) ${storeName}에서 판매하는 인기 상품입니다.`}\n\n=== 제품 특징 ===\n${retryName}은(는) ${storeName}에서 판매하는 인기 상품입니다.\n${retrySalesLine}`,
+                rawText: `\n상품명: ${retryName}\n${retryPriceLine}브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc || `${retryName}은(는) ${storeName}에서 판매하는 인기 상품입니다.`}\n${retryReviews.length > 0 ? `\n=== 실제 구매자 리뷰 (발췌) ===\n${retryReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n` : ''}\n=== 제품 특징 ===\n${retryName}은(는) ${storeName}에서 판매하는 인기 상품입니다.\n${retrySalesLine}`,
+                productPrice: retryPriceNum !== null ? `${retryPriceNum.toLocaleString()}원` : undefined,
+                productSpec: retryDesc.length >= 80 ? retryDesc : undefined,
+                productReviews: retryReviews.length > 0 ? retryReviews : undefined,
                 crawledTime: new Date().toISOString(),
                 categoryHint: 'shopping_review',
                 metadata: { keywords: [retryName, storeName].filter(Boolean), productInfo: { name: retryName, price: retryPriceNum ?? 0, brand: storeName, description: retryDesc } },
