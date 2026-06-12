@@ -8442,6 +8442,11 @@ function addShoppingConnectSubImageModeOption(): void {
         <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">제품 사진을 참조해 AI가 새로 생성 — 장당 비용 발생</span>
       </label>
     </div>
+    <label style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; padding: 0.55rem 0.6rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; cursor: pointer;">
+      <input type="checkbox" id="sc-auto-thumbnail-inline" style="width: 16px; height: 16px; accent-color: #10b981;">
+      <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🖼️ 자동 이미지 수집 및 썸네일 세팅</span>
+      <span style="font-size: 0.68rem; color: var(--text-muted);">수집된 첫 이미지로 썸네일 자동 생성</span>
+    </label>
   `;
   if (anchor) {
     anchor.insertAdjacentElement('afterend', container);
@@ -8458,10 +8463,18 @@ function addShoppingConnectSubImageModeOption(): void {
       return v === 'ai' ? 'ai' : 'collected';
     } catch { return 'collected'; }
   };
+  const autoThumbInline = container.querySelector<HTMLInputElement>('#sc-auto-thumbnail-inline');
   const syncFromStore = () => {
     const mode = readMode();
     radios.forEach(r => { r.checked = r.value === mode; });
+    if (autoThumbInline) {
+      try { autoThumbInline.checked = localStorage.getItem('scAutoThumbnailSetting') === 'true'; } catch { /* ignore */ }
+    }
   };
+  autoThumbInline?.addEventListener('change', () => {
+    try { localStorage.setItem('scAutoThumbnailSetting', String(autoThumbInline.checked)); } catch { /* ignore */ }
+    console.log(`[ShoppingConnect] 자동 썸네일 세팅: ${autoThumbInline.checked}`);
+  });
   radios.forEach(r => r.addEventListener('change', () => {
     if (!r.checked) return;
     const mode = r.value === 'ai' ? 'ai' : 'collected';

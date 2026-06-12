@@ -818,42 +818,6 @@ export function createHeadingImageModal(): void {
             </div>
           </div>
 
-          <!-- ✅ 쇼핑커넥트 전용 옵션 (기본 숨김) - [2026-01-28] 연속발행과 동일한 UI로 업데이트 -->
-          <div id="shopping-connect-options" class="shopping-connect-section">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
-              <span style="font-size: 1.3rem;">🛒</span>
-              <span style="font-weight: 600; color: #92400e; font-size: 14px;">쇼핑커넥트 전용</span>
-            </div>
-            
-            <!-- ✅ 소제목 이미지 소스 선택 (라디오 버튼) -->
-            <div style="margin-bottom: 16px;">
-              <div style="font-size: 13px; font-weight: 600; color: #4a4a4a; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-                <span>🖼️</span> 소제목 이미지 소스
-              </div>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <label style="display: flex; align-items: center; gap: 8px; padding: 12px 14px; background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.05)); border: 2px solid #8b5cf6; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
-                  <input type="radio" name="sc-sub-image-source" value="ai" style="accent-color: #8b5cf6; width: 16px; height: 16px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #7c3aed;">✨ AI 이미지 활용하기</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 8px; padding: 12px 14px; background: linear-gradient(135deg, rgba(75,85,99,0.1), rgba(75,85,99,0.05)); border: 2px solid #6b7280; border-radius: 10px; cursor: pointer; transition: all 0.2s;">
-                  <input type="radio" name="sc-sub-image-source" value="collected" checked style="accent-color: #6b7280; width: 16px; height: 16px;">
-                  <span style="font-size: 13px; font-weight: 600; color: #4b5563;">📦 수집 이미지 사용</span>
-                </label>
-              </div>
-              <p style="margin: 8px 0 0 0; font-size: 11px; color: #666; line-height: 1.4;">
-                ℹ️ AI 활용: 수집한 이미지 기반으로 AI가 새 이미지 생성 (나노바나나프로/딥인프라 등) | 수집 이미지: 크롤링한 원본 이미지 그대로 사용
-              </p>
-            </div>
-            
-            <!-- ✅ 자동 이미지 수집 및 썸네일 세팅 -->
-            <div class="premium-checkbox" style="background: rgba(255,255,255,0.7); margin-bottom: 12px; border: 2px solid #10b981; padding: 14px;">
-              <input type="checkbox" id="sc-auto-thumbnail-setting" />
-              <div>
-                <div class="checkbox-label" style="color: #059669; font-weight: 700;">🖼️ 자동 이미지 수집 및 썸네일 세팅</div>
-              </div>
-            </div>
-          </div>
-          
           <!-- ✅ 완료 버튼 (골드 테마) - 항상 표시 -->
           <button id="heading-image-done-btn" style="
             width: 100%;
@@ -1381,20 +1345,6 @@ export function createHeadingImageModal(): void {
     if (fallbackEngineSelect && fallbackEngineSelect.value) {
       localStorage.setItem('localFolderFallbackEngine', fallbackEngineSelect.value);
       console.log(`[HeadingImageSettings] 📂 폴백 AI 엔진: ${fallbackEngineSelect.value}`);
-    }
-
-    // ✅ [2026-01-28] 쇼핑커넥트 전용 필드들 저장
-    const scSubImageSourceRadio = document.querySelector('input[name="sc-sub-image-source"]:checked') as HTMLInputElement;
-    const scAutoThumbnailCheck = document.getElementById('sc-auto-thumbnail-setting') as HTMLInputElement;
-    if (scSubImageSourceRadio) {
-      // ✅ [2026-05-18] 라디오 value('ai'|'collected')는 mode 그대로. 헬퍼가 레거시 키도 sync.
-      const mode = (scSubImageSourceRadio.value === 'ai' ? 'ai' : 'collected') as SubImageMode;
-      setSubImageMode(mode);
-      console.log(`[HeadingImageSettings] 쇼핑커넥트 소제목 이미지 소스: ${mode}`);
-    }
-    if (scAutoThumbnailCheck) {
-      localStorage.setItem('scAutoThumbnailSetting', String(scAutoThumbnailCheck.checked));
-      console.log(`[HeadingImageSettings] 쇼핑커넥트 자동 썸네일 세팅: ${scAutoThumbnailCheck.checked}`);
     }
 
     // ✅ [2026-01-27] 썸네일/소제목 비율 드롭다운 값 저장
@@ -2806,35 +2756,7 @@ export function openHeadingImageModal(): void {
     if (textOnlyCheck) textOnlyCheck.checked = localStorage.getItem('textOnlyPublish') === 'true';
     if (lifestyleCheck) lifestyleCheck.checked = localStorage.getItem('lifestyleImageGenerate') === 'true';
 
-    // ✅ 쇼핑커넥트 모드 감지 및 전용 옵션 표시
-    const shoppingConnectSection = document.getElementById('shopping-connect-options');
-    if (shoppingConnectSection) {
-      // 쇼핑커넥트 모드 체크 (여러 방법으로 확인)
-      const contentModeInput = document.getElementById('unified-content-mode') as HTMLInputElement | null;
-      const shoppingConnectSettings = document.getElementById('shopping-connect-settings');
 
-      // 1. isShoppingConnectModeActive() 전역 함수 사용
-      // 2. unified-content-mode 값이 'affiliate'인지 확인
-      // 3. shopping-connect-settings 섹션이 보이는지 확인
-      const isShoppingConnect =
-        (typeof (window as any).isShoppingConnectModeActive === 'function' && (window as any).isShoppingConnectModeActive()) ||
-        contentModeInput?.value === 'affiliate' ||
-        (shoppingConnectSettings && shoppingConnectSettings.style.display !== 'none');
-
-      shoppingConnectSection.style.display = isShoppingConnect ? 'block' : 'none';
-      console.log('[HeadingImageSettings] 쇼핑커넥트 모드:', isShoppingConnect);
-
-      // ✅ [2026-01-28] 쇼핑커넥트 전용 필드들 로드
-      if (isShoppingConnect) {
-        // ✅ [2026-05-18] getSubImageMode가 엔진명도 'ai'로 정규화 → 라디오 매치 실패 방지
-        const scSubImageMode = getSubImageMode();
-        const scSubImageRadio = document.querySelector(`input[name="sc-sub-image-source"][value="${scSubImageMode}"]`) as HTMLInputElement;
-        if (scSubImageRadio) scSubImageRadio.checked = true;
-
-        const scAutoThumbnailCheck = document.getElementById('sc-auto-thumbnail-setting') as HTMLInputElement;
-        if (scAutoThumbnailCheck) scAutoThumbnailCheck.checked = localStorage.getItem('scAutoThumbnailSetting') === 'true';
-      }
-    }
   }
 }
 
