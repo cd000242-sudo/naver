@@ -17,13 +17,13 @@ describe('Phase 7.2 코어 순수화 — generateImagesForAutomation headingImag
     expect(src).toContain('headingImageMode 미전달 — localStorage 폴백');
   });
 
-  it('4개 진입점(연속/다중×2/풀오토 래퍼)이 headingImageMode를 명시 전달한다', () => {
+  it('6개 진입점(연속×2/다중×3/풀오토 래퍼)이 headingImageMode를 명시 전달한다', () => {
     const mam = read('src', 'renderer', 'modules', 'multiAccountManager.ts');
     const cp = read('src', 'renderer', 'modules', 'continuousPublishing.ts');
     const ph = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
     const passPattern = /headingImageMode: localStorage\.getItem\('headingImageMode'\) \|\| 'all'/g;
-    expect((mam.match(passPattern) || []).length).toBeGreaterThanOrEqual(2);
-    expect((cp.match(passPattern) || []).length).toBeGreaterThanOrEqual(1);
+    expect((mam.match(passPattern) || []).length).toBeGreaterThanOrEqual(3);
+    expect((cp.match(passPattern) || []).length).toBeGreaterThanOrEqual(2);
     expect((ph.match(passPattern) || []).length).toBeGreaterThanOrEqual(1);
   });
 });

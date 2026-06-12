@@ -3260,6 +3260,7 @@ async function initMultiAccountPublishModal() {
                                 },
                                 aiFallbackFn: generateImagesForAutomation,
                                 aiOptions: {
+                                    headingImageMode: localStorage.getItem('headingImageMode') || 'all',
                                     stopCheck: () => stopRequested || window.stopFullAutoPublish,
                                     allowThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true',
                                     thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',

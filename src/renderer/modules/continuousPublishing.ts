@@ -4609,6 +4609,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                   headings,
                   finalStructuredContent.selectedTitle,
                   {
+                    headingImageMode: localStorage.getItem('headingImageMode') || 'all',
                     stopCheck: () => !isContinuousMode,
                     onProgress: (msg: string) => {
                       appendLog(msg);
