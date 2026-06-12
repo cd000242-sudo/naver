@@ -81,6 +81,7 @@ declare function generateContentFromUrl(url: string, title?: string, tone?: stri
 declare function generateContentFromKeywords(title: string, keywords?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
+declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string } };
 declare function executeUnifiedAutomation(formData: any): Promise<any>;
 declare function updateUnifiedPreview(content: any): void;
 declare function syncGlobalImagesFromImageManager(): void;
@@ -4210,7 +4211,7 @@ async function startContinuousPublishingV2(): Promise<void> {
   // ✅ [v2.8.3] 이미지 엔진 사전 차단 가드 — 연속발행도 동일 정책 (폴백 금지)
   // v2.10.84: dynamic import 제거 — 인라인 빌드에서 silent fail 방지.
   try {
-    const textOnlyGuard = localStorage.getItem('textOnlyPublish') === 'true';
+    const textOnlyGuard = resolvePipelineConfig('continuous').image.textOnlyPublish;
     if (!textOnlyGuard) {
       const guardSources = Array.from(new Set(
         pendingItems
@@ -4299,8 +4300,10 @@ async function startContinuousPublishingV2(): Promise<void> {
   };
 
   // ✅ [2026-01-28 FIX] localStorage 설정 최우선 적용
+  // [Phase 7.1-b] 플로우 시작 시 1회 해석 — 루프 내 per-item 스냅샷과 별도
+  const startPipelineCfg = resolvePipelineConfig('continuous');
   const includeThumbnailTextEl = document.getElementById('continuous-include-thumbnail-text') as HTMLInputElement | null;
-  const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true' ||
+  const includeThumbnailText = startPipelineCfg.image.thumbnailTextInclude ||
     includeThumbnailTextEl?.checked || false;
   console.log(`[Continuous] 🖼️ 썸네일 텍스트 포함: ${includeThumbnailText} (localStorage 또는 체크박스)`);
 
@@ -4320,6 +4323,10 @@ async function startContinuousPublishingV2(): Promise<void> {
     const item = continuousQueueV2[i];
     if (!isContinuousMode) break;
     if (item.status !== 'pending') continue;
+
+    // [Phase 7.1-b] Per-item snapshot — settings changed mid-run apply from
+    // the NEXT post, never mid-post (design §2.2).
+    const itemPipelineCfg = resolvePipelineConfig('continuous');
 
     const currentIdx = successCount + failCount + 1;
     const progress = ((currentIdx - 0.5) / totalCount) * 100;
@@ -4526,7 +4533,7 @@ async function startContinuousPublishingV2(): Promise<void> {
         // 'skip': 이미지 없이 발행, 'saved': 저장된 이미지 사용 (AI 생성 불필요)
         const skipImages = item.imageSource === 'skip'
           || item.imageSource === 'saved'
-          || localStorage.getItem('textOnlyPublish') === 'true';
+          || itemPipelineCfg.image.textOnlyPublish;
         if (!skipImages) {
           updateContinuousProgressModal({
             step: '이미지 생성 중...',
@@ -4569,7 +4576,7 @@ async function startContinuousPublishingV2(): Promise<void> {
               // ✅ [2026-03-12 FIX] thumbnailOnly / headingImageMode=none 체크
               // 이 모드들에서는 generateImagesForAutomation을 건너뛰고
               // fullAutoFlow의 전용 썸네일/thumbnailOnly 로직에 위임
-              const _headingImageMode = localStorage.getItem('headingImageMode') || 'all';
+              const _headingImageMode = itemPipelineCfg.image.headingImageMode;
               // Continuous publishing follows headingImageMode only — the
               // legacy 'thumbnailOnly' checkbox key is full-auto-scoped, and a
               // stale 'true' here forced thumbnail-only publishes.
@@ -4592,7 +4599,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                   onLog: (msg: string) => appendLog(msg),
                   aiFallbackFn: generateImagesForAutomation,
                   aiOptions: {
-                    headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                    headingImageMode: itemPipelineCfg.image.headingImageMode,
                     fallbackProvider: resolveImageProviderFallback(),
                     stopCheck: () => !isContinuousMode,
                     allowThumbnailText: includeThumbnailText,
@@ -4611,7 +4618,7 @@ async function startContinuousPublishingV2(): Promise<void> {
                   headings,
                   finalStructuredContent.selectedTitle,
                   {
-                    headingImageMode: localStorage.getItem('headingImageMode') || 'all',
+                    headingImageMode: itemPipelineCfg.image.headingImageMode,
                     fallbackProvider: resolveImageProviderFallback(),
                     stopCheck: () => !isContinuousMode,
                     onProgress: (msg: string) => {
@@ -4774,7 +4781,7 @@ async function startContinuousPublishingV2(): Promise<void> {
           previousPostTitle: item.previousPostTitle || undefined,
           // Continuous publishing derives thumbnail-only from headingImageMode
           // (the legacy checkbox key is full-auto-scoped).
-          thumbnailOnly: (localStorage.getItem('headingImageMode') || 'all') === 'thumbnail-only',
+          thumbnailOnly: itemPipelineCfg.image.headingImageMode === 'thumbnail-only',
         };
 
         // ✅ [2026-03-11 FIX] 발행 실행 직전 최종 중지 체크 — 어떤 발행 모드든 반드시 적용
@@ -5198,6 +5205,8 @@ async function processNextInQueueEnhanced(): Promise<void> {
 
 // ✅ 연속 발행 실행 (발행 모드 지원)
 export async function executeContinuousPublish(structuredContent: any, publishMode: string, scheduleDate?: string): Promise<void> {
+  // [Phase 7.1-b] Per-publish snapshot (this function handles one post).
+  const pipelineCfg = resolvePipelineConfig('continuous');
   // ✅ 사용자 설정 이미지 소스 가져오기 (리뉴얼 모달: select 우선, 구형 UI: radio fallback)
   const imageSourceSelect = document.getElementById('continuous-image-source-select') as HTMLSelectElement | null;
   const imageSourceRadio = document.querySelector('input[name="continuous-image-source"]:checked') as HTMLInputElement | null;
@@ -5205,7 +5214,7 @@ export async function executeContinuousPublish(structuredContent: any, publishMo
   // ✅ [2026-03-07 FIX] 이미지 건너뛰기 조건 확장
   const skipImages = imageSource === 'skip'
     || imageSource === 'saved'
-    || localStorage.getItem('textOnlyPublish') === 'true';
+    || pipelineCfg.image.textOnlyPublish;
 
   // ✅ 연속발행: 썸네일 텍스트 포함 옵션
   const includeThumbnailTextEl = document.getElementById('continuous-include-thumbnail-text') as HTMLInputElement | null;
@@ -5225,11 +5234,12 @@ export async function executeContinuousPublish(structuredContent: any, publishMo
     includeThumbnailText,
     categoryName: UnifiedDOMCache.getRealCategoryName(), // ✅ [2026-02-11 FIX] 카테고리 이름(text) 전달 — value(번호) 아닌 name으로 발행 모달에서 매칭
     // ✅ [2026-03-23 FIX] Enhanced 연속발행에서도 이미지 설정 명시적 전달 (localStorage 폴백 의존 제거)
-    imageStyle: localStorage.getItem('imageStyle') || 'realistic',
-    headingImageMode: localStorage.getItem('headingImageMode') || 'all',
-    imageRatio: localStorage.getItem('imageRatio') || '1:1',
-    thumbnailImageRatio: localStorage.getItem('thumbnailImageRatio') || '1:1',
-    subheadingImageRatio: localStorage.getItem('subheadingImageRatio') || '1:1',
+    // [Phase 7.1-b] 진입점 1회 해석 스냅샷 사용
+    imageStyle: pipelineCfg.image.imageStyle,
+    headingImageMode: pipelineCfg.image.headingImageMode,
+    imageRatio: pipelineCfg.image.imageRatio,
+    thumbnailImageRatio: pipelineCfg.image.thumbnailImageRatio,
+    subheadingImageRatio: pipelineCfg.image.subheadingImageRatio,
   };
 
   await executeUnifiedAutomation(formData);

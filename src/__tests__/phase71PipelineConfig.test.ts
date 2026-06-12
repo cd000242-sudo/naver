@@ -75,3 +75,22 @@ describe('직독 래칫 — publishingHandlers (7.1-a)', () => {
     expect(ph).toContain("const pipelineCfg = resolvePipelineConfig('full-auto')");
   });
 });
+
+describe('직독 래칫 — continuousPublishing (7.1-b)', () => {
+  it('연속발행 이미지 클러스터 직독이 단일 해석처로 이관되었다', () => {
+    const cp = read('src', 'renderer', 'modules', 'continuousPublishing.ts');
+    const count = (key: string) =>
+      (cp.match(new RegExp(`localStorage\\.getItem\\('${key}'\\)`, 'g')) || []).length;
+    expect(count('headingImageMode')).toBe(0);
+    expect(count('imageStyle')).toBe(0);
+    expect(count('imageRatio')).toBe(0);
+    expect(count('thumbnailImageRatio')).toBe(0);
+    expect(count('subheadingImageRatio')).toBe(0);
+    // 잔여 부채 (아이템 생성 시점 UI 수집 2곳 — 후속 단계 이관): 늘어나면 FAIL
+    expect(count('textOnlyPublish')).toBeLessThanOrEqual(1);
+    expect(count('thumbnailTextInclude')).toBeLessThanOrEqual(1);
+    // V2 루프 per-item 해석 + Enhanced per-publish 해석이 존재
+    expect(cp).toContain("const itemPipelineCfg = resolvePipelineConfig('continuous')");
+    expect(cp).toContain("const pipelineCfg = resolvePipelineConfig('continuous')");
+  });
+});
