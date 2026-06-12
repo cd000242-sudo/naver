@@ -112,6 +112,7 @@ export async function selectCategoryInPublishModal(self: any, frame: Frame, page
       }
       await self.delay(200);
     } catch {
+      recordSilentFailure('publish:dropdown-close');
       // 닫기 실패해도 계속 진행
     }
   };

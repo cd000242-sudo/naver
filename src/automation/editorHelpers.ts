@@ -90,6 +90,7 @@ async function insertPreviousPostTailBlock(
     await page.keyboard.down('Control');
     await page.keyboard.press('End');
   } catch {
+    recordSilentFailure('editor:cursor-move');
     // 커서 이동 실패는 발행 자체를 막지 않도록 아래 해시태그 단계에서 재시도한다.
   } finally {
     await page.keyboard.up('Control').catch(() => undefined);
@@ -1098,6 +1099,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             await page.keyboard.press('Enter');
             await self.delay(200);
           } catch (safetyNetError) {
+            recordSilentFailure('editor:safety-net-thumbnail');
             self.log(`   ⚠️ [Safety Net] 썸네일 삽입 실패: ${(safetyNetError as Error).message}`);
           }
         } else {

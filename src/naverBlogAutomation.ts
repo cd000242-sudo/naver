@@ -45,7 +45,7 @@ import {
 import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
 import { collectPrePublishStats, evaluatePrePublishReport, formatPrePublishReport, getBlockingFailures } from './automation/prePublishAssertion.js';
-import { formatSilentFailureSummary, resetSilentFailureCounts } from './automation/silentFailureCounter.js';
+import { formatSilentFailureSummary, recordSilentFailure, resetSilentFailureCounts } from './automation/silentFailureCounter.js';
 import { resolveImmediatePublishOutcome } from './automation/publishOutcomeResolver';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
@@ -5101,6 +5101,7 @@ export class NaverBlogAutomation {
               await frame.click('body').catch(() => { });
               await this.delay(100);
             } catch (imgErr) {
+              recordSilentFailure('image:width-apply');
               this.log(`   ⚠️ ${i + 1}/${imageElements.length} 이미지 처리 중 오류 (무시): ${(imgErr as Error).message}`);
             }
           }
