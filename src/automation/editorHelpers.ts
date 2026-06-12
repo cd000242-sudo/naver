@@ -1662,6 +1662,36 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           // ✅ 쇼핑커넥트 모드: 표 이미지 삽입
           // ✅ [2026-02-19] 장단점 표 중복 방지 플래그 (첫 번째 섹션에서 이미 삽입 시 마지막 섹션 건너뜀)
           if (i === 0) self._prosConsAlreadyInserted = false;
+
+          // [2026-06-12] 업체홍보 모드: 마지막 섹션 뒤 문의 안내 표 이미지.
+          // 연락 채널(전화/카톡/운영시간/주소/홈페이지)을 스펙 표와 동일
+          // 룩앤필의 표 이미지로 정리해 문의 전환을 유도한다.
+          const isBusinessPromoMode = (resolved as any).contentMode === 'business' && (resolved as any).businessInfo;
+          if (isBusinessPromoMode && i === headings.length - 1) {
+            try {
+              const biz = (resolved as any).businessInfo as Record<string, any>;
+              const contactRows = [
+                biz.phone ? { label: '전화', value: String(biz.phone) } : null,
+                biz.kakao ? { label: '카카오톡', value: String(biz.kakao) } : null,
+                biz.hours ? { label: '운영시간', value: String(biz.hours) } : null,
+                biz.address ? { label: '주소', value: String(biz.address) } : null,
+                biz.researchUrl ? { label: '홈페이지', value: String(biz.researchUrl) } : null,
+              ].filter(Boolean) as Array<{ label: string; value: string }>;
+              if (contactRows.length > 0) {
+                self.log('   📋[업체홍보] 문의 안내 표 이미지 생성 중...');
+                const { generateContactTableImage } = await import('../image/tableImageGenerator.js');
+                const contactTablePath = await generateContactTableImage(String(biz.name || ''), contactRows);
+                await page.keyboard.press('Enter');
+                await self.delay(300);
+                await self.insertBase64ImageAtCursor(contactTablePath);
+                await self.delay(1000);
+                self.log(`   ✅ 문의 안내 표 삽입 완료 (채널 ${contactRows.length}개)`);
+              }
+            } catch (contactErr) {
+              self.log(`   ⚠️ 문의 표 생성 실패(발행 계속): ${(contactErr as Error).message}`);
+            }
+          }
+
           if (isShoppingConnectMode) {
             const productName = resolved.title?.split(' ').slice(0, 5).join(' ') || '제품';
             const fullBodyText = bodyText || cleanBody;

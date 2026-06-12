@@ -512,6 +512,17 @@ export async function generateProsConsTableImage(
   return generator.generateProsConsTable(productName, pros, cons, outputDir);
 }
 
+// [2026-06-12] 업체홍보 문의 안내 표 — 스펙 표와 동일 룩앤필로 연락 채널을
+// 정리해 글 하단에 삽입한다 (사용자 요청: "문의는 표로 깔끔하게 정리").
+export async function generateContactTableImage(
+  businessName: string,
+  rows: TableRow[],
+  outputDir?: string
+): Promise<string> {
+  const title = `${String(businessName || '').trim() || '문의'} 문의 안내`;
+  return generator.generateSpecTable(title, rows, outputDir);
+}
+
 // ==========================================
 // 4. CTA 배너 이미지 생성기 (쇼핑커넥트용)
 // ==========================================

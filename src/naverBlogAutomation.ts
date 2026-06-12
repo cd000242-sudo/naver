@@ -222,6 +222,7 @@ export interface RunOptions {
   affiliateLink?: string; // ✅ 추가: 쇼핑커넥트 제휴 링크
   useAffiliateVideo?: boolean; // ✅ 추가: 쇼핑 비디오 변환 옵션
   contentMode?: string; // ✅ 추가: 콘텐츠 모드 (seo, homefeed, affiliate, custom 등)
+  businessInfo?: Record<string, any>; // [2026-06-12] 업체홍보 문의 표 이미지용 연락 채널
   useAiImage?: boolean; // ✅ 추가: AI 이미지 생성 사용 여부
   createProductThumbnail?: boolean; // ✅ 추가: 제품 이미지 기반 썸네일 합성 여부
   includeThumbnailText?: boolean; // ✅ 추가: 썸네일 텍스트 합성 여부
@@ -271,6 +272,7 @@ interface ResolvedRunOptions {
   affiliateLink?: string; // ✅ 추가: 쇼핑커넥트 제휴 링크
   useAffiliateVideo?: boolean; // ✅ 추가: 쇼핑 비디오 변환 옵션
   contentMode?: string; // ✅ 추가: 콘텐츠 모드
+  businessInfo?: Record<string, any>; // [2026-06-12] 업체홍보 문의 표
   useAiImage?: boolean; // ✅ 추가
   createProductThumbnail?: boolean; // ✅ 추가
   includeThumbnailText: boolean; // ✅ 추가

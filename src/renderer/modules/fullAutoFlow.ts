@@ -2884,6 +2884,8 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         skipCta: formData.skipCta || false,
         contentMode: formData.contentMode || 'seo',
         affiliateLink: formData.affiliateLink,
+        // [2026-06-12] 업체홍보 문의 표 이미지용 — 발행 단계에 연락 채널 전달
+        businessInfo: formData.contentMode === 'business' ? (window._businessInfo || undefined) : undefined,
         previousPostTitle: formData.previousPostTitle || undefined,
         previousPostUrl: formData.previousPostUrl || undefined,
         customBannerPath: formData.customBannerPath || window.customBannerPath || undefined,
