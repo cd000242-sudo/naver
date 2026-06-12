@@ -1846,7 +1846,15 @@ async function generateFullAutoContent(formData) {
     appendLog(`🤖 AI 콘텐츠 생성을 시작합니다... (방식: ${isUrlMode ? 'URL 뉴스' : '키워드'})`);
     const urls = formData.urls || [];
     const keywords = formData.keywords || '';
-    const keywordList = keywords ? keywords.split(',').map((k) => k.trim()).filter((k) => k.length > 0) : [];
+    // [2026-06-12] 키워드 입력에 URL이 섞이면("키워드, https://...") URL은
+    // 참고자료로 자동 분리 — 키워드/제목으로 새지 않게 하고 글 재료로 쓴다.
+    const rawTokens = keywords ? keywords.split(',').map((k) => k.trim()).filter((k) => k.length > 0) : [];
+    const inlineReferenceUrls = rawTokens.filter((k) => /^https?:\/\//i.test(k));
+    const keywordList = rawTokens.filter((k) => !/^https?:\/\//i.test(k));
+    const cleanedKeywords = keywordList.join(', ');
+    if (inlineReferenceUrls.length > 0) {
+        appendLog(`🔗 키워드 입력에서 참고 URL ${inlineReferenceUrls.length}개 분리 — 페이지를 수집해 글 재료로 사용합니다.`);
+    }
     const titleStr = formData.title ? String(formData.title || '').trim() : '';
     let draftText;
     if (keywordList.length > 0) {
@@ -1910,7 +1918,7 @@ async function generateFullAutoContent(formData) {
         window._keywordTitleOptions = {
             useKeywordAsTitle: true,
             useKeywordTitlePrefix: formData.keywordTitlePrefix || false,
-            keyword: formData.keywords || titleStr || keywordList.join(' '),
+            keyword: cleanedKeywords || titleStr || keywordList.join(' '),
         };
         appendLog(`📌 키워드를 제목으로 그대로 사용: "${window._keywordTitleOptions.keyword}"`);
     }
@@ -1918,7 +1926,7 @@ async function generateFullAutoContent(formData) {
         window._keywordTitleOptions = {
             useKeywordAsTitle: false,
             useKeywordTitlePrefix: true,
-            keyword: formData.keywords || titleStr || keywordList.join(' '),
+            keyword: cleanedKeywords || titleStr || keywordList.join(' '),
         };
         appendLog(`🔝 키워드를 제목 맨 앞에 배치합니다.`);
     }
@@ -1934,7 +1942,7 @@ async function generateFullAutoContent(formData) {
         assembly: {
             generator: formData.generator,
             keywords: keywordList,
-            rssUrl: urls.length > 0 ? urls[0] : (businessResearchUrl || undefined),
+            rssUrl: urls.length > 0 ? urls[0] : (inlineReferenceUrls[0] || businessResearchUrl || undefined),
             title: titleStr || undefined,
             draftText,
             targetAge: formData.targetAge,
@@ -1947,7 +1955,7 @@ async function generateFullAutoContent(formData) {
             toneStyle: formData.toneStyle || formData.tone,
             businessInfo,
             useKeywordAsTitle: formData.keywordAsTitle || false,
-            keywordForTitle: formData.keywordAsTitle ? (formData.keywords || titleStr || keywordList.join(' ')) : undefined,
+            keywordForTitle: formData.keywordAsTitle ? (cleanedKeywords || titleStr || keywordList.join(' ')) : undefined,
             useKeywordTitlePrefix: formData.keywordTitlePrefix || false,
         }
     };
