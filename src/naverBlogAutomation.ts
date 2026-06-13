@@ -44,6 +44,12 @@ import {
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
+import {
+  collectEditorTitleDiagnostics,
+  findEditorTitleInputElement,
+  readEditorTitleText,
+  setTitleByDomEvent,
+} from './automation/editorTitleHelpers.js';
 import { collectPrePublishStats, evaluatePrePublishReport, formatPrePublishReport, getBlockingFailures } from './automation/prePublishAssertion.js';
 import { formatSilentFailureSummary, recordSilentFailure, resetSilentFailureCounts } from './automation/silentFailureCounter.js';
 import { resolveImmediatePublishOutcome } from './automation/publishOutcomeResolver';
@@ -4789,9 +4795,9 @@ export class NaverBlogAutomation {
     }
 
     // ✅ 타임아웃 설정 (60초)
-    const titleElement = await this.findTitleInputElement(frame, page, 60000);
+    const titleElement = await findEditorTitleInputElement(frame, page, 60000, (message) => this.log(message));
     if (!titleElement) {
-      const diagnostics = await this.collectEditorTitleDiagnostics(frame, page);
+      const diagnostics = await collectEditorTitleDiagnostics(frame, page);
       throw new Error(`제목 입력 필드를 찾을 수 없습니다. ${diagnostics}`);
     }
 
@@ -4815,12 +4821,12 @@ export class NaverBlogAutomation {
         await this.delay(100);
 
         // 입력 확인
-        let currentTitle = await this.readEditorTitleText(frame);
+        let currentTitle = await readEditorTitleText(frame);
         if (!currentTitle.includes(titleText.substring(0, 10))) {
           this.log('   ⚠️ 키보드 입력 확인 실패 → DOM input 이벤트 fallback 시도');
-          const domTitle = await this.setTitleByDomEvent(titleElement, titleText);
+          const domTitle = await setTitleByDomEvent(titleElement, titleText);
           await this.delay(180);
-          currentTitle = await this.readEditorTitleText(frame) || domTitle;
+          currentTitle = await readEditorTitleText(frame) || domTitle;
         }
         if (currentTitle.includes(titleText.substring(0, 10))) {
           this.log(`   ✅ 제목 입력 확인됨`);
@@ -4838,7 +4844,7 @@ export class NaverBlogAutomation {
     }
 
     if (!titleInputSuccess) {
-      const diagnostics = await this.collectEditorTitleDiagnostics(frame, page);
+      const diagnostics = await collectEditorTitleDiagnostics(frame, page);
       throw new Error(`제목 입력에 실패했습니다 (3회 시도). ${diagnostics}`);
     }
 

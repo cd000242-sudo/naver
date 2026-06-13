@@ -109,18 +109,28 @@ describe('Phase 7.4 characterization - preload/main IPC bridge', () => {
 describe('Phase 7.4 characterization - Naver editor automation contracts', () => {
   it('keeps manual-login-to-write-editor recovery and title diagnostics', () => {
     const automation = read('src', 'naverBlogAutomation.ts');
+    const titleHelpers = read('src', 'automation', 'editorTitleHelpers.ts');
 
     expectAll(automation, [
       'GoBlogWrite.naver',
       'PostWriteForm',
       'manual login detected on blog domain; moving to write editor',
-      'findTitleInputElement(frame, page, 60000)',
+      'findEditorTitleInputElement(frame, page, 60000',
       'collectEditorTitleDiagnostics(frame, page)',
       'setTitleByDomEvent(titleElement, titleText)',
+    ]);
+
+    expectAll(titleHelpers, [
+      'export async function findEditorTitleInputElement',
+      'export async function readEditorTitleText',
+      'export async function setTitleByDomEvent',
+      'export async function collectEditorTitleDiagnostics',
       "'.se-section-documentTitle'",
       "'[data-name=\"documentTitle\"]'",
       "'[class*=\"documentTitle\"]'",
       "'[contenteditable=\"true\"]'",
+      "'page.editor.documentTitle'",
+      "target.dispatchEvent(new InputEvent('input'",
     ]);
   });
 

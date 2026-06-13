@@ -48,7 +48,10 @@
   contentGenerator 공개 export, post-gen validation/winners hook, preload/main IPC bridge,
   Naver editor login→write/title diagnostics, previous-post/CTA/hashtags/thumbnail payload,
   rich-paste tail recovery를 `phase74GodFileCharacterization.test.ts`로 잠금. 단일 테스트 7/7 GREEN.
-- 다음: Phase 7.4-b god file 분해 대상별 얇은 adapter 추출 전 live-critical static guard 보강
+- ✅ 7.4-b (이번 세션): 제목 입력 필드 탐색/진단/DOM input fallback을
+  `automation/editorTitleHelpers.ts`로 분리하고 `inputTitle()` 런타임 호출을 새 헬퍼로 전환.
+  Phase 7.4 characterization은 새 헬퍼 소유 셀렉터/진단 계약을 추가로 잠금.
+- 다음: Phase 7.4-c 남은 레거시 title private wrapper 정리 또는 editor tail helper 2차 분해
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

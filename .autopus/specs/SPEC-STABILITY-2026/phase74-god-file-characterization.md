@@ -24,14 +24,44 @@ The guard covers:
 - `npm test -- src/__tests__/phase74GodFileCharacterization.test.ts`
   - 7 tests passed.
 
+## 7.4-b Completed
+
+Added `src/automation/editorTitleHelpers.ts` and moved the live runtime path for
+title-field discovery, title diagnostics, title text readback, and DOM input-event
+fallback behind that helper module.
+
+`NaverBlogAutomation.inputTitle()` now calls:
+
+- `findEditorTitleInputElement()`
+- `collectEditorTitleDiagnostics()`
+- `readEditorTitleText()`
+- `setTitleByDomEvent()`
+
+The old private methods remain as a short-term legacy cleanup target, but the
+active publishing path no longer depends on their internal implementation.
+
+Additional characterization coverage now asserts that the helper owns the title
+selectors, page fallback, diagnostics output, and DOM `InputEvent` fallback.
+
+## 7.4-b Verification
+
+- `npm test -- src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 7 tests passed.
+- `npm test -- src/__tests__/phase71PipelineConfig.test.ts src/__tests__/phase72CorePurity.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 27 tests passed.
+- `npm run build`
+  - passed.
+
 ## Next
 
-7.4-b should add one more layer of static guards for the exact first split target
-before moving code. Suggested order:
+7.4-c should remove the legacy title private wrappers or continue with the editor
+tail helper split. Suggested order:
 
-1. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
+1. `naverBlogAutomation.ts` legacy title wrappers, because active runtime now uses
+   the extracted helper.
+2. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
    and previous-post/hashtag failures are most expensive.
-2. `main.ts` IPC registration clusters, because dead-router regressions already
+3. `main.ts` IPC registration clusters, because dead-router regressions already
    shipped more than once.
-3. `contentGenerator.ts` pure prompt/title/rate-limit helpers.
-4. `renderer/renderer.ts` only after event handler ownership is clear.
+4. `contentGenerator.ts` pure prompt/title/rate-limit helpers.
+5. `renderer/renderer.ts` only after event handler ownership is clear.
