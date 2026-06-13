@@ -44,6 +44,7 @@ declare function generateEnglishPromptForHeading(title: string, subtitle?: strin
 declare function getManualEnglishPromptOverrideForHeading(heading: string): string;
 declare function clearManualEnglishPromptOverrideForHeading(heading: string): void;
 declare function generateImagesWithCostSafety(options: any): Promise<any>;
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
 declare function generateNanoBananaProImage(prompt: string): Promise<string>;
 declare function isShoppingConnectModeActive(): boolean;
 // Shared helpers live in renderer/utils/shoppingConnectUtils.ts and are
@@ -947,7 +948,7 @@ export function initHeadingImageGeneration(): void {
         // ✅ [2026-02-27 FIX] AI 비동기 프롬프트 업그레이드 — Sync 폴백 프롬프트를 AI 번역으로 교체
         // Gemini → OpenAI → Claude → Perplexity 순 AI 폴백 체인으로 소제목에 맞는 정확한 프롬프트 생성
         appendLog('🤖 AI 프롬프트 번역 중... (소제목 → 영어 이미지 프롬프트)', 'images-log-output');
-        const imageStyle = localStorage.getItem('imageStyle') || 'realistic';
+        const imageStyle = readRawPipelineSettings().imageStyle || 'realistic';
         try {
           // [v2.10.110] batch=3 동시성 제한 — 같은 파일 line 261 패턴과 통일.
           //   이전: 30개 소제목 동시 AI 호출 → Gemini 429 rate limit. (Agent T HIGH-1)
@@ -1309,9 +1310,10 @@ export function initHeadingImageGeneration(): void {
             // ✅ [2026-02-23] 종합 이미지 생성 정보 로그 (엔진 + 모델 + 스타일 + 다양성)
             {
               const _srcLabel = imageSourceNames[imageSource] || imageSource;
-              const _style = localStorage.getItem('imageStyle') || 'realistic';
+              const _rawPipeline = readRawPipelineSettings();
+              const _style = _rawPipeline.imageStyle || 'realistic';
               const _styleNames: Record<string, string> = { 'realistic': '📸 리얼리스틱', 'vintage': '🎞️ 빈티지', 'stickman': '🖌️ 스틱맨', 'roundy': '🫧 라운디', '2d': '✏️ 2D 웹툰' };
-              const _ratio = localStorage.getItem('imageRatio') || localStorage.getItem('subheadingImageRatio') || '1:1';
+              const _ratio = _rawPipeline.imageRatio || _rawPipeline.subheadingImageRatio || '1:1';
               let _modelLabel = '';
               if (imageSource === 'leonardoai') {
                 const _m = (document.getElementById('leonardoai-model-select') as HTMLSelectElement)?.value || 'seedream-4.5';
@@ -1351,7 +1353,7 @@ export function initHeadingImageGeneration(): void {
                 console.log(`[ImageGen] 🛒 쇼핑커넥트 AI 모드 → ${imageSource} + collectedImages(img2img)`);
               }
               const scPool = getShoppingConnectImagePool();
-              const thumbnailTextInclude = localStorage.getItem('thumbnailTextInclude') === 'true';
+              const thumbnailTextInclude = readRawPipelineSettings().thumbnailTextInclude === 'true';
               const imageResult = await generateImagesWithCostSafety({
                 provider: imageSource,
                 items: [{
@@ -1780,9 +1782,10 @@ export function initHeadingImageGeneration(): void {
           // ✅ [2026-02-23] 종합 이미지 생성 정보 로그 (엔진 + 모델 + 스타일 + 다양성)
           {
             const _srcLabel = imageSourceNames[imageSource] || imageSource;
-            const _style = localStorage.getItem('imageStyle') || 'realistic';
+            const _rawPipeline = readRawPipelineSettings();
+            const _style = _rawPipeline.imageStyle || 'realistic';
             const _styleNames: Record<string, string> = { 'realistic': '📸 리얼리스틱', 'vintage': '🎞️ 빈티지', 'stickman': '🖌️ 스틱맨', 'roundy': '🫧 라운디', '2d': '✏️ 2D 웹툰' };
-            const _ratio = localStorage.getItem('imageRatio') || localStorage.getItem('subheadingImageRatio') || '1:1';
+            const _ratio = _rawPipeline.imageRatio || _rawPipeline.subheadingImageRatio || '1:1';
             let _modelLabel = '';
             if (imageSource === 'leonardoai') {
               const _m = (document.getElementById('leonardoai-model-select') as HTMLSelectElement)?.value || 'seedream-4.5';
@@ -4842,7 +4845,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
         appendLog(`🛒 쇼핑커넥트 AI(${imageSource}) 재생성: img2img 참조 주입`, 'images-log-output');
       }
       const scPool = getShoppingConnectImagePool();
-      const thumbnailTextInclude = localStorage.getItem('thumbnailTextInclude') === 'true';
+      const thumbnailTextInclude = readRawPipelineSettings().thumbnailTextInclude === 'true';
       const imageResult = await generateImagesWithCostSafety({
         provider: imageSource,
         items: [{

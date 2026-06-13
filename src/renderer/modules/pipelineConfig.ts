@@ -41,6 +41,47 @@ function pipelineReadBool(key: string): boolean {
   }
 }
 
+export interface RawPipelineSettings {
+  headingImageMode: string | null;
+  thumbnailTextInclude: string | null;
+  textOnlyPublish: string | null;
+  imageStyle: string | null;
+  imageRatio: string | null;
+  thumbnailImageRatio: string | null;
+  subheadingImageRatio: string | null;
+  fullAutoImageSource: string | null;
+  globalImageSource: string | null;
+  imageFallbackPolicy: string | null;
+}
+
+function pipelineReadRaw(key: string): string | null {
+  try {
+    return typeof localStorage === 'undefined' ? null : localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+// Raw (null-preserving) reads for shared helpers that keep their own legacy
+// fallback chains (e.g. thumbnailImageRatio || imageRatio || '1:1'). This is
+// the ONLY other sanctioned localStorage touchpoint besides
+// resolvePipelineConfig — chains stay at the call site until each one is
+// deliberately normalized into the standard resolution above.
+export function readRawPipelineSettings(): RawPipelineSettings {
+  return {
+    headingImageMode: pipelineReadRaw('headingImageMode'),
+    thumbnailTextInclude: pipelineReadRaw('thumbnailTextInclude'),
+    textOnlyPublish: pipelineReadRaw('textOnlyPublish'),
+    imageStyle: pipelineReadRaw('imageStyle'),
+    imageRatio: pipelineReadRaw('imageRatio'),
+    thumbnailImageRatio: pipelineReadRaw('thumbnailImageRatio'),
+    subheadingImageRatio: pipelineReadRaw('subheadingImageRatio'),
+    fullAutoImageSource: pipelineReadRaw('fullAutoImageSource'),
+    globalImageSource: pipelineReadRaw('globalImageSource'),
+    imageFallbackPolicy: pipelineReadRaw('imageFallbackPolicy'),
+  };
+}
+
 export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   return {
     flow,

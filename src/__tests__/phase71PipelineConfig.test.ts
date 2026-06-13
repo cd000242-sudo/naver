@@ -95,6 +95,38 @@ describe('직독 래칫 — continuousPublishing (7.1-b)', () => {
   });
 });
 
+describe('직독 래칫 — 공유 헬퍼/풀오토 위임부 (7.1-d)', () => {
+  it('costAndAutoGen은 localStorage 직독 0건 (raw 접근자 경유)', () => {
+    const src = read('src', 'renderer', 'modules', 'costAndAutoGen.ts');
+    expect((src.match(/localStorage\.getItem\(/g) || []).length).toBe(0);
+    expect(src).toContain('const rawPipeline = readRawPipelineSettings()');
+  });
+
+  it('headingImageGen은 localStorage 직독 0건 (raw 접근자 경유)', () => {
+    const src = read('src', 'renderer', 'modules', 'headingImageGen.ts');
+    expect((src.match(/localStorage\.getItem\(/g) || []).length).toBe(0);
+  });
+
+  it('fullAutoFlow는 ftc 2건(7.1-h 대상) + 앱상태 1건만 잔존', () => {
+    const src = read('src', 'renderer', 'modules', 'fullAutoFlow.ts');
+    const count = (key: string) =>
+      (src.match(new RegExp(`localStorage\\.getItem\\('${key}'\\)`, 'g')) || []).length;
+    for (const key of ['headingImageMode', 'textOnlyPublish', 'thumbnailTextInclude', 'imageStyle', 'imageRatio', 'thumbnailImageRatio', 'subheadingImageRatio', 'imageFallbackPolicy']) {
+      expect(count(key)).toBe(0);
+    }
+    expect(count('ftcDisclosureEnabled')).toBeLessThanOrEqual(1);
+    expect(count('ftcDisclosureText')).toBeLessThanOrEqual(1);
+    // 직접 UI 진입점(collectFullAutoFormData)의 1회 해석 존재
+    expect(src).toContain("const pipelineCfg = resolvePipelineConfig('full-auto')");
+  });
+
+  it('raw 접근자는 pipelineConfig에만 정의되고 null 보존 규칙을 갖는다', () => {
+    const src = read('src', 'renderer', 'modules', 'pipelineConfig.ts');
+    expect(src).toContain('function readRawPipelineSettings()');
+    expect(src).toContain("pipelineReadRaw('thumbnailImageRatio')");
+  });
+});
+
 describe('직독 래칫 — multiAccountManager (7.1-c)', () => {
   it('다중계정 이미지 모드 클러스터 직독이 단일 해석처로 이관되었다', () => {
     const mam = read('src', 'renderer', 'modules', 'multiAccountManager.ts');

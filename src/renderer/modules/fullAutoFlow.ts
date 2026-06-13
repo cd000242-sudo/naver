@@ -694,7 +694,10 @@ async function executeFullAutoFlow(formData) {
                     if (collectedImgs.length > 0) {
                         referenceImagePath = collectedImgs[0].filePath || collectedImgs[0].url;
                     }
-                    const _headingImageModeForThumb = localStorage.getItem('headingImageMode') || 'all';
+                    // [Phase 7.1-d] formData snapshot first (set by flow entry); raw
+                    // accessor fallback covers callers that do not populate it
+                    // (image-narrative paths) — behavior unchanged.
+                    const _headingImageModeForThumb = formData?.headingImageMode || readRawPipelineSettings().headingImageMode || 'all';
                     let dedicatedThumbnailImage = null;
                     if (_headingImageModeForThumb === 'none') {
                         console.log('[FullAuto] 🚫 headingImageMode=none: 전용 썸네일 생성도 건너뜁니다.');
@@ -769,7 +772,7 @@ async function executeFullAutoFlow(formData) {
                             }).filter(Boolean);
                             // formData carries the live checkbox state for single
                             // full-auto; headingImageMode covers every other flow.
-                            const isThumbnailOnly = formData.thumbnailOnly === true || localStorage.getItem('headingImageMode') === 'thumbnail-only';
+                            const isThumbnailOnly = formData.thumbnailOnly === true || (formData?.headingImageMode || readRawPipelineSettings().headingImageMode) === 'thumbnail-only';
                             if (isThumbnailOnly) {
                                 console.log('[FullAuto] 📷 썸네일만 생성 모드: 소제목 이미지 없이 전용 썸네일만 사용');
                                 return [];
@@ -1540,6 +1543,9 @@ function initFullAutoExecution() {
     }
 }
 function collectFullAutoFormData() {
+    // [Phase 7.1-d] This is the direct-UI full-auto entry (bypasses
+    // publishingHandlers) — resolve the pipeline snapshot here once.
+    const pipelineCfg = resolvePipelineConfig('full-auto');
     const urls = Array.from(document.querySelectorAll('#unified-url-fields-container .url-field-input, #full-auto-url-fields-container .url-field-input'))
         .map(input => input.value.trim())
         .filter(url => url.length > 0);
@@ -1548,7 +1554,7 @@ function collectFullAutoFormData() {
     const generator = UnifiedDOMCache.getGenerator();
     const targetAge = 'all';
     const imageSource = UnifiedDOMCache.getImageSource();
-    const skipImages = localStorage.getItem('textOnlyPublish') === 'true';
+    const skipImages = pipelineCfg.image.textOnlyPublish;
     const publishMode = document.getElementById('unified-publish-mode')?.value
         || 'publish';
     let scheduleDate;
@@ -1572,7 +1578,7 @@ function collectFullAutoFormData() {
         }
     }
     const autoPublish = document.getElementById('auto-publish-after-generate')?.checked || false;
-    const includeThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true' ||
+    const includeThumbnailText = pipelineCfg.image.thumbnailTextInclude ||
         document.getElementById('thumbnail-text-include')?.checked || false;
     const enablePreview = true;
     const autoOptimize = true;
@@ -2206,15 +2212,19 @@ async function generateAIImagesForHeadings(headings, formData) {
         appendLog('⚠️ 소제목 정보가 없어 이미지 생성을 중단합니다.');
         throw new Error('이미지 생성을 위한 소제목 정보가 없습니다.');
     }
+    // [Phase 7.1-d] Raw accessor fallbacks — formData (flow-entry snapshot)
+    // stays first; raw reads cover un-populating callers (image-narrative).
+    const _rawPipeline = readRawPipelineSettings();
     const _skipImagesFlag = formData?.skipImages === true
-        || localStorage.getItem('textOnlyPublish') === 'true';
+        || _rawPipeline.textOnlyPublish === 'true';
     if (_skipImagesFlag) {
         console.log('[AI Images] 🚫 skipImages/textOnlyPublish=true → 유료 이미지 API 호출 차단');
         appendLog('🚫 이미지 없이 발행: generateAIImagesForHeadings 호출 차단 (유료 API 비용 방지)');
         return [];
     }
-    const _thumbnailOnly = formData.thumbnailOnly === true || localStorage.getItem('headingImageMode') === 'thumbnail-only';
-    const _headingImageMode = localStorage.getItem('headingImageMode') || 'all';
+    const _resolvedHeadingImageMode = formData?.headingImageMode || _rawPipeline.headingImageMode;
+    const _thumbnailOnly = formData.thumbnailOnly === true || _resolvedHeadingImageMode === 'thumbnail-only';
+    const _headingImageMode = _resolvedHeadingImageMode || 'all';
     if (_headingImageMode === 'none') {
         console.log('[AI Images] 🚫 headingImageMode=none → 이미지 생성 전체 스킵');
         appendLog('🚫 이미지 없이 모드: 소제목 이미지 생성 건너뜁니다.');
@@ -2237,7 +2247,7 @@ async function generateAIImagesForHeadings(headings, formData) {
     formData.imageSource = imageSource;
     const imageStyle = formData.imageStyle || globalSettings.imageStyle;
     const imageRatio = formData.imageRatio || globalSettings.imageRatio;
-    const imageFallbackPolicy = formData.imageFallbackPolicy || globalSettings.imageFallbackPolicy || localStorage.getItem('imageFallbackPolicy') || 'engine-only';
+    const imageFallbackPolicy = formData.imageFallbackPolicy || globalSettings.imageFallbackPolicy || _rawPipeline.imageFallbackPolicy || 'engine-only';
     console.log(`[AI Images] 이미지 생성 시작 - 소스: ${imageSource}, 스타일: ${imageStyle}, 비율: ${imageRatio}, 폴백정책: ${imageFallbackPolicy}, 소제목 개수: ${headings.length}`);
     const sourceNames = {
         'local-folder': '📂 내 폴더 (로컬)',
@@ -2269,7 +2279,7 @@ async function generateAIImagesForHeadings(headings, formData) {
         console.log(`[AI Images] ✅ 수동 썸네일 감지: 첫 번째 이미지 건너뛰기`);
     }
     const thumbnailTextCheckbox = document.getElementById('thumbnail-text-option');
-    const thumbnailFromStorage = localStorage.getItem('thumbnailTextInclude') === 'true';
+    const thumbnailFromStorage = _rawPipeline.thumbnailTextInclude === 'true';
     const isShoppingConnect = formData.isShoppingConnect === true || formData.contentMode === 'affiliate';
     const SC_FAKE_AI_ENGINES = [
         'imagefx', 'dall-e-3', 'leonardoai', 'deepinfra', 'deepinfra-flux',

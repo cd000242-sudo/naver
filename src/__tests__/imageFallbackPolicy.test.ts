@@ -32,7 +32,9 @@ describe('image fallback policy contract', () => {
 
   it('renderer injects the saved policy and ask mode requires user confirmation before guarantee retry', () => {
     const src = read('renderer/modules/costAndAutoGen.ts');
-    expect(src).toMatch(/localStorage\.getItem\('imageFallbackPolicy'\)/);
+    // [Phase 7.1-d] The saved policy now arrives via the single pipeline
+    // accessor instead of a direct localStorage read — injection must stay.
+    expect(src).toMatch(/normalizeImageFallbackPolicy\(rawPipeline\.imageFallbackPolicy\)/);
     expect(src).toMatch(/options\.imageFallbackPolicy\s*=\s*savedFallbackPolicy/);
     expect(src).toMatch(/invokeGenerateImagesWithPolicy/);
     expect(src).toMatch(/policy !== 'ask'/);

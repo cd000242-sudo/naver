@@ -35,6 +35,7 @@ declare function getSafeHeadingTitle(heading: any): string;
 declare function getHeadingSelectedImageKey(...args: any[]): string;
 declare function getStableImageKey(heading: any): string;
 declare function toFileUrlMaybe(p: string): string;
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
 
 type ImageFallbackPolicy = 'engine-only' | 'ask' | 'guarantee';
 
@@ -93,14 +94,6 @@ function disableTextOnlyPublishForExplicitImageGeneration(): void {
     }
   } catch {
     // Best-effort UI sync only.
-  }
-}
-
-function getLocalStorageFlag(key: string): boolean {
-  try {
-    return localStorage.getItem(key) === 'true';
-  } catch {
-    return false;
   }
 }
 
@@ -597,6 +590,9 @@ async function generateImagesWithCostSafety(options: any): Promise<any> {
 async function generateImagesWithCostSafetyInternal(options: any): Promise<any> {
   // ✅ [2026-02-11 FIX] provider 결정 우선순위: 전달값 → fullAutoImageSource → globalImageSource → 'nano-banana-pro'
   console.log(`[generateImagesWithCostSafety] 📥 전달받은 provider: "${String(options?.provider || '').trim()}"`);
+  // [Phase 7.1-d] Auto-injection fallbacks below read through the single
+  // pipeline accessor — legacy per-site fallback chains are preserved as-is.
+  const rawPipeline = readRawPipelineSettings();
 
   // ✅ [2026-04-18 CRITICAL GUARD] 유료 이미지 API의 최종 방어선
   //    모든 유료/과금 가능 이미지 생성이 이 함수를 경유하므로 여기서 skipImages 차단하면
@@ -607,7 +603,7 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
     disableTextOnlyPublishForExplicitImageGeneration();
   }
 
-  const _textOnlyPublishFlag = !_forceImageGeneration && getLocalStorageFlag('textOnlyPublish');
+  const _textOnlyPublishFlag = !_forceImageGeneration && rawPipeline.textOnlyPublish === 'true';
   const _domSkipImagesFlag = !_forceImageGeneration && getDomSkipImagesChecked();
   const _skipImagesFlag = options?.skipImages === true
     || _textOnlyPublishFlag
@@ -627,7 +623,7 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
   // checkbox key is full-auto-scoped and arrives here via options; reading it
   // globally let stale values force thumbnail-only in every flow.
   const _thumbnailOnlyFlag = options?.thumbnailOnly === true
-    || localStorage.getItem('headingImageMode') === 'thumbnail-only';
+    || rawPipeline.headingImageMode === 'thumbnail-only';
   if (_thumbnailOnlyFlag && Array.isArray(options?.items)) {
     const beforeCount = options.items.length;
     const thumbOnlyItems = options.items.filter((it: any) => it?.isThumbnail === true);
@@ -645,7 +641,7 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
 
   // ✅ [2026-01-24 FIX] headingImageMode 자동 주입 - 다중계정 발행에서도 홀수/짝수 필터링 적용
   if (!options.headingImageMode) {
-    const savedMode = localStorage.getItem('headingImageMode') as 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none' | null;
+    const savedMode = rawPipeline.headingImageMode as 'all' | 'thumbnail-only' | 'odd-only' | 'even-only' | 'none' | null;
     if (savedMode) {
       options.headingImageMode = savedMode;
       console.log(`[Renderer] 🖼️ headingImageMode 자동 주입: "${savedMode}"`);
@@ -654,8 +650,8 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
 
   // ✅ [2026-02-11 FIX] 이미지 소스 자동 주입 - fullAutoImageSource를 globalImageSource보다 우선 참조
   if (!options.provider) {
-    const fullAutoSource = localStorage.getItem('fullAutoImageSource');
-    const globalSource = localStorage.getItem('globalImageSource');
+    const fullAutoSource = rawPipeline.fullAutoImageSource;
+    const globalSource = rawPipeline.globalImageSource;
     const resolvedSource = fullAutoSource || globalSource;
     if (resolvedSource) {
       options.provider = resolvedSource;
@@ -664,14 +660,14 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
   }
   provider = String(options?.provider || provider || '').trim();
   if (!options.imageStyle) {
-    const savedStyle = localStorage.getItem('imageStyle');
+    const savedStyle = rawPipeline.imageStyle;
     if (savedStyle) {
       options.imageStyle = savedStyle;
       console.log(`[Renderer] ✨ 이미지 스타일 자동 주입: "${savedStyle}"`);
     }
   }
   if (!options.imageRatio) {
-    const savedRatio = localStorage.getItem('imageRatio');
+    const savedRatio = rawPipeline.imageRatio;
     if (savedRatio) {
       options.imageRatio = savedRatio;
       console.log(`[Renderer] 📐 이미지 비율 자동 주입: "${savedRatio}"`);
@@ -689,12 +685,12 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
 
   // ✅ [2026-01-27] 썸네일/소제목 분리 비율 주입
   if (!(options as any).thumbnailImageRatio) {
-    const savedThumbnailRatio = localStorage.getItem('thumbnailImageRatio') || localStorage.getItem('imageRatio') || '1:1';
+    const savedThumbnailRatio = rawPipeline.thumbnailImageRatio || rawPipeline.imageRatio || '1:1';
     (options as any).thumbnailImageRatio = savedThumbnailRatio;
     console.log(`[Renderer] 📐 썸네일 비율 자동 주입: "${savedThumbnailRatio}"`);
   }
   if (!(options as any).subheadingImageRatio) {
-    const savedSubheadingRatio = localStorage.getItem('subheadingImageRatio') || localStorage.getItem('imageRatio') || '1:1';
+    const savedSubheadingRatio = rawPipeline.subheadingImageRatio || rawPipeline.imageRatio || '1:1';
     (options as any).subheadingImageRatio = savedSubheadingRatio;
     console.log(`[Renderer] 📐 소제목 비율 자동 주입: "${savedSubheadingRatio}"`);
   }
@@ -709,13 +705,13 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
     console.log(`[Renderer] 🔤 thumbnailTextInclude 별칭 정규화: ${options.thumbnailTextInclude}`);
   }
   if (options.thumbnailTextInclude === undefined) {
-    const savedThumbnailText = localStorage.getItem('thumbnailTextInclude') === 'true';
+    const savedThumbnailText = rawPipeline.thumbnailTextInclude === 'true';
     options.thumbnailTextInclude = hasThumbnailTextTarget && savedThumbnailText;
     console.log(`[Renderer] 🔤 thumbnailTextInclude 자동 주입: ${options.thumbnailTextInclude}`);
   }
 
   if (!options.imageFallbackPolicy) {
-    const savedFallbackPolicy = normalizeImageFallbackPolicy(localStorage.getItem('imageFallbackPolicy'));
+    const savedFallbackPolicy = normalizeImageFallbackPolicy(rawPipeline.imageFallbackPolicy);
     options.imageFallbackPolicy = savedFallbackPolicy;
     console.log(`[Renderer] 🧭 imageFallbackPolicy 자동 주입: "${savedFallbackPolicy}"`);
   } else {
