@@ -32,6 +32,10 @@ import {
   insertPreviousPostTailBlock,
   insertTailLinkCardBlock,
 } from './editorTailActions.js';
+import {
+  pickOfficialSiteHook,
+  shouldSearchOfficialSiteTail,
+} from './editorOfficialSiteTail.js';
 
 // ── Local utility: smartTypeWithAutoHighlight ──
 async function smartTypeWithAutoHighlight(
@@ -2225,24 +2229,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             // ✅ [2026-02-08] 공식 사이트 링크 자동 삽입 (이전글 앞에 배치)
             // 행동 유발 카테고리에서만 동작 (비즈니스, 티켓, 여행, 건강, 교육 등)
             try {
-              const actionCategories = [
-                '비즈니스', '경제', '금융', '부동산', '지원금', '보조금', '대출',
-                '티켓', '예매', '공연', '콘서트', '전시',
-                '여행', '항공', 'KTX', '숙소', '호텔',
-                '건강', '병원', '검진', '보험', '의료',
-                '교육', '자격증', '시험', '수강', '학원',
-                '취업', '채용', '이직', '공채',
-                '정부', '민원', '신청', '발급', '등록',
-                '맛집', '카페', '레스토랑',
-              ];
-
-              const titleLower = (resolved.title || '').toLowerCase();
-              const hashtagStr = (resolved.hashtags || []).join(' ').toLowerCase();
-              const combinedText = `${titleLower} ${hashtagStr}`;
-
-              const isActionCategory = actionCategories.some(cat => combinedText.includes(cat));
-
-              if (isActionCategory) {
+              if (shouldSearchOfficialSiteTail({
+                title: resolved.title,
+                hashtags: resolved.hashtags,
+              })) {
                 self.log(`   🔗 [공식사이트] 행동 유발 키워드 감지 → 관련 공식 사이트 검색 중...`);
 
                 const { findRelevantOfficialSite } = await import('../contentGenerator.js');
@@ -2255,17 +2245,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                 if (siteResult.success && siteResult.url) {
                   self.log(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${siteResult.url})`);
 
-                  // 관련 사이트 바로가기 문구
-                  const siteHooks = [
-                    '🔗 관련 사이트 바로가기!!',
-                    '🌐 공식 사이트 바로가기!!',
-                    '📌 관련 공식 사이트 바로가기!!',
-                  ];
-                  const randomSiteHook = siteHooks[Math.floor(Math.random() * siteHooks.length)];
                   await insertTailLinkCardBlock({
                     self,
                     page,
-                    label: randomSiteHook,
+                    label: pickOfficialSiteHook(),
                     url: siteResult.url,
                   });
                   self.log(`   ✅ [공식사이트] 관련 사이트 바로가기 삽입 완료: ${siteResult.siteName}`);
@@ -2307,24 +2290,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
       // 공식 사이트 바로가기 삽입
       try {
-        const actionCategories = [
-          '비즈니스', '경제', '금융', '부동산', '지원금', '보조금', '대출',
-          '티켓', '예매', '공연', '콘서트', '전시',
-          '여행', '항공', 'KTX', '숙소', '호텔',
-          '건강', '병원', '검진', '보험', '의료',
-          '교육', '자격증', '시험', '수강', '학원',
-          '취업', '채용', '이직', '공채',
-          '정부', '민원', '신청', '발급', '등록',
-          '맛집', '카페', '레스토랑',
-        ];
-
-        const titleLower = (resolved.title || '').toLowerCase();
-        const hashtagStr = (resolved.hashtags || []).join(' ').toLowerCase();
-        const combinedText = `${titleLower} ${hashtagStr}`;
-
-        const isActionCategory = actionCategories.some(cat => combinedText.includes(cat));
-
-        if (isActionCategory) {
+        if (shouldSearchOfficialSiteTail({
+          title: resolved.title,
+          hashtags: resolved.hashtags,
+        })) {
           self.log(`   🔗 [공식사이트] 행동 유발 키워드 감지 (CTA 없는 모드) → 관련 공식 사이트 검색 중...`);
 
           const { findRelevantOfficialSite } = await import('../contentGenerator.js');
@@ -2337,16 +2306,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           if (siteResult.success && siteResult.url) {
             self.log(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${siteResult.url})`);
 
-            const siteHooks = [
-              '🔗 관련 사이트 바로가기!!',
-              '🌐 공식 사이트 바로가기!!',
-              '📌 관련 공식 사이트 바로가기!!',
-            ];
-            const randomSiteHook = siteHooks[Math.floor(Math.random() * siteHooks.length)];
             await insertTailLinkCardBlock({
               self,
               page,
-              label: randomSiteHook,
+              label: pickOfficialSiteHook(),
               url: siteResult.url,
             });
             self.log(`   ✅ [공식사이트] 관련 사이트 바로가기 삽입 완료: ${siteResult.siteName}`);

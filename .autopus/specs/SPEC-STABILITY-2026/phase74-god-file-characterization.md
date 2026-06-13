@@ -171,9 +171,42 @@ The helper now owns the repeated CTA/official-site link-card sequence:
 - `npm test -- src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
   - 40 tests passed.
 
+## 7.4-h Completed
+
+Added `src/automation/editorOfficialSiteTail.ts` and
+`src/__tests__/editorOfficialSiteTail.test.ts`.
+
+The helper now owns the official-site tail policy that had been duplicated in
+the CTA and no-CTA runtime branches:
+
+- Action-category keyword matching across title and hashtags.
+- Official-site hook label selection.
+- Injectable random source for deterministic tests.
+
+`src/automation/editorHelpers.ts` now calls this shared policy from both
+official-site insertion branches, so CTA tail behavior and no-CTA tail behavior
+cannot drift independently.
+
+## 7.4-h Verification
+
+- `npm test -- src/__tests__/editorOfficialSiteTail.test.ts`
+  - 3 tests passed.
+- `npm test -- src/__tests__/editorOfficialSiteTail.test.ts src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 43 tests passed.
+- `npm test -- src/__tests__/editorOfficialSiteTail.test.ts src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/editorTitleHelpers.test.ts src/__tests__/phase71PipelineConfig.test.ts src/__tests__/phase72CorePurity.test.ts src/__tests__/phase74GodFileCharacterization.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts`
+  - 66 tests passed.
+- `npm test`
+  - 264 files / 3,103 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - 0 errors / 1,023 baseline warnings.
+- `npm run lint:ipc`
+  - passed.
+
 ## Next
 
-7.4-h should continue the editor tail runtime split. Suggested order:
+7.4-i should continue the editor tail runtime split. Suggested order:
 
 1. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
    and previous-post/hashtag failures are most expensive.
