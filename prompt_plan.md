@@ -74,7 +74,10 @@
 - ✅ 7.4-l (이번 세션): Gemini 결제/한도 차단 분류를
   `geminiBillingBlock.ts` 순수 helper로 분리 —
   선불 크레딧 소진/후불 spend cap/결제 연결 필요를 RPM 대기와 구분하는 메시지 계약을 테스트로 고정.
-- 다음: Phase 7.4-m renderer event ownership 분해 또는 contentGenerator prompt helper 분해
+- ✅ 7.4-m (이번 세션): 콘텐츠 생성 실패 terminal/recoverable 판정과
+  same-engine 복구 프롬프트를 `contentGenerationFailurePolicy.ts`로 분리 —
+  결제/인증/정책 오류는 즉시 중단하고 RPM/timeout/connection은 선택 엔진 기준으로 복구하도록 테스트 고정.
+- 다음: Phase 7.4-n renderer event ownership 분해 또는 contentGenerator prompt helper 분해
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

@@ -141,6 +141,7 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
 
   describe('OpenAI 재시도 — 429 누진 backoff가 끝까지 발동', () => {
     const content = read('contentGenerator.ts');
+    const failurePolicy = read('contentGenerationFailurePolicy.ts');
 
     // ✅ [2026-06-06] 사용자 요청 — RPM이 풀릴 때까지 같은 모델로 천천히 대기.
     //   고정 5회 retry 후 실패하지 않고 patient wait budget 안에서 reset/retry-after를 존중한다.
@@ -158,7 +159,7 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
       expect(content).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
       expect(content).toMatch(/const\s+promptRepairMinAttempts\s*=\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
       expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*Math\.max\(baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts\)/);
-      expect(content).toMatch(/SAME_ENGINE_RECOVERY/);
+      expect(failurePolicy).toMatch(/SAME_ENGINE_RECOVERY/);
     });
 
     it('OpenAI connection errors are retried and not mislabeled as unavailable model', () => {

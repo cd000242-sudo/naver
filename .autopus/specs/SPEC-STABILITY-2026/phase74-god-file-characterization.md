@@ -332,9 +332,42 @@ mistaken for transient RPM/TPM waits:
   - passed; 264 preload channels, 289 main registrations, 321 preload API
     methods, 6 critical API methods.
 
+## 7.4-m Completed
+
+Extracted same-engine content failure policy from `src/contentGenerator.ts` into
+`src/contentGenerationFailurePolicy.ts`.
+
+This protects the selected-engine contract used after a recoverable content
+generation failure:
+
+- Terminal errors remain terminal: user cancel, missing input/source, invalid
+  key/auth, model access, billing/credit, hard quota, and safety policy blocks.
+- Transient pressure remains recoverable: RPM/TPM/resource-exhausted, timeout,
+  and connection errors do not trigger cross-engine fallback.
+- The same-engine recovery prompt is compacted before being appended to the
+  next selected-engine attempt.
+- Existing source-level guards now verify helper ownership plus
+  `contentGenerator.ts` call-site wiring.
+
+## 7.4-m Verification
+
+- `npm test -- src/__tests__/contentGenerationFailurePolicy.test.ts`
+  - expected red first: module missing before helper extraction.
+- `npm test -- src/__tests__/contentGenerationFailurePolicy.test.ts src/__tests__/contentGenerationTimeoutPolicy.test.ts src/__tests__/costInvariants.test.ts`
+  - 50 tests passed.
+- `npm test`
+  - 267 test files passed, 3,118 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - 0 errors, 1,023 baseline warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-m should continue the stability split. Suggested order:
+7.4-n should continue the stability split. Suggested order:
 
 1. `contentGenerator.ts` pure prompt helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.

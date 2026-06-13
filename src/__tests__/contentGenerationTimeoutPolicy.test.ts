@@ -16,6 +16,7 @@ describe('content generation timeout policy', () => {
   const mainSrc = read('main.ts');
   const preloadSrc = read('preload.ts');
   const generatorSrc = read('contentGenerator.ts');
+  const failurePolicySrc = read('contentGenerationFailurePolicy.ts');
   const lowSpecSrc = read('diagnostics/lowSpecMode.ts');
   const costPolicySrc = read('geminiCostOptimizer.ts');
 
@@ -128,13 +129,13 @@ describe('content generation timeout policy', () => {
   });
 
   it('keeps generation on the selected engine while giving recoverable failures one same-engine repair', () => {
-    expect(generatorSrc).toMatch(/function\s+isTerminalContentGenerationError/);
-    expect(generatorSrc).toMatch(/function\s+buildSameEngineRecoveryInstruction/);
+    expect(failurePolicySrc).toMatch(/function\s+isTerminalContentGenerationError/);
+    expect(failurePolicySrc).toMatch(/function\s+buildSameEngineRecoveryInstruction/);
     expect(generatorSrc).toMatch(/CONTENT_SAME_ENGINE_MIN_ATTEMPTS/);
     expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
     expect(generatorSrc).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*Math\.max\(baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts\)/);
-    expect(generatorSrc).toMatch(/SAME_ENGINE_RECOVERY/);
-    expect(generatorSrc).toMatch(/다른 AI 엔진으로 전환하지 않습니다/);
+    expect(failurePolicySrc).toMatch(/SAME_ENGINE_RECOVERY/);
+    expect(failurePolicySrc).toMatch(/다른 AI 엔진으로 전환하지 않습니다/);
     expect(generatorSrc).toMatch(/const\s+terminalError\s*=\s*isTerminalContentGenerationError\(error\)/);
     expect(generatorSrc).toMatch(/terminalError\s*\|\|\s*attempt\s*===\s*MAX_ATTEMPTS/);
   });
