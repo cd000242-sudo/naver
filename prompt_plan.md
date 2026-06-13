@@ -77,7 +77,10 @@
 - ✅ 7.4-m (이번 세션): 콘텐츠 생성 실패 terminal/recoverable 판정과
   same-engine 복구 프롬프트를 `contentGenerationFailurePolicy.ts`로 분리 —
   결제/인증/정책 오류는 즉시 중단하고 RPM/timeout/connection은 선택 엔진 기준으로 복구하도록 테스트 고정.
-- 다음: Phase 7.4-n renderer event ownership 분해 또는 contentGenerator prompt helper 분해
+- ✅ 7.4-n (이번 세션): 사용자 추가 프롬프트 준수 판정과
+  `[PROMPT_ADHERENCE_REPAIR]` 재시도 지시를 `contentPromptAdherence.ts`로 분리 —
+  FAQ/표/체크리스트 같은 요청 구조와 필수/금지어 누락을 테스트로 고정.
+- 다음: Phase 7.4-o renderer event ownership 분해 또는 contentGenerator pure prompt helper 분해
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

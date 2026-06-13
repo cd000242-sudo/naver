@@ -365,9 +365,41 @@ generation failure:
   - passed; 264 preload channels, 289 main registrations, 321 preload API
     methods, 6 critical API methods.
 
+## 7.4-n Completed
+
+Extracted custom prompt adherence scoring from `src/contentGenerator.ts` into
+`src/contentPromptAdherence.ts`.
+
+This keeps the user-prompt repair contract intact while removing another pure
+policy block from the generation god file:
+
+- Empty custom prompts skip scoring and never force a repair retry.
+- Required terms, forbidden terms, and requested structures such as FAQ/table
+  are scored in one focused helper.
+- Failed prompt adherence still injects `[PROMPT_ADHERENCE_REPAIR]` before the
+  next selected-engine generation attempt.
+- Existing source-level guards now verify helper ownership plus
+  `contentGenerator.ts` call-site wiring.
+
+## 7.4-n Verification
+
+- `npm test -- src/__tests__/contentPromptAdherence.test.ts`
+  - expected red first: module missing before helper extraction.
+- `npm test -- src/__tests__/contentPromptAdherence.test.ts src/__tests__/contentGenerationTimeoutPolicy.test.ts src/__tests__/costInvariants.test.ts`
+  - 50 tests passed.
+- `npm test`
+  - 268 test files passed, 3,121 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - 0 errors, 1,023 baseline warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-n should continue the stability split. Suggested order:
+7.4-o should continue the stability split. Suggested order:
 
 1. `contentGenerator.ts` pure prompt helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.

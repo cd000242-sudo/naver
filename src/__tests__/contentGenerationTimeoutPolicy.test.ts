@@ -17,6 +17,7 @@ describe('content generation timeout policy', () => {
   const preloadSrc = read('preload.ts');
   const generatorSrc = read('contentGenerator.ts');
   const failurePolicySrc = read('contentGenerationFailurePolicy.ts');
+  const promptAdherenceSrc = read('contentPromptAdherence.ts');
   const lowSpecSrc = read('diagnostics/lowSpecMode.ts');
   const costPolicySrc = read('geminiCostOptimizer.ts');
 
@@ -119,9 +120,9 @@ describe('content generation timeout policy', () => {
   });
 
   it('uses the first regeneration budget to repair custom prompt drift instead of passing weak output', () => {
-    expect(generatorSrc).toMatch(/type\s+PromptAdherenceReport/);
-    expect(generatorSrc).toMatch(/function\s+assessCustomPromptAdherence/);
-    expect(generatorSrc).toMatch(/PROMPT_ADHERENCE_REPAIR/);
+    expect(promptAdherenceSrc).toMatch(/export\s+type\s+PromptAdherenceReport/);
+    expect(promptAdherenceSrc).toMatch(/export\s+function\s+assessCustomPromptAdherence/);
+    expect(promptAdherenceSrc).toMatch(/PROMPT_ADHERENCE_REPAIR/);
     expect(generatorSrc).toMatch(/const\s+promptRepairMinAttempts\s*=\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
     expect(generatorSrc).toMatch(/const\s+customPromptAdherence\s*=\s*assessCustomPromptAdherence\(parsed,\s*source\)/);
     expect(generatorSrc).toMatch(/!customPromptAdherence\.passed\s*&&\s*attempt\s*<\s*MAX_ATTEMPTS/);
