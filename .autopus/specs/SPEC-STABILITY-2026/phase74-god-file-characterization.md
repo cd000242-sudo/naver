@@ -554,9 +554,39 @@ generation paths.
   - passed; 264 preload channels, 289 main registrations, 321 preload API
     methods, 6 critical API methods.
 
+## 7.4-t Completed
+
+Extracted the URL-source prompt prefix from `src/contentGenerator.ts` into
+`src/contentUrlModeDirective.ts`.
+
+The helper now owns:
+
+- URL/news source detection for the "original source preservation" prompt.
+- the 200-character minimum raw-text gate.
+- the full URL mode directive text used before the mode-based system prompt.
+
+This keeps URL-based generation behavior stable while making the retry loop in
+`generateStructuredContent()` smaller and easier to audit.
+
+## 7.4-t Verification
+
+- `npm test -- src/__tests__/contentUrlModeDirective.test.ts`
+  - expected red first: module missing before helper extraction.
+- `npm test -- src/__tests__/contentUrlModeDirective.test.ts src/__tests__/contentGenerator.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 33 tests passed.
+- `npm test`
+  - 274 test files passed, 3,140 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - passed with baseline warnings: 0 errors, 1,019 warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-t should continue the stability split. Suggested order:
+7.4-u should continue the stability split. Suggested order:
 
 1. `contentGenerator.ts` pure prompt helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.
