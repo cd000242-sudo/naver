@@ -84,7 +84,9 @@
             </button>
             <div class="nav-links" id="nav-links">
                 <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
-                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품</a>
+                <a href="leword.html" class="nav-link" onclick="closeMobileMenu()">LEWORD</a>
+                <a href="index.html#chatbot" class="nav-link" onclick="closeMobileMenu()">무료 챗봇</a>
+                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품정보</a>
                 <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
                 <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
                 <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
@@ -250,17 +252,43 @@
             return saved.downloadUrl || '';
         }
 
-        // GitHub Releases latest API — 최신 .exe asset URL 동적 fetch
-        // 매 release 자동 반영, 하드코딩 불필요
-        async function getLatestExeFromGitHub(repo) {
+        function getClientPlatform() {
+            const platformText = `${navigator.platform || ''} ${navigator.userAgent || ''}`;
+            return /mac/i.test(platformText) ? 'mac' : 'windows';
+        }
+
+        function scoreReleaseAsset(asset, platform) {
+            const name = String(asset && asset.name || '').toLowerCase();
+            if (!asset || !asset.browser_download_url || !name.includes('leword') || name.endsWith('.blockmap')) return 0;
+            if (platform === 'mac') {
+                if (/\.dmg$/i.test(name) && name.includes('universal')) return 110;
+                if (/\.dmg$/i.test(name)) return 100;
+                if (/\.zip$/i.test(name) && /(mac|darwin|universal|arm64|x64)/.test(name)) return name.includes('universal') ? 95 : 90;
+                return 0;
+            }
+            if (/\.exe$/i.test(name) && /setup/.test(name)) return 100;
+            if (/\.exe$/i.test(name) && /portable/.test(name)) return 90;
+            if (/\.exe$/i.test(name)) return 80;
+            if (/\.zip$/i.test(name) && /(setup|portable|win|windows)/.test(name)) return 70;
+            return 0;
+        }
+
+        function selectReleaseAsset(assets, platform) {
+            return (assets || []).reduce((best, asset) => {
+                const score = scoreReleaseAsset(asset, platform);
+                return score > best.score ? { asset, score } : best;
+            }, { asset: null, score: 0 }).asset;
+        }
+
+        async function getLatestDownloadFromGitHub(repo) {
             const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, {
                 headers: { 'Accept': 'application/vnd.github+json' },
             });
             if (!res.ok) throw new Error(`GitHub API ${res.status}`);
             const data = await res.json();
-            const exe = (data.assets || []).find(a => /\.exe$/i.test(a.name));
-            if (!exe) throw new Error('No .exe asset found in latest release');
-            return { url: exe.browser_download_url, version: data.tag_name, filename: exe.name };
+            const asset = selectReleaseAsset(data.assets || [], getClientPlatform());
+            if (!asset) throw new Error('No compatible LEWORD asset found in latest release');
+            return { url: asset.browser_download_url, version: data.tag_name, filename: asset.name };
         }
 
         async function downloadWithPassword(product) {
@@ -284,7 +312,7 @@
                 const origBtnHtml = btn ? btn.innerHTML : '';
                 if (btn) { btn.disabled = true; btn.innerHTML = '⏳'; }
                 try {
-                    const { url, version, filename } = await getLatestExeFromGitHub(repo);
+                    const { url, version, filename } = await getLatestDownloadFromGitHub(repo);
                     console.log(`[DOWNLOAD] ${name} ${version} → ${filename}`);
                     window.location.href = url;  // 직접 navigation → 브라우저 자동 다운로드
                     input.value = '';
@@ -309,7 +337,7 @@
         // 페이지 로드 시 Leword 최신 버전 라벨 표시
         async function showLatestVersionLabel() {
             try {
-                const { version } = await getLatestExeFromGitHub('cd000242-sudo/leword-app');
+                const { version } = await getLatestDownloadFromGitHub('cd000242-sudo/leword-app');
                 const el = document.getElementById('leword-latest-ver');
                 if (el) el.textContent = version;
             } catch {}

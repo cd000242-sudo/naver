@@ -430,6 +430,335 @@
             width: 100%;
             display: block;
         }
+
+        /* ========== MODE SHOWCASE / SALES DETAIL ========== */
+        .mode-showcase {
+            display: grid;
+            gap: 28px;
+            margin-top: 56px;
+        }
+
+        .mode-card {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(360px, 0.86fr);
+            gap: 28px;
+            align-items: stretch;
+            padding: 28px;
+            border-radius: 18px;
+            background: rgba(18,18,26,0.76);
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 20px 70px rgba(0,0,0,0.28);
+        }
+
+        .mode-card:nth-child(even) {
+            grid-template-columns: minmax(360px, 0.86fr) minmax(0, 1fr);
+        }
+
+        .mode-card:nth-child(even) .mode-copy { order: 2; }
+
+        .mode-copy {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+        }
+
+        .mode-kicker {
+            display: inline-flex;
+            width: fit-content;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            margin-bottom: 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #111;
+            background: #dbeafe;
+        }
+
+        .mode-kicker.seo { background: #bbf7d0; }
+        .mode-kicker.home { background: #bfdbfe; }
+        .mode-kicker.mate { background: #ccfbf1; }
+        .mode-kicker.shop { background: #fde68a; }
+        .mode-kicker.promo { background: #fecdd3; }
+
+        .mode-copy h3 {
+            font-size: clamp(24px, 3vw, 36px);
+            line-height: 1.28;
+            margin-bottom: 14px;
+        }
+
+        .mode-copy p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .mode-points {
+            display: grid;
+            gap: 9px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mode-points li {
+            display: flex;
+            gap: 10px;
+            color: #d7d7df;
+            font-size: 14px;
+            line-height: 1.55;
+        }
+
+        .mode-points li::before {
+            content: "✓";
+            color: var(--neon-green);
+            font-weight: 900;
+            flex: 0 0 auto;
+        }
+
+        .mode-visual-stack {
+            display: grid;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .mode-shot {
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #090a10;
+        }
+
+        .mode-shot img {
+            width: 100%;
+            height: 230px;
+            display: block;
+            object-fit: cover;
+        }
+
+        .article-result {
+            padding: 20px;
+            border-radius: 12px;
+            background: #f7f7f5;
+            color: #2b211d;
+            border-left: 8px solid #46657a;
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        .article-result .label {
+            font-size: 12px;
+            font-weight: 800;
+            color: #6a7d89;
+            margin-bottom: 10px;
+        }
+
+        .article-result h4 {
+            font-size: 20px;
+            line-height: 1.45;
+            margin-bottom: 16px;
+            color: #15304d;
+        }
+
+        .article-result p {
+            margin: 0 0 12px;
+            color: #5c4437;
+            line-height: 1.85;
+            text-align: center;
+        }
+
+        .article-result .highlight-line {
+            display: inline;
+            padding: 2px 4px;
+            background: #d7f2df;
+            color: #044333;
+            font-weight: 800;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        .automation-grid,
+        .image-workflow-grid,
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 44px;
+        }
+
+        .automation-card,
+        .image-workflow-card,
+        .trust-card {
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .automation-card img,
+        .image-workflow-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 16px;
+        }
+
+        .automation-card h3,
+        .image-workflow-card h3,
+        .trust-card h3 {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .automation-card p,
+        .image-workflow-card p,
+        .trust-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .result-showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 44px;
+            align-items: start;
+        }
+
+        .result-card {
+            overflow: hidden;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.09);
+            box-shadow: 0 18px 55px rgba(0,0,0,0.22);
+        }
+
+        .result-card.wide {
+            grid-column: span 2;
+        }
+
+        .result-card img {
+            width: 100%;
+            height: 320px;
+            display: block;
+            object-fit: cover;
+            object-position: top center;
+            background: #f6f7f8;
+        }
+
+        .result-card.tall img {
+            height: 460px;
+        }
+
+        .result-card-body {
+            padding: 20px;
+        }
+
+        .result-card .result-tag {
+            display: inline-flex;
+            width: fit-content;
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(0,255,136,0.14);
+            color: var(--neon-green);
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .result-card h3 {
+            font-size: 20px;
+            line-height: 1.35;
+            margin-bottom: 9px;
+        }
+
+        .result-card p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .operator-callout {
+            margin-top: 48px;
+            padding: 30px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(0,170,255,0.12), rgba(255,215,0,0.10));
+            border: 1px solid rgba(255,255,255,0.12);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .operator-callout h3 {
+            font-size: clamp(22px, 3vw, 32px);
+            margin-bottom: 8px;
+        }
+
+        .operator-callout p {
+            color: #e1e1e8;
+            margin: 0;
+        }
+
+        .proof-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 14px;
+            margin-top: 42px;
+        }
+
+        .proof-strip img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            object-position: top center;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #101018;
+        }
+
+        @media (max-width: 900px) {
+            .mode-card,
+            .mode-card:nth-child(even) {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .mode-card:nth-child(even) .mode-copy { order: 0; }
+
+            .automation-grid,
+            .image-workflow-grid,
+            .trust-grid,
+            .result-showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-card.wide {
+                grid-column: auto;
+            }
+
+            .operator-callout {
+                grid-template-columns: 1fr;
+            }
+
+            .proof-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .mode-shot img { height: 180px; }
+            .article-result { padding: 16px; }
+            .article-result h4 { font-size: 18px; }
+            .result-card img,
+            .result-card.tall img { height: 300px; }
+            .proof-strip { grid-template-columns: 1fr; }
+        }
         
         /* ========== COMPARISON TABLE ========== */
         .comparison-section {
@@ -1160,8 +1489,8 @@
 .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
 .nav-logo { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; }
 .nav-brand-text { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
-.nav-links { display: flex; gap: 32px; }
-.nav-link { color: #a0a0b0; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s ease; position: relative; }
+.nav-links { display: flex; gap: 22px; }
+.nav-link { color: #a0a0b0; text-decoration: none; font-size: 0.86rem; font-weight: 500; transition: color 0.2s ease; position: relative; white-space: nowrap; }
 .nav-link:hover { color: #c9a84c; }
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1010; }
 .nav-hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.2s ease; }
@@ -1198,7 +1527,9 @@
         </button>
         <div class="nav-links" id="nav-links">
             <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
-            <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품</a>
+            <a href="leword.html" class="nav-link" onclick="closeMobileMenu()">LEWORD</a>
+            <a href="index.html#chatbot" class="nav-link" onclick="closeMobileMenu()">무료 챗봇</a>
+            <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품정보</a>
             <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
             <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
             <a href="community.html" class="nav-link" onclick="closeMobileMenu()">커뮤니티</a>
@@ -1298,261 +1629,373 @@ function closeMobileMenu() {
     </div>
 </section>
 
-<!-- ========== MEGA SECTION 1: AI 글 작성 ========== -->
+<!-- ========== MODE SHOWCASE ========== -->
 <section class="features-section" id="features">
     <div class="container">
-        <div class="section-label" style="color: var(--neon-green)">🧠 MEGA FEATURE 01</div>
-        <h2 class="section-title" style="text-align:center">10종 AI 엔진이<br><span style="color: var(--neon-green)">전문가 수준의 글을 대신 써줍니다</span></h2>
-        <p class="section-desc">Gemini 3.1 Flash · GPT-5.4 · Claude 4 Sonnet — 세계 최고 AI를 한 곳에서</p>
-        
-        <div class="feature-row fade-up">
-            <div class="feature-text">
-                <span class="feature-tag tag-ai">AI POWERED</span>
-                <h3>키워드 하나로<br>6,000~10,000자 고품질 글 완성</h3>
-                <p>10개 AI 엔진이 네이버 SEO에 최적화된 자연스러운 문체로 글을 생성합니다. AI 탐지를 우회하며, 실시간 SEO 점수까지 표시합니다.</p>
-                <ul class="feature-bullets">
-                    <li>키워드 입력 → 10종 AI 엔진 중 최적 선택</li>
-                    <li>네이버 AI 탐지 우회 자연 문체</li>
-                    <li>SEO 점수 · AI 탐지 위험도 실시간 분석</li>
-                    <li>14개 카테고리별 홈피드 최적화 제목 생성</li>
-                </ul>
-            </div>
-            <div class="feature-visual" style="margin:auto 0;align-self:center">
-                <div class="feature-screenshot">
-                    <img src="images/mega01-hero.jpg" alt="키워드 하나로 고품질 글 완성" loading="lazy">
+        <div class="section-label" style="color: var(--neon-green)">APP MODES</div>
+        <h2 class="section-title" style="text-align:center">모드만 고르면<br><span style="color: var(--neon-green)">글의 목적과 결과물이 달라집니다</span></h2>
+        <p class="section-desc">단순히 글만 뽑는 툴이 아닙니다. 노출용, 수익용, 메이트 선정용, 업체 홍보용까지 목적에 맞게 구조와 이미지 배치를 바꿉니다.</p>
+
+        <div class="mode-showcase">
+            <article class="mode-card">
+                <div class="mode-copy">
+                    <span class="mode-kicker seo">SEO 모드</span>
+                    <h3>검색 유입을 노리는 기본기 모드</h3>
+                    <p>키워드 의도, 제목 구조, 본문 흐름, 하이라이트 문장까지 네이버 검색 글에 맞춰 정리합니다.</p>
+                    <ul class="mode-points">
+                        <li>키워드 중심 제목과 소제목 자동 구성</li>
+                        <li>모바일에서 읽히는 짧은 문단과 핵심 문장 강조</li>
+                        <li>해시태그, 이전글 엮기, CTA까지 발행 흐름에 포함</li>
+                    </ul>
                 </div>
-            </div>
+                <div class="mode-visual-stack">
+                    <div class="mode-shot"><img src="images/seo-analysis.png" alt="SEO 모드 화면" loading="lazy"></div>
+                    <div class="article-result">
+                        <div class="label">글 결과 예시</div>
+                        <h4>제습기와 서큘레이터 같이 쓰면 빨래가 더 빨리 마를까?</h4>
+                        <p><span class="highlight-line">습도 제거와 공기 순환을 같이 잡으면 건조 시간이 확실히 줄어듭니다.</span></p>
+                        <p>장마철 실내 빨래 고민을 기준으로 전기요금, 냄새, 배치 방법까지 단계별로 풀어줍니다.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="mode-card">
+                <div class="mode-copy">
+                    <span class="mode-kicker home">홈판 모드</span>
+                    <h3>클릭하고 싶게 만드는 홈피드형 글</h3>
+                    <p>홈판은 제목 첫인상과 도입부가 중요합니다. 궁금증을 만들고, 본문에서 바로 답을 주는 흐름으로 작성합니다.</p>
+                    <ul class="mode-points">
+                        <li>메인·추천 영역을 겨냥한 후킹 제목 생성</li>
+                        <li>첫 문단에서 독자의 고민을 바로 건드리는 구조</li>
+                        <li>딱딱한 설명체가 아니라 자연스러운 대화형 문체 적용</li>
+                    </ul>
+                </div>
+                <div class="mode-visual-stack">
+                    <div class="mode-shot"><img src="images/content-modes.png" alt="홈판 모드 화면" loading="lazy"></div>
+                    <div class="article-result">
+                        <div class="label">글 결과 예시</div>
+                        <h4>광고에서는 조용하다는데, 실제로는 왜 다르게 느껴질까요?</h4>
+                        <p>처음부터 결론을 던지고, 독자가 궁금해하는 단점을 솔직하게 풀어갑니다.</p>
+                        <p><span class="highlight-line">읽는 사람이 “내 얘기네”라고 느끼게 만드는 흐름이 핵심입니다.</span></p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="mode-card">
+                <div class="mode-copy">
+                    <span class="mode-kicker mate">네이버 메이트 모드</span>
+                    <h3>선정 가능성을 목표로 한 답변형 콘텐츠</h3>
+                    <p>주제 전문성, 근거 중심 문장, Q&amp;A, 핵심 판정 문장을 강화해 AI 브리핑과 네이버 메이트 방향에 맞춥니다.</p>
+                    <ul class="mode-points">
+                        <li>한 주제에 깊게 집중하는 전문성 구조</li>
+                        <li>Q1/A1 형식, 체크리스트, 한 줄 판정 자동 구성</li>
+                        <li>과장 대신 경험·근거·주의점을 섞은 사람 같은 설명</li>
+                    </ul>
+                </div>
+                <div class="mode-visual-stack">
+                    <div class="mode-shot"><img src="images/writing-styles.png" alt="네이버 메이트 모드 화면" loading="lazy"></div>
+                    <div class="article-result">
+                        <div class="label">글 결과 예시</div>
+                        <h4>Q1. 자동건조 기능이 있는데 왜 냄새가 계속 날까요?</h4>
+                        <p>A1: 내부 습기는 줄어도 필터와 송풍팬에 남은 오염은 따로 청소해야 합니다.</p>
+                        <p><span class="highlight-line">한 줄 판정: 냄새 예방은 자동건조만으로는 부족합니다.</span></p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="mode-card">
+                <div class="mode-copy">
+                    <span class="mode-kicker shop">쇼핑커넥트 모드</span>
+                    <h3>제품 링크 하나로 리뷰형 수익 글까지</h3>
+                    <p>스마트스토어, 브랜드스토어, 제휴 링크를 읽고 제품명·가격·대표 이미지·장단점을 글 구조에 반영합니다.</p>
+                    <ul class="mode-points">
+                        <li>대표 이미지 수집과 AI 이미지 2 이미지 생성 연동</li>
+                        <li>제품 정보가 틀리지 않도록 글 생성 전 핵심 정보 추출</li>
+                        <li>CTA 배너, 비교표, 이전글 엮기, 해시태그까지 자연스럽게 배치</li>
+                    </ul>
+                </div>
+                <div class="mode-visual-stack">
+                    <div class="mode-shot"><img src="images/shopping-connect.png" alt="쇼핑커넥트 모드 화면" loading="lazy"></div>
+                    <div class="article-result">
+                        <div class="label">글 결과 예시</div>
+                        <h4>광고와 실제 사용감이 다른 휴대용 선풍기, 직접 비교해봤습니다</h4>
+                        <p>제품 스펙만 복붙하지 않고, 실제 구매 전 고민하는 소음·배터리·가격을 중심으로 풀어줍니다.</p>
+                        <p><span class="highlight-line">본문 중간과 하단에 CTA를 넣어 클릭 흐름을 만듭니다.</span></p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="mode-card">
+                <div class="mode-copy">
+                    <span class="mode-kicker promo">업체홍보 · 사용자정의 모드</span>
+                    <h3>가게, 병원, 서비스 홍보도 글답게</h3>
+                    <p>광고 문구처럼 보이지 않게 고객의 고민, 선택 기준, 방문 이유를 먼저 잡고 자연스럽게 소개합니다.</p>
+                    <ul class="mode-points">
+                        <li>업체 장점만 나열하지 않고 문제 해결형 글로 구성</li>
+                        <li>원하는 문체와 강조 포인트를 사용자정의 프롬프트로 반영</li>
+                        <li>글 결과 이미지는 실제 샘플을 받는 즉시 교체 가능</li>
+                    </ul>
+                </div>
+                <div class="mode-visual-stack">
+                    <div class="mode-shot"><img src="images/mega05-hero.jpg" alt="업체홍보 모드 임시 이미지" loading="lazy"></div>
+                    <div class="article-result">
+                        <div class="label">임시 AI 글 결과 예시</div>
+                        <h4>처음 방문하는 분들이 가장 많이 묻는 3가지</h4>
+                        <p>가격보다 먼저 확인해야 할 기준, 상담 전 체크할 내용, 실제 이용자가 느끼는 차이를 순서대로 안내합니다.</p>
+                        <p><span class="highlight-line">홍보지만 광고처럼 밀어붙이지 않는 글을 목표로 합니다.</span></p>
+                    </div>
+                </div>
+            </article>
         </div>
-        
-        <div class="carousel-wrapper fade-up">
-            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
-            <div class="feature-gallery">
-                <div class="gallery-item"><img src="images/engine-gemini.png" alt="Gemini 엔진" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/engine-gpt.png" alt="GPT 엔진" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/engine-claude.png" alt="Claude 엔진" loading="lazy"></div>
-            </div>
-            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
-            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
-        </div>
-        
-        <div class="sub-features fade-up">
-            <div class="sub-feature"><div class="sf-icon">🎯</div><div class="sf-title">4가지 콘텐츠 모드</div><div class="sf-desc">SEO · 홈판 · 쇼핑커넥트 · 사용자정의</div></div>
-            <div class="sub-feature"><div class="sf-icon">✍️</div><div class="sf-title">11가지 글 톤/스타일</div><div class="sf-desc">전문적 · 친근한 · 경험담 등</div></div>
-            <div class="sub-feature"><div class="sf-icon">📂</div><div class="sf-title">32개 카테고리</div><div class="sf-desc">자동 분류 · 최적 키워드 매칭</div></div>
+    </div>
+</section>
+
+<!-- ========== WRITING RESULT SHOWCASE ========== -->
+<section class="features-section" style="background: var(--bg-dark)">
+    <div class="container">
+        <div class="section-label" style="color: var(--neon-blue)">REAL WRITING RESULT</div>
+        <h2 class="section-title" style="text-align:center">문단 정리, 하이라이트, 줄바꿈까지<br><span style="color: var(--neon-blue)">글 결과물이 바로 보기 좋게 나옵니다</span></h2>
+        <p class="section-desc">본문을 통째로 던져주는 방식이 아니라 모바일에서 읽히는 짧은 문단, 핵심문장 하이라이트, 자동 표, 이전글 엮기, 해시태그까지 한 번에 정리합니다.</p>
+
+        <div class="result-showcase-grid">
+            <article class="result-card wide">
+                <img src="images/naver-detail/content-format-highlight.png" alt="문단 정리와 핵심문장 하이라이트 결과" loading="lazy">
+                <div class="result-card-body">
+                    <span class="result-tag">문단 정리 + 하이라이트</span>
+                    <h3>모바일에서 읽기 좋은 줄바꿈과 핵심문장 강조</h3>
+                    <p>중요 문장만 골라 하이라이트하고, 문단 간 공백과 줄바꿈을 정리해 사람이 한 번 더 손보는 시간을 줄입니다.</p>
+                </div>
+            </article>
+
+            <article class="result-card">
+                <img src="images/naver-detail/auto-table-result.png" alt="본문 표 자동 삽입 결과" loading="lazy">
+                <div class="result-card-body">
+                    <span class="result-tag">표 자동 삽입</span>
+                    <h3>정보성 글에는 표까지 자동으로 들어갑니다</h3>
+                    <p>확인 기준, 비교 항목, 제품 스펙처럼 표가 어울리는 구간을 찾아 깔끔한 표 형태로 정리합니다.</p>
+                </div>
+            </article>
+
+            <article class="result-card">
+                <img src="images/naver-detail/previous-post-hashtags.png" alt="이전글 엮기와 해시태그 자동 추가 결과" loading="lazy">
+                <div class="result-card-body">
+                    <span class="result-tag">이전글 엮기 + 해시태그</span>
+                    <h3>발행 마지막 흐름까지 자동으로 이어집니다</h3>
+                    <p>이전글 링크 카드가 뜨면 이어서 해시태그까지 넣을 수 있어 내부 이동과 주제 묶음을 같이 챙깁니다.</p>
+                </div>
+            </article>
+
+            <article class="result-card">
+                <div class="result-card-body">
+                    <span class="result-tag">한 번에 정리</span>
+                    <h3>글만 생성하고 끝나는 툴이 아닙니다</h3>
+                    <p>문단, 강조, 표, CTA, 이전글, 해시태그까지 발행 직전의 귀찮은 마무리 작업을 자동화하는 쪽에 초점을 맞췄습니다.</p>
+                </div>
+            </article>
         </div>
     </div>
 </section>
 
 <!-- ===== MID CTA 1 ===== -->
 <div class="mid-cta">
-    <p>✍️ AI가 쓴 글, 직접 확인해보세요</p>
+    <p>글 목적이 다르면 모드도 달라야 합니다. 리더스프로는 그걸 자동으로 나눕니다.</p>
     <a href="https://www.leaderspro.kr/pricing.html" class="btn-primary">무료 체험 시작 →</a>
 </div>
 
-<!-- ========== MEGA SECTION 2: AI 이미지 & 영상 ========== -->
+<!-- ========== PUBLISH MODES ========== -->
 <section class="features-section" style="background: var(--bg-dark)">
     <div class="container">
-        <div class="section-label" style="color: #ff6b6b">🎨 MEGA FEATURE 02</div>
-        <h2 class="section-title" style="text-align:center">6종 AI 이미지 엔진 +<br><span style="color: #ff6b6b">Veo 영상 자동 생성</span></h2>
-        <p class="section-desc">8가지 스타일 프리셋으로 클릭 한 번이면 블로그 이미지 완성. 저작권 걱정 제로.</p>
-        
-        <div class="feature-row fade-up">
-            <div class="feature-text">
-                <span class="feature-tag tag-image">AI IMAGE</span>
-                <h3>나노 바나나 프로 · FLUX-2<br>6종 이미지 엔진 탑재</h3>
-                <p>글 내용을 분석해 맞춤 이미지를 자동 생성. 한국형 이미지(한국인, 한국 배경) 특화. ImageFX로 무료 1,000장/일 생성 가능.</p>
-                <ul class="feature-bullets">
-                    <li>글 내용 분석 → 맞춤 이미지 자동 생성</li>
-                    <li>8가지 스타일 프리셋 (수채화, 3D, 웹툰 등)</li>
-                    <li>Veo AI 영상 자동 변환</li>
-                    <li>한국형 이미지 (한국인, 한국 배경)</li>
-                </ul>
+        <div class="section-label" style="color: var(--neon-blue)">SEMI AUTO / FULL AUTO</div>
+        <h2 class="section-title" style="text-align:center">확인하고 발행할 수도 있고<br><span style="color: var(--neon-blue)">세팅 후 클릭 한 번에 끝낼 수도 있습니다</span></h2>
+        <p class="section-desc">초보자는 반자동으로 결과를 확인하고, 익숙해지면 풀오토·연속발행·다중계정으로 시간을 아끼면 됩니다.</p>
+
+        <div class="automation-grid">
+            <div class="automation-card">
+                <img src="images/smart-publish.png" alt="풀오토 발행 화면" loading="lazy">
+                <h3>풀오토 발행</h3>
+                <p>키워드와 설정만 넣으면 글 생성, 이미지 생성, 썸네일, 본문 삽입, 이전글 엮기, 해시태그, 발행까지 이어집니다.</p>
             </div>
-            <div class="feature-visual" style="margin:auto 0;align-self:center">
-                <div class="feature-screenshot">
-                    <img src="images/mega02-hero.jpg" alt="나노 바나나 프로 FLUX-2 이미지 엔진" loading="lazy">
-                </div>
+            <div class="automation-card">
+                <img src="images/feature-auto-publish.png" alt="반자동 발행 화면" loading="lazy">
+                <h3>반자동 발행</h3>
+                <p>AI가 만든 글과 이미지를 먼저 확인하고, 필요한 부분만 수정한 뒤 발행합니다. 결과 검수형 사용자에게 맞습니다.</p>
+            </div>
+            <div class="automation-card">
+                <img src="images/continuous-publish.png" alt="연속 발행 화면" loading="lazy">
+                <h3>연속 발행</h3>
+                <p>자기 전에 키워드와 간격을 세팅하면 순서대로 작성합니다. 10개든 100개든 안정적인 대기열을 목표로 설계했습니다.</p>
             </div>
         </div>
-        
-        <div class="carousel-wrapper fade-up">
-            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
-            <div class="feature-gallery">
-                <div class="gallery-item"><img src="images/image-styles-grid.png" alt="이미지 스타일" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/image-result.png" alt="이미지 생성 결과" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/image-editor.png" alt="이미지 편집기" loading="lazy"></div>
+
+        <div class="automation-grid">
+            <div class="automation-card">
+                <img src="images/multi-account.png" alt="다중계정 관리" loading="lazy">
+                <h3>다중계정 발행</h3>
+                <p>계정이 여러 개여도 계정별 카테고리, 글톤, 이미지 옵션을 나눠서 순차 발행할 수 있습니다.</p>
             </div>
-            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
-            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
+            <div class="automation-card">
+                <img src="images/multi-account-settings.png" alt="다중계정 세팅" loading="lazy">
+                <h3>계정별 풀오토 세팅</h3>
+                <p>블로그마다 목적이 다를 때도 한 화면에서 세팅을 분리합니다. 운영자가 바쁜 시간을 줄이는 구조입니다.</p>
+            </div>
+            <div class="automation-card">
+                <img src="images/schedule-calendar.png" alt="예약 발행 캘린더" loading="lazy">
+                <h3>예약과 간격 관리</h3>
+                <p>무작정 빠르게 발행하는 방식이 아니라, 안정적인 간격과 순서를 두고 오래 운영할 수 있게 맞춥니다.</p>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ========== MEGA SECTION 3: 원클릭 자동 발행 ========== -->
+<!-- ========== IMAGE WORKFLOW ========== -->
 <section class="features-section">
     <div class="container">
-        <div class="section-label" style="color: var(--neon-green)">🚀 MEGA FEATURE 03</div>
-        <h2 class="section-title" style="text-align:center">키워드 입력 → AI 글 작성 → 이미지 생성 → 발행<br><span style="color: var(--neon-green)">전부 자동.</span></h2>
-        <p class="section-desc">발행 버튼 한 번이면 끝. 예약 발행, 연속 발행, 다중계정까지.</p>
-        
-        <div class="feature-row fade-up">
-            <div class="feature-text">
-                <span class="feature-tag tag-auto">FULL AUTO</span>
-                <h3>자는 동안에도<br>블로그가 운영됩니다</h3>
-                <p>글 작성부터 이미지 삽입, 썸네일 생성, 카테고리 지정, 발행까지 올 자동. 지능형 간격 조절로 봇 탐지도 회피합니다.</p>
-                <ul class="feature-bullets">
-                    <li>글 작성 → 이미지 → 발행 완전 자동</li>
-                    <li>예약 발행 · 연속 발행 · 큐 시스템</li>
-                    <li>스마트 시간차 발행 (캡차 방지)</li>
-                    <li>에러 자동 복구 &amp; 재시도</li>
-                </ul>
+        <div class="section-label" style="color: #ff6b6b">IMAGE WORKFLOW</div>
+        <h2 class="section-title" style="text-align:center">이미지도 그냥 생성이 아니라<br><span style="color: #ff6b6b">소제목별로 맞춰 배치합니다</span></h2>
+        <p class="section-desc">이미지 관리탭, 이미지 생성 서브탭, AI 자동수집, 소제목별 원하는 이미지 배치까지 블로그 글의 완성도를 올리는 흐름입니다.</p>
+
+        <div class="image-workflow-grid">
+            <div class="image-workflow-card">
+                <img src="images/ai_image_engines.png" alt="AI 이미지 엔진 선택" loading="lazy">
+                <h3>AI 이미지 생성 서브탭</h3>
+                <p>리더스 나노바나나프로, GPT 이미지, DeepInfra, Leonardo 등 상황에 맞는 이미지 엔진을 선택합니다.</p>
             </div>
-            <div class="feature-visual" style="margin:auto 0;align-self:center">
-                <div class="feature-screenshot">
-                    <img src="images/mega03-hero.jpg" alt="자는 동안에도 블로그가 운영됩니다" loading="lazy">
-                </div>
+            <div class="image-workflow-card">
+                <img src="images/image-editor.png" alt="이미지 관리탭" loading="lazy">
+                <h3>이미지 관리탭</h3>
+                <p>생성된 이미지를 확인하고, 썸네일 텍스트 포함 여부와 크기 통일을 관리합니다.</p>
+            </div>
+            <div class="image-workflow-card">
+                <img src="images/image-result.png" alt="소제목별 이미지 배치" loading="lazy">
+                <h3>소제목별 이미지 배치</h3>
+                <p>본문 흐름과 어울리는 이미지를 소제목별로 넣어 독자가 중간에 이탈하지 않게 만듭니다.</p>
             </div>
         </div>
-        
-        <div class="carousel-wrapper fade-up">
-            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
-            <div class="feature-gallery">
-                <div class="gallery-item"><img src="images/smart-publish.png" alt="스마트 발행" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/continuous-publish.png" alt="연속 발행" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/schedule-calendar.png" alt="스케줄 캘린더" loading="lazy"></div>
+
+        <div class="image-workflow-grid">
+            <div class="image-workflow-card">
+                <img src="images/shopping-banner-preview.png" alt="대표 이미지 자동수집" loading="lazy">
+                <h3>AI 이미지 자동수집</h3>
+                <p>쇼핑커넥트에서는 대표 제품 이미지를 수집하고, 필요하면 그 이미지를 기반으로 새 이미지를 생성합니다.</p>
             </div>
-            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
-            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
+            <div class="image-workflow-card">
+                <img src="images/thumbnail-generator.png" alt="썸네일 생성" loading="lazy">
+                <h3>썸네일 텍스트</h3>
+                <p>대표 썸네일에만 제목을 합성하고, 본문 이미지는 깔끔하게 유지하도록 설계합니다.</p>
+            </div>
+            <div class="image-workflow-card">
+                <img src="images/shopping-cta-preview.png" alt="CTA 배너" loading="lazy">
+                <h3>CTA 배치</h3>
+                <p>이전글 엮기, 관련 사이트, 제휴 CTA를 글의 흐름에 맞춰 배치해 클릭 가능성을 높입니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SHOPPING CONNECT RESULT ========== -->
+<section class="features-section" style="background: var(--bg-dark)">
+    <div class="container">
+        <div class="section-label" style="color: var(--gold)">SHOPPING CONNECT RESULT</div>
+        <h2 class="section-title" style="text-align:center">쇼핑커넥트는 제품 링크를 읽고<br><span class="highlight">리뷰형 수익 글로 이어줍니다</span></h2>
+        <p class="section-desc">대표 이미지, 제품 스펙, 장점과 단점, 할인 CTA, 관련 글 카드, 해시태그까지 쇼핑형 글에 필요한 요소를 함께 구성합니다.</p>
+
+        <div class="result-showcase-grid">
+            <article class="result-card tall">
+                <img src="images/naver-detail/shopping-result-main.png" alt="쇼핑커넥트 본문 이미지와 리뷰 문단 결과" loading="lazy">
+                <div class="result-card-body">
+                    <span class="result-tag">리뷰형 본문</span>
+                    <h3>제품 이미지만 붙이는 게 아니라 실제 후기처럼 풀어줍니다</h3>
+                    <p>제품 특징을 독자가 궁금해하는 상황과 연결해 구매 전 고민을 자연스럽게 풀어냅니다.</p>
+                </div>
+            </article>
+
+            <article class="result-card tall">
+                <img src="images/naver-detail/shopping-result-table.png" alt="쇼핑커넥트 제품 정보 표 결과" loading="lazy">
+                <div class="result-card-body">
+                    <span class="result-tag">스펙 표</span>
+                    <h3>가격, 브랜드, 카테고리도 보기 좋게 정리</h3>
+                    <p>제품 정보가 필요한 글에서는 스펙 표를 넣어 독자가 빠르게 비교할 수 있게 합니다.</p>
+                </div>
+            </article>
+
+            <article class="result-card tall">
+                <img src="images/naver-detail/shopping-result-cta.png" alt="쇼핑커넥트 CTA 배너 결과" loading="lazy">
+                <div class="result-card-body">
+                    <span class="result-tag">CTA 배치</span>
+                    <h3>구매 흐름이 끊기지 않게 CTA를 배치</h3>
+                    <p>글을 읽다가 관심이 생기는 지점에 할인 확인 버튼을 배치해 클릭 흐름을 만듭니다.</p>
+                </div>
+            </article>
+
+            <article class="result-card">
+                <img src="images/naver-detail/shopping-result-link-card.png" alt="쇼핑커넥트 링크 카드 결과" loading="lazy">
+                <div class="result-card-body">
+                    <span class="result-tag">링크 카드</span>
+                    <h3>상품 링크 카드도 깔끔하게 노출</h3>
+                    <p>제휴 링크나 제품 링크가 카드로 뜨는 흐름까지 고려해 마무리합니다.</p>
+                </div>
+            </article>
+
+            <article class="result-card wide">
+                <img src="images/naver-detail/shopping-result-related-hashtags.png" alt="쇼핑커넥트 관련글과 해시태그 결과" loading="lazy">
+                <div class="result-card-body">
+                    <span class="result-tag">관련글 + 해시태그</span>
+                    <h3>이전글 엮기와 해시태그로 글끼리 이어줍니다</h3>
+                    <p>관련 글 카드와 해시태그를 함께 넣어 블로그 안에서 다음 글로 넘어갈 이유를 만듭니다.</p>
+                </div>
+            </article>
         </div>
     </div>
 </section>
 
 <!-- ===== MID CTA 2 ===== -->
 <div class="mid-cta">
-    <p>⚡ 하루 10편 자동 발행, 지금 시작하기</p>
+    <p>글, 이미지, 이전글, 해시태그, CTA까지 한 번에 이어지는 자동화입니다.</p>
     <a href="https://www.leaderspro.kr/pricing.html" class="btn-primary">요금제 확인 →</a>
 </div>
 
-<!-- ========== MEGA SECTION 4: 다중계정 ========== -->
+<!-- ========== TRUST / REVENUE PROOF ========== -->
 <section class="features-section" style="background: var(--bg-dark)">
     <div class="container">
-        <div class="section-label" style="color: var(--neon-blue)">👥 MEGA FEATURE 04</div>
-        <h2 class="section-title" style="text-align:center">계정 6개를<br><span style="color: var(--neon-blue)">한 화면에서 동시 관리</span></h2>
-        <p class="section-desc">계정별 독립 설정, 순차 발행 대기열, 원클릭 일괄 발행. 블로그 팜 운영의 끝판왕.</p>
-        
-        <div class="feature-row fade-up">
-            <div class="feature-text">
-                <span class="feature-tag tag-auto">MULTI ACCOUNT</span>
-                <h3>블로그 수익 스케일<br>무제한 계정 동시 운영</h3>
-                <p>한 화면에서 모든 계정을 관리하고, 대기열 시스템으로 순차 자동 발행. 계정별 독립 설정으로 최적화된 운영이 가능합니다.</p>
-                <ul class="feature-bullets">
-                    <li>다중 계정 무제한 동시 운영</li>
-                    <li>계정별 독립 설정 (카테고리, 톤, 스타일)</li>
-                    <li>순차 발행 대기열 시스템</li>
-                    <li>한 번에 전체 계정 일괄 발행</li>
-                </ul>
-            </div>
-            <div class="feature-visual" style="margin:auto 0;align-self:center">
-                <div class="feature-screenshot">
-                    <img src="images/mega04-hero.jpg" alt="블로그 수익 스케일 무제한 계정" loading="lazy">
-                </div>
-            </div>
-        </div>
-        
-        <div class="carousel-wrapper fade-up">
-            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
-            <div class="feature-gallery">
-                <div class="gallery-item"><img src="images/multi-account.png" alt="다중계정 관리" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/multi-account-settings.png" alt="다중계정 설정" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/multi_account.png" alt="다중계정 풀오토" loading="lazy"></div>
-            </div>
-            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
-            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
-        </div>
-    </div>
-</section>
+        <div class="section-label" style="color: var(--gold)">WHY BUY NOW</div>
+        <h2 class="section-title" style="text-align:center">AI지만 더 사람처럼,<br><span class="highlight">그리고 매일 더 안정적으로</span></h2>
+        <p class="section-desc">블로그 자동화는 한 번 만들고 끝나는 도구가 아닙니다. 네이버 로직, 에디터 구조, 이미지 엔진 상태를 계속 보고 바꿔야 오래 씁니다.</p>
 
-<!-- ========== MEGA SECTION 5: 쇼핑 커넥트 ========== -->
-<section class="features-section">
-    <div class="container">
-        <div class="section-label" style="color: var(--gold)">💰 MEGA FEATURE 05</div>
-        <h2 class="section-title" style="text-align:center">블로그로 매달 부수입 만드는<br><span class="highlight">가장 쉬운 방법</span></h2>
-        <p class="section-desc">쿠팡/네이버 제휴링크 자동 삽입 + CTA 배너 자동 생성. 글 쓰면서 돈도 벌기.</p>
-        
-        <div class="feature-row fade-up">
-            <div class="feature-text">
-                <span class="feature-tag tag-seo">SHOPPING CONNECT</span>
-                <h3>제휴 마케팅 자동화<br>CTA 배너까지 원클릭</h3>
-                <p>쇼핑 커넥트로 쿠팡/네이버 제휴링크를 자동 삽입하고, 전환율 높은 CTA 배너와 장단점 비교표를 자동 생성합니다.</p>
-                <ul class="feature-bullets">
-                    <li>쿠팡 파트너스 · 네이버 제휴링크 자동 삽입</li>
-                    <li>CTA 배너 자동 생성 (커스텀 디자인)</li>
-                    <li>장단점 비교표 자동 삽입</li>
-                    <li>베스트 상품 수집기 연동</li>
-                </ul>
+        <div class="trust-grid">
+            <div class="trust-card">
+                <h3>사람보다 더 사람 같은 글톤</h3>
+                <p>딱딱한 “~다” 문체가 아니라 “~요”, “~습니다”를 섞어 독자가 편하게 읽는 문장으로 다듬습니다.</p>
             </div>
-            <div class="feature-visual" style="margin:auto 0;align-self:center">
-                <div class="feature-screenshot">
-                    <img src="images/mega05-hero.jpg" alt="제휴 마케팅 CTA 배너 원클릭" loading="lazy">
-                </div>
+            <div class="trust-card">
+                <h3>매일 업데이트와 로직 모니터링</h3>
+                <p>네이버 에디터 변화, 이미지 생성 오류, API 한도 이슈를 개발자가 계속 추적하고 업데이트합니다.</p>
+            </div>
+            <div class="trust-card">
+                <h3>초보자도 운영 흐름을 압축</h3>
+                <p>키워드 찾기, 글 작성, 이미지 준비, 발행, 이전글 엮기까지 사람이 하던 반복 작업을 줄여줍니다.</p>
             </div>
         </div>
-        
-        <div class="carousel-wrapper fade-up">
-            <button class="carousel-arrow prev" onclick="slideCarousel(this,-1)">❮</button>
-            <div class="feature-gallery">
-                <div class="gallery-item"><img src="images/shopping-connect.png" alt="쇼핑커넥트" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/shopping-cta-preview.png" alt="CTA 미리보기" loading="lazy"></div>
-                <div class="gallery-item"><img src="images/shopping-banner-preview.png" alt="배너 미리보기" loading="lazy"></div>
+
+        <div class="operator-callout">
+            <div>
+                <h3>“구매 후 방치되는 프로그램”이 아니라 계속 따라가는 운영형 툴입니다.</h3>
+                <p>무료체험자는 결과를 보고 판단하고, 구매자는 업데이트를 받으면서 계속 개선된 자동화 흐름을 사용할 수 있습니다.</p>
             </div>
-            <button class="carousel-arrow next" onclick="slideCarousel(this,1)">❯</button>
-            <div class="carousel-dots"><button class="carousel-dot active"></button><button class="carousel-dot"></button><button class="carousel-dot"></button></div>
+            <a href="https://www.leaderspro.kr/pricing.html" class="btn-primary">지금 시작하기 →</a>
         </div>
-    </div>
-</section>
 
-<!-- ===== MID CTA 3 ===== -->
-<div class="mid-cta">
-    <p>💰 쇼핑 커넥트로 블로그 수익화 시작</p>
-    <a href="https://www.leaderspro.kr/pricing.html" class="btn-primary">지금 시작하기 →</a>
-</div>
-
-<!-- ========== MEGA SECTION 6: 보너스 도구 ========== -->
-<section class="features-section" style="background: var(--bg-dark)">
-    <div class="container">
-        <div class="section-label" style="color: var(--gold)">🛠️ MEGA FEATURE 06</div>
-        <h2 class="section-title" style="text-align:center">이것까지 다 포함?<br><span class="highlight">네, 전부 포함입니다.</span></h2>
-        <p class="section-desc">썸네일 생성, 이미지 편집, SEO 분석, AI탐지 검사까지. 블로거에게 필요한 모든 것.</p>
-        
-        <div class="bonus-grid fade-up">
-            <div class="bonus-card">
-                <img src="images/thumbnail-generator.png" alt="썸네일 생성기" loading="lazy">
-                <div class="bonus-card-body">
-                    <h4>🎨 썸네일 생성기</h4>
-                    <p>텍스트/배경/스타일 프리셋으로 전문가급 썸네일을 원클릭 생성</p>
-                </div>
-            </div>
-            <div class="bonus-card">
-                <img src="images/image-editor.png" alt="이미지 편집기" loading="lazy">
-                <div class="bonus-card-body">
-                    <h4>✂️ 이미지 편집기</h4>
-                    <p>크기 조절, 필터, AI 보정 올인원 편집 도구</p>
-                </div>
-            </div>
-            <div class="bonus-card">
-                <img src="images/seo-analysis.png" alt="SEO 분석" loading="lazy">
-                <div class="bonus-card-body">
-                    <h4>📊 SEO 분석</h4>
-                    <p>실시간 최적화 점수로 검색 1페이지 노출 극대화</p>
-                </div>
-            </div>
-            <div class="bonus-card">
-                <img src="images/ai-detection.png" alt="AI 탐지 검사" loading="lazy">
-                <div class="bonus-card-body">
-                    <h4>🛡️ AI 탐지 검사</h4>
-                    <p>발행 전 AI 글 탐지율 체크로 저품질 방지</p>
-                </div>
-            </div>
+        <div class="proof-strip" aria-label="구매자 성과 인증 이미지">
+            <img src="images/proof-user/KakaoTalk_20260305_004700252.jpg" alt="구매자 조회수 및 수익 인증 1" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260305_004700252_01.jpg" alt="구매자 조회수 및 수익 인증 2" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260305_004700252_02.jpg" alt="구매자 조회수 및 수익 인증 3" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260305_004700252_03.jpg" alt="구매자 조회수 및 수익 인증 4" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260305_004700252_04.jpg" alt="구매자 조회수 및 수익 인증 5" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260305_004700252_05.png" alt="구매자 조회수 및 수익 인증 6" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260305_004700252_06.jpg" alt="구매자 조회수 및 수익 인증 7" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260305_004700252_07.jpg" alt="구매자 조회수 및 수익 인증 8" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260309_163736774.jpg" alt="구매자 조회수 및 수익 인증 9" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260309_164704537.png" alt="구매자 조회수 및 수익 인증 10" loading="lazy">
+            <img src="images/proof-user/KakaoTalk_20260310_002438127.png" alt="구매자 조회수 및 수익 인증 11" loading="lazy">
         </div>
     </div>
 </section>
@@ -1994,7 +2437,7 @@ function closeMobileMenu() {
 </section>
 
 <!-- FLOATING CTA (Mobile) — CRO-2: 2옵션 (무료 체험 + 구매) -->
-<div class="floating-cta" style="display:flex; gap:8px; right:16px; left:16px; bottom:16px;">
+<div class="floating-cta" style="display:flex; gap:8px;">
     <a href="https://www.leaderspro.kr/download.html" style="flex:1; display:flex; align-items:center; justify-content:center; padding:14px 12px; background:rgba(255,255,255,0.95); border:1px solid rgba(201,168,76,0.4); border-radius:50px; color:#14304d; text-decoration:none; font-weight:700; font-size:14px; box-shadow:0 6px 22px rgba(0,0,0,0.18);">
         🎁 무료 체험
     </a>
