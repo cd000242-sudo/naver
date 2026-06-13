@@ -44,7 +44,11 @@
 - ✅ 7.1-h (이번 세션): 공시/안전(ftc/adb) 클러스터 흡수 —
   ftcDisclosureEnabled/ftcDisclosureText/adbIpChangeEnabled/adbIpChangeEvery 발행 경로 직독 0건.
   제휴 기본 공시 fallback은 보존. 게이트: phase71/phase72 타깃 vitest 20/20 GREEN.
-- 다음: Phase 7.4 god file 분해 전 characterization 테스트 보강
+- ✅ 7.4-a (이번 세션): god file 분해 전 characterization 테스트 1차 보강 —
+  contentGenerator 공개 export, post-gen validation/winners hook, preload/main IPC bridge,
+  Naver editor login→write/title diagnostics, previous-post/CTA/hashtags/thumbnail payload,
+  rich-paste tail recovery를 `phase74GodFileCharacterization.test.ts`로 잠금. 단일 테스트 7/7 GREEN.
+- 다음: Phase 7.4-b god file 분해 대상별 얇은 adapter 추출 전 live-critical static guard 보강
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert
