@@ -71,9 +71,35 @@ after typing) protected without editing the large automation file again.
 - `npm test -- src/__tests__/editorTitleHelpers.test.ts`
   - 3 tests passed.
 
+## 7.4-d Completed
+
+Added `src/automation/editorTailPlan.ts` and `src/__tests__/editorTailPlan.test.ts`.
+
+The helper now owns the high-risk tail planning rules before the remaining
+runtime typing code is split further:
+
+- Previous-post URLs are normalized before duplicate CTA filtering.
+- CTA placement set to `heading-N` is kept out of the bottom tail CTA area.
+- Previous-post cards keep the larger hashtag gap (`Enter` 5) while ordinary
+  tail hashtags keep the smaller gap (`Enter` 3).
+- Tail hashtags are trimmed and capped to five before body typing.
+- Pre-publish link-card expectations count the previous-post card plus the
+  remaining non-duplicate CTA URLs.
+
+`src/automation/editorHelpers.ts` now calls this helper for the live tail path,
+while the older rich-paste tail wiring guards were updated to assert the new
+helper-backed contract.
+
+## 7.4-d Verification
+
+- `npm test -- src/__tests__/editorTailPlan.test.ts`
+  - 5 tests passed.
+- `npm test -- src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 35 tests passed.
+
 ## Next
 
-7.4-d should continue with the editor tail helper split. Suggested order:
+7.4-e should continue the editor tail runtime split. Suggested order:
 
 1. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
    and previous-post/hashtag failures are most expensive.

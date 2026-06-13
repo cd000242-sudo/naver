@@ -171,7 +171,7 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
     expectAll(editorHelpers, [
       'insertPreviousPostTailBlock',
       'ensureTailTypingReady',
-      'previousPostTailInserted ? 5 : 3',
+      'getHashtagGapEnterCount(previousPostTailInserted)',
       'await self.applyHashtagsInBody(hashtagsToApply)',
       'expectedHashtags: hashtagsToApply',
       'expectedLinkCardMin',

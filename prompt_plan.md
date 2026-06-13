@@ -53,7 +53,10 @@
   Phase 7.4 characterization은 새 헬퍼 소유 셀렉터/진단 계약을 추가로 잠금.
 - ✅ 7.4-c (이번 세션): `editorTitleHelpers.test.ts` 추가 —
   제목 읽기, DOM input-event fallback, 진단 문자열(page/frame/selectors) 동작을 happy-dom 단위 테스트로 잠금.
-- 다음: Phase 7.4-d editor tail helper 2차 분해 전 이전글/CTA/해시태그 삽입 순서 단위 보호
+- ✅ 7.4-d (이번 세션): `editorTailPlan.ts` + `editorTailPlan.test.ts` 추가 —
+  이전글 URL과 중복 CTA 제거, heading-N CTA 하단 중복 방지, 이전글 카드 뒤 Enter 5회 후 해시태그,
+  링크카드 기대값 계산을 helper로 분리하고 `editorHelpers.ts` runtime 경로에 연결.
+- 다음: Phase 7.4-e editor tail runtime 2차 분해 — 실제 타이핑 실행부(이전글/CTA/해시태그)를 더 작은 helper로 추출
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

@@ -71,7 +71,7 @@ describe('publish metadata propagation', () => {
     expect(tailHelper).toMatch(/removeBareUrlTextAfterLinkCard/);
     expect(tailHelper).not.toMatch(/effectiveCtas\.some\(\(cta\) => cta\.link && cta\.link === previousPostUrl\)/);
     expect(code).toMatch(/previousPostTailInserted = previousPostTailInserted \|\| previousResult\.inserted/);
-    expect(hashtagTail).toMatch(/const hashtagGapEnterCount = previousPostTailInserted \? 5 : 3/);
+    expect(hashtagTail).toMatch(/const hashtagGapEnterCount = getHashtagGapEnterCount\(previousPostTailInserted\)/);
     expect(hashtagTail.indexOf('page.keyboard.press')).toBeLessThan(hashtagTail.indexOf('applyHashtagsInBody'));
   });
 

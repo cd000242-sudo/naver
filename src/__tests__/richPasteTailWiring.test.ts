@@ -140,7 +140,8 @@ describe('rich paste tail wiring', () => {
     // as a CTA AND previousPostUrl — with typing fixed, both landed and the
     // post showed the link twice. The dedup must keep the previous-post block.
     expect(code).toMatch(/이전글과 동일 URL CTA/);
-    expect(code).toMatch(/normalizeUrl\(resolved\.previousPostUrl\)/);
+    expect(code).toMatch(/planEditorTail\(\{/);
+    expect(code).toMatch(/previousPostUrl:\s*resolved\.previousPostUrl/);
   });
 
   it('counts general CTAs in the pre-publish link-card expectation', () => {
@@ -153,7 +154,7 @@ describe('rich paste tail wiring', () => {
     // previousPostTailInserted was counted — the lost link card passed 5/5.
     // effectiveCtas = post-S16-dedup list, so a skipped duplicate CTA is not
     // re-counted into the expectation.
-    expect(stash).toMatch(/expectedLinkCardMin:[\s\S]*?effectiveCtas/);
+    expect(stash).toMatch(/expectedLinkCardMin:\s*getExpectedLinkCardMin\(previousPostTailInserted,\s*effectiveCtas\)/);
     expect(stash).toMatch(/expectedHashtags/);
   });
 
