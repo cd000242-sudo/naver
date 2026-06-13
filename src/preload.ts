@@ -1136,6 +1136,7 @@ contextBridge.exposeInMainWorld('api', {
     mode?: string;
     targetChars?: number;
     toneStyle?: string;
+    context?: unknown;
     plan?: unknown;
     reviewEdits?: unknown;
   }): Promise<{ success: boolean; plan?: any; content?: any; imageMap?: Record<string, any[]>; message?: string }> =>

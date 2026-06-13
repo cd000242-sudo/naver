@@ -10,6 +10,7 @@
 
 import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
 import { VISION_MODELS } from '../../runtime/modelRegistry.js';
+import { runGeminiVisionQuotaProtected } from '../../runtime/geminiVisionQuotaGuard.js';
 import { getSystemPrompt, getUserInstruction } from './inferencePrompts.js';
 import type {
   InferenceContext,
@@ -49,6 +50,8 @@ const INFERENCE_RESPONSE_SCHEMA = {
     'confidence',
   ],
 };
+
+const GEMINI_VISION_TIMEOUT_MS = 30_000;
 
 // ---------------------------------------------------------------------------
 // Internal helpers
@@ -97,6 +100,33 @@ function validateResult(raw: unknown): ImageInferenceResult {
   };
 }
 
+async function withGeminiVisionTimeout<T>(
+  requestFactory: () => Promise<T>,
+  signal?: AbortSignal,
+): Promise<T> {
+  const internal = new AbortController();
+  const timer = setTimeout(
+    () => internal.abort(new Error('Gemini Vision timeout (30s)')),
+    GEMINI_VISION_TIMEOUT_MS,
+  );
+  const onAbort = () => internal.abort(signal?.reason);
+  signal?.addEventListener('abort', onAbort, { once: true });
+
+  try {
+    return await Promise.race([
+      requestFactory(),
+      new Promise<never>((_, reject) => {
+        internal.signal.addEventListener('abort', () => {
+          reject(internal.signal.reason ?? new Error('Gemini Vision timeout (30s)'));
+        }, { once: true });
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+    signal?.removeEventListener('abort', onAbort);
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Public adapter function
 // ---------------------------------------------------------------------------
@@ -114,7 +144,7 @@ export async function runGeminiVision(
 ): Promise<ImageInferenceResult> {
   const mode = options.mode ?? 'auto';
   const systemPrompt = getSystemPrompt(mode);
-  const userInstruction = getUserInstruction(mode);
+  const userInstruction = getUserInstruction(mode, options.context);
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({
@@ -130,53 +160,41 @@ export async function runGeminiVision(
     },
   });
 
-  // Build abort controller — 30 s hard timeout merged with caller's signal
-  const internal = new AbortController();
-  const timer = setTimeout(() => internal.abort(new Error('Gemini Vision timeout (30s)')), 30_000);
+  const imagePart = {
+    inlineData: {
+      mimeType: context.mimeType,
+      data: context.imageBase64,
+    },
+  };
 
-  // Propagate caller's signal into the internal controller
-  options.signal?.addEventListener('abort', () => internal.abort(options.signal?.reason));
-
-  try {
-    const imagePart = {
-      inlineData: {
-        mimeType: context.mimeType,
-        data: context.imageBase64,
-      },
-    };
-
-    const request = model.generateContent({
-      contents: [
-        {
-          role: 'user',
-          parts: [imagePart, { text: userInstruction }],
-        },
-      ],
-    });
-    const result = await Promise.race([
-      request,
-      new Promise<never>((_, reject) => {
-        internal.signal.addEventListener('abort', () => {
-          reject(internal.signal.reason ?? new Error('Gemini Vision timeout (30s)'));
-        }, { once: true });
+  const result = await runGeminiVisionQuotaProtected(
+    VISION_MODELS.GEMINI_FLASH,
+    options.signal,
+    () => withGeminiVisionTimeout(
+      () => model.generateContent({
+        contents: [
+          {
+            role: 'user',
+            parts: [imagePart, { text: userInstruction }],
+          },
+        ],
       }),
-    ]);
+      options.signal,
+    ),
+  );
 
-    const text = result.response.text();
-    if (!text || text.trim() === '') {
-      throw new Error('Gemini returned empty response text');
-    }
-
-    // The SDK with responseMimeType=application/json should return valid JSON.
-    // Parse defensively in case the model decorates the output.
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
-      throw new Error(`Gemini response is not JSON: ${text.slice(0, 200)}`);
-    }
-
-    const parsed: unknown = JSON.parse(jsonMatch[0]);
-    return validateResult(parsed);
-  } finally {
-    clearTimeout(timer);
+  const text = result.response.text();
+  if (!text || text.trim() === '') {
+    throw new Error('Gemini returned empty response text');
   }
+
+  // The SDK with responseMimeType=application/json should return valid JSON.
+  // Parse defensively in case the model decorates the output.
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
+  if (!jsonMatch) {
+    throw new Error(`Gemini response is not JSON: ${text.slice(0, 200)}`);
+  }
+
+  const parsed: unknown = JSON.parse(jsonMatch[0]);
+  return validateResult(parsed);
 }

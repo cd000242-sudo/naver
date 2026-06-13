@@ -32,6 +32,39 @@ describe('normalizeInferAndWritePayload', () => {
     expect(normalized.toneStyle).toBe('formal');
   });
 
+  it('normalizes optional photo context and drops empty fields', () => {
+    const normalized = normalizeInferAndWritePayload({
+      images: [image('a'), image('b'), image('c')],
+      context: {
+        timeHint: '  토요일 저녁  ',
+        mainPeople: ' 친구 민수 ',
+        place: ' 성수동 카페 ',
+        occasion: ' 생일 모임 ',
+        notes: ' 케이크 사진은 마지막 순서 ',
+        ignored: 'not allowed',
+      },
+    });
+
+    expect(normalized.context).toEqual({
+      timeHint: '토요일 저녁',
+      mainPeople: '친구 민수',
+      place: '성수동 카페',
+      occasion: '생일 모임',
+      notes: '케이크 사진은 마지막 순서',
+    });
+  });
+
+  it('limits long photo context memo text', () => {
+    const normalized = normalizeInferAndWritePayload({
+      images: [image('a'), image('b'), image('c')],
+      context: {
+        notes: 'a'.repeat(1200),
+      },
+    });
+
+    expect(normalized.context?.notes).toHaveLength(1000);
+  });
+
   it('rejects fewer than 3 images', () => {
     expect(() => normalizeInferAndWritePayload({
       images: [image('a'), image('b')],

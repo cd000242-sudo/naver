@@ -63,6 +63,23 @@ export interface ImageExif {
   camera?: string;
 }
 
+/**
+ * Optional user-provided context that helps the model interpret photos.
+ * These values are hints, not replacement facts for what is visible.
+ */
+export interface ImageNarrativeContext {
+  /** Human-entered time hint, e.g. "토요일 오후" or "2026-06-13 저녁". */
+  readonly timeHint?: string;
+  /** Main people or relationship context, e.g. "엄마와 아이". */
+  readonly mainPeople?: string;
+  /** Place hint, e.g. "강릉 바다" or "성수동 카페". */
+  readonly place?: string;
+  /** Situation, event, or purpose, e.g. "가족 여행". */
+  readonly occasion?: string;
+  /** Additional memo for chronology, intent, or details. */
+  readonly notes?: string;
+}
+
 // ---------------------------------------------------------------------------
 // Options
 // ---------------------------------------------------------------------------
@@ -81,6 +98,8 @@ export interface InferenceOptions {
    * Defaults to 'auto' if omitted.
    */
   readonly mode?: InferenceMode;
+  /** User-entered hints used by Vision and final writing prompts. */
+  readonly context?: ImageNarrativeContext;
   /**
    * AbortSignal to cancel a long-running inference.
    * If not provided, a 30-second internal timeout applies.

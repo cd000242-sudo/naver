@@ -8498,6 +8498,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
   mode?: string;
   targetChars?: number;
   toneStyle?: string;
+  context?: unknown;
   plan?: unknown;
   reviewEdits?: unknown;
 }) => {
@@ -8528,6 +8529,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
     const inferredPlan = normalized.plan ?? await aggregateInferences(imageInputs, {
       provider: normalized.provider,
       mode: normalized.mode,
+      context: normalized.context,
     });
     const plan = applyReviewEditsToPlan(inferredPlan, normalized.reviewEdits);
 
@@ -8535,6 +8537,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
       provider: normalized.provider,
       targetChars: normalized.targetChars,
       toneStyle: normalized.toneStyle,
+      context: normalized.context,
     });
 
     const imageMap = mapInferencesToImageMap(

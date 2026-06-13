@@ -120,7 +120,7 @@ export async function runOpenAIVision(
 ): Promise<ImageInferenceResult> {
   const mode = options.mode ?? 'auto';
   const systemPrompt = getSystemPrompt(mode);
-  const userInstruction = getUserInstruction(mode);
+  const userInstruction = getUserInstruction(mode, options.context);
 
   // Preemptive throttle — waits if near RPM ceiling
   await openaiRpmThrottler.throttle();

@@ -12,7 +12,13 @@
 
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import type { NarrativePlan, InferenceMode, VisionProvider } from '../types.js';
+import { formatImageNarrativeContext } from '../context.js';
+import type {
+  ImageNarrativeContext,
+  NarrativePlan,
+  InferenceMode,
+  VisionProvider,
+} from '../types.js';
 import type { StructuredContent } from '../../contentGenerator.js';
 
 // Resolved at runtime relative to this file: ../../prompts/imageNarrative/
@@ -32,6 +38,8 @@ export interface BuilderOptions {
   readonly targetChars?: number;
   /** Speech style: formal / casual / friendly. Defaults to 'friendly'. */
   readonly toneStyle?: 'friendly' | 'formal' | 'casual';
+  /** User-entered hints used to shape the final article. */
+  readonly context?: ImageNarrativeContext;
   /** AbortSignal to cancel a long-running generation. */
   readonly signal?: AbortSignal;
 }
@@ -107,6 +115,7 @@ function modeToPromptFile(mode: InferenceMode): string | null {
 function buildUserPrompt(plan: NarrativePlan, options: BuilderOptions): string {
   const targetChars = options.targetChars ?? 1500;
   const tone = options.toneStyle ?? 'friendly';
+  const contextBlock = formatImageNarrativeContext(options.context);
 
   const sectionsText = plan.sections
     .map((section, i) => {
@@ -130,6 +139,7 @@ function buildUserPrompt(plan: NarrativePlan, options: BuilderOptions): string {
     `목표 글자 수: ${targetChars}자 (±15%)\n` +
     `말투: ${tone === 'friendly' ? '~해요 체 (친근하고 자연스럽게)' : tone === 'formal' ? '~합니다 체 (정중하게)' : '반말 (편하게)'}\n` +
     `전체 분위기 키워드: ${moodKeywords || '없음'}\n\n` +
+    (contextBlock ? `${contextBlock}\n\n` : '') +
     `=== 사진 분석 결과 ===\n\n` +
     `${sectionsText}\n\n` +
     `=== 요구사항 ===\n` +

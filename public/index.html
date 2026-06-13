@@ -1303,6 +1303,35 @@
                             <!-- Thumbnail grid -->
                             <div id="image-narrative-thumbnail-grid" class="image-narrative-thumbnail-grid"></div>
 
+                            <!-- User-provided photo context -->
+                            <div class="image-narrative-context-section">
+                                <label class="image-narrative-context-title">
+                                    🧭 사진 참고 정보
+                                </label>
+                                <div class="image-narrative-context-grid">
+                                    <label class="image-narrative-context-field">
+                                        <span>시간</span>
+                                        <input type="text" id="image-narrative-context-time" maxlength="120" placeholder="예: 토요일 오후" />
+                                    </label>
+                                    <label class="image-narrative-context-field">
+                                        <span>주요 인물</span>
+                                        <input type="text" id="image-narrative-context-people" maxlength="180" placeholder="예: 엄마와 아이" />
+                                    </label>
+                                    <label class="image-narrative-context-field">
+                                        <span>장소</span>
+                                        <input type="text" id="image-narrative-context-place" maxlength="180" placeholder="예: 강릉 바다" />
+                                    </label>
+                                    <label class="image-narrative-context-field">
+                                        <span>상황</span>
+                                        <input type="text" id="image-narrative-context-occasion" maxlength="180" placeholder="예: 가족 여행" />
+                                    </label>
+                                </div>
+                                <label class="image-narrative-context-field image-narrative-context-field--full">
+                                    <span>추가 메모</span>
+                                    <textarea id="image-narrative-context-notes" maxlength="1000" rows="3" placeholder="예: 첫 사진은 도착 직후, 마지막 사진은 케이크 커팅"></textarea>
+                                </label>
+                            </div>
+
                             <!-- Vision provider selection -->
                             <div class="image-narrative-provider-section">
                                 <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-strong); display: block; margin-bottom: 0.5rem;">

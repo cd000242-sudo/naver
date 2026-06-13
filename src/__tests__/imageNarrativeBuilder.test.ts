@@ -301,6 +301,39 @@ describe('buildNarrativeContent — NarrativePlan to StructuredContent', () => {
     expect(content.metadata.category).toBe('travel');
     expect(content.metadata.wordCount).toBeGreaterThan(0);
   });
+
+  it('passes user photo context into the generation prompt', async () => {
+    const mockGenerateContent = vi.fn().mockResolvedValue({
+      response: { text: () => MOCK_AI_RESPONSE },
+    });
+
+    vi.doMock('../gemini', () => ({
+      getGeminiModel: vi.fn().mockReturnValue({
+        model: { generateContent: mockGenerateContent },
+        modelName: 'gemini-test',
+      }),
+    }));
+
+    const { buildNarrativeContent } = await import('../imageNarrative/narrativeBuilder/builder');
+    await buildNarrativeContent(makePlan('travel'), {
+      provider: 'gemini',
+      context: {
+        timeHint: '토요일 오후',
+        mainPeople: '엄마와 아이',
+        place: '강릉 바다',
+        occasion: '가족 여행',
+        notes: '첫 사진은 도착 직후입니다.',
+      },
+    });
+
+    const request = mockGenerateContent.mock.calls[0]?.[0] as any;
+    const prompt = request?.contents?.[0]?.parts?.[0]?.text ?? '';
+    expect(prompt).toContain('토요일 오후');
+    expect(prompt).toContain('엄마와 아이');
+    expect(prompt).toContain('강릉 바다');
+    expect(prompt).toContain('가족 여행');
+    expect(prompt).toContain('첫 사진은 도착 직후입니다.');
+  });
 });
 
 describe('buildNarrativeContent — mode routing', () => {

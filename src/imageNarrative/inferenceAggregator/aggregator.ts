@@ -20,6 +20,7 @@ import type {
   ImageExif,
   InferenceMode,
   InferenceOptions,
+  ImageNarrativeContext,
   NarrativePlan,
   NarrativeSection,
   VisionProvider,
@@ -43,6 +44,8 @@ export interface AggregatorOptions {
   readonly provider?: VisionProvider;
   /** Content mode to apply. Defaults to 'auto'. */
   readonly mode?: InferenceMode;
+  /** User-entered hints that help each Vision call interpret the photo set. */
+  readonly context?: ImageNarrativeContext;
   /**
    * Maximum number of concurrent Vision API calls.
    * Defaults to 3 (SPEC FR-4 guideline).
@@ -195,7 +198,9 @@ export async function aggregateInferences(
   images: readonly ImageInput[],
   options: AggregatorOptions = {},
 ): Promise<NarrativePlan> {
-  const concurrency = options.concurrency ?? 3;
+  const provider = options.provider ?? 'gemini';
+  const requestedConcurrency = options.concurrency ?? 3;
+  const concurrency = provider === 'gemini' ? 1 : requestedConcurrency;
   const mode = options.mode ?? 'auto';
 
   // Step 1: Extract EXIF in parallel
@@ -214,8 +219,9 @@ export async function aggregateInferences(
         exif: exifResults[i],
       },
       {
-        provider: options.provider ?? 'gemini',
+        provider,
         mode,
+        context: options.context,
         onFallback: options.onFallback,
       },
     );

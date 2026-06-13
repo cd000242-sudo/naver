@@ -6,7 +6,8 @@
  * All prompts share the same JSON output schema to keep parsing uniform.
  */
 
-import type { InferenceMode } from '../types.js';
+import { formatImageNarrativeContext } from '../context.js';
+import type { ImageNarrativeContext, InferenceMode } from '../types.js';
 
 // ---------------------------------------------------------------------------
 // JSON output schema fragment (appended to every prompt)
@@ -116,7 +117,10 @@ export function getSystemPrompt(mode: InferenceMode): string {
  * Returns the user-facing instruction (one-shot) appended after the image.
  * Kept short because the system prompt already sets context.
  */
-export function getUserInstruction(mode: InferenceMode): string {
+export function getUserInstruction(
+  mode: InferenceMode,
+  context?: ImageNarrativeContext,
+): string {
   const topicMap: Record<InferenceMode, string> = {
     travel: '여행 사진',
     food: '음식 또는 맛집 사진',
@@ -127,5 +131,7 @@ export function getUserInstruction(mode: InferenceMode): string {
     auto: '사진',
   };
   const topic = topicMap[mode] ?? '사진';
-  return `위 ${topic}을 분석하여 JSON을 출력하세요.`;
+  const base = `위 ${topic}을 분석하여 JSON을 출력하세요.`;
+  const contextBlock = formatImageNarrativeContext(context);
+  return contextBlock ? `${base}\n\n${contextBlock}` : base;
 }

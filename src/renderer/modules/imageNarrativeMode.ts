@@ -8,7 +8,12 @@
  * Phase 3 — SPEC-IMAGE-NARRATIVE-2026
  */
 
-import type { NarrativePlan, VisionProvider, InferenceMode } from '../../imageNarrative/types.js';
+import type {
+  ImageNarrativeContext,
+  NarrativePlan,
+  VisionProvider,
+  InferenceMode,
+} from '../../imageNarrative/types.js';
 import { initImageNarrativeUpload, getUploadedImages } from './imageNarrativeUpload.js';
 import {
   getReviewEdits,
@@ -148,6 +153,7 @@ async function _startInference(): Promise<void> {
   if (_modeState.isInferring) return;
 
   const images = getUploadedImages();
+  const context = _readPhotoContext();
   if (images.length < 3) {
     _showToast('최소 3장 이상의 이미지를 업로드해 주세요.', 'error');
     return;
@@ -167,6 +173,7 @@ async function _startInference(): Promise<void> {
       })),
       provider: _modeState.provider,
       mode: _modeState.mode,
+      context,
     });
 
     if (!result || !result.success) {
@@ -255,6 +262,7 @@ async function _handlePublish(reviewEdits?: unknown): Promise<void> {
   }
 
   const edits = reviewEdits ?? Object.fromEntries(getReviewEdits());
+  const context = _readPhotoContext();
 
   // Build the formData payload for executeFullAutoFlow
   const formData: Record<string, unknown> = {
@@ -267,6 +275,7 @@ async function _handlePublish(reviewEdits?: unknown): Promise<void> {
       })),
       provider: _modeState.provider,
       mode: _modeState.mode,
+      context,
       plan: _modeState.plan ?? undefined,
       reviewEdits: edits,
     },
@@ -294,4 +303,15 @@ function _readTargetChars(): number | undefined {
   if (!el) return undefined;
   const n = parseInt(el.value, 10);
   return Number.isNaN(n) ? undefined : n;
+}
+
+function _readPhotoContext(): ImageNarrativeContext | undefined {
+  const context: ImageNarrativeContext = {
+    timeHint: _readFormField('image-narrative-context-time'),
+    mainPeople: _readFormField('image-narrative-context-people'),
+    place: _readFormField('image-narrative-context-place'),
+    occasion: _readFormField('image-narrative-context-occasion'),
+    notes: _readFormField('image-narrative-context-notes'),
+  };
+  return Object.values(context).some(Boolean) ? context : undefined;
 }

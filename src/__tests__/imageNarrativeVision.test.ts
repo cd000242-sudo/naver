@@ -64,6 +64,23 @@ describe('inferencePrompts', () => {
     }
   });
 
+  it('getUserInstruction includes optional user photo context', async () => {
+    const { getUserInstruction } = await import('../imageNarrative/visionInference/inferencePrompts');
+    const instruction = getUserInstruction('auto', {
+      timeHint: '토요일 오후',
+      mainPeople: '엄마와 아이',
+      place: '강릉 바다',
+      occasion: '가족 여행',
+      notes: '첫 사진은 도착 직후입니다.',
+    });
+
+    expect(instruction).toContain('토요일 오후');
+    expect(instruction).toContain('엄마와 아이');
+    expect(instruction).toContain('강릉 바다');
+    expect(instruction).toContain('가족 여행');
+    expect(instruction).toContain('첫 사진은 도착 직후입니다.');
+  });
+
   it('JSON schema instruction is embedded in every system prompt', async () => {
     const { getSystemPrompt, JSON_SCHEMA_INSTRUCTION } = await import('../imageNarrative/visionInference/inferencePrompts');
     const modes = ['travel', 'food'] as const;

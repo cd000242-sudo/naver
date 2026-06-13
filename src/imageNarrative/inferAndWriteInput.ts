@@ -1,4 +1,5 @@
-import type { InferenceMode, NarrativePlan } from './types.js';
+import { normalizeImageNarrativeContext } from './context.js';
+import type { ImageNarrativeContext, InferenceMode, NarrativePlan } from './types.js';
 import type { NarrativeReviewEditsById } from './reviewEdits.js';
 
 export type SupportedVisionProvider = 'gemini' | 'openai';
@@ -19,6 +20,7 @@ export interface NormalizedInferAndWritePayload {
   readonly mode: InferenceMode;
   readonly targetChars?: number;
   readonly toneStyle?: 'friendly' | 'formal' | 'casual';
+  readonly context?: ImageNarrativeContext;
   readonly plan?: NarrativePlan;
   readonly reviewEdits?: NarrativeReviewEditsById;
 }
@@ -69,6 +71,7 @@ export function normalizeInferAndWritePayload(
     mode: normalizeMode(payload['mode']),
     targetChars: normalizeTargetChars(payload['targetChars']),
     toneStyle: normalizeToneStyle(payload['toneStyle']),
+    context: normalizeImageNarrativeContext(payload['context']),
     plan: normalizePlan(payload['plan']),
     reviewEdits: normalizeReviewEdits(payload['reviewEdits']),
   };

@@ -3088,6 +3088,7 @@ async function publishWithImageNarrative(formData) {
             mode: formData.imageNarrative?.mode ?? 'auto',
             targetChars: formData.targetChars,
             toneStyle: formData.toneStyle,
+            context: formData.imageNarrative?.context,
             plan: formData.imageNarrative?.plan,
             reviewEdits: formData.imageNarrative?.reviewEdits,
         });
