@@ -2558,13 +2558,13 @@ document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
 </script>
 
 <!-- ========== LIGHTBOX MODAL ========== -->
-<div id="lightbox-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);cursor:zoom-out;align-items:center;justify-content:center" onclick="this.style.display='none'">
+<div id="lightbox-overlay" style="display:none;position:fixed;inset:0;z-index:2147483000;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);cursor:zoom-out;align-items:center;justify-content:center" onclick="this.style.display='none'">
     <img id="lightbox-img" style="max-width:92vw;max-height:90vh;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.6);object-fit:contain;cursor:default" onclick="event.stopPropagation()">
-    <button onclick="document.getElementById('lightbox-overlay').style.display='none'" style="position:absolute;top:24px;right:32px;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:28px;width:44px;height:44px;border-radius:50%;cursor:pointer;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseenter="this.style.background='rgba(255,255,255,.3)'" onmouseleave="this.style.background='rgba(255,255,255,.15)'">&times;</button>
+    <button onclick="document.getElementById('lightbox-overlay').style.display='none'" data-lightbox-close="true" style="position:absolute;top:24px;right:32px;z-index:2147483001;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:28px;width:44px;height:44px;border-radius:50%;cursor:pointer;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;transition:background .2s" onmouseenter="this.style.background='rgba(255,255,255,.3)'" onmouseleave="this.style.background='rgba(255,255,255,.15)'">&times;</button>
 </div>
 <script>
-// Lightbox: click any bonus-card or gallery image to enlarge
-document.querySelectorAll('.bonus-card img, .gallery-item img, .feature-visual img, .proof-card img').forEach(img => {
+// Lightbox: click any detail/result/proof image to enlarge
+document.querySelectorAll('.bonus-card img, .gallery-item img, .feature-visual img, .proof-card img, .mode-shot img, .result-card img, .shopping-result-card img, .proof-strip img, .automation-card img, .image-workflow-card img').forEach(img => {
     img.style.cursor = 'zoom-in';
     img.addEventListener('click', e => {
         e.stopPropagation();

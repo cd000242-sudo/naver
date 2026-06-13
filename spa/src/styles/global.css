@@ -86,6 +86,10 @@ button { cursor: pointer; font-family: inherit; }
     margin: 0 auto;
 }
 
+.detail-page-root img:not([data-zoom-disabled="true"]) {
+    cursor: zoom-in;
+}
+
 @media (max-width: 768px) {
     .nav-hamburger {
         display: inline-flex !important;

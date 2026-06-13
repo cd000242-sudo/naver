@@ -475,6 +475,7 @@ function ProofSection() {
 
 function DetailPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
+    const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null);
 
     useEffect(() => {
         const prev = document.title;
@@ -482,8 +483,29 @@ function DetailPage() {
         return () => { document.title = prev; };
     }, []);
 
+    useEffect(() => {
+        const onClick = (event: MouseEvent) => {
+            const target = event.target as HTMLElement | null;
+            const img = target?.closest?.('.detail-page-root img') as HTMLImageElement | null;
+            if (!img || img.closest('nav') || img.dataset.zoomDisabled === 'true') return;
+            setLightboxImage({
+                src: img.currentSrc || img.src,
+                alt: img.alt || '이미지 크게 보기',
+            });
+        };
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') setLightboxImage(null);
+        };
+        document.addEventListener('click', onClick);
+        document.addEventListener('keydown', onKeyDown);
+        return () => {
+            document.removeEventListener('click', onClick);
+            document.removeEventListener('keydown', onKeyDown);
+        };
+    }, []);
+
     return (
-        <div style={{ background: C.bgDark, color: C.textPrimary }}>
+        <div className="detail-page-root" style={{ background: C.bgDark, color: C.textPrimary }}>
             <ParticlesCanvas />
 
             {/* HERO */}
@@ -716,6 +738,70 @@ function DetailPage() {
                     <p style={{ marginTop: 16, color: '#888', fontSize: 14 }}>🔒 안전한 결제 · 7일 환불 보장 · 카카오톡 즉시 지원</p>
                 </div>
             </section>
+
+            {lightboxImage && (
+                <div
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={lightboxImage.alt}
+                    onClick={() => setLightboxImage(null)}
+                    style={{
+                        position: 'fixed',
+                        inset: 0,
+                        zIndex: 2147483000,
+                        background: 'rgba(0,0,0,0.88)',
+                        backdropFilter: 'blur(10px)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '72px 22px 28px',
+                        cursor: 'zoom-out',
+                    }}
+                >
+                    <button
+                        type="button"
+                        aria-label="큰 이미지 닫기"
+                        data-lightbox-close="true"
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            setLightboxImage(null);
+                        }}
+                        style={{
+                            position: 'fixed',
+                            top: 22,
+                            right: 24,
+                            width: 46,
+                            height: 46,
+                            borderRadius: '50%',
+                            border: '1px solid rgba(255,255,255,0.26)',
+                            background: 'rgba(20,20,28,0.78)',
+                            color: '#fff',
+                            fontSize: 30,
+                            lineHeight: 1,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            zIndex: 2147483001,
+                        }}
+                    >
+                        ×
+                    </button>
+                    <img
+                        src={lightboxImage.src}
+                        alt={lightboxImage.alt}
+                        onClick={(event) => event.stopPropagation()}
+                        style={{
+                            maxWidth: '92vw',
+                            maxHeight: '88vh',
+                            objectFit: 'contain',
+                            borderRadius: 14,
+                            boxShadow: '0 22px 90px rgba(0,0,0,0.58)',
+                            background: '#111',
+                            cursor: 'default',
+                        }}
+                    />
+                </div>
+            )}
         </div>
     );
 }
