@@ -68,7 +68,7 @@ describe('Phase 7.4 characterization - contentGenerator public surface', () => {
     expectAll(src, [
       'validateContent as runValidationPipeline',
       'function runPostGenValidator(',
-      'function buildRecentWinnersBlock(',
+      "from './contentRecentWinnersBlock.js'",
       'runPostGenValidator(finalContent, source)',
       'buildRecentWinnersBlock(source)',
       'buildFullPrompt(',

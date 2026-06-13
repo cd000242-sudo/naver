@@ -187,19 +187,26 @@ describe('integration: validator result → publishMeta attachment', () => {
 
 describe('integration: contentGenerator calls production hooks (grep proof)', () => {
   const contentGenPath = path.resolve(__dirname, '../../contentGenerator.ts');
+  const recentWinnersBlockPath = path.resolve(__dirname, '../../contentRecentWinnersBlock.ts');
   const mainPath = path.resolve(__dirname, '../../main.ts');
 
   it('contentGenerator imports the validation pipeline facade', () => {
     const src = fs.readFileSync(contentGenPath, 'utf-8');
     expect(src).toMatch(/validateContent as runValidationPipeline/);
-    expect(src).toMatch(/extractRecentWinners/);
     expect(src).toMatch(/isFeatureEnabled/);
   });
 
   it('contentGenerator defines runPostGenValidator helper', () => {
     const src = fs.readFileSync(contentGenPath, 'utf-8');
     expect(src).toMatch(/function runPostGenValidator\(/);
+    expect(src).toMatch(/from ['"].\/contentRecentWinnersBlock\.js['"]/);
+  });
+
+  it('contentRecentWinnersBlock owns recent winner prompt extraction', () => {
+    const src = fs.readFileSync(recentWinnersBlockPath, 'utf-8');
     expect(src).toMatch(/function buildRecentWinnersBlock\(/);
+    expect(src).toMatch(/extractRecentWinners/);
+    expect(src).toMatch(/formatWinnersForPrompt/);
   });
 
   it('finalizeStructuredContent calls runPostGenValidator at least twice', () => {

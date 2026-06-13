@@ -45,7 +45,6 @@ import { META_CRITIQUE_PHRASES } from './content/forbiddenPhrases.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
 import { validateContent as runValidationPipeline } from './services/contentValidationPipeline.js';
 import { loadAeoRules } from './aeoRulesManager.js';
-import { extractRecentWinners, formatWinnersForPrompt } from './learning/recentWinnersExtractor.js';
 import { isFeatureEnabled } from './services/featureFlagConfig.js';
 // ✅ [v1.4.48 Stage A.2] require() 혼용 제거 → 정적 import로 통일 (모듈 인스턴스 단일 보장)
 import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type TitleSelectionResult } from './titleSelector.js';
@@ -100,6 +99,7 @@ import {
   validateHeadingOrder,
 } from './contentDuplicateHeuristics.js';
 import { buildUrlModeDirective } from './contentUrlModeDirective.js';
+import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
 export {
   classifyGeminiBillingBlock,
   isGeminiPrepaidCreditsDepletedError,
@@ -275,28 +275,7 @@ function runPostGenValidator(content: any, source: any): void {
   }
 }
 
-/**
- * Compute the RECENT_WINNERS few-shot block to inject into buildFullPrompt.
- * Returns empty string when feature disabled OR insufficient samples (N<5).
- * Caller's responsibility to resolve postId → title/intro text; for now we
- * look it up from previousTitles if available.
- */
-function buildRecentWinnersBlock(source: any): string {
-  if (!isFeatureEnabled('feedback_loop')) return '';
-  try {
-    const previousMap: Record<string, string> = source?.__previousTitleMap || {};
-    const resolver = (postId: string) => {
-      const title = previousMap[postId];
-      if (!title) return null;
-      return { title, intro: '' };
-    };
-    const winners = extractRecentWinners(resolver);
-    return formatWinnersForPrompt(winners);
-  } catch (err) {
-    console.error('[RecentWinners] 추출 실패, 빈 블록 사용:', err);
-    return '';
-  }
-}
+// [Phase 7.4-u] recent winners prompt block -> contentRecentWinnersBlock.ts
 
 // [Phase 3-1/v2.10.139] removeEmojis 함수는 contentTextHelpers.ts로 추출됨 (god file 분해).
 
