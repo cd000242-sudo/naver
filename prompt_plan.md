@@ -37,7 +37,11 @@
   fullAutoImageSource/globalImageSource/imageFallbackPolicy 계열을 readRawPipelineSettings()
   경유로 통일. 게이트: vitest 3,077/3,077 GREEN · build PASS · lint 0 errors ·
   lint:ipc PASS.
-- 다음: 7.1-g 쇼핑커넥트 sc* 클러스터 → PipelineConfig 흡수
+- ✅ 7.1-g (이번 세션): 쇼핑커넥트 sc* 클러스터 흡수 —
+  scSubImageMode/scSubImageSource/scAIImageEngine/scAutoThumbnailSetting 계열을
+  PipelineConfig.shopping + readRawPipelineSettings() 경유로 통일. 레거시 엔진명은 ai 모드로 정규화.
+  게이트: phase71/phase72 타깃 vitest 19/19 GREEN.
+- 다음: 7.1-h 공시/안전(ftc/adb) 클러스터 + 직독 0 래칫 마감
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

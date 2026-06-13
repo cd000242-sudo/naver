@@ -34,17 +34,23 @@ interface ImagePipelineConfig {
   imageFallbackPolicy: 'engine-only';
 }
 interface DisclosureConfig { enabled: boolean; text: string }
+interface ShoppingConnectConfig {
+  subImageMode: 'ai' | 'collected';
+  aiImageEngine: string;
+  autoThumbnail: boolean;
+}
 interface PipelineConfig {
   flow: 'full-auto' | 'continuous' | 'multi-account';
   resolvedAt: number;              // 해석 시각 (진단용)
   image: ImagePipelineConfig;
+  shopping: ShoppingConnectConfig;
   disclosure: DisclosureConfig;
 }
 function resolvePipelineConfig(flow: PipelineConfig['flow']): PipelineConfig
 ```
 
 - 키 이름·기본값의 **단일 정의처**. 모든 플로우가 같은 키를 같은 기본값으로 해석.
-- 쇼핑커넥트(sc*) 클러스터는 후속 단계에서 `shopping?: ScImageConfig`로 추가.
+- 쇼핑커넥트(sc*) 클러스터는 7.1-g에서 `shopping` 설정으로 흡수 완료.
 
 ### 2.2 해석 시점 — 발행 아이템 시작 시 1회
 
@@ -77,7 +83,7 @@ R13 1~3차에서 만든 options 통로를 그대로 사용. `aiOptions`/`options
 | 7.1-d | 공유 헬퍼(headingImageGen/costAndAutoGen)의 직독 → config 수신 전환 (경고 폴백) | module |
 | 7.1-e | 이미지 포맷 클러스터 (imageStyle/Ratio 4종) 동일 절차 | module |
 | 7.1-f | 프로바이더 클러스터 흡수 (resolveImageProviderFallback → config) | local |
-| 7.1-g | 쇼핑커넥트 sc* 클러스터 | module |
+| 7.1-g | ✅ 쇼핑커넥트 sc* 클러스터 | module |
 | 7.1-h | 공시/안전(ftc/adb) 클러스터 + 직독 0 래칫 마감 | local |
 
 각 단계 라이브 회귀 시 즉시 단독 revert 가능. 7.1-d 이후부터 "한 플로우 수정이
@@ -102,5 +108,8 @@ R13 1~3차에서 만든 options 통로를 그대로 사용. `aiOptions`/`options
   imageFallbackPolicy 직독을 readRawPipelineSettings() 경유로 통일. 가드: phase71/phase72
   직독 래칫 확장. 게이트: vitest 3,077/3,077 GREEN · build PASS · lint 0 errors ·
   lint:ipc PASS.
-- 남은 단계: 7.1-g(쇼핑커넥트 sc* 클러스터) → 7.1-h(공시/안전 클러스터 + 직독 0 래칫 마감).
+- 6/13 7.1-g 완료: scSubImageMode/scSubImageSource/scAIImageEngine/
+  scAutoThumbnailSetting 읽기를 PipelineConfig.shopping + readRawPipelineSettings() 경유로 통일.
+  레거시 scSubImageSource 엔진명은 ai 모드로 정규화. 가드: phase71/phase72 타깃 19/19 GREEN.
+- 남은 단계: 7.1-h(공시/안전 클러스터 + 직독 0 래칫 마감).
 - 라이브 일괄 검증(3플로우)은 7.1-d 이후 또는 다음 릴리즈 전 1회.

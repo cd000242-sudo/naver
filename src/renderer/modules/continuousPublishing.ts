@@ -11,15 +11,8 @@ import { resolvePublishModeAfterScheduleRemoved } from './continuousPublishModeH
 type SubImageMode = 'ai' | 'collected';
 function getSubImageMode(): SubImageMode {
   try {
-    const w = (typeof window !== 'undefined' ? (window as any) : null);
-    if (w && typeof w.getSubImageMode === 'function') {
-      const v = w.getSubImageMode();
-      if (v === 'ai' || v === 'collected') return v;
-    }
-    const explicit = localStorage.getItem('scSubImageMode');
-    if (explicit === 'ai' || explicit === 'collected') return explicit;
-    const legacy = localStorage.getItem('scSubImageSource');
-    if (legacy === 'ai' || legacy === 'collected') return legacy;
+    const mode = resolvePipelineConfig('continuous').shopping.subImageMode;
+    if (mode === 'ai' || mode === 'collected') return mode;
   } catch { /* ignore */ }
   return 'collected';
 }
@@ -81,8 +74,8 @@ declare function generateContentFromUrl(url: string, title?: string, tone?: stri
 declare function generateContentFromKeywords(title: string, keywords?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
-declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string } };
-declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
+declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; autoThumbnail: boolean } };
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null; scSubImageMode: string | null; scSubImageSource: string | null; scAIImageEngine: string | null; scAutoThumbnailSetting: string | null };
 declare function executeUnifiedAutomation(formData: any): Promise<any>;
 declare function updateUnifiedPreview(content: any): void;
 declare function syncGlobalImagesFromImageManager(): void;
@@ -1602,15 +1595,16 @@ export function initContinuousPublishingV2(): void {
 
           // ✅ [2026-02-19] localStorage → 서브탭 UI 복원
           // ✅ [2026-05-18] mode='ai'면 라디오의 엔진명(저장된 scAIImageEngine)에 매칭, 'collected'면 그대로
-          const scSubMode = getSubImageMode();
+          const shoppingPipelineCfg = resolvePipelineConfig('continuous').shopping;
+          const scSubMode = shoppingPipelineCfg.subImageMode;
           const restoredRadioValue = scSubMode === 'collected'
             ? 'collected'
-            : (localStorage.getItem('scAIImageEngine') || 'nano-banana-pro');
+            : shoppingPipelineCfg.aiImageEngine;
           document.querySelectorAll('input[name="continuous-modal-shopping-subimage-source"]').forEach(r => {
             (r as HTMLInputElement).checked = (r as HTMLInputElement).value === restoredRadioValue;
           });
           const autoThumb = document.getElementById('continuous-modal-shopping-auto-thumbnail') as HTMLInputElement;
-          if (autoThumb) autoThumb.checked = localStorage.getItem('scAutoThumbnailSetting') === 'true';
+          if (autoThumb) autoThumb.checked = shoppingPipelineCfg.autoThumbnail;
           const subAutoBanner = document.getElementById('continuous-modal-shopping-auto-random-banner') as HTMLInputElement;
           const mainBannerEl = document.getElementById('continuous-auto-banner-generate') as HTMLInputElement;
           if (subAutoBanner && mainBannerEl) subAutoBanner.checked = mainBannerEl.checked;
@@ -4557,7 +4551,7 @@ async function startContinuousPublishingV2(): Promise<void> {
 
             // ✅ [2026-01-28] 이미지 설정 전역 적용 (localStorage에서 읽음)
             // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화 — 키 충돌 mismatch 해결
-            const scSubImageMode = getSubImageMode();
+            const scSubImageMode = itemPipelineCfg.shopping.subImageMode;
             // If the post already carries collected product images, honor them
             // even when the mode key normalized away from 'collected' — falling
             // through to AI generation here caused slow retry grinds instead of

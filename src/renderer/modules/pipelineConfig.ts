@@ -6,6 +6,7 @@
 // key with different defaults again.
 
 export type PipelineFlow = 'full-auto' | 'continuous' | 'multi-account';
+export type ShoppingSubImageMode = 'ai' | 'collected';
 
 export interface ImagePipelineConfig {
   headingImageMode: string;
@@ -17,10 +18,17 @@ export interface ImagePipelineConfig {
   subheadingImageRatio: string;
 }
 
+export interface ShoppingConnectPipelineConfig {
+  subImageMode: ShoppingSubImageMode;
+  aiImageEngine: string;
+  autoThumbnail: boolean;
+}
+
 export interface PipelineConfig {
   flow: PipelineFlow;
   resolvedAt: number;
   image: ImagePipelineConfig;
+  shopping: ShoppingConnectPipelineConfig;
 }
 
 function pipelineReadString(key: string, fallback: string): string {
@@ -52,6 +60,10 @@ export interface RawPipelineSettings {
   fullAutoImageSource: string | null;
   globalImageSource: string | null;
   imageFallbackPolicy: string | null;
+  scSubImageMode: string | null;
+  scSubImageSource: string | null;
+  scAIImageEngine: string | null;
+  scAutoThumbnailSetting: string | null;
 }
 
 function pipelineReadRaw(key: string): string | null {
@@ -79,10 +91,43 @@ export function readRawPipelineSettings(): RawPipelineSettings {
     fullAutoImageSource: pipelineReadRaw('fullAutoImageSource'),
     globalImageSource: pipelineReadRaw('globalImageSource'),
     imageFallbackPolicy: pipelineReadRaw('imageFallbackPolicy'),
+    scSubImageMode: pipelineReadRaw('scSubImageMode'),
+    scSubImageSource: pipelineReadRaw('scSubImageSource'),
+    scAIImageEngine: pipelineReadRaw('scAIImageEngine'),
+    scAutoThumbnailSetting: pipelineReadRaw('scAutoThumbnailSetting'),
   };
 }
 
+const SHOPPING_AI_ENGINE_NAMES = new Set([
+  'nano-banana-pro',
+  'nano-banana-2',
+  'openai-image',
+  'gpt-image-2',
+  'imagefx',
+  'leonardoai',
+  'deepinfra',
+  'deepinfra-flux',
+  'stability',
+  'falai',
+  'prodia',
+  'pollinations',
+  'flow',
+  'dropshot',
+]);
+
+function normalizeShoppingSubImageMode(raw: RawPipelineSettings): ShoppingSubImageMode {
+  const explicit = raw.scSubImageMode;
+  if (explicit === 'ai' || explicit === 'collected') return explicit;
+
+  const legacy = raw.scSubImageSource;
+  if (legacy === 'ai' || legacy === 'collected') return legacy;
+  if (legacy && SHOPPING_AI_ENGINE_NAMES.has(legacy)) return 'ai';
+
+  return 'collected';
+}
+
 export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
+  const raw = readRawPipelineSettings();
   return {
     flow,
     resolvedAt: Date.now(),
@@ -94,6 +139,11 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       imageRatio: pipelineReadString('imageRatio', '1:1'),
       thumbnailImageRatio: pipelineReadString('thumbnailImageRatio', '1:1'),
       subheadingImageRatio: pipelineReadString('subheadingImageRatio', '1:1'),
+    },
+    shopping: {
+      subImageMode: normalizeShoppingSubImageMode(raw),
+      aiImageEngine: raw.scAIImageEngine || 'nano-banana-pro',
+      autoThumbnail: raw.scAutoThumbnailSetting === 'true',
     },
   };
 }

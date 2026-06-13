@@ -33,6 +33,11 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
       thumbnailImageRatio: '1:1',
       subheadingImageRatio: '1:1',
     });
+    expect(cfg.shopping).toEqual({
+      subImageMode: 'collected',
+      aiImageEngine: 'nano-banana-pro',
+      autoThumbnail: false,
+    });
   });
 
   it('저장된 값을 직독과 동일한 규칙으로 해석한다 (boolean은 === "true")', () => {
@@ -42,6 +47,9 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
       textOnlyPublish: 'false',
       imageStyle: 'illustration',
       imageRatio: '16:9',
+      scSubImageMode: 'ai',
+      scAIImageEngine: 'openai-image',
+      scAutoThumbnailSetting: 'true',
     });
     const cfg = resolvePipelineConfig('continuous');
     expect(cfg.image.headingImageMode).toBe('thumbnail-only');
@@ -50,6 +58,16 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     expect(cfg.image.imageStyle).toBe('illustration');
     expect(cfg.image.imageRatio).toBe('16:9');
     expect(cfg.image.thumbnailImageRatio).toBe('1:1'); // 미설정 → 기본값
+    expect(cfg.shopping.subImageMode).toBe('ai');
+    expect(cfg.shopping.aiImageEngine).toBe('openai-image');
+    expect(cfg.shopping.autoThumbnail).toBe(true);
+  });
+
+  it('쇼핑커넥트 legacy scSubImageSource에 엔진명이 남아도 ai 모드로 해석한다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageSource: 'openai-image',
+    });
+    expect(resolvePipelineConfig('full-auto').shopping.subImageMode).toBe('ai');
   });
 
   it('빈 문자열 저장값은 직독(|| 기본값)과 동일하게 기본값으로 떨어진다', () => {
@@ -144,6 +162,25 @@ describe('직독 래칫 — 공유 헬퍼/풀오토 위임부 (7.1-d)', () => {
     expect(count(cp, 'globalImageSource')).toBe(0);
     expect(count(ph, 'fullAutoImageSource')).toBe(0);
     expect(count(ph, 'globalImageSource')).toBe(0);
+  });
+
+  it('[7.1-g] 쇼핑커넥트 sc* 설정 읽기는 pipelineConfig 경유로 잠근다', () => {
+    const cp = read('src', 'renderer', 'modules', 'continuousPublishing.ts');
+    const mam = read('src', 'renderer', 'modules', 'multiAccountManager.ts');
+    const ph = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
+    const faf = read('src', 'renderer', 'modules', 'fullAutoFlow.ts');
+    const imt = read('src', 'renderer', 'modules', 'imageManagementTab.ts');
+    const count = (src: string, key: string) =>
+      (src.match(new RegExp(`localStorage\\.getItem\\('${key}'\\)`, 'g')) || []).length;
+    for (const src of [cp, mam, ph, faf, imt]) {
+      expect(count(src, 'scSubImageMode')).toBe(0);
+      expect(count(src, 'scSubImageSource')).toBe(0);
+      expect(count(src, 'scAIImageEngine')).toBe(0);
+      expect(count(src, 'scAutoThumbnailSetting')).toBe(0);
+    }
+    const pipeline = read('src', 'renderer', 'modules', 'pipelineConfig.ts');
+    expect(pipeline).toContain("pipelineReadRaw('scSubImageMode')");
+    expect(pipeline).toContain('function normalizeShoppingSubImageMode');
   });
 });
 

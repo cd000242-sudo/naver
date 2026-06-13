@@ -41,8 +41,8 @@ declare function generateAutoCTA(title: string, keywords?: string): any;
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
-declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string } };
-declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
+declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; autoThumbnail: boolean } };
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null; scSubImageMode: string | null; scSubImageSource: string | null; scAIImageEngine: string | null; scAutoThumbnailSetting: string | null };
 declare function parseLocalFolderImages(folderPath: string, headings: any[]): Promise<any[]>;
 declare function isFullAutoStopRequested(modal: any): boolean;
 declare function getProgressModal(): any;
@@ -839,7 +839,7 @@ export async function handleFullAutoPublish(): Promise<void> {
         // ✅ [2026-02-07 FIX] AI 이미지 생성 모드에서는 수집 이미지 매칭 스킵!
         // → AI 이미지 생성을 선택한 경우 수집 이미지 매칭은 불필요하고 혼란만 줌
         // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화
-        const scSubImageModePre = (window as any).getSubImageMode?.() || 'collected';
+        const scSubImageModePre = pipelineCfg.shopping.subImageMode;
         const shouldMatchCollected = !formData.useAiImage ||
           (formData.contentMode === 'affiliate' && scSubImageModePre === 'collected');
 
@@ -850,7 +850,7 @@ export async function handleFullAutoPublish(): Promise<void> {
               headings: structuredContent.headings || [],
               collectedImages: collectedImgs,
               // ✅ [2026-05-18] 정규화된 mode만 main 프로세스로 전송 ('ai'|'collected')
-              scSubImageSource: (window as any).getSubImageMode?.() || 'collected'
+              scSubImageSource: pipelineCfg.shopping.subImageMode
             });
             if (matchResult.success && matchResult.assignments) {
               matchResult.assignments.forEach((assignment: any) => {
@@ -880,7 +880,7 @@ export async function handleFullAutoPublish(): Promise<void> {
 
         // ✅ [2026-01-31 FIX] 쇼핑커넥트 모드에서 "수집 이미지 사용" 설정 확인
         // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화
-        const scSubImageMode = (window as any).getSubImageMode?.() || 'collected';
+        const scSubImageMode = pipelineCfg.shopping.subImageMode;
         const isShoppingConnectCollected = formData.contentMode === 'affiliate' && scSubImageMode === 'collected';
 
         if (isShoppingConnectCollected) {
@@ -1491,12 +1491,12 @@ export async function handleMultiAccountPublish(): Promise<void> {
     category: UnifiedDOMCache.getRealCategory() || undefined, // ✅ 카테고리 추가
     // ✅ [2026-01-28] 이미지 설정 전역 적용 (연속발행/다중계정에도 적용)
     // ✅ [2026-05-18] 정규화된 mode만 전송 — main 프로세스 분기 조건은 'ai'|'collected'만 처리
-    scSubImageSource: (window as any).getSubImageMode?.() || 'collected',  // 수집 이미지 직접 사용 여부
+    scSubImageSource: maPipelineCfg.shopping.subImageMode,  // 수집 이미지 직접 사용 여부
     // [Phase 7.1-e] 진입점 1회 해석 스냅샷 사용
     thumbnailImageRatio: maPipelineCfg.image.thumbnailImageRatio,  // 썸네일 비율
     subheadingImageRatio: maPipelineCfg.image.subheadingImageRatio,  // 소제목 비율
     thumbnailTextInclude: maPipelineCfg.image.thumbnailTextInclude,  // 썸네일 텍스트
-    scAutoThumbnailSetting: localStorage.getItem('scAutoThumbnailSetting') === 'true',  // 자동 썸네일 (sc 클러스터 — 7.1-g)
+    scAutoThumbnailSetting: maPipelineCfg.shopping.autoThumbnail,  // 자동 썸네일 (sc 클러스터 — 7.1-g)
   };
 
   // ✅ [2026-03-11 FIX] datetime-local 값에서 날짜+시간 모두 추출 (기존: 날짜만 추출하여 시간 손실)

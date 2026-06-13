@@ -512,7 +512,9 @@ async function executeFullAutoFlow(formData) {
             console.log('[FullAuto] ♻️ formData.imageManagementImages 경로로 복구');
         }
         await yieldToUI();
-        const scSubImageMode = window.getSubImageMode?.() || 'collected';
+        const scSubImageMode = (formData.scSubImageSource === 'ai' || formData.scSubImageSource === 'collected')
+            ? formData.scSubImageSource
+            : resolvePipelineConfig('full-auto').shopping.subImageMode;
         const isCollectedMode = formData.contentMode === 'affiliate' && scSubImageMode === 'collected';
         if (isCollectedMode && finalImages.length === 0) {
             const collectedFromContent = structuredContent.collectedImages || structuredContent.images || formData.collectedImages || [];

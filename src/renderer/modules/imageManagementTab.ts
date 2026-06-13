@@ -6,6 +6,7 @@
  */
 
 import { toastManager } from '../utils/uiManagers.js';
+import { readRawPipelineSettings } from './pipelineConfig.js';
 // ✅ [v2.10.288] subImageMode import 제거 — esbuild 회귀 차단. window 통해 호출.
 type SubImageMode = 'ai' | 'collected';
 function setSubImageMode(mode: SubImageMode): void {
@@ -111,8 +112,14 @@ export async function initImageManagementTab(): Promise<void> {
   // migrate to dropshot (리더스 나노바나나 무제한) once, with a visible log.
   // Backend modules stay (incl. the S14 Flow fixes) for a possible return.
   try {
+    const rawPipeline = readRawPipelineSettings();
+    const savedByKey: Record<string, string | null> = {
+      fullAutoImageSource: rawPipeline.fullAutoImageSource,
+      globalImageSource: rawPipeline.globalImageSource,
+      scAIImageEngine: rawPipeline.scAIImageEngine,
+    };
     for (const key of ['fullAutoImageSource', 'globalImageSource', 'scAIImageEngine']) {
-      const saved = localStorage.getItem(key);
+      const saved = savedByKey[key];
       if (saved === 'imagefx' || saved === 'flow') {
         localStorage.setItem(key, 'dropshot');
         console.log(`[ImageEngine] 🔁 ${key}: ${saved} → dropshot (불안정 엔진 제거 — 리더스 나노바나나로 이관)`);

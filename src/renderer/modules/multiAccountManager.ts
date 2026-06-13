@@ -56,18 +56,9 @@ function getSafeMultiAccountInterval(requestedSeconds, totalItems, imageSource) 
 }
 function getSubImageMode() {
     try {
-        const w = (typeof window !== 'undefined' ? window : null);
-        if (w && typeof w.getSubImageMode === 'function') {
-            const v = w.getSubImageMode();
-            if (v === 'ai' || v === 'collected')
-                return v;
-        }
-        const explicit = localStorage.getItem('scSubImageMode');
-        if (explicit === 'ai' || explicit === 'collected')
-            return explicit;
-        const legacy = localStorage.getItem('scSubImageSource');
-        if (legacy === 'ai' || legacy === 'collected')
-            return legacy;
+        const mode = resolvePipelineConfig('multi-account').shopping.subImageMode;
+        if (mode === 'ai' || mode === 'collected')
+            return mode;
     }
     catch { }
     return 'collected';
@@ -3211,7 +3202,7 @@ async function initMultiAccountPublishModal() {
                                 addMALog(`⚠️ 이미지 수집 오류: ${collectError.message?.substring(0, 50)} - AI 이미지로 대체`, 'warning');
                             }
                         }
-                        const scSubImageModePre = getSubImageMode();
+                        const scSubImageModePre = itemPipelineCfg.shopping.subImageMode;
                         if (generatedImages.length > 0 && queueItem.contentMode === 'affiliate') {
                             const shouldMatchCollected = scSubImageModePre === 'collected';
                             if (shouldMatchCollected && (structuredContent.headings || []).length > 0) {
@@ -3622,7 +3613,7 @@ async function initMultiAccountPublishModal() {
                         skipImages: (queueItem.imageSource === 'skip') || false,
                         useAiImage: queueItem.useAiImage ?? true,
                         createProductThumbnail: queueItem.createProductThumbnail ?? false,
-                        scSubImageSource: getSubImageMode(),
+                        scSubImageSource: itemPipelineCfg.shopping.subImageMode,
                         collectedImages: structuredContent?.collectedImages || [],
                         previousPostUrl: queueItem?.previousPostUrl || (queueItem.ctaType === 'previous-post' ? queueItem?.ctaUrl : undefined) || undefined,
                         previousPostTitle: queueItem?.previousPostTitle || (queueItem.ctaType === 'previous-post' && queueItem?.ctaText ? String(queueItem.ctaText).replace(/^[\s📖👉:\-]+/, '').trim() : undefined) || undefined,
