@@ -67,12 +67,13 @@ describe('직독 래칫 — publishingHandlers (7.1-a)', () => {
     expect(count('textOnlyPublish')).toBe(0);
     expect(count('imageStyle')).toBe(0);
     expect(count('imageRatio')).toBe(0);
-    // 잔여 부채 (mainSettings 블록 — 7.1-e/g에서 이관): 늘어나면 FAIL
-    expect(count('thumbnailTextInclude')).toBeLessThanOrEqual(1);
-    expect(count('thumbnailImageRatio')).toBeLessThanOrEqual(1);
-    expect(count('subheadingImageRatio')).toBeLessThanOrEqual(1);
-    // 진입점 1회 해석이 존재
+    // [7.1-e] mainSettings 블록 이관 완료 — 이미지 클러스터 직독 0 잠금
+    expect(count('thumbnailTextInclude')).toBe(0);
+    expect(count('thumbnailImageRatio')).toBe(0);
+    expect(count('subheadingImageRatio')).toBe(0);
+    // 진입점 1회 해석이 존재 (풀오토 + 다중계정 메인 수집)
     expect(ph).toContain("const pipelineCfg = resolvePipelineConfig('full-auto')");
+    expect(ph).toContain("const maPipelineCfg = resolvePipelineConfig('multi-account')");
   });
 });
 
@@ -86,9 +87,9 @@ describe('직독 래칫 — continuousPublishing (7.1-b)', () => {
     expect(count('imageRatio')).toBe(0);
     expect(count('thumbnailImageRatio')).toBe(0);
     expect(count('subheadingImageRatio')).toBe(0);
-    // 잔여 부채 (아이템 생성 시점 UI 수집 2곳 — 후속 단계 이관): 늘어나면 FAIL
-    expect(count('textOnlyPublish')).toBeLessThanOrEqual(1);
-    expect(count('thumbnailTextInclude')).toBeLessThanOrEqual(1);
+    // [7.1-e] 아이템 생성 시점 수집 2곳 이관 완료 — 직독 0 잠금
+    expect(count('textOnlyPublish')).toBe(0);
+    expect(count('thumbnailTextInclude')).toBe(0);
     // V2 루프 per-item 해석 + Enhanced per-publish 해석이 존재
     expect(cp).toContain("const itemPipelineCfg = resolvePipelineConfig('continuous')");
     expect(cp).toContain("const pipelineCfg = resolvePipelineConfig('continuous')");

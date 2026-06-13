@@ -1868,7 +1868,8 @@ export function initContinuousPublishingV2(): void {
             realCategoryName,
             scheduleDate,
             // ✅ [2026-01-28 FIX] localStorage 설정 우선 적용
-            includeThumbnailText: localStorage.getItem('thumbnailTextInclude') === 'true' || includeThumbnailTextCheck?.checked || false,
+            // [Phase 7.1-e] 단일 해석처 경유 (아이템 편집 시점 스냅샷)
+            includeThumbnailText: resolvePipelineConfig('continuous').image.thumbnailTextInclude || includeThumbnailTextCheck?.checked || false,
             useAiImage: useAiImageCheck?.checked ?? true,
             createProductThumbnail: createThumbnailCheck?.checked ?? false
           };
@@ -2681,7 +2682,8 @@ function addItemToQueueV2Impl(): void {
   }
 
   // ✅ [2026-03-07 FIX] 텍스트만 발행 설정 시 이미지 소스를 'skip'으로 설정
-  const textOnlyPublish = localStorage.getItem('textOnlyPublish') === 'true';
+  // [Phase 7.1-e] 단일 해석처 경유 (아이템 생성 시점 스냅샷)
+  const textOnlyPublish = resolvePipelineConfig('continuous').image.textOnlyPublish;
   const imageSource = textOnlyPublish ? 'skip' : getFullAutoImageSource();
   // 🛡️ [2026-03-23] 끝판왕: 기본값 7(분 단위)로 변경
   const intervalValue = parseInt((document.getElementById('continuous-interval-value') as HTMLInputElement)?.value || '7');

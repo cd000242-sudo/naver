@@ -1397,6 +1397,9 @@ function applySequentialMultiAccountJitter(intervalSeconds: number, floorSeconds
 
 // 다중계정 순차 발행 처리
 export async function handleMultiAccountPublish(): Promise<void> {
+  // [Phase 7.1-e] Settings snapshot for the multi-account main collection —
+  // resolved once at flow entry (per-item snapshots live in the queue loop).
+  const maPipelineCfg = resolvePipelineConfig('multi-account');
   const selectedAccountIds = (window as any).getInlineSelectedAccounts?.() || [];
   const requestedIntervalSeconds = (window as any).getInlineInterval?.() || 30;
 
@@ -1488,10 +1491,11 @@ export async function handleMultiAccountPublish(): Promise<void> {
     // ✅ [2026-01-28] 이미지 설정 전역 적용 (연속발행/다중계정에도 적용)
     // ✅ [2026-05-18] 정규화된 mode만 전송 — main 프로세스 분기 조건은 'ai'|'collected'만 처리
     scSubImageSource: (window as any).getSubImageMode?.() || 'collected',  // 수집 이미지 직접 사용 여부
-    thumbnailImageRatio: localStorage.getItem('thumbnailImageRatio') || '1:1',  // 썸네일 비율
-    subheadingImageRatio: localStorage.getItem('subheadingImageRatio') || '1:1',  // 소제목 비율
-    thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',  // 썸네일 텍스트
-    scAutoThumbnailSetting: localStorage.getItem('scAutoThumbnailSetting') === 'true',  // 자동 썸네일
+    // [Phase 7.1-e] 진입점 1회 해석 스냅샷 사용
+    thumbnailImageRatio: maPipelineCfg.image.thumbnailImageRatio,  // 썸네일 비율
+    subheadingImageRatio: maPipelineCfg.image.subheadingImageRatio,  // 소제목 비율
+    thumbnailTextInclude: maPipelineCfg.image.thumbnailTextInclude,  // 썸네일 텍스트
+    scAutoThumbnailSetting: localStorage.getItem('scAutoThumbnailSetting') === 'true',  // 자동 썸네일 (sc 클러스터 — 7.1-g)
   };
 
   // ✅ [2026-03-11 FIX] datetime-local 값에서 날짜+시간 모두 추출 (기존: 날짜만 추출하여 시간 손실)
