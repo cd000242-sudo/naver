@@ -1,428 +1,85 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÈÄ±â & FAQ ? Leaders Pro</title>
-    <meta name="description" content="Leaders Pro ½ÇÁ¦ »ç¿ëÀÚ ÈÄ±â¿Í ÀÚÁÖ ¹¯´Â Áú¹®. ±¸¸Å °í°´´ÔµéÀÇ »ı»ıÇÑ °æÇèÀ» È®ÀÎÇÏ¼¼¿ä.">
-    <link rel="icon" type="image/jpeg" href="favicon.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <style>
-        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
-        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
-        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
-        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
-        body::after { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 10% 5%, rgba(255,183,197,0.07) 0%, transparent 40%), radial-gradient(ellipse at 90% 10%, rgba(255,218,233,0.05) 0%, transparent 35%), radial-gradient(ellipse at 50% 95%, rgba(255,182,193,0.04) 0%, transparent 40%), url('spring-bg.png') center/cover no-repeat fixed; pointer-events: none; z-index: 0; opacity: 0.35; }
-        .kakao-float { position: fixed; bottom: 30px; right: 24px; z-index: 10001; display: flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 50px; background: rgba(60, 29, 0, 0.85); border: 1px solid rgba(254, 229, 0, 0.4); backdrop-filter: blur(16px); cursor: grab; user-select: none; text-decoration: none; box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 20px rgba(254,229,0,0.15); transition: transform 0.2s, box-shadow 0.2s; font-family: 'Pretendard Variable', 'Inter', sans-serif; }
-        .kakao-float:hover { transform: scale(1.05); }
-        .kakao-float-icon { width: 28px; height: 28px; background: #fee500; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-        .kakao-float-text { color: #fee500; font-weight: 700; font-size: 14px; white-space: nowrap; }
-        .kakao-float-pulse { position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #ff3b5c; animation: kakaoPulse 2s ease-in-out infinite; }
-        @keyframes kakaoPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.6; } }
-        .youtube-float { position: fixed; bottom: 30px; left: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 0, 0, 0.85); border: 1px solid rgba(255, 100, 100, 0.4); backdrop-filter: blur(12px); text-decoration: none; box-shadow: 0 4px 20px rgba(255,0,0,0.3); transition: all 0.3s; font-size: 22px; }
-        .youtube-float:hover { transform: scale(1.1); }
-
-        /* ========== REVIEW FORM ========== */
-        .review-write-section { max-width: 700px; margin: 48px auto 0; padding: 36px; background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.2); border-radius: 20px; backdrop-filter: blur(12px); }
-        .review-write-title { font-size: 1.3rem; font-weight: 700; color: var(--gold); margin-bottom: 8px; text-align: center; }
-        .review-write-desc { font-size: 0.85rem; color: var(--text-secondary); text-align: center; margin-bottom: 24px; }
-        .review-verify { display: flex; gap: 12px; margin-bottom: 20px; }
-        .review-verify input { flex: 1; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: var(--text-primary); font-size: 0.9rem; outline: none; transition: border 0.3s; }
-        .review-verify input:focus { border-color: var(--gold); }
-        .review-verify-btn { padding: 12px 24px; background: linear-gradient(135deg, var(--gold), #d4a012); color: #1a1a2e; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; white-space: nowrap; }
-        .review-verify-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
-        .review-verify-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .review-form-body { display: none; }
-        .review-form-body.active { display: block; }
-        .review-stars { display: flex; gap: 6px; justify-content: center; margin-bottom: 16px; }
-        .review-star { font-size: 32px; cursor: pointer; transition: transform 0.2s; color: rgba(255,255,255,0.2); }
-        .review-star:hover, .review-star.active { color: #f5c842; transform: scale(1.15); }
-        .review-field { width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; color: var(--text-primary); font-size: 0.9rem; margin-bottom: 12px; outline: none; resize: vertical; font-family: inherit; transition: border 0.3s; box-sizing: border-box; }
-        .review-field:focus { border-color: var(--gold); }
-        .review-field::placeholder { color: rgba(255,255,255,0.3); }
-        .review-submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--gold), #d4a012); color: #1a1a2e; font-weight: 700; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; transition: all 0.3s; }
-        .review-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,168,76,0.3); }
-        .review-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .review-msg { text-align: center; padding: 12px; margin-top: 12px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; display: none; }
-        .review-msg.success { display: block; background: rgba(68,215,182,0.1); color: #44d7b6; border: 1px solid rgba(68,215,182,0.3); }
-        .review-msg.error { display: block; background: rgba(255,59,92,0.1); color: #ff3b5c; border: 1px solid rgba(255,59,92,0.3); }
-        /* Dynamic reviews */
-        .dynamic-reviews { margin-top: 32px; }
-        .dynamic-review-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
-        .dynamic-review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-        .dynamic-review-author { font-weight: 600; color: var(--text-primary); }
-        .dynamic-review-date { font-size: 0.8rem; color: var(--text-secondary); }
-        .dynamic-review-stars { color: #f5c842; margin-bottom: 8px; }
-        .dynamic-review-text { color: var(--text-secondary); line-height: 1.7; }
-        @media (max-width: 768px) {
-            .review-verify { flex-direction: column; }
-            .kakao-float { bottom: 24px; right: 16px; padding: 12px 18px; }
-            .youtube-float { bottom: 24px; left: 16px; width: 44px; height: 44px; font-size: 18px; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro ë„¤ì´ë²„ ìë™í™” íˆ´ Â· AI ë¸”ë¡œê·¸ ìë™ ë°œí–‰</title>
+    <meta name="description" content="ë¦¬ë”ìŠ¤í”„ë¡œ(Leaders Pro)ëŠ” ë„¤ì´ë²„ ë¸”ë¡œê·¸ ìë™í™”, AI ê¸€ì“°ê¸°, ì´ë¯¸ì§€ ìƒì„±, ìë™ ë°œí–‰ì„ í•œ ë²ˆì— ì²˜ë¦¬í•˜ëŠ” ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜ì…ë‹ˆë‹¤. í‚¤ì›Œë“œë§Œ ë„£ìœ¼ë©´ ì‚¬ëŒì´ ì“´ ê²ƒì²˜ëŸ¼ ê¸€Â·ì´ë¯¸ì§€Â·ë°œí–‰ê¹Œì§€ ìë™ìœ¼ë¡œ ì§„í–‰í•©ë‹ˆë‹¤." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="naverbot" content="index, follow" />
+    <meta name="google-site-verification" content="J8UjZf8cZq9Nl52VyhB_ppk9i6saE_AJ1xbh3EfpU88" />
+    <meta name="keywords" content="ë¦¬ë”ìŠ¤í”„ë¡œ, Leaders Pro, ë¦¬ë”ìŠ¤ í”„ë¡œ, ë„¤ì´ë²„ ìë™í™” íˆ´, ë„¤ì´ë²„ ë¸”ë¡œê·¸ ìë™í™”, AI ë¸”ë¡œê·¸ ìë™ ë°œí–‰, ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜" />
+    <link rel="canonical" href="https://www.leaderspro.kr/" />
+    <link rel="alternate" type="application/rss+xml" title="ë¦¬ë”ìŠ¤í”„ë¡œ ì—…ë°ì´íŠ¸" href="https://www.leaderspro.kr/rss.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content="ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro" />
+    <meta property="og:title" content="ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro ë„¤ì´ë²„ ìë™í™” íˆ´ Â· AI ë¸”ë¡œê·¸ ìë™ ë°œí–‰" />
+    <meta property="og:description" content="ë¦¬ë”ìŠ¤í”„ë¡œëŠ” ë„¤ì´ë²„ ë¸”ë¡œê·¸ ê¸€ì“°ê¸°, ì´ë¯¸ì§€ ìƒì„±, ìë™ ë°œí–‰ì„ í•œ ë²ˆì— ì²˜ë¦¬í•˜ëŠ” AI ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜ì…ë‹ˆë‹¤." />
+    <meta property="og:url" content="https://www.leaderspro.kr/" />
+    <meta property="og:image" content="https://www.leaderspro.kr/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro ë„¤ì´ë²„ ìë™í™” íˆ´" />
+    <meta name="twitter:description" content="AI ê¸€ì“°ê¸°ë¶€í„° ì´ë¯¸ì§€ ìƒì„±, ë„¤ì´ë²„ ë¸”ë¡œê·¸ ìë™ ë°œí–‰ê¹Œì§€ í•œ ë²ˆì— ì²˜ë¦¬í•˜ëŠ” ë¦¬ë”ìŠ¤í”„ë¡œ ê³µì‹ ì‚¬ì´íŠ¸ì…ë‹ˆë‹¤." />
+    <meta name="twitter:image" content="https://www.leaderspro.kr/og-image.jpg" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.leaderspro.kr/#organization",
+          "name": "ë¦¬ë”ìŠ¤í”„ë¡œ",
+          "alternateName": ["Leaders Pro", "ë¦¬ë”ìŠ¤ í”„ë¡œ", "Better Life Naver", "Leaders Pro ë„¤ì´ë²„ ìë™í™”"],
+          "url": "https://www.leaderspro.kr/",
+          "logo": "https://www.leaderspro.kr/logo.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "availableLanguage": "Korean"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.leaderspro.kr/#website",
+          "url": "https://www.leaderspro.kr/",
+          "name": "ë¦¬ë”ìŠ¤í”„ë¡œ",
+          "alternateName": "Leaders Pro",
+          "inLanguage": "ko-KR",
+          "publisher": { "@id": "https://www.leaderspro.kr/#organization" }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://www.leaderspro.kr/#software",
+          "name": "ë¦¬ë”ìŠ¤í”„ë¡œ ë„¤ì´ë²„ ìë™í™” íˆ´",
+          "alternateName": "Leaders Pro",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Windows, macOS",
+          "url": "https://www.leaderspro.kr/",
+          "description": "ë„¤ì´ë²„ ë¸”ë¡œê·¸ ê¸€ì“°ê¸°, ì´ë¯¸ì§€ ìƒì„±, ìë™ ë°œí–‰ì„ ì§€ì›í•˜ëŠ” AI ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜ì…ë‹ˆë‹¤.",
+          "publisher": { "@id": "https://www.leaderspro.kr/#organization" }
         }
-    </style>
-
-    <style>
-        /* CHERRY BLOSSOM */
-        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
-        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
-        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
-        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
-        /* MUSIC TOGGLE */
-        .music-toggle { position: fixed; bottom: 170px; right: 24px; z-index: 10000; width: 52px; height: 52px; border-radius: 50%; background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5); backdrop-filter: blur(12px); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
-        .music-toggle:hover { transform: scale(1.1); background: rgba(255,183,197,0.4); box-shadow: 0 6px 30px rgba(255,107,138,0.4); }
-        .music-toggle.playing { animation: musicPulse 1.5s ease-in-out infinite; }
-        @keyframes musicPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); } 50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); } }
-        .music-hint { position: fixed; bottom: 108px; right: 84px; z-index: 10000; background: rgba(255,183,197,0.92); color: #1a0a10; padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 20px rgba(255,107,138,0.3); animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both; pointer-events: none; }
-        .music-hint::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92); }
-        @keyframes hintFadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes hintFadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
-        .music-toggle.attention { animation: bounceAttention 1s ease-in-out 3; }
-        @keyframes bounceAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
-        @media (max-width: 768px) { .music-toggle { bottom: 90px; } }
-    </style>
+      ]
+    }
+    </script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ğŸ‘‘</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://s.ytimg.com" />
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/index-_-6MH-KZ.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/router-BCNeJdl_.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-DEZw6Cgu.css">
 </head>
-
 <body>
-    <canvas id="particles-canvas"></canvas>
-
-    <nav class="navbar" id="navbar">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-brand">
-                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
-                <span class="nav-brand-text">Leaders Pro</span>
-            </a>
-            <button class="nav-hamburger" id="nav-hamburger" aria-label="¸Ş´º ¿­±â" onclick="toggleMobileMenu()">
-                <span></span><span></span><span></span>
-            </button>
-            <div class="nav-links" id="nav-links">
-                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">È¨</a>
-                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">Á¦Ç°Á¤º¸</a>
-                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">±¸¸Å</a>
-                <a href="reviews.html" class="nav-link active" onclick="closeMobileMenu()">ÈÄ±â</a>
-                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">Ä¿¹Â´ÏÆ¼</a>
-                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">´Ù¿î·Îµå</a>
-                <a href="lookup.html" class="nav-link">ÁÖ¹®Á¶È¸</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- ??? TESTIMONIALS ??? -->
-    <section class="section section-proof" id="social-proof" style="padding-top: 120px;">
-        <div class="section-inner">
-            <div class="section-header">
-                <span class="section-tag">TESTIMONIALS</span>
-                <h2 class="section-title">½ÇÁ¦ »ç¿ëÀÚµéÀÇ ÀÌ¾ß±â</h2>
-                <p class="section-desc">Leaders Pro¸¦ °æÇèÇÑ ºĞµéÀÇ »ı»ıÇÑ ÈÄ±â</p>
-            </div>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">ºí·Î±× 10°³¸¦ È¥ÀÚ ¿î¿µÇÏ´Âµ¥, <strong>¸®´õ½º ÇÁ·Î ¾ø¾úÀ¸¸é ºÒ°¡´É</strong>Çß¾î¿ä. Ãâ±Ù Àü¿¡ Å°¿öµå¸¸ ¼¼ÆÃÇÏ¸é Åğ±ÙÇÒ ¶§ 50°ÇÀÌ ¿Ã¶ó°¡ ÀÖ½À´Ï´Ù.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">K</div>
-                        <div class="author-info"><strong>K ´ëÇ¥</strong><span>¸¶ÄÉÆÃ ¿¡ÀÌÀü½Ã ¡¤ 10°³¿ù »ç¿ë</span></div>
-                    </div>
-                    <div class="testimonial-result"><span class="result-badge">?? ¿ù ¹æ¹®ÀÚ 12¸¸ ´Ş¼º</span></div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">ÄíÆÎ ÆÄÆ®³Ê½º ºí·Î±×¸¦ 4°³ µ¹¸®°í ÀÖ´Âµ¥, ¼îÇÎ Ä¿³ØÆ® ±â´ÉÀ¸·Î <strong>¿ù ¼öÀÍÀÌ 3¹è</strong> ¶Ù¾ú¾î¿ä. AI°¡ »ı¼ºÇÑ ¸®ºä ±ÛÀÌ Á¤¸» ÀÚ¿¬½º·¯¿ö¿ä.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">P</div>
-                        <div class="author-info"><strong>P´Ô</strong><span>Á¦ÈŞ ¸¶ÄÉÅÍ ¡¤ 6°³¿ù »ç¿ë</span></div>
-                    </div>
-                    <div class="testimonial-result"><span class="result-badge">?? ¿ù ¼öÀÍ 3¹è ¼ºÀå</span></div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">"</div>
-                    <p class="testimonial-text">±Û·Î¹ú ºí·Î±× 5°³¸¦ Leaders OrbitÀ¸·Î ¿î¿µ ÁßÀÔ´Ï´Ù. <strong>¾Öµå¼¾½º ½ÂÀÎÀÌ 2ÁÖ ¸¸¿¡</strong> ¶³¾îÁ³°í, Áö±İÀº ¿ù $400 ÀÌ»ó ¹ú°í ÀÖ¾î¿ä.</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">L</div>
-                        <div class="author-info"><strong>L´Ô</strong><span>±Û·Î¹ú ºí·Î°Å ¡¤ 8°³¿ù »ç¿ë</span></div>
-                    </div>
-                    <div class="testimonial-result"><span class="result-badge">?? ¿ù $400+ ¾Öµå¼¾½º ¼öÀÍ</span></div>
-                </div>
-            </div>
-
-            <!-- Dynamic user reviews -->
-            <div class="dynamic-reviews" id="dynamic-reviews"></div>
-
-            <!-- ??? REVIEW WRITE FORM ??? -->
-            <div class="review-write-section" id="review-write">
-                <h3 class="review-write-title">?? ÈÄ±â ÀÛ¼ºÇÏ±â</h3>
-                <p class="review-write-desc">±¸¸Å °í°´ÀÌ½Å°¡¿ä? ÁÖ¹®¹øÈ£¿Í ÀÌ¸ŞÀÏ·Î ÀÎÁõ ÈÄ ÈÄ±â¸¦ ³²°ÜÁÖ¼¼¿ä.</p>
-
-                <div class="review-verify" id="review-verify">
-                    <input type="text" id="review-order-id" placeholder="ÁÖ¹®¹øÈ£ (¿¹: LP-1234567890-ABCDEF)">
-                    <input type="email" id="review-email" placeholder="°áÁ¦ ½Ã »ç¿ëÇÑ ÀÌ¸ŞÀÏ">
-                    <button class="review-verify-btn" id="review-verify-btn" onclick="verifyPurchase()">ÀÎÁõÇÏ±â</button>
-                </div>
-
-                <div class="review-form-body" id="review-form-body">
-                    <div class="review-stars" id="review-stars">
-                        <span class="review-star" data-star="1" onclick="setRating(1)">¡Ú</span>
-                        <span class="review-star" data-star="2" onclick="setRating(2)">¡Ú</span>
-                        <span class="review-star" data-star="3" onclick="setRating(3)">¡Ú</span>
-                        <span class="review-star" data-star="4" onclick="setRating(4)">¡Ú</span>
-                        <span class="review-star" data-star="5" onclick="setRating(5)">¡Ú</span>
-                    </div>
-                    <input type="text" class="review-field" id="review-summary" placeholder="ÇÑÁÙ ¿ä¾à (¿¹: ºí·Î±× ¿î¿µÀÌ Á¤¸» ÆíÇØÁ³¾î¿ä!)" maxlength="50">
-                    <textarea class="review-field" id="review-detail" rows="4" placeholder="»ó¼¼ ÈÄ±â¸¦ ÀÛ¼ºÇØÁÖ¼¼¿ä..." maxlength="500"></textarea>
-                    <button class="review-submit-btn" id="review-submit-btn" onclick="submitReview()">ÈÄ±â µî·ÏÇÏ±â</button>
-                </div>
-                <div class="review-msg" id="review-msg"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ??? FAQ SECTION ??? -->
-    <section class="section" id="faq">
-        <div class="section-inner">
-            <div class="section-header">
-                <span class="section-tag">FAQ</span>
-                <h2 class="section-title">ÀÚÁÖ ¹¯´Â Áú¹®</h2>
-                <p class="section-desc">±Ã±İÇÑ Á¡À» ºü¸£°Ô ÇØ°áÇÏ¼¼¿ä</p>
-            </div>
-
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Leaders Pro´Â ¾î¶² ÇÁ·Î±×·¥ÀÎ°¡¿ä?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><p>Leaders Pro´Â AI ±â¹İ ³×ÀÌ¹ö ºí·Î±× ÀÚµ¿È­ ¼Ö·ç¼ÇÀÔ´Ï´Ù. Å°¿öµå¸¸ ÀÔ·ÂÇÏ¸é GPT-4o, Gemini 2.5 µî 7Á¾ÀÇ AI°¡ 6,000~10,000ÀÚÀÇ ÀÚ¿¬½º·¯¿î Æ÷½ºÆÃÀ» ÀÛ¼ºÇÏ°í, AI ÀÌ¹ÌÁö¡¤¿µ»óÀ» »ı¼ºÇÏ¸ç, ³×ÀÌ¹ö ºí·Î±×¿¡ ÀÚµ¿À¸·Î ¹ßÇàÇÕ´Ï´Ù.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>º¿ °¨Áö¿¡ °É¸®Áö ¾Ê³ª¿ä?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><p>»ç¶÷Ã³·³ Å¸ÀÌÇÎÇÏ´Â °í±Ş º¿ È¸ÇÇ ¿£ÁøÀ» Å¾ÀçÇß½À´Ï´Ù. ·£´ı µô·¹ÀÌ, ÃÖÀû ½Ã°£´ë ¹ßÇà, Äğ´Ù¿î ±â°£ µîÀÇ ±â¼ú·Î º¿ °¨Áö¸¦ ¿ìÈ¸ÇÕ´Ï´Ù. ½ÇÁ¦·Î ¼öÃµ ¸íÀÇ »ç¿ëÀÚ°¡ ¾ÈÀüÇÏ°Ô »ç¿ë ÁßÀÔ´Ï´Ù.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>°èÁ¤À» ¸î °³±îÁö µî·ÏÇÒ ¼ö ÀÖ³ª¿ä?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><p>°èÁ¤ ¼ö Á¦ÇÑÀÌ ¾ø½À´Ï´Ù. ³×ÀÌ¹ö ºí·Î±× ID¸¦ ¿øÇÏ´Â ¸¸Å­ µî·ÏÇÏ°í, °¢ °èÁ¤º°·Î µ¶¸³ÀûÀÎ ½ºÄÉÁÙÀ» ¼³Á¤ÇÏ¿© ÅëÇÕ °ü¸®ÇÒ ¼ö ÀÖ½À´Ï´Ù.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>È¯ºÒÀÌ °¡´ÉÇÑ°¡¿ä?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><p>¶óÀÌ¼±½º ÄÚµå ¹ß±Ş ÈÄ 7ÀÏ ÀÌ³», ¼­ºñ½º ¹Ì»ç¿ë ½Ã Àü¾× È¯ºÒ °¡´ÉÇÕ´Ï´Ù. È¯ºÒ ¿äÃ»Àº cd000242@gmail.comÀ¸·Î º¸³»ÁÖ¼¼¿ä. <a href="refund.html" style="color:var(--gold);">È¯ºÒÁ¤Ã¥ ÀÚ¼¼È÷ º¸±â ¡æ</a></p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Leaders Orbit°ú Leaders ProÀÇ Â÷ÀÌ´Â?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><p>Leaders Pro´Â <strong>³×ÀÌ¹ö ºí·Î±× Àü¿ë</strong>, Leaders OrbitÀº <strong>¿öµåÇÁ·¹½º + ºí·Î±×½ºÆÌ</strong> ±Û·Î¹ú ÇÃ·§ÆûÀ» ´ë»óÀ¸·Î ÇÕ´Ï´Ù. OrbitÀº 100% API ±â¹İÀÌ¶ó º¿ °¨Áö °ÆÁ¤ ¾øÀÌ ±¸±Û ¾Öµå¼¾½º ¼öÀÍÈ­¿¡ ÃÖÀûÈ­µÇ¾î ÀÖ½À´Ï´Ù.</p></div>
-                </div>
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>±â±â º¯°æ ½Ã ¾î¶»°Ô ÇÏ³ª¿ä?</span>
-                        <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                    </button>
-                    <div class="faq-answer"><p>¶óÀÌ¼±½º´Â µ¿½Ã¿¡ 1´ëÀÇ ±â±â¿¡¼­¸¸ »ç¿ë °¡´ÉÇÕ´Ï´Ù. ±â±â¸¦ º¯°æÇÏ¸é ÀÌÀü ±â±â¿¡¼­ ÀÚµ¿À¸·Î ·Î±×¾Æ¿ôµË´Ï´Ù. º°µµÀÇ ÀÌÀü ÀıÂ÷ ¾øÀÌ »õ ±â±â¿¡¼­ ¹Ù·Î ·Î±×ÀÎÇÏ½Ã¸é µË´Ï´Ù.</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-brand"><img src="logo.png" alt="Leaders Pro" class="footer-logo"><span>Leaders Pro</span></div>
-            <div class="footer-links">
-                <a href="terms.html">ÀÌ¿ë¾à°ü</a>
-                <a href="refund.html">È¯ºÒÁ¤Ã¥</a>
-                <a href="privacy.html">°³ÀÎÁ¤º¸Ã³¸®¹æÄ§</a>
-                <a href="lookup.html">ÁÖ¹® Á¶È¸</a>
-                <a href="mailto:cd000242@gmail.com">°í°´ ¹®ÀÇ</a>
-            </div>
-            <div class="footer-biz">
-                <p>»óÈ£: Leaders Pro | ´ëÇ¥: ¹Ú¼ºÇö | »ç¾÷ÀÚµî·Ï¹øÈ£: 515-97-01802</p>
-                <p>ÁÖ¼Ò: °æ³² ±èÇØ½Ã ÀåÀ¯·Î334¹ø±æ9</p>
-                <p>ÀÌ¸ŞÀÏ: tjdgus24280@naver.com | ÀüÈ­: 010-7545-1645</p>
-            </div>
-            <p class="footer-copy">¨Ï 2026 Leaders Pro. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-        let verifiedOrderId = null;
-        let verifiedEmail = null;
-        let selectedRating = 0;
-
-        // ===== Verify Purchase =====
-        async function verifyPurchase() {
-            const orderId = document.getElementById('review-order-id').value.trim();
-            const email = document.getElementById('review-email').value.trim();
-            const btn = document.getElementById('review-verify-btn');
-            const msg = document.getElementById('review-msg');
-
-            if (!orderId || !email) { showMsg('ÁÖ¹®¹øÈ£¿Í ÀÌ¸ŞÀÏÀ» ¸ğµÎ ÀÔ·ÂÇØÁÖ¼¼¿ä.', 'error'); return; }
-
-            btn.disabled = true; btn.textContent = 'ÀÎÁõ Áß...';
-
-            try {
-                const url = `${GAS_URL}?action=check-order&orderId=${encodeURIComponent(orderId)}&email=${encodeURIComponent(email)}`;
-                const res = await fetch(url);
-                const data = await res.json();
-
-                if (data.success && data.order) {
-                    verifiedOrderId = orderId;
-                    verifiedEmail = email;
-                    document.getElementById('review-form-body').classList.add('active');
-                    document.getElementById('review-verify').style.display = 'none';
-                    showMsg('? ±¸¸Å È®ÀÎ ¿Ï·á! ÈÄ±â¸¦ ÀÛ¼ºÇØÁÖ¼¼¿ä.', 'success');
-                } else {
-                    showMsg('ÁÖ¹® Á¤º¸¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù. ÁÖ¹®¹øÈ£¿Í ÀÌ¸ŞÀÏÀ» È®ÀÎÇØÁÖ¼¼¿ä.', 'error');
-                }
-            } catch (err) {
-                showMsg('ÀÎÁõ Áß ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù. Àá½Ã ÈÄ ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä.', 'error');
-            }
-            btn.disabled = false; btn.textContent = 'ÀÎÁõÇÏ±â';
-        }
-
-        // ===== Star Rating =====
-        function setRating(n) {
-            selectedRating = n;
-            document.querySelectorAll('.review-star').forEach((star, i) => {
-                star.classList.toggle('active', i < n);
-            });
-        }
-
-        // ===== Submit Review =====
-        async function submitReview() {
-            const summary = document.getElementById('review-summary').value.trim();
-            const detail = document.getElementById('review-detail').value.trim();
-            const btn = document.getElementById('review-submit-btn');
-
-            if (selectedRating === 0) { showMsg('º°Á¡À» ¼±ÅÃÇØÁÖ¼¼¿ä.', 'error'); return; }
-            if (!summary) { showMsg('ÇÑÁÙ ¿ä¾àÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.', 'error'); return; }
-
-            btn.disabled = true; btn.textContent = 'µî·Ï Áß...';
-
-            try {
-                const res = await fetch(GAS_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({
-                        action: 'submit-review',
-                        orderId: verifiedOrderId,
-                        email: verifiedEmail,
-                        rating: selectedRating,
-                        summary: summary,
-                        detail: detail,
-                        timestamp: new Date().toISOString()
-                    })
-                });
-                const data = await res.json();
-
-                if (data.success) {
-                    showMsg('?? ÈÄ±â°¡ µî·ÏµÇ¾ú½À´Ï´Ù! °¨»çÇÕ´Ï´Ù.', 'success');
-                    document.getElementById('review-form-body').classList.remove('active');
-                    btn.textContent = '? µî·Ï ¿Ï·á';
-                    // Reload reviews
-                    loadReviews();
-                } else {
-                    showMsg(data.message || 'ÈÄ±â µî·Ï¿¡ ½ÇÆĞÇß½À´Ï´Ù.', 'error');
-                    btn.disabled = false; btn.textContent = 'ÈÄ±â µî·ÏÇÏ±â';
-                }
-            } catch (err) {
-                showMsg('µî·Ï Áß ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.', 'error');
-                btn.disabled = false; btn.textContent = 'ÈÄ±â µî·ÏÇÏ±â';
-            }
-        }
-
-        function showMsg(text, type) {
-            const msg = document.getElementById('review-msg');
-            msg.className = 'review-msg ' + type;
-            msg.textContent = text;
-        }
-
-        // ===== Load Dynamic Reviews =====
-        async function loadReviews() {
-            try {
-                const res = await fetch(`${GAS_URL}?action=get-reviews`);
-                const data = await res.json();
-                if (data.success && data.reviews && data.reviews.length > 0) {
-                    const container = document.getElementById('dynamic-reviews');
-                    container.innerHTML = '<h3 style="text-align:center; color:var(--gold); margin-bottom:20px; font-size:1.1rem;">?? ±¸¸Å °í°´ ÈÄ±â</h3>';
-                    data.reviews.forEach(r => {
-                        const stars = '¡Ú'.repeat(r.rating) + '¡Ù'.repeat(5 - r.rating);
-                        const date = new Date(r.timestamp).toLocaleDateString('ko-KR');
-                        container.innerHTML += `
-                            <div class="dynamic-review-card">
-                                <div class="dynamic-review-header">
-                                    <span class="dynamic-review-author">${r.email.replace(/(.{2}).*(@.*)/, '$1***$2')}</span>
-                                    <span class="dynamic-review-date">${date}</span>
-                                </div>
-                                <div class="dynamic-review-stars">${stars}</div>
-                                <p class="dynamic-review-text"><strong>${r.summary}</strong>${r.detail ? '<br>' + r.detail : ''}</p>
-                            </div>
-                        `;
-                    });
-                }
-            } catch (err) { console.log('Reviews load failed:', err); }
-        }
-
-        // ===== FAQ Toggle =====
-        function toggleFaq(btn) {
-            const item = btn.parentElement;
-            const isOpen = item.classList.contains('open');
-            document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-            if (!isOpen) item.classList.add('open');
-        }
-
-        // ===== Common =====
-        function initParticles() {
-            const canvas = document.getElementById('particles-canvas'); if (!canvas) return;
-            const ctx = canvas.getContext('2d'); let particles = []; let w, h;
-            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 3; } resize(); window.addEventListener('resize', resize);
-            class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * w; this.y = Math.random() * h; this.size = Math.random() * 2 + 0.5; this.speedY = -(Math.random() * 0.3 + 0.1); this.speedX = (Math.random() - 0.5) * 0.2; this.opacity = Math.random() * 0.5 + 0.1; this.gold = Math.random() > 0.3; } update() { this.y += this.speedY; this.x += this.speedX; this.opacity += (Math.random() - 0.5) * 0.01; this.opacity = Math.max(0.05, Math.min(0.6, this.opacity)); if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; } } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fillStyle = this.gold ? `rgba(201, 168, 76, ${this.opacity})` : `rgba(255, 255, 255, ${this.opacity * 0.4})`; ctx.fill(); } }
-            for (let i = 0; i < 80; i++) particles.push(new Particle());
-            function animate() { ctx.clearRect(0, 0, w, h); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); } animate();
-        }
-        function initScrollAnimations() { const observer = new IntersectionObserver((entries) => { entries.forEach((entry, i) => { if (entry.isIntersecting) { entry.target.style.transitionDelay = `${i * 0.08}s`; entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 }); document.querySelectorAll('.fade-in, .testimonial-card, .faq-item').forEach(el => observer.observe(el)); }
-        function initNavbar() { const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); }); }
-        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
-        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initParticles(); initScrollAnimations(); initNavbar();
-            loadReviews();
-        });
-    </script>
-
-    <div class="petal-container" id="petalContainer"></div>
-    <script>
-    (function() { const container = document.getElementById('petalContainer'); if (!container) return; for (let i = 0; i < 30; i++) { const petal = document.createElement('div'); petal.className = 'petal'; const size = Math.random() * 14 + 8; petal.style.width = size + 'px'; petal.style.height = size + 'px'; petal.style.left = Math.random() * 100 + '%'; petal.style.animationDuration = (Math.random() * 8 + 7) + 's'; petal.style.animationDelay = (Math.random() * 10) + 's'; container.appendChild(petal); } })();
-    </script>
-    <a href="https://www.youtube.com/@leadernam-s5e" target="_blank" rel="noopener" class="youtube-float" title="°ø½Ä À¯Æ©ºê Ã¤³Î">¢º</a>
-    <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" class="kakao-float" id="kakaoFloat" title="1:1 Ä«Ä«¿ÀÅå ¹®ÀÇ">
-        <div class="kakao-float-pulse"></div>
-        <div class="kakao-float-icon">??</div>
-        <span class="kakao-float-text">1:1 ¹®ÀÇ</span>
-    </a>
-
-<!-- CHERRY BLOSSOM PETALS -->
-<div class="petal-container" id="petalContainer"></div>
-
-<!-- MUSIC TOGGLE -->
-<button class="music-toggle attention" id="musicToggle" title="?? º½ ¹è°æÀ½¾Ç ÄÑ±â/²ô±â">??</button>
-<div class="music-hint" id="musicHint">?? Å¬¸¯ÇÏ¸é º½ À½¾ÇÀÌ Èê·¯¿ä</div>
-
-<script src="music.js"></script>
+    <noscript>
+        <main>
+            <h1>ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro ë„¤ì´ë²„ ìë™í™” íˆ´</h1>
+            <p>ë¦¬ë”ìŠ¤í”„ë¡œëŠ” ë„¤ì´ë²„ ë¸”ë¡œê·¸ ìë™í™”, AI ê¸€ì“°ê¸°, ì´ë¯¸ì§€ ìƒì„±, ìë™ ë°œí–‰ì„ ì§€ì›í•˜ëŠ” ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜ì…ë‹ˆë‹¤.</p>
+            <p><a href="https://www.leaderspro.kr/products.html">ì œí’ˆ ì†Œê°œ</a> Â· <a href="https://www.leaderspro.kr/pricing.html">ìš”ê¸ˆì œ</a> Â· <a href="https://www.leaderspro.kr/download.html">ë‹¤ìš´ë¡œë“œ</a></p>
+        </main>
+    </noscript>
+    <div id="root"></div>
 </body>
 </html>

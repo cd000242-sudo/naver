@@ -1,273 +1,85 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ÀÌ¿ë¾à°ü ? Leaders Pro</title>
-    <link rel="icon" type="image/jpeg" href="favicon.jpg"><text y='.9em' font-size='90'>??</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <style>
-        .legal-container {
-            position: relative;
-            z-index: 1;
-            max-width: 780px;
-            margin: 0 auto;
-            padding: 120px 32px 80px;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro ë„¤ì´ë²„ ìë™í™” íˆ´ Â· AI ë¸”ë¡œê·¸ ìë™ ë°œí–‰</title>
+    <meta name="description" content="ë¦¬ë”ìŠ¤í”„ë¡œ(Leaders Pro)ëŠ” ë„¤ì´ë²„ ë¸”ë¡œê·¸ ìë™í™”, AI ê¸€ì“°ê¸°, ì´ë¯¸ì§€ ìƒì„±, ìë™ ë°œí–‰ì„ í•œ ë²ˆì— ì²˜ë¦¬í•˜ëŠ” ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜ì…ë‹ˆë‹¤. í‚¤ì›Œë“œë§Œ ë„£ìœ¼ë©´ ì‚¬ëŒì´ ì“´ ê²ƒì²˜ëŸ¼ ê¸€Â·ì´ë¯¸ì§€Â·ë°œí–‰ê¹Œì§€ ìë™ìœ¼ë¡œ ì§„í–‰í•©ë‹ˆë‹¤." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="naverbot" content="index, follow" />
+    <meta name="google-site-verification" content="J8UjZf8cZq9Nl52VyhB_ppk9i6saE_AJ1xbh3EfpU88" />
+    <meta name="keywords" content="ë¦¬ë”ìŠ¤í”„ë¡œ, Leaders Pro, ë¦¬ë”ìŠ¤ í”„ë¡œ, ë„¤ì´ë²„ ìë™í™” íˆ´, ë„¤ì´ë²„ ë¸”ë¡œê·¸ ìë™í™”, AI ë¸”ë¡œê·¸ ìë™ ë°œí–‰, ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜" />
+    <link rel="canonical" href="https://www.leaderspro.kr/" />
+    <link rel="alternate" type="application/rss+xml" title="ë¦¬ë”ìŠ¤í”„ë¡œ ì—…ë°ì´íŠ¸" href="https://www.leaderspro.kr/rss.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:site_name" content="ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro" />
+    <meta property="og:title" content="ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro ë„¤ì´ë²„ ìë™í™” íˆ´ Â· AI ë¸”ë¡œê·¸ ìë™ ë°œí–‰" />
+    <meta property="og:description" content="ë¦¬ë”ìŠ¤í”„ë¡œëŠ” ë„¤ì´ë²„ ë¸”ë¡œê·¸ ê¸€ì“°ê¸°, ì´ë¯¸ì§€ ìƒì„±, ìë™ ë°œí–‰ì„ í•œ ë²ˆì— ì²˜ë¦¬í•˜ëŠ” AI ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜ì…ë‹ˆë‹¤." />
+    <meta property="og:url" content="https://www.leaderspro.kr/" />
+    <meta property="og:image" content="https://www.leaderspro.kr/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro ë„¤ì´ë²„ ìë™í™” íˆ´" />
+    <meta name="twitter:description" content="AI ê¸€ì“°ê¸°ë¶€í„° ì´ë¯¸ì§€ ìƒì„±, ë„¤ì´ë²„ ë¸”ë¡œê·¸ ìë™ ë°œí–‰ê¹Œì§€ í•œ ë²ˆì— ì²˜ë¦¬í•˜ëŠ” ë¦¬ë”ìŠ¤í”„ë¡œ ê³µì‹ ì‚¬ì´íŠ¸ì…ë‹ˆë‹¤." />
+    <meta name="twitter:image" content="https://www.leaderspro.kr/og-image.jpg" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.leaderspro.kr/#organization",
+          "name": "ë¦¬ë”ìŠ¤í”„ë¡œ",
+          "alternateName": ["Leaders Pro", "ë¦¬ë”ìŠ¤ í”„ë¡œ", "Better Life Naver", "Leaders Pro ë„¤ì´ë²„ ìë™í™”"],
+          "url": "https://www.leaderspro.kr/",
+          "logo": "https://www.leaderspro.kr/logo.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "availableLanguage": "Korean"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.leaderspro.kr/#website",
+          "url": "https://www.leaderspro.kr/",
+          "name": "ë¦¬ë”ìŠ¤í”„ë¡œ",
+          "alternateName": "Leaders Pro",
+          "inLanguage": "ko-KR",
+          "publisher": { "@id": "https://www.leaderspro.kr/#organization" }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://www.leaderspro.kr/#software",
+          "name": "ë¦¬ë”ìŠ¤í”„ë¡œ ë„¤ì´ë²„ ìë™í™” íˆ´",
+          "alternateName": "Leaders Pro",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Windows, macOS",
+          "url": "https://www.leaderspro.kr/",
+          "description": "ë„¤ì´ë²„ ë¸”ë¡œê·¸ ê¸€ì“°ê¸°, ì´ë¯¸ì§€ ìƒì„±, ìë™ ë°œí–‰ì„ ì§€ì›í•˜ëŠ” AI ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜ì…ë‹ˆë‹¤.",
+          "publisher": { "@id": "https://www.leaderspro.kr/#organization" }
         }
-
-        .legal-hero {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .legal-hero h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-
-        .legal-hero .effective {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .legal-content {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-lg);
-            padding: 40px;
-            backdrop-filter: blur(20px);
-        }
-
-        .legal-content h2 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin: 32px 0 12px;
-            color: var(--gold-primary);
-        }
-
-        .legal-content h2:first-child {
-            margin-top: 0;
-        }
-
-        .legal-content p,
-        .legal-content li {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 8px;
-        }
-
-        .legal-content ul {
-            padding-left: 20px;
-        }
-
-        .legal-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 32px;
-            padding: 12px 24px;
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-sm);
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all var(--transition-fast);
-        }
-
-        .legal-back:hover {
-            border-color: var(--border-gold);
-            color: var(--gold-primary);
-        }
-    </style>
-
-    <style>
-        /* CHERRY BLOSSOM */
-        .petal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
-        .petal { position: absolute; top: -60px; width: 18px; height: 18px; background: radial-gradient(ellipse at 30% 30%, #ffb7c5 0%, #ff8fa3 40%, #ff6b8a 100%); border-radius: 50% 0 50% 50%; opacity: 0; animation: petalFall linear infinite; filter: blur(0.5px); box-shadow: 0 0 6px rgba(255,183,197,0.3); }
-        .petal:nth-child(odd) { background: radial-gradient(ellipse at 30% 30%, #ffd4e0 0%, #ffaac4 40%, #ff85a1 100%); border-radius: 0 50% 50% 50%; }
-        @keyframes petalFall { 0% { opacity: 0; transform: translateX(0) rotate(0deg) scale(0.8); } 10% { opacity: 0.9; } 90% { opacity: 0.6; } 100% { opacity: 0; transform: translateX(120px) rotate(720deg) scale(0.4) translateY(110vh); } }
-        /* MUSIC TOGGLE */
-        .music-toggle { position: fixed; bottom: 170px; right: 24px; z-index: 10000; width: 52px; height: 52px; border-radius: 50%; background: rgba(255,183,197,0.25); border: 1px solid rgba(255,183,197,0.5); backdrop-filter: blur(12px); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: all 0.3s; box-shadow: 0 4px 20px rgba(255,107,138,0.2); }
-        .music-toggle:hover { transform: scale(1.1); background: rgba(255,183,197,0.4); box-shadow: 0 6px 30px rgba(255,107,138,0.4); }
-        .music-toggle.playing { animation: musicPulse 1.5s ease-in-out infinite; }
-        @keyframes musicPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(255,107,138,0.2); } 50% { box-shadow: 0 4px 30px rgba(255,107,138,0.6), 0 0 60px rgba(255,183,197,0.3); } }
-        .music-hint { position: fixed; bottom: 108px; right: 84px; z-index: 10000; background: rgba(255,183,197,0.92); color: #1a0a10; padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 4px 20px rgba(255,107,138,0.3); animation: hintFadeIn 0.5s ease-out both, hintFadeOut 0.5s 6s ease-in both; pointer-events: none; }
-        .music-hint::after { content: ''; position: absolute; right: -6px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-left-color: rgba(255,183,197,0.92); }
-        @keyframes hintFadeIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes hintFadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
-        .music-toggle.attention { animation: bounceAttention 1s ease-in-out 3; }
-        @keyframes bounceAttention { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
-        @media (max-width: 768px) { .music-toggle { bottom: 90px; } }
-    </style>
-</head>
-
-<body>
-    <canvas id="particles-canvas"></canvas>
-
-    <!-- Navigation -->
-    <nav class="navbar scrolled" id="navbar">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-brand">
-                <img src="logo.png" alt="Leaders Pro" class="nav-logo">
-                <span class="nav-brand-text">Leaders Pro</span>
-            </a>
-            <button class="nav-hamburger" id="nav-hamburger" aria-label="¸Ş´º ¿­±â" onclick="toggleMobileMenu()">
-                <span></span><span></span><span></span>
-            </button>
-            <div class="nav-links" id="nav-links">
-                <a href="index.html" class="nav-link" onclick="closeMobileMenu()">È¨</a>
-                <a href="products.html" class="nav-link" onclick="closeMobileMenu()">Á¦Ç°Á¤º¸</a>
-                <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">±¸¸Å</a>
-                <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">ÈÄ±â</a>
-                <a href="community.html" class="nav-link" onclick="closeMobileMenu()">Ä¿¹Â´ÏÆ¼</a>
-                <a href="download.html" class="nav-link" onclick="closeMobileMenu()">´Ù¿î·Îµå</a>
-                <a href="lookup.html" class="nav-link">ÁÖ¹®Á¶È¸</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="legal-container">
-        <div class="legal-hero">
-            <h1>ÀÌ¿ë¾à°ü</h1>
-            <p class="effective">½ÃÇàÀÏ: 2026³â 3¿ù 24ÀÏ (ÃÖÁ¾ ¼öÁ¤)</p>
-        </div>
-
-        <div class="legal-content">
-            <h2>Á¦1Á¶ (¸ñÀû)</h2>
-            <p>º» ¾à°üÀº Leaders Pro (ÀÌÇÏ "È¸»ç")°¡ Á¦°øÇÏ´Â ºí·Î±× ÀÚµ¿È­ ¼ÒÇÁÆ®¿ş¾î (ÀÌÇÏ "¼­ºñ½º")ÀÇ ÀÌ¿ë Á¶°Ç°ú ÀıÂ÷, ±Ç¸®, ÀÇ¹« ¹× ±âÅ¸ ÇÊ¿äÇÑ »çÇ×À» ±ÔÁ¤ÇÔÀ» ¸ñÀûÀ¸·Î ÇÕ´Ï´Ù.</p>
-
-            <h2>Á¦2Á¶ (Á¤ÀÇ)</h2>
-            <ul>
-                <li>"¼­ºñ½º"¶õ È¸»ç°¡ Á¦°øÇÏ´Â Leaders Pro, Leaders Orbit, Leaders Tistory, Leword µîÀÇ ÀÚµ¿È­ ÇÁ·Î±×·¥À» ÀÇ¹ÌÇÕ´Ï´Ù.</li>
-                <li>"¶óÀÌ¼±½º ÄÚµå"¶õ ¼­ºñ½º ÀÌ¿ëÀ» À§ÇØ ¹ß±ŞµÇ´Â °íÀ¯ÇÑ ÀÎÁõ ÄÚµå¸¦ ÀÇ¹ÌÇÕ´Ï´Ù.</li>
-                <li>"ÀÌ¿ëÀÚ"¶õ º» ¾à°ü¿¡ µ¿ÀÇÇÏ°í ¶óÀÌ¼±½º¸¦ ±¸¸ÅÇÑ ÀÚ¸¦ ÀÇ¹ÌÇÕ´Ï´Ù.</li>
-            </ul>
-
-            <h2>Á¦3Á¶ (¶óÀÌ¼±½º)</h2>
-            <ul>
-                <li>¶óÀÌ¼±½º ÄÚµå´Â ±¸¸ÅÀÚ º»ÀÎ¿¡°Ô¸¸ »ç¿ë ±ÇÇÑÀÌ ºÎ¿©µË´Ï´Ù.</li>
-                <li>1°³¿ù±Ç: ±¸¸ÅÀÏ·ÎºÎÅÍ 30ÀÏ°£ À¯È¿ÇÕ´Ï´Ù.</li>
-                <li>3°³¿ù±Ç: ±¸¸ÅÀÏ·ÎºÎÅÍ 90ÀÏ°£ À¯È¿ÇÕ´Ï´Ù.</li>
-                <li>1³â±Ç: ±¸¸ÅÀÏ·ÎºÎÅÍ 365ÀÏ°£ À¯È¿ÇÕ´Ï´Ù.</li>
-                <li>¿µ±¸Á¦: ±â°£ Á¦ÇÑ ¾øÀÌ »ç¿ë °¡´ÉÇÕ´Ï´Ù.</li>
-                <li>¶óÀÌ¼±½º ÄÚµåÀÇ ¾çµµ, ÀçÆÇ¸Å, °øÀ¯´Â ±İÁöµË´Ï´Ù.</li>
-                <li>µ¿½Ã¿¡ 1´ëÀÇ ±â±â¿¡¼­¸¸ »ç¿ë °¡´ÉÇÕ´Ï´Ù.</li>
-            </ul>
-
-            <h2>Á¦4Á¶ (°áÁ¦ ¹× È¯ºÒ)</h2>
-            <ul>
-                <li>°áÁ¦´Â Åä½ºÆäÀÌ¸ÕÃ÷¸¦ ÅëÇØ Ã³¸®µÇ¸ç, Ä«µå °áÁ¦ ¹× °èÁÂÀÌÃ¼¸¦ Áö¿øÇÕ´Ï´Ù.</li>
-                <li>¸ğµç °¡°İÀº ºÎ°¡°¡Ä¡¼¼(VAT)°¡ Æ÷ÇÔµÈ ±İ¾×ÀÔ´Ï´Ù.</li>
-                <li>¶óÀÌ¼±½º ÄÚµå ¹ß±Ş ÈÄ 7ÀÏ ÀÌ³», ¼­ºñ½º ¹Ì»ç¿ë ½Ã Àü¾× È¯ºÒ °¡´ÉÇÕ´Ï´Ù.</li>
-                <li>¼­ºñ½º »ç¿ë ÀÌ·ÂÀÌ ÀÖ´Â °æ¿ì È¯ºÒÀÌ Á¦ÇÑµÉ ¼ö ÀÖ½À´Ï´Ù.</li>
-                <li>È¯ºÒÀº cd000242@gmail.comÀ¸·Î ¿äÃ»ÇØÁÖ¼¼¿ä.</li>
-            </ul>
-
-            <h2>Á¦5Á¶ (¼­ºñ½º ÀÌ¿ë Á¦ÇÑ)</h2>
-            <p>´ÙÀ½ÀÇ °æ¿ì ¼­ºñ½º ÀÌ¿ëÀÌ Á¦ÇÑµÉ ¼ö ÀÖ½À´Ï´Ù:</p>
-            <ul>
-                <li>¶óÀÌ¼±½º ÄÚµå¸¦ Å¸ÀÎ¿¡°Ô °øÀ¯ÇÏ°Å³ª ÆÇ¸ÅÇÏ´Â ÇàÀ§</li>
-                <li>¼­ºñ½º¸¦ ¿ª°øÇĞ, ºĞÇØ, º¯Á¶ÇÏ´Â ÇàÀ§</li>
-                <li>¼­ºñ½º¸¦ ÀÌ¿ëÇÏ¿© ºÒ¹ıÀûÀÎ È°µ¿À» ÇÏ´Â ÇàÀ§</li>
-            </ul>
-
-            <h2>Á¦6Á¶ (¸éÃ¥)</h2>
-            <ul>
-                <li>³×ÀÌ¹ö µî ¿ÜºÎ ÇÃ·§ÆûÀÇ Á¤Ã¥ º¯°æÀ¸·Î ÀÎÇÑ ¼­ºñ½º ±â´É Á¦ÇÑ¿¡ ´ëÇØ È¸»ç´Â Ã¥ÀÓÀ» ÁöÁö ¾Ê½À´Ï´Ù.</li>
-                <li>ÀÌ¿ëÀÚÀÇ ºÎÁÖÀÇ·Î ÀÎÇÑ ¶óÀÌ¼±½º ÄÚµå ºĞ½Ç¿¡ ´ëÇØ Ã¥ÀÓÁöÁö ¾Ê½À´Ï´Ù. (ÀÌ¸ŞÀÏ ¹é¾÷À» ±ÇÀåÇÕ´Ï´Ù)</li>
-            </ul>
-
-            <h2>Á¦7Á¶ (¾à°ü º¯°æ)</h2>
-            <p>È¸»ç´Â ÇÊ¿ä ½Ã ¾à°üÀ» º¯°æÇÒ ¼ö ÀÖÀ¸¸ç, º¯°æ »çÇ×Àº º» ÆäÀÌÁö¿¡ °Ô½ÃµË´Ï´Ù.</p>
-
-            <a href="index.html" class="legal-back">¡ç ¸ŞÀÎÀ¸·Î µ¹¾Æ°¡±â</a>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <img src="logo.png" alt="Leaders Pro" class="footer-logo">
-                <span>Leaders Pro</span>
-            </div>
-            <div class="footer-biz">
-                <p>»óÈ£: Leaders Pro | ´ëÇ¥: ¹Ú¼ºÇö | »ç¾÷ÀÚµî·Ï¹øÈ£: 515-97-01802</p>
-                <p>ÁÖ¼Ò: °æ³² ±èÇØ½Ã ÀåÀ¯·Î334¹ø±æ9</p>
-                <p>ÀÌ¸ŞÀÏ: tjdgus24280@naver.com | ÀüÈ­: 010-7545-1645</p>
-            </div>
-            <p class="footer-copy">¨Ï 2026 Leaders Pro. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        function initParticles() {
-            const canvas = document.getElementById('particles-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let particles = [], w, h, animId;
-            function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight * 2; }
-            resize(); window.addEventListener('resize', resize);
-            class Particle {
-                constructor() { this.reset(); }
-                reset() {
-                    this.x = Math.random() * w; this.y = Math.random() * h;
-                    this.size = Math.random() * 2 + 0.5;
-                    this.speedY = -(Math.random() * 0.3 + 0.1);
-                    this.speedX = (Math.random() - 0.5) * 0.2;
-                    this.opacity = Math.random() * 0.5 + 0.1;
-                    this.gold = Math.random() > 0.3;
-                }
-                update() {
-                    this.y += this.speedY; this.x += this.speedX;
-                    this.opacity += (Math.random() - 0.5) * 0.01;
-                    this.opacity = Math.max(0.05, Math.min(0.6, this.opacity));
-                    if (this.y < -10) { this.y = h + 10; this.x = Math.random() * w; }
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = this.gold
-                        ? `rgba(201, 168, 76, ${this.opacity})`
-                        : `rgba(255, 255, 255, ${this.opacity * 0.4})`;
-                    ctx.fill();
-                }
-            }
-            for (let i = 0; i < 30; i++) particles.push(new Particle());
-            function animate() {
-                ctx.clearRect(0, 0, w, h);
-                particles.forEach(p => { p.update(); p.draw(); });
-                animId = requestAnimationFrame(animate);
-            }
-            const observer = new IntersectionObserver(([entry]) => {
-                if (entry.isIntersecting) { animate(); } else { cancelAnimationFrame(animId); }
-            });
-            observer.observe(canvas);
-            animate();
-        }
-        function toggleMobileMenu() { document.getElementById('nav-hamburger').classList.toggle('active'); document.getElementById('nav-links').classList.toggle('mobile-open'); }
-        function closeMobileMenu() { document.getElementById('nav-hamburger').classList.remove('active'); document.getElementById('nav-links').classList.remove('mobile-open'); }
-        document.addEventListener('DOMContentLoaded', initParticles);
+      ]
+    }
     </script>
-
-<!-- CHERRY BLOSSOM PETALS -->
-<div class="petal-container" id="petalContainer"></div>
-
-<!-- MUSIC TOGGLE -->
-<button class="music-toggle attention" id="musicToggle" title="?? º½ ¹è°æÀ½¾Ç ÄÑ±â/²ô±â">??</button>
-<div class="music-hint" id="musicHint">?? Å¬¸¯ÇÏ¸é º½ À½¾ÇÀÌ Èê·¯¿ä</div>
-
-<script src="music.js"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ğŸ‘‘</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://s.ytimg.com" />
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/index-_-6MH-KZ.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/router-BCNeJdl_.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-DEZw6Cgu.css">
+</head>
+<body>
+    <noscript>
+        <main>
+            <h1>ë¦¬ë”ìŠ¤í”„ë¡œ | Leaders Pro ë„¤ì´ë²„ ìë™í™” íˆ´</h1>
+            <p>ë¦¬ë”ìŠ¤í”„ë¡œëŠ” ë„¤ì´ë²„ ë¸”ë¡œê·¸ ìë™í™”, AI ê¸€ì“°ê¸°, ì´ë¯¸ì§€ ìƒì„±, ìë™ ë°œí–‰ì„ ì§€ì›í•˜ëŠ” ë¸”ë¡œê·¸ ìë™í™” ì†”ë£¨ì…˜ì…ë‹ˆë‹¤.</p>
+            <p><a href="https://www.leaderspro.kr/products.html">ì œí’ˆ ì†Œê°œ</a> Â· <a href="https://www.leaderspro.kr/pricing.html">ìš”ê¸ˆì œ</a> Â· <a href="https://www.leaderspro.kr/download.html">ë‹¤ìš´ë¡œë“œ</a></p>
+        </main>
+    </noscript>
+    <div id="root"></div>
 </body>
-
 </html>
