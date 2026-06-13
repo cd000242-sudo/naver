@@ -16,7 +16,6 @@ import {
 type ResolvedRunOptions = any;
 import type { StructuredContent, ImagePlan } from '../contentGenerator.js';
 import type { GhostCursor } from '../ghostCursorHelper.js';
-import { PREV_POST_HOOKS } from './ctaHelpers.js';
 import { recordSilentFailure } from './silentFailureCounter.js';
 import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
@@ -27,85 +26,9 @@ import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
   getExpectedLinkCardMin,
   getHashtagGapEnterCount,
-  normalizeComparableUrl,
   planEditorTail,
 } from './editorTailPlan.js';
-
-const PREVIOUS_POST_SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-
-type TailCtaLike = { link?: string; text?: string };
-
-async function insertPreviousPostTailBlock(
-  self: any,
-  page: Page,
-  resolved: ResolvedRunOptions,
-  _effectiveCtas: TailCtaLike[] = [],
-  context = 'tail'
-): Promise<{ inserted: boolean; cardReady: boolean }> {
-  const previousPostUrl = String(resolved.previousPostUrl || '').trim();
-  if (!previousPostUrl) {
-    return { inserted: false, cardReady: false };
-  }
-
-  const prevUrlUsedAsCta =
-    normalizeComparableUrl(resolved.affiliateLink) === normalizeComparableUrl(previousPostUrl);
-
-  if (prevUrlUsedAsCta) {
-    self.log(`   ⚠️ [이전글] CTA 링크와 동일 URL → 중복 삽입 건너뜀`);
-    return { inserted: false, cardReady: false };
-  }
-
-  const randomPrevHook = PREV_POST_HOOKS[Math.floor(Math.random() * PREV_POST_HOOKS.length)];
-  const previousPostTitle = String(resolved.previousPostTitle || '이전 글 보기').trim();
-
-  self.log(`   📖 [이전글] 리치 본문 뒤 이전글 연결 (${context})`);
-  // CTA/link-card insertions above can mutate the DOM and silently kill
-  // keyboard input — verify a probe Enter registers before typing the block.
-  // (Live-validated 2026-06-10: programmatic/CDP focus alone can fail; the
-  // ladder's caret-end click recovers without mid-paragraph displacement.)
-  try {
-    const frame = typeof self.getAttachedFrame === 'function' ? await self.getAttachedFrame() : null;
-    if (frame) await ensureTailTypingReady(page, frame, (m: string) => self.log(m));
-  } catch {
-    // best-effort — Enter below still lands at the last known cursor
-  }
-  await page.keyboard.press('Enter');
-  await safeKeyboardType(page, PREVIOUS_POST_SEPARATOR, { delay: 5 });
-  await page.keyboard.press('Enter');
-  await safeKeyboardType(page, randomPrevHook || previousPostTitle, { delay: 10 });
-  await page.keyboard.press('Enter');
-  // User-confirmed format (2026-06-10 live test): hook line → URL line.
-  // The separate title line was removed from the tail block.
-  await safeKeyboardType(page, previousPostUrl, { delay: 10 });
-  // Give Naver a beat to recognize the bare URL as a complete link before the
-  // Enter that triggers oglink-card conversion — typing Enter too fast leaves
-  // a plain URL line (live-observed intermittent card miss).
-  await self.delay(600);
-  await page.keyboard.press('Enter');
-
-  const cardReady = typeof self.waitForLinkCard === 'function'
-    ? await self.waitForLinkCard(15000, 500)
-    : false;
-
-  if (cardReady && typeof self.removeBareUrlTextAfterLinkCard === 'function') {
-    await self.removeBareUrlTextAfterLinkCard();
-  }
-
-  await page.keyboard.press('End').catch(() => undefined);
-  try {
-    await page.keyboard.down('Control');
-    await page.keyboard.press('End');
-  } catch {
-    recordSilentFailure('editor:cursor-move');
-    // 커서 이동 실패는 발행 자체를 막지 않도록 아래 해시태그 단계에서 재시도한다.
-  } finally {
-    await page.keyboard.up('Control').catch(() => undefined);
-  }
-  await self.delay(200);
-  self.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook}, 카드: ${cardReady ? '감지' : '대기 초과'})`);
-
-  return { inserted: true, cardReady };
-}
+import { insertPreviousPostTailBlock } from './editorTailActions.js';
 
 // ── Local utility: smartTypeWithAutoHighlight ──
 async function smartTypeWithAutoHighlight(

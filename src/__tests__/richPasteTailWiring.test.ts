@@ -14,7 +14,7 @@ function read(rel: string): string {
  */
 describe('rich paste tail wiring', () => {
   it('uses the thick divider for the previous-post separator (matches every other tail divider)', () => {
-    const code = read('automation/editorHelpers.ts');
+    const code = read('automation/editorTailActions.ts');
     expect(code).toContain(
       "const PREVIOUS_POST_SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'"
     );
@@ -29,7 +29,7 @@ describe('rich paste tail wiring', () => {
   });
 
   it('verifies keyboard input registers before typing the previous-post tail block', () => {
-    const code = read('automation/editorHelpers.ts');
+    const code = read('automation/editorTailActions.ts');
     const tailHelper = code.slice(
       code.indexOf('async function insertPreviousPostTailBlock'),
       code.indexOf('// ── Local utility')

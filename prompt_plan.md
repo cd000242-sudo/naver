@@ -56,7 +56,9 @@
 - ✅ 7.4-d (이번 세션): `editorTailPlan.ts` + `editorTailPlan.test.ts` 추가 —
   이전글 URL과 중복 CTA 제거, heading-N CTA 하단 중복 방지, 이전글 카드 뒤 Enter 5회 후 해시태그,
   링크카드 기대값 계산을 helper로 분리하고 `editorHelpers.ts` runtime 경로에 연결.
-- 다음: Phase 7.4-e editor tail runtime 2차 분해 — 실제 타이핑 실행부(이전글/CTA/해시태그)를 더 작은 helper로 추출
+- ✅ 7.4-e (이번 세션): `editorTailActions.ts` + `editorTailActions.test.ts` 추가 —
+  실제 이전글 tail 타이핑 실행부를 `editorHelpers.ts`에서 분리하고, 구분선/후킹/URL/링크카드 대기/URL 제거 순서를 단위 테스트로 고정.
+- 다음: Phase 7.4-f editor tail runtime 3차 분해 — CTA/공식사이트/해시태그 실행부를 작은 action helper로 단계적 추출
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

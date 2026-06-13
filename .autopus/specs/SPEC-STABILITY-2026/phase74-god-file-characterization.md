@@ -97,9 +97,33 @@ helper-backed contract.
 - `npm test -- src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
   - 35 tests passed.
 
+## 7.4-e Completed
+
+Added `src/automation/editorTailActions.ts` and
+`src/__tests__/editorTailActions.test.ts`.
+
+The previous-post tail runtime action is now outside `editorHelpers.ts`:
+
+- It types the separator, hook, and previous-post URL in the confirmed order.
+- It waits for the Naver link card and removes leftover bare URL text when the
+  card appears.
+- It keeps the duplicate affiliate/previous-post URL skip logic using normalized
+  URL comparison.
+- It preserves the tail typing readiness probe before the block is typed.
+
+Existing rich-paste tail wiring guards now read the moved action module while
+`editorHelpers.ts` keeps only the orchestration calls.
+
+## 7.4-e Verification
+
+- `npm test -- src/__tests__/editorTailActions.test.ts`
+  - 2 tests passed.
+- `npm test -- src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 37 tests passed.
+
 ## Next
 
-7.4-e should continue the editor tail runtime split. Suggested order:
+7.4-f should continue the editor tail runtime split. Suggested order:
 
 1. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
    and previous-post/hashtag failures are most expensive.
