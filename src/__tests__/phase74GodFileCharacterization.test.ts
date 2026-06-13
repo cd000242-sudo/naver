@@ -32,8 +32,6 @@ describe('Phase 7.4 characterization - contentGenerator public surface', () => {
       'validateBusinessContent',
       'getGeminiRateLimitPatienceMs',
       'getGeminiRateLimitWaitMs',
-      'isGeminiPrepaidCreditsDepletedError',
-      'classifyGeminiBillingBlock',
       'buildGeminiModelChain',
       'findRelevantOfficialSite',
       'researchWithPerplexity',
@@ -46,6 +44,11 @@ describe('Phase 7.4 characterization - contentGenerator public surface', () => {
       expect(src).toMatch(new RegExp(`export\\s+(?:async\\s+)?function\\s+${name}\\b`));
     }
 
+    expectAll(src, [
+      'classifyGeminiBillingBlock',
+      'isGeminiPrepaidCreditsDepletedError',
+      "from './geminiBillingBlock.js'",
+    ]);
     expect(src).toMatch(/export\s+const\s+CONTENT_PRESETS\b/);
     expect(src).toMatch(/export\s+const\s+GEMINI_RATE_LIMIT_MIN_WAIT_MS\b/);
     expect(src).toMatch(/export\s+const\s+GEMINI_RATE_LIMIT_MAX_SINGLE_WAIT_MS\b/);

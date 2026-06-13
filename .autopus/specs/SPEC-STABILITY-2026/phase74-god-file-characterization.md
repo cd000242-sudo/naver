@@ -301,9 +301,40 @@ shrinking `contentGenerator.ts` before deeper prompt/rate-limit work:
   - passed; 264 preload channels, 289 main registrations, 321 preload API
     methods, 6 critical API methods.
 
+## 7.4-l Completed
+
+Extracted Gemini billing-block classification from `src/contentGenerator.ts`
+into `src/geminiBillingBlock.ts`.
+
+This reduces the risk that Gemini prepaid/postpaid billing failures are
+mistaken for transient RPM/TPM waits:
+
+- Kept `contentGenerator.ts` public exports compatible through re-exports.
+- Moved prepaid credit depletion, postpaid spend-cap, and billing-required
+  classification into a focused helper.
+- Added message-level tests so user-facing guidance remains explicit about
+  whether waiting will help.
+- Updated Phase 7.4 characterization to allow re-exported public API ownership.
+
+## 7.4-l Verification
+
+- `npm test -- src/__tests__/geminiBillingBlock.test.ts`
+  - expected red first: module missing before helper extraction.
+- `npm test -- src/__tests__/geminiBillingBlock.test.ts src/__tests__/geminiRateLimitPolicy.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 18 tests passed.
+- `npm test`
+  - 266 files / 3,115 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - 0 errors / 1,023 baseline warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-l should continue the stability split. Suggested order:
+7.4-m should continue the stability split. Suggested order:
 
-1. `contentGenerator.ts` pure prompt/rate-limit helpers.
+1. `contentGenerator.ts` pure prompt helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.
