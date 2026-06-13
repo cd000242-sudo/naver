@@ -65,7 +65,7 @@ describe('content generation timeout policy', () => {
     expect(generatorSrc).toMatch(/getGeminiRateLimitWaitMs\(error,\s*fallbackWaitMs\)/);
   });
 
-  it('reduces transient provider retry loops so stalled generations fail fast', () => {
+  it('keeps transient provider retries bounded without cross-model fallback loops', () => {
     expect(generatorSrc).toMatch(/function\s+callOpenAIChatCompletionsRest/);
     expect(generatorSrc).toMatch(/\/chat\/completions/);
     expect(generatorSrc).toMatch(/callOpenAIChatCompletionsRest\(directOpenAiApiKey,\s*baseParams,\s*timeoutMs,\s*signal,\s*diagnosticsEnabled\)/);
@@ -73,7 +73,7 @@ describe('content generation timeout policy', () => {
     expect(generatorSrc).toMatch(/timeout:\s*timeoutMs/);
     expect(generatorSrc).toMatch(/signal:\s*requestAbort\.signal/);
     expect(generatorSrc).toMatch(/requestAbort\.normalizeError\(requestError\)/);
-    expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*0/);
+    expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*3/);
     expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*5/);
     expect(generatorSrc).toMatch(/maxTransientRetries\s*=\s*5/);
     expect(generatorSrc).not.toMatch(/maxRetriesPerModel\s*=\s*4/);

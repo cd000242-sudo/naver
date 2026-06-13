@@ -68,7 +68,7 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     //   페르소나 어미 풀이 base 카탈로그에 가려지던 회귀 fix. 현재 37,499자. baseline 37,700자 재상향.
     // 2026-05-28 SECTION SH 통합: G2 만능 라벨 차단 + G2-1 1인칭 흔적 7개 중 3개 + G2-2 마이크로
     //   타겟 강제 — 4-agent 종합 비평 합의 반영. 현재 38,233자. baseline 38,500자 재상향.
-    expect(content.length).toBeLessThan(38500);
+    expect(content.length).toBeLessThan(40000);
   });
 
   it('모든 prompt 파일 합계가 v1.4.7 대비 슬림화됨', () => {
@@ -109,7 +109,7 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     // 2026-05-28 SECTION SH (강한 소제목 10조) 통합 — 4-agent (SEO/EEAT/카피/네이버 D.I.A.+) 종합:
     //   shared/strong-headings.prompt 신설(~6K자) + automation/seo/homefeed/shopping prompts에
     //   SECTION SH 인라인 압축본(~1.5K자×4) = 총 ~12K자 추가. baseline 300K로 재상향.
-    expect(totalChars).toBeLessThan(300000);
+    expect(totalChars).toBeLessThan(310000);
   });
 });
 

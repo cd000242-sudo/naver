@@ -7339,7 +7339,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
   const timeoutMs = getTimeoutMs(minChars);
   const maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars);
   const maxAttemptsPerModel = 99;
-  const maxTransientRetriesPerModel = 0;
+  const maxTransientRetriesPerModel = 3;
   const openAiRateLimitPatienceMs = getOpenAiRateLimitPatienceMs();
 
   for (const modelName of modelsToTry) {
