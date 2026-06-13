@@ -372,8 +372,11 @@ const _GIA_STALE_MS = 15 * 60 * 1000; // a run older than this is presumed dead
 // a provider out of localStorage on its own.
 function resolveImageProviderFallback() {
     const INVALID_PROVIDERS = ['saved', '', 'null', 'undefined'];
-    const rawFullAuto = typeof localStorage !== 'undefined' ? localStorage.getItem('fullAutoImageSource') : null;
-    const rawGlobal = typeof localStorage !== 'undefined' ? localStorage.getItem('globalImageSource') : null;
+    // [Phase 7.1-f] Reads go through the single pipeline accessor; the
+    // priority chain itself stays here (full-auto > global > default).
+    const _rawPipeline = readRawPipelineSettings();
+    const rawFullAuto = _rawPipeline.fullAutoImageSource;
+    const rawGlobal = _rawPipeline.globalImageSource;
     return (rawFullAuto && !INVALID_PROVIDERS.includes(rawFullAuto) ? rawFullAuto : null) ||
         (rawGlobal && !INVALID_PROVIDERS.includes(rawGlobal) ? rawGlobal : null) ||
         'nano-banana-pro';
@@ -447,7 +450,7 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         ? options.headingImageMode
         : '';
     if (!_headingImageMode) {
-        _headingImageMode = typeof localStorage !== 'undefined' ? (localStorage.getItem('headingImageMode') || 'all') : 'all';
+        _headingImageMode = readRawPipelineSettings().headingImageMode || 'all';
         console.warn('[generateImagesForAutomation] ⚠️ headingImageMode 미전달 — localStorage 폴백 (R13: 호출자가 명시 전달)');
     }
     // headingImageMode is the single source of truth here. The legacy

@@ -126,6 +126,25 @@ describe('직독 래칫 — 공유 헬퍼/풀오토 위임부 (7.1-d)', () => {
     expect(src).toContain('function readRawPipelineSettings()');
     expect(src).toContain("pipelineReadRaw('thumbnailImageRatio')");
   });
+
+  it('[7.1-f] 발행 보조 경로(provider/동기화)도 직독 0 — raw 접근자 경유', () => {
+    const lf = read('src', 'renderer', 'modules', 'localFolderImageLoader.ts');
+    const sync = read('src', 'renderer', 'modules', 'imageSyncService.ts');
+    const cp = read('src', 'renderer', 'modules', 'continuousPublishing.ts');
+    const ph = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
+    const count = (src: string, key: string) =>
+      (src.match(new RegExp(`localStorage\\.getItem\\('${key}'\\)`, 'g')) || []).length;
+    expect(count(lf, 'fullAutoImageSource')).toBe(0);
+    // localFolderFallbackEngine은 플로우 고유 키 — 직독 1 허용
+    expect(count(lf, 'localFolderFallbackEngine')).toBe(1);
+    for (const key of ['fullAutoImageSource', 'globalImageSource', 'imageStyle', 'imageRatio', 'thumbnailImageRatio', 'subheadingImageRatio', 'headingImageMode', 'imageFallbackPolicy', 'thumbnailTextInclude', 'textOnlyPublish']) {
+      expect(count(sync, key)).toBe(0);
+    }
+    expect(count(cp, 'fullAutoImageSource')).toBe(0);
+    expect(count(cp, 'globalImageSource')).toBe(0);
+    expect(count(ph, 'fullAutoImageSource')).toBe(0);
+    expect(count(ph, 'globalImageSource')).toBe(0);
+  });
 });
 
 describe('직독 래칫 — multiAccountManager (7.1-c)', () => {
@@ -133,9 +152,11 @@ describe('직독 래칫 — multiAccountManager (7.1-c)', () => {
     const mam = read('src', 'renderer', 'modules', 'multiAccountManager.ts');
     const count = (key: string) =>
       (mam.match(new RegExp(`localStorage\\.getItem\\('${key}'\\)`, 'g')) || []).length;
-    // 코어의 경고 동반 전환기 폴백 1곳만 허용 (R13 1차)
-    expect(count('headingImageMode')).toBeLessThanOrEqual(1);
+    // [7.1-f] 코어 경고 폴백도 raw 접근자 경유 — 직독 0 잠금
+    expect(count('headingImageMode')).toBe(0);
     expect(count('thumbnailTextInclude')).toBe(0);
+    expect(count('fullAutoImageSource')).toBe(0);
+    expect(count('globalImageSource')).toBe(0);
     // 큐 루프 per-item 해석이 존재
     expect(mam).toContain("const itemPipelineCfg = resolvePipelineConfig('multi-account')");
   });

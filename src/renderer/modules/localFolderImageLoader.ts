@@ -5,6 +5,8 @@
 
 import { shouldGenerateImageForHeading } from '../components/HeadingImageSettings.js';
 
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
+
 /** 로컬 폴더 이미지 — AutomationImage 호환 */
 export interface LocalFolderImage {
   heading: string;
@@ -328,10 +330,12 @@ export async function loadLocalFolderWithFallback(
 }
 
 /** AI 폴백 시 안전한 provider 반환 (local-folder 자기참조 방지)
- *  Priority: user-selected fallback engine > main image source > nano-banana-pro */
+ *  Priority: user-selected fallback engine > main image source > nano-banana-pro
+ *  [Phase 7.1-f] main source read goes through the pipeline accessor;
+ *  localFolderFallbackEngine is a flow-local key and stays a direct read. */
 function getSafeAiProvider(): string {
   const explicit = localStorage.getItem('localFolderFallbackEngine');
-  const main = localStorage.getItem('fullAutoImageSource');
+  const main = readRawPipelineSettings().fullAutoImageSource;
   const picked = explicit || main || 'nano-banana-pro';
   return picked === 'local-folder' ? 'nano-banana-pro' : picked;
 }

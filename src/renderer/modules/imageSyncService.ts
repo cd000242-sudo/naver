@@ -17,6 +17,7 @@ declare const toastManager: any;
 declare function toFileUrlMaybe(p: string): string;
 declare function normalizeHeadingKeyForVideoCache(title: string): string;
 declare function getStableImageKey(heading: any): string;
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // localStorage에 저장된 사용자 이미지 설정을 반환합니다.
@@ -27,16 +28,19 @@ function getGlobalImageSettings() {
   const w = window as any;
   // ✅ [2026-02-04 FIX] fullAutoImageSource를 우선 사용 (풀오토 모달에서 설정한 값)
   // globalImageSource는 이미지 관리 탭용, fullAutoImageSource는 풀오토 발행용
+  // [Phase 7.1-f] Storage fallbacks read through the single pipeline
+  // accessor; window getter priority and per-key defaults are unchanged.
+  const rawPipeline = readRawPipelineSettings();
   return {
-    imageSource: w.getFullAutoImageSource?.() || localStorage.getItem('fullAutoImageSource') || w.getGlobalImageSource?.() || localStorage.getItem('globalImageSource') || 'nano-banana-pro',
-    imageStyle: w.getImageStyle?.() || localStorage.getItem('imageStyle') || 'realistic',
-    imageRatio: w.getImageRatio?.() || localStorage.getItem('imageRatio') || '1:1',
-    thumbnailRatio: w.getThumbnailRatio?.() || localStorage.getItem('thumbnailImageRatio') || '1:1',
-    subheadingRatio: w.getSubheadingRatio?.() || localStorage.getItem('subheadingImageRatio') || '1:1',
-    headingImageMode: w.getHeadingImageMode?.() || localStorage.getItem('headingImageMode') || 'all',
-    imageFallbackPolicy: w.getImageFallbackPolicy?.() || localStorage.getItem('imageFallbackPolicy') || 'engine-only',
-    thumbnailTextInclude: localStorage.getItem('thumbnailTextInclude') === 'true',
-    textOnlyPublish: localStorage.getItem('textOnlyPublish') === 'true',
+    imageSource: w.getFullAutoImageSource?.() || rawPipeline.fullAutoImageSource || w.getGlobalImageSource?.() || rawPipeline.globalImageSource || 'nano-banana-pro',
+    imageStyle: w.getImageStyle?.() || rawPipeline.imageStyle || 'realistic',
+    imageRatio: w.getImageRatio?.() || rawPipeline.imageRatio || '1:1',
+    thumbnailRatio: w.getThumbnailRatio?.() || rawPipeline.thumbnailImageRatio || '1:1',
+    subheadingRatio: w.getSubheadingRatio?.() || rawPipeline.subheadingImageRatio || '1:1',
+    headingImageMode: w.getHeadingImageMode?.() || rawPipeline.headingImageMode || 'all',
+    imageFallbackPolicy: w.getImageFallbackPolicy?.() || rawPipeline.imageFallbackPolicy || 'engine-only',
+    thumbnailTextInclude: rawPipeline.thumbnailTextInclude === 'true',
+    textOnlyPublish: rawPipeline.textOnlyPublish === 'true',
     lifestyleImageGenerate: localStorage.getItem('lifestyleImageGenerate') === 'true'
   };
 }

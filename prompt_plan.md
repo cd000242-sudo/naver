@@ -33,7 +33,11 @@
 - ✅ 7.1-a~c (02def1cd·09a204ea·f2be7386): PipelineConfig 단일 해석처 +
   3대 플로우 진입점 배선 완료. 멀티에이전트 회귀 리뷰(7 agents) 확정 결함 0건.
   직독 래칫 가드 3건 + 기본값 동등성 단위 3건. 상세: phase71-pipeline-config.md §5
-- 다음: 7.1-d 공유 헬퍼(headingImageGen/costAndAutoGen) 직독 → config 수신 전환
+- ✅ 7.1-f (이번 세션): provider/동기화 보조 경로 직독 제거 —
+  fullAutoImageSource/globalImageSource/imageFallbackPolicy 계열을 readRawPipelineSettings()
+  경유로 통일. 게이트: vitest 3,077/3,077 GREEN · build PASS · lint 0 errors ·
+  lint:ipc PASS.
+- 다음: 7.1-g 쇼핑커넥트 sc* 클러스터 → PipelineConfig 흡수
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

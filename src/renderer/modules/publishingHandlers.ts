@@ -42,6 +42,7 @@ declare function resolveAffiliateLink(link1?: string, link2?: string): string | 
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
 declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string } };
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
 declare function parseLocalFolderImages(folderPath: string, headings: any[]): Promise<any[]>;
 declare function isFullAutoStopRequested(modal: any): boolean;
 declare function getProgressModal(): any;
@@ -473,8 +474,8 @@ export async function handleFullAutoPublish(): Promise<void> {
     const imageSource = UnifiedDOMCache.getImageSource();
     // 🔍 [DIAGNOSTIC] imageSource 결정 직후 값 확인 — 이 로그를 보면 어디서 nano-banana-pro가 주입되는지 알 수 있음
     console.log(`[FullAutoPublish] 🔍🔍🔍 getImageSource() 결과 = "${imageSource}"`);
-    console.log(`[FullAutoPublish] 🔍🔍🔍 localStorage.fullAutoImageSource = "${localStorage.getItem('fullAutoImageSource')}"`);
-    console.log(`[FullAutoPublish] 🔍🔍🔍 localStorage.globalImageSource = "${localStorage.getItem('globalImageSource')}"`);
+    console.log(`[FullAutoPublish] 🔍🔍🔍 localStorage.fullAutoImageSource = "${readRawPipelineSettings().fullAutoImageSource}"`);
+    console.log(`[FullAutoPublish] 🔍🔍🔍 localStorage.globalImageSource = "${readRawPipelineSettings().globalImageSource}"`);
     // 선택된 이미지 소스 버튼 확인
     const selectedBtnDiag = document.querySelector('.unified-img-source-btn.selected') as HTMLElement;
     console.log(`[FullAutoPublish] 🔍🔍🔍 선택된 버튼 data-source = "${selectedBtnDiag?.dataset?.source || '(없음)'}"`);

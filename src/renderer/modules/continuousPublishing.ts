@@ -82,6 +82,7 @@ declare function generateContentFromKeywords(title: string, keywords?: string, t
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
 declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string } };
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
 declare function executeUnifiedAutomation(formData: any): Promise<any>;
 declare function updateUnifiedPreview(content: any): void;
 declare function syncGlobalImagesFromImageManager(): void;
@@ -214,8 +215,8 @@ function getCurrentContinuousImageSourceForSafety(): string {
     return String(
       imageSourceSelect?.value
       || imageSourceRadio?.value
-      || localStorage.getItem('fullAutoImageSource')
-      || localStorage.getItem('globalImageSource')
+      || readRawPipelineSettings().fullAutoImageSource
+      || readRawPipelineSettings().globalImageSource
       || getFullAutoImageSource()
       || ''
     ).trim();
@@ -507,7 +508,7 @@ function processNextInQueue(): void {
     }
     const fullAutoPublishBtn = document.getElementById('full-auto-publish-btn') as HTMLButtonElement | null;
     if (fullAutoPublishBtn) {
-      const finalEngine = localStorage.getItem('fullAutoImageSource');
+      const finalEngine = readRawPipelineSettings().fullAutoImageSource;
       console.log(`[Continuous] 🎨 발행 직전 이미지 엔진 확인: "${finalEngine}" (localStorage.fullAutoImageSource)`);
       console.log('[Continuous] 풀오토 발행 실행 버튼 클릭!');
       fullAutoPublishBtn.click();

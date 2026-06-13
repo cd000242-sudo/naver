@@ -38,7 +38,8 @@ describe('Phase 7.2 코어 순수화 — invalid-provider fallbackProvider (R13 
     // The chain itself lives in ONE function — the inline duplicate inside
     // the core's invalid-provider branch must stay removed.
     expect(src).toContain('function resolveImageProviderFallback()');
-    expect((src.match(/localStorage\.getItem\('fullAutoImageSource'\)/g) || []).length).toBe(1);
+    // [7.1-f] The chain reads through the pipeline accessor — no direct read.
+    expect((src.match(/localStorage\.getItem\('fullAutoImageSource'\)/g) || []).length).toBe(0);
   });
 
   it('6개 진입점이 fallbackProvider를 명시 전달한다', () => {

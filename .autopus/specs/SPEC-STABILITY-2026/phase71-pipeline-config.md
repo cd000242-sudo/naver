@@ -98,5 +98,9 @@ R13 1~3차에서 만든 options 통로를 그대로 사용. `aiOptions`/`options
 - 멀티에이전트 회귀 리뷰(5차원 리뷰어 + 발견별 적대 검증 2인, 에이전트 7):
   **확정 결함 0건**. 기각 1건 — "mam 래칫 7키 전체 잠금" 제안은 결함 아닌
   하드닝으로 판정 → 7.1-h에서 3개 모듈 × 7키 전체 toBe(0) 래칫으로 흡수 예정.
-- 남은 단계: 7.1-d(공유 헬퍼 headingImageGen/costAndAutoGen) → e~h.
+- 6/13 7.1-f 완료: provider/동기화 보조 경로의 fullAutoImageSource/globalImageSource/
+  imageFallbackPolicy 직독을 readRawPipelineSettings() 경유로 통일. 가드: phase71/phase72
+  직독 래칫 확장. 게이트: vitest 3,077/3,077 GREEN · build PASS · lint 0 errors ·
+  lint:ipc PASS.
+- 남은 단계: 7.1-g(쇼핑커넥트 sc* 클러스터) → 7.1-h(공시/안전 클러스터 + 직독 0 래칫 마감).
 - 라이브 일괄 검증(3플로우)은 7.1-d 이후 또는 다음 릴리즈 전 1회.
