@@ -204,13 +204,46 @@ cannot drift independently.
 - `npm run lint:ipc`
   - passed.
 
+## 7.4-i Completed
+
+Extended `src/automation/editorOfficialSiteTail.ts` with
+`insertOfficialSiteTailBlock()`.
+
+The helper now owns the official-site runtime orchestration:
+
+- Skip search when title/hashtags are not action-category topics.
+- Search official sites with the existing `findRelevantOfficialSite()` contract.
+- Pass the same 500-character body context used by the prior inline runtime.
+- Insert the official-site link card through `insertTailLinkCardBlock()`.
+- Keep the previous production behavior of swallowing official-site lookup
+  failures after logging them.
+
+`src/automation/editorHelpers.ts` now calls this helper from both CTA and no-CTA
+branches, shrinking the live editor tail runtime while keeping the previous
+failure-tolerant behavior.
+
+## 7.4-i Verification
+
+- `npm test -- src/__tests__/editorOfficialSiteTail.test.ts`
+  - 6 tests passed.
+- `npm test -- src/__tests__/editorOfficialSiteTail.test.ts src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 46 tests passed.
+- `npm test -- src/__tests__/editorOfficialSiteTail.test.ts src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/editorTitleHelpers.test.ts src/__tests__/phase71PipelineConfig.test.ts src/__tests__/phase72CorePurity.test.ts src/__tests__/phase74GodFileCharacterization.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts`
+  - 69 tests passed.
+- `npm test`
+  - 264 files / 3,106 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - 0 errors / 1,023 baseline warnings.
+- `npm run lint:ipc`
+  - passed.
+
 ## Next
 
-7.4-i should continue the editor tail runtime split. Suggested order:
+7.4-j should continue the stability split. Suggested order:
 
-1. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
-   and previous-post/hashtag failures are most expensive.
-2. `main.ts` IPC registration clusters, because dead-router regressions already
+1. `main.ts` IPC registration clusters, because dead-router regressions already
    shipped more than once.
-3. `contentGenerator.ts` pure prompt/title/rate-limit helpers.
-4. `renderer/renderer.ts` only after event handler ownership is clear.
+2. `contentGenerator.ts` pure prompt/title/rate-limit helpers.
+3. `renderer/renderer.ts` only after event handler ownership is clear.

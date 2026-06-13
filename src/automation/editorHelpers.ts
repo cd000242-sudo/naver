@@ -32,10 +32,7 @@ import {
   insertPreviousPostTailBlock,
   insertTailLinkCardBlock,
 } from './editorTailActions.js';
-import {
-  pickOfficialSiteHook,
-  shouldSearchOfficialSiteTail,
-} from './editorOfficialSiteTail.js';
+import { insertOfficialSiteTailBlock } from './editorOfficialSiteTail.js';
 
 // ── Local utility: smartTypeWithAutoHighlight ──
 async function smartTypeWithAutoHighlight(
@@ -2228,37 +2225,13 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           if (isLastCta) {
             // ✅ [2026-02-08] 공식 사이트 링크 자동 삽입 (이전글 앞에 배치)
             // 행동 유발 카테고리에서만 동작 (비즈니스, 티켓, 여행, 건강, 교육 등)
-            try {
-              if (shouldSearchOfficialSiteTail({
-                title: resolved.title,
-                hashtags: resolved.hashtags,
-              })) {
-                self.log(`   🔗 [공식사이트] 행동 유발 키워드 감지 → 관련 공식 사이트 검색 중...`);
-
-                const { findRelevantOfficialSite } = await import('../contentGenerator.js');
-                const siteResult = await findRelevantOfficialSite(
-                  resolved.title || resolved.hashtags?.[0] || '',
-                  undefined,
-                  bodyText?.substring(0, 500),
-                );
-
-                if (siteResult.success && siteResult.url) {
-                  self.log(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${siteResult.url})`);
-
-                  await insertTailLinkCardBlock({
-                    self,
-                    page,
-                    label: pickOfficialSiteHook(),
-                    url: siteResult.url,
-                  });
-                  self.log(`   ✅ [공식사이트] 관련 사이트 바로가기 삽입 완료: ${siteResult.siteName}`);
-                } else {
-                  self.log(`   ⚠️ [공식사이트] 적합한 사이트 없음 → 건너뜀`);
-                }
-              }
-            } catch (siteError) {
-              self.log(`   ⚠️ [공식사이트] 검색 실패 (무시): ${(siteError as Error).message}`);
-            }
+            await insertOfficialSiteTailBlock({
+              self,
+              page,
+              title: resolved.title,
+              hashtags: resolved.hashtags,
+              bodyText,
+            });
 
             // ✅ 이전글 삽입
             if (resolved.previousPostUrl) {
@@ -2289,37 +2262,14 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       const page = self.ensurePage();
 
       // 공식 사이트 바로가기 삽입
-      try {
-        if (shouldSearchOfficialSiteTail({
-          title: resolved.title,
-          hashtags: resolved.hashtags,
-        })) {
-          self.log(`   🔗 [공식사이트] 행동 유발 키워드 감지 (CTA 없는 모드) → 관련 공식 사이트 검색 중...`);
-
-          const { findRelevantOfficialSite } = await import('../contentGenerator.js');
-          const siteResult = await findRelevantOfficialSite(
-            resolved.title || resolved.hashtags?.[0] || '',
-            undefined,
-            bodyText?.substring(0, 500),
-          );
-
-          if (siteResult.success && siteResult.url) {
-            self.log(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${siteResult.url})`);
-
-            await insertTailLinkCardBlock({
-              self,
-              page,
-              label: pickOfficialSiteHook(),
-              url: siteResult.url,
-            });
-            self.log(`   ✅ [공식사이트] 관련 사이트 바로가기 삽입 완료: ${siteResult.siteName}`);
-          } else {
-            self.log(`   ⚠️ [공식사이트] 적합한 사이트 없음 → 건너뜀`);
-          }
-        }
-      } catch (siteError) {
-        self.log(`   ⚠️ [공식사이트] 검색 실패 (무시): ${(siteError as Error).message}`);
-      }
+      await insertOfficialSiteTailBlock({
+        self,
+        page,
+        title: resolved.title,
+        hashtags: resolved.hashtags,
+        bodyText,
+        noCtaMode: true,
+      });
 
       // 이전글 삽입
       if (resolved.previousPostUrl) {
