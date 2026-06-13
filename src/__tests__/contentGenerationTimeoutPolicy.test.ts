@@ -18,6 +18,7 @@ describe('content generation timeout policy', () => {
   const generatorSrc = read('contentGenerator.ts');
   const failurePolicySrc = read('contentGenerationFailurePolicy.ts');
   const promptAdherenceSrc = read('contentPromptAdherence.ts');
+  const diagnosticsSrc = read('contentErrorDiagnostics.ts');
   const lowSpecSrc = read('diagnostics/lowSpecMode.ts');
   const costPolicySrc = read('geminiCostOptimizer.ts');
 
@@ -92,6 +93,7 @@ describe('content generation timeout policy', () => {
     expect(generatorSrc).toMatch(/CHAT_REQUEST_START/);
     expect(generatorSrc).toMatch(/CHAT_RESPONSE_OK/);
     expect(generatorSrc).toMatch(/CHAT_REQUEST_ERROR/);
+    expect(diagnosticsSrc).toMatch(/function\s+classifyOpenAiDiagnosticError/);
     expect(generatorSrc).toMatch(/classifyOpenAiDiagnosticError/);
     expect(generatorSrc).toMatch(/process\.platform\s*===\s*'darwin'/);
   });

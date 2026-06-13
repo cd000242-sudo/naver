@@ -397,9 +397,42 @@ policy block from the generation god file:
   - passed; 264 preload channels, 289 main registrations, 321 preload API
     methods, 6 critical API methods.
 
+## 7.4-o Completed
+
+Extracted content-generation error diagnostics from `src/contentGenerator.ts`
+into `src/contentErrorDiagnostics.ts`.
+
+This protects the high-complaint timeout/quota guidance path while reducing the
+generation god file again:
+
+- OpenAI diagnostic classification now has direct tests for auth, rate limit,
+  billing, DNS, and connection cases.
+- Provider wait messages keep the "1분 미만" floor so RPM/TPM guidance never
+  appears as a zero-minute wait.
+- Header extraction for request IDs remains compatible with fetch Headers-like
+  objects and plain objects.
+- Existing timeout/cost invariants now verify helper ownership plus
+  `contentGenerator.ts` call-site wiring.
+
+## 7.4-o Verification
+
+- `npm test -- src/__tests__/contentErrorDiagnostics.test.ts`
+  - expected red first: module missing before helper extraction.
+- `npm test -- src/__tests__/contentErrorDiagnostics.test.ts src/__tests__/contentGenerationTimeoutPolicy.test.ts src/__tests__/costInvariants.test.ts`
+  - 51 tests passed.
+- `npm test`
+  - 269 test files passed, 3,125 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - 0 errors, 1,023 baseline warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-o should continue the stability split. Suggested order:
+7.4-p should continue the stability split. Suggested order:
 
 1. `contentGenerator.ts` pure prompt helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.

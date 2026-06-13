@@ -142,6 +142,7 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
   describe('OpenAI 재시도 — 429 누진 backoff가 끝까지 발동', () => {
     const content = read('contentGenerator.ts');
     const failurePolicy = read('contentGenerationFailurePolicy.ts');
+    const diagnostics = read('contentErrorDiagnostics.ts');
 
     // ✅ [2026-06-06] 사용자 요청 — RPM이 풀릴 때까지 같은 모델로 천천히 대기.
     //   고정 5회 retry 후 실패하지 않고 patient wait budget 안에서 reset/retry-after를 존중한다.
@@ -163,8 +164,8 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     });
 
     it('OpenAI connection errors are retried and not mislabeled as unavailable model', () => {
-      expect(content).toMatch(/function\s+isOpenAiConnectionIssue/);
-      expect(content).toMatch(/connection error/);
+      expect(diagnostics).toMatch(/function\s+isOpenAiConnectionIssue/);
+      expect(diagnostics).toMatch(/connection error/);
       // v2.11.9 cost policy: OpenAI transient retries tightened 3 → 0 — the
       // 10s call gap + progressive backoff scheduler handles transient errors.
       expect(content).toMatch(/maxTransientRetriesPerModel\s*=\s*0/);
@@ -172,8 +173,8 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     });
 
     it('provider wait messages never round sub-minute waits down to 0 minutes', () => {
-      expect(content).toMatch(/function\s+formatWaitDurationKo/);
-      expect(content).toMatch(/1분 미만/);
+      expect(diagnostics).toMatch(/function\s+formatWaitDurationKo/);
+      expect(diagnostics).toMatch(/1분 미만/);
       expect(content).not.toMatch(/RPM\/TPM.*Math\.round\([^)]*\/ 60_000\).*분 동안 풀리지/);
     });
   });
