@@ -52,16 +52,32 @@ selectors, page fallback, diagnostics output, and DOM `InputEvent` fallback.
 - `npm run build`
   - passed.
 
+## 7.4-c Completed
+
+Added `src/__tests__/editorTitleHelpers.test.ts` as a behavior-level guard for
+the extracted title helper.
+
+The test covers:
+
+- Reading the current editor title through the Naver title selector list.
+- DOM input-event fallback when keyboard typing does not stick.
+- Diagnostic output that includes page URL, page title, frame URL, and selector counts.
+
+This keeps the title-field failure class (`documentTitle` not found / blank title
+after typing) protected without editing the large automation file again.
+
+## 7.4-c Verification
+
+- `npm test -- src/__tests__/editorTitleHelpers.test.ts`
+  - 3 tests passed.
+
 ## Next
 
-7.4-c should remove the legacy title private wrappers or continue with the editor
-tail helper split. Suggested order:
+7.4-d should continue with the editor tail helper split. Suggested order:
 
-1. `naverBlogAutomation.ts` legacy title wrappers, because active runtime now uses
-   the extracted helper.
-2. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
+1. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
    and previous-post/hashtag failures are most expensive.
-3. `main.ts` IPC registration clusters, because dead-router regressions already
+2. `main.ts` IPC registration clusters, because dead-router regressions already
    shipped more than once.
-4. `contentGenerator.ts` pure prompt/title/rate-limit helpers.
-5. `renderer/renderer.ts` only after event handler ownership is clear.
+3. `contentGenerator.ts` pure prompt/title/rate-limit helpers.
+4. `renderer/renderer.ts` only after event handler ownership is clear.
