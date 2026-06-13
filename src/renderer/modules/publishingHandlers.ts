@@ -41,8 +41,8 @@ declare function generateAutoCTA(title: string, keywords?: string): any;
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
-declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; autoThumbnail: boolean } };
-declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null; scSubImageMode: string | null; scSubImageSource: string | null; scAIImageEngine: string | null; scAutoThumbnailSetting: string | null };
+declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; autoThumbnail: boolean }; disclosure: { enabledSetting: boolean | null; text: string; defaultText: string }; safety: { adbIpChangeEnabled: boolean; adbIpChangeEvery: number } };
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null; scSubImageMode: string | null; scSubImageSource: string | null; scAIImageEngine: string | null; scAutoThumbnailSetting: string | null; ftcDisclosureEnabled: string | null; ftcDisclosureText: string | null; adbIpChangeEnabled: string | null; adbIpChangeEvery: string | null };
 declare function parseLocalFolderImages(folderPath: string, headings: any[]): Promise<any[]>;
 declare function isFullAutoStopRequested(modal: any): boolean;
 declare function getProgressModal(): any;
@@ -1278,7 +1278,7 @@ export async function handleFullAutoPublish(): Promise<void> {
 
     // ✅ [2026-03-11] 발행 직전 ADB IP 변경 (단일 풀오토)
     try {
-      const adbEnabled = localStorage.getItem('adbIpChangeEnabled') === 'true';
+      const adbEnabled = pipelineCfg.safety.adbIpChangeEnabled;
       if (adbEnabled) {
         modal.addLog('📱 ADB 비행기모드 IP 변경 중...');
         modal.setProgress(90, '📱 IP 변경 중...');
@@ -1772,6 +1772,7 @@ function reSyncHeadingsContent(headings: any[], editedBody: string): any[] {
 export async function handleSemiAutoPublish(): Promise<any> {
   // ✅ 반자동 모드 설정
   (window as any).currentAutomationMode = 'semi-auto';
+  const semiPipelineCfg = resolvePipelineConfig('full-auto');
 
   // 먼저 콘텐츠가 생성되었는지 확인
   let structuredContent = (window as any).currentStructuredContent;
@@ -2138,7 +2139,7 @@ export async function handleSemiAutoPublish(): Promise<any> {
 
   // ✅ [2026-03-11] 발행 직전 ADB IP 변경 (반자동)
   try {
-    const adbEnabled = localStorage.getItem('adbIpChangeEnabled') === 'true';
+    const adbEnabled = semiPipelineCfg.safety.adbIpChangeEnabled;
     if (adbEnabled) {
       appendLog('📱 ADB 비행기모드 IP 변경 중...');
       const adbResult = await (window as any).api.adbChangeIp(5);

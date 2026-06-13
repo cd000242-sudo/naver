@@ -3061,13 +3061,12 @@ async function initMultiAccountPublishModal() {
                     }
                     {
                         const _isAffiliateMode = queueItem.contentMode === 'affiliate';
-                        const _stored = localStorage.getItem('ftcDisclosureEnabled');
-                        const _ftcEnabled = _stored !== null ? (_stored === 'true') : _isAffiliateMode;
-                        const _DEFAULT_FTC = '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.';
+                        const _disclosureCfg = itemPipelineCfg.disclosure;
+                        const _ftcEnabled = _disclosureCfg.enabledSetting !== null ? _disclosureCfg.enabledSetting : _isAffiliateMode;
                         const _ftcText = _ftcEnabled
-                            ? ((localStorage.getItem('ftcDisclosureText') || '').trim() || (_isAffiliateMode ? _DEFAULT_FTC : ''))
+                            ? (_disclosureCfg.text || (_isAffiliateMode ? _disclosureCfg.defaultText : ''))
                             : '';
-                        const _ftcSource = _stored !== null ? 'localStorage' : (_isAffiliateMode ? 'mode-default-affiliate' : 'mode-default-other');
+                        const _ftcSource = _disclosureCfg.enabledSetting !== null ? 'PipelineConfig' : (_isAffiliateMode ? 'mode-default-affiliate' : 'mode-default-other');
                         if (_ftcEnabled && _ftcText && structuredContent) {
                             structuredContent.ftcDisclosure = _ftcText;
                             addMALog(`⚖️ 공정위 문구 삽입됨 (${_ftcSource}): "${_ftcText.substring(0, 30)}..."`, 'info');
@@ -3682,8 +3681,8 @@ async function initMultiAccountPublishModal() {
                 }
                 if (i < queueSnapshot.length - 1 && !stopRequested && !window.stopFullAutoPublish) {
                     try {
-                        const adbEnabled = localStorage.getItem('adbIpChangeEnabled') === 'true';
-                        const adbEvery = Math.max(1, parseInt(localStorage.getItem('adbIpChangeEvery') || '1'));
+                        const adbEnabled = itemPipelineCfg.safety.adbIpChangeEnabled;
+                        const adbEvery = itemPipelineCfg.safety.adbIpChangeEvery;
                         const publishedCount = i + 1;
                         if (adbEnabled && publishedCount % adbEvery === 0) {
                             updateMAProgress(i + 1, totalItems, '📱 IP 변경 중...', '📱 ADB 비행기모드 IP 변경 중...');

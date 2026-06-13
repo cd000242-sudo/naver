@@ -33,7 +33,15 @@ interface ImagePipelineConfig {
   fallbackProvider: string;        // resolveImageProviderFallback() 흡수
   imageFallbackPolicy: 'engine-only';
 }
-interface DisclosureConfig { enabled: boolean; text: string }
+interface DisclosureConfig {
+  enabledSetting: boolean | null;   // null이면 모드 기본값(affiliate=true) 유지
+  text: string;
+  defaultText: string;
+}
+interface SafetyConfig {
+  adbIpChangeEnabled: boolean;
+  adbIpChangeEvery: number;
+}
 interface ShoppingConnectConfig {
   subImageMode: 'ai' | 'collected';
   aiImageEngine: string;
@@ -45,6 +53,7 @@ interface PipelineConfig {
   image: ImagePipelineConfig;
   shopping: ShoppingConnectConfig;
   disclosure: DisclosureConfig;
+  safety: SafetyConfig;
 }
 function resolvePipelineConfig(flow: PipelineConfig['flow']): PipelineConfig
 ```
@@ -84,7 +93,7 @@ R13 1~3차에서 만든 options 통로를 그대로 사용. `aiOptions`/`options
 | 7.1-e | 이미지 포맷 클러스터 (imageStyle/Ratio 4종) 동일 절차 | module |
 | 7.1-f | 프로바이더 클러스터 흡수 (resolveImageProviderFallback → config) | local |
 | 7.1-g | ✅ 쇼핑커넥트 sc* 클러스터 | module |
-| 7.1-h | 공시/안전(ftc/adb) 클러스터 + 직독 0 래칫 마감 | local |
+| 7.1-h | ✅ 공시/안전(ftc/adb) 클러스터 + 직독 0 래칫 마감 | local |
 
 각 단계 라이브 회귀 시 즉시 단독 revert 가능. 7.1-d 이후부터 "한 플로우 수정이
 다른 플로우를 건드릴 수 없는" 목표 상태에 실질 진입.
@@ -95,7 +104,7 @@ R13 1~3차에서 만든 options 통로를 그대로 사용. `aiOptions`/`options
   게이트가 커버. 신규 모듈의 인라인 번들 포함 여부를 7.1-a에서 확인.
 - **스냅샷 동작 변화**: §2.2 명기 — 의도된 개선이나 릴리즈 노트에 기록.
 - **이중 전달 기간**: config + 개별 키 공존으로 전환기 코드가 일시적으로 늘어남
-  — 7.1-h에서 개별 키 전달 제거로 정리.
+  — 7.1-h에서 발행 경로의 공시/안전 직독은 0건으로 정리. 잔여 개별 키 전달은 Phase 7.4 분해 직전 확인.
 
 ## 5. 진행 기록
 
@@ -111,5 +120,8 @@ R13 1~3차에서 만든 options 통로를 그대로 사용. `aiOptions`/`options
 - 6/13 7.1-g 완료: scSubImageMode/scSubImageSource/scAIImageEngine/
   scAutoThumbnailSetting 읽기를 PipelineConfig.shopping + readRawPipelineSettings() 경유로 통일.
   레거시 scSubImageSource 엔진명은 ai 모드로 정규화. 가드: phase71/phase72 타깃 19/19 GREEN.
-- 남은 단계: 7.1-h(공시/안전 클러스터 + 직독 0 래칫 마감).
+- 6/13 7.1-h 완료: ftcDisclosureEnabled/ftcDisclosureText/adbIpChangeEnabled/
+  adbIpChangeEvery 발행 경로 직독을 PipelineConfig.disclosure/safety 경유로 통일.
+  제휴 모드 기본 공시 fallback은 보존. 가드: phase71/phase72 타깃 20/20 GREEN.
+- 남은 단계: Phase 7.4 god file 분해 전 characterization 테스트 보강.
 - 라이브 일괄 검증(3플로우)은 7.1-d 이후 또는 다음 릴리즈 전 1회.

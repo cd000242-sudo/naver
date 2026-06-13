@@ -38,6 +38,15 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
       aiImageEngine: 'nano-banana-pro',
       autoThumbnail: false,
     });
+    expect(cfg.disclosure).toEqual({
+      enabledSetting: null,
+      text: '',
+      defaultText: '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.',
+    });
+    expect(cfg.safety).toEqual({
+      adbIpChangeEnabled: false,
+      adbIpChangeEvery: 1,
+    });
   });
 
   it('저장된 값을 직독과 동일한 규칙으로 해석한다 (boolean은 === "true")', () => {
@@ -50,6 +59,10 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
       scSubImageMode: 'ai',
       scAIImageEngine: 'openai-image',
       scAutoThumbnailSetting: 'true',
+      ftcDisclosureEnabled: 'true',
+      ftcDisclosureText: '제휴 링크 안내 문구',
+      adbIpChangeEnabled: 'true',
+      adbIpChangeEvery: '3',
     });
     const cfg = resolvePipelineConfig('continuous');
     expect(cfg.image.headingImageMode).toBe('thumbnail-only');
@@ -61,6 +74,10 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     expect(cfg.shopping.subImageMode).toBe('ai');
     expect(cfg.shopping.aiImageEngine).toBe('openai-image');
     expect(cfg.shopping.autoThumbnail).toBe(true);
+    expect(cfg.disclosure.enabledSetting).toBe(true);
+    expect(cfg.disclosure.text).toBe('제휴 링크 안내 문구');
+    expect(cfg.safety.adbIpChangeEnabled).toBe(true);
+    expect(cfg.safety.adbIpChangeEvery).toBe(3);
   });
 
   it('쇼핑커넥트 legacy scSubImageSource에 엔진명이 남아도 ai 모드로 해석한다', () => {
@@ -133,8 +150,8 @@ describe('직독 래칫 — 공유 헬퍼/풀오토 위임부 (7.1-d)', () => {
     for (const key of ['headingImageMode', 'textOnlyPublish', 'thumbnailTextInclude', 'imageStyle', 'imageRatio', 'thumbnailImageRatio', 'subheadingImageRatio', 'imageFallbackPolicy']) {
       expect(count(key)).toBe(0);
     }
-    expect(count('ftcDisclosureEnabled')).toBeLessThanOrEqual(1);
-    expect(count('ftcDisclosureText')).toBeLessThanOrEqual(1);
+    expect(count('ftcDisclosureEnabled')).toBe(0);
+    expect(count('ftcDisclosureText')).toBe(0);
     // 직접 UI 진입점(collectFullAutoFormData)의 1회 해석 존재
     expect(src).toContain("const pipelineCfg = resolvePipelineConfig('full-auto')");
   });
@@ -181,6 +198,23 @@ describe('직독 래칫 — 공유 헬퍼/풀오토 위임부 (7.1-d)', () => {
     const pipeline = read('src', 'renderer', 'modules', 'pipelineConfig.ts');
     expect(pipeline).toContain("pipelineReadRaw('scSubImageMode')");
     expect(pipeline).toContain('function normalizeShoppingSubImageMode');
+  });
+
+  it('[7.1-h] 발행 경로의 공시/안전 설정 읽기는 pipelineConfig 경유로 잠근다', () => {
+    const mam = read('src', 'renderer', 'modules', 'multiAccountManager.ts');
+    const ph = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
+    const faf = read('src', 'renderer', 'modules', 'fullAutoFlow.ts');
+    const count = (src: string, key: string) =>
+      (src.match(new RegExp(`localStorage\\.getItem\\('${key}'\\)`, 'g')) || []).length;
+    for (const src of [mam, ph, faf]) {
+      expect(count(src, 'ftcDisclosureEnabled')).toBe(0);
+      expect(count(src, 'ftcDisclosureText')).toBe(0);
+      expect(count(src, 'adbIpChangeEnabled')).toBe(0);
+      expect(count(src, 'adbIpChangeEvery')).toBe(0);
+    }
+    const pipeline = read('src', 'renderer', 'modules', 'pipelineConfig.ts');
+    expect(pipeline).toContain("pipelineReadRaw('ftcDisclosureEnabled')");
+    expect(pipeline).toContain("pipelineReadRaw('adbIpChangeEvery')");
   });
 });
 

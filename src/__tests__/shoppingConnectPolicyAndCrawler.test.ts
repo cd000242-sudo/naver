@@ -25,16 +25,17 @@ describe('shopping-connect policy and crawler hardening', () => {
   });
 
   it('keeps a clear FTC disclosure on all full-auto paths', () => {
-    const sources = [
-      'src/renderer/utils/ftcResolver.ts',
-      'src/renderer/modules/fullAutoFlow.ts',
-      'src/renderer/modules/multiAccountManager.ts',
-    ].map(readSource);
+    const ftcResolver = readSource('src/renderer/utils/ftcResolver.ts');
+    const pipelineConfig = readSource('src/renderer/modules/pipelineConfig.ts');
+    const fullAutoFlow = readSource('src/renderer/modules/fullAutoFlow.ts');
+    const multiAccountManager = readSource('src/renderer/modules/multiAccountManager.ts');
 
-    for (const source of sources) {
+    for (const source of [ftcResolver, pipelineConfig]) {
       expect(source).toContain('쇼핑커넥트/제휴마케팅 활동');
       expect(source).toContain('수수료');
     }
+    expect(fullAutoFlow).toContain('const disclosureCfg = pipelineCfg.disclosure');
+    expect(multiAccountManager).toContain('const _disclosureCfg = itemPipelineCfg.disclosure');
   });
 
   it('extracts structured product metadata and page quality diagnostics', () => {

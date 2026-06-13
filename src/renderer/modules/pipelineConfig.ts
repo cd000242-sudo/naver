@@ -24,11 +24,24 @@ export interface ShoppingConnectPipelineConfig {
   autoThumbnail: boolean;
 }
 
+export interface DisclosurePipelineConfig {
+  enabledSetting: boolean | null;
+  text: string;
+  defaultText: string;
+}
+
+export interface SafetyPipelineConfig {
+  adbIpChangeEnabled: boolean;
+  adbIpChangeEvery: number;
+}
+
 export interface PipelineConfig {
   flow: PipelineFlow;
   resolvedAt: number;
   image: ImagePipelineConfig;
   shopping: ShoppingConnectPipelineConfig;
+  disclosure: DisclosurePipelineConfig;
+  safety: SafetyPipelineConfig;
 }
 
 function pipelineReadString(key: string, fallback: string): string {
@@ -64,6 +77,10 @@ export interface RawPipelineSettings {
   scSubImageSource: string | null;
   scAIImageEngine: string | null;
   scAutoThumbnailSetting: string | null;
+  ftcDisclosureEnabled: string | null;
+  ftcDisclosureText: string | null;
+  adbIpChangeEnabled: string | null;
+  adbIpChangeEvery: string | null;
 }
 
 function pipelineReadRaw(key: string): string | null {
@@ -95,8 +112,15 @@ export function readRawPipelineSettings(): RawPipelineSettings {
     scSubImageSource: pipelineReadRaw('scSubImageSource'),
     scAIImageEngine: pipelineReadRaw('scAIImageEngine'),
     scAutoThumbnailSetting: pipelineReadRaw('scAutoThumbnailSetting'),
+    ftcDisclosureEnabled: pipelineReadRaw('ftcDisclosureEnabled'),
+    ftcDisclosureText: pipelineReadRaw('ftcDisclosureText'),
+    adbIpChangeEnabled: pipelineReadRaw('adbIpChangeEnabled'),
+    adbIpChangeEvery: pipelineReadRaw('adbIpChangeEvery'),
   };
 }
+
+const DEFAULT_FTC_DISCLOSURE_TEXT =
+  '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.';
 
 const SHOPPING_AI_ENGINE_NAMES = new Set([
   'nano-banana-pro',
@@ -126,6 +150,11 @@ function normalizeShoppingSubImageMode(raw: RawPipelineSettings): ShoppingSubIma
   return 'collected';
 }
 
+function normalizePositiveInt(value: string | null, fallback: number): number {
+  const parsed = Number.parseInt(String(value ?? ''), 10);
+  return Number.isFinite(parsed) ? Math.max(1, parsed) : fallback;
+}
+
 export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   const raw = readRawPipelineSettings();
   return {
@@ -144,6 +173,15 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       subImageMode: normalizeShoppingSubImageMode(raw),
       aiImageEngine: raw.scAIImageEngine || 'nano-banana-pro',
       autoThumbnail: raw.scAutoThumbnailSetting === 'true',
+    },
+    disclosure: {
+      enabledSetting: raw.ftcDisclosureEnabled === null ? null : raw.ftcDisclosureEnabled === 'true',
+      text: (raw.ftcDisclosureText || '').trim(),
+      defaultText: DEFAULT_FTC_DISCLOSURE_TEXT,
+    },
+    safety: {
+      adbIpChangeEnabled: raw.adbIpChangeEnabled === 'true',
+      adbIpChangeEvery: normalizePositiveInt(raw.adbIpChangeEvery, 1),
     },
   };
 }

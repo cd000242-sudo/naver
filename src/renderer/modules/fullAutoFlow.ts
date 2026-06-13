@@ -2586,6 +2586,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         appendLog('⏹️ 발행 시작 전 취소 감지 → 건너뜁니다.');
         throw new Error('사용자가 작업을 취소했습니다.');
     }
+    const pipelineCfg = resolvePipelineConfig('full-auto');
     const modal = window.currentProgressModal;
     appendLog('📤 블로그 발행을 준비합니다.');
     showUnifiedProgress(85, '블로그 발행 준비 중...', '네이버 계정 정보를 확인하고 있습니다.');
@@ -2838,17 +2839,16 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     const ftcCheckboxEl = document.getElementById('unified-ftc-disclosure');
     const ftcTextareaEl = document.getElementById('unified-ftc-text');
     const isAffiliateModeFtc = formData.contentMode === 'affiliate';
-    const storedFtcEnabled = localStorage.getItem('ftcDisclosureEnabled');
-    const DEFAULT_FTC_TEXT = '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.';
+    const disclosureCfg = pipelineCfg.disclosure;
     let ftcEnabled;
     let ftcSource;
     if (ftcCheckboxEl) {
         ftcEnabled = ftcCheckboxEl.checked;
         ftcSource = 'checkbox';
     }
-    else if (storedFtcEnabled !== null) {
-        ftcEnabled = storedFtcEnabled === 'true';
-        ftcSource = 'localStorage';
+    else if (disclosureCfg.enabledSetting !== null) {
+        ftcEnabled = disclosureCfg.enabledSetting;
+        ftcSource = 'PipelineConfig';
     }
     else {
         ftcEnabled = isAffiliateModeFtc;
@@ -2856,8 +2856,8 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     }
     const ftcText = ftcEnabled
         ? (ftcTextareaEl?.value?.trim()
-            || (localStorage.getItem('ftcDisclosureText') || '').trim()
-            || (isAffiliateModeFtc ? DEFAULT_FTC_TEXT : ''))
+            || disclosureCfg.text
+            || (isAffiliateModeFtc ? disclosureCfg.defaultText : ''))
         : '';
     const finalContent = cleanedContent;
     if (ftcEnabled && ftcText) {
