@@ -2,8 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { fileURLToPath } from 'url';
 import * as path from 'path';
 import {
+  CRITICAL_PRELOAD_API_METHODS,
   extractPreloadChannels,
+  extractPreloadApiMethods,
   extractMainChannels,
+  findMissingCriticalApiMethods,
   findUnregisteredChannels,
   runIpcLint,
 } from '../../scripts/lint-ipc.mjs';
@@ -55,5 +58,31 @@ describe('ipc contract lint (6.2)', () => {
       `safeHandle('e:f', h)`,
     ]);
     expect([...channels].sort()).toEqual(['a:b', 'c:d', 'e:f']);
+  });
+
+  it('catches missing critical preload API methods before renderer runtime', () => {
+    const preloadFixture = `
+      generateStructuredContent: () => ipcRenderer.invoke('automation:generateStructuredContent'),
+      matchImagesToHeadings: () => ipcRenderer.invoke('image:matchToHeadings'),
+      collectImagesFromShopping: () => ipcRenderer.invoke('image:collectFromShopping'),
+    `;
+
+    expect([...extractPreloadApiMethods(preloadFixture)].sort()).toEqual([
+      'collectImagesFromShopping',
+      'generateStructuredContent',
+      'matchImagesToHeadings',
+    ]);
+    expect(findMissingCriticalApiMethods(preloadFixture, [
+      'generateStructuredContent',
+      'matchImages',
+    ])).toEqual(['matchImages']);
+  });
+
+  it('the real preload exposes all critical renderer API methods', () => {
+    const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+    const result = runIpcLint(root);
+
+    expect(CRITICAL_PRELOAD_API_METHODS).toContain('matchImages');
+    expect(result.missingCriticalApiMethods).toEqual([]);
   });
 });

@@ -19,7 +19,17 @@ export const ALLOWLIST = new Set([
   // (none yet)
 ]);
 
+export const CRITICAL_PRELOAD_API_METHODS = [
+  'generateStructuredContent',
+  'matchImagesToHeadings',
+  'matchImages',
+  'collectImagesFromShopping',
+  'multiAccountPublish',
+  'downloadAndSaveMultipleImages',
+];
+
 const PRELOAD_RE = /ipcRenderer\.(?:invoke|send)\(\s*['"`]([^'"`$]+)['"`]/g;
+const PRELOAD_API_METHOD_RE = /^\s*([A-Za-z_$][\w$]*)\s*:/gm;
 // `once` included: license:code registers lazily when the license window
 // opens — a real registration, not a dead channel.
 const MAIN_RE = /(?:ipcMain\.(?:handle|on|once)|safeHandle)\(\s*['"`]([^'"`$]+)['"`]/g;
@@ -28,6 +38,12 @@ export function extractPreloadChannels(source) {
   const channels = new Set();
   for (const m of String(source).matchAll(PRELOAD_RE)) channels.add(m[1]);
   return channels;
+}
+
+export function extractPreloadApiMethods(source) {
+  const methods = new Set();
+  for (const m of String(source).matchAll(PRELOAD_API_METHOD_RE)) methods.add(m[1]);
+  return methods;
 }
 
 export function extractMainChannels(sources) {
@@ -43,6 +59,15 @@ export function findUnregisteredChannels(preloadSource, mainSources) {
   const preload = extractPreloadChannels(preloadSource);
   const main = extractMainChannels(mainSources);
   return [...preload].filter((ch) => !main.has(ch) && !ALLOWLIST.has(ch)).sort();
+}
+
+/** Returns critical window.api methods that disappeared from preload. */
+export function findMissingCriticalApiMethods(
+  preloadSource,
+  requiredMethods = CRITICAL_PRELOAD_API_METHODS
+) {
+  const preloadMethods = extractPreloadApiMethods(preloadSource);
+  return [...requiredMethods].filter((method) => !preloadMethods.has(method)).sort();
 }
 
 function walkTsFiles(dir, out) {
@@ -64,9 +89,12 @@ export function runIpcLint(rootDir) {
   const mainFiles = walkTsFiles(path.join(rootDir, 'src'), []);
   const mainSources = mainFiles.map((f) => fs.readFileSync(f, 'utf8'));
   const missing = findUnregisteredChannels(preloadSource, mainSources);
+  const missingCriticalApiMethods = findMissingCriticalApiMethods(preloadSource);
   return {
     missing,
+    missingCriticalApiMethods,
     preloadCount: extractPreloadChannels(preloadSource).size,
+    preloadApiMethodCount: extractPreloadApiMethods(preloadSource).size,
     mainCount: extractMainChannels(mainSources).size,
     mainFileCount: mainFiles.length,
   };
@@ -75,12 +103,26 @@ export function runIpcLint(rootDir) {
 const isCli = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isCli) {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-  const { missing, preloadCount, mainCount, mainFileCount } = runIpcLint(root);
+  const {
+    missing,
+    missingCriticalApiMethods,
+    preloadCount,
+    preloadApiMethodCount,
+    mainCount,
+    mainFileCount,
+  } = runIpcLint(root);
   console.log(`[lint:ipc] preload 채널 ${preloadCount}개 ↔ main 등록 ${mainCount}개 (${mainFileCount}개 파일 스캔)`);
+  console.log(`[lint:ipc] preload API methods ${preloadApiMethodCount}개, critical ${CRITICAL_PRELOAD_API_METHODS.length}개 확인`);
   if (missing.length > 0) {
     console.error(`[lint:ipc] ❌ main 프로세스에 등록되지 않은 채널 ${missing.length}개:`);
     for (const ch of missing) console.error(`  - ${ch}`);
     console.error('[lint:ipc] 등록 누락은 blob:hasMany 사고(13b29f9a)와 같은 silent 기능 전멸을 만듭니다.');
+    process.exit(1);
+  }
+  if (missingCriticalApiMethods.length > 0) {
+    console.error(`[lint:ipc] ❌ critical preload API method 누락 ${missingCriticalApiMethods.length}개:`);
+    for (const method of missingCriticalApiMethods) console.error(`  - window.api.${method}`);
+    console.error('[lint:ipc] preload API 이름 누락은 window.api.* is not a function 런타임 오류로 이어집니다.');
     process.exit(1);
   }
   console.log('[lint:ipc] ✅ 모든 preload 채널이 main에 등록되어 있습니다.');

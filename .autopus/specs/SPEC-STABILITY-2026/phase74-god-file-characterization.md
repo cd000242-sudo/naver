@@ -239,11 +239,42 @@ failure-tolerant behavior.
 - `npm run lint:ipc`
   - passed.
 
+## 7.4-j Completed
+
+Extended `scripts/lint-ipc.mjs` with critical preload API surface validation.
+
+This targets the `window.api.matchImages is not a function` class directly:
+
+- The existing IPC channel lint still verifies preload channels are registered
+  in main.
+- The new critical API method lint verifies the preload bridge still exposes
+  renderer-facing method names that must not disappear during bundling or
+  refactoring.
+- The first protected set includes `matchImages`, `matchImagesToHeadings`,
+  `generateStructuredContent`, shopping image collection, multi-account publish,
+  and multi-image download.
+
+## 7.4-j Verification
+
+- `npm test -- src/__tests__/ipcContractLint.test.ts`
+  - 7 tests passed.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+- `npm test -- src/__tests__/ipcContractLint.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 14 tests passed.
+- `npm test`
+  - 264 files / 3,108 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - 0 errors / 1,023 baseline warnings.
+- `npm run lint:ipc`
+  - passed.
+
 ## Next
 
-7.4-j should continue the stability split. Suggested order:
+7.4-k should continue the stability split. Suggested order:
 
-1. `main.ts` IPC registration clusters, because dead-router regressions already
-   shipped more than once.
-2. `contentGenerator.ts` pure prompt/title/rate-limit helpers.
-3. `renderer/renderer.ts` only after event handler ownership is clear.
+1. `contentGenerator.ts` pure prompt/title/rate-limit helpers.
+2. `renderer/renderer.ts` only after event handler ownership is clear.

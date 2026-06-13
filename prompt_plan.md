@@ -66,7 +66,9 @@
   CTA 후/CTA 없는 경로가 같은 키워드 조건과 hook pool을 공유하도록 통합.
 - ✅ 7.4-i (이번 세션): 공식사이트 검색 실행/결과 삽입을 `insertOfficialSiteTailBlock()`로 분리 —
   검색 대상 판단, finder 호출, 링크카드 삽입, 실패 무시 로그를 한 helper로 통합.
-- 다음: Phase 7.4-j main IPC registration cluster 분해 또는 contentGenerator pure helper 분해
+- ✅ 7.4-j (이번 세션): `lint:ipc`에 critical preload API surface 검사를 추가 —
+  `window.api.matchImages is not a function` 계열 회귀가 main 채널 검사 전에 잡히도록 보강.
+- 다음: Phase 7.4-k contentGenerator pure helper 분해 또는 renderer event ownership 분해
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert
