@@ -60,9 +60,9 @@ describe('publish metadata propagation', () => {
       tailActions.indexOf('export async function insertPreviousPostTailBlock'),
       tailActions.length
     );
-    const hashtagTail = code.slice(
-      code.indexOf('const hashtagGapEnterCount'),
-      code.indexOf('// 7. CTA 버튼 최종 확인')
+    const hashtagTail = tailActions.slice(
+      tailActions.indexOf('export async function applyTailHashtagsAfterCards'),
+      tailActions.length
     );
 
     expect(tailActions).toContain("export const PREVIOUS_POST_SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'");
@@ -72,6 +72,7 @@ describe('publish metadata propagation', () => {
     expect(tailHelper).toMatch(/removeBareUrlTextAfterLinkCard/);
     expect(tailHelper).not.toMatch(/effectiveCtas\.some\(\(cta\) => cta\.link && cta\.link === previousPostUrl\)/);
     expect(code).toMatch(/previousPostTailInserted = previousPostTailInserted \|\| previousResult\.inserted/);
+    expect(code).toMatch(/await applyTailHashtagsAfterCards\(\{/);
     expect(hashtagTail).toMatch(/const hashtagGapEnterCount = getHashtagGapEnterCount\(previousPostTailInserted\)/);
     expect(hashtagTail.indexOf('page.keyboard.press')).toBeLessThan(hashtagTail.indexOf('applyHashtagsInBody'));
   });

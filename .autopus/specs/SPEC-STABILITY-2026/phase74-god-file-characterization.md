@@ -121,9 +121,33 @@ Existing rich-paste tail wiring guards now read the moved action module while
 - `npm test -- src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
   - 37 tests passed.
 
+## 7.4-f Completed
+
+Extended `src/automation/editorTailActions.ts` with
+`applyTailHashtagsAfterCards()`.
+
+The helper now owns the hashtag tail runtime sequence:
+
+- Move to the editor end after previous-post/CTA insertion.
+- Re-run the tail typing readiness probe.
+- Insert `Enter` 5 when a previous-post card was inserted, otherwise `Enter` 3.
+- Wait shorter when the previous-post card was already detected and longer when
+  the card state is uncertain.
+- Type hashtags through the existing body hashtag path after the gap is in place.
+
+This keeps the previous-post/CTA/hashtag ordering protected while shrinking
+`editorHelpers.ts` further.
+
+## 7.4-f Verification
+
+- `npm test -- src/__tests__/editorTailActions.test.ts`
+  - 4 tests passed.
+- `npm test -- src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 39 tests passed.
+
 ## Next
 
-7.4-f should continue the editor tail runtime split. Suggested order:
+7.4-g should continue the editor tail runtime split. Suggested order:
 
 1. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
    and previous-post/hashtag failures are most expensive.

@@ -52,9 +52,9 @@ describe('rich paste tail wiring', () => {
   });
 
   it('re-verifies keyboard input right before the hashtag tail', () => {
-    const code = read('automation/editorHelpers.ts');
+    const code = read('automation/editorTailActions.ts');
     const beforeHashtags = code.slice(
-      code.indexOf('이전글 카드 뒤에는 반드시 Enter'),
+      code.indexOf('export async function applyTailHashtagsAfterCards'),
       code.indexOf('const hashtagGapEnterCount')
     );
     expect(beforeHashtags).toMatch(/ensureTailTypingReady\(/);

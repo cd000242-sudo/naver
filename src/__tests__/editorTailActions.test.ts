@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  applyTailHashtagsAfterCards,
   insertPreviousPostTailBlock,
   PREVIOUS_POST_SEPARATOR,
 } from '../automation/editorTailActions.js';
@@ -40,9 +41,14 @@ function makePage() {
 
 function makeSelf() {
   return {
+    DELAYS: {
+      SHORT: 150,
+      MEDIUM: 200,
+    },
     log: vi.fn(),
     delay: vi.fn(async () => undefined),
     getAttachedFrame: vi.fn(async () => ({ ok: true })),
+    applyHashtagsInBody: vi.fn(async () => undefined),
     waitForLinkCard: vi.fn(async () => true),
     removeBareUrlTextAfterLinkCard: vi.fn(async () => undefined),
   };
@@ -107,5 +113,50 @@ describe('editor tail actions', () => {
     expect(result).toEqual({ inserted: false, cardReady: false });
     expect(typed).toEqual([]);
     expect(pressed).toEqual([]);
+  });
+
+  it('moves below the previous-post card before typing hashtags', async () => {
+    const self = makeSelf();
+    const { page, pressed } = makePage();
+
+    await applyTailHashtagsAfterCards({
+      self,
+      page: page as any,
+      previousPostTailInserted: true,
+      previousPostCardReady: true,
+      hashtagsToApply: ['#one', '#two'],
+    });
+
+    expect(pressed).toEqual([
+      'End',
+      'down:Control',
+      'End',
+      'up:Control',
+      'Enter',
+      'Enter',
+      'Enter',
+      'Enter',
+      'Enter',
+      'End',
+    ]);
+    expect(self.delay).toHaveBeenCalledWith(1000);
+    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one', '#two']);
+  });
+
+  it('uses the shorter hashtag gap when no previous-post card was inserted', async () => {
+    const self = makeSelf();
+    const { page, pressed } = makePage();
+
+    await applyTailHashtagsAfterCards({
+      self,
+      page: page as any,
+      previousPostTailInserted: false,
+      previousPostCardReady: false,
+      hashtagsToApply: [],
+    });
+
+    expect(pressed.filter((key) => key === 'Enter')).toHaveLength(3);
+    expect(self.delay).toHaveBeenCalledWith(3000);
+    expect(self.applyHashtagsInBody).not.toHaveBeenCalled();
   });
 });

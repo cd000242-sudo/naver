@@ -3,7 +3,7 @@ import { PREV_POST_HOOKS } from './ctaHelpers.js';
 import { recordSilentFailure } from './silentFailureCounter.js';
 import { safeKeyboardType } from './typingUtils.js';
 import { ensureTailTypingReady } from './richTextPaste.js';
-import { normalizeComparableUrl } from './editorTailPlan.js';
+import { getHashtagGapEnterCount, normalizeComparableUrl } from './editorTailPlan.js';
 
 type ResolvedRunOptions = any;
 type TailCtaLike = { link?: string; text?: string };
@@ -70,4 +70,57 @@ export async function insertPreviousPostTailBlock(
   self.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook}, 카드: ${cardReady ? '감지' : '대기 초과'})`);
 
   return { inserted: true, cardReady };
+}
+
+export async function applyTailHashtagsAfterCards(input: {
+  self: any;
+  page: Page;
+  previousPostTailInserted: boolean;
+  previousPostCardReady: boolean;
+  hashtagsToApply: readonly string[];
+}): Promise<void> {
+  const {
+    self,
+    page,
+    previousPostTailInserted,
+    previousPostCardReady,
+    hashtagsToApply,
+  } = input;
+
+  self.log('   → 커서를 에디터 맨 끝으로 이동 (해시태그 영역 준비)');
+  await page.keyboard.press('End');
+  await self.delay(100);
+  await page.keyboard.down('Control');
+  await page.keyboard.press('End');
+  await page.keyboard.up('Control');
+  await self.delay(200);
+
+  try {
+    const hashtagFrame = await self.getAttachedFrame();
+    if (hashtagFrame) await ensureTailTypingReady(page, hashtagFrame, (m: string) => self.log(m));
+  } catch {
+    // best-effort
+  }
+
+  const hashtagGapEnterCount = getHashtagGapEnterCount(previousPostTailInserted);
+  self.log(`   → Enter ${hashtagGapEnterCount}회 입력 (해시태그 영역 준비)`);
+  for (let i = 0; i < hashtagGapEnterCount; i++) {
+    await page.keyboard.press('Enter');
+    await self.delay(self.DELAYS.SHORT);
+  }
+  self.log(`   ✅ Enter ${hashtagGapEnterCount}회 완료`);
+
+  const cardStabilizeDelay = previousPostTailInserted && previousPostCardReady ? 1000 : 3000;
+  self.log(`   ⏳ 링크 카드 안정화 대기(${Math.round(cardStabilizeDelay / 1000)}초)...`);
+  await self.delay(cardStabilizeDelay);
+  self.log('   ✅ 링크 카드 안정화 완료');
+
+  if (hashtagsToApply.length > 0) {
+    self.log(`   → 해시태그 ${hashtagsToApply.length}개 입력 중...`);
+    await page.keyboard.press('End');
+    await self.delay(100);
+    await self.applyHashtagsInBody([...hashtagsToApply]);
+    await self.delay(self.DELAYS.MEDIUM);
+    self.log(`   ✅ 해시태그 입력 완료`);
+  }
 }

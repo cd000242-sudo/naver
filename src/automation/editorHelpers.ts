@@ -25,10 +25,9 @@ import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, ensu
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
   getExpectedLinkCardMin,
-  getHashtagGapEnterCount,
   planEditorTail,
 } from './editorTailPlan.js';
-import { insertPreviousPostTailBlock } from './editorTailActions.js';
+import { applyTailHashtagsAfterCards, insertPreviousPostTailBlock } from './editorTailActions.js';
 
 // ── Local utility: smartTypeWithAutoHighlight ──
 async function smartTypeWithAutoHighlight(
@@ -2403,51 +2402,14 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     // ✅ 중복 문구 제거됨: '쇼핑커넥트 수익이 발생할 수 있습니다' 문구는 
     // 이미 위에서 '제휴 마케팅 고지 문구'로 처리되므로 별도 추가하지 않음
 
-    // 5. 커서를 에디터 맨 끝으로 확실히 이동 (해시태그 짤림 방지)
-    self.log('   → 커서를 에디터 맨 끝으로 이동 (해시태그 영역 준비)');
-    await page.keyboard.press('End');
-    await self.delay(100);
-    await page.keyboard.down('Control');
-    await page.keyboard.press('End');
-    await page.keyboard.up('Control');
-    await self.delay(200);
-
-    // 6. 이전글 카드 뒤에는 반드시 Enter 5회 후 해시태그를 타이핑한다.
-    // Link-card insertion mutates the DOM and can drop keyboard focus —
-    // verify input registers once more before the Enters and hashtag typing.
-    try {
-      const hashtagFrame = await self.getAttachedFrame();
-      if (hashtagFrame) await ensureTailTypingReady(page, hashtagFrame, (m: string) => self.log(m));
-    } catch {
-      // best-effort
-    }
-    const hashtagGapEnterCount = getHashtagGapEnterCount(previousPostTailInserted);
-    self.log(`   → Enter ${hashtagGapEnterCount}회 입력 (해시태그 영역 준비)`);
-    for (let i = 0; i < hashtagGapEnterCount; i++) {
-      await page.keyboard.press('Enter');
-      await self.delay(self.DELAYS.SHORT); // 150ms
-    }
-    self.log(`   ✅ Enter ${hashtagGapEnterCount}회 완료`);
-
-    // ✅ 카드가 이미 감지된 경우 긴 고정 대기 대신 짧게 안정화한다.
-    const cardStabilizeDelay = previousPostTailInserted && previousPostCardReady ? 1000 : 3000;
-    self.log(`   → 링크 카드 안정화 대기 (${Math.round(cardStabilizeDelay / 1000)}초)...`);
-    await self.delay(cardStabilizeDelay);
-    self.log('   ✅ 링크 카드 안정화 완료');
-
-    // 7. 해시태그 입력 (최대 5개) - 본문에 직접 입력
     const hashtagsToApply = tailPlan.hashtagsToApply;
-    if (hashtagsToApply.length > 0) {
-      self.log(`   → 해시태그 ${hashtagsToApply.length}개 입력 중...`);
-
-      // ✅ 해시태그 입력 전 다시 한번 커서 위치 확인
-      await page.keyboard.press('End');
-      await self.delay(100);
-
-      await self.applyHashtagsInBody(hashtagsToApply);
-      await self.delay(self.DELAYS.MEDIUM); // 200ms
-      self.log(`   ✅ 해시태그 입력 완료`);
-    }
+    await applyTailHashtagsAfterCards({
+      self,
+      page,
+      previousPostTailInserted,
+      previousPostCardReady,
+      hashtagsToApply,
+    });
 
     // [SPEC-STABILITY-2026 R2] Stash tail expectations for the pre-publish
     // assertion in publishBlogPost (observation mode — log only).
