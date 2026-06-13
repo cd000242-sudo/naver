@@ -67,6 +67,7 @@ import {
   cleanupTrailingTitleTokens,
   cleanupColonQuotePattern,
 } from './contentTitleHelpers';
+import { removeDuplicatePhrases as removeDuplicatePhrasesFromTitle } from './contentTitleDuplicateRemoval.js';
 // [Phase 3-6/v2.10.144] 제목 품질 validator 4개 추출
 import {
   computeSeoTitleCriticalIssues,
@@ -280,141 +281,6 @@ function buildRecentWinnersBlock(source: any): string {
 // [Phase 3-2/v2.10.140] stripAllFormatting 함수는 contentTextHelpers.ts로 추출됨 (god file 분해).
 //   외부 호출자 (naverBlogAutomation.ts, contentGenerator.test.ts)는 contentGenerator.ts의
 //   re-export를 통해 변경 없이 작동.
-
-/**
- * ✅ [2026-01-20] 제목에서 연속으로 중복되는 구절 제거
- * ✅ [2026-02-04] 단어 단위 중복 제거 추가 (박나래, 광고 손절 등)
- * 예: "박나래, 광고 줄줄이 손절 박나래 광고 손절, 복귀 1주일"
- *  → "박나래, 광고 줄줄이 손절, 복귀 1주일"
- */
-function removeDuplicatePhrases(title: string): string {
-  let t = String(title || '').trim();
-  if (!t || t.length < 10) return t;
-
-  // ✅ [2026-02-04] 단어 단위 중복 제거 (2자 이상 한글/영문 단어)
-  // ✅ [2026-02-24] 동음이의어 보호: 조사 문맥이 다르면 다른 의미로 간주
-  // ✅ [2026-02-24] 3회 이상 등장 단어도 완전 제거 (while 루프)
-  const words = t.match(/[가-힣]{2,}|[a-zA-Z]{2,}/g) || [];
-  const wordCountMap = new Map<string, number>();
-
-  for (const word of words) {
-    const normalized = word.toLowerCase();
-    wordCountMap.set(normalized, (wordCountMap.get(normalized) || 0) + 1);
-  }
-
-  // 2번 이상 등장하는 단어 찾기
-  for (const [word, count] of wordCountMap.entries()) {
-    if (count >= 2 && word.length >= 2) {
-      const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-      // ✅ 동음이의어 보호: 각 등장 위치의 뒤따르는 조사를 비교
-      const contextPattern = new RegExp(`${escaped}([가-힣]{0,2})`, 'gi');
-      const contexts: string[] = [];
-      let cm;
-      while ((cm = contextPattern.exec(t)) !== null) {
-        contexts.push(cm[1] || '');
-      }
-      // 조사가 모두 다르면 다른 문맥(동음이의어)으로 간주 → 건너뜀
-      const uniqueContexts = new Set(contexts);
-      if (uniqueContexts.size >= contexts.length && contexts.length > 1) {
-        console.log(`[DuplicateRemoval] 동음이의어 보호: "${word}" (문맥: ${contexts.join(', ')})`);
-        continue;
-      }
-
-      // ✅ while 루프로 3회 이상 등장도 완전 제거
-      const pattern = new RegExp(`(${escaped}[^가-힣a-zA-Z]*)(.*?)\\s*${escaped}`, 'gi');
-      let prev;
-      do {
-        prev = t;
-        t = t.replace(pattern, (match, first, middle) => {
-          const trimmedMiddle = (middle || '').trim();
-          if (trimmedMiddle && !trimmedMiddle.match(/^[,\s:·•|]+$/)) {
-            return first + trimmedMiddle;
-          }
-          return first.trim();
-        });
-      } while (t !== prev);
-      if (t !== String(title || '').trim()) {
-        console.log(`[DuplicateRemoval] 단어 "${word}" 중복 제거됨: "${title}" → "${t}"`);
-      }
-    }
-  }
-
-  // ✅ [2026-02-01 FIX] 비연속 중복 패턴 제거 (A X A Y → A X Y)
-  // 예: "린백 LB221HA 사무용 컴퓨터 린백 LB221HA 가성비 후기" → "린백 LB221HA 사무용 컴퓨터 가성비 후기"
-  // ✅ [2026-02-24] 최소 6자로 상향 (한글 3글자) — 3자는 정상 텍스트 파괴 위험
-  for (let len = 20; len >= 6; len--) {
-    const regex = new RegExp(`(.{${len},${len}})(.{1,30}?)\\1`, 'g');
-    const before = t;
-    // 첫 번째 매치에서 중간 부분을 유지하고 두 번째 중복만 제거
-    t = t.replace(regex, (match, phrase, middle) => {
-      // 중간 부분이 존재하면 phrase + middle 유지 (두 번째 phrase 제거)
-      if (middle && middle.trim()) {
-        console.log(`[DuplicateRemoval] 비연속 중복 제거: "${phrase.trim()}" (중간: "${middle.trim().substring(0, 15)}...")`);
-        return phrase + middle;
-      }
-      return phrase; // 중간이 없으면 하나만 유지
-    });
-    if (t !== before) {
-      console.log(`[DuplicateRemoval] 비연속 중복 제거됨 (${len}자): "${before}" → "${t}"`);
-    }
-  }
-
-  // ✅ [2026-01-21] 콜론(:) 전후 동일/유사 텍스트 감지 및 제거
-  // 예: "캐치웰 CX PRO 매직타워 N: 캐치웰 울 집 캐치웰 CX PRO 매직타워 N, 한 달"
-  //  → "캐치웰 CX PRO 매직타워 N, 한 달 실사용 후기"
-  const colonIdx = t.indexOf(':');
-  if (colonIdx > 3 && colonIdx < t.length - 3) {
-    const beforeColon = t.slice(0, colonIdx).trim();
-    const afterColon = t.slice(colonIdx + 1).trim();
-
-    // 콜론 앞 텍스트와 동일/유사한 패턴이 콜론 뒤에도 있으면 정리
-    // 제품명이 반복되는 경우: "A: ... A, B" → "A B"
-    const normBefore = beforeColon.replace(/[\s\-–—:|·•.,!?()[\]{}\"']/g, '').toLowerCase();
-    if (normBefore.length >= 5) {
-      // afterColon에서 beforeColon과 동일한 텍스트가 있으면 제거
-      const escapedBefore = beforeColon.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const dupePattern = new RegExp(`\\s*${escapedBefore}\\s*[,:]?\\s*`, 'gi');
-      const cleanedAfter = afterColon.replace(dupePattern, ' ').replace(/\s+/g, ' ').trim();
-
-      if (cleanedAfter !== afterColon && cleanedAfter.length > 0) {
-        // 중복 제거 후 의미있는 텍스트가 남으면 재구성
-        const remaining = cleanedAfter.replace(/^[,\s:]+|[,\s:]+$/g, '').trim();
-        if (remaining.length >= 3) {
-          t = `${beforeColon} ${remaining}`;
-          console.log(`[DuplicateRemoval] 콜론 전후 중복 제거: "${title}" → "${t}"`);
-        } else {
-          // 남은게 없으면 콜론 앞 텍스트만 사용
-          t = beforeColon;
-          console.log(`[DuplicateRemoval] 콜론 뒤 제거 (중복): "${title}" → "${t}"`);
-        }
-      }
-    }
-  }
-
-  // ✅ [2026-01-21] 4~25자 길이의 연속 중복 패턴 찾기
-  // ✅ [2026-02-24] 최소 4자로 상향 (한글 2글자) — 3자는 정상 텍스트 파괴 위험
-  for (let len = 25; len >= 4; len--) {
-    const regex = new RegExp(`(.{${len},${len}})(?:[\\s,·•|]*\\1)+`, 'g');
-    const before = t;
-    t = t.replace(regex, '$1');
-    if (t !== before) {
-      console.log(`[DuplicateRemoval] 중복 제거됨 (${len}자): "${before}" → "${t}"`);
-    }
-  }
-
-  // ✅ [2026-01-21] 의미없는 짧은 단편 제거 ("울 집" 같은 AI 환각)
-  // ✅ [2026-02-24] 1글자 4연속만 제거 (2글자 3연속은 정상 한글 파괴 위험)
-  t = t.replace(/\s[가-힣]\s+[가-힣]\s+[가-힣]\s+[가-힣]\s/g, ' ');
-
-  // 연속된 쉼표/공백 정리
-  t = t.replace(/[,\s]{2,}/g, ', ').replace(/,\s*,/g, ',').trim();
-  t = t.replace(/^[,\s]+|[,\s]+$/g, '');
-
-  return t;
-}
-
-
 
 // [Phase 3-4/v2.10.142] stripOrdinalHeadingPrefix → contentTitleHelpers.ts
 
@@ -858,14 +724,14 @@ JSON:
       // ✅ [2026-02-09 FIX] 품질 평가 전에 제목 정제 실행!
       // 기존: AI 원본 → 품질 평가 → (나중) 정제 → 중복/빈괄호가 검증을 우회
       // 수정: AI 원본 → 정제 → 품질 평가 → 정제된 제목으로 반환
-      selectedTitle = removeDuplicatePhrases(
+      selectedTitle = removeDuplicatePhrasesFromTitle(
         cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(selectedTitle))))
       ).trim();
 
       if (titleCandidates) {
         titleCandidates = titleCandidates.map((c: { text: string; score: number; reasoning: string }) => ({
           ...c,
-          text: removeDuplicatePhrases(
+          text: removeDuplicatePhrasesFromTitle(
             cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(c.text))))
           ).trim(),
         })).filter((c: { text: string }) => c.text);
@@ -1360,7 +1226,7 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
         console.warn(`[FinalQualityGate] ⚠️ 최종 제목 품질 미달 (${finalCheck.score}점): "${finalContent.selectedTitle}"`);
         console.warn(`[FinalQualityGate]   issues: ${finalCheck.issues.join(', ')}`);
         // 접두사로 인한 훼손 → cleanup만 재적용하여 복구 시도
-        finalContent.selectedTitle = removeDuplicatePhrases(
+        finalContent.selectedTitle = removeDuplicatePhrasesFromTitle(
           cleanupColonQuotePattern(cleanupTrailingTitleTokens(
             cleanupStartingTitleTokens(sanitizeTitleSpecialChars(finalContent.selectedTitle))
           ))

@@ -272,9 +272,38 @@ This targets the `window.api.matchImages is not a function` class directly:
 - `npm run lint:ipc`
   - passed.
 
+## 7.4-k Completed
+
+Extracted title duplicate removal from `src/contentGenerator.ts` into
+`src/contentTitleDuplicateRemoval.ts`.
+
+This keeps the shopping-connect and URL-generation title cleanup behavior while
+shrinking `contentGenerator.ts` before deeper prompt/rate-limit work:
+
+- Reused the existing duplicate-removal behavior through a focused pure helper.
+- Rewired all title cleanup call sites to the helper import.
+- Added focused regression coverage for short-title trimming, colon-side product
+  duplication, and repeated Korean title words.
+
+## 7.4-k Verification
+
+- `npm test -- src/__tests__/contentTitleDuplicateRemoval.test.ts`
+  - 3 tests passed.
+- `npm test -- src/__tests__/contentTitleDuplicateRemoval.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 10 tests passed.
+- `npm test`
+  - 265 files / 3,111 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - 0 errors / 1,023 baseline warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-k should continue the stability split. Suggested order:
+7.4-l should continue the stability split. Suggested order:
 
-1. `contentGenerator.ts` pure prompt/title/rate-limit helpers.
+1. `contentGenerator.ts` pure prompt/rate-limit helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.
