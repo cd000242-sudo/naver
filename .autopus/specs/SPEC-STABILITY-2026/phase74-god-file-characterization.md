@@ -520,9 +520,43 @@ could contain unsupported phrases like "2026년 공식 가이드에서는" or
   - passed; 264 preload channels, 289 main registrations, 321 preload API
     methods, 6 critical API methods.
 
+## 7.4-s Completed
+
+Extracted duplicate/similarity generation heuristics from
+`src/contentGenerator.ts` into `src/contentDuplicateHeuristics.ts`.
+
+The helper now owns:
+
+- weighted text similarity scoring used by paragraph/sentence cleanup and full
+  article repeat cleanup.
+- permissive heading-order validation.
+- generated body length gating used by retry decisions.
+- duplicate heading detection.
+- repeated full article heading-sequence cleanup.
+
+This reduces the content generation god file while keeping the same stable
+retry thresholds for full-auto, semi-auto, continuous publishing, and URL-based
+generation paths.
+
+## 7.4-s Verification
+
+- `npm test -- src/__tests__/contentDuplicateHeuristics.test.ts`
+  - expected red first: module missing before helper extraction.
+- `npm test -- src/__tests__/contentDuplicateHeuristics.test.ts src/__tests__/contentGenerator.test.ts src/__tests__/contentGenerationTimeoutPolicy.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 55 tests passed.
+- `npm test`
+  - 273 test files passed, 3,138 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - passed with baseline warnings: 0 errors, 1,019 warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-s should continue the stability split. Suggested order:
+7.4-t should continue the stability split. Suggested order:
 
 1. `contentGenerator.ts` pure prompt helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.
