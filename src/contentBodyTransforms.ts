@@ -6,26 +6,9 @@
  */
 
 import type { StructuredContent } from './contentGenerator';
-import { removeEmojis } from './contentTextHelpers';
+import { removeEmojis, removeInternalStructureMarkersFromText } from './contentTextHelpers';
 
-const INTERNAL_STRUCTURE_SEQUENCE_PREFIX = /^\s*[FIRO](?:\s*(?:\u2192|->|=>|>|\/|-)\s*[FIRO]){1,5}\s*[:：]?\s*/i;
-const INTERNAL_STRUCTURE_PAREN_PREFIX = /^\s*\(\s*[FIRO]\s*\)\s*[:：]?\s*/i;
-
-export function removeInternalStructureMarkersFromText(text: string): string {
-  if (!text) return text;
-
-  const cleaned = String(text)
-    .split(/\r?\n/)
-    .map((line) => line
-      .replace(INTERNAL_STRUCTURE_SEQUENCE_PREFIX, '')
-      .replace(INTERNAL_STRUCTURE_PAREN_PREFIX, '')
-      .trimEnd())
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
-
-  return cleaned;
-}
+export { removeInternalStructureMarkersFromText } from './contentTextHelpers';
 
 export function removeInternalStructureMarkersFromContent(content: StructuredContent): StructuredContent {
   if (!content) return content;

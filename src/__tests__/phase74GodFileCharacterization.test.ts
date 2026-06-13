@@ -40,8 +40,17 @@ describe('Phase 7.4 characterization - contentGenerator public surface', () => {
       'generateContentsInParallel',
     ];
 
+    const reExportedFunctions = new Set([
+      'stripInternalMarkers',
+      'removeOrdinalHeadingLabelsFromBody',
+    ]);
+
     for (const name of exportedFunctions) {
-      expect(src).toMatch(new RegExp(`export\\s+(?:async\\s+)?function\\s+${name}\\b`));
+      if (reExportedFunctions.has(name)) {
+        expect(src).toMatch(new RegExp(`export\\s*\\{[^}]*\\b${name}\\b[^}]*\\}`));
+      } else {
+        expect(src).toMatch(new RegExp(`export\\s+(?:async\\s+)?function\\s+${name}\\b`));
+      }
     }
 
     expectAll(src, [

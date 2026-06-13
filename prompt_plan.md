@@ -86,7 +86,10 @@
 - ✅ 7.4-p (이번 세션): 모드×카테고리 자동 글톤 매칭을
   `contentTonePolicy.ts`로 분리 —
   홈판/SEO/메이트/쇼핑/업체 모드별 기본 톤 계약을 테스트로 고정.
-- 다음: Phase 7.4-q renderer event ownership 분해 또는 contentGenerator pure prompt helper 분해
+- ✅ 7.4-q (이번 세션): 본문 내부 마커 제거와 소제목 레이블 정리 helper를
+  `contentTextHelpers.ts`로 분리 —
+  기존 `contentGenerator` public export 호환과 직접 helper import를 테스트로 고정.
+- 다음: Phase 7.4-r renderer event ownership 분해 또는 contentGenerator pure prompt helper 분해
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

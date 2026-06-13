@@ -460,9 +460,40 @@ work:
   - passed; 264 preload channels, 289 main registrations, 321 preload API
     methods, 6 critical API methods.
 
+## 7.4-q Completed
+
+Extracted body marker cleanup helpers from `src/contentGenerator.ts` into
+`src/contentTextHelpers.ts`:
+
+- `stripInternalMarkers`
+- `removeOrdinalHeadingLabelsFromBody`
+- `removeInternalStructureMarkersFromText`
+
+`contentGenerator.ts` keeps named re-exports for existing callers, while new
+tests import the helpers directly from `contentTextHelpers.ts`.
+`contentBodyTransforms.ts` now reuses the shared internal-structure marker
+cleanup helper instead of owning a duplicate definition.
+
+## 7.4-q Verification
+
+- `npm test -- src/__tests__/contentTextHelpersMarkers.test.ts`
+  - expected red first: helper exports were not available from
+    `contentTextHelpers.ts`.
+- `npm test -- src/__tests__/phase74GodFileCharacterization.test.ts src/__tests__/contentTextHelpersMarkers.test.ts src/__tests__/contentGenerator.test.ts src/__tests__/stripInternalMarkers.test.ts`
+  - 40 tests passed.
+- `npm test`
+  - 271 test files passed, 3,131 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - passed with baseline warnings: 0 errors, 1,023 warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-q should continue the stability split. Suggested order:
+7.4-r should continue the stability split. Suggested order:
 
 1. `contentGenerator.ts` pure prompt helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.

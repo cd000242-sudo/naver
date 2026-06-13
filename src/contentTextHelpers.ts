@@ -90,6 +90,97 @@ export function stripAllFormatting(text: string): string {
   return cleaned.trim();
 }
 
+const INTERNAL_STRUCTURE_SEQUENCE_PREFIX = /^\s*[FIRO](?:\s*(?:\u2192|->|=>|>|\/|-)\s*[FIRO]){1,5}\s*[:：]?\s*/i;
+const INTERNAL_STRUCTURE_PAREN_PREFIX = /^\s*\(\s*[FIRO]\s*\)\s*[:：]?\s*/i;
+
+export function removeInternalStructureMarkersFromText(text: string): string {
+  if (!text) return text;
+
+  const cleaned = String(text)
+    .split(/\r?\n/)
+    .map((line) => line
+      .replace(INTERNAL_STRUCTURE_SEQUENCE_PREFIX, '')
+      .replace(INTERNAL_STRUCTURE_PAREN_PREFIX, '')
+      .trimEnd())
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  return cleaned;
+}
+
+export function stripInternalMarkers(s: string): string {
+  if (typeof s !== 'string') return s;
+  return s
+    .replace(/\s*\[자료\d*\]/g, '')
+    .replace(/\s*\[원본\s*텍스트\]/g, '')
+    .replace(/\s*\[Article\s*Content\]/gi, '');
+}
+
+export function removeOrdinalHeadingLabelsFromBody(bodyText: string): string {
+  if (!bodyText) return '';
+  let cleaned = String(bodyText);
+
+  cleaned = cleaned.replace(/(?:첫|두|세|네|다섯|여섯|일곱|여덟|아홉|열)\s*번째\s*소제목\s*[:：]\s*/gi, '');
+  cleaned = cleaned.replace(/(?:제\s*)?\d+\s*번째\s*소제목\s*[:：]\s*/gi, '');
+  cleaned = cleaned.replace(/^\s*소제목\s*[:：]\s*/gim, '');
+  cleaned = cleaned.replace(/^\s*(?:[\?？][\s:：]+|\[\s*공지\s*\]|\(\s*공지\s*\)|【\s*공지\s*】)\s*/gim, '');
+
+  for (let i = 0; i < 3; i++) {
+    cleaned = cleaned.replace(/\*\*(.*?)\*\*/g, '$1');
+  }
+  cleaned = cleaned.replace(/\*\*/g, '');
+
+  for (let i = 0; i < 3; i++) {
+    cleaned = cleaned.replace(/<u\s*>(.*?)<\/u\s*>/gi, '$1');
+  }
+  cleaned = cleaned.replace(/<\/?u\s*>/gi, '');
+
+  cleaned = cleaned.replace(/<\/?(?:b|i|strong|em|mark|span)[^>]*>/gi, '');
+  cleaned = cleaned.replace(/\b(OOO|XXX|AAA|BBB|CCC|DDD|EEE|FFF|GGG|HHH|III|JJJ|KKK|LLL|MMM|NNN)\b/g, '');
+  cleaned = cleaned.replace(/[○□]{3}/g, '');
+  cleaned = cleaned.replace(/\{[^}]+\}/g, '');
+  cleaned = cleaned.replace(/\[(?:인물명|키워드|서브키워드|주제|이름|제품명|브랜드명|이미지|사진|IMAGE|image)\]/gi, '');
+  cleaned = cleaned.replace(/\s*\[\d+(?:\s*,\s*\d+)*\]\s*/g, ' ');
+
+  cleaned = cleaned.replace(/([^\n])(📌[^\n]+)/g, '$1\n\n$2');
+  cleaned = cleaned.replace(/(📌[^\n]+)([^\n])/g, '$1\n\n$2');
+
+  cleaned = cleaned.replace(/(📌[^\n]*(?:반응|요약|정리)[^\n]*[\n]*)([^\n]{20,})/g, (match, label, content) => {
+    let formatted = content
+      .replace(/(다|네요?|요|죠|음|야|지|어요?|워요?|아요?|했다|겠다|있다|없다|된다|난다|간다|왔다|했네|됐네|왔네|갔네|봤네|이네|해요|해네|나요|네요|대요|라네|라요|데요|군요|래요|했어요|됐어요|왔어요|좋았어요|싫었어요|진짜|실화|대박) /g, '$1\n')
+      .replace(/(가네|하네|보네|되네|오네|같네|싶네|하네요|되네요|오네요) /g, '$1\n')
+      .replace(/(ㅋㅋ+|ㅎㅎ+|ㅠㅠ+|ㅜㅜ+) /g, '$1\n');
+
+    formatted = formatted
+      .replace(/(뻔|됐네|했네|왔네|갔네|봤네|있네|없네|났네|졌네|됐다|했다|왔다|갔다|봤다|났다|졌다|란다|난다|됩니다|합니다|입니다|군요|네요|대요|래요)([가-힣])/g, '$1\n$2');
+
+    if (formatted.indexOf('\n') === -1 && formatted.length > 50) {
+      const words = formatted.split(' ');
+      let currentLine = '';
+      const lines: string[] = [];
+
+      for (const word of words) {
+        if (currentLine.length + word.length > 40 && currentLine.length > 0) {
+          lines.push(currentLine.trim());
+          currentLine = word;
+        } else {
+          currentLine += (currentLine ? ' ' : '') + word;
+        }
+      }
+      if (currentLine) lines.push(currentLine.trim());
+      formatted = lines.join('\n');
+    }
+
+    return label + '\n' + formatted;
+  });
+
+  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
+  cleaned = removeInternalStructureMarkersFromText(cleaned);
+
+  return cleaned.trim();
+}
+
 /**
  * 제목 공백 정규화 — 다중 공백 압축 + 쉼표/콜론/파이프 주변 일관된 띄어쓰기 적용.
  *

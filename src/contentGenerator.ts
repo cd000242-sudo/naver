@@ -56,6 +56,8 @@ import { isMaskedSecretValue } from './security/secretValueUtils.js';
 import {
   removeEmojis,
   stripAllFormatting,
+  stripInternalMarkers,
+  removeOrdinalHeadingLabelsFromBody,
   normalizeTitleWhitespace,
   normalizeBodyWhitespacePreserveNewlines,
 } from './contentTextHelpers';
@@ -122,7 +124,6 @@ import {
   limitRegexOccurrences,
   truncateHeadingTitles,
   removeInternalStructureMarkersFromContent,
-  removeInternalStructureMarkersFromText,
 } from './contentBodyTransforms';
 // [Phase 3-17/v2.10.163] 제목 안전성 검증 (내부 사용은 detectPromptLeakageInTitle만)
 import { detectPromptLeakageInTitle } from './contentTitleSafetyChecks';
@@ -159,8 +160,8 @@ import {
   type ProductCategory,
   type ProductCategoryResult,
 } from './contentProductCategory';
-// [Phase 3-2/v2.10.140] re-export — naverBlogAutomation.ts / contentGenerator.test.ts 외부 호출자 호환 유지
-export { stripAllFormatting };
+// [Phase 3-2/v2.10.140, Phase 7.4-q] re-export — 기존 외부 호출자 호환 유지
+export { stripAllFormatting, stripInternalMarkers, removeOrdinalHeadingLabelsFromBody };
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
 import { checkHomefeedCriticalViolations, checkPromptCompliance, formatComplianceReport } from './contentQualityChecker.js';
 import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from './jsonParser';
@@ -216,21 +217,7 @@ export class ZeroPriceArtifactError extends Error {
   }
 }
 
-/**
- * 발행 본문에서 내부 프롬프트 마커·인용 토큰을 제거한다.
- *
- * [원본 텍스트] / [Article Content]는 promptSplitter가 system/user를 가르는 내부 마커이고,
- * [자료N]은 Faithfulness 측정용 인용 토큰이다. 이들은 절대 발행물에 노출되면 안 된다
- * (= "AI로 작성" 광고나 다름없음). 모델이 본문에 마커를 따라 써도 발행 직전 여기서 제거된다.
- * 앞 공백/개행까지 함께 제거해 "한다 [원본 텍스트]." → "한다." 형태로 깔끔히 정리한다.
- */
-export function stripInternalMarkers(s: string): string {
-  if (typeof s !== 'string') return s;
-  return s
-    .replace(/\s*\[자료\d*\]/g, '')
-    .replace(/\s*\[원본\s*텍스트\]/g, '')
-    .replace(/\s*\[Article\s*Content\]/gi, '');
-}
+// [Phase 7.4-q] stripInternalMarkers -> contentTextHelpers.ts
 
 function runPostGenValidator(content: any, source: any): void {
   if (!isFeatureEnabled('validator')) return;
@@ -308,116 +295,7 @@ function buildRecentWinnersBlock(source: any): string {
 
 // [Phase 3-4/v2.10.142] stripOrdinalHeadingPrefix → contentTitleHelpers.ts
 
-/**
- * ✅ 본문 전체에서 "첫 번째 소제목:", "두 번째 소제목:" 같은 레이블을 제거
- * AI가 잘못된 지시를 따라 레이블을 출력한 경우를 후처리로 정리
- */
-export function removeOrdinalHeadingLabelsFromBody(bodyText: string): string {
-  if (!bodyText) return '';
-  let cleaned = String(bodyText);
-
-  // "첫 번째 소제목:", "두 번째 소제목:", ... 등의 레이블 제거
-  cleaned = cleaned.replace(/(?:첫|두|세|네|다섯|여섯|일곱|여덟|아홉|열)\s*번째\s*소제목\s*[:：]\s*/gi, '');
-
-  // "제1번째 소제목:", "제2번째 소제목:" 등의 레이블 제거
-  cleaned = cleaned.replace(/(?:제\s*)?\d+\s*번째\s*소제목\s*[:：]\s*/gi, '');
-
-  // "소제목:" 단독 레이블 제거
-  cleaned = cleaned.replace(/^\s*소제목\s*[:：]\s*/gim, '');
-
-  // ✅ [공지/이슈] AI가 임의로 붙이는 문장 접두어/기호 제거 (?:, ? :, [공지] 등)
-  cleaned = cleaned.replace(/^\s*(?:[\?？][\s:：]+|\[\s*공지\s*\]|\(\s*공지\s*\)|【\s*공지\s*】)\s*/gim, '');
-
-  // ✅ [하이라이팅] **bold** 마크다운 제거 (발행 시 `**`가 그대로 표시되는 문제 방지)
-  // 비탐욕적 매칭(.*?)으로 확실하게 제거 - 여러 번 반복 실행
-  for (let i = 0; i < 3; i++) {
-    cleaned = cleaned.replace(/\*\*(.*?)\*\*/g, '$1'); // 비탐욕적 매칭
-  }
-  cleaned = cleaned.replace(/\*\*/g, ''); // 남은 ** 완전 제거
-
-  // ✅ [밑줄] <u>underline</u> HTML 태그 제거 (발행 시 태그가 그대로 표시되는 문제 방지)
-  // 비탐욕적 매칭으로 중첩/불완전한 태그도 완전 제거
-  for (let i = 0; i < 3; i++) {
-    cleaned = cleaned.replace(/<u\s*>(.*?)<\/u\s*>/gi, '$1'); // 비탐욕적 매칭
-  }
-  cleaned = cleaned.replace(/<\/?u\s*>/gi, ''); // 남은 <u>, </u> 단독 태그도 제거
-
-  // ✅ [기타 HTML 태그] <b>, <i>, <strong>, <em> 등 제거
-  cleaned = cleaned.replace(/<\/?(?:b|i|strong|em|mark|span)[^>]*>/gi, '');
-
-  // ✅ [플레이스홀더 제거] OOO, XXX, {키워드} 등 모든 형태의 플레이스홀더 제거
-  // 1. 영문 대문자 3자 플레이스홀더만 선택적 제거 (API, SEO, URL 같은 정상 약어는 보호)
-  //    실제 플레이스홀더로 사용되는 패턴만 타겟
-  cleaned = cleaned.replace(/\b(OOO|XXX|AAA|BBB|CCC|DDD|EEE|FFF|GGG|HHH|III|JJJ|KKK|LLL|MMM|NNN)\b/g, '');
-
-
-  // 2. 동그라미/네모 3개 플레이스홀더: ○○○, □□□ 등
-  cleaned = cleaned.replace(/[○□]{3}/g, '');
-
-  // 3. 중괄호 변수명 플레이스홀더: {키워드}, {인물명}, {서브키워드} 등
-  cleaned = cleaned.replace(/\{[^}]+\}/g, '');
-
-  // 4. 대괄호 플레이스홀더: [인물명], [키워드], [이미지] 등 AI가 삽입한 마커 제거
-  cleaned = cleaned.replace(/\[(?:인물명|키워드|서브키워드|주제|이름|제품명|브랜드명|이미지|사진|IMAGE|image)\]/gi, '');
-
-  // 5. ✅ [2026-03-09] AI 인용 번호 제거: [1], [2, 3], [1, 2, 3] 등 Perplexity/검색 기반 AI의 출처 표시
-  //    패턴: 대괄호 안에 숫자와 쉼표/공백만 있는 경우 (최대 20자 — 매우 긴 인용은 드묾)
-  cleaned = cleaned.replace(/\s*\[\d+(?:\s*,\s*\d+)*\]\s*/g, ' ');
-
-  // ✅ [섹션 레이블 포맷팅] 📌로 시작하는 섹션 레이블 앞뒤에 줄바꿈 추가
-  // "...지경이에요.. 📌 당시 대중 반응 요약 와 드디어..." 
-  // → "...지경이에요..\n\n📌 당시 대중 반응 요약\n\n와 드디어..."
-  cleaned = cleaned.replace(/([^\n])(📌[^\n]+)/g, '$1\n\n$2');  // 앞에 줄바꿈 추가
-  cleaned = cleaned.replace(/(📌[^\n]+)([^\n])/g, '$1\n\n$2');  // 뒤에 줄바꿈 추가
-
-  // ✅ [대중 반응 섹션 가독성 개선] 
-  // "📌" 뒤에 나오는 긴 문장을 종결어미 기준으로 줄바꿈
-  // ✅ [2026-02-02] 강화: 공백 없이 바로 다음 문장이 와도 줄바꿈 처리
-  cleaned = cleaned.replace(/(📌[^\n]*(?:반응|요약|정리)[^\n]*[\n]*)([^\n]{20,})/g, (match, label, content) => {
-    // ✅ 핵심: 종결어미 + 공백 OR 종결어미 + 한글 시작 → 줄바꿈
-    // 1단계: 종결어미 뒤에 공백이 있으면 줄바꿈
-    let formatted = content
-      .replace(/(다|네요?|요|죠|음|야|지|어요?|워요?|아요?|했다|겠다|있다|없다|된다|난다|간다|왔다|했네|됐네|왔네|갔네|봤네|이네|해요|해네|나요|네요|대요|라네|라요|데요|군요|래요|했어요|됐어요|왔어요|좋았어요|싫었어요|진짜|실화|대박) /g, '$1\n')
-      .replace(/(가네|하네|보네|되네|오네|같네|싶네|하네요|되네요|오네요) /g, '$1\n')
-      // ㅋㅋ, ㅠㅠ 뒤에는 무조건 줄바꿈
-      .replace(/(ㅋㅋ+|ㅎㅎ+|ㅠㅠ+|ㅜㅜ+) /g, '$1\n');
-
-    // ✅ 2단계: 공백 없이 바로 한글이 오는 경우도 처리 (예: "기절할뻔세탁소에" → "기절할뻔\n세탁소에")
-    // 종결어미 패턴 뒤에 바로 한글이 오면 줄바꿈 삽입
-    formatted = formatted
-      .replace(/(뻔|됐네|했네|왔네|갔네|봤네|있네|없네|났네|졌네|됐다|했다|왔다|갔다|봤다|났다|졌다|란다|난다|됩니다|합니다|입니다|군요|네요|대요|래요)([가-힣])/g, '$1\n$2');
-
-    // ✅ 3단계: 그래도 줄바꿈이 안 됐으면 문장 길이 기준으로 강제 분리
-    // 한 줄이 50자 이상이면서 줄바꿈이 없으면, 25자 단위로 적절한 위치에서 자르기
-    if (formatted.indexOf('\n') === -1 && formatted.length > 50) {
-      // 공백 기준으로 분리 시도
-      const words = formatted.split(' ');
-      let currentLine = '';
-      const lines: string[] = [];
-
-      for (const word of words) {
-        if (currentLine.length + word.length > 40 && currentLine.length > 0) {
-          lines.push(currentLine.trim());
-          currentLine = word;
-        } else {
-          currentLine += (currentLine ? ' ' : '') + word;
-        }
-      }
-      if (currentLine) lines.push(currentLine.trim());
-      formatted = lines.join('\n');
-    }
-
-    return label + '\n' + formatted;
-  });
-
-
-
-  // 과도한 줄바꿈 정리 (3개 이상의 연속 줄바꿈을 2개로)
-  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
-  cleaned = removeInternalStructureMarkersFromText(cleaned);
-
-  return cleaned.trim();
-}
+// [Phase 7.4-q] removeOrdinalHeadingLabelsFromBody -> contentTextHelpers.ts
 
 // [Phase 3-5/v2.10.143] sanitizeTitleSpecialChars → contentTitleHelpers.ts
 
