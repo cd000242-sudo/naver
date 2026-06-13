@@ -130,4 +130,8 @@ button { cursor: pointer; font-family: inherit; }
         grid-template-columns: minmax(0, 1fr) !important;
         gap: 28px !important;
     }
+
+    .detail-image-workflow-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
 }

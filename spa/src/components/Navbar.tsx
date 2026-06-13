@@ -3,11 +3,12 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 const NAV_LINKS = [
     { to: '/', label: '홈' },
+    { to: '/leword', label: 'LEWORD' },
+    { to: '/chatbots', label: '무료 챗봇' },
     { to: '/products', label: '제품정보' },
     { to: '/pricing', label: '구매' },
     { to: '/reviews', label: '후기' },
     { to: '/community', label: '커뮤니티' },
-    { to: '/chatbots', label: '무료 챗봇' },
     { to: '/download', label: '다운로드' },
     { to: '/lookup', label: '주문조회' },
 ];

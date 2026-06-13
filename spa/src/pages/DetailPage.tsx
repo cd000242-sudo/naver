@@ -109,6 +109,101 @@ const BONUS_CARDS = [
     { img: '/images/ai-detection.png', title: '🛡️ AI 탐지 검사', desc: '발행 전 AI 글 탐지율 체크로 저품질 방지' },
 ];
 
+const MODE_SHOWCASES = [
+    {
+        badge: 'SEO 모드',
+        title: '검색 노출을 목표로 글 구조를 자동 설계',
+        desc: '키워드, 제목, 소제목, 본문 흐름, 표, 해시태그까지 네이버 검색형 글 구조로 정리합니다.',
+        image: '/images/seo-analysis.png',
+        points: ['핵심 키워드 중심 제목 생성', '소제목별 본문 흐름 자동 정리', '표·체크리스트 자동 삽입', '이전글 엮기와 해시태그 자동 추가'],
+    },
+    {
+        badge: '홈판 모드',
+        title: '홈피드에서 술술 읽히는 대화형 글',
+        desc: '딱딱한 설명문이 아니라 공감, 경험, 질문, 짧은 문단 중심으로 읽히는 글을 만듭니다.',
+        image: '/images/mega03-hero.jpg',
+        points: ['공감형 도입부', '짧은 문단과 자연스러운 줄바꿈', '요체·습니다체 혼합 문체', '모바일 화면 기준 가독성 정리'],
+    },
+    {
+        badge: '네이버 메이트',
+        title: '선정 가능성을 높이는 정보형 고품질 구성',
+        desc: '근거, 경험, 비교, 요약, Q&A를 조합해 사람이 직접 정리한 듯한 신뢰형 글을 구성합니다.',
+        image: '/images/naver-detail/content-format-highlight.png',
+        points: ['핵심 문장 하이라이트', '모바일 중심 문단 간격', 'Q&A·한 줄 판정 정리', '표와 체크리스트 기반 설명'],
+    },
+    {
+        badge: '쇼핑커넥트',
+        title: '제품 크롤링부터 CTA·수익화 배치까지',
+        desc: '상품명, 가격, 대표 이미지, 추가 이미지, 핵심 장단점을 읽고 구매욕구를 만드는 글로 바꿉니다.',
+        image: '/images/naver-detail/shopping-result-main.png',
+        points: ['대표·추가 이미지 수집', '제품 정보 기반 글 생성', 'CTA 위치 선택', '관련 글·해시태그까지 마무리'],
+    },
+    {
+        badge: '업체홍보·사용자정의',
+        title: '홍보글도 티 나지 않게 자연스럽게',
+        desc: '업체 정보, 장점, 후기형 흐름을 섞어 광고 느낌은 낮추고 문의 전환은 높이도록 구성합니다.',
+        image: '/images/mega05-hero.jpg',
+        points: ['업체 장점 자동 정리', '후기형 문체 적용', '전환 CTA 삽입', '사용자 프롬프트 자유 반영'],
+    },
+];
+
+const RESULT_SHOWCASES = [
+    {
+        label: '문단·하이라이트',
+        image: '/images/naver-detail/content-format-highlight.png',
+        title: '문단정리, 하이라이트, 줄바꿈을 한 번에',
+        desc: '모바일에서 읽기 쉬운 간격으로 문단을 나누고, 중요한 문장만 자연스럽게 강조합니다.',
+    },
+    {
+        label: '표 자동 삽입',
+        image: '/images/naver-detail/auto-table-result.png',
+        title: '필요한 글에는 표까지 자동 삽입',
+        desc: '비교, 기준, 가격, 체크포인트가 필요한 글은 표로 정리해 독자가 빠르게 이해하게 만듭니다.',
+    },
+    {
+        label: '이전글·해시태그',
+        image: '/images/naver-detail/previous-post-hashtags.png',
+        title: '이전글 엮기와 해시태그까지 자동 마무리',
+        desc: '본문 작성 후 관련 이전글 카드와 해시태그를 붙여 체류 시간과 내부 이동을 함께 챙깁니다.',
+    },
+];
+
+const SHOPPING_RESULT_IMAGES = [
+    { image: '/images/naver-detail/shopping-result-main.png', title: '쇼핑커넥트 본문 결과' },
+    { image: '/images/naver-detail/shopping-result-table.png', title: '제품 정보 표 자동 구성' },
+    { image: '/images/naver-detail/shopping-result-cta.png', title: 'CTA 배너 배치' },
+    { image: '/images/naver-detail/shopping-result-link-card.png', title: '상품 카드 연결' },
+    { image: '/images/naver-detail/shopping-result-related-hashtags.png', title: '관련글과 해시태그' },
+];
+
+const PROOF_IMAGES = [
+    '/images/proof-user/KakaoTalk_20260305_004700252.jpg',
+    '/images/proof-user/KakaoTalk_20260305_004700252_01.jpg',
+    '/images/proof-user/KakaoTalk_20260305_004700252_02.jpg',
+    '/images/proof-user/KakaoTalk_20260305_004700252_03.jpg',
+    '/images/proof-user/KakaoTalk_20260305_004700252_04.jpg',
+    '/images/proof-user/KakaoTalk_20260305_004700252_05.png',
+    '/images/proof-user/KakaoTalk_20260305_004700252_06.jpg',
+    '/images/proof-user/KakaoTalk_20260305_004700252_07.jpg',
+    '/images/proof-user/KakaoTalk_20260309_163736774.jpg',
+    '/images/proof-user/KakaoTalk_20260309_164704537.png',
+    '/images/proof-user/KakaoTalk_20260310_002438127.png',
+];
+
+const AUTOMATION_FEATURES = [
+    { title: '반자동 모드', desc: '글은 직접 확인하고, 이미지 삽입과 발행 흐름은 자동화합니다.' },
+    { title: '풀오토 모드', desc: '키워드나 URL만 넣으면 글 생성, 이미지 생성, 발행까지 클릭 한 번으로 진행합니다.' },
+    { title: '연속발행', desc: '자기 전에 세팅해두면 안전 간격을 두고 여러 글을 순차 발행합니다.' },
+    { title: '다중계정 발행', desc: '계정별 설정을 나누고 각 계정에 맞춰 순차 발행할 수 있습니다.' },
+];
+
+const IMAGE_WORKFLOW_FEATURES = [
+    { title: 'AI 이미지 자동 생성', desc: '소제목과 문맥에 맞는 이미지를 엔진별로 생성하고 미리보기로 확인합니다.' },
+    { title: 'AI 이미지 자동 수집', desc: 'URL에서 대표 이미지와 추가 이미지를 수집해 글 흐름에 맞게 사용할 수 있습니다.' },
+    { title: '소제목별 원하는 이미지 배치', desc: '특정 소제목에는 사용자가 고른 이미지를 우선 배치해 섞임을 줄입니다.' },
+    { title: '썸네일 텍스트 포함', desc: '대표 썸네일에만 제목 텍스트를 넣고 본문 이미지는 깔끔하게 유지합니다.' },
+];
+
 const COMPARISON = [
     { feature: 'AI 글 작성', manual: '✕', generic: '일부 지원', ours: '✓ 10종 AI 엔진' },
     { feature: 'AI 이미지 생성', manual: '✕', generic: '✕', ours: '✓ 6종 이미지 엔진' },
@@ -203,6 +298,181 @@ function MegaSectionView({ data }: { data: MegaSection }) {
     );
 }
 
+const sectionBase = (background: string): React.CSSProperties => ({
+    padding: '100px 20px',
+    background,
+    position: 'relative',
+    zIndex: 1,
+});
+
+function SectionHeading({ label, title, desc }: { label: string; title: React.ReactNode; desc?: string }) {
+    return (
+        <div style={{ textAlign: 'center', maxWidth: 820, margin: '0 auto 54px' }}>
+            <div style={{ color: C.gold, fontWeight: 800, fontSize: 13, letterSpacing: 3, textTransform: 'uppercase', marginBottom: 14 }}>{label}</div>
+            <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 900, lineHeight: 1.25, marginBottom: desc ? 18 : 0 }}>{title}</h2>
+            {desc && <p style={{ color: C.textSecondary, fontSize: 18, lineHeight: 1.8 }}>{desc}</p>}
+        </div>
+    );
+}
+
+function ModeShowcaseSection() {
+    return (
+        <section style={sectionBase(C.bgDark)} id="features">
+            <div style={{ maxWidth: 1200, margin: '0 auto' }}>
+                <SectionHeading
+                    label="MODE BY MODE"
+                    title={<>앱 모드별로 결과가 다르게 나옵니다</>}
+                    desc="SEO, 홈판, 네이버 메이트, 쇼핑커넥트, 업체홍보까지 목적에 맞는 글 구조와 이미지 흐름을 자동으로 맞춥니다."
+                />
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 22 }}>
+                    {MODE_SHOWCASES.map((mode, i) => (
+                        <article key={mode.badge} style={{ background: 'rgba(255,255,255,0.045)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 20, overflow: 'hidden', boxShadow: '0 24px 70px rgba(0,0,0,0.22)' }}>
+                            <div style={{ height: 190, background: '#08080c', overflow: 'hidden' }}>
+                                <img src={mode.image} alt={`${mode.badge} 결과 예시`} loading={i < 2 ? 'eager' : 'lazy'} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+                            </div>
+                            <div style={{ padding: 24 }}>
+                                <span style={{ display: 'inline-flex', padding: '6px 12px', borderRadius: 999, background: 'rgba(255,215,0,0.12)', color: C.gold, fontSize: 12, fontWeight: 900, marginBottom: 14 }}>{mode.badge}</span>
+                                <h3 style={{ fontSize: 21, fontWeight: 900, lineHeight: 1.35, marginBottom: 10 }}>{mode.title}</h3>
+                                <p style={{ color: C.textSecondary, fontSize: 14, lineHeight: 1.75, marginBottom: 16 }}>{mode.desc}</p>
+                                <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: 8 }}>
+                                    {mode.points.map(point => (
+                                        <li key={point} style={{ display: 'flex', gap: 9, color: '#d8d8e8', fontSize: 13, lineHeight: 1.55 }}>
+                                            <span style={{ color: C.neonGreen, fontWeight: 900, flexShrink: 0 }}>✓</span>
+                                            <span>{point}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function ResultShowcaseSection() {
+    return (
+        <section style={sectionBase(C.bgSection)}>
+            <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+                <SectionHeading
+                    label="REAL WRITING RESULT"
+                    title={<>글 결과물은 이렇게 정리됩니다</>}
+                    desc="문단정리, 핵심문장 하이라이트, 표, 이전글 엮기, 해시태그가 발행 흐름 안에서 같이 들어가도록 구성합니다."
+                />
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24 }}>
+                    {RESULT_SHOWCASES.map((result, i) => (
+                        <article key={result.label} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 20, overflow: 'hidden' }}>
+                            <div style={{ height: i === 0 ? 300 : 260, overflow: 'hidden', background: '#f5f5f5' }}>
+                                <img src={result.image} alt={result.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+                            </div>
+                            <div style={{ padding: 24 }}>
+                                <div style={{ color: C.neonGreen, fontSize: 12, fontWeight: 900, letterSpacing: 2, marginBottom: 10 }}>{result.label}</div>
+                                <h3 style={{ fontSize: 22, fontWeight: 900, marginBottom: 10 }}>{result.title}</h3>
+                                <p style={{ color: C.textSecondary, lineHeight: 1.75, fontSize: 14 }}>{result.desc}</p>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function AutomationSection() {
+    return (
+        <section style={sectionBase(C.bgDark)}>
+            <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+                <SectionHeading
+                    label="PUBLISHING FLOW"
+                    title={<>클릭 한 번부터 자기 전 세팅까지</>}
+                    desc="반자동, 풀오토, 연속발행, 다중계정 발행까지 사용자의 운영 방식에 맞춰 글과 이미지를 끝까지 처리합니다."
+                />
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 18 }}>
+                    {AUTOMATION_FEATURES.map((feature, i) => (
+                        <article key={feature.title} style={{ background: 'linear-gradient(180deg, rgba(255,215,0,0.08), rgba(255,255,255,0.04))', border: '1px solid rgba(255,215,0,0.18)', borderRadius: 18, padding: 26 }}>
+                            <div style={{ width: 34, height: 34, borderRadius: '50%', background: C.gradGold, color: '#111', fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 18 }}>{i + 1}</div>
+                            <h3 style={{ fontSize: 20, fontWeight: 900, marginBottom: 9 }}>{feature.title}</h3>
+                            <p style={{ color: C.textSecondary, fontSize: 14, lineHeight: 1.75 }}>{feature.desc}</p>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function ImageWorkflowSection() {
+    return (
+        <section style={sectionBase(C.bgSection)}>
+            <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+                <SectionHeading
+                    label="IMAGE MANAGEMENT"
+                    title={<>이미지도 글 흐름에 맞게 자동 관리합니다</>}
+                    desc="이미지 생성, 이미지 수집, 소제목별 이미지 배치, 썸네일 텍스트 포함까지 한 화면에서 관리할 수 있습니다."
+                />
+                <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 26, alignItems: 'stretch' }} className="detail-image-workflow-grid">
+                    <div style={{ borderRadius: 22, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.10)', background: '#060609' }}>
+                        <img src="/images/mega02-hero.jpg" alt="AI 이미지 생성과 이미지 관리 탭" loading="lazy" style={{ width: '100%', height: '100%', minHeight: 360, objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+                    </div>
+                    <div style={{ display: 'grid', gap: 16 }}>
+                        {IMAGE_WORKFLOW_FEATURES.map(feature => (
+                            <article key={feature.title} style={{ background: 'rgba(255,255,255,0.055)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 18, padding: 24 }}>
+                                <h3 style={{ fontSize: 20, fontWeight: 900, marginBottom: 9 }}>{feature.title}</h3>
+                                <p style={{ color: C.textSecondary, fontSize: 14, lineHeight: 1.75 }}>{feature.desc}</p>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function ShoppingConnectResultSection() {
+    return (
+        <section style={sectionBase(C.bgDark)}>
+            <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+                <SectionHeading
+                    label="SHOPPING CONNECT RESULT"
+                    title={<>쇼핑커넥트 글은 판매 흐름까지 챙깁니다</>}
+                    desc="제품 이미지, 제품 정보 표, CTA, 상품 카드, 관련글과 해시태그까지 구매 전환에 필요한 구성을 자동으로 붙입니다."
+                />
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
+                    {SHOPPING_RESULT_IMAGES.map(item => (
+                        <article key={item.title} style={{ background: 'rgba(255,255,255,0.045)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 18, overflow: 'hidden' }}>
+                            <img src={item.image} alt={item.title} loading="lazy" style={{ width: '100%', height: 260, objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+                            <div style={{ padding: '16px 18px', fontWeight: 800 }}>{item.title}</div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function ProofSection() {
+    return (
+        <section style={sectionBase(C.bgSection)}>
+            <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+                <SectionHeading
+                    label="USER PROOF"
+                    title={<>사용자들이 실제로 결과를 만들고 있습니다</>}
+                    desc="조회수와 수익 인증 이미지를 그대로 모아, 단순 기능 소개가 아니라 실제 운영 결과를 함께 보여줍니다."
+                />
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16 }}>
+                    {PROOF_IMAGES.map((image, i) => (
+                        <div key={image} style={{ borderRadius: 16, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.10)', background: 'rgba(255,255,255,0.04)', minHeight: 180 }}>
+                            <img src={image} alt={`구매자 수익 인증 ${i + 1}`} loading="lazy" style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+                        </div>
+                    ))}
+                </div>
+                <p style={{ color: C.textSecondary, textAlign: 'center', marginTop: 24, fontSize: 14 }}>매일 업데이트되는 로직과 네이버 화면 변경 모니터링으로, 사용자가 막히는 지점을 계속 개선합니다.</p>
+            </div>
+        </section>
+    );
+}
+
 function DetailPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -267,39 +537,14 @@ function DetailPage() {
                 </div>
             </section>
 
-            {/* MEGA 1 */}
-            <MegaSectionView data={MEGAS[0]} />
-            <MidCTA text="✍️ AI가 쓴 글, 직접 확인해보세요" />
-
-            {/* MEGA 2 ~ 3 */}
-            <MegaSectionView data={MEGAS[1]} />
-            <MegaSectionView data={MEGAS[2]} />
-            <MidCTA text="⚡ 하루 10편 자동 발행, 지금 시작하기" btnLabel="요금제 확인 →" />
-
-            {/* MEGA 4 ~ 5 */}
-            <MegaSectionView data={MEGAS[3]} />
-            <MegaSectionView data={MEGAS[4]} />
-            <MidCTA text="💰 쇼핑 커넥트로 블로그 수익화 시작" btnLabel="지금 시작하기 →" />
-
-            {/* MEGA 6: BONUS */}
-            <section style={{ padding: '100px 20px', background: C.bgDark, position: 'relative', zIndex: 1 }}>
-                <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
-                    <div style={{ color: C.gold, fontWeight: 700, fontSize: 14, letterSpacing: 3, textTransform: 'uppercase', marginBottom: 16 }}>🛠️ MEGA FEATURE 06</div>
-                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 48px)', fontWeight: 900, marginBottom: 20 }}>이것까지 다 포함?<br /><span style={{ background: C.gradGold, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>네, 전부 포함입니다.</span></h2>
-                    <p style={{ fontSize: 18, color: C.textSecondary, maxWidth: 700, margin: '0 auto 60px' }}>썸네일 생성, 이미지 편집, SEO 분석, AI탐지 검사까지. 블로거에게 필요한 모든 것.</p>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 24 }}>
-                        {BONUS_CARDS.map((b, i) => (
-                            <div key={i} style={{ background: C.bgCard, border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
-                                <img src={b.img} alt={b.title} loading="lazy" style={{ width: '100%', height: 160, objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
-                                <div style={{ padding: 20, textAlign: 'left' }}>
-                                    <h4 style={{ fontSize: 16, fontWeight: 700, marginBottom: 6 }}>{b.title}</h4>
-                                    <p style={{ fontSize: 13, color: C.textSecondary }}>{b.desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <ModeShowcaseSection />
+            <ResultShowcaseSection />
+            <MidCTA text="문단정리, 하이라이트, 표, 이전글 엮기까지 한 번에 끝냅니다" />
+            <AutomationSection />
+            <ImageWorkflowSection />
+            <ShoppingConnectResultSection />
+            <MidCTA text="쇼핑커넥트 글도 클릭 한 번으로 수익화 흐름까지 배치합니다" btnLabel="요금제 확인 →" />
+            <ProofSection />
 
             {/* COMPARISON */}
             <section style={{ padding: '100px 20px', background: C.bgDark, position: 'relative', zIndex: 1 }}>
