@@ -491,9 +491,38 @@ cleanup helper instead of owning a duplicate definition.
   - passed; 264 preload channels, 289 main registrations, 321 preload API
     methods, 6 critical API methods.
 
+## 7.4-r Completed
+
+Extracted unverified official/latest guide claim cleanup from
+`src/contentGenerator.ts` into `src/contentClaimSanitizer.ts`.
+
+This directly locks the user-reported quality regression where generated posts
+could contain unsupported phrases like "2026년 공식 가이드에서는" or
+"최신 가이드 기준으로는". The helper now owns:
+
+- plain text claim phrase cleanup.
+- structured content field cleanup for body/introduction/conclusion.
+- heading content/body/summary cleanup with immutable heading replacement.
+
+## 7.4-r Verification
+
+- `npm test -- src/__tests__/contentClaimSanitizer.test.ts`
+  - expected red first: module missing before helper extraction.
+- `npm test -- src/__tests__/contentClaimSanitizer.test.ts src/__tests__/contentGenerationTimeoutPolicy.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 28 tests passed.
+- `npm test`
+  - 272 test files passed, 3,133 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - passed with baseline warnings: 0 errors, 1,023 warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-r should continue the stability split. Suggested order:
+7.4-s should continue the stability split. Suggested order:
 
 1. `contentGenerator.ts` pure prompt helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.
