@@ -83,7 +83,10 @@
 - ✅ 7.4-o (이번 세션): OpenAI/Provider 에러 진단·대기시간 포맷을
   `contentErrorDiagnostics.ts`로 분리 —
   인증/한도/결제/DNS/connection 분류와 "1분 미만" 안내를 테스트로 고정.
-- 다음: Phase 7.4-p renderer event ownership 분해 또는 contentGenerator pure prompt helper 분해
+- ✅ 7.4-p (이번 세션): 모드×카테고리 자동 글톤 매칭을
+  `contentTonePolicy.ts`로 분리 —
+  홈판/SEO/메이트/쇼핑/업체 모드별 기본 톤 계약을 테스트로 고정.
+- 다음: Phase 7.4-q renderer event ownership 분해 또는 contentGenerator pure prompt helper 분해
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

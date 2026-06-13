@@ -430,9 +430,39 @@ generation god file again:
   - passed; 264 preload channels, 289 main registrations, 321 preload API
     methods, 6 critical API methods.
 
+## 7.4-p Completed
+
+Extracted automatic tone/category mapping from `src/contentGenerator.ts` into
+`src/contentTonePolicy.ts`.
+
+This keeps the mode-specific tone contract isolated for future writing-quality
+work:
+
+- Missing categories keep safe mode defaults: SEO/Mate calm_info, homefeed
+  friendly, business professional.
+- Homefeed remains conversational/community-oriented.
+- SEO/Mate remains information-oriented.
+- Shopping affiliate and business modes stay distinct.
+
+## 7.4-p Verification
+
+- `npm test -- src/__tests__/contentTonePolicy.test.ts`
+  - expected red first: module missing before helper extraction.
+- `npm test -- src/__tests__/contentTonePolicy.test.ts src/__tests__/contentGenerationTimeoutPolicy.test.ts`
+  - 23 tests passed.
+- `npm test`
+  - 270 test files passed, 3,129 tests passed.
+- `npm run build`
+  - passed.
+- `npm run lint`
+  - passed with baseline warnings: 0 errors, 1,023 warnings.
+- `npm run lint:ipc`
+  - passed; 264 preload channels, 289 main registrations, 321 preload API
+    methods, 6 critical API methods.
+
 ## Next
 
-7.4-p should continue the stability split. Suggested order:
+7.4-q should continue the stability split. Suggested order:
 
 1. `contentGenerator.ts` pure prompt helpers.
 2. `renderer/renderer.ts` only after event handler ownership is clear.
