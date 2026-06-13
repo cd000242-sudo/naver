@@ -60,7 +60,9 @@
   실제 이전글 tail 타이핑 실행부를 `editorHelpers.ts`에서 분리하고, 구분선/후킹/URL/링크카드 대기/URL 제거 순서를 단위 테스트로 고정.
 - ✅ 7.4-f (이번 세션): 해시태그 tail 실행부를 `applyTailHashtagsAfterCards()`로 분리 —
   이전글 카드 뒤 Enter 5회, 일반 tail Enter 3회, 링크카드 안정화 대기, 해시태그 본문 입력 순서를 단위 테스트로 고정.
-- 다음: Phase 7.4-g editor tail runtime 4차 분해 — CTA/공식사이트 실행부를 작은 action helper로 단계적 추출
+- ✅ 7.4-g (이번 세션): CTA/공식사이트 링크카드 반복 실행부를 `insertTailLinkCardBlock()`로 분리 —
+  구분선, 후킹/CTA 문구, URL 입력, 링크카드 대기 순서를 단위 테스트로 고정하고 4개 호출부에 적용.
+- 다음: Phase 7.4-h editor tail runtime 5차 분해 — 공식사이트 검색 조건/결과 처리 helper 분리
 - 7.4 god file 분해: characterization은 공유 코어 가드(매트릭스 §4)가 1차 잠금 —
   분해 대상별 추가 잠금은 분해 직전에 (renderer.ts 8.8k / main.ts 8.6k / nBA 9k / contentGenerator)
 - 원칙: 1단계=1커밋=1revert, 커밋마다 full vitest+tsc+lint+build, 라이브 발행 회귀 시 즉시 revert

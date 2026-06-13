@@ -124,3 +124,26 @@ export async function applyTailHashtagsAfterCards(input: {
     self.log(`   ✅ 해시태그 입력 완료`);
   }
 }
+
+export async function insertTailLinkCardBlock(input: {
+  self: any;
+  page: Page;
+  label: string;
+  url: string;
+}): Promise<{ cardReady: boolean }> {
+  const { self, page, label, url } = input;
+
+  await page.keyboard.press('Enter');
+  await safeKeyboardType(page, PREVIOUS_POST_SEPARATOR, { delay: 5 });
+  await page.keyboard.press('Enter');
+  await safeKeyboardType(page, label, { delay: 10 });
+  await page.keyboard.press('Enter');
+  await safeKeyboardType(page, `👉 ${url}`, { delay: 10 });
+  await page.keyboard.press('Enter');
+
+  const cardReady = typeof self.waitForLinkCard === 'function'
+    ? await self.waitForLinkCard(15000, 500)
+    : false;
+
+  return { cardReady };
+}

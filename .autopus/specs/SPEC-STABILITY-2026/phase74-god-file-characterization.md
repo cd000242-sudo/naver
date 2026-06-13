@@ -145,9 +145,35 @@ This keeps the previous-post/CTA/hashtag ordering protected while shrinking
 - `npm test -- src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
   - 39 tests passed.
 
+## 7.4-g Completed
+
+Extended `src/automation/editorTailActions.ts` with
+`insertTailLinkCardBlock()`.
+
+The helper now owns the repeated CTA/official-site link-card sequence:
+
+- Insert the shared tail separator.
+- Type the CTA or official-site hook label.
+- Type the URL line with the same arrow prefix used in production.
+- Wait for Naver's link-card conversion.
+
+`src/automation/editorHelpers.ts` now calls this helper from four runtime paths:
+
+- Shopping-connect additional CTA links.
+- General/manual CTA links.
+- Official-site link insertion after a CTA.
+- Official-site link insertion when no CTA exists.
+
+## 7.4-g Verification
+
+- `npm test -- src/__tests__/editorTailActions.test.ts`
+  - 5 tests passed.
+- `npm test -- src/__tests__/editorTailActions.test.ts src/__tests__/editorTailPlan.test.ts src/__tests__/richPasteTailWiring.test.ts src/__tests__/publishMetadataPropagation.test.ts src/__tests__/phase74GodFileCharacterization.test.ts`
+  - 40 tests passed.
+
 ## Next
 
-7.4-g should continue the editor tail runtime split. Suggested order:
+7.4-h should continue the editor tail runtime split. Suggested order:
 
 1. `naverBlogAutomation.ts` editor/tail helpers, because this is where live selector
    and previous-post/hashtag failures are most expensive.

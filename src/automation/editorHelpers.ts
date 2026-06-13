@@ -27,7 +27,11 @@ import {
   getExpectedLinkCardMin,
   planEditorTail,
 } from './editorTailPlan.js';
-import { applyTailHashtagsAfterCards, insertPreviousPostTailBlock } from './editorTailActions.js';
+import {
+  applyTailHashtagsAfterCards,
+  insertPreviousPostTailBlock,
+  insertTailLinkCardBlock,
+} from './editorTailActions.js';
 
 // ── Local utility: smartTypeWithAutoHighlight ──
 async function smartTypeWithAutoHighlight(
@@ -2176,20 +2180,12 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             self.log(`   📎 [추가 CTA ${i}] \"${c.text}\" → ${c.link || '#'}`);
             const page = self.ensurePage();
 
-            // 구분선 삽입
-            const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, divider, { delay: 5 });
-            await page.keyboard.press('Enter');
-
-            // 후킹 문구 + 링크 삽입
-            await safeKeyboardType(page, `📎 ${c.text}`, { delay: 10 });
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, `👉 ${c.link || '#'}`, { delay: 10 });
-            await page.keyboard.press('Enter');
-
-            // 링크 카드 로딩 대기 (polling 방식)
-            await self.waitForLinkCard(15000, 500);
+            await insertTailLinkCardBlock({
+              self,
+              page,
+              label: `📎 ${c.text}`,
+              url: c.link || '#',
+            });
           }
 
           // ✅ 마지막 CTA 후: 이전글 삽입
@@ -2214,20 +2210,12 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             const ctaDisplayText = c.text || '자세히 보러가기';
             self.log(`   📎 [일반 CTA ${i + 1}] \"${ctaDisplayText}\" → ${c.link}`);
 
-            // 구분선 삽입
-            const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, divider, { delay: 5 });
-            await page.keyboard.press('Enter');
-
-            // 후킹 문구 + 링크 삽입
-            await safeKeyboardType(page, `📎 ${ctaDisplayText}`, { delay: 10 });
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, `👉 ${c.link}`, { delay: 10 });
-            await page.keyboard.press('Enter');
-
-            // 링크 카드 로딩 대기 (polling 방식)
-            await self.waitForLinkCard(15000, 500);
+            await insertTailLinkCardBlock({
+              self,
+              page,
+              label: `📎 ${ctaDisplayText}`,
+              url: c.link,
+            });
           }
 
 
@@ -2267,12 +2255,6 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                 if (siteResult.success && siteResult.url) {
                   self.log(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${siteResult.url})`);
 
-                  // 구분선
-                  const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-                  await page.keyboard.press('Enter');
-                  await safeKeyboardType(page, divider, { delay: 5 });
-                  await page.keyboard.press('Enter');
-
                   // 관련 사이트 바로가기 문구
                   const siteHooks = [
                     '🔗 관련 사이트 바로가기!!',
@@ -2280,15 +2262,12 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                     '📌 관련 공식 사이트 바로가기!!',
                   ];
                   const randomSiteHook = siteHooks[Math.floor(Math.random() * siteHooks.length)];
-                  await safeKeyboardType(page, randomSiteHook, { delay: 10 });
-                  await page.keyboard.press('Enter');
-
-                  // 공식 사이트 URL 삽입 → 링크 카드 자동 생성
-                  await safeKeyboardType(page, `👉 ${siteResult.url}`, { delay: 10 });
-                  await page.keyboard.press('Enter');
-
-                  // 링크 카드 로딩 대기
-                  await self.waitForLinkCard(15000, 500);
+                  await insertTailLinkCardBlock({
+                    self,
+                    page,
+                    label: randomSiteHook,
+                    url: siteResult.url,
+                  });
                   self.log(`   ✅ [공식사이트] 관련 사이트 바로가기 삽입 완료: ${siteResult.siteName}`);
                 } else {
                   self.log(`   ⚠️ [공식사이트] 적합한 사이트 없음 → 건너뜀`);
@@ -2358,24 +2337,18 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           if (siteResult.success && siteResult.url) {
             self.log(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${siteResult.url})`);
 
-            const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-            await page.keyboard.press('Enter');
-            await safeKeyboardType(page, divider, { delay: 5 });
-            await page.keyboard.press('Enter');
-
             const siteHooks = [
               '🔗 관련 사이트 바로가기!!',
               '🌐 공식 사이트 바로가기!!',
               '📌 관련 공식 사이트 바로가기!!',
             ];
             const randomSiteHook = siteHooks[Math.floor(Math.random() * siteHooks.length)];
-            await safeKeyboardType(page, randomSiteHook, { delay: 10 });
-            await page.keyboard.press('Enter');
-
-            await safeKeyboardType(page, `👉 ${siteResult.url}`, { delay: 10 });
-            await page.keyboard.press('Enter');
-
-            await self.waitForLinkCard(15000, 500);
+            await insertTailLinkCardBlock({
+              self,
+              page,
+              label: randomSiteHook,
+              url: siteResult.url,
+            });
             self.log(`   ✅ [공식사이트] 관련 사이트 바로가기 삽입 완료: ${siteResult.siteName}`);
           } else {
             self.log(`   ⚠️ [공식사이트] 적합한 사이트 없음 → 건너뜀`);

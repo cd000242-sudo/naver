@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   applyTailHashtagsAfterCards,
+  insertTailLinkCardBlock,
   insertPreviousPostTailBlock,
   PREVIOUS_POST_SEPARATOR,
 } from '../automation/editorTailActions.js';
@@ -158,5 +159,26 @@ describe('editor tail actions', () => {
     expect(pressed.filter((key) => key === 'Enter')).toHaveLength(3);
     expect(self.delay).toHaveBeenCalledWith(3000);
     expect(self.applyHashtagsInBody).not.toHaveBeenCalled();
+  });
+
+  it('types a reusable tail link-card block for CTA and official-site links', async () => {
+    const self = makeSelf();
+    const { page, pressed } = makePage();
+
+    const result = await insertTailLinkCardBlock({
+      self,
+      page: page as any,
+      label: '📎 자세히 보러가기',
+      url: 'https://example.com/product',
+    });
+
+    expect(result).toEqual({ cardReady: true });
+    expect(typed).toEqual([
+      PREVIOUS_POST_SEPARATOR,
+      '📎 자세히 보러가기',
+      '👉 https://example.com/product',
+    ]);
+    expect(pressed).toEqual(['Enter', 'Enter', 'Enter', 'Enter']);
+    expect(self.waitForLinkCard).toHaveBeenCalledWith(15000, 500);
   });
 });
