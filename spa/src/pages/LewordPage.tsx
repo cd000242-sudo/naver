@@ -32,7 +32,7 @@ function LewordPage() {
             style={{
                 minHeight: 'calc(100vh - 72px)',
                 background: '#07090d',
-                padding: '12px 16px 18px',
+                padding: '10px 14px 14px',
             }}
         >
             <div
@@ -46,49 +46,64 @@ function LewordPage() {
                     boxShadow: '0 20px 54px rgba(0,0,0,.34)',
                 }}
             >
-                {!loaded && (
+                {(!loaded || failed) && (
                     <div
-                        role="status"
-                        aria-live="polite"
                         style={{
                             position: 'absolute',
-                            inset: 0,
-                            zIndex: 2,
-                            display: 'grid',
-                            placeItems: 'center',
-                            background: 'linear-gradient(180deg, #07090d, #0b1119)',
-                            color: '#f8fbff',
-                            textAlign: 'center',
-                            padding: 24,
+                            top: 12,
+                            left: 12,
+                            right: 12,
+                            zIndex: 3,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: 10,
+                            pointerEvents: 'none',
                         }}
                     >
-                        <div>
-                            <strong style={{ display: 'block', color: '#f5c542', fontSize: 20, marginBottom: 8 }}>
-                                LEWORD Pro Web 불러오는 중
+                        <div
+                            role="status"
+                            aria-live="polite"
+                            style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: 8,
+                                border: '1px solid rgba(245,197,66,.28)',
+                                borderRadius: 8,
+                                background: 'rgba(7,9,13,.72)',
+                                color: '#f8fbff',
+                                padding: '8px 10px',
+                                boxShadow: '0 10px 28px rgba(0,0,0,.22)',
+                                backdropFilter: 'blur(10px)',
+                                pointerEvents: 'auto',
+                            }}
+                        >
+                            <strong style={{ color: '#f5c542', fontSize: 13, fontWeight: 900 }}>
+                                LEWORD Pro Web
                             </strong>
-                            <span style={{ color: '#a4b1c4', fontSize: 14 }}>
-                                서버 콘솔을 연결하고 있습니다. 잠시만 기다려주세요.
+                            <span style={{ color: '#a4b1c4', fontSize: 12 }}>
+                                {failed ? '연결 확인 필요' : '실시간 서버 연결 중'}
                             </span>
-                            {failed && (
-                                <div style={{ marginTop: 16 }}>
-                                    <button
-                                        type="button"
-                                        onClick={retry}
-                                        style={{
-                                            minHeight: 38,
-                                            border: '1px solid rgba(245,197,66,.48)',
-                                            borderRadius: 8,
-                                            background: 'rgba(245,197,66,.12)',
-                                            color: '#f5c542',
-                                            padding: '8px 14px',
-                                            fontWeight: 900,
-                                        }}
-                                    >
-                                        다시 불러오기
-                                    </button>
-                                </div>
-                            )}
                         </div>
+                        <button
+                            type="button"
+                            onClick={retry}
+                            style={{
+                                minHeight: 36,
+                                border: '1px solid rgba(91,183,255,.42)',
+                                borderRadius: 8,
+                                background: 'rgba(7,9,13,.72)',
+                                color: '#dceaff',
+                                padding: '7px 11px',
+                                fontSize: 12,
+                                fontWeight: 900,
+                                boxShadow: '0 10px 28px rgba(0,0,0,.22)',
+                                backdropFilter: 'blur(10px)',
+                                pointerEvents: 'auto',
+                            }}
+                        >
+                            새로고침
+                        </button>
                     </div>
                 )}
                 <iframe
@@ -110,7 +125,7 @@ function LewordPage() {
                         border: 0,
                         display: 'block',
                         background: '#07090d',
-                        opacity: loaded ? 1 : 0.01,
+                        opacity: 1,
                         transition: 'opacity .18s ease',
                     }}
                     allow="clipboard-read; clipboard-write"

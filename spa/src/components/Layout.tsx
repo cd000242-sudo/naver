@@ -30,7 +30,7 @@ function Layout() {
             </main>
             {!isLewordConsole && <Footer />}
             {!isLewordConsole && <SummerEffect />}
-            <MusicPlayer />
+            {!isLewordConsole && <MusicPlayer />}
             {!isLewordConsole && <FloatStack />}
         </>
     );
