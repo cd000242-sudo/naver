@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import MusicPlayer from './MusicPlayer';
@@ -12,6 +13,18 @@ import ScrollToTop from './ScrollToTop';
  * <Outlet /> 안만 페이지별 내용 교체.
  */
 function Layout() {
+    const location = useLocation();
+    const pathname = location.pathname.replace(/\/$/, '') || '/';
+    const isLewordConsole = pathname === '/leword' || pathname === '/leword.html';
+
+    if (isLewordConsole) {
+        return (
+            <main style={{ minHeight: '100vh' }}>
+                <Outlet />
+            </main>
+        );
+    }
+
     return (
         <>
             <ScrollToTop />
