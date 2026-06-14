@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
+// Keep the Pro shell in Pages so UI fixes can ship before the API container restarts.
 const LEWORD_PRO_WEB_URL = '/leword-pro-web.html';
 
 function LewordPage() {
