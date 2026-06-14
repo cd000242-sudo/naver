@@ -735,6 +735,7 @@
         <a href="#lookup" data-view-target="lookup">키워드 조회</a>
         <a href="#features" data-view-target="features">Pro 기능</a>
         <a href="#ops" data-view-target="ops">운영 현황</a>
+        <a href="#settings" data-view-target="settings">환경설정</a>
         <a class="download" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe">PC 앱 다운로드</a>
         <a class="download" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk">모바일 APK</a>
         <button type="button" id="loginOpen">Pro 로그인</button>
@@ -748,6 +749,7 @@
         <a class="side-link" href="#lookup" data-view-target="lookup">PC/모바일 실측 조회</a>
         <a class="side-link" href="#features" data-view-target="features">전체 Pro 기능</a>
         <a class="side-link" href="#ops" data-view-target="ops">노출/성과/발행/스케줄</a>
+        <a class="side-link" href="#settings" data-view-target="settings">환경설정/API 키</a>
         <a class="side-link" href="#downloads" data-view-target="downloads">앱 다운로드</a>
         <a class="side-link" href="#workbench" data-view-target="workbench">실행 로그</a>
       </aside>
@@ -921,29 +923,16 @@
           </div>
         </section>
 
-        <section class="panel main-view" id="downloads" data-view="downloads">
+        <section class="panel main-view" id="settings" data-view="settings">
           <div class="panel-title">
             <div>
-              <h2>LEWORD 앱 다운로드</h2>
-              <div class="muted">PC Electron 앱과 Android APK를 바로 내려받습니다. 모바일 앱은 LEWORD 로고와 production API 주소를 반영한 최신 APK로 제공합니다.</div>
+              <h2>환경설정</h2>
+              <div class="muted">Electron 앱처럼 각 사용자 API 키를 입력합니다. 키는 이 브라우저 로컬에만 저장되고, 서버 공용 설정으로 저장하지 않으며 실행 요청에만 전달됩니다.</div>
             </div>
           </div>
-          <div class="download-grid">
-            <article class="download-card">
-              <h3>PC Electron 앱</h3>
-              <p>Windows용 LEWORD 데스크톱 앱입니다. 기존 Electron 앱의 전체 기능을 PC 환경에서 그대로 사용합니다.</p>
-              <div class="download-meta" id="pcDownloadMeta">다운로드 파일 확인 중</div>
-              <a class="btn primary" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe">PC 앱 다운로드</a>
-            </article>
-            <article class="download-card">
-              <h3>Android 모바일 앱</h3>
-              <p>서버 기반 Pro 기능, 실시간 소스, 키워드 저장/공유, 알림 기능을 사용하는 Android APK입니다.</p>
-              <div class="download-meta" id="androidDownloadMeta">다운로드 파일 확인 중</div>
-              <a class="btn primary" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk">모바일 APK 다운로드</a>
-            </article>
-          </div>
-          <details class="settings-panel" id="naverApiSettings">
-            <summary>네이버 API 키 설정</summary>
+          <div class="settings-panel" id="naverApiSettings">
+            <h3 style="margin:0 0 6px;">키워드 API 설정</h3>
+            <p class="muted" style="margin:0;">Naver OpenAPI는 문서수/연관어, SearchAd는 PC/모바일 실측 검색량, YouTube API는 유튜브 황금키워드에 사용합니다.</p>
             <div class="settings-grid">
               <div>
                 <label for="naverClientId">Naver Client ID</label>
@@ -965,13 +954,43 @@
                 <label for="naverSearchAdCustomerId">SearchAd Customer ID</label>
                 <input class="input" id="naverSearchAdCustomerId" autocomplete="off" />
               </div>
+              <div>
+                <label for="youtubeApiKey">YouTube Data API Key</label>
+                <input class="input" id="youtubeApiKey" type="password" autocomplete="off" />
+              </div>
             </div>
             <div class="settings-actions">
-              <button class="btn primary" type="button" id="saveNaverApiSettings">저장</button>
-              <button class="btn blue" type="button" id="checkNaverApiSettings">상태 확인</button>
+              <button class="btn primary" type="button" id="saveNaverApiSettings">내 API 키 저장</button>
+              <button class="btn blue" type="button" id="checkNaverApiSettings">로컬 설정 확인</button>
+              <button class="btn red" type="button" id="clearNaverApiSettings">저장값 삭제</button>
+              <a class="btn blue" href="https://developers.naver.com/apps/#/register" target="_blank" rel="noopener">Naver OpenAPI</a>
+              <a class="btn blue" href="https://manage.searchad.naver.com/customers/links" target="_blank" rel="noopener">SearchAd API</a>
             </div>
-            <div class="settings-message" id="naverApiSettingsMessage">키 값은 저장 후 다시 표시하지 않습니다. 필요한 항목만 입력해도 기존 저장값은 유지됩니다.</div>
-          </details>
+            <div class="settings-message" id="naverApiSettingsMessage">키 값은 서버에 저장하지 않습니다. 저장 후 비밀키 입력칸은 비우고, 실행할 때 브라우저 로컬 값만 요청 헤더로 전달합니다.</div>
+          </div>
+        </section>
+
+        <section class="panel main-view" id="downloads" data-view="downloads">
+          <div class="panel-title">
+            <div>
+              <h2>LEWORD 앱 다운로드</h2>
+              <div class="muted">PC Electron 앱과 Android APK를 바로 내려받습니다. 모바일 앱은 LEWORD 로고와 production API 주소를 반영한 최신 APK로 제공합니다.</div>
+            </div>
+          </div>
+          <div class="download-grid">
+            <article class="download-card">
+              <h3>PC Electron 앱</h3>
+              <p>Windows용 LEWORD 데스크톱 앱입니다. 기존 Electron 앱의 전체 기능을 PC 환경에서 그대로 사용합니다.</p>
+              <div class="download-meta" id="pcDownloadMeta">다운로드 파일 확인 중</div>
+              <a class="btn primary" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe">PC 앱 다운로드</a>
+            </article>
+            <article class="download-card">
+              <h3>Android 모바일 앱</h3>
+              <p>서버 기반 Pro 기능, 실시간 소스, 키워드 저장/공유, 알림 기능을 사용하는 Android APK입니다.</p>
+              <div class="download-meta" id="androidDownloadMeta">다운로드 파일 확인 중</div>
+              <a class="btn primary" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk">모바일 APK 다운로드</a>
+            </article>
+          </div>
         </section>
 
         <section class="panel main-view" id="workbench" data-view="workbench">
@@ -1056,7 +1075,6 @@
       publicSources: apiUrl('/v1/public/source-signals'),
       proSources: apiUrl('/v1/mobile/source-signals'),
       apiStatus: apiUrl('/v1/mobile/api-status'),
-      naverApiSettings: apiUrl('/v1/mobile/api-settings/naver'),
       pcFeatures: apiUrl('/v1/mobile/pc-features'),
       rankTracking: apiUrl('/v1/mobile/rank-tracking'),
       rankTrackingManual: apiUrl('/v1/mobile/rank-tracking/manual'),
@@ -1124,7 +1142,8 @@
     let activeViewId = 'golden';
     let selectedOpsId = 'rank';
     let selectedCatalogTab = 'today';
-    const viewIds = ['golden', 'sources', 'lookup', 'features', 'ops', 'downloads', 'workbench'];
+    const userApiSettingsStorageKey = 'leword.pro.userApiSettings.v1';
+    const viewIds = ['golden', 'sources', 'lookup', 'features', 'ops', 'settings', 'downloads', 'workbench'];
     const catalogTabs = [
       { id: 'today', label: '오늘/실시간' },
       { id: 'discovery', label: '발굴' },
@@ -1657,9 +1676,14 @@
         log('추적 등록 실패: ' + err.message);
       }
     }
-    function headers() {
+    function headers(options) {
+      const opts = options || {};
       const out = { 'Content-Type': 'application/json' };
       if (session && session.accessToken) out.Authorization = 'Bearer ' + session.accessToken;
+      if (opts.userApiCredentials) {
+        const credentialHeader = encodeUserApiCredentialsHeader();
+        if (credentialHeader) out['X-Leword-User-Api-Credentials'] = credentialHeader;
+      }
       return out;
     }
     function requireSession() {
@@ -1716,8 +1740,8 @@
       if (status === 404) return '서버 API가 아직 최신 배포로 열리지 않았습니다. 서버 재시작/배포 반영 후 다시 실행하세요. (' + routePath(url) + ')';
       return message || 'HTTP ' + status;
     }
-    async function apiPost(url, body) {
-      const res = await fetch(url, { method: 'POST', headers: headers(), body: JSON.stringify(body || {}) });
+    async function apiPost(url, body, options) {
+      const res = await fetch(url, { method: 'POST', headers: headers(options), body: JSON.stringify(body || {}) });
       const payload = await res.json().catch(function() { return {}; });
       if (url !== endpoints.session && (res.status === 401 || res.status === 403)) {
         saveSession(null);
@@ -1733,7 +1757,49 @@
         'naverSearchAdAccessLicense',
         'naverSearchAdSecretKey',
         'naverSearchAdCustomerId',
+        'youtubeApiKey',
       ];
+    }
+    function readUserApiSettings() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(userApiSettingsStorageKey) || '{}');
+        return naverApiSettingsFields().reduce(function(out, id) {
+          const value = raw && typeof raw[id] === 'string' ? raw[id].trim() : '';
+          if (value) out[id] = value;
+          return out;
+        }, {});
+      } catch (err) {
+        return {};
+      }
+    }
+    function writeUserApiSettings(settings) {
+      localStorage.setItem(userApiSettingsStorageKey, JSON.stringify(settings || {}));
+    }
+    function encodeUserApiCredentialsHeader() {
+      const settings = readUserApiSettings();
+      if (!Object.keys(settings).length) return '';
+      try {
+        return btoa(unescape(encodeURIComponent(JSON.stringify(settings))));
+      } catch (err) {
+        return '';
+      }
+    }
+    function apiSettingsReadyLabel(ok) {
+      return ok ? '설정됨' : '미설정';
+    }
+    function hydrateNaverApiSettingsForm() {
+      const settings = readUserApiSettings();
+      naverApiSettingsFields().forEach(function(id) {
+        const input = qs(id);
+        if (!input) return;
+        input.value = '';
+        if (settings[id]) {
+          input.placeholder = '저장됨 - 변경할 때만 입력';
+        } else {
+          input.placeholder = '';
+        }
+      });
+      renderNaverApiStatusMessage({ localSettings: settings });
     }
     function collectNaverApiSettings() {
       return naverApiSettingsFields().reduce(function(out, id) {
@@ -1749,54 +1815,77 @@
         if (input) input.value = '';
       });
     }
-    function statusLabel(status) {
-      if (status === 'ready') return '정상';
-      if (status === 'partial') return '일부 설정';
-      return '미설정';
-    }
     function renderNaverApiStatusMessage(payload) {
-      const items = payload && payload.snapshot && Array.isArray(payload.snapshot.items) ? payload.snapshot.items : [];
-      const openApi = items.find(function(item) { return item.id === 'naver-openapi'; });
-      const searchAd = items.find(function(item) { return item.id === 'naver-searchad'; });
-      const openStatus = openApi ? statusLabel(openApi.status) : '확인 필요';
-      const adStatus = searchAd ? statusLabel(searchAd.status) : '확인 필요';
-      qs('naverApiSettingsMessage').textContent = 'OpenAPI ' + openStatus + ' · SearchAd ' + adStatus + ' · 키 값은 화면에 다시 표시하지 않습니다.';
+      const settings = payload && payload.localSettings ? payload.localSettings : readUserApiSettings();
+      const openReady = !!(settings.naverClientId && settings.naverClientSecret);
+      const adReady = !!(settings.naverSearchAdAccessLicense && settings.naverSearchAdSecretKey && settings.naverSearchAdCustomerId);
+      const youtubeReady = !!settings.youtubeApiKey;
+      qs('naverApiSettingsMessage').textContent =
+        '브라우저 로컬 저장 · OpenAPI ' + apiSettingsReadyLabel(openReady)
+        + ' · SearchAd ' + apiSettingsReadyLabel(adReady)
+        + ' · YouTube ' + apiSettingsReadyLabel(youtubeReady)
+        + ' · 서버 공용 저장 아님 · 실행 요청에만 전달';
     }
     async function saveNaverApiSettings() {
-      if (!requireSession()) return;
-      const settings = collectNaverApiSettings();
+      const entered = collectNaverApiSettings();
+      const previous = readUserApiSettings();
+      const settings = Object.assign({}, previous, entered);
       if (!Object.keys(settings).length) {
-        qs('naverApiSettingsMessage').textContent = '저장할 네이버 API 키를 입력하세요.';
+        qs('naverApiSettingsMessage').textContent = '저장할 API 키를 입력하세요.';
         return;
       }
-      openProgress('네이버 API 키 저장', '서버 설정 저장소에 안전하게 저장하는 중입니다.');
+      openProgress('API 키 저장', '이 브라우저 로컬 저장소에 저장하는 중입니다.');
       try {
-        updateProgress(35, '입력값을 검증하고 있습니다.');
-        const payload = await apiPost(endpoints.naverApiSettings, settings);
+        updateProgress(55, '입력값을 로컬 설정으로 병합하고 있습니다.');
+        writeUserApiSettings(settings);
         clearNaverApiSecretInputs();
-        renderNaverApiStatusMessage(payload);
-        setResult({ naverApiSettings: { ok: payload.ok, savedKeys: payload.savedKeys || [] } });
-        log('네이버 API 키 설정 저장 완료');
-        completeProgress('네이버 API 설정이 저장되었습니다.');
+        hydrateNaverApiSettingsForm();
+        setResult({
+          userApiSettings: {
+            ok: true,
+            storage: 'browser-local',
+            savedKeys: Object.keys(settings),
+          },
+        });
+        log('사용자 API 키 로컬 저장 완료');
+        completeProgress('API 키가 이 브라우저에 저장되었습니다.');
       } catch (err) {
         qs('naverApiSettingsMessage').textContent = err.message;
-        log('네이버 API 키 저장 실패: ' + err.message);
+        log('API 키 로컬 저장 실패: ' + err.message);
         failProgress(err.message);
       }
     }
     async function checkNaverApiSettings() {
-      if (!requireSession()) return;
-      openProgress('네이버 API 상태 확인', '저장된 키 상태를 확인하고 있습니다.');
+      openProgress('API 설정 확인', '브라우저 로컬 설정을 확인하고 있습니다.');
       try {
-        const payload = await apiGet(endpoints.apiStatus, true);
-        renderNaverApiStatusMessage(payload);
-        setResult({ naverApiStatus: payload.snapshot || payload });
-        log('네이버 API 상태 확인 완료');
-        completeProgress('네이버 API 상태 확인이 완료되었습니다.');
+        const settings = readUserApiSettings();
+        renderNaverApiStatusMessage({ localSettings: settings });
+        setResult({
+          userApiSettings: {
+            storage: 'browser-local',
+            savedKeys: Object.keys(settings),
+            openApiReady: !!(settings.naverClientId && settings.naverClientSecret),
+            searchAdReady: !!(settings.naverSearchAdAccessLicense && settings.naverSearchAdSecretKey && settings.naverSearchAdCustomerId),
+            youtubeReady: !!settings.youtubeApiKey,
+          },
+        });
+        log('사용자 API 로컬 설정 확인 완료');
+        completeProgress('로컬 API 설정 확인이 완료되었습니다.');
       } catch (err) {
         qs('naverApiSettingsMessage').textContent = err.message;
-        log('네이버 API 상태 확인 실패: ' + err.message);
+        log('API 설정 확인 실패: ' + err.message);
         failProgress(err.message);
+      }
+    }
+    function clearNaverApiSettings() {
+      try {
+        localStorage.removeItem(userApiSettingsStorageKey);
+        clearNaverApiSecretInputs();
+        hydrateNaverApiSettingsForm();
+        setResult({ userApiSettings: { ok: true, storage: 'browser-local', savedKeys: [] } });
+        log('사용자 API 키 로컬 저장값 삭제 완료');
+      } catch (err) {
+        qs('naverApiSettingsMessage').textContent = err.message;
       }
     }
     async function pollJob(jobPayload) {
@@ -2625,7 +2714,7 @@
         if (feature.workflow === 'blueprint-draft') {
           updateProgress(22, '블루프린트를 생성하고 있습니다.');
           log(feature.title + ' 블루프린트 생성 중');
-          const blueprintPayload = await apiPost(endpoints.blueprint, feature.payload ? feature.payload(q, runOptions) : { keyword: q });
+          const blueprintPayload = await apiPost(endpoints.blueprint, feature.payload ? feature.payload(q, runOptions) : { keyword: q }, { userApiCredentials: true });
           const blueprint = blueprintPayload && blueprintPayload.result && blueprintPayload.result.blueprint
             ? blueprintPayload.result.blueprint
             : blueprintPayload && blueprintPayload.blueprint
@@ -2649,14 +2738,14 @@
         }
         if (feature.direct) {
           updateProgress(36, '서버에서 즉시 실행 중입니다.');
-          const payload = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {});
+          const payload = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {}, { userApiCredentials: true });
           renderFeatureResult(feature, payload.snapshot || payload.result || payload);
           log(feature.title + ' 즉시 실행 완료');
           completeProgress('즉시 실행 결과가 정리되었습니다.');
           return;
         }
         updateProgress(18, '서버 job을 접수하고 있습니다.');
-        const created = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {});
+        const created = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {}, { userApiCredentials: true });
         const result = await pollJob(created);
         renderFeatureResult(feature, result);
         log(feature.title + ' 완료');
@@ -2780,6 +2869,7 @@
     });
     qs('saveNaverApiSettings').addEventListener('click', saveNaverApiSettings);
     qs('checkNaverApiSettings').addEventListener('click', checkNaverApiSettings);
+    qs('clearNaverApiSettings').addEventListener('click', clearNaverApiSettings);
     qs('refreshSources').addEventListener('click', loadSources);
     qs('refreshGolden').addEventListener('click', loadGoldenBoard);
     qs('refreshOps').addEventListener('click', function() {
@@ -2918,6 +3008,7 @@
     });
 
     restoreSession();
+    hydrateNaverApiSettingsForm();
     renderFeatureGrid();
     renderFeatureCatalog(null, null);
     selectTool(selectedToolId);
