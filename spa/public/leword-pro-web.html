@@ -167,6 +167,7 @@
     .main { display: grid; gap: 16px; min-width: 0; }
     .main-view { display: none; }
     .main-view.active { display: block; }
+    [hidden] { display: none !important; }
     .hero {
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -386,8 +387,29 @@
     .quick-tool.hot { border-color: rgba(245,197,66,.48); background: linear-gradient(135deg, rgba(245,197,66,.18), rgba(53,211,153,.08)); }
     .quick-tool strong { display: block; font-size: 13px; line-height: 1.3; overflow-wrap: anywhere; }
     .quick-tool span { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.35; overflow-wrap: anywhere; }
-    .tool-group-tabs, .tool-tabs, .ops-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-    .tool-tab, .tool-group-tab, .ops-tab {
+    .tool-group-tabs, .ops-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .tool-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .tool-tab {
+      min-height: 112px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, rgba(21,30,44,.98), rgba(11,16,23,.98));
+      color: #d9e6f7;
+      padding: 14px;
+      text-align: left;
+      display: grid;
+      align-content: start;
+      gap: 7px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+      overflow: hidden;
+    }
+    .tool-group-tab, .ops-tab {
       min-height: 34px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -397,8 +419,42 @@
       font-size: 12px;
       font-weight: 900;
     }
-    .tool-tab.active, .tool-group-tab.active, .ops-tab.active { border-color: rgba(245,197,66,.7); color: #07111f; background: linear-gradient(135deg, var(--gold), #b7f65c); }
-    .tool-form { display: grid; grid-template-columns: 1.2fr .9fr .7fr .8fr; gap: 8px; align-items: center; }
+    .tool-tab strong { display: block; font-size: 15px; line-height: 1.35; color: #f5f8ff; word-break: keep-all; overflow-wrap: anywhere; }
+    .tool-tab span { display: block; color: var(--muted); font-size: 12px; line-height: 1.45; word-break: keep-all; overflow-wrap: anywhere; }
+    .tool-tab em {
+      display: inline-flex;
+      width: fit-content;
+      border-radius: 999px;
+      border: 1px solid rgba(245,197,66,.3);
+      background: rgba(245,197,66,.1);
+      color: var(--gold);
+      padding: 3px 8px;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 1000;
+    }
+    .tool-tab.active {
+      border-color: rgba(245,197,66,.72);
+      background:
+        linear-gradient(135deg, rgba(245,197,66,.95), rgba(183,246,92,.93));
+      color: #07111f;
+      box-shadow: 0 14px 30px rgba(245,197,66,.14);
+    }
+    .tool-tab.active strong, .tool-tab.active span, .tool-tab.active em { color: #07111f; }
+    .tool-tab.active em { border-color: rgba(7,17,31,.22); background: rgba(7,17,31,.09); }
+    .tool-group-tab.active, .ops-tab.active { border-color: rgba(245,197,66,.7); color: #07111f; background: linear-gradient(135deg, var(--gold), #b7f65c); }
+    .tool-form { display: grid; grid-template-columns: minmax(180px, 1fr) 120px minmax(160px, .75fr); gap: 8px; align-items: center; }
+    .auto-discovery-panel {
+      grid-column: 1 / -1;
+      border: 1px solid rgba(53,211,153,.26);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(53,211,153,.1), rgba(91,183,255,.07)),
+        rgba(7,12,19,.82);
+      padding: 12px;
+    }
+    .auto-discovery-panel strong { display: block; color: #d9fff0; font-size: 14px; margin-bottom: 4px; }
+    .auto-discovery-panel span { display: block; color: #b8c8dc; font-size: 12px; line-height: 1.5; word-break: keep-all; }
     .tool-checks { display: flex; gap: 10px; flex-wrap: wrap; grid-column: 1 / -1; color: #d9e6f7; font-size: 12px; }
     .tool-checks label { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
     .tool-note { margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.5; }
@@ -692,7 +748,7 @@
       .feature-grid, .ops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 820px) {
-      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid { grid-template-columns: 1fr; }
+      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid { grid-template-columns: 1fr; }
       .quick-feature-dock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quality-strip { grid-template-columns: 1fr 1fr; }
       .result-toolbar { grid-template-columns: 1fr; }
@@ -853,7 +909,11 @@
             <div class="tool-group-tabs" id="toolGroupTabs" aria-label="Pro 기능 그룹" hidden></div>
             <div class="tool-tabs" id="toolTabs" aria-label="Pro 도구 선택"></div>
             <div class="tool-form">
-              <input class="input" id="toolSeedInput" placeholder="시드 키워드 또는 상품/질문 키워드" autocomplete="off" />
+              <input type="hidden" id="toolSeedInput" value="" />
+              <div class="auto-discovery-panel" id="toolAutoDiscoveryPanel">
+                <strong id="toolAutoModeTitle">자동 발굴 모드</strong>
+                <span id="toolAutoModeDesc">실시간 소스와 카테고리를 서버가 감지해서 후보를 수집하고, 검색량·문서수·니즈 의도를 교차검증합니다.</span>
+              </div>
               <select class="input" id="toolCategory">
                 <option value="all">전체 카테고리</option>
                 <option value="policy">정책/지원금</option>
@@ -878,10 +938,9 @@
                 <label><input type="checkbox" id="toolVolumeMetrics" checked /> PC/모바일 실측</label>
                 <label><input type="checkbox" id="toolCrossRef" checked /> 교차검증</label>
               </div>
-              <button class="btn primary" type="button" id="runSelectedTool">선택 도구 실행</button>
-              <button class="btn blue" type="button" id="copyLookupKeyword">조회 키워드 가져오기</button>
+              <button class="btn primary" type="button" id="runSelectedTool">자동 발굴 실행</button>
             </div>
-            <div class="tool-note" id="toolProfileNote">Pro 트래픽 폭발 키워드 헌터 설정을 조정한 뒤 실행하세요.</div>
+            <div class="tool-note" id="toolProfileNote">Pro 트래픽 폭발 키워드 헌터가 실시간 이슈와 시즌 신호를 자동으로 감지합니다.</div>
             <div class="tool-detail" id="toolDetail"></div>
             <div class="tool-result-panel" id="toolResultPanel">
               <h3>도구 선택 대기</h3>
@@ -1126,9 +1185,9 @@
     ];
 
     const features = [
-      { id: 'pro-traffic', group: 'keyword', title: 'PRO 트래픽 폭발키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '실시간 이슈, 계절성, evergreen 신호를 서버 job으로 분석해 선점형 트래픽 후보를 뽑습니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 30, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false, includeAiInference: options.includeAiInference !== false }) },
-      { id: 'naver-mate', group: 'keyword', title: '네이버 메이트 황금키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어를 실측 검색량과 연결해 네이버 친화 롱테일 후보를 확장합니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false, includeAiInference: options.includeAiInference !== false }) },
-      { id: 'shopping', group: 'keyword', title: '쇼핑커넥트 황금제품키워드', status: 'ready', route: endpoints.shoppingConnect, desc: '지금 이슈가 있거나 구매 전환 가능성이 있는 상품 신호를 블로그 진입형 제품 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim', requireSellableIntent: true, includeAiInference: options.includeAiInference !== false }) },
+      { id: 'pro-traffic', group: 'keyword', title: 'PRO 트래픽 폭발키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '실시간 이슈, 계절성, evergreen 신호를 서버 job으로 분석해 선점형 트래픽 후보를 뽑습니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 30, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false, autoDiscovery: true, includeAiInference: options.includeAiInference !== false }) },
+      { id: 'naver-mate', group: 'keyword', title: '네이버 메이트 황금키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어를 실측 검색량과 연결해 네이버 친화 롱테일 후보를 확장합니다.', requiresKeyword: false, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q || options.autoSeedKeyword || '오늘 실시간 이슈', targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false, autoDiscovery: !q, includeAiInference: options.includeAiInference !== false }) },
+      { id: 'shopping', group: 'keyword', title: '쇼핑커넥트 황금제품키워드', status: 'ready', route: endpoints.shoppingConnect, desc: '지금 이슈가 있거나 구매 전환 가능성이 있는 상품 신호를 블로그 진입형 제품 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q || '', targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim', requireSellableIntent: true, autoDiscovery: !q, includeAiInference: options.includeAiInference !== false }) },
       { id: 'kin', group: 'keyword', title: '지식인 황금키워드', status: 'ready', route: endpoints.kin, desc: '지식인 질문 신호에서 답변 수요가 높고 문서 경쟁이 낮은 정보형 키워드를 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true, includeAiInference: options.includeAiInference !== false }) },
       { id: 'youtube', group: 'keyword', title: '유튜브 황금키워드 및 쇼츠분석', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승/쇼츠 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, crossReferenceNaver: options.crossReferenceNaver !== false, includeShortsSignals: true, includeAiInference: options.includeAiInference !== false }) }
     ];
@@ -1344,7 +1403,7 @@
         'pro-traffic': ['실시간 이슈, 시즌성, evergreen 후보를 섞어 트래픽 폭발 가능성이 큰 키워드를 좁힙니다.', '검색량, 문서수, 황금비율, PC/모바일 신호를 서버에서 실측 검증합니다.', '무료 보드보다 훨씬 넓은 후보군에서 Pro 전용 선점 키워드를 뽑습니다.'],
         shopping: ['현재 이슈와 구매 전환 가능성이 같이 있는 제품 신호를 우선합니다.', '상품명 그대로가 아니라 블로그 진입형 정보/비교/추천 키워드로 변환합니다.', '최소 30개 이상 성과 가능 후보를 목표로 자동 발굴합니다.'],
         youtube: ['유튜브 급상승 영상과 쇼츠 신호를 포털 검색 수요와 교차 검증합니다.', '영상 이슈를 블로그/쇼츠/뉴스형 키워드로 재가공합니다.', 'YouTube API와 네이버 API가 있으면 더 정확한 실측 기반 후보를 보여줍니다.'],
-        'naver-mate': ['자동완성, 연관어, 검색량을 묶어 네이버 친화 롱테일 후보를 만듭니다.', 'PC/모바일 분리 지표를 켜면 표에서 바로 비교할 수 있습니다.', '시드 키워드를 넣을수록 더 좁고 정확하게 확장됩니다.'],
+        'naver-mate': ['실시간 소스에서 감지한 이슈를 네이버 자동완성/연관어로 확장합니다.', 'PC/모바일 분리 지표를 켜면 표에서 바로 비교할 수 있습니다.', '사용자가 시드를 넣지 않아도 서버가 오늘 수요에 맞는 롱테일을 자동 발굴합니다.'],
         kin: ['지식인 질문 신호에서 답변 수요가 뚜렷한 키워드를 추립니다.', '질문 의도, 최신성, 상승 여부를 기준으로 정렬합니다.', '블로그 제목과 FAQ 섹션으로 바로 전환하기 좋은 후보를 보여줍니다.'],
       };
       return guides[feature && feature.id] || ['서버 기능 상태를 확인하고 연결된 데이터를 불러옵니다.', '실행 결과는 이 기능 화면 안에 바로 정리합니다.', '권한이 필요하면 로그인 창을 먼저 띄웁니다.'];
@@ -1392,12 +1451,12 @@
         + list;
     }
     function renderToolWaiting(feature) {
-      renderToolResultPanel(feature, feature && feature.title ? feature.title : 'Pro 도구', '필요한 값만 입력하고 실행하세요. 실행 중에는 진행률 모달이 뜨고, 완료 후 이 영역에 결과만 정리됩니다.', [], []);
+      renderToolResultPanel(feature, feature && feature.title ? feature.title : 'Pro 도구', '자동 발굴 실행을 누르면 진행률 모달이 뜨고, 완료 후 이 영역에 후보와 실측 지표가 정리됩니다.', [], []);
     }
     function renderToolLocked(feature) {
       renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 로그인 필요', '이 도구는 Pro 세션이 있어야 실행됩니다. 아이디와 비밀번호만 입력하면 기존 사용자 계정으로 바로 접속합니다.', [
         { label: '상태', value: '권한 대기' },
-        { label: '입력', value: feature && feature.requiresKeyword ? '키워드 필요' : '선택' },
+        { label: '입력', value: '자동 감지' },
         { label: '결과', value: '잠김' },
         { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
       ], []);
@@ -1405,7 +1464,7 @@
     function renderToolRunning(feature, q) {
       renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 실행 중', '서버에 요청을 보냈습니다. 데이터 수집과 분석 진행률을 모달에 표시합니다.', [
         { label: '상태', value: '실행 중' },
-        { label: '키워드', value: q || '-' },
+        { label: '감지값', value: q || '자동' },
         { label: '방식', value: feature && feature.method === 'DOWNLOAD' ? '다운로드' : feature && feature.method === 'GET' ? '조회' : feature && feature.direct ? '즉시 실행' : 'job' },
         { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
       ], []);
@@ -1563,10 +1622,10 @@
       if (result && Array.isArray(result.keywords)) {
         const rows = result.keywords;
         const summary = result.summary || {};
-        const topRows = rows.slice(0, 6).map(function(row) {
+        const topRows = rows.slice(0, 12).map(function(row) {
           return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>' + keywordActionHtml(row.keyword || '') + '</li>';
         });
-        renderToolResultPanel(feature, feature.title + ' 완료', '상위 후보를 먼저 표시합니다. 전체 표는 키워드 분석기 표와 이 결과 영역에서 이어서 확인할 수 있습니다.', [
+        renderToolResultPanel(feature, feature.title + ' 완료', '상위 후보 12개를 먼저 표시합니다. 전체 표는 키워드 분석기 표와 이 결과 영역에서 이어서 확인할 수 있습니다.', [
           { label: '후보', value: fmt(summary.total == null ? rows.length : summary.total) },
           { label: 'SSS', value: fmt(summary.sss == null ? rows.filter(function(row) { return row.grade === 'SSS'; }).length : summary.sss) },
           { label: '실측', value: fmt(summary.measured == null ? rows.filter(function(row) { return row.isMeasured; }).length : summary.measured) },
@@ -2210,11 +2269,8 @@
     function renderToolGroupTabs() {
       const target = qs('toolGroupTabs');
       if (!target) return;
-      target.innerHTML = toolGroups.map(function(group) {
-        const count = features.filter(function(feature) { return feature.group === group.id; }).length;
-        const active = group.id === selectedToolGroupId ? ' active' : '';
-        return '<button class="tool-group-tab' + active + '" type="button" data-tool-group="' + escapeAttr(group.id) + '">' + escapeHtml(group.label) + '<span>' + count + '</span></button>';
-      }).join('');
+      target.hidden = true;
+      target.innerHTML = '';
     }
     function selectToolGroup(id) {
       const group = toolGroups.find(function(row) { return row.id === id; }) || toolGroups[0];
@@ -2232,17 +2288,89 @@
       });
       qs('toolTabs').innerHTML = visibleRows.map(function(feature) {
         const active = feature.id === selectedToolId ? ' active' : '';
-        return '<button class="tool-tab' + active + '" type="button" data-tool="' + escapeAttr(feature.id) + '">' + escapeHtml(feature.title) + '</button>';
+        return '<button class="tool-tab' + active + '" type="button" data-tool="' + escapeAttr(feature.id) + '">'
+          + '<strong>' + escapeHtml(feature.title) + '</strong>'
+          + '<span>' + escapeHtml(toolTabDescription(feature)) + '</span>'
+          + '<em>자동 발굴 · 목표 ' + escapeHtml(String(feature.defaultTargetCount || 30)) + '개</em>'
+          + '</button>';
       }).join('');
+    }
+    function toolTabDescription(feature) {
+      if (!feature) return '서버 자동 발굴';
+      if (feature.id === 'pro-traffic') return '실시간/시즌/evergreen 신호를 섞어 상위 후보 선별';
+      if (feature.id === 'naver-mate') return '네이버 자동완성·연관어를 오늘 소스에서 자동 확장';
+      if (feature.id === 'shopping') return '핫한 상품 신호를 구매 전환형 블로그 키워드로 변환';
+      if (feature.id === 'kin') return '지식인 질문 수요에서 정보형 황금키워드 추출';
+      return feature.desc || '서버 자동 발굴';
+    }
+    function toolAutoModeText(feature) {
+      if (!feature) return { title: '자동 발굴 모드', desc: '서버가 실시간 소스와 카테고리를 감지해 후보를 수집합니다.' };
+      const rows = {
+        'pro-traffic': {
+          title: '실시간 자동 헌팅',
+          desc: '네이버/다음/네이트/줌/정책/이슈 신호와 서버 prewarm 후보를 섞어 검색량·문서수·황금비를 검증합니다.',
+        },
+        'naver-mate': {
+          title: '네이버 자동완성 자동 확장',
+          desc: '현재 소스 보드에서 감지한 이슈를 내부 시드로 사용해 자동완성·연관어·PC/모바일 실측을 연결합니다.',
+        },
+        shopping: {
+          title: '쇼핑 핫제품 자동 발굴',
+          desc: '시드를 입력하지 않아도 서버가 최신 상품 신호를 찾고, 구매 전환 가능한 제품 키워드 30개 이상을 목표로 정리합니다.',
+        },
+        kin: {
+          title: '지식인 질문 자동 채굴',
+          desc: '답변 수요와 최신 질문 흐름을 기준으로 숨은 정보형 키워드를 자동 추립니다.',
+        },
+      };
+      return rows[feature.id] || { title: feature.title, desc: feature.desc || '서버 자동 발굴' };
+    }
+    function latestSourceKeywordForCategory(categoryId) {
+      const laneMap = {
+        policy: ['policy', 'issue', 'naver', 'daum', 'nate', 'zum'],
+        broadcast: ['issue', 'nate', 'naver', 'daum', 'zum', 'policy'],
+        shopping: ['zum', 'naver', 'daum', 'issue', 'nate', 'policy'],
+        sports: ['issue', 'naver', 'nate', 'daum', 'zum', 'policy'],
+        education: ['policy', 'naver', 'daum', 'issue', 'zum', 'nate'],
+        life: ['daum', 'zum', 'naver', 'policy', 'issue', 'nate'],
+        all: ['naver', 'daum', 'nate', 'zum', 'policy', 'issue'],
+      };
+      const order = laneMap[categoryId] || laneMap.all;
+      for (const laneId of order) {
+        const nodes = Array.from(document.querySelectorAll('#lane-' + laneId + ' .signal strong'));
+        for (const node of nodes) {
+          const value = String(node.textContent || '').trim();
+          if (value && value !== '-') return value;
+        }
+      }
+      return '';
+    }
+    function categoryAutoSeed(categoryId) {
+      const month = new Date().getMonth() + 1;
+      const rows = {
+        policy: month + '월 지원금 신청',
+        broadcast: '오늘 방송 이슈',
+        shopping: '오늘 인기 상품',
+        sports: '오늘 스포츠 일정',
+        education: month + '월 교육 일정',
+        life: month + '월 생활정보',
+        all: '오늘 실시간 이슈',
+      };
+      return rows[categoryId] || rows.all;
+    }
+    function autoSeedKeyword(feature, options) {
+      const categoryId = options && options.categoryId ? options.categoryId : 'all';
+      if (feature && (feature.id === 'shopping' || feature.id === 'kin' || feature.id === 'youtube')) return '';
+      return latestSourceKeywordForCategory(categoryId) || categoryAutoSeed(categoryId);
     }
     function selectTool(id) {
       const feature = features.find(function(row) { return row.id === id; }) || features[0];
       selectedToolId = feature.id;
       selectedToolGroupId = feature.group || selectedToolGroupId;
       qs('toolTargetCount').value = String(feature.defaultTargetCount || 30);
-      qs('toolSeedInput').placeholder = feature.requiresKeyword
-        ? feature.title + ' 실행 키워드 필수'
-        : feature.title + ' 시드 키워드 선택 입력';
+      const mode = toolAutoModeText(feature);
+      qs('toolAutoModeTitle').textContent = mode.title;
+      qs('toolAutoModeDesc').textContent = mode.desc;
       qs('toolProfileNote').textContent = feature.title + ' · ' + feature.desc;
       renderToolGroupTabs();
       renderToolTabs();
@@ -2250,13 +2378,13 @@
       renderToolWaiting(feature);
     }
     function toolKeywordInput() {
-      return (qs('toolSeedInput').value.trim() || compactKeywordInput()).trim();
+      return String(qs('toolSeedInput').value || '').trim();
     }
     function collectToolOptions() {
       const selected = getSelectedTool();
       const minCount = selected && selected.id === 'shopping' ? 30 : 5;
       const count = Math.max(minCount, Math.min(80, Number(qs('toolTargetCount').value || 30)));
-      return {
+      const options = {
         keyword: toolKeywordInput(),
         categoryId: qs('toolCategory').value || 'all',
         targetCount: count,
@@ -2267,6 +2395,9 @@
         includeVolumeMetrics: qs('toolVolumeMetrics').checked,
         crossReferenceNaver: qs('toolCrossRef').checked,
       };
+      options.autoSeedKeyword = options.keyword || autoSeedKeyword(selected, options);
+      options.autoDiscovery = !options.keyword;
+      return options;
     }
     function selectFeatureShortcut(id, keyword, autorun) {
       const feature = features.find(function(row) { return row.id === id; });
@@ -2279,7 +2410,7 @@
       selectTool(feature.id);
       setActiveView('features', { load: false });
       if (autorun) runFeature(feature, collectToolOptions());
-      else setTimeout(function() { qs('toolSeedInput').focus(); }, 0);
+      else setTimeout(function() { qs('runSelectedTool').focus(); }, 0);
     }
     function renderFeatureGrid() {
       const target = qs('featureGrid');
@@ -2715,11 +2846,12 @@
       }
       const runOptions = options || {};
       const q = runOptions.keyword == null ? compactKeywordInput() : String(runOptions.keyword || '').trim();
+      const displayKeyword = q || String(runOptions.autoSeedKeyword || '').trim();
       try {
         if (feature.requiresKeyword && !q) {
           log(feature.title + '는 키워드 입력이 필요합니다.');
           if (feature.id) {
-            renderToolResultPanel(feature, feature.title + ' 입력 필요', '시드 키워드 또는 조회 키워드를 넣은 뒤 다시 실행하세요.', [
+            renderToolResultPanel(feature, feature.title + ' 입력 필요', '자동 감지값을 만들 수 없습니다. 실시간 소스를 새로고침한 뒤 다시 실행하세요.', [
               { label: '상태', value: '입력 필요' },
               { label: '필수값', value: '키워드' },
               { label: '결과', value: '-' },
@@ -2728,7 +2860,7 @@
           }
           return;
         }
-        if (feature.id) renderToolRunning(feature, q);
+        if (feature.id) renderToolRunning(feature, displayKeyword);
         log(feature.title + ' 실행 시작');
         openProgress(feature.title + ' 실행', '서버 요청을 준비하고 있습니다.');
         if (feature.method === 'GET') {
@@ -2798,13 +2930,13 @@
           { label: '상태', value: statusLabel },
           { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
           { label: '라우트', value: feature.route || '-' },
-          { label: '입력', value: q || '-' },
+          { label: '입력', value: displayKeyword || '자동' },
         ], []);
         if (feature.id) {
           renderToolResultPanel(feature, feature.title + ' 실패', err.message, [
             { label: '상태', value: statusLabel },
             { label: '라우트', value: feature.route || '-' },
-            { label: '입력', value: q || '-' },
+            { label: '입력', value: displayKeyword || '자동' },
             { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
           ], []);
         }
@@ -2897,10 +3029,6 @@
       if (!target) return;
       selectToolGroup(target.getAttribute('data-tool-group'));
       setActiveView('features', { load: false });
-    });
-    qs('copyLookupKeyword').addEventListener('click', function() {
-      qs('toolSeedInput').value = compactKeywordInput();
-      qs('toolSeedInput').focus();
     });
     qs('runSelectedTool').addEventListener('click', function() {
       const feature = getSelectedTool();
