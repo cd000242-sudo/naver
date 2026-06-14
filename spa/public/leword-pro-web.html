@@ -1701,19 +1701,29 @@
       const payload = await res.json().catch(function() { return {}; });
       if (authed && (res.status === 401 || res.status === 403)) {
         saveSession(null);
-        throw new Error('Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.');
+        throw new Error(formatApiError(url, res.status, payload));
       }
-      if (!res.ok) throw new Error(payload.message || payload.error || 'HTTP ' + res.status);
+      if (!res.ok) throw new Error(formatApiError(url, res.status, payload));
       return payload;
+    }
+    function routePath(url) {
+      try { return new URL(url, location.href).pathname; }
+      catch { return String(url || '-'); }
+    }
+    function formatApiError(url, status, payload) {
+      const message = payload && (payload.message || payload.error) ? String(payload.message || payload.error) : '';
+      if (status === 401 || status === 403) return 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.';
+      if (status === 404) return '서버 API가 아직 최신 배포로 열리지 않았습니다. 서버 재시작/배포 반영 후 다시 실행하세요. (' + routePath(url) + ')';
+      return message || 'HTTP ' + status;
     }
     async function apiPost(url, body) {
       const res = await fetch(url, { method: 'POST', headers: headers(), body: JSON.stringify(body || {}) });
       const payload = await res.json().catch(function() { return {}; });
       if (url !== endpoints.session && (res.status === 401 || res.status === 403)) {
         saveSession(null);
-        throw new Error('Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.');
+        throw new Error(formatApiError(url, res.status, payload));
       }
-      if (!res.ok) throw new Error(payload.message || payload.error || 'HTTP ' + res.status);
+      if (!res.ok) throw new Error(formatApiError(url, res.status, payload));
       return payload;
     }
     function naverApiSettingsFields() {
@@ -2430,6 +2440,9 @@
     function isAuthErrorMessage(message) {
       return /authorization required|401|403|로그인|권한|인증|session/i.test(String(message || ''));
     }
+    function isRouteMissingMessage(message) {
+      return /404|endpoint not found|최신 배포|서버 재시작|route not found/i.test(String(message || ''));
+    }
     function friendlyOpsError(result) {
       const message = settledError(result);
       if (isAuthErrorMessage(message)) return 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.';
@@ -2651,15 +2664,23 @@
       } catch (err) {
         log(feature.title + ' 실패: ' + err.message);
         setResult({ error: err.message });
+        if (isAuthErrorMessage(err.message)) {
+          saveSession(null);
+          if (feature.id) renderToolLocked(feature);
+          openLogin();
+          failProgress(err.message);
+          return;
+        }
+        const statusLabel = isRouteMissingMessage(err.message) ? '서버 배포 확인' : '오류';
         renderResultSummary(feature.title + ' 실패', err.message, [
-          { label: '상태', value: '오류' },
+          { label: '상태', value: statusLabel },
           { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
           { label: '라우트', value: feature.route || '-' },
           { label: '입력', value: q || '-' },
         ], []);
         if (feature.id) {
           renderToolResultPanel(feature, feature.title + ' 실패', err.message, [
-            { label: '상태', value: '오류' },
+            { label: '상태', value: statusLabel },
             { label: '라우트', value: feature.route || '-' },
             { label: '입력', value: q || '-' },
             { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
