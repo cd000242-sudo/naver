@@ -25,7 +25,7 @@ const ROOT = path.resolve(__dirname, '..');
 const read = (rel: string): string => fs.readFileSync(path.join(ROOT, rel), 'utf-8');
 
 /** 사용자가 그리드/드롭다운에서 고를 수 있는 4개 AI 생성엔진 */
-const ENGINE_VALUES = ['nano-banana-2', 'nano-banana-pro', 'nano-banana', 'openai-image'];
+const ENGINE_VALUES = ['nano-banana-2', 'nano-banana-pro', 'nano-banana', 'openai-image', 'flow', 'prodia'];
 const NANO_VALUES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro'];
 
 describe('Stage 4 — 카탈로그 무결성', () => {
@@ -35,7 +35,7 @@ describe('Stage 4 — 카탈로그 무결성', () => {
 
   it('모든 엔진의 model ID는 VERIFIED_IMAGE_MODELS에 속한다 (가짜 ID 차단)', () => {
     for (const engine of IMAGE_ENGINE_CATALOG) {
-      if (engine.value === 'dropshot') continue; // UI 자동화 — 실 API 모델 ID 없음(검증 대상 아님)
+      if (engine.value === 'dropshot' || engine.value === 'flow' || engine.value === 'prodia') continue; // UI/legacy engines do not use VERIFIED_IMAGE_MODELS IDs
       expect(isVerifiedImageModel(engine.model), `${engine.value} → ${engine.model}`).toBe(true);
     }
   });

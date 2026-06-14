@@ -107,10 +107,8 @@ function ensureImageFxSwitchButton(imageSourceSelect: HTMLSelectElement, show: b
 }
 
 export async function initImageManagementTab(): Promise<void> {
-  // 2026-06-11: ImageFX AND Flow removed from selectable engines (user
-  // request — both too unstable for distributed users). Stale selections
-  // migrate to dropshot (리더스 나노바나나 무제한) once, with a visible log.
-  // Backend modules stay (incl. the S14 Flow fixes) for a possible return.
+  // 2026-06-14: Flow/Prodia are selectable again for existing users.
+  // ImageFX remains hidden; only stale ImageFX selections migrate to dropshot.
   try {
     const rawPipeline = readRawPipelineSettings();
     const savedByKey: Record<string, string | null> = {
@@ -120,12 +118,12 @@ export async function initImageManagementTab(): Promise<void> {
     };
     for (const key of ['fullAutoImageSource', 'globalImageSource', 'scAIImageEngine']) {
       const saved = savedByKey[key];
-      if (saved === 'imagefx' || saved === 'flow') {
+      if (saved === 'imagefx') {
         localStorage.setItem(key, 'dropshot');
         console.log(`[ImageEngine] 🔁 ${key}: ${saved} → dropshot (불안정 엔진 제거 — 리더스 나노바나나로 이관)`);
       }
     }
-    if ((window as any).globalImageSource === 'imagefx' || (window as any).globalImageSource === 'flow') {
+    if ((window as any).globalImageSource === 'imagefx') {
       (window as any).globalImageSource = 'dropshot';
     }
   } catch { /* localStorage unavailable — nothing to migrate */ }
@@ -407,6 +405,8 @@ export async function initImageManagementTab(): Promise<void> {
         appendLog('✅ 🦆 덕트테이프(OpenAI gpt-image-1.5/2, 기본 1.5)가 선택되었습니다. — OpenAI API 키 필요, 장당 ₩25~₩280');
       } else if (selectedSource === 'leonardoai') {
         appendLog('✅ Leonardo AI가 선택되었습니다. API 키가 필요합니다.');
+      } else if (selectedSource === 'flow') {
+        appendLog('✅ Flow가 선택되었습니다. Google 로그인 기반 UI 자동화로 순차 생성됩니다.');
       } else if (selectedSource === 'imagefx') {
         appendLog('⚠️ ImageFX (Google Labs)가 선택되었습니다. Google 로그인 후에도 계정/IP/지역에 따라 403 접근 거부가 날 수 있습니다. 대량 발행은 Flow, 리더스 나노바나나프로, OpenAI Image, DeepInfra를 권장합니다.');
       } else if (selectedSource === 'local-folder') {
@@ -500,6 +500,7 @@ export async function initImageManagementTab(): Promise<void> {
           'openai-image': 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
           'leonardoai': 'linear-gradient(135deg, #ea580c, #dc2626)',
           'imagefx': 'linear-gradient(135deg, #10b981, #059669)',
+          'flow': 'linear-gradient(135deg, #22c55e, #16a34a)',
           'local-folder': 'linear-gradient(135deg, #4338ca, #6366f1)',
           'saved': 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
         };

@@ -84,7 +84,7 @@ const UnifiedDOMCache = {
     //   3종(nano-banana / nano-banana-2 / nano-banana-pro)을 VALID_AI_SOURCES에 직접 등록.
     const ALIAS_MAP: Record<string, string> = { 'dall-e-3': 'openai-image' };
     // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
-    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'dropshot', 'falai', 'pollinations', 'local-folder'];
+    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'falai', 'pollinations', 'local-folder'];
 
     const normalizeSource = (raw: string | null): string | null => {
       if (!raw || raw === 'undefined' || raw === 'null') return null;

@@ -3794,7 +3794,9 @@
 
                             <option value="leonardoai" data-icon="🦁" data-price="Phoenix 1.0 | $0.01~$0.02">🦁 Leonardo
                                 AI ($0.01~$0.02/장)</option>
-                            <!-- 2026-06-11: ImageFX·Flow 옵션 제거 (사용자 요청 — 불안정 엔진 비노출) -->
+                            <!-- 2026-06-14: Flow/Prodia 복구 (기존 사용자 선택권 유지). ImageFX만 비노출 유지. -->
+                            <option value="flow" data-icon="🍌" data-price="Google Flow | UI 자동화 · 로그인 필요">🍌 Flow (Google Labs, 로그인 필요)</option>
+                            <option value="prodia" data-icon="⚡" data-price="Prodia API | $0.0025~$0.01/장">⚡ Prodia (API 키 필요)</option>
                             <!-- ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 (UI 자동화 · 로그인 필요) -->
                             <option value="dropshot" data-icon="🍌" data-price="Pro 구독자 무제한 · 추가비용 0원 | UI 자동화 · 로그인 필요" selected>🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)</option>
                             <option value="local-folder" data-icon="📂" data-price="내 폴더에서 자동 매핑">📂 내 폴더 (로컬 이미지 자동 매핑)</option>
@@ -7894,13 +7896,25 @@
                             </label>
                             <label
                                 style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
+                                <input type="radio" name="continuous-modal-shopping-subimage-source" value="flow"
+                                    style="accent-color: #22c55e;">
+                                <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🍌 Flow (AI)</span>
+                            </label>
+                            <label
+                                style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
+                                <input type="radio" name="continuous-modal-shopping-subimage-source" value="prodia"
+                                    style="accent-color: #a855f7;">
+                                <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">⚡ Prodia (AI)</span>
+                            </label>
+                            <label
+                                style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                 <input type="radio" name="continuous-modal-shopping-subimage-source" value="collected"
                                     style="accent-color: #10b981;">
                                 <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">📷 수집 이미지</span>
                             </label>
                         </div>
                         <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                            ℹ️ 🍌 나노바나나2: Gemini img2img, 장당 ₩97 | 🦆 덕트테이프: gpt-image-1.5/2 img2img, 장당 ₩77~₩280 (디테일 강함) | 📷 수집: 원본 그대로
+                            ℹ️ 🍌 나노바나나2: Gemini img2img, 장당 ₩97 | 🦆 덕트테이프: gpt-image-1.5/2 img2img | 🍌 Flow: 로그인 기반 UI 자동화 | ⚡ Prodia: API 키 필요 | 📷 수집: 원본 그대로
                         </p>
                     </div>
 
@@ -9952,13 +9966,25 @@
                                 </label>
                                 <label
                                     style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
+                                    <input type="radio" name="ma-shopping-subimage-source" value="flow"
+                                        style="accent-color: #22c55e;">
+                                    <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🍌 Flow (AI)</span>
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
+                                    <input type="radio" name="ma-shopping-subimage-source" value="prodia"
+                                        style="accent-color: #a855f7;">
+                                    <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">⚡ Prodia (AI)</span>
+                                </label>
+                                <label
+                                    style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">
                                     <input type="radio" name="ma-shopping-subimage-source" value="collected"
                                         style="accent-color: #10b981;">
                                     <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">📷 수집 이미지</span>
                                 </label>
                             </div>
                             <p style="margin: 0.5rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                                ℹ️ 🍌 나노바나나2: Gemini img2img, ₩97 | 🦆 덕트테이프: gpt-image-1.5/2 img2img, ₩77~₩280 (디테일 강함) | 📷 수집: 원본 그대로
+                                ℹ️ 🍌 나노바나나2: Gemini img2img, ₩97 | 🦆 덕트테이프: gpt-image-1.5/2 img2img | 🍌 Flow: 로그인 기반 UI 자동화 | ⚡ Prodia: API 키 필요 | 📷 수집: 원본 그대로
                             </p>
                         </div>
 

@@ -500,7 +500,8 @@ export async function initPriceInfoModal(): Promise<void> {
   const geminiFreeQuotaFirst = document.getElementById('gemini-free-quota-first') as HTMLInputElement | null;
   const unsplashApiKey = document.getElementById('unsplash-api-key') as HTMLInputElement;
   const pixabayApiKey = document.getElementById('pixabay-api-key') as HTMLInputElement;
-  // (prodiaTokenInput removed - deprecated provider)
+  const prodiaTokenInput = document.getElementById('prodia-token') as HTMLInputElement | null;
+  const prodiaModelSelect = document.getElementById('prodia-model-select') as HTMLSelectElement | null;
   const naverClientId = document.getElementById('naver-client-id') as HTMLInputElement; // ✅ 네이버 API
   const naverClientSecret = document.getElementById('naver-client-secret') as HTMLInputElement; // ✅ 네이버 API
   const dailyPostLimit = document.getElementById('daily-post-limit') as HTMLInputElement;
@@ -702,7 +703,12 @@ export async function initPriceInfoModal(): Promise<void> {
     }
     if (unsplashApiKey) unsplashApiKey.value = config.unsplashApiKey || '';
     if (pixabayApiKey) pixabayApiKey.value = config.pixabayApiKey || '';
-    // (prodiaTokenInput removed - deprecated provider)
+    if (prodiaTokenInput) {
+      prodiaTokenInput.value = (config as any).prodiaApiKey || (config as any).prodiaToken || (config as any)['prodia-token'] || '';
+    }
+    if (prodiaModelSelect) {
+      prodiaModelSelect.value = (config as any).prodiaModel || (config as any)['prodia-model'] || 'sdxl';
+    }
     if (naverClientId) {
       naverClientId.value = config.naverClientId || config.naverDatalabClientId || '';
       if (config.naverClientId || config.naverDatalabClientId) {
@@ -991,8 +997,8 @@ export async function initPriceInfoModal(): Promise<void> {
         console.log('[Settings] 네이버 Client Secret 입력값:', naverClientSecretInput?.value ? '***' : '없음');
         console.log('[Settings] 네이버 광고 API Key 입력값:', naverAdApiKeyInput?.value ? '✅' : '❌');
 
-        // ✅ [2026-02-22] 이미지 생성 필드 (deprecated: prodia, stability, falai 제거)
-        const prodiaTokenInput = undefined; // deprecated
+        // ✅ [2026-06-14] Prodia 복구: prodiaApiKey/prodiaToken 별칭 모두 유지
+        const prodiaApiKeyValue = readSecretInputValue('prodia-token', currentConfig?.prodiaApiKey || currentConfig?.prodiaToken);
         const stabilityApiKeyInput = undefined; // deprecated
 
         const parsedGeminiExtraKeys = (geminiExtraApiKeys?.value || '')
@@ -1032,6 +1038,9 @@ export async function initPriceInfoModal(): Promise<void> {
           // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
           openaiImageApiKey: openaiApiKeyValue, // ✅ [2026-02-23] OpenAI API 키와 통합
           leonardoaiApiKey: leonardoaiApiKeyValue,
+          prodiaApiKey: prodiaApiKeyValue,
+          prodiaToken: prodiaApiKeyValue,
+          prodiaModel: (document.getElementById('prodia-model-select') as HTMLSelectElement | null)?.value || currentConfig?.prodiaModel || 'sdxl',
 
           leonardoaiModel: (document.getElementById('leonardoai-model-select') as HTMLSelectElement)?.value || 'seedream-4.5',
           deepinfraApiKey: deepinfraApiKeyValue, // ✅ [2026-01-26] DeepInfra API

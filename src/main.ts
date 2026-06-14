@@ -2961,6 +2961,7 @@ ipcMain.handle(
         // ✅ [2026-02-22] 새 이미지 프로바이더 API 키
         openaiImageApiKey: (config as any).openaiImageApiKey,
         leonardoaiApiKey: (config as any).leonardoaiApiKey,
+        prodiaApiKey: (config as any).prodiaApiKey || (config as any).prodiaToken,
 
       };
 
@@ -4508,6 +4509,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
                 openaiApiKey: (imgConfig as any).openaiApiKey,
                 openaiImageApiKey: (imgConfig as any).openaiImageApiKey,
                 leonardoaiApiKey: (imgConfig as any).leonardoaiApiKey,
+                prodiaApiKey: (imgConfig as any).prodiaApiKey || (imgConfig as any).prodiaToken,
               };
 
               // ═══ Phase 1: 전용 썸네일 별도 생성 (headings 유무 무관) ═══
@@ -7261,6 +7263,7 @@ const PRESERVE_FIELDS = [
   'claudeApiKey', 'claude-api-key',
   'perplexityApiKey', 'perplexity-api-key',
   'openaiImageApiKey', 'leonardoaiApiKey', 'leonardoaiModel',
+  'prodiaApiKey', 'prodia-api-key', 'prodiaToken', 'prodia-token', 'prodiaModel', 'prodia-model',
   'deepinfraApiKey', 'deepinfra-api-key',
   'falaiApiKey', 'falai-api-key', 'falaiModel',
   'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',

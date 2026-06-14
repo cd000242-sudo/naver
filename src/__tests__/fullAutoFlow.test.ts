@@ -163,7 +163,7 @@ describe('full-auto image failure policy', () => {
   it('does not publish text-only output after image generation failure', () => {
     expect(source).toMatch(/이미지 없이 발행하지 않고 중단/);
     expect(source).toMatch(/throw new Error\('이미지 생성 결과가 비어있습니다\.'\)/);
-    expect(source).toMatch(/이미지 관리 탭에 사용할 이미지가 없습니다/);
+    expect(source).toContain('semi-auto:text-only-empty-image-management');
     expect(source).not.toMatch(/텍스트 위주로 발행합니다/);
   });
 });

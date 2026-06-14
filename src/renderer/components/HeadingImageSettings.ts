@@ -57,13 +57,13 @@ export type ActiveImageSource =
  *
  * @deprecated 신규 코드는 {@link ActiveImageSource}를 사용하세요.
  *   - 'dall-e-3': 2026-05-12 OpenAI API 폐기. v2.10.302에서 UI 클릭 차단 + write VALID_AI_SOURCES 제거.
- *   - 'falai' / 'prodia' / 'stability' / 'pollinations': UI 옵션 사라짐. localStorage 잔존 호환만 유지.
+ *   - 'falai' / 'stability' / 'pollinations': UI 옵션 사라짐. localStorage 잔존 호환만 유지.
  */
 // ✅ [2026-02-08 FIX] 이미지 관리 탭 드롭다운 value와 완전 통일
 // ✅ [v1.4.80] 'flow' 추가 — Google Labs Flow (Nano Banana Pro 무료 쿼터)
 export type GlobalImageSource = ActiveImageSource
   | 'falai'          // @deprecated UI 폐기
-  | 'prodia'         // @deprecated UI 폐기
+  | 'prodia'
   | 'stability'      // @deprecated UI 폐기
   | 'pollinations'   // @deprecated UI 폐기
   | 'dall-e-3';      // @deprecated 2026-05-12 OpenAI 폐기 — gpt-image-1 자동 마이그레이션
@@ -318,7 +318,7 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   // ✅ [v2.10.302] dall-e-3 제거 — UI 완전 폐기 (v2.10.295 UI option 삭제 + v2.10.302 write 차단)
   //   기존 위험: 사용자가 서브 모달에서 dall-e-3 카드 클릭 시 VALID_AI_SOURCES 통과해 localStorage 저장 →
   //              imageGenerator.ts:335 마이그레이션 분기 진입. 폐기 표시인데 실질 진입 경로 잔존.
-  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'dropshot', 'local-folder'];
+  const VALID_AI_SOURCES: GlobalImageSource[] = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'local-folder'];
   if (VALID_AI_SOURCES.includes(normalized)) {
     safeLocalStorageSet('fullAutoImageSource', normalized);
     console.log(`[HeadingImageSettings] 글로벌 + 풀오토 이미지 소스 동기화: ${normalized}`);
@@ -814,6 +814,8 @@ export function createHeadingImageModal(): void {
                 <option value="deepinfra">FLUX-2 (DeepInfra)</option>
                 <option value="openai-image">OpenAI Image (gpt-image-1 / 1.5 / 2)</option>
                 <option value="leonardoai">Leonardo AI</option>
+                <option value="flow">Flow (Google Labs)</option>
+                <option value="prodia">Prodia</option>
               </select>
             </div>
           </div>
@@ -936,7 +938,17 @@ export function createHeadingImageModal(): void {
             <div style="font-size: 12px; font-weight: 600; color: #9a3412;">Leonardo AI</div>
             <div style="font-size: 10px; color: #ea580c;">API 키 필요</div>
           </label>
-          <!-- 2026-06-11: ImageFX·Flow 카드 제거 (사용자 요청 — 불안정 엔진 비노출) -->
+          <!-- 2026-06-14: Flow/Prodia cards restored. ImageFX remains hidden. -->
+          <label class="source-option" data-value="flow" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #dcfce7, #86efac); text-align: center; transition: all 0.2s;">
+            <div style="font-size: 1.5rem;">🍌</div>
+            <div style="font-size: 12px; font-weight: 600; color: #166534;">Flow</div>
+            <div style="font-size: 10px; color: #15803d;">Google Labs UI 자동화</div>
+          </label>
+          <label class="source-option" data-value="prodia" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #e5e7eb; background: linear-gradient(135deg, #f3e8ff, #d8b4fe); text-align: center; transition: all 0.2s;">
+            <div style="font-size: 1.5rem;">⚡</div>
+            <div style="font-size: 12px; font-weight: 600; color: #6b21a8;">Prodia</div>
+            <div style="font-size: 10px; color: #7e22ce;">API 키 필요</div>
+          </label>
           <!-- ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 (UI 자동화 · 로그인 필요) -->
           <label class="source-option" data-value="dropshot" style="cursor: pointer; padding: 12px; border-radius: 10px; border: 2px solid #f59e0b; background: linear-gradient(135deg, #fef3c7, #fde68a); text-align: center; transition: all 0.2s; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); position: relative;">
             <div style="position: absolute; top: -6px; right: -6px; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 8px;">무제한</div>

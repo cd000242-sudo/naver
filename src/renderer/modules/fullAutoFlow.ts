@@ -1085,10 +1085,10 @@ async function executeSemiAutoFlow(formData) {
             showUnifiedProgress(60, '이미지 준비 완료', '이미지가 준비되었습니다.');
             appendLog('✅ 이미지 준비 완료!');
         }
-        else if (hasImageManagementData && formData.imageManagementImages.length === 0 && (formData.imageSource === 'image-management' || formData.imageSource === 'saved' || formData.imageSource === 'local-folder')) {
-            showUnifiedProgress(50, '이미지 없음', '이미지 관리 탭에 이미지가 없어 발행을 중단합니다.');
-            appendLog('⛔ 이미지 관리 탭에 이미지가 없어 발행을 중단합니다.');
-            throw new Error('이미지 관리 탭에 사용할 이미지가 없습니다.');
+        else if (hasImageManagementData && formData.imageManagementImages.length === 0) {
+            formData.skipImages = true;
+            showUnifiedProgress(50, '이미지 없이 발행', '이미지 관리 탭에 이미지가 없어도 본문만 발행합니다.');
+            appendLog('ℹ️ 반자동 발행: 이미지 관리 탭이 비어 있어 이미지 없이 발행합니다. [semi-auto:text-only-empty-image-management]');
         }
         else if (!formData.skipImages) {
             showUnifiedProgress(40, '이미지 생성 시작...', '제목에 맞는 이미지를 생성하고 있습니다.');

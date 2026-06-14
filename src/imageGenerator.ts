@@ -13,6 +13,7 @@ import { generateWithOpenAIImage } from './image/openaiImageGenerator.js';
 import { generateWithLeonardoAI } from './image/leonardoAIGenerator.js';
 import { generateWithImageFx } from './image/imageFxGenerator.js';
 import { generateWithFlow, resetFlowState } from './image/flowGenerator.js';
+import { generateWithProdia } from './image/prodiaGenerator.js';
 // ✅ [v2.11.7] 리더스 나노바나나 무제한 (dropshot)
 import { generateWithDropshot } from './image/dropshotGenerator.js';
 
@@ -348,6 +349,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   deepinfraApiKey?: string; // ✅ DeepInfra 키
   openaiImageApiKey?: string; // ✅ OpenAI Image (DALL-E) 키
   leonardoaiApiKey?: string; // ✅ Leonardo AI 키
+  prodiaApiKey?: string; // Prodia
 }, onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void  // ✅ [2026-02-13 SPEED] 실시간 콜백
 ): Promise<GeneratedImage[]> {
   // ✅ [v2.7.27] Adaptive Limiter — 메인 스레드 lag 발생 시 자동으로 동시성 다운
@@ -384,6 +386,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     'openai-image': 'OpenAI 덕트테이프 (gpt-image-2)',
     'dall-e-3': 'GPT 이미지 시리즈 (OpenAI, 기존 DALL-E 설정 자동 전환)',
     'leonardoai': 'Leonardo AI',
+    'prodia': 'Prodia',
     'imagefx': 'ImageFX (Google Labs, 계정/IP 제한 가능)',
     'flow': 'Flow (Nano Banana 2, AI Pro 무료)', // ✅ [v1.5.4]
     'dropshot': '🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)', // ✅ [v2.11.7]
@@ -650,6 +653,31 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         throw new Error(`[Flow] ${userMessage}`);
       }
       throw new Error(`[Flow] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. 계정 쿼터 초과 (1시간 후 재시도)\n2. Google 세션 만료 (AdsPower 재로그인)\n3. 안전 필터 차단\n4. Flow 내부 API 구조 변경 (자동 재학습 시도됨)`);
+    }
+  }
+
+  if (normalizedProvider === 'prodia') {
+    try {
+      console.log(`[이미지생성] ⚡ Prodia로 ${items.length}개 이미지 생성 시작...`);
+      const prodiaImages = await generateWithProdia(
+        items,
+        options.postTitle,
+        options.postId,
+        options.isFullAuto,
+        apiKeys?.prodiaApiKey,
+        onImageGenerated,
+      );
+      if (prodiaImages.length === 0) {
+        throw new Error('Prodia가 0건을 반환했습니다. API 키, 크레딧, 모델 제한을 확인해주세요.');
+      }
+      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(prodiaImages, {
+        requestedProvider,
+        actualProvider: 'prodia',
+        policy: fallbackPolicy,
+      }), 'prodia', options.postTitle, options.thumbnailTextInclude, items), items);
+    } catch (prodiaError) {
+      const userMsg = getImageErrorMessage(prodiaError);
+      throw new Error(`[Prodia] ${userMsg}`);
     }
   }
 

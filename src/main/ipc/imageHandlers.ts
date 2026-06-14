@@ -485,7 +485,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
 
                 case 'prodia': {
                     // Prodia AI
-                    const prodiaApiKey = (config as any).prodiaApiKey;
+                    const prodiaApiKey = (config as any).prodiaApiKey || (config as any).prodiaToken;
                     if (!prodiaApiKey) {
                         return { success: false, error: 'Prodia API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
                     }

@@ -3754,6 +3754,68 @@ async function initUnifiedTab(): Promise<void> {
   // ✅ [v2.10.280] 외부 LLM이 [제목]/[본문]/[해시태그] 마커로 출력한 글을 paste하면
   //   각 필드(title/content/hashtags)로 자동 분배. ## 마크다운 헤더는 headings로 추출.
   //   마커 없으면 휴리스틱 (첫 줄 40자 이내 = 제목, 끝의 #태그 = 해시태그).
+  function _normalizeSemiAutoManualHeadingTitle(raw: string): string {
+    return String(raw || '')
+      .trim()
+      .replace(/^\s{0,3}#{1,4}\s+/, '')
+      .replace(/^\s*(?:소제목|제목|heading|section)\s*\d*\s*[:：.\-]\s*/i, '')
+      .replace(/^\s*[\[(【]\s*(?:소제목|제목|heading|section)\s*\d*\s*[\])】]\s*/i, '')
+      .replace(/^\s*\d{1,2}\s*[\).:：\-]\s*/, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function _isSemiAutoManualHeadingCandidate(lines: string[], index: number): boolean {
+    const raw = String(lines[index] || '').trim();
+    if (!raw) return false;
+    if (/^(?:#\S+\s*){2,}$/u.test(raw)) return false;
+    if (/^(?:A|Q)\d?\s*[:：.]/i.test(raw)) return false;
+    if (/^[-*•]\s+/.test(raw)) return false;
+
+    const title = _normalizeSemiAutoManualHeadingTitle(raw);
+    if (title.length < 3 || title.length > 80) return false;
+    if (/^(?:본문|해시태그|태그|요약|마무리)$/u.test(title)) return false;
+
+    if (/^\s{0,3}#{1,4}\s+/.test(raw)) return true;
+    if (/^\s*(?:소제목|제목|heading|section)\s*\d*\s*[:：.\-]/i.test(raw)) return true;
+    if (/^\s*[\[(【]\s*(?:소제목|제목|heading|section)/i.test(raw)) return true;
+    if (/^\s*\d{1,2}\s*[\).:：\-]\s+\S/.test(raw) && !/[.!。]\s*$/.test(title)) return true;
+
+    const prevBlank = index === 0 || String(lines[index - 1] || '').trim().length === 0;
+    const next = String(lines[index + 1] || '').trim();
+    const sentenceLike = /(?:습니다|합니다|했어요|돼요|입니다|이에요|예요|다)\.?$/u.test(title) || /[.!。]\s*$/u.test(title);
+    return prevBlank && next.length > 0 && title.length <= 46 && !sentenceLike;
+  }
+
+  function _extractSemiAutoManualHeadings(body: string): Array<{ title: string; content: string; prompt: string; source: string }> {
+    const lines = String(body || '').split(/\r?\n/);
+    const matches: Array<{ lineIndex: number; title: string }> = [];
+    const seen = new Set<string>();
+
+    lines.forEach((line, index) => {
+      if (!_isSemiAutoManualHeadingCandidate(lines, index)) return;
+      const title = _normalizeSemiAutoManualHeadingTitle(line);
+      const key = title.toLowerCase();
+      if (!title || seen.has(key)) return;
+      seen.add(key);
+      matches.push({ lineIndex: index, title });
+    });
+
+    return matches.map((match, index) => {
+      const next = matches[index + 1]?.lineIndex ?? lines.length;
+      const content = lines
+        .slice(match.lineIndex + 1, next)
+        .join('\n')
+        .trim();
+      return {
+        title: match.title,
+        content,
+        prompt: match.title,
+        source: 'semi-auto:manual-body-heading',
+      };
+    });
+  }
+
   function _parsePastedContent(raw: string): {
     title: string | null;
     body: string | null;
@@ -3770,7 +3832,7 @@ async function initUnifiedTab(): Promise<void> {
 
     if (titleMatch || bodyMatch || tagsMatch) {
       const body = bodyMatch?.[1]?.trim() || null;
-      const headings = body ? (body.match(/^##\s+(.+)$/gm) || []).map(m => m.replace(/^##\s+/, '').trim()) : [];
+      const headings = body ? _extractSemiAutoManualHeadings(body).map(h => h.title) : [];
       return {
         title: titleMatch?.[1]?.trim() || null,
         body,
@@ -3793,7 +3855,7 @@ async function initUnifiedTab(): Promise<void> {
     if (likelyTitle) body = body.replace(firstLine, '').trim();
     if (likelyTags) body = body.replace(lastNonEmpty, '').trim();
 
-    const headings = (body.match(/^##\s+(.+)$/gm) || []).map(m => m.replace(/^##\s+/, '').trim());
+    const headings = _extractSemiAutoManualHeadings(body).map(h => h.title);
 
     return {
       title: likelyTitle,
@@ -3845,6 +3907,34 @@ async function initUnifiedTab(): Promise<void> {
     } catch { /* noop */ }
   }
 
+  let semiAutoHeadingAnalyzeTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function _scheduleSemiAutoHeadingAnalysis(sc: any): void {
+    if (!sc || !Array.isArray(sc.headings) || sc.headings.length === 0) return;
+    if (semiAutoHeadingAnalyzeTimer) clearTimeout(semiAutoHeadingAnalyzeTimer);
+    semiAutoHeadingAnalyzeTimer = setTimeout(() => {
+      semiAutoHeadingAnalyzeTimer = null;
+      try {
+        void autoAnalyzeHeadings(sc);
+      } catch (error) {
+        console.warn('[SemiAuto] heading auto-analysis failed:', error);
+      }
+    }, 450);
+  }
+
+  function _syncSemiAutoManualHeadings(sc: any, body: string): void {
+    if (!sc || !body || body.trim().length < 20) return;
+    const extracted = _extractSemiAutoManualHeadings(body);
+    if (extracted.length === 0) return;
+    const currentSignature = Array.isArray(sc.headings)
+      ? sc.headings.map((h: any) => String(h?.title || '').trim()).filter(Boolean).join('|')
+      : '';
+    const nextSignature = extracted.map((h) => h.title).join('|');
+    if (currentSignature === nextSignature) return;
+    sc.headings = extracted;
+    _scheduleSemiAutoHeadingAnalysis(sc);
+  }
+
   if (semiAutoTitle) {
     const _syncTitle = () => {
       const v = semiAutoTitle.value;
@@ -3870,6 +3960,7 @@ async function initUnifiedTab(): Promise<void> {
         sc.content = v;
         // ✅ [2026-02-28] 사용자 직접 편집 플래그 — applyStructuredContent에서 100% 원문 반영 분기 활성화
         sc._bodyManuallyEdited = true;
+        _syncSemiAutoManualHeadings(sc, v);
       }
     };
     semiAutoContent.addEventListener('input', _syncContent);
@@ -3887,8 +3978,14 @@ async function initUnifiedTab(): Promise<void> {
         semiAutoHashtags.dispatchEvent(new Event('input', { bubbles: true }));
       }
       const sc = _ensureSemiAutoStructuredContent();
-      if (sc && parsed.headings.length > 0) {
-        sc.headings = parsed.headings.map((title: string) => ({ title }));
+      if (sc) {
+        const parsedHeadings = parsed.headings.length > 0
+          ? parsed.headings.map((title: string) => ({ title, prompt: title, source: 'semi-auto:pasted-heading' }))
+          : _extractSemiAutoManualHeadings(semiAutoContent.value);
+        if (parsedHeadings.length > 0) {
+          sc.headings = parsedHeadings;
+          _scheduleSemiAutoHeadingAnalysis(sc);
+        }
       }
       _refreshSemiAutoPreview();
       try {

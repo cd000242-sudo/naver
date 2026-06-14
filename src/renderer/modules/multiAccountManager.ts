@@ -2036,7 +2036,7 @@ async function initMultiAccountPublishModal() {
         radio.addEventListener('change', (e) => {
             const value = e.target.value;
             setSubImageMode(value === 'collected' ? 'collected' : 'ai');
-            if (value === 'nano-banana-pro' || value === 'openai-image') {
+            if (value === 'nano-banana' || value === 'nano-banana-2' || value === 'nano-banana-pro' || value === 'openai-image' || value === 'flow' || value === 'prodia') {
                 localStorage.setItem('scAIImageEngine', value);
                 localStorage.setItem('fullAutoImageSource', value);
                 localStorage.setItem('globalImageSource', value);

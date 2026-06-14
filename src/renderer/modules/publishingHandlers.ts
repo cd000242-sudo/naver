@@ -1745,6 +1745,68 @@ export async function handleMultiAccountPublish(): Promise<void> {
 }
 
 // 반자동 발행 처리
+function normalizeSemiAutoHeadingTitle(raw: string): string {
+  return String(raw || '')
+    .trim()
+    .replace(/^\s{0,3}#{1,4}\s+/, '')
+    .replace(/^\s*(?:소제목|제목|heading|section)\s*\d*\s*[:：.\-]\s*/i, '')
+    .replace(/^\s*[\[(【]\s*(?:소제목|제목|heading|section)\s*\d*\s*[\])】]\s*/i, '')
+    .replace(/^\s*\d{1,2}\s*[\).:：\-]\s*/, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isSemiAutoHeadingCandidate(lines: string[], index: number): boolean {
+  const raw = String(lines[index] || '').trim();
+  if (!raw) return false;
+  if (/^(?:#\S+\s*){2,}$/u.test(raw)) return false;
+  if (/^(?:A|Q)\d?\s*[:：.]/i.test(raw)) return false;
+  if (/^[-*•]\s+/.test(raw)) return false;
+
+  const title = normalizeSemiAutoHeadingTitle(raw);
+  if (title.length < 3 || title.length > 80) return false;
+  if (/^(?:본문|해시태그|태그|요약|마무리)$/u.test(title)) return false;
+
+  if (/^\s{0,3}#{1,4}\s+/.test(raw)) return true;
+  if (/^\s*(?:소제목|제목|heading|section)\s*\d*\s*[:：.\-]/i.test(raw)) return true;
+  if (/^\s*[\[(【]\s*(?:소제목|제목|heading|section)/i.test(raw)) return true;
+  if (/^\s*\d{1,2}\s*[\).:：\-]\s+\S/.test(raw) && !/[.!。]\s*$/.test(title)) return true;
+
+  const prevBlank = index === 0 || String(lines[index - 1] || '').trim().length === 0;
+  const next = String(lines[index + 1] || '').trim();
+  const sentenceLike = /(?:습니다|합니다|했어요|돼요|입니다|이에요|예요|다)\.?$/u.test(title) || /[.!。]\s*$/u.test(title);
+  return prevBlank && next.length > 0 && title.length <= 46 && !sentenceLike;
+}
+
+function extractSemiAutoHeadingsFromBody(body: string): any[] {
+  const lines = String(body || '').split(/\r?\n/);
+  const matches: Array<{ lineIndex: number; title: string }> = [];
+  const seen = new Set<string>();
+
+  lines.forEach((line, index) => {
+    if (!isSemiAutoHeadingCandidate(lines, index)) return;
+    const title = normalizeSemiAutoHeadingTitle(line);
+    const key = title.toLowerCase();
+    if (!title || seen.has(key)) return;
+    seen.add(key);
+    matches.push({ lineIndex: index, title });
+  });
+
+  return matches.map((match, index) => {
+    const next = matches[index + 1]?.lineIndex ?? lines.length;
+    const content = lines
+      .slice(match.lineIndex + 1, next)
+      .join('\n')
+      .trim();
+    return {
+      title: match.title,
+      content,
+      prompt: match.title,
+      source: 'semi-auto:manual-body-heading',
+    };
+  });
+}
+
 /**
  * ✅ [2026-02-27 FIX] 편집된 본문에서 각 heading의 content를 재파싱
  * resolveRunOptions에서 structuredContent.bodyPlain이 payload.content보다 우선하므로
@@ -1838,7 +1900,7 @@ export async function handleSemiAutoPublish(): Promise<any> {
       bodyPlain: content,
       content: content,
       hashtags: parsePublishHashtags(hashtagsStr),
-      headings: [],
+      headings: extractSemiAutoHeadingsFromBody(content),
       toneStyle: (document.getElementById('unified-tone-style') as HTMLInputElement)?.value || 'friendly'
     };
 
@@ -1892,6 +1954,12 @@ export async function handleSemiAutoPublish(): Promise<any> {
     (document.getElementById('unified-generated-hashtags') as HTMLInputElement | null)?.value,
   );
 
+  const existingSemiAutoHeadings = Array.isArray(structuredContent.headings) ? structuredContent.headings : [];
+  const syncedSemiAutoHeadings = reSyncHeadingsContent(existingSemiAutoHeadings, content);
+  const resolvedSemiAutoHeadings = syncedSemiAutoHeadings.length > 0
+    ? syncedSemiAutoHeadings
+    : extractSemiAutoHeadingsFromBody(content);
+
   const updatedStructuredContent = {
     ...structuredContent,
     selectedTitle: title,
@@ -1899,7 +1967,7 @@ export async function handleSemiAutoPublish(): Promise<any> {
     content: content,
     hashtags: publishHashtags,
     // ✅ [2026-02-27 FIX] 소제목 content를 편집된 본문에서 재파싱 (이미지-소제목 매칭 정확도)
-    headings: reSyncHeadingsContent(structuredContent.headings || [], content),
+    headings: resolvedSemiAutoHeadings,
     // ✅ [2026-03-26 FIX] 사용자 수정 플래그 명시적 설정 — spread에만 의존 금지
     // applyStructuredContent에서 이 플래그로 heading.content 직접 사용 분기가 결정됨
     _bodyManuallyEdited: true,
@@ -2028,14 +2096,14 @@ export async function handleSemiAutoPublish(): Promise<any> {
     }
     try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
   } else {
-    appendLog(`⚠️ 이미지가 없습니다. 새로 생성합니다.`);
+    appendLog(`ℹ️ 이미지가 없습니다. 반자동 발행은 이미지 없이 진행할 수 있습니다.`);
   }
 
   // 발행 데이터 구성
   const imageSource = UnifiedDOMCache.getImageSource();
   // ✅ [2026-04-18 FIX] SSOT 헬퍼 사용 — DOM 체크박스 + localStorage.textOnlyPublish + headingImageMode=none 통합 체크
   //    이전 버그: DOM만 읽어서 모달 "텍스트만 발행" 체크만 했을 때 formData.skipImages=false → nano-banana 실행 → 650원 과금
-  const skipImages = (window as any).isImageSkipEnabled?.() === true
+  let skipImages = (window as any).isImageSkipEnabled?.() === true
     || (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
 
   const ctasUi = readUnifiedCtasFromUi();
@@ -2108,6 +2176,11 @@ export async function handleSemiAutoPublish(): Promise<any> {
     })
     .filter((img: any) => Boolean(img?.filePath));
 
+  if (!skipImages && normalizedImagesForPublish.length === 0) {
+    skipImages = true;
+    appendLog('ℹ️ 반자동 발행: 준비된 이미지가 없어 이미지 없이 발행합니다. [semi-auto:text-only-when-no-images]');
+  }
+
   const formData: any = {
     mode: 'semi-auto',
     generator: UnifiedDOMCache.getGenerator(), // ✅ [2026-02-22 FIX] perplexity 지원
@@ -2150,7 +2223,7 @@ export async function handleSemiAutoPublish(): Promise<any> {
   // ✅ [2026-02-16 FIX] 이미 로드된 이미지가 있으면 API 키 체크 불필요 (저장된 이미지 사용)
   const currentImageSource = formData.imageSource;
   const hasPreloadedImages = normalizedImagesForPublish.length > 0;
-  if (!hasPreloadedImages && currentImageSource !== 'saved' && currentImageSource !== 'collected') {
+  if (!skipImages && !hasPreloadedImages && currentImageSource !== 'saved' && currentImageSource !== 'collected') {
     if (currentImageSource === 'openai-image') {
       const config = await window.api.getConfig();
       if (!((config as any)?.openaiImageApiKey || (config as any)?.openaiApiKey)) {

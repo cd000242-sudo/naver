@@ -207,7 +207,7 @@ export function getShoppingConnectImagePool(): any[] {
  *   - openai-image    (gpt-image-2 = 덕테이프)
  * 이 화이트리스트는 "AI 이미지 엔진 선택 드롭다운" 용도로만 쓰임.
  */
-const SHOPPING_CONNECT_ALLOWED_ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image'] as const;
+const SHOPPING_CONNECT_ALLOWED_ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image', 'flow', 'prodia'] as const;
 export type ShoppingConnectAIEngine = typeof SHOPPING_CONNECT_ALLOWED_ENGINES[number];
 
 /**
@@ -217,7 +217,7 @@ export type ShoppingConnectAIEngine = typeof SHOPPING_CONNECT_ALLOWED_ENGINES[nu
  */
 const SHOPPING_CONNECT_BLOCKED_FAKE_AI = [
     'imagefx', 'dall-e-3', 'leonardoai', 'deepinfra', 'deepinfra-flux',
-    'stability', 'falai', 'prodia', 'pollinations', 'flow',
+    'stability', 'falai', 'pollinations',
 ];
 
 export function shouldBlockEngineForShoppingConnect(engine: string): boolean {

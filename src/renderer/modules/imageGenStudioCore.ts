@@ -16,12 +16,14 @@ export interface StudioEngine {
   readonly note: string;
 }
 
-// Mirror of IMAGE_ENGINE_CATALOG (nano×3 · 덕테이프 · dropshot).
+// Mirror of IMAGE_ENGINE_CATALOG (nano×3 · 덕테이프 · flow · prodia · dropshot).
 const STUDIO_ENGINES: readonly StudioEngine[] = [
   { value: 'nano-banana-2', label: '🍌 나노바나나2 (Gemini 3.1 Flash)', costKrw: 97, note: '적정 가격 · 한글 텍스트 가능 · ★ 추천' },
   { value: 'nano-banana-pro', label: '🍌 나노바나나 프로 (Gemini 3 Pro)', costKrw: 185, note: '이미지 끝판왕 · 한글 최강 · 고가' },
   { value: 'nano-banana', label: '🍌 나노바나나 (Gemini 2.5 Flash)', costKrw: 54, note: '퀄리티 좋음 · 한글 텍스트 깨짐(구버전)' },
   { value: 'openai-image', label: '🦆 덕테이프 (OpenAI gpt-image-2)', costKrw: 280, note: '한글 텍스트 가능 · Org 인증 필요 · 고가' },
+  { value: 'flow', label: '🍌 Flow (Google Labs)', costKrw: 0, note: 'Google Labs UI 자동화 · 로그인 필요 · 순차 생성' },
+  { value: 'prodia', label: '⚡ Prodia', costKrw: 14, note: 'Prodia API · 빠른 저비용 이미지 생성 · API 키 필요' },
   { value: 'dropshot', label: '🍌 리더스 나노바나나 무제한', costKrw: 0, note: '구독자 무제한 · 추가비용 0원 (Pro 월 구독료 별도)' },
 ];
 

@@ -26,6 +26,9 @@ export interface AppConfig {
   openaiImageApiKey?: string;
   // ✅ [2026-02-22] Leonardo AI API Key
   leonardoaiApiKey?: string;
+  prodiaApiKey?: string;
+  prodiaToken?: string;
+  prodiaModel?: string;
 
   // v2.7.18 (Phase 2): "100점 모드" 토글 — 5 Opus 합의
   // ON 시 제목 검증 루프(최대 3회 재생성) + LLM Judge(별도 모델) 활성화
@@ -343,6 +346,9 @@ function getRuntimeSecretFallbacks(): Record<string, unknown> {
     claudeApiKey: process.env.CLAUDE_API_KEY,
     perplexityApiKey: process.env.PERPLEXITY_API_KEY,
     leonardoaiApiKey: process.env.LEONARDOAI_API_KEY,
+    prodiaApiKey: process.env.PRODIA_API_KEY || process.env.PRODIA_TOKEN,
+    prodiaToken: process.env.PRODIA_API_KEY || process.env.PRODIA_TOKEN,
+    prodiaModel: process.env.PRODIA_MODEL,
     deepinfraApiKey: process.env.DEEPINFRA_API_KEY,
     pexelsApiKey: process.env.PEXELS_API_KEY,
     unsplashApiKey: process.env.UNSPLASH_API_KEY,
@@ -409,6 +415,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
           'perplexityApiKey', 'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey',
           'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey', 'leonardoaiModel',
+          'prodiaApiKey', 'prodiaToken', 'prodiaModel',
           'naverDatalabClientId', 'naverDatalabClientSecret',
           'naverClientId', 'naverClientSecret',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
@@ -500,7 +507,9 @@ export async function loadConfig(): Promise<AppConfig> {
       openaiApiKey: parsed.openaiApiKey || parsed['openai-api-key'] || undefined,
       claudeApiKey: parsed.claudeApiKey || parsed['claude-api-key'] || undefined,
       pexelsApiKey: parsed.pexelsApiKey || parsed['pexels-api-key'] || undefined,
-      prodiaToken: undefined, // deprecated - removed
+      prodiaApiKey: parsed.prodiaApiKey || parsed.prodiaToken || parsed['prodia-api-key'] || parsed['prodia-token'] || undefined,
+      prodiaToken: parsed.prodiaToken || parsed.prodiaApiKey || parsed['prodia-token'] || parsed['prodia-api-key'] || undefined,
+      prodiaModel: parsed.prodiaModel || parsed['prodia-model'] || undefined,
       unsplashApiKey: parsed.unsplashApiKey || parsed['unsplash-api-key'] || undefined,
       pixabayApiKey: parsed.pixabayApiKey || parsed['pixabay-api-key'] || undefined,
       stabilityApiKey: undefined, // deprecated - removed
@@ -606,6 +615,9 @@ export async function loadConfig(): Promise<AppConfig> {
       // ✅ [2026-01-26] DeepInfra API 키 호환성
       'deepinfra-api-key': (normalizedConfig as any).deepinfraApiKey,
       'leonardoai-api-key': (normalizedConfig as any).leonardoaiApiKey,
+      'prodia-api-key': (normalizedConfig as any).prodiaApiKey || (normalizedConfig as any).prodiaToken,
+      'prodia-token': (normalizedConfig as any).prodiaToken || (normalizedConfig as any).prodiaApiKey,
+      'prodia-model': (normalizedConfig as any).prodiaModel,
     };
 
     cachedConfig = compatibleConfig;
@@ -823,6 +835,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
       const PRESERVE_KEYS = [
         'geminiApiKey', 'openaiApiKey', 'claudeApiKey', 'perplexityApiKey',
         'pexelsApiKey', 'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
+        'prodiaApiKey', 'prodiaToken', 'prodiaModel',
         'naverDatalabClientId', 'naverDatalabClientSecret',
         'naverClientId', 'naverClientSecret',
         'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
@@ -936,6 +949,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'geminiApiKey', 'geminiApiKeys', 'openaiApiKey', 'claudeApiKey',
           'pexelsApiKey', 'unsplashApiKey', 'pixabayApiKey', 'perplexityApiKey',
           'deepinfraApiKey', 'openaiImageApiKey', 'leonardoaiApiKey',
+          'prodiaApiKey', 'prodiaToken', 'prodiaModel',
           'naverDatalabClientId', 'naverDatalabClientSecret',
           'naverClientId', 'naverClientSecret',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
@@ -1000,7 +1014,15 @@ export function applyConfigToEnv(config: AppConfig): void {
     }
   }
 
-  // (removed prodiaToken env injection - deprecated)
+  const prodiaKey = (config as any).prodiaApiKey?.trim() || (config as any).prodiaToken?.trim();
+  if (prodiaKey) {
+    process.env.PRODIA_API_KEY = prodiaKey;
+    process.env.PRODIA_TOKEN = prodiaKey;
+    console.log('[Config] PRODIA_API_KEY 설정됨 ✅');
+  }
+  if ((config as any).prodiaModel && String((config as any).prodiaModel).trim()) {
+    process.env.PRODIA_MODEL = String((config as any).prodiaModel).trim();
+  }
 
   // ✅ [2026-03-18 FIX] Gemini 모델 설정 — 비-Gemini 모델명 오염 방지
   // primaryGeminiTextModel은 'claude-haiku', 'openai-gpt4o', 'perplexity-sonar' 등
