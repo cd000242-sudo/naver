@@ -730,14 +730,6 @@
       <a class="brand" href="/leword"><span class="brand-mark" aria-hidden="true">L</span><span>LEWORD Pro Web</span></a>
       <button class="mobile-shell-toggle" type="button" id="mobileProShellToggle" aria-expanded="false" aria-controls="proTopNav proSidebar">Pro 메뉴 열기</button>
       <nav class="nav" id="proTopNav" aria-label="주요 메뉴">
-        <a href="#golden" data-view-target="golden">황금키워드 보드</a>
-        <a href="#sources" data-view-target="sources">실시간 소스</a>
-        <a href="#lookup" data-view-target="lookup">키워드 조회</a>
-        <a href="#features" data-view-target="features">Pro 기능</a>
-        <a href="#ops" data-view-target="ops">운영 현황</a>
-        <a href="#settings" data-view-target="settings">환경설정</a>
-        <a class="download" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe">PC 앱 다운로드</a>
-        <a class="download" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk">모바일 APK</a>
         <button type="button" id="loginOpen">Pro 로그인</button>
       </nav>
     </header>
@@ -746,12 +738,11 @@
       <aside class="sidebar" id="proSidebar" aria-label="Pro 기능 탭">
         <a class="side-link" href="#golden" data-view-target="golden">LIVE 황금키워드 보드</a>
         <a class="side-link" href="#sources" data-view-target="sources">네이버/다음/네이트/줌/정책/이슈</a>
-        <a class="side-link" href="#lookup" data-view-target="lookup">PC/모바일 실측 조회</a>
-        <a class="side-link" href="#features" data-view-target="features">전체 Pro 기능</a>
-        <a class="side-link" href="#ops" data-view-target="ops">노출/성과/발행/스케줄</a>
+        <a class="side-link" href="#lookup" data-view-target="lookup">키워드 분석기</a>
+        <a class="side-link" href="#features" data-view-target="features">추가 기능</a>
+        <a class="side-link" href="#features" data-view-target="features" data-feature-shortcut="youtube">유튜브 황금키워드 및 쇼츠분석</a>
         <a class="side-link" href="#settings" data-view-target="settings">환경설정/API 키</a>
         <a class="side-link" href="#downloads" data-view-target="downloads">앱 다운로드</a>
-        <a class="side-link" href="#workbench" data-view-target="workbench">실행 로그</a>
       </aside>
 
       <section class="main">
@@ -811,8 +802,8 @@
         <section class="panel main-view" id="lookup" data-view="lookup">
           <div class="panel-title">
             <div>
-              <h2>키워드 실측 조회</h2>
-              <div class="muted">PC/모바일 검색량을 분리해 표로 보여줍니다. 서버의 SearchAd/OpenAPI 설정이 없으면 측정 불가 상태를 그대로 표시합니다.</div>
+              <h2>키워드 분석기</h2>
+              <div class="muted">키워드 입력 후 PC/모바일 실측 검색량, 문서수, 경쟁비, 마인드맵 확장을 한 화면에서 확인합니다.</div>
             </div>
           </div>
           <form class="lookup-row" id="lookupForm">
@@ -824,6 +815,7 @@
             </select>
             <button class="btn primary" type="submit">서버 조회</button>
           </form>
+          <div class="tool-result-panel" id="lookupInsightPanel" hidden></div>
           <div class="table-wrap">
             <table>
               <thead>
@@ -852,13 +844,13 @@
         <section class="panel main-view" id="features" data-view="features">
           <div class="panel-title">
             <div>
-              <h2>Pro 전체 기능</h2>
-              <div class="muted">PC 앱에서 쓰던 핵심 기능을 웹에서도 기능별 화면으로 나눠 실행합니다. 각 서브탭은 선택한 기능의 입력값, 실행 상태, 결과만 보여줍니다.</div>
+              <h2>추가 기능</h2>
+              <div class="muted">키워드 발굴 전용 기능만 서브탭으로 분리했습니다. 각 탭은 Electron 앱의 기능 모달처럼 입력, 실행 상태, 결과를 독립적으로 보여줍니다.</div>
             </div>
             <button class="btn blue" type="button" id="refreshFeatureStatus" hidden>서버 상태 확인</button>
           </div>
           <div class="tool-console" id="toolConsole">
-            <div class="tool-group-tabs" id="toolGroupTabs" aria-label="Pro 기능 그룹"></div>
+            <div class="tool-group-tabs" id="toolGroupTabs" aria-label="Pro 기능 그룹" hidden></div>
             <div class="tool-tabs" id="toolTabs" aria-label="Pro 도구 선택"></div>
             <div class="tool-form">
               <input class="input" id="toolSeedInput" placeholder="시드 키워드 또는 상품/질문 키워드" autocomplete="off" />
@@ -957,6 +949,22 @@
               <div>
                 <label for="youtubeApiKey">YouTube Data API Key</label>
                 <input class="input" id="youtubeApiKey" type="password" autocomplete="off" />
+              </div>
+              <div>
+                <label for="anthropicApiKey">Claude API Key</label>
+                <input class="input" id="anthropicApiKey" type="password" autocomplete="off" />
+              </div>
+              <div>
+                <label for="manusApiKey">Manus API Key</label>
+                <input class="input" id="manusApiKey" type="password" autocomplete="off" />
+              </div>
+              <div>
+                <label for="openaiApiKey">OpenAI API Key</label>
+                <input class="input" id="openaiApiKey" type="password" autocomplete="off" />
+              </div>
+              <div>
+                <label>AI 추론 보조</label>
+                <div class="muted" style="min-height:44px; line-height:1.5;">Claude/Manus/OpenAI 키가 있으면 서버 job이 키워드 니즈 추론, 후보 의도 분류, 부적합 키워드 제거에 활용할 수 있게 요청 헤더로 전달합니다.</div>
               </div>
             </div>
             <div class="settings-actions">
@@ -1066,6 +1074,11 @@
       if (/^https?:\/\//i.test(path)) return path;
       return apiBase ? apiBase + path : path;
     }
+    function resolveApiLink(url) {
+      const value = String(url || '');
+      if (/^https?:\/\//i.test(value)) return value;
+      return apiUrl(value);
+    }
     const pcReleaseUrl = 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe';
     const androidReleaseUrl = 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk';
     const endpoints = {
@@ -1109,41 +1122,28 @@
     };
 
     const toolGroups = [
-      { id: 'hunter', label: '황금/헌터' },
-      { id: 'ops', label: '노출/성과' },
-      { id: 'publish', label: '발행/스케줄' }
+      { id: 'keyword', label: '키워드 발굴' }
     ];
 
     const features = [
-      { id: 'pro-traffic', group: 'hunter', title: 'PRO 트래픽 폭발 키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '실시간 이슈, 계절성, evergreen 신호를 서버 job으로 분석합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 30, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false }) },
-      { id: 'golden-discovery', group: 'hunter', title: '황금키워드 정밀 발굴', status: 'ready', route: endpoints.golden, desc: '검색량, 문서수, 황금비율을 실측해 선점 후보를 job으로 뽑습니다.', defaultTargetCount: 40, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, mode: 'precision', targetCount: options.targetCount || 40, requireSssFloor: true }) },
-      { id: 'niche', group: 'hunter', title: '니치/얼티밋 키워드 발굴', status: 'ready', route: endpoints.golden, desc: '롱테일, 저문서, 선점형 후보를 넓게 긁어 정밀 황금키워드로 재랭킹합니다.', defaultTargetCount: 60, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, mode: 'bulk', targetCount: options.targetCount || 60, requireSssFloor: true }) },
-      { id: 'adsense', group: 'hunter', title: '애드센스 승인 키워드 헌터', status: 'ready', route: endpoints.adsense, desc: 'home-board/adsense 계열 엔진을 서버 job으로 실행합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy', seedKeyword: q || undefined, targetCount: options.targetCount || 30, requireSplusFloor: true }) },
-      { id: 'youtube', group: 'hunter', title: '유튜브 황금키워드', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, crossReferenceNaver: options.crossReferenceNaver !== false }) },
-      { id: 'naver-mate', group: 'hunter', title: '네이버 메이트 황금키워드', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어 기반 확장을 서버 측정표로 연결합니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
-      { id: 'kin', group: 'hunter', title: '지식인 황금질문', status: 'ready', route: endpoints.kin, desc: '지식인 외부유입 질문을 서버 job으로 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true }) },
-      { id: 'shopping', group: 'hunter', title: '쇼핑 커넥트', status: 'ready', route: endpoints.shoppingConnect, desc: '네이버 쇼핑 상품 신호를 서버 job으로 분석하고 블로그 진입 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim' }) },
-      { id: 'exposure', group: 'ops', title: '내노출 추적', status: 'linked', route: endpoints.rankTracking, desc: '서버의 노출/순위 추적 스냅샷과 SERP 체크 라우트에 연결합니다.', method: 'GET' },
-      { id: 'rank-check', group: 'ops', title: 'SERP 순위 즉시 점검', status: 'linked', route: endpoints.rankTrackingRun, desc: '등록된 추적 키워드의 현재 노출 순위를 서버에서 다시 확인합니다.', direct: true, payload: (_q, options) => ({ limit: options.targetCount || 30 }) },
-      { id: 'outcomes', group: 'ops', title: '성과 기록/벤치마크', status: 'linked', route: endpoints.proOutcomes, desc: 'Pro 성과 기록과 수익 벤치마크 스냅샷을 확인합니다.', method: 'GET' },
-      { id: 'outcome-sync', group: 'ops', title: '성과 기록 동기화', status: 'linked', route: endpoints.proOutcomeSync, desc: '노출 추적 데이터를 Pro 성과 기록으로 동기화합니다.', direct: true, payload: () => ({}) },
-      { id: 'content-blueprint', group: 'publish', title: '글감 블루프린트 생성', status: 'linked', route: endpoints.blueprint, desc: '키워드의 상위문서 구조, 공백, 글감 설계를 서버 블루프린트로 생성합니다.', requiresKeyword: true, defaultTargetCount: 30, direct: true, payload: (q) => ({ keyword: q, force: false, searchVolume: null }) },
-      { id: 'blueprint', group: 'publish', title: 'Pro 블루프린트/수익 설계', status: 'linked', route: endpoints.revenue, desc: '키워드별 예상 수익과 글감 블루프린트 서버 라우트에 연결합니다.', requiresKeyword: false, defaultTargetCount: 30, direct: true, payload: (q, options) => ({ keyword: q || '소상공인 지원금 신청', monthlyViews: Math.max(100, (options.targetCount || 30) * 100), category: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy' }) },
-      { id: 'blueprint-draft', group: 'publish', title: '블로그 초안 생성', status: 'linked', route: endpoints.blueprintDraft, desc: '블루프린트 생성 후 초안 생성까지 이어 실행합니다.', requiresKeyword: true, defaultTargetCount: 30, direct: true, workflow: 'blueprint-draft', payload: (q) => ({ keyword: q, force: false, searchVolume: null }) },
-      { id: 'wordpress', group: 'publish', title: '워드프레스 발행 현황', status: 'linked', route: endpoints.wordpress, desc: '연결 사이트, 발행 초안, 카테고리 상태를 확인합니다.', method: 'GET' },
-      { id: 'schedule', group: 'publish', title: '예약/알림 대시보드', status: 'linked', route: endpoints.scheduleDashboard, desc: '발행 예약, 키워드 그룹, 알림 상태를 확인합니다.', method: 'GET' }
+      { id: 'pro-traffic', group: 'keyword', title: 'PRO 트래픽 폭발키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '실시간 이슈, 계절성, evergreen 신호를 서버 job으로 분석해 선점형 트래픽 후보를 뽑습니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 30, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false, includeAiInference: options.includeAiInference !== false }) },
+      { id: 'naver-mate', group: 'keyword', title: '네이버 메이트 황금키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어를 실측 검색량과 연결해 네이버 친화 롱테일 후보를 확장합니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false, includeAiInference: options.includeAiInference !== false }) },
+      { id: 'shopping', group: 'keyword', title: '쇼핑커넥트 황금제품키워드', status: 'ready', route: endpoints.shoppingConnect, desc: '지금 이슈가 있거나 구매 전환 가능성이 있는 상품 신호를 블로그 진입형 제품 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim', requireSellableIntent: true, includeAiInference: options.includeAiInference !== false }) },
+      { id: 'kin', group: 'keyword', title: '지식인 황금키워드', status: 'ready', route: endpoints.kin, desc: '지식인 질문 신호에서 답변 수요가 높고 문서 경쟁이 낮은 정보형 키워드를 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true, includeAiInference: options.includeAiInference !== false }) },
+      { id: 'youtube', group: 'keyword', title: '유튜브 황금키워드 및 쇼츠분석', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승/쇼츠 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, crossReferenceNaver: options.crossReferenceNaver !== false, includeShortsSignals: true, includeAiInference: options.includeAiInference !== false }) }
     ];
 
     let session = null;
     let pcCatalog = null;
     let selectedToolId = 'pro-traffic';
-    let selectedToolGroupId = 'hunter';
+    let selectedToolGroupId = 'keyword';
     let lastKeywordResult = null;
     let activeViewId = 'golden';
     let selectedOpsId = 'rank';
     let selectedCatalogTab = 'today';
     const userApiSettingsStorageKey = 'leword.pro.userApiSettings.v1';
-    const viewIds = ['golden', 'sources', 'lookup', 'features', 'ops', 'settings', 'downloads', 'workbench'];
+    const toolTabFeatureIds = ['pro-traffic', 'naver-mate', 'shopping', 'kin'];
+    const viewIds = ['golden', 'sources', 'lookup', 'features', 'settings', 'downloads'];
     const catalogTabs = [
       { id: 'today', label: '오늘/실시간' },
       { id: 'discovery', label: '발굴' },
@@ -1203,7 +1203,6 @@
       if (next === 'golden') loadGoldenBoard().catch(function(err) { log('황금키워드 보드 갱신 실패: ' + err.message); });
       if (next === 'sources') loadSources().catch(function(err) { log('실시간 소스 갱신 실패: ' + err.message); });
       if (next === 'features' && session && session.accessToken) refreshFeatureStatus().catch(function(err) { log('Pro 기능 상태 확인 실패: ' + err.message); });
-      if (next === 'ops') loadOpsDashboard().catch(function(err) { log('운영 현황 갱신 실패: ' + err.message); });
       if (next === 'downloads') loadDownloads().catch(function(err) { log('다운로드 상태 확인 실패: ' + err.message); });
       if (next === 'lookup') setTimeout(function() { if (qs('keywordInput')) qs('keywordInput').focus(); }, 0);
     }
@@ -1342,20 +1341,16 @@
     }
     function toolGuide(feature) {
       const guides = {
-        'pro-traffic': ['실시간 이슈, 시즌성, evergreen 후보를 한 번에 섞어 트래픽 폭발 후보를 좁힙니다.', '검색량, 문서수, 황금비율, 등급을 서버 job으로 검증합니다.', '무료 보드보다 넓은 후보군을 돌려 Pro 전용 선점 키워드를 뽑습니다.'],
-        exposure: ['내 글 URL과 키워드 노출 상태를 서버 저장소에서 확인합니다.', '현재 순위, Top30 여부, 알림 대상을 운영 현황과 연결합니다.', '상위 키워드는 결과 센터에서 바로 추적 등록할 수 있습니다.'],
-        shopping: ['상품/카테고리 키워드를 블로그 진입형 롱테일로 변환합니다.', '쇼핑 수요와 검색 키워드 확장 후보를 함께 정렬합니다.', '상품명만 넣어도 정보형/비교형 글감으로 분해합니다.'],
-        youtube: ['유튜브 급상승/영상 신호를 네이버 수요와 교차 검증합니다.', '영상 이슈를 블로그/숏폼/뉴스형 키워드로 재가공합니다.', '교차검증 옵션을 켜면 포털 수요까지 함께 봅니다.'],
-        adsense: ['RPM/CPC가 붙기 쉬운 정책, 금융, 지원금 계열 후보를 우선합니다.', '승인 글감으로 쓰기 쉬운 정보형 롱테일을 분리합니다.', 'SSS 바닥 조건을 켜서 낮은 품질 후보를 걸러냅니다.'],
-        'naver-mate': ['자동완성, 연관, 실측 검색량을 묶어 네이버 친화 후보를 만듭니다.', 'PC/모바일 분리 지표를 켜면 표에서 바로 비교할 수 있습니다.', '시드 키워드를 넣을수록 정밀한 확장이 됩니다.'],
-        kin: ['지식인 질문 신호에서 답변형 황금질문을 추립니다.', '질문 의도, 최신성, 상승 여부를 기준으로 정렬합니다.', '블로그 제목과 FAQ 섹션으로 바로 전환하기 좋습니다.'],
-        blueprint: ['키워드별 예상 조회수, 글감 구조, 수익 설계를 한 화면에 묶습니다.', '카테고리와 월간 조회 가정값으로 수익 플랜을 계산합니다.', '발행 전략을 만들 때 운영 현황과 함께 쓰는 도구입니다.'],
+        'pro-traffic': ['실시간 이슈, 시즌성, evergreen 후보를 섞어 트래픽 폭발 가능성이 큰 키워드를 좁힙니다.', '검색량, 문서수, 황금비율, PC/모바일 신호를 서버에서 실측 검증합니다.', '무료 보드보다 훨씬 넓은 후보군에서 Pro 전용 선점 키워드를 뽑습니다.'],
+        shopping: ['현재 이슈와 구매 전환 가능성이 같이 있는 제품 신호를 우선합니다.', '상품명 그대로가 아니라 블로그 진입형 정보/비교/추천 키워드로 변환합니다.', '최소 30개 이상 성과 가능 후보를 목표로 자동 발굴합니다.'],
+        youtube: ['유튜브 급상승 영상과 쇼츠 신호를 포털 검색 수요와 교차 검증합니다.', '영상 이슈를 블로그/쇼츠/뉴스형 키워드로 재가공합니다.', 'YouTube API와 네이버 API가 있으면 더 정확한 실측 기반 후보를 보여줍니다.'],
+        'naver-mate': ['자동완성, 연관어, 검색량을 묶어 네이버 친화 롱테일 후보를 만듭니다.', 'PC/모바일 분리 지표를 켜면 표에서 바로 비교할 수 있습니다.', '시드 키워드를 넣을수록 더 좁고 정확하게 확장됩니다.'],
+        kin: ['지식인 질문 신호에서 답변 수요가 뚜렷한 키워드를 추립니다.', '질문 의도, 최신성, 상승 여부를 기준으로 정렬합니다.', '블로그 제목과 FAQ 섹션으로 바로 전환하기 좋은 후보를 보여줍니다.'],
       };
-      return guides[feature && feature.id] || ['서버 기능 상태를 확인하고 연결된 데이터를 불러옵니다.', '실행 결과는 결과 센터와 실행 로그에 동시에 남습니다.', '권한이 필요하면 로그인 창을 먼저 띄웁니다.'];
+      return guides[feature && feature.id] || ['서버 기능 상태를 확인하고 연결된 데이터를 불러옵니다.', '실행 결과는 이 기능 화면 안에 바로 정리합니다.', '권한이 필요하면 로그인 창을 먼저 띄웁니다.'];
     }
     function renderToolDetail(feature) {
       const guide = toolGuide(feature);
-      const route = feature && feature.route ? feature.route : '-';
       const method = feature && feature.method === 'DOWNLOAD'
         ? '파일 다운로드'
         : feature && feature.method === 'GET'
@@ -1365,8 +1360,13 @@
             : '서버 job 실행';
       const target = qs('toolDetail');
       if (!target || !feature) return;
-      target.hidden = true;
-      target.innerHTML = '';
+      target.hidden = false;
+      target.innerHTML = '<div class="tool-detail-grid">'
+        + '<div class="tool-detail-card"><strong>발굴 목표</strong><span>' + escapeHtml(guide[0]) + '</span></div>'
+        + '<div class="tool-detail-card"><strong>판단 기준</strong><span>' + escapeHtml(guide[1]) + '</span></div>'
+        + '<div class="tool-detail-card"><strong>결과 활용</strong><span>' + escapeHtml(guide[2]) + '</span></div>'
+        + '<div class="tool-detail-card"><strong>실행 방식</strong><span>' + escapeHtml(method) + ' · 진행률 모달 표시 · 완료 후 결과만 표시</span></div>'
+        + '</div>';
     }
     function renderToolResultPanel(feature, title, subtitle, metrics, rows) {
       const target = qs('toolResultPanel');
@@ -1379,8 +1379,20 @@
         + resultKpiHtml(metrics || [])
         + list;
     }
+    function renderLookupInsight(title, subtitle, metrics, rows) {
+      const target = qs('lookupInsightPanel');
+      if (!target) return;
+      const list = Array.isArray(rows) && rows.length
+        ? '<ul class="result-list">' + rows.join('') + '</ul>'
+        : '';
+      target.hidden = false;
+      target.innerHTML = '<h3>' + escapeHtml(title || '키워드 분석') + '</h3>'
+        + '<p>' + escapeHtml(subtitle || '') + '</p>'
+        + resultKpiHtml(metrics || [])
+        + list;
+    }
     function renderToolWaiting(feature) {
-      renderToolResultPanel(feature, feature && feature.title ? feature.title : 'Pro 도구', '필요한 값만 입력하고 실행하세요. 진행률은 모달로 표시하고, 완료 후 이 영역에는 결과만 정리합니다.', [], []);
+      renderToolResultPanel(feature, feature && feature.title ? feature.title : 'Pro 도구', '필요한 값만 입력하고 실행하세요. 실행 중에는 진행률 모달이 뜨고, 완료 후 이 영역에 결과만 정리됩니다.', [], []);
     }
     function renderToolLocked(feature) {
       renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 로그인 필요', '이 도구는 Pro 세션이 있어야 실행됩니다. 아이디와 비밀번호만 입력하면 기존 사용자 계정으로 바로 접속합니다.', [
@@ -1391,7 +1403,7 @@
       ], []);
     }
     function renderToolRunning(feature, q) {
-      renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 실행 중', '서버에 요청을 보냈습니다. job 진행률은 실행 로그에도 계속 쌓입니다.', [
+      renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 실행 중', '서버에 요청을 보냈습니다. 데이터 수집과 분석 진행률을 모달에 표시합니다.', [
         { label: '상태', value: '실행 중' },
         { label: '키워드', value: q || '-' },
         { label: '방식', value: feature && feature.method === 'DOWNLOAD' ? '다운로드' : feature && feature.method === 'GET' ? '조회' : feature && feature.direct ? '즉시 실행' : 'job' },
@@ -1451,13 +1463,13 @@
         '<li><div class="trend-card"><div class="trend-bars" aria-label="30일 검색량 그래프">' + bars + '</div><div class="trend-meta"><span>현재 실측 전체 ' + fmt(total) + '</span><span>PC ' + fmt(pc) + '</span><span>모바일 ' + fmt(mobile) + '</span><span>문서 ' + fmt(docs) + '</span></div></div></li>',
         '<li><strong>바로 실행</strong>' + keywordActionHtml(keyword) + '</li>',
       ];
-      renderResultSummary(keyword + ' 검색량 그래프', row ? '방금 서버가 측정한 PC/모바일 검색량을 기준으로 표시합니다.' : '현재 조회 결과에 없는 키워드라 검색 바로가기를 함께 제공합니다.', [
+      renderLookupInsight(keyword + ' 검색량 그래프', row ? '방금 서버가 측정한 PC/모바일 검색량을 기준으로 표시합니다.' : '현재 조회 결과에 없는 키워드라 검색 바로가기를 함께 제공합니다.', [
         { label: '전체 검색량', value: fmt(total) },
         { label: 'PC', value: fmt(pc) },
         { label: '모바일', value: fmt(mobile) },
         { label: '문서수', value: fmt(docs) },
       ], rows);
-      setActiveView('workbench', { load: false });
+      setActiveView('lookup', { load: false });
       log('검색량 그래프 표시: ' + keyword);
     }
     function renderKeywordResultSummary(title, result) {
@@ -1554,7 +1566,7 @@
         const topRows = rows.slice(0, 6).map(function(row) {
           return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>' + keywordActionHtml(row.keyword || '') + '</li>';
         });
-        renderToolResultPanel(feature, feature.title + ' 완료', '상위 후보를 먼저 표시합니다. 전체 표와 저장/내보내기는 실행 로그 탭의 결과 센터에서 이어서 사용할 수 있습니다.', [
+        renderToolResultPanel(feature, feature.title + ' 완료', '상위 후보를 먼저 표시합니다. 전체 표는 키워드 분석기 표와 이 결과 영역에서 이어서 확인할 수 있습니다.', [
           { label: '후보', value: fmt(summary.total == null ? rows.length : summary.total) },
           { label: 'SSS', value: fmt(summary.sss == null ? rows.filter(function(row) { return row.grade === 'SSS'; }).length : summary.sss) },
           { label: '실측', value: fmt(summary.measured == null ? rows.filter(function(row) { return row.isMeasured; }).length : summary.measured) },
@@ -1564,7 +1576,7 @@
       }
       const snapshot = result && result.snapshot ? result.snapshot : result;
       const preview = JSON.stringify(snapshot || result || {}, null, 2).slice(0, 2400);
-      renderToolResultPanel(feature, feature.title + ' 완료', '서버 응답을 받았습니다. 자세한 원문은 실행 로그 탭 결과 센터에도 남겨두었습니다.', [
+      renderToolResultPanel(feature, feature.title + ' 완료', '서버 응답을 받았습니다. 주요 결과만 이 화면에 정리했습니다.', [
         { label: '상태', value: result && result.ok === false ? '확인 필요' : '완료' },
         { label: '경로', value: feature.route || '-' },
         { label: '방식', value: feature.method === 'DOWNLOAD' ? '다운로드' : feature.method === 'GET' ? '조회' : feature.direct ? '즉시 실행' : 'job' },
@@ -1576,6 +1588,18 @@
       if (result && Array.isArray(result.keywords)) {
         renderKeywordRows(result);
         renderKeywordResultSummary(feature && feature.title ? feature.title : '키워드 결과', result);
+        if ((!feature || !feature.id) && activeViewId === 'lookup') {
+          const rows = result.keywords || [];
+          const topRows = rows.slice(0, 5).map(function(row) {
+            return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 등급 ' + escapeHtml(row.grade || '-') + '</span>' + keywordActionHtml(row.keyword || '') + '</li>';
+          });
+          renderLookupInsight(feature && feature.title ? feature.title + ' 완료' : '키워드 분석 완료', 'PC/모바일 실측표와 함께 상위 후보를 정리했습니다. 그래프와 마인드맵은 각 키워드 액션에서 바로 실행됩니다.', [
+            { label: '후보', value: fmt(rows.length) },
+            { label: '실측', value: fmt(rows.filter(function(row) { return row.isMeasured; }).length) },
+            { label: 'SSS', value: fmt(rows.filter(function(row) { return row.grade === 'SSS'; }).length) },
+            { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+          ], topRows);
+        }
         renderToolFeatureResult(feature, result);
         return;
       }
@@ -1737,7 +1761,7 @@
     function formatApiError(url, status, payload) {
       const message = payload && (payload.message || payload.error) ? String(payload.message || payload.error) : '';
       if (status === 401 || status === 403) return 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.';
-      if (status === 404) return '서버 API가 아직 최신 배포로 열리지 않았습니다. 서버 재시작/배포 반영 후 다시 실행하세요. (' + routePath(url) + ')';
+      if (status === 404) return 'API 경로 또는 job 상태를 찾지 못했습니다. 잠시 후 다시 실행하거나 새로고침 후 재시도하세요. (' + routePath(url) + ')';
       return message || 'HTTP ' + status;
     }
     async function apiPost(url, body, options) {
@@ -1758,6 +1782,9 @@
         'naverSearchAdSecretKey',
         'naverSearchAdCustomerId',
         'youtubeApiKey',
+        'anthropicApiKey',
+        'manusApiKey',
+        'openaiApiKey',
       ];
     }
     function readUserApiSettings() {
@@ -1820,10 +1847,12 @@
       const openReady = !!(settings.naverClientId && settings.naverClientSecret);
       const adReady = !!(settings.naverSearchAdAccessLicense && settings.naverSearchAdSecretKey && settings.naverSearchAdCustomerId);
       const youtubeReady = !!settings.youtubeApiKey;
+      const aiReadyCount = ['anthropicApiKey', 'manusApiKey', 'openaiApiKey'].filter(function(key) { return !!settings[key]; }).length;
       qs('naverApiSettingsMessage').textContent =
         '브라우저 로컬 저장 · OpenAPI ' + apiSettingsReadyLabel(openReady)
         + ' · SearchAd ' + apiSettingsReadyLabel(adReady)
         + ' · YouTube ' + apiSettingsReadyLabel(youtubeReady)
+        + ' · AI 추론 ' + aiReadyCount + '/3'
         + ' · 서버 공용 저장 아님 · 실행 요청에만 전달';
     }
     async function saveNaverApiSettings() {
@@ -1867,6 +1896,7 @@
             openApiReady: !!(settings.naverClientId && settings.naverClientSecret),
             searchAdReady: !!(settings.naverSearchAdAccessLicense && settings.naverSearchAdSecretKey && settings.naverSearchAdCustomerId),
             youtubeReady: !!settings.youtubeApiKey,
+            aiInferenceReady: ['anthropicApiKey', 'manusApiKey', 'openaiApiKey'].filter(function(key) { return !!settings[key]; }).length,
           },
         });
         log('사용자 API 로컬 설정 확인 완료');
@@ -1894,7 +1924,7 @@
       log('job 접수: ' + job.id + ' / ' + job.product);
       updateProgress(Math.max(8, job.progressPercent || 8), job.progressMessage || '서버 job이 접수되었습니다.');
       for (let i = 0; i < 180; i++) {
-        const state = await apiGet(jobPayload.links.self, true);
+        const state = await apiGet(resolveApiLink(jobPayload.links.self), true);
         const current = state.job || {};
         if (current.progressMessage) {
           log(current.progressPercent + '% ' + current.progressMessage);
@@ -2197,7 +2227,10 @@
       selectTool(selectedToolId);
     }
     function renderToolTabs() {
-      qs('toolTabs').innerHTML = currentGroupFeatures().map(function(feature) {
+      const visibleRows = currentGroupFeatures().filter(function(feature) {
+        return toolTabFeatureIds.indexOf(feature.id) >= 0 || feature.id === selectedToolId;
+      });
+      qs('toolTabs').innerHTML = visibleRows.map(function(feature) {
         const active = feature.id === selectedToolId ? ' active' : '';
         return '<button class="tool-tab' + active + '" type="button" data-tool="' + escapeAttr(feature.id) + '">' + escapeHtml(feature.title) + '</button>';
       }).join('');
@@ -2530,7 +2563,7 @@
       return /authorization required|401|403|로그인|권한|인증|session/i.test(String(message || ''));
     }
     function isRouteMissingMessage(message) {
-      return /404|endpoint not found|최신 배포|서버 재시작|route not found/i.test(String(message || ''));
+      return /404|endpoint not found|API 경로|route not found/i.test(String(message || ''));
     }
     function friendlyOpsError(result) {
       const message = settledError(result);
@@ -2760,7 +2793,7 @@
           failProgress(err.message);
           return;
         }
-        const statusLabel = isRouteMissingMessage(err.message) ? '서버 배포 확인' : '오류';
+        const statusLabel = isRouteMissingMessage(err.message) ? 'API 경로 확인' : '오류';
         renderResultSummary(feature.title + ' 실패', err.message, [
           { label: '상태', value: statusLabel },
           { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
@@ -2801,7 +2834,12 @@
     document.querySelectorAll('[data-view-target]').forEach(function(target) {
       target.addEventListener('click', function(event) {
         event.preventDefault();
-        setActiveView(target.getAttribute('data-view-target') || 'golden');
+        const shortcutFeature = target.getAttribute('data-feature-shortcut');
+        if (shortcutFeature) {
+          selectFeatureShortcut(shortcutFeature, compactKeywordInput(), false);
+        } else {
+          setActiveView(target.getAttribute('data-view-target') || 'golden');
+        }
         if (isMobileProChrome()) {
           setMobileProChromePreference('closed');
           setMobileProChromeCollapsed(true);
@@ -2836,8 +2874,10 @@
         saveSession(payload.session);
         qs('loginMessage').textContent = '로그인 완료';
         closeLogin();
+        hydrateNaverApiSettingsForm();
+        setActiveView('settings', { load: false });
         log('Pro 로그인 완료: ' + (payload.session.tier || 'standard'));
-        await Promise.all([loadSources(), loadGoldenBoard(), loadOpsDashboard(), refreshFeatureStatus().catch(function() {})]);
+        await Promise.all([loadSources(), loadGoldenBoard(), refreshFeatureStatus().catch(function() {})]);
       } catch (err) {
         qs('loginMessage').textContent = err.message;
       }
@@ -2911,16 +2951,6 @@
       if (actionTarget.id === 'trackTopKeyword') {
         trackTopKeywordFromResult();
       }
-    });
-    document.addEventListener('click', function(event) {
-      const shortcut = event.target.closest('[data-tool-shortcut]');
-      if (!shortcut) return;
-      selectFeatureShortcut(shortcut.getAttribute('data-tool-shortcut') || 'pro-traffic', compactKeywordInput(), false);
-    });
-    document.addEventListener('click', function(event) {
-      const shortcut = event.target.closest('[data-view-shortcut]');
-      if (!shortcut) return;
-      setActiveView(shortcut.getAttribute('data-view-shortcut') || 'sources');
     });
     document.addEventListener('click', function(event) {
       const target = event.target.closest('[data-feature]');
@@ -3018,12 +3048,10 @@
     loadHealth();
     loadGoldenBoard();
     loadSources();
-    loadOpsDashboard();
     loadDownloads().catch(function() {});
     setInterval(loadHealth, 30000);
     setInterval(loadGoldenBoard, 60000);
     setInterval(loadSources, 60000);
-    setInterval(loadOpsDashboard, 90000);
   </script>
 </body>
 </html>
