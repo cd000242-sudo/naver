@@ -1001,6 +1001,40 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   // ✅ 소제목 길이 제한 (60자 이내로 완화 - 너무 짧으면 정보 전달력 하락)
   finalContent = truncateHeadingTitles(finalContent, 60);
 
+  const manualTitleOverride = String((source as any).manualTitleOverride || '').trim();
+  if (manualTitleOverride) {
+    console.log(`[finalizeStructuredContent] 📌 사용자 지정 제목 고정: "${manualTitleOverride}"`);
+    (finalContent as any).title = manualTitleOverride;
+    finalContent.selectedTitle = manualTitleOverride;
+    (finalContent as any).manualTitleLocked = true;
+    (finalContent as any).manualTitleValue = manualTitleOverride;
+    finalContent.titleAlternatives = [manualTitleOverride];
+    finalContent.titleCandidates = [{ text: manualTitleOverride, score: 100, reasoning: '사용자 지정 제목' }];
+
+    try {
+      if (finalContent.bodyPlain) {
+        finalContent.bodyPlain = removeOrdinalHeadingLabelsFromBody(finalContent.bodyPlain);
+      }
+      if (finalContent.bodyHtml) {
+        finalContent.bodyHtml = removeOrdinalHeadingLabelsFromBody(finalContent.bodyHtml);
+      }
+      if (Array.isArray(finalContent.headings)) {
+        finalContent.headings = finalContent.headings.map((h: any) => ({
+          ...h,
+          body: h.body ? removeOrdinalHeadingLabelsFromBody(String(h.body)) : h.body
+        }));
+      }
+      sanitizeStructuredContentClaims(finalContent);
+    } catch { /* ignore */ }
+
+    applyHomefeedNarrativeHookBlock(finalContent, source);
+    try { applyOrdinalHeadingMarkerFix(finalContent); } catch { /* ignore */ }
+    finalContent = removeInternalStructureMarkersFromContent(finalContent);
+
+    runPostGenValidator(finalContent, source);
+    return finalContent;
+  }
+
   // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용하는 모드
   // 사용자가 명시적으로 선택한 경우, 모든 제목 조작/평가를 건너뛰고 키워드 원문 그대로 사용
   if (source.useKeywordAsTitle && source.keywordForTitle) {
@@ -1406,6 +1440,7 @@ export interface ContentSource {
   productReviews?: string[];  // 리뷰 텍스트 배열 (최대 5개)
   productReviewImages?: string[]; // 포토리뷰 이미지 URL
   previousTitles?: string[]; // ✅ [2026-02-09 v2] 이전 생성 제목 (연속발행 중복 방지)
+  manualTitleOverride?: string; // User-entered title that must not be rewritten by AI/SEO title logic
   useKeywordAsTitle?: boolean; // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 (제목 생성/평가 건너뛰기)
   keywordForTitle?: string; // ✅ [2026-02-24] useKeywordAsTitle=true 일 때 사용할 키워드 원문
   aiTabFriendly?: boolean; // [v2.10.235 Phase 3-A] AI 탭 친화 모드 — 6,000~8,000자 + bullet/리스트 강제

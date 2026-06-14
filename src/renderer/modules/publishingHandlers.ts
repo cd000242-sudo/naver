@@ -92,6 +92,30 @@ function parsePublishHashtags(...sources: any[]): string[] {
   return result;
 }
 
+function readManualTitleOverrideForPublish(contentMode?: string): string | undefined {
+  const isAffiliate = String(contentMode || '').trim() === 'affiliate' || isShoppingConnectModeActive();
+  const ids = isAffiliate
+    ? ['shopping-connect-manual-title', 'unified-manual-title']
+    : ['unified-manual-title'];
+
+  for (const id of ids) {
+    const value = (document.getElementById(id) as HTMLInputElement | null)?.value?.trim();
+    if (value) return value.slice(0, 120);
+  }
+  return undefined;
+}
+
+function applyManualTitleOverrideForPublish(structuredContent: any, manualTitle?: string): void {
+  const title = String(manualTitle || '').trim();
+  if (!structuredContent || !title) return;
+  structuredContent.title = title;
+  structuredContent.selectedTitle = title;
+  structuredContent.manualTitleLocked = true;
+  structuredContent.manualTitleValue = title;
+  structuredContent.titleAlternatives = [title];
+  structuredContent.titleCandidates = [{ text: title, score: 100, reasoning: '사용자 지정 제목' }];
+}
+
 function normalizePreviousPostCategoryForPublish(value: any): string {
   return String(value || '').replace(/\s+/g, '').toLowerCase();
 }
@@ -176,6 +200,7 @@ function buildPublishContentReuseKey(formData: any): string {
     generator: normalizePublishReuseString(formData?.generator),
     toneStyle: normalizePublishReuseString(formData?.toneStyle),
     contentMode: normalizePublishReuseString(formData?.contentMode || formData?.styleOptions?.contentMode || ''),
+    manualTitleOverride: normalizePublishReuseString(formData?.manualTitleOverride),
     keywordAsTitle: formData?.keywordAsTitle === true,
     keywordTitlePrefix: formData?.keywordTitlePrefix === true,
     ctaType: normalizePublishReuseString(formData?.ctaType),
@@ -324,6 +349,7 @@ export async function handleFullAutoPublish(): Promise<void> {
     );
     const selectedContentModeForPublish = String((document.getElementById('unified-content-mode') as HTMLInputElement)?.value || 'seo').trim() || 'seo';
     const resolvedContentModeForPublish = (earlyAffiliateLink || isShoppingConnectModeActive()) ? 'affiliate' : selectedContentModeForPublish;
+    const manualTitleOverride = readManualTitleOverrideForPublish(resolvedContentModeForPublish);
     const contentReuseSeed = {
       urls,
       title,
@@ -331,6 +357,7 @@ export async function handleFullAutoPublish(): Promise<void> {
       generator: UnifiedDOMCache.getGenerator(),
       toneStyle,
       contentMode: resolvedContentModeForPublish,
+      manualTitleOverride,
       categoryName: UnifiedDOMCache.getRealCategoryName?.(),
       keywordAsTitle: faKeywordAsTitle,
       keywordTitlePrefix: faKeywordTitlePrefix,
@@ -392,6 +419,7 @@ export async function handleFullAutoPublish(): Promise<void> {
     if (!structuredContent) {
       throw new Error('콘텐츠 생성에 실패했습니다.');
     }
+    applyManualTitleOverrideForPublish(structuredContent, manualTitleOverride);
 
     // 풀오토 발행에서도 콘텐츠 미리보기 표시 (대기 시간 제거 - 속도 향상)
     updateUnifiedPreview(structuredContent);
@@ -418,7 +446,7 @@ export async function handleFullAutoPublish(): Promise<void> {
 
     // ✅ [2026-02-08] 쇼핑커넥트 모드: 항상 100점 SEO 제목 생성
     // 핵심: 제품명 + 네이버 자동완성 키워드 최소 3개 조합 = 상위노출 보장
-    if (isShoppingConnectModeActive() && structuredContent) {
+    if (!manualTitleOverride && isShoppingConnectModeActive() && structuredContent) {
       // ✅ [2026-03-10 FIX] URL이 제목에 혼입되는 버그 방지
       // structuredContent.title은 원본 소스 제목(크롤링/RSS)으로, URL이 들어있을 수 있음
       const isUrl = (str: string) => /^https?:\/\//i.test(str.trim());
@@ -573,7 +601,8 @@ export async function handleFullAutoPublish(): Promise<void> {
       scheduleType,
       structuredContent,
       urls: urls, // URL 배열 추가
-      title: title,
+      title: manualTitleOverride || title,
+      manualTitleOverride,
       keywords: keywords,
       keywordAsTitle: faKeywordAsTitle,
       keywordTitlePrefix: faKeywordTitlePrefix,

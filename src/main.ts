@@ -5048,6 +5048,12 @@ ipcMain.handle(
         console.log(`[Main] ✨ 후킹 1문장 전달: "${hookHint.trim().substring(0, 40)}"`);
       }
 
+      const manualTitleOverride = String((payload.assembly as any).manualTitleOverride || '').trim();
+      if (manualTitleOverride) {
+        source.manualTitleOverride = manualTitleOverride.slice(0, 120);
+        console.log(`[Main] 📌 사용자 지정 제목 고정: "${source.manualTitleOverride.substring(0, 40)}"`);
+      }
+
       // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 옵션 전달
       const useKeywordAsTitle = (payload.assembly as any).useKeywordAsTitle as boolean | undefined;
       const keywordForTitle = (payload.assembly as any).keywordForTitle as string | undefined;
@@ -8501,6 +8507,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
   context?: unknown;
   plan?: unknown;
   reviewEdits?: unknown;
+  manualTitle?: string;
 }) => {
   try {
     const { normalizeInferAndWritePayload } = await import('./imageNarrative/inferAndWriteInput.js');
@@ -8539,6 +8546,15 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
       toneStyle: normalized.toneStyle,
       context: normalized.context,
     });
+    const manualTitle = String(payload?.manualTitle || '').trim().slice(0, 120);
+    if (manualTitle) {
+      (content as any).title = manualTitle;
+      (content as any).selectedTitle = manualTitle;
+      (content as any).manualTitleLocked = true;
+      (content as any).manualTitleValue = manualTitle;
+      (content as any).titleAlternatives = [manualTitle];
+      (content as any).titleCandidates = [{ text: manualTitle, score: 100, reasoning: '사용자 지정 제목' }];
+    }
 
     const imageMap = mapInferencesToImageMap(
       plan,

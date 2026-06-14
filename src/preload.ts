@@ -1139,6 +1139,7 @@ contextBridge.exposeInMainWorld('api', {
     context?: unknown;
     plan?: unknown;
     reviewEdits?: unknown;
+    manualTitle?: string;
   }): Promise<{ success: boolean; plan?: any; content?: any; imageMap?: Record<string, any[]>; message?: string }> =>
     ipcRenderer.invoke('vision:infer-and-write', payload),
 

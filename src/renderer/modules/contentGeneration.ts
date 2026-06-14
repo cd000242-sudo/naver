@@ -108,6 +108,30 @@ function appendContentGenerationRetryNotice(activeModal?: any): void {
   if (activeModal?.addLog) activeModal.addLog(`🔁 ${CONTENT_GENERATION_RETRY_NOTICE}`);
 }
 
+function readManualTitleOverrideForContent(contentMode?: string): string | undefined {
+  const isAffiliate = String(contentMode || '').trim() === 'affiliate' || isShoppingConnectModeActive();
+  const ids = isAffiliate
+    ? ['shopping-connect-manual-title', 'unified-manual-title']
+    : ['unified-manual-title'];
+
+  for (const id of ids) {
+    const value = (document.getElementById(id) as HTMLInputElement | null)?.value?.trim();
+    if (value) return value.slice(0, 120);
+  }
+  return undefined;
+}
+
+function applyManualTitleOverrideToContent(structuredContent: any, manualTitle?: string): void {
+  const title = String(manualTitle || '').trim();
+  if (!structuredContent || !title) return;
+  structuredContent.title = title;
+  structuredContent.selectedTitle = title;
+  structuredContent.manualTitleLocked = true;
+  structuredContent.manualTitleValue = title;
+  structuredContent.titleAlternatives = [title];
+  structuredContent.titleCandidates = [{ text: title, score: 100, reasoning: '사용자 지정 제목' }];
+}
+
 // ✅ [2026-03-14] 강화된 키워드 중복 제거 공통 함수
 // 키워드와 AI 생성 제목 사이의 중복을 5단계로 제거:
 // 1. 정규화 (따옴표/특수문자 제거) 버전으로 매칭
@@ -462,6 +486,7 @@ export async function generateContentFromUrl(
     'general': 'general'
   };
   const categoryHint = categoryHintMap[articleType] || '';
+  const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
 
   // ✅ 리뷰형이면 로그 출력
   if (isReviewType) {
@@ -484,6 +509,7 @@ export async function generateContentFromUrl(
       previousTitles: ((window as any)._previousTitles as string[]) || undefined,
       businessInfo: collectBusinessInfo(contentMode), // ✅ [v1.4.24]
       hookHint, // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 (선택)
+      manualTitleOverride,
     }
   };
 
@@ -533,6 +559,7 @@ export async function generateContentFromUrl(
 
     const result = apiResponse.data;
     const structuredContent = result.content;
+    applyManualTitleOverrideToContent(structuredContent, manualTitleOverride);
 
     // ✅ [2026-03-07 FIX] 스크래핑된 콘텐츠에서 원본 블로거 메타데이터 제거
     sanitizeScrapedContent(structuredContent);
@@ -546,7 +573,7 @@ export async function generateContentFromUrl(
     // ✅ [2026-03-15 FIX] coreKeyword가 URL이면 빈 문자열로 처리
     const _rawCoreKeyword = (keywords || '').split(',').map((k) => k.trim()).filter(Boolean)[0] || '';
     const coreKeyword = /^https?:\/\//i.test(_rawCoreKeyword) ? '' : _rawCoreKeyword;
-    if (coreKeyword) {
+    if (!manualTitleOverride && coreKeyword) {
       // ✅ [2026-02-08 FIX] 강화된 중복 방지: 키워드의 모든 토큰이 이미 제목에 포함되어 있으면 건너뜀
       const currentTitle = String(structuredContent.selectedTitle || structuredContent.title || '');
       // ✅ [2026-03-10 FIX] currentTitle이 URL이면 키워드 접두사 적용 건너뛰
@@ -570,7 +597,7 @@ export async function generateContentFromUrl(
 
     // ✅ [2026-02-08] 쇼핑커넥트 모드: 글 생성 시에도 SEO 100점 제목 적용
     // (풀오토뿐 아니라 일반 글 생성 버튼에서도 자동완성 키워드 3개 이상 조합)
-    if (isShoppingConnectModeActive() && structuredContent) {
+    if (!manualTitleOverride && isShoppingConnectModeActive() && structuredContent) {
       // ✅ [2026-03-10 FIX] title이 URL이면 productName으로 사용하지 않음
       const _rawTitleForSeo = String(structuredContent.title || structuredContent.selectedTitle || '').trim();
       const _titleIsSeoUrl = /^https?:\/\//i.test(_rawTitleForSeo);
@@ -1008,6 +1035,7 @@ export async function generateContentFromKeywords(
     'general': ''
   };
   const categoryHint = categoryHintMap[articleType] || '';
+  const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
 
   // ✅ 리뷰형/정보형 선택 확인 (키워드 생성에서도 반영)
   const selectedContentType = (window as any).selectedContentType || 'info';
@@ -1051,6 +1079,7 @@ export async function generateContentFromKeywords(
       useKeywordAsTitle: (window as any)._keywordTitleOptions?.useKeywordAsTitle || false,
       keywordForTitle: (window as any)._keywordTitleOptions?.keyword || undefined,
       businessInfo: collectBusinessInfo(contentMode), // ✅ [v1.4.24]
+      manualTitleOverride,
     }
   };
 
@@ -1098,10 +1127,11 @@ export async function generateContentFromKeywords(
 
     const result = apiResponse.data;
     const structuredContent = result.content;
+    applyManualTitleOverrideToContent(structuredContent, manualTitleOverride);
 
     // ✅ [2026-02-13] 키워드 제목 옵션 후처리 (AI 생성된 제목을 사용자 설정에 맞게 조정)
     const keywordTitleOpts = (window as any)._keywordTitleOptions;
-    if (keywordTitleOpts && structuredContent) {
+    if (!manualTitleOverride && keywordTitleOpts && structuredContent) {
       if (keywordTitleOpts.useKeywordAsTitle) {
         // 📌 키워드를 그대로 제목으로 사용
         const originalTitle = structuredContent.selectedTitle;

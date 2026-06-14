@@ -1192,6 +1192,18 @@
                                     🎯 키워드 추출
                                 </button>
                             </div>
+                            <label for="shopping-connect-manual-title"
+                                style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem; margin-bottom: 0.5rem; font-weight: 700; color: var(--text-strong);">
+                                <span>📝</span>
+                                <span>원하는 제목으로 사용</span>
+                                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">(쇼핑커넥트/URL 선택)</span>
+                            </label>
+                            <input type="text" id="shopping-connect-manual-title"
+                                placeholder="비워두면 AI가 제목을 만듭니다"
+                                style="width: 100%; padding: 0.875rem; border-radius: 8px; border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.95rem;">
+                            <p style="margin: 0.45rem 0 0 0; font-size: 0.78rem; color: var(--text-muted);">
+                                입력하면 AI 제목/SEO 제목 재작성보다 이 제목을 최우선으로 사용합니다.
+                            </p>
                             <button type="button" id="generate-from-url-btn"
                                 style="width: 100%; margin-top: 1rem; padding: 1rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 10px; font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
                                 🔄 URL로 AI 글 생성하기
@@ -1305,6 +1317,12 @@
 
                             <!-- User-provided photo context -->
                             <div class="image-narrative-context-section">
+                                <label class="image-narrative-context-title" for="image-narrative-manual-title">
+                                    📝 원하는 제목
+                                </label>
+                                <input type="text" id="image-narrative-manual-title" maxlength="120"
+                                    placeholder="비워두면 사진을 추론해서 제목을 만듭니다"
+                                    style="width: 100%; padding: 0.875rem; border-radius: 8px; border: 1px solid var(--border-medium); background: var(--bg-primary); color: var(--text-strong); font-size: 0.95rem; margin-bottom: 1rem;" />
                                 <label class="image-narrative-context-title">
                                     🧭 사진 참고 정보
                                 </label>

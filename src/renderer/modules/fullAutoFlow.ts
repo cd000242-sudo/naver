@@ -111,6 +111,20 @@ function hasReusableFullAutoContent(content) {
     return !!content && ((Array.isArray(content.headings) && content.headings.length > 0) ||
         !!normalizeReuseString(content.bodyPlain || content.content || content.introduction));
 }
+function getManualTitleOverride(formData) {
+    return normalizeReuseString(formData?.manualTitleOverride || formData?.manualTitle || formData?.imageNarrative?.manualTitle).slice(0, 120) || undefined;
+}
+function applyManualTitleOverride(structuredContent, manualTitle) {
+    const title = normalizeReuseString(manualTitle).slice(0, 120);
+    if (!structuredContent || !title)
+        return;
+    structuredContent.title = title;
+    structuredContent.selectedTitle = title;
+    structuredContent.manualTitleLocked = true;
+    structuredContent.manualTitleValue = title;
+    structuredContent.titleAlternatives = [title];
+    structuredContent.titleCandidates = [{ text: title, score: 100, reasoning: '사용자 지정 제목' }];
+}
 function buildFullAutoContentReuseKey(formData) {
     const contentMode = normalizeReuseString(formData?.contentMode || formData?.styleOptions?.contentMode || '');
     return JSON.stringify({
@@ -119,6 +133,7 @@ function buildFullAutoContentReuseKey(formData) {
         generator: normalizeReuseString(formData?.generator),
         toneStyle: normalizeReuseString(formData?.toneStyle),
         contentMode,
+        manualTitleOverride: normalizeReuseString(getManualTitleOverride(formData)),
         keywordAsTitle: formData?.keywordAsTitle === true,
         keywordTitlePrefix: formData?.keywordTitlePrefix === true,
         ctaType: normalizeReuseString(formData?.ctaType),
@@ -448,7 +463,8 @@ async function executeFullAutoFlow(formData) {
                 }
             }
             const _kwLockEarly = window._keywordTitleOptions?.useKeywordAsTitle === true
-                || structuredContent?.keywordAsTitleLocked === true;
+                || structuredContent?.keywordAsTitleLocked === true
+                || structuredContent?.manualTitleLocked === true;
             if (_kwLockEarly && existingSelectedTitle) {
                 console.log(`[FullAuto] 🔒 keywordAsTitle lock 활성 — UI 제목 패치 skip. existingSelectedTitle="${existingSelectedTitle.substring(0, 40)}..." 보존`);
             }
@@ -477,6 +493,7 @@ async function executeFullAutoFlow(formData) {
         if (!structuredContent) {
             throw new Error('콘텐츠 생성에 실패했습니다.');
         }
+        applyManualTitleOverride(structuredContent, getManualTitleOverride(formData));
         await yieldToUI();
         await displayContentInAllTabs(structuredContent);
         const newTitle = structuredContent.selectedTitle || structuredContent.title || '';
@@ -1589,10 +1606,14 @@ function collectFullAutoFormData() {
     const toneStyle = document.getElementById('unified-tone-style')?.value || 'professional';
     const keywordAsTitle = document.getElementById('fullauto-keyword-as-title')?.checked || false;
     const keywordTitlePrefix = document.getElementById('fullauto-keyword-title-prefix')?.checked || false;
+    const manualTitleOverride = document.getElementById('shopping-connect-manual-title')?.value?.trim()
+        || document.getElementById('unified-manual-title')?.value?.trim()
+        || undefined;
     return {
         urls,
         keywords,
-        title,
+        title: manualTitleOverride || title,
+        manualTitleOverride,
         generator,
         targetAge,
         imageSource,
@@ -1738,6 +1759,7 @@ async function executeFullAutoAutomation(formData) {
         if (!structuredContent) {
             throw new Error('콘텐츠 생성에 실패했습니다.');
         }
+        applyManualTitleOverride(structuredContent, getManualTitleOverride(formData));
         updateProgress(25, '콘텐츠 생성 완료');
         showUnifiedProgress(25, '콘텐츠 생성 완료', 'AI 글 생성이 완료되었습니다.');
         currentStructuredContent = structuredContent;
@@ -1961,6 +1983,7 @@ async function generateFullAutoContent(formData) {
     const businessResearchUrl = formData.contentMode === 'business'
         ? String(businessInfo?.researchUrl || '').trim()
         : '';
+    const manualTitleOverride = getManualTitleOverride(formData);
     const payload = {
         assembly: {
             generator: formData.generator,
@@ -1977,6 +2000,7 @@ async function generateFullAutoContent(formData) {
             articleType: formData.articleType,
             toneStyle: formData.toneStyle || formData.tone,
             businessInfo,
+            manualTitleOverride,
             useKeywordAsTitle: formData.keywordAsTitle || false,
             keywordForTitle: formData.keywordAsTitle ? (cleanedKeywords || titleStr || keywordList.join(' ')) : undefined,
             useKeywordTitlePrefix: formData.keywordTitlePrefix || false,
@@ -2008,6 +2032,7 @@ async function generateFullAutoContent(formData) {
         appendLog('❌ 콘텐츠 생성에 실패했습니다.');
         throw new Error(errMsg);
     }
+    applyManualTitleOverride(result.content, manualTitleOverride);
     appendLog('✅ AI 콘텐츠 생성이 완료되었습니다!');
     try {
         const factReport = result.content?.factCheckReport;
@@ -3076,6 +3101,7 @@ async function publishWithImageNarrative(formData) {
             mimeType: img.mimeType ?? 'image/jpeg',
             fileName: img.fileName ?? img.name,
         }));
+        const manualTitleOverride = getManualTitleOverride(formData);
         const imagePayloadById = new Map(imagePayloads.map((img) => [img.imageId, img]));
         if (imagePayloads.length < 3) {
             throw new Error('이미지 추론 글 모드: 최소 3장의 이미지가 필요합니다.');
@@ -3089,6 +3115,7 @@ async function publishWithImageNarrative(formData) {
             targetChars: formData.targetChars,
             toneStyle: formData.toneStyle,
             context: formData.imageNarrative?.context,
+            manualTitle: manualTitleOverride,
             plan: formData.imageNarrative?.plan,
             reviewEdits: formData.imageNarrative?.reviewEdits,
         });
@@ -3096,6 +3123,7 @@ async function publishWithImageNarrative(formData) {
             throw new Error(ipcResult.message ?? 'Vision 추론 또는 글 생성에 실패했습니다.');
         }
         structuredContent = ipcResult.content;
+        applyManualTitleOverride(structuredContent, manualTitleOverride);
         narrativeImageMap = new Map();
         if (ipcResult.imageMap) {
             for (const [heading, imgs] of Object.entries(ipcResult.imageMap)) {

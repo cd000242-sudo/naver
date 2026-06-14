@@ -60,6 +60,15 @@ function setState(patch: Partial<ImageNarrativeState>): void {
   _modeState = { ..._modeState, ...patch };
 }
 
+function _getProgressModal(): any | null {
+  return (window as any).aiProgressModal || (window as any).currentProgressModal || null;
+}
+
+function _readManualTitle(): string | undefined {
+  const title = _readFormField('image-narrative-manual-title');
+  return title ? title.slice(0, 120) : undefined;
+}
+
 // ---------------------------------------------------------------------------
 // Initialization
 // ---------------------------------------------------------------------------
@@ -161,10 +170,22 @@ async function _startInference(): Promise<void> {
 
   setState({ isInferring: true, plan: null });
   _setInferButtonState(true);
+  const manualTitle = _readManualTitle();
+  const progress = _getProgressModal();
 
   try {
+    progress?.show?.('📸 사진 AI 추론 중...', {
+      autoAnimate: false,
+      icon: '📸',
+      initialLog: `업로드 이미지 ${images.length}장을 분석할 준비를 시작합니다.`,
+    });
+    progress?.update?.(8, '이미지 확인 중...');
+    progress?.addLog?.(`선택 모델: ${_modeState.provider}`);
+    if (manualTitle) progress?.addLog?.(`사용자 지정 제목: ${manualTitle}`);
+
     // ✅ [SPEC-IMAGE-NARRATIVE] 표준 IPC 채널로 통일 (Quick Mode와 동일).
     // 이전: 존재하지 않는 electronAPI.inferImages → 항상 undefined → "Vision 추론 실패".
+    progress?.update?.(24, 'Vision AI 요청 중...');
     const result = await (window as any).api?.inferAndWrite?.({
       images: images.map((img) => ({
         imageId: img.id,
@@ -174,17 +195,29 @@ async function _startInference(): Promise<void> {
       provider: _modeState.provider,
       mode: _modeState.mode,
       context,
+      manualTitle,
     });
 
     if (!result || !result.success) {
       throw new Error(result?.message ?? 'Vision 추론 실패');
     }
 
+    progress?.update?.(78, '추론 결과 정리 중...');
     const plan = result.plan as NarrativePlan;
     setState({ plan, isInferring: false });
     showReviewPanel(plan, images);
+    progress?.complete?.(true, {
+      successTitle: '사진 추론 완료',
+      successIcon: '✅',
+      successLog: '리뷰 패널에 사진별 추론 결과를 표시했습니다.',
+    });
   } catch (err) {
     console.error('[ImageNarrativeMode] Inference failed:', err);
+    progress?.complete?.(false, {
+      failureTitle: '사진 추론 실패',
+      failureIcon: '❌',
+      failureLog: (err as Error).message,
+    });
     _showToast(`추론 실패: ${(err as Error).message}`, 'error');
     setState({ isInferring: false });
   } finally {
@@ -263,6 +296,7 @@ async function _handlePublish(reviewEdits?: unknown): Promise<void> {
 
   const edits = reviewEdits ?? Object.fromEntries(getReviewEdits());
   const context = _readPhotoContext();
+  const manualTitle = _readManualTitle();
 
   // Build the formData payload for executeFullAutoFlow
   const formData: Record<string, unknown> = {
@@ -276,6 +310,7 @@ async function _handlePublish(reviewEdits?: unknown): Promise<void> {
       provider: _modeState.provider,
       mode: _modeState.mode,
       context,
+      manualTitle,
       plan: _modeState.plan ?? undefined,
       reviewEdits: edits,
     },
