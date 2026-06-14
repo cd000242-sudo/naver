@@ -650,6 +650,15 @@
     .dialog p { margin: 0 0 14px; color: var(--muted); line-height: 1.55; }
     .dialog label { display: block; margin: 10px 0 6px; font-size: 13px; color: #d9e6f7; font-weight: 900; }
     .dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+    .progress-dialog { width: min(520px, 100%); }
+    .progress-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px; }
+    .progress-head h2 { margin: 0; font-size: 20px; }
+    .progress-percent { color: var(--gold); font-size: 22px; font-weight: 1000; }
+    .progress-track { height: 12px; border: 1px solid var(--line); border-radius: 999px; background: #07090d; overflow: hidden; }
+    .progress-fill { width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--gold), var(--green)); transition: width .22s ease; }
+    .progress-message { min-height: 22px; margin-top: 12px; color: #d9e6f7; font-size: 13px; line-height: 1.5; }
+    .progress-steps { margin-top: 12px; display: grid; gap: 6px; color: var(--muted); font-size: 12px; }
+    .progress-steps span.active { color: var(--gold); font-weight: 900; }
     .login-license {
       margin-top: 12px;
       border: 1px solid rgba(91,183,255,.24);
@@ -664,6 +673,18 @@
       font-size: 13px;
     }
     .login-license p { margin: 8px 0 10px; font-size: 12px; }
+    .settings-panel {
+      margin-top: 14px;
+      border: 1px solid rgba(91,183,255,.26);
+      border-radius: 8px;
+      background: rgba(5,10,18,.48);
+      padding: 12px;
+    }
+    .settings-panel summary { cursor: pointer; font-weight: 1000; color: #d9e6f7; }
+    .settings-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .settings-grid label { margin: 0 0 5px; }
+    .settings-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .settings-message { min-height: 18px; margin-top: 10px; color: var(--muted); font-size: 12px; }
     @media (max-width: 1160px) {
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: static; grid-template-columns: repeat(4, 1fr); }
@@ -671,7 +692,7 @@
       .feature-grid, .ops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 820px) {
-      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid { grid-template-columns: 1fr; }
+      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid { grid-template-columns: 1fr; }
       .quick-feature-dock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quality-strip { grid-template-columns: 1fr 1fr; }
       .result-toolbar { grid-template-columns: 1fr; }
@@ -832,17 +853,9 @@
               <h2>Pro 전체 기능</h2>
               <div class="muted">PC 앱에서 쓰던 핵심 기능을 웹에서도 기능별 화면으로 나눠 실행합니다. 각 서브탭은 선택한 기능의 입력값, 실행 상태, 결과만 보여줍니다.</div>
             </div>
-            <button class="btn blue" type="button" id="refreshFeatureStatus">서버 상태 확인</button>
+            <button class="btn blue" type="button" id="refreshFeatureStatus" hidden>서버 상태 확인</button>
           </div>
           <div class="tool-console" id="toolConsole">
-            <div class="quick-feature-dock" id="quickFeatureDock" aria-label="PC 앱 핵심 기능 바로가기">
-              <button class="quick-tool hot" type="button" data-tool-shortcut="pro-traffic"><strong>PRO 트래픽 폭발</strong><span>실시간 이슈와 롱테일을 황금 후보로 발굴</span></button>
-              <button class="quick-tool" type="button" data-tool-shortcut="shopping"><strong>쇼핑 커넥트</strong><span>상품 니즈를 블로그 진입 키워드로 전환</span></button>
-              <button class="quick-tool" type="button" data-tool-shortcut="mindmap"><strong>마인드맵 확장</strong><span>연관어와 롱테일 가지를 바로 펼침</span></button>
-              <button class="quick-tool" type="button" data-tool-shortcut="keyword-analysis"><strong>검색량 정밀조회</strong><span>PC/모바일/문서수를 한 번에 측정</span></button>
-              <button class="quick-tool" type="button" data-tool-shortcut="golden-discovery"><strong>황금키워드 발굴</strong><span>검색량 대비 문서수 낮은 선점 후보</span></button>
-              <button class="quick-tool" type="button" data-view-shortcut="sources"><strong>실시간 소스 보드</strong><span>네이버/다음/네이트/줌/정책/이슈</span></button>
-            </div>
             <div class="tool-group-tabs" id="toolGroupTabs" aria-label="Pro 기능 그룹"></div>
             <div class="tool-tabs" id="toolTabs" aria-label="Pro 도구 선택"></div>
             <div class="tool-form">
@@ -877,11 +890,11 @@
             <div class="tool-note" id="toolProfileNote">Pro 트래픽 폭발 키워드 헌터 설정을 조정한 뒤 실행하세요.</div>
             <div class="tool-detail" id="toolDetail"></div>
             <div class="tool-result-panel" id="toolResultPanel">
-              <h3>도구 실행 대기</h3>
-              <p>왼쪽 서브탭에서 Pro 기능을 선택한 뒤 실행하면 이 영역에 진행 상태와 핵심 후보가 바로 표시됩니다.</p>
+              <h3>도구 선택 대기</h3>
+              <p>서브탭에서 기능을 선택하고 실행하면 진행률 모달이 뜬 뒤 결과만 정리해서 표시합니다.</p>
             </div>
           </div>
-          <div class="catalog-strip" id="featureCatalogStrip" aria-label="기능 적용 현황" style="margin-top:14px;"></div>
+          <div class="catalog-strip" id="featureCatalogStrip" aria-label="기능 적용 현황" hidden></div>
           <div id="featureCatalogTabs" hidden></div>
           <div id="featureCatalogList" hidden></div>
         </section>
@@ -929,6 +942,36 @@
               <a class="btn primary" href="/download/android">모바일 APK 다운로드</a>
             </article>
           </div>
+          <details class="settings-panel" id="naverApiSettings">
+            <summary>네이버 API 키 설정</summary>
+            <div class="settings-grid">
+              <div>
+                <label for="naverClientId">Naver Client ID</label>
+                <input class="input" id="naverClientId" autocomplete="off" />
+              </div>
+              <div>
+                <label for="naverClientSecret">Naver Client Secret</label>
+                <input class="input" id="naverClientSecret" type="password" autocomplete="off" />
+              </div>
+              <div>
+                <label for="naverSearchAdAccessLicense">SearchAd Access License</label>
+                <input class="input" id="naverSearchAdAccessLicense" autocomplete="off" />
+              </div>
+              <div>
+                <label for="naverSearchAdSecretKey">SearchAd Secret Key</label>
+                <input class="input" id="naverSearchAdSecretKey" type="password" autocomplete="off" />
+              </div>
+              <div>
+                <label for="naverSearchAdCustomerId">SearchAd Customer ID</label>
+                <input class="input" id="naverSearchAdCustomerId" autocomplete="off" />
+              </div>
+            </div>
+            <div class="settings-actions">
+              <button class="btn primary" type="button" id="saveNaverApiSettings">저장</button>
+              <button class="btn blue" type="button" id="checkNaverApiSettings">상태 확인</button>
+            </div>
+            <div class="settings-message" id="naverApiSettingsMessage">키 값은 저장 후 다시 표시하지 않습니다. 필요한 항목만 입력해도 기존 저장값은 유지됩니다.</div>
+          </details>
         </section>
 
         <section class="panel main-view" id="workbench" data-view="workbench">
@@ -976,6 +1019,23 @@
     </form>
   </div>
 
+  <div class="modal" id="progressModal" aria-hidden="true" aria-live="polite">
+    <div class="dialog progress-dialog" role="status">
+      <div class="progress-head">
+        <h2 id="progressTitle">실행 중</h2>
+        <strong class="progress-percent" id="progressPercent">0%</strong>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-message" id="progressMessage">서버에 요청을 준비하고 있습니다.</div>
+      <div class="progress-steps">
+        <span id="progressStepRequest" class="active">요청 접수</span>
+        <span id="progressStepCollect">데이터 수집</span>
+        <span id="progressStepAnalyze">분석/검증</span>
+        <span id="progressStepDone">결과 정리</span>
+      </div>
+    </div>
+  </div>
+
   <script>
     const apiBase = 'https://141.164.59.17.sslip.io';
     function apiUrl(path) { return apiBase + path; }
@@ -986,6 +1046,7 @@
       publicSources: apiUrl('/v1/public/source-signals'),
       proSources: apiUrl('/v1/mobile/source-signals'),
       apiStatus: apiUrl('/v1/mobile/api-status'),
+      naverApiSettings: apiUrl('/v1/mobile/api-settings/naver'),
       pcFeatures: apiUrl('/v1/mobile/pc-features'),
       rankTracking: apiUrl('/v1/mobile/rank-tracking'),
       rankTrackingManual: apiUrl('/v1/mobile/rank-tracking/manual'),
@@ -1019,25 +1080,10 @@
       androidDownload: apiUrl('/download/android')
     };
 
-    const legacyFeatureCards = [
-      { id: 'pro-traffic', title: 'PRO 트래픽 폭발 키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '실시간 이슈, 계절성, evergreen 신호를 서버 job으로 분석합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 30, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false }) },
-      { id: 'exposure', title: '내노출 추적', status: 'linked', route: endpoints.rankTracking, desc: '서버의 노출/순위 추적 스냅샷과 SERP 체크 라우트에 연결합니다.', method: 'GET' },
-      { id: 'shopping', title: '쇼핑 커넥트', status: 'ready', route: endpoints.shoppingConnect, desc: '네이버 쇼핑 상품 신호를 서버 job으로 분석하고 블로그 진입 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim' }) },
-      { id: 'youtube', title: '유튜브 황금키워드', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, crossReferenceNaver: options.crossReferenceNaver !== false }) },
-      { id: 'adsense', title: '애드센스 승인 키워드 헌터', status: 'ready', route: endpoints.adsense, desc: 'home-board/adsense 계열 엔진을 서버 job으로 실행합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy', seedKeyword: q || undefined, targetCount: options.targetCount || 30, requireSplusFloor: true }) },
-      { id: 'naver-mate', title: '네이버 메이트 키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어 기반 확장을 서버 측정표로 연결합니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
-      { id: 'kin', title: '지식인 황금질문', status: 'ready', route: endpoints.kin, desc: '지식인 외부유입 질문을 서버 job으로 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true }) },
-      { id: 'blueprint', title: 'Pro 블루프린트/수익 설계', status: 'linked', route: endpoints.revenue, desc: '키워드별 예상 수익과 글감 블루프린트 서버 라우트에 연결합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q || '소상공인 지원금 신청', monthlyViews: Math.max(100, (options.targetCount || 30) * 100), category: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy' }) }
-    ];
-
     const toolGroups = [
       { id: 'hunter', label: '황금/헌터' },
-      { id: 'sources', label: '실시간/소스' },
-      { id: 'expand', label: '조회/확장' },
-      { id: 'analysis', label: '경쟁/분석' },
       { id: 'ops', label: '노출/성과' },
-      { id: 'publish', label: '발행/스케줄' },
-      { id: 'system', label: '상태/다운로드' }
+      { id: 'publish', label: '발행/스케줄' }
     ];
 
     const features = [
@@ -1046,14 +1092,9 @@
       { id: 'niche', group: 'hunter', title: '니치/얼티밋 키워드 발굴', status: 'ready', route: endpoints.golden, desc: '롱테일, 저문서, 선점형 후보를 넓게 긁어 정밀 황금키워드로 재랭킹합니다.', defaultTargetCount: 60, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, mode: 'bulk', targetCount: options.targetCount || 60, requireSssFloor: true }) },
       { id: 'adsense', group: 'hunter', title: '애드센스 승인 키워드 헌터', status: 'ready', route: endpoints.adsense, desc: 'home-board/adsense 계열 엔진을 서버 job으로 실행합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy', seedKeyword: q || undefined, targetCount: options.targetCount || 30, requireSplusFloor: true }) },
       { id: 'youtube', group: 'hunter', title: '유튜브 황금키워드', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, crossReferenceNaver: options.crossReferenceNaver !== false }) },
+      { id: 'naver-mate', group: 'hunter', title: '네이버 메이트 황금키워드', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어 기반 확장을 서버 측정표로 연결합니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
       { id: 'kin', group: 'hunter', title: '지식인 황금질문', status: 'ready', route: endpoints.kin, desc: '지식인 외부유입 질문을 서버 job으로 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true }) },
-      { id: 'source-radar', group: 'sources', title: '실시간 검색어/이슈 레이더', status: 'linked', route: endpoints.proSources + '?limit=30', desc: '네이버, 다음, 네이트, 줌, 정책, 이슈 소스를 서버 수집 결과로 분리해서 확인합니다.', method: 'GET' },
-      { id: 'keyword-analysis', group: 'expand', title: '키워드 정밀 조회', status: 'ready', route: endpoints.keywordAnalysis, desc: 'PC/모바일 검색량, 문서수, 경쟁비를 표와 결과 센터에 분리 표시합니다.', requiresKeyword: true, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, maxRelatedCount: options.targetCount || 30, includeMindmapPreview: true }) },
-      { id: 'mindmap', group: 'expand', title: '마인드맵 확장', status: 'ready', route: endpoints.mindmap, desc: '시드 키워드를 연관, 롱테일 후보군으로 확장하고 측정값을 붙입니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, depth: 1, targetCount: options.targetCount || 50, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
-      { id: 'naver-mate', group: 'expand', title: '네이버 메이트 키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어 기반 확장을 서버 측정표로 연결합니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
-      { id: 'seasonal-longtail', group: 'expand', title: '계절/롱테일 키워드 캘린더', status: 'ready', route: endpoints.mindmap, desc: '시즌성, 접미어, 롱테일 조합을 확장하고 PC/모바일 실측값을 붙입니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, depth: 2, targetCount: options.targetCount || 50, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
-      { id: 'shopping', group: 'expand', title: '쇼핑 커넥트', status: 'ready', route: endpoints.shoppingConnect, desc: '네이버 쇼핑 상품 신호를 서버 job으로 분석하고 블로그 진입 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim' }) },
-      { id: 'competitor-analysis', group: 'analysis', title: '경쟁/블로그 지수 분석', status: 'ready', route: endpoints.keywordAnalysis, desc: '키워드 경쟁도, 문서수, 연관 후보, 상위노출 가능성을 정밀 조회합니다.', requiresKeyword: true, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, maxRelatedCount: options.targetCount || 30, includeMindmapPreview: true }) },
+      { id: 'shopping', group: 'hunter', title: '쇼핑 커넥트', status: 'ready', route: endpoints.shoppingConnect, desc: '네이버 쇼핑 상품 신호를 서버 job으로 분석하고 블로그 진입 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim' }) },
       { id: 'exposure', group: 'ops', title: '내노출 추적', status: 'linked', route: endpoints.rankTracking, desc: '서버의 노출/순위 추적 스냅샷과 SERP 체크 라우트에 연결합니다.', method: 'GET' },
       { id: 'rank-check', group: 'ops', title: 'SERP 순위 즉시 점검', status: 'linked', route: endpoints.rankTrackingRun, desc: '등록된 추적 키워드의 현재 노출 순위를 서버에서 다시 확인합니다.', direct: true, payload: (_q, options) => ({ limit: options.targetCount || 30 }) },
       { id: 'outcomes', group: 'ops', title: '성과 기록/벤치마크', status: 'linked', route: endpoints.proOutcomes, desc: 'Pro 성과 기록과 수익 벤치마크 스냅샷을 확인합니다.', method: 'GET' },
@@ -1062,13 +1103,7 @@
       { id: 'blueprint', group: 'publish', title: 'Pro 블루프린트/수익 설계', status: 'linked', route: endpoints.revenue, desc: '키워드별 예상 수익과 글감 블루프린트 서버 라우트에 연결합니다.', requiresKeyword: false, defaultTargetCount: 30, direct: true, payload: (q, options) => ({ keyword: q || '소상공인 지원금 신청', monthlyViews: Math.max(100, (options.targetCount || 30) * 100), category: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy' }) },
       { id: 'blueprint-draft', group: 'publish', title: '블로그 초안 생성', status: 'linked', route: endpoints.blueprintDraft, desc: '블루프린트 생성 후 초안 생성까지 이어 실행합니다.', requiresKeyword: true, defaultTargetCount: 30, direct: true, workflow: 'blueprint-draft', payload: (q) => ({ keyword: q, force: false, searchVolume: null }) },
       { id: 'wordpress', group: 'publish', title: '워드프레스 발행 현황', status: 'linked', route: endpoints.wordpress, desc: '연결 사이트, 발행 초안, 카테고리 상태를 확인합니다.', method: 'GET' },
-      { id: 'schedule', group: 'publish', title: '예약/알림 대시보드', status: 'linked', route: endpoints.scheduleDashboard, desc: '발행 예약, 키워드 그룹, 알림 상태를 확인합니다.', method: 'GET' },
-      { id: 'live-golden-run', group: 'system', title: '황금보드 즉시 갱신', status: 'linked', route: endpoints.liveGoldenRun, desc: 'LIVE 황금키워드 보드를 서버에서 즉시 갱신합니다.', direct: true, payload: () => ({ cycles: 1 }) },
-      { id: 'prewarm', group: 'system', title: '서버 예열 상태', status: 'linked', route: endpoints.prewarmSnapshot, desc: '일일 헌터 예열과 캐시 작업 상태를 확인합니다.', method: 'GET' },
-      { id: 'prewarm-run', group: 'system', title: '일일 헌터 즉시 실행', status: 'linked', route: endpoints.prewarmRun, desc: '서버의 일일 헌터 후보 예열을 즉시 시작합니다.', direct: true, payload: (_q, options) => ({ limit: options.targetCount || 30 }) },
-      { id: 'api-status', group: 'system', title: '서버/API 상태', status: 'linked', route: endpoints.apiStatus, desc: 'API 키, 런타임, 서버 준비 상태를 점검합니다.', method: 'GET' },
-      { id: 'download-pc', group: 'system', title: 'PC 앱 다운로드', status: 'ready', route: endpoints.pcDownload, desc: 'Windows Electron 설치 파일을 다운로드합니다.', method: 'DOWNLOAD' },
-      { id: 'download-android', group: 'system', title: '모바일 APK 다운로드', status: 'ready', route: endpoints.androidDownload, desc: 'LEWORD 로고와 production API가 반영된 Android APK를 다운로드합니다.', method: 'DOWNLOAD' }
+      { id: 'schedule', group: 'publish', title: '예약/알림 대시보드', status: 'linked', route: endpoints.scheduleDashboard, desc: '발행 예약, 키워드 그룹, 알림 상태를 확인합니다.', method: 'GET' }
     ];
 
     let session = null;
@@ -1227,6 +1262,50 @@
     function setResult(message) {
       qs('resultLog').textContent = typeof message === 'string' ? message : JSON.stringify(message, null, 2);
     }
+    let progressCloseTimer = null;
+    function progressStep(percent) {
+      const steps = [
+        ['progressStepRequest', 0],
+        ['progressStepCollect', 25],
+        ['progressStepAnalyze', 55],
+        ['progressStepDone', 90],
+      ];
+      steps.forEach(function(step) {
+        const el = qs(step[0]);
+        if (el) el.classList.toggle('active', percent >= step[1]);
+      });
+    }
+    function updateProgress(percent, message) {
+      const pct = Math.max(0, Math.min(100, Math.round(Number(percent) || 0)));
+      const fill = qs('progressFill');
+      if (fill) fill.style.width = pct + '%';
+      if (qs('progressPercent')) qs('progressPercent').textContent = pct + '%';
+      if (message && qs('progressMessage')) qs('progressMessage').textContent = message;
+      progressStep(pct);
+    }
+    function openProgress(title, message) {
+      if (progressCloseTimer) clearTimeout(progressCloseTimer);
+      if (qs('progressTitle')) qs('progressTitle').textContent = title || '실행 중';
+      updateProgress(4, message || '서버에 요청을 준비하고 있습니다.');
+      qs('progressModal').classList.add('open');
+      qs('progressModal').setAttribute('aria-hidden', 'false');
+    }
+    function closeProgress(delay) {
+      const done = function() {
+        qs('progressModal').classList.remove('open');
+        qs('progressModal').setAttribute('aria-hidden', 'true');
+      };
+      if (progressCloseTimer) clearTimeout(progressCloseTimer);
+      progressCloseTimer = setTimeout(done, delay == null ? 450 : delay);
+    }
+    function completeProgress(message) {
+      updateProgress(100, message || '결과 정리가 완료되었습니다.');
+      closeProgress(550);
+    }
+    function failProgress(message) {
+      updateProgress(100, message || '실행 중 오류가 발생했습니다.');
+      closeProgress(900);
+    }
     function resultKpiHtml(metrics) {
       return '<div class="result-kpis">' + metrics.map(function(metric) {
         return '<div class="result-kpi"><strong>' + escapeHtml(metric.value) + '</strong><span>' + escapeHtml(metric.label) + '</span></div>';
@@ -1257,12 +1336,8 @@
             : '서버 job 실행';
       const target = qs('toolDetail');
       if (!target || !feature) return;
-      target.innerHTML = '<div class="tool-detail-grid">'
-        + '<div class="tool-detail-card"><strong>실행 방식</strong><span>' + escapeHtml(method + ' · ' + route) + '</span></div>'
-        + '<div class="tool-detail-card"><strong>분석 의도</strong><span>' + escapeHtml(guide[0]) + '</span></div>'
-        + '<div class="tool-detail-card"><strong>결과 활용</strong><span>' + escapeHtml(guide[1]) + '</span></div>'
-        + '</div>'
-        + '<div class="tool-note">' + escapeHtml(guide[2]) + '</div>';
+      target.hidden = true;
+      target.innerHTML = '';
     }
     function renderToolResultPanel(feature, title, subtitle, metrics, rows) {
       const target = qs('toolResultPanel');
@@ -1276,12 +1351,7 @@
         + list;
     }
     function renderToolWaiting(feature) {
-      renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 대기', '설정을 확인한 뒤 실행 버튼을 누르면 서버 진행 상태와 핵심 후보가 여기에 표시됩니다.', [
-        { label: '상태', value: '대기' },
-        { label: '권한', value: session ? 'Pro 연결' : '로그인 필요' },
-        { label: '결과', value: '-' },
-        { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
-      ], []);
+      renderToolResultPanel(feature, feature && feature.title ? feature.title : 'Pro 도구', '필요한 값만 입력하고 실행하세요. 진행률은 모달로 표시하고, 완료 후 이 영역에는 결과만 정리합니다.', [], []);
     }
     function renderToolLocked(feature) {
       renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 로그인 필요', '이 도구는 Pro 세션이 있어야 실행됩니다. 아이디와 비밀번호만 입력하면 기존 사용자 계정으로 바로 접속합니다.', [
@@ -1636,14 +1706,93 @@
       if (!res.ok) throw new Error(payload.message || payload.error || 'HTTP ' + res.status);
       return payload;
     }
+    function naverApiSettingsFields() {
+      return [
+        'naverClientId',
+        'naverClientSecret',
+        'naverSearchAdAccessLicense',
+        'naverSearchAdSecretKey',
+        'naverSearchAdCustomerId',
+      ];
+    }
+    function collectNaverApiSettings() {
+      return naverApiSettingsFields().reduce(function(out, id) {
+        const input = qs(id);
+        const value = input ? input.value.trim() : '';
+        if (value) out[id] = value;
+        return out;
+      }, {});
+    }
+    function clearNaverApiSecretInputs() {
+      naverApiSettingsFields().forEach(function(id) {
+        const input = qs(id);
+        if (input) input.value = '';
+      });
+    }
+    function statusLabel(status) {
+      if (status === 'ready') return '정상';
+      if (status === 'partial') return '일부 설정';
+      return '미설정';
+    }
+    function renderNaverApiStatusMessage(payload) {
+      const items = payload && payload.snapshot && Array.isArray(payload.snapshot.items) ? payload.snapshot.items : [];
+      const openApi = items.find(function(item) { return item.id === 'naver-openapi'; });
+      const searchAd = items.find(function(item) { return item.id === 'naver-searchad'; });
+      const openStatus = openApi ? statusLabel(openApi.status) : '확인 필요';
+      const adStatus = searchAd ? statusLabel(searchAd.status) : '확인 필요';
+      qs('naverApiSettingsMessage').textContent = 'OpenAPI ' + openStatus + ' · SearchAd ' + adStatus + ' · 키 값은 화면에 다시 표시하지 않습니다.';
+    }
+    async function saveNaverApiSettings() {
+      if (!requireSession()) return;
+      const settings = collectNaverApiSettings();
+      if (!Object.keys(settings).length) {
+        qs('naverApiSettingsMessage').textContent = '저장할 네이버 API 키를 입력하세요.';
+        return;
+      }
+      openProgress('네이버 API 키 저장', '서버 설정 저장소에 안전하게 저장하는 중입니다.');
+      try {
+        updateProgress(35, '입력값을 검증하고 있습니다.');
+        const payload = await apiPost(endpoints.naverApiSettings, settings);
+        clearNaverApiSecretInputs();
+        renderNaverApiStatusMessage(payload);
+        setResult({ naverApiSettings: { ok: payload.ok, savedKeys: payload.savedKeys || [] } });
+        log('네이버 API 키 설정 저장 완료');
+        completeProgress('네이버 API 설정이 저장되었습니다.');
+      } catch (err) {
+        qs('naverApiSettingsMessage').textContent = err.message;
+        log('네이버 API 키 저장 실패: ' + err.message);
+        failProgress(err.message);
+      }
+    }
+    async function checkNaverApiSettings() {
+      if (!requireSession()) return;
+      openProgress('네이버 API 상태 확인', '저장된 키 상태를 확인하고 있습니다.');
+      try {
+        const payload = await apiGet(endpoints.apiStatus, true);
+        renderNaverApiStatusMessage(payload);
+        setResult({ naverApiStatus: payload.snapshot || payload });
+        log('네이버 API 상태 확인 완료');
+        completeProgress('네이버 API 상태 확인이 완료되었습니다.');
+      } catch (err) {
+        qs('naverApiSettingsMessage').textContent = err.message;
+        log('네이버 API 상태 확인 실패: ' + err.message);
+        failProgress(err.message);
+      }
+    }
     async function pollJob(jobPayload) {
       const job = jobPayload.job;
       if (!job || !jobPayload.links || !jobPayload.links.self) return jobPayload;
       log('job 접수: ' + job.id + ' / ' + job.product);
+      updateProgress(Math.max(8, job.progressPercent || 8), job.progressMessage || '서버 job이 접수되었습니다.');
       for (let i = 0; i < 180; i++) {
         const state = await apiGet(jobPayload.links.self, true);
         const current = state.job || {};
-        if (current.progressMessage) log(current.progressPercent + '% ' + current.progressMessage);
+        if (current.progressMessage) {
+          log(current.progressPercent + '% ' + current.progressMessage);
+          updateProgress(current.progressPercent || 20, current.progressMessage);
+        } else {
+          updateProgress(Math.min(92, 18 + i), '서버가 데이터를 수집하고 분석하는 중입니다.');
+        }
         if (current.state === 'completed') return current.result || state;
         if (current.state === 'failed' || current.state === 'cancelled') throw new Error(current.error || current.progressMessage || current.state);
         await new Promise(function(resolve) { setTimeout(resolve, i < 6 ? 900 : 1600); });
@@ -2436,7 +2585,9 @@
         }
         if (feature.id) renderToolRunning(feature, q);
         log(feature.title + ' 실행 시작');
+        openProgress(feature.title + ' 실행', '서버 요청을 준비하고 있습니다.');
         if (feature.method === 'GET') {
+          updateProgress(30, '서버 상태를 불러오는 중입니다.');
           const payload = await apiGet(feature.route, true);
           if (feature.handler && payload.catalog && Array.isArray(payload.catalog.items)) {
             const matched = payload.catalog.items.filter(function(item) { return item.handler === feature.handler; });
@@ -2445,9 +2596,11 @@
             renderFeatureResult(feature, payload.snapshot || payload.catalog || payload);
           }
           log(feature.title + ' 서버 상태 확인 완료');
+          completeProgress('서버 상태 확인이 완료되었습니다.');
           return;
         }
         if (feature.workflow === 'blueprint-draft') {
+          updateProgress(22, '블루프린트를 생성하고 있습니다.');
           log(feature.title + ' 블루프린트 생성 중');
           const blueprintPayload = await apiPost(endpoints.blueprint, feature.payload ? feature.payload(q, runOptions) : { keyword: q });
           const blueprint = blueprintPayload && blueprintPayload.result && blueprintPayload.result.blueprint
@@ -2458,6 +2611,7 @@
                 ? blueprintPayload.result
                 : null;
           if (!blueprint) throw new Error('블루프린트 생성 결과가 비어 있습니다.');
+          updateProgress(62, '초안을 생성하고 있습니다.');
           log(feature.title + ' 초안 생성 중');
           const draftPayload = await apiPost(endpoints.blueprintDraft, { blueprint: blueprint });
           renderFeatureResult(feature, {
@@ -2467,18 +2621,23 @@
             draft: draftPayload.result || draftPayload,
           });
           log(feature.title + ' 완료');
+          completeProgress('블루프린트와 초안 생성이 완료되었습니다.');
           return;
         }
         if (feature.direct) {
+          updateProgress(36, '서버에서 즉시 실행 중입니다.');
           const payload = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {});
           renderFeatureResult(feature, payload.snapshot || payload.result || payload);
           log(feature.title + ' 즉시 실행 완료');
+          completeProgress('즉시 실행 결과가 정리되었습니다.');
           return;
         }
+        updateProgress(18, '서버 job을 접수하고 있습니다.');
         const created = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {});
         const result = await pollJob(created);
         renderFeatureResult(feature, result);
         log(feature.title + ' 완료');
+        completeProgress('분석 결과가 정리되었습니다.');
       } catch (err) {
         log(feature.title + ' 실패: ' + err.message);
         setResult({ error: err.message });
@@ -2496,6 +2655,7 @@
             { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
           ], []);
         }
+        failProgress(err.message);
       }
     }
     async function runLookup(mode) {
@@ -2587,6 +2747,8 @@
       const options = collectToolOptions();
       runFeature(feature, options);
     });
+    qs('saveNaverApiSettings').addEventListener('click', saveNaverApiSettings);
+    qs('checkNaverApiSettings').addEventListener('click', checkNaverApiSettings);
     qs('refreshSources').addEventListener('click', loadSources);
     qs('refreshGolden').addEventListener('click', loadGoldenBoard);
     qs('refreshOps').addEventListener('click', function() {
@@ -2691,7 +2853,10 @@
         return;
       }
       if (action === 'mindmap') {
-        selectFeatureShortcut('mindmap', keyword, true);
+        qs('keywordInput').value = keyword;
+        qs('lookupMode').value = 'mindmap-expansion';
+        setActiveView('lookup', { load: false });
+        runLookup('mindmap-expansion');
         return;
       }
       if (action === 'pro-traffic') {
@@ -2700,6 +2865,13 @@
       }
       if (action === 'shopping') {
         selectFeatureShortcut('shopping', keyword, true);
+        return;
+      }
+      if (action === 'analyze') {
+        qs('keywordInput').value = keyword;
+        qs('lookupMode').value = 'keyword-analysis';
+        setActiveView('lookup', { load: false });
+        runLookup('keyword-analysis');
         return;
       }
       qs('keywordInput').value = keyword;
