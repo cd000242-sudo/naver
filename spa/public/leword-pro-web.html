@@ -1161,14 +1161,14 @@
     }
     function isFreshGoldenKeywordText(value) {
       const text = normalizeText(value).toLowerCase();
-      const lotto = text.match(/(d{3,4})s*회s*로또|로또s*(d{3,4})s*회/);
+      const lotto = text.match(/(\d{3,4})\s*회\s*로또|로또\s*(\d{3,4})\s*회/);
       if (lotto) {
         const round = Number(lotto[1] || lotto[2] || 0);
         const current = currentLottoRound();
         if (round < current || round > current + 1) return false;
       }
       if (/(6모|9모|모의고사|수능|기출).*(등급컷|답지|정답|해설)/.test(text)) return false;
-      return !/(2027s*6모|2027s*6월s*모의고사|1227s*회s*로또|로또s*1227s*회)/.test(text);
+      return !/(2027\s*6모|2027\s*6월\s*모의고사|1227\s*회\s*로또|로또\s*1227\s*회)/.test(text);
     }
     function filterFreshGoldenItems(items) {
       return (Array.isArray(items) ? items : []).filter(function(item) {
