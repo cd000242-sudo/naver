@@ -741,6 +741,18 @@
     .settings-grid label { margin: 0 0 5px; }
     .settings-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
     .settings-message { min-height: 18px; margin-top: 10px; color: var(--muted); font-size: 12px; }
+    .settings-checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+    .settings-check {
+      border: 1px solid rgba(159,177,200,.16);
+      border-radius: 8px;
+      background: rgba(18,26,38,.68);
+      padding: 10px;
+    }
+    .settings-check.ready { border-color: rgba(53,211,153,.38); background: rgba(53,211,153,.08); }
+    .settings-check.partial { border-color: rgba(245,197,66,.48); background: rgba(245,197,66,.08); }
+    .settings-check.missing { border-color: rgba(255,91,110,.34); background: rgba(255,91,110,.08); }
+    .settings-check strong { display: block; font-size: 13px; color: #f5f8ff; margin-bottom: 4px; }
+    .settings-check span { display: block; color: var(--muted); font-size: 12px; line-height: 1.45; }
     @media (max-width: 1160px) {
       .layout { grid-template-columns: 1fr; }
       .sidebar { position: static; grid-template-columns: repeat(4, 1fr); }
@@ -748,7 +760,7 @@
       .feature-grid, .ops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 820px) {
-      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid { grid-template-columns: 1fr; }
+      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist { grid-template-columns: 1fr; }
       .quick-feature-dock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quality-strip { grid-template-columns: 1fr 1fr; }
       .result-toolbar { grid-template-columns: 1fr; }
@@ -796,7 +808,7 @@
         <a class="side-link" href="#sources" data-view-target="sources">네이버/다음/네이트/줌/정책/이슈</a>
         <a class="side-link" href="#lookup" data-view-target="lookup">키워드 분석기</a>
         <a class="side-link" href="#features" data-view-target="features">추가 기능</a>
-        <a class="side-link" href="#features" data-view-target="features" data-feature-shortcut="youtube">유튜브 황금키워드 및 쇼츠분석</a>
+        <a class="side-link" href="#youtube" data-view-target="youtube">유튜브 황금키워드 및 쇼츠분석</a>
         <a class="side-link" href="#settings" data-view-target="settings">환경설정/API 키</a>
         <a class="side-link" href="#downloads" data-view-target="downloads">앱 다운로드</a>
       </aside>
@@ -901,7 +913,7 @@
           <div class="panel-title">
             <div>
               <h2>추가 기능</h2>
-              <div class="muted">키워드 발굴 전용 기능만 서브탭으로 분리했습니다. 각 탭은 Electron 앱의 기능 모달처럼 입력, 실행 상태, 결과를 독립적으로 보여줍니다.</div>
+              <div class="muted">각 기능은 시드 입력 없이 서버가 실시간 소스와 카테고리를 감지해 자동 발굴합니다.</div>
             </div>
             <button class="btn blue" type="button" id="refreshFeatureStatus" hidden>서버 상태 확인</button>
           </div>
@@ -941,7 +953,6 @@
               <button class="btn primary" type="button" id="runSelectedTool">자동 발굴 실행</button>
             </div>
             <div class="tool-note" id="toolProfileNote">Pro 트래픽 폭발 키워드 헌터가 실시간 이슈와 시즌 신호를 자동으로 감지합니다.</div>
-            <div class="tool-detail" id="toolDetail"></div>
             <div class="tool-result-panel" id="toolResultPanel">
               <h3>도구 선택 대기</h3>
               <p>서브탭에서 기능을 선택하고 실행하면 진행률 모달이 뜬 뒤 결과만 정리해서 표시합니다.</p>
@@ -950,6 +961,40 @@
           <div class="catalog-strip" id="featureCatalogStrip" aria-label="기능 적용 현황" hidden></div>
           <div id="featureCatalogTabs" hidden></div>
           <div id="featureCatalogList" hidden></div>
+        </section>
+
+        <section class="panel main-view" id="youtube" data-view="youtube">
+          <div class="panel-title">
+            <div>
+              <h2>유튜브 황금키워드 및 쇼츠분석</h2>
+              <div class="muted">유튜브 전용 사이드 화면입니다. 추가 기능 서브탭과 분리해 급상승 영상/쇼츠 신호만 분석합니다.</div>
+            </div>
+          </div>
+          <div class="tool-console">
+            <div class="auto-discovery-panel">
+              <strong>유튜브 자동 분석</strong>
+              <span>YouTube Data API 키가 있으면 급상승 영상과 쇼츠 후보를 수집하고, 네이버 실측 키와 함께 교차검증합니다.</span>
+            </div>
+            <div class="tool-form">
+              <select class="input" id="youtubeCategory">
+                <option value="all">전체 카테고리</option>
+                <option value="broadcast">방송/이슈</option>
+                <option value="sports">스포츠</option>
+                <option value="music">음악</option>
+                <option value="life">생활</option>
+              </select>
+              <input class="input" id="youtubeTargetCount" type="number" min="10" max="100" step="10" value="50" />
+              <button class="btn primary" type="button" id="runYoutubeTool">유튜브 자동 분석 실행</button>
+              <div class="tool-checks">
+                <label><input type="checkbox" id="youtubeCrossRef" checked /> 네이버 수요 교차검증</label>
+                <label><input type="checkbox" id="youtubeShorts" checked /> 쇼츠 신호 포함</label>
+              </div>
+            </div>
+            <div class="tool-result-panel" id="youtubeResultPanel">
+              <h3>유튜브 분석 대기</h3>
+              <p>환경설정/API 키에서 YouTube API 키를 저장한 뒤 실행하면 진행률 모달과 결과가 이 화면에 표시됩니다.</p>
+            </div>
+          </div>
         </section>
 
         <section class="panel main-view" id="ops" data-view="ops">
@@ -983,30 +1028,30 @@
           </div>
           <div class="settings-panel" id="naverApiSettings">
             <h3 style="margin:0 0 6px;">키워드 API 설정</h3>
-            <p class="muted" style="margin:0;">Naver OpenAPI는 문서수/연관어, SearchAd는 PC/모바일 실측 검색량, YouTube API는 유튜브 황금키워드에 사용합니다.</p>
+            <p class="muted" style="margin:0;">네이버 API는 문서수/연관어, 네이버 검색광고 API는 PC/모바일 실측 검색량, 유튜브 API는 유튜브 황금키워드에 사용합니다.</p>
             <div class="settings-grid">
               <div>
-                <label for="naverClientId">Naver Client ID</label>
+                <label for="naverClientId">네이버 API Client ID</label>
                 <input class="input" id="naverClientId" autocomplete="off" />
               </div>
               <div>
-                <label for="naverClientSecret">Naver Client Secret</label>
+                <label for="naverClientSecret">네이버 API Client Secret</label>
                 <input class="input" id="naverClientSecret" type="password" autocomplete="off" />
               </div>
               <div>
-                <label for="naverSearchAdAccessLicense">SearchAd Access License</label>
+                <label for="naverSearchAdAccessLicense">네이버 검색광고 Access License</label>
                 <input class="input" id="naverSearchAdAccessLicense" autocomplete="off" />
               </div>
               <div>
-                <label for="naverSearchAdSecretKey">SearchAd Secret Key</label>
+                <label for="naverSearchAdSecretKey">네이버 검색광고 Secret Key</label>
                 <input class="input" id="naverSearchAdSecretKey" type="password" autocomplete="off" />
               </div>
               <div>
-                <label for="naverSearchAdCustomerId">SearchAd Customer ID</label>
+                <label for="naverSearchAdCustomerId">네이버 검색광고 Customer ID</label>
                 <input class="input" id="naverSearchAdCustomerId" autocomplete="off" />
               </div>
               <div>
-                <label for="youtubeApiKey">YouTube Data API Key</label>
+                <label for="youtubeApiKey">유튜브 Data API Key</label>
                 <input class="input" id="youtubeApiKey" type="password" autocomplete="off" />
               </div>
               <div>
@@ -1030,10 +1075,11 @@
               <button class="btn primary" type="button" id="saveNaverApiSettings">내 API 키 저장</button>
               <button class="btn blue" type="button" id="checkNaverApiSettings">로컬 설정 확인</button>
               <button class="btn red" type="button" id="clearNaverApiSettings">저장값 삭제</button>
-              <a class="btn blue" href="https://developers.naver.com/apps/#/register" target="_blank" rel="noopener">Naver OpenAPI</a>
-              <a class="btn blue" href="https://manage.searchad.naver.com/customers/links" target="_blank" rel="noopener">SearchAd API</a>
+              <a class="btn blue" href="https://developers.naver.com/apps/#/register" target="_blank" rel="noopener">네이버 API 키 발급</a>
+              <a class="btn blue" href="https://manage.searchad.naver.com/customers/links" target="_blank" rel="noopener">네이버 검색광고 API 키 발급</a>
             </div>
             <div class="settings-message" id="naverApiSettingsMessage">키 값은 서버에 저장하지 않습니다. 저장 후 비밀키 입력칸은 비우고, 실행할 때 브라우저 로컬 값만 요청 헤더로 전달합니다.</div>
+            <div class="settings-checklist" id="apiSettingsChecklist"></div>
           </div>
         </section>
 
@@ -1184,12 +1230,13 @@
       { id: 'keyword', label: '키워드 발굴' }
     ];
 
+    const youtubeFeature = { id: 'youtube', group: 'youtube', title: '유튜브 황금키워드 및 쇼츠분석', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승/쇼츠 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, categoryId: options.categoryId || 'all', crossReferenceNaver: options.crossReferenceNaver !== false, includeShortsSignals: options.includeShortsSignals !== false, includeAiInference: options.includeAiInference !== false }) };
+
     const features = [
       { id: 'pro-traffic', group: 'keyword', title: 'PRO 트래픽 폭발키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '실시간 이슈, 계절성, evergreen 신호를 서버 job으로 분석해 선점형 트래픽 후보를 뽑습니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 30, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false, autoDiscovery: true, includeAiInference: options.includeAiInference !== false }) },
       { id: 'naver-mate', group: 'keyword', title: '네이버 메이트 황금키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어를 실측 검색량과 연결해 네이버 친화 롱테일 후보를 확장합니다.', requiresKeyword: false, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q || options.autoSeedKeyword || '오늘 실시간 이슈', targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false, autoDiscovery: !q, includeAiInference: options.includeAiInference !== false }) },
       { id: 'shopping', group: 'keyword', title: '쇼핑커넥트 황금제품키워드', status: 'ready', route: endpoints.shoppingConnect, desc: '지금 이슈가 있거나 구매 전환 가능성이 있는 상품 신호를 블로그 진입형 제품 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q || '', targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim', requireSellableIntent: true, autoDiscovery: !q, includeAiInference: options.includeAiInference !== false }) },
-      { id: 'kin', group: 'keyword', title: '지식인 황금키워드', status: 'ready', route: endpoints.kin, desc: '지식인 질문 신호에서 답변 수요가 높고 문서 경쟁이 낮은 정보형 키워드를 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true, includeAiInference: options.includeAiInference !== false }) },
-      { id: 'youtube', group: 'keyword', title: '유튜브 황금키워드 및 쇼츠분석', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승/쇼츠 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, crossReferenceNaver: options.crossReferenceNaver !== false, includeShortsSignals: true, includeAiInference: options.includeAiInference !== false }) }
+      { id: 'kin', group: 'keyword', title: '지식인 황금키워드', status: 'ready', route: endpoints.kin, desc: '지식인 질문 신호에서 답변 수요가 높고 문서 경쟁이 낮은 정보형 키워드를 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true, includeAiInference: options.includeAiInference !== false }) }
     ];
 
     let session = null;
@@ -1202,7 +1249,7 @@
     let selectedCatalogTab = 'today';
     const userApiSettingsStorageKey = 'leword.pro.userApiSettings.v1';
     const toolTabFeatureIds = ['pro-traffic', 'naver-mate', 'shopping', 'kin'];
-    const viewIds = ['golden', 'sources', 'lookup', 'features', 'settings', 'downloads'];
+    const viewIds = ['golden', 'sources', 'lookup', 'features', 'youtube', 'settings', 'downloads'];
     const catalogTabs = [
       { id: 'today', label: '오늘/실시간' },
       { id: 'discovery', label: '발굴' },
@@ -1409,26 +1456,10 @@
       return guides[feature && feature.id] || ['서버 기능 상태를 확인하고 연결된 데이터를 불러옵니다.', '실행 결과는 이 기능 화면 안에 바로 정리합니다.', '권한이 필요하면 로그인 창을 먼저 띄웁니다.'];
     }
     function renderToolDetail(feature) {
-      const guide = toolGuide(feature);
-      const method = feature && feature.method === 'DOWNLOAD'
-        ? '파일 다운로드'
-        : feature && feature.method === 'GET'
-          ? '상태 확인'
-          : feature && feature.direct
-            ? '즉시 실행'
-            : '서버 job 실행';
-      const target = qs('toolDetail');
-      if (!target || !feature) return;
-      target.hidden = false;
-      target.innerHTML = '<div class="tool-detail-grid">'
-        + '<div class="tool-detail-card"><strong>발굴 목표</strong><span>' + escapeHtml(guide[0]) + '</span></div>'
-        + '<div class="tool-detail-card"><strong>판단 기준</strong><span>' + escapeHtml(guide[1]) + '</span></div>'
-        + '<div class="tool-detail-card"><strong>결과 활용</strong><span>' + escapeHtml(guide[2]) + '</span></div>'
-        + '<div class="tool-detail-card"><strong>실행 방식</strong><span>' + escapeHtml(method) + ' · 진행률 모달 표시 · 완료 후 결과만 표시</span></div>'
-        + '</div>';
+      return feature;
     }
     function renderToolResultPanel(feature, title, subtitle, metrics, rows) {
-      const target = qs('toolResultPanel');
+      const target = feature && feature.id === 'youtube' ? qs('youtubeResultPanel') : qs('toolResultPanel');
       if (!target) return;
       const list = Array.isArray(rows) && rows.length
         ? '<ul class="result-list">' + rows.join('') + '</ul>'
@@ -1846,6 +1877,125 @@
         'openaiApiKey',
       ];
     }
+    function apiSettingGroups() {
+      return [
+        {
+          id: 'naver-openapi',
+          label: '네이버 API 키',
+          required: true,
+          keys: [
+            { id: 'naverClientId', label: 'Client ID' },
+            { id: 'naverClientSecret', label: 'Client Secret' },
+          ],
+          usage: '문서수, 자동완성, 연관어, 쇼핑/블로그 검색',
+        },
+        {
+          id: 'naver-searchad',
+          label: '네이버 검색광고 API 키',
+          required: true,
+          keys: [
+            { id: 'naverSearchAdAccessLicense', label: 'Access License' },
+            { id: 'naverSearchAdSecretKey', label: 'Secret Key' },
+            { id: 'naverSearchAdCustomerId', label: 'Customer ID' },
+          ],
+          usage: 'PC/모바일 검색량, CPC, 황금비율 실측',
+        },
+        {
+          id: 'youtube',
+          label: '유튜브 API 키',
+          required: false,
+          keys: [
+            { id: 'youtubeApiKey', label: 'YouTube Data API Key' },
+          ],
+          usage: '유튜브 급상승 영상, 쇼츠 후보 분석',
+        },
+        {
+          id: 'ai',
+          label: 'AI 추론 보조 키',
+          required: false,
+          anyOf: true,
+          keys: [
+            { id: 'anthropicApiKey', label: 'Claude API Key' },
+            { id: 'manusApiKey', label: 'Manus API Key' },
+            { id: 'openaiApiKey', label: 'OpenAI API Key' },
+          ],
+          usage: '니즈 추론, 의도 분류, 부적합 후보 제거 보조',
+        },
+      ];
+    }
+    function apiSettingGroupState(group, settings) {
+      const present = group.keys.filter(function(key) { return !!settings[key.id]; });
+      const ready = group.anyOf ? present.length > 0 : present.length === group.keys.length;
+      const partial = !ready && present.length > 0;
+      const missing = group.keys.filter(function(key) { return !settings[key.id]; });
+      return {
+        ready: ready,
+        status: ready ? 'ready' : partial ? 'partial' : 'missing',
+        present: present,
+        missing: group.anyOf && present.length > 0 ? [] : missing,
+      };
+    }
+    function apiSettingGroupById(id) {
+      return apiSettingGroups().find(function(group) { return group.id === id; });
+    }
+    function renderApiSettingsChecklist(settings) {
+      const target = qs('apiSettingsChecklist');
+      if (!target) return;
+      target.innerHTML = apiSettingGroups().map(function(group) {
+        const state = apiSettingGroupState(group, settings || {});
+        const statusLabel = state.ready ? '연동 준비 완료' : state.status === 'partial' ? '일부 누락' : '미입력';
+        const missingText = state.ready
+          ? '필요 항목이 모두 저장되었습니다.'
+          : '누락: ' + state.missing.map(function(key) { return key.label; }).join(', ');
+        return '<div class="settings-check ' + state.status + '">'
+          + '<strong>' + escapeHtml(group.label) + ' · ' + escapeHtml(statusLabel) + '</strong>'
+          + '<span>' + escapeHtml(group.usage) + '</span>'
+          + '<span>' + escapeHtml(missingText) + '</span>'
+          + '</div>';
+      }).join('');
+    }
+    function requiredApiGroupIdsForRun(feature, options) {
+      const route = feature && feature.route ? feature.route : '';
+      const id = feature && feature.id ? feature.id : '';
+      const needsMeasured = !options || options.includeVolumeMetrics !== false;
+      if (id === 'youtube') {
+        return options && options.crossReferenceNaver === false
+          ? ['youtube']
+          : ['youtube', 'naver-openapi', 'naver-searchad'];
+      }
+      if (id === 'pro-traffic' || id === 'shopping' || id === 'kin') return ['naver-openapi', 'naver-searchad'];
+      if (id === 'naver-mate') return needsMeasured ? ['naver-openapi', 'naver-searchad'] : ['naver-openapi'];
+      if (route === endpoints.keywordAnalysis || route === endpoints.mindmap || route === endpoints.golden) return ['naver-openapi', 'naver-searchad'];
+      return [];
+    }
+    function missingApiGroupsForRun(feature, options) {
+      const settings = readUserApiSettings();
+      return requiredApiGroupIdsForRun(feature, options).map(apiSettingGroupById).filter(Boolean).filter(function(group) {
+        return !apiSettingGroupState(group, settings).ready;
+      });
+    }
+    function renderApiKeyRequired(feature, missingGroups) {
+      const groups = missingGroups || [];
+      const title = ((feature && feature.title) || '서버 실행') + ' API 키 필요';
+      const subtitle = '정확한 실측 결과를 내려면 환경설정/API 키에서 필요한 키를 먼저 저장해야 합니다.';
+      const metrics = groups.map(function(group) {
+        const state = apiSettingGroupState(group, readUserApiSettings());
+        return { label: group.label, value: state.status === 'partial' ? '일부 누락' : '미입력' };
+      });
+      const rows = groups.map(function(group) {
+        const state = apiSettingGroupState(group, readUserApiSettings());
+        return '<li><strong>' + escapeHtml(group.label) + '</strong><span>' + escapeHtml('누락 항목: ' + state.missing.map(function(key) { return key.label; }).join(', ')) + '</span></li>';
+      });
+      rows.push('<li><strong>다음 단계</strong><span>좌측 환경설정/API 키에서 저장 후 로컬 설정 확인을 누른 뒤 다시 실행하세요.</span></li>');
+      if (feature && feature.id) renderToolResultPanel(feature, title, subtitle, metrics, rows);
+      if ((!feature || !feature.id) && activeViewId === 'lookup') {
+        renderLookupInsight(title, subtitle, metrics, rows);
+        qs('keywordRows').innerHTML = '<tr><td colspan="12" class="muted">환경설정/API 키에서 필수 API 키를 저장한 뒤 다시 실행하세요.</td></tr>';
+      }
+      renderResultSummary(title, subtitle, metrics, rows);
+      setResult({ ok: false, reason: 'missing-user-api-keys', missingGroups: groups.map(function(group) { return group.id; }) });
+      log(title + ': ' + groups.map(function(group) { return group.label; }).join(', '));
+    }
     function readUserApiSettings() {
       try {
         const raw = JSON.parse(localStorage.getItem(userApiSettingsStorageKey) || '{}');
@@ -1908,11 +2058,12 @@
       const youtubeReady = !!settings.youtubeApiKey;
       const aiReadyCount = ['anthropicApiKey', 'manusApiKey', 'openaiApiKey'].filter(function(key) { return !!settings[key]; }).length;
       qs('naverApiSettingsMessage').textContent =
-        '브라우저 로컬 저장 · OpenAPI ' + apiSettingsReadyLabel(openReady)
-        + ' · SearchAd ' + apiSettingsReadyLabel(adReady)
-        + ' · YouTube ' + apiSettingsReadyLabel(youtubeReady)
+        '브라우저 로컬 저장 · 네이버 API ' + apiSettingsReadyLabel(openReady)
+        + ' · 네이버 검색광고 ' + apiSettingsReadyLabel(adReady)
+        + ' · 유튜브 ' + apiSettingsReadyLabel(youtubeReady)
         + ' · AI 추론 ' + aiReadyCount + '/3'
         + ' · 서버 공용 저장 아님 · 실행 요청에만 전달';
+      renderApiSettingsChecklist(settings);
     }
     async function saveNaverApiSettings() {
       const entered = collectNaverApiSettings();
@@ -1944,9 +2095,22 @@
       }
     }
     async function checkNaverApiSettings() {
-      openProgress('API 설정 확인', '브라우저 로컬 설정을 확인하고 있습니다.');
+      openProgress('API 설정 확인', '브라우저 로컬 설정을 항목별로 확인하고 있습니다.');
       try {
         const settings = readUserApiSettings();
+        updateProgress(25, '네이버 API 키 저장 여부를 확인합니다.');
+        const checks = apiSettingGroups().map(function(group) {
+          const state = apiSettingGroupState(group, settings);
+          return {
+            id: group.id,
+            label: group.label,
+            status: state.status,
+            ready: state.ready,
+            missingKeys: state.missing.map(function(key) { return key.id; }),
+            usage: group.usage,
+          };
+        });
+        updateProgress(55, '네이버 검색광고, 유튜브, AI 보조 키를 확인합니다.');
         renderNaverApiStatusMessage({ localSettings: settings });
         setResult({
           userApiSettings: {
@@ -1956,10 +2120,17 @@
             searchAdReady: !!(settings.naverSearchAdAccessLicense && settings.naverSearchAdSecretKey && settings.naverSearchAdCustomerId),
             youtubeReady: !!settings.youtubeApiKey,
             aiInferenceReady: ['anthropicApiKey', 'manusApiKey', 'openaiApiKey'].filter(function(key) { return !!settings[key]; }).length,
+            checks: checks,
           },
         });
-        log('사용자 API 로컬 설정 확인 완료');
-        completeProgress('로컬 API 설정 확인이 완료되었습니다.');
+        const missingRequired = checks.filter(function(check) {
+          return (check.id === 'naver-openapi' || check.id === 'naver-searchad') && !check.ready;
+        });
+        if (missingRequired.length) {
+          qs('naverApiSettingsMessage').textContent = '필수 API 키 누락: ' + missingRequired.map(function(check) { return check.label; }).join(', ') + '를 입력해야 실측 발굴을 실행할 수 있습니다.';
+        }
+        log('사용자 API 로컬 설정 확인 완료: ' + checks.map(function(check) { return check.label + '=' + check.status; }).join(', '));
+        completeProgress('로컬 API 설정을 항목별로 확인했습니다.');
       } catch (err) {
         qs('naverApiSettingsMessage').textContent = err.message;
         log('API 설정 확인 실패: ' + err.message);
@@ -2262,6 +2433,10 @@
     function getSelectedTool() {
       return features.find(function(feature) { return feature.id === selectedToolId; }) || features[0];
     }
+    function featureById(id) {
+      if (id === 'youtube') return youtubeFeature;
+      return features.find(function(feature) { return feature.id === id; }) || null;
+    }
     function currentGroupFeatures() {
       const rows = features.filter(function(feature) { return feature.group === selectedToolGroupId; });
       return rows.length ? rows : features;
@@ -2399,18 +2574,35 @@
       options.autoDiscovery = !options.keyword;
       return options;
     }
+    function collectYoutubeOptions() {
+      return {
+        keyword: '',
+        categoryId: qs('youtubeCategory') ? qs('youtubeCategory').value || 'all' : 'all',
+        targetCount: Math.max(10, Math.min(100, Number(qs('youtubeTargetCount') ? qs('youtubeTargetCount').value || 50 : 50))),
+        crossReferenceNaver: qs('youtubeCrossRef') ? qs('youtubeCrossRef').checked : true,
+        includeShortsSignals: qs('youtubeShorts') ? qs('youtubeShorts').checked : true,
+        includeAiInference: true,
+        autoDiscovery: true,
+      };
+    }
     function selectFeatureShortcut(id, keyword, autorun) {
-      const feature = features.find(function(row) { return row.id === id; });
+      const feature = featureById(id);
       if (!feature) return;
       const q = String(keyword || '').trim();
       if (q) {
         qs('keywordInput').value = q;
         qs('toolSeedInput').value = q;
       }
-      selectTool(feature.id);
-      setActiveView('features', { load: false });
-      if (autorun) runFeature(feature, collectToolOptions());
-      else setTimeout(function() { qs('runSelectedTool').focus(); }, 0);
+      if (feature.id === 'youtube') {
+        setActiveView('youtube', { load: false });
+        if (autorun) runFeature(feature, collectYoutubeOptions());
+        else setTimeout(function() { qs('runYoutubeTool').focus(); }, 0);
+      } else {
+        selectTool(feature.id);
+        setActiveView('features', { load: false });
+        if (autorun) runFeature(feature, collectToolOptions());
+        else setTimeout(function() { qs('runSelectedTool').focus(); }, 0);
+      }
     }
     function renderFeatureGrid() {
       const target = qs('featureGrid');
@@ -2443,7 +2635,7 @@
     }
     function featureForCatalogItem(item) {
       const route = normalizeRoute(item && item.mobileRoute);
-      const direct = features.find(function(feature) {
+      const direct = [youtubeFeature].concat(features).find(function(feature) {
         return normalizeRoute(feature.route) === route;
       });
       if (direct) return direct;
@@ -2531,7 +2723,7 @@
         'get-dashboard-stats': 'schedule'
       };
       const id = byIpc[item && item.ipcEquivalent] || byIpc[item && item.handler];
-      return id ? features.find(function(feature) { return feature.id === id; }) : null;
+      return id ? featureById(id) : null;
     }
     function canRunCatalogItem(item) {
       if (!item || item.status === 'planned' || item.status === 'pc-only') return false;
@@ -2560,15 +2752,18 @@
       const catalog = pcCatalog && Array.isArray(pcCatalog.items) ? pcCatalog : null;
       const item = catalog ? catalog.items.find(function(row) { return row.id === itemId; }) : null;
       if (!item && String(itemId || '').indexOf('manual:') === 0) {
-        const feature = features.find(function(row) { return row.id === String(itemId).slice(7); });
-        if (feature) runFeature(feature, collectToolOptions());
+        const feature = featureById(String(itemId).slice(7));
+        if (feature) runFeature(feature, feature.id === 'youtube' ? collectYoutubeOptions() : collectToolOptions());
         return;
       }
       if (!item) return;
       const feature = featureForCatalogItem(item);
       if (feature) {
-        selectTool(feature.id);
-        runFeature(feature, collectToolOptions());
+        if (feature.id === 'youtube') runFeature(feature, collectYoutubeOptions());
+        else {
+          selectTool(feature.id);
+          runFeature(feature, collectToolOptions());
+        }
         return;
       }
       if (!canRunCatalogItem(item)) {
@@ -2826,8 +3021,12 @@
     }
     async function runFeature(feature, options) {
       if (feature && feature.id) {
-        selectTool(feature.id);
-        setActiveView('features', { load: false });
+        if (feature.id === 'youtube') {
+          setActiveView('youtube', { load: false });
+        } else {
+          selectTool(feature.id);
+          setActiveView('features', { load: false });
+        }
       }
       if (feature && feature.method === 'DOWNLOAD') {
         renderToolResultPanel(feature, feature.title, '다운로드를 시작합니다. 브라우저 다운로드 목록을 확인하세요.', [
@@ -2839,14 +3038,22 @@
         window.location.href = feature.route;
         return;
       }
+      const runOptions = options || {};
+      const q = runOptions.keyword == null ? compactKeywordInput() : String(runOptions.keyword || '').trim();
+      const displayKeyword = q || String(runOptions.autoSeedKeyword || '').trim();
+      const missingApiGroups = missingApiGroupsForRun(feature, runOptions);
+      if (missingApiGroups.length) {
+        openProgress('API 키 필요', '필수 API 키 설정을 확인하고 있습니다.');
+        updateProgress(100, '환경설정/API 키에서 필요한 키를 저장한 뒤 다시 실행하세요.');
+        renderApiKeyRequired(feature, missingApiGroups);
+        failProgress('API 키를 입력한 뒤 다시 실행하세요.');
+        return;
+      }
       if (!session || !session.accessToken) {
         if (feature && feature.id) renderToolLocked(feature);
         requireSession();
         return;
       }
-      const runOptions = options || {};
-      const q = runOptions.keyword == null ? compactKeywordInput() : String(runOptions.keyword || '').trim();
-      const displayKeyword = q || String(runOptions.autoSeedKeyword || '').trim();
       try {
         if (feature.requiresKeyword && !q) {
           log(feature.title + '는 키워드 입력이 필요합니다.');
@@ -3034,6 +3241,9 @@
       const feature = getSelectedTool();
       const options = collectToolOptions();
       runFeature(feature, options);
+    });
+    qs('runYoutubeTool').addEventListener('click', function() {
+      runFeature(youtubeFeature, collectYoutubeOptions());
     });
     qs('saveNaverApiSettings').addEventListener('click', saveNaverApiSettings);
     qs('checkNaverApiSettings').addEventListener('click', checkNaverApiSettings);
