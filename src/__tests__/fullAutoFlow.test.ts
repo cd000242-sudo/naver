@@ -132,6 +132,25 @@ describe('detached Naver login frame publish retry guard', () => {
   });
 });
 
+describe('recoverable publish session retry guard', () => {
+  const source = readFileSync(new URL('../renderer/modules/fullAutoFlow.ts', import.meta.url), 'utf8');
+
+  it('retries once when Naver browser session is closed during semi/full auto publish', () => {
+    expect(source).toContain('function isRecoverablePublishAutomationError');
+    expect(source).toContain('브라우저 세션이 종료');
+    expect(source).toContain('제목 입력 필드를 찾을 수 없습니다');
+    expect(source).toContain('_publishSessionRecoveryRetryCount');
+    expect(source).toContain('retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg)');
+  });
+
+  it('runs the same payload after closing the stale browser session instead of regenerating content', () => {
+    expect(source).toContain('await resetBrowserForDetachedLoginFrameRetry()');
+    expect(source).toContain('const retryPayload = {');
+    expect(source).toContain('...payload');
+    expect(source).toContain('timeout: PUBLISH_AUTOMATION_TIMEOUT_MS');
+  });
+});
+
 describe('full-auto image failure policy', () => {
   const source = readFileSync(new URL('../renderer/modules/fullAutoFlow.ts', import.meta.url), 'utf8');
 

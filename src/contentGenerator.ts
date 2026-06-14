@@ -38,7 +38,7 @@ import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, reset
 import { analyzeContentBySemantic, isLlmRubricEnabled } from './contentSemanticScoring.js';
 import { buildPersonaCard } from './authgrDefense.js';
 import { selfCritiqueAndRewrite, isSelfCritiqueEnabled } from './contentSelfCritique.js';
-import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, TONE_PERSONAS, buildStructureVariationDirective, buildBusinessAngleDirective, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
+import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
@@ -95,6 +95,22 @@ import {
 } from './contentDuplicateHeuristics.js';
 import { buildUrlModeDirective } from './contentUrlModeDirective.js';
 import { buildRecentWinnersBlock } from './contentRecentWinnersBlock.js';
+import {
+  applyManualTitleOverride,
+  normalizeManualTitleOverride,
+} from './contentManualTitlePolicy.js';
+import { appendClaudeStrongAbstentionBlock } from './contentPromptAddons.js';
+import {
+  appendAiTabFriendlyPrompt,
+  loadAiTabFriendlyPrompt,
+  shouldApplyAiTabFriendlyPrompt,
+} from './contentAiTabPrompt.js';
+import { resolvePromptTemperature } from './contentTemperaturePolicy.js';
+import { buildContentJsonOutputFormat } from './contentJsonPromptFormat.js';
+import { buildCustomModeOverridePrompt } from './contentCustomModePrompt.js';
+import { applyFactCheckHardConstraint } from './contentFactCheckConstraint.js';
+import { appendReviewAnalysisPrompt } from './contentReviewAnalysisPrompt.js';
+import { appendShoppingOfficialSafetyGuard } from './contentShoppingPromptAddons.js';
 import { optimizeForViral } from './contentViralOptimizer.js';
 import {
   detectBannedHeadingPatterns as detectBannedHeadingPatternsImpl,
@@ -190,6 +206,11 @@ import {
 export { stripAllFormatting, stripInternalMarkers, removeOrdinalHeadingLabelsFromBody };
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
 import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from './jsonParser';
+import { recoverLooseStructuredContentFields } from './contentStructuredRecovery';
+import {
+  buildGeminiEmptyResponseUserMessage,
+  buildMissingBodyUserMessage,
+} from './contentGenerationUserGuidance';
 
 // ✅ [v1.4.50] 예산 초과 전용 에러 클래스 — Safety Lock에서 throw
 // catch 블록에서 instanceof로 식별하여 다른 네트워크/API 에러와 명확히 구분
@@ -1001,15 +1022,10 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   // ✅ 소제목 길이 제한 (60자 이내로 완화 - 너무 짧으면 정보 전달력 하락)
   finalContent = truncateHeadingTitles(finalContent, 60);
 
-  const manualTitleOverride = String((source as any).manualTitleOverride || '').trim();
+  const manualTitleOverride = normalizeManualTitleOverride((source as any).manualTitleOverride);
   if (manualTitleOverride) {
     console.log(`[finalizeStructuredContent] 📌 사용자 지정 제목 고정: "${manualTitleOverride}"`);
-    (finalContent as any).title = manualTitleOverride;
-    finalContent.selectedTitle = manualTitleOverride;
-    (finalContent as any).manualTitleLocked = true;
-    (finalContent as any).manualTitleValue = manualTitleOverride;
-    finalContent.titleAlternatives = [manualTitleOverride];
-    finalContent.titleCandidates = [{ text: manualTitleOverride, score: 100, reasoning: '사용자 지정 제목' }];
+    finalContent = applyManualTitleOverride(finalContent, manualTitleOverride) as StructuredContent;
 
     try {
       if (finalContent.bodyPlain) {
@@ -1832,123 +1848,10 @@ export function buildModeBasedPrompt(
   const isCustomModeOverride = isUserPromptMode && contentMode === 'custom';
   if (isCustomModeOverride) {
     // 사용자정의 모드: 사용자 프롬프트를 최우선 지시사항으로, SEO/홈판급 품질 규칙을 가드레일로 적용
-    const customTone = toneStyle || 'friendly';
-    systemPromptResult = `당신은 네이버 블로그 일방문자 10,000명 이상의 전문 블로거입니다.
-아래 [사용자 요청 프롬프트]의 지시사항이 이 글의 **최우선 방향**입니다.
-그 외의 규칙은 품질 가드레일이며, 사용자 요청과 충돌 시 사용자 요청이 우선합니다.
-
-═══════════════════════════════════════════════════════════
-🎯 [최우선] 사용자 요청 프롬프트
-═══════════════════════════════════════════════════════════
-
-${source.customPrompt!.trim()}
-
-═══════════════════════════════════════════════════════════
-🧭 [사용자정의 모드 제어 규칙]
-═══════════════════════════════════════════════════════════
-- 먼저 사용자 요청에서 목적, 대상 독자, 필수 형식, 금지 표현, 반드시 넣을 요소를 추출하고 글 전체의 작성 계약으로 삼기
-- 사용자 요청이 애매하면 네이버 블로그 정보형 글 기준으로 안전하게 보강하되, 사용자가 명시한 방향을 바꾸지 않기
-- 사용자가 특정 구조(표, Q&A, 체크리스트, 후기형, 비교형, 업체홍보형 등)를 요구하면 해당 구조를 본문에 실제로 구현하기
-- 사용자가 금지한 표현/분위기/구성은 품질 가드레일보다 우선해서 제외하기
-- 입력에 없는 수치, 기관, 공식 가이드, 후기, 경험은 만들지 않기
-
-═══════════════════════════════════════════════════════════
-🛡️ [품질 가드레일] 핵심 규칙 (사용자 요청과 충돌하지 않는 한 준수)
-═══════════════════════════════════════════════════════════
-
-【글톤: ${customTone}】
-- ${TONE_PERSONAS[customTone]?.label || '사용자 설정 글톤'}: ${TONE_PERSONAS[customTone]?.persona || '자연스러운 문체로 작성'}
-
-【이모지 절대 금지】
-- 본문, 소제목 어디에서도 이모지/이모티콘 사용 금지
-- 감정은 문장으로 표현 (예: "진짜 좋았어요", "깜짝 놀랐어요")
-
-【자료 외 사실 작성 금지】
-- [원본 텍스트] / [Article Content] / 사용자가 입력한 정보에 없는 날짜·금액·수치·기관명·상품명·후기·인용은 만들지 않기
-- 자료가 부족한 부분은 일반론으로 채우지 말고, 확인된 범위 안에서만 쓰기
-- "보통", "일반적으로", "많은 분들이" 같은 근거 없는 완충 표현으로 빈 문단을 채우지 않기
-
-【거짓 경험 금지】
-- 직접 해본 적 없는 체험을 1인칭으로 단정하지 않기
-- 입력에 실제 경험/후기 데이터가 있을 때만 "직접", "써봤다", "가봤다", "제가 찍은" 같은 표현 사용
-- 경험 데이터가 없으면 "확인된 정보 기준", "후기에서 반복되는 패턴"처럼 출처 범위를 좁혀 쓰기
-
-【모바일 가독성 (필수)】
-- 한 문단은 최대 3~4줄 이내 (모바일 기준 2줄)
-- 문단 사이에 반드시 빈 줄(엔터) 삽입
-- "~해서, ~했는데, ~하니까" 같은 긴 연결문 금지 → 마침표로 끊기
-- AI가 쓴 것처럼 보이지 않는 자연스러운 문장체
-
-【단락 = 의미 단위 (최우선)】
-"한 단락 = 한 의미 덩어리". 위 길이 룰은 결과 — 의미 응집이 우선.
-① 새 주제/관점/시점/장면 전환 시 새 단락. 인과·시간·연결 문장은 같은 단락.
-② 단락 첫 문장 = 핵심 진술, 뒤 문장 = 근거·예시·디테일.
-③ 새 정보 = 새 단락. 부연·예시 = 같은 단락. 강제 분할/병합 금지.
-
-【키워드 배치】
-- 메인 키워드를 제목/도입/본문/마무리에 자연스럽게 3~6회 분산 삽입
-- 첫 문단에 1회, 마지막 문단에 1회 필수 포함
-- 키워드가 억지스럽게 반복되지 않도록 유의어/동의어 활용
-- 같은 키워드나 업체명을 문단마다 반복해서 스팸처럼 보이게 만들지 않기
-
-【글 구조 (소제목 3~8개)】
-- 도입부(2~3줄) → 소제목 3~8개(각 4~6문장) → 마무리(2~3줄)
-- 소제목은 독자의 궁금증을 유발하는 구체적 표현 사용
-- "포인트 1", "포인트 2" 같은 번호형 소제목 금지
-- "삶의 질이 달라졌어요", "이것 하나로 끝" 같은 뻔한 표현 금지
-
-【표/체크리스트/근거 블록】
-- 비교·비용·시간·절차·기준·안전·스펙·장단점 주제는 본문 중간에 구조화 블록 1개 이상 포함
-- 정보형 글은 기준·금액·서류·절차·비교 주제면 2열 마크다운 표 1개 필수 (인용구로 대체 금지)
-- 표가 어색한 감성/홈판형 글은 짧은 체크리스트 또는 단계 리스트로 대체
-- 출처 없는 "공식 가이드", "최신 가이드에서는" 표현 금지
-- 확인 기준은 "2026년 6월 기준", "제조사 안내 확인 기준"처럼 범위를 좁혀 표현
-
-═══════════════════════════════════════════════════════════
-📋 [필수] JSON 출력 형식 — 반드시 이 스키마로 응답하세요
-═══════════════════════════════════════════════════════════
-
-⚠️ 출력은 반드시 아래 JSON 형식이어야 합니다. 설명이나 마크다운 없이 순수 JSON만 반환하세요.
-
-{
-  "selectedTitle": "최종 선택된 제목 (25~45자)",
-  "titleCandidates": [
-    {"text": "제목 후보 1", "score": 95},
-    {"text": "제목 후보 2", "score": 90},
-    {"text": "제목 후보 3", "score": 85}
-  ],
-  "introduction": "도입부 텍스트 (2~3줄, 자연스러운 시작)",
-  "headings": [
-    {"title": "소제목 1", "content": "본문 내용 (4~6문장, 상세 서술)", "summary": "한 줄 요약", "imagePrompt": "이 소제목에 맞는 구체적 이미지 묘사 (한국어)"},
-    {"title": "소제목 2", "content": "본문 내용...", "summary": "요약", "imagePrompt": "이미지 묘사"},
-    {"title": "소제목 3", "content": "본문 내용...", "summary": "요약", "imagePrompt": "이미지 묘사"}
-  ],
-  "conclusion": "마무리 텍스트 (2~3줄, 여운형)",
-  "hashtags": ["해시태그1", "해시태그2", "해시태그3"],
-  "category": "카테고리"
-}
-
-═══════════════════════════════════════════════════════════
-🎨 [이미지 프롬프트 작성 규칙]
-═══════════════════════════════════════════════════════════
-- 각 소제목의 imagePrompt는 해당 소제목+본문의 문맥에 정확히 맞는 구체적 장면 묘사
-- "아름다운 풍경", "행복한 모습" 같은 추상적 표현 금지
-- 한국어로 구체적인 상황/장면을 묘사 (예: "포근한 아기 침대에서 편안하게 잠든 신생아, 부드러운 조명")
-- 각 소제목별로 서로 다른 고유한 이미지 프롬프트 생성
-
-═══════════════════════════════════════════════════════════
-🚨 최종 자가검수 체크리스트 (내부 검증용 — 본문에 절대 출력 금지)
-═══════════════════════════════════════════════════════════
-⛔ 아래 체크리스트는 너의 머릿속에서만 수행하는 사일런트 검증이다.
-⛔ "솔직하게 자체비평하겠습니다", "자가검수를 진행하면", "체크리스트로
-   확인해보면" 같은 메타 문구를 본문/제목/도입/결론 어디에도 출력하지 마라.
-⛔ JSON 출력에는 검증 결과만 반영하고 검증 과정 자체는 단 한 글자도 쓰지 않는다.
-□ 사용자 요청 프롬프트를 충실히 반영했는가? (가장 중요!)
-□ 이모지/이모티콘이 없는가?
-□ AI가 쓴 것처럼 보이지 않는가?
-□ 거짓/지어낸 수치가 없는가?
-□ 모바일에서 읽기 편한 문단 구조인가?
-□ 순수 JSON만 출력했는가?`;
+    systemPromptResult = buildCustomModeOverridePrompt({
+      customPrompt: source.customPrompt!,
+      toneStyle,
+    });
     const modeLabels: Record<string, string> = { custom: '사용자정의', affiliate: '쇼핑커넥트', seo: 'SEO', homefeed: '홈판', business: '업체홍보', mate: '네이버 메이트' };
     const modeLabel = modeLabels[contentMode] || contentMode;
     console.log(`[PromptBuilder] ✅ ${modeLabel} 모드 + 개인 프롬프트: 사용자 프롬프트 100% 반영 + 품질 가드레일 (${source.customPrompt!.length}자)`);
@@ -1989,12 +1892,7 @@ ${source.customPrompt!.trim()}
     if (shoppingPrompt) {
       // .prompt 파일 로드 성공 → 모듈화된 프롬프트 사용
       systemPromptResult += `\n\n${shoppingPrompt}`;
-      systemPromptResult += `\n\n[쇼핑커넥트 공식 안전 가드 - 반드시 내부 준수]
-- 글 첫 부분에서 제휴/수수료 가능성을 독자가 즉시 알아볼 수 있게 명확히 전제한다. 단, 같은 문구를 반복하지 않는다.
-- 숨겨진 키워드, 숨겨진 링크, 링크 목적을 흐리는 문장, 과장된 최상급 표현을 쓰지 않는다.
-- 상품명/가격/스펙/품절/브랜드 정보는 입력된 productInfo와 원문 데이터에 있는 범위만 사용한다.
-- 직접 구매/체험 리뷰 데이터가 없으면 "직접 써봤다", "며칠 사용했다" 같은 경험 서술을 만들지 않는다.
-- CTA는 글 하단에 1회만 자연스럽게 배치하고, 링크 클릭을 강요하지 않는다.`;
+      systemPromptResult = appendShoppingOfficialSafetyGuard(systemPromptResult);
       console.log(`[PromptBuilder] ✅ 쇼핑커넥트 모듈 프롬프트 적용: ${shoppingArticleType}`);
     } else {
       // ✅ [v1.4.12] 인라인 폴백 dead code 제거 — .prompt 파일 정상 로드 시 절대 진입 불가
@@ -2056,41 +1954,7 @@ ${source.customPrompt!.trim()}
   //   목적: LLM이 [Article Content]에 없는 사실을 생성 못하도록 강제 (모르는 것은 안 쓴다)
   //   조건: source.hasFactCheckSource === true (main.ts에서 RAG 주입 + 검증 통과 시 set)
   if ((source as any).hasFactCheckSource === true) {
-    const HARD_CONSTRAINT = `
-═══════════════════════════════════════════════════════════════════════
-🚨 [HARD CONSTRAINT — 위반 시 본문 통째로 폐기 후 다시 작성]
-═══════════════════════════════════════════════════════════════════════
-
-★ 본 글의 모든 사실은 [원본 텍스트]/[Article Content]에 명시된 자료에서만 가져온다.
-★ 자료에 없는 정보는 글에 절대 들어가지 않는다 — 모르는 것은 안 쓴다.
-
-[금지 — 자료에 없는 사실 생성]
-⛔ 자료에 없는 숫자/날짜/금액/통계/퍼센트 0건 강제
-⛔ 자료에 없는 인물명/기관명/제품명/지역명 0건 강제
-⛔ 자료에 없는 법령/제도/정책명 0건 강제
-
-[금지 — 일반화 도피 표현]
-⛔ "약 30%", "대략 5만원", "여러 명", "많은 사람들" — 자료에 정확 수치가 있으면 그대로, 없으면 그 사실 자체를 본문에 넣지 않는다.
-⛔ "보통 ~", "일반적으로 ~" — 자료 근거 없으면 사용 금지.
-⛔ 모호한 추정 ("아마 ~일 것이다", "~로 추정된다") — 자료 명시 없으면 그 주장 자체 삭제.
-
-[작성 원칙]
-✅ 자료에 명시된 구체 수치/날짜/금액만 본문에 넣는다.
-✅ 자료가 부족한 H2 주제는 다루지 않는다 — 다른 H2로 대체하거나 H2 개수를 줄인다.
-✅ 자료가 모순될 때(블로그A=4.57%, 블로그B=5%): 가장 신뢰도 높은 자료(뉴스 > 블로그 > 지식인) 우선. 명시 어렵다면 "자료별 차이 있음" 1회 언급.
-
-[출력 직전 자가 점검 — 메타 표현 출력 금지]
-□ 본문의 모든 숫자/날짜/금액/퍼센트가 [Article Content]에 있는가?
-□ 인물명/기관명/제품명이 [Article Content]에 있는가?
-□ 일반화 도피 표현("약", "대략", "여러", "많은")이 0건인가?
-□ 자료 근거 없는 주장이 0건인가?
-
-⛔ 위 4개 중 하나라도 미충족 → 그 부분 통째로 삭제 + 본문 재작성.
-⛔ 자료가 너무 부족해 1500자 못 채우면 자료 있는 부분만 작성 (1000자대도 허용). 절대 자료 없는 사실로 채우지 않는다.
-
-═══════════════════════════════════════════════════════════════════════
-`;
-    systemPromptResult = HARD_CONSTRAINT + '\n' + systemPromptResult;
+    systemPromptResult = applyFactCheckHardConstraint(systemPromptResult, true);
     console.log('[PromptBuilder] 🚨 HARD_CONSTRAINT (Phase 2) 적용 — 자료 기반 작성 강제');
   }
 
@@ -2107,22 +1971,6 @@ ${source.customPrompt!.trim()}
   // ✅ [v1.4.35] SEO 0.2 → 0.5 (로봇 회귀 방지, "사람보다 사람처럼" 우선)
   //              0.2는 거의 deterministic이라 학습 데이터의 평균 어조로 회귀.
   //              0.5는 키워드 정확도를 유지하면서 어휘/표현 다양성 확보.
-  // ✅ [v2.10.231 SPEC-PROMPT-2026-REFRESH Phase 1] faithfulness 우선 인하
-  //              SEO 0.5 → 0.3 (1단계 인하 — 0.1까지 가면 학습 데이터 회귀 위험)
-  //              homefeed 0.7 → 0.5 (창의 유지 + 충실도 균형)
-  //              Phase 1 효과 측정 후 추가 인하 결정. F1~F5 prompt rule이 일반론 회귀 차단.
-  let temperature = 0.5; // 기본값
-  // ✅ [2026-05-31 S1] 회귀 되돌림 — v2.10.231 인하(SEO 0.3, 홈판 0.5)가 문장 변주↓·균질↑로
-  //   "더 AI스러움"을 유발(사용자 회귀 신고). 사람다움 회복 위해 원복(SEO 0.5, 홈판 0.7).
-  //   뜬금없음(저충실도) 부작용은 S4(삽입식 후처리 문맥검사)·F1~F5 prompt rule로 별도 차단.
-  if (contentMode === 'seo') temperature = 0.5;
-  else if (contentMode === 'mate') temperature = 0.45;
-  else if (contentMode === 'homefeed') temperature = 0.7;
-  else if (contentMode === 'traffic-hunter') temperature = 0.9;
-  else if (contentMode === 'affiliate') temperature = 0.5;
-  else if (contentMode === 'custom') temperature = 0.7;
-  else if (contentMode === 'business') temperature = 0.6; // ✅ [v1.4.21] 0.4→0.6 (같은 업체 반복 발행 시 다양성 확보)
-
   let systemPrompt = systemPromptResult;
 
   // [SPEC-PROMPT-2026-REFRESH Phase 3-B / v2.10.236] Claude Sonnet abstention 강화 prompt
@@ -2130,17 +1978,7 @@ ${source.customPrompt!.trim()}
   //   동작: systemPrompt 끝에 강한 abstention 지시 추가 — Sonnet의 96.7% abstention 성능 극대화.
   //   Gemini Flash 사용자에게는 base.prompt F6 룰만 적용되고 이 강화 inject는 생략 (Sonnet 전용).
   if ((source as any).claudeAbstentionStrong === true) {
-    systemPrompt = `${systemPrompt}\n\n` +
-      `════════════════════════════════════════\n` +
-      `🛡️ [SECTION -3 STRONG ABSTENTION] (Sonnet 전용 강화)\n` +
-      `════════════════════════════════════════\n` +
-      `★ 자료에 명시되지 않은 사실은 절대 추측 금지.\n` +
-      `★ "확실히 알지 못하는 부분은 솔직히 표시" 우선:\n` +
-      `   - "이 부분은 자료에 명시되어 있지 않습니다"\n` +
-      `   - "정확한 수치는 공식 출처 확인을 권장합니다"\n` +
-      `   - "확인된 정보가 부족하여 단언할 수 없습니다"\n` +
-      `★ 부정확한 자신감보다 정직한 불확실성 표현이 더 가치 있음.\n` +
-      `★ 모든 사실 진술 단락에 [자료N] 인용 토큰 또는 "(자료 부족)" 표기 강제.\n`;
+    systemPrompt = appendClaudeStrongAbstentionBlock(systemPrompt, true);
     console.log('[PromptBuilder] 🛡️ Claude Sonnet STRONG abstention 강화 prompt 추가');
   }
 
@@ -2149,22 +1987,21 @@ ${source.customPrompt!.trim()}
   //   동작: src/prompts/seo/ai-tab-friendly.prompt 로드해서 systemPrompt 끝에 append.
   //   효과: 6,000~8,000자 + bullet/리스트 + 정의문 + 정보 탐색형 키워드 룰 LLM에 강제.
   //   실패 시 graceful skip (기본 SEO 룰만 적용).
-  if (source.aiTabFriendly === true && (contentMode === 'seo' || contentMode === 'mate')) {
+  if (shouldApplyAiTabFriendlyPrompt(source, contentMode)) {
     try {
-      const aiTabPromptPath = path.join(app.getAppPath(), 'dist', 'prompts', 'seo', 'ai-tab-friendly.prompt');
-      if (fsSync.existsSync(aiTabPromptPath)) {
-        const aiTabPromptContent = fsSync.readFileSync(aiTabPromptPath, 'utf-8');
-        systemPrompt = `${systemPrompt}\n\n${aiTabPromptContent}`;
+      const aiTabPrompt = loadAiTabFriendlyPrompt({
+        appPath: app.getAppPath(),
+        currentDir: __dirname,
+        existsSync: fsSync.existsSync,
+        readFileSync: fsSync.readFileSync,
+      });
+      systemPrompt = appendAiTabFriendlyPrompt(systemPrompt, aiTabPrompt);
+      if (aiTabPrompt.source === 'dist') {
         console.log('[PromptBuilder] 🎯 AI 탭 친화 프롬프트 추가 (ai-tab-friendly.prompt)');
+      } else if (aiTabPrompt.source === 'dev') {
+        console.log('[PromptBuilder] 🎯 AI 탭 친화 프롬프트 추가 (dev src 폴백)');
       } else {
-        // dev 환경 (dist 빌드 전): src 경로 폴백
-        const devPath = path.join(__dirname, '..', 'src', 'prompts', 'seo', 'ai-tab-friendly.prompt');
-        if (fsSync.existsSync(devPath)) {
-          systemPrompt = `${systemPrompt}\n\n${fsSync.readFileSync(devPath, 'utf-8')}`;
-          console.log('[PromptBuilder] 🎯 AI 탭 친화 프롬프트 추가 (dev src 폴백)');
-        } else {
-          console.warn('[PromptBuilder] ⚠️ ai-tab-friendly.prompt 파일 없음 — 기본 SEO 룰만 적용');
-        }
+        console.warn('[PromptBuilder] ⚠️ ai-tab-friendly.prompt 파일 없음 — 기본 SEO 룰만 적용');
       }
     } catch (e: any) {
       console.warn('[PromptBuilder] AI 탭 친화 프롬프트 로드 실패 — graceful skip:', e?.message || e);
@@ -2188,226 +2025,23 @@ ${source.customPrompt!.trim()}
 
   // ✅ 리뷰형일 때 구매 전 제품 분석 프롬프트 추가
   if (isReviewType) {
-    const reviewAnalysisPrompt = `
-
-🔍 [리뷰형 — 구매 전 제품 분석 가이드, 사용후기 아님!]
-관점: 제품/서비스 전문 에디터. "이 제품은 ~스펙", "이런 분에게 적합" 식 분석적 표현. 객관 정보 + 전문가 판단.
-
-필수 구조 3~8개 소제목: 핵심요약 → 스펙·기능 분석 → 추천 타겟 → 장점 심층 → 아쉬운 점/주의 → 가성비 판단 → 최종 구매 가이드.
-
-❌ 금지 표현: "써보니/사용해보니/도착해서/2주 써봤는데/재구매 의향 있어요/다시 살 거예요"
-✅ 권장 표현: "스펙을 살펴보면/주목할 점은/비교해보면/이 가격대에서는/구매 전 체크포인트/~라는 평가가 많아요"
-
-🏆 제목: "실사용/솔직후기/내돈내산/찐후기/리얼후기" 금지. "[제품명] 구매 전 OO가지/스펙 비교 총정리/이 가격 합리적일까" 권장. 25~40자, 제품명 필수.
-`;
-    systemPrompt = systemPrompt + reviewAnalysisPrompt;
+    systemPrompt = appendReviewAnalysisPrompt(systemPrompt, true);
     console.log(`[PromptBuilder] 리뷰형 구매 전 분석 프롬프트 추가됨`);
   }
 
   console.log(`[PromptBuilder] 2축 분리 프롬프트 생성: mode=${mode}, category=${categoryHint || 'general'}, isFullAuto=${isFullAuto}, isReviewType=${isReviewType}`);
 
-  // JSON 출력 형식 지시 (홈판/메이트/SEO 모드: 소제목 3~8개)
-  const isHomefeed = mode === 'homefeed';
-  const isMate = mode === 'mate';
-  const headingsExample = `"headings": [
-    {"title": "소제목 1", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
-    {"title": "소제목 2", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"},
-    {"title": "소제목 3", "content": "본문 내용...", "summary": "요약", "keywords": ["키워드"], "imagePrompt": "이미지 프롬프트"}
-  ]`;
-
-  // 홈판/메이트 모드 전용 구조 규칙
-  const modeStructureRule = isHomefeed ? `
-⚠️⚠️⚠️ [홈판 모드 필수 구조 규칙] ⚠️⚠️⚠️
-- introduction: 정확히 3줄, 첫 문장 25자 이내, 상황/발언/반응으로 시작
-- headings: STRUCTURE OVERRIDE에서 지정한 소제목 개수를 따를 것 (3~8개)
-- [강제] 1번 소제목은 반드시 인물명(주어)으로 시작 (예: "매니저의 폭로" - O / "의 폭로" - X)
-- (선택) 맥락상 자연스러울 때만 독자 반응을 본문에 1~2문장 녹임. ⛔ "📌 당시 대중 반응 요약" 같은 가짜 댓글 블록 합성 금지(거짓 신호 = AI 티 + 신뢰 저하)
-- conclusion: 결론/정리 금지, 여운형 문장 2줄만
-- 전체 톤: 사용자 설정 글톤 어미 적용, 기자체/설명체 절대 금지
-` : isMate ? `
-⚠️⚠️⚠️ [네이버 메이트 모드 필수 구조 규칙 — 울트라 플랜] ⚠️⚠️⚠️
-- introduction: 첫 300자 안에 핵심 답변 + 판단 기준 2~3개 + 글의 적용 범위를 먼저 작성
-- headings: 5~7개, 각 소제목은 하나의 검색 질문에 답하는 형태
-- [강제] 1번 소제목은 반드시 메인 주제(주어)로 시작하고, 첫 문장에 바로 답을 쓴다
-- [강제] 모든 소제목 본문 첫 2문장 안에 정의/기준/절차/비교/주의 중 1개 이상의 "인용 원자"를 넣는다
-- [강제] 본문 중간에 기준표/비교표/체크리스트/단계형 정리 중 최소 1개를 실제 본문 블록으로 작성
-- [강제] 마지막 소제목 또는 결론 직전에 FAQ 4~6개를 포함
-- [강제] 최신성 또는 확인 기준일이 필요한 주제는 "확인 기준" 또는 "최신 확인 포인트" 문장을 포함하되, 출처 없는 "공식 가이드/최신 가이드" 표현은 절대 금지
-- [강제] 원본에 없는 수치·날짜·비용·경험·정책은 만들지 말고, 부족하면 "자료 기준으로는 확인되지 않습니다"라고 처리
-- [강제] "한 줄 판정", "한 줄 결론", "[한 줄 판정: ...]" 같은 라벨 출력 금지. 핵심 문장은 라벨 없이 자연 문장으로 작성
-- 결론: 핵심 요약 2~3줄 + 다음에 확인할 행동 1개, 선정/수익/AI 브리핑 인용 보장 표현 금지
-` : `
-⚠️⚠️⚠️ [SEO 모드 필수 규칙] ⚠️⚠️⚠️
-- [강제] 1번 소제목은 반드시 메인 주제(주어)로 시작 (예: "아이폰16 디자인" - O / "의 디자인" - X)
-- 주어가 생략된 채 조사(~의, ~에 대한)로 시작하는 소제목 절대 금지
-
-💡 [SEO 제목 생성 가이드 - 과한 자극 자제]
-- 과도한 충격 유도형 단어(충격, 경악, 소름 등)는 실제 내용과 관련이 깊을 때만 제한적으로 사용하세요.
-- 단순히 클릭을 위한 낚시성보다는 정보의 가치와 해결책을 암시하는 제목을 우선하세요.
-- [메인 키워드] + [핵심 혜택/결과] + [궁금증 유발] 구조를 권장합니다.
-`;
-
-  const evidenceBlockRule = `
-📊 [모든 모드 공통: 표/체크리스트/그래프성 블록 규칙]
-- 비교·비용·시간·절차·기준·안전·스펙·장단점·FAQ형 주제는 본문 중간에 반드시 1개 이상의 구조화 블록을 넣는다.
-- 정보형/SEO/메이트/쇼핑/업체홍보: 기준·금액·서류·절차·비교처럼 항목화 가능한 주제면 2열 마크다운 표 1개를 반드시 작성한다. 인용구·산문으로 대체 금지. 항목화가 어려운 주제만 체크리스트 대체 허용. 형식은 반드시 최대 2열:
-  | 항목 | 정리 |
-  | --- | --- |
-  | 기준 | 독자가 바로 판단할 수 있는 내용 |
-  위 표의 '항목/정리'는 형식 예시일 뿐이다 — 실제 열 이름은 글 내용에 맞는 단어로 바꿔라. 표 밖에 "| 항목 | 정리 |" 같은 단독 헤더 행을 출력하지 마라.
-- 표가 어색한 홈판/감성글은 짧은 체크리스트 또는 단계 리스트로 대체한다.
-- 그래프는 실제 수치 데이터가 있을 때만 표로 표현한다. 수치가 없으면 "흐름 정리" 또는 "체크리스트"로 작성한다.
-- 표/체크리스트는 본문용 콘텐츠이며, 자가검수 체크리스트나 내부 검증 결과를 출력하면 안 된다.
-- 출처 없는 "공식 가이드", "최신 가이드에서는" 같은 표현은 금지한다. 확인 기준은 "2026년 6월 기준", "제조사 안내 확인 기준"처럼 범위를 좁혀 쓴다.
-`;
-
-  const jsonOutputFormat = `
-────────────────────
-[출력 형식 — 반드시 이 순서와 JSON 형식으로]${modeStructureRule}${evidenceBlockRule}
-
-{
-  "selectedTitle": "제목 1",
-  "titleCandidates": [
-    {"text": "제목 1", "score": 95},
-    {"text": "제목 2", "score": 90},
-    {"text": "제목 3", "score": 85}
-  ],
-  ${headingsExample},
-  "introduction": "${isHomefeed ? '도입부 (정확히 3줄, 첫 문장 25자 이내)' : isMate ? '도입부 (첫 300자 안에 직접 답변)' : '도입부'}",
-  "conclusion": "${isHomefeed ? '마무리 (여운형 2줄, 결론/정리 금지)' : isMate ? '마무리 (핵심 요약 + 다음 행동)' : '마무리'}",
-  "hashtags": ["해시태그1", "해시태그2", "해시태그3"],
-  "category": "카테고리"
-}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🎨 [이미지 프롬프트 작성 규칙 - 매우 중요!]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국어 장면 묘사. 추상적/막연한 표현 금지, 소제목별 고유 이미지.
-예시: 소제목 "겨울철 피부 관리 팁" → imagePrompt "보습 크림 바르는 손, 촉촉한 겨울 피부, 따뜻한 실내"
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-[원본 텍스트]
-${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}${contentMode === 'business' ? buildBusinessAngleDirective() : ''}${source.previousTitles && source.previousTitles.length > 0 && (contentMode === 'business' || contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate') ? `
-══════════════════════════════════════════
-🚫 [이전 작성 제목 — 비슷한 패턴 반복 금지]
-══════════════════════════════════════════
-${source.previousTitles.slice(-5).map((t, i) => `${i + 1}. ${t}`).join('\n')}
-
-⛔ 위 제목들과 같은 시작 단어, 같은 패턴, 같은 후킹 방식 절대 금지.
-⛔ 완전히 다른 각도로 새 제목 창작하라.
-` : ''}${contentMode === 'business' && source.businessInfo ? `
-══════════════════════════════════════════
-🏢 [업체 정보 — 절대 변경/조작 금지, 그대로 사용]
-══════════════════════════════════════════
-${source.businessInfo.name ? `📛 업체명: ${source.businessInfo.name}` : ''}
-${source.businessInfo.phone ? `📞 전화번호: ${source.businessInfo.phone}` : ''}
-${source.businessInfo.kakao ? `💬 카카오톡: ${source.businessInfo.kakao}` : ''}
-${source.businessInfo.address ? `📍 주소: ${source.businessInfo.address}` : ''}
-${source.businessInfo.hours ? `🕐 영업시간: ${source.businessInfo.hours}` : ''}
-${source.businessInfo.serviceArea === 'nationwide' ? `🌏 서비스 범위: 전국 (지역 제한 없음)
-   → 제목/본문에 특정 지역명 강제 삽입 금지
-   → "전국 상담 가능", "지역 무관 안내", "서비스 가능 범위 확인"처럼 입력 정보 기반 표현 활용
-   → 단, 디지털·온라인 상품(앱/소프트웨어/전자책/강의/구독 등)이면 "전국" 표현 자체를 쓰지 마라 — 지역 개념이 무의미하다. 대신 사용 환경(OS·기기·사양), 라이선스 조건, 지원 채널(오픈채팅·원격)을 다뤄라
-   → 시공 건수, 거점 수, 방문 가능 시간은 특징/경력에 실제 입력된 경우에만 사용
-   → 지역 키워드 대신 업종+차별점으로 검색 노출 (예: "원목 인테리어", "친환경 도배")` : source.businessInfo.region ? `🗺️ 서비스 지역: ${source.businessInfo.region}
-   → 제목 맨 앞에 위 지역명 중 1개 필수 배치 (예: "${source.businessInfo.region.split(/[,/\s]+/)[0]} 인테리어")
-   → 본문에 위 지역명들을 골고루 분산 등장 (각 지역 최소 1회)
-   → 시공 건수, 당일 방문, 가격, 경력 수치는 특징/경력 또는 원본 텍스트에 실제 입력된 경우에만 사용
-   → 입력 근거가 없으면 지역별 상담 가능 범위, 문의 전 확인사항, 방문 가능 여부 확인 절차를 설명
-   → 다른 지역명(서울/강남 등) 임의 추가 절대 금지` : ''}
-${source.businessInfo.extra ? `✨ 특징/경력: ${source.businessInfo.extra}` : ''}
-${source.businessInfo.promoTarget === 'product' ? `
-🛍️ [홍보 대상: 취급 상품 판매]
-- 이 글의 주인공은 업체가 아니라 업체가 취급/판매하는 상품이다. 수집 자료(원문)의 상품 정보(이름·가격·조건·혜택)를 중심으로 작성하라.
-- 상품의 장점·혜택·사용 시나리오를 구체적으로 다루고, 업체는 "믿을 수 있는 판매처"로 소개하라.
-- 글의 목표는 구매·문의 전환 — 마무리에 위 연락처(전화/카카오톡)로 문의를 자연스럽게 유도하라.
-- 수집 자료에 없는 상품 스펙·가격·혜택을 지어내지 마라.` : `
-🏢 [홍보 대상: 업체 자체 홍보]
-- 이 글의 주인공은 업체다. 전문성·신뢰·서비스 품질을 중심으로 작성하라.
-- 취급 상품/서비스는 업체의 강점을 보여주는 근거로 활용하라.
-- 글의 목표는 문의 전환 — 마무리에 위 연락처로 상담 문의를 자연스럽게 유도하라.`}
-${source.businessInfo.promoAngle ? `
-🎯 [이번 글 강조 각도: ${source.businessInfo.promoAngle}]
-- ${source.businessInfo.promoAngleDirective || '이 각도를 글의 중심 프레임으로 사용하라.'}
-- 같은 업체로 발행된 직전 글들과 프레임이 겹치지 않도록, 제목과 소제목 구성을 이 각도 중심으로 잡아라. 마무리는 항상 문의 전환으로 수렴하라.` : ''}
-
-⛔ 위 연락처 정보는 한 글자도 변경하지 말고 그대로 사용하라.
-⛔ 절대 가짜 전화번호, 가짜 카카오톡 ID, 가짜 주소, 가짜 지역을 만들지 마라.
-⛔ 입력/원본에 없는 시공 건수·평점·가격·A/S 기간·당일 방문 가능 여부를 만들지 마라.
-⛔ 위 업체명은 제목 1회 + 도입/본문/문의 안내에 총 3~6회만 자연 노출하라.
-⛔ 업체명을 문단마다 반복하지 말고, 서비스 장점·절차·고객 상황·문의 CTA로 전환 설득을 구성하라.
-` : ''}${source.customPrompt ? `
-══════════════════════════════════════════
-💡 [사용자 추가 지시사항 — 최우선 반영, 다른 모든 규칙보다 상위]
-══════════════════════════════════════════
-${source.customPrompt.trim()}
-` : ''}
-══════════════════════════════════════════
-🎯 [필수 키워드 정보 — 제목/소제목 작성에 반드시 반영]
-══════════════════════════════════════════
-${title ? `📌 원본 제목 참고: "${title}"
-   → 이 제목을 참고하여 더 강력한 후킹 제목으로 변환. 핵심 키워드 유지 + 감정/호기심 트리거 추가.
-` : ''}${(() => {
-      if (!primaryKeyword) return '';
-      const processed = preprocessLongKeyword(primaryKeyword);
-      if (processed.isLong) {
-        return `🔑 메인 키워드: "${processed.coreKeyword}"
-   → 제목 맨 앞 3글자 이내 필수 배치
-   → 본문 전체에 3~5회 자연스럽게 분산 (밀도 1~2%)
-   → 주제 문맥(${processed.contextHint})은 참고만, 제목에 그대로 사용 금지`;
-      }
-      return `🔑 메인 키워드: "${processed.coreKeyword}"
-   → 제목 맨 앞 3글자 이내 필수 배치
-   → 본문 전체에 3~5회 자연스럽게 분산 (밀도 1~2%)
-   → 소제목 5~7개 중 2~3개에만 메인 키워드 또는 변형을 자연스럽게 포함 (나머지는 키워드 없이 작성)`;
-    })()}
-${subKeywords ? `🔖 서브 키워드: ${subKeywords}
-   → 소제목 5~7개 중 2~3개의 소제목에 분산 포함
-   → 도입부·결론부 각 1회 이상 자연스럽게 등장` : ''}
-${contentMode === 'homefeed' && subKeywords ? `
-⚠️ [홈판 추가] 메인키워드 3~5회(1~2%), 서브키워드 2~3개 소제목에 분산, 도입부·결론부 각 1회. 스크롤 트리거 3개 이상 의무. 키워드를 억지로 넣지 말 것.` : ''}
-${contentMode === 'seo' ? `
-⚠️ [SEO 모드 제목 필수 조건]
-1. 메인 키워드를 제목 맨 앞 3글자 이내 배치 (검색 매칭률 ↑)
-2. 28~45자 길이
-3. 1인칭 경험 + 구체성(결과/변화/수치) 포함 (예: "써본 후기", "바꿨더니", "월 얼마 절감"). 기간 수치(N주/N개월)는 연속 발행 시 반복되므로 다른 구체성 우선.
-4. AI 표현 절대 금지 ("결론적으로", "정리하면", "알아보겠습니다")` : ''}
-${contentMode === 'mate' ? `
-⚠️ [네이버 메이트 모드 제목 필수 조건]
-1. 메인 키워드를 제목 앞쪽에 배치하되 과한 낚시 표현 금지
-2. 28~45자 길이
-3. 질문에 답하는 의도 또는 판단 기준을 제목에 반영
-4. "선정 보장", "수익 보장", "돈쓸어담는" 등 과장 표현 금지
-5. 기준형/방법형/비교형/질문답변형 중 하나로 작성
-6. 제목과 본문 주제가 1:1로 일치해야 하며, 주제 이탈 금지` : ''}
-${contentMode === 'homefeed' ? `
-⚠️ [홈판 모드 제목 필수 조건]
-1. 28~35자 길이 (모바일 1.5초 법칙)
-2. 감정 트리거 1개 이상 (충격/공감/궁금증)
-3. 결핍 설계 5대 공식 중 하나 적용 (정보 결핍/사회적 결핍/경험 결핍/시간 결핍/금전 결핍)
-4. 메인 키워드 자연스럽게 포함 (단, SEO처럼 맨 앞 강제 아님)` : ''}
-${metrics ? `
-📊 [참고 지표] 월간검색량 ${metrics.searchVolume !== undefined && metrics.searchVolume >= 0 ? metrics.searchVolume.toLocaleString() + '건' : '집계중'} / 문서량 ${metrics.documentCount !== undefined ? metrics.documentCount.toLocaleString() + '건' : '집계중'} → ${metrics.searchVolume && metrics.searchVolume > 10000 ? '대형키워드: 전문성·최신성 강조' : '블루오션: 세부 경험·독점 정보'}` : ''}
-
-══════════════════════════════════════════
-📄 [원본 본문 — 아래 내용을 바탕으로 작성하라]
-══════════════════════════════════════════
-${rawText}
-
-══════════════════════════════════════════
-⚠️ [최종 강제 조건 — 위반 시 0점]
-══════════════════════════════════════════${minChars && minChars > 0 ? `
-1. 글자수: 최소 ${minChars}자 이상. 각 소제목 5문장 이상. 요약/축약 금지.` : ''}
-2. 메인 키워드를 제목 맨 앞에 배치. 소제목에는 절반 이하에만 자연스럽게 포함 (과다 삽입 금지)
-3. 위 [필수 키워드 정보]의 모든 규칙을 한 줄도 어기지 말 것
-4. 출력은 오직 JSON 객체 하나만. JSON 밖에 설명·코드펜스(\`\`\`)를 붙이지 말 것. JSON 문자열 값 안의 마크다운 표·리스트는 허용이며 위 표 규칙은 그대로 유효하다.
-5. JSON은 반드시 { 로 시작하고 } 로 끝나야 함.
-6. 기준·금액·서류·절차·비교처럼 항목화 가능한 주제면 본문에 2열 마크다운 표(| 항목 | 정리 | 형식) 1개를 반드시 포함하라. 인용구·산문으로 대체 금지.
-
-이제 위 모든 정보를 종합하여 즉시 JSON으로 출력하라.
-`;
+  const jsonOutputFormat = buildContentJsonOutputFormat({
+    contentMode,
+    mode,
+    source,
+    title,
+    rawText,
+    primaryKeyword,
+    subKeywords,
+    metrics,
+    minChars,
+  });
 
   return `${systemPrompt}\n\n${jsonOutputFormat}`.trim();
 }
@@ -2434,6 +2068,14 @@ function buildPrompt(
 
 function validateStructuredContent(content: StructuredContent, source?: ContentSource): void {
   if (!content) throw new Error('AI 응답에 본문이 없습니다. 자동 재시도 중입니다... 계속 실패하면 다른 AI 엔진(Gemini/Claude/OpenAI)으로 전환해주세요.');
+
+  const looseRecovery = recoverLooseStructuredContentFields(content);
+  if (looseRecovery.bodyRecovered || looseRecovery.headingsRecovered) {
+    console.warn(
+      `[validateStructuredContent] 느슨한 AI 응답 구조 복구: ` +
+      `body=${looseRecovery.bodySource || 'none'}, headings=${looseRecovery.headingsSource || 'none'}`
+    );
+  }
 
   // ✅ [2026-04-11 FIX] 제목 개행 제거 — 최종 방어선
   if (content.selectedTitle && typeof content.selectedTitle === 'string') {
@@ -2543,11 +2185,7 @@ function validateStructuredContent(content: StructuredContent, source?: ContentS
       //   재시도 체인이 모두 실패하면 사용자가 다시 글생성 버튼 누르도록.
       const fallbackTitle = content.selectedTitle || '콘텐츠';
       console.error(`[validateStructuredContent] ❌ 필수 필드 모두 누락 (제목: "${fallbackTitle}") — 본문 생성 실패`);
-      throw new Error(
-        `AI 응답에서 본문(bodyPlain/bodyHtml/headings)이 모두 누락되었습니다.\n\n` +
-        `원인: AI가 빈 응답 또는 안전 필터 차단(SAFETY/RECITATION).\n` +
-        `해결: 다른 키워드로 시도하거나 다른 AI 엔진으로 변경 후 재시도해주세요.`
-      );
+      throw new Error(buildMissingBodyUserMessage());
     }
   }
 
@@ -3975,13 +3613,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           }
           // ✅ [v1.4.64] 모든 회복 수단 소진 → 명확한 에러 (다른 모델로 전환 안 함)
           console.error(`[Gemini] ❌ ${modelName} 빈 응답 회복 불가`);
-          throw new Error(
-            `🚫 [${modelName}] 응답을 생성하지 못했습니다. (빈 응답 반복)\n\n` +
-            `📌 원인: Gemini가 이 주제에 대해 응답을 거부하거나, 안전 필터에 걸렸을 수 있습니다.\n\n` +
-            `💡 해결 방법:\n` +
-            `  1) 프롬프트나 주제를 약간 수정해서 다시 시도하세요.\n` +
-            `  2) 계속 실패하면 설정에서 다른 AI 엔진(Claude/OpenAI)으로 변경하세요.`
-          );
+          throw new Error(buildGeminiEmptyResponseUserMessage(modelName));
         }
 
         const errMsg = (error as Error).message || String(error);
@@ -6169,13 +5801,8 @@ export async function generateStructuredContent(
       const smartGrounding = true;
       console.log(`[ContentGenerator] 🧠 Grounding: ON (강제) | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
 
-      // ✅ [Traffic Hunter 통합] buildModeBasedPrompt 내에서 계산된 temperature 값을 가져와야 함.
-      // 하지만 buildModeBasedPrompt는 string만 반환하므로, 여기서 다시 온도 계산 (중복을 피하려면 리팩토링이 필요하지만 현재 흐름 유지)
-      // ✅ [v1.4.35] SEO 0.2 → 0.5 (로봇 회귀 방지). 4205 라인과 동일 값 유지.
-      let temperature = 0.5;
-      if (mode === 'seo') temperature = 0.5;  // 0.2 → 0.5
-      else if (mode === 'mate') temperature = 0.45;
-      else if (mode === 'homefeed') temperature = 0.7;
+      // ✅ [Phase 7.4-y] 모드별 호출 온도는 contentTemperaturePolicy 단일 소스에서 관리.
+      const temperature = resolvePromptTemperature(mode);
 
       console.log(`[ContentGenerator] AI 호출 모드: ${mode}, 온도: ${temperature}`);
 
@@ -6319,6 +5946,14 @@ export async function generateStructuredContent(
             ...c,
             text: typeof c?.text === 'string' ? c.text.replace(/[\r\n]+/g, ' ').trim() : c?.text,
           }));
+        }
+
+        const looseRecovery = recoverLooseStructuredContentFields(parsed);
+        if (looseRecovery.bodyRecovered || looseRecovery.headingsRecovered) {
+          console.warn(
+            `[ContentGenerator] 느슨한 AI 응답 구조 복구: ` +
+            `body=${looseRecovery.bodySource || 'none'}, headings=${looseRecovery.headingsSource || 'none'}`
+          );
         }
       } catch (parseError) {
         console.error(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: JSON 파싱 실패 - 재시도 필요:`, (parseError as Error).message);

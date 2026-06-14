@@ -61,6 +61,10 @@ import { getDailyLimit, getTodayCount, incrementTodayCount, setDailyLimit } from
 // ✅ [v2.10.301] 다중계정 봇감지 백오프 + 계정별 로그인 시차 — 10팀 검증에서 botBackoff dead code 발견
 import { isAccountBackedOff, getBotBackoff, computeLoginStaggerDelayMs } from './utils/botBackoff.js';
 import { generateStructuredContent, removeOrdinalHeadingLabelsFromBody } from './contentGenerator.js';
+import {
+  applyManualTitleOverrideInPlace,
+  normalizeManualTitleOverride,
+} from './contentManualTitlePolicy.js';
 import { withRetry, isRetryableError } from './errorRecovery.js';
 import { createDatalabClient, NaverDatalabClient } from './naverDatalab.js';
 import type { ContentSource, StructuredContent, ContentGeneratorProvider, ArticleType } from './contentGenerator.js';
@@ -8546,14 +8550,9 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
       toneStyle: normalized.toneStyle,
       context: normalized.context,
     });
-    const manualTitle = String(payload?.manualTitle || '').trim().slice(0, 120);
+    const manualTitle = normalizeManualTitleOverride(payload?.manualTitle);
     if (manualTitle) {
-      (content as any).title = manualTitle;
-      (content as any).selectedTitle = manualTitle;
-      (content as any).manualTitleLocked = true;
-      (content as any).manualTitleValue = manualTitle;
-      (content as any).titleAlternatives = [manualTitle];
-      (content as any).titleCandidates = [{ text: manualTitle, score: 100, reasoning: '사용자 지정 제목' }];
+      applyManualTitleOverrideInPlace(content as any, manualTitle);
     }
 
     const imageMap = mapInferencesToImageMap(

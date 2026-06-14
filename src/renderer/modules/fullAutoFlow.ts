@@ -2549,6 +2549,8 @@ async function generateAIImagesForHeadings(headings, formData) {
 const PUBLISH_AUTOMATION_TIMEOUT_MS = 1500000;
 const DETACHED_LOGIN_FRAME_RETRY_DELAY_MS = 10000;
 const MAX_DETACHED_LOGIN_FRAME_RETRIES = 1;
+const PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS = 10000;
+const MAX_PUBLISH_SESSION_RECOVERY_RETRIES = 1;
 function isDetachedLoginFrameError(message) {
     const normalized = String(message || '').toLowerCase();
     const hasDetachedFrameSignal = normalized.includes('execution context is not available in detached frame') ||
@@ -2604,6 +2606,84 @@ async function retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, err
     }
     const retryErrorMsg = retryResponse.error || retryResponse.data?.message || '로그인 프레임 복구 재시도 실패';
     appendLog(`❌ 로그인 프레임 복구 재시도 실패: ${retryErrorMsg}`);
+    throw new Error(retryErrorMsg);
+}
+function isRecoverablePublishAutomationError(errorMsg) {
+    const normalized = String(errorMsg || '').toLowerCase();
+    const userActionRequiredSignals = [
+        'captcha',
+        'security verification',
+        'authentication required',
+        'auth required',
+        '보안인증',
+        '보안 인증',
+        '인증이 필요',
+        '사용자가 작업을 취소',
+        'cancelled',
+        'canceled',
+        '이미 자동화가 실행 중',
+        'category_not_found',
+        'publish_condition',
+        'pre_publish_blocked',
+        'image upload',
+        'unsupported image',
+        'file too large',
+        '이미지 업로드',
+        '이미지 파일',
+    ];
+    if (userActionRequiredSignals.some((signal) => normalized.includes(signal.toLowerCase()))) {
+        return false;
+    }
+    const recoverableSignals = [
+        '브라우저 세션이 종료',
+        '세션이 종료',
+        'target closed',
+        'protocol error',
+        'session closed',
+        'connection closed',
+        'browser is closed',
+        'page is closed',
+        'execution context was destroyed',
+        'cannot find context',
+        'detached frame',
+        '제목 입력 필드를 찾을 수 없습니다',
+        'documenttitle',
+        '.se-section-documenttitle',
+        'postwriteform',
+        'smarteditor',
+        'naverwriteeditor',
+    ];
+    return recoverableSignals.some((signal) => normalized.includes(signal.toLowerCase()));
+}
+async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg) {
+    if (!isRecoverablePublishAutomationError(errorMsg)) {
+        return null;
+    }
+    const retryAttempts = Number(payload._publishSessionRecoveryRetryCount || 0);
+    if (retryAttempts >= MAX_PUBLISH_SESSION_RECOVERY_RETRIES) {
+        return null;
+    }
+    const nextAttempt = retryAttempts + 1;
+    appendLog(`🔄 브라우저/에디터 세션이 끊겨 발행을 복구합니다: ${String(errorMsg || '').substring(0, 100)}`);
+    appendLog(`🔄 브라우저 세션을 정리하고 ${PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS / 1000}초 후 같은 글/이미지로 1회 재시도합니다. (${nextAttempt}/${MAX_PUBLISH_SESSION_RECOVERY_RETRIES})`);
+    showUnifiedProgress(88, '브라우저 세션 복구 중...', '글과 이미지는 유지한 채 네이버 발행 브라우저만 다시 준비합니다.');
+    await resetBrowserForDetachedLoginFrameRetry();
+    await new Promise(resolve => setTimeout(resolve, PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS));
+    const retryPayload = {
+        ...payload,
+        _publishSessionRecoveryRetryCount: nextAttempt,
+    };
+    const retryResponse = await apiClient.call('runAutomation', [retryPayload], {
+        retryCount: 0,
+        retryDelay: 5000,
+        timeout: PUBLISH_AUTOMATION_TIMEOUT_MS,
+    });
+    if (retryResponse.success && retryResponse.data?.success) {
+        appendLog('✅ 브라우저 세션 복구 후 발행 재시도에 성공했습니다.');
+        return retryResponse.data;
+    }
+    const retryErrorMsg = retryResponse.error || retryResponse.data?.message || '브라우저 세션 복구 재시도 실패';
+    appendLog(`❌ 브라우저 세션 복구 재시도도 실패했습니다: ${String(retryErrorMsg).substring(0, 120)}`);
     throw new Error(retryErrorMsg);
 }
 async function executeBlogPublishing(structuredContent, generatedImages, formData) {
@@ -2989,6 +3069,10 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         if (detachedFrameRetryResult) {
             return detachedFrameRetryResult;
         }
+        const recoverablePublishRetryResult = await retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg);
+        if (recoverablePublishRetryResult) {
+            return recoverablePublishRetryResult;
+        }
         const isNetworkError = errorMsg.includes('ERR_CONNECTION_RESET') ||
             errorMsg.includes('ERR_CONNECTION_REFUSED') ||
             errorMsg.includes('ERR_CONNECTION_TIMED_OUT') ||
@@ -3028,6 +3112,10 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         const detachedFrameRetryResult = await retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg);
         if (detachedFrameRetryResult) {
             return detachedFrameRetryResult;
+        }
+        const recoverablePublishRetryResult = await retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg);
+        if (recoverablePublishRetryResult) {
+            return recoverablePublishRetryResult;
         }
         const isNetworkError2 = errorMsg.includes('ERR_CONNECTION_RESET') ||
             errorMsg.includes('ERR_CONNECTION_REFUSED') ||

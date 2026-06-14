@@ -36,7 +36,15 @@ export function classifyPublishFailure(input: unknown): PublishFailureClassifica
     return { code: 'USER_CANCELLED', retryable: false, userActionRequired: false };
   }
 
-  if (includesAny(message, ['target closed', 'detached frame', 'protocol error', 'session closed', 'browser is closed'])) {
+  if (includesAny(message, [
+    'target closed',
+    'detached frame',
+    'protocol error',
+    'session closed',
+    'browser is closed',
+    '브라우저 세션이 종료',
+    '세션이 종료',
+  ])) {
     return { code: 'BROWSER_CLOSED', retryable: true, userActionRequired: false };
   }
 
@@ -46,6 +54,14 @@ export function classifyPublishFailure(input: unknown): PublishFailureClassifica
 
   if (includesAny(message, ['캡차', '보안인증', '보안 인증', '로그인', '인증이 필요', 'captcha', 'login', 'security verification', 'authentication required', 'auth required'])) {
     return { code: 'LOGIN_CHALLENGE', retryable: false, userActionRequired: true };
+  }
+
+  if (includesAny(message, [
+    '제목 입력 필드를 찾을 수 없습니다',
+    'documenttitle',
+    '.se-section-documenttitle',
+  ])) {
+    return { code: 'EDITOR_NOT_READY', retryable: true, userActionRequired: false };
   }
 
   if (includesAny(message, ['에디터', '로딩', 'editor', 'mainframe', 'postwriteform', 'goblogwrite', 'smarteditor', 'naverwriteeditor'])) {

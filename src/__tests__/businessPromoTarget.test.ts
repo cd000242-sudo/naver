@@ -9,6 +9,10 @@ import path from 'path';
  * ③ 심층 리서치 URL — 업체 홈페이지/상품 페이지를 수집 파이프라인(rssUrl)에 주입
  */
 const read = (...seg: string[]): string => fs.readFileSync(path.join(process.cwd(), ...seg), 'utf-8');
+const readBusinessPromptSources = (): string => [
+  read('src', 'contentGenerator.ts'),
+  read('src', 'contentJsonPromptFormat.ts'),
+].join('\n');
 
 describe('업체홍보 홍보 대상 + 리서치 URL + 재오픈 (2026-06-12)', () => {
   it('모달 HTML에 홍보 대상 라디오와 리서치 URL 입력이 있다', () => {
@@ -32,7 +36,7 @@ describe('업체홍보 홍보 대상 + 리서치 URL + 재오픈 (2026-06-12)', 
   });
 
   it('프롬프트에 홍보 대상별 분기(업체 자체 vs 취급 상품)가 있다', () => {
-    const src = read('src', 'contentGenerator.ts');
+    const src = readBusinessPromptSources();
     expect(src).toContain('홍보 대상: 취급 상품 판매');
     expect(src).toContain('홍보 대상: 업체 자체 홍보');
     expect(src).toContain('promoTarget');
@@ -44,7 +48,7 @@ describe('업체홍보 홍보 대상 + 리서치 URL + 재오픈 (2026-06-12)', 
 // 지역 프레임 자체를 금지하고 사용 환경·라이선스 중심으로 전환.
 describe('디지털 상품 지역 프레임 금지', () => {
   it('전국구 분기에 디지털 상품 예외 지시가 있다', () => {
-    const src = fs.readFileSync(path.join(process.cwd(), 'src', 'contentGenerator.ts'), 'utf-8');
+    const src = readBusinessPromptSources();
     expect(src).toContain('디지털·온라인 상품');
     expect(src).toMatch(/디지털·온라인 상품[\s\S]{0,160}전국/);
   });

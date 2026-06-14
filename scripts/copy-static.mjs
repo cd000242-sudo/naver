@@ -120,6 +120,41 @@ try {
     console.warn('⚠️ performanceUtils.js not found');
   }
 
+  // ✅ runtime modules imported directly by renderer.ts.
+  // 누락 시 dist/public/renderer.js에서 require가 제거된 뒤 함수만 남아 ReferenceError가 발생한다.
+  const runtimeDir = path.join(projectRoot, 'dist', 'runtime');
+  const runtimeModules = [
+    'imageProviderMigration.js',
+  ];
+  let runtimeSource = '';
+  for (const runtimeFile of runtimeModules) {
+    const runtimePath = path.join(runtimeDir, runtimeFile);
+    try {
+      await access(runtimePath);
+      let content = await readFile(runtimePath, 'utf-8');
+      content = content
+        .replace(/Object\.defineProperty\(exports, "__esModule", \{ value: true \}\);\s*/g, '')
+        .replace(/^exports\.\w+\s*(=\s*exports\.\w+\s*)*=\s*void\s+0;\s*$/gm, '')
+        .replace(/exports\.(\w+)\s*=\s*void\s+0;\s*/g, '')
+        .replace(/exports\.(\w+)\s*=\s*\1;/g, '')
+        .replace(/^(\s*)exports\.(\w+)\s*=\s*(\{|\[|function|class|new\s)/gm, '$1const $2 = $3')
+        .replace(/^(\s*)exports\.(\w+)\s*=\s*([^;=]+);/gm, (match, indent, name, value) => {
+          if (value.trim() === name) return '';
+          if (value.includes('exports.')) return '';
+          return `${indent}const ${name} = ${value};`;
+        })
+        .replace(/exports\.default\s*=/g, '// exports.default =')
+        .replace(/module\.exports\s*=/g, '// module.exports =');
+      content = content.replace(/exports\.(\w+)/g, '$1');
+      content = content.replace(/const\s+\{[^}]+\}\s*=\s*require\([^)]+\);\s*/g, '');
+      content = content.replace(/const\s+\w+\s*=\s*require\([^)]+\);\s*/g, '');
+      runtimeSource += `\n// ===== runtime/${runtimeFile} inlined =====\n${content}\n`;
+      console.log(`📦 Inlined runtime/${runtimeFile}`);
+    } catch (e) {
+      console.warn(`⚠️ runtime/${runtimeFile} not found`);
+    }
+  }
+
   // ✅ [2026-01-25] utils 모듈들 복사 (모듈화 후 번들링 필수)
   // renderer.ts에서 import하는 모든 utils 모듈 포함 (100% 완전성)
   const utilsDir = path.join(projectRoot, 'dist', 'renderer', 'utils');
@@ -596,6 +631,10 @@ try {
   }
 
   // ✅ [2026-01-25] utils 모듈들을 가장 앞에 추가 (의존성 순서 주의)
+  if (runtimeSource) {
+    sanitized = `// ===== RUNTIME MODULES INLINED =====\n${runtimeSource}\n// ===== END RUNTIME MODULES =====\n\n${sanitized}`;
+  }
+
   if (utilsSource) {
     sanitized = `// ===== UTILS MODULES INLINED =====\n${utilsSource}\n// ===== END UTILS MODULES =====\n\n${sanitized}`;
   }

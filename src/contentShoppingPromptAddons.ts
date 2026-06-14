@@ -1,0 +1,12 @@
+export function buildShoppingOfficialSafetyGuard(): string {
+  return `[쇼핑커넥트 공식 안전 가드 - 반드시 내부 준수]
+- 글 첫 부분에서 제휴/수수료 가능성을 독자가 즉시 알아볼 수 있게 명확히 전제한다. 단, 같은 문구를 반복하지 않는다.
+- 숨겨진 키워드, 숨겨진 링크, 링크 목적을 흐리는 문장, 과장된 최상급 표현을 쓰지 않는다.
+- 상품명/가격/스펙/품절/브랜드 정보는 입력된 productInfo와 원문 데이터에 있는 범위만 사용한다.
+- 직접 구매/체험 리뷰 데이터가 없으면 "직접 써봤다", "며칠 사용했다" 같은 경험 서술을 만들지 않는다.
+- CTA는 글 하단에 1회만 자연스럽게 배치하고, 링크 클릭을 강요하지 않는다.`;
+}
+
+export function appendShoppingOfficialSafetyGuard(systemPrompt: string): string {
+  return `${systemPrompt}\n\n${buildShoppingOfficialSafetyGuard()}`;
+}

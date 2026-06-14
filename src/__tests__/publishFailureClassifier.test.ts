@@ -10,6 +10,20 @@ describe('classifyPublishFailure', () => {
     });
   });
 
+  it('classifies localized browser-session and editor-ready failures as retryable', () => {
+    expect(classifyPublishFailure('블로그 발행 실패 - 브라우저 세션이 종료되었습니다. 다시 시작해주세요.')).toMatchObject({
+      code: 'BROWSER_CLOSED',
+      retryable: true,
+      userActionRequired: false,
+    });
+
+    expect(classifyPublishFailure('콘텐츠 적용 실패: 제목 입력 필드를 찾을 수 없습니다. selector=.se-section-documentTitle')).toMatchObject({
+      code: 'EDITOR_NOT_READY',
+      retryable: true,
+      userActionRequired: false,
+    });
+  });
+
   it('keeps detached Naver login frames retryable instead of requiring user login action', () => {
     expect(classifyPublishFailure('Execution context is not available in detached frame or worker https://nid.naver.com/nidlogin.login')).toEqual({
       code: 'BROWSER_CLOSED',

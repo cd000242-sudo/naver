@@ -10,6 +10,11 @@ import * as path from 'path';
 
 const ROOT = path.resolve(__dirname, '..');
 const read = (rel: string) => fs.readFileSync(path.join(ROOT, rel), 'utf-8');
+const readGenerationPromptSources = () => [
+  read('contentGenerator.ts'),
+  read('contentJsonPromptFormat.ts'),
+  read('contentCustomModePrompt.ts'),
+].join('\n');
 
 describe('콘텐츠 모드 프롬프트 계약', () => {
   it('homefeed는 후킹/사람다움/근거성 계약을 동시에 가진다', () => {
@@ -58,7 +63,7 @@ describe('콘텐츠 모드 프롬프트 계약', () => {
   });
 
   it('사용자정의 모드도 자료 외 사실·거짓 경험·모바일 호흡 가드레일을 가진다', () => {
-    const src = read('contentGenerator.ts');
+    const src = readGenerationPromptSources();
     expect(src).toContain('사용자정의 모드');
     expect(src).toContain('사용자정의 모드 제어 규칙');
     expect(src).toContain('사용자 요청에서 목적, 대상 독자, 필수 형식, 금지 표현');
@@ -71,7 +76,7 @@ describe('콘텐츠 모드 프롬프트 계약', () => {
 // 2026-06-12 라이브 실측: 기준/증빙/지급기준 4연속 발행에서 표 0개 — "가능하면"
 // 재량 문구를 LLM이 인용구로 회피. 항목화 가능한 주제는 표를 필수로 강제한다.
 describe('표 생성 강제 계약 (2026-06-12)', () => {
-  const source = read('contentGenerator.ts');
+  const source = readGenerationPromptSources();
 
   it('항목화 가능한 주제(기준·금액·서류·절차·비교)는 표 1개 필수를 명시한다', () => {
     expect(source).toContain('기준·금액·서류·절차·비교처럼 항목화 가능한 주제면 2열 마크다운 표 1개를 반드시 작성');
@@ -88,7 +93,7 @@ describe('표 생성 강제 계약 (2026-06-12)', () => {
 // 최종 강제 조건의 "마크다운/설명 절대 금지"(위반 시 0점)가 표 작성 지시를
 // 압도. 금지 범위를 "JSON 밖"으로 한정하고 표 필수를 강제 조건으로 승격.
 describe('표 생성 프롬프트 자기모순 해소 (2026-06-12 라운드2)', () => {
-  const source = read('contentGenerator.ts');
+  const source = readGenerationPromptSources();
 
   it('마크다운 전면 금지 조항이 사라지고 JSON 밖 한정으로 바뀐다', () => {
     expect(source).not.toContain('마크다운/설명 절대 금지');
@@ -104,7 +109,7 @@ describe('표 생성 프롬프트 자기모순 해소 (2026-06-12 라운드2)', 
 // 복사해 표 밖에 단독 출력 — 예시임을 명시하고 단독 출력을 금지한다.
 describe('표 형식 예시 보일러플레이트 방지 (2026-06-12 라운드3)', () => {
   it('열 이름 예시 교체 지시와 표 밖 단독 헤더 금지를 명시한다', () => {
-    const source = read('contentGenerator.ts');
+    const source = readGenerationPromptSources();
     expect(source).toContain("'항목/정리'는 형식 예시");
     expect(source).toContain('표 밖에');
   });
