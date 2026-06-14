@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-const LEWORD_PRO_WEB_URL = 'https://141.164.59.17.sslip.io/leword';
+const LEWORD_PRO_WEB_URL = '/leword-pro-web.html';
 
 function LewordPage() {
     const [iframeKey, setIframeKey] = useState(() => Date.now());

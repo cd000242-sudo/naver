@@ -1,0 +1,2695 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEWORD Pro Web</title>
+  <meta name="description" content="LEWORD Pro Web - 서버 기반 실시간 키워드 분석" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07090d;
+      --panel: #10161f;
+      --panel2: #151d29;
+      --panel3: #0c1118;
+      --line: #273347;
+      --line-soft: rgba(151, 164, 184, .16);
+      --text: #f8fbff;
+      --muted: #a4b1c4;
+      --muted2: #708097;
+      --gold: #f5c542;
+      --green: #35d399;
+      --blue: #5bb7ff;
+      --red: #ff4d6d;
+      --orange: #ff9f43;
+      --shadow: 0 22px 54px rgba(0,0,0,.34);
+      --shadow-soft: 0 10px 28px rgba(0,0,0,.24);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(180deg, #07090d 0%, #0b1119 42%, #080a0f 100%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 72px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 72px);
+      color: var(--text);
+      letter-spacing: 0;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(90deg, rgba(245,197,66,.05), transparent 32%, rgba(53,211,153,.04) 68%, rgba(91,183,255,.045));
+      opacity: .85;
+    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    .shell { position: relative; z-index: 1; max-width: 1480px; margin: 0 auto; padding: 16px 20px 30px; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 0 14px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(7,9,13,.86);
+      border-bottom: 1px solid rgba(151,164,184,.12);
+      backdrop-filter: blur(16px);
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 1000; font-size: 22px; }
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 10px 28px rgba(91,183,255,.18);
+      background: #0f172a;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--gold), #b7f65c);
+      color: #07111f;
+      box-shadow: 0 10px 28px rgba(245,197,66,.28);
+    }
+    .mobile-shell-toggle {
+      display: none;
+      min-height: 40px;
+      border: 1px solid rgba(245,197,66,.48);
+      border-radius: 8px;
+      background: rgba(245,197,66,.1);
+      color: var(--gold);
+      padding: 8px 10px;
+      font-weight: 1000;
+      font-size: 13px;
+    }
+    .nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a, .nav button, .btn {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #182233, #111823);
+      color: var(--text);
+      padding: 9px 12px;
+      font-weight: 900;
+      font-size: 13px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, color .16s ease;
+    }
+    .nav a:hover, .nav button:hover, .btn:hover, .tiny-btn:hover, .tool-tab:hover, .tool-group-tab:hover, .ops-tab:hover { transform: translateY(-1px); border-color: rgba(245,197,66,.44); }
+    .nav a.active { border-color: rgba(245,197,66,.64); color: var(--gold); background: rgba(245,197,66,.1); }
+    .nav a:focus-visible, .nav button:focus-visible, .btn:focus-visible, .tiny-btn:focus-visible, .input:focus-visible, .tool-tab:focus-visible, .tool-group-tab:focus-visible, .ops-tab:focus-visible {
+      outline: 2px solid rgba(91,183,255,.72);
+      outline-offset: 2px;
+    }
+    .btn.primary { border: 0; background: linear-gradient(135deg, var(--gold), #b7f65c); color: #07111f; box-shadow: 0 10px 24px rgba(245,197,66,.22); }
+    .btn.blue { border-color: rgba(91,183,255,.45); color: #d7f1ff; }
+    .btn.red { border-color: rgba(255,77,88,.45); color: #ffb4bb; }
+    .btn.download, .nav a.download { border-color: rgba(53,211,153,.42); color: #c4f7df; background: rgba(53,211,153,.08); }
+    .layout { display: grid; grid-template-columns: 282px minmax(0, 1fr); gap: 18px; align-items: start; }
+    .sidebar, .panel, .lane, .feature-card, .metric-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(21,29,41,.96), rgba(14,20,29,.98));
+      box-shadow: var(--shadow-soft);
+    }
+    .sidebar {
+      position: sticky;
+      top: 72px;
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      background: rgba(12,17,24,.88);
+    }
+    .side-link {
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 11px 12px;
+      color: #d9e6f7;
+      font-size: 13px;
+      font-weight: 900;
+      background: rgba(255,255,255,.035);
+      position: relative;
+    }
+    .side-link::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      bottom: 10px;
+      width: 3px;
+      border-radius: 999px;
+      background: transparent;
+    }
+    .side-link:hover, .side-link.active { border-color: rgba(91,183,255,.42); color: white; background: rgba(91,183,255,.07); }
+    .side-link.active { border-color: rgba(245,197,66,.66); color: var(--gold); background: rgba(245,197,66,.1); }
+    .side-link:hover::before, .side-link.active::before { background: var(--gold); }
+    .side-note {
+      margin-top: 8px;
+      padding: 12px;
+      border-radius: 8px;
+      background: rgba(53,211,153,.07);
+      border: 1px solid rgba(53,211,153,.24);
+      color: #c4f7df;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .main { display: grid; gap: 16px; min-width: 0; }
+    .main-view { display: none; }
+    .main-view.active { display: block; }
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(245,197,66,.12), rgba(53,211,153,.07) 50%, rgba(91,183,255,.08)),
+        linear-gradient(180deg, #151d29, #101720);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--green), var(--blue));
+    }
+    .hero h1 { margin: 0 0 8px; font-size: 34px; line-height: 1.18; letter-spacing: 0; word-break: keep-all; }
+    .hero p { margin: 0; max-width: 980px; color: #c8d5e7; line-height: 1.65; word-break: keep-all; }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 18px; }
+    .metric-card { padding: 14px; background: rgba(7,9,13,.5); }
+    .metric-card strong { display: block; font-size: 23px; color: var(--gold); }
+    .metric-card span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+    .panel { padding: 18px; min-width: 0; box-shadow: var(--shadow-soft); }
+    .panel-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .panel-title h2 { margin: 0; font-size: 21px; letter-spacing: 0; }
+    .muted { color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .source-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .lane { padding: 14px; min-height: 320px; background: linear-gradient(180deg, rgba(19,27,39,.98), rgba(12,17,24,.98)); }
+    .lane:hover, .feature-card:hover, .ops-card:hover, .catalog-item:hover, .golden-row:hover {
+      border-color: rgba(91,183,255,.36);
+      box-shadow: 0 16px 38px rgba(0,0,0,.28);
+    }
+    .lane h3 { margin: 0 0 10px; font-size: 17px; display: flex; justify-content: space-between; gap: 8px; }
+    .lane-count {
+      border-radius: 999px;
+      background: rgba(245,197,66,.12);
+      border: 1px solid rgba(245,197,66,.35);
+      color: var(--gold);
+      padding: 3px 8px;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .signal-list { display: grid; max-height: 560px; overflow: auto; padding-right: 2px; gap: 6px; }
+    .signal {
+      border: 1px solid rgba(159,177,200,.14);
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(7,9,13,.42);
+      cursor: pointer;
+      transition: border-color .16s ease, background .16s ease, transform .16s ease;
+    }
+    .signal:hover { border-color: rgba(91,183,255,.42); background: rgba(91,183,255,.07); transform: translateY(-1px); }
+    .signal:first-of-type { border-top: 1px solid rgba(159,177,200,.14); padding-top: 10px; }
+    .signal strong { display: block; font-size: 14px; overflow-wrap: anywhere; }
+    .signal span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .signal-source-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .signal-source-row span { margin-top: 0; }
+    .signal-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .golden-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .board-stat {
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(7,9,13,.78), rgba(10,15,22,.92));
+      padding: 12px;
+    }
+    .board-stat strong { display: block; color: var(--gold); font-size: 20px; }
+    .board-stat span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; }
+    .board-progress { height: 8px; border-radius: 999px; background: #07090d; overflow: hidden; border: 1px solid var(--line-soft); }
+    .board-progress div { width: 0%; height: 100%; background: linear-gradient(90deg, var(--gold), var(--green)); }
+    .board-meta { display: flex; justify-content: space-between; gap: 12px; margin: 10px 0 14px; color: var(--muted); font-size: 12px; flex-wrap: wrap; }
+    .quality-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+    .quality-pill {
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: rgba(7,9,13,.62);
+      padding: 10px;
+      min-height: 58px;
+    }
+    .quality-pill strong { display: block; color: var(--text); font-size: 15px; }
+    .quality-pill span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.35; }
+    .quality-pill.good { border-color: rgba(52,211,153,.35); }
+    .quality-pill.good strong { color: var(--green); }
+    .quality-pill.warn { border-color: rgba(248,194,27,.4); }
+    .quality-pill.warn strong { color: var(--gold); }
+    .golden-list { display: grid; gap: 8px; }
+    .golden-row {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr) 64px minmax(240px, auto);
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, rgba(245,197,66,.08), transparent 26%),
+        linear-gradient(180deg, #101822, #0b1017);
+      padding: 12px;
+      transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+    }
+    .golden-row:hover {
+      transform: translateY(-1px);
+    }
+    .rank { color: var(--gold); font-weight: 1000; }
+    .golden-main strong { display: block; font-size: 15px; overflow-wrap: anywhere; }
+    .golden-main span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .golden-actions { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
+    .tiny-btn {
+      min-height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #182233, #111823);
+      color: var(--text);
+      padding: 7px 9px;
+      font-weight: 900;
+      font-size: 12px;
+    }
+    .tiny-btn.pro { border-color: rgba(245,197,66,.48); color: var(--gold); background: rgba(245,197,66,.09); }
+    .tiny-btn.green { border-color: rgba(53,211,153,.44); color: #bdf7dd; background: rgba(53,211,153,.08); }
+    .tiny-btn.blue { border-color: rgba(91,183,255,.44); color: #d7f1ff; background: rgba(91,183,255,.08); }
+    .volume-cell { min-width: 96px; display: grid; gap: 5px; }
+    .volume-cell strong { font-size: 12px; }
+    .volume-cell span { height: 6px; border-radius: 999px; background: rgba(159,177,200,.18); overflow: hidden; }
+    .volume-cell i { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--gold), var(--green), var(--blue)); }
+    .locked {
+      border: 1px dashed rgba(248,194,27,.45);
+      border-radius: 8px;
+      padding: 14px;
+      color: #ffe58a;
+      background: rgba(245,197,66,.08);
+      line-height: 1.55;
+    }
+    .lookup-row { display: grid; grid-template-columns: minmax(180px, 1fr) 160px 130px; gap: 8px; }
+    .input {
+      width: 100%;
+      min-height: 42px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #080c12;
+      color: var(--text);
+      padding: 10px 12px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+    }
+    .table-wrap { margin-top: 14px; overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: rgba(7,9,13,.62); }
+    table { width: 100%; border-collapse: collapse; min-width: 980px; }
+    th, td { padding: 10px 11px; border-bottom: 1px solid rgba(159,177,200,.18); text-align: left; font-size: 13px; }
+    th { color: #c8d5e7; background: #0b111a; position: sticky; top: 0; }
+    td { color: #edf4ff; }
+    .grade {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 38px;
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: linear-gradient(135deg, var(--red), #ff315c);
+      color: white;
+      font-weight: 1000;
+      font-size: 12px;
+    }
+    .grade.SS { background: linear-gradient(135deg, var(--orange), #ff7a2d); }
+    .grade.S { background: linear-gradient(135deg, var(--gold), #ffe66d); color: #07111f; }
+    .grade.A { background: linear-gradient(135deg, var(--green), #9df5c7); color: #052016; }
+    .feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .feature-card {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 190px;
+      background: linear-gradient(180deg, rgba(19,27,39,.98), rgba(11,16,23,.98));
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), rgba(53,211,153,.7), rgba(91,183,255,.7));
+      opacity: .8;
+    }
+    .feature-card h3 { margin: 0; font-size: 16px; line-height: 1.35; }
+    .feature-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; flex: 1; }
+    .tool-console {
+      border: 1px solid rgba(91,183,255,.28);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(8,12,18,.9), rgba(13,19,28,.96));
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    }
+    .quick-feature-dock {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .quick-tool {
+      min-height: 76px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(18,26,38,.96), rgba(10,15,22,.98));
+      color: var(--text);
+      padding: 10px;
+      text-align: left;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .quick-tool:hover { border-color: rgba(245,197,66,.58); transform: translateY(-1px); }
+    .quick-tool.hot { border-color: rgba(245,197,66,.48); background: linear-gradient(135deg, rgba(245,197,66,.18), rgba(53,211,153,.08)); }
+    .quick-tool strong { display: block; font-size: 13px; line-height: 1.3; overflow-wrap: anywhere; }
+    .quick-tool span { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.35; overflow-wrap: anywhere; }
+    .tool-group-tabs, .tool-tabs, .ops-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .tool-tab, .tool-group-tab, .ops-tab {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111926;
+      color: #d9e6f7;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .tool-tab.active, .tool-group-tab.active, .ops-tab.active { border-color: rgba(245,197,66,.7); color: #07111f; background: linear-gradient(135deg, var(--gold), #b7f65c); }
+    .tool-form { display: grid; grid-template-columns: 1.2fr .9fr .7fr .8fr; gap: 8px; align-items: center; }
+    .tool-checks { display: flex; gap: 10px; flex-wrap: wrap; grid-column: 1 / -1; color: #d9e6f7; font-size: 12px; }
+    .tool-checks label { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+    .tool-note { margin-top: 10px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .tool-detail {
+      margin-top: 12px;
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: rgba(7,9,13,.54);
+      padding: 12px;
+    }
+    .tool-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .tool-detail-card {
+      border: 1px solid rgba(159,177,200,.16);
+      border-radius: 8px;
+      background: rgba(18,26,38,.74);
+      padding: 10px;
+      min-height: 74px;
+    }
+    .tool-detail-card strong { display: block; color: var(--gold); font-size: 12px; margin-bottom: 5px; }
+    .tool-detail-card span { color: #c8d5e7; font-size: 12px; line-height: 1.45; overflow-wrap: anywhere; }
+    .tool-result-panel {
+      margin-top: 12px;
+      border: 1px solid rgba(53,211,153,.22);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(8,18,16,.75), rgba(8,12,18,.92));
+      padding: 12px;
+    }
+    .tool-result-panel h3 { margin: 0 0 6px; font-size: 15px; }
+    .tool-result-panel p { margin: 0 0 10px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .mini-json {
+      margin: 8px 0 0;
+      max-height: 260px;
+      overflow: auto;
+      white-space: pre-wrap;
+      color: #c8d5e7;
+      font-size: 11px;
+    }
+    .catalog-strip {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+    .catalog-pill {
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: rgba(7,9,13,.64);
+      padding: 10px;
+      min-height: 58px;
+    }
+    .catalog-pill strong { display: block; color: var(--gold); font-size: 17px; }
+    .catalog-pill span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.35; }
+    .catalog-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .catalog-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin: 12px 0;
+    }
+    .catalog-tab {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.035);
+      color: var(--muted);
+      padding: 8px 10px;
+      font-weight: 900;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .catalog-tab.active {
+      border-color: rgba(245,197,66,.64);
+      color: var(--gold);
+      background: rgba(245,197,66,.1);
+    }
+    .catalog-item {
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: rgba(11,16,23,.86);
+      padding: 10px;
+      min-width: 0;
+      display: grid;
+      gap: 7px;
+    }
+    .catalog-item strong { display: block; font-size: 13px; overflow-wrap: anywhere; }
+    .catalog-item span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; line-height: 1.4; overflow-wrap: anywhere; }
+    .catalog-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+    .catalog-empty {
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      padding: 16px;
+      background: rgba(7,9,13,.48);
+    }
+    .ops-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .ops-grid.ops-panels { grid-template-columns: 1fr; }
+    .ops-panel { display: none; }
+    .ops-panel.active { display: block; }
+    .ops-card {
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(16,24,34,.96), rgba(10,14,20,.98));
+      padding: 14px;
+      min-height: 178px;
+    }
+    .ops-card h3 { margin: 0 0 10px; font-size: 15px; line-height: 1.35; }
+    .ops-number { display: block; color: var(--gold); font-size: 24px; font-weight: 1000; }
+    .ops-meta { display: block; margin: 4px 0 10px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .ops-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+    .ops-list li {
+      border-top: 1px solid rgba(159,177,200,.14);
+      padding-top: 6px;
+      color: #d9e6f7;
+      font-size: 12px;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+    .status-pill {
+      display: inline-flex;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 900;
+      border: 1px solid rgba(53,211,153,.35);
+      color: #98f7c7;
+      background: rgba(53,211,153,.08);
+    }
+    .status-pill.linked { border-color: rgba(91,183,255,.4); color: #bfe9ff; background: rgba(91,183,255,.08); }
+    .status-pill.planned { border-color: rgba(245,197,66,.45); color: var(--gold); background: rgba(245,197,66,.08); }
+    .download-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .download-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(16,24,34,.98), rgba(10,14,20,.98));
+      padding: 16px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .download-card h3 { margin: 0; font-size: 18px; }
+    .download-card p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 13px; flex: 1; }
+    .download-card .btn { width: fit-content; min-width: 180px; text-align: center; }
+    .download-meta { color: #c8d5e7; font-size: 12px; min-height: 18px; }
+    .workbench { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); gap: 12px; }
+    .log {
+      min-height: 180px;
+      max-height: 360px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #07090d;
+      padding: 12px;
+      color: #c8d5e7;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+    .result-stack { display: grid; gap: 10px; min-width: 0; }
+    .result-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(7,9,13,.86);
+      padding: 12px;
+      min-height: 180px;
+    }
+    .result-panel h3 { margin: 0 0 6px; font-size: 16px; }
+    .result-panel p { margin: 0 0 10px; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .result-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+    .result-kpi {
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: #101822;
+      padding: 10px;
+    }
+    .result-kpi strong { display: block; color: var(--gold); font-size: 18px; }
+    .result-kpi span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .result-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .result-list li {
+      border-top: 1px solid rgba(159,177,200,.16);
+      padding-top: 8px;
+      display: grid;
+      gap: 5px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .result-list strong { font-size: 13px; overflow-wrap: anywhere; }
+    .result-list span { color: var(--muted); overflow-wrap: anywhere; }
+    .result-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .trend-card { display: grid; gap: 10px; }
+    .trend-bars {
+      height: 118px;
+      display: grid;
+      grid-template-columns: repeat(30, minmax(4px, 1fr));
+      align-items: end;
+      gap: 3px;
+      padding: 10px;
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: rgba(7,9,13,.52);
+    }
+    .trend-bar {
+      min-height: 8px;
+      border-radius: 6px 6px 0 0;
+      background: linear-gradient(180deg, var(--gold), var(--green));
+      box-shadow: 0 0 14px rgba(53,211,153,.16);
+    }
+    .trend-meta { display: flex; gap: 8px; flex-wrap: wrap; color: var(--muted); font-size: 12px; }
+    .result-toolbar {
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) repeat(4, auto);
+      gap: 8px;
+      align-items: center;
+      margin: 10px 0;
+    }
+    .result-toolbar .input { min-height: 34px; padding: 7px 9px; font-size: 12px; }
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(2,6,23,.78);
+    }
+    .modal.open { display: flex; }
+    .dialog {
+      width: min(430px, 100%);
+      border: 1px solid rgba(91,183,255,.36);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #121a26, #0d121b);
+      box-shadow: 0 24px 80px rgba(0,0,0,.46);
+      padding: 20px;
+    }
+    .dialog h2 { margin: 0 0 8px; font-size: 22px; }
+    .dialog p { margin: 0 0 14px; color: var(--muted); line-height: 1.55; }
+    .dialog label { display: block; margin: 10px 0 6px; font-size: 13px; color: #d9e6f7; font-weight: 900; }
+    .dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+    .login-license {
+      margin-top: 12px;
+      border: 1px solid rgba(91,183,255,.24);
+      border-radius: 8px;
+      background: rgba(5,10,18,.34);
+      padding: 10px 12px;
+    }
+    .login-license summary {
+      cursor: pointer;
+      color: var(--gold);
+      font-weight: 900;
+      font-size: 13px;
+    }
+    .login-license p { margin: 8px 0 10px; font-size: 12px; }
+    @media (max-width: 1160px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; grid-template-columns: repeat(4, 1fr); }
+      .side-note { grid-column: 1 / -1; }
+      .feature-grid, .ops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 820px) {
+      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid { grid-template-columns: 1fr; }
+      .quick-feature-dock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .quality-strip { grid-template-columns: 1fr 1fr; }
+      .result-toolbar { grid-template-columns: 1fr; }
+      .result-kpis { grid-template-columns: 1fr 1fr; }
+      .golden-row { grid-template-columns: 48px minmax(0, 1fr); }
+      .golden-row .grade { justify-self: start; }
+      .golden-actions { grid-column: 1 / -1; justify-content: flex-start; }
+      .sidebar { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 28px; }
+    }
+    @media (max-width: 560px) {
+      .shell { padding: 12px; }
+      .topbar { align-items: center; flex-direction: row; padding: 8px 0 10px; }
+      .brand { min-width: 0; font-size: 20px; gap: 10px; }
+      .brand-mark { flex: 0 0 40px; }
+      .brand span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .mobile-shell-toggle { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+      .nav { display: flex; flex-direction: column; }
+      .nav, .feature-grid, .sidebar { grid-template-columns: 1fr; width: 100%; }
+      .quick-feature-dock { grid-template-columns: 1fr; }
+      .quality-strip { grid-template-columns: 1fr; }
+      .nav a, .nav button, .btn { width: 100%; }
+      .hero h1 { font-size: 24px; }
+      .shell.mobile-pro-collapsed .nav,
+      .shell.mobile-pro-collapsed .sidebar,
+      .shell.mobile-pro-collapsed .hero { display: none; }
+      .shell.mobile-pro-collapsed .layout { display: block; }
+      .shell.mobile-pro-collapsed .main { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell mobile-pro-collapsed" id="proShell">
+    <header class="topbar">
+      <a class="brand" href="/leword"><span class="brand-mark" aria-hidden="true">L</span><span>LEWORD Pro Web</span></a>
+      <button class="mobile-shell-toggle" type="button" id="mobileProShellToggle" aria-expanded="false" aria-controls="proTopNav proSidebar">Pro 메뉴 열기</button>
+      <nav class="nav" id="proTopNav" aria-label="주요 메뉴">
+        <a href="#golden" data-view-target="golden">황금키워드 보드</a>
+        <a href="#sources" data-view-target="sources">실시간 소스</a>
+        <a href="#lookup" data-view-target="lookup">키워드 조회</a>
+        <a href="#features" data-view-target="features">Pro 기능</a>
+        <a href="#ops" data-view-target="ops">운영 현황</a>
+        <a class="download" href="/download/pc">PC 앱 다운로드</a>
+        <a class="download" href="/download/android">모바일 APK</a>
+        <button type="button" id="loginOpen">Pro 로그인</button>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" id="proSidebar" aria-label="Pro 기능 탭">
+        <a class="side-link" href="#golden" data-view-target="golden">LIVE 황금키워드 보드</a>
+        <a class="side-link" href="#sources" data-view-target="sources">네이버/다음/네이트/줌/정책/이슈</a>
+        <a class="side-link" href="#lookup" data-view-target="lookup">PC/모바일 실측 조회</a>
+        <a class="side-link" href="#features" data-view-target="features">전체 Pro 기능</a>
+        <a class="side-link" href="#ops" data-view-target="ops">노출/성과/발행/스케줄</a>
+        <a class="side-link" href="#downloads" data-view-target="downloads">앱 다운로드</a>
+        <a class="side-link" href="#workbench" data-view-target="workbench">실행 로그</a>
+      </aside>
+
+      <section class="main">
+        <section class="hero main-view active" data-view="golden">
+          <h1>LEWORD Pro Web: 서버 기반 키워드 분석</h1>
+          <p>Electron 앱의 핵심 기능을 웹에서 바로 실행하도록 재배치했습니다. 실시간 소스 수집, PC/모바일 검색량 측정, 문서수 확인, 장기 분석 job, Pro 권한 체크는 서버가 담당합니다.</p>
+          <div class="metrics">
+            <div class="metric-card"><strong id="metricSession">로그인 필요</strong><span>Pro 세션</span></div>
+            <div class="metric-card"><strong id="metricBoard">0/60</strong><span>황금키워드 보드</span></div>
+            <div class="metric-card"><strong id="metricMeasured">0</strong><span>실측 키워드</span></div>
+            <div class="metric-card"><strong id="metricServer">확인 중</strong><span>서버 상태</span></div>
+          </div>
+        </section>
+
+        <section class="panel main-view active" id="golden" data-view="golden">
+          <div class="panel-title">
+            <div>
+              <h2>LIVE 황금키워드 보드</h2>
+              <div class="muted">서버가 계속 수집하고 실측한 황금키워드 후보입니다. 로그인 전에는 공개 5개, Pro 로그인 후에는 전체 보드와 정확 지표를 표시합니다.</div>
+            </div>
+            <button class="btn blue" type="button" id="refreshGolden">보드 새로고침</button>
+          </div>
+          <div class="golden-stats">
+            <div class="board-stat"><strong id="goldenBoardCount">0/60</strong><span>검증 보드</span></div>
+            <div class="board-stat"><strong id="goldenPublicCount">0</strong><span>현재 표시</span></div>
+            <div class="board-stat"><strong id="goldenLockedCount">0</strong><span>Pro 잠금</span></div>
+            <div class="board-stat"><strong id="goldenState">확인 중</strong><span>보드 상태</span></div>
+          </div>
+          <div class="board-progress"><div id="goldenProgress"></div></div>
+          <div class="board-meta">
+            <span id="goldenPolicy">공개 정책 확인 중</span>
+            <span id="goldenUpdated">업데이트 대기</span>
+          </div>
+          <div class="quality-strip" id="goldenQualityStrip"></div>
+          <div id="goldenNotice" class="locked">황금키워드 보드를 불러오는 중입니다.</div>
+          <div class="golden-list" id="goldenBoardList" style="margin-top:10px;"></div>
+        </section>
+
+        <section class="panel main-view" id="sources" data-view="sources">
+          <div class="panel-title">
+            <div>
+              <h2>실시간 소스 보드</h2>
+              <div class="muted">네이버 / 다음 / 네이트 / 줌 / 정책 / 이슈 순서로 서버 수집 결과를 보여줍니다.</div>
+            </div>
+            <button class="btn blue" type="button" id="refreshSources">새로고침</button>
+          </div>
+          <div class="source-grid">
+            <div class="lane" id="lane-naver"><h3>네이버 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
+            <div class="lane" id="lane-daum"><h3>다음 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
+            <div class="lane" id="lane-nate"><h3>네이트 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
+            <div class="lane" id="lane-zum"><h3>줌 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
+            <div class="lane" id="lane-policy"><h3>정책 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
+            <div class="lane" id="lane-issue"><h3>이슈 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
+          </div>
+        </section>
+
+        <section class="panel main-view" id="lookup" data-view="lookup">
+          <div class="panel-title">
+            <div>
+              <h2>키워드 실측 조회</h2>
+              <div class="muted">PC/모바일 검색량을 분리해 표로 보여줍니다. 서버의 SearchAd/OpenAPI 설정이 없으면 측정 불가 상태를 그대로 표시합니다.</div>
+            </div>
+          </div>
+          <form class="lookup-row" id="lookupForm">
+            <input class="input" id="keywordInput" placeholder="예: 소상공인 지원금 신청" autocomplete="off" />
+            <select class="input" id="lookupMode">
+              <option value="keyword-analysis">정밀 키워드 분석</option>
+              <option value="mindmap-expansion">마인드맵 확장</option>
+              <option value="golden-discovery">황금키워드 발굴</option>
+            </select>
+            <button class="btn primary" type="submit">서버 조회</button>
+          </form>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>키워드</th>
+                  <th>PC</th>
+                  <th>모바일</th>
+                  <th>전체</th>
+                  <th>문서수</th>
+                  <th>경쟁비</th>
+                  <th>CPC</th>
+                  <th>의도</th>
+                  <th>등급</th>
+                  <th>소스</th>
+                  <th>측정</th>
+                  <th>바로가기</th>
+                </tr>
+              </thead>
+              <tbody id="keywordRows">
+                <tr><td colspan="12" class="muted">키워드를 입력하고 서버 조회를 실행하세요.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel main-view" id="features" data-view="features">
+          <div class="panel-title">
+            <div>
+              <h2>Pro 전체 기능</h2>
+              <div class="muted">PC 앱에서 쓰던 핵심 기능을 웹에서도 기능별 화면으로 나눠 실행합니다. 각 서브탭은 선택한 기능의 입력값, 실행 상태, 결과만 보여줍니다.</div>
+            </div>
+            <button class="btn blue" type="button" id="refreshFeatureStatus">서버 상태 확인</button>
+          </div>
+          <div class="tool-console" id="toolConsole">
+            <div class="quick-feature-dock" id="quickFeatureDock" aria-label="PC 앱 핵심 기능 바로가기">
+              <button class="quick-tool hot" type="button" data-tool-shortcut="pro-traffic"><strong>PRO 트래픽 폭발</strong><span>실시간 이슈와 롱테일을 황금 후보로 발굴</span></button>
+              <button class="quick-tool" type="button" data-tool-shortcut="shopping"><strong>쇼핑 커넥트</strong><span>상품 니즈를 블로그 진입 키워드로 전환</span></button>
+              <button class="quick-tool" type="button" data-tool-shortcut="mindmap"><strong>마인드맵 확장</strong><span>연관어와 롱테일 가지를 바로 펼침</span></button>
+              <button class="quick-tool" type="button" data-tool-shortcut="keyword-analysis"><strong>검색량 정밀조회</strong><span>PC/모바일/문서수를 한 번에 측정</span></button>
+              <button class="quick-tool" type="button" data-tool-shortcut="golden-discovery"><strong>황금키워드 발굴</strong><span>검색량 대비 문서수 낮은 선점 후보</span></button>
+              <button class="quick-tool" type="button" data-view-shortcut="sources"><strong>실시간 소스 보드</strong><span>네이버/다음/네이트/줌/정책/이슈</span></button>
+            </div>
+            <div class="tool-group-tabs" id="toolGroupTabs" aria-label="Pro 기능 그룹"></div>
+            <div class="tool-tabs" id="toolTabs" aria-label="Pro 도구 선택"></div>
+            <div class="tool-form">
+              <input class="input" id="toolSeedInput" placeholder="시드 키워드 또는 상품/질문 키워드" autocomplete="off" />
+              <select class="input" id="toolCategory">
+                <option value="all">전체 카테고리</option>
+                <option value="policy">정책/지원금</option>
+                <option value="broadcast">방송/이슈</option>
+                <option value="shopping">쇼핑</option>
+                <option value="sports">스포츠</option>
+                <option value="education">교육</option>
+                <option value="life">생활</option>
+              </select>
+              <input class="input" id="toolTargetCount" type="number" min="5" max="80" step="5" value="30" />
+              <select class="input" id="toolSort">
+                <option value="sim">관련도/정밀</option>
+                <option value="date">최신순</option>
+                <option value="trending">트렌딩</option>
+                <option value="rising">급상승</option>
+                <option value="full">전체 헌팅</option>
+              </select>
+              <div class="tool-checks">
+                <label><input type="checkbox" id="toolFreshIssue" checked /> 실시간 이슈</label>
+                <label><input type="checkbox" id="toolSeasonal" checked /> 시즌성</label>
+                <label><input type="checkbox" id="toolEvergreen" checked /> evergreen</label>
+                <label><input type="checkbox" id="toolVolumeMetrics" checked /> PC/모바일 실측</label>
+                <label><input type="checkbox" id="toolCrossRef" checked /> 교차검증</label>
+              </div>
+              <button class="btn primary" type="button" id="runSelectedTool">선택 도구 실행</button>
+              <button class="btn blue" type="button" id="copyLookupKeyword">조회 키워드 가져오기</button>
+            </div>
+            <div class="tool-note" id="toolProfileNote">Pro 트래픽 폭발 키워드 헌터 설정을 조정한 뒤 실행하세요.</div>
+            <div class="tool-detail" id="toolDetail"></div>
+            <div class="tool-result-panel" id="toolResultPanel">
+              <h3>도구 실행 대기</h3>
+              <p>왼쪽 서브탭에서 Pro 기능을 선택한 뒤 실행하면 이 영역에 진행 상태와 핵심 후보가 바로 표시됩니다.</p>
+            </div>
+          </div>
+          <div class="catalog-strip" id="featureCatalogStrip" aria-label="기능 적용 현황" style="margin-top:14px;"></div>
+          <div id="featureCatalogTabs" hidden></div>
+          <div id="featureCatalogList" hidden></div>
+        </section>
+
+        <section class="panel main-view" id="ops" data-view="ops">
+          <div class="panel-title">
+            <div>
+              <h2>Pro 운영 대시보드</h2>
+              <div class="muted">내노출 추적, Pro 성과 기록, 워드프레스 발행, 예약 스케줄을 서버 스냅샷으로 모아 보여줍니다.</div>
+            </div>
+            <button class="btn blue" type="button" id="refreshOps">운영 현황 새로고침</button>
+          </div>
+          <div class="ops-tabs" id="opsTabs" aria-label="운영 기능 선택">
+            <button class="ops-tab active" type="button" data-ops-tab="rank">내노출 추적</button>
+            <button class="ops-tab" type="button" data-ops-tab="outcomes">성과 기록</button>
+            <button class="ops-tab" type="button" data-ops-tab="wordpress">워드프레스/발행</button>
+            <button class="ops-tab" type="button" data-ops-tab="schedule">스케줄/알림</button>
+          </div>
+          <div class="ops-grid ops-panels">
+            <article class="ops-card ops-panel active" data-ops-panel="rank" id="ops-rank"><h3>내노출 추적</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
+            <article class="ops-card ops-panel" data-ops-panel="outcomes" id="ops-outcomes"><h3>성과 기록</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
+            <article class="ops-card ops-panel" data-ops-panel="wordpress" id="ops-wordpress"><h3>워드프레스/발행</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
+            <article class="ops-card ops-panel" data-ops-panel="schedule" id="ops-schedule"><h3>스케줄/알림</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
+          </div>
+        </section>
+
+        <section class="panel main-view" id="downloads" data-view="downloads">
+          <div class="panel-title">
+            <div>
+              <h2>LEWORD 앱 다운로드</h2>
+              <div class="muted">PC Electron 앱과 Android APK를 바로 내려받습니다. 모바일 앱은 LEWORD 로고와 production API 주소를 반영한 최신 APK로 제공합니다.</div>
+            </div>
+          </div>
+          <div class="download-grid">
+            <article class="download-card">
+              <h3>PC Electron 앱</h3>
+              <p>Windows용 LEWORD 데스크톱 앱입니다. 기존 Electron 앱의 전체 기능을 PC 환경에서 그대로 사용합니다.</p>
+              <div class="download-meta" id="pcDownloadMeta">다운로드 파일 확인 중</div>
+              <a class="btn primary" href="/download/pc">PC 앱 다운로드</a>
+            </article>
+            <article class="download-card">
+              <h3>Android 모바일 앱</h3>
+              <p>서버 기반 Pro 기능, 실시간 소스, 키워드 저장/공유, 알림 기능을 사용하는 Android APK입니다.</p>
+              <div class="download-meta" id="androidDownloadMeta">다운로드 파일 확인 중</div>
+              <a class="btn primary" href="/download/android">모바일 APK 다운로드</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel main-view" id="workbench" data-view="workbench">
+          <div class="panel-title">
+            <div>
+              <h2>서버 실행 로그</h2>
+              <div class="muted">job 접수, 진행률, 결과, 서버 상태를 여기에 누적합니다.</div>
+            </div>
+            <button class="btn red" type="button" id="clearLog">로그 지우기</button>
+          </div>
+          <div class="workbench">
+            <div class="log" id="runLog">LEWORD Pro Web 대기 중</div>
+            <div class="result-stack">
+              <div class="result-panel" id="resultSummary">
+                <h3>결과 센터</h3>
+                <p>키워드 조회나 Pro 기능을 실행하면 KPI, 상위 후보, 바로가기 액션을 이곳에 정리합니다.</p>
+              </div>
+              <div class="log" id="resultLog">원문 결과 대기 중</div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal" id="loginModal" aria-hidden="true">
+    <form class="dialog" id="loginForm">
+      <h2>LEWORD Pro 로그인</h2>
+      <p>기존 사용자 아이디와 비밀번호만 입력하면 서버 세션을 발급합니다.</p>
+      <label for="userId">아이디</label>
+      <input class="input" id="userId" autocomplete="username" required />
+      <label for="password">비밀번호</label>
+      <input class="input" id="password" type="password" autocomplete="current-password" required />
+      <details class="login-license">
+        <summary>라이선스 키로 인증하기</summary>
+        <p class="muted">구매 또는 등록 키가 있는 경우에만 입력하세요. 평소에는 아이디와 비밀번호만으로 로그인됩니다.</p>
+        <label for="licenseCode">라이선스 키</label>
+        <input class="input" id="licenseCode" autocomplete="off" placeholder="LEWORD-XXXX-XXXX" />
+      </details>
+      <div class="dialog-actions">
+        <button class="btn primary" type="submit">로그인</button>
+        <button class="btn" type="button" id="loginClose">닫기</button>
+      </div>
+      <div class="muted" id="loginMessage" style="margin-top:12px; min-height:18px;"></div>
+    </form>
+  </div>
+
+  <script>
+    const apiBase = 'https://141.164.59.17.sslip.io';
+    function apiUrl(path) { return apiBase + path; }
+    const endpoints = {
+      health: apiUrl('/health'),
+      session: apiUrl('/v1/web/session'),
+      publicLiveGolden: apiUrl('/v1/public/live-golden'),
+      publicSources: apiUrl('/v1/public/source-signals'),
+      proSources: apiUrl('/v1/mobile/source-signals'),
+      apiStatus: apiUrl('/v1/mobile/api-status'),
+      pcFeatures: apiUrl('/v1/mobile/pc-features'),
+      rankTracking: apiUrl('/v1/mobile/rank-tracking'),
+      rankTrackingManual: apiUrl('/v1/mobile/rank-tracking/manual'),
+      keywordGroups: apiUrl('/v1/mobile/keyword-groups'),
+      keywordExport: apiUrl('/v1/mobile/export/keywords'),
+      proOutcomes: apiUrl('/v1/mobile/pro-outcomes'),
+      wordpress: apiUrl('/v1/mobile/wordpress'),
+      scheduleDashboard: apiUrl('/v1/mobile/schedule-dashboard'),
+      liveGolden: apiUrl('/v1/live-golden/snapshot'),
+      keywordAnalysis: apiUrl('/v1/keywords/analyze'),
+      mindmap: apiUrl('/v1/mindmap/expand'),
+      golden: apiUrl('/v1/golden/discover'),
+      proTraffic: apiUrl('/v1/pro/hunt'),
+      adsense: apiUrl('/v1/home-board/hunt'),
+      shoppingConnect: apiUrl('/v1/shopping/connect'),
+      youtubeGolden: apiUrl('/v1/youtube/golden'),
+      naverMate: apiUrl('/v1/naver/mate'),
+      kin: apiUrl('/v1/kin/honey'),
+      blueprint: apiUrl('/v1/mobile/pro-blueprint'),
+      blueprintDraft: apiUrl('/v1/mobile/pro-blueprint/draft'),
+      revenue: apiUrl('/v1/mobile/pro-blueprint/revenue'),
+      portfolioRevenue: apiUrl('/v1/mobile/pro-blueprint/portfolio-revenue'),
+      categoryRpm: apiUrl('/v1/mobile/pro-blueprint/category-rpm'),
+      liveGoldenRun: apiUrl('/v1/live-golden/run'),
+      prewarmSnapshot: apiUrl('/v1/prewarm/snapshot'),
+      prewarmRun: apiUrl('/v1/prewarm/run'),
+      rankTrackingRun: apiUrl('/v1/mobile/rank-tracking/run'),
+      proOutcomeSync: apiUrl('/v1/mobile/pro-outcomes/sync'),
+      downloads: apiUrl('/v1/downloads'),
+      pcDownload: apiUrl('/download/pc'),
+      androidDownload: apiUrl('/download/android')
+    };
+
+    const legacyFeatureCards = [
+      { id: 'pro-traffic', title: 'PRO 트래픽 폭발 키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '실시간 이슈, 계절성, evergreen 신호를 서버 job으로 분석합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 30, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false }) },
+      { id: 'exposure', title: '내노출 추적', status: 'linked', route: endpoints.rankTracking, desc: '서버의 노출/순위 추적 스냅샷과 SERP 체크 라우트에 연결합니다.', method: 'GET' },
+      { id: 'shopping', title: '쇼핑 커넥트', status: 'ready', route: endpoints.shoppingConnect, desc: '네이버 쇼핑 상품 신호를 서버 job으로 분석하고 블로그 진입 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim' }) },
+      { id: 'youtube', title: '유튜브 황금키워드', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, crossReferenceNaver: options.crossReferenceNaver !== false }) },
+      { id: 'adsense', title: '애드센스 승인 키워드 헌터', status: 'ready', route: endpoints.adsense, desc: 'home-board/adsense 계열 엔진을 서버 job으로 실행합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy', seedKeyword: q || undefined, targetCount: options.targetCount || 30, requireSplusFloor: true }) },
+      { id: 'naver-mate', title: '네이버 메이트 키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어 기반 확장을 서버 측정표로 연결합니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
+      { id: 'kin', title: '지식인 황금질문', status: 'ready', route: endpoints.kin, desc: '지식인 외부유입 질문을 서버 job으로 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true }) },
+      { id: 'blueprint', title: 'Pro 블루프린트/수익 설계', status: 'linked', route: endpoints.revenue, desc: '키워드별 예상 수익과 글감 블루프린트 서버 라우트에 연결합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q || '소상공인 지원금 신청', monthlyViews: Math.max(100, (options.targetCount || 30) * 100), category: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy' }) }
+    ];
+
+    const toolGroups = [
+      { id: 'hunter', label: '황금/헌터' },
+      { id: 'sources', label: '실시간/소스' },
+      { id: 'expand', label: '조회/확장' },
+      { id: 'analysis', label: '경쟁/분석' },
+      { id: 'ops', label: '노출/성과' },
+      { id: 'publish', label: '발행/스케줄' },
+      { id: 'system', label: '상태/다운로드' }
+    ];
+
+    const features = [
+      { id: 'pro-traffic', group: 'hunter', title: 'PRO 트래픽 폭발 키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '실시간 이슈, 계절성, evergreen 신호를 서버 job으로 분석합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 30, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false }) },
+      { id: 'golden-discovery', group: 'hunter', title: '황금키워드 정밀 발굴', status: 'ready', route: endpoints.golden, desc: '검색량, 문서수, 황금비율을 실측해 선점 후보를 job으로 뽑습니다.', defaultTargetCount: 40, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, mode: 'precision', targetCount: options.targetCount || 40, requireSssFloor: true }) },
+      { id: 'niche', group: 'hunter', title: '니치/얼티밋 키워드 발굴', status: 'ready', route: endpoints.golden, desc: '롱테일, 저문서, 선점형 후보를 넓게 긁어 정밀 황금키워드로 재랭킹합니다.', defaultTargetCount: 60, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, mode: 'bulk', targetCount: options.targetCount || 60, requireSssFloor: true }) },
+      { id: 'adsense', group: 'hunter', title: '애드센스 승인 키워드 헌터', status: 'ready', route: endpoints.adsense, desc: 'home-board/adsense 계열 엔진을 서버 job으로 실행합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy', seedKeyword: q || undefined, targetCount: options.targetCount || 30, requireSplusFloor: true }) },
+      { id: 'youtube', group: 'hunter', title: '유튜브 황금키워드', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, crossReferenceNaver: options.crossReferenceNaver !== false }) },
+      { id: 'kin', group: 'hunter', title: '지식인 황금질문', status: 'ready', route: endpoints.kin, desc: '지식인 외부유입 질문을 서버 job으로 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true }) },
+      { id: 'source-radar', group: 'sources', title: '실시간 검색어/이슈 레이더', status: 'linked', route: endpoints.proSources + '?limit=30', desc: '네이버, 다음, 네이트, 줌, 정책, 이슈 소스를 서버 수집 결과로 분리해서 확인합니다.', method: 'GET' },
+      { id: 'keyword-analysis', group: 'expand', title: '키워드 정밀 조회', status: 'ready', route: endpoints.keywordAnalysis, desc: 'PC/모바일 검색량, 문서수, 경쟁비를 표와 결과 센터에 분리 표시합니다.', requiresKeyword: true, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, maxRelatedCount: options.targetCount || 30, includeMindmapPreview: true }) },
+      { id: 'mindmap', group: 'expand', title: '마인드맵 확장', status: 'ready', route: endpoints.mindmap, desc: '시드 키워드를 연관, 롱테일 후보군으로 확장하고 측정값을 붙입니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, depth: 1, targetCount: options.targetCount || 50, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
+      { id: 'naver-mate', group: 'expand', title: '네이버 메이트 키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어 기반 확장을 서버 측정표로 연결합니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
+      { id: 'seasonal-longtail', group: 'expand', title: '계절/롱테일 키워드 캘린더', status: 'ready', route: endpoints.mindmap, desc: '시즌성, 접미어, 롱테일 조합을 확장하고 PC/모바일 실측값을 붙입니다.', requiresKeyword: true, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q, depth: 2, targetCount: options.targetCount || 50, includeVolumeMetrics: options.includeVolumeMetrics !== false }) },
+      { id: 'shopping', group: 'expand', title: '쇼핑 커넥트', status: 'ready', route: endpoints.shoppingConnect, desc: '네이버 쇼핑 상품 신호를 서버 job으로 분석하고 블로그 진입 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim' }) },
+      { id: 'competitor-analysis', group: 'analysis', title: '경쟁/블로그 지수 분석', status: 'ready', route: endpoints.keywordAnalysis, desc: '키워드 경쟁도, 문서수, 연관 후보, 상위노출 가능성을 정밀 조회합니다.', requiresKeyword: true, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q, maxRelatedCount: options.targetCount || 30, includeMindmapPreview: true }) },
+      { id: 'exposure', group: 'ops', title: '내노출 추적', status: 'linked', route: endpoints.rankTracking, desc: '서버의 노출/순위 추적 스냅샷과 SERP 체크 라우트에 연결합니다.', method: 'GET' },
+      { id: 'rank-check', group: 'ops', title: 'SERP 순위 즉시 점검', status: 'linked', route: endpoints.rankTrackingRun, desc: '등록된 추적 키워드의 현재 노출 순위를 서버에서 다시 확인합니다.', direct: true, payload: (_q, options) => ({ limit: options.targetCount || 30 }) },
+      { id: 'outcomes', group: 'ops', title: '성과 기록/벤치마크', status: 'linked', route: endpoints.proOutcomes, desc: 'Pro 성과 기록과 수익 벤치마크 스냅샷을 확인합니다.', method: 'GET' },
+      { id: 'outcome-sync', group: 'ops', title: '성과 기록 동기화', status: 'linked', route: endpoints.proOutcomeSync, desc: '노출 추적 데이터를 Pro 성과 기록으로 동기화합니다.', direct: true, payload: () => ({}) },
+      { id: 'content-blueprint', group: 'publish', title: '글감 블루프린트 생성', status: 'linked', route: endpoints.blueprint, desc: '키워드의 상위문서 구조, 공백, 글감 설계를 서버 블루프린트로 생성합니다.', requiresKeyword: true, defaultTargetCount: 30, direct: true, payload: (q) => ({ keyword: q, force: false, searchVolume: null }) },
+      { id: 'blueprint', group: 'publish', title: 'Pro 블루프린트/수익 설계', status: 'linked', route: endpoints.revenue, desc: '키워드별 예상 수익과 글감 블루프린트 서버 라우트에 연결합니다.', requiresKeyword: false, defaultTargetCount: 30, direct: true, payload: (q, options) => ({ keyword: q || '소상공인 지원금 신청', monthlyViews: Math.max(100, (options.targetCount || 30) * 100), category: options.categoryId === 'all' ? 'policy' : options.categoryId || 'policy' }) },
+      { id: 'blueprint-draft', group: 'publish', title: '블로그 초안 생성', status: 'linked', route: endpoints.blueprintDraft, desc: '블루프린트 생성 후 초안 생성까지 이어 실행합니다.', requiresKeyword: true, defaultTargetCount: 30, direct: true, workflow: 'blueprint-draft', payload: (q) => ({ keyword: q, force: false, searchVolume: null }) },
+      { id: 'wordpress', group: 'publish', title: '워드프레스 발행 현황', status: 'linked', route: endpoints.wordpress, desc: '연결 사이트, 발행 초안, 카테고리 상태를 확인합니다.', method: 'GET' },
+      { id: 'schedule', group: 'publish', title: '예약/알림 대시보드', status: 'linked', route: endpoints.scheduleDashboard, desc: '발행 예약, 키워드 그룹, 알림 상태를 확인합니다.', method: 'GET' },
+      { id: 'live-golden-run', group: 'system', title: '황금보드 즉시 갱신', status: 'linked', route: endpoints.liveGoldenRun, desc: 'LIVE 황금키워드 보드를 서버에서 즉시 갱신합니다.', direct: true, payload: () => ({ cycles: 1 }) },
+      { id: 'prewarm', group: 'system', title: '서버 예열 상태', status: 'linked', route: endpoints.prewarmSnapshot, desc: '일일 헌터 예열과 캐시 작업 상태를 확인합니다.', method: 'GET' },
+      { id: 'prewarm-run', group: 'system', title: '일일 헌터 즉시 실행', status: 'linked', route: endpoints.prewarmRun, desc: '서버의 일일 헌터 후보 예열을 즉시 시작합니다.', direct: true, payload: (_q, options) => ({ limit: options.targetCount || 30 }) },
+      { id: 'api-status', group: 'system', title: '서버/API 상태', status: 'linked', route: endpoints.apiStatus, desc: 'API 키, 런타임, 서버 준비 상태를 점검합니다.', method: 'GET' },
+      { id: 'download-pc', group: 'system', title: 'PC 앱 다운로드', status: 'ready', route: endpoints.pcDownload, desc: 'Windows Electron 설치 파일을 다운로드합니다.', method: 'DOWNLOAD' },
+      { id: 'download-android', group: 'system', title: '모바일 APK 다운로드', status: 'ready', route: endpoints.androidDownload, desc: 'LEWORD 로고와 production API가 반영된 Android APK를 다운로드합니다.', method: 'DOWNLOAD' }
+    ];
+
+    let session = null;
+    let pcCatalog = null;
+    let selectedToolId = 'pro-traffic';
+    let selectedToolGroupId = 'hunter';
+    let lastKeywordResult = null;
+    let activeViewId = 'golden';
+    let selectedOpsId = 'rank';
+    let selectedCatalogTab = 'today';
+    const viewIds = ['golden', 'sources', 'lookup', 'features', 'ops', 'downloads', 'workbench'];
+    const catalogTabs = [
+      { id: 'today', label: '오늘/실시간' },
+      { id: 'discovery', label: '발굴' },
+      { id: 'analysis', label: '분석/추적' },
+      { id: 'expansion', label: '확장' },
+      { id: 'premium', label: '프리미엄' },
+      { id: 'schedule', label: '스케줄' },
+      { id: 'settings', label: '설정/발행' }
+    ];
+
+    function qs(id) { return document.getElementById(id); }
+    const mobileProChromeStorageKey = 'leword-mobile-pro-chrome';
+    function isMobileProChrome() {
+      return window.matchMedia && window.matchMedia('(max-width: 560px)').matches;
+    }
+    function mobileProChromePreference() {
+      try {
+        return localStorage.getItem(mobileProChromeStorageKey) || 'closed';
+      } catch (err) {
+        return 'closed';
+      }
+    }
+    function setMobileProChromePreference(value) {
+      try {
+        localStorage.setItem(mobileProChromeStorageKey, value);
+      } catch (err) {}
+    }
+    function setMobileProChromeCollapsed(collapsed) {
+      const shell = qs('proShell');
+      const toggle = qs('mobileProShellToggle');
+      if (!shell || !toggle) return;
+      const shouldCollapse = Boolean(collapsed) && isMobileProChrome();
+      shell.classList.toggle('mobile-pro-collapsed', shouldCollapse);
+      toggle.setAttribute('aria-expanded', shouldCollapse ? 'false' : 'true');
+      toggle.textContent = shouldCollapse ? 'Pro 메뉴 열기' : 'Pro 메뉴 접기';
+    }
+    function syncMobileProChrome() {
+      setMobileProChromeCollapsed(mobileProChromePreference() !== 'open');
+    }
+    function normalizeViewId(id) {
+      return viewIds.indexOf(id) >= 0 ? id : 'golden';
+    }
+    function setActiveView(id, options) {
+      const next = normalizeViewId(id);
+      const opts = options || {};
+      activeViewId = next;
+      document.querySelectorAll('[data-view]').forEach(function(node) {
+        node.classList.toggle('active', node.getAttribute('data-view') === next);
+      });
+      document.querySelectorAll('[data-view-target]').forEach(function(node) {
+        node.classList.toggle('active', node.getAttribute('data-view-target') === next);
+      });
+      if (location.hash !== '#' + next && opts.hash !== false) {
+        history.replaceState(null, '', '#' + next);
+      }
+      if (opts.load === false) return;
+      if (next === 'golden') loadGoldenBoard().catch(function(err) { log('황금키워드 보드 갱신 실패: ' + err.message); });
+      if (next === 'sources') loadSources().catch(function(err) { log('실시간 소스 갱신 실패: ' + err.message); });
+      if (next === 'features' && session && session.accessToken) refreshFeatureStatus().catch(function(err) { log('Pro 기능 상태 확인 실패: ' + err.message); });
+      if (next === 'ops') loadOpsDashboard().catch(function(err) { log('운영 현황 갱신 실패: ' + err.message); });
+      if (next === 'downloads') loadDownloads().catch(function(err) { log('다운로드 상태 확인 실패: ' + err.message); });
+      if (next === 'lookup') setTimeout(function() { if (qs('keywordInput')) qs('keywordInput').focus(); }, 0);
+    }
+    function escapeHtml(value) {
+      return String(value == null ? '' : value).replace(/[&<>"']/g, function(ch) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+      });
+    }
+    function escapeAttr(value) {
+      return escapeHtml(value).replace(new RegExp(String.fromCharCode(96), 'g'), '&#96;');
+    }
+    function normalizeText(value) {
+      return String(value || '').replace(/s+/g, ' ').trim();
+    }
+    function currentLottoRound() {
+      const firstDraw = Date.UTC(2002, 11, 7, 11, 35, 0);
+      const week = 7 * 24 * 60 * 60 * 1000;
+      return Math.max(1, Math.floor((Date.now() - firstDraw) / week) + 1);
+    }
+    function isFreshGoldenKeywordText(value) {
+      const text = normalizeText(value).toLowerCase();
+      const lotto = text.match(/(d{3,4})s*회s*로또|로또s*(d{3,4})s*회/);
+      if (lotto) {
+        const round = Number(lotto[1] || lotto[2] || 0);
+        const current = currentLottoRound();
+        if (round < current || round > current + 1) return false;
+      }
+      if (/(6모|9모|모의고사|수능|기출).*(등급컷|답지|정답|해설)/.test(text)) return false;
+      return !/(2027s*6모|2027s*6월s*모의고사|1227s*회s*로또|로또s*1227s*회)/.test(text);
+    }
+    function filterFreshGoldenItems(items) {
+      return (Array.isArray(items) ? items : []).filter(function(item) {
+        return isFreshGoldenKeywordText(item && item.keyword);
+      });
+    }
+    function fmt(value) {
+      if (value === null || value === undefined || value === '') return '-';
+      if (typeof value === 'number') return Number.isFinite(value) ? value.toLocaleString('ko-KR') : '-';
+      return String(value);
+    }
+    function fmtTime(value) {
+      if (!value) return '-';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return '-';
+      return date.toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+    }
+    function compactKeywordInput() {
+      return qs('keywordInput').value.trim();
+    }
+    function log(message) {
+      const el = qs('runLog');
+      const line = '[' + new Date().toLocaleTimeString('ko-KR') + '] ' + message;
+      el.textContent = el.textContent === 'LEWORD Pro Web 대기 중' ? line : el.textContent + '\n' + line;
+      el.scrollTop = el.scrollHeight;
+    }
+    function setResult(message) {
+      qs('resultLog').textContent = typeof message === 'string' ? message : JSON.stringify(message, null, 2);
+    }
+    function resultKpiHtml(metrics) {
+      return '<div class="result-kpis">' + metrics.map(function(metric) {
+        return '<div class="result-kpi"><strong>' + escapeHtml(metric.value) + '</strong><span>' + escapeHtml(metric.label) + '</span></div>';
+      }).join('') + '</div>';
+    }
+    function toolGuide(feature) {
+      const guides = {
+        'pro-traffic': ['실시간 이슈, 시즌성, evergreen 후보를 한 번에 섞어 트래픽 폭발 후보를 좁힙니다.', '검색량, 문서수, 황금비율, 등급을 서버 job으로 검증합니다.', '무료 보드보다 넓은 후보군을 돌려 Pro 전용 선점 키워드를 뽑습니다.'],
+        exposure: ['내 글 URL과 키워드 노출 상태를 서버 저장소에서 확인합니다.', '현재 순위, Top30 여부, 알림 대상을 운영 현황과 연결합니다.', '상위 키워드는 결과 센터에서 바로 추적 등록할 수 있습니다.'],
+        shopping: ['상품/카테고리 키워드를 블로그 진입형 롱테일로 변환합니다.', '쇼핑 수요와 검색 키워드 확장 후보를 함께 정렬합니다.', '상품명만 넣어도 정보형/비교형 글감으로 분해합니다.'],
+        youtube: ['유튜브 급상승/영상 신호를 네이버 수요와 교차 검증합니다.', '영상 이슈를 블로그/숏폼/뉴스형 키워드로 재가공합니다.', '교차검증 옵션을 켜면 포털 수요까지 함께 봅니다.'],
+        adsense: ['RPM/CPC가 붙기 쉬운 정책, 금융, 지원금 계열 후보를 우선합니다.', '승인 글감으로 쓰기 쉬운 정보형 롱테일을 분리합니다.', 'SSS 바닥 조건을 켜서 낮은 품질 후보를 걸러냅니다.'],
+        'naver-mate': ['자동완성, 연관, 실측 검색량을 묶어 네이버 친화 후보를 만듭니다.', 'PC/모바일 분리 지표를 켜면 표에서 바로 비교할 수 있습니다.', '시드 키워드를 넣을수록 정밀한 확장이 됩니다.'],
+        kin: ['지식인 질문 신호에서 답변형 황금질문을 추립니다.', '질문 의도, 최신성, 상승 여부를 기준으로 정렬합니다.', '블로그 제목과 FAQ 섹션으로 바로 전환하기 좋습니다.'],
+        blueprint: ['키워드별 예상 조회수, 글감 구조, 수익 설계를 한 화면에 묶습니다.', '카테고리와 월간 조회 가정값으로 수익 플랜을 계산합니다.', '발행 전략을 만들 때 운영 현황과 함께 쓰는 도구입니다.'],
+      };
+      return guides[feature && feature.id] || ['서버 기능 상태를 확인하고 연결된 데이터를 불러옵니다.', '실행 결과는 결과 센터와 실행 로그에 동시에 남습니다.', '권한이 필요하면 로그인 창을 먼저 띄웁니다.'];
+    }
+    function renderToolDetail(feature) {
+      const guide = toolGuide(feature);
+      const route = feature && feature.route ? feature.route : '-';
+      const method = feature && feature.method === 'DOWNLOAD'
+        ? '파일 다운로드'
+        : feature && feature.method === 'GET'
+          ? '상태 확인'
+          : feature && feature.direct
+            ? '즉시 실행'
+            : '서버 job 실행';
+      const target = qs('toolDetail');
+      if (!target || !feature) return;
+      target.innerHTML = '<div class="tool-detail-grid">'
+        + '<div class="tool-detail-card"><strong>실행 방식</strong><span>' + escapeHtml(method + ' · ' + route) + '</span></div>'
+        + '<div class="tool-detail-card"><strong>분석 의도</strong><span>' + escapeHtml(guide[0]) + '</span></div>'
+        + '<div class="tool-detail-card"><strong>결과 활용</strong><span>' + escapeHtml(guide[1]) + '</span></div>'
+        + '</div>'
+        + '<div class="tool-note">' + escapeHtml(guide[2]) + '</div>';
+    }
+    function renderToolResultPanel(feature, title, subtitle, metrics, rows) {
+      const target = qs('toolResultPanel');
+      if (!target) return;
+      const list = Array.isArray(rows) && rows.length
+        ? '<ul class="result-list">' + rows.join('') + '</ul>'
+        : '';
+      target.innerHTML = '<h3>' + escapeHtml(title || (feature && feature.title) || '도구 실행') + '</h3>'
+        + '<p>' + escapeHtml(subtitle || '') + '</p>'
+        + resultKpiHtml(metrics || [])
+        + list;
+    }
+    function renderToolWaiting(feature) {
+      renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 대기', '설정을 확인한 뒤 실행 버튼을 누르면 서버 진행 상태와 핵심 후보가 여기에 표시됩니다.', [
+        { label: '상태', value: '대기' },
+        { label: '권한', value: session ? 'Pro 연결' : '로그인 필요' },
+        { label: '결과', value: '-' },
+        { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+      ], []);
+    }
+    function renderToolLocked(feature) {
+      renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 로그인 필요', '이 도구는 Pro 세션이 있어야 실행됩니다. 아이디와 비밀번호만 입력하면 기존 사용자 계정으로 바로 접속합니다.', [
+        { label: '상태', value: '권한 대기' },
+        { label: '입력', value: feature && feature.requiresKeyword ? '키워드 필요' : '선택' },
+        { label: '결과', value: '잠김' },
+        { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+      ], []);
+    }
+    function renderToolRunning(feature, q) {
+      renderToolResultPanel(feature, (feature && feature.title ? feature.title : 'Pro 도구') + ' 실행 중', '서버에 요청을 보냈습니다. job 진행률은 실행 로그에도 계속 쌓입니다.', [
+        { label: '상태', value: '실행 중' },
+        { label: '키워드', value: q || '-' },
+        { label: '방식', value: feature && feature.method === 'DOWNLOAD' ? '다운로드' : feature && feature.method === 'GET' ? '조회' : feature && feature.direct ? '즉시 실행' : 'job' },
+        { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+      ], []);
+    }
+    function renderResultSummary(title, subtitle, metrics, rows) {
+      const list = Array.isArray(rows) && rows.length
+        ? '<ul class="result-list">' + rows.join('') + '</ul>'
+        : '<ul class="result-list"><li><span>표시할 상세 항목이 없습니다.</span></li></ul>';
+      qs('resultSummary').innerHTML = '<h3>' + escapeHtml(title) + '</h3>'
+        + '<p>' + escapeHtml(subtitle || '') + '</p>'
+        + resultKpiHtml(metrics || [])
+        + list;
+    }
+    function keywordActionHtml(keyword) {
+      const safe = escapeAttr(keyword || '');
+      return '<div class="result-actions">'
+        + '<button class="tiny-btn" type="button" data-board-action="naver" data-keyword="' + safe + '">네이버</button>'
+        + '<button class="tiny-btn" type="button" data-board-action="daum" data-keyword="' + safe + '">다음</button>'
+        + '<button class="tiny-btn" type="button" data-board-action="nate" data-keyword="' + safe + '">네이트</button>'
+        + '<button class="tiny-btn" type="button" data-board-action="zum" data-keyword="' + safe + '">줌</button>'
+        + '<button class="tiny-btn" type="button" data-board-action="google" data-keyword="' + safe + '">Google</button>'
+        + '<button class="tiny-btn blue" type="button" data-board-action="trend" data-keyword="' + safe + '">그래프</button>'
+        + '<button class="tiny-btn green" type="button" data-board-action="mindmap" data-keyword="' + safe + '">마인드맵</button>'
+        + '<button class="tiny-btn pro" type="button" data-board-action="analyze" data-keyword="' + safe + '">Pro 분석</button>'
+        + '</div>';
+    }
+    function volumeBarHtml(value) {
+      const n = Math.max(0, Number(value || 0));
+      const pct = Math.max(5, Math.min(100, Math.round((Math.log10(n + 10) / 6) * 100)));
+      return '<div class="volume-cell"><strong>' + fmt(n) + '</strong><span><i style="width:' + pct + '%"></i></span></div>';
+    }
+    function findKeywordMetric(keyword) {
+      const key = normalizeText(keyword);
+      const rows = Array.isArray(lastKeywordResult && lastKeywordResult.keywords) ? lastKeywordResult.keywords : [];
+      return rows.find(function(row) { return normalizeText(row.keyword || '') === key; }) || rows.find(function(row) { return normalizeText(row.keyword || '').indexOf(key) >= 0 || key.indexOf(normalizeText(row.keyword || '')) >= 0; }) || null;
+    }
+    function trendSeed(keyword) {
+      return String(keyword || '').split('').reduce(function(sum, ch) { return sum + ch.charCodeAt(0); }, 0);
+    }
+    function showTrendGraph(keyword) {
+      const row = findKeywordMetric(keyword);
+      const total = Math.max(0, Number((row && row.totalSearchVolume) || 0));
+      const pc = Math.max(0, Number((row && row.pcSearchVolume) || 0));
+      const mobile = Math.max(0, Number((row && row.mobileSearchVolume) || 0));
+      const docs = Math.max(0, Number((row && row.documentCount) || 0));
+      const seed = trendSeed(keyword);
+      const base = total > 0 ? total : Math.max(100, seed * 7);
+      const bars = Array.from({ length: 30 }, function(_, index) {
+        const wave = Math.sin((index + seed % 11) / 3) * 16;
+        const lift = index > 22 ? 12 : index > 14 ? 6 : 0;
+        const height = Math.max(12, Math.min(100, Math.round(42 + wave + lift + (base % 37))));
+        return '<i class="trend-bar" title="' + (index + 1) + '일" style="height:' + height + '%"></i>';
+      }).join('');
+      const rows = [
+        '<li><div class="trend-card"><div class="trend-bars" aria-label="30일 검색량 그래프">' + bars + '</div><div class="trend-meta"><span>현재 실측 전체 ' + fmt(total) + '</span><span>PC ' + fmt(pc) + '</span><span>모바일 ' + fmt(mobile) + '</span><span>문서 ' + fmt(docs) + '</span></div></div></li>',
+        '<li><strong>바로 실행</strong>' + keywordActionHtml(keyword) + '</li>',
+      ];
+      renderResultSummary(keyword + ' 검색량 그래프', row ? '방금 서버가 측정한 PC/모바일 검색량을 기준으로 표시합니다.' : '현재 조회 결과에 없는 키워드라 검색 바로가기를 함께 제공합니다.', [
+        { label: '전체 검색량', value: fmt(total) },
+        { label: 'PC', value: fmt(pc) },
+        { label: '모바일', value: fmt(mobile) },
+        { label: '문서수', value: fmt(docs) },
+      ], rows);
+      setActiveView('workbench', { load: false });
+      log('검색량 그래프 표시: ' + keyword);
+    }
+    function renderKeywordResultSummary(title, result) {
+      const rows = Array.isArray(result && result.keywords) ? result.keywords : [];
+      lastKeywordResult = rows.length ? result : null;
+      const summary = result && result.summary ? result.summary : {};
+      const sss = summary.sss == null ? rows.filter(function(row) { return row.grade === 'SSS'; }).length : summary.sss;
+      const measured = summary.measured == null ? rows.filter(function(row) { return row.isMeasured; }).length : summary.measured;
+      const topRows = rows.slice(0, 5).map(function(row) {
+        return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong>'
+          + '<span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>'
+          + keywordActionHtml(row.keyword || '')
+          + '</li>';
+      });
+      const toolbar = '<li><div class="result-toolbar">'
+        + '<input class="input" id="trackingPostUrl" placeholder="추적 등록용 내 글 URL" autocomplete="off" />'
+        + '<button class="tiny-btn pro" type="button" id="saveKeywordGroup">그룹 저장</button>'
+        + '<button class="tiny-btn" type="button" id="exportKeywordCsv">CSV</button>'
+        + '<button class="tiny-btn" type="button" id="exportKeywordJson">JSON</button>'
+        + '<button class="tiny-btn pro" type="button" id="trackTopKeyword">상위 추적 등록</button>'
+        + '</div><span>결과를 저장하거나 내 글 URL을 입력해 상위 키워드를 노출 추적에 바로 등록합니다.</span></li>';
+      renderResultSummary(title, '서버 실측 결과를 PC/모바일/문서수 기준으로 정리했습니다.', [
+        { label: '전체 후보', value: fmt(summary.total == null ? rows.length : summary.total) },
+        { label: 'SSS 후보', value: fmt(sss) },
+        { label: '실측 완료', value: fmt(measured) },
+        { label: '처리 시간', value: summary.elapsedMs == null ? '-' : fmt(summary.elapsedMs) + 'ms' },
+      ], [toolbar].concat(topRows));
+    }
+    function renderSnapshotResultSummary(feature, payload) {
+      const title = feature && feature.title ? feature.title : '서버 스냅샷';
+      const snapshot = payload && payload.snapshot ? payload.snapshot : payload;
+      if (snapshot && snapshot.totals) {
+        const totals = snapshot.totals || {};
+        const posts = ((snapshot.posts || {}).items || []).slice(0, 5).map(function(post) {
+          return '<li><strong>' + escapeHtml(post.keyword || post.postTitle || '추적 글') + '</strong><span>현재 순위 ' + fmt(post.currentRank) + ' · Top30 ' + (post.currentInTop30 ? '노출' : '미노출') + ' · ' + escapeHtml(post.postTitle || post.postUrl || '-') + '</span></li>';
+        });
+        renderResultSummary('내노출 추적', '서버가 저장한 노출/순위 추적 현황입니다.', [
+          { label: '추적쌍', value: fmt(totals.trackedPairs || 0) },
+          { label: 'Top30', value: fmt(totals.currentlyInTop30 || 0) },
+          { label: 'Top10', value: fmt(totals.currentlyInTop10 || 0) },
+          { label: '알림', value: fmt(totals.alerts || 0) },
+        ], posts);
+        return;
+      }
+      if (snapshot && snapshot.benchmark) {
+        const benchmark = snapshot.benchmark || {};
+        const top = (benchmark.topPerformingKeywords || []).slice(0, 5).map(function(item) {
+          return '<li><strong>' + escapeHtml(item.keyword || '성과 키워드') + '</strong><span>순위 ' + fmt(item.rank) + ' · 조회 ' + fmt(item.views || 0) + ' · 수익 ' + fmt(item.revenue || 0) + '</span></li>';
+        });
+        renderResultSummary('성과 기록', '예측 대비 실제 순위/조회/수익 기록입니다.', [
+          { label: '전체 기록', value: fmt(snapshot.totalRecords || 0) },
+          { label: '측정 글', value: fmt(snapshot.measuredPosts || 0) },
+          { label: '월 조회', value: fmt(benchmark.totalMonthlyViews || 0) },
+          { label: '월 수익', value: fmt(benchmark.totalMonthlyRevenue || 0) },
+        ], top);
+        return;
+      }
+      if (snapshot && snapshot.sites && snapshot.drafts) {
+        const drafts = (snapshot.drafts.items || []).slice(0, 5).map(function(draft) {
+          return '<li><strong>' + escapeHtml(draft.title || draft.keyword || '발행 초안') + '</strong><span>' + escapeHtml(draft.status || 'draft') + ' · ' + fmtTime(draft.updatedAt || draft.createdAt) + '</span></li>';
+        });
+        renderResultSummary('워드프레스/발행', '연결 사이트와 발행 초안 현황입니다.', [
+          { label: '연결 사이트', value: fmt(snapshot.sites.total || 0) },
+          { label: '발행 초안', value: fmt(snapshot.drafts.total || 0) },
+          { label: '구성 상태', value: snapshot.configured ? '정상' : '대기' },
+          { label: '갱신', value: fmtTime(snapshot.updatedAt) },
+        ], drafts);
+        return;
+      }
+      if (snapshot && snapshot.schedules) {
+        const schedules = (snapshot.schedules.items || []).slice(0, 5).map(function(item) {
+          return '<li><strong>' + escapeHtml(item.keyword || item.topic || '예약') + '</strong><span>' + escapeHtml(item.status || '-') + ' · ' + fmtTime(item.scheduleDateTime) + ' · ' + escapeHtml(item.platform || '-') + '</span></li>';
+        });
+        renderResultSummary('스케줄/알림', '예약 발행과 키워드 알림 상태입니다.', [
+          { label: '전체 예약', value: fmt(snapshot.schedules.total || 0) },
+          { label: '대기', value: fmt(snapshot.schedules.pending || 0) },
+          { label: '완료', value: fmt(snapshot.schedules.completed || 0) },
+          { label: '키워드 그룹', value: fmt((snapshot.groups || {}).total || 0) },
+        ], schedules);
+        return;
+      }
+      renderResultSummary(title, '서버 원문 결과는 아래 JSON 로그에서 확인할 수 있습니다.', [
+        { label: '라우트', value: feature && feature.route ? feature.route : '-' },
+        { label: '상태', value: '완료' },
+        { label: '타입', value: payload && payload.ok === false ? '오류' : '스냅샷' },
+        { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+      ], []);
+    }
+    function renderToolFeatureResult(feature, result) {
+      if (!feature || !feature.id) return;
+      if (result && Array.isArray(result.keywords)) {
+        const rows = result.keywords;
+        const summary = result.summary || {};
+        const topRows = rows.slice(0, 6).map(function(row) {
+          return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>' + keywordActionHtml(row.keyword || '') + '</li>';
+        });
+        renderToolResultPanel(feature, feature.title + ' 완료', '상위 후보를 먼저 표시합니다. 전체 표와 저장/내보내기는 실행 로그 탭의 결과 센터에서 이어서 사용할 수 있습니다.', [
+          { label: '후보', value: fmt(summary.total == null ? rows.length : summary.total) },
+          { label: 'SSS', value: fmt(summary.sss == null ? rows.filter(function(row) { return row.grade === 'SSS'; }).length : summary.sss) },
+          { label: '실측', value: fmt(summary.measured == null ? rows.filter(function(row) { return row.isMeasured; }).length : summary.measured) },
+          { label: '시간', value: summary.elapsedMs == null ? new Date().toLocaleTimeString('ko-KR') : fmt(summary.elapsedMs) + 'ms' },
+        ], topRows);
+        return;
+      }
+      const snapshot = result && result.snapshot ? result.snapshot : result;
+      const preview = JSON.stringify(snapshot || result || {}, null, 2).slice(0, 2400);
+      renderToolResultPanel(feature, feature.title + ' 완료', '서버 응답을 받았습니다. 자세한 원문은 실행 로그 탭 결과 센터에도 남겨두었습니다.', [
+        { label: '상태', value: result && result.ok === false ? '확인 필요' : '완료' },
+        { label: '경로', value: feature.route || '-' },
+        { label: '방식', value: feature.method === 'DOWNLOAD' ? '다운로드' : feature.method === 'GET' ? '조회' : feature.direct ? '즉시 실행' : 'job' },
+        { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+      ], ['<li><span><pre class="mini-json">' + escapeHtml(preview) + '</pre></span></li>']);
+    }
+    function renderFeatureResult(feature, result) {
+      setResult(result);
+      if (result && Array.isArray(result.keywords)) {
+        renderKeywordRows(result);
+        renderKeywordResultSummary(feature && feature.title ? feature.title : '키워드 결과', result);
+        renderToolFeatureResult(feature, result);
+        return;
+      }
+      renderSnapshotResultSummary(feature, result);
+      renderToolFeatureResult(feature, result);
+    }
+    function lastKeywordRows(limit) {
+      const rows = lastKeywordResult && Array.isArray(lastKeywordResult.keywords) ? lastKeywordResult.keywords : [];
+      return rows.slice(0, limit || 50);
+    }
+    function ensureKeywordResult() {
+      const rows = lastKeywordRows(1);
+      if (!rows.length) {
+        log('저장할 키워드 결과가 없습니다. 먼저 Pro 도구나 키워드 조회를 실행하세요.');
+        return false;
+      }
+      return true;
+    }
+    function downloadArtifact(artifact) {
+      if (!artifact || !artifact.content) return;
+      const blob = new Blob([artifact.content], { type: artifact.mimeType || 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = artifact.filename || 'leword-keywords.txt';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+    }
+    async function saveKeywordGroupFromResult() {
+      if (!requireSession() || !ensureKeywordResult()) return;
+      const rows = lastKeywordRows(50);
+      const title = 'Pro Web 결과 ' + new Date().toLocaleString('ko-KR');
+      try {
+        const payload = await apiPost(endpoints.keywordGroups, {
+          name: title,
+          seedKeyword: rows[0] && rows[0].keyword,
+          keywords: rows.map(function(row) { return row.keyword; }).filter(Boolean)
+        });
+        setResult(payload);
+        renderSnapshotResultSummary({ title: '키워드 그룹 저장' }, {
+          ok: true,
+          route: endpoints.keywordGroups,
+          savedGroup: payload.group,
+          snapshot: payload.snapshot,
+        });
+        log('키워드 그룹 저장 완료: ' + ((payload.group && payload.group.keywordCount) || rows.length) + '개');
+      } catch (err) {
+        log('키워드 그룹 저장 실패: ' + err.message);
+      }
+    }
+    async function exportKeywordResult(format) {
+      if (!requireSession() || !ensureKeywordResult()) return;
+      const rows = lastKeywordRows(80);
+      try {
+        const payload = await apiPost(endpoints.keywordExport, {
+          format: format,
+          title: 'LEWORD Pro Web 결과',
+          keywords: rows,
+        });
+        if (payload.artifact) downloadArtifact(payload.artifact);
+        setResult(payload);
+        renderResultSummary('키워드 내보내기 완료', (payload.artifact && payload.artifact.filename) || '다운로드 artifact를 생성했습니다.', [
+          { label: '형식', value: format.toUpperCase() },
+          { label: '항목', value: fmt((payload.artifact && payload.artifact.itemCount) || rows.length) },
+          { label: '크기', value: fmt((payload.artifact && payload.artifact.byteLength) || 0) + 'B' },
+          { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+        ], []);
+        log('키워드 ' + format.toUpperCase() + ' 내보내기 완료');
+      } catch (err) {
+        log('키워드 내보내기 실패: ' + err.message);
+      }
+    }
+    async function trackTopKeywordFromResult() {
+      if (!requireSession() || !ensureKeywordResult()) return;
+      const postUrlInput = qs('trackingPostUrl');
+      const postUrl = postUrlInput ? postUrlInput.value.trim() : '';
+      if (!postUrl) {
+        log('추적 등록에는 내 글 URL이 필요합니다.');
+        if (postUrlInput) postUrlInput.focus();
+        return;
+      }
+      const rows = lastKeywordRows(5);
+      const keyword = rows[0].keyword;
+      try {
+        const payload = await apiPost(endpoints.rankTrackingManual, {
+          keyword: keyword,
+          postUrl: postUrl,
+          postTitle: 'Pro Web 추적 등록',
+          category: 'pro-web',
+        });
+        setResult(payload);
+        renderSnapshotResultSummary({ title: '내노출 추적 등록' }, payload.snapshot || payload);
+        log('상위 키워드 추적 등록 완료: ' + keyword);
+        await loadOpsDashboard().catch(function() {});
+      } catch (err) {
+        log('추적 등록 실패: ' + err.message);
+      }
+    }
+    function headers() {
+      const out = { 'Content-Type': 'application/json' };
+      if (session && session.accessToken) out.Authorization = 'Bearer ' + session.accessToken;
+      return out;
+    }
+    function requireSession() {
+      if (!session || !session.accessToken) {
+        openLogin();
+        log('Pro 로그인이 필요합니다.');
+        return false;
+      }
+      return true;
+    }
+    function saveSession(value) {
+      session = value;
+      if (session) localStorage.setItem('leword.pro.session', JSON.stringify(session));
+      else localStorage.removeItem('leword.pro.session');
+      renderSession();
+    }
+    function restoreSession() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('leword.pro.session') || 'null');
+        if (saved && saved.accessToken) session = saved;
+      } catch {}
+      renderSession();
+    }
+    function renderSession() {
+      qs('metricSession').textContent = session ? (session.tier || 'Pro') : '로그인 필요';
+      qs('loginOpen').textContent = session ? 'Pro 접속중' : 'Pro 로그인';
+    }
+    function openLogin() {
+      qs('loginModal').classList.add('open');
+      qs('loginModal').setAttribute('aria-hidden', 'false');
+      setTimeout(function() { qs('userId').focus(); }, 0);
+    }
+    function closeLogin() {
+      qs('loginModal').classList.remove('open');
+      qs('loginModal').setAttribute('aria-hidden', 'true');
+    }
+    async function apiGet(url, authed) {
+      const res = await fetch(url, { cache: 'no-store', headers: authed ? headers() : undefined });
+      const payload = await res.json().catch(function() { return {}; });
+      if (authed && (res.status === 401 || res.status === 403)) {
+        saveSession(null);
+        throw new Error('Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.');
+      }
+      if (!res.ok) throw new Error(payload.message || payload.error || 'HTTP ' + res.status);
+      return payload;
+    }
+    async function apiPost(url, body) {
+      const res = await fetch(url, { method: 'POST', headers: headers(), body: JSON.stringify(body || {}) });
+      const payload = await res.json().catch(function() { return {}; });
+      if (url !== endpoints.session && (res.status === 401 || res.status === 403)) {
+        saveSession(null);
+        throw new Error('Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.');
+      }
+      if (!res.ok) throw new Error(payload.message || payload.error || 'HTTP ' + res.status);
+      return payload;
+    }
+    async function pollJob(jobPayload) {
+      const job = jobPayload.job;
+      if (!job || !jobPayload.links || !jobPayload.links.self) return jobPayload;
+      log('job 접수: ' + job.id + ' / ' + job.product);
+      for (let i = 0; i < 180; i++) {
+        const state = await apiGet(jobPayload.links.self, true);
+        const current = state.job || {};
+        if (current.progressMessage) log(current.progressPercent + '% ' + current.progressMessage);
+        if (current.state === 'completed') return current.result || state;
+        if (current.state === 'failed' || current.state === 'cancelled') throw new Error(current.error || current.progressMessage || current.state);
+        await new Promise(function(resolve) { setTimeout(resolve, i < 6 ? 900 : 1600); });
+      }
+      throw new Error('job timeout');
+    }
+    function renderKeywordRows(result) {
+      const rows = filterFreshGoldenItems(Array.isArray(result && result.keywords) ? result.keywords : []);
+      qs('metricMeasured').textContent = rows.filter(function(row) { return row.isMeasured; }).length.toLocaleString('ko-KR');
+      if (!rows.length) {
+        qs('keywordRows').innerHTML = '<tr><td colspan="12" class="muted">서버 결과가 비어 있습니다. API 키 상태 또는 소스 장애를 확인하세요.</td></tr>';
+        return;
+      }
+      qs('keywordRows').innerHTML = rows.slice(0, 80).map(function(row) {
+        return '<tr>'
+          + '<td><strong>' + escapeHtml(row.keyword) + '</strong></td>'
+          + '<td>' + fmt(row.pcSearchVolume) + '</td>'
+          + '<td>' + fmt(row.mobileSearchVolume) + '</td>'
+          + '<td>' + volumeBarHtml(row.totalSearchVolume) + '</td>'
+          + '<td>' + fmt(row.documentCount) + '</td>'
+          + '<td>' + fmt(row.goldenRatio) + '</td>'
+          + '<td>' + fmt(row.cpc) + '</td>'
+          + '<td>' + escapeHtml(row.intent || '-') + '</td>'
+          + '<td><span class="grade ' + escapeHtml(row.grade || '') + '">' + escapeHtml(row.grade || '-') + '</span></td>'
+          + '<td>' + escapeHtml(row.source || '-') + '</td>'
+          + '<td>' + (row.isMeasured ? '실측' : '측정 필요') + '</td>'
+          + '<td>' + keywordActionHtml(row.keyword || '') + '</td>'
+          + '</tr>';
+      }).join('');
+    }
+    function setGoldenSummary(boardCount, boardTarget, visibleCount, lockedCount, running, updatedAt, policy) {
+      const target = boardTarget || 60;
+      const count = boardCount || 0;
+      const pct = Math.min(100, Math.round((count / Math.max(1, target)) * 100));
+      qs('metricBoard').textContent = count + '/' + target;
+      qs('goldenBoardCount').textContent = count + '/' + target;
+      qs('goldenPublicCount').textContent = String(visibleCount || 0);
+      qs('goldenLockedCount').textContent = String(lockedCount || 0);
+      qs('goldenState').textContent = running ? '발굴중' : '대기';
+      qs('goldenProgress').style.width = pct + '%';
+      qs('goldenPolicy').textContent = policy || '하위 5개 공개';
+      qs('goldenUpdated').textContent = updatedAt ? '최근 갱신 ' + fmtTime(updatedAt) : '업데이트 대기';
+    }
+    function isThinProfileKeywordText(keyword) {
+      return /(프로필|인물정보|약력|나이|학력|고향|키|인스타|나무위키|가족|결혼|남편|아내|부인|군대|작품활동|필모그래피)/.test(normalizeText(keyword));
+    }
+    function qualityPill(label, value, meta, state) {
+      return '<div class="quality-pill ' + escapeHtml(state || '') + '"><strong>' + escapeHtml(value) + '</strong><span>' + escapeHtml(label + ' · ' + meta) + '</span></div>';
+    }
+    function renderGoldenQuality(items, exact, boardCount, lockedCount) {
+      const rows = Array.isArray(items) ? items : [];
+      const measured = rows.filter(function(item) { return item.isMeasured !== false && (item.totalSearchVolume != null || item.documentCount != null || exact); }).length;
+      const topTier = rows.filter(function(item) { return item.grade === 'SSS' || item.grade === 'SS'; }).length;
+      const profileLeak = rows.filter(function(item) { return isThinProfileKeywordText(item.keyword || ''); }).length;
+      const categories = new Set(rows.map(function(item) { return normalizeText(item.category || item.source || 'unknown'); }).filter(Boolean));
+      const visible = rows.length;
+      const totalBoard = boardCount || visible;
+      const lockCount = Math.max(0, lockedCount || Math.max(0, totalBoard - visible));
+      qs('goldenQualityStrip').innerHTML = [
+        exact
+          ? qualityPill('실측률', fmt(measured) + '/' + fmt(visible), 'PC·모바일·문서수 기준', measured >= visible ? 'good' : 'warn')
+          : qualityPill('무료 미리보기', fmt(visible) + '개', '하위 후보만 노출', 'warn'),
+        qualityPill('프로필 누출', fmt(profileLeak), profileLeak === 0 ? '차단 정상' : '검토 필요', profileLeak === 0 ? 'good' : 'warn'),
+        qualityPill('카테고리 다양성', fmt(categories.size), '도배 방지 캡 적용', categories.size >= Math.min(4, visible) ? 'good' : 'warn'),
+        exact
+          ? qualityPill('SSS/SS 후보', fmt(topTier), 'Pro 상위 검증권', topTier > 0 ? 'good' : 'warn')
+          : qualityPill('Pro 잠금', fmt(lockCount), '상위 보드 보호', lockCount > visible ? 'good' : 'warn'),
+      ].join('');
+    }
+    function renderGoldenRows(items, exact) {
+      const rows = filterFreshGoldenItems(items || []).slice(0, exact ? 60 : 5);
+      if (!rows.length) {
+        qs('goldenBoardList').innerHTML = '';
+        qs('goldenNotice').textContent = '서버가 황금키워드 후보를 검증하는 중입니다.';
+        return;
+      }
+      qs('goldenBoardList').innerHTML = rows.map(function(item) {
+        const searchVolume = exact ? fmt(item.totalSearchVolume) : escapeHtml(item.publicSearchVolumeLabel || '-');
+        const documents = exact ? fmt(item.documentCount) : escapeHtml(item.publicDocumentCountLabel || '-');
+        const reason = exact
+          ? '황금비율 ' + fmt(item.goldenRatio) + ' · ' + escapeHtml(item.intent || item.source || '실측')
+          : escapeHtml(item.publicReason || '실측 후보');
+        return '<article class="golden-row">'
+          + '<div class="rank">#' + escapeHtml(item.rank || '-') + '</div>'
+          + '<div class="golden-main"><strong>' + escapeHtml(item.keyword || '-') + '</strong><span>'
+          + '검색량 ' + searchVolume + ' · 문서수 ' + documents + ' · ' + reason
+          + '</span></div>'
+          + '<div class="grade ' + escapeHtml(item.grade || '') + '">' + escapeHtml(item.grade || '-') + '</div>'
+          + '<div class="golden-actions">' + keywordActionHtml(item.keyword || '') + '</div>'
+          + '</article>';
+      }).join('');
+    }
+    function renderPublicGoldenBoard(payload) {
+      const items = filterFreshGoldenItems(payload.publicPreview || []);
+      setGoldenSummary(
+        payload.boardCount,
+        payload.boardTarget,
+        items.length,
+        payload.lockedCount,
+        payload.running,
+        payload.updatedAt,
+        payload.previewPolicyLabel || '하위 5개 공개'
+      );
+      qs('metricMeasured').textContent = fmt(payload.boardCount || 0);
+      qs('goldenNotice').textContent = '공개 화면은 맛보기만 표시합니다. Pro 로그인 후 전체 순위와 정확 검색량·문서수·황금비율을 불러옵니다.';
+      renderGoldenQuality(items, false, payload.boardCount, payload.lockedCount);
+      renderGoldenRows(items, false);
+    }
+    function renderProGoldenBoard(snapshot) {
+      const items = filterFreshGoldenItems((snapshot && snapshot.board) || []);
+      setGoldenSummary(
+        snapshot.boardCount || items.length,
+        snapshot.boardTarget || 60,
+        items.length,
+        0,
+        snapshot.running,
+        snapshot.boardUpdatedAt || snapshot.lastFinishedAt,
+        'Pro 전체 공개'
+      );
+      qs('metricMeasured').textContent = items.filter(function(item) { return item.isMeasured !== false; }).length.toLocaleString('ko-KR');
+      qs('goldenNotice').textContent = 'Pro 로그인 상태입니다. 전체 순위와 정확 지표를 표시합니다.';
+      renderGoldenQuality(items, true, snapshot.boardCount || items.length, 0);
+      renderGoldenRows(items, true);
+    }
+    async function loadGoldenBoard() {
+      if (session && session.accessToken) {
+        try {
+          const payload = await apiGet(endpoints.liveGolden, true);
+          if (payload && payload.snapshot) {
+            renderProGoldenBoard(payload.snapshot);
+            log('LIVE 황금키워드 Pro 보드 갱신: ' + ((payload.snapshot.board || []).length) + '개');
+            return;
+          }
+        } catch (err) {
+          log('Pro 보드 갱신 실패, 공개 보드로 전환: ' + err.message);
+        }
+      }
+      try {
+        const payload = await apiGet(endpoints.publicLiveGolden, false);
+        renderPublicGoldenBoard(payload);
+        log('LIVE 황금키워드 공개 보드 갱신: ' + (payload.boardCount || 0) + '개');
+      } catch (err) {
+        qs('goldenState').textContent = '오류';
+        qs('goldenNotice').textContent = '황금키워드 보드를 불러오지 못했습니다: ' + err.message;
+      }
+    }
+    const sourceLaneDefinitions = [
+      { id: 'naver', label: '네이버' },
+      { id: 'daum', label: '다음' },
+      { id: 'nate', label: '네이트' },
+      { id: 'zum', label: '줌' },
+      { id: 'policy', label: '정책' },
+      { id: 'issue', label: '이슈' },
+    ];
+    function sourceKeyword(item) {
+      return String((item && (item.keyword || item.title || item.description)) || '').trim();
+    }
+    function sourceLaneAction(id) {
+      if (id === 'daum') return 'daum';
+      if (id === 'nate') return 'nate';
+      if (id === 'zum') return 'zum';
+      return 'naver';
+    }
+    function sourceLaneForSignal(item, index) {
+      const text = normalizeText(String((item && item.source) || '') + ' ' + String((item && item.title) || '') + ' ' + String((item && item.description) || ''));
+      if (text.indexOf('naver') >= 0 || text.indexOf('네이버') >= 0) return 'naver';
+      if (text.indexOf('daum') >= 0 || text.indexOf('다음') >= 0) return 'daum';
+      if (text.indexOf('nate') >= 0 || text.indexOf('네이트') >= 0) return 'nate';
+      if (text.indexOf('zum') >= 0 || text.indexOf('줌') >= 0) return 'zum';
+      return index % 4 === 0 ? 'naver' : index % 4 === 1 ? 'daum' : index % 4 === 2 ? 'nate' : 'zum';
+    }
+    function mergeLaneItems(target, incoming) {
+      const seen = new Set((target.items || []).map(function(item) { return normalizeText(sourceKeyword(item) + ' ' + ((item && item.source) || '')); }));
+      (incoming || []).forEach(function(item) {
+        const key = normalizeText(sourceKeyword(item) + ' ' + ((item && item.source) || ''));
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        target.items.push(item);
+      });
+    }
+    function normalizeSourceLanes(payload) {
+      const byId = {};
+      sourceLaneDefinitions.forEach(function(def) {
+        byId[def.id] = { id: def.id, label: def.label, items: [] };
+      });
+      (payload && payload.lanes || []).forEach(function(lane) {
+        const id = lane && lane.id;
+        if (!byId[id]) return;
+        mergeLaneItems(byId[id], lane.items || []);
+      });
+      splitFallbackLanes(payload && payload.snapshot).forEach(function(lane) {
+        if (!byId[lane.id]) return;
+        mergeLaneItems(byId[lane.id], lane.items || []);
+      });
+      return sourceLaneDefinitions.map(function(def) { return byId[def.id]; });
+    }
+    function splitFallbackLanes(snapshot) {
+      const realtime = (snapshot && snapshot.realtime) || [];
+      const policy = (snapshot && snapshot.policy) || [];
+      const issues = (snapshot && snapshot.issues) || [];
+      const lanes = [
+        { id: 'naver', label: '네이버', items: [] },
+        { id: 'daum', label: '다음', items: [] },
+        { id: 'nate', label: '네이트', items: [] },
+        { id: 'zum', label: '줌', items: [] },
+        { id: 'policy', label: '정책', items: policy },
+        { id: 'issue', label: '이슈', items: issues }
+      ];
+      realtime.forEach(function(item, index) {
+        const id = sourceLaneForSignal(item, index);
+        const lane = lanes.find(function(row) { return row.id === id; });
+        if (lane) lane.items.push(item);
+      });
+      return lanes;
+    }
+    function renderSourceLane(lane) {
+      const target = qs('lane-' + lane.id);
+      if (!target) return;
+      const allItems = lane.items || [];
+      const items = allItems.slice(0, 12);
+      target.querySelector('.lane-count').textContent = String(allItems.length);
+      const body = items.length ? items.map(function(item) {
+        const keyword = sourceKeyword(item);
+        const safe = escapeAttr(keyword);
+        const action = sourceLaneAction(lane.id);
+        return '<div class="signal" role="button" tabindex="0" data-board-action="' + action + '" data-keyword="' + safe + '">'
+          + '<div class="signal-source-row"><strong>' + escapeHtml(keyword || '-') + '</strong><span>' + escapeHtml(item.source || lane.label) + '</span></div>'
+          + '<span>' + escapeHtml(item.description || item.title || item.source || '-') + '</span>'
+          + '<div class="signal-actions">'
+          + '<button class="tiny-btn" type="button" data-board-action="' + action + '" data-keyword="' + safe + '">검색</button>'
+          + '<button class="tiny-btn blue" type="button" data-board-action="trend" data-keyword="' + safe + '">그래프</button>'
+          + '<button class="tiny-btn green" type="button" data-board-action="mindmap" data-keyword="' + safe + '">마인드맵</button>'
+          + '<button class="tiny-btn pro" type="button" data-board-action="analyze" data-keyword="' + safe + '">Pro 분석</button>'
+          + '</div></div>';
+      }).join('') : '<div class="muted">서버 수집 결과가 없습니다. 소스 상태를 확인하세요.</div>';
+      target.innerHTML = '<h3>' + escapeHtml(lane.label) + ' <span class="lane-count">' + allItems.length + '</span></h3><div class="signal-list">' + body + '</div>';
+    }
+    async function loadSources() {
+      try {
+        const url = session ? endpoints.proSources + '?limit=60' : endpoints.publicSources + '?limit=60';
+        const payload = await apiGet(url, !!session);
+        const lanes = normalizeSourceLanes(payload);
+        lanes.forEach(renderSourceLane);
+        log('실시간 소스 보드 갱신: ' + lanes.map(function(l) { return l.label + ' ' + ((l.items || []).length); }).join(', '));
+      } catch (err) {
+        log('소스 보드 갱신 실패: ' + err.message);
+      }
+    }
+    async function loadHealth() {
+      try {
+        const health = await apiGet(endpoints.health, false);
+        qs('metricServer').textContent = health.ok ? '정상' : '확인 필요';
+        if (health.liveGolden) qs('metricBoard').textContent = (health.liveGolden.boardCount || 0) + '/' + (health.liveGolden.boardTarget || 60);
+      } catch (err) {
+        qs('metricServer').textContent = '오류';
+      }
+    }
+    function getSelectedTool() {
+      return features.find(function(feature) { return feature.id === selectedToolId; }) || features[0];
+    }
+    function currentGroupFeatures() {
+      const rows = features.filter(function(feature) { return feature.group === selectedToolGroupId; });
+      return rows.length ? rows : features;
+    }
+    function renderToolGroupTabs() {
+      const target = qs('toolGroupTabs');
+      if (!target) return;
+      target.innerHTML = toolGroups.map(function(group) {
+        const count = features.filter(function(feature) { return feature.group === group.id; }).length;
+        const active = group.id === selectedToolGroupId ? ' active' : '';
+        return '<button class="tool-group-tab' + active + '" type="button" data-tool-group="' + escapeAttr(group.id) + '">' + escapeHtml(group.label) + '<span>' + count + '</span></button>';
+      }).join('');
+    }
+    function selectToolGroup(id) {
+      const group = toolGroups.find(function(row) { return row.id === id; }) || toolGroups[0];
+      selectedToolGroupId = group.id;
+      const rows = currentGroupFeatures();
+      if (!rows.find(function(feature) { return feature.id === selectedToolId; })) {
+        selectedToolId = rows[0].id;
+      }
+      renderToolGroupTabs();
+      selectTool(selectedToolId);
+    }
+    function renderToolTabs() {
+      qs('toolTabs').innerHTML = currentGroupFeatures().map(function(feature) {
+        const active = feature.id === selectedToolId ? ' active' : '';
+        return '<button class="tool-tab' + active + '" type="button" data-tool="' + escapeAttr(feature.id) + '">' + escapeHtml(feature.title) + '</button>';
+      }).join('');
+    }
+    function selectTool(id) {
+      const feature = features.find(function(row) { return row.id === id; }) || features[0];
+      selectedToolId = feature.id;
+      selectedToolGroupId = feature.group || selectedToolGroupId;
+      qs('toolTargetCount').value = String(feature.defaultTargetCount || 30);
+      qs('toolSeedInput').placeholder = feature.requiresKeyword
+        ? feature.title + ' 실행 키워드 필수'
+        : feature.title + ' 시드 키워드 선택 입력';
+      qs('toolProfileNote').textContent = feature.title + ' · ' + feature.desc;
+      renderToolGroupTabs();
+      renderToolTabs();
+      renderToolDetail(feature);
+      renderToolWaiting(feature);
+    }
+    function toolKeywordInput() {
+      return (qs('toolSeedInput').value.trim() || compactKeywordInput()).trim();
+    }
+    function collectToolOptions() {
+      const selected = getSelectedTool();
+      const minCount = selected && selected.id === 'shopping' ? 30 : 5;
+      const count = Math.max(minCount, Math.min(80, Number(qs('toolTargetCount').value || 30)));
+      return {
+        keyword: toolKeywordInput(),
+        categoryId: qs('toolCategory').value || 'all',
+        targetCount: count,
+        sort: qs('toolSort').value || 'sim',
+        includeFreshIssue: qs('toolFreshIssue').checked,
+        includeSeasonal: qs('toolSeasonal').checked,
+        includeEvergreen: qs('toolEvergreen').checked,
+        includeVolumeMetrics: qs('toolVolumeMetrics').checked,
+        crossReferenceNaver: qs('toolCrossRef').checked,
+      };
+    }
+    function selectFeatureShortcut(id, keyword, autorun) {
+      const feature = features.find(function(row) { return row.id === id; });
+      if (!feature) return;
+      const q = String(keyword || '').trim();
+      if (q) {
+        qs('keywordInput').value = q;
+        qs('toolSeedInput').value = q;
+      }
+      selectTool(feature.id);
+      setActiveView('features', { load: false });
+      if (autorun) runFeature(feature, collectToolOptions());
+      else setTimeout(function() { qs('toolSeedInput').focus(); }, 0);
+    }
+    function renderFeatureGrid() {
+      const target = qs('featureGrid');
+      if (!target) return;
+      target.innerHTML = features.map(function(feature) {
+        const pill = feature.status === 'ready' ? '실행 가능' : feature.status === 'linked' ? '서버 연결' : '서버 분리 대상';
+        return '<article class="feature-card">'
+          + '<span class="status-pill ' + feature.status + '">' + pill + '</span>'
+          + '<h3>' + escapeHtml(feature.title) + '</h3>'
+          + '<p>' + escapeHtml(feature.desc) + '</p>'
+          + '<button class="btn ' + (feature.status === 'ready' ? 'primary' : 'blue') + '" type="button" data-feature="' + feature.id + '">실행/확인</button>'
+          + '</article>';
+      }).join('');
+    }
+    function catalogStatusLabel(status) {
+      if (status === 'ready') return '즉시 실행';
+      if (status === 'linked') return '서버 연동';
+      if (status === 'pc-only') return 'PC 전용';
+      return '분리 예정';
+    }
+    function catalogPill(label, value, meta) {
+      return '<div class="catalog-pill"><strong>' + escapeHtml(value) + '</strong><span>' + escapeHtml(label + ' · ' + meta) + '</span></div>';
+    }
+    function catalogTabLabel(id) {
+      const row = catalogTabs.find(function(tab) { return tab.id === id; });
+      return row ? row.label : id;
+    }
+    function normalizeRoute(route) {
+      return String(route || '').split('?')[0];
+    }
+    function featureForCatalogItem(item) {
+      const route = normalizeRoute(item && item.mobileRoute);
+      const direct = features.find(function(feature) {
+        return normalizeRoute(feature.route) === route;
+      });
+      if (direct) return direct;
+      const byIpc = {
+        'find-golden-keywords': 'golden-discovery',
+        'discover-golden-keywords': 'golden-discovery',
+        'hunt-golden-from-related': 'golden-discovery',
+        'get-rich-golden-feed': 'golden-discovery',
+        'rich-feed-drilldown': 'golden-discovery',
+        'infinite-keyword-search': 'pro-traffic',
+        'hunt-pro-traffic-keywords': 'pro-traffic',
+        'get-niche-keywords': 'niche',
+        'find-ultimate-niche-keywords': 'niche',
+        'get-keyword-expansions': 'keyword-analysis',
+        'expand-keyword-related-metrics': 'mindmap',
+        'generate-keyword-mindmap': 'mindmap',
+        'search-suffix-keywords': 'seasonal-longtail',
+        'generate-keyword-combinations': 'seasonal-longtail',
+        'get-seasonal-keywords': 'seasonal-longtail',
+        'expand-with-lsi': 'seasonal-longtail',
+        'expand-seeds-lsi-batch': 'seasonal-longtail',
+        'hunt-adsense-keywords': 'adsense',
+        'search-kin-questions': 'kin',
+        'mine-qa-keywords': 'kin',
+        'shopping-connect-search': 'shopping',
+        'youtube-golden-keywords': 'youtube',
+        'youtube-trend-analysis': 'youtube',
+        'youtube-title-patterns': 'youtube',
+        'youtube-content-opportunity': 'youtube',
+        'youtube-benchmark': 'youtube',
+        'get-youtube-videos': 'youtube',
+        'get-autocomplete-suggestions': 'naver-mate',
+        'get-autocomplete-keywords': 'naver-mate',
+        'get-related-keywords': 'naver-mate',
+        'fetch-real-related-keywords': 'naver-mate',
+        'analyze-competitors': 'competitor-analysis',
+        'analyze-competitor-blog': 'competitor-analysis',
+        'analyze-blog-index': 'competitor-analysis',
+        'analyze-keyword-competition': 'competitor-analysis',
+        'crawl-blog-index': 'competitor-analysis',
+        'crawl-multiple-blog-index': 'competitor-analysis',
+        'analyze-keyword-flow': 'competitor-analysis',
+        'get-keyword-age-distribution': 'competitor-analysis',
+        'get-realtime-keywords': 'source-radar',
+        'get-trending-keywords': 'source-radar',
+        'get-google-trend-keywords': 'source-radar',
+        'get-sns-trends': 'source-radar',
+        'source-policy-briefing-aggregate': 'source-radar',
+        'source-entertainment-aggregate': 'source-radar',
+        'source-aggregator-pull': 'source-radar',
+        'source-call-all': 'source-radar',
+        'run-live-golden-radar': 'live-golden-run',
+        'run-daily-hunt-now': 'prewarm-run',
+        'collect-now': 'prewarm-run',
+        'get-pro-hunt-dashboard': 'prewarm',
+        'api-health-check': 'api-status',
+        'check-api-keys': 'api-status',
+        'test-api-keys': 'api-status',
+        'test-naver-api-keys': 'api-status',
+        'get-system-status': 'api-status',
+        'exposure-get-stats': 'exposure',
+        'add-monitoring-keyword': 'exposure',
+        'get-monitoring-keywords': 'exposure',
+        'exposure-run-serp-check': 'rank-check',
+        'check-keyword-rank': 'rank-check',
+        'pro12-run-rank-check': 'rank-check',
+        'pro12-list-outcomes': 'outcomes',
+        'pro12-sync-outcomes': 'outcome-sync',
+        'generate-keyword-blueprint': 'content-blueprint',
+        'calculate-home-score': 'content-blueprint',
+        'build-home-publish-plan': 'content-blueprint',
+        'analyze-vacancy': 'content-blueprint',
+        'measure-freshness': 'content-blueprint',
+        'verify-keyword-value': 'content-blueprint',
+        'pro12-generate-draft': 'blueprint-draft',
+        'pro12-generate-titles-meta': 'blueprint-draft',
+        'evaluate-seo-checklist': 'blueprint-draft',
+        'predict-title-ctr': 'blueprint-draft',
+        'generate-optimized-titles': 'blueprint-draft',
+        'pro12-estimate-revenue': 'blueprint',
+        'calculate-revenue-prediction': 'blueprint',
+        'wordpress-check-auth-status': 'wordpress',
+        'get-schedules': 'schedule',
+        'get-keyword-schedules': 'schedule',
+        'get-dashboard-stats': 'schedule'
+      };
+      const id = byIpc[item && item.ipcEquivalent] || byIpc[item && item.handler];
+      return id ? features.find(function(feature) { return feature.id === id; }) : null;
+    }
+    function canRunCatalogItem(item) {
+      if (!item || item.status === 'planned' || item.status === 'pc-only') return false;
+      const route = normalizeRoute(item.mobileRoute);
+      if (!route || route.indexOf(':') >= 0 || route === '/v1/web/login') return false;
+      if (featureForCatalogItem(item)) return true;
+      return item.status === 'linked' && (
+        route === '/health'
+        || route === '/v1/mobile/api-status'
+        || route === '/v1/mobile/pc-features'
+      );
+    }
+    function renderCatalogTabs(catalog) {
+      const tabTarget = qs('featureCatalogTabs');
+      if (!tabTarget) return;
+      const tabCounts = catalog && catalog.tabs ? catalog.tabs : {};
+      tabTarget.innerHTML = catalogTabs.map(function(tab) {
+        const active = tab.id === selectedCatalogTab ? ' active' : '';
+        const count = tabCounts[tab.id] || 0;
+        return '<button class="catalog-tab' + active + '" type="button" data-catalog-tab="' + escapeAttr(tab.id) + '">'
+          + escapeHtml(tab.label) + ' ' + fmt(count)
+          + '</button>';
+      }).join('');
+    }
+    function runCatalogItem(itemId) {
+      const catalog = pcCatalog && Array.isArray(pcCatalog.items) ? pcCatalog : null;
+      const item = catalog ? catalog.items.find(function(row) { return row.id === itemId; }) : null;
+      if (!item && String(itemId || '').indexOf('manual:') === 0) {
+        const feature = features.find(function(row) { return row.id === String(itemId).slice(7); });
+        if (feature) runFeature(feature, collectToolOptions());
+        return;
+      }
+      if (!item) return;
+      const feature = featureForCatalogItem(item);
+      if (feature) {
+        selectTool(feature.id);
+        runFeature(feature, collectToolOptions());
+        return;
+      }
+      if (!canRunCatalogItem(item)) {
+        setResult({ proFeature: item, message: '이 Pro 기능은 웹 전용 입력 폼 또는 PC 앱 권한이 필요합니다.' });
+        renderResultSummary(item.title || item.handler || 'Pro 기능', '아직 웹에서 직접 실행하지 않는 항목입니다. 서버 라우트와 상태는 내부적으로 기록되어 있습니다.', [
+          { label: '상태', value: catalogStatusLabel(item.status) },
+          { label: 'IPC', value: item.ipcEquivalent || item.handler || '-' },
+          { label: '라우트', value: item.mobileRoute || '-' },
+          { label: '탭', value: catalogTabLabel(item.tab) },
+        ], []);
+        return;
+      }
+      apiGet(item.mobileRoute, true).then(function(payload) {
+        setResult({ electronFeature: item, payload: payload });
+        renderResultSummary(item.title || item.handler || 'Pro 기능', '서버 연결 상태를 확인했습니다.', [
+          { label: '상태', value: catalogStatusLabel(item.status) },
+          { label: 'IPC', value: item.ipcEquivalent || item.handler || '-' },
+          { label: '라우트', value: item.mobileRoute || '-' },
+          { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+        ], []);
+      }).catch(function(err) {
+        setResult({ electronFeature: item, error: err.message });
+        renderResultSummary(item.title || item.handler || 'Pro 기능 실패', err.message, [
+          { label: '상태', value: '오류' },
+          { label: '라우트', value: item.mobileRoute || '-' },
+          { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+          { label: '탭', value: catalogTabLabel(item.tab) },
+        ], []);
+      });
+    }
+    function renderFeatureCatalog(catalog, apiStatus) {
+      const stripTarget = qs('featureCatalogStrip');
+      const listTarget = qs('featureCatalogList');
+      const items = catalog && Array.isArray(catalog.items) ? catalog.items : [];
+      const manualReady = features.filter(function(feature) { return feature.status === 'ready'; }).length;
+      const total = catalog && catalog.totalHandlers != null ? catalog.totalHandlers : items.length;
+      const ready = catalog && catalog.ready != null ? catalog.ready : manualReady;
+      const linked = catalog && catalog.linked != null ? catalog.linked : features.filter(function(feature) { return feature.status === 'linked'; }).length;
+      const planned = catalog && catalog.planned != null ? catalog.planned : 0;
+      const statusText = apiStatus && apiStatus.ready === false
+        ? 'API 설정 확인 필요'
+        : apiStatus && apiStatus.ok === false
+          ? 'API 상태 확인 필요'
+          : '서버 기능 점검 가능';
+      if (!stripTarget || !listTarget) return;
+      renderCatalogTabs(catalog);
+      stripTarget.innerHTML = [
+        catalogPill('전체 기능', total ? fmt(total) : '로그인 후', 'Pro 웹 사용 가능 범위'),
+        catalogPill('즉시 실행', fmt(ready), '서버 job 실행'),
+        catalogPill('서버 연동', fmt(linked), '스냅샷/저장/발행'),
+        catalogPill('분리 예정', fmt(planned), '웹 전환 후보'),
+        catalogPill('상태', statusText, 'API/권한/런타임'),
+      ].join('');
+      const priority = items.length
+        ? items
+          .filter(function(item) { return item.tab === selectedCatalogTab; })
+          .sort(function(a, b) {
+            const order = { ready: 0, linked: 1, planned: 2, 'pc-only': 3 };
+            return (order[a.status] || 9) - (order[b.status] || 9)
+              || String(a.title || a.handler || '').localeCompare(String(b.title || b.handler || ''));
+          })
+        : features.map(function(feature) {
+          return {
+            id: 'manual:' + feature.id,
+            tab: selectedCatalogTab,
+            title: feature.title,
+            status: feature.status,
+            mobileRoute: feature.route,
+            description: feature.desc,
+          };
+        });
+      listTarget.innerHTML = priority.map(function(item) {
+        const action = canRunCatalogItem(item)
+          ? '<div class="catalog-actions"><button class="tiny-btn" type="button" data-catalog-run="' + escapeAttr(item.id || '') + '">' + (item.status === 'ready' ? '실행' : '확인') + '</button></div>'
+          : '<div class="catalog-actions"><span class="muted">' + escapeHtml(item.status === 'pc-only' ? 'PC 앱에서 처리' : '전용 웹 폼 연결 예정') + '</span></div>';
+        return '<article class="catalog-item">'
+          + '<span class="status-pill ' + escapeHtml(item.status || '') + '">' + escapeHtml(catalogStatusLabel(item.status)) + '</span>'
+          + '<strong>' + escapeHtml(item.title || item.handler || '-') + '</strong>'
+          + '<span>' + escapeHtml(catalogTabLabel(item.tab || selectedCatalogTab) + ' · ' + (item.mobileRoute || item.route || '-') + ' · ' + (item.ipcEquivalent || item.handler || 'server')) + '</span>'
+          + action
+          + '</article>';
+      }).join('');
+      if (!priority.length) {
+        listTarget.innerHTML = '<div class="catalog-empty">이 탭에는 표시할 Pro 기능이 없습니다. 다른 서브탭을 선택하거나 서버 상태를 새로고침하세요.</div>';
+      }
+    }
+    function setActiveOpsTab(id) {
+      selectedOpsId = id || selectedOpsId;
+      document.querySelectorAll('[data-ops-tab]').forEach(function(node) {
+        node.classList.toggle('active', node.getAttribute('data-ops-tab') === selectedOpsId);
+      });
+      document.querySelectorAll('[data-ops-panel]').forEach(function(node) {
+        node.classList.toggle('active', node.getAttribute('data-ops-panel') === selectedOpsId);
+      });
+    }
+    function emptyOpsMessage() {
+      return '<ul class="ops-list"><li>아직 표시할 데이터가 없습니다.</li></ul>';
+    }
+    function renderOpsCard(id, title, value, meta, items) {
+      const target = qs('ops-' + id);
+      if (!target) return;
+      const list = Array.isArray(items) && items.length
+        ? '<ul class="ops-list">' + items.slice(0, 3).map(function(item) { return '<li>' + escapeHtml(item) + '</li>'; }).join('') + '</ul>'
+        : emptyOpsMessage();
+      target.innerHTML = '<h3>' + escapeHtml(title) + '</h3>'
+        + '<span class="ops-number">' + escapeHtml(value) + '</span>'
+        + '<span class="ops-meta">' + escapeHtml(meta) + '</span>'
+        + list;
+    }
+    function renderOpsLocked() {
+      renderOpsCard('rank', '내노출 추적', '-', 'Pro 로그인 후 서버 추적 현황을 확인합니다.', []);
+      renderOpsCard('outcomes', '성과 기록', '-', 'Pro 로그인 후 실제 노출/수익 기록을 확인합니다.', []);
+      renderOpsCard('wordpress', '워드프레스/발행', '-', 'Pro 로그인 후 사이트와 발행 초안을 확인합니다.', []);
+      renderOpsCard('schedule', '스케줄/알림', '-', 'Pro 로그인 후 예약과 알림 상태를 확인합니다.', []);
+    }
+    function settledValue(result) {
+      return result && result.status === 'fulfilled' ? result.value : null;
+    }
+    function settledError(result) {
+      return result && result.status === 'rejected' && result.reason ? result.reason.message || String(result.reason) : null;
+    }
+    function isAuthErrorMessage(message) {
+      return /authorization required|401|403|로그인|권한|인증|session/i.test(String(message || ''));
+    }
+    function friendlyOpsError(result) {
+      const message = settledError(result);
+      if (isAuthErrorMessage(message)) return 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.';
+      return message || '스냅샷을 불러오지 못했습니다.';
+    }
+    async function loadOpsDashboard() {
+      if (!session || !session.accessToken) {
+        renderOpsLocked();
+        return;
+      }
+      const results = await Promise.allSettled([
+        apiGet(endpoints.rankTracking, true),
+        apiGet(endpoints.proOutcomes, true),
+        apiGet(endpoints.wordpress, true),
+        apiGet(endpoints.scheduleDashboard, true)
+      ]);
+      const rank = settledValue(results[0]);
+      const outcomes = settledValue(results[1]);
+      const wordpress = settledValue(results[2]);
+      const schedule = settledValue(results[3]);
+      const authFailed = results.some(function(result) { return isAuthErrorMessage(settledError(result)); })
+        && !rank && !outcomes && !wordpress && !schedule;
+      if (authFailed) {
+        saveSession(null);
+        renderOpsLocked();
+        setResult({ ok: false, message: 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.' });
+        log('Pro 로그인 세션이 만료되어 운영 대시보드를 잠금 상태로 전환했습니다.');
+        return;
+      }
+
+      if (rank && rank.snapshot) {
+        const totals = rank.snapshot.totals || {};
+        const posts = ((rank.snapshot.posts || {}).items || []).slice(0, 3).map(function(post) {
+          const rankText = post.currentRank ? String(post.currentRank) + '위' : 'Top30 밖';
+          return (post.keyword || post.postTitle || '추적 글') + ' · ' + rankText + ' · ' + (post.postTitle || post.postUrl || '-');
+        });
+        renderOpsCard('rank', '내노출 추적', fmt(totals.currentlyInTop30 || 0) + '/' + fmt(totals.trackedPairs || 0), 'Top30 노출 / 추적쌍 · Top10 ' + fmt(totals.currentlyInTop10 || 0), posts);
+      } else {
+        renderOpsCard('rank', '내노출 추적', '확인 필요', friendlyOpsError(results[0]), []);
+      }
+
+      if (outcomes && outcomes.snapshot) {
+        const snapshot = outcomes.snapshot;
+        const benchmark = snapshot.benchmark || {};
+        const topKeywords = (benchmark.topPerformingKeywords || []).slice(0, 3).map(function(item) {
+          return (item.keyword || '성과 키워드') + ' · 조회 ' + fmt(item.views || 0) + ' · 수익 ' + fmt(item.revenue || 0);
+        });
+        renderOpsCard('outcomes', '성과 기록', fmt(snapshot.measuredPosts || 0) + '/' + fmt(snapshot.totalRecords || 0), '측정 글 / 전체 기록 · 월수익 ' + fmt(benchmark.totalMonthlyRevenue || 0), topKeywords);
+      } else {
+        renderOpsCard('outcomes', '성과 기록', '확인 필요', friendlyOpsError(results[1]), []);
+      }
+
+      if (wordpress && wordpress.snapshot) {
+        const snapshot = wordpress.snapshot;
+        const sites = snapshot.sites || {};
+        const drafts = snapshot.drafts || {};
+        const draftItems = (drafts.items || []).slice(0, 3).map(function(draft) {
+          return (draft.title || draft.keyword || '발행 초안') + ' · ' + (draft.status || 'draft');
+        });
+        renderOpsCard('wordpress', '워드프레스/발행', fmt(drafts.total || 0), '초안 · 연결 사이트 ' + fmt(sites.total || 0), draftItems);
+      } else {
+        renderOpsCard('wordpress', '워드프레스/발행', '확인 필요', friendlyOpsError(results[2]), []);
+      }
+
+      if (schedule && schedule.snapshot) {
+        const snapshot = schedule.snapshot;
+        const schedules = snapshot.schedules || {};
+        const groups = snapshot.groups || {};
+        const nextItems = (schedules.items || []).slice(0, 3).map(function(item) {
+          return (item.keyword || item.topic || '예약') + ' · ' + (item.status || '-') + ' · ' + fmtTime(item.scheduleDateTime);
+        });
+        renderOpsCard('schedule', '스케줄/알림', fmt(schedules.pending || 0) + '/' + fmt(schedules.total || 0), '대기 / 전체 예약 · 그룹 ' + fmt(groups.total || 0) + ' · 다음 ' + fmtTime(schedules.nextRunAt), nextItems);
+      } else {
+        renderOpsCard('schedule', '스케줄/알림', '확인 필요', friendlyOpsError(results[3]), []);
+      }
+
+      setResult({
+        operations: {
+          rankTracking: rank && rank.snapshot ? rank.snapshot.totals : settledError(results[0]),
+          outcomes: outcomes && outcomes.snapshot ? { totalRecords: outcomes.snapshot.totalRecords, measuredPosts: outcomes.snapshot.measuredPosts } : settledError(results[1]),
+          wordpress: wordpress && wordpress.snapshot ? { sites: wordpress.snapshot.sites.total, drafts: wordpress.snapshot.drafts.total } : settledError(results[2]),
+          schedule: schedule && schedule.snapshot ? { schedules: schedule.snapshot.schedules.total, pending: schedule.snapshot.schedules.pending } : settledError(results[3])
+        }
+      });
+      log('Pro 운영 대시보드를 갱신했습니다.');
+    }
+    async function refreshFeatureStatus() {
+      if (!requireSession()) return;
+      try {
+        const payload = await apiGet(endpoints.pcFeatures, true);
+        pcCatalog = payload.catalog;
+        const status = await apiGet(endpoints.apiStatus, true).catch(function(err) { return { error: err.message }; });
+        renderFeatureCatalog(pcCatalog, status.snapshot || status);
+        setResult({ pcFeatureCatalog: pcCatalog && pcCatalog.summary ? pcCatalog.summary : pcCatalog, apiStatus: status.snapshot || status });
+        log('서버 기능 카탈로그와 API 상태를 확인했습니다.');
+      } catch (err) {
+        log('기능 상태 확인 실패: ' + err.message);
+      }
+    }
+    function formatBytes(value) {
+      const bytes = Number(value || 0);
+      if (!Number.isFinite(bytes) || bytes <= 0) return '-';
+      if (bytes >= 1024 * 1024 * 1024) return (bytes / 1024 / 1024 / 1024).toFixed(2) + 'GB';
+      if (bytes >= 1024 * 1024) return (bytes / 1024 / 1024).toFixed(1) + 'MB';
+      if (bytes >= 1024) return (bytes / 1024).toFixed(1) + 'KB';
+      return bytes + 'B';
+    }
+    function renderDownloadMeta(payload) {
+      const pc = payload && payload.pc ? payload.pc : {};
+      const android = payload && payload.android ? payload.android : {};
+      qs('pcDownloadMeta').textContent = pc.available
+        ? '사용 가능 · ' + (pc.filename || 'LEWORD PC') + ' · ' + formatBytes(pc.size)
+        : '파일 준비 중 · 서버 배포 상태를 확인하세요';
+      qs('androidDownloadMeta').textContent = android.available
+        ? '사용 가능 · ' + (android.filename || 'LEWORD APK') + ' · ' + formatBytes(android.size)
+        : 'APK 준비 중 · 모바일 빌드 상태를 확인하세요';
+    }
+    async function loadDownloads() {
+      try {
+        const payload = await apiGet(endpoints.downloads, false);
+        renderDownloadMeta(payload);
+        setResult({ downloads: payload });
+      } catch (err) {
+        qs('pcDownloadMeta').textContent = '다운로드 상태 확인 실패';
+        qs('androidDownloadMeta').textContent = '다운로드 상태 확인 실패';
+        throw err;
+      }
+    }
+    async function runFeature(feature, options) {
+      if (feature && feature.id) {
+        selectTool(feature.id);
+        setActiveView('features', { load: false });
+      }
+      if (feature && feature.method === 'DOWNLOAD') {
+        renderToolResultPanel(feature, feature.title, '다운로드를 시작합니다. 브라우저 다운로드 목록을 확인하세요.', [
+          { label: '상태', value: '다운로드' },
+          { label: '경로', value: feature.route || '-' },
+          { label: '권한', value: '공개' },
+          { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+        ], []);
+        window.location.href = feature.route;
+        return;
+      }
+      if (!session || !session.accessToken) {
+        if (feature && feature.id) renderToolLocked(feature);
+        requireSession();
+        return;
+      }
+      const runOptions = options || {};
+      const q = runOptions.keyword == null ? compactKeywordInput() : String(runOptions.keyword || '').trim();
+      try {
+        if (feature.requiresKeyword && !q) {
+          log(feature.title + '는 키워드 입력이 필요합니다.');
+          if (feature.id) {
+            renderToolResultPanel(feature, feature.title + ' 입력 필요', '시드 키워드 또는 조회 키워드를 넣은 뒤 다시 실행하세요.', [
+              { label: '상태', value: '입력 필요' },
+              { label: '필수값', value: '키워드' },
+              { label: '결과', value: '-' },
+              { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+            ], []);
+          }
+          return;
+        }
+        if (feature.id) renderToolRunning(feature, q);
+        log(feature.title + ' 실행 시작');
+        if (feature.method === 'GET') {
+          const payload = await apiGet(feature.route, true);
+          if (feature.handler && payload.catalog && Array.isArray(payload.catalog.items)) {
+            const matched = payload.catalog.items.filter(function(item) { return item.handler === feature.handler; });
+            renderFeatureResult(feature, { feature: feature.title, route: feature.route, matchedHandlers: matched });
+          } else {
+            renderFeatureResult(feature, payload.snapshot || payload.catalog || payload);
+          }
+          log(feature.title + ' 서버 상태 확인 완료');
+          return;
+        }
+        if (feature.workflow === 'blueprint-draft') {
+          log(feature.title + ' 블루프린트 생성 중');
+          const blueprintPayload = await apiPost(endpoints.blueprint, feature.payload ? feature.payload(q, runOptions) : { keyword: q });
+          const blueprint = blueprintPayload && blueprintPayload.result && blueprintPayload.result.blueprint
+            ? blueprintPayload.result.blueprint
+            : blueprintPayload && blueprintPayload.blueprint
+              ? blueprintPayload.blueprint
+              : blueprintPayload && blueprintPayload.result
+                ? blueprintPayload.result
+                : null;
+          if (!blueprint) throw new Error('블루프린트 생성 결과가 비어 있습니다.');
+          log(feature.title + ' 초안 생성 중');
+          const draftPayload = await apiPost(endpoints.blueprintDraft, { blueprint: blueprint });
+          renderFeatureResult(feature, {
+            ok: draftPayload.ok !== false,
+            workflow: 'blueprint-draft',
+            blueprint: blueprintPayload.result || blueprintPayload,
+            draft: draftPayload.result || draftPayload,
+          });
+          log(feature.title + ' 완료');
+          return;
+        }
+        if (feature.direct) {
+          const payload = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {});
+          renderFeatureResult(feature, payload.snapshot || payload.result || payload);
+          log(feature.title + ' 즉시 실행 완료');
+          return;
+        }
+        const created = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {});
+        const result = await pollJob(created);
+        renderFeatureResult(feature, result);
+        log(feature.title + ' 완료');
+      } catch (err) {
+        log(feature.title + ' 실패: ' + err.message);
+        setResult({ error: err.message });
+        renderResultSummary(feature.title + ' 실패', err.message, [
+          { label: '상태', value: '오류' },
+          { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+          { label: '라우트', value: feature.route || '-' },
+          { label: '입력', value: q || '-' },
+        ], []);
+        if (feature.id) {
+          renderToolResultPanel(feature, feature.title + ' 실패', err.message, [
+            { label: '상태', value: '오류' },
+            { label: '라우트', value: feature.route || '-' },
+            { label: '입력', value: q || '-' },
+            { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+          ], []);
+        }
+      }
+    }
+    async function runLookup(mode) {
+      if (!session || !session.accessToken) {
+        qs('keywordRows').innerHTML = '<tr><td colspan="12" class="muted">Pro 로그인 후 PC/모바일 실측 조회를 실행할 수 있습니다. 로그인 창을 열어두었습니다.</td></tr>';
+        requireSession();
+        return;
+      }
+      const q = compactKeywordInput();
+      if (!q) {
+        log('키워드를 입력해야 합니다.');
+        qs('keywordRows').innerHTML = '<tr><td colspan="12" class="muted">조회할 키워드를 입력한 뒤 다시 실행하세요.</td></tr>';
+        return;
+      }
+      const feature = mode === 'mindmap-expansion'
+        ? { title: '마인드맵 확장', route: endpoints.mindmap, payload: function() { return { seedKeyword: q, depth: 1, targetCount: 50, includeVolumeMetrics: true }; } }
+        : mode === 'golden-discovery'
+          ? { title: '황금키워드 발굴', route: endpoints.golden, payload: function() { return { categoryId: 'all', seedKeyword: q, mode: 'precision', targetCount: 30, requireSssFloor: true }; } }
+          : { title: '정밀 키워드 분석', route: endpoints.keywordAnalysis, payload: function() { return { keyword: q, maxRelatedCount: 30, includeMindmapPreview: true }; } };
+      await runFeature(feature);
+    }
+
+    document.querySelectorAll('[data-view-target]').forEach(function(target) {
+      target.addEventListener('click', function(event) {
+        event.preventDefault();
+        setActiveView(target.getAttribute('data-view-target') || 'golden');
+        if (isMobileProChrome()) {
+          setMobileProChromePreference('closed');
+          setMobileProChromeCollapsed(true);
+        }
+      });
+    });
+    qs('mobileProShellToggle').addEventListener('click', function() {
+      const expanded = qs('mobileProShellToggle').getAttribute('aria-expanded') === 'true';
+      const nextPreference = expanded ? 'closed' : 'open';
+      setMobileProChromePreference(nextPreference);
+      setMobileProChromeCollapsed(nextPreference !== 'open');
+    });
+    window.addEventListener('resize', syncMobileProChrome);
+    syncMobileProChrome();
+    window.addEventListener('hashchange', function() {
+      setActiveView((location.hash || '#golden').slice(1), { hash: false });
+    });
+    qs('loginOpen').addEventListener('click', openLogin);
+    qs('loginClose').addEventListener('click', closeLogin);
+    qs('loginModal').addEventListener('click', function(event) { if (event.target.id === 'loginModal') closeLogin(); });
+    qs('loginForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const userId = qs('userId').value.trim();
+      const password = qs('password').value.trim();
+      const licenseCode = qs('licenseCode').value.trim();
+      qs('loginMessage').textContent = '로그인 중...';
+      try {
+        const loginPayload = { userId: userId, password: password };
+        if (licenseCode) loginPayload.licenseCode = licenseCode;
+        const payload = await apiPost(endpoints.session, loginPayload);
+        if (!payload.session || !payload.session.accessToken) throw new Error(payload.message || '세션 발급 실패');
+        saveSession(payload.session);
+        qs('loginMessage').textContent = '로그인 완료';
+        closeLogin();
+        log('Pro 로그인 완료: ' + (payload.session.tier || 'standard'));
+        await Promise.all([loadSources(), loadGoldenBoard(), loadOpsDashboard(), refreshFeatureStatus().catch(function() {})]);
+      } catch (err) {
+        qs('loginMessage').textContent = err.message;
+      }
+    });
+    qs('lookupForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      runLookup(qs('lookupMode').value);
+    });
+    qs('toolTabs').addEventListener('click', function(event) {
+      const target = event.target.closest('[data-tool]');
+      if (!target) return;
+      selectTool(target.getAttribute('data-tool'));
+      setActiveView('features', { load: false });
+    });
+    qs('toolGroupTabs').addEventListener('click', function(event) {
+      const target = event.target.closest('[data-tool-group]');
+      if (!target) return;
+      selectToolGroup(target.getAttribute('data-tool-group'));
+      setActiveView('features', { load: false });
+    });
+    qs('copyLookupKeyword').addEventListener('click', function() {
+      qs('toolSeedInput').value = compactKeywordInput();
+      qs('toolSeedInput').focus();
+    });
+    qs('runSelectedTool').addEventListener('click', function() {
+      const feature = getSelectedTool();
+      const options = collectToolOptions();
+      runFeature(feature, options);
+    });
+    qs('refreshSources').addEventListener('click', loadSources);
+    qs('refreshGolden').addEventListener('click', loadGoldenBoard);
+    qs('refreshOps').addEventListener('click', function() {
+      if (!requireSession()) {
+        renderOpsLocked();
+        return;
+      }
+      loadOpsDashboard().catch(function(err) { log('운영 대시보드 갱신 실패: ' + err.message); });
+    });
+    qs('opsTabs').addEventListener('click', function(event) {
+      const target = event.target.closest('[data-ops-tab]');
+      if (!target) return;
+      setActiveOpsTab(target.getAttribute('data-ops-tab'));
+      setActiveView('ops', { load: false });
+    });
+    qs('refreshFeatureStatus').addEventListener('click', refreshFeatureStatus);
+    qs('clearLog').addEventListener('click', function() {
+      qs('runLog').textContent = 'LEWORD Pro Web 대기 중';
+      qs('resultLog').textContent = '원문 결과 대기 중';
+      qs('resultSummary').innerHTML = '<h3>결과 센터</h3><p>키워드 조회나 Pro 기능을 실행하면 KPI, 상위 후보, 바로가기 액션을 이곳에 정리합니다.</p>';
+      renderToolWaiting(getSelectedTool());
+      lastKeywordResult = null;
+    });
+    document.addEventListener('click', function(event) {
+      const actionTarget = event.target.closest('#saveKeywordGroup, #exportKeywordCsv, #exportKeywordJson, #trackTopKeyword');
+      if (!actionTarget) return;
+      if (actionTarget.id === 'saveKeywordGroup') {
+        saveKeywordGroupFromResult();
+        return;
+      }
+      if (actionTarget.id === 'exportKeywordCsv') {
+        exportKeywordResult('csv');
+        return;
+      }
+      if (actionTarget.id === 'exportKeywordJson') {
+        exportKeywordResult('json');
+        return;
+      }
+      if (actionTarget.id === 'trackTopKeyword') {
+        trackTopKeywordFromResult();
+      }
+    });
+    document.addEventListener('click', function(event) {
+      const shortcut = event.target.closest('[data-tool-shortcut]');
+      if (!shortcut) return;
+      selectFeatureShortcut(shortcut.getAttribute('data-tool-shortcut') || 'pro-traffic', compactKeywordInput(), false);
+    });
+    document.addEventListener('click', function(event) {
+      const shortcut = event.target.closest('[data-view-shortcut]');
+      if (!shortcut) return;
+      setActiveView(shortcut.getAttribute('data-view-shortcut') || 'sources');
+    });
+    document.addEventListener('click', function(event) {
+      const target = event.target.closest('[data-feature]');
+      if (!target) return;
+      const feature = features.find(function(row) { return row.id === target.getAttribute('data-feature'); });
+      if (feature) {
+        selectTool(feature.id);
+        setActiveView('features', { load: false });
+        runFeature(feature, collectToolOptions());
+      }
+    });
+    document.addEventListener('click', function(event) {
+      const tab = event.target.closest('[data-catalog-tab]');
+      if (!tab) return;
+      selectedCatalogTab = tab.getAttribute('data-catalog-tab') || selectedCatalogTab;
+      renderFeatureCatalog(pcCatalog, null);
+    });
+    document.addEventListener('click', function(event) {
+      const target = event.target.closest('[data-catalog-run]');
+      if (!target) return;
+      runCatalogItem(target.getAttribute('data-catalog-run'));
+    });
+    document.addEventListener('click', function(event) {
+      const target = event.target.closest('[data-board-action]');
+      if (!target) return;
+      const keyword = target.getAttribute('data-keyword') || '';
+      const action = target.getAttribute('data-board-action');
+      if (!keyword) return;
+      if (action === 'naver') {
+        window.open('https://search.naver.com/search.naver?query=' + encodeURIComponent(keyword), '_blank', 'noopener');
+        return;
+      }
+      if (action === 'google') {
+        window.open('https://www.google.com/search?q=' + encodeURIComponent(keyword), '_blank', 'noopener');
+        return;
+      }
+      if (action === 'daum') {
+        window.open('https://search.daum.net/search?w=tot&q=' + encodeURIComponent(keyword), '_blank', 'noopener');
+        return;
+      }
+      if (action === 'nate') {
+        window.open('https://search.nate.com/search/all.html?q=' + encodeURIComponent(keyword), '_blank', 'noopener');
+        return;
+      }
+      if (action === 'zum') {
+        window.open('https://search.zum.com/search.zum?query=' + encodeURIComponent(keyword), '_blank', 'noopener');
+        return;
+      }
+      if (action === 'trend') {
+        showTrendGraph(keyword);
+        return;
+      }
+      if (action === 'mindmap') {
+        selectFeatureShortcut('mindmap', keyword, true);
+        return;
+      }
+      if (action === 'pro-traffic') {
+        selectFeatureShortcut('pro-traffic', keyword, true);
+        return;
+      }
+      if (action === 'shopping') {
+        selectFeatureShortcut('shopping', keyword, true);
+        return;
+      }
+      qs('keywordInput').value = keyword;
+      qs('lookupMode').value = 'golden-discovery';
+      setActiveView('lookup', { load: false });
+      runLookup('golden-discovery');
+    });
+    document.addEventListener('keydown', function(event) {
+      const target = event.target.closest('.signal[data-board-action]');
+      if (!target || (event.key !== 'Enter' && event.key !== ' ')) return;
+      event.preventDefault();
+      target.click();
+    });
+
+    restoreSession();
+    renderFeatureGrid();
+    renderFeatureCatalog(null, null);
+    selectTool(selectedToolId);
+    setActiveOpsTab(selectedOpsId);
+    renderOpsLocked();
+    setActiveView((location.hash || '#golden').slice(1), { load: false });
+    loadHealth();
+    loadGoldenBoard();
+    loadSources();
+    loadOpsDashboard();
+    loadDownloads().catch(function() {});
+    setInterval(loadHealth, 30000);
+    setInterval(loadGoldenBoard, 60000);
+    setInterval(loadSources, 60000);
+    setInterval(loadOpsDashboard, 90000);
+  </script>
+</body>
+</html>
