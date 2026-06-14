@@ -12,7 +12,7 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW
 const DOWNLOAD_PW = '1645';
 
 type DownloadChoice = {
-    key: 'windows' | 'mac-arm' | 'mac-intel';
+    key: 'windows' | 'android' | 'mac-arm' | 'mac-intel';
     label: string;
     detail: string;
     url: string;
@@ -42,12 +42,13 @@ const PRODUCTS = {
     },
     leword: {
         name: 'LEWORD',
-        version: 'AI 키워드 인텔리전스 · v2.49.83',
+        version: 'AI 키워드 인텔리전스 · Windows v2.49.85',
         image: '/images/leword/hero-banner.png',
         accent: '#A78BFA',
         borderColor: 'rgba(124,58,237,0.25)',
         downloads: [
-            { key: 'windows', label: 'Windows', detail: '2.49.83 · exe', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83.exe' },
+            { key: 'windows', label: 'Windows', detail: '2.49.85 · exe', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe' },
+            { key: 'android', label: 'Android APK', detail: '2.49.85 · apk', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk' },
             { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.49.83 · arm64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-arm64.dmg' },
             { key: 'mac-intel', label: 'Mac Intel', detail: '2.49.83 · x64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-x64.dmg' },
         ],

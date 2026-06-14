@@ -735,8 +735,8 @@
         <a href="#lookup" data-view-target="lookup">키워드 조회</a>
         <a href="#features" data-view-target="features">Pro 기능</a>
         <a href="#ops" data-view-target="ops">운영 현황</a>
-        <a class="download" href="/download/pc">PC 앱 다운로드</a>
-        <a class="download" href="/download/android">모바일 APK</a>
+        <a class="download" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe">PC 앱 다운로드</a>
+        <a class="download" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk">모바일 APK</a>
         <button type="button" id="loginOpen">Pro 로그인</button>
       </nav>
     </header>
@@ -933,13 +933,13 @@
               <h3>PC Electron 앱</h3>
               <p>Windows용 LEWORD 데스크톱 앱입니다. 기존 Electron 앱의 전체 기능을 PC 환경에서 그대로 사용합니다.</p>
               <div class="download-meta" id="pcDownloadMeta">다운로드 파일 확인 중</div>
-              <a class="btn primary" href="/download/pc">PC 앱 다운로드</a>
+              <a class="btn primary" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe">PC 앱 다운로드</a>
             </article>
             <article class="download-card">
               <h3>Android 모바일 앱</h3>
               <p>서버 기반 Pro 기능, 실시간 소스, 키워드 저장/공유, 알림 기능을 사용하는 Android APK입니다.</p>
               <div class="download-meta" id="androidDownloadMeta">다운로드 파일 확인 중</div>
-              <a class="btn primary" href="/download/android">모바일 APK 다운로드</a>
+              <a class="btn primary" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk">모바일 APK 다운로드</a>
             </article>
           </div>
           <details class="settings-panel" id="naverApiSettings">
@@ -1037,8 +1037,18 @@
   </div>
 
   <script>
-    const apiBase = 'https://141.164.59.17.sslip.io';
-    function apiUrl(path) { return apiBase + path; }
+    const apiBase = (function() {
+      if (window.LEWORD_API_BASE) return String(window.LEWORD_API_BASE).replace(/\/$/, '');
+      const host = location.hostname || '';
+      if (host === 'www.leaderspro.kr' || host === 'leaderspro.kr') return 'https://141.164.59.17.sslip.io';
+      return '';
+    })();
+    function apiUrl(path) {
+      if (/^https?:\/\//i.test(path)) return path;
+      return apiBase ? apiBase + path : path;
+    }
+    const pcReleaseUrl = 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe';
+    const androidReleaseUrl = 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk';
     const endpoints = {
       health: apiUrl('/health'),
       session: apiUrl('/v1/web/session'),
@@ -1076,8 +1086,8 @@
       rankTrackingRun: apiUrl('/v1/mobile/rank-tracking/run'),
       proOutcomeSync: apiUrl('/v1/mobile/pro-outcomes/sync'),
       downloads: apiUrl('/v1/downloads'),
-      pcDownload: apiUrl('/download/pc'),
-      androidDownload: apiUrl('/download/android')
+      pcDownload: pcReleaseUrl,
+      androidDownload: androidReleaseUrl
     };
 
     const toolGroups = [
