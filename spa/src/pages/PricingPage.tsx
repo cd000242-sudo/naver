@@ -20,6 +20,8 @@ interface Plan {
     amountCard?: number;
     period: string;
     monthly?: string;
+    futureAmount?: number;
+    eventLabel?: string;
     features: string[];
     badge?: { text: string; type: 'best' | 'lifetime' | 'trial' };
     free?: boolean;
@@ -27,10 +29,61 @@ interface Plan {
 
 const PLANS: Record<string, Plan[]> = {
     naver: [
-        { id: 'free-naver', name: 'Better Life Naver 무료 체험', desc: '네이버 자동화 먼저 체험', amount: 0, period: '무료', free: true, badge: { text: '🎁 FREE', type: 'trial' }, features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 올인원 구매 후 이용'] },
-        { id: 'all-in-one-monthly', name: '올인원 1개월', desc: '세 제품을 한 번에 가볍게 시작', amount: 50000, amountCard: 55000, period: '/ 월 (공급가)', features: ['네이버 자동화툴 이용', 'LEWORD 키워드 분석 이용', 'Leaders Orbit 이용', '이메일 고객 지원'] },
-        { id: 'all-in-one-quarterly', name: '올인원 3개월', desc: '블로그 자동화 흐름을 안정적으로 운영', amount: 120000, period: '/ 3개월', monthly: '월 40,000원', features: ['네이버 자동화툴 이용', 'LEWORD 전체 기능 이용', 'Leaders Orbit 이용', '우선 고객 지원'] },
-        { id: 'all-in-one-yearly', name: '올인원 1년', desc: '가장 합리적인 전체 제품 기간권', amount: 400000, period: '/ 년', monthly: '월 33,333원', badge: { text: '👑 BEST VALUE', type: 'best' }, features: ['모든 자동화툴 기간 내 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원'] },
+        {
+            id: 'free-naver',
+            name: 'Better Life Naver 무료 체험',
+            desc: '네이버 자동화 먼저 체험',
+            amount: 0,
+            period: '무료',
+            free: true,
+            badge: { text: '🎁 FREE', type: 'trial' },
+            features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2편 발행 제한', 'LEWORD·Orbit은 올인원 구매 후 이용'],
+        },
+        {
+            id: 'all-in-one-monthly',
+            name: '올인원 1개월',
+            desc: '3개 앱을 한 번에 가볍게 시작',
+            amount: 50000,
+            amountCard: 55000,
+            futureAmount: 100000,
+            eventLabel: '8월 1일부터 정상가 100,000원',
+            period: '/ 월 (공급가)',
+            features: ['Better Life Naver 이용', 'LEWORD 키워드 분석 이용', 'Leadernam Orbit 이용', '이메일 고객 지원'],
+        },
+        {
+            id: 'all-in-one-quarterly',
+            name: '올인원 3개월',
+            desc: '블로그 자동화 흐름을 안정적으로 운영',
+            amount: 120000,
+            futureAmount: 240000,
+            eventLabel: '8월 1일부터 정상가 240,000원',
+            period: '/ 3개월',
+            monthly: '월 40,000원',
+            features: ['Better Life Naver 이용', 'LEWORD 전체 기능 이용', 'Leadernam Orbit 이용', '우선 고객 지원'],
+        },
+        {
+            id: 'all-in-one-yearly',
+            name: '올인원 1년',
+            desc: '가장 합리적인 전체 제품 기간권',
+            amount: 400000,
+            futureAmount: 800000,
+            eventLabel: '8월 1일부터 정상가 800,000원',
+            period: '/ 년',
+            monthly: '월 33,333원',
+            badge: { text: '👑 BEST VALUE', type: 'best' },
+            features: ['모든 자동화툴 기간 내 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원'],
+        },
+        {
+            id: 'all-in-one-lifetime',
+            name: '올인원 영구제',
+            desc: '한 번 구매로 장기 운영하는 영구 이용권',
+            amount: 1650000,
+            futureAmount: 3300000,
+            eventLabel: '8월 1일부터 정상가 3,300,000원',
+            period: '영구 이용',
+            badge: { text: '🌟 LIFETIME', type: 'lifetime' },
+            features: ['3개 앱 모두 영구 이용', '영구제 전용 라이선스', '장기 운영자 우선 지원', '주요 업데이트 포함'],
+        },
     ],
 };
 
@@ -152,7 +205,7 @@ function PricingPage() {
         if (!selected) return '플랜을 선택해주세요';
         const charge = selected.amountCard || selected.amount;
         const vatNote = selected.amountCard ? ' (VAT 포함)' : '';
-        return `${selected.name} 시작 — 7일 후 ${charge.toLocaleString()}원${vatNote}`;
+        return `${selected.name} 시작 · 7일 환불 보장 · ${charge.toLocaleString()}원${vatNote}`;
     })();
 
     return (
@@ -160,8 +213,11 @@ function PricingPage() {
             <section style={{ padding: '140px 20px 80px', maxWidth: 1200, margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>PRICING</span>
-                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>올인원 기간제 이용권</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>구매하면 패널에서 올인원 라이선스 코드가 발급됩니다. Better Life Naver, Leaders Orbit, LEWORD를 이용 기간 안에서 함께 사용할 수 있습니다.</p>
+                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>지금 이벤트가로 이용하고, 8월 1일 정상가 전에 시작하세요</h2>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>1개월·3개월·1년·영구제 모두 올인원 라이선스로 Better Life Naver, LEWORD, Leadernam Orbit을 함께 이용합니다.</p>
+                    <div style={{ margin: '18px auto 0', maxWidth: 720, padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(255,215,0,0.28)', background: 'rgba(255,215,0,0.08)', color: '#FFD700', fontSize: 14, fontWeight: 800 }}>
+                        현재 가격은 7월 31일까지 이벤트가입니다. 2026년 8월 1일부터 1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원 정상가로 전환됩니다.
+                    </div>
                 </div>
 
                 {/* Product tabs */}
@@ -214,10 +270,20 @@ function PricingPage() {
                                     <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>{p.desc}</p>
                                 </div>
                                 <div style={{ marginBottom: 10 }}>
+                                    {p.futureAmount && !p.free && (
+                                        <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', textDecoration: 'line-through', marginBottom: 4 }}>
+                                            정상가 {p.futureAmount.toLocaleString()}원
+                                        </div>
+                                    )}
                                     <span style={{ fontSize: 28, fontWeight: 900, background: 'linear-gradient(135deg, #FFD700, #FFA500)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                                         {p.free ? '0' : p.amount.toLocaleString()}
                                     </span>
                                     <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', marginLeft: 4 }}>{p.free ? '원' : '원'}</span>
+                                    {p.eventLabel && (
+                                        <div style={{ margin: '8px auto 0', display: 'inline-flex', padding: '4px 10px', borderRadius: 999, background: 'rgba(255,215,0,0.10)', border: '1px solid rgba(255,215,0,0.22)', color: '#FFD700', fontSize: 11, fontWeight: 900 }}>
+                                            지금 이벤트가 · {p.eventLabel}
+                                        </div>
+                                    )}
                                 </div>
                                 <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', marginBottom: 4 }}>
                                     {p.period}
@@ -328,9 +394,9 @@ function PricingPage() {
                     </div>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 12 }}>
                         {[
-                            ['네이버 자동화툴', '영구제', '₩1,000,000'],
-                            ['LEADER Orbit', '영구제', '₩1,000,000'],
-                            ['LEWORD', '영구제', '₩1,000,000'],
+                            ['Better Life Naver', '개별 영구제', '별도 문의'],
+                            ['Leadernam Orbit', '개별 영구제', '별도 문의'],
+                            ['LEWORD', '개별 영구제', '별도 문의'],
                         ].map(([name, type, price]) => (
                             <article key={name} style={{ padding: 18, borderRadius: 12, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.10)' }}>
                                 <strong style={{ display: 'block', color: '#fff', fontSize: 16, marginBottom: 6 }}>{name}</strong>
