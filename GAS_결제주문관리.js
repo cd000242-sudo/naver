@@ -181,9 +181,14 @@ function handleConfirmPayment(e) {
   var PRODUCT_MAP = {
     50000:  { type: '올인원 1개월', name: 'Leaders Pro 올인원 1개월', poolType: null, licenseType: 'CUSTOM', customDays: 30, platform: 'ALL' },
     55000:  { type: '올인원 1개월', name: 'Leaders Pro 올인원 1개월', poolType: null, licenseType: 'CUSTOM', customDays: 30, platform: 'ALL' },
+    100000: { type: '올인원 1개월', name: 'Leaders Pro 올인원 1개월', poolType: null, licenseType: 'CUSTOM', customDays: 30, platform: 'ALL' },
+    110000: { type: '올인원 1개월', name: 'Leaders Pro 올인원 1개월', poolType: null, licenseType: 'CUSTOM', customDays: 30, platform: 'ALL' },
     120000: { type: '올인원 3개월', name: 'Leaders Pro 올인원 3개월', poolType: null, licenseType: 'CUSTOM', customDays: 90, platform: 'ALL' },
-    400000: { type: '올인원 1년',   name: 'Leaders Pro 올인원 1년',   poolType: null, licenseType: 'CUSTOM', customDays: 365, platform: 'ALL' }
-    ,1650000: { type: '올인원 영구제', name: 'Leaders Pro 올인원 영구제', poolType: 'lifetime', licenseType: 'LIFE', customDays: -1, platform: 'ALL' }
+    240000: { type: '올인원 3개월', name: 'Leaders Pro 올인원 3개월', poolType: null, licenseType: 'CUSTOM', customDays: 90, platform: 'ALL' },
+    400000: { type: '올인원 1년',   name: 'Leaders Pro 올인원 1년',   poolType: null, licenseType: 'CUSTOM', customDays: 365, platform: 'ALL' },
+    800000: { type: '올인원 1년',   name: 'Leaders Pro 올인원 1년',   poolType: null, licenseType: 'CUSTOM', customDays: 365, platform: 'ALL' },
+    1650000: { type: '올인원 영구제', name: 'Leaders Pro 올인원 영구제', poolType: 'lifetime', licenseType: 'LIFE', customDays: -1, platform: 'ALL' },
+    3300000: { type: '올인원 영구제', name: 'Leaders Pro 올인원 영구제', poolType: 'lifetime', licenseType: 'LIFE', customDays: -1, platform: 'ALL' }
   };
 
   var product = PRODUCT_MAP[amount];

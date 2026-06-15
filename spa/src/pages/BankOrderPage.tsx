@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 
 /**
  * 계좌이체 결제 — payment-page/bank-order.html 마이그.
@@ -9,14 +10,14 @@ import { useSearchParams } from 'react-router-dom';
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
 
-interface ProductOption { id: string; name: string; price: number; period: string; }
+interface ProductOption { id: string; name: string; price: number; futurePrice?: number; period: string; normalPeriod?: string; }
 
 const ALL_PRODUCTS: Record<string, ProductOption[]> = {
     naver: [
-        { id: 'all-in-one-monthly', name: '올인원 1개월', price: 50000, period: '/ 월 · 8월 1일부터 100,000원' },
-        { id: 'all-in-one-quarterly', name: '올인원 3개월', price: 120000, period: '월 40,000원 · 8월 1일부터 240,000원' },
-        { id: 'all-in-one-yearly', name: '올인원 1년', price: 400000, period: '월 33,333원 · 8월 1일부터 800,000원' },
-        { id: 'all-in-one-lifetime', name: '올인원 영구제', price: 1650000, period: '영구 이용 · 8월 1일부터 3,300,000원' },
+        { id: 'all-in-one-monthly', name: '올인원 1개월', price: 50000, futurePrice: 100000, period: '/ 월 · 8월 1일부터 100,000원', normalPeriod: '/ 월 · 정상가 적용 중' },
+        { id: 'all-in-one-quarterly', name: '올인원 3개월', price: 120000, futurePrice: 240000, period: '월 40,000원 · 8월 1일부터 240,000원', normalPeriod: '월 80,000원 · 정상가 적용 중' },
+        { id: 'all-in-one-yearly', name: '올인원 1년', price: 400000, futurePrice: 800000, period: '월 33,333원 · 8월 1일부터 800,000원', normalPeriod: '월 66,667원 · 정상가 적용 중' },
+        { id: 'all-in-one-lifetime', name: '올인원 영구제', price: 1650000, futurePrice: 3300000, period: '영구 이용 · 8월 1일부터 3,300,000원', normalPeriod: '영구 이용 · 정상가 적용 중' },
     ],
 };
 
@@ -29,6 +30,8 @@ type Status = 'pending' | 'approved' | 'rejected';
 interface ResultInfo { orderId: string; amount?: number; product?: string; status: Status; code?: string; }
 
 const fmt = (n: number) => n.toLocaleString();
+const productPrice = (p: ProductOption, nowMs: number = Date.now()) => getScheduledAmount(p.price, p.futurePrice, nowMs);
+const productPeriod = (p: ProductOption, nowMs: number = Date.now()) => isNormalPricingActive(nowMs) && p.normalPeriod ? p.normalPeriod : p.period;
 
 async function fetchOrderStatus(orderId: string) {
     const res = await fetch(GAS_URL, {
@@ -47,6 +50,7 @@ function BankOrderPage() {
     const [email, setEmail] = useState('');
     const [submitting, setSubmitting] = useState(false);
     const [result, setResult] = useState<ResultInfo | null>(null);
+    const [pricingNow, setPricingNow] = useState(() => Date.now());
     const [copyLabel, setCopyLabel] = useState('📋 복사');
     const [licCopyLabel, setLicCopyLabel] = useState('📋 복사');
     const [shake, setShake] = useState<'name' | 'email' | null>(null);
@@ -58,6 +62,17 @@ function BankOrderPage() {
         return () => {
             document.title = prev;
             if (pollingRef.current) window.clearInterval(pollingRef.current);
+        };
+    }, []);
+
+    useEffect(() => {
+        const refreshPricing = () => setPricingNow(Date.now());
+        const intervalId = window.setInterval(refreshPricing, 60000);
+        const switchDelay = Math.max(1000, PRICING_SWITCH_AT_MS - Date.now() + 1000);
+        const switchTimeoutId = window.setTimeout(refreshPricing, switchDelay);
+        return () => {
+            window.clearInterval(intervalId);
+            window.clearTimeout(switchTimeoutId);
         };
     }, []);
 
@@ -130,6 +145,7 @@ function BankOrderPage() {
         if (!e || !e.includes('@')) { setShake('email'); window.setTimeout(() => setShake(null), 500); return; }
 
         setSubmitting(true);
+        const orderAmount = productPrice(selected);
         const productLabel = selected.name.startsWith('올인원')
             ? `Leaders Pro ${selected.name}`
             : `${PRODUCT_LABELS[tab]} ${selected.name}`;
@@ -137,12 +153,12 @@ function BankOrderPage() {
             const res = await fetch(GAS_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify({ action: 'bank-order', name: n, email: e, product: productLabel, amount: selected.price }),
+                body: JSON.stringify({ action: 'bank-order', name: n, email: e, product: productLabel, amount: orderAmount }),
             });
             const data = await res.json();
             if (data.ok) {
                 setSearchParams({ orderId: data.orderId }, { replace: true });
-                setResult({ orderId: data.orderId, amount: selected.price, product: productLabel, status: 'pending' });
+                setResult({ orderId: data.orderId, amount: orderAmount, product: productLabel, status: 'pending' });
                 startPolling(data.orderId);
             } else {
                 alert(data.error || '주문 접수에 실패했습니다.');
@@ -202,8 +218,8 @@ function BankOrderPage() {
                                     }}
                                 >
                                     <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', marginBottom: 6 }}>{p.name}</div>
-                                    <div style={{ fontSize: 18, fontWeight: 800, color: '#FFD700' }}>{fmt(p.price)}원</div>
-                                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginTop: 4 }}>{p.period}</div>
+                                    <div style={{ fontSize: 18, fontWeight: 800, color: '#FFD700' }}>{fmt(productPrice(p, pricingNow))}원</div>
+                                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginTop: 4 }}>{productPeriod(p, pricingNow)}</div>
                                 </div>
                             );
                         })}
@@ -243,7 +259,7 @@ function BankOrderPage() {
                         <BankRow label="은행" value="토스뱅크" />
                         <BankRow label="계좌번호" value={<>1000-1770-4358 <span onClick={onCopyAccount} style={{ marginLeft: 8, color: '#FFD700', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>{copyLabel}</span></>} />
                         <BankRow label="예금주" value="박성현" />
-                        <BankRow label="입금 금액" value={selected ? <strong style={{ color: '#FFD700' }}>{fmt(selected.price)}원</strong> : '기간권을 선택해주세요'} />
+                        <BankRow label="입금 금액" value={selected ? <strong style={{ color: '#FFD700' }}>{fmt(productPrice(selected, pricingNow))}원</strong> : '기간권을 선택해주세요'} />
                     </div>
                 </Step>
 
@@ -259,7 +275,7 @@ function BankOrderPage() {
                         cursor: selected && !submitting ? 'pointer' : 'not-allowed',
                     }}
                 >
-                    {submitting ? '접수 중...' : selected ? `${fmt(selected.price)}원 주문 접수하기` : '기간권을 선택해주세요'}
+                    {submitting ? '접수 중...' : selected ? `${fmt(productPrice(selected, pricingNow))}원 주문 접수하기` : '기간권을 선택해주세요'}
                 </button>
 
                 <div style={{ marginTop: 18, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.7 }}>
