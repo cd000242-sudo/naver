@@ -3216,7 +3216,7 @@
         qs('loginMessage').textContent = '로그인 완료';
         closeLogin();
         hydrateNaverApiSettingsForm();
-        setActiveView('settings', { load: false });
+        setActiveView('golden', { load: false });
         log('Pro 로그인 완료: ' + (payload.session.tier || 'standard'));
         await Promise.all([loadSources(), loadGoldenBoard(), refreshFeatureStatus().catch(function() {})]);
       } catch (err) {
