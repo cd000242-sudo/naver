@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // Keep the Pro shell in Pages so UI fixes can ship before the API container restarts.
 const LEWORD_PRO_WEB_URL = '/leword-pro-web.html';
@@ -17,9 +17,7 @@ function LewordPage() {
         };
     }, []);
 
-    const iframeSrc = useMemo(() => {
-        return `${LEWORD_PRO_WEB_URL}?embed=leaderspro&v=${iframeKey}`;
-    }, [iframeKey]);
+    const iframeSrc = `${LEWORD_PRO_WEB_URL}?embed=leaderspro&v=${iframeKey}`;
 
     const retry = () => {
         setLoaded(false);
@@ -132,32 +130,6 @@ function LewordPage() {
                     allow="clipboard-read; clipboard-write"
                     referrerPolicy="no-referrer-when-downgrade"
                 />
-                <a
-                    href={LEWORD_PRO_WEB_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                        position: 'absolute',
-                        right: 14,
-                        bottom: 14,
-                        zIndex: 3,
-                        minHeight: 38,
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        border: '1px solid rgba(245,197,66,.42)',
-                        borderRadius: 8,
-                        background: 'rgba(7,9,13,.78)',
-                        color: '#f5c542',
-                        padding: '8px 12px',
-                        fontSize: 13,
-                        fontWeight: 900,
-                        boxShadow: '0 10px 28px rgba(0,0,0,.24)',
-                        backdropFilter: 'blur(10px)',
-                    }}
-                >
-                    새 창
-                </a>
             </div>
         </section>
     );
