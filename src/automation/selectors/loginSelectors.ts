@@ -35,7 +35,7 @@ export const LOGIN_SELECTORS: SelectorMap<LoginSelectorKey> = {
   ),
   loginButton: entry(
     '#log\\.login',
-    ['button[type="submit"].btn_login', 'button.btn_login', 'button[type="submit"]'],
+    ['button[type="submit"].btn_login', 'button.btn_login', 'button[type="submit"].next_step', 'button[type="submit"]'],
     '로그인 버튼',
   ),
   logoutLink: entry(

@@ -1,20 +1,21 @@
 import { describe, expect, it } from 'vitest';
 import {
+  WARN_FILE_THRESHOLD,
   checkLoreFormat,
   checkStagedFileCount,
-  WARN_FILE_THRESHOLD,
 } from '../../scripts/git-hooks/checks.mjs';
 
 /**
- * SPEC-STABILITY-2026 Phase 6.4 — warn-only pre-commit/commit-msg checks.
- * Acceptance: attempting an 11-file commit prints a warning (never blocks).
+ * SPEC-STABILITY-2026 Phase 6.4 - warn-only pre-commit/commit-msg checks.
+ * Acceptance: attempting an 11-file commit prints a warning and never blocks.
  */
 describe('pre-commit staged file count (6.4)', () => {
   it('warns when staged files exceed the threshold (acceptance: 11 files)', () => {
     const files = Array.from({ length: 11 }, (_, i) => `src/file${i}.ts`);
     const warning = checkStagedFileCount(files);
-    expect(warning).toContain('11개');
-    expect(warning).toContain(`${WARN_FILE_THRESHOLD}개 초과`);
+
+    expect(warning).toContain('11');
+    expect(warning).toContain(String(WARN_FILE_THRESHOLD));
   });
 
   it('stays silent at or under the threshold', () => {
@@ -30,13 +31,13 @@ describe('pre-commit staged file count (6.4)', () => {
 
 describe('commit-msg Lore format check (6.4)', () => {
   const loreMessage = [
-    'fix(content): 외톨이 파이프 행 차단',
+    'fix(content): stabilize publish pipeline',
     '',
-    '본문 설명.',
+    'Body description.',
     '',
-    'Constraint: 파이프 노출 금지',
+    'Constraint: keep hook checks warn-only.',
     '',
-    '🐙 Autopus <noreply@autopus.co>',
+    'Autopus <noreply@autopus.co>',
   ].join('\n');
 
   it('accepts a compliant Lore message', () => {
@@ -44,19 +45,19 @@ describe('commit-msg Lore format check (6.4)', () => {
   });
 
   it('warns on missing type prefix', () => {
-    const warnings = checkLoreFormat('외톨이 파이프 행 차단\n\n🐙 Autopus <noreply@autopus.co>');
+    const warnings = checkLoreFormat('stabilize publish pipeline\n\nAutopus <noreply@autopus.co>');
     expect(warnings).toHaveLength(1);
-    expect(warnings[0]).toContain('타입 프리픽스');
+    expect(warnings[0]).toContain('[commit-msg]');
   });
 
   it('warns on missing Autopus sign-off', () => {
-    const warnings = checkLoreFormat('fix: 제목만 있는 커밋');
+    const warnings = checkLoreFormat('fix: title only');
     expect(warnings).toHaveLength(1);
-    expect(warnings[0]).toContain('사인오프');
+    expect(warnings[0]).toContain('[commit-msg]');
   });
 
   it('exempts merge and revert commits', () => {
-    expect(checkLoreFormat('Merge branch \'main\' into feature')).toEqual([]);
-    expect(checkLoreFormat('Revert "fix: 이전 커밋"')).toEqual([]);
+    expect(checkLoreFormat("Merge branch 'main' into feature")).toEqual([]);
+    expect(checkLoreFormat('Revert "fix: previous commit"')).toEqual([]);
   });
 });

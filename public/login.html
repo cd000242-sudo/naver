@@ -1384,7 +1384,7 @@
     // 에러 메시지 표시 (+ 라이선스 만료 시 ACCESS DENIED 모달 표시)
     function showError(message) {
       // 먼저 ACCESS DENIED 모달 표시 여부 확인
-      const expiredKeywords = ['만료', '종료', 'expired', 'invalid', '유효하지', '라이선스가 없', '접근 거부', '기간', 'denied'];
+      const expiredKeywords = ['라이선스 만료', '이용 기간이 종료', '기간이 종료', '만료되었습니다', '만료', '종료', 'expired', 'license expired'];
       const isExpired = expiredKeywords.some(kw => String(message).toLowerCase().includes(kw.toLowerCase()));
       if (isExpired) {
         showAccessDeniedModal();
@@ -1453,7 +1453,7 @@
 
     // 라이선스 만료 감지 시 ACCESS DENIED 모달 표시
     function checkAndShowAccessDenied(errorMessage) {
-      const expiredKeywords = ['만료', '종료', 'expired', 'invalid', '유효하지', '라이선스가 없', '접근 거부'];
+      const expiredKeywords = ['라이선스 만료', '이용 기간이 종료', '기간이 종료', '만료되었습니다', '만료', '종료', 'expired', 'license expired'];
       const isExpired = expiredKeywords.some(kw => String(errorMessage).toLowerCase().includes(kw.toLowerCase()));
       if (isExpired) {
         showAccessDeniedModal();

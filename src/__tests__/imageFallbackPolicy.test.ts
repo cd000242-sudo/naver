@@ -78,6 +78,7 @@ describe('image fallback policy contract', () => {
     const main = read('main.ts');
     const multiAccount = read('renderer/modules/multiAccountManager.ts');
     const publishingHandlers = read('renderer/modules/publishingHandlers.ts');
+    const blogExecutor = read('main/services/BlogExecutor.ts');
 
     expect(costAndAutoGen).toMatch(/function\s+normalizeEmptyImageSuccess/);
     expect(costAndAutoGen).toMatch(/imageCount === 0/);
@@ -89,5 +90,8 @@ describe('image fallback policy contract', () => {
     expect(multiAccount).toMatch(/image generation returned no images/);
     expect(publishingHandlers).toMatch(/발행을 중단하고 다음 실행 때 이미지 단계부터 다시 시도/);
     expect(publishingHandlers).not.toMatch(/이미지 없이 발행 계속/);
+    expect(blogExecutor).toMatch(/IMAGE_PROCESSING_FAILED/);
+    expect(blogExecutor).not.toMatch(/이미지 없이 발행을 계속합니다/);
+    expect(blogExecutor).not.toMatch(/processedImages = \[\];\s*\n\s*\}/);
   });
 });

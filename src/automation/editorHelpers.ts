@@ -24,9 +24,14 @@ import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typi
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, ensureTailTypingReady } from './richTextPaste.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
+  enforceOrdinalLineBreaks,
+  stripRepeatedHookBlocks,
+} from './bodyTextCleanupPolicy.js';
+import {
   getExpectedLinkCardMin,
   planEditorTail,
 } from './editorTailPlan.js';
+import { countExpectedPublishImages } from './prePublishAssertion.js';
 import {
   applyTailHashtagsAfterCards,
   insertPreviousPostTailBlock,
@@ -602,8 +607,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     }
 
     if (structured.bodyPlain) {
-      structured.bodyPlain = self.stripRepeatedHookBlocks(structured.bodyPlain);
-      structured.bodyPlain = self.enforceOrdinalLineBreaks(structured.bodyPlain);
+      structured.bodyPlain = stripRepeatedHookBlocks(structured.bodyPlain);
+      structured.bodyPlain = enforceOrdinalLineBreaks(structured.bodyPlain);
       resolved.content = structured.bodyPlain;
     }
 
@@ -623,8 +628,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         // ✅ 수정된 본문에서도 중복된 CTA 텍스트 제거
         let cleanedContent = stripCtaArtifactsFromBody(currentContent.content);
 
-        cleanedContent = self.stripRepeatedHookBlocks(cleanedContent);
-        cleanedContent = self.enforceOrdinalLineBreaks(cleanedContent);
+        cleanedContent = stripRepeatedHookBlocks(cleanedContent);
+        cleanedContent = enforceOrdinalLineBreaks(cleanedContent);
 
         // 수정된 내용으로 structuredContent 업데이트
         // [v2.10.239 BUG FIX] keywordAsTitle lock — verbatim 키워드 모드에서 잔존 UI 값으로 덮어쓰기 차단
@@ -2305,7 +2310,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         .trim().length;
       self.__prePublishExpectations = {
         minBodyChars: Math.max(200, Math.floor(plannedBodyLen * 0.5)),
-        expectedImageMin: (resolved.images?.length ?? 0) > 0 ? 1 : 0,
+        expectedImageMin: resolved.skipImages ? 0 : countExpectedPublishImages(resolved.images),
         // 2026-06-11: general CTAs each type a URL that must become a link
         // card — counting only the previous-post tail let a lost CTA card
         // pass 5/5. (Observation mode: conversion is Naver-server dependent,

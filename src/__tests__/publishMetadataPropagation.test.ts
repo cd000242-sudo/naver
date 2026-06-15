@@ -7,10 +7,10 @@ function read(rel: string): string {
 
 describe('publish metadata propagation', () => {
   it('does not let empty runOptions hashtags suppress structuredContent hashtags', () => {
-    const code = read('naverBlogAutomation.ts');
+    const code = read('automation/runOptionsPolicy.ts');
 
-    expect(code).toMatch(/const normalizeHashtags = \(\.\.\.sources: any\[\]\): string\[\]/);
-    expect(code).toMatch(/const hashtags = normalizeHashtags\(\s*runOptions\.hashtags,\s*structured\?\.hashtags,\s*\)/);
+    expect(code).toMatch(/export function normalizePublishHashtags\(\.\.\.sources: any\[\]\): string\[\]/);
+    expect(code).toMatch(/const hashtags = normalizePublishHashtags\(runOptions\.hashtags,\s*structured\?\.hashtags\)/);
     expect(code).not.toMatch(/runOptions\.hashtags \?\?\s*structured\?\.hashtags/);
   });
 

@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import {
+  formatPublishGuardLog,
   isConcreteNaverBlogPostUrl,
   isNaverEditorUrl,
+  resolvePublishedUrlAfterOutcome,
   resolveImmediatePublishOutcome,
 } from '../automation/publishOutcomeResolver';
 
@@ -14,7 +16,9 @@ describe('publish outcome URL helpers', () => {
 
   it('detects editor URLs as non-post URLs', () => {
     expect(isNaverEditorUrl('https://blog.naver.com/PostWriteForm.naver?blogId=test')).toBe(true);
+    expect(isNaverEditorUrl('https://blog.naver.com/test?Redirect=Write')).toBe(true);
     expect(isConcreteNaverBlogPostUrl('https://blog.naver.com/PostWriteForm.naver?blogId=test')).toBe(false);
+    expect(isConcreteNaverBlogPostUrl('https://blog.naver.com/test?Redirect=Write')).toBe(false);
   });
 });
 
@@ -88,5 +92,38 @@ describe('resolveImmediatePublishOutcome', () => {
       code: 'PUBLISH_CONDITION',
       userActionRequired: true,
     });
+  });
+});
+
+describe('publish outcome state updates', () => {
+  it('updates the published URL only when the outcome proves a new URL', () => {
+    const outcome = resolveImmediatePublishOutcome({
+      beforeUrl: 'https://blog.naver.com/PostWriteForm.naver?blogId=test',
+      afterUrl: 'https://blog.naver.com/test/223000001',
+    });
+
+    expect(resolvePublishedUrlAfterOutcome(null, outcome)).toBe('https://blog.naver.com/test/223000001');
+  });
+
+  it('keeps the existing URL when success is based on visible success text only', () => {
+    const outcome = resolveImmediatePublishOutcome({
+      beforeUrl: 'https://blog.naver.com/PostWriteForm.naver?blogId=test',
+      publishStatus: { success: true, successText: 'published' },
+    });
+
+    expect(resolvePublishedUrlAfterOutcome('https://blog.naver.com/test/old', outcome)).toBe(
+      'https://blog.naver.com/test/old',
+    );
+  });
+
+  it('formats the manual URL confidence log from the resolved published URL state', () => {
+    const outcome = resolveImmediatePublishOutcome({
+      beforeUrl: 'https://blog.naver.com/PostWriteForm.naver?blogId=test',
+      publishStatus: { success: true, successText: 'published' },
+    });
+
+    expect(formatPublishGuardLog(outcome, 'https://blog.naver.com/test/old')).toBe(
+      '[PublishGuard] outcome=SUCCESS_MESSAGE, url=https://blog.naver.com/test/old',
+    );
   });
 });

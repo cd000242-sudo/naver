@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'fs';
 import {
+  countExpectedPublishImages,
   evaluatePrePublishReport,
   findLeakedMarkers,
   formatPrePublishReport,
@@ -46,6 +47,19 @@ describe('evaluatePrePublishReport', () => {
     expect(report.checks.find((c) => c.name === 'image-count')?.pass).toBe(false);
   });
 
+  it('fails when only part of the planned image set reached the editor', () => {
+    const report = evaluatePrePublishReport(
+      { ...okStats, imageCount: 1 },
+      { ...expectations, expectedImageMin: 3 }
+    );
+    expect(report.pass).toBe(false);
+    expect(report.checks.find((c) => c.name === 'image-count')).toMatchObject({
+      pass: false,
+      expected: '>= 3',
+      actual: '1',
+    });
+  });
+
   it('fails when the previous-post link card or tail divider is missing', () => {
     const noCard = evaluatePrePublishReport({ ...okStats, linkCardCount: 0 }, expectations);
     expect(noCard.checks.find((c) => c.name === 'link-card-count')?.pass).toBe(false);
@@ -74,6 +88,22 @@ describe('findLeakedMarkers', () => {
 
   it('returns empty for clean published text', () => {
     expect(findLeakedMarkers('깨끗한 본문입니다. 구분선 ━━━ 도 마커가 아닙니다.')).toEqual([]);
+  });
+});
+
+describe('countExpectedPublishImages', () => {
+  it('counts only images with an insertable source', () => {
+    expect(countExpectedPublishImages([
+      { filePath: 'C:/tmp/a.png' },
+      { url: 'https://example.com/b.jpg' },
+      { previewDataUrl: 'data:image/png;base64,aaa' },
+      { filePath: '' },
+      { failed: true, filePath: 'C:/tmp/failed.png' },
+      { skip: true, url: 'https://example.com/skipped.jpg' },
+      'C:/tmp/string-path.png',
+      '',
+      null,
+    ])).toBe(4);
   });
 });
 
@@ -107,6 +137,7 @@ describe('pre-publish assertion wiring (observation mode)', () => {
     const code = read('automation/editorHelpers.ts');
     expect(code).toMatch(/self\.__prePublishExpectations = null/);
     expect(code).toMatch(/self\.__prePublishExpectations = \{/);
+    expect(code).toMatch(/expectedImageMin:\s*resolved\.skipImages\s*\?\s*0\s*:\s*countExpectedPublishImages\(resolved\.images\)/);
     expect(code.indexOf('self.__prePublishExpectations = {')).toBeLessThan(
       code.indexOf('// 7. CTA 버튼 최종 확인')
     );

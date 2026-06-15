@@ -261,6 +261,91 @@ export async function setImageSizeToDocumentWidth(self: any): Promise<void> {
   }
 }
 
+// ── applyDocumentWidthToAllImagesBeforePublish ──
+export async function applyDocumentWidthToAllImagesBeforePublish(self: any, frame: any): Promise<void> {
+  try {
+    self.log('🖼️ 발행 전 모든 이미지에 문서 너비 적용 중...');
+
+    const imageElements = await frame.$$('img.se-image-resource, .se-module-image img, .se-component-image img');
+
+    if (imageElements.length === 0) {
+      self.log('   ℹ️ 적용할 이미지가 없습니다.');
+      await self.delay(300);
+      return;
+    }
+
+    self.log(`   📷 ${imageElements.length}개 이미지 발견, 문서 너비 적용 시작...`);
+
+    let appliedCount = 0;
+    const imageWidthStartTime = Date.now();
+    const IMAGE_WIDTH_TIMEOUT = 10000;
+
+    for (let i = 0; i < imageElements.length; i++) {
+      if (Date.now() - imageWidthStartTime > IMAGE_WIDTH_TIMEOUT) {
+        self.log(`   ⏱️ 이미지 너비 적용 시간 초과 (${i}/${imageElements.length}개 완료, 10초 제한). 나머지 건너뜁니다.`);
+        break;
+      }
+
+      try {
+        await imageElements[i].click();
+        await self.delay(300);
+
+        const fitButton = await frame.$('button[data-value="fit"][data-name="content-mode-without-pagefull"], button.se-object-arrangement-fit-toolbar-button[data-value="fit"]');
+
+        if (fitButton) {
+          const isAlreadyActive = await frame.evaluate((btn: Element) => {
+            return btn.classList.contains('se-toolbar-button-active') ||
+              btn.getAttribute('aria-pressed') === 'true';
+          }, fitButton);
+
+          if (!isAlreadyActive) {
+            await fitButton.click();
+            await self.delay(200);
+            self.log(`   ✅ ${i + 1}/${imageElements.length} 이미지 문서 너비 적용`);
+          } else {
+            self.log(`   ⏭️ ${i + 1}/${imageElements.length} 이미지 이미 문서 너비 상태`);
+          }
+          appliedCount++;
+        } else {
+          await frame.evaluate((imgEl: Element) => {
+            const img = imgEl as HTMLImageElement;
+            let el: HTMLElement | null = img;
+            while (el && el !== document.body) {
+              if (el.classList.contains('se-section') || el.classList.contains('se-module') || el.classList.contains('se-component')) {
+                el.classList.remove('se-l-left', 'se-l-right', 'se-l-original');
+                el.classList.add('se-l-default');
+                el.style.width = '100%';
+                el.style.maxWidth = '100%';
+                el.setAttribute('data-size', 'document-width');
+              }
+              el = el.parentElement;
+            }
+            img.style.width = '100%';
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+          }, imageElements[i]);
+          self.log(`   ⚠️ ${i + 1}/${imageElements.length} 이미지 CSS 폴백 적용`);
+          appliedCount++;
+        }
+
+        await frame.click('body').catch(() => { });
+        await self.delay(100);
+      } catch (imgErr) {
+        recordSilentFailure('image:width-apply');
+        self.log(`   ⚠️ ${i + 1}/${imageElements.length} 이미지 처리 중 오류 (무시): ${(imgErr as Error).message}`);
+      }
+    }
+
+    if (appliedCount > 0) {
+      self.log(`   ✅ ${appliedCount}개 이미지에 문서 너비 적용 완료`);
+    }
+
+    await self.delay(300);
+  } catch (imgError) {
+    self.log(`   ⚠️ 이미지 문서 너비 적용 중 오류 (계속 진행): ${(imgError as Error).message}`);
+  }
+}
+
 // ── verifyImagePlacement ──
 export async function verifyImagePlacement(self: any, expectedCount: number): Promise<boolean> {
   const frame = await self.getAttachedFrame();
@@ -1387,6 +1472,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
   let frame = await self.getAttachedFrame();
   const fs = await import('fs/promises');
   const MAX_RETRIES = 3;
+  const failures: string[] = [];
 
   for (let imgIdx = 0; imgIdx < images.length; imgIdx++) {
     const image = images[imgIdx];
@@ -1398,6 +1484,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     // ImageFX 등에서 filePath/savedToLocal/url 모두 없고 previewDataUrl만 있는 경우 대응
     const imagePath = image.filePath || image.savedToLocal || image.url || image.previewDataUrl;
     if (!imagePath) {
+      failures.push(`이미지 ${imgIdx + 1}: 경로 없음 (heading="${image.heading || ''}", provider="${image.provider || ''}")`);
       self.log(`      ⚠️ 이미지 경로가 없음, 건너뜀 (heading: "${image.heading}", provider: "${image.provider}", 키: ${Object.keys(image).join(',')})`);
       continue;
     }
@@ -1407,6 +1494,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
       try {
         await fs.access(imagePath);
       } catch {
+        failures.push(`이미지 ${imgIdx + 1}: 파일 없음 (${maskedPath})`);
         self.log(`      ⚠️ 이미지 파일 없음: ${maskedPath}, 건너뜀`);
         continue;
       }
@@ -1421,6 +1509,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
         await self.switchToMainFrame();
         frame = await self.getAttachedFrame();
       } catch (reconnectError) {
+        failures.push(`이미지 ${imgIdx + 1}: 프레임 재연결 실패 (${(reconnectError as Error).message})`);
         self.log(`      ❌ 프레임 재연결 실패, 이미지 건너뜀`);
         continue;
       }
@@ -1468,6 +1557,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     }
 
     if (!insertSuccess) {
+      failures.push(`이미지 ${imgIdx + 1}: ${MAX_RETRIES}회 삽입 실패`);
       self.log(`      ❌ 이미지 ${imgIdx + 1} 최종 삽입 실패, 건너뜀`);
       continue;
     }
@@ -1516,6 +1606,10 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     await self.normalizeSpacingAfterLastImage(frame, 1);
   } catch (sizeError) {
     self.log(`      ⚠️ 이미지 후처리 실패: ${(sizeError as Error).message}`);
+  }
+
+  if (failures.length > 0) {
+    throw new Error(`IMAGE_INSERTION_FAILED:${failures.length}/${images.length}개 이미지 삽입 실패 — ${failures.slice(0, 3).join(' | ')}`);
   }
 }
 

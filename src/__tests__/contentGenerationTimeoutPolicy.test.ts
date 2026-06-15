@@ -16,6 +16,9 @@ describe('content generation timeout policy', () => {
   const mainSrc = read('main.ts');
   const preloadSrc = read('preload.ts');
   const generatorSrc = read('contentGenerator.ts');
+  const abortTimeoutPolicySrc = read('contentAbortTimeoutPolicy.ts');
+  const geminiUsageMetadataSrc = read('contentGeminiUsageMetadata.ts');
+  const geminiCacheStreamFallbackSrc = read('contentGeminiCacheStreamFallback.ts');
   const failurePolicySrc = read('contentGenerationFailurePolicy.ts');
   const promptAdherenceSrc = read('contentPromptAdherence.ts');
   const diagnosticsSrc = read('contentErrorDiagnostics.ts');
@@ -48,15 +51,16 @@ describe('content generation timeout policy', () => {
 
   it('bounds Gemini paid/cache side waits that can otherwise stall a completed generation', () => {
     expect(generatorSrc).toMatch(/GEMINI_CACHE_CREATE_TIMEOUT_MS\s*=\s*10_000/);
-    expect(generatorSrc).toMatch(/GEMINI_USAGE_METADATA_TIMEOUT_MS\s*=\s*5_000/);
+    expect(geminiUsageMetadataSrc).toMatch(/GEMINI_USAGE_METADATA_TIMEOUT_MS\s*=\s*5_000/);
     expect(generatorSrc).toMatch(/waitForGeminiUsageMetadata/);
     expect(generatorSrc).toMatch(/withGeminiTimeout(?:<[^>]+>)?\(\s*cacheManager\.create/);
   });
 
   it('uses abort-aware provider waits instead of blind sleeps during content generation', () => {
-    expect(generatorSrc).toMatch(/function\s+sleepWithAbort/);
-    expect(generatorSrc).toMatch(/function\s+withProviderTimeout/);
-    expect(generatorSrc).toMatch(/function\s+createProviderTimeoutSignal/);
+    expect(abortTimeoutPolicySrc).toMatch(/export\s+function\s+sleepWithAbort/);
+    expect(abortTimeoutPolicySrc).toMatch(/export\s+function\s+withProviderTimeout/);
+    expect(abortTimeoutPolicySrc).toMatch(/export\s+function\s+createProviderTimeoutSignal/);
+    expect(generatorSrc).toMatch(/from\s+['"]\.\/contentAbortTimeoutPolicy\.js['"]/);
     expect(generatorSrc).toMatch(/openaiRpmThrottler\.throttle\(\s*getOpenAiMinIntervalMs\(modelName,\s*maxCompletionTokens\),\s*signal\s*\)/);
     expect(generatorSrc).toMatch(/await\s+sleepWithAbort\(backoffMs,\s*signal\)/);
     expect(generatorSrc).toMatch(/await\s+sleepWithAbort\(delay,\s*signal\)/);
@@ -158,9 +162,20 @@ describe('content generation timeout policy', () => {
 
   it('keeps Gemini context caching opt-in so one content request does not create a hidden pre-call', () => {
     expect(generatorSrc).toMatch(/GEMINI_CACHE_ENABLED/);
-    expect(generatorSrc).toMatch(/const\s+cacheOptInEnv\s*=\s*process\.env\.GEMINI_CACHE_ENABLED\s*===\s*'1'/);
-    expect(generatorSrc).toMatch(/const\s+cacheEnabled\s*=\s*cacheOptInEnv\s*\n\s*&&\s*!cacheDisabledEnv/);
+    expect(generatorSrc).toMatch(/resolveGeminiPromptCacheEligibility/);
+    const eligibilitySrc = read('contentGeminiCacheEligibility.ts');
+    expect(eligibilitySrc).toMatch(/cacheEnabledEnv\s*!==\s*'1'/);
+    expect(eligibilitySrc).toMatch(/cacheDisabledEnv\s*===\s*'1'/);
     expect(generatorSrc).not.toMatch(/const\s+cacheEnabled\s*=\s*!cacheDisabledEnv\s*\n\s*&&\s*isCacheSupportedForKey/);
+  });
+
+  it('keeps cached-content stream failure recoverable without losing system instructions', () => {
+    expect(generatorSrc).toMatch(/invokeGeminiStreamWithCacheFallback/);
+    expect(geminiCacheStreamFallbackSrc).toMatch(/function\s+buildPlainRequestConfig/);
+    expect(geminiCacheStreamFallbackSrc).toMatch(/markUnsupported\(apiKey,\s*`stream:/);
+    expect(geminiCacheStreamFallbackSrc).toMatch(/deletePromptCache\(getGeminiPromptCacheKey\(systemText,\s*modelName\)\)/);
+    expect(geminiCacheStreamFallbackSrc).toMatch(/systemInstruction:\s*\{\s*role:\s*'system'/);
+    expect(generatorSrc).not.toMatch(/let\s+effectiveCached\s*=/);
   });
 
   it('keeps Claude prompt caching opt-in to avoid hidden schema-fallback calls', () => {

@@ -1,5 +1,9 @@
 import type { ElementHandle, Frame, Page } from 'puppeteer';
 import { SELECTORS, getSelectorStrings, waitForElement } from './selectors';
+import {
+  collectEditorReadinessSnapshot,
+  formatEditorReadinessDiagnostics,
+} from './editorReadinessDiagnostics.js';
 
 export async function findEditorTitleInputElement(
   frame: Frame,
@@ -132,23 +136,7 @@ export async function setTitleByDomEvent(
 }
 
 export async function collectEditorTitleDiagnostics(frame: Frame, page: Page): Promise<string> {
-  const frameUrl = frame.url?.() || '(frame url unavailable)';
-  const pageUrl = page.url();
-  const pageTitle = await page.title().catch(() => '');
-  const diag = await frame.evaluate(() => {
-    const selectors = [
-      '.se-section-documentTitle',
-      '.se-documentTitle',
-      '[data-name="documentTitle"]',
-      '[class*="documentTitle"]',
-      '[contenteditable="true"]',
-      '.se-section-text',
-      '.se-main-container',
-    ];
-    return selectors.map((selector) => {
-      const count = document.querySelectorAll(selector).length;
-      return `${selector}=${count}`;
-    }).join(', ');
-  }).catch((error) => `diagnostics failed: ${(error as Error).message}`);
-  return `pageUrl=${pageUrl}, pageTitle=${pageTitle}, frameUrl=${frameUrl}, selectors=[${diag}]`;
+  return formatEditorReadinessDiagnostics(
+    await collectEditorReadinessSnapshot(frame, page)
+  );
 }

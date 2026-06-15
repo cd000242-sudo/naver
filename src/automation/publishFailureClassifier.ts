@@ -48,7 +48,7 @@ export function classifyPublishFailure(input: unknown): PublishFailureClassifica
     return { code: 'BROWSER_CLOSED', retryable: true, userActionRequired: false };
   }
 
-  if (includesAny(message, ['이미지 업로드', '이미지 파일', '이미지 용량', '이미지 확장자', 'image_rejected', 'image upload', 'file too large', 'unsupported image', 'image file', 'image size'])) {
+  if (includesAny(message, ['이미지 처리 실패', '이미지 업로드', '이미지 파일', '이미지 용량', '이미지 확장자', 'image_processing_failed', 'image_insertion_failed', 'image_rejected', 'image upload', 'file too large', 'unsupported image', 'image file', 'image size'])) {
     return { code: 'IMAGE_REJECTED', retryable: false, userActionRequired: true };
   }
 

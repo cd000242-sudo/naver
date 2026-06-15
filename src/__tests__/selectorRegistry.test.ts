@@ -121,6 +121,10 @@ describe('핵심 셀렉터 존재 확인', () => {
     expect(LOGIN_SELECTORS.loginButton).toBeDefined();
   });
 
+  it('로그인 버튼 next_step 폴백을 레지스트리에서 관리한다', () => {
+    expect(getAllSelectors(LOGIN_SELECTORS.loginButton)).toContain('button[type="submit"].next_step');
+  });
+
   it('발행에 필요한 셀렉터가 존재한다', () => {
     expect(PUBLISH_SELECTORS.publishButton).toBeDefined();
     expect(PUBLISH_SELECTORS.confirmPublishButton).toBeDefined();

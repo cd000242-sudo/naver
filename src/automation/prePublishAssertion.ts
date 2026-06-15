@@ -39,6 +39,16 @@ export interface PrePublishReport {
   checks: PrePublishCheck[];
 }
 
+const IMAGE_SOURCE_FIELDS = [
+  'filePath',
+  'savedToLocal',
+  'url',
+  'thumbnailUrl',
+  'previewDataUrl',
+  'dataUrl',
+  'path',
+] as const;
+
 export const DEFAULT_FORBIDDEN_MARKERS = [
   '[원본 텍스트]',
   '[Article Content]',
@@ -55,6 +65,23 @@ export function findLeakedMarkers(
   const leaked = markers.filter((marker) => text.includes(marker));
   if (/\[자료\s*\d+\]/.test(text)) leaked.push('[자료N]');
   return leaked;
+}
+
+export function countExpectedPublishImages(images: unknown): number {
+  if (!Array.isArray(images)) return 0;
+
+  return images.filter((image) => {
+    if (typeof image === 'string') return image.trim().length > 0;
+    if (!image || typeof image !== 'object') return false;
+
+    const record = image as Record<string, unknown>;
+    if (record.skip === true || record.failed === true) return false;
+
+    return IMAGE_SOURCE_FIELDS.some((field) => {
+      const value = record[field];
+      return typeof value === 'string' && value.trim().length > 0;
+    });
+  }).length;
 }
 
 export function evaluatePrePublishReport(

@@ -4,7 +4,6 @@ import puppeteer from 'puppeteer-extra';
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import { Browser, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
 import type { StructuredContent, ImagePlan } from './contentGenerator.js';
-import { removeOrdinalHeadingLabelsFromBody, stripAllFormatting } from './contentGenerator.js';
 import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs/promises';
@@ -15,14 +14,14 @@ import {
   generateProductSpecTableImage,
   generateProsConsTableImage,
   extractSpecsFromContent,
-  generateCtaBannerImage,
   generateTableFromUrl // ✅ [추가] 제휴 링크에서 직접 스펙 크롤링
 } from './image/tableImageGenerator.js';
 import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
-import { pickBannerHook, pickCtaHook } from './automation/bannerPhrasePool.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
 // [v2.10.113] 명시적 쿠키 파일 저장/복원 — userDataDir 보조 안전망 (캡차 반복 차단)
 import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile, warmupSession } from './sessionPersistence.js';
+import { buildNaverAutomationProfile, hashAutomationAccountId } from './automation/accountProfilePolicy.js';
+import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 import { performIdleMouseShake } from './automation/humanBehavior.js';
 // [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
 import { recordBotBackoff, getBotBackoff, isAccountBackedOff, computePostLoginHumanDelayMs } from './utils/botBackoff.js';
@@ -30,6 +29,7 @@ import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetry
 import { createGhostCursor, safeClick, safeType, safeClickInFrame, waitRandom, randomMouseMovement, type GhostCursor } from './ghostCursorHelper.js';
 import * as imageHelpers from './automation/imageHelpers';
 import * as publishHelpers from './automation/publishHelpers';
+import * as ctaHelpers from './automation/ctaHelpers';
 import { NAVER_TIMEOUTS, NAVER_WAIT_UNTIL } from './automation/timeouts';
 import * as editorHelpers from './automation/editorHelpers';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
@@ -50,9 +50,58 @@ import {
   readEditorTitleText,
   setTitleByDomEvent,
 } from './automation/editorTitleHelpers.js';
+import {
+  collectEditorReadinessSnapshot,
+  shouldRetryEditorReadiness,
+} from './automation/editorReadinessDiagnostics.js';
 import { collectPrePublishStats, evaluatePrePublishReport, formatPrePublishReport, getBlockingFailures } from './automation/prePublishAssertion.js';
 import { formatSilentFailureSummary, recordSilentFailure, resetSilentFailureCounts } from './automation/silentFailureCounter.js';
-import { resolveImmediatePublishOutcome } from './automation/publishOutcomeResolver';
+import {
+  classifyBlogWriteNavigationUrl,
+  isBlogWriteLoginRedirect,
+  resolveBlogWriteFrameSwitchSurface,
+  resolveManualLoginRetryWriteNavigation,
+  shouldSkipBlogWriteWarmup,
+} from './automation/editorNavigationUrlPolicy.js';
+import {
+  isManualLoginBlogLandingSuccessful,
+  resolveManualLoginCheckpoint,
+} from './automation/manualLoginRecoveryPolicy.js';
+import {
+  formatPipelineUrlLog,
+  PUBLISH_PIPELINE_LOG_MESSAGES,
+} from './automation/publishPipelineLogPolicy.js';
+import { createPostPublishReviewPlan } from './automation/postPublishReviewPlan.js';
+import { resolvePostRunBrowserPolicy } from './automation/postRunBrowserPolicy.js';
+import { resolvePostRunPageHealthDecision } from './automation/postRunPageHealthPolicy.js';
+import { resolveStalePageCleanupPlan } from './automation/postRunStalePagePolicy.js';
+import {
+  classifyLoginGotoError,
+  isDeviceConfirmBodyText,
+  isDeviceConfirmUrl,
+  isLoginChallengeUrl,
+  isLoginProxyFailureBody,
+  isPostLoginFinalCheckSuccess,
+  resolveLoginPageNavigationUrl,
+  resolvePostLoginProgressUrl,
+  shouldInspectLoginPageDom,
+  shouldNavigateToLoginPageFromCurrentUrl,
+  shouldReportFinalLoginUrlFailure,
+  shouldVerifyExistingSessionAfterMissingLoginInput,
+} from './automation/loginPageNavigationPolicy.js';
+import { classifyLoginStatusUrl } from './automation/loginStatusUrlPolicy.js';
+import {
+  formatPublishGuardLog,
+  isNaverEditorUrl,
+  resolveImmediatePublishOutcome,
+  resolvePublishedUrlAfterOutcome,
+} from './automation/publishOutcomeResolver';
+import {
+  getConfirmPublishSelectors,
+  getPublishButtonSelectors,
+  getPublishModalIndicatorSelectors,
+} from './automation/publishModalSelectorPolicy.js';
+import { resolveNaverRunOptions } from './automation/runOptionsPolicy.js';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
 // ✅ [2026-03-27 FIX] 매번 Escape 전송 → 팝업 존재 시에만 조건부 Escape
@@ -325,6 +374,9 @@ export class NaverBlogAutomation {
   private readonly PUBLISH_BUTTON_SELECTORS = getAllSelectors(SELECTORS.publish.publishButton);
   private readonly CONFIRM_PUBLISH_SELECTORS = getAllSelectors(SELECTORS.publish.confirmPublishButton);
   private readonly LOGIN_BUTTON_SELECTORS = getAllSelectors(SELECTORS.login.loginButton);
+  private readonly LOGIN_ID_INPUT_SELECTORS = getAllSelectors(SELECTORS.login.idInput);
+  private readonly LOGIN_PASSWORD_INPUT_SELECTORS = getAllSelectors(SELECTORS.login.pwInput);
+  private readonly KEEP_LOGIN_SELECTORS = getAllSelectors(SELECTORS.login.keepLoginCheckbox);
 
   // Delay 상수
   private readonly DELAYS = {
@@ -354,40 +406,9 @@ export class NaverBlogAutomation {
     private readonly progressCallback?: (step: number, total: number, message: string) => void,
   ) { }
 
-  private stripRepeatedHookBlocks(text: string): string {
-    if (!text) return text;
-    let out = String(text);
-    out = out.replace(
-      /댓글창이[^\n]*\n같은 걸 보고도 어떤 사람은 "별거 없다"고 하고, 어떤 사람은 "왜 나만 다르지\?"라고 하더라고요\.\n근데 가만 보면 갈리는 지점이 딱 세 가지예요\.\n내 상황이[^\n]*\n기대하는 결과가 "바로"인지, 아니면 "천천히"인지\.\n지금 당장 해도 되는 타입인지, 잠깐 멈추는 게 나은 타입인지\.\n아래에서 3분 안에 체크하고 바로 결론 내릴 수 있게 정리해둘게요\.\n*/g,
-      '',
-    );
-    out = out.replace(/\n{3,}/g, '\n\n');
-    return out.trim();
-  }
-
-  private enforceOrdinalLineBreaks(text: string): string {
-    if (!text) return text;
-    const ord = '(?:첫째|첫쨰|둘째|셋째|넷째|다섯째)';
-    let out = String(text);
-    out = out.replace(new RegExp(`([^\n])\s*(${ord})\s*,`, 'g'), '$1\n$2,');
-    out = out.replace(new RegExp(`(^|\n)\s*(${ord})\s*,`, 'g'), '$1$2,');
-    return out;
-  }
-
-  // ✅ 계정 ID 해시 함수 (프로필 폴더명 생성용)
-  private hashAccountId(accountId: string): string {
-    let hash = 0;
-    for (let i = 0; i < accountId.length; i++) {
-      const char = accountId.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash;
-    }
-    return Math.abs(hash).toString(36);
-  }
-
   // ✅ 현재 계정의 프로필 경로 (계정별 독립 세션)
   private get accountProfileDir(): string {
-    const accountHash = this.hashAccountId(this.options.naverId);
+    const accountHash = hashAutomationAccountId(this.options.naverId);
     return path.join(this.ACCOUNT_PROFILE_BASE, accountHash);
   }
 
@@ -396,47 +417,13 @@ export class NaverBlogAutomation {
     userAgent: string;
     screen: { width: number; height: number };
   } {
-    // ✅ [2026-03-27 FIX] FNV-1a 해시 — 문자 순서 구분 + 균등 분포
-    let hash = 0x811c9dc5;
-    for (let i = 0; i < this.options.naverId.length; i++) {
-      hash ^= this.options.naverId.charCodeAt(i);
-      hash = Math.imul(hash, 0x01000193);
-    }
-    hash = hash >>> 0; // unsigned 32-bit
-
     // ✅ [2026-05-25 v2.10.357 P0 FIX] Chrome 버전 풀 최신화 (145~149)
     //   Phase A 5팀 진단 발견: 기존 풀 131~135 vs 사용자 실제 Chrome 148 → 14버전 차이
     //   → 네이버 서버측 UA 파싱에서 즉시 봇 신호 분류 (95% 멈춤·캡차 root cause)
     //   해결: 최근 1~2개월 출시된 안정 버전으로 풀 교체. 미래에는 동적 binary 감지로 전환 예정.
     //   환경 변수 CHROME_VERSION_HINT로 override 가능 (사용자 Chrome 정확한 버전 명시 시)
     const envHint = (typeof process !== 'undefined' ? process.env.CHROME_VERSION_HINT : '') || '';
-    const chromeVersions = envHint
-      ? [envHint]
-      : [
-          '145.0.7480.66', '145.0.7480.135', '146.0.7530.41',
-          '146.0.7530.123', '147.0.7592.79', '147.0.7592.155',
-          '148.0.7666.50', '148.0.7666.137', '149.0.7710.42',
-          '149.0.7710.124',
-        ];
-    const version = chromeVersions[hash % chromeVersions.length];
-    const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${version} Safari/537.36`;
-
-    // ✅ 해상도 풀 확대 (8개)
-    const screenConfigs = [
-      { width: 1920, height: 1080 },
-      { width: 1536, height: 864 },
-      { width: 1440, height: 900 },
-      { width: 1366, height: 768 },
-      { width: 1600, height: 900 },
-      { width: 1680, height: 1050 },
-      { width: 1280, height: 720 },
-      { width: 1360, height: 768 },
-    ];
-    // 두 번째 해시로 해상도 선택 (버전과 독립적으로)
-    const hash2 = Math.imul(hash, 0x9e3779b9) >>> 0;
-    const screen = screenConfigs[hash2 % screenConfigs.length];
-
-    return { userAgent, screen };
+    return buildNaverAutomationProfile(this.options.naverId, envHint);
   }
 
   private randomInt(min: number, max: number): number {
@@ -821,21 +808,13 @@ export class NaverBlogAutomation {
     return await publishHelpers.debugCategoryElements(this, frame, page);
   }
 
-  // ✅ [2026-02-14] 기기 등록 URL 패턴 감지 헬퍼
-  private isDeviceConfirmUrl(url: string): boolean {
-    const lower = url.toLowerCase();
-    return ['deviceconfirm', 'device_confirm', 'new_device', 'register_device', 'devicereg']
-      .some(p => lower.includes(p));
-  }
-
   // ✅ [2026-02-14] 기기 등록 페이지 감지 (URL + 페이지 텍스트 이중 검사)
   private async isDeviceConfirmPage(page: Page): Promise<boolean> {
     // 1차: URL 패턴
-    if (this.isDeviceConfirmUrl(page.url())) return true;
+    if (isDeviceConfirmUrl(page.url())) return true;
     // 2차: 페이지 텍스트 기반 (URL 변경 시에도 동작)
     const text = await page.evaluate(() => document.body?.innerText || '').catch(() => '');
-    return (text.includes('새로운 기기') && text.includes('등록')) ||
-      (text.includes('기기를 등록하면') && text.includes('알림'));
+    return isDeviceConfirmBodyText(text);
   }
 
   // ✅ [2026-03-07] 기기 등록 화면 자동 처리 — "등록" 클릭
@@ -1054,25 +1033,27 @@ export class NaverBlogAutomation {
       const currentUrl = page.url();
 
       // ✅ [2026-02-14] 기기 등록 화면 자동 처리 (URL + 페이지 텍스트 이중 감지)
-      if (await this.isDeviceConfirmPage(page)) {
+      const deviceConfirmDetected = await this.isDeviceConfirmPage(page);
+      const twoFactorDetected = deviceConfirmDetected ? false : await this.handleTwoFactorAuthPage(page);
+      const manualLoginCheckpoint = resolveManualLoginCheckpoint({
+        currentUrl,
+        deviceConfirmDetected,
+        twoFactorDetected,
+      });
+
+      if (manualLoginCheckpoint.action === 'handle-device-confirm') {
         await this.handleDeviceConfirmPage(page);
         continue;
       }
 
       // ✅ [2026-02-09] 2단계 인증 페이지 자동 처리
-      const is2FAManual = await this.handleTwoFactorAuthPage(page);
-      if (is2FAManual) {
+      if (manualLoginCheckpoint.action === 'wait-two-factor') {
         continue;
       }
 
       // 로그인 페이지가 아니고, 블로그 페이지에 도착했으면 성공
-      if (currentUrl.includes('blog.naver.com') && !currentUrl.includes('login')) {
-        const isEditorLike = currentUrl.includes('GoBlogWrite') ||
-          currentUrl.includes('blogPostWrite') ||
-          currentUrl.includes('NaverWriteEditor') ||
-          currentUrl.includes('PostWriteForm') ||
-          /[?&]Redirect=Write\b/i.test(currentUrl);
-        if (!isEditorLike) {
+      if (manualLoginCheckpoint.action === 'success' || manualLoginCheckpoint.action === 'navigate-write-editor') {
+        if (manualLoginCheckpoint.action === 'navigate-write-editor') {
           this.log('[LoginFlow] manual login detected on blog domain; moving to write editor...');
           try {
             await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
@@ -1092,9 +1073,7 @@ export class NaverBlogAutomation {
       }
 
       // 네이버 메인이나 다른 페이지로 이동했으면 (로그인 페이지가 아닌 경우)
-      if (!currentUrl.includes('nidlogin') &&
-        !currentUrl.includes('login') &&
-        currentUrl.includes('naver.com')) {
+      if (manualLoginCheckpoint.action === 'navigate-from-naver-domain') {
         // 블로그 페이지로 직접 이동 시도
         this.log('✅ 로그인 감지! 블로그 페이지로 이동합니다...');
         try {
@@ -1105,7 +1084,7 @@ export class NaverBlogAutomation {
           await this.delay(2000);
 
           const newUrl = page.url();
-          if (newUrl.includes('blog.naver.com') && !newUrl.includes('login')) {
+          if (isManualLoginBlogLandingSuccessful(newUrl)) {
             this.log('');
             this.log('✅✅✅ 블로그 페이지 접속 성공! ✅✅✅');
             this.log('');
@@ -1385,77 +1364,6 @@ export class NaverBlogAutomation {
     }
   }
 
-  /**
-   * 시스템에 설치된 Chrome 경로를 찾습니다.
-   * Windows에서 일반적인 Chrome 설치 경로를 확인합니다.
-   */
-  private findChromeExecutable(): string | undefined {
-    const platform = os.platform();
-
-    if (platform === 'win32') {
-      // Windows에서 일반적인 Chrome 설치 경로들
-      const possiblePaths = [
-        'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-        'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-        path.join(os.homedir(), 'AppData\\Local\\Google\\Chrome\\Application\\chrome.exe'),
-      ];
-
-      for (const chromePath of possiblePaths) {
-        try {
-          // 파일이 존재하는지 확인
-          if (existsSync(chromePath)) {
-            this.log(`✅ 시스템 Chrome 발견: ${chromePath}`);
-            return chromePath;
-          }
-        } catch (error) {
-          // 무시하고 다음 경로 확인
-        }
-      }
-
-      // 레지스트리에서 Chrome 경로 찾기 시도
-      try {
-        const regQuery = execSync(
-          'reg query "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\chrome.exe" /ve',
-          { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'] }
-        );
-        const match = regQuery.match(/REG_SZ\s+(.+)/);
-        if (match && match[1]) {
-          const chromePath = match[1].trim();
-          if (existsSync(chromePath)) {
-            this.log(`✅ 레지스트리에서 Chrome 발견: ${chromePath}`);
-            return chromePath;
-          }
-        }
-      } catch (error) {
-        // 레지스트리 조회 실패 시 무시
-      }
-    } else if (platform === 'darwin') {
-      // macOS
-      const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-      if (existsSync(chromePath)) {
-        this.log(`✅ 시스템 Chrome 발견: ${chromePath}`);
-        return chromePath;
-      }
-    } else if (platform === 'linux') {
-      // Linux
-      const possiblePaths = [
-        '/usr/bin/google-chrome',
-        '/usr/bin/google-chrome-stable',
-        '/usr/bin/chromium',
-        '/usr/bin/chromium-browser',
-      ];
-      for (const chromePath of possiblePaths) {
-        if (existsSync(chromePath)) {
-          this.log(`✅ 시스템 Chrome 발견: ${chromePath}`);
-          return chromePath;
-        }
-      }
-    }
-
-    this.log('⚠️ 시스템 Chrome을 찾을 수 없습니다. Puppeteer가 자동으로 다운로드한 Chrome을 사용합니다.');
-    return undefined;
-  }
-
   private ensurePage(): Page {
     if (!this.page) {
       throw new Error('브라우저 페이지가 초기화되지 않았습니다. setupBrowser()를 먼저 호출하세요.');
@@ -1541,167 +1449,11 @@ export class NaverBlogAutomation {
   }
 
   private resolveRunOptions(runOptions: RunOptions): ResolvedRunOptions {
-    const structured = runOptions.structuredContent;
-
-    // ✅ [2026-03-11 FIX] 입력 검증 - publishMode 연동 + 날짜/시간 분리 전달 자동 결합
-    if (runOptions.scheduleDate) {
-      // publishMode가 schedule이 아닌데 scheduleDate가 있으면 무시 (즉시발행 시 잔존값 방지)
-      if (runOptions.publishMode !== 'schedule' && runOptions.publishMode !== 'draft') {
-        runOptions.scheduleDate = undefined;
-      } else {
-        // T구분자를 공백으로 정규화 (예: "2026-02-19T10:30" → "2026-02-19 10:30")
-        runOptions.scheduleDate = runOptions.scheduleDate.replace('T', ' ');
-        // 날짜만 있고 시간이 없으면 scheduleTime에서 결합 (분리 전달 호환)
-        if (/^\d{4}-\d{2}-\d{2}$/.test(runOptions.scheduleDate) && (runOptions as any).scheduleTime) {
-          runOptions.scheduleDate = `${runOptions.scheduleDate} ${(runOptions as any).scheduleTime}`;
-        }
-        if (!/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(runOptions.scheduleDate)) {
-          throw new Error('예약발행 날짜 형식이 올바르지 않습니다. (YYYY-MM-DD HH:mm 형식)');
-        }
-      }
-    }
-
-    const ctasFromInput = Array.isArray(runOptions.ctas) ? runOptions.ctas : [];
-    const ctas = (() => {
-      const list = ctasFromInput
-        .map((c) => ({
-          text: String((c as any)?.text || '').trim(),
-          link: String((c as any)?.link || '').trim(),
-        }))
-        .filter((c) => c.text);
-      if (list.length > 0) return list;
-      const t = String(runOptions.ctaText || '').trim();
-      const l = String(runOptions.ctaLink || '').trim();
-      return t ? [{ text: t, link: l }] : [];
-    })();
-
-    for (const cta of ctas) {
-      if (cta.link && !/^https?:\/\//.test(cta.link)) {
-        throw new Error('CTA 링크는 유효한 URL 형식이어야 합니다. (http:// 또는 https://로 시작)');
-      }
-    }
-
-    const normalizeHashtags = (...sources: any[]): string[] => {
-      const seen = new Set<string>();
-      const result: string[] = [];
-      const visit = (value: any) => {
-        if (Array.isArray(value)) {
-          value.forEach(visit);
-          return;
-        }
-        String(value ?? '')
-          .split(/[,\s#]+/)
-          .map((tag) => tag.trim().replace(/^#+/, '').replace(/[^\p{L}\p{N}_-]/gu, ''))
-          .filter(Boolean)
-          .forEach((tag) => {
-            const key = tag.toLowerCase();
-            if (seen.has(key)) return;
-            seen.add(key);
-            result.push(tag);
-          });
-      };
-      sources.forEach(visit);
-      return result;
-    };
-
-    const hashtags = normalizeHashtags(
-      runOptions.hashtags,
-      structured?.hashtags,
-    );
-
-    if (hashtags.length > 5) {
-      this.log(`⚠️ 해시태그가 5개를 초과합니다. (${hashtags.length}개) 처음 5개만 사용됩니다.`);
-      hashtags.splice(5);
-    }
-
-    // 이미지 파일 경로 검증 및 정규화
-    if (runOptions.images) {
-      for (const image of runOptions.images) {
-        // ✅ savedToLocal이 있으면 filePath로 복사 (저장된 이미지 우선)
-        // savedToLocal은 문자열(경로) 또는 불린(true/false)일 수 있음
-        if (image.savedToLocal) {
-          // 타입 체크: 문자열이면 경로로 사용, 불린이면 무시
-          if (typeof image.savedToLocal === 'string' && image.savedToLocal.trim() !== '') {
-            image.filePath = image.savedToLocal;
-            this.log(`   📁 저장된 이미지 경로 사용: ${image.savedToLocal.replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~')}`);
-          } else if (typeof image.savedToLocal === 'boolean' && image.savedToLocal === true) {
-            // 불린 true면 이미 filePath가 설정되어 있다고 가정
-            this.log(`   📁 저장된 이미지 사용 (경로: ${image.filePath})`);
-          }
-        }
-
-        // ✅ filePath가 존재하는 경우에만 체크
-        if (image.filePath && !image.filePath.startsWith('http://') && !image.filePath.startsWith('https://') && !image.filePath.startsWith('data:')) {
-          // 로컬 파일 경로는 나중에 확인 (비동기 작업)
-        }
-      }
-    }
-
-    // ✅ [100점 수정] 제목에서도 마크다운/HTML 포맷팅 완전 제거
-    // ✅ [2026-01-20] 폴백 값 제거 - 콘텐츠 없으면 에러 던지기 (플레이스홀더 발행 방지)
-    const rawTitle =
-      structured?.selectedTitle?.trim() ||
-      runOptions.title?.trim() ||
-      this.options.defaultTitle?.trim();
-
-    if (!rawTitle) {
-      throw new Error('❌ 발행 실패: 제목이 없습니다. 콘텐츠 생성이 필요합니다.');
-    }
-    const title = stripAllFormatting(rawTitle);
-
-    // ✅ [2026-01-16] 발행 직전 **bold**, <u>underline</u> 등 마크다운/HTML 완전 제거
-    // ✅ [2026-01-20] 폴백 값 제거 - 콘텐츠 없으면 에러 던지기
-    const rawContent =
-      structured?.bodyPlain?.trim() ||
-      runOptions.content?.trim() ||
-      this.options.defaultContent?.trim();
-
-    if (!rawContent) {
-      throw new Error('❌ 발행 실패: 본문 내용이 없습니다. 콘텐츠 생성이 필요합니다.');
-    }
-    const content = removeOrdinalHeadingLabelsFromBody(rawContent);
-
-    const rawLines = runOptions.lines ?? this.options.defaultLines ?? 5;
-    const lines = Number.isFinite(rawLines) && rawLines > 0 ? Math.floor(rawLines) : 5;
-
-    return {
-      title,
-      content,
-      lines,
-      selectedHeadings: runOptions.selectedHeadings ?? [],
-      structuredContent: structured,
-      hashtags,
-      ctaLink: runOptions.ctaLink?.trim(),
-      ctaText: runOptions.ctaText?.trim(),
-      ctas,
-      ctaPosition: runOptions.ctaPosition || 'bottom', // 기본값: 하단
-      skipCta: runOptions.skipCta || false, // ✅ CTA 없이 발행하기
-      images: runOptions.images ?? [],
-      publishMode: runOptions.publishMode ?? 'publish', // ✅ [2026-03-10 FIX] 기본값을 즉시발행으로 변경
-      scheduleDate: runOptions.scheduleDate,
-      scheduleType: runOptions.scheduleType || 'naver-server', // ✅ [2026-02-07 FIX] 기본값: 네이버 서버 예약 (app-schedule은 미구현)
-      scheduleMethod: runOptions.scheduleMethod || 'datetime-local', // 기본값: datetime-local
-      skipImages: runOptions.skipImages || runOptions.imageMode === 'skip' || false, // ✅ [v1.4.66] imageMode:'skip'도 skipImages로 처리
-      imageMode: runOptions.imageMode,
-      collectedImages: runOptions.collectedImages,
-      toneStyle: runOptions.toneStyle ?? 'professional',
-      categoryName: runOptions.categoryName,
-      useIntelligentImagePlacement: runOptions.useIntelligentImagePlacement,
-      onlyImagePlacement: runOptions.onlyImagePlacement,
-      keepBrowserOpen: runOptions.keepBrowserOpen ?? true, // ✅ 기본값 true로 변경 (세션 유지)
-      affiliateLink: runOptions.affiliateLink?.trim(),
-      useAffiliateVideo: runOptions.useAffiliateVideo ?? false,
-      contentMode: runOptions.contentMode,
-      useAiImage: runOptions.useAiImage,
-      // ✅ 쇼핑커넥트 모드에서는 자동으로 제품 이미지 썸네일 활성화
-      createProductThumbnail: runOptions.createProductThumbnail ||
-        (runOptions.contentMode === 'affiliate' || !!runOptions.affiliateLink),
-      includeThumbnailText: runOptions.includeThumbnailText || false,
-      isFullAuto: runOptions.isFullAuto ?? false, // ✅ 풀오토 모드 전달
-      previousPostTitle: runOptions.previousPostTitle, // ✅ 같은 카테고리 이전글 제목
-      previousPostUrl: runOptions.previousPostUrl, // ✅ 같은 카테고리 이전글 URL
-      thumbnailPath: runOptions.thumbnailPath, // ✅ [2026-03-03 FIX] 대표사진 경로 전달
-    };
+    return resolveNaverRunOptions({
+      runOptions,
+      defaults: this.options,
+      log: (message) => this.log(message),
+    }) as ResolvedRunOptions;
   }
 
   async setupBrowser(): Promise<void> {
@@ -1857,7 +1609,7 @@ export class NaverBlogAutomation {
           this.log('   ⚠️ 세션 데이터 없음 (첫 로그인 또는 세션 만료)');
         }
 
-        const chromeExecutablePath = this.findChromeExecutable();
+        const chromeExecutablePath = findChromeExecutable();
         const profile = this.getAccountConsistentProfile();
         const screenRes = profile.screen;
 
@@ -1983,6 +1735,7 @@ export class NaverBlogAutomation {
             await this.page.authenticate(proxyAuth);
             this.log(`   🔐 프록시 인증 설정 완료 (user: ${proxyAuth.username.substring(0, 5)}...)`);
         }
+        await this.loadCookies();
         const initialPages = await this.browser.pages();
         for (const p of initialPages) {
           if (p !== this.page) {
@@ -2334,14 +2087,15 @@ export class NaverBlogAutomation {
 
       // ✅ 2단계: 현재 URL 기반 판단 (이미 블로그/에디터에 있으면 유효)
       const currentUrl = page.url();
-      if (currentUrl.includes('blog.naver.com') && !currentUrl.includes('login') && !currentUrl.includes('nidlogin')) {
+      const loginStatusUrl = classifyLoginStatusUrl(currentUrl);
+      if (loginStatusUrl.isBlogSessionSurface) {
         // 블로그 도메인에 있고 로그인 페이지가 아니면 유효
         this.log('   ✅ 세션 유효 (현재 블로그 도메인에 위치)');
         return true;
       }
 
       // ✅ 3단계: 현재 페이지가 네이버 도메인이면 DOM으로 정밀 확인
-      if (currentUrl.includes('naver.com') && !currentUrl.includes('nidlogin') && !currentUrl.includes('login')) {
+      if (loginStatusUrl.shouldProbeNaverDom) {
         try {
           const loginIndicators = await page.evaluate(() => {
             const logoutBtn = document.querySelector('a[href*="logout"], .gnb_btn_login, #gnb_login_button');
@@ -2403,7 +2157,7 @@ export class NaverBlogAutomation {
     this.log(`   현재 페이지: ${currentUrl}`);
 
     // 이미 로그인 페이지에 있으면 이동하지 않음
-    if (!currentUrl.includes('nidlogin')) {
+    if (shouldNavigateToLoginPageFromCurrentUrl(currentUrl)) {
       const LOGIN_MAX_RETRIES = 3;
       let loginPageLoaded = false;
 
@@ -2439,7 +2193,8 @@ export class NaverBlogAutomation {
 
           // 로드 검증
           const loadedUrl = page.url();
-          if (loadedUrl.includes('nid.naver.com') || loadedUrl.includes('nidlogin')) {
+          const loginPageNavigation = resolveLoginPageNavigationUrl(loadedUrl);
+          if (loginPageNavigation.isLoginPageLoaded) {
             loginPageLoaded = true;
             break; // 성공
           }
@@ -2447,7 +2202,7 @@ export class NaverBlogAutomation {
           // ✅ [v1.4.62] nidlogin.login으로 이동했지만 다른 URL로 리다이렉트됨
           // → 네이버가 "이미 로그인됨" 판정하여 referrer/메인으로 튕겨낸 것.
           // 이는 실패가 아니라 "세션 유효" 신호이므로 즉시 성공 처리.
-          if (loadedUrl.includes('naver.com') && !loadedUrl.includes('nidlogin')) {
+          if (loginPageNavigation.isAlreadyLoggedInRedirect) {
             this.log(`✅ 로그인 페이지 요청이 ${loadedUrl.substring(0, 60)}으로 리다이렉트됨 → 이미 로그인된 상태`);
             browserSessionManager.setLoggedIn(this.options.naverId, true);
             return;
@@ -2456,27 +2211,15 @@ export class NaverBlogAutomation {
           this.log(`⚠️ 로그인 페이지 로드 실패 (URL: ${loadedUrl})`);
         } catch (gotoError: any) {
           const errorMsg = gotoError.message || '';
-          const isNetworkError = errorMsg.includes('ERR_CONNECTION_RESET') ||
-            errorMsg.includes('ERR_CONNECTION_REFUSED') ||
-            errorMsg.includes('ERR_CONNECTION_TIMED_OUT') ||
-            errorMsg.includes('ERR_NAME_NOT_RESOLVED') ||
-            errorMsg.includes('ERR_INTERNET_DISCONNECTED') ||
-            errorMsg.includes('ERR_TUNNEL_CONNECTION_FAILED') ||
-            errorMsg.includes('ERR_PROXY_CONNECTION_FAILED') ||
-            errorMsg.includes('ERR_PROXY_AUTH_REQUESTED') ||
-            errorMsg.includes('ERR_NO_SUPPORTED_PROXIES') ||
-            errorMsg.includes('ERR_SOCKS_CONNECTION_FAILED') ||
-            errorMsg.includes('ERR_PROXY') ||
-            errorMsg.includes('net::');
+          const loginGotoError = classifyLoginGotoError(errorMsg);
 
           // 프록시 관련 에러 감지 (accountProxyUrl 사용 시에만 의미 있음)
-          const isProxyError = errorMsg.includes('PROXY') || errorMsg.includes('TUNNEL') || errorMsg.includes('407');
-          if (isProxyError) {
+          if (loginGotoError.isProxyError) {
             this.log(`🔴 프록시/터널 연결 실패: ${errorMsg.substring(0, 80)}`);
             // ⚠️ 크롤링 모듈의 전역 프록시 상태를 건드리지 않음 (블로그 자동화와 크롤링은 독립)
           }
 
-          if (isNetworkError && loginAttempt < LOGIN_MAX_RETRIES) {
+          if (loginGotoError.shouldRetry && loginAttempt < LOGIN_MAX_RETRIES) {
             const waitSec = loginAttempt * 5;
             this.log(`⚠️ 네트워크 오류 (${errorMsg.substring(0, 60)})`);
             this.log(`⏳ ${waitSec}초 후 재시도합니다... (${loginAttempt}/${LOGIN_MAX_RETRIES})`);
@@ -2516,12 +2259,9 @@ export class NaverBlogAutomation {
 
     // ✅ 캡차 사전 체크 제거 - 먼저 자동 로그인 시도하고, 캡차 나오면 그때 대기
 
-    // ✅ [2026-03-26 FIX] 다중 셀렉터 폴백 + 진단 로깅 강화
-    const ID_INPUT_SELECTORS = ['#id', 'input.input_id', 'input[name="id"]', 'input[aria-label*="아이디"]'];
-
     // 로그인 필드 확인 — 다중 셀렉터 순회
     let idInput: import('puppeteer-core').ElementHandle<Element> | null = null;
-    for (const sel of ID_INPUT_SELECTORS) {
+    for (const sel of this.LOGIN_ID_INPUT_SELECTORS) {
       idInput = await page.waitForSelector(sel, { visible: true, timeout: 3000 }).catch(() => null);
       if (idInput) {
         this.log(`✅ 아이디 입력 필드 발견 (셀렉터: ${sel})`);
@@ -2538,7 +2278,7 @@ export class NaverBlogAutomation {
       this.log(`   📍 페이지 제목: ${diagTitle}`);
 
       // 이미 로그인되어 있을 수 있음
-      if (!diagUrl.includes('nidlogin') && !diagUrl.includes('nid.naver.com')) {
+      if (shouldVerifyExistingSessionAfterMissingLoginInput(diagUrl)) {
         const finalCheck = await this.checkLoginStatus();
         if (finalCheck) {
           this.log('✅ 이미 로그인되어 있습니다.');
@@ -2556,7 +2296,7 @@ export class NaverBlogAutomation {
       await this.humanDelay(2000, 3000);
 
       // 2차 시도 — 다중 셀렉터 순회 (3초 × 4 = 최대 12초)
-      for (const sel of ID_INPUT_SELECTORS) {
+      for (const sel of this.LOGIN_ID_INPUT_SELECTORS) {
         idInput = await page.waitForSelector(sel, { visible: true, timeout: 3000 }).catch(() => null);
         if (idInput) {
           this.log(`✅ 아이디 입력 필드 발견 (2차, 셀렉터: ${sel})`);
@@ -2573,9 +2313,7 @@ export class NaverBlogAutomation {
         this.log(`❌ 최종 실패 — 본문: ${failBodySnippet.substring(0, 150)}`);
 
         // 에러 원인 세분화
-        const isProxyPage = failBodySnippet.includes('407') || failBodySnippet.includes('작동하지 않습니다') ||
-          failBodySnippet.includes('proxy') || failBodySnippet.includes('프록시');
-        if (isProxyPage) {
+        if (isLoginProxyFailureBody(failBodySnippet)) {
           throw new Error(`프록시 연결 실패로 로그인 페이지를 열 수 없습니다. (HTTP 407) 프록시 설정을 확인하거나 비활성화하세요.`);
         }
         throw new Error(`아이디 입력 필드를 찾을 수 없습니다. (URL: ${failUrl}, 제목: ${failTitle})`);
@@ -2812,11 +2550,9 @@ export class NaverBlogAutomation {
     // [Playwright 검증] 실제 셀렉터: #nvlong (class: input_keep, name: nvlong)
     // ⚠️ 이전 #keep은 존재하지 않아 항상 null → 세션 미유지 → 매번 재로그인 → 캡차 유발 근본 원인!
     try {
-      // 다중 셀렉터 폴백: #nvlong (현재) → #keep (레거시) → input.input_keep (클래스)
-      const KEEP_LOGIN_SELECTORS = ['#nvlong', '#keep', 'input.input_keep', 'input[name="nvlong"]'];
       let keepLoggedIn: import('puppeteer-core').ElementHandle<Element> | null = null;
       let usedSelector = '';
-      for (const sel of KEEP_LOGIN_SELECTORS) {
+      for (const sel of this.KEEP_LOGIN_SELECTORS) {
         keepLoggedIn = await page.$(sel);
         if (keepLoggedIn) {
           usedSelector = sel;
@@ -2853,7 +2589,7 @@ export class NaverBlogAutomation {
         }
         await this.humanDelay(300, 600);
       } else {
-        this.log('⚠️ 로그인 상태 유지 체크박스를 찾을 수 없습니다 (시도된 셀렉터: ' + KEEP_LOGIN_SELECTORS.join(', ') + ')');
+        this.log('⚠️ 로그인 상태 유지 체크박스를 찾을 수 없습니다 (시도된 셀렉터: ' + this.KEEP_LOGIN_SELECTORS.join(', ') + ')');
       }
     } catch (e) {
       this.log(`⚠️ 로그인 상태 유지 체크 실패: ${(e as Error).message}`);
@@ -2921,10 +2657,7 @@ export class NaverBlogAutomation {
 
     this.log('🔄 로그인 버튼 클릭 중...');
 
-    const loginButtonSelectors = [
-      ...this.LOGIN_BUTTON_SELECTORS,
-      'button[type="submit"].next_step',
-    ];
+    const loginButtonSelectors = this.LOGIN_BUTTON_SELECTORS;
 
     let loginButton: ElementHandle<Element> | null = null;
     for (const selector of loginButtonSelectors) {
@@ -3073,10 +2806,8 @@ export class NaverBlogAutomation {
       this.log(`⚠️ 1차 클릭 예외: ${(e as Error).message}`);
     }
 
-    // 비밀번호 입력 셀렉터 (하드코딩 방지 — 폴백 전부 활용)
-    const pwSelectors = ['#pw', 'input.input_pw', 'input[name="pw"]', 'input[type="password"]'];
     const focusPwInput = async (): Promise<boolean> => {
-      for (const sel of pwSelectors) {
+      for (const sel of this.LOGIN_PASSWORD_INPUT_SELECTORS) {
         const ok = await page.focus(sel).then(() => true).catch(() => false);
         if (ok) return true;
       }
@@ -3336,32 +3067,32 @@ export class NaverBlogAutomation {
       await this.delay(challengeDetected ? 2000 : 1000);
 
       const currentUrl = page.url();
+      const postLoginProgress = resolvePostLoginProgressUrl(currentUrl, loginUrl);
 
       // ═══════════════════════════════════════════════════════════════
       // 1️⃣ 로그인 성공 여부 우선 확인
       // ═══════════════════════════════════════════════════════════════
-      if (!currentUrl.includes('nidlogin') && !currentUrl.includes('nid.naver.com/login')) {
-        if (currentUrl.includes('naver.com')) {
+      if (postLoginProgress.shouldMarkLoginSuccess) {
+        loginSuccess = true;
+        this.log('✅ 네이버 로그인이 성공적으로 완료되었습니다.');
+        break;
+      }
+
+      if (postLoginProgress.shouldRecheckAfterDelay) {
+        await this.delay(1000);
+        this.ensureNotCancelled();
+        const finalCheckUrl = page.url();
+        if (isPostLoginFinalCheckSuccess(finalCheckUrl)) {
           loginSuccess = true;
           this.log('✅ 네이버 로그인이 성공적으로 완료되었습니다.');
           break;
-        }
-        if (currentUrl !== loginUrl && currentUrl !== 'about:blank') {
-          await this.delay(1000);
-          this.ensureNotCancelled();
-          const finalCheckUrl = page.url();
-          if (!finalCheckUrl.includes('nidlogin') && !finalCheckUrl.includes('login')) {
-            loginSuccess = true;
-            this.log('✅ 네이버 로그인이 성공적으로 완료되었습니다.');
-            break;
-          }
         }
       }
 
       // ═══════════════════════════════════════════════════════════════
       // 2️⃣ 보호조치/본인인증 페이지 감지 (URL 기반)
       // ═══════════════════════════════════════════════════════════════
-      if (currentUrl.includes('protect') || currentUrl.includes('security') || currentUrl.includes('verification')) {
+      if (isLoginChallengeUrl(currentUrl)) {
         if (!challengeDetected) {
           challengeDetected = true;
           this.log('');
@@ -3431,7 +3162,7 @@ export class NaverBlogAutomation {
       // ═══════════════════════════════════════════════════════════════
       // 5️⃣ 로그인 페이지에 머물러 있는 경우 — 종합 진단
       // ═══════════════════════════════════════════════════════════════
-      if (currentUrl.includes('nidlogin') || currentUrl.includes('nid.naver.com')) {
+      if (shouldInspectLoginPageDom(currentUrl)) {
         try {
           // 🔍 [Playwright 검증 완료] 페이지 DOM 종합 분석 (2026-03-30 실제 nid.naver.com 확인)
           // 검증된 셀렉터:
@@ -3746,10 +3477,7 @@ export class NaverBlogAutomation {
             // 캡차 해결 후 로그인 버튼 재클릭 시도
             await this.delay(1000);
             try {
-              const retryBtnSelectors = [
-                ...this.LOGIN_BUTTON_SELECTORS,
-                'button[type="submit"].next_step',
-              ];
+              const retryBtnSelectors = this.LOGIN_BUTTON_SELECTORS;
 
               for (const selector of retryBtnSelectors) {
                 const retryBtn = await page.$(selector).catch(() => null);
@@ -3850,7 +3578,7 @@ export class NaverBlogAutomation {
 
     // 최종 확인
     const finalUrl = page.url();
-    if (!loginSuccess && (finalUrl.includes('nidlogin') || finalUrl.includes('login'))) {
+    if (!loginSuccess && shouldReportFinalLoginUrlFailure(finalUrl)) {
       if (loginErrorDetected) {
         throw new Error(loginErrorDetected);
       } else if (challengeDetected) {
@@ -3907,13 +3635,12 @@ export class NaverBlogAutomation {
     // ✅ [2026-03-27 FIX] about:blank 경유 제거 — 네이버 세션 의심 유발 + 캡차 트리거
     // 이전 에디터의 alert는 ensureDialogHandler()가 자동으로 수락하므로 about:blank 불필요
     // about:blank → blog.naver.com 패턴은 봇 행동으로 감지될 수 있음
-    if (currentUrl.includes('blog.naver.com') || currentUrl.includes('GoBlogWrite') ||
-        currentUrl.includes('blogPostWrite') || currentUrl.includes('NaverWriteEditor')) {
+    if (shouldSkipBlogWriteWarmup(currentUrl)) {
       this.log('   ℹ️ 이전 에디터 페이지에서 GoBlogWrite로 직접 이동합니다 (about:blank 미경유)');
     }
 
     // 로그인 페이지에 있으면 로그인이 필요함
-    if (currentUrl.includes('nidlogin') || currentUrl.includes('login')) {
+    if (isBlogWriteLoginRedirect(currentUrl)) {
       this.log('   ⚠️ 로그인 페이지에 있습니다. 로그인을 다시 시도합니다...');
       // ✅ [2026-03-26 FIX] isLoggedIn 캐시 무효화 — 서버 측 세션 만료 감지
       // 이 호출이 없으면 다음 run()에서 loginToNaver()가 스킵되어 무한 실패
@@ -3936,10 +3663,7 @@ export class NaverBlogAutomation {
     // 🛡️ [2026-03-23] 끝판왕 워밍업 브라우징 — 네이버 메인 → (랜덤 서비스) → 블로그 홈 → 글쓰기
     // ✅ [2026-03-27 FIX] 이미 블로그/에디터에 있으면 워밍업 스킵 — 매 발행마다 반복하면 봇 패턴
     // ═══════════════════════════════════════════════════════════════════
-    const shouldSkipWarmup = currentUrl.includes('blog.naver.com') ||
-                              currentUrl.includes('GoBlogWrite') ||
-                              currentUrl.includes('blogPostWrite') ||
-                              currentUrl.includes('NaverWriteEditor');
+    const shouldSkipWarmup = shouldSkipBlogWriteWarmup(currentUrl);
 
     if (shouldSkipWarmup) {
       this.log('   ⚡ 워밍업 스킵 (이미 블로그 도메인에 위치 — 연속 발행 최적화)');
@@ -4053,14 +3777,11 @@ export class NaverBlogAutomation {
 
         // URL 확인
         const finalUrl = page.url();
+        const finalNavigation = classifyBlogWriteNavigationUrl(finalUrl);
         this.log(`   최종 URL: ${finalUrl}`);
 
         // Chromium 에러 페이지 감지 (일시적 네트워크 오류/차단/리다이렉트 실패 등)
-        if (
-          finalUrl.startsWith('chrome-error://') ||
-          finalUrl.includes('chromewebdata') ||
-          finalUrl === 'about:blank'
-        ) {
+        if (finalNavigation.isBrowserError) {
           const pageTitle = await page.title().catch(() => '');
           throw new Error(
             `페이지 로딩 오류 감지 (크롬 에러 페이지)\n` +
@@ -4077,19 +3798,14 @@ export class NaverBlogAutomation {
         }
 
         // ✅ [2026-03-24 FIX] 로그인/세션 문제 감지 — 로그인 페이지 + 메인 페이지 리다이렉트 통합 처리
-        const isLoginRedirect = finalUrl.includes('nidlogin') || finalUrl.includes('login.naver') ||
-                                (finalUrl.includes('/login') && !finalUrl.includes('blog.naver.com'));
+        const isLoginRedirect = finalNavigation.isLoginRedirect;
         // ✅ [v2.7.41] 에디터 URL 화이트리스트 — Redirect 체인 누락 회귀 수정
         //   사용자 보고: blog.naver.com/{id}?Redirect=Write 페이지에서 "글을 불러오고 있습니다..." 무한로딩
         //   원인: GoBlogWrite → blog.naver.com/{id}?Redirect=Write → PostWriteForm.naver redirect 체인에서
         //         중간 URL이 화이트리스트 누락 → fallback 분기로 빠져 #mainFrame 못 찾고 멍때림
         //   수정: Redirect=Write / PostWriteForm 패턴 추가 + #mainFrame 안착 별도 검증
-        const isEditorUrl = finalUrl.includes('blogPostWrite') ||
-                            finalUrl.includes('GoBlogWrite') ||
-                            finalUrl.includes('NaverWriteEditor') ||
-                            finalUrl.includes('PostWriteForm') ||
-                            /[?&]Redirect=Write\b/i.test(finalUrl);
-        const isBlogDomain = finalUrl.includes('blog.naver.com');
+        const isEditorUrl = finalNavigation.isEditorUrl;
+        const isBlogDomain = finalNavigation.isBlogDomain;
 
         // 에디터 URL 패턴이 확인되면 즉시 성공 (가장 빠른 경로)
         if (isEditorUrl) {
@@ -4147,19 +3863,17 @@ export class NaverBlogAutomation {
             await this.delay(3000);
 
             const retryUrl = page.url();
-            const retryIsEditor = retryUrl.includes('blogPostWrite') ||
-                                  retryUrl.includes('GoBlogWrite') ||
-                                  retryUrl.includes('NaverWriteEditor') ||
-                                  retryUrl.includes('PostWriteForm') ||
-                                  /[?&]Redirect=Write\b/i.test(retryUrl);
+            const retryNavigation = classifyBlogWriteNavigationUrl(retryUrl);
+            const retryIsEditor = retryNavigation.isEditorUrl;
             const retryHasEditorFrame = !retryIsEditor ? await page.evaluate(() => {
               return !!document.querySelector('#mainFrame, iframe[name="mainFrame"]');
             }).catch(() => false) : true;
+            const manualRetryNavigation = resolveManualLoginRetryWriteNavigation(retryUrl, retryHasEditorFrame);
 
-            if (retryUrl.includes('blog.naver.com') && (retryIsEditor || retryHasEditorFrame)) {
+            if (manualRetryNavigation.isReadyForEditor) {
               navigationSuccess = true;
               break;
-            } else if (retryUrl.includes('blog.naver.com')) {
+            } else if (manualRetryNavigation.status === 'blog-main-without-editor') {
               // 블로그 도메인이지만 에디터가 아님 → 재시도 (에러 대신)
               this.log(`   ⚠️ 수동 로그인 후 블로그 메인으로 이동됨 (에디터 아님): ${retryUrl}`);
               throw new Error('수동 로그인 후 블로그 에디터가 아닌 메인 페이지로 이동되었습니다.');
@@ -4245,7 +3959,7 @@ export class NaverBlogAutomation {
     this.log(`   현재 페이지 URL: ${currentUrl}`);
 
     // ✅ 로그인 페이지에 있으면 수동 로그인 대기 (바로 에러 던지지 않음!)
-    if (currentUrl.includes('nidlogin') || currentUrl.includes('login')) {
+    if (isBlogWriteLoginRedirect(currentUrl)) {
       this.log('');
       this.log('🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨🚨');
       this.log('⚠️  로그인 페이지에 있습니다!');
@@ -4287,20 +4001,17 @@ export class NaverBlogAutomation {
       currentUrl = page.url();
       this.log(`   로그인 후 URL: ${currentUrl}`);
 
-      if (currentUrl.includes('nidlogin') || currentUrl.includes('login')) {
+      if (isBlogWriteLoginRedirect(currentUrl)) {
         throw new Error('로그인 후에도 블로그 페이지 접근 실패. 네이버 계정 보안 설정을 확인해주세요.');
       }
     }
 
     // ✅ [2026-03-24 FIX] 블로그 글쓰기 페이지 검증 강화 — URL 패턴 + DOM 기반
-    const isOnEditorByUrl = currentUrl.includes('GoBlogWrite') ||
-                            currentUrl.includes('blogPostWrite') ||
-                            currentUrl.includes('NaverWriteEditor') ||
-                            currentUrl.includes('PostWriteForm') ||
-                            /[?&]Redirect=Write\b/i.test(currentUrl);
-    const isOnBlogDomain = currentUrl.includes('blog.naver.com');
+    let frameSwitchSurface = resolveBlogWriteFrameSwitchSurface(currentUrl);
+    let isOnEditorByUrl = frameSwitchSurface.isEditorSurface;
+    let isOnBlogDomain = frameSwitchSurface.isBlogDomainSurface;
 
-    if (!isOnEditorByUrl && !isOnBlogDomain) {
+    if (frameSwitchSurface.shouldRetryNavigation) {
       // 완전히 다른 도메인(www.naver.com 등)에 있는 경우 → 자동 재이동
       this.log(`   ⚠️ 에디터가 아닌 페이지에 있습니다: ${currentUrl}`);
       this.log(`   🔄 블로그 글쓰기 페이지로 재이동 시도...`);
@@ -4313,17 +4024,15 @@ export class NaverBlogAutomation {
         await this.delay(3000);
         currentUrl = page.url();
         this.log(`   재이동 후 URL: ${currentUrl}`);
+        frameSwitchSurface = resolveBlogWriteFrameSwitchSurface(currentUrl);
+        isOnEditorByUrl = frameSwitchSurface.isEditorSurface;
+        isOnBlogDomain = frameSwitchSurface.isBlogDomainSurface;
       } catch (retryErr) {
         // 재이동도 실패하면 에러
       }
 
       // 재이동 후에도 에디터가 아니면 에러
-      const stillNotEditor = !currentUrl.includes('blog.naver.com') &&
-                             !currentUrl.includes('GoBlogWrite') &&
-                             !currentUrl.includes('blogPostWrite') &&
-                             !currentUrl.includes('NaverWriteEditor') &&
-                             !currentUrl.includes('PostWriteForm') &&
-                             !/[?&]Redirect=Write\b/i.test(currentUrl);
+      const stillNotEditor = frameSwitchSurface.shouldRetryNavigation;
       if (stillNotEditor) {
         throw new Error(
           `메인 프레임을 찾을 수 없습니다.\n` +
@@ -4637,152 +4346,8 @@ export class NaverBlogAutomation {
     this.log('ℹ️ 닫을 팝업이 없거나 이미 닫혀있습니다.');
   }
 
-  private async findTitleInputElement(frame: Frame, page: Page, timeoutMs = 20000): Promise<ElementHandle<Element> | null> {
-    const titleTextElement = await waitForElement(frame, SELECTORS.editor.titleText, 'editor.titleText', {
-      visible: true,
-      timeout: Math.max(5000, Math.floor(timeoutMs / 2)),
-    });
-    if (titleTextElement) return titleTextElement as ElementHandle<Element>;
-
-    const titleSectionElement = await waitForElement(frame, SELECTORS.editor.documentTitle, 'editor.documentTitle', {
-      visible: true,
-      timeout: Math.max(5000, Math.floor(timeoutMs / 2)),
-    });
-    if (titleSectionElement) return titleSectionElement as ElementHandle<Element>;
-
-    const heuristicHandle = await frame.evaluateHandle(() => {
-      const isVisible = (el: Element): boolean => {
-        const html = el as HTMLElement;
-        const rect = html.getBoundingClientRect();
-        const style = window.getComputedStyle(html);
-        return rect.width > 80
-          && rect.height > 16
-          && style.visibility !== 'hidden'
-          && style.display !== 'none'
-          && html.offsetParent !== null;
-      };
-
-      const scoreCandidate = (el: Element): number => {
-        const html = el as HTMLElement;
-        const text = `${html.className || ''} ${html.id || ''} ${html.getAttribute('data-name') || ''} ${html.getAttribute('aria-label') || ''} ${html.getAttribute('placeholder') || ''} ${html.getAttribute('data-placeholder') || ''}`;
-        const lower = text.toLowerCase();
-        let score = 0;
-        if (lower.includes('documenttitle')) score += 90;
-        if (lower.includes('title')) score += 50;
-        if (text.includes('제목')) score += 70;
-        if (html.getAttribute('contenteditable') === 'true') score += 30;
-        if (html.tagName === 'INPUT' || html.tagName === 'TEXTAREA') score += 25;
-        const rect = html.getBoundingClientRect();
-        if (rect.top < Math.max(window.innerHeight * 0.45, 360)) score += 15;
-        if (rect.height > 24 && rect.height < 180) score += 10;
-        if (lower.includes('section-text') || lower.includes('module-text') || lower.includes('paragraph')) score -= 80;
-        return score;
-      };
-
-      const selectors = [
-        '.se-section-documentTitle',
-        '.se-documentTitle',
-        '[data-name="documentTitle"]',
-        '[class*="documentTitle"]',
-        '[class*="DocumentTitle"]',
-        '[contenteditable="true"][aria-label*="제목"]',
-        '[contenteditable="true"][data-placeholder*="제목"]',
-        '[placeholder*="제목"]',
-        'input[aria-label*="제목"]',
-        'textarea[aria-label*="제목"]',
-        '[contenteditable="true"]',
-      ];
-
-      const candidates = selectors
-        .flatMap((selector) => Array.from(document.querySelectorAll(selector)))
-        .filter((el, index, list) => list.indexOf(el) === index)
-        .filter(isVisible)
-        .map((el) => ({ el, score: scoreCandidate(el) }))
-        .filter((item) => item.score > 0)
-        .sort((a, b) => b.score - a.score);
-
-      return candidates[0]?.el || null;
-    }).catch(() => null);
-
-    const heuristicElement = heuristicHandle?.asElement() as ElementHandle<Element> | null;
-    if (heuristicElement) {
-      this.log('   ✅ 제목 입력 영역을 휴리스틱 fallback으로 찾았습니다.');
-      return heuristicElement;
-    }
-    await heuristicHandle?.dispose().catch(() => undefined);
-
-    const pageFallback = await waitForElement(page, SELECTORS.editor.documentTitle, 'page.editor.documentTitle', {
-      visible: true,
-      timeout: 3000,
-    });
-    return pageFallback as ElementHandle<Element> | null;
-  }
-
-  private async readEditorTitleText(frame: Frame): Promise<string> {
-    const selectors = [
-      ...getSelectorStrings(SELECTORS.editor.titleText),
-      ...getSelectorStrings(SELECTORS.editor.documentTitle),
-    ];
-
-    return await frame.evaluate((candidateSelectors) => {
-      for (const selector of candidateSelectors) {
-        const el = document.querySelector(selector) as HTMLInputElement | HTMLTextAreaElement | HTMLElement | null;
-        if (!el) continue;
-        const value = 'value' in el ? String(el.value || '') : String(el.innerText || el.textContent || '');
-        if (value.trim()) return value.trim();
-      }
-      return '';
-    }, selectors).catch(() => '');
-  }
-
-  private async setTitleByDomEvent(titleElement: ElementHandle<Element>, titleText: string): Promise<string> {
-    return await titleElement.evaluate((element, value) => {
-      const root = element as HTMLElement;
-      const target = (
-        root.matches('input, textarea, [contenteditable="true"]')
-          ? root
-          : root.querySelector('input, textarea, [contenteditable="true"], .se-title-text')
-      ) as HTMLInputElement | HTMLTextAreaElement | HTMLElement | null;
-      if (!target) return '';
-
-      target.focus();
-      if ('value' in target) {
-        target.value = value;
-      } else {
-        target.textContent = value;
-      }
-
-      target.dispatchEvent(new InputEvent('beforeinput', { bubbles: true, cancelable: true, data: value, inputType: 'insertText' }));
-      target.dispatchEvent(new InputEvent('input', { bubbles: true, data: value, inputType: 'insertText' }));
-      target.dispatchEvent(new Event('change', { bubbles: true }));
-      return 'value' in target ? String(target.value || '') : String(target.innerText || target.textContent || '');
-    }, titleText).catch(() => '');
-  }
-
-  private async collectEditorTitleDiagnostics(frame: Frame, page: Page): Promise<string> {
-    const frameUrl = frame.url?.() || '(frame url unavailable)';
-    const pageUrl = page.url();
-    const pageTitle = await page.title().catch(() => '');
-    const diag = await frame.evaluate(() => {
-      const selectors = [
-        '.se-section-documentTitle',
-        '.se-documentTitle',
-        '[data-name="documentTitle"]',
-        '[class*="documentTitle"]',
-        '[contenteditable="true"]',
-        '.se-section-text',
-        '.se-main-container',
-      ];
-      return selectors.map((selector) => {
-        const count = document.querySelectorAll(selector).length;
-        return `${selector}=${count}`;
-      }).join(', ');
-    }).catch((error) => `diagnostics failed: ${(error as Error).message}`);
-    return `pageUrl=${pageUrl}, pageTitle=${pageTitle}, frameUrl=${frameUrl}, selectors=[${diag}]`;
-  }
-
   async inputTitle(title: string): Promise<void> {
-    const frame = (await this.getAttachedFrame());
+    let frame = (await this.getAttachedFrame());
     const page = this.ensurePage();
     this.ensureNotCancelled();
     this.log('🔄 제목 입력 중...');
@@ -4795,9 +4360,28 @@ export class NaverBlogAutomation {
     }
 
     // ✅ 타임아웃 설정 (60초)
-    const titleElement = await findEditorTitleInputElement(frame, page, 60000, (message) => this.log(message));
+    let titleElement = await findEditorTitleInputElement(frame, page, 60000, (message) => this.log(message));
     if (!titleElement) {
-      const diagnostics = await collectEditorTitleDiagnostics(frame, page);
+      const snapshot = await collectEditorReadinessSnapshot(frame, page).catch(() => null);
+      if (snapshot && shouldRetryEditorReadiness(snapshot)) {
+        this.log('   ⚠️ 에디터 프레임은 열렸지만 내부 문서가 비어 있습니다. 글쓰기 페이지를 재안착합니다...');
+        try {
+          await page.goto(this.options.blogWriteUrl ?? 'https://blog.naver.com/GoBlogWrite.naver', {
+            waitUntil: 'domcontentloaded',
+            timeout: NAVER_TIMEOUTS.PAGE_LOAD
+          });
+          await this.delay(3000);
+          await this.switchToMainFrame();
+          const recoveredFrame = await this.getAttachedFrame();
+          frame = recoveredFrame;
+          titleElement = await findEditorTitleInputElement(recoveredFrame, page, 45000, (message) => this.log(message));
+        } catch (recoveryError) {
+          this.log(`   ⚠️ 에디터 재안착 실패: ${(recoveryError as Error).message}`);
+        }
+      }
+    }
+    if (!titleElement) {
+      const diagnostics = await collectEditorTitleDiagnostics(await this.getAttachedFrame(), page);
       throw new Error(`제목 입력 필드를 찾을 수 없습니다. ${diagnostics}`);
     }
 
@@ -4946,29 +4530,6 @@ export class NaverBlogAutomation {
   }
 
   /**
-   * 날짜 유효성 검증
-   */
-  private validateScheduleDate(scheduleDate: string): void {
-    if (!/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(scheduleDate)) {
-      throw new Error('날짜 형식이 올바르지 않습니다. (예: 2025-02-01 14:30)');
-    }
-
-    const scheduleTime = new Date(scheduleDate.replace(' ', 'T'));
-    const now = new Date();
-
-    if (scheduleTime <= now) {
-      throw new Error('예약 날짜는 현재 시각보다 미래여야 합니다.');
-    }
-
-    const oneYearLater = new Date();
-    oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
-
-    if (scheduleTime > oneYearLater) {
-      throw new Error('예약 날짜는 1년 이내로 설정해야 합니다.');
-    }
-  }
-
-  /**
    * 날짜/시간 설정 (네이버 UI에 맞춤)
    */
   /**
@@ -4981,10 +4542,6 @@ export class NaverBlogAutomation {
   /**
    * 발행 모달 디버깅 (네이버 UI 구조 파악)
    */
-  private async debugPublishModal(): Promise<void> {
-    return await publishHelpers.debugPublishModal(this);
-  }
-
   /**
    * 네이버 블로그 예약발행 (완벽 수정 버전 - 자동으로 최적 방식 선택)
    */
@@ -5037,92 +4594,8 @@ export class NaverBlogAutomation {
         this.log(`[PrePublish] 검사 자체 실패 (발행 진행): ${(assertErr as Error).message}`);
       }
 
-      // ✅ [2026-01-22 FIX] 발행 직전 모든 이미지에 '문서 너비' 적용 (버튼 클릭 방식)
-      try {
-        this.log('🖼️ 발행 전 모든 이미지에 문서 너비 적용 중...');
-
-        // 모든 이미지 요소 찾기
-        const imageElements = await frame.$$('img.se-image-resource, .se-module-image img, .se-component-image img');
-
-        if (imageElements.length > 0) {
-          this.log(`   📷 ${imageElements.length}개 이미지 발견, 문서 너비 적용 시작...`);
-
-          let appliedCount = 0;
-          const imageWidthStartTime = Date.now();
-          const IMAGE_WIDTH_TIMEOUT = 10000; // 10초 제한
-          for (let i = 0; i < imageElements.length; i++) {
-            // ✅ [2026-02-17] 타임아웃 가드: 이미지 너비 적용이 너무 오래 걸리면 중단
-            if (Date.now() - imageWidthStartTime > IMAGE_WIDTH_TIMEOUT) {
-              this.log(`   ⏱️ 이미지 너비 적용 시간 초과 (${i}/${imageElements.length}개 완료, 10초 제한). 나머지 건너뜁니다.`);
-              break;
-            }
-            try {
-              // 1. 이미지 클릭하여 선택
-              await imageElements[i].click();
-              await this.delay(300);
-
-              // 2. 문서 너비 버튼 찾기 및 클릭
-              // 버튼이 이미 '문서 너비' 상태인지 확인 (se-object-arrangement-fit-toolbar-button 클래스 존재 여부)
-              const fitButton = await frame.$('button[data-value="fit"][data-name="content-mode-without-pagefull"], button.se-object-arrangement-fit-toolbar-button[data-value="fit"]');
-
-              if (fitButton) {
-                // 버튼이 이미 활성화 상태인지 확인
-                const isAlreadyActive = await frame.evaluate((btn: Element) => {
-                  return btn.classList.contains('se-toolbar-button-active') ||
-                    btn.getAttribute('aria-pressed') === 'true';
-                }, fitButton);
-
-                if (!isAlreadyActive) {
-                  await fitButton.click();
-                  await this.delay(200);
-                  this.log(`   ✅ ${i + 1}/${imageElements.length} 이미지 문서 너비 적용`);
-                } else {
-                  this.log(`   ⏭️ ${i + 1}/${imageElements.length} 이미지 이미 문서 너비 상태`);
-                }
-                appliedCount++;
-              } else {
-                // 폴백: CSS 스타일로 직접 적용
-                await frame.evaluate((imgEl: Element) => {
-                  const img = imgEl as HTMLImageElement;
-                  let el: HTMLElement | null = img;
-                  while (el && el !== document.body) {
-                    if (el.classList.contains('se-section') || el.classList.contains('se-module') || el.classList.contains('se-component')) {
-                      el.classList.remove('se-l-left', 'se-l-right', 'se-l-original');
-                      el.classList.add('se-l-default');
-                      el.style.width = '100%';
-                      el.style.maxWidth = '100%';
-                      el.setAttribute('data-size', 'document-width');
-                    }
-                    el = el.parentElement;
-                  }
-                  img.style.width = '100%';
-                  img.style.maxWidth = '100%';
-                  img.style.height = 'auto';
-                }, imageElements[i]);
-                this.log(`   ⚠️ ${i + 1}/${imageElements.length} 이미지 CSS 폴백 적용`);
-                appliedCount++;
-              }
-
-              // 이미지 선택 해제 (다른 곳 클릭)
-              await frame.click('body').catch(() => { });
-              await this.delay(100);
-            } catch (imgErr) {
-              recordSilentFailure('image:width-apply');
-              this.log(`   ⚠️ ${i + 1}/${imageElements.length} 이미지 처리 중 오류 (무시): ${(imgErr as Error).message}`);
-            }
-          }
-
-          if (appliedCount > 0) {
-            this.log(`   ✅ ${appliedCount}개 이미지에 문서 너비 적용 완료`);
-          }
-        } else {
-          this.log('   ℹ️ 적용할 이미지가 없습니다.');
-        }
-
-        await this.delay(300);
-      } catch (imgError) {
-        this.log(`   ⚠️ 이미지 문서 너비 적용 중 오류 (계속 진행): ${(imgError as Error).message}`);
-      }
+      // ✅ 발행 직전 모든 이미지에 문서 너비 적용
+      await imageHelpers.applyDocumentWidthToAllImagesBeforePublish(this, frame);
 
       if (mode === 'draft') {
         this.log('🔄 블로그 글 임시저장 중...');
@@ -5157,17 +4630,7 @@ export class NaverBlogAutomation {
 
         // ✅ 발행 버튼 찾기 (안정적인 data-* 속성 우선, CSS 클래스명은 네이버 업데이트 시 변경 가능)
         this.log('📌 발행 버튼 탐색 시작...');
-        const publishButtonSelectors = [
-          // 1순위: data-* 속성 (네이버 업데이트에도 안정적)
-          'button[data-click-area="tpb.publish"]',
-          '[data-click-area="tpb.publish"]',
-          // 2순위: 기존 CSS 클래스 셀렉터
-          'button.publish_btn__m9KHH[data-click-area="tpb.publish"]',
-          ...this.PUBLISH_BUTTON_SELECTORS,
-          'button.publish_btn__m9KHH',
-          '.publish_btn__bzc5B',
-          '[data-testid="publish-button"]',
-        ];
+        const publishButtonSelectors = getPublishButtonSelectors(this.PUBLISH_BUTTON_SELECTORS);
 
         let publishButton: ElementHandle<Element> | null = null;
         for (const selector of publishButtonSelectors) {
@@ -5374,11 +4837,7 @@ export class NaverBlogAutomation {
             await frame.evaluate(() => window.scrollTo(0, 0));
             await this.delay(300);
             // 발행 버튼 핸들 재탐색 (stale 방지)
-            const refreshSelectors = [
-              'button[data-click-area="tpb.publish"]',
-              'button.publish_btn__m9KHH',
-              ...this.PUBLISH_BUTTON_SELECTORS,
-            ];
+            const refreshSelectors = getPublishButtonSelectors(this.PUBLISH_BUTTON_SELECTORS);
             for (const sel of refreshSelectors) {
               const freshBtn = await frame.waitForSelector(sel, { visible: true, timeout: 2000 }).catch(() => null);
               if (freshBtn) {
@@ -5391,13 +4850,7 @@ export class NaverBlogAutomation {
 
           // ✅ [2026-02-27 FIX v2] 발행 모달 열기 — Playwright waitForSelector 기반
           // delay 폴링 대신 Playwright 네이티브 대기로 모달 트랜지션 완료까지 정확히 대기
-          const modalIndicatorSelectors = [
-            '[data-testid="seOnePublishBtn"]',           // 모달 내 최종 발행 버튼
-            'button[data-click-area="tpb*i.publish"]',   // 모달 내 발행 확인
-            'button.confirm_btn__WEaBq',                 // 모달 확인 버튼 클래스
-            '[data-click-area="tpb*i.category"]',        // 카테고리 선택 영역
-            'input#radio_time1',                          // 즉시발행 라디오
-          ];
+          const modalIndicatorSelectors = getPublishModalIndicatorSelectors();
           const MAX_MODAL_CLICKS = 3;
           let modalOpened = false;
 
@@ -5447,6 +4900,7 @@ export class NaverBlogAutomation {
 
           if (!modalOpened) {
             this.log('   ❌ 발행 모달 열기 3회 시도 모두 실패 — 카테고리 선택 건너뜀 가능');
+            throw new Error('PUBLISH_MODAL_NOT_OPENED:발행 버튼은 눌렀지만 발행 모달이 열리지 않았습니다. 네이버 에디터 UI 변경 또는 세션 끊김 가능성이 있어 카테고리/발행 확인 단계로 계속 진행하지 않습니다.');
           }
 
           // ✅ [2026-02-17] 발행 모달 DOM 덤프 (디버깅용)
@@ -5540,21 +4994,7 @@ export class NaverBlogAutomation {
           }
 
           this.log('📌 발행 확인 버튼 탐색 시작...');
-          const confirmPublishSelectors = [
-            // 1순위: data-* 속성 (안정적)
-            'button[data-testid="seOnePublishBtn"]',
-            // ✅ [2026-02-23 FIX] *= (contains) → = (exact) 변경
-            'button[data-click-area="tpb*i.publish"]',
-            '[data-testid="seOnePublishBtn"]',
-            // 2순위: CSS 클래스 (정확)
-            'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"]',
-            'button.confirm_btn__WEaBq[data-click-area="tpb*i.publish"]',
-            'button.confirm_btn__WEaBq',
-            // ✅ [2026-03-05] 3순위: 와일드카드 패턴 (네이버 CSS 모듈 해시 변경 대응)
-            'button[class*="confirm_btn"][data-testid="seOnePublishBtn"]',
-            'button[class*="confirm_btn"][data-click-area="tpb*i.publish"]',
-            'button[class*="confirm_btn"]',
-          ];
+          const confirmPublishSelectors = getConfirmPublishSelectors(this.CONFIRM_PUBLISH_SELECTORS);
 
           let confirmPublishButton: ElementHandle<Element> | null = null;
           for (const selector of confirmPublishSelectors) {
@@ -5706,7 +5146,7 @@ export class NaverBlogAutomation {
                 // URL은 변경되었지만 블로그 포스트 URL이 아닌 경우
                 this.log(`⚠️ URL이 변경되었지만 블로그 포스트 URL이 아닙니다: ${afterUrl}`);
                 // 추가 확인: 에디터 페이지가 아닌지 확인
-                if (!afterUrl.includes('GoBlogWrite') && !afterUrl.includes('blogPostWrite')) {
+                if (!isNaverEditorUrl(afterUrl)) {
                   this.log(`✅ 블로그 글이 발행되었습니다. (URL: ${afterUrl})`);
                   this.log(`POST_URL: ${afterUrl}`);
                   this.publishedUrl = afterUrl; // ✅ URL 저장
@@ -5943,7 +5383,7 @@ export class NaverBlogAutomation {
                 this.log('✅ 블로그 글이 즉시발행되었습니다.');
                 this.log(`POST_URL: ${afterUrl}`);
                 this.publishedUrl = afterUrl; // ✅ URL 저장
-              } else if (!afterUrl.includes('GoBlogWrite') && !afterUrl.includes('blogPostWrite')) {
+              } else if (!isNaverEditorUrl(afterUrl)) {
                 this.log('✅ 블로그 글이 발행되었습니다.');
                 this.log(`POST_URL: ${afterUrl}`);
                 this.publishedUrl = afterUrl; // ✅ URL 저장
@@ -6523,6 +5963,8 @@ export class NaverBlogAutomation {
           // 'detached Frame' 제외 - 프레임 재연결로 복구 가능
           // [R11/A-4] 발행 미확인은 블라인드 재시도 시 이중 발행 위험 — 즉시 중단
           'PUBLISH_UNCONFIRMED',
+          // [R8/A-2] 발행 모달이 열리지 않은 상태에서 계속 진행하면 카테고리/확인 버튼 오작동 위험
+          'PUBLISH_MODAL_NOT_OPENED',
           // [R8-1] 카테고리가 목록에 없음은 결정적 실패 — 재시도 무의미
           'CATEGORY_NOT_FOUND',
           // [R6] 발행 직전 검사 차단은 콘텐츠 결함 — 재발행 반복은 무의미
@@ -6803,23 +6245,6 @@ export class NaverBlogAutomation {
   }
 
   // 이미지 DOM 검증
-  private async verifyImageInDOM(frame: Frame, imagePath: string): Promise<boolean> {
-    return await frame.evaluate((path) => {
-      const images = Array.from(document.querySelectorAll('img'));
-      const fileName = path.split(/[/\\]/).pop() || '';
-
-      for (const img of images) {
-        const src = img.getAttribute('src') || '';
-        if (src.includes(fileName) || img.alt === fileName) {
-          return true;
-        }
-      }
-
-      // 검증 실패 (에러는 상위에서 처리)
-      return false;
-    }, imagePath);
-  }
-
   // 소제목 입력 (재시도 + 검증 포함)
   // quotationStyle: 'line' = 인용구 2 (버티컬 라인, 사용자 요청), 'underline' = 인용구 4 (쇼핑커넥트용), 'bracket' = 인용구 1 (따옴표)
   private async typeSubtitleWithRetry(
@@ -7307,639 +6732,14 @@ export class NaverBlogAutomation {
 
 
   private extractBodyForHeading(fullBody: string, headingTitle: string, headingIndex: number, totalHeadings: number, allHeadings?: any[]): string {
-    if (!fullBody || !fullBody.trim()) {
-      return '';
-    }
-
-    // ✅ 0. 최우선: structuredContent에서 직접 본문 추출 (가장 확실한 방법)
-    // heading.content가 있으면 바로 사용
-    if (allHeadings && allHeadings[headingIndex] && allHeadings[headingIndex].content) {
-      const directContent = allHeadings[headingIndex].content.trim();
-      if (directContent.length > 30) {
-        this.log(`   🎯 [본문추출] heading.content에서 직접 추출 성공: "${headingTitle}" (${directContent.length}자)`);
-        return directContent;
-      }
-    }
-
-    // ✅ 1. 간단한 방식: 전체 본문을 소제목 기준으로 분할
-    // 모든 소제목 제목을 찾아서 본문을 구분
-    if (allHeadings && allHeadings.length > 0) {
-      const headingTitles = allHeadings.map(h => h.title);
-
-      // 현재 소제목과 다음 소제목 사이의 내용 추출
-      const currentTitle = headingTitle;
-      const nextTitle = headingIndex < allHeadings.length - 1 ? allHeadings[headingIndex + 1].title : null;
-
-      // "소제목: 내용" 형식으로 찾기
-      const currentTitleEscaped = currentTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const currentPattern = new RegExp(`${currentTitleEscaped}\\s*:?\\s*`, 'i');
-      const currentMatch = fullBody.match(currentPattern);
-
-      if (currentMatch && currentMatch.index !== undefined) {
-        const startIdx = currentMatch.index + currentMatch[0].length;
-        let endIdx = fullBody.length;
-
-        // 다음 소제목까지 찾기
-        if (nextTitle) {
-          const nextTitleEscaped = nextTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          const nextPattern = new RegExp(`${nextTitleEscaped}\\s*:?\\s*`, 'i');
-          const nextMatch = fullBody.substring(startIdx).match(nextPattern);
-          if (nextMatch && nextMatch.index !== undefined) {
-            endIdx = startIdx + nextMatch.index;
-          }
-        }
-
-        // 마지막 소제목이면 끝까지 추출
-        const extractedContent = fullBody.substring(startIdx, endIdx).trim();
-
-        if (extractedContent.length > 30) {
-          // 소제목 제목이 본문에 포함되어 있으면 제거
-          const cleanContent = extractedContent
-            .replace(new RegExp(`^\\s*${currentTitleEscaped}\\s*:?\\s*`, 'gi'), '')
-            .trim();
-
-          this.log(`   🎯 [본문추출] 소제목 기준 분할 성공: "${headingTitle}" (${cleanContent.length}자)`);
-          return cleanContent;
-        }
-      }
-    }
-
-    // ✅ 개선된 로직: 정확한 소제목 매칭 및 본문 추출
-    // 2. 정확한 소제목 패턴 찾기: "소제목: 내용..." 형식
-    const escapedHeadingTitle = headingTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-    // 정확한 매칭: 소제목이 줄의 시작 부분에 있고 콜론(:)이 바로 뒤에 오는 경우
-    // 또는 소제목이 포함된 줄에서 콜론(:)이 바로 뒤에 오는 경우
-    const exactPattern = new RegExp(`(^|\\n)\\s*${escapedHeadingTitle}\\s*:\\s*`, 'i');
-    const match = fullBody.match(exactPattern);
-
-    if (match && match.index !== undefined) {
-      // 소제목을 찾았을 경우
-      const startIndex = match.index + match[0].length;
-      let content = fullBody.substring(startIndex);
-
-      // 다음 소제목을 찾아서 중지
-      const remainingHeadings: any[] = allHeadings?.filter((_, idx) => idx > headingIndex) || [];
-      let endIndex = content.length;
-
-      // ✅ 마무리 소제목이 마지막 소제목인 경우: 전체 본문의 마지막 부분을 가져옴
-      const isLastHeading = headingIndex === totalHeadings - 1;
-      const isClosingHeading = headingTitle.includes('마무리') || headingTitle.includes('결론');
-
-      if (isLastHeading || isClosingHeading) {
-        // 마지막 소제목이면 전체 본문의 마지막 부분을 가져옴
-        // 다음 소제목을 찾지 않고 전체 내용 사용
-        this.log(`   🔍 [마지막/마무리 소제목] 전체 본문의 마지막 부분 추출`);
-      } else {
-        // 다음 소제목들을 찾아서 가장 가까운 것을 찾음
-        for (const nextHeading of remainingHeadings) {
-          const nextEscaped = nextHeading.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          const nextPattern = new RegExp(`(^|\\n)\\s*${nextEscaped}\\s*:\\s*`, 'i');
-          const nextMatch = content.match(nextPattern);
-          if (nextMatch && nextMatch.index !== undefined) {
-            const nextIndex = nextMatch.index;
-            if (nextIndex < endIndex) {
-              endIndex = nextIndex;
-            }
-          }
-        }
-        content = content.substring(0, endIndex).trim();
-      }
-
-      // 소제목이 본문에 포함되어 있으면 제거 (중복 방지)
-      let cleanContent = content
-        .replace(new RegExp(`^\\s*${escapedHeadingTitle}\\s*:\\s*`, 'i'), '')
-        .replace(new RegExp(`\\n\\s*${escapedHeadingTitle}\\s*:\\s*`, 'gi'), '\n')
-        .trim();
-
-      // ✅ 글 마지막에 중복된 CTA 텍스트 제거 (🔗 자세히 보기, 🔗 더 알아보기 등)
-      cleanContent = cleanContent
-        .replace(/\n+🔗\s*자세히\s*보기[^\n]*$/i, '') // 마지막 줄의 "🔗 자세히 보기" 제거
-        .replace(/\n+🔗\s*더\s*알아보기[^\n]*$/i, '') // 마지막 줄의 "🔗 더 알아보기" 제거
-        .replace(/\n+자세히\s*보기[^\n]*$/i, '') // 마지막 줄의 "자세히 보기" 제거
-        .replace(/\n+더\s*알아보기[^\n]*$/i, '') // 마지막 줄의 "더 알아보기" 제거
-        .trim();
-
-      // ✅ 마무리 문구 패턴 제거 (부자연스러운 마무리 문구 정리)
-      const closingPatterns = [
-        /도움이\s*되었으면\s*좋겠습니다/gi,
-        /참고하시길\s*바랍니다/gi,
-        /함께\s*응원해요/gi,
-        /화이팅/gi,
-        /응원합니다/gi,
-        /다음에\s*또\s*만나요/gi,
-        /다음에\s*또\s*봬요/gi,
-        /글을\s*마무리하겠습니다/gi,
-        /글을\s*마칩니다/gi,
-        /마무리하겠습니다/gi,
-        /마무리합니다/gi,
-        /기대하며\s*글을/gi,
-        /기대하며\s*마무리/gi,
-        /기대하며\s*마칩니다/gi,
-        /승리를\s*기대하며/gi,
-        /활약을\s*기대하며/gi,
-        /정리하면/gi,
-        /마지막으로/gi,
-        /끝으로/gi,
-        /요약하면/gi,
-      ];
-
-      // 마지막 500자 내에서 마무리 문구가 중복되면 제거
-      const last500Chars = cleanContent.slice(-500);
-      let closingCount = 0;
-      for (const pattern of closingPatterns) {
-        const matches = last500Chars.match(pattern);
-        if (matches) {
-          closingCount += matches.length;
-        }
-      }
-
-      // 마무리 문구가 2개 이상이면 마지막 것만 남기고 제거
-      if (closingCount > 1) {
-        const lines = cleanContent.split('\n');
-        const cleanedLines: string[] = [];
-        let foundClosing = false;
-
-        // 뒤에서부터 검사하여 마지막 마무리 문구만 유지
-        for (let i = lines.length - 1; i >= 0; i--) {
-          const line = lines[i];
-          const hasClosing = closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(line); });
-
-          if (hasClosing) {
-            if (!foundClosing) {
-              // 첫 번째로 발견한 마무리 문구만 유지
-              cleanedLines.unshift(line);
-              foundClosing = true;
-            }
-            // 나머지 마무리 문구는 제거
-          } else {
-            cleanedLines.unshift(line);
-          }
-        }
-
-        cleanContent = cleanedLines.join('\n').trim();
-      }
-
-      // ✅ 불필요한 문구 전체 제거 (본문 중간에도 있는 경우 제거)
-      const unwantedPhrases = [
-        /비즈니스\s*성장에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
-        /비즈니스\s*성장에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /마케팅\s*활동에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /마케팅\s*활동에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
-        /이\s*정보가\s*도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
-        /도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
-        // ✅ "도움이 되었으면" 모든 변형 제거 (오타 포함)
-        /도움이\s*되(었|셧|셨)으면\s*좋겠(습니다|어요|다)[^\n]*/gi,
-        /도움이\s*되(었|셧|셨)으면\s*(합니다|해요|한다)[^\n]*/gi,
-        /도움이\s*되(었|셧|셨)으면[^\n]*/gi,
-        /도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /도움이\s*되었으면\s*합니다[^\n]*/gi,
-        /도움이\s*되셧으면\s*좋겠습니다[^\n]*/gi,
-        /도움이\s*되셨으면\s*좋겠습니다[^\n]*/gi,
-        /정보가\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /정보가\s*도움이\s*되셧으면\s*좋겠습니다[^\n]*/gi,
-        /정보가\s*도움이\s*되셨으면\s*좋겠습니다[^\n]*/gi,
-        /참고하시길\s*바랍니다[^\n]*/gi,
-        /재태크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
-        /재태크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
-        /재태크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /재태크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
-        /재테크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
-        /재테크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
-        /재테크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /재테크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
-      ];
-
-      // 본문 전체에서 불필요한 문구 제거 (줄 단위로)
-      const lines = cleanContent.split('\n');
-      const filteredLines: string[] = [];
-      for (const line of lines) {
-        let shouldRemove = false;
-        for (const pattern of unwantedPhrases) {
-          if (pattern.test(line)) {
-            shouldRemove = true;
-            break;
-          }
-        }
-        if (!shouldRemove) {
-          filteredLines.push(line);
-        }
-      }
-      cleanContent = filteredLines.join('\n').trim();
-
-      // ✅ 마지막 문단이 너무 짧거나 의미 없는 경우 제거 (5자 이하)
-      const contentLines = cleanContent.split('\n');
-      if (contentLines.length > 0) {
-        const lastLine = contentLines[contentLines.length - 1].trim();
-        if (lastLine.length <= 5 && closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(lastLine); })) {
-          contentLines.pop();
-          cleanContent = contentLines.join('\n').trim();
-        }
-      }
-
-      // ✅ 다른 소제목의 제목과 내용 제거 (중복 방지)
-      // 예: "3개월 사용 후 솔직 후기: ..." 같은 다른 소제목 내용이 포함된 경우 제거
-      if (allHeadings && allHeadings.length > 0) {
-        for (const otherHeading of allHeadings) {
-          if (otherHeading.title !== headingTitle) {
-            const escapedOtherTitle = otherHeading.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-            // 다른 소제목 제목으로 시작하는 줄 전체 제거 (소제목: 내용 형식)
-            cleanContent = cleanContent
-              .replace(new RegExp(`^\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '') // 줄 시작에서
-              .replace(new RegExp(`\\n\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '\n') // 줄 중간에서
-              .replace(new RegExp(`${escapedOtherTitle}\\s*:.*?(\\n|$)`, 'gi'), '') // 일반 패턴
-              .trim();
-
-            // ✅ 마무리 소제목의 본문 내용이 앞 소제목에 포함된 경우 제거
-            // "마무리: 내용..." 패턴이 본문 중간에 포함되어 있으면 제거
-            if (otherHeading.title.includes('마무리') || otherHeading.title.includes('결론')) {
-              // 마무리 소제목의 제목 패턴으로 시작하는 모든 줄 제거
-              const closingPattern = /마무리\s*:|결론\s*:|끝으로\s*:|마지막으로\s*:/gi;
-              const lines = cleanContent.split('\n');
-              const filteredLines: string[] = [];
-              let skipNextLines = false;
-              let foundClosingTitle = false;
-
-              for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
-
-                // 마무리 소제목 제목이 발견되면 그 줄부터 끝까지 모두 제거
-                if (closingPattern.test(line)) {
-                  // 마무리 소제목 제목이 포함된 줄인지 확인
-                  const titlePart = otherHeading.title.split(':')[0].trim();
-                  if (line.includes(titlePart) || line.match(/마무리\s*:.*코스트코|결론\s*:/i)) {
-                    foundClosingTitle = true;
-                    skipNextLines = true;
-                    continue; // 마무리 소제목 라인 자체는 제거
-                  }
-                }
-
-                // 마무리 소제목 제목이 발견된 이후 모든 줄 제거
-                if (foundClosingTitle || skipNextLines) {
-                  // 마무리 소제목의 본문 내용인지 확인 (특정 키워드 포함 여부)
-                  const hasClosingContent = /마무리|결론|끝으로|마지막으로|오늘\s*소개해\s*드린|어떠셨나요|꼭\s*한번|눈여겨보시고|현명한\s*쇼핑/i.test(line);
-                  if (hasClosingContent) {
-                    continue; // 마무리 내용 줄 제거
-                  }
-                  // 마무리 소제목 이후 모든 줄 제거
-                  if (foundClosingTitle) {
-                    continue;
-                  }
-                }
-
-                filteredLines.push(line);
-              }
-
-              cleanContent = filteredLines.join('\n').trim();
-
-              // ✅ 추가 필터링: 마무리 소제목 본문의 일반적인 패턴 제거
-              cleanContent = cleanContent
-                .replace(new RegExp(`오늘\\s*소개해\\s*드린[^\\n]*`, 'gi'), '')
-                .replace(new RegExp(`어떠셨나요[^\\n]*`, 'gi'), '')
-                .replace(new RegExp(`꼭\\s*한번[^\\n]*`, 'gi'), '')
-                .replace(new RegExp(`눈여겨보시고[^\\n]*`, 'gi'), '')
-                .replace(new RegExp(`현명한\\s*쇼핑[^\\n]*`, 'gi'), '')
-                .trim();
-            }
-          }
-        }
-      }
-
-      if (cleanContent.length > 0) {
-        this.log(`   🔍 [본문추출] 정확한 패턴 매칭 성공: "${headingTitle}" (${cleanContent.length}자)`);
-        return cleanContent;
-      }
-    }
-
-    // 2. 패턴을 찾지 못한 경우: 줄 단위로 검색 (더 유연한 매칭)
-    const lines = fullBody.split('\n');
-    const extractedContent: string[] = [];
-    let isCollecting = false;
-    let foundHeading = false;
-
-    // 남은 headings 정의
-    const remainingHeadings: any[] = allHeadings?.filter((_, idx) => idx > headingIndex) || [];
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-
-      // 정확한 heading 시작 감지 (이미 찾지 않은 경우에만)
-      if (!foundHeading && line.includes(headingTitle)) {
-        // 콜론(:)이 있는지 확인
-        const colonIndex = line.indexOf(':');
-        if (colonIndex !== -1) {
-          // heading 제목이 콜론 앞에 있는지 확인
-          const beforeColon = line.substring(0, colonIndex).trim();
-          if (beforeColon.includes(headingTitle)) {
-            isCollecting = true;
-            foundHeading = true;
-            // heading 라인은 제외하고 내용부터 수집
-            const contentPart = line.substring(colonIndex + 1).trim();
-            if (contentPart) {
-              extractedContent.push(contentPart);
-            }
-            continue;
-          }
-        }
-      }
-
-      // 다른 heading을 만나면 중지 (마지막/마무리 소제목이면 중지하지 않음)
-      const isLastHeading = headingIndex === totalHeadings - 1;
-      const isClosingHeading = headingTitle.includes('마무리') || headingTitle.includes('결론');
-
-      if (isCollecting && !isLastHeading && !isClosingHeading) {
-        let isNextHeading = false;
-        for (const nextHeading of remainingHeadings) {
-          if (line.includes(nextHeading.title)) {
-            const colonIndex = line.indexOf(':');
-            if (colonIndex !== -1) {
-              const beforeColon = line.substring(0, colonIndex).trim();
-              if (beforeColon.includes(nextHeading.title)) {
-                isNextHeading = true;
-                break;
-              }
-            }
-          }
-        }
-
-        if (isNextHeading) {
-          break;
-        }
-      }
-
-      // 본문 수집
-      if (isCollecting && line.trim()) {
-        // 소제목이 포함된 줄은 제외
-        if (!line.includes(headingTitle) || line.indexOf(':') === -1) {
-          extractedContent.push(line);
-        }
-      }
-    }
-
-    if (extractedContent.length > 0) {
-      let result = extractedContent.join('\n').trim();
-      // 소제목 제거 (중복 방지)
-      result = result
-        .replace(new RegExp(`^\\s*${escapedHeadingTitle}\\s*:\\s*`, 'i'), '')
-        .replace(new RegExp(`\\n\\s*${escapedHeadingTitle}\\s*:\\s*`, 'gi'), '\n')
-        .trim();
-
-      // ✅ 다른 소제목의 제목과 내용 제거 (중복 방지)
-      // 예: "3개월 사용 후 솔직 후기: ..." 같은 다른 소제목 내용이 포함된 경우 제거
-      if (allHeadings && allHeadings.length > 0) {
-        for (const otherHeading of allHeadings) {
-          if (otherHeading.title !== headingTitle) {
-            const escapedOtherTitle = otherHeading.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-            // 다른 소제목 제목으로 시작하는 줄 전체 제거 (소제목: 내용 형식)
-            result = result
-              .replace(new RegExp(`^\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '') // 줄 시작에서
-              .replace(new RegExp(`\\n\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '\n') // 줄 중간에서
-              .replace(new RegExp(`${escapedOtherTitle}\\s*:.*?(\\n|$)`, 'gi'), '') // 일반 패턴
-              .trim();
-
-            // ✅ 마무리 소제목의 본문 내용이 앞 소제목에 포함된 경우 제거
-            if (otherHeading.title.includes('마무리') || otherHeading.title.includes('결론')) {
-              const closingPattern = /마무리\s*:|결론\s*:|끝으로\s*:|마지막으로\s*:/gi;
-              const resultLines = result.split('\n');
-              const filteredLines: string[] = [];
-              let skipNextLines = false;
-              let foundClosingTitle = false;
-
-              for (let i = 0; i < resultLines.length; i++) {
-                const line = resultLines[i];
-
-                // 마무리 소제목 제목이 발견되면 그 줄부터 끝까지 모두 제거
-                if (closingPattern.test(line)) {
-                  const titlePart = otherHeading.title.split(':')[0].trim();
-                  if (line.includes(titlePart) || line.match(/마무리\s*:.*코스트코|결론\s*:/i)) {
-                    foundClosingTitle = true;
-                    skipNextLines = true;
-                    continue;
-                  }
-                }
-
-                // 마무리 소제목 제목이 발견된 이후 모든 줄 제거
-                if (foundClosingTitle || skipNextLines) {
-                  const hasClosingContent = /마무리|결론|끝으로|마지막으로|오늘\s*소개해\s*드린|어떠셨나요|꼭\s*한번|눈여겨보시고|현명한\s*쇼핑/i.test(line);
-                  if (hasClosingContent || foundClosingTitle) {
-                    continue;
-                  }
-                }
-
-                filteredLines.push(line);
-              }
-
-              result = filteredLines.join('\n').trim();
-
-              // ✅ 추가 필터링: 마무리 소제목 본문의 일반적인 패턴 제거
-              result = result
-                .replace(new RegExp(`오늘\\s*소개해\\s*드린[^\\n]*`, 'gi'), '')
-                .replace(new RegExp(`어떠셨나요[^\\n]*`, 'gi'), '')
-                .replace(new RegExp(`꼭\\s*한번[^\\n]*`, 'gi'), '')
-                .replace(new RegExp(`눈여겨보시고[^\\n]*`, 'gi'), '')
-                .replace(new RegExp(`현명한\\s*쇼핑[^\\n]*`, 'gi'), '')
-                .trim();
-            }
-          }
-        }
-      }
-
-      // ✅ 글 마지막에 중복된 CTA 텍스트 제거 (🔗 자세히 보기, 🔗 더 알아보기 등)
-      result = result
-        .replace(/\n+🔗\s*자세히\s*보기[^\n]*$/i, '') // 마지막 줄의 "🔗 자세히 보기" 제거
-        .replace(/\n+🔗\s*더\s*알아보기[^\n]*$/i, '') // 마지막 줄의 "🔗 더 알아보기" 제거
-        .replace(/\n+자세히\s*보기[^\n]*$/i, '') // 마지막 줄의 "자세히 보기" 제거
-        .replace(/\n+더\s*알아보기[^\n]*$/i, '') // 마지막 줄의 "더 알아보기" 제거
-        .trim();
-
-      // ✅ 마무리 문구 패턴 제거 (부자연스러운 마무리 문구 정리)
-      const closingPatterns = [
-        /도움이\s*되었으면\s*좋겠습니다/gi,
-        /참고하시길\s*바랍니다/gi,
-        /함께\s*응원해요/gi,
-        /화이팅/gi,
-        /응원합니다/gi,
-        /다음에\s*또\s*만나요/gi,
-        /다음에\s*또\s*봬요/gi,
-        /글을\s*마무리하겠습니다/gi,
-        /글을\s*마칩니다/gi,
-        /마무리하겠습니다/gi,
-        /마무리합니다/gi,
-        /기대하며\s*글을/gi,
-        /기대하며\s*마무리/gi,
-        /기대하며\s*마칩니다/gi,
-        /승리를\s*기대하며/gi,
-        /활약을\s*기대하며/gi,
-        /정리하면/gi,
-        /마지막으로/gi,
-        /끝으로/gi,
-        /요약하면/gi,
-      ];
-
-      // 마지막 500자 내에서 마무리 문구가 중복되면 제거
-      const last500Chars = result.slice(-500);
-      let closingCount = 0;
-      for (const pattern of closingPatterns) {
-        const matches = last500Chars.match(pattern);
-        if (matches) {
-          closingCount += matches.length;
-        }
-      }
-
-      // 마무리 문구가 2개 이상이면 마지막 것만 남기고 제거
-      if (closingCount > 1) {
-        const resultLines = result.split('\n');
-        const cleanedLines: string[] = [];
-        let foundClosing = false;
-
-        // 뒤에서부터 검사하여 마지막 마무리 문구만 유지
-        for (let i = resultLines.length - 1; i >= 0; i--) {
-          const line = resultLines[i];
-          const hasClosing = closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(line); });
-
-          if (hasClosing) {
-            if (!foundClosing) {
-              // 첫 번째로 발견한 마무리 문구만 유지
-              cleanedLines.unshift(line);
-              foundClosing = true;
-            }
-            // 나머지 마무리 문구는 제거
-          } else {
-            cleanedLines.unshift(line);
-          }
-        }
-
-        result = cleanedLines.join('\n').trim();
-      }
-
-      // ✅ 불필요한 문구 전체 제거 (본문 중간에도 있는 경우 제거)
-      const unwantedPhrases = [
-        /비즈니스\s*성장에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
-        /비즈니스\s*성장에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /마케팅\s*활동에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /마케팅\s*활동에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
-        /이\s*정보가\s*도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
-        /도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
-        // ✅ "도움이 되었으면" 모든 변형 제거 (오타 포함)
-        /도움이\s*되(었|셧|셨)으면\s*좋겠(습니다|어요|다)[^\n]*/gi,
-        /도움이\s*되(었|셧|셨)으면\s*(합니다|해요|한다)[^\n]*/gi,
-        /도움이\s*되(었|셧|셨)으면[^\n]*/gi,
-        /도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /도움이\s*되었으면\s*합니다[^\n]*/gi,
-        /도움이\s*되셧으면\s*좋겠습니다[^\n]*/gi,
-        /도움이\s*되셨으면\s*좋겠습니다[^\n]*/gi,
-        /정보가\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /정보가\s*도움이\s*되셧으면\s*좋겠습니다[^\n]*/gi,
-        /정보가\s*도움이\s*되셨으면\s*좋겠습니다[^\n]*/gi,
-        /참고하시길\s*바랍니다[^\n]*/gi,
-        /재태크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
-        /재태크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
-        /재태크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /재태크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
-        /재테크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
-        /재테크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
-        /재테크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-        /재테크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
-      ];
-
-      // 본문 전체에서 불필요한 문구 제거 (줄 단위로)
-      const resultLines2 = result.split('\n');
-      const filteredLines2: string[] = [];
-      for (const line of resultLines2) {
-        let shouldRemove = false;
-        for (const pattern of unwantedPhrases) {
-          if (pattern.test(line)) {
-            shouldRemove = true;
-            break;
-          }
-        }
-        if (!shouldRemove) {
-          filteredLines2.push(line);
-        }
-      }
-      result = filteredLines2.join('\n').trim();
-
-      // ✅ 마지막 문단이 너무 짧거나 의미 없는 경우 제거 (5자 이하)
-      const resultLines = result.split('\n');
-      if (resultLines.length > 0) {
-        const lastLine = resultLines[resultLines.length - 1].trim();
-        if (lastLine.length <= 5 && closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(lastLine); })) {
-          resultLines.pop();
-          result = resultLines.join('\n').trim();
-        }
-      }
-
-      if (result.length > 0) {
-        this.log(`   🔍 [본문추출] 줄 단위 검색 성공: "${headingTitle}" (${result.length}자)`);
-        return result;
-      }
-    }
-
-    // 3. 최후의 폴백: 기존 방식으로 균등 분배 (단순화)
-    this.log(`   ⚠️ [본문추출] heading을 찾을 수 없어 균등 분배로 대체: "${headingTitle}"`);
-
-    // 문단 분리: 빈 줄 또는 마침표+공백+대문자/한글로 시작
-    const paragraphs = fullBody.split(/\n{2,}/).filter(p => p.trim());
-    if (paragraphs.length === 0) {
-      // 문단이 없으면 문장 단위로 분배
-      const sentences = fullBody.split(/(?<=[.!?])\s+/).filter(s => s.trim());
-      const sentencesPerHeading = Math.max(3, Math.ceil(sentences.length / totalHeadings));
-      const startIdx = headingIndex * sentencesPerHeading;
-      const endIdx = Math.min(startIdx + sentencesPerHeading, sentences.length);
-      const result = sentences.slice(startIdx, endIdx).join(' ').trim();
-
-      if (result.length > 0) {
-        this.log(`   🔧 [본문추출] 문장 단위 균등 분배: "${headingTitle}" (${result.length}자)`);
-        return result;
-      }
-      return '';
-    }
-
-    const paragraphsPerHeading = Math.max(1, Math.ceil(paragraphs.length / totalHeadings));
-    const startIndex = headingIndex * paragraphsPerHeading;
-    const endIndex = Math.min(startIndex + paragraphsPerHeading, paragraphs.length);
-    const assignedParagraphs = paragraphs.slice(startIndex, endIndex);
-
-    let result = assignedParagraphs.join('\n\n').trim();
-
-    // ✅ 소제목 제거 (중복 방지) - 최소한의 정리만
-    result = result
-      .replace(new RegExp(`^\\s*${escapedHeadingTitle}\\s*:\\s*`, 'i'), '')
-      .trim();
-
-    // ✅ 결과가 비어있으면 원본 분배 결과 반환 (과도한 필터링 방지)
-    if (result.length < 30 && assignedParagraphs.length > 0) {
-      result = assignedParagraphs.join('\n\n').trim();
-      this.log(`   🔧 [본문추출] 필터링 후 너무 짧아서 원본 사용: "${headingTitle}" (${result.length}자)`);
-    } else {
-      this.log(`   🔧 [본문추출] 균등 분배 완료: "${headingTitle}" (${result.length}자)`);
-    }
-
-    // ✅ 결과가 여전히 비어있으면 로깅만 하고 반환 (과도한 필터링 방지)
-    if (result.length === 0) {
-      this.log(`   ⚠️ [본문추출] 결과가 비어있습니다. 원본 텍스트의 일부를 사용합니다.`);
-      // 균등 분배된 문단이 있으면 그대로 반환
-      if (assignedParagraphs.length > 0) {
-        return assignedParagraphs.join('\n\n').trim();
-      }
-    }
-
-    // ✅ 최소한의 정리만 수행 (CTA 텍스트만 제거)
-    result = result
-      .replace(/\n*🔗[^\n]*$/i, '') // 마지막 CTA 제거
-      .replace(/도움이\s*되(었|셧|셨)으면[^\n]*/gi, '') // "도움이 되었으면" 패턴만 제거
-      .trim();
-
-    // ✅ 필터링 후에도 본문이 비어있으면 원본 사용
-    if (result.length < 20 && assignedParagraphs.length > 0) {
-      this.log(`   ⚠️ [본문추출] 필터링 후 너무 짧음, 원본 사용`);
-      return assignedParagraphs.join('\n\n').trim();
-    }
-
-    // ✅ 최종 결과 반환
-    return result;
+    return editorHelpers.extractBodyForHeading(
+      this,
+      fullBody,
+      headingTitle,
+      headingIndex,
+      totalHeadings,
+      allHeadings,
+    );
   }
 
   /**
@@ -7949,10 +6749,6 @@ export class NaverBlogAutomation {
   /**
    * 네이버 이미지 업로드 버튼을 통해 이미지 업로드 (가장 확실한 방법)
    */
-  private async insertImageViaUploadButton(filePath: string): Promise<void> {
-    return await imageHelpers.insertImageViaUploadButton(this, filePath);
-  }
-
   /**
    * 네이버 이미지 버튼을 통해 이미지 업로드 (메인 방식)
    */
@@ -8004,14 +6800,6 @@ export class NaverBlogAutomation {
   /**
    * 이미지 크기를 '문서 너비'로 설정 (안전 모드: DOM 스타일만 적용, 툴바 클릭 없음)
    */
-  private async setImageSizeToDocumentWidth(): Promise<void> {
-    return await imageHelpers.setImageSizeToDocumentWidth(this);
-  }
-
-  private async insertSingleImage(image: AutomationImage): Promise<void> {
-    return await imageHelpers.insertSingleImage(this, image);
-  }
-
   /**
    * 반자동 모드: 사용자가 선택한 이미지를 특정 소제목에 삽입
    */
@@ -8339,173 +7127,26 @@ export class NaverBlogAutomation {
   private async insertEnhancedCta(
     url: string,
     hookText: string,
-    productName: string, // ✅ [FIX] 현재 글 제목 (제품명)
+    productName: string,
     previousPostTitle?: string,
     previousPostUrl?: string,
-    hashtags?: string[], // ✅ [추가] 해시태그 배열
-    useAiBanner?: boolean, // ✅ [2026-01-18] AI 배너 생성 옵션
-    customBannerPath?: string, // ✅ [2026-01-19] 커스텀 배너 경로 (쇼핑커넥트 배너 생성기)
-    autoBannerGenerate?: boolean // ✅ [2026-01-21] 배너 자동 랜덤 생성 (연속발행용)
+    hashtags?: string[],
+    useAiBanner?: boolean,
+    customBannerPath?: string,
+    autoBannerGenerate?: boolean
   ): Promise<void> {
-    const page = this.ensurePage();
-    this.ensureNotCancelled();
-
-    if (!url || !hookText) {
-      return;
-    }
-
-    // ✅ 안전 검사: 열린 패널/모달 닫기
-    for (let i = 0; i < 2; i++) {
-      await page.keyboard.press('Escape');
-      await this.delay(50);
-    }
-
-    // ✅ [2026-05-18] 공통 풀(20개) + 최근 3개 회피 — bannerPhrasePool.ts 헬퍼로 일원화
-    const bannerHook = pickBannerHook();
-    const ctaHook = pickCtaHook();
-
-    const displayProductName = productName || '상품 상세보기';
-
-    this.log(`🔗 [Enhanced CTA] 배너+CTA 삽입 중: 배너="${bannerHook}", CTA="${ctaHook}" → ${url}`);
-
-    try {
-      // ✅ [2026-01-19] 커스텀 배너가 있으면 우선 사용 (쇼핑커넥트 배너 생성기로 만든 배너)
-      let bannerImagePath: string;
-      if (autoBannerGenerate) {
-        // ✅ [2026-01-21] 연속발행: 매번 새로운 랜덤 배너 생성
-        this.log(`   🎲 [연속발행] 랜덤 배너 자동 생성 중...`);
-        bannerImagePath = await generateCtaBannerImage(bannerHook, displayProductName);
-        this.log(`   ✅ [연속발행] 새 랜덤 배너 생성 완료: ${bannerImagePath.split(/[/\\\\]/).pop()}`);
-      } else if (customBannerPath) {
-        bannerImagePath = customBannerPath;
-        this.log(`   🎨 커스텀 배너 사용: ${customBannerPath.split(/[/\\]/).pop()}`);
-      } else if (useAiBanner) {
-        // ✅ [2026-01-18] useAiBanner 옵션에 따라 AI 배너 생성
-        const { generateCtaBannerWithAI } = await import('./image/nanoBananaProGenerator.js');
-        const aiBannerPath = await generateCtaBannerWithAI(displayProductName, bannerHook);
-        if (aiBannerPath) {
-          bannerImagePath = aiBannerPath;
-          this.log(`   🤖 AI CTA 배너 생성 완료: ${bannerImagePath}`);
-        } else {
-          bannerImagePath = await generateCtaBannerImage(bannerHook, displayProductName);
-          this.log(`   📸 AI 실패 → HTML 배너로 폴백: ${bannerImagePath}`);
-        }
-      } else {
-        bannerImagePath = await generateCtaBannerImage(bannerHook, displayProductName);
-        this.log(`   📸 CTA 배너 이미지 생성 완료: ${bannerImagePath}`);
-      }
-
-      await page.keyboard.press('Enter'); // ✅ [2026-01-19] 엔터 1회로 축소
-      await this.insertBase64ImageAtCursor(bannerImagePath);
-
-      // ✅ 이미지 렌더링 완료 대기 (2초)
-      this.log(`   ⏳ 배너 이미지 렌더링 대기 중...`);
-      await this.delay(2000);
-
-      // ✅ 배너 이미지에 제휴 링크 삽입
-      await this.attachLinkToLastImage(url);
-      this.log(`   ✅ 배너 이미지 + 제휴 링크 삽입 완료`);
-
-      // ✅ [핵심] 이미지 선택 해제 - Escape 눌러서 커서를 텍스트 모드로 전환
-      await page.keyboard.press('Escape');
-      await this.delay(300);
-      await page.keyboard.press('Escape');
-      await this.delay(200);
-
-      // ✅ 2. 구분선 삽입
-      const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-      await page.keyboard.press('Enter'); // ✅ [2026-01-19] 엔터 1회로 축소
-      await safeKeyboardType(page, divider, { delay: 5 });
-      await page.keyboard.press('Enter');
-      this.log(`   ✅ 구분선 1 삽입 완료`);
-
-      // ✅ 3. [신규] CTA 텍스트 삽입 (📎 후킹문구 + 제휴링크)
-      // 배너와 다른 강력한 구매 결심 유도 문구!
-      this.log(`   🛒 CTA 텍스트 삽입 중: "${ctaHook}"`);
-      await page.keyboard.press('Enter');
-      await safeKeyboardType(page, `📎 ${ctaHook}`, { delay: 10 });
-      await page.keyboard.press('Enter');
-      await safeKeyboardType(page, `👉 ${url}`, { delay: 10 });
-      await page.keyboard.press('Enter');
-      this.log(`   ✅ CTA 텍스트 + 제휴링크 삽입 완료`);
-
-      // ✅ 4. [신규] 링크 카드 로딩 대기 (polling 방식)
-      this.log(`   ⏳ 링크 카드 로딩 대기 중...`);
-      const ctaCardReady = await this.waitForLinkCard(15000, 500);
-      if (ctaCardReady) {
-        await this.removeBareUrlTextAfterLinkCard();
-      }
-
-      // ✅ [2026-01-19] 마지막 구분선 제거 - 추가 CTA/이전글에서 각자 구분선 삽입
-      // 중복 구분선 방지
-
-      // ✅ 6. 이전글 제목 + 링크 삽입 (구분선 포함)
-      if (previousPostTitle && previousPostUrl) {
-        this.log(`🔗 [이전글] 같은 카테고리 이전글 삽입 중: "${previousPostTitle}"`);
-
-        // ✅ 이전글 전 구분선 삽입
-        const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, divider, { delay: 5 });
-        await page.keyboard.press('Enter');
-
-        // ✅ [2026-01-23 FIX] 후킹 문구 + 이전글 제목
-        const prevPostHooks = [
-          '✨ 이런 글도 많이 봤어요!',
-          '📚 다음 글도 궁금하다면?',
-          '🔥 이 글도 인기 있어요!',
-          '💡 맛있게 읽었다면 이것도!',
-          '👀 놓치면 아까운 추천 글!',
-        ];
-        const randomPrevHook = prevPostHooks[Math.floor(Math.random() * prevPostHooks.length)];
-        await safeKeyboardType(page, randomPrevHook, { delay: 10 });
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `📖 ${previousPostTitle}`, { delay: 10 });
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `👉 ${previousPostUrl}`, { delay: 10 });
-        await page.keyboard.press('Enter');
-        this.log(`   ✅ 이전글 연결 완료 (후킹: ${randomPrevHook})`);
-
-
-        // ✅ 7. [신규] 이전글 링크 카드 로딩 대기 (polling 방식)
-        this.log(`   ⏳ 이전글 카드 로딩 대기 중...`);
-        const previousCardReady = await this.waitForLinkCard(15000, 500);
-        if (previousCardReady) {
-          await this.removeBareUrlTextAfterLinkCard();
-        }
-      } else {
-        this.log(`   ℹ️ 이전글 정보 없음 - 건너뜀`);
-      }
-
-      // ✅ [2026-01-18 수정] 해시태그는 본문 작성 후 별도로 삽입됨 (6291행)
-      // 여기서는 엔터 5번만 추가하여 공간 확보
-      this.log(`   📏 CTA 하단 여백 추가 (Enter 5회)...`);
-      for (let i = 0; i < 5; i++) {
-        await page.keyboard.press('Enter');
-        await this.delay(50);
-      }
-    } catch (error) {
-      this.log(`⚠️ CTA 배너 생성/삽입 실패: ${(error as Error).message}`);
-      // 폴백: 기존 텍스트 방식으로 삽입
-      this.log(`   🔄 폴백: 텍스트 CTA로 대체합니다.`);
-      try {
-        const divider = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━';
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, divider, { delay: 5 });
-        await page.keyboard.press('Enter');
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, ctaHook, { delay: 10 });
-        await page.keyboard.press('Enter');
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `🔗 ${displayProductName}`, { delay: 10 });
-        await page.keyboard.press('Enter');
-        await safeKeyboardType(page, `👉 ${url}`, { delay: 10 });
-        await page.keyboard.press('Enter');
-        this.log(`   ✅ 텍스트 CTA 폴백 완료`);
-      } catch (fallbackError) {
-        this.log(`⚠️ 텍스트 CTA 폴백도 실패: ${(fallbackError as Error).message}`);
-      }
-    }
+    return await ctaHelpers.insertEnhancedCta(
+      this,
+      url,
+      hookText,
+      productName,
+      previousPostTitle,
+      previousPostUrl,
+      hashtags,
+      useAiBanner,
+      customBannerPath,
+      autoBannerGenerate,
+    );
   }
 
   private async insertCtaLink(url: string, text: string, position: 'heading' | 'bottom' = 'bottom'): Promise<void> {
@@ -8588,314 +7229,8 @@ export class NaverBlogAutomation {
   }
 
   // 상단에 CTA 삽입
-  private async insertCtaHtmlAtTop(frame: any, html: string): Promise<void> {
-    // 줄바꿈 2회 (제목과 CTA 사이 간격)
-    const page = this.ensurePage();
-    await page.keyboard.press('Enter');
-    await this.delay(15);
-    await page.keyboard.press('Enter');
-    await this.delay(15);
-
-    const success = await frame.evaluate((markup: string) => {
-      const sectionText = document.querySelector('.se-section-text');
-      if (!sectionText) {
-        console.error('[CTA] .se-section-text를 찾을 수 없습니다');
-        return false;
-      }
-
-      let contentContainer = sectionText.querySelector('.se-module-text') ||
-        sectionText.querySelector('.se-module.se-module-text');
-
-      if (!contentContainer) {
-        const firstParagraph = sectionText.querySelector('.se-text-paragraph');
-        if (firstParagraph && firstParagraph.parentElement) {
-          contentContainer = firstParagraph.parentElement;
-        } else {
-          contentContainer = sectionText;
-        }
-      }
-
-      const temp = document.createElement('div');
-      temp.innerHTML = markup;
-      const fragment = document.createDocumentFragment();
-      while (temp.firstChild) {
-        fragment.appendChild(temp.firstChild);
-      }
-
-      // 새로운 paragraph 생성
-      const newParagraph = document.createElement('div');
-      newParagraph.className = 'se-text-paragraph';
-      newParagraph.setAttribute('data-module', 'se2_text_paragraph');
-      newParagraph.appendChild(fragment);
-
-      // 첫 번째 paragraph 앞에 삽입
-      const firstParagraph = contentContainer.querySelector('.se-text-paragraph');
-      if (firstParagraph && firstParagraph.parentElement) {
-        firstParagraph.parentElement.insertBefore(newParagraph, firstParagraph);
-      } else {
-        contentContainer.insertBefore(newParagraph, contentContainer.firstChild);
-      }
-
-      // 에디터에 변경사항 알리기
-      const event = new Event('input', { bubbles: true });
-      newParagraph.dispatchEvent(event);
-
-      return true;
-    }, html);
-
-    if (!success) {
-      throw new Error('상단에 CTA 삽입 실패');
-    }
-
-    await this.delay(100);
-  }
-
   // 중간에 CTA 삽입
-  private async insertCtaHtmlInMiddle(frame: any, html: string): Promise<void> {
-    // 줄바꿈 2회 (본문과 CTA 사이 간격)
-    const page = this.ensurePage();
-    await page.keyboard.press('Enter');
-    await this.delay(15);
-    await page.keyboard.press('Enter');
-    await this.delay(15);
-
-    const success = await frame.evaluate((markup: string) => {
-      const sectionText = document.querySelector('.se-section-text');
-      if (!sectionText) {
-        console.error('[CTA] .se-section-text를 찾을 수 없습니다');
-        return false;
-      }
-
-      let contentContainer = sectionText.querySelector('.se-module-text') ||
-        sectionText.querySelector('.se-module.se-module-text');
-
-      if (!contentContainer) {
-        const firstParagraph = sectionText.querySelector('.se-text-paragraph');
-        if (firstParagraph && firstParagraph.parentElement) {
-          contentContainer = firstParagraph.parentElement;
-        } else {
-          contentContainer = sectionText;
-        }
-      }
-
-      const paragraphs = Array.from(contentContainer.querySelectorAll('.se-text-paragraph'));
-      if (paragraphs.length === 0) {
-        console.error('[CTA] paragraph를 찾을 수 없습니다');
-        return false;
-      }
-
-      // 중간 지점 계산
-      const middleIndex = Math.floor(paragraphs.length / 2);
-      const targetParagraph = paragraphs[middleIndex] as HTMLElement;
-
-      const temp = document.createElement('div');
-      temp.innerHTML = markup;
-      const fragment = document.createDocumentFragment();
-      while (temp.firstChild) {
-        fragment.appendChild(temp.firstChild);
-      }
-
-      // 새로운 paragraph 생성
-      const newParagraph = document.createElement('div');
-      newParagraph.className = 'se-text-paragraph';
-      newParagraph.setAttribute('data-module', 'se2_text_paragraph');
-      newParagraph.appendChild(fragment);
-
-      // 중간 paragraph 다음에 삽입
-      if (targetParagraph.parentElement) {
-        targetParagraph.parentElement.insertBefore(newParagraph, targetParagraph.nextSibling);
-      } else {
-        contentContainer.appendChild(newParagraph);
-      }
-
-      // 에디터에 변경사항 알리기
-      const event = new Event('input', { bubbles: true });
-      newParagraph.dispatchEvent(event);
-
-      return true;
-    }, html);
-
-    if (!success) {
-      throw new Error('중간에 CTA 삽입 실패');
-    }
-
-    await this.delay(100);
-  }
-
   // 하단에 CTA 삽입
-  private async insertCtaHtmlAtBottom(frame: any, page: any, html: string): Promise<void> {
-    this.log(`🔗 CTA 버튼 HTML 삽입 시작...`);
-
-    // 줄바꿈 2회 (해시태그와 CTA 사이 간격)
-    await page.keyboard.press('Enter');
-    await this.delay(100);
-    await page.keyboard.press('Enter');
-    await this.delay(100);
-
-    // HTML에서 텍스트와 링크 추출
-    const textMatch = html.match(/<a[^>]*>([^<]+)<\/a>/);
-    const linkMatch = html.match(/href=["']([^"']+)["']/);
-    const ctaText = textMatch ? textMatch[1] : '더 알아보기';
-    const ctaLink = linkMatch ? linkMatch[1] : '#';
-
-    this.log(`   → CTA 텍스트: "${ctaText}", 링크: "${ctaLink}"`);
-
-    // 여러 방법으로 시도 (최대 3회)
-    let success = false;
-    for (let attempt = 1; attempt <= 3; attempt++) {
-      this.log(`   → 삽입 시도 ${attempt}/3...`);
-
-      // 방법 1: 네이버 에디터 구조에 맞게 직접 DOM 삽입
-      const result = await frame.evaluate((markup: string, buttonText: string) => {
-        try {
-          // 네이버 블로그 에디터 구조에 맞게 삽입
-          const sectionText = document.querySelector('.se-section-text') ||
-            document.querySelector('.se-main-container') ||
-            document.querySelector('[contenteditable="true"]');
-
-          if (!sectionText) {
-            console.error('[CTA] 에디터 영역을 찾을 수 없습니다');
-            return { success: false, method: 'no-editor' };
-          }
-
-          // 본문 컨테이너 찾기
-          let contentContainer: Element | null = sectionText.querySelector('.se-module-text') ||
-            sectionText.querySelector('.se-module.se-module-text') ||
-            sectionText.querySelector('.se-component-content') ||
-            sectionText;
-
-          if (!contentContainer) {
-            const firstParagraph = sectionText.querySelector('.se-text-paragraph');
-            if (firstParagraph && firstParagraph.parentElement) {
-              contentContainer = firstParagraph.parentElement;
-            } else {
-              contentContainer = sectionText;
-            }
-          }
-
-          // 마지막 paragraph 찾기
-          const paragraphs = contentContainer.querySelectorAll('.se-text-paragraph');
-          let insertAfter: Element | null = null;
-
-          if (paragraphs.length > 0) {
-            insertAfter = paragraphs[paragraphs.length - 1];
-          }
-
-          // HTML 파싱하여 버튼 생성
-          const temp = document.createElement('div');
-          temp.innerHTML = markup.trim();
-          const buttonElement = temp.querySelector('a') || temp.firstElementChild;
-
-          if (!buttonElement) {
-            console.error('[CTA] 버튼 요소를 생성할 수 없습니다');
-            return { success: false, method: 'no-button' };
-          }
-
-          // 네이버 에디터 구조에 맞는 paragraph 생성
-          const newParagraph = document.createElement('div');
-          newParagraph.className = 'se-text-paragraph';
-          newParagraph.setAttribute('data-module', 'se2_text_paragraph');
-          newParagraph.style.textAlign = 'center';
-          newParagraph.style.margin = '40px 0';
-
-          // 버튼을 paragraph 안에 삽입
-          newParagraph.appendChild(buttonElement.cloneNode(true) as Node);
-
-          // 마지막 paragraph 다음에 삽입
-          if (insertAfter && insertAfter.parentElement) {
-            insertAfter.parentElement.insertBefore(newParagraph, insertAfter.nextSibling);
-          } else {
-            contentContainer.appendChild(newParagraph);
-          }
-
-          // 에디터에 변경사항 알리기
-          const events = ['input', 'change', 'keyup', 'blur'];
-          events.forEach(eventType => {
-            const event = new Event(eventType, { bubbles: true, cancelable: true });
-            newParagraph.dispatchEvent(event);
-            contentContainer?.dispatchEvent(event);
-          });
-
-          // 네이버 에디터 내부 업데이트 시도
-          try {
-            const editor = (window as any).editor ||
-              (window as any).se2Editor ||
-              (window as any).__se2Editor__;
-            if (editor) {
-              if (typeof editor.update === 'function') editor.update();
-              if (typeof editor.sync === 'function') editor.sync();
-              if (typeof editor.triggerChange === 'function') editor.triggerChange();
-            }
-          } catch (e) {
-            console.log('[CTA] 에디터 업데이트 함수 호출 실패 (무시)');
-          }
-
-          // 삽입 확인 - 실제로 DOM에 있는지 체크 (바로 확인)
-          const insertedElements = contentContainer.querySelectorAll('.se-text-paragraph');
-          for (let i = insertedElements.length - 1; i >= 0; i--) {
-            const p = insertedElements[i] as HTMLElement;
-            const innerHTML = p.innerHTML || '';
-            if (innerHTML.includes(buttonText) ||
-              innerHTML.includes('background:') ||
-              innerHTML.includes('linear-gradient') ||
-              innerHTML.includes('href=')) {
-              return { success: true, method: 'direct-insert' };
-            }
-          }
-
-          return { success: false, method: 'not-found' };
-        } catch (error) {
-          console.error('[CTA] 삽입 중 오류:', error);
-          return { success: false, method: 'error', error: String(error) };
-        }
-      }, html, ctaText).catch(() => ({ success: false, method: 'exception' }));
-
-      if (result && result.success) {
-        this.log(`   ✅ CTA 버튼 삽입 성공 (방법: ${result.method})`);
-        success = true;
-        break;
-      } else {
-        this.log(`   ⚠️ 삽입 시도 ${attempt} 실패 (방법: ${result?.method || 'unknown'})`);
-        await this.delay(500);
-      }
-    }
-
-    if (!success) {
-      this.log(`⚠️ 직접 삽입 실패, 타이핑 방식으로 재시도...`);
-      await this.insertCtaViaTyping(page, html);
-    } else {
-      // 삽입 확인 (더 강력한 확인)
-      await this.delay(500);
-      const verified = await frame.evaluate((buttonText: string) => {
-        const paragraphs = document.querySelectorAll('.se-text-paragraph');
-        for (let i = paragraphs.length - 1; i >= 0; i--) {
-          const p = paragraphs[i] as HTMLElement;
-          const html = p.innerHTML || '';
-          // 다양한 패턴으로 확인
-          if (html.includes(buttonText) ||
-            html.includes('background:') ||
-            html.includes('linear-gradient') ||
-            html.includes('border-radius:') ||
-            (html.includes('href=') && html.includes('display: inline-block'))) {
-            return true;
-          }
-        }
-        return false;
-      }, ctaText).catch(() => false);
-
-      if (!verified) {
-        this.log(`⚠️ CTA 삽입 확인 실패, 최종 재시도...`);
-        await this.delay(300);
-        await this.insertCtaViaTyping(page, html);
-      } else {
-        this.log(`   ✅ CTA 버튼 삽입 및 확인 완료`);
-      }
-    }
-
-    // 삽입 후 충분한 대기 (에디터 렌더링 대기)
-    await this.delay(500);
-  }
-
   // 타이핑 방식으로 CTA 삽입 (폴백)
   private async insertCtaViaTyping(page: any, html: string): Promise<void> {
     try {
@@ -8987,106 +7322,13 @@ export class NaverBlogAutomation {
     return await imageHelpers.attachLinkToLastImage(this, link);
   }
 
-  private async insertImages(images: AutomationImage[], plans: ImagePlan[]): Promise<void> {
-    return await imageHelpers.insertImages(this, images, plans);
-  }
-
   /**
    * ✅ 이미지 alt 태그에 출처 정보 자동 추가
    * 형식: "소제목 | 출처: Provider명 (URL)"
    */
-  private generateAltWithSource(image: any): string {
-    return imageHelpers.generateAltWithSource(this, image);
-  }
-
-  private async applyCaption(caption: string): Promise<void> {
-    return await imageHelpers.applyCaption(this, caption);
-  }
-
-  private async findElement(frame: Frame, selectors: string[]): Promise<ElementHandle<Element> | null> {
-    for (const selector of selectors) {
-      const handle = await frame.$(selector);
-      if (handle) {
-        return handle;
-      }
-    }
-    return null;
-  }
-
   /**
    * 현재 activeElement 기준으로 소제목 바로 다음 본문 영역 찾기 (인용구 없음)
    */
-  private async findNextBodyElement(frame: Frame): Promise<ElementHandle<Node> | null> {
-    const handle = await frame.evaluateHandle(() => {
-      const activeElement = document.activeElement;
-      if (!activeElement) return null;
-
-      // 현재 activeElement가 있는 컴포넌트 찾기
-      let currentComponent = activeElement.closest('.se-component') as HTMLElement | null;
-      if (!currentComponent) {
-        let current = activeElement.parentElement;
-        while (current) {
-          if (current.classList.contains('se-component')) {
-            currentComponent = current as HTMLElement;
-            break;
-          }
-          current = current.parentElement;
-        }
-      }
-
-      // 현재 컴포넌트의 다음 형제 컴포넌트 찾기 (소제목 바로 아래 본문)
-      if (currentComponent) {
-        let nextSibling = currentComponent.nextElementSibling;
-        while (nextSibling) {
-          // 텍스트 컴포넌트인지 확인
-          if (nextSibling.classList.contains('se-component') &&
-            nextSibling.classList.contains('se-text')) {
-            // 인용구가 아닌 본문 컴포넌트인지 확인
-            const hasBlockquote = nextSibling.querySelector('.se-blockquote, .se-component-blockquote');
-            if (!hasBlockquote) {
-              // 본문 영역 요소 찾기
-              const section = nextSibling.querySelector('.se-section.se-section-text.se-l-default, .se-section.se-section-text');
-              if (section) return section;
-              const module = nextSibling.querySelector('.se-module.se-module-text');
-              if (module) return module;
-              const paragraph = nextSibling.querySelector('p.se-text-paragraph');
-              if (paragraph) return paragraph;
-              return nextSibling;
-            }
-          }
-          nextSibling = nextSibling.nextElementSibling;
-        }
-      }
-
-      // 폴백: 가장 아래쪽 본문 영역 (소제목 근처, placeholder 우선)
-      const allBodySections = document.querySelectorAll('.se-section.se-section-text.se-l-default, .se-section.se-section-text');
-      let candidate: HTMLElement | null = null;
-      // 배열의 마지막 요소부터 확인 (최근에 생성된 본문 영역, 소제목 근처)
-      for (let i = allBodySections.length - 1; i >= 0; i--) {
-        const section = allBodySections[i] as HTMLElement;
-        const isInBlockquote = section.closest('.se-blockquote, .se-component-blockquote');
-        if (!isInBlockquote) {
-          // placeholder가 있으면 우선 선택 (새로운 본문 영역)
-          const hasPlaceholder = section.querySelector('.se-placeholder') !== null;
-          if (hasPlaceholder) {
-            return section;
-          }
-          // placeholder가 없으면 후보로 저장
-          if (!candidate) {
-            candidate = section;
-          }
-        }
-      }
-
-      // 후보가 있으면 반환
-      return candidate;
-    }).catch(() => null);
-    if (handle && handle.asElement()) {
-      return handle.asElement()!;
-    }
-    return null;
-  }
-
   /**
    * 구분선 추가
    */
@@ -9611,20 +7853,20 @@ export class NaverBlogAutomation {
     // ✅ [2026-03-24 FIX] 매 run() 사이클마다 dialog 핸들러 보장
     // setupBrowser()는 세션 재사용 시 early-return하여 핸들러 등록을 건너뛸 수 있음
     // → run()에서 확정적으로 등록하여 어떤 경로든 dialog 자동 수락 보장
-    this.ensureDialogHandler();
+     this.ensureDialogHandler();
 
-    try {
-      this.log('[Pipeline] login step start');
-      await this.loginToNaver();
-      this.log(`[Pipeline] login step done url=${this.page?.url() || '(unknown)'}`);
+     try {
+       this.log(PUBLISH_PIPELINE_LOG_MESSAGES.loginStart);
+       await this.loginToNaver();
+       this.log(formatPipelineUrlLog('loginDone', this.page?.url()));
 
-      this.log('[Pipeline] opening Naver write editor');
-      await this.navigateToBlogWrite();
-      this.log(`[Pipeline] write editor navigation done url=${this.page?.url() || '(unknown)'}`);
+       this.log(PUBLISH_PIPELINE_LOG_MESSAGES.openingWriteEditor);
+       await this.navigateToBlogWrite();
+       this.log(formatPipelineUrlLog('writeEditorNavigationDone', this.page?.url()));
 
-      this.log('[Pipeline] switching to main editor frame');
-      await this.switchToMainFrame();
-      this.log('[Pipeline] editor frame ready');
+       this.log(PUBLISH_PIPELINE_LOG_MESSAGES.switchingEditorFrame);
+       await this.switchToMainFrame();
+       this.log(PUBLISH_PIPELINE_LOG_MESSAGES.editorFrameReady);
 
       // 팝업이 완전히 렌더링될 때까지 대기 (최적화)
       await this.delay(1000); // 2000ms → 1000ms
@@ -9674,44 +7916,55 @@ export class NaverBlogAutomation {
     } finally {
       // [R7] 발행 종료 — keep-alive가 이 세션을 다시 ping해 살려두도록 해제.
       try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
-      const keepOpen = resolvedOptions.keepBrowserOpen ?? true; // ✅ 기본값 true로 변경
-      if (!keepOpen && this.browser) {
+      const postRunPolicy = resolvePostRunBrowserPolicy({
+        keepBrowserOpen: resolvedOptions.keepBrowserOpen,
+        hasBrowser: Boolean(this.browser),
+        hasPage: Boolean(this.page),
+        hasPublishedUrl: Boolean(this.publishedUrl),
+      });
+
+      if (postRunPolicy.shouldCloseBrowser && this.browser) {
         this.log('⏳ 브라우저 종료 중...');
         await this.browser.close().catch(() => undefined);
         this.browser = null;
         this.page = null;
         this.mainFrame = null;
         this.log('🔚 브라우저가 종료되었습니다.');
-      } else if (keepOpen) {
+      } else if (postRunPolicy.shouldLogKeepOpen) {
         this.log('ℹ️ 세션 유지를 위해 브라우저를 열어둡니다.');
 
         // ✅ [2026-03-23] 발행 후 "여운 행동" 극한 강화 — 발행글 확인 + 스크롤 + 블로그 홈 방문 (봇 감지 회피)
         // 인간은 발행 후 자신의 글을 확인하고, 블로그 홈을 둘러보는 패턴
-        if (this.page && this.publishedUrl) {
+        if (postRunPolicy.shouldReviewPublishedPost && this.page && this.publishedUrl) {
           try {
             this.log('👀 발행된 글 확인 중... (여운 행동)');
-            await this.page.goto(this.publishedUrl, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
+            const reviewPlan = createPostPublishReviewPlan({
+              naverId: this.options.naverId,
+              publishedUrl: this.publishedUrl,
+              viewport: this.page.viewport(),
+              randomInt: (min, max) => this.randomInt(min, max),
+            });
+
+            await this.page.goto(reviewPlan.publishedUrl, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
             
             // 발행된 글에서 5~10초 체류 (인간적 확인 행동)
-            const reviewDuration = this.randomInt(5000, 10000);
-            this.log(`   📖 발행글 읽는 중... (${Math.round(reviewDuration/1000)}초)`);
+            this.log(`   📖 발행글 읽는 중... (${Math.round(reviewPlan.reviewDurationMs/1000)}초)`);
             
             // 여러 번 스크롤 (글을 읽는 것처럼)
-            for (let s = 0; s < this.randomInt(3, 5); s++) {
+            for (let s = 0; s < reviewPlan.reviewScrollCount; s++) {
               await this.page.evaluate(() => window.scrollBy(0, 200 + Math.random() * 400)).catch(() => {});
               await this.humanDelay(800, 2000);
             }
             
             // 마우스 이동
-            const vs = this.page.viewport();
-            if (vs) {
+            if (reviewPlan.mouseMove) {
               await this.page.mouse.move(
-                this.randomInt(100, vs.width - 100),
-                this.randomInt(200, vs.height - 100),
-                { steps: this.randomInt(8, 15) }
+                reviewPlan.mouseMove.x,
+                reviewPlan.mouseMove.y,
+                { steps: reviewPlan.mouseMove.steps }
               ).catch(() => {});
             }
-            await this.delay(Math.max(0, reviewDuration - 4000));
+            await this.delay(reviewPlan.afterReviewDelayMs);
             
             // 스크롤 복귀
             await this.page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })).catch(() => {});
@@ -9719,15 +7972,13 @@ export class NaverBlogAutomation {
             
             // 블로그 홈으로 자연스럽게 이동 (2~5초 체류)
             this.log('🏠 블로그 홈으로 이동...');
-            const blogHomeUrl = `https://blog.naver.com/${this.options.naverId}`;
-            await this.page.goto(blogHomeUrl, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
-            const homeStay = this.randomInt(2000, 5000);
+            await this.page.goto(reviewPlan.blogHomeUrl, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
             
             // 블로그 홈에서 스크롤
             await this.page.evaluate(() => window.scrollBy(0, 150 + Math.random() * 300)).catch(() => {});
             await this.humanDelay(800, 1500);
             await this.page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })).catch(() => {});
-            await this.delay(Math.max(0, homeStay - 1500));
+            await this.delay(reviewPlan.afterHomeDelayMs);
             
             this.log('✅ 여운 행동 완료 (발행글 확인 → 블로그 홈)');
           } catch (afterErr) {
@@ -9736,17 +7987,27 @@ export class NaverBlogAutomation {
         }
 
         // ✅ [2026-03-26] 발행 완료 후 브라우저 창 최소화 — 사용자가 실수로 닫는 것 방지
-        await this.minimizeBrowserWindow();
+        if (postRunPolicy.shouldMinimizeBrowser) {
+          await this.minimizeBrowserWindow();
+        }
         // ✅ [2026-03-25 FIX] keepBrowserOpen=true일 때 page를 닫지 않음 — 세션 재사용 보장
         // page.close() 호출 시 this.page=null → 다음 발행에서 setupBrowser() → 재로그인 → 캡차 유발
 
         // ✅ [2026-03-25 FIX] 에러 등으로 page가 오염된 상태일 수 있으므로 건강성 체크
-        if (this.page) {
+        if (postRunPolicy.shouldCheckPageHealth && this.page) {
+          let urlProbeSucceeded = false;
           try {
             await this.page.url(); // 생존 체크 (disconnect된 page라면 예외 발생)
-            this.log('ℹ️ 페이지와 브라우저 세션이 유지됩니다. (다음 발행에서 재사용)');
+            urlProbeSucceeded = true;
           } catch {
-            // page가 disconnect/crash 상태 → 참조 제거하여 다음 setupBrowser()에서 새 페이지 생성
+            urlProbeSucceeded = false;
+          }
+
+          const pageHealthDecision = resolvePostRunPageHealthDecision({ urlProbeSucceeded });
+          if (pageHealthDecision.shouldKeepPageReferences) {
+            this.log('ℹ️ 페이지와 브라우저 세션이 유지됩니다. (다음 발행에서 재사용)');
+          }
+          if (pageHealthDecision.shouldResetPageReferences) {
             this.log('⚠️ 페이지가 오염된 상태입니다. 다음 발행 시 새 페이지를 생성합니다.');
             this.page = null;
             this.mainFrame = null;
@@ -9754,18 +8015,15 @@ export class NaverBlogAutomation {
         }
 
         // ✅ [Phase 2B] 스테일 페이지 정리 — this.page 이외의 여분 페이지 닫기 (메모리 누수 방지)
-        if (this.browser) {
+        if (postRunPolicy.shouldCleanupStalePages && this.browser) {
           try {
             const allPages = await this.browser.pages();
-            let staleCount = 0;
-            for (const p of allPages) {
-              if (p !== this.page) {
-                await p.close().catch(() => {});
-                staleCount++;
-              }
+            const cleanupPlan = resolveStalePageCleanupPlan(allPages, this.page);
+            for (const p of cleanupPlan.stalePages) {
+              await p.close().catch(() => {});
             }
-            if (staleCount > 0) {
-              this.log(`🧹 스테일 페이지 ${staleCount}개 정리 완료`);
+            if (cleanupPlan.shouldLogCleanup) {
+              this.log(`🧹 스테일 페이지 ${cleanupPlan.staleCount}개 정리 완료`);
             }
           } catch (e) { console.debug('[Browser] 스테일 페이지 정리 실패:', (e as Error).message); }
         }
@@ -9790,12 +8048,11 @@ export class NaverBlogAutomation {
       throw new Error(`[${outcome.code}] ${outcome.message}`);
     }
 
-    if (outcome.url) {
-      this.publishedUrl = outcome.url;
-    }
+    this.publishedUrl = resolvePublishedUrlAfterOutcome(this.publishedUrl, outcome);
 
-    if (outcome.needsManualUrlCheck) {
-      this.log(`[PublishGuard] outcome=${outcome.reason}, url=${outcome.url || this.publishedUrl || '(none)'}`);
+    const guardLog = formatPublishGuardLog(outcome, this.publishedUrl);
+    if (guardLog) {
+      this.log(guardLog);
     }
   }
 

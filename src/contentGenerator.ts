@@ -111,6 +111,60 @@ import { buildCustomModeOverridePrompt } from './contentCustomModePrompt.js';
 import { applyFactCheckHardConstraint } from './contentFactCheckConstraint.js';
 import { appendReviewAnalysisPrompt } from './contentReviewAnalysisPrompt.js';
 import { appendShoppingOfficialSafetyGuard } from './contentShoppingPromptAddons.js';
+import { buildContentExpansionRetryInstruction } from './contentLengthRetryPolicy.js';
+import {
+  prependDuplicatePatternRetryInstruction,
+  prependFaithfulnessRetryInstruction,
+  prependInvalidJsonResponseInstruction,
+  prependJsonParseRetryInstruction,
+  prependSectionDistinctnessRetryInstruction,
+  prependValidationRetryInstruction,
+} from './contentRetryPromptPolicy.js';
+import { getContentProviderTimeoutMs } from './contentProviderTimeoutPolicy.js';
+import {
+  readNonNegativeIntegerEnv,
+  readNonNegativeMsEnv,
+  readOptionalNonNegativeMsEnv,
+} from './contentEnvNumberPolicy.js';
+import { getProviderRateLimitWaitMs } from './providerRateLimitWaitPolicy.js';
+import {
+  createContentGenerationAbortError,
+  createProviderTimeoutSignal,
+  sleepWithAbort,
+  throwIfContentGenerationAborted,
+  withProviderTimeout,
+} from './contentAbortTimeoutPolicy.js';
+import { translateGeminiError } from './contentGeminiErrorPolicy.js';
+import {
+  BudgetExceededError,
+  enforceGeminiBudgetSafety,
+} from './contentGeminiBudgetSafety.js';
+export { BudgetExceededError } from './contentGeminiBudgetSafety.js';
+import { waitForGeminiUsageMetadata } from './contentGeminiUsageMetadata.js';
+import { fixUtf8Encoding } from './contentEncodingPolicy.js';
+import { buildGeminiModelChain } from './contentGeminiModelPolicy.js';
+import { resolveGeminiPromptCacheEligibility } from './contentGeminiCacheEligibility.js';
+import {
+  getGeminiPromptCacheKey,
+  getGeminiResultCacheKey,
+  isStructuralGeminiCacheError,
+} from './contentGeminiCachePolicy.js';
+import {
+  isGeminiCacheSupportedForKey,
+  markGeminiCacheUnsupported,
+} from './contentGeminiCacheSupportRegistry.js';
+import {
+  deleteCachedGeminiPrompt,
+  getCachedGeminiPrompt,
+  pruneExpiredGeminiPromptCaches,
+  setCachedGeminiPrompt,
+} from './contentGeminiPromptCache.js';
+import { invokeGeminiStreamWithCacheFallback } from './contentGeminiCacheStreamFallback.js';
+import {
+  getCachedGeminiResult,
+  setCachedGeminiResult,
+} from './contentGeminiResultCache.js';
+import { ProviderRequestGate } from './contentProviderRequestGate.js';
 import { optimizeForViral } from './contentViralOptimizer.js';
 import {
   detectBannedHeadingPatterns as detectBannedHeadingPatternsImpl,
@@ -136,6 +190,7 @@ export {
   isGeminiPrepaidCreditsDepletedError,
 } from './geminiBillingBlock.js';
 export type { GeminiBillingBlockKind } from './geminiBillingBlock.js';
+export { buildGeminiModelChain } from './contentGeminiModelPolicy.js';
 // [Phase 3-6/v2.10.144] 제목 품질 validator 4개 추출
 import {
   computeSeoTitleCriticalIssues,
@@ -167,8 +222,7 @@ import {
   truncateHeadingTitles,
   removeInternalStructureMarkersFromContent,
 } from './contentBodyTransforms';
-// [Phase 3-17/v2.10.163] 제목 안전성 검증 (내부 사용은 detectPromptLeakageInTitle만)
-import { detectPromptLeakageInTitle } from './contentTitleSafetyChecks';
+// [Phase 3-17/v2.10.163] 제목 안전성 검증 helper는 contentStructuredValidator.ts에서 사용
 // [Phase 3-18/v2.10.164] 키워드 전처리 helper
 import { getPrimaryKeywordFromSource, getSecondaryKeywordsFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
 // [SPEC-PROMPT-2026-REFRESH Phase 1/v2.10.231] 일반론 도망 감지 + 인용 토큰 밀도 측정
@@ -207,23 +261,10 @@ export { stripAllFormatting, stripInternalMarkers, removeOrdinalHeadingLabelsFro
 import { splitPromptByMarker, adjustForPerplexity } from './promptSplitter.js';
 import { safeParseJson, cleanJsonOutput, tryFixJson, fixJsonAtPosition } from './jsonParser';
 import { recoverLooseStructuredContentFields } from './contentStructuredRecovery';
+import { validateStructuredContent } from './contentStructuredValidator';
 import {
   buildGeminiEmptyResponseUserMessage,
-  buildMissingBodyUserMessage,
 } from './contentGenerationUserGuidance';
-
-// ✅ [v1.4.50] 예산 초과 전용 에러 클래스 — Safety Lock에서 throw
-// catch 블록에서 instanceof로 식별하여 다른 네트워크/API 에러와 명확히 구분
-export class BudgetExceededError extends Error {
-  constructor(
-    message: string,
-    public readonly currentUsageUSD: number,
-    public readonly budgetUSD: number
-  ) {
-    super(message);
-    this.name = 'BudgetExceededError';
-  }
-}
 
 // ✅ [v1.4.51] Gemini 빈 응답 전용 에러 클래스 — finishReason별 대응 위해
 // SAFETY/RECITATION → 재시도 금지, MAX_TOKENS → 설정 조정 후 재시도, OTHER → 일반 재시도
@@ -1596,11 +1637,6 @@ export function validateShoppingConnectContent(content: StructuredContent): { sc
 
 // ✅ [2026-02-11] getCurrentSeason() 제거 — 인라인 템플릿 전용이었음
 
-function readNonNegativeIntegerEnv(name: string, fallback: number): number {
-  const value = Number(process.env[name] ?? '');
-  return Number.isFinite(value) && value >= 0 ? Math.floor(value) : fallback;
-}
-
 type OpenAiDiagnosticLevel = 'info' | 'warn' | 'error';
 
 function emitOpenAiDiagnosticLog(message: string, level: OpenAiDiagnosticLevel = 'info'): void {
@@ -2066,448 +2102,7 @@ function buildPrompt(
 // [Phase 7.4-u] escape sequence cleanup -> contentEscapeCleanup.ts
 // [Phase 7.4-v] exaggeration/prompt leak filter -> contentExaggerationFilter.ts
 
-function validateStructuredContent(content: StructuredContent, source?: ContentSource): void {
-  if (!content) throw new Error('AI 응답에 본문이 없습니다. 자동 재시도 중입니다... 계속 실패하면 다른 AI 엔진(Gemini/Claude/OpenAI)으로 전환해주세요.');
-
-  const looseRecovery = recoverLooseStructuredContentFields(content);
-  if (looseRecovery.bodyRecovered || looseRecovery.headingsRecovered) {
-    console.warn(
-      `[validateStructuredContent] 느슨한 AI 응답 구조 복구: ` +
-      `body=${looseRecovery.bodySource || 'none'}, headings=${looseRecovery.headingsSource || 'none'}`
-    );
-  }
-
-  // ✅ [2026-04-11 FIX] 제목 개행 제거 — 최종 방어선
-  if (content.selectedTitle && typeof content.selectedTitle === 'string') {
-    content.selectedTitle = content.selectedTitle.replace(/[\r\n]+/g, ' ').trim();
-  }
-  const rawSelectedTitleForHeadingStrip = String(content.selectedTitle || '').trim();
-
-  // ✅ 누락된 필수 필드 자동 복구 (오류 대신 복구 시도)
-  // selectedTitle 복구
-  if (!content.selectedTitle) {
-    if (content.titleAlternatives && content.titleAlternatives.length > 0) {
-      content.selectedTitle = content.titleAlternatives[0];
-      console.warn('[validateStructuredContent] selectedTitle 누락 → titleAlternatives[0]으로 복구');
-    } else if (content.headings && content.headings.length > 0) {
-      content.selectedTitle = content.headings[0].title || '제목 없음';
-      console.warn('[validateStructuredContent] selectedTitle 누락 → headings[0].title로 복구');
-    } else {
-      content.selectedTitle = '제목 없음';
-      console.warn('[validateStructuredContent] selectedTitle 누락 → 기본값으로 설정');
-    }
-  }
-
-  // ✅ 프롬프트 지침 누출 감지 및 수정
-  const primaryKeyword = String((source as any)?.keyword || source?.title || (source as any)?.rawText?.slice(0, 50) || '').trim();
-  if (content.selectedTitle && primaryKeyword) {
-    const leakageCheck = detectPromptLeakageInTitle(content.selectedTitle, primaryKeyword);
-
-    if (leakageCheck.isLeaked) {
-      console.error(`[validateStructuredContent] 프롬프트 누출 감지! 원본 제목: "${content.selectedTitle}"`);
-      console.error(`[validateStructuredContent] 누출 패턴: ${JSON.stringify(leakageCheck.leakagePatterns)} `);
-
-      // 대안 제목 중 유효한 것 찾기
-      let validTitle: string | null = null;
-
-      // titleAlternatives에서 유효한 제목 찾기
-      if (Array.isArray(content.titleAlternatives)) {
-        for (const alt of content.titleAlternatives) {
-          const altCheck = detectPromptLeakageInTitle(alt, primaryKeyword);
-          if (!altCheck.isLeaked) {
-            validTitle = alt;
-            console.log(`[validateStructuredContent] 유효한 대안 제목 발견: "${validTitle}"`);
-            break;
-          }
-        }
-      }
-
-      // titleCandidates에서 유효한 제목 찾기
-      if (!validTitle && Array.isArray(content.titleCandidates)) {
-        for (const cand of content.titleCandidates) {
-          const candCheck = detectPromptLeakageInTitle(cand.text, primaryKeyword);
-          if (!candCheck.isLeaked) {
-            validTitle = cand.text;
-            console.log(`[validateStructuredContent] 유효한 후보 제목 발견: "${validTitle}"`);
-            break;
-          }
-        }
-      }
-
-      // 유효한 대안이 없으면 키워드 기반 제목 생성
-      if (!validTitle) {
-        // 키워드를 활용해 기본 제목 생성
-        validTitle = `${primaryKeyword}, 알아두면 좋은 핵심 정보 총정리`;
-        console.warn(`[validateStructuredContent] 유효한 대안 없음 → 키워드 기반 제목 생성: "${validTitle}"`);
-      }
-
-      content.selectedTitle = validTitle;
-
-      // titleAlternatives도 업데이트 (undefined 체크 추가)
-      if (!content.titleAlternatives) {
-        content.titleAlternatives = [];
-      }
-      if (!content.titleAlternatives.includes(validTitle)) {
-        content.titleAlternatives.unshift(validTitle);
-      }
-    }
-  }
-
-  // bodyHtml 복구
-  if (!content.bodyHtml) {
-    if (content.bodyPlain) {
-      // bodyPlain을 HTML로 변환
-      content.bodyHtml = content.bodyPlain
-        .split('\n\n')
-        .map(p => `< p > ${p.replace(/\n/g, '<br>')} </p>`)
-        .join('\n');
-      console.warn('[validateStructuredContent] bodyHtml 누락 → bodyPlain에서 복구');
-    } else if (content.headings && content.headings.length > 0) {
-      // headings에서 본문 생성 (content 또는 summary 사용)
-      const bodyParts: string[] = [];
-      content.headings.forEach(h => {
-        if (h.title) bodyParts.push(`<h2>${h.title}</h2>`);
-        // ✅ content 또는 summary 중 있는 것 사용
-        const bodyText = h.content || h.summary || '';
-        if (bodyText) bodyParts.push(`<p>${bodyText}</p>`);
-      });
-      content.bodyHtml = bodyParts.join('\n');
-      // ✅ bodyPlain도 content 또는 summary 사용
-      content.bodyPlain = content.headings.map(h => {
-        const bodyText = h.content || h.summary || '';
-        return `${h.title}\n${bodyText}`;
-      }).join('\n\n');
-      console.warn('[validateStructuredContent] bodyHtml 누락 → headings에서 복구');
-    } else {
-      // ✅ [v2.10.50] 본문 누락 fallback 폐기 — 사용자 보고 '제목과 본문이 똑같이 나옴'
-      //   기존: throw 대신 최소 구조로 복구 (제목=본문 1줄짜리 글 발행) → 네이버 어뷰징 위험
-      //   수정: 명확한 에러 throw → 호출자(generateStructuredContent)가 재시도/사용자 안내
-      //   재시도 체인이 모두 실패하면 사용자가 다시 글생성 버튼 누르도록.
-      const fallbackTitle = content.selectedTitle || '콘텐츠';
-      console.error(`[validateStructuredContent] ❌ 필수 필드 모두 누락 (제목: "${fallbackTitle}") — 본문 생성 실패`);
-      throw new Error(buildMissingBodyUserMessage());
-    }
-  }
-
-  // bodyPlain 복구
-  if (!content.bodyPlain && content.bodyHtml) {
-    content.bodyPlain = content.bodyHtml
-      .replace(/<[^>]+>/g, '')
-      .replace(/&nbsp;/g, ' ')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&amp;/g, '&')
-      .trim();
-    console.warn('[validateStructuredContent] bodyPlain 누락 → bodyHtml에서 복구');
-  }
-
-  // titleAlternatives 복구
-  if (!Array.isArray(content.titleAlternatives) || content.titleAlternatives.length < 1) {
-    content.titleAlternatives = [content.selectedTitle];
-    console.warn('[validateStructuredContent] titleAlternatives 누락 → selectedTitle로 복구');
-  }
-
-  // ✅ 제품/쇼핑/IT 리뷰: 과한 훅/감정 트리거 반복 방지 + 제목 상품명 prefix 강제
-  if (isReviewArticleType(source?.articleType)) {
-    const productName = getReviewProductName(source);
-    if (productName) {
-      content.selectedTitle = sanitizeReviewTitle(content.selectedTitle || '', productName);
-      if (Array.isArray(content.titleAlternatives)) {
-        content.titleAlternatives = content.titleAlternatives
-          .map((t) => sanitizeReviewTitle(String(t || ''), productName))
-          .filter(Boolean);
-      }
-      if (Array.isArray(content.titleCandidates)) {
-        content.titleCandidates = content.titleCandidates.map((c) => ({
-          ...c,
-          text: sanitizeReviewTitle(String(c?.text || ''), productName),
-        }));
-      }
-    }
-
-    // 본문에서 같은 훅 단어가 과하게 반복되는 현상 억제 (1회만 허용)
-    if (content.bodyPlain) {
-      content.bodyPlain = limitRegexOccurrences(content.bodyPlain, /직접\s*써보[고니]/g, 1);
-      content.bodyPlain = limitRegexOccurrences(content.bodyPlain, /소름/g, 1);
-      content.bodyPlain = limitRegexOccurrences(content.bodyPlain, /난리/g, 1);
-      content.bodyPlain = limitRegexOccurrences(content.bodyPlain, /충격/g, 1);
-      content.bodyPlain = limitRegexOccurrences(content.bodyPlain, /경악/g, 1);
-      content.bodyPlain = normalizeBodyWhitespacePreserveNewlines(content.bodyPlain);
-    }
-
-    if (content.headings && content.headings.length > 0) {
-      // ✅ [2026-01-28] 하드코딩된 폴백 소제목 제거 - AI 생성 소제목 그대로 사용
-      // 중복문서 방지를 위해 AI가 생성한 고유 소제목을 유지
-      const seen = new Set<string>();
-      content.headings = content.headings.map((h, idx) => {
-        const stripTitleBase = rawSelectedTitleForHeadingStrip || String(content.selectedTitle || '').trim();
-        const originalTitle = h.title || '';
-        const stripped = stripReviewTitlePrefixFromHeading(originalTitle, stripTitleBase, productName);
-        // ✅ [2026-01-28] AI 생성 소제목을 폴백으로 전달하여 유지
-        const sanitized = sanitizeReviewHeadingTitle(stripped || '', originalTitle, productName);
-
-        // 빈 소제목인 경우에만 간단한 번호 폴백 사용
-        const finalTitle = sanitized.trim() || `포인트 ${idx + 1}`;
-
-        const key = finalTitle.replace(/[\s\-–—:|·•.,!?()\[\]{}"']/g, '').toLowerCase();
-        let result = finalTitle;
-        if (seen.has(key)) {
-          result = `${finalTitle} (${idx + 1})`;
-        }
-        seen.add(key);
-        return {
-          ...h,
-          title: result,
-        };
-      });
-    }
-  }
-
-  // ✅ 비-리뷰 글에서도: 소제목이 제목(일부 포함)으로 시작하는 경우 제목 prefix 제거
-  // - 제거가 실제로 발생한 경우에도 소제목에 제품명 prefix를 새로 붙이지 않음
-  if (!isReviewArticleType(source?.articleType) && content.headings && content.headings.length > 0 && content.selectedTitle) {
-    const guessedProductName = extractLikelyProductNameFromTitle(content.selectedTitle);
-    const selectedTitle = rawSelectedTitleForHeadingStrip || String(content.selectedTitle || '').trim();
-    content.headings = content.headings.map((h) => {
-      const original = String(h.title || '').trim();
-      if (!original) return h;
-
-      const stripped = stripReviewTitlePrefixFromHeading(original, selectedTitle, guessedProductName || '');
-      const didStrip = normalizeTitleWhitespace(stripped) !== normalizeTitleWhitespace(original);
-      if (!didStrip) return h;
-
-      const cleaned = String(stripped || '').replace(/^[\s\-–—:|·•,]+/, '').trim();
-      const finalTitle = cleaned || original;
-
-      return {
-        ...h,
-        title: finalTitle,
-      };
-    });
-  }
-
-  // ✅ 1번 소제목이 제목과 동일하거나 유사한 경우 제거/수정
-  if (content.headings && content.headings.length > 0 && content.selectedTitle) {
-    const firstHeadingTitle = content.headings[0]?.title?.trim().toLowerCase() || '';
-    const mainTitle = content.selectedTitle.trim().toLowerCase();
-
-    // 제목과 1번 소제목이 동일하거나 80% 이상 유사한 경우
-    const isSimilar = firstHeadingTitle === mainTitle ||
-      mainTitle.includes(firstHeadingTitle) ||
-      firstHeadingTitle.includes(mainTitle) ||
-      (firstHeadingTitle.length > 10 && mainTitle.includes(firstHeadingTitle.substring(0, 10)));
-
-    if (isSimilar) {
-      console.warn(`[validateStructuredContent] 1번 소제목("${content.headings[0].title}")이 제목("${content.selectedTitle}")과 중복됨 → 1번 소제목 제거`);
-
-      // 1번 소제목 제거
-      content.headings = content.headings.slice(1);
-
-      // bodyPlain과 bodyHtml에서도 1번 소제목 내용 제거
-      if (content.bodyPlain) {
-        const firstHeading = content.headings[0]?.title || '';
-        if (firstHeading) {
-          const firstHeadingIndex = content.bodyPlain.indexOf(firstHeading);
-          if (firstHeadingIndex > 0) {
-            content.bodyPlain = content.bodyPlain.substring(firstHeadingIndex);
-          }
-        }
-      }
-    }
-  }
-
-  // headings 복구
-  if (!Array.isArray(content.headings) || content.headings.length < 1) {
-    // bodyPlain에서 소제목 추출 시도
-    const headingMatches = content.bodyPlain?.match(/^(?:##?\s*)?(.+?)(?:\n|$)/gm) || [];
-    if (headingMatches.length > 0) {
-      content.headings = headingMatches.slice(0, 5).map((h) => ({
-        title: h.replace(/^##?\s*/, '').trim(),
-        content: '',  // ✅ content 필드 추가
-        summary: '',
-        keywords: [],
-        imagePrompt: ''
-      }));
-      console.warn('[validateStructuredContent] headings 누락 → bodyPlain에서 추출');
-    } else {
-      content.headings = [{
-        title: '본문',
-        content: content.bodyPlain || '',  // ✅ content 필드 추가
-        summary: content.bodyPlain || '',
-        keywords: [],
-        imagePrompt: ''
-      }];
-      console.warn('[validateStructuredContent] headings 누락 → 기본값으로 설정');
-    }
-  }
-
-  // headings 개수 제한 (10개 초과 시 자르기)
-  if (content.headings.length > 10) {
-    console.warn(`[validateStructuredContent] headings가 ${content.headings.length}개로 너무 많아 10개로 자름`);
-    content.headings = content.headings.slice(0, 10);
-  }
-
-  // images 배열 복구
-  if (!Array.isArray(content.images)) {
-    content.images = [];
-    console.warn('[validateStructuredContent] images 누락 → 빈 배열로 설정');
-  }
-
-  // ✅ hashtags 배열 복구 (해시태그가 없으면 제목/키워드에서 자동 생성)
-  if (!Array.isArray(content.hashtags) || content.hashtags.length === 0) {
-    const generatedHashtags: string[] = [];
-    const title = content.selectedTitle || '';
-
-    // ✅ [2026-03-06] 홈판 모드: 서브키워드를 해시태그 최우선 포함 (토픽 매칭 시그널)
-    const hashtagSubKws = Array.isArray((source?.metadata as any)?.keywords)
-      ? (source!.metadata as any).keywords.filter((k: any) => String(k).length >= 2 && !/^\d+$/.test(String(k))).slice(0, 5)
-      : [];
-    if (hashtagSubKws.length > 0) {
-      hashtagSubKws.forEach((kw: string) => {
-        const tag = `#${String(kw).trim()}`;
-        if (!generatedHashtags.includes(tag)) generatedHashtags.push(tag);
-      });
-      console.log(`[validateStructuredContent] ✅ 서브키워드 해시태그 우선 포함: ${generatedHashtags.join(', ')}`);
-    }
-
-    // 제목에서 핵심 키워드 추출
-    const titleKeywords = title
-      .replace(/[?!.,\-_"']/g, ' ')
-      .split(/\s+/)
-      .filter(word => word.length >= 2 && word.length <= 20)
-      .filter(word => !['하는', '되는', '있는', '없는', '위한', '대한', '이런', '저런', '그런', '어떤', '무엇', '어디', '언제', '누가', '왜', '어떻게'].includes(word))
-      .slice(0, 5);
-
-    // 핵심 키워드를 해시태그로 변환
-    titleKeywords.forEach(keyword => {
-      if (!generatedHashtags.includes(`#${keyword}`)) {
-        generatedHashtags.push(`#${keyword}`);
-      }
-    });
-
-    // headings에서 추가 키워드 추출
-    if (content.headings && content.headings.length > 0) {
-      content.headings.slice(0, 3).forEach(h => {
-        const headingWords = (h.title || '')
-          .replace(/[?!.,\-_"']/g, ' ')
-          .split(/\s+/)
-          .filter(word => word.length >= 2 && word.length <= 15)
-          .slice(0, 2);
-
-        headingWords.forEach(word => {
-          if (generatedHashtags.length < 8 && !generatedHashtags.some(tag => tag.includes(word))) {
-            generatedHashtags.push(`#${word}`);
-          }
-        });
-      });
-    }
-
-    // 최소 3개 보장
-    if (generatedHashtags.length < 3) {
-      const fallbackTags = ['#정보', '#꿀팁', '#추천', '#후기', '#리뷰'];
-      fallbackTags.forEach(tag => {
-        if (generatedHashtags.length < 5 && !generatedHashtags.includes(tag)) {
-          generatedHashtags.push(tag);
-        }
-      });
-    }
-
-    // 최대 8개로 제한
-    content.hashtags = generatedHashtags.slice(0, 8);
-    console.log(`[validateStructuredContent] hashtags 누락 → 자동 생성: ${content.hashtags.join(', ')}`);
-  } else {
-    // 기존 해시태그에 # 접두사가 없으면 추가
-    content.hashtags = content.hashtags.map(tag =>
-      tag.startsWith('#') ? tag : `#${tag}`
-    );
-  }
-
-  const normalizeTag = (tag: string): string => {
-    const cleaned = String(tag || '')
-      .replace(/^#+/, '')
-      .replace(/[^\p{L}\p{N}_가-힣\s-]/gu, ' ')
-      .replace(/\s+/g, '')
-      .trim();
-    return cleaned ? `#${cleaned}` : '';
-  };
-
-  const addHashtag = (tags: string[], raw: string): void => {
-    const tag = normalizeTag(raw);
-    if (!tag) return;
-    if (tag.length < 3 || tag.length > 24) return;
-    if (tags.some(existing => existing.toLowerCase() === tag.toLowerCase())) return;
-    tags.push(tag);
-  };
-
-  const normalizedHashtags: string[] = [];
-  for (const tag of content.hashtags || []) addHashtag(normalizedHashtags, tag);
-
-  if (normalizedHashtags.length < 5) {
-    const seedTexts = [
-      ...(
-        Array.isArray((source?.metadata as any)?.keywords)
-          ? (source!.metadata as any).keywords.map((kw: any) => String(kw || ''))
-          : []
-      ),
-      content.selectedTitle || '',
-      content.metadata?.category || '',
-      source?.categoryHint || '',
-    ];
-
-    for (const seed of seedTexts) {
-      String(seed || '')
-        .replace(/[?!.,\-_"'()[\]{}]/g, ' ')
-        .split(/\s+/)
-        .map(word => word.trim())
-        .filter(word => word.length >= 2 && word.length <= 15)
-        .filter(word => !['하는', '되는', '있는', '없는', '위한', '대한', '그리고', '하지만', '어떻게', '무엇', '어디', '언제', '누가', '왜'].includes(word))
-        .forEach(word => {
-          if (normalizedHashtags.length < 8) addHashtag(normalizedHashtags, word);
-        });
-      if (normalizedHashtags.length >= 5) break;
-    }
-  }
-
-  if (normalizedHashtags.length < 5) {
-    ['정보', '꿀팁', '생활팁', '체크리스트', '비교정리'].forEach(tag => {
-      if (normalizedHashtags.length < 5) addHashtag(normalizedHashtags, tag);
-    });
-  }
-
-  content.hashtags = normalizedHashtags.slice(0, 8);
-
-  // metadata 객체 복구
-  if (!content.metadata || typeof content.metadata !== 'object') {
-    const readTimeMinutes = Math.ceil((content.bodyPlain?.length || 0) / 500);
-    content.metadata = {
-      category: 'general',
-      targetAge: 'all',
-      urgency: 'evergreen',
-      estimatedReadTime: `${readTimeMinutes}분`,
-      wordCount: content.bodyPlain?.length || 0,
-      aiDetectionRisk: 'low',
-      legalRisk: 'safe',
-      seoScore: 70,
-      keywordStrategy: '기본',
-      publishTimeRecommend: '언제든지'
-    };
-    console.warn('[validateStructuredContent] metadata 누락 → 기본값으로 설정');
-  }
-
-  // quality 객체 복구
-  if (!content.quality || typeof content.quality !== 'object') {
-    content.quality = {
-      aiDetectionRisk: 'low',
-      legalRisk: 'safe',
-      seoScore: 70,
-      originalityScore: 70,
-      readabilityScore: 70,
-      warnings: []
-    };
-    console.warn('[validateStructuredContent] quality 누락 → 기본값으로 설정');
-  }
-
-}
+// [Phase 7.4-ae] structured response validation -> contentStructuredValidator.ts
 
 /**
  * ✅ SEO 모드 전용 검증 및 보정 함수
@@ -2669,166 +2264,18 @@ export function validateBusinessContent(content: StructuredContent, source: Cont
  * - 사양과 무관: AI 처리는 서버에서 수행됨
  */
 function getTimeoutMs(minChars: number, retryAttempt: number = 0): number {
-  // ✅ [v2.10.20] 타임아웃 공격적 단축 — 사용자 보고 '글 생성 10분 hang'
-  //   기존: 1500~1800자 글 = 3분 + 재시도 +60% → 누적 10분 가능
-  //   변경: 1500~1800자 = 90초, 재시도 +10% → 빠르게 다음 모델로 폴백
-  //   네트워크 정상 시 AI 응답은 30~60초. 90초 안에 응답 없으면 비정상 → 즉시 폴백.
-  let baseTimeout: number;
-  if (minChars < 1000) baseTimeout = 60000;        // 제목만: 1분
-  else if (minChars < 3000) baseTimeout = 90000;   // 짧은 글: 90초 (1500~1800자 권장)
-  else if (minChars < 5000) baseTimeout = 120000;  // 중간 글: 2분
-  else if (minChars < 10000) baseTimeout = 150000; // 긴 글: 2.5분
-  else baseTimeout = 180000;                       // 매우 긴 글: 3분
-
-  // ✅ [v2.10.20] 재시도 시 타임아웃 거의 동일 (이전 +20%/+40%/+60% → +5%/+10%)
-  //   재시도 횟수 자체도 호출자가 1회로 축소됨
-  const multiplier = 1 + (Math.min(retryAttempt, 2) * 0.05);
-  return Math.floor(baseTimeout * multiplier);
+  return getContentProviderTimeoutMs(minChars, retryAttempt);
 }
 
 const GEMINI_CACHE_CREATE_TIMEOUT_MS = 10_000;
-const GEMINI_USAGE_METADATA_TIMEOUT_MS = 5_000;
-
-function createContentGenerationAbortError(): Error {
-  return new Error('사용자가 콘텐츠 생성을 취소했습니다.');
-}
-
-function throwIfContentGenerationAborted(signal?: AbortSignal): void {
-  if (signal?.aborted) {
-    throw createContentGenerationAbortError();
-  }
-}
-
-function sleepWithAbort(ms: number, signal?: AbortSignal): Promise<void> {
-  if (ms <= 0) return Promise.resolve();
-  throwIfContentGenerationAborted(signal);
-
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  let onAbort: (() => void) | undefined;
-
-  return new Promise<void>((resolve, reject) => {
-    timer = setTimeout(resolve, ms);
-    if (signal) {
-      onAbort = () => {
-        if (timer) clearTimeout(timer);
-        reject(createContentGenerationAbortError());
-      };
-      signal.addEventListener('abort', onAbort, { once: true });
-    }
-  }).finally(() => {
-    if (timer) clearTimeout(timer);
-    if (signal && onAbort) signal.removeEventListener('abort', onAbort);
-  });
-}
-
-function withProviderTimeout<T>(
-  promise: Promise<T>,
-  timeoutMs: number,
-  label: string,
-  signal?: AbortSignal,
-): Promise<T> {
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  let onAbort: (() => void) | undefined;
-
-  return new Promise<T>((resolve, reject) => {
-    try {
-      throwIfContentGenerationAborted(signal);
-    } catch (error) {
-      reject(error);
-      return;
-    }
-
-    timer = setTimeout(() => reject(new Error(label)), timeoutMs);
-    if (signal) {
-      onAbort = () => reject(createContentGenerationAbortError());
-      signal.addEventListener('abort', onAbort, { once: true });
-    }
-
-    promise.then(resolve, reject);
-  }).finally(() => {
-    if (timer) clearTimeout(timer);
-    if (signal && onAbort) signal.removeEventListener('abort', onAbort);
-  });
-}
 
 function withGeminiTimeout<T>(promise: Promise<T>, timeoutMs: number, label: string): Promise<T> {
   return withProviderTimeout(promise, timeoutMs, label);
 }
 
-function createProviderTimeoutSignal(
-  timeoutMs: number,
-  label: string,
-  externalSignal?: AbortSignal,
-): {
-  signal: AbortSignal;
-  didTimeout: () => boolean;
-  dispose: () => void;
-  normalizeError: (error: unknown) => Error;
-} {
-  const controller = new AbortController();
-  let timedOut = false;
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  let onExternalAbort: (() => void) | undefined;
-
-  const abortOnce = (reason: Error): void => {
-    if (!controller.signal.aborted) {
-      controller.abort(reason);
-    }
-  };
-
-  timer = setTimeout(() => {
-    timedOut = true;
-    abortOnce(new Error(label));
-  }, timeoutMs);
-
-  if (externalSignal) {
-    onExternalAbort = () => abortOnce(createContentGenerationAbortError());
-    if (externalSignal.aborted) {
-      onExternalAbort();
-    } else {
-      externalSignal.addEventListener('abort', onExternalAbort, { once: true });
-    }
-  }
-
-  return {
-    signal: controller.signal,
-    didTimeout: () => timedOut,
-    dispose: () => {
-      if (timer) clearTimeout(timer);
-      if (externalSignal && onExternalAbort) {
-        externalSignal.removeEventListener('abort', onExternalAbort);
-      }
-    },
-    normalizeError: (error: unknown) => {
-      if (timedOut) return new Error(label);
-      if (externalSignal?.aborted) return createContentGenerationAbortError();
-
-      const message = normalizeErrorMessage(error).toLowerCase();
-      if (controller.signal.aborted && (
-        message.includes('apiuseraborterror') ||
-        message.includes('abort') ||
-        message.includes('aborted') ||
-        message.includes('ecanceled')
-      )) {
-        return createContentGenerationAbortError();
-      }
-
-      return error instanceof Error ? error : new Error(String(error));
-    },
-  };
-}
-
-const geminiRequestGate = new Map<string, { nextAllowedAt: number }>();
+const geminiRequestGate = new ProviderRequestGate({ sleep: sleepWithAbort });
 export const GEMINI_RATE_LIMIT_MIN_WAIT_MS = 75_000;
 export const GEMINI_RATE_LIMIT_MAX_SINGLE_WAIT_MS = 180_000;
-
-function readOptionalNonNegativeMsEnv(name: string, minMs = 0): number | undefined {
-  const raw = process.env[name];
-  if (raw === undefined || raw.trim() === '') return undefined;
-  const value = Number(raw);
-  if (Number.isFinite(value) && value >= minMs) return Math.floor(value);
-  return undefined;
-}
 
 function getGeminiMinIntervalMs(config: any): number {
   const envValue = readOptionalNonNegativeMsEnv('GEMINI_MIN_INTERVAL_MS');
@@ -2846,24 +2293,18 @@ async function throttleGeminiRequest(modelName: string, config: any, signal?: Ab
   const minIntervalMs = getGeminiMinIntervalMs(config);
   if (minIntervalMs <= 0) return;
 
-  const key = `${config?.geminiPlanType || 'auto'}:${modelName}`;
-  const now = Date.now();
-  const gate = geminiRequestGate.get(key);
-  const waitMs = Math.max(0, (gate?.nextAllowedAt || 0) - now);
-  if (waitMs > 0) {
-    console.log(`[GeminiThrottle] ${modelName} RPM 보호 — ${Math.round(waitMs / 1000)}초 대기`);
-    await sleepWithAbort(waitMs, signal);
-  }
-
-  geminiRequestGate.set(key, { nextAllowedAt: Date.now() + minIntervalMs });
+  const key = `Gemini:${config?.geminiPlanType || 'auto'}:${modelName}`;
+  await geminiRequestGate.throttle(
+    key,
+    minIntervalMs,
+    signal,
+    (waitMs) => `[GeminiThrottle] ${modelName} RPM 보호 — ${Math.round(waitMs / 1000)}초 대기`,
+  );
 }
 
 function recordGeminiRateLimitBackoff(modelName: string, config: any, waitMs: number): void {
-  const key = `${config?.geminiPlanType || 'auto'}:${modelName}`;
-  const previous = geminiRequestGate.get(key);
-  geminiRequestGate.set(key, {
-    nextAllowedAt: Math.max(previous?.nextAllowedAt || 0, Date.now() + waitMs),
-  });
+  const key = `Gemini:${config?.geminiPlanType || 'auto'}:${modelName}`;
+  geminiRequestGate.recordBackoff(key, waitMs);
 }
 
 export function getGeminiRateLimitWaitMs(error: unknown, fallbackMs: number): number {
@@ -2903,107 +2344,22 @@ export function getGeminiRateLimitWaitMs(error: unknown, fallbackMs: number): nu
   return Math.min(waitMs, GEMINI_RATE_LIMIT_MAX_SINGLE_WAIT_MS);
 }
 
-const providerRequestGates = new Map<string, { nextAllowedAt: number }>();
-
-function readProviderHeader(error: unknown, name: string): string | undefined {
-  const headers =
-    (error as any)?.headers ||
-    (error as any)?.response?.headers ||
-    (error as any)?.error?.headers;
-  if (!headers) return undefined;
-
-  if (typeof headers.get === 'function') {
-    return headers.get(name) || headers.get(name.toLowerCase()) || undefined;
-  }
-
-  const target = name.toLowerCase();
-  for (const [key, value] of Object.entries(headers)) {
-    if (key.toLowerCase() === target) return String(value);
-  }
-  return undefined;
-}
-
-function parseProviderDelayMs(raw: unknown): number | null {
-  if (raw === undefined || raw === null) return null;
-  const value = String(raw).trim();
-  if (!value) return null;
-
-  if (/^\d+(\.\d+)?$/.test(value)) {
-    return Math.ceil(Number(value) * 1000);
-  }
-
-  const dateMs = Date.parse(value);
-  if (!Number.isNaN(dateMs)) {
-    return Math.max(0, dateMs - Date.now());
-  }
-
-  let totalMs = 0;
-  const unitPattern = /(\d+(?:\.\d+)?)(ms|s|m|h)/gi;
-  let match: RegExpExecArray | null;
-  while ((match = unitPattern.exec(value)) !== null) {
-    const amount = Number(match[1]);
-    const unit = match[2].toLowerCase();
-    if (unit === 'ms') totalMs += amount;
-    if (unit === 's') totalMs += amount * 1000;
-    if (unit === 'm') totalMs += amount * 60_000;
-    if (unit === 'h') totalMs += amount * 3_600_000;
-  }
-  return totalMs > 0 ? Math.ceil(totalMs) : null;
-}
-
-function readNonNegativeMsEnv(name: string, fallbackMs: number, minMs = 0): number {
-  const value = readOptionalNonNegativeMsEnv(name, minMs);
-  if (value !== undefined) return value;
-  return fallbackMs;
-}
+const providerRequestGates = new ProviderRequestGate({ sleep: sleepWithAbort });
 
 async function throttleProviderRequest(provider: string, modelName: string, minIntervalMs: number, signal?: AbortSignal): Promise<void> {
   if (minIntervalMs <= 0) return;
   const key = `${provider}:${modelName}`;
-  const now = Date.now();
-  const scheduledAt = Math.max(now, providerRequestGates.get(key)?.nextAllowedAt || 0);
-  providerRequestGates.set(key, { nextAllowedAt: scheduledAt + minIntervalMs });
-  const waitMs = scheduledAt - now;
-  if (waitMs > 0) {
-    console.log(`[${provider}Throttle] ${modelName} RPM 보호 — ${Math.round(waitMs / 1000)}초 대기`);
-    await sleepWithAbort(waitMs, signal);
-  }
+  await providerRequestGates.throttle(
+    key,
+    minIntervalMs,
+    signal,
+    (waitMs) => `[${provider}Throttle] ${modelName} RPM 보호 — ${Math.round(waitMs / 1000)}초 대기`,
+  );
 }
 
 function recordProviderRateLimitBackoff(provider: string, modelName: string, waitMs: number): void {
   const key = `${provider}:${modelName}`;
-  const previous = providerRequestGates.get(key);
-  providerRequestGates.set(key, {
-    nextAllowedAt: Math.max(previous?.nextAllowedAt || 0, Date.now() + waitMs),
-  });
-}
-
-function getProviderRateLimitWaitMs(error: unknown, fallbackMs: number, headerNames: string[]): number {
-  const headerWaits = headerNames
-    .map((name) => readProviderHeader(error, name))
-    .map(parseProviderDelayMs)
-    .filter((value): value is number => typeof value === 'number' && value > 0);
-
-  const raw = `${normalizeErrorMessage(error)}\n${safeStringifyError(error)}`;
-  const retryHint = raw.match(/retry(?:\s|-)?after["'\s:]+([\d.]+)\s*(ms|s|m|h)?/i)
-    || raw.match(/retryDelay["'\s:]+([\d.]+)\s*(ms|s|m|h)?/i);
-  if (retryHint) {
-    const amount = Number(retryHint[1]);
-    const unit = (retryHint[2] || 's').toLowerCase();
-    if (Number.isFinite(amount) && amount >= 0) {
-      const hintedMs = unit === 'h'
-        ? amount * 3_600_000
-        : unit === 'm'
-          ? amount * 60_000
-          : unit === 'ms'
-            ? amount
-            : amount * 1000;
-      headerWaits.push(Math.ceil(hintedMs));
-    }
-  }
-
-  const waitMs = Math.max(fallbackMs, headerWaits.length ? Math.max(...headerWaits) : 0, 1000);
-  return Math.min(waitMs + 500, 180_000);
+  providerRequestGates.recordBackoff(key, waitMs);
 }
 
 function getClaudeMinIntervalMs(modelName: string): number {
@@ -3040,42 +2396,12 @@ function getPerplexityRateLimitWaitMs(error: unknown, fallbackMs: number): numbe
   return getProviderRateLimitWaitMs(error, fallbackMs, ['retry-after', 'x-ratelimit-reset-requests', 'x-ratelimit-reset-tokens']);
 }
 
-async function waitForGeminiUsageMetadata(streamResult: any): Promise<any | null> {
-  try {
-    return await withGeminiTimeout(
-      Promise.resolve(streamResult.response),
-      GEMINI_USAGE_METADATA_TIMEOUT_MS,
-      `Gemini usage metadata timeout (${GEMINI_USAGE_METADATA_TIMEOUT_MS / 1000}s)`,
-    );
-  } catch (error) {
-    console.warn('[Gemini] usage metadata 대기 시간 초과 — 생성 결과는 그대로 사용:', (error as Error).message);
-    return null;
-  }
-}
-
 // ✅ [v1.4.6] Gemini Context Caching — 정적 시스템 프롬프트를 캐시하여 입력 토큰 비용 75% 절감
 // 캐시 키: SHA-256(systemText + modelName) → 동일 system 프롬프트 + 동일 모델이면 재사용
 // 캐시 TTL: 1시간 (Google 권장값)
 // 최소 토큰: Flash 4096, Pro 2048 (그 이상이어야 캐시 가능)
-interface GeminiCacheEntry {
-  cacheName: string;        // 캐시 리소스 이름 (Google 서버에 저장)
-  modelName: string;
-  createdAt: number;        // 생성 시각 (만료 체크용)
-  ttlSeconds: number;       // TTL
-}
-
-const geminiPromptCache = new Map<string, GeminiCacheEntry>();
 const GEMINI_CACHE_TTL = 3600; // 1시간
 const GEMINI_CACHE_MIN_TOKENS = { flash: 4096, pro: 2048 };
-
-interface GeminiResultCacheEntry {
-  text: string;
-  createdAt: number;
-}
-
-const geminiResultCache = new Map<string, GeminiResultCacheEntry>();
-const GEMINI_RESULT_CACHE_TTL_MS = 10 * 60 * 1000;
-const GEMINI_RESULT_CACHE_MAX = 50;
 
 /**
  * ✅ [v1.4.77] API 키별 캐시 지원 자동 감지
@@ -3084,109 +2410,13 @@ const GEMINI_RESULT_CACHE_MAX = 50;
  * - 유료 티어(캐시 지원)는 정상 75% 절감 혜택
  * - 앱 재시작 시 리셋되어 다시 시도 (플랜 업그레이드 자동 감지)
  */
-const geminiCacheUnsupportedKeys = new Set<string>();
-function apiKeyFingerprint(key: string): string {
-  const crypto = require('crypto') as typeof import('crypto');
-  return crypto.createHash('sha256').update(key).digest('hex').substring(0, 12);
-}
-function markCacheUnsupported(apiKey: string, reason: string): void {
-  const fp = apiKeyFingerprint(apiKey);
-  if (!geminiCacheUnsupportedKeys.has(fp)) {
-    geminiCacheUnsupportedKeys.add(fp);
-    console.warn(`[GeminiCache] 🔒 API 키 ${fp}는 캐시 미지원으로 기록됨 (이유: ${reason}) — 이후 일반 호출만 사용`);
-  }
-}
-function isCacheSupportedForKey(apiKey: string): boolean {
-  return !geminiCacheUnsupportedKeys.has(apiKeyFingerprint(apiKey));
-}
-
-/**
- * 시스템 프롬프트의 캐시 키 생성 (SHA-256)
- */
-function getCacheKey(systemText: string, modelName: string): string {
-  const crypto = require('crypto') as typeof import('crypto');
-  const hash = crypto.createHash('sha256');
-  hash.update(`${modelName}::${systemText}`);
-  return hash.digest('hex').substring(0, 32);
-}
-
-function getGeminiResultCacheKey(input: {
-  modelName: string;
-  systemText: string;
-  userText: string;
-  temperature: number;
-  useGrounding: boolean;
-}): string {
-  const crypto = require('crypto') as typeof import('crypto');
-  const hash = crypto.createHash('sha256');
-  hash.update(JSON.stringify({
-    modelName: input.modelName,
-    temperature: Number(input.temperature.toFixed(2)),
-    useGrounding: input.useGrounding,
-    systemText: input.systemText,
-    userText: input.userText,
-  }));
-  return hash.digest('hex').substring(0, 32);
-}
-
-function getCachedGeminiResult(cacheKey: string): string | undefined {
-  const entry = geminiResultCache.get(cacheKey);
-  if (!entry) return undefined;
-  if (Date.now() - entry.createdAt > GEMINI_RESULT_CACHE_TTL_MS) {
-    geminiResultCache.delete(cacheKey);
-    return undefined;
-  }
-  return entry.text;
-}
-
-function setCachedGeminiResult(cacheKey: string, text: string): void {
-  if (!text.trim()) return;
-  if (geminiResultCache.size >= GEMINI_RESULT_CACHE_MAX) {
-    const oldest = geminiResultCache.keys().next().value;
-    if (oldest) geminiResultCache.delete(oldest);
-  }
-  geminiResultCache.set(cacheKey, { text, createdAt: Date.now() });
-}
-
-/**
- * 캐시 만료 체크
- */
-function isCacheExpired(entry: GeminiCacheEntry): boolean {
-  const elapsed = (Date.now() - entry.createdAt) / 1000;
-  return elapsed >= entry.ttlSeconds - 60; // 60초 안전 마진
-}
-
 /**
  * 캐시 정리 (만료된 항목 제거)
  */
 function cleanExpiredCaches(): void {
-  for (const [key, entry] of geminiPromptCache.entries()) {
-    if (isCacheExpired(entry)) {
-      geminiPromptCache.delete(key);
-      console.log(`[GeminiCache] 만료 캐시 제거: ${entry.cacheName}`);
-    }
+  for (const entry of pruneExpiredGeminiPromptCaches()) {
+    console.log(`[GeminiCache] 만료 캐시 제거: ${entry.cacheName}`);
   }
-}
-
-// ✅ Gemini 모델 체인 — 안정 우선 기본값
-//   자동/무료/유료 기본: Flash (품질·속도·한도 안정 균형)
-//   Flash-Lite는 사용자가 명시 선택한 경우에만 사용
-//   사용자가 명시적으로 선택한 모델은 플랜 관계없이 그 선택 존중
-export function buildGeminiModelChain(config?: { primaryGeminiTextModel?: string; geminiModel?: string; geminiPlanType?: 'auto' | 'free' | 'paid' }): {
-  primaryModel: string;
-  uniqueModels: string[];
-  isPro: boolean;
-} {
-  // 플랜에 따라 기본값 결정
-  const defaultModel = 'gemini-2.5-flash';
-
-  let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || defaultModel;
-  if (!primaryModel.startsWith('gemini-')) {
-    primaryModel = defaultModel;
-  }
-  const isPro = primaryModel.includes('-pro');
-  const uniqueModels = [primaryModel];
-  return { primaryModel, uniqueModels, isPro };
 }
 
 async function callGemini(prompt: string, temperature: number = 0.9, minChars: number = 2000, options: { useGrounding?: boolean; signal?: AbortSignal } = {}): Promise<string> {
@@ -3205,30 +2435,18 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   // ✅ [v1.4.50] Safety Lock — 유료 플랜 사용자의 예산 초과 방지
   // 무료 플랜은 Google이 자동 차단하므로 Safety Lock 불필요 (무료는 한도만 체크)
   // 유료 플랜은 카드 자동 청구되므로 앱에서 직접 차단해야 함
-  if (config?.geminiPlanType === 'paid') {
-    try {
-      const { flushGeminiUsage, getGeminiUsageSnapshot } = await import('./gemini.js');
+  await enforceGeminiBudgetSafety(config, {
+    flushUsage: async () => {
+      const { flushGeminiUsage } = await import('./gemini.js');
       await flushGeminiUsage();
-      const usage = await getGeminiUsageSnapshot();
-      const budget = Number(config.geminiCreditBudget) || 300;
-      const spent = Number(usage.estimatedCostUSD) || 0;
-      const ratio = spent / budget;
-
-      if (spent >= budget) {
-        // 100% 도달 — 차단 (사용자가 직접 초기화/예산 상향해야 재개)
-        const msg = `🛡️ Safety Lock 발동: 예산 한도 도달 ($${spent.toFixed(2)} / $${budget}). 설정 → Gemini → 예산을 상향하거나 사용량을 초기화하세요.`;
-        console.error(`[Gemini] ${msg}`);
-        throw new BudgetExceededError(msg, spent, budget);
-      }
-      if (ratio >= 0.9) {
-        // 90% 경고 (차단은 아님)
-        console.warn(`[Gemini] ⚠️ 예산 90% 경고: $${spent.toFixed(2)} / $${budget} (${(ratio * 100).toFixed(1)}%)`);
-      }
-    } catch (e) {
-      if (e instanceof BudgetExceededError) throw e;
-      console.warn('[Gemini] Safety Lock 체크 실패(무시하고 진행):', (e as Error).message);
-    }
-  }
+    },
+    getUsageSnapshot: async () => {
+      const { getGeminiUsageSnapshot } = await import('./gemini.js');
+      return getGeminiUsageSnapshot();
+    },
+    warn: console.warn,
+    error: console.error,
+  });
 
   // ✅ [2026-03-16] promptSplitter 모듈로 system/user 분리
   // 기존 37줄 하드코딩 systemInstructionText 제거 → .prompt 파일의 규칙이 그대로 system으로 전달
@@ -3307,25 +2525,26 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         // ✅ [v1.4.6] Gemini Context Caching — 시스템 프롬프트 재사용으로 75% 절감
         // 캐시 가능 조건: system 프롬프트가 충분히 큼 (Flash 4096 토큰, Pro 2048 토큰)
         // 1토큰 ≈ 4자 한국어 기준 → Flash 16,384자, Pro 8,192자
-        const minCacheChars = modelName.includes('-pro') ? 8192 : 16384;
         // ✅ [2026-06-06] 캐시는 기본 OFF.
         //    cacheManager.create가 본문 생성 전 Gemini API 1회를 추가로 사용하므로
         //    Tier 1/RPM 낮은 프로젝트에서는 "버튼 1회"가 "API 2회"가 되어 429가 쉽게 난다.
         //    비용 절감이 필요한 고한도 프로젝트만 ENV GEMINI_CACHE_ENABLED=1로 명시 opt-in.
-        const cacheDisabledEnv = process.env.GEMINI_CACHE_DISABLED === '1';
-        const cacheOptInEnv = process.env.GEMINI_CACHE_ENABLED === '1';
-        const cacheEnabled = cacheOptInEnv
-          && !cacheDisabledEnv
-          && isCacheSupportedForKey(trimmedKey)
-          && geminiSystemText.length >= minCacheChars;
+        const cacheEligibility = resolveGeminiPromptCacheEligibility({
+          modelName,
+          systemTextLength: geminiSystemText.length,
+          isKeySupported: isGeminiCacheSupportedForKey(trimmedKey),
+          cacheEnabledEnv: process.env.GEMINI_CACHE_ENABLED,
+          cacheDisabledEnv: process.env.GEMINI_CACHE_DISABLED,
+        });
+        const cacheEnabled = cacheEligibility.enabled;
         let cachedContentName: string | undefined;
 
         if (cacheEnabled) {
           cleanExpiredCaches();
-          const cacheKey = getCacheKey(geminiSystemText, modelName);
-          const existingCache = geminiPromptCache.get(cacheKey);
+          const cacheKey = getGeminiPromptCacheKey(geminiSystemText, modelName);
+          const existingCache = getCachedGeminiPrompt(cacheKey);
 
-          if (existingCache && !isCacheExpired(existingCache)) {
+          if (existingCache) {
             // 캐시 히트 — 75% 절감
             cachedContentName = existingCache.cacheName;
             console.log(`[GeminiCache] ✅ 히트: ${cachedContentName.substring(0, 30)}... (system ${geminiSystemText.length}자, 75% 절감)`);
@@ -3346,7 +2565,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
               );
               cachedContentName = newCache.name;
               if (cachedContentName) {
-                geminiPromptCache.set(cacheKey, {
+                setCachedGeminiPrompt(cacheKey, {
                   cacheName: cachedContentName,
                   modelName,
                   createdAt: Date.now(),
@@ -3360,9 +2579,9 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
               cachedContentName = undefined;
               // ✅ [v1.4.77] 무료 티어 / 캐시 미지원 키 자동 학습
               // 403 Forbidden, 400 Bad Request, "caching is not supported" 등 구조적 실패는 영구 기록
-              const isStructural = /403|forbidden|400|not\s+support|not\s+available|cached.*content|cache create timeout/i.test(errMsg);
+              const isStructural = isStructuralGeminiCacheError(errMsg);
               if (isStructural) {
-                markCacheUnsupported(trimmedKey, errMsg.substring(0, 60));
+                markGeminiCacheUnsupported(trimmedKey, errMsg.substring(0, 60));
               }
             }
           }
@@ -3453,27 +2672,19 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
         //    4/18 장애 원인: getGenerativeModelFromCachedContent 경로가 일부 환경에서 실패
         //    해결: 캐시 호출 실패 감지 → 해당 API 키를 캐시 미지원으로 기록 → 일반 모델로 즉시 재시도
         //    효과: 무료/유료 구분 없이 모든 사용자가 안전하게 생성됨
-        let activeModel = model;
-        let effectiveCached = cachedContentName;
         const invokeStream = async (): Promise<any> => {
-          try {
-            return await activeModel.generateContentStream(requestConfig);
-          } catch (streamErr: any) {
-            if (effectiveCached) {
-              const msg = streamErr?.message || '';
-              console.warn(`[GeminiCache] ⚠️ 캐시 호출 실패 → 일반 호출로 즉시 폴백: ${msg.substring(0, 100)}`);
-              markCacheUnsupported(trimmedKey, `stream: ${msg.substring(0, 60)}`);
-              geminiPromptCache.delete(getCacheKey(geminiSystemText, modelName));
-              activeModel = client.getGenerativeModel({ model: modelName });
-              effectiveCached = undefined;
-              // 캐시 사용 시 systemInstruction 제외했으므로 일반 호출에서 재주입
-              if (geminiSystemText && !requestConfig.systemInstruction) {
-                requestConfig.systemInstruction = { role: 'system', parts: [{ text: geminiSystemText }] };
-              }
-              return await activeModel.generateContentStream(requestConfig);
-            }
-            throw streamErr;
-          }
+          return await invokeGeminiStreamWithCacheFallback({
+            modelName,
+            apiKey: trimmedKey,
+            systemText: geminiSystemText,
+            cachedContentName,
+            requestConfig,
+            activeModel: model,
+            getPlainModel: () => client.getGenerativeModel({ model: modelName }),
+            markUnsupported: markGeminiCacheUnsupported,
+            deletePromptCache: deleteCachedGeminiPrompt,
+            warn: console.warn,
+          });
         };
         // ✅ [2026-01-28 FIX] 첫 응답 타임아웃 60초로 증가 (유료 API 안정성)
         const firstResponseTimeoutMs = Math.min(timeoutMs, 60_000);
@@ -3804,108 +3015,6 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
     throw finalError; // already user-friendly
   }
   throw new Error(translateGeminiError(finalMsg));
-}
-
-// ✅ [2026-02-20] Gemini API 에러 → 사용자 친화적 한국어 변환
-// ✅ [v1.4.33] 모든 분기에 풀 에러 첨부 + 잘림 제거 — 진단을 위해
-//    손님이 화면 캡처 1장만 보내면 사장님이 즉시 원인 파악 가능
-function translateGeminiError(rawMessage: string): string {
-  const msg = rawMessage.toLowerCase();
-  const detail = `\n📋 상세: ${rawMessage}`;
-  const captureGuide = `\n📸 이 화면을 캡처해서 사장님께 보내주시면 즉시 해결됩니다.`;
-
-  // API 키 만료/무효
-  if (msg.includes('api key expired') || msg.includes('api_key_invalid') || msg.includes('api key not valid')) {
-    return '🔑 Gemini API키가 만료됨! Google AI Studio에서 새 키를 발급받으세요.' + detail;
-  }
-
-  // ✅ [v1.4.64] 할당량 관련 에러는 callGemini에서 이미 구체적 메시지로 throw하므로
-  //   여기서는 혹시 빠진 경우만 기본 안내 제공
-  if (msg.includes('429') || msg.includes('quota') || msg.includes('rate limit') || msg.includes('too many requests') || msg.includes('resource exhausted')) {
-    if (msg.includes('limit: 0') || msg.includes('free_tier')) {
-      return '🚫 이 모델의 무료 사용이 차단되었습니다.\n' +
-        '👉 해결: 설정 → AI 엔진에서 다른 모델로 변경하거나, Google AI Studio에서 유료(Pay-as-you-go)로 전환하세요.\n' +
-        '⚠️ 유료 전환 시 기존 무료 할당량도 사라지므로 주의!' + detail;
-    }
-    return '⚡ 분당 요청 한도 초과! 1~2분 후 자동 해제됩니다.\n' +
-      '💡 계속 발생하면: AI Studio에서 현재 프로젝트 한도를 확인하고, 유료 전환 또는 한도 상향을 검토하세요.' + detail;
-  }
-
-  // 인증 실패 (401/403)
-  if (msg.includes('401') || msg.includes('403') || msg.includes('permission') || msg.includes('forbidden')) {
-    return '🔒 Gemini API 인증 실패! API키가 올바른지 확인하세요.' + detail;
-  }
-
-  // 서버 오류 (500/503)
-  if (msg.includes('500') || msg.includes('503') || msg.includes('internal') || msg.includes('unavailable') || msg.includes('overloaded')) {
-    return '🔧 Gemini 응답 오류가 발생했습니다.\n' +
-      '💡 잠시 후 다시 시도하거나 API 키와 사용량 한도를 확인하세요.' + detail;
-  }
-
-  // 타임아웃
-  if (msg.includes('timeout') || msg.includes('시간 초과') || msg.includes('타임아웃')) {
-    return '⏱️ Gemini 응답 시간 초과! 네트워크 상태를 확인하고 다시 시도하세요.' + detail;
-  }
-
-  // 모델 없음 (404)
-  if (msg.includes('404') || msg.includes('not found') || msg.includes('모델')) {
-    return '❌ Gemini 모델을 찾을 수 없음! 지원되는 모델인지 확인하세요.' + detail;
-  }
-
-  // 콘텐츠 차단
-  if (msg.includes('blocked') || msg.includes('safety') || msg.includes('content policy')) {
-    return '🚫 Gemini 콘텐츠 정책 위반으로 차단됨! 프롬프트를 수정하세요.' + detail;
-  }
-
-  // 네트워크 연결 실패 (fetch 자체 실패)
-  if (msg.includes('fetch failed') || msg.includes('error fetching') ||
-      msg.includes('econnreset') || msg.includes('econnrefused') ||
-      msg.includes('enotfound') || msg.includes('eai_') ||
-      msg.includes('getaddrinfo') || msg.includes('network') ||
-      msg.includes('ssl') || msg.includes('certificate') || msg.includes('handshake')) {
-    return '🌐 네트워크 연결 실패! 인터넷 연결, 백신/방화벽, 회사 프록시 설정을 확인하세요.' + detail + captureGuide;
-  }
-
-  // API키 미설정
-  if (msg.includes('api 키가 설정되지') || msg.includes('api key')) {
-    return '⚙️ Gemini API키가 설정되지 않았습니다! 환경설정에서 API키를 입력하세요.' + detail;
-  }
-
-  // 그 외 — 원본 메시지를 잘리지 않고 풀 출력 + 캡처 안내
-  return `Gemini 오류 (분류 안 됨): ${rawMessage}` + captureGuide;
-}
-
-function fixUtf8Encoding(text: string): string {
-  if (!text) return text;
-
-  try {
-    // 방법 1: Buffer 사용 (Node.js 환경)
-    // 잘못된 인코딩으로 해석된 경우 복구 시도
-    const buffer = Buffer.from(text, 'latin1');
-    const utf8Text = buffer.toString('utf8');
-
-    // UTF-8로 디코딩한 결과가 유효한 한글을 포함하는지 확인
-    if (/[가-힣]/.test(utf8Text) && !utf8Text.includes('\ufffd')) {
-      console.log('[인코딩 수정] latin1 → utf8 변환 성공');
-      return utf8Text;
-    }
-  } catch (e) {
-    // 무시
-  }
-
-  try {
-    // 방법 2: 이중 인코딩된 경우 (UTF-8이 다시 UTF-8로 인코딩됨)
-    const decoded = decodeURIComponent(escape(text));
-    if (/[가-힣]/.test(decoded) && !decoded.includes('\ufffd')) {
-      console.log('[인코딩 수정] 이중 인코딩 복구 성공');
-      return decoded;
-    }
-  } catch (e) {
-    // 무시
-  }
-
-  // 원본 반환 (이미 UTF-8이면 변환 필요 없음)
-  return text;
 }
 
 // ✅ [2026-01-25] callOpenAI 함수 제거됨 - Perplexity로 대체
@@ -5865,7 +4974,7 @@ export async function generateStructuredContent(
               (window as any).appendLog(`⚠️ ${provider} 엔진이 프롬프트를 거부했습니다. 재시도합니다...`);
             }
             // ✅ 마지막 시도든 아니든 동일 provider로 재시도 (Gemini 폴백 제거)
-            extraInstruction = `\n⚠️ 이전 응답이 올바른 JSON이 아니었습니다. 반드시 { 로 시작하는 유효한 JSON만 출력하세요. 설명, 인사말, 마크다운 없이 오직 JSON 객체만 반환하세요.\n${extraInstruction}`;
+            extraInstruction = prependInvalidJsonResponseInstruction(extraInstruction);
             if (attempt < MAX_ATTEMPTS) {
               lastFailReason = `AI 거부 응답 (${raw.substring(0, 60)}...)`;
               continue;
@@ -5964,7 +5073,7 @@ export async function generateStructuredContent(
         if (attempt < MAX_ATTEMPTS) {
           console.log(`[시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}] 재시도 중... AI에게 더 엄격한 JSON 형식 요청`);
           // ✅ [v1.4.14] 30줄 → 3줄로 축약. 재시도 시 토큰 -90%
-          extraInstruction = `\n⚠️ JSON 파싱 실패 (시도 ${attempt + 1}). 반드시 { 로 시작 } 로 끝나는 유효 JSON만 출력. 마크다운/설명 금지. 모든 키-값 사이 콤마 필수.\n${extraInstruction}`;
+          extraInstruction = prependJsonParseRetryInstruction({ attempt, previousInstruction: extraInstruction });
           continue; // 다음 시도로
         } else {
           // 마지막 시도도 실패
@@ -6037,7 +5146,10 @@ export async function generateStructuredContent(
         console.warn(`[ContentGenerator] 중복/패턴 하드게이트 실패: ${errs}`);
         lastFailReason = `중복/패턴 감지: ${errs}`;
         // ✅ [v1.4.14] 5줄 → 1줄 축약
-        extraInstruction = `\n⚠️ 중복/패턴 감지: ${errs}. 반복 구조/문구 제거하고 다른 표현으로 재작성.\n${extraInstruction}`;
+        extraInstruction = prependDuplicatePatternRetryInstruction({
+          errors: errs,
+          previousInstruction: extraInstruction,
+        });
         continue;
       }
 
@@ -6050,7 +5162,7 @@ export async function generateStructuredContent(
         // ✅ 첫 번째 시도에서만 한 번 재시도 (속도와 품질 균형)
         if (attempt === 0) {
           console.warn(`[ContentGenerator] 검증 실패 (1회 재시도): ${validationErrors.slice(0, 2).join(', ')}`);
-          extraInstruction = `\n⚠️ 검증 오류 발생. 소제목 순서와 중복을 확인하고 다시 작성하세요.\n${extraInstruction}`;
+          extraInstruction = prependValidationRetryInstruction(extraInstruction);
           continue; // 한 번만 재시도
         }
 
@@ -6373,11 +5485,10 @@ export async function generateStructuredContent(
         console.warn(`[ContentGenerator] 🔄 Faithfulness 실패 — 재시도(attempt ${attempt}): ${platitudeReportRef.reason}`);
         lastFailReason = `Faithfulness 실패: ${platitudeReportRef.reason}`;
         const platitudeList = platitudeReportRef.matchedTriggers.slice(0, 5).join(', ');
-        extraInstruction = `\n⚠️ Faithfulness 강화 재생성:\n` +
-          `1. 일반론 어휘 (${platitudeList}) 사용 금지.\n` +
-          `2. 모든 사실 진술 단락 끝에 [자료] 인용 토큰 추가.\n` +
-          `3. [Article Content] 또는 <source>에 없는 수치/날짜/금액 작성 금지.\n` +
-          `4. 자료에 답이 없는 섹션은 "(자료 부족)" 표기 후 다음 섹션으로.\n${extraInstruction}`;
+        extraInstruction = prependFaithfulnessRetryInstruction({
+          matchedTriggers: platitudeList,
+          previousInstruction: extraInstruction,
+        });
         continue;
       }
 
@@ -6437,8 +5548,7 @@ export async function generateStructuredContent(
           console.warn(`[DistinctnessJudge] 🔁 섹션 중복 감지: ${verdict.reason}`);
           if (attempt < MAX_ATTEMPTS) {
             lastFailReason = `섹션 중복(시맨틱): ${verdict.reason}`;
-            extraInstruction = `\n⚠️ 섹션 중복 재생성: 각 H2(소제목)는 서로 다른 정보 단위를 담아야 합니다. `
-              + `같은 내용을 표현만 바꿔 반복하지 말고, 섹션마다 다른 구체 정보(장소·수치·방법·사례·비교 기준)를 넣으세요.\n${extraInstruction}`;
+            extraInstruction = prependSectionDistinctnessRetryInstruction(extraInstruction);
             continue;
           }
           // terminal: 재생성 기회 소진 → 갭 A와 동일하게 high 격상 + 옵트인 차단.
@@ -7079,31 +6189,13 @@ export async function generateStructuredContent(
       // - 2차 재시도: 1.40배 (40% 증가)
       lastFailReason = `글자수 미달: ${plainLength}자 / 목표 ${minChars}자 (${Math.round((plainLength / minChars) * 100)}%)`;
       console.warn(`[ContentGenerator] ⚠️ 시도 ${attempt + 1}: ${lastFailReason}`);
-      const targetChars = Math.min(
-        Math.round(requestedMinChars * (1 + attempt * 0.20)), // 재시도마다 20% 증가
-        SAFE_MAX_CHARS // 최대 80,000자
-      );
-      extraInstruction = `
-
-[REVISE REQUEST - URGENT - MANDATORY EXPANSION]
-- ⚠️ CRITICAL: 현재 본문 분량이 ${plainLength}자로 목표(${minChars}자)의 ${Math.round((plainLength / minChars) * 100)}%에 불과합니다. 이것은 불충분합니다.
-- ⚠️ REQUIREMENT: ${targetChars}자 목표로 확장해주세요.
-- ⚠️ EXPANSION STRATEGY:
-  * 각 소제목(heading) 섹션을 300-400자로 확장하세요
-  * 각 소제목당 2-3개의 문단을 작성하세요
-  * 각 문단은 80-120자 정도면 충분합니다
-  * 원본 자료·검색 결과에 이미 있는 사실의 배경, 이유, 맥락("왜")을 풀어 설명하세요
-  * 실용적인 팁과 적용 방법, 주의점을 구체적으로 설명하세요
-  * 자료에 있는 내용 범위 안에서 비교 분석이나 대안을 제시하세요
-  * ⛔ 자료에 없는 통계·수치·연구 결과·전문가 인용·경험담을 만들어 추가하는 것은 절대 금지입니다 (분량보다 사실성이 우선)
-- ⚠️ QUALITY REQUIREMENT: 가치 있는 정보로만 확장하세요:
-  * 같은 내용 반복 금지
-  * 의미 없는 문장 추가 금지
-  * 억지로 글자수만 늘리는 것 금지
-  * 구체적이고 실용적인 정보만 추가
-- ⚠️ STRUCTURE REQUIREMENT: 본문을 확장할 때는 중간 섹션(본문 내용)을 확장하세요. 결론(headings 배열의 마지막 소제목)에 해당하는 본문을 작성한 후에는 즉시 멈추세요. 결론 후에는 어떤 내용도 추가하지 마세요.
-- ⚠️ CHARACTER COUNT VERIFICATION: 확장 후 반드시 본문의 한글 글자수를 세어보세요. ${targetChars}자 이상이 되어야 합니다.
-`;
+      extraInstruction = buildContentExpansionRetryInstruction({
+        plainLength,
+        minChars,
+        requestedMinChars,
+        attempt,
+        safeMaxChars: SAFE_MAX_CHARS,
+      });
 
     } catch (error) {
       // 오류 처리
@@ -7224,4 +6316,3 @@ export async function generateContentsInParallel(
 
   return results;
 }
-

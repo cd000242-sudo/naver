@@ -15,6 +15,7 @@ import * as os from 'os';
 import { promises as fs } from 'fs';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
 import { emitSessionEvent } from './session/sessionEventLogger.js';
+import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 
 // ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
 // 기본 설정에서 일부 모듈(chrome.csi 등)이 비활성화되어 있을 수 있으므로 명시적으로 설정
@@ -243,26 +244,6 @@ class BrowserSessionManager {
     }
 
     /**
-     * Chrome 실행 파일 찾기
-     */
-    private findChromeExecutable(): string | null {
-        const possiblePaths = [
-            'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-            'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-            process.env.LOCALAPPDATA + '\\Google\\Chrome\\Application\\chrome.exe',
-        ];
-
-        for (const chromePath of possiblePaths) {
-            try {
-                if (require('fs').existsSync(chromePath)) {
-                    return chromePath;
-                }
-            } catch { }
-        }
-        return null;
-    }
-
-    /**
      * 세션 가져오기 또는 생성
      */
     async getOrCreateSession(accountId: string, headless: boolean = false, accountProxyUrl?: string): Promise<SessionInfo> {
@@ -381,7 +362,7 @@ class BrowserSessionManager {
         await this.ensurePasswordManagerDisabled(profileDir);
 
         const profile = this.getAccountConsistentProfile(accountId);
-        const chromeExecutablePath = this.findChromeExecutable();
+        const chromeExecutablePath = findChromeExecutable() || null;
         // ✅ [2026-05-25 v2.10.357 P1] Chrome 폴백 명시 로그 — Phase A2 진단 발견
         //   findChromeExecutable() === null이면 Puppeteer 번들 Chromium 폴백 → stealth UA 버전이
         //   실제 시스템 Chrome과 달라져 fingerprint 불일치 재발. 그동안 silent fallback이어서 추적 불가.

@@ -17,6 +17,7 @@ function read(rel: string): string {
  */
 describe('publish confirmation integrity (R11)', () => {
   const code = read('naverBlogAutomation.ts');
+  const publishHelpers = read('automation/publishHelpers.ts');
 
   it('A-3: missing publish button throws instead of silently saving a draft', () => {
     expect(code).toMatch(/PUBLISH_BUTTON_NOT_FOUND/);
@@ -31,6 +32,19 @@ describe('publish confirmation integrity (R11)', () => {
   it('A-4: unconfirmed publishes are never blind-retried (double-publish guard)', () => {
     const fatalBlock = code.slice(code.indexOf('const fatalErrors'), code.indexOf('isFatalError'));
     expect(fatalBlock).toMatch(/PUBLISH_UNCONFIRMED/);
+    expect(fatalBlock).toMatch(/PUBLISH_MODAL_NOT_OPENED/);
     expect(fatalBlock).toMatch(/CATEGORY_NOT_FOUND/);
+  });
+
+  it('A-2: publish modal open failure stops before category/confirm stages', () => {
+    const modalFailureBlock = code.slice(code.indexOf('if (!modalOpened)'), code.indexOf('// ✅ [2026-02-17] 발행 모달 DOM 덤프'));
+    expect(modalFailureBlock).toMatch(/PUBLISH_MODAL_NOT_OPENED/);
+    expect(modalFailureBlock).toMatch(/throw new Error/);
+    expect(code).not.toMatch(/발행 모달 열기 3회 시도 모두 실패[\s\S]{0,200}카테고리 선택 건너뜀 가능'\);\s*\}/);
+  });
+
+  it('A-3: helper module does not keep a second stale immediate-publish implementation', () => {
+    expect(publishHelpers).not.toMatch(/export\s+async\s+function\s+publishBlogPost\b/);
+    expect(publishHelpers).not.toMatch(/saveButtonSelectors[\s\S]{0,4000}findFirstMatchingSelector/);
   });
 });

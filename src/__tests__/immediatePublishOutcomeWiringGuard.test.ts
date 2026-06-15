@@ -15,8 +15,14 @@ describe('immediate publish outcome wiring guard', () => {
   });
 
   it('uses the shared publish outcome resolver instead of ad hoc URL checks', () => {
-    expect(source).toContain("import { resolveImmediatePublishOutcome } from './automation/publishOutcomeResolver'");
+    expect(source).toContain("} from './automation/publishOutcomeResolver'");
+    expect(source).toContain('isNaverEditorUrl,');
+    expect(source).toContain('formatPublishGuardLog,');
     expect(source).toContain('const outcome = resolveImmediatePublishOutcome({');
     expect(source).toContain('throw new Error(`[${outcome.code}] ${outcome.message}`)');
+    expect(source).toContain('this.publishedUrl = resolvePublishedUrlAfterOutcome(this.publishedUrl, outcome)');
+    expect(source).toContain('const guardLog = formatPublishGuardLog(outcome, this.publishedUrl)');
+    expect(source).not.toContain("!afterUrl.includes('GoBlogWrite')");
+    expect(source).not.toContain("!afterUrl.includes('blogPostWrite')");
   });
 });

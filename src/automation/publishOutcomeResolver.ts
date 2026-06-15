@@ -1,4 +1,8 @@
 import { classifyPublishFailure, type PublishFailureCode } from './publishFailureClassifier.js';
+import {
+  isNaverBlogDomainUrl,
+  isNaverWriteEditorUrl,
+} from './editorUrlState.js';
 
 export interface PublishStatusSnapshot {
   success?: boolean;
@@ -44,17 +48,11 @@ function isSameUrl(left: string, right: string): boolean {
 }
 
 export function isNaverEditorUrl(value: string): boolean {
-  return /(GoBlogWrite|blogPostWrite|PostWriteForm|SmartEditor|NaverWriteEditor)/i.test(value);
+  return isNaverWriteEditorUrl(value);
 }
 
 export function isNaverBlogUrl(value: string): boolean {
-  try {
-    const parsed = new URL(value);
-    const hostname = parsed.hostname.toLowerCase();
-    return hostname === 'blog.naver.com' || hostname === 'm.blog.naver.com';
-  } catch {
-    return /^https?:\/\/m?\.?blog\.naver\.com\//i.test(value);
-  }
+  return isNaverBlogDomainUrl(value);
 }
 
 export function isConcreteNaverBlogPostUrl(value: string): boolean {
@@ -141,4 +139,26 @@ export function resolveImmediatePublishOutcome(input: ImmediatePublishOutcomeInp
   }
 
   return failure('publish navigation timeout: no post URL or success message was confirmed');
+}
+
+export function resolvePublishedUrlAfterOutcome(
+  currentPublishedUrl: string | null | undefined,
+  outcome: ImmediatePublishOutcome,
+): string | null {
+  if (!outcome.success) {
+    return normalizeUrl(currentPublishedUrl);
+  }
+
+  return normalizeUrl(outcome.url) || normalizeUrl(currentPublishedUrl);
+}
+
+export function formatPublishGuardLog(
+  outcome: ImmediatePublishOutcome,
+  resolvedPublishedUrl: string | null | undefined,
+): string | null {
+  if (!outcome.success || !outcome.needsManualUrlCheck) {
+    return null;
+  }
+
+  return `[PublishGuard] outcome=${outcome.reason}, url=${normalizeUrl(outcome.url) || normalizeUrl(resolvedPublishedUrl) || '(none)'}`;
 }

@@ -100,6 +100,7 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
 
   describe('Gemini 캐싱 — 무료/유료 구분 없음 + 자동 학습', () => {
     const content = read('contentGenerator.ts');
+    const cacheStreamFallback = read('contentGeminiCacheStreamFallback.ts');
 
     it('cacheEnabled 조건이 "paid 플랜 한정"으로 하드코딩되지 않음', () => {
       // 4/18 장애 원인이었던 false && 패턴이 남아있지 않음
@@ -109,15 +110,20 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     });
 
     it('isCacheSupportedForKey 기반 세션 학습 구조 사용', () => {
-      expect(content).toMatch(/isCacheSupportedForKey\s*\(\s*trimmedKey\s*\)/);
+      expect(content).toMatch(/isGeminiCacheSupportedForKey\s*\(\s*trimmedKey\s*\)/);
     });
 
     it('markCacheUnsupported 실패 기록 로직 존재', () => {
-      expect(content).toMatch(/function\s+markCacheUnsupported/);
+      expect(content).toMatch(/markGeminiCacheUnsupported\s*\(\s*trimmedKey/);
+      expect(read('contentGeminiCacheSupportRegistry.ts')).toMatch(/function\s+markGeminiCacheUnsupported/);
     });
 
     it('캐시 호출 실패 시 일반 모델 재시도 보호막 존재', () => {
-      expect(content).toMatch(/invokeStream[\s\S]{0,800}generateContentStream[\s\S]{0,400}markCacheUnsupported/);
+      expect(content).toMatch(/invokeGeminiStreamWithCacheFallback/);
+      expect(cacheStreamFallback).toMatch(/generateContentStream\(requestConfig\)/);
+      expect(cacheStreamFallback).toMatch(/markUnsupported\(apiKey,\s*`stream:/);
+      expect(cacheStreamFallback).toMatch(/deletePromptCache\(getGeminiPromptCacheKey\(systemText,\s*modelName\)\)/);
+      expect(cacheStreamFallback).toMatch(/systemInstruction:\s*\{\s*role:\s*'system'/);
     });
 
     it('GEMINI_CACHE_DISABLED ENV 비상 탈출구 유지', () => {
@@ -126,7 +132,11 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
 
     it('Gemini cache is opt-in to avoid a hidden extra API request before content generation', () => {
       expect(content).toMatch(/GEMINI_CACHE_ENABLED/);
-      expect(content).toMatch(/cacheOptInEnv\s*\n?\s*&&\s*!cacheDisabledEnv/);
+      expect(content).toMatch(/resolveGeminiPromptCacheEligibility/);
+      const eligibility = read('contentGeminiCacheEligibility.ts');
+      expect(eligibility).toMatch(/cacheDisabledEnv\s*===\s*'1'/);
+      expect(eligibility).toMatch(/cacheEnabledEnv\s*!==\s*'1'/);
+      expect(eligibility).toMatch(/env-opt-in-missing/);
     });
   });
 

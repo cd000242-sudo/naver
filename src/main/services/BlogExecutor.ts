@@ -696,9 +696,9 @@ export async function runFullPostCycle(
             AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — 이미지 처리 후 갱신
         } catch (imageError) {
             const imgMsg = (imageError as Error).message || '이미지 처리 중 알 수 없는 오류';
-            Logger.error('[BlogExecutor] ⚠️ 이미지 처리 실패 — 이미지 없이 발행 계속', imageError as Error);
-            sendLog(`⚠️ 이미지 처리 실패: ${imgMsg.substring(0, 100)} — 이미지 없이 발행을 계속합니다.`);
-            processedImages = [];
+            Logger.error('[BlogExecutor] 이미지 처리 실패 — 발행 중단', imageError as Error);
+            sendLog(`⚠️ 이미지 처리 실패: ${imgMsg.substring(0, 100)} — 이미지 없이 발행하지 않고 중단합니다.`);
+            throw new Error(`IMAGE_PROCESSING_FAILED:${imgMsg}`);
         }
 
         // 8. 취소 체크 (이미지 처리 후 재확인)

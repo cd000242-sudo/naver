@@ -73,6 +73,11 @@ describe('classifyPublishFailure', () => {
       userActionRequired: true,
     });
 
+    expect(classifyPublishFailure('IMAGE_PROCESSING_FAILED: failed to copy local image file')).toMatchObject({
+      code: 'IMAGE_REJECTED',
+      userActionRequired: true,
+    });
+
     expect(classifyPublishFailure('이미지 업로드 실패: 이미지 용량이 네이버 제한을 초과했습니다')).toMatchObject({
       code: 'IMAGE_REJECTED',
       userActionRequired: true,

@@ -43,6 +43,7 @@ describe('Phase 7.4 characterization - contentGenerator public surface', () => {
     const reExportedFunctions = new Set([
       'stripInternalMarkers',
       'removeOrdinalHeadingLabelsFromBody',
+      'buildGeminiModelChain',
     ]);
 
     for (const name of exportedFunctions) {
@@ -124,13 +125,50 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
     const titleHelpers = read('src', 'automation', 'editorTitleHelpers.ts');
 
     expectAll(automation, [
+      "from './automation/accountProfilePolicy.js'",
+      "from './automation/chromeExecutablePolicy.js'",
+      'hashAutomationAccountId(this.options.naverId)',
+      'buildNaverAutomationProfile(this.options.naverId, envHint)',
+      'isDeviceConfirmUrl(page.url())',
+      'isDeviceConfirmBodyText(text)',
       'GoBlogWrite.naver',
       'PostWriteForm',
       'manual login detected on blog domain; moving to write editor',
       'findEditorTitleInputElement(frame, page, 60000',
+      'shouldRetryEditorReadiness(snapshot)',
+      '에디터 프레임은 열렸지만 내부 문서가 비어 있습니다',
       'collectEditorTitleDiagnostics(frame, page)',
       'setTitleByDomEvent(titleElement, titleText)',
     ]);
+
+    expect(automation).not.toContain('private async findTitleInputElement(');
+    expect(automation).not.toContain('private async readEditorTitleText(');
+    expect(automation).not.toContain('private async setTitleByDomEvent(');
+    expect(automation).not.toContain('private async collectEditorTitleDiagnostics(');
+    expect(automation).not.toContain('private async verifyImageInDOM(');
+    expect(automation).not.toContain('private async findElement(');
+    expect(automation).not.toContain('private async findNextBodyElement(');
+    expect(automation).not.toContain('private async debugPublishModal(');
+    expect(automation).not.toContain('private async insertImageViaUploadButton(');
+    expect(automation).not.toContain('private async setImageSizeToDocumentWidth(');
+    expect(automation).not.toContain('private async insertSingleImage(');
+    expect(automation).not.toContain('private async insertImages(');
+    expect(automation).not.toContain('private generateAltWithSource(');
+    expect(automation).not.toContain('private async applyCaption(');
+    expect(automation).not.toContain('private async insertCtaHtmlAtTop(');
+    expect(automation).not.toContain('private async insertCtaHtmlInMiddle(');
+    expect(automation).not.toContain('private async insertCtaHtmlAtBottom(');
+    expect(automation).toContain('return await ctaHelpers.insertEnhancedCta(');
+    expect(automation).not.toContain('🔗 [이전글] 같은 카테고리 이전글 삽입 중');
+    expect(automation).toContain('await imageHelpers.applyDocumentWidthToAllImagesBeforePublish(this, frame)');
+    expect(automation).not.toContain('private hashAccountId(');
+    expect(automation).not.toContain('private stripRepeatedHookBlocks(');
+    expect(automation).not.toContain('private enforceOrdinalLineBreaks(');
+    expect(automation).not.toContain('private isDeviceConfirmUrl(');
+    expect(automation).not.toContain('private findChromeExecutable(');
+    expect(automation).not.toContain('private validateScheduleDate(');
+    expect(automation).toContain('return editorHelpers.extractBodyForHeading(');
+    expect(automation).not.toContain('heading.content에서 직접 추출 성공');
 
     expectAll(titleHelpers, [
       'export async function findEditorTitleInputElement',
@@ -144,15 +182,37 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
       "'page.editor.documentTitle'",
       "target.dispatchEvent(new InputEvent('input'",
     ]);
+
+    const editorHelpers = read('src', 'automation', 'editorHelpers.ts');
+    expectAll(editorHelpers, [
+      "from './bodyTextCleanupPolicy.js'",
+      'stripRepeatedHookBlocks(structured.bodyPlain)',
+      'enforceOrdinalLineBreaks(structured.bodyPlain)',
+      'stripRepeatedHookBlocks(cleanedContent)',
+      'enforceOrdinalLineBreaks(cleanedContent)',
+    ]);
+
+    const imageHelpers = read('src', 'automation', 'imageHelpers.ts');
+    expectAll(imageHelpers, [
+      'export async function applyDocumentWidthToAllImagesBeforePublish',
+      "recordSilentFailure('image:width-apply')",
+      '이미지 문서 너비 적용 중 오류',
+    ]);
   });
 
   it('keeps run options that carry hashtags, previous-post links, CTA placement, and thumbnail text', () => {
     const automation = read('src', 'naverBlogAutomation.ts');
+    const runOptionsPolicy = read('src', 'automation', 'runOptionsPolicy.ts');
     const fullAuto = read('src', 'renderer', 'modules', 'fullAutoFlow.ts');
     const publishingHandlers = read('src', 'renderer', 'modules', 'publishingHandlers.ts');
 
     expectAll(automation, [
-      'const hashtags = normalizeHashtags(',
+      'return resolveNaverRunOptions({',
+      'defaults: this.options',
+    ]);
+
+    expectAll(runOptionsPolicy, [
+      'normalizePublishHashtags(runOptions.hashtags, structured?.hashtags)',
       "ctaPosition: runOptions.ctaPosition || 'bottom'",
       'includeThumbnailText: runOptions.includeThumbnailText || false',
       'previousPostTitle: runOptions.previousPostTitle',
@@ -188,5 +248,25 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
       'expectedLinkCardMin',
       'expectedDividerMin',
     ]);
+  });
+
+  it('keeps publishHelpers scoped to active category and schedule helper ownership', () => {
+    const publishHelpers = read('src', 'automation', 'publishHelpers.ts');
+
+    expect(publishHelpers).toContain('export async function publishScheduled');
+    expect(publishHelpers).toContain("from './scheduleDatePolicy.js'");
+    expect(publishHelpers).toContain('validateScheduleDate(scheduleDate)');
+    expect(publishHelpers).not.toContain('export async function publishBlogPost');
+    expect(publishHelpers).not.toMatch(/\bfindElement,\s*\n/);
+    expect(publishHelpers).not.toMatch(/\bwaitForElement,\s*\n/);
+    expect(publishHelpers).not.toMatch(/\bgetSelectorStrings,\s*\n/);
+  });
+
+  it('keeps file-cookie restore wired in the fallback browser startup path', () => {
+    const automation = read('src', 'naverBlogAutomation.ts');
+
+    expect(automation).toMatch(
+      /this\.page\s*=\s*await\s+this\.browser\.newPage\(\);[\s\S]{0,900}?await\s+this\.loadCookies\(\);/,
+    );
   });
 });

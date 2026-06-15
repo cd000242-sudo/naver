@@ -7,27 +7,24 @@
  * 비용 실측 없이 순수 로직만 검증 — API 호출 없음
  */
 import { describe, it, expect, beforeEach } from 'vitest';
-import * as crypto from 'crypto';
+import {
+  apiKeyFingerprint,
+  isStructuralGeminiCacheError,
+} from '../contentGeminiCachePolicy';
+import {
+  clearGeminiCacheUnsupportedKeys as resetUnsupportedKeys,
+  isGeminiCacheSupportedForKey as isCacheSupportedForKey,
+  markGeminiCacheUnsupported,
+} from '../contentGeminiCacheSupportRegistry';
 
 // ====== 테스트 대상 로직 재구현 (contentGenerator.ts의 로직과 동일) ======
-const geminiCacheUnsupportedKeys = new Set<string>();
-
-function apiKeyFingerprint(key: string): string {
-  return crypto.createHash('sha256').update(key).digest('hex').substring(0, 12);
-}
 function markCacheUnsupported(apiKey: string): void {
-  geminiCacheUnsupportedKeys.add(apiKeyFingerprint(apiKey));
-}
-function isCacheSupportedForKey(apiKey: string): boolean {
-  return !geminiCacheUnsupportedKeys.has(apiKeyFingerprint(apiKey));
-}
-function resetUnsupportedKeys(): void {
-  geminiCacheUnsupportedKeys.clear();
+  markGeminiCacheUnsupported(apiKey, 'test');
 }
 
 // 구조적 에러 분류 (contentGenerator.ts와 동일 regex)
 function isStructuralCacheError(errMsg: string): boolean {
-  return /403|forbidden|400|not\s+support|not\s+available|cached.*content/i.test(errMsg);
+  return isStructuralGeminiCacheError(errMsg);
 }
 
 describe('v1.4.77 — Gemini 캐시 자동 학습', () => {
