@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ZoomableImage from '../components/ZoomableImage';
 
 const FEATURE_CARDS = [
-    { title: '두 플랫폼을 한 화면에서', desc: 'Blogger API와 WordPress REST API 기반 발행 흐름을 같은 제품 안에서 관리합니다.' },
+    { title: '세 플랫폼을 한 화면에서', desc: 'Blogger API, WordPress REST API, Tistory 브라우저 발행 흐름을 같은 제품 안에서 관리합니다.' },
     { title: '콘텐츠 모드 분리', desc: 'SEO, 애드센스, 쇼핑, 내부링크, 페러프레이징 목적에 맞춰 글 구조를 나눕니다.' },
     { title: '이미지 흐름까지 포함', desc: '썸네일, H2 이미지, URL 이미지 수집, CTA 배너를 발행 흐름 안에서 함께 봅니다.' },
     { title: '연속 발행 대기열', desc: '여러 키워드를 한 번에 넣고 진행, 대기, 실패 상태를 순차적으로 확인합니다.' },
@@ -13,7 +13,7 @@ const FLOW_STEPS = [
     ['01', 'Keyword', '키워드 또는 URL을 입력하고 콘텐츠 방향을 잡습니다.'],
     ['02', 'Generate', '본문, 제목, FAQ, CTA 구간을 생성합니다.'],
     ['03', 'Image', '썸네일과 본문 이미지를 생성하거나 수집합니다.'],
-    ['04', 'Publish', '블로그스팟 또는 워드프레스로 순차 발행합니다.'],
+    ['04', 'Publish', '블로그스팟, 워드프레스, 티스토리로 순차 발행합니다.'],
     ['05', 'Link', '종합글과 하위글을 내부링크로 연결합니다.'],
     ['06', 'Traffic', '발행글 기반 외부유입 문안을 만듭니다.'],
 ];
@@ -21,7 +21,7 @@ const FLOW_STEPS = [
 const SCREENSHOTS = [
     ['키워드 입력', '/images/orbit/orbit-smart-keyword.png', '본문 모드, 이미지 엔진, CTA 설정까지 함께 확인'],
     ['연속 발행', '/images/orbit/orbit-sequential-queue.png', '여러 키워드를 순서대로 처리하고 상태를 추적'],
-    ['플랫폼 연동', '/images/orbit/orbit-platform-settings.png', 'Blogger와 WordPress 연결 정보를 한 화면에서 확인'],
+    ['플랫폼 연동', '/images/orbit/orbit-platform-settings.png', 'Blogger, WordPress, Tistory 연결 정보를 한 화면에서 확인'],
     ['외부유입 생성', '/images/orbit/orbit-external-traffic.png', '공개 글을 기준으로 채널별 보조 문안 생성'],
     ['내부링크', '/images/orbit/orbit-spider-links.png', '종합글과 하위글을 연결하는 거미줄 구조'],
     ['이미지 도구', '/images/orbit/leadernam-orbit-download.png', '썸네일, 배너, 발행용 이미지 흐름 보조'],
@@ -35,7 +35,7 @@ const TRAFFIC_SHOTS = [
 ];
 
 const PERSONAS = [
-    '블로그스팟이나 워드프레스를 보조 채널로 키우려는 분',
+    '블로그스팟, 워드프레스, 티스토리를 보조 채널로 키우려는 분',
     '네이버블로그 외부유입 동선을 함께 만들고 싶은 분',
     '애드센스형 정보 글과 제휴 글을 반복 운영하는 분',
     '종합글, 하위글, 보조 글을 역할별로 나누고 싶은 분',
@@ -44,8 +44,8 @@ const PERSONAS = [
 ];
 
 const FAQS = [
-    ['Leaders Orbit은 어떤 제품인가요?', '블로그스팟과 워드프레스 발행을 중심으로 본문 생성, 이미지, CTA, 내부링크, 외부유입 문안 흐름을 지원하는 자동화 제품입니다.'],
-    ['네이버블로그 자동화와 다른 점은 무엇인가요?', '네이버 자동화는 네이버 채널 운영에 초점을 두고, Orbit은 블로그스팟·워드프레스 기반 보조 콘텐츠와 외부유입 동선에 초점을 둡니다.'],
+    ['Leaders Orbit은 어떤 제품인가요?', '블로그스팟, 워드프레스, 티스토리 발행을 중심으로 본문 생성, 이미지, CTA, 내부링크, 외부유입 문안 흐름을 지원하는 자동화 제품입니다.'],
+    ['네이버블로그 자동화와 다른 점은 무엇인가요?', '네이버 자동화는 네이버 채널 운영에 초점을 두고, Orbit은 블로그스팟·워드프레스·티스토리 기반 보조 콘텐츠와 외부유입 동선에 초점을 둡니다.'],
     ['상위노출이나 수익을 보장하나요?', '아닙니다. 검색 결과와 수익은 키워드, 콘텐츠 품질, 도메인 상태, 운영 기간, 플랫폼 정책에 따라 달라집니다.'],
     ['어떤 정보를 먼저 보내면 좋나요?', '사용 PC 환경, 운영 중인 플랫폼, 연결하려는 계정 수, 필요한 기능 범위를 먼저 알려주시면 확인이 빠릅니다.'],
 ];
@@ -82,7 +82,7 @@ function Shot({ title, src, alt, desc, wide = false }: ShotProps) {
 function OrbitPage() {
     useEffect(() => {
         const prev = document.title;
-        document.title = 'Leaders Orbit — 블로그스팟·워드프레스 자동화';
+        document.title = 'Leaders Orbit — 블로그스팟·워드프레스·티스토리 자동화';
         return () => { document.title = prev; };
     }, []);
 
@@ -93,7 +93,7 @@ function OrbitPage() {
                     <div>
                         <p className="orbit-kicker">GLOBAL PUBLISHER</p>
                         <h1>Leaders Orbit</h1>
-                        <p className="hero-subtitle">블로그스팟·워드프레스를 한 화면에서 운영하는 글로벌 블로그 자동화</p>
+                        <p className="hero-subtitle">블로그스팟·워드프레스·티스토리를 한 화면에서 운영하는 글로벌 블로그 자동화</p>
                         <p className="hero-copy">
                             키워드 입력, 본문 생성, 이미지 수집, 썸네일과 H2 이미지, CTA 배치, 발행, 내부링크,
                             외부유입 문안까지 실제 운영자가 반복해서 하던 흐름을 하나의 제품 안에 묶었습니다.
@@ -111,7 +111,7 @@ function OrbitPage() {
                     />
                 </div>
                 <div className="orbit-wrap metric-row">
-                    <article><b>2 Platforms</b><span>Blogger API + WordPress REST</span></article>
+                    <article><b>3 Platforms</b><span>Blogger API + WordPress REST + Tistory</span></article>
                     <article><b>5 Modes</b><span>SEO, 애드센스, 쇼핑, 내부링크, 페러프레이징</span></article>
                     <article><b>Images</b><span>썸네일, 본문 이미지, CTA 배너 흐름</span></article>
                     <article><b>Traffic</b><span>발행글 기반 외부유입 문안 생성</span></article>
@@ -123,7 +123,7 @@ function OrbitPage() {
                     <p className="orbit-kicker">WHY IT MATTERS</p>
                     <h2>글을 많이 쓰는 것보다 중요한 건, 글이 서로 이어지는 구조입니다</h2>
                     <p className="section-lead">
-                        블로그스팟과 워드프레스는 외부유입, 보조 콘텐츠, 애드센스형 글, 제휴 글을 운영하기 좋지만
+                        블로그스팟, 워드프레스, 티스토리는 외부유입, 보조 콘텐츠, 애드센스형 글, 제휴 글을 운영하기 좋지만
                         설정과 발행 흐름이 흩어지면 매번 처음부터 다시 세팅하게 됩니다.
                     </p>
                     <div className="feature-grid">
@@ -163,7 +163,7 @@ function OrbitPage() {
                             썸네일 엔진, CTA, 말투, 제목 옵션을 발행 흐름 안에서 같이 다룹니다.
                         </p>
                         <ul className="check-list">
-                            <li>Blogger와 WordPress 발행 흐름을 같은 화면에서 선택</li>
+                            <li>Blogger, WordPress, Tistory 발행 흐름을 같은 화면에서 선택</li>
                             <li>키워드 기반, URL 기반, 이미지 기반 글 생성 흐름 지원</li>
                             <li>본문 모드와 이미지 정책을 발행 전 한 번에 확인</li>
                             <li>대기열에 들어간 글을 1개씩 순차 처리해 실패 지점을 추적</li>
@@ -181,12 +181,12 @@ function OrbitPage() {
             <section className="orbit-section dark">
                 <div className="orbit-wrap">
                     <p className="orbit-kicker">PLATFORM CONNECTION</p>
-                    <h2>블로그스팟과 워드프레스 연결 방식은 다르지만, 발행 경험은 하나로 맞췄습니다</h2>
+                    <h2>블로그스팟, 워드프레스, 티스토리 연결 방식은 다르지만, 발행 경험은 하나로 맞췄습니다</h2>
                     <p className="section-lead">
-                        Blogger는 Google 계정 인증과 Blog ID를 기준으로, WordPress는 REST API와 Application Password를 기준으로 연결합니다.
+                        Blogger는 Google 계정 인증과 Blog ID를 기준으로, WordPress는 REST API와 Application Password를 기준으로, Tistory는 로그인 세션과 브라우저 발행 흐름을 기준으로 연결합니다.
                     </p>
                     <div className="split-gallery">
-                        <Shot title="Platform Settings" src="/images/orbit/orbit-platform-settings.png" alt="블로그스팟 워드프레스 플랫폼 연결 설정 화면" desc="플랫폼 연결, 인증 상태, 발행 대상 정보를 한 화면에서 확인" />
+                        <Shot title="Platform Settings" src="/images/orbit/orbit-platform-settings.png" alt="블로그스팟 워드프레스 티스토리 플랫폼 연결 설정 화면" desc="플랫폼 연결, 인증 상태, 발행 대상 정보를 한 화면에서 확인" />
                         <Shot title="Blogspot Output" src="/images/orbit/orbit-blogspot.png" alt="블로그스팟 공개 발행글 화면" desc="발행 후 공개 URL에서 본문, CTA, FAQ 구간을 확인" />
                     </div>
                 </div>
@@ -258,12 +258,12 @@ function OrbitPage() {
                     <p className="orbit-kicker">LEADERS PRO ECOSYSTEM</p>
                     <h2>Leaders Orbit은 리더스 프로 올인원 흐름 안에서 더 강해집니다</h2>
                     <p className="section-lead">
-                        LEWORD로 키워드를 찾고, 네이버 자동화로 핵심 채널을 운영하고, Leaders Orbit으로 블로그스팟·워드프레스 보조 동선을 만듭니다. 기간제 구매자는 올인원 코드 1개로 세 제품을 함께 이용합니다.
+                        LEWORD로 키워드를 찾고, 네이버 자동화로 핵심 채널을 운영하고, Leaders Orbit으로 블로그스팟·워드프레스·티스토리 보조 동선을 만듭니다. 기간제 구매자는 올인원 코드 1개로 세 제품을 함께 이용합니다.
                     </p>
                     <div className="logo-wall">
                         <article><img src="/images/orbit/leword-logo.svg" alt="LEWORD 로고" /><b>LEWORD</b><p>검색량, 문서수, 경쟁비율을 보고 키워드 후보를 발굴합니다.</p></article>
                         <article><img src="/images/orbit/leaders-pro-logo.png" alt="리더스 프로 로고" /><b>네이버 자동화</b><p>계정별 대기열, 발행 간격, 콘텐츠 모드를 관리합니다.</p></article>
-                        <article><img src="/images/orbit/orbit-logo.png" alt="Leaders Orbit 로고" /><b>Leaders Orbit</b><p>블로그스팟과 워드프레스로 외부유입 보조 글을 발행합니다.</p></article>
+                        <article><img src="/images/orbit/orbit-logo.png" alt="Leaders Orbit 로고" /><b>Leaders Orbit</b><p>블로그스팟, 워드프레스, 티스토리로 외부유입 보조 글을 발행합니다.</p></article>
                     </div>
                     <div className="split-gallery">
                         <Shot title="LEWORD Keywords" src="/images/orbit/orbit-leword-keywords.png" alt="LEWORD 최신 키워드 발굴 화면" desc="키워드 출발점은 LEWORD에서 잡고" />
@@ -286,7 +286,7 @@ function OrbitPage() {
                             <li><b>종합글</b><span>다이어트 식단 시작 전 알아야 할 구성 원칙</span></li>
                             <li><b>하위글</b><span>직장인 식단, 저녁 식단, 도시락 식단처럼 세부 글 분리</span></li>
                             <li><b>내부링크</b><span>종합글에서 하위글로, 하위글에서 다시 종합글로 이동</span></li>
-                            <li><b>외부유입</b><span>블로그스팟·워드프레스 보조 글로 메인 콘텐츠 진입 보완</span></li>
+                            <li><b>외부유입</b><span>블로그스팟·워드프레스·티스토리 보조 글로 메인 콘텐츠 진입 보완</span></li>
                         </ol>
                     </div>
                 </div>
@@ -329,7 +329,7 @@ function OrbitPage() {
             <section className="orbit-final">
                 <div className="orbit-wrap">
                     <p className="orbit-kicker">LEADERS ORBIT</p>
-                    <h2>블로그스팟·워드프레스를 보조 채널이 아니라 운영 동선으로 쓰고 싶다면</h2>
+                    <h2>블로그스팟·워드프레스·티스토리를 보조 채널이 아니라 운영 동선으로 쓰고 싶다면</h2>
                     <p>
                         운영 중인 블로그 플랫폼, 연결하려는 계정 수, 필요한 자동화 범위를 보내주세요.
                         Leaders Pro 올인원 흐름 안에서 어떤 방식으로 쓰는 것이 맞는지 안내할 수 있습니다. 개별 구매가 필요하면 영구제만 별도 문의로 가능합니다.
