@@ -2678,8 +2678,26 @@ ipcMain.handle('automation:syncImageManager', async (_event, imageMapData: Recor
 });
 
 // ✅ 브라우저 세션 종료 핸들러
-ipcMain.handle('automation:closeBrowser', async () => {
+ipcMain.handle('automation:closeBrowser', async (_event, naverId?: string) => {
   try {
+    const normalizedId = String(naverId || '').trim().toLowerCase();
+    if (normalizedId) {
+      sendLog('🛑 발행 복구를 위해 해당 계정의 브라우저 세션만 정리합니다.');
+      await AutomationService.closeSession(normalizedId).catch(() => undefined);
+
+      const legacyAutomation = automationMap.get(normalizedId);
+      if (legacyAutomation) {
+        await legacyAutomation.closeBrowser().catch(() => undefined);
+        automationMap.delete(normalizedId);
+        if (automation === legacyAutomation) {
+          automation = null;
+        }
+      }
+      return { success: true };
+    }
+
+    await AutomationService.closeAllSessions().catch(() => undefined);
+
     if (automation || automationMap.size > 0) {
       sendLog('🛑 모든 브라우저 세션을 명시적으로 종료합니다.');
 

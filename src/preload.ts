@@ -77,7 +77,7 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('automation:resetImageState'),
   abortImageGeneration: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('automation:abortImageGeneration'),
-  closeBrowser: () => ipcRenderer.invoke('automation:closeBrowser'), // ✅ 추가
+  closeBrowser: (naverId?: string) => ipcRenderer.invoke('automation:closeBrowser', naverId), // ✅ 추가
   launchLeword: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('leword:launch'), // ✅ LEWORD 황금키워드 앱 실행
   freeActivate: (userInfo?: { email: string; nickname: string; phone: string }): Promise<{ success: boolean; message?: string }> =>

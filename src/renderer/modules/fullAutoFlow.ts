@@ -181,6 +181,11 @@ function clearFullAutoContentRetryCache() {
     catch {
     }
 }
+function isExplicitImageManagementSource(formData) {
+    return formData.imageSource === 'image-management' ||
+        formData.imageSource === 'saved' ||
+        formData.imageSource === 'local-folder';
+}
 if (typeof window !== 'undefined') {
     window.getFullAutoContentRetryCache = getFullAutoContentRetryCache;
     window.saveFullAutoContentRetryCache = saveFullAutoContentRetryCache;
@@ -1078,6 +1083,7 @@ async function executeSemiAutoFlow(formData) {
         console.log('[SemiAuto] imageManagementImages.length:', formData.imageManagementImages?.length);
         console.log('[SemiAuto] skipImages:', formData.skipImages);
         const hasImageManagementData = Array.isArray(formData.imageManagementImages);
+        const isExplicitImageManagement = isExplicitImageManagementSource(formData);
         if (hasImageManagementData && formData.imageManagementImages.length > 0) {
             showUnifiedProgress(50, '이미지 준비 완료', `이미지 관리 탭에서 생성한 ${formData.imageManagementImages.length}개의 이미지를 사용합니다.`);
             appendLog(`✅ 이미지 관리 탭에서 생성한 ${formData.imageManagementImages.length}개의 이미지를 사용합니다.`);
@@ -1085,7 +1091,7 @@ async function executeSemiAutoFlow(formData) {
             showUnifiedProgress(60, '이미지 준비 완료', '이미지가 준비되었습니다.');
             appendLog('✅ 이미지 준비 완료!');
         }
-        else if (hasImageManagementData && formData.imageManagementImages.length === 0) {
+        else if (hasImageManagementData && formData.imageManagementImages.length === 0 && isExplicitImageManagement) {
             formData.skipImages = true;
             showUnifiedProgress(50, '이미지 없이 발행', '이미지 관리 탭에 이미지가 없어도 본문만 발행합니다.');
             appendLog('ℹ️ 반자동 발행: 이미지 관리 탭이 비어 있어 이미지 없이 발행합니다. [semi-auto:text-only-empty-image-management]');
@@ -2563,18 +2569,16 @@ function isDetachedLoginFrameError(message) {
         normalized.includes('naver login');
     return hasDetachedFrameSignal && hasNaverLoginSignal;
 }
-async function resetBrowserForDetachedLoginFrameRetry() {
+function getPublishRetryNaverId(payload) {
+    return String(payload?.naverId || payload?.accountId || payload?.account?.naverId || '').trim();
+}
+async function closeBrowserForPublishRetry(payload) {
+    const naverId = getPublishRetryNaverId(payload);
     try {
-        await window.api?.cancelAutomation?.();
+        await window.api?.closeBrowser?.(naverId);
     }
     catch (error) {
-        console.warn('[PublishRetry] cancelAutomation failed before detached-frame retry:', error);
-    }
-    try {
-        await window.api?.closeBrowser?.();
-    }
-    catch (error) {
-        console.warn('[PublishRetry] closeBrowser failed before detached-frame retry:', error);
+        console.warn('[PublishRetry] closeBrowser failed before publish retry:', error);
     }
 }
 async function retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg) {
@@ -2589,7 +2593,7 @@ async function retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, err
     appendLog(`⚠️ 네이버 로그인 프레임이 새로고침되어 발행 연결이 끊겼습니다: ${errorMsg.substring(0, 80)}`);
     appendLog(`🔄 브라우저 세션을 정리하고 ${DETACHED_LOGIN_FRAME_RETRY_DELAY_MS / 1000}초 후 발행을 1회 재시도합니다. (${nextAttempt}/${MAX_DETACHED_LOGIN_FRAME_RETRIES})`);
     showUnifiedProgress(88, '로그인 프레임 복구 중...', '네이버 로그인 화면이 갱신되어 브라우저 세션을 다시 준비합니다.');
-    await resetBrowserForDetachedLoginFrameRetry();
+    await closeBrowserForPublishRetry(payload);
     await new Promise(resolve => setTimeout(resolve, DETACHED_LOGIN_FRAME_RETRY_DELAY_MS));
     const retryPayload = {
         ...payload,
@@ -2655,6 +2659,38 @@ function isRecoverablePublishAutomationError(errorMsg) {
     ];
     return recoverableSignals.some((signal) => normalized.includes(signal.toLowerCase()));
 }
+function shouldCloseBrowserBeforePublishRetry(errorMsg) {
+    const normalized = String(errorMsg || '').toLowerCase();
+    const editorNotReadySignals = [
+        '?쒕ぉ ?낅젰 ?꾨뱶瑜?李얠쓣 ???놁뒿?덈떎',
+        '제목 입력 필드를 찾을 수 없습니다',
+        'documenttitle',
+        '.se-section-documenttitle',
+        'postwriteform',
+        'smarteditor',
+        'naverwriteeditor',
+        'selectors=[',
+    ];
+    if (editorNotReadySignals.some((signal) => normalized.includes(signal.toLowerCase()))) {
+        return false;
+    }
+    const hardSessionSignals = [
+        '釉뚮씪?곗? ?몄뀡??醫낅즺',
+        '?몄뀡??醫낅즺',
+        '브라우저 세션이 종료',
+        '세션이 종료',
+        'target closed',
+        'protocol error',
+        'session closed',
+        'connection closed',
+        'browser is closed',
+        'page is closed',
+        'execution context was destroyed',
+        'cannot find context',
+        'detached frame',
+    ];
+    return hardSessionSignals.some((signal) => normalized.includes(signal.toLowerCase()));
+}
 async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg) {
     if (!isRecoverablePublishAutomationError(errorMsg)) {
         return null;
@@ -2665,9 +2701,17 @@ async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, paylo
     }
     const nextAttempt = retryAttempts + 1;
     appendLog(`🔄 브라우저/에디터 세션이 끊겨 발행을 복구합니다: ${String(errorMsg || '').substring(0, 100)}`);
-    appendLog(`🔄 브라우저 세션을 정리하고 ${PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS / 1000}초 후 같은 글/이미지로 1회 재시도합니다. (${nextAttempt}/${MAX_PUBLISH_SESSION_RECOVERY_RETRIES})`);
+    const closeBeforeRetry = shouldCloseBrowserBeforePublishRetry(errorMsg);
+    if (closeBeforeRetry) {
+        appendLog(`🔄 브라우저 세션을 정리하고 ${PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS / 1000}초 후 같은 글/이미지로 1회 재시도합니다. (${nextAttempt}/${MAX_PUBLISH_SESSION_RECOVERY_RETRIES})`);
+    }
+    else {
+        appendLog(`🔄 에디터가 아직 준비되지 않아 같은 브라우저에서 다시 시도합니다. (${nextAttempt}/${MAX_PUBLISH_SESSION_RECOVERY_RETRIES})`);
+    }
     showUnifiedProgress(88, '브라우저 세션 복구 중...', '글과 이미지는 유지한 채 네이버 발행 브라우저만 다시 준비합니다.');
-    await resetBrowserForDetachedLoginFrameRetry();
+    if (closeBeforeRetry) {
+        await closeBrowserForPublishRetry(payload);
+    }
     await new Promise(resolve => setTimeout(resolve, PUBLISH_SESSION_RECOVERY_RETRY_DELAY_MS));
     const retryPayload = {
         ...payload,

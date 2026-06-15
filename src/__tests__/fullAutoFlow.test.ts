@@ -124,10 +124,10 @@ describe('detached Naver login frame publish retry guard', () => {
     expect(source).toContain('retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg)');
   });
 
-  it('resets stale browser automation once and keeps the long publish timeout on retry', () => {
+  it('closes stale browser automation once without marking the publish as user-cancelled', () => {
     expect(source).toContain('MAX_DETACHED_LOGIN_FRAME_RETRIES = 1');
-    expect(source).toContain('cancelAutomation');
-    expect(source).toContain('closeBrowser');
+    expect(source).toContain('closeBrowserForPublishRetry(payload)');
+    expect(source).not.toContain('cancelAutomation failed before detached-frame retry');
     expect(source).toContain('timeout: PUBLISH_AUTOMATION_TIMEOUT_MS');
   });
 });
@@ -143,8 +143,11 @@ describe('recoverable publish session retry guard', () => {
     expect(source).toContain('retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg)');
   });
 
-  it('runs the same payload after closing the stale browser session instead of regenerating content', () => {
-    expect(source).toContain('await resetBrowserForDetachedLoginFrameRetry()');
+  it('keeps the same browser for editor-not-ready recovery and only closes hard-dead sessions', () => {
+    expect(source).toContain('function shouldCloseBrowserBeforePublishRetry');
+    expect(source).toContain('const closeBeforeRetry = shouldCloseBrowserBeforePublishRetry(errorMsg)');
+    expect(source).toContain('if (closeBeforeRetry)');
+    expect(source).toContain('에디터가 아직 준비되지 않아 같은 브라우저에서 다시 시도합니다');
     expect(source).toContain('const retryPayload = {');
     expect(source).toContain('...payload');
     expect(source).toContain('timeout: PUBLISH_AUTOMATION_TIMEOUT_MS');
