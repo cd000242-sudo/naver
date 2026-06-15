@@ -210,13 +210,17 @@ function PricingPage() {
 
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
-            <section style={{ padding: '140px 20px 80px', maxWidth: 1200, margin: '0 auto' }}>
+            <section style={{ padding: '140px 20px 80px', maxWidth: 1320, margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
                     <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>PRICING</span>
                     <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>지금 이벤트가로 이용하고, 8월 1일 정상가 전에 시작하세요</h2>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>1개월·3개월·1년·영구제 모두 올인원 라이선스로 Better Life Naver, LEWORD, Leadernam Orbit을 함께 이용합니다.</p>
-                    <div style={{ margin: '18px auto 0', maxWidth: 720, padding: '14px 18px', borderRadius: 14, border: '1px solid rgba(255,215,0,0.28)', background: 'rgba(255,215,0,0.08)', color: '#FFD700', fontSize: 14, fontWeight: 800 }}>
-                        현재 가격은 7월 31일까지 이벤트가입니다. 2026년 8월 1일부터 1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원 정상가로 전환됩니다.
+                    <div style={{ margin: '20px auto 0', maxWidth: 860, padding: '18px 24px', borderRadius: 16, border: '1px solid rgba(255,215,0,0.34)', background: 'rgba(255,215,0,0.10)', color: '#FFD700', fontSize: 16, fontWeight: 900, lineHeight: 1.75, boxShadow: '0 12px 36px rgba(0,0,0,0.16)' }}>
+                        <div style={{ fontSize: 18, marginBottom: 2 }}>현재 가격은 7월 31일까지 이벤트가입니다.</div>
+                        <div>2026년 8월 1일부터 아래 정상가로 전환됩니다.</div>
+                        <div style={{ marginTop: 4, color: '#fff7b0', fontSize: 15 }}>
+                            1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원
+                        </div>
                     </div>
                 </div>
 
@@ -238,8 +242,21 @@ function PricingPage() {
                     ))}
                 </div>
 
+                <style>{`
+                    .pricing-plan-grid {
+                        display: grid;
+                        grid-template-columns: repeat(5, minmax(0, 1fr));
+                        gap: 18px;
+                    }
+                    @media (max-width: 1180px) {
+                        .pricing-plan-grid {
+                            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+                        }
+                    }
+                `}</style>
+
                 {/* Pricing grid */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 18 }}>
+                <div className="pricing-plan-grid">
                     {PLANS[tab].map((p) => {
                         const isSelected = selected?.id === p.id;
                         const isFeatured = p.badge?.type === 'best';
@@ -280,8 +297,9 @@ function PricingPage() {
                                     </span>
                                     <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', marginLeft: 4 }}>{p.free ? '원' : '원'}</span>
                                     {p.eventLabel && (
-                                        <div style={{ margin: '8px auto 0', display: 'inline-flex', padding: '4px 10px', borderRadius: 999, background: 'rgba(255,215,0,0.10)', border: '1px solid rgba(255,215,0,0.22)', color: '#FFD700', fontSize: 11, fontWeight: 900 }}>
-                                            지금 이벤트가 · {p.eventLabel}
+                                        <div style={{ margin: '10px auto 0', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 2, padding: '7px 12px', borderRadius: 14, background: 'rgba(255,215,0,0.12)', border: '1px solid rgba(255,215,0,0.26)', color: '#FFD700', fontSize: 12, fontWeight: 900, lineHeight: 1.35 }}>
+                                            <span>지금 이벤트가</span>
+                                            <span style={{ color: '#fff7b0', fontSize: 11 }}>{p.eventLabel}</span>
                                         </div>
                                     )}
                                 </div>
