@@ -339,6 +339,15 @@
     .grade.SS { background: linear-gradient(135deg, var(--orange), #ff7a2d); }
     .grade.S { background: linear-gradient(135deg, var(--gold), #ffe66d); color: #07111f; }
     .grade.A { background: linear-gradient(135deg, var(--green), #9df5c7); color: #052016; }
+    .publish-decision { display: flex; flex-direction: column; gap: 3px; min-width: 128px; line-height: 1.35; }
+    .publish-decision strong { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 3px 8px; background: rgba(159,177,200,.14); color: #dbe7f7; font-size: 11px; font-weight: 1000; }
+    .publish-decision.publish strong { background: rgba(53,211,153,.18); color: #9df5c7; border: 1px solid rgba(53,211,153,.36); }
+    .publish-decision.conditional strong { background: rgba(248,194,27,.16); color: #ffe58a; border: 1px solid rgba(248,194,27,.32); }
+    .publish-decision.exclude strong { background: rgba(255,77,109,.14); color: #ff9aac; border: 1px solid rgba(255,77,109,.28); }
+    .publish-decision span { color: var(--muted); font-size: 11px; }
+    .golden-decision { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
+    .golden-decision strong { border-radius: 999px; padding: 2px 7px; background: rgba(248,194,27,.14); color: #ffe58a; font-size: 11px; }
+    .golden-decision span { color: var(--muted); }
     .feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
     .feature-card {
       padding: 14px;
@@ -896,7 +905,7 @@
                   <th>문서수</th>
                   <th>경쟁비</th>
                   <th>CPC</th>
-                  <th>의도</th>
+                  <th>발행판정/의도</th>
                   <th>등급</th>
                   <th>소스</th>
                   <th>측정</th>
@@ -1523,6 +1532,33 @@
         + '<button class="tiny-btn pro" type="button" data-board-action="analyze" data-keyword="' + safe + '">Pro 분석</button>'
         + '</div>';
     }
+    function publishDecisionFor(row) {
+      return row && row.publishDecision && typeof row.publishDecision === 'object'
+        ? row.publishDecision
+        : null;
+    }
+    function publishDecisionReason(decision) {
+      if (!decision) return '';
+      if (Array.isArray(decision.reasons) && decision.reasons.length) return decision.reasons[0];
+      if (Array.isArray(decision.cautions) && decision.cautions.length) return decision.cautions[0];
+      return decision.nextAction || '';
+    }
+    function publishDecisionHtml(row) {
+      const decision = publishDecisionFor(row);
+      if (!decision || !decision.label) return escapeHtml((row && row.intent) || '-');
+      const score = decision.score == null ? '' : ' ' + fmt(decision.score) + '점';
+      const reason = publishDecisionReason(decision);
+      return '<div class="publish-decision ' + escapeHtml(decision.verdict || 'conditional') + '">'
+        + '<strong>' + escapeHtml(decision.label + score) + '</strong>'
+        + '<span>' + escapeHtml(reason || ((row && row.intent) || '-')) + '</span>'
+        + '</div>';
+    }
+    function publishDecisionInline(row) {
+      const decision = publishDecisionFor(row);
+      if (!decision || !decision.label) return '';
+      const score = decision.score == null ? '' : ' ' + fmt(decision.score) + '점';
+      return '<span class="golden-decision"><strong>' + escapeHtml(decision.label + score) + '</strong><span>' + escapeHtml(publishDecisionReason(decision) || decision.nextAction || '') + '</span></span>';
+    }
     function volumeBarHtml(value) {
       const n = Math.max(0, Number(value || 0));
       const pct = Math.max(5, Math.min(100, Math.round((Math.log10(n + 10) / 6) * 100)));
@@ -1572,9 +1608,14 @@
       const topRows = rows.slice(0, 5).map(function(row) {
         return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong>'
           + '<span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>'
+          + publishDecisionInline(row)
           + keywordActionHtml(row.keyword || '')
           + '</li>';
       });
+      const publishReady = rows.filter(function(row) {
+        const decision = publishDecisionFor(row);
+        return decision && decision.verdict === 'publish';
+      }).length;
       const toolbar = '<li><div class="result-toolbar">'
         + '<input class="input" id="trackingPostUrl" placeholder="추적 등록용 내 글 URL" autocomplete="off" />'
         + '<button class="tiny-btn pro" type="button" id="saveKeywordGroup">그룹 저장</button>'
@@ -1586,6 +1627,7 @@
         { label: '전체 후보', value: fmt(summary.total == null ? rows.length : summary.total) },
         { label: 'SSS 후보', value: fmt(sss) },
         { label: '실측 완료', value: fmt(measured) },
+        { label: '발행 추천', value: fmt(publishReady) },
         { label: '처리 시간', value: summary.elapsedMs == null ? '-' : fmt(summary.elapsedMs) + 'ms' },
       ], [toolbar].concat(topRows));
     }
@@ -1655,12 +1697,17 @@
         const rows = result.keywords;
         const summary = result.summary || {};
         const topRows = rows.slice(0, 12).map(function(row) {
-          return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>' + keywordActionHtml(row.keyword || '') + '</li>';
+          return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>' + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
         });
+        const publishReady = rows.filter(function(row) {
+          const decision = publishDecisionFor(row);
+          return decision && decision.verdict === 'publish';
+        }).length;
         renderToolResultPanel(feature, feature.title + ' 완료', '상위 후보 12개를 먼저 표시합니다. 전체 표는 키워드 분석기 표와 이 결과 영역에서 이어서 확인할 수 있습니다.', [
           { label: '후보', value: fmt(summary.total == null ? rows.length : summary.total) },
           { label: 'SSS', value: fmt(summary.sss == null ? rows.filter(function(row) { return row.grade === 'SSS'; }).length : summary.sss) },
           { label: '실측', value: fmt(summary.measured == null ? rows.filter(function(row) { return row.isMeasured; }).length : summary.measured) },
+          { label: '발행 추천', value: fmt(publishReady) },
           { label: '시간', value: summary.elapsedMs == null ? new Date().toLocaleTimeString('ko-KR') : fmt(summary.elapsedMs) + 'ms' },
         ], topRows);
         return;
@@ -1682,12 +1729,17 @@
         if ((!feature || !feature.id) && activeViewId === 'lookup') {
           const rows = result.keywords || [];
           const topRows = rows.slice(0, 5).map(function(row) {
-            return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 등급 ' + escapeHtml(row.grade || '-') + '</span>' + keywordActionHtml(row.keyword || '') + '</li>';
+            return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 등급 ' + escapeHtml(row.grade || '-') + '</span>' + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
           });
+          const publishReady = rows.filter(function(row) {
+            const decision = publishDecisionFor(row);
+            return decision && decision.verdict === 'publish';
+          }).length;
           renderLookupInsight(feature && feature.title ? feature.title + ' 완료' : '키워드 분석 완료', 'PC/모바일 실측표와 함께 상위 후보를 정리했습니다. 그래프와 마인드맵은 각 키워드 액션에서 바로 실행됩니다.', [
             { label: '후보', value: fmt(rows.length) },
             { label: '실측', value: fmt(rows.filter(function(row) { return row.isMeasured; }).length) },
             { label: 'SSS', value: fmt(rows.filter(function(row) { return row.grade === 'SSS'; }).length) },
+            { label: '발행 추천', value: fmt(publishReady) },
             { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
           ], topRows);
         }
@@ -2185,7 +2237,7 @@
           + '<td>' + fmt(row.documentCount) + '</td>'
           + '<td>' + fmt(row.goldenRatio) + '</td>'
           + '<td>' + fmt(row.cpc) + '</td>'
-          + '<td>' + escapeHtml(row.intent || '-') + '</td>'
+          + '<td>' + publishDecisionHtml(row) + '</td>'
           + '<td><span class="grade ' + escapeHtml(row.grade || '') + '">' + escapeHtml(row.grade || '-') + '</span></td>'
           + '<td>' + escapeHtml(row.source || '-') + '</td>'
           + '<td>' + (row.isMeasured ? '실측' : '측정 필요') + '</td>'
@@ -2250,7 +2302,7 @@
           + '<div class="rank">#' + escapeHtml(item.rank || '-') + '</div>'
           + '<div class="golden-main"><strong>' + escapeHtml(item.keyword || '-') + '</strong><span>'
           + '검색량 ' + searchVolume + ' · 문서수 ' + documents + ' · ' + reason
-          + '</span></div>'
+          + '</span>' + publishDecisionInline(item) + '</div>'
           + '<div class="grade ' + escapeHtml(item.grade || '') + '">' + escapeHtml(item.grade || '-') + '</div>'
           + '<div class="golden-actions">' + keywordActionHtml(item.keyword || '') + '</div>'
           + '</article>';
