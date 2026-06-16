@@ -725,6 +725,27 @@
     .progress-message { min-height: 22px; margin-top: 12px; color: #d9e6f7; font-size: 13px; line-height: 1.5; }
     .progress-steps { margin-top: 12px; display: grid; gap: 6px; color: var(--muted); font-size: 12px; }
     .progress-steps span.active { color: var(--gold); font-weight: 900; }
+    .progress-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+    .progress-pill {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
+      min-width: min(360px, calc(100vw - 36px));
+      border: 1px solid rgba(91,183,255,.5);
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(17,25,37,.96), rgba(5,10,18,.96));
+      color: #fff;
+      box-shadow: 0 18px 48px rgba(0,0,0,.42);
+      padding: 12px 14px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .progress-pill[hidden] { display: none; }
+    .progress-pill strong { display: flex; justify-content: space-between; gap: 12px; color: var(--gold); font-size: 14px; }
+    .progress-pill span { display: block; margin-top: 6px; color: #c9d6e6; font-size: 12px; line-height: 1.35; }
+    .progress-pill i { display: block; height: 5px; margin-top: 9px; border-radius: 999px; background: #07101b; overflow: hidden; }
+    .progress-pill i b { display: block; width: 0%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--gold), var(--green)); }
     .login-license {
       margin-top: 12px;
       border: 1px solid rgba(91,183,255,.24);
@@ -1161,6 +1182,17 @@
     </form>
   </div>
 
+  <div class="modal" id="welcomeModal" aria-hidden="true">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+      <h2 id="welcomeTitle">환영합니다, LEWORD Pro</h2>
+      <p id="welcomeMessage">Pro 세션이 연결되었습니다. 지식인 황금키워드와 쇼핑커넥트는 서버가 자동으로 발굴을 시작합니다.</p>
+      <div class="dialog-actions">
+        <button class="btn primary" type="button" id="welcomeClose">바로 시작</button>
+        <button class="btn" type="button" id="welcomeSettings">API 키 확인</button>
+      </div>
+    </div>
+  </div>
+
   <div class="modal" id="progressModal" aria-hidden="true" aria-live="polite">
     <div class="dialog progress-dialog" role="status">
       <div class="progress-head">
@@ -1175,8 +1207,17 @@
         <span id="progressStepAnalyze">분석/검증</span>
         <span id="progressStepDone">결과 정리</span>
       </div>
+      <div class="progress-actions">
+        <button class="btn" type="button" id="progressMinimize">아래에 띄워두기</button>
+        <button class="btn blue" type="button" id="progressDismiss" hidden>닫기</button>
+      </div>
     </div>
   </div>
+  <button class="progress-pill" type="button" id="progressPill" hidden>
+    <strong><span id="progressPillTitle">실행 중</span><span id="progressPillPercent">0%</span></strong>
+    <span id="progressPillMessage">서버 작업을 진행하고 있습니다.</span>
+    <i><b id="progressPillFill"></b></i>
+  </button>
 
   <script>
     const apiBase = (function() {
@@ -1272,6 +1313,16 @@
 
     function qs(id) { return document.getElementById(id); }
     const mobileProChromeStorageKey = 'leword-mobile-pro-chrome';
+    const postLoginAutoFeatureIds = ['kin', 'shopping'];
+    const featureResultCache = {};
+    const featureRunState = {};
+    let postLoginAutoRunStarted = false;
+    let progressCloseTimer = null;
+    let progressMinimized = false;
+    let progressDone = false;
+    let progressTitleState = '실행 중';
+    let progressPercentState = 0;
+    let progressMessageState = '서버 작업을 진행하고 있습니다.';
     function isMobileProChrome() {
       return window.matchMedia && window.matchMedia('(max-width: 560px)').matches;
     }
@@ -1411,7 +1462,6 @@
     function setResult(message) {
       qs('resultLog').textContent = typeof message === 'string' ? message : JSON.stringify(message, null, 2);
     }
-    let progressCloseTimer = null;
     function progressStep(percent) {
       const steps = [
         ['progressStepRequest', 0],
@@ -1426,34 +1476,79 @@
     }
     function updateProgress(percent, message) {
       const pct = Math.max(0, Math.min(100, Math.round(Number(percent) || 0)));
+      progressPercentState = pct;
+      if (message) progressMessageState = message;
       const fill = qs('progressFill');
       if (fill) fill.style.width = pct + '%';
       if (qs('progressPercent')) qs('progressPercent').textContent = pct + '%';
       if (message && qs('progressMessage')) qs('progressMessage').textContent = message;
       progressStep(pct);
+      renderProgressPill();
     }
-    function openProgress(title, message) {
+    function renderProgressPill() {
+      const pill = qs('progressPill');
+      if (!pill) return;
+      qs('progressPillTitle').textContent = progressDone ? '발굴 완료' : progressTitleState;
+      qs('progressPillPercent').textContent = progressPercentState + '%';
+      qs('progressPillMessage').textContent = progressMessageState || '서버 작업을 진행하고 있습니다.';
+      qs('progressPillFill').style.width = progressPercentState + '%';
+      pill.hidden = !progressMinimized;
+    }
+    function openProgress(title, message, options) {
       if (progressCloseTimer) clearTimeout(progressCloseTimer);
-      if (qs('progressTitle')) qs('progressTitle').textContent = title || '실행 중';
+      progressDone = false;
+      progressMinimized = false;
+      progressTitleState = title || '실행 중';
+      progressMessageState = message || '서버에 요청을 준비하고 있습니다.';
+      if (qs('progressTitle')) qs('progressTitle').textContent = progressTitleState;
+      if (qs('progressDismiss')) qs('progressDismiss').hidden = true;
       updateProgress(4, message || '서버에 요청을 준비하고 있습니다.');
-      qs('progressModal').classList.add('open');
-      qs('progressModal').setAttribute('aria-hidden', 'false');
+      const startMinimized = options && options.minimized;
+      if (startMinimized) {
+        minimizeProgress();
+      } else {
+        restoreProgress();
+      }
     }
     function closeProgress(delay) {
       const done = function() {
+        progressMinimized = false;
         qs('progressModal').classList.remove('open');
         qs('progressModal').setAttribute('aria-hidden', 'true');
+        renderProgressPill();
       };
       if (progressCloseTimer) clearTimeout(progressCloseTimer);
       progressCloseTimer = setTimeout(done, delay == null ? 450 : delay);
     }
+    function minimizeProgress() {
+      progressMinimized = true;
+      qs('progressModal').classList.remove('open');
+      qs('progressModal').setAttribute('aria-hidden', 'true');
+      renderProgressPill();
+    }
+    function restoreProgress() {
+      progressMinimized = false;
+      qs('progressModal').classList.add('open');
+      qs('progressModal').setAttribute('aria-hidden', 'false');
+      renderProgressPill();
+    }
+    function dismissProgress() {
+      progressDone = true;
+      closeProgress(0);
+    }
     function completeProgress(message) {
-      updateProgress(100, message || '결과 정리가 완료되었습니다.');
-      closeProgress(550);
+      progressDone = true;
+      if (qs('progressTitle')) qs('progressTitle').textContent = '발굴 완료';
+      if (qs('progressDismiss')) qs('progressDismiss').hidden = false;
+      updateProgress(100, message || '발굴 완료. 결과가 아래 영역에 정리되었습니다.');
+      if (!progressMinimized) closeProgress(850);
     }
     function failProgress(message) {
+      progressDone = true;
+      if (qs('progressTitle')) qs('progressTitle').textContent = '실행 실패';
+      if (qs('progressDismiss')) qs('progressDismiss').hidden = false;
       updateProgress(100, message || '실행 중 오류가 발생했습니다.');
-      closeProgress(900);
+      if (!progressMinimized) closeProgress(1200);
     }
     function resultKpiHtml(metrics) {
       return '<div class="result-kpis">' + metrics.map(function(metric) {
@@ -1472,6 +1567,11 @@
     }
     function renderToolDetail(feature) {
       return feature;
+    }
+    function renderCachedFeatureResult(feature) {
+      if (!feature || !feature.id || !featureResultCache[feature.id]) return false;
+      renderToolFeatureResult(feature, featureResultCache[feature.id].result);
+      return true;
     }
     function renderToolResultPanel(feature, title, subtitle, metrics, rows) {
       const target = feature && feature.id === 'youtube' ? qs('youtubeResultPanel') : qs('toolResultPanel');
@@ -1726,7 +1826,11 @@
         { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
       ], ['<li><span><pre class="mini-json">' + escapeHtml(preview) + '</pre></span></li>']);
     }
-    function renderFeatureResult(feature, result) {
+    function renderFeatureResult(feature, result, options) {
+      if (feature && feature.id) {
+        featureResultCache[feature.id] = { result: result, updatedAt: new Date().toISOString() };
+        if (options && options.background && feature.id !== selectedToolId) return;
+      }
       setResult(result);
       if (result && Array.isArray(result.keywords)) {
         renderKeywordRows(result);
@@ -1892,7 +1996,10 @@
     function saveSession(value) {
       session = value;
       if (session) localStorage.setItem('leword.pro.session', JSON.stringify(session));
-      else localStorage.removeItem('leword.pro.session');
+      else {
+        localStorage.removeItem('leword.pro.session');
+        postLoginAutoRunStarted = false;
+      }
       renderSession();
     }
     function restoreSession() {
@@ -1914,6 +2021,18 @@
     function closeLogin() {
       qs('loginModal').classList.remove('open');
       qs('loginModal').setAttribute('aria-hidden', 'true');
+    }
+    function openWelcomeModal(tier) {
+      const label = tier || (session && session.tier) || 'Pro';
+      if (qs('welcomeMessage')) {
+        qs('welcomeMessage').textContent = label + ' 세션이 연결되었습니다. 지식인 황금키워드와 쇼핑커넥트는 서버가 자동으로 분석을 시작합니다.';
+      }
+      qs('welcomeModal').classList.add('open');
+      qs('welcomeModal').setAttribute('aria-hidden', 'false');
+    }
+    function closeWelcomeModal() {
+      qs('welcomeModal').classList.remove('open');
+      qs('welcomeModal').setAttribute('aria-hidden', 'true');
     }
     async function apiGet(url, authed) {
       const res = await fetch(url, { cache: 'no-store', headers: authed ? headers() : undefined });
@@ -2643,7 +2762,11 @@
       renderToolGroupTabs();
       renderToolTabs();
       renderToolDetail(feature);
-      renderToolWaiting(feature);
+      if (!renderCachedFeatureResult(feature)) {
+        if (featureRunState[feature.id] === 'running') renderToolRunning(feature, '자동');
+        else renderToolWaiting(feature);
+      }
+      maybeAutoRunFeature(feature, 'select');
     }
     function toolKeywordInput() {
       return String(qs('toolSeedInput').value || '').trim();
@@ -2666,6 +2789,58 @@
       options.autoSeedKeyword = options.keyword || autoSeedKeyword(selected, options);
       options.autoDiscovery = !options.keyword;
       return options;
+    }
+    function autoOptionsForFeature(feature) {
+      const categoryId = 'all';
+      const targetCount = Math.max(feature && feature.id === 'shopping' ? 30 : 5, Math.min(80, Number((feature && feature.defaultTargetCount) || 30)));
+      return {
+        keyword: '',
+        categoryId: categoryId,
+        targetCount: targetCount,
+        sort: 'sim',
+        includeFreshIssue: true,
+        includeSeasonal: true,
+        includeEvergreen: true,
+        includeVolumeMetrics: true,
+        crossReferenceNaver: true,
+        autoSeedKeyword: autoSeedKeyword(feature, { categoryId: categoryId }),
+        autoDiscovery: true,
+      };
+    }
+    function shouldAutoRunFeature(feature) {
+      return !!(feature && feature.id && postLoginAutoFeatureIds.indexOf(feature.id) >= 0);
+    }
+    function maybeAutoRunFeature(feature, reason) {
+      if (!session || !session.accessToken || !shouldAutoRunFeature(feature)) return;
+      if (featureResultCache[feature.id] || featureRunState[feature.id] === 'running') return;
+      setTimeout(function() {
+        runFeature(feature, autoOptionsForFeature(feature), {
+          autoTriggered: true,
+          background: true,
+          minimizeOnStart: true,
+          reason: reason || 'auto',
+        }).catch(function(err) {
+          log(feature.title + ' 자동 분석 실패: ' + err.message);
+        });
+      }, 200);
+    }
+    async function schedulePostLoginAutoDiscovery() {
+      if (postLoginAutoRunStarted || !session || !session.accessToken) return;
+      postLoginAutoRunStarted = true;
+      for (const id of postLoginAutoFeatureIds) {
+        const feature = featureById(id);
+        if (!feature || featureResultCache[id] || featureRunState[id] === 'running') continue;
+        try {
+          await runFeature(feature, autoOptionsForFeature(feature), {
+            autoTriggered: true,
+            background: true,
+            minimizeOnStart: true,
+            reason: 'post-login',
+          });
+        } catch (err) {
+          log(feature.title + ' 자동 분석 실패: ' + err.message);
+        }
+      }
     }
     function collectYoutubeOptions() {
       return {
@@ -3112,8 +3287,10 @@
         throw err;
       }
     }
-    async function runFeature(feature, options) {
-      if (feature && feature.id) {
+    async function runFeature(feature, options, uiOptions) {
+      const ui = uiOptions || {};
+      const backgroundRun = !!ui.background;
+      if (feature && feature.id && !backgroundRun) {
         if (feature.id === 'youtube') {
           setActiveView('youtube', { load: false });
         } else {
@@ -3136,14 +3313,14 @@
       const displayKeyword = q || String(runOptions.autoSeedKeyword || '').trim();
       const missingApiGroups = missingApiGroupsForRun(feature, runOptions);
       if (missingApiGroups.length) {
-        openProgress('API 키 필요', '필수 API 키 설정을 확인하고 있습니다.');
+        openProgress('API 키 필요', '필수 API 키 설정을 확인하고 있습니다.', { minimized: backgroundRun });
         updateProgress(100, '환경설정/API 키에서 필요한 키를 저장한 뒤 다시 실행하세요.');
-        renderApiKeyRequired(feature, missingApiGroups);
+        if (!backgroundRun || (feature && feature.id === selectedToolId)) renderApiKeyRequired(feature, missingApiGroups);
         failProgress('API 키를 입력한 뒤 다시 실행하세요.');
         return;
       }
       if (!session || !session.accessToken) {
-        if (feature && feature.id) renderToolLocked(feature);
+        if (feature && feature.id && !backgroundRun) renderToolLocked(feature);
         requireSession();
         return;
       }
@@ -3160,18 +3337,22 @@
           }
           return;
         }
-        if (feature.id) renderToolRunning(feature, displayKeyword);
-        log(feature.title + ' 실행 시작');
-        openProgress(feature.title + ' 실행', '서버 요청을 준비하고 있습니다.');
+        if (feature.id) {
+          featureRunState[feature.id] = 'running';
+          if (!backgroundRun || feature.id === selectedToolId) renderToolRunning(feature, displayKeyword);
+        }
+        log(feature.title + (ui.autoTriggered ? ' 자동 분석 시작' : ' 실행 시작'));
+        openProgress(feature.title + ' 실행', '서버 요청을 준비하고 있습니다.', { minimized: ui.minimizeOnStart || backgroundRun });
         if (feature.method === 'GET') {
           updateProgress(30, '서버 상태를 불러오는 중입니다.');
           const payload = await apiGet(feature.route, true);
           if (feature.handler && payload.catalog && Array.isArray(payload.catalog.items)) {
             const matched = payload.catalog.items.filter(function(item) { return item.handler === feature.handler; });
-            renderFeatureResult(feature, { feature: feature.title, route: feature.route, matchedHandlers: matched });
+            renderFeatureResult(feature, { feature: feature.title, route: feature.route, matchedHandlers: matched }, { background: backgroundRun });
           } else {
-            renderFeatureResult(feature, payload.snapshot || payload.catalog || payload);
+            renderFeatureResult(feature, payload.snapshot || payload.catalog || payload, { background: backgroundRun });
           }
+          if (feature.id) featureRunState[feature.id] = 'completed';
           log(feature.title + ' 서버 상태 확인 완료');
           completeProgress('서버 상태 확인이 완료되었습니다.');
           return;
@@ -3196,7 +3377,8 @@
             workflow: 'blueprint-draft',
             blueprint: blueprintPayload.result || blueprintPayload,
             draft: draftPayload.result || draftPayload,
-          });
+          }, { background: backgroundRun });
+          if (feature.id) featureRunState[feature.id] = 'completed';
           log(feature.title + ' 완료');
           completeProgress('블루프린트와 초안 생성이 완료되었습니다.');
           return;
@@ -3204,7 +3386,8 @@
         if (feature.direct) {
           updateProgress(36, '서버에서 즉시 실행 중입니다.');
           const payload = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {}, { userApiCredentials: true });
-          renderFeatureResult(feature, payload.snapshot || payload.result || payload);
+          renderFeatureResult(feature, payload.snapshot || payload.result || payload, { background: backgroundRun });
+          if (feature.id) featureRunState[feature.id] = 'completed';
           log(feature.title + ' 즉시 실행 완료');
           completeProgress('즉시 실행 결과가 정리되었습니다.');
           return;
@@ -3212,18 +3395,24 @@
         updateProgress(18, '서버 job을 접수하고 있습니다.');
         const created = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {}, { userApiCredentials: true });
         const result = await pollJob(created);
-        renderFeatureResult(feature, result);
+        renderFeatureResult(feature, result, { background: backgroundRun });
+        if (feature.id) featureRunState[feature.id] = 'completed';
         log(feature.title + ' 완료');
-        completeProgress('분석 결과가 정리되었습니다.');
+        completeProgress('발굴 완료. 결과가 아래 영역에 정리되었습니다.');
       } catch (err) {
+        if (feature && feature.id) featureRunState[feature.id] = 'failed';
         log(feature.title + ' 실패: ' + err.message);
         setResult({ error: err.message });
         if (isAuthErrorMessage(err.message)) {
           saveSession(null);
-          if (feature.id) renderToolLocked(feature);
+          if (feature.id && !backgroundRun) renderToolLocked(feature);
           openLogin();
           failProgress(err.message);
           return;
+        }
+        if (backgroundRun && feature && feature.id !== selectedToolId) {
+          failProgress(err.message);
+          throw err;
         }
         const statusLabel = isRouteMissingMessage(err.message) ? 'API 경로 확인' : '오류';
         renderResultSummary(feature.title + ' 실패', err.message, [
@@ -3292,6 +3481,15 @@
     qs('loginOpen').addEventListener('click', openLogin);
     qs('loginClose').addEventListener('click', closeLogin);
     qs('loginModal').addEventListener('click', function(event) { if (event.target.id === 'loginModal') closeLogin(); });
+    qs('welcomeClose').addEventListener('click', closeWelcomeModal);
+    qs('welcomeSettings').addEventListener('click', function() {
+      closeWelcomeModal();
+      setActiveView('settings', { load: false });
+    });
+    qs('welcomeModal').addEventListener('click', function(event) { if (event.target.id === 'welcomeModal') closeWelcomeModal(); });
+    qs('progressMinimize').addEventListener('click', minimizeProgress);
+    qs('progressPill').addEventListener('click', restoreProgress);
+    qs('progressDismiss').addEventListener('click', dismissProgress);
     qs('loginForm').addEventListener('submit', async function(event) {
       event.preventDefault();
       const userId = qs('userId').value.trim();
@@ -3304,12 +3502,19 @@
         const payload = await apiPost(endpoints.session, loginPayload);
         if (!payload.session || !payload.session.accessToken) throw new Error(payload.message || '세션 발급 실패');
         saveSession(payload.session);
+        postLoginAutoRunStarted = false;
+        postLoginAutoFeatureIds.forEach(function(id) {
+          delete featureResultCache[id];
+          delete featureRunState[id];
+        });
         qs('loginMessage').textContent = '로그인 완료';
         closeLogin();
+        openWelcomeModal(payload.session.tier || 'Pro');
         hydrateNaverApiSettingsForm();
         setActiveView('golden', { load: false });
         log('Pro 로그인 완료: ' + (payload.session.tier || 'standard'));
         await Promise.all([loadSources(), loadGoldenBoard(), refreshFeatureStatus().catch(function() {})]);
+        schedulePostLoginAutoDiscovery();
       } catch (err) {
         qs('loginMessage').textContent = err.message;
       }
