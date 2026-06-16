@@ -148,21 +148,6 @@ export async function isLoggedIn(page: any): Promise<boolean> {
       } catch {
         // cookie access can fail in rare browser states.
       }
-      try {
-        const bodyText = document.body?.innerText || '';
-        const hasLoginPrompt = /로그인|sign\s*in|log\s*in/i.test(bodyText);
-        const hasAccountChrome =
-          /플랜\s*업그레이드|plan\s*upgrade/i.test(bodyText) &&
-          /[\d,]{2,}/.test(bodyText) &&
-          !hasLoginPrompt;
-        const hasWorkspaceNav =
-          /이미지\s*생성|AI\s*이미지|image\s*generation/i.test(bodyText) &&
-          /플랜\s*업그레이드|plan\s*upgrade|크레딧|credits/i.test(bodyText) &&
-          !hasLoginPrompt;
-        if (hasAccountChrome || hasWorkspaceNav) return true;
-      } catch {
-        // Text-based logged-in signal is best-effort.
-      }
       return false;
     });
     return !!has;

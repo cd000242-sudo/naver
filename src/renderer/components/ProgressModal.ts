@@ -69,6 +69,20 @@ function dedupeProgressImages(images: ProgressPreviewImage[]): ProgressPreviewIm
     });
 }
 
+function isProgressThumbnailImage(image?: ProgressPreviewImage | null): boolean {
+    if (!image || image.isPlaceholder) return false;
+    const heading = String(image.heading || image.title || image.label || '').trim();
+    return image.isThumbnail === true ||
+        image.role === 'thumbnail' ||
+        image.kind === 'thumbnail' ||
+        heading === '썸네일' ||
+        /^🖼️?\s*썸네일$/u.test(heading);
+}
+
+function getProgressBodyImages(images: ProgressPreviewImage[]): ProgressPreviewImage[] {
+    return dedupeProgressImages((images || []).filter((image) => !isProgressThumbnailImage(image)));
+}
+
 export class ProgressModal {
     private modal: HTMLElement | null = null;
     private progressBar: HTMLElement | null = null;
@@ -94,6 +108,7 @@ export class ProgressModal {
     // ✅ [2026-02-13] 캐러셀 네비게이션 상태
     private currentImageIndex: number = 0;
     private currentImages: ProgressPreviewImage[] = [];
+    private thumbnailSkippedInPreview: boolean = false;
 
     private steps = [
         { id: 1, name: '글 생성', icon: '📝' },
@@ -854,9 +869,11 @@ export class ProgressModal {
         const imageInfo = document.getElementById('progress-image-info');
 
         if (!grid) return;
-        const previewImages = dedupeProgressImages(Array.isArray(images) ? images : []);
-        if (previewImages.length !== (Array.isArray(images) ? images.length : 0)) {
-            console.warn(`[ProgressModal] duplicate preview images hidden: ${images.length} -> ${previewImages.length}`);
+        const inputImages = Array.isArray(images) ? images : [];
+        const previewImages = getProgressBodyImages(inputImages);
+        this.thumbnailSkippedInPreview = inputImages.some((image) => isProgressThumbnailImage(image));
+        if (previewImages.length !== inputImages.length) {
+            console.warn(`[ProgressModal] thumbnail/duplicate preview images hidden: ${inputImages.length} -> ${previewImages.length}`);
         }
 
         // 제목 업데이트
@@ -1092,12 +1109,21 @@ export class ProgressModal {
 
         if (!grid) return;
 
+        if (isProgressThumbnailImage(image)) {
+            this.thumbnailSkippedInPreview = true;
+            console.log('[ProgressModal] thumbnail image kept out of body preview grid');
+            return;
+        }
+
+        const previewIndex = this.thumbnailSkippedInPreview ? Math.max(0, index - 1) : index;
+        const previewTotal = this.thumbnailSkippedInPreview && total ? Math.max(1, total - 1) : total;
+
         const src = getProgressImageSource(image);
         if (!src) return;
 
         // ✅ 첫 호출 시 자동 플레이스홀더 초기화
         const existingItems = grid.querySelectorAll(':scope > div').length;
-        const totalCount = total || Math.max(index + 1, existingItems);
+        const totalCount = previewTotal || Math.max(previewIndex + 1, existingItems);
         if (existingItems === 0 && totalCount > 0) {
             console.log(`[ProgressModal] 🎨 플레이스홀더 ${totalCount}개 자동 초기화`);
             this.currentImages = [];
@@ -1144,11 +1170,11 @@ export class ProgressModal {
         }
 
         const gridItems = grid.querySelectorAll(':scope > div');
-        const targetItem = gridItems[index] as HTMLElement | undefined;
+        const targetItem = gridItems[previewIndex] as HTMLElement | undefined;
         const incomingKey = getProgressImageKey(image);
         if (incomingKey) {
             const duplicateIndex = this.currentImages.findIndex((existing, existingIndex) =>
-                existingIndex !== index &&
+                existingIndex !== previewIndex &&
                 !(existing as any)?.isPlaceholder &&
                 getProgressImageKey(existing) === incomingKey
             );
@@ -1162,10 +1188,10 @@ export class ProgressModal {
                     targetItem.style.border = '1px dashed var(--border-light)';
                     targetItem.style.background = 'var(--bg-tertiary)';
                 }
-                if (index < this.currentImages.length) {
-                    this.currentImages[index] = { url: '', heading: '중복 이미지 제외', isPlaceholder: true };
+                if (previewIndex < this.currentImages.length) {
+                    this.currentImages[previewIndex] = { url: '', heading: '중복 이미지 제외', isPlaceholder: true };
                 }
-                console.warn(`[ProgressModal] duplicate live image ignored: target=${index + 1}, existing=${duplicateIndex + 1}`);
+                console.warn(`[ProgressModal] duplicate live image ignored: target=${previewIndex + 1}, existing=${duplicateIndex + 1}`);
                 return;
             }
         }
@@ -1187,7 +1213,7 @@ export class ProgressModal {
 
             const imgEl = document.createElement('img');
             imgEl.src = toFileUrlSafe(src);
-            imgEl.alt = image.heading || `이미지 ${index + 1}`;
+            imgEl.alt = image.heading || `이미지 ${previewIndex + 1}`;
             imgEl.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
             imgEl.onerror = () => {
                 imgEl.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23333" width="100" height="100"/><text x="50" y="50" text-anchor="middle" fill="%23666" font-size="20">❌</text></svg>';
@@ -1197,11 +1223,11 @@ export class ProgressModal {
             const badge = document.createElement('div');
             badge.style.cssText = `
                 position: absolute; top: 3px; left: 3px;
-                background: ${index === 0 ? '#3b82f6' : 'rgba(0, 0, 0, 0.65)'};
+                background: ${previewIndex === 0 ? '#3b82f6' : 'rgba(0, 0, 0, 0.65)'};
                 color: white; font-size: 9px; font-weight: 700;
                 padding: 1px 6px; border-radius: 4px; line-height: 1.5;
             `;
-            badge.textContent = index === 0 ? '대표' : `${index}`;
+            badge.textContent = previewIndex === 0 ? '대표' : `${previewIndex}`;
 
             // 하단 소제목 오버레이
             const label = document.createElement('div');
@@ -1231,9 +1257,9 @@ export class ProgressModal {
 
             // 클릭 시 메인 미리보기 업데이트
             targetItem.onclick = () => {
-                this.updateMainPreviewDirect(src, image.heading || `이미지 ${index + 1}`, index);
+                this.updateMainPreviewDirect(src, image.heading || `이미지 ${previewIndex + 1}`, previewIndex);
                 gridItems.forEach((item, idx) => {
-                    (item as HTMLElement).style.borderColor = idx === index ? '#3b82f6' : 'var(--border-light)';
+                    (item as HTMLElement).style.borderColor = idx === previewIndex ? '#3b82f6' : 'var(--border-light)';
                 });
             };
 
@@ -1244,14 +1270,14 @@ export class ProgressModal {
         }
 
         // ✅ currentImages 업데이트
-        if (index < this.currentImages.length) {
-            this.currentImages[index] = image;
+        if (previewIndex < this.currentImages.length) {
+            this.currentImages[previewIndex] = image;
         } else {
             this.currentImages.push(image);
         }
 
         // ✅ 메인 미리보기를 최신 완료 이미지로 자동 업데이트
-        this.updateMainPreviewDirect(src, image.heading || `이미지 ${index + 1}`, index);
+        this.updateMainPreviewDirect(src, image.heading || `이미지 ${previewIndex + 1}`, previewIndex);
 
         // ✅ 완료 카운트 업데이트
         const completedCount = this.currentImages.filter(img => {
@@ -1265,7 +1291,7 @@ export class ProgressModal {
         // 그리드 표시
         if (grid) grid.style.display = this.currentImages.length > 1 ? 'grid' : 'none';
 
-        console.log(`[ProgressModal] 🖼️ 실시간 이미지 업데이트: [${index + 1}/${this.currentImages.length}] "${image.heading || ''}" 완료`);
+        console.log(`[ProgressModal] 🖼️ 실시간 이미지 업데이트: [${previewIndex + 1}/${this.currentImages.length}] "${image.heading || ''}" 완료`);
     }
 
     // ✅ [2026-02-27 NEW] 메인 미리보기 직접 업데이트 (showImages 내부 헬퍼와 동일)
@@ -1310,6 +1336,7 @@ export class ProgressModal {
 
         this.currentImages = [];
         this.currentImageIndex = 0;
+        this.thumbnailSkippedInPreview = false;
 
         if (grid) {
             grid.innerHTML = '';

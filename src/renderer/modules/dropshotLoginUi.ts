@@ -56,6 +56,39 @@ export function bindDropshotLogin(ids: DropshotLoginIds): void {
   }
 }
 
+/** Binds the login/check buttons to the Flow IPC (idempotent). */
+export function bindFlowLogin(ids: DropshotLoginIds): void {
+  const api = (window as any).api;
+  const loginBtn = document.getElementById(ids.loginBtnId) as HTMLButtonElement | null;
+  const checkBtn = document.getElementById(ids.checkBtnId) as HTMLButtonElement | null;
+
+  if (loginBtn && !loginBtn.dataset.flowBound) {
+    loginBtn.dataset.flowBound = '1';
+    loginBtn.addEventListener('click', async () => {
+      dsSetStatus(ids.statusId, 'Flow 로그인 창을 여는 중입니다. Google 로그인 후 자동으로 확인합니다.', 'info');
+      try {
+        const r = await api?.flowLogin?.();
+        dsSetStatus(ids.statusId, r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? 'Flow 로그인 실패'}`, r?.loggedIn ? 'ok' : 'error');
+      } catch (e) {
+        dsSetStatus(ids.statusId, `⚠️ Flow 로그인 오류: ${(e as Error)?.message ?? e}`, 'error');
+      }
+    });
+  }
+
+  if (checkBtn && !checkBtn.dataset.flowBound) {
+    checkBtn.dataset.flowBound = '1';
+    checkBtn.addEventListener('click', async () => {
+      dsSetStatus(ids.statusId, 'Flow 로그인 세션 확인 중...', 'info');
+      try {
+        const r = await api?.checkFlowLogin?.();
+        dsSetStatus(ids.statusId, r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? 'Flow 미로그인'}`, r?.loggedIn ? 'ok' : 'error');
+      } catch (e) {
+        dsSetStatus(ids.statusId, `⚠️ Flow 확인 오류: ${(e as Error)?.message ?? e}`, 'error');
+      }
+    });
+  }
+}
+
 /** Shows/hides the login row. */
 export function toggleDropshotRow(rowId: string, show: boolean): void {
   const row = document.getElementById(rowId);
@@ -77,6 +110,21 @@ export function wireSelectDropshotRow(opts: {
   const sel = document.getElementById(opts.selectId) as HTMLSelectElement | null;
   if (!sel) return;
   const sync = (): void => toggleDropshotRow(opts.rowId, sel.value === 'dropshot');
+  sel.addEventListener('change', sync);
+  sync();
+}
+
+export function wireSelectFlowRow(opts: {
+  selectId: string;
+  rowId: string;
+  loginBtnId: string;
+  checkBtnId: string;
+  statusId: string;
+}): void {
+  bindFlowLogin(opts);
+  const sel = document.getElementById(opts.selectId) as HTMLSelectElement | null;
+  if (!sel) return;
+  const sync = (): void => toggleDropshotRow(opts.rowId, sel.value === 'flow');
   sel.addEventListener('change', sync);
   sync();
 }

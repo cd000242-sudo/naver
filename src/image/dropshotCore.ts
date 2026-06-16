@@ -55,7 +55,10 @@ export async function ensurePage(onLog?: (m: string) => void): Promise<any> {
       try {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         await (cachedPage as any).evaluate(() => document.readyState);
-        return cachedPage;
+        if (await isLoggedIn(cachedPage)) {
+          return cachedPage;
+        }
+        clearCached();
       } catch {
         // fall through to re-init
       }
@@ -83,7 +86,10 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
       await (cachedPage as any).evaluate(() => document.readyState);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await openDropshotImageWorkspace(cachedPage, onLog);
-      return cachedPage;
+      if (await isLoggedIn(cachedPage)) {
+        return cachedPage;
+      }
+      clearCached();
     } catch {
       clearCached();
     }
@@ -158,6 +164,11 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
   await hpage.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
   await new Promise((r) => setTimeout(r, 4000));
   await openDropshotImageWorkspace(hpage, onLog);
+  if (!(await isLoggedIn(hpage))) {
+    await hctx.close();
+    clearCached();
+    throw new Error('[리더스 나노바나나 무제한] 로그인 세션 저장 확인 실패 — 로그인 완료 후 다시 시도해주세요.');
+  }
 
   setCached(hctx, hpage);
   onLog?.('[리더스 나노바나나] 준비 완료');

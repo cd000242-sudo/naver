@@ -1115,6 +1115,10 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('flow:testConnection'),
 
   // ImageFX 연결 테스트 — Flow와 별도 프로필. 세션 없으면 visible 브라우저 자동 표시
+  checkFlowLogin: (): Promise<{ loggedIn: boolean; message: string; userInfo?: { email?: string; name?: string } }> =>
+    ipcRenderer.invoke('flow:check-login'),
+  flowLogin: (): Promise<{ loggedIn: boolean; message: string; userInfo?: { email?: string; name?: string } }> =>
+    ipcRenderer.invoke('flow:login'),
   testImageFxConnection: (): Promise<{ ok: boolean; message: string; userInfo?: { email?: string; name?: string } }> =>
     ipcRenderer.invoke('imagefx:testConnection'),
 

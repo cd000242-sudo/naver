@@ -12,6 +12,7 @@ describe('Dropshot unlimited mode safety', () => {
   const browserCode = read('image/dropshotBrowser.ts');
   const captureCode = read('image/dropshotCapture.ts');
   const sessionCode = read('image/dropshotSession.ts');
+  const coreCode = read('image/dropshotCore.ts');
 
   it('reads unlimited switch state and zero-cost generate button state', () => {
     expect(browserCode).toMatch(/readDropshotControlState/);
@@ -33,5 +34,20 @@ describe('Dropshot unlimited mode safety', () => {
   it('can close cached Dropshot browser contexts after sequential tests', () => {
     expect(sessionCode).toMatch(/closeBrowserCache/);
     expect(sessionCode).toMatch(/await .*\.close\(\)/);
+  });
+
+  it('does not treat workspace text as a valid login session without auth tokens', () => {
+    expect(browserCode).toMatch(/CognitoIdentityServiceProvider/);
+    expect(browserCode).toMatch(/idToken\|accessToken\|refreshToken/);
+    expect(browserCode).toMatch(/document\.cookie/);
+    expect(browserCode).not.toMatch(/hasAccountChrome/);
+    expect(browserCode).not.toMatch(/hasWorkspaceNav/);
+  });
+
+  it('rechecks cached and headless Dropshot pages before marking the session ready', () => {
+    expect(coreCode).toMatch(/if\s*\(await isLoggedIn\(cachedPage\)\)\s*{\s*return cachedPage;\s*}/);
+    expect(coreCode).toMatch(/로그인 세션 저장 확인 실패/);
+    expect(coreCode).toMatch(/if\s*\(!\(await isLoggedIn\(hpage\)\)\)\s*{/);
+    expect(coreCode).toMatch(/clearCached\(\)/);
   });
 });

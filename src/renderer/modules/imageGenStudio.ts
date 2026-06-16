@@ -13,7 +13,7 @@ import {
   resetResultsUi,
   downloadAll,
 } from './imageGenStudioLightbox.js';
-import { wireSelectDropshotRow } from './dropshotLoginUi.js';
+import { wireSelectDropshotRow, wireSelectFlowRow } from './dropshotLoginUi.js';
 import {
   getSelectedEngine,
   populateEngineSelect,
@@ -50,6 +50,13 @@ export function initImageGenStudio(): void {
     loginBtnId: 'imgstudio-ds-login-btn',
     checkBtnId: 'imgstudio-ds-check-btn',
     statusId: 'imgstudio-ds-status',
+  });
+  wireSelectFlowRow({
+    selectId: 'imgstudio-engine',
+    rowId: 'imgstudio-flow-login',
+    loginBtnId: 'imgstudio-flow-login-btn',
+    checkBtnId: 'imgstudio-flow-check-btn',
+    statusId: 'imgstudio-flow-status',
   });
   (window as any).switchImagesSubtab = _switchSubtab;
 }

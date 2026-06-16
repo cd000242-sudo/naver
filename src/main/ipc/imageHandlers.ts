@@ -119,6 +119,24 @@ export function registerImageHandlers(ctx: IpcContext): void {
 
     // ImageFX 연결 테스트 — Flow와 별도 프로필 디렉토리라 명시 트리거 필요.
     // 세션 없으면 visible 브라우저 자동 표시 → 사용자가 Google 로그인 진행.
+    safeHandle('flow:check-login', async () => {
+        try {
+            const { checkFlowLogin } = await import('../../image/flowGenerator.js');
+            return await checkFlowLogin();
+        } catch (error: any) {
+            return { loggedIn: false, message: `Flow 로그인 확인 실패: ${error.message}` };
+        }
+    });
+
+    safeHandle('flow:login', async () => {
+        try {
+            const { flowLogin } = await import('../../image/flowGenerator.js');
+            return await flowLogin();
+        } catch (error: any) {
+            return { loggedIn: false, message: `Flow 로그인 실패: ${error.message}` };
+        }
+    });
+
     safeHandle('imagefx:testConnection', async () => {
         try {
             const { testImageFxConnection } = await import('../../image/imageFxGenerator.js');

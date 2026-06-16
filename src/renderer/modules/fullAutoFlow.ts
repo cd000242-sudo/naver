@@ -1170,6 +1170,11 @@ async function executeSemiAutoFlow(formData) {
     }
     catch (error) {
         console.error('[SemiAutoFlow] 오류:', error);
+        if (isPostContentAppliedPublishError(error?.message || String(error || ''))) {
+            appendLog('🛑 본문 작성 완료 후 발행 단계에서 브라우저 세션이 종료되었습니다. 같은 글을 다시 쓰지 않도록 자동 재작성을 중단합니다.');
+            showUnifiedProgress(95, '본문 작성 완료 — 발행 상태 확인 필요', '네이버 글쓰기 창의 임시저장/작성 상태를 먼저 확인해주세요.');
+            throw error;
+        }
         try {
             resetPublishing();
         }
@@ -1397,7 +1402,7 @@ function updateUnifiedImagePreview(headings, generatedImages) {
         ? generatedImages.filter((img) => img?.isThumbnail !== true)
         : [];
     const integratedHtml = headings.map((heading, index) => {
-        const generatedImage = bodyImages[index] || generatedImages?.[index];
+        const generatedImage = bodyImages[index];
         const imageStatus = generatedImage ? '✅ 생성됨' : '⏳ 준비중';
         const statusColor = generatedImage ? 'var(--success)' : 'var(--accent)';
         const headingTitle = typeof heading === 'string' ? heading : (heading.title || heading);

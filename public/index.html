@@ -3822,6 +3822,16 @@
                         </div>
                     </div>
 
+                    <!-- ✅ Flow 선택 시 Google Labs 로그인/확인 -->
+                    <div id="mgmt-flow-login" style="display:none; margin-bottom:1rem; padding:0.6rem 0.75rem; background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:8px;">
+                        <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.4rem;">🍌 Flow는 labs.google Google 로그인 세션이 필요합니다.</div>
+                        <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+                            <button type="button" id="mgmt-flow-login-btn" style="padding:0.45rem 0.9rem; background:linear-gradient(135deg,#22c55e,#16a34a); color:white; border:none; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;">🔗 Flow 로그인</button>
+                            <button type="button" id="mgmt-flow-check-btn" style="padding:0.45rem 0.9rem; background:var(--bg-tertiary); color:var(--text-strong); border:1px solid var(--border-medium); border-radius:6px; font-weight:600; font-size:0.8rem; cursor:pointer;">✅ 로그인 확인</button>
+                            <span id="mgmt-flow-status" style="font-size:0.78rem; color:var(--text-muted);"></span>
+                        </div>
+                    </div>
+
                     <!-- ✅ [2026-02-22] Leonardo AI 상세 모델 선택 (Leonardo AI 선택 시에만 표시) -->
                     <div id="leonardoai-model-selection-container"
                         style="display: none; margin-bottom: 1rem; padding: 1rem; background: rgba(251, 146, 60, 0.05); border-radius: 8px; border: 1px solid rgba(251, 146, 60, 0.2);">
@@ -4425,6 +4435,14 @@
                                     <button type="button" id="imgstudio-ds-login-btn" style="padding:0.45rem 0.9rem; background:linear-gradient(135deg,#f59e0b,#d97706); color:white; border:none; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;">🔗 로그인</button>
                                     <button type="button" id="imgstudio-ds-check-btn" style="padding:0.45rem 0.9rem; background:var(--bg-tertiary); color:var(--text-strong); border:1px solid var(--border-medium); border-radius:6px; font-weight:600; font-size:0.8rem; cursor:pointer;">✅ 로그인 확인</button>
                                     <span id="imgstudio-ds-status" style="font-size:0.78rem; color:var(--text-muted);"></span>
+                                </div>
+                            </div>
+                            <div id="imgstudio-flow-login" style="display:none; margin-top:0.6rem; padding:0.6rem 0.75rem; background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:var(--radius-sm);">
+                                <div style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.4rem;">🍌 Flow는 labs.google Google 로그인 세션이 필요합니다.</div>
+                                <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+                                    <button type="button" id="imgstudio-flow-login-btn" style="padding:0.45rem 0.9rem; background:linear-gradient(135deg,#22c55e,#16a34a); color:white; border:none; border-radius:6px; font-weight:700; font-size:0.8rem; cursor:pointer;">🔗 Flow 로그인</button>
+                                    <button type="button" id="imgstudio-flow-check-btn" style="padding:0.45rem 0.9rem; background:var(--bg-tertiary); color:var(--text-strong); border:1px solid var(--border-medium); border-radius:6px; font-weight:600; font-size:0.8rem; cursor:pointer;">✅ 로그인 확인</button>
+                                    <span id="imgstudio-flow-status" style="font-size:0.78rem; color:var(--text-muted);"></span>
                                 </div>
                             </div>
                         </div>

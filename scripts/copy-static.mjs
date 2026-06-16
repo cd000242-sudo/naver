@@ -212,6 +212,7 @@ try {
     'headingVideoPreviewUtils.js',
     'veoVideoUtils.js',
     'semiAutoImageSearch.js',
+    'semiAutoHeadingExtractor.js',
     // UI/이벤트 관련 (마지막에 로드)
     'categoryModalUtils.js',
     'appEventsHandler.js',

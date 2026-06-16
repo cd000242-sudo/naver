@@ -52,6 +52,7 @@ import './components/PromptEditModal.js';
 import { InitializationGuard, clearImageGenerationLocks, runUiActionLocked } from './utils/stabilityUtils.js';
 // ✅ [2026-01-25 모듈화] HTML 유틸리티
 import { escapeHtml, removeMarkdownBold } from './utils/htmlUtils.js';
+import { extractSemiAutoHeadingsFromBody } from './utils/semiAutoHeadingExtractor.js';
 // ✅ [2026-01-25 모듈화] 이미지 비용 유틸리티
 import { isCostRiskImageProvider, getCostRiskProviderLabel, getTodayKey } from './utils/imageCostUtils.js';
 // ✅ [2026-01-25 모듈화] 쇼핑커넥트 유틸리티
@@ -306,7 +307,7 @@ import { initImageNarrativeMode } from './modules/imageNarrativeMode.js';
 // ✅ [SPEC-DROPSHOT-2026] 이미지 관리 → 🎨 이미지 생성 서브탭 (멀티엔진 대량 생성 스튜디오)
 import { initImageGenStudio } from './modules/imageGenStudio.js';
 // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 UI (엔진 선택 시 노출)
-import { wireSelectDropshotRow } from './modules/dropshotLoginUi.js';
+import { wireSelectDropshotRow, wireSelectFlowRow } from './modules/dropshotLoginUi.js';
 import { initImageLibrary, loadLibraryImages, useLibraryImage, switchToTab, generateFavoritesContent, generateTemplatesContent, getEnhancedTemplates } from './modules/contentPreviewAndLibrary.js';
 declare let thumbnailBackgroundImage: string | null;
 declare let thumbnailBackgroundDataUrl: string | null;
@@ -3782,38 +3783,15 @@ async function initUnifiedTab(): Promise<void> {
     if (/^\s*\d{1,2}\s*[\).:：\-]\s+\S/.test(raw) && !/[.!。]\s*$/.test(title)) return true;
 
     const prevBlank = index === 0 || String(lines[index - 1] || '').trim().length === 0;
-    const next = String(lines[index + 1] || '').trim();
-    const sentenceLike = /(?:습니다|합니다|했어요|돼요|입니다|이에요|예요|다)\.?$/u.test(title) || /[.!。]\s*$/u.test(title);
-    return prevBlank && next.length > 0 && title.length <= 46 && !sentenceLike;
+    const nextNonEmpty = lines.slice(index + 1).find((line) => String(line || '').trim().length > 0)?.trim() || '';
+    const sentenceLike = /(?:습니다|합니다|했어요|돼요|입니다|이에요|예요|했다|였다|된다|이다|다)\.?$/u.test(title) || /[.!?。？！]\s*$/u.test(title);
+    const startsLikeQuote = /^[“"'‘’]/u.test(title);
+    const hasHeadingKeyword = /(?:이유|지점|부분|질문|핵심|무엇인가|방법|정리|비교|분석|후기|반응|오해|결론|포인트|순서|기준|원인|진짜|체크리스트|루틴)$/u.test(title);
+    return prevBlank && nextNonEmpty.length > 0 && !sentenceLike && !startsLikeQuote && (title.length <= 34 || hasHeadingKeyword);
   }
 
   function _extractSemiAutoManualHeadings(body: string): Array<{ title: string; content: string; prompt: string; source: string }> {
-    const lines = String(body || '').split(/\r?\n/);
-    const matches: Array<{ lineIndex: number; title: string }> = [];
-    const seen = new Set<string>();
-
-    lines.forEach((line, index) => {
-      if (!_isSemiAutoManualHeadingCandidate(lines, index)) return;
-      const title = _normalizeSemiAutoManualHeadingTitle(line);
-      const key = title.toLowerCase();
-      if (!title || seen.has(key)) return;
-      seen.add(key);
-      matches.push({ lineIndex: index, title });
-    });
-
-    return matches.map((match, index) => {
-      const next = matches[index + 1]?.lineIndex ?? lines.length;
-      const content = lines
-        .slice(match.lineIndex + 1, next)
-        .join('\n')
-        .trim();
-      return {
-        title: match.title,
-        content,
-        prompt: match.title,
-        source: 'semi-auto:manual-body-heading',
-      };
-    });
+    return extractSemiAutoHeadingsFromBody(body);
   }
 
   function _parsePastedContent(raw: string): {
@@ -10286,6 +10264,13 @@ wireSelectDropshotRow({
   loginBtnId: 'mgmt-ds-login-btn',
   checkBtnId: 'mgmt-ds-check-btn',
   statusId: 'mgmt-ds-status',
+});
+wireSelectFlowRow({
+  selectId: 'image-source-select',
+  rowId: 'mgmt-flow-login',
+  loginBtnId: 'mgmt-flow-login-btn',
+  checkBtnId: 'mgmt-flow-check-btn',
+  statusId: 'mgmt-flow-status',
 });
 
 // ✅ [v2.10.191 Phase 3.8.3] SERP 추이 패널 초기화 + 데이터 로드

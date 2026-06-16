@@ -157,6 +157,8 @@ describe('recoverable publish session retry guard', () => {
     expect(source).toContain('function isPostContentAppliedPublishError');
     expect(source).toContain('POST_CONTENT_APPLIED');
     expect(source).toContain('blockPostContentAppliedPublishRetry(errorMsg)');
+    expect(source).toContain('본문 작성 완료 후 발행 단계에서 브라우저 세션이 종료되었습니다');
+    expect(source).toContain("showUnifiedProgress(95, '본문 작성 완료 — 발행 상태 확인 필요'");
 
     const markerGuard = source.indexOf('blockPostContentAppliedPublishRetry(errorMsg)');
     const detachedRetry = source.indexOf('retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg)');

@@ -2315,6 +2315,99 @@ export async function generateWithFlow(
 }
 
 // ─── 연결 테스트 ────
+export async function checkFlowLogin(): Promise<{ loggedIn: boolean; message: string; userInfo?: any }> {
+    let ctx: BrowserContext | null = null;
+    try {
+        if (cachedPage && !cachedPage.isClosed()) {
+            const cachedLoggedIn = await isLoggedInToFlow(cachedPage).catch(() => false);
+            if (cachedLoggedIn) {
+                const userInfo = await readFlowSessionUser(cachedPage);
+                return {
+                    loggedIn: true,
+                    message: `Flow 로그인 세션 확인됨${userInfo?.email ? ` (${userInfo.email})` : ''}`,
+                    userInfo,
+                };
+            }
+        }
+
+        if (cachedContext) {
+            try { await cachedContext.close(); } catch { /* ignore */ }
+            cachedContext = null;
+            cachedPage = null;
+            cachedProjectUrl = null;
+            _networkListenerInstalled = false;
+            _networkImageQueue = [];
+        }
+
+        const profileDir = getFlowProfileDir();
+        ctx = await launchWithStealthFallback(profileDir, true);
+        const page = ctx.pages()[0] || await ctx.newPage();
+        await page.goto('https://labs.google/fx/tools/flow', { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await page.waitForLoadState('networkidle', { timeout: 2500 }).catch(() => {});
+        await dismissCookieBanner(page);
+
+        const loggedIn = await isLoggedInToFlow(page).catch(() => false);
+        if (!loggedIn) {
+            return {
+                loggedIn: false,
+                message: 'Flow 로그인이 필요합니다. [Flow 로그인] 버튼으로 Google 계정 로그인 후 다시 확인해주세요.',
+            };
+        }
+
+        const userInfo = await readFlowSessionUser(page);
+        return {
+            loggedIn: true,
+            message: `Flow 로그인 세션 확인됨${userInfo?.email ? ` (${userInfo.email})` : ''}`,
+            userInfo,
+        };
+    } catch (err) {
+        return { loggedIn: false, message: `Flow 로그인 확인 실패: ${(err as Error)?.message ?? err}` };
+    } finally {
+        try {
+            if (ctx) await ctx.close();
+        } catch { /* ignore */ }
+    }
+}
+
+export async function flowLogin(): Promise<{ loggedIn: boolean; message: string; userInfo?: any }> {
+    try {
+        const page = await ensureFlowBrowserPage();
+        const loggedIn = await isLoggedInToFlow(page).catch(() => false);
+        if (!loggedIn) {
+            return {
+                loggedIn: false,
+                message: 'Flow 로그인 창에서 Google 로그인을 완료한 뒤 다시 확인해주세요.',
+            };
+        }
+        const userInfo = await readFlowSessionUser(page);
+        return {
+            loggedIn: true,
+            message: `Flow 로그인 완료${userInfo?.email ? ` (${userInfo.email})` : ''}`,
+            userInfo,
+        };
+    } catch (err) {
+        const msg = (err as Error)?.message || String(err);
+        if (msg.startsWith('FLOW_LOGIN_TIMEOUT')) {
+            return { loggedIn: false, message: 'Flow 로그인 시간이 초과되었습니다. Google 2단계 인증까지 완료한 뒤 다시 시도해주세요.' };
+        }
+        return { loggedIn: false, message: `Flow 로그인 실패: ${msg}` };
+    }
+}
+
+async function readFlowSessionUser(page: Page): Promise<any | null> {
+    try {
+        const session = await page.evaluate(async () => {
+            try {
+                const res = await fetch('/fx/api/auth/session', { credentials: 'include' });
+                return res.ok ? await res.json() : null;
+            } catch { return null; }
+        });
+        return (session as any)?.user || null;
+    } catch {
+        return null;
+    }
+}
+
 export async function testFlowConnection(): Promise<{ ok: boolean; message: string; userInfo?: any }> {
     try {
         const page = await ensureFlowBrowserPage();

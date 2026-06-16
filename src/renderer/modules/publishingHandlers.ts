@@ -4,6 +4,8 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
+import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
 declare let currentPostId: string;
@@ -1755,7 +1757,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
 }
 
 // 반자동 발행 처리
-function normalizeSemiAutoHeadingTitle(raw: string): string {
+function normalizeSemiAutoHeadingTitleLegacy(raw: string): string {
   return String(raw || '')
     .trim()
     .replace(/^\s{0,3}#{1,4}\s+/, '')
@@ -1766,14 +1768,14 @@ function normalizeSemiAutoHeadingTitle(raw: string): string {
     .trim();
 }
 
-function isSemiAutoHeadingCandidate(lines: string[], index: number): boolean {
+function isSemiAutoHeadingCandidateLegacy(lines: string[], index: number): boolean {
   const raw = String(lines[index] || '').trim();
   if (!raw) return false;
   if (/^(?:#\S+\s*){2,}$/u.test(raw)) return false;
   if (/^(?:A|Q)\d?\s*[:：.]/i.test(raw)) return false;
   if (/^[-*•]\s+/.test(raw)) return false;
 
-  const title = normalizeSemiAutoHeadingTitle(raw);
+  const title = normalizeSemiAutoHeadingTitleLegacy(raw);
   if (title.length < 3 || title.length > 80) return false;
   if (/^(?:본문|해시태그|태그|요약|마무리)$/u.test(title)) return false;
 
@@ -1783,19 +1785,21 @@ function isSemiAutoHeadingCandidate(lines: string[], index: number): boolean {
   if (/^\s*\d{1,2}\s*[\).:：\-]\s+\S/.test(raw) && !/[.!。]\s*$/.test(title)) return true;
 
   const prevBlank = index === 0 || String(lines[index - 1] || '').trim().length === 0;
-  const next = String(lines[index + 1] || '').trim();
-  const sentenceLike = /(?:습니다|합니다|했어요|돼요|입니다|이에요|예요|다)\.?$/u.test(title) || /[.!。]\s*$/u.test(title);
-  return prevBlank && next.length > 0 && title.length <= 46 && !sentenceLike;
+  const nextNonEmpty = lines.slice(index + 1).find((line) => String(line || '').trim().length > 0)?.trim() || '';
+  const sentenceLike = /(?:습니다|합니다|했어요|돼요|입니다|이에요|예요|했다|였다|된다|이다|다)\.?$/u.test(title) || /[.!?。？！]\s*$/u.test(title);
+  const startsLikeQuote = /^[“"'‘’]/u.test(title);
+  const hasHeadingKeyword = /(?:이유|지점|부분|질문|핵심|무엇인가|방법|정리|비교|분석|후기|반응|오해|결론|포인트|순서|기준|원인|진짜|체크리스트|루틴)$/u.test(title);
+  return prevBlank && nextNonEmpty.length > 0 && !sentenceLike && !startsLikeQuote && (title.length <= 34 || hasHeadingKeyword);
 }
 
-function extractSemiAutoHeadingsFromBody(body: string): any[] {
+function extractSemiAutoHeadingsFromBodyLegacy(body: string): any[] {
   const lines = String(body || '').split(/\r?\n/);
   const matches: Array<{ lineIndex: number; title: string }> = [];
   const seen = new Set<string>();
 
   lines.forEach((line, index) => {
-    if (!isSemiAutoHeadingCandidate(lines, index)) return;
-    const title = normalizeSemiAutoHeadingTitle(line);
+    if (!isSemiAutoHeadingCandidateLegacy(lines, index)) return;
+    const title = normalizeSemiAutoHeadingTitleLegacy(line);
     const key = title.toLowerCase();
     if (!title || seen.has(key)) return;
     seen.add(key);

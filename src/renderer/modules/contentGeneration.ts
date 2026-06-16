@@ -4,6 +4,8 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ✅ renderer.ts의 전역 변수/함수 참조
+import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
 declare let currentPostId: string | null;
@@ -291,6 +293,22 @@ function sanitizeScrapedContent(content: any): void {
 //   - generateContentFromUrl (선택적 — 기존 분산 코드 유지하면 중복 위험)
 //   - paraphraseContent (✓ v2.11.0에서 통합)
 //   - postListUI 글 불러오기 (✓ v2.11.0에서 통합)
+function rebuildHeadingsFromPreferredBody(structuredContent: any): void {
+  if (!structuredContent || typeof structuredContent !== 'object') return;
+  const body = String(structuredContent.bodyPlain || structuredContent.content || '').trim();
+  if (!body) return;
+
+  const extracted = extractSemiAutoHeadingsFromBody(body);
+  structuredContent.headings = extracted.length > 0
+    ? extracted.map((heading) => ({
+        title: heading.title,
+        content: heading.content,
+        prompt: heading.prompt || heading.title,
+        source: 'paraphrase:body-heading',
+      }))
+    : [];
+}
+
 export async function applyContentPostProcessing(
   structuredContent: any,
   opts?: {
@@ -1399,10 +1417,14 @@ export function fillSemiAutoFields(structuredContent: any): void {
   const contentTextarea = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
   if (contentTextarea) {
     let body = structuredContent.bodyPlain || structuredContent.content || '';
+    const preferBodyPlain =
+      structuredContent._preferBodyPlain === true ||
+      structuredContent._source === 'paraphrase' ||
+      structuredContent._paraphrased === true;
 
     // ✅ [핵심 수정] 소제목이 있으면 항상 headings에서 본문 재구성
     // 미리보기(headings)와 편집 필드(bodyPlain)가 다른 내용일 수 있으므로 동기화
-    if (structuredContent.headings && structuredContent.headings.length > 0) {
+    if (!preferBodyPlain && structuredContent.headings && structuredContent.headings.length > 0) {
       console.log('[fillSemiAutoFields] ✅ headings에서 본문 재구성 (미리보기와 동기화)');
       const headings = structuredContent.headings;
       const structuredBlocks: string[] = [];
@@ -1755,6 +1777,11 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
     if (titleInput && structuredContent.selectedTitle && typeof structuredContent.selectedTitle === 'string') {
       titleInput.value = structuredContent.selectedTitle;
     }
+    structuredContent._source = 'paraphrase';
+    structuredContent._paraphrased = true;
+    structuredContent._preferBodyPlain = true;
+    structuredContent._bodyManuallyEdited = true;
+
     if (contentTextarea && structuredContent.bodyPlain && typeof structuredContent.bodyPlain === 'string') {
       const normalized = normalizeReadableBodyText(structuredContent.bodyPlain);
       structuredContent.bodyPlain = normalized;
@@ -1773,6 +1800,7 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
     //   배경: v2.10.117~122에서 paraphraseContent post-processing 단계(저장/분석/펼치기/마킹/이미지타이틀)를
     //   *하나씩* 추가하다가 5번 fix 반복. D3 진단 결과: generateContent와 분리된 분산 코드가 원인.
     //   해결: applyContentPostProcessing이 모든 단계를 *동일 순서*로 실행 → 누락 불가능.
+    rebuildHeadingsFromPreferredBody(structuredContent);
     await applyContentPostProcessing(structuredContent, { source: 'paraphrase', forceNew: true });
 
     appendLog('✨ 페러프레이징 완료! 필드를 확인해주세요.');
