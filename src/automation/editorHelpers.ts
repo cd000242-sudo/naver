@@ -24,6 +24,10 @@ import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typi
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, ensureTailTypingReady } from './richTextPaste.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
+  stripBodyHashtagBlocks,
+  stripBodyHashtagsFromStructuredContent,
+} from './bodyHashtagCleanup.js';
+import {
   enforceOrdinalLineBreaks,
   stripRepeatedHookBlocks,
 } from './bodyTextCleanupPolicy.js';
@@ -587,10 +591,18 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
   self.__prePublishExpectations = null;
 
   await self.retry(async () => {
-    const structured = resolved.structuredContent;
+    let structured = resolved.structuredContent;
     if (!structured) {
       await self.applyPlainContent(resolved);
       return;
+    }
+
+    const structuredWithoutBodyHashtags = stripBodyHashtagsFromStructuredContent(structured);
+    if (structuredWithoutBodyHashtags !== structured) {
+      structured = structuredWithoutBodyHashtags;
+      resolved.structuredContent = structured;
+      if (structured.bodyPlain) resolved.content = structured.bodyPlain;
+      self.log('🧹 본문 내부 해시태그 문단 제거 완료 — 해시태그는 마지막 tail 영역에서만 입력합니다.');
     }
 
     // ✅ 본문에서 중복된 CTA 텍스트 제거 (🔗 더 알아보기 등)
@@ -627,6 +639,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
         // ✅ 수정된 본문에서도 중복된 CTA 텍스트 제거
         let cleanedContent = stripCtaArtifactsFromBody(currentContent.content);
+        cleanedContent = stripBodyHashtagBlocks(cleanedContent);
 
         cleanedContent = stripRepeatedHookBlocks(cleanedContent);
         cleanedContent = enforceOrdinalLineBreaks(cleanedContent);
@@ -2058,6 +2071,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     }
 
     // ✅ 빠른 검증 (성능 최적화)
+    (self as any).__editorContentApplied = true;
     self.log('\n✅ 콘텐츠 작성 완료! 발행 준비 중...');
 
     // 간단한 이미지 배치 현황만 로깅

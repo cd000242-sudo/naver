@@ -2581,7 +2581,21 @@ async function closeBrowserForPublishRetry(payload) {
         console.warn('[PublishRetry] closeBrowser failed before publish retry:', error);
     }
 }
+function isPostContentAppliedPublishError(errorMsg) {
+    return String(errorMsg || '').includes('POST_CONTENT_APPLIED');
+}
+function blockPostContentAppliedPublishRetry(errorMsg) {
+    if (!isPostContentAppliedPublishError(errorMsg)) {
+        return false;
+    }
+    appendLog('⚠️ 본문 작성 완료 후 발행 단계 오류가 감지되어 자동 재로그인/재작성을 중단합니다.');
+    appendLog('   네이버 글쓰기 창의 작성 내용 또는 임시저장 상태를 먼저 확인해주세요.');
+    return true;
+}
 async function retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg) {
+    if (isPostContentAppliedPublishError(errorMsg)) {
+        return null;
+    }
     if (!isDetachedLoginFrameError(errorMsg)) {
         return null;
     }
@@ -2613,6 +2627,9 @@ async function retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, err
     throw new Error(retryErrorMsg);
 }
 function isRecoverablePublishAutomationError(errorMsg) {
+    if (isPostContentAppliedPublishError(errorMsg)) {
+        return false;
+    }
     const normalized = String(errorMsg || '').toLowerCase();
     const userActionRequiredSignals = [
         'captcha',
@@ -2692,6 +2709,9 @@ function shouldCloseBrowserBeforePublishRetry(errorMsg) {
     return hardSessionSignals.some((signal) => normalized.includes(signal.toLowerCase()));
 }
 async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg) {
+    if (isPostContentAppliedPublishError(errorMsg)) {
+        return null;
+    }
     if (!isRecoverablePublishAutomationError(errorMsg)) {
         return null;
     }
@@ -3109,6 +3129,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     });
     if (!apiResponse.success) {
         const errorMsg = apiResponse.error || '블로그 발행 실패';
+        if (blockPostContentAppliedPublishRetry(errorMsg)) {
+            throw new Error(errorMsg);
+        }
         const detachedFrameRetryResult = await retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg);
         if (detachedFrameRetryResult) {
             return detachedFrameRetryResult;
@@ -3152,6 +3175,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
             appendLog('⚠️ 이전 자동화가 아직 실행 중입니다. 발행이 실행되지 않았습니다.');
             appendLog('💡 잠시 후 다시 시도하거나, 브라우저 닫기 후 재시도해주세요.');
             throw new Error('이전 자동화가 아직 실행 중입니다. 완료 후 다시 시도해주세요.');
+        }
+        if (blockPostContentAppliedPublishRetry(errorMsg)) {
+            throw new Error(errorMsg);
         }
         const detachedFrameRetryResult = await retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg);
         if (detachedFrameRetryResult) {

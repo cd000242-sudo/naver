@@ -152,6 +152,44 @@ describe('recoverable publish session retry guard', () => {
     expect(source).toContain('...payload');
     expect(source).toContain('timeout: PUBLISH_AUTOMATION_TIMEOUT_MS');
   });
+
+  it('blocks every runAutomation retry after editor content was already applied', () => {
+    expect(source).toContain('function isPostContentAppliedPublishError');
+    expect(source).toContain('POST_CONTENT_APPLIED');
+    expect(source).toContain('blockPostContentAppliedPublishRetry(errorMsg)');
+
+    const markerGuard = source.indexOf('blockPostContentAppliedPublishRetry(errorMsg)');
+    const detachedRetry = source.indexOf('retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg)');
+    const recoverableRetry = source.indexOf('retryRunAutomationAfterRecoverablePublishFailure(apiClient, payload, errorMsg)');
+    const networkRetry = source.indexOf("payload._networkRetryCount = retryAttempts + 1");
+
+    expect(markerGuard).toBeGreaterThan(-1);
+    expect(detachedRetry).toBeGreaterThan(markerGuard);
+    expect(recoverableRetry).toBeGreaterThan(markerGuard);
+    expect(networkRetry).toBeGreaterThan(markerGuard);
+  });
+});
+
+describe('post-content-applied publish failure marker', () => {
+  const source = readFileSync(new URL('../naverBlogAutomation.ts', import.meta.url), 'utf8');
+
+  it('marks publish-stage failures after content insertion so renderer cannot rewrite the post', () => {
+    expect(source).toContain('POST_CONTENT_APPLIED');
+    expect(source).toContain('let editorContentApplied = false');
+    expect(source).toContain('(this as any).__editorContentApplied = false');
+    expect(source).toContain('editorContentApplied || (this as any).__editorContentApplied === true');
+    expect(source).toContain('editorContentApplied = true');
+    expect(source).toContain('throwPostContentAppliedPublishError');
+    expect(source).toContain('postContentAppliedPublishFailure = true');
+    expect(source).toContain('keepBrowserOpen: resolvedOptions.keepBrowserOpen || postContentAppliedPublishFailure');
+    expect(source).toContain('!keepBrowserOpen && !postContentAppliedPublishFailure');
+
+    const firstApplied = source.indexOf('editorContentApplied = true');
+    const firstPublish = source.indexOf('await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod)');
+
+    expect(firstApplied).toBeGreaterThan(-1);
+    expect(firstPublish).toBeGreaterThan(firstApplied);
+  });
 });
 
 describe('full-auto image failure policy', () => {

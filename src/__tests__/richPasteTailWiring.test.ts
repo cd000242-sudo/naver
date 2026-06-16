@@ -24,6 +24,8 @@ describe('rich paste tail wiring', () => {
     const code = read('automation/editorHelpers.ts');
     const calls = code.match(/stripCtaArtifactsFromBody\(/g) || [];
     expect(calls.length).toBeGreaterThanOrEqual(2);
+    expect(code).toMatch(/stripBodyHashtagsFromStructuredContent\(/);
+    expect(code).toMatch(/stripBodyHashtagBlocks\(/);
     // The old blanket regex deleted legitimate standalone section dividers.
     expect(code).not.toContain("replace(/━━━━━━━━━━━━━━━━━━━━━━[^\\n]*\\n?/g, '')");
   });
@@ -161,6 +163,15 @@ describe('rich paste tail wiring', () => {
   it('asserts expected hashtags are present in the editor body before publish', () => {
     const code = read('automation/prePublishAssertion.ts');
     expect(code).toMatch(/hashtag/i);
+  });
+
+  it('marks editor content as applied before the previous-post and hashtag tail phase', () => {
+    const code = read('automation/editorHelpers.ts');
+    const appliedMarker = code.indexOf('__editorContentApplied = true');
+    const tailPhase = code.indexOf('[TailOptions]');
+
+    expect(appliedMarker).toBeGreaterThan(-1);
+    expect(tailPhase).toBeGreaterThan(appliedMarker);
   });
 
   it('verifies the server session before reusing an open browser in runPostOnly', () => {

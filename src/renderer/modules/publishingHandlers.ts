@@ -92,6 +92,15 @@ function parsePublishHashtags(...sources: any[]): string[] {
   return result;
 }
 
+function parsePublishHashtagsWithManualPriority(manualSource: any, ...fallbackSources: any[]): string[] {
+  const manualHashtags = parsePublishHashtags(manualSource);
+  if (manualHashtags.length > 0) {
+    return manualHashtags;
+  }
+
+  return parsePublishHashtags(...fallbackSources);
+}
+
 function readManualTitleOverrideForPublish(contentMode?: string): string | undefined {
   const isAffiliate = String(contentMode || '').trim() === 'affiliate' || isShoppingConnectModeActive();
   const ids = isAffiliate
@@ -574,9 +583,10 @@ export async function handleFullAutoPublish(): Promise<void> {
       UnifiedDOMCache.getRealCategoryName?.() || UnifiedDOMCache.getRealCategory?.()
     );
     const linkPreviousPostChecked = (document.getElementById('unified-link-previous-post') as HTMLInputElement | null)?.checked === true;
-    const publishHashtags = parsePublishHashtags(
+    const visibleHashtagsInput = (document.getElementById('unified-generated-hashtags') as HTMLInputElement | null)?.value;
+    const publishHashtags = parsePublishHashtagsWithManualPriority(
+      visibleHashtagsInput,
       structuredContent?.hashtags,
-      (document.getElementById('unified-generated-hashtags') as HTMLInputElement | null)?.value,
       keywords,
       title,
     );
@@ -1636,7 +1646,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
         mainSettings.contentMode,
         mainSettings.category || UnifiedDOMCache.getRealCategoryName?.() || UnifiedDOMCache.getRealCategory?.()
       );
-      const multiPublishHashtags = parsePublishHashtags(
+      const multiPublishHashtags = parsePublishHashtagsWithManualPriority(
         mainSettings.generatedHashtags,
         (window as any).currentStructuredContent?.hashtags,
         mainSettings.keywords,
@@ -1948,10 +1958,10 @@ export async function handleSemiAutoPublish(): Promise<any> {
   // ✅ [2026-02-27 FIX] 수정된 콘텐츠로 structuredContent 업데이트
   // Smoking Gun: resolveRunOptions에서 structured?.bodyPlain이 payload.content보다 우선
   // 따라서 여기서 bodyPlain을 반드시 최신 편집 내용으로 업데이트해야 함
-  const publishHashtags = parsePublishHashtags(
-    hashtagsStr,
+  const visibleSemiAutoHashtags = (document.getElementById('unified-generated-hashtags') as HTMLInputElement | null)?.value;
+  const publishHashtags = parsePublishHashtagsWithManualPriority(
+    visibleSemiAutoHashtags || hashtagsStr,
     structuredContent?.hashtags,
-    (document.getElementById('unified-generated-hashtags') as HTMLInputElement | null)?.value,
   );
 
   const existingSemiAutoHeadings = Array.isArray(structuredContent.headings) ? structuredContent.headings : [];

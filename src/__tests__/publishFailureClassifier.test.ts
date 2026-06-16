@@ -10,6 +10,14 @@ describe('classifyPublishFailure', () => {
     });
   });
 
+  it('does not retry after the post body was already written to the editor', () => {
+    expect(classifyPublishFailure('POST_CONTENT_APPLIED: Protocol error: Target closed')).toEqual({
+      code: 'PUBLISH_CONDITION',
+      retryable: false,
+      userActionRequired: true,
+    });
+  });
+
   it('classifies localized browser-session and editor-ready failures as retryable', () => {
     expect(classifyPublishFailure('블로그 발행 실패 - 브라우저 세션이 종료되었습니다. 다시 시작해주세요.')).toMatchObject({
       code: 'BROWSER_CLOSED',

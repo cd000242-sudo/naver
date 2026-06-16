@@ -299,6 +299,26 @@ export interface AutomationImage {
   savedToLocal?: string | boolean; // 로컬에 저장된 이미지 경로 (string) 또는 저장 여부 (boolean)
 }
 
+const POST_CONTENT_APPLIED_MARKER = 'POST_CONTENT_APPLIED';
+
+function getAutomationErrorMessage(error: unknown): string {
+  if (error instanceof Error) return error.message;
+  if (typeof error === 'string') return error;
+  if (error && typeof error === 'object' && 'message' in error) {
+    return String((error as { message?: unknown }).message || '');
+  }
+  return String(error || '');
+}
+
+function throwPostContentAppliedPublishError(error: unknown): never {
+  const originalMessage = getAutomationErrorMessage(error);
+  if (originalMessage.includes(POST_CONTENT_APPLIED_MARKER)) {
+    throw error instanceof Error ? error : new Error(originalMessage);
+  }
+
+  throw new Error(`${POST_CONTENT_APPLIED_MARKER}: 본문 작성은 완료됐지만 발행 단계에서 오류가 발생했습니다. 같은 글을 새 창에 다시 쓰지 않도록 자동 재작성을 중단했습니다. 네이버 글쓰기 창의 임시저장/작성 상태를 먼저 확인해주세요. 원인: ${originalMessage}`);
+}
+
 interface ResolvedRunOptions {
   title: string;
   content: string;
@@ -5500,6 +5520,7 @@ export class NaverBlogAutomation {
       this.log(`⚠️ 모바일 화면 모드 설정 실패 (계속 진행): ${error.message}`);
     });
     await this.typePlainContent(resolved.content, resolved.lines);
+    (this as any).__editorContentApplied = true;
   }
 
   /**
@@ -7475,6 +7496,9 @@ export class NaverBlogAutomation {
   async runPostOnly(runOptions: RunOptions = {}, keepBrowserOpen: boolean = true): Promise<void> {
     this.cancelRequested = false;
     const resolvedOptions = this.resolveRunOptions(runOptions);
+    let editorContentApplied = false;
+    let postContentAppliedPublishFailure = false;
+    (this as any).__editorContentApplied = false;
 
     // ✅ [2026-02-15 FIX] RunOptions에서 전달된 categoryName을 this.options에 동기화
     if (resolvedOptions.categoryName) {
@@ -7516,16 +7540,34 @@ export class NaverBlogAutomation {
       // 2단계: 도움말 패널 닫기
       await this.closePopups();
 
-      if (resolvedOptions.structuredContent) {
-        await this.applyStructuredContent(resolvedOptions);
-      } else {
-        await this.applyPlainContent(resolvedOptions);
+      try {
+        if (resolvedOptions.structuredContent) {
+          await this.applyStructuredContent(resolvedOptions);
+        } else {
+          await this.applyPlainContent(resolvedOptions);
+        }
+      } catch (error) {
+        if (editorContentApplied || (this as any).__editorContentApplied === true) {
+          postContentAppliedPublishFailure = true;
+          throwPostContentAppliedPublishError(error);
+        }
+        throw error;
       }
+      editorContentApplied = true;
+      (this as any).__editorContentApplied = true;
 
       const beforePublishUrl = this.page?.url() || '';
-      await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
-      if (resolvedOptions.publishMode === 'publish') {
-        this.verifyImmediatePublishOutcome(beforePublishUrl);
+      try {
+        await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
+        if (resolvedOptions.publishMode === 'publish') {
+          this.verifyImmediatePublishOutcome(beforePublishUrl);
+        }
+      } catch (error) {
+        if (editorContentApplied) {
+          postContentAppliedPublishFailure = true;
+          throwPostContentAppliedPublishError(error);
+        }
+        throw error;
       }
       this.log('🎉 포스팅이 성공적으로 완료되었습니다!');
       const modeText = resolvedOptions.publishMode === 'draft' ? '임시저장' :
@@ -7541,13 +7583,15 @@ export class NaverBlogAutomation {
       // [R7] 발행 종료 — keep-alive ping 재개로 세션 유지(캡차 방지).
       try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
       // keepBrowserOpen이 false이거나 오류 발생 시에만 브라우저 종료
-      if (!keepBrowserOpen && this.browser) {
+      if (!keepBrowserOpen && !postContentAppliedPublishFailure && this.browser) {
         this.log('⏳ 브라우저 종료 중...');
         await this.browser.close().catch(() => undefined);
         this.browser = null;
         this.page = null;
         this.mainFrame = null;
         this.log('🔚 브라우저가 종료되었습니다.');
+      } else if (postContentAppliedPublishFailure && this.browser) {
+        this.log('⚠️ 본문 작성 완료 후 발행 단계에서 실패하여 브라우저를 닫지 않고 유지합니다.');
       }
     }
   }
@@ -7741,6 +7785,8 @@ export class NaverBlogAutomation {
     //   사용자 보고: "글/이미지 다 끝났는데 네이버 로그인에서 95% 멈춤"
     //   log() 함수가 [+N.Ns] 자동 추가 → main 로그·debug.log에서 hang 위치 즉시 식별 가능
     this._runStartMs = Date.now();
+    let postContentAppliedPublishFailure = false;
+    (this as any).__editorContentApplied = false;
     try {
     this.cancelRequested = false;
     this.publishedUrl = null; // ✅ 초기화
@@ -7878,18 +7924,37 @@ export class NaverBlogAutomation {
       // 2단계: 도움말 패널 닫기
       await this.closePopups();
 
-      if (resolvedOptions.structuredContent) {
-        await this.applyStructuredContent(resolvedOptions);
-      } else {
-        await this.applyPlainContent(resolvedOptions);
+      let editorContentApplied = false;
+      try {
+        if (resolvedOptions.structuredContent) {
+          await this.applyStructuredContent(resolvedOptions);
+        } else {
+          await this.applyPlainContent(resolvedOptions);
+        }
+      } catch (error) {
+        if (editorContentApplied || (this as any).__editorContentApplied === true) {
+          postContentAppliedPublishFailure = true;
+          throwPostContentAppliedPublishError(error);
+        }
+        throw error;
       }
+      editorContentApplied = true;
+      (this as any).__editorContentApplied = true;
 
       // ✅ [2026-02-17] 전환점 로깅: 콘텐츠 작성 → 발행 프로세스
       this.log('\n🔄 콘텐츠 작성 완료 → 발행 프로세스 시작...');
       const beforePublishUrl = this.page?.url() || '';
-      await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
-      if (resolvedOptions.publishMode === 'publish') {
-        this.verifyImmediatePublishOutcome(beforePublishUrl);
+      try {
+        await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
+        if (resolvedOptions.publishMode === 'publish') {
+          this.verifyImmediatePublishOutcome(beforePublishUrl);
+        }
+      } catch (error) {
+        if (editorContentApplied) {
+          postContentAppliedPublishFailure = true;
+          throwPostContentAppliedPublishError(error);
+        }
+        throw error;
       }
 
       // ✅ 자동화 완료 후 에디터를 편집 가능한 상태로 활성화
@@ -7917,7 +7982,7 @@ export class NaverBlogAutomation {
       // [R7] 발행 종료 — keep-alive가 이 세션을 다시 ping해 살려두도록 해제.
       try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
       const postRunPolicy = resolvePostRunBrowserPolicy({
-        keepBrowserOpen: resolvedOptions.keepBrowserOpen,
+        keepBrowserOpen: resolvedOptions.keepBrowserOpen || postContentAppliedPublishFailure,
         hasBrowser: Boolean(this.browser),
         hasPage: Boolean(this.page),
         hasPublishedUrl: Boolean(this.publishedUrl),

@@ -18,6 +18,7 @@ describe('publish metadata propagation', () => {
     const code = read('renderer/modules/publishingHandlers.ts');
 
     expect(code).toMatch(/function parsePublishHashtags/);
+    expect(code).toMatch(/function parsePublishHashtagsWithManualPriority/);
     expect(code).toMatch(/function readSelectedPreviousPostForPublish/);
     expect(code).toMatch(/function findPreviousPostForPublish/);
     expect(code).toMatch(/shouldAutoLinkPreviousPostForMode/);
@@ -26,6 +27,16 @@ describe('publish metadata propagation', () => {
     expect(code).toMatch(/previousPostUrl:\s*selectedPreviousPost\.url \|\| undefined/);
     expect(code).toMatch(/hashtags:\s*multiPublishHashtags/);
     expect(code).toMatch(/structuredContent:[\s\S]{0,180}?hashtags:\s*multiPublishHashtags/);
+  });
+
+  it('does not append AI or keyword hashtags when the visible edit field already has hashtags', () => {
+    const code = read('renderer/modules/publishingHandlers.ts');
+
+    expect(code).toMatch(/const visibleHashtagsInput = .*unified-generated-hashtags/);
+    expect(code).toMatch(/parsePublishHashtagsWithManualPriority\(\s*visibleHashtagsInput,\s*structuredContent\?\.hashtags,\s*keywords,\s*title,\s*\)/);
+    expect(code).toMatch(/parsePublishHashtagsWithManualPriority\(\s*mainSettings\.generatedHashtags,\s*\(window as any\)\.currentStructuredContent\?\.hashtags,\s*mainSettings\.keywords,\s*preferredTitle,\s*\)/);
+    expect(code).toMatch(/const visibleSemiAutoHashtags = .*unified-generated-hashtags/);
+    expect(code).toMatch(/parsePublishHashtagsWithManualPriority\(\s*visibleSemiAutoHashtags \|\| hashtagsStr,\s*structuredContent\?\.hashtags,\s*\)/);
   });
 
   it('syncs previous-post CTA URL into the editor previousPostUrl field', () => {

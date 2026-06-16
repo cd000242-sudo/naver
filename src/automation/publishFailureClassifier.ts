@@ -36,6 +36,10 @@ export function classifyPublishFailure(input: unknown): PublishFailureClassifica
     return { code: 'USER_CANCELLED', retryable: false, userActionRequired: false };
   }
 
+  if (includesAny(message, ['POST_CONTENT_APPLIED'])) {
+    return { code: 'PUBLISH_CONDITION', retryable: false, userActionRequired: true };
+  }
+
   if (includesAny(message, [
     'target closed',
     'detached frame',
