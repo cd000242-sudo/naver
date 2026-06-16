@@ -1354,6 +1354,11 @@
         return isFreshGoldenKeywordText(item && item.keyword);
       });
     }
+    function keywordResultRows(result) {
+      return (Array.isArray(result && result.keywords) ? result.keywords : []).filter(function(item) {
+        return item && normalizeText(item.keyword);
+      });
+    }
     function liveSignalBackfillItems(payload, existingItems, limit) {
       const existing = new Set((existingItems || []).map(function(item) {
         return normalizeText(item && item.keyword).toLowerCase();
@@ -1753,6 +1758,29 @@
       const rows = lastKeywordResult && Array.isArray(lastKeywordResult.keywords) ? lastKeywordResult.keywords : [];
       return rows.slice(0, limit || 50);
     }
+    function buildLookupContextKeywords(seed, limit) {
+      const seedKey = normalizeText(seed).toLowerCase().replace(/s+/g, '');
+      const seen = new Set();
+      return lastKeywordRows(limit || 80).filter(function(row) {
+        const keyword = normalizeText(row && row.keyword);
+        const key = keyword.toLowerCase().replace(/s+/g, '');
+        if (!keyword || !key || key === seedKey || seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      }).map(function(row) {
+        return {
+          keyword: row.keyword,
+          pcSearchVolume: row.pcSearchVolume,
+          mobileSearchVolume: row.mobileSearchVolume,
+          totalSearchVolume: row.totalSearchVolume,
+          documentCount: row.documentCount,
+          goldenRatio: row.goldenRatio,
+          source: row.source,
+          evidence: row.evidence,
+          isMeasured: row.isMeasured,
+        };
+      });
+    }
     function ensureKeywordResult() {
       const rows = lastKeywordRows(1);
       if (!rows.length) {
@@ -1907,8 +1935,19 @@
       if (status === 404) return 'API 경로 또는 job 상태를 찾지 못했습니다. 잠시 후 다시 실행하거나 새로고침 후 재시도하세요. (' + routePath(url) + ')';
       return message || 'HTTP ' + status;
     }
+    function withKeywordContextPayload(url, body) {
+      const payload = body && typeof body === 'object' && !Array.isArray(body) ? Object.assign({}, body) : {};
+      if (url === endpoints.keywordAnalysis || url === endpoints.mindmap) {
+        const seed = normalizeText(payload.keyword || payload.seedKeyword || compactKeywordInput());
+        if (!Array.isArray(payload.contextKeywords)) {
+          payload.contextKeywords = buildLookupContextKeywords(seed, url === endpoints.mindmap ? 100 : 60);
+        }
+        payload.engineVersion = 'web-electron-parity-20260616';
+      }
+      return payload;
+    }
     async function apiPost(url, body, options) {
-      const res = await fetch(url, { method: 'POST', headers: headers(options), body: JSON.stringify(body || {}) });
+      const res = await fetch(url, { method: 'POST', headers: headers(options), body: JSON.stringify(withKeywordContextPayload(url, body || {})) });
       const payload = await res.json().catch(function() { return {}; });
       if (url !== endpoints.session && (res.status === 401 || res.status === 403)) {
         saveSession(null);
@@ -2222,7 +2261,7 @@
       throw new Error('job timeout');
     }
     function renderKeywordRows(result) {
-      const rows = filterFreshGoldenItems(Array.isArray(result && result.keywords) ? result.keywords : []);
+      const rows = keywordResultRows(result);
       qs('metricMeasured').textContent = rows.filter(function(row) { return row.isMeasured; }).length.toLocaleString('ko-KR');
       if (!rows.length) {
         qs('keywordRows').innerHTML = '<tr><td colspan="12" class="muted">서버 결과가 비어 있습니다. API 키 상태 또는 소스 장애를 확인하세요.</td></tr>';
