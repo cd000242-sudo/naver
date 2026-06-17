@@ -8,6 +8,7 @@ import {
   formatPrePublishReport,
   getHashtagPresenceDiagnostics,
   getMissingExpectedHashtags,
+  isEditorChromeOnlyText,
   isEditorBodyUnreadable,
   type PrePublishStats,
 } from '../automation/prePublishAssertion';
@@ -170,14 +171,40 @@ describe('getMissingExpectedHashtags', () => {
     expect(isEditorBodyUnreadable({ ...unreadableStats, linkCardCount: 1 })).toBe(false);
   });
 
+  it('treats SmartEditor toolbar/image chrome text as unreadable body text', () => {
+    const chromeOnlyStats: PrePublishStats = {
+      bodyChars: 193,
+      imageCount: 0,
+      linkCardCount: 0,
+      dividerCount: 0,
+      leakedMarkers: [],
+      bodyText: [
+        '제목',
+        '사진 편집',
+        '작게',
+        '문서 너비',
+        'AI 사용 설정',
+        '사진 설명을 입력하세요',
+      ].join('\n'),
+    };
+
+    expect(isEditorChromeOnlyText(chromeOnlyStats.bodyText || '', chromeOnlyStats.bodyChars)).toBe(true);
+    expect(isEditorBodyUnreadable(chromeOnlyStats)).toBe(true);
+    expect(getHashtagPresenceDiagnostics(chromeOnlyStats, {
+      expectedHashtags: ['#alpha'],
+    }).probableCause).toBe('editor-chrome-selected-instead-of-body');
+  });
+
   it('collects pre-publish stats from the SmartEditor document root, not global editor panels', () => {
     const source = readFileSync(new URL('../automation/prePublishAssertion.ts', import.meta.url), 'utf8');
     const fn = source.slice(
       source.indexOf('export async function collectPrePublishStats'),
-      source.indexOf('return {', source.indexOf('export async function collectPrePublishStats'))
+      source.length
     );
 
     expect(fn).toMatch(/article\.se-components-wrap/);
+    expect(fn).toMatch(/componentText/);
+    expect(fn).toMatch(/bodySource/);
     expect(fn).toMatch(/fallbackText/);
     expect(fn).toMatch(/contenteditable="true"/);
     expect(fn).not.toMatch(/document\.body/);
@@ -290,12 +317,13 @@ describe('pre-publish hashtag repair wiring', () => {
     expect(apply).toMatch(/apply-hashtags-before-type/);
     expect(apply).toMatch(/apply-hashtags-after-type/);
     expect(apply).toMatch(/apply-hashtags-after-retry/);
-    expect(apply).toMatch(/HASHTAG_TAIL_NOT_READY/);
     expect(apply).toMatch(/apply-hashtags-tail-not-ready/);
+    expect(apply).toMatch(/apply-hashtags-tail-not-ready-fail-open/);
     expect(apply).toMatch(/isEditorBodyUnreadable/);
     expect(apply).toMatch(/body-still-unreadable/);
-    expect(apply).toMatch(/HASHTAG_APPLY_VERIFY_FAILED/);
-    expect(apply).toMatch(/throw error/);
+    expect(apply).toMatch(/발행을 중단하지 않습니다/);
+    expect(apply).not.toMatch(/HASHTAG_TAIL_NOT_READY/);
+    expect(apply).not.toMatch(/throw new Error\(`HASHTAG_APPLY_VERIFY_FAILED/);
     expect(apply).not.toMatch(/최선 위치에 입력을 계속/);
     expect(apply).not.toMatch(/최선 위치에 재입력/);
   });
@@ -334,7 +362,7 @@ describe('renderer publish tail diagnostics', () => {
 describe('R6 staged blocking', () => {
   it('blocks only on deterministic checks', async () => {
     const { BLOCKING_CHECKS, getBlockingFailures, evaluatePrePublishReport } = await import('../automation/prePublishAssertion.js');
-    expect([...BLOCKING_CHECKS].sort()).toEqual(['body-min-chars', 'hashtag-presence', 'image-count', 'marker-leak']);
+    expect([...BLOCKING_CHECKS].sort()).toEqual(['body-min-chars', 'image-count', 'marker-leak']);
     const report = evaluatePrePublishReport(
       { bodyChars: 10, imageCount: 0, linkCardCount: 0, dividerCount: 0, leakedMarkers: [], bodyText: '' },
       { minBodyChars: 500, expectedImageMin: 1, expectedLinkCardMin: 2, expectedDividerMin: 1 }
@@ -354,7 +382,7 @@ describe('R6 staged blocking', () => {
     const terminalBlock = code.slice(code.indexOf('const terminalErrors'), code.indexOf('const frameRecoverableErrors'));
     expect(terminalBlock).toMatch(/PRE_PUBLISH_BLOCKED/);
     expect(terminalBlock).toMatch(/POST_TAIL_INCOMPLETE/);
-    expect(terminalBlock).toMatch(/HASHTAG_TAIL_NOT_READY/);
-    expect(terminalBlock).toMatch(/HASHTAG_APPLY_VERIFY_FAILED/);
+    expect(terminalBlock).not.toMatch(/HASHTAG_TAIL_NOT_READY/);
+    expect(terminalBlock).not.toMatch(/HASHTAG_APPLY_VERIFY_FAILED/);
   });
 });

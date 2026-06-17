@@ -25,6 +25,8 @@ export interface PrePublishStats {
   leakedMarkers: string[];
   /** Raw editor text — used for hashtag presence (optional for old callers). */
   bodyText?: string;
+  /** Where the body text came from, for publish-gate diagnostics. */
+  bodySource?: string;
 }
 
 export interface PrePublishCheck {
@@ -51,6 +53,7 @@ export interface HashtagPresenceDiagnostics {
   bodyHashtagStatus: HashtagPresenceDiagnostic[];
   plainOccurrences: string[];
   bodyChars: number;
+  bodySource?: string;
   bodyTail: string;
   probableCause: string;
 }
@@ -76,6 +79,19 @@ const SMART_EDITOR_ROOT_SELECTORS = [
 // Do not include `.se-panel`: current SmartEditor can wrap the document
 // canvas in it, and excluding it makes the publish gate read an empty body.
 const SMART_EDITOR_PANEL_SELECTOR = '.se-popup, .se-layer, .se-modal, [role="dialog"], [aria-modal="true"]';
+
+const EDITOR_CHROME_ONLY_TEXT_MARKERS = [
+  '사진 편집',
+  '문서 너비',
+  'AI 사용 설정',
+  '사진 설명을 입력하세요',
+  '대표',
+  '작게',
+  '크게',
+  '마이박스',
+  '템플릿',
+  '라이브러리',
+] as const;
 
 export const DEFAULT_FORBIDDEN_MARKERS = [
   '[원본 텍스트]',
@@ -214,6 +230,8 @@ export function getHashtagPresenceDiagnostics(
     probableCause = 'no-expected-hashtags';
   } else if (missingHashtags.length === 0) {
     probableCause = 'all-hashtags-present';
+  } else if (isEditorChromeOnlyText(bodyText, stats.bodyChars)) {
+    probableCause = 'editor-chrome-selected-instead-of-body';
   } else if (!bodyText.trim()) {
     probableCause = 'editor-body-not-readable';
   } else if (
@@ -236,6 +254,7 @@ export function getHashtagPresenceDiagnostics(
     bodyHashtagStatus,
     plainOccurrences,
     bodyChars: stats.bodyChars,
+    bodySource: stats.bodySource,
     bodyTail,
     probableCause,
   };
@@ -250,13 +269,26 @@ export function formatHashtagPresenceDiagnostics(
 
 export function isEditorBodyUnreadable(stats: PrePublishStats | null | undefined): boolean {
   if (!stats) return false;
+  const text = (stats.bodyText || '').trim();
   return (
     stats.bodyChars === 0 &&
-    !(stats.bodyText || '').trim() &&
+    !text &&
     stats.imageCount === 0 &&
     stats.linkCardCount === 0 &&
     stats.dividerCount === 0
-  );
+  ) || isEditorChromeOnlyText(text, stats.bodyChars);
+}
+
+export function isEditorChromeOnlyText(text: string, bodyChars = text.replace(/\s+/g, ' ').trim().length): boolean {
+  const normalized = text.replace(/\s+/g, ' ').trim();
+  if (!normalized) return false;
+  if (bodyChars > 450) return false;
+
+  const markerHits = EDITOR_CHROME_ONLY_TEXT_MARKERS
+    .filter((marker) => normalized.includes(marker))
+    .length;
+
+  return markerHits >= 2;
 }
 
 // [SPEC-STABILITY-2026 R6] 단계적 차단: 의미가 에디터 안에서 결정되는 검사만
@@ -266,7 +298,6 @@ export const BLOCKING_CHECKS: ReadonlySet<string> = new Set([
   'body-min-chars',
   'image-count',
   'marker-leak',
-  'hashtag-presence',
 ]);
 
 export function getBlockingFailures(report: PrePublishReport): PrePublishCheck[] {
@@ -289,13 +320,58 @@ export async function collectPrePublishStats(
   frame: Frame,
   markers: string[] = DEFAULT_FORBIDDEN_MARKERS
 ): Promise<PrePublishStats> {
-  const raw = await frame.evaluate(({ rootSelectors, panelSelector }) => {
+  const raw = await frame.evaluate(({ rootSelectors, panelSelector, chromeMarkers }) => {
     function isVisibleElement(element: Element): boolean {
       if (!(element instanceof HTMLElement)) return false;
       if (element.closest(panelSelector)) return false;
       const rect = element.getBoundingClientRect();
       const style = window.getComputedStyle(element);
       return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && style.display !== 'none';
+    }
+
+    function normalizeText(value: string): string {
+      return value.replace(/\s+/g, ' ').trim();
+    }
+
+    function looksLikeEditorChromeOnly(value: string): boolean {
+      const normalized = normalizeText(value);
+      if (!normalized || normalized.length > 450) return false;
+      const markerHits = chromeMarkers.filter((marker: string) => normalized.includes(marker)).length;
+      return markerHits >= 2;
+    }
+
+    function isDocumentTextElement(element: Element): boolean {
+      if (!(element instanceof HTMLElement)) return false;
+      if (!isVisibleElement(element)) return false;
+      if (element.closest('.se-section-documentTitle, .se-documentTitle, [data-name="documentTitle"]')) return false;
+      if (element.closest('.se-toolbar, .se-floating-toolbar, .se-property-panel, .se-image-setting, .se-image-toolbar')) return false;
+      if (element.closest('button, [role="button"], [role="toolbar"], nav, header, footer')) return false;
+      return true;
+    }
+
+    function collectDocumentComponentText(scope: ParentNode): string {
+      const selectors = [
+        '.se-component-text .se-text-paragraph',
+        '.se-component-text .se-module-text',
+        '.se-section-text .se-text-paragraph',
+        '.se-section-text .se-module-text',
+        '.se-component-text [contenteditable="true"]',
+        '.se-module-text',
+        '.se-text-paragraph',
+      ].join(',');
+      const seen = new Set<string>();
+      return Array.from(scope.querySelectorAll(selectors))
+        .filter(isDocumentTextElement)
+        .map((el) => ((el as HTMLElement).innerText || el.textContent || '').trim())
+        .filter(Boolean)
+        .filter((text) => !looksLikeEditorChromeOnly(text))
+        .filter((text) => {
+          const key = normalizeText(text);
+          if (!key || seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        })
+        .join('\n');
     }
 
     function getSmartEditorDocumentRoot(): HTMLElement | null {
@@ -325,7 +401,9 @@ export async function collectPrePublishStats(
 
     const root = getSmartEditorDocumentRoot();
     const rootText = root?.innerText || root?.textContent || '';
-    const fallbackText = !rootText.trim()
+    const componentText = collectDocumentComponentText(root || document);
+    const cleanRootText = looksLikeEditorChromeOnly(rootText) ? '' : rootText;
+    const fallbackText = !componentText.trim() && !cleanRootText.trim()
       ? Array.from(document.querySelectorAll([
         '.se-section-text',
         '.se-module-text',
@@ -333,13 +411,25 @@ export async function collectPrePublishStats(
         '.se-component-text',
         '[contenteditable="true"]',
       ].join(',')))
-        .filter(isVisibleElement)
+        .filter(isDocumentTextElement)
         .map((el) => ((el as HTMLElement).innerText || el.textContent || '').trim())
         .filter(Boolean)
+        .filter((text) => !looksLikeEditorChromeOnly(text))
         .filter((text, index, all) => all.indexOf(text) === index)
         .join('\n')
       : '';
-    const text = rootText.trim() ? rootText : fallbackText;
+    const text = componentText.trim()
+      ? componentText
+      : cleanRootText.trim()
+        ? cleanRootText
+        : fallbackText;
+    const source = componentText.trim()
+      ? 'component-text'
+      : cleanRootText.trim()
+        ? 'root-text'
+        : fallbackText.trim()
+          ? 'fallback-text'
+          : 'empty';
     const searchScope: ParentNode = root || document;
 
     const imageCount = Array.from(searchScope.querySelectorAll(
@@ -372,6 +462,7 @@ export async function collectPrePublishStats(
 
     return {
       text,
+      source,
       imageCount,
       linkCardCount: cardRoots.size,
       dividerCount: dividerTextRuns + dividerComponents,
@@ -379,6 +470,7 @@ export async function collectPrePublishStats(
   }, {
     rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
     panelSelector: SMART_EDITOR_PANEL_SELECTOR,
+    chromeMarkers: [...EDITOR_CHROME_ONLY_TEXT_MARKERS],
   });
 
   return {
@@ -388,5 +480,6 @@ export async function collectPrePublishStats(
     dividerCount: raw.dividerCount,
     leakedMarkers: findLeakedMarkers(raw.text, markers),
     bodyText: raw.text,
+    bodySource: raw.source,
   };
 }

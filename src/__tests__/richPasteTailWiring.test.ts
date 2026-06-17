@@ -265,8 +265,9 @@ describe('rich paste tail wiring', () => {
       code.indexOf('export async function applyTailHashtagsAfterCards'),
       code.indexOf('export async function insertTailLinkCardBlock')
     );
-    expect(hashtagTail).toMatch(/if \([\s\S]{0,180}previousPostTailInserted[\s\S]{0,80}!confirmedPreviousPostCardReady/);
-    expect(hashtagTail).toMatch(/const cardStabilizeDelay = previousPostTailInserted\s*\?\s*\(confirmedPreviousPostCardReady \? 1000 : 3000\)\s*:\s*300/);
+    expect(hashtagTail).toMatch(/const linkCardInsertedBeforeHashtags = previousPostTailInserted \|\| tailLinkCardInserted/);
+    expect(hashtagTail).toMatch(/if \(linkCardInsertedBeforeHashtags && !confirmedTailLinkCardReady\)/);
+    expect(hashtagTail).toMatch(/const cardStabilizeDelay = linkCardInsertedBeforeHashtags\s*\?\s*\(confirmedTailLinkCardReady \|\| anyTailCardReady \? 1000 : 3000\)\s*:\s*300/);
     expect(hashtagTail).toMatch(/applyHashtagsInBody\(\[\.{3}hashtagsToApply\]/);
   });
 });

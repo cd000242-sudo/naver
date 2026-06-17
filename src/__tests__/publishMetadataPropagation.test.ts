@@ -84,7 +84,7 @@ describe('publish metadata propagation', () => {
     expect(tailHelper).not.toMatch(/effectiveCtas\.some\(\(cta\) => cta\.link && cta\.link === previousPostUrl\)/);
     expect(code).toMatch(/previousPostTailInserted = previousPostTailInserted \|\| previousResult\.inserted/);
     expect(code).toMatch(/await applyTailHashtagsAfterCards\(\{/);
-    expect(hashtagTail).toMatch(/const hashtagGapEnterCount = getHashtagGapEnterCount\(previousPostTailInserted\)/);
+    expect(hashtagTail).toMatch(/const hashtagGapEnterCount = getHashtagGapEnterCount\(linkCardInsertedBeforeHashtags\)/);
     expect(hashtagTail).toMatch(/ensureTailTypingReady/);
     expect(hashtagTail).toMatch(/POST_TAIL_INCOMPLETE/);
     expect(hashtagTail).not.toMatch(/keyboard\.press\('End'\)[\s\S]{0,400}applyHashtagsInBody/);

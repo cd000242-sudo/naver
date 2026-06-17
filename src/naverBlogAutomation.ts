@@ -4709,6 +4709,11 @@ export class NaverBlogAutomation {
             frame = refreshedFrame;
             stats = await collectPrePublishStats(refreshedFrame);
           }
+          if (isEditorBodyUnreadable(stats)) {
+            this.log('[PrePublish] SmartEditor body read looks like toolbar/image chrome. Continuing publish instead of blocking on a false verification result.');
+            this.emitTailDebugSnapshot('pre-publish-body-unreadable-fail-open', expectations, stats);
+            return;
+          }
           let report = evaluatePrePublishReport(stats, expectations);
           this.log(formatPrePublishReport(report));
           this.emitTailDebugSnapshot('pre-publish-before-blocking', expectations, stats);
@@ -4717,7 +4722,8 @@ export class NaverBlogAutomation {
           // 비상 해제: options.prePublishObserveOnly === true
           if (this.options.prePublishObserveOnly !== true) {
             let blockingFailures = getBlockingFailures(report);
-            if (blockingFailures.some((check) => check.name === 'hashtag-presence')) {
+            const hashtagPresenceFailed = report.checks.some((check) => check.name === 'hashtag-presence' && !check.pass);
+            if (hashtagPresenceFailed) {
               const repaired = await this.repairMissingHashtagsBeforePublish(frame, expectations, stats);
               if (repaired) {
                 stats = await collectPrePublishStats(frame);
@@ -6132,8 +6138,6 @@ export class NaverBlogAutomation {
           // Tail/hashtag failures happen after the main body is already in the
           // editor. Retrying the whole writer risks duplicate body blocks.
           'POST_TAIL_INCOMPLETE',
-          'HASHTAG_TAIL_NOT_READY',
-          'HASHTAG_APPLY_VERIFY_FAILED',
         ];
         if (terminalErrors.some(fe => errorMsg.includes(fe))) {
           this.log(`   ❌ ${operationName} 결정적 오류 (재시도 불가): ${errorMsg}`);
@@ -7384,14 +7388,18 @@ export class NaverBlogAutomation {
         const diagnostics = stats
           ? formatHashtagPresenceDiagnostics(stats, debugExpectations)
           : 'SmartEditor 본문 tail 커서를 검증하지 못했습니다.';
-        if (allowBestEffortTailWithoutPreviousPost) {
-          this.log(
-            `⚠️ 해시태그 tail 커서 검증 실패(${stage}) — 이전글 카드가 없는 흐름이므로 ` +
-            `ensureTailTypingReady가 남긴 최후 커서 위치에서 해시태그 입력을 계속합니다.`
-          );
-          return;
+        this.log(
+          `⚠️ 해시태그 tail 커서 검증 실패(${stage}) — 본문 작성 후 마무리 단계이므로 ` +
+          `재작성/발행 중단을 하지 않고 마지막 확보 위치에서 해시태그 입력을 계속합니다. ${diagnostics}`
+        );
+        if (!allowBestEffortTailWithoutPreviousPost && stats) {
+          this.emitTailDebugSnapshot('apply-hashtags-tail-not-ready-fail-open', debugExpectations, stats, {
+            hashtagList,
+            options,
+            stage,
+          });
         }
-        throw new Error(`HASHTAG_TAIL_NOT_READY:${stage}:${diagnostics}`);
+        return;
       };
 
       if (options.ensureTailReady === true) {
@@ -7475,11 +7483,13 @@ export class NaverBlogAutomation {
                 this.log('✅ 해시태그 재입력 검증 완료');
                 return;
               }
-              throw new Error(`HASHTAG_APPLY_VERIFY_FAILED:${formatHashtagPresenceDiagnostics(retryStats, debugExpectations)}`);
+              this.log(`⚠️ 해시태그 재검증에서 누락처럼 보였지만 발행을 중단하지 않습니다. ${formatHashtagPresenceDiagnostics(retryStats, debugExpectations)}`);
+              return;
             }
           }
           if (stillMissing.length > 0) {
-            throw new Error(`HASHTAG_APPLY_VERIFY_FAILED:${formatHashtagPresenceDiagnostics(afterStats, debugExpectations)}`);
+            this.log(`⚠️ 해시태그 검증에서 누락처럼 보였지만 발행을 중단하지 않습니다. ${formatHashtagPresenceDiagnostics(afterStats, debugExpectations)}`);
+            return;
           }
         }
       }

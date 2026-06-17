@@ -333,7 +333,7 @@ describe('editor tail actions', () => {
     });
   });
 
-  it('keeps strict hashtag tail mode only when the previous link card and tail cursor were verified', async () => {
+  it('keeps strict hashtag tail mode but does not abort publishing on tail verification false positives', async () => {
     const tailSource = readFileSync(new URL('../automation/editorTailActions.ts', import.meta.url), 'utf8');
     expect(tailSource).toContain('const strictHashtagTail = linkCardInsertedBeforeHashtags');
     expect(tailSource).toContain('confirmedTailLinkCardReady');
@@ -342,7 +342,8 @@ describe('editor tail actions', () => {
     const source = readFileSync(new URL('../naverBlogAutomation.ts', import.meta.url), 'utf8');
     expect(source).toContain('allowBestEffortTailWithoutPreviousPost');
     expect(source).toContain('options.previousPostTailInserted !== true');
-    expect(source).toContain('이전글 카드가 없는 흐름');
+    expect(source).toContain('apply-hashtags-tail-not-ready-fail-open');
+    expect(source).not.toContain('throw new Error(`HASHTAG_TAIL_NOT_READY');
   });
 
   it('types a reusable tail link-card block for CTA and official-site links', async () => {

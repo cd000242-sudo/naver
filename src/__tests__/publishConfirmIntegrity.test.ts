@@ -35,8 +35,8 @@ describe('publish confirmation integrity (R11)', () => {
     expect(terminalBlock).toMatch(/PUBLISH_MODAL_NOT_OPENED/);
     expect(terminalBlock).toMatch(/CATEGORY_NOT_FOUND/);
     expect(terminalBlock).toMatch(/POST_TAIL_INCOMPLETE/);
-    expect(terminalBlock).toMatch(/HASHTAG_TAIL_NOT_READY/);
-    expect(terminalBlock).toMatch(/HASHTAG_APPLY_VERIFY_FAILED/);
+    expect(terminalBlock).not.toMatch(/HASHTAG_TAIL_NOT_READY/);
+    expect(terminalBlock).not.toMatch(/HASHTAG_APPLY_VERIFY_FAILED/);
   });
 
   it('A-2: publish modal open failure stops before category/confirm stages', () => {
