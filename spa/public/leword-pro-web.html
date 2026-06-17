@@ -773,6 +773,22 @@
     .settings-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
     .settings-message { min-height: 18px; margin-top: 10px; color: var(--muted); font-size: 12px; }
     .settings-checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+    .admin-ai-panel { margin-top: 14px; border-color: rgba(245,197,66,.36); background: linear-gradient(180deg, rgba(16,22,31,.96), rgba(8,12,18,.98)); }
+    .admin-ai-panel.locked { opacity: .74; }
+    .admin-ai-provider-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .admin-ai-provider {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px;
+      background: rgba(14,21,31,.82);
+      display: grid;
+      gap: 5px;
+      color: #d9e6f7;
+    }
+    .admin-ai-provider input { width: 16px; height: 16px; }
+    .admin-ai-provider strong { font-size: 13px; color: #f6f8ff; }
+    .admin-ai-provider span { color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .admin-ai-provider.active { border-color: rgba(245,197,66,.78); background: linear-gradient(135deg, rgba(245,197,66,.18), rgba(53,211,153,.08)); }
     .settings-check {
       border: 1px solid rgba(159,177,200,.16);
       border-radius: 8px;
@@ -796,7 +812,7 @@
       .feature-grid, .ops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 820px) {
-      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist, .api-issue-grid { grid-template-columns: 1fr; }
+      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist, .admin-ai-provider-grid, .api-issue-grid { grid-template-columns: 1fr; }
       .quick-feature-dock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quality-strip { grid-template-columns: 1fr 1fr; }
       .result-toolbar { grid-template-columns: 1fr; }
@@ -1116,6 +1132,51 @@
             <div class="settings-message" id="naverApiSettingsMessage">키 값은 서버에 저장하지 않습니다. 저장 후 비밀키 입력칸은 비우고, 실행할 때 브라우저 로컬 값만 요청 헤더로 전달합니다.</div>
             <div class="settings-checklist" id="apiSettingsChecklist"></div>
           </div>
+          <div class="settings-panel admin-ai-panel locked" id="adminAiWorkerSettings">
+            <h3 style="margin:0 0 6px;">관리자 AI 작업자 설정</h3>
+            <p class="muted" style="margin:0;">Codex와 Claude Code는 관리자 전용 서버 작업자입니다. 관리자 계정으로 Pro 로그인한 뒤 사용할 작업자를 선택하세요.</p>
+            <div class="admin-ai-provider-grid" id="adminAiProviderGrid">
+              <label class="admin-ai-provider" data-admin-ai-provider="codex">
+                <input type="radio" name="adminAiWorkerProvider" value="codex" />
+                <strong>Codex</strong>
+                <span>서버 작업자가 Codex 로그인 세션을 우선 사용해 키워드 리서치/추론 보강을 수행합니다.</span>
+              </label>
+              <label class="admin-ai-provider" data-admin-ai-provider="claude-code">
+                <input type="radio" name="adminAiWorkerProvider" value="claude-code" />
+                <strong>Claude Code</strong>
+                <span>Claude Code 로그인 세션을 우선 사용합니다. Codex와 같은 관리자 작업자 레벨로 선택됩니다.</span>
+              </label>
+              <label class="admin-ai-provider" data-admin-ai-provider="api">
+                <input type="radio" name="adminAiWorkerProvider" value="api" />
+                <strong>API 키 보조</strong>
+                <span>CLI 로그인 작업자 대신 Claude/OpenAI/Manus API 키 기반 추론 보조만 사용합니다.</span>
+              </label>
+            </div>
+            <div class="settings-grid">
+              <label class="tool-checks" style="display:flex;">
+                <input type="checkbox" id="codexCliLoggedIn" />
+                <span>Codex 서버 로그인 완료</span>
+              </label>
+              <label class="tool-checks" style="display:flex;">
+                <input type="checkbox" id="claudeCodeCliLoggedIn" />
+                <span>Claude Code 서버 로그인 완료</span>
+              </label>
+              <div>
+                <label for="adminAiWorkerNote">관리자 메모</label>
+                <input class="input" id="adminAiWorkerNote" maxlength="80" placeholder="예: prod 서버 root 세션에서 로그인 확인" autocomplete="off" />
+              </div>
+              <div>
+                <label>적용 범위</label>
+                <div class="muted" style="min-height:44px; line-height:1.5;">일반 사용자는 볼 수 없고, 관리자 세션에서 실행하는 job 요청에만 작업자 선택 메타가 전달됩니다.</div>
+              </div>
+            </div>
+            <div class="settings-actions">
+              <button class="btn primary" type="button" id="saveAdminAiWorkerSettings">관리자 작업자 저장</button>
+              <button class="btn blue" type="button" id="checkAdminAiWorkerSettings">관리자 연동상태 확인</button>
+            </div>
+            <div class="settings-message" id="adminAiWorkerMessage">관리자 계정으로 로그인하면 Codex 또는 Claude Code 작업자를 선택할 수 있습니다.</div>
+            <div class="settings-checklist" id="adminAiWorkerChecklist"></div>
+          </div>
         </section>
 
         <section class="panel main-view" id="downloads" data-view="downloads">
@@ -1315,6 +1376,7 @@
     let selectedOpsId = 'rank';
     let selectedCatalogTab = 'today';
     const userApiSettingsStorageKey = 'leword.pro.userApiSettings.v1';
+    const adminAiWorkerSettingsStorageKey = 'leword.pro.adminAiWorkerSettings.v1';
     const toolTabFeatureIds = ['pro-traffic', 'naver-mate', 'shopping', 'kin'];
     const viewIds = ['golden', 'sources', 'lookup', 'features', 'youtube', 'settings', 'downloads'];
     const catalogTabs = [
@@ -2028,6 +2090,173 @@
     function renderSession() {
       qs('metricSession').textContent = session ? (session.tier || 'Pro') : '로그인 필요';
       qs('loginOpen').textContent = session ? 'Pro 접속중' : 'Pro 로그인';
+      hydrateAdminAiWorkerSettingsForm();
+    }
+    function isAdminSession() {
+      return !!(session && session.tier === 'admin');
+    }
+    function adminAiWorkerProviderLabel(provider) {
+      if (provider === 'claude-code') return 'Claude Code';
+      if (provider === 'api') return 'API 키 보조';
+      return 'Codex';
+    }
+    function defaultAdminAiWorkerSettings() {
+      return {
+        provider: 'codex',
+        codexCliLoggedIn: false,
+        claudeCodeCliLoggedIn: false,
+        note: '',
+      };
+    }
+    function readAdminAiWorkerSettings() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(adminAiWorkerSettingsStorageKey) || '{}');
+        const provider = ['codex', 'claude-code', 'api'].includes(raw.provider) ? raw.provider : 'codex';
+        return {
+          provider: provider,
+          codexCliLoggedIn: raw.codexCliLoggedIn === true,
+          claudeCodeCliLoggedIn: raw.claudeCodeCliLoggedIn === true,
+          note: typeof raw.note === 'string' ? raw.note.slice(0, 80) : '',
+        };
+      } catch (err) {
+        return defaultAdminAiWorkerSettings();
+      }
+    }
+    function writeAdminAiWorkerSettings(settings) {
+      localStorage.setItem(adminAiWorkerSettingsStorageKey, JSON.stringify(settings || defaultAdminAiWorkerSettings()));
+    }
+    function adminAiWorkerReadyState(settings) {
+      const apiSettings = readUserApiSettings();
+      if (settings.provider === 'api') {
+        const count = ['anthropicApiKey', 'manusApiKey', 'openaiApiKey'].filter(function(key) { return !!apiSettings[key]; }).length;
+        return { ready: count > 0, status: count > 0 ? 'ready' : 'missing', detail: count > 0 ? 'AI API 키 ' + count + '개 저장됨' : 'Claude/OpenAI/Manus API 키 중 하나 이상 필요' };
+      }
+      if (settings.provider === 'claude-code') {
+        return { ready: !!settings.claudeCodeCliLoggedIn, status: settings.claudeCodeCliLoggedIn ? 'ready' : 'missing', detail: settings.claudeCodeCliLoggedIn ? 'Claude Code 서버 로그인 확인됨' : 'Claude Code 서버 로그인 확인 필요' };
+      }
+      return { ready: !!settings.codexCliLoggedIn, status: settings.codexCliLoggedIn ? 'ready' : 'missing', detail: settings.codexCliLoggedIn ? 'Codex 서버 로그인 확인됨' : 'Codex 서버 로그인 확인 필요' };
+    }
+    function collectAdminAiWorkerSettings() {
+      const selected = document.querySelector('input[name="adminAiWorkerProvider"]:checked');
+      return {
+        provider: selected ? selected.value : 'codex',
+        codexCliLoggedIn: !!(qs('codexCliLoggedIn') && qs('codexCliLoggedIn').checked),
+        claudeCodeCliLoggedIn: !!(qs('claudeCodeCliLoggedIn') && qs('claudeCodeCliLoggedIn').checked),
+        note: qs('adminAiWorkerNote') ? qs('adminAiWorkerNote').value.trim().slice(0, 80) : '',
+      };
+    }
+    function renderAdminAiWorkerChecklist(settings) {
+      const target = qs('adminAiWorkerChecklist');
+      if (!target) return;
+      const state = adminAiWorkerReadyState(settings);
+      const adminStatus = isAdminSession() ? 'ready' : 'missing';
+      target.innerHTML =
+        '<div class="settings-check ' + adminStatus + '"><strong>관리자 권한 · ' + (isAdminSession() ? '확인됨' : '잠김') + '</strong><span>' + (isAdminSession() ? 'admin 세션에서만 작업자 선택이 저장됩니다.' : '관리자 계정으로 Pro 로그인해야 설정할 수 있습니다.') + '</span></div>'
+        + '<div class="settings-check ' + state.status + '"><strong>' + escapeHtml(adminAiWorkerProviderLabel(settings.provider)) + ' · ' + (state.ready ? '사용 준비' : '확인 필요') + '</strong><span>' + escapeHtml(state.detail) + '</span></div>';
+    }
+    function renderAdminAiWorkerStatusMessage(settings) {
+      const saved = settings || readAdminAiWorkerSettings();
+      const state = adminAiWorkerReadyState(saved);
+      if (!qs('adminAiWorkerMessage')) return;
+      if (!isAdminSession()) {
+        qs('adminAiWorkerMessage').textContent = '관리자 전용 설정입니다. admin 계정으로 Pro 로그인하면 Codex/Claude Code 작업자를 선택할 수 있습니다.';
+      } else {
+        qs('adminAiWorkerMessage').textContent = '관리자 작업자: ' + adminAiWorkerProviderLabel(saved.provider) + ' · ' + state.detail + ' · 일반 사용자 API 키와 분리 저장';
+      }
+      renderAdminAiWorkerChecklist(saved);
+    }
+    function hydrateAdminAiWorkerSettingsForm() {
+      const panel = qs('adminAiWorkerSettings');
+      if (!panel) return;
+      const settings = readAdminAiWorkerSettings();
+      const admin = isAdminSession();
+      panel.classList.toggle('locked', !admin);
+      document.querySelectorAll('input[name="adminAiWorkerProvider"]').forEach(function(input) {
+        input.checked = input.value === settings.provider;
+        input.disabled = !admin;
+      });
+      document.querySelectorAll('[data-admin-ai-provider]').forEach(function(card) {
+        card.classList.toggle('active', card.getAttribute('data-admin-ai-provider') === settings.provider);
+      });
+      if (qs('codexCliLoggedIn')) {
+        qs('codexCliLoggedIn').checked = !!settings.codexCliLoggedIn;
+        qs('codexCliLoggedIn').disabled = !admin;
+      }
+      if (qs('claudeCodeCliLoggedIn')) {
+        qs('claudeCodeCliLoggedIn').checked = !!settings.claudeCodeCliLoggedIn;
+        qs('claudeCodeCliLoggedIn').disabled = !admin;
+      }
+      if (qs('adminAiWorkerNote')) {
+        qs('adminAiWorkerNote').value = settings.note || '';
+        qs('adminAiWorkerNote').disabled = !admin;
+      }
+      ['saveAdminAiWorkerSettings', 'checkAdminAiWorkerSettings'].forEach(function(id) {
+        if (qs(id)) qs(id).disabled = !admin;
+      });
+      renderAdminAiWorkerStatusMessage(settings);
+    }
+    function adminAiWorkerRequestPayload() {
+      if (!isAdminSession()) return null;
+      const settings = readAdminAiWorkerSettings();
+      const state = adminAiWorkerReadyState(settings);
+      return {
+        mode: 'admin-worker',
+        provider: settings.provider,
+        providerLabel: adminAiWorkerProviderLabel(settings.provider),
+        ready: state.ready,
+        codexCliLoggedIn: settings.codexCliLoggedIn,
+        claudeCodeCliLoggedIn: settings.claudeCodeCliLoggedIn,
+      };
+    }
+    async function saveAdminAiWorkerSettings() {
+      if (!isAdminSession()) {
+        renderAdminAiWorkerStatusMessage(readAdminAiWorkerSettings());
+        openLogin();
+        return;
+      }
+      openProgress('관리자 AI 작업자 저장', 'Codex/Claude Code 선택값을 관리자 로컬 설정으로 저장합니다.');
+      try {
+        const settings = collectAdminAiWorkerSettings();
+        writeAdminAiWorkerSettings(settings);
+        hydrateAdminAiWorkerSettingsForm();
+        setResult({ adminAiWorker: Object.assign({ storage: 'browser-local-admin-only' }, adminAiWorkerRequestPayload()) });
+        log('관리자 AI 작업자 저장 완료: ' + adminAiWorkerProviderLabel(settings.provider));
+        completeProgress('관리자 AI 작업자 설정이 저장되었습니다.');
+      } catch (err) {
+        qs('adminAiWorkerMessage').textContent = err.message;
+        failProgress(err.message);
+      }
+    }
+    async function checkAdminAiWorkerSettings() {
+      if (!isAdminSession()) {
+        renderAdminAiWorkerStatusMessage(readAdminAiWorkerSettings());
+        openLogin();
+        return;
+      }
+      openProgress('관리자 AI 작업자 연동상태 확인', 'Codex/Claude Code 로그인 확인값과 선택 작업자를 점검합니다.');
+      try {
+        const settings = readAdminAiWorkerSettings();
+        const state = adminAiWorkerReadyState(settings);
+        updateProgress(55, adminAiWorkerProviderLabel(settings.provider) + ' 선택 상태를 확인합니다.');
+        renderAdminAiWorkerStatusMessage(settings);
+        setResult({
+          adminAiWorker: {
+            ok: state.ready,
+            storage: 'browser-local-admin-only',
+            provider: settings.provider,
+            providerLabel: adminAiWorkerProviderLabel(settings.provider),
+            codexCliLoggedIn: settings.codexCliLoggedIn,
+            claudeCodeCliLoggedIn: settings.claudeCodeCliLoggedIn,
+            status: state.status,
+            detail: state.detail,
+          },
+        });
+        log('관리자 AI 작업자 확인: ' + adminAiWorkerProviderLabel(settings.provider) + '=' + state.status);
+        completeProgress(state.ready ? '관리자 AI 작업자 사용 준비가 확인되었습니다.' : state.detail);
+      } catch (err) {
+        qs('adminAiWorkerMessage').textContent = err.message;
+        failProgress(err.message);
+      }
     }
     function openLogin() {
       qs('loginModal').classList.add('open');
@@ -2144,6 +2373,10 @@
           payload.contextKeywords = buildLookupContextKeywords(seed, url === endpoints.mindmap ? 100 : 60);
         }
         payload.engineVersion = 'web-electron-parity-20260616';
+      }
+      if (url !== endpoints.session) {
+        const adminAiWorker = adminAiWorkerRequestPayload();
+        if (adminAiWorker) payload.adminAiWorker = adminAiWorker;
       }
       return payload;
     }
@@ -3661,6 +3894,14 @@
     qs('saveNaverApiSettings').addEventListener('click', saveNaverApiSettings);
     qs('checkNaverApiSettings').addEventListener('click', checkNaverApiSettings);
     qs('clearNaverApiSettings').addEventListener('click', clearNaverApiSettings);
+    qs('saveAdminAiWorkerSettings').addEventListener('click', saveAdminAiWorkerSettings);
+    qs('checkAdminAiWorkerSettings').addEventListener('click', checkAdminAiWorkerSettings);
+    qs('adminAiProviderGrid').addEventListener('change', function() {
+      document.querySelectorAll('[data-admin-ai-provider]').forEach(function(card) {
+        const input = card.querySelector('input[name="adminAiWorkerProvider"]');
+        card.classList.toggle('active', !!(input && input.checked));
+      });
+    });
     qs('refreshSources').addEventListener('click', loadSources);
     qs('refreshGolden').addEventListener('click', loadGoldenBoard);
     qs('refreshOps').addEventListener('click', function() {
