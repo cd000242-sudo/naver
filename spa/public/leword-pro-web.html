@@ -666,6 +666,34 @@
     .result-list strong { font-size: 13px; overflow-wrap: anywhere; }
     .result-list span { color: var(--muted); overflow-wrap: anywhere; }
     .result-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .mindmap-view {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 12px;
+      align-items: stretch;
+      margin-top: 12px;
+    }
+    .mindmap-root, .mindmap-node {
+      border: 1px solid rgba(91,183,255,.32);
+      border-radius: 8px;
+      background: rgba(7,9,13,.52);
+      color: var(--text);
+      padding: 11px;
+      text-align: left;
+    }
+    .mindmap-root {
+      display: grid;
+      place-items: center;
+      min-height: 128px;
+      border-color: rgba(245,197,66,.58);
+      background: linear-gradient(135deg, rgba(245,197,66,.18), rgba(53,211,153,.08));
+      color: var(--gold);
+      font-weight: 1000;
+    }
+    .mindmap-branches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .mindmap-node strong { display: block; font-size: 13px; overflow-wrap: anywhere; }
+    .mindmap-node span { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .mindmap-node:hover { border-color: rgba(53,211,153,.48); transform: translateY(-1px); }
     .trend-card { display: grid; gap: 10px; }
     .trend-bars {
       height: 118px;
@@ -775,6 +803,18 @@
     .settings-checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
     .admin-ai-panel { margin-top: 14px; border-color: rgba(245,197,66,.36); background: linear-gradient(180deg, rgba(16,22,31,.96), rgba(8,12,18,.98)); }
     .admin-ai-panel.locked { opacity: .74; }
+    .admin-ai-panel.password-locked { border-color: rgba(255,159,67,.5); }
+    .admin-ai-lock-banner {
+      margin-top: 10px;
+      border: 1px dashed rgba(245,197,66,.48);
+      border-radius: 8px;
+      background: rgba(245,197,66,.08);
+      color: #f7dc86;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+    .admin-ai-lock-banner strong { display: block; font-size: 13px; color: var(--gold); }
+    .admin-ai-lock-banner span { display: block; margin-top: 4px; color: #cbd7e8; font-size: 12px; line-height: 1.45; }
     .admin-ai-provider-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
     .admin-ai-provider {
       border: 1px solid var(--line);
@@ -812,7 +852,7 @@
       .feature-grid, .ops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 820px) {
-      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist, .admin-ai-provider-grid, .api-issue-grid { grid-template-columns: 1fr; }
+      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist, .admin-ai-provider-grid, .api-issue-grid, .mindmap-view, .mindmap-branches { grid-template-columns: 1fr; }
       .quick-feature-dock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quality-strip { grid-template-columns: 1fr 1fr; }
       .result-toolbar { grid-template-columns: 1fr; }
@@ -1135,6 +1175,10 @@
           <div class="settings-panel admin-ai-panel locked" id="adminAiWorkerSettings">
             <h3 style="margin:0 0 6px;">관리자 AI 작업자 설정</h3>
             <p class="muted" style="margin:0;">Codex와 Claude Code는 관리자 전용 서버 작업자입니다. 관리자 계정으로 Pro 로그인한 뒤 사용할 작업자를 선택하세요.</p>
+            <div class="admin-ai-lock-banner" id="adminAiLockBanner" role="button" tabindex="0">
+              <strong>관리자 설정 잠김</strong>
+              <span>관리자 로그인 후 비밀번호를 입력하면 Codex/Claude Code 작업자 설정이 열립니다.</span>
+            </div>
             <div class="admin-ai-provider-grid" id="adminAiProviderGrid">
               <label class="admin-ai-provider" data-admin-ai-provider="codex">
                 <input type="radio" name="adminAiWorkerProvider" value="codex" />
@@ -1270,6 +1314,20 @@
     </div>
   </div>
 
+  <div class="modal" id="adminPasswordModal" aria-hidden="true">
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="adminPasswordTitle">
+      <h2 id="adminPasswordTitle">관리자 설정 비밀번호</h2>
+      <p>관리자 AI 작업자 설정을 열려면 별도 비밀번호를 입력하세요.</p>
+      <label for="adminSettingsPassword">비밀번호</label>
+      <input class="input" id="adminSettingsPassword" type="password" autocomplete="current-password" />
+      <div class="dialog-actions">
+        <button class="btn primary" type="button" id="adminPasswordConfirm">확인</button>
+        <button class="btn" type="button" id="adminPasswordClose">닫기</button>
+      </div>
+      <div class="muted" id="adminPasswordMessage" style="margin-top:12px; min-height:18px;"></div>
+    </div>
+  </div>
+
   <div class="modal" id="progressModal" aria-hidden="true" aria-live="polite">
     <div class="dialog progress-dialog" role="status">
       <div class="progress-head">
@@ -1317,6 +1375,7 @@
     const endpoints = {
       health: apiUrl('/health'),
       session: apiUrl('/v1/web/session'),
+      adminSettingsUnlock: apiUrl('/v1/admin/settings/unlock'),
       publicLiveGolden: apiUrl('/v1/public/live-golden'),
       publicSources: apiUrl('/v1/public/source-signals'),
       proSources: apiUrl('/v1/mobile/source-signals'),
@@ -1377,6 +1436,7 @@
     let selectedCatalogTab = 'today';
     const userApiSettingsStorageKey = 'leword.pro.userApiSettings.v1';
     const adminAiWorkerSettingsStorageKey = 'leword.pro.adminAiWorkerSettings.v1';
+    const adminSettingsUnlockStorageKey = 'leword.pro.adminSettingsUnlocked.v1';
     const toolTabFeatureIds = ['pro-traffic', 'naver-mate', 'shopping', 'kin'];
     const viewIds = ['golden', 'sources', 'lookup', 'features', 'youtube', 'settings', 'downloads'];
     const catalogTabs = [
@@ -1674,6 +1734,38 @@
         + resultKpiHtml(metrics || [])
         + list;
     }
+    function clearLookupInsight() {
+      const target = qs('lookupInsightPanel');
+      if (!target) return;
+      target.hidden = true;
+      target.innerHTML = '';
+    }
+    function renderMindmapLookupInsight(seed, result) {
+      const target = qs('lookupInsightPanel');
+      if (!target) return;
+      const rows = keywordResultRows(result).slice(0, 30);
+      const measured = rows.filter(function(row) { return row.isMeasured; }).length;
+      const seedLabel = normalizeText(seed) || 'seed';
+      const nodes = rows.map(function(row) {
+        const safe = escapeAttr(row.keyword || '');
+        return '<button class="mindmap-node" type="button" data-board-action="analyze" data-keyword="' + safe + '">'
+          + '<strong>' + escapeHtml(row.keyword || '-') + '</strong>'
+          + '<span>전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 등급 ' + escapeHtml(row.grade || '-') + '</span>'
+          + '</button>';
+      }).join('');
+      target.hidden = false;
+      target.innerHTML = '<h3>마인드맵 확장</h3>'
+        + '<p>자동완성/연관어 후보를 서버에서 수집한 뒤 실측 가능한 항목만 가지로 정리했습니다.</p>'
+        + resultKpiHtml([
+          { label: '가지', value: fmt(rows.length) },
+          { label: '실측', value: fmt(measured) },
+          { label: 'SSS', value: fmt(rows.filter(function(row) { return row.grade === 'SSS'; }).length) },
+          { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+        ])
+        + (rows.length
+          ? '<div class="mindmap-view"><div class="mindmap-root">' + escapeHtml(seedLabel) + '</div><div class="mindmap-branches">' + nodes + '</div></div>'
+          : '<ul class="result-list"><li><span>실측 가능한 마인드맵 후보가 없습니다. API 키 상태와 네이버 자동완성/연관어 응답을 확인하세요.</span></li></ul>');
+    }
     function renderToolWaiting(feature) {
       renderToolResultPanel(feature, feature && feature.title ? feature.title : 'Pro 도구', '자동 발굴 실행을 누르면 진행률 모달이 뜨고, 완료 후 이 영역에 후보와 실측 지표가 정리됩니다.', [], []);
     }
@@ -1697,10 +1789,19 @@
       const list = Array.isArray(rows) && rows.length
         ? '<ul class="result-list">' + rows.join('') + '</ul>'
         : '<ul class="result-list"><li><span>표시할 상세 항목이 없습니다.</span></li></ul>';
-      qs('resultSummary').innerHTML = '<h3>' + escapeHtml(title) + '</h3>'
+      const target = qs('resultSummary');
+      if (!target) return;
+      target.hidden = false;
+      target.innerHTML = '<h3>' + escapeHtml(title) + '</h3>'
         + '<p>' + escapeHtml(subtitle || '') + '</p>'
         + resultKpiHtml(metrics || [])
         + list;
+    }
+    function clearResultSummary() {
+      const target = qs('resultSummary');
+      if (!target) return;
+      target.hidden = true;
+      target.innerHTML = '';
     }
     function keywordActionHtml(keyword) {
       const safe = escapeAttr(keyword || '');
@@ -1914,6 +2015,12 @@
         renderKeywordRows(result);
         renderKeywordResultSummary(feature && feature.title ? feature.title : '키워드 결과', result);
         if ((!feature || !feature.id) && activeViewId === 'lookup') {
+          if (feature && feature.route === endpoints.keywordAnalysis) {
+            clearResultSummary();
+            clearLookupInsight();
+          } else if (feature && feature.route === endpoints.mindmap) {
+            renderMindmapLookupInsight(compactKeywordInput(), result);
+          } else {
           const rows = result.keywords || [];
           const topRows = rows.slice(0, 5).map(function(row) {
             return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 등급 ' + escapeHtml(row.grade || '-') + '</span>' + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
@@ -1929,6 +2036,7 @@
             { label: '발행 추천', value: fmt(publishReady) },
             { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
           ], topRows);
+          }
         }
         renderToolFeatureResult(feature, result);
         return;
@@ -2073,9 +2181,13 @@
     }
     function saveSession(value) {
       session = value;
-      if (session) localStorage.setItem('leword.pro.session', JSON.stringify(session));
+      if (session) {
+        localStorage.setItem('leword.pro.session', JSON.stringify(session));
+        if (session.tier !== 'admin') setAdminSettingsUnlocked(false);
+      }
       else {
         localStorage.removeItem('leword.pro.session');
+        setAdminSettingsUnlocked(false);
         postLoginAutoRunStarted = false;
       }
       renderSession();
@@ -2094,6 +2206,25 @@
     }
     function isAdminSession() {
       return !!(session && session.tier === 'admin');
+    }
+    function setAdminSettingsUnlocked(value, expiresInSeconds) {
+      try {
+        if (value) {
+          const ttl = Number(expiresInSeconds || 3600);
+          sessionStorage.setItem(adminSettingsUnlockStorageKey, JSON.stringify({ unlocked: true, expiresAt: Date.now() + Math.max(60, ttl) * 1000 }));
+        } else {
+          sessionStorage.removeItem(adminSettingsUnlockStorageKey);
+        }
+      } catch (err) {}
+    }
+    function isAdminSettingsUnlocked() {
+      if (!isAdminSession()) return false;
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(adminSettingsUnlockStorageKey) || 'null');
+        return !!(saved && saved.unlocked === true && Number(saved.expiresAt || 0) > Date.now());
+      } catch (err) {
+        return false;
+      }
     }
     function adminAiWorkerProviderLabel(provider) {
       if (provider === 'claude-code') return 'Claude Code';
@@ -2150,14 +2281,22 @@
       if (!target) return;
       const state = adminAiWorkerReadyState(settings);
       const adminStatus = isAdminSession() ? 'ready' : 'missing';
+      const unlocked = isAdminSettingsUnlocked();
+      const passwordStatusHtml = '<div class="settings-check ' + (unlocked ? 'ready' : 'missing') + '"><strong>비밀번호 · ' + (unlocked ? '확인됨' : '잠김') + '</strong><span>' + (unlocked ? '관리자 설정 입력이 활성화되었습니다.' : '관리자 설정을 열려면 비밀번호를 입력하세요.') + '</span></div>';
       target.innerHTML =
         '<div class="settings-check ' + adminStatus + '"><strong>관리자 권한 · ' + (isAdminSession() ? '확인됨' : '잠김') + '</strong><span>' + (isAdminSession() ? 'admin 세션에서만 작업자 선택이 저장됩니다.' : '관리자 계정으로 Pro 로그인해야 설정할 수 있습니다.') + '</span></div>'
         + '<div class="settings-check ' + state.status + '"><strong>' + escapeHtml(adminAiWorkerProviderLabel(settings.provider)) + ' · ' + (state.ready ? '사용 준비' : '확인 필요') + '</strong><span>' + escapeHtml(state.detail) + '</span></div>';
+      target.insertAdjacentHTML('beforeend', passwordStatusHtml);
     }
     function renderAdminAiWorkerStatusMessage(settings) {
       const saved = settings || readAdminAiWorkerSettings();
       const state = adminAiWorkerReadyState(saved);
       if (!qs('adminAiWorkerMessage')) return;
+      if (isAdminSession() && !isAdminSettingsUnlocked()) {
+        qs('adminAiWorkerMessage').textContent = '관리자 설정은 비밀번호 확인 후 열립니다. 패널을 클릭해 비밀번호를 입력하세요.';
+        renderAdminAiWorkerChecklist(saved);
+        return;
+      }
       if (!isAdminSession()) {
         qs('adminAiWorkerMessage').textContent = '관리자 전용 설정입니다. admin 계정으로 Pro 로그인하면 Codex/Claude Code 작업자를 선택할 수 있습니다.';
       } else {
@@ -2170,33 +2309,41 @@
       if (!panel) return;
       const settings = readAdminAiWorkerSettings();
       const admin = isAdminSession();
-      panel.classList.toggle('locked', !admin);
+      const unlocked = isAdminSettingsUnlocked();
+      const enabled = admin && unlocked;
+      panel.classList.toggle('locked', !enabled);
+      panel.classList.toggle('password-locked', admin && !unlocked);
+      if (qs('adminAiLockBanner')) {
+        qs('adminAiLockBanner').hidden = enabled;
+        qs('adminAiLockBanner').querySelector('strong').textContent = admin ? '관리자 설정 비밀번호 필요' : '관리자 로그인 필요';
+        qs('adminAiLockBanner').querySelector('span').textContent = admin ? '클릭해서 비밀번호를 입력하면 관리자 AI 작업자 설정이 열립니다.' : 'admin 계정으로 Pro 로그인한 뒤 비밀번호를 입력해야 열립니다.';
+      }
       document.querySelectorAll('input[name="adminAiWorkerProvider"]').forEach(function(input) {
         input.checked = input.value === settings.provider;
-        input.disabled = !admin;
+        input.disabled = !enabled;
       });
       document.querySelectorAll('[data-admin-ai-provider]').forEach(function(card) {
         card.classList.toggle('active', card.getAttribute('data-admin-ai-provider') === settings.provider);
       });
       if (qs('codexCliLoggedIn')) {
         qs('codexCliLoggedIn').checked = !!settings.codexCliLoggedIn;
-        qs('codexCliLoggedIn').disabled = !admin;
+        qs('codexCliLoggedIn').disabled = !enabled;
       }
       if (qs('claudeCodeCliLoggedIn')) {
         qs('claudeCodeCliLoggedIn').checked = !!settings.claudeCodeCliLoggedIn;
-        qs('claudeCodeCliLoggedIn').disabled = !admin;
+        qs('claudeCodeCliLoggedIn').disabled = !enabled;
       }
       if (qs('adminAiWorkerNote')) {
         qs('adminAiWorkerNote').value = settings.note || '';
-        qs('adminAiWorkerNote').disabled = !admin;
+        qs('adminAiWorkerNote').disabled = !enabled;
       }
       ['saveAdminAiWorkerSettings', 'checkAdminAiWorkerSettings'].forEach(function(id) {
-        if (qs(id)) qs(id).disabled = !admin;
+        if (qs(id)) qs(id).disabled = !enabled;
       });
       renderAdminAiWorkerStatusMessage(settings);
     }
     function adminAiWorkerRequestPayload() {
-      if (!isAdminSession()) return null;
+      if (!isAdminSession() || !isAdminSettingsUnlocked()) return null;
       const settings = readAdminAiWorkerSettings();
       const state = adminAiWorkerReadyState(settings);
       return {
@@ -2212,6 +2359,10 @@
       if (!isAdminSession()) {
         renderAdminAiWorkerStatusMessage(readAdminAiWorkerSettings());
         openLogin();
+        return;
+      }
+      if (!isAdminSettingsUnlocked()) {
+        openAdminPasswordModal();
         return;
       }
       openProgress('관리자 AI 작업자 저장', 'Codex/Claude Code 선택값을 관리자 로컬 설정으로 저장합니다.');
@@ -2231,6 +2382,10 @@
       if (!isAdminSession()) {
         renderAdminAiWorkerStatusMessage(readAdminAiWorkerSettings());
         openLogin();
+        return;
+      }
+      if (!isAdminSettingsUnlocked()) {
+        openAdminPasswordModal();
         return;
       }
       openProgress('관리자 AI 작업자 연동상태 확인', 'Codex/Claude Code 로그인 확인값과 선택 작업자를 점검합니다.');
@@ -2257,6 +2412,53 @@
         qs('adminAiWorkerMessage').textContent = err.message;
         failProgress(err.message);
       }
+    }
+    function openAdminPasswordModal() {
+      if (!isAdminSession()) {
+        openLogin();
+        return;
+      }
+      const modal = qs('adminPasswordModal');
+      const input = qs('adminSettingsPassword');
+      if (!modal || !input) return;
+      input.value = '';
+      if (qs('adminPasswordMessage')) qs('adminPasswordMessage').textContent = '';
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      setTimeout(function() { input.focus(); }, 0);
+    }
+    function closeAdminPasswordModal() {
+      if (!qs('adminPasswordModal')) return;
+      qs('adminPasswordModal').classList.remove('open');
+      qs('adminPasswordModal').setAttribute('aria-hidden', 'true');
+    }
+    async function confirmAdminSettingsPassword() {
+      const input = qs('adminSettingsPassword');
+      const message = qs('adminPasswordMessage');
+      const value = input ? input.value : '';
+      if (!value) {
+        if (message) message.textContent = '비밀번호를 입력하세요.';
+        return;
+      }
+      try {
+        const payload = await apiPost(endpoints.adminSettingsUnlock, { password: value });
+        if (!payload || payload.unlocked !== true) throw new Error(payload && payload.message ? payload.message : '관리자 설정 잠금 해제에 실패했습니다.');
+        setAdminSettingsUnlocked(true, payload.expiresInSeconds);
+        closeAdminPasswordModal();
+        hydrateAdminAiWorkerSettingsForm();
+        log('관리자 설정 비밀번호 확인 완료');
+      } catch (err) {
+        if (message) message.textContent = err.message || String(err);
+      }
+    }
+    function handleAdminAiLockedClick(event) {
+      if (isAdminSettingsUnlocked()) return;
+      const panel = qs('adminAiWorkerSettings');
+      if (!panel || !panel.contains(event.target)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      if (!isAdminSession()) openLogin();
+      else openAdminPasswordModal();
     }
     function openLogin() {
       qs('loginModal').classList.add('open');
@@ -3894,6 +4096,16 @@
     qs('saveNaverApiSettings').addEventListener('click', saveNaverApiSettings);
     qs('checkNaverApiSettings').addEventListener('click', checkNaverApiSettings);
     qs('clearNaverApiSettings').addEventListener('click', clearNaverApiSettings);
+    qs('adminAiWorkerSettings').addEventListener('click', handleAdminAiLockedClick);
+    qs('adminAiLockBanner').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ') handleAdminAiLockedClick(event);
+    });
+    qs('adminPasswordConfirm').addEventListener('click', confirmAdminSettingsPassword);
+    qs('adminPasswordClose').addEventListener('click', closeAdminPasswordModal);
+    qs('adminSettingsPassword').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') confirmAdminSettingsPassword();
+    });
+    qs('adminPasswordModal').addEventListener('click', function(event) { if (event.target.id === 'adminPasswordModal') closeAdminPasswordModal(); });
     qs('saveAdminAiWorkerSettings').addEventListener('click', saveAdminAiWorkerSettings);
     qs('checkAdminAiWorkerSettings').addEventListener('click', checkAdminAiWorkerSettings);
     qs('adminAiProviderGrid').addEventListener('change', function() {
