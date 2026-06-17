@@ -61,6 +61,6 @@ describe('editor tail plan', () => {
   it('normalizes comparable URLs for query, hash, and trailing slash differences', () => {
     expect(normalizeComparableUrl(' https://blog.naver.com/a/1/?x=1#top ')).toBe('https://blog.naver.com/a/1');
     expect(getHashtagGapEnterCount(true)).toBe(5);
-    expect(getHashtagGapEnterCount(false)).toBe(3);
+    expect(getHashtagGapEnterCount(false)).toBe(5);
   });
 });

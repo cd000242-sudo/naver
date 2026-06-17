@@ -40,7 +40,8 @@ export function isHeadingCtaPosition(value?: string): boolean {
 }
 
 export function getHashtagGapEnterCount(previousPostTailInserted: boolean): number {
-  return previousPostTailInserted ? 5 : 3;
+  void previousPostTailInserted;
+  return 5;
 }
 
 export function getExpectedLinkCardMin(

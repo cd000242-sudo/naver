@@ -765,6 +765,77 @@ function markdownTableToHtml(lines: string[], theme: SoftTableTheme): { html: st
   };
 }
 
+const TABLE_REFERENCE_CUE_RE = /(?:\uC544\uB798\s*\uD45C|\uD45C\uB85C\s*\uC815\uB9AC|\uD45C\uB97C\s*(?:\uBCF4|\uCC38\uACE0)|\uD45C\uC5D0\uC11C|\uBE44\uAD50\uD45C)/;
+
+function hasTableReferenceCue(value: string): boolean {
+  return TABLE_REFERENCE_CUE_RE.test(stripInlineMarkdown(String(value || '')));
+}
+
+function trimFallbackTableCell(value: string, fallback: string): string {
+  const cleaned = stripInlineMarkdown(value)
+    .replace(TABLE_REFERENCE_CUE_RE, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const source = cleaned || fallback;
+  return source.length > 62 ? `${source.slice(0, 59).trim()}...` : source;
+}
+
+function plainTextFromRenderNode(node: RenderNode): string {
+  if (node.type === 'heading') return node.title;
+  if (node.type === 'qa-question') return node.plain;
+  if (node.type === 'paragraph') return node.plain;
+  if (node.type === 'list') return node.plain.replace(/\n+/g, ' ');
+  if (node.type === 'table') return node.plain;
+  return '';
+}
+
+function buildFallbackTableFromTableReference(nodes: readonly RenderNode[], theme: SoftTableTheme): RenderNode | null {
+  const rows: string[][] = [];
+  let currentHeading = '\uD575\uC2EC';
+
+  for (const node of nodes) {
+    if (node.type === 'heading') {
+      currentHeading = trimFallbackTableCell(node.title, currentHeading);
+      continue;
+    }
+
+    if (node.type !== 'paragraph' && node.type !== 'qa-question' && node.type !== 'list') continue;
+    const plain = plainTextFromRenderNode(node);
+    if (!plain || hasTableReferenceCue(plain)) continue;
+
+    const cell = trimFallbackTableCell(plain, '');
+    if (cell.length < 8) continue;
+    rows.push([currentHeading, cell]);
+    if (rows.length >= 3) break;
+  }
+
+  if (rows.length === 0) return null;
+  if (rows.length === 1) {
+    rows.push([
+      '\uCD94\uAC00 \uD655\uC778',
+      '\uC870\uAC74\uACFC \uC608\uC678\uB97C \uD568\uAED8 \uC810\uAC80\uD558\uBA74 \uC2E4\uC218\uB97C \uC904\uC77C \uC218 \uC788\uC5B4\uC694.',
+    ]);
+  }
+
+  const table = markdownTableToHtml([
+    '|\uD56D\uBAA9|\uD655\uC778 \uD3EC\uC778\uD2B8|',
+    '|---|---|',
+    ...rows.map(([label, detail]) => `|${label}|${detail}|`),
+  ], theme);
+
+  return table.html ? { type: 'table', html: table.html, plain: table.plain } : null;
+}
+
+function insertFallbackTableAfterReference(nodes: readonly RenderNode[], tableNode: RenderNode): RenderNode[] {
+  const cueIndex = nodes.findIndex((node) => hasTableReferenceCue(plainTextFromRenderNode(node)));
+  const insertIndex = cueIndex >= 0 ? cueIndex + 1 : Math.min(nodes.length, 1);
+  return [
+    ...nodes.slice(0, insertIndex),
+    tableNode,
+    ...nodes.slice(insertIndex),
+  ];
+}
+
 const DOMAIN_DOT_PLACEHOLDER = '\uE000';
 const DOMAIN_TOKEN_RE = /\b(?:https?:\/\/)?(?:www\.)?[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+){1,}(?:\/[^\s)]*)?/g;
 
@@ -1283,7 +1354,16 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
     }
   }
 
-  const selectedHighlights = enableHighlight ? selectImportantParagraphs(nodes, maxHighlights) : new Set<number>();
+  let renderNodes = nodes;
+  if (tableCount === 0 && hasTableReferenceCue(normalized)) {
+    const fallbackTable = buildFallbackTableFromTableReference(nodes, tableTheme);
+    if (fallbackTable) {
+      renderNodes = insertFallbackTableAfterReference(nodes, fallbackTable);
+      tableCount += 1;
+    }
+  }
+
+  const selectedHighlights = enableHighlight ? selectImportantParagraphs(renderNodes, maxHighlights) : new Set<number>();
   const htmlParts: string[] = [];
   const plainParts: string[] = [];
   let paragraphCount = 0;
@@ -1294,7 +1374,7 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
     plainParts.push(toc.plain);
   }
 
-  nodes.forEach((node, index) => {
+  renderNodes.forEach((node, index) => {
     if (node.type === 'table') {
       htmlParts.push(node.html);
       plainParts.push(node.plain);

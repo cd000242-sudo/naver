@@ -262,7 +262,7 @@ describe('editor tail actions', () => {
     });
   });
 
-  it('uses the shorter hashtag gap when no previous-post card was inserted', async () => {
+  it('skips hashtag work when no hashtags are present', async () => {
     const self = makeSelf();
     const { page, pressed } = makePage();
 
@@ -280,7 +280,7 @@ describe('editor tail actions', () => {
     expect(self.applyHashtagsInBody).not.toHaveBeenCalled();
   });
 
-  it('uses text-bearing tail focus and then hashtags directly when no previous post exists', async () => {
+  it('uses text-bearing tail focus and then five-line hashtag spacing when no previous post exists', async () => {
     const self = makeSelf();
     const { page, pressed } = makePage();
 
@@ -301,12 +301,12 @@ describe('editor tail actions', () => {
     );
     expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one'], {
       ensureTailReady: true,
-      leadingEnterCount: 3,
+      leadingEnterCount: 5,
       previousPostTailInserted: false,
     });
   });
 
-  it('continues to hashtag input when no previous post exists even if tail readiness probe is unstable', async () => {
+  it('continues to hashtag input with five-line spacing when no previous post exists even if tail readiness probe is unstable', async () => {
     vi.mocked(ensureTailTypingReady).mockResolvedValueOnce(false);
     const self = makeSelf();
     const { page, pressed } = makePage();
@@ -328,7 +328,7 @@ describe('editor tail actions', () => {
     );
     expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one', '#two'], {
       ensureTailReady: true,
-      leadingEnterCount: 3,
+      leadingEnterCount: 5,
       previousPostTailInserted: false,
     });
   });

@@ -122,6 +122,24 @@ describe('buildMobileRichHtml', () => {
     expect(result.html).toContain('>OK</td>');
   });
 
+  it('adds a fallback table when prose references a table but no markdown table was generated', () => {
+    const result = buildMobileRichHtml(
+      [
+        '\uC544\uB798 \uD45C\uB97C \uBCF4\uBA74 \uC9C0\uAE09 \uAE30\uC900\uC744 \uD55C\uBC88\uC5D0 \uD655\uC778\uD560 \uC218 \uC788\uC5B4\uC694.',
+        '',
+        '\uC2E0\uCCAD \uC870\uAC74\uC740 \uAC00\uAD6C \uC18C\uB4DD\uACFC \uAC70\uC8FC \uC694\uAC74\uC744 \uD568\uAED8 \uBCF4\uC154\uC57C \uD569\uB2C8\uB2E4.',
+        '',
+        '\uC11C\uB958 \uD655\uC778\uACFC \uC7AC\uC811\uC218 \uC2DC\uAE30\uB3C4 \uAC19\uC774 \uC810\uAC80\uD574\uC57C \uC2E4\uC218\uB97C \uC904\uC77C \uC218 \uC788\uC5B4\uC694.',
+      ].join('\n'),
+      { highlight: false }
+    );
+
+    expect(result.tableCount).toBe(1);
+    expect(result.html).toContain('<table ');
+    expect(result.plainText).toContain('\uD56D\uBAA9');
+    expect(result.plainText).toContain('\uD655\uC778 \uD3EC\uC778\uD2B8');
+  });
+
   it('formats Q&A without standalone A labels and renders questions at 24px', () => {
     const result = buildMobileRichHtml(
       [
