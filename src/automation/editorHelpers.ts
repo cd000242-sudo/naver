@@ -313,7 +313,7 @@ export async function typeBodyWithRetry(self: any,
 
     // 열린 패널 강제 닫기
     await frame.evaluate(() => {
-      const panels = document.querySelectorAll('.se-popup, .se-panel, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
+      const panels = document.querySelectorAll('.se-popup, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
       panels.forEach(panel => {
         if (panel instanceof HTMLElement && panel.style.display !== 'none') {
           const closeBtn = panel.querySelector('button[class*="close"], .close, [aria-label*="닫기"]');
@@ -378,7 +378,7 @@ export async function typeBodyWithRetry(self: any,
         return;
       }
 
-      self.log(`   ⚠️ [리치입력] 실패 → 기존 타이핑 fallback: ${pasteResult.reason || 'unknown'}`);
+      self.log(`   ⚠️ [리치입력] 모든 붙여넣기 재시도 실패 → 최후 안전 키보드 입력 fallback: ${pasteResult.reason || 'unknown'}`);
     }
 
     // ✅ [2026-03-16 OVERHAUL] AI가 결정한 문단 구분을 그대로 존중
@@ -693,7 +693,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     }
 
     self.log('🧱 구조화된 콘텐츠를 체계적으로 적용합니다 (완전 순차 실행)...');
-    self.log('📋 타이핑 순서: 제목 → Enter 2회 → 소제목(28px) → Enter 2회 → 이미지 → Enter 1회 → 본문(19px) → Enter 2회 → 반복');
+    self.log('📋 입력 순서: 제목 → Enter 2회 → 소제목(28px) → 이미지 → 본문 리치 입력 → 구분선 → 반복');
     self.ensureNotCancelled();
 
     // ✅ [2026-03-05 FIX] retry 시마다 frame을 새로 가져오도록 수정 (detached frame 복구)
@@ -761,6 +761,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     // 2. 서론(Introduction) 작성
     const headings = structured.headings || [];
     const bodyText = structured.bodyPlain || '';
+    const bodyTextHasHeadingMarkers = headings.some((h: any) => {
+      const title = String(h?.title || '').trim();
+      return title.length > 0 && bodyText.includes(title);
+    });
 
     // ✅ [2026-03-26 DEBUG] 반자동 편집 반영 확인 — bodyText와 resolved.content 일치 검증
     self.log(`🔍 [편집 검증] _bodyManuallyEdited=${structured._bodyManuallyEdited}, bodyText길이=${bodyText.length}, resolved.content길이=${resolved.content?.length}`);
@@ -821,6 +825,29 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           }
         }
         structured.conclusion = '';
+      }
+    }
+
+    // ✅ [2026-06-17 FIX] 생성 콘텐츠에서도 bodyPlain 앞 도입부를 복구
+    // 반자동이 아닌 흐름에서는 introduction이 비어있고 bodyPlain에
+    // "도입부 + 첫 소제목 + 본문"이 들어오는 경우가 있어, 대표 이미지 뒤에
+    // 바로 첫 소제목 이미지가 나와 글 흐름이 끊겼다.
+    if ((!structured.introduction || structured.introduction.trim().length === 0) && headings.length > 0 && bodyText.trim().length > 0) {
+      const firstTitle = String(headings[0]?.title || '').trim();
+      const firstHeadingPos = firstTitle ? bodyText.indexOf(firstTitle) : -1;
+      if (firstHeadingPos > 0) {
+        const normalizedTitle = String(resolved.title || structured.selectedTitle || '').replace(/\s+/g, ' ').trim();
+        let inferredIntro = bodyText.substring(0, firstHeadingPos).trim();
+        if (normalizedTitle) {
+          const introLines = inferredIntro.split(/\r?\n/).map((line: string) => line.trim());
+          if (introLines.length > 0 && introLines[0].replace(/\s+/g, ' ') === normalizedTitle) {
+            inferredIntro = introLines.slice(1).join('\n').trim();
+          }
+        }
+        if (inferredIntro.length > 20) {
+          structured.introduction = inferredIntro;
+          self.log(`   📖 [도입부 복구] bodyPlain에서 서론 ${inferredIntro.length}자 복구`);
+        }
       }
     }
 
@@ -1536,7 +1563,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             cleanBody = allLines.slice(sl, el).join('\n').trim();
             self.log(`   ✅ 균등 분배 추출: ${cleanBody.length}자`);
           } else {
-            // ✅ [기존 로직] extractBodyForHeading 기반 추출 + 필터링
+            const directHeadingContent = String(heading.content || '').trim();
+            if (!bodyTextHasHeadingMarkers && directHeadingContent.length > 30) {
+              // ✅ [2026-06-17 FIX] bodyPlain에 소제목 마커가 없는 생성 결과는
+              // heading.content가 가장 정확한 섹션 본문이다. 기존 균등 분배는
+              // 첫 섹션 도입부를 먹거나 빈 본문을 만들 수 있었다.
+              cleanBody = directHeadingContent;
+              self.log(`   ✅ [본문복구] heading.content 우선 사용(bodyPlain 소제목 마커 없음): ${cleanBody.length}자`);
+            } else {
+              // ✅ [기존 로직] extractBodyForHeading 기반 추출 + 필터링
             const headingBody = self.extractBodyForHeading(bodyText, heading.title, i, headings.length, headings);
             cleanBody = headingBody.trim();
 
@@ -1561,6 +1596,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
               .replace(/https?:\/\/[^\s\n]+/g, '')
               .replace(/\n{3,}/g, '\n\n')
               .trim();
+            }
           }
 
           // 1-2. 이미지 분류
@@ -1569,8 +1605,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           const bottomImages = headingImages.filter((img: any) => img.position === 'bottom');
 
           // ✅ [2단계] 순차적 삽입
-          // 쇼핑커넥트 첫 번째 섹션: 이미지 → 소제목 → 본문
-          // 그 외: 소제목(위에서 이미 삽입됨) → 이미지 → 본문
+          // 소제목(위에서 이미 삽입됨) → 이미지 → 본문.
+          // 이미지 직후에는 SmartEditor 커서가 이미지/캡션/툴바에 남을 수 있으므로
+          // 본문 리치 붙여넣기 전에 프레임과 입력 커서를 다시 복구한다.
 
           // A. 모든 이미지 삽입 (Top, Middle, Bottom 통합 또는 Top 우선)
           const allSectionImages = [
@@ -1578,14 +1615,23 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             ...middleImages,
             ...bottomImages
           ];
+          let bodyFrame = currentFrame;
 
+          // A. 이미지 업로드
           if (allSectionImages.length > 0) {
             self.log(`   📸[이미지] 총 ${allSectionImages.length}개 이미지 삽입 중...`);
             allSectionImages.forEach((img: any, idx: number) => {
               const p = (img?.filePath || img?.url || '').replace(/^C:\\Users\\[^\\]+/, '~').replace(/^\/Users\/[^/]+/, '~');
               self.log(`      [${idx}] heading="${img?.heading}", provider="${img?.provider}", path=${p.substring(0, 80)}`);
             });
-            await self.insertImagesAtCurrentCursor(allSectionImages, page, currentFrame, resolved.affiliateLink);
+            const imageFrame = (await self.getAttachedFrame());
+            await ensureTailTypingReady(page, imageFrame, (m: string) => self.log(m)).catch(() => false);
+            await self.insertImagesAtCurrentCursor(allSectionImages, page, imageFrame, resolved.affiliateLink);
+            bodyFrame = (await self.getAttachedFrame());
+            const bodyReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
+            if (!bodyReady) {
+              self.log('   ⚠️ 이미지 삽입 후 본문 입력 커서 복구가 불완전합니다. 본문 입력 재시도 로직으로 계속 진행합니다.');
+            }
           }
 
           // B. 본문 타이핑
@@ -1606,8 +1652,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             }
           }
           if (cleanBody.trim()) {
-            self.log(`   ⌨️[본문] 타이핑 시작 (${cleanBody.length}자)...`);
-            await self.typeBodyWithRetry(currentFrame, page, cleanBody, 19);
+            self.log(`   🧩[본문] 이미지 뒤에 리치 입력 처리 (${cleanBody.length}자)...`);
+            await self.typeBodyWithRetry(bodyFrame, page, cleanBody, 19);
           } else {
             self.log(`   ⚠️ 본문 내용이 비어있어 타이핑 건너뜀 (소제목: "${heading.title}")`);
           }
@@ -1961,7 +2007,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           }
 
           if (cBody.trim()) {
-            self.log(`   ⌨️ 본문 타이핑 시작(이미지 없음)...`);
+            self.log(`   🧩 본문 리치 입력 우선 처리(이미지 없음)...`);
             await self.typeBodyWithRetry(cFrame, page, cBody, 19);
           }
         }
@@ -2070,44 +2116,28 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       self.log('   ✅ 마무리 작성 완료');
     }
 
-    // ✅ 빠른 검증 (성능 최적화)
-    (self as any).__editorContentApplied = true;
-    self.log('\n✅ 콘텐츠 작성 완료! 발행 준비 중...');
+    // ✅ 본문 본체 적용 완료. 이전글/CTA/해시태그 tail이 끝나기 전까지는
+    // __editorContentApplied를 켜지 않는다. 그래야 tail 단계 실패가
+    // "발행 직전 실패"로 오분류되어 복구/진단을 막지 않는다.
+    (self as any).__editorMainBodyApplied = true;
+    self.log('\n✅ 본문 작성 완료! 이전글/해시태그 마무리 중...');
 
     // 간단한 이미지 배치 현황만 로깅
     if (resolved.images && resolved.images.length > 0) {
       self.log(`   📊 이미지 ${Math.min(resolved.images.length, headings.length)}개 배치 완료`);
     }
 
-    // 3. 마지막 본문 끝에서 Enter 2회 (CTA와 본문 사이 간격)
+    // 3. 마지막 본문 tail 준비
     self.log('📝 [마지막 단계] CTA 및 해시태그 영역 준비 중...');
     // [SPEC-STABILITY-2026 diagnostics] Surface what the tail phase actually
     // received — distinguishes "options arrived empty" from "typing failed".
     self.log(`🔎 [TailOptions] 이전글=${resolved.previousPostUrl ? 'O' : 'X'} / CTA ${(resolved.ctas || []).length}개(skip=${resolved.skipCta === true}) / 해시태그 ${(resolved.hashtags || []).length}개`);
-    // Right after rich paste the editor may still be digesting the pasted DOM
-    // and keystrokes silently die (live-reproduced 2026-06-10). Release any
-    // modifier stuck from clipboard shortcuts, then run the keyboard recovery
-    // ladder: settle-wait → probe Enter must register → escalate focus
-    // methods, ending with a caret-END precision click (never mid-paragraph).
+    // Right after rich paste the editor may still be digesting the pasted DOM.
+    // Release modifiers here, but do not create blind blank blocks. Tail blocks
+    // and hashtags own their own focused spacing so the redesigned editor does
+    // not open MyBox/template/library/table panels from an empty slot.
     for (const modifier of ['Control', 'Shift', 'Alt']) {
       await page.keyboard.up(modifier).catch(() => undefined);
-    }
-    try {
-      const tailFrame = await self.getAttachedFrame();
-      const tailReady = tailFrame
-        ? await ensureTailTypingReady(page, tailFrame, (m: string) => self.log(m))
-        : false;
-      if (!tailReady) {
-        self.log('   ⚠️ [TailRecovery] 키보드 복구 실패 — 꼬리 입력 누락 가능성, 그대로 진행');
-      }
-    } catch {
-      // best-effort
-    }
-    self.log('   → Enter 2회 입력 (CTA 삽입 준비)');
-    for (let i = 0; i < 2; i++) {
-      await page.keyboard.press('Enter');
-      await self.delay(self.DELAYS.SHORT); // 150ms
-      self.log(`   ✅ Enter ${i + 1}/2 완료`);
     }
 
     // 4. CTA 버튼 삽입 (해시태그 전에 배치, skipCta가 false인 경우만)
@@ -2115,6 +2145,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     let effectiveCtas = resolved.ctas || [];
     let previousPostTailInserted = false;
     let previousPostCardReady = false;
+    let tailLinkCardInserted = false;
+    let tailLinkCardReady = false;
     if (!resolved.skipCta && resolved.affiliateLink && effectiveCtas.length === 0) {
       // 🛒 쇼핑커넥트 자동 CTA 생성 (구매 결심 유도 후킹 문구)
       const hookTexts = [
@@ -2195,17 +2227,21 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
               resolved.customBannerPath,
               resolved.autoBannerGenerate // ✅ [2026-01-21] 배너 자동 랜덤 생성
             );
+            tailLinkCardInserted = true;
+            tailLinkCardReady = true;
           } else {
             // ✅ 추가 CTA들: 배너 없이 구분선 + 후킹 + 링크만 (사용자 추가 CTA)
             self.log(`   📎 [추가 CTA ${i}] \"${c.text}\" → ${c.link || '#'}`);
             const page = self.ensurePage();
 
-            await insertTailLinkCardBlock({
+            const ctaResult = await insertTailLinkCardBlock({
               self,
               page,
               label: `📎 ${c.text}`,
               url: c.link || '#',
             });
+            tailLinkCardInserted = true;
+            tailLinkCardReady = tailLinkCardReady || ctaResult.cardReady;
           }
 
           // ✅ 마지막 CTA 후: 이전글 삽입
@@ -2219,6 +2255,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             );
             previousPostTailInserted = previousPostTailInserted || previousResult.inserted;
             previousPostCardReady = previousPostCardReady || previousResult.cardReady;
+            tailLinkCardInserted = tailLinkCardInserted || previousResult.inserted;
+            tailLinkCardReady = tailLinkCardReady || previousResult.cardReady;
           }
         } else {
           // ✅ [2026-01-26 FIX] 일반 모드 (SEO): 이전글 엮기만 삽입 (CTA는 수동 추가 시에만)
@@ -2230,12 +2268,14 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             const ctaDisplayText = c.text || '자세히 보러가기';
             self.log(`   📎 [일반 CTA ${i + 1}] \"${ctaDisplayText}\" → ${c.link}`);
 
-            await insertTailLinkCardBlock({
+            const ctaResult = await insertTailLinkCardBlock({
               self,
               page,
               label: `📎 ${ctaDisplayText}`,
               url: c.link,
             });
+            tailLinkCardInserted = true;
+            tailLinkCardReady = tailLinkCardReady || ctaResult.cardReady;
           }
 
 
@@ -2244,13 +2284,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           if (isLastCta) {
             // ✅ [2026-02-08] 공식 사이트 링크 자동 삽입 (이전글 앞에 배치)
             // 행동 유발 카테고리에서만 동작 (비즈니스, 티켓, 여행, 건강, 교육 등)
-            await insertOfficialSiteTailBlock({
+            const officialResult = await insertOfficialSiteTailBlock({
               self,
               page,
               title: resolved.title,
               hashtags: resolved.hashtags,
               bodyText,
             });
+            tailLinkCardInserted = tailLinkCardInserted || officialResult.inserted;
+            tailLinkCardReady = tailLinkCardReady || officialResult.cardReady;
 
             // ✅ 이전글 삽입
             if (resolved.previousPostUrl) {
@@ -2263,6 +2305,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
               );
               previousPostTailInserted = previousPostTailInserted || previousResult.inserted;
               previousPostCardReady = previousPostCardReady || previousResult.cardReady;
+              tailLinkCardInserted = tailLinkCardInserted || previousResult.inserted;
+              tailLinkCardReady = tailLinkCardReady || previousResult.cardReady;
             }
           }
         }
@@ -2281,7 +2325,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       const page = self.ensurePage();
 
       // 공식 사이트 바로가기 삽입
-      await insertOfficialSiteTailBlock({
+      const officialResult = await insertOfficialSiteTailBlock({
         self,
         page,
         title: resolved.title,
@@ -2289,6 +2333,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         bodyText,
         noCtaMode: true,
       });
+      tailLinkCardInserted = tailLinkCardInserted || officialResult.inserted;
+      tailLinkCardReady = tailLinkCardReady || officialResult.cardReady;
 
       // 이전글 삽입
       if (resolved.previousPostUrl) {
@@ -2301,6 +2347,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         );
         previousPostTailInserted = previousPostTailInserted || previousResult.inserted;
         previousPostCardReady = previousPostCardReady || previousResult.cardReady;
+        tailLinkCardInserted = tailLinkCardInserted || previousResult.inserted;
+        tailLinkCardReady = tailLinkCardReady || previousResult.cardReady;
       }
     }
 
@@ -2313,6 +2361,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       page,
       previousPostTailInserted,
       previousPostCardReady,
+      tailLinkCardInserted,
+      tailLinkCardReady,
       hashtagsToApply,
     });
 
@@ -2358,6 +2408,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       await self.verifyImagePlacement(resolved.images);
     }
 
+    (self as any).__editorContentApplied = true;
     self.log('\n✅ 구조화된 콘텐츠 작성이 완료되었습니다.');
   }, 3, '콘텐츠 적용');
 }

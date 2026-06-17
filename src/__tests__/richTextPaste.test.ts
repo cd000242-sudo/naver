@@ -361,6 +361,27 @@ describe('mobile line-break readability (2026-06-11)', () => {
     expect(lines.length).toBeGreaterThanOrEqual(3);
   });
 
+  it('keeps website domains intact when sentence wrapping on periods', () => {
+    const text = [
+      '근데 온라인으로도 계좌 변경이 가능하더라구요.',
+      '복지로(www.bokjiro.go.kr)나 정부24(www.gov.kr)에서 공동인증서나 금융인증서로 로그인하면 쉽게 바꿀 수 있어요.',
+      '주민센터 방문 없이 집에서 할 수 있으니 훨씬 편하죠.',
+    ].join('\n\n');
+
+    const result = buildMobileRichHtml(text, { highlight: false });
+    const lines = result.plainText.split('\n').map((line) => line.trim()).filter(Boolean);
+    const flat = result.plainText.replace(/\s+/g, ' ');
+
+    expect(flat).toContain('www.bokjiro.go.kr');
+    expect(flat).toContain('www.gov.kr');
+    expect(lines).not.toContain('복지로(www.');
+    expect(lines).not.toContain('bokjiro.');
+    expect(lines).not.toContain('go.');
+    expect(lines).not.toContain('kr)나 정부24(www.');
+    expect(lines.some((line) => line.includes('복지로(www.bokjiro.go.kr)나'))).toBe(true);
+    expect(lines.some((line) => line.includes('정부24(www.gov.kr)에서'))).toBe(true);
+  });
+
   it('detects markdown tables even when rows are separated by blank lines', () => {
     const brokenTable = [
       '| 항목 | 정리 |',

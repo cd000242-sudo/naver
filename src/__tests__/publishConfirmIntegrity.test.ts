@@ -30,10 +30,13 @@ describe('publish confirmation integrity (R11)', () => {
   });
 
   it('A-4: unconfirmed publishes are never blind-retried (double-publish guard)', () => {
-    const fatalBlock = code.slice(code.indexOf('const fatalErrors'), code.indexOf('isFatalError'));
-    expect(fatalBlock).toMatch(/PUBLISH_UNCONFIRMED/);
-    expect(fatalBlock).toMatch(/PUBLISH_MODAL_NOT_OPENED/);
-    expect(fatalBlock).toMatch(/CATEGORY_NOT_FOUND/);
+    const terminalBlock = code.slice(code.indexOf('const terminalErrors'), code.indexOf('const frameRecoverableErrors'));
+    expect(terminalBlock).toMatch(/PUBLISH_UNCONFIRMED/);
+    expect(terminalBlock).toMatch(/PUBLISH_MODAL_NOT_OPENED/);
+    expect(terminalBlock).toMatch(/CATEGORY_NOT_FOUND/);
+    expect(terminalBlock).toMatch(/POST_TAIL_INCOMPLETE/);
+    expect(terminalBlock).toMatch(/HASHTAG_TAIL_NOT_READY/);
+    expect(terminalBlock).toMatch(/HASHTAG_APPLY_VERIFY_FAILED/);
   });
 
   it('A-2: publish modal open failure stops before category/confirm stages', () => {

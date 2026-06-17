@@ -1171,9 +1171,12 @@
       </div>
 
       <div style="display:flex;flex-direction:column;gap:14px;">
-        <a id="access-denied-upgrade-btn" href="https://cd000242-sudo.github.io/naver/" target="_blank"
+        <a id="access-denied-renew-btn" href="https://cd000242-sudo.github.io/naver/" target="_blank" rel="noopener noreferrer"
           style="display:block;padding:18px;text-align:center;border-radius:14px;background:linear-gradient(135deg, #22c55e 0%, #16a34a 100%);color:#fff;font-weight:900;font-size:17px;text-decoration:none;box-shadow:0 8px 30px rgba(34,197,94,0.4);transition:all 0.2s;">💎
           라이선스 갱신하고 바로 로그인</a>
+        <a id="access-denied-purchase-btn" href="https://cd000242-sudo.github.io/naver/" target="_blank" rel="noopener noreferrer"
+          style="display:block;padding:16px;text-align:center;border-radius:14px;background:linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);color:#fff;font-weight:900;font-size:16px;text-decoration:none;box-shadow:0 8px 30px rgba(59,130,246,0.32);transition:all 0.2s;">🛒
+          라이선스 구매하기</a>
         <button id="access-denied-close-btn"
           style="padding:12px;background:transparent;border:none;color:rgba(255,255,255,0.3);font-size:13px;cursor:pointer;">네,
           그냥 손으로 쓸게요</button>
@@ -1185,6 +1188,7 @@
     // contextIsolation: true — preloadLogin.ts의 electronAPI 사용
     const ipcRenderer = window.electronAPI || (typeof require !== 'undefined' ? require('electron').ipcRenderer : null);
     const KAKAO_OPEN_CHAT_URL = 'https://open.kakao.com/o/sPcaslwh';
+    const LICENSE_PURCHASE_URL = 'https://cd000242-sudo.github.io/naver/';
 
     let deviceId = '';
 
@@ -1452,6 +1456,28 @@
     });
 
     // 라이선스 만료 감지 시 ACCESS DENIED 모달 표시
+    function openLicensePurchasePage(event) {
+      if (event) event.preventDefault();
+      if (ipcRenderer && typeof ipcRenderer.invoke === 'function') {
+        ipcRenderer.invoke('openExternalUrl', LICENSE_PURCHASE_URL).catch(() => {
+          window.open(LICENSE_PURCHASE_URL, '_blank', 'noopener,noreferrer');
+        });
+        return;
+      }
+      window.open(LICENSE_PURCHASE_URL, '_blank', 'noopener,noreferrer');
+    }
+
+    const accessDeniedRenewBtn = document.getElementById('access-denied-renew-btn');
+    const accessDeniedPurchaseBtn = document.getElementById('access-denied-purchase-btn');
+    if (accessDeniedRenewBtn) {
+      accessDeniedRenewBtn.textContent = '💎 라이선스 연장하기';
+      accessDeniedRenewBtn.addEventListener('click', openLicensePurchasePage);
+    }
+    if (accessDeniedPurchaseBtn) {
+      accessDeniedPurchaseBtn.textContent = '🛒 라이선스 구매하기';
+      accessDeniedPurchaseBtn.addEventListener('click', openLicensePurchasePage);
+    }
+
     function checkAndShowAccessDenied(errorMessage) {
       const expiredKeywords = ['라이선스 만료', '이용 기간이 종료', '기간이 종료', '만료되었습니다', '만료', '종료', 'expired', 'license expired'];
       const isExpired = expiredKeywords.some(kw => String(errorMessage).toLowerCase().includes(kw.toLowerCase()));

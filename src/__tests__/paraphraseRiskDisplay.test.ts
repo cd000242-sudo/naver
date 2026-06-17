@@ -54,7 +54,7 @@ interface MockQuality {
   aiDetectionRisk: RiskLevel;
   legalRisk: LegalRiskLevel;
   seoScore: number;
-  qualityGate?: { finalScore: number; decision: string };
+  qualityGate?: { finalScore: number; decision: string; modeScore?: number };
 }
 
 /**
@@ -91,7 +91,9 @@ function applyContentPostProcessingFixed(
   if (q.qualityGate && typeof q.qualityGate.finalScore === 'number') {
     const label = q.qualityGate.decision === 'pass' ? '✓통과'
       : q.qualityGate.decision === 'patch' ? '⚙수정' : '↻재생성';
-    seoSpan.textContent = `${q.seoScore}/100 · 게이트 ${q.qualityGate.finalScore} (${label})`;
+    const modeScore = typeof q.qualityGate.modeScore === 'number' ? ` · 모드 ${q.qualityGate.modeScore}` : '';
+    const seoScore = typeof q.seoScore === 'number' ? ` · SEO ${q.seoScore}` : '';
+    seoSpan.textContent = `${q.qualityGate.finalScore}/100 (${label})${modeScore}${seoScore}`;
   } else {
     seoSpan.textContent = `${q.seoScore}/100`;
   }
@@ -159,19 +161,19 @@ describe('paraphrase completion — risk indicator display', () => {
     expect(stubs.seoSpan.textContent).toBe('65/100');
   });
 
-  it('GREEN: fixed updates SEO indicator with qualityGate data when present', () => {
+  it('GREEN: fixed updates quality indicator with qualityGate data first when present', () => {
     const content = {
       quality: {
         aiDetectionRisk: 'low' as RiskLevel,
         legalRisk: 'safe' as LegalRiskLevel,
         seoScore: 78,
-        qualityGate: { finalScore: 82, decision: 'pass' },
+        qualityGate: { finalScore: 82, modeScore: 86, decision: 'pass' },
       },
     };
 
     applyContentPostProcessingFixed(content, stubs);
 
-    expect(stubs.seoSpan.textContent).toBe('78/100 · 게이트 82 (✓통과)');
+    expect(stubs.seoSpan.textContent).toBe('82/100 (✓통과) · 모드 86 · SEO 78');
   });
 
   it('GREEN: fixed applyContentPostProcessing updates legal risk indicator', () => {

@@ -3,8 +3,10 @@ import { insertTailLinkCardBlock } from '../automation/editorTailActions.js';
 import {
   OFFICIAL_SITE_HOOKS,
   insertOfficialSiteTailBlock,
+  normalizeOfficialSiteUrl,
   pickOfficialSiteHook,
   shouldSearchOfficialSiteTail,
+  verifyOfficialSiteUrlAvailable,
 } from '../automation/editorOfficialSiteTail.js';
 
 vi.mock('../automation/editorTailActions.js', () => ({
@@ -61,8 +63,9 @@ describe('editor official-site tail policy', () => {
     const finder = vi.fn(async () => ({
       success: true,
       siteName: '지원금 공식 사이트',
-      url: 'https://example.go.kr/support',
+      url: 'https://example.go.kr/support#지원금',
     }));
+    const fetchOfficialSite = vi.fn(async () => new Response('<html>정상 서비스 안내</html>', { status: 200 }));
     const longBody = `${'body '.repeat(130)}tail`;
 
     const result = await insertOfficialSiteTailBlock({
@@ -72,6 +75,7 @@ describe('editor official-site tail policy', () => {
       hashtags: [],
       bodyText: longBody,
       findRelevantOfficialSite: finder,
+      fetchOfficialSite,
       random: () => 0,
     });
 
@@ -87,6 +91,44 @@ describe('editor official-site tail policy', () => {
       label: OFFICIAL_SITE_HOOKS[0],
       url: 'https://example.go.kr/support',
     });
+  });
+
+  it('normalizes official URLs before card insertion so hashtags cannot attach to the link', () => {
+    expect(normalizeOfficialSiteUrl('https://www.gov.kr/portal/service/serviceInfo/134000000156#지원금세대원'))
+      .toBe('https://www.gov.kr/portal/service/serviceInfo/134000000156');
+    expect(normalizeOfficialSiteUrl('https://www.gov.kr/portal/service/serviceInfo/134000000156 #지원금'))
+      .toBe('');
+  });
+
+  it('skips unavailable official-site pages instead of linking users to a service-not-found page', async () => {
+    const self = { log: vi.fn() };
+    const finder = vi.fn(async () => ({
+      success: true,
+      siteName: '정부24',
+      url: 'https://www.gov.kr/portal/service/serviceInfo/134000000156',
+    }));
+    const fetchOfficialSite = vi.fn(async () => new Response('<html>서비스를 찾을 수 없습니다</html>', { status: 200 }));
+
+    const result = await insertOfficialSiteTailBlock({
+      self,
+      page: { kind: 'page' } as any,
+      title: '지원금 신청 방법',
+      hashtags: ['#지원금'],
+      bodyText: 'body',
+      findRelevantOfficialSite: finder,
+      fetchOfficialSite,
+    });
+
+    expect(result).toEqual({ attempted: true, inserted: false, cardReady: false });
+    expect(insertTailLinkCardBlock).not.toHaveBeenCalled();
+    expect(self.log).toHaveBeenCalledWith(expect.stringContaining('서비스 없음/오류 페이지'));
+  });
+
+  it('treats gov serviceInfo pages as unavailable when they cannot be verified', async () => {
+    await expect(verifyOfficialSiteUrlAvailable({
+      url: 'https://www.gov.kr/portal/service/serviceInfo/134000000156',
+      fetchOfficialSite: vi.fn(async () => { throw new Error('network blocked'); }) as any,
+    })).resolves.toMatchObject({ ok: false });
   });
 
   it('handles official-site search misses without inserting a card', async () => {

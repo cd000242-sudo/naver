@@ -31,6 +31,12 @@ describe('progress image preview duplicate guards', () => {
     expect(progressModal).toMatch(/중복 이미지 제외/);
   });
 
+  it('keeps generated bitmaps out of the small progress grid', () => {
+    expect(progressModal).toContain('The generated bitmap is shown only in the large preview');
+    expect(progressModal).toMatch(/private\s+renderProgressStatusTile/);
+    expect(progressModal).not.toMatch(/appendChild\(imgEl\)/);
+  });
+
   it('keeps cost-risk image listener from double-rendering progress grid images', () => {
     expect(costAndAutoGen).toMatch(/preview bridge/);
     expect(costAndAutoGen).not.toMatch(/progressModal\.updateSingleImage/);

@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { readFileSync } from 'fs';
 import {
   applyTailHashtagsAfterCards,
   insertTailLinkCardBlock,
@@ -21,6 +22,18 @@ vi.mock('../automation/richTextPaste.js', () => ({
 }));
 
 const typed: string[] = [];
+
+describe('editor tail debug instrumentation', () => {
+  it('keeps TailDebug instrumentation on previous-post and hashtag tail steps', () => {
+    const source = readFileSync(new URL('../automation/editorTailActions.ts', import.meta.url), 'utf8');
+    expect(source).toContain('[TailDebug]');
+    expect(source).toContain('previous-post-card-check');
+    expect(source).toContain('tail-hashtag-start');
+    expect(source).toContain('tail-hashtag-gap');
+    expect(source).toContain('tail-hashtag-typed');
+    expect(source).toContain('tail-hashtag-card-timeout-continue');
+  });
+});
 
 function makePage() {
   const pressed: string[] = [];
@@ -57,6 +70,7 @@ function makeSelf() {
 
 describe('editor tail actions', () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     typed.length = 0;
     vi.mocked(safeKeyboardType).mockImplementation(async (_page, text) => {
       typed.push(String(text));
@@ -87,13 +101,10 @@ describe('editor tail actions', () => {
       'Enter',
       'Enter',
       'Enter',
-      'End',
-      'down:Control',
-      'End',
-      'up:Control',
     ]);
     expect(self.waitForLinkCard).toHaveBeenCalledWith(15000, 500);
     expect(self.removeBareUrlTextAfterLinkCard).toHaveBeenCalledTimes(1);
+    expect(ensureTailTypingReady).toHaveBeenCalled();
   });
 
   it('skips the previous-post block when the affiliate URL is the same target', async () => {
@@ -116,7 +127,7 @@ describe('editor tail actions', () => {
     expect(pressed).toEqual([]);
   });
 
-  it('moves below the previous-post card before typing hashtags', async () => {
+  it('verifies the editor tail before typing hashtags', async () => {
     const self = makeSelf();
     const { page, pressed } = makePage();
 
@@ -128,20 +139,127 @@ describe('editor tail actions', () => {
       hashtagsToApply: ['#one', '#two'],
     });
 
-    expect(pressed).toEqual([
-      'End',
-      'down:Control',
-      'End',
-      'up:Control',
-      'Enter',
-      'Enter',
-      'Enter',
-      'Enter',
-      'Enter',
-      'End',
-    ]);
+    expect(pressed).toEqual([]);
+    expect(ensureTailTypingReady).toHaveBeenCalledTimes(1);
     expect(self.delay).toHaveBeenCalledWith(1000);
-    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one', '#two']);
+    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one', '#two'], {
+      ensureTailReady: true,
+      leadingEnterCount: 5,
+      previousPostTailInserted: true,
+    });
+  });
+
+  it('waits for any tail link card before adding five blank lines and hashtags', async () => {
+    const self = makeSelf();
+    const { page } = makePage();
+
+    await applyTailHashtagsAfterCards({
+      self,
+      page: page as any,
+      previousPostTailInserted: false,
+      previousPostCardReady: false,
+      tailLinkCardInserted: true,
+      tailLinkCardReady: true,
+      hashtagsToApply: ['#one'],
+    });
+
+    expect(self.waitForLinkCard).not.toHaveBeenCalled();
+    expect(self.delay).toHaveBeenCalledWith(1000);
+    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one'], {
+      ensureTailReady: true,
+      leadingEnterCount: 5,
+      previousPostTailInserted: true,
+    });
+  });
+
+  it('does not re-wait for a tail link card and still keeps five-line hashtag spacing after timeout', async () => {
+    const self = makeSelf();
+    const { page } = makePage();
+    self.waitForLinkCard.mockResolvedValueOnce(false);
+
+    await applyTailHashtagsAfterCards({
+      self,
+      page: page as any,
+      previousPostTailInserted: false,
+      previousPostCardReady: false,
+      tailLinkCardInserted: true,
+      tailLinkCardReady: false,
+      hashtagsToApply: ['#one'],
+    });
+
+    expect(self.waitForLinkCard).not.toHaveBeenCalled();
+    expect(self.delay).toHaveBeenCalledWith(3000);
+    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one'], {
+      ensureTailReady: false,
+      leadingEnterCount: 5,
+      previousPostTailInserted: false,
+    });
+  });
+
+  it('continues with five-line spacing when the editor tail readiness probe is unstable after a previous-post card', async () => {
+    vi.mocked(ensureTailTypingReady).mockResolvedValueOnce(false);
+    const self = makeSelf();
+    const { page } = makePage();
+
+    await applyTailHashtagsAfterCards({
+      self,
+      page: page as any,
+      previousPostTailInserted: true,
+      previousPostCardReady: true,
+      hashtagsToApply: ['#one'],
+    });
+
+    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one'], {
+      ensureTailReady: true,
+      leadingEnterCount: 5,
+      previousPostTailInserted: false,
+    });
+  });
+
+  it('does not re-wait for a delayed previous-post card before typing hashtags', async () => {
+    const self = makeSelf();
+    const { page, pressed } = makePage();
+
+    await applyTailHashtagsAfterCards({
+      self,
+      page: page as any,
+      previousPostTailInserted: true,
+      previousPostCardReady: false,
+      hashtagsToApply: ['#one'],
+    });
+
+    expect(self.waitForLinkCard).not.toHaveBeenCalled();
+    expect(self.removeBareUrlTextAfterLinkCard).not.toHaveBeenCalled();
+    expect(pressed.filter((key) => key === 'Enter')).toHaveLength(0);
+    expect(self.delay).toHaveBeenCalledWith(3000);
+    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one'], {
+      ensureTailReady: false,
+      leadingEnterCount: 5,
+      previousPostTailInserted: false,
+    });
+  });
+
+  it('continues with five-line spacing when the previous-post card wait times out', async () => {
+    const self = makeSelf();
+    const { page, pressed } = makePage();
+    self.waitForLinkCard.mockResolvedValueOnce(false);
+
+    await applyTailHashtagsAfterCards({
+      self,
+      page: page as any,
+      previousPostTailInserted: true,
+      previousPostCardReady: false,
+      hashtagsToApply: ['#one'],
+    });
+
+    expect(pressed).toEqual([]);
+    expect(self.waitForLinkCard).not.toHaveBeenCalled();
+    expect(self.delay).toHaveBeenCalledWith(3000);
+    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one'], {
+      ensureTailReady: false,
+      leadingEnterCount: 5,
+      previousPostTailInserted: false,
+    });
   });
 
   it('uses the shorter hashtag gap when no previous-post card was inserted', async () => {
@@ -156,9 +274,75 @@ describe('editor tail actions', () => {
       hashtagsToApply: [],
     });
 
-    expect(pressed.filter((key) => key === 'Enter')).toHaveLength(3);
-    expect(self.delay).toHaveBeenCalledWith(3000);
+    expect(pressed.filter((key) => key === 'Enter')).toHaveLength(0);
+    expect(ensureTailTypingReady).not.toHaveBeenCalled();
+    expect(self.delay).not.toHaveBeenCalledWith(300);
     expect(self.applyHashtagsInBody).not.toHaveBeenCalled();
+  });
+
+  it('uses text-bearing tail focus and then hashtags directly when no previous post exists', async () => {
+    const self = makeSelf();
+    const { page, pressed } = makePage();
+
+    await applyTailHashtagsAfterCards({
+      self,
+      page: page as any,
+      previousPostTailInserted: false,
+      previousPostCardReady: false,
+      hashtagsToApply: ['#one'],
+    });
+
+    expect(pressed.filter((key) => key === 'Enter')).toHaveLength(0);
+    expect(ensureTailTypingReady).toHaveBeenCalledWith(
+      page,
+      { ok: true },
+      expect.any(Function),
+      { allowEmptyParagraph: false },
+    );
+    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one'], {
+      ensureTailReady: true,
+      leadingEnterCount: 3,
+      previousPostTailInserted: false,
+    });
+  });
+
+  it('continues to hashtag input when no previous post exists even if tail readiness probe is unstable', async () => {
+    vi.mocked(ensureTailTypingReady).mockResolvedValueOnce(false);
+    const self = makeSelf();
+    const { page, pressed } = makePage();
+
+    await applyTailHashtagsAfterCards({
+      self,
+      page: page as any,
+      previousPostTailInserted: false,
+      previousPostCardReady: false,
+      hashtagsToApply: ['#one', '#two'],
+    });
+
+    expect(pressed.filter((key) => key === 'Enter')).toHaveLength(0);
+    expect(ensureTailTypingReady).toHaveBeenCalledWith(
+      page,
+      { ok: true },
+      expect.any(Function),
+      { allowEmptyParagraph: false },
+    );
+    expect(self.applyHashtagsInBody).toHaveBeenCalledWith(['#one', '#two'], {
+      ensureTailReady: true,
+      leadingEnterCount: 3,
+      previousPostTailInserted: false,
+    });
+  });
+
+  it('keeps strict hashtag tail mode only when the previous link card and tail cursor were verified', async () => {
+    const tailSource = readFileSync(new URL('../automation/editorTailActions.ts', import.meta.url), 'utf8');
+    expect(tailSource).toContain('const strictHashtagTail = linkCardInsertedBeforeHashtags');
+    expect(tailSource).toContain('confirmedTailLinkCardReady');
+    expect(tailSource).toContain('tailCursorVerified');
+
+    const source = readFileSync(new URL('../naverBlogAutomation.ts', import.meta.url), 'utf8');
+    expect(source).toContain('allowBestEffortTailWithoutPreviousPost');
+    expect(source).toContain('options.previousPostTailInserted !== true');
+    expect(source).toContain('이전글 카드가 없는 흐름');
   });
 
   it('types a reusable tail link-card block for CTA and official-site links', async () => {
@@ -176,9 +360,10 @@ describe('editor tail actions', () => {
     expect(typed).toEqual([
       PREVIOUS_POST_SEPARATOR,
       '📎 자세히 보러가기',
-      '👉 https://example.com/product',
+      'https://example.com/product',
     ]);
     expect(pressed).toEqual(['Enter', 'Enter', 'Enter', 'Enter']);
     expect(self.waitForLinkCard).toHaveBeenCalledWith(15000, 500);
+    expect(self.removeBareUrlTextAfterLinkCard).toHaveBeenCalledTimes(1);
   });
 });

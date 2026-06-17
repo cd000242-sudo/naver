@@ -73,7 +73,7 @@ describe('publish metadata propagation', () => {
     );
     const hashtagTail = tailActions.slice(
       tailActions.indexOf('export async function applyTailHashtagsAfterCards'),
-      tailActions.length
+      tailActions.indexOf('export async function insertTailLinkCardBlock')
     );
 
     expect(tailActions).toContain("export const PREVIOUS_POST_SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'");
@@ -85,7 +85,9 @@ describe('publish metadata propagation', () => {
     expect(code).toMatch(/previousPostTailInserted = previousPostTailInserted \|\| previousResult\.inserted/);
     expect(code).toMatch(/await applyTailHashtagsAfterCards\(\{/);
     expect(hashtagTail).toMatch(/const hashtagGapEnterCount = getHashtagGapEnterCount\(previousPostTailInserted\)/);
-    expect(hashtagTail.indexOf('page.keyboard.press')).toBeLessThan(hashtagTail.indexOf('applyHashtagsInBody'));
+    expect(hashtagTail).toMatch(/ensureTailTypingReady/);
+    expect(hashtagTail).toMatch(/POST_TAIL_INCOMPLETE/);
+    expect(hashtagTail).not.toMatch(/keyboard\.press\('End'\)[\s\S]{0,400}applyHashtagsInBody/);
   });
 
   it('keeps CTA placement selection available in the unified publish panel', () => {

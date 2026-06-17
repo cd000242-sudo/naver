@@ -23,7 +23,7 @@ export interface MobileRichHtmlResult {
 
 export interface RichPasteResult {
   ok: boolean;
-  method: 'clipboard-html' | 'none';
+  method: 'clipboard-html' | 'paste-event-html' | 'clipboard-plain' | 'none';
   reason?: string;
   beforeChars: number;
   afterChars: number;
@@ -74,6 +74,17 @@ const SECTION_HIGHLIGHT_MIN_SCORE = 3;
 const INLINE_FORMAT_COMMANDS = ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'];
 const TEXT_DECORATION_RESET = 'text-decoration:none';
 const FONT_STYLE_RESET = 'font-style:normal';
+const SMART_EDITOR_ROOT_SELECTORS = [
+  'article.se-components-wrap',
+  '.se-canvas > article.se-components-wrap',
+  '.se-content article.se-components-wrap',
+  '.se-components-wrap',
+  '.se-main-container',
+] as const;
+// `.se-panel` is intentionally excluded here. Naver SmartEditor also uses
+// that class in the normal editor layout, so treating it as a transient panel
+// can hide the real article root and make tail/hashtag checks read 0 chars.
+const SMART_EDITOR_PANEL_SELECTOR = '.se-popup, .se-layer, .se-modal, [role="dialog"], [aria-modal="true"]';
 
 export const SOFT_TABLE_THEMES: SoftTableTheme[] = [
   {
@@ -754,11 +765,43 @@ function markdownTableToHtml(lines: string[], theme: SoftTableTheme): { html: st
   };
 }
 
+const DOMAIN_DOT_PLACEHOLDER = '\uE000';
+const DOMAIN_TOKEN_RE = /\b(?:https?:\/\/)?(?:www\.)?[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+){1,}(?:\/[^\s)]*)?/g;
+
+function protectDomainDots(value: string): string {
+  return value.replace(DOMAIN_TOKEN_RE, token => token.replace(/\./g, DOMAIN_DOT_PLACEHOLDER));
+}
+
+function restoreDomainDots(value: string): string {
+  return value.replace(new RegExp(DOMAIN_DOT_PLACEHOLDER, 'g'), '.');
+}
+
+function getDomainTokenRanges(value: string): Array<{ start: number; end: number }> {
+  const ranges: Array<{ start: number; end: number }> = [];
+  let match: RegExpExecArray | null;
+  DOMAIN_TOKEN_RE.lastIndex = 0;
+  while ((match = DOMAIN_TOKEN_RE.exec(value)) !== null) {
+    ranges.push({ start: match.index, end: match.index + match[0].length });
+  }
+  return ranges;
+}
+
+function moveCutOutsideDomainToken(value: string, cut: number, minCut: number, maxCut: number): number {
+  for (const range of getDomainTokenRanges(value)) {
+    if (cut <= range.start || cut >= range.end) continue;
+    if (range.end <= maxCut) return range.end;
+    if (range.start >= minCut) return range.start;
+  }
+  return cut;
+}
+
 function splitSentencesForMobile(value: string): string[] {
   const compact = value.replace(/\s+/g, ' ').trim();
   if (!compact) return [];
-  const matches = compact.match(/[^.!?。！？\n]+[.!?。！？]?/g);
-  return (matches && matches.length > 0 ? matches : [compact])
+  const protectedCompact = protectDomainDots(compact);
+  const matches = protectedCompact.match(/[^.!?。！？\n]+[.!?。！？]?/g);
+  return (matches && matches.length > 0 ? matches : [protectedCompact])
+    .map(restoreDomainDots)
     .map(sentence => sentence.trim())
     .filter(Boolean);
 }
@@ -818,6 +861,7 @@ function splitLongSentenceForMobile(sentence: string, maxChars: number): string[
       const lastSpace = windowText.lastIndexOf(' ', maxChars);
       cut = lastSpace >= minCut ? lastSpace + 1 : maxChars;
     }
+    cut = moveCutOutsideDomainToken(rest, cut, minCut, windowText.length);
     // [2026-06-11] Never strand punctuation at the start of the next line
     // (", 빠뜨리기" class) — semantic patterns like 기준(으로) cut before a
     // trailing comma, so consume it into the current line.
@@ -1306,14 +1350,47 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
 }
 
 async function readEditorStats(frame: Frame): Promise<{ chars: number; tables: number; text: string }> {
-  return await frame.evaluate(() => {
-    const roots = Array.from(document.querySelectorAll('.se-section-text, .se-main-container, .se-component'));
-    const text = roots.map(el => (el as HTMLElement).innerText || el.textContent || '').join('\n').trim();
+  return await frame.evaluate(({ rootSelectors, panelSelector }) => {
+    function getSmartEditorDocumentRoot(): HTMLElement | null {
+      const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+      let best: HTMLElement | null = null;
+      let bestScore = -1;
+      for (const candidate of candidates) {
+        if (!(candidate instanceof HTMLElement)) continue;
+        if (candidate.closest(panelSelector)) continue;
+        const rect = candidate.getBoundingClientRect();
+        const style = window.getComputedStyle(candidate);
+        if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+        const componentCount = candidate.querySelectorAll('.se-component').length;
+        const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+        const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+        const roleScore = candidate.matches('article.se-components-wrap')
+          ? 1000000
+          : candidate.matches('.se-components-wrap')
+            ? 900000
+            : candidate.matches('.se-main-container')
+              ? 100000
+              : 0;
+        const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+        if (score > bestScore) {
+          bestScore = score;
+          best = candidate;
+        }
+      }
+      return best;
+    }
+
+    const root = getSmartEditorDocumentRoot();
+    const scope = root || document.body;
+    const text = (scope.innerText || scope.textContent || '').trim();
     return {
       chars: text.length,
-      tables: document.querySelectorAll('table, .se-component.se-table, .se-component-table').length,
+      tables: scope.querySelectorAll('table, .se-component.se-table, .se-component-table').length,
       text,
     };
+  }, {
+    rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
+    panelSelector: SMART_EDITOR_PANEL_SELECTOR,
   }).catch(() => ({ chars: 0, tables: 0, text: '' }));
 }
 
@@ -1338,12 +1415,176 @@ async function grantClipboardPermission(page: Page, frame: Frame): Promise<void>
   }
 }
 
+function isPasteVisible(
+  before: { chars: number; tables: number; text: string },
+  after: { chars: number; tables: number; text: string },
+  trimmedPlain: string
+): boolean {
+  const needle = trimmedPlain.replace(/\s+/g, ' ').slice(0, 12);
+  const normalizedAfter = after.text.replace(/\s+/g, ' ');
+  return (needle.length > 0 && normalizedAfter.includes(needle)) ||
+    after.chars > before.chars + Math.min(20, trimmedPlain.length / 2) ||
+    after.tables > before.tables;
+}
+
+function buildPasteFailureReason(
+  reason: string,
+  before: { chars: number; tables: number },
+  after: { chars: number; tables: number },
+  trimmedPlain: string
+): string {
+  const needle = trimmedPlain.replace(/\s+/g, ' ').slice(0, 24);
+  return `${reason} (beforeChars=${before.chars}, afterChars=${after.chars}, beforeTables=${before.tables}, afterTables=${after.tables}, needle="${needle}")`;
+}
+
+async function dispatchRichPasteEventAtCursor(
+  frame: Frame,
+  html: string,
+  plainText: string
+): Promise<{ ok: boolean; reason?: string }> {
+  return await frame.evaluate(({ richHtml, fallbackText, rootSelectors, panelSelector }) => {
+    function getSmartEditorDocumentRoot(): HTMLElement | null {
+      const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+      let best: HTMLElement | null = null;
+      let bestScore = -1;
+      for (const candidate of candidates) {
+        if (!(candidate instanceof HTMLElement)) continue;
+        if (candidate.closest(panelSelector)) continue;
+        const rect = candidate.getBoundingClientRect();
+        const style = window.getComputedStyle(candidate);
+        if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+        const componentCount = candidate.querySelectorAll('.se-component').length;
+        const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+        const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+        const roleScore = candidate.matches('article.se-components-wrap')
+          ? 1000000
+          : candidate.matches('.se-components-wrap')
+            ? 900000
+            : candidate.matches('.se-main-container')
+              ? 100000
+              : 0;
+        const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+        if (score > bestScore) {
+          bestScore = score;
+          best = candidate;
+        }
+      }
+      return best;
+    }
+
+    const root = getSmartEditorDocumentRoot();
+    if (!root) return { ok: false, reason: 'editor root not found' };
+
+    const paragraphs = Array.from(root.querySelectorAll(
+      '.se-component:not(.se-documentTitle) p.se-text-paragraph, .se-component:not(.se-documentTitle) .se-text-paragraph, p.se-text-paragraph, .se-text-paragraph'
+    )) as HTMLElement[];
+    const target = [...paragraphs].reverse().find((paragraph) => {
+      if (paragraph.closest(panelSelector) || paragraph.closest('.se-documentTitle')) return false;
+      const rect = paragraph.getBoundingClientRect();
+      const style = window.getComputedStyle(paragraph);
+      return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && style.display !== 'none';
+    }) || root;
+
+    target.scrollIntoView({ block: 'center', inline: 'nearest' });
+    target.focus?.();
+    const range = document.createRange();
+    range.selectNodeContents(target);
+    range.collapse(false);
+    const selection = window.getSelection();
+    if (!selection) return { ok: false, reason: 'selection unavailable' };
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    try {
+      const dataTransfer = new DataTransfer();
+      dataTransfer.setData('text/html', richHtml);
+      dataTransfer.setData('text/plain', fallbackText);
+      const event = new ClipboardEvent('paste', {
+        bubbles: true,
+        cancelable: true,
+        clipboardData: dataTransfer,
+      } as ClipboardEventInit);
+      target.dispatchEvent(event);
+      return event.defaultPrevented
+        ? { ok: true }
+        : { ok: false, reason: 'paste event was not consumed by editor' };
+    } catch (error) {
+      return {
+        ok: false,
+        reason: error instanceof Error ? `${error.name}: ${error.message}` : String(error),
+      };
+    }
+  }, {
+    richHtml: html,
+    fallbackText: plainText,
+    rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
+    panelSelector: SMART_EDITOR_PANEL_SELECTOR,
+  }).catch(error => ({
+    ok: false,
+    reason: error instanceof Error ? error.message : String(error),
+  }));
+}
+
+async function pastePlainTextAtCursor(page: Page, frame: Frame, plainText: string): Promise<{ ok: boolean; reason?: string }> {
+  const writeResult = await page.evaluate(async (text) => {
+    if (!navigator.clipboard?.writeText) return { ok: false, reason: 'clipboard.writeText unavailable' };
+    try {
+      await navigator.clipboard.writeText(text);
+      return { ok: true };
+    } catch (error) {
+      return { ok: false, reason: error instanceof Error ? `${error.name}: ${error.message}` : String(error) };
+    }
+  }, plainText).catch(error => ({
+    ok: false,
+    reason: error instanceof Error ? error.message : String(error),
+  }));
+
+  if (!writeResult.ok) return writeResult;
+
+  await focusLastEditableLine(page, frame).catch(() => undefined);
+  await new Promise(resolve => setTimeout(resolve, 120));
+  await page.keyboard.down('Control');
+  await page.keyboard.press('V');
+  await page.keyboard.up('Control');
+  return { ok: true };
+}
+
 async function resetInlineFormattingState(page: Page, frame: Frame): Promise<void> {
   const resetCommands = async (target: Page | Frame): Promise<void> => {
-    await target.evaluate((commands: string[]) => {
+    await target.evaluate(({ commands, rootSelectors, panelSelector }) => {
       try {
+        function getSmartEditorDocumentRoot(): HTMLElement | null {
+          const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+          let best: HTMLElement | null = null;
+          let bestScore = -1;
+          for (const candidate of candidates) {
+            if (!(candidate instanceof HTMLElement)) continue;
+            if (candidate.closest(panelSelector)) continue;
+            const rect = candidate.getBoundingClientRect();
+            const style = window.getComputedStyle(candidate);
+            if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+            const componentCount = candidate.querySelectorAll('.se-component').length;
+            const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+            const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+            const roleScore = candidate.matches('article.se-components-wrap')
+              ? 1000000
+              : candidate.matches('.se-components-wrap')
+                ? 900000
+                : candidate.matches('.se-main-container')
+                  ? 100000
+                  : 0;
+            const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+            if (score > bestScore) {
+              bestScore = score;
+              best = candidate;
+            }
+          }
+          return best;
+        }
+
         const editable =
-          (document.querySelector('.se-main-container .se-text-paragraph, .se-section-text, [contenteditable="true"]') as HTMLElement | null) ||
+          (getSmartEditorDocumentRoot()?.querySelector('.se-text-paragraph') as HTMLElement | null) ||
+          getSmartEditorDocumentRoot() ||
           (document.activeElement as HTMLElement | null);
         editable?.focus?.();
 
@@ -1356,7 +1597,11 @@ async function resetInlineFormattingState(page: Page, frame: Frame): Promise<voi
       } catch {
         // Toolbar reset is a best-effort guard. Rich HTML styles still prevent inheritance.
       }
-    }, INLINE_FORMAT_COMMANDS).catch(() => undefined);
+    }, {
+      commands: INLINE_FORMAT_COMMANDS,
+      rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
+      panelSelector: SMART_EDITOR_PANEL_SELECTOR,
+    }).catch(() => undefined);
   };
 
   const resetToolbarButtons = async (target: Page | Frame): Promise<void> => {
@@ -1395,16 +1640,48 @@ async function resetInlineFormattingState(page: Page, frame: Frame): Promise<voi
 }
 
 export async function focusLastEditableLine(page: Page, frame: Frame): Promise<void> {
-  const focusedBySelection = await frame.evaluate(() => {
-    const candidates = Array.from(document.querySelectorAll('.se-main-container .se-text-paragraph, .se-section-text, [contenteditable="true"]')) as HTMLElement[];
+  const focusedBySelection = await frame.evaluate(({ rootSelectors, panelSelector }) => {
+    function getSmartEditorDocumentRoot(): HTMLElement | null {
+      const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+      let best: HTMLElement | null = null;
+      let bestScore = -1;
+      for (const candidate of candidates) {
+        if (!(candidate instanceof HTMLElement)) continue;
+        if (candidate.closest(panelSelector)) continue;
+        const rect = candidate.getBoundingClientRect();
+        const style = window.getComputedStyle(candidate);
+        if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+        const componentCount = candidate.querySelectorAll('.se-component').length;
+        const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+        const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+        const roleScore = candidate.matches('article.se-components-wrap')
+          ? 1000000
+          : candidate.matches('.se-components-wrap')
+            ? 900000
+            : candidate.matches('.se-main-container')
+              ? 100000
+              : 0;
+        const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+        if (score > bestScore) {
+          bestScore = score;
+          best = candidate;
+        }
+      }
+      return best;
+    }
+
+    const root = getSmartEditorDocumentRoot();
+    if (!root) return false;
+    const candidates = Array.from(root.querySelectorAll('.se-component:not(.se-documentTitle) p.se-text-paragraph, .se-component:not(.se-documentTitle) .se-text-paragraph, p.se-text-paragraph, .se-text-paragraph')) as HTMLElement[];
     for (let i = candidates.length - 1; i >= 0; i -= 1) {
       const target = candidates[i];
+      if (target.closest('.se-documentTitle')) continue;
+      if (target.closest(panelSelector)) continue;
       const rect = target.getBoundingClientRect();
       const style = window.getComputedStyle(target);
       if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
-      const editable = (target.closest('[contenteditable="true"]') as HTMLElement | null) || target;
       target.scrollIntoView({ block: 'center', inline: 'nearest' });
-      editable.focus();
+      root.focus();
       const range = document.createRange();
       range.selectNodeContents(target);
       range.collapse(false);
@@ -1415,11 +1692,14 @@ export async function focusLastEditableLine(page: Page, frame: Frame): Promise<v
       return true;
     }
     return false;
+  }, {
+    rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
+    panelSelector: SMART_EDITOR_PANEL_SELECTOR,
   }).catch(() => false);
 
   if (focusedBySelection) return;
 
-  const handles = await frame.$$('.se-text-paragraph, .se-section-text, [contenteditable="true"]');
+  const handles = await frame.$$('.se-main-container .se-text-paragraph, article.se-components-wrap .se-text-paragraph, .se-canvas > article.se-components-wrap .se-text-paragraph');
   for (let i = handles.length - 1; i >= 0; i -= 1) {
     const handle = handles[i];
     const box = await handle.boundingBox().catch(() => null);
@@ -1442,10 +1722,41 @@ export async function focusLastEditableLine(page: Page, frame: Frame): Promise<v
 // against the component tree, and anchor the caret by clicking paragraphs.
 function editableRootText(frame: Frame): Promise<string> {
   return frame
-    .evaluate(() => {
-      const scope = (document.querySelector('.se-components-wrap, .se-canvas, .se-content') as HTMLElement | null)
-        || document.body;
+    .evaluate(({ rootSelectors, panelSelector }) => {
+      function getSmartEditorDocumentRoot(): HTMLElement | null {
+        const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+        let best: HTMLElement | null = null;
+        let bestScore = -1;
+        for (const candidate of candidates) {
+          if (!(candidate instanceof HTMLElement)) continue;
+          if (candidate.closest(panelSelector)) continue;
+          const rect = candidate.getBoundingClientRect();
+          const style = window.getComputedStyle(candidate);
+          if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+          const componentCount = candidate.querySelectorAll('.se-component').length;
+          const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+          const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+          const roleScore = candidate.matches('article.se-components-wrap')
+            ? 1000000
+            : candidate.matches('.se-components-wrap')
+              ? 900000
+              : candidate.matches('.se-main-container')
+                ? 100000
+                : 0;
+          const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+          if (score > bestScore) {
+            bestScore = score;
+            best = candidate;
+          }
+        }
+        return best;
+      }
+
+      const scope = getSmartEditorDocumentRoot();
       return (scope?.innerText || scope?.textContent || '').replace(/\s+$/g, '');
+    }, {
+      rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
+      panelSelector: SMART_EDITOR_PANEL_SELECTOR,
     })
     .catch(() => '');
 }
@@ -1459,16 +1770,60 @@ function editableRootText(frame: Frame): Promise<string> {
  * Mouse is used only as the last resort, and only at the computed END-caret
  * position of the last text block (never mid-paragraph).
  */
+export type TailTypingReadyOptions = {
+  readonly allowEmptyParagraph?: boolean;
+};
+
 export async function ensureTailTypingReady(
   page: Page,
   frame: Frame,
-  log?: (message: string) => void
+  log?: (message: string) => void,
+  options: TailTypingReadyOptions = {},
 ): Promise<boolean> {
+  const allowEmptyParagraph = options.allowEmptyParagraph !== false;
+  // panelSelector includes se-popup/se-panel/se-layer/se-modal, which must
+  // never be used as the document tail.
+  const documentRootPayload = {
+    rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
+    panelSelector: SMART_EDITOR_PANEL_SELECTOR,
+  };
+
   // 1) Wait until the editor stops mutating (paste digestion complete).
   let previousLength = -1;
   for (let i = 0; i < 12; i += 1) {
     const length = await frame
-      .evaluate(() => (document.body?.innerText || '').length)
+      .evaluate(({ rootSelectors, panelSelector }) => {
+        function getSmartEditorDocumentRoot(): HTMLElement | null {
+          const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+          let best: HTMLElement | null = null;
+          let bestScore = -1;
+          for (const candidate of candidates) {
+            if (!(candidate instanceof HTMLElement)) continue;
+            if (candidate.closest(panelSelector)) continue;
+            const rect = candidate.getBoundingClientRect();
+            const style = window.getComputedStyle(candidate);
+            if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+            const componentCount = candidate.querySelectorAll('.se-component').length;
+            const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+            const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+            const roleScore = candidate.matches('article.se-components-wrap')
+              ? 1000000
+              : candidate.matches('.se-components-wrap')
+                ? 900000
+                : candidate.matches('.se-main-container')
+                  ? 100000
+                  : 0;
+            const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+            if (score > bestScore) {
+              bestScore = score;
+              best = candidate;
+            }
+          }
+          return best;
+        }
+        const root = getSmartEditorDocumentRoot();
+        return (root?.innerText || root?.textContent || '').length;
+      }, documentRootPayload)
       .catch(() => -1);
     if (length >= 0 && length === previousLength) break;
     previousLength = length;
@@ -1481,19 +1836,53 @@ export async function ensureTailTypingReady(
   // element click handles the iframe offset math that broke the manual
   // coordinate path historically (N3).
   const clickParagraphEnd = async (textBearingOnly: boolean): Promise<void> => {
-    const handle = await frame.evaluateHandle((onlyText) => {
-      const wrap = (document.querySelector('.se-components-wrap, .se-canvas, .se-content') as HTMLElement | null)
-        || document.body;
-      const paras = Array.from(wrap.querySelectorAll('p.se-text-paragraph')) as HTMLElement[];
+    const handle = await frame.evaluateHandle(({ onlyText, rootSelectors, panelSelector }) => {
+      function getSmartEditorDocumentRoot(): HTMLElement | null {
+        const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+        let best: HTMLElement | null = null;
+        let bestScore = -1;
+        for (const candidate of candidates) {
+          if (!(candidate instanceof HTMLElement)) continue;
+          if (candidate.closest(panelSelector)) continue;
+          const rect = candidate.getBoundingClientRect();
+          const style = window.getComputedStyle(candidate);
+          if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+          const componentCount = candidate.querySelectorAll('.se-component').length;
+          const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+          const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+          const roleScore = candidate.matches('article.se-components-wrap')
+            ? 1000000
+            : candidate.matches('.se-components-wrap')
+              ? 900000
+              : candidate.matches('.se-main-container')
+                ? 100000
+                : 0;
+          const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+          if (score > bestScore) {
+            bestScore = score;
+            best = candidate;
+          }
+        }
+        return best;
+      }
+
+      const wrap = getSmartEditorDocumentRoot();
+      if (!wrap) return null;
+      const paras = Array.from(wrap.querySelectorAll('.se-component:not(.se-documentTitle) p.se-text-paragraph, .se-component:not(.se-documentTitle) .se-text-paragraph, p.se-text-paragraph, .se-text-paragraph')) as HTMLElement[];
       for (let i = paras.length - 1; i >= 0; i -= 1) {
-        if (onlyText && (paras[i].innerText || '').trim().length === 0) continue;
+        const paragraphText = (paras[i].innerText || paras[i].textContent || '').replace(/\s+/g, ' ').trim();
+        if (onlyText && paragraphText.length === 0) continue;
+        if (/^(내용을 입력하세요|삭제)$/u.test(paragraphText)) continue;
+        if (paras[i].closest('.se-documentTitle')) continue;
+        if (paras[i].closest(panelSelector)) continue;
         const rect = paras[i].getBoundingClientRect();
-        if (rect.width <= 0 || rect.height <= 0) continue;
+        const style = window.getComputedStyle(paras[i]);
+        if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
         paras[i].scrollIntoView({ block: 'center', inline: 'nearest' });
         return paras[i];
       }
       return null;
-    }, textBearingOnly).catch(() => null);
+    }, { onlyText: textBearingOnly, ...documentRootPayload }).catch(() => null);
     const el = handle ? handle.asElement() : null;
     if (!el) return;
     const box = await (el as import('puppeteer').ElementHandle<Element>).boundingBox().catch(() => null);
@@ -1518,15 +1907,40 @@ export async function ensureTailTypingReady(
     // Scroll the true last block into view FIRST — clicking coordinates that
     // sit below the fold misses or hits the wrong paragraph (the cause of
     // tail-inserted-mid-body incidents). Rect is computed after the scroll.
-    const rect = await frame.evaluate(() => {
+    const rect = await frame.evaluate(({ rootSelectors, panelSelector }) => {
+      function getSmartEditorDocumentRoot(): HTMLElement | null {
+        const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+        let best: HTMLElement | null = null;
+        let bestScore = -1;
+        for (const candidate of candidates) {
+          if (!(candidate instanceof HTMLElement)) continue;
+          if (candidate.closest(panelSelector)) continue;
+          const rect = candidate.getBoundingClientRect();
+          const style = window.getComputedStyle(candidate);
+          if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+          const componentCount = candidate.querySelectorAll('.se-component').length;
+          const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+          const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+          const roleScore = candidate.matches('article.se-components-wrap')
+            ? 1000000
+            : candidate.matches('.se-components-wrap')
+              ? 900000
+              : candidate.matches('.se-main-container')
+                ? 100000
+                : 0;
+          const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+          if (score > bestScore) {
+            bestScore = score;
+            best = candidate;
+          }
+        }
+        return best;
+      }
+
       // Target the editable ROOT's last visible child — by definition the
       // final block, immune to editor-internal class changes (class-based
       // "last paragraph" lookups landed one block short on the redesign).
-      let root: HTMLElement | null = null; let bestScore = -1;
-      document.querySelectorAll('[contenteditable="true"]').forEach((el) => {
-        const score = el.querySelectorAll('.se-component').length * 100000 + ((el as HTMLElement).innerText || '').length;
-        if (score > bestScore) { bestScore = score; root = el as HTMLElement; }
-      });
+      const root = getSmartEditorDocumentRoot();
       if (!root) return null;
       const rootEl = root as HTMLElement;
       let el = rootEl.lastElementChild as HTMLElement | null;
@@ -1552,7 +1966,7 @@ export async function ensureTailTypingReady(
         viewportWidth: window.innerWidth,
         viewportHeight: window.innerHeight,
       };
-    }).catch(() => null);
+    }, documentRootPayload).catch(() => null);
     if (!rect) return;
 
     const frameEl = await page.$('#mainFrame, iframe[name="mainFrame"]').catch(() => null);
@@ -1573,12 +1987,37 @@ export async function ensureTailTypingReady(
   };
 
   const focusRootEnd = async (): Promise<void> => {
-    await frame.evaluate(() => {
-      let root: HTMLElement | null = null; let bestScore = -1;
-      document.querySelectorAll('[contenteditable="true"]').forEach((el) => {
-        const score = el.querySelectorAll('.se-component').length * 100000 + ((el as HTMLElement).innerText || '').length;
-        if (score > bestScore) { bestScore = score; root = el as HTMLElement; }
-      });
+    await frame.evaluate(({ rootSelectors, panelSelector }) => {
+      function getSmartEditorDocumentRoot(): HTMLElement | null {
+        const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+        let best: HTMLElement | null = null;
+        let bestScore = -1;
+        for (const candidate of candidates) {
+          if (!(candidate instanceof HTMLElement)) continue;
+          if (candidate.closest(panelSelector)) continue;
+          const rect = candidate.getBoundingClientRect();
+          const style = window.getComputedStyle(candidate);
+          if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+          const componentCount = candidate.querySelectorAll('.se-component').length;
+          const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+          const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+          const roleScore = candidate.matches('article.se-components-wrap')
+            ? 1000000
+            : candidate.matches('.se-components-wrap')
+              ? 900000
+              : candidate.matches('.se-main-container')
+                ? 100000
+                : 0;
+          const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+          if (score > bestScore) {
+            bestScore = score;
+            best = candidate;
+          }
+        }
+        return best;
+      }
+
+      const root = getSmartEditorDocumentRoot();
       if (!root) return;
       const rootEl = root as HTMLElement;
       rootEl.focus();
@@ -1612,14 +2051,14 @@ export async function ensureTailTypingReady(
       selection.removeAllRanges();
       selection.addRange(range);
       (block || (rootEl.lastElementChild as HTMLElement | null))?.scrollIntoView({ block: 'center', inline: 'nearest' });
-    }).catch(() => undefined);
+    }, documentRootPayload).catch(() => undefined);
   };
 
   const strategies: Array<{ name: string; run: () => Promise<void> }> = [
     // A REAL paragraph click FIRST — the redesigned editor only moves its
     // model caret on clicks; Selection tricks land in the hidden input proxy
     // (2026-06-11 structure dump: document tree has no contenteditable).
-    { name: 'paragraph-end-click', run: clickLastParagraphEnd },
+    ...(allowEmptyParagraph ? [{ name: 'paragraph-end-click', run: clickLastParagraphEnd }] : []),
     // Same click but restricted to text-bearing paragraphs — covers the case
     // where clicking the trailing empty paragraph fails to revive input.
     { name: 'text-paragraph-end-click', run: clickLastTextParagraphEnd },
@@ -1631,14 +2070,38 @@ export async function ensureTailTypingReady(
     {
       name: 'cdp-focus',
       run: async () => {
-        const editableHandle = await frame.evaluateHandle(() => {
-          let root: HTMLElement | null = null; let bestScore = -1;
-          document.querySelectorAll('[contenteditable="true"]').forEach((el) => {
-            const score = el.querySelectorAll('.se-component').length * 100000 + ((el as HTMLElement).innerText || '').length;
-            if (score > bestScore) { bestScore = score; root = el as HTMLElement; }
-          });
-          return root;
-        }).catch(() => null);
+        const editableHandle = await frame.evaluateHandle(({ rootSelectors, panelSelector }) => {
+          function getSmartEditorDocumentRoot(): HTMLElement | null {
+            const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+            let best: HTMLElement | null = null;
+            let bestScore = -1;
+            for (const candidate of candidates) {
+              if (!(candidate instanceof HTMLElement)) continue;
+              if (candidate.closest(panelSelector)) continue;
+              const rect = candidate.getBoundingClientRect();
+              const style = window.getComputedStyle(candidate);
+              if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+              const componentCount = candidate.querySelectorAll('.se-component').length;
+              const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+              const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+              const roleScore = candidate.matches('article.se-components-wrap')
+                ? 1000000
+                : candidate.matches('.se-components-wrap')
+                  ? 900000
+                  : candidate.matches('.se-main-container')
+                    ? 100000
+                    : 0;
+              const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+              if (score > bestScore) {
+                bestScore = score;
+                best = candidate;
+              }
+            }
+            return best;
+          }
+
+          return getSmartEditorDocumentRoot();
+        }, documentRootPayload).catch(() => null);
         const editable = editableHandle ? editableHandle.asElement() : null;
         if (editable) await (editable as import('puppeteer').ElementHandle<Element>).focus().catch(() => undefined);
         await focusRootEnd();
@@ -1668,9 +2131,37 @@ export async function ensureTailTypingReady(
     // dropped AGAIN while the probe's own sentinels survived publish).
     let inModel = false;
     if (registered) {
-      inModel = await frame.evaluate((sentinel) => {
-        const root = (document.querySelector('.se-components-wrap, .se-canvas, .se-content') as HTMLElement | null)
-          || document.body;
+      inModel = await frame.evaluate(({ sentinel, rootSelectors, panelSelector }) => {
+        function getSmartEditorDocumentRoot(): HTMLElement | null {
+          const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+          let best: HTMLElement | null = null;
+          let bestScore = -1;
+          for (const candidate of candidates) {
+            if (!(candidate instanceof HTMLElement)) continue;
+            if (candidate.closest(panelSelector)) continue;
+            const rect = candidate.getBoundingClientRect();
+            const style = window.getComputedStyle(candidate);
+            if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+            const componentCount = candidate.querySelectorAll('.se-component').length;
+            const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+            const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+            const roleScore = candidate.matches('article.se-components-wrap')
+              ? 1000000
+              : candidate.matches('.se-components-wrap')
+                ? 900000
+                : candidate.matches('.se-main-container')
+                  ? 100000
+                  : 0;
+            const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+            if (score > bestScore) {
+              bestScore = score;
+              best = candidate;
+            }
+          }
+          return best;
+        }
+
+        const root = getSmartEditorDocumentRoot();
         if (!root) return false;
         const rootEl = root as HTMLElement;
         const depthOf = (el: HTMLElement | null): number => {
@@ -1695,6 +2186,7 @@ export async function ensureTailTypingReady(
           }
         }
         if (!sentinelEl) return false;
+        if (sentinelEl.closest(panelSelector)) return false;
         if (sentinelEl.closest('.se-component')) return true;
         const sentinelDepth = depthOf(sentinelEl);
         // As deep as the real body text (−1 tolerance for span nesting) =
@@ -1702,7 +2194,7 @@ export async function ensureTailTypingReady(
         return bodyDepthMax > 0
           ? sentinelDepth >= Math.max(1, bodyDepthMax - 1)
           : sentinelDepth >= 3;
-      }, SENTINEL).catch(() => false);
+      }, { sentinel: SENTINEL, ...documentRootPayload }).catch(() => false);
     }
     if (after.includes(SENTINEL)) {
       await page.keyboard.press('Backspace').catch(() => undefined);
@@ -1713,9 +2205,37 @@ export async function ensureTailTypingReady(
       for (let cleanupTry = 0; cleanupTry < 2; cleanupTry += 1) {
         const residue = await editableRootText(frame);
         if (!residue.includes(SENTINEL)) break;
-        await frame.evaluate((sentinel) => {
-          const root = (document.querySelector('.se-components-wrap, .se-canvas, .se-content') as HTMLElement | null)
-            || document.body;
+        await frame.evaluate(({ sentinel, rootSelectors, panelSelector }) => {
+          function getSmartEditorDocumentRoot(): HTMLElement | null {
+            const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+            let best: HTMLElement | null = null;
+            let bestScore = -1;
+            for (const candidate of candidates) {
+              if (!(candidate instanceof HTMLElement)) continue;
+              if (candidate.closest(panelSelector)) continue;
+              const rect = candidate.getBoundingClientRect();
+              const style = window.getComputedStyle(candidate);
+              if (rect.width <= 0 || rect.height <= 0 || style.visibility === 'hidden' || style.display === 'none') continue;
+              const componentCount = candidate.querySelectorAll('.se-component').length;
+              const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+              const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+              const roleScore = candidate.matches('article.se-components-wrap')
+                ? 1000000
+                : candidate.matches('.se-components-wrap')
+                  ? 900000
+                  : candidate.matches('.se-main-container')
+                    ? 100000
+                    : 0;
+              const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+              if (score > bestScore) {
+                bestScore = score;
+                best = candidate;
+              }
+            }
+            return best;
+          }
+
+          const root = getSmartEditorDocumentRoot();
           if (!root) return;
           const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
           let node: Node | null;
@@ -1732,7 +2252,7 @@ export async function ensureTailTypingReady(
               return;
             }
           }
-        }, SENTINEL).catch(() => undefined);
+        }, { sentinel: SENTINEL, ...documentRootPayload }).catch(() => undefined);
         await page.keyboard.press('Backspace').catch(() => undefined);
         await new Promise((resolve) => setTimeout(resolve, 150));
       }
@@ -1752,7 +2272,11 @@ export async function ensureTailTypingReady(
   // Ladder exhausted (callers proceed best-effort): leave the caret at the
   // structurally BEST position, not wherever the last fallback dropped it —
   // live 2026-06-11: the final fallback's orphan caret ate the whole tail.
-  await clickLastParagraphEnd();
+  if (allowEmptyParagraph) {
+    await clickLastParagraphEnd();
+  } else {
+    await clickLastTextParagraphEnd();
+  }
   return false;
 }
 
@@ -1781,8 +2305,11 @@ export async function pasteRichHtmlAtCursor(
   try {
     await page.bringToFront().catch(() => undefined);
     await page.evaluate(() => window.focus()).catch(() => undefined);
-    await focusLastEditableLine(page, frame).catch(() => undefined);
     await resetInlineFormattingState(page, frame).catch(() => undefined);
+    const pasteCaretReady = await ensureTailTypingReady(page, frame).catch(() => false);
+    if (!pasteCaretReady) {
+      await focusLastEditableLine(page, frame).catch(() => undefined);
+    }
     await new Promise(resolve => setTimeout(resolve, 120));
     await grantClipboardPermission(page, frame).catch(() => undefined);
 
@@ -1848,7 +2375,10 @@ export async function pasteRichHtmlAtCursor(
       };
     }
 
-    await focusLastEditableLine(page, frame);
+    const postClipboardCaretReady = await ensureTailTypingReady(page, frame).catch(() => false);
+    if (!postClipboardCaretReady) {
+      await focusLastEditableLine(page, frame);
+    }
     await new Promise(resolve => setTimeout(resolve, 150));
     await page.keyboard.down('Control');
     await page.keyboard.press('V');
@@ -1856,20 +2386,75 @@ export async function pasteRichHtmlAtCursor(
     await new Promise(resolve => setTimeout(resolve, 800));
 
     const after = await readEditorStats(frame);
-    const needle = trimmedPlain.replace(/\s+/g, ' ').slice(0, 12);
-    const normalizedAfter = after.text.replace(/\s+/g, ' ');
-    const inserted = (needle.length > 0 && normalizedAfter.includes(needle)) ||
-      after.chars > before.chars + Math.min(20, trimmedPlain.length / 2) ||
-      after.tables > before.tables;
+    const inserted = isPasteVisible(before, after, trimmedPlain);
 
+    if (inserted) {
+      return {
+        ok: true,
+        method: 'clipboard-html',
+        beforeChars: before.chars,
+        afterChars: after.chars,
+        beforeTables: before.tables,
+        afterTables: after.tables,
+      };
+    }
+
+    const eventResult = await dispatchRichPasteEventAtCursor(frame, trimmedHtml, trimmedPlain);
+    if (eventResult.ok) {
+      await new Promise(resolve => setTimeout(resolve, 900));
+      const afterEvent = await readEditorStats(frame);
+      if (isPasteVisible(before, afterEvent, trimmedPlain)) {
+        return {
+          ok: true,
+          method: 'paste-event-html',
+          beforeChars: before.chars,
+          afterChars: afterEvent.chars,
+          beforeTables: before.tables,
+          afterTables: afterEvent.tables,
+        };
+      }
+    }
+
+    const plainResult = await pastePlainTextAtCursor(page, frame, trimmedPlain);
+    if (plainResult.ok) {
+      await new Promise(resolve => setTimeout(resolve, 900));
+      const afterPlain = await readEditorStats(frame);
+      if (isPasteVisible(before, afterPlain, trimmedPlain)) {
+        return {
+          ok: true,
+          method: 'clipboard-plain',
+          reason: 'rich html paste failed; plain clipboard paste succeeded',
+          beforeChars: before.chars,
+          afterChars: afterPlain.chars,
+          beforeTables: before.tables,
+          afterTables: afterPlain.tables,
+        };
+      }
+      return {
+        ok: false,
+        method: 'none',
+        reason: buildPasteFailureReason('plain paste verification failed', before, afterPlain, trimmedPlain),
+        beforeChars: before.chars,
+        afterChars: afterPlain.chars,
+        beforeTables: before.tables,
+        afterTables: afterPlain.tables,
+      };
+    }
+
+    const finalStats = await readEditorStats(frame);
+    const fallbackReason = [
+      'paste verification failed',
+      eventResult.reason ? `event=${eventResult.reason}` : '',
+      plainResult.reason ? `plain=${plainResult.reason}` : '',
+    ].filter(Boolean).join('; ');
     return {
-      ok: inserted,
-      method: inserted ? 'clipboard-html' : 'none',
-      reason: inserted ? undefined : 'paste verification failed',
+      ok: false,
+      method: 'none',
+      reason: buildPasteFailureReason(fallbackReason, before, finalStats, trimmedPlain),
       beforeChars: before.chars,
-      afterChars: after.chars,
+      afterChars: finalStats.chars,
       beforeTables: before.tables,
-      afterTables: after.tables,
+      afterTables: finalStats.tables,
     };
   } catch (error) {
     const after = await readEditorStats(frame);

@@ -39,6 +39,22 @@ export interface PrePublishReport {
   checks: PrePublishCheck[];
 }
 
+export interface HashtagPresenceDiagnostic {
+  tag: string;
+  hashPresent: boolean;
+  plainPresent: boolean;
+}
+
+export interface HashtagPresenceDiagnostics {
+  expectedHashtags: string[];
+  missingHashtags: string[];
+  bodyHashtagStatus: HashtagPresenceDiagnostic[];
+  plainOccurrences: string[];
+  bodyChars: number;
+  bodyTail: string;
+  probableCause: string;
+}
+
 const IMAGE_SOURCE_FIELDS = [
   'filePath',
   'savedToLocal',
@@ -48,6 +64,18 @@ const IMAGE_SOURCE_FIELDS = [
   'dataUrl',
   'path',
 ] as const;
+
+const SMART_EDITOR_ROOT_SELECTORS = [
+  'article.se-components-wrap',
+  '.se-canvas > article.se-components-wrap',
+  '.se-content article.se-components-wrap',
+  '.se-components-wrap',
+  '.se-main-container',
+] as const;
+
+// Do not include `.se-panel`: current SmartEditor can wrap the document
+// canvas in it, and excluding it makes the publish gate read an empty body.
+const SMART_EDITOR_PANEL_SELECTOR = '.se-popup, .se-layer, .se-modal, [role="dialog"], [aria-modal="true"]';
 
 export const DEFAULT_FORBIDDEN_MARKERS = [
   '[원본 텍스트]',
@@ -126,11 +154,7 @@ export function evaluatePrePublishReport(
   // Presence in the editor body is the closest pre-publish signal we have.
   const expectedHashtags = expectations.expectedHashtags || [];
   if (expectedHashtags.length > 0) {
-    const bodyText = stats.bodyText || '';
-    const missing = expectedHashtags.filter((tag) => {
-      const name = String(tag).replace(/^#/, '').trim();
-      return name.length > 0 && !bodyText.includes(`#${name}`);
-    });
+    const missing = getMissingExpectedHashtags(stats, expectations);
     checks.push({
       name: 'hashtag-presence',
       pass: missing.length === 0,
@@ -140,6 +164,99 @@ export function evaluatePrePublishReport(
   }
 
   return { pass: checks.every((check) => check.pass), checks };
+}
+
+export function getMissingExpectedHashtags(
+  stats: PrePublishStats,
+  expectations: Pick<PrePublishExpectations, 'expectedHashtags'>
+): string[] {
+  const bodyText = stats.bodyText || '';
+  return getExpectedHashtagNames(expectations)
+    .filter((name) => name.length > 0 && !bodyText.includes(`#${name}`));
+}
+
+export function getExpectedHashtagNames(
+  expectations: Pick<PrePublishExpectations, 'expectedHashtags'>
+): string[] {
+  const seen = new Set<string>();
+  return (expectations.expectedHashtags || [])
+    .map((tag) => String(tag).replace(/^#/, '').trim())
+    .filter((name) => {
+      if (name.length === 0) return false;
+      const key = name.toLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+}
+
+export function getHashtagPresenceDiagnostics(
+  stats: PrePublishStats,
+  expectations: Pick<PrePublishExpectations, 'expectedHashtags'>
+): HashtagPresenceDiagnostics {
+  const bodyText = stats.bodyText || '';
+  const expectedHashtags = getExpectedHashtagNames(expectations);
+  const bodyHashtagStatus = expectedHashtags.map((tag) => ({
+    tag,
+    hashPresent: bodyText.includes(`#${tag}`),
+    plainPresent: bodyText.includes(tag),
+  }));
+  const missingHashtags = bodyHashtagStatus
+    .filter((status) => !status.hashPresent)
+    .map((status) => status.tag);
+  const plainOccurrences = bodyHashtagStatus
+    .filter((status) => !status.hashPresent && status.plainPresent)
+    .map((status) => status.tag);
+  const bodyTail = bodyText.slice(-700);
+
+  let probableCause = 'ok';
+  if (expectedHashtags.length === 0) {
+    probableCause = 'no-expected-hashtags';
+  } else if (missingHashtags.length === 0) {
+    probableCause = 'all-hashtags-present';
+  } else if (!bodyText.trim()) {
+    probableCause = 'editor-body-not-readable';
+  } else if (
+    bodyTail.includes('추가할 컴포넌트를 선택하세요') ||
+    bodyTail.includes('사진 라이브러리') ||
+    bodyTail.includes('현재 문서구매 목록')
+  ) {
+    probableCause = 'editor-insert-panel-active';
+  } else if (plainOccurrences.length > 0) {
+    probableCause = 'hash-prefix-lost-or-plain-text-only';
+  } else if (bodyTail.includes('http://') || bodyTail.includes('https://')) {
+    probableCause = 'cursor-stayed-near-link-card-or-tail-not-after-card';
+  } else {
+    probableCause = 'hashtag-tail-not-inserted-or-focus-lost';
+  }
+
+  return {
+    expectedHashtags,
+    missingHashtags,
+    bodyHashtagStatus,
+    plainOccurrences,
+    bodyChars: stats.bodyChars,
+    bodyTail,
+    probableCause,
+  };
+}
+
+export function formatHashtagPresenceDiagnostics(
+  stats: PrePublishStats,
+  expectations: Pick<PrePublishExpectations, 'expectedHashtags'>
+): string {
+  return `HASHTAG_DEBUG:${JSON.stringify(getHashtagPresenceDiagnostics(stats, expectations))}`;
+}
+
+export function isEditorBodyUnreadable(stats: PrePublishStats | null | undefined): boolean {
+  if (!stats) return false;
+  return (
+    stats.bodyChars === 0 &&
+    !(stats.bodyText || '').trim() &&
+    stats.imageCount === 0 &&
+    stats.linkCardCount === 0 &&
+    stats.dividerCount === 0
+  );
 }
 
 // [SPEC-STABILITY-2026 R6] 단계적 차단: 의미가 에디터 안에서 결정되는 검사만
@@ -172,14 +289,62 @@ export async function collectPrePublishStats(
   frame: Frame,
   markers: string[] = DEFAULT_FORBIDDEN_MARKERS
 ): Promise<PrePublishStats> {
-  const raw = await frame.evaluate(() => {
-    const root =
-      (document.querySelector('.se-main-container') as HTMLElement | null) || document.body;
-    const text = root?.innerText || root?.textContent || '';
+  const raw = await frame.evaluate(({ rootSelectors, panelSelector }) => {
+    function isVisibleElement(element: Element): boolean {
+      if (!(element instanceof HTMLElement)) return false;
+      if (element.closest(panelSelector)) return false;
+      const rect = element.getBoundingClientRect();
+      const style = window.getComputedStyle(element);
+      return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && style.display !== 'none';
+    }
 
-    const imageCount = document.querySelectorAll(
+    function getSmartEditorDocumentRoot(): HTMLElement | null {
+      const candidates = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+      let best: HTMLElement | null = null;
+      let bestScore = -1;
+      for (const candidate of candidates) {
+        if (!isVisibleElement(candidate)) continue;
+        const componentCount = candidate.querySelectorAll('.se-component').length;
+        const paragraphCount = candidate.querySelectorAll('.se-text-paragraph, p').length;
+        const textLength = (candidate.innerText || candidate.textContent || '').trim().length;
+        const roleScore = candidate.matches('article.se-components-wrap')
+          ? 1000000
+          : candidate.matches('.se-components-wrap')
+            ? 900000
+            : candidate.matches('.se-main-container')
+              ? 100000
+              : 0;
+        const score = roleScore + componentCount * 1000 + paragraphCount * 100 + Math.min(textLength, 2000);
+        if (score > bestScore) {
+          bestScore = score;
+          best = candidate;
+        }
+      }
+      return best;
+    }
+
+    const root = getSmartEditorDocumentRoot();
+    const rootText = root?.innerText || root?.textContent || '';
+    const fallbackText = !rootText.trim()
+      ? Array.from(document.querySelectorAll([
+        '.se-section-text',
+        '.se-module-text',
+        '.se-text-paragraph',
+        '.se-component-text',
+        '[contenteditable="true"]',
+      ].join(',')))
+        .filter(isVisibleElement)
+        .map((el) => ((el as HTMLElement).innerText || el.textContent || '').trim())
+        .filter(Boolean)
+        .filter((text, index, all) => all.indexOf(text) === index)
+        .join('\n')
+      : '';
+    const text = rootText.trim() ? rootText : fallbackText;
+    const searchScope: ParentNode = root || document;
+
+    const imageCount = Array.from(searchScope.querySelectorAll(
       'img.se-image-resource, .se-module-image img, .se-component-image img'
-    ).length;
+    )).filter((el) => isVisibleElement(el)).length;
 
     // Same selector pool as waitForLinkCard; dedup nested matches by their
     // component root so one card never counts twice.
@@ -194,15 +359,16 @@ export async function collectPrePublishStats(
     ];
     const cardRoots = new Set<Element>();
     for (const selector of linkSelectors) {
-      document.querySelectorAll(selector).forEach((el) => {
+      searchScope.querySelectorAll(selector).forEach((el) => {
+        if (!isVisibleElement(el)) return;
         cardRoots.add(el.closest('.se-component') || el);
       });
     }
 
     const dividerTextRuns = (text.match(/━{10,}/g) || []).length;
-    const dividerComponents = document.querySelectorAll(
+    const dividerComponents = Array.from(searchScope.querySelectorAll(
       '[class*="horizontalLine"], [class*="horizontal-line"], hr'
-    ).length;
+    )).filter((el) => isVisibleElement(el)).length;
 
     return {
       text,
@@ -210,6 +376,9 @@ export async function collectPrePublishStats(
       linkCardCount: cardRoots.size,
       dividerCount: dividerTextRuns + dividerComponents,
     };
+  }, {
+    rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
+    panelSelector: SMART_EDITOR_PANEL_SELECTOR,
   });
 
   return {

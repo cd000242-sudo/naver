@@ -108,6 +108,10 @@ export async function dropshotLogin(
       if (userClosed) break;
       try {
         const pages = ctx.pages();
+        if (!pages || pages.length === 0) {
+          userClosed = true;
+          break;
+        }
         page =
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           pages.find((p: any) => {
@@ -131,6 +135,24 @@ export async function dropshotLogin(
     }
 
     // 감지 시 자동 닫기(사용자가 이미 닫았으면 skip).
+    if (!detected) {
+      if (!userClosed) {
+        try {
+          await ctx.close();
+        } catch {
+          // ignore
+        }
+      }
+      ctx = null;
+      clearCached();
+      return {
+        loggedIn: false,
+        message: userClosed
+          ? '로그인 창이 닫혔지만 로그인 완료 신호가 감지되지 않았습니다. 로그인 후 [로그인 확인]을 눌러주세요.'
+          : '로그인 시간 초과 — 다시 시도해 주세요.',
+      };
+    }
+
     if (!userClosed) {
       try {
         await ctx.close();
@@ -151,6 +173,16 @@ export async function dropshotLogin(
     await hpage.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
     await new Promise((r) => setTimeout(r, 4000));
     await openDropshotImageWorkspace(hpage, onLog);
+    const finalLoggedIn = await isLoggedIn(hpage);
+    if (!finalLoggedIn) {
+      try {
+        await hctx.close();
+      } catch {
+        // ignore
+      }
+      clearCached();
+      return { loggedIn: false, message: '⚠️ 로그인이 확인되지 않았습니다(토큰 없음). 다시 로그인해 주세요.' };
+    }
     setCached(hctx, hpage);
     return (await isLoggedIn(hpage))
       ? { loggedIn: true, message: '✅ 로그인 완료 — 세션이 저장되었습니다.' }

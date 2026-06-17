@@ -1008,38 +1008,10 @@ export class ProgressModal {
                     </div>
                 `;
             } else {
-                const imgEl = document.createElement('img');
-                imgEl.src = toFileUrlSafe(src);
-                imgEl.alt = img.heading || `이미지 ${idx + 1}`;
-                imgEl.style.cssText = `width: 100%; height: 100%; object-fit: cover;`;
-                imgEl.onerror = () => {
-                    imgEl.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23333" width="100" height="100"/><text x="50" y="50" text-anchor="middle" fill="%23666" font-size="20">❌</text></svg>';
-                };
-
-                // 인덱스 배지 + 소제목 라벨
-                const badge = document.createElement('div');
-                badge.style.cssText = `
-                    position: absolute; top: 3px; left: 3px;
-                    background: ${idx === 0 ? '#3b82f6' : 'rgba(0, 0, 0, 0.65)'};
-                    color: white; font-size: 9px; font-weight: 700;
-                    padding: 1px 6px; border-radius: 4px; line-height: 1.5;
-                `;
-                badge.textContent = idx === 0 ? '대표' : `${idx}`;
-
-                // ✅ [2026-02-13 NEW] 하단 소제목 오버레이
-                const label = document.createElement('div');
-                label.style.cssText = `
-                    position: absolute; bottom: 0; left: 0; right: 0;
-                    background: linear-gradient(transparent, rgba(0,0,0,0.75));
-                    color: white; font-size: 8px; font-weight: 600;
-                    padding: 12px 4px 3px 4px; text-align: center;
-                    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-                `;
-                label.textContent = (img.heading || '').substring(0, 12);
-
-                wrapper.appendChild(imgEl);
-                wrapper.appendChild(badge);
-                if (img.heading) wrapper.appendChild(label);
+                // The generated bitmap is shown only in the large preview.
+                // The small strip is a status/navigation strip so the same
+                // image does not appear twice in the modal.
+                this.renderProgressStatusTile(wrapper, img.heading || `이미지 ${idx + 1}`, idx, idx === 0);
             }
 
             grid.appendChild(wrapper);
@@ -1211,39 +1183,12 @@ export class ProgressModal {
                 transition: border-color 0.3s, transform 0.2s;
             `;
 
-            const imgEl = document.createElement('img');
-            imgEl.src = toFileUrlSafe(src);
-            imgEl.alt = image.heading || `이미지 ${previewIndex + 1}`;
-            imgEl.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
-            imgEl.onerror = () => {
-                imgEl.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23333" width="100" height="100"/><text x="50" y="50" text-anchor="middle" fill="%23666" font-size="20">❌</text></svg>';
-            };
-
-            // 인덱스 배지
-            const badge = document.createElement('div');
-            badge.style.cssText = `
-                position: absolute; top: 3px; left: 3px;
-                background: ${previewIndex === 0 ? '#3b82f6' : 'rgba(0, 0, 0, 0.65)'};
-                color: white; font-size: 9px; font-weight: 700;
-                padding: 1px 6px; border-radius: 4px; line-height: 1.5;
-            `;
-            badge.textContent = previewIndex === 0 ? '대표' : `${previewIndex}`;
-
-            // 하단 소제목 오버레이
-            const label = document.createElement('div');
-            label.style.cssText = `
-                position: absolute; bottom: 0; left: 0; right: 0;
-                background: linear-gradient(transparent, rgba(0,0,0,0.75));
-                color: white; font-size: 8px; font-weight: 600;
-                padding: 12px 4px 3px 4px; text-align: center;
-                white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-            `;
-            label.textContent = (image.heading || '').substring(0, 12);
-
-            targetItem.innerHTML = '';
-            targetItem.appendChild(imgEl);
-            targetItem.appendChild(badge);
-            if (image.heading) targetItem.appendChild(label);
+            this.renderProgressStatusTile(
+                targetItem,
+                image.heading || `이미지 ${previewIndex + 1}`,
+                previewIndex,
+                previewIndex === this.currentImageIndex
+            );
 
             // 호버 효과
             targetItem.onmouseenter = () => {
@@ -1292,6 +1237,55 @@ export class ProgressModal {
         if (grid) grid.style.display = this.currentImages.length > 1 ? 'grid' : 'none';
 
         console.log(`[ProgressModal] 🖼️ 실시간 이미지 업데이트: [${previewIndex + 1}/${this.currentImages.length}] "${image.heading || ''}" 완료`);
+    }
+
+    private renderProgressStatusTile(targetItem: HTMLElement, heading: string, index: number, selected: boolean = false): void {
+        targetItem.innerHTML = '';
+        targetItem.style.background = selected
+            ? 'linear-gradient(135deg, rgba(16,185,129,0.24), rgba(59,130,246,0.18))'
+            : 'linear-gradient(135deg, rgba(15,23,42,0.96), rgba(30,41,59,0.88))';
+
+        const badge = document.createElement('div');
+        badge.style.cssText = `
+            position: absolute; top: 5px; left: 5px;
+            background: ${index === 0 ? '#3b82f6' : 'rgba(0, 0, 0, 0.65)'};
+            color: white; font-size: 9px; font-weight: 800;
+            padding: 1px 6px; border-radius: 4px; line-height: 1.5;
+        `;
+        badge.textContent = index === 0 ? '대표' : `${index}`;
+
+        const check = document.createElement('div');
+        check.style.cssText = `
+            position: absolute; right: 5px; top: 5px;
+            width: 18px; height: 18px; border-radius: 999px;
+            display: flex; align-items: center; justify-content: center;
+            background: #10b981; color: white; font-size: 12px; font-weight: 900;
+            box-shadow: 0 2px 8px rgba(16,185,129,0.35);
+        `;
+        check.textContent = '✓';
+
+        const icon = document.createElement('div');
+        icon.style.cssText = `
+            position: absolute; inset: 0 0 24px 0;
+            display: flex; align-items: center; justify-content: center;
+            color: #93c5fd; font-size: 1.35rem; opacity: 0.95;
+        `;
+        icon.textContent = '🖼️';
+
+        const label = document.createElement('div');
+        label.style.cssText = `
+            position: absolute; bottom: 0; left: 0; right: 0;
+            color: white; font-size: 8px; font-weight: 700;
+            padding: 5px 4px; text-align: center;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            background: rgba(0,0,0,0.45);
+        `;
+        label.textContent = heading.substring(0, 14);
+
+        targetItem.appendChild(badge);
+        targetItem.appendChild(check);
+        targetItem.appendChild(icon);
+        targetItem.appendChild(label);
     }
 
     // ✅ [2026-02-27 NEW] 메인 미리보기 직접 업데이트 (showImages 내부 헬퍼와 동일)

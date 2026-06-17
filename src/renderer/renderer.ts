@@ -1575,16 +1575,16 @@ function updateRiskIndicators(content: StructuredContent | null): void {
   }
 
   if (riskSeoValue) {
-    if (_quality && typeof _quality.seoScore === 'number') {
-      const _gate = (_quality as any)?.qualityGate;
-      if (_gate && typeof _gate.finalScore === 'number') {
-        const _decisionLabel = _gate.decision === 'pass' ? '✓통과'
-          : _gate.decision === 'patch' ? '⚙수정'
-          : '↻재생성';
-        riskSeoValue.textContent = `${_quality.seoScore || 0}/100 · 게이트 ${_gate.finalScore} (${_decisionLabel})`;
-      } else {
-        riskSeoValue.textContent = `${_quality.seoScore || 0}/100`;
-      }
+    const _gate = (_quality as any)?.qualityGate;
+    if (_gate && typeof _gate.finalScore === 'number') {
+      const _decisionLabel = _gate.decision === 'pass' ? '✓통과'
+        : _gate.decision === 'patch' ? '⚙수정'
+        : '↻재생성';
+      const _modeScore = typeof _gate.modeScore === 'number' ? ` · 모드 ${_gate.modeScore}` : '';
+      const _seoScore = typeof _quality?.seoScore === 'number' ? ` · SEO ${_quality.seoScore}` : '';
+      riskSeoValue.textContent = `${_gate.finalScore}/100 (${_decisionLabel})${_modeScore}${_seoScore}`;
+    } else if (_quality && typeof _quality.seoScore === 'number') {
+      riskSeoValue.textContent = `${_quality.seoScore}/100`;
     } else {
       riskSeoValue.textContent = '-/100';
     }

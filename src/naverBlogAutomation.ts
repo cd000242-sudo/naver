@@ -43,7 +43,7 @@ import {
 } from './automation/selectors';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
-import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
+import { buildMobileRichHtml, ensureTailTypingReady, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
 import {
   collectEditorTitleDiagnostics,
   findEditorTitleInputElement,
@@ -54,7 +54,18 @@ import {
   collectEditorReadinessSnapshot,
   shouldRetryEditorReadiness,
 } from './automation/editorReadinessDiagnostics.js';
-import { collectPrePublishStats, evaluatePrePublishReport, formatPrePublishReport, getBlockingFailures } from './automation/prePublishAssertion.js';
+import {
+  collectPrePublishStats,
+  evaluatePrePublishReport,
+  formatHashtagPresenceDiagnostics,
+  formatPrePublishReport,
+  getBlockingFailures,
+  getHashtagPresenceDiagnostics,
+  getMissingExpectedHashtags,
+  isEditorBodyUnreadable,
+  type PrePublishExpectations,
+  type PrePublishStats,
+} from './automation/prePublishAssertion.js';
 import { formatSilentFailureSummary, recordSilentFailure, resetSilentFailureCounts } from './automation/silentFailureCounter.js';
 import {
   classifyBlogWriteNavigationUrl,
@@ -300,6 +311,7 @@ export interface AutomationImage {
 }
 
 const POST_CONTENT_APPLIED_MARKER = 'POST_CONTENT_APPLIED';
+const POST_TAIL_INCOMPLETE_MARKER = 'POST_TAIL_INCOMPLETE';
 
 function getAutomationErrorMessage(error: unknown): string {
   if (error instanceof Error) return error.message;
@@ -317,6 +329,18 @@ function throwPostContentAppliedPublishError(error: unknown): never {
   }
 
   throw new Error(`${POST_CONTENT_APPLIED_MARKER}: 본문 작성은 완료됐지만 발행 단계에서 오류가 발생했습니다. 같은 글을 새 창에 다시 쓰지 않도록 자동 재작성을 중단했습니다. 네이버 글쓰기 창의 임시저장/작성 상태를 먼저 확인해주세요. 원인: ${originalMessage}`);
+}
+
+function throwPostTailIncompleteError(error: unknown): never {
+  const originalMessage = getAutomationErrorMessage(error);
+  if (
+    originalMessage.includes(POST_TAIL_INCOMPLETE_MARKER) ||
+    originalMessage.includes(POST_CONTENT_APPLIED_MARKER)
+  ) {
+    throw error instanceof Error ? error : new Error(originalMessage);
+  }
+
+  throw new Error(`${POST_TAIL_INCOMPLETE_MARKER}: 본문 작성 후 이전글 엮기/해시태그/CTA 마무리 단계에서 오류가 발생했습니다. 같은 글을 새 창에 다시 쓰지 않도록 자동 재작성을 중단했습니다. 네이버 글쓰기 창의 작성 상태를 먼저 확인해주세요. 원인: ${originalMessage}`);
 }
 
 interface ResolvedRunOptions {
@@ -4569,6 +4593,91 @@ export class NaverBlogAutomation {
     return await publishHelpers.publishScheduled(this, scheduleDate);
   }
 
+  private async repairMissingHashtagsBeforePublish(
+    frame: Frame,
+    expectations: PrePublishExpectations,
+    stats: PrePublishStats
+  ): Promise<boolean> {
+    const missingHashtags = getMissingExpectedHashtags(stats, expectations);
+    if (missingHashtags.length === 0) {
+      return false;
+    }
+
+    this.emitTailDebugSnapshot('hashtag-repair-before', expectations, stats);
+    this.log(`[PrePublish] 해시태그 누락 자동 복구 시도: ${missingHashtags.map((tag) => `#${tag}`).join(' ')}`);
+    try {
+      await this.applyHashtagsInBody(missingHashtags, {
+        ensureTailReady: true,
+        leadingEnterCount: 5,
+      });
+      await this.delay(700);
+
+      this.mainFrame = null;
+      const repairedFrame = await this.getAttachedFrame().catch(() => frame);
+      const repairedStats = await collectPrePublishStats(repairedFrame);
+      const stillMissing = getMissingExpectedHashtags(repairedStats, expectations);
+      this.emitTailDebugSnapshot('hashtag-repair-after', expectations, repairedStats, {
+        stillMissing,
+      });
+      if (stillMissing.length === 0) {
+        this.log('[PrePublish] 해시태그 자동 복구 완료');
+        return true;
+      }
+
+      this.log(`[PrePublish] 해시태그 자동 복구 후에도 누락: ${stillMissing.map((tag) => `#${tag}`).join(' ')}`);
+      this.log(`[PrePublish] 해시태그 자동 복구 진단: ${formatHashtagPresenceDiagnostics(repairedStats, expectations)}`);
+      return true;
+    } catch (error) {
+      this.emitTailDebugSnapshot('hashtag-repair-error', expectations, stats, {
+        error: (error as Error).message,
+      });
+      this.log(`[PrePublish] 해시태그 자동 복구 실패: ${(error as Error).message}`);
+      return false;
+    }
+  }
+
+  private emitTailDebugSnapshot(
+    stage: string,
+    expectations: PrePublishExpectations,
+    stats: PrePublishStats,
+    extra: Record<string, unknown> = {}
+  ): void {
+    try {
+      const expectedHashtags = (expectations.expectedHashtags || [])
+        .map((tag) => String(tag).replace(/^#/, '').trim())
+        .filter(Boolean);
+      const missingHashtags = getMissingExpectedHashtags(stats, expectations);
+      const hashtagDiagnostics = getHashtagPresenceDiagnostics(stats, expectations);
+      const bodyText = stats.bodyText || '';
+      const tail = bodyText.slice(-700);
+      const plainOccurrences = expectedHashtags.filter((tag) => {
+        return tag.length > 0 && bodyText.includes(tag) && !bodyText.includes(`#${tag}`);
+      });
+
+      const payload = {
+        stage,
+        expectedHashtags,
+        missingHashtags,
+        plainOccurrences,
+        bodyChars: stats.bodyChars,
+        imageCount: stats.imageCount,
+        linkCardCount: stats.linkCardCount,
+        dividerCount: stats.dividerCount,
+        leakedMarkers: stats.leakedMarkers,
+        bodyTail: tail,
+        probableCause: hashtagDiagnostics.probableCause,
+        bodyHashtagStatus: hashtagDiagnostics.bodyHashtagStatus,
+        ...extra,
+      };
+
+      const line = `[TailDebug] ${JSON.stringify(payload)}`;
+      this.log(line);
+      console.warn(line);
+    } catch (error) {
+      console.warn('[TailDebug] snapshot failed', (error as Error).message);
+    }
+  }
+
   async publishBlogPost(mode: PublishMode, scheduleDate?: string, scheduleMethod: 'datetime-local' | 'individual-inputs' = 'datetime-local'): Promise<void> {
     // ✅ [2026-02-07 FIX] 발행 모드 명시적 로깅 (디버깅용)
     this.log(`📋 publishBlogPost 호출됨 → mode: "${mode}", scheduleDate: "${scheduleDate || 'undefined'}", scheduleMethod: "${scheduleMethod}"`);
@@ -4583,7 +4692,7 @@ export class NaverBlogAutomation {
       resetSilentFailureCounts();
     }
     await this.retry(async () => {
-      const frame = (await this.getAttachedFrame());
+      let frame = (await this.getAttachedFrame());
       this.ensureNotCancelled();
 
       // [SPEC-STABILITY-2026 R2] Pre-publish assertion — observation mode.
@@ -4592,19 +4701,48 @@ export class NaverBlogAutomation {
       try {
         const expectations = (this as any).__prePublishExpectations;
         if (expectations) {
-          const stats = await collectPrePublishStats(frame);
-          const report = evaluatePrePublishReport(stats, expectations);
+          let stats = await collectPrePublishStats(frame);
+          if (isEditorBodyUnreadable(stats)) {
+            this.log('[PrePublish] 본문 판독 결과가 0자로 나와 프레임을 재획득 후 재검사합니다.');
+            this.mainFrame = null;
+            const refreshedFrame = await this.getAttachedFrame().catch(() => frame);
+            frame = refreshedFrame;
+            stats = await collectPrePublishStats(refreshedFrame);
+          }
+          let report = evaluatePrePublishReport(stats, expectations);
           this.log(formatPrePublishReport(report));
+          this.emitTailDebugSnapshot('pre-publish-before-blocking', expectations, stats);
           // [SPEC-STABILITY-2026 R6] 단계적 차단: 결정적 검사 실패 시 발행
           // 중단 (반쪽 발행 구조적 차단). 서버 의존 검사는 관찰 유지.
           // 비상 해제: options.prePublishObserveOnly === true
           if (this.options.prePublishObserveOnly !== true) {
-            const blockingFailures = getBlockingFailures(report);
+            let blockingFailures = getBlockingFailures(report);
+            if (blockingFailures.some((check) => check.name === 'hashtag-presence')) {
+              const repaired = await this.repairMissingHashtagsBeforePublish(frame, expectations, stats);
+              if (repaired) {
+                stats = await collectPrePublishStats(frame);
+                report = evaluatePrePublishReport(stats, expectations);
+                this.log('[PrePublish] 해시태그 복구 후 재검사');
+                this.log(formatPrePublishReport(report));
+                this.emitTailDebugSnapshot('pre-publish-after-repair', expectations, stats);
+                blockingFailures = getBlockingFailures(report);
+              }
+            }
             if (blockingFailures.length > 0) {
+              this.emitTailDebugSnapshot('pre-publish-blocked', expectations, stats, {
+                blockingFailures: blockingFailures.map((check) => ({
+                  name: check.name,
+                  expected: check.expected,
+                  actual: check.actual,
+                })),
+              });
               const detail = blockingFailures
                 .map((c) => `${c.name}(기대 ${c.expected}/실제 ${c.actual})`)
                 .join(', ');
-              throw new Error(`PRE_PUBLISH_BLOCKED:발행 직전 검사 실패 — ${detail}. 누락된 글이 발행되지 않도록 중단합니다.`);
+              const hashtagDebug = blockingFailures.some((check) => check.name === 'hashtag-presence')
+                ? `\n${formatHashtagPresenceDiagnostics(stats, expectations)}`
+                : '';
+              throw new Error(`PRE_PUBLISH_BLOCKED:발행 직전 검사 실패 — ${detail}. 누락된 글이 발행되지 않도록 중단합니다.${hashtagDebug}`);
             }
           }
         }
@@ -5969,19 +6107,20 @@ export class NaverBlogAutomation {
       } catch (error) {
         lastError = error as Error;
         const errorMsg = lastError.message || '';
+        const isContentApplyOperation =
+          operationName.includes('콘텐츠 적용') ||
+          operationName.toLowerCase().includes('content');
 
-        // ✅ 치명적 에러 감지 - 재시도 불가능한 에러는 즉시 종료
-        // ⚠️ [2026-01-21] 'detached Frame'은 복구 가능하므로 치명적 에러 목록에서 제외
-        const fatalErrors = [
-          'Target closed',
-          'Protocol error',
-          'Session closed',
-          'Connection closed',
-          'Execution context was destroyed',
-          'Cannot find context',
-          'Page is closed',
-          'Browser is closed',
-          // 'detached Frame' 제외 - 프레임 재연결로 복구 가능
+        if (
+          isContentApplyOperation &&
+          (this as any).__editorMainBodyApplied === true &&
+          (this as any).__editorContentApplied !== true
+        ) {
+          this.log(`   ⚠️ ${operationName} tail 단계 오류 — 본문 전체 재실행 없이 상위 단계에서 마무리 실패로 처리합니다: ${errorMsg}`);
+          throw lastError;
+        }
+
+        const terminalErrors = [
           // [R11/A-4] 발행 미확인은 블라인드 재시도 시 이중 발행 위험 — 즉시 중단
           'PUBLISH_UNCONFIRMED',
           // [R8/A-2] 발행 모달이 열리지 않은 상태에서 계속 진행하면 카테고리/확인 버튼 오작동 위험
@@ -5990,14 +6129,40 @@ export class NaverBlogAutomation {
           'CATEGORY_NOT_FOUND',
           // [R6] 발행 직전 검사 차단은 콘텐츠 결함 — 재발행 반복은 무의미
           'PRE_PUBLISH_BLOCKED',
+          // Tail/hashtag failures happen after the main body is already in the
+          // editor. Retrying the whole writer risks duplicate body blocks.
+          'POST_TAIL_INCOMPLETE',
+          'HASHTAG_TAIL_NOT_READY',
+          'HASHTAG_APPLY_VERIFY_FAILED',
         ];
+        if (terminalErrors.some(fe => errorMsg.includes(fe))) {
+          this.log(`   ❌ ${operationName} 결정적 오류 (재시도 불가): ${errorMsg}`);
+          throw lastError;
+        }
 
-        const isFatalError = fatalErrors.some(fe => errorMsg.includes(fe));
+        const frameRecoverableErrors = [
+          'detached Frame',
+          'Protocol error',
+          'Execution context was destroyed',
+          'Cannot find context',
+        ];
+        const hardSessionErrors = [
+          'Target closed',
+          'Session closed',
+          'Connection closed',
+          'Page is closed',
+          'Browser is closed',
+        ];
+        const browserConnected = Boolean(this.browser && (this.browser as any).connected !== false);
+        const pageOpen = Boolean(this.page && !this.page.isClosed());
+        const isFrameRecoverableError = frameRecoverableErrors.some(fe => errorMsg.includes(fe));
+        const isHardSessionError = hardSessionErrors.some(fe => errorMsg.includes(fe));
 
-        // ✅ [2026-01-21] detached Frame 에러 발생 시 프레임 재연결 시도
-        const isDetachedFrameError = errorMsg.includes('detached Frame');
-        if (isDetachedFrameError && attempt < maxRetries) {
-          this.log(`   ⚠️ 프레임 분리 오류 발생: ${errorMsg.substring(0, 60)}...`);
+        // ✅ 네이버 SmartEditor iframe은 리치 붙여넣기/링크카드 변환 중 일시적으로
+        // detached/protocol 에러를 내는 경우가 있다. 브라우저와 page가 살아있으면
+        // 세션 종료로 단정하지 말고 frame을 재획득한 뒤 같은 창에서 재시도한다.
+        if ((isFrameRecoverableError || (isHardSessionError && browserConnected && pageOpen)) && attempt < maxRetries) {
+          this.log(`   ⚠️ 에디터 프레임/컨텍스트 오류 발생: ${errorMsg.substring(0, 80)}...`);
           this.log(`   🔄 프레임 재연결 시도 중...`);
           try {
             // ✅ [2026-03-05 FIX] mainFrame을 null로 리셋하여 강제 재연결
@@ -6019,7 +6184,7 @@ export class NaverBlogAutomation {
           }
         }
 
-        if (isFatalError) {
+        if (isHardSessionError || !browserConnected || !pageOpen) {
           this.log(`   ❌ ${operationName} 치명적 에러 (재시도 불가): ${errorMsg}`);
           throw new Error(`${operationName} 실패 - 브라우저 세션이 종료되었습니다. 다시 시작해주세요.`);
         }
@@ -6282,7 +6447,7 @@ export class NaverBlogAutomation {
       // ✅ 1. 기본 준비 (패널 닫기 등)
       await page.keyboard.press('Escape');
       await frame.evaluate(() => {
-        const panels = document.querySelectorAll('.se-popup, .se-panel, .se-layer, .se-modal');
+        const panels = document.querySelectorAll('.se-popup, .se-layer, .se-modal');
         panels.forEach(p => (p as HTMLElement).style.display = 'none');
       }).catch(() => { });
 
@@ -7021,66 +7186,306 @@ export class NaverBlogAutomation {
     }
   }
 
-  private async applyHashtagsInBody(hashtags: string[]): Promise<void> {
-    const frame = (await this.getAttachedFrame());
+  private async dismissEditorTransientPanels(page: Page, frame: Frame, reason: string): Promise<void> {
+    for (let i = 0; i < 2; i += 1) {
+      await page.keyboard.press('Escape').catch(() => undefined);
+      await this.delay(80);
+    }
+
+    const result = await frame.evaluate(() => {
+      const keywords = [
+        '추가할 컴포넌트를 선택하세요',
+        '사진 라이브러리',
+        '현재 문서구매 목록',
+        '팝업 닫기',
+      ];
+      const bodyText = document.body?.innerText || document.body?.textContent || '';
+      const insertPanelTextVisible = keywords.some((keyword) => bodyText.includes(keyword));
+      let clicked = 0;
+      let panelCount = 0;
+
+      const editorRoots = Array.from(document.querySelectorAll([
+        'article.se-components-wrap',
+        '.se-components-wrap',
+        '.se-main-container',
+        '.se-canvas',
+      ].join(','))) as HTMLElement[];
+      const isVisible = (element: HTMLElement): boolean => {
+        const rect = element.getBoundingClientRect();
+        const style = window.getComputedStyle(element);
+        return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && style.display !== 'none';
+      };
+      const isInsideEditorRoot = (element: HTMLElement): boolean => editorRoots.some((root) => root.contains(element));
+      const panels = Array.from(document.querySelectorAll([
+        '.se-popup',
+        '.se-layer',
+        '.se-modal',
+        '[role="dialog"]',
+        '[aria-modal="true"]',
+        '[class*="popup"]',
+        '[class*="modal"]',
+      ].join(','))) as HTMLElement[];
+
+      for (const panel of panels) {
+        if (!isVisible(panel) || isInsideEditorRoot(panel)) {
+          continue;
+        }
+        panelCount += 1;
+        const candidates = Array.from(panel.querySelectorAll([
+          'button',
+          '[role="button"]',
+          '[aria-label*="닫기"]',
+          '[title*="닫기"]',
+          '.se-popup-close-button',
+          '[class*="close"]',
+        ].join(','))) as HTMLElement[];
+
+        for (const candidate of candidates) {
+          if (!isVisible(candidate)) {
+            continue;
+          }
+          const label = [
+            candidate.innerText,
+            candidate.textContent,
+            candidate.getAttribute('aria-label'),
+            candidate.getAttribute('title'),
+            candidate.className,
+          ].join(' ');
+          if (/닫기|close|×|✕/i.test(label)) {
+            candidate.click();
+            clicked += 1;
+            break;
+          }
+        }
+      }
+
+      const active = document.activeElement as HTMLElement | null;
+      const activeText = (active?.innerText || active?.textContent || '').trim().slice(0, 80);
+      if (active && !active.closest('.se-section-text, .se-module-text, .se-text-paragraph, .se-component-text, .se-components-wrap')) {
+        active.blur();
+      }
+
+      return { insertPanelTextVisible, clicked, activeText, panelCount };
+    }).catch(() => ({ insertPanelTextVisible: false, clicked: 0, activeText: '', panelCount: 0 }));
+
+    if (result.insertPanelTextVisible || result.clicked > 0) {
+      this.log(`🔎 [TailFocus] ${reason}: 열린 에디터 패널 정리 (panel=${result.insertPanelTextVisible}, transient=${result.panelCount}, close=${result.clicked})`);
+    }
+  }
+
+  private async applyHashtagsInBody(
+    hashtags: string[],
+    options: { ensureTailReady?: boolean; leadingEnterCount?: number; previousPostTailInserted?: boolean } = {}
+  ): Promise<void> {
+    let frame = (await this.getAttachedFrame());
     const page = this.ensurePage();
     this.ensureNotCancelled();
-    if (!hashtags.length) {
+
+    const hashtagList = hashtags
+      .map(tag => {
+        const sanitized = tag.replace(/^#/, '').trim();
+        return sanitized ? `#${sanitized}` : '';
+      })
+      .filter(Boolean);
+
+    if (!hashtagList.length) {
       return;
     }
 
-    // ✅ 안전 검사: 열린 패널/모달 닫기 (ABOUT, 지도, 함수 등 방지)
-    for (let i = 0; i < 2; i++) {
-      await page.keyboard.press('Escape');
-      await this.delay(50);
-    }
+    const refreshHashtagFrameIfUnreadable = async (stage: string): Promise<void> => {
+      const stats = await collectPrePublishStats(frame).catch(() => null);
+      if (stats && !isEditorBodyUnreadable(stats)) {
+        return;
+      }
 
-    // 열린 패널 강제 닫기
-    await frame.evaluate(() => {
-      const panels = document.querySelectorAll('.se-popup, .se-panel, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
-      panels.forEach(panel => {
-        if (panel instanceof HTMLElement && panel.style.display !== 'none') {
-          const closeBtn = panel.querySelector('button[class*="close"], .close, [aria-label*="닫기"]');
-          if (closeBtn instanceof HTMLElement) {
-            closeBtn.click();
-          }
-        }
-      });
-    }).catch(() => { });
+      this.log(`[TailFrame] ${stage}: editor body unreadable, reacquiring #mainFrame before hashtag tail.`);
+      this.mainFrame = null;
+      frame = await this.getAttachedFrame();
+
+      const refreshedStats = await collectPrePublishStats(frame).catch(() => null);
+      this.log(
+        `[TailFrame] ${stage}: refreshed stats body=${refreshedStats?.bodyChars ?? -1}, ` +
+        `cards=${refreshedStats?.linkCardCount ?? -1}, dividers=${refreshedStats?.dividerCount ?? -1}`
+      );
+    };
+
+    const recollectHashtagStatsAfterUnreadable = async (
+      stage: string,
+      expectations: PrePublishExpectations,
+      extra: Record<string, unknown> = {}
+    ): Promise<PrePublishStats | null> => {
+      let stats = await collectPrePublishStats(frame).catch(() => null);
+      if (!isEditorBodyUnreadable(stats)) {
+        return stats;
+      }
+
+      if (stats) {
+        this.emitTailDebugSnapshot(`${stage}-body-unreadable`, expectations, stats, extra);
+      }
+      this.log(`⚠️ ${stage}: 네이버 에디터 본문을 0자로 읽었습니다. 프레임 재획득 후 1회 재검증합니다.`);
+      await refreshHashtagFrameIfUnreadable(`${stage}-body-unreadable`);
+      stats = await collectPrePublishStats(frame).catch(() => null);
+      if (stats && isEditorBodyUnreadable(stats)) {
+        this.emitTailDebugSnapshot(`${stage}-body-still-unreadable`, expectations, stats, extra);
+        this.log(
+          `⚠️ ${stage}: 재검증 후에도 본문 판독 불가입니다. ` +
+          '해시태그 입력 명령은 완료됐으므로 누락 오판을 막기 위해 검증 차단만 건너뜁니다.'
+        );
+      }
+      return stats;
+    };
+
+    await this.dismissEditorTransientPanels(page, frame, 'before-hashtag-tail-ready');
+    await refreshHashtagFrameIfUnreadable('before-hashtag-tail-ready');
 
     this.log('🔄 해시태그를 본문에 입력합니다...');
 
     try {
-      // 해시태그 목록 준비
-      const hashtagList = hashtags
-        .map(tag => {
-          const sanitized = tag.replace(/^#/, '').trim();
-          return sanitized ? `#${sanitized}` : '';
-        })
-        .filter(Boolean);
+      const debugExpectations: PrePublishExpectations = {
+        minBodyChars: 0,
+        expectedImageMin: 0,
+        expectedLinkCardMin: 0,
+        expectedDividerMin: 0,
+        expectedHashtags: hashtagList,
+      };
 
-      if (hashtagList.length > 0) {
-        // ✅ 속도 최적화: 해시태그 2-3개씩 묶어서 입력
-        const batchSize = 3;
-        for (let i = 0; i < hashtagList.length; i += batchSize) {
-          const batch = hashtagList.slice(i, i + batchSize).join(' ');
-
-          // 배치 입력 (delay 40ms - 한글 조합에 충분하면서 빠름)
-          await safeKeyboardType(page, batch, { delay: 40 });
-
-          // 한글 조합 완료 대기 (최소화)
-          await this.delay(80);
-
-          // 다음 배치가 있으면 공백 추가
-          if (i + batchSize < hashtagList.length) {
-            await safeKeyboardType(page, ' ', { delay: 20 });
-          }
+      const allowEmptyTailParagraph = options.previousPostTailInserted === true;
+      const allowBestEffortTailWithoutPreviousPost = options.previousPostTailInserted !== true;
+      const ensureRequiredTailReady = async (stage: string): Promise<void> => {
+        await refreshHashtagFrameIfUnreadable(`ensure-${stage}-initial`);
+        const firstReady = await ensureTailTypingReady(page, frame, (message: string) => this.log(message), {
+          allowEmptyParagraph: allowEmptyTailParagraph,
+        });
+        if (firstReady) {
+          return;
         }
 
+        this.log(`⚠️ 해시태그 입력 전 본문 tail 커서 검증 실패(${stage}) → 패널 정리 후 재확보합니다.`);
+        await this.dismissEditorTransientPanels(page, frame, `hashtag-tail-not-ready-${stage}`);
+        await this.delay(220);
+        await refreshHashtagFrameIfUnreadable(`ensure-${stage}-retry`);
+
+        const secondReady = await ensureTailTypingReady(page, frame, (message: string) => this.log(message), {
+          allowEmptyParagraph: allowEmptyTailParagraph,
+        });
+        if (secondReady) {
+          return;
+        }
+
+        const stats = await collectPrePublishStats(frame).catch(() => null);
+        if (stats) {
+          this.emitTailDebugSnapshot('apply-hashtags-tail-not-ready', debugExpectations, stats, {
+            hashtagList,
+            options,
+            stage,
+          });
+        }
+
+        const diagnostics = stats
+          ? formatHashtagPresenceDiagnostics(stats, debugExpectations)
+          : 'SmartEditor 본문 tail 커서를 검증하지 못했습니다.';
+        if (allowBestEffortTailWithoutPreviousPost) {
+          this.log(
+            `⚠️ 해시태그 tail 커서 검증 실패(${stage}) — 이전글 카드가 없는 흐름이므로 ` +
+            `ensureTailTypingReady가 남긴 최후 커서 위치에서 해시태그 입력을 계속합니다.`
+          );
+          return;
+        }
+        throw new Error(`HASHTAG_TAIL_NOT_READY:${stage}:${diagnostics}`);
+      };
+
+      if (options.ensureTailReady === true) {
+        await ensureRequiredTailReady('before-type');
+      }
+
+      const leadingEnterCount = Math.max(0, Math.min(8, options.leadingEnterCount ?? 0));
+      for (let i = 0; i < leadingEnterCount; i += 1) {
+        await page.keyboard.press('Enter');
+        await this.delay(80);
+        await this.dismissEditorTransientPanels(page, frame, `hashtag-leading-enter-${i + 1}`);
+      }
+      if (leadingEnterCount > 0 && options.ensureTailReady === true && allowEmptyTailParagraph) {
+        await this.dismissEditorTransientPanels(page, frame, 'after-hashtag-leading-enters');
+        await ensureRequiredTailReady('after-gap');
+      }
+
+      if (hashtagList.length > 0) {
+        const beforeStats = await collectPrePublishStats(frame).catch(() => null);
+        if (beforeStats) {
+          this.emitTailDebugSnapshot('apply-hashtags-before-type', debugExpectations, beforeStats, {
+            hashtagList,
+            options,
+          });
+        }
+
+        const typeHashtagBatch = async (tags: string[]): Promise<void> => {
+          const batchSize = 3;
+          for (let i = 0; i < tags.length; i += batchSize) {
+            const batch = tags.slice(i, i + batchSize).join(' ');
+            await safeKeyboardType(page, batch, { delay: 40 });
+            await this.delay(80);
+            if (i + batchSize < tags.length) {
+              await safeKeyboardType(page, ' ', { delay: 20 });
+            }
+          }
+        };
+
+        await typeHashtagBatch(hashtagList);
+
         this.log(`✅ 해시태그 입력 완료: ${hashtagList.join(' ')}`);
+        await this.delay(300);
+        const afterStats = await recollectHashtagStatsAfterUnreadable('apply-hashtags-after-type', debugExpectations, {
+          hashtagList,
+          options,
+        });
+        if (afterStats) {
+          const stillMissing = getMissingExpectedHashtags(afterStats, debugExpectations);
+          this.emitTailDebugSnapshot('apply-hashtags-after-type', debugExpectations, afterStats, {
+            hashtagList,
+            options,
+            stillMissing,
+          });
+          if (stillMissing.length > 0 && isEditorBodyUnreadable(afterStats)) {
+            return;
+          }
+          if (stillMissing.length > 0 && options.ensureTailReady === true) {
+            this.log(`🔁 해시태그 1차 입력 검증 실패 → 꼬리 재확보 후 누락분 재입력: ${stillMissing.map(tag => `#${tag}`).join(' ')}`);
+            await this.dismissEditorTransientPanels(page, frame, 'hashtag-verify-retry');
+            await ensureRequiredTailReady('retry-before-type');
+            await typeHashtagBatch(stillMissing.map(tag => `#${tag}`));
+            await this.delay(300);
+
+            const retryStats = await recollectHashtagStatsAfterUnreadable('apply-hashtags-after-retry', debugExpectations, {
+              hashtagList,
+              options,
+              firstMissing: stillMissing,
+            });
+            if (retryStats) {
+              const retryMissing = getMissingExpectedHashtags(retryStats, debugExpectations);
+              this.emitTailDebugSnapshot('apply-hashtags-after-retry', debugExpectations, retryStats, {
+                hashtagList,
+                options,
+                firstMissing: stillMissing,
+                retryMissing,
+              });
+              if (retryMissing.length > 0 && isEditorBodyUnreadable(retryStats)) {
+                return;
+              }
+              if (retryMissing.length === 0) {
+                this.log('✅ 해시태그 재입력 검증 완료');
+                return;
+              }
+              throw new Error(`HASHTAG_APPLY_VERIFY_FAILED:${formatHashtagPresenceDiagnostics(retryStats, debugExpectations)}`);
+            }
+          }
+          if (stillMissing.length > 0) {
+            throw new Error(`HASHTAG_APPLY_VERIFY_FAILED:${formatHashtagPresenceDiagnostics(afterStats, debugExpectations)}`);
+          }
+        }
       }
     } catch (error) {
       this.log(`⚠️ 해시태그 입력 실패: ${(error as Error).message}`);
+      throw error;
     }
   }
 
@@ -7187,7 +7592,7 @@ export class NaverBlogAutomation {
 
     // 열린 패널 강제 닫기
     await frame.evaluate(() => {
-      const panels = document.querySelectorAll('.se-popup, .se-panel, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
+      const panels = document.querySelectorAll('.se-popup, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
       panels.forEach(panel => {
         if (panel instanceof HTMLElement && panel.style.display !== 'none') {
           const closeBtn = panel.querySelector('button[class*="close"], .close, [aria-label*="닫기"]');
@@ -7364,7 +7769,7 @@ export class NaverBlogAutomation {
 
       // 열린 패널 강제 닫기
       await frame.evaluate(() => {
-        const panels = document.querySelectorAll('.se-popup, .se-panel, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
+        const panels = document.querySelectorAll('.se-popup, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
         panels.forEach(panel => {
           if (panel instanceof HTMLElement && panel.style.display !== 'none') {
             const closeBtn = panel.querySelector('button[class*="close"], .close, [aria-label*="닫기"]');
@@ -7498,6 +7903,7 @@ export class NaverBlogAutomation {
     const resolvedOptions = this.resolveRunOptions(runOptions);
     let editorContentApplied = false;
     let postContentAppliedPublishFailure = false;
+    (this as any).__editorMainBodyApplied = false;
     (this as any).__editorContentApplied = false;
 
     // ✅ [2026-02-15 FIX] RunOptions에서 전달된 categoryName을 this.options에 동기화
@@ -7547,6 +7953,10 @@ export class NaverBlogAutomation {
           await this.applyPlainContent(resolvedOptions);
         }
       } catch (error) {
+        if ((this as any).__editorMainBodyApplied === true && (this as any).__editorContentApplied !== true) {
+          postContentAppliedPublishFailure = true;
+          throwPostTailIncompleteError(error);
+        }
         if (editorContentApplied || (this as any).__editorContentApplied === true) {
           postContentAppliedPublishFailure = true;
           throwPostContentAppliedPublishError(error);
@@ -7786,6 +8196,7 @@ export class NaverBlogAutomation {
     //   log() 함수가 [+N.Ns] 자동 추가 → main 로그·debug.log에서 hang 위치 즉시 식별 가능
     this._runStartMs = Date.now();
     let postContentAppliedPublishFailure = false;
+    (this as any).__editorMainBodyApplied = false;
     (this as any).__editorContentApplied = false;
     try {
     this.cancelRequested = false;
@@ -7932,6 +8343,10 @@ export class NaverBlogAutomation {
           await this.applyPlainContent(resolvedOptions);
         }
       } catch (error) {
+        if ((this as any).__editorMainBodyApplied === true && (this as any).__editorContentApplied !== true) {
+          postContentAppliedPublishFailure = true;
+          throwPostTailIncompleteError(error);
+        }
         if (editorContentApplied || (this as any).__editorContentApplied === true) {
           postContentAppliedPublishFailure = true;
           throwPostContentAppliedPublishError(error);

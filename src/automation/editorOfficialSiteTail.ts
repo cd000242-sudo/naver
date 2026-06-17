@@ -89,6 +89,88 @@ export type OfficialSiteTailResult = {
   cardReady: boolean;
 };
 
+const UNAVAILABLE_OFFICIAL_SITE_PATTERNS = [
+  /서비스를\s*찾을\s*수\s*없/i,
+  /요청하신\s*페이지를\s*찾을\s*수\s*없/i,
+  /페이지를\s*찾을\s*수\s*없/i,
+  /not\s*found/i,
+  /404\s*(?:error|not\s*found)?/i,
+] as const;
+
+export function normalizeOfficialSiteUrl(rawUrl?: string): string {
+  const trimmed = String(rawUrl || '').trim();
+  if (!trimmed || /\s/.test(trimmed)) return '';
+
+  try {
+    const url = new URL(trimmed);
+    if (!/^https?:$/.test(url.protocol)) return '';
+    // Link cards and Naver hashtags must not share a fragment tail.
+    url.hash = '';
+    return url.toString();
+  } catch {
+    return '';
+  }
+}
+
+function isGovServiceInfoUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return /(^|\.)gov\.kr$/i.test(parsed.hostname)
+      && /\/portal\/service\/serviceInfo\//i.test(parsed.pathname);
+  } catch {
+    return false;
+  }
+}
+
+export async function verifyOfficialSiteUrlAvailable(input: {
+  url: string;
+  fetchOfficialSite?: typeof fetch;
+}): Promise<{ ok: boolean; reason?: string }> {
+  const { url, fetchOfficialSite = globalThis.fetch } = input;
+  const normalized = normalizeOfficialSiteUrl(url);
+  if (!normalized) return { ok: false, reason: 'invalid-url' };
+
+  if (typeof fetchOfficialSite !== 'function') {
+    return isGovServiceInfoUrl(normalized)
+      ? { ok: false, reason: 'gov-service-info-unverified' }
+      : { ok: true };
+  }
+
+  const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timeout = controller
+    ? setTimeout(() => controller.abort(), 6000)
+    : null;
+
+  try {
+    const response = await fetchOfficialSite(normalized, {
+      method: 'GET',
+      redirect: 'follow',
+      signal: controller?.signal,
+      headers: {
+        'user-agent': 'Mozilla/5.0 BetterLifeNaver/official-site-check',
+      },
+    } as RequestInit);
+    if (timeout) clearTimeout(timeout);
+
+    if (!response.ok) {
+      return { ok: false, reason: `http-${response.status}` };
+    }
+
+    const html = await response.text().catch(() => '');
+    const sample = html.slice(0, 120000);
+    if (UNAVAILABLE_OFFICIAL_SITE_PATTERNS.some(pattern => pattern.test(sample))) {
+      return { ok: false, reason: 'unavailable-page-text' };
+    }
+
+    return { ok: true };
+  } catch (error) {
+    if (timeout) clearTimeout(timeout);
+    return isGovServiceInfoUrl(normalized)
+      ? { ok: false, reason: `gov-service-info-check-failed:${(error as Error).message}` }
+      : { ok: true, reason: `check-skipped:${(error as Error).message}` };
+  }
+}
+
 async function getDefaultOfficialSiteFinder(): Promise<FindRelevantOfficialSite> {
   const { findRelevantOfficialSite } = await import('../contentGenerator.js');
   return findRelevantOfficialSite as FindRelevantOfficialSite;
@@ -103,6 +185,7 @@ export async function insertOfficialSiteTailBlock(input: {
   noCtaMode?: boolean;
   random?: () => number;
   findRelevantOfficialSite?: FindRelevantOfficialSite;
+  fetchOfficialSite?: typeof fetch;
 }): Promise<OfficialSiteTailResult> {
   const {
     self,
@@ -113,6 +196,7 @@ export async function insertOfficialSiteTailBlock(input: {
     noCtaMode = false,
     random,
     findRelevantOfficialSite,
+    fetchOfficialSite,
   } = input;
 
   if (!shouldSearchOfficialSiteTail({ title, hashtags })) {
@@ -130,18 +214,28 @@ export async function insertOfficialSiteTailBlock(input: {
       bodyText?.substring(0, 500),
     );
 
-    if (!siteResult.success || !siteResult.url) {
+    const normalizedUrl = normalizeOfficialSiteUrl(siteResult.url);
+    if (!siteResult.success || !normalizedUrl) {
       self.log?.(`   ⚠️ [공식사이트] 적합한 사이트 없음 → 건너뜀`);
       return { attempted: true, inserted: false, cardReady: false };
     }
 
-    self.log?.(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${siteResult.url})`);
+    const availability = await verifyOfficialSiteUrlAvailable({
+      url: normalizedUrl,
+      fetchOfficialSite,
+    });
+    if (!availability.ok) {
+      self.log?.(`   ⚠️ [공식사이트] 서비스 없음/오류 페이지로 판단되어 삽입 건너뜀 (${availability.reason})`);
+      return { attempted: true, inserted: false, cardReady: false };
+    }
+
+    self.log?.(`   ✅ [공식사이트] 검증 완료: ${siteResult.siteName} (${normalizedUrl})`);
 
     const { cardReady } = await insertTailLinkCardBlock({
       self,
       page,
       label: pickOfficialSiteHook(random),
-      url: siteResult.url,
+      url: normalizedUrl,
     });
 
     self.log?.(`   ✅ [공식사이트] 관련 사이트 바로가기 삽입 완료: ${siteResult.siteName}`);

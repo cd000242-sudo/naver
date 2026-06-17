@@ -99,6 +99,93 @@ function resolveFallbackHashtags(structuredContent, formData) {
     })
         .slice(0, 5);
 }
+function compactTailDebugText(value, maxLength = 700) {
+    const text = String(value ?? '');
+    return text.length > maxLength ? text.slice(-maxLength) : text;
+}
+function parsePrePublishMissingHashtags(errorMsg) {
+    const message = String(errorMsg || '');
+    const match = message.match(/hashtag-presence\(([^)]*)\)/);
+    const detail = match?.[1] || '';
+    const missingMarker = '\uc2e4\uc81c \ub204\ub77d:';
+    const missingIndex = detail.indexOf(missingMarker);
+    if (missingIndex < 0) {
+        return [];
+    }
+    return splitHashtagCandidates(detail.slice(missingIndex + missingMarker.length));
+}
+function parseBackendHashtagDebug(errorMsg) {
+    const message = String(errorMsg || '');
+    const marker = 'HASHTAG_DEBUG:';
+    const markerIndex = message.indexOf(marker);
+    if (markerIndex < 0) {
+        return null;
+    }
+    const jsonText = message.slice(markerIndex + marker.length).trim();
+    try {
+        return JSON.parse(jsonText);
+    }
+    catch {
+        return {
+            parseFailed: true,
+            raw: jsonText.slice(0, 900),
+        };
+    }
+}
+function buildRendererPublishTailDebug(payload, errorMsg) {
+    const structuredContent = payload?.structuredContent || {};
+    const expectedHashtags = splitHashtagCandidates(
+        payload?.hashtags || structuredContent?.hashtags || payload?.formDataHashtags || []
+    );
+    const content = String(payload?.content || structuredContent?.bodyPlain || structuredContent?.content || '');
+    const backendHashtagDebug = parseBackendHashtagDebug(errorMsg);
+    const missingFromError = parsePrePublishMissingHashtags(errorMsg);
+    const bodyHashtagStatus = expectedHashtags.map((tag) => ({
+        tag,
+        hashPresent: content.includes(`#${tag}`),
+        plainPresent: content.includes(tag),
+    }));
+    return {
+        title: String(payload?.title || structuredContent?.selectedTitle || structuredContent?.title || '').slice(0, 120),
+        publishMode: payload?.publishMode,
+        contentMode: payload?.contentMode,
+        expectedHashtags,
+        missingFromError: missingFromError.length > 0 ? missingFromError : backendHashtagDebug?.missingHashtags || [],
+        backendHashtagDebug,
+        bodyHashtagStatus,
+        contentChars: content.length,
+        contentTail: compactTailDebugText(content),
+        previousPostTitle: payload?.previousPostTitle || '',
+        previousPostUrl: payload?.previousPostUrl || '',
+        ctaPosition: payload?.ctaPosition || '',
+        ctasCount: Array.isArray(payload?.ctas) ? payload.ctas.length : 0,
+        generatedImagesCount: Array.isArray(payload?.generatedImages) ? payload.generatedImages.length : 0,
+        imageMode: payload?.imageMode,
+        skipImages: payload?.skipImages === true,
+    };
+}
+function emitRendererPublishTailDebug(stage, payload, extra = {}) {
+    try {
+        const errorMsg = extra?.errorMsg || extra?.apiError || '';
+        const diagnostics = buildRendererPublishTailDebug(payload, errorMsg);
+        const line = `[TailDebug] ${JSON.stringify({
+            scope: 'renderer-publish',
+            stage,
+            ...diagnostics,
+            ...extra,
+        })}`;
+        console.warn(line);
+        if (String(stage).includes('error') && diagnostics.missingFromError?.length > 0) {
+            const logFn = (typeof window !== 'undefined' && typeof window.appendLog === 'function')
+                ? window.appendLog
+                : (typeof appendLog === 'function' ? appendLog : null);
+            logFn?.(`🧭 [TailDebug] 해시태그 누락 진단: ${diagnostics.missingFromError.map((tag) => `#${tag}`).join(' ')} / cause=${diagnostics.backendHashtagDebug?.probableCause || 'unknown'}`);
+        }
+    }
+    catch (error) {
+        console.warn('[TailDebug] renderer emit failed', error?.message || error);
+    }
+}
 function cloneFullAutoContentForRetry(content) {
     try {
         return JSON.parse(JSON.stringify(content));
@@ -2587,7 +2674,8 @@ async function closeBrowserForPublishRetry(payload) {
     }
 }
 function isPostContentAppliedPublishError(errorMsg) {
-    return String(errorMsg || '').includes('POST_CONTENT_APPLIED');
+    const message = String(errorMsg || '');
+    return message.includes('POST_CONTENT_APPLIED') || message.includes('POST_TAIL_INCOMPLETE');
 }
 function blockPostContentAppliedPublishRetry(errorMsg) {
     if (!isPostContentAppliedPublishError(errorMsg)) {
@@ -3079,6 +3167,10 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         includeThumbnailText: formData.includeThumbnailText ?? false,
         skipBotBackoff: formData._semiAutoMode === true,
     };
+    emitRendererPublishTailDebug('renderer-payload-before-runAutomation', payload, {
+        formHashtags: splitHashtagCandidates(formData?.hashtags || formData?.generatedHashtags || []),
+        structuredHashtags: splitHashtagCandidates(structuredContent?.hashtags || []),
+    });
     if (formData.publishMode === 'schedule') {
         if (!currentPostId) {
             appendLog('⚠️ 글 ID가 없습니다. 자동으로 저장합니다...');
@@ -3134,6 +3226,11 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     });
     if (!apiResponse.success) {
         const errorMsg = apiResponse.error || '블로그 발행 실패';
+        emitRendererPublishTailDebug('renderer-runAutomation-api-error', payload, {
+            errorMsg,
+            apiSuccess: apiResponse.success,
+            responseKeys: Object.keys(apiResponse || {}),
+        });
         if (blockPostContentAppliedPublishRetry(errorMsg)) {
             throw new Error(errorMsg);
         }
@@ -3176,6 +3273,13 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     }
     else if (!apiResponse.data?.success) {
         const errorMsg = apiResponse.data?.message || apiResponse.error || '블로그 발행 실패';
+        emitRendererPublishTailDebug('renderer-runAutomation-data-error', payload, {
+            errorMsg,
+            apiSuccess: apiResponse.success,
+            dataSuccess: apiResponse.data?.success,
+            responseKeys: Object.keys(apiResponse || {}),
+            dataKeys: Object.keys(apiResponse.data || {}),
+        });
         if (errorMsg.includes('이미 자동화가 실행 중')) {
             appendLog('⚠️ 이전 자동화가 아직 실행 중입니다. 발행이 실행되지 않았습니다.');
             appendLog('💡 잠시 후 다시 시도하거나, 브라우저 닫기 후 재시도해주세요.');
@@ -3224,6 +3328,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     }
     const automationResult = apiResponse.data;
     window._lastPublishOutcome = 'success';
+    emitRendererPublishTailDebug('renderer-runAutomation-success', payload, {
+        resultKeys: Object.keys(automationResult || {}),
+    });
     showUnifiedProgress(98, '발행 완료 확인...', '블로그 발행이 완료되었는지 확인하고 있습니다.');
     setTimeout(() => {
         showUnifiedProgress(100, '발행 완료!', '🎉 블로그 발행이 성공적으로 완료되었습니다!');

@@ -242,7 +242,7 @@ export async function insertCtaLink(
 
     // 열린 패널 강제 닫기
     await frame.evaluate(() => {
-        const panels = document.querySelectorAll('.se-popup, .se-panel, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
+        const panels = document.querySelectorAll('.se-popup, .se-layer, .se-modal, [class*="popup"], [class*="layer"]');
         panels.forEach((panel: any) => {
             if (panel instanceof HTMLElement && panel.style.display !== 'none') {
                 const closeBtn = panel.querySelector('button[class*="close"], .close, [aria-label*="닫기"]');

@@ -16,6 +16,12 @@ describe('classifyPublishFailure', () => {
       retryable: false,
       userActionRequired: true,
     });
+
+    expect(classifyPublishFailure('POST_TAIL_INCOMPLETE: 이전글 엮기 단계에서 브라우저 세션이 종료되었습니다.')).toEqual({
+      code: 'PUBLISH_CONDITION',
+      retryable: false,
+      userActionRequired: true,
+    });
   });
 
   it('classifies localized browser-session and editor-ready failures as retryable', () => {
