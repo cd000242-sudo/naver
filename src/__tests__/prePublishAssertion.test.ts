@@ -10,6 +10,7 @@ import {
   getMissingExpectedHashtags,
   isEditorChromeOnlyText,
   isEditorBodyUnreadable,
+  selectPrePublishBodyText,
   type PrePublishStats,
 } from '../automation/prePublishAssertion';
 
@@ -93,6 +94,34 @@ describe('findLeakedMarkers', () => {
 
   it('returns empty for clean published text', () => {
     expect(findLeakedMarkers('깨끗한 본문입니다. 구분선 ━━━ 도 마커가 아닙니다.')).toEqual([]);
+  });
+});
+
+describe('selectPrePublishBodyText', () => {
+  it('prefers the complete editor root over a non-empty partial component snapshot', () => {
+    const fullBody = Array.from({ length: 80 }, (_, index) => `完整 본문 문장 ${index + 1}입니다.`).join('\n');
+    const partialTail = '이전글 후킹 문구\nhttps://blog.naver.com/example\n#태그1 #태그2';
+
+    const selected = selectPrePublishBodyText({
+      componentText: partialTail,
+      rootText: fullBody,
+      fallbackText: '',
+    });
+
+    expect(selected.source).toBe('root-text');
+    expect(selected.text).toBe(fullBody);
+    expect(selected.text.length).toBeGreaterThan(partialTail.length * 5);
+  });
+
+  it('keeps component text when it is the most complete valid snapshot', () => {
+    const selected = selectPrePublishBodyText({
+      componentText: '첫 문단입니다.\n둘째 문단입니다.\n셋째 문단입니다.',
+      rootText: '첫 문단입니다.',
+      fallbackText: '',
+    });
+
+    expect(selected.source).toBe('component-text');
+    expect(selected.text).toContain('셋째 문단');
   });
 });
 
@@ -206,8 +235,10 @@ describe('getMissingExpectedHashtags', () => {
     expect(fn).toMatch(/componentText/);
     expect(fn).toMatch(/bodySource/);
     expect(fn).toMatch(/fallbackText/);
+    expect(fn).toMatch(/selectPrePublishBodyText\(raw\)/);
     expect(fn).toMatch(/contenteditable="true"/);
     expect(fn).not.toMatch(/document\.body/);
+    expect(fn).not.toMatch(/componentText\.trim\(\)\s*\?\s*componentText/);
   });
 
   it('does not treat normal SmartEditor se-panel layout wrappers as transient popups', () => {
@@ -335,6 +366,8 @@ describe('pre-publish hashtag repair wiring', () => {
     expect(code).toMatch(/hashtag-repair-before/);
     expect(code).toMatch(/pre-publish-blocked/);
     expect(code).toMatch(/bodyTail/);
+    expect(code).toMatch(/bodySource:\s*stats\.bodySource/);
+    expect(code).toMatch(/bodyCandidateChars:\s*stats\.bodyCandidateChars/);
     expect(code).toMatch(/probableCause/);
     expect(code).toMatch(/bodyHashtagStatus/);
     expect(code).toMatch(/console\.warn\(line\)/);

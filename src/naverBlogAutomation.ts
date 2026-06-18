@@ -4660,6 +4660,8 @@ export class NaverBlogAutomation {
         missingHashtags,
         plainOccurrences,
         bodyChars: stats.bodyChars,
+        bodySource: stats.bodySource,
+        bodyCandidateChars: stats.bodyCandidateChars,
         imageCount: stats.imageCount,
         linkCardCount: stats.linkCardCount,
         dividerCount: stats.dividerCount,

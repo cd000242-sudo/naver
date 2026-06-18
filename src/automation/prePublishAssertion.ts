@@ -27,6 +27,12 @@ export interface PrePublishStats {
   bodyText?: string;
   /** Where the body text came from, for publish-gate diagnostics. */
   bodySource?: string;
+  /** Candidate lengths used when choosing the most complete editor snapshot. */
+  bodyCandidateChars?: {
+    componentText: number;
+    rootText: number;
+    fallbackText: number;
+  };
 }
 
 export interface PrePublishCheck {
@@ -39,6 +45,17 @@ export interface PrePublishCheck {
 export interface PrePublishReport {
   pass: boolean;
   checks: PrePublishCheck[];
+}
+
+export interface PrePublishBodyCandidates {
+  componentText?: string;
+  rootText?: string;
+  fallbackText?: string;
+}
+
+export interface SelectedPrePublishBody {
+  text: string;
+  source: 'component-text' | 'root-text' | 'fallback-text' | 'empty';
 }
 
 export interface HashtagPresenceDiagnostic {
@@ -294,6 +311,27 @@ export function isEditorChromeOnlyText(text: string, bodyChars = text.replace(/\
 // [SPEC-STABILITY-2026 R6] 단계적 차단: 의미가 에디터 안에서 결정되는 검사만
 // 차단 대상. 링크카드/구분선은 네이버 서버 변환에 의존해 오탐 여지가 있어
 // 라이브 오탐 데이터가 쌓일 때까지 관찰 유지.
+export function selectPrePublishBodyText(
+  candidates: PrePublishBodyCandidates
+): SelectedPrePublishBody {
+  const ranked = [
+    { source: 'component-text' as const, text: candidates.componentText || '' },
+    { source: 'root-text' as const, text: candidates.rootText || '' },
+    { source: 'fallback-text' as const, text: candidates.fallbackText || '' },
+  ]
+    .map((candidate) => ({
+      ...candidate,
+      normalizedLength: candidate.text.replace(/\s+/g, ' ').trim().length,
+    }))
+    .filter((candidate) => candidate.normalizedLength > 0)
+    .sort((left, right) => right.normalizedLength - left.normalizedLength);
+
+  const best = ranked[0];
+  return best
+    ? { text: best.text, source: best.source }
+    : { text: '', source: 'empty' };
+}
+
 export const BLOCKING_CHECKS: ReadonlySet<string> = new Set([
   'body-min-chars',
   'image-count',
@@ -418,18 +456,6 @@ export async function collectPrePublishStats(
         .filter((text, index, all) => all.indexOf(text) === index)
         .join('\n')
       : '';
-    const text = componentText.trim()
-      ? componentText
-      : cleanRootText.trim()
-        ? cleanRootText
-        : fallbackText;
-    const source = componentText.trim()
-      ? 'component-text'
-      : cleanRootText.trim()
-        ? 'root-text'
-        : fallbackText.trim()
-          ? 'fallback-text'
-          : 'empty';
     const searchScope: ParentNode = root || document;
 
     const imageCount = Array.from(searchScope.querySelectorAll(
@@ -455,14 +481,17 @@ export async function collectPrePublishStats(
       });
     }
 
-    const dividerTextRuns = (text.match(/━{10,}/g) || []).length;
+    const dividerSourceText = [componentText, cleanRootText, fallbackText]
+      .sort((left, right) => normalizeText(right).length - normalizeText(left).length)[0] || '';
+    const dividerTextRuns = (dividerSourceText.match(/━{10,}/g) || []).length;
     const dividerComponents = Array.from(searchScope.querySelectorAll(
       '[class*="horizontalLine"], [class*="horizontal-line"], hr'
     )).filter((el) => isVisibleElement(el)).length;
 
     return {
-      text,
-      source,
+      componentText,
+      rootText: cleanRootText,
+      fallbackText,
       imageCount,
       linkCardCount: cardRoots.size,
       dividerCount: dividerTextRuns + dividerComponents,
@@ -472,14 +501,21 @@ export async function collectPrePublishStats(
     panelSelector: SMART_EDITOR_PANEL_SELECTOR,
     chromeMarkers: [...EDITOR_CHROME_ONLY_TEXT_MARKERS],
   });
+  const selectedBody = selectPrePublishBodyText(raw);
+  const normalizedLength = (text: string): number => text.replace(/\s+/g, ' ').trim().length;
 
   return {
-    bodyChars: raw.text.replace(/\s+/g, ' ').trim().length,
+    bodyChars: normalizedLength(selectedBody.text),
     imageCount: raw.imageCount,
     linkCardCount: raw.linkCardCount,
     dividerCount: raw.dividerCount,
-    leakedMarkers: findLeakedMarkers(raw.text, markers),
-    bodyText: raw.text,
-    bodySource: raw.source,
+    leakedMarkers: findLeakedMarkers(selectedBody.text, markers),
+    bodyText: selectedBody.text,
+    bodySource: selectedBody.source,
+    bodyCandidateChars: {
+      componentText: normalizedLength(raw.componentText),
+      rootText: normalizedLength(raw.rootText),
+      fallbackText: normalizedLength(raw.fallbackText),
+    },
   };
 }
