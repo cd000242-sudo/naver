@@ -272,6 +272,7 @@ ${referenceLock}
 
 REASONING: Analyze the topic "${heading}" and infer the most appropriate color palette, lighting, and composition. Do NOT rely on generic templates — create a unique scene tailored to this specific subject.
 PERSON RULE: ${personRule}
+ANATOMY: If any person appears, render anatomically correct hands with exactly five fingers per hand, natural limb and joint proportions, and a single head. Avoid extra/fused/missing fingers, extra hands or arms, and distorted faces.
 
 ${styleInstruction}
 Pure visual — no text, letters, or watermarks.`;
