@@ -223,8 +223,8 @@
                 생성기</button>
             <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="images">🖼️ 이미지
                 관리</button>
-            <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="schedule">📅 스케줄
-                관리</button>
+            <!-- [v2.11.x] 스케줄 관리 탭 제거 — 앱 스케줄 모드 폐지(네이버 예약발행으로 일원화).
+                 탭 패널/scheduleManager 백엔드는 도달 불가 dead로 남김(후속 정리). -->
         </div>
 
         <!-- 메인 대시보드 탭 -->
@@ -1529,41 +1529,8 @@
                     <div class="field" id="unified-schedule-container" style="display: none;">
                         <label for="unified-schedule-date">⏰ 예약 시간 설정</label>
 
-                        <!-- 예약 발행 타입 선택 (앱 스케줄 vs 네이버 서버 예약) -->
-                        <div
-                            style="margin-bottom: 1.5rem; padding: 1rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.05)); border: 2px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius-md);">
-                            <label for="unified-schedule-type"
-                                style="display: block; margin-bottom: 0.75rem; font-weight: 700; color: var(--text-strong); font-size: 1rem;">
-                                📋 예약 발행 타입 선택
-                            </label>
-                            <select id="unified-schedule-type" class="thumbnail-select"
-                                style="width: 100%; padding: 1rem; border: 2px solid var(--border-medium); border-radius: var(--radius-md); font-size: 1rem; background: var(--bg-primary); color: var(--text-strong); font-weight: 600; margin-bottom: 0.75rem;">
-                                <option value="app-schedule">📱 앱 스케줄 관리 (앱이 예약 저장 후 자동 발행)</option>
-                                <option value="naver-server">🌐 네이버 서버 예약 (네이버가 예약 관리 후 자동 발행)</option>
-                            </select>
-
-                            <!-- 앱 스케줄 관리 설명 -->
-                            <div id="schedule-type-app-desc"
-                                style="padding: 0.875rem; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 6px; font-size: 0.875rem; line-height: 1.6; color: var(--text-strong);">
-                                <div style="font-weight: 700; color: #10b981; margin-bottom: 0.5rem;">📱 앱 스케줄 관리</div>
-                                <div style="margin-bottom: 0.5rem;">✅ <strong>장점:</strong> 스케줄 관리 탭에서 예약 목록 확인 및 관리 가능
-                                </div>
-                                <div style="margin-bottom: 0.5rem;">⚠️ <strong>주의:</strong> 설정된 시간에 <strong
-                                        style="color: #ef4444;">앱이 실행 중</strong>이어야 발행됩니다</div>
-                                <div>💡 <strong>추천:</strong> 앱을 자주 사용하고 예약 목록을 관리하고 싶을 때</div>
-                            </div>
-
-                            <!-- 네이버 서버 예약 설명 -->
-                            <div id="schedule-type-naver-desc"
-                                style="display: none; padding: 0.875rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; border-radius: 6px; font-size: 0.875rem; line-height: 1.6; color: var(--text-strong);">
-                                <div style="font-weight: 700; color: #3b82f6; margin-bottom: 0.5rem;">🌐 네이버 서버 예약</div>
-                                <div style="margin-bottom: 0.5rem;">✅ <strong>장점:</strong> <strong
-                                        style="color: #10b981;">앱을
-                                        종료해도</strong> 네이버가 자동으로 발행</div>
-                                <div style="margin-bottom: 0.5rem;">⚠️ <strong>주의:</strong> 네이버 블로그에서만 예약 목록 확인 가능</div>
-                                <div>💡 <strong>추천:</strong> 앱을 종료하고도 발행이 보장되어야 할 때</div>
-                            </div>
-                        </div>
+                        <!-- [v2.11.x] 앱 스케줄 모드 제거 — 예약발행은 네이버 서버 예약으로 일원화
+                             (scheduleType 읽기는 전부 '|| naver-server' 폴백이라 select 제거 시 자동 수렴) -->
 
                         <!-- 네이버 서버 예약 방식 자동 선택 (드롭다운 제거됨 - 자동으로 최적 방식 선택) -->
                         <div id="naver-schedule-method-container"
