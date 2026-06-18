@@ -4362,6 +4362,12 @@ function initMainAccountSelector() {
         if (isRefreshingAccountList)
             return;
         const selectedId = accountSelector.value;
+        // Keyword/URL are account-independent content inputs. Switching the
+        // account (session clear or restore) must not wipe what the user typed,
+        // so snapshot them here and re-apply after the switch. The manual
+        // "세션 초기화" button still clears everything via clearSession().
+        const _preservedKeywords = document.getElementById('unified-keywords')?.value || '';
+        const _preservedUrls = Array.from(document.querySelectorAll('.unified-url-input')).map(el => el.value);
         if (currentAccountId) {
             accountSessions.set(currentAccountId, collectCurrentSession());
         }
@@ -4404,6 +4410,18 @@ function initMainAccountSelector() {
                 naverPwInput.value = '';
             toastManager.info('📝 직접 입력 모드로 전환되었습니다.');
         }
+        // Re-apply the user's keyword/URL after the switch so neither clearSession
+        // (fresh account) nor restoreSession (saved account) drops them. Only
+        // non-empty typed values override — empty fields can still be populated
+        // by a restored session.
+        const _kwInput = document.getElementById('unified-keywords');
+        if (_kwInput && _preservedKeywords)
+            _kwInput.value = _preservedKeywords;
+        const _urlInputs = document.querySelectorAll('.unified-url-input');
+        _preservedUrls.forEach((v, i) => {
+            if (v && _urlInputs[i])
+                _urlInputs[i].value = v;
+        });
     });
     addAccountBtn?.addEventListener('click', () => {
         if (typeof window.openAccountEditModal === 'function') {
