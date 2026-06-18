@@ -3358,28 +3358,14 @@ export function displayImageHeadingsWithPrompts(headings: any[]): void {
   const promptsContainer = document.getElementById('prompts-container') as HTMLDivElement;
   const promptsPlaceholder = document.getElementById('prompts-placeholder') as HTMLDivElement;
 
-  // ✅ 썸네일 텍스트 포함 옵션: 4개 버튼 아래 전용 영역에 렌더
+  // [v2.11.x] 중복 "썸네일 텍스트 포함" 제거: 여기서 동적 렌더하던 체크박스는
+  // 이미지 소스 선택 영역의 정적 체크박스(#thumbnail-text-option)와 같은 id라
+  // getElementById가 정적 것만 읽어 시각적 중복일 뿐이었다. 정적 체크박스를
+  // 단일 진실로 유지하고, 소제목 분석하기 아래 동적 클론은 제거한다.
   const thumbnailOptionHost = document.getElementById('thumbnail-text-option-host') as HTMLDivElement | null;
   if (thumbnailOptionHost) {
-    const existingChecked = (document.getElementById('thumbnail-text-option') as HTMLInputElement | null)?.checked ?? false;
-    thumbnailOptionHost.style.display = 'block';
-    thumbnailOptionHost.innerHTML = `
-      <div id="thumbnail-text-option-container" style="
-        background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
-        border: 1px solid rgba(245, 158, 11, 0.3);
-        border-radius: 12px;
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      ">
-        <input type="checkbox" id="thumbnail-text-option" ${existingChecked ? 'checked' : ''} style="width: 20px; height: 20px; cursor: pointer; accent-color: #f59e0b;">
-        <label for="thumbnail-text-option" style="cursor: pointer; font-weight: 600; color: var(--text-strong); display: flex; flex-direction: column; gap: 0.25rem;">
-          <span>🖼️ 썸네일 텍스트 포함</span>
-          <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">나노바나나프로: 이미지에 직접 텍스트 생성 / 그 외 엔진: SVG 오버레이</span>
-          </label>
-        </div>
-      `;
+    thumbnailOptionHost.style.display = 'none';
+    thumbnailOptionHost.innerHTML = '';
   }
 
   if (!promptsContainer || !promptsPlaceholder) return;
