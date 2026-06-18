@@ -508,6 +508,49 @@ export async function initImageManagementTab(): Promise<void> {
       }
     });
 
+    // [v2.11.x] 내 폴더 / 저장된 이미지 — AI 엔진 드롭다운에서 분리한 별도 버튼.
+    // 기존 드롭다운 'local-folder'/'saved' 분기의 소스 상태 설정을 그대로 복제.
+    const localFolderBtn = document.getElementById('image-source-local-folder-btn');
+    if (localFolderBtn && !localFolderBtn.hasAttribute('data-listener-added')) {
+      localFolderBtn.setAttribute('data-listener-added', 'true');
+      localFolderBtn.addEventListener('click', async () => {
+        try {
+          const result = await (window as any).api.selectFolder();
+          if (result && result.filePaths && result.filePaths.length > 0) {
+            const folderPath = result.filePaths[0];
+            localStorage.setItem('localFolderPath', folderPath);
+            (window as any).globalImageSource = 'local-folder';
+            localStorage.setItem('globalImageSource', 'local-folder');
+            localStorage.setItem('fullAutoImageSource', 'local-folder');
+            appendLog(`✅ 📂 내 폴더가 선택되었습니다: ${folderPath}`);
+          } else {
+            appendLog('⚠️ 폴더 선택이 취소되었습니다.');
+          }
+        } catch (e: any) {
+          appendLog(`❌ 폴더 선택 오류: ${e.message}`);
+        }
+      });
+    }
+    const savedImagesBtn = document.getElementById('image-source-saved-btn');
+    if (savedImagesBtn && !savedImagesBtn.hasAttribute('data-listener-added')) {
+      savedImagesBtn.setAttribute('data-listener-added', 'true');
+      savedImagesBtn.addEventListener('click', async () => {
+        const confirmed = window.confirm(
+          '⚠️ 저작권 경고\n\n' +
+          '저장된 이미지를 사용할 경우, 해당 이미지의 저작권 및 초상권 문제는 전적으로 사용자 본인이 책임져야 합니다.\n\n' +
+          '이미지 사용으로 인해 발생하는 모든 법적 책임은 사용자에게 있습니다.\n\n' +
+          '위 내용을 충분히 숙지하셨습니까?'
+        );
+        if (!confirmed) {
+          appendLog('⚠️ 저장된 이미지 사용이 취소되었습니다.');
+          return;
+        }
+        (window as any).globalImageSource = 'saved';
+        await showLocalImageManagementModal();
+        appendLog('✅ 저장된 이미지 모드가 선택되었습니다.');
+      });
+    }
+
     // 초기화: 저장된 설정 복원 (풀오토 설정 우선)
     // ✅ [2026-03-02 FIX] fullAutoImageSource 우선 읽기 → 풀오토 이미지 설정이 이미지 관리 탭에도 반영
     let savedSource = localStorage.getItem('fullAutoImageSource') || localStorage.getItem('globalImageSource');

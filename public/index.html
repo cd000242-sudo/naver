@@ -3751,8 +3751,6 @@
                             <option value="prodia" data-icon="⚡" data-price="Prodia API | $0.0025~$0.01/장">⚡ Prodia (API 키 필요)</option>
                             <!-- ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 (UI 자동화 · 로그인 필요) -->
                             <option value="dropshot" data-icon="🍌" data-price="Pro 구독자 무제한 · 추가비용 0원 | UI 자동화 · 로그인 필요" selected>🍌 리더스 나노바나나 무제한 (구독자 무제한 · 추가비용 0원)</option>
-                            <option value="local-folder" data-icon="📂" data-price="내 폴더에서 자동 매핑">📂 내 폴더 (로컬 이미지 자동 매핑)</option>
-                            <option value="saved" data-icon="📁" data-price="폴더에서 불러오기">📁 저장된 이미지 (폴더에서 불러오기)</option>
                         </select>
 
                         <!-- 선택된 소스 정보 배지 -->
@@ -3760,6 +3758,13 @@
                             style="padding: 0.5rem 0.875rem; background: linear-gradient(135deg, #03c75a, #02a94f); border-radius: 8px; font-size: 0.75rem; font-weight: 700; color: white; white-space: nowrap; min-width: 90px; text-align: center;">
                             선택됨 ✓
                         </div>
+                        <!-- [v2.11.x] 내 폴더 / 저장된 이미지 — AI 엔진 드롭다운에서 분리한 별도 버튼 -->
+                        <button type="button" id="image-source-local-folder-btn"
+                            style="padding: 0.5rem 0.75rem; background: linear-gradient(135deg, #4338ca, #6366f1); color: white; border: none; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap;"
+                            title="내 폴더의 로컬 이미지를 자동 매핑">📂 내 폴더</button>
+                        <button type="button" id="image-source-saved-btn"
+                            style="padding: 0.5rem 0.75rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; white-space: nowrap;"
+                            title="저장된 폴더에서 이미지 불러오기">📁 저장된 이미지</button>
                     </div>
 
 
