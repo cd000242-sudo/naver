@@ -121,44 +121,46 @@ export async function launchBrowser(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function isLoggedIn(page: any): Promise<boolean> {
   try {
-    // ✅ [v2.11.x] 정확한 로그인 신호 = 살아있는 Cognito 세션 JWT(idToken/accessToken)뿐.
-    //   직전 구현은 키 끝이 LastAuthUser|session|user|refreshToken 이어도 로그인으로
-    //   인정했는데, 이들은 로그아웃 후에도 localStorage/cookie에 남아(다음 로그인 편의)
-    //   false positive("로그인한 적 없는데 로그인 완료")를 냈다. idToken/accessToken은
-    //   signOut 시 제거되므로 이것만 + JWT 3-파트 형식 검증으로 판정한다. 쿠키 'session'
-    //   휴리스틱도 제거(로그아웃 상태에도 흔히 존재).
-    const result = await page.evaluate(() => {
+    // ✅ [v2.11.x] 정확한 로그인 신호 = 살아있는 Cognito 세션 토큰(idToken/accessToken).
+    //   라이브 확인 결과 dropshot은 이 토큰을 localStorage가 아니라 **쿠키**에 저장한다
+    //   (CognitoIdentityServiceProvider.<clientId>.<user>.idToken/accessToken). 따라서
+    //   localStorage·쿠키 양쪽을 본다. idToken/accessToken은 signOut 시 제거되지만
+    //   LastAuthUser/deviceKey/refreshToken 등은 "기기 기억"으로 잔존하므로 제외해야
+    //   false positive("로그아웃인데 로그인됨")가 안 난다. 느슨한 /session/ 매칭도 금지.
+    const loggedIn = await page.evaluate(() => {
       const isJwt = (v: string | null): boolean => {
         if (!v) return false;
         const parts = v.split('.');
         return parts.length === 3 && parts.every((p) => p.length > 0);
       };
-      const cognitoKeys: string[] = [];
-      let loggedIn = false;
+      const TOKEN_KEY = /CognitoIdentityServiceProvider\..+\.(idToken|accessToken)$/i;
       try {
         for (let i = 0; i < localStorage.length; i++) {
           const k = localStorage.key(i) || '';
-          if (/CognitoIdentityServiceProvider/i.test(k)) cognitoKeys.push(k);
-          if (
-            /CognitoIdentityServiceProvider\..+\.(idToken|accessToken)$/i.test(k) &&
-            isJwt(localStorage.getItem(k))
-          ) {
-            loggedIn = true;
-          }
+          if (TOKEN_KEY.test(k) && isJwt(localStorage.getItem(k))) return true;
         }
       } catch {
-        // localStorage 접근 불가 → 미로그인 취급
+        // localStorage 접근 불가
       }
-      return { loggedIn, cognitoKeys };
+      try {
+        for (const raw of (document.cookie || '').split(';')) {
+          const eq = raw.indexOf('=');
+          const name = (eq >= 0 ? raw.slice(0, eq) : raw).trim();
+          const val = eq >= 0 ? raw.slice(eq + 1).trim() : '';
+          if (!TOKEN_KEY.test(name)) continue;
+          let decoded = val;
+          try { decoded = decodeURIComponent(val); } catch { /* keep raw */ }
+          // 쿠키 값이 JWT면 확실. 인코딩/길이 변형이 있어도 토큰 쿠키 존재 + 긴 값이면
+          // 살아있는 세션으로 인정(이 쿠키는 로그아웃 시 제거됨).
+          if (isJwt(decoded) || val.length > 20) return true;
+        }
+      } catch {
+        // cookie 접근 불가
+      }
+      return false;
     });
-    // 진단(메인 stdout): 다음 시도에서 실제 Cognito 키 형식 확인용. 표준 키와 다르면
-    // 위 정규식을 그 형식으로 보정한다.
-    console.log(
-      `[Dropshot] isLoggedIn=${result.loggedIn} cognitoKeys=${JSON.stringify(result.cognitoKeys)}`,
-    );
-    return !!result.loggedIn;
-  } catch (e) {
-    console.log(`[Dropshot] isLoggedIn error: ${(e as Error).message?.slice(0, 80)}`);
+    return !!loggedIn;
+  } catch {
     return false;
   }
 }
