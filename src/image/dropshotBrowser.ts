@@ -121,37 +121,44 @@ export async function launchBrowser(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function isLoggedIn(page: any): Promise<boolean> {
   try {
-    // ✅ [SPEC-DROPSHOT-2026 2단계 보정] 정확한 로그인 신호 = AWS Cognito 인증 토큰.
-    //   dropshot은 Cognito(키트 §0)를 쓰며 로그인 시 localStorage에
-    //   `CognitoIdentityServiceProvider.<clientId>.<user>.idToken/accessToken` 를 저장한다.
-    //   이전 휴리스틱(마케팅 텍스트 / 프롬프트 textarea)은 미로그인 board에도 존재해
-    //   false positive("로그인한 적 없는데 완료" + 생성 0건)를 냈다.
-    const has = await page.evaluate(() => {
+    // ✅ [v2.11.x] 정확한 로그인 신호 = 살아있는 Cognito 세션 JWT(idToken/accessToken)뿐.
+    //   직전 구현은 키 끝이 LastAuthUser|session|user|refreshToken 이어도 로그인으로
+    //   인정했는데, 이들은 로그아웃 후에도 localStorage/cookie에 남아(다음 로그인 편의)
+    //   false positive("로그인한 적 없는데 로그인 완료")를 냈다. idToken/accessToken은
+    //   signOut 시 제거되므로 이것만 + JWT 3-파트 형식 검증으로 판정한다. 쿠키 'session'
+    //   휴리스틱도 제거(로그아웃 상태에도 흔히 존재).
+    const result = await page.evaluate(() => {
+      const isJwt = (v: string | null): boolean => {
+        if (!v) return false;
+        const parts = v.split('.');
+        return parts.length === 3 && parts.every((p) => p.length > 0);
+      };
+      const cognitoKeys: string[] = [];
+      let loggedIn = false;
       try {
         for (let i = 0; i < localStorage.length; i++) {
           const k = localStorage.key(i) || '';
+          if (/CognitoIdentityServiceProvider/i.test(k)) cognitoKeys.push(k);
           if (
-            /(CognitoIdentityServiceProvider|amplify|auth|token|user)/i.test(k) &&
-            /(idToken|accessToken|refreshToken|LastAuthUser|session|user)$/i.test(k)
+            /CognitoIdentityServiceProvider\..+\.(idToken|accessToken)$/i.test(k) &&
+            isJwt(localStorage.getItem(k))
           ) {
-            const v = localStorage.getItem(k);
-            if (v && v.length > 20) return true;
+            loggedIn = true;
           }
         }
       } catch {
-        // localStorage 접근 불가 시 미로그인 취급
+        // localStorage 접근 불가 → 미로그인 취급
       }
-      try {
-        if (/(cognito|amplify|idtoken|accesstoken|refreshtoken|session)/i.test(document.cookie || '')) {
-          return true;
-        }
-      } catch {
-        // cookie access can fail in rare browser states.
-      }
-      return false;
+      return { loggedIn, cognitoKeys };
     });
-    return !!has;
-  } catch {
+    // 진단(메인 stdout): 다음 시도에서 실제 Cognito 키 형식 확인용. 표준 키와 다르면
+    // 위 정규식을 그 형식으로 보정한다.
+    console.log(
+      `[Dropshot] isLoggedIn=${result.loggedIn} cognitoKeys=${JSON.stringify(result.cognitoKeys)}`,
+    );
+    return !!result.loggedIn;
+  } catch (e) {
+    console.log(`[Dropshot] isLoggedIn error: ${(e as Error).message?.slice(0, 80)}`);
     return false;
   }
 }
