@@ -2742,7 +2742,8 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: unknown) =>
     // ✅ [v2.7.62] config에서 AI 검증 + 글 생성 AI 라우팅 설정 로드
     const { loadConfig } = await import('./configManager.js');
     const cfg = await loadConfig();
-    const relevanceCheckEnabled = (cfg as any).imageRelevanceCheck === true;
+    // [v2.11.x] AI 이미지 관련성 검증 제거 — 항상 비활성 (UI 삭제, stale config 무시)
+    const relevanceCheckEnabled = false;
     const relevanceThreshold = Number((cfg as any).imageRelevanceThreshold ?? 60);
 
     // ✅ [v2.7.63] 글 1편 단위로 비용 누적 리셋
