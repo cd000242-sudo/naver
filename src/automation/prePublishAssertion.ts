@@ -308,6 +308,23 @@ export function isEditorChromeOnlyText(text: string, bodyChars = text.replace(/\
   return markerHits >= 2;
 }
 
+// [SPEC-STABILITY-2026 R6] Signal that a body read fell well short of what the
+// flow planned. A single live-editor read can be transient/partial (mid-reflow,
+// async card conversion), so the caller must NOT treat one short read as proof
+// of a truncated post. When this is true the caller settles + re-acquires the
+// frame and re-measures to confirm; it blocks only if the most complete snapshot
+// is still short — so genuine truncation is still caught. Zero-char / chrome-only
+// reads are handled separately by isEditorBodyUnreadable, so only positive
+// lengths are considered here.
+export function isPrePublishBodySuspiciouslyShort(
+  stats: PrePublishStats | null | undefined,
+  expectations: Pick<PrePublishExpectations, 'minBodyChars'>
+): boolean {
+  if (!stats) return false;
+  if (stats.bodyChars <= 0) return false;
+  return stats.bodyChars < expectations.minBodyChars;
+}
+
 // [SPEC-STABILITY-2026 R6] 단계적 차단: 의미가 에디터 안에서 결정되는 검사만
 // 차단 대상. 링크카드/구분선은 네이버 서버 변환에 의존해 오탐 여지가 있어
 // 라이브 오탐 데이터가 쌓일 때까지 관찰 유지.

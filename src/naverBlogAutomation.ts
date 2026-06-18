@@ -63,6 +63,7 @@ import {
   getHashtagPresenceDiagnostics,
   getMissingExpectedHashtags,
   isEditorBodyUnreadable,
+  isPrePublishBodySuspiciouslyShort,
   type PrePublishExpectations,
   type PrePublishStats,
 } from './automation/prePublishAssertion.js';
@@ -4715,6 +4716,31 @@ export class NaverBlogAutomation {
             this.log('[PrePublish] SmartEditor body read looks like toolbar/image chrome. Continuing publish instead of blocking on a false verification result.');
             this.emitTailDebugSnapshot('pre-publish-body-unreadable-fail-open', expectations, stats);
             return;
+          }
+          // [SPEC-STABILITY-2026 R6] 정의적 수정: 본문이 기대치보다 한참 짧게 읽히면
+          // 단발 판독을 진짜 누락으로 단정하지 않는다. 라이브 에디터는 리플로우/비동기
+          // 카드 변환 도중 일시적으로 부분만 읽힐 수 있으므로, 안정 대기 + 프레임 재획득으로
+          // 최대 3회 재측정해 '가장 완전한 스냅샷'(최대 bodyChars)을 확정한 뒤에만 판정한다.
+          // 재측정해도 여전히 짧으면 진짜 누락 → 그대로 차단(누락 발행 방지 유지).
+          if (this.options.prePublishObserveOnly !== true
+            && isPrePublishBodySuspiciouslyShort(stats, expectations)) {
+            const firstReadChars = stats.bodyChars;
+            for (let attempt = 1; attempt <= 3; attempt++) {
+              await this.delay(500);
+              this.mainFrame = null;
+              const settleFrame = await this.getAttachedFrame().catch(() => frame);
+              frame = settleFrame;
+              const retryStats = await collectPrePublishStats(settleFrame).catch(() => null);
+              if (retryStats && retryStats.bodyChars > stats.bodyChars) {
+                stats = retryStats;
+              }
+              if (!isPrePublishBodySuspiciouslyShort(stats, expectations)) break;
+            }
+            this.log(`[PrePublish] 짧은 본문 판독 재확인: ${firstReadChars} → ${stats.bodyChars}자 (안정 대기·프레임 재획득 후)`);
+            this.emitTailDebugSnapshot('pre-publish-short-read-resettle', expectations, stats, {
+              firstReadChars,
+              settledChars: stats.bodyChars,
+            });
           }
           let report = evaluatePrePublishReport(stats, expectations);
           this.log(formatPrePublishReport(report));

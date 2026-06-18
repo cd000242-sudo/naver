@@ -10,6 +10,7 @@ import {
   getMissingExpectedHashtags,
   isEditorChromeOnlyText,
   isEditorBodyUnreadable,
+  isPrePublishBodySuspiciouslyShort,
   selectPrePublishBodyText,
   type PrePublishStats,
 } from '../automation/prePublishAssertion';
@@ -122,6 +123,31 @@ describe('selectPrePublishBodyText', () => {
 
     expect(selected.source).toBe('component-text');
     expect(selected.text).toContain('셋째 문단');
+  });
+});
+
+describe('isPrePublishBodySuspiciouslyShort', () => {
+  it('flags a positive read that fell well short of the planned body', () => {
+    // The live failure: planned >=1282, editor read only 161 — a transient/partial
+    // read that must be re-confirmed, not treated as a truncated post.
+    expect(isPrePublishBodySuspiciouslyShort({ ...okStats, bodyChars: 161 }, { minBodyChars: 1282 })).toBe(true);
+  });
+
+  it('does not flag a read that meets the planned minimum', () => {
+    expect(isPrePublishBodySuspiciouslyShort({ ...okStats, bodyChars: 1300 }, { minBodyChars: 1282 })).toBe(false);
+  });
+
+  it('leaves zero-char / empty reads to isEditorBodyUnreadable', () => {
+    expect(isPrePublishBodySuspiciouslyShort({ ...okStats, bodyChars: 0 }, { minBodyChars: 1282 })).toBe(false);
+    expect(isPrePublishBodySuspiciouslyShort(null, { minBodyChars: 1282 })).toBe(false);
+  });
+
+  it('publish flow settles + re-acquires the frame before blocking on a short read', () => {
+    // Locks the wiring: a short read must trigger a re-measure loop, not an
+    // immediate block. Guards against regressing back to single-read blocking.
+    const flow = read('naverBlogAutomation.ts');
+    expect(flow).toMatch(/isPrePublishBodySuspiciouslyShort\(stats, expectations\)/);
+    expect(flow).toMatch(/pre-publish-short-read-resettle/);
   });
 });
 
