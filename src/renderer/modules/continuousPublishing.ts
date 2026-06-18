@@ -2785,11 +2785,9 @@ function addItemToQueueV2Impl(): void {
       realCategory,   // ✅ 실제 블로그 카테고리 추가
       realCategoryName, // ✅ 실제 블로그 카테고리 이름 추가
       includeThumbnailText: (document.getElementById('continuous-modal-include-thumbnail-text') as HTMLInputElement)?.checked || false,
-      // ✅ [v2.7.76] URL 자동 수집 + 부족분 AI 생성
-      urlAutoCollect: (document.getElementById('continuous-modal-url-auto-collect') as HTMLInputElement)?.checked
-        || localStorage.getItem('continuous_urlAutoCollect') === '1',
-      fillGapWithAI: (document.getElementById('continuous-modal-fillgap-ai') as HTMLInputElement)?.checked
-        || localStorage.getItem('continuous_fillGapAi') === '1',
+      // [v2.11.x] URL 이미지 자동 수집 기능 제거 — 항상 비활성 (UI 삭제, stale localStorage 무시)
+      urlAutoCollect: false,
+      fillGapWithAI: false,
       // ✅ [2026-02-19] 제휴링크 자동 감지: URL 입력이 제휴 URL이면 별도 필드 없이도 자동 적용
       affiliateLink: resolveAffiliateLink(
         contentMode === 'affiliate' ? ((document.getElementById('continuous-affiliate-link') as HTMLInputElement)?.value?.trim() || '') : undefined,

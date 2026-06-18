@@ -1812,10 +1812,9 @@ async function initMultiAccountPublishModal() {
                 realCategoryName,
                 keywordAsTitle,
                 keywordTitlePrefix,
-                urlAutoCollect: document.getElementById('ma-modal-url-auto-collect')?.checked
-                    || localStorage.getItem('ma_urlAutoCollect') === '1',
-                fillGapWithAI: document.getElementById('ma-modal-fillgap-ai')?.checked
-                    || localStorage.getItem('ma_fillGapAi') === '1',
+                // [v2.11.x] URL 이미지 자동 수집 기능 제거 — 항상 비활성
+                urlAutoCollect: false,
+                fillGapWithAI: false,
             };
             const idx = publishQueue.findIndex(q => q.id === editingQueueId);
             if (idx !== -1) {
@@ -1859,10 +1858,9 @@ async function initMultiAccountPublishModal() {
                     realCategoryName,
                     keywordAsTitle,
                     keywordTitlePrefix,
-                    urlAutoCollect: document.getElementById('ma-modal-url-auto-collect')?.checked
-                        || localStorage.getItem('ma_urlAutoCollect') === '1',
-                    fillGapWithAI: document.getElementById('ma-modal-fillgap-ai')?.checked
-                        || localStorage.getItem('ma_fillGapAi') === '1',
+                    // [v2.11.x] URL 이미지 자동 수집 기능 제거 — 항상 비활성
+                    urlAutoCollect: false,
+                    fillGapWithAI: false,
                 };
                 publishQueue.push(queueItem);
                 addedCount++;
