@@ -171,6 +171,22 @@ describe('mapInferencesToImageMap', () => {
     expect(imgs[0]!.blobId).toBe('uniqueId-42');
   });
 
+  it('places each image under its OWN section (contextual, not even split)', () => {
+    // Section A discusses 3 photos, Section B discusses 1.
+    // Even-split would wrongly give 2/2 — contextual MUST give 3/1, in order.
+    const sections = [
+      makeSection('맛집 탐방', ['m1', 'm2', 'm3']),
+      makeSection('카페 디저트', ['c1']),
+    ];
+    const ids = ['m1', 'm2', 'm3', 'c1'];
+    const plan = makePlan(sections, ids);
+
+    const result = mapInferencesToImageMap(plan, ids);
+
+    expect(result.get('맛집 탐방')!.map((i) => i.blobId)).toEqual(['m1', 'm2', 'm3']);
+    expect(result.get('카페 디저트')!.map((i) => i.blobId)).toEqual(['c1']);
+  });
+
   it('handles single section with multiple images', () => {
     const sections = [makeSection('Solo', ['a', 'b', 'c'])];
     const plan = makePlan(sections, ['a', 'b', 'c']);

@@ -1,11 +1,17 @@
 /**
  * Inference Image Mapper — converts a NarrativePlan into an ImageManager-compatible
- * imageMap by distributing image references across headings.
+ * imageMap by placing each image under the section that actually discusses it.
  *
  * SPEC-IMAGE-NARRATIVE-2026 Phase 4 (FR-7)
  *
- * Strategy: evenly distribute the available images across sections.
- * Each section receives at least one image when possible.
+ * Strategy: CONTEXTUAL placement. The aggregator already groups images into
+ * sections by location_hint/scene_type (sectionBuilder.buildNarrativeSections),
+ * and each section's body is written from those exact images' descriptions. So we
+ * place every image under its own section.imageRefs — the photo lands exactly
+ * where the body talks about it (사용자 요청: "문맥에 맞게 완벽하게 배치").
+ *
+ * Any image not referenced by a section (edge case — e.g. review edits dropped a
+ * ref) is round-robin appended so no uploaded photo is ever silently dropped.
  */
 
 import type { NarrativePlan } from '../types.js';
@@ -43,13 +49,14 @@ export type HeadingImageMap = Map<string, ImageMetadata[]>;
 
 /**
  * Converts a NarrativePlan + raw image references into an ImageManager-compatible
- * HeadingImageMap.
+ * HeadingImageMap, placing each image under the section that discusses it.
  *
- * Distribution strategy (even):
- *   - Total images `N`, total sections `S`.
- *   - Base images per section = floor(N / S).
- *   - Remaining images (N mod S) go to the first `rem` sections (one extra each).
- *   - Sections with no imageRefs in the plan receive images from the overflow pool.
+ * Placement strategy (contextual):
+ *   1. Each section receives exactly its own `section.imageRefs`, in plan order.
+ *      Because the body of that section is generated from those images'
+ *      descriptions, the photo lands precisely where the text talks about it.
+ *   2. Any image present in the plan/imageIds but not referenced by any section
+ *      is round-robin appended across sections so no upload is ever dropped.
  *
  * @param narrativePlan  - The aggregated plan containing sections with imageRefs.
  * @param imageIds       - Ordered list of image IDs corresponding to the plan's
@@ -63,39 +70,41 @@ export function mapInferencesToImageMap(
   const sections = narrativePlan.sections;
   const resultMap = new Map<string, ImageMetadata[]>();
 
-  if (sections.length === 0 || imageIds.length === 0) {
+  if (sections.length === 0) {
     return resultMap;
   }
 
-  // Build an ordered array of all imageIds from plan (falling back to provided list)
+  // Ordered universe of every image id (plan EXIF order first, then extras).
   const allImageIds = buildOrderedImageIds(narrativePlan, imageIds);
-  const totalImages = allImageIds.length;
-  const totalSections = sections.length;
+  if (allImageIds.length === 0) {
+    return resultMap;
+  }
 
-  // Even-distribution: each section gets a base amount, plus one extra for remainder
-  const base = Math.floor(totalImages / totalSections);
-  const remainder = totalImages % totalSections;
+  const available = new Set(allImageIds);
+  const placed = new Set<string>();
 
-  let imageIndex = 0;
-
-  for (let sectionIdx = 0; sectionIdx < sections.length; sectionIdx++) {
-    const section = sections[sectionIdx]!;
-    const count = base + (sectionIdx < remainder ? 1 : 0);
-
-    const assignedImages: ImageMetadata[] = [];
-
-    for (let i = 0; i < count && imageIndex < allImageIds.length; i++) {
-      const imageId = allImageIds[imageIndex++]!;
-      assignedImages.push(buildImageMetadata(imageId, section.heading));
+  // 1) Contextual placement — each section gets its own imageRefs.
+  for (const section of sections) {
+    const assigned: ImageMetadata[] = [];
+    for (const imageId of section.imageRefs) {
+      if (available.has(imageId) && !placed.has(imageId)) {
+        placed.add(imageId);
+        assigned.push(buildImageMetadata(imageId, section.heading));
+      }
     }
+    resultMap.set(section.heading, assigned);
+  }
 
-    // Always assign at least one image if available and base is 0
-    if (assignedImages.length === 0 && imageIndex < allImageIds.length) {
-      const imageId = allImageIds[imageIndex++]!;
-      assignedImages.push(buildImageMetadata(imageId, section.heading));
-    }
-
-    resultMap.set(section.heading, assignedImages);
+  // 2) Leftover safety — round-robin any image no section referenced.
+  const leftovers = allImageIds.filter((id) => !placed.has(id));
+  let rr = 0;
+  for (const imageId of leftovers) {
+    const section = sections[rr % sections.length]!;
+    const arr = resultMap.get(section.heading) ?? [];
+    arr.push(buildImageMetadata(imageId, section.heading));
+    resultMap.set(section.heading, arr);
+    placed.add(imageId);
+    rr++;
   }
 
   return resultMap;
