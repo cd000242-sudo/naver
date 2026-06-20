@@ -59,6 +59,24 @@ describe('routeTextToVision — 글 생성 AI → vision provider 매핑', () =>
     expect(r.reason).toContain('Perplexity');
   });
 
+  it('Claude Opus / Haiku → claude vendor (Sonnet으로 추론 통일)', () => {
+    for (const key of ['claude-opus', 'claude-haiku']) {
+      const r = routeTextToVision(key);
+      expect(r.vendor).toBe('claude');
+      expect(r.model).toBe(VISION_MODELS.CLAUDE_SONNET);
+      expect(r.fellBack).toBe(false);
+    }
+  });
+
+  it('레거시 OpenAI gpt-4o / gpt-4o-search → openai vendor (gpt-4.1로 추론)', () => {
+    for (const key of ['openai-gpt4o', 'openai-gpt4o-search']) {
+      const r = routeTextToVision(key);
+      expect(r.vendor).toBe('openai');
+      expect(r.model).toBe(VISION_MODELS.OPENAI_41);
+      expect(r.fellBack).toBe(false);
+    }
+  });
+
   it('미지원 키 → Gemini Flash 기본 폴백 (안전)', () => {
     const r = routeTextToVision('unknown-future-model');
     expect(r.vendor).toBe('gemini');

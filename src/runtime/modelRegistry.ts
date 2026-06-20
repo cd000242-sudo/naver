@@ -139,10 +139,18 @@ export function routeTextToVision(textKey: string): VisionRouting {
       return { provider: 'gemini-pro', model: VISION_MODELS.GEMINI_PRO, vendor: 'gemini', fellBack: false };
     case 'claude-sonnet':
       return { provider: 'claude-sonnet', model: VISION_MODELS.CLAUDE_SONNET, vendor: 'claude', fellBack: false };
+    case 'claude-opus':
+    case 'claude-haiku':
+      // Opus/Haiku도 Anthropic vision 가능하나 어댑터는 Sonnet으로 추론 통일 (동일 vendor)
+      return { provider: 'claude-sonnet', model: VISION_MODELS.CLAUDE_SONNET, vendor: 'claude', fellBack: false };
     case 'openai-gpt41':
       return { provider: 'openai-41', model: VISION_MODELS.OPENAI_41, vendor: 'openai', fellBack: false };
     case 'openai-gpt4o-mini':
       return { provider: 'openai-41-mini', model: VISION_MODELS.OPENAI_41_MINI, vendor: 'openai', fellBack: false };
+    case 'openai-gpt4o':
+    case 'openai-gpt4o-search':
+      // 레거시 gpt-4o 계열 키 — vision은 현행 gpt-4.1로 추론 (동일 vendor)
+      return { provider: 'openai-41', model: VISION_MODELS.OPENAI_41, vendor: 'openai', fellBack: false };
     case 'perplexity-sonar':
       return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: true, reason: 'Perplexity vision 미지원 → Gemini Flash 폴백' };
     default:

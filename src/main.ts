@@ -8545,12 +8545,21 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
     const normalized = normalizeInferAndWritePayload(payload);
     console.log(`[Main] vision:infer-and-write images=${normalized.images.length}`);
 
+    // 글로벌 글생성 엔진(primaryGeminiTextModel) → vision/text vendor 자동 라우팅.
+    // 사용자 요청: 별도 vision provider 선택 UI를 없애고 메인 AI 엔진을 그대로 따라간다.
+    let routedProvider: string | undefined;
     try {
       const currentConfig = await loadConfig();
       applyConfigToEnv(currentConfig);
+      const { routeTextToVision } = await import('./runtime/modelRegistry.js');
+      const textEngine = (currentConfig as any).primaryGeminiTextModel || 'gemini-2.5-flash';
+      routedProvider = routeTextToVision(textEngine).vendor;
+      console.log(`[Main] vision:infer-and-write — 글로벌 엔진(${textEngine}) → provider=${routedProvider}`);
     } catch (configError) {
       console.warn('[Main] vision:infer-and-write config load skipped:', configError);
     }
+    // Fallback to the payload provider only if routing failed.
+    const effectiveProvider = (routedProvider ?? normalized.provider) as typeof normalized.provider;
 
     // Convert plain base64 objects to ImageInput format
     const imageInputs = normalized.images.map((img) => ({
@@ -8560,14 +8569,14 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
     }));
 
     const inferredPlan = normalized.plan ?? await aggregateInferences(imageInputs, {
-      provider: normalized.provider,
+      provider: effectiveProvider,
       mode: normalized.mode,
       context: normalized.context,
     });
     const plan = applyReviewEditsToPlan(inferredPlan, normalized.reviewEdits);
 
     const content = await buildNarrativeContent(plan, {
-      provider: normalized.provider,
+      provider: effectiveProvider,
       targetChars: normalized.targetChars,
       toneStyle: normalized.toneStyle,
       context: normalized.context,
