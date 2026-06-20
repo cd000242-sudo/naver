@@ -151,18 +151,27 @@ async function _startInference(): Promise<void> {
   const progress = _getProgressModal();
 
   try {
-    progress?.show?.('📸 사진 AI 추론 중...', {
-      autoAnimate: false,
+    // Modal에 실시간 단계 애니메이션을 위임한다. 추론은 단일 IPC 호출(블로킹)이라
+    // 수동 update만 쓰면 24%에서 멈춰 보임 → autoAnimate custom steps로 살아있게 표시.
+    // 최소화(⬇)/닫기(✕)/하단 FAB 복원은 aiProgressModal에 내장되어 있다.
+    progress?.show?.('📸 사진으로 글생성', {
+      autoAnimate: true,
+      mode: 'custom',
       icon: '📸',
-      initialLog: `업로드 이미지 ${images.length}장을 분석할 준비를 시작합니다.`,
+      initialLog: `업로드한 사진 ${images.length}장을 분석합니다.`,
+      steps: [
+        { percent: 12, step: '🖼️ 사진 확인 중...' },
+        { percent: 28, step: '👁️ Vision AI가 사진을 분석 중...' },
+        { percent: 45, step: '🧩 장면·맥락 추론 중...' },
+        { percent: 64, step: '📝 사진 순서로 이야기 구성 중...' },
+        { percent: 80, step: '✍️ 블로그 글 작성 중...' },
+      ],
     });
-    progress?.update?.(8, '이미지 확인 중...');
     progress?.addLog?.('사진 분석 엔진: 메인 AI 글생성 엔진과 동일하게 사용');
     if (manualTitle) progress?.addLog?.(`사용자 지정 제목: ${manualTitle}`);
 
     // ✅ [SPEC-IMAGE-NARRATIVE] 표준 IPC 채널로 통일 (Quick Mode와 동일).
     // 이전: 존재하지 않는 electronAPI.inferImages → 항상 undefined → "Vision 추론 실패".
-    progress?.update?.(24, 'Vision AI 요청 중...');
     const result = await (window as any).api?.inferAndWrite?.({
       images: images.map((img) => ({
         imageId: img.id,
@@ -179,7 +188,6 @@ async function _startInference(): Promise<void> {
       throw new Error(result?.message ?? 'Vision 추론 실패');
     }
 
-    progress?.update?.(78, '추론 결과 정리 중...');
     const plan = result.plan as NarrativePlan;
     setState({ plan, isInferring: false });
     showReviewPanel(plan, images);
