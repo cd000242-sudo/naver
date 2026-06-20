@@ -12,8 +12,8 @@
  *   Source: docs.claude.com / console.anthropic.com models
  */
 export const CLAUDE_MODELS = {
-  /** 최고 성능 — Opus 4.7 */
-  OPUS: 'claude-opus-4-7',
+  /** 최고 성능 — Opus 4.8 (2026-05-28 GA, $5/$25, 4.7와 동가) */
+  OPUS: 'claude-opus-4-8',
   /** 균형 — Sonnet 4.6 */
   SONNET: 'claude-sonnet-4-6',
   /** 가성비 — Haiku 4.5 (정식 ID, 날짜 suffix 포함) */

@@ -82,8 +82,8 @@ describe('v1.4.77 — 실존 모델 ID 매트릭스 (2026-04)', () => {
       expect(tracker).toMatch(/'claude-haiku-4-5-20251001':/);
     });
 
-    it("Opus 4.7 (2026-04-16 출시, 현행 최신) 존재", () => {
-      expect(tracker).toMatch(/'claude-opus-4-7':/);
+    it("Opus 4.8 (2026-05-28 GA, 현행 최신) 존재", () => {
+      expect(tracker).toMatch(/'claude-opus-4-8':/);
     });
 
     it("Sonnet 4.6 (2026-02-17 출시, 현행 최신) 존재", () => {

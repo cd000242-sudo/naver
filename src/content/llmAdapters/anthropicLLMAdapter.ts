@@ -5,9 +5,9 @@
  * LLMProvider 인터페이스를 Anthropic SDK 호출로 충족.
  *
  * 적용 best practice (claude-api skill):
- *   - 기본 모델: claude-opus-4-7
- *   - thinking: adaptive (Opus 4.7 표준)
- *   - sampling 파라미터(temperature/top_p/top_k) 자동 strip — Opus 4.7에서 400 방지
+ *   - 기본 모델: claude-opus-4-8
+ *   - thinking: adaptive (Opus 4.7+ 표준)
+ *   - sampling 파라미터(temperature/top_p/top_k) 자동 strip — Opus 4.7+에서 400 방지
  *   - max_tokens > 16,000 시 streaming + finalMessage() 자동 사용 (timeout 회피)
  *   - 4xx 에러 → 명시 throw, 5xx/429 → SDK 자동 재시도
  *
@@ -21,13 +21,13 @@
 
 import type { LLMProvider, LLMCompleteOptions } from '../draftWriter';
 
-const DEFAULT_MODEL = 'claude-opus-4-7';
+const DEFAULT_MODEL = 'claude-opus-4-8';
 const DEFAULT_MAX_TOKENS = 16_000;
 const STREAM_THRESHOLD = 16_000;
 
-// Opus 4.7에서 sampling 파라미터 제거 필요. 4.6 이하는 허용.
-function isOpus47(model: string): boolean {
-  return model.startsWith('claude-opus-4-7');
+// Opus 4.7+ (4.7/4.8/4.9, 5.x)는 sampling 파라미터 미지원 — strip 필요. 4.6 이하는 허용.
+function isOpusSamplingDeprecated(model: string): boolean {
+  return /^claude-opus-4-[7-9]/.test(model) || /^claude-opus-[5-9]/.test(model);
 }
 
 export interface AnthropicMessageBlock {
@@ -60,8 +60,8 @@ export interface AnthropicLLMAdapterConfig {
   readonly messagesAPI: AnthropicMessagesAPI;
   readonly defaultModel?: string;
   readonly defaultMaxTokens?: number;
-  readonly enableAdaptiveThinking?: boolean;     // 기본 true (Opus 4.7 권장)
-  readonly thinkingDisplay?: 'omitted' | 'summarized'; // 기본 'omitted' (4.7 기본값)
+  readonly enableAdaptiveThinking?: boolean;     // 기본 true (Opus 4.7+ 권장)
+  readonly thinkingDisplay?: 'omitted' | 'summarized'; // 기본 'omitted' (4.7+ 기본값)
 }
 
 export interface AnthropicLLMAdapterStats {
@@ -116,8 +116,8 @@ function buildMessageParams(
     messages: [{ role: 'user', content: prompt }],
   };
 
-  // Opus 4.7는 sampling 파라미터 받지 않음 — 명시 strip
-  if (!isOpus47(model) && typeof options?.temperature === 'number') {
+  // Opus 4.7+는 sampling 파라미터 받지 않음 — 명시 strip
+  if (!isOpusSamplingDeprecated(model) && typeof options?.temperature === 'number') {
     params.temperature = options.temperature;
   }
 

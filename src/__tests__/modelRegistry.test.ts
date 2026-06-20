@@ -24,7 +24,7 @@ function readSrcFile(rel: string): string {
 
 describe('modelRegistry SSOT 회귀 가드', () => {
   it('CLAUDE_MODELS 검증된 ID 3종', () => {
-    expect(CLAUDE_MODELS.OPUS).toBe('claude-opus-4-7');
+    expect(CLAUDE_MODELS.OPUS).toBe('claude-opus-4-8');
     expect(CLAUDE_MODELS.SONNET).toBe('claude-sonnet-4-6');
     expect(CLAUDE_MODELS.HAIKU).toBe('claude-haiku-4-5-20251001');
   });
@@ -56,7 +56,7 @@ describe('modelRegistry SSOT 회귀 가드', () => {
     expect(isBannedModelId('gemini-3.1-flash-image')).toBe(true);
     expect(isBannedModelId('gpt-4o-mini')).toBe(true);
     expect(isBannedModelId('gemini-3-pro-image-preview')).toBe(false); // 실재 모델
-    expect(isBannedModelId('claude-opus-4-7')).toBe(false);
+    expect(isBannedModelId('claude-opus-4-8')).toBe(false);
     expect(isBannedModelId('gemini-2.5-flash-image')).toBe(false);
   });
 

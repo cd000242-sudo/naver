@@ -52,8 +52,8 @@ describe('v1.4.77 — 공식 가격 매트릭스 (2026-04)', () => {
       expect(content).toMatch(/'claude-opus-4-6':\s*\{\s*input:\s*5\.00[^}]*output:\s*25\.00/);
     });
 
-    it("Opus 4.7 신규 엔트리 존재", () => {
-      expect(content).toMatch(/'claude-opus-4-7':\s*\{\s*input:\s*5\.00[^}]*output:\s*25\.00/);
+    it("Opus 4.8 신규 엔트리 존재 ($5/$25)", () => {
+      expect(content).toMatch(/'claude-opus-4-8':\s*\{\s*input:\s*5\.00[^}]*output:\s*25\.00/);
     });
 
     it("Opus 4.1은 레거시 $15/$75 유지", () => {

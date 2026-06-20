@@ -34,19 +34,19 @@ function createMock(response: AnthropicMessageResponse): AnthropicMessagesAPI & 
 }
 
 describe('createAnthropicLLMAdapter — 정상 흐름', () => {
-  it('기본 모델 claude-opus-4-7 + adaptive thinking + sampling strip', async () => {
+  it('기본 모델 claude-opus-4-8 + adaptive thinking + sampling strip', async () => {
     const api = createMock(makeResponse('hello'));
     const adapter = createAnthropicLLMAdapter({ messagesAPI: api });
     expect(adapter.type).toBe('anthropic');
-    expect(adapter.defaultModel).toBe('claude-opus-4-7');
+    expect(adapter.defaultModel).toBe('claude-opus-4-8');
 
     const r = await adapter.complete('test prompt', { temperature: 0.7 });
     expect(r).toBe('hello');
     expect(api.createMock).toHaveBeenCalledTimes(1);
     const params = api.createMock.mock.calls[0][0];
-    expect(params.model).toBe('claude-opus-4-7');
+    expect(params.model).toBe('claude-opus-4-8');
     expect(params.thinking).toEqual({ type: 'adaptive' });
-    // Opus 4.7은 temperature strip
+    // Opus 4.8은 temperature strip
     expect(params.temperature).toBeUndefined();
     expect(params.messages[0]).toEqual({ role: 'user', content: 'test prompt' });
   });

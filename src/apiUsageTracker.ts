@@ -114,7 +114,8 @@ const OPENAI_IMAGE_PRICING: Record<string, number> = {
  */
 const CLAUDE_PRICING: Record<string, { input: number; output: number }> = {
   // Latest tier (현행 플래그십)
-  'claude-opus-4-7':         { input: 5.00,  output: 25.00 },  // 2026-04-16 출시
+  'claude-opus-4-8':         { input: 5.00,  output: 25.00 },  // 2026-05-28 GA
+  'claude-opus-4-7':         { input: 5.00,  output: 25.00 },  // 2026-04-16 출시 (이전 플래그십, API 가용)
   'claude-sonnet-4-6':       { input: 3.00,  output: 15.00 },  // 2026-02-17 출시
   'claude-haiku-4-5':        { input: 1.00,  output: 5.00 },
   'claude-haiku-4-5-20251001': { input: 1.00, output: 5.00 },  // snapshot
