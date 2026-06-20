@@ -1335,26 +1335,21 @@
                                 </label>
                             </div>
 
-                            <!-- Vision provider selection -->
+                            <!-- Vision은 메인 AI 글생성 엔진을 그대로 사용 (별도 선택 불필요) -->
                             <div class="image-narrative-provider-section">
-                                <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-strong); display: block; margin-bottom: 0.5rem;">
-                                    🤖 Vision 분석 모델
+                                <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-strong); display: block; margin-bottom: 0.4rem;">
+                                    🤖 사진 분석(Vision) 엔진
                                 </label>
-                                <div class="image-narrative-provider-radios">
-                                    <label class="image-narrative-provider-radio">
-                                        <input type="radio" name="vision-provider" value="gemini" checked />
-                                        <span>✨ Gemini Flash <em>(디폴트 · 저비용)</em></span>
-                                    </label>
-                                    <label class="image-narrative-provider-radio">
-                                        <input type="radio" name="vision-provider" value="openai" />
-                                        <span>🧠 GPT-4o <em>(한국어 묘사 우수)</em></span>
-                                    </label>
-                                    <label class="image-narrative-provider-radio">
-                                        <input type="radio" name="vision-provider" value="claude" disabled />
-                                        <span>🎯 Claude Sonnet <em>(준비중)</em></span>
-                                    </label>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 0.5rem; line-height: 1.5;">
+                                    위에서 고른 <strong>AI 글생성 엔진</strong>을 사진 분석에도 그대로 사용해요. 따로 고를 필요 없습니다.
+                                </p>
+                                <div style="font-size: 0.78rem; color: var(--text-muted); background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.15); border-radius: 8px; padding: 0.6rem 0.75rem; line-height: 1.65;">
+                                    <strong style="color: var(--text-strong);">📊 사진 추론 추천 순위</strong><br/>
+                                    ① <strong>Gemini 2.5 Pro</strong> · <strong>Claude Opus</strong> — 장면·맥락 해석이 가장 정확 (고품질·고가)<br/>
+                                    ② <strong>GPT-4.1</strong> — 한국어 묘사 디테일이 우수 (균형형)<br/>
+                                    ③ <strong>Gemini Flash</strong> — 빠르고 저렴, 사진 분석 안정적 (기본 추천)<br/>
+                                    <span style="opacity:0.75;">※ Perplexity는 사진 분석을 지원하지 않아 Gemini Flash로 자동 전환됩니다.</span>
                                 </div>
-                                <div id="vision-provider-warning" class="image-narrative-provider-warning" style="display:none;"></div>
                             </div>
 
                             <!-- Infer button -->

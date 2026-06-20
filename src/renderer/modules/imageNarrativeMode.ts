@@ -90,7 +90,6 @@ export function initImageNarrativeMode(): void {
 
   initImageNarrativeUpload();
   initImageNarrativeReview();
-  _bindProviderRadios();
   _bindInferButton();
   _bindReviewGenerateEvent();
 }
@@ -99,35 +98,13 @@ export function initImageNarrativeMode(): void {
 // Provider selection
 // ---------------------------------------------------------------------------
 
-/** Returns the currently selected Vision provider. */
+/**
+ * Returns the Vision provider hint sent with the payload. The main process
+ * derives the real provider from the global AI engine (routeTextToVision), so
+ * this is only a fallback hint — there is no longer a separate provider picker.
+ */
 export function getSelectedProvider(): VisionProvider {
   return _modeState.provider;
-}
-
-function _bindProviderRadios(): void {
-  const radios = document.querySelectorAll<HTMLInputElement>(
-    'input[name="vision-provider"]'
-  );
-  radios.forEach((radio) => {
-    radio.addEventListener('change', () => {
-      const value = radio.value as VisionProvider;
-      setState({ provider: value });
-      _updateProviderWarning(value);
-    });
-  });
-}
-
-function _updateProviderWarning(provider: VisionProvider): void {
-  const warningEl = document.getElementById('vision-provider-warning');
-  if (!warningEl) return;
-
-  const warnings: Partial<Record<VisionProvider, string>> = {
-    claude: 'Claude Vision is not available in this build. Use Gemini or OpenAI.',
-  };
-
-  const msg = warnings[provider];
-  warningEl.textContent = msg ?? '';
-  warningEl.style.display = msg ? 'block' : 'none';
 }
 
 let _reviewGenerateBound = false;
@@ -180,7 +157,7 @@ async function _startInference(): Promise<void> {
       initialLog: `업로드 이미지 ${images.length}장을 분석할 준비를 시작합니다.`,
     });
     progress?.update?.(8, '이미지 확인 중...');
-    progress?.addLog?.(`선택 모델: ${_modeState.provider}`);
+    progress?.addLog?.('사진 분석 엔진: 메인 AI 글생성 엔진과 동일하게 사용');
     if (manualTitle) progress?.addLog?.(`사용자 지정 제목: ${manualTitle}`);
 
     // ✅ [SPEC-IMAGE-NARRATIVE] 표준 IPC 채널로 통일 (Quick Mode와 동일).
