@@ -3435,9 +3435,16 @@ async function publishWithImageNarrative(formData) {
             titleInput.value = newTitle;
         formData.title = newTitle;
     }
+    const finalImages = ImageManager.getAllImages() ?? [];
+    // Phase 4: "글 생성하기"는 반자동 편집까지만 — 본문/이미지는 통합 탭에 배치된 상태로
+    // 멈추고 사용자가 검토 후 직접 발행한다(발행 보류). 풀오토(_generateOnly=false)만 발행.
+    if (formData._generateOnly) {
+        showUnifiedProgress(100, '글 생성 완료', '반자동 편집 탭에서 확인 후 발행하세요.');
+        appendLog(`✅ 사진으로 글생성 완료 — 이미지 ${finalImages.length}개를 소제목에 배치, 반자동 편집/이미지 관리탭 대기 (발행 보류)`);
+        return;
+    }
     showUnifiedProgress(70, '발행 준비 중...', '네이버 블로그에 발행합니다.');
     modal?.setProgress?.(70, '발행 준비...');
-    const finalImages = ImageManager.getAllImages() ?? [];
     appendLog(`📤 발행 위임: 이미지 ${finalImages.length}개, 글 "${newTitle.substring(0, 30)}..."`);
     await executeBlogPublishing(structuredContent, finalImages, formData);
 }

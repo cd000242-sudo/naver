@@ -158,14 +158,20 @@ function _renderReviewPanel(): void {
     </div>
     <div class="image-narrative-review-actions">
       <button id="image-narrative-generate-btn" class="btn-primary">
-        ✏️ 글 생성하기
+        ✏️ 글 생성하기 (반자동 편집)
+      </button>
+      <button id="image-narrative-publish-btn" class="btn-secondary">
+        🚀 바로 풀오토 발행
       </button>
     </div>
+    <p class="image-narrative-review-actions-hint" style="font-size:0.75rem; color:var(--text-muted); margin:0.4rem 0 0; line-height:1.5;">
+      <strong>글 생성하기</strong>: 반자동 편집 탭으로 보내 검토 후 직접 발행 · <strong>풀오토 발행</strong>: 생성부터 네이버 발행까지 한 번에
+    </p>
   `;
 
   _bindCardEvents();
 
-  // Re-bind generate button since innerHTML replaced it
+  // Re-bind action buttons since innerHTML replaced them
   const generateBtn = document.getElementById('image-narrative-generate-btn');
   generateBtn?.addEventListener('click', () => {
     if (!isReviewComplete()) {
@@ -173,6 +179,15 @@ function _renderReviewPanel(): void {
       return;
     }
     _dispatchGenerateEvent();
+  });
+
+  const publishBtn = document.getElementById('image-narrative-publish-btn');
+  publishBtn?.addEventListener('click', () => {
+    if (!isReviewComplete()) {
+      _showToast('빨간색으로 표시된 항목에 설명을 입력해 주세요.', 'error');
+      return;
+    }
+    _dispatchPublishEvent();
   });
 }
 
@@ -370,6 +385,15 @@ function _showToast(message: string, type: 'error' | 'info'): void {
 function _dispatchGenerateEvent(): void {
   document.dispatchEvent(
     new CustomEvent('imageNarrative:generate', {
+      detail: { edits: Object.fromEntries(_edits), plan: _plan },
+    })
+  );
+}
+
+/** Full-auto: generate AND publish in one shot (Phase 5). */
+function _dispatchPublishEvent(): void {
+  document.dispatchEvent(
+    new CustomEvent('imageNarrative:publish', {
       detail: { edits: Object.fromEntries(_edits), plan: _plan },
     })
   );

@@ -113,12 +113,22 @@ function _bindReviewGenerateEvent(): void {
   if (_reviewGenerateBound) return;
   _reviewGenerateBound = true;
 
+  // "글 생성하기" → 반자동 편집까지만 (generateOnly), 발행 보류
   document.addEventListener('imageNarrative:generate', async (event) => {
     const detail = (event as CustomEvent).detail ?? {};
     if (detail.plan) {
       setState({ plan: detail.plan as NarrativePlan });
     }
-    await _handlePublish(detail.edits);
+    await _handlePublish(detail.edits, true);
+  });
+
+  // "바로 풀오토 발행" → 생성 + 배치 + 네이버 발행 원스톱 (Phase 5)
+  document.addEventListener('imageNarrative:publish', async (event) => {
+    const detail = (event as CustomEvent).detail ?? {};
+    if (detail.plan) {
+      setState({ plan: detail.plan as NarrativePlan });
+    }
+    await _handlePublish(detail.edits, false);
   });
 }
 
@@ -268,14 +278,22 @@ export function bindImageNarrativePublish(): void {
   });
 }
 
-async function _handlePublish(reviewEdits?: unknown): Promise<void> {
+/**
+ * Generates the article from photos and routes it through the full-auto flow.
+ *
+ * @param generateOnly When true ("글 생성하기"), stops at the semi-auto editor:
+ *   the body lands in the unified edit tabs and images are placed in the image
+ *   manager by heading, but nothing is published — the user reviews then publishes
+ *   manually. When false ("바로 풀오토 발행"), generates and publishes in one shot.
+ */
+async function _handlePublish(reviewEdits?: unknown, generateOnly = false): Promise<void> {
   const images = getUploadedImages();
   if (images.length < 3) {
     _showToast('최소 3장 이상의 이미지를 업로드해 주세요.', 'error');
     return;
   }
   if (_modeState.plan && !isReviewComplete()) {
-    _showToast('Please complete the photo review fields before publishing.', 'error');
+    _showToast('빨간색으로 표시된 항목에 설명을 입력한 뒤 진행해 주세요.', 'error');
     return;
   }
 
@@ -286,6 +304,7 @@ async function _handlePublish(reviewEdits?: unknown): Promise<void> {
   // Build the formData payload for executeFullAutoFlow
   const formData: Record<string, unknown> = {
     contentMode: 'image-narrative',
+    _generateOnly: generateOnly,
     imageNarrative: {
       images: images.map((img) => ({
         imageId: img.id,
@@ -307,9 +326,12 @@ async function _handlePublish(reviewEdits?: unknown): Promise<void> {
 
   try {
     await executeFullAutoFlow(formData);
+    if (generateOnly) {
+      _showToast('글 생성 완료 — 반자동 편집 탭에서 확인 후 발행하세요.', 'info');
+    }
   } catch (err) {
-    console.error('[ImageNarrativeMode] Publish failed:', err);
-    _showToast(`발행 실패: ${(err as Error).message}`, 'error');
+    console.error('[ImageNarrativeMode] Flow failed:', err);
+    _showToast(`${generateOnly ? '글 생성' : '발행'} 실패: ${(err as Error).message}`, 'error');
   }
 }
 
