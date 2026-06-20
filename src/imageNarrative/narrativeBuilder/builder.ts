@@ -13,6 +13,7 @@
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { formatImageNarrativeContext } from '../context.js';
+import { CLAUDE_MODELS, OPENAI_TEXT_MODELS } from '../../runtime/modelRegistry.js';
 import type {
   ImageNarrativeContext,
   NarrativePlan,
@@ -225,7 +226,7 @@ async function callOpenAIProvider(
 
   const response = await client.chat.completions.create(
     {
-      model: 'gpt-4o-mini',
+      model: OPENAI_TEXT_MODELS.GPT_41,
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.6,
       max_tokens: 8192, // 2048 → 8192: JSON truncation 방지 (위 Gemini 동일 사유)
@@ -248,7 +249,7 @@ async function callClaudeProvider(
 
   const message = await client.messages.create(
     {
-      model: 'claude-sonnet-4-6',
+      model: CLAUDE_MODELS.SONNET,
       max_tokens: 8192, // 2048 → 8192: JSON truncation 방지 (위 Gemini 동일 사유)
       messages: [{ role: 'user', content: prompt }],
     },

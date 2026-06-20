@@ -325,3 +325,81 @@ describe('openaiVisionAdapter', () => {
     await expect(runOpenAIVision(MOCK_CONTEXT, {}, 'key')).rejects.toThrow();
   });
 });
+
+// ---------------------------------------------------------------------------
+// claudeVisionAdapter tests (mock @anthropic-ai/sdk)
+// ---------------------------------------------------------------------------
+
+describe('claudeVisionAdapter', () => {
+  beforeEach(() => {
+    vi.resetModules();
+    process.env['ANTHROPIC_API_KEY'] = 'test-claude-key';
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    delete process.env['ANTHROPIC_API_KEY'];
+  });
+
+  const mockAnthropic = (create: ReturnType<typeof vi.fn>) => {
+    vi.doMock('@anthropic-ai/sdk', () => ({
+      default: function Anthropic() { return { messages: { create } }; },
+    }));
+  };
+
+  it('returns ImageInferenceResult on successful Claude response', async () => {
+    const create = vi.fn().mockResolvedValue({
+      content: [{ type: 'text', text: JSON.stringify(VALID_RESULT) }],
+    });
+    mockAnthropic(create);
+
+    const { runClaudeVision } = await import('../imageNarrative/visionInference/claudeVisionAdapter');
+    const result = await runClaudeVision(MOCK_CONTEXT, { mode: 'food' }, 'key');
+
+    expect(result.scene_type).toBe('food');
+    expect(result.location_hint).toBe('서울 홍대');
+    expect(result.food_items).toEqual(['떡볶이', '순대']);
+    expect(result.confidence).toBe(0.85);
+  });
+
+  it('throws when Claude returns no text block', async () => {
+    const create = vi.fn().mockResolvedValue({ content: [] });
+    mockAnthropic(create);
+
+    const { runClaudeVision } = await import('../imageNarrative/visionInference/claudeVisionAdapter');
+    await expect(runClaudeVision(MOCK_CONTEXT, {}, 'key')).rejects.toThrow();
+  });
+
+  it('retries once when the first response is not valid JSON', async () => {
+    const create = vi.fn()
+      .mockResolvedValueOnce({ content: [{ type: 'text', text: 'Sorry, cannot analyze.' }] })
+      .mockResolvedValueOnce({ content: [{ type: 'text', text: JSON.stringify(VALID_RESULT) }] });
+    mockAnthropic(create);
+
+    const { runClaudeVision } = await import('../imageNarrative/visionInference/claudeVisionAdapter');
+    const result = await runClaudeVision(MOCK_CONTEXT, { mode: 'food' }, 'key');
+
+    expect(create).toHaveBeenCalledTimes(2);
+    expect(result.description_ko).toBe(VALID_RESULT.description_ko);
+  });
+
+  it('coerces confidence to 0-1 range', async () => {
+    const create = vi.fn().mockResolvedValue({
+      content: [{ type: 'text', text: JSON.stringify({ ...VALID_RESULT, confidence: 1.8 }) }],
+    });
+    mockAnthropic(create);
+
+    const { runClaudeVision } = await import('../imageNarrative/visionInference/claudeVisionAdapter');
+    const result = await runClaudeVision(MOCK_CONTEXT, {}, 'key');
+    expect(result.confidence).toBeLessThanOrEqual(1);
+    expect(result.confidence).toBeGreaterThanOrEqual(0);
+  });
+
+  it('throws when API call itself rejects', async () => {
+    const create = vi.fn().mockRejectedValue(new Error('API error: 529'));
+    mockAnthropic(create);
+
+    const { runClaudeVision } = await import('../imageNarrative/visionInference/claudeVisionAdapter');
+    await expect(runClaudeVision(MOCK_CONTEXT, {}, 'key')).rejects.toThrow('API error: 529');
+  });
+});

@@ -16,6 +16,8 @@
 
 import { runGeminiVision } from './geminiVisionAdapter.js';
 import { runOpenAIVision } from './openaiVisionAdapter.js';
+import { runClaudeVision } from './claudeVisionAdapter.js';
+import { VISION_MODELS } from '../../runtime/modelRegistry.js';
 import {
   getCachedInference,
   setCachedInference,
@@ -37,9 +39,9 @@ import type {
 // ---------------------------------------------------------------------------
 
 const PROVIDER_DEFAULT_MODEL: Record<VisionProvider, string> = {
-  gemini: 'gemini-2.5-flash',
-  openai: 'gpt-4o',
-  claude: 'claude-sonnet-4-6',
+  gemini: VISION_MODELS.GEMINI_FLASH,
+  openai: VISION_MODELS.OPENAI_41,
+  claude: VISION_MODELS.CLAUDE_SONNET,
   deepinfra: 'llama-3.2-vision',
 };
 
@@ -97,7 +99,7 @@ async function callAdapter(
     case 'openai':
       return runOpenAIVision(context, options, apiKey);
     case 'claude':
-      throw new Error('Claude Vision adapter is not implemented in Phase 1');
+      return runClaudeVision(context, options, apiKey);
     case 'deepinfra':
       throw new Error('DeepInfra Vision adapter is not implemented in Phase 1');
     default: {
