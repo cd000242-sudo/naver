@@ -98,6 +98,11 @@ describe('geminiVisionAdapter', () => {
   beforeEach(() => {
     vi.resetModules();
     process.env['GEMINI_API_KEY'] = 'test-gemini-key';
+    vi.doMock('../runtime/geminiVisionQuotaGuard', () => ({
+      runGeminiVisionQuotaProtected: vi.fn(
+        async (_model: string, _signal: AbortSignal | undefined, task: () => Promise<unknown>) => task(),
+      ),
+    }));
   });
 
   afterEach(() => {
@@ -159,6 +164,63 @@ describe('geminiVisionAdapter', () => {
 
     const { runGeminiVision } = await import('../imageNarrative/visionInference/geminiVisionAdapter');
     await expect(runGeminiVision(MOCK_CONTEXT, {}, 'key')).rejects.toThrow(/not JSON/i);
+  });
+
+  it('retries once with Gemini when the first structured response is malformed', async () => {
+    const generateContent = vi.fn()
+      .mockResolvedValueOnce({
+        response: {
+          text: () => '{ "scene_type"',
+          candidates: [{ finishReason: 'MAX_TOKENS' }],
+        },
+      })
+      .mockResolvedValueOnce({
+        response: {
+          text: () => JSON.stringify(VALID_RESULT),
+          candidates: [{ finishReason: 'STOP' }],
+        },
+      });
+    vi.doMock('@google/generative-ai', () => ({
+      GoogleGenerativeAI: function GoogleGenerativeAI() {
+        return { getGenerativeModel: function() { return { generateContent }; } };
+      },
+      SchemaType: { OBJECT: 'object', STRING: 'string', ARRAY: 'array', NUMBER: 'number' },
+    }));
+
+    const { runGeminiVision } = await import('../imageNarrative/visionInference/geminiVisionAdapter');
+    const result = await runGeminiVision(MOCK_CONTEXT, { mode: 'food' }, 'key');
+
+    expect(generateContent).toHaveBeenCalledTimes(2);
+    expect(result.scene_type).toBe('food');
+    expect(result.description_ko).toBe(VALID_RESULT.description_ko);
+  });
+
+  it('retries once when Gemini returns valid JSON with missing required content', async () => {
+    const generateContent = vi.fn()
+      .mockResolvedValueOnce({
+        response: {
+          text: () => JSON.stringify({ scene_type: 'daily', confidence: 0.7 }),
+          candidates: [{ finishReason: 'STOP' }],
+        },
+      })
+      .mockResolvedValueOnce({
+        response: {
+          text: () => JSON.stringify(VALID_RESULT),
+          candidates: [{ finishReason: 'STOP' }],
+        },
+      });
+    vi.doMock('@google/generative-ai', () => ({
+      GoogleGenerativeAI: function GoogleGenerativeAI() {
+        return { getGenerativeModel: function() { return { generateContent }; } };
+      },
+      SchemaType: { OBJECT: 'object', STRING: 'string', ARRAY: 'array', NUMBER: 'number' },
+    }));
+
+    const { runGeminiVision } = await import('../imageNarrative/visionInference/geminiVisionAdapter');
+    const result = await runGeminiVision(MOCK_CONTEXT, {}, 'key');
+
+    expect(generateContent).toHaveBeenCalledTimes(2);
+    expect(result.description_ko).toBe(VALID_RESULT.description_ko);
   });
 
   it('throws when API call itself rejects', async () => {

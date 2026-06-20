@@ -3,7 +3,7 @@
  *
  * Responsibilities:
  * 1. Select the correct adapter based on InferenceOptions.provider.
- * 2. Execute the primary provider; on failure, attempt one fallback.
+ * 2. Execute the selected provider; only use another vendor after explicit opt-in.
  * 3. Enforce the feedback_no_fallback rule:
  *    - Fallback is NEVER silent. console.warn is emitted.
  *    - If options.onFallback is provided it is called so the UI can show a modal.
@@ -120,7 +120,8 @@ async function callAdapter(
  *   2. 'gemini' (default)
  *
  * Fallback policy (feedback_no_fallback rule):
- *   - If the primary provider throws, the fallback provider is tried once.
+ *   - Cross-provider fallback is disabled by default.
+ *   - If allowProviderFallback is true, the fallback provider is tried once.
  *   - The fallback is NEVER silent: console.warn is emitted and
  *     options.onFallback (if provided) is called so the UI can alert the user.
  *   - If the fallback also throws, the error propagates to the caller.
@@ -178,6 +179,16 @@ export async function inferImage(
     return response;
   } catch (err) {
     primaryError = err;
+  }
+
+  if (!options.allowProviderFallback) {
+    const primaryMsg =
+      primaryError instanceof Error ? primaryError.message : String(primaryError);
+    throw new Error(
+      `Vision inference failed for image "${context.imageId}". ` +
+      `Selected provider (${primaryProvider}): ${primaryMsg}. ` +
+      'Cross-provider fallback was not used.',
+    );
   }
 
   // --- Fallback ---

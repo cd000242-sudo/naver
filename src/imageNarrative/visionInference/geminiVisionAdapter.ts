@@ -11,6 +11,7 @@
 import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
 import { VISION_MODELS } from '../../runtime/modelRegistry.js';
 import { runGeminiVisionQuotaProtected } from '../../runtime/geminiVisionQuotaGuard.js';
+import { safeParseJson } from '../../jsonParser.js';
 import { getSystemPrompt, getUserInstruction } from './inferencePrompts.js';
 import type {
   InferenceContext,
@@ -52,6 +53,8 @@ const INFERENCE_RESPONSE_SCHEMA = {
 };
 
 const GEMINI_VISION_TIMEOUT_MS = 30_000;
+const GEMINI_VISION_MAX_OUTPUT_TOKENS = 1_024;
+const GEMINI_VISION_FORMAT_ATTEMPTS = 2;
 
 // ---------------------------------------------------------------------------
 // Internal helpers
@@ -77,25 +80,36 @@ function validateResult(raw: unknown): ImageInferenceResult {
     throw new Error(`Invalid scene_type: ${scene_type}`);
   }
 
-  const confidence = Number(obj['confidence'] ?? 0);
-  if (isNaN(confidence)) {
+  if (typeof obj['location_hint'] !== 'string') {
+    throw new Error('location_hint is missing or not a string');
+  }
+  if (!Array.isArray(obj['food_items'])) {
+    throw new Error('food_items is missing or not an array');
+  }
+  if (!Array.isArray(obj['mood_keywords'])) {
+    throw new Error('mood_keywords is missing or not an array');
+  }
+  if (
+    typeof obj['description_ko'] !== 'string' ||
+    obj['description_ko'].trim().length === 0
+  ) {
+    throw new Error('description_ko is missing or empty');
+  }
+  if (typeof obj['confidence'] !== 'number') {
     throw new Error('confidence is not a number');
   }
+  const confidence = obj['confidence'];
 
-  const food_items = Array.isArray(obj['food_items'])
-    ? (obj['food_items'] as unknown[]).map(String)
-    : [];
+  const food_items = (obj['food_items'] as unknown[]).map(String);
 
-  const mood_keywords = Array.isArray(obj['mood_keywords'])
-    ? (obj['mood_keywords'] as unknown[]).map(String)
-    : [];
+  const mood_keywords = (obj['mood_keywords'] as unknown[]).map(String);
 
   return {
     scene_type: scene_type as ImageInferenceResult['scene_type'],
-    location_hint: String(obj['location_hint'] ?? ''),
+    location_hint: obj['location_hint'],
     food_items,
     mood_keywords,
-    description_ko: String(obj['description_ko'] ?? ''),
+    description_ko: obj['description_ko'].trim(),
     confidence: Math.max(0, Math.min(1, confidence)),
   };
 }
@@ -156,7 +170,7 @@ export async function runGeminiVision(
         typeof genAI.getGenerativeModel
       >[0]['generationConfig'] extends { responseSchema?: infer S } ? S : never,
       temperature: 0.2,
-      maxOutputTokens: 512,
+      maxOutputTokens: GEMINI_VISION_MAX_OUTPUT_TOKENS,
     },
   });
 
@@ -167,34 +181,48 @@ export async function runGeminiVision(
     },
   };
 
-  const result = await runGeminiVisionQuotaProtected(
-    VISION_MODELS.GEMINI_FLASH,
-    options.signal,
-    () => withGeminiVisionTimeout(
-      () => model.generateContent({
-        contents: [
-          {
-            role: 'user',
-            parts: [imagePart, { text: userInstruction }],
-          },
-        ],
-      }),
+  let lastFormatError: Error | null = null;
+
+  for (let attempt = 1; attempt <= GEMINI_VISION_FORMAT_ATTEMPTS; attempt += 1) {
+    const result = await runGeminiVisionQuotaProtected(
+      VISION_MODELS.GEMINI_FLASH,
       options.signal,
-    ),
-  );
+      () => withGeminiVisionTimeout(
+        () => model.generateContent({
+          contents: [
+            {
+              role: 'user',
+              parts: [imagePart, { text: userInstruction }],
+            },
+          ],
+        }),
+        options.signal,
+      ),
+    );
 
-  const text = result.response.text();
-  if (!text || text.trim() === '') {
-    throw new Error('Gemini returned empty response text');
+    const text = result.response.text();
+    const finishReason = result.response.candidates?.[0]?.finishReason;
+    try {
+      if (!text || text.trim() === '') {
+        throw new Error('Gemini returned empty response text');
+      }
+
+      const parsed = safeParseJson<unknown>(text);
+      return validateResult(parsed);
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : String(error);
+      lastFormatError = new Error(
+        `Gemini response is not JSON (finishReason=${finishReason ?? 'unknown'}): ` +
+        `${text.slice(0, 200)}. Parse error: ${detail}`,
+      );
+      if (attempt < GEMINI_VISION_FORMAT_ATTEMPTS) {
+        console.warn(
+          `[GeminiVision] Structured response parse failed; retrying with Gemini only ` +
+          `(${attempt}/${GEMINI_VISION_FORMAT_ATTEMPTS - 1}). ${lastFormatError.message}`,
+        );
+      }
+    }
   }
 
-  // The SDK with responseMimeType=application/json should return valid JSON.
-  // Parse defensively in case the model decorates the output.
-  const jsonMatch = text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
-    throw new Error(`Gemini response is not JSON: ${text.slice(0, 200)}`);
-  }
-
-  const parsed: unknown = JSON.parse(jsonMatch[0]);
-  return validateResult(parsed);
+  throw lastFormatError ?? new Error('Gemini response could not be parsed');
 }

@@ -111,6 +111,12 @@ export interface InferenceOptions {
    */
   readonly maxImages?: number;
   /**
+   * Allows switching to a different vendor after the selected provider fails.
+   * Defaults to false so a user's explicit provider choice never consumes
+   * another provider's credits without consent.
+   */
+  readonly allowProviderFallback?: boolean;
+  /**
    * Called when the primary provider fails and fallback kicks in.
    * Receives the provider that failed and the one that will be tried next.
    * The caller MUST surface this to the user (feedback_no_fallback rule).

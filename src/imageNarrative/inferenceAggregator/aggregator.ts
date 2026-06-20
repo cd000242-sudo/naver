@@ -51,6 +51,8 @@ export interface AggregatorOptions {
    * Defaults to 3 (SPEC FR-4 guideline).
    */
   readonly concurrency?: number;
+  /** Explicit opt-in for switching to another paid Vision provider. */
+  readonly allowProviderFallback?: InferenceOptions['allowProviderFallback'];
   /** Forwarded to visionRouter for modal display on fallback. */
   readonly onFallback?: InferenceOptions['onFallback'];
 }
@@ -222,6 +224,7 @@ export async function aggregateInferences(
         provider,
         mode,
         context: options.context,
+        allowProviderFallback: options.allowProviderFallback,
         onFallback: options.onFallback,
       },
     );

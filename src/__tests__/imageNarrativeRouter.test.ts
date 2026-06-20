@@ -69,7 +69,24 @@ describe('visionRouter — inferImage', () => {
     expect(response.latencyMs).toBeGreaterThanOrEqual(0);
   });
 
-  it('falls back to OpenAI when Gemini fails', async () => {
+  it('does not call OpenAI when explicitly selected Gemini fails', async () => {
+    const openaiMock = vi.fn().mockResolvedValue(VALID_RESULT);
+    vi.doMock('../imageNarrative/visionInference/geminiVisionAdapter', () => ({
+      runGeminiVision: vi.fn().mockRejectedValue(new Error('Gemini unavailable')),
+    }));
+    vi.doMock('../imageNarrative/visionInference/openaiVisionAdapter', () => ({
+      runOpenAIVision: openaiMock,
+    }));
+
+    const { inferImage } = await import('../imageNarrative/visionInference/visionRouter');
+    await expect(
+      inferImage(MOCK_CONTEXT, { provider: 'gemini', mode: 'food' }),
+    ).rejects.toThrow(/Gemini unavailable/i);
+
+    expect(openaiMock).not.toHaveBeenCalled();
+  });
+
+  it('falls back to OpenAI only when cross-provider fallback is explicitly enabled', async () => {
     vi.doMock('../imageNarrative/visionInference/geminiVisionAdapter', () => ({
       runGeminiVision: vi.fn().mockRejectedValue(new Error('Gemini unavailable')),
     }));
@@ -78,7 +95,11 @@ describe('visionRouter — inferImage', () => {
     }));
 
     const { inferImage } = await import('../imageNarrative/visionInference/visionRouter');
-    const response = await inferImage(MOCK_CONTEXT, { provider: 'gemini', mode: 'food' });
+    const response = await inferImage(MOCK_CONTEXT, {
+      provider: 'gemini',
+      mode: 'food',
+      allowProviderFallback: true,
+    });
 
     expect(response.provider).toBe('openai');
     expect(response.result.description_ko).toBe(VALID_RESULT.description_ko);
@@ -95,7 +116,11 @@ describe('visionRouter — inferImage', () => {
     vi.spyOn(console, 'warn').mockImplementation(() => { /* suppress */ });
 
     const { inferImage } = await import('../imageNarrative/visionInference/visionRouter');
-    const response = await inferImage(MOCK_CONTEXT, { provider: 'openai', mode: 'food' });
+    const response = await inferImage(MOCK_CONTEXT, {
+      provider: 'openai',
+      mode: 'food',
+      allowProviderFallback: true,
+    });
 
     expect(response.provider).toBe('gemini');
     expect(response.result.description_ko).toBe(VALID_RESULT.description_ko);
@@ -112,7 +137,10 @@ describe('visionRouter — inferImage', () => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => { /* captured */ });
 
     const { inferImage } = await import('../imageNarrative/visionInference/visionRouter');
-    await inferImage(MOCK_CONTEXT, { provider: 'gemini' });
+    await inferImage(MOCK_CONTEXT, {
+      provider: 'gemini',
+      allowProviderFallback: true,
+    });
 
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('gemini'));
   });
@@ -129,7 +157,11 @@ describe('visionRouter — inferImage', () => {
     const onFallback = vi.fn();
 
     const { inferImage } = await import('../imageNarrative/visionInference/visionRouter');
-    await inferImage(MOCK_CONTEXT, { provider: 'gemini', onFallback });
+    await inferImage(MOCK_CONTEXT, {
+      provider: 'gemini',
+      onFallback,
+      allowProviderFallback: true,
+    });
 
     expect(onFallback).toHaveBeenCalledWith('gemini', 'openai');
   });
@@ -146,7 +178,10 @@ describe('visionRouter — inferImage', () => {
 
     const { inferImage } = await import('../imageNarrative/visionInference/visionRouter');
     await expect(
-      inferImage(MOCK_CONTEXT, { provider: 'gemini' }),
+      inferImage(MOCK_CONTEXT, {
+        provider: 'gemini',
+        allowProviderFallback: true,
+      }),
     ).rejects.toThrow(/Vision inference failed/i);
   });
 
