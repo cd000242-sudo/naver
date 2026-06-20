@@ -124,16 +124,17 @@ export async function isLoggedIn(page: any): Promise<boolean> {
     // ✅ [v2.11.x] 정확한 로그인 신호 = 살아있는 Cognito 세션 토큰(idToken/accessToken).
     //   라이브 확인 결과 dropshot은 이 토큰을 localStorage가 아니라 **쿠키**에 저장한다
     //   (CognitoIdentityServiceProvider.<clientId>.<user>.idToken/accessToken). 따라서
-    //   localStorage·쿠키 양쪽을 본다. idToken/accessToken은 signOut 시 제거되지만
-    //   LastAuthUser/deviceKey/refreshToken 등은 "기기 기억"으로 잔존하므로 제외해야
-    //   false positive("로그아웃인데 로그인됨")가 안 난다. 느슨한 /session/ 매칭도 금지.
+    //   localStorage·쿠키 양쪽을 본다. idToken/accessToken/refreshToken은 signOut 시
+    //   모두 제거되므로 세션 신호로 본다. 반면 LastAuthUser/deviceKey/deviceGroupKey
+    //   등은 "기기 기억"으로 로그아웃 후에도 잔존하므로 제외해야 false positive
+    //   ("로그아웃인데 로그인됨")가 안 난다. 느슨한 /session/ 매칭도 금지.
     const loggedIn = await page.evaluate(() => {
       const isJwt = (v: string | null): boolean => {
         if (!v) return false;
         const parts = v.split('.');
         return parts.length === 3 && parts.every((p) => p.length > 0);
       };
-      const TOKEN_KEY = /CognitoIdentityServiceProvider\..+\.(idToken|accessToken)$/i;
+      const TOKEN_KEY = /CognitoIdentityServiceProvider\..+\.(idToken|accessToken|refreshToken)$/i;
       try {
         for (let i = 0; i < localStorage.length; i++) {
           const k = localStorage.key(i) || '';
