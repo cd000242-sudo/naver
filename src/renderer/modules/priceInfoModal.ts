@@ -21,24 +21,75 @@ function isMaskedSecretValue(value: string | undefined): boolean {
   return /[\u2022\u25CF*]/.test(value);
 }
 
+/** display \uD1A0\uAE00 \uD5EC\uD37C \u2014 \uBC84\uD2BC/\uCEE8\uD14C\uC774\uB108 \uD45C\uC2DC \uC81C\uC5B4. */
+function setShown(el: HTMLElement | null, on: boolean, mode: 'inline-block' | 'flex' = 'inline-block'): void {
+  if (el) el.style.display = on ? mode : 'none';
+}
+
 /**
- * \uC5D0\uC774\uC804\uD2B8 \uBAA8\uB4DC(codex/claude \uAD6C\uB3C5 CLI) \uC124\uCE58\u00B7\uB85C\uADF8\uC778 \uC0C1\uD0DC \uBC43\uC9C0 \uAC31\uC2E0.
+ * \uC124\uCE58/\uB85C\uADF8\uC778 \uBC84\uD2BC\uC5D0 \uD074\uB9AD \uD578\uB4E4\uB7EC \uBC14\uC778\uB529 (\uD480\uC790\uB3D9 \u2014 \uC571\uC5D0\uC11C npm \uC124\uCE58/OAuth \uB85C\uADF8\uC778 \uC2E4\uD589).
+ * onclick \uB300\uC785\uC774\uB77C \uBC18\uBCF5 \uD638\uCD9C\uB3FC\uB3C4 \uB204\uC801\uB418\uC9C0 \uC54A\uB294\uB2E4. \uC644\uB8CC \uD6C4 \uC0C1\uD0DC\uB97C \uC7AC\uC870\uD68C\uD574 \uBC43\uC9C0/\uBC84\uD2BC\uC744 \uAC31\uC2E0\uD55C\uB2E4.
+ */
+function bindAgentAction(
+  btn: HTMLButtonElement | null,
+  provider: 'codex' | 'claude',
+  action: 'install' | 'login',
+  statusEl: HTMLElement,
+): void {
+  if (!btn) return;
+  btn.onclick = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const api = (window as any).api;
+    const fn = action === 'install' ? api?.agentInstall : api?.agentLogin;
+    if (typeof fn !== 'function') return;
+    const orig = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = action === 'install' ? '\u23F3 \uC124\uCE58 \uC911... (\uCD5C\uB300 2\uBD84)' : '\u23F3 \uBE0C\uB77C\uC6B0\uC800\uC5D0\uC11C \uB85C\uADF8\uC778 \uC644\uB8CC...';
+    statusEl.textContent = action === 'install' ? '\u23F3 npm \uC804\uC5ED \uC124\uCE58 \uC911...' : '\u23F3 \uB85C\uADF8\uC778 \uC9C4\uD589 \uC911 (\uBE0C\uB77C\uC6B0\uC800 \uD655\uC778)...';
+    statusEl.style.color = '#6b7280';
+    try {
+      const res = await fn(provider);
+      if (res?.success) {
+        toastManager.success(action === 'install' ? '\u2705 CLI \uC124\uCE58 \uC644\uB8CC' : '\u2705 \uB85C\uADF8\uC778 \uC644\uB8CC');
+      } else {
+        toastManager.error(`\u274C ${action === 'install' ? '\uC124\uCE58' : '\uB85C\uADF8\uC778'} \uC2E4\uD328: ${res?.message || '\uC54C \uC218 \uC5C6\uB294 \uC624\uB958'}`);
+      }
+    } catch (err) {
+      toastManager.error(`\u274C \uC624\uB958: ${(err as Error).message}`);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = orig;
+      void refreshAgentStatusBadges(); // \uC0C1\uD0DC \uC7AC\uC870\uD68C \u2192 \uBC43\uC9C0/\uBC84\uD2BC \uC790\uB3D9 \uAC31\uC2E0
+    }
+  };
+}
+
+/**
+ * \uC5D0\uC774\uC804\uD2B8 \uBAA8\uB4DC(codex/claude \uAD6C\uB3C5 CLI) \uC124\uCE58\u00B7\uB85C\uADF8\uC778 \uC0C1\uD0DC \uBC43\uC9C0 + \uC561\uC158 \uBC84\uD2BC \uAC31\uC2E0.
  * \uAE00\uC0DD\uC131 \uC5D4\uC9C4 \uC124\uC815 \uB85C\uB4DC \uC2DC \uD638\uCD9C \u2014 agent:status IPC\uB85C \uC2E4\uC81C \uC0C1\uD0DC\uB97C \uC870\uD68C\uD574 \uCE74\uB4DC\uC5D0 \uD45C\uAE30\uD55C\uB2E4.
+ * \uBBF8\uC124\uCE58 \u2192 \uC790\uB3D9\uC124\uCE58 \uBC84\uD2BC, \uBBF8\uB85C\uADF8\uC778 \u2192 \uB85C\uADF8\uC778 \uBC84\uD2BC\uC744 \uB178\uCD9C\uD55C\uB2E4(\uD480\uC790\uB3D9).
  */
 async function refreshAgentStatusBadges(): Promise<void> {
   const api = (window as any).api;
   if (!api?.agentStatus) return;
-  const targets: Array<{ provider: 'codex' | 'claude'; elId: string }> = [
-    { provider: 'codex', elId: 'agent-codex-status' },
-    { provider: 'claude', elId: 'agent-claude-status' },
-  ];
-  await Promise.all(targets.map(async ({ provider, elId }) => {
-    const el = document.getElementById(elId);
+  const targets = [
+    { provider: 'codex', elId: 'agent-codex-status', actionsId: 'agent-codex-actions', installId: 'agent-codex-install-btn', loginId: 'agent-codex-login-btn' },
+    { provider: 'claude', elId: 'agent-claude-status', actionsId: 'agent-claude-actions', installId: 'agent-claude-install-btn', loginId: 'agent-claude-login-btn' },
+  ] as const;
+  await Promise.all(targets.map(async (t) => {
+    const el = document.getElementById(t.elId);
     if (!el) return;
+    const actions = document.getElementById(t.actionsId);
+    const installBtn = document.getElementById(t.installId) as HTMLButtonElement | null;
+    const loginBtn = document.getElementById(t.loginId) as HTMLButtonElement | null;
     el.textContent = '\u23F3 \uC0C1\uD0DC \uD655\uC778 \uC911...';
     el.style.color = '#6b7280';
+    setShown(actions, false, 'flex');
+    setShown(installBtn, false);
+    setShown(loginBtn, false);
     try {
-      const res = await api.agentStatus(provider);
+      const res = await api.agentStatus(t.provider);
       const s = res?.status;
       if (!res?.success || !s) {
         el.textContent = '\u26A0\uFE0F \uC0C1\uD0DC \uD655\uC778 \uC2E4\uD328 \u2014 \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4';
@@ -46,13 +97,19 @@ async function refreshAgentStatusBadges(): Promise<void> {
         return;
       }
       if (!s.installed) {
-        el.textContent = '\u2B07\uFE0F \uBBF8\uC124\uCE58 \u2014 CLI \uC124\uCE58 \uD6C4 \uC0AC\uC6A9 \uAC00\uB2A5';
+        el.textContent = '\u2B07\uFE0F \uBBF8\uC124\uCE58 \u2014 \uC790\uB3D9 \uC124\uCE58\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4';
         el.style.color = '#b91c1c';
+        setShown(actions, true, 'flex');
+        setShown(installBtn, true);
+        bindAgentAction(installBtn, t.provider, 'install', el);
         return;
       }
       if (!s.loggedIn) {
         el.textContent = `\u2705 \uC124\uCE58\uB428(${s.version || '?'}) \u00B7 \u274C \uB85C\uADF8\uC778 \uD544\uC694`;
         el.style.color = '#b45309';
+        setShown(actions, true, 'flex');
+        setShown(loginBtn, true);
+        bindAgentAction(loginBtn, t.provider, 'login', el);
         return;
       }
       el.textContent = `\u2705 \uC900\uBE44\uB428 \u2014 ${s.detail || s.version || '\uB85C\uADF8\uC778 \uC0C1\uD0DC'}`;

@@ -122,6 +122,10 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('agent:status', provider),
   agentGenerate: (payload: { provider: 'codex' | 'claude'; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }): Promise<{ success: boolean; provider?: string; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:generate', payload),
+  agentInstall: (provider: 'codex' | 'claude'): Promise<{ success: boolean; version?: string; code?: string; message?: string }> =>
+    ipcRenderer.invoke('agent:install', provider),
+  agentLogin: (provider: 'codex' | 'claude'): Promise<{ success: boolean; code?: string; message?: string }> =>
+    ipcRenderer.invoke('agent:login', provider),
   // ✅ [2026-03-11 FIX] generateImages 바인딩 추가 (누락으로 인한 연속발행 이미지 생성 실패 수정)
   generateImages: (options: any): Promise<GenerateImagesResult> =>
     ipcRenderer.invoke('automation:generateImages', options),

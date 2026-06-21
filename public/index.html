@@ -5814,6 +5814,13 @@
                                                 style="font-size: 0.8rem; color: #6b7280; font-weight: 700; margin-top: 0.3rem;">⏳ 상태 확인 중...</div>
                                         </div>
                                     </label>
+                                    <!-- Codex 설치/로그인 액션 (label 밖 — 라디오 토글 충돌 방지, 상태 따라 JS가 표시) -->
+                                    <div id="agent-codex-actions" style="display: none; gap: 0.5rem; margin: -0.25rem 0 0.25rem 0;">
+                                        <button type="button" id="agent-codex-install-btn"
+                                            style="display: none; padding: 0.5rem 0.9rem; background: #059669; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">⬇️ 자동 설치</button>
+                                        <button type="button" id="agent-codex-login-btn"
+                                            style="display: none; padding: 0.5rem 0.9rem; background: #047857; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">🔑 로그인</button>
+                                    </div>
 
                                     <!-- 🤖 에이전트 모드 (Claude Code 구독) -->
                                     <label class="gemini-model-card"
@@ -5836,6 +5843,13 @@
                                                 style="font-size: 0.8rem; color: #6b7280; font-weight: 700; margin-top: 0.3rem;">⏳ 상태 확인 중...</div>
                                         </div>
                                     </label>
+                                    <!-- Claude 설치/로그인 액션 (label 밖 — 라디오 토글 충돌 방지, 상태 따라 JS가 표시) -->
+                                    <div id="agent-claude-actions" style="display: none; gap: 0.5rem; margin: -0.25rem 0 0.25rem 0;">
+                                        <button type="button" id="agent-claude-install-btn"
+                                            style="display: none; padding: 0.5rem 0.9rem; background: #7c3aed; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">⬇️ 자동 설치</button>
+                                        <button type="button" id="agent-claude-login-btn"
+                                            style="display: none; padding: 0.5rem 0.9rem; background: #6d28d9; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">🔑 로그인</button>
+                                    </div>
 
                                     <!-- 에이전트 모드 고지 (ToS·한도·사진모드 vision키) -->
                                     <div

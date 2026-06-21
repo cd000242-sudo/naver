@@ -5,6 +5,7 @@
 
 // ✅ renderer.ts의 전역 변수/함수 참조
 import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+import { ensureAgentEngineReady } from '../utils/agentModeGuard.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -455,6 +456,8 @@ export async function generateContentFromUrl(
   // ✅ UI에서 선택된 생성기 사용 (UnifiedDOMCache에서 가져옴)
   const generator = UnifiedDOMCache.getGenerator();
   console.log(`[Unified] 사용할 AI 엔진: ${generator}`);
+  // ✅ 에이전트 모드 사전 가드 — 미설치/미로그인이면 차단형 모달 후 중단 (silent 폴백 없음)
+  if (!(await ensureAgentEngineReady(generator))) { try { hideUnifiedProgress(); } catch { /* ignore */ } return; }
   const targetAge = 'all'; // 고정
 
   // ✅ Override 우선 사용
@@ -876,6 +879,8 @@ export async function generateContentFromKeywords(
   appendLog('✏️ 키워드 기반 AI 글 생성 시작...');
 
   const generator = UnifiedDOMCache.getGenerator();
+  // ✅ 에이전트 모드 사전 가드 — 미설치/미로그인이면 차단형 모달 후 중단 (silent 폴백 없음)
+  if (!(await ensureAgentEngineReady(generator))) { try { hideUnifiedProgress(); } catch { /* ignore */ } return; }
   const targetAge = 'all'; // 고정
 
   // ✅ Override 우선 사용
@@ -1583,6 +1588,8 @@ export async function paraphraseContent(): Promise<void> {
     }
 
     const generator = UnifiedDOMCache.getGenerator();
+    // ✅ 에이전트 모드 사전 가드 — 미준비면 중단 (finally가 모달/잠금 정리, silent 폴백 없음)
+    if (!(await ensureAgentEngineReady(generator))) return;
     const targetAge = 'all';
     const toneStyle = UnifiedDOMCache.getToneStyle();
     const articleType = (document.getElementById('unified-article-type') as HTMLSelectElement)?.value || 'general';

@@ -29,6 +29,30 @@ export function registerAgentHandlers(): void {
     }
   });
 
+  // 자동 설치 (npm i -g) — 사용자 옵트인. 완료까지 대기 후 결과 반환.
+  ipcMain.handle('agent:install', async (_event, provider: AgentProvider) => {
+    try {
+      const { installAgent } = await import('../../agentCli/installer.js');
+      const result = await installAgent(provider);
+      return { success: true, ...result };
+    } catch (err) {
+      const e = err as { code?: string; message?: string };
+      return { success: false, code: e?.code, message: e?.message ?? '설치 중 오류가 발생했습니다.' };
+    }
+  });
+
+  // 구독 로그인 (브라우저 OAuth) — 완료까지 대기 후 결과 반환.
+  ipcMain.handle('agent:login', async (_event, provider: AgentProvider) => {
+    try {
+      const { loginAgent } = await import('../../agentCli/installer.js');
+      await loginAgent(provider);
+      return { success: true };
+    } catch (err) {
+      const e = err as { code?: string; message?: string };
+      return { success: false, code: e?.code, message: e?.message ?? '로그인 중 오류가 발생했습니다.' };
+    }
+  });
+
   // One-shot generation. Errors carry a stable code so the renderer can show the right modal.
   ipcMain.handle('agent:generate', async (_event, payload: AgentGeneratePayload) => {
     try {

@@ -43,11 +43,37 @@ async function probeCodexLogin(): Promise<{ loggedIn: boolean; detail?: string }
   }
 }
 
-/** claude stores subscription OAuth in ~/.claude/.credentials.json on this platform. */
+/**
+ * claude exposes `claude auth status` (JSON: { loggedIn, authMethod, subscriptionType, ... }).
+ * Falls back to the ~/.claude/.credentials.json check if the JSON cannot be read.
+ */
 async function probeClaudeLogin(): Promise<{ loggedIn: boolean; detail?: string }> {
   try {
-    await access(join(homedir(), '.claude', '.credentials.json'));
-    return { loggedIn: true, detail: 'credentials.json 확인됨' };
+    const res = await spawnCollect({
+      command: 'claude',
+      args: ['auth', 'status'],
+      provider: 'claude',
+      timeoutMs: DETECT_TIMEOUT_MS,
+    });
+    const out = (res.stdout || res.stderr).trim();
+    try {
+      const j = JSON.parse(out) as { loggedIn?: boolean; authMethod?: string; subscriptionType?: string };
+      if (j && j.loggedIn === true) {
+        const detail = j.subscriptionType
+          ? `${j.authMethod || 'claude.ai'} · ${j.subscriptionType}`
+          : (j.authMethod || '로그인됨');
+        return { loggedIn: true, detail };
+      }
+      return { loggedIn: false };
+    } catch {
+      // Non-JSON output — fall back to the credentials file existence check.
+      try {
+        await access(join(homedir(), '.claude', '.credentials.json'));
+        return { loggedIn: true, detail: 'credentials.json 확인됨' };
+      } catch {
+        return { loggedIn: false };
+      }
+    }
   } catch {
     return { loggedIn: false };
   }

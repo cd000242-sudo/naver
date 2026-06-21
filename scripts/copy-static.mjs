@@ -197,6 +197,8 @@ try {
     'videoProviderUtils.js',
     // 상위 유틸리티 (여러 모듈에 의존)
     'uiManagers.js',
+    // ✅ 에이전트 모드 사전 가드 — contentGeneration.ts에서 import (toastManager 의존 → uiManagers 뒤).
+    'agentModeGuard.js',
     'apiClient.js',
     'postStorageUtils.js',
     // ✅ [SPEC-IMAGE-MODEL-001 Phase 3] localStorage display field absolutepath strip utility.
