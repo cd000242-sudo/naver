@@ -62,41 +62,43 @@ export function injectHeadingVariation(
     return `${subjectLine}${hint}\n\n${prompt}`;
 }
 
-// A fully neutral, safe scene used as the last-resort prompt when Flow keeps
-// returning a server-side generation error for the original prompt.
-const SIMPLIFY_GENERIC_SCENE =
-    'A clean, professional conceptual illustration with soft natural lighting, ' +
-    'minimal modern composition, calm neutral friendly tone, no text, no letters, ' +
-    'no charts or numbers, safe for all audiences.';
-
-// Progressive prompt simplification for Flow's "문제가 발생했습니다" generation errors.
+// Quality-preserving bypass for Flow's "문제가 발생했습니다" generation errors.
 //
-// Flow rejects some prompts deterministically — abstract policy/finance subjects (e.g. a
-// Korean heading like "청년내일저축계좌 소득·재산 기준"), number/amount-heavy phrasing, or
-// otherwise sensitive wording. Re-submitting the same text fails forever, so we strip the
-// risky parts step by step and finally fall back to a generic safe scene that almost always
-// renders. level 0 = unchanged; level 1 = strip subject line + numbers/amounts; level >= 2 =
-// generic safe scene only.
+// The trigger is almost always the literal Korean "# Subject" heading line that
+// injectHeadingVariation prepends (abstract policy/finance text, e.g. "청년내일저축계좌
+// 소득·재산 기준"). The English visual scene below it (the LLM-built englishPrompt) is the
+// actual quality content. So we BYPASS the trigger while keeping that scene intact — we do
+// NOT dumb the image down to a generic placeholder.
+//
+//   level 0 = unchanged
+//   level 1 = unchanged text (caller still retries on a FRESH project → clears transient/
+//             project-state errors at full quality)
+//   level 2 = drop ONLY the Korean "# Subject" line; keep viewpoint + English scene (full quality)
+//   level 3+= also neutralize currency/percent/long-number tokens; scene stays (near-full quality)
+//
+// Never returns empty — if a step would strip everything, the previous text is kept.
 export function simplifyFlowPrompt(prompt: string, level: number): string {
     if (!prompt || level <= 0) return prompt;
 
-    if (level >= 2) {
-        return SIMPLIFY_GENERIC_SCENE;
-    }
+    // level 1 — no text change; the retry happens on a fresh Flow project (handled by caller).
+    if (level === 1) return prompt;
 
-    // level 1 — drop the literal heading subject line and number/currency/percent tokens that
-    // commonly trip Flow, then nudge toward a simple, safe composition.
-    const stripped = String(prompt)
-        .replace(/^#\s*Subject[^\n]*\n+/gim, '')   // remove "# Subject (must reflect this heading): ..."
-        .replace(/[₩$]\s?\d[\d,.\s]*/g, ' ')        // currency amounts
-        .replace(/\d+(\.\d+)?\s?%/g, ' ')           // percentages
-        .replace(/\d{2,}/g, ' ')                    // long digit runs (years, amounts, counts)
-        .replace(/[ \t]{2,}/g, ' ')
+    // level 2 — drop only the literal "# Subject (...): <heading>" line. English scene survives.
+    let out = String(prompt)
+        .replace(/^#\s*Subject[^\n]*\n+/gim, '')
         .replace(/\n{3,}/g, '\n\n')
         .trim();
 
-    // Over-stripped to nothing (digit/symbol-only prompt) → skip straight to the generic scene.
-    if (!stripped) return SIMPLIFY_GENERIC_SCENE;
+    // level 3+ — additionally neutralize number/currency/percent tokens that can trip Flow,
+    // while keeping the actual scene description.
+    if (level >= 3) {
+        out = out
+            .replace(/[₩$]\s?\d[\d,.\s]*/g, ' ')   // currency amounts
+            .replace(/\d+(\.\d+)?\s?%/g, ' ')      // percentages
+            .replace(/\d{2,}/g, ' ')               // long digit runs (years, amounts, counts)
+            .replace(/[ \t]{2,}/g, ' ')
+            .trim();
+    }
 
-    return `${stripped}\n\nKeep the image simple, clean, conceptual and safe-for-all-audiences. No text, no numbers, no charts.`;
+    return out || prompt; // never empty — keep the original scene if over-stripped
 }
