@@ -38,6 +38,10 @@ export function classifyError(input: ClassifyInput): RecoveryDecision {
   if (errorCode === 'IMAGEFX_QUOTA_EXCEEDED') {
     return blockDecision('B3', '시간당 한도 초과 (IMAGEFX_QUOTA_EXCEEDED)', errorCode);
   }
+  // Flow 무료 할당량(일일 한도) 소진 — 재시도 무의미, 즉시 차단 + 업그레이드/다른 엔진 안내.
+  if (errorCode === 'FLOW_QUOTA_EXCEEDED') {
+    return blockDecision('B3', 'Flow 무료 할당량 한도 도달 (FLOW_QUOTA_EXCEEDED) — 업그레이드/다른 엔진 유도', errorCode);
+  }
   // ✅ [v2.10.299] BOT_DETECTED — 봇감지 의심 (오늘 성공 < 100장에서 429 발생).
   //   B3와 modalCode는 동일하지만 errorCode가 BOT_DETECTED로 보존되어 ProgressModal에서
   //   "한도 아님 → 다른 엔진 즉시 전환" 메시지로 차별화 표시됨.

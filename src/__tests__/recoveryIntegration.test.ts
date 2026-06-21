@@ -181,4 +181,17 @@ describe('Phase 5 — FLOW_BOT_BLOCKED fail-fast 분류', () => {
     expect(decision.modalCode).toBe('B3');
     expect(decision.errorCode).toBe('FLOW_BOT_BLOCKED');
   });
+
+  it('FLOW_QUOTA_EXCEEDED → block B3 (무료 할당량 — 업그레이드/다른 엔진)', () => {
+    const decision = classifyError({
+      errorCode: 'FLOW_QUOTA_EXCEEDED',
+      errorMessage: 'FLOW_QUOTA_EXCEEDED:Flow 무료 할당량 한도 도달',
+      attempts: emptyAttempts,
+      context: ctx(0, 'flow'),
+    });
+    expect(decision.action).toBe('block');
+    if (decision.action !== 'block') return;
+    expect(decision.modalCode).toBe('B3');
+    expect(decision.errorCode).toBe('FLOW_QUOTA_EXCEEDED');
+  });
 });

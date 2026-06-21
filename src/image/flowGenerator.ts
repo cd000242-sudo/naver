@@ -1272,19 +1272,14 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
     // [v1.6.1] 포커스 안정화 150→50ms
     await page.waitForTimeout(50);
 
-    // ✅ [Phase 0 anti-BotGuard] 1순위: 인간형 타이핑(키 간격 variance + 마우스 포커스).
-    //   fill()은 즉시 붙여넣기(키리듬 variance 0) → BotGuard 즉시 탄로. 실패 시 fill→pressSequentially 폴백.
+    // ⚠️ [ROLLBACK Phase 0 humanType] off-screen headful 창은 OS 포커스가 없어 page.keyboard 입력이
+    //   순서가 꼬이거나 유실됨(라이브 실측: 552자 중 82자만·문자 뒤섞임). fill()이 안정적이고,
+    //   BotGuard 차단은 headful+실UA+워밍업이 이미 제거하므로 타이핑 리듬은 포기하고 fill 1순위로 복귀.
     let inputSuccess = false;
     try {
-        const { humanType } = await import('./humanInteraction.js');
-        await humanType(page, promptInput, prompt);
+        await promptInput.fill(prompt, { timeout: 10000 });
         inputSuccess = true;
-    } catch (err0) {
-        flowWarn(`[Flow][2/3] humanType 실패 → fill() 폴백: ${(err0 as Error).message.substring(0, 100)}`);
-        try {
-            await promptInput.fill(prompt, { timeout: 10000 });
-            inputSuccess = true;
-        } catch (err1) {
+    } catch (err1) {
         flowWarn(`[Flow][2/3] fill() 실패 → pressSequentially 폴백: ${(err1 as Error).message.substring(0, 100)}`);
         try {
             await promptInput.pressSequentially(prompt, { delay: 3, timeout: 15000 });
@@ -1298,7 +1293,6 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
             } catch (err3) {
                 flowWarn(`[Flow][2/3] keyboard.type 폴백도 실패: ${(err3 as Error).message.substring(0, 100)}`);
             }
-        }
         }
     }
     if (!inputSuccess) {
@@ -1517,21 +1511,33 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
             try {
                 const state = await page.evaluate(() => {
                     const bodyText = document.body?.innerText || '';
+                    // 쿼터 소진(무료 한도) — "도구 에이전트 할당량 한도에 도달... 내일 다시/업그레이드".
+                    //   재시도로 회복 불가 → 즉시 명확 안내. (라이브 실측 메시지)
+                    const isQuota = /할당량 한도에 도달|한도에 도달했|업그레이드하여 더 많이|내일 다시 시도|quota|reached your limit|upgrade to (chat|generate) more|daily limit/i.test(bodyText);
                     const hasError = /문제가 발생했습니다|다시 시도해 주세요|Something went wrong|An error occurred/i.test(bodyText);
-                    if (!hasError) return { hasError: false, clicked: false, errorText: '' };
-                    // 진단: 오류 카드 주변 텍스트 일부를 캡처 (실제 트리거 원인 분석용)
+                    if (!isQuota && !hasError) return { hasError: false, isQuota: false, clicked: false, errorText: '' };
+                    // 진단: 오류/쿼터 카드 주변 텍스트 일부를 캡처 (실제 트리거 원인 분석용)
                     const errorText = bodyText.replace(/\s+/g, ' ').slice(0, 300);
                     let clicked = false;
-                    for (const btn of Array.from(document.querySelectorAll('button'))) {
-                        const label = (btn.textContent || '').trim();
-                        if (/^다시 시도$|^Retry$|^Try again$/i.test(label)) {
-                            (btn as HTMLButtonElement).click();
-                            clicked = true;
-                            break;
+                    if (!isQuota) {
+                        for (const btn of Array.from(document.querySelectorAll('button'))) {
+                            const label = (btn.textContent || '').trim();
+                            if (/^다시 시도$|^Retry$|^Try again$/i.test(label)) {
+                                (btn as HTMLButtonElement).click();
+                                clicked = true;
+                                break;
+                            }
                         }
                     }
-                    return { hasError: true, clicked, errorText };
+                    return { hasError, isQuota, clicked, errorText };
                 });
+                // 쿼터 소진은 재시도 무의미 → 즉시 명확 에러(무료 한도/업그레이드/다른 엔진).
+                if (state.isQuota && !watchdogStopped) {
+                    flowError(`[Flow][3/3] ⛔ 쿼터 소진 감지: ${state.errorText}`);
+                    sendImageLog('⛔ [Flow] 무료 할당량 한도 도달 — 내일 리셋 / AI Pro 업그레이드 / 다른 엔진(나노바나나·DeepInfra)');
+                    reject(new Error('FLOW_QUOTA_EXCEEDED:Flow 무료 할당량(일일 한도)에 도달했습니다. Google 메시지: "도구 에이전트 할당량 한도에 도달". 해결: 1) 내일 리셋 대기 2) Google AI Pro/Ultra 업그레이드 3) 다른 이미지 엔진(나노바나나/DeepInfra) 사용'));
+                    return;
+                }
                 if (state.hasError && !watchdogStopped) {
                     if (state.clicked && retryClicks < FLOW_INPAGE_RETRY_MAX) {
                         retryClicks += 1;
