@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
@@ -114,7 +114,7 @@ function applyPlanOverrides(plans: Plan[], siteContent: SiteContent | null): Pla
             ...plan,
             ...patch,
             features: Array.isArray(patch.features) && patch.features.length > 0 ? patch.features : plan.features,
-            badge: plan.badge,
+            badge: patch.badgeText ? { ...(plan.badge || { type: 'best' as const }), text: patch.badgeText } : plan.badge,
             free: plan.free,
         };
     });
@@ -256,23 +256,43 @@ function PricingPage() {
 
     const normalPricingActive = isNormalPricingActive(pricingNow);
     const activePlans = applyPlanOverrides(PLANS[tab], siteContent);
+    const pricingPage = siteContent?.pricing?.page || {};
+    const pricingBgImage = siteContent?.theme?.pricingBgImage;
+    const pricingTitle = normalPricingActive
+        ? (pricingPage.titleNormal || '정상가 적용 중입니다. 올인원 라이선스로 시작하세요')
+        : (pricingPage.title || '지금 이벤트가로 이용하고, 8월 1일 정상가 전에 시작하세요');
+    const pricingEventTitle = normalPricingActive
+        ? (pricingPage.eventTitleNormal || '정상가가 적용 중입니다.')
+        : (pricingPage.eventTitle || '현재 가격은 7월 31일까지 이벤트가입니다.');
+    const pricingEventDesc = normalPricingActive
+        ? (pricingPage.eventDescNormal || '2026년 8월 1일부터 아래 정상가로 자동 전환되었습니다.')
+        : (pricingPage.eventDesc || '2026년 8월 1일부터 아래 정상가로 자동 전환됩니다.');
 
     return (
-        <div style={{ position: 'relative', zIndex: 1 }}>
+        <div style={{
+            position: 'relative',
+            zIndex: 1,
+            ...(pricingBgImage ? {
+                backgroundImage: `linear-gradient(rgba(5,8,12,0.34), rgba(5,8,12,0.50)), url(${pricingBgImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+                backgroundAttachment: 'fixed',
+            } : {}),
+        }}>
             <section style={{ padding: '140px 20px 80px', maxWidth: 1320, margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
-                    <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>PRICING</span>
+                    <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>{pricingPage.eyebrow || 'PRICING'}</span>
                     <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>
-                        {normalPricingActive ? '정상가 적용 중입니다. 올인원 라이선스로 시작하세요' : '지금 이벤트가로 이용하고, 8월 1일 정상가 전에 시작하세요'}
+                        {pricingTitle}
                     </h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>1개월·3개월·1년·영구제 모두 올인원 라이선스로 Better Life Naver, LEWORD, Leadernam Orbit을 함께 이용합니다.</p>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>{pricingPage.desc || '1개월·3개월·1년·영구제 모두 올인원 라이선스로 Better Life Naver, LEWORD, Leadernam Orbit을 함께 이용합니다.'}</p>
                     <div style={{ margin: '20px auto 0', maxWidth: 860, padding: '18px 24px', borderRadius: 16, border: '1px solid rgba(255,215,0,0.34)', background: 'rgba(255,215,0,0.10)', color: '#FFD700', fontSize: 16, fontWeight: 900, lineHeight: 1.75, boxShadow: '0 12px 36px rgba(0,0,0,0.16)' }}>
                         <div style={{ fontSize: 18, marginBottom: 2 }}>
-                            {normalPricingActive ? '정상가가 적용 중입니다.' : '현재 가격은 7월 31일까지 이벤트가입니다.'}
+                            {pricingEventTitle}
                         </div>
-                        <div>{normalPricingActive ? '2026년 8월 1일부터 아래 정상가로 자동 전환되었습니다.' : '2026년 8월 1일부터 아래 정상가로 자동 전환됩니다.'}</div>
+                        <div>{pricingEventDesc}</div>
                         <div style={{ marginTop: 4, color: '#fff7b0', fontSize: 15 }}>
-                            1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원
+                            {pricingPage.eventLine || '1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원'}
                         </div>
                     </div>
                 </div>
@@ -291,7 +311,7 @@ function PricingPage() {
                                 color: tab === k ? '#FFD700' : 'rgba(255,255,255,0.7)',
                                 fontWeight: 700, fontSize: 14,
                             }}
-                        >{TAB_LABELS[k]}</button>
+                        >{pricingPage.tabLabel || TAB_LABELS[k]}</button>
                     ))}
                 </div>
 
@@ -415,7 +435,7 @@ function PricingPage() {
 
                 {/* Payment section */}
                 <div ref={paymentSectionRef} style={{ maxWidth: 720, margin: '0 auto', padding: '28px 24px', background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,215,0,0.15)', borderRadius: 18 }}>
-                    <label style={{ display: 'block', marginBottom: 8, color: '#FFD700', fontSize: 14, fontWeight: 700 }}>📧 라이선스를 받을 이메일</label>
+                    <label style={{ display: 'block', marginBottom: 8, color: '#FFD700', fontSize: 14, fontWeight: 700 }}>📧 {pricingPage.paymentEmailLabel || '라이선스를 받을 이메일'}</label>
                     <input
                         type="email"
                         value={email}
@@ -430,7 +450,7 @@ function PricingPage() {
                             animation: emailShake ? 'shakePay 0.4s' : 'none',
                         }}
                     />
-                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>결제 완료 후 이 이메일로 올인원 라이선스 코드가 발송됩니다.</p>
+                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', marginTop: 6, marginBottom: 14 }}>{pricingPage.paymentEmailHelp || '결제 완료 후 이 이메일로 올인원 라이선스 코드가 발송됩니다.'}</p>
 
                     <button
                         onClick={requestPayment}
@@ -448,8 +468,9 @@ function PricingPage() {
                         <span>{paying ? '결제 중...' : chargeLabel}</span>
                     </button>
                     <p style={{ textAlign: 'center', color: '#c9a84c', fontSize: 13, marginTop: 10, lineHeight: 1.7 }}>
-                        구매 시 올인원 코드 1개가 발급되며, 이용 기간 안에서 네이버 자동화툴·LEWORD·Leaders Orbit을 함께 사용할 수 있습니다.<br />
-                        무료 다운로드 체험은 Better Life Naver 기준이며, LEWORD·Orbit은 올인원 구매 후 함께 이용합니다.
+                        {(pricingPage.paymentNote || '구매 시 올인원 코드 1개가 발급되며, 이용 기간 안에서 네이버 자동화툴·LEWORD·Leaders Orbit을 함께 사용할 수 있습니다.\n무료 다운로드 체험은 Better Life Naver 기준이며, LEWORD·Orbit은 올인원 구매 후 함께 이용합니다.').split('\n').map((line, index, arr) => (
+                            <Fragment key={`${line}-${index}`}>{line}{index < arr.length - 1 ? <br /> : null}</Fragment>
+                        ))}
                     </p>
                     <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.45)', fontSize: 12, marginTop: 8 }}>
                         결제 진행 시 <Link to="/terms" style={{ color: '#FFD700' }}>이용약관</Link> 및 <Link to="/privacy" style={{ color: '#FFD700' }}>개인정보처리방침</Link>에 동의하는 것으로 간주됩니다.

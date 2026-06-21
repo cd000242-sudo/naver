@@ -8,6 +8,21 @@ export type SiteContent = {
         notice?: string;
     };
     pricing?: {
+        page?: {
+            eyebrow?: string;
+            title?: string;
+            titleNormal?: string;
+            desc?: string;
+            tabLabel?: string;
+            eventTitle?: string;
+            eventTitleNormal?: string;
+            eventDesc?: string;
+            eventDescNormal?: string;
+            eventLine?: string;
+            paymentEmailLabel?: string;
+            paymentEmailHelp?: string;
+            paymentNote?: string;
+        };
         plans?: Record<string, {
             name?: string;
             desc?: string;
@@ -18,7 +33,44 @@ export type SiteContent = {
             period?: string;
             monthly?: string;
             eventLabel?: string;
+            badgeText?: string;
             features?: string[];
+        }>;
+    };
+    productsPage?: {
+        heroKicker?: string;
+        heroTitle?: string;
+        heroDesc?: string;
+        primaryCta?: string;
+        secondaryCta?: string;
+        guideKicker?: string;
+        guideTitle?: string;
+        guideDesc?: string;
+        lineupKicker?: string;
+        lineupTitle?: string;
+        lineupDesc?: string;
+        fitKicker?: string;
+        fitTitle?: string;
+        fitDesc?: string;
+        suiteKicker?: string;
+        suiteTitle?: string;
+        suiteDesc?: string;
+        compareKicker?: string;
+        compareTitle?: string;
+        compareDesc?: string;
+        finalKicker?: string;
+        finalTitle?: string;
+        finalDesc?: string;
+        finalNote?: string;
+        finalPrimaryCta?: string;
+        finalSecondaryCta?: string;
+        guideCards?: Array<[string, string, string, string]>;
+        suiteFlow?: Array<[string, string, string]>;
+        comparison?: Array<[string, string, string, string]>;
+        images?: Record<string, {
+            src?: string;
+            alt?: string;
+            title?: string;
         }>;
     };
     products?: Record<string, {
@@ -29,20 +81,46 @@ export type SiteContent = {
         desc?: string;
         href?: string;
         cta?: string;
+        media?: {
+            type?: 'video' | 'image';
+            src?: string;
+            alt?: string;
+        };
         metrics?: Array<[string, string]>;
         bullets?: string[];
         fit?: string[];
     }>;
-    downloads?: Record<string, {
-        name?: string;
-        version?: string;
-        downloads?: Record<string, {
-            label?: string;
-            detail?: string;
-            url?: string;
-        }>;
-    }>;
+    downloads?: {
+        page?: {
+            eyebrow?: string;
+            title?: string;
+            desc?: string;
+            note?: string;
+        };
+        naver?: DownloadProductContent;
+        leword?: DownloadProductContent;
+        orbit?: DownloadProductContent;
+        tistory?: DownloadProductContent;
+    };
+    theme?: {
+        pricingBgImage?: string;
+        productsBgImage?: string;
+        downloadBgImage?: string;
+        gold?: string;
+    };
     updatedAt?: string;
+};
+
+export type DownloadProductContent = {
+    name?: string;
+    version?: string;
+    image?: string;
+    accent?: string;
+    downloads?: Record<string, {
+        label?: string;
+        detail?: string;
+        url?: string;
+    }>;
 };
 
 export async function fetchSiteContent(): Promise<SiteContent | null> {

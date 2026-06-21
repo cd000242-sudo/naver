@@ -116,9 +116,30 @@ function applyProductOverrides(products: Product[], siteContent: SiteContent | n
             metrics: Array.isArray(patch.metrics) && patch.metrics.length > 0 ? patch.metrics : product.metrics,
             bullets: Array.isArray(patch.bullets) && patch.bullets.length > 0 ? patch.bullets : product.bullets,
             fit: Array.isArray(patch.fit) && patch.fit.length > 0 ? patch.fit : product.fit,
-            media: product.media,
+            media: patch.media?.src
+                ? { ...product.media, ...patch.media, type: patch.media.type === 'video' || patch.media.type === 'image' ? patch.media.type : product.media.type }
+                : product.media,
         };
     });
+}
+
+function rowsOr<T>(rows: T[] | undefined, fallback: T[]): T[] {
+    return Array.isArray(rows) && rows.length > 0 ? rows : fallback;
+}
+
+type ProductImageMap = NonNullable<NonNullable<SiteContent['productsPage']>['images']>;
+
+function imageOr(
+    images: ProductImageMap | undefined,
+    key: string,
+    fallback: { src: string; alt: string; title: string },
+) {
+    const patch = images?.[key] || {};
+    return {
+        src: patch.src || fallback.src,
+        alt: patch.alt || fallback.alt,
+        title: patch.title || fallback.title,
+    };
 }
 
 function ProductMedia({ product }: { product: Product }) {
@@ -181,23 +202,38 @@ function ProductsPage() {
     }, []);
 
     const products = applyProductOverrides(PRODUCTS, siteContent);
+    const page = siteContent?.productsPage || {};
+    const productsBgImage = siteContent?.theme?.productsBgImage;
+    const guideCards = rowsOr(page.guideCards, GUIDE_CARDS);
+    const suiteFlow = rowsOr(page.suiteFlow, SUITE_FLOW);
+    const comparison = rowsOr(page.comparison, COMPARISON);
+    const productImages = {
+        preview1: imageOr(page.images, 'preview1', { src: '/images/leword/screen-golden-keywords.png', alt: 'LEWORD 황금키워드 화면', title: 'LEWORD 황금키워드 화면' }),
+        preview2: imageOr(page.images, 'preview2', { src: '/images/orbit/orbit-sequential-queue.png', alt: 'Orbit 연속 발행 대기열 화면', title: 'Orbit 연속 발행 대기열 화면' }),
+        workflow1: imageOr(page.images, 'workflow1', { src: '/images/leword/17-sources-orbit.png', alt: 'LEWORD 17개 데이터 소스 화면', title: 'LEWORD 17개 데이터 소스 화면' }),
+        workflow2: imageOr(page.images, 'workflow2', { src: '/images/orbit/orbit-external-traffic.png', alt: 'Orbit 외부유입 글 생성 화면', title: 'Orbit 외부유입 글 생성 화면' }),
+    };
+    const heroStyle = productsBgImage ? {
+        backgroundImage: `linear-gradient(135deg, rgba(8, 13, 18, 0.74), rgba(7, 35, 31, 0.66) 52%, rgba(48, 39, 17, 0.56)), url(${productsBgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
+    } : undefined;
 
     return (
         <>
             <ParticlesCanvas />
             <main className="products-page">
-                <section className="products-hero">
+                <section className="products-hero" style={heroStyle}>
                     <div className="products-wrap products-hero-grid">
                         <div className="products-hero-copy">
-                            <span className="products-kicker">PRODUCTS</span>
-                            <h1>운영 목적에 맞는 자동화를 바로 고르세요</h1>
+                            <span className="products-kicker">{page.heroKicker || 'PRODUCTS'}</span>
+                            <h1>{page.heroTitle || '운영 목적에 맞는 자동화를 바로 고르세요'}</h1>
                             <p>
-                                Leaders Pro는 키워드 발굴, 네이버 블로그 발행, 블로그스팟·워드프레스·티스토리 외부유입까지
-                                하나의 운영 흐름으로 이어지도록 만든 제품군입니다.
+                                {page.heroDesc || 'Leaders Pro는 키워드 발굴, 네이버 블로그 발행, 블로그스팟·워드프레스·티스토리 외부유입까지 하나의 운영 흐름으로 이어지도록 만든 제품군입니다.'}
                             </p>
                             <div className="products-actions">
-                                <a className="products-btn primary" href="#products-guide">제품 선택 가이드</a>
-                                <Link className="products-btn secondary" to="/pricing">요금제 보기</Link>
+                                <a className="products-btn primary" href="#products-guide">{page.primaryCta || '제품 선택 가이드'}</a>
+                                <Link className="products-btn secondary" to="/pricing">{page.secondaryCta || '요금제 보기'}</Link>
                             </div>
                         </div>
                         <div className="products-suite-panel" aria-label="Leaders Pro 제품 흐름">
@@ -208,7 +244,7 @@ function ProductsPage() {
                                 <b>Leaders Pro Suite</b>
                             </div>
                             <div className="suite-steps">
-                                {SUITE_FLOW.map(([step, name, desc]) => (
+                                {suiteFlow.map(([step, name, desc]) => (
                                     <article key={step}>
                                         <small>{step}</small>
                                         <strong>{name}</strong>
@@ -217,8 +253,8 @@ function ProductsPage() {
                                 ))}
                             </div>
                             <div className="suite-preview">
-                                <ZoomableImage className="products-zoom-trigger" src="/images/leword/screen-golden-keywords.png" alt="LEWORD 황금키워드 화면" title="LEWORD 황금키워드 화면" />
-                                <ZoomableImage className="products-zoom-trigger" src="/images/orbit/orbit-sequential-queue.png" alt="Orbit 연속 발행 대기열 화면" title="Orbit 연속 발행 대기열 화면" />
+                                <ZoomableImage className="products-zoom-trigger" src={productImages.preview1.src} alt={productImages.preview1.alt} title={productImages.preview1.title} />
+                                <ZoomableImage className="products-zoom-trigger" src={productImages.preview2.src} alt={productImages.preview2.alt} title={productImages.preview2.title} />
                             </div>
                         </div>
                     </div>
@@ -227,12 +263,12 @@ function ProductsPage() {
                 <section id="products-guide" className="products-section light">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">CHOICE MAP</span>
-                            <h2>지금 필요한 제품부터 고르면 됩니다</h2>
-                            <p>처음에는 하나로 시작하고, 운영이 커지면 LEWORD → Naver → Orbit 흐름으로 확장하면 됩니다.</p>
+                            <span className="products-kicker">{page.guideKicker || 'CHOICE MAP'}</span>
+                            <h2>{page.guideTitle || '지금 필요한 제품부터 고르면 됩니다'}</h2>
+                            <p>{page.guideDesc || '처음에는 하나로 시작하고, 운영이 커지면 LEWORD → Naver → Orbit 흐름으로 확장하면 됩니다.'}</p>
                         </div>
                         <div className="guide-grid">
-                            {GUIDE_CARDS.map(([title, product, desc, href]) => (
+                            {guideCards.map(([title, product, desc, href]) => (
                                 <Link className="guide-card fade-in" to={href} key={product}>
                                     <span>{title}</span>
                                     <strong>{product}</strong>
@@ -247,9 +283,9 @@ function ProductsPage() {
                 <section className="products-section dark">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">PRODUCT LINEUP</span>
-                            <h2>각 제품의 역할이 겹치지 않게 나뉩니다</h2>
-                            <p>키워드 판단, 네이버 발행, 외부유입 발행을 서로 다른 단계로 분리해 운영 흐름을 단순하게 만듭니다.</p>
+                            <span className="products-kicker">{page.lineupKicker || 'PRODUCT LINEUP'}</span>
+                            <h2>{page.lineupTitle || '각 제품의 역할이 겹치지 않게 나뉩니다'}</h2>
+                            <p>{page.lineupDesc || '키워드 판단, 네이버 발행, 외부유입 발행을 서로 다른 단계로 분리해 운영 흐름을 단순하게 만듭니다.'}</p>
                         </div>
 
                         <div className="product-panels">
@@ -279,9 +315,9 @@ function ProductsPage() {
                 <section className="products-section light">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">BEST FIT</span>
-                            <h2>이럴 때 이 제품을 쓰면 됩니다</h2>
-                            <p>구매 전 가장 많이 헷갈리는 기준만 따로 정리했습니다.</p>
+                            <span className="products-kicker">{page.fitKicker || 'BEST FIT'}</span>
+                            <h2>{page.fitTitle || '이럴 때 이 제품을 쓰면 됩니다'}</h2>
+                            <p>{page.fitDesc || '구매 전 가장 많이 헷갈리는 기준만 따로 정리했습니다.'}</p>
                         </div>
                         <div className="fit-grid">
                             {products.map((product) => (
@@ -305,12 +341,12 @@ function ProductsPage() {
                 <section className="products-section dark compact">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">ONE SUITE</span>
-                            <h2>올인원 코드로 운영 흐름이 더 깔끔해집니다</h2>
-                            <p>LEWORD에서 키워드를 고르고, Naver와 Orbit으로 발행 채널을 나눠도 기간제 구매자는 올인원 라이선스 코드 하나로 함께 이용합니다.</p>
+                            <span className="products-kicker">{page.suiteKicker || 'ONE SUITE'}</span>
+                            <h2>{page.suiteTitle || '올인원 코드로 운영 흐름이 더 깔끔해집니다'}</h2>
+                            <p>{page.suiteDesc || 'LEWORD에서 키워드를 고르고, Naver와 Orbit으로 발행 채널을 나눠도 기간제 구매자는 올인원 라이선스 코드 하나로 함께 이용합니다.'}</p>
                         </div>
                         <div className="flow-line fade-in">
-                            {SUITE_FLOW.map(([step, name, desc]) => (
+                            {suiteFlow.map(([step, name, desc]) => (
                                 <article key={step}>
                                     <small>{step}</small>
                                     <b>{name}</b>
@@ -319,8 +355,8 @@ function ProductsPage() {
                             ))}
                         </div>
                         <div className="workflow-shots fade-in">
-                            <ZoomableImage className="products-zoom-trigger" src="/images/leword/17-sources-orbit.png" alt="LEWORD 17개 데이터 소스 화면" title="LEWORD 17개 데이터 소스 화면" />
-                            <ZoomableImage className="products-zoom-trigger" src="/images/orbit/orbit-external-traffic.png" alt="Orbit 외부유입 글 생성 화면" title="Orbit 외부유입 글 생성 화면" />
+                            <ZoomableImage className="products-zoom-trigger" src={productImages.workflow1.src} alt={productImages.workflow1.alt} title={productImages.workflow1.title} />
+                            <ZoomableImage className="products-zoom-trigger" src={productImages.workflow2.src} alt={productImages.workflow2.alt} title={productImages.workflow2.title} />
                         </div>
                     </div>
                 </section>
@@ -328,9 +364,9 @@ function ProductsPage() {
                 <section className="products-section light">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">COMPARE</span>
-                            <h2>한눈에 보는 제품 비교</h2>
-                            <p>세 제품은 경쟁 제품이 아니라, 운영 단계별로 이어지는 역할을 맡습니다.</p>
+                            <span className="products-kicker">{page.compareKicker || 'COMPARE'}</span>
+                            <h2>{page.compareTitle || '한눈에 보는 제품 비교'}</h2>
+                            <p>{page.compareDesc || '세 제품은 경쟁 제품이 아니라, 운영 단계별로 이어지는 역할을 맡습니다.'}</p>
                         </div>
                         <div className="compare-table-wrap fade-in">
                             <table className="compare-table">
@@ -343,7 +379,7 @@ function ProductsPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {COMPARISON.map(([label, naver, leword, orbit]) => (
+                                    {comparison.map(([label, naver, leword, orbit]) => (
                                         <tr key={label}>
                                             <th>{label}</th>
                                             <td>{naver}</td>
@@ -359,13 +395,13 @@ function ProductsPage() {
 
                 <section className="products-final">
                     <div className="products-wrap">
-                        <span className="products-kicker">START</span>
-                        <h2>고민되면 올인원으로 시작하면 됩니다</h2>
-                        <p>네이버 자동화, LEWORD, Orbit은 함께 쓸 때 키워드 발굴부터 발행, 외부유입까지 흐름이 가장 좋아집니다.</p>
-                        <p className="products-note">무료 체험은 Better Life Naver 기준입니다. LEWORD와 Orbit은 올인원 라이선스에서 함께 이용합니다. 개별 구매는 영구제만 별도 문의로 가능하며 각 100만원입니다.</p>
+                        <span className="products-kicker">{page.finalKicker || 'START'}</span>
+                        <h2>{page.finalTitle || '고민되면 올인원으로 시작하면 됩니다'}</h2>
+                        <p>{page.finalDesc || '네이버 자동화, LEWORD, Orbit은 함께 쓸 때 키워드 발굴부터 발행, 외부유입까지 흐름이 가장 좋아집니다.'}</p>
+                        <p className="products-note">{page.finalNote || '무료 체험은 Better Life Naver 기준입니다. LEWORD와 Orbit은 올인원 라이선스에서 함께 이용합니다. 개별 구매는 영구제만 별도 문의로 가능하며 각 100만원입니다.'}</p>
                         <div className="products-actions center">
-                            <Link className="products-btn primary" to="/pricing">요금제 확인하기</Link>
-                            <Link className="products-btn secondary" to="/download">네이버 무료 체험 다운로드</Link>
+                            <Link className="products-btn primary" to="/pricing">{page.finalPrimaryCta || '요금제 확인하기'}</Link>
+                            <Link className="products-btn secondary" to="/download">{page.finalSecondaryCta || '네이버 무료 체험 다운로드'}</Link>
                         </div>
                     </div>
                 </section>
