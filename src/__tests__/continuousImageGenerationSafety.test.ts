@@ -237,7 +237,8 @@ describe('continuous and multi-account image generation safety', () => {
     expect(openaiGuardCode).toMatch(/testImageFxConnection/);
     expect(openaiGuardCode).toMatch(/imagefx_generation_probe_ok_v1/);
     expect(headingSettingsCode).not.toMatch(/1000장\/일/);
-    expect(headingSettingsCode).toMatch(/ImageFX 실제 1장 생성 테스트/);
+    // 코드 리워딩(2026): "ImageFX 실제 생성 테스트" + "테스트 이미지 1장을 생성" — 로그인만이 아닌 실제 1장 생성 가드 유지.
+    expect(headingSettingsCode).toMatch(/ImageFX 실제 생성 테스트[\s\S]{0,500}?테스트 이미지 1장을 생성/);
     expect(publishingHandlersCode).toMatch(/imagefx: 로그인만 확인하지 않고 실제 1장 생성 프리플라이트/);
     expect(publishingHandlersCode).toMatch(/skipImagesForGuard/);
     expect(continuousPublishingCode).toMatch(/guardSources/);
