@@ -21,6 +21,49 @@ function isMaskedSecretValue(value: string | undefined): boolean {
   return /[\u2022\u25CF*]/.test(value);
 }
 
+/**
+ * \uC5D0\uC774\uC804\uD2B8 \uBAA8\uB4DC(codex/claude \uAD6C\uB3C5 CLI) \uC124\uCE58\u00B7\uB85C\uADF8\uC778 \uC0C1\uD0DC \uBC43\uC9C0 \uAC31\uC2E0.
+ * \uAE00\uC0DD\uC131 \uC5D4\uC9C4 \uC124\uC815 \uB85C\uB4DC \uC2DC \uD638\uCD9C \u2014 agent:status IPC\uB85C \uC2E4\uC81C \uC0C1\uD0DC\uB97C \uC870\uD68C\uD574 \uCE74\uB4DC\uC5D0 \uD45C\uAE30\uD55C\uB2E4.
+ */
+async function refreshAgentStatusBadges(): Promise<void> {
+  const api = (window as any).api;
+  if (!api?.agentStatus) return;
+  const targets: Array<{ provider: 'codex' | 'claude'; elId: string }> = [
+    { provider: 'codex', elId: 'agent-codex-status' },
+    { provider: 'claude', elId: 'agent-claude-status' },
+  ];
+  await Promise.all(targets.map(async ({ provider, elId }) => {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    el.textContent = '\u23F3 \uC0C1\uD0DC \uD655\uC778 \uC911...';
+    el.style.color = '#6b7280';
+    try {
+      const res = await api.agentStatus(provider);
+      const s = res?.status;
+      if (!res?.success || !s) {
+        el.textContent = '\u26A0\uFE0F \uC0C1\uD0DC \uD655\uC778 \uC2E4\uD328 \u2014 \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4';
+        el.style.color = '#b45309';
+        return;
+      }
+      if (!s.installed) {
+        el.textContent = '\u2B07\uFE0F \uBBF8\uC124\uCE58 \u2014 CLI \uC124\uCE58 \uD6C4 \uC0AC\uC6A9 \uAC00\uB2A5';
+        el.style.color = '#b91c1c';
+        return;
+      }
+      if (!s.loggedIn) {
+        el.textContent = `\u2705 \uC124\uCE58\uB428(${s.version || '?'}) \u00B7 \u274C \uB85C\uADF8\uC778 \uD544\uC694`;
+        el.style.color = '#b45309';
+        return;
+      }
+      el.textContent = `\u2705 \uC900\uBE44\uB428 \u2014 ${s.detail || s.version || '\uB85C\uADF8\uC778 \uC0C1\uD0DC'}`;
+      el.style.color = '#15803d';
+    } catch {
+      el.textContent = '\u26A0\uFE0F \uC0C1\uD0DC \uD655\uC778 \uC2E4\uD328 \u2014 \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4';
+      el.style.color = '#b45309';
+    }
+  }));
+}
+
 function readSecretInputValue(inputId: string, currentValue?: string): string | undefined {
   const input = document.getElementById(inputId) as HTMLInputElement | null;
   const current = currentValue?.trim();
@@ -647,6 +690,8 @@ export async function initPriceInfoModal(): Promise<void> {
           'openai-gpt41': '⚖️ GPT-4.1 (~₩101/글)',
           'openai-gpt4o-search': '🔎 GPT-4o Search (~₩101 + 검색비)',
           'claude-sonnet': '📜 Claude Sonnet 4.6 (~₩176/글)',
+          'agent-codex': '🤖 에이전트 (Codex 구독 · API 과금 0)',
+          'agent-claude': '🤖 에이전트 (Claude 구독 · API 과금 0)',
         };
         // deprecate된 모델 ID 자동 마이그레이션 (gemini-3-*-preview 등)
         const DEPRECATED_TO_DEFAULT: Record<string, string> = {
@@ -666,6 +711,8 @@ export async function initPriceInfoModal(): Promise<void> {
         }
         navStatusEl.textContent = `현재: ${modelNames[activeModel] || activeModel}`;
       }
+      // ✅ 에이전트 모드 설치/로그인 상태 뱃지 갱신 (비동기 — 로드 차단 안 함)
+      void refreshAgentStatusBadges();
     }
 
     // ✅ [2026-06-05] Gemini 플랜 로드 (텍스트+이미지 공통)
@@ -1089,7 +1136,7 @@ export async function initPriceInfoModal(): Promise<void> {
           openaiApiKey: openaiApiKeyValue, // ✅ [2026-02-22] OpenAI API
           claudeApiKey: claudeApiKeyValue, // ✅ [2026-02-22] Claude API
           perplexityApiKey: perplexityApiKeyValue, // ✅ [2026-03-30] Perplexity API 키 저장 누락 수정
-          defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return m === 'perplexity-sonar' ? 'perplexity' : (m === 'openai-gpt4o' || m === 'openai-gpt4o-mini' || m === 'openai-gpt41' || m === 'openai-gpt4o-search') ? 'openai' : (m === 'claude-haiku' || m === 'claude-sonnet' || m === 'claude-opus') ? 'claude' : 'gemini'; })(),
+          defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return (m === 'agent-codex' || m === 'agent-claude') ? m : m === 'perplexity-sonar' ? 'perplexity' : (m === 'openai-gpt4o' || m === 'openai-gpt4o-mini' || m === 'openai-gpt41' || m === 'openai-gpt4o-search') ? 'openai' : (m === 'claude-haiku' || m === 'claude-sonnet' || m === 'claude-opus') ? 'claude' : 'gemini'; })(),
         };
 
 
@@ -1170,6 +1217,8 @@ export async function initPriceInfoModal(): Promise<void> {
                 'perplexity-sonar': '🔮 Perplexity AI',
                 'openai-gpt41': '⚖️ GPT-4.1',
                 'claude-sonnet': '📜 Claude Sonnet 4.6',
+                'agent-codex': '🤖 에이전트 (Codex 구독)',
+                'agent-claude': '🤖 에이전트 (Claude 구독)',
               };
               statusEl.textContent = `현재: ${names[config.primaryGeminiTextModel] || config.primaryGeminiTextModel}`;
             }
