@@ -206,6 +206,17 @@ export function buildSystemPrompt(
     }
   }
 
+  // 2.6 상황-공감 깊이 보강 — 전 콘텐츠 모드(seo/homefeed/mate) 도입부 보강 (always-on).
+  //     기존 도입부 룰(R0-4/GAMMA-7)을 보강만 — 글자수·줄수 제약은 기존 룰 우선.
+  {
+    const situationOverlay = loadPromptFile('shared/situation-depth.prompt');
+    if (situationOverlay) {
+      composed = `${composed}\n\n${situationOverlay}`;
+    } else {
+      console.warn('[PromptLoader] situation-depth.prompt 로드 실패 - 상황 보강 미적용');
+    }
+  }
+
   // 3. GEO/AEO 오버레이 — v2.10.62 사용자 명시 ON 시에만 (seo/mate 모드 한정)
   if (options?.geoOverlay && (mode === 'seo' || mode === 'mate')) {
     const geoOverlay = loadPromptFile('seo/geo-overlay.prompt');
