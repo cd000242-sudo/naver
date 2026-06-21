@@ -114,7 +114,10 @@ export function stripInternalMarkers(s: string): string {
   return s
     .replace(/\s*\[자료\d*\]/g, '')
     .replace(/\s*\[원본\s*텍스트\]/g, '')
-    .replace(/\s*\[Article\s*Content\]/gi, '');
+    .replace(/\s*\[Article\s*Content\]/gi, '')
+    // 작성일 못박기 제거 — codex 등 에이전트가 환경 날짜로 "2026-06-21 기준"을 박는 경우 strip.
+    // 전체 날짜(연-월-일)+"기준"만 제거. 연도만 있는 "2026년 기준"이나 자료 날짜는 보존.
+    .replace(/\d{4}\s*[-.년]\s*\d{1,2}\s*[-.월]\s*\d{1,2}\s*일?\s*기준[으로]*[,.\s]*/g, '');
 }
 
 export function removeOrdinalHeadingLabelsFromBody(bodyText: string): string {
