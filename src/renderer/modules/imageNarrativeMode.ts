@@ -324,13 +324,51 @@ async function _handlePublish(reviewEdits?: unknown, generateOnly = false): Prom
     targetChars: _readTargetChars(),
   };
 
+  // 클릭 즉시 중앙 진행 모달을 띄운다(추론 시작과 동일한 aiProgressModal — 최소화/FAB 포함).
+  // 이전엔 executeFullAutoFlow 내부의 인라인 진행바만 갱신돼 "반응 없음"으로 보였다.
+  const progress = _getProgressModal();
+  const title = generateOnly ? '📝 사진으로 글 생성 중...' : '🚀 사진으로 글 생성 + 발행 중...';
+  const steps = generateOnly
+    ? [
+        { percent: 15, step: '🖼️ 사진 분석 결과 정리 중...' },
+        { percent: 35, step: '✍️ 블로그 글 작성 중...' },
+        { percent: 60, step: '🧩 소제목별 이미지 배치 중...' },
+        { percent: 82, step: '📋 반자동 편집 탭 구성 중...' },
+      ]
+    : [
+        { percent: 12, step: '🖼️ 사진 분석 결과 정리 중...' },
+        { percent: 30, step: '✍️ 블로그 글 작성 중...' },
+        { percent: 50, step: '🧩 소제목별 이미지 배치 중...' },
+        { percent: 70, step: '🔐 네이버 발행 준비 중...' },
+        { percent: 88, step: '📤 네이버 블로그 발행 중...' },
+      ];
+
   try {
+    progress?.show?.(title, {
+      autoAnimate: true,
+      mode: 'custom',
+      icon: generateOnly ? '📝' : '🚀',
+      initialLog: `사진 ${images.length}장으로 ${generateOnly ? '글을 생성합니다' : '글 생성 후 네이버에 발행합니다'}.`,
+      steps,
+    });
     await executeFullAutoFlow(formData);
+    progress?.complete?.(true, {
+      successTitle: generateOnly ? '글 생성 완료' : '발행 완료',
+      successIcon: '✅',
+      successLog: generateOnly
+        ? '반자동 편집 탭과 이미지 관리탭에 배치했습니다. 검토 후 발행하세요.'
+        : '네이버 블로그 발행까지 완료했습니다.',
+    });
     if (generateOnly) {
       _showToast('글 생성 완료 — 반자동 편집 탭에서 확인 후 발행하세요.', 'info');
     }
   } catch (err) {
     console.error('[ImageNarrativeMode] Flow failed:', err);
+    progress?.complete?.(false, {
+      failureTitle: generateOnly ? '글 생성 실패' : '발행 실패',
+      failureIcon: '❌',
+      failureLog: (err as Error).message,
+    });
     _showToast(`${generateOnly ? '글 생성' : '발행'} 실패: ${(err as Error).message}`, 'error');
   }
 }
