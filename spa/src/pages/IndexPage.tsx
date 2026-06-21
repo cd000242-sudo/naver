@@ -201,10 +201,6 @@ function IndexPage() {
                     </div>
                 </div>
                 <div className="hero-proof-stage" aria-label="실제 사용자 성과 이미지">
-                    <div className="proof-status">
-                        <span />
-                        <b>REAL USER PROOF · {(activeProofIndex % heroProofs.length) + 1}/{heroProofs.length}</b>
-                    </div>
                     <div className="proof-summary">
                         <span>{activeProof.metric || '성과 인증'}</span>
                         <strong>{activeProof.title || '실제 운영 성과'}</strong>
@@ -233,10 +229,6 @@ function IndexPage() {
                                 aria-selected={index === activeProofIndex % heroProofs.length}
                             />
                         ))}
-                    </div>
-                    <div className="proof-console">
-                        <span>성과 이미지는 어드민 홈/공통 탭에서 교체 가능</span>
-                        <strong>전체 {heroProofs.length}개 방문 · 조회 · 수익 인증 화면을 판매 페이지 첫 화면에 노출</strong>
                     </div>
                 </div>
             </section>
@@ -395,38 +387,6 @@ function IndexPage() {
                     z-index: -2;
                 }
 
-                .proof-status {
-                    position: absolute;
-                    top: 44px;
-                    right: 34px;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                    min-height: 38px;
-                    padding: 8px 12px;
-                    border-radius: 8px;
-                    border: 1px solid rgba(255,255,255,0.16);
-                    background: rgba(8,13,18,0.76);
-                    color: #f8fafc;
-                    backdrop-filter: blur(12px);
-                    box-shadow: 0 14px 36px rgba(0,0,0,0.24);
-                    z-index: 3;
-                }
-
-                .proof-status b {
-                    font-size: 12px;
-                    font-weight: 900;
-                    letter-spacing: 0;
-                }
-
-                .proof-status span {
-                    width: 8px;
-                    height: 8px;
-                    border-radius: 50%;
-                    background: #44d7b6;
-                    box-shadow: 0 0 12px rgba(68,215,182,0.9);
-                }
-
                 .proof-summary {
                     position: absolute;
                     left: 26px;
@@ -496,7 +456,7 @@ function IndexPage() {
                 .proof-dots {
                     position: absolute;
                     left: 50%;
-                    bottom: 92px;
+                    bottom: 52px;
                     transform: translateX(-50%);
                     display: flex;
                     align-items: center;
@@ -517,34 +477,6 @@ function IndexPage() {
                 .proof-dots button.active {
                     width: 28px;
                     background: #f4c95d;
-                }
-
-                .proof-console {
-                    position: absolute;
-                    left: 42px;
-                    right: 42px;
-                    bottom: 18px;
-                    display: grid;
-                    gap: 4px;
-                    padding: 14px 16px;
-                    border-radius: 8px;
-                    border: 1px solid rgba(244,201,93,0.22);
-                    background: rgba(8,13,18,0.84);
-                    backdrop-filter: blur(16px);
-                    z-index: 4;
-                    box-shadow: 0 18px 50px rgba(0,0,0,0.30);
-                }
-
-                .proof-console span {
-                    color: #f4c95d;
-                    font-size: 11px;
-                    font-weight: 900;
-                }
-
-                .proof-console strong {
-                    color: #ffffff;
-                    font-size: 15px;
-                    line-height: 1.4;
                 }
 
                 @media (max-width: 900px) {
@@ -581,7 +513,6 @@ function IndexPage() {
                         inset: 18px 0 36px;
                     }
 
-                    .proof-status,
                     .proof-summary {
                         display: none;
                     }
@@ -595,19 +526,7 @@ function IndexPage() {
                     }
 
                     .proof-dots {
-                        bottom: 80px;
-                    }
-
-                    .proof-console {
-                        left: 14px;
-                        right: 14px;
-                        bottom: 12px;
-                    }
-
-                    .proof-console strong {
-                        font-size: 13px;
-                        line-height: 1.35;
-                        overflow-wrap: anywhere;
+                        bottom: 38px;
                     }
                 }
             `}</style>
