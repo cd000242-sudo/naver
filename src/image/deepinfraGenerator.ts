@@ -83,7 +83,7 @@ const translationCache = new Map<string, string>();
  * - 이미지 생성에 최적화된 시각적 묘사로 번역
  * - API 전부 실패 시 카테고리 기반 제너릭 장면 사용
  */
-async function translateKoreanToEnglishWithAI(koreanText: string, category?: string, imageStyle?: string): Promise<string> {
+export async function translateKoreanToEnglishWithAI(koreanText: string, category?: string, imageStyle?: string): Promise<string> {
     const trimmed = koreanText.trim();
     if (!trimmed) return 'everyday life scene, daily activity';
 

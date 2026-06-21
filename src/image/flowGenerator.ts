@@ -24,6 +24,7 @@ import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 import { injectUniqueSalt, injectHeadingVariation, simplifyFlowPrompt } from './flowPromptInjection.js';
+import { hasUsableEnglishPrompt } from './promptSafety.js';
 // ✅ [v2.10.298] Flow 일별 카운터 — 한도 에러 발생 시 봇감지 vs 진짜 한도 구분
 import { incrementDailySuccess, classifyQuotaError, getDailySuccess } from '../utils/imageEngineDailyCounter.js';
 const incrementFlowDailySuccess = (): number => incrementDailySuccess('flow');
@@ -1829,6 +1830,35 @@ const FLOW_FORCE_FRESH_PROJECT_ON_DUPLICATE = process.env.FLOW_STRICT_DIVERSITY 
 // 64비트 중 6비트 차이까지 유사로 간주 (8 → 6 환원, 사용자 보고 후 강화).
 const FLOW_AHASH_THRESHOLD = 6;
 
+// 영어 보장: englishPrompt가 실사용 가능한 영어면 그대로, 한글이거나 없으면 AI 번역으로 영어 장면 확보.
+// deepinfra 경로엔 이미 있던 가드(hasUsableEnglishPrompt)를 Flow에도 적용 — 앱 정책상 Flow에도 영어 전송.
+// 번역기는 deepinfra에 있으므로 lazy dynamic import로 무거운 의존성 로드를 회피한다.
+async function resolveEnglishBasePrompt(item: ImageRequestItem): Promise<string> {
+    if (hasUsableEnglishPrompt(item.englishPrompt)) return item.englishPrompt as string;
+    const source = String((item as any).heading || (item as any).prompt || '').trim();
+    if (source && /[가-힣]/.test(source)) {
+        try {
+            const { translateKoreanToEnglishWithAI } = await import('./deepinfraGenerator.js');
+            const en = await translateKoreanToEnglishWithAI(
+                source,
+                (item as any).category,
+                (item as any).imageStyle || 'realistic',
+            );
+            if (hasUsableEnglishPrompt(en)) {
+                flowLog(`[Flow] 🔤 한글 프롬프트 → 영어 번역 적용: "${source.slice(0, 20)}" → "${en.slice(0, 50)}"`);
+                return en;
+            }
+        } catch (e) {
+            flowWarn(`[Flow] 영어 번역 실패(원본 프롬프트 사용): ${(e as Error).message.slice(0, 80)}`);
+        }
+    }
+    // 번역 불가/실패 — 기존 동작 폴백 (englishPrompt 그대로 또는 PromptBuilder).
+    return item.englishPrompt || PromptBuilder.build(item, {
+        imageStyle: (item as any).imageStyle || 'realistic',
+        category: (item as any).category || '',
+    } as any);
+}
+
 // ─── [v1.6.1] 파이프라인 배치 생성 ────
 //   queueDepth=2: 제출 #1 → 입력 재활성화 대기 → 제출 #2 → #1 감지 → 제출 #3...
 //   Flow 서버가 동시 생성 처리 시 실질 2x 속도 (서버 bound)
@@ -1882,10 +1912,7 @@ async function generateBatchPipelined(
             }
 
             const item = items[submittedCount];
-            const basePrompt = item.englishPrompt || PromptBuilder.build(item, {
-                imageStyle: (item as any).imageStyle || 'realistic',
-                category: (item as any).category || '',
-            } as any);
+            const basePrompt = await resolveEnglishBasePrompt(item);
             // 헤딩 인덱스 기반 강제 시점/구도 회전 + 헤딩 제목 명시 subject prepend
             // (LLM이 비슷한 헤딩에 비슷한 base prompt 만드는 상류 회귀 방어)
             const prompt = injectHeadingVariation(basePrompt, submittedCount, item.heading);
@@ -2156,10 +2183,7 @@ export async function generateWithFlow(
 
         try {
             sendImageLog(`🖼️ [Flow] [${i + 1}/${items.length}] "${item.heading}" 생성 중...`);
-            const basePrompt = item.englishPrompt || PromptBuilder.build(item, {
-                imageStyle: (item as any).imageStyle || 'realistic',
-                category: (item as any).category || '',
-            } as any);
+            const basePrompt = await resolveEnglishBasePrompt(item);
             // 헤딩 인덱스 기반 강제 시점/구도 회전 + 헤딩 제목 명시 subject prepend
             // (LLM이 비슷한 헤딩에 비슷한 base prompt 만드는 상류 회귀 방어)
             let prompt = injectHeadingVariation(basePrompt, i, item.heading);
