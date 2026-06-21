@@ -23,7 +23,7 @@ import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
-import { injectUniqueSalt, injectHeadingVariation, simplifyFlowPrompt } from './flowPromptInjection.js';
+import { injectUniqueSalt, injectHeadingVariation, simplifyFlowPrompt, softenSensitiveScene } from './flowPromptInjection.js';
 import { hasUsableEnglishPrompt } from './promptSafety.js';
 // ✅ [v2.10.298] Flow 일별 카운터 — 한도 에러 발생 시 봇감지 vs 진짜 한도 구분
 import { incrementDailySuccess, classifyQuotaError, getDailySuccess } from '../utils/imageEngineDailyCounter.js';
@@ -1747,10 +1747,18 @@ export async function generateSingleImageWithFlow(
             flowLog(`[Flow] 🖼️ 이미지 생성 시도 ${attempt}/${MAX_RETRIES} (기존 ${prevCount}장)`);
             sendImageLog(`🖼️ [Flow] 프롬프트 전송 중... (시도 ${attempt}/${MAX_RETRIES})`);
 
+            // 금융/민감 객체 장면(뱅킹앱·통장·서류 등)은 Flow가 결정적으로 거부하는 경향 →
+            // 첫 시도부터 선제적으로 일반 사무 장면으로 완화(420초 재시도 낭비 회피). 일반 글은 무영향.
+            let base = rawPrompt;
+            const soft = softenSensitiveScene(base);
+            if (soft.softened) {
+                base = soft.prompt;
+                sendImageLog('🩹 [Flow] 금융/민감 장면 감지 — 일반 장면으로 완화 후 생성 (Flow 거부 회피)');
+            }
             // Flow가 같은 prompt에 같은 이미지 반환하는 회귀 차단 — 매 시도 unique salt.
             // 생성 오류가 누적됐으면(genErrorSimplifyLevel>0) 트리거(한글 Subject 줄 등)만 우회 —
             // 영어 비주얼 장면은 보존해 퀄리티 유지.
-            let prompt = injectUniqueSalt(rawPrompt);
+            let prompt = injectUniqueSalt(base);
             if (genErrorSimplifyLevel > 0) {
                 prompt = simplifyFlowPrompt(prompt, genErrorSimplifyLevel);
                 sendImageLog(`🔁 [Flow] 생성 오류 우회 재시도 (레벨 ${genErrorSimplifyLevel}) — 장면 유지, 트리거만 제거`);

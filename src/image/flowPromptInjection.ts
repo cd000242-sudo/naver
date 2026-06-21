@@ -102,3 +102,30 @@ export function simplifyFlowPrompt(prompt: string, level: number): string {
 
     return out || prompt; // never empty — keep the original scene if over-stripped
 }
+
+// 금융/민감 "객체"가 등장하는 장면은 Google Flow가 결정적으로 거부하는 경향이 있다(라이브 실측:
+// "banking app + financial documents" 장면이 420초 내내 "문제가 발생했습니다"로 거부됨, 같은 세션
+// 다른 주제는 정상 생성). 추상적 주제어("financial")가 아니라 구체적 객체(뱅킹앱/통장/카드/현금/서류 등)만
+// 탐지해 일반 사무·라이프스타일 장면으로 선제 치환한다(오탐 최소화, 관련성 약간 손해는 사용자 합의).
+const SENSITIVE_SCENE_OBJECT_PATTERN =
+    /banking app|mobile banking|bank statement|bank account|financial documents?|financial statements?|financial papers?|credit card|debit card|loan documents?|tax (?:form|document|papers?)|passbook|bankbook|\batm\b|stacks? of (?:cash|money|bills?)|banknotes?|piles? of money|통장|뱅킹\s*앱|적금\s*통장|현금\s*다발|카드\s*명세서/i;
+
+const NEUTRAL_PROFESSIONAL_SCENE =
+    'A bright, modern, tidy workspace by a window: a person calmly planning at a clean desk with ' +
+    'a notebook, a laptop and a cup of coffee, warm natural light, hopeful and focused mood, ' +
+    'clean minimal composition, soft depth of field. No text, no letters, no logos, no numbers.';
+
+/**
+ * Detects sensitive financial OBJECTS in a Flow prompt and, if present, replaces the scene with
+ * a neutral Flow-safe professional scene (keeping the rotating viewpoint hint for variety).
+ * Returns { softened } so the caller can log it. Topic words alone (e.g. "financial freedom on a
+ * beach") are NOT softened — only concrete objects Flow tends to reject.
+ */
+export function softenSensitiveScene(prompt: string): { prompt: string; softened: boolean } {
+    if (!prompt || !SENSITIVE_SCENE_OBJECT_PATTERN.test(prompt)) {
+        return { prompt, softened: false };
+    }
+    const framingMatch = prompt.match(/CRITICAL FRAMING:[^\n]*/);
+    const framing = framingMatch ? `${framingMatch[0]}\n\n` : '';
+    return { prompt: `${framing}${NEUTRAL_PROFESSIONAL_SCENE}`, softened: true };
+}
