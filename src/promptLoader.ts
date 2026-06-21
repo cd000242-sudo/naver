@@ -195,6 +195,17 @@ export function buildSystemPrompt(
     }
   }
 
+  // 2.5 노출·인용 구조 오버레이 — 정보성 모드(seo/mate) 기본 적용 (always-on, 경량 핵심).
+  //     홈판(homefeed)은 에세이형 투트랙 보존을 위해 제외. aiTabFriendlyMode ON 시 ai-tab-friendly가 상위 적용.
+  if (mode === 'seo' || mode === 'mate') {
+    const structureOverlay = loadPromptFile('shared/exposure-structure.prompt');
+    if (structureOverlay) {
+      composed = `${composed}\n\n${structureOverlay}`;
+    } else {
+      console.warn('[PromptLoader] exposure-structure.prompt 로드 실패 - 구조 오버레이 미적용');
+    }
+  }
+
   // 3. GEO/AEO 오버레이 — v2.10.62 사용자 명시 ON 시에만 (seo/mate 모드 한정)
   if (options?.geoOverlay && (mode === 'seo' || mode === 'mate')) {
     const geoOverlay = loadPromptFile('seo/geo-overlay.prompt');
