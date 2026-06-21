@@ -1193,7 +1193,7 @@
                             <div class="editor-field full">
                                 <label>첫 화면 성과 이미지</label>
                                 <textarea id="edit-hero-proofs" placeholder="/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg | 방문자 상승 흐름 | 콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다. | 조회수 80 | 네이버 블로그 일간현황 조회수 상승 성과 화면"></textarea>
-                                <p class="editor-help">한 줄에 한 장씩 입력합니다. 형식: 이미지경로 | 제목 | 설명 | 지표 | 이미지 설명</p>
+                                <p class="editor-help">한 줄에 한 장씩 입력합니다. 기본값은 압축된 성과 이미지 11장 전체입니다. 형식: 이미지경로 | 제목 | 설명 | 지표 | 이미지 설명</p>
                             </div>
                         </div>
                     </div>
@@ -2786,32 +2786,81 @@
                 notice: '',
                 proofs: [
                     {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg',
+                        alt: '네이버 블로그 방문횟수 9,177 성과 화면',
+                        title: '방문횟수 9,177 돌파',
+                        desc: '2월 15일 기준 방문 지표가 크게 상승한 실제 성과 화면입니다.',
+                        metric: '방문 9,177'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260310_002438127-fast.jpg',
+                        alt: '조회수 19,896 공감 213 성과 화면',
+                        title: '조회수 19,896 인증',
+                        desc: '조회수와 공감수가 함께 쌓인 고성과 요약 화면입니다.',
+                        metric: '조회 19,896'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260309_163736774-fast.jpg',
+                        alt: '카카오톡 사용자 조회수 10,003 인증 대화',
+                        title: '하루 만명 조회 인증',
+                        desc: '실사용자가 공유한 조회수 10,003 성과 인증 대화입니다.',
+                        metric: '조회 10,003'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_06-fast.jpg',
+                        alt: '블로그 예상수익 12,978원 성과 화면',
+                        title: '예상수익 상승',
+                        desc: '네이버 리워드 예상수익 그래프와 일별 수익 내역입니다.',
+                        metric: '₩12,978'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_04-fast.jpg',
+                        alt: '오늘 조회수 1,514 성과 화면',
+                        title: '오늘 조회수 1,514',
+                        desc: '실시간 조회수와 공감, 댓글이 함께 잡힌 운영 성과입니다.',
+                        metric: '조회 1,514'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_02-fast.jpg',
+                        alt: '오늘 조회수 1,187 성과 화면',
+                        title: '오늘 조회수 1,187',
+                        desc: '하루 조회 흐름이 빠르게 올라간 블로그 통계 화면입니다.',
+                        metric: '조회 1,187'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_05-fast.jpg',
+                        alt: '조회수 1,122와 방문 분석 성과 화면',
+                        title: '조회수 1,122 기록',
+                        desc: '방문 분석 그래프에서 우상향 흐름을 확인할 수 있는 화면입니다.',
+                        metric: '조회 1,122'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_03-fast.jpg',
+                        alt: '오늘 조회수 836 성과 화면',
+                        title: '오늘 조회수 836',
+                        desc: '조회수와 오늘 지표가 함께 표시된 네이버 통계 인증입니다.',
+                        metric: '조회 836'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_01-fast.jpg',
+                        alt: '조회수 그래프 5,928 성과 화면',
+                        title: '조회 그래프 급상승',
+                        desc: '1,062에서 5,928까지 상승한 추세가 보이는 그래프입니다.',
+                        metric: '5,928'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260309_164704537-fast.jpg',
+                        alt: '카카오톡 사용자 프로그램 사용 후기와 공감수 인증',
+                        title: '사용자 반응 인증',
+                        desc: '프로그램 사용 후 생긴 성과를 사용자가 직접 공유한 대화입니다.',
+                        metric: '공감 213'
+                    },
+                    {
                         src: '/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg',
                         alt: '네이버 블로그 일간현황 조회수 상승 성과 화면',
                         title: '방문자 상승 흐름',
                         desc: '콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다.',
                         metric: '조회수 80'
-                    },
-                    {
-                        src: '/images/proof-user/fast/KakaoTalk_20260309_163736774-fast.jpg',
-                        alt: '사용자 성과 인증 화면',
-                        title: '실사용자 성과 인증',
-                        desc: '운영자가 직접 확인한 블로그 지표와 반응 데이터를 보여줍니다.',
-                        metric: '성과 인증'
-                    },
-                    {
-                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_01-fast.jpg',
-                        alt: '블로그 성과 데이터 요약 화면',
-                        title: '운영 데이터 확인',
-                        desc: '반복 발행 후 확인해야 하는 핵심 지표를 한눈에 보여줍니다.',
-                        metric: '데이터 기반'
-                    },
-                    {
-                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_05-fast.jpg',
-                        alt: '성과 이미지 캡처',
-                        title: '성과 캡처 모음',
-                        desc: '판매 페이지에서 바로 보여줄 수 있는 실제 화면 기반 자료입니다.',
-                        metric: '실제 화면'
                     }
                 ]
             },
@@ -3065,8 +3114,25 @@
             };
         }
 
+        function mergeProofLists(savedProofs, defaultProofs) {
+            const result = (savedProofs || []).filter(proof => proof && proof.src);
+            const seen = new Set(result.map(proof => proof.src));
+            (defaultProofs || []).forEach(proof => {
+                if (proof && proof.src && !seen.has(proof.src)) {
+                    result.push(proof);
+                    seen.add(proof.src);
+                }
+            });
+            return result;
+        }
+
         function withEditorDefaults(content) {
-            return deepMerge(deepClone(DEFAULT_SITE_CONTENT), normalizeLegacySiteEdits(content || {}));
+            const normalized = normalizeLegacySiteEdits(content || {});
+            const merged = deepMerge(deepClone(DEFAULT_SITE_CONTENT), normalized);
+            if (normalized?.hero && Array.isArray(normalized.hero.proofs)) {
+                merged.hero.proofs = mergeProofLists(normalized.hero.proofs, DEFAULT_SITE_CONTENT.hero.proofs);
+            }
+            return merged;
         }
 
         function editorEl(id) {
