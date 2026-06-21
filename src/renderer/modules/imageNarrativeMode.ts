@@ -360,6 +360,7 @@ async function _handlePublish(reviewEdits?: unknown, generateOnly = false): Prom
         : '네이버 블로그 발행까지 완료했습니다.',
     });
     if (generateOnly) {
+      _populateSemiAutoEditor();
       _showToast('글 생성 완료 — 반자동 편집 탭에서 확인 후 발행하세요.', 'info');
     }
   } catch (err) {
@@ -371,6 +372,49 @@ async function _handlePublish(reviewEdits?: unknown, generateOnly = false): Prom
     });
     _showToast(`${generateOnly ? '글 생성' : '발행'} 실패: ${(err as Error).message}`, 'error');
   }
+}
+
+/**
+ * Fills the standard 반자동 편집 (semi-auto edit) fields from the generated content.
+ *
+ * The full-auto flow populates the structure preview + title, but the editable
+ * body/hashtag fields live in the unified semi-auto section and were left empty
+ * for the image-narrative path (only keyword mode wired them). We read the
+ * already-built StructuredContent from window.currentStructuredContent and fill
+ * body (소제목 + 본문 재구성) + hashtags so the user can review and publish.
+ */
+function _populateSemiAutoEditor(): void {
+  const sc = (window as any).currentStructuredContent;
+  if (!sc) return;
+
+  const section = document.getElementById('unified-semi-auto-section');
+  if (section) section.style.display = 'block';
+
+  const bodyEl = document.getElementById('unified-generated-content') as HTMLTextAreaElement | null;
+  if (bodyEl) {
+    const headings = Array.isArray(sc.headings) ? sc.headings : [];
+    const blocks: string[] = [];
+    if (sc.introduction) blocks.push(String(sc.introduction));
+    for (const h of headings) {
+      if (h?.title) blocks.push(String(h.title));
+      const body = h?.content || h?.summary;
+      if (body) blocks.push(String(body));
+    }
+    if (sc.conclusion) blocks.push(String(sc.conclusion));
+    const text = blocks.length > 0 ? blocks.join('\n\n') : String(sc.bodyPlain || sc.content || '');
+    if (text.trim()) {
+      bodyEl.value = text;
+      bodyEl.readOnly = false;
+    }
+  }
+
+  const tagsEl = document.getElementById('unified-generated-hashtags') as HTMLInputElement | null;
+  if (tagsEl && sc.hashtags) {
+    tagsEl.value = Array.isArray(sc.hashtags) ? sc.hashtags.join(' ') : String(sc.hashtags);
+    tagsEl.readOnly = false;
+  }
+
+  section?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function _readFormField(id: string): string | undefined {

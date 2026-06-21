@@ -376,7 +376,9 @@ function toStructuredContent(
     bodyPlain,
     headings: sections.map((s, i) => ({
       title: s.heading || `Section ${i + 1}`,
-      summary: '',
+      // 섹션 본문을 summary에 실어 반자동 편집기(fillSemiAutoFields)가 소제목별 본문을
+      // 재구성할 수 있게 한다. 비워두면 편집탭 본문이 제목만 남는다(2026-06 제보).
+      summary: s.content,
       keywords: tags,
       imagePrompt: plan.sections[i]?.imageRefs[0] ?? '',
     })),
