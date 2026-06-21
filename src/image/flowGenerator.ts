@@ -277,18 +277,21 @@ async function launchWithStealthFallback(profileDir: string, offScreen: boolean)
     //   offScreen=true일 때는 headless: true 사용 (창 자체 안 뜸)
     //   offScreen=false (로그인 단계)는 visible 유지 — 사용자가 직접 로그인해야 함
     //   기존 음수 좌표/크기 args는 headless=false 폴백 시에만 사용 (호환성 유지)
+    // ✅ [Phase 0 anti-BotGuard] headless 제거 → headful + 화면 밖 배치로 숨김.
+    //   headless는 window.chrome.runtime 부재 등으로 BotGuard에 즉시 봇 탄로. off-screen headful은
+    //   document.visibilityState='visible' 유지(봇 신호↓)하면서 창은 사용자 눈에 안 보인다.
+    //   기존 --window-size=1,1/--start-minimized는 비현실 viewport·document.hidden 유발 → 제거.
     const offScreenArgs = offScreen ? [
         '--window-position=-32000,-32000',
-        '--window-size=1,1',
-        '--start-minimized',
     ] : [];
     const commonOptions: any = {
-        headless: offScreen, // ✅ [v2.10.11] offScreen=true → 진짜 headless로 창 숨김
+        headless: false, // ✅ Phase 0: 항상 headful (off-screen 위치로 숨김 — headless 탄로 제거)
         viewport: { width: 1280, height: 800 },
         args: [...STEALTH_ARGS, ...offScreenArgs],
         ignoreDefaultArgs: STEALTH_IGNORE_DEFAULT_ARGS,
         timeout: 60000,
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+        // ✅ Phase 0: UA override 제거 — channel:'chrome'의 실제 Chrome UA 사용(실버전 일치).
+        //   기존 Chrome/131 하드코딩은 실제 브라우저 버전과 불일치 → fingerprint 탄로점이었음.
     };
 
     const attempts = [
@@ -1262,12 +1265,19 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
     // [v1.6.1] 포커스 안정화 150→50ms
     await page.waitForTimeout(50);
 
-    // fill() 1순위, 실패 시 폴백 체인
+    // ✅ [Phase 0 anti-BotGuard] 1순위: 인간형 타이핑(키 간격 variance + 마우스 포커스).
+    //   fill()은 즉시 붙여넣기(키리듬 variance 0) → BotGuard 즉시 탄로. 실패 시 fill→pressSequentially 폴백.
     let inputSuccess = false;
     try {
-        await promptInput.fill(prompt, { timeout: 10000 });
+        const { humanType } = await import('./humanInteraction.js');
+        await humanType(page, promptInput, prompt);
         inputSuccess = true;
-    } catch (err1) {
+    } catch (err0) {
+        flowWarn(`[Flow][2/3] humanType 실패 → fill() 폴백: ${(err0 as Error).message.substring(0, 100)}`);
+        try {
+            await promptInput.fill(prompt, { timeout: 10000 });
+            inputSuccess = true;
+        } catch (err1) {
         flowWarn(`[Flow][2/3] fill() 실패 → pressSequentially 폴백: ${(err1 as Error).message.substring(0, 100)}`);
         try {
             await promptInput.pressSequentially(prompt, { delay: 3, timeout: 15000 });
@@ -1281,6 +1291,7 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
             } catch (err3) {
                 flowWarn(`[Flow][2/3] keyboard.type 폴백도 실패: ${(err3 as Error).message.substring(0, 100)}`);
             }
+        }
         }
     }
     if (!inputSuccess) {
@@ -1332,7 +1343,14 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
     }
 
     try {
-        await submitBtn.click({ timeout: 10000 });
+        // ✅ [Phase 0 anti-BotGuard] 생성 클릭 전 인간형 마우스 이동 — "마우스무브 0으로 액션 = 봇" 회피.
+        try {
+            const { humanClick } = await import('./humanInteraction.js');
+            await humanClick(page, submitBtn);
+        } catch (humanErr) {
+            flowWarn(`[Flow][2/3] humanClick 실패 → 일반 클릭 폴백: ${(humanErr as Error).message.substring(0, 80)}`);
+            await submitBtn.click({ timeout: 10000 });
+        }
     } catch (err) {
         flowWarn(`[Flow][2/3] 일반 클릭 실패 → force:true 재시도`);
         try {
