@@ -1817,16 +1817,24 @@ export async function generateSingleImageWithFlow(
             }
             if (/FLOW_GENERATION_ERROR/.test(msg) && genErrorSimplifyLevel < FLOW_GEN_ERROR_MAX_SIMPLIFY) {
                 genErrorSimplifyLevel += 1;
-                flowWarn(`[Flow] 🔁 생성 오류 → 트리거 우회(레벨 ${genErrorSimplifyLevel}/${FLOW_GEN_ERROR_MAX_SIMPLIFY}, 장면 보존) + 새 프로젝트 후 재시도`);
                 sendImageLog(`🔁 [Flow] 생성 오류 감지 — 트리거만 우회하고 재시도 (${genErrorSimplifyLevel}/${FLOW_GEN_ERROR_MAX_SIMPLIFY})`);
-                try {
-                    const p = await ensureFlowBrowserPage();
-                    await ensureFlowProject(p, true);
-                } catch (isoErr) {
-                    flowWarn(`[Flow] 단순화 재시도 전 새 프로젝트 격리 실패(계속 진행): ${(isoErr as Error).message.substring(0, 80)}`);
+                // ✅ [Phase 2 anti-BotGuard] 버스트 회피 — 매번 새 프로젝트 생성은 봇 신호.
+                //   레벨 1은 동일 프로젝트 재사용, 레벨 2+에서만 새 프로젝트로 격리(꼭 필요할 때만).
+                if (genErrorSimplifyLevel >= 2) {
+                    flowWarn(`[Flow] 🔁 우회(레벨 ${genErrorSimplifyLevel}) + 새 프로젝트 격리 후 재시도`);
+                    try {
+                        const p = await ensureFlowBrowserPage();
+                        await ensureFlowProject(p, true);
+                    } catch (isoErr) {
+                        flowWarn(`[Flow] 새 프로젝트 격리 실패(계속 진행): ${(isoErr as Error).message.substring(0, 80)}`);
+                    }
+                } else {
+                    flowLog(`[Flow] 🔁 우회(레벨 ${genErrorSimplifyLevel}) — 동일 프로젝트 재사용(버스트 회피)`);
                 }
-                await new Promise((r) => setTimeout(r, FLOW_GEN_ERROR_BACKOFF_MS));
-                attempt -= 1; // 단순화 재시도는 일반 retry 예산을 소비하지 않음 (genError 카운터로 별도 제한)
+                // ✅ [Phase 2] 인간형 jitter 백오프 — 상수 간격(Welford 분산 0)은 봇 탄로점.
+                const jitterMs = Math.round((Math.random() - 0.5) * 2 * 8000); // ±8s
+                await new Promise((r) => setTimeout(r, Math.max(8000, FLOW_GEN_ERROR_BACKOFF_MS + jitterMs)));
+                attempt -= 1; // 우회 재시도는 일반 retry 예산을 소비하지 않음 (genError 카운터로 별도 제한)
                 continue;
             }
 
