@@ -1190,6 +1190,11 @@
                                 <label>공지사항</label>
                                 <input id="edit-notice" type="text" placeholder="공지사항이 없습니다.">
                             </div>
+                            <div class="editor-field full">
+                                <label>첫 화면 성과 이미지</label>
+                                <textarea id="edit-hero-proofs" placeholder="/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg | 방문자 상승 흐름 | 콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다. | 조회수 80 | 네이버 블로그 일간현황 조회수 상승 성과 화면"></textarea>
+                                <p class="editor-help">한 줄에 한 장씩 입력합니다. 형식: 이미지경로 | 제목 | 설명 | 지표 | 이미지 설명</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2778,7 +2783,37 @@
                 title: '매일 100건,\n사람이 쓴 것처럼.',
                 desc: '키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.\n블로그 10개를 혼자 운영하는 분들의 비밀 무기.',
                 benefit: '2,800+명이 사용 중',
-                notice: ''
+                notice: '',
+                proofs: [
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg',
+                        alt: '네이버 블로그 일간현황 조회수 상승 성과 화면',
+                        title: '방문자 상승 흐름',
+                        desc: '콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다.',
+                        metric: '조회수 80'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260309_163736774-fast.jpg',
+                        alt: '사용자 성과 인증 화면',
+                        title: '실사용자 성과 인증',
+                        desc: '운영자가 직접 확인한 블로그 지표와 반응 데이터를 보여줍니다.',
+                        metric: '성과 인증'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_01-fast.jpg',
+                        alt: '블로그 성과 데이터 요약 화면',
+                        title: '운영 데이터 확인',
+                        desc: '반복 발행 후 확인해야 하는 핵심 지표를 한눈에 보여줍니다.',
+                        metric: '데이터 기반'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_05-fast.jpg',
+                        alt: '성과 이미지 캡처',
+                        title: '성과 캡처 모음',
+                        desc: '판매 페이지에서 바로 보여줄 수 있는 실제 화면 기반 자료입니다.',
+                        metric: '실제 화면'
+                    }
+                ]
             },
             pricing: {
                 page: {
@@ -3072,6 +3107,26 @@
             return textToRows(text, 2).map(row => [row[0], row.slice(1).join(' | ')]);
         }
 
+        function proofsToText(proofs) {
+            return (proofs || []).map(proof => [
+                proof.src || '',
+                proof.title || '',
+                proof.desc || '',
+                proof.metric || '',
+                proof.alt || ''
+            ].join(' | ')).join('\n');
+        }
+
+        function textToProofs(text) {
+            return textToRows(text, 1).map(row => compactObject({
+                src: row[0],
+                title: row[1] || '',
+                desc: row[2] || '',
+                metric: row[3] || '',
+                alt: row[4] || row[1] || ''
+            }));
+        }
+
         function copyBlockToText(kicker, title, desc) {
             return [kicker || '', title || '', desc || ''].join('\n');
         }
@@ -3183,6 +3238,7 @@
             setValue('edit-hero-desc', hero.desc);
             setValue('edit-hero-benefit', hero.benefit);
             setValue('edit-notice', hero.notice);
+            setValue('edit-hero-proofs', proofsToText(hero.proofs));
 
             setValue('pricing-page-eyebrow', pricingPage.eyebrow);
             setValue('pricing-tab-label', pricingPage.tabLabel);
@@ -3443,7 +3499,8 @@
                     title: getValue('edit-hero-title'),
                     desc: getValue('edit-hero-desc'),
                     benefit: getValue('edit-hero-benefit'),
-                    notice: getValue('edit-notice')
+                    notice: getValue('edit-notice'),
+                    proofs: textToProofs(getValue('edit-hero-proofs'))
                 },
                 pricing: {
                     page: {

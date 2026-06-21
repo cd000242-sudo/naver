@@ -6,6 +6,13 @@ export type SiteContent = {
         desc?: string;
         benefit?: string;
         notice?: string;
+        proofs?: Array<{
+            src?: string;
+            alt?: string;
+            title?: string;
+            desc?: string;
+            metric?: string;
+        }>;
     };
     pricing?: {
         page?: {
