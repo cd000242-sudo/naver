@@ -11,6 +11,7 @@ import {
   bezierPoint,
   easeInOut,
   buildMousePath,
+  buildWarmupTargets,
 } from '../image/humanInteraction';
 
 describe('gaussianDelay', () => {
@@ -65,5 +66,25 @@ describe('buildMousePath', () => {
     const a = buildMousePath({ x: 0, y: 0 }, { x: 500, y: 500 });
     const b = buildMousePath({ x: 0, y: 0 }, { x: 500, y: 500 });
     expect(JSON.stringify(a)).not.toBe(JSON.stringify(b));
+  });
+});
+
+describe('buildWarmupTargets', () => {
+  it('returns the requested count of in-viewport points', () => {
+    const pts = buildWarmupTargets(1280, 800, 3);
+    expect(pts.length).toBe(3);
+    for (const p of pts) {
+      expect(p.x).toBeGreaterThanOrEqual(128);
+      expect(p.x).toBeLessThanOrEqual(1152);
+      expect(p.y).toBeGreaterThanOrEqual(80);
+      expect(p.y).toBeLessThanOrEqual(720);
+    }
+  });
+  it('default count is 2–4', () => {
+    for (let i = 0; i < 50; i++) {
+      const n = buildWarmupTargets(1000, 1000).length;
+      expect(n).toBeGreaterThanOrEqual(2);
+      expect(n).toBeLessThanOrEqual(4);
+    }
   });
 });

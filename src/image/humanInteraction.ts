@@ -97,6 +97,45 @@ export async function humanClick(page: Page, locator: Locator): Promise<void> {
   await page.mouse.up();
 }
 
+/** Random in-viewport points for a pre-action mouse warmup (builds behavioral history). Pure. */
+export function buildWarmupTargets(vw: number, vh: number, count?: number): Pt[] {
+  const n = count ?? Math.round(randBetween(2, 4));
+  return Array.from({ length: n }, () => ({
+    x: Math.round(randBetween(vw * 0.1, vw * 0.9)),
+    y: Math.round(randBetween(vh * 0.1, vh * 0.9)),
+  }));
+}
+
+/** Wheel-scroll with human-like chunking + variable timing. */
+export async function humanScroll(page: Page, deltaY: number): Promise<void> {
+  const steps = Math.round(randBetween(3, 6));
+  for (let i = 0; i < steps; i++) {
+    await page.mouse.wheel(0, Math.round(deltaY / steps + randBetween(-15, 15)));
+    await page.waitForTimeout(gaussianDelay(90, 40, 30));
+  }
+}
+
+/**
+ * Pre-action warmup: a few human mouse moves to random points + occasional scroll + idle.
+ * BotGuard flags "meaningful action with ZERO preceding mouse movement" — this seeds the session
+ * with human-shaped activity before the prompt/generate action. Best-effort (never throws).
+ */
+export async function humanWarmup(
+  page: Page,
+  viewport: { width: number; height: number } = { width: 1280, height: 800 },
+): Promise<void> {
+  try {
+    for (const t of buildWarmupTargets(viewport.width, viewport.height)) {
+      await humanMouseMoveTo(page, t.x, t.y);
+      await page.waitForTimeout(gaussianDelay(220, 120, 80));
+    }
+    if (Math.random() < 0.6) await humanScroll(page, randBetween(120, 400));
+    await page.waitForTimeout(gaussianDelay(300, 150, 120));
+  } catch {
+    /* warmup is best-effort — never block generation on it */
+  }
+}
+
 /**
  * Type text into a locator with human keystroke rhythm: focus via a human click, then per-char
  * Gaussian delays (variance!), longer pauses after punctuation/space, occasional think-pauses.

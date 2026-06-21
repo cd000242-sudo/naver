@@ -1249,6 +1249,13 @@ async function submitPromptOnly(page: Page, prompt: string): Promise<void> {
     // 2026-04-28 changelog iframe이 매 시도마다 다시 뜰 수 있어 입력 직전 재dismiss
     await dismissChangelogModal(page);
 
+    // ✅ [Phase 1 anti-BotGuard] 입력 전 인간형 워밍업 — 마우스 무행동 상태에서 액션 시작 방지.
+    //   BotGuard는 "마우스무브 0으로 의미있는 액션 = 봇"으로 본다. 행동 이력을 먼저 쌓는다.
+    try {
+        const { humanWarmup } = await import('./humanInteraction.js');
+        await humanWarmup(page);
+    } catch { /* best-effort */ }
+
     // R4 Phase 6: 단일 셀렉터 → 다중 폴백
     let promptInput = await findFirstMatchingFlowSelector(page, 'promptInput');
     if (!promptInput) {
