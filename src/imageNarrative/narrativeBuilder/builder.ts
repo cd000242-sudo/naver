@@ -114,7 +114,9 @@ function modeToPromptFile(mode: InferenceMode): string | null {
  * Converts a NarrativePlan into a structured user prompt string.
  */
 function buildUserPrompt(plan: NarrativePlan, options: BuilderOptions): string {
-  const targetChars = options.targetChars ?? 1500;
+  // 1,500 → 2,500: 사진 글이 다른 툴 대비 빈약하다는 피드백 대응. 환각 없이 경험·오감·
+  // 맥락을 깊게 풀어쓰도록 분량 기준 상향(프롬프트의 풍부화 규칙과 병행).
+  const targetChars = options.targetChars ?? 2500;
   const tone = options.toneStyle ?? 'friendly';
   const contextBlock = formatImageNarrativeContext(options.context);
 
@@ -145,7 +147,9 @@ function buildUserPrompt(plan: NarrativePlan, options: BuilderOptions): string {
     `${sectionsText}\n\n` +
     `=== 요구사항 ===\n` +
     `- 위 섹션별 이미지와 비트를 자연스럽게 엮어 블로그 글 작성\n` +
-    `- 사진에 없는 정보는 절대 추가하지 말 것\n` +
+    `- 각 사진을 1~2줄로 끝내지 말 것. 그 순간의 감정·기대·오감(색·질감·향·온도·소리)과 ` +
+    `전후 맥락(위 입력 정보 활용)을 충분히 풀어 ${targetChars}자 분량을 자연스럽게 채울 것\n` +
+    `- 단, 사진에 없는 사실(가격·메뉴명·영업시간·상호 등)은 절대 지어내지 말 것 (군더더기 반복도 금지)\n` +
     `- 반드시 JSON 형식으로만 응답 (마크다운 코드 블록 없이)`
   );
 }
