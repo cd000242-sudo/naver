@@ -5681,6 +5681,9 @@ export async function generateStructuredContent(
       const stripCitationTokens = stripInternalMarkers;
       if (optimized.bodyPlain) optimized.bodyPlain = stripCitationTokens(optimized.bodyPlain);
       if (optimized.bodyHtml) optimized.bodyHtml = stripCitationTokens(optimized.bodyHtml);
+      // ✅ 도입부/마무리 필드도 strip — 날짜 "기준" 못박기·마커가 도입부에 남는 케이스 차단(별도 필드라 누락됐었음).
+      if (typeof (optimized as any).introduction === 'string') (optimized as any).introduction = stripCitationTokens((optimized as any).introduction);
+      if (typeof (optimized as any).conclusion === 'string') (optimized as any).conclusion = stripCitationTokens((optimized as any).conclusion);
       // 제목 누출이 가장 치명적 — selectedTitle/title + 소제목 title까지 일괄 제거.
       if (typeof (optimized as any).selectedTitle === 'string') {
         (optimized as any).selectedTitle = stripCitationTokens((optimized as any).selectedTitle);
