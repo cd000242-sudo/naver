@@ -176,13 +176,17 @@ const BODY_ZERO_WON_PATTERN = /(?:^|[^\d,])0\s*원\s*(?:에|으로|부터|의)?\
 const MISSING_INFO_PATTERN = /가격\s*정보\s*없음/;
 
 /**
- * Stricter scanner for heading titles. Headings are short and rarely mention
- * "판매/가격" explicitly; the mere presence of "0원" in a heading is almost
- * always a bug (e.g. "0원 할인가", "0원 특가", "특가 0원"). We flag any
- * standalone "0원" in a heading title, as long as it is not preceded by
- * another digit (guarding against "15,370원").
+ * Heading "0원" scanner. A heading "0원" is a price-crawl artifact ONLY when a
+ * sale/price word sits next to it (e.g. "0원 할인가", "0원 특가", "특가 0원").
+ * A bare "0원" in an informational heading is legitimate fact — "정부기여금 0원",
+ * "수수료 0원", "월 0원" — and must NOT be blocked. So we require BOTH a standalone
+ * "0원" (not part of "15,370원") AND an adjacent sale/price keyword.
+ *
+ * [FIX] Previously any "0원" in a heading was flagged critical, which wrongly
+ * blocked legitimate policy/finance posts (e.g. "선해지 후가입 시 정부기여금 0원").
  */
 const HEADING_ZERO_WON_PATTERN = /(?:^|[^\d,])0\s*원/;
+const HEADING_PRICE_SALE_CONTEXT = /특가|할인|정가|세일|판매가|할인가|최저가|원가|판매\s*중|구매|결제|주문|특별가|이벤트가/;
 
 function scanPriceArtifact(fullText: string): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
@@ -206,7 +210,11 @@ function scanHeadingPriceArtifact(content: CheckableContent): ValidationIssue[] 
   for (const h of content.headings ?? []) {
     const title = (h.title ?? '').trim();
     if (!title) continue;
-    if (HEADING_ZERO_WON_PATTERN.test(title) || MISSING_INFO_PATTERN.test(title)) {
+    // "가격 정보 없음"은 맥락 무관 명백한 크롤 실패 → 항상 차단.
+    // standalone "0원"은 옆에 판매/특가 등 가격어가 있을 때만 아티팩트(쇼핑 가격크롤 실패).
+    // 정보성 글의 "정부기여금 0원" 등은 정상 사실 → 차단하지 않는다.
+    const isZeroWonArtifact = HEADING_ZERO_WON_PATTERN.test(title) && HEADING_PRICE_SALE_CONTEXT.test(title);
+    if (isZeroWonArtifact || MISSING_INFO_PATTERN.test(title)) {
       issues.push({
         severity: 'critical',
         category: 'price_artifact',

@@ -120,6 +120,23 @@ describe('contentValidationPipeline — price artifact scanner (2nd-line defense
     ).toBe(true);
   });
 
+  it('does NOT flag legitimate "0원" fact in an informational heading (no sale word)', () => {
+    const result = validateContent(
+      buildContent({
+        headings: [
+          { title: '선해지 후가입 시 정부기여금 0원', body: '청년도약계좌를 중도 해지하면 정부기여금을 받지 못합니다.' },
+          { title: '수수료 0원으로 갈아타는 법', body: '이체 수수료가 면제됩니다.' },
+        ],
+      }),
+      { skipFingerprint: true },
+    );
+    expect(
+      result.issues.some(
+        (i) => i.category === 'price_artifact' && i.location === 'heading',
+      ),
+    ).toBe(false);
+  });
+
   it('flags "가격 정보 없음" even if it only appears in a heading', () => {
     const result = validateContent(
       buildContent({
