@@ -14,8 +14,38 @@ import {
     injectHeadingVariation,
     injectUniqueSalt,
     sanitizeHeadingForPrompt,
+    simplifyFlowPrompt,
     HEADING_VARIATION_HINT_COUNT,
 } from '../image/flowPromptInjection';
+
+describe('simplifyFlowPrompt — Flow 생성 오류 회복용 단계적 단순화', () => {
+    const sample =
+        '# Subject (must reflect this heading): 청년내일저축계좌 가입 소득 33만원 재산 기준\n\n' +
+        'CRITICAL FRAMING: wide-angle.\n\nA young person reviewing documents, 2026 budget 100만원, 50% match.';
+
+    it('level 0은 원본 유지', () => {
+        expect(simplifyFlowPrompt(sample, 0)).toBe(sample);
+        expect(simplifyFlowPrompt('', 1)).toBe('');
+    });
+
+    it('level 1은 Subject 줄 + 숫자/금액/퍼센트 제거', () => {
+        const out = simplifyFlowPrompt(sample, 1);
+        expect(out).not.toMatch(/# Subject/);
+        expect(out).not.toContain('청년내일저축계좌'); // subject 줄 통째 제거
+        expect(out).not.toMatch(/\d{2,}/);            // 33, 100, 2026, 50 등 제거
+        expect(out).not.toMatch(/%/);
+        expect(out.toLowerCase()).toContain('safe-for-all-audiences');
+    });
+
+    it('level 2+는 일반 안전 장면으로 완전 대체', () => {
+        const out = simplifyFlowPrompt(sample, 2);
+        expect(out).not.toContain('청년내일저축계좌');
+        expect(out).not.toMatch(/# Subject/);
+        expect(out.toLowerCase()).toContain('conceptual illustration');
+        expect(out.toLowerCase()).toContain('no text');
+        expect(simplifyFlowPrompt(sample, 5)).toBe(simplifyFlowPrompt(sample, 2));
+    });
+});
 
 describe('sanitizeHeadingForPrompt', () => {
     it('빈 입력은 빈 문자열', () => {

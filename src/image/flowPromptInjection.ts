@@ -61,3 +61,42 @@ export function injectHeadingVariation(
     const subjectLine = subject ? `# Subject (must reflect this heading): ${subject}\n\n` : '';
     return `${subjectLine}${hint}\n\n${prompt}`;
 }
+
+// A fully neutral, safe scene used as the last-resort prompt when Flow keeps
+// returning a server-side generation error for the original prompt.
+const SIMPLIFY_GENERIC_SCENE =
+    'A clean, professional conceptual illustration with soft natural lighting, ' +
+    'minimal modern composition, calm neutral friendly tone, no text, no letters, ' +
+    'no charts or numbers, safe for all audiences.';
+
+// Progressive prompt simplification for Flow's "문제가 발생했습니다" generation errors.
+//
+// Flow rejects some prompts deterministically — abstract policy/finance subjects (e.g. a
+// Korean heading like "청년내일저축계좌 소득·재산 기준"), number/amount-heavy phrasing, or
+// otherwise sensitive wording. Re-submitting the same text fails forever, so we strip the
+// risky parts step by step and finally fall back to a generic safe scene that almost always
+// renders. level 0 = unchanged; level 1 = strip subject line + numbers/amounts; level >= 2 =
+// generic safe scene only.
+export function simplifyFlowPrompt(prompt: string, level: number): string {
+    if (!prompt || level <= 0) return prompt;
+
+    if (level >= 2) {
+        return SIMPLIFY_GENERIC_SCENE;
+    }
+
+    // level 1 — drop the literal heading subject line and number/currency/percent tokens that
+    // commonly trip Flow, then nudge toward a simple, safe composition.
+    const stripped = String(prompt)
+        .replace(/^#\s*Subject[^\n]*\n+/gim, '')   // remove "# Subject (must reflect this heading): ..."
+        .replace(/[₩$]\s?\d[\d,.\s]*/g, ' ')        // currency amounts
+        .replace(/\d+(\.\d+)?\s?%/g, ' ')           // percentages
+        .replace(/\d{2,}/g, ' ')                    // long digit runs (years, amounts, counts)
+        .replace(/[ \t]{2,}/g, ' ')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+
+    // Over-stripped to nothing (digit/symbol-only prompt) → skip straight to the generic scene.
+    if (!stripped) return SIMPLIFY_GENERIC_SCENE;
+
+    return `${stripped}\n\nKeep the image simple, clean, conceptual and safe-for-all-audiences. No text, no numbers, no charts.`;
+}

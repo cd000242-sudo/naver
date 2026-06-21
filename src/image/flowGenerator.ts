@@ -23,7 +23,7 @@ import { writeImageFile } from './imageUtils.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
-import { injectUniqueSalt, injectHeadingVariation } from './flowPromptInjection.js';
+import { injectUniqueSalt, injectHeadingVariation, simplifyFlowPrompt } from './flowPromptInjection.js';
 // ✅ [v2.10.298] Flow 일별 카운터 — 한도 에러 발생 시 봇감지 vs 진짜 한도 구분
 import { incrementDailySuccess, classifyQuotaError, getDailySuccess } from '../utils/imageEngineDailyCounter.js';
 const incrementFlowDailySuccess = (): number => incrementDailySuccess('flow');
@@ -1102,6 +1102,15 @@ async function saveDebugScreenshot(page: Page, label: string): Promise<string> {
 const FLOW_PROJECT_IMAGE_LIMIT = 9;
 const FLOW_SINGLE_IMAGE_WAIT_TIMEOUT_MS = 180000;
 const FLOW_SINGLE_IMAGE_MAX_RETRIES = 2;
+// 생성 오류(서버 거부) 회복: 같은 프롬프트 재시도는 무의미 → 프롬프트를 단계적으로 단순화(레벨 1~2)
+// 하고 새 프로젝트로 격리한 뒤 재시도. 일반 retry 예산과 별개로 최대 2회.
+// WARNING: 이 값을 올리면 generateSingleImageWithFlow의 attempt-- 재시도 상한도 그만큼 늘어난다(총 submit 증가).
+const FLOW_GEN_ERROR_MAX_SIMPLIFY = 2;
+const FLOW_GEN_ERROR_BACKOFF_MS = 20000;
+// in-page "다시 시도" 자동 클릭: 일시 서버 오류/throttle는 즉시 재클릭보다 시간을 줘야 회복된다.
+// 클릭 후 점증 대기(10s→18s→28s)로 transient 회복률을 높이고, 그래도 실패면 단순화 단계로 넘긴다.
+const FLOW_INPAGE_RETRY_MAX = 3;
+const FLOW_INPAGE_RETRY_WAIT_MS = [10000, 18000, 28000];
 const FLOW_SEQUENTIAL_IMAGE_STABILIZE_MS = 30_000;
 
 function getFlowSequentialImageStabilizeMs(): number {
@@ -1494,10 +1503,14 @@ async function waitForNewImage(page: Page, prevCount: number, timeoutMs: number 
                     return { hasError: true, clicked };
                 });
                 if (state.hasError && !watchdogStopped) {
-                    if (state.clicked && retryClicks < 2) {
+                    if (state.clicked && retryClicks < FLOW_INPAGE_RETRY_MAX) {
                         retryClicks += 1;
-                        flowLog(`[Flow][3/3] ⚠️ 생성 오류 카드 감지 → "다시 시도" 자동 클릭 (${retryClicks}/2)`);
-                        sendImageLog(`🔁 [Flow] 생성 오류 감지 — 다시 시도 자동 클릭 (${retryClicks}/2)`);
+                        flowLog(`[Flow][3/3] ⚠️ 생성 오류 카드 감지 → "다시 시도" 자동 클릭 (${retryClicks}/${FLOW_INPAGE_RETRY_MAX})`);
+                        sendImageLog(`🔁 [Flow] 생성 오류 감지 — 다시 시도 자동 클릭 (${retryClicks}/${FLOW_INPAGE_RETRY_MAX})`);
+                        // 재클릭 후엔 점증 대기 — 일시 서버 오류/throttle 회복 시간 부여 (즉시 재확인 금지).
+                        const waitMs = FLOW_INPAGE_RETRY_WAIT_MS[Math.min(retryClicks - 1, FLOW_INPAGE_RETRY_WAIT_MS.length - 1)];
+                        if (!watchdogStopped) setTimeout(check, waitMs);
+                        return;
                     } else {
                         reject(new Error('FLOW_GENERATION_ERROR:Flow가 생성 오류를 반환했습니다 (다시 시도 자동 클릭 후에도 실패). 잠시 후 재시도하거나 프롬프트를 단순화하세요.'));
                         return;
@@ -1700,8 +1713,8 @@ export async function generateSingleImageWithFlow(
 ): Promise<{ buffer: Buffer; mimeType: string } | null> {
     const MAX_RETRIES = FLOW_SINGLE_IMAGE_MAX_RETRIES;
     let lastError: Error | null = null;
-    // Flow가 같은 prompt에 같은 이미지 반환하는 회귀 차단 — 호출마다 unique salt 주입
-    const prompt = injectUniqueSalt(rawPrompt);
+    // 생성 오류(FLOW_GENERATION_ERROR) 누적 시 프롬프트 단순화 레벨 — 일반 retry 예산과 별개.
+    let genErrorSimplifyLevel = 0;
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
         if (signal?.aborted) {
@@ -1726,6 +1739,13 @@ export async function generateSingleImageWithFlow(
             flowLog(`[Flow] 🖼️ 이미지 생성 시도 ${attempt}/${MAX_RETRIES} (기존 ${prevCount}장)`);
             sendImageLog(`🖼️ [Flow] 프롬프트 전송 중... (시도 ${attempt}/${MAX_RETRIES})`);
 
+            // Flow가 같은 prompt에 같은 이미지 반환하는 회귀 차단 — 매 시도 unique salt.
+            // 생성 오류가 누적됐으면(genErrorSimplifyLevel>0) 프롬프트를 단순화해 서버 거부 회피.
+            let prompt = injectUniqueSalt(rawPrompt);
+            if (genErrorSimplifyLevel > 0) {
+                prompt = simplifyFlowPrompt(prompt, genErrorSimplifyLevel);
+                sendImageLog(`🔧 [Flow] 프롬프트 단순화 적용 (레벨 ${genErrorSimplifyLevel}) — 생성 오류 회피`);
+            }
             await submitPromptOnly(page, prompt);
 
             sendImageLog('⏳ [Flow] 이미지 생성 대기 중...');
@@ -1745,6 +1765,23 @@ export async function generateSingleImageWithFlow(
             flowWarn(`[Flow] 시도 ${attempt}/${MAX_RETRIES} 실패: ${msg}`);
             sendImageLog(`⚠️ [Flow] 시도 ${attempt} 실패: ${msg.substring(0, 150)}`);
             lastError = err as Error;
+
+            // ✅ 생성 오류(서버 거부) — 같은 프롬프트 재시도는 무의미. 프롬프트 단순화 + 새 프로젝트 + 대기 후
+            //   재시도(일반 retry 예산 미소진). 정책·숫자·민감어를 단계적으로 제거해 결정적 실패를 회복한다.
+            if (/FLOW_GENERATION_ERROR/.test(msg) && genErrorSimplifyLevel < FLOW_GEN_ERROR_MAX_SIMPLIFY) {
+                genErrorSimplifyLevel += 1;
+                flowWarn(`[Flow] 🔧 생성 오류 → 프롬프트 단순화(레벨 ${genErrorSimplifyLevel}/${FLOW_GEN_ERROR_MAX_SIMPLIFY}) + 새 프로젝트 후 재시도`);
+                sendImageLog(`🔧 [Flow] 생성 오류 감지 — 프롬프트 단순화 후 재시도 (${genErrorSimplifyLevel}/${FLOW_GEN_ERROR_MAX_SIMPLIFY})`);
+                try {
+                    const p = await ensureFlowBrowserPage();
+                    await ensureFlowProject(p, true);
+                } catch (isoErr) {
+                    flowWarn(`[Flow] 단순화 재시도 전 새 프로젝트 격리 실패(계속 진행): ${(isoErr as Error).message.substring(0, 80)}`);
+                }
+                await new Promise((r) => setTimeout(r, FLOW_GEN_ERROR_BACKOFF_MS));
+                attempt -= 1; // 단순화 재시도는 일반 retry 예산을 소비하지 않음 (genError 카운터로 별도 제한)
+                continue;
+            }
 
             // Flow timeout은 같은 프로젝트에 pending 작업이 남는 경우가 많으므로 다음 시도 전 새 프로젝트로 격리한다.
             // FLOW_BROWSER_LAUNCH_FAILED · FLOW_LOGIN_TIMEOUT 같은 구조적 오류는 reload/new project로 회복 불가 → skip.
