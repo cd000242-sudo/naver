@@ -60,8 +60,14 @@ describe('v1.4.77 — 0원 누출 봉쇄 매트릭스', () => {
     });
 
     it("price_artifact critical 이슈 감지 시 throw", () => {
-      // category === 'price_artifact' && severity === 'critical' 감지 후 throw 로직 존재
-      expect(code).toMatch(/category === 'price_artifact'[\s\S]{0,200}?throw new ZeroPriceArtifactError/);
+      // category === 'price_artifact' && severity === 'critical' 감지 후 throw 로직 존재.
+      // (윈도우 확대: 이제 쇼핑/제휴 맥락 게이트가 감지와 throw 사이에 들어감)
+      expect(code).toMatch(/category === 'price_artifact'[\s\S]{0,800}?throw new ZeroPriceArtifactError/);
+    });
+
+    it("0원 blocking throw가 쇼핑/제휴(가격) 맥락에서만 발동 (정보성 글 오탐 차단 방지)", () => {
+      // isPriceContext 게이트가 throw를 감싸야 한다 — 비쇼핑 글의 정당한 "0원"은 차단 금지.
+      expect(code).toMatch(/isPriceContext[\s\S]{0,120}?throw new ZeroPriceArtifactError/);
     });
 
     it("runPostGenValidator의 'Never throws' 주석이 제거됨 (동작 변경 반영)", () => {

@@ -342,12 +342,24 @@ function runPostGenValidator(content: any, source: any): void {
     console.error('[Validator] 파사드 호출 실패, 발행 계속:', err);
     return;
   }
-  // ✅ [v1.4.77] 0원 아티팩트는 blocking 게이트
+  // ✅ [v1.4.77] 0원 아티팩트는 blocking 게이트 — 단, 가격이 실제로 등장하는 쇼핑/제휴 맥락에서만.
+  //   이 게이트의 목적은 "가격 크롤 실패 → 0원" 아티팩트 차단(쇼핑커넥트/리뷰). 정보성 글
+  //   (SEO/홈피드/정책 등)의 "정부기여금 0원·수수료 0원" 같은 정당한 사실은 절대 차단하지 않는다.
   const zeroPriceIssue = result?.issues?.find(
     (i: any) => i.category === 'price_artifact' && i.severity === 'critical',
   );
   if (zeroPriceIssue) {
-    throw new ZeroPriceArtifactError(zeroPriceIssue.message || '본문/소제목에 0원 패턴');
+    const url = typeof source?.url === 'string' ? source.url : '';
+    const isPriceContext =
+      source?.contentMode === 'affiliate' ||
+      source?.isReviewType === true ||
+      source?.isShoppingConnectMode === true ||
+      /(smartstore\.naver|brand\.naver|naver\.me|coupang|aliexpress|11st|gmarket)/i.test(url);
+    if (isPriceContext) {
+      throw new ZeroPriceArtifactError(zeroPriceIssue.message || '본문/소제목에 0원 패턴');
+    }
+    // 비쇼핑(정보성) 맥락: 차단하지 않고 로그만 — 0원은 정당한 사실일 수 있음.
+    console.warn(`[Validator] ℹ️ 0원 아티팩트 감지(비쇼핑 맥락 — 발행 차단 안 함): ${zeroPriceIssue.message}`);
   }
 }
 
