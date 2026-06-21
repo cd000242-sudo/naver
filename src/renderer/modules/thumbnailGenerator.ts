@@ -2150,14 +2150,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const target = e.target as HTMLElement;
     // 버튼 자체거나 버튼 내부 요소(아이콘 등)를 클릭한 경우 모두 처리
     if (target.id === 'launch-leword-btn' || target.closest('#launch-leword-btn')) {
-      console.log('🔑 황금키워드(LEWORD) 실행 버튼 클릭됨');
+      console.log('🔑 LEWORD 사이트 바로가기 클릭됨');
       try {
-        const result = await (window as any).api.launchLeword();
-        if (!result.success) {
-          console.error('LEWORD 실행 실패:', result.message);
-        }
+        await (window as any).api.openExternalUrl('https://www.leaderspro.kr/leword');
       } catch (error) {
-        console.error('LEWORD 실행 오류:', error);
+        console.error('LEWORD 사이트 열기 오류:', error);
       }
     }
   });

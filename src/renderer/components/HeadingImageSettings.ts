@@ -743,7 +743,7 @@ export function createHeadingImageModal(): void {
               <div style="display: flex; align-items: center; gap: 14px;">
                 <div class="btn-icon" id="google-account-icon" style="background: linear-gradient(135deg, #4285F4 0%, #1a73e8 100%);">🔗</div>
                 <div>
-                  <div class="btn-text">Google 계정 연동 (ImageFX · Flow 통합)</div>
+                  <div class="btn-text">Google 계정 연동 (Flow)</div>
                   <div class="btn-value" id="google-account-status" style="color: #9ca3af; display: flex; align-items: center; gap: 6px;">
                     <span id="google-account-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #6b7280; display: inline-block; flex-shrink: 0;"></span>
                     <span id="google-account-text">확인 중... — 클릭하여 로그인 + 연결 테스트</span>
@@ -2114,11 +2114,9 @@ export function createHeadingImageModal(): void {
     if (textEl) textEl.textContent = '⏳ Step 1/3: Google 로그인 중...';
     if (statusEl) statusEl.style.color = '#3b82f6';
 
-    // ✅ [v2.10.292] 진짜 통합 — 클릭 한 번으로 Google 로그인 + ImageFX 테스트 + Flow 테스트 + 통합 상태 표시
+    // ✅ 통합 — 클릭 한 번으로 Google 로그인 + Flow 연결 테스트 + 상태 표시 (ImageFX 제거됨)
     let userName = '';
-    let imagefxOk = false;
     let flowOk = false;
-    let imagefxMsg = '';
     let flowMsg = '';
 
     try {
@@ -2134,59 +2132,38 @@ export function createHeadingImageModal(): void {
       userName = loginResult.userName || 'user';
       console.log(`[HeadingImageSettings] ✅ Step 1/3: Google 로그인 OK (${userName})`);
 
-      // ── Step 2/3: ImageFX 실제 생성 테스트 ─────────────────────
-      if (textEl) textEl.textContent = `⏳ Step 2/3: ImageFX 실제 1장 생성 테스트 중...`;
-      try {
-        const imagefxResult = await (window as any).api.testImageFxConnection();
-        imagefxOk = Boolean(imagefxResult?.ok ?? imagefxResult?.success);
-        imagefxMsg = imagefxResult?.message || (imagefxOk ? '정상' : '실패');
-        console.log(`[HeadingImageSettings] ${imagefxOk ? '✅' : '⚠️'} Step 2/3: ImageFX = ${imagefxMsg}`);
-      } catch (e: any) {
-        imagefxOk = false;
-        imagefxMsg = e?.message || '예외';
-      }
-
-      // ── Step 3/3: Flow 연결 테스트 ───────────────────────
-      if (textEl) textEl.textContent = `⏳ Step 3/3: Flow 연결 확인 중...`;
+      // ── Step 2/2: Flow 연결 테스트 (ImageFX 제거됨) ───────────
+      if (textEl) textEl.textContent = `⏳ Step 2/2: Flow 연결 확인 중...`;
       try {
         const flowResult = await (window as any).api.testFlowConnection();
         flowOk = Boolean(flowResult?.ok ?? flowResult?.success);
         flowMsg = flowResult?.message || (flowOk ? '정상' : '실패');
-        console.log(`[HeadingImageSettings] ${flowOk ? '✅' : '⚠️'} Step 3/3: Flow = ${flowMsg}`);
+        console.log(`[HeadingImageSettings] ${flowOk ? '✅' : '⚠️'} Step 2/2: Flow = ${flowMsg}`);
       } catch (e: any) {
         flowOk = false;
         flowMsg = e?.message || '예외';
       }
 
-      // ── 통합 상태 표시 ────────────────────────────────────
-      const allOk = imagefxOk && flowOk;
-      const someOk = imagefxOk || flowOk;
-      const imagefxIcon = imagefxOk ? '✅' : '⚠️';
+      // ── 상태 표시 (Flow 단독) ──────────────────────────────
       const flowIcon = flowOk ? '✅' : '⚠️';
-
-      if (allOk) {
+      if (flowOk) {
         if (dotEl) dotEl.style.background = '#22c55e';
         if (statusEl) statusEl.style.color = '#22c55e';
         if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'; iconEl.textContent = '✅'; }
-      } else if (someOk) {
+      } else {
         if (dotEl) dotEl.style.background = '#f59e0b';
         if (statusEl) statusEl.style.color = '#f59e0b';
         if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'; iconEl.textContent = '⚠️'; }
-      } else {
-        if (dotEl) dotEl.style.background = '#ef4444';
-        if (statusEl) statusEl.style.color = '#ef4444';
-        if (iconEl) { iconEl.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)'; iconEl.textContent = '❌'; }
       }
 
       if (textEl) {
         textEl.innerHTML =
           `<div style="font-size: 12px; line-height: 1.5;">` +
           `<div>👤 ${userName}</div>` +
-          `<div>${imagefxIcon} ImageFX: ${imagefxOk ? '정상' : imagefxMsg}</div>` +
           `<div>${flowIcon} Flow: ${flowOk ? '정상' : flowMsg}</div>` +
           `</div>`;
       }
-      console.log('[HeadingImageSettings] 🎯 통합 시퀀스 완료:', { userName, imagefxOk, flowOk });
+      console.log('[HeadingImageSettings] 🎯 통합 시퀀스 완료:', { userName, flowOk });
     } catch (err: any) {
       console.error('[HeadingImageSettings] ❌ 통합 시퀀스 오류:', err);
       if (dotEl) dotEl.style.background = '#ef4444';

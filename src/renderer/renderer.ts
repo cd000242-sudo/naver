@@ -743,10 +743,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lewordRedirectBtn) {
     lewordRedirectBtn.addEventListener('click', async () => {
       try {
-        await (window as any).api.launchLeword();
+        await (window as any).api.openExternalUrl('https://www.leaderspro.kr/leword');
       } catch (err) {
-        console.error('[LEWORD] 실행 실패:', err);
-        alert('LEWORD 실행 실패: ' + (err as Error).message);
+        console.error('[LEWORD] 사이트 열기 실패:', err);
+        alert('LEWORD 사이트 열기 실패: ' + (err as Error).message);
       }
     });
   }
