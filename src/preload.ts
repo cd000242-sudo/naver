@@ -117,6 +117,11 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('apiKey:validate', provider, apiKey),
   generateContent: (prompt: string): Promise<GenerateContentResult> =>
     ipcRenderer.invoke('automation:generateContent', prompt),
+  // ✅ 에이전트 모드(codex/claude 구독 연동) — 설치/로그인 상태 + 글생성 브리지
+  agentStatus: (provider: 'codex' | 'claude'): Promise<{ success: boolean; status?: { provider: string; installed: boolean; version?: string; loggedIn: boolean; detail?: string }; message?: string }> =>
+    ipcRenderer.invoke('agent:status', provider),
+  agentGenerate: (payload: { provider: 'codex' | 'claude'; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }): Promise<{ success: boolean; provider?: string; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
+    ipcRenderer.invoke('agent:generate', payload),
   // ✅ [2026-03-11 FIX] generateImages 바인딩 추가 (누락으로 인한 연속발행 이미지 생성 실패 수정)
   generateImages: (options: any): Promise<GenerateImagesResult> =>
     ipcRenderer.invoke('automation:generateImages', options),

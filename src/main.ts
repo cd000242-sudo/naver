@@ -181,6 +181,7 @@ import { registerEngagementHandlers } from './main/ipc/engagementHandlers.js';
 import { registerImageTableHandlers } from './main/ipc/imageTableHandlers.js';
 // ✅ [v2.10.203] SERP 프로브 + publishedPostTracker handlers — 끝판왕 시스템 IPC 등록 누락 fix
 import { registerSerpProbeHandlers } from './main/ipc/serpProbeHandlers.js';
+import { registerAgentHandlers } from './main/ipc/agentHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -3880,6 +3881,8 @@ try { ipcMain.handle('app:minimize-to-tray', async () => {
 }); } catch { /* 이미 등록됨 */ }
 registerQuotaHandlers(_earlyCtx);
 registerApiHandlers(_earlyCtx);
+// ✅ 에이전트 모드(codex/claude 구독 연동 글생성) IPC — 의존성 없음, 최상위 등록
+registerAgentHandlers();
 registerKeywordHandlers();
 registerProductHandlers();
 registerEngagementHandlers();
