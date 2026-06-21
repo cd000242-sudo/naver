@@ -165,6 +165,29 @@ export async function initPriceInfoModal(): Promise<void> {
     });
   }
 
+  // ✅ 비용표·추천 모달 공통 열기 — 우측 상단 재오픈 버튼 + 엔진 설정 진입 자동 표시에서 재사용.
+  const openPriceModal = () => {
+    if (!priceInfoModal) return;
+    priceInfoModal.style.display = 'flex';
+    priceInfoModal.setAttribute('aria-hidden', 'false');
+    try { refreshApiCostDashboard(); } catch { /* ignore */ }
+  };
+
+  // 우측 상단 고정 재오픈 버튼 — 사용자가 닫아도 언제든 다시 볼 수 있게.
+  const reopenPriceInfoBtn = document.getElementById('reopen-price-info-btn');
+  if (reopenPriceInfoBtn) reopenPriceInfoBtn.addEventListener('click', openPriceModal);
+
+  // AI 텍스트 엔진 설정 진입 시 비용표·추천을 "먼저" 1회 자동 표시 (사용자 요청 — Gemini 쪽에 묻으면 안 봄).
+  const navTextEngineBtn = document.getElementById('nav-text-engine-btn');
+  if (navTextEngineBtn && priceInfoModal) {
+    navTextEngineBtn.addEventListener('click', () => {
+      if ((window as any).__priceModalAutoShown) return; // 세션 1회만 — 매번 띄워 귀찮게 하지 않음
+      (window as any).__priceModalAutoShown = true;
+      // 섹션 전환 직후 자연스럽게: 약간의 지연 후 모달 표시
+      setTimeout(openPriceModal, 350);
+    });
+  }
+
   // ✅ [2026-03-19] 통합 API 비용 대시보드 초기화
   initApiCostDashboard();
 

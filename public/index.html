@@ -12242,6 +12242,12 @@
     </div>
 
 
+    <!-- 💰 비용표·추천 조합 재오픈 버튼 (우측 상단 고정 — 닫아도 다시 볼 수 있게) -->
+    <button type="button" id="reopen-price-info-btn" title="AI 엔진 비용표 · 추천 조합 다시 보기"
+        style="position: fixed; top: 10px; right: 16px; z-index: 20005; padding: 0.45rem 0.9rem; background: linear-gradient(135deg, #D4AF37, #FFD700); color: #1a1a1a; border: none; border-radius: 999px; font-weight: 800; font-size: 0.82rem; cursor: pointer; box-shadow: 0 4px 14px rgba(212,175,55,0.4);">
+        💰 비용표·추천
+    </button>
+
     <!-- 💰 가격 정보 & 추천 조합 모달 -->
     <div id="price-info-modal" class="modal-backdrop" aria-hidden="true" style="display: none; z-index: 20010;">
         <div class="modal-panel"
@@ -12679,37 +12685,35 @@
                 </h4>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
-                    <!-- 완전 무료 조합 -->
+                    <!-- 구독으로 완전 무료 (사용량 과금 0) -->
                     <div style="background: rgba(34, 197, 94, 0.12); border: 2px solid rgba(52, 211, 153, 0.5); border-radius: 12px; padding: 1.25rem;">
                         <h5 style="margin: 0 0 1rem 0; color: #4ade80; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <span>🆓</span> 완전 무료 조합
+                            <span>🆓</span> 구독으로 무료 (사용량 과금 0)
                         </h5>
                         <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
-                            <li><strong>글:</strong> Gemini 2.5 Flash (500회/일 무료)</li>
-                            <li><strong>썸네일:</strong> Flow (AI Pro 100장/일)</li>
-                            <li><strong>본문 이미지:</strong> ImageFX (500~1,000장/일)</li>
+                            <li><strong>글생성:</strong> 🤖 에이전트 모드 — <strong>GPT Plus 또는 Claude Plus</strong> 구독($20/월) → 본인 구독 한도 내 무료</li>
+                            <li><strong>이미지:</strong> Flow — <strong>Google AI(제미나이) Pro</strong> 구독($20/월) → 무료 이미지</li>
                             <li style="margin-top: 0.5rem; color: #4ade80; font-weight: bold; background: rgba(34, 197, 94, 0.15); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
-                                총 비용: ₩0 / 편 (쿼터 내)</li>
+                                구독료만 — 토큰·이미지 사용량 과금 ₩0</li>
                         </ul>
                         <div style="margin-top: 0.8rem; font-size: 0.8rem; color: #a7f3d0; background: rgba(16, 185, 129, 0.1); padding: 0.6rem; border-radius: 6px; line-height: 1.5;">
-                            💡 일 40글 이하 + AI Pro 구독 시 평생 ₩0
+                            💡 월 $20씩(글/이미지)만 내면 사용량 무제한급. 단, 구독 한도(5시간/주간) 내.
                         </div>
                     </div>
 
-                    <!-- 현재 기본값 (가성비) -->
+                    <!-- 유료 가성비 (종량제 API) -->
                     <div style="background: rgba(236, 72, 153, 0.1); border: 2px solid rgba(244, 114, 182, 0.4); border-radius: 12px; padding: 1.25rem;">
                         <h5 style="margin: 0 0 1rem 0; color: #f472b6; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <span>⭐</span> 현재 기본값 (가성비)
+                            <span>💰</span> 유료 가성비 (API 종량제 · 쿼터 걱정 X)
                         </h5>
                         <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
-                            <li><strong>글:</strong> Claude Haiku 4.5 (₩42)</li>
-                            <li><strong>썸네일:</strong> Flow (AI Pro 무료 쿼터)</li>
-                            <li><strong>본문 이미지:</strong> DeepInfra FLUX schnell (₩4/장)</li>
+                            <li><strong>글생성:</strong> OpenAI <strong>GPT-4.1 API</strong> (균형형 — 품질·비용 밸런스)</li>
+                            <li><strong>이미지:</strong> <strong>DeepInfra</strong> 또는 <strong>Prodia</strong> (장당 수원~수십원)</li>
                             <li style="margin-top: 0.5rem; color: #f472b6; font-weight: bold; background: rgba(244, 114, 182, 0.15); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
-                                총 비용: ₩62 / 편 (5장 기준)</li>
+                                구독 없이 쓴 만큼만 — 한도 막힘 없음</li>
                         </ul>
                         <div style="margin-top: 0.8rem; font-size: 0.8rem; color: #fbcfe8; background: rgba(236, 72, 153, 0.08); padding: 0.6rem; border-radius: 6px; line-height: 1.5;">
-                            💡 품질 7.55 + 쿼터 걱정 없음. $10으로 약 225편
+                            💡 답답한 쿼터 한도가 싫고 가성비를 원할 때. 결제 등록 후 종량제.
                         </div>
                     </div>
 
