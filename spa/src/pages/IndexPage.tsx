@@ -11,6 +11,7 @@ import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
  */
 function IndexPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+    const [showRobotFrame, setShowRobotFrame] = useState(false);
 
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
@@ -108,16 +109,29 @@ function IndexPage() {
                         <b>AI + CTA</b>
                         <span>글·이미지·발행</span>
                     </div>
-                    <iframe
-                        src="https://my.spline.design/nexbotrobotcharacterconcept-mQLqodza99cchehegYbwsdiu/"
-                        title="3D Robot"
-                        frameBorder="0"
-                        width="100%"
-                        height="500"
-                        allowFullScreen
-                        loading="lazy"
-                        className="hero-robot-frame"
-                    />
+                    {showRobotFrame ? (
+                        <iframe
+                            src="https://my.spline.design/nexbotrobotcharacterconcept-mQLqodza99cchehegYbwsdiu/"
+                            title="3D Robot"
+                            frameBorder="0"
+                            width="100%"
+                            height="500"
+                            allowFullScreen
+                            loading="lazy"
+                            className="hero-robot-frame"
+                        />
+                    ) : (
+                        <button
+                            type="button"
+                            className="hero-robot-frame robot-frame-placeholder"
+                            onClick={() => setShowRobotFrame(true)}
+                            aria-label="3D 로봇 미리보기 열기"
+                        >
+                            <span className="robot-placeholder-core">AI</span>
+                            <strong>3D 미리보기</strong>
+                            <small>클릭하면 로봇 씬을 불러옵니다</small>
+                        </button>
+                    )}
                     <div className="robot-scanline" />
                     <div className="robot-console">
                         <span>LIVE OPS</span>
@@ -359,6 +373,56 @@ function IndexPage() {
                     box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 26px 90px rgba(0,0,0,0.34);
                     position: relative;
                     z-index: 1;
+                }
+
+                .robot-frame-placeholder {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    color: #fff;
+                    overflow: hidden;
+                }
+
+                .robot-frame-placeholder::before {
+                    content: "";
+                    position: absolute;
+                    inset: 10%;
+                    border-radius: 999px;
+                    background: radial-gradient(circle, rgba(68,215,182,0.20), transparent 58%);
+                    filter: blur(18px);
+                }
+
+                .robot-frame-placeholder strong,
+                .robot-frame-placeholder small,
+                .robot-placeholder-core {
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .robot-placeholder-core {
+                    width: 104px;
+                    height: 104px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 50%;
+                    border: 1px solid rgba(244,201,93,0.45);
+                    background: linear-gradient(135deg, rgba(244,201,93,0.18), rgba(68,215,182,0.14));
+                    color: #f4c95d;
+                    font-size: 36px;
+                    font-weight: 900;
+                    box-shadow: 0 18px 60px rgba(0,0,0,0.34);
+                }
+
+                .robot-frame-placeholder strong {
+                    font-size: 18px;
+                    font-weight: 900;
+                }
+
+                .robot-frame-placeholder small {
+                    color: rgba(255,255,255,0.62);
+                    font-size: 13px;
                 }
 
                 .robot-scanline {

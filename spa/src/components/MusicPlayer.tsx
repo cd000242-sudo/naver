@@ -39,6 +39,7 @@ function MusicPlayer() {
     const hostRef = useRef<HTMLDivElement | null>(null);
     const playerElementIdRef = useRef('');
     const playerRef = useRef<any>(null);
+    const [shouldLoadApi, setShouldLoadApi] = useState(false);
     const [apiReady, setApiReady] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [expanded, setExpanded] = useState(false);
@@ -49,8 +50,21 @@ function MusicPlayer() {
         playerElementIdRef.current = `lpm-yt-player-${musicPlayerMountSeq}`;
     }
 
-    // YT IFrame API 로드 (한 번만)
     useEffect(() => {
+        const loadWhenIdle = () => setShouldLoadApi(true);
+        const idleWindow = window as any;
+        const idleId = 'requestIdleCallback' in idleWindow
+            ? idleWindow.requestIdleCallback(loadWhenIdle, { timeout: 9000 })
+            : window.setTimeout(loadWhenIdle, 7000);
+        return () => {
+            if ('cancelIdleCallback' in idleWindow && typeof idleId === 'number') idleWindow.cancelIdleCallback(idleId);
+            else window.clearTimeout(idleId);
+        };
+    }, []);
+
+    // YT IFrame API 로드 (사용자 클릭 또는 idle 이후)
+    useEffect(() => {
+        if (!shouldLoadApi) return;
         if (window.YT && window.YT.Player) {
             setApiReady(true);
             return;
@@ -72,7 +86,7 @@ function MusicPlayer() {
                 window.onYouTubeIframeAPIReady = undefined;
             }
         };
-    }, []);
+    }, [shouldLoadApi]);
 
     // Player 생성 (apiReady 가 true 가 되면)
     useEffect(() => {
@@ -160,7 +174,7 @@ function MusicPlayer() {
                     localStorage.setItem(STORAGE_TIME_TS, String(Date.now()));
                 }
             } catch {}
-        }, 500);
+        }, 5000);
         const saveOnHide = () => {
             try {
                 if (!playerRef.current?.getCurrentTime) return;
@@ -181,7 +195,11 @@ function MusicPlayer() {
     }, []);
 
     const toggle = () => {
-        if (!playerRef.current) return;
+        if (!playerRef.current) {
+            setShouldLoadApi(true);
+            setExpanded(true);
+            return;
+        }
         try {
             if (isPlaying) playerRef.current.pauseVideo();
             else playerRef.current.playVideo();

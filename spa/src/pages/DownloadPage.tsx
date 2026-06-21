@@ -44,7 +44,7 @@ const PRODUCTS = {
     leword: {
         name: 'LEWORD',
         version: 'AI 키워드 인텔리전스 · Windows v2.49.85',
-        image: '/images/leword/hero-banner.png',
+        image: '/images/leword/hero-banner-fast.jpg',
         accent: '#A78BFA',
         borderColor: 'rgba(124,58,237,0.25)',
         downloads: [
@@ -57,7 +57,7 @@ const PRODUCTS = {
     orbit: {
         name: 'LEADERNAM Orbit',
         version: '블로그스팟·워드프레스 자동화 · v3.8.112',
-        image: '/images/orbit/leadernam-orbit-download.png',
+        image: '/images/orbit/leadernam-orbit-download-fast.jpg',
         accent: '#44d7b6',
         borderColor: 'rgba(68,215,182,0.28)',
         downloads: [

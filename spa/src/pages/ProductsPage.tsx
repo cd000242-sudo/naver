@@ -210,7 +210,7 @@ function ProductsPage() {
     const productImages = {
         preview1: imageOr(page.images, 'preview1', { src: '/images/leword/screen-golden-keywords.png', alt: 'LEWORD 황금키워드 화면', title: 'LEWORD 황금키워드 화면' }),
         preview2: imageOr(page.images, 'preview2', { src: '/images/orbit/orbit-sequential-queue.png', alt: 'Orbit 연속 발행 대기열 화면', title: 'Orbit 연속 발행 대기열 화면' }),
-        workflow1: imageOr(page.images, 'workflow1', { src: '/images/leword/17-sources-orbit.png', alt: 'LEWORD 17개 데이터 소스 화면', title: 'LEWORD 17개 데이터 소스 화면' }),
+        workflow1: imageOr(page.images, 'workflow1', { src: '/images/leword/17-sources-orbit-fast.jpg', alt: 'LEWORD 17개 데이터 소스 화면', title: 'LEWORD 17개 데이터 소스 화면' }),
         workflow2: imageOr(page.images, 'workflow2', { src: '/images/orbit/orbit-external-traffic.png', alt: 'Orbit 외부유입 글 생성 화면', title: 'Orbit 외부유입 글 생성 화면' }),
     };
     const heroStyle = productsBgImage ? {

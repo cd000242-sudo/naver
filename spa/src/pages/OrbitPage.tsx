@@ -24,7 +24,7 @@ const SCREENSHOTS = [
     ['플랫폼 연동', '/images/orbit/orbit-platform-settings.png', 'Blogger, WordPress, Tistory 연결 정보를 한 화면에서 확인'],
     ['외부유입 생성', '/images/orbit/orbit-external-traffic.png', '공개 글을 기준으로 채널별 보조 문안 생성'],
     ['내부링크', '/images/orbit/orbit-spider-links.png', '종합글과 하위글을 연결하는 거미줄 구조'],
-    ['이미지 도구', '/images/orbit/leadernam-orbit-download.png', '썸네일, 배너, 발행용 이미지 흐름 보조'],
+    ['이미지 도구', '/images/orbit/leadernam-orbit-download-fast.jpg', '썸네일, 배너, 발행용 이미지 흐름 보조'],
 ];
 
 const TRAFFIC_SHOTS = [
@@ -105,7 +105,7 @@ function OrbitPage() {
                     </div>
                     <Shot
                         title="Leaders Orbit - Global Publisher"
-                        src="/images/orbit/leadernam-orbit-download.png"
+                        src="/images/orbit/leadernam-orbit-download-fast.jpg"
                         alt="Leaders Orbit 글로벌 퍼블리셔 대표 이미지"
                         wide
                     />

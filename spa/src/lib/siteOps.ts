@@ -123,15 +123,63 @@ export type DownloadProductContent = {
     }>;
 };
 
+let siteContentPromise: Promise<SiteContent | null> | null = null;
+
 export async function fetchSiteContent(): Promise<SiteContent | null> {
-    try {
-        const res = await fetch(`${GAS_URL}?action=site-content&ts=${Date.now()}`, { cache: 'no-store' });
-        const data = await res.json();
-        if (data && (data.ok || data.success) && data.content) return data.content as SiteContent;
-    } catch (err) {
-        console.warn('[site-content] load failed', err);
+    if (siteContentPromise) return siteContentPromise;
+    siteContentPromise = fetch(`${GAS_URL}?action=site-content&ts=${Date.now()}`, { cache: 'no-store' })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data && (data.ok || data.success) && data.content) return data.content as SiteContent;
+            return null;
+        })
+        .catch((err) => {
+            console.warn('[site-content] load failed', err);
+            siteContentPromise = null;
+            return null;
+        });
+    return siteContentPromise;
+}
+
+function runWhenIdle(task: () => void) {
+    const idleWindow = window as any;
+    if ('requestIdleCallback' in idleWindow) {
+        idleWindow.requestIdleCallback(task, { timeout: 2500 });
+        return;
     }
-    return null;
+    window.setTimeout(task, 900);
+}
+
+export function recordPageView(path: string) {
+    try {
+        runWhenIdle(() => {
+            try {
+                const isInternal = localStorage.getItem('lp_analytics_exclude') === '1' || sessionStorage.getItem('lp_admin_logged_in') === '1';
+                const payload = {
+                    action: 'analytics-hit',
+                    type: 'pageview',
+                    path,
+                    title: document.title,
+                    referrer: document.referrer || '',
+                    visitorId: getOrCreateStorageId(localStorage, 'lp_visitor_id', 'v_'),
+                    sessionId: getOrCreateStorageId(sessionStorage, 'lp_session_id', 's_'),
+                    isInternal,
+                    userAgent: navigator.userAgent,
+                    timestamp: new Date().toISOString(),
+                };
+                fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload),
+                    keepalive: true,
+                }).catch(() => undefined);
+            } catch {
+                // Analytics must never block the site.
+            }
+        });
+    } catch {
+        // Analytics must never block the site.
+    }
 }
 
 function getOrCreateStorageId(storage: Storage, key: string, prefix: string) {
@@ -145,31 +193,5 @@ function getOrCreateStorageId(storage: Storage, key: string, prefix: string) {
         return id;
     } catch {
         return prefix + Math.random().toString(36).slice(2);
-    }
-}
-
-export function recordPageView(path: string) {
-    try {
-        const isInternal = localStorage.getItem('lp_analytics_exclude') === '1' || sessionStorage.getItem('lp_admin_logged_in') === '1';
-        const payload = {
-            action: 'analytics-hit',
-            type: 'pageview',
-            path,
-            title: document.title,
-            referrer: document.referrer || '',
-            visitorId: getOrCreateStorageId(localStorage, 'lp_visitor_id', 'v_'),
-            sessionId: getOrCreateStorageId(sessionStorage, 'lp_session_id', 's_'),
-            isInternal,
-            userAgent: navigator.userAgent,
-            timestamp: new Date().toISOString(),
-        };
-        fetch(GAS_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(payload),
-            keepalive: true,
-        }).catch(() => undefined);
-    } catch {
-        // Analytics must never block the site.
     }
 }
