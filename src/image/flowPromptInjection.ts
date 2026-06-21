@@ -105,27 +105,38 @@ export function simplifyFlowPrompt(prompt: string, level: number): string {
 
 // 금융/민감 "객체"가 등장하는 장면은 Google Flow가 결정적으로 거부하는 경향이 있다(라이브 실측:
 // "banking app + financial documents" 장면이 420초 내내 "문제가 발생했습니다"로 거부됨, 같은 세션
-// 다른 주제는 정상 생성). 추상적 주제어("financial")가 아니라 구체적 객체(뱅킹앱/통장/카드/현금/서류 등)만
-// 탐지해 일반 사무·라이프스타일 장면으로 선제 치환한다(오탐 최소화, 관련성 약간 손해는 사용자 합의).
-const SENSITIVE_SCENE_OBJECT_PATTERN =
-    /banking app|mobile banking|bank statement|bank account|financial documents?|financial statements?|financial papers?|credit card|debit card|loan documents?|tax (?:form|document|papers?)|passbook|bankbook|\batm\b|stacks? of (?:cash|money|bills?)|banknotes?|piles? of money|통장|뱅킹\s*앱|적금\s*통장|현금\s*다발|카드\s*명세서/i;
-
-const NEUTRAL_PROFESSIONAL_SCENE =
-    'A bright, modern, tidy workspace by a window: a person calmly planning at a clean desk with ' +
-    'a notebook, a laptop and a cup of coffee, warm natural light, hopeful and focused mood, ' +
-    'clean minimal composition, soft depth of field. No text, no letters, no logos, no numbers.';
+// 다른 주제는 정상 생성).
+//
+// 연관성 보존(사용자 요청): 장면 전체를 일반 장면으로 갈아엎지 않고, Flow가 거부하는 구체적 객체만
+// 안전한 등가물로 치환한다 — 인물·상황·분위기·구도는 그대로라 주제 연관성/가독성을 유지한다.
+// (예: "금융 서류와 뱅킹앱을 검토하는 사람" → "노트와 플래너를 검토하는 사람" = 여전히 '계획·검토' 장면)
+const SENSITIVE_OBJECT_REPLACEMENTS: ReadonlyArray<readonly [RegExp, string]> = [
+    [/mobile banking|banking apps?/gi, 'a notebook'],
+    [/bank statements?|financial statements?|financial documents?|financial papers?|loan documents?|bank documents?|card statements?|tax (?:forms?|documents?|papers?)/gi, 'planning notes in a notebook'],
+    [/credit cards?|debit cards?/gi, 'a pen'],
+    [/passbooks?|bankbooks?/gi, 'a notebook'],
+    [/atm machines?|\batms?\b/gi, 'a tidy desk'],
+    [/stacks? of (?:cash|money|bills?)|piles? of (?:cash|money)|banknotes?|wads? of cash/gi, 'a small potted plant'],
+    // Korean concrete objects
+    [/적금\s*통장|예금\s*통장|통장/g, '노트'],
+    [/뱅킹\s*앱|모바일\s*뱅킹/g, '노트'],
+    [/카드\s*명세서|은행\s*명세서/g, '메모'],
+    [/현금\s*다발|지폐\s*다발/g, '작은 화분'],
+    [/신용\s*카드|체크\s*카드/g, '펜'],
+];
 
 /**
- * Detects sensitive financial OBJECTS in a Flow prompt and, if present, replaces the scene with
- * a neutral Flow-safe professional scene (keeping the rotating viewpoint hint for variety).
- * Returns { softened } so the caller can log it. Topic words alone (e.g. "financial freedom on a
- * beach") are NOT softened — only concrete objects Flow tends to reject.
+ * Detects sensitive financial OBJECTS in a Flow prompt and swaps ONLY those objects for safe,
+ * topically-adjacent equivalents (notebook/planner/pen/plant) — keeping the person, setting, mood
+ * and composition so the image stays relevant to the article (avoids the readability drop a fully
+ * generic scene would cause). Topic words alone (e.g. "financial freedom on a beach") are left
+ * untouched — only concrete objects Flow tends to reject are replaced.
  */
 export function softenSensitiveScene(prompt: string): { prompt: string; softened: boolean } {
-    if (!prompt || !SENSITIVE_SCENE_OBJECT_PATTERN.test(prompt)) {
-        return { prompt, softened: false };
+    if (!prompt) return { prompt, softened: false };
+    let out = prompt;
+    for (const [pattern, replacement] of SENSITIVE_OBJECT_REPLACEMENTS) {
+        out = out.replace(pattern, replacement);
     }
-    const framingMatch = prompt.match(/CRITICAL FRAMING:[^\n]*/);
-    const framing = framingMatch ? `${framingMatch[0]}\n\n` : '';
-    return { prompt: `${framing}${NEUTRAL_PROFESSIONAL_SCENE}`, softened: true };
+    return { prompt: out, softened: out !== prompt };
 }
