@@ -1838,6 +1838,15 @@ export async function generateSingleImageWithFlow(
                 continue;
             }
 
+            // ✅ [Phase 5 anti-BotGuard] 우회 사다리(headful·인간형·트리거제거·새프로젝트) 소진 후에도
+            //   생성 오류 = BotGuard 차단 의심. 추가 재시도(60~180s×N)는 낭비 + 봇 신호만 키움 →
+            //   즉시 명확한 에러로 중단(fail-fast). classifier가 B3(치명적)로 분류해 배치 중단 + 안내.
+            if (/FLOW_GENERATION_ERROR/.test(msg)) {
+                flowError('[Flow] ⛔ 모든 우회 후에도 생성 거부 — BotGuard 차단 의심, 즉시 중단(fail-fast)');
+                sendImageLog('⛔ [Flow] 모든 우회 실패 — Google BotGuard 차단 의심. 다른 IP/계정/엔진 권장.');
+                throw new Error('FLOW_BOT_BLOCKED:Flow가 모든 우회(headful·인간형 입력·트리거 제거·새 프로젝트) 후에도 생성을 거부했습니다. Google BotGuard가 이 계정/IP의 자동화를 차단했을 가능성이 큽니다. 해결: 1) 휴대폰 핫스팟 등 다른 네트워크/계정으로 확인 2) 10~30분 후 재시도 3) 다른 이미지 엔진(나노바나나/DeepInfra) 사용');
+            }
+
             // Flow timeout은 같은 프로젝트에 pending 작업이 남는 경우가 많으므로 다음 시도 전 새 프로젝트로 격리한다.
             // FLOW_BROWSER_LAUNCH_FAILED · FLOW_LOGIN_TIMEOUT 같은 구조적 오류는 reload/new project로 회복 불가 → skip.
             const isClickOrInputTimeout = /Timeout.*exceeded|FLOW_PROMPT_INPUT|FLOW_SUBMIT_BUTTON|FLOW_IMAGE_TIMEOUT|intercepts pointer/i.test(msg);

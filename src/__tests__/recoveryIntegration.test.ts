@@ -162,3 +162,23 @@ describe('Pure classifier — silent fallback absence (C.1)', () => {
     }
   });
 });
+
+describe('Phase 5 — FLOW_BOT_BLOCKED fail-fast 분류', () => {
+  const emptyAttempts = {
+    r1Tried: false, r2Count: 0, r3SessionDisabled: false, r4SelectorFailed: new Set<string>(),
+    r5LoginExtended: 0, r6SmallImageRetried: false, r7AHashFailed: false, r8ColdStartFailures: 0, c4Server503Count: 0,
+  };
+
+  it('FLOW_BOT_BLOCKED → block B3 (배치 중단 + 다른 엔진 안내)', () => {
+    const decision = classifyError({
+      errorCode: 'FLOW_BOT_BLOCKED',
+      errorMessage: 'FLOW_BOT_BLOCKED:모든 우회 후에도 생성 거부',
+      attempts: emptyAttempts,
+      context: ctx(0, 'flow'),
+    });
+    expect(decision.action).toBe('block');
+    if (decision.action !== 'block') return;
+    expect(decision.modalCode).toBe('B3');
+    expect(decision.errorCode).toBe('FLOW_BOT_BLOCKED');
+  });
+});
