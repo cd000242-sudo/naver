@@ -53,7 +53,10 @@ const INFERENCE_RESPONSE_SCHEMA = {
 };
 
 const GEMINI_VISION_TIMEOUT_MS = 30_000;
-const GEMINI_VISION_MAX_OUTPUT_TOKENS = 1_024;
+// 1,024 → 2,048: Gemini 2.5의 thinking 토큰이 출력 예산을 잠식해 한국어 JSON이
+// finishReason=MAX_TOKENS로 description_ko 중간에서 잘리던 문제(2026-06 제보) 대응.
+// thinkingBudget=0과 병행해 실제 JSON 출력 공간을 확보한다.
+const GEMINI_VISION_MAX_OUTPUT_TOKENS = 2_048;
 const GEMINI_VISION_FORMAT_ATTEMPTS = 2;
 
 // ---------------------------------------------------------------------------
@@ -171,7 +174,12 @@ export async function runGeminiVision(
       >[0]['generationConfig'] extends { responseSchema?: infer S } ? S : never,
       temperature: 0.2,
       maxOutputTokens: GEMINI_VISION_MAX_OUTPUT_TOKENS,
-    },
+      // Flash는 구조화 추출에 thinking이 불필요 — 비활성해 출력 예산 확보 + 비용 절감.
+      // (contentGenerator의 2.5-flash 처리와 동일 패턴. Pro로 바뀌면 자동 미적용)
+      ...(/2\.5-flash/i.test(VISION_MODELS.GEMINI_FLASH)
+        ? { thinkingConfig: { thinkingBudget: 0 } }
+        : {}),
+    } as any,
   });
 
   const imagePart = {

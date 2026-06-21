@@ -163,7 +163,8 @@ export async function runOpenAIVision(
           },
         },
         temperature: 0.2,
-        max_tokens: 512,
+        // 512 → 2,048: 한국어 구조화 JSON이 512 토큰을 넘겨 잘리던 문제 대응(Gemini와 동일 사유)
+        max_tokens: 2_048,
       },
       { signal: internal.signal },
     );

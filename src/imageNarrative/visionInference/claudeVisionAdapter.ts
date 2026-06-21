@@ -22,7 +22,8 @@ import type {
 } from '../types.js';
 
 const CLAUDE_VISION_TIMEOUT_MS = 30_000;
-const CLAUDE_VISION_MAX_OUTPUT_TOKENS = 1_024;
+// 1,024 → 2,048: 한국어 구조화 JSON 잘림(MAX_TOKENS) 방지 — Gemini/OpenAI 어댑터와 동일 사유
+const CLAUDE_VISION_MAX_OUTPUT_TOKENS = 2_048;
 const CLAUDE_VISION_FORMAT_ATTEMPTS = 2;
 
 // ---------------------------------------------------------------------------
