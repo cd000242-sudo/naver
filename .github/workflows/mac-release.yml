@@ -25,10 +25,26 @@ jobs:
 
       - name: Install dependencies
         run: |
+          install_with_retry() {
+            local attempt=1
+            local max_attempts=4
+            until "$@"; do
+              local exit_code=$?
+              if [ "${attempt}" -ge "${max_attempts}" ]; then
+                echo "::error::Dependency install failed after ${attempt} attempts."
+                return "${exit_code}"
+              fi
+              local delay=$((attempt * 30))
+              echo "::warning::Dependency install failed (attempt ${attempt}/${max_attempts}, exit ${exit_code}). Retrying in ${delay}s..."
+              sleep "${delay}"
+              attempt=$((attempt + 1))
+            done
+          }
+
           if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
-            npm ci
+            install_with_retry npm ci
           else
-            npm install
+            install_with_retry npm install
           fi
 
       - name: Build and publish macOS universal release

@@ -60,6 +60,7 @@ jobs:
             ! -name '404.html' \
             ! -name 'success.html' \
             ! -name 'fail.html' \
+            ! -name 'leword-pro-web.html' \
             -exec cp _site/index.html {} \;
           # 4) Deep link fallback — 존재하지 않는 경로(/foo)도 SPA index 로
           cp _site/index.html _site/404.html

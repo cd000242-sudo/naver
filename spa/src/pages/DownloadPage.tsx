@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ZoomableImage from '../components/ZoomableImage';
+import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 /**
  * 다운로드 — payment-page/download.html 마이그.
@@ -12,7 +13,7 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW
 const DOWNLOAD_PW = '1645';
 
 type DownloadChoice = {
-    key: 'windows' | 'mac-arm' | 'mac-intel';
+    key: 'windows' | 'android' | 'mac-arm' | 'mac-intel';
     label: string;
     detail: string;
     url: string;
@@ -42,12 +43,13 @@ const PRODUCTS = {
     },
     leword: {
         name: 'LEWORD',
-        version: 'AI 키워드 인텔리전스 · v2.49.83',
-        image: '/images/leword/hero-banner.png',
+        version: 'AI 키워드 인텔리전스 · Windows v2.49.85',
+        image: '/images/leword/hero-banner-fast.jpg',
         accent: '#A78BFA',
         borderColor: 'rgba(124,58,237,0.25)',
         downloads: [
-            { key: 'windows', label: 'Windows', detail: '2.49.83 · exe', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83.exe' },
+            { key: 'windows', label: 'Windows', detail: '2.49.85 · exe', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe' },
+            { key: 'android', label: 'Android APK', detail: '2.49.85 · apk', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk' },
             { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.49.83 · arm64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-arm64.dmg' },
             { key: 'mac-intel', label: 'Mac Intel', detail: '2.49.83 · x64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-x64.dmg' },
         ],
@@ -55,7 +57,7 @@ const PRODUCTS = {
     orbit: {
         name: 'LEADERNAM Orbit',
         version: '블로그스팟·워드프레스 자동화 · v3.8.112',
-        image: '/images/orbit/leadernam-orbit-download.png',
+        image: '/images/orbit/leadernam-orbit-download-fast.jpg',
         accent: '#44d7b6',
         borderColor: 'rgba(68,215,182,0.28)',
         downloads: [
@@ -68,6 +70,22 @@ const PRODUCTS = {
 
 type ProductKey = keyof typeof PRODUCTS;
 
+function applyDownloadOverrides(productKey: ProductKey, siteContent: SiteContent | null): ProductConfig {
+    const product = PRODUCTS[productKey];
+    const patch = siteContent?.downloads?.[productKey];
+    if (!patch) return product;
+    const downloadPatches = patch.downloads || {};
+    return {
+        ...product,
+        name: patch.name || product.name,
+        version: patch.version || product.version,
+        image: patch.image || product.image,
+        accent: patch.accent || product.accent,
+        borderColor: patch.accent ? `${patch.accent}45` : product.borderColor,
+        downloads: product.downloads.map((item) => ({ ...item, ...(downloadPatches[item.key] || {}) })),
+    };
+}
+
 function getPreferredDownload(downloads: DownloadChoice[]): DownloadChoice {
     if (typeof navigator !== 'undefined' && /mac/i.test(`${navigator.platform} ${navigator.userAgent}`)) {
         return downloads.find((item) => item.key === 'mac-arm') || downloads[0];
@@ -76,14 +94,32 @@ function getPreferredDownload(downloads: DownloadChoice[]): DownloadChoice {
 }
 
 function DownloadPage() {
+    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+
     useEffect(() => {
         const prev = document.title;
         document.title = '다운로드 — Leaders Pro';
         return () => { document.title = prev; };
     }, []);
 
+    useEffect(() => {
+        fetchSiteContent().then(setSiteContent);
+    }, []);
+
+    const page = siteContent?.downloads?.page || {};
+    const downloadBgImage = siteContent?.theme?.downloadBgImage;
+
     return (
-        <div style={{ position: 'relative', zIndex: 1 }}>
+        <div style={{
+            position: 'relative',
+            zIndex: 1,
+            ...(downloadBgImage ? {
+                backgroundImage: `linear-gradient(rgba(5,8,12,0.36), rgba(5,8,12,0.62)), url(${downloadBgImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center top',
+                backgroundAttachment: 'fixed',
+            } : {}),
+        }}>
             <style>{`
                 @media (min-width: 1180px) and (max-width: 1520px) {
                     .download-product-grid {
@@ -103,18 +139,18 @@ function DownloadPage() {
             `}</style>
             <section style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: 40 }}>
-                    <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>DOWNLOAD</span>
-                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>프로그램 다운로드</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.</p>
-                    <p style={{ color: 'rgba(255,255,255,0.52)', fontSize: 13, marginTop: 8 }}>무료 체험은 Better Life Naver만 제공됩니다. LEWORD는 올인원 라이선스 보유자용입니다.</p>
+                    <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>{page.eyebrow || 'DOWNLOAD'}</span>
+                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>{page.title || '프로그램 다운로드'}</h2>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>{page.desc || '비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.'}</p>
+                    <p style={{ color: 'rgba(255,255,255,0.52)', fontSize: 13, marginTop: 8 }}>{page.note || '무료 체험은 Better Life Naver만 제공됩니다. LEWORD는 올인원 라이선스 보유자용입니다.'}</p>
                 </div>
 
                 <LeadCapture />
 
                 <div className="download-product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24, margin: '32px auto 0' }}>
-                    <DownloadCard productKey="naver" />
-                    <DownloadCard productKey="leword" />
-                    <DownloadCard productKey="orbit" />
+                    <DownloadCard productKey="naver" siteContent={siteContent} />
+                    <DownloadCard productKey="leword" siteContent={siteContent} />
+                    <DownloadCard productKey="orbit" siteContent={siteContent} />
                 </div>
             </section>
         </div>
@@ -179,8 +215,8 @@ function LeadCapture() {
 }
 
 // ─── Download card ───
-function DownloadCard({ productKey }: { productKey: ProductKey }) {
-    const product = PRODUCTS[productKey];
+function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; siteContent: SiteContent | null }) {
+    const product = applyDownloadOverrides(productKey, siteContent);
     const [pw, setPw] = useState('');
     const [error, setError] = useState(false);
     const [shake, setShake] = useState(false);

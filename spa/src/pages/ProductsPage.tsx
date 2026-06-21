@@ -1,7 +1,8 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
 import ZoomableImage from '../components/ZoomableImage';
+import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 type ProductId = 'naver' | 'leword' | 'orbit';
 type Product = {
@@ -60,39 +61,39 @@ const PRODUCTS: Product[] = [
         id: 'orbit',
         eyebrow: 'GLOBAL',
         name: 'Leaders Orbit',
-        subtitle: '블로그스팟 · 워드프레스 자동화',
+        subtitle: '블로그스팟 · 워드프레스 · 티스토리 자동화',
         headline: '외부유입용 글과 링크 구조를 한 번에 만드는 글로벌 발행 엔진',
-        desc: <>블로그스팟과 워드프레스 발행, 내부링크, 외부유입 문안, 공개 글 확인까지 이어지는 보조 채널 자동화입니다. 올인원 이용권 안에서 함께 씁니다.</>,
+        desc: <>블로그스팟, 워드프레스, 티스토리 발행, 내부링크, 외부유입 문안, 공개 글 확인까지 이어지는 보조 채널 자동화입니다. 올인원 이용권 안에서 함께 씁니다.</>,
         href: '/orbit',
         cta: 'Orbit 자세히 보기',
-        media: { type: 'image', src: '/images/orbit/orbit-smart-keyword.png', alt: 'Leaders Orbit 키워드 입력과 발행 설정 화면' },
-        metrics: [['2플랫폼', 'Blogger·WordPress'], ['5모드', '목적별 콘텐츠'], ['유입글', '채널별 문안 생성']],
+        media: { type: 'image', src: '/images/orbit/orbit-hero-live.gif', alt: 'Leaders Orbit 대표 발행 결과 GIF 시연' },
+        metrics: [['3플랫폼', 'Blogger·WordPress·Tistory'], ['5모드', '목적별 콘텐츠'], ['유입글', '채널별 문안 생성']],
         bullets: [
-            'WordPress REST API와 Blogger API 기반 발행 흐름',
+            'Blogger API, WordPress REST API, Tistory 브라우저 기반 발행 흐름',
             '종합글, 하위글, FAQ, CTA가 이어지는 공개 글 구조',
             '네이버 자동화와 함께 외부유입 보조 채널을 구축',
         ],
-        fit: ['네이버 외 보조 채널을 만들고 싶은 경우', '외부유입 글과 내부링크 구조가 필요한 경우', '워드프레스/블로그스팟을 함께 쓰는 경우'],
+        fit: ['네이버 외 보조 채널을 만들고 싶은 경우', '외부유입 글과 내부링크 구조가 필요한 경우', '블로그스팟/워드프레스/티스토리를 함께 쓰는 경우'],
     },
 ];
 
 const GUIDE_CARDS = [
     ['블로그 운영 자동화가 먼저라면', 'Better Life Naver', '본문·이미지·발행까지 반복 업무를 줄이는 메인 제품입니다.', '/detail'],
     ['키워드 판단이 막힌다면', 'LEWORD', '검색량과 경쟁도를 보고 발행할 주제를 먼저 골라냅니다.', '/leword'],
-    ['외부유입 채널이 필요하다면', 'Leaders Orbit', '블로그스팟·워드프레스 글과 링크 구조를 보조 채널로 만듭니다.', '/orbit'],
+    ['외부유입 채널이 필요하다면', 'Leaders Orbit', '블로그스팟·워드프레스·티스토리 글과 링크 구조를 보조 채널로 만듭니다.', '/orbit'],
 ];
 
 const SUITE_FLOW = [
     ['01', 'LEWORD', '쓸 만한 키워드 후보를 찾고 경쟁도를 확인'],
     ['02', 'Naver', '네이버 블로그에 본문·이미지·CTA 자동 발행'],
-    ['03', 'Orbit', '블로그스팟·워드프레스로 외부유입 글 확장'],
+    ['03', 'Orbit', '블로그스팟·워드프레스·티스토리로 외부유입 글 확장'],
     ['04', '운영', '주문·결제·지원까지 Leaders Pro에서 관리'],
 ];
 
 const COMPARISON = [
     ['주요 목적', '네이버 블로그 성장', '키워드 발굴', '외부유입 채널 확장'],
     ['입력값', '키워드, 계정, 발행 옵션', '주제, 카테고리, 지표 조건', '키워드, 플랫폼 연결, 글 모드'],
-    ['결과물', '네이버 블로그 공개 글', '우선순위가 매겨진 키워드 후보', 'Blogger·WordPress 공개 글'],
+    ['결과물', '네이버 블로그 공개 글', '우선순위가 매겨진 키워드 후보', 'Blogger·WordPress·Tistory 공개 글'],
     ['잘 맞는 사용자', '꾸준한 발행량이 필요한 운영자', '쓰기 전 판단을 정확히 하고 싶은 운영자', '보조 채널과 링크 구조가 필요한 운영자'],
     ['추천 조합', 'LEWORD와 함께 쓰면 주제 선정이 쉬움', 'Naver·Orbit의 출발점으로 사용', 'Naver 글의 외부유입 보조 채널로 사용'],
 ];
@@ -102,6 +103,44 @@ const stackStyle: Record<ProductId, string> = {
     leword: 'linear-gradient(135deg, #7c3aed 0%, #38bdf8 100%)',
     orbit: 'linear-gradient(135deg, #1fb6ff 0%, #34d399 100%)',
 };
+
+function applyProductOverrides(products: Product[], siteContent: SiteContent | null): Product[] {
+    const overrides = siteContent?.products || {};
+    return products.map((product) => {
+        const patch = overrides[product.id];
+        if (!patch) return product;
+        return {
+            ...product,
+            ...patch,
+            desc: patch.desc || product.desc,
+            metrics: Array.isArray(patch.metrics) && patch.metrics.length > 0 ? patch.metrics : product.metrics,
+            bullets: Array.isArray(patch.bullets) && patch.bullets.length > 0 ? patch.bullets : product.bullets,
+            fit: Array.isArray(patch.fit) && patch.fit.length > 0 ? patch.fit : product.fit,
+            media: patch.media?.src
+                ? { ...product.media, ...patch.media, type: patch.media.type === 'video' || patch.media.type === 'image' ? patch.media.type : product.media.type }
+                : product.media,
+        };
+    });
+}
+
+function rowsOr<T>(rows: T[] | undefined, fallback: T[]): T[] {
+    return Array.isArray(rows) && rows.length > 0 ? rows : fallback;
+}
+
+type ProductImageMap = NonNullable<NonNullable<SiteContent['productsPage']>['images']>;
+
+function imageOr(
+    images: ProductImageMap | undefined,
+    key: string,
+    fallback: { src: string; alt: string; title: string },
+) {
+    const patch = images?.[key] || {};
+    return {
+        src: patch.src || fallback.src,
+        alt: patch.alt || fallback.alt,
+        title: patch.title || fallback.title,
+    };
+}
 
 function ProductMedia({ product }: { product: Product }) {
     if (product.media.type === 'video') {
@@ -137,6 +176,8 @@ function MetricList({ items }: { items: Array<[string, string]> }) {
 }
 
 function ProductsPage() {
+    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+
     useEffect(() => {
         const prev = document.title;
         document.title = '제품 정보 — Leaders Pro';
@@ -156,22 +197,43 @@ function ProductsPage() {
         return () => observer.disconnect();
     }, []);
 
+    useEffect(() => {
+        fetchSiteContent().then(setSiteContent);
+    }, []);
+
+    const products = applyProductOverrides(PRODUCTS, siteContent);
+    const page = siteContent?.productsPage || {};
+    const productsBgImage = siteContent?.theme?.productsBgImage;
+    const guideCards = rowsOr(page.guideCards, GUIDE_CARDS);
+    const suiteFlow = rowsOr(page.suiteFlow, SUITE_FLOW);
+    const comparison = rowsOr(page.comparison, COMPARISON);
+    const productImages = {
+        preview1: imageOr(page.images, 'preview1', { src: '/images/leword/screen-golden-keywords.png', alt: 'LEWORD 황금키워드 화면', title: 'LEWORD 황금키워드 화면' }),
+        preview2: imageOr(page.images, 'preview2', { src: '/images/orbit/orbit-sequential-queue.png', alt: 'Orbit 연속 발행 대기열 화면', title: 'Orbit 연속 발행 대기열 화면' }),
+        workflow1: imageOr(page.images, 'workflow1', { src: '/images/leword/17-sources-orbit-fast.jpg', alt: 'LEWORD 17개 데이터 소스 화면', title: 'LEWORD 17개 데이터 소스 화면' }),
+        workflow2: imageOr(page.images, 'workflow2', { src: '/images/orbit/orbit-external-traffic.png', alt: 'Orbit 외부유입 글 생성 화면', title: 'Orbit 외부유입 글 생성 화면' }),
+    };
+    const heroStyle = productsBgImage ? {
+        backgroundImage: `linear-gradient(135deg, rgba(8, 13, 18, 0.74), rgba(7, 35, 31, 0.66) 52%, rgba(48, 39, 17, 0.56)), url(${productsBgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
+    } : undefined;
+
     return (
         <>
             <ParticlesCanvas />
             <main className="products-page">
-                <section className="products-hero">
+                <section className="products-hero" style={heroStyle}>
                     <div className="products-wrap products-hero-grid">
                         <div className="products-hero-copy">
-                            <span className="products-kicker">PRODUCTS</span>
-                            <h1>운영 목적에 맞는 자동화를 바로 고르세요</h1>
+                            <span className="products-kicker">{page.heroKicker || 'PRODUCTS'}</span>
+                            <h1>{page.heroTitle || '운영 목적에 맞는 자동화를 바로 고르세요'}</h1>
                             <p>
-                                Leaders Pro는 키워드 발굴, 네이버 블로그 발행, 블로그스팟·워드프레스 외부유입까지
-                                하나의 운영 흐름으로 이어지도록 만든 제품군입니다.
+                                {page.heroDesc || 'Leaders Pro는 키워드 발굴, 네이버 블로그 발행, 블로그스팟·워드프레스·티스토리 외부유입까지 하나의 운영 흐름으로 이어지도록 만든 제품군입니다.'}
                             </p>
                             <div className="products-actions">
-                                <a className="products-btn primary" href="#products-guide">제품 선택 가이드</a>
-                                <Link className="products-btn secondary" to="/pricing">요금제 보기</Link>
+                                <a className="products-btn primary" href="#products-guide">{page.primaryCta || '제품 선택 가이드'}</a>
+                                <Link className="products-btn secondary" to="/pricing">{page.secondaryCta || '요금제 보기'}</Link>
                             </div>
                         </div>
                         <div className="products-suite-panel" aria-label="Leaders Pro 제품 흐름">
@@ -182,7 +244,7 @@ function ProductsPage() {
                                 <b>Leaders Pro Suite</b>
                             </div>
                             <div className="suite-steps">
-                                {SUITE_FLOW.map(([step, name, desc]) => (
+                                {suiteFlow.map(([step, name, desc]) => (
                                     <article key={step}>
                                         <small>{step}</small>
                                         <strong>{name}</strong>
@@ -191,8 +253,8 @@ function ProductsPage() {
                                 ))}
                             </div>
                             <div className="suite-preview">
-                                <ZoomableImage className="products-zoom-trigger" src="/images/leword/screen-golden-keywords.png" alt="LEWORD 황금키워드 화면" title="LEWORD 황금키워드 화면" />
-                                <ZoomableImage className="products-zoom-trigger" src="/images/orbit/orbit-sequential-queue.png" alt="Orbit 연속 발행 대기열 화면" title="Orbit 연속 발행 대기열 화면" />
+                                <ZoomableImage className="products-zoom-trigger" src={productImages.preview1.src} alt={productImages.preview1.alt} title={productImages.preview1.title} />
+                                <ZoomableImage className="products-zoom-trigger" src={productImages.preview2.src} alt={productImages.preview2.alt} title={productImages.preview2.title} />
                             </div>
                         </div>
                     </div>
@@ -201,12 +263,12 @@ function ProductsPage() {
                 <section id="products-guide" className="products-section light">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">CHOICE MAP</span>
-                            <h2>지금 필요한 제품부터 고르면 됩니다</h2>
-                            <p>처음에는 하나로 시작하고, 운영이 커지면 LEWORD → Naver → Orbit 흐름으로 확장하면 됩니다.</p>
+                            <span className="products-kicker">{page.guideKicker || 'CHOICE MAP'}</span>
+                            <h2>{page.guideTitle || '지금 필요한 제품부터 고르면 됩니다'}</h2>
+                            <p>{page.guideDesc || '처음에는 하나로 시작하고, 운영이 커지면 LEWORD → Naver → Orbit 흐름으로 확장하면 됩니다.'}</p>
                         </div>
                         <div className="guide-grid">
-                            {GUIDE_CARDS.map(([title, product, desc, href]) => (
+                            {guideCards.map(([title, product, desc, href]) => (
                                 <Link className="guide-card fade-in" to={href} key={product}>
                                     <span>{title}</span>
                                     <strong>{product}</strong>
@@ -221,13 +283,13 @@ function ProductsPage() {
                 <section className="products-section dark">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">PRODUCT LINEUP</span>
-                            <h2>각 제품의 역할이 겹치지 않게 나뉩니다</h2>
-                            <p>키워드 판단, 네이버 발행, 외부유입 발행을 서로 다른 단계로 분리해 운영 흐름을 단순하게 만듭니다.</p>
+                            <span className="products-kicker">{page.lineupKicker || 'PRODUCT LINEUP'}</span>
+                            <h2>{page.lineupTitle || '각 제품의 역할이 겹치지 않게 나뉩니다'}</h2>
+                            <p>{page.lineupDesc || '키워드 판단, 네이버 발행, 외부유입 발행을 서로 다른 단계로 분리해 운영 흐름을 단순하게 만듭니다.'}</p>
                         </div>
 
                         <div className="product-panels">
-                            {PRODUCTS.map((product) => (
+                            {products.map((product) => (
                                 <article className={`product-panel fade-in ${product.id}`} key={product.id}>
                                     <div className="product-panel-copy">
                                         <span className="product-badge" style={{ background: stackStyle[product.id] }}>{product.eyebrow}</span>
@@ -253,12 +315,12 @@ function ProductsPage() {
                 <section className="products-section light">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">BEST FIT</span>
-                            <h2>이럴 때 이 제품을 쓰면 됩니다</h2>
-                            <p>구매 전 가장 많이 헷갈리는 기준만 따로 정리했습니다.</p>
+                            <span className="products-kicker">{page.fitKicker || 'BEST FIT'}</span>
+                            <h2>{page.fitTitle || '이럴 때 이 제품을 쓰면 됩니다'}</h2>
+                            <p>{page.fitDesc || '구매 전 가장 많이 헷갈리는 기준만 따로 정리했습니다.'}</p>
                         </div>
                         <div className="fit-grid">
-                            {PRODUCTS.map((product) => (
+                            {products.map((product) => (
                                 <article className={`fit-card fade-in ${product.id}`} key={product.id}>
                                     <div className="fit-title">
                                         <span style={{ background: stackStyle[product.id] }}>{product.name.slice(0, 1)}</span>
@@ -279,12 +341,12 @@ function ProductsPage() {
                 <section className="products-section dark compact">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">ONE SUITE</span>
-                            <h2>올인원 코드로 운영 흐름이 더 깔끔해집니다</h2>
-                            <p>LEWORD에서 키워드를 고르고, Naver와 Orbit으로 발행 채널을 나눠도 기간제 구매자는 올인원 라이선스 코드 하나로 함께 이용합니다.</p>
+                            <span className="products-kicker">{page.suiteKicker || 'ONE SUITE'}</span>
+                            <h2>{page.suiteTitle || '올인원 코드로 운영 흐름이 더 깔끔해집니다'}</h2>
+                            <p>{page.suiteDesc || 'LEWORD에서 키워드를 고르고, Naver와 Orbit으로 발행 채널을 나눠도 기간제 구매자는 올인원 라이선스 코드 하나로 함께 이용합니다.'}</p>
                         </div>
                         <div className="flow-line fade-in">
-                            {SUITE_FLOW.map(([step, name, desc]) => (
+                            {suiteFlow.map(([step, name, desc]) => (
                                 <article key={step}>
                                     <small>{step}</small>
                                     <b>{name}</b>
@@ -293,8 +355,8 @@ function ProductsPage() {
                             ))}
                         </div>
                         <div className="workflow-shots fade-in">
-                            <ZoomableImage className="products-zoom-trigger" src="/images/leword/17-sources-orbit.png" alt="LEWORD 17개 데이터 소스 화면" title="LEWORD 17개 데이터 소스 화면" />
-                            <ZoomableImage className="products-zoom-trigger" src="/images/orbit/orbit-external-traffic.png" alt="Orbit 외부유입 글 생성 화면" title="Orbit 외부유입 글 생성 화면" />
+                            <ZoomableImage className="products-zoom-trigger" src={productImages.workflow1.src} alt={productImages.workflow1.alt} title={productImages.workflow1.title} />
+                            <ZoomableImage className="products-zoom-trigger" src={productImages.workflow2.src} alt={productImages.workflow2.alt} title={productImages.workflow2.title} />
                         </div>
                     </div>
                 </section>
@@ -302,9 +364,9 @@ function ProductsPage() {
                 <section className="products-section light">
                     <div className="products-wrap">
                         <div className="products-section-head fade-in">
-                            <span className="products-kicker">COMPARE</span>
-                            <h2>한눈에 보는 제품 비교</h2>
-                            <p>세 제품은 경쟁 제품이 아니라, 운영 단계별로 이어지는 역할을 맡습니다.</p>
+                            <span className="products-kicker">{page.compareKicker || 'COMPARE'}</span>
+                            <h2>{page.compareTitle || '한눈에 보는 제품 비교'}</h2>
+                            <p>{page.compareDesc || '세 제품은 경쟁 제품이 아니라, 운영 단계별로 이어지는 역할을 맡습니다.'}</p>
                         </div>
                         <div className="compare-table-wrap fade-in">
                             <table className="compare-table">
@@ -317,7 +379,7 @@ function ProductsPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {COMPARISON.map(([label, naver, leword, orbit]) => (
+                                    {comparison.map(([label, naver, leword, orbit]) => (
                                         <tr key={label}>
                                             <th>{label}</th>
                                             <td>{naver}</td>
@@ -333,13 +395,13 @@ function ProductsPage() {
 
                 <section className="products-final">
                     <div className="products-wrap">
-                        <span className="products-kicker">START</span>
-                        <h2>고민되면 올인원으로 시작하면 됩니다</h2>
-                        <p>네이버 자동화, LEWORD, Orbit은 함께 쓸 때 키워드 발굴부터 발행, 외부유입까지 흐름이 가장 좋아집니다.</p>
-                        <p className="products-note">무료 체험은 Better Life Naver 기준입니다. LEWORD와 Orbit은 올인원 라이선스에서 함께 이용합니다. 개별 구매는 영구제만 별도 문의로 가능하며 각 100만원입니다.</p>
+                        <span className="products-kicker">{page.finalKicker || 'START'}</span>
+                        <h2>{page.finalTitle || '고민되면 올인원으로 시작하면 됩니다'}</h2>
+                        <p>{page.finalDesc || '네이버 자동화, LEWORD, Orbit은 함께 쓸 때 키워드 발굴부터 발행, 외부유입까지 흐름이 가장 좋아집니다.'}</p>
+                        <p className="products-note">{page.finalNote || '무료 체험은 Better Life Naver 기준입니다. LEWORD와 Orbit은 올인원 라이선스에서 함께 이용합니다. 개별 구매는 영구제만 별도 문의로 가능하며 각 100만원입니다.'}</p>
                         <div className="products-actions center">
-                            <Link className="products-btn primary" to="/pricing">요금제 확인하기</Link>
-                            <Link className="products-btn secondary" to="/download">네이버 무료 체험 다운로드</Link>
+                            <Link className="products-btn primary" to="/pricing">{page.finalPrimaryCta || '요금제 확인하기'}</Link>
+                            <Link className="products-btn secondary" to="/download">{page.finalSecondaryCta || '네이버 무료 체험 다운로드'}</Link>
                         </div>
                     </div>
                 </section>
@@ -787,6 +849,12 @@ function ProductsPage() {
                     min-height: 300px;
                     object-fit: cover;
                     background: #071018;
+                }
+
+                .product-panel.orbit .products-media {
+                    aspect-ratio: 16 / 9;
+                    min-height: 0;
+                    object-fit: contain;
                 }
 
                 .fit-card {

@@ -10,10 +10,12 @@ function ParticlesCanvas() {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
+        const context = ctx;
 
-        let w = 0, h = 0;
+        let w = 0, h = 0, dpr = 1;
         const particles: Array<{
             x: number; y: number; size: number;
             speedY: number; speedX: number; opacity: number; gold: boolean;
@@ -21,8 +23,14 @@ function ParticlesCanvas() {
 
         function resize() {
             if (!canvas) return;
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = window.innerHeight * 3;
+            dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+            w = window.innerWidth;
+            h = window.innerHeight;
+            canvas.width = Math.floor(w * dpr);
+            canvas.height = Math.floor(h * dpr);
+            canvas.style.width = `${w}px`;
+            canvas.style.height = `${h}px`;
+            context.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
         resize();
         window.addEventListener('resize', resize);
@@ -38,30 +46,44 @@ function ParticlesCanvas() {
                 gold: Math.random() > 0.3,
             };
         }
-        for (let i = 0; i < 80; i++) particles.push(makeParticle());
+        const particleCount = window.innerWidth < 768 ? 28 : (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4 ? 40 : 56);
+        for (let i = 0; i < particleCount; i++) particles.push(makeParticle());
 
         let raf = 0;
+        let visible = !document.hidden;
         function animate() {
-            if (!ctx) return;
-            ctx.clearRect(0, 0, w, h);
+            if (!visible) return;
+            context.clearRect(0, 0, w, h);
             for (const p of particles) {
                 p.y += p.speedY;
                 p.x += p.speedX;
                 p.opacity += (Math.random() - 0.5) * 0.01;
                 p.opacity = Math.max(0.05, Math.min(0.6, p.opacity));
                 if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = p.gold ? `rgba(201, 168, 76, ${p.opacity})` : `rgba(255, 255, 255, ${p.opacity * 0.4})`;
-                ctx.fill();
+                context.beginPath();
+                context.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                context.fillStyle = p.gold ? `rgba(201, 168, 76, ${p.opacity})` : `rgba(255, 255, 255, ${p.opacity * 0.4})`;
+                context.fill();
             }
             raf = requestAnimationFrame(animate);
         }
+
+        function onVisibilityChange() {
+            visible = !document.hidden;
+            if (visible && !raf) animate();
+            if (!visible) {
+                cancelAnimationFrame(raf);
+                raf = 0;
+            }
+        }
+
         animate();
+        document.addEventListener('visibilitychange', onVisibilityChange);
 
         return () => {
             cancelAnimationFrame(raf);
             window.removeEventListener('resize', resize);
+            document.removeEventListener('visibilitychange', onVisibilityChange);
         };
     }, []);
 

@@ -1,7 +1,96 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
 import TrustCounter from '../components/TrustCounter';
+import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
+
+type HeroProof = {
+    src: string;
+    alt?: string;
+    title?: string;
+    desc?: string;
+    metric?: string;
+};
+
+const DEFAULT_HERO_PROOFS: HeroProof[] = [
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg',
+        alt: '네이버 블로그 방문횟수 9,177 성과 화면',
+        title: '방문횟수 9,177 돌파',
+        desc: '2월 15일 기준 방문 지표가 크게 상승한 실제 성과 화면입니다.',
+        metric: '방문 9,177',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260310_002438127-fast.jpg',
+        alt: '조회수 19,896 공감 213 성과 화면',
+        title: '조회수 19,896 인증',
+        desc: '조회수와 공감수가 함께 쌓인 고성과 요약 화면입니다.',
+        metric: '조회 19,896',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260309_163736774-fast.jpg',
+        alt: '카카오톡 사용자 조회수 10,003 인증 대화',
+        title: '하루 만명 조회 인증',
+        desc: '실사용자가 공유한 조회수 10,003 성과 인증 대화입니다.',
+        metric: '조회 10,003',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_06-fast.jpg',
+        alt: '블로그 예상수익 12,978원 성과 화면',
+        title: '예상수익 상승',
+        desc: '네이버 리워드 예상수익 그래프와 일별 수익 내역입니다.',
+        metric: '₩12,978',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_04-fast.jpg',
+        alt: '오늘 조회수 1,514 성과 화면',
+        title: '오늘 조회수 1,514',
+        desc: '실시간 조회수와 공감, 댓글이 함께 잡힌 운영 성과입니다.',
+        metric: '조회 1,514',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_02-fast.jpg',
+        alt: '오늘 조회수 1,187 성과 화면',
+        title: '오늘 조회수 1,187',
+        desc: '하루 조회 흐름이 빠르게 올라간 블로그 통계 화면입니다.',
+        metric: '조회 1,187',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_05-fast.jpg',
+        alt: '조회수 1,122와 방문 분석 성과 화면',
+        title: '조회수 1,122 기록',
+        desc: '방문 분석 그래프에서 우상향 흐름을 확인할 수 있는 화면입니다.',
+        metric: '조회 1,122',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_03-fast.jpg',
+        alt: '오늘 조회수 836 성과 화면',
+        title: '오늘 조회수 836',
+        desc: '조회수와 오늘 지표가 함께 표시된 네이버 통계 인증입니다.',
+        metric: '조회 836',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_01-fast.jpg',
+        alt: '조회수 그래프 5,928 성과 화면',
+        title: '조회 그래프 급상승',
+        desc: '1,062에서 5,928까지 상승한 추세가 보이는 그래프입니다.',
+        metric: '5,928',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260309_164704537-fast.jpg',
+        alt: '카카오톡 사용자 프로그램 사용 후기와 공감수 인증',
+        title: '사용자 반응 인증',
+        desc: '프로그램 사용 후 생긴 성과를 사용자가 직접 공유한 대화입니다.',
+        metric: '공감 213',
+    },
+    {
+        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg',
+        alt: '네이버 블로그 일간현황 조회수 상승 성과 화면',
+        title: '방문자 상승 흐름',
+        desc: '콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다.',
+        metric: '조회수 80',
+    },
+];
 
 /**
  * 메인 페이지 — payment-page/index.html (838줄) 마이그레이션.
@@ -9,6 +98,9 @@ import TrustCounter from '../components/TrustCounter';
  * inline style 그대로 유지 (사용자 요구).
  */
 function IndexPage() {
+    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+    const [activeProofIndex, setActiveProofIndex] = useState(0);
+
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
         const prevTitle = document.title;
@@ -31,6 +123,39 @@ function IndexPage() {
         return () => observer.disconnect();
     }, []);
 
+    useEffect(() => {
+        fetchSiteContent().then(setSiteContent);
+    }, []);
+
+    const heroTitle = siteContent?.hero?.title || '매일 100건,\n사람이 쓴 것처럼.';
+    const heroLines = heroTitle.split('\n').filter(Boolean);
+    const heroLead = heroLines.slice(0, -1).join('\n') || '매일 100건,';
+    const heroAccent = heroLines[heroLines.length - 1] || '사람이 쓴 것처럼.';
+    const heroDesc = siteContent?.hero?.desc || '키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.\n블로그 10개를 혼자 운영하는 분들의 비밀 무기.';
+    const heroBenefit = siteContent?.hero?.benefit || '2,800+명이 사용 중';
+    const heroNotice = siteContent?.hero?.notice || '';
+    const configuredProofs = siteContent?.hero?.proofs?.filter((proof) => proof?.src) || [];
+    const mergedProofs = configuredProofs.length
+        ? [
+            ...configuredProofs,
+            ...DEFAULT_HERO_PROOFS.filter((defaultProof) => !configuredProofs.some((proof) => proof?.src === defaultProof.src)),
+        ]
+        : DEFAULT_HERO_PROOFS;
+    const heroProofs = mergedProofs.map((proof, index) => ({
+        ...DEFAULT_HERO_PROOFS[index % DEFAULT_HERO_PROOFS.length],
+        ...proof,
+    }));
+    const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
+
+    useEffect(() => {
+        if (heroProofs.length <= 1) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const timer = window.setInterval(() => {
+            setActiveProofIndex((index) => (index + 1) % heroProofs.length);
+        }, 4200);
+        return () => window.clearInterval(timer);
+    }, [heroProofs.length]);
+
     return (
         <>
             <ParticlesCanvas />
@@ -42,14 +167,20 @@ function IndexPage() {
                         <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
                         <span>PREMIUM AUTOMATION</span>
                     </div>
-                    <h1 style={{ fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 900, lineHeight: 1.2, letterSpacing: '-2px', marginBottom: 20 }}>
-                        매일 100건,<br />
-                        <span style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-light))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>사람이 쓴 것처럼.</span>
+                    <h1 style={{ fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, marginBottom: 20 }}>
+                        {heroLead.split('\n').map((line) => <span key={line}>{line}<br /></span>)}
+                        <span style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-light))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{heroAccent}</span>
                     </h1>
                     <p style={{ fontSize: 18, color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: 32 }}>
-                        키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.<br />
-                        블로그 10개를 혼자 운영하는 분들의 <strong style={{ color: 'var(--text-primary)' }}>비밀 무기</strong>.
+                        {heroDesc.split('\n').map((line, index) => (
+                            <span key={`${line}-${index}`}>{line}{index < heroDesc.split('\n').length - 1 ? <br /> : null}</span>
+                        ))}
                     </p>
+                    {heroNotice && (
+                        <div style={{ marginBottom: 24, padding: '12px 16px', border: '1px solid rgba(201,168,76,0.28)', borderRadius: 12, color: 'var(--gold-primary)', background: 'rgba(201,168,76,0.08)', fontSize: 14, fontWeight: 700 }}>
+                            {heroNotice}
+                        </div>
+                    )}
                     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 24 }}>
                         <Link to="/pricing" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '16px 32px', background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-light))', color: '#1a1a2e', borderRadius: 12, fontWeight: 800, fontSize: 16, textDecoration: 'none', boxShadow: '0 8px 24px rgba(201, 168, 76, 0.4)' }}>
                             <span>지금 자동화 시작하기</span>
@@ -65,43 +196,47 @@ function IndexPage() {
                                     <div key={i} style={{ width: 32, height: 32, borderRadius: '50%', background: a.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 13, border: '2px solid var(--bg-dark)', marginLeft: i === 0 ? 0 : -10 }}>{a.letter}</div>
                                 ))}
                             </div>
-                            <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>2,800+명이 사용 중</span>
+                            <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{heroBenefit}</span>
                         </div>
                     </div>
                 </div>
-                <div className="hero-robot-stage">
-                    <div className="robot-ambient robot-ambient-main" />
-                    <div className="robot-ambient robot-ambient-blue" />
-                    <div className="robot-orbit robot-orbit-one" />
-                    <div className="robot-orbit robot-orbit-two" />
-                    <div className="robot-gridline" />
-                    <div className="robot-chip robot-chip-top">
+                <div className="hero-proof-stage" aria-label="실제 사용자 성과 이미지">
+                    <div className="proof-status">
                         <span />
-                        <b>AUTO PILOT READY</b>
+                        <b>REAL USER PROOF · {(activeProofIndex % heroProofs.length) + 1}/{heroProofs.length}</b>
                     </div>
-                    <div className="robot-chip robot-chip-left">
-                        <b>127K</b>
-                        <span>누적 발행</span>
+                    <div className="proof-summary">
+                        <span>{activeProof.metric || '성과 인증'}</span>
+                        <strong>{activeProof.title || '실제 운영 성과'}</strong>
+                        <small>{activeProof.desc || '사용자가 직접 확인한 성과 이미지를 순서대로 보여줍니다.'}</small>
                     </div>
-                    <div className="robot-chip robot-chip-right">
-                        <b>AI + CTA</b>
-                        <span>글·이미지·발행</span>
+                    <div className="proof-image-shell">
+                        {heroProofs.map((proof, index) => (
+                            <img
+                                key={`${proof.src}-${index}`}
+                                src={proof.src}
+                                alt={proof.alt || proof.title || 'Leaders Pro 사용자 성과 이미지'}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                                decoding="async"
+                                className={`proof-image${index === activeProofIndex % heroProofs.length ? ' active' : ''}`}
+                            />
+                        ))}
                     </div>
-                    <iframe
-                        src="https://my.spline.design/nexbotrobotcharacterconcept-mQLqodza99cchehegYbwsdiu/"
-                        title="3D Robot"
-                        frameBorder="0"
-                        width="100%"
-                        height="500"
-                        allowFullScreen
-                        loading="lazy"
-                        className="hero-robot-frame"
-                    />
-                    <div className="robot-scanline" />
-                    <div className="robot-console">
-                        <span>LIVE OPS</span>
-                        <strong>Keyword → Draft → Image → Publish</strong>
-                        <small>queue stable · multi account · 99% uptime</small>
+                    <div className="proof-dots" role="tablist" aria-label="성과 이미지 선택">
+                        {heroProofs.map((proof, index) => (
+                            <button
+                                key={`${proof.src}-dot-${index}`}
+                                type="button"
+                                className={index === activeProofIndex % heroProofs.length ? 'active' : ''}
+                                onClick={() => setActiveProofIndex(index)}
+                                aria-label={`${index + 1}번째 성과 이미지 보기`}
+                                aria-selected={index === activeProofIndex % heroProofs.length}
+                            />
+                        ))}
+                    </div>
+                    <div className="proof-console">
+                        <span>성과 이미지는 어드민 홈/공통 탭에서 교체 가능</span>
+                        <strong>전체 {heroProofs.length}개 방문 · 조회 · 수익 인증 화면을 판매 페이지 첫 화면에 노출</strong>
                     </div>
                 </div>
             </section>
@@ -235,7 +370,7 @@ function IndexPage() {
             </section>
 
             <style>{`
-                .hero-robot-stage {
+                .hero-proof-stage {
                     position: relative;
                     min-height: 560px;
                     display: flex;
@@ -246,115 +381,24 @@ function IndexPage() {
                     border-radius: 8px;
                 }
 
-                .hero-robot-stage::before {
+                .hero-proof-stage::before {
                     content: '';
                     position: absolute;
-                    inset: 24px 10px 42px;
+                    inset: 24px 8px 42px;
                     border-radius: 8px;
                     border: 1px solid rgba(201,168,76,0.22);
                     background:
-                        linear-gradient(180deg, rgba(12,18,28,0.38), rgba(5,8,12,0.16)),
-                        radial-gradient(circle at 50% 28%, rgba(244,201,93,0.12), transparent 48%);
+                        linear-gradient(135deg, rgba(12,18,28,0.82), rgba(5,8,12,0.38)),
+                        linear-gradient(90deg, rgba(244,201,93,0.10), rgba(68,215,182,0.08));
                     box-shadow: 0 26px 90px rgba(0,0,0,0.30);
                     pointer-events: none;
                     z-index: -2;
                 }
 
-                .robot-ambient,
-                .robot-orbit,
-                .robot-gridline,
-                .robot-chip,
-                .robot-console,
-                .robot-scanline {
-                    pointer-events: none;
-                }
-
-                .robot-ambient {
+                .proof-status {
                     position: absolute;
-                    border-radius: 999px;
-                    filter: blur(4px);
-                    z-index: -3;
-                }
-
-                .robot-ambient-main {
-                    width: 460px;
-                    height: 460px;
-                    background: radial-gradient(circle, rgba(244,201,93,0.22), transparent 62%);
-                    animation: robotPulse 6s ease-in-out infinite;
-                }
-
-                .robot-ambient-blue {
-                    width: 320px;
-                    height: 320px;
-                    right: 22px;
-                    top: 92px;
-                    background: radial-gradient(circle, rgba(68,215,182,0.16), transparent 64%);
-                    animation: robotFloat 8s ease-in-out infinite;
-                }
-
-                .robot-orbit {
-                    position: absolute;
-                    border: 1px solid rgba(244,201,93,0.28);
-                    border-radius: 50%;
-                    transform: rotate(-10deg);
-                    z-index: -1;
-                }
-
-                .robot-orbit-one {
-                    width: 480px;
-                    height: 210px;
-                    top: 146px;
-                }
-
-                .robot-orbit-two {
-                    width: 390px;
-                    height: 170px;
-                    top: 190px;
-                    border-color: rgba(68,215,182,0.24);
-                    transform: rotate(18deg);
-                }
-
-                .robot-gridline {
-                    position: absolute;
-                    width: min(520px, 88%);
-                    height: 290px;
-                    top: 122px;
-                    border-radius: 8px;
-                    background:
-                        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
-                    background-size: 36px 36px;
-                    mask-image: radial-gradient(circle at center, #000 0%, transparent 72%);
-                    opacity: 0.55;
-                    z-index: -1;
-                }
-
-                .hero-robot-frame {
-                    width: min(100%, 560px);
-                    height: 520px;
-                    border: 1px solid rgba(255,255,255,0.16);
-                    border-radius: 8px;
-                    background: rgba(255,255,255,0.06);
-                    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 26px 90px rgba(0,0,0,0.34);
-                    position: relative;
-                    z-index: 1;
-                }
-
-                .robot-scanline {
-                    position: absolute;
-                    left: 7%;
-                    right: 7%;
-                    top: 28%;
-                    height: 2px;
-                    border-radius: 999px;
-                    background: linear-gradient(90deg, transparent, rgba(68,215,182,0.88), rgba(244,201,93,0.68), transparent);
-                    box-shadow: 0 0 18px rgba(68,215,182,0.52);
-                    animation: robotScan 4.8s ease-in-out infinite;
-                    z-index: 2;
-                }
-
-                .robot-chip {
-                    position: absolute;
+                    top: 44px;
+                    right: 34px;
                     display: inline-flex;
                     align-items: center;
                     gap: 8px;
@@ -369,23 +413,13 @@ function IndexPage() {
                     z-index: 3;
                 }
 
-                .robot-chip b {
+                .proof-status b {
                     font-size: 12px;
                     font-weight: 900;
                     letter-spacing: 0;
                 }
 
-                .robot-chip span {
-                    color: rgba(255,255,255,0.66);
-                    font-size: 12px;
-                }
-
-                .robot-chip-top {
-                    top: 54px;
-                    right: 44px;
-                }
-
-                .robot-chip-top span {
+                .proof-status span {
                     width: 8px;
                     height: 8px;
                     border-radius: 50%;
@@ -393,33 +427,99 @@ function IndexPage() {
                     box-shadow: 0 0 12px rgba(68,215,182,0.9);
                 }
 
-                .robot-chip-left {
-                    left: 0;
-                    bottom: 152px;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    gap: 2px;
+                .proof-summary {
+                    position: absolute;
+                    left: 26px;
+                    top: 58px;
+                    width: min(230px, 44%);
+                    display: grid;
+                    gap: 6px;
+                    padding: 14px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.14);
+                    background: rgba(8,13,18,0.78);
+                    backdrop-filter: blur(14px);
+                    z-index: 4;
+                    box-shadow: 0 18px 46px rgba(0,0,0,0.26);
                 }
 
-                .robot-chip-left b {
+                .proof-summary span {
                     color: #f4c95d;
-                    font-size: 22px;
+                    font-size: 12px;
+                    font-weight: 900;
                 }
 
-                .robot-chip-right {
-                    right: 0;
-                    bottom: 118px;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    gap: 2px;
+                .proof-summary strong {
+                    color: #fff;
+                    font-size: 18px;
+                    line-height: 1.35;
                 }
 
-                .robot-chip-right b {
-                    color: #44d7b6;
-                    font-size: 15px;
+                .proof-summary small {
+                    color: rgba(255,255,255,0.62);
+                    font-size: 12px;
+                    line-height: 1.45;
                 }
 
-                .robot-console {
+                .proof-image-shell {
+                    width: min(100%, 560px);
+                    height: 480px;
+                    position: relative;
+                    z-index: 1;
+                    overflow: hidden;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.16);
+                    background:
+                        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+                        #080d12;
+                    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 26px 90px rgba(0,0,0,0.34);
+                }
+
+                .proof-image {
+                    position: absolute;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    object-position: center;
+                    padding: 18px;
+                    opacity: 0;
+                    transform: translateX(22px) scale(0.985);
+                    transition: opacity 0.52s ease, transform 0.52s ease;
+                }
+
+                .proof-image.active {
+                    opacity: 1;
+                    transform: translateX(0) scale(1);
+                }
+
+                .proof-dots {
+                    position: absolute;
+                    left: 50%;
+                    bottom: 92px;
+                    transform: translateX(-50%);
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    z-index: 5;
+                }
+
+                .proof-dots button {
+                    width: 9px;
+                    height: 9px;
+                    border: 0;
+                    border-radius: 999px;
+                    background: rgba(255,255,255,0.32);
+                    cursor: pointer;
+                    transition: width 0.2s ease, background 0.2s ease;
+                }
+
+                .proof-dots button.active {
+                    width: 28px;
+                    background: #f4c95d;
+                }
+
+                .proof-console {
                     position: absolute;
                     left: 42px;
                     right: 42px;
@@ -435,36 +535,16 @@ function IndexPage() {
                     box-shadow: 0 18px 50px rgba(0,0,0,0.30);
                 }
 
-                .robot-console span {
+                .proof-console span {
                     color: #f4c95d;
                     font-size: 11px;
                     font-weight: 900;
                 }
 
-                .robot-console strong {
+                .proof-console strong {
                     color: #ffffff;
                     font-size: 15px;
-                }
-
-                .robot-console small {
-                    color: rgba(255,255,255,0.54);
-                    font-size: 12px;
-                }
-
-                @keyframes robotPulse {
-                    0%, 100% { transform: scale(0.96); opacity: 0.72; }
-                    50% { transform: scale(1.06); opacity: 1; }
-                }
-
-                @keyframes robotFloat {
-                    0%, 100% { transform: translate3d(0, 0, 0); }
-                    50% { transform: translate3d(-18px, 14px, 0); }
-                }
-
-                @keyframes robotScan {
-                    0%, 100% { transform: translateY(-72px); opacity: 0; }
-                    18%, 76% { opacity: 1; }
-                    50% { transform: translateY(210px); }
+                    line-height: 1.4;
                 }
 
                 @media (max-width: 900px) {
@@ -475,15 +555,15 @@ function IndexPage() {
                         padding: 100px 20px 56px !important;
                     }
 
-                    .hero-robot-stage {
+                    .hero-proof-stage {
                         min-height: 520px;
                         margin-top: 22px;
                         width: 100%;
                     }
 
-                    .hero-robot-frame {
+                    .proof-image-shell {
                         width: 100%;
-                        height: 480px;
+                        height: 460px;
                     }
                 }
 
@@ -492,36 +572,39 @@ function IndexPage() {
                         padding: 92px 14px 48px !important;
                     }
 
-                    .hero-robot-stage {
+                    .hero-proof-stage {
                         min-height: 455px;
                         margin-top: 4px;
                     }
 
-                    .hero-robot-stage::before {
+                    .hero-proof-stage::before {
                         inset: 18px 0 36px;
                     }
 
-                    .hero-robot-frame {
-                        height: 410px;
-                    }
-
-                    .robot-chip-top {
-                        top: 28px;
-                        right: 18px;
-                    }
-
-                    .robot-chip-left,
-                    .robot-chip-right {
+                    .proof-status,
+                    .proof-summary {
                         display: none;
                     }
 
-                    .robot-console {
+                    .proof-image-shell {
+                        height: 390px;
+                    }
+
+                    .proof-image {
+                        padding: 12px;
+                    }
+
+                    .proof-dots {
+                        bottom: 80px;
+                    }
+
+                    .proof-console {
                         left: 14px;
                         right: 14px;
                         bottom: 12px;
                     }
 
-                    .robot-console strong {
+                    .proof-console strong {
                         font-size: 13px;
                         line-height: 1.35;
                         overflow-wrap: anywhere;

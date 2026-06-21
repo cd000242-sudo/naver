@@ -500,6 +500,100 @@
         .editor-card textarea:focus {
             border-color: var(--gold);
         }
+        .editor-subtabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+        .editor-subtab {
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04);
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            padding: 10px 14px;
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .editor-subtab.active {
+            background: var(--gold-dim);
+            border-color: rgba(201,168,76,0.5);
+            color: var(--gold);
+        }
+        .editor-subpanel { display: none; }
+        .editor-subpanel.active { display: block; }
+        .editor-section-title {
+            margin: 6px 0 14px;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            font-weight: 900;
+        }
+        .editor-field-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+        .editor-field-grid.four {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+        .editor-field {
+            display: grid;
+            gap: 7px;
+        }
+        .editor-field.full { grid-column: 1 / -1; }
+        .editor-field label {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+        .editor-field input,
+        .editor-field select,
+        .editor-field textarea {
+            width: 100%;
+            min-height: auto;
+            padding: 12px 14px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .editor-field textarea {
+            min-height: 92px;
+            resize: vertical;
+        }
+        .editor-field input:focus,
+        .editor-field select:focus,
+        .editor-field textarea:focus {
+            border-color: var(--gold);
+        }
+        .editor-help {
+            color: var(--text-secondary);
+            font-size: 0.76rem;
+            line-height: 1.6;
+            margin: -4px 0 14px;
+        }
+        .editor-product-stack,
+        .editor-plan-stack {
+            display: grid;
+            gap: 16px;
+        }
+        .editor-mini-card {
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+            padding: 18px;
+            background: rgba(255,255,255,0.025);
+        }
+        .editor-mini-card h5 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+        }
         .editor-save-bar {
             margin-top: 24px;
             display: flex;
@@ -626,6 +720,8 @@
         @media (max-width: 1024px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .editor-grid { grid-template-columns: 1fr; }
+            .editor-field-grid,
+            .editor-field-grid.four { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
             /* Login */
@@ -710,6 +806,8 @@
             .editor-grid { grid-template-columns: 1fr; gap: 12px; }
             .editor-card { padding: 16px; }
             .editor-card textarea { min-height: 80px; font-size: 0.8rem; padding: 10px; }
+            .editor-subtabs { gap: 6px; }
+            .editor-subtab { flex: 1 1 calc(50% - 6px); padding: 10px 8px; font-size: 0.76rem; }
             .editor-save-bar { margin-top: 16px; }
 
             /* Toast */
@@ -777,6 +875,10 @@
                 <div class="nav-item" data-tab="orders" onclick="switchTab('orders')">
                     <span class="nav-icon">💳</span>
                     <span>주문 내역</span>
+                </div>
+                <div class="nav-item" data-tab="analytics" onclick="switchTab('analytics')">
+                    <span class="nav-icon">📈</span>
+                    <span>매출/방문 분석</span>
                 </div>
                 <div class="nav-item" data-tab="editor" onclick="switchTab('editor')">
                     <span class="nav-icon">✏️</span>
@@ -1007,55 +1109,322 @@
                 </div>
             </div>
 
+            <!-- TAB: Analytics -->
+            <div class="tab-panel" id="tab-analytics">
+                <div class="page-header">
+                    <h1>매출/방문 분석</h1>
+                    <p>Toss 결제, 계좌이체, 방문 로그를 합쳐 오늘과 이번 달 흐름을 확인합니다.</p>
+                </div>
+                <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;">
+                    <button class="btn btn-gold" id="analytics-period-today" onclick="loadAnalyticsDashboard('today')">오늘</button>
+                    <button class="btn" id="analytics-period-month" onclick="loadAnalyticsDashboard('month')">이번 달</button>
+                    <button class="btn" onclick="setInternalAnalytics(true)">내 방문 제외 켜기</button>
+                    <button class="btn" onclick="setInternalAnalytics(false)">내 방문 제외 끄기</button>
+                    <button class="btn" onclick="loadAnalyticsDashboard(currentAnalyticsPeriod)" style="margin-left:auto;">🔄 새로고침</button>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card card-gold">
+                        <div class="stat-top"><div class="stat-label">매출</div><div class="stat-icon icon-gold">₩</div></div>
+                        <div class="stat-value gold" id="analytics-revenue">—</div>
+                        <div class="stat-change neutral" id="analytics-revenue-meta">기간 합계</div>
+                    </div>
+                    <div class="stat-card card-green">
+                        <div class="stat-top"><div class="stat-label">주문</div><div class="stat-icon icon-green">#</div></div>
+                        <div class="stat-value green" id="analytics-orders">—</div>
+                        <div class="stat-change neutral" id="analytics-orders-meta">결제/계좌이체 포함</div>
+                    </div>
+                    <div class="stat-card card-blue">
+                        <div class="stat-top"><div class="stat-label">순 방문자</div><div class="stat-icon icon-blue">👤</div></div>
+                        <div class="stat-value blue" id="analytics-visitors">—</div>
+                        <div class="stat-change neutral" id="analytics-visitors-meta">내부 방문 제외</div>
+                    </div>
+                    <div class="stat-card card-purple">
+                        <div class="stat-top"><div class="stat-label">페이지뷰</div><div class="stat-icon icon-purple">↗</div></div>
+                        <div class="stat-value purple" id="analytics-pageviews">—</div>
+                        <div class="stat-change neutral" id="analytics-pageviews-meta">중복 포함</div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>최근 주문/결제</h3>
+                        <span id="analytics-updated" style="font-size:0.78rem;color:var(--text-secondary);">—</span>
+                    </div>
+                    <div id="analytics-table-body">
+                        <div class="loading-spinner"><div class="spinner-ring"></div> 분석 데이터 로딩 중...</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- TAB: Editor -->
             <div class="tab-panel" id="tab-editor">
                 <div class="page-header">
                     <h1>사이트 편집</h1>
-                    <p>메인 결제 페이지의 핵심 콘텐츠를 수정합니다.</p>
+                    <p>메인 문구, 제품 상세, 요금제, 다운로드 링크를 저장하면 실제 사이트가 같은 데이터를 읽습니다.</p>
                 </div>
-                <div class="editor-grid">
+                <div class="editor-subtabs">
+                    <button class="editor-subtab active" data-editor-subtab="home" onclick="switchEditorSubtab('home')">홈/공통</button>
+                    <button class="editor-subtab" data-editor-subtab="pricing" onclick="switchEditorSubtab('pricing')">구매/요금제</button>
+                    <button class="editor-subtab" data-editor-subtab="products" onclick="switchEditorSubtab('products')">제품정보</button>
+                    <button class="editor-subtab" data-editor-subtab="downloads" onclick="switchEditorSubtab('downloads')">다운로드</button>
+                    <button class="editor-subtab" data-editor-subtab="design" onclick="switchEditorSubtab('design')">디자인/고급</button>
+                </div>
+
+                <div id="editor-sub-home" class="editor-subpanel active">
                     <div class="editor-card">
-                        <h4>✨ Hero 제목</h4>
-                        <textarea id="edit-hero-title" placeholder="블로그 자동화의 새로운 기준">블로그 자동화의 새로운 기준</textarea>
-                    </div>
-                    <div class="editor-card">
-                        <h4>📝 Hero 설명</h4>
-                        <textarea id="edit-hero-desc" placeholder="AI가 글을 쓰고...">키워드 하나면 끝. AI가 글을 쓰고, 이미지를 만들고, 블로그에 올립니다.</textarea>
-                    </div>
-                    <div class="editor-card">
-                        <h4>🔥 Hero 혜택 카피</h4>
-                        <textarea id="edit-hero-benefit" placeholder="매일 100건, 사람이 쓴 것처럼">매일 100건, 사람이 쓴 것처럼</textarea>
-                    </div>
-                    <div class="editor-card">
-                        <h4>📢 공지사항</h4>
-                        <textarea id="edit-notice" placeholder="공지사항이 없습니다."></textarea>
-                    </div>
-                    <div class="editor-card" style="grid-column: 1 / -1;">
-                        <h4>📥 제품별 다운로드 URL</h4>
-                        <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:16px;">각 제품의 다운로드 버튼과 무료 체험 버튼이 해당 URL로 연결됩니다.<br>Google Drive, GitHub Releases 등의 직접 다운로드 링크를 입력하세요.</p>
-                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                            <div>
-                                <label style="display:block;font-size:0.75rem;color:var(--gold);font-weight:600;margin-bottom:6px;">🟢 Better Life Naver</label>
-                                <input type="url" id="edit-dl-naver" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                        <h4>홈 첫 화면</h4>
+                        <p class="editor-help">메인 페이지 Hero 영역과 공지 문구입니다. 줄바꿈은 그대로 사이트에 반영됩니다.</p>
+                        <div class="editor-field-grid">
+                            <div class="editor-field full">
+                                <label>Hero 제목</label>
+                                <textarea id="edit-hero-title" placeholder="매일 100건,&#10;사람이 쓴 것처럼."></textarea>
                             </div>
-                            <div>
-                                <label style="display:block;font-size:0.75rem;color:#4fc3f7;font-weight:600;margin-bottom:6px;">🔵 Leaders Orbit (블로거/WP)</label>
-                                <input type="url" id="edit-dl-orbit" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            <div class="editor-field full">
+                                <label>Hero 설명</label>
+                                <textarea id="edit-hero-desc" placeholder="키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로."></textarea>
                             </div>
-                            <div>
-                                <label style="display:block;font-size:0.75rem;color:#ff9800;font-weight:600;margin-bottom:6px;">🟠 Leaders Tistory</label>
-                                <input type="url" id="edit-dl-tistory" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            <div class="editor-field">
+                                <label>혜택/신뢰 문구</label>
+                                <input id="edit-hero-benefit" type="text" placeholder="2,800+명이 사용 중">
                             </div>
-                            <div>
-                                <label style="display:block;font-size:0.75rem;color:#a78bfa;font-weight:600;margin-bottom:6px;">🟣 Leword</label>
-                                <input type="url" id="edit-dl-leword" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            <div class="editor-field">
+                                <label>공지사항</label>
+                                <input id="edit-notice" type="text" placeholder="공지사항이 없습니다.">
+                            </div>
+                            <div class="editor-field full">
+                                <label>첫 화면 성과 이미지</label>
+                                <textarea id="edit-hero-proofs" placeholder="/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg | 방문자 상승 흐름 | 콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다. | 조회수 80 | 네이버 블로그 일간현황 조회수 상승 성과 화면"></textarea>
+                                <p class="editor-help">한 줄에 한 장씩 입력합니다. 기본값은 압축된 성과 이미지 11장 전체입니다. 형식: 이미지경로 | 제목 | 설명 | 지표 | 이미지 설명</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="editor-sub-pricing" class="editor-subpanel">
+                    <div class="editor-card">
+                        <h4>구매 탭 상단 문구</h4>
+                        <div class="editor-field-grid">
+                            <div class="editor-field">
+                                <label>뱃지</label>
+                                <input id="pricing-page-eyebrow" type="text" placeholder="PRICING">
+                            </div>
+                            <div class="editor-field">
+                                <label>탭 라벨</label>
+                                <input id="pricing-tab-label" type="text" placeholder="ALL · Leaders Pro 올인원">
+                            </div>
+                            <div class="editor-field full">
+                                <label>이벤트 기간 제목</label>
+                                <input id="pricing-page-title" type="text" placeholder="지금 이벤트가로 이용하고, 8월 1일 정상가 전에 시작하세요">
+                            </div>
+                            <div class="editor-field full">
+                                <label>정상가 전환 후 제목</label>
+                                <input id="pricing-page-title-normal" type="text" placeholder="정상가 적용 중입니다. 올인원 라이선스로 시작하세요">
+                            </div>
+                            <div class="editor-field full">
+                                <label>설명</label>
+                                <textarea id="pricing-page-desc"></textarea>
+                            </div>
+                            <div class="editor-field">
+                                <label>이벤트 박스 제목</label>
+                                <input id="pricing-event-title" type="text">
+                            </div>
+                            <div class="editor-field">
+                                <label>정상가 박스 제목</label>
+                                <input id="pricing-event-title-normal" type="text">
+                            </div>
+                            <div class="editor-field">
+                                <label>이벤트 박스 설명</label>
+                                <input id="pricing-event-desc" type="text">
+                            </div>
+                            <div class="editor-field">
+                                <label>정상가 박스 설명</label>
+                                <input id="pricing-event-desc-normal" type="text">
+                            </div>
+                            <div class="editor-field full">
+                                <label>가격 안내 라인</label>
+                                <input id="pricing-event-line" type="text" placeholder="1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원">
+                            </div>
+                            <div class="editor-field">
+                                <label>결제 이메일 라벨</label>
+                                <input id="pricing-payment-label" type="text" placeholder="라이선스를 받을 이메일">
+                            </div>
+                            <div class="editor-field">
+                                <label>결제 이메일 안내</label>
+                                <input id="pricing-payment-help" type="text" placeholder="결제 완료 후 이 이메일로 올인원 라이선스 코드가 발송됩니다.">
+                            </div>
+                            <div class="editor-field full">
+                                <label>결제 하단 안내</label>
+                                <textarea id="pricing-payment-note"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card" style="margin-top:16px;">
+                        <h4>요금제 카드</h4>
+                        <p class="editor-help">카드 금액은 VAT 포함 금액입니다. 기능 목록은 한 줄에 하나씩 입력합니다.</p>
+                        <div class="editor-plan-stack" id="editor-plan-stack"></div>
+                    </div>
+                </div>
+
+                <div id="editor-sub-products" class="editor-subpanel">
+                    <div class="editor-card">
+                        <h4>제품정보 페이지 문구</h4>
+                        <div class="editor-field-grid">
+                            <div class="editor-field">
+                                <label>Hero 뱃지</label>
+                                <input id="products-page-hero-kicker" type="text" placeholder="PRODUCTS">
+                            </div>
+                            <div class="editor-field">
+                                <label>Hero 버튼 1</label>
+                                <input id="products-page-primary-cta" type="text" placeholder="제품 선택 가이드">
+                            </div>
+                            <div class="editor-field full">
+                                <label>Hero 제목</label>
+                                <input id="products-page-hero-title" type="text">
+                            </div>
+                            <div class="editor-field full">
+                                <label>Hero 설명</label>
+                                <textarea id="products-page-hero-desc"></textarea>
+                            </div>
+                            <div class="editor-field">
+                                <label>Hero 버튼 2</label>
+                                <input id="products-page-secondary-cta" type="text" placeholder="요금제 보기">
+                            </div>
+                            <div class="editor-field">
+                                <label>마무리 버튼 2</label>
+                                <input id="products-page-final-secondary-cta" type="text" placeholder="네이버 무료 체험 다운로드">
+                            </div>
+                            <div class="editor-field full">
+                                <label>선택 가이드 섹션</label>
+                                <textarea id="products-page-guide-copy" placeholder="CHOICE MAP&#10;지금 필요한 제품부터 고르면 됩니다&#10;처음에는 하나로 시작하고..."></textarea>
+                            </div>
+                            <div class="editor-field full">
+                                <label>제품 라인업 섹션</label>
+                                <textarea id="products-page-lineup-copy"></textarea>
+                            </div>
+                            <div class="editor-field full">
+                                <label>Best Fit 섹션</label>
+                                <textarea id="products-page-fit-copy"></textarea>
+                            </div>
+                            <div class="editor-field full">
+                                <label>One Suite 섹션</label>
+                                <textarea id="products-page-suite-copy"></textarea>
+                            </div>
+                            <div class="editor-field full">
+                                <label>비교 섹션</label>
+                                <textarea id="products-page-compare-copy"></textarea>
+                            </div>
+                            <div class="editor-field full">
+                                <label>마무리 섹션</label>
+                                <textarea id="products-page-final-copy"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card" style="margin-top:16px;">
+                        <h4>제품별 카드/상세/이미지</h4>
+                        <p class="editor-help">이미지는 `/images/...` 또는 외부 URL을 넣으면 됩니다. 지표는 `100건 | 일 최대 자동 발행` 형식입니다.</p>
+                        <div class="editor-product-stack" id="editor-product-stack"></div>
+                    </div>
+
+                    <div class="editor-card" style="margin-top:16px;">
+                        <h4>제품정보 페이지 하단 이미지/표</h4>
+                        <div class="editor-field-grid">
+                            <div class="editor-field full">
+                                <label>선택 가이드 카드</label>
+                                <textarea id="products-page-guide-cards" placeholder="블로그 운영 자동화가 먼저라면 | Better Life Naver | 설명 | /detail"></textarea>
+                            </div>
+                            <div class="editor-field full">
+                                <label>Suite 흐름</label>
+                                <textarea id="products-page-suite-flow" placeholder="01 | LEWORD | 쓸 만한 키워드 후보를 찾고 경쟁도를 확인"></textarea>
+                            </div>
+                            <div class="editor-field full">
+                                <label>비교표</label>
+                                <textarea id="products-page-comparison" placeholder="주요 목적 | 네이버 블로그 성장 | 키워드 발굴 | 외부유입 채널 확장"></textarea>
+                            </div>
+                            <div class="editor-field">
+                                <label>상단 미리보기 이미지 1</label>
+                                <input id="products-page-preview-1-src" type="text">
+                            </div>
+                            <div class="editor-field">
+                                <label>상단 미리보기 이미지 2</label>
+                                <input id="products-page-preview-2-src" type="text">
+                            </div>
+                            <div class="editor-field">
+                                <label>하단 워크플로우 이미지 1</label>
+                                <input id="products-page-workflow-1-src" type="text">
+                            </div>
+                            <div class="editor-field">
+                                <label>하단 워크플로우 이미지 2</label>
+                                <input id="products-page-workflow-2-src" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="editor-sub-downloads" class="editor-subpanel">
+                    <div class="editor-card">
+                        <h4>다운로드 페이지 문구</h4>
+                        <div class="editor-field-grid">
+                            <div class="editor-field">
+                                <label>뱃지</label>
+                                <input id="download-page-eyebrow" type="text" placeholder="DOWNLOAD">
+                            </div>
+                            <div class="editor-field">
+                                <label>제목</label>
+                                <input id="download-page-title" type="text" placeholder="프로그램 다운로드">
+                            </div>
+                            <div class="editor-field full">
+                                <label>설명</label>
+                                <input id="download-page-desc" type="text">
+                            </div>
+                            <div class="editor-field full">
+                                <label>주의/안내 문구</label>
+                                <input id="download-page-note" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="editor-card" style="margin-top:16px;">
+                        <h4>제품별 다운로드 카드</h4>
+                        <p class="editor-help">제품명, 버전 문구, 이미지, 플랫폼별 다운로드 버튼 문구와 URL을 직접 수정합니다.</p>
+                        <div class="editor-product-stack" id="editor-download-stack"></div>
+                    </div>
+                </div>
+
+                <div id="editor-sub-design" class="editor-subpanel">
+                    <div class="editor-card">
+                        <h4>디자인/고급 JSON</h4>
+                        <div class="editor-field-grid">
+                            <div class="editor-field">
+                                <label>요금제 배경 이미지</label>
+                                <input id="theme-pricing-bg-image" type="text" placeholder="/images/hero-beach-bg-fast.jpg">
+                            </div>
+                            <div class="editor-field">
+                                <label>제품정보 배경 이미지</label>
+                                <input id="theme-products-bg-image" type="text" placeholder="/images/hero-beach-bg-fast.jpg">
+                            </div>
+                            <div class="editor-field">
+                                <label>다운로드 배경 이미지</label>
+                                <input id="theme-download-bg-image" type="text" placeholder="/images/hero-beach-bg-fast.jpg">
+                            </div>
+                            <div class="editor-field">
+                                <label>대표 골드 컬러</label>
+                                <input id="theme-gold" type="text" placeholder="#FFD700">
+                            </div>
+                            <div class="editor-field full">
+                                <label>제품 상세 JSON 직접 편집</label>
+                                <textarea id="edit-products-json" spellcheck="false" style="min-height:180px;font-family:Consolas,monospace;" placeholder='{"naver":{"headline":"키워드 하나로 끝","bullets":["자동 글쓰기","자동 발행"]}}'></textarea>
+                            </div>
+                            <div class="editor-field full">
+                                <label>전체 저장 데이터 미리보기</label>
+                                <textarea id="edit-site-json-preview" spellcheck="false" readonly style="min-height:220px;font-family:Consolas,monospace;"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="editor-save-bar">
+                    <button class="btn" onclick="loadEditorContent()">🔄 서버에서 불러오기</button>
                     <button class="btn" onclick="resetEditorContent()">↩️ 초기화</button>
-                    <button class="btn btn-gold" onclick="saveEditorContent()">💾 저장하기</button>
+                    <button class="btn btn-gold" onclick="saveEditorContent()">💾 서버에 저장하기</button>
                 </div>
             </div>
 
@@ -1322,6 +1691,7 @@
         let allCodes = [];
         let codesPage = 1;
         let ordersPage = 1;
+        let currentAnalyticsPeriod = 'today';
         const PAGE_SIZE = 20;
 
         // ===== SHA-256 HASH UTILITY =====
@@ -1377,7 +1747,8 @@
                 codes: { title: '코드 관리', desc: '라이선스 코드를 발급, 조회, 무효화합니다.' },
                 'all-in-one': { title: '올인원 발급', desc: '구매자에게 지급할 ALL 라이선스 코드를 발급합니다.' },
                 orders: { title: '주문 내역', desc: '결제 완료된 주문과 활성화된 라이선스 내역입니다.' },
-                editor: { title: '사이트 편집', desc: '메인 결제 페이지의 핵심 콘텐츠를 수정합니다.' },
+                analytics: { title: '매출/방문 분석', desc: 'Toss 결제, 계좌이체, 방문 로그를 기간별로 확인합니다.' },
+                editor: { title: '사이트 편집', desc: '메인 문구, 제품 상세, 요금제, 다운로드 링크를 직접 수정합니다.' },
                 bank: { title: '계좌이체 관리', desc: '계좌이체 주문을 확인하고 승인/거절합니다.' },
                 trial: { title: '체험 관리', desc: '무료 체험 사용자 목록을 조회하고 관리합니다.' },
                 reviews: { title: '후기 관리', desc: '구매자 후기 승인·거절 (Phase 6-D에서 활성화).' },
@@ -1396,6 +1767,8 @@
             if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
             if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
             if (tabId === 'leads') loadLeadsAdmin();
+            if (tabId === 'analytics') loadAnalyticsDashboard(currentAnalyticsPeriod);
+            if (tabId === 'editor') loadEditorContent();
         }
 
         // ===== PHASE 6-F: SEED DEFAULTS (idempotent — 시트 비어있을 때만 import) =====
@@ -1867,9 +2240,101 @@
         function trackVisit() {
             // Mark admin session so main page can filter us out
             sessionStorage.setItem('lp_admin_logged_in', '1');
+            localStorage.setItem('lp_analytics_exclude', '1');
             // Admin does NOT increment visit counter — we only READ data
         }
         trackVisit();
+
+        // ===== ANALYTICS DASHBOARD =====
+        function formatWon(value) {
+            return (Number(value) || 0).toLocaleString('ko-KR') + '원';
+        }
+
+        function setInternalAnalytics(enabled) {
+            if (enabled) {
+                localStorage.setItem('lp_analytics_exclude', '1');
+                sessionStorage.setItem('lp_admin_logged_in', '1');
+                showToast('✅ 이 브라우저 방문은 분석에서 제외합니다.');
+            } else {
+                localStorage.removeItem('lp_analytics_exclude');
+                showToast('⚠️ 이 브라우저 방문도 분석에 포함됩니다.');
+            }
+        }
+
+        async function fetchAnalyticsDashboard(period) {
+            const res = await fetch(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action: 'analytics-dashboard', adminToken: ADMIN_TOKEN, period })
+            });
+            const json = await res.json();
+            if (json.ok || json.success) return json;
+            throw new Error(json.error || json.message || '분석 데이터를 불러오지 못했습니다.');
+        }
+
+        function setAnalyticsPeriodButtons(period) {
+            const todayBtn = document.getElementById('analytics-period-today');
+            const monthBtn = document.getElementById('analytics-period-month');
+            if (todayBtn) todayBtn.className = period === 'today' ? 'btn btn-gold' : 'btn';
+            if (monthBtn) monthBtn.className = period === 'month' ? 'btn btn-gold' : 'btn';
+        }
+
+        async function loadAnalyticsDashboard(period = 'today') {
+            currentAnalyticsPeriod = period;
+            setAnalyticsPeriodButtons(period);
+            const table = document.getElementById('analytics-table-body');
+            if (table) table.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 분석 데이터 로딩 중...</div>';
+
+            try {
+                const data = await fetchAnalyticsDashboard(period);
+                const sales = data.sales || {};
+                const visitors = data.visitors || {};
+                const recentOrders = data.recentOrders || [];
+
+                document.getElementById('analytics-revenue').textContent = formatWon(sales.revenue);
+                document.getElementById('analytics-orders').textContent = (Number(sales.orders) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-visitors').textContent = (Number(visitors.unique) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-pageviews').textContent = (Number(visitors.pageviews) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-revenue-meta').textContent = period === 'month' ? '이번 달 합계' : '오늘 합계';
+                document.getElementById('analytics-orders-meta').textContent = 'Toss + 계좌이체 승인';
+                document.getElementById('analytics-visitors-meta').textContent = `내부 제외 · 내부뷰 ${Number(visitors.internalPageviews) || 0}`;
+                document.getElementById('analytics-pageviews-meta').textContent = '중복 페이지 이동 포함';
+                document.getElementById('analytics-updated').textContent = data.updatedAt ? new Date(data.updatedAt).toLocaleString('ko-KR') : '방금 갱신';
+
+                if (!recentOrders.length) {
+                    table.innerHTML = '<div style="padding:32px;text-align:center;color:var(--text-secondary);">해당 기간 주문이 없습니다.</div>';
+                    return data;
+                }
+
+                let html = '<table class="data-table"><thead><tr>';
+                html += '<th>일시</th><th>구매자</th><th>상품</th><th>금액</th><th>결제수단</th><th>주문번호</th>';
+                html += '</tr></thead><tbody>';
+                recentOrders.forEach(order => {
+                    const when = order.createdAt ? new Date(order.createdAt).toLocaleString('ko-KR') : '—';
+                    html += `<tr>
+                        <td>${escapeHtml_(when)}</td>
+                        <td>${escapeHtml_(order.email || order.name || '—')}</td>
+                        <td>${escapeHtml_(order.productName || order.product || '—')}</td>
+                        <td>${formatWon(order.amount)}</td>
+                        <td>${escapeHtml_(order.method || '—')}</td>
+                        <td><span class="code-text">${escapeHtml_(order.orderId || '—')}</span></td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                table.innerHTML = html;
+                return data;
+            } catch (err) {
+                document.getElementById('analytics-revenue').textContent = '—';
+                document.getElementById('analytics-orders').textContent = '—';
+                document.getElementById('analytics-visitors').textContent = '—';
+                document.getElementById('analytics-pageviews').textContent = '—';
+                document.getElementById('analytics-updated').textContent = 'GAS 재배포 필요';
+                if (table) {
+                    table.innerHTML = `<div style="padding:32px;text-align:center;color:#ff6b6b;">분석 API 연결 실패: ${escapeHtml_(err.message)}<br><small>GAS에 analytics-dashboard 액션이 배포되어야 실제 매출/방문 데이터가 표시됩니다.</small></div>`;
+                }
+                return null;
+            }
+        }
 
         // ===== HELPER: Stat Change Display =====
         function setStatChange(elementId, current, previous, label) {
@@ -1971,9 +2436,12 @@
             const todayOrders = allCodes.filter(c => c.usedAt && c.usedAt.slice(0, 10) === today);
             const activeCount = allCodes.filter(c => c.used === true).length;
             const traffic = getTrafficData();
+            const analytics = await fetchAnalyticsDashboard('today').catch(() => null);
+            const visitorCount = analytics?.visitors?.unique ?? traffic.views;
+            const orderCount = analytics?.sales?.orders ?? todayOrders.length;
 
-            document.getElementById('stat-visitors').textContent = traffic.views.toLocaleString();
-            document.getElementById('stat-orders').textContent = todayOrders.length.toLocaleString();
+            document.getElementById('stat-visitors').textContent = visitorCount.toLocaleString();
+            document.getElementById('stat-orders').textContent = orderCount.toLocaleString();
             document.getElementById('stat-total').textContent = allCodes.length.toLocaleString();
             document.getElementById('stat-active').textContent = activeCount.toLocaleString();
 
@@ -1990,8 +2458,13 @@
             const yOrders = allCodes.filter(c => c.usedAt && c.usedAt.slice(0, 10) === yDate);
 
             // Stat changes
-            setStatChange('stat-visitors-change', traffic.views, yTraffic.views, '어제 대비');
-            setStatChange('stat-orders-change', todayOrders.length, yOrders.length, '어제 대비');
+            if (analytics) {
+                document.getElementById('stat-visitors-change').innerHTML = '<span>내부 방문 제외 순방문자</span>';
+                document.getElementById('stat-orders-change').innerHTML = `<span>오늘 매출 ${formatWon(analytics.sales?.revenue)}</span>`;
+            } else {
+                setStatChange('stat-visitors-change', traffic.views, yTraffic.views, '어제 대비');
+                setStatChange('stat-orders-change', todayOrders.length, yOrders.length, '어제 대비');
+            }
 
             // Active rate
             const activeRate = allCodes.length > 0 ? Math.round((activeCount / allCodes.length) * 100) : 0;
@@ -2284,55 +2757,889 @@
 
         // ===== SITE EDITOR =====
         const DEFAULT_DOWNLOAD_URLS = {
-            naver: 'https://github.com/cd000242-sudo/naver/releases/download/v2.10.334/Better-Life-Naver-Setup-2.10.334.exe',
-            orbit: '',
-            tistory: '',
-            leword: 'https://github.com/cd000242-sudo/leword-app/releases/download/v1.0.5/LEWORD.Setup.1.0.5.zip'
+            naver: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.14/Better-Life-Naver-Setup-2.11.14.exe',
+            orbit: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.112/LEADERNAM-Orbit-3.8.112.exe',
+            leword: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe'
         };
 
-        function loadEditorContent() {
-            const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
-            if (saved.heroTitle) document.getElementById('edit-hero-title').value = saved.heroTitle;
-            if (saved.heroDesc) document.getElementById('edit-hero-desc').value = saved.heroDesc;
-            if (saved.heroBenefit) document.getElementById('edit-hero-benefit').value = saved.heroBenefit;
-            if (saved.notice) document.getElementById('edit-notice').value = saved.notice;
-            // 제품별 다운로드 URL 로드 (저장값 > 기본값)
-            const urls = saved.downloadUrls || {};
-            document.getElementById('edit-dl-naver').value = urls.naver || DEFAULT_DOWNLOAD_URLS.naver;
-            document.getElementById('edit-dl-orbit').value = urls.orbit || DEFAULT_DOWNLOAD_URLS.orbit;
-            document.getElementById('edit-dl-tistory').value = urls.tistory || DEFAULT_DOWNLOAD_URLS.tistory;
-            document.getElementById('edit-dl-leword').value = urls.leword || DEFAULT_DOWNLOAD_URLS.leword;
+        const EDITOR_PLAN_DEFS = [
+            { id: 'free-naver', label: 'Better Life Naver 무료 체험' },
+            { id: 'all-in-one-monthly', label: '올인원 1개월' },
+            { id: 'all-in-one-quarterly', label: '올인원 3개월' },
+            { id: 'all-in-one-yearly', label: '올인원 1년' },
+            { id: 'all-in-one-lifetime', label: '올인원 영구제' }
+        ];
+
+        const EDITOR_PRODUCT_DEFS = [
+            { id: 'naver', label: 'Better Life Naver' },
+            { id: 'leword', label: 'LEWORD' },
+            { id: 'orbit', label: 'Leaders Orbit' }
+        ];
+
+        const EDITOR_DOWNLOAD_CHOICES = ['windows', 'android', 'mac-arm', 'mac-intel'];
+
+        const DEFAULT_SITE_CONTENT = {
+            hero: {
+                title: '매일 100건,\n사람이 쓴 것처럼.',
+                desc: '키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.\n블로그 10개를 혼자 운영하는 분들의 비밀 무기.',
+                benefit: '2,800+명이 사용 중',
+                notice: '',
+                proofs: [
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg',
+                        alt: '네이버 블로그 방문횟수 9,177 성과 화면',
+                        title: '방문횟수 9,177 돌파',
+                        desc: '2월 15일 기준 방문 지표가 크게 상승한 실제 성과 화면입니다.',
+                        metric: '방문 9,177'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260310_002438127-fast.jpg',
+                        alt: '조회수 19,896 공감 213 성과 화면',
+                        title: '조회수 19,896 인증',
+                        desc: '조회수와 공감수가 함께 쌓인 고성과 요약 화면입니다.',
+                        metric: '조회 19,896'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260309_163736774-fast.jpg',
+                        alt: '카카오톡 사용자 조회수 10,003 인증 대화',
+                        title: '하루 만명 조회 인증',
+                        desc: '실사용자가 공유한 조회수 10,003 성과 인증 대화입니다.',
+                        metric: '조회 10,003'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_06-fast.jpg',
+                        alt: '블로그 예상수익 12,978원 성과 화면',
+                        title: '예상수익 상승',
+                        desc: '네이버 리워드 예상수익 그래프와 일별 수익 내역입니다.',
+                        metric: '₩12,978'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_04-fast.jpg',
+                        alt: '오늘 조회수 1,514 성과 화면',
+                        title: '오늘 조회수 1,514',
+                        desc: '실시간 조회수와 공감, 댓글이 함께 잡힌 운영 성과입니다.',
+                        metric: '조회 1,514'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_02-fast.jpg',
+                        alt: '오늘 조회수 1,187 성과 화면',
+                        title: '오늘 조회수 1,187',
+                        desc: '하루 조회 흐름이 빠르게 올라간 블로그 통계 화면입니다.',
+                        metric: '조회 1,187'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_05-fast.jpg',
+                        alt: '조회수 1,122와 방문 분석 성과 화면',
+                        title: '조회수 1,122 기록',
+                        desc: '방문 분석 그래프에서 우상향 흐름을 확인할 수 있는 화면입니다.',
+                        metric: '조회 1,122'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_03-fast.jpg',
+                        alt: '오늘 조회수 836 성과 화면',
+                        title: '오늘 조회수 836',
+                        desc: '조회수와 오늘 지표가 함께 표시된 네이버 통계 인증입니다.',
+                        metric: '조회 836'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_01-fast.jpg',
+                        alt: '조회수 그래프 5,928 성과 화면',
+                        title: '조회 그래프 급상승',
+                        desc: '1,062에서 5,928까지 상승한 추세가 보이는 그래프입니다.',
+                        metric: '5,928'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260309_164704537-fast.jpg',
+                        alt: '카카오톡 사용자 프로그램 사용 후기와 공감수 인증',
+                        title: '사용자 반응 인증',
+                        desc: '프로그램 사용 후 생긴 성과를 사용자가 직접 공유한 대화입니다.',
+                        metric: '공감 213'
+                    },
+                    {
+                        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg',
+                        alt: '네이버 블로그 일간현황 조회수 상승 성과 화면',
+                        title: '방문자 상승 흐름',
+                        desc: '콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다.',
+                        metric: '조회수 80'
+                    }
+                ]
+            },
+            pricing: {
+                page: {
+                    eyebrow: 'PRICING',
+                    title: '지금 이벤트가로 이용하고, 8월 1일 정상가 전에 시작하세요',
+                    titleNormal: '정상가 적용 중입니다. 올인원 라이선스로 시작하세요',
+                    desc: '1개월·3개월·1년·영구제 모두 올인원 라이선스로 Better Life Naver, LEWORD, Leadernam Orbit을 함께 이용합니다.',
+                    tabLabel: 'ALL · Leaders Pro 올인원',
+                    eventTitle: '현재 가격은 7월 31일까지 이벤트가입니다.',
+                    eventTitleNormal: '정상가가 적용 중입니다.',
+                    eventDesc: '2026년 8월 1일부터 아래 정상가로 자동 전환됩니다.',
+                    eventDescNormal: '2026년 8월 1일부터 아래 정상가로 자동 전환되었습니다.',
+                    eventLine: '1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원',
+                    paymentEmailLabel: '라이선스를 받을 이메일',
+                    paymentEmailHelp: '결제 완료 후 이 이메일로 올인원 라이선스 코드가 발송됩니다.',
+                    paymentNote: '구매 시 올인원 코드 1개가 발급되며, 이용 기간 안에서 네이버 자동화툴·LEWORD·Leaders Orbit을 함께 사용할 수 있습니다.\n무료 다운로드 체험은 Better Life Naver 기준이며, LEWORD·Orbit은 올인원 구매 후 함께 이용합니다.'
+                },
+                plans: {
+                    'free-naver': {
+                        name: 'Better Life Naver 무료 체험',
+                        desc: '네이버 자동화 먼저 체험',
+                        amount: 0,
+                        period: '무료',
+                        badgeText: '🎁 FREE',
+                        features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 올인원 구매 후 이용']
+                    },
+                    'all-in-one-monthly': {
+                        name: '올인원 1개월',
+                        desc: '3개 툴을 한 번에 가볍게 시작',
+                        amount: 50000,
+                        amountCard: 55000,
+                        futureAmount: 100000,
+                        futureAmountCard: 110000,
+                        eventLabel: '8월 1일부터 정상가 100,000원',
+                        period: '/ 월(공급가)',
+                        features: ['Better Life Naver 이용', 'LEWORD 키워드 분석 이용', 'Leadernam Orbit 이용', '이메일 고객 지원']
+                    },
+                    'all-in-one-quarterly': {
+                        name: '올인원 3개월',
+                        desc: '블로그 자동화 흐름을 안정적으로 운영',
+                        amount: 120000,
+                        futureAmount: 240000,
+                        eventLabel: '8월 1일부터 정상가 240,000원',
+                        period: '/ 3개월',
+                        monthly: '월 40,000원',
+                        features: ['Better Life Naver 이용', 'LEWORD 전체 기능 이용', 'Leadernam Orbit 이용', '우선 고객 지원']
+                    },
+                    'all-in-one-yearly': {
+                        name: '올인원 1년',
+                        desc: '가장 합리적인 전체 제품 기간권',
+                        amount: 400000,
+                        futureAmount: 800000,
+                        eventLabel: '8월 1일부터 정상가 800,000원',
+                        period: '/ 년',
+                        monthly: '월 33,333원',
+                        badgeText: '👑 BEST VALUE',
+                        features: ['모든 자동화툴 기간 내 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원']
+                    },
+                    'all-in-one-lifetime': {
+                        name: '올인원 영구제',
+                        desc: '한 번 구매로 장기 운영하는 영구 이용권',
+                        amount: 1650000,
+                        futureAmount: 3300000,
+                        eventLabel: '8월 1일부터 정상가 3,300,000원',
+                        period: '영구 이용',
+                        badgeText: '🌟 LIFETIME',
+                        features: ['3개 툴 모두 영구 이용', '영구제 전용 라이선스', '장기 운영자 우선 지원', '주요 업데이트 포함']
+                    }
+                }
+            },
+            productsPage: {
+                heroKicker: 'PRODUCTS',
+                heroTitle: '운영 목적에 맞는 자동화를 바로 고르세요',
+                heroDesc: 'Leaders Pro는 키워드 발굴, 네이버 블로그 발행, 블로그스팟·워드프레스·티스토리 외부유입까지 하나의 운영 흐름으로 이어지도록 만든 제품군입니다.',
+                primaryCta: '제품 선택 가이드',
+                secondaryCta: '요금제 보기',
+                guideKicker: 'CHOICE MAP',
+                guideTitle: '지금 필요한 제품부터 고르면 됩니다',
+                guideDesc: '처음에는 하나로 시작하고, 운영이 커지면 LEWORD → Naver → Orbit 흐름으로 확장하면 됩니다.',
+                lineupKicker: 'PRODUCT LINEUP',
+                lineupTitle: '각 제품의 역할이 겹치지 않게 나뉩니다',
+                lineupDesc: '키워드 판단, 네이버 발행, 외부유입 발행을 서로 다른 단계로 분리해 운영 흐름을 단순하게 만듭니다.',
+                fitKicker: 'BEST FIT',
+                fitTitle: '이럴 때 이 제품을 쓰면 됩니다',
+                fitDesc: '구매 전 가장 많이 헷갈리는 기준만 따로 정리했습니다.',
+                suiteKicker: 'ONE SUITE',
+                suiteTitle: '올인원 코드로 운영 흐름이 더 깔끔해집니다',
+                suiteDesc: 'LEWORD에서 키워드를 고르고, Naver와 Orbit으로 발행 채널을 나눠도 기간제 구매자는 올인원 라이선스 코드 하나로 함께 이용합니다.',
+                compareKicker: 'COMPARE',
+                compareTitle: '한눈에 보는 제품 비교',
+                compareDesc: '세 제품은 경쟁 제품이 아니라, 운영 단계별로 이어지는 역할을 맡습니다.',
+                finalKicker: 'START',
+                finalTitle: '고민되면 올인원으로 시작하면 됩니다',
+                finalDesc: '네이버 자동화, LEWORD, Orbit은 함께 쓸 때 키워드 발굴부터 발행, 외부유입까지 흐름이 가장 좋아집니다.',
+                finalNote: '무료 체험은 Better Life Naver 기준입니다. LEWORD와 Orbit은 올인원 라이선스에서 함께 이용합니다. 개별 구매는 영구제만 별도 문의로 가능하며 각 100만원입니다.',
+                finalPrimaryCta: '요금제 확인하기',
+                finalSecondaryCta: '네이버 무료 체험 다운로드',
+                guideCards: [
+                    ['블로그 운영 자동화가 먼저라면', 'Better Life Naver', '본문·이미지·발행까지 반복 업무를 줄이는 메인 제품입니다.', '/detail'],
+                    ['키워드 판단이 막힌다면', 'LEWORD', '검색량과 경쟁도를 보고 발행할 주제를 먼저 골라냅니다.', '/leword'],
+                    ['외부유입 채널이 필요하다면', 'Leaders Orbit', '블로그스팟·워드프레스·티스토리 글과 링크 구조를 보조 채널로 만듭니다.', '/orbit']
+                ],
+                suiteFlow: [
+                    ['01', 'LEWORD', '쓸 만한 키워드 후보를 찾고 경쟁도를 확인'],
+                    ['02', 'Naver', '네이버 블로그에 본문·이미지·CTA 자동 발행'],
+                    ['03', 'Orbit', '블로그스팟·워드프레스·티스토리로 외부유입 글 확장'],
+                    ['04', '운영', '주문·결제·지원까지 Leaders Pro에서 관리']
+                ],
+                comparison: [
+                    ['주요 목적', '네이버 블로그 성장', '키워드 발굴', '외부유입 채널 확장'],
+                    ['입력값', '키워드, 계정, 발행 옵션', '주제, 카테고리, 지표 조건', '키워드, 플랫폼 연결, 글 모드'],
+                    ['결과물', '네이버 블로그 공개 글', '우선순위가 매겨진 키워드 후보', 'Blogger·WordPress·Tistory 공개 글'],
+                    ['잘 맞는 사용자', '꾸준한 발행량이 필요한 운영자', '쓰기 전 판단을 정확히 하고 싶은 운영자', '보조 채널과 링크 구조가 필요한 운영자'],
+                    ['추천 조합', 'LEWORD와 함께 쓰면 주제 선정이 쉬움', 'Naver·Orbit의 출발점으로 사용', 'Naver 글의 외부유입 보조 채널로 사용']
+                ],
+                images: {
+                    preview1: { src: '/images/leword/screen-golden-keywords.png', alt: 'LEWORD 황금키워드 화면', title: 'LEWORD 황금키워드 화면' },
+                    preview2: { src: '/images/orbit/orbit-sequential-queue.png', alt: 'Orbit 연속 발행 대기열 화면', title: 'Orbit 연속 발행 대기열 화면' },
+                    workflow1: { src: '/images/leword/17-sources-orbit-fast.jpg', alt: 'LEWORD 17개 데이터 소스 화면', title: 'LEWORD 17개 데이터 소스 화면' },
+                    workflow2: { src: '/images/orbit/orbit-external-traffic.png', alt: 'Orbit 외부유입 글 생성 화면', title: 'Orbit 외부유입 글 생성 화면' }
+                }
+            },
+            products: {
+                naver: {
+                    eyebrow: 'FLAGSHIP',
+                    name: 'Better Life Naver',
+                    subtitle: '네이버 블로그 자동화',
+                    headline: '키워드 하나로 글, 이미지, 발행까지 끝내는 메인 엔진',
+                    desc: '계정별 대기열, 글 생성, 이미지 생성, 자동 발행, 제휴 링크까지 한 화면에서 운영합니다. 네이버 블로그를 꾸준히 쌓아야 하는 사용자에게 가장 먼저 필요한 제품입니다.',
+                    href: '/detail',
+                    cta: '네이버 자동화 자세히 보기',
+                    media: { type: 'video', src: '/images/hero-demo.mp4', alt: 'Better Life Naver 자동 발행 데모' },
+                    metrics: [['100건', '일 최대 자동 발행'], ['7 AI', '본문·이미지 엔진'], ['다계정', '계정별 간격 관리']],
+                    bullets: ['키워드 입력 후 제목, 본문, 이미지, CTA까지 자동 구성', '쿠팡·스마트스토어 상품 기반 리뷰형 포스팅 지원', '사람형 타이핑, 랜덤 딜레이, 계정별 스케줄링으로 운영 부담 감소'],
+                    fit: ['네이버 블로그를 본진으로 키우는 경우', '다계정 운영과 반복 발행이 필요한 경우', '제휴/리뷰형 콘텐츠까지 함께 돌리는 경우']
+                },
+                leword: {
+                    eyebrow: 'INTELLIGENCE',
+                    name: 'LEWORD',
+                    subtitle: 'AI 키워드 인텔리전스',
+                    headline: '검색량, 문서수, 경쟁도를 보고 쓸 키워드만 남깁니다',
+                    desc: '네이버·ZUM·네이트·다음 실시간 검색어와 17개 데이터 소스를 교차검증해 운영자가 바로 판단할 수 있는 키워드 후보를 보여줍니다.',
+                    href: '/leword',
+                    cta: 'LEWORD 자세히 보기',
+                    media: { type: 'image', src: '/images/leword/realtime-monitor-hero.png', alt: 'LEWORD 실시간 검색어 모니터링 화면' },
+                    metrics: [['4매체', '실시간 검색어'], ['17소스', '교차검증'], ['SSS', '황금키워드 등급']],
+                    bullets: ['실시간 이슈와 롱테일 후보를 한 화면에서 확인', '검색량, 문서수, CPC, SERP 지표를 조합해 우선순위 계산', 'Naver와 Orbit 발행 전에 키워드 선별 단계로 사용'],
+                    fit: ['무엇을 써야 할지 먼저 정해야 하는 경우', '키워드 경쟁도를 숫자로 보고 싶은 경우', '트렌드형/정보형 콘텐츠를 섞어 운영하는 경우']
+                },
+                orbit: {
+                    eyebrow: 'GLOBAL',
+                    name: 'Leaders Orbit',
+                    subtitle: '블로그스팟 · 워드프레스 · 티스토리 자동화',
+                    headline: '외부유입용 글과 링크 구조를 한 번에 만드는 글로벌 발행 엔진',
+                    desc: '블로그스팟, 워드프레스, 티스토리 발행, 내부링크, 외부유입 문안, 공개 글 확인까지 이어지는 보조 채널 자동화입니다. 올인원 이용권 안에서 함께 씁니다.',
+                    href: '/orbit',
+                    cta: 'Orbit 자세히 보기',
+                    media: { type: 'image', src: '/images/orbit/orbit-hero-live.gif', alt: 'Leaders Orbit 대표 발행 결과 GIF 시연' },
+                    metrics: [['3플랫폼', 'Blogger·WordPress·Tistory'], ['5모드', '목적별 콘텐츠'], ['유입글', '채널별 문안 생성']],
+                    bullets: ['Blogger API, WordPress REST API, Tistory 브라우저 기반 발행 흐름', '종합글, 하위글, FAQ, CTA가 이어지는 공개 글 구조', '네이버 자동화와 함께 외부유입 보조 채널을 구축'],
+                    fit: ['네이버 외 보조 채널을 만들고 싶은 경우', '외부유입 글과 내부링크 구조가 필요한 경우', '블로그스팟/워드프레스/티스토리를 함께 쓰는 경우']
+                }
+            },
+            downloads: {
+                page: {
+                    eyebrow: 'DOWNLOAD',
+                    title: '프로그램 다운로드',
+                    desc: '비밀번호를 입력하면 최신 버전을 다운로드할 수 있습니다.',
+                    note: '무료 체험은 Better Life Naver만 제공됩니다. LEWORD는 올인원 라이선스 보유자용입니다.'
+                },
+                naver: {
+                    name: 'Better Life Naver',
+                    version: '네이버 블로그 자동화 · v2.11.14',
+                    image: '/images/feature-auto-publish.png',
+                    accent: '#FFD700',
+                    downloads: {
+                        windows: { label: 'Windows', detail: '2.11.14 · exe', url: DEFAULT_DOWNLOAD_URLS.naver },
+                        'mac-arm': { label: 'Mac M1-M4', detail: '2.11.14 · arm64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.14/Better-Life-Naver-2.11.14-arm64.dmg' },
+                        'mac-intel': { label: 'Mac Intel', detail: '2.11.14 · x64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.14/Better-Life-Naver-2.11.14-x64.dmg' }
+                    }
+                },
+                leword: {
+                    name: 'LEWORD',
+                    version: 'AI 키워드 인텔리전스 · Windows v2.49.85',
+                    image: '/images/leword/hero-banner-fast.jpg',
+                    accent: '#A78BFA',
+                    downloads: {
+                        windows: { label: 'Windows', detail: '2.49.85 · exe', url: DEFAULT_DOWNLOAD_URLS.leword },
+                        android: { label: 'Android APK', detail: '2.49.85 · apk', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk' },
+                        'mac-arm': { label: 'Mac M1-M4', detail: '2.49.83 · arm64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-arm64.dmg' },
+                        'mac-intel': { label: 'Mac Intel', detail: '2.49.83 · x64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-x64.dmg' }
+                    }
+                },
+                orbit: {
+                    name: 'LEADERNAM Orbit',
+                    version: '블로그스팟·워드프레스 자동화 · v3.8.112',
+                    image: '/images/orbit/leadernam-orbit-download-fast.jpg',
+                    accent: '#44d7b6',
+                    downloads: {
+                        windows: { label: 'Windows', detail: '3.8.112 · exe', url: DEFAULT_DOWNLOAD_URLS.orbit },
+                        'mac-arm': { label: 'Mac M1-M4', detail: '3.8.112 · arm64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.112/LEADERNAM-Orbit-3.8.112-arm64.dmg' },
+                        'mac-intel': { label: 'Mac Intel', detail: '3.8.112 · x64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.112/LEADERNAM-Orbit-3.8.112-x64.dmg' }
+                    }
+                }
+            },
+            theme: {
+                pricingBgImage: '',
+                productsBgImage: '',
+                downloadBgImage: '',
+                gold: '#FFD700'
+            }
+        };
+
+        let productsJsonTouched = false;
+
+        function deepClone(obj) {
+            return JSON.parse(JSON.stringify(obj || {}));
         }
 
-        function saveEditorContent() {
-            const data = {
-                heroTitle: document.getElementById('edit-hero-title').value,
-                heroDesc: document.getElementById('edit-hero-desc').value,
-                heroBenefit: document.getElementById('edit-hero-benefit').value,
-                notice: document.getElementById('edit-notice').value,
-                downloadUrls: {
-                    naver: document.getElementById('edit-dl-naver').value.trim(),
-                    orbit: document.getElementById('edit-dl-orbit').value.trim(),
-                    tistory: document.getElementById('edit-dl-tistory').value.trim(),
-                    leword: document.getElementById('edit-dl-leword').value.trim()
+        function deepMerge(target, source) {
+            if (!source || typeof source !== 'object') return target;
+            Object.keys(source).forEach(key => {
+                const value = source[key];
+                if (value === undefined || value === null || value === '') return;
+                if (value && typeof value === 'object' && !Array.isArray(value)) {
+                    target[key] = deepMerge(target[key] && typeof target[key] === 'object' && !Array.isArray(target[key]) ? target[key] : {}, value);
+                } else {
+                    target[key] = value;
+                }
+            });
+            return target;
+        }
+
+        function normalizeLegacySiteEdits(saved) {
+            if (!saved || saved.hero || saved.pricing || saved.downloads || saved.products) return saved || {};
+            return {
+                hero: {
+                    title: saved.heroTitle || '',
+                    desc: saved.heroDesc || '',
+                    benefit: saved.heroBenefit || '',
+                    notice: saved.notice || ''
+                },
+                downloads: {
+                    naver: { downloads: { windows: { url: saved.downloadUrls?.naver || '' } } },
+                    orbit: { downloads: { windows: { url: saved.downloadUrls?.orbit || '' } } },
+                    tistory: { downloads: { windows: { url: saved.downloadUrls?.tistory || '' } } },
+                    leword: { downloads: { windows: { url: saved.downloadUrls?.leword || '' } } }
+                }
+            };
+        }
+
+        function mergeProofLists(savedProofs, defaultProofs) {
+            const result = (savedProofs || []).filter(proof => proof && proof.src);
+            const seen = new Set(result.map(proof => proof.src));
+            (defaultProofs || []).forEach(proof => {
+                if (proof && proof.src && !seen.has(proof.src)) {
+                    result.push(proof);
+                    seen.add(proof.src);
+                }
+            });
+            return result;
+        }
+
+        function withEditorDefaults(content) {
+            const normalized = normalizeLegacySiteEdits(content || {});
+            const merged = deepMerge(deepClone(DEFAULT_SITE_CONTENT), normalized);
+            if (normalized?.hero && Array.isArray(normalized.hero.proofs)) {
+                merged.hero.proofs = mergeProofLists(normalized.hero.proofs, DEFAULT_SITE_CONTENT.hero.proofs);
+            }
+            return merged;
+        }
+
+        function editorEl(id) {
+            return document.getElementById(id);
+        }
+
+        function setValue(id, value) {
+            const el = editorEl(id);
+            if (el) el.value = value ?? '';
+        }
+
+        function getValue(id) {
+            const el = editorEl(id);
+            return el ? String(el.value || '').trim() : '';
+        }
+
+        function arrayToLines(items) {
+            return (items || []).join('\n');
+        }
+
+        function linesToArray(text) {
+            return String(text || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean);
+        }
+
+        function rowsToText(rows) {
+            return (rows || []).map(row => (row || []).join(' | ')).join('\n');
+        }
+
+        function textToRows(text, minCols) {
+            return linesToArray(text).map(line => line.split('|').map(part => part.trim())).filter(row => row.length >= minCols);
+        }
+
+        function metricsToText(metrics) {
+            return rowsToText(metrics || []);
+        }
+
+        function textToMetrics(text) {
+            return textToRows(text, 2).map(row => [row[0], row.slice(1).join(' | ')]);
+        }
+
+        function proofsToText(proofs) {
+            return (proofs || []).map(proof => [
+                proof.src || '',
+                proof.title || '',
+                proof.desc || '',
+                proof.metric || '',
+                proof.alt || ''
+            ].join(' | ')).join('\n');
+        }
+
+        function textToProofs(text) {
+            return textToRows(text, 1).map(row => compactObject({
+                src: row[0],
+                title: row[1] || '',
+                desc: row[2] || '',
+                metric: row[3] || '',
+                alt: row[4] || row[1] || ''
+            }));
+        }
+
+        function copyBlockToText(kicker, title, desc) {
+            return [kicker || '', title || '', desc || ''].join('\n');
+        }
+
+        function textToCopyBlock(text) {
+            const lines = String(text || '').split(/\r?\n/);
+            return {
+                kicker: (lines[0] || '').trim(),
+                title: (lines[1] || '').trim(),
+                desc: lines.slice(2).join('\n').trim()
+            };
+        }
+
+        function renderEditorDynamicForms() {
+            const planStack = editorEl('editor-plan-stack');
+            if (planStack && !planStack.dataset.rendered) {
+                planStack.innerHTML = EDITOR_PLAN_DEFS.map(plan => `
+                    <div class="editor-mini-card">
+                        <h5>${plan.label}</h5>
+                        <div class="editor-field-grid four">
+                            <div class="editor-field"><label>이름</label><input id="plan-${plan.id}-name" type="text"></div>
+                            <div class="editor-field"><label>설명</label><input id="plan-${plan.id}-desc" type="text"></div>
+                            <div class="editor-field"><label>뱃지 문구</label><input id="plan-${plan.id}-badge" type="text"></div>
+                            <div class="editor-field"><label>기간 표기</label><input id="plan-${plan.id}-period" type="text"></div>
+                            <div class="editor-field"><label>계좌/기본 금액</label><input id="plan-${plan.id}-amount" type="number" min="0"></div>
+                            <div class="editor-field"><label>카드 금액</label><input id="plan-${plan.id}-card" type="number" min="0"></div>
+                            <div class="editor-field"><label>정상가</label><input id="plan-${plan.id}-future" type="number" min="0"></div>
+                            <div class="editor-field"><label>정상 카드가</label><input id="plan-${plan.id}-future-card" type="number" min="0"></div>
+                            <div class="editor-field"><label>월 환산</label><input id="plan-${plan.id}-monthly" type="text"></div>
+                            <div class="editor-field"><label>이벤트 라벨</label><input id="plan-${plan.id}-event" type="text"></div>
+                            <div class="editor-field full"><label>기능 목록</label><textarea id="plan-${plan.id}-features"></textarea></div>
+                        </div>
+                    </div>
+                `).join('');
+                planStack.dataset.rendered = '1';
+            }
+
+            const productStack = editorEl('editor-product-stack');
+            if (productStack && !productStack.dataset.rendered) {
+                productStack.innerHTML = EDITOR_PRODUCT_DEFS.map(product => `
+                    <div class="editor-mini-card">
+                        <h5>${product.label}</h5>
+                        <div class="editor-field-grid">
+                            <div class="editor-field"><label>뱃지</label><input id="product-${product.id}-eyebrow" type="text"></div>
+                            <div class="editor-field"><label>제품명</label><input id="product-${product.id}-name" type="text"></div>
+                            <div class="editor-field"><label>부제목</label><input id="product-${product.id}-subtitle" type="text"></div>
+                            <div class="editor-field"><label>상세 링크</label><input id="product-${product.id}-href" type="text"></div>
+                            <div class="editor-field full"><label>헤드라인</label><input id="product-${product.id}-headline" type="text"></div>
+                            <div class="editor-field full"><label>설명</label><textarea id="product-${product.id}-desc"></textarea></div>
+                            <div class="editor-field"><label>버튼 문구</label><input id="product-${product.id}-cta" type="text"></div>
+                            <div class="editor-field"><label>미디어 타입</label><select id="product-${product.id}-media-type"><option value="image">image</option><option value="video">video</option></select></div>
+                            <div class="editor-field"><label>이미지/영상 경로</label><input id="product-${product.id}-media-src" type="text"></div>
+                            <div class="editor-field"><label>이미지 설명</label><input id="product-${product.id}-media-alt" type="text"></div>
+                            <div class="editor-field full"><label>지표</label><textarea id="product-${product.id}-metrics" placeholder="100건 | 일 최대 자동 발행"></textarea></div>
+                            <div class="editor-field full"><label>불릿 설명</label><textarea id="product-${product.id}-bullets"></textarea></div>
+                            <div class="editor-field full"><label>추천 대상</label><textarea id="product-${product.id}-fit"></textarea></div>
+                        </div>
+                    </div>
+                `).join('');
+                productStack.dataset.rendered = '1';
+            }
+
+            const downloadStack = editorEl('editor-download-stack');
+            if (downloadStack && !downloadStack.dataset.rendered) {
+                downloadStack.innerHTML = EDITOR_PRODUCT_DEFS.map(product => `
+                    <div class="editor-mini-card">
+                        <h5>${product.label}</h5>
+                        <div class="editor-field-grid">
+                            <div class="editor-field"><label>표시 이름</label><input id="download-${product.id}-name" type="text"></div>
+                            <div class="editor-field"><label>버전 문구</label><input id="download-${product.id}-version" type="text"></div>
+                            <div class="editor-field"><label>이미지 경로</label><input id="download-${product.id}-image" type="text"></div>
+                            <div class="editor-field"><label>강조 색상</label><input id="download-${product.id}-accent" type="text"></div>
+                            ${EDITOR_DOWNLOAD_CHOICES.map(choice => `
+                                <div class="editor-field"><label>${choice} 라벨</label><input id="download-${product.id}-${choice}-label" type="text"></div>
+                                <div class="editor-field"><label>${choice} 상세</label><input id="download-${product.id}-${choice}-detail" type="text"></div>
+                                <div class="editor-field full"><label>${choice} URL</label><input id="download-${product.id}-${choice}-url" type="url"></div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+                downloadStack.dataset.rendered = '1';
+            }
+
+            const productsJson = editorEl('edit-products-json');
+            if (productsJson && !productsJson.dataset.bound) {
+                productsJson.addEventListener('input', () => { productsJsonTouched = true; });
+                productsJson.dataset.bound = '1';
+            }
+        }
+
+        function switchEditorSubtab(name) {
+            document.querySelectorAll('.editor-subtab').forEach(btn => btn.classList.toggle('active', btn.dataset.editorSubtab === name));
+            document.querySelectorAll('.editor-subpanel').forEach(panel => panel.classList.toggle('active', panel.id === `editor-sub-${name}`));
+            refreshEditorPreview();
+        }
+
+        function setEditorValues(content) {
+            renderEditorDynamicForms();
+            const data = withEditorDefaults(content || {});
+            const hero = data.hero || {};
+            const pricingPage = data.pricing?.page || {};
+            const plans = data.pricing?.plans || {};
+            const productsPage = data.productsPage || {};
+            const products = data.products || {};
+            const downloads = data.downloads || {};
+            const theme = data.theme || {};
+
+            setValue('edit-hero-title', hero.title);
+            setValue('edit-hero-desc', hero.desc);
+            setValue('edit-hero-benefit', hero.benefit);
+            setValue('edit-notice', hero.notice);
+            setValue('edit-hero-proofs', proofsToText(hero.proofs));
+
+            setValue('pricing-page-eyebrow', pricingPage.eyebrow);
+            setValue('pricing-tab-label', pricingPage.tabLabel);
+            setValue('pricing-page-title', pricingPage.title);
+            setValue('pricing-page-title-normal', pricingPage.titleNormal);
+            setValue('pricing-page-desc', pricingPage.desc);
+            setValue('pricing-event-title', pricingPage.eventTitle);
+            setValue('pricing-event-title-normal', pricingPage.eventTitleNormal);
+            setValue('pricing-event-desc', pricingPage.eventDesc);
+            setValue('pricing-event-desc-normal', pricingPage.eventDescNormal);
+            setValue('pricing-event-line', pricingPage.eventLine);
+            setValue('pricing-payment-label', pricingPage.paymentEmailLabel);
+            setValue('pricing-payment-help', pricingPage.paymentEmailHelp);
+            setValue('pricing-payment-note', pricingPage.paymentNote);
+
+            EDITOR_PLAN_DEFS.forEach(({ id }) => {
+                const plan = plans[id] || {};
+                setValue(`plan-${id}-name`, plan.name);
+                setValue(`plan-${id}-desc`, plan.desc);
+                setValue(`plan-${id}-badge`, plan.badgeText);
+                setValue(`plan-${id}-period`, plan.period);
+                setValue(`plan-${id}-amount`, plan.amount);
+                setValue(`plan-${id}-card`, plan.amountCard);
+                setValue(`plan-${id}-future`, plan.futureAmount);
+                setValue(`plan-${id}-future-card`, plan.futureAmountCard);
+                setValue(`plan-${id}-monthly`, plan.monthly);
+                setValue(`plan-${id}-event`, plan.eventLabel);
+                setValue(`plan-${id}-features`, arrayToLines(plan.features));
+            });
+
+            setValue('products-page-hero-kicker', productsPage.heroKicker);
+            setValue('products-page-primary-cta', productsPage.primaryCta);
+            setValue('products-page-hero-title', productsPage.heroTitle);
+            setValue('products-page-hero-desc', productsPage.heroDesc);
+            setValue('products-page-secondary-cta', productsPage.secondaryCta);
+            setValue('products-page-final-secondary-cta', productsPage.finalSecondaryCta);
+            setValue('products-page-guide-copy', copyBlockToText(productsPage.guideKicker, productsPage.guideTitle, productsPage.guideDesc));
+            setValue('products-page-lineup-copy', copyBlockToText(productsPage.lineupKicker, productsPage.lineupTitle, productsPage.lineupDesc));
+            setValue('products-page-fit-copy', copyBlockToText(productsPage.fitKicker, productsPage.fitTitle, productsPage.fitDesc));
+            setValue('products-page-suite-copy', copyBlockToText(productsPage.suiteKicker, productsPage.suiteTitle, productsPage.suiteDesc));
+            setValue('products-page-compare-copy', copyBlockToText(productsPage.compareKicker, productsPage.compareTitle, productsPage.compareDesc));
+            setValue('products-page-final-copy', copyBlockToText(productsPage.finalKicker, productsPage.finalTitle, `${productsPage.finalDesc || ''}\n${productsPage.finalNote || ''}\n${productsPage.finalPrimaryCta || ''}`));
+            setValue('products-page-guide-cards', rowsToText(productsPage.guideCards));
+            setValue('products-page-suite-flow', rowsToText(productsPage.suiteFlow));
+            setValue('products-page-comparison', rowsToText(productsPage.comparison));
+            setValue('products-page-preview-1-src', productsPage.images?.preview1?.src);
+            setValue('products-page-preview-2-src', productsPage.images?.preview2?.src);
+            setValue('products-page-workflow-1-src', productsPage.images?.workflow1?.src);
+            setValue('products-page-workflow-2-src', productsPage.images?.workflow2?.src);
+
+            EDITOR_PRODUCT_DEFS.forEach(({ id }) => {
+                const product = products[id] || {};
+                setValue(`product-${id}-eyebrow`, product.eyebrow);
+                setValue(`product-${id}-name`, product.name);
+                setValue(`product-${id}-subtitle`, product.subtitle);
+                setValue(`product-${id}-href`, product.href);
+                setValue(`product-${id}-headline`, product.headline);
+                setValue(`product-${id}-desc`, product.desc);
+                setValue(`product-${id}-cta`, product.cta);
+                setValue(`product-${id}-media-type`, product.media?.type || 'image');
+                setValue(`product-${id}-media-src`, product.media?.src);
+                setValue(`product-${id}-media-alt`, product.media?.alt);
+                setValue(`product-${id}-metrics`, metricsToText(product.metrics));
+                setValue(`product-${id}-bullets`, arrayToLines(product.bullets));
+                setValue(`product-${id}-fit`, arrayToLines(product.fit));
+            });
+
+            const downloadPage = downloads.page || {};
+            setValue('download-page-eyebrow', downloadPage.eyebrow);
+            setValue('download-page-title', downloadPage.title);
+            setValue('download-page-desc', downloadPage.desc);
+            setValue('download-page-note', downloadPage.note);
+            EDITOR_PRODUCT_DEFS.forEach(({ id }) => {
+                const product = downloads[id] || {};
+                setValue(`download-${id}-name`, product.name);
+                setValue(`download-${id}-version`, product.version);
+                setValue(`download-${id}-image`, product.image);
+                setValue(`download-${id}-accent`, product.accent);
+                EDITOR_DOWNLOAD_CHOICES.forEach(choice => {
+                    const item = product.downloads?.[choice] || {};
+                    setValue(`download-${id}-${choice}-label`, item.label);
+                    setValue(`download-${id}-${choice}-detail`, item.detail);
+                    setValue(`download-${id}-${choice}-url`, item.url);
+                });
+            });
+
+            setValue('theme-pricing-bg-image', theme.pricingBgImage);
+            setValue('theme-products-bg-image', theme.productsBgImage);
+            setValue('theme-download-bg-image', theme.downloadBgImage);
+            setValue('theme-gold', theme.gold);
+            setValue('edit-products-json', JSON.stringify(products, null, 2));
+            productsJsonTouched = false;
+            refreshEditorPreview(data);
+        }
+
+        async function loadEditorContent() {
+            try {
+                const res = await fetch(`${GAS_URL}?action=site-content&ts=${Date.now()}`, { cache: 'no-store' });
+                const json = await res.json();
+                if (json.ok || json.success) {
+                    setEditorValues(json.content || {});
+                    localStorage.setItem('lp_site_edits', JSON.stringify(json.content || {}));
+                    showToast('✅ 서버 콘텐츠를 불러왔습니다.');
+                    return;
+                }
+                throw new Error(json.error || json.message || '서버 콘텐츠를 불러오지 못했습니다.');
+            } catch (err) {
+                const fallback = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
+                setEditorValues(fallback);
+                showToast('⚠️ 서버 불러오기 실패, 이 브라우저 저장값을 표시합니다.');
+            }
+        }
+
+        function numberOrUndefined(id) {
+            const raw = getValue(id);
+            if (raw === '') return undefined;
+            const n = Number(raw);
+            return Number.isFinite(n) ? n : undefined;
+        }
+
+        function compactObject(obj) {
+            Object.keys(obj).forEach(key => {
+                const value = obj[key];
+                if (value && typeof value === 'object' && !Array.isArray(value)) compactObject(value);
+                if (value === undefined || value === '') delete obj[key];
+            });
+            return obj;
+        }
+
+        function collectPricingPlans() {
+            const plans = {};
+            EDITOR_PLAN_DEFS.forEach(({ id }) => {
+                plans[id] = {
+                    name: getValue(`plan-${id}-name`),
+                    desc: getValue(`plan-${id}-desc`),
+                    badgeText: getValue(`plan-${id}-badge`),
+                    period: getValue(`plan-${id}-period`),
+                    amount: numberOrUndefined(`plan-${id}-amount`),
+                    amountCard: numberOrUndefined(`plan-${id}-card`),
+                    futureAmount: numberOrUndefined(`plan-${id}-future`),
+                    futureAmountCard: numberOrUndefined(`plan-${id}-future-card`),
+                    monthly: getValue(`plan-${id}-monthly`),
+                    eventLabel: getValue(`plan-${id}-event`),
+                    features: linesToArray(getValue(`plan-${id}-features`))
+                };
+            });
+            return plans;
+        }
+
+        function collectProductsPage() {
+            const guide = textToCopyBlock(getValue('products-page-guide-copy'));
+            const lineup = textToCopyBlock(getValue('products-page-lineup-copy'));
+            const fit = textToCopyBlock(getValue('products-page-fit-copy'));
+            const suite = textToCopyBlock(getValue('products-page-suite-copy'));
+            const compare = textToCopyBlock(getValue('products-page-compare-copy'));
+            const finalBlock = textToCopyBlock(getValue('products-page-final-copy'));
+            const finalLines = String(finalBlock.desc || '').split(/\r?\n/);
+            return {
+                heroKicker: getValue('products-page-hero-kicker'),
+                heroTitle: getValue('products-page-hero-title'),
+                heroDesc: getValue('products-page-hero-desc'),
+                primaryCta: getValue('products-page-primary-cta'),
+                secondaryCta: getValue('products-page-secondary-cta'),
+                guideKicker: guide.kicker,
+                guideTitle: guide.title,
+                guideDesc: guide.desc,
+                lineupKicker: lineup.kicker,
+                lineupTitle: lineup.title,
+                lineupDesc: lineup.desc,
+                fitKicker: fit.kicker,
+                fitTitle: fit.title,
+                fitDesc: fit.desc,
+                suiteKicker: suite.kicker,
+                suiteTitle: suite.title,
+                suiteDesc: suite.desc,
+                compareKicker: compare.kicker,
+                compareTitle: compare.title,
+                compareDesc: compare.desc,
+                finalKicker: finalBlock.kicker,
+                finalTitle: finalBlock.title,
+                finalDesc: (finalLines[0] || '').trim(),
+                finalNote: (finalLines[1] || '').trim(),
+                finalPrimaryCta: (finalLines[2] || '').trim(),
+                finalSecondaryCta: getValue('products-page-final-secondary-cta'),
+                guideCards: textToRows(getValue('products-page-guide-cards'), 4).map(row => [row[0], row[1], row[2], row[3]]),
+                suiteFlow: textToRows(getValue('products-page-suite-flow'), 3).map(row => [row[0], row[1], row.slice(2).join(' | ')]),
+                comparison: textToRows(getValue('products-page-comparison'), 4).map(row => [row[0], row[1], row[2], row[3]]),
+                images: {
+                    preview1: { src: getValue('products-page-preview-1-src'), alt: 'LEWORD 황금키워드 화면', title: 'LEWORD 황금키워드 화면' },
+                    preview2: { src: getValue('products-page-preview-2-src'), alt: 'Orbit 연속 발행 대기열 화면', title: 'Orbit 연속 발행 대기열 화면' },
+                    workflow1: { src: getValue('products-page-workflow-1-src'), alt: 'LEWORD 17개 데이터 소스 화면', title: 'LEWORD 17개 데이터 소스 화면' },
+                    workflow2: { src: getValue('products-page-workflow-2-src'), alt: 'Orbit 외부유입 글 생성 화면', title: 'Orbit 외부유입 글 생성 화면' }
+                }
+            };
+        }
+
+        function collectProducts() {
+            const products = {};
+            EDITOR_PRODUCT_DEFS.forEach(({ id }) => {
+                products[id] = {
+                    eyebrow: getValue(`product-${id}-eyebrow`),
+                    name: getValue(`product-${id}-name`),
+                    subtitle: getValue(`product-${id}-subtitle`),
+                    headline: getValue(`product-${id}-headline`),
+                    desc: getValue(`product-${id}-desc`),
+                    href: getValue(`product-${id}-href`),
+                    cta: getValue(`product-${id}-cta`),
+                    media: {
+                        type: getValue(`product-${id}-media-type`) || 'image',
+                        src: getValue(`product-${id}-media-src`),
+                        alt: getValue(`product-${id}-media-alt`)
+                    },
+                    metrics: textToMetrics(getValue(`product-${id}-metrics`)),
+                    bullets: linesToArray(getValue(`product-${id}-bullets`)),
+                    fit: linesToArray(getValue(`product-${id}-fit`))
+                };
+            });
+
+            const raw = getValue('edit-products-json');
+            if (productsJsonTouched && raw) {
+                return deepMerge(products, JSON.parse(raw));
+            }
+            return products;
+        }
+
+        function collectDownloads() {
+            const downloads = {
+                page: {
+                    eyebrow: getValue('download-page-eyebrow'),
+                    title: getValue('download-page-title'),
+                    desc: getValue('download-page-desc'),
+                    note: getValue('download-page-note')
+                }
+            };
+            EDITOR_PRODUCT_DEFS.forEach(({ id }) => {
+                const productDownloads = {};
+                EDITOR_DOWNLOAD_CHOICES.forEach(choice => {
+                    productDownloads[choice] = {
+                        label: getValue(`download-${id}-${choice}-label`),
+                        detail: getValue(`download-${id}-${choice}-detail`),
+                        url: getValue(`download-${id}-${choice}-url`)
+                    };
+                });
+                downloads[id] = {
+                    name: getValue(`download-${id}-name`),
+                    version: getValue(`download-${id}-version`),
+                    image: getValue(`download-${id}-image`),
+                    accent: getValue(`download-${id}-accent`),
+                    downloads: productDownloads
+                };
+            });
+            return downloads;
+        }
+
+        function collectEditorContent() {
+            const data = compactObject({
+                hero: {
+                    title: getValue('edit-hero-title'),
+                    desc: getValue('edit-hero-desc'),
+                    benefit: getValue('edit-hero-benefit'),
+                    notice: getValue('edit-notice'),
+                    proofs: textToProofs(getValue('edit-hero-proofs'))
+                },
+                pricing: {
+                    page: {
+                        eyebrow: getValue('pricing-page-eyebrow'),
+                        title: getValue('pricing-page-title'),
+                        titleNormal: getValue('pricing-page-title-normal'),
+                        desc: getValue('pricing-page-desc'),
+                        tabLabel: getValue('pricing-tab-label'),
+                        eventTitle: getValue('pricing-event-title'),
+                        eventTitleNormal: getValue('pricing-event-title-normal'),
+                        eventDesc: getValue('pricing-event-desc'),
+                        eventDescNormal: getValue('pricing-event-desc-normal'),
+                        eventLine: getValue('pricing-event-line'),
+                        paymentEmailLabel: getValue('pricing-payment-label'),
+                        paymentEmailHelp: getValue('pricing-payment-help'),
+                        paymentNote: getValue('pricing-payment-note')
+                    },
+                    plans: collectPricingPlans()
+                },
+                productsPage: collectProductsPage(),
+                products: collectProducts(),
+                downloads: collectDownloads(),
+                theme: {
+                    pricingBgImage: getValue('theme-pricing-bg-image'),
+                    productsBgImage: getValue('theme-products-bg-image'),
+                    downloadBgImage: getValue('theme-download-bg-image'),
+                    gold: getValue('theme-gold')
                 },
                 updatedAt: new Date().toISOString()
-            };
+            });
+            refreshEditorPreview(data);
+            return data;
+        }
+
+        function refreshEditorPreview(data) {
+            const preview = editorEl('edit-site-json-preview');
+            if (!preview) return;
+            try {
+                const content = data || collectEditorContent();
+                preview.value = JSON.stringify(content, null, 2);
+            } catch {
+                preview.value = '저장 데이터 미리보기를 만들 수 없습니다.';
+            }
+        }
+
+        async function saveEditorContent() {
+            let data;
+            try {
+                data = collectEditorContent();
+            } catch (err) {
+                showToast('❌ 제품 상세 JSON 형식이 올바르지 않습니다.');
+                return;
+            }
+
             localStorage.setItem('lp_site_edits', JSON.stringify(data));
-            showToast('✅ 저장되었습니다! 메인 사이트에 반영됩니다.');
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'site-content-save', adminToken: ADMIN_TOKEN, content: data })
+                });
+                const json = await res.json();
+                if (!(json.ok || json.success)) throw new Error(json.error || json.message || '저장 실패');
+                showToast('✅ 서버에 저장했습니다. 실제 사이트가 이 데이터를 읽습니다.');
+            } catch (err) {
+                showToast('⚠️ 브라우저에는 저장됨 · 서버 저장 실패: ' + err.message);
+            }
         }
 
         function resetEditorContent() {
             if (!confirm('모든 편집 내용을 초기화하시겠습니까?')) return;
             localStorage.removeItem('lp_site_edits');
-            document.getElementById('edit-hero-title').value = '블로그 자동화의 새로운 기준';
-            document.getElementById('edit-hero-desc').value = '키워드 하나면 끝. AI가 글을 쓰고, 이미지를 만들고, 블로그에 올립니다.';
-            document.getElementById('edit-hero-benefit').value = '매일 100건, 사람이 쓴 것처럼';
-            document.getElementById('edit-notice').value = '';
-            document.getElementById('edit-dl-naver').value = '';
-            document.getElementById('edit-dl-orbit').value = '';
-            document.getElementById('edit-dl-tistory').value = '';
-            document.getElementById('edit-dl-leword').value = '';
+            setEditorValues({});
             showToast('↩️ 초기화되었습니다.');
         }
 

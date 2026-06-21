@@ -24,6 +24,7 @@ const START_SEC = 16;
 const STORAGE_TIME = 'lp_music_time';
 const STORAGE_TIME_TS = 'lp_music_time_ts';
 const STORAGE_VOL = 'lp_music_volume';
+let musicPlayerMountSeq = 0;
 
 function getResumeTime(): number {
     try {
@@ -35,36 +36,72 @@ function getResumeTime(): number {
 }
 
 function MusicPlayer() {
+    const hostRef = useRef<HTMLDivElement | null>(null);
+    const playerElementIdRef = useRef('');
     const playerRef = useRef<any>(null);
+    const [shouldLoadApi, setShouldLoadApi] = useState(false);
     const [apiReady, setApiReady] = useState(false);
     const [isPlaying, setIsPlaying] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [trackTitle, setTrackTitle] = useState('Summer Vibes');
 
-    // YT IFrame API 로드 (한 번만)
+    if (!playerElementIdRef.current) {
+        musicPlayerMountSeq += 1;
+        playerElementIdRef.current = `lpm-yt-player-${musicPlayerMountSeq}`;
+    }
+
     useEffect(() => {
+        const loadWhenIdle = () => setShouldLoadApi(true);
+        const idleWindow = window as any;
+        const idleId = 'requestIdleCallback' in idleWindow
+            ? idleWindow.requestIdleCallback(loadWhenIdle, { timeout: 9000 })
+            : window.setTimeout(loadWhenIdle, 7000);
+        return () => {
+            if ('cancelIdleCallback' in idleWindow && typeof idleId === 'number') idleWindow.cancelIdleCallback(idleId);
+            else window.clearTimeout(idleId);
+        };
+    }, []);
+
+    // YT IFrame API 로드 (사용자 클릭 또는 idle 이후)
+    useEffect(() => {
+        if (!shouldLoadApi) return;
         if (window.YT && window.YT.Player) {
             setApiReady(true);
             return;
         }
+        let disposed = false;
         const existing = document.querySelector('script[src*="youtube.com/iframe_api"]');
         if (!existing) {
             const tag = document.createElement('script');
             tag.src = 'https://www.youtube.com/iframe_api';
             document.head.appendChild(tag);
         }
-        window.onYouTubeIframeAPIReady = () => setApiReady(true);
-    }, []);
+        const onReady = () => {
+            if (!disposed) setApiReady(true);
+        };
+        window.onYouTubeIframeAPIReady = onReady;
+        return () => {
+            disposed = true;
+            if (window.onYouTubeIframeAPIReady === onReady) {
+                window.onYouTubeIframeAPIReady = undefined;
+            }
+        };
+    }, [shouldLoadApi]);
 
     // Player 생성 (apiReady 가 true 가 되면)
     useEffect(() => {
         if (!apiReady) return;
         if (playerRef.current) return;
 
-        const div = document.getElementById('lpm-yt-player');
-        if (!div) return;
+        const host = hostRef.current;
+        if (!host) return;
 
-        playerRef.current = new window.YT.Player('lpm-yt-player', {
+        host.replaceChildren();
+        const playerNode = document.createElement('div');
+        playerNode.id = playerElementIdRef.current;
+        host.appendChild(playerNode);
+
+        playerRef.current = new window.YT.Player(playerNode.id, {
             videoId: VIDEO_ID,
             playerVars: {
                 autoplay: 1,
@@ -99,6 +136,13 @@ function MusicPlayer() {
                 },
             },
         });
+
+        return () => {
+            const player = playerRef.current;
+            playerRef.current = null;
+            try { player?.destroy?.(); } catch {}
+            try { host.replaceChildren(); } catch {}
+        };
     }, [apiReady]);
 
     // 첫 인터랙션 시 자동재생 시도 (브라우저 정책 우회)
@@ -130,7 +174,7 @@ function MusicPlayer() {
                     localStorage.setItem(STORAGE_TIME_TS, String(Date.now()));
                 }
             } catch {}
-        }, 500);
+        }, 5000);
         const saveOnHide = () => {
             try {
                 if (!playerRef.current?.getCurrentTime) return;
@@ -151,7 +195,11 @@ function MusicPlayer() {
     }, []);
 
     const toggle = () => {
-        if (!playerRef.current) return;
+        if (!playerRef.current) {
+            setShouldLoadApi(true);
+            setExpanded(true);
+            return;
+        }
         try {
             if (isPlaying) playerRef.current.pauseVideo();
             else playerRef.current.playVideo();
@@ -176,7 +224,7 @@ function MusicPlayer() {
                 }
             `}</style>
             {/* 숨김 YT 플레이어 */}
-            <div id="lpm-yt-player" style={{ position: 'fixed', top: -9999, left: -9999, width: 1, height: 1, opacity: 0, pointerEvents: 'none' }} />
+            <div ref={hostRef} style={{ position: 'fixed', top: -9999, left: -9999, width: 1, height: 1, opacity: 0, pointerEvents: 'none' }} />
 
             {/* 미니 플레이어 FAB — 4개 stack 중 가장 위 (유튜브 위로) */}
             <div

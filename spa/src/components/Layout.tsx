@@ -17,25 +17,21 @@ function Layout() {
     const pathname = location.pathname.replace(/\/$/, '') || '/';
     const isLewordConsole = pathname === '/leword' || pathname === '/leword.html';
 
-    if (isLewordConsole) {
-        return (
-            <main style={{ minHeight: '100vh' }}>
-                <Outlet />
-            </main>
-        );
-    }
-
     return (
         <>
             <ScrollToTop />
             <Navbar />
-            <main style={{ minHeight: '100vh' }}>
+            <main style={{
+                minHeight: '100vh',
+                paddingTop: isLewordConsole ? 72 : 0,
+                background: isLewordConsole ? '#07090d' : undefined,
+            }}>
                 <Outlet />
             </main>
-            <Footer />
-            <SummerEffect />
-            <MusicPlayer />
-            <FloatStack />
+            {!isLewordConsole && <Footer />}
+            {!isLewordConsole && <SummerEffect />}
+            {!isLewordConsole && <MusicPlayer />}
+            {!isLewordConsole && <FloatStack />}
         </>
     );
 }
