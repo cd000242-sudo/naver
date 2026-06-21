@@ -12264,6 +12264,16 @@
 
             <div class="modal-content" style="max-height: 70vh; overflow-y: auto; padding-right: 0.5rem;">
 
+                <!-- 🤖 에이전트 모드 소개 (최상단 — 비용표보다 먼저) -->
+                <div style="margin-bottom: 2rem; padding: 1.2rem; background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(52,211,153,0.05)); border: 2px solid #10b981; border-radius: 12px;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #6ee7b7; font-size: 1.15rem;">🤖 먼저 보세요 — 에이전트 모드 (API 과금 ₩0)</h4>
+                    <p style="margin: 0; color: #e5e7eb; font-size: 0.92rem; line-height: 1.65;">
+                        <strong>GPT Plus 또는 Claude Plus 구독($20/월)</strong>이 있다면, 그 구독 한도 안에서 <strong>글생성을 사용량 과금 없이(₩0)</strong> 쓸 수 있습니다.
+                        API 키 결제 대신 <strong>codex / claude 구독을 연동</strong>해 글을 만드는 방식이에요. (글 전용 — 이미지는 아래 이미지 엔진 사용)<br>
+                        <span style="color: #a7f3d0; font-size: 0.85rem;">💡 글은 구독으로 무료, 이미지는 Flow(Google AI Pro) 또는 종량제 — 자세한 조합은 아래 "상황별 추천 조합" 참고.</span>
+                    </p>
+                </div>
+
                 <!-- 💳 선불 결제 안내 ($300 무료 크레딧 프로모션 종료) -->
                 <div
                     style="margin-bottom: 2rem; padding: 1.2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.10), rgba(37, 99, 235, 0.05)); border: 2px solid #3b82f6; border-radius: 12px;">
@@ -12692,7 +12702,7 @@
                         </h5>
                         <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
                             <li><strong>글생성:</strong> 🤖 에이전트 모드 — <strong>GPT Plus 또는 Claude Plus</strong> 구독($20/월) → 본인 구독 한도 내 무료</li>
-                            <li><strong>이미지:</strong> Flow — <strong>Google AI(제미나이) Pro</strong> 구독($20/월) → 무료 이미지</li>
+                            <li><strong>이미지:</strong> Flow — <strong>Google AI Pro 이상 구독 필요</strong>($20/월~). ⚠️ 무료 계정은 50크레딧/일로 제한적이라 실사용은 Pro 이상부터.</li>
                             <li style="margin-top: 0.5rem; color: #4ade80; font-weight: bold; background: rgba(34, 197, 94, 0.15); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
                                 구독료만 — 토큰·이미지 사용량 과금 ₩0</li>
                         </ul>
@@ -12724,10 +12734,9 @@
                         </h5>
                         <ul style="margin: 0; padding-left: 1.2rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.7;">
                             <li><strong>글:</strong> Claude Opus 4.7 (₩210)</li>
-                            <li><strong>썸네일:</strong> Flow (4K — AI Ultra 필수)</li>
-                            <li><strong>본문 이미지:</strong> Nano Banana Pro API (₩188/장)</li>
+                            <li><strong>썸네일·본문 모두:</strong> <strong>Nano Banana Pro</strong> (Gemini 3 Pro · 한글 최강 · ₩188/장) — 최고가·최고퀄</li>
                             <li style="margin-top: 0.5rem; color: #fbbf24; font-weight: bold; background: rgba(245, 158, 11, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
-                                총 비용: 약 ₩1,150 / 편</li>
+                                총 비용: 약 ₩1,350 / 편 (이미지 7장 기준)</li>
                         </ul>
                         <div style="margin-top: 0.8rem; font-size: 0.8rem; color: #fde68a; background: rgba(245, 158, 11, 0.1); padding: 0.6rem; border-radius: 6px; line-height: 1.5;">
                             💡 중요 브랜드 포스트 · $10으로 약 12편
@@ -12753,7 +12762,7 @@
 
             <div style="margin-top: 1.5rem; text-align: center;">
                 <button type="button" id="confirm-price-btn"
-                    style="padding: 0.75rem 2rem; background: var(--bg-gold); color: var(--bg-primary); border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3); transition: all 0.2s;">확인했습니다</button>
+                    style="padding: 0.8rem 2.4rem; background: linear-gradient(135deg, #D4AF37, #FFD700); color: #1a1a1a; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 1.05rem; box-shadow: 0 4px 14px rgba(212, 175, 55, 0.45); transition: all 0.2s;">확인했습니다</button>
             </div>
         </div>
     </div>
