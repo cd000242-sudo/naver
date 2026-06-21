@@ -2149,7 +2149,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', async (e) => {
     const target = e.target as HTMLElement;
     // 버튼 자체거나 버튼 내부 요소(아이콘 등)를 클릭한 경우 모두 처리
-    if (target.id === 'launch-leword-btn' || target.closest('#launch-leword-btn')) {
+    if (
+      target.id === 'launch-leword-btn' || target.closest('#launch-leword-btn') ||
+      target.id === 'open-leword-site-btn' || target.closest('#open-leword-site-btn')
+    ) {
       console.log('🔑 LEWORD 사이트 바로가기 클릭됨');
       try {
         await (window as any).api.openExternalUrl('https://www.leaderspro.kr/leword');
