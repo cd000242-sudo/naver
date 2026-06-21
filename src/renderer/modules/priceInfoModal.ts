@@ -639,14 +639,14 @@ export async function initPriceInfoModal(): Promise<void> {
       if (navStatusEl) {
         // [v1.4.32] 가격 표시 추가 — 사용자가 어떤 비용을 쓰는지 한눈에
         const modelNames: Record<string, string> = {
-          'gemini-2.5-flash-lite': '💰 Gemini 2.5 Flash-Lite (~₩15/글)',
-          'gemini-2.5-flash': '⚖️ Gemini 2.5 Flash (~₩80/글) ★ 기본',
-          'gemini-2.5-pro': '👑 Gemini 2.5 Pro (~₩300/글)',
-          'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
-          'openai-gpt4o-mini': '🧠 GPT-4.1 mini (~₩16/글)',
-          'openai-gpt41': '⚖️ GPT-4.1 (~₩60/글)',
-          'openai-gpt4o-search': '🔎 GPT-4o Search (~₩101 + ₩35/검색)',
-          'claude-sonnet': '📜 Claude Sonnet 4.6 (~₩240/글)',
+          'gemini-2.5-flash-lite': '💰 Gemini 2.5 Flash-Lite (~₩5/글)',
+          'gemini-2.5-flash': '⚖️ Gemini 2.5 Flash (~₩26/글) ★ 기본',
+          'gemini-2.5-pro': '👑 Gemini 2.5 Pro (~₩105/글)',
+          'perplexity-sonar': '🔮 Perplexity Sonar (~₩32/글)',
+          'openai-gpt4o-mini': '🧠 GPT-4.1 mini (~₩20/글)',
+          'openai-gpt41': '⚖️ GPT-4.1 (~₩101/글)',
+          'openai-gpt4o-search': '🔎 GPT-4o Search (~₩101 + 검색비)',
+          'claude-sonnet': '📜 Claude Sonnet 4.6 (~₩176/글)',
         };
         // deprecate된 모델 ID 자동 마이그레이션 (gemini-3-*-preview 등)
         const DEPRECATED_TO_DEFAULT: Record<string, string> = {
