@@ -8591,10 +8591,18 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
       normalized.images.map((img) => img.imageId),
     );
 
-    // Convert Map to plain object for IPC serialisation
+    // Re-key image headings to the FINAL article's 소제목. The narrative builder lets the
+    // AI rewrite section headings while writing, so the plan heading (e.g. "강남 노블발렌티
+    // 삼성", location-based) differs from the body 소제목 (e.g. "입맛 돋우는 첫 접시"). Align by
+    // section index so 이미지 관리탭 groups each photo under the same 소제목 shown in the body.
+    const articleHeadings: Array<{ title?: string }> =
+      Array.isArray((content as any)?.headings) ? (content as any).headings : [];
     const imageMapObj: Record<string, Array<{ blobId?: string; filePath?: string; previewDataUrl?: string; heading?: string }>> = {};
-    imageMap.forEach((imgs, heading) => {
-      imageMapObj[heading] = imgs;
+    let imgSectionIdx = 0;
+    imageMap.forEach((imgs, planHeading) => {
+      const articleTitle = articleHeadings[imgSectionIdx]?.title?.trim() || planHeading;
+      imageMapObj[articleTitle] = imgs.map((img) => ({ ...img, heading: articleTitle }));
+      imgSectionIdx += 1;
     });
 
     console.log(`[Main] vision:infer-and-write — 완료 (섹션 ${plan.sections.length}개, 이미지 ${imageMap.size}개 소제목)`);

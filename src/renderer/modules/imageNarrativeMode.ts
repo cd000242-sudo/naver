@@ -22,6 +22,7 @@ import {
   showReviewPanel,
 } from './imageNarrativeReview.js';
 import { executeFullAutoFlow } from './fullAutoFlow.js';
+import { autoAnalyzeHeadings } from './headingImageGen.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -361,6 +362,14 @@ async function _handlePublish(reviewEdits?: unknown, generateOnly = false): Prom
     });
     if (generateOnly) {
       _populateSemiAutoEditor();
+      // 일반 글생성과 동일하게 소제목 분석을 자동 실행 — 이미지 관리탭에 소제목 구조를
+      // 채우고 배치된 사진을 본문 소제목별로 정리한다(사용자 보고: 자동 분석 누락).
+      try {
+        const sc = (window as any).currentStructuredContent;
+        if (sc?.headings?.length) await autoAnalyzeHeadings(sc);
+      } catch (e) {
+        console.warn('[ImageNarrativeMode] 소제목 자동 분석 실패(무시):', e);
+      }
       _showToast('글 생성 완료 — 반자동 편집 탭에서 확인 후 발행하세요.', 'info');
     }
   } catch (err) {
