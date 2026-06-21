@@ -778,6 +778,10 @@
                     <span class="nav-icon">💳</span>
                     <span>주문 내역</span>
                 </div>
+                <div class="nav-item" data-tab="analytics" onclick="switchTab('analytics')">
+                    <span class="nav-icon">📈</span>
+                    <span>매출/방문 분석</span>
+                </div>
                 <div class="nav-item" data-tab="editor" onclick="switchTab('editor')">
                     <span class="nav-icon">✏️</span>
                     <span>사이트 편집</span>
@@ -1007,11 +1011,57 @@
                 </div>
             </div>
 
+            <!-- TAB: Analytics -->
+            <div class="tab-panel" id="tab-analytics">
+                <div class="page-header">
+                    <h1>매출/방문 분석</h1>
+                    <p>Toss 결제, 계좌이체, 방문 로그를 합쳐 오늘과 이번 달 흐름을 확인합니다.</p>
+                </div>
+                <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;">
+                    <button class="btn btn-gold" id="analytics-period-today" onclick="loadAnalyticsDashboard('today')">오늘</button>
+                    <button class="btn" id="analytics-period-month" onclick="loadAnalyticsDashboard('month')">이번 달</button>
+                    <button class="btn" onclick="setInternalAnalytics(true)">내 방문 제외 켜기</button>
+                    <button class="btn" onclick="setInternalAnalytics(false)">내 방문 제외 끄기</button>
+                    <button class="btn" onclick="loadAnalyticsDashboard(currentAnalyticsPeriod)" style="margin-left:auto;">🔄 새로고침</button>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card card-gold">
+                        <div class="stat-top"><div class="stat-label">매출</div><div class="stat-icon icon-gold">₩</div></div>
+                        <div class="stat-value gold" id="analytics-revenue">—</div>
+                        <div class="stat-change neutral" id="analytics-revenue-meta">기간 합계</div>
+                    </div>
+                    <div class="stat-card card-green">
+                        <div class="stat-top"><div class="stat-label">주문</div><div class="stat-icon icon-green">#</div></div>
+                        <div class="stat-value green" id="analytics-orders">—</div>
+                        <div class="stat-change neutral" id="analytics-orders-meta">결제/계좌이체 포함</div>
+                    </div>
+                    <div class="stat-card card-blue">
+                        <div class="stat-top"><div class="stat-label">순 방문자</div><div class="stat-icon icon-blue">👤</div></div>
+                        <div class="stat-value blue" id="analytics-visitors">—</div>
+                        <div class="stat-change neutral" id="analytics-visitors-meta">내부 방문 제외</div>
+                    </div>
+                    <div class="stat-card card-purple">
+                        <div class="stat-top"><div class="stat-label">페이지뷰</div><div class="stat-icon icon-purple">↗</div></div>
+                        <div class="stat-value purple" id="analytics-pageviews">—</div>
+                        <div class="stat-change neutral" id="analytics-pageviews-meta">중복 포함</div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>최근 주문/결제</h3>
+                        <span id="analytics-updated" style="font-size:0.78rem;color:var(--text-secondary);">—</span>
+                    </div>
+                    <div id="analytics-table-body">
+                        <div class="loading-spinner"><div class="spinner-ring"></div> 분석 데이터 로딩 중...</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- TAB: Editor -->
             <div class="tab-panel" id="tab-editor">
                 <div class="page-header">
                     <h1>사이트 편집</h1>
-                    <p>메인 결제 페이지의 핵심 콘텐츠를 수정합니다.</p>
+                    <p>메인 문구, 제품 상세, 요금제, 다운로드 링크를 저장하면 실제 사이트가 같은 데이터를 읽습니다.</p>
                 </div>
                 <div class="editor-grid">
                     <div class="editor-card">
@@ -1029,6 +1079,20 @@
                     <div class="editor-card">
                         <h4>📢 공지사항</h4>
                         <textarea id="edit-notice" placeholder="공지사항이 없습니다."></textarea>
+                    </div>
+                    <div class="editor-card" style="grid-column: 1 / -1;">
+                        <h4>💳 요금제 금액</h4>
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:16px;">카드 금액은 VAT 포함 금액입니다. 빈 값은 기존 사이트 기본값을 유지합니다.</p>
+                        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;">
+                            <input id="plan-monthly-amount" type="number" min="0" placeholder="1개월 계좌이체 50000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-monthly-card" type="number" min="0" placeholder="1개월 카드 55000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-quarterly-amount" type="number" min="0" placeholder="3개월 120000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-yearly-amount" type="number" min="0" placeholder="1년 400000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-lifetime-amount" type="number" min="0" placeholder="영구제 1650000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-monthly-future" type="number" min="0" placeholder="1개월 정상가 100000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-quarterly-future" type="number" min="0" placeholder="3개월 정상가 240000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-yearly-future" type="number" min="0" placeholder="1년 정상가 800000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                        </div>
                     </div>
                     <div class="editor-card" style="grid-column: 1 / -1;">
                         <h4>📥 제품별 다운로드 URL</h4>
@@ -1052,10 +1116,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="editor-card" style="grid-column: 1 / -1;">
+                        <h4>🧩 제품 상세 JSON</h4>
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px;">제품별 이름, 상세 문구, 버튼, 불릿을 수정합니다. 예: {"naver":{"headline":"새 문구","bullets":["항목1","항목2"]}}</p>
+                        <textarea id="edit-products-json" spellcheck="false" style="min-height:180px;font-family:Consolas,monospace;" placeholder='{"naver":{"headline":"키워드 하나로 끝","bullets":["자동 글쓰기","자동 발행"]}}'></textarea>
+                    </div>
                 </div>
                 <div class="editor-save-bar">
+                    <button class="btn" onclick="loadEditorContent()">🔄 서버에서 불러오기</button>
                     <button class="btn" onclick="resetEditorContent()">↩️ 초기화</button>
-                    <button class="btn btn-gold" onclick="saveEditorContent()">💾 저장하기</button>
+                    <button class="btn btn-gold" onclick="saveEditorContent()">💾 서버에 저장하기</button>
                 </div>
             </div>
 
@@ -1322,6 +1392,7 @@
         let allCodes = [];
         let codesPage = 1;
         let ordersPage = 1;
+        let currentAnalyticsPeriod = 'today';
         const PAGE_SIZE = 20;
 
         // ===== SHA-256 HASH UTILITY =====
@@ -1377,7 +1448,8 @@
                 codes: { title: '코드 관리', desc: '라이선스 코드를 발급, 조회, 무효화합니다.' },
                 'all-in-one': { title: '올인원 발급', desc: '구매자에게 지급할 ALL 라이선스 코드를 발급합니다.' },
                 orders: { title: '주문 내역', desc: '결제 완료된 주문과 활성화된 라이선스 내역입니다.' },
-                editor: { title: '사이트 편집', desc: '메인 결제 페이지의 핵심 콘텐츠를 수정합니다.' },
+                analytics: { title: '매출/방문 분석', desc: 'Toss 결제, 계좌이체, 방문 로그를 기간별로 확인합니다.' },
+                editor: { title: '사이트 편집', desc: '메인 문구, 제품 상세, 요금제, 다운로드 링크를 직접 수정합니다.' },
                 bank: { title: '계좌이체 관리', desc: '계좌이체 주문을 확인하고 승인/거절합니다.' },
                 trial: { title: '체험 관리', desc: '무료 체험 사용자 목록을 조회하고 관리합니다.' },
                 reviews: { title: '후기 관리', desc: '구매자 후기 승인·거절 (Phase 6-D에서 활성화).' },
@@ -1396,6 +1468,8 @@
             if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
             if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
             if (tabId === 'leads') loadLeadsAdmin();
+            if (tabId === 'analytics') loadAnalyticsDashboard(currentAnalyticsPeriod);
+            if (tabId === 'editor') loadEditorContent();
         }
 
         // ===== PHASE 6-F: SEED DEFAULTS (idempotent — 시트 비어있을 때만 import) =====
@@ -1867,9 +1941,101 @@
         function trackVisit() {
             // Mark admin session so main page can filter us out
             sessionStorage.setItem('lp_admin_logged_in', '1');
+            localStorage.setItem('lp_analytics_exclude', '1');
             // Admin does NOT increment visit counter — we only READ data
         }
         trackVisit();
+
+        // ===== ANALYTICS DASHBOARD =====
+        function formatWon(value) {
+            return (Number(value) || 0).toLocaleString('ko-KR') + '원';
+        }
+
+        function setInternalAnalytics(enabled) {
+            if (enabled) {
+                localStorage.setItem('lp_analytics_exclude', '1');
+                sessionStorage.setItem('lp_admin_logged_in', '1');
+                showToast('✅ 이 브라우저 방문은 분석에서 제외합니다.');
+            } else {
+                localStorage.removeItem('lp_analytics_exclude');
+                showToast('⚠️ 이 브라우저 방문도 분석에 포함됩니다.');
+            }
+        }
+
+        async function fetchAnalyticsDashboard(period) {
+            const res = await fetch(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action: 'analytics-dashboard', adminToken: ADMIN_TOKEN, period })
+            });
+            const json = await res.json();
+            if (json.ok || json.success) return json;
+            throw new Error(json.error || json.message || '분석 데이터를 불러오지 못했습니다.');
+        }
+
+        function setAnalyticsPeriodButtons(period) {
+            const todayBtn = document.getElementById('analytics-period-today');
+            const monthBtn = document.getElementById('analytics-period-month');
+            if (todayBtn) todayBtn.className = period === 'today' ? 'btn btn-gold' : 'btn';
+            if (monthBtn) monthBtn.className = period === 'month' ? 'btn btn-gold' : 'btn';
+        }
+
+        async function loadAnalyticsDashboard(period = 'today') {
+            currentAnalyticsPeriod = period;
+            setAnalyticsPeriodButtons(period);
+            const table = document.getElementById('analytics-table-body');
+            if (table) table.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 분석 데이터 로딩 중...</div>';
+
+            try {
+                const data = await fetchAnalyticsDashboard(period);
+                const sales = data.sales || {};
+                const visitors = data.visitors || {};
+                const recentOrders = data.recentOrders || [];
+
+                document.getElementById('analytics-revenue').textContent = formatWon(sales.revenue);
+                document.getElementById('analytics-orders').textContent = (Number(sales.orders) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-visitors').textContent = (Number(visitors.unique) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-pageviews').textContent = (Number(visitors.pageviews) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-revenue-meta').textContent = period === 'month' ? '이번 달 합계' : '오늘 합계';
+                document.getElementById('analytics-orders-meta').textContent = 'Toss + 계좌이체 승인';
+                document.getElementById('analytics-visitors-meta').textContent = `내부 제외 · 내부뷰 ${Number(visitors.internalPageviews) || 0}`;
+                document.getElementById('analytics-pageviews-meta').textContent = '중복 페이지 이동 포함';
+                document.getElementById('analytics-updated').textContent = data.updatedAt ? new Date(data.updatedAt).toLocaleString('ko-KR') : '방금 갱신';
+
+                if (!recentOrders.length) {
+                    table.innerHTML = '<div style="padding:32px;text-align:center;color:var(--text-secondary);">해당 기간 주문이 없습니다.</div>';
+                    return data;
+                }
+
+                let html = '<table class="data-table"><thead><tr>';
+                html += '<th>일시</th><th>구매자</th><th>상품</th><th>금액</th><th>결제수단</th><th>주문번호</th>';
+                html += '</tr></thead><tbody>';
+                recentOrders.forEach(order => {
+                    const when = order.createdAt ? new Date(order.createdAt).toLocaleString('ko-KR') : '—';
+                    html += `<tr>
+                        <td>${escapeHtml_(when)}</td>
+                        <td>${escapeHtml_(order.email || order.name || '—')}</td>
+                        <td>${escapeHtml_(order.productName || order.product || '—')}</td>
+                        <td>${formatWon(order.amount)}</td>
+                        <td>${escapeHtml_(order.method || '—')}</td>
+                        <td><span class="code-text">${escapeHtml_(order.orderId || '—')}</span></td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                table.innerHTML = html;
+                return data;
+            } catch (err) {
+                document.getElementById('analytics-revenue').textContent = '—';
+                document.getElementById('analytics-orders').textContent = '—';
+                document.getElementById('analytics-visitors').textContent = '—';
+                document.getElementById('analytics-pageviews').textContent = '—';
+                document.getElementById('analytics-updated').textContent = 'GAS 재배포 필요';
+                if (table) {
+                    table.innerHTML = `<div style="padding:32px;text-align:center;color:#ff6b6b;">분석 API 연결 실패: ${escapeHtml_(err.message)}<br><small>GAS에 analytics-dashboard 액션이 배포되어야 실제 매출/방문 데이터가 표시됩니다.</small></div>`;
+                }
+                return null;
+            }
+        }
 
         // ===== HELPER: Stat Change Display =====
         function setStatChange(elementId, current, previous, label) {
@@ -1971,9 +2137,12 @@
             const todayOrders = allCodes.filter(c => c.usedAt && c.usedAt.slice(0, 10) === today);
             const activeCount = allCodes.filter(c => c.used === true).length;
             const traffic = getTrafficData();
+            const analytics = await fetchAnalyticsDashboard('today').catch(() => null);
+            const visitorCount = analytics?.visitors?.unique ?? traffic.views;
+            const orderCount = analytics?.sales?.orders ?? todayOrders.length;
 
-            document.getElementById('stat-visitors').textContent = traffic.views.toLocaleString();
-            document.getElementById('stat-orders').textContent = todayOrders.length.toLocaleString();
+            document.getElementById('stat-visitors').textContent = visitorCount.toLocaleString();
+            document.getElementById('stat-orders').textContent = orderCount.toLocaleString();
             document.getElementById('stat-total').textContent = allCodes.length.toLocaleString();
             document.getElementById('stat-active').textContent = activeCount.toLocaleString();
 
@@ -1990,8 +2159,13 @@
             const yOrders = allCodes.filter(c => c.usedAt && c.usedAt.slice(0, 10) === yDate);
 
             // Stat changes
-            setStatChange('stat-visitors-change', traffic.views, yTraffic.views, '어제 대비');
-            setStatChange('stat-orders-change', todayOrders.length, yOrders.length, '어제 대비');
+            if (analytics) {
+                document.getElementById('stat-visitors-change').innerHTML = '<span>내부 방문 제외 순방문자</span>';
+                document.getElementById('stat-orders-change').innerHTML = `<span>오늘 매출 ${formatWon(analytics.sales?.revenue)}</span>`;
+            } else {
+                setStatChange('stat-visitors-change', traffic.views, yTraffic.views, '어제 대비');
+                setStatChange('stat-orders-change', todayOrders.length, yOrders.length, '어제 대비');
+            }
 
             // Active rate
             const activeRate = allCodes.length > 0 ? Math.round((activeCount / allCodes.length) * 100) : 0;
@@ -2290,49 +2464,154 @@
             leword: 'https://github.com/cd000242-sudo/leword-app/releases/download/v1.0.5/LEWORD.Setup.1.0.5.zip'
         };
 
-        function loadEditorContent() {
-            const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
-            if (saved.heroTitle) document.getElementById('edit-hero-title').value = saved.heroTitle;
-            if (saved.heroDesc) document.getElementById('edit-hero-desc').value = saved.heroDesc;
-            if (saved.heroBenefit) document.getElementById('edit-hero-benefit').value = saved.heroBenefit;
-            if (saved.notice) document.getElementById('edit-notice').value = saved.notice;
-            // 제품별 다운로드 URL 로드 (저장값 > 기본값)
-            const urls = saved.downloadUrls || {};
-            document.getElementById('edit-dl-naver').value = urls.naver || DEFAULT_DOWNLOAD_URLS.naver;
-            document.getElementById('edit-dl-orbit').value = urls.orbit || DEFAULT_DOWNLOAD_URLS.orbit;
-            document.getElementById('edit-dl-tistory').value = urls.tistory || DEFAULT_DOWNLOAD_URLS.tistory;
-            document.getElementById('edit-dl-leword').value = urls.leword || DEFAULT_DOWNLOAD_URLS.leword;
+        function normalizeLegacySiteEdits(saved) {
+            if (!saved || saved.hero || saved.pricing || saved.downloads || saved.products) return saved || {};
+            return {
+                hero: {
+                    title: saved.heroTitle || '',
+                    desc: saved.heroDesc || '',
+                    benefit: saved.heroBenefit || '',
+                    notice: saved.notice || ''
+                },
+                downloads: {
+                    naver: { downloads: { windows: { url: saved.downloadUrls?.naver || '' } } },
+                    orbit: { downloads: { windows: { url: saved.downloadUrls?.orbit || '' } } },
+                    tistory: { downloads: { windows: { url: saved.downloadUrls?.tistory || '' } } },
+                    leword: { downloads: { windows: { url: saved.downloadUrls?.leword || '' } } }
+                }
+            };
         }
 
-        function saveEditorContent() {
-            const data = {
-                heroTitle: document.getElementById('edit-hero-title').value,
-                heroDesc: document.getElementById('edit-hero-desc').value,
-                heroBenefit: document.getElementById('edit-hero-benefit').value,
-                notice: document.getElementById('edit-notice').value,
-                downloadUrls: {
-                    naver: document.getElementById('edit-dl-naver').value.trim(),
-                    orbit: document.getElementById('edit-dl-orbit').value.trim(),
-                    tistory: document.getElementById('edit-dl-tistory').value.trim(),
-                    leword: document.getElementById('edit-dl-leword').value.trim()
+        function setEditorValues(content) {
+            const data = normalizeLegacySiteEdits(content || {});
+            const hero = data.hero || {};
+            const plans = data.pricing?.plans || {};
+            const downloads = data.downloads || {};
+            document.getElementById('edit-hero-title').value = hero.title || '블로그 자동화의 새로운 기준';
+            document.getElementById('edit-hero-desc').value = hero.desc || '키워드 하나면 끝. AI가 글을 쓰고, 이미지를 만들고, 블로그에 올립니다.';
+            document.getElementById('edit-hero-benefit').value = hero.benefit || '매일 100건, 사람이 쓴 것처럼';
+            document.getElementById('edit-notice').value = hero.notice || '';
+            document.getElementById('plan-monthly-amount').value = plans['all-in-one-monthly']?.amount || '';
+            document.getElementById('plan-monthly-card').value = plans['all-in-one-monthly']?.amountCard || '';
+            document.getElementById('plan-quarterly-amount').value = plans['all-in-one-quarterly']?.amount || '';
+            document.getElementById('plan-yearly-amount').value = plans['all-in-one-yearly']?.amount || '';
+            document.getElementById('plan-lifetime-amount').value = plans['all-in-one-lifetime']?.amount || '';
+            document.getElementById('plan-monthly-future').value = plans['all-in-one-monthly']?.futureAmount || '';
+            document.getElementById('plan-quarterly-future').value = plans['all-in-one-quarterly']?.futureAmount || '';
+            document.getElementById('plan-yearly-future').value = plans['all-in-one-yearly']?.futureAmount || '';
+            document.getElementById('edit-dl-naver').value = downloads.naver?.downloads?.windows?.url || DEFAULT_DOWNLOAD_URLS.naver;
+            document.getElementById('edit-dl-orbit').value = downloads.orbit?.downloads?.windows?.url || DEFAULT_DOWNLOAD_URLS.orbit;
+            document.getElementById('edit-dl-tistory').value = downloads.tistory?.downloads?.windows?.url || DEFAULT_DOWNLOAD_URLS.tistory;
+            document.getElementById('edit-dl-leword').value = downloads.leword?.downloads?.windows?.url || DEFAULT_DOWNLOAD_URLS.leword;
+            document.getElementById('edit-products-json').value = JSON.stringify(data.products || {}, null, 2);
+        }
+
+        async function loadEditorContent() {
+            try {
+                const res = await fetch(`${GAS_URL}?action=site-content&ts=${Date.now()}`, { cache: 'no-store' });
+                const json = await res.json();
+                if (json.ok || json.success) {
+                    setEditorValues(json.content || {});
+                    localStorage.setItem('lp_site_edits', JSON.stringify(json.content || {}));
+                    showToast('✅ 서버 콘텐츠를 불러왔습니다.');
+                    return;
+                }
+                throw new Error(json.error || json.message || '서버 콘텐츠를 불러오지 못했습니다.');
+            } catch (err) {
+                const fallback = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
+                setEditorValues(fallback);
+                showToast('⚠️ 서버 불러오기 실패, 이 브라우저 저장값을 표시합니다.');
+            }
+        }
+
+        function numberOrUndefined(id) {
+            const raw = document.getElementById(id).value;
+            if (raw === '') return undefined;
+            const n = Number(raw);
+            return Number.isFinite(n) ? n : undefined;
+        }
+
+        function compactObject(obj) {
+            Object.keys(obj).forEach(key => {
+                const value = obj[key];
+                if (value && typeof value === 'object' && !Array.isArray(value)) compactObject(value);
+                if (value === undefined || value === '') delete obj[key];
+            });
+            return obj;
+        }
+
+        function collectEditorContent() {
+            let products = {};
+            const productsRaw = document.getElementById('edit-products-json').value.trim();
+            if (productsRaw) {
+                products = JSON.parse(productsRaw);
+            }
+            return compactObject({
+                hero: {
+                    title: document.getElementById('edit-hero-title').value.trim(),
+                    desc: document.getElementById('edit-hero-desc').value.trim(),
+                    benefit: document.getElementById('edit-hero-benefit').value.trim(),
+                    notice: document.getElementById('edit-notice').value.trim()
                 },
+                pricing: {
+                    plans: {
+                        'all-in-one-monthly': {
+                            amount: numberOrUndefined('plan-monthly-amount'),
+                            amountCard: numberOrUndefined('plan-monthly-card'),
+                            futureAmount: numberOrUndefined('plan-monthly-future')
+                        },
+                        'all-in-one-quarterly': {
+                            amount: numberOrUndefined('plan-quarterly-amount'),
+                            futureAmount: numberOrUndefined('plan-quarterly-future')
+                        },
+                        'all-in-one-yearly': {
+                            amount: numberOrUndefined('plan-yearly-amount'),
+                            futureAmount: numberOrUndefined('plan-yearly-future')
+                        },
+                        'all-in-one-lifetime': {
+                            amount: numberOrUndefined('plan-lifetime-amount')
+                        }
+                    }
+                },
+                downloads: {
+                    naver: { downloads: { windows: { url: document.getElementById('edit-dl-naver').value.trim() } } },
+                    orbit: { downloads: { windows: { url: document.getElementById('edit-dl-orbit').value.trim() } } },
+                    tistory: { downloads: { windows: { url: document.getElementById('edit-dl-tistory').value.trim() } } },
+                    leword: { downloads: { windows: { url: document.getElementById('edit-dl-leword').value.trim() } } }
+                },
+                products,
                 updatedAt: new Date().toISOString()
-            };
+            });
+        }
+
+        async function saveEditorContent() {
+            let data;
+            try {
+                data = collectEditorContent();
+            } catch (err) {
+                showToast('❌ 제품 상세 JSON 형식이 올바르지 않습니다.');
+                return;
+            }
+
             localStorage.setItem('lp_site_edits', JSON.stringify(data));
-            showToast('✅ 저장되었습니다! 메인 사이트에 반영됩니다.');
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'site-content-save', adminToken: ADMIN_TOKEN, content: data })
+                });
+                const json = await res.json();
+                if (!(json.ok || json.success)) throw new Error(json.error || json.message || '저장 실패');
+                showToast('✅ 서버에 저장했습니다. 실제 사이트가 이 데이터를 읽습니다.');
+            } catch (err) {
+                showToast('⚠️ 브라우저에는 저장됨 · 서버 저장 실패: ' + err.message);
+            }
         }
 
         function resetEditorContent() {
             if (!confirm('모든 편집 내용을 초기화하시겠습니까?')) return;
             localStorage.removeItem('lp_site_edits');
-            document.getElementById('edit-hero-title').value = '블로그 자동화의 새로운 기준';
-            document.getElementById('edit-hero-desc').value = '키워드 하나면 끝. AI가 글을 쓰고, 이미지를 만들고, 블로그에 올립니다.';
-            document.getElementById('edit-hero-benefit').value = '매일 100건, 사람이 쓴 것처럼';
-            document.getElementById('edit-notice').value = '';
-            document.getElementById('edit-dl-naver').value = '';
-            document.getElementById('edit-dl-orbit').value = '';
-            document.getElementById('edit-dl-tistory').value = '';
-            document.getElementById('edit-dl-leword').value = '';
+            setEditorValues({});
             showToast('↩️ 초기화되었습니다.');
         }
 

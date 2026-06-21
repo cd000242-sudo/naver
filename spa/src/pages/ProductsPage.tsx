@@ -1,7 +1,8 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
 import ZoomableImage from '../components/ZoomableImage';
+import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 type ProductId = 'naver' | 'leword' | 'orbit';
 type Product = {
@@ -103,6 +104,23 @@ const stackStyle: Record<ProductId, string> = {
     orbit: 'linear-gradient(135deg, #1fb6ff 0%, #34d399 100%)',
 };
 
+function applyProductOverrides(products: Product[], siteContent: SiteContent | null): Product[] {
+    const overrides = siteContent?.products || {};
+    return products.map((product) => {
+        const patch = overrides[product.id];
+        if (!patch) return product;
+        return {
+            ...product,
+            ...patch,
+            desc: patch.desc || product.desc,
+            metrics: Array.isArray(patch.metrics) && patch.metrics.length > 0 ? patch.metrics : product.metrics,
+            bullets: Array.isArray(patch.bullets) && patch.bullets.length > 0 ? patch.bullets : product.bullets,
+            fit: Array.isArray(patch.fit) && patch.fit.length > 0 ? patch.fit : product.fit,
+            media: product.media,
+        };
+    });
+}
+
 function ProductMedia({ product }: { product: Product }) {
     if (product.media.type === 'video') {
         return (
@@ -137,6 +155,8 @@ function MetricList({ items }: { items: Array<[string, string]> }) {
 }
 
 function ProductsPage() {
+    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+
     useEffect(() => {
         const prev = document.title;
         document.title = '제품 정보 — Leaders Pro';
@@ -155,6 +175,12 @@ function ProductsPage() {
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         return () => observer.disconnect();
     }, []);
+
+    useEffect(() => {
+        fetchSiteContent().then(setSiteContent);
+    }, []);
+
+    const products = applyProductOverrides(PRODUCTS, siteContent);
 
     return (
         <>
@@ -227,7 +253,7 @@ function ProductsPage() {
                         </div>
 
                         <div className="product-panels">
-                            {PRODUCTS.map((product) => (
+                            {products.map((product) => (
                                 <article className={`product-panel fade-in ${product.id}`} key={product.id}>
                                     <div className="product-panel-copy">
                                         <span className="product-badge" style={{ background: stackStyle[product.id] }}>{product.eyebrow}</span>
@@ -258,7 +284,7 @@ function ProductsPage() {
                             <p>구매 전 가장 많이 헷갈리는 기준만 따로 정리했습니다.</p>
                         </div>
                         <div className="fit-grid">
-                            {PRODUCTS.map((product) => (
+                            {products.map((product) => (
                                 <article className={`fit-card fade-in ${product.id}`} key={product.id}>
                                     <div className="fit-title">
                                         <span style={{ background: stackStyle[product.id] }}>{product.name.slice(0, 1)}</span>

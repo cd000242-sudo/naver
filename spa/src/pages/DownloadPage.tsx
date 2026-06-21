@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ZoomableImage from '../components/ZoomableImage';
+import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 /**
  * 다운로드 — payment-page/download.html 마이그.
@@ -69,6 +70,19 @@ const PRODUCTS = {
 
 type ProductKey = keyof typeof PRODUCTS;
 
+function applyDownloadOverrides(productKey: ProductKey, siteContent: SiteContent | null): ProductConfig {
+    const product = PRODUCTS[productKey];
+    const patch = siteContent?.downloads?.[productKey];
+    if (!patch) return product;
+    const downloadPatches = patch.downloads || {};
+    return {
+        ...product,
+        name: patch.name || product.name,
+        version: patch.version || product.version,
+        downloads: product.downloads.map((item) => ({ ...item, ...(downloadPatches[item.key] || {}) })),
+    };
+}
+
 function getPreferredDownload(downloads: DownloadChoice[]): DownloadChoice {
     if (typeof navigator !== 'undefined' && /mac/i.test(`${navigator.platform} ${navigator.userAgent}`)) {
         return downloads.find((item) => item.key === 'mac-arm') || downloads[0];
@@ -77,10 +91,16 @@ function getPreferredDownload(downloads: DownloadChoice[]): DownloadChoice {
 }
 
 function DownloadPage() {
+    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+
     useEffect(() => {
         const prev = document.title;
         document.title = '다운로드 — Leaders Pro';
         return () => { document.title = prev; };
+    }, []);
+
+    useEffect(() => {
+        fetchSiteContent().then(setSiteContent);
     }, []);
 
     return (
@@ -113,9 +133,9 @@ function DownloadPage() {
                 <LeadCapture />
 
                 <div className="download-product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24, margin: '32px auto 0' }}>
-                    <DownloadCard productKey="naver" />
-                    <DownloadCard productKey="leword" />
-                    <DownloadCard productKey="orbit" />
+                    <DownloadCard productKey="naver" siteContent={siteContent} />
+                    <DownloadCard productKey="leword" siteContent={siteContent} />
+                    <DownloadCard productKey="orbit" siteContent={siteContent} />
                 </div>
             </section>
         </div>
@@ -180,8 +200,8 @@ function LeadCapture() {
 }
 
 // ─── Download card ───
-function DownloadCard({ productKey }: { productKey: ProductKey }) {
-    const product = PRODUCTS[productKey];
+function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; siteContent: SiteContent | null }) {
+    const product = applyDownloadOverrides(productKey, siteContent);
     const [pw, setPw] = useState('');
     const [error, setError] = useState(false);
     const [shake, setShake] = useState(false);

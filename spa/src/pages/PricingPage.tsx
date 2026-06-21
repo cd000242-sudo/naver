@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
+import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 /**
  * 요금제 — 올인원 기간제 이용권.
@@ -104,6 +105,21 @@ function getPlanCardAmount(plan: Plan, nowMs: number = Date.now()) {
     return getScheduledAmount(plan.amountCard, normalCard, nowMs);
 }
 
+function applyPlanOverrides(plans: Plan[], siteContent: SiteContent | null): Plan[] {
+    const overrides = siteContent?.pricing?.plans || {};
+    return plans.map((plan) => {
+        const patch = overrides[plan.id];
+        if (!patch) return plan;
+        return {
+            ...plan,
+            ...patch,
+            features: Array.isArray(patch.features) && patch.features.length > 0 ? patch.features : plan.features,
+            badge: plan.badge,
+            free: plan.free,
+        };
+    });
+}
+
 declare global {
     interface Window { TossPayments?: (key: string) => any; }
 }
@@ -146,6 +162,7 @@ function PricingPage() {
     const [emailShake, setEmailShake] = useState(false);
     const [paying, setPaying] = useState(false);
     const [pricingNow, setPricingNow] = useState(() => Date.now());
+    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
     const tossRef = useRef<any | null>(null);
     const [sdkReady, setSdkReady] = useState(false);
     const paymentSectionRef = useRef<HTMLDivElement | null>(null);
@@ -179,6 +196,10 @@ function PricingPage() {
                 console.error('Toss SDK init failed:', e);
             }
         })();
+    }, []);
+
+    useEffect(() => {
+        fetchSiteContent().then(setSiteContent);
     }, []);
 
     // 탭 전환 시 선택 초기화
@@ -234,6 +255,7 @@ function PricingPage() {
     })();
 
     const normalPricingActive = isNormalPricingActive(pricingNow);
+    const activePlans = applyPlanOverrides(PLANS[tab], siteContent);
 
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
@@ -288,7 +310,7 @@ function PricingPage() {
 
                 {/* Pricing grid */}
                 <div className="pricing-plan-grid">
-                    {PLANS[tab].map((p) => {
+                    {activePlans.map((p) => {
                         const isSelected = selected?.id === p.id;
                         const isFeatured = p.badge?.type === 'best';
                         const isTrial = p.free;

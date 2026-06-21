@@ -1,2418 +1,2902 @@
-﻿<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="ko">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Leaders Pro — Admin Panel</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <style>
-
         :root {
-
             --bg-primary: #0a0a0f;
-
             --bg-card: rgba(255,255,255,0.04);
-
             --bg-card-hover: rgba(255,255,255,0.07);
-
             --border: rgba(255,255,255,0.08);
-
             --gold: #c9a84c;
-
             --gold-dim: rgba(201,168,76,0.2);
-
             --text-primary: #f0f0f0;
-
             --text-secondary: rgba(255,255,255,0.55);
-
             --accent-green: #44d7b6;
-
             --accent-red: #f5576c;
-
             --accent-blue: #4facfe;
-
             --accent-purple: #a855f7;
-
             --radius: 16px;
-
             --radius-sm: 10px;
-
         }
-
-
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-
-
         body {
-
             font-family: 'Inter', -apple-system, sans-serif;
-
             background: var(--bg-primary);
-
             color: var(--text-primary);
-
             min-height: 100vh;
-
         }
-
-
 
         /* ===== LOGIN SCREEN ===== */
-
         .login-screen {
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             min-height: 100vh;
-
             background: radial-gradient(ellipse at 30% 20%, rgba(201,168,76,0.06) 0%, transparent 50%),
-
                         radial-gradient(ellipse at 70% 80%, rgba(79,172,254,0.04) 0%, transparent 50%);
-
         }
-
         .login-card {
-
             background: var(--bg-card);
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius);
-
             padding: 48px;
-
             width: 100%;
-
             max-width: 420px;
-
             backdrop-filter: blur(20px);
-
         }
-
         .login-logo {
-
             text-align: center;
-
             margin-bottom: 32px;
-
         }
-
         .login-logo img {
-
             width: 48px;
-
             height: 48px;
-
             border-radius: 50%;
-
             margin-bottom: 12px;
-
         }
-
         .login-logo h1 {
-
             font-size: 1.5rem;
-
             font-weight: 700;
-
             color: var(--gold);
-
         }
-
         .login-logo p {
-
             color: var(--text-secondary);
-
             font-size: 0.85rem;
-
             margin-top: 4px;
-
         }
-
         .form-group {
-
             margin-bottom: 20px;
-
         }
-
         .form-group label {
-
             display: block;
-
             font-size: 0.8rem;
-
             color: var(--text-secondary);
-
             margin-bottom: 8px;
-
             font-weight: 500;
-
             text-transform: uppercase;
-
             letter-spacing: 0.5px;
-
         }
-
         .form-group input {
-
             width: 100%;
-
             padding: 14px 16px;
-
             background: rgba(255,255,255,0.06);
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius-sm);
-
             color: var(--text-primary);
-
             font-size: 0.95rem;
-
             font-family: inherit;
-
             transition: all 0.3s;
-
             outline: none;
-
         }
-
         .form-group input:focus {
-
             border-color: var(--gold);
-
             box-shadow: 0 0 0 3px var(--gold-dim);
-
         }
-
         .login-btn {
-
             width: 100%;
-
             padding: 14px;
-
             background: linear-gradient(135deg, var(--gold), #b8962f);
-
             border: none;
-
             border-radius: var(--radius-sm);
-
             color: #0a0a0f;
-
             font-size: 1rem;
-
             font-weight: 700;
-
             cursor: pointer;
-
             transition: all 0.3s;
-
             font-family: inherit;
-
         }
-
         .login-btn:hover {
-
             transform: translateY(-2px);
-
             box-shadow: 0 8px 32px rgba(201,168,76,0.25);
-
         }
-
         .login-error {
-
             color: var(--accent-red);
-
             font-size: 0.85rem;
-
             text-align: center;
-
             margin-top: 16px;
-
             display: none;
-
         }
-
         .login-error.visible { display: block; }
 
-
-
         /* ===== DASHBOARD LAYOUT ===== */
-
         .dashboard { display: none; min-height: 100vh; }
-
         .dashboard.active { display: flex; }
 
-
-
         /* Sidebar */
-
         .sidebar {
-
             width: 260px;
-
             background: rgba(255,255,255,0.02);
-
             border-right: 1px solid var(--border);
-
             padding: 24px 0;
-
             display: flex;
-
             flex-direction: column;
-
             position: fixed;
-
             top: 0;
-
             left: 0;
-
             height: 100vh;
-
             z-index: 100;
-
         }
-
         .sidebar-brand {
-
             padding: 0 24px 24px;
-
             border-bottom: 1px solid var(--border);
-
             display: flex;
-
             align-items: center;
-
             gap: 12px;
-
         }
-
         .sidebar-brand img { width: 36px; height: 36px; border-radius: 50%; }
-
         .sidebar-brand h2 { font-size: 1.1rem; font-weight: 700; }
-
         .sidebar-brand span { font-size: 0.7rem; color: var(--gold); font-weight: 600; }
 
-
-
         .sidebar-nav { flex: 1; padding: 16px 12px; }
-
         .nav-item {
-
             display: flex;
-
             align-items: center;
-
             gap: 12px;
-
             padding: 12px 16px;
-
             border-radius: var(--radius-sm);
-
             cursor: pointer;
-
             color: var(--text-secondary);
-
             transition: all 0.2s;
-
             font-size: 0.9rem;
-
             font-weight: 500;
-
             margin-bottom: 4px;
-
         }
-
         .nav-item:hover { background: var(--bg-card-hover); color: var(--text-primary); }
-
         .nav-item.active { background: var(--gold-dim); color: var(--gold); }
-
         .nav-item .nav-icon { font-size: 1.2rem; width: 24px; text-align: center; }
 
-
-
         .sidebar-footer {
-
             padding: 16px 24px;
-
             border-top: 1px solid var(--border);
-
         }
-
         .logout-btn {
-
             width: 100%;
-
             padding: 10px;
-
             background: rgba(245,87,108,0.1);
-
             border: 1px solid rgba(245,87,108,0.2);
-
             border-radius: var(--radius-sm);
-
             color: var(--accent-red);
-
             cursor: pointer;
-
             font-size: 0.85rem;
-
             font-weight: 500;
-
             font-family: inherit;
-
             transition: all 0.2s;
-
         }
-
         .logout-btn:hover { background: rgba(245,87,108,0.2); }
 
-
-
         /* Main Content */
-
         .main-content {
-
             flex: 1;
-
             margin-left: 260px;
-
             padding: 32px;
-
             min-height: 100vh;
-
         }
-
         .page-header {
-
             margin-bottom: 32px;
-
         }
-
         .page-header h1 {
-
             font-size: 1.8rem;
-
             font-weight: 800;
-
             margin-bottom: 4px;
-
         }
-
         .page-header p {
-
             color: var(--text-secondary);
-
             font-size: 0.9rem;
-
         }
-
-
 
         /* Tab Panels */
-
         .tab-panel { display: none; }
-
         .tab-panel.active { display: block; }
 
-
-
         /* ===== STAT CARDS ===== */
-
         .stats-grid {
-
             display: grid;
-
             grid-template-columns: repeat(4, 1fr);
-
             gap: 20px;
-
             margin-bottom: 32px;
-
         }
-
         .stat-card {
-
             background: var(--bg-card);
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius);
-
             padding: 24px;
-
             transition: all 0.3s;
-
+            position: relative;
+            overflow: hidden;
         }
-
-        .stat-card:hover {
-
-            border-color: rgba(255,255,255,0.15);
-
-            transform: translateY(-2px);
-
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            opacity: 0.08;
+            transition: opacity 0.3s;
         }
-
+        .stat-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .stat-card:hover::before { opacity: 0.15; }
+        .stat-card.card-gold::before { background: var(--gold); }
+        .stat-card.card-green::before { background: var(--accent-green); }
+        .stat-card.card-blue::before { background: var(--accent-blue); }
+        .stat-card.card-purple::before { background: var(--accent-purple); }
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
         .stat-label {
-
             font-size: 0.75rem;
-
             color: var(--text-secondary);
-
             text-transform: uppercase;
-
             letter-spacing: 0.5px;
-
             font-weight: 600;
-
-            margin-bottom: 8px;
-
         }
-
+        .stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .stat-icon.icon-gold { background: rgba(201,168,76,0.15); color: var(--gold); }
+        .stat-icon.icon-green { background: rgba(68,215,182,0.15); color: var(--accent-green); }
+        .stat-icon.icon-blue { background: rgba(79,172,254,0.15); color: var(--accent-blue); }
+        .stat-icon.icon-purple { background: rgba(168,85,247,0.15); color: var(--accent-purple); }
         .stat-value {
-
             font-size: 2rem;
-
             font-weight: 800;
-
             line-height: 1;
-
         }
-
         .stat-value.gold { color: var(--gold); }
-
         .stat-value.green { color: var(--accent-green); }
-
         .stat-value.blue { color: var(--accent-blue); }
-
         .stat-value.purple { color: var(--accent-purple); }
-
         .stat-change {
-
             font-size: 0.75rem;
-
             margin-top: 8px;
-
             color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .stat-change.negative { color: var(--accent-red); }
+        .stat-change.neutral { color: var(--text-secondary); }
 
+        /* Platform Badges */
+        .platform-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .platform-all { background: rgba(201,168,76,0.16); color: #f5d46f; }
+        .platform-naver { background: rgba(3,199,90,0.15); color: #03c75a; }
+        .platform-blogger { background: rgba(255,152,0,0.15); color: #ff9800; }
+        .platform-tistory { background: rgba(233,84,32,0.15); color: #e95420; }
+        .platform-leword { background: rgba(168,85,247,0.15); color: #a855f7; }
+        .platform-default { background: rgba(255,255,255,0.06); color: var(--text-secondary); }
+
+        /* Sidebar System Info */
+        .sidebar-info {
+            padding: 12px 24px;
+            border-top: 1px solid var(--border);
+        }
+        .sidebar-info-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .sidebar-info-item span:last-child {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .sidebar-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            color: var(--accent-green);
+            margin-top: 8px;
+        }
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            animation: pulse-dot 2s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
         }
 
-        .stat-change.negative { color: var(--accent-red); }
-
-
+        /* Pagination */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 16px 0 8px;
+        }
+        .page-btn {
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .page-btn:hover { border-color: var(--gold); color: var(--gold); }
+        .page-btn.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
+        .page-btn:disabled { opacity: 0.3; cursor: default; }
+        .page-info {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            padding: 0 8px;
+        }
 
         /* ===== DATA TABLE ===== */
-
         .table-card {
-
             background: var(--bg-card);
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius);
-
             overflow: hidden;
-
         }
-
         .table-header {
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             padding: 20px 24px;
-
             border-bottom: 1px solid var(--border);
-
         }
-
         .table-header h3 { font-size: 1.1rem; font-weight: 700; }
-
         .table-actions { display: flex; gap: 10px; }
-
         .btn {
-
             padding: 8px 16px;
-
             border-radius: var(--radius-sm);
-
             border: 1px solid var(--border);
-
             background: var(--bg-card-hover);
-
             color: var(--text-primary);
-
             font-size: 0.8rem;
-
             font-weight: 600;
-
             cursor: pointer;
-
             font-family: inherit;
-
             transition: all 0.2s;
-
         }
-
         .btn:hover { border-color: rgba(255,255,255,0.2); }
-
         .btn-gold {
-
             background: linear-gradient(135deg, var(--gold), #b8962f);
-
             color: #0a0a0f;
-
             border: none;
-
         }
-
         .btn-gold:hover { box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
-
         .btn-red {
-
             background: rgba(245,87,108,0.15);
-
             color: var(--accent-red);
-
             border-color: rgba(245,87,108,0.2);
-
         }
-
-
 
         .data-table {
-
             width: 100%;
-
             border-collapse: collapse;
-
         }
-
         .data-table th {
-
             padding: 12px 24px;
-
             text-align: left;
-
             font-size: 0.7rem;
-
             text-transform: uppercase;
-
             letter-spacing: 0.5px;
-
             color: var(--text-secondary);
-
             font-weight: 600;
-
             background: rgba(255,255,255,0.02);
-
             border-bottom: 1px solid var(--border);
-
         }
-
         .data-table td {
-
             padding: 14px 24px;
-
             font-size: 0.85rem;
-
             border-bottom: 1px solid rgba(255,255,255,0.04);
-
         }
-
         .data-table tr:hover td {
-
             background: rgba(255,255,255,0.02);
-
         }
-
         .badge {
-
             display: inline-block;
-
             padding: 4px 10px;
-
             border-radius: 20px;
-
             font-size: 0.7rem;
-
             font-weight: 600;
-
         }
-
         .badge-active {
-
             background: rgba(68,215,182,0.15);
-
             color: var(--accent-green);
-
         }
-
         .badge-unused {
-
             background: rgba(255,255,255,0.06);
-
             color: var(--text-secondary);
-
         }
-
         .badge-expired {
-
             background: rgba(245,87,108,0.15);
-
             color: var(--accent-red);
-
         }
-
         .code-text {
-
             font-family: 'Fira Code', 'Consolas', monospace;
-
             font-size: 0.8rem;
-
             color: var(--gold);
-
             background: var(--gold-dim);
-
             padding: 3px 8px;
-
             border-radius: 4px;
-
         }
-
-
 
         /* ===== EDITOR SECTION ===== */
-
         .editor-grid {
-
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
             gap: 20px;
-
         }
-
         .editor-card {
-
             background: var(--bg-card);
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius);
-
             padding: 24px;
-
         }
-
         .editor-card h4 {
-
             font-size: 0.9rem;
-
             font-weight: 700;
-
             margin-bottom: 16px;
-
             display: flex;
-
             align-items: center;
-
             gap: 8px;
-
         }
-
         .editor-card textarea {
-
             width: 100%;
-
             min-height: 120px;
-
             background: rgba(255,255,255,0.04);
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius-sm);
-
             padding: 14px;
-
             color: var(--text-primary);
-
             font-family: inherit;
-
             font-size: 0.85rem;
-
             resize: vertical;
-
             outline: none;
-
             transition: border-color 0.3s;
-
         }
-
         .editor-card textarea:focus {
-
             border-color: var(--gold);
-
         }
-
         .editor-save-bar {
-
             margin-top: 24px;
-
             display: flex;
-
             justify-content: flex-end;
-
             gap: 12px;
-
         }
-
         .save-toast {
-
             position: fixed;
-
             bottom: 32px;
-
             right: 32px;
-
             background: var(--accent-green);
-
             color: #0a0a0f;
-
             padding: 14px 24px;
-
             border-radius: var(--radius-sm);
-
             font-weight: 700;
-
             font-size: 0.9rem;
-
             transform: translateY(100px);
-
             opacity: 0;
-
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-
             z-index: 9999;
-
         }
-
         .save-toast.visible {
-
             transform: translateY(0);
-
             opacity: 1;
-
         }
-
-
 
         /* Issue Modal */
-
         .modal-overlay {
-
             display: none;
-
             position: fixed;
-
             inset: 0;
-
             background: rgba(0,0,0,0.6);
-
             backdrop-filter: blur(8px);
-
             z-index: 1000;
-
             align-items: center;
-
             justify-content: center;
-
         }
-
         .modal-overlay.active { display: flex; }
-
         .modal {
-
             background: #141418;
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius);
-
             padding: 32px;
-
             width: 100%;
-
             max-width: 480px;
-
         }
-
         .modal h3 {
-
             font-size: 1.2rem;
-
             font-weight: 700;
-
             margin-bottom: 20px;
-
         }
-
         .modal .form-group select {
-
             width: 100%;
-
             padding: 12px 16px;
-
             background: rgba(255,255,255,0.06);
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius-sm);
-
             color: var(--text-primary);
-
             font-size: 0.9rem;
-
             font-family: inherit;
-
             outline: none;
-
         }
-
         .modal .form-group select option {
-
             background: #141418;
-
         }
-
         .modal-actions {
-
             display: flex;
-
             justify-content: flex-end;
-
             gap: 12px;
-
             margin-top: 24px;
-
         }
-
-
 
         /* Recent Orders */
-
         .orders-list { margin-top: 24px; }
-
         .order-item {
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             padding: 16px 24px;
-
             border-bottom: 1px solid rgba(255,255,255,0.04);
-
         }
-
         .order-item:hover { background: rgba(255,255,255,0.02); }
-
         .order-product { font-weight: 600; font-size: 0.9rem; }
-
         .order-email { color: var(--text-secondary); font-size: 0.8rem; }
-
         .order-amount { color: var(--gold); font-weight: 700; }
-
         .order-date { color: var(--text-secondary); font-size: 0.75rem; }
 
-
-
         /* Loading */
-
         .loading-spinner {
-
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             padding: 48px;
-
             color: var(--text-secondary);
-
         }
-
         .spinner-ring {
-
             width: 24px;
-
             height: 24px;
-
             border: 3px solid var(--border);
-
             border-top-color: var(--gold);
-
             border-radius: 50%;
-
             animation: spin 0.8s linear infinite;
-
             margin-right: 12px;
-
         }
-
         @keyframes spin { to { transform: rotate(360deg); } }
 
-
-
         /* Search */
-
         .search-input {
-
             padding: 10px 16px;
-
             background: rgba(255,255,255,0.04);
-
             border: 1px solid var(--border);
-
             border-radius: var(--radius-sm);
-
             color: var(--text-primary);
-
             font-size: 0.85rem;
-
             font-family: inherit;
-
             outline: none;
-
             width: 240px;
-
             transition: border-color 0.3s;
-
         }
-
         .search-input:focus { border-color: var(--gold); }
-
         .search-input::placeholder { color: var(--text-secondary); }
 
-
-
         /* Responsive */
-
         @media (max-width: 1024px) {
-
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
-
             .editor-grid { grid-template-columns: 1fr; }
-
         }
-
         @media (max-width: 768px) {
-
             /* Login */
-
             .login-card { padding: 32px 20px; margin: 16px; }
 
-
-
             /* Sidebar → Bottom Tab Bar */
-
             .sidebar {
-
                 width: 100%;
-
                 height: 64px;
-
                 position: fixed;
-
                 top: auto;
-
                 bottom: 0;
-
                 left: 0;
-
                 flex-direction: row;
-
                 border-right: none;
-
                 border-top: 1px solid var(--border);
-
                 padding: 0;
-
                 background: rgba(10,10,15,0.95);
-
                 backdrop-filter: blur(20px);
-
             }
-
             .sidebar-brand { display: none; }
-
             .sidebar-footer { display: none; }
-
             .sidebar-nav {
-
                 display: flex;
-
                 flex-direction: row;
-
                 width: 100%;
-
                 padding: 0;
-
                 justify-content: space-around;
-
                 align-items: center;
-
                 height: 100%;
-
             }
-
             .nav-item {
-
                 flex-direction: column;
-
                 gap: 2px;
-
                 padding: 8px 4px;
-
                 margin-bottom: 0;
-
                 font-size: 0.65rem;
-
                 min-width: 0;
-
                 flex: 1;
-
                 justify-content: center;
-
                 align-items: center;
-
                 border-radius: 0;
-
             }
-
             .nav-item .nav-icon { font-size: 1.3rem; width: auto; }
-
             .nav-item.active { background: transparent; border-top: 2px solid var(--gold); }
 
-
-
             /* Main Content */
-
             .main-content {
-
                 margin-left: 0;
-
                 padding: 16px 16px 80px;
-
                 min-height: calc(100vh - 64px);
-
             }
-
             .page-header { margin-bottom: 20px; }
-
             .page-header h1 { font-size: 1.4rem; }
-
             .page-header p { font-size: 0.8rem; }
 
-
-
             /* Stats */
-
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
-
             .stat-card { padding: 16px; }
-
             .stat-value { font-size: 1.6rem; }
 
-
-
             /* Tables */
-
             .table-card { border-radius: 12px; }
-
             .table-header {
-
                 flex-direction: column;
-
                 gap: 12px;
-
                 padding: 16px;
-
                 align-items: stretch;
-
             }
-
             .table-header h3 { font-size: 0.95rem; }
-
             .table-actions {
-
                 flex-direction: column;
-
                 gap: 8px;
-
             }
-
             .search-input { width: 100%; }
-
             .data-table { display: block; overflow-x: auto; white-space: nowrap; }
-
             .data-table th { padding: 10px 14px; font-size: 0.65rem; }
-
             .data-table td { padding: 10px 14px; font-size: 0.75rem; }
-
             .code-text { font-size: 0.65rem; padding: 2px 6px; }
 
-
-
             /* Editor */
-
             .editor-grid { grid-template-columns: 1fr; gap: 12px; }
-
             .editor-card { padding: 16px; }
-
             .editor-card textarea { min-height: 80px; font-size: 0.8rem; padding: 10px; }
-
             .editor-save-bar { margin-top: 16px; }
 
-
-
             /* Toast */
-
             .save-toast { bottom: 80px; right: 16px; left: 16px; text-align: center; font-size: 0.85rem; }
 
-
-
             /* Modal */
-
             .modal { margin: 16px; padding: 24px 20px; }
-
         }
-
-
 
         /* Small phones */
-
         @media (max-width: 380px) {
-
             .stats-grid { grid-template-columns: 1fr; }
-
             .nav-item span:not(.nav-icon) { display: none; }
-
         }
-
     </style>
-
 </head>
-
 <body>
-
     <!-- ===== LOGIN ===== -->
-
     <div class="login-screen" id="login-screen">
-
         <div class="login-card">
-
             <div class="login-logo">
-
-                <img src="logo.png" alt="Leaders Pro">
-
+                <img src="../logo.png" alt="Leaders Pro">
                 <h1>Admin Panel</h1>
-
                 <p>관리자 전용 대시보드</p>
-
             </div>
-
             <form id="login-form" onsubmit="handleLogin(event)">
-
                 <div class="form-group">
-
                     <label>아이디</label>
-
                     <input type="text" id="login-id" placeholder="관리자 아이디 입력" autocomplete="username" required>
-
                 </div>
-
                 <div class="form-group">
-
                     <label>비밀번호</label>
-
                     <input type="password" id="login-pw" placeholder="비밀번호 입력" autocomplete="current-password" required>
-
                 </div>
-
                 <button type="submit" class="login-btn">로그인</button>
-
                 <p class="login-error" id="login-error">아이디 또는 비밀번호가 올바르지 않습니다.</p>
-
             </form>
-
         </div>
-
     </div>
-
-
 
     <!-- ===== DASHBOARD ===== -->
-
     <div class="dashboard" id="dashboard">
-
         <!-- Sidebar -->
-
         <aside class="sidebar">
-
             <div class="sidebar-brand">
-
-                <img src="logo.png" alt="Leaders Pro">
-
+                <img src="../logo.png" alt="Leaders Pro">
                 <div>
-
                     <h2>Leaders Pro</h2>
-
                     <span>ADMIN</span>
-
                 </div>
-
             </div>
-
             <nav class="sidebar-nav">
-
                 <div class="nav-item active" data-tab="overview" onclick="switchTab('overview')">
-
                     <span class="nav-icon">📊</span>
-
                     <span>대시보드</span>
-
                 </div>
-
                 <div class="nav-item" data-tab="codes" onclick="switchTab('codes')">
-
                     <span class="nav-icon">🔑</span>
-
                     <span>코드 관리</span>
-
                 </div>
-
+                <div class="nav-item" data-tab="all-in-one" onclick="switchTab('all-in-one')">
+                    <span class="nav-icon">🧩</span>
+                    <span>올인원 발급</span>
+                </div>
                 <div class="nav-item" data-tab="orders" onclick="switchTab('orders')">
-
                     <span class="nav-icon">💳</span>
-
                     <span>주문 내역</span>
-
                 </div>
-
+                <div class="nav-item" data-tab="analytics" onclick="switchTab('analytics')">
+                    <span class="nav-icon">📈</span>
+                    <span>매출/방문 분석</span>
+                </div>
                 <div class="nav-item" data-tab="editor" onclick="switchTab('editor')">
-
                     <span class="nav-icon">✏️</span>
-
                     <span>사이트 편집</span>
-
                 </div>
-
-                <div class="nav-item" data-tab="bank-orders" onclick="switchTab('bank-orders')">
-
+                <div class="nav-item" data-tab="bank" onclick="switchTab('bank')">
                     <span class="nav-icon">💰</span>
-
-                    <span>계좌이체 주문</span>
-
+                    <span>계좌이체</span>
                 </div>
-
+                <div class="nav-item" data-tab="trial" onclick="switchTab('trial')">
+                    <span class="nav-icon">🎁</span>
+                    <span>체험 관리</span>
+                </div>
+                <!-- Phase 6-A scaffold: GAS actions wired in 6-B~6-E -->
+                <div class="nav-item" data-tab="reviews" onclick="switchTab('reviews')">
+                    <span class="nav-icon">📝</span>
+                    <span>후기 관리</span>
+                </div>
+                <div class="nav-item" data-tab="notices" onclick="switchTab('notices')">
+                    <span class="nav-icon">📢</span>
+                    <span>공지사항</span>
+                </div>
+                <div class="nav-item" data-tab="income" onclick="switchTab('income')">
+                    <span class="nav-icon">💰</span>
+                    <span>수익 인증</span>
+                </div>
+                <div class="nav-item" data-tab="tips" onclick="switchTab('tips')">
+                    <span class="nav-icon">💡</span>
+                    <span>활용 팁</span>
+                </div>
+                <!-- CRO-3 scaffold: 리드 관리 -->
+                <div class="nav-item" data-tab="leads" onclick="switchTab('leads')">
+                    <span class="nav-icon">📧</span>
+                    <span>리드 관리</span>
+                </div>
             </nav>
-
-            <div class="sidebar-footer">
-
-                <button class="logout-btn" onclick="handleLogout()">🚪 로그아웃</button>
-
+            <div class="sidebar-info">
+                <div class="sidebar-info-item"><span>버전</span><span>v1.2.28</span></div>
+                <div class="sidebar-info-item"><span>엔진</span><span>GAS API</span></div>
+                <div class="sidebar-info-item"><span>라이선스</span><span id="sidebar-license-count">—</span></div>
+                <div class="sidebar-status">
+                    <div class="status-dot"></div>
+                    <span>시스템 정상 운영 중</span>
+                </div>
             </div>
-
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="handleLogout()">🚪 로그아웃</button>
+            </div>
         </aside>
 
-
-
         <!-- Main Content -->
-
         <div class="main-content">
 
-
-
             <!-- TAB: Overview -->
-
             <div class="tab-panel active" id="tab-overview">
-
                 <div class="page-header">
-
                     <h1>대시보드</h1>
-
                     <p>오늘의 트래픽과 주문 현황을 한눈에 확인하세요.</p>
-
                 </div>
-
                 <div class="stats-grid">
-
-                    <div class="stat-card">
-
-                        <div class="stat-label">오늘 방문자</div>
-
+                    <div class="stat-card card-gold">
+                        <div class="stat-top">
+                            <div class="stat-label">오늘 방문자</div>
+                            <div class="stat-icon icon-gold">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            </div>
+                        </div>
                         <div class="stat-value gold" id="stat-visitors">—</div>
-
                         <div class="stat-change" id="stat-visitors-change"></div>
-
                     </div>
-
-                    <div class="stat-card">
-
-                        <div class="stat-label">오늘 주문</div>
-
+                    <div class="stat-card card-green">
+                        <div class="stat-top">
+                            <div class="stat-label">오늘 주문</div>
+                            <div class="stat-icon icon-green">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+                            </div>
+                        </div>
                         <div class="stat-value green" id="stat-orders">—</div>
-
                         <div class="stat-change" id="stat-orders-change"></div>
-
                     </div>
-
-                    <div class="stat-card">
-
-                        <div class="stat-label">총 라이선스</div>
-
+                    <div class="stat-card card-blue">
+                        <div class="stat-top">
+                            <div class="stat-label">총 라이선스</div>
+                            <div class="stat-icon icon-blue">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                            </div>
+                        </div>
                         <div class="stat-value blue" id="stat-total">—</div>
-
+                        <div class="stat-change neutral" id="stat-total-change"></div>
                     </div>
-
-                    <div class="stat-card">
-
-                        <div class="stat-label">활성 라이선스</div>
-
+                    <div class="stat-card card-purple">
+                        <div class="stat-top">
+                            <div class="stat-label">활성 라이선스</div>
+                            <div class="stat-icon icon-purple">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                        </div>
                         <div class="stat-value purple" id="stat-active">—</div>
-
+                        <div class="stat-change neutral" id="stat-active-change"></div>
                     </div>
-
                 </div>
-
-
 
                 <!-- Recent Orders -->
-
                 <div class="table-card">
-
                     <div class="table-header">
-
                         <h3>최근 활성화된 라이선스</h3>
-
                         <button class="btn" onclick="loadDashboardData()">🔄 새로고침</button>
-
                     </div>
-
                     <div id="recent-activations">
-
                         <div class="loading-spinner"><div class="spinner-ring"></div> 데이터 로딩 중...</div>
-
                     </div>
-
                 </div>
-
             </div>
-
-
 
             <!-- TAB: Codes -->
-
             <div class="tab-panel" id="tab-codes">
-
                 <div class="page-header">
-
                     <h1>코드 관리</h1>
-
                     <p>라이선스 코드를 발급, 조회, 무효화합니다.</p>
-
                 </div>
-
                 <div class="table-card">
-
                     <div class="table-header">
-
                         <h3>전체 코드 목록</h3>
-
                         <div class="table-actions">
-
                             <input class="search-input" id="code-search" placeholder="🔍 코드 검색..." oninput="filterCodes()">
-
                             <button class="btn btn-gold" onclick="openIssueModal()">➕ 코드 발급</button>
-
                             <button class="btn" onclick="loadCodes()">🔄 새로고침</button>
-
                         </div>
-
                     </div>
-
                     <div id="codes-table-body">
-
                         <div class="loading-spinner"><div class="spinner-ring"></div> 코드 목록 로딩 중...</div>
-
                     </div>
-
                 </div>
-
             </div>
 
-
+            <!-- TAB: All-in-one Code Issue -->
+            <div class="tab-panel" id="tab-all-in-one">
+                <div class="page-header">
+                    <h1>올인원 라이선스 발급</h1>
+                    <p>네이버 자동화툴, Leaders Orbit, LEWORD를 함께 여는 ALL 코드를 발급합니다.</p>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card card-green">
+                        <div class="stat-top">
+                            <div class="stat-label">Better Life Naver</div>
+                            <div class="stat-icon icon-green">N</div>
+                        </div>
+                        <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;">네이버 자동화툴 이용 가능</div>
+                    </div>
+                    <div class="stat-card card-blue">
+                        <div class="stat-top">
+                            <div class="stat-label">Leaders Orbit</div>
+                            <div class="stat-icon icon-blue">O</div>
+                        </div>
+                        <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;">블로그스팟·워드프레스 자동화 이용 가능</div>
+                    </div>
+                    <div class="stat-card card-purple">
+                        <div class="stat-top">
+                            <div class="stat-label">LEWORD</div>
+                            <div class="stat-icon icon-purple">L</div>
+                        </div>
+                        <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;">키워드 마스터 이용 가능</div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>ALL 코드 즉시 발급</h3>
+                        <div class="table-actions">
+                            <button class="btn" onclick="switchTab('codes')">코드 목록 보기</button>
+                        </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
+                        <div class="editor-card">
+                            <h4>기간 선택</h4>
+                            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;">
+                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="CUSTOM1" checked> 1일</label>
+                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="PAID30"> 30일</label>
+                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="CUSTOM90"> 90일</label>
+                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="CUSTOM365"> 365일</label>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h4>발급 옵션</h4>
+                            <div style="display:grid;gap:12px;">
+                                <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:700;">직접 일수</label>
+                                <input id="allinone-days" type="number" min="1" max="3650" value="1" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                                <label style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);font-size:0.86rem;"><input type="checkbox" id="allinone-unlimited"> 무제한 코드로 발급</label>
+                            </div>
+                        </div>
+                        <div class="editor-card">
+                            <h4>수량 및 프리픽스</h4>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                                <div>
+                                    <label style="display:block;font-size:0.78rem;color:var(--text-secondary);font-weight:700;margin-bottom:8px;">발급 수량</label>
+                                    <input id="allinone-count" type="number" min="1" max="500" value="10" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                                </div>
+                                <div>
+                                    <label style="display:block;font-size:0.78rem;color:var(--text-secondary);font-weight:700;margin-bottom:8px;">프리픽스</label>
+                                    <input id="allinone-prefix" type="text" value="ALL" placeholder="ALL" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:18px;padding:14px 16px;border:1px solid rgba(201,168,76,0.22);background:rgba(201,168,76,0.08);border-radius:12px;color:var(--text-secondary);font-size:0.86rem;line-height:1.7;">
+                        올인원 구매자는 이 탭에서 발급한 <strong style="color:var(--gold);">ALL 플랫폼 코드</strong>를 받아야 합니다. 개별 제품 영구제 코드는 별도 문의 건에서만 발급하세요.
+                    </div>
+                    <div class="editor-save-bar" style="margin-top:18px;">
+                        <button class="btn" onclick="resetAllInOneForm()">↩️ 초기화</button>
+                        <button class="btn btn-gold" onclick="issueAllInOneCode(this)">🧩 올인원 코드 발급</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- TAB: Orders -->
-
             <div class="tab-panel" id="tab-orders">
-
                 <div class="page-header">
-
                     <h1>주문 내역</h1>
-
                     <p>결제 완료된 주문과 활성화된 라이선스 내역입니다.</p>
-
                 </div>
-
                 <div class="table-card">
-
                     <div class="table-header">
-
                         <h3>활성화된 주문 목록</h3>
-
                         <button class="btn" onclick="loadCodes()">🔄 새로고침</button>
-
                     </div>
-
                     <div id="orders-table-body">
-
                         <div class="loading-spinner"><div class="spinner-ring"></div> 주문 내역 로딩 중...</div>
-
                     </div>
-
                 </div>
-
             </div>
 
-
+            <!-- TAB: Analytics -->
+            <div class="tab-panel" id="tab-analytics">
+                <div class="page-header">
+                    <h1>매출/방문 분석</h1>
+                    <p>Toss 결제, 계좌이체, 방문 로그를 합쳐 오늘과 이번 달 흐름을 확인합니다.</p>
+                </div>
+                <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;">
+                    <button class="btn btn-gold" id="analytics-period-today" onclick="loadAnalyticsDashboard('today')">오늘</button>
+                    <button class="btn" id="analytics-period-month" onclick="loadAnalyticsDashboard('month')">이번 달</button>
+                    <button class="btn" onclick="setInternalAnalytics(true)">내 방문 제외 켜기</button>
+                    <button class="btn" onclick="setInternalAnalytics(false)">내 방문 제외 끄기</button>
+                    <button class="btn" onclick="loadAnalyticsDashboard(currentAnalyticsPeriod)" style="margin-left:auto;">🔄 새로고침</button>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card card-gold">
+                        <div class="stat-top"><div class="stat-label">매출</div><div class="stat-icon icon-gold">₩</div></div>
+                        <div class="stat-value gold" id="analytics-revenue">—</div>
+                        <div class="stat-change neutral" id="analytics-revenue-meta">기간 합계</div>
+                    </div>
+                    <div class="stat-card card-green">
+                        <div class="stat-top"><div class="stat-label">주문</div><div class="stat-icon icon-green">#</div></div>
+                        <div class="stat-value green" id="analytics-orders">—</div>
+                        <div class="stat-change neutral" id="analytics-orders-meta">결제/계좌이체 포함</div>
+                    </div>
+                    <div class="stat-card card-blue">
+                        <div class="stat-top"><div class="stat-label">순 방문자</div><div class="stat-icon icon-blue">👤</div></div>
+                        <div class="stat-value blue" id="analytics-visitors">—</div>
+                        <div class="stat-change neutral" id="analytics-visitors-meta">내부 방문 제외</div>
+                    </div>
+                    <div class="stat-card card-purple">
+                        <div class="stat-top"><div class="stat-label">페이지뷰</div><div class="stat-icon icon-purple">↗</div></div>
+                        <div class="stat-value purple" id="analytics-pageviews">—</div>
+                        <div class="stat-change neutral" id="analytics-pageviews-meta">중복 포함</div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>최근 주문/결제</h3>
+                        <span id="analytics-updated" style="font-size:0.78rem;color:var(--text-secondary);">—</span>
+                    </div>
+                    <div id="analytics-table-body">
+                        <div class="loading-spinner"><div class="spinner-ring"></div> 분석 데이터 로딩 중...</div>
+                    </div>
+                </div>
+            </div>
 
             <!-- TAB: Editor -->
-
             <div class="tab-panel" id="tab-editor">
-
                 <div class="page-header">
-
                     <h1>사이트 편집</h1>
-
-                    <p>메인 결제 페이지의 핵심 콘텐츠를 수정합니다.</p>
-
+                    <p>메인 문구, 제품 상세, 요금제, 다운로드 링크를 저장하면 실제 사이트가 같은 데이터를 읽습니다.</p>
                 </div>
-
                 <div class="editor-grid">
-
                     <div class="editor-card">
-
                         <h4>✨ Hero 제목</h4>
-
                         <textarea id="edit-hero-title" placeholder="블로그 자동화의 새로운 기준">블로그 자동화의 새로운 기준</textarea>
-
                     </div>
-
                     <div class="editor-card">
-
                         <h4>📝 Hero 설명</h4>
-
                         <textarea id="edit-hero-desc" placeholder="AI가 글을 쓰고...">키워드 하나면 끝. AI가 글을 쓰고, 이미지를 만들고, 블로그에 올립니다.</textarea>
-
                     </div>
-
                     <div class="editor-card">
-
                         <h4>🔥 Hero 혜택 카피</h4>
-
                         <textarea id="edit-hero-benefit" placeholder="매일 100건, 사람이 쓴 것처럼">매일 100건, 사람이 쓴 것처럼</textarea>
-
                     </div>
-
                     <div class="editor-card">
-
                         <h4>📢 공지사항</h4>
-
                         <textarea id="edit-notice" placeholder="공지사항이 없습니다."></textarea>
-
                     </div>
-
+                    <div class="editor-card" style="grid-column: 1 / -1;">
+                        <h4>💳 요금제 금액</h4>
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:16px;">카드 금액은 VAT 포함 금액입니다. 빈 값은 기존 사이트 기본값을 유지합니다.</p>
+                        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;">
+                            <input id="plan-monthly-amount" type="number" min="0" placeholder="1개월 계좌이체 50000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-monthly-card" type="number" min="0" placeholder="1개월 카드 55000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-quarterly-amount" type="number" min="0" placeholder="3개월 120000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-yearly-amount" type="number" min="0" placeholder="1년 400000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-lifetime-amount" type="number" min="0" placeholder="영구제 1650000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-monthly-future" type="number" min="0" placeholder="1개월 정상가 100000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-quarterly-future" type="number" min="0" placeholder="3개월 정상가 240000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                            <input id="plan-yearly-future" type="number" min="0" placeholder="1년 정상가 800000" style="padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
+                        </div>
+                    </div>
+                    <div class="editor-card" style="grid-column: 1 / -1;">
+                        <h4>📥 제품별 다운로드 URL</h4>
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:16px;">각 제품의 다운로드 버튼과 무료 체험 버튼이 해당 URL로 연결됩니다.<br>Google Drive, GitHub Releases 등의 직접 다운로드 링크를 입력하세요.</p>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                            <div>
+                                <label style="display:block;font-size:0.75rem;color:var(--gold);font-weight:600;margin-bottom:6px;">🟢 Better Life Naver</label>
+                                <input type="url" id="edit-dl-naver" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            </div>
+                            <div>
+                                <label style="display:block;font-size:0.75rem;color:#4fc3f7;font-weight:600;margin-bottom:6px;">🔵 Leaders Orbit (블로거/WP)</label>
+                                <input type="url" id="edit-dl-orbit" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            </div>
+                            <div>
+                                <label style="display:block;font-size:0.75rem;color:#ff9800;font-weight:600;margin-bottom:6px;">🟠 Leaders Tistory</label>
+                                <input type="url" id="edit-dl-tistory" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            </div>
+                            <div>
+                                <label style="display:block;font-size:0.75rem;color:#a78bfa;font-weight:600;margin-bottom:6px;">🟣 Leword</label>
+                                <input type="url" id="edit-dl-leword" placeholder="https://drive.google.com/..." style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--border)'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="editor-card" style="grid-column: 1 / -1;">
+                        <h4>🧩 제품 상세 JSON</h4>
+                        <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px;">제품별 이름, 상세 문구, 버튼, 불릿을 수정합니다. 예: {"naver":{"headline":"새 문구","bullets":["항목1","항목2"]}}</p>
+                        <textarea id="edit-products-json" spellcheck="false" style="min-height:180px;font-family:Consolas,monospace;" placeholder='{"naver":{"headline":"키워드 하나로 끝","bullets":["자동 글쓰기","자동 발행"]}}'></textarea>
+                    </div>
                 </div>
-
                 <div class="editor-save-bar">
-
+                    <button class="btn" onclick="loadEditorContent()">🔄 서버에서 불러오기</button>
                     <button class="btn" onclick="resetEditorContent()">↩️ 초기화</button>
-
-                    <button class="btn btn-gold" onclick="saveEditorContent()">💾 저장하기</button>
-
+                    <button class="btn btn-gold" onclick="saveEditorContent()">💾 서버에 저장하기</button>
                 </div>
+            </div>
 
+            <!-- TAB: Trial Management -->
+            <div class="tab-panel" id="tab-trial">
+                <div class="page-header">
+                    <h1>체험 사용자 관리</h1>
+                    <p>무료 체험 사용자 목록을 조회하고 차단/해제할 수 있습니다.</p>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card card-purple">
+                        <div class="stat-top">
+                            <div class="stat-label">전체 체험 사용자</div>
+                            <div class="stat-icon icon-purple">🎁</div>
+                        </div>
+                        <div class="stat-value purple" id="trial-stat-total">—</div>
+                    </div>
+                    <div class="stat-card card-green">
+                        <div class="stat-top">
+                            <div class="stat-label">활성 사용자</div>
+                            <div class="stat-icon icon-green">✅</div>
+                        </div>
+                        <div class="stat-value green" id="trial-stat-active">—</div>
+                    </div>
+                    <div class="stat-card" style="border-left: 3px solid #ef4444;">
+                        <div class="stat-top">
+                            <div class="stat-label">차단된 사용자</div>
+                            <div class="stat-icon" style="background:rgba(239,68,68,0.1);color:#ef4444;">🚫</div>
+                        </div>
+                        <div class="stat-value" style="color:#ef4444;" id="trial-stat-blocked">—</div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>체험 사용자 목록</h3>
+                        <div class="table-actions">
+                            <input class="search-input" id="trial-search" placeholder="🔍 이메일/닉네임 검색..." oninput="filterTrialUsers()">
+                            <button class="btn" onclick="loadTrialUsers()">🔄 새로고침</button>
+                        </div>
+                    </div>
+                    <div id="trial-table-body">
+                        <div class="loading-spinner"><div class="spinner-ring"></div> 체험 사용자 로딩 중...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: Bank Transfer Management -->
+            <div class="tab-panel" id="tab-bank">
+                <div class="page-header">
+                    <h1>계좌이체 관리</h1>
+                    <p>계좌이체 주문을 확인하고 승인/거절할 수 있습니다.</p>
+                </div>
+                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card" style="border-left: 3px solid #f59e0b;">
+                        <div class="stat-top">
+                            <div class="stat-label">대기 중</div>
+                            <div class="stat-icon" style="background:rgba(245,158,11,0.1);color:#f59e0b;">⏳</div>
+                        </div>
+                        <div class="stat-value" style="color:#f59e0b;" id="bank-stat-pending">—</div>
+                    </div>
+                    <div class="stat-card card-green">
+                        <div class="stat-top">
+                            <div class="stat-label">승인 완료</div>
+                            <div class="stat-icon icon-green">✅</div>
+                        </div>
+                        <div class="stat-value green" id="bank-stat-approved">—</div>
+                    </div>
+                    <div class="stat-card" style="border-left: 3px solid #ef4444;">
+                        <div class="stat-top">
+                            <div class="stat-label">거절됨</div>
+                            <div class="stat-icon" style="background:rgba(239,68,68,0.1);color:#ef4444;">❌</div>
+                        </div>
+                        <div class="stat-value" style="color:#ef4444;" id="bank-stat-rejected">—</div>
+                    </div>
+                </div>
+                <div class="table-card">
+                    <div class="table-header">
+                        <h3>계좌이체 주문 목록</h3>
+                        <div class="table-actions">
+                            <select id="bank-status-filter" onchange="filterBankOrders()" style="padding:8px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-size:0.8rem;cursor:pointer;">
+                                <option value="all">전체</option>
+                                <option value="pending" selected>대기 중</option>
+                                <option value="approved">승인됨</option>
+                                <option value="rejected">거절됨</option>
+                            </select>
+                            <input class="search-input" id="bank-search" placeholder="🔍 이름/이메일 검색..." oninput="filterBankOrders()">
+                            <button class="btn" onclick="loadBankOrders()">🔄 새로고침</button>
+                        </div>
+                    </div>
+                    <div id="bank-table-body">
+                        <div class="loading-spinner"><div class="spinner-ring"></div> 계좌이체 주문 로딩 중...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB: Reviews (Phase 6-D) -->
+            <div class="tab-panel" id="tab-reviews">
+                <div class="page-header">
+                    <h1>후기 관리</h1>
+                    <p>구매자 후기 승인·거절·수정. <strong>pending</strong>은 reviews.html에 노출 안 됨. <strong>approved</strong>만 공개.</p>
+                </div>
+                <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">하드코딩 sample 후기 3건 가져오기 →</span>
+                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                    <button class="btn" onclick="loadReviewsAdmin('all')" id="rv-filter-all">전체</button>
+                    <button class="btn" onclick="loadReviewsAdmin('pending')" id="rv-filter-pending">⏳ 대기</button>
+                    <button class="btn" onclick="loadReviewsAdmin('approved')" id="rv-filter-approved">✅ 승인</button>
+                    <button class="btn" onclick="loadReviewsAdmin('rejected')" id="rv-filter-rejected">🚫 거절</button>
+                    <button class="btn" onclick="loadReviewsAdmin(currentReviewFilter)" style="margin-left: auto;">🔄 새로고침</button>
+                </div>
+                <div id="reviews-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 후기 목록 로딩 중...</div>
+                </div>
+            </div>
+
+            <!-- TAB: Notices (Phase 6-B) -->
+            <div class="tab-panel" id="tab-notices">
+                <div class="page-header">
+                    <h1>공지사항</h1>
+                    <p>커뮤니티 공지 등록·수정·삭제. 변경사항은 community.html 공지 탭에 즉시 반영됩니다.</p>
+                </div>
+                <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">처음이라면 기존 하드코딩 데이터(공지·수익·팁·후기 16건)를 시트로 가져오세요 →</span>
+                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
+                </div>
+                <div class="form-card" style="padding: 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; margin-bottom: 24px;">
+                    <h3 id="notice-form-title" style="margin-bottom: 16px; font-size: 1.05rem;">📝 새 공지 작성</h3>
+                    <input type="hidden" id="notice-edit-id" value="">
+                    <div style="display: grid; grid-template-columns: 140px 160px 1fr; gap: 12px; margin-bottom: 10px;">
+                        <select id="notice-badge" style="padding: 10px; border-radius: 8px;">
+                            <option value="important">중요</option>
+                            <option value="update" selected>업데이트</option>
+                            <option value="event">이벤트</option>
+                            <option value="tip">안내</option>
+                        </select>
+                        <input type="text" id="notice-date" placeholder="2026.05.23" style="padding: 10px; border-radius: 8px;">
+                        <input type="text" id="notice-title" placeholder="제목 (필수, 200자 이내)" style="padding: 10px; border-radius: 8px;">
+                    </div>
+                    <input type="text" id="notice-preview" placeholder="미리보기 — 한 줄 요약 (300자 이내)" style="width: 100%; padding: 10px; border-radius: 8px; margin-bottom: 8px;">
+                    <textarea id="notice-body" placeholder="본문 (필수, HTML 태그 일부 허용 — <p>, <ul>, <li>, <strong>, <a>)" rows="6" style="width: 100%; padding: 10px; border-radius: 8px; font-family: inherit; margin-bottom: 12px;"></textarea>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn btn-gold" onclick="submitNotice()">💾 저장</button>
+                        <button class="btn" onclick="resetNoticeForm()">↩️ 초기화</button>
+                        <button class="btn" onclick="loadNotices()" style="margin-left: auto;">🔄 새로고침</button>
+                    </div>
+                </div>
+                <h3 style="margin: 24px 0 12px; font-size: 1rem; color: var(--text-primary); border-bottom: 1px solid var(--border-glass); padding-bottom: 8px;">📋 기존 공지 목록</h3>
+                <div id="notices-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>
+                </div>
+            </div>
+
+            <!-- TAB: Income (Phase 6-C v2) -->
+            <div class="tab-panel" id="tab-income">
+                <div class="page-header">
+                    <h1>수익 인증</h1>
+                    <p>구매자가 community.html에서 제출한 수익 인증을 승인·거절·수정·삭제합니다. <strong>pending</strong>은 community에 노출 안 됨.</p>
+                </div>
+                <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">하드코딩 sample 4건 가져오기 →</span>
+                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                    <button class="btn" onclick="loadIncomeAdmin('all')" id="ic-filter-all">전체</button>
+                    <button class="btn" onclick="loadIncomeAdmin('pending')" id="ic-filter-pending">⏳ 대기</button>
+                    <button class="btn" onclick="loadIncomeAdmin('approved')" id="ic-filter-approved">✅ 승인</button>
+                    <button class="btn" onclick="loadIncomeAdmin('rejected')" id="ic-filter-rejected">🚫 거절</button>
+                    <button class="btn" onclick="loadIncomeAdmin(currentIncomeFilter)" style="margin-left: auto;">🔄 새로고침</button>
+                </div>
+                <div id="income-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>
+                </div>
+            </div>
+
+            <!-- TAB: Tips (Phase 6-E) -->
+            <div class="tab-panel" id="tab-tips">
+                <div class="page-header">
+                    <h1>활용 팁</h1>
+                    <p>구매자 활용 팁 승인·거절·수정. <strong>pending</strong>은 community에 노출 안 됨. <strong>approved</strong>만 공개.</p>
+                </div>
+                <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);">하드코딩 sample 6건 가져오기 →</span>
+                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                    <button class="btn" onclick="loadTipsAdmin('all')" id="tp-filter-all">전체</button>
+                    <button class="btn" onclick="loadTipsAdmin('pending')" id="tp-filter-pending">⏳ 대기</button>
+                    <button class="btn" onclick="loadTipsAdmin('approved')" id="tp-filter-approved">✅ 승인</button>
+                    <button class="btn" onclick="loadTipsAdmin('rejected')" id="tp-filter-rejected">🚫 거절</button>
+                    <button class="btn" onclick="loadTipsAdmin(currentTipFilter)" style="margin-left: auto;">🔄 새로고침</button>
+                </div>
+                <div id="tips-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 팁 목록 로딩 중...</div>
+                </div>
+            </div>
+
+            <!-- TAB: Leads (CRO-3 — 이메일 리드 캡쳐) -->
+            <div class="tab-panel" id="tab-leads">
+                <div class="page-header">
+                    <h1>리드 관리 (이메일 캡쳐)</h1>
+                    <p>다운로드 페이지·기타 form에서 수집된 이메일 목록. CSV로 export 후 메일 발송 도구(Stibee/Mailchimp 등)에 import해 활용하세요.</p>
+                </div>
+                <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <span id="leads-count" style="display: inline-flex; align-items: center; padding: 8px 14px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); border-radius: 8px; font-size: 0.88rem; color: var(--gold-primary, #c9a84c); font-weight: 600;">총 0건</span>
+                    <button class="btn btn-gold" onclick="exportLeadsCsv()">📥 CSV 다운로드</button>
+                    <button class="btn" onclick="loadLeadsAdmin()" style="margin-left: auto;">🔄 새로고침</button>
+                </div>
+                <div id="leads-table-body">
+                    <div class="loading-spinner"><div class="spinner-ring"></div> 리드 목록 로딩 중...</div>
+                </div>
             </div>
 
         </div>
-
     </div>
-
-
 
     <!-- Issue Modal -->
-
     <div class="modal-overlay" id="issue-modal">
-
         <div class="modal">
-
             <h3>🔑 새 코드 발급</h3>
-
             <div class="form-group">
-
                 <label>플랫폼</label>
-
                 <select id="issue-platform">
-
                     <option value="ALL">Leaders Pro 올인원</option>
-
                     <option value="NAVER">Leaders Pro (네이버 블로그)</option>
-
                     <option value="BLOGGER">Leaders Orbit (워드프레스/블로그스팟)</option>
-
                     <option value="TISTORY">Leaders Tistory</option>
-
                     <option value="LEWORD">Leword</option>
-
                 </select>
-
             </div>
-
             <div class="form-group">
-
                 <label>유형</label>
-
                 <select id="issue-type">
-
                     <option value="MONTH1">1개월</option>
-
                     <option value="MONTH3">3개월</option>
-
                     <option value="YEAR1">1년</option>
-
                     <option value="LIFE">영구제</option>
-
                     <option value="TRIAL7">7일 체험</option>
-
                 </select>
-
             </div>
-
             <div class="form-group">
-
                 <label>발급 수량</label>
-
                 <input type="number" id="issue-count" value="1" min="1" max="50">
-
             </div>
-
             <div class="modal-actions">
-
                 <button class="btn" onclick="closeIssueModal()">취소</button>
-
                 <button class="btn btn-gold" onclick="issueCode()">발급하기</button>
-
             </div>
-
         </div>
-
     </div>
 
-
-
     <!-- Save Toast -->
-
     <div class="save-toast" id="save-toast">✅ 저장되었습니다!</div>
 
-
-
     <script>
-
         // ===== CONFIG =====
-
         // Auth: SHA-256 hashed credentials (never store plaintext)
-
         const ADMIN_ID_HASH = '340ecd3d8edb927ef26c6d0703fabd15612b7d8a5be2241719b619975836d5e7'; // hashed
-
         const ADMIN_PW_HASH = '39cc994b55f33b94f5b8f2d99507b40e155792b1d1e9cb0595a22c30b0e9e7c5'; // hashed
-
         const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-
         const ADMIN_TOKEN = 'qkrtjdgus2021645';
 
-
-
         let allCodes = [];
-
-
+        let codesPage = 1;
+        let ordersPage = 1;
+        let currentAnalyticsPeriod = 'today';
+        const PAGE_SIZE = 20;
 
         // ===== SHA-256 HASH UTILITY =====
-
         async function sha256(message) {
-
             const msgBuffer = new TextEncoder().encode(message);
-
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-
             const hashArray = Array.from(new Uint8Array(hashBuffer));
-
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
         }
-
-
 
         // ===== LOGIN =====
-
         async function handleLogin(e) {
-
             e.preventDefault();
-
             const id = document.getElementById('login-id').value.trim();
-
             const pw = document.getElementById('login-pw').value.trim();
 
-
-
             const idHash = await sha256(id);
-
             const pwHash = await sha256(pw);
 
-
-
             if (idHash === ADMIN_ID_HASH && pwHash === ADMIN_PW_HASH) {
-
                 sessionStorage.setItem('admin_auth', '1');
-
                 document.getElementById('login-screen').style.display = 'none';
-
                 document.getElementById('dashboard').classList.add('active');
-
                 loadDashboardData();
-
             } else {
-
                 document.getElementById('login-error').classList.add('visible');
-
                 setTimeout(() => document.getElementById('login-error').classList.remove('visible'), 3000);
-
             }
-
         }
-
-
 
         function handleLogout() {
-
             sessionStorage.removeItem('admin_auth');
-
             location.reload();
-
         }
-
-
 
         // Auto-login check
-
         if (sessionStorage.getItem('admin_auth') === '1') {
-
             document.getElementById('login-screen').style.display = 'none';
-
             document.getElementById('dashboard').classList.add('active');
-
             setTimeout(() => loadDashboardData(), 100);
-
         }
-
-
 
         // ===== TAB SWITCHING =====
-
         function switchTab(tabId) {
-
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
             document.querySelector(`.nav-item[data-tab="${tabId}"]`).classList.add('active');
-
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-
             document.getElementById(`tab-${tabId}`).classList.add('active');
 
-
-
             // Update page header context
-
             const headers = {
-
                 overview: { title: '대시보드', desc: '오늘의 트래픽과 주문 현황을 한눈에 확인하세요.' },
-
                 codes: { title: '코드 관리', desc: '라이선스 코드를 발급, 조회, 무효화합니다.' },
-
+                'all-in-one': { title: '올인원 발급', desc: '구매자에게 지급할 ALL 라이선스 코드를 발급합니다.' },
                 orders: { title: '주문 내역', desc: '결제 완료된 주문과 활성화된 라이선스 내역입니다.' },
-
-                editor: { title: '사이트 편집', desc: '메인 결제 페이지의 핵심 콘텐츠를 수정합니다.' }
-
+                analytics: { title: '매출/방문 분석', desc: 'Toss 결제, 계좌이체, 방문 로그를 기간별로 확인합니다.' },
+                editor: { title: '사이트 편집', desc: '메인 문구, 제품 상세, 요금제, 다운로드 링크를 직접 수정합니다.' },
+                bank: { title: '계좌이체 관리', desc: '계좌이체 주문을 확인하고 승인/거절합니다.' },
+                trial: { title: '체험 관리', desc: '무료 체험 사용자 목록을 조회하고 관리합니다.' },
+                reviews: { title: '후기 관리', desc: '구매자 후기 승인·거절 (Phase 6-D에서 활성화).' },
+                notices: { title: '공지사항', desc: '커뮤니티 공지 등록·수정·삭제 (Phase 6-B에서 활성화).' },
+                income: { title: '수익 인증', desc: '커뮤니티 수익 인증 카드 관리 (Phase 6-C에서 활성화).' },
+                tips: { title: '활용 팁', desc: '구매자 활용 팁 승인·거절 (Phase 6-E에서 활성화).' },
+                leads: { title: '리드 관리', desc: '이메일 리드 캡쳐 (CRO-3에서 활성화).' }
             };
 
+            // Load data for the tab
+            if (tabId === 'trial') loadTrialUsers();
+            if (tabId === 'bank') loadBankOrders();
+            if (tabId === 'codes') loadCodes();
+            if (tabId === 'notices') loadNotices();
+            if (tabId === 'income') loadIncomeAdmin(currentIncomeFilter);
+            if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
+            if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
+            if (tabId === 'leads') loadLeadsAdmin();
+            if (tabId === 'analytics') loadAnalyticsDashboard(currentAnalyticsPeriod);
+            if (tabId === 'editor') loadEditorContent();
         }
 
+        // ===== PHASE 6-F: SEED DEFAULTS (idempotent — 시트 비어있을 때만 import) =====
+        async function seedDefaults() {
+            if (!confirm('하드코딩된 기본 데이터(공지 3 + 수익 4 + 팁 6 + 후기 3 = 16건)를 시트로 가져옵니다.\n이미 데이터가 있는 카테고리는 건너뜁니다.\n진행할까요?')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'seed-defaults', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                const r = res.report || {};
+                const skipMsg = (r.skipped && r.skipped.length) ? ` (이미 있음: ${r.skipped.join(', ')})` : '';
+                showToast(`✅ 가져오기 완료 — 공지 ${r.notices||0} / 수익 ${r.income||0} / 팁 ${r.tips||0} / 후기 ${r.reviews||0}${skipMsg}`);
+                // 현재 탭 자동 리로드
+                const activeTab = document.querySelector('.nav-item.active')?.dataset.tab;
+                if (activeTab === 'notices') loadNotices();
+                else if (activeTab === 'income') loadIncomeAdmin(currentIncomeFilter);
+                else if (activeTab === 'tips') loadTipsAdmin(currentTipFilter);
+                else if (activeTab === 'reviews') loadReviewsAdmin(currentReviewFilter);
+            } catch (err) {
+                showToast('❌ 가져오기 실패: ' + err.message);
+            }
+        }
 
+        // ===== PHASE 6-B: NOTICES =====
+        const NOTICE_BADGE_LABEL = { important: '중요', update: '업데이트', event: '이벤트', tip: '안내' };
+        function escapeHtml_(s) {
+            return String(s == null ? '' : s).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+        }
+        async function loadNotices() {
+            const container = document.getElementById('notices-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>';
+            try {
+                const res = await fetch(`${GAS_URL}?action=get-notices`).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                const list = res.notices || [];
+                if (list.length === 0) {
+                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary);">등록된 공지가 없습니다. 위 폼에서 새 공지를 작성하세요.</div>';
+                    return;
+                }
+                container.innerHTML = list.map(n => `
+                    <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px;">
+                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
+                            <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: rgba(201,168,76,0.15); color: var(--gold-primary, #c9a84c);">${escapeHtml_(NOTICE_BADGE_LABEL[n.badge] || n.badge)}</span>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml_(n.date)}</span>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(n.id)}</span>
+                        </div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(n.title)}</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">${escapeHtml_(n.preview)}</div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn" onclick='editNoticeFromBtn(${JSON.stringify(n).replace(/'/g, "&#39;")})'>✏️ 수정</button>
+                            <button class="btn" onclick='deleteNotice("${escapeHtml_(n.id)}")'>🗑️ 삭제</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요 시 사용자에게 안내.</small></div>`;
+            }
+        }
+        function resetNoticeForm() {
+            document.getElementById('notice-form-title').textContent = '📝 새 공지 작성';
+            document.getElementById('notice-edit-id').value = '';
+            document.getElementById('notice-badge').value = 'update';
+            document.getElementById('notice-date').value = new Date().toISOString().slice(0, 10).replace(/-/g, '.');
+            document.getElementById('notice-title').value = '';
+            document.getElementById('notice-preview').value = '';
+            document.getElementById('notice-body').value = '';
+        }
+        function editNoticeFromBtn(n) {
+            document.getElementById('notice-form-title').textContent = '✏️ 공지 수정 — ' + n.id;
+            document.getElementById('notice-edit-id').value = n.id;
+            document.getElementById('notice-badge').value = n.badge;
+            document.getElementById('notice-date').value = n.date;
+            document.getElementById('notice-title').value = n.title;
+            document.getElementById('notice-preview').value = n.preview;
+            document.getElementById('notice-body').value = n.body;
+            document.getElementById('tab-notices').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        async function submitNotice() {
+            const id = document.getElementById('notice-edit-id').value;
+            const body = {
+                action: id ? 'update-notice' : 'submit-notice',
+                adminToken: ADMIN_TOKEN,
+                badge: document.getElementById('notice-badge').value,
+                date: document.getElementById('notice-date').value.trim(),
+                title: document.getElementById('notice-title').value.trim(),
+                preview: document.getElementById('notice-preview').value.trim(),
+                body: document.getElementById('notice-body').value.trim(),
+            };
+            if (id) body.id = id;
+            if (!body.title || !body.body) { showToast('❌ 제목과 본문은 필수입니다'); return; }
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(body),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast(id ? '✅ 수정되었습니다' : '✅ 공지 등록 완료');
+                resetNoticeForm();
+                loadNotices();
+            } catch (err) {
+                showToast('❌ 저장 실패: ' + err.message);
+            }
+        }
+        async function deleteNotice(id) {
+            if (!confirm('이 공지를 삭제하시겠습니까?\n(soft delete — 시트에는 hidden=true로 표시되어 복구 가능)')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'delete-notice', adminToken: ADMIN_TOKEN, id: id }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 삭제 완료');
+                loadNotices();
+            } catch (err) {
+                showToast('❌ 삭제 실패: ' + err.message);
+            }
+        }
+
+        // ===== PHASE 6-C v2: INCOME ADMIN (approve/reject/edit/delete) =====
+        let currentIncomeFilter = 'pending';
+        async function loadIncomeAdmin(filter) {
+            currentIncomeFilter = filter || 'pending';
+            const container = document.getElementById('income-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'get-income-admin', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                const all = res.income || [];
+                const list = currentIncomeFilter === 'all' ? all : all.filter(n => n.status === currentIncomeFilter);
+                ['all','pending','approved','rejected'].forEach(k => {
+                    const b = document.getElementById('ic-filter-' + k);
+                    if (b) b.style.background = (k === currentIncomeFilter) ? 'rgba(201,168,76,0.2)' : '';
+                });
+                if (list.length === 0) {
+                    container.innerHTML = `<div style="padding: 32px; text-align: center; color: var(--text-secondary);">${currentIncomeFilter === 'all' ? '등록된 수익 인증이 없습니다.' : currentIncomeFilter + ' 상태가 없습니다.'}</div>`;
+                    return;
+                }
+                container.innerHTML = list.map(n => `
+                    <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px; display: flex; gap: 16px; align-items: flex-start;">
+                        <div style="font-size: 2.4rem; flex-shrink: 0;">${escapeHtml_(n.emoji)}</div>
+                        <div style="flex: 1; min-width: 0;">
+                            <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 4px; flex-wrap: wrap;">
+                                <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: ${REVIEW_STATUS_COLOR[n.status]}22; color: ${REVIEW_STATUS_COLOR[n.status]};">${REVIEW_STATUS_LABEL[n.status] || n.status}</span>
+                                <strong style="color: var(--gold-primary, #c9a84c);">${escapeHtml_(n.amount)}</strong>
+                                <span style="color: var(--text-secondary); font-size: 0.85rem;">${escapeHtml_(n.author)}</span>
+                                ${n.email ? `<span style="color: var(--text-muted); font-size: 0.78rem;">${escapeHtml_(n.email)}</span>` : ''}
+                                <span style="color: var(--text-muted); font-size: 0.8rem;">${escapeHtml_(n.date)}</span>
+                                <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(n.id)}</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; white-space: pre-wrap;">${escapeHtml_(n.desc)}</div>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px;">${(n.tags || []).map(t => `<span style="padding: 2px 8px; border-radius: 10px; background: rgba(201,168,76,0.1); font-size: 0.72rem; color: var(--gold-primary, #c9a84c);">${escapeHtml_(t)}</span>`).join('')}</div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                ${n.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveIncome("${escapeHtml_(n.id)}")'>✅ 승인</button>` : ''}
+                                ${n.status !== 'rejected' ? `<button class="btn" onclick='rejectIncome("${escapeHtml_(n.id)}")'>🚫 거절</button>` : ''}
+                                <button class="btn" onclick='editIncomeFromBtn(${JSON.stringify(n).replace(/'/g, "&#39;")})'>✏️ 수정</button>
+                                <button class="btn" onclick='deleteIncome("${escapeHtml_(n.id)}")'>🗑️ 삭제</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요.</small></div>`;
+            }
+        }
+        async function approveIncome(id) {
+            try {
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'income-approve', adminToken: ADMIN_TOKEN, id }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 승인 완료'); loadIncomeAdmin(currentIncomeFilter);
+            } catch (err) { showToast('❌ 승인 실패: ' + err.message); }
+        }
+        async function rejectIncome(id) {
+            if (!confirm('이 수익 인증을 거절하시겠습니까?')) return;
+            try {
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'income-reject', adminToken: ADMIN_TOKEN, id }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 거절 완료'); loadIncomeAdmin(currentIncomeFilter);
+            } catch (err) { showToast('❌ 거절 실패: ' + err.message); }
+        }
+        async function deleteIncome(id) {
+            if (!confirm('이 수익 인증을 영구 삭제(숨김)하시겠습니까?\n(soft delete — 시트에는 hidden=true)')) return;
+            try {
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'income-delete', adminToken: ADMIN_TOKEN, id }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 삭제 완료'); loadIncomeAdmin(currentIncomeFilter);
+            } catch (err) { showToast('❌ 삭제 실패: ' + err.message); }
+        }
+        function editIncomeFromBtn(n) {
+            // Inline edit via prompt() — minimal, fast, no extra modal markup
+            const emoji = prompt('이모지', n.emoji); if (emoji === null) return;
+            const amount = prompt('금액 (예: 월 127만원)', n.amount); if (amount === null) return;
+            const author = prompt('작성자', n.author); if (author === null) return;
+            const date = prompt('날짜 (예: 2026.05)', n.date); if (date === null) return;
+            const desc = prompt('설명', n.desc); if (desc === null) return;
+            const tags = prompt('태그 (콤마 구분)', (n.tags || []).join(',')); if (tags === null) return;
+            updateIncome(n.id, { emoji, amount, author, date, desc, tags });
+        }
+        async function updateIncome(id, fields) {
+            try {
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'income-update', adminToken: ADMIN_TOKEN, id, ...fields }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 수정 완료'); loadIncomeAdmin(currentIncomeFilter);
+            } catch (err) { showToast('❌ 수정 실패: ' + err.message); }
+        }
+
+        // ===== PHASE 6-D: REVIEWS ADMIN (approve / reject workflow) =====
+        let currentReviewFilter = 'pending';
+        const REVIEW_STATUS_LABEL = { pending: '⏳ 대기', approved: '✅ 승인', rejected: '🚫 거절' };
+        const REVIEW_STATUS_COLOR = { pending: '#ffb84a', approved: '#44d7b6', rejected: '#ff3b5c' };
+        async function loadReviewsAdmin(filter) {
+            currentReviewFilter = filter || 'pending';
+            const container = document.getElementById('reviews-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'get-reviews-admin', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                const all = res.reviews || [];
+                const list = currentReviewFilter === 'all' ? all : all.filter(r => r.status === currentReviewFilter);
+                // Update filter button styles
+                ['all','pending','approved','rejected'].forEach(k => {
+                    const b = document.getElementById('rv-filter-' + k);
+                    if (b) b.style.background = (k === currentReviewFilter) ? 'rgba(201,168,76,0.2)' : '';
+                });
+                if (list.length === 0) {
+                    container.innerHTML = `<div style="padding: 32px; text-align: center; color: var(--text-secondary);">${currentReviewFilter === 'all' ? '등록된 후기가 없습니다.' : currentReviewFilter + ' 상태의 후기가 없습니다.'}</div>`;
+                    return;
+                }
+                container.innerHTML = list.map(r => `
+                    <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px;">
+                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
+                            <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: ${REVIEW_STATUS_COLOR[r.status]}22; color: ${REVIEW_STATUS_COLOR[r.status]};">${REVIEW_STATUS_LABEL[r.status] || r.status}</span>
+                            <span style="color: #f5c842;">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</span>
+                            <strong>${escapeHtml_(r.author)}</strong>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml_(r.email || '')}</span>
+                            <span style="font-size: 0.72rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(r.timestamp.slice(0, 19))}</span>
+                        </div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(r.summary)}</div>
+                        ${r.detail ? `<div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; white-space: pre-wrap;">${escapeHtml_(r.detail)}</div>` : ''}
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            ${r.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveReview("${escapeHtml_(r.timestamp)}")'>✅ 승인</button>` : ''}
+                            ${r.status !== 'rejected' ? `<button class="btn" onclick='rejectReview("${escapeHtml_(r.timestamp)}")'>🚫 거절</button>` : ''}
+                            <button class="btn" onclick='editReviewFromBtn(${JSON.stringify(r).replace(/'/g, "&#39;")})'>✏️ 수정</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요.</small></div>`;
+            }
+        }
+        async function approveReview(ts) {
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'review-approve', adminToken: ADMIN_TOKEN, timestamp: ts }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 승인 완료');
+                loadReviewsAdmin(currentReviewFilter);
+            } catch (err) {
+                showToast('❌ 승인 실패: ' + err.message);
+            }
+        }
+        function editReviewFromBtn(r) {
+            const author = prompt('작성자', r.author); if (author === null) return;
+            const rating = prompt('별점 (1~5)', String(r.rating)); if (rating === null) return;
+            const summary = prompt('한줄 요약', r.summary); if (summary === null) return;
+            const detail = prompt('본문', r.detail); if (detail === null) return;
+            updateReview(r.timestamp, { author, rating: Number(rating) || r.rating, summary, detail });
+        }
+        async function updateReview(ts, fields) {
+            try {
+                const res = await fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'review-update', adminToken: ADMIN_TOKEN, timestamp: ts, ...fields }), headers:{'Content-Type':'text/plain;charset=utf-8'} }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 수정 완료'); loadReviewsAdmin(currentReviewFilter);
+            } catch (err) { showToast('❌ 수정 실패: ' + err.message); }
+        }
+        async function rejectReview(ts) {
+            if (!confirm('이 후기를 거절하시겠습니까?\n(rejected — 영구 차단, 복구는 시트에서 수동)')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'review-reject', adminToken: ADMIN_TOKEN, timestamp: ts }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 거절 완료');
+                loadReviewsAdmin(currentReviewFilter);
+            } catch (err) {
+                showToast('❌ 거절 실패: ' + err.message);
+            }
+        }
+
+        // ===== PHASE 6-E: TIPS ADMIN (approve / reject workflow) =====
+        let currentTipFilter = 'pending';
+        async function loadTipsAdmin(filter) {
+            currentTipFilter = filter || 'pending';
+            const container = document.getElementById('tips-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'get-tips-admin', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                const all = res.tips || [];
+                const list = currentTipFilter === 'all' ? all : all.filter(t => t.status === currentTipFilter);
+                ['all','pending','approved','rejected'].forEach(k => {
+                    const b = document.getElementById('tp-filter-' + k);
+                    if (b) b.style.background = (k === currentTipFilter) ? 'rgba(201,168,76,0.2)' : '';
+                });
+                if (list.length === 0) {
+                    container.innerHTML = `<div style="padding: 32px; text-align: center; color: var(--text-secondary);">${currentTipFilter === 'all' ? '등록된 팁이 없습니다.' : currentTipFilter + ' 상태의 팁이 없습니다.'}</div>`;
+                    return;
+                }
+                container.innerHTML = list.map(t => `
+                    <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px;">
+                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
+                            <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: ${REVIEW_STATUS_COLOR[t.status]}22; color: ${REVIEW_STATUS_COLOR[t.status]};">${REVIEW_STATUS_LABEL[t.status] || t.status}</span>
+                            <strong>${escapeHtml_(t.author)}</strong>
+                            <span style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml_(t.email || '')}</span>
+                            <span style="font-size: 0.72rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(t.timestamp.slice(0, 19))}</span>
+                        </div>
+                        <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(t.title)}</div>
+                        <div style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 10px; white-space: pre-wrap;">${escapeHtml_(t.detail)}</div>
+                        <div style="display: flex; gap: 8px;">
+                            ${t.status !== 'approved' ? `<button class="btn btn-gold" onclick='approveTip("${escapeHtml_(t.timestamp)}")'>✅ 승인</button>` : ''}
+                            ${t.status !== 'rejected' ? `<button class="btn" onclick='rejectTip("${escapeHtml_(t.timestamp)}")'>🚫 거절</button>` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요.</small></div>`;
+            }
+        }
+        async function approveTip(ts) {
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'tip-approve', adminToken: ADMIN_TOKEN, timestamp: ts }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 승인 완료');
+                loadTipsAdmin(currentTipFilter);
+            } catch (err) {
+                showToast('❌ 승인 실패: ' + err.message);
+            }
+        }
+        async function rejectTip(ts) {
+            if (!confirm('이 팁을 거절하시겠습니까?')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'tip-reject', adminToken: ADMIN_TOKEN, timestamp: ts }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 거절 완료');
+                loadTipsAdmin(currentTipFilter);
+            } catch (err) {
+                showToast('❌ 거절 실패: ' + err.message);
+            }
+        }
+
+        // ===== CRO-3: LEADS ADMIN (이메일 리스트 + CSV export) =====
+        let _leadsCache = [];
+        async function loadLeadsAdmin() {
+            const container = document.getElementById('leads-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 로딩 중...</div>';
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'get-leads-admin', adminToken: ADMIN_TOKEN }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message || '응답 실패');
+                _leadsCache = res.leads || [];
+                document.getElementById('leads-count').textContent = `총 ${_leadsCache.length}건`;
+                if (_leadsCache.length === 0) {
+                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary);">아직 수집된 이메일이 없습니다.<br><small>다운로드 페이지에서 이메일이 등록되면 여기 표시됩니다.</small></div>';
+                    return;
+                }
+                container.innerHTML = `
+                    <div style="overflow-x: auto;">
+                        <table style="width:100%; min-width:600px; border-collapse:collapse; background:var(--bg-card); border:1px solid var(--border-glass); border-radius:10px; overflow:hidden;">
+                            <thead>
+                                <tr style="background:rgba(201,168,76,0.08);">
+                                    <th style="padding:12px; text-align:left; font-size:0.8rem; color:var(--text-secondary);">이메일</th>
+                                    <th style="padding:12px; text-align:left; font-size:0.8rem; color:var(--text-secondary);">출처</th>
+                                    <th style="padding:12px; text-align:left; font-size:0.8rem; color:var(--text-secondary);">관심 제품</th>
+                                    <th style="padding:12px; text-align:left; font-size:0.8rem; color:var(--text-secondary);">등록일시</th>
+                                    <th style="padding:12px; text-align:center; font-size:0.8rem; color:var(--text-secondary); width:80px;">관리</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${_leadsCache.map(l => `
+                                    <tr style="border-top:1px solid var(--border-glass);">
+                                        <td style="padding:10px 12px; font-family:monospace; font-size:0.85rem;">${escapeHtml_(l.email)}</td>
+                                        <td style="padding:10px 12px; font-size:0.82rem; color:var(--text-secondary);">${escapeHtml_(l.source)}</td>
+                                        <td style="padding:10px 12px; font-size:0.82rem; color:var(--text-secondary);">${escapeHtml_(l.productInterest)}</td>
+                                        <td style="padding:10px 12px; font-size:0.78rem; color:var(--text-muted); font-family:monospace;">${escapeHtml_(l.timestamp.slice(0,19))}</td>
+                                        <td style="padding:10px 12px; text-align:center;"><button class="btn" style="padding:6px 10px; font-size:0.75rem;" onclick='deleteLead("${escapeHtml_(l.id)}")'>🗑️</button></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } catch (err) {
+                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요.</small></div>`;
+            }
+        }
+        async function deleteLead(id) {
+            if (!confirm('이 리드를 삭제하시겠습니까? (soft delete)')) return;
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'lead-delete', adminToken: ADMIN_TOKEN, id }),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                }).then(r => r.json());
+                if (res.success === false) throw new Error(res.message);
+                showToast('✅ 삭제 완료');
+                loadLeadsAdmin();
+            } catch (err) {
+                showToast('❌ 삭제 실패: ' + err.message);
+            }
+        }
+        function exportLeadsCsv() {
+            if (_leadsCache.length === 0) { showToast('❌ 다운로드할 리드가 없습니다'); return; }
+            // CSV header + rows
+            const rows = [['email', 'source', 'productInterest', 'timestamp', 'notes']];
+            _leadsCache.forEach(l => rows.push([l.email, l.source, l.productInterest, l.timestamp, l.notes || '']));
+            const csv = rows.map(r => r.map(c => `"${String(c || '').replace(/"/g, '""')}"`).join(',')).join('\r\n');
+            // UTF-8 BOM for Excel 한글 호환
+            const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `leads-${new Date().toISOString().slice(0,10)}.csv`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast(`✅ ${_leadsCache.length}건 CSV 다운로드 완료`);
+        }
 
         // ===== TRAFFIC TRACKING =====
-
         function getTrafficData() {
-
             const key = 'lp_traffic_' + new Date().toISOString().slice(0, 10);
-
             const data = JSON.parse(localStorage.getItem(key) || '{"views":0,"unique":[]}');
-
+            // Ensure views reflects unique count
+            data.views = data.unique ? data.unique.length : data.views;
             return data;
-
         }
-
-
 
         function trackVisit() {
-
-            const key = 'lp_traffic_' + new Date().toISOString().slice(0, 10);
-
-            const data = getTrafficData();
-
-            data.views++;
-
-            localStorage.setItem(key, JSON.stringify(data));
-
+            // Mark admin session so main page can filter us out
+            sessionStorage.setItem('lp_admin_logged_in', '1');
+            localStorage.setItem('lp_analytics_exclude', '1');
+            // Admin does NOT increment visit counter — we only READ data
         }
-
         trackVisit();
 
+        // ===== ANALYTICS DASHBOARD =====
+        function formatWon(value) {
+            return (Number(value) || 0).toLocaleString('ko-KR') + '원';
+        }
 
+        function setInternalAnalytics(enabled) {
+            if (enabled) {
+                localStorage.setItem('lp_analytics_exclude', '1');
+                sessionStorage.setItem('lp_admin_logged_in', '1');
+                showToast('✅ 이 브라우저 방문은 분석에서 제외합니다.');
+            } else {
+                localStorage.removeItem('lp_analytics_exclude');
+                showToast('⚠️ 이 브라우저 방문도 분석에 포함됩니다.');
+            }
+        }
+
+        async function fetchAnalyticsDashboard(period) {
+            const res = await fetch(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action: 'analytics-dashboard', adminToken: ADMIN_TOKEN, period })
+            });
+            const json = await res.json();
+            if (json.ok || json.success) return json;
+            throw new Error(json.error || json.message || '분석 데이터를 불러오지 못했습니다.');
+        }
+
+        function setAnalyticsPeriodButtons(period) {
+            const todayBtn = document.getElementById('analytics-period-today');
+            const monthBtn = document.getElementById('analytics-period-month');
+            if (todayBtn) todayBtn.className = period === 'today' ? 'btn btn-gold' : 'btn';
+            if (monthBtn) monthBtn.className = period === 'month' ? 'btn btn-gold' : 'btn';
+        }
+
+        async function loadAnalyticsDashboard(period = 'today') {
+            currentAnalyticsPeriod = period;
+            setAnalyticsPeriodButtons(period);
+            const table = document.getElementById('analytics-table-body');
+            if (table) table.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 분석 데이터 로딩 중...</div>';
+
+            try {
+                const data = await fetchAnalyticsDashboard(period);
+                const sales = data.sales || {};
+                const visitors = data.visitors || {};
+                const recentOrders = data.recentOrders || [];
+
+                document.getElementById('analytics-revenue').textContent = formatWon(sales.revenue);
+                document.getElementById('analytics-orders').textContent = (Number(sales.orders) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-visitors').textContent = (Number(visitors.unique) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-pageviews').textContent = (Number(visitors.pageviews) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-revenue-meta').textContent = period === 'month' ? '이번 달 합계' : '오늘 합계';
+                document.getElementById('analytics-orders-meta').textContent = 'Toss + 계좌이체 승인';
+                document.getElementById('analytics-visitors-meta').textContent = `내부 제외 · 내부뷰 ${Number(visitors.internalPageviews) || 0}`;
+                document.getElementById('analytics-pageviews-meta').textContent = '중복 페이지 이동 포함';
+                document.getElementById('analytics-updated').textContent = data.updatedAt ? new Date(data.updatedAt).toLocaleString('ko-KR') : '방금 갱신';
+
+                if (!recentOrders.length) {
+                    table.innerHTML = '<div style="padding:32px;text-align:center;color:var(--text-secondary);">해당 기간 주문이 없습니다.</div>';
+                    return data;
+                }
+
+                let html = '<table class="data-table"><thead><tr>';
+                html += '<th>일시</th><th>구매자</th><th>상품</th><th>금액</th><th>결제수단</th><th>주문번호</th>';
+                html += '</tr></thead><tbody>';
+                recentOrders.forEach(order => {
+                    const when = order.createdAt ? new Date(order.createdAt).toLocaleString('ko-KR') : '—';
+                    html += `<tr>
+                        <td>${escapeHtml_(when)}</td>
+                        <td>${escapeHtml_(order.email || order.name || '—')}</td>
+                        <td>${escapeHtml_(order.productName || order.product || '—')}</td>
+                        <td>${formatWon(order.amount)}</td>
+                        <td>${escapeHtml_(order.method || '—')}</td>
+                        <td><span class="code-text">${escapeHtml_(order.orderId || '—')}</span></td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                table.innerHTML = html;
+                return data;
+            } catch (err) {
+                document.getElementById('analytics-revenue').textContent = '—';
+                document.getElementById('analytics-orders').textContent = '—';
+                document.getElementById('analytics-visitors').textContent = '—';
+                document.getElementById('analytics-pageviews').textContent = '—';
+                document.getElementById('analytics-updated').textContent = 'GAS 재배포 필요';
+                if (table) {
+                    table.innerHTML = `<div style="padding:32px;text-align:center;color:#ff6b6b;">분석 API 연결 실패: ${escapeHtml_(err.message)}<br><small>GAS에 analytics-dashboard 액션이 배포되어야 실제 매출/방문 데이터가 표시됩니다.</small></div>`;
+                }
+                return null;
+            }
+        }
+
+        // ===== HELPER: Stat Change Display =====
+        function setStatChange(elementId, current, previous, label) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            if (previous === 0 && current === 0) {
+                el.className = 'stat-change neutral';
+                el.innerHTML = `<span>${label} — 데이터 없음</span>`;
+                return;
+            }
+            const diff = current - previous;
+            if (diff > 0) {
+                el.className = 'stat-change';
+                el.innerHTML = `<span>▲ ${diff} ${label}</span>`;
+            } else if (diff < 0) {
+                el.className = 'stat-change negative';
+                el.innerHTML = `<span>▼ ${Math.abs(diff)} ${label}</span>`;
+            } else {
+                el.className = 'stat-change neutral';
+                el.innerHTML = `<span>— ${label} 동일</span>`;
+            }
+        }
+
+        // ===== HELPER: Platform Badge =====
+        function platformBadge(platform) {
+            if (!platform) return '—';
+            const p = platform.toUpperCase();
+            const map = {
+                'ALL': 'platform-all',
+                'NAVER': 'platform-naver',
+                'BLOGGER': 'platform-blogger',
+                'LEADERNAM': 'platform-blogger',
+                'TISTORY': 'platform-tistory',
+                'LEWORD': 'platform-leword'
+            };
+            const cls = map[p] || 'platform-default';
+            const labels = {
+                'ALL': '올인원',
+                'NAVER': 'NAVER',
+                'BLOGGER': 'Orbit',
+                'LEADERNAM': 'Orbit',
+                'TISTORY': 'Tistory',
+                'LEWORD': 'LEWORD'
+            };
+            return `<span class="platform-badge ${cls}">${labels[p] || platform}</span>`;
+        }
 
         // ===== GAS API CALLS =====
-
         async function fetchGASList() {
-
             try {
-
                 const res = await fetch(GAS_URL, {
-
                     method: 'POST',
-
                     headers: { 'Content-Type': 'text/plain' },
-
                     body: JSON.stringify({ action: 'list', adminToken: ADMIN_TOKEN })
-
                 });
-
                 const json = await res.json();
-
                 if (json.ok) return json.data;
-
                 throw new Error(json.error);
-
             } catch (err) {
-
                 console.error('GAS API Error:', err);
-
                 return [];
-
             }
-
         }
 
-
-
-        async function issueCodeAPI(platform, type, count) {
-
+        async function issueCodeAPI(platform, type, count, extra = {}) {
             try {
-
                 const res = await fetch(GAS_URL, {
-
                     method: 'POST',
-
                     headers: { 'Content-Type': 'text/plain' },
-
-                    body: JSON.stringify({ action: 'issue', adminToken: ADMIN_TOKEN, platform, type, count })
-
+                    body: JSON.stringify({ action: 'issue', adminToken: ADMIN_TOKEN, platform, type, count, ...extra })
                 });
-
                 return await res.json();
-
             } catch (err) {
-
                 console.error('Issue Error:', err);
-
                 return { ok: false, error: err.message };
-
             }
-
         }
-
-
 
         async function revokeCodeAPI(code) {
-
             try {
-
                 const res = await fetch(GAS_URL, {
-
                     method: 'POST',
-
                     headers: { 'Content-Type': 'text/plain' },
-
                     body: JSON.stringify({ action: 'revoke', adminToken: ADMIN_TOKEN, code })
-
                 });
-
                 return await res.json();
-
             } catch (err) {
-
                 console.error('Revoke Error:', err);
-
                 return { ok: false, error: err.message };
-
             }
-
         }
-
-
 
         // ===== DASHBOARD DATA =====
-
         async function loadDashboardData() {
-
             allCodes = await fetchGASList();
-
-
 
             // Stats
-
             const today = new Date().toISOString().slice(0, 10);
-
             const todayOrders = allCodes.filter(c => c.usedAt && c.usedAt.slice(0, 10) === today);
-
             const activeCount = allCodes.filter(c => c.used === true).length;
-
             const traffic = getTrafficData();
+            const analytics = await fetchAnalyticsDashboard('today').catch(() => null);
+            const visitorCount = analytics?.visitors?.unique ?? traffic.views;
+            const orderCount = analytics?.sales?.orders ?? todayOrders.length;
 
-
-
-            document.getElementById('stat-visitors').textContent = traffic.views.toLocaleString();
-
-            document.getElementById('stat-orders').textContent = todayOrders.length.toLocaleString();
-
+            document.getElementById('stat-visitors').textContent = visitorCount.toLocaleString();
+            document.getElementById('stat-orders').textContent = orderCount.toLocaleString();
             document.getElementById('stat-total').textContent = allCodes.length.toLocaleString();
-
             document.getElementById('stat-active').textContent = activeCount.toLocaleString();
 
+            // Sidebar license count
+            const sidebarEl = document.getElementById('sidebar-license-count');
+            if (sidebarEl) sidebarEl.textContent = activeCount + '/' + allCodes.length;
 
+            // Yesterday comparison
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yKey = 'lp_traffic_' + yesterday.toISOString().slice(0, 10);
+            const yTraffic = JSON.parse(localStorage.getItem(yKey) || '{"views":0}');
+            const yDate = yesterday.toISOString().slice(0, 10);
+            const yOrders = allCodes.filter(c => c.usedAt && c.usedAt.slice(0, 10) === yDate);
+
+            // Stat changes
+            if (analytics) {
+                document.getElementById('stat-visitors-change').innerHTML = '<span>내부 방문 제외 순방문자</span>';
+                document.getElementById('stat-orders-change').innerHTML = `<span>오늘 매출 ${formatWon(analytics.sales?.revenue)}</span>`;
+            } else {
+                setStatChange('stat-visitors-change', traffic.views, yTraffic.views, '어제 대비');
+                setStatChange('stat-orders-change', todayOrders.length, yOrders.length, '어제 대비');
+            }
+
+            // Active rate
+            const activeRate = allCodes.length > 0 ? Math.round((activeCount / allCodes.length) * 100) : 0;
+            document.getElementById('stat-total-change').innerHTML = `<span>총 ${allCodes.length}건 발급됨</span>`;
+            document.getElementById('stat-active-change').innerHTML = `<span>활성화율 ${activeRate}%</span>`;
 
             // Recent activations
-
             const recent = allCodes
-
                 .filter(c => c.used && c.usedAt)
-
                 .sort((a, b) => new Date(b.usedAt) - new Date(a.usedAt))
-
                 .slice(0, 10);
 
-
-
             let recentHtml = '<table class="data-table"><thead><tr>';
-
             recentHtml += '<th>코드</th><th>플랫폼</th><th>유형</th><th>사용자</th><th>활성화 일시</th>';
-
             recentHtml += '</tr></thead><tbody>';
 
-
-
             if (recent.length === 0) {
-
                 recentHtml += '<tr><td colspan="5" style="text-align:center;color:var(--text-secondary);padding:32px;">최근 활성화된 라이선스가 없습니다.</td></tr>';
-
             } else {
-
                 recent.forEach(c => {
-
                     const dateStr = c.usedAt ? new Date(c.usedAt).toLocaleString('ko-KR') : '—';
-
                     recentHtml += `<tr>
-
                         <td><span class="code-text">${c.code}</span></td>
-
-                        <td>${c.platform || '—'}</td>
-
+                        <td>${platformBadge(c.platform)}</td>
                         <td>${c.type || '—'}</td>
-
                         <td>${c.userId || c.user || '—'}</td>
-
                         <td>${dateStr}</td>
-
                     </tr>`;
-
                 });
-
             }
-
             recentHtml += '</tbody></table>';
-
             document.getElementById('recent-activations').innerHTML = recentHtml;
 
-
-
             // Also populate codes and orders tables
-
             renderCodesTable();
-
             renderOrdersTable();
-
         }
-
-
 
         // ===== CODES TABLE =====
-
         function renderCodesTable(filter = '') {
-
             let filtered = allCodes;
-
             if (filter) {
-
                 const q = filter.toLowerCase();
-
                 filtered = allCodes.filter(c =>
-
                     (c.code || '').toLowerCase().includes(q) ||
-
                     (c.platform || '').toLowerCase().includes(q) ||
-
                     (c.userId || '').toLowerCase().includes(q)
-
                 );
-
+                codesPage = 1;
             }
 
-
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+            if (codesPage > totalPages) codesPage = totalPages;
+            const start = (codesPage - 1) * PAGE_SIZE;
+            const pageItems = filtered.slice(start, start + PAGE_SIZE);
 
             let html = '<table class="data-table"><thead><tr>';
-
-            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>상태</th><th>사용자</th><th>만료일</th><th>작업</th>';
-
+            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>상태</th><th>사용자</th><th>비밀번호</th><th>만료일</th><th>작업</th>';
             html += '</tr></thead><tbody>';
 
-
-
-            if (filtered.length === 0) {
-
-                html += '<tr><td colspan="7" style="text-align:center;color:var(--text-secondary);padding:32px;">코드가 없습니다.</td></tr>';
-
+            if (pageItems.length === 0) {
+                html += '<tr><td colspan="8" style="text-align:center;color:var(--text-secondary);padding:32px;">코드가 없습니다.</td></tr>';
             } else {
-
-                filtered.forEach(c => {
-
+                pageItems.forEach(c => {
                     const status = c.used ? '<span class="badge badge-active">활성</span>' :
-
                         (c.expiresAt && new Date(c.expiresAt) < new Date() ? '<span class="badge badge-expired">만료</span>' : '<span class="badge badge-unused">미사용</span>');
-
                     const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '—';
-
+                    const pwDisplay = c.userPassword && c.userPassword.length <= 30 ? c.userPassword : (c.userPassword ? c.userPassword.substring(0,6) + '...' : '—');
                     html += `<tr>
-
                         <td><span class="code-text">${c.code}</span></td>
-
-                        <td>${c.platform || '—'}</td>
-
+                        <td>${platformBadge(c.platform)}</td>
                         <td>${c.type || '—'}</td>
-
                         <td>${status}</td>
-
                         <td>${c.userId || c.user || '—'}</td>
-
+                        <td>${pwDisplay}</td>
                         <td>${expires}</td>
-
                         <td><button class="btn btn-red" onclick="revokeCode('${c.code}')" style="padding:4px 10px;font-size:0.7rem;">무효화</button></td>
-
                     </tr>`;
-
                 });
-
             }
-
             html += '</tbody></table>';
-
+            html += buildPagination(codesPage, totalPages, filtered.length, 'codes');
             document.getElementById('codes-table-body').innerHTML = html;
-
         }
-
-
 
         function filterCodes() {
-
             const q = document.getElementById('code-search').value;
-
             renderCodesTable(q);
-
         }
-
-
 
         async function loadCodes() {
-
             document.getElementById('codes-table-body').innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 코드 목록 로딩 중...</div>';
-
             allCodes = await fetchGASList();
-
             renderCodesTable();
-
             renderOrdersTable();
-
         }
-
-
 
         // ===== ORDERS TABLE =====
-
         function renderOrdersTable() {
-
             const orders = allCodes
-
                 .filter(c => c.used && c.usedAt)
-
                 .sort((a, b) => new Date(b.usedAt) - new Date(a.usedAt));
 
-
+            const totalPages = Math.max(1, Math.ceil(orders.length / PAGE_SIZE));
+            if (ordersPage > totalPages) ordersPage = totalPages;
+            const start = (ordersPage - 1) * PAGE_SIZE;
+            const pageItems = orders.slice(start, start + PAGE_SIZE);
 
             let html = '<table class="data-table"><thead><tr>';
-
-            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>사용자 ID</th><th>활성화 일시</th><th>만료일</th>';
-
+            html += '<th>코드</th><th>플랫폼</th><th>유형</th><th>사용자 ID</th><th>비밀번호</th><th>활성화 일시</th><th>만료일</th>';
             html += '</tr></thead><tbody>';
 
-
-
-            if (orders.length === 0) {
-
-                html += '<tr><td colspan="6" style="text-align:center;color:var(--text-secondary);padding:32px;">주문 내역이 없습니다.</td></tr>';
-
+            if (pageItems.length === 0) {
+                html += '<tr><td colspan="7" style="text-align:center;color:var(--text-secondary);padding:32px;">주문 내역이 없습니다.</td></tr>';
             } else {
-
-                orders.forEach(c => {
-
+                pageItems.forEach(c => {
                     const dateStr = c.usedAt ? new Date(c.usedAt).toLocaleString('ko-KR') : '—';
-
                     const expires = c.expiresAt ? new Date(c.expiresAt).toLocaleDateString('ko-KR') : '영구';
-
+                    const pwDisplay = c.userPassword && c.userPassword.length <= 30 ? c.userPassword : (c.userPassword ? c.userPassword.substring(0,6) + '...' : '—');
                     html += `<tr>
-
                         <td><span class="code-text">${c.code}</span></td>
-
-                        <td>${c.platform || '—'}</td>
-
+                        <td>${platformBadge(c.platform)}</td>
                         <td>${c.type || '—'}</td>
-
                         <td>${c.userId || '—'}</td>
-
+                        <td>${pwDisplay}</td>
                         <td>${dateStr}</td>
-
                         <td>${expires}</td>
-
                     </tr>`;
-
                 });
-
             }
-
             html += '</tbody></table>';
-
+            html += buildPagination(ordersPage, totalPages, orders.length, 'orders');
             document.getElementById('orders-table-body').innerHTML = html;
-
         }
 
+        // ===== PAGINATION HELPER =====
+        function buildPagination(currentPage, totalPages, totalItems, type) {
+            if (totalPages <= 1) return '';
+            let html = '<div class="pagination">';
+            html += `<button class="page-btn" onclick="goPage('${type}', 1)" ${currentPage === 1 ? 'disabled' : ''}>«</button>`;
+            html += `<button class="page-btn" onclick="goPage('${type}', ${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
 
+            const maxVisible = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+            if (endPage - startPage < maxVisible - 1) startPage = Math.max(1, endPage - maxVisible + 1);
+
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goPage('${type}', ${i})">${i}</button>`;
+            }
+
+            html += `<button class="page-btn" onclick="goPage('${type}', ${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>›</button>`;
+            html += `<button class="page-btn" onclick="goPage('${type}', ${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>»</button>`;
+            html += `<span class="page-info">${totalItems}건 중 ${(currentPage-1)*PAGE_SIZE+1}-${Math.min(currentPage*PAGE_SIZE, totalItems)}</span>`;
+            html += '</div>';
+            return html;
+        }
+
+        function goPage(type, page) {
+            if (type === 'codes') {
+                codesPage = page;
+                renderCodesTable(document.getElementById('code-search')?.value || '');
+            } else if (type === 'trial') {
+                trialPage = page;
+                renderTrialTable(document.getElementById('trial-search')?.value || '');
+            } else {
+                ordersPage = page;
+                renderOrdersTable();
+            }
+        }
 
         // ===== ISSUE CODE =====
-
         function openIssueModal() { document.getElementById('issue-modal').classList.add('active'); }
-
         function closeIssueModal() { document.getElementById('issue-modal').classList.remove('active'); }
 
+        function getAllInOnePresetDays(type) {
+            if (type === 'CUSTOM1') return 1;
+            if (type === 'PAID30') return 30;
+            if (type === 'CUSTOM90') return 90;
+            if (type === 'CUSTOM365') return 365;
+            return 0;
+        }
 
+        function syncAllInOneDays(type) {
+            const input = document.getElementById('allinone-days');
+            if (!input) return;
+            const presetDays = getAllInOnePresetDays(type);
+            if (presetDays > 0) input.value = String(presetDays);
+        }
 
-        async function issueCode() {
+        function buildAllInOneIssuePayload() {
+            const checked = document.querySelector('input[name="allinone-duration"]:checked');
+            const type = checked ? checked.value : 'CUSTOM1';
+            const unlimited = document.getElementById('allinone-unlimited')?.checked;
+            if (unlimited) {
+                return { actualType: 'LIFE', customData: { isUnlimitedDays: true }, finalLabel: '무제한' };
+            }
 
-            const platform = document.getElementById('issue-platform').value;
+            const presetDays = getAllInOnePresetDays(type);
+            const inputDays = parseInt(document.getElementById('allinone-days')?.value || '0', 10);
+            const finalDays = inputDays > 0 ? inputDays : presetDays;
+            if (!finalDays || finalDays <= 0 || finalDays > 3650) {
+                throw new Error('일수를 1~3650 사이로 입력해주세요.');
+            }
+            return { actualType: 'CUSTOM', customData: { customDays: finalDays }, finalLabel: `${finalDays}일` };
+        }
 
-            const type = document.getElementById('issue-type').value;
+        function resetAllInOneForm() {
+            const first = document.querySelector('input[name="allinone-duration"][value="CUSTOM1"]');
+            if (first) first.checked = true;
+            document.getElementById('allinone-days').value = '1';
+            document.getElementById('allinone-unlimited').checked = false;
+            document.getElementById('allinone-count').value = '10';
+            document.getElementById('allinone-prefix').value = 'ALL';
+            showToast('↩️ 올인원 발급 옵션을 초기화했습니다.');
+        }
 
-            const count = parseInt(document.getElementById('issue-count').value);
+        document.querySelectorAll('input[name="allinone-duration"]').forEach(input => {
+            input.addEventListener('change', () => {
+                document.getElementById('allinone-unlimited').checked = false;
+                syncAllInOneDays(input.value);
+            });
+        });
 
+        async function issueAllInOneCode(btn) {
+            let payload;
+            try {
+                payload = buildAllInOneIssuePayload();
+            } catch (err) {
+                showToast('❌ ' + err.message);
+                return;
+            }
 
-
-            const btn = event.target;
-
+            const count = Math.max(1, Math.min(500, parseInt(document.getElementById('allinone-count').value || '1', 10)));
+            const prefix = (document.getElementById('allinone-prefix').value || 'ALL').trim();
+            const originalText = btn.textContent;
             btn.textContent = '발급 중...';
-
             btn.disabled = true;
 
+            const result = await issueCodeAPI('ALL', payload.actualType, count, {
+                prefix,
+                ...payload.customData
+            });
 
+            if (result.ok) {
+                showToast(`✅ 올인원 ${payload.finalLabel} 코드 ${result.created?.length || count}개 발급 완료!`);
+                await loadCodes();
+                switchTab('codes');
+            } else {
+                showToast('❌ 올인원 발급 실패: ' + (result.error || '알 수 없는 오류'));
+            }
+
+            btn.textContent = originalText;
+            btn.disabled = false;
+        }
+
+        async function issueCode() {
+            const platform = document.getElementById('issue-platform').value;
+            const type = document.getElementById('issue-type').value;
+            const count = parseInt(document.getElementById('issue-count').value);
+
+            const btn = event.target;
+            btn.textContent = '발급 중...';
+            btn.disabled = true;
 
             const result = await issueCodeAPI(platform, type, count);
-
             if (result.ok) {
-
                 showToast(`✅ ${result.created.length}개 코드 발급 완료!`);
-
                 closeIssueModal();
-
                 await loadCodes();
-
             } else {
-
                 showToast('❌ 발급 실패: ' + (result.error || '알 수 없는 오류'));
-
             }
-
             btn.textContent = '발급하기';
-
             btn.disabled = false;
-
         }
-
-
 
         // ===== REVOKE CODE =====
-
         async function revokeCode(code) {
-
             if (!confirm(`코드 ${code}를 무효화하시겠습니까?`)) return;
 
-
-
             const result = await revokeCodeAPI(code);
-
             if (result.ok) {
-
                 showToast('✅ 무효화 완료');
-
                 await loadCodes();
-
             } else {
-
                 showToast('❌ 무효화 실패: ' + (result.error || ''));
-
             }
-
         }
-
-
 
         // ===== SITE EDITOR =====
+        const DEFAULT_DOWNLOAD_URLS = {
+            naver: 'https://github.com/cd000242-sudo/naver/releases/download/v2.10.334/Better-Life-Naver-Setup-2.10.334.exe',
+            orbit: '',
+            tistory: '',
+            leword: 'https://github.com/cd000242-sudo/leword-app/releases/download/v1.0.5/LEWORD.Setup.1.0.5.zip'
+        };
 
-        function loadEditorContent() {
-
-            const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
-
-            if (saved.heroTitle) document.getElementById('edit-hero-title').value = saved.heroTitle;
-
-            if (saved.heroDesc) document.getElementById('edit-hero-desc').value = saved.heroDesc;
-
-            if (saved.heroBenefit) document.getElementById('edit-hero-benefit').value = saved.heroBenefit;
-
-            if (saved.notice) document.getElementById('edit-notice').value = saved.notice;
-
+        function normalizeLegacySiteEdits(saved) {
+            if (!saved || saved.hero || saved.pricing || saved.downloads || saved.products) return saved || {};
+            return {
+                hero: {
+                    title: saved.heroTitle || '',
+                    desc: saved.heroDesc || '',
+                    benefit: saved.heroBenefit || '',
+                    notice: saved.notice || ''
+                },
+                downloads: {
+                    naver: { downloads: { windows: { url: saved.downloadUrls?.naver || '' } } },
+                    orbit: { downloads: { windows: { url: saved.downloadUrls?.orbit || '' } } },
+                    tistory: { downloads: { windows: { url: saved.downloadUrls?.tistory || '' } } },
+                    leword: { downloads: { windows: { url: saved.downloadUrls?.leword || '' } } }
+                }
+            };
         }
 
+        function setEditorValues(content) {
+            const data = normalizeLegacySiteEdits(content || {});
+            const hero = data.hero || {};
+            const plans = data.pricing?.plans || {};
+            const downloads = data.downloads || {};
+            document.getElementById('edit-hero-title').value = hero.title || '블로그 자동화의 새로운 기준';
+            document.getElementById('edit-hero-desc').value = hero.desc || '키워드 하나면 끝. AI가 글을 쓰고, 이미지를 만들고, 블로그에 올립니다.';
+            document.getElementById('edit-hero-benefit').value = hero.benefit || '매일 100건, 사람이 쓴 것처럼';
+            document.getElementById('edit-notice').value = hero.notice || '';
+            document.getElementById('plan-monthly-amount').value = plans['all-in-one-monthly']?.amount || '';
+            document.getElementById('plan-monthly-card').value = plans['all-in-one-monthly']?.amountCard || '';
+            document.getElementById('plan-quarterly-amount').value = plans['all-in-one-quarterly']?.amount || '';
+            document.getElementById('plan-yearly-amount').value = plans['all-in-one-yearly']?.amount || '';
+            document.getElementById('plan-lifetime-amount').value = plans['all-in-one-lifetime']?.amount || '';
+            document.getElementById('plan-monthly-future').value = plans['all-in-one-monthly']?.futureAmount || '';
+            document.getElementById('plan-quarterly-future').value = plans['all-in-one-quarterly']?.futureAmount || '';
+            document.getElementById('plan-yearly-future').value = plans['all-in-one-yearly']?.futureAmount || '';
+            document.getElementById('edit-dl-naver').value = downloads.naver?.downloads?.windows?.url || DEFAULT_DOWNLOAD_URLS.naver;
+            document.getElementById('edit-dl-orbit').value = downloads.orbit?.downloads?.windows?.url || DEFAULT_DOWNLOAD_URLS.orbit;
+            document.getElementById('edit-dl-tistory').value = downloads.tistory?.downloads?.windows?.url || DEFAULT_DOWNLOAD_URLS.tistory;
+            document.getElementById('edit-dl-leword').value = downloads.leword?.downloads?.windows?.url || DEFAULT_DOWNLOAD_URLS.leword;
+            document.getElementById('edit-products-json').value = JSON.stringify(data.products || {}, null, 2);
+        }
 
+        async function loadEditorContent() {
+            try {
+                const res = await fetch(`${GAS_URL}?action=site-content&ts=${Date.now()}`, { cache: 'no-store' });
+                const json = await res.json();
+                if (json.ok || json.success) {
+                    setEditorValues(json.content || {});
+                    localStorage.setItem('lp_site_edits', JSON.stringify(json.content || {}));
+                    showToast('✅ 서버 콘텐츠를 불러왔습니다.');
+                    return;
+                }
+                throw new Error(json.error || json.message || '서버 콘텐츠를 불러오지 못했습니다.');
+            } catch (err) {
+                const fallback = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
+                setEditorValues(fallback);
+                showToast('⚠️ 서버 불러오기 실패, 이 브라우저 저장값을 표시합니다.');
+            }
+        }
 
-        function saveEditorContent() {
+        function numberOrUndefined(id) {
+            const raw = document.getElementById(id).value;
+            if (raw === '') return undefined;
+            const n = Number(raw);
+            return Number.isFinite(n) ? n : undefined;
+        }
 
-            const data = {
+        function compactObject(obj) {
+            Object.keys(obj).forEach(key => {
+                const value = obj[key];
+                if (value && typeof value === 'object' && !Array.isArray(value)) compactObject(value);
+                if (value === undefined || value === '') delete obj[key];
+            });
+            return obj;
+        }
 
-                heroTitle: document.getElementById('edit-hero-title').value,
-
-                heroDesc: document.getElementById('edit-hero-desc').value,
-
-                heroBenefit: document.getElementById('edit-hero-benefit').value,
-
-                notice: document.getElementById('edit-notice').value,
-
+        function collectEditorContent() {
+            let products = {};
+            const productsRaw = document.getElementById('edit-products-json').value.trim();
+            if (productsRaw) {
+                products = JSON.parse(productsRaw);
+            }
+            return compactObject({
+                hero: {
+                    title: document.getElementById('edit-hero-title').value.trim(),
+                    desc: document.getElementById('edit-hero-desc').value.trim(),
+                    benefit: document.getElementById('edit-hero-benefit').value.trim(),
+                    notice: document.getElementById('edit-notice').value.trim()
+                },
+                pricing: {
+                    plans: {
+                        'all-in-one-monthly': {
+                            amount: numberOrUndefined('plan-monthly-amount'),
+                            amountCard: numberOrUndefined('plan-monthly-card'),
+                            futureAmount: numberOrUndefined('plan-monthly-future')
+                        },
+                        'all-in-one-quarterly': {
+                            amount: numberOrUndefined('plan-quarterly-amount'),
+                            futureAmount: numberOrUndefined('plan-quarterly-future')
+                        },
+                        'all-in-one-yearly': {
+                            amount: numberOrUndefined('plan-yearly-amount'),
+                            futureAmount: numberOrUndefined('plan-yearly-future')
+                        },
+                        'all-in-one-lifetime': {
+                            amount: numberOrUndefined('plan-lifetime-amount')
+                        }
+                    }
+                },
+                downloads: {
+                    naver: { downloads: { windows: { url: document.getElementById('edit-dl-naver').value.trim() } } },
+                    orbit: { downloads: { windows: { url: document.getElementById('edit-dl-orbit').value.trim() } } },
+                    tistory: { downloads: { windows: { url: document.getElementById('edit-dl-tistory').value.trim() } } },
+                    leword: { downloads: { windows: { url: document.getElementById('edit-dl-leword').value.trim() } } }
+                },
+                products,
                 updatedAt: new Date().toISOString()
+            });
+        }
 
-            };
+        async function saveEditorContent() {
+            let data;
+            try {
+                data = collectEditorContent();
+            } catch (err) {
+                showToast('❌ 제품 상세 JSON 형식이 올바르지 않습니다.');
+                return;
+            }
 
             localStorage.setItem('lp_site_edits', JSON.stringify(data));
-
-            showToast('✅ 저장되었습니다! 메인 사이트에 반영됩니다.');
-
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'site-content-save', adminToken: ADMIN_TOKEN, content: data })
+                });
+                const json = await res.json();
+                if (!(json.ok || json.success)) throw new Error(json.error || json.message || '저장 실패');
+                showToast('✅ 서버에 저장했습니다. 실제 사이트가 이 데이터를 읽습니다.');
+            } catch (err) {
+                showToast('⚠️ 브라우저에는 저장됨 · 서버 저장 실패: ' + err.message);
+            }
         }
-
-
 
         function resetEditorContent() {
-
             if (!confirm('모든 편집 내용을 초기화하시겠습니까?')) return;
-
             localStorage.removeItem('lp_site_edits');
-
-            document.getElementById('edit-hero-title').value = '블로그 자동화의 새로운 기준';
-
-            document.getElementById('edit-hero-desc').value = '키워드 하나면 끝. AI가 글을 쓰고, 이미지를 만들고, 블로그에 올립니다.';
-
-            document.getElementById('edit-hero-benefit').value = '매일 100건, 사람이 쓴 것처럼';
-
-            document.getElementById('edit-notice').value = '';
-
+            setEditorValues({});
             showToast('↩️ 초기화되었습니다.');
-
         }
-
-
 
         loadEditorContent();
 
-
-
         // ===== TOAST =====
-
         function showToast(msg) {
-
             const toast = document.getElementById('save-toast');
-
             toast.textContent = msg;
-
             toast.classList.add('visible');
-
             setTimeout(() => toast.classList.remove('visible'), 3000);
-
+        }
+        // ===== TRIAL USER MANAGEMENT =====
+        // ✅ [2026-03-26] XSS 방지 유틸
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
         }
 
-    
-        // === 계좌이체 주문 관리 ===
-        (function() {
-            var mc = document.querySelector('.main-content');
-            if (mc) {
-                var bp = document.createElement('div');
-                bp.className = 'tab-panel';
-                bp.id = 'tab-bank-orders';
-                bp.innerHTML = '<div class="page-header"><h1>💰 계좌이체 주문 관리</h1><p>입금 대기 주문을 확인하고 승인/거절합니다.</p></div>'
-                    + '<div class="stats-grid">'
-                    + '<div class="stat-card"><div class="stat-value" id="bkStatTotal">0</div><div class="stat-label">전체 주문</div></div>'
-                    + '<div class="stat-card" style="border-color:rgba(245,158,11,0.3)"><div class="stat-value" style="color:#f59e0b" id="bkStatPending">0</div><div class="stat-label">입금 대기</div></div>'
-                    + '<div class="stat-card" style="border-color:rgba(16,185,129,0.3)"><div class="stat-value" style="color:#10b981" id="bkStatApproved">0</div><div class="stat-label">승인 완료</div></div>'
-                    + '<div class="stat-card" style="border-color:rgba(239,68,68,0.3)"><div class="stat-value" style="color:#ef4444" id="bkStatRejected">0</div><div class="stat-label">거절</div></div>'
-                    + '</div>'
-                    + '<div class="table-card"><div class="table-header"><h3>주문 목록</h3><div class="table-actions">'
-                    + '<select id="bkFilterStatus" onchange="loadBankOrders()" style="padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg-card);color:var(--text-primary);font-size:0.8rem;">'
-                    + '<option value="all">전체</option><option value="pending">⏳ 대기</option><option value="approved">✅ 승인</option><option value="rejected">❌ 거절</option></select>'
-                    + '<button class="btn-action" onclick="loadBankOrders()">🔄 새로고침</button></div></div>'
-                    + '<div id="bankOrdersTable" style="padding:20px;text-align:center;color:var(--text-secondary);">탭 선택 시 자동으로 불러옵니다.</div></div>'
-                    + '<div style="margin-top:16px;padding:16px;background:rgba(68,215,182,0.06);border:1px solid rgba(68,215,182,0.15);border-radius:12px;">'
-                    + '<p style="color:#44d7b6;font-size:0.85rem;margin:0;">💡 <strong>워크플로우:</strong> 고객 주문 접수 → Gmail 알림 → 입금 확인 → 승인 클릭 → 라이선스 코드 자동 생성 → 고객 이메일 발송</p></div>';
-                mc.appendChild(bp);
+        let allTrialUsers = [];
+        let trialPage = 1;
+
+        async function fetchTrialUsers() {
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'trial-list', adminToken: ADMIN_TOKEN })
+                });
+                const json = await res.json();
+                if (json.ok) return json.users || [];
+                throw new Error(json.error);
+            } catch (err) {
+                console.error('Trial API Error:', err);
+                return [];
             }
-            var orig = window.switchTab;
-            window.switchTab = function(tabId) {
-                if (orig) orig(tabId);
-                if (tabId === 'bank-orders') loadBankOrders();
-            };
-        })();
+        }
+
+        async function loadTrialUsers() {
+            document.getElementById('trial-table-body').innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 체험 사용자 로딩 중...</div>';
+            allTrialUsers = await fetchTrialUsers();
+
+            // Stats
+            const total = allTrialUsers.length;
+            const blocked = allTrialUsers.filter(u => u.blocked === 'true' || u.blocked === 'Y').length;
+            const active = total - blocked;
+            document.getElementById('trial-stat-total').textContent = total.toLocaleString();
+            document.getElementById('trial-stat-active').textContent = active.toLocaleString();
+            document.getElementById('trial-stat-blocked').textContent = blocked.toLocaleString();
+
+            renderTrialTable();
+        }
+
+        function renderTrialTable(filter = '') {
+            let filtered = allTrialUsers;
+            if (filter) {
+                const q = filter.toLowerCase();
+                filtered = allTrialUsers.filter(u =>
+                    (u.email || '').toLowerCase().includes(q) ||
+                    (u.nickname || '').toLowerCase().includes(q) ||
+                    (u.phone || '').includes(q)
+                );
+                trialPage = 1;
+            }
+
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+            if (trialPage > totalPages) trialPage = totalPages;
+            const start = (trialPage - 1) * PAGE_SIZE;
+            const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+            let html = '<table class="data-table"><thead><tr>';
+            html += '<th>이메일</th><th>닉네임</th><th>전화번호</th><th>상태</th><th>활성화 횟수</th><th>등록일</th><th>최근 활동</th><th>작업</th>';
+            html += '</tr></thead><tbody>';
+
+            if (pageItems.length === 0) {
+                html += '<tr><td colspan="8" style="text-align:center;color:var(--text-secondary);padding:32px;">체험 사용자가 없습니다.</td></tr>';
+            } else {
+                pageItems.forEach(u => {
+                    const isBlocked = u.blocked === 'true' || u.blocked === 'Y';
+                    const statusBadge = isBlocked
+                        ? '<span class="badge badge-expired">차단됨</span>'
+                        : '<span class="badge badge-active">활성</span>';
+                    const regDate = u.registeredAt ? new Date(u.registeredAt).toLocaleDateString('ko-KR') : '—';
+                    const lastDate = u.lastActiveAt ? new Date(u.lastActiveAt).toLocaleString('ko-KR') : '—';
+                    const safeEmail = escapeHtml(u.email);
+                    const actionBtn = isBlocked
+                        ? `<button class="btn" onclick="toggleBlockTrialUser('${safeEmail}', false)" style="padding:4px 10px;font-size:0.7rem;">해제</button>`
+                        : `<button class="btn btn-red" onclick="toggleBlockTrialUser('${safeEmail}', true)" style="padding:4px 10px;font-size:0.7rem;">차단</button>`;
+
+                    html += `<tr${isBlocked ? ' style="opacity:0.5;"' : ''}>
+                        <td><span class="code-text">${safeEmail}</span></td>
+                        <td>${escapeHtml(u.nickname) || '—'}</td>
+                        <td>${escapeHtml(u.phone) || '—'}</td>
+                        <td>${statusBadge}</td>
+                        <td style="text-align:center;">${u.totalActivations || 0}</td>
+                        <td>${escapeHtml(regDate)}</td>
+                        <td>${escapeHtml(lastDate)}</td>
+                        <td>${actionBtn}</td>
+                    </tr>`;
+                });
+            }
+            html += '</tbody></table>';
+            html += buildPagination(trialPage, totalPages, filtered.length, 'trial');
+            document.getElementById('trial-table-body').innerHTML = html;
+        }
+
+        function filterTrialUsers() {
+            const q = document.getElementById('trial-search').value;
+            renderTrialTable(q);
+        }
+
+        async function toggleBlockTrialUser(email, block) {
+            const action = block ? '차단' : '해제';
+            if (!confirm(`${email}을(를) ${action}하시겠습니까?`)) return;
+
+            try {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'trial-block', adminToken: ADMIN_TOKEN, email, block })
+                });
+                const json = await res.json();
+                if (json.ok) {
+                    showToast(`✅ ${email} ${action} 완료`);
+                    await loadTrialUsers();
+                } else {
+                    showToast('❌ ' + (json.error || '실패'));
+                }
+            } catch (err) {
+                showToast('❌ 네트워크 오류: ' + err.message);
+            }
+        }
+
+
+        // ===== BANK TRANSFER MANAGEMENT =====
+        let allBankOrders = [];
+        let bankPage = 1;
 
         async function loadBankOrders() {
-            var filter = document.getElementById('bkFilterStatus') ? document.getElementById('bkFilterStatus').value : 'all';
+            document.getElementById('bank-table-body').innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 계좌이체 주문 로딩 중...</div>';
             try {
-                var res = await fetch(GAS_URL, {
+                const res = await fetch(GAS_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({ action: 'bank-list', adminToken: ADMIN_TOKEN, status: filter })
+                    body: JSON.stringify({ action: 'bank-list', adminToken: ADMIN_TOKEN, status: 'all' })
                 });
-                var r = await res.json();
-                if (!r || !r.ok) throw new Error((r && r.error) || '로드 실패');
-                var orders = r.orders || [];
-                var pend = orders.filter(function(o){return o.status==='pending'}).length;
-                var appr = orders.filter(function(o){return o.status==='approved'}).length;
-                var rej = orders.filter(function(o){return o.status==='rejected'}).length;
-                document.getElementById('bkStatTotal').textContent = orders.length;
-                document.getElementById('bkStatPending').textContent = pend;
-                document.getElementById('bkStatApproved').textContent = appr;
-                document.getElementById('bkStatRejected').textContent = rej;
-                if (!orders.length) {
-                    document.getElementById('bankOrdersTable').innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:40px;">주문이 없습니다.</p>';
-                    return;
+                const json = await res.json();
+                if (json.ok) {
+                    allBankOrders = json.orders || [];
+                    // Update stats
+                    const pending = allBankOrders.filter(o => o.status === 'pending').length;
+                    const approved = allBankOrders.filter(o => o.status === 'approved').length;
+                    const rejected = allBankOrders.filter(o => o.status === 'rejected').length;
+                    document.getElementById('bank-stat-pending').textContent = pending;
+                    document.getElementById('bank-stat-approved').textContent = approved;
+                    document.getElementById('bank-stat-rejected').textContent = rejected;
+                    renderBankTable();
+                } else {
+                    document.getElementById('bank-table-body').innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-secondary);">❌ ${json.error || '로딩 실패'}</div>`;
                 }
-                var html = '<table class="data-table"><thead><tr><th>주문번호</th><th>입금자명</th><th>이메일</th><th>상품</th><th>금액</th><th>상태</th><th>코드</th><th>접수일</th><th>작업</th></tr></thead><tbody>';
-                orders.forEach(function(o) {
-                    var statusBadge = o.status==='pending' ? '<span style="color:#f59e0b;font-weight:600;">⏳ 대기</span>'
-                        : o.status==='approved' ? '<span style="color:#10b981;font-weight:600;">✅ 승인</span>'
-                        : '<span style="color:#ef4444;font-weight:600;">❌ 거절</span>';
-                    var dateStr = o.createdAt ? new Date(o.createdAt).toLocaleString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '-';
-                    var codeStr = o.licenseCode ? '<code style="font-size:10px;cursor:pointer;" onclick="navigator.clipboard.writeText(\'' + o.licenseCode + '\');this.style.color=\'#10b981\';" title="복사">' + o.licenseCode.substring(0,18) + '...</code>' : '-';
-                    var actions = o.status==='pending'
-                        ? '<button class="btn-action" style="background:rgba(16,185,129,0.15);color:#10b981;font-size:0.7rem;padding:4px 10px;" onclick="approveBankOrder(\'' + o.orderId + '\')">✅ 승인</button> <button class="btn-action" style="background:rgba(239,68,68,0.15);color:#ef4444;font-size:0.7rem;padding:4px 10px;" onclick="rejectBankOrder(\'' + o.orderId + '\')">❌</button>'
-                        : o.status==='approved' ? '<span style="color:#10b981;font-size:0.7rem;">완료</span>' : '<span style="color:var(--text-secondary);font-size:0.7rem;">거절됨</span>';
-                    html += '<tr><td style="font-size:0.7rem;font-family:monospace;" title="' + o.orderId + '">' + o.orderId.substring(0,14) + '...</td><td style="font-weight:600;">' + (o.name||'-') + '</td><td style="font-size:0.8rem;">' + (o.email||'-') + '</td><td style="color:var(--gold);font-weight:600;">' + (o.product||'-') + '</td><td style="font-weight:700;">' + (o.amount||0).toLocaleString() + '원</td><td>' + statusBadge + '</td><td>' + codeStr + '</td><td style="font-size:0.75rem;color:var(--text-secondary);">' + dateStr + '</td><td>' + actions + '</td></tr>';
-                });
-                html += '</tbody></table>';
-                document.getElementById('bankOrdersTable').innerHTML = html;
-            } catch (e) {
-                document.getElementById('bankOrdersTable').innerHTML = '<p style="text-align:center;color:var(--accent-red);padding:20px;">❌ ' + e.message + '</p>';
+            } catch (err) {
+                document.getElementById('bank-table-body').innerHTML = `<div style="text-align:center;padding:32px;color:var(--text-secondary);">❌ 네트워크 오류: ${err.message}</div>`;
             }
         }
+
+        function filterBankOrders() {
+            bankPage = 1;
+            renderBankTable();
+        }
+
+        function renderBankTable(customQuery) {
+            const q = (customQuery || document.getElementById('bank-search').value || '').toLowerCase();
+            const statusFilter = document.getElementById('bank-status-filter').value;
+
+            let filtered = allBankOrders;
+            if (statusFilter !== 'all') {
+                filtered = filtered.filter(o => o.status === statusFilter);
+            }
+            if (q) {
+                filtered = filtered.filter(o =>
+                    (o.name || '').toLowerCase().includes(q) ||
+                    (o.email || '').toLowerCase().includes(q) ||
+                    (o.orderId || '').toLowerCase().includes(q) ||
+                    (o.product || '').toLowerCase().includes(q)
+                );
+            }
+
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+            bankPage = Math.min(bankPage, totalPages);
+            const start = (bankPage - 1) * PAGE_SIZE;
+            const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+            let html = '<table class="data-table"><thead><tr>';
+            html += '<th>주문번호</th><th>입금자명</th><th>이메일</th><th>상품</th><th>금액</th><th>상태</th><th>라이선스</th><th>접수일</th><th>작업</th>';
+            html += '</tr></thead><tbody>';
+
+            if (pageItems.length === 0) {
+                html += '<tr><td colspan="9" style="text-align:center;color:var(--text-secondary);padding:32px;">주문이 없습니다.</td></tr>';
+            } else {
+                pageItems.forEach(o => {
+                    let statusBadge = '';
+                    if (o.status === 'pending') statusBadge = '<span class="badge" style="background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);padding:4px 10px;border-radius:20px;font-size:0.7rem;font-weight:600;">⏳ 대기</span>';
+                    else if (o.status === 'approved') statusBadge = '<span class="badge badge-active">✅ 승인</span>';
+                    else if (o.status === 'rejected') statusBadge = '<span class="badge badge-expired">❌ 거절</span>';
+                    else statusBadge = `<span class="badge">${o.status}</span>`;
+
+                    const createdDate = o.createdAt ? new Date(o.createdAt).toLocaleString('ko-KR') : '—';
+                    const amount = o.amount ? o.amount.toLocaleString() + '원' : '—';
+                    const code = o.licenseCode ? `<span class="code-text">${escapeHtml(o.licenseCode)}</span>` : '—';
+                    const safeOrderId = escapeHtml(o.orderId);
+
+                    let actionBtns = '';
+                    if (o.status === 'pending') {
+                        actionBtns = `
+                            <button class="btn btn-gold" onclick="approveBankOrder('${safeOrderId}')" style="padding:4px 10px;font-size:0.7rem;margin-right:4px;">✅ 승인</button>
+                            <button class="btn btn-red" onclick="rejectBankOrder('${safeOrderId}')" style="padding:4px 10px;font-size:0.7rem;">❌ 거절</button>
+                        `;
+                    } else if (o.status === 'approved') {
+                        actionBtns = '<span style="color:var(--text-secondary);font-size:0.7rem;">처리 완료</span>';
+                    } else {
+                        actionBtns = '<span style="color:var(--text-secondary);font-size:0.7rem;">거절됨</span>';
+                    }
+
+                    html += `<tr>
+                        <td><span class="code-text">${safeOrderId}</span></td>
+                        <td>${escapeHtml(o.name) || '—'}</td>
+                        <td>${escapeHtml(o.email) || '—'}</td>
+                        <td>${escapeHtml(o.product) || '—'}</td>
+                        <td style="font-weight:600;">${amount}</td>
+                        <td>${statusBadge}</td>
+                        <td>${code}</td>
+                        <td>${escapeHtml(createdDate)}</td>
+                        <td>${actionBtns}</td>
+                    </tr>`;
+                });
+            }
+            html += '</tbody></table>';
+            html += buildPagination(bankPage, totalPages, filtered.length, 'bank');
+            document.getElementById('bank-table-body').innerHTML = html;
+        }
+
         async function approveBankOrder(orderId) {
-            if (!confirm('주문 ' + orderId + '을(를) 승인하시겠습니까?\n라이선스 코드가 자동 생성되어 고객 이메일로 발송됩니다.')) return;
+            if (!confirm(`주문 ${orderId}을(를) 승인하시겠습니까?\n\n승인하면 라이선스가 자동 발급되고 고객에게 메일이 발송됩니다.`)) return;
+
+            showToast('⏳ 승인 처리 중...');
             try {
-                var res = await fetch(GAS_URL, {
+                const res = await fetch(GAS_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({ action: 'bank-approve', adminToken: ADMIN_TOKEN, orderId: orderId })
+                    body: JSON.stringify({ action: 'bank-approve', adminToken: ADMIN_TOKEN, orderId: orderId, reject: false })
                 });
-                var r = await res.json();
-                if (!r || !r.ok) throw new Error((r && r.error) || '승인 실패');
-                alert('✅ 승인 완료!\n코드: ' + (r.code || '(발급됨)'));
-                loadBankOrders();
-            } catch (e) { alert('❌ 승인 실패: ' + e.message); }
+                const json = await res.json();
+                if (json.ok) {
+                    showToast(`✅ 승인 완료! 라이선스: ${json.code}`);
+                    await loadBankOrders();
+                } else {
+                    showToast('❌ 승인 실패: ' + (json.error || '알 수 없는 오류'));
+                }
+            } catch (err) {
+                showToast('❌ 네트워크 오류: ' + err.message);
+            }
         }
+
         async function rejectBankOrder(orderId) {
-            if (!confirm('주문 ' + orderId + '을(를) 거절하시겠습니까?')) return;
+            if (!confirm(`주문 ${orderId}을(를) 거절하시겠습니까?`)) return;
+
+            showToast('⏳ 거절 처리 중...');
             try {
-                var res = await fetch(GAS_URL, {
+                const res = await fetch(GAS_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify({ action: 'bank-approve', adminToken: ADMIN_TOKEN, orderId: orderId, reject: true })
                 });
-                var r = await res.json();
-                if (!r || !r.ok) throw new Error((r && r.error) || '거절 실패');
-                alert('주문이 거절되었습니다.');
-                loadBankOrders();
-            } catch (e) { alert('❌ 거절 실패: ' + e.message); }
+                const json = await res.json();
+                if (json.ok) {
+                    showToast('✅ 주문이 거절되었습니다.');
+                    await loadBankOrders();
+                } else {
+                    showToast('❌ 거절 실패: ' + (json.error || '알 수 없는 오류'));
+                }
+            } catch (err) {
+                showToast('❌ 네트워크 오류: ' + err.message);
+            }
         }
 
     </script>
-
 </body>
-
 </html>
-

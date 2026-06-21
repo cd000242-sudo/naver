@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import IndexPage from './pages/IndexPage';
 import ProductsPage from './pages/ProductsPage';
@@ -16,8 +17,15 @@ import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
 import BankOrderPage from './pages/BankOrderPage';
 import NotFoundPage from './pages/NotFoundPage';
+import { recordPageView } from './lib/siteOps';
 
 function App() {
+    const location = useLocation();
+
+    useEffect(() => {
+        recordPageView(location.pathname + location.search);
+    }, [location.pathname, location.search]);
+
     return (
         <Routes>
             <Route element={<Layout />}>

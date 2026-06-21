@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
 import TrustCounter from '../components/TrustCounter';
+import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 /**
  * 메인 페이지 — payment-page/index.html (838줄) 마이그레이션.
@@ -9,6 +10,8 @@ import TrustCounter from '../components/TrustCounter';
  * inline style 그대로 유지 (사용자 요구).
  */
 function IndexPage() {
+    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
         const prevTitle = document.title;
@@ -31,6 +34,18 @@ function IndexPage() {
         return () => observer.disconnect();
     }, []);
 
+    useEffect(() => {
+        fetchSiteContent().then(setSiteContent);
+    }, []);
+
+    const heroTitle = siteContent?.hero?.title || '매일 100건,\n사람이 쓴 것처럼.';
+    const heroLines = heroTitle.split('\n').filter(Boolean);
+    const heroLead = heroLines.slice(0, -1).join('\n') || '매일 100건,';
+    const heroAccent = heroLines[heroLines.length - 1] || '사람이 쓴 것처럼.';
+    const heroDesc = siteContent?.hero?.desc || '키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.\n블로그 10개를 혼자 운영하는 분들의 비밀 무기.';
+    const heroBenefit = siteContent?.hero?.benefit || '2,800+명이 사용 중';
+    const heroNotice = siteContent?.hero?.notice || '';
+
     return (
         <>
             <ParticlesCanvas />
@@ -43,13 +58,19 @@ function IndexPage() {
                         <span>PREMIUM AUTOMATION</span>
                     </div>
                     <h1 style={{ fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 900, lineHeight: 1.2, letterSpacing: '-2px', marginBottom: 20 }}>
-                        매일 100건,<br />
-                        <span style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-light))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>사람이 쓴 것처럼.</span>
+                        {heroLead.split('\n').map((line) => <span key={line}>{line}<br /></span>)}
+                        <span style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-light))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{heroAccent}</span>
                     </h1>
                     <p style={{ fontSize: 18, color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: 32 }}>
-                        키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.<br />
-                        블로그 10개를 혼자 운영하는 분들의 <strong style={{ color: 'var(--text-primary)' }}>비밀 무기</strong>.
+                        {heroDesc.split('\n').map((line, index) => (
+                            <span key={`${line}-${index}`}>{line}{index < heroDesc.split('\n').length - 1 ? <br /> : null}</span>
+                        ))}
                     </p>
+                    {heroNotice && (
+                        <div style={{ marginBottom: 24, padding: '12px 16px', border: '1px solid rgba(201,168,76,0.28)', borderRadius: 12, color: 'var(--gold-primary)', background: 'rgba(201,168,76,0.08)', fontSize: 14, fontWeight: 700 }}>
+                            {heroNotice}
+                        </div>
+                    )}
                     <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 24 }}>
                         <Link to="/pricing" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '16px 32px', background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-light))', color: '#1a1a2e', borderRadius: 12, fontWeight: 800, fontSize: 16, textDecoration: 'none', boxShadow: '0 8px 24px rgba(201, 168, 76, 0.4)' }}>
                             <span>지금 자동화 시작하기</span>
@@ -65,7 +86,7 @@ function IndexPage() {
                                     <div key={i} style={{ width: 32, height: 32, borderRadius: '50%', background: a.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 13, border: '2px solid var(--bg-dark)', marginLeft: i === 0 ? 0 : -10 }}>{a.letter}</div>
                                 ))}
                             </div>
-                            <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>2,800+명이 사용 중</span>
+                            <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{heroBenefit}</span>
                         </div>
                     </div>
                 </div>

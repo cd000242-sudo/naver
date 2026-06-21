@@ -58,6 +58,14 @@ function doGet(e) {
     case 'get-naver-accounts':
       return handleGetNaverAccounts();
 
+    // ── 사이트 콘텐츠 조회 ──
+    case 'site-content':
+      return handleSiteContentGet(e);
+
+    // ── 방문 로그 수집(GET fallback) ──
+    case 'analytics-hit':
+      return handleAnalyticsHit(e);
+
     // ── 기본: 기존 라이선스 검증 등 ──
     default:
       return handleDefault(e);
@@ -93,6 +101,14 @@ function doPost(e) {
         return handleBankApprove(data);
       case 'bank-list':
         return handleBankList(data);
+
+      // ✅ 관리자 사이트 편집 + 매출/방문 분석
+      case 'site-content-save':
+        return handleSiteContentSave(data);
+      case 'analytics-hit':
+        return handleAnalyticsPost(data);
+      case 'analytics-dashboard':
+        return handleAnalyticsDashboard(data);
 
       default:
         return ContentService.createTextOutput(JSON.stringify({
@@ -132,6 +148,15 @@ function jsonpResponse(callback, data) {
   var output = callback + '(' + json + ')';
   return ContentService.createTextOutput(output)
     .setMimeType(ContentService.MimeType.JAVASCRIPT);
+}
+
+function jsonResponse(data) {
+  return ContentService.createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function isAdminToken(token) {
+  return String(token || '') === 'qkrtjdgus2021645';
 }
 
 
@@ -1118,4 +1143,306 @@ function handleBankList(data) {
   return ContentService.createTextOutput(JSON.stringify({
     ok: true, total: orders.length, orders: orders
   })).setMimeType(ContentService.MimeType.JSON);
+}
+
+
+// ═══════════════════════════════════════════════════════════
+// ▣ 14. 관리자 사이트 편집 — 실제 사이트가 읽는 콘텐츠 저장소
+// ═══════════════════════════════════════════════════════════
+
+function getSiteContentSheet() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName('사이트콘텐츠');
+  if (!sheet) {
+    sheet = ss.insertSheet('사이트콘텐츠');
+    sheet.appendRow(['key', 'json', 'updatedAt']);
+    sheet.getRange(1, 1, 1, 3)
+      .setFontWeight('bold')
+      .setBackground('#c9a84c')
+      .setFontColor('#0a0a0f');
+    sheet.setFrozenRows(1);
+    sheet.setColumnWidth(1, 160);
+    sheet.setColumnWidth(2, 720);
+    sheet.setColumnWidth(3, 180);
+  }
+  return sheet;
+}
+
+function defaultSiteContent() {
+  return {
+    hero: {
+      title: '매일 100건,\n사람이 쓴 것처럼.',
+      desc: '키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.\n블로그 10개를 혼자 운영하는 분들의 비밀 무기.',
+      benefit: '2,800+명이 사용 중',
+      notice: ''
+    },
+    pricing: {
+      plans: {
+        'all-in-one-monthly': { amount: 50000, amountCard: 55000, futureAmount: 100000 },
+        'all-in-one-quarterly': { amount: 120000, futureAmount: 240000 },
+        'all-in-one-yearly': { amount: 400000, futureAmount: 800000 },
+        'all-in-one-lifetime': { amount: 1650000, futureAmount: 3300000 }
+      }
+    },
+    downloads: {},
+    products: {},
+    updatedAt: new Date().toISOString()
+  };
+}
+
+function readSiteContent() {
+  var sheet = getSiteContentSheet();
+  var values = sheet.getDataRange().getValues();
+  for (var i = 1; i < values.length; i++) {
+    if (String(values[i][0] || '') === 'site') {
+      try {
+        return JSON.parse(String(values[i][1] || '{}'));
+      } catch (err) {
+        Logger.log('[SiteContent] JSON parse error: ' + err.message);
+        return defaultSiteContent();
+      }
+    }
+  }
+  return defaultSiteContent();
+}
+
+function handleSiteContentGet(e) {
+  return jsonResponse({
+    ok: true,
+    success: true,
+    content: readSiteContent(),
+    updatedAt: new Date().toISOString()
+  });
+}
+
+function handleSiteContentSave(data) {
+  if (!isAdminToken(data.adminToken)) {
+    return jsonResponse({ ok: false, success: false, error: '관리자 인증 실패' });
+  }
+  var content = data.content || {};
+  content.updatedAt = content.updatedAt || new Date().toISOString();
+  var json = JSON.stringify(content);
+  var sheet = getSiteContentSheet();
+  var values = sheet.getDataRange().getValues();
+  var rowNum = 0;
+  for (var i = 1; i < values.length; i++) {
+    if (String(values[i][0] || '') === 'site') {
+      rowNum = i + 1;
+      break;
+    }
+  }
+  if (rowNum) {
+    sheet.getRange(rowNum, 1, 1, 3).setValues([['site', json, content.updatedAt]]);
+  } else {
+    sheet.appendRow(['site', json, content.updatedAt]);
+  }
+  SpreadsheetApp.flush();
+  return jsonResponse({ ok: true, success: true, updatedAt: content.updatedAt });
+}
+
+
+// ═══════════════════════════════════════════════════════════
+// ▣ 15. 매출/방문 분석 — Toss + 계좌이체 + 방문 로그
+// ═══════════════════════════════════════════════════════════
+
+function getAnalyticsSheet() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName('방문로그');
+  if (!sheet) {
+    sheet = ss.insertSheet('방문로그');
+    sheet.appendRow(['timestamp', 'type', 'path', 'title', 'referrer', 'visitorId', 'sessionId', 'isInternal', 'userAgent']);
+    sheet.getRange(1, 1, 1, 9)
+      .setFontWeight('bold')
+      .setBackground('#4a90d9')
+      .setFontColor('#ffffff');
+    sheet.setFrozenRows(1);
+    [180, 90, 220, 220, 260, 180, 180, 90, 420].forEach(function (w, i) {
+      sheet.setColumnWidth(i + 1, w);
+    });
+  }
+  return sheet;
+}
+
+function handleAnalyticsHit(e) {
+  return handleAnalyticsPost({
+    timestamp: e.parameter.timestamp,
+    type: e.parameter.type,
+    path: e.parameter.path,
+    title: e.parameter.title,
+    referrer: e.parameter.referrer,
+    visitorId: e.parameter.visitorId,
+    sessionId: e.parameter.sessionId,
+    isInternal: e.parameter.isInternal,
+    userAgent: e.parameter.userAgent
+  });
+}
+
+function handleAnalyticsPost(data) {
+  var sheet = getAnalyticsSheet();
+  var isInternal = data.isInternal === true || String(data.isInternal || '').toLowerCase() === 'true' || String(data.isInternal || '').toUpperCase() === 'Y';
+  sheet.appendRow([
+    data.timestamp || new Date().toISOString(),
+    data.type || 'pageview',
+    data.path || '',
+    data.title || '',
+    data.referrer || '',
+    data.visitorId || '',
+    data.sessionId || '',
+    isInternal ? 'Y' : 'N',
+    data.userAgent || ''
+  ]);
+  return jsonResponse({ ok: true, success: true });
+}
+
+function analyticsPad2(n) {
+  return n < 10 ? '0' + n : String(n);
+}
+
+function analyticsDateRange(period) {
+  var now = new Date();
+  var today = Utilities.formatDate(now, 'Asia/Seoul', 'yyyy-MM-dd');
+  if (period === 'month') {
+    var y = Number(today.slice(0, 4));
+    var m = Number(today.slice(5, 7));
+    var nextY = m === 12 ? y + 1 : y;
+    var nextM = m === 12 ? 1 : m + 1;
+    return {
+      start: new Date(y + '-' + analyticsPad2(m) + '-01T00:00:00+09:00'),
+      end: new Date(nextY + '-' + analyticsPad2(nextM) + '-01T00:00:00+09:00')
+    };
+  }
+  var start = new Date(today + 'T00:00:00+09:00');
+  return { start: start, end: new Date(start.getTime() + 24 * 60 * 60 * 1000) };
+}
+
+function parseAnalyticsDate(value) {
+  if (value instanceof Date) return value;
+  var date = new Date(value);
+  if (isNaN(date.getTime())) return null;
+  return date;
+}
+
+function inAnalyticsRange(value, range) {
+  var date = parseAnalyticsDate(value);
+  return !!date && date >= range.start && date < range.end;
+}
+
+function getHeaderMap(headers) {
+  var map = {};
+  for (var i = 0; i < headers.length; i++) {
+    map[String(headers[i] || '').trim()] = i;
+  }
+  return map;
+}
+
+function collectSalesRows(range) {
+  var rows = [];
+  var seen = {};
+
+  try {
+    var orderSheet = getOrderSheet();
+    var orderValues = orderSheet.getDataRange().getValues();
+    if (orderValues.length > 1) {
+      var orderMap = getHeaderMap(orderValues[0]);
+      for (var i = 1; i < orderValues.length; i++) {
+        var row = orderValues[i];
+        var orderId = String(row[orderMap.orderId] || '');
+        var status = String(row[orderMap.status] || '').toLowerCase();
+        var createdAt = row[orderMap.createdAt];
+        if (status && status !== 'completed' && status !== 'complete' && status !== 'approved') continue;
+        if (!inAnalyticsRange(createdAt, range)) continue;
+        seen[orderId] = true;
+        rows.push({
+          orderId: orderId,
+          email: String(row[orderMap.email] || ''),
+          productName: String(row[orderMap.productName] || row[orderMap.productType] || ''),
+          amount: Number(row[orderMap.amount]) || 0,
+          method: String(row[orderMap.paymentKey] || '').indexOf('bank') >= 0 ? '계좌이체' : 'Toss',
+          createdAt: parseAnalyticsDate(createdAt).toISOString()
+        });
+      }
+    }
+  } catch (err) {
+    Logger.log('[Analytics] 주문내역 읽기 오류: ' + err.message);
+  }
+
+  try {
+    var bankSheet = getBankOrderSheet();
+    var bankValues = bankSheet.getDataRange().getValues();
+    if (bankValues.length > 1) {
+      var bankMap = getHeaderMap(bankValues[0]);
+      for (var b = 1; b < bankValues.length; b++) {
+        var brow = bankValues[b];
+        var bid = String(brow[bankMap.orderId] || '');
+        var bstatus = String(brow[bankMap.status] || '').toLowerCase();
+        var bcreatedAt = brow[bankMap.approvedAt] || brow[bankMap.createdAt];
+        if (bstatus !== 'approved') continue;
+        if (seen[bid]) continue;
+        if (!inAnalyticsRange(bcreatedAt, range)) continue;
+        seen[bid] = true;
+        rows.push({
+          orderId: bid,
+          name: String(brow[bankMap.name] || ''),
+          email: String(brow[bankMap.email] || ''),
+          productName: String(brow[bankMap.product] || ''),
+          amount: Number(brow[bankMap.amount]) || 0,
+          method: '계좌이체',
+          createdAt: parseAnalyticsDate(bcreatedAt).toISOString()
+        });
+      }
+    }
+  } catch (bankErr) {
+    Logger.log('[Analytics] 계좌이체주문 읽기 오류: ' + bankErr.message);
+  }
+
+  rows.sort(function (a, b) { return String(b.createdAt).localeCompare(String(a.createdAt)); });
+  return rows;
+}
+
+function collectVisitorStats(range) {
+  var sheet = getAnalyticsSheet();
+  var values = sheet.getDataRange().getValues();
+  var unique = {};
+  var pageviews = 0;
+  var internalPageviews = 0;
+
+  for (var i = 1; i < values.length; i++) {
+    var row = values[i];
+    if (!inAnalyticsRange(row[0], range)) continue;
+    if (String(row[1] || 'pageview') !== 'pageview') continue;
+    var isInternal = String(row[7] || '').toUpperCase() === 'Y' || String(row[7] || '').toLowerCase() === 'true';
+    if (isInternal) {
+      internalPageviews++;
+      continue;
+    }
+    pageviews++;
+    var visitorId = String(row[5] || row[6] || 'anon-' + i);
+    unique[visitorId] = true;
+  }
+
+  return {
+    unique: Object.keys(unique).length,
+    pageviews: pageviews,
+    internalPageviews: internalPageviews
+  };
+}
+
+function handleAnalyticsDashboard(data) {
+  if (!isAdminToken(data.adminToken)) {
+    return jsonResponse({ ok: false, success: false, error: '관리자 인증 실패' });
+  }
+  var period = data.period === 'month' ? 'month' : 'today';
+  var range = analyticsDateRange(period);
+  var salesRows = collectSalesRows(range);
+  var revenue = 0;
+  salesRows.forEach(function (row) { revenue += Number(row.amount) || 0; });
+  return jsonResponse({
+    ok: true,
+    success: true,
+    period: period,
+    sales: { revenue: revenue, orders: salesRows.length },
+    visitors: collectVisitorStats(range),
+    recentOrders: salesRows.slice(0, 30),
+    updatedAt: new Date().toISOString()
+  });
 }
