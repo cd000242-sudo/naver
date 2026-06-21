@@ -2053,14 +2053,18 @@ export async function checkGoogleLoginForImageFx(): Promise<{
     }
 
     const { chromium } = await import('playwright');
-    console.log('[ImageFX] 🔍 headless 브라우저로 세션 확인...');
+    // ✅ [Phase 3 anti-BotGuard] 로그인 확인도 headful + 화면 밖 배치로 전환.
+    //   v2.10.290 원칙(headless = Google 자동화 감지↑)을 로그인 체크 경로에도 적용 —
+    //   raw headless로 Google에 핑하면 그 자체가 플래그 신호가 될 수 있다. 창은 off-screen으로 숨김.
+    console.log('[ImageFX] 🔍 headful(off-screen) 브라우저로 세션 확인...');
 
     let context = await chromium.launchPersistentContext(profileDir, {
-      headless: true,
+      headless: false,
       args: [
         '--no-first-run',
         '--disable-blink-features=AutomationControlled',
         '--disable-infobars',
+        '--window-position=-32000,-32000',
       ],
       viewport: { width: 1280, height: 800 },
       ignoreDefaultArgs: ['--enable-automation'],
