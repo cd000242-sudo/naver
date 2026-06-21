@@ -8,6 +8,26 @@
 // 호출자는 이 모듈에서 가져와 사용 (직접 문자열 리터럴 금지).
 
 /**
+ * 에이전트 모드 — 사용자 본인 PC의 codex/claude CLI를 본인 구독으로 호출하는 글생성 엔진.
+ *   API 모델 ID가 아니라 글로벌 엔진 셀렉터(primaryGeminiTextModel)의 provider 값이다.
+ *   'agent-codex' → ChatGPT 구독(codex), 'agent-claude' → Claude 구독(claude CLI).
+ *   SSOT: 렌더러 매핑·메인 라우팅·콘텐츠 분기가 모두 이 목록/헬퍼를 참조한다.
+ */
+export const AGENT_TEXT_PROVIDERS = ['agent-codex', 'agent-claude'] as const;
+
+export type AgentTextProvider = (typeof AGENT_TEXT_PROVIDERS)[number];
+
+/** primaryGeminiTextModel/provider 값이 에이전트 모드인지 판별. */
+export function isAgentTextProvider(value: unknown): value is AgentTextProvider {
+  return value === 'agent-codex' || value === 'agent-claude';
+}
+
+/** 에이전트 provider 값 → agentCli 서비스 provider('codex'|'claude'). */
+export function agentTextProviderToCli(value: AgentTextProvider): 'codex' | 'claude' {
+  return value === 'agent-codex' ? 'codex' : 'claude';
+}
+
+/**
  * Anthropic Claude (2026-04 기준 검증)
  *   Source: docs.claude.com / console.anthropic.com models
  */

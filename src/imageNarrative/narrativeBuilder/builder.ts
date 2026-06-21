@@ -32,9 +32,14 @@ const PROMPT_DIR_DIST = join(__dirname, '..', '..', 'prompts', 'imageNarrative')
 // Builder options
 // ---------------------------------------------------------------------------
 
+// Text-generation provider for the narrative writer. Extends VisionProvider with the agent
+// CLIs (codex/claude subscription) — agent mode applies to the TEXT step only; image vision
+// inference still uses a vision-capable vendor upstream.
+export type NarrativeTextProvider = VisionProvider | 'agent-codex' | 'agent-claude';
+
 export interface BuilderOptions {
   /** AI provider to use for content generation. Defaults to 'gemini'. */
-  readonly provider?: VisionProvider;
+  readonly provider?: NarrativeTextProvider;
   /** Target character count. Defaults to 1500. */
   readonly targetChars?: number;
   /** Speech style: formal / casual / friendly. Defaults to 'friendly'. */
@@ -161,7 +166,7 @@ function buildUserPrompt(plan: NarrativePlan, options: BuilderOptions): string {
 async function callProvider(
   systemPrompt: string,
   userPrompt: string,
-  provider: VisionProvider,
+  provider: NarrativeTextProvider,
   signal?: AbortSignal,
 ): Promise<string> {
   const fullPrompt = `${systemPrompt}\n\n---\n\n${userPrompt}`;
@@ -173,10 +178,27 @@ async function callProvider(
       return callOpenAIProvider(fullPrompt, signal);
     case 'claude':
       return callClaudeProvider(fullPrompt, signal);
+    case 'agent-codex':
+    case 'agent-claude':
+      // 에이전트 모드 — 사용자 본인 구독 CLI로 글 작성 (공유 agentCli 서비스, 중복 구현 금지).
+      // silent 폴백 금지: 실패는 AgentCliError 그대로 throw.
+      return callAgentProvider(provider, fullPrompt, signal);
     default:
       // deepinfra — fall back to gemini
       return callGeminiProvider(fullPrompt, signal);
   }
+}
+
+async function callAgentProvider(
+  provider: 'agent-codex' | 'agent-claude',
+  prompt: string,
+  signal?: AbortSignal,
+): Promise<string> {
+  const { generateWithAgent } = await import('../../agentCli/index.js');
+  const { agentTextProviderToCli } = await import('../../runtime/modelRegistry.js');
+  const cliProvider = agentTextProviderToCli(provider);
+  const result = await generateWithAgent({ provider: cliProvider, prompt, signal });
+  return result.text;
 }
 
 async function callGeminiProvider(
@@ -513,7 +535,7 @@ export async function buildNarrativeContent(
   plan: NarrativePlan,
   options: BuilderOptions = {},
 ): Promise<StructuredContent> {
-  const provider: VisionProvider = options.provider ?? 'gemini';
+  const provider: NarrativeTextProvider = options.provider ?? 'gemini';
 
   // Step 1: Load system prompt
   const systemPrompt = await loadSystemPrompt(plan.mode);

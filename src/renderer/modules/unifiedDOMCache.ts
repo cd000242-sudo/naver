@@ -42,6 +42,9 @@ const UnifiedDOMCache = {
       'claude-haiku': 'claude',
       'claude-sonnet': 'claude',
       'claude-opus': 'claude',
+      // ✅ 에이전트 모드 — 사용자 본인 codex/claude 구독 CLI (API 과금 0)
+      'agent-codex': 'agent-codex',
+      'agent-claude': 'agent-claude',
     };
     const derivedProvider = modelToProvider[selectedModel];
     if (derivedProvider) {

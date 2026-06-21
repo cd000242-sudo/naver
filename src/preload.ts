@@ -13,7 +13,7 @@ type AutomationPayload = {
   structuredContent?: StructuredContent;
   generatedImages?: Array<{ heading: string; filePath: string; provider: string; alt?: string; caption?: string; blobId?: string }>;
   hashtags?: string[];
-  generator?: 'gemini' | 'openai' | 'claude' | 'perplexity';
+  generator?: 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude';
   keywords?: string[];
   draft?: string;
   rssUrl?: string;

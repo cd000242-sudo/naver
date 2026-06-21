@@ -661,7 +661,9 @@ JSON:
         delete process.env.CLAUDE_STRUCTURED_MODEL;
       } else {
         // 기본 'same': 본문과 동일 모델
-        if (provider === 'perplexity') {
+        if (provider === 'agent-codex' || provider === 'agent-claude') {
+          raw = await callAgent(provider, titlePromptFull);
+        } else if (provider === 'perplexity') {
           raw = await callPerplexity(titlePromptFull, titleTemp, 650);
         } else if (provider === 'openai') {
           raw = await callOpenAI(titlePromptFull, titleTemp, 650);
@@ -849,7 +851,9 @@ JSON:
   try {
     // ✅ [v2.10.56] silent 폴백 회귀 — 사용자 선택 provider 그대로 (자동 폴백 금지 원칙)
     let raw: string;
-    if (provider === 'perplexity') {
+    if (provider === 'agent-codex' || provider === 'agent-claude') {
+      raw = await callAgent(provider, prompt);
+    } else if (provider === 'perplexity') {
       raw = await callPerplexity(prompt, 0.9, 450);
     } else if (provider === 'openai') {
       raw = await callOpenAI(prompt, 0.9, 450);
@@ -1397,7 +1401,7 @@ export type SourceCategoryHint =
   | '기타'
   // 문자열도 허용 (사용자 커스텀)
   | string;
-export type ContentGeneratorProvider = 'gemini' | 'openai' | 'claude' | 'perplexity';
+export type ContentGeneratorProvider = 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude';
 
 export type ArticleType =
   // 뉴스/정보
@@ -3603,6 +3607,23 @@ function getAnthropicClient(apiKey?: string): Anthropic {
 }
 
 
+// ✅ 에이전트 모드 — 사용자 본인 codex/claude 구독 CLI로 글 생성 (API 토큰 과금 0).
+//   모든 글생성 모드(SEO/홈피드/쇼핑/사진)가 공유하는 agentCli 서비스를 호출한다(중복 구현 금지).
+//   silent 폴백 절대 금지: 미설치/미로그인/한도소진은 AgentCliError 그대로 throw → 차단형 모달.
+async function callAgent(
+  provider: 'agent-codex' | 'agent-claude',
+  prompt: string,
+  signal?: AbortSignal,
+): Promise<string> {
+  const { generateWithAgent } = await import('./agentCli/index.js');
+  const { agentTextProviderToCli } = await import('./runtime/modelRegistry.js');
+  const cliProvider = agentTextProviderToCli(provider);
+  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (API 과금 0)`);
+  const result = await generateWithAgent({ provider: cliProvider, prompt, signal });
+  console.log(`[Agent] ✅ ${cliProvider} 응답 수신 (${result.durationMs}ms, ${result.text.length}자)`);
+  return result.text;
+}
+
 async function callClaude(prompt: string, temperature: number = 0.9, minChars: number = 2000, signal?: AbortSignal): Promise<string> {
   console.log('[Claude] JSON 형식 준수 요청 - 유니코드 이스케이프 4자리, 쉼표 필수');
 
@@ -4459,8 +4480,19 @@ export async function generateStructuredContent(
       context: imgOpts.context,
     });
 
+    // ✅ 에이전트 모드: vision 추론은 vendor로(위), 글 작성만 구독 CLI로 분리.
+    //   글로벌 엔진(primaryGeminiTextModel)이 agent-*면 텍스트 provider로 승격.
+    let narrativeTextProvider: string = imgOpts.provider ?? 'gemini';
+    try {
+      const { isAgentTextProvider } = await import('./runtime/modelRegistry.js');
+      const { loadConfig } = await import('./configManager.js');
+      const cfg = await loadConfig();
+      const textEngine = (cfg as any)?.primaryGeminiTextModel;
+      if (isAgentTextProvider(textEngine)) narrativeTextProvider = textEngine;
+    } catch { /* config 로드 실패 시 vision provider 유지 */ }
+
     return buildNarrativeContent(plan, {
-      provider: imgOpts.provider ?? 'gemini',
+      provider: narrativeTextProvider as any,
       context: imgOpts.context,
     });
   }
@@ -4936,7 +4968,9 @@ export async function generateStructuredContent(
         };
 
         // ✅ [v2.10.28] signal을 callX에 직접 전달 — SDK 레벨 fetch abort
-        if (provider === 'openai') {
+        if (provider === 'agent-codex' || provider === 'agent-claude') {
+          rawResponse = await withAbortRace(callAgent(provider, systemPrompt, signal));
+        } else if (provider === 'openai') {
           rawResponse = await withAbortRace(callOpenAI(systemPrompt, temperature, adjustedMinChars, signal));
         } else if (provider === 'claude') {
           rawResponse = await withAbortRace(callClaude(systemPrompt, temperature, adjustedMinChars, signal));
@@ -5538,6 +5572,7 @@ export async function generateStructuredContent(
         const judgeCaller = async (jp: string): Promise<string> => {
           const jt = 0.2; // 결정적 JSON 유도
           const jc = 300; // <1000 → 60초 타임아웃 + 짧은 JSON 응답 길이거부 없음 (각 호출 내부 타임아웃+signal로 abort)
+          if (provider === 'agent-codex' || provider === 'agent-claude') return callAgent(provider, jp, signal);
           if (provider === 'openai') return callOpenAI(jp, jt, jc, signal);
           if (provider === 'claude') return callClaude(jp, jt, jc, signal);
           if (provider === 'perplexity') return callPerplexity(jp, jt, jc, signal);

@@ -8550,19 +8550,25 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
 
     // 글로벌 글생성 엔진(primaryGeminiTextModel) → vision/text vendor 자동 라우팅.
     // 사용자 요청: 별도 vision provider 선택 UI를 없애고 메인 AI 엔진을 그대로 따라간다.
+    // ✅ 에이전트 모드: 이미지 추론(vision)은 CLI로 불가하므로 vision vendor로, 글 작성(text)만
+    //    구독 CLI(agent-codex/agent-claude)로 분리 라우팅한다.
     let routedProvider: string | undefined;
+    let narrativeTextProvider: string | undefined;
     try {
       const currentConfig = await loadConfig();
       applyConfigToEnv(currentConfig);
-      const { routeTextToVision } = await import('./runtime/modelRegistry.js');
+      const { routeTextToVision, isAgentTextProvider } = await import('./runtime/modelRegistry.js');
       const textEngine = (currentConfig as any).primaryGeminiTextModel || 'gemini-2.5-flash';
       routedProvider = routeTextToVision(textEngine).vendor;
-      console.log(`[Main] vision:infer-and-write — 글로벌 엔진(${textEngine}) → provider=${routedProvider}`);
+      narrativeTextProvider = isAgentTextProvider(textEngine) ? textEngine : routedProvider;
+      console.log(`[Main] vision:infer-and-write — 글로벌 엔진(${textEngine}) → vision=${routedProvider}, text=${narrativeTextProvider}`);
     } catch (configError) {
       console.warn('[Main] vision:infer-and-write config load skipped:', configError);
     }
     // Fallback to the payload provider only if routing failed.
     const effectiveProvider = (routedProvider ?? normalized.provider) as typeof normalized.provider;
+    // 글 작성 단계 provider — 에이전트 모드면 CLI, 아니면 vision vendor와 동일.
+    const textProvider = (narrativeTextProvider ?? effectiveProvider) as typeof normalized.provider;
 
     // Convert plain base64 objects to ImageInput format
     const imageInputs = normalized.images.map((img) => ({
@@ -8579,7 +8585,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
     const plan = applyReviewEditsToPlan(inferredPlan, normalized.reviewEdits);
 
     const content = await buildNarrativeContent(plan, {
-      provider: effectiveProvider,
+      provider: textProvider as any,
       targetChars: normalized.targetChars,
       toneStyle: normalized.toneStyle,
       context: normalized.context,
