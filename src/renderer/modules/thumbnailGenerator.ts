@@ -2171,7 +2171,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // ✅ 스마트 자동 발행 탭 전용 섹션들 표시/숨김 제어
       const unifiedOnlySections = [
         'unified-semi-auto-section',      // 반자동 편집 영역
-        'unified-only-posts-list',        // 생성된 글 목록
+        // ✅ [v2.11.49] unified-only-posts-list는 전용 탭(post-list)으로 이동 — 이 토글에서 제거(non-unified 탭에서 숨기지 않음)
         'unified-only-log-section',       // 로그 & 진행상황
         'unified-only-image-engine',      // 이미지 엔진 선택
         'unified-only-publish-settings',  // 발행 설정
