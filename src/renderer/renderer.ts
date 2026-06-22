@@ -2807,7 +2807,9 @@ function initPublishModeSubtabs(): void {
         panel.style.margin = '0';
         host.appendChild(panel);
       }
-      modal.style.display = 'none';
+      // 백드롭 완전 중립화 — 다른 코드가 display:flex로 띄워도 빈 오버레이가 화면을 막지 않게 !important + pointer-events none.
+      modal.style.setProperty('display', 'none', 'important');
+      modal.style.pointerEvents = 'none';
       modal.setAttribute('aria-hidden', 'true');
       modal.dataset.inlined = 'true';
     };
