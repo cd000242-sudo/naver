@@ -2762,6 +2762,23 @@ function initPurchaseInquiryButton(): void {
   if (postListTabBtn) {
     postListTabBtn.addEventListener('click', () => setTimeout(relocatePostsList, 0));
   }
+
+  // ✅ [v2.11.49] 발행 모드 서브탭(단일/연속/다중계정) — 기존 트리거 재사용(안전 스캐폴드, B3-1).
+  //   연속/다중계정은 기존 모달 opener 호출. (모달 인라인화는 후속 B3-2/3)
+  const pubModeTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.pub-mode-tab'));
+  pubModeTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      pubModeTabs.forEach((t) => t.classList.remove('active'));
+      tab.classList.add('active');
+      const mode = tab.dataset.pubmode;
+      if (mode === 'continuous') {
+        try { (window as any).toggleContinuousModeModal?.(); } catch (e) { console.error('연속발행 열기 오류:', e); }
+      } else if (mode === 'ma') {
+        document.getElementById('multi-account-btn')?.click();
+      }
+      // single: 현재 단일발행 뷰 유지
+    });
+  });
 }
 
 // 메인 초기화 함수 (DOMContentLoaded와 상관없이 한 번만 실행)

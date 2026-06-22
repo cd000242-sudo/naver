@@ -297,6 +297,18 @@
                     <span>AI 자동 블로그 발행</span>
                 </h2>
 
+                <!-- ✅ [v2.11.49] 발행 모드 서브탭 (단일/연속/다중계정) -->
+                <style>
+                    .pub-mode-tab { padding: 0.7rem 1.3rem; border-radius: 10px; border: 1px solid var(--border-medium); background: var(--bg-tertiary); color: var(--text-muted); font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 0.4rem; }
+                    .pub-mode-tab:hover { color: var(--text-strong); border-color: rgba(255,255,255,0.25); }
+                    .pub-mode-tab.active { background: linear-gradient(135deg, #10b981, #059669); color: #fff; border-color: transparent; }
+                </style>
+                <div id="publish-mode-subtabs" style="display:flex; gap:0.6rem; margin-bottom:1.75rem; flex-wrap:wrap; border-bottom:1px solid rgba(255,255,255,0.07); padding-bottom:1rem;">
+                    <button type="button" class="pub-mode-tab active" data-pubmode="single">📝 단일발행</button>
+                    <button type="button" class="pub-mode-tab" data-pubmode="continuous">🔄 연속발행</button>
+                    <button type="button" class="pub-mode-tab" data-pubmode="ma">🚀 다중계정 풀오토</button>
+                </div>
+
                 <!-- 네이버 계정 정보 (탭 방식) -->
                 <div class="field"
                     style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(139, 92, 246, 0.3); margin-bottom: 2rem;">
