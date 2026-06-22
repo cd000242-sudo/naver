@@ -2739,6 +2739,18 @@ function initPurchaseInquiryButton(): void {
       }
     });
   }
+
+  // ✅ [v2.11.49] "생성된 글 목록" 섹션을 글 발행하기 탭 → 전용 탭(post-list)으로 이동.
+  //   DOM 노드를 그대로 옮기므로 id·핸들러(togglePostsListSection 등)는 보존됨. 멱등(이미 이동됐으면 skip).
+  try {
+    const postsList = document.getElementById('unified-only-posts-list');
+    const postsHost = document.getElementById('post-list-tab-host');
+    if (postsList && postsHost && postsList.parentElement !== postsHost) {
+      postsHost.appendChild(postsList);
+    }
+  } catch (e) {
+    console.error('생성된 글 목록 탭 이동 오류:', e);
+  }
 }
 
 // 메인 초기화 함수 (DOMContentLoaded와 상관없이 한 번만 실행)

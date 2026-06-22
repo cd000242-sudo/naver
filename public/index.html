@@ -213,10 +213,25 @@
         <div class="tabs-header" role="tablist">
             <button type="button" class="tab-button active" role="tab" aria-selected="true" data-tab="main">📅 시간/달력·메모장</button>
             <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="unified">📝 글 발행하기</button>
+            <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="post-list">📋 생성된 글 목록</button>
             <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="images">🖼️ 이미지 생성·관리</button>
             <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="image-tools">🎨 썸네일 배너 생성기</button>
             <!-- [v2.11.x] 스케줄 관리 탭 제거 — 앱 스케줄 모드 폐지(네이버 예약발행으로 일원화).
                  탭 패널/scheduleManager 백엔드는 도달 불가 dead로 남김(후속 정리). -->
+        </div>
+
+        <!-- ✅ [v2.11.49] 생성된 글 목록 탭 — 기존 글 발행하기 탭의 목록 섹션(unified-only-posts-list)을 앱 init에서 이곳으로 이동 -->
+        <div id="tab-post-list" class="tab-panel" role="tabpanel">
+            <section class="dashboard-section">
+                <div class="dashboard-header">
+                    <h2 style="display: flex; align-items: center; gap: 1rem; color: var(--text-gold); margin-bottom: 0.5rem;">
+                        <span style="font-size: 2rem;">📋</span>
+                        <span>생성된 글 목록</span>
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem;">생성·저장한 글을 한곳에서 보고 다시 발행하세요</p>
+                </div>
+                <div id="post-list-tab-host"><!-- unified-only-posts-list 가 여기로 이동됨 --></div>
+            </section>
         </div>
 
         <!-- 메인 대시보드 탭 -->
