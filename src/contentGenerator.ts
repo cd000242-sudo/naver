@@ -5253,7 +5253,23 @@ export async function generateStructuredContent(
       validateHomefeedContent(parsed, source); // 홈판 모드: 소제목/도입부/기자체 검증
       validateBusinessContent(parsed, source); // ✅ [v1.4.24] business 모드: 가짜 번호/광고법/CTA 검증
 
-      if (mode === 'seo' || mode === 'mate') {
+      // [2026-06-23] "키워드 그대로 제목으로 사용" 모드: 아래 제목 품질 패치/재생성을 전면 스킵하고
+      //   키워드를 verbatim으로 고정한다. 이 패치 블록(seo/homefeed/affiliate)이 useKeywordAsTitle
+      //   플래그를 무시하고 클릭유도형/키워드-prefix 제목으로 덮어써서 "키워드 그대로"가 안 먹고
+      //   "종합소득세 환급일 지연 이유, 들어오지? (2026년 최신)" 같은 결과가 나오던 버그.
+      const _useKwTitle = !!source.useKeywordAsTitle;
+      if (_useKwTitle) {
+        // keywordForTitle 우선, 비어 있으면 source의 기본 키워드로 폴백 — 플로우(단일/풀오토/연속)마다
+        // 전달 필드가 달라도 verbatim이 작동하도록.
+        const _kw = String(source.keywordForTitle || getPrimaryKeywordFromSource(source) || '').trim();
+        if (_kw) {
+          parsed.selectedTitle = _kw;
+          parsed.titleAlternatives = [_kw];
+          parsed.titleCandidates = [{ text: _kw, score: 100, reasoning: '사용자 지정 키워드 제목(verbatim)' }];
+        }
+      }
+
+      if (!_useKwTitle && (mode === 'seo' || mode === 'mate')) {
         const seoKeyword = getPrimaryKeywordFromSource(source);
         const issues = computeSeoTitleCriticalIssues(parsed.selectedTitle, seoKeyword);
         if (issues.length > 0 && attempt < MAX_ATTEMPTS) {
@@ -5301,7 +5317,7 @@ export async function generateStructuredContent(
         }
       }
 
-      if (mode === 'homefeed') {
+      if (!_useKwTitle && mode === 'homefeed') {
         const hfKeyword = getPrimaryKeywordFromSource(source);
         const titleIssues = computeHomefeedTitleCriticalIssues(parsed.selectedTitle, hfKeyword);
         if (titleIssues.length > 0 && attempt < MAX_ATTEMPTS) {
@@ -5623,7 +5639,7 @@ export async function generateStructuredContent(
       // ✅ [2026-02-01] 쇼핑커넥트(affiliate) 모드 제목 검증 및 패치
       // ✅ [FIX] 모든 시도에서 제목 패치 적용 (attempt < MAX_ATTEMPTS 조건 제거)
       // ✅ [2026-02-04 FIX] isShoppingConnectMode도 체크하여 URL 기반 쇼핑커넥트에서도 제목 패치 작동
-      if (isShoppingConnectMode || mode === 'affiliate') {
+      if (!_useKwTitle && (isShoppingConnectMode || mode === 'affiliate')) {
         const titleIssues = computeAffiliateTitleCriticalIssues(parsed.selectedTitle, source);
         if (titleIssues.length > 0 && costPolicy.allowLlmTitlePatch) {
           try {
