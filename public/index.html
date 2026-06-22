@@ -81,7 +81,7 @@
                 <button type="button" id="purchase-inquiry-btn" class="floating-btn"
                     style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.32), rgba(255, 215, 0, 0.14)); color: var(--text-gold); border: 2px solid rgba(212, 175, 55, 0.75); padding: 1rem 1.25rem; border-radius: 12px; cursor: pointer; font-weight: 900; box-shadow: 0 4px 16px rgba(212, 175, 55, 0.35); transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; min-width: 160px;">
                     <span style="font-size: 1.25rem;">💬</span>
-                    <span>구매 문의하기</span>
+                    <span>1:1 카톡문의</span>
                 </button>
                 <button type="button" id="settings-button-fixed" data-open-settings class="settings-button-fixed floating-btn"
                     style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; border: none; padding: 1rem 1.25rem; border-radius: 12px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4); transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; min-width: 160px;">
@@ -106,21 +106,17 @@
                     <span style="font-size: 1.25rem;">🔄</span>
                     <span>전체 초기화</span>
                 </button>
-                <!-- ✅ 트레이 아이콘화 버튼 -->
-                <button type="button" id="minimize-to-tray-btn" class="floating-btn"
-                    style="background: linear-gradient(135deg, #6b7280, #374151); color: white; border: 2px solid rgba(255,255,255,0.2); padding: 1rem 1.25rem; border-radius: 12px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3); transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; min-width: 140px;"
-                    title="앱을 트레이로 숨깁니다. 트레이 아이콘 클릭으로 복원합니다.">
-                    <span style="font-size: 1.25rem;">📥</span>
-                    <span>트레이 숨기기</span>
-                </button>
-                <!-- ✅ 브라우저 세션 종료 버튼 추가 -->
+                <!-- ✅ [v2.11.49] 트레이 숨기기 버튼 제거 — 창 내리기로 자동 처리되므로 중복 -->
+                <!-- ✅ [v2.11.49] 브라우저 종료 → 앱 사용법 영상 바로가기로 변경 -->
                 <button type="button" id="close-browser-session-btn" class="close-browser-session-btn floating-btn"
-                    style="background: linear-gradient(135deg, #4b5563, #1f2937); color: white; border: 2px solid rgba(255,255,255,0.2); padding: 1rem 1.25rem; border-radius: 12px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4); transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; min-width: 160px;">
-                    <span style="font-size: 1.25rem;">🛑</span>
-                    <span>브라우저 종료</span>
+                    style="background: linear-gradient(135deg, #ef4444, #b91c1c); color: white; border: none; padding: 1rem 1.25rem; border-radius: 12px; cursor: pointer; font-weight: 700; box-shadow: 0 4px 16px rgba(239, 68, 68, 0.35); transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem; min-width: 160px;">
+                    <span style="font-size: 1.25rem;">▶️</span>
+                    <span>앱 사용법 영상</span>
                 </button>
                 <!-- ✅ LEWORD 황금키워드 실행 버튼 (프리미엄 골드 디자인) -->
                 <style>
+                    /* ✅ [v2.11.49] 헤더 액션 버튼 텍스트 확대 (라벨 가독성↑, 아이콘은 인라인 크기 유지) */
+                    .floating-btn { font-size: 1.05rem; }
                     @keyframes gold-shimmer {
                         0% {
                             background-position: -200% center;
@@ -193,7 +189,7 @@
                     }
                 </style>
                 <button type="button" id="launch-leword-btn" class="launch-leword-btn floating-btn"
-                    style="padding: 1rem 1.5rem; border-radius: 14px; cursor: pointer; font-weight: 700; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; gap: 0.6rem; min-width: 170px; font-size: 0.95rem; letter-spacing: 0.3px;">
+                    style="padding: 1rem 1.5rem; border-radius: 14px; cursor: pointer; font-weight: 700; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; align-items: center; gap: 0.6rem; min-width: 170px; font-size: 1.05rem; letter-spacing: 0.3px;">
                     <span class="gold-badge">HOT</span>
                     <span style="font-size: 1.4rem; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));">👑</span>
                     <span style="font-weight: 800;">황금키워드 찾기</span>

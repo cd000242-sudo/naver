@@ -2723,8 +2723,8 @@ function initPurchaseInquiryButton(): void {
   if (!btn) return;
 
   btn.addEventListener('click', () => {
-    // ✅ [2026-02-17] 결제 페이지로 연결 (GitHub Pages)
-    window.api.openExternalUrl('https://cd000242-sudo.github.io/naver/');
+    // ✅ [v2.11.49] 구매문의 → 1:1 카톡문의 (오픈채팅)
+    window.api.openExternalUrl('https://open.kakao.com/o/sPcaslwh');
   });
 }
 

@@ -2456,23 +2456,14 @@ export function initContinuousPublishingV2(): void {
   });
 
   // ✅ 브라우저 세션 종료 버튼 이벤트 리스너 추가
+  // ✅ [v2.11.49] 브라우저 종료 → 앱 사용법 영상(유튜브) 바로가기로 변경
   document.getElementById('close-browser-session-btn')?.addEventListener('click', async () => {
-    if (confirm('현재 열려 있는 모든 브라우저 세션을 종료하시겠습니까?')) {
-      try {
-        const result = await (window as any).api.closeBrowser();
-        if (result && result.success) {
-          if ((window as any).showToast) {
-            (window as any).showToast('🛑 브라우저 세션이 성공적으로 종료되었습니다.', 'success');
-          } else {
-            alert('브라우저 세션이 종료되었습니다.');
-          }
-        } else {
-          alert('브라우저 종료 실패: ' + (result?.message || '알 수 없는 오류'));
-        }
-      } catch (error) {
-        console.error('브라우저 종료 버튼 클릭 오류:', error);
-        alert('오류 발생: ' + (error as Error).message);
-      }
+    const url = 'https://www.youtube.com/watch?v=wGxmIcvh5Bc&list=PL5ci4Gqmio0dE7HMEkA8cF-o16epvswig&index=6';
+    try {
+      await (window as any).api.openExternalUrl(url);
+    } catch (error) {
+      console.error('앱 사용법 영상 열기 오류:', error);
+      alert('영상 열기 실패: ' + (error as Error).message);
     }
   });
 
