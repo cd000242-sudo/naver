@@ -659,7 +659,8 @@ async function initMultiAccountPublishModal() {
         console.log('[MultiAccountPublish] 모달 요소를 찾을 수 없습니다.');
         return;
     }
-    if (multiAccountModal.parentElement !== document.body) {
+    // ✅ [v2.11.49] 발행 서브탭으로 인라인됐으면 body로 이동하지 않음(서브탭 밖으로 탈출 방지).
+    if ((multiAccountModal as HTMLElement).dataset.inlined !== 'true' && multiAccountModal.parentElement !== document.body) {
         console.log('[MultiAccountPublish] 모달을 body로 이동합니다.');
         document.body.appendChild(multiAccountModal);
     }
