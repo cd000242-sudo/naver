@@ -723,6 +723,13 @@ export function scheduleNextPosting(): void {
 // 연속 발행 URL 입력 모달 토글
 export function toggleContinuousModeModal(): void {
   console.log('[Continuous] toggleContinuousModeModal 호출됨');
+  // ✅ [v2.11.49] 모달이 발행 서브탭으로 인라인됐으면 모달 대신 서브탭 전환.
+  const inlinedModal = document.getElementById('continuous-mode-modal') as HTMLElement | null;
+  if (inlinedModal?.dataset.inlined === 'true' && typeof (window as any).__showPublishMode === 'function') {
+    document.querySelector('[data-tab="unified"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    (window as any).__showPublishMode('continuous');
+    return;
+  }
   const modal = document.getElementById('continuous-mode-modal') as HTMLDivElement;
   console.log('[Continuous] 모달 엘리먼트 찾음:', modal ? '있음' : '없음');
 

@@ -671,6 +671,12 @@ async function initMultiAccountPublishModal() {
         const unlocked = await window.checkFeatureLockAndShow?.('multi-account-manage');
         if (unlocked === false)
             return;
+        // ✅ [v2.11.49] 모달이 발행 서브탭으로 인라인됐으면 모달 대신 서브탭 전환.
+        if ((multiAccountModal as HTMLElement).dataset.inlined === 'true' && typeof (window as any).__showPublishMode === 'function') {
+            document.querySelector('[data-tab="unified"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+            (window as any).__showPublishMode('ma');
+            return;
+        }
         multiAccountModal.style.display = 'flex';
         multiAccountModal.setAttribute('aria-hidden', 'false');
         try {

@@ -2763,22 +2763,73 @@ function initPurchaseInquiryButton(): void {
     postListTabBtn.addEventListener('click', () => setTimeout(relocatePostsList, 0));
   }
 
-  // ✅ [v2.11.49] 발행 모드 서브탭(단일/연속/다중계정) — 기존 트리거 재사용(안전 스캐폴드, B3-1).
-  //   연속/다중계정은 기존 모달 opener 호출. (모달 인라인화는 후속 B3-2/3)
-  const pubModeTabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.pub-mode-tab'));
-  pubModeTabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      pubModeTabs.forEach((t) => t.classList.remove('active'));
-      tab.classList.add('active');
-      const mode = tab.dataset.pubmode;
-      if (mode === 'continuous') {
-        try { (window as any).toggleContinuousModeModal?.(); } catch (e) { console.error('연속발행 열기 오류:', e); }
-      } else if (mode === 'ma') {
-        document.getElementById('multi-account-btn')?.click();
+  // ✅ [v2.11.49] 발행 모드 서브탭(단일/연속/다중계정) — 모달을 서브탭 인라인으로 (B3-2).
+  initPublishModeSubtabs();
+}
+
+/**
+ * 발행 모드 서브탭 — 연속/다중계정 모달을 서브탭 안 인라인 패널로 이동(모달 팝업 제거).
+ * 멱등·방어적: 요소 없으면 graceful 종료. DOM 노드 이동이라 핸들러/id 보존.
+ */
+function initPublishModeSubtabs(): void {
+  try {
+    const subtabs = document.getElementById('publish-mode-subtabs');
+    if (!subtabs || document.getElementById('pub-mode-single-panel')) return;
+    const formSection = (subtabs.closest('section') || subtabs.parentElement) as HTMLElement | null;
+    if (!formSection) return;
+
+    // 1. 단일 콘텐츠(서브탭 바 이후 형제 전부)를 single 패널로 래핑
+    const single = document.createElement('div');
+    single.id = 'pub-mode-single-panel';
+    const toMove: Element[] = [];
+    let n = subtabs.nextElementSibling;
+    while (n) { toMove.push(n); n = n.nextElementSibling; }
+    toMove.forEach((el) => single.appendChild(el));
+    formSection.appendChild(single);
+
+    // 2. continuous / ma 인라인 패널 생성
+    const cont = document.createElement('div');
+    cont.id = 'pub-mode-continuous-panel'; cont.style.display = 'none';
+    const ma = document.createElement('div');
+    ma.id = 'pub-mode-ma-panel'; ma.style.display = 'none';
+    formSection.appendChild(cont);
+    formSection.appendChild(ma);
+
+    // 3. 모달 .modal-panel을 인라인 패널로 이동 + 백드롭 중립화(더 이상 오버레이로 안 뜸)
+    const relocate = (modalId: string, host: HTMLElement): void => {
+      const modal = document.getElementById(modalId) as HTMLElement | null;
+      if (!modal) return;
+      const panel = modal.querySelector('.modal-panel') as HTMLElement | null;
+      if (panel && panel.parentElement !== host) {
+        panel.style.maxWidth = '100%';
+        panel.style.width = '100%';
+        panel.style.maxHeight = 'none';
+        panel.style.margin = '0';
+        host.appendChild(panel);
       }
-      // single: 현재 단일발행 뷰 유지
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      modal.dataset.inlined = 'true';
+    };
+    relocate('continuous-mode-modal', cont);
+    relocate('multi-account-modal', ma);
+
+    // 4. 서브탭 전환 (전역 노출 → opener들이 호출)
+    const showMode = (mode: 'single' | 'continuous' | 'ma'): void => {
+      single.style.display = mode === 'single' ? 'block' : 'none';
+      cont.style.display = mode === 'continuous' ? 'block' : 'none';
+      ma.style.display = mode === 'ma' ? 'block' : 'none';
+      document.querySelectorAll<HTMLElement>('.pub-mode-tab').forEach((t) => {
+        t.classList.toggle('active', t.dataset.pubmode === mode);
+      });
+    };
+    (window as any).__showPublishMode = showMode;
+    document.querySelectorAll<HTMLButtonElement>('.pub-mode-tab').forEach((tab) => {
+      tab.addEventListener('click', () => showMode((tab.dataset.pubmode as 'single' | 'continuous' | 'ma') || 'single'));
     });
-  });
+  } catch (e) {
+    console.error('발행 모드 서브탭 초기화 오류:', e);
+  }
 }
 
 // 메인 초기화 함수 (DOMContentLoaded와 상관없이 한 번만 실행)
