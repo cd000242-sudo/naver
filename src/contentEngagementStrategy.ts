@@ -136,6 +136,34 @@ export function calculateEngagementScore(content: StructuredContent): number {
   return Math.min(100, Math.round(base));
 }
 
+const KST_OFFSET_HOURS = 9;
+
+function formatUtcDateTime(date: Date): string {
+  return date.toISOString().replace('T', ' ').slice(0, 19);
+}
+
+function parseKstDateTimeToUtc(value: string): Date {
+  const match = String(value || '').match(
+    /^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2}):(\d{2})$/,
+  );
+  if (match) {
+    const [, year, month, day, hour, minute, second] = match;
+    return new Date(
+      Date.UTC(
+        Number(year),
+        Number(month) - 1,
+        Number(day),
+        Number(hour) - KST_OFFSET_HOURS,
+        Number(minute),
+        Number(second),
+      ),
+    );
+  }
+
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+}
+
 export function buildTrafficStrategy(
   source: ContentSource,
   getOptimalPublishTime: (
@@ -150,9 +178,9 @@ export function buildTrafficStrategy(
 
   const recommendTime = getOptimalPublishTime(category, targetAge, target);
 
-  const peakTime = new Date(recommendTime);
-  peakTime.setHours(peakTime.getHours() + 1);
-  const peakTimeStr = peakTime.toISOString().replace('T', ' ').slice(0, 19);
+  const peakTime = parseKstDateTimeToUtc(recommendTime);
+  peakTime.setUTCHours(peakTime.getUTCHours() + 1);
+  const peakTimeStr = formatUtcDateTime(peakTime);
 
   return {
     peakTrafficTime: peakTimeStr,
@@ -204,10 +232,20 @@ export function getOptimalPublishTime(
     recommendHour = 10;
   }
 
-  const recommendTime = new Date(now);
-  recommendTime.setHours(recommendHour, 0, 0, 0);
+  const kstNow = new Date(now.getTime() + KST_OFFSET_HOURS * 60 * 60 * 1000);
+  const recommendTime = new Date(
+    Date.UTC(
+      kstNow.getUTCFullYear(),
+      kstNow.getUTCMonth(),
+      kstNow.getUTCDate(),
+      recommendHour - KST_OFFSET_HOURS,
+      0,
+      0,
+      0,
+    ),
+  );
 
-  return recommendTime.toISOString().replace('T', ' ').slice(0, 19);
+  return formatUtcDateTime(recommendTime);
 }
 
 export function extractKeywordsFromContent(content: string): string[] {

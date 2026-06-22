@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import {
-  WARN_FILE_THRESHOLD,
-  checkLoreFormat,
-  checkStagedFileCount,
-} from '../../scripts/git-hooks/checks.mjs';
+import checks from '../../scripts/git-hooks/checks-lib.cjs';
+
+const { WARN_FILE_THRESHOLD, checkLoreFormat, checkStagedFileCount } = checks as {
+  WARN_FILE_THRESHOLD: number;
+  checkLoreFormat: (message: string) => string[];
+  checkStagedFileCount: (files: string[]) => string | null;
+};
 
 /**
  * SPEC-STABILITY-2026 Phase 6.4 - warn-only pre-commit/commit-msg checks.
