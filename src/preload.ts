@@ -126,6 +126,9 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('agent:install', provider),
   agentLogin: (provider: 'codex' | 'claude'): Promise<{ success: boolean; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:login', provider),
+  // 계정 전환용 로그아웃 (다른 구독 계정으로 재로그인)
+  agentLogout: (provider: 'codex' | 'claude'): Promise<{ success: boolean; code?: string; message?: string }> =>
+    ipcRenderer.invoke('agent:logout', provider),
   // ✅ [2026-03-11 FIX] generateImages 바인딩 추가 (누락으로 인한 연속발행 이미지 생성 실패 수정)
   generateImages: (options: any): Promise<GenerateImagesResult> =>
     ipcRenderer.invoke('automation:generateImages', options),

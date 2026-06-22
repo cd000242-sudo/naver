@@ -83,3 +83,28 @@ export async function loginAgent(provider: AgentProvider): Promise<void> {
     );
   }
 }
+
+/** Logout command per provider (clears stored subscription auth). */
+function logoutCommand(provider: AgentProvider): { command: string; args: string[] } {
+  return provider === 'codex'
+    ? { command: 'codex', args: ['logout'] }
+    : { command: 'claude', args: ['auth', 'logout'] };
+}
+
+/**
+ * Clear the stored subscription credentials so a different account can sign in.
+ * @throws AgentCliError if logout fails.
+ */
+export async function logoutAgent(provider: AgentProvider): Promise<void> {
+  const { command, args } = logoutCommand(provider);
+  const res = await spawnCollect({ command, args, provider, timeoutMs: 60_000 });
+
+  if (res.code !== 0) {
+    throw new AgentCliError(
+      classifyExit(provider, res.stderr, res.stdout),
+      provider,
+      `${provider} 로그아웃에 실패했습니다. 터미널에서 직접 실행이 필요할 수 있습니다 (codex logout / claude auth logout).`,
+      (res.stderr || res.stdout || '').slice(0, 800),
+    );
+  }
+}

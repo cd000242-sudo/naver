@@ -53,6 +53,18 @@ export function registerAgentHandlers(): void {
     }
   });
 
+  // 계정 전환용 로그아웃 — 기존 구독 인증을 비워 다른 계정으로 로그인할 수 있게 함.
+  ipcMain.handle('agent:logout', async (_event, provider: AgentProvider) => {
+    try {
+      const { logoutAgent } = await import('../../agentCli/installer.js');
+      await logoutAgent(provider);
+      return { success: true };
+    } catch (err) {
+      const e = err as { code?: string; message?: string };
+      return { success: false, code: e?.code, message: e?.message ?? '로그아웃 중 오류가 발생했습니다.' };
+    }
+  });
+
   // One-shot generation. Errors carry a stable code so the renderer can show the right modal.
   ipcMain.handle('agent:generate', async (_event, payload: AgentGeneratePayload) => {
     try {

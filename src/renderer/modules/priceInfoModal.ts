@@ -66,6 +66,51 @@ function bindAgentAction(
 }
 
 /**
+ * \uC5D0\uC774\uC804\uD2B8 \uACC4\uC815 \uC804\uD658 \u2014 \uB85C\uADF8\uC544\uC6C3 \uD6C4 \uB2E4\uB978 \uAD6C\uB3C5 \uACC4\uC815\uC73C\uB85C \uC7AC\uB85C\uADF8\uC778.
+ * codex logout / claude auth logout \u2192 \uC774\uC5B4\uC11C \uB85C\uADF8\uC778(\uBE0C\uB77C\uC6B0\uC800 OAuth, \uB2E4\uB978 \uACC4\uC815 \uC120\uD0DD \uAC00\uB2A5).
+ */
+function bindAgentSwitch(
+  btn: HTMLButtonElement | null,
+  provider: 'codex' | 'claude',
+  statusEl: HTMLElement,
+): void {
+  if (!btn) return;
+  btn.onclick = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const api = (window as any).api;
+    if (typeof api?.agentLogout !== 'function' || typeof api?.agentLogin !== 'function') return;
+    if (!confirm(`${provider} \uACC4\uC815\uC744 \uB85C\uADF8\uC544\uC6C3\uD558\uACE0 \uB2E4\uB978 \uACC4\uC815\uC73C\uB85C \uB2E4\uC2DC \uB85C\uADF8\uC778\uD560\uAE4C\uC694?`)) return;
+    const orig = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = '\u23F3 \uB85C\uADF8\uC544\uC6C3 \uC911...';
+    statusEl.textContent = '\u23F3 \uB85C\uADF8\uC544\uC6C3 \uC911...';
+    statusEl.style.color = '#6b7280';
+    try {
+      const out = await api.agentLogout(provider);
+      if (!out?.success) {
+        toastManager.error(`\u274C \uB85C\uADF8\uC544\uC6C3 \uC2E4\uD328: ${out?.message || '\uC54C \uC218 \uC5C6\uB294 \uC624\uB958'}`);
+        return;
+      }
+      btn.textContent = '\u23F3 \uBE0C\uB77C\uC6B0\uC800\uC5D0\uC11C \uB85C\uADF8\uC778 \uC644\uB8CC...';
+      statusEl.textContent = '\u23F3 \uC0C8 \uACC4\uC815 \uB85C\uADF8\uC778 \uC9C4\uD589 \uC911 (\uBE0C\uB77C\uC6B0\uC800 \uD655\uC778)...';
+      const login = await api.agentLogin(provider);
+      if (login?.success) {
+        toastManager.success('\u2705 \uACC4\uC815 \uC804\uD658 \uC644\uB8CC');
+      } else {
+        toastManager.error(`\u274C \uB85C\uADF8\uC778 \uC2E4\uD328: ${login?.message || '\uC54C \uC218 \uC5C6\uB294 \uC624\uB958'}`);
+      }
+    } catch (err) {
+      toastManager.error(`\u274C \uC624\uB958: ${(err as Error).message}`);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = orig;
+      void refreshAgentStatusBadges();
+    }
+  };
+}
+
+/**
  * \uC5D0\uC774\uC804\uD2B8 \uBAA8\uB4DC(codex/claude \uAD6C\uB3C5 CLI) \uC124\uCE58\u00B7\uB85C\uADF8\uC778 \uC0C1\uD0DC \uBC43\uC9C0 + \uC561\uC158 \uBC84\uD2BC \uAC31\uC2E0.
  * \uAE00\uC0DD\uC131 \uC5D4\uC9C4 \uC124\uC815 \uB85C\uB4DC \uC2DC \uD638\uCD9C \u2014 agent:status IPC\uB85C \uC2E4\uC81C \uC0C1\uD0DC\uB97C \uC870\uD68C\uD574 \uCE74\uB4DC\uC5D0 \uD45C\uAE30\uD55C\uB2E4.
  * \uBBF8\uC124\uCE58 \u2192 \uC790\uB3D9\uC124\uCE58 \uBC84\uD2BC, \uBBF8\uB85C\uADF8\uC778 \u2192 \uB85C\uADF8\uC778 \uBC84\uD2BC\uC744 \uB178\uCD9C\uD55C\uB2E4(\uD480\uC790\uB3D9).
@@ -74,8 +119,8 @@ async function refreshAgentStatusBadges(): Promise<void> {
   const api = (window as any).api;
   if (!api?.agentStatus) return;
   const targets = [
-    { provider: 'codex', elId: 'agent-codex-status', actionsId: 'agent-codex-actions', installId: 'agent-codex-install-btn', loginId: 'agent-codex-login-btn' },
-    { provider: 'claude', elId: 'agent-claude-status', actionsId: 'agent-claude-actions', installId: 'agent-claude-install-btn', loginId: 'agent-claude-login-btn' },
+    { provider: 'codex', elId: 'agent-codex-status', actionsId: 'agent-codex-actions', installId: 'agent-codex-install-btn', loginId: 'agent-codex-login-btn', switchId: 'agent-codex-switch-btn' },
+    { provider: 'claude', elId: 'agent-claude-status', actionsId: 'agent-claude-actions', installId: 'agent-claude-install-btn', loginId: 'agent-claude-login-btn', switchId: 'agent-claude-switch-btn' },
   ] as const;
   await Promise.all(targets.map(async (t) => {
     const el = document.getElementById(t.elId);
@@ -83,11 +128,13 @@ async function refreshAgentStatusBadges(): Promise<void> {
     const actions = document.getElementById(t.actionsId);
     const installBtn = document.getElementById(t.installId) as HTMLButtonElement | null;
     const loginBtn = document.getElementById(t.loginId) as HTMLButtonElement | null;
+    const switchBtn = document.getElementById(t.switchId) as HTMLButtonElement | null;
     el.textContent = '\u23F3 \uC0C1\uD0DC \uD655\uC778 \uC911...';
     el.style.color = '#6b7280';
     setShown(actions, false, 'flex');
     setShown(installBtn, false);
     setShown(loginBtn, false);
+    setShown(switchBtn, false);
     try {
       const res = await api.agentStatus(t.provider);
       const s = res?.status;
@@ -114,6 +161,10 @@ async function refreshAgentStatusBadges(): Promise<void> {
       }
       el.textContent = `\u2705 \uC900\uBE44\uB428 \u2014 ${s.detail || s.version || '\uB85C\uADF8\uC778 \uC0C1\uD0DC'}`;
       el.style.color = '#15803d';
+      // \u2705 [v2.11.49] \uB85C\uADF8\uC778 \uC0C1\uD0DC\uC77C \uB54C "\uACC4\uC815 \uC804\uD658" \uBC84\uD2BC \uB178\uCD9C (\uB85C\uADF8\uC544\uC6C3 \u2192 \uB2E4\uB978 \uACC4\uC815 \uC7AC\uB85C\uADF8\uC778)
+      setShown(actions, true, 'flex');
+      setShown(switchBtn, true);
+      bindAgentSwitch(switchBtn, t.provider, el);
     } catch {
       el.textContent = '\u26A0\uFE0F \uC0C1\uD0DC \uD655\uC778 \uC2E4\uD328 \u2014 \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4';
       el.style.color = '#b45309';
