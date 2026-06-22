@@ -172,6 +172,7 @@ import { registerAllHandlers, registerAccountHandlers, registerAdminHandlers } f
 import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { registerContentHandlers } from './main/ipc/contentHandlers.js';
 import { registerHeadingHandlers } from './main/ipc/headingHandlers.js';
+import { registerDiagnosticsHandlers, generateDiagnosticReport } from './main/ipc/diagnosticsHandlers.js';
 import { registerLicenseHandlers } from './main/ipc/authHandlers.js';
 import { registerQuotaHandlers } from './main/ipc/quotaHandlers.js';
 import { registerApiHandlers } from './main/ipc/apiHandlers.js';
@@ -2896,7 +2897,12 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
           } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
         }
         const failureCode = (result as any).failureCode || classifyPublishFailure(result.message).code;
-        sendStatus({ success: false, message: result.message, failureCode });
+        // [2026-06-23] 발행 실패 시 진단 리포트 자동 생성 — 추측 대신 데이터로 즉시 원인 파악.
+        const diag = await generateDiagnosticReport({ lastError: result.message, stage: 'result-failure' }).catch(() => null);
+        if (diag?.savedPath) {
+          (result as any).message = `${result.message}\n\n🔧 진단 리포트가 저장됐어요:\n${diag.savedPath}\n이 파일을 개발자에게 보내주시면 원인을 바로 찾을 수 있어요.`;
+        }
+        sendStatus({ success: false, message: (result as any).message, failureCode });
       }
 
       return result;
@@ -2908,9 +2914,14 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
           console.log(`[Main] 자동화 오류: 쿼터 환불 완료 (현재: ${refunded.publish})`);
         } catch (e) { console.error('[Main] 쿼터 환불 오류:', e); }
       }
-      const message = (error as Error).message || '자동화 실행 중 오류가 발생했습니다.';
-      console.error('[Main] automation:run 오류:', message);
+      const baseMessage = (error as Error).message || '자동화 실행 중 오류가 발생했습니다.';
+      console.error('[Main] automation:run 오류:', baseMessage);
       const failureCode = classifyPublishFailure(error).code;
+      // [2026-06-23] 예외 발생 시에도 진단 리포트 자동 생성.
+      const diag = await generateDiagnosticReport({ lastError: baseMessage, stage: 'automation:run/exception' }).catch(() => null);
+      const message = diag?.savedPath
+        ? `${baseMessage}\n\n🔧 진단 리포트가 저장됐어요:\n${diag.savedPath}\n이 파일을 개발자에게 보내주시면 원인을 바로 찾을 수 있어요.`
+        : baseMessage;
       sendStatus({ success: false, message, failureCode });
       AutomationService.stopRunning();
       return { success: false, message, failureCode };
@@ -3896,6 +3907,8 @@ registerQuotaHandlers(_earlyCtx);
 registerApiHandlers(_earlyCtx);
 // ✅ 에이전트 모드(codex/claude 구독 연동 글생성) IPC — 의존성 없음, 최상위 등록
 registerAgentHandlers();
+// ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고) — 환경별 버그 즉시 진단
+registerDiagnosticsHandlers();
 registerKeywordHandlers();
 registerProductHandlers();
 registerEngagementHandlers();

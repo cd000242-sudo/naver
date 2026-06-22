@@ -2741,6 +2741,31 @@ function initPurchaseInquiryButton(): void {
     });
   }
 
+  // ✅ [v2.11.55] 원클릭 오류 진단 저장 — 발행 실패 후 클릭하면 진단 파일을 바탕화면에 저장.
+  //   추측이 아니라 데이터로: 앱버전·어느 브라우저·OS·최근 로그를 한 파일에 담아 개발자에게 전달.
+  const diagBtn = document.getElementById('diagnostic-report-btn');
+  if (diagBtn) {
+    diagBtn.addEventListener('click', async () => {
+      const original = diagBtn.innerHTML;
+      diagBtn.innerHTML = '<span style="font-size:1.25rem;">⏳</span><span>진단 저장 중...</span>';
+      (diagBtn as HTMLButtonElement).disabled = true;
+      try {
+        const res = await window.api.generateDiagnosticReport?.({ stage: 'manual' });
+        if (res?.ok && res.savedPath) {
+          alert(`🔧 진단 리포트가 저장됐어요.\n\n${res.savedPath}\n\n이 파일을 개발자(1:1 카톡)에게 보내주시면 원인을 바로 찾을 수 있어요.`);
+        } else {
+          alert('진단 리포트 저장에 실패했어요. 다시 시도해주세요.');
+        }
+      } catch (e) {
+        console.error('진단 리포트 생성 오류:', e);
+        alert('진단 리포트 생성 중 오류가 발생했어요.');
+      } finally {
+        diagBtn.innerHTML = original;
+        (diagBtn as HTMLButtonElement).disabled = false;
+      }
+    });
+  }
+
   // ✅ [v2.11.49] "생성된 글 목록" 섹션을 글 발행하기 탭 → 전용 탭(post-list)으로 이동.
   //   DOM 노드를 그대로 옮기므로 id·핸들러(togglePostsListSection 등)는 보존됨. 멱등.
   //   init 타이밍/재렌더에 무관하게: init 즉시 + 탭 클릭 시 재시도 양쪽에서 보장.

@@ -78,6 +78,9 @@ contextBridge.exposeInMainWorld('api', {
   abortImageGeneration: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('automation:abortImageGeneration'),
   closeBrowser: (naverId?: string) => ipcRenderer.invoke('automation:closeBrowser', naverId), // ✅ 추가
+  // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고)
+  generateDiagnosticReport: (context?: { lastError?: string; stage?: string }): Promise<{ ok: boolean; savedPath: string; report: string }> =>
+    ipcRenderer.invoke('diagnostics:generateReport', context),
   launchLeword: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('leword:launch'), // ✅ LEWORD 황금키워드 앱 실행
   freeActivate: (userInfo?: { email: string; nickname: string; phone: string }): Promise<{ success: boolean; message?: string }> =>

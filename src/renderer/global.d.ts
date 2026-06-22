@@ -225,6 +225,8 @@ interface AutomationAPI {
   resetGeminiUsageTracker: () => Promise<{ success: boolean; message?: string }>;
   setGeminiCreditBudget: (budget: number) => Promise<{ success: boolean; message?: string }>;
   runAutomation: (payload: RendererAutomationPayload) => Promise<RendererStatus>;
+  // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고)
+  generateDiagnosticReport?: (context?: { lastError?: string; stage?: string }) => Promise<{ ok: boolean; savedPath: string; report: string }>;
   // Excel 관련 API 제거됨
   cancelAutomation: () => Promise<boolean>;
   freeActivate: () => Promise<{ success: boolean; message?: string }>;
