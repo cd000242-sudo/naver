@@ -121,20 +121,21 @@ export async function launchBrowser(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function isLoggedIn(page: any): Promise<boolean> {
   try {
-    // ✅ [v2.11.x] 정확한 로그인 신호 = 살아있는 Cognito 세션 토큰(idToken/accessToken).
-    //   라이브 확인 결과 dropshot은 이 토큰을 localStorage가 아니라 **쿠키**에 저장한다
-    //   (CognitoIdentityServiceProvider.<clientId>.<user>.idToken/accessToken). 따라서
-    //   localStorage·쿠키 양쪽을 본다. idToken/accessToken/refreshToken은 signOut 시
-    //   모두 제거되므로 세션 신호로 본다. 반면 LastAuthUser/deviceKey/deviceGroupKey
-    //   등은 "기기 기억"으로 로그아웃 후에도 잔존하므로 제외해야 false positive
-    //   ("로그아웃인데 로그인됨")가 안 난다. 느슨한 /session/ 매칭도 금지.
+    // ✅ [v2.11.50] 정확한 로그인 신호 = 살아있는 Cognito 세션 JWT(idToken/accessToken)뿐.
+    //   라이브 확인: dropshot은 이 토큰을 쿠키에 저장한다
+    //   (CognitoIdentityServiceProvider.<clientId>.<user>.idToken/accessToken) → localStorage·쿠키 양쪽을 본다.
+    //   ⚠️ refreshToken은 반드시 제외한다: (1) opaque 문자열이라 JWT가 아니고 (2) 로그아웃 후에도
+    //   쿠키에 잔존한다(라이브 재확인). 포함하면 아래 쿠키 길이 폴백(val.length>20)에 걸려
+    //   "로그아웃인데 로그인됨" false positive가 재발한다 — 이것이 2ed04e1e 회귀의 정확한 원인이며
+    //   사용자 라이브 테스트(v2.11.48)에서 "로그인 완료 오탐 + 로그인창 즉시 닫힘"으로 재현됐다.
+    //   idToken/accessToken만 signOut 시 제거되는 살아있는 세션 신호. LastAuthUser/deviceKey 등 "기기 기억" 키도 제외.
     const loggedIn = await page.evaluate(() => {
       const isJwt = (v: string | null): boolean => {
         if (!v) return false;
         const parts = v.split('.');
         return parts.length === 3 && parts.every((p) => p.length > 0);
       };
-      const TOKEN_KEY = /CognitoIdentityServiceProvider\..+\.(idToken|accessToken|refreshToken)$/i;
+      const TOKEN_KEY = /CognitoIdentityServiceProvider\..+\.(idToken|accessToken)$/i;
       try {
         for (let i = 0; i < localStorage.length; i++) {
           const k = localStorage.key(i) || '';
