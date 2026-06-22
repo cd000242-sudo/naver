@@ -2795,23 +2795,24 @@ function initPublishModeSubtabs(): void {
     formSection.appendChild(cont);
     formSection.appendChild(ma);
 
-    // 3. 모달 .modal-panel을 인라인 패널로 이동 + 백드롭 중립화(더 이상 오버레이로 안 뜸)
+    // 3. 모달 "전체"를 인라인 패널로 이동(구조 유지 → modal.querySelector 동작) + 오버레이를 일반 블록으로 변환.
+    //    panel만 빼지 않는 이유: opener의 핸들러 배선이 modal.querySelector(...)를 쓰기 때문.
     const relocate = (modalId: string, host: HTMLElement): void => {
       const modal = document.getElementById(modalId) as HTMLElement | null;
       if (!modal) return;
-      const panel = modal.querySelector('.modal-panel') as HTMLElement | null;
-      if (panel && panel.parentElement !== host) {
-        panel.style.maxWidth = '100%';
-        panel.style.width = '100%';
-        panel.style.maxHeight = 'none';
-        panel.style.margin = '0';
-        host.appendChild(panel);
-      }
-      // 백드롭 완전 중립화 — 다른 코드가 display:flex로 띄워도 빈 오버레이가 화면을 막지 않게 !important + pointer-events none.
-      modal.style.setProperty('display', 'none', 'important');
-      modal.style.pointerEvents = 'none';
-      modal.setAttribute('aria-hidden', 'true');
+      if (modal.parentElement !== host) host.appendChild(modal);
+      modal.style.setProperty('position', 'static', 'important');
+      modal.style.setProperty('display', 'block', 'important');
+      modal.style.setProperty('background', 'transparent', 'important');
+      modal.style.setProperty('width', '100%', 'important');
+      modal.style.setProperty('height', 'auto', 'important');
+      modal.style.setProperty('padding', '0', 'important');
+      modal.style.setProperty('inset', 'auto', 'important');
+      modal.style.pointerEvents = 'auto';
+      modal.setAttribute('aria-hidden', 'false');
       modal.dataset.inlined = 'true';
+      const panel = modal.querySelector('.modal-panel') as HTMLElement | null;
+      if (panel) { panel.style.maxWidth = '100%'; panel.style.width = '100%'; panel.style.maxHeight = 'none'; panel.style.margin = '0'; }
     };
     relocate('continuous-mode-modal', cont);
     relocate('multi-account-modal', ma);
@@ -2829,6 +2830,12 @@ function initPublishModeSubtabs(): void {
     document.querySelectorAll<HTMLButtonElement>('.pub-mode-tab').forEach((tab) => {
       tab.addEventListener('click', () => showMode((tab.dataset.pubmode as 'single' | 'continuous' | 'ma') || 'single'));
     });
+
+    // 5. 인라인 패널 내부 기능 배선(상세설정·큐추가 등) 1회 트리거 — opener가 "열 때" 배선하므로.
+    //    __showPublishMode 설정 후 실행 → 트리거가 잠시 continuous/ma로 갔다가 single로 복귀.
+    try { (window as any).toggleContinuousModeModal?.(); } catch { /* ignore */ }
+    document.getElementById('multi-account-btn')?.click();
+    setTimeout(() => { try { showMode('single'); } catch { /* ignore */ } }, 0);
   } catch (e) {
     console.error('발행 모드 서브탭 초기화 오류:', e);
   }

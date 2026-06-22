@@ -723,33 +723,35 @@ export function scheduleNextPosting(): void {
 // 연속 발행 URL 입력 모달 토글
 export function toggleContinuousModeModal(): void {
   console.log('[Continuous] toggleContinuousModeModal 호출됨');
-  // ✅ [v2.11.49] 모달이 발행 서브탭으로 인라인됐으면 모달 대신 서브탭 전환.
-  const inlinedModal = document.getElementById('continuous-mode-modal') as HTMLElement | null;
-  if (inlinedModal?.dataset.inlined === 'true' && typeof (window as any).__showPublishMode === 'function') {
-    document.querySelector('[data-tab="unified"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-    (window as any).__showPublishMode('continuous');
-    return;
-  }
   const modal = document.getElementById('continuous-mode-modal') as HTMLDivElement;
-  console.log('[Continuous] 모달 엘리먼트 찾음:', modal ? '있음' : '없음');
-
   if (!modal) {
     console.log('[Continuous] 모달 엘리먼트를 찾을 수 없음');
     return;
   }
 
-  // ✅ 모달을 body 직속으로 이동 (position:fixed 정상 작동을 위해)
-  if (modal.parentElement !== document.body) {
-    console.log('[Continuous] 모달을 body로 이동 (현재 부모:', modal.parentElement?.id || modal.parentElement?.tagName, ')');
-    document.body.appendChild(modal);
+  // ✅ [v2.11.49] 발행 서브탭으로 인라인된 경우: 오버레이 대신 서브탭 표시 + 배선(상세설정/큐추가 등)은 그대로 실행.
+  const isInlined = modal.dataset.inlined === 'true';
+  let isOpening = true;
+  if (isInlined) {
+    if (typeof (window as any).__showPublishMode === 'function') {
+      document.querySelector('[data-tab="unified"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      (window as any).__showPublishMode('continuous');
+    }
+    modal.setAttribute('aria-hidden', 'false');
+  } else {
+    if (modal.parentElement !== document.body) document.body.appendChild(modal);
+    const currentDisplay = modal.style.display;
+    isOpening = currentDisplay === 'none' || currentDisplay === '';
+    if (!isOpening) {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      return;
+    }
   }
 
-  const currentDisplay = modal.style.display;
-  const isOpening = currentDisplay === 'none' || currentDisplay === '';
-  console.log('[Continuous] 모달 표시 상태 변경:', currentDisplay, '->', isOpening ? 'flex' : 'none');
-
   if (isOpening) {
-    // ✅ 모달 열기 - 모든 필수 스타일 명시적 설정
+    if (!isInlined) {
+    // ✅ 모달 열기 - 모든 필수 스타일 명시적 설정 (인라인은 오버레이 미적용)
     modal.style.cssText = `
       display: flex !important;
       position: fixed !important;
@@ -788,8 +790,9 @@ export function toggleContinuousModeModal(): void {
         modal.setAttribute('aria-hidden', 'true');
       }
     };
+    } // end if(!isInlined) — 오버레이/닫기 배선은 모달 모드 전용
 
-    // ✅ 상세 설정 버튼 클릭 이벤트 직접 연결
+    // ✅ 상세 설정 버튼 클릭 이벤트 직접 연결 (인라인·모달 공통)
     const openSettingsBtn = modal.querySelector('#continuous-open-settings-modal-btn, [id*="settings-modal-btn"]') as HTMLButtonElement;
     if (openSettingsBtn) {
       openSettingsBtn.onclick = (e) => {
