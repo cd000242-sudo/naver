@@ -54,7 +54,7 @@ describe('evaluatePrePublishReport', () => {
     expect(report.checks.find((c) => c.name === 'image-count')?.pass).toBe(false);
   });
 
-  it('fails when only part of the planned image set reached the editor', () => {
+  it('fails when most of the planned image set is missing (severe shortfall = real failure)', () => {
     const report = evaluatePrePublishReport(
       { ...okStats, imageCount: 1 },
       { ...expectations, expectedImageMin: 3 }
@@ -62,9 +62,31 @@ describe('evaluatePrePublishReport', () => {
     expect(report.pass).toBe(false);
     expect(report.checks.find((c) => c.name === 'image-count')).toMatchObject({
       pass: false,
-      expected: '>= 3',
       actual: '1',
     });
+  });
+
+  it('tolerates user curation — a 1~2 image shortfall passes (user deletes bad/off-topic images live)', () => {
+    // 6 planned, user deleted 1 hamster image → 5 present. Must NOT block the whole post.
+    const five = evaluatePrePublishReport(
+      { ...okStats, imageCount: 5 },
+      { ...expectations, expectedImageMin: 6 }
+    );
+    expect(five.checks.find((c) => c.name === 'image-count')?.pass).toBe(true);
+    // user deleted 2 → 4 present, still >= 70% → passes
+    const four = evaluatePrePublishReport(
+      { ...okStats, imageCount: 4 },
+      { ...expectations, expectedImageMin: 6 }
+    );
+    expect(four.checks.find((c) => c.name === 'image-count')?.pass).toBe(true);
+  });
+
+  it('still blocks a fully image-less post when images were planned', () => {
+    const report = evaluatePrePublishReport(
+      { ...okStats, imageCount: 0 },
+      { ...expectations, expectedImageMin: 6 }
+    );
+    expect(report.checks.find((c) => c.name === 'image-count')?.pass).toBe(false);
   });
 
   it('fails when the previous-post link card or tail divider is missing', () => {

@@ -158,8 +158,13 @@ export function evaluatePrePublishReport(
     },
     {
       name: 'image-count',
-      pass: stats.imageCount >= expectations.expectedImageMin,
-      expected: `>= ${expectations.expectedImageMin}`,
+      // [2026-06-23] 이미지 개수 검사를 너그럽게 — 사용자가 직접 큐레이션하기 때문이다.
+      //   리더스 나노바나나프로가 가끔 주제와 무관한 이미지(예: 햄스터)를 생성·배치하면 사용자가
+      //   타이핑 중 직접 삭제한다(라이브 확인: 6개 기획→사용자가 1장 삭제→최종 5개). 이때 글 전체를
+      //   막으면 멀쩡한 글이 발행 불가가 된다. 따라서 '기획 대비 70%(최소 1장)' 이상이면 통과시켜
+      //   여러 장 삭제도 허용하되, 전부 누락(이미지 0인데 기획은 있었음)은 계속 차단한다.
+      pass: stats.imageCount >= Math.max(expectations.expectedImageMin > 0 ? 1 : 0, Math.floor(expectations.expectedImageMin * 0.7)),
+      expected: `>= ${Math.max(expectations.expectedImageMin > 0 ? 1 : 0, Math.floor(expectations.expectedImageMin * 0.7))} (기획 ${expectations.expectedImageMin}, 사용자 큐레이션 허용)`,
       actual: String(stats.imageCount),
     },
     {
