@@ -345,6 +345,29 @@ export async function typeBodyWithRetry(self: any,
     await self.setBold(false);
     await self.delay(self.DELAYS.SHORT);
 
+    // [2026-06-22] Refund-crisis fix: capture the editor text length BEFORE this
+    // section is typed. typeBodyWithRetry is called once per section, and the
+    // subheading is inserted first, so the editor already holds 30+ chars on entry.
+    // The old verification declared success on "any 30+ chars present", so a body
+    // that typed NOTHING ("소제목만 작성하고 본문작성을 안 함") passed as success and
+    // was only caught later by the pre-publish guard → user saw a blocked publish.
+    // Now success requires the editor to actually GROW by this section's content.
+    const readEditorTextLen = async (): Promise<number> => frame.evaluate(() => {
+      const sels = ['.se-section-text', '.se-main-container', '.se-component-content', '[contenteditable="true"]', '.se-text-paragraph', '.se-component'];
+      let combined = '';
+      for (const sel of sels) {
+        document.querySelectorAll(sel).forEach((el) => {
+          combined += ' ' + ((el as HTMLElement).innerText || el.textContent || '');
+        });
+      }
+      return combined.trim().length;
+    }).catch(() => 0);
+    const editorCharsBeforeBody = await readEditorTextLen();
+    // A full insertion grows the editor by at least ~40% of the section length
+    // (innerText ≈ source; nested selectors inflate the count further, so this floor
+    // is conservative). Heading-only state grows ~0 → fails → outer retry re-types.
+    const minBodyGrowth = Math.max(20, Math.floor(text.trim().length * 0.4));
+
     const normalizedText = text.replace(/\r\n/g, '\n');
     const richThemes = self.__richPasteThemes || (self.__richPasteThemes = pickRichArticleThemes());
     const rich = buildMobileRichHtml(normalizedText, {
@@ -530,13 +553,18 @@ export async function typeBodyWithRetry(self: any,
             self.log(`   ✅ 본문 DOM 검증 완료 (에디터 내용: ${editorContent.length}자)`);
             break;
           } else {
-            // ✅ [긴급 수정] 스마트 타이핑(HTML)으로 인해 텍스트 매칭이 실패하더라도 내용은 입력된 경우 통과
-            if (editorContent.length > 30) { // 30자 이상이면 입력된 것으로 간주
-              self.log(`   ⚠️ 정확한 매칭 실패했으나 내용 있음 (${editorContent.length}자) - 성공으로 간주`);
+            // [2026-06-22] Smart-typing (HTML chunking) can break exact text
+            // matching even when the content IS present — but the old fallback
+            // ("any 30+ chars → success") also passed when ONLY the subheading was
+            // present and the body typed nothing. Require the editor to have GROWN
+            // by this section's content since entry, so heading-only state fails.
+            const grew = editorContent.length - editorCharsBeforeBody;
+            if (grew >= minBodyGrowth) {
+              self.log(`   ⚠️ 정확한 매칭 실패했으나 본문 증가분 확인 (+${grew}자 ≥ ${minBodyGrowth}) - 성공으로 간주`);
               verified = true;
               break;
             }
-            self.log(`   ⚠️ 검증 시도 ${verifyAttempt + 1}/5: 에디터 내용은 있음 (${editorContent.length}자)이지만 검증 실패`);
+            self.log(`   ⚠️ 검증 시도 ${verifyAttempt + 1}/5: 본문 증가분 부족 (+${grew}자 < ${minBodyGrowth}, 총 ${editorContent.length}자) - 재시도`);
           }
         } else {
           self.log(`   ⚠️ 검증 시도 ${verifyAttempt + 1}/5: 에디터 내용이 비어있음`);
@@ -544,24 +572,16 @@ export async function typeBodyWithRetry(self: any,
       }
 
       if (!verified) {
-        // ✅ 검증 실패 시 에러 던지기 (빈 글 발행 방지)
-        // ✅ 개선:broader selectors로 최종 확인 (querySelectorAll 사용)
-        const finalContent = await frame.evaluate(() => {
-          const possibleSelectors = ['.se-section-text', '.se-main-container', '[contenteditable="true"]', '.se-text-paragraph', '.se-component-content'];
-          let combined = '';
-          possibleSelectors.forEach(sel => {
-            document.querySelectorAll(sel).forEach(el => {
-              combined += ' ' + (el.textContent || '');
-            });
-          });
-          return combined.trim();
-        });
-
-        if (finalContent.length === 0) {
-          throw new Error(`본문 입력 실패: 에디터에 내용이 없습니다. (검증 시도 5회 모두 실패)`);
-        } else {
-          self.log(`   ⚠️ 본문 DOM 검증 실패했지만 에디터에 내용이 있음 (${finalContent.length}자) - 계속 진행`);
+        // [2026-06-22] 검증 실패 시: 이 섹션 본문이 실제로 반영됐는지 '증가분'으로 최종 판정.
+        // 옛 코드는 에디터 전체가 비었을 때(=0자)만 throw 했는데, 소제목이 먼저 들어가 있어
+        // 본문이 0자여도 전체는 0이 아니라 항상 "계속 진행" → 본문 누락 글이 발행 직전까지 감.
+        // 이제 증가분이 거의 없으면(소제목만 있는 상태) throw → self.retry가 본문을 재입력.
+        const finalLen = await readEditorTextLen();
+        const finalGrew = finalLen - editorCharsBeforeBody;
+        if (finalGrew < Math.max(15, Math.floor(minBodyGrowth * 0.5))) {
+          throw new Error(`본문 입력 실패: 이 섹션 본문이 에디터에 반영되지 않았습니다 (증가분 +${finalGrew}자 / 총 ${finalLen}자). 소제목만 작성되고 본문이 누락되는 상태를 차단합니다.`);
         }
+        self.log(`   ⚠️ 본문 DOM 정확매칭은 실패했으나 증가분 확인(+${finalGrew}자) - 계속 진행`);
       }
     } else {
       // 텍스트가 비어있으면 에러

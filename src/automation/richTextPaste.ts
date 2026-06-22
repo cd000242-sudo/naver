@@ -1495,16 +1495,30 @@ async function grantClipboardPermission(page: Page, frame: Frame): Promise<void>
   }
 }
 
-function isPasteVisible(
+// [2026-06-22] Refund-crisis fix: this guard used to declare a paste "visible"
+// whenever the FIRST 12 chars of the content appeared (or any 21+ chars landed).
+// On slower client machines a long article often pastes only its first paragraph
+// before the snapshot is read, so a 171/1528-char partial paste passed as success.
+// The publish then proceeded with a truncated body and was blocked downstream by
+// the pre-publish guard, surfacing to users as a mysterious "발행 실패" loop.
+// Now substantial content must actually land most of itself (coverage), not just
+// a fragment. Short content keeps the presence heuristic (counts are noisy small).
+export function isPasteVisible(
   before: { chars: number; tables: number; text: string },
   after: { chars: number; tables: number; text: string },
   trimmedPlain: string
 ): boolean {
-  const needle = trimmedPlain.replace(/\s+/g, ' ').slice(0, 12);
-  const normalizedAfter = after.text.replace(/\s+/g, ' ');
-  return (needle.length > 0 && normalizedAfter.includes(needle)) ||
-    after.chars > before.chars + Math.min(20, trimmedPlain.length / 2) ||
-    after.tables > before.tables;
+  const expected = trimmedPlain.replace(/\s+/g, ' ').trim().length;
+  const delta = after.chars - before.chars;
+  if (expected <= 60) {
+    const needle = trimmedPlain.replace(/\s+/g, ' ').slice(0, 12);
+    const normalizedAfter = after.text.replace(/\s+/g, ' ');
+    return (needle.length > 0 && normalizedAfter.includes(needle)) ||
+      delta > Math.min(20, expected / 2) ||
+      after.tables > before.tables;
+  }
+  const coverage = delta / expected;
+  return coverage >= 0.6 || (after.tables > before.tables && coverage >= 0.45);
 }
 
 function buildPasteFailureReason(
@@ -2463,9 +2477,30 @@ export async function pasteRichHtmlAtCursor(
     await page.keyboard.down('Control');
     await page.keyboard.press('V');
     await page.keyboard.up('Control');
-    await new Promise(resolve => setTimeout(resolve, 800));
 
-    const after = await readEditorStats(frame);
+    // [2026-06-22] Slow-client fix: a long article can take several seconds to
+    // finish rendering after Ctrl+V on slower machines. The old single fixed-wait
+    // snapshot caught the paste mid-insertion, so only the first fragment was seen.
+    // Poll until the body covers the expected content, or the char count stops
+    // growing (paste settled / genuinely incomplete), up to ~6s.
+    let after = await readEditorStats(frame);
+    {
+      const pollStart = Date.now();
+      let lastChars = -1;
+      let stableReads = 0;
+      while (Date.now() - pollStart < 6000) {
+        if (isPasteVisible(before, after, trimmedPlain)) break;
+        if (after.chars === lastChars) {
+          stableReads += 1;
+          if (stableReads >= 3) break; // count stalled → paste won't grow further
+        } else {
+          stableReads = 0;
+        }
+        lastChars = after.chars;
+        await new Promise(resolve => setTimeout(resolve, 400));
+        after = await readEditorStats(frame);
+      }
+    }
     const inserted = isPasteVisible(before, after, trimmedPlain);
 
     if (inserted) {
