@@ -2839,6 +2839,12 @@ function initPublishModeSubtabs(): void {
       tab.addEventListener('click', () => showMode((tab.dataset.pubmode as 'single' | 'continuous' | 'ma') || 'single'));
     });
 
+    // ✅ [v2.11.49] 서브탭으로 일원화 → 기존(옛) UI 제거:
+    //   ① 옛 "연속 발행 모드" 카드(continuous-mode-section) ② 헤더 "풀오토 다중계정" 버튼.
+    //   (multi-account-btn은 init 배선에 필요해 제거 대신 숨김 — DOM엔 유지)
+    document.getElementById('continuous-mode-section')?.style.setProperty('display', 'none', 'important');
+    document.getElementById('multi-account-btn')?.style.setProperty('display', 'none', 'important');
+
     // 5. 인라인 패널 내부 기능 배선(상세설정·큐추가 등) 1회 트리거 — opener가 "열 때" 배선하므로.
     //    __showPublishMode 설정 후 실행 → 트리거가 잠시 continuous/ma로 갔다가 single로 복귀.
     try { (window as any).toggleContinuousModeModal?.(); } catch { /* ignore */ }
