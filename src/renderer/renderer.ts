@@ -2818,10 +2818,18 @@ function initPublishModeSubtabs(): void {
     relocate('multi-account-modal', ma);
 
     // 4. 서브탭 전환 (전역 노출 → opener들이 호출)
+    //    견고화: 모달이 다른 코드에 의해 body 등으로 탈출했으면 매번 호스트로 되돌리고,
+    //    모달 자체 display(!important)도 직접 토글 → 서브탭별로 정확히 하나만 표시.
     const showMode = (mode: 'single' | 'continuous' | 'ma'): void => {
+      const contModal = document.getElementById('continuous-mode-modal') as HTMLElement | null;
+      const maModal = document.getElementById('multi-account-modal') as HTMLElement | null;
+      if (contModal && contModal.parentElement !== cont) cont.appendChild(contModal);
+      if (maModal && maModal.parentElement !== ma) ma.appendChild(maModal);
       single.style.display = mode === 'single' ? 'block' : 'none';
       cont.style.display = mode === 'continuous' ? 'block' : 'none';
       ma.style.display = mode === 'ma' ? 'block' : 'none';
+      if (contModal) contModal.style.setProperty('display', mode === 'continuous' ? 'block' : 'none', 'important');
+      if (maModal) maModal.style.setProperty('display', mode === 'ma' ? 'block' : 'none', 'important');
       document.querySelectorAll<HTMLElement>('.pub-mode-tab').forEach((t) => {
         t.classList.toggle('active', t.dataset.pubmode === mode);
       });
