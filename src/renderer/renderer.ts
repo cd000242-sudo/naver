@@ -2720,12 +2720,25 @@ function initShoppingBannerTab(): void {
 
 function initPurchaseInquiryButton(): void {
   const btn = document.getElementById('purchase-inquiry-btn') as HTMLButtonElement | null;
-  if (!btn) return;
+  if (btn) {
+    btn.addEventListener('click', () => {
+      // ✅ [v2.11.49] 구매문의 → 1:1 카톡문의 (오픈채팅)
+      window.api.openExternalUrl('https://open.kakao.com/o/sPcaslwh');
+    });
+  }
 
-  btn.addEventListener('click', () => {
-    // ✅ [v2.11.49] 구매문의 → 1:1 카톡문의 (오픈채팅)
-    window.api.openExternalUrl('https://open.kakao.com/o/sPcaslwh');
-  });
+  // ✅ [v2.11.49] 앱 사용법 영상(유튜브) — 헤더 버튼이라 항상 실행되는 이 init에서 배선.
+  //   (이전엔 연속발행 init 안에 있어 연속발행을 열기 전엔 리스너 미등록 → 클릭해도 안 열리는 버그)
+  const videoBtn = document.getElementById('close-browser-session-btn');
+  if (videoBtn) {
+    videoBtn.addEventListener('click', async () => {
+      try {
+        await window.api.openExternalUrl('https://www.youtube.com/watch?v=wGxmIcvh5Bc&list=PL5ci4Gqmio0dE7HMEkA8cF-o16epvswig&index=6');
+      } catch (e) {
+        console.error('앱 사용법 영상 열기 오류:', e);
+      }
+    });
+  }
 }
 
 // 메인 초기화 함수 (DOMContentLoaded와 상관없이 한 번만 실행)

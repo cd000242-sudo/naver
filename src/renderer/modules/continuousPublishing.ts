@@ -2455,17 +2455,8 @@ export function initContinuousPublishingV2(): void {
     }
   });
 
-  // ✅ 브라우저 세션 종료 버튼 이벤트 리스너 추가
-  // ✅ [v2.11.49] 브라우저 종료 → 앱 사용법 영상(유튜브) 바로가기로 변경
-  document.getElementById('close-browser-session-btn')?.addEventListener('click', async () => {
-    const url = 'https://www.youtube.com/watch?v=wGxmIcvh5Bc&list=PL5ci4Gqmio0dE7HMEkA8cF-o16epvswig&index=6';
-    try {
-      await (window as any).api.openExternalUrl(url);
-    } catch (error) {
-      console.error('앱 사용법 영상 열기 오류:', error);
-      alert('영상 열기 실패: ' + (error as Error).message);
-    }
-  });
+  // ✅ [v2.11.49] 앱 사용법 영상(close-browser-session-btn) 핸들러는 renderer.ts
+  //   initPurchaseInquiryButton(앱 init에서 항상 실행)으로 이관 — 연속발행 열기 전에도 동작하도록.
 
   // ✅ LEWORD 황금키워드 실행 버튼 이벤트 리스너는 DOMContentLoaded에서 전역 등록 (아래 참조)
 
