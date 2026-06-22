@@ -2795,6 +2795,19 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
 
   console.log('[Main] automation:run  AutomationService.executePostCycle() 위임');
 
+  // [2026-06-23] 발행용 브라우저 보장 — 시스템 Chrome이 없는 PC는 고정버전 Chrome을 최초 1회
+  // 자동 다운로드한다. dev(Chrome 있음)↔배포(Chrome 없는 고객) 브라우저 변인을 제거해 모든
+  // 사용자가 동일한 브라우저로 발행하게 만든다. 진행률은 기존 진행 모달(sendLog)에 표시.
+  try {
+    const { ensureChromiumAvailable } = await import('./browserInstaller.js');
+    await ensureChromiumAvailable((_pct, message) => sendLog(`🌐 ${message}`));
+  } catch (browserErr: any) {
+    const msg = `발행용 브라우저 준비 실패: ${browserErr?.message || browserErr}. 인터넷 연결을 확인한 뒤 다시 시도해주세요.`;
+    console.error(`[Main] ${msg}`);
+    sendLog(`❌ ${msg}`);
+    return { success: false, message: msg };
+  }
+
   // SPEC-IMAGE-MODEL-001 Phase 5 — materialize blob-id images to temp files for automation god file compat.
   if (payload.generatedImages && payload.generatedImages.length > 0) {
     const { materializePublishingImages } = await import('./main/utils/materializePublishingImages.js');
@@ -4241,6 +4254,17 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
   // ============================================
 
   console.log('[Main] multiAccount:publish  executePostCycle 루프 위임');
+
+  // [2026-06-23] 발행용 브라우저 보장 (automation:run과 동일) — Chrome 없는 PC는 최초 1회 자동 다운로드.
+  try {
+    const { ensureChromiumAvailable } = await import('./browserInstaller.js');
+    await ensureChromiumAvailable((_pct, message) => sendLog(`🌐 ${message}`));
+  } catch (browserErr: any) {
+    const msg = `발행용 브라우저 준비 실패: ${browserErr?.message || browserErr}. 인터넷 연결을 확인한 뒤 다시 시도해주세요.`;
+    console.error(`[Main] ${msg}`);
+    sendLog(`❌ ${msg}`);
+    return { success: false, message: msg };
+  }
 
   //  설정 동기화
   try {

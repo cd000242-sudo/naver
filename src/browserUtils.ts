@@ -36,11 +36,23 @@ function getSystemChromiumCandidates(): string[] {
 
 function getPuppeteerCacheRoots(): string[] {
   const home = os.homedir();
-  return [
+  const roots = [
     path.join(home, '.cache', 'puppeteer', 'chrome'),
     path.join(home, 'Library', 'Caches', 'puppeteer', 'chrome'),
     path.join(home, 'AppData', 'Local', 'puppeteer', 'chrome'),
   ];
+  // [2026-06-23] Managed (auto-downloaded) Chrome lives in Electron userData/browsers
+  // so getChromiumExecutablePath() can find it after browserInstaller downloads it.
+  // require('electron') only resolves in the main process — ignore elsewhere.
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const electron = require('electron');
+    const userData: string | undefined = electron?.app?.getPath?.('userData');
+    if (userData) roots.unshift(path.join(userData, 'browsers', 'chrome'));
+  } catch {
+    // not an Electron main context — system/default caches still apply
+  }
+  return roots;
 }
 
 function getPuppeteerChromeCandidates(cacheRoot: string, version: string): string[] {
@@ -60,10 +72,18 @@ function getPuppeteerChromeCandidates(cacheRoot: string, version: string): strin
  * default is used.
  */
 export async function getChromiumExecutablePath(): Promise<string | undefined> {
-  for (const chromePath of getSystemChromiumCandidates()) {
-    if (fs.existsSync(chromePath)) {
-      console.log(`[BrowserUtils] system browser found: ${chromePath}`);
-      return chromePath;
+  // [2026-06-23] 재현용 플래그 — BLN_FORCE_NO_SYSTEM_CHROME=1 로 실행하면 시스템 Chrome을
+  // 건너뛴다. 개발자 PC(Chrome 설치됨)에서 'Chrome 없는 고객' 환경을 그대로 재현해
+  // dev↔배포 차이(브라우저 변인)를 로컬에서 테스트하기 위함.
+  const skipSystemChrome = process.env.BLN_FORCE_NO_SYSTEM_CHROME === '1';
+  if (skipSystemChrome) {
+    console.log('[BrowserUtils] BLN_FORCE_NO_SYSTEM_CHROME=1 → 시스템 Chrome 건너뜀 (Chrome 없는 고객 환경 재현)');
+  } else {
+    for (const chromePath of getSystemChromiumCandidates()) {
+      if (fs.existsSync(chromePath)) {
+        console.log(`[BrowserUtils] system browser found: ${chromePath}`);
+        return chromePath;
+      }
     }
   }
 
