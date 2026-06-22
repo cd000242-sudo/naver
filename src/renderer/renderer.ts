@@ -2741,15 +2741,25 @@ function initPurchaseInquiryButton(): void {
   }
 
   // ✅ [v2.11.49] "생성된 글 목록" 섹션을 글 발행하기 탭 → 전용 탭(post-list)으로 이동.
-  //   DOM 노드를 그대로 옮기므로 id·핸들러(togglePostsListSection 등)는 보존됨. 멱등(이미 이동됐으면 skip).
-  try {
-    const postsList = document.getElementById('unified-only-posts-list');
-    const postsHost = document.getElementById('post-list-tab-host');
-    if (postsList && postsHost && postsList.parentElement !== postsHost) {
-      postsHost.appendChild(postsList);
+  //   DOM 노드를 그대로 옮기므로 id·핸들러(togglePostsListSection 등)는 보존됨. 멱등.
+  //   init 타이밍/재렌더에 무관하게: init 즉시 + 탭 클릭 시 재시도 양쪽에서 보장.
+  const relocatePostsList = (): void => {
+    try {
+      const postsList = document.getElementById('unified-only-posts-list');
+      const postsHost = document.getElementById('post-list-tab-host');
+      if (postsList && postsHost && postsList.parentElement !== postsHost) {
+        postsHost.appendChild(postsList);
+        (postsList as HTMLElement).style.display = 'block';
+        console.log('[v2.11.49] 생성된 글 목록 섹션을 전용 탭으로 이동 완료');
+      }
+    } catch (e) {
+      console.error('생성된 글 목록 탭 이동 오류:', e);
     }
-  } catch (e) {
-    console.error('생성된 글 목록 탭 이동 오류:', e);
+  };
+  relocatePostsList();
+  const postListTabBtn = document.querySelector('[data-tab="post-list"]');
+  if (postListTabBtn) {
+    postListTabBtn.addEventListener('click', () => setTimeout(relocatePostsList, 0));
   }
 }
 
@@ -9158,7 +9168,9 @@ function initTabSwitching() {
   //   attribute selector 풀스캔 비용을 1회로 줄임. DOM 7579개에서 65~200ms LongTask 원인.
   const tabPanelsCache = Array.from(document.querySelectorAll('.tab-panel')) as HTMLElement[];
   const unifiedOnlySectionsCache = Array.from(document.querySelectorAll('[id^="unified-only-"]')) as HTMLElement[];
-  const excludedSections = new Set(['unified-only-progress-container', 'unified-only-preview-section', 'unified-only-semi-auto-section']);
+  // ✅ [v2.11.49] unified-only-posts-list는 전용 탭(post-list)으로 이동했으므로 unified 토글에서 제외
+  //   (제외 안 하면 [id^="unified-only-"] 패턴이 잡아 non-unified 탭에서 강제 display:none → 빈 화면)
+  const excludedSections = new Set(['unified-only-progress-container', 'unified-only-preview-section', 'unified-only-semi-auto-section', 'unified-only-posts-list']);
 
   tabButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -9218,7 +9230,7 @@ function initTabSwitching() {
   // ✅ 페이지 로드 시 현재 active 탭에 맞게 unified-only 섹션 및 app-container 토글
   const activeTab = document.querySelector('.tab-button.active')?.getAttribute('data-tab');
   const unifiedOnlySectionsInit = document.querySelectorAll('[id^="unified-only-"]');
-  const excludedSectionsInit = ['unified-only-progress-container', 'unified-only-preview-section', 'unified-only-semi-auto-section'];
+  const excludedSectionsInit = ['unified-only-progress-container', 'unified-only-preview-section', 'unified-only-semi-auto-section', 'unified-only-posts-list'];
   unifiedOnlySectionsInit.forEach(section => {
     const sectionId = section.id;
     // 조건부 표시 섹션은 자동으로 표시하지 않음
