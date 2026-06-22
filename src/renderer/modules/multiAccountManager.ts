@@ -42,8 +42,18 @@ function getSafeMultiAccountInterval(requestedSeconds, totalItems, imageSource) 
     else if (MULTI_ACCOUNT_SLOW_IMAGE_SOURCES.has(normalizedImageSource)) {
         minimum = Math.max(minimum, MULTI_ACCOUNT_SLOW_IMAGE_MIN_INTERVAL_SEC);
     }
+    // ✅ [v2.11.49] no-proxy(프록시 미설정) 환경: 같은 IP 다계정이라 간격을 1.5배 자동 강화(캡차 예방).
+    //   프록시 강요 대신, 행동을 더 사람답게(넓은 간격) 해서 프록시 없이도 안전하게.
+    const hasProxy = typeof window !== 'undefined' && window.__hasProxyConfigured === true;
+    let noProxyBoosted = false;
+    if (!hasProxy) {
+        const boosted = Math.round(minimum * 1.5);
+        if (boosted > minimum) { minimum = boosted; noProxyBoosted = true; }
+    }
     const safe = Math.min(86400, Math.max(requested, minimum));
-    const reason = MULTI_ACCOUNT_UI_IMAGE_SOURCES.has(normalizedImageSource)
+    const reason = noProxyBoosted
+        ? '프록시 미설정 — 캡차 예방 위해 간격 자동 강화'
+        : MULTI_ACCOUNT_UI_IMAGE_SOURCES.has(normalizedImageSource)
         ? '브라우저 이미지 엔진 안정화 보호'
         : MULTI_ACCOUNT_SLOW_IMAGE_SOURCES.has(normalizedImageSource)
             ? '이미지 생성 엔진 안정화 보호'
@@ -76,6 +86,9 @@ function setSubImageMode(mode) {
     catch { }
 }
 async function initMultiAccountManager() {
+    // ✅ [v2.11.49] 프록시 설정 여부 캐시 — getSafeMultiAccountInterval의 no-proxy 간격 강화에 사용.
+    //   기본 false(보수적: 미확인 시 강화 적용). 확인되면 갱신.
+    try { window.__hasProxyConfigured = (await window.api?.proxyIsConfigured?.()) === true; } catch { window.__hasProxyConfigured = false; }
     console.log('[MultiAccount] 다계정 관리 기능 초기화 시작');
     const accountListContainer = document.getElementById('ar-account-list') || document.getElementById('account-list');
     const noAccountsMessage = document.getElementById('ar-no-accounts-message') || document.getElementById('no-accounts-message');

@@ -356,6 +356,20 @@ export function registerSystemHandlers(ctx: IpcContext): void {
         }
     });
 
+    // ✅ [v2.11.49] 프록시 설정 여부 — 다중계정 발행 시 no-proxy면 간격을 자동 강화(캡차 예방).
+    //   글로벌/수동/SmartProxy(getProxyUrl) 또는 PROXY_POOL_URLS 중 하나라도 있으면 true.
+    ipcMain.handle('proxy:isConfigured', async (): Promise<boolean> => {
+        try {
+            const poolRaw = (process.env.PROXY_POOL_URLS || '').trim();
+            if (poolRaw) return true;
+            const { getProxyUrl } = await import('../../crawler/utils/proxyManager.js');
+            const url = await getProxyUrl();
+            return !!url;
+        } catch {
+            return false;
+        }
+    });
+
     // ✅ [2026-03-27] 계정별 Sticky Session 프록시 자동 생성
     // C-1 해결: SmartProxy 자격증명은 main process에서만 처리 (렌더러 노출 차단)
     // M-1 해결: Decodo 공식 format — session-{id}-sessionduration-{min}

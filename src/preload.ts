@@ -129,6 +129,8 @@ contextBridge.exposeInMainWorld('api', {
   // 계정 전환용 로그아웃 (다른 구독 계정으로 재로그인)
   agentLogout: (provider: 'codex' | 'claude'): Promise<{ success: boolean; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:logout', provider),
+  // 프록시 설정 여부 (다중계정 no-proxy 시 간격 자동 강화용)
+  proxyIsConfigured: (): Promise<boolean> => ipcRenderer.invoke('proxy:isConfigured'),
   // ✅ [2026-03-11 FIX] generateImages 바인딩 추가 (누락으로 인한 연속발행 이미지 생성 실패 수정)
   generateImages: (options: any): Promise<GenerateImagesResult> =>
     ipcRenderer.invoke('automation:generateImages', options),
