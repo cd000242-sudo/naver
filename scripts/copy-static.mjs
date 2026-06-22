@@ -337,6 +337,7 @@ try {
     'tutorialsTab.js',
     'apiGuideModals.js',
     'priceInfoModal.js',
+    'noticeAdmin.js',
     'imageManagementTab.js',
     'guideModals.js',
     'dashboardUI.js',

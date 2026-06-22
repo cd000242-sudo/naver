@@ -26,6 +26,7 @@ import './modules/tailUIUtils.js';
 // ✅ [2026-02-26 모듈화] AI 어시스턴트 + 가격 정보 + 이미지 관리
 import { initAIAssistant } from './modules/aiAssistant.js';
 import { initPriceInfoModal } from './modules/priceInfoModal.js';
+import { initNoticeAdmin } from './modules/noticeAdmin.js';
 import { initImageManagementTab } from './modules/imageManagementTab.js';
 import { testLicenseCode, initLicenseBadge, initCustomerServiceButton, initGlobalRefreshButton, performGlobalRefresh, initLicenseModal, showErrorAlertModal } from './modules/licenseUI.js';
 import { showRescheduleModal, initScheduleManagement, showSchedulePreviewModal, connectToAdminPanel, syncAdminSettings, sendAdminReport, checkAdminPermissions } from './modules/scheduleManager.js';
@@ -2868,6 +2869,7 @@ async function initializeApplication(): Promise<void> {
   initThumbnailGenerator(); _perfMark('initThumbnailGenerator'); await _yieldIfNeeded();
   initLicenseModal(); _perfMark('initLicenseModal'); await _yieldIfNeeded();
   initPriceInfoModal(); _perfMark('initPriceInfoModal'); await _yieldIfNeeded();
+  initNoticeAdmin(); _perfMark('initNoticeAdmin'); await _yieldIfNeeded();
   try { initGeminiModelSync(); } catch (e) { console.warn('[renderer] catch ignored:', e); }
   _perfMark('initGeminiModelSync'); await _yieldIfNeeded();
   initCredentialsSave(); _perfMark('initCredentialsSave'); await _yieldIfNeeded();
