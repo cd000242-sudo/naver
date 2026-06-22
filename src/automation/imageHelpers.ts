@@ -783,6 +783,11 @@ export async function insertBase64ImageAtCursor(self: any, filePath: string): Pr
     });
   }).catch(() => { });
 
+  // [2026-06-23] 삽입 성공 판정을 '증가분'으로 — 이전 섹션 이미지가 이미 있으면
+  // imgCount>0이 항상 참이라 새 이미지가 안 들어가도 성공 처리되던 false positive 차단.
+  const IMG_SELECTOR = 'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"], img[src*="postfiles"], img[data-attachment-id]';
+  const imgBeforeCount = await frame.$$eval(IMG_SELECTOR, (imgs: any) => imgs.length).catch(() => 0);
+
   const fs = await import('fs/promises');
   const pathModule = await import('path');
   const os = await import('os');
@@ -1018,14 +1023,11 @@ export async function insertBase64ImageAtCursor(self: any, filePath: string): Pr
       await self.delay(1000);
     }
 
-    // 이미지가 삽입되었는지 확인
-    const imgCount = await frame.$$eval(
-      'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"], img[src*="postfiles"], img[data-attachment-id]',
-      (imgs: any) => imgs.length
-    );
+    // 이미지가 삽입되었는지 확인 — 절대 개수가 아니라 '증가분'으로 판정
+    const imgCount = await frame.$$eval(IMG_SELECTOR, (imgs: any) => imgs.length).catch(() => 0);
 
-    if (imgCount > 0) {
-      self.log(`   ✅ 이미지 버튼 클릭 + FileChooser 성공 (이미지 ${imgCount}개 확인됨)`);
+    if (imgCount > imgBeforeCount) {
+      self.log(`   ✅ 이미지 버튼 클릭 + FileChooser 성공 (이미지 ${imgBeforeCount}→${imgCount}개, +${imgCount - imgBeforeCount})`);
 
       // ✅ MyBox 팝업 자동 닫기
       await self.delay(500); // 팝업이 뜰 시간 대기
@@ -1106,6 +1108,11 @@ export async function insertImageViaBase64(self: any, filePath: string, frame?: 
   const pathModule = await import('path');
 
   self.log(`   🔄 Base64 변환 방식으로 이미지 삽입 시작...`);
+
+  // [2026-06-23] 삽입 판정을 '증가분'으로 — 이전 섹션 이미지가 있으면 imgCount>0이 항상 참이라
+  // 새 이미지가 안 들어가도 "성공" 로그를 내던 false positive 차단(로그 정확화).
+  const IMG_SELECTOR_B64 = 'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"], img[src*="postfiles"], img[data-attachment-id]';
+  const imgBeforeCount = frame ? await frame.$$eval(IMG_SELECTOR_B64, (imgs: any) => imgs.length).catch(() => 0) : 0;
 
   // 이미지를 Base64로 읽기
   const absolutePath = filePath;
@@ -1188,16 +1195,13 @@ export async function insertImageViaBase64(self: any, filePath: string, frame?: 
   // 이미지 삽입 완료 대기
   await self.delay(2500);
 
-  // 이미지가 삽입되었는지 확인
-  const imgCount = await frame.$$eval(
-    'img.se-image-resource, img[src*="blob:"], img[src*="blogfiles"], img[src*="postfiles"], img[data-attachment-id]',
-    (imgs: any) => imgs.length
-  ).catch(() => 0);
+  // 이미지가 삽입되었는지 확인 — 절대 개수가 아니라 '증가분'으로 판정
+  const imgCount = await frame.$$eval(IMG_SELECTOR_B64, (imgs: any) => imgs.length).catch(() => 0);
 
-  if (imgCount > 0) {
-    self.log(`   ✅ Base64 방식으로 이미지 삽입 성공 (이미지 ${imgCount}개 확인됨)`);
+  if (imgCount > imgBeforeCount) {
+    self.log(`   ✅ Base64 방식으로 이미지 삽입 성공 (이미지 ${imgBeforeCount}→${imgCount}개, +${imgCount - imgBeforeCount})`);
   } else {
-    self.log(`   ⚠️ Base64 방식으로 삽입했으나 DOM에서 이미지를 찾을 수 없음`);
+    self.log(`   ⚠️ Base64 방식으로 삽입했으나 새 이미지가 DOM에 늘지 않음 (${imgBeforeCount}개 그대로)`);
   }
 
   // ✅ 이미지 크기를 '문서 너비'로 설정

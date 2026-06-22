@@ -41,14 +41,17 @@ export async function verifyCtaInsertion(self: any, frame: any, ctaText: string)
                 const html = p.innerHTML || '';
                 const text = p.innerText || p.textContent || '';
 
-                // 다양한 패턴으로 확인
-                if (html.includes(buttonText) ||
-                    text.includes(buttonText) ||
-                    html.includes('background:') ||
-                    html.includes('linear-gradient') ||
-                    html.includes('border-radius:') ||
-                    (html.includes('href=') && html.includes('display: inline-block')) ||
-                    (html.includes('href=') && html.includes('padding:'))) {
+                // [2026-06-23] 스타일 단독(background:/linear-gradient/border-radius:) 매칭 제거 —
+                // 하이라이트 박스·표 등 CTA가 아닌 요소도 인라인 스타일을 가져 false positive("CTA 있음"
+                // 오탐 → 누락 발행)를 냈다. CTA는 항상 앵커(href=)이므로 스타일 검사를 href= 뒤로 게이팅하고,
+                // 버튼 텍스트는 비어있지 않을 때만 신뢰한다.
+                if ((buttonText && (html.includes(buttonText) || text.includes(buttonText))) ||
+                    (html.includes('href=') && (
+                        html.includes('background:') ||
+                        html.includes('linear-gradient') ||
+                        html.includes('border-radius:') ||
+                        html.includes('display: inline-block') ||
+                        html.includes('padding:')))) {
                     console.log('[CTA 확인] ✅ CTA 버튼 발견:', buttonText);
                     return true;
                 }
@@ -59,8 +62,7 @@ export async function verifyCtaInsertion(self: any, frame: any, ctaText: string)
                 const html = (el as HTMLElement).innerHTML || '';
                 const text = (el as HTMLElement).innerText || (el as HTMLElement).textContent || '';
 
-                if (html.includes(buttonText) ||
-                    text.includes(buttonText) ||
+                if ((buttonText && (html.includes(buttonText) || text.includes(buttonText))) ||
                     (html.includes('href=') && (html.includes('background:') || html.includes('linear-gradient')))) {
                     console.log('[CTA 확인] ✅ CTA 버튼 발견 (전체 검색):', buttonText);
                     return true;
@@ -593,12 +595,17 @@ export async function insertCtaHtmlAtBottom(self: any, frame: any, page: any, ht
             for (let i = paragraphs.length - 1; i >= 0; i--) {
                 const p = paragraphs[i] as HTMLElement;
                 const html = p.innerHTML || '';
-                // 다양한 패턴으로 확인
-                if (html.includes(buttonText) ||
-                    html.includes('background:') ||
-                    html.includes('linear-gradient') ||
-                    html.includes('border-radius:') ||
-                    (html.includes('href=') && html.includes('display: inline-block'))) {
+                const text = p.innerText || p.textContent || '';
+                // [2026-06-23] 스타일 단독 매칭 제거 + href= 게이팅. 옛 코드는 background: 단독으로
+                // 통과해, DOM 삽입이 실패했어도 다른 단락의 스타일을 보고 verified=true로 판정 →
+                // 타이핑 폴백을 건너뛰어 CTA가 누락됐다. CTA는 앵커이므로 href= 뒤로 게이팅한다.
+                if ((buttonText && (html.includes(buttonText) || text.includes(buttonText))) ||
+                    (html.includes('href=') && (
+                        html.includes('background:') ||
+                        html.includes('linear-gradient') ||
+                        html.includes('border-radius:') ||
+                        html.includes('display: inline-block') ||
+                        html.includes('padding:')))) {
                     return true;
                 }
             }
