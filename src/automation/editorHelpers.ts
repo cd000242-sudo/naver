@@ -21,7 +21,7 @@ import { pickBannerHook } from './bannerPhrasePool.js';
 import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
-import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, ensureTailTypingReady } from './richTextPaste.js';
+import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, ensureTailTypingReady, focusLastEditableLine } from './richTextPaste.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
   stripBodyHashtagBlocks,
@@ -403,6 +403,11 @@ export async function typeBodyWithRetry(self: any,
 
       self.log(`   ⚠️ [리치입력] 모든 붙여넣기 재시도 실패 → 최후 안전 키보드 입력 fallback: ${pasteResult.reason || 'unknown'}`);
     }
+
+    // [2026-06-23] 키보드 타이핑 직전 캐럿 재고정 — SmartEditor는 클릭으로만 캐럿이 잡히므로
+    // (특히 이미지 직후) 마지막 본문 단락을 클릭해 캐럿을 본문에 고정한다. 이게 없으면 키스트로크가
+    // 숨은 입력 프록시로 들어가 한 글자도 안 들어간다(+0자 = 본문 누락).
+    await focusLastEditableLine(page, frame).catch(() => undefined);
 
     // ✅ [2026-03-16 OVERHAUL] AI가 결정한 문단 구분을 그대로 존중
     // 기존: 3문장마다 기계적으로 끊기 → 부자연스러운 줄바꿈 발생
@@ -1648,9 +1653,21 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             await ensureTailTypingReady(page, imageFrame, (m: string) => self.log(m)).catch(() => false);
             await self.insertImagesAtCurrentCursor(allSectionImages, page, imageFrame, resolved.affiliateLink);
             bodyFrame = (await self.getAttachedFrame());
-            const bodyReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
-            if (!bodyReady) {
-              self.log('   ⚠️ 이미지 삽입 후 본문 입력 커서 복구가 불완전합니다. 본문 입력 재시도 로직으로 계속 진행합니다.');
+            // [2026-06-23] 이미지 직후 캐럿 복구 강화. SmartEditor는 읽기전용 컴포넌트 트리 +
+            // 숨은 입력 프록시 구조라, 이미지가 아직 렌더 중이면 텍스트 캐럿을 못 잡는다(특히 느린 PC
+            // + 다수 이미지). 단발 실패 후 곧장 본문으로 가면 본문이 dead proxy로 들어가 +0자
+            // (="소제목만 작성되고 본문 누락")가 된다. 렌더 안정 대기 + 클릭 기반 캐럿 고정으로 재시도.
+            let bodyReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
+            for (let r = 0; r < 3 && !bodyReady; r++) {
+              await self.delay(800);
+              bodyFrame = (await self.getAttachedFrame());
+              await focusLastEditableLine(page, bodyFrame).catch(() => undefined);
+              bodyReady = await ensureTailTypingReady(page, bodyFrame, (m: string) => self.log(m)).catch(() => false);
+            }
+            if (bodyReady) {
+              self.log('   ✅ 이미지 삽입 후 본문 입력 캐럿 복구 완료');
+            } else {
+              self.log('   ⚠️ 이미지 삽입 후 캐럿 복구가 4회 시도 후에도 불완전 — 본문 입력 단계에서 추가 복구합니다.');
             }
           }
 
