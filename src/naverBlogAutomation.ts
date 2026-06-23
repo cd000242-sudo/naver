@@ -8189,6 +8189,31 @@ export class NaverBlogAutomation {
     }
   }
 
+  /**
+   * ✅ [2026-06-23] CDP Emulation.setFocusEmulationEnabled — 페이지가 OS 창 포커스와 무관하게
+   * 항상 document.hasFocus()=true로 보고하게 강제한다.
+   *
+   * 라이브 진단(suma0404): 소제목(인용구) 삽입 후 커서가 제목 영역으로 튀고, 본문 복귀를 위한
+   * 모든 캐럿 전략(클릭·CDP·programmatic)이 "키보드 미반응/위치오류"로 전부 실패 → 본문 +0 →
+   * 결국 페이지가 닫혀 detached Frame. 원인: SmartEditor는 실제 클릭으로만 모델 캐럿이 잡히는데,
+   * 앱(Electron) 창이 OS 포커스를 가지면 Chrome 창은 document.hasFocus()=false가 되어 SmartEditor가
+   * 클릭 캐럿을 무시한다. 포커스 에뮬레이션을 켜면 창이 뒤에 있든/숨겨졌든 캐럿이 잡혀 어떤
+   * 환경에서도 본문 입력이 동작한다. (세션은 detach하지 않고 유지해야 emulation이 보존된다.)
+   */
+  async enableFocusEmulation(): Promise<void> {
+    if (!this.page) return;
+    try {
+      const client = await this.page.target().createCDPSession();
+      await client.send('Emulation.setFocusEmulationEnabled', { enabled: true });
+      const prev = (this as any)._focusEmulationClient;
+      (this as any)._focusEmulationClient = client;
+      if (prev && prev !== client) { try { await prev.detach(); } catch { /* ignore */ } }
+      this.log('🎯 포커스 에뮬레이션 활성화 — 창 포커스와 무관하게 에디터 캐럿 보장');
+    } catch (e) {
+      this.log(`⚠️ 포커스 에뮬레이션 설정 실패 (무시): ${(e as Error).message}`);
+    }
+  }
+
   async closeBrowser(): Promise<void> {
     if (this.browser) {
       this.log('⏳ 브라우저 종료 중...');

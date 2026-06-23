@@ -616,6 +616,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
   self.__prePublishExpectations = null;
 
   await self.retry(async () => {
+    // ✅ [2026-06-23] 본문 작성 전 포커스 에뮬레이션 활성화 — 앱(Electron) 창이 OS 포커스를
+    //   가져도 Chrome 페이지가 항상 focused로 보고하게 만들어, 창이 뒤에 있거나 숨겨진 상태에서도
+    //   SmartEditor가 클릭 기반 모델 캐럿을 받는다(라이브 진단: 캐럿 미반응 → 본문 +0 → detached frame).
+    await self.enableFocusEmulation?.();
     let structured = resolved.structuredContent;
     if (!structured) {
       await self.applyPlainContent(resolved);
