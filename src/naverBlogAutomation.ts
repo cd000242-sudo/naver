@@ -5464,20 +5464,34 @@ export class NaverBlogAutomation {
           }
         } else {
           // ✅ 발행 버튼을 찾지 못하면 저장 버튼 클릭 후 발행 모달 처리 (사용자가 제공한 정확한 셀렉터 사용)
-          const saveButton = await frame.waitForSelector(
+          let saveButton = await frame.waitForSelector(
             'button.save_btn__bzc5B[data-click-area="tpb.save"]', // ✅ 최우선: 사용자가 제공한 정확한 셀렉터
             { visible: true, timeout: 5000 } // ✅ 타임아웃 3초 → 5초 증가
           ).catch(() => null);
 
           if (!saveButton) {
-            // 폴백: 다른 저장 버튼 선택자 시도
-            await frame.waitForSelector('button.save_btn__bzc5B', { visible: true, timeout: 5000 }).catch(() => null);
+            // 폴백: 다른 저장 버튼 선택자 시도 — [2026-06-23 FIX] 결과를 saveButton에 반영(기존 미할당 버그)
+            saveButton = await frame.waitForSelector('button.save_btn__bzc5B', { visible: true, timeout: 5000 }).catch(() => null);
           }
           if (!saveButton) {
-            throw new Error('저장 버튼을 찾을 수 없습니다.');
+            // [2026-06-23] 저장 버튼이 없어도 발행 모달이 이미 열려 확정 버튼(seOnePublishBtn)이 있으면
+            //   저장 단계를 건너뛰고 곧장 발행 확정으로 직행한다(저장 버튼은 모달을 여는 용도일 뿐 —
+            //   모달이 이미 열려 있으면 불필요). suma0404 라이브: 본문·이미지·해시태그 모두 정상이고
+            //   발행 모달도 열렸는데(seOnePublishBtn 존재) 저장버튼 미발견으로 발행이 막혔다.
+            const page = this.ensurePage();
+            const openConfirm = await frame.$('button[data-testid="seOnePublishBtn"]').catch(() => null)
+              || await frame.$('button[class*="confirm_btn"]').catch(() => null)
+              || await page.$('button[data-testid="seOnePublishBtn"]').catch(() => null)
+              || await page.$('button[class*="confirm_btn"]').catch(() => null);
+            if (!openConfirm) {
+              throw new Error('저장 버튼을 찾을 수 없습니다.');
+            }
+            this.log('   ℹ️ 저장 버튼 미발견이나 발행 모달이 이미 열려 있어 발행 확정으로 직행합니다.');
+            // saveButton 클릭 건너뜀 — 아래 발행 옵션(확정 버튼) 탐색이 곧장 발행을 누른다.
+          } else {
+            await saveButton.click();
+            await this.delay(this.DELAYS.LONG);
           }
-          await saveButton.click();
-          await this.delay(this.DELAYS.LONG);
 
           // ✅ 발행 옵션 선택 (모달이 열릴 때까지 충분히 대기)
           await this.delay(500); // 모달이 열릴 때까지 추가 대기
