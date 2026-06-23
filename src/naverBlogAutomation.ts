@@ -2357,9 +2357,19 @@ export class NaverBlogAutomation {
         this.log(`❌ 최종 실패 — 제목: ${failTitle}`);
         this.log(`❌ 최종 실패 — 본문: ${failBodySnippet.substring(0, 150)}`);
 
-        // 에러 원인 세분화
-        if (isLoginProxyFailureBody(failBodySnippet)) {
-          throw new Error(`프록시 연결 실패로 로그인 페이지를 열 수 없습니다. (HTTP 407) 프록시 설정을 확인하거나 비활성화하세요.`);
+        // 에러 원인 세분화 — [2026-06-23] 프록시 설정 여부로 정확히 분기
+        //   기존 버그: 프록시 미설정인데도 "작동하지 않습니다"를 무조건 프록시 실패로 오분류해
+        //   "프록시 연결 실패(407)"라는 틀린 안내를 던졌다. 다중계정 사용자 대부분 프록시 미사용이라
+        //   실제론 일시적 네이버/네트워크 오류(잦은 순차 로그인 차단 등)인데 엉뚱한 조치를 유도.
+        const proxyConfigured = !!this.options.accountProxyUrl;
+        const looksLikePageError = isLoginProxyFailureBody(failBodySnippet) ||
+          failBodySnippet.includes('작동하지 않습니다') || failBodySnippet.includes('HTTP ERROR') ||
+          failBodySnippet.includes('ERR_');
+        if (proxyConfigured && looksLikePageError) {
+          throw new Error(`프록시 연결 실패로 로그인 페이지를 열 수 없습니다. 계정 프록시(${String(this.options.accountProxyUrl).replace(/:[^:@/]+@/, ':***@')})가 응답하지 않습니다 — 프록시를 끄거나 다른 프록시로 교체 후 다시 시도하세요.`);
+        }
+        if (!proxyConfigured && looksLikePageError) {
+          throw new Error(`네이버 로그인 페이지가 일시적으로 열리지 않습니다 (네트워크/네이버 일시 오류, 프록시 미사용). 잠시 후 다시 시도하거나, 다중계정 발행 간격을 늘려주세요. 여러 계정을 짧은 간격으로 연속 로그인하면 네이버가 일시 차단할 수 있습니다.`);
         }
         throw new Error(`아이디 입력 필드를 찾을 수 없습니다. (URL: ${failUrl}, 제목: ${failTitle})`);
       }

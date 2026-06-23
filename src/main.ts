@@ -643,7 +643,12 @@ async function performServerSync(isBackground: boolean = false): Promise<{ allow
     }
 
     // 버전 체크 (글로벌 스위치가 켜져 있을 때만)
-    if (syncResult.versionCheckEnabled !== false && syncResult.minVersion) {
+    // ✅ [2026-06-23] !isBackground — 앱 시작(껐다 켰을 때) 동기화에서만 버전 감지/업데이트를 트리거.
+    //   기존: 5분 주기 백그라운드 동기화도 버전 게이트를 돌려, 발행 도중 서버 minVersion을 감지해
+    //   갑자기 자동 업데이트/차단되던 문제(사용자 보고: "발행 도중 갑자기 감지"). 사용자 요청:
+    //   "껐다 실행했을 때만 감지하고, 그 외에는 현재 버전으로 계속 사용". → 주기 동기화는 라이선스/
+    //   공지/차단만 확인하고 버전 게이트는 건너뛴다. 다음 실행 시 시작 동기화가 감지·적용한다.
+    if (!isBackground && syncResult.versionCheckEnabled !== false && syncResult.minVersion) {
       const currentVersion = app.getVersion();
       const versionCompare = compareVersions(currentVersion, syncResult.minVersion);
 
