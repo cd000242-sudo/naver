@@ -2858,6 +2858,13 @@ function initPublishModeSubtabs(): void {
       document.querySelectorAll<HTMLElement>('.pub-mode-tab').forEach((t) => {
         t.classList.toggle('active', t.dataset.pubmode === mode);
       });
+      // ✅ [2026-06-23 FIX] ma(풀오토 다중계정) 서브탭은 패널 표시만 하고 계정 목록 렌더를
+      //   호출하지 않아, 계정이 6개 있어도 정적 "등록된 계정이 없습니다"가 그대로 보이던 버그
+      //   (v2.11.49 모달→인라인 서브탭 전환 때 렌더 트리거 누락). 서브탭 표시 시 렌더 트리거.
+      //   백엔드는 정상(getAllBlogAccounts→6개) — 화면만 안 그려졌던 회귀. window 노출 함수 사용.
+      if (mode === 'ma') {
+        try { (window as any).renderMultiAccountList?.(); } catch (e) { console.warn('[showMode] 다중계정 목록 렌더 실패:', e); }
+      }
     };
     (window as any).__showPublishMode = showMode;
     document.querySelectorAll<HTMLButtonElement>('.pub-mode-tab').forEach((tab) => {
