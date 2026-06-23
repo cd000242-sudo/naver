@@ -2363,6 +2363,36 @@ export async function ensureTailTypingReady(
     }
     log?.(`   ⚠️ 키보드 미반응/위치오류 — 다음 단계 (${strategy.name})`);
   }
+  // [2026-06-23] 진단 스냅샷 — 모든 캐럿 전략 실패 시 에디터 실제 상태를 찍는다(로그만, 동작변경 없음).
+  //   focus emulation을 켜도 입력이 완전히 무시되는(붙여넣기/타이핑 +0) 원인을 추측이 아니라
+  //   데이터로 확정하기 위함: 어떤 요소가 focus인지, contenteditable이 있는지, 가리는 오버레이/팝업이
+  //   있는지, designMode·문단수·URL 등. 다음 진단 리포트에 그대로 남아 정확한 원인을 짚게 한다.
+  try {
+    const snap = await frame.evaluate(({ rootSelectors }) => {
+      const ae = document.activeElement as HTMLElement | null;
+      const visible = (el: Element) => {
+        const r = (el as HTMLElement).getBoundingClientRect();
+        const s = getComputedStyle(el as HTMLElement);
+        return r.width > 0 && r.height > 0 && s.display !== 'none' && s.visibility !== 'hidden';
+      };
+      const overlays = Array.from(document.querySelectorAll('.se-popup, .se-layer, .se-modal, [class*="popup"], [class*="dimmed"], [class*="overlay"], [class*="loading"]'))
+        .filter(visible).map((el) => String((el as HTMLElement).className).slice(0, 50)).slice(0, 6);
+      const root = document.querySelector(rootSelectors.join(',')) as HTMLElement | null;
+      return {
+        url: location.href.slice(0, 80),
+        active: ae ? `${ae.tagName}.${String(ae.className || '').slice(0, 40)}#${ae.id || ''} ce=${ae.isContentEditable}` : 'null',
+        designMode: document.designMode,
+        paraCount: document.querySelectorAll('.se-text-paragraph, p').length,
+        compCount: document.querySelectorAll('.se-component').length,
+        rootEditable: root ? root.isContentEditable : null,
+        bodyChars: (root?.innerText || '').trim().length,
+        visibleW: window.innerWidth, visibleH: window.innerHeight,
+        hasFocus: document.hasFocus(),
+        overlays,
+      };
+    }, documentRootPayload).catch((e) => ({ error: String((e as Error)?.message ?? e) }));
+    log?.(`   🔬 [캐럿진단] ${JSON.stringify(snap)}`);
+  } catch { /* diagnostic best-effort */ }
   // Ladder exhausted (callers proceed best-effort): leave the caret at the
   // structurally BEST position, not wherever the last fallback dropped it —
   // live 2026-06-11: the final fallback's orphan caret ate the whole tail.
