@@ -1565,6 +1565,7 @@
     const analyticsVisitorStorageKey = 'leword.analytics.visitor.v1';
     const analyticsSessionStorageKey = 'leword.analytics.session.v1';
     const analyticsExcludeStorageKey = 'leword.analytics.exclude.v1';
+    let recentLoginCredentialValues = [];
     const toolTabFeatureIds = ['pro-traffic', 'naver-mate', 'shopping', 'kin'];
     const viewIds = ['golden', 'sources', 'lookup', 'features', 'youtube', 'settings', 'downloads', 'commerce'];
     const catalogTabs = [
@@ -3564,6 +3565,9 @@
     function rememberProLoginUserId(userId) {
       const value = String(userId || '').trim();
       if (!value) return;
+      recentLoginCredentialValues = [value].concat(recentLoginCredentialValues.filter(function(item) {
+        return item !== value;
+      })).slice(0, 10);
       try {
         localStorage.removeItem(proLoginIdStorageKey);
         readUserApiSettings();
@@ -3692,11 +3696,15 @@
     }
     function loginCredentialValues() {
       return [
+        qs('proLoginAccountId') && qs('proLoginAccountId').value,
         qs('proLoginAccountPassword') && qs('proLoginAccountPassword').value,
+        qs('adminUserId') && qs('adminUserId').value,
         qs('adminUserPassword') && qs('adminUserPassword').value,
-      ]
+        session && session.userId,
+        storedProLoginUserId(),
+      ].concat(recentLoginCredentialValues || [])
         .map(function(value) { return String(value || '').trim(); })
-        .filter(function(value) { return value.length >= 3; });
+        .filter(function(value, index, list) { return value.length >= 3 && list.indexOf(value) === index; });
     }
     function isLoginCredentialValue(value) {
       const trimmed = String(value || '').trim();
