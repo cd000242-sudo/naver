@@ -2998,6 +2998,8 @@
     function openLogin() {
       qs('loginModal').classList.add('open');
       qs('loginModal').setAttribute('aria-hidden', 'false');
+      if (qs('loginMessage')) qs('loginMessage').textContent = '';
+      if (qs('licenseCode')) qs('licenseCode').value = '';
       try {
         localStorage.removeItem(proLoginIdStorageKey);
         prepareFreshProLoginFields(true);
@@ -3012,6 +3014,12 @@
     function closeLogin() {
       qs('loginModal').classList.remove('open');
       qs('loginModal').setAttribute('aria-hidden', 'true');
+    }
+    function loginLicenseCodeForSubmit() {
+      const details = document.querySelector('#loginForm .login-license');
+      const input = qs('licenseCode');
+      if (!details || !input || !details.open) return '';
+      return String(input.value || '').trim();
     }
     function openWelcomeModal(tier) {
       const label = tier || (session && session.tier) || 'Pro';
@@ -3107,6 +3115,9 @@
     }
     function formatApiError(url, status, payload) {
       const message = payload && (payload.message || payload.error) ? String(payload.message || payload.error) : '';
+      if ((status === 401 || status === 403) && url === endpoints.session) {
+        return '아이디 또는 비밀번호가 맞지 않습니다. 자동완성 값이 들어갔다면 지우고 다시 입력하세요.';
+      }
       if (status === 401 || status === 403) return 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.';
       if (status === 404) return 'API 경로 또는 job 상태를 찾지 못했습니다. 잠시 후 다시 실행하거나 새로고침 후 재시도하세요. (' + routePath(url) + ')';
       return message || 'HTTP ' + status;
@@ -3127,7 +3138,8 @@
       return payload;
     }
     async function apiPost(url, body, options) {
-      const res = await fetch(url, { method: 'POST', headers: headers(options), body: JSON.stringify(withKeywordContextPayload(url, body || {})) });
+      const requestHeaders = url === endpoints.session ? { 'Content-Type': 'application/json' } : headers(options);
+      const res = await fetch(url, { method: 'POST', headers: requestHeaders, body: JSON.stringify(withKeywordContextPayload(url, body || {})) });
       const payload = await res.json().catch(function() { return {}; });
       if (url !== endpoints.session && (res.status === 401 || res.status === 403)) {
         saveSession(null);
@@ -5003,9 +5015,10 @@
       event.preventDefault();
       const userId = qs('proLoginAccountId').value.trim();
       const password = qs('proLoginAccountPassword').value.trim();
-      const licenseCode = qs('licenseCode').value.trim();
+      const licenseCode = loginLicenseCodeForSubmit();
       qs('loginMessage').textContent = '로그인 중...';
       try {
+        saveSession(null);
         const loginPayload = { userId: userId, password: password };
         if (licenseCode) loginPayload.licenseCode = licenseCode;
         const payload = await apiPost(endpoints.session, loginPayload);
