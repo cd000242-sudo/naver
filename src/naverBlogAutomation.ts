@@ -2203,7 +2203,9 @@ export class NaverBlogAutomation {
 
     // 이미 로그인 페이지에 있으면 이동하지 않음
     if (shouldNavigateToLoginPageFromCurrentUrl(currentUrl)) {
-      const LOGIN_MAX_RETRIES = 3;
+      // ✅ [2026-06-23] 3→4: 네이버 일시 차단(프록시 미사용 다중계정)은 길게 기다리면 풀리므로
+      //   재시도 기회를 한 번 더 준다. 백오프가 길어 실패 케이스에서만 시간이 늘고 정상 로그인은 영향 없음.
+      const LOGIN_MAX_RETRIES = 4;
       let loginPageLoaded = false;
 
       for (let loginAttempt = 1; loginAttempt <= LOGIN_MAX_RETRIES; loginAttempt++) {
@@ -2230,7 +2232,12 @@ export class NaverBlogAutomation {
                 bodyText.includes('ERR_') || bodyText.includes('프록시') || bodyText.includes('proxy')) {
               this.log(`🔴 에러 페이지 감지: ${bodyText.substring(0, 100)}`);
               if (loginAttempt < LOGIN_MAX_RETRIES) {
-                await this.delay(loginAttempt * 5 * 1000);
+                // ✅ [2026-06-23] 프록시 미사용 다중계정에서 "작동하지 않습니다"는 대부분 네이버가
+                //   같은 IP의 짧은 간격 연속 로그인을 일시 차단한 것. 5초 같은 짧은 재시도는 같은
+                //   차단에 다시 걸리므로, 길고 지터를 둔 백오프로 차단이 풀릴 시간을 준다.
+                const backoffSec = loginAttempt * 12 + this.randomInt(0, 8);
+                this.log(`⏳ 네이버 일시 차단 추정 — ${backoffSec}초 대기 후 재시도 (${loginAttempt}/${LOGIN_MAX_RETRIES}). 반복되면 다중계정 발행 간격을 늘려주세요(프록시 미사용 시 예방).`);
+                await this.delay(backoffSec * 1000);
                 continue;
               }
             }
