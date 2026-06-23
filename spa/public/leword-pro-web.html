@@ -349,6 +349,10 @@
     .golden-decision { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
     .golden-decision strong { border-radius: 999px; padding: 2px 7px; background: rgba(248,194,27,.14); color: #ffe58a; font-size: 11px; }
     .golden-decision span { color: var(--muted); }
+    .shopping-pick { margin-top: 8px; display: grid; gap: 4px; max-width: 420px; padding: 8px; border: 1px solid rgba(53,211,153,.26); border-radius: 8px; background: rgba(53,211,153,.07); color: #dbe7f7; font-size: 11px; line-height: 1.45; }
+    .shopping-pick strong { color: #ffe58a; }
+    .shopping-pick span { display: block; color: var(--muted); }
+    .shopping-pick a { color: #8bd7ff; font-weight: 900; }
     .feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
     .feature-card {
       padding: 14px;
@@ -2066,6 +2070,27 @@
       if (!decision || !decision.label) return '';
       const score = decision.score == null ? '' : ' ' + fmt(decision.score) + '점';
       return '<span class="golden-decision"><strong>' + escapeHtml(decision.label + score) + '</strong><span>' + escapeHtml(publishDecisionReason(decision) || decision.nextAction || '') + '</span></span>';
+    }
+    function shoppingProductPickHtml(row) {
+      const pick = row && row.shoppingProductPick;
+      if (!pick || !pick.productName) return '';
+      const price = pick.price == null ? '' : ' · ' + fmt(pick.price) + '원';
+      const mall = pick.mallName ? ' · ' + pick.mallName : '';
+      const score = pick.conversionScore == null ? '' : ' · 전환점수 ' + fmt(pick.conversionScore);
+      const triggers = Array.isArray(pick.buyingTriggers) ? pick.buyingTriggers.slice(0, 3).join(' · ') : '';
+      const titles = Array.isArray(pick.titleDrafts) ? pick.titleDrafts.slice(0, 2).join(' / ') : '';
+      const reason = pick.sellableReason || pick.writeRecommendation || '';
+      const link = pick.productUrl
+        ? '<a href="' + escapeAttr(pick.productUrl) + '" target="_blank" rel="noopener noreferrer">상품 보기</a>'
+        : '';
+      return '<div class="shopping-pick">'
+        + '<strong>추천 제품: ' + escapeHtml(pick.productName) + '</strong>'
+        + '<span>' + escapeHtml((pick.recommendedAngle || '구매 전환 정보형') + mall + price + score) + '</span>'
+        + (reason ? '<span>글감: ' + escapeHtml(reason) + '</span>' : '')
+        + (triggers ? '<span>전환 포인트: ' + escapeHtml(triggers) + '</span>' : '')
+        + (titles ? '<span>제목 초안: ' + escapeHtml(titles) + '</span>' : '')
+        + (link ? '<span>' + link + '</span>' : '')
+        + '</div>';
     }
     function volumeBarHtml(value) {
       const n = Math.max(0, Number(value || 0));
@@ -3901,7 +3926,7 @@
       }
       qs('keywordRows').innerHTML = rows.slice(0, 80).map(function(row) {
         return '<tr>'
-          + '<td><strong>' + escapeHtml(row.keyword) + '</strong></td>'
+          + '<td><strong>' + escapeHtml(row.keyword) + '</strong>' + shoppingProductPickHtml(row) + '</td>'
           + '<td>' + fmt(row.pcSearchVolume) + '</td>'
           + '<td>' + fmt(row.mobileSearchVolume) + '</td>'
           + '<td>' + volumeBarHtml(row.totalSearchVolume) + '</td>'
