@@ -2148,7 +2148,46 @@ export async function ensureTailTypingReady(
     }, documentRootPayload).catch(() => undefined);
   };
 
+  // [2026-06-23] input_buffer 트랩 탈출 (라이브 진단 suma0404: active=IFRAME#input_buffer, hasFocus·
+  //   overlay 정상인데 클릭/타이핑이 IME 입력버퍼에 갇혀 한글이 본문에 커밋 안 됨). SmartEditor의
+  //   입력버퍼 iframe이 직전 캐럿 위치에 떠서 본문 클릭을 가로채므로, ① IME 조합 Escape ② 활성요소
+  //   blur ③ 본문 컨테이너의 '빈 좌하단 영역'(input_buffer가 덮지 않는 곳)을 실제 클릭 → 모델 캐럿을
+  //   문서 끝에 강제로 재설정한다.
+  const escapeInputBufferTrap = async (): Promise<void> => {
+    await page.keyboard.press('Escape').catch(() => undefined);
+    const pt = await frame.evaluate(({ rootSelectors, panelSelector }) => {
+      function getRoot(): HTMLElement | null {
+        const cands = Array.from(document.querySelectorAll(rootSelectors.join(','))) as HTMLElement[];
+        let best: HTMLElement | null = null; let bs = -1;
+        for (const c of cands) {
+          if (!(c instanceof HTMLElement) || c.closest(panelSelector)) continue;
+          const r = c.getBoundingClientRect(); const s = getComputedStyle(c);
+          if (r.width <= 0 || r.height <= 0 || s.visibility === 'hidden' || s.display === 'none') continue;
+          const score = (c.matches('article.se-components-wrap') ? 1e6 : c.matches('.se-components-wrap') ? 9e5 : c.matches('.se-main-container') ? 1e5 : 0)
+            + c.querySelectorAll('.se-component').length * 1000 + c.querySelectorAll('.se-text-paragraph, p').length * 100;
+          if (score > bs) { bs = score; best = c; }
+        }
+        return best;
+      }
+      try { (document.activeElement as HTMLElement | null)?.blur?.(); } catch { /* ignore */ }
+      const root = getRoot();
+      if (!root) return null;
+      root.scrollIntoView({ block: 'end', inline: 'nearest' });
+      const r = root.getBoundingClientRect();
+      return { x: Math.round(r.left + Math.min(60, r.width / 3)), y: Math.round(r.bottom - 6), vh: window.innerHeight };
+    }, documentRootPayload).catch(() => null);
+    if (pt) {
+      const y = Math.max(8, Math.min(pt.y, pt.vh - 8));
+      await page.mouse.click(pt.x, y).catch(() => undefined);
+      await page.keyboard.press('End').catch(() => undefined);
+    }
+  };
+
   const strategies: Array<{ name: string; run: () => Promise<void> }> = [
+    // [2026-06-23] FIRST: escape the input_buffer (IME proxy) trap that swallows
+    // clicks/keys at the caret — must run before the paragraph clicks below, since
+    // those land ON the input_buffer iframe when it overlays the caret.
+    { name: 'escape-inputbuffer-trap', run: escapeInputBufferTrap },
     // A REAL paragraph click FIRST — the redesigned editor only moves its
     // model caret on clicks; Selection tricks land in the hidden input proxy
     // (2026-06-11 structure dump: document tree has no contenteditable).
