@@ -509,14 +509,17 @@ export function initAutoUpdaterEarly(): void {
             if (all.length > 0) targetWindow = all[0];
         }
 
-        // 다이얼로그 옵션 (재사용)
+        // ✅ [2026-06-23] 다이얼로그 옵션 — "나중에" 추가. 사용자 보고: 이미지 생성/발행 도중
+        //   다운로드가 완료되면 "지금 재시작" 단일 버튼 다이얼로그가 떠 작업이 강제 중단됨.
+        //   → "나중에"를 누르면 작업을 계속하고, 다음에 앱을 껐다 켜면 그때 적용된다.
         const dialogOptions = {
             type: 'info' as const,
             title: '✅ 업데이트 준비 완료',
             message: `Better Life Naver v${info.version}`,
-            detail: `🎉 새로운 버전이 성공적으로 다운로드되었습니다!\n\n새로운 기능과 개선 사항을 적용하기 위해\n앱을 재시작합니다.\n\n⚠️ 진행 중인 작업이 있다면 먼저 저장해 주세요.`,
-            buttons: ['지금 재시작하여 업데이트'],
-            defaultId: 0,
+            detail: `새로운 버전이 다운로드되었습니다.\n\n작업(이미지 생성·발행) 중이면 "나중에"를 눌러 그대로 계속하세요.\n다음에 앱을 껐다 켜면 자동으로 적용됩니다.`,
+            buttons: ['지금 재시작하여 업데이트', '나중에'],
+            defaultId: 1,
+            cancelId: 1,
             noLink: true,
         };
 
@@ -529,7 +532,14 @@ export function initAutoUpdaterEarly(): void {
                 progressWindow.hide();
             }
 
-            dialog.showMessageBox(targetWindow, dialogOptions).then(async () => {
+            dialog.showMessageBox(targetWindow, dialogOptions).then(async (result) => {
+                // ✅ [2026-06-23] "나중에"(0이 아님) → 작업 계속, 다음 실행 시 적용. 강제 재시작 없음.
+                if (result.response !== 0) {
+                    sendLogToRenderer('[Updater] 사용자 "나중에" 선택 — 작업 계속, 다음 실행 시 업데이트 적용');
+                    closeProgressWindow();
+                    isUpdateInProgress = false; // 작업이 계속 진행될 수 있도록 해제
+                    return;
+                }
                 sendLogToRenderer('[Updater] 사용자가 업데이트 확인, 재시작 실행');
                 closeProgressWindow();
                 // ✅ [2026-03-07] 인증창이 열려있으면 닫기 (업데이트 재시작 시)
@@ -539,13 +549,12 @@ export function initAutoUpdaterEarly(): void {
                 }
                 // v2.10.96: cleanup 후 quitAndInstall (자식 프로세스 lock 잔존 차단)
                 await quitAndInstallWithCleanup(updater);
-            }).catch(async (err) => {
-                sendLogToRenderer(`[Updater] 다이얼로그 에러: ${err}`);
+            }).catch((err) => {
+                // ✅ [2026-06-23] 다이얼로그 에러로 사용자 의사를 못 받았으면 강제 재시작하지 않는다
+                //   (작업 중단 방지). 업데이트는 다음 실행 시 다시 안내된다.
+                sendLogToRenderer(`[Updater] 다이얼로그 에러 — 재시작 보류(작업 보호): ${err}`);
                 closeProgressWindow();
-                if (loginWindow && !loginWindow.isDestroyed()) {
-                    loginWindow.close();
-                }
-                await quitAndInstallWithCleanup(updater);
+                isUpdateInProgress = false;
             });
         } else {
             sendLogToRenderer('[Updater] targetWindow 없음, 진행률 창에서 완료 표시');
@@ -584,20 +593,23 @@ export function initAutoUpdaterEarly(): void {
                     doRestart();
                 });
 
-                // 5초 후 자동 재시작 (사용자가 안 클릭하면)
-                setTimeout(() => {
-                    sendLogToRenderer('[Updater] 5초 경과, 자동 재시작');
-                    doRestart();
-                }, 5000);
+                // ✅ [2026-06-23] 5초 자동 재시작 제거 — 사용자가 클릭할 때만 재시작.
+                //   작업(이미지 생성·발행) 도중 강제 재시작으로 중단되던 문제 차단.
+                //   사용자가 클릭 안 하면 그대로 작업 계속, 다음 실행 시 업데이트 적용.
             } else {
-                // 진행률 창도 없으면 독립 다이얼로그 표시
-                dialog.showMessageBox(dialogOptions).then(async () => {
+                // 진행률 창도 없으면 독립 다이얼로그 표시 (나중에 선택 가능)
+                dialog.showMessageBox(dialogOptions).then(async (result) => {
+                    if (result.response !== 0) {
+                        sendLogToRenderer('[Updater] 사용자 "나중에" 선택 — 작업 계속, 다음 실행 시 적용');
+                        isUpdateInProgress = false;
+                        return;
+                    }
                     if (loginWindow && !loginWindow.isDestroyed()) {
                         loginWindow.close();
                     }
                     // v2.10.96: cleanup 후 quitAndInstall
                     await quitAndInstallWithCleanup(updater);
-                });
+                }).catch(() => { isUpdateInProgress = false; });
             }
         }
 
