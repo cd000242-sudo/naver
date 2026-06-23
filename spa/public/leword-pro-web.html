@@ -3516,6 +3516,9 @@
       }
     }
     function prepareFreshProLoginFields(locked) {
+      try {
+        localStorage.removeItem(proLoginIdStorageKey);
+      } catch (err) {}
       const stamp = Date.now().toString(36);
       const userInput = qs('proLoginAccountId');
       const passwordInput = qs('proLoginAccountPassword');
