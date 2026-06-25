@@ -114,7 +114,7 @@ function applyDownloadOverrides(productKey: ProductKey, siteContent: SiteContent
         downloads: product.downloads.map((item) => {
             const configured = { ...item, ...(downloadPatches[item.key] || {}) };
             const uploaded = apiProduct[item.key];
-            if (!uploaded?.available || !uploaded.url) return configured;
+            if (uploaded?.source !== 'uploaded' || !uploaded.available || !uploaded.url) return configured;
             const size = formatApiFileSize(uploaded.size);
             return {
                 ...configured,
