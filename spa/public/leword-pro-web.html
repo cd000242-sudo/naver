@@ -625,6 +625,31 @@
     .download-card p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 13px; flex: 1; }
     .download-card .btn { width: fit-content; min-width: 180px; text-align: center; }
     .download-meta { color: #c8d5e7; font-size: 12px; min-height: 18px; }
+    .download-upload-panel {
+      margin-top: 12px;
+      border: 1px solid rgba(53,211,153,.32);
+      border-radius: 8px;
+      background: linear-gradient(180deg, rgba(8,28,24,.68), rgba(7,11,16,.96));
+      padding: 14px;
+    }
+    .download-upload-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 10px; }
+    .download-dropzone {
+      border: 1px dashed rgba(151,214,255,.42);
+      border-radius: 8px;
+      background: rgba(8,14,22,.72);
+      padding: 16px;
+      min-height: 132px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    }
+    .download-dropzone strong { color: #f6f8ff; font-size: 15px; }
+    .download-dropzone span { color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .download-dropzone.dragging { border-color: rgba(195,244,65,.9); background: rgba(195,244,65,.08); transform: translateY(-1px); }
+    .download-upload-status { margin-top: 10px; color: #cbd7e8; font-size: 12px; min-height: 18px; }
     .workbench { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(300px, .9fr); gap: 12px; }
     .log {
       min-height: 180px;
@@ -864,7 +889,7 @@
       .feature-grid, .ops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 820px) {
-      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist, .admin-ai-provider-grid, .admin-content-tools, .api-issue-grid, .mindmap-view, .mindmap-branches { grid-template-columns: 1fr; }
+      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .download-upload-grid, .settings-grid, .settings-checklist, .admin-ai-provider-grid, .admin-content-tools, .api-issue-grid, .mindmap-view, .mindmap-branches { grid-template-columns: 1fr; }
       .quick-feature-dock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quality-strip { grid-template-columns: 1fr 1fr; }
       .result-toolbar { grid-template-columns: 1fr; }
@@ -1287,14 +1312,36 @@
               <h3>PC Electron 앱</h3>
               <p>Windows용 LEWORD 데스크톱 앱입니다. 기존 Electron 앱의 전체 기능을 PC 환경에서 그대로 사용합니다.</p>
               <div class="download-meta" id="pcDownloadMeta">다운로드 파일 확인 중</div>
-              <a class="btn primary" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe">PC 앱 다운로드</a>
+              <a class="btn primary" id="pcDownloadButton" href="/download/pc">PC 앱 다운로드</a>
             </article>
             <article class="download-card">
               <h3>Android 모바일 앱</h3>
               <p>서버 기반 Pro 기능, 실시간 소스, 키워드 저장/공유, 알림 기능을 사용하는 Android APK입니다.</p>
               <div class="download-meta" id="androidDownloadMeta">다운로드 파일 확인 중</div>
-              <a class="btn primary" href="https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk">모바일 APK 다운로드</a>
+              <a class="btn primary" id="androidDownloadButton" href="/download/android">모바일 APK 다운로드</a>
             </article>
+          </div>
+          <div class="download-upload-panel">
+            <div class="panel-title" style="margin-bottom:0;">
+              <div>
+                <h3 style="margin:0;">관리자 직접 업로드</h3>
+                <div class="muted">GitHub 릴리스 없이 PC 셋업 파일이나 모바일 APK를 직접 올리면 다운로드 버튼이 서버 파일로 바로 연결됩니다.</div>
+              </div>
+              <button class="btn blue" type="button" id="downloadAdminLogin">관리자 로그인</button>
+            </div>
+            <div class="download-upload-grid">
+              <div class="download-dropzone" data-download-upload-kind="pc" tabindex="0" role="button">
+                <strong>PC 셋업 파일 드래그</strong>
+                <span>.exe 또는 .msi 파일을 여기에 놓거나 클릭해서 선택하세요.</span>
+                <input type="file" id="pcDownloadUploadInput" accept=".exe,.msi" hidden />
+              </div>
+              <div class="download-dropzone" data-download-upload-kind="android" tabindex="0" role="button">
+                <strong>모바일 APK 드래그</strong>
+                <span>.apk 파일을 여기에 놓거나 클릭해서 선택하세요.</span>
+                <input type="file" id="androidDownloadUploadInput" accept=".apk" hidden />
+              </div>
+            </div>
+            <div class="download-upload-status" id="downloadUploadStatus">관리자 로그인 후 파일을 업로드할 수 있습니다.</div>
           </div>
         </section>
 
@@ -1488,13 +1535,14 @@
       if (/^https?:\/\//i.test(value)) return value;
       return apiUrl(value);
     }
-    const pcReleaseUrl = 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe';
-    const androidReleaseUrl = 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk';
+    const pcReleaseUrl = apiUrl('/download/pc');
+    const androidReleaseUrl = apiUrl('/download/android');
     const endpoints = {
       health: apiUrl('/health'),
       session: apiUrl('/v1/web/session'),
       adminSettingsUnlock: apiUrl('/v1/admin/settings/unlock'),
       adminSiteContent: apiUrl('/v1/admin/site-content'),
+      adminDownloadUpload: apiUrl('/v1/admin/downloads/upload'),
       adminCommerceDashboard: apiUrl('/v1/admin/commerce/dashboard'),
       publicSiteContent: apiUrl('/v1/public/site-content'),
       publicCommerceCatalog: apiUrl('/v1/public/commerce/catalog'),
@@ -4807,12 +4855,69 @@
     function renderDownloadMeta(payload) {
       const pc = payload && payload.pc ? payload.pc : {};
       const android = payload && payload.android ? payload.android : {};
+      if (qs('pcDownloadButton')) qs('pcDownloadButton').href = resolveApiLink(pc.url || endpoints.pcDownload || '/download/pc');
+      if (qs('androidDownloadButton')) qs('androidDownloadButton').href = resolveApiLink(android.url || endpoints.androidDownload || '/download/android');
+      const pcSource = pc.source === 'uploaded' ? '직접 업로드' : '서버 파일';
+      const androidSource = android.source === 'uploaded' ? '직접 업로드' : '서버 파일';
       qs('pcDownloadMeta').textContent = pc.available
-        ? '사용 가능 · ' + (pc.filename || 'LEWORD PC') + ' · ' + formatBytes(pc.size)
+        ? '사용 가능 · ' + pcSource + ' · ' + (pc.filename || 'LEWORD PC') + ' · ' + formatBytes(pc.size)
         : '파일 준비 중 · 서버 배포 상태를 확인하세요';
       qs('androidDownloadMeta').textContent = android.available
-        ? '사용 가능 · ' + (android.filename || 'LEWORD APK') + ' · ' + formatBytes(android.size)
+        ? '사용 가능 · ' + androidSource + ' · ' + (android.filename || 'LEWORD APK') + ' · ' + formatBytes(android.size)
         : 'APK 준비 중 · 모바일 빌드 상태를 확인하세요';
+    }
+    function setDownloadUploadStatus(message) {
+      if (qs('downloadUploadStatus')) qs('downloadUploadStatus').textContent = message || '';
+    }
+    function downloadUploadInput(kind) {
+      return kind === 'android' ? qs('androidDownloadUploadInput') : qs('pcDownloadUploadInput');
+    }
+    function validateDownloadUploadFile(kind, file) {
+      const name = file && file.name ? String(file.name) : '';
+      const lower = name.toLowerCase();
+      if (!file) throw new Error('업로드할 파일을 선택하세요.');
+      if (kind === 'pc' && !(lower.endsWith('.exe') || lower.endsWith('.msi'))) {
+        throw new Error('PC 셋업 파일은 .exe 또는 .msi만 올릴 수 있습니다.');
+      }
+      if (kind === 'android' && !lower.endsWith('.apk')) {
+        throw new Error('모바일 앱은 .apk 파일만 올릴 수 있습니다.');
+      }
+      return true;
+    }
+    async function uploadDownloadFile(kind, file) {
+      validateDownloadUploadFile(kind, file);
+      if (!session || !session.accessToken || session.tier !== 'admin') {
+        setDownloadUploadStatus('관리자 로그인 후 업로드할 수 있습니다.');
+        openAdminLoginModal();
+        return;
+      }
+      const form = new FormData();
+      form.append('kind', kind);
+      form.append('updatedBy', session.userId || 'admin');
+      form.append('file', file, file.name);
+      try {
+        openProgress('다운로드 파일 업로드', file.name + ' 파일을 서버에 업로드하고 있습니다.');
+        updateProgress(35, '파일 전송 중 · 창을 닫지 마세요.');
+        const res = await fetch(endpoints.adminDownloadUpload, {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + session.accessToken },
+          body: form,
+        });
+        const payload = await res.json().catch(function() { return {}; });
+        if (res.status === 401 || res.status === 403) {
+          saveSession(null);
+          throw new Error(formatApiError(endpoints.adminDownloadUpload, res.status, payload));
+        }
+        if (!res.ok) throw new Error(formatApiError(endpoints.adminDownloadUpload, res.status, payload));
+        updateProgress(85, '업로드 완료 · 다운로드 상태를 갱신합니다.');
+        setDownloadUploadStatus((payload.message || '업로드 완료') + ' 다운로드 버튼이 서버 파일로 연결됐습니다.');
+        await loadDownloads();
+        setResult({ downloadUpload: payload });
+        completeProgress('업로드가 완료됐습니다.');
+      } catch (err) {
+        setDownloadUploadStatus(err.message || String(err));
+        failProgress(err.message || String(err));
+      }
     }
     async function loadDownloads() {
       try {
@@ -5122,6 +5227,50 @@
     qs('adminLoginClose').addEventListener('click', closeAdminLoginModal);
     qs('adminLoginModal').addEventListener('click', function(event) { if (event.target.id === 'adminLoginModal') closeAdminLoginModal(); });
     qs('openAdminLogin').addEventListener('click', openAdminLoginModal);
+    qs('downloadAdminLogin').addEventListener('click', openAdminLoginModal);
+    document.querySelectorAll('[data-download-upload-kind]').forEach(function(zone) {
+      const kind = zone.getAttribute('data-download-upload-kind') || 'pc';
+      const input = downloadUploadInput(kind);
+      const openPicker = function(event) {
+        if (event) event.preventDefault();
+        if (!session || !session.accessToken || session.tier !== 'admin') {
+          setDownloadUploadStatus('관리자 로그인 후 업로드할 수 있습니다.');
+          openAdminLoginModal();
+          return;
+        }
+        if (input) input.click();
+      };
+      zone.addEventListener('click', openPicker);
+      zone.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') openPicker(event);
+      });
+      ['dragenter', 'dragover'].forEach(function(eventName) {
+        zone.addEventListener(eventName, function(event) {
+          event.preventDefault();
+          zone.classList.add('dragging');
+        });
+      });
+      ['dragleave', 'dragend'].forEach(function(eventName) {
+        zone.addEventListener(eventName, function() {
+          zone.classList.remove('dragging');
+        });
+      });
+      zone.addEventListener('drop', function(event) {
+        event.preventDefault();
+        zone.classList.remove('dragging');
+        const file = event.dataTransfer && event.dataTransfer.files ? event.dataTransfer.files[0] : null;
+        if (file) uploadDownloadFile(kind, file);
+      });
+      if (input) {
+        input.addEventListener('change', function() {
+          const file = input.files && input.files[0];
+          if (!file) return;
+          uploadDownloadFile(kind, file).finally(function() {
+            input.value = '';
+          });
+        });
+      }
+    });
     qs('adminContentLockBanner').addEventListener('click', function(event) {
       event.preventDefault();
       if (!isAdminSession()) openAdminLoginModal();
