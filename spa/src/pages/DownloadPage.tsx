@@ -11,6 +11,7 @@ import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
 const DOWNLOAD_PW = '1645';
+const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
 
 type DownloadChoice = {
     key: 'windows' | 'android' | 'mac-arm' | 'mac-intel';
@@ -26,6 +27,19 @@ type ProductConfig = {
     accent: string;
     borderColor: string;
     downloads: DownloadChoice[];
+};
+
+type ApiDownloadMeta = {
+    available?: boolean;
+    filename?: string;
+    size?: number;
+    updatedAt?: string | null;
+    url?: string;
+    source?: string;
+};
+
+type ApiDownloadsPayload = {
+    products?: Record<string, Record<string, ApiDownloadMeta>>;
 };
 
 const PRODUCTS = {
@@ -70,19 +84,44 @@ const PRODUCTS = {
 
 type ProductKey = keyof typeof PRODUCTS;
 
-function applyDownloadOverrides(productKey: ProductKey, siteContent: SiteContent | null): ProductConfig {
+function absoluteApiDownloadUrl(url?: string): string {
+    if (!url) return '';
+    if (/^https?:\/\//i.test(url)) return url;
+    return `${LEWORD_API_BASE}${url.startsWith('/') ? url : `/${url}`}`;
+}
+
+function formatApiFileSize(bytes?: number): string {
+    const value = Number(bytes || 0);
+    if (!value) return '';
+    if (value >= 1024 * 1024) return `${(value / 1024 / 1024).toFixed(1)} MB`;
+    if (value >= 1024) return `${(value / 1024).toFixed(1)} KB`;
+    return `${value} B`;
+}
+
+function applyDownloadOverrides(productKey: ProductKey, siteContent: SiteContent | null, apiDownloads: ApiDownloadsPayload | null): ProductConfig {
     const product = PRODUCTS[productKey];
     const patch = siteContent?.downloads?.[productKey];
-    if (!patch) return product;
-    const downloadPatches = patch.downloads || {};
+    const apiProduct = apiDownloads?.products?.[productKey] || {};
+    if (!patch && !Object.keys(apiProduct).length) return product;
+    const downloadPatches = patch?.downloads || {};
     return {
         ...product,
-        name: patch.name || product.name,
-        version: patch.version || product.version,
-        image: patch.image || product.image,
-        accent: patch.accent || product.accent,
-        borderColor: patch.accent ? `${patch.accent}45` : product.borderColor,
-        downloads: product.downloads.map((item) => ({ ...item, ...(downloadPatches[item.key] || {}) })),
+        name: patch?.name || product.name,
+        version: patch?.version || product.version,
+        image: patch?.image || product.image,
+        accent: patch?.accent || product.accent,
+        borderColor: patch?.accent ? `${patch.accent}45` : product.borderColor,
+        downloads: product.downloads.map((item) => {
+            const configured = { ...item, ...(downloadPatches[item.key] || {}) };
+            const uploaded = apiProduct[item.key];
+            if (!uploaded?.available || !uploaded.url) return configured;
+            const size = formatApiFileSize(uploaded.size);
+            return {
+                ...configured,
+                url: absoluteApiDownloadUrl(uploaded.url),
+                detail: `${uploaded.filename || configured.detail}${size ? ` · ${size}` : ''}`,
+            };
+        }),
     };
 }
 
@@ -95,6 +134,7 @@ function getPreferredDownload(downloads: DownloadChoice[]): DownloadChoice {
 
 function DownloadPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+    const [apiDownloads, setApiDownloads] = useState<ApiDownloadsPayload | null>(null);
 
     useEffect(() => {
         const prev = document.title;
@@ -104,6 +144,15 @@ function DownloadPage() {
 
     useEffect(() => {
         fetchSiteContent().then(setSiteContent);
+    }, []);
+
+    useEffect(() => {
+        fetch(`${LEWORD_API_BASE}/v1/downloads?ts=${Date.now()}`, { cache: 'no-store' })
+            .then((res) => res.json())
+            .then((payload) => {
+                if (payload?.ok && payload.products) setApiDownloads(payload as ApiDownloadsPayload);
+            })
+            .catch(() => setApiDownloads(null));
     }, []);
 
     const page = siteContent?.downloads?.page || {};
@@ -148,9 +197,9 @@ function DownloadPage() {
                 <LeadCapture />
 
                 <div className="download-product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24, margin: '32px auto 0' }}>
-                    <DownloadCard productKey="naver" siteContent={siteContent} />
-                    <DownloadCard productKey="leword" siteContent={siteContent} />
-                    <DownloadCard productKey="orbit" siteContent={siteContent} />
+                    <DownloadCard productKey="naver" siteContent={siteContent} apiDownloads={apiDownloads} />
+                    <DownloadCard productKey="leword" siteContent={siteContent} apiDownloads={apiDownloads} />
+                    <DownloadCard productKey="orbit" siteContent={siteContent} apiDownloads={apiDownloads} />
                 </div>
             </section>
         </div>
@@ -215,8 +264,8 @@ function LeadCapture() {
 }
 
 // ─── Download card ───
-function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; siteContent: SiteContent | null }) {
-    const product = applyDownloadOverrides(productKey, siteContent);
+function DownloadCard({ productKey, siteContent, apiDownloads }: { productKey: ProductKey; siteContent: SiteContent | null; apiDownloads: ApiDownloadsPayload | null }) {
+    const product = applyDownloadOverrides(productKey, siteContent, apiDownloads);
     const [pw, setPw] = useState('');
     const [error, setError] = useState(false);
     const [shake, setShake] = useState(false);

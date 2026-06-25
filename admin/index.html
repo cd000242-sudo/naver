@@ -1433,8 +1433,8 @@
                         <div class="editor-product-stack" id="editor-download-stack"></div>
                     </div>
                     <div class="editor-card" style="margin-top:16px;">
-                        <h4>LEWORD 설치 파일 직접 업로드</h4>
-                        <p class="editor-help">GitHub 릴리스 URL을 쓰지 않고 서버에 직접 PC 셋업 파일과 모바일 APK를 올립니다. 업로드 후 LEWORD 다운로드 버튼이 이 서버 파일로 연결됩니다.</p>
+                        <h4>App installer direct upload</h4>
+                        <p class="editor-help">Upload installer files directly to the server. LEWORD, Better Life Naver, and LEADERNAM Orbit download buttons use uploaded files first.</p>
                         <div class="editor-field-grid">
                             <div class="editor-field">
                                 <label>LEWORD API 관리자 ID</label>
@@ -1452,21 +1452,39 @@
                         <div class="leword-upload-status" id="leword-download-status">관리자 연동 확인 후 파일을 업로드하세요.</div>
                         <div class="leword-upload-grid">
                             <div class="leword-upload-card">
-                                <h4>PC 셋업 파일</h4>
-                                <p class="editor-help">Windows용 LEWORD 설치 파일입니다. `.exe` 또는 `.msi`만 업로드할 수 있습니다.</p>
-                                <div class="leword-upload-dropzone" data-leword-admin-upload-kind="pc" tabindex="0" role="button">
-                                    <strong>PC 셋업 파일 드래그</strong>
-                                    <span>여기에 놓거나 클릭해서 `.exe/.msi` 파일을 선택하세요.</span>
-                                    <input id="leword-pc-upload-input" type="file" accept=".exe,.msi" hidden>
+                                <h4>LEWORD PC installer</h4>
+                                <p class="editor-help">Windows installer for LEWORD. Upload .exe or .msi.</p>
+                                <div class="leword-upload-dropzone" data-leword-admin-upload-product="leword" data-leword-admin-upload-kind="windows" tabindex="0" role="button">
+                                    <strong>Choose file or drag here</strong>
+                                    <span>Clicking this card opens the file picker for .exe/.msi files.</span>
+                                    <input id="leword-windows-upload-input" type="file" accept=".exe,.msi" hidden>
                                 </div>
                             </div>
                             <div class="leword-upload-card">
-                                <h4>모바일 APK</h4>
-                                <p class="editor-help">Android용 LEWORD APK입니다. `.apk` 파일만 업로드할 수 있습니다.</p>
-                                <div class="leword-upload-dropzone" data-leword-admin-upload-kind="android" tabindex="0" role="button">
-                                    <strong>모바일 APK 드래그</strong>
-                                    <span>여기에 놓거나 클릭해서 `.apk` 파일을 선택하세요.</span>
+                                <h4>LEWORD Android APK</h4>
+                                <p class="editor-help">Android APK for LEWORD. Upload .apk.</p>
+                                <div class="leword-upload-dropzone" data-leword-admin-upload-product="leword" data-leword-admin-upload-kind="android" tabindex="0" role="button">
+                                    <strong>Choose APK or drag here</strong>
+                                    <span>Clicking this card opens the file picker for .apk files.</span>
                                     <input id="leword-android-upload-input" type="file" accept=".apk" hidden>
+                                </div>
+                            </div>
+                            <div class="leword-upload-card">
+                                <h4>Better Life Naver PC installer</h4>
+                                <p class="editor-help">Windows installer for the Naver automation app. Upload .exe or .msi.</p>
+                                <div class="leword-upload-dropzone" data-leword-admin-upload-product="naver" data-leword-admin-upload-kind="windows" tabindex="0" role="button">
+                                    <strong>Choose file or drag here</strong>
+                                    <span>Clicking this card opens the file picker for .exe/.msi files.</span>
+                                    <input id="naver-windows-upload-input" type="file" accept=".exe,.msi" hidden>
+                                </div>
+                            </div>
+                            <div class="leword-upload-card">
+                                <h4>LEADERNAM Orbit PC installer</h4>
+                                <p class="editor-help">Windows installer for LEADERNAM Orbit. Upload .exe or .msi.</p>
+                                <div class="leword-upload-dropzone" data-leword-admin-upload-product="orbit" data-leword-admin-upload-kind="windows" tabindex="0" role="button">
+                                    <strong>Choose file or drag here</strong>
+                                    <span>Clicking this card opens the file picker for .exe/.msi files.</span>
+                                    <input id="orbit-windows-upload-input" type="file" accept=".exe,.msi" hidden>
                                 </div>
                             </div>
                         </div>
@@ -1859,41 +1877,77 @@
             return value + ' B';
         }
 
+        function downloadProductLabel(product) {
+            return ({ leword: 'LEWORD', naver: 'Better Life Naver', orbit: 'LEADERNAM Orbit' })[product] || product;
+        }
+
+        function downloadKindLabel(kind) {
+            return ({ windows: 'PC', android: 'Android APK', 'mac-arm': 'Mac ARM', 'mac-intel': 'Mac Intel' })[kind] || kind;
+        }
+
+        function absoluteLewordApiDownloadUrl(url) {
+            if (!url) return '';
+            if (new RegExp('^https?://', 'i').test(url)) return url;
+            return lewordApiUrl(url.charAt(0) === '/' ? url : '/' + url);
+        }
+
+        function syncUploadedDownloadUrl(product, kind, meta) {
+            const field = document.getElementById('download-' + product + '-' + kind + '-url');
+            if (field && meta && meta.url) {
+                field.value = absoluteLewordApiDownloadUrl(meta.url);
+            }
+            const detail = document.getElementById('download-' + product + '-' + kind + '-detail');
+            if (detail && meta && meta.filename) {
+                detail.value = meta.filename + (meta.size ? ' - ' + formatFileSize(meta.size) : '');
+            }
+        }
+
         async function loadLewordDownloadStatus() {
             const target = document.getElementById('leword-download-status');
             if (!target) return;
             try {
                 const res = await fetch(lewordApiUrl('/v1/downloads'), { cache: 'no-store' });
                 const payload = await res.json();
-                if (!res.ok) throw new Error(payload.message || payload.error || '다운로드 상태 조회 실패');
-                const pc = payload.pc || {};
-                const android = payload.android || {};
-                setLewordDownloadStatus(
-                    '현재 다운로드 상태 · PC: ' + (pc.available ? `${pc.filename || '파일'} (${formatFileSize(pc.size)}, ${pc.source || 'server'})` : '준비 중')
-                    + ' / APK: ' + (android.available ? `${android.filename || '파일'} (${formatFileSize(android.size)}, ${android.source || 'server'})` : '준비 중')
-                );
+                if (!res.ok) throw new Error(payload.message || payload.error || 'Download status lookup failed');
+                const products = payload.products || {};
+                ['naver', 'leword', 'orbit'].forEach((product) => {
+                    Object.keys(products[product] || {}).forEach((kind) => syncUploadedDownloadUrl(product, kind, products[product][kind]));
+                });
+                const watched = [
+                    ['naver', 'windows'],
+                    ['leword', 'windows'],
+                    ['leword', 'android'],
+                    ['orbit', 'windows'],
+                ];
+                const lines = watched.map(([product, kind]) => {
+                    const meta = products[product] && products[product][kind] ? products[product][kind] : {};
+                    return downloadProductLabel(product) + ' ' + downloadKindLabel(kind) + ': ' + (meta.available ? (meta.filename || 'file') + ' (' + formatFileSize(meta.size) + ', ' + (meta.source || 'server') + ')' : 'not uploaded');
+                });
+                setLewordDownloadStatus('Current uploads ? ' + lines.join(' / '));
             } catch (err) {
-                setLewordDownloadStatus('다운로드 상태 조회 실패: ' + (err.message || err), true);
+                setLewordDownloadStatus('Download status lookup failed: ' + (err.message || err), true);
             }
         }
 
         function validateLewordUploadFile(kind, file) {
             const name = (file && file.name ? file.name : '').toLowerCase();
-            if (!file) throw new Error('업로드할 파일을 선택하세요.');
-            if (kind === 'pc' && !(name.endsWith('.exe') || name.endsWith('.msi'))) throw new Error('PC 셋업 파일은 .exe 또는 .msi만 가능합니다.');
-            if (kind === 'android' && !name.endsWith('.apk')) throw new Error('모바일 앱은 .apk 파일만 가능합니다.');
+            if (!file) throw new Error('Select a file to upload.');
+            if (kind === 'windows' && !(name.endsWith('.exe') || name.endsWith('.msi'))) throw new Error('PC installer must be .exe or .msi.');
+            if (kind === 'android' && !name.endsWith('.apk')) throw new Error('Android upload must be .apk.');
+            if ((kind === 'mac-arm' || kind === 'mac-intel') && !(name.endsWith('.dmg') || name.endsWith('.pkg') || name.endsWith('.zip'))) throw new Error('Mac installer must be .dmg, .pkg, or .zip.');
         }
 
-        async function uploadLewordDownloadFile(kind, file) {
+        async function uploadLewordDownloadFile(product, kind, file) {
             try {
                 validateLewordUploadFile(kind, file);
                 const session = await ensureLewordAdminSession();
                 if (!session || !session.accessToken) return;
                 const form = new FormData();
+                form.append('product', product || 'leword');
                 form.append('kind', kind);
                 form.append('updatedBy', session.userId || 'admin');
                 form.append('file', file, file.name);
-                setLewordDownloadStatus(file.name + ' 업로드 중...');
+                setLewordDownloadStatus(downloadProductLabel(product) + ' ' + downloadKindLabel(kind) + ' uploading: ' + file.name);
                 const res = await fetch(lewordApiUrl('/v1/admin/downloads/upload'), {
                     method: 'POST',
                     headers: { Authorization: 'Bearer ' + session.accessToken },
@@ -1902,24 +1956,24 @@
                 const payload = await res.json().catch(() => ({}));
                 if (res.status === 401 || res.status === 403) {
                     saveLewordAdminSession(null);
-                    throw new Error(payload.message || payload.error || '관리자 세션이 만료되었습니다. 다시 연동 확인을 누르세요.');
+                    throw new Error(payload.message || payload.error || 'Admin session expired. Check connection again.');
                 }
-                if (!res.ok) throw new Error(payload.message || payload.error || '업로드 실패');
-                setLewordDownloadStatus('업로드 완료: ' + (payload.download?.filename || file.name) + ' · LEWORD 다운로드 버튼에 반영됐습니다.');
+                if (!res.ok) throw new Error(payload.message || payload.error || 'Upload failed');
+                syncUploadedDownloadUrl(payload.product || product, payload.kind || kind, payload.download);
+                setLewordDownloadStatus('Upload complete: ' + downloadProductLabel(payload.product || product) + ' ' + downloadKindLabel(payload.kind || kind) + ' ? ' + ((payload.download && payload.download.filename) || file.name));
                 await loadLewordDownloadStatus();
-                showToast('✅ LEWORD 다운로드 파일이 업로드되었습니다.');
+                showToast('? Download file uploaded.');
             } catch (err) {
-                setLewordDownloadStatus('업로드 실패: ' + (err.message || err), true);
+                setLewordDownloadStatus('Upload failed: ' + (err.message || err), true);
             }
         }
 
         function initLewordDownloadUploads() {
             readLewordAdminSession();
             document.querySelectorAll('[data-leword-admin-upload-kind]').forEach((zone) => {
+                const product = zone.getAttribute('data-leword-admin-upload-product') || 'leword';
                 const kind = zone.getAttribute('data-leword-admin-upload-kind');
-                const input = kind === 'android'
-                    ? document.getElementById('leword-android-upload-input')
-                    : document.getElementById('leword-pc-upload-input');
+                const input = zone.querySelector('input[type="file"]');
                 const openPicker = (event) => {
                     if (event) event.preventDefault();
                     if (input) input.click();
@@ -1941,13 +1995,13 @@
                     event.preventDefault();
                     zone.classList.remove('dragging');
                     const file = event.dataTransfer && event.dataTransfer.files ? event.dataTransfer.files[0] : null;
-                    if (file) uploadLewordDownloadFile(kind, file);
+                    if (file) uploadLewordDownloadFile(product, kind, file);
                 });
                 if (input) {
                     input.addEventListener('change', () => {
                         const file = input.files && input.files[0];
                         if (!file) return;
-                        uploadLewordDownloadFile(kind, file).finally(() => { input.value = ''; });
+                        uploadLewordDownloadFile(product, kind, file).finally(() => { input.value = ''; });
                     });
                 }
             });
