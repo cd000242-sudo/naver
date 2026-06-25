@@ -1755,6 +1755,7 @@
         const PAGE_SIZE = 20;
         const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
         const LEWORD_ADMIN_SESSION_KEY = 'leword_api_admin_session';
+        const ADMIN_UPLOAD_CREDENTIALS_KEY = 'leaderspro_admin_upload_credentials';
         let lewordApiAdminSession = null;
         let lewordPendingAdminCredentials = null;
 
@@ -1795,6 +1796,27 @@
             }));
         }
 
+        function saveAdminUploadCredentials(userId, password) {
+            lewordPendingAdminCredentials = userId && password ? { userId, password } : null;
+            if (!lewordPendingAdminCredentials) {
+                sessionStorage.removeItem(ADMIN_UPLOAD_CREDENTIALS_KEY);
+                return;
+            }
+            sessionStorage.setItem(ADMIN_UPLOAD_CREDENTIALS_KEY, JSON.stringify(lewordPendingAdminCredentials));
+        }
+
+        function restoreAdminUploadCredentials() {
+            if (lewordPendingAdminCredentials) return lewordPendingAdminCredentials;
+            try {
+                const parsed = JSON.parse(sessionStorage.getItem(ADMIN_UPLOAD_CREDENTIALS_KEY) || 'null');
+                if (parsed && parsed.userId && parsed.password) {
+                    lewordPendingAdminCredentials = { userId: parsed.userId, password: parsed.password };
+                    return lewordPendingAdminCredentials;
+                }
+            } catch (err) {}
+            return null;
+        }
+
         async function requestLewordAdminSession(userId, password, options = {}) {
             if (!userId || !password) return null;
             try {
@@ -1821,11 +1843,15 @@
         async function ensureLewordAdminSession(product, kind) {
             const existing = lewordApiAdminSession || readLewordAdminSession();
             if (existing && existing.accessToken) return existing;
-            if (lewordPendingAdminCredentials) {
-                const session = await requestLewordAdminSession(lewordPendingAdminCredentials.userId, lewordPendingAdminCredentials.password, { silent: true });
+            const credentials = restoreAdminUploadCredentials();
+            if (credentials) {
+                setDownloadInlineStatus(product, kind, '업로드 권한 확인 중...');
+                const session = await requestLewordAdminSession(credentials.userId, credentials.password, { silent: true });
                 if (session) return session;
+                setDownloadInlineStatus(product, kind, '업로드 권한 연결 실패. 관리자 페이지에서 다시 로그인해주세요.', true);
+                return null;
             }
-            setDownloadInlineStatus(product, kind, '\uad00\ub9ac\uc790 \uc11c\ubc84 \uc138\uc158\uc774 \uc5c6\uc2b5\ub2c8\ub2e4. \uad00\ub9ac\uc790 \ud398\uc774\uc9c0\uc5d0\uc11c \ub2e4\uc2dc \ub85c\uadf8\uc778\ud574\uc8fc\uc138\uc694.', true);
+            setDownloadInlineStatus(product, kind, '업로드 세션을 복구할 수 없습니다. 보안을 위해 관리자 페이지에서 다시 로그인해주세요.', true);
             return null;
         }
 
@@ -1855,7 +1881,7 @@
             const field = document.getElementById('download-' + product + '-' + kind + '-url');
             if (field && meta && meta.url) {
                 field.dataset.uploadedUrl = absoluteLewordApiDownloadUrl(meta.url);
-                field.placeholder = '\uc5c5\ub85c\ub4dc \ud30c\uc77c \uc0ac\uc6a9 \uc911 - \uc774 \uce78\uc740 \ubc31\uc5c5 URL\ub9cc \uc785\ub825';
+                field.placeholder = '직접 업로드 사용 중 - 필요하면 외부 다운로드 URL 입력';
             }
             const detail = document.getElementById('download-' + product + '-' + kind + '-detail');
             if (detail && meta && meta.filename) {
@@ -1948,9 +1974,10 @@
                 const input = zone.querySelector('input[type="file"]');
                 const button = zone.querySelector('[data-leword-upload-button="1"]');
                 if (button && input) {
-                    button.addEventListener('click', (event) => {
+                    button.addEventListener('click', async (event) => {
                         event.preventDefault();
-                        input.click();
+                        const session = await ensureLewordAdminSession(product, kind);
+                        if (session && session.accessToken) input.click();
                     });
                 }
                 if (input) {
@@ -1983,7 +2010,7 @@
 
             if (idHash === ADMIN_ID_HASH && pwHash === ADMIN_PW_HASH) {
                 sessionStorage.setItem('admin_auth', '1');
-                lewordPendingAdminCredentials = { userId: id, password: pw };
+                saveAdminUploadCredentials(id, pw);
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
                 requestLewordAdminSession(id, pw, { silent: true }).catch(() => {});
@@ -1996,6 +2023,8 @@
 
         function handleLogout() {
             sessionStorage.removeItem('admin_auth');
+            saveAdminUploadCredentials(null, null);
+            saveLewordAdminSession(null);
             location.reload();
         }
 
@@ -2003,6 +2032,8 @@
         if (sessionStorage.getItem('admin_auth') === '1') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('dashboard').classList.add('active');
+            const credentials = restoreAdminUploadCredentials();
+            if (credentials) requestLewordAdminSession(credentials.userId, credentials.password, { silent: true }).catch(() => {});
             setTimeout(() => loadDashboardData(), 100);
         }
 
@@ -3582,7 +3613,7 @@
                 downloadStack.innerHTML = EDITOR_PRODUCT_DEFS.map(product => `
                     <div class="editor-mini-card">
                         <h5>${product.label}</h5>
-                        <p class="editor-help">\uc9c1\uc811 \uc5c5\ub85c\ub4dc \ud30c\uc77c\uc774 \uc788\uc73c\uba74 \uc544\ub798 URL\uc740 \uc0ac\uc6a9\ub418\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4. URL\uc740 \ubbf8\uc5c5\ub85c\ub4dc \uc0c1\ud0dc\uc758 \ubc31\uc5c5 \ub9c1\ud06c\ub85c\ub9cc \uc785\ub825\ud558\uc138\uc694.</p>
+                        <p class="editor-help">직접 업로드 파일이 있으면 업로드 파일이 먼저 사용됩니다. URL은 업로드 파일이 없을 때 사용하는 외부 다운로드 링크입니다.</p>
                         <div class="editor-field-grid">
                             <div class="editor-field"><label>\ud45c\uc2dc \uc774\ub984</label><input id="download-${product.id}-name" type="text"></div>
                             <div class="editor-field"><label>\ubc84\uc804 \ubb38\uad6c</label><input id="download-${product.id}-version" type="text"></div>
@@ -3592,11 +3623,11 @@
                                 <div class="editor-field"><label>${choice} \ub77c\ubca8</label><input id="download-${product.id}-${choice}-label" type="text"></div>
                                 <div class="editor-field"><label>${choice} \uc0c1\uc138</label><input id="download-${product.id}-${choice}-detail" type="text"></div>
                                 <div class="editor-field full download-url-field">
-                                    <label>${choice} \ubc31\uc5c5 URL</label>
-                                    <input id="download-${product.id}-${choice}-url" type="url" placeholder="\uc5c5\ub85c\ub4dc \ud30c\uc77c\uc774 \uc5c6\uc744 \ub54c\ub9cc \uc0ac\uc6a9\ud560 GitHub/\uc678\ubd80 \ub9c1\ud06c">
+                                    <label>${choice} 다운로드 URL</label>
+                                    <input id="download-${product.id}-${choice}-url" type="url" placeholder="직접 업로드가 없을 때 사용할 GitHub/외부 링크">
                                     <div class="download-inline-upload" data-leword-inline-upload="1" data-leword-admin-upload-product="${product.id}" data-leword-admin-upload-kind="${choice}">
                                         <button type="button" data-leword-upload-button="1">${downloadUploadButtonText(choice)}</button>
-                                        <span id="download-${product.id}-${choice}-upload-status">\uc5c5\ub85c\ub4dc \ud30c\uc77c \uc5c6\uc74c - \ubc31\uc5c5 URL \uc0ac\uc6a9</span>
+                                        <span id="download-${product.id}-${choice}-upload-status">업로드 파일 없음 - 다운로드 URL 사용</span>
                                         <input id="download-${product.id}-${choice}-upload-input" type="file" accept="${downloadAcceptForKind(choice)}" hidden>
                                     </div>
                                 </div>
