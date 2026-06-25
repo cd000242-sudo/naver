@@ -1296,6 +1296,28 @@
               <button class="btn primary" type="button" id="saveAdminSiteContent">콘텐츠 저장</button>
               <button class="btn" type="button" id="addAdminProductDraft">신규 제품 추가</button>
             </div>
+            <div class="download-upload-panel">
+              <div class="panel-title" style="margin-bottom:0;">
+                <div>
+                  <h3 style="margin:0;">다운로드 파일 관리</h3>
+                  <div class="muted">관리자만 PC 셋업 파일이나 모바일 APK를 직접 올릴 수 있습니다. 업로드가 끝나면 LEWORD 다운로드 버튼이 서버 파일로 바로 연결됩니다.</div>
+                </div>
+                <button class="btn blue" type="button" id="downloadAdminLogin">관리자 로그인</button>
+              </div>
+              <div class="download-upload-grid">
+                <div class="download-dropzone" data-download-upload-kind="pc" tabindex="0" role="button">
+                  <strong>PC 셋업 파일 드래그</strong>
+                  <span>.exe 또는 .msi 파일을 여기에 놓거나 클릭해서 선택하세요.</span>
+                  <input type="file" id="pcDownloadUploadInput" accept=".exe,.msi" hidden />
+                </div>
+                <div class="download-dropzone" data-download-upload-kind="android" tabindex="0" role="button">
+                  <strong>모바일 APK 드래그</strong>
+                  <span>.apk 파일을 여기에 놓거나 클릭해서 선택하세요.</span>
+                  <input type="file" id="androidDownloadUploadInput" accept=".apk" hidden />
+                </div>
+              </div>
+              <div class="download-upload-status" id="downloadUploadStatus">관리자 로그인 후 파일을 업로드할 수 있습니다.</div>
+            </div>
             <div class="settings-message" id="adminContentMessage">관리자 로그인 후 콘텐츠를 불러오세요.</div>
           </div>
         </section>
@@ -1320,28 +1342,6 @@
               <div class="download-meta" id="androidDownloadMeta">다운로드 파일 확인 중</div>
               <a class="btn primary" id="androidDownloadButton" href="/download/android">모바일 APK 다운로드</a>
             </article>
-          </div>
-          <div class="download-upload-panel">
-            <div class="panel-title" style="margin-bottom:0;">
-              <div>
-                <h3 style="margin:0;">관리자 직접 업로드</h3>
-                <div class="muted">GitHub 릴리스 없이 PC 셋업 파일이나 모바일 APK를 직접 올리면 다운로드 버튼이 서버 파일로 바로 연결됩니다.</div>
-              </div>
-              <button class="btn blue" type="button" id="downloadAdminLogin">관리자 로그인</button>
-            </div>
-            <div class="download-upload-grid">
-              <div class="download-dropzone" data-download-upload-kind="pc" tabindex="0" role="button">
-                <strong>PC 셋업 파일 드래그</strong>
-                <span>.exe 또는 .msi 파일을 여기에 놓거나 클릭해서 선택하세요.</span>
-                <input type="file" id="pcDownloadUploadInput" accept=".exe,.msi" hidden />
-              </div>
-              <div class="download-dropzone" data-download-upload-kind="android" tabindex="0" role="button">
-                <strong>모바일 APK 드래그</strong>
-                <span>.apk 파일을 여기에 놓거나 클릭해서 선택하세요.</span>
-                <input type="file" id="androidDownloadUploadInput" accept=".apk" hidden />
-              </div>
-            </div>
-            <div class="download-upload-status" id="downloadUploadStatus">관리자 로그인 후 파일을 업로드할 수 있습니다.</div>
           </div>
         </section>
 
