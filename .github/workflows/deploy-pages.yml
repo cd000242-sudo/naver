@@ -48,6 +48,7 @@ jobs:
           mkdir -p _site
           # 1) Legacy 정적 페이지 복사 (admin + Toss success/fail + 이미지 자산 등)
           cp -r payment-page/* _site/
+          rm -rf _site/admin
           cp -r admin _site/admin
           # 2) SPA dist를 root로 덮어쓰기
           cp -r spa/dist/* _site/

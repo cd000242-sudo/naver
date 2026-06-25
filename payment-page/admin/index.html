@@ -600,6 +600,49 @@
             justify-content: flex-end;
             gap: 12px;
         }
+        .leword-upload-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+        .leword-upload-card {
+            border: 1px solid rgba(255, 215, 0, 0.22);
+            border-radius: 16px;
+            background: linear-gradient(145deg, rgba(17, 24, 39, 0.96), rgba(8, 13, 22, 0.98));
+            padding: 22px;
+        }
+        .leword-upload-dropzone {
+            min-height: 180px;
+            border: 2px dashed rgba(255, 215, 0, 0.38);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            color: #e5e7eb;
+            background: rgba(255, 215, 0, 0.05);
+            transition: border-color .15s ease, background .15s ease, transform .15s ease;
+            text-align: center;
+        }
+        .leword-upload-dropzone.dragging {
+            border-color: #c3f441;
+            background: rgba(195, 244, 65, 0.12);
+            transform: translateY(-2px);
+        }
+        .leword-upload-dropzone strong { font-size: 1.05rem; color: #fff; }
+        .leword-upload-dropzone span { color: #a7b0c1; font-size: 0.86rem; line-height: 1.5; }
+        .leword-upload-status {
+            margin-top: 16px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.86);
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            color: #cbd5e1;
+            line-height: 1.55;
+        }
         .save-toast {
             position: fixed;
             bottom: 32px;
@@ -804,6 +847,7 @@
 
             /* Editor */
             .editor-grid { grid-template-columns: 1fr; gap: 12px; }
+            .leword-upload-grid { grid-template-columns: 1fr; }
             .editor-card { padding: 16px; }
             .editor-card textarea { min-height: 80px; font-size: 0.8rem; padding: 10px; }
             .editor-subtabs { gap: 6px; }
@@ -1388,6 +1432,45 @@
                         <p class="editor-help">제품명, 버전 문구, 이미지, 플랫폼별 다운로드 버튼 문구와 URL을 직접 수정합니다.</p>
                         <div class="editor-product-stack" id="editor-download-stack"></div>
                     </div>
+                    <div class="editor-card" style="margin-top:16px;">
+                        <h4>LEWORD 설치 파일 직접 업로드</h4>
+                        <p class="editor-help">GitHub 릴리스 URL을 쓰지 않고 서버에 직접 PC 셋업 파일과 모바일 APK를 올립니다. 업로드 후 LEWORD 다운로드 버튼이 이 서버 파일로 연결됩니다.</p>
+                        <div class="editor-field-grid">
+                            <div class="editor-field">
+                                <label>LEWORD API 관리자 ID</label>
+                                <input id="leword-api-admin-id" type="text" autocomplete="off" placeholder="관리자 ID">
+                            </div>
+                            <div class="editor-field">
+                                <label>LEWORD API 관리자 비밀번호</label>
+                                <input id="leword-api-admin-password" type="password" autocomplete="new-password" placeholder="관리자 비밀번호">
+                            </div>
+                        </div>
+                        <div class="editor-save-bar" style="justify-content:flex-start;">
+                            <button class="btn btn-gold" onclick="checkLewordDownloadAdmin()">연동 확인</button>
+                            <button class="btn" onclick="loadLewordDownloadStatus()">다운로드 상태 새로고침</button>
+                        </div>
+                        <div class="leword-upload-status" id="leword-download-status">관리자 연동 확인 후 파일을 업로드하세요.</div>
+                        <div class="leword-upload-grid">
+                            <div class="leword-upload-card">
+                                <h4>PC 셋업 파일</h4>
+                                <p class="editor-help">Windows용 LEWORD 설치 파일입니다. `.exe` 또는 `.msi`만 업로드할 수 있습니다.</p>
+                                <div class="leword-upload-dropzone" data-leword-admin-upload-kind="pc" tabindex="0" role="button">
+                                    <strong>PC 셋업 파일 드래그</strong>
+                                    <span>여기에 놓거나 클릭해서 `.exe/.msi` 파일을 선택하세요.</span>
+                                    <input id="leword-pc-upload-input" type="file" accept=".exe,.msi" hidden>
+                                </div>
+                            </div>
+                            <div class="leword-upload-card">
+                                <h4>모바일 APK</h4>
+                                <p class="editor-help">Android용 LEWORD APK입니다. `.apk` 파일만 업로드할 수 있습니다.</p>
+                                <div class="leword-upload-dropzone" data-leword-admin-upload-kind="android" tabindex="0" role="button">
+                                    <strong>모바일 APK 드래그</strong>
+                                    <span>여기에 놓거나 클릭해서 `.apk` 파일을 선택하세요.</span>
+                                    <input id="leword-android-upload-input" type="file" accept=".apk" hidden>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="editor-sub-design" class="editor-subpanel">
@@ -1693,6 +1776,183 @@
         let ordersPage = 1;
         let currentAnalyticsPeriod = 'today';
         const PAGE_SIZE = 20;
+        const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
+        const LEWORD_ADMIN_SESSION_KEY = 'leword_api_admin_session';
+        let lewordApiAdminSession = null;
+
+        function setLewordDownloadStatus(message, isError = false) {
+            const target = document.getElementById('leword-download-status');
+            if (!target) return;
+            target.textContent = message || '';
+            target.style.borderColor = isError ? 'rgba(239,68,68,.55)' : 'rgba(148,163,184,.18)';
+            target.style.color = isError ? '#fecaca' : '#cbd5e1';
+        }
+
+        function lewordApiUrl(path) {
+            return LEWORD_API_BASE + path;
+        }
+
+        function readLewordAdminSession() {
+            try {
+                const parsed = JSON.parse(sessionStorage.getItem(LEWORD_ADMIN_SESSION_KEY) || 'null');
+                if (parsed && parsed.accessToken) {
+                    lewordApiAdminSession = parsed;
+                    return parsed;
+                }
+            } catch (err) {}
+            return null;
+        }
+
+        function saveLewordAdminSession(session) {
+            lewordApiAdminSession = session || null;
+            if (!session) {
+                sessionStorage.removeItem(LEWORD_ADMIN_SESSION_KEY);
+                return;
+            }
+            sessionStorage.setItem(LEWORD_ADMIN_SESSION_KEY, JSON.stringify({
+                accessToken: session.accessToken,
+                userId: session.userId || 'admin',
+                tier: session.tier || 'admin',
+                expiresAt: session.expiresAt || '',
+            }));
+        }
+
+        async function checkLewordDownloadAdmin() {
+            const userId = document.getElementById('leword-api-admin-id')?.value.trim();
+            const password = document.getElementById('leword-api-admin-password')?.value.trim();
+            if (!userId || !password) {
+                setLewordDownloadStatus('LEWORD API 관리자 ID와 비밀번호를 입력하세요.', true);
+                return null;
+            }
+            setLewordDownloadStatus('LEWORD API 관리자 세션 확인 중...');
+            try {
+                const res = await fetch(lewordApiUrl('/v1/web/session'), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, password, adminLogin: true }),
+                });
+                const payload = await res.json().catch(() => ({}));
+                if (!res.ok || !payload.session || !payload.session.accessToken || payload.session.tier !== 'admin') {
+                    throw new Error(payload.message || payload.error || '관리자 세션 발급 실패');
+                }
+                saveLewordAdminSession(payload.session);
+                document.getElementById('leword-api-admin-password').value = '';
+                setLewordDownloadStatus('LEWORD API 관리자 연동 완료. 이제 PC 셋업 파일과 APK를 업로드할 수 있습니다.');
+                await loadLewordDownloadStatus();
+                return payload.session;
+            } catch (err) {
+                saveLewordAdminSession(null);
+                setLewordDownloadStatus('LEWORD API 관리자 연동 실패: ' + (err.message || err), true);
+                return null;
+            }
+        }
+
+        async function ensureLewordAdminSession() {
+            return lewordApiAdminSession || readLewordAdminSession() || await checkLewordDownloadAdmin();
+        }
+
+        function formatFileSize(bytes) {
+            const value = Number(bytes || 0);
+            if (!value) return '-';
+            if (value > 1024 * 1024) return (value / 1024 / 1024).toFixed(1) + ' MB';
+            if (value > 1024) return (value / 1024).toFixed(1) + ' KB';
+            return value + ' B';
+        }
+
+        async function loadLewordDownloadStatus() {
+            const target = document.getElementById('leword-download-status');
+            if (!target) return;
+            try {
+                const res = await fetch(lewordApiUrl('/v1/downloads'), { cache: 'no-store' });
+                const payload = await res.json();
+                if (!res.ok) throw new Error(payload.message || payload.error || '다운로드 상태 조회 실패');
+                const pc = payload.pc || {};
+                const android = payload.android || {};
+                setLewordDownloadStatus(
+                    '현재 다운로드 상태 · PC: ' + (pc.available ? `${pc.filename || '파일'} (${formatFileSize(pc.size)}, ${pc.source || 'server'})` : '준비 중')
+                    + ' / APK: ' + (android.available ? `${android.filename || '파일'} (${formatFileSize(android.size)}, ${android.source || 'server'})` : '준비 중')
+                );
+            } catch (err) {
+                setLewordDownloadStatus('다운로드 상태 조회 실패: ' + (err.message || err), true);
+            }
+        }
+
+        function validateLewordUploadFile(kind, file) {
+            const name = (file && file.name ? file.name : '').toLowerCase();
+            if (!file) throw new Error('업로드할 파일을 선택하세요.');
+            if (kind === 'pc' && !(name.endsWith('.exe') || name.endsWith('.msi'))) throw new Error('PC 셋업 파일은 .exe 또는 .msi만 가능합니다.');
+            if (kind === 'android' && !name.endsWith('.apk')) throw new Error('모바일 앱은 .apk 파일만 가능합니다.');
+        }
+
+        async function uploadLewordDownloadFile(kind, file) {
+            try {
+                validateLewordUploadFile(kind, file);
+                const session = await ensureLewordAdminSession();
+                if (!session || !session.accessToken) return;
+                const form = new FormData();
+                form.append('kind', kind);
+                form.append('updatedBy', session.userId || 'admin');
+                form.append('file', file, file.name);
+                setLewordDownloadStatus(file.name + ' 업로드 중...');
+                const res = await fetch(lewordApiUrl('/v1/admin/downloads/upload'), {
+                    method: 'POST',
+                    headers: { Authorization: 'Bearer ' + session.accessToken },
+                    body: form,
+                });
+                const payload = await res.json().catch(() => ({}));
+                if (res.status === 401 || res.status === 403) {
+                    saveLewordAdminSession(null);
+                    throw new Error(payload.message || payload.error || '관리자 세션이 만료되었습니다. 다시 연동 확인을 누르세요.');
+                }
+                if (!res.ok) throw new Error(payload.message || payload.error || '업로드 실패');
+                setLewordDownloadStatus('업로드 완료: ' + (payload.download?.filename || file.name) + ' · LEWORD 다운로드 버튼에 반영됐습니다.');
+                await loadLewordDownloadStatus();
+                showToast('✅ LEWORD 다운로드 파일이 업로드되었습니다.');
+            } catch (err) {
+                setLewordDownloadStatus('업로드 실패: ' + (err.message || err), true);
+            }
+        }
+
+        function initLewordDownloadUploads() {
+            readLewordAdminSession();
+            document.querySelectorAll('[data-leword-admin-upload-kind]').forEach((zone) => {
+                const kind = zone.getAttribute('data-leword-admin-upload-kind');
+                const input = kind === 'android'
+                    ? document.getElementById('leword-android-upload-input')
+                    : document.getElementById('leword-pc-upload-input');
+                const openPicker = (event) => {
+                    if (event) event.preventDefault();
+                    if (input) input.click();
+                };
+                zone.addEventListener('click', openPicker);
+                zone.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') openPicker(event);
+                });
+                ['dragenter', 'dragover'].forEach((eventName) => {
+                    zone.addEventListener(eventName, (event) => {
+                        event.preventDefault();
+                        zone.classList.add('dragging');
+                    });
+                });
+                ['dragleave', 'dragend'].forEach((eventName) => {
+                    zone.addEventListener(eventName, () => zone.classList.remove('dragging'));
+                });
+                zone.addEventListener('drop', (event) => {
+                    event.preventDefault();
+                    zone.classList.remove('dragging');
+                    const file = event.dataTransfer && event.dataTransfer.files ? event.dataTransfer.files[0] : null;
+                    if (file) uploadLewordDownloadFile(kind, file);
+                });
+                if (input) {
+                    input.addEventListener('change', () => {
+                        const file = input.files && input.files[0];
+                        if (!file) return;
+                        uploadLewordDownloadFile(kind, file).finally(() => { input.value = ''; });
+                    });
+                }
+            });
+            loadLewordDownloadStatus().catch(() => {});
+        }
 
         // ===== SHA-256 HASH UTILITY =====
         async function sha256(message) {
@@ -1733,6 +1993,7 @@
             document.getElementById('dashboard').classList.add('active');
             setTimeout(() => loadDashboardData(), 100);
         }
+        setTimeout(() => initLewordDownloadUploads(), 100);
 
         // ===== TAB SWITCHING =====
         function switchTab(tabId) {
