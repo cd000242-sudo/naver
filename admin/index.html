@@ -1434,7 +1434,7 @@
                     </div>
                     <div class="editor-card" style="margin-top:16px;">
                         <h4>앱 설치 파일 직접 업로드</h4>
-                        <p class="editor-help">Upload installer files directly to the server. LEWORD, Better Life Naver, and LEADERNAM Orbit download buttons use uploaded files first.</p>
+                        <p class="editor-help">?? ??? ??? ??? ???? ??? ??? ??? ?? ?????. ?? GitHub/?? URL? ??? ??? ?? ?? ?? ?? ?????.</p>
                         <div class="editor-field-grid">
                             <div class="editor-field">
                                 <label>LEWORD API 관리자 ID</label>
@@ -1894,11 +1894,12 @@
         function syncUploadedDownloadUrl(product, kind, meta) {
             const field = document.getElementById('download-' + product + '-' + kind + '-url');
             if (field && meta && meta.url) {
-                field.value = absoluteLewordApiDownloadUrl(meta.url);
+                field.dataset.uploadedUrl = absoluteLewordApiDownloadUrl(meta.url);
+                field.placeholder = '?? ??? ?? ?? ? - ? ?? ?? URL? ??';
             }
             const detail = document.getElementById('download-' + product + '-' + kind + '-detail');
             if (detail && meta && meta.filename) {
-                detail.value = meta.filename + (meta.size ? ' - ' + formatFileSize(meta.size) : '');
+                detail.dataset.uploadedFile = meta.filename + (meta.size ? ' - ' + formatFileSize(meta.size) : '');
             }
         }
 
@@ -3550,6 +3551,7 @@
                 productStack.innerHTML = EDITOR_PRODUCT_DEFS.map(product => `
                     <div class="editor-mini-card">
                         <h5>${product.label}</h5>
+                        <p class="editor-help">?? ??? ??? ??? ?? URL? ???? ????. URL? ???? ??? ?? ???? ?????.</p>
                         <div class="editor-field-grid">
                             <div class="editor-field"><label>뱃지</label><input id="product-${product.id}-eyebrow" type="text"></div>
                             <div class="editor-field"><label>제품명</label><input id="product-${product.id}-name" type="text"></div>
@@ -3583,7 +3585,7 @@
                             ${EDITOR_DOWNLOAD_CHOICES.map(choice => `
                                 <div class="editor-field"><label>${choice} 라벨</label><input id="download-${product.id}-${choice}-label" type="text"></div>
                                 <div class="editor-field"><label>${choice} 상세</label><input id="download-${product.id}-${choice}-detail" type="text"></div>
-                                <div class="editor-field full"><label>${choice} URL</label><input id="download-${product.id}-${choice}-url" type="url"></div>
+                                <div class="editor-field full"><label>${choice} ?? URL</label><input id="download-${product.id}-${choice}-url" type="url" placeholder="?? ??? ??? ?? ?? ??? GitHub/?? ??"></div>
                             `).join('')}
                         </div>
                     </div>
