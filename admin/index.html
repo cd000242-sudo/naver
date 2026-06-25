@@ -1755,9 +1755,7 @@
         const PAGE_SIZE = 20;
         const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
         const LEWORD_ADMIN_SESSION_KEY = 'leword_api_admin_session';
-        const ADMIN_UPLOAD_CREDENTIALS_KEY = 'leaderspro_admin_upload_credentials';
         let lewordApiAdminSession = null;
-        let lewordPendingAdminCredentials = null;
 
         function setLewordDownloadStatus(message, isError = false) {
             const target = document.getElementById('leword-download-status');
@@ -1796,27 +1794,6 @@
             }));
         }
 
-        function saveAdminUploadCredentials(userId, password) {
-            lewordPendingAdminCredentials = userId && password ? { userId, password } : null;
-            if (!lewordPendingAdminCredentials) {
-                sessionStorage.removeItem(ADMIN_UPLOAD_CREDENTIALS_KEY);
-                return;
-            }
-            sessionStorage.setItem(ADMIN_UPLOAD_CREDENTIALS_KEY, JSON.stringify(lewordPendingAdminCredentials));
-        }
-
-        function restoreAdminUploadCredentials() {
-            if (lewordPendingAdminCredentials) return lewordPendingAdminCredentials;
-            try {
-                const parsed = JSON.parse(sessionStorage.getItem(ADMIN_UPLOAD_CREDENTIALS_KEY) || 'null');
-                if (parsed && parsed.userId && parsed.password) {
-                    lewordPendingAdminCredentials = { userId: parsed.userId, password: parsed.password };
-                    return lewordPendingAdminCredentials;
-                }
-            } catch (err) {}
-            return null;
-        }
-
         async function requestLewordAdminSession(userId, password, options = {}) {
             if (!userId || !password) return null;
             try {
@@ -1843,15 +1820,15 @@
         async function ensureLewordAdminSession(product, kind) {
             const existing = lewordApiAdminSession || readLewordAdminSession();
             if (existing && existing.accessToken) return existing;
-            const credentials = restoreAdminUploadCredentials();
-            if (credentials) {
-                setDownloadInlineStatus(product, kind, '업로드 권한 확인 중...');
-                const session = await requestLewordAdminSession(credentials.userId, credentials.password, { silent: true });
-                if (session) return session;
-                setDownloadInlineStatus(product, kind, '업로드 권한 연결 실패. 관리자 페이지에서 다시 로그인해주세요.', true);
-                return null;
+            if (sessionStorage.getItem('admin_auth') === '1') {
+                return {
+                    accessToken: ADMIN_TOKEN,
+                    userId: 'admin',
+                    tier: 'admin',
+                    source: 'leaderspro-admin-panel',
+                };
             }
-            setDownloadInlineStatus(product, kind, '업로드 세션을 복구할 수 없습니다. 보안을 위해 관리자 페이지에서 다시 로그인해주세요.', true);
+            setDownloadInlineStatus(product, kind, '관리자 페이지 로그인 후 업로드할 수 있습니다.', true);
             return null;
         }
 
@@ -1943,15 +1920,18 @@
                 form.append('updatedBy', session.userId || 'admin');
                 form.append('file', file, file.name);
                 setDownloadInlineStatus(product, kind, '\uc5c5\ub85c\ub4dc \uc911: ' + file.name);
+                const headers = session.source === 'leaderspro-admin-panel'
+                    ? { 'X-LeadersPro-Admin-Token': session.accessToken }
+                    : { Authorization: 'Bearer ' + session.accessToken };
                 const res = await fetch(lewordApiUrl('/v1/admin/downloads/upload'), {
                     method: 'POST',
-                    headers: { Authorization: 'Bearer ' + session.accessToken },
+                    headers,
                     body: form,
                 });
                 const payload = await res.json().catch(() => ({}));
                 if (res.status === 401 || res.status === 403) {
                     saveLewordAdminSession(null);
-                    throw new Error(payload.message || payload.error || '\uad00\ub9ac\uc790 \uc11c\ubc84 \uc138\uc158\uc774 \ub9cc\ub8cc\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \ub2e4\uc2dc \ub85c\uadf8\uc778\ud574\uc8fc\uc138\uc694.');
+                    throw new Error(payload.message || payload.error || '업로드 권한 확인 실패. 관리자 페이지 로그인 상태를 확인하세요.');
                 }
                 if (!res.ok) throw new Error(payload.message || payload.error || 'Upload failed');
                 syncUploadedDownloadUrl(payload.product || product, payload.kind || kind, payload.download);
@@ -2010,10 +1990,8 @@
 
             if (idHash === ADMIN_ID_HASH && pwHash === ADMIN_PW_HASH) {
                 sessionStorage.setItem('admin_auth', '1');
-                saveAdminUploadCredentials(id, pw);
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
-                requestLewordAdminSession(id, pw, { silent: true }).catch(() => {});
                 loadDashboardData();
             } else {
                 document.getElementById('login-error').classList.add('visible');
@@ -2023,7 +2001,6 @@
 
         function handleLogout() {
             sessionStorage.removeItem('admin_auth');
-            saveAdminUploadCredentials(null, null);
             saveLewordAdminSession(null);
             location.reload();
         }
@@ -2032,8 +2009,6 @@
         if (sessionStorage.getItem('admin_auth') === '1') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('dashboard').classList.add('active');
-            const credentials = restoreAdminUploadCredentials();
-            if (credentials) requestLewordAdminSession(credentials.userId, credentials.password, { silent: true }).catch(() => {});
             setTimeout(() => loadDashboardData(), 100);
         }
 
