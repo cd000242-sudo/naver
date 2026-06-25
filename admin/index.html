@@ -1805,15 +1805,15 @@
                 });
                 const payload = await res.json().catch(() => ({}));
                 if (!res.ok || !payload.session || !payload.session.accessToken || payload.session.tier !== 'admin') {
-                    throw new Error(payload.message || payload.error || '??? ?? ?? ?? ??');
+                    throw new Error(payload.message || payload.error || '\uad00\ub9ac\uc790 \uc11c\ubc84 \uc138\uc158 \ubc1c\uae09 \uc2e4\ud328');
                 }
                 saveLewordAdminSession(payload.session);
-                if (!options.silent) showToast('?? ??? ??? ???????.');
+                if (!options.silent) showToast('\uc11c\ubc84 \uc5c5\ub85c\ub4dc \uad8c\ud55c\uc774 \uc5f0\uacb0\ub418\uc5c8\uc2b5\ub2c8\ub2e4.');
                 await loadLewordDownloadStatus();
                 return payload.session;
             } catch (err) {
                 saveLewordAdminSession(null);
-                if (!options.silent) showToast('?? ??? ?? ?? ??: ' + (err.message || err));
+                if (!options.silent) showToast('\uc11c\ubc84 \uc5c5\ub85c\ub4dc \uad8c\ud55c \uc5f0\uacb0 \uc2e4\ud328: ' + (err.message || err));
                 return null;
             }
         }
@@ -1825,7 +1825,7 @@
                 const session = await requestLewordAdminSession(lewordPendingAdminCredentials.userId, lewordPendingAdminCredentials.password, { silent: true });
                 if (session) return session;
             }
-            setDownloadInlineStatus(product, kind, '??? ?? ??? ????. ??? ????? ?? ???????.', true);
+            setDownloadInlineStatus(product, kind, '\uad00\ub9ac\uc790 \uc11c\ubc84 \uc138\uc158\uc774 \uc5c6\uc2b5\ub2c8\ub2e4. \uad00\ub9ac\uc790 \ud398\uc774\uc9c0\uc5d0\uc11c \ub2e4\uc2dc \ub85c\uadf8\uc778\ud574\uc8fc\uc138\uc694.', true);
             return null;
         }
 
@@ -1855,7 +1855,7 @@
             const field = document.getElementById('download-' + product + '-' + kind + '-url');
             if (field && meta && meta.url) {
                 field.dataset.uploadedUrl = absoluteLewordApiDownloadUrl(meta.url);
-                field.placeholder = '?? ??? ?? ?? ? - ? ?? ?? URL? ??';
+                field.placeholder = '\uc5c5\ub85c\ub4dc \ud30c\uc77c \uc0ac\uc6a9 \uc911 - \uc774 \uce78\uc740 \ubc31\uc5c5 URL\ub9cc \uc785\ub825';
             }
             const detail = document.getElementById('download-' + product + '-' + kind + '-detail');
             if (detail && meta && meta.filename) {
@@ -1884,7 +1884,7 @@
                     const meta = products[product] && products[product][kind] ? products[product][kind] : {};
                     return downloadProductLabel(product) + ' ' + downloadKindLabel(kind) + ': ' + (meta.available ? (meta.filename || 'file') + ' (' + formatFileSize(meta.size) + ', ' + (meta.source || 'server') + ')' : 'not uploaded');
                 });
-                setLewordDownloadStatus('Current uploads ? ' + lines.join(' / '));
+                setLewordDownloadStatus('\uc5c5\ub85c\ub4dc \uc0c1\ud0dc - ' + lines.join(' / '));
             } catch (err) {
                 setLewordDownloadStatus('Download status lookup failed: ' + (err.message || err), true);
             }
@@ -1916,7 +1916,7 @@
                 form.append('kind', kind);
                 form.append('updatedBy', session.userId || 'admin');
                 form.append('file', file, file.name);
-                setDownloadInlineStatus(product, kind, '??? ?: ' + file.name);
+                setDownloadInlineStatus(product, kind, '\uc5c5\ub85c\ub4dc \uc911: ' + file.name);
                 const res = await fetch(lewordApiUrl('/v1/admin/downloads/upload'), {
                     method: 'POST',
                     headers: { Authorization: 'Bearer ' + session.accessToken },
@@ -1925,16 +1925,16 @@
                 const payload = await res.json().catch(() => ({}));
                 if (res.status === 401 || res.status === 403) {
                     saveLewordAdminSession(null);
-                    throw new Error(payload.message || payload.error || '??? ?? ??? ???????. ?? ???????.');
+                    throw new Error(payload.message || payload.error || '\uad00\ub9ac\uc790 \uc11c\ubc84 \uc138\uc158\uc774 \ub9cc\ub8cc\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \ub2e4\uc2dc \ub85c\uadf8\uc778\ud574\uc8fc\uc138\uc694.');
                 }
                 if (!res.ok) throw new Error(payload.message || payload.error || 'Upload failed');
                 syncUploadedDownloadUrl(payload.product || product, payload.kind || kind, payload.download);
                 const meta = payload.download || {};
-                setDownloadInlineStatus(payload.product || product, payload.kind || kind, '????: ' + (meta.filename || file.name) + (meta.size ? ' ? ' + formatFileSize(meta.size) : ''), false, true);
+                setDownloadInlineStatus(payload.product || product, payload.kind || kind, '\uc5c5\ub85c\ub4dc\ub428: ' + (meta.filename || file.name) + (meta.size ? ' ? ' + formatFileSize(meta.size) : ''), false, true);
                 await loadLewordDownloadStatus();
-                showToast('???? ??? ????????.');
+                showToast('\ub2e4\uc6b4\ub85c\ub4dc \ud30c\uc77c\uc774 \uc5c5\ub85c\ub4dc\ub418\uc5c8\uc2b5\ub2c8\ub2e4.');
             } catch (err) {
-                setDownloadInlineStatus(product, kind, '??? ??: ' + (err.message || err), true);
+                setDownloadInlineStatus(product, kind, '\uc5c5\ub85c\ub4dc \uc2e4\ud328: ' + (err.message || err), true);
             }
         }
 
@@ -3444,7 +3444,7 @@
                 button.type = 'button';
                 button.className = 'editor-clear-btn';
                 button.textContent = '?';
-                button.setAttribute('aria-label', '?? ???');
+                button.setAttribute('aria-label', '\ud544\ub4dc \ucd08\uae30\ud654');
                 button.addEventListener('click', () => {
                     input.value = '';
                     input.dispatchEvent(new Event('input', { bubbles: true }));
@@ -3465,10 +3465,11 @@
         }
 
         function downloadUploadButtonText(kind) {
-            if (kind === 'android') return 'APK ???';
-            if (kind === 'mac-arm' || kind === 'mac-intel') return 'Mac ?? ???';
-            return '???? ???';
+            if (kind === 'android') return '\u0041\u0050\u004b \uc5c5\ub85c\ub4dc';
+            if (kind === 'mac-arm' || kind === 'mac-intel') return '\u004d\u0061\u0063 \ud30c\uc77c \uc5c5\ub85c\ub4dc';
+            return '\uc124\uce58\ud30c\uc77c \uc5c5\ub85c\ub4dc';
         }
+
 
         function arrayToLines(items) {
             return (items || []).join('\n');
@@ -3556,7 +3557,6 @@
                 productStack.innerHTML = EDITOR_PRODUCT_DEFS.map(product => `
                     <div class="editor-mini-card">
                         <h5>${product.label}</h5>
-                        <p class="editor-help">?? ??? ??? ??? ?? URL? ???? ????. URL? ???? ??? ?? ???? ?????.</p>
                         <div class="editor-field-grid">
                             <div class="editor-field"><label>뱃지</label><input id="product-${product.id}-eyebrow" type="text"></div>
                             <div class="editor-field"><label>제품명</label><input id="product-${product.id}-name" type="text"></div>
@@ -3582,20 +3582,21 @@
                 downloadStack.innerHTML = EDITOR_PRODUCT_DEFS.map(product => `
                     <div class="editor-mini-card">
                         <h5>${product.label}</h5>
+                        <p class="editor-help">\uc9c1\uc811 \uc5c5\ub85c\ub4dc \ud30c\uc77c\uc774 \uc788\uc73c\uba74 \uc544\ub798 URL\uc740 \uc0ac\uc6a9\ub418\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4. URL\uc740 \ubbf8\uc5c5\ub85c\ub4dc \uc0c1\ud0dc\uc758 \ubc31\uc5c5 \ub9c1\ud06c\ub85c\ub9cc \uc785\ub825\ud558\uc138\uc694.</p>
                         <div class="editor-field-grid">
-                            <div class="editor-field"><label>표시 이름</label><input id="download-${product.id}-name" type="text"></div>
-                            <div class="editor-field"><label>버전 문구</label><input id="download-${product.id}-version" type="text"></div>
-                            <div class="editor-field"><label>이미지 경로</label><input id="download-${product.id}-image" type="text"></div>
-                            <div class="editor-field"><label>강조 색상</label><input id="download-${product.id}-accent" type="text"></div>
+                            <div class="editor-field"><label>\ud45c\uc2dc \uc774\ub984</label><input id="download-${product.id}-name" type="text"></div>
+                            <div class="editor-field"><label>\ubc84\uc804 \ubb38\uad6c</label><input id="download-${product.id}-version" type="text"></div>
+                            <div class="editor-field"><label>\uc774\ubbf8\uc9c0 \uacbd\ub85c</label><input id="download-${product.id}-image" type="text"></div>
+                            <div class="editor-field"><label>\uac15\uc870 \uc0c9\uc0c1</label><input id="download-${product.id}-accent" type="text"></div>
                             ${EDITOR_DOWNLOAD_CHOICES.map(choice => `
-                                <div class="editor-field"><label>${choice} 라벨</label><input id="download-${product.id}-${choice}-label" type="text"></div>
-                                <div class="editor-field"><label>${choice} 상세</label><input id="download-${product.id}-${choice}-detail" type="text"></div>
+                                <div class="editor-field"><label>${choice} \ub77c\ubca8</label><input id="download-${product.id}-${choice}-label" type="text"></div>
+                                <div class="editor-field"><label>${choice} \uc0c1\uc138</label><input id="download-${product.id}-${choice}-detail" type="text"></div>
                                 <div class="editor-field full download-url-field">
-                                    <label>${choice} ?? URL</label>
-                                    <input id="download-${product.id}-${choice}-url" type="url" placeholder="??? ??? ?? ?? ??? GitHub/?? ??">
+                                    <label>${choice} \ubc31\uc5c5 URL</label>
+                                    <input id="download-${product.id}-${choice}-url" type="url" placeholder="\uc5c5\ub85c\ub4dc \ud30c\uc77c\uc774 \uc5c6\uc744 \ub54c\ub9cc \uc0ac\uc6a9\ud560 GitHub/\uc678\ubd80 \ub9c1\ud06c">
                                     <div class="download-inline-upload" data-leword-inline-upload="1" data-leword-admin-upload-product="${product.id}" data-leword-admin-upload-kind="${choice}">
                                         <button type="button" data-leword-upload-button="1">${downloadUploadButtonText(choice)}</button>
-                                        <span id="download-${product.id}-${choice}-upload-status">??? ?? ?? ? ?? URL ??</span>
+                                        <span id="download-${product.id}-${choice}-upload-status">\uc5c5\ub85c\ub4dc \ud30c\uc77c \uc5c6\uc74c - \ubc31\uc5c5 URL \uc0ac\uc6a9</span>
                                         <input id="download-${product.id}-${choice}-upload-input" type="file" accept="${downloadAcceptForKind(choice)}" hidden>
                                     </div>
                                 </div>
