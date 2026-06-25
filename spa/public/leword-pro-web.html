@@ -632,6 +632,7 @@
       background: linear-gradient(180deg, rgba(8,28,24,.68), rgba(7,11,16,.96));
       padding: 14px;
     }
+    .download-upload-panel[hidden] { display: none; }
     .download-upload-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 10px; }
     .download-dropzone {
       border: 1px dashed rgba(151,214,255,.42);
@@ -1296,7 +1297,7 @@
               <button class="btn primary" type="button" id="saveAdminSiteContent">콘텐츠 저장</button>
               <button class="btn" type="button" id="addAdminProductDraft">신규 제품 추가</button>
             </div>
-            <div class="download-upload-panel">
+            <div class="download-upload-panel" id="adminDownloadUploadPanel" hidden>
               <div class="panel-title" style="margin-bottom:0;">
                 <div>
                   <h3 style="margin:0;">다운로드 파일 관리</h3>
@@ -1631,6 +1632,9 @@
     ];
 
     function qs(id) { return document.getElementById(id); }
+    function isAdminSurface() {
+      return /^\/admin\/?$/i.test(location.pathname || '');
+    }
     const mobileProChromeStorageKey = 'leword-mobile-pro-chrome';
     const postLoginAutoFeatureIds = ['kin', 'shopping'];
     const featureResultCache = {};
@@ -1674,7 +1678,7 @@
     }
     function initialViewId() {
       if ((location.hash || '').length > 1) return (location.hash || '#golden').slice(1);
-      return /^\/admin\/?$/i.test(location.pathname || '') ? 'commerce' : 'golden';
+      return isAdminSurface() ? 'commerce' : 'golden';
     }
     function setActiveView(id, options) {
       const next = normalizeViewId(id);
@@ -2829,6 +2833,9 @@
     function hydrateAdminSiteContentSettings() {
       const panel = qs('adminSiteContentSettings');
       if (!panel) return;
+      if (qs('adminDownloadUploadPanel')) {
+        qs('adminDownloadUploadPanel').hidden = !isAdminSurface();
+      }
       const enabled = isAdminSession() && isAdminSettingsUnlocked();
       panel.classList.toggle('locked', !enabled);
       panel.classList.toggle('password-locked', isAdminSession() && !isAdminSettingsUnlocked());
@@ -5227,7 +5234,7 @@
     qs('adminLoginClose').addEventListener('click', closeAdminLoginModal);
     qs('adminLoginModal').addEventListener('click', function(event) { if (event.target.id === 'adminLoginModal') closeAdminLoginModal(); });
     qs('openAdminLogin').addEventListener('click', openAdminLoginModal);
-    qs('downloadAdminLogin').addEventListener('click', openAdminLoginModal);
+    if (qs('downloadAdminLogin')) qs('downloadAdminLogin').addEventListener('click', openAdminLoginModal);
     document.querySelectorAll('[data-download-upload-kind]').forEach(function(zone) {
       const kind = zone.getAttribute('data-download-upload-kind') || 'pc';
       const input = downloadUploadInput(kind);
