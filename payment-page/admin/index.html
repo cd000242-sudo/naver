@@ -572,6 +572,65 @@
         .editor-field textarea:focus {
             border-color: var(--gold);
         }
+        .editor-clear-wrap {
+            position: relative;
+            width: 100%;
+        }
+        .editor-clear-wrap input {
+            padding-right: 40px;
+        }
+        .editor-clear-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.08);
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 18px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .15s ease, background .15s ease, color .15s ease;
+        }
+        .editor-clear-btn.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .editor-clear-btn:hover {
+            background: rgba(239,68,68,.18);
+            color: #fecaca;
+        }
+        .download-inline-upload {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 7px;
+        }
+        .download-inline-upload button {
+            min-height: 30px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(201,168,76,.45);
+            background: rgba(201,168,76,.12);
+            color: var(--gold);
+            font-family: inherit;
+            font-size: .74rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .download-inline-upload span {
+            color: var(--text-muted);
+            font-size: .72rem;
+            line-height: 1.4;
+        }
+        .download-inline-upload span.error { color: #fecaca; }
+        .download-inline-upload span.ready { color: #bbf7d0; }
         .editor-help {
             color: var(--text-secondary);
             font-size: 0.76rem;
@@ -599,49 +658,6 @@
             display: flex;
             justify-content: flex-end;
             gap: 12px;
-        }
-        .leword-upload-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 18px;
-            margin-top: 18px;
-        }
-        .leword-upload-card {
-            border: 1px solid rgba(255, 215, 0, 0.22);
-            border-radius: 16px;
-            background: linear-gradient(145deg, rgba(17, 24, 39, 0.96), rgba(8, 13, 22, 0.98));
-            padding: 22px;
-        }
-        .leword-upload-dropzone {
-            min-height: 180px;
-            border: 2px dashed rgba(255, 215, 0, 0.38);
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            color: #e5e7eb;
-            background: rgba(255, 215, 0, 0.05);
-            transition: border-color .15s ease, background .15s ease, transform .15s ease;
-            text-align: center;
-        }
-        .leword-upload-dropzone.dragging {
-            border-color: #c3f441;
-            background: rgba(195, 244, 65, 0.12);
-            transform: translateY(-2px);
-        }
-        .leword-upload-dropzone strong { font-size: 1.05rem; color: #fff; }
-        .leword-upload-dropzone span { color: #a7b0c1; font-size: 0.86rem; line-height: 1.5; }
-        .leword-upload-status {
-            margin-top: 16px;
-            padding: 14px 16px;
-            border-radius: 12px;
-            background: rgba(15, 23, 42, 0.86);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            color: #cbd5e1;
-            line-height: 1.55;
         }
         .save-toast {
             position: fixed;
@@ -847,7 +863,6 @@
 
             /* Editor */
             .editor-grid { grid-template-columns: 1fr; gap: 12px; }
-            .leword-upload-grid { grid-template-columns: 1fr; }
             .editor-card { padding: 16px; }
             .editor-card textarea { min-height: 80px; font-size: 0.8rem; padding: 10px; }
             .editor-subtabs { gap: 6px; }
@@ -1432,63 +1447,7 @@
                         <p class="editor-help">제품명, 버전 문구, 이미지, 플랫폼별 다운로드 버튼 문구와 URL을 직접 수정합니다.</p>
                         <div class="editor-product-stack" id="editor-download-stack"></div>
                     </div>
-                    <div class="editor-card" style="margin-top:16px;">
-                        <h4>앱 설치 파일 직접 업로드</h4>
-                        <p class="editor-help">?? ??? ??? ??? ???? ??? ??? ??? ?? ?????. ?? GitHub/?? URL? ??? ??? ?? ?? ?? ?? ?????.</p>
-                        <div class="editor-field-grid">
-                            <div class="editor-field">
-                                <label>LEWORD API 관리자 ID</label>
-                                <input id="leword-api-admin-id" type="text" autocomplete="off" placeholder="관리자 ID">
-                            </div>
-                            <div class="editor-field">
-                                <label>LEWORD API 관리자 비밀번호</label>
-                                <input id="leword-api-admin-password" type="password" autocomplete="new-password" placeholder="관리자 비밀번호">
-                            </div>
-                        </div>
-                        <div class="editor-save-bar" style="justify-content:flex-start;">
-                            <button class="btn btn-gold" onclick="checkLewordDownloadAdmin()">연동 확인</button>
-                            <button class="btn" onclick="loadLewordDownloadStatus()">다운로드 상태 새로고침</button>
-                        </div>
-                        <div class="leword-upload-status" id="leword-download-status">관리자 연동 확인 후 파일을 업로드하세요.</div>
-                        <div class="leword-upload-grid">
-                            <div class="leword-upload-card">
-                                <h4>LEWORD PC installer</h4>
-                                <p class="editor-help">Windows installer for LEWORD. Upload .exe or .msi.</p>
-                                <div class="leword-upload-dropzone" data-leword-admin-upload-product="leword" data-leword-admin-upload-kind="windows" tabindex="0" role="button">
-                                    <strong>파일 선택 또는 드래그</strong>
-                                    <span>카드를 클릭하면 .exe/.msi 파일 선택창이 열립니다.</span>
-                                    <input id="leword-windows-upload-input" type="file" accept=".exe,.msi" hidden>
-                                </div>
-                            </div>
-                            <div class="leword-upload-card">
-                                <h4>LEWORD Android APK</h4>
-                                <p class="editor-help">Android APK for LEWORD. Upload .apk.</p>
-                                <div class="leword-upload-dropzone" data-leword-admin-upload-product="leword" data-leword-admin-upload-kind="android" tabindex="0" role="button">
-                                    <strong>APK 선택 또는 드래그</strong>
-                                    <span>카드를 클릭하면 .apk 파일 선택창이 열립니다.</span>
-                                    <input id="leword-android-upload-input" type="file" accept=".apk" hidden>
-                                </div>
-                            </div>
-                            <div class="leword-upload-card">
-                                <h4>Better Life Naver PC 설치 파일</h4>
-                                <p class="editor-help">Windows installer for the Naver automation app. Upload .exe or .msi.</p>
-                                <div class="leword-upload-dropzone" data-leword-admin-upload-product="naver" data-leword-admin-upload-kind="windows" tabindex="0" role="button">
-                                    <strong>파일 선택 또는 드래그</strong>
-                                    <span>카드를 클릭하면 .exe/.msi 파일 선택창이 열립니다.</span>
-                                    <input id="naver-windows-upload-input" type="file" accept=".exe,.msi" hidden>
-                                </div>
-                            </div>
-                            <div class="leword-upload-card">
-                                <h4>LEADERNAM Orbit PC 설치 파일</h4>
-                                <p class="editor-help">Windows installer for LEADERNAM Orbit. Upload .exe or .msi.</p>
-                                <div class="leword-upload-dropzone" data-leword-admin-upload-product="orbit" data-leword-admin-upload-kind="windows" tabindex="0" role="button">
-                                    <strong>파일 선택 또는 드래그</strong>
-                                    <span>카드를 클릭하면 .exe/.msi 파일 선택창이 열립니다.</span>
-                                    <input id="orbit-windows-upload-input" type="file" accept=".exe,.msi" hidden>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div id="editor-sub-design" class="editor-subpanel">
@@ -1797,6 +1756,7 @@
         const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
         const LEWORD_ADMIN_SESSION_KEY = 'leword_api_admin_session';
         let lewordApiAdminSession = null;
+        let lewordPendingAdminCredentials = null;
 
         function setLewordDownloadStatus(message, isError = false) {
             const target = document.getElementById('leword-download-status');
@@ -1835,14 +1795,8 @@
             }));
         }
 
-        async function checkLewordDownloadAdmin() {
-            const userId = document.getElementById('leword-api-admin-id')?.value.trim();
-            const password = document.getElementById('leword-api-admin-password')?.value.trim();
-            if (!userId || !password) {
-                setLewordDownloadStatus('LEWORD API 관리자 ID와 비밀번호를 입력하세요.', true);
-                return null;
-            }
-            setLewordDownloadStatus('LEWORD API 관리자 세션 확인 중...');
+        async function requestLewordAdminSession(userId, password, options = {}) {
+            if (!userId || !password) return null;
             try {
                 const res = await fetch(lewordApiUrl('/v1/web/session'), {
                     method: 'POST',
@@ -1851,22 +1805,28 @@
                 });
                 const payload = await res.json().catch(() => ({}));
                 if (!res.ok || !payload.session || !payload.session.accessToken || payload.session.tier !== 'admin') {
-                    throw new Error(payload.message || payload.error || '관리자 세션 발급 실패');
+                    throw new Error(payload.message || payload.error || '??? ?? ?? ?? ??');
                 }
                 saveLewordAdminSession(payload.session);
-                document.getElementById('leword-api-admin-password').value = '';
-                setLewordDownloadStatus('LEWORD API 관리자 연동 완료. 이제 PC 셋업 파일과 APK를 업로드할 수 있습니다.');
+                if (!options.silent) showToast('?? ??? ??? ???????.');
                 await loadLewordDownloadStatus();
                 return payload.session;
             } catch (err) {
                 saveLewordAdminSession(null);
-                setLewordDownloadStatus('LEWORD API 관리자 연동 실패: ' + (err.message || err), true);
+                if (!options.silent) showToast('?? ??? ?? ?? ??: ' + (err.message || err));
                 return null;
             }
         }
 
-        async function ensureLewordAdminSession() {
-            return lewordApiAdminSession || readLewordAdminSession() || await checkLewordDownloadAdmin();
+        async function ensureLewordAdminSession(product, kind) {
+            const existing = lewordApiAdminSession || readLewordAdminSession();
+            if (existing && existing.accessToken) return existing;
+            if (lewordPendingAdminCredentials) {
+                const session = await requestLewordAdminSession(lewordPendingAdminCredentials.userId, lewordPendingAdminCredentials.password, { silent: true });
+                if (session) return session;
+            }
+            setDownloadInlineStatus(product, kind, '??? ?? ??? ????. ??? ????? ?? ???????.', true);
+            return null;
         }
 
         function formatFileSize(bytes) {
@@ -1938,17 +1898,25 @@
             if ((kind === 'mac-arm' || kind === 'mac-intel') && !(name.endsWith('.dmg') || name.endsWith('.pkg') || name.endsWith('.zip'))) throw new Error('Mac installer must be .dmg, .pkg, or .zip.');
         }
 
+        function setDownloadInlineStatus(product, kind, message, isError = false, isReady = false) {
+            const target = document.getElementById('download-' + product + '-' + kind + '-upload-status');
+            if (!target) return;
+            target.textContent = message || '';
+            target.classList.toggle('error', !!isError);
+            target.classList.toggle('ready', !!isReady && !isError);
+        }
+
         async function uploadLewordDownloadFile(product, kind, file) {
             try {
                 validateLewordUploadFile(kind, file);
-                const session = await ensureLewordAdminSession();
+                const session = await ensureLewordAdminSession(product, kind);
                 if (!session || !session.accessToken) return;
                 const form = new FormData();
                 form.append('product', product || 'leword');
                 form.append('kind', kind);
                 form.append('updatedBy', session.userId || 'admin');
                 form.append('file', file, file.name);
-                setLewordDownloadStatus(downloadProductLabel(product) + ' ' + downloadKindLabel(kind) + ' uploading: ' + file.name);
+                setDownloadInlineStatus(product, kind, '??? ?: ' + file.name);
                 const res = await fetch(lewordApiUrl('/v1/admin/downloads/upload'), {
                     method: 'POST',
                     headers: { Authorization: 'Bearer ' + session.accessToken },
@@ -1957,47 +1925,34 @@
                 const payload = await res.json().catch(() => ({}));
                 if (res.status === 401 || res.status === 403) {
                     saveLewordAdminSession(null);
-                    throw new Error(payload.message || payload.error || 'Admin session expired. Check connection again.');
+                    throw new Error(payload.message || payload.error || '??? ?? ??? ???????. ?? ???????.');
                 }
                 if (!res.ok) throw new Error(payload.message || payload.error || 'Upload failed');
                 syncUploadedDownloadUrl(payload.product || product, payload.kind || kind, payload.download);
-                setLewordDownloadStatus('Upload complete: ' + downloadProductLabel(payload.product || product) + ' ' + downloadKindLabel(payload.kind || kind) + ' ? ' + ((payload.download && payload.download.filename) || file.name));
+                const meta = payload.download || {};
+                setDownloadInlineStatus(payload.product || product, payload.kind || kind, '????: ' + (meta.filename || file.name) + (meta.size ? ' ? ' + formatFileSize(meta.size) : ''), false, true);
                 await loadLewordDownloadStatus();
-                showToast('? Download file uploaded.');
+                showToast('???? ??? ????????.');
             } catch (err) {
-                setLewordDownloadStatus('Upload failed: ' + (err.message || err), true);
+                setDownloadInlineStatus(product, kind, '??? ??: ' + (err.message || err), true);
             }
         }
 
         function initLewordDownloadUploads() {
             readLewordAdminSession();
-            document.querySelectorAll('[data-leword-admin-upload-kind]').forEach((zone) => {
+            document.querySelectorAll('[data-leword-inline-upload="1"]').forEach((zone) => {
+                if (zone.dataset.uploadBound === '1') return;
+                zone.dataset.uploadBound = '1';
                 const product = zone.getAttribute('data-leword-admin-upload-product') || 'leword';
                 const kind = zone.getAttribute('data-leword-admin-upload-kind');
                 const input = zone.querySelector('input[type="file"]');
-                const openPicker = (event) => {
-                    if (event) event.preventDefault();
-                    if (input) input.click();
-                };
-                zone.addEventListener('click', openPicker);
-                zone.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' || event.key === ' ') openPicker(event);
-                });
-                ['dragenter', 'dragover'].forEach((eventName) => {
-                    zone.addEventListener(eventName, (event) => {
+                const button = zone.querySelector('[data-leword-upload-button="1"]');
+                if (button && input) {
+                    button.addEventListener('click', (event) => {
                         event.preventDefault();
-                        zone.classList.add('dragging');
+                        input.click();
                     });
-                });
-                ['dragleave', 'dragend'].forEach((eventName) => {
-                    zone.addEventListener(eventName, () => zone.classList.remove('dragging'));
-                });
-                zone.addEventListener('drop', (event) => {
-                    event.preventDefault();
-                    zone.classList.remove('dragging');
-                    const file = event.dataTransfer && event.dataTransfer.files ? event.dataTransfer.files[0] : null;
-                    if (file) uploadLewordDownloadFile(product, kind, file);
-                });
+                }
                 if (input) {
                     input.addEventListener('change', () => {
                         const file = input.files && input.files[0];
@@ -2006,8 +1961,8 @@
                     });
                 }
             });
-            loadLewordDownloadStatus().catch(() => {});
         }
+
 
         // ===== SHA-256 HASH UTILITY =====
         async function sha256(message) {
@@ -2028,8 +1983,10 @@
 
             if (idHash === ADMIN_ID_HASH && pwHash === ADMIN_PW_HASH) {
                 sessionStorage.setItem('admin_auth', '1');
+                lewordPendingAdminCredentials = { userId: id, password: pw };
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
+                requestLewordAdminSession(id, pw, { silent: true }).catch(() => {});
                 loadDashboardData();
             } else {
                 document.getElementById('login-error').classList.add('visible');
@@ -2048,7 +2005,6 @@
             document.getElementById('dashboard').classList.add('active');
             setTimeout(() => loadDashboardData(), 100);
         }
-        setTimeout(() => initLewordDownloadUploads(), 100);
 
         // ===== TAB SWITCHING =====
         function switchTab(tabId) {
@@ -3457,12 +3413,61 @@
 
         function setValue(id, value) {
             const el = editorEl(id);
-            if (el) el.value = value ?? '';
+            if (el) {
+                el.value = value ?? '';
+                updateEditorClearButton(el);
+            }
         }
 
         function getValue(id) {
             const el = editorEl(id);
             return el ? String(el.value || '').trim() : '';
+        }
+
+        function updateEditorClearButton(input) {
+            const button = input && input.parentElement ? input.parentElement.querySelector('.editor-clear-btn') : null;
+            if (button) button.classList.toggle('visible', String(input.value || '').length > 0);
+        }
+
+        function enhanceEditorClearButtons(root = document) {
+            root.querySelectorAll('#editor-sub-downloads .editor-field input[type="text"], #editor-sub-downloads .editor-field input[type="url"]').forEach((input) => {
+                if (input.dataset.clearEnhanced === '1') {
+                    updateEditorClearButton(input);
+                    return;
+                }
+                input.dataset.clearEnhanced = '1';
+                const wrapper = document.createElement('div');
+                wrapper.className = 'editor-clear-wrap';
+                input.parentNode.insertBefore(wrapper, input);
+                wrapper.appendChild(input);
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'editor-clear-btn';
+                button.textContent = '?';
+                button.setAttribute('aria-label', '?? ???');
+                button.addEventListener('click', () => {
+                    input.value = '';
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                    updateEditorClearButton(input);
+                    refreshEditorPreview();
+                    input.focus();
+                });
+                input.addEventListener('input', () => updateEditorClearButton(input));
+                wrapper.appendChild(button);
+                updateEditorClearButton(input);
+            });
+        }
+
+        function downloadAcceptForKind(kind) {
+            if (kind === 'android') return '.apk';
+            if (kind === 'mac-arm' || kind === 'mac-intel') return '.dmg,.pkg,.zip';
+            return '.exe,.msi';
+        }
+
+        function downloadUploadButtonText(kind) {
+            if (kind === 'android') return 'APK ???';
+            if (kind === 'mac-arm' || kind === 'mac-intel') return 'Mac ?? ???';
+            return '???? ???';
         }
 
         function arrayToLines(items) {
@@ -3585,13 +3590,24 @@
                             ${EDITOR_DOWNLOAD_CHOICES.map(choice => `
                                 <div class="editor-field"><label>${choice} 라벨</label><input id="download-${product.id}-${choice}-label" type="text"></div>
                                 <div class="editor-field"><label>${choice} 상세</label><input id="download-${product.id}-${choice}-detail" type="text"></div>
-                                <div class="editor-field full"><label>${choice} ?? URL</label><input id="download-${product.id}-${choice}-url" type="url" placeholder="?? ??? ??? ?? ?? ??? GitHub/?? ??"></div>
+                                <div class="editor-field full download-url-field">
+                                    <label>${choice} ?? URL</label>
+                                    <input id="download-${product.id}-${choice}-url" type="url" placeholder="??? ??? ?? ?? ??? GitHub/?? ??">
+                                    <div class="download-inline-upload" data-leword-inline-upload="1" data-leword-admin-upload-product="${product.id}" data-leword-admin-upload-kind="${choice}">
+                                        <button type="button" data-leword-upload-button="1">${downloadUploadButtonText(choice)}</button>
+                                        <span id="download-${product.id}-${choice}-upload-status">??? ?? ?? ? ?? URL ??</span>
+                                        <input id="download-${product.id}-${choice}-upload-input" type="file" accept="${downloadAcceptForKind(choice)}" hidden>
+                                    </div>
+                                </div>
                             `).join('')}
                         </div>
                     </div>
                 `).join('');
                 downloadStack.dataset.rendered = '1';
             }
+            enhanceEditorClearButtons(downloadStack || document);
+            initLewordDownloadUploads();
+            loadLewordDownloadStatus().catch(() => {});
 
             const productsJson = editorEl('edit-products-json');
             if (productsJson && !productsJson.dataset.bound) {
@@ -3714,6 +3730,7 @@
             setValue('theme-gold', theme.gold);
             setValue('edit-products-json', JSON.stringify(products, null, 2));
             productsJsonTouched = false;
+            enhanceEditorClearButtons(document);
             refreshEditorPreview(data);
         }
 
