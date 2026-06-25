@@ -45,14 +45,14 @@ type ApiDownloadsPayload = {
 const PRODUCTS = {
     naver: {
         name: 'Better Life Naver',
-        version: '네이버 블로그 자동화 · v2.11.14',
+        version: '네이버 블로그 자동화 · v2.11.66',
         image: '/images/feature-auto-publish.png',
         accent: '#FFD700',
         borderColor: 'rgba(255,215,0,0.25)',
         downloads: [
-            { key: 'windows', label: 'Windows', detail: '2.11.14 · exe', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.14/Better-Life-Naver-Setup-2.11.14.exe' },
-            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.11.14 · arm64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.14/Better-Life-Naver-2.11.14-arm64.dmg' },
-            { key: 'mac-intel', label: 'Mac Intel', detail: '2.11.14 · x64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.14/Better-Life-Naver-2.11.14-x64.dmg' },
+            { key: 'windows', label: 'Windows', detail: '2.11.66 · exe', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.66/Better-Life-Naver-Setup-2.11.66.exe' },
+            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.11.66 · arm64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.66/Better-Life-Naver-2.11.66-arm64.dmg' },
+            { key: 'mac-intel', label: 'Mac Intel', detail: '2.11.66 · x64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.66/Better-Life-Naver-2.11.66-x64.dmg' },
         ],
     },
     leword: {
@@ -64,20 +64,20 @@ const PRODUCTS = {
         downloads: [
             { key: 'windows', label: 'Windows', detail: '2.49.85 · exe', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85.exe' },
             { key: 'android', label: 'Android APK', detail: '2.49.85 · apk', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-mobile-0.1.0.apk' },
-            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.49.83 · arm64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-arm64.dmg' },
-            { key: 'mac-intel', label: 'Mac Intel', detail: '2.49.83 · x64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.83/LEWORD-2.49.83-x64.dmg' },
+            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.49.85 · arm64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85-arm64.dmg' },
+            { key: 'mac-intel', label: 'Mac Intel', detail: '2.49.85 · x64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.85/LEWORD-2.49.85-x64.dmg' },
         ],
     },
     orbit: {
         name: 'LEADERNAM Orbit',
-        version: '블로그스팟·워드프레스 자동화 · v3.8.112',
+        version: '블로그스팟·워드프레스 자동화 · v3.8.221',
         image: '/images/orbit/leadernam-orbit-download-fast.jpg',
         accent: '#44d7b6',
         borderColor: 'rgba(68,215,182,0.28)',
         downloads: [
-            { key: 'windows', label: 'Windows', detail: '3.8.112 · exe', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.112/LEADERNAM-Orbit-3.8.112.exe' },
-            { key: 'mac-arm', label: 'Mac M1-M4', detail: '3.8.112 · arm64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.112/LEADERNAM-Orbit-3.8.112-arm64.dmg' },
-            { key: 'mac-intel', label: 'Mac Intel', detail: '3.8.112 · x64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.112/LEADERNAM-Orbit-3.8.112-x64.dmg' },
+            { key: 'windows', label: 'Windows', detail: '3.8.221 · exe', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.221/LEADERNAM-Orbit-3.8.221.exe' },
+            { key: 'mac-arm', label: 'Mac M1-M4', detail: '3.8.221 · arm64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.221/LEADERNAM-Orbit-3.8.221-arm64.dmg' },
+            { key: 'mac-intel', label: 'Mac Intel', detail: '3.8.221 · x64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.221/LEADERNAM-Orbit-3.8.221-x64.dmg' },
         ],
     },
 } satisfies Record<string, ProductConfig>;
