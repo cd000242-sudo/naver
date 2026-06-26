@@ -605,6 +605,51 @@
             tistory: 'Leaders Tistory',
             leword: 'Leword'
         };
+        const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
+        let serverDownloadsPromise = null;
+
+        function lewordApiUrl(path) {
+            return LEWORD_API_BASE + (path.charAt(0) === '/' ? path : '/' + path);
+        }
+
+        function absoluteLewordDownloadUrl(url) {
+            if (!url) return '';
+            if (/^https?:\/\//i.test(url)) return url;
+            return lewordApiUrl(url);
+        }
+
+        function preferredDownloadKinds(product) {
+            const platform = `${navigator.platform || ''} ${navigator.userAgent || ''}`;
+            if (/android/i.test(platform)) return ['android', 'windows'];
+            if (/mac/i.test(platform)) return ['mac-arm', 'mac-intel', 'windows'];
+            return ['windows'];
+        }
+
+        async function loadServerDownloads() {
+            if (!serverDownloadsPromise) {
+                serverDownloadsPromise = fetch(lewordApiUrl('/v1/public/downloads'), { cache: 'no-store' })
+                    .then(res => res.ok ? res.json() : Promise.reject(new Error('download status ' + res.status)))
+                    .catch(err => {
+                        console.warn('[DOWNLOAD] 서버 업로드 상태 조회 실패:', err);
+                        serverDownloadsPromise = null;
+                        return null;
+                    });
+            }
+            return serverDownloadsPromise;
+        }
+
+        async function getUploadedDownloadUrl(product) {
+            const payload = await loadServerDownloads();
+            const entries = payload && payload.products && payload.products[product] ? payload.products[product] : null;
+            if (!entries) return '';
+            for (const kind of preferredDownloadKinds(product)) {
+                const meta = entries[kind];
+                if (meta && meta.available && meta.source === 'uploaded' && meta.url) {
+                    return absoluteLewordDownloadUrl(meta.url);
+                }
+            }
+            return '';
+        }
 
         function getDownloadUrl(product) {
             // Default download URLs (GitHub Releases)
@@ -616,6 +661,10 @@
             };
             // Admin overrides from localStorage
             const saved = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
+            const nested = saved.downloads && saved.downloads[product] && saved.downloads[product].downloads && saved.downloads[product].downloads.windows
+                ? saved.downloads[product].downloads.windows.url
+                : '';
+            if (product && nested) return nested;
             const urls = saved.downloadUrls || {};
             if (product && urls[product]) return urls[product];
             if (product && defaults[product]) return defaults[product];
@@ -635,14 +684,14 @@
             }
         }
 
-        function downloadWithPassword(product) {
+        async function downloadWithPassword(product) {
             const input = document.querySelector(`.download-input[data-pw="${product}"]`);
             const errorEl = document.querySelector(`.download-error[data-error="${product}"]`);
             const pw = input.value.trim();
 
             if (pw === '1645') {
                 errorEl.classList.remove('visible');
-                const url = getDownloadUrl(product);
+                const url = await getUploadedDownloadUrl(product) || getDownloadUrl(product);
                 const name = PRODUCT_NAMES[product] || product;
                 if (!url) {
                     alert(`${name} 다운로드 파일이 아직 준비되지 않았습니다.\n관리자에게 문의해주세요.`);

@@ -1873,6 +1873,13 @@
             if (detail && !isUploaded) {
                 delete detail.dataset.uploadedFile;
             }
+            if (isUploaded) {
+                setDownloadInlineStatus(product, kind, '업로드됨: ' + (meta.filename || '설치 파일') + (meta.size ? ' - ' + formatFileSize(meta.size) : ''), false, true);
+            } else if (meta && meta.available && meta.source === 'server') {
+                setDownloadInlineStatus(product, kind, '서버 기본 파일 사용 중 - 업로드가 없으면 다운로드 URL을 사용합니다.', false, false);
+            } else {
+                setDownloadInlineStatus(product, kind, '업로드 파일 없음 - 다운로드 URL 사용', false, false);
+            }
         }
 
         async function loadLewordDownloadStatus() {
@@ -1918,34 +1925,62 @@
             target.classList.toggle('ready', !!isReady && !isError);
         }
 
+        const LEWORD_UPLOAD_CHUNK_BYTES = 4 * 1024 * 1024;
+
+        function createLewordUploadId() {
+            const browserCrypto = window.crypto || window.msCrypto;
+            const random = (browserCrypto && browserCrypto.getRandomValues)
+                ? Array.from(browserCrypto.getRandomValues(new Uint32Array(4))).map(v => v.toString(16)).join('')
+                : String(Date.now()) + Math.random().toString(16).slice(2);
+            return Date.now().toString(36) + '-' + random;
+        }
+
+        function lewordChunkUploadUrl(product, kind, file, uploadId, chunkIndex, totalChunks, updatedBy) {
+            const params = new URLSearchParams({
+                product: product || 'leword',
+                kind,
+                filename: file.name || 'installer',
+                uploadId,
+                chunkIndex: String(chunkIndex),
+                totalChunks: String(totalChunks),
+                updatedBy: updatedBy || 'admin'
+            });
+            return lewordApiUrl('/v1/admin/downloads/upload-chunk?' + params.toString());
+        }
+
         async function uploadLewordDownloadFile(product, kind, file) {
             try {
                 validateLewordUploadFile(kind, file);
                 const session = await ensureLewordAdminSession(product, kind);
                 if (!session || !session.accessToken) return;
-                const form = new FormData();
-                form.append('product', product || 'leword');
-                form.append('kind', kind);
-                form.append('updatedBy', session.userId || 'admin');
-                form.append('file', file, file.name);
-                setDownloadInlineStatus(product, kind, '\uc5c5\ub85c\ub4dc \uc911: ' + file.name);
                 const headers = session.source === 'leaderspro-admin-panel'
                     ? { 'X-LeadersPro-Admin-Token': session.accessToken }
                     : { Authorization: 'Bearer ' + session.accessToken };
-                const res = await fetch(lewordApiUrl('/v1/admin/downloads/upload'), {
-                    method: 'POST',
-                    headers,
-                    body: form,
-                });
-                const payload = await res.json().catch(() => ({}));
-                if (res.status === 401 || res.status === 403) {
-                    saveLewordAdminSession(null);
-                    throw new Error(payload.message || payload.error || '업로드 권한 확인 실패. 관리자 페이지 로그인 상태를 확인하세요.');
+                const uploadId = createLewordUploadId();
+                const totalChunks = Math.max(1, Math.ceil(file.size / LEWORD_UPLOAD_CHUNK_BYTES));
+                let payload = null;
+                for (let chunkIndex = 0; chunkIndex < totalChunks; chunkIndex += 1) {
+                    const start = chunkIndex * LEWORD_UPLOAD_CHUNK_BYTES;
+                    const chunk = file.slice(start, Math.min(file.size, start + LEWORD_UPLOAD_CHUNK_BYTES));
+                    const percent = Math.max(1, Math.round((chunkIndex / totalChunks) * 100));
+                    setDownloadInlineStatus(product, kind, '업로드 중 ' + percent + '%: ' + file.name);
+                    const res = await fetch(lewordChunkUploadUrl(product, kind, file, uploadId, chunkIndex, totalChunks, session.userId || 'admin'), {
+                        method: 'POST',
+                        headers: Object.assign({ 'Content-Type': 'application/octet-stream' }, headers),
+                        body: chunk,
+                    });
+                    payload = await res.json().catch(() => ({}));
+                    if (res.status === 401 || res.status === 403) {
+                        saveLewordAdminSession(null);
+                        throw new Error(payload.message || payload.error || '업로드 권한 확인 실패. 관리자 페이지 로그인 상태를 확인하세요.');
+                    }
+                    if (!res.ok) throw new Error(payload.message || payload.error || 'Upload failed');
+                    setDownloadInlineStatus(product, kind, '업로드 중 ' + Math.round(((chunkIndex + 1) / totalChunks) * 100) + '%: ' + file.name);
                 }
-                if (!res.ok) throw new Error(payload.message || payload.error || 'Upload failed');
+                if (!payload || !payload.done) throw new Error('업로드가 완료되지 않았습니다. 다시 시도해주세요.');
                 syncUploadedDownloadUrl(payload.product || product, payload.kind || kind, payload.download);
                 const meta = payload.download || {};
-                setDownloadInlineStatus(payload.product || product, payload.kind || kind, '\uc5c5\ub85c\ub4dc\ub428: ' + (meta.filename || file.name) + (meta.size ? ' ? ' + formatFileSize(meta.size) : ''), false, true);
+                setDownloadInlineStatus(payload.product || product, payload.kind || kind, '업로드됨: ' + (meta.filename || file.name) + (meta.size ? ' - ' + formatFileSize(meta.size) : ''), false, true);
                 await loadLewordDownloadStatus();
                 showToast('\ub2e4\uc6b4\ub85c\ub4dc \ud30c\uc77c\uc774 \uc5c5\ub85c\ub4dc\ub418\uc5c8\uc2b5\ub2c8\ub2e4.');
             } catch (err) {
@@ -3458,7 +3493,7 @@
                 const button = document.createElement('button');
                 button.type = 'button';
                 button.className = 'editor-clear-btn';
-                button.textContent = '?';
+                button.textContent = '×';
                 button.setAttribute('aria-label', '\ud544\ub4dc \ucd08\uae30\ud654');
                 button.addEventListener('click', () => {
                     input.value = '';
