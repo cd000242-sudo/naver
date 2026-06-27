@@ -307,17 +307,6 @@ function IndexPage() {
     const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
     const livePrimaryGolden = liveState.golden[0] || HOME_LIVE_FALLBACK_GOLDEN[0];
     const liveSourceTotal = liveState.lanes.reduce((sum, lane) => sum + lane.items.length, 0);
-    const heroRealtimeTerms = liveState.lanes.map((lane) => {
-        const fallback = HOME_LIVE_FALLBACK_SIGNALS[lane.id][0];
-        const item = lane.items.find((entry) => entry.keyword || entry.title) || fallback;
-        return {
-            id: lane.id,
-            label: lane.label,
-            accent: lane.accent,
-            keyword: cleanLiveText(item.keyword || item.title, fallback.keyword || lane.label),
-            priority: item.priority || 0,
-        };
-    });
     const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
         || liveState.lanes[0]
         || { ...SOURCE_LANE_CONFIGS[0], items: HOME_LIVE_FALLBACK_SIGNALS.naver };
@@ -350,19 +339,42 @@ function IndexPage() {
                             <strong>실시간 검색어</strong>
                             <small>{liveUpdatedAt}</small>
                         </div>
-                        <div className="hero-realtime-primary">
-                            <span style={{ background: heroRealtimeTerms[0]?.accent || '#44d7b6' }}>{heroRealtimeTerms[0]?.label || 'LIVE'}</span>
-                            <h1>{heroRealtimeTerms[0]?.keyword || '실시간 검색어'}</h1>
-                            <p>{liveState.status === 'ready' ? '지금 뜨는 검색 흐름을 바로 글감으로 전환하세요.' : '실시간 검색어를 빠르게 준비하고 있습니다.'}</p>
+                        <div className="hero-source-tabs" role="tablist" aria-label="홈 실시간 소스 선택">
+                            {liveState.lanes.map((lane) => {
+                                const isActive = lane.id === activeSourceLane.id;
+                                return (
+                                    <button
+                                        key={lane.id}
+                                        type="button"
+                                        role="tab"
+                                        aria-selected={isActive}
+                                        className={`hero-source-tab${isActive ? ' active' : ''}`}
+                                        onClick={() => setActiveSourceLaneId(lane.id)}
+                                        style={{ borderColor: isActive ? lane.accent : 'rgba(255,255,255,0.13)', color: isActive ? '#061018' : 'rgba(255,255,255,0.74)', background: isActive ? lane.accent : 'rgba(255,255,255,0.045)' }}
+                                    >
+                                        <span style={{ background: isActive ? '#061018' : lane.accent }} />
+                                        <strong>{lane.label}</strong>
+                                        <small>{lane.items.length}</small>
+                                    </button>
+                                );
+                            })}
                         </div>
-                        <div className="hero-realtime-grid">
-                            {heroRealtimeTerms.slice(1).map((term) => (
-                                <div key={term.id} className="hero-realtime-chip" style={{ borderColor: term.accent + '66', background: 'linear-gradient(135deg, ' + term.accent + '18, rgba(5,10,18,0.38))' }}>
-                                    <span style={{ color: term.accent }}>{term.label}</span>
-                                    <strong>{term.keyword}</strong>
-                                    <small>{term.priority || 'LIVE'}</small>
-                                </div>
-                            ))}
+                        <div className="hero-realtime-primary" style={{ borderColor: activeSourceLane.accent + '66', background: 'linear-gradient(135deg, ' + activeSourceLane.accent + '16, rgba(255,255,255,0.035))' }}>
+                            <span style={{ background: activeSourceLane.accent }}>{activeSourceLane.label}</span>
+                            <h1>{cleanLiveText(activeSourceItems[0]?.keyword || activeSourceItems[0]?.title, activeSourceFallback.keyword || activeSourceLane.label)}</h1>
+                            <p>{cleanLiveText(activeSourceItems[0]?.description || activeSourceItems[0]?.title, activeSourceFallback.description || activeSourceLane.description)}</p>
+                        </div>
+                        <div className="hero-source-stack">
+                            {activeSourceItems.slice(1, 4).map((item, index) => {
+                                const keyword = cleanLiveText(item.keyword || item.title, activeSourceFallback.keyword || activeSourceLane.label);
+                                return (
+                                    <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className="hero-source-row">
+                                        <span>{index + 2}</span>
+                                        <strong>{keyword}</strong>
+                                        <small>{item.priority || 'LIVE'}</small>
+                                    </article>
+                                );
+                            })}
                         </div>
                     </div>
                     {heroNotice && (
@@ -709,10 +721,69 @@ function IndexPage() {
                     white-space: nowrap;
                 }
 
+                .hero-source-tabs {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    align-items: center;
+                    gap: 7px;
+                    overflow-x: auto;
+                    padding-bottom: 2px;
+                    scrollbar-width: none;
+                }
+
+                .hero-source-tabs::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .hero-source-tab {
+                    min-height: 38px;
+                    flex: 0 0 auto;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 7px;
+                    padding: 8px 10px;
+                    border: 1px solid rgba(255,255,255,0.13);
+                    border-radius: 999px;
+                    font: inherit;
+                    cursor: pointer;
+                    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+                }
+
+                .hero-source-tab:hover,
+                .hero-source-tab.active {
+                    transform: translateY(-1px);
+                }
+
+                .hero-source-tab span {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                    flex: 0 0 auto;
+                }
+
+                .hero-source-tab strong {
+                    font-size: 12px;
+                    font-weight: 900;
+                    white-space: nowrap;
+                }
+
+                .hero-source-tab small {
+                    min-width: 18px;
+                    padding: 2px 5px;
+                    border-radius: 999px;
+                    background: rgba(255,255,255,0.16);
+                    font-size: 11px;
+                    font-weight: 900;
+                    text-align: center;
+                }
+
                 .hero-realtime-primary {
                     display: grid;
                     gap: 8px;
                     min-width: 0;
+                    padding: 16px;
+                    border: 1px solid rgba(255,255,255,0.12);
+                    border-radius: 8px;
                 }
 
                 .hero-realtime-primary span {
@@ -728,7 +799,7 @@ function IndexPage() {
                 .hero-realtime-primary h1 {
                     margin: 0;
                     color: #fff;
-                    font-size: clamp(38px, 5.7vw, 68px);
+                    font-size: clamp(34px, 5.2vw, 58px);
                     line-height: 1.08;
                     letter-spacing: 0;
                     overflow-wrap: anywhere;
@@ -738,35 +809,41 @@ function IndexPage() {
                 .hero-realtime-primary p {
                     margin: 0;
                     color: rgba(255,255,255,0.74);
-                    font-size: 17px;
+                    font-size: 15px;
                     line-height: 1.55;
                 }
 
-                .hero-realtime-grid {
+                .hero-source-stack {
                     display: grid;
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
-                    gap: 10px;
+                    gap: 8px;
                 }
 
-                .hero-realtime-chip {
-                    min-height: 72px;
+                .hero-source-row {
+                    min-height: 52px;
                     display: grid;
-                    grid-template-columns: minmax(0, 1fr) auto;
-                    gap: 5px 10px;
-                    align-content: center;
-                    padding: 12px;
-                    border: 1px solid;
+                    grid-template-columns: 30px minmax(0, 1fr) auto;
+                    align-items: center;
+                    gap: 9px;
+                    padding: 10px 12px;
                     border-radius: 8px;
-                    background: rgba(255,255,255,0.04);
+                    border: 1px solid rgba(255,255,255,0.08);
+                    background: rgba(255,255,255,0.045);
                 }
 
-                .hero-realtime-chip span {
-                    grid-column: 1 / -1;
+                .hero-source-row span {
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 999px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(255,255,255,0.10);
+                    color: #fff;
                     font-size: 12px;
                     font-weight: 900;
                 }
 
-                .hero-realtime-chip strong {
+                .hero-source-row strong {
                     min-width: 0;
                     color: #fff;
                     font-size: 14px;
@@ -776,10 +853,11 @@ function IndexPage() {
                     white-space: nowrap;
                 }
 
-                .hero-realtime-chip small {
-                    color: rgba(255,255,255,0.52);
+                .hero-source-row small {
+                    color: rgba(255,255,255,0.56);
                     font-size: 12px;
                     font-weight: 900;
+                    white-space: nowrap;
                 }
 
                 .hero-live-rack {
@@ -1387,11 +1465,16 @@ function IndexPage() {
                         margin-left: 0;
                     }
 
-                    .hero-realtime-grid {
-                        grid-template-columns: 1fr;
+                    .hero-source-row {
+                        grid-template-columns: 28px minmax(0, 1fr);
                     }
 
-                    .hero-realtime-chip strong {
+                    .hero-source-row small {
+                        grid-column: 2;
+                        justify-self: start;
+                    }
+
+                    .hero-source-row strong {
                         white-space: normal;
                     }
 
