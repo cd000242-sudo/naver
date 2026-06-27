@@ -62,7 +62,7 @@ type HomeLiveState = {
 };
 
 const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
-const HOME_LIVE_TIMEOUT_MS = 6500;
+const HOME_LIVE_TIMEOUT_MS = 15000;
 
 const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
     { id: 'naver', label: '네이버', accent: '#2ed36f', description: '실시간 검색과 블로그 수요' },
