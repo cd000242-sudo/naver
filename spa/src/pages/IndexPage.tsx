@@ -430,12 +430,12 @@ function IndexPage() {
             <ParticlesCanvas />
 
             {/* ═══ HERO ═══ */}
-            <section className="home-hero" style={{ minHeight: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: 'minmax(0, 850px) minmax(280px, 360px)', gap: 24, padding: '76px 24px 28px', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <section className="home-hero" style={{ minHeight: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: 'minmax(0, 850px) minmax(280px, 360px)', columnGap: 24, rowGap: 14, padding: '76px 24px 28px', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
+                <div className="hero-eyebrow">
+                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
+                    <span>PREMIUM AUTOMATION</span>
+                </div>
                 <div className="hero-content">
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: 'rgba(201, 168, 76, 0.1)', border: '1px solid rgba(201, 168, 76, 0.3)', borderRadius: 50, fontSize: 12, fontWeight: 800, letterSpacing: 2, color: 'var(--gold-primary)', marginBottom: 18 }}>
-                        <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
-                        <span>PREMIUM AUTOMATION</span>
-                    </div>
                     <div className="hero-realtime-board" aria-label="실시간 검색어">
                         <div className="hero-realtime-head">
                             <span>{liveStatusLabel}</span>
@@ -497,18 +497,6 @@ function IndexPage() {
                             </div>
                         </div>
                     </div>
-                    <div className="hero-action-strip" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
-                        {[
-                            { to: '/leword', label: '\ud669\uae08\ud0a4\uc6cc\ub4dc \ubcf4\ub7ec\uac00\uae30', desc: '\uc2e4\uc2dc\uac04 \ud669\uae08\ud0a4\uc6cc\ub4dc\ub97c \ubc14\ub85c \ud655\uc778', tone: 'gold' },
-                            { to: '/chatbots', label: '\ubb34\ub8cc \ucc57\ubd07 \uc0ac\uc6a9\ud558\ub7ec\uac00\uae30', desc: '\uc9c8\ubb38\ud558\uace0 \uc544\uc774\ub514\uc5b4 \ubc14\ub85c \ubc1b\uae30', tone: 'cyan' },
-                            { to: '/pricing', label: '\uc790\ub3d9\ud654 \uad6c\ub9e4\ud558\ub7ec\uac00\uae30', desc: '\ubc1c\ud589 \uc790\ub3d9\ud654\ub97c \ubc14\ub85c \uc2dc\uc791', tone: 'green' },
-                        ].map((action, index) => (
-                            <Link key={action.to} to={action.to} className={`hero-action-button ${action.tone}`} style={{ animationDelay: `${index * 0.14}s` }}>
-                                <strong>{action.label}</strong>
-                                <span>{action.desc}</span>
-                            </Link>
-                        ))}
-                    </div>
                 </div>
                 <div className="hero-proof-stage" aria-label="실제 사용자 성과 이미지">
                     <div className="proof-summary">
@@ -541,14 +529,44 @@ function IndexPage() {
                         ))}
                     </div>
                 </div>
+                <div className="hero-action-strip" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
+                    {[
+                        { to: '/leword', label: '\ud669\uae08\ud0a4\uc6cc\ub4dc \ubcf4\ub7ec\uac00\uae30', desc: '\uc2e4\uc2dc\uac04 \ud669\uae08\ud0a4\uc6cc\ub4dc\ub97c \ubc14\ub85c \ud655\uc778', tone: 'gold' },
+                        { to: '/chatbots', label: '\ubb34\ub8cc \ucc57\ubd07 \uc0ac\uc6a9\ud558\ub7ec\uac00\uae30', desc: '\uc9c8\ubb38\ud558\uace0 \uc544\uc774\ub514\uc5b4 \ubc14\ub85c \ubc1b\uae30', tone: 'cyan' },
+                        { to: '/pricing', label: '\uc790\ub3d9\ud654 \uad6c\ub9e4\ud558\ub7ec\uac00\uae30', desc: '\ubc1c\ud589 \uc790\ub3d9\ud654\ub97c \ubc14\ub85c \uc2dc\uc791', tone: 'green' },
+                    ].map((action, index) => (
+                        <Link key={action.to} to={action.to} className={`hero-action-button ${action.tone}`} style={{ animationDelay: `${index * 0.14}s` }}>
+                            <strong>{action.label}</strong>
+                            <span>{action.desc}</span>
+                        </Link>
+                    ))}
+                </div>
             </section>
 
             <style>{`
+                .hero-eyebrow {
+                    grid-column: 1 / -1;
+                    justify-self: center;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 6px 16px;
+                    background: rgba(201, 168, 76, 0.1);
+                    border: 1px solid rgba(201, 168, 76, 0.3);
+                    border-radius: 50px;
+                    color: var(--gold-primary);
+                    font-size: 12px;
+                    font-weight: 800;
+                    letter-spacing: 2px;
+                }
+
                 .hero-realtime-board {
                     width: 100%;
+                    min-height: 520px;
+                    height: 100%;
                     display: grid;
                     gap: 16px;
-                    margin: 0 auto 18px;
+                    margin: 0;
                     padding: 18px;
                     border-radius: 8px;
                     border: 1px solid rgba(255,255,255,0.14);
@@ -1031,13 +1049,17 @@ function IndexPage() {
 
                 .hero-content {
                     width: 100%;
+                    height: 100%;
                     justify-self: stretch;
+                    align-self: stretch;
+                    display: grid;
                     text-align: center;
                     position: relative;
                     z-index: 3;
                 }
 
                 .hero-action-strip {
+                    grid-column: 1 / -1;
                     width: 100%;
                     margin: 0 auto;
                     display: grid;
@@ -1507,7 +1529,8 @@ function IndexPage() {
                 .hero-proof-stage {
                     position: relative;
                     width: 100%;
-                    min-height: 480px;
+                    min-height: 520px;
+                    height: 100%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
