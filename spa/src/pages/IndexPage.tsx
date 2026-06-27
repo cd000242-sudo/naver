@@ -288,11 +288,6 @@ function IndexPage() {
         fetchSiteContent().then(setSiteContent);
     }, []);
 
-    const heroTitle = siteContent?.hero?.title || '매일 100건,\n사람이 쓴 것처럼.';
-    const heroLines = heroTitle.split('\n').filter(Boolean);
-    const heroLead = heroLines.slice(0, -1).join('\n') || '매일 100건,';
-    const heroAccent = heroLines[heroLines.length - 1] || '사람이 쓴 것처럼.';
-    const heroDesc = siteContent?.hero?.desc || '키워드만 넣으면 AI가 글 · 이미지 · 발행까지 자동으로.\n블로그 10개를 혼자 운영하는 분들의 비밀 무기.';
     const heroBenefit = siteContent?.hero?.benefit || '2,800+명이 사용 중';
     const heroNotice = siteContent?.hero?.notice || '';
     const configuredProofs = siteContent?.hero?.proofs?.filter((proof) => proof?.src) || [];
@@ -311,6 +306,17 @@ function IndexPage() {
     const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
     const livePrimaryGolden = liveState.golden[0] || HOME_LIVE_FALLBACK_GOLDEN[0];
     const liveSourceTotal = liveState.lanes.reduce((sum, lane) => sum + lane.items.length, 0);
+    const heroRealtimeTerms = liveState.lanes.map((lane) => {
+        const fallback = HOME_LIVE_FALLBACK_SIGNALS[lane.id][0];
+        const item = lane.items.find((entry) => entry.keyword || entry.title) || fallback;
+        return {
+            id: lane.id,
+            label: lane.label,
+            accent: lane.accent,
+            keyword: cleanLiveText(item.keyword || item.title, fallback.keyword || lane.label),
+            priority: item.priority || 0,
+        };
+    });
 
     useEffect(() => {
         if (heroProofs.length <= 1) return;
@@ -332,15 +338,27 @@ function IndexPage() {
                         <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
                         <span>PREMIUM AUTOMATION</span>
                     </div>
-                    <h1 style={{ fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 900, lineHeight: 1.2, letterSpacing: 0, marginBottom: 20 }}>
-                        {heroLead.split('\n').map((line) => <span key={line}>{line}<br /></span>)}
-                        <span style={{ background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-light))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{heroAccent}</span>
-                    </h1>
-                    <p style={{ fontSize: 18, color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: 32 }}>
-                        {heroDesc.split('\n').map((line, index) => (
-                            <span key={`${line}-${index}`}>{line}{index < heroDesc.split('\n').length - 1 ? <br /> : null}</span>
-                        ))}
-                    </p>
+                    <div className="hero-realtime-board" aria-label="실시간 검색어">
+                        <div className="hero-realtime-head">
+                            <span>{liveStatusLabel}</span>
+                            <strong>실시간 검색어</strong>
+                            <small>{liveUpdatedAt}</small>
+                        </div>
+                        <div className="hero-realtime-primary">
+                            <span style={{ background: heroRealtimeTerms[0]?.accent || '#44d7b6' }}>{heroRealtimeTerms[0]?.label || 'LIVE'}</span>
+                            <h1>{heroRealtimeTerms[0]?.keyword || '실시간 검색어'}</h1>
+                            <p>{liveState.status === 'ready' ? '지금 뜨는 검색 흐름을 바로 글감으로 전환하세요.' : '실시간 검색어를 빠르게 준비하고 있습니다.'}</p>
+                        </div>
+                        <div className="hero-realtime-grid">
+                            {heroRealtimeTerms.slice(1).map((term) => (
+                                <div key={term.id} className="hero-realtime-chip" style={{ borderColor: term.accent + '66', background: 'linear-gradient(135deg, ' + term.accent + '18, rgba(5,10,18,0.38))' }}>
+                                    <span style={{ color: term.accent }}>{term.label}</span>
+                                    <strong>{term.keyword}</strong>
+                                    <small>{term.priority || 'LIVE'}</small>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                     {heroNotice && (
                         <div style={{ marginBottom: 24, padding: '12px 16px', border: '1px solid rgba(201,168,76,0.28)', borderRadius: 12, color: 'var(--gold-primary)', background: 'rgba(201,168,76,0.08)', fontSize: 14, fontWeight: 700 }}>
                             {heroNotice}
@@ -362,19 +380,6 @@ function IndexPage() {
                                 ))}
                             </div>
                             <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{heroBenefit}</span>
-                        </div>
-                    </div>
-
-                    <div id="leaders-live-summary" className="hero-live-rack">
-                        <div className="hero-live-rack-main">
-                            <span>{liveStatusLabel}</span>
-                            <strong>{cleanLiveText(livePrimaryGolden.keyword, 'LEWORD 황금키워드')}</strong>
-                            <small>{liveState.boardCount > 0 ? liveState.boardCount + '/' + liveState.boardTarget + ' 검증' : '황금키워드 준비 중'}</small>
-                        </div>
-                        <div className="hero-live-rack-lanes">
-                            {liveState.lanes.map((lane) => (
-                                <span key={lane.id} style={{ borderColor: lane.accent + '66', color: lane.accent }}>{lane.label}</span>
-                            ))}
                         </div>
                     </div>
                 </div>
@@ -624,6 +629,124 @@ function IndexPage() {
             </section>
 
             <style>{`
+                .hero-realtime-board {
+                    width: min(100%, 720px);
+                    display: grid;
+                    gap: 16px;
+                    margin-bottom: 24px;
+                    padding: 18px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.14);
+                    background: rgba(8,15,24,0.62);
+                    backdrop-filter: blur(16px);
+                    box-shadow: 0 24px 70px rgba(0,0,0,0.22);
+                }
+
+                .hero-realtime-head {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    min-width: 0;
+                }
+
+                .hero-realtime-head span {
+                    flex: 0 0 auto;
+                    padding: 6px 10px;
+                    border-radius: 999px;
+                    background: rgba(68,215,182,0.14);
+                    color: #44d7b6;
+                    font-size: 11px;
+                    font-weight: 900;
+                    letter-spacing: 0.08em;
+                }
+
+                .hero-realtime-head strong {
+                    color: #fff;
+                    font-size: 14px;
+                    font-weight: 900;
+                }
+
+                .hero-realtime-head small {
+                    margin-left: auto;
+                    color: rgba(255,255,255,0.58);
+                    font-size: 12px;
+                    font-weight: 700;
+                    white-space: nowrap;
+                }
+
+                .hero-realtime-primary {
+                    display: grid;
+                    gap: 8px;
+                    min-width: 0;
+                }
+
+                .hero-realtime-primary span {
+                    width: fit-content;
+                    max-width: 100%;
+                    padding: 6px 11px;
+                    border-radius: 999px;
+                    color: #051018;
+                    font-size: 12px;
+                    font-weight: 900;
+                }
+
+                .hero-realtime-primary h1 {
+                    margin: 0;
+                    color: #fff;
+                    font-size: clamp(38px, 5.7vw, 68px);
+                    line-height: 1.08;
+                    letter-spacing: 0;
+                    overflow-wrap: anywhere;
+                    text-shadow: 0 12px 34px rgba(0,0,0,0.28);
+                }
+
+                .hero-realtime-primary p {
+                    margin: 0;
+                    color: rgba(255,255,255,0.74);
+                    font-size: 17px;
+                    line-height: 1.55;
+                }
+
+                .hero-realtime-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 10px;
+                }
+
+                .hero-realtime-chip {
+                    min-height: 72px;
+                    display: grid;
+                    grid-template-columns: minmax(0, 1fr) auto;
+                    gap: 5px 10px;
+                    align-content: center;
+                    padding: 12px;
+                    border: 1px solid;
+                    border-radius: 8px;
+                    background: rgba(255,255,255,0.04);
+                }
+
+                .hero-realtime-chip span {
+                    grid-column: 1 / -1;
+                    font-size: 12px;
+                    font-weight: 900;
+                }
+
+                .hero-realtime-chip strong {
+                    min-width: 0;
+                    color: #fff;
+                    font-size: 14px;
+                    line-height: 1.35;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                .hero-realtime-chip small {
+                    color: rgba(255,255,255,0.52);
+                    font-size: 12px;
+                    font-weight: 900;
+                }
+
                 .hero-live-rack {
                     margin-top: 22px;
                     display: grid;
@@ -1086,6 +1209,14 @@ function IndexPage() {
                 }
 
                 @media (max-width: 900px) {
+                    .hero-realtime-board {
+                        width: 100%;
+                    }
+
+                    .hero-realtime-primary h1 {
+                        font-size: clamp(34px, 8vw, 56px);
+                    }
+
                     .home-hero {
                         grid-template-columns: 1fr !important;
                         gap: 28px !important;
@@ -1106,6 +1237,27 @@ function IndexPage() {
                 }
 
                 @media (max-width: 640px) {
+                    .hero-realtime-board {
+                        padding: 14px;
+                    }
+
+                    .hero-realtime-head {
+                        align-items: flex-start;
+                        flex-direction: column;
+                    }
+
+                    .hero-realtime-head small {
+                        margin-left: 0;
+                    }
+
+                    .hero-realtime-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .hero-realtime-chip strong {
+                        white-space: normal;
+                    }
+
                     .hero-live-rack-main {
                         align-items: flex-start;
                         flex-direction: column;
