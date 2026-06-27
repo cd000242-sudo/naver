@@ -289,6 +289,20 @@ function IndexPage() {
         fetchSiteContent().then(setSiteContent);
     }, []);
 
+    useEffect(() => {
+        let alive = true;
+        loadHomeLiveState()
+            .then((state) => {
+                if (alive) setLiveState(state);
+            })
+            .catch(() => {
+                if (alive) setLiveState(buildFallbackHomeLiveState('error'));
+            });
+        return () => {
+            alive = false;
+        };
+    }, []);
+
     const heroBenefit = siteContent?.hero?.benefit || '2,800+명이 사용 중';
     const heroNotice = siteContent?.hero?.notice || '';
     const configuredProofs = siteContent?.hero?.proofs?.filter((proof) => proof?.src) || [];
