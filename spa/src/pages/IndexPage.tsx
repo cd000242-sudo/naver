@@ -154,6 +154,130 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
     };
 }
 
+
+
+const SOURCE_SEARCH_PATHS: Record<SourceLaneId, (keyword: string) => string> = {
+    naver: (keyword) => `https://search.naver.com/search.naver?query=${encodeURIComponent(keyword)}`,
+    daum: (keyword) => `https://search.daum.net/search?w=tot&q=${encodeURIComponent(keyword)}`,
+    nate: (keyword) => `https://search.nate.com/search/all.html?q=${encodeURIComponent(keyword)}`,
+    zum: (keyword) => `https://search.zum.com/search.zum?query=${encodeURIComponent(keyword)}`,
+    policy: (keyword) => `https://www.korea.kr/search?srchKeyword=${encodeURIComponent(keyword)}`,
+    issue: (keyword) => `https://search.naver.com/search.naver?where=news&query=${encodeURIComponent(keyword)}`,
+};
+
+const SOURCE_EXPANSION_SUFFIXES: Record<SourceLaneId, string[]> = {
+    naver: ['\ud6c4\uae30', '\ucd94\ucc9c', '\uac00\uaca9', '\ube44\uad50', '\ubc29\ubc95', '\uc7a5\ub2e8\uc810', '\uccb4\ud06c\ub9ac\uc2a4\ud2b8', '2026'],
+    daum: ['\uc815\ub9ac', '\uc6d0\uc778', '\uc77c\uc815', '\uc804\ub9dd', '\ubc18\uc751', '\uad00\ub828 \ub274\uc2a4', '\ud575\uc2ec', '\uc624\ub298'],
+    nate: ['\ucd9c\uc5f0\uc9c4', '\ud504\ub85c\ud544', '\uacf5\uc2dd\uc785\uc7a5', '\uc7ac\ubc29\uc1a1', '\uc778\uc2a4\ud0c0', '\uadfc\ud669', '\uc601\uc0c1', '\ubc18\uc751'],
+    zum: ['\uc704\uce58', '\ud6c4\uae30', '\uac00\uaca9', '\uc608\uc57d', '\uc77c\uc815', '\ud560\uc778', '\ucd94\ucc9c', '\uadfc\ucc98'],
+    policy: ['\uc2e0\uccad \ubc29\ubc95', '\ub300\uc0c1', '\uc870\uac74', '\uc11c\ub958', '\uc9c0\uae09\uc77c', '\ud648\ud398\uc774\uc9c0', '\uc9c0\uc5ed\ubcc4', '\ubb38\uc758\ucc98'],
+    issue: ['\uc815\ub9ac', '\uc774\uc720', '\uacf5\uc2dd\uc785\uc7a5', '\uc77c\uc815', '\ubc18\uc751', '\uad00\ub828\uc8fc', '\uc778\ubb3c', '\uc804\ub9dd'],
+};
+
+const SOURCE_MINDMAP_BRANCHES: Record<SourceLaneId, Array<{ label: string; suffixes: string[] }>> = {
+    naver: [
+        { label: '\uac80\uc0c9\uc758\ub3c4', suffixes: ['\ud6c4\uae30', '\ucd94\ucc9c'] },
+        { label: '\uc804\ud658\ud615', suffixes: ['\uac00\uaca9', '\ube44\uad50'] },
+        { label: '\ucf58\ud150\uce20\uac01', suffixes: ['\ubc29\ubc95', '\uccb4\ud06c\ub9ac\uc2a4\ud2b8'] },
+    ],
+    daum: [
+        { label: '\ub274\uc2a4\ub9e5\ub77d', suffixes: ['\uc815\ub9ac', '\uc6d0\uc778'] },
+        { label: '\uc2dc\uac04\ucd95', suffixes: ['\uc77c\uc815', '\uc624\ub298'] },
+        { label: '\ubc18\uc751', suffixes: ['\uc804\ub9dd', '\uad00\ub828 \ub274\uc2a4'] },
+    ],
+    nate: [
+        { label: '\uc778\ubb3c', suffixes: ['\ud504\ub85c\ud544', '\uadfc\ud669'] },
+        { label: '\ubc29\uc1a1', suffixes: ['\ucd9c\uc5f0\uc9c4', '\uc7ac\ubc29\uc1a1'] },
+        { label: '\ubc18\uc751', suffixes: ['\uacf5\uc2dd\uc785\uc7a5', '\uc778\uc2a4\ud0c0'] },
+    ],
+    zum: [
+        { label: '\ud0d0\uc0c9', suffixes: ['\uc704\uce58', '\uadfc\ucc98'] },
+        { label: '\uad6c\ub9e4', suffixes: ['\uac00\uaca9', '\ud560\uc778'] },
+        { label: '\uacbd\ud5d8', suffixes: ['\ud6c4\uae30', '\uc608\uc57d'] },
+    ],
+    policy: [
+        { label: '\ub300\uc0c1', suffixes: ['\ub300\uc0c1', '\uc870\uac74'] },
+        { label: '\uc2e0\uccad', suffixes: ['\uc2e0\uccad \ubc29\ubc95', '\uc11c\ub958'] },
+        { label: '\uc77c\uc815', suffixes: ['\uc9c0\uae09\uc77c', '\ubb38\uc758\ucc98'] },
+    ],
+    issue: [
+        { label: '\ud575\uc2ec', suffixes: ['\uc815\ub9ac', '\uc774\uc720'] },
+        { label: '\ud6c4\uc18d', suffixes: ['\uacf5\uc2dd\uc785\uc7a5', '\uc804\ub9dd'] },
+        { label: '\ud655\uc0b0', suffixes: ['\ubc18\uc751', '\uc778\ubb3c'] },
+    ],
+};
+
+function buildSourceSearchUrl(laneId: SourceLaneId, keyword: string): string {
+    const trimmed = keyword.trim();
+    return SOURCE_SEARCH_PATHS[laneId](trimmed || 'LEWORD');
+}
+
+function buildSourceExpansionKeywords(laneId: SourceLaneId, keyword: string): string[] {
+    const base = keyword.trim();
+    if (!base) return [];
+    return Array.from(new Set(SOURCE_EXPANSION_SUFFIXES[laneId].map((suffix) => `${base} ${suffix}`))).slice(0, 8);
+}
+
+function buildSourceMindMap(laneId: SourceLaneId, keyword: string): Array<{ label: string; items: string[] }> {
+    const base = keyword.trim();
+    if (!base) return [];
+    return SOURCE_MINDMAP_BRANCHES[laneId].map((branch) => ({
+        label: branch.label,
+        items: branch.suffixes.map((suffix) => `${base} ${suffix}`),
+    }));
+}
+
+function SourceSignalInsightPanel({ lane, item }: { lane: SourceLane; item: SourceSignal | null }) {
+    if (!item) {
+        return (
+            <aside className="source-insight-panel source-insight-panel-empty">
+                <strong>{'\ub9c8\uc778\ub4dc\ub9f5 \ub300\uae30'}</strong>
+                <p>{lane.label} {'\uc6d0\ubcf8\uc774 \ub4e4\uc5b4\uc624\uba74 \uac80\uc0c9 \uc758\ub3c4\uc640 \ud655\uc7a5\ud0a4\uc6cc\ub4dc\ub97c \ud568\uaed8 \ud45c\uc2dc\ud569\ub2c8\ub2e4.'}</p>
+            </aside>
+        );
+    }
+
+    const keyword = cleanLiveText(item.keyword || item.title, lane.label);
+    const description = cleanLiveText(item.description || item.title, lane.description);
+    const searchUrl = buildSourceSearchUrl(lane.id, keyword);
+    const expansions = buildSourceExpansionKeywords(lane.id, keyword);
+    const mindMap = buildSourceMindMap(lane.id, keyword);
+
+    return (
+        <aside className="source-insight-panel" style={{ borderColor: lane.accent + '66' }}>
+            <div className="source-insight-head">
+                <div>
+                    <span style={{ color: lane.accent }}>{'\ub9c8\uc778\ub4dc\ub9f5'}</span>
+                    <strong>{keyword}</strong>
+                </div>
+                <a href={searchUrl} target="_blank" rel="noreferrer">{'\uac80\uc0c9\uacb0\uacfc'}</a>
+            </div>
+            <p className="source-insight-desc">{description}</p>
+            <div className="source-mindmap" aria-label={`${keyword} \ub9c8\uc778\ub4dc\ub9f5`}>
+                <div className="source-mindmap-core" style={{ borderColor: lane.accent, color: lane.accent }}>{keyword}</div>
+                <div className="source-mindmap-branches">
+                    {mindMap.map((branch) => (
+                        <div key={branch.label} className="source-mindmap-branch">
+                            <span>{branch.label}</span>
+                            {branch.items.map((child) => (
+                                <a key={child} href={buildSourceSearchUrl(lane.id, child)} target="_blank" rel="noreferrer">{child}</a>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className="source-expansion-box">
+                <strong>{'\ud655\uc7a5\ud0a4\uc6cc\ub4dc'}</strong>
+                <div className="source-expansion-chips">
+                    {expansions.map((expanded) => (
+                        <a key={expanded} href={buildSourceSearchUrl(lane.id, expanded)} target="_blank" rel="noreferrer">{expanded}</a>
+                    ))}
+                </div>
+            </div>
+        </aside>
+    );
+}
+
 function formatLiveUpdatedAt(value?: string): string {
     if (!value) return '실시간 대기';
     const date = new Date(value);
@@ -251,6 +375,7 @@ function IndexPage() {
     const [activeProofIndex, setActiveProofIndex] = useState(0);
     const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
+    const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
 
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
@@ -314,6 +439,11 @@ function IndexPage() {
         || liveState.lanes[0]
         || { ...SOURCE_LANE_CONFIGS[0], items: [] };
     const activeSourceItems = activeSourceLane.items.slice(0, 10);
+    const activeSourceInsightItem = activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === activeSourceKeyword) || activeSourceItems[0] || null;
+    const selectSourceLane = (laneId: SourceLaneId) => {
+        setActiveSourceLaneId(laneId);
+        setActiveSourceKeyword('');
+    };
 
     useEffect(() => {
         if (heroProofs.length <= 1) return;
@@ -351,7 +481,7 @@ function IndexPage() {
                                         role="tab"
                                         aria-selected={isActive}
                                         className={`hero-source-tab${isActive ? ' active' : ''}`}
-                                        onClick={() => setActiveSourceLaneId(lane.id)}
+                                        onClick={() => selectSourceLane(lane.id)}
                                         style={{ borderColor: isActive ? lane.accent : 'rgba(255,255,255,0.13)', color: isActive ? '#061018' : 'rgba(255,255,255,0.74)', background: isActive ? lane.accent : 'rgba(255,255,255,0.045)' }}
                                     >
                                         <span style={{ background: isActive ? '#061018' : lane.accent }} />
@@ -370,6 +500,7 @@ function IndexPage() {
                                 </div>
                                 <small>{activeSourceItems.length}개 표시</small>
                             </div>
+                            <div className="hero-source-body">
                             <div className="hero-source-list">
                                 {activeSourceItems.length === 0 ? (
                                     <article className="hero-source-empty">
@@ -380,16 +511,18 @@ function IndexPage() {
                                     const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
                                     const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
                                     return (
-                                        <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className="hero-source-row">
+                                        <a key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`} href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer" onClick={() => setActiveSourceKeyword(keyword)}>
                                             <span>{index + 1}</span>
                                             <div>
                                                 <strong>{keyword}</strong>
                                                 <p>{description}</p>
                                             </div>
                                             <small>{item.priority || 'LIVE'}</small>
-                                        </article>
+                                        </a>
                                     );
                                 })}
+                            </div>
+                                <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} />
                             </div>
                         </div>
                     </div>
@@ -519,7 +652,7 @@ function IndexPage() {
                                         role="tab"
                                         aria-selected={isActive}
                                         className={`home-source-tab${isActive ? ' active' : ''}`}
-                                        onClick={() => setActiveSourceLaneId(lane.id)}
+                                        onClick={() => selectSourceLane(lane.id)}
                                         style={{ borderColor: isActive ? lane.accent : 'rgba(255,255,255,0.12)', color: isActive ? '#fff' : 'rgba(255,255,255,0.72)' }}
                                     >
                                         <span style={{ background: lane.accent }} />
@@ -538,6 +671,7 @@ function IndexPage() {
                                 </div>
                                 <small>{activeSourceItems.length}개 표시</small>
                             </div>
+                            <div className="home-source-body">
                             <div className="home-source-list">
                                 {activeSourceItems.length === 0 ? (
                                     <article className="home-source-empty">
@@ -548,16 +682,18 @@ function IndexPage() {
                                     const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
                                     const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
                                     return (
-                                        <article key={item.id || `${activeSourceLane.id}-${keyword}-${index}`} className="home-source-row">
+                                        <a key={item.id || `${activeSourceLane.id}-${keyword}-${index}`} className={`home-source-row${activeSourceInsightItem === item ? ' active' : ''}`} href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer" onClick={() => setActiveSourceKeyword(keyword)}>
                                             <div className="home-source-row-rank">{index + 1}</div>
                                             <div>
                                                 <strong>{keyword}</strong>
                                                 <p>{description}</p>
                                             </div>
                                             <small>{item.priority || 'LIVE'}</small>
-                                        </article>
+                                        </a>
                                     );
                                 })}
+                            </div>
+                                <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} />
                             </div>
                         </div>
                     </div>
@@ -925,6 +1061,188 @@ function IndexPage() {
                     font-weight: 900;
                     white-space: nowrap;
                 }
+
+                .hero-source-body,
+                .home-source-body {
+                    display: grid;
+                    grid-template-columns: minmax(0, 1fr) minmax(250px, 0.72fr);
+                    gap: 12px;
+                    align-items: start;
+                }
+
+                .hero-source-row,
+                .home-source-row {
+                    color: inherit;
+                    text-decoration: none;
+                    cursor: pointer;
+                    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+                }
+
+                .hero-source-row:hover,
+                .hero-source-row.active,
+                .home-source-row:hover,
+                .home-source-row.active {
+                    transform: translateY(-1px);
+                    border-color: rgba(255,255,255,0.24);
+                    background: rgba(255,255,255,0.085);
+                }
+
+                .source-insight-panel {
+                    min-width: 0;
+                    display: grid;
+                    gap: 12px;
+                    padding: 13px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.14);
+                    background: rgba(5,10,18,0.35);
+                }
+
+                .source-insight-panel-empty {
+                    min-height: 180px;
+                    align-content: center;
+                    border-style: dashed;
+                }
+
+                .source-insight-panel-empty strong {
+                    color: #fff;
+                    font-size: 15px;
+                    font-weight: 900;
+                }
+
+                .source-insight-panel-empty p {
+                    margin: 0;
+                    color: rgba(255,255,255,0.58);
+                    font-size: 12px;
+                    line-height: 1.45;
+                }
+
+                .source-insight-head {
+                    display: flex;
+                    align-items: start;
+                    justify-content: space-between;
+                    gap: 10px;
+                }
+
+                .source-insight-head span {
+                    display: block;
+                    font-size: 11px;
+                    font-weight: 900;
+                }
+
+                .source-insight-head strong {
+                    display: block;
+                    max-width: 190px;
+                    margin-top: 3px;
+                    color: #fff;
+                    font-size: 15px;
+                    font-weight: 900;
+                    line-height: 1.25;
+                }
+
+                .source-insight-head a {
+                    flex: 0 0 auto;
+                    padding: 6px 9px;
+                    border-radius: 999px;
+                    border: 1px solid rgba(255,255,255,0.16);
+                    color: rgba(255,255,255,0.84);
+                    text-decoration: none;
+                    font-size: 11px;
+                    font-weight: 900;
+                }
+
+                .source-insight-desc {
+                    margin: 0;
+                    color: rgba(255,255,255,0.62);
+                    font-size: 11px;
+                    line-height: 1.45;
+                }
+
+                .source-mindmap {
+                    display: grid;
+                    gap: 10px;
+                }
+
+                .source-mindmap-core {
+                    min-height: 42px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 9px 11px;
+                    border-radius: 999px;
+                    border: 1px solid rgba(255,255,255,0.18);
+                    background: rgba(255,255,255,0.055);
+                    font-size: 12px;
+                    font-weight: 900;
+                    text-align: center;
+                    line-height: 1.25;
+                }
+
+                .source-mindmap-branches {
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 7px;
+                }
+
+                .source-mindmap-branch {
+                    min-width: 0;
+                    display: grid;
+                    gap: 5px;
+                    padding: 8px;
+                    border-radius: 8px;
+                    background: rgba(255,255,255,0.045);
+                }
+
+                .source-mindmap-branch span {
+                    color: rgba(255,255,255,0.88);
+                    font-size: 11px;
+                    font-weight: 900;
+                }
+
+                .source-mindmap-branch a,
+                .source-expansion-chips a {
+                    min-width: 0;
+                    color: rgba(255,255,255,0.62);
+                    text-decoration: none;
+                    font-size: 10px;
+                    font-weight: 800;
+                    line-height: 1.25;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                .source-mindmap-branch a:hover,
+                .source-expansion-chips a:hover,
+                .source-insight-head a:hover {
+                    color: #fff;
+                    border-color: rgba(255,255,255,0.28);
+                }
+
+                .source-expansion-box {
+                    display: grid;
+                    gap: 8px;
+                }
+
+                .source-expansion-box > strong {
+                    color: #fff;
+                    font-size: 12px;
+                    font-weight: 900;
+                }
+
+                .source-expansion-chips {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 6px;
+                }
+
+                .source-expansion-chips a {
+                    max-width: 100%;
+                    padding: 6px 8px;
+                    border-radius: 999px;
+                    border: 1px solid rgba(255,255,255,0.13);
+                    background: rgba(255,255,255,0.045);
+                }
+
 
                 .hero-live-rack {
                     margin-top: 22px;
