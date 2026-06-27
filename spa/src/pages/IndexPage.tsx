@@ -434,7 +434,6 @@ function IndexPage() {
     const liveUpdatedAt = formatLiveUpdatedAt(liveState.updatedAt);
     const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
     const livePrimaryGolden = liveState.golden[0] || HOME_LIVE_FALLBACK_GOLDEN[0];
-    const liveSourceTotal = liveState.lanes.reduce((sum, lane) => sum + lane.items.length, 0);
     const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
         || liveState.lanes[0]
         || { ...SOURCE_LANE_CONFIGS[0], items: [] };
@@ -594,128 +593,21 @@ function IndexPage() {
                 <TrustCounter target={15000} label="일일 자동 발행" />
             </section>
 
-            <section id="leaders-live-home" className="home-live-section">
-                <div className="home-live-header">
-                    <div>
-                        <span className="section-tag">LEWORD LIVE</span>
-                        <h2>황금키워드와 실시간 소스를 탭별로 확인하세요</h2>
-                        <p>네이버·다음·네이트·줌·정책·이슈를 하나씩 골라 보면서 바로 글감 흐름을 확인합니다.</p>
-                    </div>
-                    <div className="home-live-status">
-                        <strong>{liveStatusLabel}</strong>
-                        <span>{liveUpdatedAt}</span>
-                    </div>
-                </div>
-
-                <div className="home-live-metrics">
-                    <div><strong>{liveState.boardCount > 0 ? liveState.boardCount : liveState.golden.length}</strong><span>검증 키워드</span></div>
-                    <div><strong>{liveSourceTotal}</strong><span>수집 소스</span></div>
-                    <div><strong>{liveState.lockedCount > 0 ? liveState.lockedCount : 'PRO'}</strong><span>잠금 성과</span></div>
-                </div>
-
-                <div className="home-live-grid">
-                    <div className="home-live-group">
-                        <div className="home-live-group-title">
-                            <span>황금키워드</span>
-                            <Link to="/leword">LEWORD 열기</Link>
-                        </div>
-                        <div className="home-golden-list">
-                            {liveState.golden.slice(0, 3).map((item, index) => (
-                                <article key={item.id || String(item.keyword || 'golden') + '-' + index} className="home-golden-card">
-                                    <div className="home-golden-rank">#{item.rank || index + 1}</div>
-                                    <div>
-                                        <strong>{cleanLiveText(item.keyword, HOME_LIVE_FALLBACK_GOLDEN[index]?.keyword || '황금키워드')}</strong>
-                                        <p>{cleanLiveText(item.publicReason, HOME_LIVE_FALLBACK_GOLDEN[index]?.publicReason || '검색 수요와 경쟁도를 검증 중입니다.')}</p>
-                                        <div className="home-golden-meta">
-                                            <span>{cleanLiveText(item.grade, 'S')}</span>
-                                            <span>{cleanLiveText(item.publicSearchVolumeLabel, '수요 확인')}</span>
-                                            <span>{cleanLiveText(item.publicDocumentCountLabel, '경쟁 잠금')}</span>
-                                        </div>
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="home-live-group home-live-group-wide">
-                        <div className="home-live-group-title">
-                            <span>포털·정책·이슈</span>
-                            <small>{liveState.fallbackUsed ? '보정 데이터 포함' : '실시간 연결'}</small>
-                        </div>
-                        <div className="home-source-tabs" role="tablist" aria-label="실시간 소스 선택">
-                            {liveState.lanes.map((lane) => {
-                                const isActive = lane.id === activeSourceLane.id;
-                                return (
-                                    <button
-                                        key={lane.id}
-                                        type="button"
-                                        role="tab"
-                                        aria-selected={isActive}
-                                        className={`home-source-tab${isActive ? ' active' : ''}`}
-                                        onClick={() => selectSourceLane(lane.id)}
-                                        style={{ borderColor: isActive ? lane.accent : 'rgba(255,255,255,0.12)', color: isActive ? '#fff' : 'rgba(255,255,255,0.72)' }}
-                                    >
-                                        <span style={{ background: lane.accent }} />
-                                        <strong>{lane.label}</strong>
-                                        <small>{lane.items.length}</small>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                        <div className="home-source-panel" style={{ borderColor: activeSourceLane.accent + '66', background: 'linear-gradient(135deg, ' + activeSourceLane.accent + '18, rgba(255,255,255,0.035))' }}>
-                            <div className="home-source-panel-head">
-                                <span style={{ background: activeSourceLane.accent }} />
-                                <div>
-                                    <strong>{activeSourceLane.label}</strong>
-                                    <p>{activeSourceLane.description}</p>
-                                </div>
-                                <small>{activeSourceItems.length}개 표시</small>
-                            </div>
-                            <div className="home-source-body">
-                            <div className="home-source-list">
-                                {activeSourceItems.length === 0 ? (
-                                    <article className="home-source-empty">
-                                        <strong>원본 수집 중</strong>
-                                        <p>{activeSourceLane.label} 원본에서 확인된 실시간 항목만 표시합니다.</p>
-                                    </article>
-                                ) : activeSourceItems.map((item, index) => {
-                                    const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
-                                    const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
-                                    return (
-                                        <a key={item.id || `${activeSourceLane.id}-${keyword}-${index}`} className={`home-source-row${activeSourceInsightItem === item ? ' active' : ''}`} href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer" onClick={() => setActiveSourceKeyword(keyword)}>
-                                            <div className="home-source-row-rank">{index + 1}</div>
-                                            <div>
-                                                <strong>{keyword}</strong>
-                                                <p>{description}</p>
-                                            </div>
-                                            <small>{item.priority || 'LIVE'}</small>
-                                        </a>
-                                    );
-                                })}
-                            </div>
-                                <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="home-live-group">
-                        <div className="home-live-group-title">
-                            <span>성과</span>
-                            <Link to="/reviews">더 보기</Link>
-                        </div>
-                        <article className="home-proof-card">
-                            <img src={activeProof.src} alt={activeProof.alt || activeProof.title || 'Leaders Pro 성과 이미지'} loading="lazy" decoding="async" />
-                            <div>
-                                <span>{activeProof.metric || '성과 인증'}</span>
-                                <strong>{activeProof.title || '실제 운영 성과'}</strong>
-                                <p>{activeProof.desc || '사용자가 직접 확인한 블로그 운영 성과입니다.'}</p>
-                            </div>
-                        </article>
-                    </div>
+            <section className="home-action-section" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
+                <div className="home-action-inner">
+                    {[
+                        { to: '/leword', label: '\ud669\uae08\ud0a4\uc6cc\ub4dc \ubcf4\ub7ec\uac00\uae30', desc: '\uc2e4\uc2dc\uac04 \ud669\uae08\ud0a4\uc6cc\ub4dc\ub97c \ubc14\ub85c \ud655\uc778', tone: 'gold' },
+                        { to: '/chatbots', label: '\ubb34\ub8cc \ucc57\ubd07 \uc0ac\uc6a9\ud558\ub7ec\uac00\uae30', desc: '\uac00\ubccd\uac8c \uc9c8\ubb38\ud558\uace0 \uc544\uc774\ub514\uc5b4 \ubc1b\uae30', tone: 'cyan' },
+                        { to: '/pricing', label: '\uc790\ub3d9\ud654 \uad6c\ub9e4\ud558\ub7ec\uac00\uae30', desc: '\ubc1c\ud589 \uc790\ub3d9\ud654\ub97c \ubc14\ub85c \uc2dc\uc791', tone: 'green' },
+                    ].map((action) => (
+                        <Link key={action.to} to={action.to} className={`home-action-button ${action.tone}`}>
+                            <strong>{action.label}</strong>
+                            <span>{action.desc}</span>
+                        </Link>
+                    ))}
                 </div>
             </section>
 
-            {/* ═══ EXPLORE GRID ═══ */}
             <section className="section">
                 <div className="section-inner">
                     <div className="section-header">
@@ -1303,6 +1195,71 @@ function IndexPage() {
                     background: rgba(255,255,255,0.04);
                 }
 
+
+                .home-action-section {
+                    max-width: 1180px;
+                    margin: 0 auto;
+                    padding: 48px 24px 34px;
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .home-action-inner {
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 14px;
+                }
+
+                .home-action-button {
+                    min-height: 92px;
+                    display: grid;
+                    align-content: center;
+                    gap: 8px;
+                    padding: 18px 20px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.14);
+                    background: rgba(7,13,22,0.54);
+                    color: #fff;
+                    text-decoration: none;
+                    box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+                    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+                }
+
+                .home-action-button:hover {
+                    transform: translateY(-2px);
+                    background: rgba(7,13,22,0.68);
+                    border-color: rgba(255,255,255,0.28);
+                }
+
+                .home-action-button strong {
+                    display: block;
+                    font-size: 18px;
+                    font-weight: 900;
+                    line-height: 1.25;
+                }
+
+                .home-action-button span {
+                    color: rgba(255,255,255,0.66);
+                    font-size: 13px;
+                    font-weight: 700;
+                    line-height: 1.4;
+                }
+
+                .home-action-button.gold {
+                    border-color: rgba(225,177,44,0.38);
+                    background: linear-gradient(135deg, rgba(225,177,44,0.22), rgba(7,13,22,0.56));
+                }
+
+                .home-action-button.cyan {
+                    border-color: rgba(64,210,255,0.34);
+                    background: linear-gradient(135deg, rgba(64,210,255,0.18), rgba(7,13,22,0.56));
+                }
+
+                .home-action-button.green {
+                    border-color: rgba(68,215,182,0.34);
+                    background: linear-gradient(135deg, rgba(68,215,182,0.18), rgba(7,13,22,0.56));
+                }
+
                 .home-live-section {
                     max-width: 1280px;
                     margin: 0 auto;
@@ -1886,7 +1843,20 @@ function IndexPage() {
                         white-space: normal;
                     }
 
-                    .home-live-section {
+
+                    .home-action-section {
+                        padding: 34px 18px 24px;
+                    }
+
+                    .home-action-inner {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .home-action-button {
+                        min-height: 78px;
+                    }
+
+                .home-live-section {
                         padding: 58px 14px 68px;
                     }
 
