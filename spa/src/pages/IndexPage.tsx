@@ -548,6 +548,18 @@ function IndexPage() {
                             <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{heroBenefit}</span>
                         </div>
                     </div>
+                    <div className="hero-action-strip" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
+                        {[
+                            { to: '/leword', label: '\ud669\uae08\ud0a4\uc6cc\ub4dc \ubcf4\ub7ec\uac00\uae30', desc: '\uc2e4\uc2dc\uac04 \ud669\uae08\ud0a4\uc6cc\ub4dc\ub97c \ubc14\ub85c \ud655\uc778', tone: 'gold' },
+                            { to: '/chatbots', label: '\ubb34\ub8cc \ucc57\ubd07 \uc0ac\uc6a9\ud558\ub7ec\uac00\uae30', desc: '\uc9c8\ubb38\ud558\uace0 \uc544\uc774\ub514\uc5b4 \ubc14\ub85c \ubc1b\uae30', tone: 'cyan' },
+                            { to: '/pricing', label: '\uc790\ub3d9\ud654 \uad6c\ub9e4\ud558\ub7ec\uac00\uae30', desc: '\ubc1c\ud589 \uc790\ub3d9\ud654\ub97c \ubc14\ub85c \uc2dc\uc791', tone: 'green' },
+                        ].map((action, index) => (
+                            <Link key={action.to} to={action.to} className={`hero-action-button ${action.tone}`} style={{ animationDelay: `${index * 0.14}s` }}>
+                                <strong>{action.label}</strong>
+                                <span>{action.desc}</span>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
                 <div className="hero-proof-stage" aria-label="실제 사용자 성과 이미지">
                     <div className="proof-summary">
@@ -591,21 +603,6 @@ function IndexPage() {
                 <TrustCounter target={99} label="가동률 %" />
                 <div style={{ width: 1, height: 40, background: 'var(--border-glass)' }} />
                 <TrustCounter target={15000} label="일일 자동 발행" />
-            </section>
-
-            <section className="home-action-section" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
-                <div className="home-action-inner">
-                    {[
-                        { to: '/leword', label: '\ud669\uae08\ud0a4\uc6cc\ub4dc \ubcf4\ub7ec\uac00\uae30', desc: '\uc2e4\uc2dc\uac04 \ud669\uae08\ud0a4\uc6cc\ub4dc\ub97c \ubc14\ub85c \ud655\uc778', tone: 'gold' },
-                        { to: '/chatbots', label: '\ubb34\ub8cc \ucc57\ubd07 \uc0ac\uc6a9\ud558\ub7ec\uac00\uae30', desc: '\uac00\ubccd\uac8c \uc9c8\ubb38\ud558\uace0 \uc544\uc774\ub514\uc5b4 \ubc1b\uae30', tone: 'cyan' },
-                        { to: '/pricing', label: '\uc790\ub3d9\ud654 \uad6c\ub9e4\ud558\ub7ec\uac00\uae30', desc: '\ubc1c\ud589 \uc790\ub3d9\ud654\ub97c \ubc14\ub85c \uc2dc\uc791', tone: 'green' },
-                    ].map((action) => (
-                        <Link key={action.to} to={action.to} className={`home-action-button ${action.tone}`}>
-                            <strong>{action.label}</strong>
-                            <span>{action.desc}</span>
-                        </Link>
-                    ))}
-                </div>
             </section>
 
             <section className="section">
@@ -1195,70 +1192,93 @@ function IndexPage() {
                     background: rgba(255,255,255,0.04);
                 }
 
+                .hero-action-strip {
+                    margin-top: 18px;
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 12px;
+                }
 
-                .home-action-section {
-                    max-width: 1180px;
-                    margin: 0 auto;
-                    padding: 48px 24px 34px;
+                .hero-action-button {
+                    position: relative;
+                    min-height: 88px;
+                    display: grid;
+                    align-content: center;
+                    gap: 7px;
+                    padding: 16px 18px;
+                    border-radius: 8px;
+                    border: 2px solid rgba(255,255,255,0.26);
+                    background: linear-gradient(135deg, rgba(4,9,16,0.94), rgba(13,24,38,0.90));
+                    color: #fff;
+                    text-decoration: none;
+                    overflow: hidden;
+                    box-shadow: 0 20px 46px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.10);
+                    animation: heroActionPulse 2.7s ease-in-out infinite;
+                    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+                }
+
+                .hero-action-button::before {
+                    content: '';
+                    position: absolute;
+                    inset: -2px;
+                    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.18) 45%, transparent 62%);
+                    transform: translateX(-120%);
+                    animation: heroActionShine 3.6s ease-in-out infinite;
+                    pointer-events: none;
+                }
+
+                .hero-action-button:hover {
+                    transform: translateY(-3px) scale(1.015);
+                    border-color: rgba(255,255,255,0.52);
+                    box-shadow: 0 24px 58px rgba(0,0,0,0.54), 0 0 28px rgba(225,177,44,0.16);
+                }
+
+                .hero-action-button strong,
+                .hero-action-button span {
                     position: relative;
                     z-index: 1;
                 }
 
-                .home-action-inner {
-                    display: grid;
-                    grid-template-columns: repeat(3, minmax(0, 1fr));
-                    gap: 14px;
-                }
-
-                .home-action-button {
-                    min-height: 92px;
-                    display: grid;
-                    align-content: center;
-                    gap: 8px;
-                    padding: 18px 20px;
-                    border-radius: 8px;
-                    border: 1px solid rgba(255,255,255,0.14);
-                    background: rgba(7,13,22,0.54);
+                .hero-action-button strong {
                     color: #fff;
-                    text-decoration: none;
-                    box-shadow: 0 18px 40px rgba(0,0,0,0.18);
-                    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+                    font-size: 16px;
+                    font-weight: 950;
+                    line-height: 1.28;
                 }
 
-                .home-action-button:hover {
-                    transform: translateY(-2px);
-                    background: rgba(7,13,22,0.68);
-                    border-color: rgba(255,255,255,0.28);
+                .hero-action-button span {
+                    color: rgba(255,255,255,0.70);
+                    font-size: 12px;
+                    font-weight: 800;
+                    line-height: 1.35;
                 }
 
-                .home-action-button strong {
-                    display: block;
-                    font-size: 18px;
-                    font-weight: 900;
-                    line-height: 1.25;
+                .hero-action-button.gold {
+                    border-color: rgba(225,177,44,0.80);
+                    box-shadow: 0 20px 46px rgba(0,0,0,0.42), 0 0 30px rgba(225,177,44,0.22);
                 }
 
-                .home-action-button span {
-                    color: rgba(255,255,255,0.66);
-                    font-size: 13px;
-                    font-weight: 700;
-                    line-height: 1.4;
+                .hero-action-button.cyan {
+                    border-color: rgba(64,210,255,0.72);
+                    box-shadow: 0 20px 46px rgba(0,0,0,0.42), 0 0 30px rgba(64,210,255,0.18);
                 }
 
-                .home-action-button.gold {
-                    border-color: rgba(225,177,44,0.38);
-                    background: linear-gradient(135deg, rgba(225,177,44,0.22), rgba(7,13,22,0.56));
+                .hero-action-button.green {
+                    border-color: rgba(68,215,182,0.72);
+                    box-shadow: 0 20px 46px rgba(0,0,0,0.42), 0 0 30px rgba(68,215,182,0.18);
                 }
 
-                .home-action-button.cyan {
-                    border-color: rgba(64,210,255,0.34);
-                    background: linear-gradient(135deg, rgba(64,210,255,0.18), rgba(7,13,22,0.56));
+                @keyframes heroActionPulse {
+                    0%, 100% { transform: translateY(0); filter: brightness(1); }
+                    50% { transform: translateY(-2px); filter: brightness(1.16); }
                 }
 
-                .home-action-button.green {
-                    border-color: rgba(68,215,182,0.34);
-                    background: linear-gradient(135deg, rgba(68,215,182,0.18), rgba(7,13,22,0.56));
+                @keyframes heroActionShine {
+                    0%, 38% { transform: translateX(-120%); }
+                    62%, 100% { transform: translateX(120%); }
                 }
+
+
 
                 .home-live-section {
                     max-width: 1280px;
@@ -1811,6 +1831,15 @@ function IndexPage() {
                         padding: 12px;
                     }
 
+                    .hero-action-strip {
+                        grid-template-columns: 1fr;
+                        margin-top: 16px;
+                    }
+
+                    .hero-action-button {
+                        min-height: 74px;
+                    }
+
                     .hero-source-panel-head {
                         grid-template-columns: 12px minmax(0, 1fr);
                     }
@@ -1843,18 +1872,6 @@ function IndexPage() {
                         white-space: normal;
                     }
 
-
-                    .home-action-section {
-                        padding: 34px 18px 24px;
-                    }
-
-                    .home-action-inner {
-                        grid-template-columns: 1fr;
-                    }
-
-                    .home-action-button {
-                        min-height: 78px;
-                    }
 
                 .home-live-section {
                         padding: 58px 14px 68px;
@@ -1943,6 +1960,13 @@ function IndexPage() {
 
                     .proof-dots {
                         bottom: 38px;
+                    }
+                }
+
+                @media (prefers-reduced-motion: reduce) {
+                    .hero-action-button,
+                    .hero-action-button::before {
+                        animation: none;
                     }
                 }
             `}</style>
