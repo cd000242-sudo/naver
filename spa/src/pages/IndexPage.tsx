@@ -128,9 +128,7 @@ function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { i
     const lanes = Array.isArray(payload?.lanes) ? payload.lanes : [];
     return SOURCE_LANE_CONFIGS.map((config) => {
         const incoming = lanes.find((lane) => lane.id === config.id);
-        const items = Array.isArray(incoming?.items) && incoming.items.length > 0
-            ? incoming.items
-            : HOME_LIVE_FALLBACK_SIGNALS[config.id];
+        const items = Array.isArray(incoming?.items) ? incoming.items : [];
         return {
             ...config,
             items: items.slice(0, 10),
@@ -323,9 +321,9 @@ function IndexPage() {
     const liveSourceTotal = liveState.lanes.reduce((sum, lane) => sum + lane.items.length, 0);
     const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
         || liveState.lanes[0]
-        || { ...SOURCE_LANE_CONFIGS[0], items: HOME_LIVE_FALLBACK_SIGNALS.naver };
+        || { ...SOURCE_LANE_CONFIGS[0], items: [] };
     const activeSourceFallback = HOME_LIVE_FALLBACK_SIGNALS[activeSourceLane.id][0];
-    const activeSourceItems = (activeSourceLane.items.length ? activeSourceLane.items : HOME_LIVE_FALLBACK_SIGNALS[activeSourceLane.id]).slice(0, 10);
+    const activeSourceItems = activeSourceLane.items.slice(0, 10);
 
     useEffect(() => {
         if (heroProofs.length <= 1) return;
@@ -383,7 +381,12 @@ function IndexPage() {
                                 <small>{activeSourceItems.length}개 표시</small>
                             </div>
                             <div className="hero-source-list">
-                                {activeSourceItems.map((item, index) => {
+                                {activeSourceItems.length === 0 ? (
+                                    <article className="hero-source-empty">
+                                        <strong>원본 수집 중</strong>
+                                        <p>{activeSourceLane.label} 원본에서 확인된 실시간 항목만 표시합니다.</p>
+                                    </article>
+                                ) : activeSourceItems.map((item, index) => {
                                     const keyword = cleanLiveText(item.keyword || item.title, activeSourceFallback.keyword || activeSourceLane.label);
                                     const description = cleanLiveText(item.description || item.title, activeSourceFallback.description || activeSourceLane.description);
                                     return (
@@ -546,7 +549,12 @@ function IndexPage() {
                                 <small>{activeSourceItems.length}개 표시</small>
                             </div>
                             <div className="home-source-list">
-                                {activeSourceItems.map((item, index) => {
+                                {activeSourceItems.length === 0 ? (
+                                    <article className="home-source-empty">
+                                        <strong>원본 수집 중</strong>
+                                        <p>{activeSourceLane.label} 원본에서 확인된 실시간 항목만 표시합니다.</p>
+                                    </article>
+                                ) : activeSourceItems.map((item, index) => {
                                     const keyword = cleanLiveText(item.keyword || item.title, activeSourceFallback.keyword || activeSourceLane.label);
                                     const description = cleanLiveText(item.description || item.title, activeSourceFallback.description || activeSourceLane.description);
                                     return (
@@ -849,6 +857,30 @@ function IndexPage() {
                 .hero-source-list {
                     display: grid;
                     gap: 7px;
+                }
+
+                .hero-source-empty {
+                    min-height: 96px;
+                    display: grid;
+                    align-content: center;
+                    gap: 6px;
+                    padding: 16px;
+                    border-radius: 8px;
+                    border: 1px dashed rgba(255,255,255,0.16);
+                    background: rgba(255,255,255,0.035);
+                }
+
+                .hero-source-empty strong {
+                    color: #fff;
+                    font-size: 15px;
+                    font-weight: 900;
+                }
+
+                .hero-source-empty p {
+                    margin: 0;
+                    color: rgba(255,255,255,0.58);
+                    font-size: 12px;
+                    line-height: 1.45;
                 }
 
                 .hero-source-row {
