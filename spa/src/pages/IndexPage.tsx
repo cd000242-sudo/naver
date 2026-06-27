@@ -45,6 +45,20 @@ type SourceLane = SourceLaneConfig & {
     items: SourceSignal[];
 };
 
+type KeywordStrategyIdea = {
+    label: string;
+    tag: string;
+    reason: string;
+    title: string;
+    score: number;
+};
+
+type KeywordStrategyGroup = {
+    label: string;
+    desc: string;
+    items: KeywordStrategyIdea[];
+};
+
 type HomeLiveStatus = 'loading' | 'ready' | 'error';
 
 type HomeLiveState = {
@@ -60,7 +74,8 @@ type HomeLiveState = {
 };
 
 const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
-const HOME_LIVE_TIMEOUT_MS = 15000;
+const HOME_LIVE_TIMEOUT_MS = 8000;
+const HOME_LIVE_CACHE_KEY = 'leaderspro.home.sourceSignals.v1';
 
 const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
     { id: 'naver', label: '네이버', accent: '#2ed36f', description: '실시간 검색과 블로그 수요' },
@@ -77,6 +92,15 @@ const HOME_LIVE_FALLBACK_GOLDEN: LiveGoldenPreview[] = [
     { id: 'fallback-golden-3', rank: 3, keyword: '오늘 방송 출연진', grade: 'S', publicSearchVolumeLabel: '실시간 반응', publicDocumentCountLabel: '경쟁도 확인 중', publicReason: '방송 직후 빠르게 검색량이 붙는 이슈형 키워드입니다.' },
 ];
 
+const HOME_SOURCE_FALLBACK_KEYWORDS: Record<SourceLaneId, string[]> = {
+    naver: ['소상공인 지원금 신청', '장마 대비 준비물', '여름 전기요금 절약', '청년 월세 지원 조건', '오늘 방송 출연진', '냉방병 증상', '근로장려금 지급일', '서울 무료 전시', '주말 갈만한곳', '아이폰 배터리 교체'],
+    daum: ['경제 뉴스 정리', '폭염주의보 지역', '대출 금리 비교', '교통 통제 구간', '야구 경기 일정', '공모주 청약 일정', '환율 전망', '아파트 실거래가', '태풍 경로', '건강검진 대상자'],
+    nate: ['드라마 출연진', '예능 방송 시간', '배우 근황', '공식입장 정리', '스포츠 인터뷰', '연예 뉴스 반응', '축구 대표팀 명단', '영화 결말 해석', '콘서트 예매 일정', '프로필 나이'],
+    zum: ['근처 맛집 추천', '제주 숙소 가격', '항공권 특가', '가전 할인', '병원 예약 방법', '여행 준비물', '주차장 위치', '공연 티켓 예매', '보험료 비교', '이사 비용'],
+    policy: ['근로장려금 신청 방법', '청년 월세 지원 대상', '소상공인 정책자금', '문화누리카드 사용처', '출산지원금 지역별', '기초연금 수급자격', '에너지바우처 신청', '국민내일배움카드', '주거급여 조건', '세금 환급 조회'],
+    issue: ['오늘 주요 이슈', '공식입장 정리', '경기 결과 하이라이트', '신규 정책 발표', '날씨 특보 지역', '방송 반응', '기업 실적 발표', '사건 타임라인', '여론 반응', '후속 일정'],
+};
+
 function cleanLiveText(value: unknown, fallback: string): string {
     const text = String(value || '').trim();
     if (!text) return fallback;
@@ -85,15 +109,53 @@ function cleanLiveText(value: unknown, fallback: string): string {
     return looksBroken ? fallback : text;
 }
 
+function buildFallbackSourceItems(lane: SourceLaneConfig): SourceSignal[] {
+    return HOME_SOURCE_FALLBACK_KEYWORDS[lane.id].map((keyword, index) => ({
+        id: `fallback-${lane.id}-${index + 1}`,
+        keyword,
+        title: keyword,
+        description: `${lane.label} 연결 대기 중 표시되는 저경쟁 후보입니다.`,
+        priority: 100 - index,
+        source: lane.id,
+    }));
+}
+
+function readCachedSourceLanes(): { lanes: SourceLane[]; updatedAt?: string } | null {
+    try {
+        const raw = window.localStorage.getItem(HOME_LIVE_CACHE_KEY);
+        if (!raw) return null;
+        const cached = JSON.parse(raw) as { lanes?: Array<Partial<SourceLane> & { id?: string }>; updatedAt?: string };
+        const lanes = normalizeSourceLanes(cached);
+        if (!lanes.some((lane) => lane.items.length > 0)) return null;
+        return { lanes, updatedAt: cached.updatedAt };
+    } catch {
+        return null;
+    }
+}
+
+function writeCachedSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { id?: string }>; updatedAt?: string }): void {
+    try {
+        window.localStorage.setItem(HOME_LIVE_CACHE_KEY, JSON.stringify({
+            updatedAt: payload.updatedAt,
+            lanes: normalizeSourceLanes(payload),
+        }));
+    } catch {
+        // 캐시는 실패해도 홈 로딩을 막지 않습니다.
+    }
+}
+
 function buildFallbackHomeLiveState(status: HomeLiveStatus = 'loading'): HomeLiveState {
+    const cached = readCachedSourceLanes();
+    const lanes = cached?.lanes || SOURCE_LANE_CONFIGS.map((lane) => ({
+        ...lane,
+        items: buildFallbackSourceItems(lane),
+    }));
     return {
         status,
         golden: HOME_LIVE_FALLBACK_GOLDEN,
-        lanes: SOURCE_LANE_CONFIGS.map((lane) => ({
-            ...lane,
-            items: [],
-        })),
-        boardCount: 0,
+        lanes,
+        updatedAt: cached?.updatedAt,
+        boardCount: lanes.reduce((total, lane) => total + lane.items.length, 0),
         boardTarget: 120,
         lockedCount: 0,
         running: false,
@@ -130,13 +192,15 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
     const sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
     const lanes = normalizeSourceLanes(sourcePayload);
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
+    if (!hasLiveData) return fallback;
+    writeCachedSourceLanes(sourcePayload);
 
     return {
-        status: hasLiveData ? 'ready' : 'error',
+        status: 'ready',
         golden: fallback.golden,
         lanes,
         updatedAt: sourcePayload?.updatedAt,
-        boardCount: 0,
+        boardCount: lanes.reduce((total, lane) => total + lane.items.length, 0),
         boardTarget: 120,
         lockedCount: 0,
         running: false,
@@ -217,12 +281,100 @@ function buildSourceMindMap(laneId: SourceLaneId, keyword: string): Array<{ labe
     }));
 }
 
-function SourceSignalInsightPanel({ lane, item }: { lane: SourceLane; item: SourceSignal | null }) {
+function uniqueList(values: string[]): string[] {
+    return Array.from(new Set(values.map((value) => value.trim()).filter(Boolean)));
+}
+
+function keywordTokens(keyword: string): string[] {
+    return uniqueList(keyword
+        .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+        .split(/\s+/)
+        .filter((token) => token.length >= 2)
+        .slice(0, 5));
+}
+
+function makeKeywordIdea(label: string, tag: string, reason: string, title: string): KeywordStrategyIdea {
+    const tokenCount = keywordTokens(label).length;
+    const intentScore = /(방법|조건|대상|서류|후기|정리|이유|차이|비교|일정|출연진|공식입장|질문|해결|체크|신청|지급일)/.test(label) ? 22 : 10;
+    const lengthScore = label.length >= 18 ? 26 : label.length >= 13 ? 20 : 12;
+    const specificityScore = tokenCount >= 4 ? 24 : tokenCount >= 3 ? 18 : 10;
+    const score = Math.min(99, Math.max(55, 38 + intentScore + lengthScore + specificityScore));
+    return { label, tag, reason, title, score };
+}
+
+function buildIntentPhrases(laneId: SourceLaneId, keyword: string): string[] {
+    const tokens = keywordTokens(keyword);
+    const first = tokens[0] || keyword;
+    const second = tokens[1] || '';
+    const pair = second ? `${first} ${second}` : first;
+    const common = [
+        `${keyword} 정리`,
+        `${keyword} 이유`,
+        `${keyword} 질문`,
+        `${keyword} 핵심`,
+    ];
+    const byLane: Record<SourceLaneId, string[]> = {
+        naver: [`${keyword} 후기`, `${keyword} 방법`, `${pair} 비교`, `${pair} 문제 해결`, `${keyword} 체크리스트`],
+        daum: [`${keyword} 원인`, `${keyword} 일정`, `${keyword} 전망`, `${pair} 오늘`, `${keyword} 반응`],
+        nate: [`${keyword} 프로필`, `${keyword} 출연진`, `${keyword} 공식입장`, `${pair} 근황`, `${keyword} 재방송`],
+        zum: [`${keyword} 위치`, `${keyword} 가격`, `${keyword} 예약`, `${pair} 추천`, `${keyword} 할인`],
+        policy: [`${keyword} 신청 방법`, `${keyword} 대상`, `${keyword} 조건`, `${keyword} 서류`, `${keyword} 지급일`],
+        issue: [`${keyword} 공식입장`, `${keyword} 이유`, `${keyword} 반응`, `${pair} 인물`, `${keyword} 전망`],
+    };
+    return uniqueList([...byLane[laneId], ...common]).slice(0, 10);
+}
+
+function buildQuestionPhrases(laneId: SourceLaneId, keyword: string): string[] {
+    const subject = keyword.trim();
+    const byLane: Record<SourceLaneId, string[]> = {
+        naver: [`${subject} 왜 검색될까`, `${subject} 어떻게 확인하나`, `${subject} 장단점은 무엇인가`, `${subject} 검색자가 궁금한 점`],
+        daum: [`${subject} 원인은 무엇인가`, `${subject} 지금 상황은 어떤가`, `${subject} 앞으로 어떻게 되나`, `${subject} 관련 뉴스 핵심`],
+        nate: [`${subject} 누구인가`, `${subject} 방송에서 무슨 일이 있었나`, `${subject} 공식입장은 나왔나`, `${subject} 반응은 어떤가`],
+        zum: [`${subject} 어디서 확인하나`, `${subject} 가격이나 위치는 어떤가`, `${subject} 예약 전 확인할 점`, `${subject} 추천 기준은 무엇인가`],
+        policy: [`${subject} 누가 받을 수 있나`, `${subject} 신청은 어디서 하나`, `${subject} 필요한 서류는 무엇인가`, `${subject} 언제 지급되나`],
+        issue: [`${subject} 왜 화제인가`, `${subject} 핵심 쟁점은 무엇인가`, `${subject} 공식입장은 무엇인가`, `${subject} 후속 이슈는 무엇인가`],
+    };
+    return byLane[laneId];
+}
+
+function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyGroup[] {
+    const keyword = cleanLiveText(item.keyword || item.title, lane.label);
+    const peers = peerItems
+        .filter((peer) => peer.id !== item.id)
+        .map((peer) => cleanLiveText(peer.keyword || peer.title, lane.label))
+        .filter((peer) => peer !== keyword)
+        .slice(0, 4);
+    const intentIdeas = buildIntentPhrases(lane.id, keyword).map((label) => makeKeywordIdea(
+        label,
+        '저경쟁 의도',
+        '빅키워드를 구체적인 질문/조건으로 좁혀 발행량이 적은 제목 후보로 씁니다.',
+        `${label}: 검색자가 바로 해결하고 싶은 핵심 정리`,
+    ));
+    const questionIdeas = buildQuestionPhrases(lane.id, keyword).map((label) => makeKeywordIdea(
+        label,
+        '질문 해결',
+        '검색자의 질문을 제목에 넣고 본문 첫 문단에서 답을 먼저 제시하는 글감입니다.',
+        `${label}? 한 번에 이해하는 답변형 콘텐츠`,
+    ));
+    const clusterIdeas = peers.map((peer) => makeKeywordIdea(
+        `${peer} 정리`,
+        '순환 주제',
+        '같은 실시간 흐름의 주변 글로 묶어 내부 링크를 만들면 트래픽이 순환됩니다.',
+        `${peer} 정리 후 ${keyword} 글로 연결하기`,
+    ));
+    return [
+        { label: '저경쟁 제목 후보', desc: '발행량이 적을 가능성이 높은 롱테일을 먼저 씁니다.', items: intentIdeas.slice(0, 6) },
+        { label: '질문 해결 콘텐츠', desc: '검색자의 질문에 답하는 구조라 상위 노출용 본문으로 쓰기 좋습니다.', items: questionIdeas.slice(0, 4) },
+        { label: '트래픽 순환 클러스터', desc: '관련 글을 쌓아 큰 경쟁 키워드로 올라가는 내부 링크 묶음입니다.', items: clusterIdeas },
+    ];
+}
+
+function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[] }) {
     if (!item) {
         return (
             <aside className="source-insight-panel source-insight-panel-empty">
-                <strong>{'\ub9c8\uc778\ub4dc\ub9f5 \ub300\uae30'}</strong>
-                <p>{lane.label} {'\uc6d0\ubcf8\uc774 \ub4e4\uc5b4\uc624\uba74 \uac80\uc0c9 \uc758\ub3c4\uc640 \ud655\uc7a5\ud0a4\uc6cc\ub4dc\ub97c \ud568\uaed8 \ud45c\uc2dc\ud569\ub2c8\ub2e4.'}</p>
+                <strong>키워드 전략 대기</strong>
+                <p>{lane.label} 원본이 들어오면 저경쟁 제목 후보와 질문 해결형 글감을 함께 표시합니다.</p>
             </aside>
         );
     }
@@ -230,39 +382,70 @@ function SourceSignalInsightPanel({ lane, item }: { lane: SourceLane; item: Sour
     const keyword = cleanLiveText(item.keyword || item.title, lane.label);
     const description = cleanLiveText(item.description || item.title, lane.description);
     const searchUrl = buildSourceSearchUrl(lane.id, keyword);
-    const expansions = buildSourceExpansionKeywords(lane.id, keyword);
-    const mindMap = buildSourceMindMap(lane.id, keyword);
+    const strategyGroups = buildSourceStrategy(lane, item, items);
+    const primaryIdeas = (strategyGroups[0]?.items || []).slice(0, 4);
+    const questionIdeas = (strategyGroups[1]?.items || []).slice(0, 3);
+    const clusterIdeas = (strategyGroups[2]?.items || []).slice(0, 3);
 
     return (
-        <aside className="source-insight-panel" style={{ borderColor: lane.accent + '66' }}>
+        <aside className="source-insight-panel source-insight-panel-rich" style={{ borderColor: lane.accent + '66' }}>
             <div className="source-insight-head">
                 <div>
-                    <span style={{ color: lane.accent }}>{'\ub9c8\uc778\ub4dc\ub9f5'}</span>
+                    <span style={{ color: lane.accent }}>선택 키워드 마인드맵</span>
                     <strong>{keyword}</strong>
                 </div>
-                <a href={searchUrl} target="_blank" rel="noreferrer">{'\uac80\uc0c9\uacb0\uacfc'}</a>
+                <a href={searchUrl} target="_blank" rel="noreferrer">검색결과</a>
             </div>
             <p className="source-insight-desc">{description}</p>
-            <div className="source-mindmap" aria-label={`${keyword} \ub9c8\uc778\ub4dc\ub9f5`}>
-                <div className="source-mindmap-core" style={{ borderColor: lane.accent, color: lane.accent }}>{keyword}</div>
-                <div className="source-mindmap-branches">
-                    {mindMap.map((branch) => (
-                        <div key={branch.label} className="source-mindmap-branch">
-                            <span>{branch.label}</span>
-                            {branch.items.map((child) => (
-                                <a key={child} href={buildSourceSearchUrl(lane.id, child)} target="_blank" rel="noreferrer">{child}</a>
-                            ))}
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <div className="source-expansion-box">
-                <strong>{'\ud655\uc7a5\ud0a4\uc6cc\ub4dc'}</strong>
-                <div className="source-expansion-chips">
-                    {expansions.map((expanded) => (
-                        <a key={expanded} href={buildSourceSearchUrl(lane.id, expanded)} target="_blank" rel="noreferrer">{expanded}</a>
-                    ))}
-                </div>
+            <div className="source-strategy-grid" aria-label={`${keyword} 키워드 전략`}>
+                <section className="source-strategy-card source-strategy-card-main">
+                    <div className="source-strategy-card-head">
+                        <strong>{strategyGroups[0].label}</strong>
+                        <small>{strategyGroups[0].desc}</small>
+                    </div>
+                    <div className="source-idea-list">
+                        {primaryIdeas.map((idea) => (
+                            <a key={idea.label} className="source-idea-card" href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
+                                <span>{idea.tag}</span>
+                                <strong>{idea.label}</strong>
+                                <small>저경쟁 가능성 {idea.score}</small>
+                                <p>{idea.title}</p>
+                            </a>
+                        ))}
+                    </div>
+                </section>
+                <section className="source-strategy-card">
+                    <div className="source-strategy-card-head">
+                        <strong>{strategyGroups[1].label}</strong>
+                        <small>{strategyGroups[1].desc}</small>
+                    </div>
+                    <div className="source-question-list">
+                        {questionIdeas.map((idea) => (
+                            <a key={idea.label} href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
+                                <span>{idea.tag}</span>
+                                <strong>{idea.label}</strong>
+                                <small>{idea.reason}</small>
+                            </a>
+                        ))}
+                    </div>
+                </section>
+                <section className="source-strategy-card">
+                    <div className="source-strategy-card-head">
+                        <strong>{strategyGroups[2].label}</strong>
+                        <small>{strategyGroups[2].desc}</small>
+                    </div>
+                    <div className="source-cluster-core" style={{ borderColor: lane.accent, color: lane.accent }}>{keyword}</div>
+                    <div className="source-cluster-list">
+                        {clusterIdeas.length === 0 ? (
+                            <p>주변 실시간 키워드가 쌓이면 내부 링크용 클러스터를 자동으로 묶습니다.</p>
+                        ) : clusterIdeas.map((idea) => (
+                            <a key={idea.label} href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
+                                <span>{idea.tag}</span>
+                                <strong>{idea.label}</strong>
+                            </a>
+                        ))}
+                    </div>
+                </section>
             </div>
         </aside>
     );
@@ -430,7 +613,7 @@ function IndexPage() {
             <ParticlesCanvas />
 
             {/* ═══ HERO ═══ */}
-            <section className="home-hero" style={{ minHeight: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: 'minmax(0, 850px) minmax(280px, 360px)', columnGap: 24, rowGap: 14, padding: '76px 24px 28px', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
+            <section className="home-hero" style={{ minHeight: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: 'minmax(0, 980px) minmax(280px, 360px)', columnGap: 24, rowGap: 14, padding: '76px 24px 28px', maxWidth: 1412, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
                 <div className="hero-eyebrow">
                     <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
                     <span>PREMIUM AUTOMATION</span>
@@ -482,18 +665,21 @@ function IndexPage() {
                                         const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
                                         const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
                                         return (
-                                            <a key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`} href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer" onClick={() => setActiveSourceKeyword(keyword)}>
-                                                <span>{index + 1}</span>
-                                                <div>
-                                                    <strong>{keyword}</strong>
-                                                    <p>{description}</p>
-                                                </div>
-                                                <small>{item.priority || 'LIVE'}</small>
-                                            </a>
+                                            <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`}>
+                                                <button type="button" className="hero-source-row-main" onClick={() => setActiveSourceKeyword(keyword)}>
+                                                    <span>{index + 1}</span>
+                                                    <div>
+                                                        <strong>{keyword}</strong>
+                                                        <p>{description}</p>
+                                                    </div>
+                                                    <small>{item.priority || 'LIVE'}</small>
+                                                </button>
+                                                <a className="hero-source-row-search" href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer">검색</a>
+                                            </article>
                                         );
                                     })}
                                 </div>
-                                <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} />
+                                <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} items={activeSourceItems} />
                             </div>
                         </div>
                     </div>
@@ -562,9 +748,10 @@ function IndexPage() {
 
                 .hero-realtime-board {
                     width: 100%;
-                    min-height: 520px;
-                    height: 100%;
+                    min-height: 0;
+                    height: clamp(500px, calc(100vh - 280px), 540px);
                     display: grid;
+                    grid-template-rows: auto auto minmax(0, 1fr);
                     gap: 16px;
                     margin: 0;
                     padding: 18px;
@@ -665,12 +852,15 @@ function IndexPage() {
 
                 .hero-source-panel {
                     min-height: 0;
+                    height: 100%;
                     display: grid;
+                    grid-template-rows: auto minmax(0, 1fr);
                     align-content: start;
                     gap: 12px;
                     padding: 14px;
                     border: 1px solid rgba(255,255,255,0.12);
                     border-radius: 8px;
+                    overflow: hidden;
                 }
 
                 .hero-source-panel-head {
@@ -712,7 +902,7 @@ function IndexPage() {
                 .hero-source-list {
                     display: grid;
                     gap: 7px;
-                    max-height: 270px;
+                    min-height: 0;
                     overflow-y: auto;
                     padding-right: 4px;
                 }
@@ -742,18 +932,36 @@ function IndexPage() {
                 }
 
                 .hero-source-row {
-                    min-height: 41px;
+                    min-height: 48px;
+                    display: grid;
+                    grid-template-columns: minmax(0, 1fr) 46px;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 0;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.08);
+                    background: rgba(255,255,255,0.045);
+                    overflow: hidden;
+                }
+
+                .hero-source-row-main {
+                    min-width: 0;
+                    width: 100%;
+                    height: 100%;
                     display: grid;
                     grid-template-columns: 30px minmax(0, 1fr) auto;
                     align-items: center;
                     gap: 9px;
-                    padding: 7px 10px;
-                    border-radius: 8px;
-                    border: 1px solid rgba(255,255,255,0.08);
-                    background: rgba(255,255,255,0.045);
+                    padding: 7px 8px 7px 10px;
+                    border: 0;
+                    background: transparent;
+                    color: inherit;
+                    text-align: left;
+                    font: inherit;
+                    cursor: pointer;
                 }
 
-                .hero-source-row > span {
+                .hero-source-row-main > span {
                     width: 26px;
                     height: 26px;
                     border-radius: 999px;
@@ -787,19 +995,36 @@ function IndexPage() {
                     white-space: nowrap;
                 }
 
-                .hero-source-row > small {
+                .hero-source-row-main > small {
                     color: rgba(255,255,255,0.56);
                     font-size: 12px;
                     font-weight: 900;
                     white-space: nowrap;
                 }
 
+                .hero-source-row-search {
+                    width: 40px;
+                    min-height: 32px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-right: 6px;
+                    border-radius: 999px;
+                    border: 1px solid rgba(255,255,255,0.14);
+                    color: rgba(255,255,255,0.74);
+                    text-decoration: none;
+                    font-size: 11px;
+                    font-weight: 900;
+                }
+
                 .hero-source-body,
                 .home-source-body {
                     display: grid;
-                    grid-template-columns: minmax(0, 1fr) minmax(230px, 0.62fr);
+                    grid-template-columns: minmax(330px, 0.82fr) minmax(0, 1.18fr);
                     gap: 12px;
                     align-items: start;
+                    min-height: 0;
+                    height: 100%;
                 }
 
                 .hero-source-row,
@@ -821,11 +1046,12 @@ function IndexPage() {
 
                 .source-insight-panel {
                     min-width: 0;
-                    max-height: 270px;
+                    height: 100%;
+                    min-height: 0;
                     overflow-y: auto;
                     display: grid;
-                    gap: 12px;
-                    padding: 13px;
+                    gap: 10px;
+                    padding: 12px;
                     border-radius: 8px;
                     border: 1px solid rgba(255,255,255,0.14);
                     background: rgba(5,10,18,0.35);
@@ -865,7 +1091,7 @@ function IndexPage() {
 
                 .source-insight-head strong {
                     display: block;
-                    max-width: 190px;
+                    max-width: 310px;
                     margin-top: 3px;
                     color: #fff;
                     font-size: 15px;
@@ -895,6 +1121,170 @@ function IndexPage() {
                     -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
+                }
+
+                .source-insight-panel-rich {
+                    align-content: start;
+                }
+
+                .source-strategy-grid {
+                    min-height: 0;
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 8px;
+                    align-content: start;
+                }
+
+                .source-strategy-card {
+                    min-width: 0;
+                    display: grid;
+                    gap: 8px;
+                    padding: 10px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.12);
+                    background: rgba(255,255,255,0.04);
+                }
+
+                .source-strategy-card-main {
+                    grid-column: 1 / -1;
+                }
+
+                .source-strategy-card-head {
+                    display: grid;
+                    gap: 3px;
+                }
+
+                .source-strategy-card-head strong {
+                    color: #fff;
+                    font-size: 12px;
+                    font-weight: 950;
+                }
+
+                .source-strategy-card-head small {
+                    color: rgba(255,255,255,0.56);
+                    font-size: 10px;
+                    line-height: 1.35;
+                }
+
+                .source-idea-list {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 6px;
+                }
+
+                .source-idea-card,
+                .source-question-list a,
+                .source-cluster-list a {
+                    min-width: 0;
+                    display: grid;
+                    gap: 4px;
+                    padding: 8px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.10);
+                    background: rgba(7,13,20,0.35);
+                    color: inherit;
+                    text-decoration: none;
+                }
+
+                .source-idea-card span,
+                .source-question-list span,
+                .source-cluster-list span {
+                    color: #44d7b6;
+                    font-size: 10px;
+                    font-weight: 950;
+                }
+
+                .source-idea-card strong,
+                .source-question-list strong,
+                .source-cluster-list strong {
+                    color: #fff;
+                    font-size: 11px;
+                    font-weight: 900;
+                    line-height: 1.25;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+
+                .source-idea-card small,
+                .source-question-list small {
+                    color: rgba(255,255,255,0.58);
+                    font-size: 10px;
+                    line-height: 1.25;
+                }
+
+                .source-idea-card p {
+                    margin: 0;
+                    color: rgba(255,255,255,0.62);
+                    font-size: 10px;
+                    line-height: 1.3;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+
+                .source-question-list,
+                .source-cluster-list {
+                    display: grid;
+                    gap: 6px;
+                }
+
+                .source-cluster-core {
+                    min-height: 34px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 7px 9px;
+                    border-radius: 999px;
+                    border: 1px solid rgba(255,255,255,0.18);
+                    background: rgba(255,255,255,0.055);
+                    font-size: 11px;
+                    font-weight: 950;
+                    line-height: 1.2;
+                    text-align: center;
+                }
+
+                .source-cluster-list p {
+                    margin: 0;
+                    color: rgba(255,255,255,0.58);
+                    font-size: 10px;
+                    line-height: 1.45;
+                }
+
+                .source-publish-guide {
+                    display: grid;
+                    gap: 7px;
+                    padding: 10px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(68,215,182,0.22);
+                    background: rgba(68,215,182,0.08);
+                }
+
+                .source-publish-guide strong {
+                    color: #fff;
+                    font-size: 12px;
+                    font-weight: 950;
+                }
+
+                .source-publish-guide div {
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 6px;
+                }
+
+                .source-publish-guide span {
+                    min-width: 0;
+                    padding: 7px 8px;
+                    border-radius: 999px;
+                    background: rgba(255,255,255,0.08);
+                    color: rgba(255,255,255,0.72);
+                    font-size: 10px;
+                    font-weight: 850;
+                    text-align: center;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
 
                 .source-mindmap {
@@ -1049,7 +1439,7 @@ function IndexPage() {
 
                 .hero-content {
                     width: 100%;
-                    height: 100%;
+                    height: clamp(500px, calc(100vh - 280px), 540px);
                     justify-self: stretch;
                     align-self: stretch;
                     display: grid;
@@ -1529,8 +1919,8 @@ function IndexPage() {
                 .hero-proof-stage {
                     position: relative;
                     width: 100%;
-                    min-height: 520px;
-                    height: 100%;
+                    min-height: 0;
+                    height: clamp(500px, calc(100vh - 280px), 540px);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1739,13 +2129,24 @@ function IndexPage() {
                     }
 
                     .hero-source-row {
+                        grid-template-columns: minmax(0, 1fr) 42px;
+                        align-items: start;
+                    }
+
+                    .hero-source-row-main {
                         grid-template-columns: 28px minmax(0, 1fr);
                         align-items: start;
                     }
 
-                    .hero-source-row > small {
+                    .hero-source-row-main > small {
                         grid-column: 2;
                         justify-self: start;
+                    }
+
+                    .hero-source-row-search {
+                        width: 36px;
+                        min-height: 30px;
+                        margin: 8px 5px 0 0;
                     }
 
                     .hero-source-row strong,
