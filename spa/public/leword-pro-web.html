@@ -200,7 +200,6 @@
     .panel-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
     .panel-title h2 { margin: 0; font-size: 21px; letter-spacing: 0; }
     .muted { color: var(--muted); font-size: 13px; line-height: 1.5; }
-    .source-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
     .lane { padding: 14px; min-height: 320px; background: linear-gradient(180deg, rgba(19,27,39,.98), rgba(12,17,24,.98)); }
     .lane:hover, .feature-card:hover, .ops-card:hover, .catalog-item:hover, .golden-row:hover {
       border-color: rgba(91,183,255,.36);
@@ -864,7 +863,7 @@
       .feature-grid, .ops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 820px) {
-      .source-grid, .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist, .admin-ai-provider-grid, .admin-content-tools, .api-issue-grid, .mindmap-view, .mindmap-branches { grid-template-columns: 1fr; }
+      .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist, .admin-ai-provider-grid, .admin-content-tools, .api-issue-grid, .mindmap-view, .mindmap-branches { grid-template-columns: 1fr; }
       .quick-feature-dock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quality-strip { grid-template-columns: 1fr 1fr; }
       .result-toolbar { grid-template-columns: 1fr; }
@@ -1478,7 +1477,6 @@
       tossConfirm: apiUrl('/v1/payments/toss/confirm'),
       publicLiveGolden: apiUrl('/v1/public/live-golden'),
       publicSources: apiUrl('/v1/public/source-signals'),
-      proSources: apiUrl('/v1/mobile/source-signals'),
       apiStatus: apiUrl('/v1/mobile/api-status'),
       pcFeatures: apiUrl('/v1/mobile/pc-features'),
       rankTracking: apiUrl('/v1/mobile/rank-tracking'),
@@ -4059,125 +4057,6 @@
       } catch (err) {
         qs('goldenState').textContent = '오류';
         qs('goldenNotice').textContent = '황금키워드 보드를 불러오지 못했습니다: ' + err.message;
-      }
-    }
-    let sourceBoardCache = null;
-    const sourceLaneDefinitions = [
-      { id: 'naver', label: '네이버' },
-      { id: 'daum', label: '다음' },
-      { id: 'nate', label: '네이트' },
-      { id: 'zum', label: '줌' },
-      { id: 'policy', label: '정책' },
-      { id: 'issue', label: '이슈' },
-    ];
-    function sourceKeyword(item) {
-      return String((item && (item.keyword || item.title || item.description)) || '').trim();
-    }
-    function sourceLaneAction(id) {
-      if (id === 'daum') return 'daum';
-      if (id === 'nate') return 'nate';
-      if (id === 'zum') return 'zum';
-      return 'naver';
-    }
-    function sourceLaneForSignal(item, index) {
-      const text = normalizeText(String((item && item.source) || '') + ' ' + String((item && item.title) || '') + ' ' + String((item && item.description) || ''));
-      if (text.indexOf('naver') >= 0 || text.indexOf('네이버') >= 0) return 'naver';
-      if (text.indexOf('daum') >= 0 || text.indexOf('다음') >= 0) return 'daum';
-      if (text.indexOf('nate') >= 0 || text.indexOf('네이트') >= 0) return 'nate';
-      if (text.indexOf('zum') >= 0 || text.indexOf('줌') >= 0) return 'zum';
-      return index % 4 === 0 ? 'naver' : index % 4 === 1 ? 'daum' : index % 4 === 2 ? 'nate' : 'zum';
-    }
-    function mergeLaneItems(target, incoming) {
-      const seen = new Set((target.items || []).map(function(item) { return normalizeText(sourceKeyword(item) + ' ' + ((item && item.source) || '')); }));
-      (incoming || []).forEach(function(item) {
-        const key = normalizeText(sourceKeyword(item) + ' ' + ((item && item.source) || ''));
-        if (!key || seen.has(key)) return;
-        seen.add(key);
-        target.items.push(item);
-      });
-    }
-    function normalizeSourceLanes(payload) {
-      const byId = {};
-      sourceLaneDefinitions.forEach(function(def) {
-        byId[def.id] = { id: def.id, label: def.label, items: [] };
-      });
-      (payload && payload.lanes || []).forEach(function(lane) {
-        const id = lane && lane.id;
-        if (!byId[id]) return;
-        mergeLaneItems(byId[id], lane.items || []);
-      });
-      splitFallbackLanes(payload && payload.snapshot).forEach(function(lane) {
-        if (!byId[lane.id]) return;
-        mergeLaneItems(byId[lane.id], lane.items || []);
-      });
-      return sourceLaneDefinitions.map(function(def) { return byId[def.id]; });
-    }
-    function splitFallbackLanes(snapshot) {
-      const realtime = (snapshot && snapshot.realtime) || [];
-      const policy = (snapshot && snapshot.policy) || [];
-      const issues = (snapshot && snapshot.issues) || [];
-      const lanes = [
-        { id: 'naver', label: '네이버', items: [] },
-        { id: 'daum', label: '다음', items: [] },
-        { id: 'nate', label: '네이트', items: [] },
-        { id: 'zum', label: '줌', items: [] },
-        { id: 'policy', label: '정책', items: policy },
-        { id: 'issue', label: '이슈', items: issues }
-      ];
-      realtime.forEach(function(item, index) {
-        const id = sourceLaneForSignal(item, index);
-        const lane = lanes.find(function(row) { return row.id === id; });
-        if (lane) lane.items.push(item);
-      });
-      return lanes;
-    }
-    function renderSourceLane(lane) {
-      const target = qs('lane-' + lane.id);
-      if (!target) return;
-      const allItems = lane.items || [];
-      const items = allItems.slice(0, 12);
-      const countEl = target.querySelector('.lane-count');
-      if (countEl) countEl.textContent = String(allItems.length);
-      const body = items.length ? items.map(function(item) {
-        const keyword = sourceKeyword(item);
-        const safe = escapeAttr(keyword);
-        const action = sourceLaneAction(lane.id);
-        return '<div class="signal" role="button" tabindex="0" data-board-action="' + action + '" data-keyword="' + safe + '">'
-          + '<div class="signal-source-row"><strong>' + escapeHtml(keyword || '-') + '</strong><span>' + escapeHtml(item.source || lane.label) + '</span></div>'
-          + '<span>' + escapeHtml(item.description || item.title || item.source || '-') + '</span>'
-          + '<div class="signal-actions">'
-          + '<button class="tiny-btn" type="button" data-board-action="' + action + '" data-keyword="' + safe + '">검색</button>'
-          + '<button class="tiny-btn blue" type="button" data-board-action="trend" data-keyword="' + safe + '">그래프</button>'
-          + '<button class="tiny-btn green" type="button" data-board-action="mindmap" data-keyword="' + safe + '">마인드맵</button>'
-          + '<button class="tiny-btn pro" type="button" data-board-action="analyze" data-keyword="' + safe + '">Pro 분석</button>'
-          + '</div></div>';
-      }).join('') : '<div class="muted">서버 수집 결과가 없습니다. 소스 상태를 확인하세요.</div>';
-      target.innerHTML = '<h3>' + escapeHtml(lane.label) + ' <span class="lane-count">' + allItems.length + '</span></h3><div class="signal-list">' + body + '</div>';
-    }
-    function renderSourceError(message) {
-      sourceLaneDefinitions.forEach(function(lane) {
-        const target = qs('lane-' + lane.id);
-        if (!target) return;
-        target.innerHTML = '<h3>' + escapeHtml(lane.label) + ' <span class="lane-count">0</span></h3>'
-          + '<div class="signal-list"><div class="muted">' + escapeHtml(message || '서버 응답이 지연되고 있습니다. 잠시 후 다시 새로고침하세요.') + '</div></div>';
-      });
-    }
-    async function loadSources() {
-      try {
-        const url = session ? endpoints.proSources + '?limit=60' : endpoints.publicSources + '?limit=60';
-        const payload = await apiGet(url, !!session, 6500);
-        sourceBoardCache = payload;
-        const lanes = normalizeSourceLanes(payload);
-        lanes.forEach(renderSourceLane);
-        log('실시간 소스 보드 갱신: ' + lanes.map(function(l) { return l.label + ' ' + ((l.items || []).length); }).join(', '));
-      } catch (err) {
-        if (sourceBoardCache) {
-          normalizeSourceLanes(sourceBoardCache).forEach(renderSourceLane);
-          log('소스 보드 갱신 지연, 직전 결과 유지: ' + err.message);
-          return;
-        }
-        renderSourceError(err.message);
-        log('소스 보드 갱신 실패: ' + err.message);
       }
     }
     function homeOutcomeCard(title, value, meta, items) {
