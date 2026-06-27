@@ -953,24 +953,6 @@
           <div class="golden-list" id="goldenBoardList" style="margin-top:10px;"></div>
         </section>
 
-        <section class="panel main-view active" id="sources" data-view="golden">
-          <div class="panel-title">
-            <div>
-              <h2>실시간 소스 보드</h2>
-              <div class="muted">홈에서 네이버 / 다음 / 네이트 / 줌 / 정책 / 이슈 수집 결과를 바로 확인합니다.</div>
-            </div>
-            <button class="btn blue" type="button" id="refreshSources">새로고침</button>
-          </div>
-          <div class="source-grid">
-            <div class="lane" id="lane-naver"><h3>네이버 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
-            <div class="lane" id="lane-daum"><h3>다음 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
-            <div class="lane" id="lane-nate"><h3>네이트 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
-            <div class="lane" id="lane-zum"><h3>줌 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
-            <div class="lane" id="lane-policy"><h3>정책 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
-            <div class="lane" id="lane-issue"><h3>이슈 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
-          </div>
-        </section>
-
         <section class="panel main-view active" id="homeOutcomes" data-view="golden">
           <div class="panel-title">
             <div>
@@ -1644,7 +1626,6 @@
       if (opts.load === false) return;
       if (next === 'golden') {
         loadGoldenBoard().catch(function(err) { log('황금키워드 보드 갱신 실패: ' + err.message); });
-        loadSources().catch(function(err) { log('실시간 소스 갱신 실패: ' + err.message); });
         loadHomeOutcomes().catch(function(err) { log('성과 기록 갱신 실패: ' + err.message); });
       }
       if (next === 'features' && session && session.accessToken) refreshFeatureStatus().catch(function(err) { log('Pro 기능 상태 확인 실패: ' + err.message); });
@@ -5037,7 +5018,7 @@
         hydrateNaverApiSettingsForm();
         setActiveView('golden', { load: false });
         log('Pro 로그인 완료: ' + (payload.session.tier || 'standard'));
-        await Promise.all([loadSources(), loadGoldenBoard(), loadHomeOutcomes(), refreshFeatureStatus().catch(function() {})]);
+        await Promise.all([loadGoldenBoard(), loadHomeOutcomes(), refreshFeatureStatus().catch(function() {})]);
         loadCommerceDashboard(selectedCommercePeriod).catch(function() {});
         schedulePostLoginAutoDiscovery();
       } catch (err) {
@@ -5146,10 +5127,8 @@
         card.classList.toggle('active', !!(input && input.checked));
       });
     });
-    qs('refreshSources').addEventListener('click', loadSources);
     qs('refreshGolden').addEventListener('click', function() {
       loadGoldenBoard();
-      loadSources();
     });
     qs('refreshHomeOutcomes').addEventListener('click', loadHomeOutcomes);
     qs('refreshFeatureStatus').addEventListener('click', refreshFeatureStatus);
@@ -5296,7 +5275,6 @@
     setActiveView(initialViewId(), { load: false });
     loadHealth();
     loadGoldenBoard();
-    loadSources();
     loadHomeOutcomes();
     loadDownloads().catch(function() {});
     loadCommerceCatalog().catch(function(err) { log('구매 카탈로그 초기화 실패: ' + err.message); });
@@ -5308,7 +5286,6 @@
     sendCommerceAnalytics('pageview', 'pageview', { view: activeViewId }).catch(function() {});
     setInterval(loadHealth, 30000);
     setInterval(loadGoldenBoard, 60000);
-    setInterval(loadSources, 60000);
     setInterval(loadHomeOutcomes, 60000);
   </script>
 </body>
