@@ -127,27 +127,19 @@ function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { i
 
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
-    const [goldenResult, sourceResult] = await Promise.allSettled([
-        fetchHomeJson<{ updatedAt?: string; boardCount?: number; boardTarget?: number; lockedCount?: number; running?: boolean; publicPreview?: LiveGoldenPreview[] }>('/v1/public/live-golden'),
-        fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60'),
-    ]);
-    const goldenPayload = goldenResult.status === 'fulfilled' ? goldenResult.value : null;
-    const sourcePayload = sourceResult.status === 'fulfilled' ? sourceResult.value : null;
-    const golden = Array.isArray(goldenPayload?.publicPreview) && goldenPayload.publicPreview.length > 0
-        ? goldenPayload.publicPreview.slice(0, 5)
-        : fallback.golden;
+    const sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
     const lanes = normalizeSourceLanes(sourcePayload);
-    const hasLiveData = Boolean(goldenPayload || sourcePayload);
+    const hasLiveData = lanes.some((lane) => lane.items.length > 0);
 
     return {
         status: hasLiveData ? 'ready' : 'error',
-        golden,
+        golden: fallback.golden,
         lanes,
-        updatedAt: goldenPayload?.updatedAt || sourcePayload?.updatedAt,
-        boardCount: Number(goldenPayload?.boardCount || 0),
-        boardTarget: Number(goldenPayload?.boardTarget || 120),
-        lockedCount: Number(goldenPayload?.lockedCount || 0),
-        running: Boolean(goldenPayload?.running),
+        updatedAt: sourcePayload?.updatedAt,
+        boardCount: 0,
+        boardTarget: 120,
+        lockedCount: 0,
+        running: false,
         fallbackUsed: Boolean(sourcePayload?.fallbackUsed || !sourcePayload),
     };
 }
@@ -369,6 +361,7 @@ const DEFAULT_HERO_PROOFS: HeroProof[] = [
  * inline style 그대로 유지 (사용자 요구).
  */
 function IndexPage() {
+    const [activeProofIndex, setActiveProofIndex] = useState(0);
     const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
@@ -420,15 +413,26 @@ function IndexPage() {
         setActiveSourceLaneId(laneId);
         setActiveSourceKeyword('');
     };
+    const heroProofs = DEFAULT_HERO_PROOFS;
+    const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
+
+    useEffect(() => {
+        if (heroProofs.length <= 1) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const timer = window.setInterval(() => {
+            setActiveProofIndex((index) => (index + 1) % heroProofs.length);
+        }, 4200);
+        return () => window.clearInterval(timer);
+    }, [heroProofs.length]);
 
     return (
         <>
             <ParticlesCanvas />
 
             {/* ═══ HERO ═══ */}
-            <section className="home-hero" style={{ minHeight: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 40, padding: '120px 24px 60px', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'center' }}>
+            <section className="home-hero" style={{ minHeight: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: 'minmax(0, 850px) minmax(280px, 360px)', gap: 24, padding: '76px 24px 28px', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'center', justifyContent: 'center' }}>
                 <div className="hero-content">
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: 'rgba(201, 168, 76, 0.1)', border: '1px solid rgba(201, 168, 76, 0.3)', borderRadius: 50, fontSize: 12, fontWeight: 800, letterSpacing: 2, color: 'var(--gold-primary)', marginBottom: 24 }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: 'rgba(201, 168, 76, 0.1)', border: '1px solid rgba(201, 168, 76, 0.3)', borderRadius: 50, fontSize: 12, fontWeight: 800, letterSpacing: 2, color: 'var(--gold-primary)', marginBottom: 18 }}>
                         <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
                         <span>PREMIUM AUTOMATION</span>
                     </div>
@@ -506,11 +510,42 @@ function IndexPage() {
                         ))}
                     </div>
                 </div>
+                <div className="hero-proof-stage" aria-label="실제 사용자 성과 이미지">
+                    <div className="proof-summary">
+                        <span>{activeProof.metric || '성과 인증'}</span>
+                        <strong>{activeProof.title || '실제 운영 성과'}</strong>
+                        <small>{activeProof.desc || '사용자가 직접 확인한 성과 이미지를 순서대로 보여줍니다.'}</small>
+                    </div>
+                    <div className="proof-image-shell">
+                        {heroProofs.map((proof, index) => (
+                            <img
+                                key={`${proof.src}-${index}`}
+                                src={proof.src}
+                                alt={proof.alt || proof.title || 'Leaders Pro 사용자 성과 이미지'}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                                decoding="async"
+                                className={`proof-image${index === activeProofIndex % heroProofs.length ? ' active' : ''}`}
+                            />
+                        ))}
+                    </div>
+                    <div className="proof-dots" role="tablist" aria-label="성과 이미지 선택">
+                        {heroProofs.map((proof, index) => (
+                            <button
+                                key={`${proof.src}-dot-${index}`}
+                                type="button"
+                                className={index === activeProofIndex % heroProofs.length ? 'active' : ''}
+                                onClick={() => setActiveProofIndex(index)}
+                                aria-label={`${index + 1}번째 성과 이미지 보기`}
+                                aria-selected={index === activeProofIndex % heroProofs.length}
+                            />
+                        ))}
+                    </div>
+                </div>
             </section>
 
             <style>{`
                 .hero-realtime-board {
-                    width: min(100%, 940px);
+                    width: 100%;
                     display: grid;
                     gap: 16px;
                     margin: 0 auto 18px;
@@ -611,7 +646,7 @@ function IndexPage() {
                 }
 
                 .hero-source-panel {
-                    min-height: 320px;
+                    min-height: 0;
                     display: grid;
                     align-content: start;
                     gap: 12px;
@@ -659,7 +694,7 @@ function IndexPage() {
                 .hero-source-list {
                     display: grid;
                     gap: 7px;
-                    max-height: 250px;
+                    max-height: 270px;
                     overflow-y: auto;
                     padding-right: 4px;
                 }
@@ -744,7 +779,7 @@ function IndexPage() {
                 .hero-source-body,
                 .home-source-body {
                     display: grid;
-                    grid-template-columns: minmax(0, 1fr) minmax(250px, 0.72fr);
+                    grid-template-columns: minmax(0, 1fr) minmax(230px, 0.62fr);
                     gap: 12px;
                     align-items: start;
                 }
@@ -768,6 +803,8 @@ function IndexPage() {
 
                 .source-insight-panel {
                     min-width: 0;
+                    max-height: 270px;
+                    overflow-y: auto;
                     display: grid;
                     gap: 12px;
                     padding: 13px;
@@ -816,6 +853,8 @@ function IndexPage() {
                     font-size: 15px;
                     font-weight: 900;
                     line-height: 1.25;
+                    max-height: 38px;
+                    overflow: hidden;
                 }
 
                 .source-insight-head a {
@@ -834,6 +873,10 @@ function IndexPage() {
                     color: rgba(255,255,255,0.62);
                     font-size: 11px;
                     line-height: 1.45;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
                 }
 
                 .source-mindmap {
@@ -843,6 +886,7 @@ function IndexPage() {
 
                 .source-mindmap-core {
                     min-height: 42px;
+                    max-height: 42px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -854,6 +898,7 @@ function IndexPage() {
                     font-weight: 900;
                     text-align: center;
                     line-height: 1.25;
+                    overflow: hidden;
                 }
 
                 .source-mindmap-branches {
@@ -912,6 +957,8 @@ function IndexPage() {
                     display: flex;
                     flex-wrap: wrap;
                     gap: 6px;
+                    max-height: 64px;
+                    overflow-y: auto;
                 }
 
                 .source-expansion-chips a {
@@ -983,17 +1030,15 @@ function IndexPage() {
                 }
 
                 .hero-content {
-                    grid-column: 1 / -1;
-                    grid-row: 1;
-                    width: min(100%, 980px);
-                    justify-self: center;
+                    width: 100%;
+                    justify-self: stretch;
                     text-align: center;
                     position: relative;
                     z-index: 3;
                 }
 
                 .hero-action-strip {
-                    width: min(100%, 940px);
+                    width: 100%;
                     margin: 0 auto;
                     display: grid;
                     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1002,7 +1047,7 @@ function IndexPage() {
 
                 .hero-action-button {
                     position: relative;
-                    min-height: 92px;
+                    min-height: 82px;
                     display: grid;
                     align-content: center;
                     gap: 7px;
@@ -1461,29 +1506,26 @@ function IndexPage() {
 
                 .hero-proof-stage {
                     position: relative;
-                    grid-column: 1 / -1;
-                    grid-row: 1;
-                    justify-self: end;
-                    width: min(42vw, 560px);
-                    min-height: 560px;
+                    width: 100%;
+                    min-height: 480px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     isolation: isolate;
                     overflow: hidden;
                     border-radius: 8px;
-                    opacity: 0.56;
-                    pointer-events: none;
+                    opacity: 0.92;
+                    pointer-events: auto;
                 }
 
                 .hero-proof-stage::before {
                     content: '';
                     position: absolute;
-                    inset: 24px 8px 42px;
+                    inset: 0;
                     border-radius: 8px;
-                    border: 1px solid rgba(201,168,76,0.22);
+                    border: 1px solid rgba(201,168,76,0.28);
                     background:
-                        linear-gradient(135deg, rgba(12,18,28,0.82), rgba(5,8,12,0.38)),
+                        linear-gradient(135deg, rgba(12,18,28,0.78), rgba(5,8,12,0.52)),
                         linear-gradient(90deg, rgba(244,201,93,0.10), rgba(68,215,182,0.08));
                     box-shadow: 0 26px 90px rgba(0,0,0,0.30);
                     pointer-events: none;
@@ -1492,9 +1534,9 @@ function IndexPage() {
 
                 .proof-summary {
                     position: absolute;
-                    left: 26px;
-                    top: 58px;
-                    width: min(230px, 44%);
+                    left: 16px;
+                    top: 16px;
+                    width: calc(100% - 32px);
                     display: grid;
                     gap: 6px;
                     padding: 14px;
@@ -1525,8 +1567,8 @@ function IndexPage() {
                 }
 
                 .proof-image-shell {
-                    width: min(100%, 560px);
-                    height: 480px;
+                    width: 100%;
+                    height: 390px;
                     position: relative;
                     z-index: 1;
                     overflow: hidden;
@@ -1559,7 +1601,7 @@ function IndexPage() {
                 .proof-dots {
                     position: absolute;
                     left: 50%;
-                    bottom: 52px;
+                    bottom: 22px;
                     transform: translateX(-50%);
                     display: flex;
                     align-items: center;
@@ -1642,7 +1684,7 @@ function IndexPage() {
                     }
 
                     .hero-source-list {
-                        max-height: 360px;
+                        max-height: 260px;
                     }
 
                     .source-insight-panel {
@@ -1655,12 +1697,14 @@ function IndexPage() {
                     }
 
                     .hero-action-button {
-                        min-height: 92px;
-                        padding: 18px 20px;
+                        width: calc(100% - 58px);
+                        justify-self: start;
+                        min-height: 78px;
+                        padding: 14px 18px;
                     }
 
                     .hero-action-button strong {
-                        font-size: 20px;
+                        font-size: 18px;
                     }
 
                     .hero-source-panel-head {
