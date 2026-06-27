@@ -373,9 +373,6 @@ const DEFAULT_HERO_PROOFS: HeroProof[] = [
 function IndexPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
     const [activeProofIndex, setActiveProofIndex] = useState(0);
-    const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
-    const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
-    const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
 
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
@@ -403,22 +400,6 @@ function IndexPage() {
         fetchSiteContent().then(setSiteContent);
     }, []);
 
-    useEffect(() => {
-        let alive = true;
-        loadHomeLiveState()
-            .then((state) => {
-                if (alive) setLiveState(state);
-            })
-            .catch(() => {
-                if (alive) setLiveState(buildFallbackHomeLiveState('error'));
-            });
-        return () => {
-            alive = false;
-        };
-    }, []);
-
-    const heroBenefit = siteContent?.hero?.benefit || '2,800+명이 사용 중';
-    const heroNotice = siteContent?.hero?.notice || '';
     const configuredProofs = siteContent?.hero?.proofs?.filter((proof) => proof?.src) || [];
     const mergedProofs = configuredProofs.length
         ? [
@@ -431,18 +412,6 @@ function IndexPage() {
         ...proof,
     }));
     const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
-    const liveUpdatedAt = formatLiveUpdatedAt(liveState.updatedAt);
-    const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
-    const livePrimaryGolden = liveState.golden[0] || HOME_LIVE_FALLBACK_GOLDEN[0];
-    const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
-        || liveState.lanes[0]
-        || { ...SOURCE_LANE_CONFIGS[0], items: [] };
-    const activeSourceItems = activeSourceLane.items.slice(0, 10);
-    const activeSourceInsightItem = activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === activeSourceKeyword) || activeSourceItems[0] || null;
-    const selectSourceLane = (laneId: SourceLaneId) => {
-        setActiveSourceLaneId(laneId);
-        setActiveSourceKeyword('');
-    };
 
     useEffect(() => {
         if (heroProofs.length <= 1) return;
@@ -463,90 +432,6 @@ function IndexPage() {
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: 'rgba(201, 168, 76, 0.1)', border: '1px solid rgba(201, 168, 76, 0.3)', borderRadius: 50, fontSize: 12, fontWeight: 800, letterSpacing: 2, color: 'var(--gold-primary)', marginBottom: 24 }}>
                         <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
                         <span>PREMIUM AUTOMATION</span>
-                    </div>
-                    <div className="hero-realtime-board" aria-label="실시간 검색어">
-                        <div className="hero-realtime-head">
-                            <span>{liveStatusLabel}</span>
-                            <strong>실시간 검색어</strong>
-                            <small>{liveUpdatedAt}</small>
-                        </div>
-                        <div className="hero-source-tabs" role="tablist" aria-label="홈 실시간 소스 선택">
-                            {liveState.lanes.map((lane) => {
-                                const isActive = lane.id === activeSourceLane.id;
-                                return (
-                                    <button
-                                        key={lane.id}
-                                        type="button"
-                                        role="tab"
-                                        aria-selected={isActive}
-                                        className={`hero-source-tab${isActive ? ' active' : ''}`}
-                                        onClick={() => selectSourceLane(lane.id)}
-                                        style={{ borderColor: isActive ? lane.accent : 'rgba(255,255,255,0.13)', color: isActive ? '#061018' : 'rgba(255,255,255,0.74)', background: isActive ? lane.accent : 'rgba(255,255,255,0.045)' }}
-                                    >
-                                        <span style={{ background: isActive ? '#061018' : lane.accent }} />
-                                        <strong>{lane.label}</strong>
-                                        <small>{lane.items.length}</small>
-                                    </button>
-                                );
-                            })}
-                        </div>
-                        <div className="hero-source-panel" style={{ borderColor: activeSourceLane.accent + '66', background: 'linear-gradient(135deg, ' + activeSourceLane.accent + '16, rgba(255,255,255,0.035))' }}>
-                            <div className="hero-source-panel-head">
-                                <span style={{ background: activeSourceLane.accent }} />
-                                <div>
-                                    <strong>{activeSourceLane.label}</strong>
-                                    <p>{activeSourceLane.description}</p>
-                                </div>
-                                <small>{activeSourceItems.length}개 표시</small>
-                            </div>
-                            <div className="hero-source-body">
-                            <div className="hero-source-list">
-                                {activeSourceItems.length === 0 ? (
-                                    <article className="hero-source-empty">
-                                        <strong>원본 수집 중</strong>
-                                        <p>{activeSourceLane.label} 원본에서 확인된 실시간 항목만 표시합니다.</p>
-                                    </article>
-                                ) : activeSourceItems.map((item, index) => {
-                                    const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
-                                    const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
-                                    return (
-                                        <a key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`} href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer" onClick={() => setActiveSourceKeyword(keyword)}>
-                                            <span>{index + 1}</span>
-                                            <div>
-                                                <strong>{keyword}</strong>
-                                                <p>{description}</p>
-                                            </div>
-                                            <small>{item.priority || 'LIVE'}</small>
-                                        </a>
-                                    );
-                                })}
-                            </div>
-                                <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} />
-                            </div>
-                        </div>
-                    </div>
-                    {heroNotice && (
-                        <div style={{ marginBottom: 24, padding: '12px 16px', border: '1px solid rgba(201,168,76,0.28)', borderRadius: 12, color: 'var(--gold-primary)', background: 'rgba(201,168,76,0.08)', fontSize: 14, fontWeight: 700 }}>
-                            {heroNotice}
-                        </div>
-                    )}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 24 }}>
-                        <Link to="/pricing" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '16px 32px', background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-light))', color: '#1a1a2e', borderRadius: 12, fontWeight: 800, fontSize: 16, textDecoration: 'none', boxShadow: '0 8px 24px rgba(201, 168, 76, 0.4)' }}>
-                            <span>지금 자동화 시작하기</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
-                        </Link>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                            <div style={{ display: 'flex' }}>
-                                {[
-                                    { bg: 'linear-gradient(135deg, #667eea, #764ba2)', letter: 'J' },
-                                    { bg: 'linear-gradient(135deg, #f093fb, #f5576c)', letter: 'K' },
-                                    { bg: 'linear-gradient(135deg, #4facfe, #00f2fe)', letter: 'L' },
-                                ].map((a, i) => (
-                                    <div key={i} style={{ width: 32, height: 32, borderRadius: '50%', background: a.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 13, border: '2px solid var(--bg-dark)', marginLeft: i === 0 ? 0 : -10 }}>{a.letter}</div>
-                                ))}
-                            </div>
-                            <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{heroBenefit}</span>
-                        </div>
                     </div>
                     <div className="hero-action-strip" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
                         {[
@@ -1192,27 +1077,39 @@ function IndexPage() {
                     background: rgba(255,255,255,0.04);
                 }
 
+                .hero-content {
+                    grid-column: 1 / -1;
+                    grid-row: 1;
+                    width: min(100%, 760px);
+                    justify-self: center;
+                    text-align: center;
+                    position: relative;
+                    z-index: 3;
+                }
+
                 .hero-action-strip {
-                    margin-top: 18px;
+                    width: min(100%, 720px);
+                    margin: 0 auto;
                     display: grid;
-                    grid-template-columns: repeat(3, minmax(0, 1fr));
-                    gap: 12px;
+                    grid-template-columns: 1fr;
+                    gap: 16px;
                 }
 
                 .hero-action-button {
                     position: relative;
-                    min-height: 88px;
+                    min-height: 112px;
                     display: grid;
                     align-content: center;
-                    gap: 7px;
-                    padding: 16px 18px;
+                    gap: 9px;
+                    padding: 22px 28px;
                     border-radius: 8px;
-                    border: 2px solid rgba(255,255,255,0.26);
-                    background: linear-gradient(135deg, rgba(4,9,16,0.94), rgba(13,24,38,0.90));
+                    border: 3px solid rgba(255,255,255,0.30);
+                    background: linear-gradient(135deg, rgba(1,5,10,0.98), rgba(10,18,30,0.96));
                     color: #fff;
                     text-decoration: none;
+                    text-align: left;
                     overflow: hidden;
-                    box-shadow: 0 20px 46px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.10);
+                    box-shadow: 0 24px 58px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.12);
                     animation: heroActionPulse 2.7s ease-in-out infinite;
                     transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
                 }
@@ -1230,7 +1127,7 @@ function IndexPage() {
                 .hero-action-button:hover {
                     transform: translateY(-3px) scale(1.015);
                     border-color: rgba(255,255,255,0.52);
-                    box-shadow: 0 24px 58px rgba(0,0,0,0.54), 0 0 28px rgba(225,177,44,0.16);
+                    box-shadow: 0 30px 68px rgba(0,0,0,0.62), 0 0 34px rgba(225,177,44,0.24);
                 }
 
                 .hero-action-button strong,
@@ -1241,31 +1138,31 @@ function IndexPage() {
 
                 .hero-action-button strong {
                     color: #fff;
-                    font-size: 16px;
+                    font-size: clamp(22px, 2.15vw, 30px);
                     font-weight: 950;
                     line-height: 1.28;
                 }
 
                 .hero-action-button span {
                     color: rgba(255,255,255,0.70);
-                    font-size: 12px;
+                    font-size: 14px;
                     font-weight: 800;
                     line-height: 1.35;
                 }
 
                 .hero-action-button.gold {
-                    border-color: rgba(225,177,44,0.80);
-                    box-shadow: 0 20px 46px rgba(0,0,0,0.42), 0 0 30px rgba(225,177,44,0.22);
+                    border-color: rgba(225,177,44,0.95);
+                    box-shadow: 0 24px 58px rgba(0,0,0,0.55), 0 0 34px rgba(225,177,44,0.34);
                 }
 
                 .hero-action-button.cyan {
-                    border-color: rgba(64,210,255,0.72);
-                    box-shadow: 0 20px 46px rgba(0,0,0,0.42), 0 0 30px rgba(64,210,255,0.18);
+                    border-color: rgba(64,210,255,0.88);
+                    box-shadow: 0 24px 58px rgba(0,0,0,0.55), 0 0 34px rgba(64,210,255,0.26);
                 }
 
                 .hero-action-button.green {
-                    border-color: rgba(68,215,182,0.72);
-                    box-shadow: 0 20px 46px rgba(0,0,0,0.42), 0 0 30px rgba(68,215,182,0.18);
+                    border-color: rgba(68,215,182,0.88);
+                    box-shadow: 0 24px 58px rgba(0,0,0,0.55), 0 0 34px rgba(68,215,182,0.26);
                 }
 
                 @keyframes heroActionPulse {
@@ -1659,6 +1556,10 @@ function IndexPage() {
 
                 .hero-proof-stage {
                     position: relative;
+                    grid-column: 1 / -1;
+                    grid-row: 1;
+                    justify-self: end;
+                    width: min(42vw, 560px);
                     min-height: 560px;
                     display: flex;
                     align-items: center;
@@ -1666,6 +1567,8 @@ function IndexPage() {
                     isolation: isolate;
                     overflow: hidden;
                     border-radius: 8px;
+                    opacity: 0.56;
+                    pointer-events: none;
                 }
 
                 .hero-proof-stage::before {
@@ -1801,9 +1704,7 @@ function IndexPage() {
                     }
 
                     .hero-proof-stage {
-                        min-height: 520px;
-                        margin-top: 22px;
-                        width: 100%;
+                        display: none;
                     }
 
                     .proof-image-shell {
@@ -1833,11 +1734,16 @@ function IndexPage() {
 
                     .hero-action-strip {
                         grid-template-columns: 1fr;
-                        margin-top: 16px;
+                        margin: 0 auto;
                     }
 
                     .hero-action-button {
-                        min-height: 74px;
+                        min-height: 92px;
+                        padding: 18px 20px;
+                    }
+
+                    .hero-action-button strong {
+                        font-size: 20px;
                     }
 
                     .hero-source-panel-head {
