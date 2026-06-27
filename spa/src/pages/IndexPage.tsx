@@ -79,15 +79,6 @@ const HOME_LIVE_FALLBACK_GOLDEN: LiveGoldenPreview[] = [
     { id: 'fallback-golden-3', rank: 3, keyword: '오늘 방송 출연진', grade: 'S', publicSearchVolumeLabel: '실시간 반응', publicDocumentCountLabel: '경쟁도 확인 중', publicReason: '방송 직후 빠르게 검색량이 붙는 이슈형 키워드입니다.' },
 ];
 
-const HOME_LIVE_FALLBACK_SIGNALS: Record<SourceLaneId, SourceSignal[]> = {
-    naver: [{ id: 'fallback-naver', keyword: '여름 가전 추천', title: '네이버 수요', description: '시즌성 구매 검색이 빠르게 붙는 흐름입니다.', priority: 96, source: 'naver' }],
-    daum: [{ id: 'fallback-daum', keyword: '장마 준비물', title: '다음 생활 이슈', description: '생활형 검색에서 바로 글감으로 확장하기 좋은 신호입니다.', priority: 91, source: 'daum' }],
-    nate: [{ id: 'fallback-nate', keyword: '오늘 방송 출연진', title: '네이트 이슈', description: '방송 직후 검색 전환이 빠른 키워드 흐름입니다.', priority: 88, source: 'nate' }],
-    zum: [{ id: 'fallback-zum', keyword: '여름휴가 숙소', title: '줌 이슈', description: '지역명과 가격 비교로 확장하기 좋은 여행 검색입니다.', priority: 86, source: 'zum' }],
-    policy: [{ id: 'fallback-policy', keyword: '청년 월세 지원 조건', title: '정책 알림', description: '조건, 서류, 신청기간으로 세분화하기 좋은 정책 키워드입니다.', priority: 94, source: 'policy' }],
-    issue: [{ id: 'fallback-issue', keyword: '신작 드라마 출연진', title: '이슈 레이더', description: '인물, 원작, 몇부작까지 빠르게 확장되는 방송 이슈입니다.', priority: 90, source: 'issue' }],
-};
-
 function cleanLiveText(value: unknown, fallback: string): string {
     const text = String(value || '').trim();
     if (!text) return fallback;
@@ -102,7 +93,7 @@ function buildFallbackHomeLiveState(status: HomeLiveStatus = 'loading'): HomeLiv
         golden: HOME_LIVE_FALLBACK_GOLDEN,
         lanes: SOURCE_LANE_CONFIGS.map((lane) => ({
             ...lane,
-            items: HOME_LIVE_FALLBACK_SIGNALS[lane.id],
+            items: [],
         })),
         boardCount: 0,
         boardTarget: 120,
@@ -322,7 +313,6 @@ function IndexPage() {
     const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
         || liveState.lanes[0]
         || { ...SOURCE_LANE_CONFIGS[0], items: [] };
-    const activeSourceFallback = HOME_LIVE_FALLBACK_SIGNALS[activeSourceLane.id][0];
     const activeSourceItems = activeSourceLane.items.slice(0, 10);
 
     useEffect(() => {
@@ -387,8 +377,8 @@ function IndexPage() {
                                         <p>{activeSourceLane.label} 원본에서 확인된 실시간 항목만 표시합니다.</p>
                                     </article>
                                 ) : activeSourceItems.map((item, index) => {
-                                    const keyword = cleanLiveText(item.keyword || item.title, activeSourceFallback.keyword || activeSourceLane.label);
-                                    const description = cleanLiveText(item.description || item.title, activeSourceFallback.description || activeSourceLane.description);
+                                    const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
+                                    const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
                                     return (
                                         <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className="hero-source-row">
                                             <span>{index + 1}</span>
@@ -555,8 +545,8 @@ function IndexPage() {
                                         <p>{activeSourceLane.label} 원본에서 확인된 실시간 항목만 표시합니다.</p>
                                     </article>
                                 ) : activeSourceItems.map((item, index) => {
-                                    const keyword = cleanLiveText(item.keyword || item.title, activeSourceFallback.keyword || activeSourceLane.label);
-                                    const description = cleanLiveText(item.description || item.title, activeSourceFallback.description || activeSourceLane.description);
+                                    const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
+                                    const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
                                     return (
                                         <article key={item.id || `${activeSourceLane.id}-${keyword}-${index}`} className="home-source-row">
                                             <div className="home-source-row-rank">{index + 1}</div>
