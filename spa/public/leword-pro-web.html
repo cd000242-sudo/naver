@@ -909,7 +909,6 @@
     <div class="layout">
       <aside class="sidebar" id="proSidebar" aria-label="Pro 기능 탭">
         <a class="side-link" href="#golden" data-view-target="golden">LIVE 황금키워드 보드</a>
-        <a class="side-link" href="#sources" data-view-target="sources">네이버/다음/네이트/줌/정책/이슈</a>
         <a class="side-link" href="#lookup" data-view-target="lookup">키워드 분석기</a>
         <a class="side-link" href="#features" data-view-target="features">추가 기능</a>
         <a class="side-link" href="#youtube" data-view-target="youtube">유튜브 황금키워드 및 쇼츠분석</a>
@@ -954,11 +953,11 @@
           <div class="golden-list" id="goldenBoardList" style="margin-top:10px;"></div>
         </section>
 
-        <section class="panel main-view" id="sources" data-view="sources">
+        <section class="panel main-view active" id="sources" data-view="golden">
           <div class="panel-title">
             <div>
               <h2>실시간 소스 보드</h2>
-              <div class="muted">네이버 / 다음 / 네이트 / 줌 / 정책 / 이슈 순서로 서버 수집 결과를 보여줍니다.</div>
+              <div class="muted">홈에서 네이버 / 다음 / 네이트 / 줌 / 정책 / 이슈 수집 결과를 바로 확인합니다.</div>
             </div>
             <button class="btn blue" type="button" id="refreshSources">새로고침</button>
           </div>
@@ -969,6 +968,22 @@
             <div class="lane" id="lane-zum"><h3>줌 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
             <div class="lane" id="lane-policy"><h3>정책 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
             <div class="lane" id="lane-issue"><h3>이슈 <span class="lane-count">0</span></h3><div class="muted">불러오는 중...</div></div>
+          </div>
+        </section>
+
+        <section class="panel main-view active" id="homeOutcomes" data-view="golden">
+          <div class="panel-title">
+            <div>
+              <h2>성과 기록</h2>
+              <div class="muted">황금키워드 발굴 후 실제 조회·수익·측정 글 현황을 홈에서 바로 확인합니다.</div>
+            </div>
+            <button class="btn blue" type="button" id="refreshHomeOutcomes">성과 새로고침</button>
+          </div>
+          <div class="ops-grid" id="homeOutcomeCards">
+            <article class="ops-card"><h3>측정 글</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
+            <article class="ops-card"><h3>전체 기록</h3><span class="ops-number">-</span><span class="ops-meta">실제 성과 기록 대기</span></article>
+            <article class="ops-card"><h3>월 조회</h3><span class="ops-number">-</span><span class="ops-meta">성과 동기화 후 표시</span></article>
+            <article class="ops-card"><h3>월 수익</h3><span class="ops-number">-</span><span class="ops-meta">성과 동기화 후 표시</span></article>
           </div>
         </section>
 
@@ -1099,28 +1114,6 @@
               <h3>유튜브 분석 대기</h3>
               <p>환경설정/API 키에서 YouTube API 키를 저장한 뒤 실행하면 진행률 모달과 결과가 이 화면에 표시됩니다.</p>
             </div>
-          </div>
-        </section>
-
-        <section class="panel main-view" id="ops" data-view="ops">
-          <div class="panel-title">
-            <div>
-              <h2>Pro 운영 대시보드</h2>
-              <div class="muted">내노출 추적, Pro 성과 기록, 워드프레스 발행, 예약 스케줄을 서버 스냅샷으로 모아 보여줍니다.</div>
-            </div>
-            <button class="btn blue" type="button" id="refreshOps">운영 현황 새로고침</button>
-          </div>
-          <div class="ops-tabs" id="opsTabs" aria-label="운영 기능 선택">
-            <button class="ops-tab active" type="button" data-ops-tab="rank">내노출 추적</button>
-            <button class="ops-tab" type="button" data-ops-tab="outcomes">성과 기록</button>
-            <button class="ops-tab" type="button" data-ops-tab="wordpress">워드프레스/발행</button>
-            <button class="ops-tab" type="button" data-ops-tab="schedule">스케줄/알림</button>
-          </div>
-          <div class="ops-grid ops-panels">
-            <article class="ops-card ops-panel active" data-ops-panel="rank" id="ops-rank"><h3>내노출 추적</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
-            <article class="ops-card ops-panel" data-ops-panel="outcomes" id="ops-outcomes"><h3>성과 기록</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
-            <article class="ops-card ops-panel" data-ops-panel="wordpress" id="ops-wordpress"><h3>워드프레스/발행</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
-            <article class="ops-card ops-panel" data-ops-panel="schedule" id="ops-schedule"><h3>스케줄/알림</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
           </div>
         </section>
 
@@ -1557,7 +1550,6 @@
     let selectedToolGroupId = 'keyword';
     let lastKeywordResult = null;
     let activeViewId = 'golden';
-    let selectedOpsId = 'rank';
     let selectedCatalogTab = 'today';
     let commerceCatalogPayload = null;
     let selectedCommercePlan = null;
@@ -1571,7 +1563,7 @@
     const analyticsExcludeStorageKey = 'leword.analytics.exclude.v1';
     let recentLoginCredentialValues = [];
     const toolTabFeatureIds = ['pro-traffic', 'naver-mate', 'shopping', 'kin'];
-    const viewIds = ['golden', 'sources', 'lookup', 'features', 'youtube', 'settings', 'downloads', 'commerce'];
+    const viewIds = ['golden', 'lookup', 'features', 'youtube', 'settings', 'downloads', 'commerce'];
     const catalogTabs = [
       { id: 'today', label: '오늘/실시간' },
       { id: 'discovery', label: '발굴' },
@@ -1625,6 +1617,7 @@
       setMobileProChromeCollapsed(mobileProChromePreference() !== 'open');
     }
     function normalizeViewId(id) {
+      if (id === 'sources') return 'golden';
       return viewIds.indexOf(id) >= 0 ? id : 'golden';
     }
     function initialViewId() {
@@ -1649,8 +1642,11 @@
         startApiAutofillGuard(30000);
       }
       if (opts.load === false) return;
-      if (next === 'golden') loadGoldenBoard().catch(function(err) { log('황금키워드 보드 갱신 실패: ' + err.message); });
-      if (next === 'sources') loadSources().catch(function(err) { log('실시간 소스 갱신 실패: ' + err.message); });
+      if (next === 'golden') {
+        loadGoldenBoard().catch(function(err) { log('황금키워드 보드 갱신 실패: ' + err.message); });
+        loadSources().catch(function(err) { log('실시간 소스 갱신 실패: ' + err.message); });
+        loadHomeOutcomes().catch(function(err) { log('성과 기록 갱신 실패: ' + err.message); });
+      }
       if (next === 'features' && session && session.accessToken) refreshFeatureStatus().catch(function(err) { log('Pro 기능 상태 확인 실패: ' + err.message); });
       if (next === 'downloads') loadDownloads().catch(function(err) { log('다운로드 상태 확인 실패: ' + err.message); });
       if (next === 'commerce') {
@@ -2408,7 +2404,7 @@
         setResult(payload);
         renderSnapshotResultSummary({ title: '내노출 추적 등록' }, payload.snapshot || payload);
         log('상위 키워드 추적 등록 완료: ' + keyword);
-        await loadOpsDashboard().catch(function() {});
+        await loadHomeOutcomes().catch(function() {});
       } catch (err) {
         log('추적 등록 실패: ' + err.message);
       }
@@ -3127,15 +3123,27 @@
       qs('apiIssueModal').classList.remove('open');
       qs('apiIssueModal').setAttribute('aria-hidden', 'true');
     }
-    async function apiGet(url, authed) {
-      const res = await fetch(url, { cache: 'no-store', headers: authed ? headers() : undefined });
-      const payload = await res.json().catch(function() { return {}; });
-      if (authed && (res.status === 401 || res.status === 403)) {
-        saveSession(null);
-        throw new Error(formatApiError(url, res.status, payload));
+    async function apiGet(url, authed, timeoutMs) {
+      let timeoutId = null;
+      const controller = timeoutMs ? new AbortController() : null;
+      if (controller) {
+        timeoutId = setTimeout(function() { controller.abort(); }, timeoutMs);
       }
-      if (!res.ok) throw new Error(formatApiError(url, res.status, payload));
-      return payload;
+      try {
+        const res = await fetch(url, { cache: 'no-store', headers: authed ? headers() : undefined, signal: controller ? controller.signal : undefined });
+        const payload = await res.json().catch(function() { return {}; });
+        if (authed && (res.status === 401 || res.status === 403)) {
+          saveSession(null);
+          throw new Error(formatApiError(url, res.status, payload));
+        }
+        if (!res.ok) throw new Error(formatApiError(url, res.status, payload));
+        return payload;
+      } catch (err) {
+        if (err && err.name === 'AbortError') throw new Error('응답이 지연되어 기본 보드를 먼저 표시합니다.');
+        throw err;
+      } finally {
+        if (timeoutId) clearTimeout(timeoutId);
+      }
     }
     function routePath(url) {
       try { return new URL(url, location.href).pathname; }
@@ -4072,6 +4080,7 @@
         qs('goldenNotice').textContent = '황금키워드 보드를 불러오지 못했습니다: ' + err.message;
       }
     }
+    let sourceBoardCache = null;
     const sourceLaneDefinitions = [
       { id: 'naver', label: '네이버' },
       { id: 'daum', label: '다음' },
@@ -4146,7 +4155,8 @@
       if (!target) return;
       const allItems = lane.items || [];
       const items = allItems.slice(0, 12);
-      target.querySelector('.lane-count').textContent = String(allItems.length);
+      const countEl = target.querySelector('.lane-count');
+      if (countEl) countEl.textContent = String(allItems.length);
       const body = items.length ? items.map(function(item) {
         const keyword = sourceKeyword(item);
         const safe = escapeAttr(keyword);
@@ -4163,15 +4173,94 @@
       }).join('') : '<div class="muted">서버 수집 결과가 없습니다. 소스 상태를 확인하세요.</div>';
       target.innerHTML = '<h3>' + escapeHtml(lane.label) + ' <span class="lane-count">' + allItems.length + '</span></h3><div class="signal-list">' + body + '</div>';
     }
+    function renderSourceError(message) {
+      sourceLaneDefinitions.forEach(function(lane) {
+        const target = qs('lane-' + lane.id);
+        if (!target) return;
+        target.innerHTML = '<h3>' + escapeHtml(lane.label) + ' <span class="lane-count">0</span></h3>'
+          + '<div class="signal-list"><div class="muted">' + escapeHtml(message || '서버 응답이 지연되고 있습니다. 잠시 후 다시 새로고침하세요.') + '</div></div>';
+      });
+    }
     async function loadSources() {
       try {
         const url = session ? endpoints.proSources + '?limit=60' : endpoints.publicSources + '?limit=60';
-        const payload = await apiGet(url, !!session);
+        const payload = await apiGet(url, !!session, 6500);
+        sourceBoardCache = payload;
         const lanes = normalizeSourceLanes(payload);
         lanes.forEach(renderSourceLane);
         log('실시간 소스 보드 갱신: ' + lanes.map(function(l) { return l.label + ' ' + ((l.items || []).length); }).join(', '));
       } catch (err) {
+        if (sourceBoardCache) {
+          normalizeSourceLanes(sourceBoardCache).forEach(renderSourceLane);
+          log('소스 보드 갱신 지연, 직전 결과 유지: ' + err.message);
+          return;
+        }
+        renderSourceError(err.message);
         log('소스 보드 갱신 실패: ' + err.message);
+      }
+    }
+    function homeOutcomeCard(title, value, meta, items) {
+      const list = Array.isArray(items) && items.length
+        ? '<ul class="ops-list">' + items.slice(0, 3).map(function(item) { return '<li>' + escapeHtml(item) + '</li>'; }).join('') + '</ul>'
+        : '';
+      return '<article class="ops-card"><h3>' + escapeHtml(title) + '</h3>'
+        + '<span class="ops-number">' + escapeHtml(value) + '</span>'
+        + '<span class="ops-meta">' + escapeHtml(meta) + '</span>'
+        + list
+        + '</article>';
+    }
+    function renderHomeOutcomesLocked() {
+      const target = qs('homeOutcomeCards');
+      if (!target) return;
+      target.innerHTML = [
+        homeOutcomeCard('측정 글', '-', 'Pro 로그인 후 확인', []),
+        homeOutcomeCard('전체 기록', '-', '실제 성과 기록 대기', []),
+        homeOutcomeCard('월 조회', '-', '성과 동기화 후 표시', []),
+        homeOutcomeCard('월 수익', '-', '성과 동기화 후 표시', []),
+      ].join('');
+    }
+    function renderHomeOutcomesError(message) {
+      const target = qs('homeOutcomeCards');
+      if (!target) return;
+      target.innerHTML = [
+        homeOutcomeCard('측정 글', '확인 필요', message || '성과 스냅샷을 불러오지 못했습니다.', []),
+        homeOutcomeCard('전체 기록', '-', '잠시 후 다시 새로고침하세요.', []),
+        homeOutcomeCard('월 조회', '-', '서버 응답 대기', []),
+        homeOutcomeCard('월 수익', '-', '서버 응답 대기', []),
+      ].join('');
+    }
+    function renderHomeOutcomesSnapshot(snapshot) {
+      const target = qs('homeOutcomeCards');
+      if (!target) return;
+      const benchmark = (snapshot && snapshot.benchmark) || {};
+      const topKeywords = (benchmark.topPerformingKeywords || []).slice(0, 3).map(function(item) {
+        return (item.keyword || '성과 키워드') + ' · 조회 ' + fmt(item.views || 0) + ' · 수익 ' + fmt(item.revenue || 0);
+      });
+      target.innerHTML = [
+        homeOutcomeCard('측정 글', fmt(snapshot.measuredPosts || 0), '실제 성과가 연결된 글', []),
+        homeOutcomeCard('전체 기록', fmt(snapshot.totalRecords || 0), '누적 성과 기록', []),
+        homeOutcomeCard('월 조회', fmt(benchmark.totalMonthlyViews || 0), '측정 글 기준', []),
+        homeOutcomeCard('월 수익', fmt(benchmark.totalMonthlyRevenue || 0), topKeywords.length ? '상위 성과 키워드 포함' : '측정 데이터 대기', topKeywords),
+      ].join('');
+    }
+    async function loadHomeOutcomes() {
+      if (!session || !session.accessToken) {
+        renderHomeOutcomesLocked();
+        return;
+      }
+      try {
+        const payload = await apiGet(endpoints.proOutcomes, true, 6500);
+        if (payload && payload.snapshot) {
+          renderHomeOutcomesSnapshot(payload.snapshot);
+          return;
+        }
+        renderHomeOutcomesError('성과 스냅샷 형식이 비어 있습니다.');
+      } catch (err) {
+        if (!session || !session.accessToken || isAuthErrorMessage(err.message)) {
+          renderHomeOutcomesLocked();
+          return;
+        }
+        renderHomeOutcomesError(err.message);
       }
     }
     async function loadHealth() {
@@ -4659,132 +4748,11 @@
         listTarget.innerHTML = '<div class="catalog-empty">이 탭에는 표시할 Pro 기능이 없습니다. 다른 서브탭을 선택하거나 서버 상태를 새로고침하세요.</div>';
       }
     }
-    function setActiveOpsTab(id) {
-      selectedOpsId = id || selectedOpsId;
-      document.querySelectorAll('[data-ops-tab]').forEach(function(node) {
-        node.classList.toggle('active', node.getAttribute('data-ops-tab') === selectedOpsId);
-      });
-      document.querySelectorAll('[data-ops-panel]').forEach(function(node) {
-        node.classList.toggle('active', node.getAttribute('data-ops-panel') === selectedOpsId);
-      });
-    }
-    function emptyOpsMessage() {
-      return '<ul class="ops-list"><li>아직 표시할 데이터가 없습니다.</li></ul>';
-    }
-    function renderOpsCard(id, title, value, meta, items) {
-      const target = qs('ops-' + id);
-      if (!target) return;
-      const list = Array.isArray(items) && items.length
-        ? '<ul class="ops-list">' + items.slice(0, 3).map(function(item) { return '<li>' + escapeHtml(item) + '</li>'; }).join('') + '</ul>'
-        : emptyOpsMessage();
-      target.innerHTML = '<h3>' + escapeHtml(title) + '</h3>'
-        + '<span class="ops-number">' + escapeHtml(value) + '</span>'
-        + '<span class="ops-meta">' + escapeHtml(meta) + '</span>'
-        + list;
-    }
-    function renderOpsLocked() {
-      renderOpsCard('rank', '내노출 추적', '-', 'Pro 로그인 후 서버 추적 현황을 확인합니다.', []);
-      renderOpsCard('outcomes', '성과 기록', '-', 'Pro 로그인 후 실제 노출/수익 기록을 확인합니다.', []);
-      renderOpsCard('wordpress', '워드프레스/발행', '-', 'Pro 로그인 후 사이트와 발행 초안을 확인합니다.', []);
-      renderOpsCard('schedule', '스케줄/알림', '-', 'Pro 로그인 후 예약과 알림 상태를 확인합니다.', []);
-    }
-    function settledValue(result) {
-      return result && result.status === 'fulfilled' ? result.value : null;
-    }
-    function settledError(result) {
-      return result && result.status === 'rejected' && result.reason ? result.reason.message || String(result.reason) : null;
-    }
     function isAuthErrorMessage(message) {
       return /authorization required|401|403|로그인|권한|인증|session/i.test(String(message || ''));
     }
     function isRouteMissingMessage(message) {
       return /404|endpoint not found|API 경로|route not found/i.test(String(message || ''));
-    }
-    function friendlyOpsError(result) {
-      const message = settledError(result);
-      if (isAuthErrorMessage(message)) return 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.';
-      return message || '스냅샷을 불러오지 못했습니다.';
-    }
-    async function loadOpsDashboard() {
-      if (!session || !session.accessToken) {
-        renderOpsLocked();
-        return;
-      }
-      const results = await Promise.allSettled([
-        apiGet(endpoints.rankTracking, true),
-        apiGet(endpoints.proOutcomes, true),
-        apiGet(endpoints.wordpress, true),
-        apiGet(endpoints.scheduleDashboard, true)
-      ]);
-      const rank = settledValue(results[0]);
-      const outcomes = settledValue(results[1]);
-      const wordpress = settledValue(results[2]);
-      const schedule = settledValue(results[3]);
-      const authFailed = results.some(function(result) { return isAuthErrorMessage(settledError(result)); })
-        && !rank && !outcomes && !wordpress && !schedule;
-      if (authFailed) {
-        saveSession(null);
-        renderOpsLocked();
-        setResult({ ok: false, message: 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.' });
-        log('Pro 로그인 세션이 만료되어 운영 대시보드를 잠금 상태로 전환했습니다.');
-        return;
-      }
-
-      if (rank && rank.snapshot) {
-        const totals = rank.snapshot.totals || {};
-        const posts = ((rank.snapshot.posts || {}).items || []).slice(0, 3).map(function(post) {
-          const rankText = post.currentRank ? String(post.currentRank) + '위' : 'Top30 밖';
-          return (post.keyword || post.postTitle || '추적 글') + ' · ' + rankText + ' · ' + (post.postTitle || post.postUrl || '-');
-        });
-        renderOpsCard('rank', '내노출 추적', fmt(totals.currentlyInTop30 || 0) + '/' + fmt(totals.trackedPairs || 0), 'Top30 노출 / 추적쌍 · Top10 ' + fmt(totals.currentlyInTop10 || 0), posts);
-      } else {
-        renderOpsCard('rank', '내노출 추적', '확인 필요', friendlyOpsError(results[0]), []);
-      }
-
-      if (outcomes && outcomes.snapshot) {
-        const snapshot = outcomes.snapshot;
-        const benchmark = snapshot.benchmark || {};
-        const topKeywords = (benchmark.topPerformingKeywords || []).slice(0, 3).map(function(item) {
-          return (item.keyword || '성과 키워드') + ' · 조회 ' + fmt(item.views || 0) + ' · 수익 ' + fmt(item.revenue || 0);
-        });
-        renderOpsCard('outcomes', '성과 기록', fmt(snapshot.measuredPosts || 0) + '/' + fmt(snapshot.totalRecords || 0), '측정 글 / 전체 기록 · 월수익 ' + fmt(benchmark.totalMonthlyRevenue || 0), topKeywords);
-      } else {
-        renderOpsCard('outcomes', '성과 기록', '확인 필요', friendlyOpsError(results[1]), []);
-      }
-
-      if (wordpress && wordpress.snapshot) {
-        const snapshot = wordpress.snapshot;
-        const sites = snapshot.sites || {};
-        const drafts = snapshot.drafts || {};
-        const draftItems = (drafts.items || []).slice(0, 3).map(function(draft) {
-          return (draft.title || draft.keyword || '발행 초안') + ' · ' + (draft.status || 'draft');
-        });
-        renderOpsCard('wordpress', '워드프레스/발행', fmt(drafts.total || 0), '초안 · 연결 사이트 ' + fmt(sites.total || 0), draftItems);
-      } else {
-        renderOpsCard('wordpress', '워드프레스/발행', '확인 필요', friendlyOpsError(results[2]), []);
-      }
-
-      if (schedule && schedule.snapshot) {
-        const snapshot = schedule.snapshot;
-        const schedules = snapshot.schedules || {};
-        const groups = snapshot.groups || {};
-        const nextItems = (schedules.items || []).slice(0, 3).map(function(item) {
-          return (item.keyword || item.topic || '예약') + ' · ' + (item.status || '-') + ' · ' + fmtTime(item.scheduleDateTime);
-        });
-        renderOpsCard('schedule', '스케줄/알림', fmt(schedules.pending || 0) + '/' + fmt(schedules.total || 0), '대기 / 전체 예약 · 그룹 ' + fmt(groups.total || 0) + ' · 다음 ' + fmtTime(schedules.nextRunAt), nextItems);
-      } else {
-        renderOpsCard('schedule', '스케줄/알림', '확인 필요', friendlyOpsError(results[3]), []);
-      }
-
-      setResult({
-        operations: {
-          rankTracking: rank && rank.snapshot ? rank.snapshot.totals : settledError(results[0]),
-          outcomes: outcomes && outcomes.snapshot ? { totalRecords: outcomes.snapshot.totalRecords, measuredPosts: outcomes.snapshot.measuredPosts } : settledError(results[1]),
-          wordpress: wordpress && wordpress.snapshot ? { sites: wordpress.snapshot.sites.total, drafts: wordpress.snapshot.drafts.total } : settledError(results[2]),
-          schedule: schedule && schedule.snapshot ? { schedules: schedule.snapshot.schedules.total, pending: schedule.snapshot.schedules.pending } : settledError(results[3])
-        }
-      });
-      log('Pro 운영 대시보드를 갱신했습니다.');
     }
     async function refreshFeatureStatus() {
       if (!requireSession()) return;
@@ -5069,7 +5037,7 @@
         hydrateNaverApiSettingsForm();
         setActiveView('golden', { load: false });
         log('Pro 로그인 완료: ' + (payload.session.tier || 'standard'));
-        await Promise.all([loadSources(), loadGoldenBoard(), refreshFeatureStatus().catch(function() {})]);
+        await Promise.all([loadSources(), loadGoldenBoard(), loadHomeOutcomes(), refreshFeatureStatus().catch(function() {})]);
         loadCommerceDashboard(selectedCommercePeriod).catch(function() {});
         schedulePostLoginAutoDiscovery();
       } catch (err) {
@@ -5179,20 +5147,11 @@
       });
     });
     qs('refreshSources').addEventListener('click', loadSources);
-    qs('refreshGolden').addEventListener('click', loadGoldenBoard);
-    qs('refreshOps').addEventListener('click', function() {
-      if (!requireSession()) {
-        renderOpsLocked();
-        return;
-      }
-      loadOpsDashboard().catch(function(err) { log('운영 대시보드 갱신 실패: ' + err.message); });
+    qs('refreshGolden').addEventListener('click', function() {
+      loadGoldenBoard();
+      loadSources();
     });
-    qs('opsTabs').addEventListener('click', function(event) {
-      const target = event.target.closest('[data-ops-tab]');
-      if (!target) return;
-      setActiveOpsTab(target.getAttribute('data-ops-tab'));
-      setActiveView('ops', { load: false });
-    });
+    qs('refreshHomeOutcomes').addEventListener('click', loadHomeOutcomes);
     qs('refreshFeatureStatus').addEventListener('click', refreshFeatureStatus);
     qs('clearLog').addEventListener('click', function() {
       qs('runLog').textContent = 'LEWORD Pro Web 대기 중';
@@ -5331,14 +5290,14 @@
     renderFeatureGrid();
     renderFeatureCatalog(null, null);
     selectTool(selectedToolId);
-    setActiveOpsTab(selectedOpsId);
     syncInternalAnalyticsToggle();
-    renderOpsLocked();
+    renderHomeOutcomesLocked();
     renderCommerceDashboardLocked();
     setActiveView(initialViewId(), { load: false });
     loadHealth();
     loadGoldenBoard();
     loadSources();
+    loadHomeOutcomes();
     loadDownloads().catch(function() {});
     loadCommerceCatalog().catch(function(err) { log('구매 카탈로그 초기화 실패: ' + err.message); });
     loadCommerceDashboard(selectedCommercePeriod).catch(function(err) { log('매출 대시보드 초기화 실패: ' + err.message); });
@@ -5350,6 +5309,7 @@
     setInterval(loadHealth, 30000);
     setInterval(loadGoldenBoard, 60000);
     setInterval(loadSources, 60000);
+    setInterval(loadHomeOutcomes, 60000);
   </script>
 </body>
 </html>

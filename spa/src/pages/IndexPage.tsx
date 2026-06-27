@@ -12,6 +12,166 @@ type HeroProof = {
     metric?: string;
 };
 
+type LiveGoldenPreview = {
+    id?: string;
+    rank?: number;
+    keyword?: string;
+    grade?: string;
+    publicSearchVolumeLabel?: string;
+    publicDocumentCountLabel?: string;
+    publicReason?: string;
+    updatedAt?: string;
+};
+
+type SourceSignal = {
+    id?: string;
+    keyword?: string;
+    title?: string;
+    description?: string;
+    priority?: number;
+    source?: string;
+    categoryId?: string;
+    createdAt?: string;
+};
+
+type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'policy' | 'issue';
+
+type SourceLaneConfig = {
+    id: SourceLaneId;
+    label: string;
+    accent: string;
+    description: string;
+};
+
+type SourceLane = SourceLaneConfig & {
+    items: SourceSignal[];
+};
+
+type HomeLiveStatus = 'loading' | 'ready' | 'error';
+
+type HomeLiveState = {
+    status: HomeLiveStatus;
+    golden: LiveGoldenPreview[];
+    lanes: SourceLane[];
+    updatedAt?: string;
+    boardCount: number;
+    boardTarget: number;
+    lockedCount: number;
+    running: boolean;
+    fallbackUsed: boolean;
+};
+
+const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
+const HOME_LIVE_TIMEOUT_MS = 6500;
+
+const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
+    { id: 'naver', label: '네이버', accent: '#2ed36f', description: '실시간 검색과 블로그 수요' },
+    { id: 'daum', label: '다음', accent: '#4d93ff', description: '생활/뉴스 검색 신호' },
+    { id: 'nate', label: '네이트', accent: '#ff6b6b', description: '이슈와 방송 검색 흐름' },
+    { id: 'zum', label: '줌', accent: '#f4c95d', description: '포털 이슈 보조 신호' },
+    { id: 'policy', label: '정책', accent: '#44d7b6', description: '지원금과 공공 알림' },
+    { id: 'issue', label: '이슈', accent: '#c084fc', description: '방송/연예/스포츠 흐름' },
+];
+
+const HOME_LIVE_FALLBACK_GOLDEN: LiveGoldenPreview[] = [
+    { id: 'fallback-golden-1', rank: 1, keyword: '소상공인 지원금 신청', grade: 'SS', publicSearchVolumeLabel: '수요 검증 중', publicDocumentCountLabel: '경쟁도 잠금', publicReason: '정책 수요와 검색 전환 가능성이 함께 있는 키워드입니다.' },
+    { id: 'fallback-golden-2', rank: 2, keyword: '장마 대비 준비물', grade: 'S', publicSearchVolumeLabel: '시즌 상승', publicDocumentCountLabel: '문서수 확인 중', publicReason: '계절 이슈와 구매 의도가 동시에 붙는 롱테일 키워드입니다.' },
+    { id: 'fallback-golden-3', rank: 3, keyword: '오늘 방송 출연진', grade: 'S', publicSearchVolumeLabel: '실시간 반응', publicDocumentCountLabel: '경쟁도 확인 중', publicReason: '방송 직후 빠르게 검색량이 붙는 이슈형 키워드입니다.' },
+];
+
+const HOME_LIVE_FALLBACK_SIGNALS: Record<SourceLaneId, SourceSignal[]> = {
+    naver: [{ id: 'fallback-naver', keyword: '여름 가전 추천', title: '네이버 수요', description: '시즌성 구매 검색이 빠르게 붙는 흐름입니다.', priority: 96, source: 'naver' }],
+    daum: [{ id: 'fallback-daum', keyword: '장마 준비물', title: '다음 생활 이슈', description: '생활형 검색에서 바로 글감으로 확장하기 좋은 신호입니다.', priority: 91, source: 'daum' }],
+    nate: [{ id: 'fallback-nate', keyword: '오늘 방송 출연진', title: '네이트 이슈', description: '방송 직후 검색 전환이 빠른 키워드 흐름입니다.', priority: 88, source: 'nate' }],
+    zum: [{ id: 'fallback-zum', keyword: '여름휴가 숙소', title: '줌 이슈', description: '지역명과 가격 비교로 확장하기 좋은 여행 검색입니다.', priority: 86, source: 'zum' }],
+    policy: [{ id: 'fallback-policy', keyword: '청년 월세 지원 조건', title: '정책 알림', description: '조건, 서류, 신청기간으로 세분화하기 좋은 정책 키워드입니다.', priority: 94, source: 'policy' }],
+    issue: [{ id: 'fallback-issue', keyword: '신작 드라마 출연진', title: '이슈 레이더', description: '인물, 원작, 몇부작까지 빠르게 확장되는 방송 이슈입니다.', priority: 90, source: 'issue' }],
+};
+
+function cleanLiveText(value: unknown, fallback: string): string {
+    const text = String(value || '').trim();
+    if (!text) return fallback;
+    const questionMarks = (text.match(/\?/g) || []).length;
+    const looksBroken = /[�]|占|揶|醫|怨|筌|嚥|媛|덈떎|섏|ㅼ/.test(text) || questionMarks >= Math.max(3, Math.ceil(text.length / 5));
+    return looksBroken ? fallback : text;
+}
+
+function buildFallbackHomeLiveState(status: HomeLiveStatus = 'loading'): HomeLiveState {
+    return {
+        status,
+        golden: HOME_LIVE_FALLBACK_GOLDEN,
+        lanes: SOURCE_LANE_CONFIGS.map((lane) => ({
+            ...lane,
+            items: HOME_LIVE_FALLBACK_SIGNALS[lane.id],
+        })),
+        boardCount: 0,
+        boardTarget: 120,
+        lockedCount: 0,
+        running: false,
+        fallbackUsed: true,
+    };
+}
+
+async function fetchHomeJson<T>(apiPath: string): Promise<T> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), HOME_LIVE_TIMEOUT_MS);
+    try {
+        const response = await fetch(LEWORD_API_BASE + apiPath, { cache: 'no-store', signal: controller.signal });
+        if (!response.ok) throw new Error('LEWORD API ' + response.status);
+        return await response.json() as T;
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
+function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { id?: string }>; fallbackUsed?: boolean } | null): SourceLane[] {
+    const lanes = Array.isArray(payload?.lanes) ? payload.lanes : [];
+    return SOURCE_LANE_CONFIGS.map((config) => {
+        const incoming = lanes.find((lane) => lane.id === config.id);
+        const items = Array.isArray(incoming?.items) && incoming.items.length > 0
+            ? incoming.items
+            : HOME_LIVE_FALLBACK_SIGNALS[config.id];
+        return {
+            ...config,
+            items: items.slice(0, 3),
+        };
+    });
+}
+
+async function loadHomeLiveState(): Promise<HomeLiveState> {
+    const fallback = buildFallbackHomeLiveState('error');
+    const [goldenResult, sourceResult] = await Promise.allSettled([
+        fetchHomeJson<{ updatedAt?: string; boardCount?: number; boardTarget?: number; lockedCount?: number; running?: boolean; publicPreview?: LiveGoldenPreview[] }>('/v1/public/live-golden'),
+        fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60'),
+    ]);
+    const goldenPayload = goldenResult.status === 'fulfilled' ? goldenResult.value : null;
+    const sourcePayload = sourceResult.status === 'fulfilled' ? sourceResult.value : null;
+    const golden = Array.isArray(goldenPayload?.publicPreview) && goldenPayload.publicPreview.length > 0
+        ? goldenPayload.publicPreview.slice(0, 5)
+        : fallback.golden;
+    const lanes = normalizeSourceLanes(sourcePayload);
+    const hasLiveData = Boolean(goldenPayload || sourcePayload);
+
+    return {
+        status: hasLiveData ? 'ready' : 'error',
+        golden,
+        lanes,
+        updatedAt: goldenPayload?.updatedAt || sourcePayload?.updatedAt,
+        boardCount: Number(goldenPayload?.boardCount || 0),
+        boardTarget: Number(goldenPayload?.boardTarget || 120),
+        lockedCount: Number(goldenPayload?.lockedCount || 0),
+        running: Boolean(goldenPayload?.running),
+        fallbackUsed: Boolean(sourcePayload?.fallbackUsed || !sourcePayload),
+    };
+}
+
+function formatLiveUpdatedAt(value?: string): string {
+    if (!value) return '실시간 대기';
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '실시간 갱신';
+    return new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(date);
+}
+
 const DEFAULT_HERO_PROOFS: HeroProof[] = [
     {
         src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg',
@@ -100,6 +260,7 @@ const DEFAULT_HERO_PROOFS: HeroProof[] = [
 function IndexPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
     const [activeProofIndex, setActiveProofIndex] = useState(0);
+    const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
 
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
@@ -146,6 +307,10 @@ function IndexPage() {
         ...proof,
     }));
     const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
+    const liveUpdatedAt = formatLiveUpdatedAt(liveState.updatedAt);
+    const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
+    const livePrimaryGolden = liveState.golden[0] || HOME_LIVE_FALLBACK_GOLDEN[0];
+    const liveSourceTotal = liveState.lanes.reduce((sum, lane) => sum + lane.items.length, 0);
 
     useEffect(() => {
         if (heroProofs.length <= 1) return;
@@ -161,7 +326,7 @@ function IndexPage() {
             <ParticlesCanvas />
 
             {/* ═══ HERO ═══ */}
-            <section className="home-hero" style={{ minHeight: '100vh', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 40, padding: '120px 24px 60px', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'center' }}>
+            <section className="home-hero" style={{ minHeight: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: 40, padding: '120px 24px 60px', maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'center' }}>
                 <div className="hero-content">
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: 'rgba(201, 168, 76, 0.1)', border: '1px solid rgba(201, 168, 76, 0.3)', borderRadius: 50, fontSize: 12, fontWeight: 800, letterSpacing: 2, color: 'var(--gold-primary)', marginBottom: 24 }}>
                         <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
@@ -197,6 +362,19 @@ function IndexPage() {
                                 ))}
                             </div>
                             <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>{heroBenefit}</span>
+                        </div>
+                    </div>
+
+                    <div id="leaders-live-summary" className="hero-live-rack">
+                        <div className="hero-live-rack-main">
+                            <span>{liveStatusLabel}</span>
+                            <strong>{cleanLiveText(livePrimaryGolden.keyword, 'LEWORD 황금키워드')}</strong>
+                            <small>{liveState.boardCount > 0 ? liveState.boardCount + '/' + liveState.boardTarget + ' 검증' : '황금키워드 준비 중'}</small>
+                        </div>
+                        <div className="hero-live-rack-lanes">
+                            {liveState.lanes.map((lane) => (
+                                <span key={lane.id} style={{ borderColor: lane.accent + '66', color: lane.accent }}>{lane.label}</span>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -242,6 +420,90 @@ function IndexPage() {
                 <TrustCounter target={99} label="가동률 %" />
                 <div style={{ width: 1, height: 40, background: 'var(--border-glass)' }} />
                 <TrustCounter target={15000} label="일일 자동 발행" />
+            </section>
+
+            <section id="leaders-live-home" className="home-live-section">
+                <div className="home-live-header">
+                    <div>
+                        <span className="section-tag">LEWORD LIVE</span>
+                        <h2>황금키워드와 실시간 소스를 홈에서 바로 확인하세요</h2>
+                        <p>네이버·다음·네이트·줌·정책·이슈 신호와 성과 이미지를 한 화면에 모았습니다.</p>
+                    </div>
+                    <div className="home-live-status">
+                        <strong>{liveStatusLabel}</strong>
+                        <span>{liveUpdatedAt}</span>
+                    </div>
+                </div>
+
+                <div className="home-live-metrics">
+                    <div><strong>{liveState.boardCount > 0 ? liveState.boardCount : liveState.golden.length}</strong><span>검증 키워드</span></div>
+                    <div><strong>{liveSourceTotal}</strong><span>수집 소스</span></div>
+                    <div><strong>{liveState.lockedCount > 0 ? liveState.lockedCount : 'PRO'}</strong><span>잠금 성과</span></div>
+                </div>
+
+                <div className="home-live-grid">
+                    <div className="home-live-group">
+                        <div className="home-live-group-title">
+                            <span>황금키워드</span>
+                            <Link to="/leword">LEWORD 열기</Link>
+                        </div>
+                        <div className="home-golden-list">
+                            {liveState.golden.slice(0, 3).map((item, index) => (
+                                <article key={item.id || String(item.keyword || 'golden') + '-' + index} className="home-golden-card">
+                                    <div className="home-golden-rank">#{item.rank || index + 1}</div>
+                                    <div>
+                                        <strong>{cleanLiveText(item.keyword, HOME_LIVE_FALLBACK_GOLDEN[index]?.keyword || '황금키워드')}</strong>
+                                        <p>{cleanLiveText(item.publicReason, HOME_LIVE_FALLBACK_GOLDEN[index]?.publicReason || '검색 수요와 경쟁도를 검증 중입니다.')}</p>
+                                        <div className="home-golden-meta">
+                                            <span>{cleanLiveText(item.grade, 'S')}</span>
+                                            <span>{cleanLiveText(item.publicSearchVolumeLabel, '수요 확인')}</span>
+                                            <span>{cleanLiveText(item.publicDocumentCountLabel, '경쟁 잠금')}</span>
+                                        </div>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="home-live-group home-live-group-wide">
+                        <div className="home-live-group-title">
+                            <span>포털·정책·이슈</span>
+                            <small>{liveState.fallbackUsed ? '보정 데이터 포함' : '실시간 연결'}</small>
+                        </div>
+                        <div className="home-source-grid">
+                            {liveState.lanes.map((lane) => {
+                                const fallback = HOME_LIVE_FALLBACK_SIGNALS[lane.id][0];
+                                const item = lane.items[0] || fallback;
+                                return (
+                                    <article key={lane.id} className="home-source-lane" style={{ borderColor: lane.accent + '55', background: 'linear-gradient(135deg, ' + lane.accent + '18, rgba(255,255,255,0.03))' }}>
+                                        <div className="home-source-lane-head">
+                                            <span style={{ background: lane.accent }} />
+                                            <strong>{lane.label}</strong>
+                                            <small>{item.priority || 0}</small>
+                                        </div>
+                                        <h3>{cleanLiveText(item.keyword || item.title, fallback.keyword || lane.label)}</h3>
+                                        <p>{cleanLiveText(item.description, fallback.description || lane.description)}</p>
+                                    </article>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    <div className="home-live-group">
+                        <div className="home-live-group-title">
+                            <span>성과</span>
+                            <Link to="/reviews">더 보기</Link>
+                        </div>
+                        <article className="home-proof-card">
+                            <img src={activeProof.src} alt={activeProof.alt || activeProof.title || 'Leaders Pro 성과 이미지'} loading="lazy" decoding="async" />
+                            <div>
+                                <span>{activeProof.metric || '성과 인증'}</span>
+                                <strong>{activeProof.title || '실제 운영 성과'}</strong>
+                                <p>{activeProof.desc || '사용자가 직접 확인한 블로그 운영 성과입니다.'}</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
             </section>
 
             {/* ═══ EXPLORE GRID ═══ */}
@@ -362,6 +624,340 @@ function IndexPage() {
             </section>
 
             <style>{`
+                .hero-live-rack {
+                    margin-top: 22px;
+                    display: grid;
+                    gap: 12px;
+                    padding: 14px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.12);
+                    background: rgba(9,14,22,0.64);
+                    backdrop-filter: blur(14px);
+                }
+
+                .hero-live-rack-main {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    min-width: 0;
+                }
+
+                .hero-live-rack-main span {
+                    flex: 0 0 auto;
+                    padding: 5px 9px;
+                    border-radius: 999px;
+                    background: rgba(68,215,182,0.14);
+                    color: #44d7b6;
+                    font-size: 11px;
+                    font-weight: 900;
+                    letter-spacing: 0.08em;
+                }
+
+                .hero-live-rack-main strong {
+                    min-width: 0;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    color: #fff;
+                    font-size: 14px;
+                }
+
+                .hero-live-rack-main small {
+                    flex: 0 0 auto;
+                    color: rgba(255,255,255,0.54);
+                    font-size: 12px;
+                }
+
+                .hero-live-rack-lanes {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 7px;
+                }
+
+                .hero-live-rack-lanes span {
+                    padding: 5px 9px;
+                    border: 1px solid;
+                    border-radius: 999px;
+                    font-size: 12px;
+                    font-weight: 800;
+                    background: rgba(255,255,255,0.04);
+                }
+
+                .home-live-section {
+                    max-width: 1280px;
+                    margin: 0 auto;
+                    padding: 76px 24px 88px;
+                    position: relative;
+                    z-index: 1;
+                }
+
+                .home-live-header {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 24px;
+                    align-items: flex-end;
+                    margin-bottom: 24px;
+                }
+
+                .home-live-header h2 {
+                    margin: 10px 0 8px;
+                    color: var(--text-primary);
+                    font-size: clamp(28px, 4vw, 44px);
+                    line-height: 1.18;
+                    letter-spacing: 0;
+                }
+
+                .home-live-header p {
+                    margin: 0;
+                    color: var(--text-secondary);
+                    font-size: 15px;
+                    line-height: 1.6;
+                }
+
+                .home-live-status {
+                    display: grid;
+                    gap: 4px;
+                    min-width: 138px;
+                    padding: 12px 14px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(68,215,182,0.28);
+                    background: rgba(68,215,182,0.08);
+                    text-align: right;
+                }
+
+                .home-live-status strong {
+                    color: #44d7b6;
+                    font-size: 13px;
+                    font-weight: 900;
+                }
+
+                .home-live-status span {
+                    color: rgba(255,255,255,0.64);
+                    font-size: 12px;
+                }
+
+                .home-live-metrics {
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 12px;
+                    margin-bottom: 22px;
+                }
+
+                .home-live-metrics div {
+                    padding: 16px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.10);
+                    background: rgba(255,255,255,0.04);
+                    display: flex;
+                    align-items: baseline;
+                    justify-content: space-between;
+                    gap: 12px;
+                }
+
+                .home-live-metrics strong {
+                    color: #fff;
+                    font-size: 28px;
+                    font-weight: 900;
+                }
+
+                .home-live-metrics span {
+                    color: var(--text-secondary);
+                    font-size: 13px;
+                    font-weight: 700;
+                }
+
+                .home-live-grid {
+                    display: grid;
+                    grid-template-columns: minmax(260px, 0.95fr) minmax(420px, 1.5fr) minmax(260px, 0.9fr);
+                    gap: 18px;
+                    align-items: stretch;
+                }
+
+                .home-live-group {
+                    min-width: 0;
+                    display: grid;
+                    align-content: start;
+                    gap: 12px;
+                }
+
+                .home-live-group-title {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    min-height: 30px;
+                    gap: 12px;
+                }
+
+                .home-live-group-title span {
+                    color: #fff;
+                    font-weight: 900;
+                    font-size: 15px;
+                }
+
+                .home-live-group-title a,
+                .home-live-group-title small {
+                    color: var(--gold-primary);
+                    font-size: 12px;
+                    font-weight: 800;
+                    text-decoration: none;
+                    white-space: nowrap;
+                }
+
+                .home-golden-list {
+                    display: grid;
+                    gap: 12px;
+                }
+
+                .home-golden-card,
+                .home-source-lane,
+                .home-proof-card {
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.12);
+                    background: rgba(12,18,28,0.72);
+                    box-shadow: 0 18px 46px rgba(0,0,0,0.18);
+                }
+
+                .home-golden-card {
+                    min-height: 142px;
+                    display: grid;
+                    grid-template-columns: 52px minmax(0, 1fr);
+                    gap: 12px;
+                    padding: 16px;
+                }
+
+                .home-golden-rank {
+                    width: 44px;
+                    height: 44px;
+                    border-radius: 8px;
+                    background: rgba(244,201,93,0.14);
+                    color: #f4c95d;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: 900;
+                    font-size: 13px;
+                }
+
+                .home-golden-card strong {
+                    display: block;
+                    color: #fff;
+                    font-size: 16px;
+                    line-height: 1.35;
+                    margin-bottom: 7px;
+                }
+
+                .home-golden-card p {
+                    margin: 0 0 10px;
+                    color: rgba(255,255,255,0.64);
+                    font-size: 12px;
+                    line-height: 1.55;
+                }
+
+                .home-golden-meta {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 6px;
+                }
+
+                .home-golden-meta span {
+                    padding: 4px 7px;
+                    border-radius: 999px;
+                    background: rgba(255,255,255,0.07);
+                    color: rgba(255,255,255,0.74);
+                    font-size: 11px;
+                    font-weight: 800;
+                }
+
+                .home-source-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 12px;
+                }
+
+                .home-source-lane {
+                    min-height: 144px;
+                    padding: 15px;
+                }
+
+                .home-source-lane-head {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin-bottom: 10px;
+                }
+
+                .home-source-lane-head span {
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50%;
+                }
+
+                .home-source-lane-head strong {
+                    color: #fff;
+                    font-size: 13px;
+                    font-weight: 900;
+                }
+
+                .home-source-lane-head small {
+                    margin-left: auto;
+                    color: rgba(255,255,255,0.50);
+                    font-size: 12px;
+                    font-weight: 800;
+                }
+
+                .home-source-lane h3 {
+                    margin: 0 0 8px;
+                    color: #fff;
+                    font-size: 15px;
+                    line-height: 1.36;
+                    letter-spacing: 0;
+                }
+
+                .home-source-lane p {
+                    margin: 0;
+                    color: rgba(255,255,255,0.64);
+                    font-size: 12px;
+                    line-height: 1.5;
+                }
+
+                .home-proof-card {
+                    overflow: hidden;
+                }
+
+                .home-proof-card img {
+                    width: 100%;
+                    height: 255px;
+                    display: block;
+                    object-fit: contain;
+                    background: rgba(0,0,0,0.28);
+                    padding: 12px;
+                }
+
+                .home-proof-card div {
+                    padding: 16px;
+                }
+
+                .home-proof-card span {
+                    color: #f4c95d;
+                    font-size: 12px;
+                    font-weight: 900;
+                }
+
+                .home-proof-card strong {
+                    display: block;
+                    margin: 6px 0;
+                    color: #fff;
+                    font-size: 17px;
+                    line-height: 1.35;
+                }
+
+                .home-proof-card p {
+                    margin: 0;
+                    color: rgba(255,255,255,0.64);
+                    font-size: 12px;
+                    line-height: 1.55;
+                }
+
                 .hero-proof-stage {
                     position: relative;
                     min-height: 560px;
@@ -479,6 +1075,16 @@ function IndexPage() {
                     background: #f4c95d;
                 }
 
+                @media (max-width: 1080px) {
+                    .home-live-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .home-source-grid {
+                        grid-template-columns: repeat(3, minmax(0, 1fr));
+                    }
+                }
+
                 @media (max-width: 900px) {
                     .home-hero {
                         grid-template-columns: 1fr !important;
@@ -500,6 +1106,42 @@ function IndexPage() {
                 }
 
                 @media (max-width: 640px) {
+                    .hero-live-rack-main {
+                        align-items: flex-start;
+                        flex-direction: column;
+                    }
+
+                    .hero-live-rack-main strong {
+                        white-space: normal;
+                    }
+
+                    .home-live-section {
+                        padding: 58px 14px 68px;
+                    }
+
+                    .home-live-header {
+                        display: grid;
+                        align-items: start;
+                    }
+
+                    .home-live-status {
+                        width: 100%;
+                        text-align: left;
+                    }
+
+                    .home-live-metrics {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .home-source-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .home-golden-card {
+                        grid-template-columns: 44px minmax(0, 1fr);
+                        padding: 14px;
+                    }
+
                     .home-hero {
                         padding: 92px 14px 48px !important;
                     }
