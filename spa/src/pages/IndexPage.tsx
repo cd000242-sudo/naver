@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
-import TrustCounter from '../components/TrustCounter';
-import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 type HeroProof = {
     src: string;
@@ -371,8 +369,9 @@ const DEFAULT_HERO_PROOFS: HeroProof[] = [
  * inline style 그대로 유지 (사용자 요구).
  */
 function IndexPage() {
-    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
-    const [activeProofIndex, setActiveProofIndex] = useState(0);
+    const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
+    const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
+    const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
 
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
@@ -397,30 +396,30 @@ function IndexPage() {
     }, []);
 
     useEffect(() => {
-        fetchSiteContent().then(setSiteContent);
+        let alive = true;
+        loadHomeLiveState()
+            .then((state) => {
+                if (alive) setLiveState(state);
+            })
+            .catch(() => {
+                if (alive) setLiveState(buildFallbackHomeLiveState('error'));
+            });
+        return () => {
+            alive = false;
+        };
     }, []);
 
-    const configuredProofs = siteContent?.hero?.proofs?.filter((proof) => proof?.src) || [];
-    const mergedProofs = configuredProofs.length
-        ? [
-            ...configuredProofs,
-            ...DEFAULT_HERO_PROOFS.filter((defaultProof) => !configuredProofs.some((proof) => proof?.src === defaultProof.src)),
-        ]
-        : DEFAULT_HERO_PROOFS;
-    const heroProofs = mergedProofs.map((proof, index) => ({
-        ...DEFAULT_HERO_PROOFS[index % DEFAULT_HERO_PROOFS.length],
-        ...proof,
-    }));
-    const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
-
-    useEffect(() => {
-        if (heroProofs.length <= 1) return;
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        const timer = window.setInterval(() => {
-            setActiveProofIndex((index) => (index + 1) % heroProofs.length);
-        }, 4200);
-        return () => window.clearInterval(timer);
-    }, [heroProofs.length]);
+    const liveUpdatedAt = formatLiveUpdatedAt(liveState.updatedAt);
+    const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
+    const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
+        || liveState.lanes[0]
+        || { ...SOURCE_LANE_CONFIGS[0], items: [] };
+    const activeSourceItems = activeSourceLane.items.slice(0, 10);
+    const activeSourceInsightItem = activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === activeSourceKeyword) || activeSourceItems[0] || null;
+    const selectSourceLane = (laneId: SourceLaneId) => {
+        setActiveSourceLaneId(laneId);
+        setActiveSourceKeyword('');
+    };
 
     return (
         <>
@@ -432,6 +431,67 @@ function IndexPage() {
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', background: 'rgba(201, 168, 76, 0.1)', border: '1px solid rgba(201, 168, 76, 0.3)', borderRadius: 50, fontSize: 12, fontWeight: 800, letterSpacing: 2, color: 'var(--gold-primary)', marginBottom: 24 }}>
                         <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
                         <span>PREMIUM AUTOMATION</span>
+                    </div>
+                    <div className="hero-realtime-board" aria-label="실시간 검색어">
+                        <div className="hero-realtime-head">
+                            <span>{liveStatusLabel}</span>
+                            <strong>실시간 검색어</strong>
+                            <small>{liveUpdatedAt}</small>
+                        </div>
+                        <div className="hero-source-tabs" role="tablist" aria-label="홈 실시간 소스 선택">
+                            {liveState.lanes.map((lane) => {
+                                const isActive = lane.id === activeSourceLane.id;
+                                return (
+                                    <button
+                                        key={lane.id}
+                                        type="button"
+                                        role="tab"
+                                        aria-selected={isActive}
+                                        className={`hero-source-tab${isActive ? ' active' : ''}`}
+                                        onClick={() => selectSourceLane(lane.id)}
+                                        style={{ borderColor: isActive ? lane.accent : 'rgba(255,255,255,0.13)', color: isActive ? '#061018' : 'rgba(255,255,255,0.74)', background: isActive ? lane.accent : 'rgba(255,255,255,0.045)' }}
+                                    >
+                                        <span style={{ background: isActive ? '#061018' : lane.accent }} />
+                                        <strong>{lane.label}</strong>
+                                        <small>{lane.items.length}</small>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                        <div className="hero-source-panel" style={{ borderColor: activeSourceLane.accent + '66', background: 'linear-gradient(135deg, ' + activeSourceLane.accent + '16, rgba(255,255,255,0.035))' }}>
+                            <div className="hero-source-panel-head">
+                                <span style={{ background: activeSourceLane.accent }} />
+                                <div>
+                                    <strong>{activeSourceLane.label}</strong>
+                                    <p>{activeSourceLane.description}</p>
+                                </div>
+                                <small>{activeSourceItems.length}개 표시</small>
+                            </div>
+                            <div className="hero-source-body">
+                                <div className="hero-source-list">
+                                    {activeSourceItems.length === 0 ? (
+                                        <article className="hero-source-empty">
+                                            <strong>원본 수집 중</strong>
+                                            <p>{activeSourceLane.label} 원본에서 확인된 실시간 항목만 표시합니다.</p>
+                                        </article>
+                                    ) : activeSourceItems.map((item, index) => {
+                                        const keyword = cleanLiveText(item.keyword || item.title, activeSourceLane.label);
+                                        const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
+                                        return (
+                                            <a key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`} href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer" onClick={() => setActiveSourceKeyword(keyword)}>
+                                                <span>{index + 1}</span>
+                                                <div>
+                                                    <strong>{keyword}</strong>
+                                                    <p>{description}</p>
+                                                </div>
+                                                <small>{item.priority || 'LIVE'}</small>
+                                            </a>
+                                        );
+                                    })}
+                                </div>
+                                <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} />
+                            </div>
+                        </div>
                     </div>
                     <div className="hero-action-strip" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
                         {[
@@ -446,172 +506,14 @@ function IndexPage() {
                         ))}
                     </div>
                 </div>
-                <div className="hero-proof-stage" aria-label="실제 사용자 성과 이미지">
-                    <div className="proof-summary">
-                        <span>{activeProof.metric || '성과 인증'}</span>
-                        <strong>{activeProof.title || '실제 운영 성과'}</strong>
-                        <small>{activeProof.desc || '사용자가 직접 확인한 성과 이미지를 순서대로 보여줍니다.'}</small>
-                    </div>
-                    <div className="proof-image-shell">
-                        {heroProofs.map((proof, index) => (
-                            <img
-                                key={`${proof.src}-${index}`}
-                                src={proof.src}
-                                alt={proof.alt || proof.title || 'Leaders Pro 사용자 성과 이미지'}
-                                loading={index === 0 ? 'eager' : 'lazy'}
-                                decoding="async"
-                                className={`proof-image${index === activeProofIndex % heroProofs.length ? ' active' : ''}`}
-                            />
-                        ))}
-                    </div>
-                    <div className="proof-dots" role="tablist" aria-label="성과 이미지 선택">
-                        {heroProofs.map((proof, index) => (
-                            <button
-                                key={`${proof.src}-dot-${index}`}
-                                type="button"
-                                className={index === activeProofIndex % heroProofs.length ? 'active' : ''}
-                                onClick={() => setActiveProofIndex(index)}
-                                aria-label={`${index + 1}번째 성과 이미지 보기`}
-                                aria-selected={index === activeProofIndex % heroProofs.length}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══ TRUST BAR ═══ */}
-            <section style={{ padding: '40px 24px', maxWidth: 1200, margin: '0 auto', display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: 24, position: 'relative', zIndex: 1, borderTop: '1px solid var(--border-glass)', borderBottom: '1px solid var(--border-glass)' }}>
-                <TrustCounter target={127000} label="누적 발행" />
-                <div style={{ width: 1, height: 40, background: 'var(--border-glass)' }} />
-                <TrustCounter target={2847} label="활성 사용자" />
-                <div style={{ width: 1, height: 40, background: 'var(--border-glass)' }} />
-                <TrustCounter target={99} label="가동률 %" />
-                <div style={{ width: 1, height: 40, background: 'var(--border-glass)' }} />
-                <TrustCounter target={15000} label="일일 자동 발행" />
-            </section>
-
-            <section className="section">
-                <div className="section-inner">
-                    <div className="section-header">
-                        <span className="section-tag">EXPLORE</span>
-                        <h2 className="section-title">원하는 정보를 빠르게 확인하세요</h2>
-                        <p className="section-desc">각 페이지에서 상세 정보를 확인할 수 있습니다</p>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, maxWidth: 1000, margin: '0 auto' }}>
-                        {[
-                            { to: '/products', emoji: '🚀', title: '제품 소개', desc: 'Leaders Pro의 강력한 블로그 자동화 기능을\n자세히 확인하세요', cta: '자세히 보기 →' },
-                            { to: '/pricing', emoji: '💰', title: '구매', desc: '올인원 기간권 선택 및\n토스페이먼츠 안전 결제', cta: '가격표 보기 →', highlight: true, badge: '💳 결제' },
-                            { to: '/reviews', emoji: '⭐', title: '후기 & FAQ', desc: '실제 사용자들의 생생한 후기와\n자주 묻는 질문 모음', cta: '후기 보기 →' },
-                            { to: '/community', emoji: '👥', title: '커뮤니티', desc: '공지사항, 수익 인증,\n활용 팁 확인', cta: '커뮤니티 →' },
-                            { to: '/download', emoji: '📥', title: '다운로드', desc: '구매 후 비밀번호 입력으로\n최신 버전 다운로드', cta: '다운로드 →' },
-                            { to: '/lookup', emoji: '🔍', title: '주문 조회', desc: '이메일 또는 주문번호로\n구매 내역 확인', cta: '조회하기 →' },
-                        ].map(card => (
-                            <Link
-                                key={card.to}
-                                to={card.to}
-                                className="fade-in"
-                                style={{
-                                    textDecoration: 'none',
-                                    background: 'var(--bg-card)',
-                                    border: card.highlight ? '1px solid var(--border-gold)' : '1px solid var(--border-glass)',
-                                    borderRadius: 'var(--radius-lg)',
-                                    padding: '36px 28px',
-                                    backdropFilter: 'blur(20px)',
-                                    transition: 'all 0.3s',
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    textAlign: 'center',
-                                    cursor: 'pointer',
-                                    position: 'relative',
-                                    overflow: 'hidden',
-                                }}
-                                onMouseEnter={e => {
-                                    e.currentTarget.style.borderColor = 'var(--border-gold)';
-                                    e.currentTarget.style.transform = 'translateY(-4px)';
-                                    e.currentTarget.style.boxShadow = card.highlight ? '0 12px 40px rgba(201,168,76,0.25)' : '0 12px 40px rgba(201,168,76,0.15)';
-                                }}
-                                onMouseLeave={e => {
-                                    e.currentTarget.style.borderColor = card.highlight ? 'var(--border-gold)' : 'var(--border-glass)';
-                                    e.currentTarget.style.transform = 'none';
-                                    e.currentTarget.style.boxShadow = 'none';
-                                }}
-                            >
-                                {card.badge && (
-                                    <div style={{ position: 'absolute', top: 12, right: 12, background: 'linear-gradient(135deg, var(--gold-primary), var(--gold-light))', color: '#000', fontSize: 11, fontWeight: 700, padding: '4px 10px', borderRadius: 20 }}>{card.badge}</div>
-                                )}
-                                <div style={{ fontSize: 40, marginBottom: 16 }}>{card.emoji}</div>
-                                <h3 style={{ fontSize: 19, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 8 }}>{card.title}</h3>
-                                <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 16, whiteSpace: 'pre-line' }}>{card.desc}</p>
-                                <span style={{ color: 'var(--gold-primary)', fontSize: 13, fontWeight: 600 }}>{card.cta}</span>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══ TESTIMONIALS ═══ */}
-            <section className="section">
-                <div className="section-inner">
-                    <div className="section-header">
-                        <span className="section-tag">TESTIMONIALS</span>
-                        <h2 className="section-title">실제 사용자들의 이야기</h2>
-                        <p className="section-desc">Leaders Pro를 경험한 분들의 생생한 후기</p>
-                    </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 24, maxWidth: 1000, margin: '0 auto' }}>
-                        {[
-                            {
-                                quote: <>블로그 10개를 혼자 운영하는데, <strong style={{ color: 'var(--text-primary)' }}>리더스 프로 없었으면 불가능</strong>했어요. 출근 전에 키워드만 세팅하면 퇴근할 때 50건이 올라가 있습니다.</>,
-                                bg: 'linear-gradient(135deg, #667eea, #764ba2)',
-                                letter: 'K',
-                                name: 'K 대표',
-                                meta: '마케팅 에이전시 · 10개월 사용',
-                            },
-                            {
-                                quote: <>쿠팡 파트너스 블로그를 4개 돌리고 있는데, 쇼핑 커넥트 기능으로 <strong style={{ color: 'var(--text-primary)' }}>월 수익이 3배</strong> 뛰었어요. AI가 생성한 리뷰 글이 정말 자연스러워요.</>,
-                                bg: 'linear-gradient(135deg, #f093fb, #f5576c)',
-                                letter: 'P',
-                                name: 'P님',
-                                meta: '제휴 마케터 · 6개월 사용',
-                            },
-                            {
-                                quote: <>글로벌 블로그 5개를 Leaders Orbit으로 운영 중입니다. <strong style={{ color: 'var(--text-primary)' }}>애드센스 승인이 2주 만에</strong> 떨어졌고, 지금은 월 $400 이상 벌고 있어요.</>,
-                                bg: 'linear-gradient(135deg, #4facfe, #00f2fe)',
-                                letter: 'L',
-                                name: 'L님',
-                                meta: '글로벌 블로거 · 8개월 사용',
-                            },
-                        ].map((t, i) => (
-                            <div key={i} className="fade-in" style={{ background: 'var(--bg-card)', border: '1px solid var(--border-glass)', borderRadius: 'var(--radius-lg)', padding: 32, backdropFilter: 'blur(20px)' }}>
-                                <div style={{ fontSize: 32, color: 'var(--gold-primary)', marginBottom: 12, lineHeight: 1, fontFamily: 'Georgia, serif' }}>"</div>
-                                <p style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 20 }}>{t.quote}</p>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                                    <div style={{ width: 40, height: 40, borderRadius: '50%', background: t.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 14 }}>{t.letter}</div>
-                                    <div>
-                                        <strong style={{ color: 'var(--text-primary)', fontSize: 14 }}>{t.name}</strong>
-                                        <div style={{ color: 'var(--text-muted)', fontSize: 12 }}>{t.meta}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    <div style={{ textAlign: 'center', marginTop: 40 }}>
-                        <Link to="/reviews" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '14px 32px', background: 'var(--bg-glass)', border: '1px solid var(--border-glass)', borderRadius: 'var(--radius-sm)', color: 'var(--gold-primary)', fontSize: 14, fontWeight: 600, transition: 'all 0.3s' }}
-                            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--border-gold)'}
-                            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-glass)'}
-                        >
-                            더 많은 후기 보기 →
-                        </Link>
-                    </div>
-                </div>
             </section>
 
             <style>{`
                 .hero-realtime-board {
-                    width: min(100%, 720px);
+                    width: min(100%, 940px);
                     display: grid;
                     gap: 16px;
-                    margin-bottom: 24px;
+                    margin: 0 auto 18px;
                     padding: 18px;
                     border-radius: 8px;
                     border: 1px solid rgba(255,255,255,0.14);
@@ -709,7 +611,7 @@ function IndexPage() {
                 }
 
                 .hero-source-panel {
-                    min-height: 500px;
+                    min-height: 320px;
                     display: grid;
                     align-content: start;
                     gap: 12px;
@@ -757,6 +659,9 @@ function IndexPage() {
                 .hero-source-list {
                     display: grid;
                     gap: 7px;
+                    max-height: 250px;
+                    overflow-y: auto;
+                    padding-right: 4px;
                 }
 
                 .hero-source-empty {
@@ -1080,7 +985,7 @@ function IndexPage() {
                 .hero-content {
                     grid-column: 1 / -1;
                     grid-row: 1;
-                    width: min(100%, 760px);
+                    width: min(100%, 980px);
                     justify-self: center;
                     text-align: center;
                     position: relative;
@@ -1088,20 +993,20 @@ function IndexPage() {
                 }
 
                 .hero-action-strip {
-                    width: min(100%, 720px);
+                    width: min(100%, 940px);
                     margin: 0 auto;
                     display: grid;
-                    grid-template-columns: 1fr;
-                    gap: 16px;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 12px;
                 }
 
                 .hero-action-button {
                     position: relative;
-                    min-height: 112px;
+                    min-height: 92px;
                     display: grid;
                     align-content: center;
-                    gap: 9px;
-                    padding: 22px 28px;
+                    gap: 7px;
+                    padding: 16px 18px;
                     border-radius: 8px;
                     border: 3px solid rgba(255,255,255,0.30);
                     background: linear-gradient(135deg, rgba(1,5,10,0.98), rgba(10,18,30,0.96));
@@ -1138,7 +1043,7 @@ function IndexPage() {
 
                 .hero-action-button strong {
                     color: #fff;
-                    font-size: clamp(22px, 2.15vw, 30px);
+                    font-size: 17px;
                     font-weight: 950;
                     line-height: 1.28;
                 }
@@ -1730,6 +1635,18 @@ function IndexPage() {
                     .hero-source-panel {
                         min-height: 0;
                         padding: 12px;
+                    }
+
+                    .hero-source-body {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .hero-source-list {
+                        max-height: 360px;
+                    }
+
+                    .source-insight-panel {
+                        display: none;
                     }
 
                     .hero-action-strip {
