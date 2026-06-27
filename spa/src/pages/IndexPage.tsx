@@ -133,7 +133,7 @@ function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { i
             : HOME_LIVE_FALLBACK_SIGNALS[config.id];
         return {
             ...config,
-            items: items.slice(0, 3),
+            items: items.slice(0, 8),
         };
     });
 }
@@ -261,6 +261,7 @@ function IndexPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
     const [activeProofIndex, setActiveProofIndex] = useState(0);
     const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
+    const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
 
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
@@ -317,6 +318,11 @@ function IndexPage() {
             priority: item.priority || 0,
         };
     });
+    const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
+        || liveState.lanes[0]
+        || { ...SOURCE_LANE_CONFIGS[0], items: HOME_LIVE_FALLBACK_SIGNALS.naver };
+    const activeSourceFallback = HOME_LIVE_FALLBACK_SIGNALS[activeSourceLane.id][0];
+    const activeSourceItems = (activeSourceLane.items.length ? activeSourceLane.items : HOME_LIVE_FALLBACK_SIGNALS[activeSourceLane.id]).slice(0, 6);
 
     useEffect(() => {
         if (heroProofs.length <= 1) return;
@@ -431,8 +437,8 @@ function IndexPage() {
                 <div className="home-live-header">
                     <div>
                         <span className="section-tag">LEWORD LIVE</span>
-                        <h2>황금키워드와 실시간 소스를 홈에서 바로 확인하세요</h2>
-                        <p>네이버·다음·네이트·줌·정책·이슈 신호와 성과 이미지를 한 화면에 모았습니다.</p>
+                        <h2>황금키워드와 실시간 소스를 탭별로 확인하세요</h2>
+                        <p>네이버·다음·네이트·줌·정책·이슈를 하나씩 골라 보면서 바로 글감 흐름을 확인합니다.</p>
                     </div>
                     <div className="home-live-status">
                         <strong>{liveStatusLabel}</strong>
@@ -475,22 +481,51 @@ function IndexPage() {
                             <span>포털·정책·이슈</span>
                             <small>{liveState.fallbackUsed ? '보정 데이터 포함' : '실시간 연결'}</small>
                         </div>
-                        <div className="home-source-grid">
+                        <div className="home-source-tabs" role="tablist" aria-label="실시간 소스 선택">
                             {liveState.lanes.map((lane) => {
-                                const fallback = HOME_LIVE_FALLBACK_SIGNALS[lane.id][0];
-                                const item = lane.items[0] || fallback;
+                                const isActive = lane.id === activeSourceLane.id;
                                 return (
-                                    <article key={lane.id} className="home-source-lane" style={{ borderColor: lane.accent + '55', background: 'linear-gradient(135deg, ' + lane.accent + '18, rgba(255,255,255,0.03))' }}>
-                                        <div className="home-source-lane-head">
-                                            <span style={{ background: lane.accent }} />
-                                            <strong>{lane.label}</strong>
-                                            <small>{item.priority || 0}</small>
-                                        </div>
-                                        <h3>{cleanLiveText(item.keyword || item.title, fallback.keyword || lane.label)}</h3>
-                                        <p>{cleanLiveText(item.description, fallback.description || lane.description)}</p>
-                                    </article>
+                                    <button
+                                        key={lane.id}
+                                        type="button"
+                                        role="tab"
+                                        aria-selected={isActive}
+                                        className={`home-source-tab${isActive ? ' active' : ''}`}
+                                        onClick={() => setActiveSourceLaneId(lane.id)}
+                                        style={{ borderColor: isActive ? lane.accent : 'rgba(255,255,255,0.12)', color: isActive ? '#fff' : 'rgba(255,255,255,0.72)' }}
+                                    >
+                                        <span style={{ background: lane.accent }} />
+                                        <strong>{lane.label}</strong>
+                                        <small>{lane.items.length}</small>
+                                    </button>
                                 );
                             })}
+                        </div>
+                        <div className="home-source-panel" style={{ borderColor: activeSourceLane.accent + '66', background: 'linear-gradient(135deg, ' + activeSourceLane.accent + '18, rgba(255,255,255,0.035))' }}>
+                            <div className="home-source-panel-head">
+                                <span style={{ background: activeSourceLane.accent }} />
+                                <div>
+                                    <strong>{activeSourceLane.label}</strong>
+                                    <p>{activeSourceLane.description}</p>
+                                </div>
+                                <small>{activeSourceItems.length}개 표시</small>
+                            </div>
+                            <div className="home-source-list">
+                                {activeSourceItems.map((item, index) => {
+                                    const keyword = cleanLiveText(item.keyword || item.title, activeSourceFallback.keyword || activeSourceLane.label);
+                                    const description = cleanLiveText(item.description || item.title, activeSourceFallback.description || activeSourceLane.description);
+                                    return (
+                                        <article key={item.id || `${activeSourceLane.id}-${keyword}-${index}`} className="home-source-row">
+                                            <div className="home-source-row-rank">{index + 1}</div>
+                                            <div>
+                                                <strong>{keyword}</strong>
+                                                <p>{description}</p>
+                                            </div>
+                                            <small>{item.priority || 'LIVE'}</small>
+                                        </article>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
 
@@ -932,7 +967,7 @@ function IndexPage() {
                 }
 
                 .home-golden-card,
-                .home-source-lane,
+                .home-source-panel,
                 .home-proof-card {
                     border-radius: 8px;
                     border: 1px solid rgba(255,255,255,0.12);
@@ -991,56 +1026,158 @@ function IndexPage() {
                     font-weight: 800;
                 }
 
-                .home-source-grid {
-                    display: grid;
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
-                    gap: 12px;
-                }
-
-                .home-source-lane {
-                    min-height: 144px;
-                    padding: 15px;
-                }
-
-                .home-source-lane-head {
+                .home-source-tabs {
                     display: flex;
+                    flex-wrap: nowrap;
+                    gap: 6px;
                     align-items: center;
-                    gap: 8px;
-                    margin-bottom: 10px;
+                    overflow-x: auto;
+                    padding-bottom: 2px;
+                    scrollbar-width: none;
                 }
 
-                .home-source-lane-head span {
-                    width: 8px;
-                    height: 8px;
+                .home-source-tabs::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .home-source-tab {
+                    min-height: 42px;
+                    flex: 0 0 auto;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 8px 9px;
+                    border: 1px solid rgba(255,255,255,0.12);
+                    border-radius: 8px;
+                    background: rgba(255,255,255,0.045);
+                    font: inherit;
+                    cursor: pointer;
+                    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+                }
+
+                .home-source-tab:hover,
+                .home-source-tab.active {
+                    transform: translateY(-1px);
+                    background: rgba(255,255,255,0.09);
+                }
+
+                .home-source-tab span,
+                .home-source-panel-head > span {
+                    width: 9px;
+                    height: 9px;
                     border-radius: 50%;
+                    flex: 0 0 auto;
                 }
 
-                .home-source-lane-head strong {
+                .home-source-tab strong {
+                    font-size: 12px;
+                    font-weight: 900;
+                    white-space: nowrap;
+                }
+
+                .home-source-tab small {
+                    min-width: 18px;
+                    padding: 2px 5px;
+                    border-radius: 999px;
+                    background: rgba(255,255,255,0.10);
+                    color: rgba(255,255,255,0.72);
+                    font-size: 11px;
+                    font-weight: 900;
+                    text-align: center;
+                }
+
+                .home-source-panel {
+                    min-height: 364px;
+                    padding: 16px;
+                    display: grid;
+                    align-content: start;
+                    gap: 14px;
+                }
+
+                .home-source-panel-head {
+                    display: grid;
+                    grid-template-columns: 12px minmax(0, 1fr) auto;
+                    align-items: center;
+                    gap: 10px;
+                    padding-bottom: 12px;
+                    border-bottom: 1px solid rgba(255,255,255,0.10);
+                }
+
+                .home-source-panel-head strong {
+                    display: block;
                     color: #fff;
-                    font-size: 13px;
+                    font-size: 17px;
                     font-weight: 900;
                 }
 
-                .home-source-lane-head small {
-                    margin-left: auto;
-                    color: rgba(255,255,255,0.50);
+                .home-source-panel-head p {
+                    margin: 3px 0 0;
+                    color: rgba(255,255,255,0.58);
                     font-size: 12px;
-                    font-weight: 800;
+                    line-height: 1.4;
                 }
 
-                .home-source-lane h3 {
-                    margin: 0 0 8px;
+                .home-source-panel-head small {
+                    color: rgba(255,255,255,0.58);
+                    font-size: 12px;
+                    font-weight: 900;
+                    white-space: nowrap;
+                }
+
+                .home-source-list {
+                    display: grid;
+                    gap: 10px;
+                }
+
+                .home-source-row {
+                    min-height: 72px;
+                    display: grid;
+                    grid-template-columns: 38px minmax(0, 1fr) auto;
+                    align-items: center;
+                    gap: 11px;
+                    padding: 12px;
+                    border-radius: 8px;
+                    border: 1px solid rgba(255,255,255,0.08);
+                    background: rgba(5,10,18,0.34);
+                }
+
+                .home-source-row-rank {
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(255,255,255,0.09);
+                    color: #fff;
+                    font-size: 12px;
+                    font-weight: 900;
+                }
+
+                .home-source-row strong {
+                    display: block;
                     color: #fff;
                     font-size: 15px;
-                    line-height: 1.36;
+                    line-height: 1.34;
                     letter-spacing: 0;
+                    overflow-wrap: anywhere;
                 }
 
-                .home-source-lane p {
-                    margin: 0;
-                    color: rgba(255,255,255,0.64);
+                .home-source-row p {
+                    margin: 5px 0 0;
+                    color: rgba(255,255,255,0.62);
                     font-size: 12px;
-                    line-height: 1.5;
+                    line-height: 1.45;
+                }
+
+                .home-source-row > small {
+                    padding: 5px 7px;
+                    border-radius: 999px;
+                    background: rgba(244,201,93,0.12);
+                    color: #f4c95d;
+                    font-size: 11px;
+                    font-weight: 900;
+                    white-space: nowrap;
                 }
 
                 .home-proof-card {
@@ -1203,8 +1340,8 @@ function IndexPage() {
                         grid-template-columns: 1fr;
                     }
 
-                    .home-source-grid {
-                        grid-template-columns: repeat(3, minmax(0, 1fr));
+                    .home-source-panel {
+                        min-height: 320px;
                     }
                 }
 
@@ -1285,8 +1422,41 @@ function IndexPage() {
                         grid-template-columns: 1fr;
                     }
 
-                    .home-source-grid {
-                        grid-template-columns: 1fr;
+                    .home-source-tabs {
+                        flex-wrap: nowrap;
+                        overflow-x: auto;
+                        padding-bottom: 2px;
+                        scrollbar-width: none;
+                    }
+
+                    .home-source-tabs::-webkit-scrollbar {
+                        display: none;
+                    }
+
+                    .home-source-tab {
+                        flex: 0 0 auto;
+                    }
+
+                    .home-source-panel {
+                        min-height: 0;
+                        padding: 14px;
+                    }
+
+                    .home-source-panel-head {
+                        grid-template-columns: 12px minmax(0, 1fr);
+                    }
+
+                    .home-source-panel-head small {
+                        grid-column: 2;
+                    }
+
+                    .home-source-row {
+                        grid-template-columns: 34px minmax(0, 1fr);
+                    }
+
+                    .home-source-row > small {
+                        grid-column: 2;
+                        justify-self: start;
                     }
 
                     .home-golden-card {
