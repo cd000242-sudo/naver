@@ -929,17 +929,6 @@
       </aside>
 
       <section class="main">
-        <section class="hero main-view active" data-view="golden">
-          <h1>LEWORD Pro Web: 서버 기반 키워드 분석</h1>
-          <p>Electron 앱의 핵심 기능을 웹에서 바로 실행하도록 재배치했습니다. 실시간 소스 수집, PC/모바일 검색량 측정, 문서수 확인, 장기 분석 job, Pro 권한 체크는 서버가 담당합니다.</p>
-          <div class="metrics">
-            <div class="metric-card"><strong id="metricSession">로그인 필요</strong><span>Pro 세션</span></div>
-            <div class="metric-card"><strong id="metricBoard">0/120</strong><span>황금키워드 보드</span></div>
-            <div class="metric-card"><strong id="metricMeasured">0</strong><span>실측 키워드</span></div>
-            <div class="metric-card"><strong id="metricServer">확인 중</strong><span>서버 상태</span></div>
-          </div>
-        </section>
-
         <section class="panel main-view active" id="golden" data-view="golden">
           <div class="panel-title">
             <div>
@@ -963,22 +952,6 @@
           <div id="goldenNotice" class="locked">황금키워드 보드를 불러오는 중입니다.</div>
           <button class="btn primary public-preview-cta" type="button" id="goldenMoreLogin">더 많은 황금키워드 보러가기</button>
           <div class="golden-list" id="goldenBoardList" style="margin-top:10px;"></div>
-        </section>
-
-        <section class="panel main-view active" id="homeOutcomes" data-view="golden">
-          <div class="panel-title">
-            <div>
-              <h2>성과 기록</h2>
-              <div class="muted">황금키워드 발굴 후 실제 조회·수익·측정 글 현황을 홈에서 바로 확인합니다.</div>
-            </div>
-            <button class="btn blue" type="button" id="refreshHomeOutcomes">성과 새로고침</button>
-          </div>
-          <div class="ops-grid" id="homeOutcomeCards">
-            <article class="ops-card"><h3>측정 글</h3><span class="ops-number">-</span><span class="ops-meta">Pro 로그인 후 확인</span></article>
-            <article class="ops-card"><h3>전체 기록</h3><span class="ops-number">-</span><span class="ops-meta">실제 성과 기록 대기</span></article>
-            <article class="ops-card"><h3>월 조회</h3><span class="ops-number">-</span><span class="ops-meta">성과 동기화 후 표시</span></article>
-            <article class="ops-card"><h3>월 수익</h3><span class="ops-number">-</span><span class="ops-meta">성과 동기화 후 표시</span></article>
-          </div>
         </section>
 
         <section class="panel main-view" id="lookup" data-view="lookup">
@@ -1637,7 +1610,6 @@
       if (opts.load === false) return;
       if (next === 'golden') {
         loadGoldenBoard().catch(function(err) { log('황금키워드 보드 갱신 실패: ' + err.message); });
-        loadHomeOutcomes().catch(function(err) { log('성과 기록 갱신 실패: ' + err.message); });
       }
       if (next === 'features' && session && session.accessToken) refreshFeatureStatus().catch(function(err) { log('Pro 기능 상태 확인 실패: ' + err.message); });
       if (next === 'downloads') loadDownloads().catch(function(err) { log('다운로드 상태 확인 실패: ' + err.message); });
@@ -2454,7 +2426,6 @@
         setResult(payload);
         renderSnapshotResultSummary({ title: '내노출 추적 등록' }, payload.snapshot || payload);
         log('상위 키워드 추적 등록 완료: ' + keyword);
-        await loadHomeOutcomes().catch(function() {});
       } catch (err) {
         log('추적 등록 실패: ' + err.message);
       }
@@ -2503,7 +2474,6 @@
     }
     function renderSession() {
       if (session && session.userId) rememberProLoginUserId(session.userId);
-      qs('metricSession').textContent = session ? (session.tier || 'Pro') : '로그인 필요';
       qs('loginOpen').textContent = session ? 'Pro 접속중' : 'Pro 로그인';
       const shell = qs('proShell');
       if (shell) shell.classList.toggle('public-preview-mode', !(session && session.accessToken));
@@ -3982,7 +3952,6 @@
     }
     function renderKeywordRows(result) {
       const rows = keywordResultRows(result);
-      qs('metricMeasured').textContent = rows.filter(function(row) { return row.isMeasured; }).length.toLocaleString('ko-KR');
       if (!rows.length) {
         qs('keywordRows').innerHTML = '<tr><td colspan="12" class="muted">서버 결과가 비어 있습니다. API 키 상태 또는 소스 장애를 확인하세요.</td></tr>';
         return;
@@ -4008,7 +3977,6 @@
       const target = boardTarget || 120;
       const count = boardCount || 0;
       const pct = Math.min(100, Math.round((count / Math.max(1, target)) * 100));
-      qs('metricBoard').textContent = count + '/' + target;
       qs('goldenBoardCount').textContent = count + '/' + target;
       qs('goldenPublicCount').textContent = String(visibleCount || 0);
       qs('goldenLockedCount').textContent = String(lockedCount || 0);
@@ -4080,7 +4048,6 @@
         payload.updatedAt,
         payload.previewPolicyLabel || '하위 5개 공개'
       );
-      qs('metricMeasured').textContent = fmt(payload.boardCount || 0);
       qs('goldenNotice').textContent = '무료 맛보기는 실측 통과 후보 5개만 보여줍니다. 더 많은 황금키워드와 정확 검색량·문서수·황금비율은 Pro 로그인 후 확인하세요.';
       renderGoldenQuality(items, false, payload.boardCount, payload.lockedCount);
       renderGoldenRows(items, false, payload.boardTarget);
@@ -4096,7 +4063,6 @@
         snapshot.boardUpdatedAt || snapshot.lastFinishedAt,
         'Pro 전체 공개'
       );
-      qs('metricMeasured').textContent = items.filter(function(item) { return item.isMeasured !== false; }).length.toLocaleString('ko-KR');
       qs('goldenNotice').textContent = 'Pro 로그인 상태입니다. 전체 순위와 정확 지표를 표시합니다.';
       renderGoldenQuality(items, true, snapshot.boardCount || items.length, 0);
       renderGoldenRows(items, true, snapshot.boardTarget || items.length);
@@ -4132,77 +4098,11 @@
         qs('goldenNotice').textContent = '황금키워드 보드를 불러오지 못했습니다: ' + err.message;
       }
     }
-    function homeOutcomeCard(title, value, meta, items) {
-      const list = Array.isArray(items) && items.length
-        ? '<ul class="ops-list">' + items.slice(0, 3).map(function(item) { return '<li>' + escapeHtml(item) + '</li>'; }).join('') + '</ul>'
-        : '';
-      return '<article class="ops-card"><h3>' + escapeHtml(title) + '</h3>'
-        + '<span class="ops-number">' + escapeHtml(value) + '</span>'
-        + '<span class="ops-meta">' + escapeHtml(meta) + '</span>'
-        + list
-        + '</article>';
-    }
-    function renderHomeOutcomesLocked() {
-      const target = qs('homeOutcomeCards');
-      if (!target) return;
-      target.innerHTML = [
-        homeOutcomeCard('측정 글', '-', 'Pro 로그인 후 확인', []),
-        homeOutcomeCard('전체 기록', '-', '실제 성과 기록 대기', []),
-        homeOutcomeCard('월 조회', '-', '성과 동기화 후 표시', []),
-        homeOutcomeCard('월 수익', '-', '성과 동기화 후 표시', []),
-      ].join('');
-    }
-    function renderHomeOutcomesError(message) {
-      const target = qs('homeOutcomeCards');
-      if (!target) return;
-      target.innerHTML = [
-        homeOutcomeCard('측정 글', '확인 필요', message || '성과 스냅샷을 불러오지 못했습니다.', []),
-        homeOutcomeCard('전체 기록', '-', '잠시 후 다시 새로고침하세요.', []),
-        homeOutcomeCard('월 조회', '-', '서버 응답 대기', []),
-        homeOutcomeCard('월 수익', '-', '서버 응답 대기', []),
-      ].join('');
-    }
-    function renderHomeOutcomesSnapshot(snapshot) {
-      const target = qs('homeOutcomeCards');
-      if (!target) return;
-      const benchmark = (snapshot && snapshot.benchmark) || {};
-      const topKeywords = (benchmark.topPerformingKeywords || []).slice(0, 3).map(function(item) {
-        return (item.keyword || '성과 키워드') + ' · 조회 ' + fmt(item.views || 0) + ' · 수익 ' + fmt(item.revenue || 0);
-      });
-      target.innerHTML = [
-        homeOutcomeCard('측정 글', fmt(snapshot.measuredPosts || 0), '실제 성과가 연결된 글', []),
-        homeOutcomeCard('전체 기록', fmt(snapshot.totalRecords || 0), '누적 성과 기록', []),
-        homeOutcomeCard('월 조회', fmt(benchmark.totalMonthlyViews || 0), '측정 글 기준', []),
-        homeOutcomeCard('월 수익', fmt(benchmark.totalMonthlyRevenue || 0), topKeywords.length ? '상위 성과 키워드 포함' : '측정 데이터 대기', topKeywords),
-      ].join('');
-    }
-    async function loadHomeOutcomes() {
-      if (!session || !session.accessToken) {
-        renderHomeOutcomesLocked();
-        return;
-      }
-      try {
-        const payload = await apiGet(endpoints.proOutcomes, true, 6500);
-        if (payload && payload.snapshot) {
-          renderHomeOutcomesSnapshot(payload.snapshot);
-          return;
-        }
-        renderHomeOutcomesError('성과 스냅샷 형식이 비어 있습니다.');
-      } catch (err) {
-        if (!session || !session.accessToken || isAuthErrorMessage(err.message)) {
-          renderHomeOutcomesLocked();
-          return;
-        }
-        renderHomeOutcomesError(err.message);
-      }
-    }
     async function loadHealth() {
       try {
         const health = await apiGet(endpoints.health, false);
-        qs('metricServer').textContent = health.ok ? '정상' : '확인 필요';
-        if (health.liveGolden) qs('metricBoard').textContent = (health.liveGolden.boardCount || 0) + '/' + (health.liveGolden.boardTarget || 120);
+        if (health.liveGolden) qs('goldenBoardCount').textContent = (health.liveGolden.boardCount || 0) + '/' + (health.liveGolden.boardTarget || 120);
       } catch (err) {
-        qs('metricServer').textContent = '오류';
       }
     }
     function getSelectedTool() {
@@ -4971,7 +4871,7 @@
         hydrateNaverApiSettingsForm();
         setActiveView('golden', { load: false });
         log('Pro 로그인 완료: ' + (payload.session.tier || 'standard'));
-        await Promise.all([loadGoldenBoard(), loadHomeOutcomes(), refreshFeatureStatus().catch(function() {})]);
+        await Promise.all([loadGoldenBoard(), refreshFeatureStatus().catch(function() {})]);
         loadCommerceDashboard(selectedCommercePeriod).catch(function() {});
         schedulePostLoginAutoDiscovery();
       } catch (err) {
@@ -5083,7 +4983,6 @@
     qs('refreshGolden').addEventListener('click', function() {
       loadGoldenBoard();
     });
-    qs('refreshHomeOutcomes').addEventListener('click', loadHomeOutcomes);
     qs('refreshFeatureStatus').addEventListener('click', refreshFeatureStatus);
     qs('clearLog').addEventListener('click', function() {
       qs('runLog').textContent = 'LEWORD Pro Web 대기 중';
@@ -5223,12 +5122,10 @@
     renderFeatureCatalog(null, null);
     selectTool(selectedToolId);
     syncInternalAnalyticsToggle();
-    renderHomeOutcomesLocked();
     renderCommerceDashboardLocked();
     setActiveView(initialViewId(), { load: false });
     loadHealth();
     loadGoldenBoard();
-    loadHomeOutcomes();
     loadDownloads().catch(function() {});
     loadCommerceCatalog().catch(function(err) { log('구매 카탈로그 초기화 실패: ' + err.message); });
     loadCommerceDashboard(selectedCommercePeriod).catch(function(err) { log('매출 대시보드 초기화 실패: ' + err.message); });
@@ -5239,7 +5136,6 @@
     sendCommerceAnalytics('pageview', 'pageview', { view: activeViewId }).catch(function() {});
     setInterval(loadHealth, 30000);
     setInterval(loadGoldenBoard, 60000);
-    setInterval(loadHomeOutcomes, 60000);
   </script>
 </body>
 </html>
