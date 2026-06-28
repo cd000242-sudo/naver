@@ -59,6 +59,23 @@ type KeywordStrategyGroup = {
     items: KeywordStrategyIdea[];
 };
 
+type TopicProfile = {
+    keyword: string;
+    core: string;
+    laneId: SourceLaneId;
+    laneLabel: string;
+    category: 'policy' | 'money' | 'entertainment' | 'sports' | 'incident' | 'commerce' | 'public' | 'general';
+    audience: string;
+    searchIntent: string;
+    tension: string;
+    proofNeed: string;
+    answerFrame: string;
+    hookAngle: string;
+    bridgeAngle: string;
+    entities: string[];
+    numbers: string[];
+};
+
 type HomeLiveStatus = 'loading' | 'ready' | 'error';
 
 type HomeLiveState = {
@@ -219,66 +236,9 @@ const SOURCE_SEARCH_PATHS: Record<SourceLaneId, (keyword: string) => string> = {
     issue: (keyword) => `https://search.naver.com/search.naver?where=news&query=${encodeURIComponent(keyword)}`,
 };
 
-const SOURCE_EXPANSION_SUFFIXES: Record<SourceLaneId, string[]> = {
-    naver: ['\ud6c4\uae30', '\ucd94\ucc9c', '\uac00\uaca9', '\ube44\uad50', '\ubc29\ubc95', '\uc7a5\ub2e8\uc810', '\uccb4\ud06c\ub9ac\uc2a4\ud2b8', '2026'],
-    daum: ['\uc815\ub9ac', '\uc6d0\uc778', '\uc77c\uc815', '\uc804\ub9dd', '\ubc18\uc751', '\uad00\ub828 \ub274\uc2a4', '\ud575\uc2ec', '\uc624\ub298'],
-    nate: ['\ucd9c\uc5f0\uc9c4', '\ud504\ub85c\ud544', '\uacf5\uc2dd\uc785\uc7a5', '\uc7ac\ubc29\uc1a1', '\uc778\uc2a4\ud0c0', '\uadfc\ud669', '\uc601\uc0c1', '\ubc18\uc751'],
-    zum: ['\uc704\uce58', '\ud6c4\uae30', '\uac00\uaca9', '\uc608\uc57d', '\uc77c\uc815', '\ud560\uc778', '\ucd94\ucc9c', '\uadfc\ucc98'],
-    policy: ['\uc2e0\uccad \ubc29\ubc95', '\ub300\uc0c1', '\uc870\uac74', '\uc11c\ub958', '\uc9c0\uae09\uc77c', '\ud648\ud398\uc774\uc9c0', '\uc9c0\uc5ed\ubcc4', '\ubb38\uc758\ucc98'],
-    issue: ['\uc815\ub9ac', '\uc774\uc720', '\uacf5\uc2dd\uc785\uc7a5', '\uc77c\uc815', '\ubc18\uc751', '\uad00\ub828\uc8fc', '\uc778\ubb3c', '\uc804\ub9dd'],
-};
-
-const SOURCE_MINDMAP_BRANCHES: Record<SourceLaneId, Array<{ label: string; suffixes: string[] }>> = {
-    naver: [
-        { label: '\uac80\uc0c9\uc758\ub3c4', suffixes: ['\ud6c4\uae30', '\ucd94\ucc9c'] },
-        { label: '\uc804\ud658\ud615', suffixes: ['\uac00\uaca9', '\ube44\uad50'] },
-        { label: '\ucf58\ud150\uce20\uac01', suffixes: ['\ubc29\ubc95', '\uccb4\ud06c\ub9ac\uc2a4\ud2b8'] },
-    ],
-    daum: [
-        { label: '\ub274\uc2a4\ub9e5\ub77d', suffixes: ['\uc815\ub9ac', '\uc6d0\uc778'] },
-        { label: '\uc2dc\uac04\ucd95', suffixes: ['\uc77c\uc815', '\uc624\ub298'] },
-        { label: '\ubc18\uc751', suffixes: ['\uc804\ub9dd', '\uad00\ub828 \ub274\uc2a4'] },
-    ],
-    nate: [
-        { label: '\uc778\ubb3c', suffixes: ['\ud504\ub85c\ud544', '\uadfc\ud669'] },
-        { label: '\ubc29\uc1a1', suffixes: ['\ucd9c\uc5f0\uc9c4', '\uc7ac\ubc29\uc1a1'] },
-        { label: '\ubc18\uc751', suffixes: ['\uacf5\uc2dd\uc785\uc7a5', '\uc778\uc2a4\ud0c0'] },
-    ],
-    zum: [
-        { label: '\ud0d0\uc0c9', suffixes: ['\uc704\uce58', '\uadfc\ucc98'] },
-        { label: '\uad6c\ub9e4', suffixes: ['\uac00\uaca9', '\ud560\uc778'] },
-        { label: '\uacbd\ud5d8', suffixes: ['\ud6c4\uae30', '\uc608\uc57d'] },
-    ],
-    policy: [
-        { label: '\ub300\uc0c1', suffixes: ['\ub300\uc0c1', '\uc870\uac74'] },
-        { label: '\uc2e0\uccad', suffixes: ['\uc2e0\uccad \ubc29\ubc95', '\uc11c\ub958'] },
-        { label: '\uc77c\uc815', suffixes: ['\uc9c0\uae09\uc77c', '\ubb38\uc758\ucc98'] },
-    ],
-    issue: [
-        { label: '\ud575\uc2ec', suffixes: ['\uc815\ub9ac', '\uc774\uc720'] },
-        { label: '\ud6c4\uc18d', suffixes: ['\uacf5\uc2dd\uc785\uc7a5', '\uc804\ub9dd'] },
-        { label: '\ud655\uc0b0', suffixes: ['\ubc18\uc751', '\uc778\ubb3c'] },
-    ],
-};
-
 function buildSourceSearchUrl(laneId: SourceLaneId, keyword: string): string {
     const trimmed = keyword.trim();
     return SOURCE_SEARCH_PATHS[laneId](trimmed || 'LEWORD');
-}
-
-function buildSourceExpansionKeywords(laneId: SourceLaneId, keyword: string): string[] {
-    const base = keyword.trim();
-    if (!base) return [];
-    return Array.from(new Set(SOURCE_EXPANSION_SUFFIXES[laneId].map((suffix) => `${base} ${suffix}`))).slice(0, 8);
-}
-
-function buildSourceMindMap(laneId: SourceLaneId, keyword: string): Array<{ label: string; items: string[] }> {
-    const base = keyword.trim();
-    if (!base) return [];
-    return SOURCE_MINDMAP_BRANCHES[laneId].map((branch) => ({
-        label: branch.label,
-        items: branch.suffixes.map((suffix) => `${base} ${suffix}`),
-    }));
 }
 
 function uniqueList(values: string[]): string[] {
@@ -293,79 +253,357 @@ function keywordTokens(keyword: string): string[] {
         .slice(0, 5));
 }
 
-function makeKeywordIdea(label: string, tag: string, reason: string, title: string): KeywordStrategyIdea {
-    const tokenCount = keywordTokens(label).length;
-    const intentScore = /(방법|조건|대상|서류|후기|정리|이유|차이|비교|일정|출연진|공식입장|질문|해결|체크|신청|지급일)/.test(label) ? 22 : 10;
-    const lengthScore = label.length >= 18 ? 26 : label.length >= 13 ? 20 : 12;
-    const specificityScore = tokenCount >= 4 ? 24 : tokenCount >= 3 ? 18 : 10;
-    const score = Math.min(99, Math.max(55, 38 + intentScore + lengthScore + specificityScore));
-    return { label, tag, reason, title, score };
+function includesAny(text: string, patterns: RegExp[]): boolean {
+    return patterns.some((pattern) => pattern.test(text));
 }
 
-function buildIntentPhrases(laneId: SourceLaneId, keyword: string): string[] {
-    const tokens = keywordTokens(keyword);
-    const first = tokens[0] || keyword;
-    const second = tokens[1] || '';
-    const pair = second ? `${first} ${second}` : first;
-    const common = [
-        `${keyword} 정리`,
-        `${keyword} 이유`,
-        `${keyword} 질문`,
-        `${keyword} 핵심`,
+function extractNumbers(text: string): string[] {
+    return uniqueList((text.match(/[0-9]+(?:\.[0-9]+)?\s?(?:회|명|위|년|월|일|%|G|차|억|만)?/gi) || []).slice(0, 3));
+}
+
+function contextTokens(keyword: string, description: string): string[] {
+    const stopwords = new Set(['네이버', '다음', '네이트', '실시간', '검색어', '포착', '상승', '중인', '바로', '정밀', '분석', '확인', '하세요', '키워드', '후보', '후보입니다', '뉴스', '이슈', '저경쟁', '표시되는', '연결', '대기', 'Pro', 'pro', '빅키워드는', '하위', '의도로', '쪼개서', '엔진에서', '검증합니다', '검색량과', '문서수를', '넘겨']);
+    const extract = (value: string) => value
+        .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+        .split(/\s+/)
+        .filter((token) => token.length >= 2 && !stopwords.has(token));
+    return uniqueList([...extract(keyword), ...extract(description)])
+        .slice(0, 8);
+}
+
+function inferTopicCategory(laneId: SourceLaneId, text: string): TopicProfile['category'] {
+    if (laneId === 'policy') return 'policy';
+    if (includesAny(text, [/지원금|장려금|월세|급여|연금|정책|신청|대상|서류|지급|환급|세금|고용/])) return 'policy';
+    if (includesAny(text, [/금리|환율|투자|주가|반도체|경제|공모주|아파트|부동산|대출|수익|실적|물가|가격/])) return 'money';
+    if (includesAny(text, [/드라마|예능|방송|출연|OST|배우|결혼|열애|콘서트|프로필|영화|SNL|전참시|스타|연예/])) return 'entertainment';
+    if (includesAny(text, [/홈런|경기|월드컵|축구|야구|대표팀|감독|선수|순위|결승|리그|로또/])) return 'sports';
+    if (includesAny(text, [/화재|태풍|폭염|살인|사건|사고|통제|지진|피해|실종|부상|특보|위험/])) return 'incident';
+    if (includesAny(text, [/맛집|숙소|항공권|할인|예약|병원|보험|비용|주차|공연|티켓|여행/])) return 'commerce';
+    if (includesAny(text, [/장관|정부|회의|지역|공식|발표|공공|한중|정상/])) return 'public';
+    return 'general';
+}
+
+function profileCopy(category: TopicProfile['category']): Pick<TopicProfile, 'audience' | 'searchIntent' | 'tension' | 'proofNeed' | 'answerFrame' | 'hookAngle' | 'bridgeAngle'> {
+    const copies: Record<TopicProfile['category'], Pick<TopicProfile, 'audience' | 'searchIntent' | 'tension' | 'proofNeed' | 'answerFrame' | 'hookAngle' | 'bridgeAngle'>> = {
+        policy: {
+            audience: '내가 받을 수 있는지 불안한 신청자',
+            searchIntent: '대상, 기한, 준비물, 놓치면 손해 보는 조건을 빠르게 확인',
+            tension: '신청 대상과 제외 조건이 헷갈리는 지점',
+            proofNeed: '공식 출처와 실제 신청 전 체크할 조건',
+            answerFrame: '대상 여부를 먼저 판별하고 다음 행동을 제시',
+            hookAngle: '놓치면 손해 보는 조건을 먼저 꺼내기',
+            bridgeAngle: '대상자 판별표와 신청 순서',
+        },
+        money: {
+            audience: '내 돈과 지역 영향이 궁금한 검색자',
+            searchIntent: '뉴스 제목보다 실제 영향, 수혜·피해 변수, 다음 확인 포인트를 파악',
+            tension: '큰 뉴스와 내 생활 사이의 연결고리가 보이지 않는 지점',
+            proofNeed: '수치, 지역, 기업, 정책 변수를 나눠 보는 근거',
+            answerFrame: '왜 중요한지보다 나에게 어떤 영향인지 먼저 설명',
+            hookAngle: '숫자 뒤에 숨은 실제 영향으로 시작하기',
+            bridgeAngle: '지역 영향, 산업 영향, 개인 선택 기준',
+        },
+        entertainment: {
+            audience: '방송을 놓쳤거나 맥락이 궁금한 시청자',
+            searchIntent: '누가 왜 화제인지, 어떤 장면과 연결되는지, 다시 볼 이유를 확인',
+            tension: '짧은 화제어만 보고는 맥락을 알기 어려운 지점',
+            proofNeed: '방송 장면, 인물 관계, 공개된 발언을 분리한 정리',
+            answerFrame: '인물보다 장면과 반응을 먼저 연결',
+            hookAngle: '화제 장면의 숨은 맥락으로 클릭 유도',
+            bridgeAngle: '인물, 장면, 반응, 다음 회차',
+        },
+        sports: {
+            audience: '결과보다 의미와 다음 경우의 수가 궁금한 팬',
+            searchIntent: '점수나 기록이 순위, 일정, 다음 변수에 어떤 영향을 주는지 확인',
+            tension: '기록은 보이지만 다음 판도가 헷갈리는 지점',
+            proofNeed: '기록, 순위, 일정, 경우의 수를 한 화면에서 비교',
+            answerFrame: '결과보다 다음 변수와 영향부터 정리',
+            hookAngle: '기록 뒤에 바뀐 판도를 앞세우기',
+            bridgeAngle: '결과, 순위, 다음 일정, 경우의 수',
+        },
+        incident: {
+            audience: '현재 상황과 내 주변 영향이 먼저 궁금한 검색자',
+            searchIntent: '위치, 피해, 교통·안전 영향, 지금 해야 할 행동을 확인',
+            tension: '속보는 많지만 현재 기준 정보가 흩어진 지점',
+            proofNeed: '시간대별 상황, 위치, 공식 발표, 행동 요령',
+            answerFrame: '현재 상황과 안전 확인 포인트를 먼저 제시',
+            hookAngle: '지금 확인해야 할 위험 신호로 시작하기',
+            bridgeAngle: '현재 상황, 위치, 피해, 대응',
+        },
+        commerce: {
+            audience: '돈과 시간을 낭비하기 싫은 비교 검색자',
+            searchIntent: '가격보다 실패하지 않는 선택 기준과 확인 순서를 찾음',
+            tension: '광고성 정보가 많아 실제 판단 기준이 흐려지는 지점',
+            proofNeed: '가격, 위치, 조건, 후기 신뢰도를 나눠 보는 기준',
+            answerFrame: '추천보다 선택 기준과 피해야 할 조건을 먼저 제시',
+            hookAngle: '실패 방지 기준으로 후킹',
+            bridgeAngle: '가격, 위치, 조건, 대안 비교',
+        },
+        public: {
+            audience: '정책·공공 이슈의 실제 의미가 궁금한 검색자',
+            searchIntent: '발표 내용이 누구에게 어떤 영향을 주는지 확인',
+            tension: '공식 발표와 실제 체감 사이의 간극',
+            proofNeed: '발표 주체, 대상, 일정, 후속 변수를 분리한 근거',
+            answerFrame: '발표 요약보다 영향 받는 사람을 먼저 설명',
+            hookAngle: '공식 발표 뒤 달라지는 점으로 시작하기',
+            bridgeAngle: '대상, 영향, 일정, 후속 조치',
+        },
+        general: {
+            audience: '짧은 화제어의 맥락을 빠르게 알고 싶은 검색자',
+            searchIntent: '왜 뜨는지, 지금 무엇을 보면 되는지 확인',
+            tension: '검색량은 붙었지만 정리된 답이 부족한 지점',
+            proofNeed: '원인, 핵심 사실, 다음 확인 포인트',
+            answerFrame: '핵심 사실과 검색자가 취할 다음 행동을 먼저 제시',
+            hookAngle: '사람들이 놓치는 첫 질문으로 시작하기',
+            bridgeAngle: '원인, 핵심, 다음 검색어',
+        },
+    };
+    return copies[category];
+}
+
+function inferTopicProfile(lane: SourceLane, item: SourceSignal): TopicProfile {
+    const keyword = cleanLiveText(item.keyword || item.title, lane.label);
+    const description = cleanLiveText(item.description || item.title, lane.description);
+    const text = `${keyword} ${description}`;
+    const entities = contextTokens(keyword, description);
+    const numbers = extractNumbers(keyword);
+    const category = inferTopicCategory(lane.id, text);
+    const copy = profileCopy(category);
+    const core = entities.slice(0, Math.min(3, Math.max(1, entities.length))).join(' ') || keyword;
+    return {
+        keyword,
+        core,
+        laneId: lane.id,
+        laneLabel: lane.label,
+        category,
+        entities,
+        numbers,
+        ...copy,
+    };
+}
+
+function scoreStrategyIdea(label: string, profile: TopicProfile, rankBias = 0): number {
+    const tokens = keywordTokens(label);
+    const hasCore = label.includes(profile.core.split(' ')[0] || profile.core);
+    const hasHook = /(놓치|진짜|갑자기|헷갈|먼저|숨은|피해야|바뀐|왜|전|후|실제|갈리는)/.test(label);
+    const hasAnswer = label.includes('확인') || label.includes('정리') || label.includes('판별') || label.includes('기준') || label.includes('답');
+    const lengthScore = label.length >= 24 && label.length <= 58 ? 24 : label.length >= 16 ? 16 : 8;
+    const specificityScore = Math.min(26, tokens.length * 5 + (profile.numbers.length ? 4 : 0));
+    const hookScore = hasHook ? 18 : 8;
+    const answerScore = hasAnswer ? 16 : 8;
+    const coreScore = hasCore ? 9 : 4;
+    const naturalPenalty = label.length > 72 ? 8 : 0;
+    return Math.min(99, Math.max(62, 39 + lengthScore + specificityScore + hookScore + answerScore + coreScore + rankBias - naturalPenalty));
+}
+
+function makeStrategyIdea(label: string, tag: string, reason: string, title: string, profile: TopicProfile, rankBias = 0): KeywordStrategyIdea {
+    return {
+        label,
+        tag,
+        reason,
+        title,
+        score: scoreStrategyIdea(label, profile, rankBias),
+    };
+}
+
+function compactAudience(profile: TopicProfile): string {
+    const audiences: Record<TopicProfile['category'], string> = {
+        policy: '신청 대상자',
+        money: '투자·지역 영향이 궁금한 사람',
+        entertainment: '방송 맥락이 궁금한 사람',
+        sports: '다음 판도가 궁금한 팬',
+        incident: '현재 상황이 급한 사람',
+        commerce: '실패 없이 고르고 싶은 사람',
+        public: '실제 영향이 궁금한 사람',
+        general: '지금 검색한 사람',
+    };
+    return audiences[profile.category];
+}
+
+function audienceSubject(profile: TopicProfile): string {
+    const subjects: Record<TopicProfile['category'], string> = {
+        policy: '신청 대상자는',
+        money: '투자·지역 영향이 궁금한 사람은',
+        entertainment: '방송 맥락이 궁금한 사람은',
+        sports: '다음 판도가 궁금한 팬은',
+        incident: '현재 상황이 급한 사람은',
+        commerce: '실패 없이 고르고 싶은 사람은',
+        public: '실제 영향이 궁금한 사람은',
+        general: '지금 검색한 사람은',
+    };
+    return subjects[profile.category];
+}
+
+function articleLeadPhrase(profile: TopicProfile): string {
+    return profile.category === 'general' ? '검색 결과보다' : '뉴스 제목보다';
+}
+
+function hookPromise(profile: TopicProfile): string {
+    const promises: Record<TopicProfile['category'], string> = {
+        policy: '대상 여부와 놓치면 손해 보는 조건',
+        money: '내 돈과 지역에 미칠 실제 영향',
+        entertainment: '화제 장면과 인물 관계',
+        sports: '기록이 바꾼 다음 판도',
+        incident: '현재 위치·피해·대응 정보',
+        commerce: '실패하지 않는 선택 기준',
+        public: '누가 영향을 받는지와 후속 일정',
+        general: '갑자기 뜬 이유와 지금 확인할 사실',
+    };
+    return promises[profile.category];
+}
+
+function buildTitleIdeas(profile: TopicProfile): KeywordStrategyIdea[] {
+    const numberHook = profile.numbers[0] ? `${profile.numbers[0]}보다 먼저 봐야 할` : '검색량 붙기 전에 잡아야 할';
+    const promise = hookPromise(profile);
+    const audience = compactAudience(profile);
+    const candidates = [
+        {
+            label: `${profile.keyword}, 지금 봐야 할 건 ${articleLeadPhrase(profile)} ${promise}`,
+            tag: 'AEO 답변형',
+            reason: '검색자의 실제 질문을 제목에 박아 첫 문단 답변으로 이어지게 합니다.',
+            title: `${profile.searchIntent} 흐름에 맞춰 답부터 제시`,
+            bias: 6,
+        },
+        {
+            label: `${profile.core} 검색 전 확인할 ${profile.proofNeed}`,
+            tag: 'GEO 근거형',
+            reason: '출처와 판단 기준을 함께 제시해 AI 검색 요약에도 잡히기 쉬운 구조입니다.',
+            title: `${profile.proofNeed}을 기준표처럼 정리`,
+            bias: 4,
+        },
+        {
+            label: `${numberHook} ${profile.core}의 숨은 변수`,
+            tag: '후킹 롱테일',
+            reason: '남들이 큰 키워드만 쓸 때 검색자가 멈칫하는 변수를 앞세웁니다.',
+            title: `${profile.hookAngle}로 클릭 이유를 만듦`,
+            bias: 8,
+        },
+        {
+            label: `${profile.keyword} 검색한 사람이 놓치면 안 되는 판단 기준`,
+            tag: 'SEO 체류형',
+            reason: '단순 요약 대신 독자가 끝까지 읽을 판단 프레임을 줍니다.',
+            title: `${profile.tension}을 해결하는 구조`,
+            bias: 5,
+        },
+        {
+            label: `${profile.core} 핵심만 보면 안 되는 이유: ${profile.bridgeAngle}`,
+            tag: '클러스터형',
+            reason: '한 글에서 끝내지 않고 후속 글과 내부 링크로 확장되는 제목입니다.',
+            title: `${profile.bridgeAngle}을 묶어 주제 권위를 만듦`,
+            bias: 3,
+        },
+        {
+            label: `${audience}가 ${profile.core}에서 가장 많이 놓치는 것`,
+            tag: '신선한 관점',
+            reason: '누구를 위한 글인지 선명해서 CTR과 체류 시간을 동시에 노립니다.',
+            title: `${audience}에게 바로 꽂히는 제목`,
+            bias: 7,
+        },
     ];
-    const byLane: Record<SourceLaneId, string[]> = {
-        naver: [`${keyword} 후기`, `${keyword} 방법`, `${pair} 비교`, `${pair} 문제 해결`, `${keyword} 체크리스트`],
-        daum: [`${keyword} 원인`, `${keyword} 일정`, `${keyword} 전망`, `${pair} 오늘`, `${keyword} 반응`],
-        nate: [`${keyword} 프로필`, `${keyword} 출연진`, `${keyword} 공식입장`, `${pair} 근황`, `${keyword} 재방송`],
-        zum: [`${keyword} 위치`, `${keyword} 가격`, `${keyword} 예약`, `${pair} 추천`, `${keyword} 할인`],
-        policy: [`${keyword} 신청 방법`, `${keyword} 대상`, `${keyword} 조건`, `${keyword} 서류`, `${keyword} 지급일`],
-        issue: [`${keyword} 공식입장`, `${keyword} 이유`, `${keyword} 반응`, `${pair} 인물`, `${keyword} 전망`],
-    };
-    return uniqueList([...byLane[laneId], ...common]).slice(0, 10);
+    return candidates.map((candidate) => makeStrategyIdea(candidate.label, candidate.tag, candidate.reason, candidate.title, profile, candidate.bias));
 }
 
-function buildQuestionPhrases(laneId: SourceLaneId, keyword: string): string[] {
-    const subject = keyword.trim();
-    const byLane: Record<SourceLaneId, string[]> = {
-        naver: [`${subject} 왜 검색될까`, `${subject} 어떻게 확인하나`, `${subject} 장단점은 무엇인가`, `${subject} 검색자가 궁금한 점`],
-        daum: [`${subject} 원인은 무엇인가`, `${subject} 지금 상황은 어떤가`, `${subject} 앞으로 어떻게 되나`, `${subject} 관련 뉴스 핵심`],
-        nate: [`${subject} 누구인가`, `${subject} 방송에서 무슨 일이 있었나`, `${subject} 공식입장은 나왔나`, `${subject} 반응은 어떤가`],
-        zum: [`${subject} 어디서 확인하나`, `${subject} 가격이나 위치는 어떤가`, `${subject} 예약 전 확인할 점`, `${subject} 추천 기준은 무엇인가`],
-        policy: [`${subject} 누가 받을 수 있나`, `${subject} 신청은 어디서 하나`, `${subject} 필요한 서류는 무엇인가`, `${subject} 언제 지급되나`],
-        issue: [`${subject} 왜 화제인가`, `${subject} 핵심 쟁점은 무엇인가`, `${subject} 공식입장은 무엇인가`, `${subject} 후속 이슈는 무엇인가`],
-    };
-    return byLane[laneId];
+function buildAnswerIdeas(profile: TopicProfile): KeywordStrategyIdea[] {
+    const questionStem = profile.core || profile.keyword;
+    const candidates = [
+        {
+            label: `${questionStem}에서 지금 확인해야 할 핵심 변수는 무엇인가`,
+            tag: 'AEO 질문',
+            reason: `첫 문단에서 ${profile.answerFrame} 형태로 바로 답변합니다.`,
+            title: '질문형 제목 + 즉답형 첫 문단',
+            bias: 5,
+        },
+        {
+            label: `${audienceSubject(profile)} ${questionStem}에서 무엇을 먼저 봐야 하나`,
+            tag: '독자 지정',
+            reason: '검색자를 특정해 글의 관점이 뚜렷해지고 이탈을 줄입니다.',
+            title: '누구에게 필요한 정보인지 먼저 고정',
+            bias: 4,
+        },
+        {
+            label: `${profile.keyword} 관련 글에서 빼면 안 되는 근거는 무엇인가`,
+            tag: 'GEO 근거',
+            reason: `AI 검색과 요약에 걸리도록 ${profile.proofNeed}을 소제목으로 분리합니다.`,
+            title: '출처형 소제목으로 신뢰도 강화',
+            bias: 6,
+        },
+        {
+            label: `${questionStem} 이후 검색자는 무엇을 또 찾아볼까`,
+            tag: '후속 의도',
+            reason: '다음 검색 의도를 미리 받아 내부 링크와 체류 시간을 만듭니다.',
+            title: `${profile.bridgeAngle}로 다음 글 연결`,
+            bias: 3,
+        },
+    ];
+    return candidates.map((candidate) => makeStrategyIdea(candidate.label, candidate.tag, candidate.reason, candidate.title, profile, candidate.bias));
+}
+
+function peerConnectionLabel(profile: TopicProfile, peer: TopicProfile): string {
+    if (profile.category === peer.category) return `${peer.core} 주제로 ${profile.bridgeAngle} 확장`;
+    if (profile.laneId === 'policy' || peer.category === 'policy') return `${peer.core} 주제를 대상·조건 글로 연결`;
+    if (profile.category === 'money' || peer.category === 'money') return `${peer.core} 주제를 영향·수혜 변수로 연결`;
+    if (profile.category === 'entertainment' || peer.category === 'entertainment') return `${peer.core} 주제를 인물·장면 반응으로 연결`;
+    return `${peer.core} 주제를 후속 검색 의도로 연결`;
+}
+
+function hasSharedTopic(profile: TopicProfile, peer: TopicProfile): boolean {
+    const shared = profile.entities.some((token) => peer.entities.includes(token));
+    if (shared) return true;
+    if (profile.category === 'general' || peer.category === 'general') return false;
+    return profile.category === peer.category;
+}
+
+function buildClusterIdeas(profile: TopicProfile, lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
+    const peerProfiles = peerItems
+        .filter((peer) => peer.id !== item.id)
+        .map((peer) => inferTopicProfile(lane, peer))
+        .filter((peer) => peer.keyword !== profile.keyword)
+        .filter((peer) => hasSharedTopic(profile, peer))
+        .slice(0, 5);
+    const peerIdeas = peerProfiles.map((peer, index) => makeStrategyIdea(
+        `${profile.core} → ${peerConnectionLabel(profile, peer)}`,
+        index === 0 ? '허브 연결' : '내부링크',
+        `같은 ${lane.label} 흐름에서 넘어갈 다음 글감입니다. 단순 나열보다 검색자의 다음 질문을 받습니다.`,
+        `${profile.keyword} 글 하단에서 ${peer.keyword}로 자연스럽게 연결`,
+        profile,
+        4 - index,
+    ));
+    const fallbackIdeas = [
+        makeStrategyIdea(
+            `${profile.core} 기본 이해 → ${profile.proofNeed} → 다음 행동`,
+            '허브 구조',
+            '한 글에 답을 몰아넣지 않고 입문, 근거, 행동 글로 쪼개 주제 권위를 쌓습니다.',
+            `${profile.bridgeAngle} 3단 내부 링크 구조`,
+            profile,
+            3,
+        ),
+        makeStrategyIdea(
+            `${profile.keyword} 이후 사람들이 다시 검색할 질문 묶음`,
+            '후속 검색',
+            '검색자가 다음에 칠 질문을 미리 받아 체류와 재방문을 만듭니다.',
+            `${profile.searchIntent} 다음 단계 설계`,
+            profile,
+            2,
+        ),
+    ];
+    return [...peerIdeas, ...fallbackIdeas].slice(0, 5);
 }
 
 function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyGroup[] {
-    const keyword = cleanLiveText(item.keyword || item.title, lane.label);
-    const peers = peerItems
-        .filter((peer) => peer.id !== item.id)
-        .map((peer) => cleanLiveText(peer.keyword || peer.title, lane.label))
-        .filter((peer) => peer !== keyword)
+    const profile = inferTopicProfile(lane, item);
+    const titleIdeas = buildTitleIdeas(profile)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 6);
+    const answerIdeas = buildAnswerIdeas(profile)
+        .sort((a, b) => b.score - a.score)
         .slice(0, 4);
-    const intentIdeas = buildIntentPhrases(lane.id, keyword).map((label) => makeKeywordIdea(
-        label,
-        '저경쟁 의도',
-        '빅키워드를 구체적인 질문/조건으로 좁혀 발행량이 적은 제목 후보로 씁니다.',
-        `${label}: 검색자가 바로 해결하고 싶은 핵심 정리`,
-    ));
-    const questionIdeas = buildQuestionPhrases(lane.id, keyword).map((label) => makeKeywordIdea(
-        label,
-        '질문 해결',
-        '검색자의 질문을 제목에 넣고 본문 첫 문단에서 답을 먼저 제시하는 글감입니다.',
-        `${label}? 한 번에 이해하는 답변형 콘텐츠`,
-    ));
-    const clusterIdeas = peers.map((peer) => makeKeywordIdea(
-        `${peer} 정리`,
-        '순환 주제',
-        '같은 실시간 흐름의 주변 글로 묶어 내부 링크를 만들면 트래픽이 순환됩니다.',
-        `${peer} 정리 후 ${keyword} 글로 연결하기`,
-    ));
+    const clusterIdeas = buildClusterIdeas(profile, lane, item, peerItems)
+        .sort((a, b) => b.score - a.score);
+
     return [
-        { label: '저경쟁 제목 후보', desc: '발행량이 적을 가능성이 높은 롱테일을 먼저 씁니다.', items: intentIdeas.slice(0, 6) },
-        { label: '질문 해결 콘텐츠', desc: '검색자의 질문에 답하는 구조라 상위 노출용 본문으로 쓰기 좋습니다.', items: questionIdeas.slice(0, 4) },
-        { label: '트래픽 순환 클러스터', desc: '관련 글을 쌓아 큰 경쟁 키워드로 올라가는 내부 링크 묶음입니다.', items: clusterIdeas },
+        { label: '저경쟁 후킹 제목', desc: '단어 붙이기가 아니라 검색자의 불안·궁금증·판단 기준을 제목에 녹입니다.', items: titleIdeas },
+        { label: '질문 해결 콘텐츠', desc: 'AEO/GEO에 맞게 첫 문단에서 답하고, 본문에서 근거와 다음 행동을 분리합니다.', items: answerIdeas },
+        { label: '트래픽 순환 클러스터', desc: '주변 실시간 흐름을 후속 질문으로 연결해 큰 경쟁 키워드까지 권위를 쌓습니다.', items: clusterIdeas },
     ];
 }
 
@@ -1201,9 +1439,11 @@ function IndexPage() {
                     font-size: 11px;
                     font-weight: 900;
                     line-height: 1.25;
+                    min-height: 28px;
                     overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
                 }
 
                 .source-idea-card small,
@@ -1219,7 +1459,7 @@ function IndexPage() {
                     font-size: 10px;
                     line-height: 1.3;
                     display: -webkit-box;
-                    -webkit-line-clamp: 1;
+                    -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
                     overflow: hidden;
                 }
