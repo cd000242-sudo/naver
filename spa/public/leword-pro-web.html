@@ -262,6 +262,18 @@
     .quality-pill.good strong { color: var(--green); }
     .quality-pill.warn { border-color: rgba(248,194,27,.4); }
     .quality-pill.warn strong { color: var(--gold); }
+    .public-preview-mode .hero .metrics,
+    .public-preview-mode .golden-stats,
+    .public-preview-mode .board-progress,
+    .public-preview-mode .board-meta,
+    .public-preview-mode .quality-strip,
+    .public-preview-mode #refreshGolden { display: none; }
+    .public-preview-cta { display: none; margin-top: 12px; }
+    .public-preview-mode .public-preview-cta { display: inline-flex; width: auto; }
+    .public-preview-mode #goldenNotice {
+      border-color: rgba(248,194,27,.32);
+      background: linear-gradient(135deg, rgba(248,194,27,.12), rgba(18,28,42,.42));
+    }
     .golden-list { display: grid; gap: 8px; }
     .golden-row {
       display: grid;
@@ -949,6 +961,7 @@
           </div>
           <div class="quality-strip" id="goldenQualityStrip"></div>
           <div id="goldenNotice" class="locked">황금키워드 보드를 불러오는 중입니다.</div>
+          <button class="btn primary public-preview-cta" type="button" id="goldenMoreLogin">더 많은 황금키워드 보러가기</button>
           <div class="golden-list" id="goldenBoardList" style="margin-top:10px;"></div>
         </section>
 
@@ -2434,6 +2447,8 @@
       if (session && session.userId) rememberProLoginUserId(session.userId);
       qs('metricSession').textContent = session ? (session.tier || 'Pro') : '로그인 필요';
       qs('loginOpen').textContent = session ? 'Pro 접속중' : 'Pro 로그인';
+      const shell = qs('proShell');
+      if (shell) shell.classList.toggle('public-preview-mode', !(session && session.accessToken));
       hydrateAdminAiWorkerSettingsForm();
       hydrateAdminSiteContentSettings();
     }
@@ -4008,7 +4023,7 @@
         payload.previewPolicyLabel || '하위 5개 공개'
       );
       qs('metricMeasured').textContent = fmt(payload.boardCount || 0);
-      qs('goldenNotice').textContent = '공개 화면은 맛보기만 표시합니다. Pro 로그인 후 전체 순위와 정확 검색량·문서수·황금비율을 불러옵니다.';
+      qs('goldenNotice').textContent = '무료 맛보기는 실측 통과 후보 5개만 보여줍니다. 더 많은 황금키워드와 정확 검색량·문서수·황금비율은 Pro 로그인 후 확인하세요.';
       renderGoldenQuality(items, false, payload.boardCount, payload.lockedCount);
       renderGoldenRows(items, false, payload.boardTarget);
     }
@@ -4852,6 +4867,7 @@
       setActiveView((location.hash || '#golden').slice(1), { hash: false });
     });
     qs('loginOpen').addEventListener('click', openLogin);
+    qs('goldenMoreLogin').addEventListener('click', openLogin);
     qs('loginClose').addEventListener('click', closeLogin);
     qs('loginModal').addEventListener('click', function(event) { if (event.target.id === 'loginModal') closeLogin(); });
     qs('welcomeClose').addEventListener('click', closeWelcomeModal);
