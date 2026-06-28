@@ -64,7 +64,7 @@ type TopicProfile = {
     core: string;
     laneId: SourceLaneId;
     laneLabel: string;
-    category: 'policy' | 'money' | 'entertainment' | 'sports' | 'incident' | 'commerce' | 'public' | 'general';
+    category: 'policy' | 'issue' | 'money' | 'entertainment' | 'sports' | 'incident' | 'commerce' | 'public' | 'general';
     audience: string;
     searchIntent: string;
     tension: string;
@@ -114,8 +114,8 @@ const HOME_SOURCE_FALLBACK_KEYWORDS: Record<SourceLaneId, string[]> = {
     daum: ['경제 뉴스 정리', '폭염주의보 지역', '대출 금리 비교', '교통 통제 구간', '야구 경기 일정', '공모주 청약 일정', '환율 전망', '아파트 실거래가', '태풍 경로', '건강검진 대상자'],
     nate: ['드라마 출연진', '예능 방송 시간', '배우 근황', '공식입장 정리', '스포츠 인터뷰', '연예 뉴스 반응', '축구 대표팀 명단', '영화 결말 해석', '콘서트 예매 일정', '프로필 나이'],
     zum: ['근처 맛집 추천', '제주 숙소 가격', '항공권 특가', '가전 할인', '병원 예약 방법', '여행 준비물', '주차장 위치', '공연 티켓 예매', '보험료 비교', '이사 비용'],
-    policy: ['근로장려금 신청 방법', '청년 월세 지원 대상', '소상공인 정책자금', '문화누리카드 사용처', '출산지원금 지역별', '기초연금 수급자격', '에너지바우처 신청', '국민내일배움카드', '주거급여 조건', '세금 환급 조회'],
-    issue: ['오늘 주요 이슈', '공식입장 정리', '경기 결과 하이라이트', '신규 정책 발표', '날씨 특보 지역', '방송 반응', '기업 실적 발표', '사건 타임라인', '여론 반응', '후속 일정'],
+    policy: ['근로장려금 지급일', '청년 월세 지원 조건', '소상공인 정책자금 신청', '에너지바우처 신청 대상', '문화누리카드 사용처', '기초연금 수급자격', '주거급여 신청 조건', '국민내일배움카드 신청', '출산지원금 지역별 조회', '보조금24 숨은 지원금'],
+    issue: ['드라마 결말 해석', '출연진 공식입장', '대표팀 경기 결과', '방송 장면 논란', '연예인 근황 반응', '사건 타임라인 정리', '콘서트 예매 일정', '영화 쿠키영상 여부', '스포츠 하이라이트', '후속 방송 일정'],
 };
 
 function cleanLiveText(value: unknown, fallback: string): string {
@@ -131,10 +131,22 @@ function buildFallbackSourceItems(lane: SourceLaneConfig): SourceSignal[] {
         id: `fallback-${lane.id}-${index + 1}`,
         keyword,
         title: keyword,
-        description: `${lane.label} 연결 대기 중 표시되는 저경쟁 후보입니다.`,
+        description: lane.id === 'policy'
+            ? '정책 수집 연결 대기 중에도 검색 의도가 분명한 신청·대상형 후보입니다.'
+            : lane.id === 'issue'
+                ? '이슈 수집 연결 대기 중에도 글 구조가 분명한 타임라인·반응형 후보입니다.'
+                : `${lane.label} 연결 대기 중 표시되는 저경쟁 후보입니다.`,
         priority: 100 - index,
         source: lane.id,
     }));
+}
+
+function fillMissingSourceLaneItems(lanes: SourceLane[]): SourceLane[] {
+    return lanes.map((lane) => (
+        lane.items.length > 0
+            ? lane
+            : { ...lane, items: buildFallbackSourceItems(lane) }
+    ));
 }
 
 function readCachedSourceLanes(): { lanes: SourceLane[]; updatedAt?: string } | null {
@@ -144,7 +156,7 @@ function readCachedSourceLanes(): { lanes: SourceLane[]; updatedAt?: string } | 
         const cached = JSON.parse(raw) as { lanes?: Array<Partial<SourceLane> & { id?: string }>; updatedAt?: string };
         const lanes = normalizeSourceLanes(cached);
         if (!lanes.some((lane) => lane.items.length > 0)) return null;
-        return { lanes, updatedAt: cached.updatedAt };
+        return { lanes: fillMissingSourceLaneItems(lanes), updatedAt: cached.updatedAt };
     } catch {
         return null;
     }
@@ -207,7 +219,7 @@ function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { i
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
     const sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
-    const lanes = normalizeSourceLanes(sourcePayload);
+    const lanes = fillMissingSourceLaneItems(normalizeSourceLanes(sourcePayload));
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
     if (!hasLiveData) return fallback;
     writeCachedSourceLanes(sourcePayload);
@@ -273,6 +285,7 @@ function contextTokens(keyword: string, description: string): string[] {
 
 function inferTopicCategory(laneId: SourceLaneId, text: string): TopicProfile['category'] {
     if (laneId === 'policy') return 'policy';
+    if (laneId === 'issue') return 'issue';
     if (includesAny(text, [/지원금|장려금|월세|급여|연금|정책|신청|대상|서류|지급|환급|세금|고용/])) return 'policy';
     if (includesAny(text, [/금리|환율|투자|주가|반도체|경제|공모주|아파트|부동산|대출|수익|실적|물가|가격/])) return 'money';
     if (includesAny(text, [/드라마|예능|방송|출연|OST|배우|결혼|열애|콘서트|프로필|영화|SNL|전참시|스타|연예/])) return 'entertainment';
@@ -293,6 +306,15 @@ function profileCopy(category: TopicProfile['category']): Pick<TopicProfile, 'au
             answerFrame: '대상 여부를 먼저 판별하고 다음 행동을 제시',
             hookAngle: '놓치면 손해 보는 조건을 먼저 꺼내기',
             bridgeAngle: '대상자 판별표와 신청 순서',
+        },
+        issue: {
+            audience: '왜 갑자기 떴는지 맥락이 궁금한 검색자',
+            searchIntent: '무슨 일이 있었는지, 공식입장과 반응, 다음 일정까지 한 번에 확인',
+            tension: '속보와 짧은 반응은 많지만 흐름이 한눈에 정리되지 않는 지점',
+            proofNeed: '최초 포착 시점, 확인된 사실, 공식입장, 반응 변화',
+            answerFrame: '왜 떴는지와 현재 확인된 사실을 먼저 분리',
+            hookAngle: '논란보다 확인된 흐름과 반전 포인트를 먼저 보여주기',
+            bridgeAngle: '타임라인, 공식입장, 반응, 후속 일정',
         },
         money: {
             audience: '내 돈과 지역 영향이 궁금한 검색자',
@@ -409,6 +431,7 @@ function makeStrategyIdea(label: string, tag: string, reason: string, title: str
 function compactAudience(profile: TopicProfile): string {
     const audiences: Record<TopicProfile['category'], string> = {
         policy: '신청 대상자',
+        issue: '맥락이 궁금한 검색자',
         money: '투자·지역 영향이 궁금한 사람',
         entertainment: '방송 맥락이 궁금한 사람',
         sports: '다음 판도가 궁금한 팬',
@@ -423,6 +446,7 @@ function compactAudience(profile: TopicProfile): string {
 function audienceSubject(profile: TopicProfile): string {
     const subjects: Record<TopicProfile['category'], string> = {
         policy: '신청 대상자는',
+        issue: '맥락이 궁금한 검색자는',
         money: '투자·지역 영향이 궁금한 사람은',
         entertainment: '방송 맥락이 궁금한 사람은',
         sports: '다음 판도가 궁금한 팬은',
@@ -435,12 +459,14 @@ function audienceSubject(profile: TopicProfile): string {
 }
 
 function articleLeadPhrase(profile: TopicProfile): string {
+    if (profile.category === 'issue') return '속보보다';
     return profile.category === 'general' ? '검색 결과보다' : '뉴스 제목보다';
 }
 
 function hookPromise(profile: TopicProfile): string {
     const promises: Record<TopicProfile['category'], string> = {
         policy: '대상 여부와 놓치면 손해 보는 조건',
+        issue: '왜 떴는지와 공식입장 전후 맥락',
         money: '내 돈과 지역에 미칠 실제 영향',
         entertainment: '화제 장면과 인물 관계',
         sports: '기록이 바꾼 다음 판도',
@@ -452,7 +478,62 @@ function hookPromise(profile: TopicProfile): string {
     return promises[profile.category];
 }
 
+function subjectParticle(text: string): string {
+    const char = String(text || '').trim().slice(-1);
+    const code = char.charCodeAt(0);
+    if (code < 0xac00 || code > 0xd7a3) return '는';
+    return (code - 0xac00) % 28 === 0 ? '는' : '은';
+}
+
 function buildTitleIdeas(profile: TopicProfile): KeywordStrategyIdea[] {
+    if (profile.category === 'issue') {
+        const issueCandidates = [
+            {
+                label: `${profile.keyword} 왜 떴나: 처음 나온 말부터 현재 반응까지`,
+                tag: '이슈 타임라인',
+                reason: '검색자가 가장 먼저 궁금해하는 발생 이유와 현재 흐름을 한 번에 잡습니다.',
+                title: '첫 문단에서 무슨 일인지 바로 답하고 시간순으로 정리',
+                bias: 9,
+            },
+            {
+                label: `${profile.core} 공식입장 전후로 달라진 핵심 쟁점`,
+                tag: '공식입장형',
+                reason: '카더라보다 확인된 입장과 바뀐 반응을 분리해 신뢰도를 높입니다.',
+                title: '공식 확인, 반응 변화, 남은 의문을 따로 배치',
+                bias: 8,
+            },
+            {
+                label: `${profile.core} 검색한 사람이 놓치기 쉬운 반응의 갈림길`,
+                tag: '반응 분석',
+                reason: '단순 사건 요약이 아니라 사람들이 왜 갈리는지 설명해 체류 시간을 만듭니다.',
+                title: '찬반, 팬 반응, 일반 여론을 한 화면에서 비교',
+                bias: 7,
+            },
+            {
+                label: `${profile.keyword}, 논란보다 먼저 확인해야 할 사실 3가지`,
+                tag: '팩트 우선',
+                reason: '후킹은 강하지만 과장 대신 확인된 사실을 앞세워 SEO/GEO 신뢰도를 지킵니다.',
+                title: '확인된 사실, 미확인 주장, 다음 발표 가능성으로 분리',
+                bias: 8,
+            },
+            {
+                label: `${profile.core} 이후 다음 검색은 무엇으로 이어질까`,
+                tag: '후속 검색',
+                reason: '이슈 글에서 끝내지 않고 후속 일정과 관련 키워드로 내부 링크를 만듭니다.',
+                title: '다음 일정, 관련 인물, 후속 기사 흐름으로 확장',
+                bias: 5,
+            },
+            {
+                label: `${profile.core} 한 줄 요약으로는 절대 안 보이는 맥락`,
+                tag: '신선한 관점',
+                reason: '남들이 베끼는 요약형 제목을 피하고 맥락형 글로 차별화합니다.',
+                title: '짧은 실검어 뒤의 배경을 독자 관점에서 해석',
+                bias: 7,
+            },
+        ];
+        return issueCandidates.map((candidate) => makeStrategyIdea(candidate.label, candidate.tag, candidate.reason, candidate.title, profile, candidate.bias));
+    }
+
     const numberHook = profile.numbers[0] ? `${profile.numbers[0]}보다 먼저 봐야 할` : '검색량 붙기 전에 잡아야 할';
     const promise = hookPromise(profile);
     const audience = compactAudience(profile);
@@ -504,6 +585,42 @@ function buildTitleIdeas(profile: TopicProfile): KeywordStrategyIdea[] {
 }
 
 function buildAnswerIdeas(profile: TopicProfile): KeywordStrategyIdea[] {
+    if (profile.category === 'issue') {
+        const questionStem = profile.core || profile.keyword;
+        const subject = subjectParticle(questionStem);
+        const issueQuestions = [
+            {
+                label: `${questionStem}${subject} 왜 지금 검색량이 붙었나`,
+                tag: '발생 이유',
+                reason: '첫 문단에서 이슈가 뜬 이유를 바로 답하고 독자의 이탈을 막습니다.',
+                title: '왜 떴는지 3문장 요약',
+                bias: 8,
+            },
+            {
+                label: `${questionStem}에서 공식적으로 확인된 내용은 어디까지인가`,
+                tag: '팩트체크',
+                reason: '확인된 사실과 추측을 분리해 신뢰도와 GEO 인용 가능성을 올립니다.',
+                title: '확인 사실, 미확인 주장, 남은 쟁점 분리',
+                bias: 9,
+            },
+            {
+                label: `${questionStem} 반응은 왜 갈리고 있나`,
+                tag: '반응 의도',
+                reason: '댓글식 요약이 아니라 반응이 갈리는 이유를 설명해 체류 시간을 늘립니다.',
+                title: '팬 반응, 대중 반응, 기사 반응 비교',
+                bias: 6,
+            },
+            {
+                label: `${profile.keyword} 이후 다음 일정이나 후속 발표는 무엇인가`,
+                tag: '후속 일정',
+                reason: '후속 검색어를 선점해 다음 글과 내부 링크로 연결합니다.',
+                title: '다음 발표, 방송 일정, 추가 확인 포인트',
+                bias: 5,
+            },
+        ];
+        return issueQuestions.map((candidate) => makeStrategyIdea(candidate.label, candidate.tag, candidate.reason, candidate.title, profile, candidate.bias));
+    }
+
     const questionStem = profile.core || profile.keyword;
     const candidates = [
         {
@@ -541,6 +658,7 @@ function buildAnswerIdeas(profile: TopicProfile): KeywordStrategyIdea[] {
 function peerConnectionLabel(profile: TopicProfile, peer: TopicProfile): string {
     if (profile.category === peer.category) return `${peer.core} 주제로 ${profile.bridgeAngle} 확장`;
     if (profile.laneId === 'policy' || peer.category === 'policy') return `${peer.core} 주제를 대상·조건 글로 연결`;
+    if (profile.category === 'issue' || peer.category === 'issue') return `${peer.core} 주제를 타임라인·반응 글로 연결`;
     if (profile.category === 'money' || peer.category === 'money') return `${peer.core} 주제를 영향·수혜 변수로 연결`;
     if (profile.category === 'entertainment' || peer.category === 'entertainment') return `${peer.core} 주제를 인물·장면 반응으로 연결`;
     return `${peer.core} 주제를 후속 검색 의도로 연결`;
@@ -568,7 +686,32 @@ function buildClusterIdeas(profile: TopicProfile, lane: SourceLane, item: Source
         profile,
         4 - index,
     ));
-    const fallbackIdeas = [
+    const fallbackIdeas = profile.category === 'issue' ? [
+        makeStrategyIdea(
+            `${profile.core} 타임라인 → 공식입장 → 반응 변화`,
+            '이슈 허브',
+            '이슈형 글은 시간순 정리, 공식 확인, 반응 변화가 분리돼야 오래 읽힙니다.',
+            '타임라인 글에서 공식입장 글과 반응 분석 글로 연결',
+            profile,
+            5,
+        ),
+        makeStrategyIdea(
+            `${profile.core} 팩트체크 → 쟁점 비교 → 후속 일정`,
+            '후속 검색',
+            '추측성 글을 피하고 다음에 검색할 질문을 미리 받아 내부 순환을 만듭니다.',
+            '확인된 사실과 다음 발표 가능성을 묶는 구조',
+            profile,
+            4,
+        ),
+        makeStrategyIdea(
+            `${profile.keyword} 관련 인물·장면·반응 키워드 묶음`,
+            '확장 묶음',
+            '하나의 이슈를 인물, 장면, 반응으로 쪼개면 저경쟁 롱테일을 더 많이 확보할 수 있습니다.',
+            '관련 인물, 원인 장면, 댓글 반응을 각각 후속 글로 분리',
+            profile,
+            3,
+        ),
+    ] : [
         makeStrategyIdea(
             `${profile.core} 기본 이해 → ${profile.proofNeed} → 다음 행동`,
             '허브 구조',
