@@ -893,7 +893,8 @@ function IndexPage() {
                                 <small>{activeSourceItems.length}개 표시</small>
                             </div>
                             <div className="hero-source-body">
-                                <div className="hero-source-list">
+                                <div className="hero-source-list-shell">
+                                    <div className="hero-source-list">
                                     {activeSourceItems.length === 0 ? (
                                         <article className="hero-source-empty">
                                             <strong>원본 수집 중</strong>
@@ -916,6 +917,12 @@ function IndexPage() {
                                             </article>
                                         );
                                     })}
+                                    </div>
+                                    {activeSourceItems.length > 5 && (
+                                        <span className="hero-source-scroll-hint" aria-hidden="true">
+                                            <span />
+                                        </span>
+                                    )}
                                 </div>
                                 <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} items={activeSourceItems} />
                             </div>
@@ -1139,10 +1146,80 @@ function IndexPage() {
 
                 .hero-source-list {
                     display: grid;
+                    align-content: start;
                     gap: 7px;
+                    height: 100%;
+                    max-height: 100%;
                     min-height: 0;
                     overflow-y: auto;
-                    padding-right: 4px;
+                    overscroll-behavior: contain;
+                    padding-right: 10px;
+                    scrollbar-gutter: stable;
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(68,215,182,0.95) rgba(255,255,255,0.12);
+                }
+
+                .hero-source-list::-webkit-scrollbar,
+                .source-insight-panel::-webkit-scrollbar {
+                    width: 11px;
+                }
+
+                .hero-source-list::-webkit-scrollbar-track,
+                .source-insight-panel::-webkit-scrollbar-track {
+                    border-radius: 999px;
+                    background: rgba(255,255,255,0.12);
+                    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+                }
+
+                .hero-source-list::-webkit-scrollbar-thumb,
+                .source-insight-panel::-webkit-scrollbar-thumb {
+                    border: 2px solid rgba(13,28,42,0.96);
+                    border-radius: 999px;
+                    background: linear-gradient(180deg, #44d7b6, #2f8cff);
+                    box-shadow: 0 0 14px rgba(68,215,182,0.38);
+                }
+
+                .hero-source-list::-webkit-scrollbar-thumb:hover,
+                .source-insight-panel::-webkit-scrollbar-thumb:hover {
+                    background: linear-gradient(180deg, #65ffd9, #59a8ff);
+                }
+
+                .hero-source-list-shell {
+                    position: relative;
+                    min-width: 0;
+                    height: 100%;
+                    min-height: 0;
+                }
+
+                .hero-source-scroll-hint {
+                    position: absolute;
+                    top: 8px;
+                    right: 2px;
+                    bottom: 8px;
+                    width: 12px;
+                    border-radius: 999px;
+                    border: 1px solid rgba(255,255,255,0.16);
+                    background: rgba(255,255,255,0.13);
+                    box-shadow: inset 0 0 0 1px rgba(6,13,22,0.68), 0 0 18px rgba(68,215,182,0.20);
+                    pointer-events: none;
+                    z-index: 3;
+                }
+
+                .hero-source-scroll-hint span {
+                    position: absolute;
+                    left: 2px;
+                    right: 2px;
+                    top: 8px;
+                    height: 34%;
+                    border-radius: 999px;
+                    background: linear-gradient(180deg, #65ffd9, #2f8cff);
+                    box-shadow: 0 0 12px rgba(68,215,182,0.50);
+                    animation: sourceScrollHint 2.8s ease-in-out infinite;
+                }
+
+                @keyframes sourceScrollHint {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(18px); }
                 }
 
                 .hero-source-empty {
@@ -1287,6 +1364,10 @@ function IndexPage() {
                     height: 100%;
                     min-height: 0;
                     overflow-y: auto;
+                    overscroll-behavior: contain;
+                    scrollbar-gutter: stable;
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(68,215,182,0.95) rgba(255,255,255,0.12);
                     display: grid;
                     gap: 10px;
                     padding: 12px;
