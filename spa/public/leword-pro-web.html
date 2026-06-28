@@ -1684,23 +1684,83 @@
         return item && normalizeText(item.keyword);
       });
     }
+    function liveSignalDerivedKeywords(signal) {
+      const raw = normalizeText(signal && (signal.keyword || signal.title));
+      const compact = raw.replace(/["'“”‘’()[]{}]/g, ' ').replace(/s+/g, ' ').trim();
+      const lower = compact.toLowerCase();
+      const candidates = [compact];
+      if (/월드컵|대표팀|한국s*축구|태극전사|조별리그|손흥민|이강인|김민재|홍명보/.test(compact)) {
+        if (/홍명보/.test(compact)) {
+          candidates.push('홍명보 대표팀 명단');
+          candidates.push('홍명보 월드컵 전술');
+          candidates.push('홍명보 감독 교체 여론');
+        }
+        if (/월드컵|조별리그|한국s*축구|태극전사/.test(compact)) {
+          candidates.push('한국 축구 월드컵 탈락 이유');
+          candidates.push('월드컵 조별리그 탈락 한국 반응');
+          candidates.push('한국 월드컵 다음 경기 일정');
+        }
+        if (/이강인/.test(compact)) candidates.push('이강인 아틀레티코 이적 가능성');
+        if (/손흥민/.test(compact)) candidates.push('손흥민 월드컵 대표팀 반응');
+        if (/김민재/.test(compact)) candidates.push('김민재 월드컵 수비 평가');
+      }
+      if (/fifa/.test(lower)) candidates.push('FIFA 월드컵 한국 일정');
+      return candidates.filter(function(keyword, index, arr) {
+        const key = normalizeText(keyword).toLowerCase();
+        return key && arr.findIndex(function(item) { return normalizeText(item).toLowerCase() === key; }) === index;
+      });
+    }
+    function liveSignalBackfillScore(keyword, signal, lane) {
+      const text = normalizeText(keyword + ' ' + (signal && signal.title || '') + ' ' + (signal && signal.description || '') + ' ' + (lane && lane.label || ''));
+      let score = Number(signal && signal.priority || 0);
+      const sports = /월드컵|대표팀|한국s*축구|태극전사|조별리그|손흥민|이강인|김민재|홍명보|FIFA/i.test(text);
+      const action = /일정|중계|명단|라인업|전술|교체|여론|반응|결과|하이라이트|상대전적|예매|티켓|탈락s*이유|평가/.test(text);
+      const policyNeed = /신청|지급|환급|대상|조건|일정|지원금|장려금|바우처|모집|감면/.test(text);
+      const pureCelebrity = /배우|결혼|열애|딸|아내|럽스타|악플|논란|서운함|인증샷|데뷔|걸그룹|예능|스타/.test(text);
+      if (sports) score += 600;
+      if (action) score += 160;
+      if (policyNeed) score += 120;
+      if (String(lane && lane.id || '').toLowerCase() === 'issue') score += 40;
+      if (String(lane && lane.id || '').toLowerCase() === 'policy') score += 35;
+      if (pureCelebrity && !sports) score -= 260;
+      if (keyword.length > 34) score -= 70;
+      if (keyword.length < 5) score -= 80;
+      return score;
+    }
     function liveSignalBackfillItems(payload, existingItems, limit) {
       const existing = new Set((existingItems || []).map(function(item) {
         return normalizeText(item && item.keyword).toLowerCase();
       }).filter(Boolean));
       const lanes = Array.isArray(payload && payload.lanes) ? payload.lanes : [];
-      const items = [];
+      const candidates = [];
       lanes.forEach(function(lane) {
         (Array.isArray(lane.items) ? lane.items : []).forEach(function(signal) {
-          const keyword = normalizeText(signal && (signal.keyword || signal.title));
-          const key = keyword.toLowerCase();
-          if (!keyword || existing.has(key) || !isFreshGoldenKeywordText(keyword)) return;
-          if (keyword.length < 2 || keyword.length > 44) return;
-          existing.add(key);
-          items.push({
-            id: 'live-' + key.replace(/s+/g, '-'),
-            rank: (existingItems || []).length + items.length + 1,
-            keyword,
+          liveSignalDerivedKeywords(signal).forEach(function(candidateKeyword) {
+            const keyword = normalizeText(candidateKeyword);
+            const key = keyword.toLowerCase();
+            if (!keyword || existing.has(key) || !isFreshGoldenKeywordText(keyword)) return;
+            if (keyword.length < 2 || keyword.length > 44) return;
+            existing.add(key);
+            candidates.push({
+              score: liveSignalBackfillScore(keyword, signal, lane),
+              lane,
+              signal,
+              keyword,
+              key,
+            });
+          });
+        });
+      });
+      return candidates
+        .sort(function(a, b) { return b.score - a.score; })
+        .slice(0, Math.max(0, limit || 0))
+        .map(function(candidate, index) {
+          const lane = candidate.lane || {};
+          const signal = candidate.signal || {};
+          return {
+            id: 'live-' + candidate.key.replace(/s+/g, '-'),
+            rank: (existingItems || []).length + index + 1,
+            keyword: candidate.keyword,
             grade: 'LIVE',
             freshness: 'live',
             isMeasured: false,
@@ -1708,10 +1768,8 @@
             publicDocumentCountLabel: '검증 대기',
             publicReason: (lane.label || signal.source || '실시간') + ' 포착 · 정밀 분석 대기',
             source: signal.source || lane.label || 'live',
-          });
+          };
         });
-      });
-      return items.slice(0, Math.max(0, limit || 0));
     }
     function fmt(value) {
       if (value === null || value === undefined || value === '') return '-';
