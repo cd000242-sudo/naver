@@ -114,3 +114,35 @@ describe('표 형식 예시 보일러플레이트 방지 (2026-06-12 라운드3)
     expect(source).toContain('표 밖에');
   });
 });
+describe('official exposure prompt contract', () => {
+  it('loads the official exposure overlay for SEO, homefeed, and mate generation', () => {
+    const overlay = read('prompts/shared/official-exposure-rubric.prompt');
+    const loader = read('promptLoader.ts');
+
+    expect(overlay).toContain('OFFICIAL NAVER EXPOSURE PRIORITY OVERRIDE');
+    expect(overlay).toContain('Intent answer fit');
+    expect(overlay).toContain('Evidence and experience density');
+    expect(overlay).toContain('Mate mode');
+    expect(loader).toContain('official-exposure-rubric.prompt');
+    expect(loader).toContain("mode === 'homefeed'");
+  });
+
+  it('loads separate 90+ quality overlays for SEO, homefeed, and mate', () => {
+    const seoOverlay = read('prompts/shared/seo-90-quality.prompt');
+    const homefeedOverlay = read('prompts/shared/homefeed-90-quality.prompt');
+    const mateOverlay = read('prompts/shared/mate-90-quality.prompt');
+    const loader = read('promptLoader.ts');
+
+    expect(seoOverlay).toContain('SEO 90+ QUALITY CONTRACT');
+    expect(seoOverlay).toContain('Search intent is answered');
+    expect(homefeedOverlay).toContain('HOMEFEED 90+ QUALITY CONTRACT');
+    expect(homefeedOverlay).toContain('first screen feels personal');
+    expect(mateOverlay).toContain('NAVER MATE 90+ QUALITY CONTRACT');
+    expect(mateOverlay).toContain('citeable answer atom');
+
+    expect(loader).toContain('seo-90-quality.prompt');
+    expect(loader).toContain('homefeed-90-quality.prompt');
+    expect(loader).toContain('mate-90-quality.prompt');
+    expect(loader).toContain('quality90OverlayByMode');
+  });
+});

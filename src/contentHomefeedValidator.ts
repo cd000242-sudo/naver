@@ -103,11 +103,12 @@ export function validateHomefeedContent(
   console.log(`[HomefeedValidator] 📊 제목 점수: ${titleScore}/100 ("${title.substring(0, 30)}...")`);
 
   const headingsCount = content.headings?.length || 0;
+  const shouldAutoPatchHomefeedHeadings = false;
   if (headingsCount < 3) {
     warnings.push(`⚠️ 소제목 ${headingsCount}개 (최소 3개 필요)`);
     console.warn(`[HomefeedValidator] ⚠️ 소제목 심각 부족: ${headingsCount}개`);
 
-    if (headingsCount < 3 && content.headings) {
+    if (shouldAutoPatchHomefeedHeadings && headingsCount < 3 && content.headings) {
       const primaryKeyword = getSourceKeywords(source)[0]?.trim() || '';
       const additionalHeadings = [
         {

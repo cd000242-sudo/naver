@@ -95,4 +95,43 @@ describe('contentStructuredValidator', () => {
     expect(content.metadata.category).toBe('general');
     expect(content.quality.warnings).toEqual([]);
   });
+
+  it('does not trim bodyPlain when removing a duplicate first heading', () => {
+    const bodyPlain = [
+      'Intro paragraph that must stay.',
+      '',
+      'Exact Main Title',
+      'This duplicate heading line may exist in the raw body.',
+      '',
+      'Second valid heading',
+      'This is the first real section body.',
+    ].join('\n');
+
+    const content = baseContent({
+      selectedTitle: 'Exact Main Title',
+      bodyPlain,
+      headings: [
+        {
+          title: 'Exact Main Title',
+          content: 'Duplicate heading body.',
+          summary: '',
+          keywords: [],
+          imagePrompt: '',
+        },
+        {
+          title: 'Second valid heading',
+          content: 'This is the first real section body.',
+          summary: '',
+          keywords: [],
+          imagePrompt: '',
+        },
+      ],
+    });
+
+    validateStructuredContent(content, baseSource({ title: 'Exact Main Title' }));
+
+    expect(content.headings[0].title).toBe('Second valid heading');
+    expect(content.bodyPlain).toBe(bodyPlain);
+    expect(content.bodyPlain).toContain('Intro paragraph that must stay.');
+  });
 });

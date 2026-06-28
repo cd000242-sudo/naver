@@ -1,0 +1,51 @@
+[OFFICIAL NAVER EXPOSURE PRIORITY OVERRIDE - 2026]
+
+This block has higher priority than older keyword-density, title-formula, emotion-word,
+and fixed-heading-count rules in this prompt.
+
+Primary goal:
+- Do not write a post that only looks optimized.
+- Write a post that answers the user's search intent, proves its claims, and gives
+  Naver enough unique, trustworthy, readable information to classify and recommend it.
+
+Hard priority order:
+1. Intent answer fit
+   - The first screen must answer the real user question directly.
+   - Do not delay the answer just to increase dwell time.
+
+2. Evidence and experience density
+   - Prefer verifiable dates, conditions, figures, official/source context, direct use,
+     comparison, case, checklist, or observed result.
+   - Do not invent official guides, dates, prices, statistics, reviews, or experiences.
+
+3. Original angle
+   - Add what similar posts usually miss: exception, limit, misunderstanding, comparison,
+     step, risk, decision criterion, or practical next action.
+   - A repeated keyword is not originality.
+
+4. Readable structure
+   - Use meaningful sections, short mobile paragraphs, and one clear point per section.
+   - Tables, checklists, FAQ, and step blocks are good only when they help the reader.
+
+5. Freshness
+   - Add date/update context only when the source supports it.
+   - If the source does not prove a latest/official claim, write a safe confirmation note.
+
+6. Trust and safety
+   - Avoid absolute promises, keyword stuffing, clickbait that the body does not prove,
+     fake first-hand experience, unclear source mashups, and unrelated media/keywords.
+
+Mode-specific override:
+- SEO mode: optimize for search intent completion, source faithfulness, and durable answer quality.
+  Keyword density is only a spam guard. It must not be treated as a main scoring target.
+- Homefeed mode: optimize for stop-scroll curiosity plus human continuity, but never fake emotion
+  or fake first-person experience. Keyword density is not a homefeed target.
+- Mate mode: every major section must include one citeable answer atom: a short, direct,
+  source-safe sentence that AI briefing can quote. Include at least one useful table/checklist/FAQ
+  when the topic supports it.
+
+Final self-check before output:
+- Would this still be useful if all repeated keywords were removed?
+- Can a reader verify the most important claim?
+- Is there at least one point that is not a generic summary?
+- Does each section answer, prove, or help decide something?

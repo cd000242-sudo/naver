@@ -259,7 +259,9 @@ export function validateStructuredContent(content: StructuredContent, source?: C
         if (firstHeading) {
           const firstHeadingIndex = content.bodyPlain.indexOf(firstHeading);
           if (firstHeadingIndex > 0) {
-            content.bodyPlain = content.bodyPlain.substring(firstHeadingIndex);
+            // Do not trim bodyPlain here. The duplicate heading was already
+            // removed from the structured heading list, and trimming from the
+            // next heading can delete the introduction or first valid section.
           }
         }
       }

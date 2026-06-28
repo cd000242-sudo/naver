@@ -41,6 +41,7 @@ import { selfCritiqueAndRewrite, isSelfCritiqueEnabled } from './contentSelfCrit
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
+import { assessQuality90Gate } from './content/quality90Gate.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
 import { validateContent as runValidationPipeline } from './services/contentValidationPipeline.js';
 import { loadAeoRules } from './aeoRulesManager.js';
@@ -234,6 +235,11 @@ import {
   applyKeywordPrefixToStructuredContent,
   sanitizeReviewTitle,
 } from './contentKeywordPrefix';
+import { applyHeadingKeywordPatch } from './contentHeadingKeywordPatch';
+import {
+  applyKeywordAsTitleLock,
+  resolveKeywordAsTitleValue,
+} from './contentKeywordTitlePolicy';
 // [Phase 3-21/v2.10.167] SEO+homefeed 결과 병합 (finalizeStructuredContent export 통해 cycle 안전)
 import { mergeSeoWithHomefeedOverlay } from './contentMergeOverlay';
 // [Phase 3-8/v2.10.146] 제목 품질 scoring data + retry feedback
@@ -1110,22 +1116,11 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
 
   // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용하는 모드
   // 사용자가 명시적으로 선택한 경우, 모든 제목 조작/평가를 건너뛰고 키워드 원문 그대로 사용
-  if (source.useKeywordAsTitle && source.keywordForTitle) {
-    const kwTitle = source.keywordForTitle.trim();
+  const keywordAsTitleValue = resolveKeywordAsTitleValue(source);
+  if (keywordAsTitleValue) {
+    const kwTitle = keywordAsTitleValue;
     console.log(`[finalizeStructuredContent] 📌 키워드를 제목으로 그대로 사용: "${kwTitle}"`);
-    (finalContent as any).title = kwTitle;
-    finalContent.selectedTitle = kwTitle;
-    // [v2.10.239] keywordAsTitle lock 플래그 — IPC 직렬화되어 main process(editorHelpers)까지 전파
-    //   editorHelpers.ts:585/593 (반자동 모드 사용자 수정 제목 적용)이 이 플래그 보고 가드.
-    (finalContent as any).keywordAsTitleLocked = true;
-    (finalContent as any).keywordAsTitleValue = kwTitle;
-    // 대안 제목도 키워드로 통일 (제목 선택 UI에서 혼선 방지)
-    if (Array.isArray(finalContent.titleAlternatives)) {
-      finalContent.titleAlternatives = [kwTitle];
-    }
-    if (Array.isArray(finalContent.titleCandidates)) {
-      finalContent.titleCandidates = [{ text: kwTitle, score: 100, reasoning: '사용자 지정 키워드 제목' }];
-    }
+    finalContent = applyKeywordAsTitleLock(finalContent as any, kwTitle) as StructuredContent;
 
     // 본문 클리닝은 유지 (제목만 건너뜀)
     try {
@@ -4710,6 +4705,7 @@ export async function generateStructuredContent(
   let lastFailReason = ''; // ✅ [2026-03-23] 실패 원인 추적
   let _fidelityRetryUsed = false; // ✅ [Phase 7-B] Source Fidelity 자동 재시도 1회 가드
   let _qualityGateRetryUsed = false; // ✅ [v2.10.178 Phase 2] qualityGate decision='regenerate' 재시도 1회 가드
+  let _quality90FollowupRetryUsed = false; // 90점 미달 patch 후에도 부족하면 추가 전체 재생성 1회
   let _distinctnessJudgeUsed = false; // ✅ [Gap C 시맨틱] 섹션 변별 LLM 판정 — 생성당 1회만 호출(비용 가드)
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
   const signal = options.signal;
@@ -5261,11 +5257,9 @@ export async function generateStructuredContent(
       if (_useKwTitle) {
         // keywordForTitle 우선, 비어 있으면 source의 기본 키워드로 폴백 — 플로우(단일/풀오토/연속)마다
         // 전달 필드가 달라도 verbatim이 작동하도록.
-        const _kw = String(source.keywordForTitle || getPrimaryKeywordFromSource(source) || '').trim();
+        const _kw = resolveKeywordAsTitleValue(source);
         if (_kw) {
-          parsed.selectedTitle = _kw;
-          parsed.titleAlternatives = [_kw];
-          parsed.titleCandidates = [{ text: _kw, score: 100, reasoning: '사용자 지정 키워드 제목(verbatim)' }];
+          parsed = applyKeywordAsTitleLock(parsed as any, _kw) as StructuredContent;
         }
       }
 
@@ -5403,37 +5397,20 @@ export async function generateStructuredContent(
           //              이후 sanitizer가 따옴표만 제거해 결과적으로 단어 중복
           //              (b) LLM이 자체 prefix를 추가했고 HeadingPatch가 한번 더 추가 (이미 dedup pass 통과한 케이스)
           //   방어: ① kwCore의 선행/후행 punct 제거 ② 패치 후 "kwCore kwCore" 연속 중복 collapse
-          const kwCoreRaw = primaryKw.trim().split(/[\s,/\-]+/).filter((w: string) => w.length >= 2)[0] || primaryKw.trim();
-          const kwCore = kwCoreRaw
-            .replace(/^[^\p{L}\p{N}]+/u, '')  // 선행 punct/quote 제거
-            .replace(/[^\p{L}\p{N}]+$/u, '')  // 후행 punct/quote 제거
-            .trim();
-          if (!kwCore) {
-            console.log(`[HeadingPatch] ⏭️ kwCore가 빈 문자열 (raw="${kwCoreRaw}") — 패치 스킵`);
-          } else {
-          let patchedCount = 0;
-          const kwCoreLower = kwCore.toLowerCase();
-          const dupPattern = new RegExp(`^(${kwCore.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\s+\\1(?=\\s|$)`, 'i');
-          for (const heading of parsed.headings) {
-            if (!heading?.title) continue;
-            const titleStr = String(heading.title);
-            // 메인 키워드 또는 핵심 단어가 소제목에 포함되어 있는지 체크 (대소문자 무관, 부분 매칭)
-            if (!titleStr.toLowerCase().includes(kwCoreLower)) {
-              // 키워드 누락 → 자연스럽게 prefix 추가 (조사 무시)
-              const original = titleStr;
-              heading.title = `${kwCore} ${titleStr}`.trim();
-              patchedCount++;
-              console.log(`[HeadingPatch] ⚠️ 소제목 키워드 누락 패치: "${original}" → "${heading.title}" (kwCore="${kwCore}")`);
-            }
-            // ✅ [v2.10.227] 패치 결과/LLM 원본 모두 대상으로 "kwCore kwCore" 선두 중복 collapse
-            //   "5월 5월 25일 …" → "5월 25일 …"
-            const beforeDedup = heading.title;
-            heading.title = String(heading.title).replace(dupPattern, '$1').trim();
-            if (beforeDedup !== heading.title) {
-              console.log(`[HeadingDedup] 🔧 선두 중복 제거: "${beforeDedup}" → "${heading.title}"`);
-            }
+          const headingPatch = applyHeadingKeywordPatch(parsed.headings as any, primaryKw, { maxPatches: 2 });
+          parsed.headings = headingPatch.headings as any;
+          if (!headingPatch.core) {
+            console.log(`[HeadingPatch] ⏭️ kwCore가 빈 문자열 — 패치 스킵 (${headingPatch.reason})`);
+          } else if (!headingPatch.shouldPatch) {
+            console.log(`[HeadingPatch] ⏭️ 강제 prefix 스킵: reason=${headingPatch.reason}, kwCore="${headingPatch.core}"`);
           }
-          if (patchedCount > 0) {
+          if (headingPatch.targetPrefixCleanedCount > 0) {
+            console.log(`[HeadingPatch] 🔧 선두 대상 조사 prefix ${headingPatch.targetPrefixCleanedCount}건 제거 (kwCore="${headingPatch.core}")`);
+          }
+          if (headingPatch.dedupedCount > 0) {
+            console.log(`[HeadingDedup] 🔧 선두 중복 ${headingPatch.dedupedCount}건 제거 (kwCore="${headingPatch.core}")`);
+          }
+          if (headingPatch.patchedCount > 0) {
             if (!parsed.quality) {
               parsed.quality = {
                 aiDetectionRisk: 'low',
@@ -5446,11 +5423,10 @@ export async function generateStructuredContent(
             }
             parsed.quality.warnings = [
               ...(parsed.quality.warnings || []),
-              `HeadingPatch(${mode}): ${patchedCount}개 소제목에 메인 키워드 자동 추가`,
+              `HeadingPatch(${mode}): ${headingPatch.patchedCount}개 소제목에 메인 키워드 자동 추가`,
             ];
             // bodyPlain 재동기화
             try { syncHeadingsWithBodyPlain(parsed); } catch { /* ignore */ }
-          }
           }
         }
       }
@@ -5919,13 +5895,15 @@ export async function generateStructuredContent(
         //   Phase 2.1: safety < 50 (강한 환각·금지패턴 신호) 시 자동 재시도 1회 활성화
         //   다른 decision('patch' 등)은 다음 릴리즈에서 단계적 확대
         let _gateResult: any = null;
+        let _quality90Assessment: ReturnType<typeof assessQuality90Gate> | null = null;
+        // 2026-06-28: 실제 결과 기준 90점 게이트 대상 모드.
+        // 기존에는 여기서 decision='pass'(80점 이상)이면 결과가 그대로 내려가
+        // SEO/홈판/메이트 90점 목표와 실제 산출물이 어긋날 수 있었다.
+        const _modeForGate = (source.contentMode === 'homefeed' || source.contentMode === 'affiliate' || source.contentMode === 'business' || source.contentMode === 'custom' || source.contentMode === 'mate')
+          ? source.contentMode
+          : 'seo';
         try {
           const { evaluate: evaluateQuality } = require('./content/qualityEvaluator');
-          // 2026-06-11: 'mate' was missing here, so mate posts were gated with
-          // SEO weights/criteria — user-visible as "SEO-only scoring".
-          const _modeForGate = (source.contentMode === 'homefeed' || source.contentMode === 'affiliate' || source.contentMode === 'business' || source.contentMode === 'custom' || source.contentMode === 'mate')
-            ? source.contentMode
-            : 'seo';
           _gateResult = evaluateQuality({
             body: optimized.bodyPlain || '',
             title: optimized.selectedTitle || '',
@@ -5950,6 +5928,12 @@ export async function generateStructuredContent(
           if (_gateResult.safetyScore.issues.length > 0) {
             console.log(`[QualityGate] safety issues: ${_gateResult.safetyScore.issues.slice(0, 2).join(' / ')}`);
           }
+          _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);
+          if (_quality90Assessment.miss) {
+            console.warn(`[QualityGate90] 🚧 실제 결과 90점 미달 — ${_quality90Assessment.reasons.join(', ')}`);
+          } else if (_quality90Assessment.enabled) {
+            console.log(`[QualityGate90] ✅ 실제 결과 90점 기준 통과 (${_modeForGate})`);
+          }
           // quality 객체에 점수 + decision 동봉 (UI 가시화는 다음 릴리즈)
           if (optimized.quality) {
             (optimized.quality as any).qualityGate = {
@@ -5958,6 +5942,9 @@ export async function generateStructuredContent(
               safetyScore: _gateResult.safetyScore.score,
               humanlikeScore: _gateResult.humanlikeScore.score,
               decision: _gateResult.decision,
+              quality90Target: _quality90Assessment.enabled ? 90 : null,
+              quality90Miss: _quality90Assessment.miss,
+              quality90Reasons: _quality90Assessment.reasons,
             };
           }
         } catch (gateErr) {
@@ -5970,15 +5957,19 @@ export async function generateStructuredContent(
         //   여전히 1회 한도 (_qualityGateRetryUsed) + attempt 여유 조건
         if (
           _gateResult
-          && _gateResult.decision === 'regenerate'
+          && (_gateResult.decision === 'regenerate' || _quality90Assessment?.miss)
           && !_qualityGateRetryUsed
           && attempt < MAX_ATTEMPTS
         ) {
           _qualityGateRetryUsed = true;
-          const _gateDirective = _gateResult.retryDirective || '';
-          const _trigger = _gateResult.safetyScore.score < 50
-            ? `safety ${_gateResult.safetyScore.score} < 50`
-            : `finalScore ${_gateResult.finalScore} < 60`;
+          const _gateDirective = _quality90Assessment?.miss
+            ? _quality90Assessment.directive
+            : (_gateResult.retryDirective || '');
+          const _trigger = _quality90Assessment?.miss
+            ? `QualityGate90 ${_quality90Assessment.reasons.join(', ')}`
+            : (_gateResult.safetyScore.score < 50
+                ? `safety ${_gateResult.safetyScore.score} < 50`
+                : `finalScore ${_gateResult.finalScore} < 60`);
           console.warn(`[QualityGate] 🚨 ${_trigger} — 자동 재시도 트리거 (decision=${_gateResult.decision})`);
           extraInstruction = `${_gateDirective}\n${extraInstruction}`;
           continue; // for 루프 다음 attempt
@@ -5996,26 +5987,56 @@ export async function generateStructuredContent(
           _gateResult
           && _gateResult.decision === 'pass'
           && _gateResult.humanlikeScore.score < 55;
+        const _quality90HardMiss = Boolean(_quality90Assessment?.miss);
         if (
           _gateResult
           && optimized.bodyPlain
-          && (_gateResult.decision === 'patch' || _humanFloorMiss)
-          && costPolicy.allowQualityGateSelfCritique
+          && (_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss)
+          && (costPolicy.allowQualityGateSelfCritique || _quality90HardMiss)
         ) {
           try {
             const _patchPersona = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
-            console.log(`[QualityGate] 📝 ${_humanFloorMiss ? `humanlike 플로어 미달(human=${_gateResult.humanlikeScore.score}<55)` : `patch decision (final=${_gateResult.finalScore})`} — selfCritique 자동 활성화`);
+            const _patchReason = _quality90HardMiss
+              ? `QualityGate90 미달(${_quality90Assessment?.reasons.join(', ')})`
+              : (_humanFloorMiss ? `humanlike 플로어 미달(human=${_gateResult.humanlikeScore.score}<55)` : `patch decision (final=${_gateResult.finalScore})`);
+            console.log(`[QualityGate] 📝 ${_patchReason} — selfCritique 자동 활성화`);
             const _patchResult = await selfCritiqueAndRewrite(
               optimized.bodyPlain,
               _patchPersona,
               (prompt: string) => callGemini(prompt, 0.3, 100, { useGrounding: false }),
-              _gateResult.retryDirective || '',
+              _quality90Assessment?.directive || _gateResult.retryDirective || '',
             );
             if (_patchResult.rewrote) {
               console.log(`[QualityGate] ✅ patch 적용 (${_patchResult.source}) — 본문 부분 재작성됨`);
               optimized.bodyPlain = _patchResult.body;
+              try {
+                const { evaluate: evaluateQualityAfterPatch } = require('./content/qualityEvaluator');
+                _gateResult = evaluateQualityAfterPatch({
+                  body: optimized.bodyPlain || '',
+                  title: optimized.selectedTitle || '',
+                  headings: optimized.headings || [],
+                  rawText: source.rawText || '',
+                  primaryKeyword: getPrimaryKeywordFromSource(source),
+                  secondaryKeywords: getSecondaryKeywordsFromSource(source),
+                  mode: _modeForGate,
+                  contentMode: source.contentMode,
+                  toneStyle: source.toneStyle,
+                  categoryHint: source.categoryHint,
+                });
+                _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);
+                console.log(`[QualityGate90] patch 후 재평가: mode=${_gateResult.modeScore.score}/100 · final=${_gateResult.finalScore}/100 · human=${_gateResult.humanlikeScore.score}/100 · miss=${_quality90Assessment.miss}`);
+              } catch (recheckErr) {
+                console.warn('[QualityGate90] patch 후 재평가 실패:', (recheckErr as Error)?.message);
+              }
               if (optimized.quality) {
                 (optimized.quality as any).qualityGate.patchApplied = true;
+                (optimized.quality as any).qualityGate.finalScore = _gateResult.finalScore;
+                (optimized.quality as any).qualityGate.modeScore = _gateResult.modeScore.score;
+                (optimized.quality as any).qualityGate.safetyScore = _gateResult.safetyScore.score;
+                (optimized.quality as any).qualityGate.humanlikeScore = _gateResult.humanlikeScore.score;
+                (optimized.quality as any).qualityGate.decision = _gateResult.decision;
+                (optimized.quality as any).qualityGate.quality90Miss = _quality90Assessment?.miss ?? false;
+                (optimized.quality as any).qualityGate.quality90Reasons = _quality90Assessment?.reasons ?? [];
               }
             } else {
               console.log(`[QualityGate] patch no-op (${_patchResult.source})`);
@@ -6029,6 +6050,24 @@ export async function generateStructuredContent(
             `QualityGate LLM patch skipped by cost saver (${_humanFloorMiss ? `human=${_gateResult.humanlikeScore.score}` : `final=${_gateResult.finalScore}`})`,
           ];
           console.log('[QualityGate] costSaver ON — LLM selfCritique 생략, 로컬 휴머나이즈 결과 유지');
+        }
+
+        if (
+          _quality90Assessment?.miss
+          && !_quality90FollowupRetryUsed
+          && attempt < MAX_ATTEMPTS
+        ) {
+          _quality90FollowupRetryUsed = true;
+          console.warn(`[QualityGate90] 🔁 patch 후에도 90점 미달 — 추가 전체 재시도 (${_quality90Assessment.reasons.join(', ')})`);
+          extraInstruction = `${_quality90Assessment.directive}\n${extraInstruction}`;
+          continue;
+        }
+
+        if (_quality90Assessment?.miss && optimized.quality) {
+          optimized.quality.warnings = [
+            ...(optimized.quality.warnings || []),
+            `QualityGate90 target still missed after bounded retries: ${_quality90Assessment.reasons.join(', ')}`,
+          ];
         }
 
         // ✅ [v2.10.187 Phase 3.6+] 자동 SERP 벤치마크 — opt-out 방식

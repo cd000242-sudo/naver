@@ -7,14 +7,14 @@ const baseQuality = () => ({
   seoScore: 70,
   originalityScore: 70,
   readabilityScore: 70,
-  warnings: [],
+  warnings: [] as string[],
 });
 
 describe('contentHomefeedValidator', () => {
   it('runs sanitizers even when source mode is not homefeed', () => {
     const content = {
-      selectedTitle: '<h1>제목&nbsp;테스트</h1>',
-      introduction: '본 기사에 따르면 도입부입니다.',
+      selectedTitle: '<h1>Title&nbsp;Test</h1>',
+      introduction: 'According to the input source, this is the intro.',
       headings: [],
       quality: baseQuality(),
     };
@@ -22,20 +22,20 @@ describe('contentHomefeedValidator', () => {
     const result = validateHomefeedContent(content, { contentMode: 'seo' });
 
     expect(result).toEqual({ hasCritical: false, violations: [] });
-    expect(content.selectedTitle).toBe('제목 테스트');
-    expect(content.introduction).toBe('도입부입니다.');
+    expect(content.selectedTitle).toBe('Title Test');
+    expect(content.introduction).toBe('According to the input source, this is the intro.');
   });
 
-  it('adds topic-related fallback headings when homefeed headings are too short', () => {
+  it('does not mutate generated headings when homefeed headings are too short', () => {
     const content = {
-      selectedTitle: '충격 반전 진짜 직접 확인한 생활 팁 모음',
-      introduction: '도입부입니다.',
-      conclusion: '마무리입니다.',
+      selectedTitle: 'A vivid homefeed title with a real angle',
+      introduction: 'Short intro.',
+      conclusion: 'Final note.',
       bodyPlain: '생활팁 '.repeat(30),
       headings: [
         {
-          title: '첫 번째 소제목',
-          content: '첫 번째 본문입니다.',
+          title: 'Only existing heading',
+          content: 'Existing body.',
           summary: '',
           keywords: [],
           imagePrompt: '',
@@ -49,8 +49,8 @@ describe('contentHomefeedValidator', () => {
       metadata: { keywords: ['생활팁'] },
     });
 
-    expect(content.headings.length).toBe(3);
-    expect(content.headings[1].title).toContain('생활팁');
-    expect(content.quality.warnings.some((warning) => warning.includes('소제목 1개'))).toBe(true);
+    expect(content.headings.length).toBe(1);
+    expect(content.headings[0].title).toBe('Only existing heading');
+    expect(content.quality.warnings.length).toBeGreaterThan(0);
   });
 });

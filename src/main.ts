@@ -5129,8 +5129,13 @@ ipcMain.handle(
       const keywordForTitle = (payload.assembly as any).keywordForTitle as string | undefined;
       if (useKeywordAsTitle) {
         source.useKeywordAsTitle = true;
-        source.keywordForTitle = keywordForTitle || '';
-        console.log(`[Main] 📌 키워드를 제목으로 사용: "${(keywordForTitle || '').substring(0, 30)}"`)
+        source.keywordForTitle = String(
+          keywordForTitle
+          || (payload.assembly as any).title
+          || ((payload.assembly as any).keywords || [])[0]
+          || ''
+        ).trim();
+        console.log(`[Main] 📌 키워드를 제목으로 사용: "${source.keywordForTitle.substring(0, 30)}"`)
       }
 
       console.log('[Main] 구조화 콘텐츠 생성 시작');

@@ -20,6 +20,7 @@
  */
 
 import type { SubScore, EvaluationInput } from '../qualityEvaluator';
+import { evaluateOfficialExposure } from '../officialExposureRubric';
 
 function countKeyword(text: string, keyword: string): number {
   if (!keyword) return 0;
@@ -223,10 +224,22 @@ export function evaluateSeo(input: EvaluationInput): SubScore {
   details.topicVocabulary = topicScore;
   total += topicScore;
 
+  const legacyScore = Math.round(Math.max(0, Math.min(100, total)));
+  const officialExposure = evaluateOfficialExposure(input);
+  const officialDetails = Object.fromEntries(
+    Object.entries(officialExposure.details).map(([key, value]) => [`official_${key}`, value]),
+  );
+  const blendedScore = Math.round((legacyScore * 0.4) + (officialExposure.score * 0.6));
+
   return {
-    score: Math.round(Math.max(0, Math.min(100, total))),
-    details,
-    issues,
-    suggestions,
+    score: Math.round(Math.max(0, Math.min(100, blendedScore))),
+    details: {
+      ...details,
+      legacySeoScore: legacyScore,
+      officialExposureScore: officialExposure.score,
+      ...officialDetails,
+    },
+    issues: [...issues, ...officialExposure.issues],
+    suggestions: [...suggestions, ...officialExposure.suggestions],
   };
 }

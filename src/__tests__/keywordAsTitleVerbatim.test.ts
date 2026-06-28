@@ -25,7 +25,8 @@ describe('keyword-as-title verbatim', () => {
   });
 
   it('forces the title to the keyword verbatim when the flag is on', () => {
-    expect(gen).toMatch(/if \(_useKwTitle\)\s*{[\s\S]*?parsed\.selectedTitle = _kw/);
+    expect(gen).toMatch(/if \(_useKwTitle\)\s*{[\s\S]*?const _kw = resolveKeywordAsTitleValue\(source\)/);
+    expect(gen).toMatch(/if \(_kw\)\s*{[\s\S]*?applyKeywordAsTitleLock\(parsed as any, _kw\)/);
   });
 
   it('skips the seo title patch block under verbatim mode', () => {

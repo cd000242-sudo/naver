@@ -218,6 +218,36 @@ export function buildSystemPrompt(
   }
 
   // 3. GEO/AEO 오버레이 — v2.10.62 사용자 명시 ON 시에만 (seo/mate 모드 한정)
+  // 2.7 Official exposure rubric overlay.
+  // Keep this after older SEO/homefeed/mate rules so it can override keyword-density
+  // and fixed-heading-count habits with evidence, source, and intent-first criteria.
+  if (mode === 'seo' || mode === 'homefeed' || mode === 'mate') {
+    const officialExposureOverlay = loadPromptFile('shared/official-exposure-rubric.prompt');
+    if (officialExposureOverlay) {
+      composed = `${composed}\n\n${officialExposureOverlay}`;
+    } else {
+      console.warn('[PromptLoader] official-exposure-rubric.prompt load failed - official exposure override skipped');
+    }
+  }
+
+  // 2.8 Mode-specific 90+ quality overlays.
+  // These overlays keep SEO/Homefeed/Mate from collapsing into the same generic style.
+  // They sit after the shared rubric so each mode can override the final writing target.
+  const quality90OverlayByMode: Partial<Record<PromptMode, string>> = {
+    seo: 'shared/seo-90-quality.prompt',
+    homefeed: 'shared/homefeed-90-quality.prompt',
+    mate: 'shared/mate-90-quality.prompt',
+  };
+  const quality90OverlayPath = quality90OverlayByMode[mode];
+  if (quality90OverlayPath) {
+    const quality90Overlay = loadPromptFile(quality90OverlayPath);
+    if (quality90Overlay) {
+      composed = `${composed}\n\n${quality90Overlay}`;
+    } else {
+      console.warn(`[PromptLoader] ${quality90OverlayPath} load failed - 90+ mode overlay skipped`);
+    }
+  }
+
   if (options?.geoOverlay && (mode === 'seo' || mode === 'mate')) {
     const geoOverlay = loadPromptFile('seo/geo-overlay.prompt');
     if (geoOverlay) {

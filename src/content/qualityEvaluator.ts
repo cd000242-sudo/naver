@@ -25,6 +25,7 @@ import { evaluateHomefeed } from './evaluators/homefeedEval';
 import { evaluateAffiliate } from './evaluators/affiliateEval';
 import { evaluateHumanlike } from './evaluators/humanlikeEval';
 import { evaluateSafety } from './evaluators/safetyEval';
+import { evaluateOfficialExposure } from './officialExposureRubric';
 
 export type Mode = 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom' | 'mate';
 export type Decision = 'pass' | 'patch' | 'regenerate';
@@ -130,6 +131,8 @@ export function evaluate(input: EvaluationInput): EvaluationResult {
     modeScore = evaluateHomefeed(input);
   } else if (mode === 'affiliate') {
     modeScore = evaluateAffiliate(input);
+  } else if (mode === 'mate') {
+    modeScore = evaluateOfficialExposure(input);
   } else {
     // seo, business, custom 모두 SEO evaluator 사용 (가중치만 다름)
     modeScore = evaluateSeo(input);

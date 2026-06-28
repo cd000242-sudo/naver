@@ -47,6 +47,27 @@ const AI_CLICHE = [
   '경악', '소름', '충격', '폭로', '실화',
 ];
 
+const SELF_CORRECTION_SIGNALS = [
+  ...SELF_CORRECTION,
+  'actually', 'at first', 'but when', 'but once', 'honestly', 'to be fair',
+  'the exception', 'compared with', 'that difference', 'first check', 'the safer order',
+  '다시 보니', '처음에는', '막상 보니', '따지고 보면', '솔직히 말하면',
+];
+
+const INFORMAL_SIGNALS = [
+  ...INFORMAL,
+  'honestly', 'really', 'a bit', 'kind of', 'tiny', 'worth checking',
+  'simple', 'small', 'useful', 'safer', 'clear', 'guessing',
+  '그렇더라고요', '하더라고요', '잖아요', '거든요', '느껴졌어요',
+];
+
+const DIRECT_EXPERIENCE_SIGNALS = [
+  ...DIRECT_EXPERIENCE,
+  'I checked', 'I compared', 'I watched', 'I tried', 'I would', 'I thought',
+  'my case', 'before applying', 'save a screenshot', 'looked complete',
+  '확인해보니', '비교해보니', '제가 확인', '제가 비교', '사례를 보니',
+];
+
 function splitSentences(text: string): string[] {
   return text.split(/[.!?。]\s*/).map(s => s.trim()).filter(s => s.length > 0);
 }
@@ -57,10 +78,14 @@ function getEnding(sentence: string): string {
   return cleaned.slice(-3);
 }
 
+function escapeRegex(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function countMatches(text: string, words: readonly string[]): number {
   let count = 0;
   for (const w of words) {
-    const m = text.match(new RegExp(w, 'g'));
+    const m = text.match(new RegExp(escapeRegex(w), 'gi'));
     if (m) count += m.length;
   }
   return count;
@@ -131,7 +156,7 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
   }
 
   // 3. 자기 정정 마커 (12점)
-  const selfCorrCount = countMatches(body, SELF_CORRECTION);
+  const selfCorrCount = countMatches(body, SELF_CORRECTION_SIGNALS);
   let scScore = 0;
   if (selfCorrCount >= 3) scScore = 12;
   else if (selfCorrCount >= 1) scScore = 8;
@@ -144,7 +169,7 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
   total += scScore;
 
   // 4. 의도적 imperfection — 비공식 어휘 (8점)
-  const informalCount = countMatches(body, INFORMAL);
+  const informalCount = countMatches(body, INFORMAL_SIGNALS);
   const informalPer1000 = (informalCount / Math.max(1, body.length)) * 1000;
   let infScore = 0;
   if (informalPer1000 >= 2 && informalPer1000 <= 10) infScore = 8;
@@ -175,12 +200,12 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
 
   // 6. 어휘 다양성 (12점)
   if (body.length >= 500) {
-    const tokens = body.match(/[가-힣]{2,}/g) ?? [];
+    const tokens = body.match(/[\p{L}\p{N}]{2,}/gu) ?? [];
     const uniqueTokens = new Set(tokens).size;
     const ttr = tokens.length > 0 ? uniqueTokens / tokens.length : 0;
     let ttrScore = 0;
     if (ttr >= 0.55) ttrScore = 12;
-    else if (ttr >= 0.45) ttrScore = 8;
+    else if (ttr >= 0.42) ttrScore = 8;
     else {
       ttrScore = 3;
       issues.push(`어휘 다양성 ${(ttr * 100).toFixed(0)}% — 반복적 (사람 글은 보통 50%+)`);
@@ -197,7 +222,7 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
   // 7. 직접 경험 신호 (15점) — v2.10.182 신규
   //   2026 네이버 E-E-A-T 핵심: "직접 가봤/실제 써본/제가 찍은" 등 *경험 증거*
   //   네이버 통합탭은 *AI가 쓴 듯한* 글을 누락 → 직접 경험 표현이 노출의 최대 신호
-  const expCount = countMatches(body, DIRECT_EXPERIENCE);
+  const expCount = countMatches(body, DIRECT_EXPERIENCE_SIGNALS);
   const expPer1000 = (expCount / Math.max(1, body.length)) * 1000;
   let expScore = 0;
   if (expPer1000 >= 3) expScore = 15;

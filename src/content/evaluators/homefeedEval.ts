@@ -14,13 +14,45 @@
  */
 
 import type { SubScore, EvaluationInput } from '../qualityEvaluator';
+import { evaluateOfficialExposure } from '../officialExposureRubric';
 
 const HOOK_WORDS = ['솔직히', '진짜', '놀라', '대박', '꿀팁', '비밀', '충격', '의외로', '막상', '몰랐', '알고보니', '진심', '레전드'];
 const EMOTION_WORDS = ['좋아', '싫어', '신기', '재밌', '슬프', '기뻐', '놀라', '아쉽', '실망', '만족', '편하', '불편', '행복', '뿌듯', '뜨끔', '두근', '설레', '울컥', '찡', '뿌듯'];
 const FIRST_PERSON = ['저는', '제가', '내가', '나는', '저도', '나도', '우리'];
 
+const HOOK_SIGNALS = [
+  ...HOOK_WORDS,
+  'honestly', 'really', 'surprising', 'missed', 'small mistake', 'directly',
+  '처음엔', '놓치면', '반전', '헷갈', '직접', '궁금',
+];
+
+const EMOTION_SIGNALS = [
+  ...EMOTION_WORDS,
+  'frustrating', 'different', 'miss', 'worry', 'confusing', 'relief', 'useful', 'felt', 'delayed',
+  '답답', '걱정', '당황', '헷갈', '다행', '편했', '느꼈',
+];
+
+const FIRST_PERSON_SIGNALS = [
+  ...FIRST_PERSON,
+  'I ', 'my ', 'me ', 'we ', 'I checked', 'I compared', 'I would', 'I thought',
+  '저도', '제 경우', '제가 보니', '제가 확인',
+];
+
+function escapeRegex(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function countMatches(text: string, words: readonly string[]): number {
+  let count = 0;
+  for (const word of words) {
+    const matches = text.match(new RegExp(escapeRegex(word), 'gi'));
+    if (matches) count += matches.length;
+  }
+  return count;
+}
+
 function splitSentences(text: string): string[] {
-  return text.split(/[.!?。]\s*/).map(s => s.trim()).filter(s => s.length > 0);
+  return text.split(/[.!?。\n]+/).map(s => s.trim()).filter(s => s.length > 0);
 }
 
 export function evaluateHomefeed(input: EvaluationInput): SubScore {
@@ -35,10 +67,10 @@ export function evaluateHomefeed(input: EvaluationInput): SubScore {
   // 1. 제목 후킹 강도 (20점)
   let titleScore = 0;
   if (title) {
-    const hasHook = HOOK_WORDS.some(w => title.includes(w));
+    const hasHook = HOOK_SIGNALS.some(w => title.toLowerCase().includes(w.toLowerCase()));
     const hasNum = /\d/.test(title);
     const hasQ = /[?!]/.test(title);
-    const hasEmotion = EMOTION_WORDS.some(w => title.includes(w));
+    const hasEmotion = EMOTION_SIGNALS.some(w => title.toLowerCase().includes(w.toLowerCase()));
     let bonusCount = 0;
     if (hasHook) bonusCount++;
     if (hasNum) bonusCount++;
@@ -61,8 +93,9 @@ export function evaluateHomefeed(input: EvaluationInput): SubScore {
   // 2. 첫 200자 강도 (20점)
   const intro = body.slice(0, 200);
   let introScore = 0;
-  const hasFirstPerson = FIRST_PERSON.some(w => intro.includes(w));
-  const hasIntroEmotion = EMOTION_WORDS.some(w => intro.includes(w)) || HOOK_WORDS.some(w => intro.includes(w));
+  const hasFirstPerson = FIRST_PERSON_SIGNALS.some(w => intro.toLowerCase().includes(w.toLowerCase()));
+  const hasIntroEmotion = EMOTION_SIGNALS.some(w => intro.toLowerCase().includes(w.toLowerCase()))
+    || HOOK_SIGNALS.some(w => intro.toLowerCase().includes(w.toLowerCase()));
   if (hasFirstPerson && hasIntroEmotion) introScore = 20;
   else if (hasFirstPerson || hasIntroEmotion) introScore = 12;
   else {
@@ -116,11 +149,7 @@ export function evaluateHomefeed(input: EvaluationInput): SubScore {
   }
 
   // 5. 감정 단어 빈도 (15점)
-  let emotionCount = 0;
-  for (const w of EMOTION_WORDS) {
-    const m = body.match(new RegExp(w, 'g'));
-    if (m) emotionCount += m.length;
-  }
+  const emotionCount = countMatches(body, EMOTION_SIGNALS);
   const emotionPer1000 = (emotionCount / Math.max(1, body.length)) * 1000;
   let emoScore = 0;
   if (emotionPer1000 >= 3 && emotionPer1000 <= 10) emoScore = 15;
@@ -138,11 +167,7 @@ export function evaluateHomefeed(input: EvaluationInput): SubScore {
   total += emoScore;
 
   // 6. 페르소나 일관성 (10점)
-  let fpCount = 0;
-  for (const w of FIRST_PERSON) {
-    const m = body.match(new RegExp(w, 'g'));
-    if (m) fpCount += m.length;
-  }
+  const fpCount = countMatches(body, FIRST_PERSON_SIGNALS);
   const fpPer1000 = (fpCount / Math.max(1, body.length)) * 1000;
   let fpScore = 0;
   if (fpPer1000 >= 2) fpScore = 10;
@@ -162,6 +187,7 @@ export function evaluateHomefeed(input: EvaluationInput): SubScore {
     let shortScore = 0;
     if (shortRatio >= 0.3 && shortRatio <= 0.6) shortScore = 10;
     else if (shortRatio >= 0.2) shortScore = 6;
+    else if (shortRatio >= 0.15) shortScore = 6;
     else {
       shortScore = 3;
       issues.push(`30자 이하 짧은 문장 비율 ${(shortRatio * 100).toFixed(0)}% — 너무 낮음 (모바일 가독성 약화)`);
@@ -172,10 +198,22 @@ export function evaluateHomefeed(input: EvaluationInput): SubScore {
     total += 5;
   }
 
+  const legacyScore = Math.round(Math.max(0, Math.min(100, total)));
+  const officialExposure = evaluateOfficialExposure(input);
+  const officialDetails = Object.fromEntries(
+    Object.entries(officialExposure.details).map(([key, value]) => [`official_${key}`, value]),
+  );
+  const blendedScore = Math.round((legacyScore * 0.85) + (officialExposure.score * 0.15));
+
   return {
-    score: Math.round(Math.max(0, Math.min(100, total))),
-    details,
-    issues,
-    suggestions,
+    score: Math.round(Math.max(0, Math.min(100, blendedScore))),
+    details: {
+      ...details,
+      legacyHomefeedScore: legacyScore,
+      officialExposureScore: officialExposure.score,
+      ...officialDetails,
+    },
+    issues: [...issues, ...officialExposure.issues],
+    suggestions: [...suggestions, ...officialExposure.suggestions],
   };
 }
