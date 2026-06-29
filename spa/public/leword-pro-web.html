@@ -2201,19 +2201,6 @@
         ], posts);
         return;
       }
-      if (snapshot && snapshot.benchmark) {
-        const benchmark = snapshot.benchmark || {};
-        const top = (benchmark.topPerformingKeywords || []).slice(0, 5).map(function(item) {
-          return '<li><strong>' + escapeHtml(item.keyword || '성과 키워드') + '</strong><span>순위 ' + fmt(item.rank) + ' · 조회 ' + fmt(item.views || 0) + ' · 수익 ' + fmt(item.revenue || 0) + '</span></li>';
-        });
-        renderResultSummary('성과 기록', '예측 대비 실제 순위/조회/수익 기록입니다.', [
-          { label: '전체 기록', value: fmt(snapshot.totalRecords || 0) },
-          { label: '측정 글', value: fmt(snapshot.measuredPosts || 0) },
-          { label: '월 조회', value: fmt(benchmark.totalMonthlyViews || 0) },
-          { label: '월 수익', value: fmt(benchmark.totalMonthlyRevenue || 0) },
-        ], top);
-        return;
-      }
       if (snapshot && snapshot.sites && snapshot.drafts) {
         const drafts = (snapshot.drafts.items || []).slice(0, 5).map(function(draft) {
           return '<li><strong>' + escapeHtml(draft.title || draft.keyword || '발행 초안') + '</strong><span>' + escapeHtml(draft.status || 'draft') + ' · ' + fmtTime(draft.updatedAt || draft.createdAt) + '</span></li>';
