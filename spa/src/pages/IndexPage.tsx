@@ -540,28 +540,28 @@ function buildTitleIdeas(profile: TopicProfile): KeywordStrategyIdea[] {
     const candidates = [
         {
             label: `${profile.keyword}, 지금 봐야 할 건 ${articleLeadPhrase(profile)} ${promise}`,
-            tag: 'AEO 답변형',
+            tag: '즉답형 가지',
             reason: '검색자의 실제 질문을 제목에 박아 첫 문단 답변으로 이어지게 합니다.',
             title: `${profile.searchIntent} 흐름에 맞춰 답부터 제시`,
             bias: 6,
         },
         {
             label: `${profile.core} 검색 전 확인할 ${profile.proofNeed}`,
-            tag: 'GEO 근거형',
-            reason: '출처와 판단 기준을 함께 제시해 AI 검색 요약에도 잡히기 쉬운 구조입니다.',
+            tag: '근거 확장',
+            reason: '출처와 판단 기준을 함께 제시해 검색자가 신뢰할 수 있는 구조입니다.',
             title: `${profile.proofNeed}을 기준표처럼 정리`,
             bias: 4,
         },
         {
             label: `${numberHook} ${profile.core}의 숨은 변수`,
-            tag: '후킹 롱테일',
+            tag: '숨은 변수',
             reason: '남들이 큰 키워드만 쓸 때 검색자가 멈칫하는 변수를 앞세웁니다.',
             title: `${profile.hookAngle}로 클릭 이유를 만듦`,
             bias: 8,
         },
         {
             label: `${profile.keyword} 검색한 사람이 놓치면 안 되는 판단 기준`,
-            tag: 'SEO 체류형',
+            tag: '체류형 가지',
             reason: '단순 요약 대신 독자가 끝까지 읽을 판단 프레임을 줍니다.',
             title: `${profile.tension}을 해결하는 구조`,
             bias: 5,
@@ -639,8 +639,8 @@ function buildAnswerIdeas(profile: TopicProfile): KeywordStrategyIdea[] {
         },
         {
             label: `${profile.keyword} 관련 글에서 빼면 안 되는 근거는 무엇인가`,
-            tag: 'GEO 근거',
-            reason: `AI 검색과 요약에 걸리도록 ${profile.proofNeed}을 소제목으로 분리합니다.`,
+            tag: '근거 질문',
+            reason: `${profile.proofNeed}을 소제목으로 분리해 신뢰도를 높입니다.`,
             title: '출처형 소제목으로 신뢰도 강화',
             bias: 6,
         },
@@ -732,21 +732,215 @@ function buildClusterIdeas(profile: TopicProfile, lane: SourceLane, item: Source
     return [...peerIdeas, ...fallbackIdeas].slice(0, 5);
 }
 
+function semanticBase(profile: TopicProfile): string {
+    return (profile.core || profile.keyword).replace(/\s+/g, ' ').trim();
+}
+
+function semanticCorpus(profile: TopicProfile, item: SourceSignal, peerItems: SourceSignal[]): string {
+    const peerText = peerItems
+        .slice(0, 8)
+        .map((peer) => `${peer.keyword || peer.title || ''} ${peer.description || ''}`)
+        .join(' ');
+    return `${profile.keyword} ${profile.core} ${profile.entities.join(' ')} ${item.description || ''} ${peerText}`;
+}
+
+function appendSemanticSuffix(base: string, suffix: string): string {
+    const cleanBase = base.replace(/\s+/g, ' ').trim();
+    const cleanSuffix = suffix.replace(/\s+/g, ' ').trim();
+    if (!cleanBase || !cleanSuffix) return cleanBase || cleanSuffix;
+    if (cleanBase.endsWith(cleanSuffix)) return '';
+    const suffixTokens = keywordTokens(cleanSuffix);
+    if (suffixTokens.length === 1 && cleanBase.includes(cleanSuffix)) return '';
+    return `${cleanBase} ${cleanSuffix}`;
+}
+
+function uniqueSemanticIdeas(profile: TopicProfile, candidates: Array<{ label: string; tag: string; reason: string; title: string; bias?: number }>, limit: number): KeywordStrategyIdea[] {
+    const seen = new Set<string>();
+    return candidates
+        .map((candidate) => ({
+            ...candidate,
+            label: candidate.label.replace(/[→:]+/g, ' ').replace(/\s+/g, ' ').trim(),
+        }))
+        .filter((candidate) => candidate.label.length >= 4)
+        .filter((candidate) => {
+            const key = candidate.label.replace(/\s+/g, '');
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        })
+        .map((candidate) => makeStrategyIdea(candidate.label, candidate.tag, candidate.reason, candidate.title, profile, candidate.bias || 0))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit);
+}
+
+function extractCoachRoot(profile: TopicProfile, corpus: string): string {
+    const coach = corpus.match(/([가-힣]{2,5})\s*감독/);
+    if (coach) return `${coach[1]} 감독`;
+    return semanticBase(profile);
+}
+
+function buildSemanticMindmapIdeas(profile: TopicProfile, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
+    const base = semanticBase(profile);
+    const corpus = semanticCorpus(profile, item, peerItems);
+    const isFootballIssue = /축구|월드컵|대표팀|감독|선임|사퇴|대한축구협회|KFA|홍명보/.test(corpus);
+    const hasCoachIssue = /감독|선임|사퇴|경질|후임|후보/.test(corpus);
+    const candidates: Array<{ label: string; tag: string; reason: string; title: string; bias?: number }> = [];
+    const pushSuffix = (suffix: string, tag: string, reason: string, title: string, bias = 4) => {
+        const label = appendSemanticSuffix(base, suffix);
+        if (label) candidates.push({ label, tag, reason, title, bias });
+    };
+
+    if (isFootballIssue && hasCoachIssue) {
+        const coachRoot = extractCoachRoot(profile, corpus);
+        candidates.push(
+            {
+                label: appendSemanticSuffix(coachRoot, '다음 감독 후보') || `${coachRoot} 후임 후보`,
+                tag: '후임 의문',
+                reason: '사퇴·선임 이슈 뒤에 바로 이어지는 검색 의도입니다.',
+                title: '후임 후보와 선임 기준을 별도 글감으로 확장',
+                bias: 10,
+            },
+            {
+                label: appendSemanticSuffix(coachRoot, '선임 과정') || `${coachRoot} 선임 배경`,
+                tag: '선임 과정',
+                reason: '왜 선임됐는지, 절차에 문제가 있었는지를 찾는 후속 검색입니다.',
+                title: '선임 배경, 의사결정 주체, 논란 지점을 분리',
+                bias: 9,
+            },
+            {
+                label: appendSemanticSuffix(coachRoot, '사퇴 이유') || `${coachRoot} 거취 이유`,
+                tag: '사퇴 이유',
+                reason: '뉴스 제목보다 원인과 책임 소재를 확인하려는 의도입니다.',
+                title: '사퇴 요구가 나온 배경과 남은 변수 정리',
+                bias: 8,
+            },
+            {
+                label: '대한축구협회 감독 선임 과정',
+                tag: '기관 쟁점',
+                reason: '개인 이슈에서 축구협회 의사결정 구조로 확장되는 가지입니다.',
+                title: '협회 절차와 책임론을 독립 글감으로 분리',
+                bias: 7,
+            },
+            {
+                label: '대표팀 선수 기용 논란',
+                tag: '선수 기용',
+                reason: '감독 이슈는 전술·선발·교체 판단으로 후속 검색이 이어집니다.',
+                title: '선발, 교체, 전술 선택을 검색자가 궁금해하는 순서로 정리',
+                bias: 6,
+            },
+            {
+                label: '월드컵 예선 대표팀 전술 변화',
+                tag: '경기 변수',
+                reason: '사퇴나 경질 이슈 이후 다음 경기 영향까지 확인하려는 검색입니다.',
+                title: '다음 경기와 예선 경우의 수로 연결',
+                bias: 5,
+            },
+        );
+    } else if (profile.category === 'policy') {
+        [
+            ['대상', '대상 확인', '신청자가 가장 먼저 확인하는 조건입니다.', '대상 조건과 제외 조건 분리'],
+            ['신청방법', '신청 절차', '실제 행동으로 이어지는 정보형 검색입니다.', '신청 위치, 준비 순서, 주의사항 정리'],
+            ['필요서류', '준비물', '신청 전 체크리스트 수요가 붙는 가지입니다.', '서류와 증빙 기준을 표로 정리'],
+            ['조회', '조회 의도', '내 상태를 확인하려는 직접 검색입니다.', '조회 경로와 결과 해석을 분리'],
+            ['제외대상', '실패 방지', '탈락 조건을 먼저 확인하려는 불안 검색입니다.', '대상자와 제외자를 한 화면에서 비교'],
+        ].forEach(([suffix, tag, reason, title], index) => pushSuffix(suffix, tag, reason, title, 8 - index));
+    } else if (profile.category === 'commerce') {
+        [
+            ['후기', '구매 검증', '구매 전 실제 후기를 확인하려는 의도입니다.', '장점보다 실패 조건을 먼저 정리'],
+            ['가격', '가격 비교', '구매 전환 직전의 핵심 검색입니다.', '가격대, 구성, 대체 상품 비교'],
+            ['비교', '대안 비교', '비슷한 제품 사이에서 선택하려는 검색입니다.', '누구에게 맞는지 기준으로 분리'],
+            ['단점', '리스크 확인', '광고보다 실제 단점을 찾는 의도입니다.', '단점과 피해야 할 조건 정리'],
+            ['대체품', '대체 수요', '품절·비싸짐 이후 대체 상품을 찾는 흐름입니다.', '대체 제품군과 구매 포인트 정리'],
+        ].forEach(([suffix, tag, reason, title], index) => pushSuffix(suffix, tag, reason, title, 7 - index));
+    } else if (profile.category === 'entertainment') {
+        [
+            ['출연진', '인물 확장', '방송·드라마 검색에서 가장 빠른 후속 의도입니다.', '등장인물과 실제 배우 정보를 분리'],
+            ['몇부작', '편성 의문', '시청 전 전체 분량과 일정을 확인하려는 검색입니다.', '방송 일정과 회차 정보를 정리'],
+            ['결말', '해석 수요', '시청 후 바로 붙는 스포일러·해석 검색입니다.', '결말과 복선 해석을 나눠 정리'],
+            ['재방송', '다시보기', '놓친 시청자가 바로 행동하는 검색입니다.', '재방송 시간과 OTT 경로를 정리'],
+            ['시청률', '반응 확인', '화제성의 크기를 확인하려는 검색입니다.', '시청률 변화와 반응 포인트 연결'],
+        ].forEach(([suffix, tag, reason, title], index) => pushSuffix(suffix, tag, reason, title, 7 - index));
+    } else if (profile.category === 'sports') {
+        [
+            ['일정', '다음 경기', '결과 확인 뒤 바로 이어지는 경기 일정 검색입니다.', '일정, 중계, 상대 전력을 분리'],
+            ['중계', '시청 행동', '실시간 시청으로 이어지는 전환형 검색입니다.', '중계 채널과 시작 시간을 정리'],
+            ['순위', '순위 변수', '결과가 순위와 경우의 수에 미치는 영향을 찾습니다.', '순위표와 남은 경기 변수를 연결'],
+            ['하이라이트', '영상 수요', '경기 직후 가장 빠르게 붙는 재확인 검색입니다.', '득점 장면과 논란 장면을 분리'],
+            ['엔트리', '선수 명단', '누가 뛰는지 확인하는 실시간 의도입니다.', '선발, 교체, 부상 변수를 정리'],
+        ].forEach(([suffix, tag, reason, title], index) => pushSuffix(suffix, tag, reason, title, 7 - index));
+    } else if (profile.category === 'incident') {
+        [
+            ['현재상황', '현재 상황', '속보 뒤 지금 기준 정보를 확인하려는 검색입니다.', '시간대별 상황과 공식 발표 분리'],
+            ['원인', '원인 추적', '사건의 배경과 책임 소재를 확인하려는 의도입니다.', '원인, 피해, 후속 조치를 분리'],
+            ['위치', '위치 확인', '내 주변 영향 여부를 확인하려는 검색입니다.', '위치, 통제, 우회 정보를 정리'],
+            ['피해', '피해 규모', '피해 범위와 현재 대응을 확인하는 흐름입니다.', '피해 규모와 복구 상황 정리'],
+            ['대응방법', '행동 요령', '지금 무엇을 해야 하는지 찾는 의도입니다.', '행동 순서와 주의사항을 정리'],
+        ].forEach(([suffix, tag, reason, title], index) => pushSuffix(suffix, tag, reason, title, 7 - index));
+    } else {
+        [
+            ['전말', '사건 전말', '짧은 화제어 뒤 전체 맥락을 알고 싶은 검색입니다.', '배경, 현재 반응, 남은 쟁점 분리'],
+            ['이유', '발생 이유', '왜 떴는지를 먼저 확인하려는 검색입니다.', '원인과 반응을 시간순으로 정리'],
+            ['공식입장', '공식 확인', '추측보다 확인된 내용을 찾는 의도입니다.', '공식 발표와 미확인 주장을 분리'],
+            ['타임라인', '흐름 정리', '무슨 일이 어떤 순서로 벌어졌는지 찾습니다.', '처음 발생부터 현재까지 정리'],
+            ['후속 발표', '다음 변수', '지금 이후 무엇이 바뀌는지 확인하려는 검색입니다.', '다음 일정과 영향 범위를 연결'],
+        ].forEach(([suffix, tag, reason, title], index) => pushSuffix(suffix, tag, reason, title, 7 - index));
+    }
+
+    return uniqueSemanticIdeas(profile, candidates, 6);
+}
+
+function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
+    const profileCorpus = semanticCorpus(profile, item, peerItems);
+    const related = peerItems
+        .filter((peer) => peer.id !== item.id)
+        .map((peer) => inferTopicProfile(lane, peer))
+        .filter((peer) => peer.keyword !== profile.keyword)
+        .filter((peer) => hasSharedTopic(profile, peer))
+        .slice(0, 4)
+        .map((peer, index) => ({
+            label: peer.keyword,
+            tag: index === 0 ? '같은 흐름' : '연결 검색',
+            reason: `${lane.label}에서 함께 뜨는 검색 흐름입니다.`,
+            title: `${profile.keyword} 글에서 ${peer.keyword}로 자연스럽게 내부 연결`,
+            bias: 5 - index,
+        }));
+
+    const namedEntities = uniqueList((profileCorpus.match(/[가-힣]{2,5}/g) || [])
+        .filter((token) => !['검색어', '검색량', '문서수', '실시간', '후보', '뉴스', '정리', '확인', '대한민국'].includes(token))
+        .slice(0, 6));
+    const entityIdeas = namedEntities
+        .filter((entity) => !profile.keyword.includes(entity) || entity.length >= 3)
+        .slice(0, 3)
+        .map((entity, index) => ({
+            label: `${entity} 관련 쟁점`,
+            tag: '인물·기관',
+            reason: '본문에서 별도 소제목으로 분리할 수 있는 연결 대상입니다.',
+            title: `${entity}가 이 흐름에서 왜 검색되는지 분리`,
+            bias: 3 - index,
+        }));
+
+    const fallback = buildClusterIdeas(profile, lane, item, peerItems)
+        .map((idea) => ({
+            label: idea.label.replace(/.*?→\s*/, ''),
+            tag: idea.tag,
+            reason: idea.reason,
+            title: idea.title,
+            bias: 1,
+        }));
+
+    return uniqueSemanticIdeas(profile, [...related, ...entityIdeas, ...fallback], 5);
+}
+
 function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyGroup[] {
     const profile = inferTopicProfile(lane, item);
-    const titleIdeas = buildTitleIdeas(profile)
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 6);
-    const answerIdeas = buildAnswerIdeas(profile)
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 4);
-    const clusterIdeas = buildClusterIdeas(profile, lane, item, peerItems)
-        .sort((a, b) => b.score - a.score);
+    const semanticIdeas = buildSemanticMindmapIdeas(profile, item, peerItems);
+    const contextIdeas = buildContextMindmapIdeas(profile, lane, item, peerItems);
+    const clusterIdeas = buildClusterIdeas(profile, lane, item, peerItems).sort((a, b) => b.score - a.score);
 
     return [
-        { label: '저경쟁 후킹 제목', desc: '단어 붙이기가 아니라 검색자의 불안·궁금증·판단 기준을 제목에 녹입니다.', items: titleIdeas },
-        { label: '질문 해결 콘텐츠', desc: 'AEO/GEO에 맞게 첫 문단에서 답하고, 본문에서 근거와 다음 행동을 분리합니다.', items: answerIdeas },
-        { label: '트래픽 순환 클러스터', desc: '주변 실시간 흐름을 후속 질문으로 연결해 큰 경쟁 키워드까지 권위를 쌓습니다.', items: clusterIdeas },
+        { label: '다음 검색 의문', desc: '선택한 실시간 키워드에서 검색자가 바로 이어서 칠 만한 확장 키워드입니다.', items: semanticIdeas },
+        { label: '문맥 확장 가지', desc: '같은 흐름의 인물·기관·후속 쟁점을 묶어 자동화 글감으로 바로 넘길 수 있게 정리합니다.', items: contextIdeas },
+        { label: '연결 이슈 클러스터', desc: '주변 실시간 흐름을 후속 글감으로 연결해 큰 키워드까지 권위를 쌓습니다.', items: clusterIdeas },
     ];
 }
 
@@ -755,7 +949,7 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
         return (
             <aside className="source-insight-panel source-insight-panel-empty">
                 <strong>키워드 전략 대기</strong>
-                <p>{lane.label} 원본이 들어오면 저경쟁 제목 후보와 질문 해결형 글감을 함께 표시합니다.</p>
+                <p>{lane.label} 원본이 들어오면 다음 검색 의문과 연결 이슈 마인드맵을 표시합니다.</p>
             </aside>
         );
     }
@@ -789,7 +983,7 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                             <a key={idea.label} className="source-idea-card" href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
                                 <span>{idea.tag}</span>
                                 <strong>{idea.label}</strong>
-                                <small>저경쟁 가능성 {idea.score}</small>
+                                <small>확장 적합도 {idea.score}</small>
                                 <p>{idea.title}</p>
                             </a>
                         ))}
