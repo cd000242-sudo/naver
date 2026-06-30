@@ -24,6 +24,16 @@ const UnifiedDOMCache = {
 
   // 안전한 getter
   getGenerator(): string {
+    // ✅ [2026-06-30 FIX] 에이전트 모드(agent-codex/agent-claude)는 사용자가 명시 선택한
+    //    0과금 엔진(본인 구독 CLI)이다. 드롭다운(#unified-generator)에 남은 stale API 값이
+    //    이 선택을 덮어써 반자동에서 API로 과금되던 버그 차단 — 에이전트 라디오를 최우선.
+    //    (풀오토는 드롭다운이 gemini라 우연히 동작했고, 반자동은 stale 값에 가로채였음.)
+    const selectedModelTop = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value;
+    if (selectedModelTop === 'agent-codex' || selectedModelTop === 'agent-claude') {
+      if (this.unifiedGenerator) this.unifiedGenerator.value = selectedModelTop;
+      return selectedModelTop;
+    }
+
     // ✅ [2026-02-22 FIX] unified-generator hidden input 우선,
     // 동기화 누락 시 primaryGeminiTextModel 라디오 버튼에서 직접 파생
     const hiddenValue = this.unifiedGenerator?.value;
