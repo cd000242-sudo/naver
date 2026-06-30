@@ -154,7 +154,11 @@ export function startAutomationRun(payload: AutomationRequest): void {
 export function endAutomationRun(payload: AutomationRequest): void {
     AutomationService.stopRunning();
 
-    if (!payload.keepBrowserOpen) {
+    // ✅ [2026-06-30] === false로 통일 (BlogExecutor와 일치). 기존 !keepBrowserOpen(falsy)은
+    //   반자동처럼 keepBrowserOpen을 안 보내는(undefined) 경로에서 매 발행 후 인스턴스를 제거 +
+    //   currentInstance=null 처리 → 다음 글 발행이 세션을 못 이어받고 처음부터(재로그인) 시작했다.
+    //   undefined는 "keep-alive 우선"이 정책이므로 명시적 false일 때만 정리한다.
+    if (payload.keepBrowserOpen === false) {
         const normalizedId = String(payload.naverId || '').trim().toLowerCase();
         if (normalizedId) {
             AutomationService.delete(normalizedId);
