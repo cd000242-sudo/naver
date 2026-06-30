@@ -3623,10 +3623,19 @@ async function callAgent(
   signal?: AbortSignal,
 ): Promise<string> {
   const { generateWithAgent } = await import('./agentCli/index.js');
+  const { wrapAsAgenticTask, AGENTIC_TIMEOUT_MS } = await import('./agentCli/agenticEnvelope.js');
   const { agentTextProviderToCli } = await import('./runtime/modelRegistry.js');
   const cliProvider = agentTextProviderToCli(provider);
-  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (API 과금 0)`);
-  const result = await generateWithAgent({ provider: cliProvider, prompt, signal });
+  // Activate the CLI's own reasoning loop (analyze -> draft -> self-critique -> revise -> JSON)
+  // instead of a one-shot pass. Iteration runs inside one subscription call (API cost 0).
+  const agenticPrompt = wrapAsAgenticTask(prompt);
+  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (자율 반복 모드, API 과금 0)`);
+  const result = await generateWithAgent({
+    provider: cliProvider,
+    prompt: agenticPrompt,
+    timeoutMs: AGENTIC_TIMEOUT_MS,
+    signal,
+  });
   console.log(`[Agent] ✅ ${cliProvider} 응답 수신 (${result.durationMs}ms, ${result.text.length}자)`);
   return result.text;
 }

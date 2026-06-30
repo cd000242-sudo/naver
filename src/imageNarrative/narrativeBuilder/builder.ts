@@ -195,9 +195,16 @@ async function callAgentProvider(
   signal?: AbortSignal,
 ): Promise<string> {
   const { generateWithAgent } = await import('../../agentCli/index.js');
+  const { wrapAsAgenticTask, AGENTIC_TIMEOUT_MS } = await import('../../agentCli/agenticEnvelope.js');
   const { agentTextProviderToCli } = await import('../../runtime/modelRegistry.js');
   const cliProvider = agentTextProviderToCli(provider);
-  const result = await generateWithAgent({ provider: cliProvider, prompt, signal });
+  // Same autonomous-iteration upgrade as the main content path: one-shot -> internal loop.
+  const result = await generateWithAgent({
+    provider: cliProvider,
+    prompt: wrapAsAgenticTask(prompt),
+    timeoutMs: AGENTIC_TIMEOUT_MS,
+    signal,
+  });
   return result.text;
 }
 
