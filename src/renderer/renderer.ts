@@ -1556,8 +1556,12 @@ function updateRiskIndicators(content: StructuredContent | null): void {
   if (riskAiValue) {
     const risk = _quality?.aiDetectionRisk;
     if (risk) {
-      riskAiValue.textContent = risk === 'low' ? '낮음' : risk === 'medium' ? '보통' : '높음';
-      riskAiValue.className = `value risk-${risk}`;
+      // [2026-06-30] 'high'는 내부 휴리스틱 품질 라벨(진짜 외부 AI 탐지기 아님)인데
+      //   '높음' 표기가 사용자 불안·민원을 유발 → 사용자 표기는 '보통'까지만 노출한다.
+      //   내부 로직(재생성/faithfulness 게이트)은 high를 그대로 사용하므로 품질은 영향 없음.
+      const displayRisk = risk === 'high' ? 'medium' : risk;
+      riskAiValue.textContent = displayRisk === 'low' ? '낮음' : '보통';
+      riskAiValue.className = `value risk-${displayRisk}`;
     } else {
       riskAiValue.textContent = '-';
       riskAiValue.className = 'value risk-unknown';
