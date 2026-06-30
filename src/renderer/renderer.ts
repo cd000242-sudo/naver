@@ -2881,7 +2881,13 @@ function initPublishModeSubtabs(): void {
     //    __showPublishMode 설정 후 실행 → 트리거가 잠시 continuous/ma로 갔다가 single로 복귀.
     try { (window as any).toggleContinuousModeModal?.(); } catch { /* ignore */ }
     document.getElementById('multi-account-btn')?.click();
-    setTimeout(() => { try { showMode('single'); } catch { /* ignore */ } }, 0);
+    // ✅ [2026-06-30] 초기 발행 모드를 항상 "단일 발행"으로 확정.
+    //   multi-account-btn 클릭 핸들러가 async(await checkFeatureLockAndShow 뒤 __showPublishMode('ma'))라
+    //   setTimeout(0)의 showMode('single')이 그 await보다 먼저 실행돼 결국 'ma'로 끝나던 레이스 버그.
+    //   wiring(클릭)은 그대로 두되 single을 충분히 뒤(250ms)+rAF로 재확정해 단일 발행이 최종 화면이 되게 한다.
+    const forceSingleMode = () => { try { showMode('single'); } catch { /* ignore */ } };
+    setTimeout(forceSingleMode, 250);
+    setTimeout(() => requestAnimationFrame(forceSingleMode), 400);
   } catch (e) {
     console.error('발행 모드 서브탭 초기화 오류:', e);
   }
