@@ -106,6 +106,19 @@ const CONTENT_GENERATION_TIMEOUT_MS = 360000;
 const CONTENT_GENERATION_RETRY_COUNT = 0;
 const CONTENT_GENERATION_RETRY_NOTICE = '응답이 6분 이상 지연되면 진행 중인 요청을 중단합니다. Gemini 내부 재시도는 이미 적용되어 있어 중복 생성 요청을 다시 보내지 않습니다.';
 
+// [2026-06-30] 모달/진행 로그에 실제 사용 엔진을 정확히 표기 (raw 'agent-codex' → '에이전트 (Codex 구독)').
+function engineLabel(generator: string): string {
+  const map: Record<string, string> = {
+    'agent-codex': '에이전트 (Codex 구독)',
+    'agent-claude': '에이전트 (Claude 구독)',
+    gemini: 'Gemini',
+    openai: 'OpenAI',
+    claude: 'Claude',
+    perplexity: 'Perplexity',
+  };
+  return map[generator] || generator;
+}
+
 function appendContentGenerationRetryNotice(activeModal?: any): void {
   appendLog(`🔁 ${CONTENT_GENERATION_RETRY_NOTICE}`);
   if (activeModal?.addLog) activeModal.addLog(`🔁 ${CONTENT_GENERATION_RETRY_NOTICE}`);
@@ -542,9 +555,9 @@ export async function generateContentFromUrl(
     appendLog('📡 URL 크롤링 중...');
 
     // ✅ 진행률 업데이트 - AI 생성 중
-    showUnifiedProgress(30, '🤖 AI 글 생성 중...', `${generator} 엔진으로 콘텐츠 생성 중`);
-    appendLog(`🤖 ${generator} 엔진으로 AI 글 생성 중... (${minChars}자 목표)`);
-    if (activeModal.addLog) activeModal.addLog(`🤖 ${generator} 엔진으로 콘텐츠 생성 중...`);
+    showUnifiedProgress(30, '🤖 AI 글 생성 중...', `${engineLabel(generator)} 엔진으로 콘텐츠 생성 중`);
+    appendLog(`🤖 ${engineLabel(generator)} 엔진으로 AI 글 생성 중... (${minChars}자 목표)`);
+    if (activeModal.addLog) activeModal.addLog(`🤖 ${engineLabel(generator)} 엔진으로 콘텐츠 생성 중...`);
     appendContentGenerationRetryNotice(activeModal);
 
     const apiResponse = await apiClient.call(
@@ -576,7 +589,7 @@ export async function generateContentFromUrl(
     }
 
     // ✅ 진행률 업데이트 - 응답 처리
-    showUnifiedProgress(70, '📝 응답 처리 중...', `${generator} 엔진 응답을 분석하고 있습니다`);
+    showUnifiedProgress(70, '📝 응답 처리 중...', `${engineLabel(generator)} 엔진 응답을 분석하고 있습니다`);
 
     const result = apiResponse.data;
     const structuredContent = result.content;
@@ -1115,8 +1128,8 @@ export async function generateContentFromKeywords(
 
     // ✅ 진행률 업데이트 - AI 생성 중
     const crawlStatus = crawledText ? ' (실시간 정보 기반)' : '';
-    showUnifiedProgress(35, '🤖 AI 글 생성 중...', `${generator} 엔진으로 콘텐츠 생성 중${crawlStatus}`);
-    appendLog(`🤖 ${generator} 엔진으로 AI 글 생성 중... (${minChars}자 목표)${crawlStatus}`);
+    showUnifiedProgress(35, '🤖 AI 글 생성 중...', `${engineLabel(generator)} 엔진으로 콘텐츠 생성 중${crawlStatus}`);
+    appendLog(`🤖 ${engineLabel(generator)} 엔진으로 AI 글 생성 중... (${minChars}자 목표)${crawlStatus}`);
     appendContentGenerationRetryNotice(activeModal);
 
     const apiResponse = await apiClient.call(
