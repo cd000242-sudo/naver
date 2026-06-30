@@ -2434,13 +2434,33 @@ export function initHeadingImageGeneration(): void {
           console.warn('[AI 수집] 배치 최적화 실패, 기본 키워드 사용');
         }
 
-        // 폴백: 최적화 실패 시 기본 쿼리 생성
+        // ✅ [2026-06-23] API 없이 동작하는 로컬 이미지 검색어 일반화.
+        //   글 제목/소제목은 "핵심개체(앞) + 후킹문구(뒤)" 구조라 그대로 검색하면 너무 specific해
+        //   네이버 이미지 0개("방탄소년단 진, 브라질 3관왕 소식에 팬덤이 진짜 놀란 이유?" → 0).
+        //   앞쪽 핵심 토큰 N개만 뽑고 후킹/불용어를 제거 → "방탄소년단 진 브라질 3관왕".
+        //   Gemini 최적화(429 등)와 extractCoreSubject가 모두 실패해도 검색이 되도록 보장.
+        const localGeneralizeImageQuery = (text: string, maxTokens = 4): string => {
+          if (!text) return '';
+          const STOP = new Set(['소식', '이유', '진짜', '정말', '놀란', '충격', '화제', '근황', '공개', '숨겨진', '그것', '이것', '모두', '드디어', '결국', '과연', '바로', '대박', '최초', '단독', '이', '가', '은', '는', '을', '를', '에', '도', '와', '과', '의', '로']);
+          const tokens = text
+            .replace(/[?!.…,"'()[\]·•~-]/g, ' ')
+            .split(/\s+/)
+            .map((t) => t.trim())
+            .filter((t) => t && !STOP.has(t));
+          return tokens.slice(0, maxTokens).join(' ').trim();
+        };
+
+        // 폴백: 최적화 실패 시 — 제목 전체가 아니라 로컬 일반화 키워드로 생성(0개 방지).
+        //   썸네일 헤딩("🖼️ 썸네일")은 헤딩 글자 대신 글 제목 핵심어로 검색(브이로그 아닌 제목 이미지).
         if (optimizedQueries.length === 0) {
-          optimizedQueries = headingTitles.map((h: string) => ({
-            heading: h,
-            optimizedQuery: h,
-            broaderQuery: coreSubject
-          }));
+          optimizedQueries = headingTitles.map((h: string) => {
+            const base = h.includes('썸네일') ? searchKeyword : h;
+            return {
+              heading: h,
+              optimizedQuery: localGeneralizeImageQuery(base, 4) || coreSubject || searchKeyword,
+              broaderQuery: localGeneralizeImageQuery(searchKeyword, 2) || coreSubject
+            };
+          });
         }
 
         // ✅ [100점 최종] 3단계: 병렬 이미지 검색 (Promise.all)
@@ -2507,6 +2527,23 @@ export function initHeadingImageGeneration(): void {
 
           if (!searchResult.success || !searchResult.images || searchResult.images.length === 0) {
             searchResult = await window.api.searchNaverImages(coreSubject);
+          }
+
+          // ✅ [2026-06-23] 위 폴백(API 기반)이 모두 0개면, API 없이 만든 로컬 일반화 키워드로 재시도.
+          //   Gemini/extractCoreSubject가 실패해 coreSubject까지 부정확해도 검색이 되도록 보장.
+          //   썸네일 헤딩은 헤딩 글자가 아니라 글 제목 핵심어로 검색(제목 이미지 우선).
+          if (!searchResult.success || !searchResult.images || searchResult.images.length === 0) {
+            const g1base = heading.includes('썸네일') ? searchKeyword : heading;
+            const g1 = localGeneralizeImageQuery(g1base, 4);
+            if (g1 && g1 !== q.optimizedQuery) {
+              searchResult = await window.api.searchNaverImages(g1);
+            }
+          }
+          if (!searchResult.success || !searchResult.images || searchResult.images.length === 0) {
+            const g2 = localGeneralizeImageQuery(searchKeyword, 2);
+            if (g2) {
+              searchResult = await window.api.searchNaverImages(g2);
+            }
           }
 
           if (searchResult.success && searchResult.images && searchResult.images.length > 0) {
