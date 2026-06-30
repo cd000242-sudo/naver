@@ -33,6 +33,12 @@ const DIRECT_EXPERIENCE = [
   '가봤', '먹어봤', '써봤', '해봤', '시도해', '체험',
   '실측', '실사용', '실제 사용', '실제 경험', '경험상',
   '눈으로 확인', '손으로 만져', '몸소', '온몸으로',
+  // [SPEC-HOMEFEED-EMPATHY-2026 R2-2] Observational first-person experience —
+  //   honest "I watched/saw it" signals for news/3rd-party topics where the writer
+  //   has no hands-on experience (faking "I did it" = fabrication; "I watched it" = true).
+  '지켜봤', '지켜보', '실시간으로 봤', '실시간으로 지켜', '중계로', '직관',
+  '방송으로 봤', '영상으로 봤', '영상으로 확인', '캡처를 다시', '다시 돌려봤',
+  '보는 내내', '장면을 보면서', '소식을 접하', '경기를 보면서', '두 눈으로 봤',
 ];
 
 const AI_CLICHE = [

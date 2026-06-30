@@ -82,9 +82,11 @@ export function validateHomefeedContent(
     titleScore -= 10;
   }
 
+  // [SPEC-HOMEFEED-EMPATHY-2026 R2-1] Bot shock-words (충격/경악/소름/실화/대박/난리/폭발)
+  //   removed from the rewarded set — they read as AI to today's readers and are penalized
+  //   by humanlikeEval + the title prompt. Keep curiosity/situation/judgment triggers only.
   const emotionTriggers = [
-    '충격', '경악', '소름', '반전', '눈물', '울컥', '분노', '논란',
-    '난리', '폭발', '실화', '대박', '감동', '궁금', '비밀', '진실',
+    '반전', '눈물', '울컥', '분노', '논란', '감동', '궁금', '비밀', '진실',
     '숨겨', '알고보니', '결국', '진짜', '직접', '현장', '실시간',
   ];
   const hasEmotionTrigger = emotionTriggers.some((trigger) => title.includes(trigger));
