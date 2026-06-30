@@ -270,7 +270,10 @@ export function registerImageSearchNaverHandlers(): void {
                                 title.includes(kw.toLowerCase()) || item.link.toLowerCase().includes(kw.toLowerCase())
                             );
 
-                            if (!hasRelevance && allImages.length >= 20) continue;
+                            // [2026-06-30] 관련성 게이트 강화: 무관 이미지 허용 한도를 20→6으로.
+                            //   sort=sim(정확도순)과 결합해 소제목·키워드에 맞는 이미지만 남도록.
+                            //   소수 시드(6장)는 허용해 0개 방지, 그 이후는 관련성 필수.
+                            if (!hasRelevance && allImages.length >= 6) continue;
 
                             usedUrls.add(item.link);
                             if (urlHash) usedImageHashes.add(urlHash);
@@ -302,7 +305,10 @@ export function registerImageSearchNaverHandlers(): void {
                 }
             }
 
-            if (allImages.length === 0) {
+            // [2026-06-30] 결과가 없거나 희박(<3)하면 주체 엔티티로 폴백.
+            //   coreKeywords[0] = 글의 핵심 주어 → 인물(연예인)이면 그 이름, 비인물이면 핵심 키워드
+            //   → 인물/비인물 구분 없이 "소제목에 없으면 주체로 최적 이미지 수집"이 자동 처리됨.
+            if (allImages.length < 3) {
                 const relaxedQueries = [
                     coreKeywords.join(' '),
                     coreKeywords[0],
@@ -319,7 +325,8 @@ export function registerImageSearchNaverHandlers(): void {
                     if (allImages.length >= TARGET_IMAGES) break;
 
                     try {
-                        const searchUrl = `https://openapi.naver.com/v1/search/image?query=${encodeURIComponent(query)}&display=100&sort=date`;
+                        // [2026-06-30] sort=date(최신순) → sim(정확도순, 네이버 기본). 소제목·키워드 관련성 우선.
+                        const searchUrl = `https://openapi.naver.com/v1/search/image?query=${encodeURIComponent(query)}&display=100&sort=sim`;
 
                         const data = await fetchWithRotation(searchUrl, query);
                         if (!data) {
