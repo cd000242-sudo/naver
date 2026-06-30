@@ -199,9 +199,10 @@ async function callAgentProvider(
   const { agentTextProviderToCli } = await import('../../runtime/modelRegistry.js');
   const cliProvider = agentTextProviderToCli(provider);
   // Same autonomous-iteration upgrade as the main content path: one-shot -> internal loop.
+  // 'photo' tailors the self-critique to image-grounded writing.
   const result = await generateWithAgent({
     provider: cliProvider,
-    prompt: wrapAsAgenticTask(prompt),
+    prompt: wrapAsAgenticTask(prompt, 'photo'),
     timeoutMs: AGENTIC_TIMEOUT_MS,
     signal,
   });

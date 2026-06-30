@@ -18,6 +18,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { app } from 'electron';
 import { hasValidPrice, formatPrice } from './services/priceNormalizer.js';
+import { buildHomefeedExposureSkeleton } from './content/homefeedExposurePattern.js';
 
 // 프롬프트 디렉토리 경로 (개발/프로덕션 환경 모두 지원)
 function getPromptsDir(): string {
@@ -1185,6 +1186,13 @@ export function buildFullPrompt(
   if (tonePrompt) {
     console.log(`[PromptLoader] 말투 보정 최종 적용: ${toneStyle}`);
     finalPrompt = `${finalPrompt}\n\n${tonePrompt}`;
+  }
+
+  // 4-b. 홈판 상위노출 본문 골격 — 실측 20개 패턴. 톤 적용 직후 recency로 호들갑 절제를 우선화.
+  //   전 엔진(API 포함)·전 플로우(반자동/풀오토/연속/다중계정)가 공유하는 단일 파이프라인이라
+  //   여기 한 번 주입으로 모든 경로가 동일 골격을 따른다.
+  if (mode === 'homefeed') {
+    finalPrompt = `${finalPrompt}\n\n${buildHomefeedExposureSkeleton()}`;
   }
 
   // 5. 원본 제목 활용 지침 (70/30 전략)

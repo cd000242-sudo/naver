@@ -643,7 +643,7 @@ JSON:
     try {
       // ✅ [v2] 매 시도마다 다른 공식 패턴 선택
       // ✅ [v1.4.57] articleType 전달 — shopping_expert_review 전용 풀 분기에 필수
-      const formula = selectTitleFormula(mode, attempt, usedFormulaIds, categoryHint, source.articleType);
+      const formula = selectTitleFormula(mode, attempt, usedFormulaIds, categoryHint, source.articleType, hasGroundingSource(source));
       usedFormulaIds.push(formula.id);
       const formulaInstruction = `\n\n🎯 [이번에 사용할 제목 공식: ${formula.name}]\n${formula.instruction}\n예시: "${formula.example}"\n⚠️ 반드시 위 공식 패턴을 적용하세요.`;
 
@@ -680,7 +680,7 @@ JSON:
       } else {
         // 기본 'same': 본문과 동일 모델
         if (provider === 'agent-codex' || provider === 'agent-claude') {
-          raw = await callAgent(provider, titlePromptFull);
+          raw = await callAgent(provider, titlePromptFull, { mode });
         } else if (provider === 'perplexity') {
           raw = await callPerplexity(titlePromptFull, titleTemp, 650);
         } else if (provider === 'openai') {
@@ -870,7 +870,7 @@ JSON:
     // ✅ [v2.10.56] silent 폴백 회귀 — 사용자 선택 provider 그대로 (자동 폴백 금지 원칙)
     let raw: string;
     if (provider === 'agent-codex' || provider === 'agent-claude') {
-      raw = await callAgent(provider, prompt);
+      raw = await callAgent(provider, prompt, { mode: 'homefeed' });
     } else if (provider === 'perplexity') {
       raw = await callPerplexity(prompt, 0.9, 450);
     } else if (provider === 'openai') {
@@ -3617,19 +3617,30 @@ function getAnthropicClient(apiKey?: string): Anthropic {
 // ✅ 에이전트 모드 — 사용자 본인 codex/claude 구독 CLI로 글 생성 (API 토큰 과금 0).
 //   모든 글생성 모드(SEO/홈피드/쇼핑/사진)가 공유하는 agentCli 서비스를 호출한다(중복 구현 금지).
 //   silent 폴백 절대 금지: 미설치/미로그인/한도소진은 AgentCliError 그대로 throw → 차단형 모달.
+interface CallAgentOptions {
+  signal?: AbortSignal;
+  /** Content mode (seo/homefeed/affiliate/photo) — tailors the autonomous self-critique. */
+  mode?: string;
+  /** When true, send the prompt as-is (no writing envelope). Use for judge/eval calls. */
+  raw?: boolean;
+}
+
 async function callAgent(
   provider: 'agent-codex' | 'agent-claude',
   prompt: string,
-  signal?: AbortSignal,
+  opts: CallAgentOptions = {},
 ): Promise<string> {
+  const { signal, mode, raw } = opts;
   const { generateWithAgent } = await import('./agentCli/index.js');
   const { wrapAsAgenticTask, AGENTIC_TIMEOUT_MS } = await import('./agentCli/agenticEnvelope.js');
   const { agentTextProviderToCli } = await import('./runtime/modelRegistry.js');
   const cliProvider = agentTextProviderToCli(provider);
   // Activate the CLI's own reasoning loop (analyze -> draft -> self-critique -> revise -> JSON)
   // instead of a one-shot pass. Iteration runs inside one subscription call (API cost 0).
-  const agenticPrompt = wrapAsAgenticTask(prompt);
-  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (자율 반복 모드, API 과금 0)`);
+  // Judge/eval calls (raw) skip the writing envelope — they are not content generation.
+  const agenticPrompt = raw ? prompt : wrapAsAgenticTask(prompt, mode);
+  const modeTag = raw ? 'raw' : (mode || 'generic');
+  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (자율 반복 모드: ${modeTag}, API 과금 0)`);
   const result = await generateWithAgent({
     provider: cliProvider,
     prompt: agenticPrompt,
@@ -4986,7 +4997,7 @@ export async function generateStructuredContent(
 
         // ✅ [v2.10.28] signal을 callX에 직접 전달 — SDK 레벨 fetch abort
         if (provider === 'agent-codex' || provider === 'agent-claude') {
-          rawResponse = await withAbortRace(callAgent(provider, systemPrompt, signal));
+          rawResponse = await withAbortRace(callAgent(provider, systemPrompt, { signal, mode }));
         } else if (provider === 'openai') {
           rawResponse = await withAbortRace(callOpenAI(systemPrompt, temperature, adjustedMinChars, signal));
         } else if (provider === 'claude') {
@@ -5585,7 +5596,7 @@ export async function generateStructuredContent(
         const judgeCaller = async (jp: string): Promise<string> => {
           const jt = 0.2; // 결정적 JSON 유도
           const jc = 300; // <1000 → 60초 타임아웃 + 짧은 JSON 응답 길이거부 없음 (각 호출 내부 타임아웃+signal로 abort)
-          if (provider === 'agent-codex' || provider === 'agent-claude') return callAgent(provider, jp, signal);
+          if (provider === 'agent-codex' || provider === 'agent-claude') return callAgent(provider, jp, { signal, raw: true });
           if (provider === 'openai') return callOpenAI(jp, jt, jc, signal);
           if (provider === 'claude') return callClaude(jp, jt, jc, signal);
           if (provider === 'perplexity') return callPerplexity(jp, jt, jc, signal);

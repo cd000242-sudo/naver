@@ -38,6 +38,13 @@ describe('wrapAsAgenticTask', () => {
     expect(wrapped).toContain('JSON 스키마');
   });
 
+  it('enforces quantitative self-critique gates (interjection cap, no section repetition, honor app settings)', () => {
+    const wrapped = wrapAsAgenticTask(base);
+    expect(wrapped).toContain('3회를 넘지 않는가'); // interjection cap
+    expect(wrapped).toContain('서로 다른 정보 단위'); // no section repetition
+    expect(wrapped).toContain('카테고리·글톤·금지어'); // honor app category/tone settings
+  });
+
   it('states the final-message-is-pure-JSON contract (so safeParseJson keeps working)', () => {
     const wrapped = wrapAsAgenticTask(base);
     expect(wrapped).toContain('오직');
@@ -48,6 +55,38 @@ describe('wrapAsAgenticTask', () => {
   it('returns empty/blank input unchanged (no wrapping on nothing to do)', () => {
     expect(wrapAsAgenticTask('')).toBe('');
     expect(wrapAsAgenticTask('   ')).toBe('   ');
+  });
+
+  it('injects a mode-specific focus block per content mode', () => {
+    expect(wrapAsAgenticTask(base, 'homefeed')).toContain('홈피드 노출');
+    expect(wrapAsAgenticTask(base, 'seo')).toContain('검색 노출(SEO)');
+    expect(wrapAsAgenticTask(base, 'affiliate')).toContain('구매 전환');
+    expect(wrapAsAgenticTask(base, 'photo')).toContain('사진');
+  });
+
+  it('homefeed focus references the base body skeleton (no duplication) for self-critique', () => {
+    const hf = wrapAsAgenticTask(base, 'homefeed');
+    expect(hf).toContain('홈판 상위노출 본문 골격'); // self-critique against the base-prompt skeleton
+    expect(hf).toContain('추임새 절제');
+    expect(hf).toContain('댓글 CTA');
+  });
+
+  it('normalizes mode aliases (shopping -> affiliate, image-narrative -> photo)', () => {
+    expect(wrapAsAgenticTask(base, 'shopping')).toContain('구매 전환');
+    expect(wrapAsAgenticTask(base, 'image-narrative')).toContain('사진');
+  });
+
+  it('omits the focus block for unknown/blank modes (generic writing envelope)', () => {
+    const wrapped = wrapAsAgenticTask(base, 'something-else');
+    expect(wrapped).not.toContain('이 모드에서 특히 끌어올릴 것');
+    expect(wrapped).toContain('자율 작업 절차'); // still the writing envelope
+    expect(wrapAsAgenticTask(base)).not.toContain('이 모드에서 특히 끌어올릴 것');
+  });
+
+  it('does not leak one mode focus into another', () => {
+    const seo = wrapAsAgenticTask(base, 'seo');
+    expect(seo).not.toContain('홈피드 노출');
+    expect(seo).not.toContain('구매 전환');
   });
 
   it('exposes a longer deadline than the one-shot default (internal iteration is slower)', () => {

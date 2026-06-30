@@ -104,13 +104,13 @@ declare function applyKeywordPrefixToTitleContinuous(...args: any[]): any;
 
 const CONTENT_GENERATION_TIMEOUT_MS = 360000;
 const CONTENT_GENERATION_RETRY_COUNT = 0;
-const CONTENT_GENERATION_RETRY_NOTICE = '응답이 6분 이상 지연되면 진행 중인 요청을 중단합니다. Gemini 내부 재시도는 이미 적용되어 있어 중복 생성 요청을 다시 보내지 않습니다.';
+const CONTENT_GENERATION_RETRY_NOTICE = '응답이 6분 이상 지연되면 진행 중인 요청을 중단합니다. 같은 요청을 중복으로 다시 보내지 않으니 안심하세요.';
 
 // [2026-06-30] 모달/진행 로그에 실제 사용 엔진을 정확히 표기 (raw 'agent-codex' → '에이전트 (Codex 구독)').
 function engineLabel(generator: string): string {
   const map: Record<string, string> = {
-    'agent-codex': '에이전트 (Codex 구독)',
-    'agent-claude': '에이전트 (Claude 구독)',
+    'agent-codex': '에이전트 · 코덱스(Codex)',
+    'agent-claude': '에이전트 · 클로드 코드(Claude Code)',
     gemini: 'Gemini',
     openai: 'OpenAI',
     claude: 'Claude',

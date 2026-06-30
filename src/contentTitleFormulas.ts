@@ -190,7 +190,22 @@ export const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
     instruction: '"왜 + 사건/결과 + 진짜 이유는?" 구조. 의문형 + 구체 사건. 단순 의문보다 사건 결합이 강함. 28~55자.',
     example: '왜 같은 단지인데 한 동만 더 비쌀까, 이유는 따로 있었다'
   },
+  // ────── [홈판 상위노출 실측 분석] 이슈픽 계열 — 자료(URL/뉴스) 기반일 때만 사용 ──────
+  {
+    id: 'hf_hidden_identity', name: '㉖익명공개형',
+    instruction: '주체(인물/대상)를 제목에서 숨겨 "누구지?" 궁금증으로 클릭 유발. "의외의 OO", "이 OO", "톱스타 OO", "OO의 정체" 활용. ⛔ 입력 자료에 명시된 실제 사실만 사용 — 인물 정보·이력 날조 절대 금지. 28~55자.',
+    example: "'이 정도 학력일 줄은 몰랐다' 서울대 출신의 의외의 방송인"
+  },
+  {
+    id: 'hf_quote_fragment', name: '㉗인용파편형',
+    instruction: '충격적인 대사·반응 한 조각을 따옴표로 앞세우고 말줄임표(..)로 긴장을 만든 뒤 핵심 정보·궁금증으로 잇기. "인용파편.." + 핵심 + 꼬리 구조. ⛔ 입력 자료에 있는 실제 발언·사실만 사용, 날조 금지. 28~55자.',
+    example: '"속옷 안 팔린다더니.." 직접 모델 도전, 반전 근황은'
+  },
 ];
+
+// ✅ [홈판 이슈픽] 자료(URL/뉴스/RAG) 없이는 환각 위험이 커 선택에서 제외되는 공식.
+//   selectTitleFormula(hasSource=false)일 때 스킵 — 실존 인물 사실 날조 차단.
+export const SOURCE_REQUIRED_FORMULA_IDS = ['hf_hidden_identity', 'hf_quote_fragment'];
 
 // ✅ [2026-03-13] 쇼핑커넥트 전용 제목 공식 8개 — 제품 후기 최적화
 export const AFFILIATE_TITLE_FORMULAS: TitleFormula[] = [
@@ -301,9 +316,9 @@ export const CATEGORY_FORMULA_PRIORITY: Record<string, string[]> = {
   '패션': ['hf_before_after', 'hf_others_reaction', 'hf_comparison', 'hf_final_choice', 'hf_unexpected'],
   '반려동물': ['hf_me_too', 'hf_confession', 'hf_before_after', 'hf_others_reaction', 'hf_unexpected'],
   '쇼핑': ['hf_numeric_proof', 'hf_comparison', 'hf_confession', 'hf_final_choice', 'hf_unexpected'],
-  // 🔥🔥 핫-반응형 카테고리
-  '연예': ['hf_comments', 'hf_others_reaction', 'hf_after_story', 'hf_reason_tracking', 'hf_spread'],
-  '스포츠': ['hf_comments', 'hf_others_reaction', 'hf_after_story', 'hf_numeric_proof', 'hf_reason_tracking'],
+  // 🔥🔥 핫-반응형 카테고리 — 이슈픽 계열(익명공개/인용파편)을 앞에 두되, 자료 없으면 selectTitleFormula가 스킵
+  '연예': ['hf_hidden_identity', 'hf_quote_fragment', 'hf_comments', 'hf_after_story', 'hf_reason_tracking'],
+  '스포츠': ['hf_quote_fragment', 'hf_comments', 'hf_after_story', 'hf_numeric_proof', 'hf_reason_tracking'],
   // 🔥+🔥🔥 혼합 카테고리
   '생활': ['hf_direct_exp', 'hf_unexpected', 'hf_spread', 'hf_numeric_proof', 'hf_hidden_truth'],
 };

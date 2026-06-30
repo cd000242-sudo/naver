@@ -19,6 +19,7 @@ import {
   AFFILIATE_TITLE_FORMULAS,
   SHOPPING_EXPERT_TITLE_FORMULAS,
   CATEGORY_FORMULA_PRIORITY,
+  SOURCE_REQUIRED_FORMULA_IDS,
 } from './contentTitleFormulas';
 
 /**
@@ -36,6 +37,8 @@ import {
  * @param usedIds - 직전 시도에서 사용한 공식 ID 목록
  * @param categoryHint - 글 카테고리 (건강/재테크/여행 등)
  * @param articleType - shopping_expert_review 등 세부 타입
+ * @param hasSource - 근거 자료(URL/뉴스/RAG) 존재 여부. false면 이슈픽 계열(익명공개/인용파편)
+ *                    공식을 스킵 — 실존 인물 사실 날조 차단. 기본 true(미지정 시 동작 보존).
  */
 export function selectTitleFormula(
   mode: PromptMode,
@@ -43,6 +46,7 @@ export function selectTitleFormula(
   usedIds: string[],
   categoryHint?: string,
   articleType?: string,
+  hasSource: boolean = true,
 ): TitleFormula {
   // affiliate 전용 공식 풀 — shopping_expert_review는 별도 풀 (후기형 표현 금지)
   const isShoppingExpert = mode === 'affiliate' && articleType === 'shopping_expert_review';
@@ -66,10 +70,18 @@ export function selectTitleFormula(
     console.log(`[TitleGen] 🚫 최근 ${recent.length}개 기간 반복 감지 → 기간 계열 공식 스킵`);
   }
 
+  // [홈판 이슈픽] 근거 자료 없으면 익명공개/인용파편 공식 스킵 — 실존 인물 사실 날조 차단
+  if (!hasSource) {
+    console.log('[TitleGen] 🔒 근거 자료 없음 → 이슈픽 계열(익명공개/인용파편) 공식 스킵 (환각 방지)');
+  }
+  const isBlocked = (id: string): boolean =>
+    (skipDurationFormulas && DURATION_FORMULA_IDS.includes(id))
+    || (!hasSource && SOURCE_REQUIRED_FORMULA_IDS.includes(id));
+
   // 카테고리 우선 공식이 있으면 먼저 시도
   if (categoryHint && CATEGORY_FORMULA_PRIORITY[categoryHint]) {
     const priorityIds = CATEGORY_FORMULA_PRIORITY[categoryHint]
-      .filter(id => !skipDurationFormulas || !DURATION_FORMULA_IDS.includes(id));
+      .filter(id => !isBlocked(id));
     const priorityUnused = priorityIds
       .filter(id => !usedIds.includes(id))
       .map(id => allFormulas.find(f => f.id === id))
@@ -80,10 +92,8 @@ export function selectTitleFormula(
     }
   }
 
-  // 아직 사용하지 않은 공식 우선 (해당 모드 풀에서, 필요 시 기간 공식 제외)
-  const filteredPool = skipDurationFormulas
-    ? pool.filter(p => !DURATION_FORMULA_IDS.includes(p.id))
-    : pool;
+  // 아직 사용하지 않은 공식 우선 (해당 모드 풀에서, 필요 시 기간/이슈픽 공식 제외)
+  const filteredPool = pool.filter(p => !isBlocked(p.id));
   const unused = filteredPool.filter(p => !usedIds.includes(p.id));
   if (unused.length > 0) {
     return unused[attempt % unused.length];
