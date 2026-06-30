@@ -894,9 +894,16 @@ export async function initPriceInfoModal(): Promise<void> {
       }
     }
     if (naverClientSecret) {
-      naverClientSecret.value = config.naverClientSecret || config.naverDatalabClientSecret || '';
-      if (config.naverClientSecret || config.naverDatalabClientSecret) {
-        console.log('[Settings] 네이버 Client Secret 로드됨:', (config.naverClientSecret || config.naverDatalabClientSecret) ? '✅' : '❌');
+      const storedNaverSecret = config.naverClientSecret || config.naverDatalabClientSecret || '';
+      // [2026-06-30] 과거 마스킹 저장 버그로 손상된 키(• 포함)는 입력칸에 다시 넣지 않는다.
+      //   넣으면 재저장 시에도 마스킹이 안 풀려 영구 stuck → 빈칸 + 안내로 재입력을 유도한다.
+      if (isMaskedSecretValue(storedNaverSecret)) {
+        naverClientSecret.value = '';
+        naverClientSecret.placeholder = '키가 손상되어 비워졌습니다 — Client Secret을 다시 입력해 주세요';
+        console.warn('[Settings] 네이버 Client Secret이 손상(마스킹)되어 있어 비웠습니다 — 재입력 필요');
+      } else {
+        naverClientSecret.value = storedNaverSecret;
+        if (storedNaverSecret) console.log('[Settings] 네이버 Client Secret 로드됨: ✅');
       }
     }
     // ✅ 네이버 광고 API 키 로드

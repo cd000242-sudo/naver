@@ -35,7 +35,22 @@ export function registerImageSearchNaverHandlers(): void {
 
             console.log(`[Main] 네이버 이미지 검색: "${keyword}"`);
 
-            const normalizeEnv = (v: string | undefined): string => String(v || '').trim().replace(/^['"]|['"]$/g, '').trim();
+            // A masked/corrupted key (e.g. "ABCD••••", • = U+2022 = 8226) crashes
+            // fetch() with "Cannot convert argument to a ByteString" the moment it is
+            // put in the X-Naver-Client-* header — which silently zeroed out every
+            // image search. Reject any credential that is not header-safe (printable
+            // ASCII) so a clean key can be used and the user gets an actionable error.
+            let maskedKeyDetected = false;
+            const HEADER_SAFE = /^[\x21-\x7E]+$/;
+            const normalizeEnv = (v: string | undefined): string => {
+                const cleaned = String(v || '').trim().replace(/^['"]|['"]$/g, '').trim();
+                if (!cleaned) return '';
+                if (!HEADER_SAFE.test(cleaned)) {
+                    maskedKeyDetected = true;
+                    return '';
+                }
+                return cleaned;
+            };
 
             const collectEnvPairs = (baseIdKey: string, baseSecretKey: string, labelPrefix: string): Array<{ id: string; secret: string; label: string }> => {
                 const pairs: Array<{ id: string; secret: string; label: string }> = [];
@@ -65,12 +80,15 @@ export function registerImageSearchNaverHandlers(): void {
 
             if (credentialCandidates.length === 0) {
                 const config = await loadConfig();
-                if (config.naverDatalabClientId && config.naverDatalabClientSecret) {
-                    credentialCandidates.push({
-                        id: String(config.naverDatalabClientId).trim(),
-                        secret: String(config.naverDatalabClientSecret).trim(),
-                        label: 'config#1',
-                    });
+                const cfgId = normalizeEnv(String(config.naverClientId || config.naverDatalabClientId || ''));
+                const cfgSecret = normalizeEnv(String(config.naverClientSecret || config.naverDatalabClientSecret || ''));
+                if (cfgId && cfgSecret) {
+                    credentialCandidates.push({ id: cfgId, secret: cfgSecret, label: 'config#1' });
+                } else if (maskedKeyDetected) {
+                    return {
+                        success: false,
+                        message: '네이버 API 키가 손상된 형태(마스킹 ••••)로 저장되어 있습니다. 환경설정에서 네이버 Client ID/Secret을 지우고 실제 키를 다시 입력해 주세요.',
+                    };
                 } else {
                     return {
                         success: false,
