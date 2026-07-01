@@ -678,11 +678,12 @@ function deduplicateSourceCitations(text: string): string {
   const citationPatterns: { pattern: RegExp; alternatives: string[] }[] = [
     {
       pattern: /참고\s*자료를\s*보면/g,
-      alternatives: ['실제로 확인해보면', '찾아보니까', '알려진 바로는', '']
+      // 반복 인용은 헤징으로 바꾸지 말고 그냥 제거(사실 바로 진술) 위주 — 빈 문자열 다수
+      alternatives: ['', '', '알고 보니', '정리하면']
     },
     {
       pattern: /자료에\s*따르면/g,
-      alternatives: ['확인해보면', '알고 보니', '실제로는', '']
+      alternatives: ['', '', '실은', '알고 보니']
     },
     {
       pattern: /여러\s*(?:참고\s*)?자료(?:들)?(?:을|는|에서)/g,
