@@ -90,8 +90,20 @@ export async function writeImageFile(
   const isWebP = buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46;
 
   if (!isPNG && !isJPEG && !isWebP) {
-    console.warn(`[ImageGenerator] ⚠️ 알 수 없는 이미지 포맷 (첫 4바이트: ${buffer.slice(0, 4).toString('hex')}), 크기: ${buffer.length}B — 저장은 시도합니다`);
-    // 알 수 없는 포맷이지만 크기가 충분하면 저장 시도 (sharp에서 처리 가능할 수 있음)
+    // ✅ [깨진 이미지/더미 폴더 fix] 매직 바이트가 불명이면 sharp로 실제 이미지인지 검증한다.
+    //   sharp도 디코딩 못 하면 에러 응답/손상 데이터이므로 저장을 "거부"한다 — 폴더 mkdir 이전에
+    //   throw하므로 깨진 파일도, 빈 타임스탬프 폴더도 생기지 않는다.
+    try {
+      const sharpProbe = await import('sharp');
+      const sharpProbeFn = (sharpProbe as any).default || sharpProbe;
+      const probeMeta = await sharpProbeFn(buffer).metadata();
+      if (!probeMeta || !probeMeta.width || !probeMeta.height) {
+        throw new Error('no image dimensions');
+      }
+      console.warn(`[ImageGenerator] ⚠️ 매직 바이트 불명이나 sharp 검증 통과 (${probeMeta.format}, ${probeMeta.width}x${probeMeta.height}) — 저장 진행`);
+    } catch {
+      throw new Error(`❌ 유효한 이미지가 아닙니다 (매직 바이트 불명 + sharp 디코딩 실패, 크기 ${buffer.length}B). 깨진 이미지 저장을 거부합니다.`);
+    }
   } else {
     console.log(`[ImageGenerator] ✅ 이미지 포맷 검증 통과: ${isPNG ? 'PNG' : isJPEG ? 'JPEG' : 'WebP'} (${Math.round(buffer.length / 1024)}KB)`);
   }
