@@ -4059,6 +4059,26 @@ async function initUnifiedTab(): Promise<void> {
 
   function _scheduleSemiAutoHeadingAnalysis(sc: any): void {
     if (!sc || !Array.isArray(sc.headings) || sc.headings.length === 0) return;
+    // ✅ [썸네일 배치 fix v2] 첫 소제목 앞 텍스트(없으면 제목)를 introduction으로 세팅한다.
+    //   autoAnalyzeHeadings는 introduction이 있을 때만 "🖼️ 썸네일" 섹션을 만들어(headingImageGen)
+    //   썸네일을 첫 소제목 위에 배치한다. 붙여넣기 입력 이벤트 경로와 LLM 분류(_applyParsed) 경로가
+    //   모두 이 함수를 거치므로 여기서 한 번에 처리(이전엔 _syncSemiAutoManualHeadings에만 있어 분류
+    //   경로가 빠져 썸네일이 안 생겼음). intro 텍스트가 없으면 제목으로 폴백해 항상 썸네일 카드 생성.
+    try {
+      if (!sc.introduction || String(sc.introduction).trim().length === 0) {
+        const body = String(sc.bodyPlain || sc.content || '');
+        const firstTitle = String(sc.headings[0]?.title || '').trim();
+        let introText = '';
+        if (firstTitle && body) {
+          const lines = body.split(/\r?\n/);
+          const hIdx = lines.findIndex((l) => l.includes(firstTitle));
+          if (hIdx > 0) introText = lines.slice(0, hIdx).join('\n').trim();
+        }
+        const fallbackTitle = String(sc.selectedTitle || sc.title || '').trim();
+        const intro = introText.length >= 20 ? introText : fallbackTitle;
+        if (intro) sc.introduction = intro;
+      }
+    } catch { /* intro 추출 실패는 무시 — 소제목 이미지 흐름은 그대로 */ }
     if (semiAutoHeadingAnalyzeTimer) clearTimeout(semiAutoHeadingAnalyzeTimer);
     semiAutoHeadingAnalyzeTimer = setTimeout(() => {
       semiAutoHeadingAnalyzeTimer = null;
@@ -4080,22 +4100,7 @@ async function initUnifiedTab(): Promise<void> {
     const nextSignature = extracted.map((h) => h.title).join('|');
     if (currentSignature === nextSignature) return;
     sc.headings = extracted;
-    // ✅ [썸네일 배치 fix] 첫 소제목 앞 텍스트를 introduction으로 세팅한다.
-    //   autoAnalyzeHeadings는 introduction이 있을 때만 "🖼️ 썸네일" 섹션을 만들어(headingImageGen)
-    //   썸네일 이미지를 첫 소제목 위에 배치한다. 붙여넣기 플로우엔 introduction이 없어 이 단계가
-    //   통째로 빠져 있었다 — 소제목 이미지는 되는데 썸네일만 안 들어가던 원인.
-    try {
-      const firstTitle = String(extracted[0]?.title || '').trim();
-      if (firstTitle) {
-        const lines = String(body).split(/\r?\n/);
-        const headingLineIdx = lines.findIndex((l) => l.includes(firstTitle));
-        if (headingLineIdx > 0) {
-          const introText = lines.slice(0, headingLineIdx).join('\n').trim();
-          if (introText.length >= 20) sc.introduction = introText;
-        }
-      }
-    } catch { /* intro 추출 실패는 무시 — 소제목 이미지 흐름은 그대로 */ }
-    _scheduleSemiAutoHeadingAnalysis(sc);
+    _scheduleSemiAutoHeadingAnalysis(sc); // introduction/썸네일 세팅은 여기 안에서 처리(양 경로 공유)
   }
 
   if (semiAutoTitle) {
