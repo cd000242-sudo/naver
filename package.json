@@ -210,6 +210,7 @@
       "artifactName": "Better-Life-Naver-${version}-${arch}.${ext}"
     },
     "nsis": {
+      "artifactName": "Better-Life-Naver-Setup-${version}.${ext}",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
