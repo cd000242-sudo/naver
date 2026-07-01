@@ -764,28 +764,39 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(15,30,20,.62);
-      backdrop-filter: blur(10px);
+      background:
+        radial-gradient(760px 420px at 50% 28%, rgba(14,165,233,.16), transparent 62%),
+        radial-gradient(520px 320px at 48% 66%, rgba(53,211,153,.12), transparent 64%),
+        rgba(4,14,20,.84);
+      backdrop-filter: blur(16px) saturate(116%);
     }
     .modal.open { display: flex; }
     .dialog {
-      width: min(430px, 100%);
-      border: 1px solid rgba(91,183,255,.36);
-      border-radius: 8px;
-      background: linear-gradient(180deg, #FFFFFF, var(--surface-2));
-      box-shadow: 0 24px 80px rgba(0,0,0,.46);
-      padding: 20px;
+      width: min(460px, calc(100vw - 32px));
+      border: 1px solid rgba(91,183,255,.28);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.99), rgba(246,251,253,.99));
+      box-shadow: 0 34px 100px rgba(2,12,18,.48), 0 0 0 1px rgba(255,255,255,.72) inset;
+      color: #0f241b;
+      padding: 26px;
     }
-    .dialog h2 { margin: 0 0 8px; font-size: 22px; }
-    .dialog p { margin: 0 0 14px; color: var(--muted); line-height: 1.55; }
-    .dialog label { display: block; margin: 10px 0 6px; font-size: 13px; color: var(--text-2); font-weight: 900; }
-    .dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+    .dialog h2 { margin: 0 0 9px; color: #102217; font-size: 24px; line-height: 1.18; letter-spacing: 0; }
+    .dialog p { margin: 0 0 16px; color: #5d7066; line-height: 1.65; word-break: keep-all; }
+    .dialog label { display: block; margin: 12px 0 7px; color: #1c3a2d; font-size: 13px; font-weight: 1000; }
+    .dialog .input {
+      border-color: rgba(30,64,175,.18);
+      background: rgba(255,255,255,.92);
+      color: #102217;
+      box-shadow: 0 0 0 1px rgba(255,255,255,.65) inset;
+    }
+    .dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .dialog-actions .btn { min-height: 46px; border-radius: 12px; }
     .welcome-modal {
       z-index: 118;
       background:
         radial-gradient(720px 420px at 50% 30%, rgba(14,165,233,.18), transparent 60%),
         radial-gradient(520px 320px at 46% 62%, rgba(53,211,153,.16), transparent 64%),
-        rgba(4,14,20,.72);
+        rgba(4,14,20,.84);
       backdrop-filter: blur(18px) saturate(122%);
     }
     .welcome-dialog {
@@ -893,8 +904,9 @@
     .login-modal {
       z-index: 120;
       background:
-        radial-gradient(620px 360px at 50% 18%, rgba(22,163,74,.18), transparent 62%),
-        rgba(10,20,14,.76);
+        radial-gradient(760px 420px at 50% 28%, rgba(14,165,233,.16), transparent 62%),
+        radial-gradient(520px 320px at 48% 66%, rgba(53,211,153,.12), transparent 64%),
+        rgba(4,14,20,.84);
     }
     .pro-login-dialog {
       position: relative;
@@ -1838,7 +1850,7 @@
     const youtubeFeature = { id: 'youtube', group: 'youtube', title: '유튜브 황금키워드 및 쇼츠분석', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승/쇼츠 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, categoryId: options.categoryId && options.categoryId !== 'all' ? options.categoryId : undefined, crossReferenceNaver: options.crossReferenceNaver !== false, includeShortsSignals: options.includeShortsSignals !== false, includeAiInference: options.includeAiInference !== false }) };
 
     const features = [
-      { id: 'pro-traffic', group: 'keyword', title: 'PRO 트래픽 폭발키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '서버가 24시간 prewarm한 PRO 트래픽 후보를 먼저 보여주고, 필요하면 실시간 job으로 보강합니다.', defaultTargetCount: 30, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 30, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false, autoDiscovery: true, contextKeywords: buildLookupContextKeywords(q || options.autoSeedKeyword || '', 120), includeAiInference: options.includeAiInference !== false }) },
+      { id: 'pro-traffic', group: 'keyword', title: 'PRO 트래픽 폭발키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '서버가 24시간 prewarm한 PRO 트래픽 후보를 먼저 보여주고, 필요하면 실시간 job으로 보강합니다.', defaultTargetCount: 60, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 60, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false, autoDiscovery: true, contextKeywords: buildLookupContextKeywords(q || options.autoSeedKeyword || '', 180), includeAiInference: options.includeAiInference !== false }) },
       { id: 'naver-mate', group: 'keyword', title: '네이버 메이트 황금키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어를 실측 검색량과 연결해 네이버 친화 롱테일 후보를 확장합니다.', requiresKeyword: false, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q || options.autoSeedKeyword || '오늘 실시간 이슈', targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false, autoDiscovery: !q, contextKeywords: buildLookupContextKeywords(q || options.autoSeedKeyword || '', 120), includeAiInference: options.includeAiInference !== false }) },
       { id: 'shopping', group: 'keyword', title: '쇼핑커넥트 황금제품키워드', status: 'ready', route: endpoints.shoppingConnect, desc: '지금 이슈가 있거나 구매 전환 가능성이 있는 상품 신호를 블로그 진입형 제품 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q || '', targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim', requireSellableIntent: true, autoDiscovery: !q, contextKeywords: buildLookupContextKeywords(q || options.autoSeedKeyword || '', 120), includeAiInference: options.includeAiInference !== false }) },
       { id: 'kin', group: 'keyword', title: '지식인 황금키워드', status: 'ready', route: endpoints.kin, desc: '지식인 질문 신호에서 답변 수요가 높고 문서 경쟁이 낮은 정보형 키워드를 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true, contextKeywords: buildLookupContextKeywords(options.autoSeedKeyword || '', 120), includeAiInference: options.includeAiInference !== false }) }
