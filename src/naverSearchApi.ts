@@ -7,6 +7,7 @@
  */
 
 import { loadConfig } from './configManager.js';
+import { isMaskedSecretValue } from './security/secretValueUtils.js';
 
 // ==================== 타입 정의 ====================
 
@@ -125,6 +126,13 @@ async function callNaverSearchApi<T>(
 
     if (!clientId || !clientSecret) {
         throw new Error('네이버 검색 API 키가 설정되지 않았습니다. 설정에서 Client ID와 Client Secret을 입력해주세요.');
+    }
+
+    // [ByteString crash guard] A masked value (e.g. `•`) in the header crashes fetch with a cryptic
+    // "Cannot convert argument to a ByteString". Fail with a clear, actionable message instead. This
+    // also covers the config-param path that bypasses loadConfig's masking normalization.
+    if (isMaskedSecretValue(clientId) || isMaskedSecretValue(clientSecret)) {
+        throw new Error('네이버 검색 API 키가 마스킹된 표시값으로 저장되어 있습니다. 설정 → 네이버 Client ID / Secret 칸을 완전히 비운 뒤 실제 값을 다시 입력해주세요.');
     }
 
     // URL 생성

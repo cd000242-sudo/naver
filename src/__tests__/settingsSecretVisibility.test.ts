@@ -28,14 +28,18 @@ describe('settings secret visibility invariants', () => {
   it('saving API keys prioritizes the current typed value over stale dataset values', () => {
     const readApiInputBlock = settingsModal.match(/function\s+readApiInput[\s\S]+?function\s+getElements/);
     expect(readApiInputBlock).toBeTruthy();
-    expect(readApiInputBlock![0]).toMatch(/const\s+value\s*=\s*stripSecretSchemaArtifacts\(input\.value\)/);
+    expect(readApiInputBlock![0]).toMatch(/const\s+preserveSchemaText\s*=\s*shouldPreserveSecretSchemaTextForInput\(input\)/);
+    expect(readApiInputBlock![0]).toMatch(/const\s+value\s*=\s*stripSecretSchemaArtifacts\(input\.value,\s*preserveSchemaText\)/);
     expect(readApiInputBlock![0]).not.toMatch(/const\s+realValue[\s\S]{0,120}if\s*\(realValue\)[\s\S]{0,120}return\s+realValue[\s\S]{0,120}const\s+value/);
   });
 
-  it('settings modal strips schema artifacts before showing or saving API keys', () => {
+  it('settings modal strips schema artifacts before showing or saving API keys except Naver Client Secret', () => {
     expect(settingsModal).toMatch(/stripSecretSchemaArtifacts/);
-    expect(settingsModal).toMatch(/const\s+cleanValue\s*=\s*stripSecretSchemaArtifacts\(value\)/);
-    expect(settingsModal).toMatch(/return\s+stripSecretSchemaArtifacts\(currentValue\)/);
+    expect(settingsModal).toMatch(/function\s+shouldPreserveSecretSchemaTextForInput/);
+    expect(settingsModal).toMatch(/'naver-client-secret'/);
+    expect(settingsModal).toMatch(/'settings-naver-client-secret'/);
+    expect(settingsModal).toMatch(/const\s+cleanValue\s*=\s*stripSecretSchemaArtifacts\(value,\s*shouldPreserveSecretSchemaTextForInput\(input\)\)/);
+    expect(settingsModal).toMatch(/return\s+stripSecretSchemaArtifacts\(currentValue,\s*preserveSchemaText\)/);
   });
 
   it('packaging does not blank or recreate the local .env file', () => {

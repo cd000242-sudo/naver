@@ -37,6 +37,10 @@ let elements: SettingsModalElements | null = null;
 const ZERO_WIDTH_RE = /[\u200B-\u200D\uFEFF]/g;
 const BRACKETED_SECRET_SCHEMA_RE = /\s*[\[({<]\s*(?:schema|masked|masking|스키마|마스킹)[^)\]}>]*[\])}>]\s*/gi;
 const INLINE_SECRET_SCHEMA_RE = /\s*(?:schema|스키마)\s*[:=]\s*/gi;
+const SCHEMA_TEXT_PRESERVED_SECRET_INPUT_IDS = new Set([
+    'naver-client-secret',
+    'settings-naver-client-secret',
+]);
 
 function tryExtractJsonSecret(raw: string): string {
     const trimmed = raw.trim();
@@ -65,15 +69,22 @@ function tryExtractJsonSecret(raw: string): string {
     return raw;
 }
 
-function stripSecretSchemaArtifacts(value: string | undefined): string {
+function shouldPreserveSecretSchemaTextForInput(input: HTMLInputElement | null): boolean {
+    return !!input?.id && SCHEMA_TEXT_PRESERVED_SECRET_INPUT_IDS.has(input.id);
+}
+
+function stripSecretSchemaArtifacts(value: string | undefined, preserveSchemaText = false): string {
     if (!value) return '';
-    return tryExtractJsonSecret(value)
-        .replace(ZERO_WIDTH_RE, '')
-        .replace(BRACKETED_SECRET_SCHEMA_RE, '')
-        .replace(INLINE_SECRET_SCHEMA_RE, '')
-        .replace(/\s+/g, '')
-        .replace(/-{2,}/g, '-')
-        .trim();
+    const extracted = tryExtractJsonSecret(value).replace(ZERO_WIDTH_RE, '');
+    if (preserveSchemaText) {
+        return extracted.trim();
+    }
+    return extracted
+            .replace(BRACKETED_SECRET_SCHEMA_RE, '')
+            .replace(INLINE_SECRET_SCHEMA_RE, '')
+            .replace(/\s+/g, '')
+            .replace(/-{2,}/g, '-')
+            .trim();
 }
 
 function getInputByIds(...ids: string[]): HTMLInputElement | null {
@@ -99,7 +110,7 @@ function isMaskedApiValue(value: string | undefined): boolean {
 
 function setApiInputValue(input: HTMLInputElement | null, value: string | undefined): void {
     if (!input) return;
-    const cleanValue = stripSecretSchemaArtifacts(value);
+    const cleanValue = stripSecretSchemaArtifacts(value, shouldPreserveSecretSchemaTextForInput(input));
     input.value = cleanValue;
     if (cleanValue) {
         input.dataset.realValue = cleanValue;
@@ -109,13 +120,14 @@ function setApiInputValue(input: HTMLInputElement | null, value: string | undefi
 }
 
 function readApiInput(input: HTMLInputElement | null, currentValue: string | undefined): string {
-    if (!input) return stripSecretSchemaArtifacts(currentValue);
-    const value = stripSecretSchemaArtifacts(input.value);
+    const preserveSchemaText = shouldPreserveSecretSchemaTextForInput(input);
+    if (!input) return stripSecretSchemaArtifacts(currentValue, preserveSchemaText);
+    const value = stripSecretSchemaArtifacts(input.value, preserveSchemaText);
     if (!value) return '';
     if (isMaskedApiValue(value)) {
-        const realValue = stripSecretSchemaArtifacts(input.dataset.realValue);
+        const realValue = stripSecretSchemaArtifacts(input.dataset.realValue, preserveSchemaText);
         if (realValue && !isMaskedApiValue(realValue)) return realValue;
-        return stripSecretSchemaArtifacts(currentValue);
+        return stripSecretSchemaArtifacts(currentValue, preserveSchemaText);
     }
     input.dataset.realValue = value;
     return value;
