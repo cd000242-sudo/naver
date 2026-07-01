@@ -4080,6 +4080,21 @@ async function initUnifiedTab(): Promise<void> {
     const nextSignature = extracted.map((h) => h.title).join('|');
     if (currentSignature === nextSignature) return;
     sc.headings = extracted;
+    // ✅ [썸네일 배치 fix] 첫 소제목 앞 텍스트를 introduction으로 세팅한다.
+    //   autoAnalyzeHeadings는 introduction이 있을 때만 "🖼️ 썸네일" 섹션을 만들어(headingImageGen)
+    //   썸네일 이미지를 첫 소제목 위에 배치한다. 붙여넣기 플로우엔 introduction이 없어 이 단계가
+    //   통째로 빠져 있었다 — 소제목 이미지는 되는데 썸네일만 안 들어가던 원인.
+    try {
+      const firstTitle = String(extracted[0]?.title || '').trim();
+      if (firstTitle) {
+        const lines = String(body).split(/\r?\n/);
+        const headingLineIdx = lines.findIndex((l) => l.includes(firstTitle));
+        if (headingLineIdx > 0) {
+          const introText = lines.slice(0, headingLineIdx).join('\n').trim();
+          if (introText.length >= 20) sc.introduction = introText;
+        }
+      }
+    } catch { /* intro 추출 실패는 무시 — 소제목 이미지 흐름은 그대로 */ }
     _scheduleSemiAutoHeadingAnalysis(sc);
   }
 
