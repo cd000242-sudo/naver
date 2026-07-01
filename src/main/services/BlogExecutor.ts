@@ -366,7 +366,15 @@ export async function processImages(
                 continue;
             }
 
-            const filename = path.basename(image.filePath);
+            // ✅ [파일 전송 오류 fix] 원본 파일명을 그대로 쓰지 않는다.
+            //   수집/수동삽입 이미지의 원본 파일명이 CDN 해시(180자+)면 네이버 업로드가
+            //   "파일 전송 오류(알 수 없는 오류)"로 거부하고 Windows 260자 경로 한계도 초과한다.
+            //   base64 경로와 동일하게 "{소제목}_{timestamp}.{ext}" 짧은 이름으로 강제.
+            const srcExt = (path.extname(image.filePath) || '.jpg').toLowerCase().replace(/[^.a-z0-9]/g, '').slice(0, 5) || '.jpg';
+            const shortHeading = (image.heading || 'image')
+                .replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_')
+                .replace(/\.+$/g, '').substring(0, 40).trim() || 'image';
+            const filename = `${shortHeading}_${Date.now()}${srcExt.startsWith('.') ? srcExt : '.' + srcExt}`;
             const destPath = path.join(postsImageDir, filename);
             await fs.copyFile(image.filePath, destPath);
 
