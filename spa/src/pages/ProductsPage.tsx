@@ -46,7 +46,7 @@ const PRODUCTS: Product[] = [
         subtitle: 'AI 키워드 인텔리전스',
         headline: '검색량, 문서수, 경쟁도를 보고 쓸 키워드만 남깁니다',
         desc: <>네이버·ZUM·네이트·다음 실시간 검색어와 17개 데이터 소스를 교차검증해 운영자가 바로 판단할 수 있는 키워드 후보를 보여줍니다.</>,
-        href: '/leword',
+        href: '/products#product-leword',
         cta: 'LEWORD 자세히 보기',
         media: { type: 'image', src: '/images/leword/realtime-monitor-hero.png', alt: 'LEWORD 실시간 검색어 모니터링 화면' },
         metrics: [['4매체', '실시간 검색어'], ['17소스', '교차검증'], ['SSS', '황금키워드 등급']],
@@ -79,7 +79,7 @@ const PRODUCTS: Product[] = [
 
 const GUIDE_CARDS = [
     ['블로그 운영 자동화가 먼저라면', 'Better Life Naver', '본문·이미지·발행까지 반복 업무를 줄이는 메인 제품입니다.', '/detail'],
-    ['키워드 판단이 막힌다면', 'LEWORD', '검색량과 경쟁도를 보고 발행할 주제를 먼저 골라냅니다.', '/leword'],
+    ['키워드 판단이 막힌다면', 'LEWORD', '검색량과 경쟁도를 보고 발행할 주제를 먼저 골라냅니다.', '/products#product-leword'],
     ['외부유입 채널이 필요하다면', 'Leaders Orbit', '블로그스팟·워드프레스·티스토리 글과 링크 구조를 보조 채널로 만듭니다.', '/orbit'],
 ];
 
@@ -104,14 +104,22 @@ const stackStyle: Record<ProductId, string> = {
     orbit: 'linear-gradient(135deg, #1fb6ff 0%, #34d399 100%)',
 };
 
+function normalizeProductHref(productId: ProductId, href: string): string {
+    if (productId === 'leword' && (href === '/leword' || href === '/leword/')) {
+        return '/products#product-leword';
+    }
+    return href;
+}
+
 function applyProductOverrides(products: Product[], siteContent: SiteContent | null): Product[] {
     const overrides = siteContent?.products || {};
     return products.map((product) => {
         const patch = overrides[product.id];
-        if (!patch) return product;
+        if (!patch) return { ...product, href: normalizeProductHref(product.id, product.href) };
         return {
             ...product,
             ...patch,
+            href: normalizeProductHref(product.id, patch.href || product.href),
             desc: patch.desc || product.desc,
             metrics: Array.isArray(patch.metrics) && patch.metrics.length > 0 ? patch.metrics : product.metrics,
             bullets: Array.isArray(patch.bullets) && patch.bullets.length > 0 ? patch.bullets : product.bullets,
@@ -200,6 +208,19 @@ function ProductsPage() {
     useEffect(() => {
         fetchSiteContent().then(setSiteContent);
     }, []);
+
+    useEffect(() => {
+        const scrollToHash = () => {
+            const id = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+            if (!id) return;
+            window.requestAnimationFrame(() => {
+                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        };
+        scrollToHash();
+        window.addEventListener('hashchange', scrollToHash);
+        return () => window.removeEventListener('hashchange', scrollToHash);
+    }, [siteContent]);
 
     const products = applyProductOverrides(PRODUCTS, siteContent);
     const page = siteContent?.productsPage || {};
@@ -290,7 +311,7 @@ function ProductsPage() {
 
                         <div className="product-panels">
                             {products.map((product) => (
-                                <article className={`product-panel fade-in ${product.id}`} key={product.id}>
+                                <article className={`product-panel fade-in ${product.id}`} id={`product-${product.id}`} key={product.id}>
                                     <div className="product-panel-copy">
                                         <span className="product-badge" style={{ background: stackStyle[product.id] }}>{product.eyebrow}</span>
                                         <h3>{product.name}</h3>

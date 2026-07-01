@@ -1876,6 +1876,7 @@
     let recentLoginCredentialValues = [];
     const toolTabFeatureIds = ['pro-traffic', 'naver-mate', 'shopping', 'kin'];
     const viewIds = ['golden', 'lookup', 'features', 'youtube', 'settings', 'downloads', 'commerce'];
+    let pendingViewAfterLogin = null;
     const catalogTabs = [
       { id: 'today', label: '오늘/실시간' },
       { id: 'discovery', label: '발굴' },
@@ -1939,6 +1940,15 @@
     function setActiveView(id, options) {
       const next = normalizeViewId(id);
       const opts = options || {};
+      if (next !== 'golden' && !opts.allowAnonymous && (!session || !session.accessToken)) {
+        pendingViewAfterLogin = next;
+        openLogin();
+        log('Pro login is required before opening this menu.');
+        if (location.hash !== '#golden' && opts.hash !== false) {
+          history.replaceState(null, '', '#golden');
+        }
+        return;
+      }
       activeViewId = next;
       document.querySelectorAll('[data-view]').forEach(function(node) {
         node.classList.toggle('active', node.getAttribute('data-view') === next);
@@ -3117,7 +3127,7 @@
         section: 'products',
         products: [
           { id: 'naver', name: 'Better Life Naver', status: 'published', href: '/detail' },
-          { id: 'leword', name: 'LEWORD', status: 'published', href: '/leword' },
+          { id: 'leword', name: 'LEWORD', status: 'published', href: '/products#product-leword' },
           { id: 'orbit', name: 'Leaders Orbit', status: 'published', href: '/orbit' },
         ],
         chatbots: [],
@@ -4663,6 +4673,12 @@
     function selectFeatureShortcut(id, keyword, autorun) {
       const feature = featureById(id);
       if (!feature) return;
+      if (!session || !session.accessToken) {
+        pendingViewAfterLogin = feature.id === 'youtube' ? 'youtube' : 'features';
+        openLogin();
+        log('Pro login is required before opening this feature.');
+        return;
+      }
       const q = String(keyword || '').trim();
       if (q) {
         qs('keywordInput').value = q;
@@ -5214,7 +5230,9 @@
         closeLogin();
         openWelcomeModal(payload.session.tier || 'Pro');
         hydrateNaverApiSettingsForm();
-        setActiveView('golden', { load: false });
+        const nextView = pendingViewAfterLogin || 'golden';
+        pendingViewAfterLogin = null;
+        setActiveView(nextView, { load: false });
         log('Pro 로그인 완료: ' + (payload.session.tier || 'standard'));
         await Promise.all([loadGoldenBoard(), refreshFeatureStatus().catch(function() {})]);
         loadCommerceDashboard(selectedCommercePeriod).catch(function() {});
