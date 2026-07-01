@@ -29,6 +29,15 @@ describe('publish confirmation integrity (R11)', () => {
     expect(code).not.toMatch(/URL이 여전히 변경되지 않았습니다\. 발행이 완료되었는지 수동으로 확인해주세요/);
   });
 
+  it('A-4: concrete post URL must also load a readable published-post screen', () => {
+    expect(code).toContain('waitForPublishedPostPageConfirmation');
+    expect(code).toContain('collectPublishedPostPageSnapshot');
+    expect(code).toContain('resolvePublishedPostPageConfirmation(snapshot)');
+    expect(code).toContain('requiredConsecutiveOk = 2');
+    expect(code).toContain('consecutiveOkCount');
+    expect(code).toContain('실제 게시글 URL은 확인됐지만 네이버 완료 화면/게시글 본문 로드를 연속 확인하지 못했습니다');
+  });
+
   it('A-4: unconfirmed publishes are never blind-retried (double-publish guard)', () => {
     const terminalBlock = code.slice(code.indexOf('const terminalErrors'), code.indexOf('const frameRecoverableErrors'));
     expect(terminalBlock).toMatch(/PUBLISH_UNCONFIRMED/);
@@ -44,6 +53,17 @@ describe('publish confirmation integrity (R11)', () => {
     expect(modalFailureBlock).toMatch(/PUBLISH_MODAL_NOT_OPENED/);
     expect(modalFailureBlock).toMatch(/throw new Error/);
     expect(code).not.toMatch(/발행 모달 열기 3회 시도 모두 실패[\s\S]{0,200}카테고리 선택 건너뜀 가능'\);\s*\}/);
+  });
+
+  it('A-3: fallback publish option step never consumes the final publish button', () => {
+    const optionStart = code.indexOf('const publishOption = await frame.waitForSelector(');
+    expect(optionStart).toBeGreaterThan(-1);
+    const optionBlock = code.slice(optionStart, code.indexOf('// 최종 발행 확인 버튼 찾기', optionStart));
+
+    expect(optionBlock).toContain('[data-value="publish"]');
+    expect(optionBlock).toContain('별도 발행 옵션 미발견');
+    expect(optionBlock).not.toContain('seOnePublishBtn');
+    expect(optionBlock).not.toContain('confirm_btn');
   });
 
   it('A-3: helper module does not keep a second stale immediate-publish implementation', () => {

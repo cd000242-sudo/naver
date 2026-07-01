@@ -15,7 +15,7 @@ export type ImmediatePublishOutcome =
   | {
       success: true;
       url?: string;
-      reason: 'CONCRETE_POST_URL' | 'NON_EDITOR_BLOG_URL' | 'SUCCESS_MESSAGE';
+      reason: 'CONCRETE_POST_URL';
       needsManualUrlCheck: boolean;
     }
   | {
@@ -111,27 +111,18 @@ export function resolveImmediatePublishOutcome(input: ImmediatePublishOutcomeInp
     };
   }
 
-  const nonEditorBlogUrl = changed.find((url) => isNaverBlogUrl(url) && !isNaverEditorUrl(url));
-  if (nonEditorBlogUrl) {
-    return {
-      success: true,
-      url: nonEditorBlogUrl,
-      reason: 'NON_EDITOR_BLOG_URL',
-      needsManualUrlCheck: true,
-    };
-  }
-
   const status = input.publishStatus || null;
   if (status?.error) {
     return failure(status.errorText || 'publish failure message was visible');
   }
 
   if (status?.success) {
-    return {
-      success: true,
-      reason: 'SUCCESS_MESSAGE',
-      needsManualUrlCheck: true,
-    };
+    return failure(`publish success message appeared but no post URL was confirmed${status.successText ? ` (${status.successText})` : ''}`);
+  }
+
+  const nonPostBlogUrl = changed.find((url) => isNaverBlogUrl(url) && !isNaverEditorUrl(url));
+  if (nonPostBlogUrl) {
+    return failure(`publish navigation timeout: no post URL was confirmed (${nonPostBlogUrl})`);
   }
 
   if (allObservedUrls(input).some(isNaverEditorUrl)) {

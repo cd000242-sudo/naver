@@ -32,7 +32,8 @@ describe('publish confirm polling', () => {
   });
 
   it('detects the published-post URL pattern as success', () => {
-    expect(automation).toMatch(/blog\\\.naver\\\.com\\\/\[\^\/\?#\]\+\\\/\\d\+/);
+    expect(automation).toContain('isConcreteNaverBlogPostUrl(url)');
+    expect(automation).toContain('isConcreteNaverBlogPostUrl(afterUrl)');
   });
 
   it('scans iframe (mainFrame) documents for the reaction/sympathy signal', () => {

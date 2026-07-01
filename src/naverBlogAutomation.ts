@@ -104,10 +104,16 @@ import {
 import { classifyLoginStatusUrl } from './automation/loginStatusUrlPolicy.js';
 import {
   formatPublishGuardLog,
+  isConcreteNaverBlogPostUrl,
   isNaverEditorUrl,
   resolveImmediatePublishOutcome,
   resolvePublishedUrlAfterOutcome,
 } from './automation/publishOutcomeResolver';
+import {
+  PUBLISHED_POST_PAGE_SIGNAL_SELECTORS,
+  resolvePublishedPostPageConfirmation,
+  type PublishedPostPageSnapshot,
+} from './automation/publishedPostPageConfirmation.js';
 import {
   getConfirmPublishSelectors,
   getPublishButtonSelectors,
@@ -5345,7 +5351,7 @@ export class NaverBlogAutomation {
 
               // ✅ URL이 변경되었는지 확인
               const urlChanged = beforeUrl !== afterUrl;
-              const isBlogPostUrl = /blog\.naver\.com\/[^\/]+\/\d+/.test(afterUrl);
+              const isBlogPostUrl = isConcreteNaverBlogPostUrl(afterUrl);
 
               if (urlChanged && isBlogPostUrl) {
                 this.log(`✅ 블로그 글이 즉시발행되었습니다.`);
@@ -5354,14 +5360,7 @@ export class NaverBlogAutomation {
               } else if (urlChanged) {
                 // URL은 변경되었지만 블로그 포스트 URL이 아닌 경우
                 this.log(`⚠️ URL이 변경되었지만 블로그 포스트 URL이 아닙니다: ${afterUrl}`);
-                // 추가 확인: 에디터 페이지가 아닌지 확인
-                if (!isNaverEditorUrl(afterUrl)) {
-                  this.log(`✅ 블로그 글이 발행되었습니다. (URL: ${afterUrl})`);
-                  this.log(`POST_URL: ${afterUrl}`);
-                  this.publishedUrl = afterUrl; // ✅ URL 저장
-                } else {
-                  throw new Error('발행이 완료되지 않았습니다. 에디터 페이지에 머물러 있습니다.');
-                }
+                throw new Error('PUBLISH_UNCONFIRMED:발행 버튼 클릭 후 URL은 바뀌었지만 실제 게시글 URL을 확인하지 못했습니다. 작성중/블로그홈 이동을 발행 완료로 처리하지 않습니다.');
               } else {
                 // [2026-06-23] URL이 아직 안 바뀐 경우 — 느린 PC에서는 발행 네비게이션이
                 // 첫 확인(클릭+1s+nav+2s) 안에 끝나지 않는다. 단발 판정으로 성급히 "실패"를
@@ -5376,9 +5375,9 @@ export class NaverBlogAutomation {
                 const pollPublished = async (): Promise<string | null> => {
                   const url = this.ensurePage().url();
                   // 1) 블로그 포스트 URL(/{id}/{글번호})로 이동 = 발행 완료
-                  if (url !== beforeUrl && /blog\.naver\.com\/[^/?#]+\/\d+/.test(url)) return url;
-                  // 2) 글쓰기 에디터를 벗어났고 blog 도메인이면 발행 완료로 간주
-                  if (url !== beforeUrl && /blog\.naver\.com/i.test(url) && !isNaverEditorUrl(url)) return url;
+                  if (url !== beforeUrl && isConcreteNaverBlogPostUrl(url)) return url;
+                  // 2) 글쓰기 에디터를 벗어난 blog 도메인만으로는 발행 완료가 아니다.
+                  //    블로그홈/작성중/리다이렉트 화면을 성공으로 오판하지 않기 위해 실제 글번호 URL만 인정한다.
                   // 3) 발행된 글 화면 신호 — top + iframe(mainFrame)까지 스캔(공감/반응 영역은
                   //    mainFrame 안에 있다 — Playwright 라이브 검증: .area_sympathy 2개,
                   //    a.u_likeit_button 26개 in mainFrame). 보이는 짧은 요소만(CDATA/숨김 오탐 방지).
@@ -5401,7 +5400,10 @@ export class NaverBlogAutomation {
                     }
                     return false;
                   }).catch(() => false);
-                  return domOk ? this.ensurePage().url() : null;
+                  if (!domOk) return null;
+
+                  const domUrl = this.ensurePage().url();
+                  return isConcreteNaverBlogPostUrl(domUrl) ? domUrl : null;
                 };
 
                 let confirmedUrl: string | null = null;
@@ -5414,10 +5416,13 @@ export class NaverBlogAutomation {
 
                 if (confirmedUrl) {
                   // 토스트가 먼저 뜨고 URL은 약간 늦게 바뀔 수 있어 포스트 URL을 한 번 더 확보 시도
-                  if (!/blog\.naver\.com\/[^/?#]+\/\d+/.test(confirmedUrl)) {
+                  if (!isConcreteNaverBlogPostUrl(confirmedUrl)) {
                     await this.delay(2500);
                     const late = this.ensurePage().url();
-                    if (/blog\.naver\.com\/[^/?#]+\/\d+/.test(late)) confirmedUrl = late;
+                    if (isConcreteNaverBlogPostUrl(late)) confirmedUrl = late;
+                  }
+                  if (!isConcreteNaverBlogPostUrl(confirmedUrl)) {
+                    throw new Error('PUBLISH_UNCONFIRMED:발행 성공 신호는 보였지만 실제 게시글 URL을 확인하지 못했습니다. 작성중/임시저장 상태를 발행 완료로 처리하지 않습니다.');
                   }
                   this.log(`✅ 블로그 글이 발행되었습니다 (폴링 확인).`);
                   this.log(`POST_URL: ${confirmedUrl}`);
@@ -5457,7 +5462,7 @@ export class NaverBlogAutomation {
                 await this.delay(2000);
                 const afterUrl = this.ensurePage().url();
 
-                if (beforeUrl !== afterUrl && /blog\.naver\.com/i.test(afterUrl)) {
+                if (beforeUrl !== afterUrl && isConcreteNaverBlogPostUrl(afterUrl)) {
                   this.log('✅ 블로그 글이 즉시발행되었습니다.');
                   this.log(`POST_URL: ${afterUrl}`);
                   this.publishedUrl = afterUrl; // ✅ URL 저장
@@ -5511,126 +5516,127 @@ export class NaverBlogAutomation {
 
           // ✅ 발행 옵션 선택 (모달이 열릴 때까지 충분히 대기)
           await this.delay(500); // 모달이 열릴 때까지 추가 대기
-          // ✅ [2026-03-05 FIX] button:has-text()는 Playwright 전용 → Puppeteer 호환 셀렉터로 교체
+          // 최종 발행 버튼(seOnePublishBtn/confirm_btn)은 옵션 단계에서 절대 누르지 않는다.
+          // 일부 네이버 UI에서는 별도 옵션 없이 곧장 최종 확인 버튼만 보이므로,
+          // 옵션이 없으면 실패하지 않고 아래 최종 발행 버튼 탐색으로 직행한다.
           const publishOption = await frame.waitForSelector(
-            '[data-value="publish"], button[data-testid="seOnePublishBtn"], button[class*="confirm_btn"]',
-            { visible: true, timeout: 5000 }
+            '[data-value="publish"], [role="radio"][data-value="publish"], input[value="publish"]',
+            { visible: true, timeout: 2500 }
           ).catch(() => null);
 
           if (publishOption) {
             await publishOption.click();
             await this.delay(1000); // ✅ 대기 시간 증가
+          } else {
+            this.log('   ℹ️ 별도 발행 옵션 미발견 — 즉시발행 확정 버튼 탐색으로 진행합니다.');
+          }
 
-            // 최종 발행 확인 버튼 찾기
-            const confirmPublishSelectors = [
-              'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"][data-click-area="tpb*i.publish"]',
-              'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"]',
-              'button[data-testid="seOnePublishBtn"]',
-              // ✅ [2026-02-23 FIX] *= → = 정확 매칭 (토글 버튼 혼동 방지)
-              'button.confirm_btn__WEaBq[data-click-area="tpb*i.publish"]',
-              'button.confirm_btn__WEaBq',
-              // ✅ [2026-03-05] 와일드카드 패턴 (네이버 CSS 모듈 해시 변경 대응)
-              'button[class*="confirm_btn"][data-testid="seOnePublishBtn"]',
-              'button[class*="confirm_btn"][data-click-area="tpb*i.publish"]',
-              'button[class*="confirm_btn"]',
-            ];
+          // 최종 발행 확인 버튼 찾기
+          const confirmPublishSelectors = [
+            'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"][data-click-area="tpb*i.publish"]',
+            'button.confirm_btn__WEaBq[data-testid="seOnePublishBtn"]',
+            'button[data-testid="seOnePublishBtn"]',
+            // ✅ [2026-02-23 FIX] *= → = 정확 매칭 (토글 버튼 혼동 방지)
+            'button.confirm_btn__WEaBq[data-click-area="tpb*i.publish"]',
+            'button.confirm_btn__WEaBq',
+            // ✅ [2026-03-05] 와일드카드 패턴 (네이버 CSS 모듈 해시 변경 대응)
+            'button[class*="confirm_btn"][data-testid="seOnePublishBtn"]',
+            'button[class*="confirm_btn"][data-click-area="tpb*i.publish"]',
+            'button[class*="confirm_btn"]',
+          ];
 
-            let confirmPublishButton: ElementHandle<Element> | null = null;
-            for (const selector of confirmPublishSelectors) {
-              confirmPublishButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
-              if (confirmPublishButton) break;
-            }
+          let confirmPublishButton: ElementHandle<Element> | null = null;
+          for (const selector of confirmPublishSelectors) {
+            confirmPublishButton = await frame.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null); // ✅ 타임아웃 3초 → 5초 증가
+            if (confirmPublishButton) break;
+          }
 
-            // ✅ [2026-03-05] 텍스트 기반 폴백 (모든 셀렉터 실패 시)
-            if (!confirmPublishButton) {
-              this.log('   ⚠️ 확인 버튼 셀렉터 실패 → 텍스트 기반 폴백...');
-              try {
-                confirmPublishButton = await frame.evaluateHandle(() => {
-                  const buttons = document.querySelectorAll('button');
-                  for (const btn of buttons) {
-                    const text = (btn.textContent || '').trim();
-                    if ((text === '발행' || text === '확인') && !btn.hasAttribute('disabled')) {
-                      const rect = btn.getBoundingClientRect();
-                      if (rect.width > 0 && rect.height > 0 && rect.top > 100) {
-                        // ✅ [2026-03-05 FIX] toolbar 발행 버튼 제외
-                        const cls = btn.className || '';
-                        const clickArea = btn.getAttribute('data-click-area') || '';
-                        if (cls.includes('publish_btn') && !cls.includes('confirm_btn')) continue;
-                        if (clickArea === 'tpb.publish') continue;
-                        return btn;
-                      }
+          // ✅ [2026-03-05] 텍스트 기반 폴백 (모든 셀렉터 실패 시)
+          if (!confirmPublishButton) {
+            this.log('   ⚠️ 확인 버튼 셀렉터 실패 → 텍스트 기반 폴백...');
+            try {
+              confirmPublishButton = await frame.evaluateHandle(() => {
+                const buttons = document.querySelectorAll('button');
+                for (const btn of buttons) {
+                  const text = (btn.textContent || '').trim();
+                  if ((text === '발행' || text === '확인') && !btn.hasAttribute('disabled')) {
+                    const rect = btn.getBoundingClientRect();
+                    if (rect.width > 0 && rect.height > 0 && rect.top > 100) {
+                      // ✅ [2026-03-05 FIX] toolbar 발행 버튼 제외
+                      const cls = btn.className || '';
+                      const clickArea = btn.getAttribute('data-click-area') || '';
+                      if (cls.includes('publish_btn') && !cls.includes('confirm_btn')) continue;
+                      if (clickArea === 'tpb.publish') continue;
+                      return btn;
                     }
                   }
-                  return null;
-                }) as ElementHandle<Element> | null;
+                }
+                return null;
+              }) as ElementHandle<Element> | null;
 
-                if (confirmPublishButton) {
-                  const isElement = await confirmPublishButton.evaluate(el => el instanceof HTMLElement).catch(() => false);
-                  if (!isElement) confirmPublishButton = null;
-                }
-                if (confirmPublishButton) {
-                  this.log('   ✅ 텍스트 기반 폴백으로 확인 버튼 발견!');
-                }
-              } catch (fallbackErr) {
-                this.log(`   ❌ 텍스트 기반 폴백 오류: ${(fallbackErr as Error).message}`);
+              if (confirmPublishButton) {
+                const isElement = await confirmPublishButton.evaluate(el => el instanceof HTMLElement).catch(() => false);
+                if (!isElement) confirmPublishButton = null;
               }
+              if (confirmPublishButton) {
+                this.log('   ✅ 텍스트 기반 폴백으로 확인 버튼 발견!');
+              }
+            } catch (fallbackErr) {
+              this.log(`   ❌ 텍스트 기반 폴백 오류: ${(fallbackErr as Error).message}`);
+            }
+          }
+
+          if (confirmPublishButton) {
+            // ✅ 발행 전 URL 저장
+            const beforeUrl = this.ensurePage().url();
+            this.log(`📌 발행 전 URL: ${beforeUrl}`);
+
+            await confirmPublishButton.click();
+            await this.delay(1000);
+
+            // ✅ 네비게이션 대기
+            let navigationSuccess = false;
+            try {
+              await Promise.race([
+                frame.waitForNavigation({ waitUntil: NAVER_WAIT_UNTIL.FRAME_NAVIGATION, timeout: NAVER_TIMEOUTS.FRAME_NAVIGATION }),
+                new Promise(resolve => setTimeout(resolve, 30000))
+              ]);
+              navigationSuccess = true;
+            } catch (navError) {
+              this.log(`⚠️ 네비게이션 대기 중 오류: ${(navError as Error).message}`);
             }
 
-            if (confirmPublishButton) {
-              // ✅ 발행 전 URL 저장
-              const beforeUrl = this.ensurePage().url();
-              this.log(`📌 발행 전 URL: ${beforeUrl}`);
+            // ✅ 발행 완료 확인
+            await this.delay(2000);
+            const afterUrl = this.ensurePage().url();
+            this.log(`📌 발행 후 URL: ${afterUrl}`);
 
-              await confirmPublishButton.click();
-              await this.delay(1000);
-
-              // ✅ 네비게이션 대기
-              let navigationSuccess = false;
-              try {
-                await Promise.race([
-                  frame.waitForNavigation({ waitUntil: NAVER_WAIT_UNTIL.FRAME_NAVIGATION, timeout: NAVER_TIMEOUTS.FRAME_NAVIGATION }),
-                  new Promise(resolve => setTimeout(resolve, 30000))
-                ]);
-                navigationSuccess = true;
-              } catch (navError) {
-                this.log(`⚠️ 네비게이션 대기 중 오류: ${(navError as Error).message}`);
-              }
-
-              // ✅ 발행 완료 확인
-              await this.delay(2000);
-              const afterUrl = this.ensurePage().url();
-              this.log(`📌 발행 후 URL: ${afterUrl}`);
-
-              if (beforeUrl !== afterUrl && /blog\.naver\.com/i.test(afterUrl)) {
-                this.log('✅ 블로그 글이 즉시발행되었습니다.');
-                this.log(`POST_URL: ${afterUrl}`);
-                this.publishedUrl = afterUrl; // ✅ URL 저장
-              } else if (!isNaverEditorUrl(afterUrl)) {
-                this.log('✅ 블로그 글이 발행되었습니다.');
-                this.log(`POST_URL: ${afterUrl}`);
-                this.publishedUrl = afterUrl; // ✅ URL 저장
-              } else {
-                // 추가 확인
-                await this.delay(3000);
-                const finalUrl = this.ensurePage().url();
-                if (finalUrl !== beforeUrl) {
-                  this.log('✅ 블로그 글이 즉시발행되었습니다.');
-                  this.log(`POST_URL: ${finalUrl}`);
-                  this.publishedUrl = finalUrl; // ✅ URL 저장
-                } else {
-                  throw new Error('발행이 완료되지 않았습니다. 에디터 페이지에 머물러 있습니다.');
-                }
-              }
+            if (beforeUrl !== afterUrl && isConcreteNaverBlogPostUrl(afterUrl)) {
+              this.log('✅ 블로그 글이 즉시발행되었습니다.');
+              this.log(`POST_URL: ${afterUrl}`);
+              this.publishedUrl = afterUrl; // ✅ URL 저장
+            } else if (isConcreteNaverBlogPostUrl(afterUrl)) {
+              this.log('✅ 블로그 글이 발행되었습니다.');
+              this.log(`POST_URL: ${afterUrl}`);
+              this.publishedUrl = afterUrl; // ✅ URL 저장
             } else {
-              // [SPEC-STABILITY-2026 R11/A-3] 임시저장 silent 전환 제거 —
-              // 사용자의 "발행" 명령을 임시저장으로 바꾸지 않는다 (중복 경로 2).
-              const page = this.ensurePage();
-              await page.keyboard.press('Escape').catch(() => { });
-              throw new Error('PUBLISH_BUTTON_NOT_FOUND:즉시 발행 확인 버튼을 찾지 못했습니다 — 임시저장 전환 없이 중단합니다 (네이버 UI 변경 가능성, 셀렉터 점검 필요).');
+              // 추가 확인
+              await this.delay(3000);
+              const finalUrl = this.ensurePage().url();
+              if (finalUrl !== beforeUrl && isConcreteNaverBlogPostUrl(finalUrl)) {
+                this.log('✅ 블로그 글이 즉시발행되었습니다.');
+                this.log(`POST_URL: ${finalUrl}`);
+                this.publishedUrl = finalUrl; // ✅ URL 저장
+              } else {
+                throw new Error('PUBLISH_UNCONFIRMED:발행 버튼 클릭 후 실제 게시글 URL을 확인하지 못했습니다. 작성중/블로그홈/임시저장 상태를 발행 완료로 처리하지 않습니다.');
+              }
             }
           } else {
-            // [SPEC-STABILITY-2026 R11/A-3] 임시저장 silent 전환 제거 (중복 경로 3).
-            throw new Error('PUBLISH_BUTTON_NOT_FOUND:발행 옵션을 찾지 못했습니다 — 임시저장 전환 없이 중단합니다 (네이버 UI 변경 가능성, 셀렉터 점검 필요).');
+            // [SPEC-STABILITY-2026 R11/A-3] 임시저장 silent 전환 제거 —
+            // 사용자의 "발행" 명령을 임시저장으로 바꾸지 않는다 (중복 경로 2).
+            const page = this.ensurePage();
+            await page.keyboard.press('Escape').catch(() => { });
+            throw new Error('PUBLISH_BUTTON_NOT_FOUND:즉시 발행 확인 버튼을 찾지 못했습니다 — 임시저장 전환 없이 중단합니다 (네이버 UI 변경 가능성, 셀렉터 점검 필요).');
           }
         }
       } else if (mode === 'schedule') {
@@ -8038,7 +8044,7 @@ export class NaverBlogAutomation {
       try {
         await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
         if (resolvedOptions.publishMode === 'publish') {
-          this.verifyImmediatePublishOutcome(beforePublishUrl);
+          await this.verifyImmediatePublishOutcome(beforePublishUrl);
         }
       } catch (error) {
         if (editorContentApplied) {
@@ -8455,7 +8461,7 @@ export class NaverBlogAutomation {
       try {
         await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
         if (resolvedOptions.publishMode === 'publish') {
-          this.verifyImmediatePublishOutcome(beforePublishUrl);
+          await this.verifyImmediatePublishOutcome(beforePublishUrl);
         }
       } catch (error) {
         if (editorContentApplied) {
@@ -8608,8 +8614,100 @@ export class NaverBlogAutomation {
     }
   }
 
+  private async collectPublishedPostPageSnapshot(expectedUrl: string): Promise<PublishedPostPageSnapshot> {
+    const page = this.ensurePage();
+    const currentUrl = page.url();
+    const pageSnapshot = await page.evaluate((selectors: string[]) => {
+      const docs: Document[] = [document];
+      document.querySelectorAll('iframe').forEach((frame) => {
+        try {
+          const frameDoc = (frame as HTMLIFrameElement).contentDocument;
+          if (frameDoc) docs.push(frameDoc);
+        } catch {
+          // cross-origin iframe은 무시한다.
+        }
+      });
+
+      const selectorEvidence = new Set<string>();
+      const textParts: string[] = [];
+      const titleParts: string[] = [];
+
+      for (const doc of docs) {
+        const title = String(doc.title || '').trim();
+        if (title) titleParts.push(title);
+
+        const bodyText = String(doc.body?.innerText || '').replace(/\s+/g, ' ').trim();
+        if (bodyText) textParts.push(bodyText);
+
+        for (const selector of selectors) {
+          try {
+            if (doc.querySelector(selector)) {
+              selectorEvidence.add(selector);
+            }
+          } catch {
+            // 잘못된/변경된 셀렉터는 증거에서 제외한다.
+          }
+        }
+      }
+
+      return {
+        title: titleParts.find(Boolean) || '',
+        bodyText: textParts.join('\n').slice(0, 2000),
+        selectorEvidence: Array.from(selectorEvidence),
+      };
+    }, Array.from(PUBLISHED_POST_PAGE_SIGNAL_SELECTORS)).catch((error) => ({
+      title: '',
+      bodyText: `DOM_SNAPSHOT_ERROR:${(error as Error).message}`,
+      selectorEvidence: [] as string[],
+    }));
+
+    return {
+      currentUrl,
+      expectedUrl,
+      ...pageSnapshot,
+    };
+  }
+
+  private async waitForPublishedPostPageConfirmation(
+    expectedUrl: string,
+    timeoutMs = 25000,
+    requiredConsecutiveOk = 2,
+  ): Promise<void> {
+    const deadline = Date.now() + timeoutMs;
+    let lastFailureMessage = 'published post screen was not checked';
+    let lastEvidence = 'none';
+    let consecutiveOkCount = 0;
+    let lastOkReason = '';
+
+    while (Date.now() < deadline) {
+      const snapshot = await this.collectPublishedPostPageSnapshot(expectedUrl);
+      const confirmation = resolvePublishedPostPageConfirmation(snapshot);
+
+      if (confirmation.ok) {
+        consecutiveOkCount += 1;
+        lastOkReason = confirmation.reason;
+        lastEvidence = confirmation.evidence.join(',') || 'none';
+
+        if (consecutiveOkCount >= requiredConsecutiveOk) {
+          this.log(`✅ 실제 게시글 화면 연속 확인 완료 (${consecutiveOkCount}/${requiredConsecutiveOk}, ${lastOkReason}, evidence=${lastEvidence})`);
+          return;
+        }
+
+        await this.delay(1000);
+        continue;
+      }
+
+      consecutiveOkCount = 0;
+      lastFailureMessage = confirmation.message;
+      lastEvidence = confirmation.evidence.join(',') || 'none';
+      await this.delay(1000);
+    }
+
+    throw new Error(`PUBLISH_UNCONFIRMED:실제 게시글 URL은 확인됐지만 네이버 완료 화면/게시글 본문 로드를 연속 확인하지 못했습니다. 사용자 환경에서 발행이 작성중으로 남는 것을 막기 위해 완료 처리하지 않습니다. requiredConsecutiveOk=${requiredConsecutiveOk}, reason=${lastFailureMessage}, evidence=${lastEvidence}`);
+  }
+
   // ✅ 발행된 URL getter
-  private verifyImmediatePublishOutcome(beforeUrl: string): void {
+  private async verifyImmediatePublishOutcome(beforeUrl: string): Promise<void> {
     const currentUrl = this.page?.url() || '';
     const outcome = resolveImmediatePublishOutcome({
       beforeUrl,
@@ -8622,6 +8720,12 @@ export class NaverBlogAutomation {
     }
 
     this.publishedUrl = resolvePublishedUrlAfterOutcome(this.publishedUrl, outcome);
+
+    if (!this.publishedUrl || !isConcreteNaverBlogPostUrl(this.publishedUrl)) {
+      throw new Error(`[PUBLISH_UNCONFIRMED] 즉시발행 버튼은 눌렀지만 실제 게시글 URL을 확인하지 못했습니다. 앱은 작성중/임시저장/블로그홈 상태를 발행 완료로 처리하지 않습니다. currentUrl=${currentUrl || '(none)'}, publishedUrl=${this.publishedUrl || '(none)'}`);
+    }
+
+    await this.waitForPublishedPostPageConfirmation(this.publishedUrl);
 
     const guardLog = formatPublishGuardLog(outcome, this.publishedUrl);
     if (guardLog) {

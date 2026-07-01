@@ -34,6 +34,22 @@ const FLOW_FULL_AUTO_THUMBNAIL_IMAGE_TIMEOUT_MS = 4 * 60 * 1000;
 const FLOW_FULL_AUTO_BODY_IMAGE_TIMEOUT_MS = 7 * 60 * 1000;
 const FULL_AUTO_CONTENT_RETRY_CACHE_KEY = '__leaderFullAutoContentRetryCache';
 const FULL_AUTO_CONTENT_RETRY_MAX_AGE_MS = 6 * 60 * 60 * 1000;
+function isConcreteNaverPostUrlLikeForFullAuto(value) {
+    const url = String(value || '').trim();
+    if (!url || !/blog\.naver\.com/i.test(url) || /PostWriteForm\.naver|Redirect=Write/i.test(url)) {
+        return false;
+    }
+    if (/blog\.naver\.com\/[^/?#]+\/\d+/i.test(url)) {
+        return true;
+    }
+    try {
+        const parsed = new URL(url);
+        return parsed.hostname.toLowerCase().includes('blog.naver.com') && /^\d+$/.test(parsed.searchParams.get('logNo') || '');
+    }
+    catch {
+        return /[?&]logNo=\d+/i.test(url);
+    }
+}
 function isFlowImageSource(provider) {
     return String(provider || '').trim() === 'flow';
 }
@@ -55,6 +71,75 @@ function getFullAutoBodyImageTimeoutMs(provider, itemCount = 1) {
         return FLOW_FULL_AUTO_BODY_IMAGE_TIMEOUT_MS;
     }
     return Math.min(FLOW_FULL_AUTO_TOTAL_BUDGET_MS, 120000 + count * FLOW_FULL_AUTO_BODY_IMAGE_TIMEOUT_MS);
+}
+function assertAutomationPublishResult(automationResult, payload) {
+    if (!automationResult) {
+        throw new Error('블로그 발행 결과가 비어 있습니다. 작성중인 글이 남아 있을 수 있어 완료 처리하지 않습니다.');
+    }
+    if (automationResult.success !== true) {
+        throw new Error(automationResult.message || automationResult.error || '블로그 발행이 성공 결과를 반환하지 않았습니다.');
+    }
+    const publishMode = String(payload?.publishMode || 'publish');
+    if (publishMode === 'publish') {
+        const publishedUrl = String(automationResult.url || automationResult.postUrl || automationResult.blogUrl || '').trim();
+        if (!isConcreteNaverPostUrlLikeForFullAuto(publishedUrl)) {
+            throw new Error('블로그 발행 URL을 확인하지 못했습니다. 작성중인 글/임시저장/블로그홈 상태를 완료로 처리하지 않습니다.');
+        }
+    }
+    return automationResult;
+}
+function getFullAutoImagePath(image) {
+    if (!image)
+        return '';
+    if (typeof image === 'string')
+        return image.trim();
+    return String(image.filePath || image.savedToLocal || image.url || image.previewDataUrl || '').trim();
+}
+function normalizeFullAutoImageForPipeline(image, overrides = {}) {
+    const merged = {
+        ...(typeof image === 'object' && image ? image : {}),
+        ...overrides,
+    };
+    const filePath = getFullAutoImagePath(merged) || getFullAutoImagePath(image);
+    if (!filePath)
+        return merged;
+    return {
+        ...merged,
+        filePath,
+        savedToLocal: merged.savedToLocal || merged.filePath || filePath,
+        url: merged.url || filePath,
+        previewDataUrl: merged.previewDataUrl || (/^(data:|blob:|file:|https?:)/i.test(filePath) ? filePath : undefined),
+    };
+}
+function registerFullAutoThumbnailImage(image, provider, formData, originalHeading = '') {
+    const normalized = normalizeFullAutoImageForPipeline(image, {
+        provider: image?.provider || provider || 'unknown',
+        heading: '🖼️ 썸네일',
+        originalHeading,
+        isThumbnail: true,
+    });
+    const thumbPath = getFullAutoImagePath(normalized);
+    if (thumbPath) {
+        try {
+            ImageManager.setImage('🖼️ 썸네일', {
+                ...normalized,
+                filePath: thumbPath,
+                savedToLocal: normalized.savedToLocal || thumbPath,
+                url: normalized.url || thumbPath,
+                previewDataUrl: normalized.previewDataUrl,
+                heading: '🖼️ 썸네일',
+                isThumbnail: true,
+            });
+            window.thumbnailPath = thumbPath;
+            if (formData)
+                formData.thumbnailPath = thumbPath;
+            console.log(`[FullAuto] ✅ 대표 썸네일 고정 등록: ${thumbPath.substring(0, 120)}`);
+        }
+        catch (e) {
+            console.warn('[FullAuto] 대표 썸네일 등록 실패:', e);
+        }
+    }
+    return normalized;
 }
 function normalizeReuseString(value) {
     return String(value ?? '').trim();
@@ -706,7 +791,7 @@ async function executeFullAutoFlow(formData) {
                 // grid.
                 const thumbEntry = finalImages.find((img) => img.isThumbnail);
                 if (thumbEntry) {
-                    let thumbPath = String(thumbEntry.filePath || thumbEntry.url || '');
+                    let thumbPath = getFullAutoImagePath(thumbEntry);
                     if (/^https?:\/\//i.test(thumbPath)) {
                         try {
                             const saved = await (window as any).api?.downloadAndSaveImage?.(
@@ -722,11 +807,15 @@ async function executeFullAutoFlow(formData) {
                     }
                     ImageManager.setImage('🖼️ 썸네일', {
                         filePath: thumbPath,
+                        savedToLocal: thumbEntry.savedToLocal || thumbPath,
                         url: thumbEntry.url || thumbPath,
+                        previewDataUrl: thumbEntry.previewDataUrl,
                         provider: thumbEntry.provider || 'collected',
                         heading: '🖼️ 썸네일',
                         isThumbnail: true
                     });
+                    window.thumbnailPath = thumbPath;
+                    formData.thumbnailPath = thumbPath;
                 }
                 ImageManager.syncGeneratedImagesArray();
                 console.log(`[FullAuto] ImageManager에 수집 이미지 ${finalImages.length}개 등록 완료 (썸네일 ${thumbEntry ? '포함' : '없음'})`);
@@ -851,11 +940,7 @@ async function executeFullAutoFlow(formData) {
                                 imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoThumbnailImageTimeoutMs(currentProvider)),
                             });
                             if (thumbResult?.success && thumbResult.images && thumbResult.images.length > 0) {
-                                dedicatedThumbnailImage = {
-                                    ...thumbResult.images[0],
-                                    heading: fullAutoTitle || '🖼️ 썸네일',
-                                    isThumbnail: true,
-                                };
+                                dedicatedThumbnailImage = registerFullAutoThumbnailImage(thumbResult.images[0], currentProvider, formData, fullAutoTitle || '블로그 썸네일');
                                 appendLog(`✅ [풀오토] 전용 썸네일 생성 완료!`);
                                 modal?.addLog(`✅ 전용 썸네일 생성 완료`);
                             }
@@ -899,17 +984,26 @@ async function executeFullAutoFlow(formData) {
                         imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoBodyImageTimeoutMs(currentProvider, headings.length)),
                     });
                     if (imageResult?.success && imageResult.images && imageResult.images.length > 0) {
+                        const normalizedBodyImages = imageResult.images.map((img) => normalizeFullAutoImageForPipeline(img, { isThumbnail: false }));
                         finalImages = [
                             ...(dedicatedThumbnailImage ? [dedicatedThumbnailImage] : []),
-                            ...imageResult.images.map((img) => ({ ...img, isThumbnail: false })),
+                            ...normalizedBodyImages,
                         ];
-                        resolveImageManagerKeys(imageResult.images, headings).forEach(({ img, headingKey }) => {
+                        resolveImageManagerKeys(normalizedBodyImages, headings).forEach(({ img, headingKey }) => {
+                            const imagePath = getFullAutoImagePath(img);
                             ImageManager.addImage(headingKey, {
-                                filePath: img.filePath,
+                                ...img,
+                                filePath: imagePath,
+                                savedToLocal: img.savedToLocal || imagePath,
                                 provider: img.provider || currentProvider,
-                                url: img.url || img.filePath
+                                url: img.url || imagePath,
+                                previewDataUrl: img.previewDataUrl
                             });
                         });
+                        if (dedicatedThumbnailImage) {
+                            registerFullAutoThumbnailImage(dedicatedThumbnailImage, currentProvider, formData, fullAutoTitle || '블로그 썸네일');
+                        }
+                        ImageManager.syncGeneratedImagesArray?.();
                         appendLog(`✅ ${finalImages.length}개의 이미지 생성 완료! (썸네일 ${dedicatedThumbnailImage ? '포함' : '미포함'}, 엔진: ${currentProvider})`);
                         modal?.addLog(`✅ 이미지 ${finalImages.length}개 생성 완료`);
                         imageGenSuccess = true;
@@ -1527,7 +1621,7 @@ function updateUnifiedImagePreview(headings, generatedImages) {
       `;
         }
         if (generatedImage) {
-            const imageRaw = generatedImage.url || generatedImage.filePath || generatedImage.previewDataUrl || '';
+            const imageRaw = getFullAutoImagePath(generatedImage);
             const imageUrl = toFileUrlMaybe(String(imageRaw || '').trim());
             if (!imageDisplay) {
                 const headingEnc = encodeURIComponent(String(headingTitle || '').trim());
@@ -2933,10 +3027,12 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     })();
     const normalizedImagesForPayload = filterImagesForPublish(structuredContent, imagesForPayloadSource)
         .map((img) => {
-        const filePath = img?.filePath || img?.url || img?.previewDataUrl;
+        const filePath = getFullAutoImagePath(img);
         return {
             ...img,
             filePath,
+            savedToLocal: img?.savedToLocal || filePath,
+            url: img?.url || filePath,
         };
     })
         .filter((img) => Boolean(img?.filePath));
@@ -2945,7 +3041,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         const thumbnailImage = normalizedImagesForPayload.find((img) => img.isThumbnail === true);
         const fallbackImage = normalizedImagesForPayload[0];
         const selectedImage = thumbnailImage || fallbackImage;
-        thumbnailPath = selectedImage?.filePath || selectedImage?.url || selectedImage?.previewDataUrl;
+        thumbnailPath = getFullAutoImagePath(selectedImage);
     }
     if (thumbnailPath) {
         appendLog(`📷 대표사진 설정됨: ${thumbnailPath.substring(0, 50)}...`);
@@ -3327,6 +3423,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         throw new Error(errorMsg);
     }
     const automationResult = apiResponse.data;
+    assertAutomationPublishResult(automationResult, payload);
     window._lastPublishOutcome = 'success';
     emitRendererPublishTailDebug('renderer-runAutomation-success', payload, {
         resultKeys: Object.keys(automationResult || {}),

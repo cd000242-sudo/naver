@@ -45,6 +45,24 @@ function getGlobalImageSettings() {
   };
 }
 
+function getImageSyncPathLike(image: any): string {
+  if (!image) return '';
+  if (typeof image === 'string') return image.trim();
+  return String(image.filePath || image.savedToLocal || image.url || image.previewDataUrl || '').trim();
+}
+
+function normalizeImageSyncPublishImage(image: any): any {
+  const filePath = getImageSyncPathLike(image);
+  if (!filePath) return image;
+  return {
+    ...image,
+    filePath,
+    savedToLocal: image?.savedToLocal || filePath,
+    url: image?.url || filePath,
+    previewDataUrl: image?.previewDataUrl || (/^(data:|blob:|file:|https?:)/i.test(filePath) ? filePath : image?.previewDataUrl),
+  };
+}
+
 function hydrateImageManagerFromImages(structuredContent: any, images: any[]): void {
   try {
     ImageManager.imageMap.clear();
@@ -137,7 +155,7 @@ function syncGlobalImagesFromImageManager(): void {
   const existingAllImages = (window as any).imageManagementGeneratedImages;
 
   const getKey = (img: any): string => {
-    const raw = img?.url || img?.filePath || img?.previewDataUrl || '';
+    const raw = getImageSyncPathLike(img);
     return toFileUrlMaybe(String(raw || '').trim());
   };
 
@@ -230,14 +248,14 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
   // ✅ [2026-02-24 FIX] 썸네일 이미지 filePath 집합 (중복 방지용)
   const thumbnailPathSet = new Set<string>();
   thumbnailImages.forEach((img: any) => {
-    const p = img?.filePath || img?.url || img?.previewDataUrl;
+    const p = getImageSyncPathLike(img);
     if (p) thumbnailPathSet.add(p);
   });
 
   const fallbackFromInput = new Map<string, any[]>();
   (images || []).forEach((img: any) => {
     // ✅ [2026-02-24 FIX] 썸네일 이미지는 heading 매칭에서 제외 (중복 방지)
-    const imgPath = img?.filePath || img?.url || img?.previewDataUrl;
+    const imgPath = getImageSyncPathLike(img);
     if (imgPath && thumbnailPathSet.has(imgPath)) return;
     if (img?.isThumbnail === true) return;
     const h = String(img?.heading || '').trim().toLowerCase();
@@ -323,7 +341,7 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
       if (img?.isThumbnail === true) return false;
       const h = String(img?.heading || '').trim().toLowerCase();
       if (h.includes('썸네일') || h.includes('thumbnail')) return false;
-      const imgPath = img?.filePath || img?.url || img?.previewDataUrl;
+      const imgPath = getImageSyncPathLike(img);
       if (imgPath && thumbnailPathSet.has(imgPath)) {
         // ✅ [2026-04-04 FIX] 썸네일과 경로가 같아서 필터링되는 이미지 로그
         console.warn(`[filterImagesForPublish] ⚠️ 소제목 "${title}" 이미지가 thumbnailPathSet에 의해 제거됨: ${String(imgPath).substring(0, 80)}`);
@@ -379,7 +397,7 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
   // ✅ [2026-03-04 FIX v5] 썸네일을 맨 앞에 배치하여 네이버 에디터에 첫 번째로 삽입
   // 기존: 맨 뒤 배치 → 네이버가 마지막 이미지를 대표사진으로 선택하는 버그 발생
   // 수정: 맨 앞 배치 → 네이버가 첫 번째 이미지를 대표사진으로 정상 인식
-  return [...thumbnailImages, ...result];
+  return [...thumbnailImages.map(normalizeImageSyncPublishImage), ...result.map(normalizeImageSyncPublishImage)];
 }
 
 export { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImagesFromImageManager, filterImagesForPublish };

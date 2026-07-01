@@ -34,6 +34,7 @@ function toFileUrlSafe(p: string): string {
 type ProgressPreviewImage = {
     url?: string;
     filePath?: string;
+    savedToLocal?: string;
     previewDataUrl?: string;
     heading?: string;
     isPlaceholder?: boolean;
@@ -42,7 +43,7 @@ type ProgressPreviewImage = {
 };
 
 function getProgressImageSource(image?: ProgressPreviewImage | null): string {
-    return String(image?.filePath || image?.url || image?.previewDataUrl || '').trim();
+    return String(image?.filePath || image?.savedToLocal || image?.url || image?.previewDataUrl || '').trim();
 }
 
 function getProgressImageKey(image?: ProgressPreviewImage | null): string {

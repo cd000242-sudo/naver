@@ -59,6 +59,45 @@ declare function saveCollectedShoppingImagesToLocal(images: any[], title: string
 const PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_CACHE_KEY = '__leaderFullAutoContentRetryCache';
 const PUBLISH_HANDLER_FULL_AUTO_CONTENT_RETRY_MAX_AGE_MS = 6 * 60 * 60 * 1000;
 
+function isConcreteNaverPostUrlLike(value: any): boolean {
+  const url = String(value || '').trim();
+  if (!url || !/blog\.naver\.com/i.test(url) || /PostWriteForm\.naver|Redirect=Write/i.test(url)) {
+    return false;
+  }
+
+  if (/blog\.naver\.com\/[^/?#]+\/\d+/i.test(url)) {
+    return true;
+  }
+
+  try {
+    const parsed = new URL(url);
+    return parsed.hostname.toLowerCase().includes('blog.naver.com') && /^\d+$/.test(parsed.searchParams.get('logNo') || '');
+  } catch {
+    return /[?&]logNo=\d+/i.test(url);
+  }
+}
+
+function assertFullAutoAutomationResult(result: any, formData: any): any {
+  if (!result) {
+    throw new Error('발행 결과를 확인하지 못했습니다. 네이버 글쓰기 창에 작성중인 글이 남아 있을 수 있으니 앱이 완료로 처리하지 않고 중단합니다.');
+  }
+
+  if (result.success !== true) {
+    const message = result.message || result.error || '자동화가 성공 결과를 반환하지 않았습니다.';
+    throw new Error(message);
+  }
+
+  const publishMode = String(formData?.publishMode || 'publish');
+  if (publishMode === 'publish') {
+    const publishedUrl = String(result.url || result.postUrl || result.blogUrl || '').trim();
+    if (!isConcreteNaverPostUrlLike(publishedUrl)) {
+      throw new Error('발행은 끝났다고 응답했지만 실제 게시글 URL을 확인하지 못했습니다. 작성중인 글/임시저장/블로그홈 상태를 완료로 처리하지 않습니다.');
+    }
+  }
+
+  return result;
+}
+
 function normalizePublishReuseString(value: any): string {
   return String(value ?? '').trim();
 }
@@ -1342,7 +1381,8 @@ export async function handleFullAutoPublish(): Promise<void> {
     // 자동화 실행 (이미지 생성 + 로그인 + 발행 포함)
     // executeUnifiedAutomation 내부에서 진행상황 업데이트를 위해 modal 전달
     (window as any).currentProgressModal = modal;
-    await executeUnifiedAutomation(formData);
+    const automationResult = await executeUnifiedAutomation(formData);
+    assertFullAutoAutomationResult(automationResult, formData);
 
     if (isFullAutoStopRequested(modal)) {
       appendLog('⏹️ 사용자가 풀오토 발행을 중지했습니다.');

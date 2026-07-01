@@ -35,27 +35,26 @@ describe('resolveImmediatePublishOutcome', () => {
     });
   });
 
-  it('treats non-editor blog URLs as success that still needs manual URL confidence', () => {
+  it('rejects non-post blog URLs so draft/editor redirects are never shown as publish success', () => {
     expect(resolveImmediatePublishOutcome({
       beforeUrl: 'https://blog.naver.com/PostWriteForm.naver?blogId=test',
       afterUrl: 'https://blog.naver.com/test',
     })).toMatchObject({
-      success: true,
-      url: 'https://blog.naver.com/test',
-      reason: 'NON_EDITOR_BLOG_URL',
-      needsManualUrlCheck: true,
+      success: false,
+      code: 'NAVIGATION_TIMEOUT',
+      retryable: true,
     });
   });
 
-  it('uses success text as success only when no URL proof exists', () => {
+  it('rejects success text when no concrete post URL proof exists', () => {
     expect(resolveImmediatePublishOutcome({
       beforeUrl: 'https://blog.naver.com/PostWriteForm.naver?blogId=test',
       afterUrl: 'https://blog.naver.com/PostWriteForm.naver?blogId=test',
       publishStatus: { success: true, successText: 'published' },
     })).toMatchObject({
-      success: true,
-      reason: 'SUCCESS_MESSAGE',
-      needsManualUrlCheck: true,
+      success: false,
+      code: 'NAVIGATION_TIMEOUT',
+      retryable: true,
     });
   });
 
@@ -105,7 +104,7 @@ describe('publish outcome state updates', () => {
     expect(resolvePublishedUrlAfterOutcome(null, outcome)).toBe('https://blog.naver.com/test/223000001');
   });
 
-  it('keeps the existing URL when success is based on visible success text only', () => {
+  it('does not replace the existing URL when success text has no URL proof', () => {
     const outcome = resolveImmediatePublishOutcome({
       beforeUrl: 'https://blog.naver.com/PostWriteForm.naver?blogId=test',
       publishStatus: { success: true, successText: 'published' },
@@ -116,14 +115,12 @@ describe('publish outcome state updates', () => {
     );
   });
 
-  it('formats the manual URL confidence log from the resolved published URL state', () => {
+  it('does not format a manual URL confidence log for rejected success text', () => {
     const outcome = resolveImmediatePublishOutcome({
       beforeUrl: 'https://blog.naver.com/PostWriteForm.naver?blogId=test',
       publishStatus: { success: true, successText: 'published' },
     });
 
-    expect(formatPublishGuardLog(outcome, 'https://blog.naver.com/test/old')).toBe(
-      '[PublishGuard] outcome=SUCCESS_MESSAGE, url=https://blog.naver.com/test/old',
-    );
+    expect(formatPublishGuardLog(outcome, 'https://blog.naver.com/test/old')).toBeNull();
   });
 });

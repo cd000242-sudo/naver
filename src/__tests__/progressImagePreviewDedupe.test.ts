@@ -12,6 +12,7 @@ describe('progress image preview duplicate guards', () => {
   const progressModal = read('renderer/components/ProgressModal.ts');
   const costAndAutoGen = read('renderer/modules/costAndAutoGen.ts');
   const fullAutoFlow = read('renderer/modules/fullAutoFlow.ts');
+  const imageSyncService = read('renderer/modules/imageSyncService.ts');
 
   it('dedupes final progress preview images by stable source key', () => {
     expect(progressModal).toMatch(/function\s+getProgressImageKey/);
@@ -35,6 +36,24 @@ describe('progress image preview duplicate guards', () => {
     expect(progressModal).toContain('The generated bitmap is shown only in the large preview');
     expect(progressModal).toMatch(/private\s+renderProgressStatusTile/);
     expect(progressModal).not.toMatch(/appendChild\(imgEl\)/);
+  });
+
+  it('keeps full-auto thumbnail canonical and first for publishing', () => {
+    expect(fullAutoFlow).toMatch(/function\s+getFullAutoImagePath/);
+    expect(fullAutoFlow).toMatch(/filePath\s*\|\|\s*image\.savedToLocal\s*\|\|\s*image\.url\s*\|\|\s*image\.previewDataUrl/);
+    expect(fullAutoFlow).toMatch(/function\s+registerFullAutoThumbnailImage/);
+    expect(fullAutoFlow).toMatch(/ImageManager\.setImage\('🖼️ 썸네일'/);
+    expect(fullAutoFlow).toMatch(/window\.thumbnailPath\s*=\s*thumbPath/);
+    expect(fullAutoFlow).toMatch(/formData\.thumbnailPath\s*=\s*thumbPath/);
+    expect(fullAutoFlow).toMatch(/registerFullAutoThumbnailImage\(thumbResult\.images\[0\]/);
+    expect(fullAutoFlow).toMatch(/const\s+imageRaw\s*=\s*getFullAutoImagePath\(generatedImage\)/);
+  });
+
+  it('accepts saved local image paths throughout preview and publish normalization', () => {
+    expect(progressModal).toMatch(/image\?\.filePath\s*\|\|\s*image\?\.savedToLocal\s*\|\|\s*image\?\.url/);
+    expect(imageSyncService).toMatch(/function\s+getImageSyncPathLike/);
+    expect(imageSyncService).toMatch(/image\.filePath\s*\|\|\s*image\.savedToLocal\s*\|\|\s*image\.url\s*\|\|\s*image\.previewDataUrl/);
+    expect(imageSyncService).toMatch(/return\s+\[\.\.\.thumbnailImages\.map\(normalizeImageSyncPublishImage\),\s*\.\.\.result\.map\(normalizeImageSyncPublishImage\)\]/);
   });
 
   it('keeps cost-risk image listener from double-rendering progress grid images', () => {

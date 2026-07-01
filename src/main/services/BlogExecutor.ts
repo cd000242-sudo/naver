@@ -16,9 +16,25 @@ import { AutomationService, type PostCyclePayload, type PostCycleContext, type P
 import { Logger } from '../utils/logger.js';
 import { sendLog, sendStatus, sendProgress } from '../utils/ipcHelpers.js';
 import { classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
+import { isConcreteNaverBlogPostUrl } from '../../automation/publishOutcomeResolver.js';
 
 // ✅ [Phase 4B] ExecutionDependencies는 types/automation.ts에서 정의 — 재export
 export type ExecutionDependencies = IExecutionDependencies;
+
+function requiresImmediatePublishedPostUrl(payload: PostCyclePayload): boolean {
+    return String(payload?.publishMode || 'publish') === 'publish';
+}
+
+function assertImmediatePublishResultUrl(result: any, payload: PostCyclePayload): void {
+    if (!result?.success || !requiresImmediatePublishedPostUrl(payload)) {
+        return;
+    }
+
+    const publishedUrl = String(result.url || result.postUrl || result.blogUrl || '').trim();
+    if (!isConcreteNaverBlogPostUrl(publishedUrl)) {
+        throw new Error('PUBLISH_UNCONFIRMED:자동화가 성공을 반환했지만 실제 네이버 게시글 URL을 확인하지 못했습니다. 작성중/임시저장/블로그홈 상태를 발행 완료로 처리하지 않습니다.');
+    }
+}
 
 /**
  * 블로그 이미지 정보 인터페이스
@@ -530,6 +546,8 @@ export async function executePublishing(
             previousPostUrl: payload.previousPostUrl,
             isFullAuto: payload.isFullAuto,
         });
+
+        assertImmediatePublishResultUrl(result, payload);
 
         if (result.success) {
             sendLog(`✅ 발행 완료: ${result.url || '(URL 없음)'}`);

@@ -98,6 +98,7 @@ import { PostAnalytics, type PostPerformance } from './analytics/postAnalytics.j
 import { SmartScheduler, type ScheduledPost as SmartScheduledPost } from './scheduler/smartScheduler.js';
 import { resolvePublishedUrl } from './scheduler/publishedUrlResolver.js';
 import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
+import { isConcreteNaverBlogPostUrl } from './automation/publishOutcomeResolver.js';
 import { KeywordAnalyzer, type KeywordCompetition, type BlueOceanKeyword } from './analytics/keywordAnalyzer.js';
 // ✅ [v2.10.36] BestProductCollector main.ts 미사용 — 다른 파일이 자체 인스턴스 생성
 //   기존: 부팅 시 클래스 평가 + new BestProductCollector() 인스턴스 생성 (사용처 0)
@@ -184,6 +185,21 @@ import { registerImageTableHandlers } from './main/ipc/imageTableHandlers.js';
 import { registerSerpProbeHandlers } from './main/ipc/serpProbeHandlers.js';
 import { registerAgentHandlers } from './main/ipc/agentHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
+
+function requiresImmediatePublishedPostUrl(payload: any): boolean {
+  return String(payload?.publishMode || 'publish') === 'publish';
+}
+
+function assertImmediatePublishResultUrl(result: any, payload: any): void {
+  if (!result?.success || !requiresImmediatePublishedPostUrl(payload)) {
+    return;
+  }
+
+  const publishedUrl = String(result.url || result.postUrl || result.blogUrl || '').trim();
+  if (!isConcreteNaverBlogPostUrl(publishedUrl)) {
+    throw new Error('PUBLISH_UNCONFIRMED:자동화가 성공을 반환했지만 실제 네이버 게시글 URL을 확인하지 못했습니다. 작성중/임시저장/블로그홈 상태를 발행 완료로 처리하지 않습니다.');
+  }
+}
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ✅ [2026-01-20] 전역 에러 핸들러 - 예상치 못한 크래시 방지
@@ -2866,6 +2882,7 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
     try {
       //  새 엔진 호출 (BlogExecutor.runFullPostCycle 실행)
       const result = await AutomationService.executePostCycle(payload as any);
+      assertImmediatePublishResultUrl(result, payload);
 
       //  결과 반환
       if (result.success) {
@@ -4854,7 +4871,18 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         }
 
         //  새 엔진 호출
-        const result = await AutomationService.executePostCycle(payload as any);
+        let result = await AutomationService.executePostCycle(payload as any);
+        try {
+          assertImmediatePublishResultUrl(result, payload);
+        } catch (guardError) {
+          const guardMessage = (guardError as Error).message || '발행 결과 URL 검증에 실패했습니다.';
+          result = {
+            ...result,
+            success: false,
+            message: guardMessage,
+            failureCode: classifyPublishFailure(guardError).code,
+          };
+        }
 
         const failureCode = result.success ? undefined : ((result as any).failureCode || classifyPublishFailure(result.message).code);
         results.push({
