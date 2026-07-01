@@ -48,6 +48,26 @@ describe('semi-auto manual heading extractor', () => {
     expect(headings[1]?.content).not.toContain('그래서 핵심은 무엇인가');
   });
 
+  it('detects short headline-style headings that end in ~다 (no trailing period)', () => {
+    const body = [
+      '장윤정 측이 선을 그은 부분',
+      '',
+      '장윤정 측 입장은 분명했습니다.',
+      '이번 사안과 장윤정은 무관하다는 입장을 밝힌 것으로 전해졌습니다.',
+      '',
+      '결국 남는 건 연락 여부다',
+      '',
+      '이번 의혹의 핵심은 돈의 액수만이 아닙니다.',
+      '장윤정의 이름이 어떤 방식으로 언급됐는지가 중요합니다.',
+    ].join('\n');
+
+    const headings = extractSemiAutoHeadingsFromBody(body);
+    expect(headings.map((h) => h.title)).toEqual([
+      '장윤정 측이 선을 그은 부분',
+      '결국 남는 건 연락 여부다',
+    ]);
+  });
+
   it('does not classify quoted reactions or sentence-like short paragraphs as headings', () => {
     const body = [
       '반응이 갈린 진짜 이유',
