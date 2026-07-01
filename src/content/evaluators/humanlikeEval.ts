@@ -67,6 +67,12 @@ const INFORMAL_SIGNALS = [
   '그렇더라고요', '하더라고요', '잖아요', '거든요', '느껴졌어요',
 ];
 
+const CONVERSATIONAL_CRUTCHES = [
+  '거든요', '잖아요', '더라고요', '진짜', '완전', '찐으로', 'ㄹㅇ',
+  '다들 그러잖아요', '이거 아는 사람', '솔직히 말해서', '와,', '헉',
+  '왜 아무도 말 안 해줬죠', '이거 좀', '여기서 봐야 할 건',
+];
+
 const DIRECT_EXPERIENCE_SIGNALS = [
   ...DIRECT_EXPERIENCE,
   'I checked', 'I compared', 'I watched', 'I tried', 'I would', 'I thought',
@@ -95,6 +101,17 @@ function countMatches(text: string, words: readonly string[]): number {
     if (m) count += m.length;
   }
   return count;
+}
+
+function countRepeatedCrutches(text: string): number {
+  let repeats = 0;
+  for (const word of CONVERSATIONAL_CRUTCHES) {
+    const matches = text.match(new RegExp(escapeRegex(word), 'gi'));
+    if (matches && matches.length > 2) {
+      repeats += matches.length - 2;
+    }
+  }
+  return repeats;
 }
 
 export function evaluateHumanlike(input: EvaluationInput): SubScore {
@@ -187,6 +204,20 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
   }
   details.informalWords = infScore;
   total += infScore;
+
+  // 4.5 과한 입말 장식 감점 — "사람 흉내" 회귀 방지
+  const crutchCount = countMatches(body, CONVERSATIONAL_CRUTCHES);
+  const repeatedCrutches = countRepeatedCrutches(body);
+  const crutchPer1000 = (crutchCount / Math.max(1, body.length)) * 1000;
+  let crutchPenalty = 0;
+  if (repeatedCrutches >= 4 || (crutchCount >= 8 && crutchPer1000 >= 8)) {
+    crutchPenalty = Math.min(12, 4 + repeatedCrutches * 2);
+    issues.push(`입말 장식 반복 ${crutchCount}회 — 사람 말투가 아니라 AI식 구어체 흉내로 보일 수 있음`);
+    suggestions.push('거든요/잖아요/더라고요/진짜/찐으로 같은 표현은 줄이고, 관찰·근거·판단 문장으로 대체');
+  }
+  details.conversationalCrutches = crutchCount;
+  details.conversationalCrutchPenalty = -crutchPenalty;
+  total -= crutchPenalty;
 
   // 5. AI 보고체 부재 (15점) — v2.10.182 도입부 클리셰 추가
   const aiClicheCount = countMatches(body, AI_CLICHE);

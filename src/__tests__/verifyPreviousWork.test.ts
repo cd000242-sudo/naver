@@ -116,7 +116,9 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     //   bloat 가드 의미 유지하며 baseline 305K로 재상향(헤드룸 ~4K).
     // 2026-06-22: current measured prompt total is 309,030 chars. Keep a narrow
     // CI guard above the measured tree instead of failing every clean checkout.
-    expect(totalChars).toBeLessThan(312000);
+    // 2026-06-30: shared/human-writing-anti-pattern.prompt 신설(~2.5K자) — 감탄사/추임새 반복
+    //   억제 + 가짜 1인칭 금지 안티패턴 가드. 의도된 증가. 실측 312,583자 → baseline 315K로 재상향.
+    expect(totalChars).toBeLessThan(315000);
   });
 });
 

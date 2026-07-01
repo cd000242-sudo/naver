@@ -136,7 +136,9 @@ describe('official exposure prompt contract', () => {
     expect(seoOverlay).toContain('SEO 90+ QUALITY CONTRACT');
     expect(seoOverlay).toContain('Search intent is answered');
     expect(homefeedOverlay).toContain('HOMEFEED 90+ QUALITY CONTRACT');
-    expect(homefeedOverlay).toContain('first screen feels personal');
+    expect(homefeedOverlay).toContain('내 얘기 같은 첫 화면');
+    expect(homefeedOverlay).toContain('저장할 이유');
+    expect(homefeedOverlay).toContain('댓글 달 거리');
     expect(mateOverlay).toContain('NAVER MATE 90+ QUALITY CONTRACT');
     expect(mateOverlay).toContain('citeable answer atom');
 

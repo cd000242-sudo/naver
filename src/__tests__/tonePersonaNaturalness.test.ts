@@ -55,4 +55,39 @@ describe('tone persona naturalness', () => {
     expect(combined).not.toMatch(/격식 혼용[\s\S]{0,80}~다,\s*~이다,\s*~한다/);
     expect(combined).not.toMatch(/~요체는\s*30% 이하/);
   });
+
+  it('injects the human writing anti-pattern guard into major generation modes', () => {
+    for (const mode of ['seo', 'homefeed', 'mate', 'affiliate', 'business'] as const) {
+      const prompt = buildFullPrompt(mode, 'entertainment', false, 'community_fan');
+
+      expect(prompt).toContain('HUMAN WRITING ANTI-PATTERN CONTRACT');
+      expect(prompt).toContain('사람 말투는 감탄사를 늘리는 것이 아니다');
+      expect(prompt).toContain('거든요/잖아요/더라고요는 양념');
+      expect(prompt).toContain('문장 끝만 바꾸지 말고 생각을 전진시켜라');
+    }
+  });
+
+  it('does not force fan/community tone into repeated crutch quotas', () => {
+    const prompt = buildFullPrompt('homefeed', 'entertainment', false, 'community_fan');
+
+    expect(prompt).toContain('같은 표현 반복은 실패');
+    expect(prompt).toContain('커뮤니티 톤의 핵심은 유행어가 아니라');
+    expect(prompt).not.toMatch(/매\s*단락\s*최소\s*1회/);
+    expect(prompt).not.toMatch(/단락당\s*2개\s*이상/);
+    expect(prompt).not.toMatch(/어미\s*분포\s*강제/);
+    expect(prompt).not.toMatch(/~거든요\/~잖아요\s*30%/);
+  });
+
+  it('makes homefeed tone exposure-friendly without reverting to noisy slang', () => {
+    const prompt = buildFullPrompt('homefeed', 'entertainment', false, 'friendly');
+
+    expect(prompt).toContain('홈판에 유리한 말투');
+    expect(prompt).toContain('내 얘기 같은 첫 화면');
+    expect(prompt).toContain('저장할 이유');
+    expect(prompt).toContain('댓글 달 거리');
+    expect(prompt).toContain('스크롤 정지 문장');
+    expect(prompt).toContain('모바일 피드 리듬');
+    expect(prompt).not.toContain('이모지 3~5개');
+    expect(prompt).not.toContain('격식 0%, 수다 리듬 우선');
+  });
 });

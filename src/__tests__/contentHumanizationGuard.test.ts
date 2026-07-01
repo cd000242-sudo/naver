@@ -64,6 +64,12 @@ describe('회귀방지 net: 사람다움/AI탐지 분별력', () => {
       const after = analyzeAiDetectionRisk(humanizeContent(AI_LIKE, 'strong', true)).score;
       expect(after).toBeLessThanOrEqual(before);
     });
+
+    it('강한 휴머나이즈도 거든요/잖아요류 말끝을 과다 삽입하지 않는다', () => {
+      const out = humanizeContent(AI_LIKE, 'strong', true, 'community_fan');
+      const crutchCount = (out.match(/거든요|잖아요|더라고요/g) ?? []).length;
+      expect(crutchCount).toBeLessThanOrEqual(2);
+    });
   });
 
   describe('detectPlatitudes', () => {
@@ -86,6 +92,28 @@ describe('회귀방지 net: 사람다움/AI탐지 분별력', () => {
       const human = evaluateHumanlike({ body: HUMAN_LIKE, mode: 'seo' });
       const ai = evaluateHumanlike({ body: AI_LIKE, mode: 'seo' });
       expect(human.score).toBeGreaterThan(ai.score);
+    });
+
+    it('입말 장식만 반복하는 글은 사람다움 점수에서 감점한다', () => {
+      const overfit = [
+        '와, 이건 진짜 놀랍거든요. 다들 그러잖아요. 이거 아는 사람 있죠?',
+        '진짜 이 부분이 중요하거든요. 완전 의외더라고요. 찐으로 봐야 하거든요.',
+        '솔직히 말해서 진짜 다시 보게 되잖아요. 여기서 봐야 할 건 이거거든요.',
+        '헉, 또 진짜 포인트가 나오더라고요. 왜 아무도 말 안 해줬죠.',
+      ].join(' ');
+      const grounded = [
+        '처음엔 단순한 가족 근황처럼 보였어요.',
+        '그런데 오디션장에서 이름을 다르게 썼다는 대목이 나오면서 이야기가 달라졌습니다.',
+        '부모 이름이 먼저 보이면 연기보다 배경이 먼저 읽힐 수 있죠.',
+        '그래서 이 사안의 핵심은 화제성이 아니라, 먼저 평가받고 싶었던 선택에 가깝습니다.',
+        '다만 법적 개명인지 활동명인지는 별도 확인이 필요해요.',
+      ].join(' ');
+
+      const overfitScore = evaluateHumanlike({ body: overfit, mode: 'homefeed' });
+      const groundedScore = evaluateHumanlike({ body: grounded, mode: 'homefeed' });
+
+      expect(overfitScore.details.conversationalCrutchPenalty).toBeLessThan(0);
+      expect(overfitScore.score).toBeLessThan(groundedScore.score);
     });
   });
 
