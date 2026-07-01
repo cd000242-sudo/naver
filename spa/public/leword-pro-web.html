@@ -760,11 +760,12 @@
       display: none;
       position: fixed;
       inset: 0;
-      z-index: 50;
+      z-index: 90;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(15,30,20,.45);
+      background: rgba(15,30,20,.62);
+      backdrop-filter: blur(10px);
     }
     .modal.open { display: flex; }
     .dialog {
@@ -779,6 +780,181 @@
     .dialog p { margin: 0 0 14px; color: var(--muted); line-height: 1.55; }
     .dialog label { display: block; margin: 10px 0 6px; font-size: 13px; color: var(--text-2); font-weight: 900; }
     .dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+    .login-modal {
+      z-index: 120;
+      background:
+        radial-gradient(620px 360px at 50% 18%, rgba(22,163,74,.18), transparent 62%),
+        rgba(10,20,14,.76);
+    }
+    .pro-login-dialog {
+      position: relative;
+      width: min(460px, calc(100vw - 32px));
+      max-height: calc(100vh - 34px);
+      overflow: auto;
+      border: 1px solid rgba(22,163,74,.24);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F7FBF8 100%);
+      color: var(--text);
+      padding: 0;
+      box-shadow: 0 34px 90px rgba(4,18,10,.38), 0 0 0 1px rgba(255,255,255,.8) inset;
+      isolation: isolate;
+    }
+    .pro-login-dialog::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 5px;
+      background: linear-gradient(90deg, var(--green), var(--green-2), var(--blue));
+    }
+    .pro-login-head {
+      padding: 28px 30px 16px;
+      border-bottom: 1px solid rgba(20,60,35,.08);
+    }
+    .pro-login-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border: 1px solid rgba(22,163,74,.18);
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: #087334;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .pro-login-dialog h2 {
+      margin: 14px 0 8px;
+      color: #102217;
+      font-size: 27px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    .pro-login-dialog p {
+      margin: 0;
+      color: #5f7166;
+      font-size: 14px;
+      line-height: 1.62;
+    }
+    .pro-login-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(20,60,35,.1);
+      border-radius: 999px;
+      background: #fff;
+      color: #496153;
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(20,60,35,.08);
+    }
+    .pro-login-close:hover { border-color: rgba(22,163,74,.34); color: var(--green); transform: translateY(-1px); }
+    .pro-login-body {
+      display: grid;
+      gap: 13px;
+      padding: 20px 30px 30px;
+    }
+    .login-field {
+      display: grid;
+      gap: 7px;
+    }
+    .login-field label,
+    .pro-login-dialog .login-license label {
+      margin: 0;
+      color: #1d3325;
+      font-size: 13px;
+      font-weight: 1000;
+    }
+    .login-field .input,
+    .pro-login-dialog .login-license .input {
+      min-height: 52px;
+      border: 1px solid rgba(20,60,35,.14);
+      border-radius: 12px;
+      background: #FFFFFF;
+      color: #101f16;
+      padding: 13px 15px;
+      font-size: 15px;
+      font-weight: 800;
+      box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 10px 20px rgba(20,60,35,.04);
+    }
+    .login-field .input::placeholder,
+    .pro-login-dialog .login-license .input::placeholder { color: #9aa99f; font-weight: 700; }
+    .login-field .input:focus,
+    .pro-login-dialog .login-license .input:focus {
+      border-color: rgba(22,163,74,.58);
+      outline: 3px solid rgba(34,197,94,.16);
+      outline-offset: 0;
+      box-shadow: 0 0 0 1px rgba(22,163,74,.16), 0 14px 24px rgba(22,163,74,.08);
+    }
+    .login-hint {
+      color: #7b8d82;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .pro-login-dialog .login-license {
+      margin-top: 4px;
+      border: 1px solid rgba(22,163,74,.18);
+      border-radius: 14px;
+      background: #F8FCF9;
+      padding: 0;
+      overflow: hidden;
+    }
+    .pro-login-dialog .login-license summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 48px;
+      padding: 0 15px;
+      color: #0d7a39;
+      font-size: 13px;
+      font-weight: 1000;
+      list-style: none;
+    }
+    .pro-login-dialog .login-license summary::-webkit-details-marker { display: none; }
+    .pro-login-dialog .login-license summary::after {
+      content: "열기";
+      border-radius: 999px;
+      background: rgba(22,163,74,.1);
+      color: #0d7a39;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 1000;
+    }
+    .pro-login-dialog .login-license[open] summary::after { content: "접기"; }
+    .login-license-body {
+      display: grid;
+      gap: 10px;
+      padding: 0 15px 15px;
+      border-top: 1px solid rgba(20,60,35,.08);
+    }
+    .pro-login-dialog .login-license p { margin: 12px 0 0; color: #687b70; font-size: 12px; }
+    .pro-login-dialog .dialog-actions {
+      grid-template-columns: 1.15fr .85fr;
+      gap: 10px;
+      margin-top: 3px;
+    }
+    .pro-login-dialog .dialog-actions .btn {
+      min-height: 52px;
+      border-radius: 12px;
+      font-size: 15px;
+    }
+    .pro-login-dialog .dialog-actions .btn:not(.primary) {
+      background: #FFFFFF;
+      border-color: rgba(20,60,35,.12);
+      color: #415648;
+      box-shadow: 0 10px 20px rgba(20,60,35,.05);
+    }
+    .login-message {
+      min-height: 20px;
+      margin-top: 0;
+      color: #607367;
+      font-size: 13px;
+      line-height: 1.45;
+    }
     .progress-dialog { width: min(520px, 100%); }
     .progress-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 10px; }
     .progress-head h2 { margin: 0; font-size: 20px; }
@@ -923,6 +1099,11 @@
       .shell.mobile-pro-collapsed .hero { display: none; }
       .shell.mobile-pro-collapsed .layout { display: block; }
       .shell.mobile-pro-collapsed .main { gap: 12px; }
+      .modal { padding: 12px; }
+      .pro-login-head { padding: 25px 22px 14px; }
+      .pro-login-body { padding: 18px 22px 24px; }
+      .pro-login-dialog h2 { font-size: 24px; }
+      .pro-login-dialog .dialog-actions { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -1327,25 +1508,38 @@
     </div>
   </main>
 
-  <div class="modal" id="loginModal" aria-hidden="true">
-    <form class="dialog" id="loginForm" autocomplete="off" data-lpignore="true" data-1p-ignore="true">
-      <h2>LEWORD Pro 로그인</h2>
-      <p>기존 사용자 아이디와 비밀번호만 입력하면 서버 세션을 발급합니다.</p>
-      <label for="proLoginAccountId">아이디</label>
-      <input class="input" id="proLoginAccountId" name="leword-pro-account-id" autocomplete="off" autocapitalize="none" spellcheck="false" data-lpignore="true" data-1p-ignore="true" data-form-type="other" readonly required />
-      <label for="proLoginAccountPassword">비밀번호</label>
-      <input class="input" id="proLoginAccountPassword" name="leword-pro-account-password" type="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore="true" data-form-type="other" readonly required />
-      <details class="login-license">
-        <summary>라이선스 키로 인증하기</summary>
-        <p class="muted">구매 또는 등록 키가 있는 경우에만 입력하세요. 평소에는 아이디와 비밀번호만으로 로그인됩니다.</p>
-        <label for="licenseCode">라이선스 키</label>
-        <input class="input" id="licenseCode" autocomplete="off" placeholder="LEWORD-XXXX-XXXX" />
-      </details>
-      <div class="dialog-actions">
-        <button class="btn primary" type="submit">로그인</button>
-        <button class="btn" type="button" id="loginClose">닫기</button>
+  <div class="modal login-modal" id="loginModal" aria-hidden="true">
+    <form class="dialog pro-login-dialog" id="loginForm" autocomplete="off" data-lpignore="true" data-1p-ignore="true" role="dialog" aria-modal="true" aria-labelledby="proLoginTitle">
+      <button class="pro-login-close" type="button" id="loginClose" aria-label="로그인 창 닫기">×</button>
+      <div class="pro-login-head">
+        <span class="pro-login-badge">Pro access</span>
+        <h2 id="proLoginTitle">LEWORD Pro 로그인</h2>
+        <p>기존 사용자 아이디와 비밀번호만 입력하면 전체 황금키워드 보드와 정밀 분석을 바로 열 수 있습니다.</p>
       </div>
-      <div class="muted" id="loginMessage" style="margin-top:12px; min-height:18px;"></div>
+      <div class="pro-login-body">
+        <div class="login-field">
+          <label for="proLoginAccountId">아이디</label>
+          <input class="input" id="proLoginAccountId" name="leword-pro-account-id" autocomplete="off" autocapitalize="none" spellcheck="false" data-lpignore="true" data-1p-ignore="true" data-form-type="other" readonly required />
+          <span class="login-hint">LEWORD에 등록된 기존 아이디를 입력하세요.</span>
+        </div>
+        <div class="login-field">
+          <label for="proLoginAccountPassword">비밀번호</label>
+          <input class="input" id="proLoginAccountPassword" name="leword-pro-account-password" type="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore="true" data-form-type="other" readonly required />
+        </div>
+        <details class="login-license">
+          <summary>라이선스 키로 인증하기</summary>
+          <div class="login-license-body">
+            <p>구매 또는 등록 키가 있는 경우에만 입력하세요. 평소에는 아이디와 비밀번호만으로 로그인됩니다.</p>
+            <label for="licenseCode">라이선스 키</label>
+            <input class="input" id="licenseCode" autocomplete="off" placeholder="LEWORD-XXXX-XXXX" />
+          </div>
+        </details>
+        <div class="dialog-actions">
+          <button class="btn primary" type="submit">로그인</button>
+          <button class="btn" type="button" id="loginCancel">닫기</button>
+        </div>
+        <div class="login-message" id="loginMessage" aria-live="polite"></div>
+      </div>
     </form>
   </div>
 
@@ -4844,6 +5038,7 @@
     qs('loginOpen').addEventListener('click', openLogin);
     qs('goldenMoreLogin').addEventListener('click', openLogin);
     qs('loginClose').addEventListener('click', closeLogin);
+    qs('loginCancel').addEventListener('click', closeLogin);
     qs('loginModal').addEventListener('click', function(event) { if (event.target.id === 'loginModal') closeLogin(); });
     qs('welcomeClose').addEventListener('click', closeWelcomeModal);
     qs('welcomeSettings').addEventListener('click', function() {
