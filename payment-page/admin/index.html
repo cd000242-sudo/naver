@@ -881,6 +881,53 @@
             .stats-grid { grid-template-columns: 1fr; }
             .nav-item span:not(.nav-icon) { display: none; }
         }
+
+        /* CMS_WORKBENCH_V1_START */
+        .cms-editor-shell { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(380px,.92fr); gap:18px; align-items:start; margin-top:18px; }
+        .cms-editor-pane { min-width:0; }
+        .cms-preview-pane { position:sticky; top:18px; border:1px solid rgba(201,168,76,.26); border-radius:18px; background:radial-gradient(circle at 12% 0%,rgba(201,168,76,.13),transparent 32%),linear-gradient(180deg,rgba(18,22,32,.98),rgba(10,12,18,.98)); box-shadow:0 22px 70px rgba(0,0,0,.28); padding:16px; min-width:0; }
+        .cms-preview-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px; }
+        .cms-preview-head h3 { margin:0; font-size:1rem; }
+        .cms-preview-head p { margin:4px 0 0; color:var(--text-secondary); font-size:.78rem; line-height:1.5; }
+        .cms-preview-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+        .cms-preview-tabs button { border:1px solid var(--border); border-radius:999px; background:rgba(255,255,255,.04); color:var(--text-secondary); padding:7px 11px; font-size:.75rem; cursor:pointer; font-weight:800; }
+        .cms-preview-tabs button.active { background:linear-gradient(135deg,#f7d94a,#b9ff4a); color:#101318; border-color:transparent; }
+        .cms-live-preview { overflow:hidden; border:1px solid rgba(255,255,255,.10); border-radius:16px; background:rgba(0,0,0,.22); }
+        .cms-preview-hero { min-height:230px; padding:28px; background-size:cover; background-position:center; position:relative; }
+        .cms-preview-hero:before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(5,9,14,.78),rgba(5,9,14,.18)); }
+        .cms-preview-hero > * { position:relative; z-index:1; }
+        .cms-preview-kicker { display:inline-flex; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,215,0,.35); color:#ffe27a; font-size:.72rem; font-weight:900; letter-spacing:0; margin-bottom:12px; }
+        .cms-preview-title { margin:0; font-size:clamp(1.7rem,3vw,2.6rem); line-height:1.12; }
+        .cms-preview-desc { max-width:560px; margin:12px 0 0; color:rgba(255,255,255,.82); line-height:1.65; white-space:pre-line; }
+        .cms-preview-benefit { margin-top:18px; display:inline-flex; align-items:center; gap:8px; color:#101318; background:#ffd700; border-radius:12px; padding:10px 14px; font-weight:900; }
+        .cms-preview-section { padding:18px; }
+        .cms-preview-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+        .cms-preview-card { border:1px solid rgba(255,255,255,.10); border-radius:14px; background:rgba(255,255,255,.045); padding:14px; min-width:0; }
+        .cms-preview-card img { width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.06); margin-bottom:10px; }
+        .cms-preview-card h4 { margin:0 0 7px; font-size:.92rem; }
+        .cms-preview-card p { margin:0; color:var(--text-secondary); font-size:.78rem; line-height:1.55; }
+        .cms-preview-pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+        .cms-preview-pill { border:1px solid rgba(201,168,76,.35); color:#ffe27a; border-radius:999px; padding:5px 9px; font-size:.72rem; font-weight:800; }
+        .cms-preview-frame { margin-top:12px; width:100%; height:330px; border:1px solid rgba(255,255,255,.10); border-radius:14px; background:#05070b; }
+        .cms-media-tools { display:grid; grid-template-columns:92px 1fr; gap:10px; margin-top:8px; align-items:center; }
+        .cms-thumb { width:92px; height:58px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,.05); display:grid; place-items:center; color:var(--text-secondary); overflow:hidden; font-size:.7rem; }
+        .cms-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+        .cms-media-tools button, .cms-small-action { border:1px solid rgba(201,168,76,.42); border-radius:10px; background:rgba(201,168,76,.09); color:#ffdf5d; padding:9px 12px; font-weight:900; cursor:pointer; }
+        .cms-skin-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:12px 0; }
+        .cms-skin-option { min-height:88px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background-size:cover; background-position:center; color:#fff; text-align:left; padding:12px; cursor:pointer; font-weight:900; display:flex; align-items:flex-end; box-shadow:inset 0 -70px 60px rgba(0,0,0,.52); }
+        .cms-skin-option.active { outline:2px solid #ffd700; border-color:#ffd700; }
+        .trial-export-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-bottom:20px; }
+        .trial-export-box { border:1px solid rgba(201,168,76,.24); border-radius:16px; background:rgba(255,255,255,.035); padding:16px; }
+        .trial-export-box h3 { margin:0 0 8px; font-size:1rem; }
+        .trial-export-box p { margin:0 0 12px; color:var(--text-secondary); font-size:.8rem; }
+        .trial-export-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+        .trial-export-toolbar strong { color:#ffd700; }
+        .trial-export-box textarea { width:100%; min-height:180px; resize:vertical; border:1px solid var(--border); border-radius:12px; background:rgba(0,0,0,.22); color:var(--text-primary); padding:12px; font-family:Consolas,monospace; line-height:1.55; }
+        .trial-export-box.focused { outline:2px solid #ffd700; }
+        @media (max-width:1180px) { .cms-editor-shell { grid-template-columns:1fr; } .cms-preview-pane { position:static; } }
+        @media (max-width:760px) { .cms-preview-grid, .trial-export-grid { grid-template-columns:1fr; } .cms-media-tools { grid-template-columns:1fr; } .cms-thumb { width:100%; height:120px; } }
+        /* CMS_WORKBENCH_V1_END */
+
     </style>
 </head>
 <body>
@@ -937,8 +984,8 @@
                     <span>체험관리</span>
                 </div>
                 <div style="padding:0 14px 10px 48px;display:grid;gap:6px;color:var(--text-secondary);font-size:0.78rem;">
-                    <button type="button" onclick="switchTab('trial')" style="all:unset;cursor:pointer;">체험자 번호 모음</button>
-                    <button type="button" onclick="switchTab('trial')" style="all:unset;cursor:pointer;">체험자 이메일 모음</button>
+                    <button type="button" onclick="switchTab('trial'); focusTrialExport('phones')" style="all:unset;cursor:pointer;">체험자 번호 모음</button>
+                    <button type="button" onclick="switchTab('trial'); focusTrialExport('emails')" style="all:unset;cursor:pointer;">체험자 이메일 모음</button>
                 </div>
                 <div class="nav-item" data-tab="analytics" onclick="switchTab('analytics')">
                     <span class="nav-icon">📊</span>
@@ -1406,8 +1453,33 @@
                         <div class="stat-value" style="color:#ef4444;" id="trial-stat-blocked">—</div>
                     </div>
                 </div>
+
+                <!-- TRIAL_EXPORT_V1_START -->
+                <div class="trial-export-grid" id="trial-export-grid">
+                    <div class="trial-export-box" id="trial-export-phones-box">
+                        <div class="trial-export-toolbar">
+                            <div><h3>체험자 번호 모음</h3><p>검색 결과 기준으로 휴대폰 번호만 모읍니다. 10으로 시작하면 010 형식으로 정리합니다.</p></div>
+                            <button class="btn btn-gold" type="button" onclick="copyTrialPhones()">번호 전체 복사</button>
+                        </div>
+                        <div class="trial-export-toolbar"><span>복사 대상</span><strong id="trial-phone-count">0개</strong></div>
+                        <textarea id="trial-phone-list" readonly placeholder="체험자 휴대폰 번호가 여기에 표시됩니다."></textarea>
+                    </div>
+                    <div class="trial-export-box" id="trial-export-emails-box">
+                        <div class="trial-export-toolbar">
+                            <div><h3>체험자 이메일 모음</h3><p>검색 결과 기준으로 이메일만 한 줄에 하나씩 정리합니다.</p></div>
+                            <button class="btn btn-gold" type="button" onclick="copyTrialEmails()">이메일 전체 복사</button>
+                        </div>
+                        <div class="trial-export-toolbar"><span>복사 대상</span><strong id="trial-email-count">0개</strong></div>
+                        <textarea id="trial-email-list" readonly placeholder="체험자 이메일이 여기에 표시됩니다."></textarea>
+                    </div>
+                </div>
+                <!-- TRIAL_EXPORT_V1_END -->
+
+
                 <div class="table-card">
+
                     <div class="table-header">
+
                         <h3>체험 사용자 목록</h3>
                         <div class="table-actions">
                             <input class="search-input" id="trial-search" placeholder="🔍 이메일/닉네임 검색..." oninput="filterTrialUsers()">
@@ -2710,6 +2782,7 @@
                 codesPage = 1;
             }
 
+            updateTrialExports(filtered);
             const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
             if (codesPage > totalPages) codesPage = totalPages;
             const start = (codesPage - 1) * PAGE_SIZE;
@@ -3555,14 +3628,282 @@
             if (typeof showToast === 'function') showToast(auth ? '관리자 연동상태 확인 완료' : '관리자 로그인이 필요합니다.');
         }
 
+
+        // CMS_WORKBENCH_V1_START
+        let cmsPreviewMode = 'home';
+        let cmsEditorBindingsReady = false;
+        function cmsEscape(value) { return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+        function cmsSafeImage(value) { const raw = String(value || '').trim(); return /^(data:image\/|https?:\/\/|\/images\/|\.\/|\/)/i.test(raw) ? raw : ''; }
+        function cmsStyleUrl(value) { return cmsSafeImage(value).replace(/['")\\]/g, ''); }
+        function installCmsWorkbench() {
+            const editor = document.getElementById('tab-editor');
+            const tabs = editor ? editor.querySelector('.editor-subtabs') : null;
+            if (!editor || !tabs || document.getElementById('cms-editor-shell')) return;
+            const shell = document.createElement('div');
+            shell.id = 'cms-editor-shell';
+            shell.className = 'cms-editor-shell';
+            const editPane = document.createElement('div');
+            editPane.className = 'cms-editor-pane';
+            const previewPane = document.createElement('aside');
+            previewPane.className = 'cms-preview-pane';
+            previewPane.innerHTML = '<div class="cms-preview-head"><div><h3>사이트 미리보기</h3><p>왼쪽 수정값이 즉시 반영됩니다. 저장하면 이 미리보기 데이터가 실제 사이트 콘텐츠로 적용됩니다.</p></div><button class="btn" type="button" onclick="saveEditorContent()">미리보기대로 적용</button></div><div class="cms-preview-tabs" id="cms-preview-tabs"><button type="button" data-preview-mode="home">홈</button><button type="button" data-preview-mode="pricing">구매/요금제</button><button type="button" data-preview-mode="products">제품정보</button><button type="button" data-preview-mode="downloads">다운로드</button><button type="button" data-preview-mode="design">디자인/음악</button></div><div class="cms-live-preview" id="cms-live-preview"></div><iframe class="cms-preview-frame" src="/" title="실제 사이트 미리보기"></iframe>';
+            tabs.insertAdjacentElement('afterend', shell);
+            shell.appendChild(editPane);
+            shell.appendChild(previewPane);
+            Array.from(editor.children).filter(el => el.classList && (el.classList.contains('editor-subpanel') || el.classList.contains('editor-save-bar'))).forEach(el => editPane.appendChild(el));
+            previewPane.addEventListener('click', event => {
+                const button = event.target.closest('[data-preview-mode]');
+                if (!button) return;
+                cmsPreviewMode = button.getAttribute('data-preview-mode') || 'home';
+                updateCmsPreviewToolbar();
+                refreshEditorPreview();
+            });
+            updateCmsPreviewToolbar();
+        }
+        function updateCmsPreviewToolbar() {
+            document.querySelectorAll('#cms-preview-tabs [data-preview-mode]').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-preview-mode') === cmsPreviewMode));
+        }
+        function installEditorLiveBindings() {
+            const editor = document.getElementById('tab-editor');
+            if (!editor || cmsEditorBindingsReady) return;
+            cmsEditorBindingsReady = true;
+            const onChange = event => {
+                const target = event.target;
+                if (!target || target.id === 'edit-site-json-preview' || target.id === 'admin-site-content-json') return;
+                refreshEditorPreview();
+                if (target.matches && target.matches('[data-cms-image-input="1"]')) updateCmsImageThumb(target);
+            };
+            editor.addEventListener('input', onChange);
+            editor.addEventListener('change', onChange);
+        }
+        function installCmsSkinControls() {
+            const panel = document.getElementById('editor-sub-design');
+            if (!panel || document.getElementById('cms-skin-controls')) return;
+            panel.insertAdjacentHTML('afterbegin', '<div class="editor-card" id="cms-skin-controls" style="margin-bottom:16px;"><h4>스킨/음악 미리보기 편집</h4><p class="editor-help">JSON을 직접 만지지 않고 스킨을 고르거나 .md 스킨 파일을 불러와 배경, 골드 컬러, 음악 설정을 적용합니다.</p><input id="cms-skin-name" type="hidden"><div class="cms-skin-grid"><button type="button" class="cms-skin-option" data-cms-skin="beach" style="background-image:url(/images/hero-beach-bg-fast.jpg)">오션 프리미엄</button><button type="button" class="cms-skin-option" data-cms-skin="midnight" style="background:linear-gradient(135deg,#06131f,#1f2638)">미드나잇 골드</button><button type="button" class="cms-skin-option" data-cms-skin="studio" style="background:linear-gradient(135deg,#14100b,#3b2b12)">스튜디오 럭스</button><button type="button" class="cms-skin-option" data-cms-skin="clean" style="background:linear-gradient(135deg,#eef3f6,#c9d6df);color:#111;box-shadow:none;">클린 라이트</button></div><div class="editor-field-grid"><div class="editor-field full"><label>.md 스킨 불러오기/편집</label><textarea id="cms-skin-md" spellcheck="false" placeholder="skin: ocean-premium&#10;pricingBgImage: /images/hero-beach-bg-fast.jpg&#10;gold: #FFD700&#10;musicTitle: Summer Vibes&#10;musicVideoId: f4jS6yW83MU"></textarea><div style="margin-top:8px;"><button class="cms-small-action" type="button" id="cms-skin-md-upload">.md 스킨 파일 선택</button><input id="cms-skin-md-file" type="file" accept=".md,text/markdown,text/plain" hidden></div></div><div class="editor-field"><label>음악 제목</label><input id="cms-music-title" type="text" placeholder="Summer Vibes"></div><div class="editor-field"><label>YouTube 영상 ID</label><input id="cms-music-video-id" type="text" placeholder="f4jS6yW83MU"></div><div class="editor-field"><label>YouTube 플레이리스트 ID</label><input id="cms-music-playlist-id" type="text" placeholder="RDf4jS6yW83MU"></div><div class="editor-field"><label>시작 초</label><input id="cms-music-start-sec" type="number" min="0" step="1" placeholder="16"></div><div class="editor-field full"><label>직접 음악 파일/URL</label><input id="cms-music-audio-url" type="text" placeholder="오디오 URL 또는 파일 선택 데이터"><div class="cms-media-tools"><div class="cms-thumb" id="cms-audio-preview">AUDIO</div><button type="button" id="cms-audio-file-button">음악 파일 선택</button><input id="cms-audio-file-input" type="file" accept="audio/*" hidden></div></div></div></div>');
+            panel.querySelectorAll('[data-cms-skin]').forEach(button => button.addEventListener('click', () => applyCmsSkinPreset(button.getAttribute('data-cms-skin'))));
+            const mdButton = document.getElementById('cms-skin-md-upload');
+            const mdFile = document.getElementById('cms-skin-md-file');
+            if (mdButton && mdFile) {
+                mdButton.addEventListener('click', () => mdFile.click());
+                mdFile.addEventListener('change', () => {
+                    const file = mdFile.files && mdFile.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = () => { setValue('cms-skin-md', String(reader.result || '')); applyCmsSkinMarkdown(String(reader.result || '')); };
+                    reader.readAsText(file, 'utf-8');
+                });
+            }
+            const audioButton = document.getElementById('cms-audio-file-button');
+            const audioInput = document.getElementById('cms-audio-file-input');
+            if (audioButton && audioInput) {
+                audioButton.addEventListener('click', () => audioInput.click());
+                audioInput.addEventListener('change', () => {
+                    const file = audioInput.files && audioInput.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        setValue('cms-music-audio-url', String(reader.result || ''));
+                        const preview = document.getElementById('cms-audio-preview');
+                        if (preview) preview.innerHTML = '<audio controls src="' + cmsEscape(String(reader.result || '')) + '" style="width:100%;height:42px;"></audio>';
+                        refreshEditorPreview();
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+        function applyCmsSkinPreset(name) {
+            const presets = { beach:{label:'오션 프리미엄',bg:'/images/hero-beach-bg-fast.jpg',gold:'#FFD700'}, midnight:{label:'미드나잇 골드',bg:'/images/hero-beach-bg-fast.jpg',gold:'#F2C94C'}, studio:{label:'스튜디오 럭스',bg:'/images/hero-beach-bg-fast.jpg',gold:'#E2B84F'}, clean:{label:'클린 라이트',bg:'/images/hero-beach-bg-fast.jpg',gold:'#2E7DFF'} };
+            const preset = presets[name] || presets.beach;
+            setValue('cms-skin-name', name || 'beach');
+            setValue('theme-pricing-bg-image', preset.bg);
+            setValue('theme-products-bg-image', preset.bg);
+            setValue('theme-download-bg-image', preset.bg);
+            setValue('theme-gold', preset.gold);
+            setValue('cms-skin-md', 'skin: ' + preset.label + '\npricingBgImage: ' + preset.bg + '\nproductsBgImage: ' + preset.bg + '\ndownloadBgImage: ' + preset.bg + '\ngold: ' + preset.gold);
+            document.querySelectorAll('[data-cms-skin]').forEach(button => button.classList.toggle('active', button.getAttribute('data-cms-skin') === name));
+            installCmsImagePickers();
+            refreshEditorPreview();
+        }
+        function applyCmsSkinMarkdown(text) {
+            const lines = String(text || '').split(/\r?\n/);
+            const pairs = {};
+            lines.forEach(line => { const match = line.match(/^\s*([A-Za-z0-9_-]+)\s*:\s*(.+)\s*$/); if (match) pairs[match[1].toLowerCase()] = match[2].trim(); });
+            const firstImage = lines.map(line => line.trim()).find(line => /^(https?:\/\/|\/images\/|data:image\/)/i.test(line));
+            if (pairs.skin) setValue('cms-skin-name', pairs.skin);
+            if (pairs.pricingbgimage || firstImage) setValue('theme-pricing-bg-image', pairs.pricingbgimage || firstImage);
+            if (pairs.productsbgimage || firstImage) setValue('theme-products-bg-image', pairs.productsbgimage || firstImage);
+            if (pairs.downloadbgimage || firstImage) setValue('theme-download-bg-image', pairs.downloadbgimage || firstImage);
+            if (pairs.gold || pairs.accent || pairs.color) setValue('theme-gold', pairs.gold || pairs.accent || pairs.color);
+            if (pairs.musictitle) setValue('cms-music-title', pairs.musictitle);
+            if (pairs.musicvideoid) setValue('cms-music-video-id', pairs.musicvideoid);
+            if (pairs.musicplaylistid) setValue('cms-music-playlist-id', pairs.musicplaylistid);
+            if (pairs.musicstartsec) setValue('cms-music-start-sec', pairs.musicstartsec);
+            refreshEditorPreview();
+        }
+        function installCmsImagePickers() {
+            document.querySelectorAll('#tab-editor input[type="text"], #tab-editor input[type="url"]').forEach(input => {
+                const id = input.id || '';
+                if (!/(bg-image$|-image$|-media-src$|-preview-\d+-src$|-workflow-\d+-src$)/.test(id)) return;
+                enhanceCmsImageInput(input);
+            });
+            const proofArea = document.getElementById('edit-hero-proofs');
+            if (proofArea && proofArea.dataset.proofPicker !== '1') {
+                proofArea.dataset.proofPicker = '1';
+                const wrap = document.createElement('div');
+                wrap.className = 'cms-media-tools';
+                wrap.innerHTML = '<div class="cms-thumb">성과 이미지</div><button type="button">성과 이미지 추가</button><input type="file" accept="image/*" multiple hidden>';
+                proofArea.insertAdjacentElement('afterend', wrap);
+                const button = wrap.querySelector('button');
+                const fileInput = wrap.querySelector('input');
+                button.addEventListener('click', () => fileInput.click());
+                fileInput.addEventListener('change', async () => {
+                    const files = Array.from(fileInput.files || []);
+                    const lines = await Promise.all(files.map(file => readFileAsDataUrl(file).then(url => url + ' | ' + file.name + ' | 직접 선택한 성과 이미지 | - | ' + file.name)));
+                    proofArea.value = [proofArea.value.trim(), ...lines].filter(Boolean).join('\n');
+                    proofArea.dispatchEvent(new Event('input', { bubbles:true }));
+                    fileInput.value = '';
+                });
+            }
+            document.querySelectorAll('[data-cms-image-input="1"]').forEach(input => updateCmsImageThumb(input));
+        }
+        function enhanceCmsImageInput(input) {
+            input.dataset.cmsImageInput = '1';
+            if (input.dataset.cmsImagePicker === '1') { updateCmsImageThumb(input); return; }
+            input.dataset.cmsImagePicker = '1';
+            const tools = document.createElement('div');
+            tools.className = 'cms-media-tools';
+            tools.innerHTML = '<div class="cms-thumb" data-cms-thumb="1">이미지 없음</div><button type="button">이미지 선택</button><input type="file" accept="image/*" hidden>';
+            input.insertAdjacentElement('afterend', tools);
+            const button = tools.querySelector('button');
+            const file = tools.querySelector('input');
+            button.addEventListener('click', () => file.click());
+            file.addEventListener('change', () => {
+                const selected = file.files && file.files[0];
+                if (!selected) return;
+                readFileAsDataUrl(selected).then(url => {
+                    input.value = url;
+                    input.dispatchEvent(new Event('input', { bubbles:true }));
+                    updateCmsImageThumb(input);
+                    refreshEditorPreview();
+                    file.value = '';
+                });
+            });
+            input.addEventListener('input', () => updateCmsImageThumb(input));
+            updateCmsImageThumb(input);
+        }
+        function readFileAsDataUrl(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(String(reader.result || ''));
+                reader.onerror = () => reject(reader.error || new Error('파일을 읽지 못했습니다.'));
+                reader.readAsDataURL(file);
+            });
+        }
+        function updateCmsImageThumb(input) {
+            const tools = input.nextElementSibling && input.nextElementSibling.classList.contains('cms-media-tools') ? input.nextElementSibling : null;
+            const thumb = tools ? tools.querySelector('[data-cms-thumb="1"]') : null;
+            if (!thumb) return;
+            const src = cmsSafeImage(input.value);
+            thumb.innerHTML = src ? '<img src="' + cmsEscape(src) + '" alt="미리보기">' : '이미지 없음';
+        }
+        function renderCmsPreview(rawContent) {
+            const target = document.getElementById('cms-live-preview');
+            if (!target) return;
+            let data = rawContent || {};
+            try { data = withEditorDefaults(data); } catch {}
+            const mode = cmsPreviewMode || 'home';
+            const theme = data.theme || {};
+            updateCmsPreviewToolbar();
+            if (mode === 'pricing') {
+                const page = data.pricing?.page || {};
+                const plans = Object.values(data.pricing?.plans || {}).slice(0, 4);
+                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">' + cmsEscape(page.eyebrow || 'PRICING') + '</span><h3 class="cms-preview-title">' + cmsEscape(page.title || '구매/요금제') + '</h3><p class="cms-preview-desc">' + cmsEscape(page.desc || '') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' + plans.map(plan => '<article class="cms-preview-card"><h4>' + cmsEscape(plan.name || '요금제') + '</h4><p>' + cmsEscape(plan.desc || '') + '</p><div class="cms-preview-pill-row"><span class="cms-preview-pill">' + cmsEscape(plan.period || '') + '</span><span class="cms-preview-pill">' + cmsEscape(plan.badgeText || '') + '</span></div></article>').join('') + '</div></div>';
+                return;
+            }
+            if (mode === 'products') {
+                const page = data.productsPage || {};
+                const products = Object.values(data.products || {}).slice(0, 4);
+                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">' + cmsEscape(page.heroKicker || 'PRODUCTS') + '</span><h3 class="cms-preview-title">' + cmsEscape(page.heroTitle || '제품정보') + '</h3><p class="cms-preview-desc">' + cmsEscape(page.heroDesc || '') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' + products.map(product => '<article class="cms-preview-card">' + (cmsSafeImage(product.media?.src) ? '<img src="' + cmsEscape(product.media.src) + '" alt="">' : '') + '<h4>' + cmsEscape(product.name || product.headline || '제품') + '</h4><p>' + cmsEscape(product.desc || product.subtitle || '') + '</p></article>').join('') + '</div></div>';
+                return;
+            }
+            if (mode === 'downloads') {
+                const page = data.downloads?.page || {};
+                const products = EDITOR_PRODUCT_DEFS.map(def => data.downloads?.[def.id] || { name:def.label }).slice(0, 3);
+                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">' + cmsEscape(page.eyebrow || 'DOWNLOAD') + '</span><h3 class="cms-preview-title">' + cmsEscape(page.title || '다운로드') + '</h3><p class="cms-preview-desc">' + cmsEscape(page.desc || '') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' + products.map(product => '<article class="cms-preview-card">' + (cmsSafeImage(product.image) ? '<img src="' + cmsEscape(product.image) + '" alt="">' : '') + '<h4>' + cmsEscape(product.name || '앱') + '</h4><p>' + cmsEscape(product.version || '') + '</p></article>').join('') + '</div></div>';
+                return;
+            }
+            if (mode === 'design' || mode === 'admin-ai' || mode === 'site-content') {
+                const music = theme.music || {};
+                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">DESIGN</span><h3 class="cms-preview-title">스킨과 음악 설정</h3><div class="cms-preview-grid" style="margin-top:16px;"><article class="cms-preview-card">' + (cmsSafeImage(theme.pricingBgImage) ? '<img src="' + cmsEscape(theme.pricingBgImage) + '" alt="">' : '') + '<h4>대표 배경</h4><p>' + cmsEscape(theme.pricingBgImage || '배경 이미지 없음') + '</p></article><article class="cms-preview-card"><h4>대표 컬러</h4><p><span style="display:inline-block;width:22px;height:22px;border-radius:999px;background:' + cmsEscape(theme.gold || '#FFD700') + ';vertical-align:middle;margin-right:8px;"></span>' + cmsEscape(theme.gold || '#FFD700') + '</p></article><article class="cms-preview-card"><h4>음악</h4><p>' + cmsEscape(music.title || 'Summer Vibes') + '<br>' + cmsEscape(music.videoId || music.audioUrl || '기본 음악') + '</p></article></div></div>';
+                return;
+            }
+            const hero = data.hero || {};
+            const proofs = Array.isArray(hero.proofs) ? hero.proofs.slice(0, 4) : [];
+            const bg = cmsStyleUrl(theme.productsBgImage || theme.pricingBgImage || '/images/hero-beach-bg-fast.jpg');
+            target.innerHTML = '<div class="cms-preview-hero" style="background-image:url(\'' + bg + '\')"><span class="cms-preview-kicker">PREMIUM AUTOMATION</span><h3 class="cms-preview-title">' + cmsEscape(hero.title || '').replace(/\n/g, '<br>') + '</h3><p class="cms-preview-desc">' + cmsEscape(hero.desc || '') + '</p>' + (hero.benefit ? '<div class="cms-preview-benefit">' + cmsEscape(hero.benefit) + '</div>' : '') + '</div><div class="cms-preview-section"><div class="cms-preview-grid">' + proofs.map(proof => '<article class="cms-preview-card">' + (cmsSafeImage(proof.src) ? '<img src="' + cmsEscape(proof.src) + '" alt="">' : '') + '<h4>' + cmsEscape(proof.title || proof.alt || '성과 이미지') + '</h4><p>' + cmsEscape(proof.desc || proof.metric || '') + '</p></article>').join('') + '</div></div>';
+        }
+        function normalizeTrialPhone(value) {
+            let digits = String(value || '').replace(/\D/g, '');
+            if (!digits) return '';
+            if (digits.startsWith('82')) digits = '0' + digits.slice(2);
+            if (digits.startsWith('10')) digits = '0' + digits;
+            if (!digits.startsWith('0') && digits.length >= 9) digits = '0' + digits;
+            if (digits.startsWith('010') && digits.length > 11) digits = digits.slice(0, 11);
+            return digits.startsWith('010') && digits.length >= 10 ? digits : '';
+        }
+        function updateTrialExports(users) {
+            const list = Array.isArray(users) ? users : allTrialUsers;
+            const phones = Array.from(new Set(list.map(u => normalizeTrialPhone(u.phone || u.mobile || u.phoneNumber)).filter(Boolean)));
+            const emails = Array.from(new Set(list.map(u => String(u.email || '').trim()).filter(v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))));
+            const phoneBox = document.getElementById('trial-phone-list');
+            const emailBox = document.getElementById('trial-email-list');
+            if (phoneBox) phoneBox.value = phones.join('\n');
+            if (emailBox) emailBox.value = emails.join('\n');
+            const phoneCount = document.getElementById('trial-phone-count');
+            const emailCount = document.getElementById('trial-email-count');
+            if (phoneCount) phoneCount.textContent = phones.length.toLocaleString('ko-KR') + '개';
+            if (emailCount) emailCount.textContent = emails.length.toLocaleString('ko-KR') + '개';
+        }
+        function copyTextFromElement(id, label) {
+            const el = document.getElementById(id);
+            const value = el ? el.value : '';
+            if (!value) { showToast(label + ' 복사할 데이터가 없습니다.'); return; }
+            const fallback = () => { el.focus(); el.select(); document.execCommand('copy'); };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(value).then(() => showToast(label + ' 전체 복사 완료')).catch(() => { fallback(); showToast(label + ' 전체 복사 완료'); });
+            } else {
+                fallback();
+                showToast(label + ' 전체 복사 완료');
+            }
+        }
+        function copyTrialPhones() { copyTextFromElement('trial-phone-list', '체험자 번호'); }
+        function copyTrialEmails() { copyTextFromElement('trial-email-list', '체험자 이메일'); }
+        function focusTrialExport(type) {
+            setTimeout(() => {
+                const box = document.getElementById(type === 'emails' ? 'trial-export-emails-box' : 'trial-export-phones-box');
+                if (!box) return;
+                document.querySelectorAll('.trial-export-box').forEach(node => node.classList.remove('focused'));
+                box.classList.add('focused');
+                box.scrollIntoView({ behavior:'smooth', block:'center' });
+            }, 120);
+        }
+        // CMS_WORKBENCH_V1_END
+
+
         function switchEditorSubtab(name) {
+            cmsPreviewMode = ['home', 'pricing', 'products', 'downloads', 'design'].includes(name) ? name : (name === 'admin-ai' || name === 'site-content' ? 'design' : 'home');
             document.querySelectorAll('.editor-subtab').forEach(btn => btn.classList.toggle('active', btn.dataset.editorSubtab === name));
             document.querySelectorAll('.editor-subpanel').forEach(panel => panel.classList.toggle('active', panel.id === `editor-sub-${name}`));
+            updateCmsPreviewToolbar();
             refreshEditorPreview();
         }
 
         function setEditorValues(content) {
             renderEditorDynamicForms();
+            installCmsWorkbench();
+            installCmsSkinControls();
+            installCmsImagePickers();
+            installEditorLiveBindings();
             const data = withEditorDefaults(content || {});
             const hero = data.hero || {};
             const pricingPage = data.pricing?.page || {};
@@ -3667,9 +4008,17 @@
             setValue('theme-products-bg-image', theme.productsBgImage);
             setValue('theme-download-bg-image', theme.downloadBgImage);
             setValue('theme-gold', theme.gold);
+            setValue('cms-skin-name', theme.skin?.name);
+            setValue('cms-skin-md', theme.skin?.md);
+            setValue('cms-music-title', theme.music?.title);
+            setValue('cms-music-video-id', theme.music?.videoId);
+            setValue('cms-music-playlist-id', theme.music?.playlistId);
+            setValue('cms-music-start-sec', theme.music?.startSec);
+            setValue('cms-music-audio-url', theme.music?.audioUrl);
             setValue('edit-products-json', JSON.stringify(products, null, 2));
             productsJsonTouched = false;
             enhanceEditorClearButtons(document);
+            installCmsImagePickers();
             refreshEditorPreview(data);
         }
 
@@ -3866,7 +4215,18 @@
                     pricingBgImage: getValue('theme-pricing-bg-image'),
                     productsBgImage: getValue('theme-products-bg-image'),
                     downloadBgImage: getValue('theme-download-bg-image'),
-                    gold: getValue('theme-gold')
+                    gold: getValue('theme-gold'),
+                    skin: {
+                        name: getValue('cms-skin-name'),
+                        md: getValue('cms-skin-md')
+                    },
+                    music: {
+                        title: getValue('cms-music-title'),
+                        videoId: getValue('cms-music-video-id'),
+                        playlistId: getValue('cms-music-playlist-id'),
+                        startSec: numberOrUndefined('cms-music-start-sec'),
+                        audioUrl: getValue('cms-music-audio-url')
+                    }
                 },
                 updatedAt: new Date().toISOString()
             });
@@ -3876,12 +4236,12 @@
 
         function refreshEditorPreview(data) {
             const preview = editorEl('edit-site-json-preview');
-            if (!preview) return;
             try {
                 const content = data || collectEditorContent();
-                preview.value = JSON.stringify(content, null, 2);
+                if (preview) preview.value = JSON.stringify(content, null, 2);
+                renderCmsPreview(content);
             } catch {
-                preview.value = '저장 데이터 미리보기를 만들 수 없습니다.';
+                if (preview) preview.value = '저장 데이터 미리보기를 만들 수 없습니다.';
             }
         }
 
@@ -3916,6 +4276,10 @@
             showToast('↩️ 초기화되었습니다.');
         }
 
+        installCmsWorkbench();
+        installCmsSkinControls();
+        installCmsImagePickers();
+        installEditorLiveBindings();
         loadEditorContent();
 
         // ===== TOAST =====
@@ -3963,6 +4327,7 @@
             document.getElementById('trial-stat-active').textContent = active.toLocaleString();
             document.getElementById('trial-stat-blocked').textContent = blocked.toLocaleString();
 
+            updateTrialExports(allTrialUsers);
             renderTrialTable();
         }
 

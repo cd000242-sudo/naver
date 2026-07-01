@@ -114,6 +114,18 @@ export type SiteContent = {
         productsBgImage?: string;
         downloadBgImage?: string;
         gold?: string;
+        skin?: {
+            name?: string;
+            md?: string;
+        };
+        music?: {
+            title?: string;
+            videoId?: string;
+            playlistId?: string;
+            startSec?: number;
+            audioUrl?: string;
+            enabled?: boolean;
+        };
     };
     updatedAt?: string;
 };
