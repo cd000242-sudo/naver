@@ -71,7 +71,9 @@ describe('v1.4.12 — 슬림화 글자수 검증', () => {
     // 2026-06-22: current measured homefeed/base.prompt is 39,597 chars after
     // accumulated prompt rules. Keep the bloat guard close to the measured file
     // so accidental large growth still fails CI without blocking the current tree.
-    expect(content.length).toBeLessThan(40500);
+    // 2026-06-30: 누적 홈판 보강(F7/F8 추임새 제한, 봇단어 제거, 관찰형 경험 신호) +
+    //   human-writing 안티패턴 정렬로 실측 41,651자. 의도된 증가 — baseline 42,500자 재상향.
+    expect(content.length).toBeLessThan(42500);
   });
 
   it('모든 prompt 파일 합계가 v1.4.7 대비 슬림화됨', () => {
