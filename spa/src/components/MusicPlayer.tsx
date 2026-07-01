@@ -18,7 +18,7 @@ type MusicConfig = {
 };
 
 const DEFAULT_MUSIC: MusicConfig = {
-    title: 'Summer Vibes',
+    title: '배경음악',
     videoId: 'f4jS6yW83MU',
     playlistId: 'RDf4jS6yW83MU',
     startSec: 16,
@@ -154,12 +154,7 @@ function MusicPlayer() {
                     if (!window.YT) return;
                     if (event.data === window.YT.PlayerState.PLAYING) {
                         setIsPlaying(true);
-                        try {
-                            const videoData = event.target.getVideoData();
-                            setTrackTitle(videoData?.title || musicConfig.title);
-                        } catch {
-                            setTrackTitle(musicConfig.title);
-                        }
+                        setTrackTitle(musicConfig.title || DEFAULT_MUSIC.title);
                     } else if (event.data === window.YT.PlayerState.PAUSED) {
                         setIsPlaying(false);
                     }

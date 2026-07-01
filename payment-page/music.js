@@ -22,7 +22,7 @@
     // === Config ===
     // Phase 4: 여름 테마 — 단일 곡 무한 루프(YouTube playlist 파라미터로 무중단)
     const PLAYLIST = [
-        { id: 'f4jS6yW83MU', title: '☀️ Summer Vibes' },
+        { id: 'f4jS6yW83MU', title: '🎵 배경음악' },
     ];
     const STORAGE_KEY = 'lp_music_playing';
     const TRACK_KEY = 'lp_music_track';
@@ -312,14 +312,8 @@
 
     // Build playlist items
     function renderPlaylist() {
-        // v5: 현재 재생 중인 Radio 트랙명을 동적으로 가져옴
+        // 관리자에서 지정한 표시명을 유지합니다. YouTube 원본 제목은 사용자에게 노출하지 않습니다.
         let nowPlayingTitle = PLAYLIST[currentTrack].title;
-        try {
-            if (player && typeof player.getVideoData === 'function') {
-                const vd = player.getVideoData();
-                if (vd && vd.title) nowPlayingTitle = vd.title;
-            }
-        } catch {}
         // Radio 자동 재생 표시 + 현재 곡
         const radioLabel = '<div class="lp-pl-item active"><span class="lp-pl-num">♪</span><span class="lp-pl-name">' + nowPlayingTitle + '</span></div>';
         const radioInfo = '<div style="font-size:10px; color:rgba(255,255,255,0.5); padding:6px 8px; text-align:center; border-top:1px solid rgba(255,255,255,0.06); margin-top:4px;">🔄 Radio 자동재생 — 비슷한 곡 자동 추가</div>';
@@ -328,19 +322,9 @@
     renderPlaylist();
 
     function updateUI() {
-        // v5: Radio playlist 동적 현재 곡 — player.getVideoData()
-        //   PLAYLIST 정적 배열은 1개 (시드 곡)이지만 YT가 Radio 자동 진행
+        // 관리자에서 지정한 표시명을 유지합니다. YouTube 원본 제목은 사용자에게 노출하지 않습니다.
         let currentTitle = PLAYLIST[currentTrack].title;
         let currentEmoji = currentTitle.split(' ')[0];
-        try {
-            if (player && typeof player.getVideoData === 'function') {
-                const vd = player.getVideoData();
-                if (vd && vd.title) {
-                    currentTitle = '🎵 ' + vd.title;
-                    currentEmoji = '🎵';
-                }
-            }
-        } catch {}
         titleEl.textContent = currentTitle;
         artEl.textContent = currentEmoji;
         playBtn.textContent = isPlaying ? '⏸' : '▶';
@@ -571,7 +555,7 @@
 
     window.onYouTubeIframeAPIReady = function() {
         // v5: 사용자 지정 URL 그대로 — youtube.com/watch?v=f4jS6yW83MU&list=RDf4jS6yW83MU&start_radio=1&t=16s
-        //   videoId = f4jS6yW83MU (Summer Vibes)
+        //   videoId = f4jS6yW83MU (관리자 표시명: 배경음악)
         //   list = RDf4jS6yW83MU (Radio 자동재생 목록 — 비슷한 곡 자동 추가, start_radio=1 효과)
         //   start = 16초 (t=16s 반영, resume time 무시 — 사용자 명시 요청)
         player = new YT.Player('yt-music-player', {

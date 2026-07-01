@@ -993,7 +993,10 @@
                 <div style="padding:0 14px 10px 48px;display:grid;gap:6px;color:var(--text-secondary);font-size:0.78rem;">
                     <button type="button" onclick="switchTab('editor'); switchEditorSubtab('home')" style="all:unset;cursor:pointer;">일반 편집</button>
                     <button type="button" onclick="switchTab('editor'); switchEditorSubtab('site-content')" style="all:unset;cursor:pointer;">사이트 콘텐츠 관리</button>
-                    <button type="button" onclick="switchTab('editor'); switchEditorSubtab('admin-ai')" style="all:unset;cursor:pointer;">관리자 AI 작업자 설정</button>
+                </div>
+                <div class="nav-item" data-tab="leword-settings" onclick="switchTab('leword-settings')">
+                    <span class="nav-icon">⚙️</span>
+                    <span>LEWORD 관리자 설정</span>
                 </div>
                 <div class="nav-item" data-tab="trial" onclick="switchTab('trial')">
                     <span class="nav-icon">🧪</span>
@@ -1125,7 +1128,6 @@
                     <button class="editor-subtab" data-editor-subtab="products" onclick="switchEditorSubtab('products')">제품정보</button>
                     <button class="editor-subtab" data-editor-subtab="downloads" onclick="switchEditorSubtab('downloads')">다운로드</button>
                                         <button class="editor-subtab" data-editor-subtab="site-content" onclick="switchEditorSubtab('site-content')">사이트 콘텐츠 관리</button>
-                    <button class="editor-subtab" data-editor-subtab="admin-ai" onclick="switchEditorSubtab('admin-ai')">관리자 AI 작업자 설정</button>
 <button class="editor-subtab" data-editor-subtab="design" onclick="switchEditorSubtab('design')">디자인/고급</button>
                 </div>
 
@@ -1367,7 +1369,7 @@
 
                 <div id="editor-sub-admin-ai" class="editor-subpanel">
                     <div class="editor-card">
-                        <h4>관리자 AI 작업자 설정</h4>
+                        <h4>AI 작업자 설정</h4>
                         <p class="editor-help">Codex와 Claude Code는 관리자 전용 서버 작업자입니다. 일반 사용자는 볼 수 없고, 관리자 작업 요청에만 선택값을 사용합니다.</p>
                         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px;">
                             <label style="display:flex;gap:10px;align-items:flex-start;padding:14px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.035);">
@@ -3633,7 +3635,7 @@
             localStorage.setItem('leaderspro_admin_ai_worker', JSON.stringify({ provider, note, savedAt: new Date().toISOString() }));
             const status = document.getElementById('admin-ai-worker-status');
             if (status) status.textContent = '저장 완료: ' + provider + ' · 관리자 세션 기준';
-            if (typeof showToast === 'function') showToast('관리자 AI 작업자 설정을 저장했습니다.');
+            if (typeof showToast === 'function') showToast('LEWORD 관리자 설정을 저장했습니다.');
         }
 
         function checkAdminAiWorkerSettings() {
@@ -3913,17 +3915,34 @@
             cmsEditorBindingsReady = true;
             const onChange = event => {
                 const target = event.target;
-                if (!target || target.id === 'edit-site-json-preview' || target.id === 'admin-site-content-json') return;
+                if (!target || target.id === 'edit-site-json-preview') return;
+                if (target.id === 'admin-site-content-json') {
+                    cmsPreviewMode = 'site-content';
+                    updateCmsPreviewToolbar();
+                    renderCmsPreview(getAdminSiteContentDraft());
+                    return;
+                }
                 refreshEditorPreview();
                 if (target.matches && target.matches('[data-cms-image-input="1"]')) updateCmsImageThumb(target);
             };
             editor.addEventListener('input', onChange);
             editor.addEventListener('change', onChange);
         }
+        function installLewordSettingsPanel() {
+            const panel = document.getElementById('editor-sub-admin-ai');
+            const main = document.querySelector('.main-content');
+            if (!panel || !main || document.getElementById('tab-leword-settings')) return;
+            panel.id = 'tab-leword-settings';
+            panel.classList.remove('editor-subpanel', 'active');
+            panel.classList.add('tab-panel');
+            panel.insertAdjacentHTML('afterbegin', '<div class="page-header"><h1>LEWORD 관리자 설정</h1><p>Codex와 Claude Code 서버 작업자, API 보조 추론 방식을 관리자 전용으로 설정합니다.</p></div>');
+            const trialPanel = document.getElementById('tab-trial');
+            main.insertBefore(panel, trialPanel || null);
+        }
         function installCmsSkinControls() {
             const panel = document.getElementById('editor-sub-design');
             if (!panel || document.getElementById('cms-skin-controls')) return;
-            panel.insertAdjacentHTML('afterbegin', '<div class="editor-card" id="cms-skin-controls" style="margin-bottom:16px;"><h4>스킨/음악 미리보기 편집</h4><p class="editor-help">JSON을 직접 만지지 않고 스킨을 고르거나 .md 스킨 파일을 불러와 배경, 골드 컬러, 음악 설정을 적용합니다.</p><input id="cms-skin-name" type="hidden"><div class="cms-skin-grid"><button type="button" class="cms-skin-option" data-cms-skin="beach" style="background-image:url(/images/hero-beach-bg-fast.jpg)">오션 프리미엄</button><button type="button" class="cms-skin-option" data-cms-skin="midnight" style="background:linear-gradient(135deg,#06131f,#1f2638)">미드나잇 골드</button><button type="button" class="cms-skin-option" data-cms-skin="studio" style="background:linear-gradient(135deg,#14100b,#3b2b12)">스튜디오 럭스</button><button type="button" class="cms-skin-option" data-cms-skin="clean" style="background:linear-gradient(135deg,#eef3f6,#c9d6df);color:#111;box-shadow:none;">클린 라이트</button></div><div class="editor-field-grid"><div class="editor-field full"><label>.md 스킨 불러오기/편집</label><textarea id="cms-skin-md" spellcheck="false" placeholder="skin: ocean-premium&#10;pricingBgImage: /images/hero-beach-bg-fast.jpg&#10;gold: #FFD700&#10;musicTitle: Summer Vibes&#10;musicVideoId: f4jS6yW83MU"></textarea><div style="margin-top:8px;"><button class="cms-small-action" type="button" id="cms-skin-md-upload">.md 스킨 파일 선택</button><input id="cms-skin-md-file" type="file" accept=".md,text/markdown,text/plain" hidden></div></div><div class="editor-field"><label>음악 제목</label><input id="cms-music-title" type="text" placeholder="Summer Vibes"></div><div class="editor-field"><label>YouTube 영상 ID</label><input id="cms-music-video-id" type="text" placeholder="f4jS6yW83MU"></div><div class="editor-field"><label>YouTube 플레이리스트 ID</label><input id="cms-music-playlist-id" type="text" placeholder="RDf4jS6yW83MU"></div><div class="editor-field"><label>시작 초</label><input id="cms-music-start-sec" type="number" min="0" step="1" placeholder="16"></div><div class="editor-field full"><label>직접 음악 파일/URL</label><input id="cms-music-audio-url" type="text" placeholder="오디오 URL 또는 파일 선택 데이터"><div class="cms-media-tools"><div class="cms-thumb" id="cms-audio-preview">AUDIO</div><button type="button" id="cms-audio-file-button">음악 파일 선택</button><input id="cms-audio-file-input" type="file" accept="audio/*" hidden></div></div></div></div>');
+            panel.insertAdjacentHTML('afterbegin', '<div class="editor-card" id="cms-skin-controls" style="margin-bottom:16px;"><h4>스킨/음악 미리보기 편집</h4><p class="editor-help">JSON을 직접 만지지 않고 스킨을 고르거나 .md 스킨 파일을 불러와 배경, 골드 컬러, 음악 설정을 적용합니다.</p><input id="cms-skin-name" type="hidden"><div class="cms-skin-grid"><button type="button" class="cms-skin-option" data-cms-skin="beach" style="background-image:url(/images/hero-beach-bg-fast.jpg)">오션 프리미엄</button><button type="button" class="cms-skin-option" data-cms-skin="midnight" style="background:linear-gradient(135deg,#06131f,#1f2638)">미드나잇 골드</button><button type="button" class="cms-skin-option" data-cms-skin="studio" style="background:linear-gradient(135deg,#14100b,#3b2b12)">스튜디오 럭스</button><button type="button" class="cms-skin-option" data-cms-skin="clean" style="background:linear-gradient(135deg,#eef3f6,#c9d6df);color:#111;box-shadow:none;">클린 라이트</button></div><div class="editor-field-grid"><div class="editor-field full"><label>.md 스킨 불러오기/편집</label><textarea id="cms-skin-md" spellcheck="false" placeholder="skin: ocean-premium&#10;pricingBgImage: /images/hero-beach-bg-fast.jpg&#10;gold: #FFD700&#10;musicTitle: 배경음악&#10;musicVideoId: f4jS6yW83MU"></textarea><div style="margin-top:8px;"><button class="cms-small-action" type="button" id="cms-skin-md-upload">.md 스킨 파일 선택</button><input id="cms-skin-md-file" type="file" accept=".md,text/markdown,text/plain" hidden></div></div><div class="editor-field"><label>음악 제목</label><input id="cms-music-title" type="text" placeholder="배경음악"></div><div class="editor-field"><label>YouTube 영상 ID</label><input id="cms-music-video-id" type="text" placeholder="f4jS6yW83MU"></div><div class="editor-field"><label>YouTube 플레이리스트 ID</label><input id="cms-music-playlist-id" type="text" placeholder="RDf4jS6yW83MU"></div><div class="editor-field"><label>시작 초</label><input id="cms-music-start-sec" type="number" min="0" step="1" placeholder="16"></div><div class="editor-field full"><label>직접 음악 파일/URL</label><input id="cms-music-audio-url" type="text" placeholder="오디오 URL 또는 파일 선택 데이터"><div class="cms-media-tools"><div class="cms-thumb" id="cms-audio-preview">AUDIO</div><button type="button" id="cms-audio-file-button">음악 파일 선택</button><input id="cms-audio-file-input" type="file" accept="audio/*" hidden></div></div></div></div>');
             panel.querySelectorAll('[data-cms-skin]').forEach(button => button.addEventListener('click', () => applyCmsSkinPreset(button.getAttribute('data-cms-skin'))));
             const mdButton = document.getElementById('cms-skin-md-upload');
             const mdFile = document.getElementById('cms-skin-md-file');
@@ -3986,6 +4005,7 @@
         }
         function installCmsImagePickers() {
             document.querySelectorAll('#tab-editor input[type="text"], #tab-editor input[type="url"]').forEach(input => {
+                if (input.closest('#cms-home-region-editor')) return;
                 const id = input.id || '';
                 if (!/(bg-image$|-image$|-media-src$|-preview-\d+-src$|-workflow-\d+-src$)/.test(id)) return;
                 enhanceCmsImageInput(input);
@@ -4050,6 +4070,24 @@
             const src = cmsSafeImage(input.value);
             thumb.innerHTML = src ? '<img src="' + cmsEscape(src) + '" alt="미리보기">' : '이미지 없음';
         }
+        function getAdminSiteContentDraft(fallback = {}) {
+            const textarea = document.getElementById('admin-site-content-json');
+            const raw = textarea ? textarea.value.trim() : '';
+            if (!raw) return fallback || {};
+            try {
+                return JSON.parse(raw);
+            } catch {
+                return {
+                    hero: {
+                        title: 'JSON 형식을 확인해주세요',
+                        desc: '사이트 콘텐츠 관리 JSON에 쉼표, 따옴표, 중괄호 오류가 있습니다.'
+                    },
+                    products: {},
+                    pricing: { plans: {} },
+                    downloads: {}
+                };
+            }
+        }
         function renderCmsPreview(rawContent) {
             const target = document.getElementById('cms-live-preview');
             if (!target) return;
@@ -4076,9 +4114,22 @@
                 target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">' + cmsEscape(page.eyebrow || 'DOWNLOAD') + '</span><h3 class="cms-preview-title">' + cmsEscape(page.title || '다운로드') + '</h3><p class="cms-preview-desc">' + cmsEscape(page.desc || '') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' + products.map(product => '<article class="cms-preview-card">' + (cmsSafeImage(product.image) ? '<img src="' + cmsEscape(product.image) + '" alt="">' : '') + '<h4>' + cmsEscape(product.name || '앱') + '</h4><p>' + cmsEscape(product.version || '') + '</p></article>').join('') + '</div></div>';
                 return;
             }
-            if (mode === 'design' || mode === 'admin-ai' || mode === 'site-content') {
+            if (mode === 'site-content') {
+                const draft = getAdminSiteContentDraft(data);
+                const hero = draft.hero || {};
+                const products = Object.values(draft.products || {}).slice(0, 4);
+                const pricingPlans = Object.values(draft.pricing?.plans || {}).slice(0, 3);
+                const downloads = EDITOR_PRODUCT_DEFS.map(def => draft.downloads?.[def.id] || null).filter(Boolean).slice(0, 3);
+                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">SITE CONTENT</span><h3 class="cms-preview-title">' + cmsEscape(hero.title || '사이트 콘텐츠 미리보기') + '</h3><p class="cms-preview-desc">' + cmsEscape(hero.desc || 'JSON을 수정하면 제품, 요금제, 다운로드 초안이 이 영역에 바로 표시됩니다.') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' +
+                    products.map(product => '<article class="cms-preview-card">' + (cmsSafeImage(product.media?.src) ? '<img src="' + cmsEscape(product.media.src) + '" alt="">' : '') + '<h4>' + cmsEscape(product.name || product.headline || '제품') + '</h4><p>' + cmsEscape(product.desc || product.subtitle || product.href || '') + '</p></article>').join('') +
+                    pricingPlans.map(plan => '<article class="cms-preview-card"><h4>' + cmsEscape(plan.name || '요금제') + '</h4><p>' + cmsEscape(plan.desc || plan.period || '') + '</p></article>').join('') +
+                    downloads.map(item => '<article class="cms-preview-card">' + (cmsSafeImage(item.image) ? '<img src="' + cmsEscape(item.image) + '" alt="">' : '') + '<h4>' + cmsEscape(item.name || '다운로드') + '</h4><p>' + cmsEscape(item.version || '') + '</p></article>').join('') +
+                    '</div></div>';
+                return;
+            }
+            if (mode === 'design') {
                 const music = theme.music || {};
-                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">DESIGN</span><h3 class="cms-preview-title">스킨과 음악 설정</h3><div class="cms-preview-grid" style="margin-top:16px;"><article class="cms-preview-card">' + (cmsSafeImage(theme.pricingBgImage) ? '<img src="' + cmsEscape(theme.pricingBgImage) + '" alt="">' : '') + '<h4>대표 배경</h4><p>' + cmsEscape(theme.pricingBgImage || '배경 이미지 없음') + '</p></article><article class="cms-preview-card"><h4>대표 컬러</h4><p><span style="display:inline-block;width:22px;height:22px;border-radius:999px;background:' + cmsEscape(theme.gold || '#FFD700') + ';vertical-align:middle;margin-right:8px;"></span>' + cmsEscape(theme.gold || '#FFD700') + '</p></article><article class="cms-preview-card"><h4>음악</h4><p>' + cmsEscape(music.title || 'Summer Vibes') + '<br>' + cmsEscape(music.videoId || music.audioUrl || '기본 음악') + '</p></article></div></div>';
+                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">DESIGN</span><h3 class="cms-preview-title">스킨과 음악 설정</h3><div class="cms-preview-grid" style="margin-top:16px;"><article class="cms-preview-card">' + (cmsSafeImage(theme.pricingBgImage) ? '<img src="' + cmsEscape(theme.pricingBgImage) + '" alt="">' : '') + '<h4>대표 배경</h4><p>' + cmsEscape(theme.pricingBgImage || '배경 이미지 없음') + '</p></article><article class="cms-preview-card"><h4>대표 컬러</h4><p><span style="display:inline-block;width:22px;height:22px;border-radius:999px;background:' + cmsEscape(theme.gold || '#FFD700') + ';vertical-align:middle;margin-right:8px;"></span>' + cmsEscape(theme.gold || '#FFD700') + '</p></article><article class="cms-preview-card"><h4>음악</h4><p>' + cmsEscape(music.title || '배경음악') + '<br>' + cmsEscape(music.videoId || music.audioUrl || '음악 소스 미설정') + '</p></article></div></div>';
                 return;
             }
             const hero = data.hero || {};
@@ -4136,7 +4187,7 @@
 
 
         function switchEditorSubtab(name) {
-            cmsPreviewMode = ['home', 'pricing', 'products', 'downloads', 'design'].includes(name) ? name : (name === 'admin-ai' || name === 'site-content' ? 'design' : 'home');
+            cmsPreviewMode = ['home', 'pricing', 'products', 'downloads', 'design', 'site-content'].includes(name) ? name : 'home';
             document.querySelectorAll('.editor-subtab').forEach(btn => btn.classList.toggle('active', btn.dataset.editorSubtab === name));
             document.querySelectorAll('.editor-subpanel').forEach(panel => panel.classList.toggle('active', panel.id === `editor-sub-${name}`));
             updateCmsPreviewToolbar();
@@ -4262,6 +4313,7 @@
             setValue('cms-music-start-sec', theme.music?.startSec);
             setValue('cms-music-audio-url', theme.music?.audioUrl);
             setValue('edit-products-json', JSON.stringify(products, null, 2));
+            setValue('admin-site-content-json', JSON.stringify(data, null, 2));
             productsJsonTouched = false;
             enhanceEditorClearButtons(document);
             installCmsImagePickers();
@@ -4429,6 +4481,13 @@
         }
 
         function collectEditorContent() {
+            const siteContentPanel = document.getElementById('editor-sub-site-content');
+            if (siteContentPanel && siteContentPanel.classList.contains('active')) {
+                const draft = getAdminSiteContentDraft();
+                draft.updatedAt = new Date().toISOString();
+                refreshEditorPreview(draft);
+                return draft;
+            }
             syncCmsHomeRegionEditorToSource();
             const data = compactObject({
                 hero: {
@@ -4525,6 +4584,7 @@
             showToast('↩️ 초기화되었습니다.');
         }
 
+        installLewordSettingsPanel();
         installCmsWorkbench();
         installCmsSkinControls();
         installCmsImagePickers();
