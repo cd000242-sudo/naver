@@ -2834,7 +2834,7 @@
         function openIssueModal() { document.getElementById('issue-modal').classList.add('active'); }
         function closeIssueModal() { document.getElementById('issue-modal').classList.remove('active'); }
 
-        function getAllInOnePresetDays(type) {
+        function getdisabledLicenseBundlePresetDays(type) {
             if (type === 'CUSTOM1') return 1;
             if (type === 'PAID30') return 30;
             if (type === 'CUSTOM90') return 90;
@@ -2842,23 +2842,23 @@
             return 0;
         }
 
-        function syncAllInOneDays(type) {
-            const input = document.getElementById('allinone-days');
+        function syncdisabledLicenseBundleDays(type) {
+            const input = document.getElementById('disabledLicenseBundle-days');
             if (!input) return;
-            const presetDays = getAllInOnePresetDays(type);
+            const presetDays = getdisabledLicenseBundlePresetDays(type);
             if (presetDays > 0) input.value = String(presetDays);
         }
 
-        function buildAllInOneIssuePayload() {
-            const checked = document.querySelector('input[name="allinone-duration"]:checked');
+        function builddisabledLicenseBundleIssuePayload() {
+            const checked = document.querySelector('input[name="disabledLicenseBundle-duration"]:checked');
             const type = checked ? checked.value : 'CUSTOM1';
-            const unlimited = document.getElementById('allinone-unlimited')?.checked;
+            const unlimited = document.getElementById('disabledLicenseBundle-unlimited')?.checked;
             if (unlimited) {
                 return { actualType: 'LIFE', customData: { isUnlimitedDays: true }, finalLabel: '무제한' };
             }
 
-            const presetDays = getAllInOnePresetDays(type);
-            const inputDays = parseInt(document.getElementById('allinone-days')?.value || '0', 10);
+            const presetDays = getdisabledLicenseBundlePresetDays(type);
+            const inputDays = parseInt(document.getElementById('disabledLicenseBundle-days')?.value || '0', 10);
             const finalDays = inputDays > 0 ? inputDays : presetDays;
             if (!finalDays || finalDays <= 0 || finalDays > 3650) {
                 throw new Error('일수를 1~3650 사이로 입력해주세요.');
@@ -2866,34 +2866,34 @@
             return { actualType: 'CUSTOM', customData: { customDays: finalDays }, finalLabel: `${finalDays}일` };
         }
 
-        function resetAllInOneForm() {
-            const first = document.querySelector('input[name="allinone-duration"][value="CUSTOM1"]');
+        function resetdisabledLicenseBundleForm() {
+            const first = document.querySelector('input[name="disabledLicenseBundle-duration"][value="CUSTOM1"]');
             if (first) first.checked = true;
-            document.getElementById('allinone-days').value = '1';
-            document.getElementById('allinone-unlimited').checked = false;
-            document.getElementById('allinone-count').value = '10';
-            document.getElementById('allinone-prefix').value = 'ALL';
-            showToast('↩️ 올인원 발급 옵션을 초기화했습니다.');
+            document.getElementById('disabledLicenseBundle-days').value = '1';
+            document.getElementById('disabledLicenseBundle-unlimited').checked = false;
+            document.getElementById('disabledLicenseBundle-count').value = '10';
+            document.getElementById('disabledLicenseBundle-prefix').value = 'ALL';
+            showToast('↩️ 사용하지 않는 발급 옵션을 초기화했습니다.');
         }
 
-        document.querySelectorAll('input[name="allinone-duration"]').forEach(input => {
+        document.querySelectorAll('input[name="disabledLicenseBundle-duration"]').forEach(input => {
             input.addEventListener('change', () => {
-                document.getElementById('allinone-unlimited').checked = false;
-                syncAllInOneDays(input.value);
+                document.getElementById('disabledLicenseBundle-unlimited').checked = false;
+                syncdisabledLicenseBundleDays(input.value);
             });
         });
 
-        async function issueAllInOneCode(btn) {
+        async function issuedisabledLicenseBundleCode(btn) {
             let payload;
             try {
-                payload = buildAllInOneIssuePayload();
+                payload = builddisabledLicenseBundleIssuePayload();
             } catch (err) {
                 showToast('❌ ' + err.message);
                 return;
             }
 
-            const count = Math.max(1, Math.min(500, parseInt(document.getElementById('allinone-count').value || '1', 10)));
-            const prefix = (document.getElementById('allinone-prefix').value || 'ALL').trim();
+            const count = Math.max(1, Math.min(500, parseInt(document.getElementById('disabledLicenseBundle-count').value || '1', 10)));
+            const prefix = (document.getElementById('disabledLicenseBundle-prefix').value || 'ALL').trim();
             const originalText = btn.textContent;
             btn.textContent = '발급 중...';
             btn.disabled = true;
@@ -2908,7 +2908,7 @@
                 await loadCodes();
                 switchTab('codes');
             } else {
-                showToast('❌ 올인원 발급 실패: ' + (result.error || '알 수 없는 오류'));
+                showToast('❌ 사용하지 않는 발급 실패: ' + (result.error || '알 수 없는 오류'));
             }
 
             btn.textContent = originalText;
@@ -2958,10 +2958,10 @@
 
         const EDITOR_PLAN_DEFS = [
             { id: 'free-naver', label: 'Better Life Naver 무료 체험' },
-            { id: 'all-in-one-monthly', label: '올인원 1개월' },
-            { id: 'all-in-one-quarterly', label: '올인원 3개월' },
-            { id: 'all-in-one-yearly', label: '올인원 1년' },
-            { id: 'all-in-one-lifetime', label: '올인원 영구제' }
+            { id: 'disabled-license-bundle-monthly', label: '올인원 1개월' },
+            { id: 'disabled-license-bundle-quarterly', label: '올인원 3개월' },
+            { id: 'disabled-license-bundle-yearly', label: '올인원 1년' },
+            { id: 'disabled-license-bundle-lifetime', label: '올인원 영구제' }
         ];
 
         const EDITOR_PRODUCT_DEFS = [
@@ -3083,7 +3083,7 @@
                         badgeText: '🎁 FREE',
                         features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 올인원 구매 후 이용']
                     },
-                    'all-in-one-monthly': {
+                    'disabled-license-bundle-monthly': {
                         name: '올인원 1개월',
                         desc: '3개 툴을 한 번에 가볍게 시작',
                         amount: 50000,
@@ -3094,7 +3094,7 @@
                         period: '/ 월(공급가)',
                         features: ['Better Life Naver 이용', 'LEWORD 키워드 분석 이용', 'Leadernam Orbit 이용', '이메일 고객 지원']
                     },
-                    'all-in-one-quarterly': {
+                    'disabled-license-bundle-quarterly': {
                         name: '올인원 3개월',
                         desc: '블로그 자동화 흐름을 안정적으로 운영',
                         amount: 120000,
@@ -3104,7 +3104,7 @@
                         monthly: '월 40,000원',
                         features: ['Better Life Naver 이용', 'LEWORD 전체 기능 이용', 'Leadernam Orbit 이용', '우선 고객 지원']
                     },
-                    'all-in-one-yearly': {
+                    'disabled-license-bundle-yearly': {
                         name: '올인원 1년',
                         desc: '가장 합리적인 전체 제품 기간권',
                         amount: 400000,
@@ -3115,7 +3115,7 @@
                         badgeText: '👑 BEST VALUE',
                         features: ['모든 자동화툴 기간 내 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원']
                     },
-                    'all-in-one-lifetime': {
+                    'disabled-license-bundle-lifetime': {
                         name: '올인원 영구제',
                         desc: '한 번 구매로 장기 운영하는 영구 이용권',
                         amount: 1650000,
