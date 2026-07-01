@@ -916,6 +916,22 @@
         .cms-skin-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:12px 0; }
         .cms-skin-option { min-height:88px; border:1px solid rgba(255,255,255,.12); border-radius:14px; background-size:cover; background-position:center; color:#fff; text-align:left; padding:12px; cursor:pointer; font-weight:900; display:flex; align-items:flex-end; box-shadow:inset 0 -70px 60px rgba(0,0,0,.52); }
         .cms-skin-option.active { outline:2px solid #ffd700; border-color:#ffd700; }
+        .cms-region-editor { display:grid; gap:14px; }
+        .cms-region-block { border:1px solid rgba(255,255,255,.10); border-radius:16px; background:rgba(255,255,255,.035); padding:14px; }
+        .cms-region-block.active { border-color:rgba(255,215,0,.62); box-shadow:0 0 0 1px rgba(255,215,0,.18), 0 18px 44px rgba(0,0,0,.22); }
+        .cms-region-block h5 { margin:0 0 6px; font-size:.95rem; color:#fff; }
+        .cms-region-block p { margin:0 0 12px; color:var(--text-secondary); font-size:.78rem; line-height:1.5; }
+        .cms-region-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+        .cms-region-grid .full { grid-column:1 / -1; }
+        .cms-proof-editor-list { display:grid; gap:10px; max-height:560px; overflow:auto; padding-right:4px; }
+        .cms-proof-edit-card { border:1px solid rgba(255,255,255,.10); border-radius:14px; background:rgba(0,0,0,.16); padding:12px; cursor:pointer; }
+        .cms-proof-edit-card.active { border-color:#ffd700; background:rgba(255,215,0,.08); }
+        .cms-proof-edit-head { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:10px; color:#ffd700; font-weight:900; font-size:.78rem; }
+        .cms-proof-edit-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+        .cms-proof-edit-actions button { border:1px solid rgba(201,168,76,.42); border-radius:10px; background:rgba(201,168,76,.09); color:#ffdf5d; padding:8px 10px; font-weight:900; cursor:pointer; }
+        .cms-preview-area { cursor:pointer; transition:outline-color .18s ease, box-shadow .18s ease, transform .18s ease; outline:2px solid transparent; outline-offset:-2px; }
+        .cms-preview-area:hover, .cms-preview-area.active { outline-color:#ffd700; box-shadow:0 0 0 3px rgba(255,215,0,.18); }
+        .cms-preview-card.cms-preview-area:hover { transform:translateY(-1px); }
         .trial-export-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-bottom:20px; }
         .trial-export-box { border:1px solid rgba(201,168,76,.24); border-radius:16px; background:rgba(255,255,255,.035); padding:16px; }
         .trial-export-box h3 { margin:0 0 8px; font-size:1rem; }
@@ -3632,6 +3648,8 @@
         // CMS_WORKBENCH_V1_START
         let cmsPreviewMode = 'home';
         let cmsEditorBindingsReady = false;
+        let cmsActiveHomeArea = 'hero';
+        let cmsRegionEditingUntil = 0;
         function cmsEscape(value) { return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
         function cmsSafeImage(value) { const raw = String(value || '').trim(); return /^(data:image\/|https?:\/\/|\/images\/|\.\/|\/)/i.test(raw) ? raw : ''; }
         function cmsStyleUrl(value) { return cmsSafeImage(value).replace(/['")\\]/g, ''); }
@@ -3653,12 +3671,238 @@
             Array.from(editor.children).filter(el => el.classList && (el.classList.contains('editor-subpanel') || el.classList.contains('editor-save-bar'))).forEach(el => editPane.appendChild(el));
             previewPane.addEventListener('click', event => {
                 const button = event.target.closest('[data-preview-mode]');
-                if (!button) return;
-                cmsPreviewMode = button.getAttribute('data-preview-mode') || 'home';
-                updateCmsPreviewToolbar();
-                refreshEditorPreview();
+                if (button) {
+                    cmsPreviewMode = button.getAttribute('data-preview-mode') || 'home';
+                    updateCmsPreviewToolbar();
+                    refreshEditorPreview();
+                    return;
+                }
+                const area = event.target.closest('[data-cms-preview-area]');
+                if (area) setCmsActiveHomeArea(area.getAttribute('data-cms-preview-area') || 'hero', { scroll:true });
             });
             updateCmsPreviewToolbar();
+        }
+        function installCmsHomeRegionEditor() {
+            const panel = document.getElementById('editor-sub-home');
+            if (!panel || document.getElementById('cms-home-region-editor')) return;
+            panel.insertAdjacentHTML('afterbegin', `
+                <div class="editor-card" id="cms-home-region-editor">
+                    <h4>홈 화면 영역별 바로 수정</h4>
+                    <p class="editor-help">우측 미리보기 순서대로 첫 화면과 성과 카드를 나눴습니다. 미리보기 영역을 클릭하면 해당 수정 카드로 이동합니다.</p>
+                    <div class="cms-region-editor">
+                        <section class="cms-region-block active" data-cms-editor-area="hero">
+                            <h5>첫 화면 배경/문구</h5>
+                            <p>바다 배경, 메인 제목, 설명, 신뢰 문구를 바로 수정합니다.</p>
+                            <div class="cms-region-grid">
+                                <div class="editor-field full">
+                                    <label>첫 화면 배경 이미지</label>
+                                    <input id="cms-hero-bg-image" type="text" data-cms-home-field="hero-bg" placeholder="/images/hero-beach-bg-fast.jpg">
+                                    <div class="cms-media-tools">
+                                        <div class="cms-thumb" data-cms-thumb-for="cms-hero-bg-image">배경</div>
+                                        <button type="button" data-cms-file-button="cms-hero-bg-image">배경 이미지 선택</button>
+                                        <input type="file" accept="image/*" hidden data-cms-file-input="cms-hero-bg-image">
+                                    </div>
+                                </div>
+                                <div class="editor-field full">
+                                    <label>메인 제목</label>
+                                    <textarea id="cms-hero-title" data-cms-home-field="hero-title"></textarea>
+                                </div>
+                                <div class="editor-field full">
+                                    <label>메인 설명</label>
+                                    <textarea id="cms-hero-desc" data-cms-home-field="hero-desc"></textarea>
+                                </div>
+                                <div class="editor-field">
+                                    <label>혜택/신뢰 문구</label>
+                                    <input id="cms-hero-benefit" type="text" data-cms-home-field="hero-benefit">
+                                </div>
+                                <div class="editor-field">
+                                    <label>공지사항</label>
+                                    <input id="cms-hero-notice" type="text" data-cms-home-field="hero-notice">
+                                </div>
+                            </div>
+                        </section>
+                        <section class="cms-region-block" data-cms-editor-area="proofs">
+                            <h5>성과 카드 영역</h5>
+                            <p>“조회수 19,896 인증” 같은 카드 제목, 설명, 지표, 이미지를 각각 바로 수정합니다.</p>
+                            <div class="cms-proof-editor-list" id="cms-proof-editor-list"></div>
+                            <div class="cms-proof-edit-actions">
+                                <button type="button" data-cms-add-proof="1">성과 카드 추가</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            `);
+            const root = document.getElementById('cms-home-region-editor');
+            root.addEventListener('input', event => {
+                const target = event.target;
+                if (!target.closest('[data-cms-home-field], [data-cms-proof-field]')) return;
+                syncCmsHomeRegionEditorToSource({ force:true });
+            });
+            root.addEventListener('click', event => {
+                const proofCard = event.target.closest('[data-cms-proof-card]');
+                if (proofCard) setCmsActiveHomeArea('proof-' + proofCard.getAttribute('data-cms-proof-index'));
+                const addButton = event.target.closest('[data-cms-add-proof]');
+                if (addButton) {
+                    const proofs = getCmsProofEditorValues();
+                    proofs.push({ src:'', title:'새 성과 카드', desc:'성과 설명을 입력하세요.', metric:'성과 지표', alt:'성과 이미지' });
+                    renderCmsProofEditorList(proofs);
+                    setCmsActiveHomeArea('proof-' + (proofs.length - 1), { scroll:true });
+                    syncCmsHomeRegionEditorToSource({ force:true });
+                    refreshEditorPreview();
+                    return;
+                }
+                const removeButton = event.target.closest('[data-cms-remove-proof]');
+                if (removeButton) {
+                    const index = Number(removeButton.getAttribute('data-cms-remove-proof'));
+                    const proofs = getCmsProofEditorValues().filter((_, i) => i !== index);
+                    renderCmsProofEditorList(proofs);
+                    setCmsActiveHomeArea('proof-' + Math.max(0, index - 1), { scroll:true });
+                    syncCmsHomeRegionEditorToSource({ force:true });
+                    refreshEditorPreview();
+                    return;
+                }
+                const fileButton = event.target.closest('[data-cms-file-button]');
+                if (fileButton) {
+                    const id = fileButton.getAttribute('data-cms-file-button');
+                    const input = root.querySelector('[data-cms-file-input="' + id + '"]');
+                    if (input) input.click();
+                }
+            });
+            root.addEventListener('change', event => {
+                const fileInput = event.target.closest('[data-cms-file-input]');
+                if (!fileInput) return;
+                const targetKey = fileInput.getAttribute('data-cms-file-input');
+                const file = fileInput.files && fileInput.files[0];
+                if (!file) return;
+                readFileAsDataUrl(file).then(url => {
+                    const field = targetKey && targetKey.startsWith('proof:')
+                        ? root.querySelector('[data-cms-proof-src="' + targetKey.split(':')[1] + '"]')
+                        : document.getElementById(targetKey);
+                    if (field) {
+                        field.value = url;
+                        syncCmsHomeRegionEditorToSource({ force:true });
+                        refreshCmsRegionThumbs();
+                        refreshEditorPreview();
+                    }
+                    fileInput.value = '';
+                });
+            });
+        }
+        function renderCmsHomeRegionEditor(data, options = {}) {
+            const root = document.getElementById('cms-home-region-editor');
+            if (!root) return;
+            if (!options.force && (root.contains(document.activeElement) || Date.now() < cmsRegionEditingUntil)) {
+                refreshCmsRegionThumbs();
+                setCmsActiveHomeArea(cmsActiveHomeArea, { scroll:false });
+                return;
+            }
+            const content = withEditorDefaults(data || {});
+            const hero = content.hero || {};
+            const theme = content.theme || {};
+            const bg = theme.productsBgImage || theme.pricingBgImage || '/images/hero-beach-bg-fast.jpg';
+            setValue('cms-hero-bg-image', bg);
+            setValue('cms-hero-title', hero.title);
+            setValue('cms-hero-desc', hero.desc);
+            setValue('cms-hero-benefit', hero.benefit);
+            setValue('cms-hero-notice', hero.notice);
+            renderCmsProofEditorList(Array.isArray(hero.proofs) ? hero.proofs : []);
+            refreshCmsRegionThumbs();
+            setCmsActiveHomeArea(cmsActiveHomeArea, { scroll:false });
+        }
+        function renderCmsProofEditorList(proofs) {
+            const list = document.getElementById('cms-proof-editor-list');
+            if (!list) return;
+            list.innerHTML = (proofs || []).map((proof, index) => `
+                <article class="cms-proof-edit-card" data-cms-proof-card="1" data-cms-proof-index="${index}">
+                    <div class="cms-proof-edit-head"><span>#${index + 1} 성과 카드</span><button type="button" data-cms-remove-proof="${index}">삭제</button></div>
+                    <div class="editor-field full">
+                        <label>이미지</label>
+                        <input type="text" data-cms-proof-field="src" data-cms-proof-src="${index}" value="${cmsEscape(proof.src || '')}">
+                        <div class="cms-media-tools">
+                            <div class="cms-thumb" data-cms-proof-thumb="${index}">이미지</div>
+                            <button type="button" data-cms-file-button="proof:${index}">이미지 선택</button>
+                            <input type="file" accept="image/*" hidden data-cms-file-input="proof:${index}">
+                        </div>
+                    </div>
+                    <div class="cms-region-grid">
+                        <div class="editor-field">
+                            <label>카드 제목</label>
+                            <input type="text" data-cms-proof-field="title" value="${cmsEscape(proof.title || '')}">
+                        </div>
+                        <div class="editor-field">
+                            <label>지표</label>
+                            <input type="text" data-cms-proof-field="metric" value="${cmsEscape(proof.metric || '')}">
+                        </div>
+                        <div class="editor-field full">
+                            <label>카드 설명</label>
+                            <textarea data-cms-proof-field="desc">${cmsEscape(proof.desc || '')}</textarea>
+                        </div>
+                        <div class="editor-field full">
+                            <label>이미지 설명</label>
+                            <input type="text" data-cms-proof-field="alt" value="${cmsEscape(proof.alt || proof.title || '')}">
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+        function getCmsProofEditorValues() {
+            return Array.from(document.querySelectorAll('#cms-proof-editor-list [data-cms-proof-card]')).map(card => compactObject({
+                src: (card.querySelector('[data-cms-proof-field="src"]')?.value || '').trim(),
+                title: (card.querySelector('[data-cms-proof-field="title"]')?.value || '').trim(),
+                desc: (card.querySelector('[data-cms-proof-field="desc"]')?.value || '').trim(),
+                metric: (card.querySelector('[data-cms-proof-field="metric"]')?.value || '').trim(),
+                alt: (card.querySelector('[data-cms-proof-field="alt"]')?.value || '').trim()
+            })).filter(proof => proof.src || proof.title || proof.desc || proof.metric);
+        }
+        function syncCmsHomeRegionEditorToSource(options = {}) {
+            const root = document.getElementById('cms-home-region-editor');
+            if (!root) return;
+            if (!options.force && !root.contains(document.activeElement)) return;
+            if (options.force) cmsRegionEditingUntil = Date.now() + 1200;
+            const bg = getValue('cms-hero-bg-image');
+            setValue('edit-hero-title', getValue('cms-hero-title'));
+            setValue('edit-hero-desc', getValue('cms-hero-desc'));
+            setValue('edit-hero-benefit', getValue('cms-hero-benefit'));
+            setValue('edit-notice', getValue('cms-hero-notice'));
+            setValue('theme-products-bg-image', bg);
+            setValue('theme-pricing-bg-image', bg);
+            setValue('edit-hero-proofs', proofsToText(getCmsProofEditorValues()));
+            refreshCmsRegionThumbs();
+        }
+        function refreshCmsRegionThumbs() {
+            const bgField = document.getElementById('cms-hero-bg-image');
+            const bgThumb = document.querySelector('[data-cms-thumb-for="cms-hero-bg-image"]');
+            if (bgThumb) {
+                const src = cmsSafeImage(bgField?.value);
+                bgThumb.innerHTML = src ? '<img src="' + cmsEscape(src) + '" alt="배경 미리보기">' : '배경';
+            }
+            document.querySelectorAll('[data-cms-proof-card]').forEach(card => {
+                const index = card.getAttribute('data-cms-proof-index');
+                const field = card.querySelector('[data-cms-proof-field="src"]');
+                const thumb = card.querySelector('[data-cms-proof-thumb="' + index + '"]');
+                const src = cmsSafeImage(field?.value);
+                if (thumb) thumb.innerHTML = src ? '<img src="' + cmsEscape(src) + '" alt="성과 이미지">' : '이미지';
+            });
+        }
+        function setCmsActiveHomeArea(area, options = {}) {
+            cmsActiveHomeArea = area || 'hero';
+            const isProof = cmsActiveHomeArea.startsWith('proof-');
+            document.querySelectorAll('[data-cms-editor-area]').forEach(node => {
+                const key = node.getAttribute('data-cms-editor-area');
+                node.classList.toggle('active', key === cmsActiveHomeArea || (isProof && key === 'proofs'));
+            });
+            document.querySelectorAll('[data-cms-proof-card]').forEach(node => {
+                node.classList.toggle('active', cmsActiveHomeArea === 'proof-' + node.getAttribute('data-cms-proof-index'));
+            });
+            document.querySelectorAll('[data-cms-preview-area]').forEach(node => {
+                node.classList.toggle('active', node.getAttribute('data-cms-preview-area') === cmsActiveHomeArea);
+            });
+            if (options.scroll) {
+                const target = isProof
+                    ? document.querySelector('[data-cms-proof-index="' + cmsActiveHomeArea.replace('proof-', '') + '"]')
+                    : document.querySelector('[data-cms-editor-area="' + cmsActiveHomeArea + '"]');
+                if (target) target.scrollIntoView({ behavior:'smooth', block:'center' });
+            }
         }
         function updateCmsPreviewToolbar() {
             document.querySelectorAll('#cms-preview-tabs [data-preview-mode]').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-preview-mode') === cmsPreviewMode));
@@ -3840,7 +4084,8 @@
             const hero = data.hero || {};
             const proofs = Array.isArray(hero.proofs) ? hero.proofs.slice(0, 4) : [];
             const bg = cmsStyleUrl(theme.productsBgImage || theme.pricingBgImage || '/images/hero-beach-bg-fast.jpg');
-            target.innerHTML = '<div class="cms-preview-hero" style="background-image:url(\'' + bg + '\')"><span class="cms-preview-kicker">PREMIUM AUTOMATION</span><h3 class="cms-preview-title">' + cmsEscape(hero.title || '').replace(/\n/g, '<br>') + '</h3><p class="cms-preview-desc">' + cmsEscape(hero.desc || '') + '</p>' + (hero.benefit ? '<div class="cms-preview-benefit">' + cmsEscape(hero.benefit) + '</div>' : '') + '</div><div class="cms-preview-section"><div class="cms-preview-grid">' + proofs.map(proof => '<article class="cms-preview-card">' + (cmsSafeImage(proof.src) ? '<img src="' + cmsEscape(proof.src) + '" alt="">' : '') + '<h4>' + cmsEscape(proof.title || proof.alt || '성과 이미지') + '</h4><p>' + cmsEscape(proof.desc || proof.metric || '') + '</p></article>').join('') + '</div></div>';
+            target.innerHTML = '<div class="cms-preview-hero cms-preview-area" data-cms-preview-area="hero" style="background-image:url(\'' + bg + '\')"><span class="cms-preview-kicker">PREMIUM AUTOMATION</span><h3 class="cms-preview-title">' + cmsEscape(hero.title || '').replace(/\n/g, '<br>') + '</h3><p class="cms-preview-desc">' + cmsEscape(hero.desc || '') + '</p>' + (hero.benefit ? '<div class="cms-preview-benefit">' + cmsEscape(hero.benefit) + '</div>' : '') + '</div><div class="cms-preview-section"><div class="cms-preview-grid">' + proofs.map((proof, index) => '<article class="cms-preview-card cms-preview-area" data-cms-preview-area="proof-' + index + '">' + (cmsSafeImage(proof.src) ? '<img src="' + cmsEscape(proof.src) + '" alt="">' : '') + '<h4>' + cmsEscape(proof.title || proof.alt || '성과 이미지') + '</h4><p>' + cmsEscape(proof.desc || proof.metric || '') + '</p></article>').join('') + '</div></div>';
+            setCmsActiveHomeArea(cmsActiveHomeArea, { scroll:false });
         }
         function normalizeTrialPhone(value) {
             let digits = String(value || '').replace(/\D/g, '');
@@ -3902,6 +4147,7 @@
             renderEditorDynamicForms();
             installCmsWorkbench();
             installCmsSkinControls();
+            installCmsHomeRegionEditor();
             installCmsImagePickers();
             installEditorLiveBindings();
             const data = withEditorDefaults(content || {});
@@ -4019,6 +4265,7 @@
             productsJsonTouched = false;
             enhanceEditorClearButtons(document);
             installCmsImagePickers();
+            renderCmsHomeRegionEditor(data, { force:true });
             refreshEditorPreview(data);
         }
 
@@ -4182,6 +4429,7 @@
         }
 
         function collectEditorContent() {
+            syncCmsHomeRegionEditorToSource();
             const data = compactObject({
                 hero: {
                     title: getValue('edit-hero-title'),
@@ -4239,6 +4487,7 @@
             try {
                 const content = data || collectEditorContent();
                 if (preview) preview.value = JSON.stringify(content, null, 2);
+                renderCmsHomeRegionEditor(content);
                 renderCmsPreview(content);
             } catch {
                 if (preview) preview.value = '저장 데이터 미리보기를 만들 수 없습니다.';

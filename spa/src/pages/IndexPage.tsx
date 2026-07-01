@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
+import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 type HeroProof = {
     src: string;
@@ -1033,6 +1034,12 @@ function formatLiveUpdatedAt(value?: string): string {
     return new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(date);
 }
 
+function cssBackgroundUrl(value?: string): string {
+    const raw = String(value || '').trim();
+    if (!/^(data:image\/|https?:\/\/|\/images\/|\/)/i.test(raw)) return '';
+    return raw.replace(/["\\\r\n]/g, '');
+}
+
 const DEFAULT_HERO_PROOFS: HeroProof[] = [
     {
         src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg',
@@ -1123,6 +1130,7 @@ function IndexPage() {
     const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
+    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
 
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
@@ -1160,6 +1168,16 @@ function IndexPage() {
         };
     }, []);
 
+    useEffect(() => {
+        let alive = true;
+        fetchSiteContent().then((content) => {
+            if (alive) setSiteContent(content);
+        });
+        return () => {
+            alive = false;
+        };
+    }, []);
+
     const liveUpdatedAt = formatLiveUpdatedAt(liveState.updatedAt);
     const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
     const activeSourceLane = liveState.lanes.find((lane) => lane.id === activeSourceLaneId)
@@ -1171,8 +1189,32 @@ function IndexPage() {
         setActiveSourceLaneId(laneId);
         setActiveSourceKeyword('');
     };
-    const heroProofs = DEFAULT_HERO_PROOFS;
+    const configuredProofs = (siteContent?.hero?.proofs || [])
+        .filter((proof) => Boolean(proof?.src))
+        .map((proof) => ({
+            src: String(proof.src || ''),
+            alt: proof.alt,
+            title: proof.title,
+            desc: proof.desc,
+            metric: proof.metric,
+        }));
+    const heroProofs = configuredProofs.length > 0 ? configuredProofs : DEFAULT_HERO_PROOFS;
     const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
+    const homeBgImage = siteContent?.theme?.productsBgImage || siteContent?.theme?.pricingBgImage || '';
+
+    useEffect(() => {
+        const bg = cssBackgroundUrl(homeBgImage);
+        if (!bg) return;
+        const previousBackground = document.body.style.background;
+        const previousAttachment = document.body.style.backgroundAttachment;
+        document.body.style.background =
+            `linear-gradient(180deg, rgba(10,10,15,0.10) 0%, rgba(10,10,15,0.25) 50%, rgba(10,10,15,0.45) 100%), url("${bg}") center top / cover no-repeat fixed, var(--bg-dark)`;
+        document.body.style.backgroundAttachment = 'fixed';
+        return () => {
+            document.body.style.background = previousBackground;
+            document.body.style.backgroundAttachment = previousAttachment;
+        };
+    }, [homeBgImage]);
 
     useEffect(() => {
         if (heroProofs.length <= 1) return;
