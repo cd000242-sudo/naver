@@ -116,6 +116,7 @@ import {
 } from './automation/publishedPostPageConfirmation.js';
 import {
   getConfirmPublishSelectors,
+  getImmediatePublishOptionSelectors,
   getPublishButtonSelectors,
   getPublishModalIndicatorSelectors,
 } from './automation/publishModalSelectorPolicy.js';
@@ -5519,14 +5520,53 @@ export class NaverBlogAutomation {
           // 최종 발행 버튼(seOnePublishBtn/confirm_btn)은 옵션 단계에서 절대 누르지 않는다.
           // 일부 네이버 UI에서는 별도 옵션 없이 곧장 최종 확인 버튼만 보이므로,
           // 옵션이 없으면 실패하지 않고 아래 최종 발행 버튼 탐색으로 직행한다.
-          const publishOption = await frame.waitForSelector(
-            '[data-value="publish"], [role="radio"][data-value="publish"], input[value="publish"]',
-            { visible: true, timeout: 2500 }
-          ).catch(() => null);
+          const immediatePublishOptionSelectors = getImmediatePublishOptionSelectors();
+          let publishOption: ElementHandle<Element> | null = null;
+          let publishOptionSelector = '';
+          let publishOptionSurface: 'frame' | 'page' = 'frame';
+
+          for (const selector of immediatePublishOptionSelectors) {
+            publishOption = await frame.waitForSelector(selector, { visible: true, timeout: 800 }).catch(() => null);
+            if (publishOption) {
+              publishOptionSelector = selector;
+              publishOptionSurface = 'frame';
+              break;
+            }
+
+            publishOption = await this.ensurePage().waitForSelector(selector, { visible: true, timeout: 500 }).catch(() => null);
+            if (publishOption) {
+              publishOptionSelector = selector;
+              publishOptionSurface = 'page';
+              break;
+            }
+          }
 
           if (publishOption) {
-            await publishOption.click();
-            await this.delay(1000); // ✅ 대기 시간 증가
+            const optionState = await publishOption.evaluate((el) => {
+              const input =
+                el instanceof HTMLInputElement
+                  ? el
+                  : el.querySelector('input[type="radio"], input[type="checkbox"]') as HTMLInputElement | null;
+              const host = el as HTMLElement;
+              const disabled =
+                host.hasAttribute('disabled') ||
+                host.getAttribute('aria-disabled') === 'true' ||
+                Boolean(input?.disabled);
+              const checked = Boolean(input?.checked) || host.getAttribute('aria-checked') === 'true';
+              return { checked, disabled };
+            }).catch(() => ({ checked: false, disabled: false }));
+
+            if (optionState.checked) {
+              this.log(`   ✅ 즉시발행 옵션 이미 선택됨: ${publishOptionSelector} (${publishOptionSurface})`);
+            } else if (optionState.disabled) {
+              this.log(`   ⚠️ 즉시발행 옵션이 비활성화됨 — 최종 발행 버튼 탐색으로 계속 진행: ${publishOptionSelector} (${publishOptionSurface})`);
+            } else {
+              await publishOption.click().catch(async () => {
+                await publishOption?.evaluate((el) => (el as HTMLElement).click()).catch(() => { });
+              });
+              this.log(`   ✅ 즉시발행 옵션 선택: ${publishOptionSelector} (${publishOptionSurface})`);
+              await this.delay(1000); // ✅ 대기 시간 증가
+            }
           } else {
             this.log('   ℹ️ 별도 발행 옵션 미발견 — 즉시발행 확정 버튼 탐색으로 진행합니다.');
           }

@@ -27,6 +27,18 @@ export function getPublishModalIndicatorSelectors(): string[] {
   ]);
 }
 
+export function getImmediatePublishOptionSelectors(): string[] {
+  return unique([
+    PUBLISH_SELECTORS.immediateRadio.primary,
+    ...getAllSelectors(PUBLISH_SELECTORS.immediateRadio),
+    'label[for="radio_time1"]',
+    '[data-value="publish"]:not(button)',
+    '[role="radio"][data-value="publish"]',
+    'input[value="publish"]',
+    'input[type="radio"][value="publish"]',
+  ]);
+}
+
 export function getConfirmPublishSelectors(extraSelectors: readonly string[] = []): string[] {
   return unique([
     'button[data-testid="seOnePublishBtn"]',

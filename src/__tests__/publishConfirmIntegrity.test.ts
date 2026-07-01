@@ -56,14 +56,16 @@ describe('publish confirmation integrity (R11)', () => {
   });
 
   it('A-3: fallback publish option step never consumes the final publish button', () => {
-    const optionStart = code.indexOf('const publishOption = await frame.waitForSelector(');
+    const optionStart = code.indexOf('const immediatePublishOptionSelectors = getImmediatePublishOptionSelectors();');
     expect(optionStart).toBeGreaterThan(-1);
     const optionBlock = code.slice(optionStart, code.indexOf('// 최종 발행 확인 버튼 찾기', optionStart));
 
-    expect(optionBlock).toContain('[data-value="publish"]');
+    expect(optionBlock).toContain('getImmediatePublishOptionSelectors()');
     expect(optionBlock).toContain('별도 발행 옵션 미발견');
+    expect(optionBlock).toContain('즉시발행 옵션 이미 선택됨');
     expect(optionBlock).not.toContain('seOnePublishBtn');
     expect(optionBlock).not.toContain('confirm_btn');
+    expect(optionBlock).not.toContain('tpb*i.publish');
   });
 
   it('A-3: helper module does not keep a second stale immediate-publish implementation', () => {
