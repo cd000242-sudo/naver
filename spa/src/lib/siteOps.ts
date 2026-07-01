@@ -161,11 +161,18 @@ export function recordPageView(path: string) {
     try {
         runWhenIdle(() => {
             try {
-                const isInternal = localStorage.getItem('lp_analytics_exclude') === '1' || sessionStorage.getItem('lp_admin_logged_in') === '1';
+                const isAdminSession = sessionStorage.getItem('lp_admin_logged_in') === '1' || sessionStorage.getItem('admin_auth') === '1';
+                const isInternal = localStorage.getItem('lp_analytics_exclude') === '1' || isAdminSession;
+                const normalizedPath = path || location.pathname;
+                const dedupeKey = `lp_pageview_dedupe:${normalizedPath}`;
+                const now = Date.now();
+                const lastHitAt = Number(sessionStorage.getItem(dedupeKey) || 0);
+                if (now - lastHitAt < 30 * 60 * 1000) return;
+                sessionStorage.setItem(dedupeKey, String(now));
                 const payload = {
                     action: 'analytics-hit',
                     type: 'pageview',
-                    path,
+                    path: normalizedPath,
                     title: document.title,
                     referrer: document.referrer || '',
                     visitorId: getOrCreateStorageId(localStorage, 'lp_visitor_id', 'v_'),

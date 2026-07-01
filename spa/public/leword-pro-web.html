@@ -173,6 +173,13 @@
     .main { display: grid; gap: 16px; min-width: 0; }
     .main-view { display: none; }
     .main-view.active { display: block; }
+    a[data-view-target="commerce"],
+    #commerce,
+    #adminAiWorkerSettings,
+    #siteContentSettings,
+    #adminSiteContentSettings {
+      display: none !important;
+    }
     [hidden] { display: none !important; }
     .hero {
       border: 1px solid var(--line);
@@ -278,23 +285,31 @@
       border-color: rgba(248,194,27,.32);
       background: linear-gradient(135deg, rgba(245,158,11,.10), var(--surface-2));
     }
-    .golden-list { display: grid; gap: 8px; }
+    /* 프로토타입 카드 그리드 (bright-v3 board card) */
+    .golden-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
     .golden-row {
-      display: grid;
-      grid-template-columns: 58px minmax(0, 1fr) 64px minmax(240px, auto);
-      align-items: center;
-      gap: 12px;
-      border: 1px solid var(--line-soft);
-      border-radius: 8px;
-      background:
-        linear-gradient(90deg, rgba(245,197,66,.08), transparent 26%),
-        linear-gradient(180deg, #FFFFFF, var(--surface-2));
-      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--panel);
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
       transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
     }
-    .golden-row:hover {
-      transform: translateY(-1px);
-    }
+    .golden-row:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--green); }
+    .gk-top { display: flex; align-items: center; gap: 7px; }
+    .gk-cat { font-size: 11px; font-weight: 700; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); padding: 3px 9px; border-radius: 7px; }
+    .gk-rank { margin-left: auto; font-size: 12px; font-weight: 1000; color: var(--green); }
+    .gk-kw { font-size: 18px; font-weight: 800; letter-spacing: -.3px; color: var(--text); overflow-wrap: anywhere; }
+    .gk-sub { font-size: 12px; color: var(--muted2); margin-top: -4px; line-height: 1.4; }
+    .gk-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .gk-m { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 8px; text-align: center; }
+    .gk-m.gk-hot { background: rgba(53,211,153,.10); border-color: rgba(53,211,153,.28); }
+    .gk-ml { font-size: 10.5px; color: var(--muted2); }
+    .gk-mv { font-size: 15px; font-weight: 800; margin-top: 3px; color: var(--text); }
+    .gk-m.gk-hot .gk-mv { color: var(--green); }
     .rank { color: var(--gold); font-weight: 1000; }
     .golden-main strong { display: block; font-size: 15px; overflow-wrap: anywhere; }
     .golden-main span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.45; }
@@ -4011,17 +4026,28 @@
         return;
       }
       qs('goldenBoardList').innerHTML = rows.map(function(item) {
+        const grade = escapeHtml(item.grade || '');
         const searchVolume = exact ? fmt(item.totalSearchVolume) : escapeHtml(item.publicSearchVolumeLabel || '-');
         const documents = exact ? fmt(item.documentCount) : escapeHtml(item.publicDocumentCountLabel || '-');
-        const reason = exact
-          ? '황금비율 ' + fmt(item.goldenRatio) + ' · ' + escapeHtml(item.intent || item.source || '실측')
+        const ratio = exact ? fmt(item.goldenRatio) : '🔒';
+        const sub = exact
+          ? escapeHtml(item.intent || item.source || '실측 검색량과 문서수가 있습니다.')
           : escapeHtml(item.publicReason || '실측 후보');
+        const cat = escapeHtml(item.category || item.categoryName || '');
         return '<article class="golden-row">'
-          + '<div class="rank">#' + escapeHtml(item.rank || '-') + '</div>'
-          + '<div class="golden-main"><strong>' + escapeHtml(item.keyword || '-') + '</strong><span>'
-          + '검색량 ' + searchVolume + ' · 문서수 ' + documents + ' · ' + reason
-          + '</span>' + publishDecisionInline(item) + '</div>'
-          + '<div class="grade ' + escapeHtml(item.grade || '') + '">' + escapeHtml(item.grade || '-') + '</div>'
+          + '<div class="gk-top">'
+          +   '<span class="grade ' + grade + '">' + (grade || '-') + '</span>'
+          +   (cat ? '<span class="gk-cat">' + cat + '</span>' : '')
+          +   '<span class="gk-rank">#' + escapeHtml(item.rank || '-') + '</span>'
+          + '</div>'
+          + '<div class="gk-kw">' + escapeHtml(item.keyword || '-') + '</div>'
+          + '<div class="gk-sub">' + sub + '</div>'
+          + '<div class="gk-metrics">'
+          +   '<div class="gk-m"><div class="gk-ml">검색량</div><div class="gk-mv">' + searchVolume + '</div></div>'
+          +   '<div class="gk-m gk-hot"><div class="gk-ml">문서수</div><div class="gk-mv">' + documents + '</div></div>'
+          +   '<div class="gk-m gk-hot"><div class="gk-ml">비율</div><div class="gk-mv">' + ratio + '</div></div>'
+          + '</div>'
+          + publishDecisionInline(item)
           + '<div class="golden-actions">' + keywordActionHtml(item.keyword || '') + '</div>'
           + '</article>';
       }).join('');

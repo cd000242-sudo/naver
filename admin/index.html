@@ -919,59 +919,50 @@
                 </div>
             </div>
             <nav class="sidebar-nav">
-                <div class="nav-item active" data-tab="overview" onclick="switchTab('overview')">
-                    <span class="nav-icon">📊</span>
-                    <span>대시보드</span>
-                </div>
-                <div class="nav-item" data-tab="codes" onclick="switchTab('codes')">
-                    <span class="nav-icon">🔑</span>
-                    <span>코드 관리</span>
-                </div>
-                <div class="nav-item" data-tab="all-in-one" onclick="switchTab('all-in-one')">
-                    <span class="nav-icon">🧩</span>
-                    <span>올인원 발급</span>
-                </div>
-                <div class="nav-item" data-tab="orders" onclick="switchTab('orders')">
-                    <span class="nav-icon">💳</span>
-                    <span>주문 내역</span>
-                </div>
-                <div class="nav-item" data-tab="analytics" onclick="switchTab('analytics')">
-                    <span class="nav-icon">📈</span>
-                    <span>매출/방문 분석</span>
+                <div class="nav-item active" data-tab="notices" onclick="switchTab('notices')">
+                    <span class="nav-icon">📢</span>
+                    <span>공지사항</span>
                 </div>
                 <div class="nav-item" data-tab="editor" onclick="switchTab('editor')">
                     <span class="nav-icon">✏️</span>
                     <span>사이트 편집</span>
                 </div>
-                <div class="nav-item" data-tab="bank" onclick="switchTab('bank')">
-                    <span class="nav-icon">💰</span>
-                    <span>계좌이체</span>
+                <div style="padding:0 14px 10px 48px;display:grid;gap:6px;color:var(--text-secondary);font-size:0.78rem;">
+                    <button type="button" onclick="switchTab('editor'); switchEditorSubtab('home')" style="all:unset;cursor:pointer;">일반 편집</button>
+                    <button type="button" onclick="switchTab('editor'); switchEditorSubtab('site-content')" style="all:unset;cursor:pointer;">사이트 콘텐츠 관리</button>
+                    <button type="button" onclick="switchTab('editor'); switchEditorSubtab('admin-ai')" style="all:unset;cursor:pointer;">관리자 AI 작업자 설정</button>
                 </div>
                 <div class="nav-item" data-tab="trial" onclick="switchTab('trial')">
-                    <span class="nav-icon">🎁</span>
-                    <span>체험 관리</span>
+                    <span class="nav-icon">🧪</span>
+                    <span>체험관리</span>
                 </div>
-                <!-- Phase 6-A scaffold: GAS actions wired in 6-B~6-E -->
+                <div style="padding:0 14px 10px 48px;display:grid;gap:6px;color:var(--text-secondary);font-size:0.78rem;">
+                    <button type="button" onclick="switchTab('trial')" style="all:unset;cursor:pointer;">체험자 번호 모음</button>
+                    <button type="button" onclick="switchTab('trial')" style="all:unset;cursor:pointer;">체험자 이메일 모음</button>
+                </div>
+                <div class="nav-item" data-tab="analytics" onclick="switchTab('analytics')">
+                    <span class="nav-icon">📊</span>
+                    <span>매출/방문 분석</span>
+                </div>
+                <div class="nav-item" data-tab="orders" onclick="switchTab('orders')">
+                    <span class="nav-icon">🧾</span>
+                    <span>주문내역</span>
+                </div>
+                <div class="nav-item" data-tab="bank" onclick="switchTab('bank')">
+                    <span class="nav-icon">🏦</span>
+                    <span>계좌이체 주문관리</span>
+                </div>
                 <div class="nav-item" data-tab="reviews" onclick="switchTab('reviews')">
-                    <span class="nav-icon">📝</span>
-                    <span>후기 관리</span>
-                </div>
-                <div class="nav-item" data-tab="notices" onclick="switchTab('notices')">
-                    <span class="nav-icon">📢</span>
-                    <span>공지사항</span>
+                    <span class="nav-icon">💬</span>
+                    <span>후기관리</span>
                 </div>
                 <div class="nav-item" data-tab="income" onclick="switchTab('income')">
                     <span class="nav-icon">💰</span>
-                    <span>수익 인증</span>
+                    <span>수익인증 관리</span>
                 </div>
                 <div class="nav-item" data-tab="tips" onclick="switchTab('tips')">
                     <span class="nav-icon">💡</span>
-                    <span>활용 팁</span>
-                </div>
-                <!-- CRO-3 scaffold: 리드 관리 -->
-                <div class="nav-item" data-tab="leads" onclick="switchTab('leads')">
-                    <span class="nav-icon">📧</span>
-                    <span>리드 관리</span>
+                    <span>활용 팁 관리</span>
                 </div>
             </nav>
             <div class="sidebar-info">
@@ -990,166 +981,6 @@
 
         <!-- Main Content -->
         <div class="main-content">
-
-            <!-- TAB: Overview -->
-            <div class="tab-panel active" id="tab-overview">
-                <div class="page-header">
-                    <h1>대시보드</h1>
-                    <p>오늘의 트래픽과 주문 현황을 한눈에 확인하세요.</p>
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-card card-gold">
-                        <div class="stat-top">
-                            <div class="stat-label">오늘 방문자</div>
-                            <div class="stat-icon icon-gold">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                            </div>
-                        </div>
-                        <div class="stat-value gold" id="stat-visitors">—</div>
-                        <div class="stat-change" id="stat-visitors-change"></div>
-                    </div>
-                    <div class="stat-card card-green">
-                        <div class="stat-top">
-                            <div class="stat-label">오늘 주문</div>
-                            <div class="stat-icon icon-green">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
-                            </div>
-                        </div>
-                        <div class="stat-value green" id="stat-orders">—</div>
-                        <div class="stat-change" id="stat-orders-change"></div>
-                    </div>
-                    <div class="stat-card card-blue">
-                        <div class="stat-top">
-                            <div class="stat-label">총 라이선스</div>
-                            <div class="stat-icon icon-blue">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-                            </div>
-                        </div>
-                        <div class="stat-value blue" id="stat-total">—</div>
-                        <div class="stat-change neutral" id="stat-total-change"></div>
-                    </div>
-                    <div class="stat-card card-purple">
-                        <div class="stat-top">
-                            <div class="stat-label">활성 라이선스</div>
-                            <div class="stat-icon icon-purple">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                            </div>
-                        </div>
-                        <div class="stat-value purple" id="stat-active">—</div>
-                        <div class="stat-change neutral" id="stat-active-change"></div>
-                    </div>
-                </div>
-
-                <!-- Recent Orders -->
-                <div class="table-card">
-                    <div class="table-header">
-                        <h3>최근 활성화된 라이선스</h3>
-                        <button class="btn" onclick="loadDashboardData()">🔄 새로고침</button>
-                    </div>
-                    <div id="recent-activations">
-                        <div class="loading-spinner"><div class="spinner-ring"></div> 데이터 로딩 중...</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB: Codes -->
-            <div class="tab-panel" id="tab-codes">
-                <div class="page-header">
-                    <h1>코드 관리</h1>
-                    <p>라이선스 코드를 발급, 조회, 무효화합니다.</p>
-                </div>
-                <div class="table-card">
-                    <div class="table-header">
-                        <h3>전체 코드 목록</h3>
-                        <div class="table-actions">
-                            <input class="search-input" id="code-search" placeholder="🔍 코드 검색..." oninput="filterCodes()">
-                            <button class="btn btn-gold" onclick="openIssueModal()">➕ 코드 발급</button>
-                            <button class="btn" onclick="loadCodes()">🔄 새로고침</button>
-                        </div>
-                    </div>
-                    <div id="codes-table-body">
-                        <div class="loading-spinner"><div class="spinner-ring"></div> 코드 목록 로딩 중...</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB: All-in-one Code Issue -->
-            <div class="tab-panel" id="tab-all-in-one">
-                <div class="page-header">
-                    <h1>올인원 라이선스 발급</h1>
-                    <p>네이버 자동화툴, Leaders Orbit, LEWORD를 함께 여는 ALL 코드를 발급합니다.</p>
-                </div>
-                <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
-                    <div class="stat-card card-green">
-                        <div class="stat-top">
-                            <div class="stat-label">Better Life Naver</div>
-                            <div class="stat-icon icon-green">N</div>
-                        </div>
-                        <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;">네이버 자동화툴 이용 가능</div>
-                    </div>
-                    <div class="stat-card card-blue">
-                        <div class="stat-top">
-                            <div class="stat-label">Leaders Orbit</div>
-                            <div class="stat-icon icon-blue">O</div>
-                        </div>
-                        <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;">블로그스팟·워드프레스 자동화 이용 가능</div>
-                    </div>
-                    <div class="stat-card card-purple">
-                        <div class="stat-top">
-                            <div class="stat-label">LEWORD</div>
-                            <div class="stat-icon icon-purple">L</div>
-                        </div>
-                        <div style="font-size:0.82rem;color:var(--text-secondary);line-height:1.7;">키워드 마스터 이용 가능</div>
-                    </div>
-                </div>
-                <div class="table-card">
-                    <div class="table-header">
-                        <h3>ALL 코드 즉시 발급</h3>
-                        <div class="table-actions">
-                            <button class="btn" onclick="switchTab('codes')">코드 목록 보기</button>
-                        </div>
-                    </div>
-                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;">
-                        <div class="editor-card">
-                            <h4>기간 선택</h4>
-                            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;">
-                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="CUSTOM1" checked> 1일</label>
-                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="PAID30"> 30일</label>
-                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="CUSTOM90"> 90일</label>
-                                <label style="display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--border);border-radius:10px;background:rgba(255,255,255,0.04);cursor:pointer;"><input type="radio" name="allinone-duration" value="CUSTOM365"> 365일</label>
-                            </div>
-                        </div>
-                        <div class="editor-card">
-                            <h4>발급 옵션</h4>
-                            <div style="display:grid;gap:12px;">
-                                <label style="font-size:0.78rem;color:var(--text-secondary);font-weight:700;">직접 일수</label>
-                                <input id="allinone-days" type="number" min="1" max="3650" value="1" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
-                                <label style="display:flex;align-items:center;gap:8px;color:var(--text-secondary);font-size:0.86rem;"><input type="checkbox" id="allinone-unlimited"> 무제한 코드로 발급</label>
-                            </div>
-                        </div>
-                        <div class="editor-card">
-                            <h4>수량 및 프리픽스</h4>
-                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                                <div>
-                                    <label style="display:block;font-size:0.78rem;color:var(--text-secondary);font-weight:700;margin-bottom:8px;">발급 수량</label>
-                                    <input id="allinone-count" type="number" min="1" max="500" value="10" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
-                                </div>
-                                <div>
-                                    <label style="display:block;font-size:0.78rem;color:var(--text-secondary);font-weight:700;margin-bottom:8px;">프리픽스</label>
-                                    <input id="allinone-prefix" type="text" value="ALL" placeholder="ALL" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="margin-top:18px;padding:14px 16px;border:1px solid rgba(201,168,76,0.22);background:rgba(201,168,76,0.08);border-radius:12px;color:var(--text-secondary);font-size:0.86rem;line-height:1.7;">
-                        올인원 구매자는 이 탭에서 발급한 <strong style="color:var(--gold);">ALL 플랫폼 코드</strong>를 받아야 합니다. 개별 제품 영구제 코드는 별도 문의 건에서만 발급하세요.
-                    </div>
-                    <div class="editor-save-bar" style="margin-top:18px;">
-                        <button class="btn" onclick="resetAllInOneForm()">↩️ 초기화</button>
-                        <button class="btn btn-gold" onclick="issueAllInOneCode(this)">🧩 올인원 코드 발급</button>
-                    </div>
-                </div>
-            </div>
 
             <!-- TAB: Orders -->
             <div class="tab-panel" id="tab-orders">
@@ -1181,26 +1012,31 @@
                     <button class="btn" onclick="setInternalAnalytics(false)">내 방문 제외 끄기</button>
                     <button class="btn" onclick="loadAnalyticsDashboard(currentAnalyticsPeriod)" style="margin-left:auto;">🔄 새로고침</button>
                 </div>
-                <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
-                    <div class="stat-card card-gold">
-                        <div class="stat-top"><div class="stat-label">매출</div><div class="stat-icon icon-gold">₩</div></div>
-                        <div class="stat-value gold" id="analytics-revenue">—</div>
-                        <div class="stat-change neutral" id="analytics-revenue-meta">기간 합계</div>
+                <div class="stats-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 24px;">
+                    <div class="stat-card card-blue">
+                        <div class="stat-top"><div class="stat-label">오늘 방문자</div><div class="stat-icon icon-blue">👥</div></div>
+                        <div class="stat-value blue" id="analytics-visitors">-</div>
+                        <div class="stat-change neutral" id="analytics-visitors-meta">내 방문 제외</div>
                     </div>
                     <div class="stat-card card-green">
-                        <div class="stat-top"><div class="stat-label">주문</div><div class="stat-icon icon-green">#</div></div>
-                        <div class="stat-value green" id="analytics-orders">—</div>
-                        <div class="stat-change neutral" id="analytics-orders-meta">결제/계좌이체 포함</div>
+                        <div class="stat-top"><div class="stat-label">오늘 주문</div><div class="stat-icon icon-green">#</div></div>
+                        <div class="stat-value green" id="analytics-orders">-</div>
+                        <div class="stat-change neutral" id="analytics-orders-meta">결제 + 계좌이체</div>
                     </div>
-                    <div class="stat-card card-blue">
-                        <div class="stat-top"><div class="stat-label">순 방문자</div><div class="stat-icon icon-blue">👤</div></div>
-                        <div class="stat-value blue" id="analytics-visitors">—</div>
-                        <div class="stat-change neutral" id="analytics-visitors-meta">내부 방문 제외</div>
+                    <div class="stat-card card-gold">
+                        <div class="stat-top"><div class="stat-label">오늘 매출</div><div class="stat-icon icon-gold">₩</div></div>
+                        <div class="stat-value gold" id="analytics-revenue">-</div>
+                        <div class="stat-change neutral" id="analytics-revenue-meta">실매출 합계</div>
                     </div>
                     <div class="stat-card card-purple">
-                        <div class="stat-top"><div class="stat-label">페이지뷰</div><div class="stat-icon icon-purple">↗</div></div>
-                        <div class="stat-value purple" id="analytics-pageviews">—</div>
-                        <div class="stat-change neutral" id="analytics-pageviews-meta">중복 포함</div>
+                        <div class="stat-top"><div class="stat-label">이번주 주문</div><div class="stat-icon icon-purple">W</div></div>
+                        <div class="stat-value purple" id="analytics-week-orders">-</div>
+                        <div class="stat-change neutral" id="analytics-week-orders-meta">월요일부터</div>
+                    </div>
+                    <div class="stat-card card-gold">
+                        <div class="stat-top"><div class="stat-label">이번주 매출</div><div class="stat-icon icon-gold">₩</div></div>
+                        <div class="stat-value gold" id="analytics-week-revenue">-</div>
+                        <div class="stat-change neutral" id="analytics-week-revenue-meta">월요일부터</div>
                     </div>
                 </div>
                 <div class="table-card">
@@ -1221,11 +1057,13 @@
                     <p>메인 문구, 제품 상세, 요금제, 다운로드 링크를 저장하면 실제 사이트가 같은 데이터를 읽습니다.</p>
                 </div>
                 <div class="editor-subtabs">
-                    <button class="editor-subtab active" data-editor-subtab="home" onclick="switchEditorSubtab('home')">홈/공통</button>
+                    <button class="editor-subtab active" data-editor-subtab="home" onclick="switchEditorSubtab('home')">일반 편집</button>
                     <button class="editor-subtab" data-editor-subtab="pricing" onclick="switchEditorSubtab('pricing')">구매/요금제</button>
                     <button class="editor-subtab" data-editor-subtab="products" onclick="switchEditorSubtab('products')">제품정보</button>
                     <button class="editor-subtab" data-editor-subtab="downloads" onclick="switchEditorSubtab('downloads')">다운로드</button>
-                    <button class="editor-subtab" data-editor-subtab="design" onclick="switchEditorSubtab('design')">디자인/고급</button>
+                                        <button class="editor-subtab" data-editor-subtab="site-content" onclick="switchEditorSubtab('site-content')">사이트 콘텐츠 관리</button>
+                    <button class="editor-subtab" data-editor-subtab="admin-ai" onclick="switchEditorSubtab('admin-ai')">관리자 AI 작업자 설정</button>
+<button class="editor-subtab" data-editor-subtab="design" onclick="switchEditorSubtab('design')">디자인/고급</button>
                 </div>
 
                 <div id="editor-sub-home" class="editor-subpanel active">
@@ -1449,6 +1287,57 @@
                     </div>
 
                 </div>
+                <div id="editor-sub-site-content" class="editor-subpanel">
+                    <div class="editor-card">
+                        <h4>사이트 콘텐츠 관리</h4>
+                        <p class="editor-help">제품정보, 무료 챗봇, 구매 문구, 신규 제품 초안을 서버 저장 콘텐츠로 관리합니다.</p>
+                        <div class="editor-field full">
+                            <label>콘텐츠 JSON</label>
+                            <textarea id="admin-site-content-json" style="min-height:360px;" placeholder="서버 콘텐츠를 불러오면 여기에 표시됩니다."></textarea>
+                        </div>
+                        <div class="editor-save-bar">
+                            <button class="btn" type="button" onclick="loadEditorContent()">서버 콘텐츠 불러오기</button>
+                            <button class="btn btn-gold" type="button" onclick="saveEditorContent()">사이트 콘텐츠 저장</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="editor-sub-admin-ai" class="editor-subpanel">
+                    <div class="editor-card">
+                        <h4>관리자 AI 작업자 설정</h4>
+                        <p class="editor-help">Codex와 Claude Code는 관리자 전용 서버 작업자입니다. 일반 사용자는 볼 수 없고, 관리자 작업 요청에만 선택값을 사용합니다.</p>
+                        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:16px;">
+                            <label style="display:flex;gap:10px;align-items:flex-start;padding:14px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.035);">
+                                <input type="radio" name="admin-ai-worker-provider" value="codex" checked>
+                                <span><strong>Codex</strong><br><small>Codex 서버 로그인 세션 우선 사용</small></span>
+                            </label>
+                            <label style="display:flex;gap:10px;align-items:flex-start;padding:14px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.035);">
+                                <input type="radio" name="admin-ai-worker-provider" value="claude-code">
+                                <span><strong>Claude Code</strong><br><small>Claude Code 서버 로그인 세션 우선 사용</small></span>
+                            </label>
+                            <label style="display:flex;gap:10px;align-items:flex-start;padding:14px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,0.035);">
+                                <input type="radio" name="admin-ai-worker-provider" value="api">
+                                <span><strong>API 키 보조</strong><br><small>서버 로그인 작업자 대신 API 기반 추론 사용</small></span>
+                            </label>
+                        </div>
+                        <div class="editor-field-grid">
+                            <div class="editor-field full">
+                                <label>관리자 메모</label>
+                                <input id="admin-ai-worker-note" type="text" placeholder="예: prod 서버 root 세션에서 Codex 로그인 확인">
+                            </div>
+                            <div class="editor-field full">
+                                <label>적용 범위</label>
+                                <input value="키워드 발굴, 마인드맵 확장, 쇼핑커넥트 제품 판단, 네이버 메이트 확장" readonly>
+                            </div>
+                        </div>
+                        <div class="editor-save-bar">
+                            <button class="btn" type="button" onclick="saveAdminAiWorkerSettings()">관리자 작업자 저장</button>
+                            <button class="btn btn-gold" type="button" onclick="checkAdminAiWorkerSettings()">관리자 연동상태 확인</button>
+                        </div>
+                        <div id="admin-ai-worker-status" style="margin-top:12px;color:var(--text-secondary);font-size:0.86rem;">관리자 페이지 로그인 세션으로 관리합니다.</div>
+                    </div>
+                </div>
+
 
                 <div id="editor-sub-design" class="editor-subpanel">
                     <div class="editor-card">
@@ -1603,7 +1492,7 @@
             </div>
 
             <!-- TAB: Notices (Phase 6-B) -->
-            <div class="tab-panel" id="tab-notices">
+            <div class="tab-panel active" id="tab-notices">
                 <div class="page-header">
                     <h1>공지사항</h1>
                     <p>커뮤니티 공지 등록·수정·삭제. 변경사항은 community.html 공지 탭에 즉시 반영됩니다.</p>
@@ -1682,25 +1571,6 @@
                     <div class="loading-spinner"><div class="spinner-ring"></div> 팁 목록 로딩 중...</div>
                 </div>
             </div>
-
-            <!-- TAB: Leads (CRO-3 — 이메일 리드 캡쳐) -->
-            <div class="tab-panel" id="tab-leads">
-                <div class="page-header">
-                    <h1>리드 관리 (이메일 캡쳐)</h1>
-                    <p>다운로드 페이지·기타 form에서 수집된 이메일 목록. CSV로 export 후 메일 발송 도구(Stibee/Mailchimp 등)에 import해 활용하세요.</p>
-                </div>
-                <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
-                    <span id="leads-count" style="display: inline-flex; align-items: center; padding: 8px 14px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); border-radius: 8px; font-size: 0.88rem; color: var(--gold-primary, #c9a84c); font-weight: 600;">총 0건</span>
-                    <button class="btn btn-gold" onclick="exportLeadsCsv()">📥 CSV 다운로드</button>
-                    <button class="btn" onclick="loadLeadsAdmin()" style="margin-left: auto;">🔄 새로고침</button>
-                </div>
-                <div id="leads-table-body">
-                    <div class="loading-spinner"><div class="spinner-ring"></div> 리드 목록 로딩 중...</div>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
     <!-- Issue Modal -->
     <div class="modal-overlay" id="issue-modal">
@@ -2034,9 +1904,11 @@
 
             if (idHash === ADMIN_ID_HASH && pwHash === ADMIN_PW_HASH) {
                 sessionStorage.setItem('admin_auth', '1');
+                sessionStorage.setItem('lp_admin_logged_in', '1');
+                localStorage.setItem('lp_analytics_exclude', '1');
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
-                loadDashboardData();
+                switchTab('notices');
             } else {
                 document.getElementById('login-error').classList.add('visible');
                 setTimeout(() => document.getElementById('login-error').classList.remove('visible'), 3000);
@@ -2045,6 +1917,7 @@
 
         function handleLogout() {
             sessionStorage.removeItem('admin_auth');
+            sessionStorage.removeItem('lp_admin_logged_in');
             saveLewordAdminSession(null);
             location.reload();
         }
@@ -2053,21 +1926,20 @@
         if (sessionStorage.getItem('admin_auth') === '1') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('dashboard').classList.add('active');
-            setTimeout(() => loadDashboardData(), 100);
+            setTimeout(() => switchTab('notices'), 100);
         }
 
         // ===== TAB SWITCHING =====
         function switchTab(tabId) {
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.querySelector(`.nav-item[data-tab="${tabId}"]`).classList.add('active');
+            const activeNav = document.querySelector(`.nav-item[data-tab="${tabId}"]`);
+            if (activeNav) activeNav.classList.add('active');
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            document.getElementById(`tab-${tabId}`).classList.add('active');
+            const activePanel = document.getElementById(`tab-${tabId}`);
+            if (activePanel) activePanel.classList.add('active');
 
             // Update page header context
             const headers = {
-                overview: { title: '대시보드', desc: '오늘의 트래픽과 주문 현황을 한눈에 확인하세요.' },
-                codes: { title: '코드 관리', desc: '라이선스 코드를 발급, 조회, 무효화합니다.' },
-                'all-in-one': { title: '올인원 발급', desc: '구매자에게 지급할 ALL 라이선스 코드를 발급합니다.' },
                 orders: { title: '주문 내역', desc: '결제 완료된 주문과 활성화된 라이선스 내역입니다.' },
                 analytics: { title: '매출/방문 분석', desc: 'Toss 결제, 계좌이체, 방문 로그를 기간별로 확인합니다.' },
                 editor: { title: '사이트 편집', desc: '메인 문구, 제품 상세, 요금제, 다운로드 링크를 직접 수정합니다.' },
@@ -2076,19 +1948,16 @@
                 reviews: { title: '후기 관리', desc: '구매자 후기 승인·거절 (Phase 6-D에서 활성화).' },
                 notices: { title: '공지사항', desc: '커뮤니티 공지 등록·수정·삭제 (Phase 6-B에서 활성화).' },
                 income: { title: '수익 인증', desc: '커뮤니티 수익 인증 카드 관리 (Phase 6-C에서 활성화).' },
-                tips: { title: '활용 팁', desc: '구매자 활용 팁 승인·거절 (Phase 6-E에서 활성화).' },
-                leads: { title: '리드 관리', desc: '이메일 리드 캡쳐 (CRO-3에서 활성화).' }
+                tips: { title: '활용 팁', desc: '구매자 활용 팁 승인·거절 (Phase 6-E에서 활성화).' }
             };
 
             // Load data for the tab
             if (tabId === 'trial') loadTrialUsers();
             if (tabId === 'bank') loadBankOrders();
-            if (tabId === 'codes') loadCodes();
             if (tabId === 'notices') loadNotices();
             if (tabId === 'income') loadIncomeAdmin(currentIncomeFilter);
             if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
             if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
-            if (tabId === 'leads') loadLeadsAdmin();
             if (tabId === 'analytics') loadAnalyticsDashboard(currentAnalyticsPeriod);
             if (tabId === 'editor') loadEditorContent();
         }
@@ -2616,11 +2485,14 @@
                 document.getElementById('analytics-revenue').textContent = formatWon(sales.revenue);
                 document.getElementById('analytics-orders').textContent = (Number(sales.orders) || 0).toLocaleString('ko-KR');
                 document.getElementById('analytics-visitors').textContent = (Number(visitors.unique) || 0).toLocaleString('ko-KR');
-                document.getElementById('analytics-pageviews').textContent = (Number(visitors.pageviews) || 0).toLocaleString('ko-KR');
+                const week = data.week || data.thisWeek || {};
+                document.getElementById('analytics-week-orders').textContent = (Number(week.orders ?? sales.weekOrders) || 0).toLocaleString('ko-KR');
+                document.getElementById('analytics-week-revenue').textContent = formatWon(week.revenue ?? sales.weekRevenue ?? 0);
                 document.getElementById('analytics-revenue-meta').textContent = period === 'month' ? '이번 달 합계' : '오늘 합계';
                 document.getElementById('analytics-orders-meta').textContent = 'Toss + 계좌이체 승인';
                 document.getElementById('analytics-visitors-meta').textContent = `내부 제외 · 내부뷰 ${Number(visitors.internalPageviews) || 0}`;
-                document.getElementById('analytics-pageviews-meta').textContent = '중복 페이지 이동 포함';
+                if (document.getElementById('analytics-week-orders-meta')) document.getElementById('analytics-week-orders-meta').textContent = '이번주 주문 합계';
+                if (document.getElementById('analytics-week-revenue-meta')) document.getElementById('analytics-week-revenue-meta').textContent = '이번주 매출 합계';
                 document.getElementById('analytics-updated').textContent = data.updatedAt ? new Date(data.updatedAt).toLocaleString('ko-KR') : '방금 갱신';
 
                 if (!recentOrders.length) {
@@ -2649,7 +2521,8 @@
                 document.getElementById('analytics-revenue').textContent = '—';
                 document.getElementById('analytics-orders').textContent = '—';
                 document.getElementById('analytics-visitors').textContent = '—';
-                document.getElementById('analytics-pageviews').textContent = '—';
+                document.getElementById('analytics-week-orders').textContent = '-';
+                document.getElementById('analytics-week-revenue').textContent = '-';
                 document.getElementById('analytics-updated').textContent = 'GAS 재배포 필요';
                 if (table) {
                     table.innerHTML = `<div style="padding:32px;text-align:center;color:#ff6b6b;">분석 API 연결 실패: ${escapeHtml_(err.message)}<br><small>GAS에 analytics-dashboard 액션이 배포되어야 실제 매출/방문 데이터가 표시됩니다.</small></div>`;
@@ -3681,6 +3554,22 @@
                 productsJson.addEventListener('input', () => { productsJsonTouched = true; });
                 productsJson.dataset.bound = '1';
             }
+        }
+        function saveAdminAiWorkerSettings() {
+            const provider = document.querySelector('input[name="admin-ai-worker-provider"]:checked')?.value || 'codex';
+            const note = document.getElementById('admin-ai-worker-note')?.value || '';
+            localStorage.setItem('leaderspro_admin_ai_worker', JSON.stringify({ provider, note, savedAt: new Date().toISOString() }));
+            const status = document.getElementById('admin-ai-worker-status');
+            if (status) status.textContent = '저장 완료: ' + provider + ' · 관리자 세션 기준';
+            if (typeof showToast === 'function') showToast('관리자 AI 작업자 설정을 저장했습니다.');
+        }
+
+        function checkAdminAiWorkerSettings() {
+            const saved = JSON.parse(localStorage.getItem('leaderspro_admin_ai_worker') || '{}');
+            const status = document.getElementById('admin-ai-worker-status');
+            const auth = sessionStorage.getItem('admin_auth') === '1';
+            if (status) status.textContent = auth ? '관리자 로그인 확인 완료 · 작업자 ' + (saved.provider || 'codex') : '관리자 로그인이 필요합니다.';
+            if (typeof showToast === 'function') showToast(auth ? '관리자 연동상태 확인 완료' : '관리자 로그인이 필요합니다.');
         }
 
         function switchEditorSubtab(name) {
