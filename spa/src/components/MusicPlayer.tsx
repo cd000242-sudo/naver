@@ -313,11 +313,11 @@ function MusicPlayer() {
                         boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
                     }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                            <div style={{ fontSize: 11, color: '#ffd700', fontWeight: 800, letterSpacing: 0 }}>PLAYLIST</div>
+                            <div style={{ fontSize: 11, color: '#ffd700', fontWeight: 800, letterSpacing: 0 }}>재생 목록</div>
                             <button onClick={() => setExpanded(false)} style={{ background: 'transparent', border: 'none', color: '#a0a0b0', cursor: 'pointer', fontSize: 16 }}>x</button>
                         </div>
                         <div style={{ background: 'rgba(255,215,0,0.06)', borderRadius: 10, padding: 10, marginBottom: 12 }}>
-                            <div style={{ fontSize: 10, color: '#a0a0b0', marginBottom: 2 }}>NOW PLAYING</div>
+                            <div style={{ fontSize: 10, color: '#a0a0b0', marginBottom: 2 }}>지금 재생</div>
                             <div style={{ fontSize: 13, fontWeight: 700, color: '#fff', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{trackTitle}</div>
                         </div>
                         <button onClick={toggle} style={{
@@ -360,8 +360,8 @@ function MusicPlayer() {
                         boxShadow: '0 4px 20px rgba(255,107,138,0.2)',
                     }}
                 >
-                    <span style={{ fontSize: 16 }}>{isPlaying ? 'Pause' : 'Play'}</span>
-                    <span>Music</span>
+                    <span style={{ fontSize: 16 }}>{isPlaying ? '일시정지' : '재생'}</span>
+                    <span>음악</span>
                 </button>
             </div>
         </>
