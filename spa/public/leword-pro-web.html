@@ -780,6 +780,116 @@
     .dialog p { margin: 0 0 14px; color: var(--muted); line-height: 1.55; }
     .dialog label { display: block; margin: 10px 0 6px; font-size: 13px; color: var(--text-2); font-weight: 900; }
     .dialog-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+    .welcome-modal {
+      z-index: 118;
+      background:
+        radial-gradient(720px 420px at 50% 30%, rgba(14,165,233,.18), transparent 60%),
+        radial-gradient(520px 320px at 46% 62%, rgba(53,211,153,.16), transparent 64%),
+        rgba(4,14,20,.72);
+      backdrop-filter: blur(18px) saturate(122%);
+    }
+    .welcome-dialog {
+      position: relative;
+      width: min(540px, calc(100vw - 32px));
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid rgba(91,183,255,.34);
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98), rgba(241,249,252,.97)),
+        #fff;
+      color: #0f241b;
+      box-shadow: 0 34px 110px rgba(2,12,18,.46), 0 0 0 1px rgba(255,255,255,.74) inset;
+    }
+    .welcome-dialog::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 5px;
+      background: linear-gradient(90deg, var(--blue), var(--green-2), var(--green));
+    }
+    .welcome-inner {
+      display: grid;
+      gap: 16px;
+      padding: 30px;
+    }
+    .welcome-badge {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      min-height: 26px;
+      border: 1px solid rgba(14,165,233,.22);
+      border-radius: 999px;
+      background: rgba(14,165,233,.1);
+      color: #0369a1;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .welcome-dialog h2 {
+      margin: 12px 0 8px;
+      color: #102217;
+      font-size: 28px;
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+    .welcome-dialog p {
+      margin: 0;
+      color: #5d7066;
+      font-size: 14px;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+    .welcome-summary {
+      border: 1px solid rgba(14,165,233,.18);
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(14,165,233,.09), rgba(53,211,153,.08));
+      color: #16362a;
+      padding: 14px 15px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+    .welcome-status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .welcome-status-card {
+      min-height: 76px;
+      border: 1px solid rgba(15,64,43,.1);
+      border-radius: 14px;
+      background: #fff;
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(15,30,20,.06);
+    }
+    .welcome-status-card strong {
+      display: block;
+      color: #0f241b;
+      font-size: 13px;
+      font-weight: 1000;
+    }
+    .welcome-status-card span {
+      display: block;
+      margin-top: 5px;
+      color: #698076;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .welcome-actions {
+      margin-top: 0;
+    }
+    .welcome-actions .btn {
+      min-height: 48px;
+      border-radius: 12px;
+    }
+    .welcome-actions .btn:not(.primary) {
+      border-color: rgba(14,165,233,.26);
+      background: rgba(255,255,255,.74);
+      color: #164e63;
+    }
     .login-modal {
       z-index: 120;
       background:
@@ -1543,13 +1653,24 @@
     </form>
   </div>
 
-  <div class="modal" id="welcomeModal" aria-hidden="true">
-    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
-      <h2 id="welcomeTitle">환영합니다, LEWORD Pro</h2>
-      <p id="welcomeMessage">Pro 세션이 연결되었습니다. 지식인 황금키워드와 쇼핑커넥트는 서버가 자동으로 발굴을 시작합니다.</p>
-      <div class="dialog-actions">
-        <button class="btn primary" type="button" id="welcomeClose">바로 시작</button>
-        <button class="btn" type="button" id="welcomeSettings">API 키 확인</button>
+  <div class="modal welcome-modal" id="welcomeModal" aria-hidden="true">
+    <div class="dialog welcome-dialog" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+      <div class="welcome-inner">
+        <div>
+          <span class="welcome-badge">Pro session ready</span>
+          <h2 id="welcomeTitle">환영합니다, LEWORD Pro</h2>
+          <p id="welcomeMessage">Pro 세션이 연결되었습니다. 지식인 황금키워드와 쇼핑커넥트는 서버가 자동으로 발굴을 시작합니다.</p>
+        </div>
+        <div class="welcome-summary">실시간 보드와 추가 기능은 서버에서 계속 준비됩니다. 필요한 API 키만 확인하면 더 정밀한 실측 분석으로 확장됩니다.</div>
+        <div class="welcome-status-grid" aria-label="Pro 시작 상태">
+          <div class="welcome-status-card"><strong>실시간 보드</strong><span>전체 후보 동기화</span></div>
+          <div class="welcome-status-card"><strong>자동 발굴</strong><span>쇼핑·지식인 준비</span></div>
+          <div class="welcome-status-card"><strong>API 연동</strong><span>개인 키로 정밀화</span></div>
+        </div>
+        <div class="dialog-actions welcome-actions">
+          <button class="btn primary" type="button" id="welcomeClose">바로 시작</button>
+          <button class="btn" type="button" id="welcomeSettings">API 키 확인</button>
+        </div>
       </div>
     </div>
   </div>
