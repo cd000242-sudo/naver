@@ -4993,8 +4993,12 @@ export class NaverBlogAutomation {
                   const imgProvider = await compImg.evaluate((el: HTMLImageElement) =>
                     el.getAttribute('data-img-provider') || ''
                   ).catch(() => '');
-                  if (imgProvider && COLLECTED_PROVIDERS.includes(imgProvider)) {
-                    this.log(`   ⏭️ [AI 마크] 수집 이미지(${imgProvider}) → 마크 스킵`);
+                  // ✅ [실제이미지 fix] provider 없음(사용자 직접 삽입 실제 이미지) 또는 수집 이미지는 AI 마크 스킵.
+                  //   기존 opt-out 로직은 수집 provider만 스킵 → provider 태그가 없는 실제 이미지가 AI 마크에
+                  //   잘못 걸렸다(실제 이미지엔 image.provider가 없어 data-img-provider 미설정, imageHelpers L1570).
+                  //   AI 마크는 provider가 명확한 AI 생성 이미지에만 붙인다.
+                  if (!imgProvider || COLLECTED_PROVIDERS.includes(imgProvider)) {
+                    this.log(`   ⏭️ [AI 마크] ${imgProvider ? `수집 이미지(${imgProvider})` : '실제/직접삽입 이미지(provider 없음)'} → 마크 스킵`);
                     continue;
                   }
 
