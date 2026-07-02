@@ -1301,9 +1301,12 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
 
     // Not a valid table — neutralize any leftover pipe fragments per line
     // (orphan header rows, rows with trailing prose, stray dividers).
+    // [2026-07-03] 텍스트 없는 빈 마크다운 헤딩 마커(예: 챗봇이 흘린 "##" 단독 줄)는 제거한다.
+    //   헤딩 인식 정규식은 "#{1,4} 텍스트"만 잡아 마커를 벗기므로, 텍스트 없는 "##"는 평문으로
+    //   새어 발행물에 리터럴 "##"로 나온다(사용자 실측). 공백 필수라 해시태그(#단어)는 보존.
     const lines = rawLines
       .map((line) => normalizeOrphanPipeLine(line))
-      .filter((line): line is string => line !== null && line.length > 0);
+      .filter((line): line is string => line !== null && line.length > 0 && !/^#{1,6}\s*$/.test(line));
     if (lines.length === 0) continue;
 
     if (isReadableListBlock(lines)) {

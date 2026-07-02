@@ -34,4 +34,36 @@ describe('리치입력 홀로 떨어진 인용부호 재결합', () => {
     const { plainText } = buildMobileRichHtml("그가 ‘문장’ 이라고 말했다");
     expect(plainText).toBe('그가 ‘문장’ 이라고 말했다');
   });
+
+  // [2026-07-03] 실측 발행물 케이스: 닫는 큰따옴표(”)가 홀로 + 맨 아래 빈 "##"
+  it("실측 케이스 — 닫는 큰따옴표 재결합 + 빈 ## 마커 제거", () => {
+    const input = [
+      '“호텔 앞까지는 오지 말아달라.',
+      '”',
+      '',
+      '뷔의 부탁은 길지 않았습니다.',
+      '',
+      '그런데 함께 올라온 수면 기록을 보고 나면,',
+      '이 말이 그냥 지나가는 당부처럼 들리지 않습니다.',
+      '',
+      '##',
+    ].join('\n');
+    const { html, plainText } = buildMobileRichHtml(input);
+    // 닫는 큰따옴표가 앞 줄에 붙어 한 문장
+    expect(plainText).toContain('“호텔 앞까지는 오지 말아달라.”');
+    // 닫는 따옴표만 홀로 있는 단락 없음
+    expect(html).not.toMatch(/<p[^>]*>\s*<span[^>]*>[”"’']<\/span>\s*<\/p>/);
+    // 빈 ## 마커는 발행물에 리터럴로 남지 않음
+    expect(plainText).not.toContain('##');
+    expect(html).not.toContain('##');
+    // 나머지 본문 보존
+    expect(plainText).toContain('뷔의 부탁은 길지 않았습니다.');
+    expect(plainText).toContain('당부처럼 들리지 않습니다.');
+  });
+
+  it("빈 ## / ### 단독 줄은 제거, #태그(공백없는 해시태그)는 보존", () => {
+    expect(buildMobileRichHtml('본문\n\n##\n\n다음').plainText).not.toContain('##');
+    expect(buildMobileRichHtml('###\n본문').plainText).not.toContain('###');
+    expect(buildMobileRichHtml('#라이머 관련 이야기').plainText).toContain('#라이머');
+  });
 });
