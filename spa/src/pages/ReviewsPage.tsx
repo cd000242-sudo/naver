@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
+import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
 
 /**
  * 후기 페이지
@@ -7,7 +8,9 @@ import { useEffect, useRef, useState, type ChangeEvent, type CSSProperties } fro
  */
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-const MAX_IMAGE_BYTES = 4 * 1024 * 1024;
+const REVIEWS_CACHE_KEY = 'leaderspro_reviews_cache_v2';
+const REVIEWS_TIMEOUT_MS = 4500;
+const MAX_MEDIA_BYTES = 18 * 1024 * 1024;
 
 const AVATAR_COLORS: Array<[string, string]> = [
     ['#667eea', '#764ba2'], ['#f093fb', '#f5576c'], ['#4facfe', '#00f2fe'],
@@ -20,9 +23,12 @@ interface Testimonial {
     role?: string;
     text: string;
     image?: string;
+    mediaType?: 'image' | 'video';
     imageAlt?: string;
     badge?: string;
     gradient?: string;
+    email?: string;
+    phone?: string;
 }
 
 function pickAvatarGradient(name: string) {
@@ -39,28 +45,48 @@ function firstText(...values: unknown[]): string {
     return '';
 }
 
-function maskEmail(email: string) {
-    return email.replace(/(.{2}).*(@.*)/, '$1***$2');
-}
-
 function normalizeReview(raw: any): Testimonial | null {
     const email = firstText(raw?.email);
+    const phone = firstText(raw?.phone, raw?.tel, raw?.mobile);
     const author = firstText(raw?.author, raw?.name, raw?.nickname, email ? maskEmail(email) : '', '익명');
     const text = firstText(raw?.reviewText, raw?.review, raw?.text, raw?.summary, raw?.detail);
-    const image = firstText(raw?.proofImage, raw?.image, raw?.imageUrl, raw?.proof, raw?.screenshot);
+    const image = firstText(raw?.proofMedia, raw?.proofImage, raw?.video, raw?.videoUrl, raw?.image, raw?.imageUrl, raw?.proof, raw?.screenshot);
+    const mediaType = firstText(raw?.mediaType).startsWith('video') || image.startsWith('data:video') ? 'video' : 'image';
     const role = firstText(raw?.role, raw?.period, raw?.usagePeriod, raw?.product);
-    const badge = firstText(raw?.badge, image ? '수익인증 이미지 포함' : '');
+    const badge = firstText(raw?.badge, image ? (mediaType === 'video' ? '수익인증 영상 포함' : '수익인증 이미지 포함') : '');
 
     if (!text && !image) return null;
     return {
         author,
         role,
-        text: text || '수익인증 이미지를 등록한 후기입니다.',
+        text: maskContactText(text || '수익인증 자료를 등록한 후기입니다.'),
         image,
+        mediaType,
         imageAlt: firstText(raw?.imageAlt, raw?.alt, `${author} 수익인증 이미지`),
         badge,
         gradient: pickAvatarGradient(author),
+        email: email ? maskEmail(email) : '',
+        phone: phone ? maskPhone(phone) : '',
     };
+}
+
+function readCachedReviews(): Testimonial[] {
+    try {
+        const raw = window.localStorage.getItem(REVIEWS_CACHE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw) as Testimonial[];
+        return Array.isArray(parsed) ? parsed : [];
+    } catch {
+        return [];
+    }
+}
+
+function writeCachedReviews(items: Testimonial[]) {
+    try {
+        window.localStorage.setItem(REVIEWS_CACHE_KEY, JSON.stringify(items.slice(0, 80)));
+    } catch {
+        /* local cache is optional */
+    }
 }
 
 function ReviewsPage() {
@@ -70,9 +96,11 @@ function ReviewsPage() {
     const [modalOpen, setModalOpen] = useState(false);
     const [author, setAuthor] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [reviewText, setReviewText] = useState('');
-    const [proofImage, setProofImage] = useState('');
-    const [proofImageName, setProofImageName] = useState('');
+    const [proofMedia, setProofMedia] = useState('');
+    const [proofMediaName, setProofMediaName] = useState('');
+    const [proofMediaType, setProofMediaType] = useState<'image' | 'video'>('image');
     const [submitting, setSubmitting] = useState(false);
     const [msg, setMsg] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
@@ -83,19 +111,35 @@ function ReviewsPage() {
     }, []);
 
     useEffect(() => {
+        const cached = readCachedReviews();
+        if (cached.length > 0) {
+            setTestimonials(cached);
+            setLoading(false);
+        }
+
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), REVIEWS_TIMEOUT_MS);
+
         (async () => {
             try {
-                const res = await fetch(`${GAS_URL}?action=get-reviews`, { cache: 'no-store' });
+                const res = await fetch(`${GAS_URL}?action=get-reviews`, { cache: 'no-store', signal: controller.signal });
                 const data = await res.json();
                 const list = Array.isArray(data?.reviews) ? data.reviews : [];
                 const normalized = list.map(normalizeReview).filter(Boolean) as Testimonial[];
                 setTestimonials(normalized);
+                writeCachedReviews(normalized);
             } catch {
-                setTestimonials([]);
+                if (cached.length === 0) setTestimonials([]);
             } finally {
+                window.clearTimeout(timer);
                 setLoading(false);
             }
         })();
+
+        return () => {
+            window.clearTimeout(timer);
+            controller.abort();
+        };
     }, []);
 
     const inputBase: CSSProperties = {
@@ -115,31 +159,40 @@ function ReviewsPage() {
         setMsg(null);
     };
 
-    const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleMediaChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (!file) return;
-        if (!file.type.startsWith('image/')) {
-            setMsg({ text: '이미지 파일만 선택할 수 있습니다.', type: 'error' });
+        if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
+            setMsg({ text: '이미지 또는 동영상 파일만 선택할 수 있습니다.', type: 'error' });
             return;
         }
-        if (file.size > MAX_IMAGE_BYTES) {
-            setMsg({ text: '이미지는 4MB 이하로 선택해주세요.', type: 'error' });
+        if (file.size > MAX_MEDIA_BYTES) {
+            setMsg({ text: '파일은 18MB 이하로 선택해주세요.', type: 'error' });
             return;
         }
 
         const reader = new FileReader();
         reader.onload = () => {
-            setProofImage(String(reader.result || ''));
-            setProofImageName(file.name);
+            setProofMedia(String(reader.result || ''));
+            setProofMediaName(file.name);
+            setProofMediaType(file.type.startsWith('video/') ? 'video' : 'image');
             setMsg(null);
         };
-        reader.onerror = () => setMsg({ text: '이미지를 읽지 못했습니다. 다른 파일을 선택해주세요.', type: 'error' });
+        reader.onerror = () => setMsg({ text: '파일을 읽지 못했습니다. 다른 파일을 선택해주세요.', type: 'error' });
         reader.readAsDataURL(file);
     };
 
     const submitReview = async () => {
-        if (!proofImage) {
-            setMsg({ text: '수익인증 이미지를 선택해주세요.', type: 'error' });
+        if (!email.trim() || !isValidEmail(email)) {
+            setMsg({ text: '정확한 이메일을 입력해주세요.', type: 'error' });
+            return;
+        }
+        if (!phone.trim() || !isValidPhone(phone)) {
+            setMsg({ text: '정확한 휴대폰 번호를 입력해주세요.', type: 'error' });
+            return;
+        }
+        if (!proofMedia) {
+            setMsg({ text: '수익인증 이미지 또는 동영상을 선택해주세요.', type: 'error' });
             return;
         }
         if (!reviewText.trim()) {
@@ -154,13 +207,19 @@ function ReviewsPage() {
                 action: 'submit-review',
                 author: author.trim() || '익명',
                 email: email.trim(),
+                phone: phone.trim(),
+                publicEmail: maskEmail(email),
+                publicPhone: maskPhone(phone),
                 rating: 5,
-                summary: reviewText.trim().slice(0, 120),
-                detail: reviewText.trim(),
-                reviewText: reviewText.trim(),
-                proofImage,
-                image: proofImage,
-                imageName: proofImageName,
+                summary: maskContactText(reviewText.trim()).slice(0, 120),
+                detail: maskContactText(reviewText.trim()),
+                reviewText: maskContactText(reviewText.trim()),
+                proofMedia,
+                proofImage: proofMedia,
+                image: proofMedia,
+                mediaType: proofMediaType,
+                imageName: proofMediaName,
+                mediaName: proofMediaName,
                 timestamp: new Date().toISOString(),
             };
             const res = await fetch(GAS_URL, {
@@ -173,9 +232,11 @@ function ReviewsPage() {
                 setMsg({ text: '후기가 접수되었습니다. 검토 후 공개됩니다.', type: 'success' });
                 setAuthor('');
                 setEmail('');
+                setPhone('');
                 setReviewText('');
-                setProofImage('');
-                setProofImageName('');
+                setProofMedia('');
+                setProofMediaName('');
+                setProofMediaType('image');
                 if (fileInputRef.current) fileInputRef.current.value = '';
             } else {
                 setMsg({ text: data.message || '등록 실패. 다시 시도해주세요.', type: 'error' });
@@ -194,7 +255,7 @@ function ReviewsPage() {
                     <div>
                         <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>REVIEWS</span>
                         <h1 style={{ fontSize: 'clamp(30px, 4vw, 46px)', fontWeight: 900, marginBottom: 12, letterSpacing: 0 }}>실제 사용자 후기</h1>
-                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>수익인증 이미지와 후기 글이 함께 등록된 실제 후기만 보여드립니다.</p>
+                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>수익인증 이미지/동영상과 후기 글이 함께 등록된 실제 후기만 보여드립니다.</p>
                     </div>
                     <button
                         type="button"
@@ -228,7 +289,11 @@ function ReviewsPage() {
                             <article key={`${t.author}-${i}`} style={{ background: 'rgba(18,18,26,0.78)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, overflow: 'hidden', boxShadow: '0 18px 52px rgba(0,0,0,0.22)' }}>
                                 {t.image && (
                                     <div style={{ background: '#080d14', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                                        <img src={t.image} alt={t.imageAlt || '수익인증 이미지'} style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
+                                        {t.mediaType === 'video' ? (
+                                            <video src={t.image} controls playsInline style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
+                                        ) : (
+                                            <img src={t.image} alt={t.imageAlt || '수익인증 이미지'} style={{ width: '100%', height: 220, objectFit: 'cover', display: 'block' }} />
+                                        )}
                                     </div>
                                 )}
                                 <div style={{ padding: 24 }}>
@@ -242,6 +307,12 @@ function ReviewsPage() {
                                         </div>
                                     </div>
                                     {t.badge && <div style={{ display: 'inline-flex', padding: '6px 10px', borderRadius: 8, background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.26)', color: '#44d7b6', fontSize: 12, fontWeight: 800, marginBottom: 12 }}>{t.badge}</div>}
+                                    {(t.email || t.phone) && (
+                                        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
+                                            {t.email && <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.58)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 999, padding: '4px 8px' }}>{t.email}</span>}
+                                            {t.phone && <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.58)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 999, padding: '4px 8px' }}>{t.phone}</span>}
+                                        </div>
+                                    )}
                                     <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.84)', lineHeight: 1.78, margin: 0, whiteSpace: 'pre-wrap' }}>{t.text}</p>
                                 </div>
                             </article>
@@ -284,14 +355,14 @@ function ReviewsPage() {
                         <div style={{ padding: '26px 28px 18px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'flex-start' }}>
                             <div>
                                 <h2 style={{ margin: '0 0 8px', fontSize: 26, letterSpacing: 0 }}>후기 작성</h2>
-                                <p style={{ margin: 0, color: 'rgba(255,255,255,0.62)', lineHeight: 1.6 }}>수익인증 이미지와 후기 글을 함께 등록해주세요.</p>
+                                <p style={{ margin: 0, color: 'rgba(255,255,255,0.62)', lineHeight: 1.6 }}>무분별한 등록을 막기 위해 이메일과 휴대폰 번호를 함께 확인합니다.</p>
                             </div>
                             <button type="button" onClick={closeModal} style={{ width: 38, height: 38, borderRadius: 8, border: '1px solid rgba(255,255,255,0.12)', background: '#0b111a', color: '#fff', fontSize: 20, cursor: 'pointer' }}>x</button>
                         </div>
 
                         <div style={{ padding: 28 }}>
-                            <label style={{ display: 'block', fontWeight: 900, marginBottom: 10 }}>수익인증 이미지</label>
-                            <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+                            <label style={{ display: 'block', fontWeight: 900, marginBottom: 10 }}>수익인증 이미지/동영상</label>
+                            <input ref={fileInputRef} type="file" accept="image/*,video/*" onChange={handleMediaChange} style={{ display: 'none' }} />
                             <button
                                 type="button"
                                 onClick={() => fileInputRef.current?.click()}
@@ -307,22 +378,27 @@ function ReviewsPage() {
                                     marginBottom: 12,
                                 }}
                             >
-                                {proofImage ? '이미지 다시 선택하기' : '이미지 선택하기'}
+                                {proofMedia ? '파일 다시 선택하기' : '이미지 또는 동영상 선택하기'}
                             </button>
-                            {proofImage && (
+                            {proofMedia && (
                                 <div style={{ marginBottom: 18, border: '1px solid rgba(255,255,255,0.10)', borderRadius: 10, background: '#080d14', overflow: 'hidden' }}>
-                                    <img src={proofImage} alt="선택한 수익인증 미리보기" style={{ width: '100%', maxHeight: 260, objectFit: 'contain', display: 'block' }} />
-                                    <div style={{ padding: '9px 12px', color: 'rgba(255,255,255,0.58)', fontSize: 12 }}>{proofImageName}</div>
+                                    {proofMediaType === 'video' ? (
+                                        <video src={proofMedia} controls playsInline style={{ width: '100%', maxHeight: 300, display: 'block' }} />
+                                    ) : (
+                                        <img src={proofMedia} alt="선택한 수익인증 미리보기" style={{ width: '100%', maxHeight: 260, objectFit: 'contain', display: 'block' }} />
+                                    )}
+                                    <div style={{ padding: '9px 12px', color: 'rgba(255,255,255,0.58)', fontSize: 12 }}>{proofMediaName}</div>
                                 </div>
                             )}
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 12, marginBottom: 12 }}>
                                 <input type="text" placeholder="닉네임 선택" maxLength={20} value={author} onChange={(e) => setAuthor(e.target.value)} style={inputBase} />
-                                <input type="email" placeholder="이메일 선택, 공개 안 됨" value={email} onChange={(e) => setEmail(e.target.value)} style={inputBase} />
+                                <input type="email" placeholder="이메일 필수, 공개 시 마스킹" value={email} onChange={(e) => setEmail(e.target.value)} style={inputBase} />
                             </div>
+                            <input type="tel" placeholder="휴대폰 번호 필수, 공개 시 010-****-**** 처리" value={phone} onChange={(e) => setPhone(e.target.value)} style={{ ...inputBase, marginBottom: 12 }} />
 
                             <label style={{ display: 'block', fontWeight: 900, marginBottom: 10 }}>후기 글</label>
-                            <textarea rows={6} placeholder="사용 후 느낀 점, 수익 변화, 구매 전 고민이 해결된 지점을 적어주세요." maxLength={800} value={reviewText} onChange={(e) => setReviewText(e.target.value)} style={{ ...inputBase, resize: 'vertical', fontFamily: 'inherit', lineHeight: 1.65, marginBottom: 14 }} />
+                            <textarea rows={6} placeholder="사용 후 느낀 점, 수익 변화, 구매 전 고민이 해결된 지점을 적어주세요. 본문 속 이메일/폰번호는 자동으로 가려집니다." maxLength={800} value={reviewText} onChange={(e) => setReviewText(e.target.value)} style={{ ...inputBase, resize: 'vertical', fontFamily: 'inherit', lineHeight: 1.65, marginBottom: 14 }} />
 
                             <button
                                 onClick={submitReview}

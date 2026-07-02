@@ -1,52 +1,33 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
+import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
 
 /**
- * 커뮤니티 — payment-page/community.html 마이그.
- * 3 탭: 공지사항 / 수익 인증 / 활용 팁
- * GAS get-notices / income-list / get-tips 로드, 실패 시 fallback.
+ * 커뮤니티
+ * - 공지사항은 관리자 게시 흐름을 유지합니다.
+ * - 수익 인증/활용 팁은 실제 서버 데이터만 노출하고, 이미지/동영상+글 작성 모달을 제공합니다.
+ * - 로컬 캐시 선노출 후 서버 최신화로 체감 로딩을 줄입니다.
  */
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+const COMMUNITY_CACHE_KEY = 'leaderspro_community_cache_v2';
+const COMMUNITY_TIMEOUT_MS = 4800;
+const MAX_MEDIA_BYTES = 18 * 1024 * 1024;
 
 type TabKey = 'notices' | 'income' | 'tips';
+type WriteKind = 'income' | 'tips';
 
 interface Notice { badge: string; date: string; title: string; preview: string; body: string; }
-interface Income { emoji: string; amount: string; author: string; date: string; desc: string; tags: string[]; }
-interface Tip { author?: string; title: string; detail: string; icon?: string; timestamp?: string; }
+interface CommunityMedia { media?: string; mediaType?: 'image' | 'video'; mediaName?: string; }
+interface Income extends CommunityMedia { amount: string; author: string; date: string; desc: string; tags: string[]; email?: string; phone?: string; }
+interface Tip extends CommunityMedia { author?: string; title: string; detail: string; timestamp?: string; email?: string; phone?: string; }
 
-const communityFieldStyle: React.CSSProperties = {
-    width: '100%',
-    padding: '13px 15px',
-    background: '#111827',
-    border: '1px solid rgba(255,255,255,0.22)',
-    borderRadius: 10,
-    color: '#f8fafc',
-    fontSize: 14,
-    outline: 'none',
-    boxSizing: 'border-box',
-    boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.04), 0 10px 24px rgba(0,0,0,0.18)',
-};
-
-const communityIncomeCardStyle: React.CSSProperties = {
-    maxWidth: 720,
-    margin: '0 auto 36px',
-    background: 'linear-gradient(180deg, rgba(34,28,12,0.96), rgba(15,18,28,0.97))',
-    border: '1px solid rgba(255,215,0,0.42)',
-    borderRadius: 16,
-    padding: 28,
-    boxShadow: '0 22px 60px rgba(0,0,0,0.36)',
-};
-
-const communityTipCardStyle: React.CSSProperties = {
-    maxWidth: 720,
-    margin: '0 auto 36px',
-    background: 'linear-gradient(180deg, rgba(16,28,54,0.96), rgba(14,18,32,0.97))',
-    border: '1px solid rgba(100,149,237,0.45)',
-    borderRadius: 16,
-    padding: 28,
-    boxShadow: '0 22px 60px rgba(0,0,0,0.36)',
-};
+interface CommunityCache {
+    notices: Notice[];
+    income: Income[];
+    tips: Tip[];
+    cachedAt: number;
+}
 
 const NOTICE_BADGE_LABEL: Record<string, string> = { important: '중요', update: '업데이트', event: '이벤트', tip: '안내' };
 
@@ -71,28 +52,135 @@ const FALLBACK_NOTICES: Notice[] = [
     },
 ];
 
-const FALLBACK_INCOME: Income[] = [
-    { emoji: '📊', amount: '월 127만원', author: '블로그왕 K님', date: '2026.03', desc: '네이버 블로그 7개 운영, 쿠팡 파트너스 + 체험단 수익입니다. Better Life Naver로 하루 평균 35건 발행 중.', tags: ['Better Life Naver', '쿠팡파트너스', '7개 블로그'] },
-    { emoji: '💵', amount: '월 $420', author: '글로벌 블로거 L님', date: '2026.03', desc: 'WordPress 3개 + Blogspot 2개 운영. 영어 콘텐츠로 구글 애드센스 수익화 성공. Leaders Orbit 8개월차.', tags: ['Leaders Orbit', '구글 애드센스', '다국어'] },
-    { emoji: '🏆', amount: '월 85만원', author: '부업러 P님', date: '2026.02', desc: '직장인 부업으로 네이버 블로그 4개 운영 중. 출근 전 키워드 세팅만 하면 퇴근 시 30건 완료.', tags: ['Better Life Naver', '직장인 부업', '4개 블로그'] },
-    { emoji: '🎯', amount: '월 200만원+', author: '에이전시 대표 M님', date: '2026.03', desc: '마케팅 에이전시 운영. 클라이언트 블로그 12개를 Leaders Pro로 통합 관리. 인건비 절약 + 품질 향상.', tags: ['Better Life Naver', '에이전시', '12개 블로그'] },
-];
+const panelStyle: CSSProperties = {
+    border: '1px solid rgba(255,255,255,0.10)',
+    borderRadius: 12,
+    background: 'linear-gradient(180deg, rgba(15,23,42,0.86), rgba(6,10,18,0.92))',
+    boxShadow: '0 24px 70px rgba(0,0,0,0.28)',
+};
 
-const FALLBACK_TIPS: Tip[] = [
-    { icon: '🎯', title: '키워드 선정이 수익의 80%', detail: '경쟁이 낮고 검색량이 있는 블루오션 키워드를 찾는 것이 핵심입니다. Leword를 활용하면 경쟁 강도·난이도를 한눈에 파악할 수 있습니다.' },
-    { icon: '⏰', title: '최적 발행 시간대', detail: '네이버 상위노출을 위한 최적 발행 시간: 오전 7-9시, 오후 12-1시, 저녁 8-10시. 스케줄링으로 자동 설정하세요.' },
-    { icon: '📈', title: '일 10건으로 시작하세요', detail: '처음부터 100건을 발행하면 봇 감지 위험이 있습니다. 일 10건부터 시작해서 2주 후 20건, 한 달 후 30건으로 천천히 늘려가세요.' },
-    { icon: '🛡️', title: '랜덤 딜레이 활용', detail: '발행 간 랜덤 딜레이(3~8분)를 설정하면 봇 감지 확률이 크게 감소합니다. 자동 설정 옵션을 활성화하세요.' },
-    { icon: '🌍', title: '글로벌 수익화 전략', detail: 'Leaders Orbit으로 영어 블로그를 운영하면 구글 애드센스 단가가 한국어 대비 2~5배 높습니다. 다국어 콘텐츠 생성을 활용하세요.' },
-    { icon: '🎨', title: 'AI 이미지 품질 높이기', detail: 'Imagen 4 또는 DALL-E를 선택하면 가장 높은 품질의 AI 이미지가 생성됩니다. 글 내용에 맞는 키워드 이미지로 체류시간을 높이세요.' },
-];
+const fieldStyle: CSSProperties = {
+    width: '100%',
+    padding: '13px 14px',
+    background: '#0d121b',
+    border: '1px solid rgba(255,255,255,0.12)',
+    borderRadius: 8,
+    color: '#fff',
+    fontSize: 14,
+    outline: 'none',
+    boxSizing: 'border-box',
+};
+
+function firstText(...values: unknown[]): string {
+    for (const value of values) {
+        if (typeof value === 'string' && value.trim()) return value.trim();
+    }
+    return '';
+}
+
+function splitTags(value: unknown): string[] {
+    if (Array.isArray(value)) return value.map((tag) => String(tag).trim()).filter(Boolean);
+    if (typeof value === 'string') return value.split(',').map((tag) => tag.trim()).filter(Boolean);
+    return [];
+}
+
+function normalizeMedia(raw: any): CommunityMedia {
+    const media = firstText(raw?.proofMedia, raw?.media, raw?.mediaUrl, raw?.proofImage, raw?.image, raw?.imageUrl, raw?.video, raw?.videoUrl);
+    const mediaType = firstText(raw?.mediaType).startsWith('video') || media.startsWith('data:video') ? 'video' : 'image';
+    return {
+        media,
+        mediaType: media ? mediaType : undefined,
+        mediaName: firstText(raw?.mediaName, raw?.imageName, raw?.fileName),
+    };
+}
+
+function normalizeNotice(raw: any): Notice | null {
+    const title = firstText(raw?.title);
+    if (!title) return null;
+    return {
+        badge: firstText(raw?.badge, 'tip'),
+        date: firstText(raw?.date, raw?.createdAt, ''),
+        title,
+        preview: firstText(raw?.preview, raw?.summary, raw?.body, ''),
+        body: firstText(raw?.body, raw?.detail, raw?.preview, ''),
+    };
+}
+
+function normalizeIncome(raw: any): Income | null {
+    const desc = firstText(raw?.desc, raw?.detail, raw?.reviewText, raw?.text);
+    const amount = firstText(raw?.amount, raw?.title);
+    const media = normalizeMedia(raw);
+    if (!desc && !media.media && !amount) return null;
+    const email = firstText(raw?.publicEmail, raw?.email);
+    const phone = firstText(raw?.publicPhone, raw?.phone);
+    return {
+        amount: amount || '수익 인증',
+        author: firstText(raw?.author, raw?.name, raw?.nickname, '익명'),
+        date: firstText(raw?.date, raw?.timestamp, raw?.createdAt, ''),
+        desc: maskContactText(desc || '수익인증 자료를 등록했습니다.'),
+        tags: splitTags(raw?.tags),
+        email: email ? (email.includes('*') ? email : maskEmail(email)) : '',
+        phone: phone ? (phone.includes('*') ? phone : maskPhone(phone)) : '',
+        ...media,
+    };
+}
+
+function normalizeTip(raw: any): Tip | null {
+    const title = firstText(raw?.title);
+    const detail = firstText(raw?.detail, raw?.desc, raw?.text);
+    const media = normalizeMedia(raw);
+    if (!title && !detail && !media.media) return null;
+    const email = firstText(raw?.publicEmail, raw?.email);
+    const phone = firstText(raw?.publicPhone, raw?.phone);
+    return {
+        author: firstText(raw?.author, raw?.name, raw?.nickname, '익명'),
+        title: title || '활용 팁',
+        detail: maskContactText(detail || '이미지/영상으로 공유한 활용 팁입니다.'),
+        timestamp: firstText(raw?.timestamp, raw?.createdAt, raw?.date),
+        email: email ? (email.includes('*') ? email : maskEmail(email)) : '',
+        phone: phone ? (phone.includes('*') ? phone : maskPhone(phone)) : '',
+        ...media,
+    };
+}
+
+function readCommunityCache(): CommunityCache | null {
+    try {
+        const raw = window.localStorage.getItem(COMMUNITY_CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw) as CommunityCache;
+        if (!parsed || !Array.isArray(parsed.notices) || !Array.isArray(parsed.income) || !Array.isArray(parsed.tips)) return null;
+        return parsed;
+    } catch {
+        return null;
+    }
+}
+
+function writeCommunityCache(cache: CommunityCache) {
+    try {
+        window.localStorage.setItem(COMMUNITY_CACHE_KEY, JSON.stringify({
+            notices: cache.notices.slice(0, 80),
+            income: cache.income.slice(0, 80),
+            tips: cache.tips.slice(0, 80),
+            cachedAt: Date.now(),
+        }));
+    } catch {
+        /* cache is optional */
+    }
+}
+
+async function fetchCommunityAction(action: string, signal: AbortSignal) {
+    const res = await fetch(`${GAS_URL}?action=${action}`, { cache: 'no-store', signal });
+    return res.json();
+}
 
 function CommunityPage() {
     const [tab, setTab] = useState<TabKey>('notices');
     const [notices, setNotices] = useState<Notice[]>(FALLBACK_NOTICES);
-    const [income, setIncome] = useState<Income[]>(FALLBACK_INCOME);
-    const [tips, setTips] = useState<Tip[]>(FALLBACK_TIPS);
+    const [income, setIncome] = useState<Income[]>([]);
+    const [tips, setTips] = useState<Tip[]>([]);
+    const [loading, setLoading] = useState(true);
     const [openNotice, setOpenNotice] = useState<number | null>(null);
+    const [writer, setWriter] = useState<WriteKind | null>(null);
 
     useEffect(() => {
         const prev = document.title;
@@ -100,289 +188,477 @@ function CommunityPage() {
         return () => { document.title = prev; };
     }, []);
 
-    const loadTips = async () => {
+    const refreshCommunity = useCallback(async (silent = false) => {
+        const cached = readCommunityCache();
+        if (cached) {
+            setNotices(cached.notices.length ? cached.notices : FALLBACK_NOTICES);
+            setIncome(cached.income);
+            setTips(cached.tips);
+            setLoading(false);
+        } else if (!silent) {
+            setLoading(true);
+        }
+
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), COMMUNITY_TIMEOUT_MS);
         try {
-            const res = await fetch(`${GAS_URL}?action=get-tips`);
-            const data = await res.json();
-            if (!data.success) return;
-            const list = data.tips || [];
-            if (list.length === 0) return;
-            setTips(list);
-        } catch { /* fallback */ }
-    };
+            const [noticeResult, incomeResult, tipResult] = await Promise.allSettled([
+                fetchCommunityAction('get-notices', controller.signal),
+                fetchCommunityAction('income-list', controller.signal),
+                fetchCommunityAction('get-tips', controller.signal),
+            ]);
+
+            const nextNotices = noticeResult.status === 'fulfilled' && noticeResult.value?.success
+                ? (noticeResult.value.notices || []).map(normalizeNotice).filter(Boolean) as Notice[]
+                : cached?.notices || FALLBACK_NOTICES;
+            const nextIncome = incomeResult.status === 'fulfilled' && incomeResult.value?.success
+                ? (incomeResult.value.income || []).map(normalizeIncome).filter(Boolean) as Income[]
+                : cached?.income || [];
+            const nextTips = tipResult.status === 'fulfilled' && tipResult.value?.success
+                ? (tipResult.value.tips || []).map(normalizeTip).filter(Boolean) as Tip[]
+                : cached?.tips || [];
+
+            setNotices(nextNotices.length ? nextNotices : FALLBACK_NOTICES);
+            setIncome(nextIncome);
+            setTips(nextTips);
+            writeCommunityCache({
+                notices: nextNotices.length ? nextNotices : FALLBACK_NOTICES,
+                income: nextIncome,
+                tips: nextTips,
+                cachedAt: Date.now(),
+            });
+        } catch {
+            if (!cached) {
+                setNotices(FALLBACK_NOTICES);
+                setIncome([]);
+                setTips([]);
+            }
+        } finally {
+            window.clearTimeout(timer);
+            setLoading(false);
+        }
+    }, []);
 
     useEffect(() => {
-        (async () => {
-            try {
-                const res = await fetch(`${GAS_URL}?action=get-notices`);
-                const data = await res.json();
-                if (data.success && data.notices?.length) setNotices(data.notices);
-            } catch { /* fallback */ }
-        })();
-        (async () => {
-            try {
-                const res = await fetch(`${GAS_URL}?action=income-list`);
-                const data = await res.json();
-                if (data.success && data.income?.length) setIncome(data.income);
-            } catch { /* fallback */ }
-        })();
-        loadTips();
-    }, []);
+        refreshCommunity();
+    }, [refreshCommunity]);
 
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
             <style>{`
-                .community-form-field::placeholder {
-                    color: rgba(226,232,240,0.68);
-                    opacity: 1;
+                .community-field::placeholder { color: rgba(226,232,240,0.64); opacity: 1; }
+                .community-field:focus {
+                    border-color: rgba(68,215,182,0.76) !important;
+                    box-shadow: 0 0 0 3px rgba(68,215,182,0.14) !important;
                 }
-                .community-form-field:focus {
-                    border-color: rgba(255,215,0,0.72) !important;
-                    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 3px rgba(255,215,0,0.16), 0 14px 28px rgba(0,0,0,0.22) !important;
-                }
-                .community-form-field.tip-focus:focus {
-                    border-color: rgba(100,149,237,0.8) !important;
-                    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 3px rgba(100,149,237,0.18), 0 14px 28px rgba(0,0,0,0.22) !important;
+                .community-write-button:hover,
+                .community-card:hover { transform: translateY(-2px); }
+                @media (max-width: 720px) {
+                    .community-grid { grid-template-columns: 1fr !important; }
+                    .community-modal-grid { grid-template-columns: 1fr !important; }
                 }
             `}</style>
             <section style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
-                <div style={{ textAlign: 'center', marginBottom: 40 }}>
-                    <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>COMMUNITY</span>
-                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>Leaders Pro 커뮤니티</h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>공지사항, 수익 인증, 활용 팁을 확인하세요</p>
+                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 18, marginBottom: 34, flexWrap: 'wrap' }}>
+                    <div>
+                        <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>COMMUNITY</span>
+                        <h1 style={{ fontSize: 'clamp(30px, 4vw, 46px)', fontWeight: 900, marginBottom: 12 }}>Leaders Pro 커뮤니티</h1>
+                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>공지사항, 실제 수익 인증, 운영자가 직접 남긴 활용 팁을 확인하세요.</p>
+                    </div>
+                    <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                        {tab === 'income' && <WriteButton label="수익인증 작성" onClick={() => setWriter('income')} />}
+                        {tab === 'tips' && <WriteButton label="활용팁 작성" onClick={() => setWriter('tips')} />}
+                        <button
+                            type="button"
+                            onClick={() => refreshCommunity(true)}
+                            style={{ minHeight: 42, padding: '10px 16px', borderRadius: 8, border: '1px solid rgba(255,255,255,0.14)', background: 'rgba(255,255,255,0.06)', color: '#e5edf7', fontWeight: 800, cursor: 'pointer' }}
+                        >
+                            새로고침
+                        </button>
+                    </div>
                 </div>
 
-                {/* Tabs */}
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 40, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 34, flexWrap: 'wrap' }}>
                     {(
                         [
-                            ['notices', '📢 공지사항'],
-                            ['income', '💰 수익 인증'],
-                            ['tips', '💡 활용 팁'],
+                            ['notices', '공지사항'],
+                            ['income', '수익 인증'],
+                            ['tips', '활용 팁'],
                         ] as Array<[TabKey, string]>
-                    ).map(([k, label]) => (
+                    ).map(([key, label]) => (
                         <button
-                            key={k}
-                            onClick={() => setTab(k)}
+                            key={key}
+                            onClick={() => setTab(key)}
                             style={{
-                                padding: '12px 28px', borderRadius: 50,
-                                background: tab === k ? 'linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,215,0,0.08))' : 'rgba(255,255,255,0.03)',
-                                border: tab === k ? '1px solid #FFD700' : '1px solid rgba(255,255,255,0.1)',
-                                color: tab === k ? '#FFD700' : 'rgba(255,255,255,0.65)',
-                                fontWeight: 600, fontSize: 14, cursor: 'pointer',
-                                boxShadow: tab === k ? '0 0 20px rgba(255,215,0,0.15)' : 'none',
+                                minHeight: 44,
+                                padding: '10px 22px',
+                                borderRadius: 8,
+                                background: tab === key ? '#16c47f' : 'rgba(255,255,255,0.06)',
+                                border: tab === key ? '1px solid rgba(68,215,182,0.7)' : '1px solid rgba(255,255,255,0.10)',
+                                color: tab === key ? '#061018' : 'rgba(255,255,255,0.72)',
+                                fontWeight: 900,
+                                cursor: 'pointer',
                             }}
-                        >{label}</button>
+                        >
+                            {label}
+                        </button>
                     ))}
                 </div>
 
+                {loading && (
+                    <div style={{ ...panelStyle, padding: 24, marginBottom: 24, color: 'rgba(255,255,255,0.70)' }}>
+                        캐시를 확인하면서 최신 커뮤니티 데이터를 불러오는 중입니다.
+                    </div>
+                )}
+
                 {tab === 'notices' && <NoticesPanel notices={notices} openIdx={openNotice} onToggle={(i) => setOpenNotice(openNotice === i ? null : i)} />}
-                {tab === 'income' && <IncomePanel items={income} />}
-                {tab === 'tips' && <TipsPanel items={tips} onSubmitted={loadTips} />}
+                {tab === 'income' && <IncomePanel items={income} onWrite={() => setWriter('income')} />}
+                {tab === 'tips' && <TipsPanel items={tips} onWrite={() => setWriter('tips')} />}
             </section>
+
+            {writer && (
+                <CommunityWriteModal
+                    kind={writer}
+                    onClose={() => setWriter(null)}
+                    onSubmitted={() => {
+                        setWriter(null);
+                        refreshCommunity(true);
+                    }}
+                />
+            )}
         </div>
     );
 }
 
-// ─── Notices ───
+function WriteButton({ label, onClick }: { label: string; onClick: () => void }) {
+    return (
+        <button
+            type="button"
+            className="community-write-button"
+            onClick={onClick}
+            style={{
+                minHeight: 42,
+                padding: '10px 18px',
+                borderRadius: 8,
+                border: '1px solid rgba(68,215,182,0.46)',
+                background: '#16c47f',
+                color: '#061018',
+                fontWeight: 900,
+                cursor: 'pointer',
+                transition: 'transform .18s ease',
+            }}
+        >
+            {label}
+        </button>
+    );
+}
+
+function MediaView({ item, height = 230 }: { item: CommunityMedia; height?: number }) {
+    if (!item.media) return null;
+    return item.mediaType === 'video' ? (
+        <video src={item.media} controls playsInline style={{ width: '100%', height, objectFit: 'cover', display: 'block', background: '#050812' }} />
+    ) : (
+        <img src={item.media} alt={item.mediaName || '커뮤니티 첨부 이미지'} style={{ width: '100%', height, objectFit: 'cover', display: 'block', background: '#050812' }} />
+    );
+}
+
+function EmptyState({ title, desc, action, onWrite }: { title: string; desc: string; action: string; onWrite: () => void }) {
+    return (
+        <div style={{ ...panelStyle, padding: '44px 26px', textAlign: 'center' }}>
+            <h2 style={{ margin: '0 0 10px', fontSize: 24 }}>{title}</h2>
+            <p style={{ margin: '0 auto 22px', maxWidth: 560, color: 'rgba(255,255,255,0.62)', lineHeight: 1.7 }}>{desc}</p>
+            <WriteButton label={action} onClick={onWrite} />
+        </div>
+    );
+}
+
 function NoticesPanel({ notices, openIdx, onToggle }: { notices: Notice[]; openIdx: number | null; onToggle: (i: number) => void }) {
-    const badgeColor = (b: string) => {
-        switch (b) {
-            case 'important': return { bg: 'rgba(255,92,117,0.15)', color: '#ff5c75', border: 'rgba(255,92,117,0.3)' };
-            case 'update': return { bg: 'rgba(0,170,255,0.15)', color: '#00AAFF', border: 'rgba(0,170,255,0.3)' };
-            case 'event': return { bg: 'rgba(68,215,182,0.15)', color: '#44d7b6', border: 'rgba(68,215,182,0.3)' };
-            default: return { bg: 'rgba(255,215,0,0.12)', color: '#FFD700', border: 'rgba(255,215,0,0.3)' };
+    const badgeColor = (badge: string) => {
+        switch (badge) {
+            case 'important': return { bg: 'rgba(255,92,117,0.15)', color: '#ff8798', border: 'rgba(255,92,117,0.30)' };
+            case 'update': return { bg: 'rgba(56,189,248,0.13)', color: '#7dd3fc', border: 'rgba(56,189,248,0.30)' };
+            case 'event': return { bg: 'rgba(68,215,182,0.13)', color: '#8ff5d4', border: 'rgba(68,215,182,0.30)' };
+            default: return { bg: 'rgba(244,201,93,0.12)', color: '#f4c95d', border: 'rgba(244,201,93,0.30)' };
         }
     };
 
     return (
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            {notices.map((n, i) => {
-                const open = openIdx === i;
-                const bc = badgeColor(n.badge);
+            {notices.map((notice, index) => {
+                const open = openIdx === index;
+                const colors = badgeColor(notice.badge);
                 return (
-                    <div
-                        key={i}
-                        onClick={() => onToggle(i)}
-                        style={{ background: 'rgba(18,18,26,0.6)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, padding: 24, marginBottom: 14, cursor: 'pointer', transition: 'all 0.2s' }}
+                    <article
+                        key={`${notice.title}-${index}`}
+                        onClick={() => onToggle(index)}
+                        style={{ ...panelStyle, padding: 24, marginBottom: 14, cursor: 'pointer' }}
                     >
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                            <span style={{ padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 700, background: bc.bg, color: bc.color, border: `1px solid ${bc.border}` }}>{NOTICE_BADGE_LABEL[n.badge] || n.badge}</span>
-                            <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 12 }}>{n.date}</span>
+                            <span style={{ padding: '4px 10px', borderRadius: 8, fontSize: 11, fontWeight: 900, background: colors.bg, color: colors.color, border: `1px solid ${colors.border}` }}>{NOTICE_BADGE_LABEL[notice.badge] || notice.badge}</span>
+                            <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 12 }}>{notice.date}</span>
                         </div>
-                        <h4 style={{ fontSize: 17, fontWeight: 700, marginBottom: 8 }}>{n.title}</h4>
-                        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, lineHeight: 1.6 }}>{n.preview}</p>
-                        <div style={{ maxHeight: open ? 600 : 0, overflow: 'hidden', transition: 'max-height 0.3s ease' }}>
+                        <h3 style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>{notice.title}</h3>
+                        <p style={{ color: 'rgba(255,255,255,0.64)', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{notice.preview}</p>
+                        <div style={{ maxHeight: open ? 700 : 0, overflow: 'hidden', transition: 'max-height 0.25s ease' }}>
                             <div
-                                style={{ paddingTop: 14, marginTop: 14, borderTop: '1px solid rgba(255,255,255,0.06)', fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.8 }}
-                                dangerouslySetInnerHTML={{ __html: n.body }}
+                                style={{ paddingTop: 14, marginTop: 14, borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: 14, color: 'rgba(255,255,255,0.74)', lineHeight: 1.8 }}
+                                dangerouslySetInnerHTML={{ __html: notice.body }}
                             />
                         </div>
-                    </div>
+                    </article>
                 );
             })}
         </div>
     );
 }
 
-// ─── Income ───
-function IncomePanel({ items }: { items: Income[] }) {
-    const [form, setForm] = useState({ emoji: '💰', amount: '', author: '', email: '', date: '', desc: '', tags: '' });
-    const [msg, setMsg] = useState<{ text: string; color: string } | null>(null);
-    const [submitting, setSubmitting] = useState(false);
-
-    const update = (k: keyof typeof form, v: string) => setForm((f) => ({ ...f, [k]: v }));
-
-    const submit = async () => {
-        if (!form.author.trim()) { setMsg({ text: '닉네임을 입력해주세요.', color: '#e95e2c' }); return; }
-        if (!form.amount.trim()) { setMsg({ text: '금액을 입력해주세요.', color: '#e95e2c' }); return; }
-        if (!form.desc.trim()) { setMsg({ text: '설명을 입력해주세요.', color: '#e95e2c' }); return; }
-        setSubmitting(true);
-        try {
-            const res = await fetch(GAS_URL, {
-                method: 'POST', headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify({ action: 'income-submit', ...form, timestamp: new Date().toISOString() }),
-            });
-            const data = await res.json();
-            if (data.success) {
-                setMsg({ text: '🎉 수익 인증이 접수되었습니다. 검토 후 1~2일 내 공개됩니다.', color: '#44d7b6' });
-                setForm({ emoji: '💰', amount: '', author: '', email: '', date: '', desc: '', tags: '' });
-            } else {
-                setMsg({ text: data.message || '등록 실패', color: '#e95e2c' });
-            }
-        } catch (err: any) {
-            setMsg({ text: '오류: ' + (err?.message || ''), color: '#e95e2c' });
-        }
-        setSubmitting(false);
-    };
-
-    const inputStyle = communityFieldStyle;
+function IncomePanel({ items, onWrite }: { items: Income[]; onWrite: () => void }) {
+    if (items.length === 0) {
+        return <EmptyState title="아직 공개된 수익인증이 없습니다" desc="더미 수익인증은 표시하지 않습니다. 실제 이미지/영상과 글이 승인되면 이곳에 노출됩니다." action="수익인증 작성" onWrite={onWrite} />;
+    }
 
     return (
-        <div>
-            {/* Submit form */}
-            <div style={communityIncomeCardStyle}>
-                <h3 style={{ fontSize: 16, color: '#FFD700', marginBottom: 6 }}>💰 내 수익 인증 올리기</h3>
-                <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 13, marginBottom: 18 }}>검토 후 1~2일 내 공개됩니다. 누구나 가능합니다.</p>
-                <div style={{ display: 'grid', gridTemplateColumns: '70px 1fr 1fr', gap: 12, marginBottom: 12 }}>
-                    <input className="community-form-field" value={form.emoji} maxLength={4} onChange={(e) => update('emoji', e.target.value)} placeholder="💰" style={{ ...inputStyle, textAlign: 'center', fontSize: 20 }} />
-                    <input className="community-form-field" value={form.amount} maxLength={50} onChange={(e) => update('amount', e.target.value)} placeholder="금액 (예: 월 127만원)" style={inputStyle} />
-                    <input className="community-form-field" value={form.author} maxLength={20} onChange={(e) => update('author', e.target.value)} placeholder="닉네임" style={inputStyle} />
-                </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
-                    <input className="community-form-field" type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="이메일 (선택 — 공개 안 됨)" style={inputStyle} />
-                    <input className="community-form-field" value={form.date} maxLength={20} onChange={(e) => update('date', e.target.value)} placeholder="시점 (예: 2026.05)" style={inputStyle} />
-                </div>
-                <textarea className="community-form-field" value={form.desc} maxLength={500} rows={3} onChange={(e) => update('desc', e.target.value)} placeholder="어떤 제품으로 어떻게 수익화했는지 1-2줄" style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.6, marginBottom: 12 }} />
-                <input className="community-form-field" value={form.tags} maxLength={200} onChange={(e) => update('tags', e.target.value)} placeholder="태그 (콤마 구분: Better Life Naver, 쿠팡파트너스, 7개 블로그)" style={inputStyle} />
-                <button onClick={submit} disabled={submitting} style={{ marginTop: 14, width: '100%', padding: 14, background: submitting ? 'rgba(255,255,255,0.08)' : 'linear-gradient(135deg, #c9a84c, #d4a012)', color: submitting ? 'rgba(255,255,255,0.4)' : '#1a1a2e', border: 'none', borderRadius: 10, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}>{submitting ? '등록 중...' : '수익 인증 등록하기'}</button>
-                {msg && <div style={{ marginTop: 12, fontSize: 13, textAlign: 'center', color: msg.color }}>{msg.text}</div>}
-            </div>
-
-            {/* Income cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 20 }}>
-                {items.map((it, i) => (
-                    <div key={i} style={{ background: 'rgba(18,18,26,0.6)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 16, overflow: 'hidden' }}>
-                        <div style={{ background: 'linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,165,0,0.08))', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                            <div style={{ fontSize: 48 }}>{it.emoji}</div>
-                            <span style={{ position: 'absolute', top: 12, right: 12, background: 'rgba(255,215,0,0.9)', color: '#000', fontSize: 12, fontWeight: 800, padding: '4px 10px', borderRadius: 50 }}>{it.amount}</span>
+        <div className="community-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 18 }}>
+            {items.map((item, index) => (
+                <article key={`${item.amount}-${index}`} className="community-card" style={{ ...panelStyle, overflow: 'hidden', transition: 'transform .18s ease' }}>
+                    {item.media ? (
+                        <MediaView item={item} />
+                    ) : (
+                        <div style={{ height: 180, background: 'linear-gradient(135deg, rgba(68,215,182,0.22), rgba(244,201,93,0.12))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={{ fontSize: 34, fontWeight: 900, color: '#f4c95d' }}>{item.amount}</span>
                         </div>
-                        <div style={{ padding: 18 }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 12 }}>
-                                <span style={{ color: '#fff', fontWeight: 600 }}>{it.author}</span>
-                                <span style={{ color: 'rgba(255,255,255,0.45)' }}>{it.date}</span>
+                    )}
+                    <div style={{ padding: 20 }}>
+                        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 12 }}>
+                            <div>
+                                <b style={{ display: 'block', color: '#f4c95d', fontSize: 13, marginBottom: 6 }}>수익인증</b>
+                                <h3 style={{ margin: 0, fontSize: 23, lineHeight: 1.2 }}>{item.amount}</h3>
                             </div>
-                            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, marginBottom: 12 }}>{it.desc}</p>
+                            {item.date && <span style={{ color: 'rgba(255,255,255,0.48)', fontSize: 12, whiteSpace: 'nowrap' }}>{item.date}</span>}
+                        </div>
+                        <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 14, lineHeight: 1.72, margin: '0 0 14px', whiteSpace: 'pre-wrap' }}>{item.desc}</p>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginBottom: 12 }}>
+                            <span style={{ color: '#fff', fontSize: 13, fontWeight: 900 }}>{item.author}</span>
+                            <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 11 }}>{item.phone || item.email}</span>
+                        </div>
+                        {item.tags.length > 0 && (
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-                                {(it.tags || []).map((t, j) => (
-                                    <span key={j} style={{ background: 'rgba(255,215,0,0.08)', color: '#FFD700', fontSize: 11, padding: '3px 10px', borderRadius: 50, border: '1px solid rgba(255,215,0,0.2)' }}>{t}</span>
+                                {item.tags.map((tag) => (
+                                    <span key={tag} style={{ background: 'rgba(244,201,93,0.10)', color: '#f4c95d', fontSize: 11, padding: '4px 9px', borderRadius: 999, border: '1px solid rgba(244,201,93,0.24)' }}>{tag}</span>
                                 ))}
                             </div>
+                        )}
+                    </div>
+                </article>
+            ))}
+        </div>
+    );
+}
+
+function TipsPanel({ items, onWrite }: { items: Tip[]; onWrite: () => void }) {
+    if (items.length === 0) {
+        return <EmptyState title="아직 공개된 활용 팁이 없습니다" desc="실제 사용자가 이미지/영상과 함께 남긴 활용 팁만 공개됩니다." action="활용팁 작성" onWrite={onWrite} />;
+    }
+
+    return (
+        <div className="community-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 18 }}>
+            {items.map((tip, index) => (
+                <article key={`${tip.title}-${index}`} className="community-card" style={{ ...panelStyle, overflow: 'hidden', transition: 'transform .18s ease' }}>
+                    {tip.media && <MediaView item={tip} height={190} />}
+                    <div style={{ padding: 20 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginBottom: 12 }}>
+                            <span style={{ color: '#44d7b6', fontSize: 12, fontWeight: 900 }}>활용 팁</span>
+                            {tip.timestamp && <span style={{ color: 'rgba(255,255,255,0.42)', fontSize: 11 }}>{new Date(tip.timestamp).toLocaleDateString('ko-KR')}</span>}
+                        </div>
+                        <h3 style={{ fontSize: 18, lineHeight: 1.42, margin: '0 0 10px' }}>{tip.title}</h3>
+                        <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.74)', lineHeight: 1.72, whiteSpace: 'pre-wrap', margin: '0 0 14px' }}>{tip.detail}</p>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, color: 'rgba(255,255,255,0.48)', fontSize: 12 }}>
+                            <span>{tip.author}</span>
+                            <span>{tip.phone || tip.email}</span>
                         </div>
                     </div>
-                ))}
-            </div>
-
-            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.55)', fontSize: 13, marginTop: 32 }}>
-                💬 수익 인증을 공유하고 싶으시다면{' '}
-                <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700' }}>카카오톡 1:1 문의</a>로 보내주세요!
+                </article>
+            ))}
+            <p style={{ gridColumn: '1 / -1', textAlign: 'center', color: 'rgba(255,255,255,0.46)', fontSize: 13, marginTop: 20 }}>
+                더 많은 정보는 <Link to="/reviews" style={{ color: '#44d7b6' }}>후기</Link> 또는 <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#44d7b6' }}>카카오톡 채널</a>에서 확인하세요.
             </p>
         </div>
     );
 }
 
-// ─── Tips ───
-function TipsPanel({ items, onSubmitted }: { items: Tip[]; onSubmitted: () => void }) {
-    const [form, setForm] = useState({ author: '', email: '', title: '', detail: '' });
-    const [msg, setMsg] = useState<{ text: string; color: string } | null>(null);
+function CommunityWriteModal({ kind, onClose, onSubmitted }: { kind: WriteKind; onClose: () => void; onSubmitted: () => void }) {
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const isIncome = kind === 'income';
+    const [form, setForm] = useState({
+        author: '',
+        email: '',
+        phone: '',
+        amount: '',
+        date: '',
+        title: '',
+        detail: '',
+        tags: '',
+    });
+    const [media, setMedia] = useState('');
+    const [mediaType, setMediaType] = useState<'image' | 'video'>('image');
+    const [mediaName, setMediaName] = useState('');
     const [submitting, setSubmitting] = useState(false);
-    const update = (k: keyof typeof form, v: string) => setForm((f) => ({ ...f, [k]: v }));
+    const [msg, setMsg] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+    const update = (key: keyof typeof form, value: string) => setForm((prev) => ({ ...prev, [key]: value }));
+
+    const handleMediaChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/') && !file.type.startsWith('video/')) {
+            setMsg({ type: 'error', text: '이미지 또는 동영상 파일만 선택할 수 있습니다.' });
+            return;
+        }
+        if (file.size > MAX_MEDIA_BYTES) {
+            setMsg({ type: 'error', text: '파일은 18MB 이하로 선택해주세요.' });
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+            setMedia(String(reader.result || ''));
+            setMediaName(file.name);
+            setMediaType(file.type.startsWith('video/') ? 'video' : 'image');
+            setMsg(null);
+        };
+        reader.onerror = () => setMsg({ type: 'error', text: '파일을 읽지 못했습니다. 다른 파일을 선택해주세요.' });
+        reader.readAsDataURL(file);
+    };
 
     const submit = async () => {
-        if (!form.author.trim()) { setMsg({ text: '닉네임을 입력해주세요.', color: '#e95e2c' }); return; }
-        if (!form.title.trim()) { setMsg({ text: '제목을 입력해주세요.', color: '#e95e2c' }); return; }
-        if (!form.detail.trim()) { setMsg({ text: '본문을 입력해주세요.', color: '#e95e2c' }); return; }
+        if (!form.author.trim()) { setMsg({ type: 'error', text: '닉네임을 입력해주세요.' }); return; }
+        if (!form.email.trim() || !isValidEmail(form.email)) { setMsg({ type: 'error', text: '정확한 이메일을 입력해주세요.' }); return; }
+        if (!form.phone.trim() || !isValidPhone(form.phone)) { setMsg({ type: 'error', text: '정확한 휴대폰 번호를 입력해주세요.' }); return; }
+        if (!media) { setMsg({ type: 'error', text: '이미지 또는 동영상을 선택해주세요.' }); return; }
+        if (isIncome && !form.amount.trim()) { setMsg({ type: 'error', text: '수익 금액을 입력해주세요.' }); return; }
+        if (!isIncome && !form.title.trim()) { setMsg({ type: 'error', text: '제목을 입력해주세요.' }); return; }
+        if (!form.detail.trim()) { setMsg({ type: 'error', text: isIncome ? '수익인증 글을 작성해주세요.' : '활용 팁 글을 작성해주세요.' }); return; }
+
         setSubmitting(true);
+        setMsg(null);
         try {
+            const maskedDetail = maskContactText(form.detail.trim());
+            const payload = isIncome
+                ? {
+                    action: 'income-submit',
+                    author: form.author.trim(),
+                    email: form.email.trim(),
+                    phone: form.phone.trim(),
+                    publicEmail: maskEmail(form.email),
+                    publicPhone: maskPhone(form.phone),
+                    amount: form.amount.trim(),
+                    date: form.date.trim(),
+                    desc: maskedDetail,
+                    tags: form.tags.trim(),
+                    proofMedia: media,
+                    image: media,
+                    media,
+                    mediaType,
+                    mediaName,
+                    timestamp: new Date().toISOString(),
+                }
+                : {
+                    action: 'submit-tip',
+                    author: form.author.trim(),
+                    email: form.email.trim(),
+                    phone: form.phone.trim(),
+                    publicEmail: maskEmail(form.email),
+                    publicPhone: maskPhone(form.phone),
+                    title: form.title.trim(),
+                    detail: maskedDetail,
+                    proofMedia: media,
+                    image: media,
+                    media,
+                    mediaType,
+                    mediaName,
+                    timestamp: new Date().toISOString(),
+                };
             const res = await fetch(GAS_URL, {
-                method: 'POST', headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify({ action: 'submit-tip', ...form, timestamp: new Date().toISOString() }),
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(payload),
             });
             const data = await res.json();
             if (data.success) {
-                setMsg({ text: '🎉 팁이 접수되었습니다. 검토 후 1~2일 내 공개됩니다.', color: '#44d7b6' });
-                setForm({ author: '', email: '', title: '', detail: '' });
-                onSubmitted();
+                setMsg({ type: 'success', text: '접수되었습니다. 검토 후 공개됩니다.' });
+                window.setTimeout(onSubmitted, 500);
             } else {
-                setMsg({ text: data.message || '등록 실패', color: '#e95e2c' });
+                setMsg({ type: 'error', text: data.message || '등록 실패. 다시 시도해주세요.' });
             }
-        } catch (err: any) {
-            setMsg({ text: '오류: ' + (err?.message || ''), color: '#e95e2c' });
+        } catch (error: any) {
+            setMsg({ type: 'error', text: `오류: ${error?.message || '서버 연결 실패'}` });
+        } finally {
+            setSubmitting(false);
         }
-        setSubmitting(false);
     };
 
-    const inputStyle = communityFieldStyle;
-
     return (
-        <div>
-            {/* Submit form */}
-            <div style={communityTipCardStyle}>
-                <h3 style={{ fontSize: 16, color: '#6495ed', marginBottom: 6 }}>💡 내 활용 팁 공유하기</h3>
-                <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 13, marginBottom: 18 }}>자유롭게 작성하세요. 누구나 가능합니다.</p>
-                <div style={{ display: 'flex', gap: 12, marginBottom: 12, flexWrap: 'wrap' }}>
-                    <input className="community-form-field tip-focus" value={form.author} maxLength={20} onChange={(e) => update('author', e.target.value)} placeholder="닉네임" style={{ ...inputStyle, flex: 1, minWidth: 180 }} />
-                    <input className="community-form-field tip-focus" type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="이메일 (선택 — 공개 안 됨)" style={{ ...inputStyle, flex: 1.3, minWidth: 200 }} />
-                </div>
-                <input className="community-form-field tip-focus" value={form.title} maxLength={100} onChange={(e) => update('title', e.target.value)} placeholder="제목 (예: 키워드 분석 꿀팁)" style={{ ...inputStyle, marginBottom: 12 }} />
-                <textarea className="community-form-field tip-focus" value={form.detail} maxLength={1500} rows={5} onChange={(e) => update('detail', e.target.value)} placeholder="활용 팁을 자세히 작성해주세요..." style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.6 }} />
-                <button onClick={submit} disabled={submitting} style={{ marginTop: 14, width: '100%', padding: 14, background: submitting ? 'rgba(255,255,255,0.08)' : 'linear-gradient(135deg, #6495ed, #4169e1)', color: '#fff', border: 'none', borderRadius: 10, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}>{submitting ? '등록 중...' : '팁 등록하기'}</button>
-                {msg && <div style={{ marginTop: 12, fontSize: 13, textAlign: 'center', color: msg.color }}>{msg.text}</div>}
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18 }}>
-                {items.map((t, i) => (
-                    <div key={i} style={{ background: 'rgba(18,18,26,0.6)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: 14, padding: 22 }}>
-                        {t.author ? (
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                                <span style={{ color: '#6495ed', fontSize: 12, fontWeight: 600 }}>👤 {t.author}</span>
-                                {t.timestamp && <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 11 }}>{new Date(t.timestamp).toLocaleDateString('ko-KR')}</span>}
-                            </div>
-                        ) : (
-                            <div style={{ fontSize: 28, marginBottom: 10 }}>{t.icon}</div>
-                        )}
-                        <h4 style={{ fontSize: 15, fontWeight: 700, marginBottom: 8 }}>{t.title}</h4>
-                        <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.7, whiteSpace: 'pre-wrap' }}>{t.detail}</p>
+        <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={isIncome ? '수익인증 작성' : '활용 팁 작성'}
+            onClick={() => { if (!submitting) onClose(); }}
+            style={{ position: 'fixed', inset: 0, zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 18, background: 'rgba(2,6,12,0.78)', backdropFilter: 'blur(10px)' }}
+        >
+            <div onClick={(event) => event.stopPropagation()} style={{ width: 'min(680px, 100%)', maxHeight: 'calc(100vh - 36px)', overflowY: 'auto', borderRadius: 12, border: '1px solid rgba(68,215,182,0.28)', background: '#101721', boxShadow: '0 30px 90px rgba(0,0,0,0.48)', color: '#fff' }}>
+                <div style={{ padding: '26px 28px 18px', borderBottom: '1px solid rgba(255,255,255,0.08)', display: 'flex', justifyContent: 'space-between', gap: 16 }}>
+                    <div>
+                        <h2 style={{ margin: '0 0 8px', fontSize: 26 }}>{isIncome ? '수익인증 작성' : '활용 팁 작성'}</h2>
+                        <p style={{ margin: 0, color: 'rgba(255,255,255,0.62)', lineHeight: 1.6 }}>이메일과 휴대폰 번호는 검토용이며 공개 영역에서는 마스킹됩니다.</p>
                     </div>
-                ))}
-            </div>
+                    <button type="button" onClick={onClose} style={{ width: 38, height: 38, borderRadius: 8, border: '1px solid rgba(255,255,255,0.12)', background: '#0b111a', color: '#fff', fontSize: 20, cursor: 'pointer' }}>x</button>
+                </div>
 
-            <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.4)', fontSize: 12, marginTop: 32 }}>
-                더 많은 정보는{' '}
-                <Link to="/reviews" style={{ color: '#FFD700' }}>후기</Link>{' '}또는{' '}
-                <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700' }}>카카오톡 채널</a>
-                에서 확인하세요.
-            </p>
+                <div style={{ padding: 28 }}>
+                    <input ref={fileInputRef} type="file" accept="image/*,video/*" onChange={handleMediaChange} style={{ display: 'none' }} />
+                    <button type="button" onClick={() => fileInputRef.current?.click()} style={{ width: '100%', minHeight: 48, borderRadius: 8, border: '1px solid rgba(68,215,182,0.42)', background: 'rgba(68,215,182,0.10)', color: '#8ff5d4', fontWeight: 900, cursor: 'pointer', marginBottom: 12 }}>
+                        {media ? '파일 다시 선택하기' : '이미지 또는 동영상 선택하기'}
+                    </button>
+                    {media && (
+                        <div style={{ marginBottom: 16, border: '1px solid rgba(255,255,255,0.10)', borderRadius: 10, background: '#080d14', overflow: 'hidden' }}>
+                            {mediaType === 'video' ? (
+                                <video src={media} controls playsInline style={{ width: '100%', maxHeight: 320, display: 'block' }} />
+                            ) : (
+                                <img src={media} alt="선택한 첨부 미리보기" style={{ width: '100%', maxHeight: 280, objectFit: 'contain', display: 'block' }} />
+                            )}
+                            <div style={{ padding: '9px 12px', color: 'rgba(255,255,255,0.58)', fontSize: 12 }}>{mediaName}</div>
+                        </div>
+                    )}
+
+                    <div className="community-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+                        <input className="community-field" value={form.author} maxLength={20} onChange={(event) => update('author', event.target.value)} placeholder="닉네임 필수" style={fieldStyle} />
+                        <input className="community-field" type="email" value={form.email} onChange={(event) => update('email', event.target.value)} placeholder="이메일 필수" style={fieldStyle} />
+                    </div>
+                    <input className="community-field" type="tel" value={form.phone} onChange={(event) => update('phone', event.target.value)} placeholder="휴대폰 번호 필수" style={{ ...fieldStyle, marginBottom: 12 }} />
+
+                    {isIncome ? (
+                        <>
+                            <div className="community-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+                                <input className="community-field" value={form.amount} maxLength={50} onChange={(event) => update('amount', event.target.value)} placeholder="수익 금액 예: 월 127만원" style={fieldStyle} />
+                                <input className="community-field" value={form.date} maxLength={20} onChange={(event) => update('date', event.target.value)} placeholder="시점 예: 2026.07" style={fieldStyle} />
+                            </div>
+                            <textarea className="community-field" value={form.detail} maxLength={800} rows={5} onChange={(event) => update('detail', event.target.value)} placeholder="어떤 제품으로 어떻게 성과가 났는지 작성해주세요. 본문 속 연락처는 자동으로 가려집니다." style={{ ...fieldStyle, resize: 'vertical', lineHeight: 1.65, marginBottom: 12 }} />
+                            <input className="community-field" value={form.tags} maxLength={200} onChange={(event) => update('tags', event.target.value)} placeholder="태그 선택, 콤마 구분" style={{ ...fieldStyle, marginBottom: 14 }} />
+                        </>
+                    ) : (
+                        <>
+                            <input className="community-field" value={form.title} maxLength={100} onChange={(event) => update('title', event.target.value)} placeholder="제목 필수" style={{ ...fieldStyle, marginBottom: 12 }} />
+                            <textarea className="community-field" value={form.detail} maxLength={1500} rows={6} onChange={(event) => update('detail', event.target.value)} placeholder="활용 팁을 이미지/영상과 함께 자세히 작성해주세요. 본문 속 연락처는 자동으로 가려집니다." style={{ ...fieldStyle, resize: 'vertical', lineHeight: 1.65, marginBottom: 14 }} />
+                        </>
+                    )}
+
+                    <button onClick={submit} disabled={submitting} style={{ width: '100%', minHeight: 50, borderRadius: 8, border: 'none', background: submitting ? '#233044' : '#16c47f', color: submitting ? 'rgba(255,255,255,0.5)' : '#061018', fontSize: 15, fontWeight: 900, cursor: submitting ? 'not-allowed' : 'pointer' }}>
+                        {submitting ? '등록 중...' : isIncome ? '수익인증 등록하기' : '활용팁 등록하기'}
+                    </button>
+                    {msg && (
+                        <div style={{ marginTop: 14, padding: 13, borderRadius: 8, textAlign: 'center', fontSize: 13, background: msg.type === 'success' ? 'rgba(68,215,182,0.10)' : 'rgba(255,92,117,0.10)', border: `1px solid ${msg.type === 'success' ? 'rgba(68,215,182,0.34)' : 'rgba(255,92,117,0.28)'}`, color: msg.type === 'success' ? '#8ff5d4' : '#ff9aaa' }}>{msg.text}</div>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }
