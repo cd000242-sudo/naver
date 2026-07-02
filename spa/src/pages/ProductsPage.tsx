@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, type MouseEvent, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
 import ZoomableImage from '../components/ZoomableImage';
@@ -19,6 +19,9 @@ type Product = {
     bullets: string[];
     fit: string[];
 };
+
+const LEWORD_PRODUCT_DETAIL_HREF = '/products#product-leword';
+const LEWORD_PRODUCT_DETAIL_HASH = '#product-leword';
 
 const PRODUCTS: Product[] = [
     {
@@ -46,7 +49,7 @@ const PRODUCTS: Product[] = [
         subtitle: 'AI 키워드 인텔리전스',
         headline: '검색량, 문서수, 경쟁도를 보고 쓸 키워드만 남깁니다',
         desc: <>네이버·ZUM·네이트·다음 실시간 검색어와 17개 데이터 소스를 교차검증해 운영자가 바로 판단할 수 있는 키워드 후보를 보여줍니다.</>,
-        href: '/products#product-leword',
+        href: LEWORD_PRODUCT_DETAIL_HREF,
         cta: 'LEWORD 자세히 보기',
         media: { type: 'image', src: '/images/leword/realtime-monitor-hero.png', alt: 'LEWORD 실시간 검색어 모니터링 화면' },
         metrics: [['4매체', '실시간 검색어'], ['17소스', '교차검증'], ['SSS', '황금키워드 등급']],
@@ -79,7 +82,7 @@ const PRODUCTS: Product[] = [
 
 const GUIDE_CARDS = [
     ['블로그 운영 자동화가 먼저라면', 'Better Life Naver', '본문·이미지·발행까지 반복 업무를 줄이는 메인 제품입니다.', '/detail'],
-    ['키워드 판단이 막힌다면', 'LEWORD', '검색량과 경쟁도를 보고 발행할 주제를 먼저 골라냅니다.', '/products#product-leword'],
+    ['키워드 판단이 막힌다면', 'LEWORD', '검색량과 경쟁도를 보고 발행할 주제를 먼저 골라냅니다.', LEWORD_PRODUCT_DETAIL_HREF],
     ['외부유입 채널이 필요하다면', 'Leaders Orbit', '블로그스팟·워드프레스·티스토리 글과 링크 구조를 보조 채널로 만듭니다.', '/orbit'],
 ];
 
@@ -106,9 +109,13 @@ const stackStyle: Record<ProductId, string> = {
 
 function normalizeProductHref(productId: ProductId, href: string): string {
     if (productId === 'leword' && (href === '/leword' || href === '/leword/')) {
-        return '/products#product-leword';
+        return LEWORD_PRODUCT_DETAIL_HREF;
     }
     return href;
+}
+
+function isLewordDetailHref(href: string): boolean {
+    return href === LEWORD_PRODUCT_DETAIL_HREF || href === '/products.html#product-leword';
 }
 
 function applyProductOverrides(products: Product[], siteContent: SiteContent | null): Product[] {
@@ -209,18 +216,34 @@ function ProductsPage() {
         fetchSiteContent().then(setSiteContent);
     }, []);
 
+    const scrollToHash = useCallback(() => {
+        const id = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+        if (!id) return;
+        window.requestAnimationFrame(() => {
+            const target = document.getElementById(id);
+            if (!target) return;
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (target instanceof HTMLElement) target.focus({ preventScroll: true });
+        });
+    }, []);
+
     useEffect(() => {
-        const scrollToHash = () => {
-            const id = decodeURIComponent(window.location.hash.replace(/^#/, ''));
-            if (!id) return;
-            window.requestAnimationFrame(() => {
-                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        };
         scrollToHash();
         window.addEventListener('hashchange', scrollToHash);
         return () => window.removeEventListener('hashchange', scrollToHash);
-    }, [siteContent]);
+    }, [siteContent, scrollToHash]);
+
+    const openLewordProductDetail = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+        if (!isLewordDetailHref(href)) return;
+        event.preventDefault();
+        const nextPath = `${window.location.pathname}${LEWORD_PRODUCT_DETAIL_HASH}`;
+        if (window.location.hash !== LEWORD_PRODUCT_DETAIL_HASH) {
+            window.history.pushState(null, '', nextPath);
+        } else {
+            window.history.replaceState(null, '', nextPath);
+        }
+        scrollToHash();
+    };
 
     const products = applyProductOverrides(PRODUCTS, siteContent);
     const page = siteContent?.productsPage || {};
@@ -290,7 +313,7 @@ function ProductsPage() {
                         </div>
                         <div className="guide-grid">
                             {guideCards.map(([title, product, desc, href]) => (
-                                <Link className="guide-card fade-in" to={href} key={product}>
+                                <Link className="guide-card fade-in" to={href} onClick={(event) => openLewordProductDetail(event, href)} key={product}>
                                     <span>{title}</span>
                                     <strong>{product}</strong>
                                     <p>{desc}</p>
@@ -311,7 +334,7 @@ function ProductsPage() {
 
                         <div className="product-panels">
                             {products.map((product) => (
-                                <article className={`product-panel fade-in ${product.id}`} id={`product-${product.id}`} key={product.id}>
+                                <article className={`product-panel fade-in ${product.id}`} id={`product-${product.id}`} tabIndex={-1} key={product.id}>
                                     <div className="product-panel-copy">
                                         <span className="product-badge" style={{ background: stackStyle[product.id] }}>{product.eyebrow}</span>
                                         <h3>{product.name}</h3>
@@ -322,7 +345,7 @@ function ProductsPage() {
                                         <ul>
                                             {product.bullets.map((item) => <li key={item}>{item}</li>)}
                                         </ul>
-                                        <Link className="products-btn panel-btn" to={product.href}>{product.cta}</Link>
+                                        <Link className="products-btn panel-btn" to={product.href} onClick={(event) => openLewordProductDetail(event, product.href)}>{product.cta}</Link>
                                     </div>
                                     <div className="product-panel-media">
                                         <ProductMedia product={product} />
