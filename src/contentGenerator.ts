@@ -41,6 +41,7 @@ import { selfCritiqueAndRewrite, isSelfCritiqueEnabled } from './contentSelfCrit
 import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
+import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
 import { assessQuality90Gate } from './content/quality90Gate.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
 import { validateContent as runValidationPipeline } from './services/contentValidationPipeline.js';
@@ -967,6 +968,29 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
     }
   } catch (hallErr) {
     console.warn('[Hallucination] 검사 모듈 로드 실패 (측정 스킵):', (hallErr as Error)?.message);
+  }
+
+  // ✅ [SPEC-DEFAMATION-2026 P0] 실존인물 미확인 단정 탐지 → legalRisk='danger' + 발행전 경고.
+  //   완화(hedge) 안 함 — 판례상 면책 효과 없음(legal-research.md). 위험 문장을 표면화해
+  //   사용자가 발행 전 삭제/확인하도록 유도(라이브 발행 신뢰 원칙: 하드차단은 P1 발행게이트).
+  try {
+    // [검토 M2] 탐지(발행 전 경고)는 컨텍스트 무관하게 돌린다 — 가십 글이 흔히 seo/일반 모드로
+    //   작성되어 celebrity 게이트를 우회하는 구멍을 막는다. 오탐은 M1 필터(해명/정책/확정)가 억제.
+    if (isCelebrityFactGuardEnabled()) {
+      const celebRisk = detectCelebrityAssertionRisk(finalContent);
+      if (celebRisk.risky) {
+        console.error(`[CelebrityGuard] 🚨 실존인물 미확인 단정 감지 ${celebRisk.samples.length}건: ${celebRisk.samples.join(' / ')}`);
+        finalContent.quality = finalContent.quality ?? ({ warnings: [], score: 0 } as any);
+        (finalContent.quality as any).legalRisk = 'danger';
+        if (Array.isArray((finalContent.quality as any).warnings)) {
+          (finalContent.quality as any).warnings.push(
+            `🚨 [법적위험] 실존인물 미확인 단정 감지 — 허위조작정보법(7·7) 위반 소지. 발행 전 해당 문장 삭제/확인 필수: ${celebRisk.samples.slice(0, 3).join(' / ')}`,
+          );
+        }
+      }
+    }
+  } catch (celebErr) {
+    console.warn('[CelebrityGuard] 스캔 실패 (스킵):', (celebErr as Error)?.message);
   }
 
   // ✅ [Phase B] LDF L5 — qualityGate 통합 (이전엔 dead code, 호출 0건)
@@ -2012,6 +2036,16 @@ export function buildModeBasedPrompt(
   if (contentMode !== 'affiliate' && isGeneralContentGuardEnabled() && !hasGroundingSource(source)) {
     systemPromptResult += `\n\n${buildGeneralContentGuardBlock()}`;
     console.log(`[PromptBuilder] 🔒 범용 근거부재 가드 적용 — ungrounded, mode=${contentMode}`);
+  }
+
+  // ✅ [SPEC-DEFAMATION-2026 P0] 실존인물(연예/스포츠/homefeed) 미확인 단정 억제 — 허위조작정보법(7·7) 대응.
+  //   generalGuard와 달리 hasGroundingSource로 게이트하지 않는다: 크롤 가십(rawText≥50)이 '근거'로
+  //   오인정되어도 검증된 사실이 아니므로, celebrity 컨텍스트면 grounding 유무와 무관하게 억제한다.
+  // 프롬프트 억제는 celebrity 컨텍스트에서만(토큰 비용). homefeed는 스켈레톤 point 6가 이미
+  // 동일 취지를 담으므로 블록 중복주입 스킵(검토 P0.5 — 토큰 절감).
+  if (isCelebrityFactGuardEnabled() && isCelebrityContext(source) && contentMode !== 'homefeed') {
+    systemPromptResult += `\n\n${buildCelebrityFactGuardBlock()}`;
+    console.log(`[PromptBuilder] ⚖️ 실존인물 안전 가드 적용 — mode=${contentMode}`);
   }
 
   // ✅ [Traffic Hunter 통합] 모드별 온도(Temperature) 설정

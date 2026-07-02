@@ -136,7 +136,7 @@ export function inferHallucinationCategory(opts: {
   if (mode === 'affiliate') return 'review';
   if (/food|맛집|음식|먹방|레시피|요리|카페|디저트/.test(combined)) return 'food';
   if (/finance|금융|주식|투자|부동산|재테크|경제|보험|대출/.test(combined)) return 'finance';
-  if (/celebrity|entertainment|연예|스타|아이돌|배우|가수|예능/.test(combined)) return 'celebrity';
+  if (/celebrity|entertainment|연예|스타|아이돌|배우|가수|예능|스포츠|선수|감독|구단|이적/.test(combined)) return 'celebrity';
   if (/review|리뷰|후기|체험|사용기|개봉|언박싱/.test(combined)) return 'review';
   return 'default';
 }
