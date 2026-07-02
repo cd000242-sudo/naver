@@ -100,6 +100,14 @@ const COMPARISON = [
     ['추천 조합', 'LEWORD와 함께 쓰면 주제 선정이 쉬움', 'Naver·Orbit의 출발점으로 사용', 'Naver 글의 외부유입 보조 채널로 사용'],
 ];
 
+const PRODUCT_FAQS: Array<[string, ReactNode]> = [
+    ['Leaders Pro는 어떤 제품군인가요?', 'Leaders Pro는 키워드 발굴용 LEWORD, 네이버 블로그 자동화용 Better Life Naver, 외부유입 발행용 Leaders Orbit을 하나의 운영 흐름으로 묶은 제품군입니다.'],
+    ['처음 구매하면 어떤 제품부터 쓰면 좋나요?', '먼저 LEWORD로 쓸 키워드를 고르고, Better Life Naver로 네이버 블로그에 발행한 뒤, Orbit으로 블로그스팟·워드프레스·티스토리 외부유입 글을 확장하는 순서를 권장합니다.'],
+    ['자동 발행은 안전하게 운영되나요?', '계정별 대기열, 랜덤 딜레이, 발행 간격, 사람형 입력 흐름을 조합해 반복 발행 부담을 줄이도록 설계했습니다. 다만 계정 상태와 플랫폼 정책에 맞춰 무리한 발행량은 피하는 운영이 필요합니다.'],
+    ['LEWORD는 왜 따로 필요한가요?', '자동화는 글을 많이 쓰는 도구이고, LEWORD는 무엇을 쓸지 먼저 고르는 판단 도구입니다. 검색량, 문서수, 경쟁도, 실시간 소스를 보고 발행 전 키워드 선별 단계에서 사용합니다.'],
+    ['환불이나 기기 변경은 어떻게 하나요?', <>환불 조건은 <Link to="/refund">환불정책</Link>에서 확인할 수 있습니다. 라이선스는 동시에 1대 기기 기준으로 사용하며, 새 기기에서 로그인하면 이전 기기 세션은 정리됩니다.</>],
+];
+
 const stackStyle: Record<ProductId, string> = {
     naver: 'linear-gradient(135deg, #f4c95d 0%, #44d7b6 100%)',
     leword: 'linear-gradient(135deg, #7c3aed 0%, #38bdf8 100%)',
@@ -190,6 +198,7 @@ function MetricList({ items }: { items: Array<[string, string]> }) {
 
 function ProductsPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+    const [openProductFaq, setOpenProductFaq] = useState<number | null>(null);
 
     useEffect(() => {
         const prev = document.title;
@@ -424,6 +433,36 @@ function ProductsPage() {
                                     ))}
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="products-section dark products-faq-section">
+                    <div className="products-wrap">
+                        <div className="products-section-head fade-in">
+                            <span className="products-kicker">FAQ</span>
+                            <h2>자주 묻는 질문</h2>
+                            <p>제품 선택 전에 가장 많이 확인하는 질문을 제품정보 페이지에 모았습니다.</p>
+                        </div>
+                        <div className="products-faq-list fade-in">
+                            {PRODUCT_FAQS.map(([question, answer], index) => {
+                                const open = openProductFaq === index;
+                                return (
+                                    <article className="products-faq-item" key={question}>
+                                        <button
+                                            type="button"
+                                            aria-expanded={open}
+                                            onClick={() => setOpenProductFaq(open ? null : index)}
+                                        >
+                                            <span>{question}</span>
+                                            <b>{open ? '-' : '+'}</b>
+                                        </button>
+                                        <div className="products-faq-answer" hidden={!open}>
+                                            <p>{answer}</p>
+                                        </div>
+                                    </article>
+                                );
+                            })}
                         </div>
                     </div>
                 </section>
@@ -991,6 +1030,71 @@ function ProductsPage() {
                 .compare-table tr:last-child th,
                 .compare-table tr:last-child td {
                     border-bottom: none;
+                }
+
+                .products-faq-section {
+                    padding-top: 76px;
+                }
+
+                .products-faq-list {
+                    max-width: 900px;
+                    margin: 0 auto;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                }
+
+                .products-faq-item {
+                    border: 1px solid rgba(255,255,255,0.12);
+                    border-radius: 8px;
+                    background: rgba(255,255,255,0.06);
+                    overflow: hidden;
+                }
+
+                .products-faq-item button {
+                    width: 100%;
+                    min-height: 62px;
+                    padding: 18px 22px;
+                    border: 0;
+                    background: transparent;
+                    color: #ffffff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 18px;
+                    text-align: left;
+                    cursor: pointer;
+                    font: inherit;
+                    font-weight: 900;
+                }
+
+                .products-faq-item button b {
+                    width: 30px;
+                    height: 30px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 8px;
+                    border: 1px solid rgba(68, 215, 182, 0.38);
+                    color: #44d7b6;
+                    flex: 0 0 auto;
+                }
+
+                .products-faq-answer {
+                    padding: 0 22px 20px;
+                    color: rgba(255,255,255,0.72);
+                    font-size: 14px;
+                    line-height: 1.75;
+                }
+
+                .products-faq-answer p {
+                    margin: 0;
+                    color: rgba(255,255,255,0.72);
+                }
+
+                .products-faq-answer a {
+                    color: #44d7b6;
+                    font-weight: 900;
                 }
 
                 .products-final {
