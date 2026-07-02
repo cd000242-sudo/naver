@@ -8457,7 +8457,23 @@ export class NaverBlogAutomation {
 
      try {
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.loginStart);
-       await this.loginToNaver();
+       // [2026-07-01 FIX] Skip login when the server session is already valid.
+       //   Root cause: run() always called loginToNaver() after setupBrowser() reused a
+       //   session (cookie restore sets isLoggedIn=true), forcing a full re-login every
+       //   publish (~148s wasted). runPostOnly() already gates on ensureServerSession();
+       //   run() lacked it, so the two publish paths were asymmetric.
+       //   ensureServerSession() is a real server-side HTTP probe (fetch PostWriteForm.naver
+       //   + login-redirect check), fundamentally different from the v1.4.62 cookie fast-path
+       //   that false-positived on stale cookies. A dead server session returns false → normal
+       //   re-login; any exception/timeout also resolves to false → login proceeds (safe default).
+       const serverSessionOk = await browserSessionManager
+         .ensureServerSession(this.options.naverId)
+         .catch(() => false);
+       if (serverSessionOk) {
+         this.log('✅ 발행 전 서버 세션 유효 확인 — 로그인 단계 건너뜀');
+       } else {
+         await this.loginToNaver();
+       }
        this.log(formatPipelineUrlLog('loginDone', this.page?.url()));
 
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.openingWriteEditor);
