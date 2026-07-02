@@ -1322,7 +1322,11 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
       const lineWithoutAnswerPrefix = parsedAnswer ? parsedAnswer.text : stripAnswerPrefix(line);
       if (!lineWithoutAnswerPrefix) continue;
 
-      const headingMatch = lineWithoutAnswerPrefix.match(/^(#{1,3})\s+(.+)$/);
+      // [2026-07-02] 마크다운 헤딩 접두(#{1,4} + 공백)는 스타일 헤딩으로 변환하며 마커를 제거한다
+      //   → 타이핑 결과에 '##' 리터럴이 절대 남지 않는다. `#{1,3}` → `#{1,4}`로 확장해
+      //   추출기(semiAutoHeadingExtractor의 `#{1,4}`)와 정렬 — `#### `가 평문으로 새던 갭 차단.
+      //   공백 필수라 해시태그(`#단어`)는 건드리지 않는다.
+      const headingMatch = lineWithoutAnswerPrefix.match(/^(#{1,4})\s+(.+)$/);
       if (headingMatch) {
         pendingAnswerNumber = null;
         headingIndex += 1;
