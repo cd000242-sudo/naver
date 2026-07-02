@@ -293,14 +293,14 @@ function PricingPage() {
     const pricingPage = siteContent?.pricing?.page || {};
     const pricingBgImage = siteContent?.theme?.pricingBgImage;
     const pricingTitle = normalPricingActive
-        ? (pricingPage.titleNormal || '정상가 적용 중입니다. 올인원 라이선스로 시작하세요')
-        : (pricingPage.title || '지금 이벤트가로 이용하고, 8월 1일 정상가 전에 시작하세요');
+        ? (pricingPage.titleNormal || '8월 1일부터 가격이 단계적으로 조정 중입니다')
+        : (pricingPage.title || '지금 이벤트가로 이용하고, 8월 1일부터 가격이 점진적으로 상승합니다');
     const pricingEventTitle = normalPricingActive
-        ? (pricingPage.eventTitleNormal || '정상가가 적용 중입니다.')
+        ? (pricingPage.eventTitleNormal || '가격이 단계적으로 조정 중입니다.')
         : (pricingPage.eventTitle || '현재 가격은 7월 31일까지 이벤트가입니다.');
     const pricingEventDesc = normalPricingActive
-        ? (pricingPage.eventDescNormal || '2026년 8월 1일부터 아래 정상가로 자동 전환되었습니다.')
-        : (pricingPage.eventDesc || '2026년 8월 1일부터 아래 정상가로 자동 전환됩니다.');
+        ? (pricingPage.eventDescNormal || '2026년 8월 1일부터 가격이 점진적으로 상승하고 있습니다.')
+        : (pricingPage.eventDesc || '2026년 8월 1일부터 가격이 점진적으로 상승합니다.');
     const pricingIntro = (
         <div style={{ textAlign: 'center', margin: '42px 0 36px' }}>
             <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>{pricingPage.eyebrow || 'PRICING'}</span>
@@ -314,7 +314,7 @@ function PricingPage() {
                 </div>
                 <div>{pricingEventDesc}</div>
                 <div style={{ marginTop: 4, color: '#fff7b0', fontSize: 15 }}>
-                    {pricingPage.eventLine || '1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원'}
+                    {pricingPage.eventLine || '8월 1일부터 단계별 인상 예정 · 1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원'}
                 </div>
             </div>
         </div>
