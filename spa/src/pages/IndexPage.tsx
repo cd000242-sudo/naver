@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
+import ProofShowcase from '../components/ProofShowcase';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 type HeroProof = {
@@ -1351,6 +1352,10 @@ function IndexPage() {
                         </Link>
                     ))}
                 </div>
+            </section>
+
+            <section style={{ maxWidth: 1180, margin: '0 auto 54px', padding: '0 24px', position: 'relative', zIndex: 1 }}>
+                <ProofShowcase />
             </section>
 
             <style>{`

@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import ProofShowcase from '../components/ProofShowcase';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
@@ -122,19 +123,6 @@ const PURCHASE_SHOWCASE_VIDEOS = [
         desc: 'Tistory 발행까지 연결되는 외부유입 운영 흐름입니다.',
         src: '/videos/pricing-showcase/leadernam-orbit-tistory-demo.mp4',
     },
-];
-
-const ADSENSE_PROOFS = [
-    { src: '/images/pricing-proof/adsense-10000-month.jpg', title: '이번 달 US$1만', desc: '애드센스 예상 수입 상승 인증' },
-    { src: '/images/pricing-proof/adsense-daily-100.jpg', title: '오늘 US$100+', desc: '일 수익 상승 사례' },
-    { src: '/images/pricing-proof/adsense-28days-931.jpg', title: '최근 28일 US$931', desc: '월간 운영 성과' },
-    { src: '/images/pricing-proof/adsense-today-95.jpg', title: '오늘 US$95.57', desc: '당일 수익 인증' },
-];
-
-const NAVER_PROOFS = [
-    { src: '/images/proof-user/fast/KakaoTalk_20260310_002438127-fast.jpg', title: '조회수 19,896 인증' },
-    { src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg', title: '방문횟수 9,177 돌파' },
-    { src: '/images/proof-user/fast/KakaoTalk_20260309_163736774-fast.jpg', title: '조회수 10,003 성과' },
 ];
 
 const TAB_LABELS: Record<string, string> = { naver: 'ALL · Leaders Pro 올인원' };
@@ -387,32 +375,7 @@ function PricingPage() {
                         </div>
                     </div>
 
-                    <aside className="purchase-proof-side">
-                        <div className="purchase-section-eyebrow proof">PROOF</div>
-                        <h3>성과 화면까지 같이 보면 구매 판단이 빨라집니다</h3>
-                        <p>애드센스 예상 수익과 기존 네이버 성과를 한 화면에 붙여, 자동화가 단순 기능이 아니라 운영 결과로 이어지는 느낌을 바로 줍니다.</p>
-
-                        <div className="adsense-proof-grid">
-                            {ADSENSE_PROOFS.map((proof, index) => (
-                                <figure className={`adsense-proof-card ${index === 0 ? 'featured' : ''}`} key={proof.src}>
-                                    <img src={proof.src} alt={proof.title} loading={index === 0 ? 'eager' : 'lazy'} />
-                                    <figcaption>
-                                        <strong>{proof.title}</strong>
-                                        <span>{proof.desc}</span>
-                                    </figcaption>
-                                </figure>
-                            ))}
-                        </div>
-
-                        <div className="naver-proof-strip" aria-label="기존 네이버 성과 인증">
-                            {NAVER_PROOFS.map((proof) => (
-                                <figure key={proof.src}>
-                                    <img src={proof.src} alt={proof.title} loading="lazy" />
-                                    <figcaption>{proof.title}</figcaption>
-                                </figure>
-                            ))}
-                        </div>
-                    </aside>
+                    <ProofShowcase compact className="purchase-proof-side" />
                 </section>
 
                 {/* Product tabs */}
