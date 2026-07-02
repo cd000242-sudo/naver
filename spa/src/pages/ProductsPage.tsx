@@ -20,7 +20,7 @@ type Product = {
     fit: string[];
 };
 
-const LEWORD_PRODUCT_DETAIL_HREF = '/detail';
+const LEWORD_PRODUCT_DETAIL_HREF = '/leword-detail';
 
 const PRODUCTS: Product[] = [
     {
@@ -117,7 +117,15 @@ const stackStyle: Record<ProductId, string> = {
 function normalizeProductHref(productId: ProductId, href: string): string {
     if (
         productId === 'leword'
-        && (href === '/leword' || href === '/leword/' || href === '/products#product-leword' || href === '/products.html#product-leword' || href === '#product-leword')
+        && (
+            href === '/detail'
+            || href === '/detail.html'
+            || href === '/leword'
+            || href === '/leword/'
+            || href === '/products#product-leword'
+            || href === '/products.html#product-leword'
+            || href === '#product-leword'
+        )
     ) {
         return LEWORD_PRODUCT_DETAIL_HREF;
     }

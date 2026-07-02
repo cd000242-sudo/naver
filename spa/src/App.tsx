@@ -6,6 +6,7 @@ import IndexPage from './pages/IndexPage';
 
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
 const DetailPage = lazy(() => import('./pages/DetailPage'));
+const LewordDetailPage = lazy(() => import('./pages/LewordDetailPage'));
 const LewordPage = lazy(() => import('./pages/LewordPage'));
 const OrbitPage = lazy(() => import('./pages/OrbitPage'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
@@ -45,6 +46,8 @@ function App() {
                     <Route path="/products.html" element={<ProductsPage />} />
                     <Route path="/detail" element={<DetailPage />} />
                     <Route path="/detail.html" element={<DetailPage />} />
+                    <Route path="/leword-detail" element={<LewordDetailPage />} />
+                    <Route path="/leword-detail.html" element={<LewordDetailPage />} />
                     <Route path="/leword" element={<LewordPage />} />
                     <Route path="/leword.html" element={<LewordPage />} />
                     <Route path="/orbit" element={<OrbitPage />} />
