@@ -3994,8 +3994,14 @@ async function initUnifiedTab(): Promise<void> {
     const firstLine = lines[0]?.trim() || '';
     const lastNonEmpty = [...lines].reverse().find(l => l.trim().length > 0) || '';
 
-    // 첫 줄이 40자 이내 + #으로 시작 안 함 → 제목 후보
-    const likelyTitle = (firstLine.length > 0 && firstLine.length <= 40 && !firstLine.startsWith('#')) ? firstLine : null;
+    // 첫 줄이 제목 후보인지 판정 → 제목 필드 자동 채움.
+    // [2026-07-02 FIX] 상한 40→60자(블로그 제목은 40~60자가 흔해 40자 상한이 놓쳤다) +
+    //   문장형 첫 줄(마침표/정중형 어미 종결)은 본문 첫 문장일 수 있어 제외(오탐 방지).
+    const firstLineLooksSentence = /[.!?。！？]\s*$/u.test(firstLine)
+      || /(?:습니다|합니다|해요|됩니다|입니다|이에요|예요|이었어요|했어요)$/u.test(firstLine);
+    const likelyTitle = (firstLine.length >= 4 && firstLine.length <= 60 && !firstLine.startsWith('#') && !firstLineLooksSentence)
+      ? firstLine
+      : null;
     // 마지막 비어있지 않은 줄이 #태그로 가득 → 해시태그
     const likelyTags = /^(#\S+\s*){3,}$/.test(lastNonEmpty) ? lastNonEmpty : null;
 
@@ -4098,7 +4104,13 @@ async function initUnifiedTab(): Promise<void> {
       ? sc.headings.map((h: any) => String(h?.title || '').trim()).filter(Boolean).join('|')
       : '';
     const nextSignature = extracted.map((h) => h.title).join('|');
-    if (currentSignature === nextSignature) return;
+    // [2026-07-02 FIX] 제목이 같아도 현재 headings에 content가 비어있으면 재동기화한다.
+    //   붙여넣기 경로(_applyParsed)가 제목만 있는 content-less headings를 먼저 세팅하는데,
+    //   제목 시그니처가 같다는 이유로 여기서 skip하면 heading.content가 영영 빈 채로 남아
+    //   발행 시 'bodyText 균등분배' 폴백 → 서론 중복·섹션 본문 유실이 발생했다.
+    const currentHasContent = Array.isArray(sc.headings)
+      && sc.headings.some((h: any) => String(h?.content || '').trim().length > 0);
+    if (currentSignature === nextSignature && currentHasContent) return;
     sc.headings = extracted;
     _scheduleSemiAutoHeadingAnalysis(sc); // introduction/썸네일 세팅은 여기 안에서 처리(양 경로 공유)
   }
@@ -4147,9 +4159,25 @@ async function initUnifiedTab(): Promise<void> {
       }
       const sc = _ensureSemiAutoStructuredContent();
       if (sc) {
-        const parsedHeadings = parsed.headings.length > 0
-          ? parsed.headings.map((title: string) => ({ title, prompt: title, source: 'semi-auto:pasted-heading' }))
-          : _extractSemiAutoManualHeadings(semiAutoContent.value);
+        // [2026-07-02 FIX] 붙여넣기 소제목에 반드시 본문(content)을 붙인다.
+        //   기존: parsed.headings(제목 문자열)만 map → content 없는 headings → 발행 시
+        //   editorHelpers의 'bodyText 균등분배' 폴백이 서론을 소제목마다 중복 타이핑하고
+        //   섹션 본문을 유실시켰다(실측 버그). 본문에서 소제목+내용을 직접 추출해 content를
+        //   보존하고, 마커/LLM이 정제한 제목과 개수가 맞으면 제목만 그 값을 신뢰한다.
+        const extractedWithContent = _extractSemiAutoManualHeadings(semiAutoContent.value);
+        let parsedHeadings: Array<{ title: string; content?: string; prompt: string; source: string }>;
+        if (extractedWithContent.length > 0 && parsed.headings.length === extractedWithContent.length) {
+          parsedHeadings = extractedWithContent.map((h, i) => ({
+            title: parsed.headings[i] || h.title,
+            content: h.content,
+            prompt: parsed.headings[i] || h.title,
+            source: 'semi-auto:pasted-heading',
+          }));
+        } else if (extractedWithContent.length > 0) {
+          parsedHeadings = extractedWithContent;
+        } else {
+          parsedHeadings = parsed.headings.map((title: string) => ({ title, prompt: title, source: 'semi-auto:pasted-heading' }));
+        }
         if (parsedHeadings.length > 0) {
           sc.headings = parsedHeadings;
           _scheduleSemiAutoHeadingAnalysis(sc);

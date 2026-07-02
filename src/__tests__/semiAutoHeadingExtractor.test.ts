@@ -68,6 +68,40 @@ describe('semi-auto manual heading extractor', () => {
     ]);
   });
 
+  it('captures per-section body content for a real pasted article (라이머 안현모 사례)', () => {
+    // [2026-07-02] 붙여넣기 발행에서 소제목만 나오고 본문이 유실되던 회귀의 재현 데이터.
+    //   추출기는 소제목 사이의 문단을 content로 반드시 담아야 한다(발행 시 heading.content 사용).
+    const body = [
+      '혼자 사는 삶이 편하다는 말은 예상할 수 있었습니다.',
+      '그런데 그 뒤에 붙은 한마디가 분위기를 바꿨습니다.',
+      '',
+      '라이머의 말이 다시 주목된 이유',
+      '',
+      '라이머와 안현모의 이름이 다시 함께 언급됐습니다.',
+      '이번에는 이혼 사유가 중심이 아닙니다.',
+      '',
+      '안현모 이름이 함께 언급되는 이유',
+      '',
+      '두 사람은 2017년 결혼했고, 2023년 이혼 조정 절차를 마무리했습니다.',
+      '',
+      '결국 남는 질문',
+      '',
+      '혼자라서 편한 삶과, 함께가 아니라서 외로운 마음.',
+    ].join('\n');
+
+    const headings = extractSemiAutoHeadingsFromBody(body);
+    expect(headings.map((h) => h.title)).toEqual([
+      '라이머의 말이 다시 주목된 이유',
+      '안현모 이름이 함께 언급되는 이유',
+      '결국 남는 질문',
+    ]);
+    // 핵심: 각 소제목의 content가 비어있지 않아야 한다(유실 방지).
+    expect(headings.every((h) => h.content.trim().length > 0)).toBe(true);
+    expect(headings[0]?.content).toContain('라이머와 안현모의 이름이 다시');
+    expect(headings[1]?.content).toContain('2017년 결혼');
+    expect(headings[2]?.content).toContain('외로운 마음');
+  });
+
   it('does not classify quoted reactions or sentence-like short paragraphs as headings', () => {
     const body = [
       '반응이 갈린 진짜 이유',
