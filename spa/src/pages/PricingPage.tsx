@@ -91,6 +91,52 @@ const PLANS: Record<string, Plan[]> = {
     ],
 };
 
+const PURCHASE_SHOWCASE_VIDEOS = [
+    {
+        title: 'Better-Life-Naver 글발행 예시 영상',
+        label: '네이버 자동 발행',
+        desc: '키워드 입력부터 글 작성, 이미지 구성, 발행 흐름까지 실제 구매자가 가장 먼저 확인해야 할 장면입니다.',
+        src: '/videos/pricing-showcase/better-life-naver-publish-demo.mp4',
+    },
+    {
+        title: 'LEADERNAM-Orbit 글 발행 영상',
+        label: 'Orbit 통합 발행',
+        desc: '외부유입용 글 발행 흐름을 한 번에 확인합니다.',
+        src: '/videos/pricing-showcase/leadernam-orbit-publish-demo.mp4',
+    },
+    {
+        title: 'LEADERNAM-Orbit 블로그스팟 발행 예시 영상',
+        label: '블로그스팟',
+        desc: 'Blogger 채널에 글이 올라가는 실제 장면입니다.',
+        src: '/videos/pricing-showcase/leadernam-orbit-blogspot-demo.mp4',
+    },
+    {
+        title: 'LEADERNAM-Orbit 워드프레스 발행 예시 영상',
+        label: '워드프레스',
+        desc: 'WordPress 발행 채널을 운영하는 사용자를 위한 예시입니다.',
+        src: '/videos/pricing-showcase/leadernam-orbit-wordpress-demo.mp4',
+    },
+    {
+        title: 'LEADERNAM-Orbit 티스토리 발행 예시 영상',
+        label: '티스토리',
+        desc: 'Tistory 발행까지 연결되는 외부유입 운영 흐름입니다.',
+        src: '/videos/pricing-showcase/leadernam-orbit-tistory-demo.mp4',
+    },
+];
+
+const ADSENSE_PROOFS = [
+    { src: '/images/pricing-proof/adsense-10000-month.jpg', title: '이번 달 US$1만', desc: '애드센스 예상 수입 상승 인증' },
+    { src: '/images/pricing-proof/adsense-daily-100.jpg', title: '오늘 US$100+', desc: '일 수익 상승 사례' },
+    { src: '/images/pricing-proof/adsense-28days-931.jpg', title: '최근 28일 US$931', desc: '월간 운영 성과' },
+    { src: '/images/pricing-proof/adsense-today-95.jpg', title: '오늘 US$95.57', desc: '당일 수익 인증' },
+];
+
+const NAVER_PROOFS = [
+    { src: '/images/proof-user/fast/KakaoTalk_20260310_002438127-fast.jpg', title: '조회수 19,896 인증' },
+    { src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg', title: '방문횟수 9,177 돌파' },
+    { src: '/images/proof-user/fast/KakaoTalk_20260309_163736774-fast.jpg', title: '조회수 10,003 성과' },
+];
+
 const TAB_LABELS: Record<string, string> = { naver: 'ALL · Leaders Pro 올인원' };
 const TAB_KEYS = ['naver'] as const;
 type TabKey = typeof TAB_KEYS[number];
@@ -297,6 +343,78 @@ function PricingPage() {
                     </div>
                 </div>
 
+                <section className="purchase-proof-showcase" aria-label="실제 발행 영상과 수익 성과 인증">
+                    <div className="purchase-video-side">
+                        <div className="purchase-section-eyebrow">REAL WORKFLOW</div>
+                        <h3>결제 전, 실제로 글이 발행되는 장면부터 확인하세요</h3>
+                        <p>
+                            Better Life Naver와 Leadernam Orbit이 실제로 글을 만들고 각 채널에 발행되는 과정을 영상으로 먼저 보여줍니다.
+                            구매 페이지에서 기능이 말이 아니라 화면으로 증명되도록 배치했습니다.
+                        </p>
+                        <article className="purchase-main-video">
+                            <video
+                                src={PURCHASE_SHOWCASE_VIDEOS[0].src}
+                                controls
+                                muted
+                                loop
+                                playsInline
+                                preload="metadata"
+                                aria-label={PURCHASE_SHOWCASE_VIDEOS[0].title}
+                            />
+                            <div>
+                                <span>{PURCHASE_SHOWCASE_VIDEOS[0].label}</span>
+                                <strong>{PURCHASE_SHOWCASE_VIDEOS[0].title}</strong>
+                                <p>{PURCHASE_SHOWCASE_VIDEOS[0].desc}</p>
+                            </div>
+                        </article>
+                        <div className="purchase-video-grid">
+                            {PURCHASE_SHOWCASE_VIDEOS.slice(1).map((video) => (
+                                <article className="purchase-mini-video" key={video.src}>
+                                    <video
+                                        src={video.src}
+                                        controls
+                                        muted
+                                        playsInline
+                                        preload="metadata"
+                                        aria-label={video.title}
+                                    />
+                                    <div>
+                                        <span>{video.label}</span>
+                                        <strong>{video.title}</strong>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </div>
+
+                    <aside className="purchase-proof-side">
+                        <div className="purchase-section-eyebrow proof">PROOF</div>
+                        <h3>성과 화면까지 같이 보면 구매 판단이 빨라집니다</h3>
+                        <p>애드센스 예상 수익과 기존 네이버 성과를 한 화면에 붙여, 자동화가 단순 기능이 아니라 운영 결과로 이어지는 느낌을 바로 줍니다.</p>
+
+                        <div className="adsense-proof-grid">
+                            {ADSENSE_PROOFS.map((proof, index) => (
+                                <figure className={`adsense-proof-card ${index === 0 ? 'featured' : ''}`} key={proof.src}>
+                                    <img src={proof.src} alt={proof.title} loading={index === 0 ? 'eager' : 'lazy'} />
+                                    <figcaption>
+                                        <strong>{proof.title}</strong>
+                                        <span>{proof.desc}</span>
+                                    </figcaption>
+                                </figure>
+                            ))}
+                        </div>
+
+                        <div className="naver-proof-strip" aria-label="기존 네이버 성과 인증">
+                            {NAVER_PROOFS.map((proof) => (
+                                <figure key={proof.src}>
+                                    <img src={proof.src} alt={proof.title} loading="lazy" />
+                                    <figcaption>{proof.title}</figcaption>
+                                </figure>
+                            ))}
+                        </div>
+                    </aside>
+                </section>
+
                 {/* Product tabs */}
                 <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 36, flexWrap: 'wrap' }}>
                     {TAB_KEYS.map((k) => (
@@ -316,14 +434,240 @@ function PricingPage() {
                 </div>
 
                 <style>{`
+                    .purchase-proof-showcase {
+                        display: grid;
+                        grid-template-columns: minmax(0, 1.18fr) minmax(360px, 0.82fr);
+                        gap: 18px;
+                        align-items: stretch;
+                        margin: 0 0 34px;
+                    }
+
+                    .purchase-video-side,
+                    .purchase-proof-side {
+                        border-radius: 18px;
+                        border: 1px solid rgba(255, 255, 255, 0.10);
+                        background: linear-gradient(180deg, rgba(12, 18, 31, 0.88), rgba(9, 13, 22, 0.74));
+                        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+                        padding: 22px;
+                        overflow: hidden;
+                    }
+
+                    .purchase-section-eyebrow {
+                        display: inline-flex;
+                        align-items: center;
+                        min-height: 28px;
+                        padding: 5px 12px;
+                        border-radius: 999px;
+                        background: rgba(56, 189, 248, 0.12);
+                        border: 1px solid rgba(56, 189, 248, 0.28);
+                        color: #7dd3fc;
+                        font-size: 12px;
+                        font-weight: 900;
+                        letter-spacing: 0;
+                        margin-bottom: 12px;
+                    }
+
+                    .purchase-section-eyebrow.proof {
+                        background: rgba(68, 215, 182, 0.12);
+                        border-color: rgba(68, 215, 182, 0.30);
+                        color: #8af5dd;
+                    }
+
+                    .purchase-video-side h3,
+                    .purchase-proof-side h3 {
+                        margin: 0 0 8px;
+                        color: #fff;
+                        font-size: clamp(22px, 2.4vw, 30px);
+                        line-height: 1.25;
+                        font-weight: 950;
+                        letter-spacing: 0;
+                    }
+
+                    .purchase-video-side > p,
+                    .purchase-proof-side > p {
+                        margin: 0 0 18px;
+                        color: rgba(226, 232, 240, 0.74);
+                        font-size: 14px;
+                        line-height: 1.75;
+                    }
+
+                    .purchase-main-video {
+                        display: grid;
+                        grid-template-columns: minmax(0, 1.22fr) minmax(220px, 0.78fr);
+                        gap: 16px;
+                        align-items: stretch;
+                        padding: 14px;
+                        border-radius: 14px;
+                        border: 1px solid rgba(56, 189, 248, 0.18);
+                        background: rgba(2, 6, 23, 0.62);
+                    }
+
+                    .purchase-main-video video,
+                    .purchase-mini-video video {
+                        width: 100%;
+                        display: block;
+                        border-radius: 10px;
+                        background: #000;
+                        aspect-ratio: 16 / 9;
+                        object-fit: cover;
+                    }
+
+                    .purchase-main-video div {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        min-width: 0;
+                    }
+
+                    .purchase-main-video span,
+                    .purchase-mini-video span {
+                        color: #7dd3fc;
+                        font-size: 12px;
+                        font-weight: 900;
+                        margin-bottom: 7px;
+                    }
+
+                    .purchase-main-video strong,
+                    .purchase-mini-video strong {
+                        color: #fff;
+                        font-size: 18px;
+                        line-height: 1.35;
+                        font-weight: 900;
+                    }
+
+                    .purchase-main-video p {
+                        margin: 10px 0 0;
+                        color: rgba(203, 213, 225, 0.76);
+                        font-size: 13px;
+                        line-height: 1.65;
+                    }
+
+                    .purchase-video-grid {
+                        display: grid;
+                        grid-template-columns: repeat(4, minmax(0, 1fr));
+                        gap: 12px;
+                        margin-top: 14px;
+                    }
+
+                    .purchase-mini-video {
+                        padding: 10px;
+                        border-radius: 12px;
+                        border: 1px solid rgba(255, 255, 255, 0.08);
+                        background: rgba(15, 23, 42, 0.56);
+                    }
+
+                    .purchase-mini-video div {
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: 10px;
+                    }
+
+                    .purchase-mini-video strong {
+                        font-size: 12px;
+                    }
+
+                    .adsense-proof-grid {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 10px;
+                    }
+
+                    .adsense-proof-card,
+                    .naver-proof-strip figure {
+                        margin: 0;
+                        border-radius: 12px;
+                        border: 1px solid rgba(255, 255, 255, 0.10);
+                        background: rgba(15, 23, 42, 0.62);
+                        overflow: hidden;
+                    }
+
+                    .adsense-proof-card.featured {
+                        grid-column: span 2;
+                    }
+
+                    .adsense-proof-card img,
+                    .naver-proof-strip img {
+                        display: block;
+                        width: 100%;
+                        height: 118px;
+                        object-fit: cover;
+                        background: #0f172a;
+                    }
+
+                    .adsense-proof-card.featured img {
+                        height: 190px;
+                    }
+
+                    .adsense-proof-card figcaption {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 3px;
+                        padding: 10px 12px 12px;
+                    }
+
+                    .adsense-proof-card strong,
+                    .naver-proof-strip figcaption {
+                        color: #fff;
+                        font-size: 13px;
+                        font-weight: 900;
+                        line-height: 1.35;
+                    }
+
+                    .adsense-proof-card span {
+                        color: rgba(203, 213, 225, 0.70);
+                        font-size: 12px;
+                        line-height: 1.4;
+                    }
+
+                    .naver-proof-strip {
+                        display: grid;
+                        grid-template-columns: repeat(3, minmax(0, 1fr));
+                        gap: 10px;
+                        margin-top: 12px;
+                    }
+
+                    .naver-proof-strip img {
+                        height: 82px;
+                    }
+
+                    .naver-proof-strip figcaption {
+                        padding: 8px 10px 10px;
+                        color: #8af5dd;
+                        font-size: 11px;
+                    }
+
                     .pricing-plan-grid {
                         display: grid;
                         grid-template-columns: repeat(5, minmax(0, 1fr));
                         gap: 18px;
                     }
                     @media (max-width: 1180px) {
+                        .purchase-proof-showcase {
+                            grid-template-columns: 1fr;
+                        }
+
                         .pricing-plan-grid {
                             grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+                        }
+                    }
+                    @media (max-width: 860px) {
+                        .purchase-video-side,
+                        .purchase-proof-side {
+                            padding: 16px;
+                        }
+
+                        .purchase-main-video {
+                            grid-template-columns: 1fr;
+                        }
+
+                        .purchase-video-grid,
+                        .adsense-proof-grid,
+                        .naver-proof-strip {
+                            grid-template-columns: 1fr;
+                        }
+
+                        .adsense-proof-card.featured {
+                            grid-column: auto;
                         }
                     }
                 `}</style>
