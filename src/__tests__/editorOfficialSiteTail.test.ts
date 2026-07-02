@@ -3,11 +3,23 @@ import { insertTailLinkCardBlock } from '../automation/editorTailActions.js';
 import {
   OFFICIAL_SITE_HOOKS,
   insertOfficialSiteTailBlock,
+  isErrorPageUrl,
   normalizeOfficialSiteUrl,
   pickOfficialSiteHook,
   shouldSearchOfficialSiteTail,
   verifyOfficialSiteUrlAvailable,
 } from '../automation/editorOfficialSiteTail.js';
+
+/**
+ * Build a fetch Response whose `url` reflects the FINAL url after redirect follow.
+ * `new Response()` defaults url to '' — bokjiro's 200→/error/error.html case can only
+ * be reproduced by overriding it.
+ */
+function responseWithFinalUrl(body: string, finalUrl: string, status = 200): Response {
+  const resp = new Response(body, { status });
+  Object.defineProperty(resp, 'url', { value: finalUrl, configurable: true });
+  return resp;
+}
 
 vi.mock('../automation/editorTailActions.js', () => ({
   insertTailLinkCardBlock: vi.fn(async () => ({ cardReady: true })),
@@ -129,6 +141,53 @@ describe('editor official-site tail policy', () => {
       url: 'https://www.gov.kr/portal/service/serviceInfo/134000000156',
       fetchOfficialSite: vi.fn(async () => { throw new Error('network blocked'); }) as any,
     })).resolves.toMatchObject({ ok: false });
+  });
+
+  it('rejects a URL that 200-redirects to an error page (bokjiro.go.kr/ssis-crms 사례)', async () => {
+    // 실측: /ssis-crms 요청 → 200 + 최종 URL /error/error.html, 본문엔 에러 '문구'가 없음.
+    await expect(verifyOfficialSiteUrlAvailable({
+      url: 'https://www.bokjiro.go.kr/ssis-crms',
+      fetchOfficialSite: vi.fn(async () => responseWithFinalUrl(
+        '<html><head><title>Document</title></head><body>ERROR</body></html>',
+        'https://www.bokjiro.go.kr/error/error.html',
+      )) as any,
+    })).resolves.toMatchObject({ ok: false });
+  });
+
+  it('does not insert an official-site card when the site redirects to an error page', async () => {
+    const self = { log: vi.fn() };
+    const finder = vi.fn(async () => ({
+      success: true,
+      siteName: '복지로',
+      url: 'https://www.bokjiro.go.kr/ssis-crms',
+    }));
+    const fetchOfficialSite = vi.fn(async () => responseWithFinalUrl(
+      '<html><head><title>Document</title></head><body>ERROR</body></html>',
+      'https://www.bokjiro.go.kr/error/error.html',
+    ));
+
+    const result = await insertOfficialSiteTailBlock({
+      self,
+      page: { kind: 'page' } as any,
+      title: '에너지바우처 신청 방법',
+      hashtags: ['#지원금'],
+      bodyText: 'body',
+      findRelevantOfficialSite: finder,
+      fetchOfficialSite: fetchOfficialSite as any,
+    });
+
+    expect(result).toEqual({ attempted: true, inserted: false, cardReady: false });
+    expect(insertTailLinkCardBlock).not.toHaveBeenCalled();
+  });
+
+  it('isErrorPageUrl flags error redirect targets but passes real portal paths', () => {
+    expect(isErrorPageUrl('https://www.bokjiro.go.kr/error/error.html')).toBe(true);
+    expect(isErrorPageUrl('https://example.go.kr/404')).toBe(true);
+    expect(isErrorPageUrl('https://example.com/pages/error.jsp')).toBe(true);
+    // 정상 경로는 통과 — '500-series' 처럼 숫자가 세그먼트 일부인 경우 오탐 금지
+    expect(isErrorPageUrl('https://www.bokjiro.go.kr/ssis-tbu/')).toBe(false);
+    expect(isErrorPageUrl('https://shop.example.com/500-series/detail')).toBe(false);
+    expect(isErrorPageUrl('https://www.gov.kr/portal/service/serviceInfo/134000000156')).toBe(false);
   });
 
   it('handles official-site search misses without inserting a card', async () => {

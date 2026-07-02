@@ -4163,6 +4163,18 @@ async function validateUrl(url: string): Promise<boolean> {
       return false;
     }
 
+    // ✅ [2026-07-02] 200이지만 redirect follow 후 최종 URL이 에러 페이지인 경우 차단.
+    //   실측: bokjiro.go.kr/ssis-crms → 200 + 최종 /error/error.html (본문 문구 스캔으론 못 걸러짐).
+    //   canonical 판정은 automation/editorOfficialSiteTail.ts의 isErrorPageUrl과 동일 규칙.
+    try {
+      const finalUrl = (response as { url?: string }).url || url;
+      const finalPath = new URL(finalUrl).pathname.toLowerCase();
+      if (/(?:^|\/)(?:error|errors|404|403|500|nopage|not[-_]?found)(?:\/|\.|$)|error[._-]?(?:page|html?|jsp|do|aspx?|php)/i.test(finalPath)) {
+        console.log(`   ❌ 에러 페이지 리다이렉트 감지: ${finalUrl} (원본: ${url})`);
+        return false;
+      }
+    } catch { /* URL 파싱 실패 시 기존 흐름 유지 */ }
+
     // 2단계: 페이지 본문에서 에러 페이지 키워드 감지
     const body = await response.text();
     const bodyLower = body.toLowerCase().substring(0, 5000); // 앞부분만 확인

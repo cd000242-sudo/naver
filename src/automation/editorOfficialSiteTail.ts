@@ -97,6 +97,22 @@ const UNAVAILABLE_OFFICIAL_SITE_PATTERNS = [
   /404\s*(?:error|not\s*found)?/i,
 ] as const;
 
+// [2026-07-02] 서버가 잘못된 경로를 HTTP 200으로 에러 페이지에 리다이렉트하는 케이스 차단.
+//   실측: bokjiro.go.kr/ssis-crms → 200 + 최종 URL /error/error.html (본문엔 에러 '문구'가
+//   없고 "Document" 제목 + "ERROR" 토큰뿐이라 문구 스캔으로 못 걸러짐).
+//   따라서 응답 본문이 아니라 '최종 리다이렉트 URL 경로'가 에러 페이지인지 직접 판정한다.
+const ERROR_PAGE_URL_PATTERN =
+  /(?:^|\/)(?:error|errors|404|403|500|nopage|not[-_]?found)(?:\/|\.|$)|error[._-]?(?:page|html?|jsp|do|aspx?|php)/i;
+
+export function isErrorPageUrl(candidateUrl?: string): boolean {
+  try {
+    const pathname = new URL(String(candidateUrl || '')).pathname.toLowerCase();
+    return ERROR_PAGE_URL_PATTERN.test(pathname);
+  } catch {
+    return false;
+  }
+}
+
 export function normalizeOfficialSiteUrl(rawUrl?: string): string {
   const trimmed = String(rawUrl || '').trim();
   if (!trimmed || /\s/.test(trimmed)) return '';
@@ -129,6 +145,8 @@ export async function verifyOfficialSiteUrlAvailable(input: {
   const { url, fetchOfficialSite = globalThis.fetch } = input;
   const normalized = normalizeOfficialSiteUrl(url);
   if (!normalized) return { ok: false, reason: 'invalid-url' };
+  // 요청 URL 자체가 이미 에러 페이지 경로면 fetch 전에 즉시 거부.
+  if (isErrorPageUrl(normalized)) return { ok: false, reason: 'error-url' };
 
   if (typeof fetchOfficialSite !== 'function') {
     return isGovServiceInfoUrl(normalized)
@@ -154,6 +172,12 @@ export async function verifyOfficialSiteUrlAvailable(input: {
 
     if (!response.ok) {
       return { ok: false, reason: `http-${response.status}` };
+    }
+
+    // 200이지만 redirect follow 후 최종 URL이 에러 페이지면 거부 (bokjiro.go.kr/ssis-crms 사례).
+    const finalUrl = (response as { url?: string }).url || normalized;
+    if (isErrorPageUrl(finalUrl)) {
+      return { ok: false, reason: `error-redirect:${finalUrl}` };
     }
 
     const html = await response.text().catch(() => '');
