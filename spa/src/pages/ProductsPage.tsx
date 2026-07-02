@@ -190,8 +190,56 @@ function MetricList({ items }: { items: Array<[string, string]> }) {
     );
 }
 
+function LewordDetailModal({ onClose }: { onClose: () => void }) {
+    useEffect(() => {
+        const onKeyDown = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') onClose();
+        };
+        document.addEventListener('keydown', onKeyDown);
+        return () => document.removeEventListener('keydown', onKeyDown);
+    }, [onClose]);
+
+    return (
+        <div className="product-detail-modal" role="dialog" aria-modal="true" aria-labelledby="leword-detail-title">
+            <button className="product-detail-backdrop" type="button" aria-label="상세 보기 닫기" onClick={onClose} />
+            <section className="product-detail-card">
+                <button className="product-detail-close" type="button" aria-label="닫기" onClick={onClose}>×</button>
+                <span className="product-detail-eyebrow">LEWORD PRODUCT DETAIL</span>
+                <h2 id="leword-detail-title">LEWORD 상세 보기</h2>
+                <p>
+                    실시간 검색어, 검색량, 문서수, 경쟁도를 한 화면에서 비교해 블로그에 바로 쓸
+                    키워드만 선별하는 키워드 분석 전용 도구입니다.
+                </p>
+                <div className="product-detail-grid">
+                    <article>
+                        <b>실시간 소스</b>
+                        <span>네이버, 다음, 네이트, ZUM, 정책/이슈 흐름을 교차 확인합니다.</span>
+                    </article>
+                    <article>
+                        <b>키워드 분석기</b>
+                        <span>PC/모바일 검색량, 문서수, 경쟁비율을 보고 후보를 걸러냅니다.</span>
+                    </article>
+                    <article>
+                        <b>Pro 헌터</b>
+                        <span>무료 보드보다 넓은 후보군에서 선점형 키워드를 추립니다.</span>
+                    </article>
+                    <article>
+                        <b>발행 연결</b>
+                        <span>Naver와 Orbit으로 이어지는 발행 전 키워드 선별 단계로 씁니다.</span>
+                    </article>
+                </div>
+                <div className="product-detail-actions">
+                    <Link className="products-btn primary" to="/leword" onClick={onClose}>LEWORD 열기</Link>
+                    <Link className="products-btn secondary" to="/pricing" onClick={onClose}>요금제 보기</Link>
+                </div>
+            </section>
+        </div>
+    );
+}
+
 function ProductsPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+    const [activeDetail, setActiveDetail] = useState<ProductId | null>(null);
 
     useEffect(() => {
         const prev = document.title;
@@ -224,6 +272,8 @@ function ProductsPage() {
             if (!target) return;
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             if (target instanceof HTMLElement) target.focus({ preventScroll: true });
+            target.classList.add('product-focus-pulse');
+            window.setTimeout(() => target.classList.remove('product-focus-pulse'), 1100);
         });
     }, []);
 
@@ -243,6 +293,11 @@ function ProductsPage() {
             window.history.replaceState(null, '', nextPath);
         }
         scrollToHash();
+    };
+
+    const openLewordPanelDetail = (event: MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        setActiveDetail('leword');
     };
 
     const products = applyProductOverrides(PRODUCTS, siteContent);
@@ -345,7 +400,11 @@ function ProductsPage() {
                                         <ul>
                                             {product.bullets.map((item) => <li key={item}>{item}</li>)}
                                         </ul>
-                                        <Link className="products-btn panel-btn" to={product.href} onClick={(event) => openLewordProductDetail(event, product.href)}>{product.cta}</Link>
+                                        {product.id === 'leword' ? (
+                                            <a className="products-btn panel-btn" href="#leword-detail" onClick={openLewordPanelDetail}>{product.cta}</a>
+                                        ) : (
+                                            <Link className="products-btn panel-btn" to={product.href} onClick={(event) => openLewordProductDetail(event, product.href)}>{product.cta}</Link>
+                                        )}
                                     </div>
                                     <div className="product-panel-media">
                                         <ProductMedia product={product} />
@@ -450,6 +509,7 @@ function ProductsPage() {
                     </div>
                 </section>
             </main>
+            {activeDetail === 'leword' ? <LewordDetailModal onClose={() => setActiveDetail(null)} /> : null}
 
             <style>{`
                 .products-page {
@@ -879,6 +939,118 @@ function ProductsPage() {
                     color: #f4c95d;
                 }
 
+                .product-focus-pulse {
+                    outline: 2px solid rgba(56, 189, 248, 0.82);
+                    box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.16), 0 22px 70px rgba(56, 189, 248, 0.20);
+                }
+
+                .product-detail-modal {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 120;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 24px;
+                }
+
+                .product-detail-backdrop {
+                    position: absolute;
+                    inset: 0;
+                    border: 0;
+                    background: rgba(3, 7, 18, 0.78);
+                    backdrop-filter: blur(10px);
+                    cursor: pointer;
+                }
+
+                .product-detail-card {
+                    position: relative;
+                    width: min(760px, 100%);
+                    border-radius: 12px;
+                    border: 1px solid rgba(56, 189, 248, 0.26);
+                    background: #0b1220;
+                    color: #f8fafc;
+                    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.58);
+                    padding: 34px;
+                }
+
+                .product-detail-close {
+                    position: absolute;
+                    top: 16px;
+                    right: 16px;
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 50%;
+                    border: 1px solid rgba(148, 163, 184, 0.32);
+                    background: rgba(15, 23, 42, 0.96);
+                    color: #e2e8f0;
+                    font-size: 24px;
+                    line-height: 1;
+                    cursor: pointer;
+                }
+
+                .product-detail-eyebrow {
+                    display: inline-flex;
+                    align-items: center;
+                    height: 30px;
+                    padding: 0 12px;
+                    border-radius: 999px;
+                    background: rgba(56, 189, 248, 0.14);
+                    color: #38bdf8;
+                    font-size: 12px;
+                    font-weight: 900;
+                    letter-spacing: 0;
+                }
+
+                .product-detail-card h2 {
+                    margin: 18px 0 12px;
+                    font-size: 34px;
+                    line-height: 1.18;
+                    letter-spacing: 0;
+                }
+
+                .product-detail-card > p {
+                    margin: 0;
+                    color: rgba(226, 232, 240, 0.82);
+                    line-height: 1.75;
+                }
+
+                .product-detail-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 12px;
+                    margin: 24px 0;
+                }
+
+                .product-detail-grid article {
+                    border-radius: 8px;
+                    border: 1px solid rgba(148, 163, 184, 0.22);
+                    background: rgba(15, 23, 42, 0.92);
+                    padding: 18px;
+                }
+
+                .product-detail-grid b,
+                .product-detail-grid span {
+                    display: block;
+                }
+
+                .product-detail-grid b {
+                    color: #f8fafc;
+                    margin-bottom: 8px;
+                }
+
+                .product-detail-grid span {
+                    color: rgba(203, 213, 225, 0.82);
+                    font-size: 14px;
+                    line-height: 1.55;
+                }
+
+                .product-detail-actions {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 12px;
+                }
+
                 .product-panel-media {
                     border-radius: 8px;
                     overflow: hidden;
@@ -1112,6 +1284,25 @@ function ProductsPage() {
 
                     .suite-preview img {
                         height: 220px;
+                    }
+
+                    .product-detail-modal {
+                        padding: 14px;
+                        align-items: flex-end;
+                    }
+
+                    .product-detail-card {
+                        max-height: calc(100vh - 28px);
+                        overflow-y: auto;
+                        padding: 26px 18px 20px;
+                    }
+
+                    .product-detail-card h2 {
+                        font-size: 26px;
+                    }
+
+                    .product-detail-grid {
+                        grid-template-columns: 1fr;
                     }
                 }
             `}</style>
