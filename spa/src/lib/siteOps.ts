@@ -143,19 +143,55 @@ export type DownloadProductContent = {
 };
 
 let siteContentPromise: Promise<SiteContent | null> | null = null;
+const SITE_CONTENT_CACHE_KEY = 'leaderspro.siteContent.cache.v2';
+const SITE_CONTENT_CACHE_TTL_MS = 60 * 1000;
+const SITE_CONTENT_FETCH_TIMEOUT_MS = 2500;
+
+function readCachedSiteContent(maxAgeMs = SITE_CONTENT_CACHE_TTL_MS): SiteContent | null {
+    try {
+        const raw = localStorage.getItem(SITE_CONTENT_CACHE_KEY);
+        if (!raw) return null;
+        const cached = JSON.parse(raw) as { savedAt?: number; content?: SiteContent };
+        if (!cached?.content) return null;
+        if (maxAgeMs > 0 && Date.now() - Number(cached.savedAt || 0) > maxAgeMs) return null;
+        return cached.content;
+    } catch {
+        return null;
+    }
+}
+
+function writeCachedSiteContent(content: SiteContent) {
+    try {
+        localStorage.setItem(SITE_CONTENT_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), content }));
+    } catch {
+        // Public page rendering must never depend on cache writes.
+    }
+}
 
 export async function fetchSiteContent(): Promise<SiteContent | null> {
+    const freshCache = readCachedSiteContent();
+    if (freshCache) return freshCache;
     if (siteContentPromise) return siteContentPromise;
-    siteContentPromise = fetch(`${GAS_URL}?action=site-content&ts=${Date.now()}`, { cache: 'no-store' })
+    const staleCache = readCachedSiteContent(0);
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), SITE_CONTENT_FETCH_TIMEOUT_MS);
+    siteContentPromise = fetch(`${GAS_URL}?action=site-content`, { cache: 'default', signal: controller.signal })
         .then((res) => res.json())
         .then((data) => {
-            if (data && (data.ok || data.success) && data.content) return data.content as SiteContent;
+            if (data && (data.ok || data.success) && data.content) {
+                const content = data.content as SiteContent;
+                writeCachedSiteContent(content);
+                return content;
+            }
             return null;
         })
         .catch((err) => {
             console.warn('[site-content] load failed', err);
             siteContentPromise = null;
-            return null;
+            return staleCache;
+        })
+        .finally(() => {
+            window.clearTimeout(timeout);
         });
     return siteContentPromise;
 }

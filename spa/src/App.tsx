@@ -2,8 +2,8 @@ import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import { recordPageView } from './lib/siteOps';
+import IndexPage from './pages/IndexPage';
 
-const IndexPage = lazy(() => import('./pages/IndexPage'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
 const DetailPage = lazy(() => import('./pages/DetailPage'));
 const LewordPage = lazy(() => import('./pages/LewordPage'));

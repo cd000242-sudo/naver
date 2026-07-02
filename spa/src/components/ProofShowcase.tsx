@@ -84,6 +84,17 @@ export default function ProofShowcase({ className = '', compact = false, variant
         return () => window.clearInterval(timerId);
     }, [variant]);
 
+    useEffect(() => {
+        if (variant !== 'carousel' || ALL_PROOFS.length <= 1) return;
+        const nextProof = ALL_PROOFS[(activeIndex + 1) % ALL_PROOFS.length];
+        const timerId = window.setTimeout(() => {
+            const image = new Image();
+            image.decoding = 'async';
+            image.src = nextProof.src;
+        }, 900);
+        return () => window.clearTimeout(timerId);
+    }, [activeIndex, variant]);
+
     if (variant === 'carousel') {
         return (
             <section className={`proof-carousel${compact ? ' proof-showcase-compact' : ''}${className ? ` ${className}` : ''}`} aria-label="애드센스와 네이버 성과 자동 슬라이드">
@@ -95,15 +106,14 @@ export default function ProofShowcase({ className = '', compact = false, variant
                     </div>
 
                     <div className="proof-carousel-image-shell" aria-live="polite">
-                        {ALL_PROOFS.map((proof, index) => (
-                            <img
-                                key={proof.src}
-                                src={proof.src}
-                                alt={proof.title}
-                                loading={index === 0 ? 'eager' : 'lazy'}
-                                className={`proof-carousel-image${index === activeIndex ? ' active' : ''}`}
-                            />
-                        ))}
+                        <img
+                            key={`${activeProof.src}-${activeIndex}`}
+                            src={activeProof.src}
+                            alt={activeProof.title}
+                            loading="lazy"
+                            decoding="async"
+                            className="proof-carousel-image active"
+                        />
                     </div>
 
                     <div className="proof-carousel-dots" aria-label="성과 이미지 선택">

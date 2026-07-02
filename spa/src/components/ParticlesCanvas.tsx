@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 /**
  * 파티클 캔버스 — 메인 페이지 배경.
- * 80개 파티클, 70% gold + 30% white. 위로 천천히 흐름.
+ * 첫 화면 이후에만 붙는 가벼운 배경 파티클.
  */
 function ParticlesCanvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,6 +11,8 @@ function ParticlesCanvas() {
         const canvas = canvasRef.current;
         if (!canvas) return;
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+        if (connection?.saveData || /2g/i.test(connection?.effectiveType || '')) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
         const context = ctx;
@@ -23,7 +25,7 @@ function ParticlesCanvas() {
 
         function resize() {
             if (!canvas) return;
-            dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+            dpr = Math.min(window.devicePixelRatio || 1, 1);
             w = window.innerWidth;
             h = window.innerHeight;
             canvas.width = Math.floor(w * dpr);
@@ -46,7 +48,7 @@ function ParticlesCanvas() {
                 gold: Math.random() > 0.3,
             };
         }
-        const particleCount = window.innerWidth < 768 ? 28 : (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4 ? 40 : 56);
+        const particleCount = window.innerWidth < 768 ? 10 : (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4 ? 20 : 34);
         for (let i = 0; i < particleCount; i++) particles.push(makeParticle());
 
         let raf = 0;

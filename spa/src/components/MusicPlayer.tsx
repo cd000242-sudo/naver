@@ -72,14 +72,25 @@ function MusicPlayer() {
 
     useEffect(() => {
         let disposed = false;
-        fetchSiteContent().then((content) => {
-            if (disposed) return;
-            const next = normalizeMusicConfig(content?.theme?.music);
-            setMusicConfig(next);
-            setTrackTitle(next.title);
-        });
+        const loadConfig = () => {
+            fetchSiteContent().then((content) => {
+                if (disposed) return;
+                const next = normalizeMusicConfig(content?.theme?.music);
+                setMusicConfig(next);
+                setTrackTitle(next.title);
+            });
+        };
+        const idleWindow = window as Window & {
+            requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => number;
+            cancelIdleCallback?: (id: number) => void;
+        };
+        const id = idleWindow.requestIdleCallback
+            ? idleWindow.requestIdleCallback(loadConfig, { timeout: 4000 })
+            : window.setTimeout(loadConfig, 2500);
         return () => {
             disposed = true;
+            if (idleWindow.cancelIdleCallback && typeof id === 'number') idleWindow.cancelIdleCallback(id);
+            else window.clearTimeout(id);
         };
     }, []);
 

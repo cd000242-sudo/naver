@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
@@ -92,7 +92,7 @@ type HomeLiveState = {
 };
 
 const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
-const HOME_LIVE_TIMEOUT_MS = 8000;
+const HOME_LIVE_TIMEOUT_MS = 2500;
 const HOME_LIVE_CACHE_KEY = 'leaderspro.home.sourceSignals.v1';
 
 const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
@@ -172,6 +172,25 @@ function writeCachedSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & {
     } catch {
         // 캐시는 실패해도 홈 로딩을 막지 않습니다.
     }
+}
+
+function runAfterFirstPaint(task: () => void, timeout = 900): () => void {
+    let cancelled = false;
+    const run = () => {
+        if (!cancelled) task();
+    };
+    const idleWindow = window as Window & {
+        requestIdleCallback?: (callback: () => void, options?: { timeout?: number }) => number;
+        cancelIdleCallback?: (id: number) => void;
+    };
+    const id = idleWindow.requestIdleCallback
+        ? idleWindow.requestIdleCallback(run, { timeout })
+        : window.setTimeout(run, Math.min(timeout, 700));
+    return () => {
+        cancelled = true;
+        if (idleWindow.cancelIdleCallback && typeof id === 'number') idleWindow.cancelIdleCallback(id);
+        else window.clearTimeout(id);
+    };
 }
 
 function buildFallbackHomeLiveState(status: HomeLiveStatus = 'loading'): HomeLiveState {
@@ -1179,6 +1198,7 @@ function IndexPage() {
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+    const [decorationsReady, setDecorationsReady] = useState(false);
 
     // SEO meta (페이지 진입 시 document.title 변경)
     useEffect(() => {
@@ -1204,27 +1224,35 @@ function IndexPage() {
 
     useEffect(() => {
         let alive = true;
-        loadHomeLiveState()
-            .then((state) => {
-                if (alive) setLiveState(state);
-            })
-            .catch(() => {
-                if (alive) setLiveState(buildFallbackHomeLiveState('error'));
-            });
+        const cancel = runAfterFirstPaint(() => {
+            loadHomeLiveState()
+                .then((state) => {
+                    if (alive) setLiveState(state);
+                })
+                .catch(() => {
+                    if (alive) setLiveState(buildFallbackHomeLiveState('error'));
+                });
+        }, 1100);
         return () => {
             alive = false;
+            cancel();
         };
     }, []);
 
     useEffect(() => {
         let alive = true;
-        fetchSiteContent().then((content) => {
-            if (alive) setSiteContent(content);
-        });
+        const cancel = runAfterFirstPaint(() => {
+            fetchSiteContent().then((content) => {
+                if (alive) setSiteContent(content);
+            });
+        }, 1400);
         return () => {
             alive = false;
+            cancel();
         };
     }, []);
+
+    useEffect(() => runAfterFirstPaint(() => setDecorationsReady(true), 1700), []);
 
     const liveUpdatedAt = formatLiveUpdatedAt(liveState.updatedAt);
     const liveStatusLabel = liveState.status === 'ready' ? 'LIVE' : liveState.status === 'error' ? 'FAST FALLBACK' : 'LOADING';
@@ -1237,19 +1265,21 @@ function IndexPage() {
         setActiveSourceLaneId(laneId);
         setActiveSourceKeyword('');
     };
-    const configuredProofs = (siteContent?.hero?.proofs || [])
-        .filter((proof) => Boolean(proof?.src))
-        .map((proof) => ({
-            src: String(proof.src || ''),
-            alt: proof.alt,
-            title: proof.title,
-            desc: proof.desc,
-            metric: proof.metric,
-        }));
-    const baseHeroProofs = configuredProofs.length > 0 ? configuredProofs : DEFAULT_HERO_PROOFS;
-    const heroProofs = [...ADSENSE_HERO_PROOFS, ...baseHeroProofs].filter((proof, index, allProofs) => (
-        allProofs.findIndex((item) => item.src === proof.src) === index
-    ));
+    const heroProofs = useMemo(() => {
+        const configuredProofs = (siteContent?.hero?.proofs || [])
+            .filter((proof) => Boolean(proof?.src))
+            .map((proof) => ({
+                src: String(proof.src || ''),
+                alt: proof.alt,
+                title: proof.title,
+                desc: proof.desc,
+                metric: proof.metric,
+            }));
+        const baseHeroProofs = configuredProofs.length > 0 ? configuredProofs : DEFAULT_HERO_PROOFS;
+        return [...ADSENSE_HERO_PROOFS, ...baseHeroProofs].filter((proof, index, allProofs) => (
+            allProofs.findIndex((item) => item.src === proof.src) === index
+        ));
+    }, [siteContent]);
     const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
     const homeBgImage = siteContent?.theme?.productsBgImage || siteContent?.theme?.pricingBgImage || '';
 
@@ -1259,8 +1289,8 @@ function IndexPage() {
         const previousBackground = document.body.style.background;
         const previousAttachment = document.body.style.backgroundAttachment;
         document.body.style.background =
-            `linear-gradient(180deg, rgba(10,10,15,0.10) 0%, rgba(10,10,15,0.25) 50%, rgba(10,10,15,0.45) 100%), url("${bg}") center top / cover no-repeat fixed, var(--bg-dark)`;
-        document.body.style.backgroundAttachment = 'fixed';
+            `linear-gradient(180deg, rgba(10,10,15,0.10) 0%, rgba(10,10,15,0.25) 50%, rgba(10,10,15,0.45) 100%), url("${bg}") center top / cover no-repeat, var(--bg-dark)`;
+        document.body.style.backgroundAttachment = 'scroll';
         return () => {
             document.body.style.background = previousBackground;
             document.body.style.backgroundAttachment = previousAttachment;
@@ -1276,9 +1306,20 @@ function IndexPage() {
         return () => window.clearInterval(timer);
     }, [heroProofs.length]);
 
+    useEffect(() => {
+        if (heroProofs.length <= 1) return;
+        const nextProof = heroProofs[(activeProofIndex + 1) % heroProofs.length];
+        if (!nextProof?.src) return;
+        return runAfterFirstPaint(() => {
+            const image = new Image();
+            image.decoding = 'async';
+            image.src = nextProof.src;
+        }, 1200);
+    }, [activeProofIndex, heroProofs]);
+
     return (
         <>
-            <ParticlesCanvas />
+            {decorationsReady && <ParticlesCanvas />}
 
             {/* ═══ HERO ═══ */}
             <section className="home-hero" style={{ minHeight: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: 'minmax(0, 980px) minmax(280px, 360px)', columnGap: 24, rowGap: 14, padding: '76px 24px 28px', maxWidth: 1412, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
@@ -1366,16 +1407,14 @@ function IndexPage() {
                         <small>{activeProof.desc || '사용자가 직접 확인한 성과 이미지를 순서대로 보여줍니다.'}</small>
                     </div>
                     <div className="proof-image-shell">
-                        {heroProofs.map((proof, index) => (
-                            <img
-                                key={`${proof.src}-${index}`}
-                                src={proof.src}
-                                alt={proof.alt || proof.title || 'Leaders Pro 사용자 성과 이미지'}
-                                loading={index === 0 ? 'eager' : 'lazy'}
-                                decoding="async"
-                                className={`proof-image${index === activeProofIndex % heroProofs.length ? ' active' : ''}`}
-                            />
-                        ))}
+                        <img
+                            key={`${activeProof.src}-${activeProofIndex}`}
+                            src={activeProof.src}
+                            alt={activeProof.alt || activeProof.title || 'Leaders Pro 사용자 성과 이미지'}
+                            loading="eager"
+                            decoding="async"
+                            className="proof-image active"
+                        />
                     </div>
                     <div className="proof-dots" role="tablist" aria-label="성과 이미지 선택">
                         {heroProofs.map((proof, index) => (

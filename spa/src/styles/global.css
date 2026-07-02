@@ -24,9 +24,9 @@ body {
     /* hero-beach-bg-fast.jpg — 원본 PNG 대신 가벼운 파생본을 우선 사용. */
     background:
         linear-gradient(180deg, rgba(10,10,15,0.10) 0%, rgba(10,10,15,0.25) 50%, rgba(10,10,15,0.45) 100%),
-        url('/images/hero-beach-bg-fast.jpg') center top / cover no-repeat fixed,
+        url('/images/hero-beach-bg-fast.jpg') center top / cover no-repeat,
         var(--bg-dark);
-    background-attachment: fixed;
+    background-attachment: scroll;
     color: var(--text-primary);
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
@@ -91,6 +91,12 @@ button { cursor: pointer; font-family: inherit; }
 }
 
 @media (max-width: 768px) {
+    body {
+        background-position: center top;
+        background-size: auto 100vh;
+        background-attachment: scroll;
+    }
+
     .nav-hamburger {
         display: inline-flex !important;
     }
