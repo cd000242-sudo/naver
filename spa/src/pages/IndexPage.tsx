@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
-import ProofShowcase from '../components/ProofShowcase';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 type HeroProof = {
@@ -1051,6 +1050,44 @@ function cssBackgroundUrl(value?: string): string {
     return raw.replace(/["\\\r\n]/g, '');
 }
 
+const ADSENSE_HERO_PROOFS: HeroProof[] = [
+    {
+        src: '/images/pricing-proof/adsense-10000-month.jpg',
+        alt: '애드센스 이번 달 US$1만 예상 수입 인증',
+        title: '이번 달 US$1만',
+        desc: '애드센스 예상 수입이 크게 상승한 실제 성과 화면입니다.',
+        metric: '월 수익',
+    },
+    {
+        src: '/images/pricing-proof/adsense-daily-100.jpg',
+        alt: '애드센스 오늘 US$100 이상 수익 인증',
+        title: '오늘 US$100+',
+        desc: '하루 수익이 눈에 보이게 올라온 운영 성과입니다.',
+        metric: '일 수익',
+    },
+    {
+        src: '/images/pricing-proof/adsense-28days-931.jpg',
+        alt: '애드센스 최근 28일 US$931 성과 인증',
+        title: '최근 28일 US$931',
+        desc: '월간 운영 성과가 누적되는 흐름을 보여줍니다.',
+        metric: '28일 성과',
+    },
+    {
+        src: '/images/pricing-proof/adsense-today-95.jpg',
+        alt: '애드센스 오늘 US$95.57 수익 인증',
+        title: '오늘 US$95.57',
+        desc: '당일 수익까지 바로 확인되는 성과 화면입니다.',
+        metric: '당일 수익',
+    },
+    {
+        src: '/images/pricing-proof/adsense-small-start.jpg',
+        alt: '애드센스 초기 블로그 수익 상승 사례',
+        title: '작은 블로그도 수익 흐름 확인',
+        desc: '초기 운영 단계에서도 수익 변화를 확인한 사례입니다.',
+        metric: '시작 사례',
+    },
+];
+
 const DEFAULT_HERO_PROOFS: HeroProof[] = [
     {
         src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg',
@@ -1209,7 +1246,10 @@ function IndexPage() {
             desc: proof.desc,
             metric: proof.metric,
         }));
-    const heroProofs = configuredProofs.length > 0 ? configuredProofs : DEFAULT_HERO_PROOFS;
+    const baseHeroProofs = configuredProofs.length > 0 ? configuredProofs : DEFAULT_HERO_PROOFS;
+    const heroProofs = [...ADSENSE_HERO_PROOFS, ...baseHeroProofs].filter((proof, index, allProofs) => (
+        allProofs.findIndex((item) => item.src === proof.src) === index
+    ));
     const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
     const homeBgImage = siteContent?.theme?.productsBgImage || siteContent?.theme?.pricingBgImage || '';
 
@@ -1362,10 +1402,6 @@ function IndexPage() {
                         </Link>
                     ))}
                 </div>
-            </section>
-
-            <section style={{ maxWidth: 1180, margin: '0 auto 54px', padding: '0 24px', position: 'relative', zIndex: 1 }}>
-                <ProofShowcase />
             </section>
 
             <style>{`
