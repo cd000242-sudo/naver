@@ -4779,6 +4779,19 @@ async function startContinuousPublishingV2(): Promise<void> {
 
         // ✅ [2026-04-03 FIX] withStopCheck 래퍼: 발행 중에도 중지 즉시 반응
         await withStopCheck(executeUnifiedAutomation(formData));
+
+        // [2026-07-02 FIX] 발행 실패를 '완료'로 오보하던 버그 차단.
+        //   executeUnifiedAutomation은 내부 withErrorHandling이 모든 에러를 삼키고 정상
+        //   반환한다(never throws) — 따라서 바로 아래 `item.status = 'completed'`의
+        //   "throw 안 함 == 성공" 가정이 항상 참이 되어, 실제 발행 실패
+        //   (EDITOR_NOT_READY / POST_CONTENT_APPLIED)도 완료로 찍혔다.
+        //   _lastPublishOutcome는 assertAutomationPublishResult(즉시=concrete post URL,
+        //   예약=success===true) 통과 후에만 'success'로 세팅되는 실측 성공 신호이므로,
+        //   이것으로 판정한다. 미확인이면 throw → 아래 catch로 라우팅되어 기존
+        //   재시도(1회)→failed 처리와 상태 정리 경로를 그대로 탄다.
+        if ((window as any)._lastPublishOutcome !== 'success') {
+          throw new Error('발행 완료가 확인되지 않았습니다 (발행 결과 미확인). 작성중/임시저장/블로그홈 상태를 완료로 처리하지 않습니다.');
+        }
       }
 
       item.status = 'completed';
