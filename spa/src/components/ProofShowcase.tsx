@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 type ProofItem = {
     src: string;
     title: string;
@@ -62,11 +64,212 @@ const NAVER_PROOFS: ProofItem[] = [
 type ProofShowcaseProps = {
     className?: string;
     compact?: boolean;
+    variant?: 'grid' | 'carousel';
 };
 
-export default function ProofShowcase({ className = '', compact = false }: ProofShowcaseProps) {
+const ALL_PROOFS = [...ADSENSE_PROOFS, ...NAVER_PROOFS];
+
+export default function ProofShowcase({ className = '', compact = false, variant = 'grid' }: ProofShowcaseProps) {
+    const [activeIndex, setActiveIndex] = useState(0);
     const feature = ADSENSE_PROOFS[0];
     const subProofs = ADSENSE_PROOFS.slice(1);
+    const activeProof = ALL_PROOFS[activeIndex] || ALL_PROOFS[0];
+
+    useEffect(() => {
+        if (variant !== 'carousel' || ALL_PROOFS.length <= 1) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const timerId = window.setInterval(() => {
+            setActiveIndex((index) => (index + 1) % ALL_PROOFS.length);
+        }, 3600);
+        return () => window.clearInterval(timerId);
+    }, [variant]);
+
+    if (variant === 'carousel') {
+        return (
+            <section className={`proof-carousel${compact ? ' proof-showcase-compact' : ''}${className ? ` ${className}` : ''}`} aria-label="애드센스와 네이버 성과 자동 슬라이드">
+                <div className="proof-carousel-stage">
+                    <div className="proof-carousel-summary">
+                        <span>{activeProof.metric}</span>
+                        <strong>{activeProof.title}</strong>
+                        <small>{activeProof.desc}</small>
+                    </div>
+
+                    <div className="proof-carousel-image-shell" aria-live="polite">
+                        {ALL_PROOFS.map((proof, index) => (
+                            <img
+                                key={proof.src}
+                                src={proof.src}
+                                alt={proof.title}
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                                className={`proof-carousel-image${index === activeIndex ? ' active' : ''}`}
+                            />
+                        ))}
+                    </div>
+
+                    <div className="proof-carousel-dots" aria-label="성과 이미지 선택">
+                        {ALL_PROOFS.map((proof, index) => (
+                            <button
+                                key={proof.src}
+                                type="button"
+                                className={index === activeIndex ? 'active' : ''}
+                                aria-label={`${index + 1}번째 성과 보기`}
+                                aria-pressed={index === activeIndex}
+                                onClick={() => setActiveIndex(index)}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <style>{`
+                    .proof-carousel {
+                        width: 100%;
+                        min-height: 680px;
+                        margin: 0;
+                        padding: 18px;
+                        border: 1px solid rgba(255,255,255,0.12);
+                        border-radius: 8px;
+                        background:
+                            linear-gradient(180deg, rgba(9,15,25,0.94), rgba(5,9,16,0.90)),
+                            radial-gradient(circle at 22% 8%, rgba(68,215,182,0.13), transparent 32%);
+                        box-shadow: 0 24px 76px rgba(0,0,0,0.34);
+                        overflow: hidden;
+                    }
+
+                    .proof-carousel-stage {
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        min-height: 640px;
+                        border-radius: 8px;
+                        border: 1px solid rgba(255,255,255,0.10);
+                        background:
+                            linear-gradient(180deg, rgba(11,19,31,0.72), rgba(6,10,18,0.92)),
+                            radial-gradient(circle at 50% 38%, rgba(56,189,248,0.11), transparent 45%);
+                        overflow: hidden;
+                    }
+
+                    .proof-carousel-stage::before {
+                        content: '';
+                        position: absolute;
+                        inset: 0;
+                        background:
+                            linear-gradient(180deg, rgba(0,0,0,0.20), transparent 28%, rgba(0,0,0,0.34)),
+                            radial-gradient(circle at 12% 18%, rgba(255,215,0,0.13), transparent 10%);
+                        pointer-events: none;
+                        z-index: 1;
+                    }
+
+                    .proof-carousel-summary {
+                        position: absolute;
+                        left: 18px;
+                        right: 18px;
+                        top: 18px;
+                        z-index: 3;
+                        display: grid;
+                        gap: 8px;
+                        padding: 17px 18px;
+                        border: 1px solid rgba(255,255,255,0.12);
+                        border-radius: 8px;
+                        background: linear-gradient(180deg, rgba(12,19,31,0.94), rgba(7,12,20,0.88));
+                        box-shadow: 0 16px 42px rgba(0,0,0,0.28);
+                    }
+
+                    .proof-carousel-summary span {
+                        color: #ffd84d;
+                        font-size: 12px;
+                        font-weight: 950;
+                        letter-spacing: 0;
+                    }
+
+                    .proof-carousel-summary strong {
+                        color: #fff;
+                        font-size: clamp(20px, 2.4vw, 28px);
+                        line-height: 1.18;
+                        font-weight: 950;
+                        letter-spacing: 0;
+                    }
+
+                    .proof-carousel-summary small {
+                        color: rgba(226,232,240,0.78);
+                        font-size: 13px;
+                        line-height: 1.55;
+                    }
+
+                    .proof-carousel-image-shell {
+                        position: relative;
+                        z-index: 2;
+                        width: 100%;
+                        height: 500px;
+                        margin: 118px auto 42px;
+                    }
+
+                    .proof-carousel-image {
+                        position: absolute;
+                        inset: 0;
+                        width: 100%;
+                        height: 100%;
+                        padding: 18px;
+                        object-fit: contain;
+                        object-position: center;
+                        opacity: 0;
+                        transform: translateX(16px) scale(0.985);
+                        transition: opacity 420ms ease, transform 420ms ease;
+                        filter: drop-shadow(0 22px 34px rgba(0,0,0,0.34));
+                    }
+
+                    .proof-carousel-image.active {
+                        opacity: 1;
+                        transform: translateX(0) scale(1);
+                    }
+
+                    .proof-carousel-dots {
+                        position: absolute;
+                        left: 0;
+                        right: 0;
+                        bottom: 17px;
+                        z-index: 4;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 8px;
+                    }
+
+                    .proof-carousel-dots button {
+                        width: 10px;
+                        height: 10px;
+                        padding: 0;
+                        border: 0;
+                        border-radius: 999px;
+                        background: rgba(255,255,255,0.34);
+                        cursor: pointer;
+                        transition: width 180ms ease, background 180ms ease;
+                    }
+
+                    .proof-carousel-dots button.active {
+                        width: 38px;
+                        background: #ffd84d;
+                    }
+
+                    @media (max-width: 900px) {
+                        .proof-carousel {
+                            min-height: 600px;
+                            padding: 14px;
+                        }
+
+                        .proof-carousel-stage {
+                            min-height: 570px;
+                        }
+
+                        .proof-carousel-image-shell {
+                            height: 420px;
+                            margin-top: 126px;
+                        }
+                    }
+                `}</style>
+            </section>
+        );
+    }
 
     return (
         <section className={`proof-showcase${compact ? ' proof-showcase-compact' : ''}${className ? ` ${className}` : ''}`} aria-label="애드센스와 네이버 성과 인증">

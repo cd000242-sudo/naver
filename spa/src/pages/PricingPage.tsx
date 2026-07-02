@@ -376,7 +376,7 @@ function PricingPage() {
                         </div>
                     </div>
 
-                    <ProofShowcase compact className="purchase-proof-side" />
+                    <ProofShowcase compact variant="carousel" className="purchase-proof-side" />
                 </section>
 
                 {pricingIntro}
@@ -408,8 +408,7 @@ function PricingPage() {
                         margin: 0 0 34px;
                     }
 
-                    .purchase-video-side,
-                    .purchase-proof-side {
+                    .purchase-video-side {
                         border-radius: 18px;
                         border: 1px solid rgba(255, 255, 255, 0.10);
                         background: linear-gradient(180deg, rgba(12, 18, 31, 0.88), rgba(9, 13, 22, 0.74));
@@ -439,8 +438,7 @@ function PricingPage() {
                         color: #8af5dd;
                     }
 
-                    .purchase-video-side h3,
-                    .purchase-proof-side h3 {
+                    .purchase-video-side h3 {
                         margin: 0 0 8px;
                         color: #fff;
                         font-size: clamp(22px, 2.4vw, 30px);
@@ -449,8 +447,7 @@ function PricingPage() {
                         letter-spacing: 0;
                     }
 
-                    .purchase-video-side > p,
-                    .purchase-proof-side > p {
+                    .purchase-video-side > p {
                         margin: 0 0 18px;
                         color: rgba(226, 232, 240, 0.74);
                         font-size: 14px;
@@ -617,8 +614,7 @@ function PricingPage() {
                         }
                     }
                     @media (max-width: 860px) {
-                        .purchase-video-side,
-                        .purchase-proof-side {
+                        .purchase-video-side {
                             padding: 16px;
                         }
 
