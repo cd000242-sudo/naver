@@ -426,6 +426,18 @@ function normalizeDanglingClosingBrackets(value: string): string {
     .replace(/(^|\n)\s*\]\s*(?=\n|$)/g, '$1');
 }
 
+// [2026-07-03] LLM/원본이 인용부호를 줄바꿈으로 떼어놓는 경우가 있다.
+//   "문장\n'" 처럼 닫는 따옴표가 홀로 다음 줄에 떨어지면 리치입력이 이를 별도 단락으로 렌더해
+//   발행물에 "'문장" / "'" 두 줄로 나온다(사용자 실측). 홀로 남은 여닫는 따옴표를 인접 텍스트에
+//   다시 붙여 한 줄로 만든다. normalizeDanglingClosingBrackets의 따옴표 버전.
+function normalizeDanglingQuotes(value: string): string {
+  return value
+    // 닫는 따옴표만 홀로 다음 줄에 떨어짐 → 앞 줄 끝에 붙임 ("문장\n'" → "문장'")
+    .replace(/([^\s'"‘’“”])[ \t]*\n+[ \t]*(['"‘’“”])(?=[ \t]*(?:\n|$))/g, '$1$2')
+    // 여는 따옴표만 홀로 앞 줄에 있음 → 다음 줄 앞에 붙임 ("'\n문장" → "'문장")
+    .replace(/(^|\n)[ \t]*(['"‘“])[ \t]*\n+[ \t]*(?=\S)/g, '$1$2');
+}
+
 function normalizeKoreanVerdictLabels(value: string): string {
   const verdictLabel = '(?:한\\s*줄\\s*(?:판정|결론|정리)|한줄\\s*(?:판정|결론|정리))';
   return value
@@ -465,7 +477,7 @@ function normalizeMateReadableText(value: string): string {
   return normalizeInlineQaMarkers(
     normalizeInlineDashLists(
       normalizeInlineNumberedLists(
-        normalizeKoreanVerdictLabels(normalizeDanglingClosingBrackets(value))
+        normalizeKoreanVerdictLabels(normalizeDanglingQuotes(normalizeDanglingClosingBrackets(value)))
       )
     )
   )
@@ -870,7 +882,9 @@ function splitSentencesForMobile(value: string): string[] {
   const compact = value.replace(/\s+/g, ' ').trim();
   if (!compact) return [];
   const protectedCompact = protectDomainDots(compact);
-  const matches = protectedCompact.match(/[^.!?。！？\n]+[.!?。！？]?/g);
+  // [2026-07-03] 문장부호 뒤 닫는 따옴표("외롭다.'")는 문장에 붙들어 따옴표가 다음 줄로
+  //   고립되지 않게 한다(dangling quote 재발 방지).
+  const matches = protectedCompact.match(/[^.!?。！？\n]+[.!?。！？]?['"‘’“”]?/g);
   return (matches && matches.length > 0 ? matches : [protectedCompact])
     .map(restoreDomainDots)
     .map(sentence => sentence.trim())
