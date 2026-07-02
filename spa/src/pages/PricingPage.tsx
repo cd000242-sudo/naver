@@ -301,6 +301,24 @@ function PricingPage() {
     const pricingEventDesc = normalPricingActive
         ? (pricingPage.eventDescNormal || '2026년 8월 1일부터 아래 정상가로 자동 전환되었습니다.')
         : (pricingPage.eventDesc || '2026년 8월 1일부터 아래 정상가로 자동 전환됩니다.');
+    const pricingIntro = (
+        <div style={{ textAlign: 'center', margin: '42px 0 36px' }}>
+            <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>{pricingPage.eyebrow || 'PRICING'}</span>
+            <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>
+                {pricingTitle}
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>{pricingPage.desc || '1개월·3개월·1년·영구제 모두 올인원 라이선스로 Better Life Naver, LEWORD, Leadernam Orbit을 함께 이용합니다.'}</p>
+            <div style={{ margin: '20px auto 0', maxWidth: 860, padding: '18px 24px', borderRadius: 16, border: '1px solid rgba(255,215,0,0.34)', background: 'rgba(255,215,0,0.10)', color: '#FFD700', fontSize: 16, fontWeight: 900, lineHeight: 1.75, boxShadow: '0 12px 36px rgba(0,0,0,0.16)' }}>
+                <div style={{ fontSize: 18, marginBottom: 2 }}>
+                    {pricingEventTitle}
+                </div>
+                <div>{pricingEventDesc}</div>
+                <div style={{ marginTop: 4, color: '#fff7b0', fontSize: 15 }}>
+                    {pricingPage.eventLine || '1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원'}
+                </div>
+            </div>
+        </div>
+    );
 
     return (
         <div style={{
@@ -314,23 +332,6 @@ function PricingPage() {
             } : {}),
         }}>
             <section style={{ padding: '140px 20px 80px', maxWidth: 1320, margin: '0 auto' }}>
-                <div style={{ textAlign: 'center', marginBottom: 40 }}>
-                    <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>{pricingPage.eyebrow || 'PRICING'}</span>
-                    <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 900, marginBottom: 12 }}>
-                        {pricingTitle}
-                    </h2>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 16 }}>{pricingPage.desc || '1개월·3개월·1년·영구제 모두 올인원 라이선스로 Better Life Naver, LEWORD, Leadernam Orbit을 함께 이용합니다.'}</p>
-                    <div style={{ margin: '20px auto 0', maxWidth: 860, padding: '18px 24px', borderRadius: 16, border: '1px solid rgba(255,215,0,0.34)', background: 'rgba(255,215,0,0.10)', color: '#FFD700', fontSize: 16, fontWeight: 900, lineHeight: 1.75, boxShadow: '0 12px 36px rgba(0,0,0,0.16)' }}>
-                        <div style={{ fontSize: 18, marginBottom: 2 }}>
-                            {pricingEventTitle}
-                        </div>
-                        <div>{pricingEventDesc}</div>
-                        <div style={{ marginTop: 4, color: '#fff7b0', fontSize: 15 }}>
-                            {pricingPage.eventLine || '1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원'}
-                        </div>
-                    </div>
-                </div>
-
                 <section className="purchase-proof-showcase" aria-label="실제 발행 영상과 수익 성과 인증">
                     <div className="purchase-video-side">
                         <div className="purchase-section-eyebrow">REAL WORKFLOW</div>
@@ -377,6 +378,8 @@ function PricingPage() {
 
                     <ProofShowcase compact className="purchase-proof-side" />
                 </section>
+
+                {pricingIntro}
 
                 {/* Product tabs */}
                 <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 36, flexWrap: 'wrap' }}>

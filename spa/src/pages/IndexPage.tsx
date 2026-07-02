@@ -289,7 +289,7 @@ function inferTopicCategory(laneId: SourceLaneId, text: string): TopicProfile['c
     if (laneId === 'policy') return 'policy';
     if (laneId === 'issue') return 'issue';
     if (includesAny(text, [/지원금|장려금|월세|급여|연금|정책|신청|대상|서류|지급|환급|세금|고용/])) return 'policy';
-    if (includesAny(text, [/금리|환율|투자|주가|반도체|경제|공모주|아파트|부동산|대출|수익|실적|물가|가격/])) return 'money';
+    if (includesAny(text, [/최저임금|임금|시급|월급|노동|노사|경영계|금리|환율|투자|주가|반도체|경제|공모주|아파트|부동산|대출|수익|실적|물가|가격/])) return 'money';
     if (includesAny(text, [/드라마|예능|방송|출연|OST|배우|결혼|열애|콘서트|프로필|영화|SNL|전참시|스타|연예/])) return 'entertainment';
     if (includesAny(text, [/홈런|경기|월드컵|축구|야구|대표팀|감독|선수|순위|결승|리그|로또/])) return 'sports';
     if (includesAny(text, [/화재|태풍|폭염|살인|사건|사고|통제|지진|피해|실종|부상|특보|위험/])) return 'incident';
@@ -783,9 +783,10 @@ function extractCoachRoot(profile: TopicProfile, corpus: string): string {
 
 function buildSemanticMindmapIdeas(profile: TopicProfile, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
     const base = semanticBase(profile);
-    const corpus = semanticCorpus(profile, item, peerItems);
-    const isFootballIssue = /축구|월드컵|대표팀|감독|선임|사퇴|대한축구협회|KFA|홍명보/.test(corpus);
-    const hasCoachIssue = /감독|선임|사퇴|경질|후임|후보/.test(corpus);
+    const focusedCorpus = `${profile.keyword} ${profile.core} ${profile.entities.join(' ')} ${item.description || ''}`;
+    const isFootballIssue = profile.category === 'sports' && /축구|월드컵|대표팀|감독|선임|사퇴|대한축구협회|KFA|홍명보/.test(focusedCorpus);
+    const hasCoachIssue = /감독|선임|사퇴|경질|후임|후보/.test(focusedCorpus);
+    const isWageIssue = /최저임금|임금|시급|월급|노동계|경영계|노사/.test(focusedCorpus);
     const candidates: Array<{ label: string; tag: string; reason: string; title: string; bias?: number }> = [];
     const pushSuffix = (suffix: string, tag: string, reason: string, title: string, bias = 4) => {
         const label = appendSemanticSuffix(base, suffix);
@@ -793,7 +794,7 @@ function buildSemanticMindmapIdeas(profile: TopicProfile, item: SourceSignal, pe
     };
 
     if (isFootballIssue && hasCoachIssue) {
-        const coachRoot = extractCoachRoot(profile, corpus);
+        const coachRoot = extractCoachRoot(profile, focusedCorpus);
         candidates.push(
             {
                 label: appendSemanticSuffix(coachRoot, '다음 감독 후보') || `${coachRoot} 후임 후보`,
@@ -838,6 +839,15 @@ function buildSemanticMindmapIdeas(profile: TopicProfile, item: SourceSignal, pe
                 bias: 5,
             },
         );
+    } else if (isWageIssue) {
+        [
+            ['월급 차이', '월급 환산', '시급 격차가 실제 월급과 연봉에 어떻게 반영되는지 찾는 검색입니다.', '시급, 월급, 연봉 환산을 표로 정리'],
+            ['노동계 경영계 입장', '입장 비교', '누가 왜 다른 금액을 주장하는지 확인하려는 의도입니다.', '노동계 요구와 경영계 반박을 분리'],
+            ['결정 과정', '심의 절차', '최저임금위원회 결정 흐름을 알고 싶은 후속 검색입니다.', '회의 일정, 표결, 공익위원 변수를 정리'],
+            ['소상공인 영향', '현장 영향', '인건비와 고용 부담을 실제 생활 영향으로 연결하는 검색입니다.', '자영업자, 아르바이트, 고용 변수를 비교'],
+            ['내년 최저임금 전망', '전망 수요', '격차 뉴스 이후 최종 금액과 적용 시기를 찾는 검색입니다.', '최종 고시, 적용일, 예상 월급으로 연결'],
+            ['산입범위 계산', '계산 기준', '상여금·수당 포함 여부를 확인하려는 실무형 검색입니다.', '산입범위와 제외 항목을 예시로 정리'],
+        ].forEach(([suffix, tag, reason, title], index) => pushSuffix(suffix, tag, reason, title, 9 - index));
     } else if (profile.category === 'policy') {
         [
             ['대상', '대상 확인', '신청자가 가장 먼저 확인하는 조건입니다.', '대상 조건과 제외 조건 분리'],
@@ -892,7 +902,7 @@ function buildSemanticMindmapIdeas(profile: TopicProfile, item: SourceSignal, pe
 }
 
 function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
-    const profileCorpus = semanticCorpus(profile, item, peerItems);
+    const focusedCorpus = `${profile.keyword} ${profile.core} ${profile.entities.join(' ')} ${item.description || ''}`;
     const related = peerItems
         .filter((peer) => peer.id !== item.id)
         .map((peer) => inferTopicProfile(lane, peer))
@@ -907,7 +917,7 @@ function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item:
             bias: 5 - index,
         }));
 
-    const namedEntities = uniqueList((profileCorpus.match(/[가-힣]{2,5}/g) || [])
+    const namedEntities = uniqueList((focusedCorpus.match(/[가-힣]{2,5}/g) || [])
         .filter((token) => !['검색어', '검색량', '문서수', '실시간', '후보', '뉴스', '정리', '확인', '대한민국'].includes(token))
         .slice(0, 6));
     const entityIdeas = namedEntities
