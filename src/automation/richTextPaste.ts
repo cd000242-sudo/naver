@@ -885,10 +885,23 @@ function splitSentencesForMobile(value: string): string[] {
   // [2026-07-03] 문장부호 뒤 닫는 따옴표("외롭다.'")는 문장에 붙들어 따옴표가 다음 줄로
   //   고립되지 않게 한다(dangling quote 재발 방지).
   const matches = protectedCompact.match(/[^.!?。！？\n]+[.!?。！？]?['"‘’“”]?/g);
-  return (matches && matches.length > 0 ? matches : [protectedCompact])
+  const raw = (matches && matches.length > 0 ? matches : [protectedCompact])
     .map(restoreDomainDots)
     .map(sentence => sentence.trim())
     .filter(Boolean);
+  // [2026-07-03] 번호목록 마커("1." / "2)")가 마침표 때문에 한 문장으로 오인돼 홀로 분리되면,
+  //   모바일 변환에서 "1." 다음에 빈 줄이 생기고 내용이 아래로 떨어진다. 마커만 남은 조각은
+  //   다음 조각에 붙여 "1. 글문단"을 한 줄로 유지한다(목록 blocks로 안 묶인 blank-분리 항목 대비).
+  const merged: string[] = [];
+  for (const sentence of raw) {
+    const prev = merged[merged.length - 1];
+    if (prev && /^\d{1,2}[.)]$/.test(prev)) {
+      merged[merged.length - 1] = `${prev} ${sentence}`.trim();
+    } else {
+      merged.push(sentence);
+    }
+  }
+  return merged;
 }
 
 function getMobileBreakCandidates(windowText: string): number[] {
