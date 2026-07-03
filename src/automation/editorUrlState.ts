@@ -22,6 +22,12 @@ export function isNaverBlogDomainUrl(value: string): boolean {
 }
 
 export function isNaverWriteEditorUrl(value: string): boolean {
+  // [2026-07-03 FIX] 로그인 페이지는 리다이렉트 파라미터에 에디터 URL을 품는다
+  //   (nid.naver.com/nidlogin.login?mode=form&url=https://blog.naver.com/GoBlogWrite.naver).
+  //   전체 문자열 substring 매칭이면 쿼리 속 'GoBlogWrite' 때문에 로그인 페이지를 에디터로 오인해
+  //   navigateToBlogWrite가 성공 처리하고 로그인 복구 브랜치를 건너뛰어 프레임 전환 실패로 팅긴다.
+  //   로그인 URL이면 에디터가 아니다 — 먼저 배제.
+  if (isNaverLoginUrl(value)) return false;
   return /(GoBlogWrite|blogPostWrite|PostWriteForm|SmartEditor|NaverWriteEditor)/i.test(value)
     || /[?&]Redirect=Write\b/i.test(value);
 }
