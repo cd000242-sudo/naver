@@ -206,6 +206,7 @@ import { selectTitleFormula } from './contentTitleSelector';
 import {
   stripReviewTitlePrefixFromHeading,
   stripSelectedTitlePrefixFromHeadings,
+  stripLeadingSubjectHookFromHeadings,
 } from './contentTitlePrefixHelpers';
 // [Phase 3-15/v2.10.161] 본문 hook 추출 (homefeed/seo 품질 게이트)
 import {
@@ -5297,6 +5298,20 @@ export async function generateStructuredContent(
 
       // ✅ 제목 전체가 그대로 붙어버린 소제목들에서 제목 부분을 한 번 더 제거 (모드/카테고리 무관 공통 처리)
       stripSelectedTitlePrefixFromHeadings(parsed);
+
+      // ✅ [2026-07-03] 소제목 앞 "{화제 인물}까지 " 매달린 훅 제거 (실명 강제 프롬프트 오버적용).
+      //   (a) 즉시 반복("박지성까지 박지성...")은 컨텍스트 무관, (b) 제목 주어 매달림("박지성까지 팬들이...")은
+      //   연예/스포츠 등 인물 중심 글에서만(맛집 "김치찌개까지 맛있는" 통합형 오탐 방지).
+      let _personCentricHeadings = false;
+      try {
+        const { inferHallucinationCategory } = require('./content/hallucinationCheck');
+        _personCentricHeadings = inferHallucinationCategory({
+          contentMode: source.contentMode,
+          toneStyle: source.toneStyle,
+          categoryHint: source.categoryHint,
+        }) === 'celebrity';
+      } catch { /* best-effort */ }
+      stripLeadingSubjectHookFromHeadings(parsed, _personCentricHeadings);
 
       // ✅ [소제목 최적화 마스터 모듈] - 구조 검증 후, 모드별 헤딩 타이틀만 보정
       optimizeHeadingsForMode(parsed, source);

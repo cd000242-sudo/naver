@@ -106,6 +106,41 @@ export function stripReviewTitlePrefixFromHeading(headingTitle: string, selected
 }
 
 
+// ✅ [2026-07-03] 소제목 앞에 붙은 "{화제 주어}까지 " 낚시 훅 제거.
+//   원인: homefeed 프롬프트가 "모든 H2에 실명 1개"를 강제 → 단일 인물 글에서 모델이 화제 인물명을
+//   "{인물}까지"(심지어 ~까지) 훅으로 소제목 앞에 덧붙인다(예: "박지성까지 박지성 공동위원장" 중복,
+//   "박지성까지 팬들이 꼽은..." 매달린 훅). stripSelectedTitlePrefixFromHeadings는 '제목 전체' 접두어만
+//   잡아 이 부분 훅을 놓친다.
+//   (a) 즉시 반복("{W}까지 {W}...")은 컨텍스트 무관 제거(오탐 0).
+//   (b) 제목 주어와 일치하는 선행 "{주어}까지 "는 인물/이슈 중심 글(personCentric)에서만 제거
+//       — 맛집/제품의 통합형 "{대상}까지 맛있는..."(까지=포함) 오탐 방지.
+export function stripLeadingSubjectHookFromHeadings(content: StructuredContent, personCentric = false): void {
+  if (!content || !Array.isArray(content.headings) || content.headings.length === 0) return;
+
+  const title = normalizeTitleWhitespace(removeEmojis(String(content.selectedTitle || ''))).trim();
+
+  const startsWithParticle = (s: string): boolean => {
+    const particles = ['의', '이', '가', '를', '을', '은', '는', '에', '와', '과', '로', '으로', '에서', '까지', '부터', '도', '만'];
+    const t = s.trim();
+    return particles.some((p) => t.startsWith(p + ' ') || t === p);
+  };
+
+  content.headings = content.headings.map((h) => {
+    const original = String(h.title || '').trim();
+    // 맨 앞 "{공백 없는 토큰}까지" + 공백/쉼표. "까지만/까지는"(조사 결합)은 [\s,] 요구로 제외.
+    const m = original.match(/^(\S{2,15}?)까지[\s,]+/);
+    if (!m) return h;
+    const lead = m[1];
+    const rest = original.slice(m[0].length).trim();
+    if (!rest || rest.length < 6 || startsWithParticle(rest)) return h; // 주어 보호·과다제거 방지
+
+    const isRepeat = rest.startsWith(lead);                 // (a) 즉시 반복 — 오탐 0
+    const isSubjectHook = personCentric && lead.length >= 2 && title.includes(lead); // (b) 인물 중심 한정
+
+    return (isRepeat || isSubjectHook) ? { ...h, title: rest } : h;
+  });
+}
+
 // ✅ 공통: 소제목이 전체 제목으로 시작하는 경우 제목 부분만 1회 잘라내기
 // - 리뷰형 여부와 무관하게 동작
 // - heading 이 제목과 완전히 동일한 경우는 건드리지 않고, 아래 "1번 소제목 중복 제거" 로직에 맡긴다.
