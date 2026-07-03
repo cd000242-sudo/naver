@@ -146,9 +146,13 @@
 
 **P0 범위 확정: 고위험(범죄/유죄 단정 = §4.1 범죄명사 + §4.2)만 자동 변환. 사생활/전언(열애/전언 세탁)은 경고만**(검토 feature-bloat LOW: 라이브 신뢰 vs 자동변환 충돌 반영). 실측 오탐율 확인 후 P0.5에서 자동변환 범위 확대.
 
-### P1 — 발행 경계 스캔(C) + 암시형 경고 (릴리즈 1개, 1~2 fix)
-- `prePublishAssertion.ts` read-only celebrity 렉시콘 스캔 → 비차단 경고. 저장본/붙여넣기 사각지대 커버.
-- 암시형 단정(§4.6) legalRisk 경고.
+### P1 — 발행 경계 게이트(C) + AI기본법 고지(D) ✅ 구현 완료(2026-07-03, 적대적 리뷰 2회)
+- **발행 경계 게이트(C)**: `evaluateCelebrityPublishRisk`(main, celebrityAssertionSanitizer.ts) — legalRisk='danger'(AI생성) OR 신선 텍스트 스캔(붙여넣기/저장본). IPC `defamation:checkPublishRisk` → renderer `celebrityPublishGate`가 **실제 공통 진입점 `executeUnifiedAutomation`** 진입부에서 1회 확인(window.confirm, 취소 가능). 사용자 결정=1회 확인 게이트(하드차단 아님). 연속발행(무인)은 isContinuousMode 분기로 confirm 억제·로그만.
+- **AI기본법 고지(D)**: 앱 내부 상시 배너(index.html `ai-basic-law-notice`, **블로그 본문 미주입**=사용자 결정) + legalRisk 뱃지 tooltip(허위조작정보법 안내).
+- **적대적 리뷰가 잡은 must-fix(반영)**: (1) 게이트가 존재하지 않는 버튼에 바인딩된 죽은 runAutomation에 있던 것 → executeUnifiedAutomation로 이동. (2) 암시형 정규식(§4.6)이 "누가 봐도 과장됐다"(부정)/"이 정도면 강력하다"(정책) 등 일반 글 오탐 → **미도입**(명시 ASSERTION_RE만, 오탐 케이스 .toBe(false) 잠금). (3) 취소를 '발행 실패'로 오인 → `_publishGateCancelled` 마커 + 오버레이 정리.
+- **§4.6 암시형**: 정규식으로는 헤지어의 서술 대상을 못 가려 컨텍스트 무관 오탐 blast. **실데이터 정밀도 측정 선행 후** 재도입(P0.5/후속).
+
+**P1 잔여(후속, 회귀 아님·커버리지 확장)**: executeUnifiedAutomation을 우회하는 일부 라이브 발행 경로(사진모드 `imageNarrativeMode.ts`, quick-mode `imageNarrativeQuickMode.ts`, `titleGeneration.ts`, `formUtilities.ts`)에 게이트 미배선 — 별도 후속으로 배선. 풀오토는 콘텐츠가 executeUnifiedAutomation 전 세팅되면 게이트가 봄(반자동·풀오토·배치·연속 커버 확인).
 
 ### P2 — 배너(D) 축소판 (릴리즈 1개, 1 fix)
 - legalRisk 뱃지 tooltip 카피 추가(플랫폼 조치 고지 포함, 신규 UI 없음).
