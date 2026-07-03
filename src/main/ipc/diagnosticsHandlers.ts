@@ -41,9 +41,13 @@ async function describeBrowser(): Promise<string[]> {
 }
 
 export async function generateDiagnosticReport(context?: { lastError?: string; stage?: string }): Promise<{ ok: boolean; savedPath: string; report: string }> {
+  // [2026-07-03 FIX] 헤더 시각을 KST로 표기 — 기존 UTC(Z) 표기가 실제 로컬(한국) 시간과 9시간
+  //   차이나 사용자가 혼동(예: 오전 7시인데 22시로 보임). 로그 파일 조회(readRecentMainLog)는
+  //   로거 파일명 규약과 맞춰야 하므로 건드리지 않고, 표시 시각만 KST로 변환한다.
+  const nowKst = new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 19).replace('T', ' ');
   const lines: string[] = [];
   lines.push('===== Better Life Naver 진단 리포트 =====');
-  lines.push(`생성시각: ${new Date().toISOString()}`);
+  lines.push(`생성시각: ${nowKst} (KST)`);
   lines.push(`앱 버전: ${app.getVersion()}`);
   lines.push(`OS: ${process.platform} ${os.release()} (${os.arch()})`);
   try {
