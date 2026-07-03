@@ -12,6 +12,7 @@ import {
   isCelebrityContext,
   isCelebrityFactGuardEnabled,
   buildCelebrityFactGuardBlock,
+  evaluateCelebrityPublishRisk,
 } from '../content/celebrityAssertionSanitizer';
 
 describe('실존인물 미확인 단정 탐지 (차단 게이트)', () => {
@@ -30,6 +31,17 @@ describe('실존인물 미확인 단정 탐지 (차단 게이트)', () => {
     expect(isRiskyAssertionSentence('사기 혐의로 구속됐다')).toBe(true);
     expect(isRiskyAssertionSentence('폭행을 시인했다')).toBe(true);
     expect(isRiskyAssertionSentence('불륜을 인정했다')).toBe(true);
+  });
+
+  // [§4.6 암시형 미도입 잠금] 헤지 마커(누가 봐도·정황상·이 정도면)의 단순 co-occurrence는
+  //   위험명사를 '확정 서술'하지 않는 부정/감상/정책 문장까지 오탐시켜(리뷰 실증) 미도입. 아래가
+  //   danger로 뒤집히면(= 암시형 정규식 재도입) 일반 글 오탐 회귀이므로 .toBe(false)로 잠근다.
+  it('오탐 방지 — 헤지 마커+위험명사라도 확정 서술이 아니면 미탐지(부정/감상/정책)', () => {
+    expect(isRiskyAssertionSentence('그의 도박 논란은 누가 봐도 과장됐다')).toBe(false); // 의혹 부정
+    expect(isRiskyAssertionSentence('이번 이혼 소식은 누가 봐도 안타깝다')).toBe(false); // 감상
+    expect(isRiskyAssertionSentence('음주운전 단속이 이 정도면 강력하다')).toBe(false); // 정책 논평
+    expect(isRiskyAssertionSentence('그 배우의 열애설은 누가 봐도 노이즈 마케팅이다')).toBe(false); // 부정
+    expect(isRiskyAssertionSentence('학폭 미투가 정황상 억울한 경우도 있다')).toBe(false); // 면책적
   });
 
   // [검토 M1] 정상 정보글/해명/확정사실 오탐 차단 — 검토가 실측 재현한 11건 계열
@@ -105,6 +117,49 @@ describe('실존인물 미확인 단정 탐지 (차단 게이트)', () => {
     expect(isCelebrityContext({ categoryHint: '맛집' })).toBe(false);
     expect(isCelebrityContext(undefined)).toBe(false);
     expect(isCelebrityFactGuardEnabled()).toBe(true); // 기본 ON
+  });
+
+  // [P1 §3-C] 발행 경계 위험 게이트 — 저장본/붙여넣기 사각지대 커버
+  describe('evaluateCelebrityPublishRisk — 발행 경계 게이트', () => {
+    it('finalize가 legalRisk=danger로 표기한 AI 생성 경로를 위험으로 판정(source=legalRisk)', () => {
+      const r = evaluateCelebrityPublishRisk({
+        structuredContent: {
+          selectedTitle: 'OO, 마약을 한 것으로 드러났다',
+          quality: { legalRisk: 'danger' },
+        },
+      });
+      expect(r.risky).toBe(true);
+      expect(r.source).toBe('legalRisk');
+    });
+
+    it('붙여넣기/수동입력(structuredContent 없음)의 위험 단정을 원문 스캔으로 잡는다(source=scan)', () => {
+      const r = evaluateCelebrityPublishRisk({
+        title: 'OO 근황',
+        content: '알고 보니 그가 학폭을 저질렀다는 게 드러났다.',
+      });
+      expect(r.risky).toBe(true);
+      expect(r.source).toBe('scan');
+    });
+
+    it('저장본 재발행(legalRisk 미세팅)이라도 본문 위험 단정을 스캔이 포착한다', () => {
+      const r = evaluateCelebrityPublishRisk({
+        structuredContent: {
+          headings: [{ title: '결국', content: '두 사람의 불륜이 포착됐다.' }],
+          quality: { legalRisk: 'safe' },
+        },
+      });
+      expect(r.risky).toBe(true);
+      expect(r.source).toBe('scan');
+    });
+
+    it('깨끗한 콘텐츠는 발행 게이트를 통과한다(source=none)', () => {
+      const r = evaluateCelebrityPublishRisk({
+        title: '신곡 발매 소식',
+        content: '이번 앨범이 공식 발표됐다. 팬들의 반응이 뜨겁다.',
+      });
+      expect(r.risky).toBe(false);
+      expect(r.source).toBe('none');
+    });
   });
 
   it('프롬프트 블록은 "완화 금지·아예 빼기"를 명시한다(법률 리서치 반영)', () => {

@@ -1382,6 +1382,15 @@ export async function handleFullAutoPublish(): Promise<void> {
     // executeUnifiedAutomation 내부에서 진행상황 업데이트를 위해 modal 전달
     (window as any).currentProgressModal = modal;
     const automationResult = await executeUnifiedAutomation(formData);
+    // ✅ [SPEC-DEFAMATION-2026 P1] 법적위험 게이트에서 사용자가 취소한 경우 — '발행 실패'로 오인 금지.
+    //   게이트 취소는 정상 중단이므로 assert(false 실패 throw) 전에 분기해 취소로 명확히 안내한다.
+    if ((window as any)._publishGateCancelled) {
+      (window as any)._publishGateCancelled = false;
+      appendLog('🛑 법적위험 확인 후 발행을 취소했습니다.');
+      modal.showError('발행 취소', '법적 위험을 확인하고 발행을 취소했습니다.');
+      if (typeof (window as any).resetPublishing === 'function') (window as any).resetPublishing();
+      return;
+    }
     assertFullAutoAutomationResult(automationResult, formData);
 
     if (isFullAutoStopRequested(modal)) {

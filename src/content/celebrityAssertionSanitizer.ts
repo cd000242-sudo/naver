@@ -12,6 +12,11 @@
 //   M4 제목 스캔 + 인접문장(±1) 슬라이딩 윈도우(문장분할 회피 차단).
 // 게이트: 프롬프트 억제는 celebrity 컨텍스트에서만(토큰 비용). 탐지(경고)는 컨텍스트 무관(M2 — 가십은
 //   흔히 seo/일반 모드로 작성되므로). 기능플래그 CELEBRITY_FACT_GUARD_V1 (기본 ON, =false 롤백).
+//
+// §4.6 암시형 단정(누가 봐도·정황상·정설 등)은 SPEC이 "정규식 한계로 gap 명시"한 영역이다. 헤지 마커의
+//   단순 co-occurrence AND는 헤지가 위험명사를 '확정 서술'하는지 못 가려 오탐이 일반 글까지 번진다
+//   (리뷰 실증: "도박 논란은 누가 봐도 과장됐다"[부정], "음주운전 단속이 이 정도면 강력하다"[정책] → 오탐).
+//   탐지가 컨텍스트 무관(M2)이라 blast radius가 크므로, 정밀도 실측 전까지 암시형은 미도입(명시 단정만).
 
 import { inferHallucinationCategory } from './hallucinationCheck.js';
 
@@ -121,6 +126,38 @@ export function detectCelebrityAssertionRisk(content: any): CelebrityRiskResult 
     if (samples.length >= 5) return { risky: true, samples };
   }
   return { risky: samples.length > 0, samples };
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// [P1 §3-C] 발행 경계 위험 게이트
+//   finalize(생성)를 거치지 않는 저장본 재발행·반자동 붙여넣기·수동입력 발행은
+//   legalRisk가 세팅되지 않아 P0 탐지의 사각지대다. 발행 개시 시점에 payload를 스캔해
+//   위험이면 사용자에게 1회 확인을 받는다(하드차단 아님 — 라이브 발행 신뢰).
+//   탐지는 main 프로세스(모듈 위치), 확인 모달은 renderer(사용자 대면)에서 — IPC로 분리.
+export interface PublishRiskResult {
+  risky: boolean;
+  samples: string[];
+  /** legalRisk: finalize가 이미 danger 표기 / scan: 신선 스캔 적발 / none: 위험 없음. */
+  source: 'legalRisk' | 'scan' | 'none';
+}
+
+/**
+ * 발행 payload에서 실존인물 미확인 단정 위험을 판정한다.
+ * 1) structuredContent.quality.legalRisk === 'danger'  → AI 생성 경로(finalize가 표기).
+ * 2) 신선 스캔(structuredContent 필드 또는 title/content 원문) → 붙여넣기/저장본 사각지대.
+ * 기능플래그 OFF면 항상 not-risky(롤백 안전).
+ */
+export function evaluateCelebrityPublishRisk(payload: any): PublishRiskResult {
+  if (!isCelebrityFactGuardEnabled()) return { risky: false, samples: [], source: 'none' };
+  const structured = payload?.structuredContent;
+  if (structured?.quality?.legalRisk === 'danger') {
+    const scan = detectCelebrityAssertionRisk(structured);
+    return { risky: true, samples: scan.samples, source: 'legalRisk' };
+  }
+  // structuredContent가 없으면(순수 붙여넣기/수동입력) title/content 원문을 스캔한다.
+  const target = structured || { title: payload?.title, content: payload?.content };
+  const scan = detectCelebrityAssertionRisk(target);
+  return { risky: scan.risky, samples: scan.samples, source: scan.risky ? 'scan' : 'none' };
 }
 
 /** 프롬프트 억제 블록 — base 프롬프트 뒤에 붙여 recency로 최우선 적용. */

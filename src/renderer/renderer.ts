@@ -1573,9 +1573,14 @@ function updateRiskIndicators(content: StructuredContent | null): void {
     if (risk) {
       riskLegalValue.textContent = risk === 'safe' ? '안전' : risk === 'caution' ? '주의' : '위험';
       riskLegalValue.className = `value legal-${risk}`;
+      // [SPEC-DEFAMATION-2026 P2 (D)] 뱃지 tooltip — 허위조작정보법(7·7) 안내. 신규 UI 없이 기존 뱃지에 얹음.
+      (riskLegalValue as HTMLElement).title = risk === 'safe'
+        ? 'AI 생성물 — 발행 전 사실 확인 권장'
+        : '⚠️ 허위조작정보법(2026-07-07 시행) — 실존인물 미확인 단정 소지. 네이버가 신고만으로 노출제한·수익화 차단을 선제 발동할 수 있습니다. 발행 전 출처 확인·해당 문장 삭제 권장.';
     } else {
       riskLegalValue.textContent = '-';
       riskLegalValue.className = 'value legal-unknown';
+      (riskLegalValue as HTMLElement).title = '';
     }
   }
 
@@ -8980,7 +8985,47 @@ function validateUnifiedFormData(data: any): boolean {
 }
 
 // 통합 자동화 실행
+// ✅ [SPEC-DEFAMATION-2026 P1 (C)] 발행 경계 위험 게이트 — 실존인물 미확인 단정(범죄/사생활) 감지 시 처리.
+//   반환 true=진행, false=취소(하드차단 아님 — 라이브 발행 신뢰). 모든 라이브 발행 버튼(반자동/풀오토/
+//   배치)이 executeUnifiedAutomation을 지나므로 여기에 배치해 저장본 재발행·반자동 붙여넣기·수동입력을
+//   커버(탐지는 main 프로세스 IPC). 연속발행(무인)은 window.confirm이 큐를 얼리므로 경고 로그만 하고
+//   진행(무인 큐 하드정책은 SPEC §8-5 별도 결정). 게이트 조회 실패는 fail-open(진행).
+async function celebrityPublishGate(formData: any): Promise<boolean> {
+  (window as any)._publishGateCancelled = false; // 이번 게이트 호출 기준으로 리셋(이전 취소 잔류 방지)
+  try {
+    const risk = await window.api.checkCelebrityRisk?.(formData);
+    if (!risk?.risky) return true;
+    if (isContinuousMode) {
+      appendLog(`⚠️ [법적위험] 연속발행 항목에서 실존인물 미확인 단정 의심 — ${(risk.samples || []).slice(0, 2).join(' / ')}`);
+      return true; // 무인 루프: confirm이 큐를 얼리므로 로그만 (하드정책은 별도)
+    }
+    const sampleLine = (risk.samples || []).slice(0, 3).map((s) => `· ${s}`).join('\n');
+    const proceed = window.confirm(
+      '⚠️ 법적 위험 감지 — 허위조작정보법(7·7)\n\n' +
+      '실존인물을 다룬 글이라면, 범죄·사생활을 미확인 상태로 단정한 문장일 수 있습니다.\n' +
+      '판례상 "의혹/보도에 따르면" 병기로도 면책되지 않습니다. 해당 문장을 먼저 확인·삭제하는 것을 권장합니다.\n\n' +
+      (sampleLine ? `감지 문장:\n${sampleLine}\n\n` : '') +
+      '그래도 책임을 인지하고 발행하시겠습니까?'
+    );
+    if (!proceed) {
+      appendLog('🛑 [법적위험] 사용자가 발행을 취소했습니다 (실존인물 미확인 단정 감지).');
+      // 취소를 '발행 실패'로 오인하지 않도록 마커 + 진행률 오버레이 정리(호출자 후처리 부작용 방지).
+      (window as any)._publishGateCancelled = true;
+      ['unified-progress-container', 'publish-progress-container'].forEach((id) => document.getElementById(id)?.remove());
+    } else {
+      appendLog('⚠️ [법적위험] 사용자가 위험을 인지하고 발행을 진행합니다.');
+    }
+    return proceed;
+  } catch (e) {
+    console.warn('[Defamation] 발행 위험 게이트 조회 실패:', (e as Error)?.message);
+    return true; // fail-open — 게이트 버그가 발행을 막으면 안 됨
+  }
+}
+
 async function executeUnifiedAutomation(formData: any): Promise<any> {
+  // ✅ [SPEC-DEFAMATION-2026 P1 (C)] 발행 전 위험 게이트 — 취소 시 발행 중단(진행률 UI 생성 전)
+  if (!(await celebrityPublishGate(formData))) return null;
+
   const startBtn = document.getElementById('unified-start-btn') as HTMLButtonElement;
 
   // 진행률 표시 초기화

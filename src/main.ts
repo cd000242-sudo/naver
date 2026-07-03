@@ -174,6 +174,7 @@ import { registerConfigHandlers } from './main/ipc/configHandlers.js';
 import { registerContentHandlers } from './main/ipc/contentHandlers.js';
 import { registerHeadingHandlers } from './main/ipc/headingHandlers.js';
 import { registerDiagnosticsHandlers, generateDiagnosticReport } from './main/ipc/diagnosticsHandlers.js';
+import { registerDefamationHandlers } from './main/ipc/defamationHandlers.js';
 import { registerLicenseHandlers } from './main/ipc/authHandlers.js';
 import { registerQuotaHandlers } from './main/ipc/quotaHandlers.js';
 import { registerApiHandlers } from './main/ipc/apiHandlers.js';
@@ -3931,6 +3932,8 @@ registerApiHandlers(_earlyCtx);
 registerAgentHandlers();
 // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고) — 환경별 버그 즉시 진단
 registerDiagnosticsHandlers();
+// ✅ [SPEC-DEFAMATION-2026 P1] 발행 경계 위험 게이트 — 저장본/붙여넣기 재발행 사각지대 커버
+registerDefamationHandlers();
 registerKeywordHandlers();
 registerProductHandlers();
 registerEngagementHandlers();
