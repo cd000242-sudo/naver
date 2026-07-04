@@ -306,6 +306,24 @@
     .gk-rank { margin-left: auto; font-size: 12px; font-weight: 1000; color: var(--green); }
     .gk-kw { font-size: 18px; font-weight: 800; letter-spacing: -.3px; color: var(--text); overflow-wrap: anywhere; }
     .gk-sub { font-size: 12px; color: var(--muted2); margin-top: -4px; line-height: 1.4; }
+    .keyword-intent {
+      display: grid;
+      gap: 5px;
+      border: 1px solid rgba(14,165,233,.24);
+      border-radius: 10px;
+      background: rgba(14,165,233,.07);
+      padding: 9px 10px;
+      color: #183426;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .keyword-intent strong { color: #075985; font-size: 12px; font-weight: 1000; }
+    .keyword-intent span { color: #365044; }
+    .keyword-intent em { color: #047857; font-style: normal; font-weight: 900; }
+    .keyword-intent.shopping { border-color: rgba(53,211,153,.34); background: rgba(53,211,153,.09); }
+    .keyword-intent.unclear { border-color: rgba(255,77,109,.26); background: rgba(255,77,109,.07); }
+    .keyword-intent.policy { border-color: rgba(91,183,255,.28); background: rgba(91,183,255,.08); }
+    .keyword-intent .tiny-btn { width: fit-content; min-height: 28px; padding: 5px 9px; }
     .gk-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .gk-m { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 8px; text-align: center; }
     .gk-m.gk-hot { background: rgba(53,211,153,.10); border-color: rgba(53,211,153,.28); }
@@ -2052,6 +2070,110 @@
         return item && normalizeText(item.keyword);
       });
     }
+    function compactKeywordText(value) {
+      return normalizeText(value).toLowerCase().replace(/\s+/g, '');
+    }
+    function keywordRowSearchText(row) {
+      return [
+        row && row.keyword,
+        row && row.category,
+        row && row.categoryName,
+        row && row.source,
+        row && row.intent,
+        row && row.publicReason,
+      ].map(normalizeText).join(' ').toLowerCase();
+    }
+    function isShoppingIntentKeywordRow(row) {
+      const text = keywordRowSearchText(row);
+      const keyword = compactKeywordText(row && row.keyword);
+      const source = compactKeywordText((row && row.source) || '') + ' ' + compactKeywordText((row && row.intent) || '') + ' ' + compactKeywordText((row && row.category) || '');
+      if (/(commerce|shopping|electronics|product|store|buying|sellable)/i.test(source)) return true;
+      if (/(구매|가격|최저가|할인|추천|순위|후기|비교|리뷰|쿠폰|배송|스펙|브랜드|제품|상품|가전|전자|청소기|로봇청소기|공기청정기|제습기|에어컨|냉장고|세탁기|노트북|태블릿|이어폰|마사지기|영양제|유산균|화장품|선크림|샴푸|운동화|가방|매트리스|캠핑|기저귀|카시트)/.test(keyword)) {
+        return !/(지원금|급여|수당|정책|신청|대상|지급일|정부|복지|채용|인턴|장려금)/.test(keyword);
+      }
+      return /(상품|제품|구매 전환|쇼핑커넥트|쇼핑)/.test(text);
+    }
+    function isAmbiguousCompositeKeyword(row) {
+      const raw = normalizeText(row && row.keyword);
+      const keyword = compactKeywordText(raw);
+      if (!keyword) return false;
+      if (/(순위.*출시일|출시일.*순위|금액.*지급일|지급일.*금액|정례대화.*금액|금액.*정례대화|방법.*주의사항|주의사항.*정리|가격.*출시일|후기.*출시일|추천.*출시일|후보.*금액|격차.*후보)/.test(keyword)) return true;
+      const markers = ['방법', '조회', '주의사항', '정리', '가격', '후기', '추천', '순위', '출시일', '금액', '지급일', '신청', '대상', '후보', '일정', '비교', '원룸'];
+      const markerCount = markers.reduce(function(count, marker) {
+        return count + (keyword.indexOf(marker) >= 0 ? 1 : 0);
+      }, 0);
+      const hasNoReadableSpacing = raw.indexOf(' ') < 0 && keyword.length >= 13;
+      return markerCount >= 3 && (hasNoReadableSpacing || keyword.length >= 17);
+    }
+    function shouldHideFromLiveGoldenBoard(row) {
+      return isAmbiguousCompositeKeyword(row) || isShoppingIntentKeywordRow(row);
+    }
+    function shouldHideFromMindmap(row) {
+      return isAmbiguousCompositeKeyword(row) || isShoppingIntentKeywordRow(row);
+    }
+    function filterDisplayGoldenItems(items) {
+      return filterFreshGoldenItems(items || []).filter(function(item) {
+        return !shouldHideFromLiveGoldenBoard(item);
+      });
+    }
+    function keywordIntentGuide(row) {
+      if (isAmbiguousCompositeKeyword(row)) {
+        return {
+          kind: 'unclear',
+          label: '의도 불명확',
+          meaning: '단어가 여러 의도로 붙어 있어 검색자가 원하는 답이 바로 읽히지 않습니다.',
+          action: '그대로 글을 쓰지 말고 정밀분석이나 마인드맵에서 자연스러운 질문형 키워드로 다시 확장하세요.',
+          route: '검증 후 사용',
+        };
+      }
+      if (isShoppingIntentKeywordRow(row)) {
+        return {
+          kind: 'shopping',
+          label: '쇼핑커넥트 전용',
+          meaning: '제품 추천, 비교, 후기, 구매 판단을 하려는 검색 의도입니다.',
+          action: '추가 기능의 쇼핑커넥트에서 팔릴 제품, 구매 포인트, 제목 각도까지 검증한 뒤 글감으로 쓰세요.',
+          route: '쇼핑커넥트로 검증',
+        };
+      }
+      const text = keywordRowSearchText(row);
+      if (/(policy|지원금|급여|수당|정책|복지|신청|대상|지급일|정부|채용|인턴|장려금)/i.test(text)) {
+        return {
+          kind: 'policy',
+          label: '정책/신청형',
+          meaning: '검색자는 대상, 금액, 지급일, 신청 방법처럼 바로 확인할 수 있는 답을 찾고 있습니다.',
+          action: '대상 조건, 신청 기간, 지급 금액, 필요 서류를 표로 먼저 정리하고 최신 공지 링크를 붙이세요.',
+          route: '정보형 글감',
+        };
+      }
+      if (/(sports|월드컵|축구|야구|감독|선수|경기|순위|일정|하이라이트)/i.test(text)) {
+        return {
+          kind: 'issue',
+          label: '이슈 해설형',
+          meaning: '검색자는 현재 이슈의 이유, 다음 일정, 영향, 후속 변수를 빠르게 알고 싶어합니다.',
+          action: '뉴스 제목을 반복하지 말고 원인, 쟁점, 다음 행동을 질문형 소제목으로 나누세요.',
+          route: '이슈 롱테일',
+        };
+      }
+      return {
+        kind: 'need',
+        label: '검색 의도 확인',
+        meaning: '검색자가 무엇을 확인하려는지 먼저 정의한 뒤 써야 하는 후보입니다.',
+        action: '상위 노출 글의 공통 질문을 확인하고 답변형 제목과 근거 표를 함께 구성하세요.',
+        route: '정밀 검증',
+      };
+    }
+    function keywordIntentGuideHtml(row) {
+      const guide = keywordIntentGuide(row);
+      const shoppingAction = guide.kind === 'shopping'
+        ? '<button class="tiny-btn green" type="button" data-board-action="shopping" data-keyword="' + escapeAttr(row && row.keyword || '') + '">쇼핑커넥트로 보기</button>'
+        : '';
+      return '<div class="keyword-intent ' + escapeAttr(guide.kind) + '">'
+        + '<strong>' + escapeHtml(guide.label) + ' · ' + escapeHtml(guide.route) + '</strong>'
+        + '<span><em>의미</em> ' + escapeHtml(guide.meaning) + '</span>'
+        + '<span><em>활용</em> ' + escapeHtml(guide.action) + '</span>'
+        + shoppingAction
+        + '</div>';
+    }
     function isEmptyKeywordResult(result) {
       return !!(result && Array.isArray(result.keywords) && !keywordResultRows(result).length);
     }
@@ -2966,7 +3088,9 @@
     function renderMindmapLookupInsight(seed, result) {
       const target = qs('lookupInsightPanel');
       if (!target) return;
-      const rows = keywordResultRows(result).slice(0, 30);
+      const rows = keywordResultRows(result).filter(function(row) {
+        return !shouldHideFromMindmap(row);
+      }).slice(0, 30);
       const measured = rows.filter(function(row) { return row.isMeasured; }).length;
       const seedLabel = normalizeText(seed) || 'seed';
       const nodes = rows.map(function(row) {
@@ -2974,6 +3098,7 @@
         return '<button class="mindmap-node" type="button" data-board-action="analyze" data-keyword="' + safe + '">'
           + '<strong>' + escapeHtml(row.keyword || '-') + '</strong>'
           + '<span>전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 등급 ' + escapeHtml(row.grade || '-') + '</span>'
+          + keywordIntentGuideHtml(row)
           + '</button>';
       }).join('');
       target.hidden = false;
@@ -3040,6 +3165,24 @@
         + '</div>';
     }
     function publishDecisionFor(row) {
+      if (isAmbiguousCompositeKeyword(row)) {
+        return {
+          label: '의도 불명확',
+          verdict: 'exclude',
+          score: 0,
+          reasons: ['단어 조합은 좋게 보일 수 있지만 검색자가 원하는 답이 명확하지 않아 글감으로 쓰기 어렵습니다.'],
+          nextAction: '마인드맵 또는 정밀분석으로 자연스러운 질문형 키워드를 다시 뽑으세요.',
+        };
+      }
+      if (isShoppingIntentKeywordRow(row)) {
+        return {
+          label: '쇼핑커넥트 전용',
+          verdict: 'conditional',
+          score: browserLocalKeywordQualityScore(row && row.totalSearchVolume, row && row.documentCount),
+          reasons: ['제품/구매 전환 의도라 LIVE 보드보다 쇼핑커넥트에서 팔릴 제품과 글 각도를 함께 검증해야 합니다.'],
+          nextAction: '쇼핑커넥트에서 제품 후보, 구매 포인트, 제목 초안을 확인하세요.',
+        };
+      }
       if (isMeasuredDemandTooCrowded(row)) {
         return {
           label: '제외 검토',
@@ -3072,6 +3215,7 @@
       return !!(row && row.isMeasured !== false && total !== null && total >= 100 && docs !== null && docs > total && ratio !== null && ratio < 1);
     }
     function displayGradeForRow(row) {
+      if (isAmbiguousCompositeKeyword(row)) return 'C';
       return isMeasuredDemandTooCrowded(row) ? 'C' : ((row && row.grade) || '-');
     }
     function publishDecisionReason(decision) {
@@ -3211,6 +3355,7 @@
       const topRows = rows.slice(0, 5).map(function(row) {
         return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong>'
           + '<span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>'
+          + keywordIntentGuideHtml(row)
           + publishDecisionInline(row)
           + keywordActionHtml(row.keyword || '')
           + '</li>';
@@ -3287,7 +3432,7 @@
         const rows = result.keywords;
         const summary = result.summary || {};
         const topRows = rows.slice(0, 12).map(function(row) {
-          return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>' + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
+          return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>' + keywordIntentGuideHtml(row) + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
         });
         const publishReady = rows.filter(function(row) {
           const decision = publishDecisionFor(row);
@@ -3329,7 +3474,7 @@
           } else {
           const rows = result.keywords || [];
           const topRows = rows.slice(0, 5).map(function(row) {
-            return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 등급 ' + escapeHtml(row.grade || '-') + '</span>' + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
+            return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 등급 ' + escapeHtml(row.grade || '-') + '</span>' + keywordIntentGuideHtml(row) + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
           });
           const publishReady = rows.filter(function(row) {
             const decision = publishDecisionFor(row);
@@ -4995,7 +5140,7 @@
       qs('keywordRows').innerHTML = rows.slice(0, 80).map(function(row) {
         const displayGrade = displayGradeForRow(row);
         return '<tr>'
-          + '<td><strong>' + escapeHtml(row.keyword) + '</strong>' + shoppingProductPickHtml(row) + '</td>'
+          + '<td><strong>' + escapeHtml(row.keyword) + '</strong>' + keywordIntentGuideHtml(row) + shoppingProductPickHtml(row) + '</td>'
           + '<td>' + fmt(row.pcSearchVolume) + '</td>'
           + '<td>' + fmt(row.mobileSearchVolume) + '</td>'
           + '<td>' + volumeBarHtml(row.totalSearchVolume) + '</td>'
@@ -5050,10 +5195,15 @@
     }
     function renderGoldenRows(items, exact, target) {
       const limit = exact ? Math.max(60, Math.min(120, Number(target) || 120)) : 5;
-      const rows = filterFreshGoldenItems(items || []).slice(0, limit);
+      const freshRows = filterFreshGoldenItems(items || []);
+      const rows = freshRows.filter(function(item) {
+        return !shouldHideFromLiveGoldenBoard(item);
+      }).slice(0, limit);
       if (!rows.length) {
         qs('goldenBoardList').innerHTML = '';
-        qs('goldenNotice').textContent = '서버가 황금키워드 후보를 검증하는 중입니다.';
+        qs('goldenNotice').textContent = freshRows.length
+          ? '제품형 또는 의도 불명확 조합 키워드는 LIVE 보드에서 숨겼습니다. 제품 키워드는 추가 기능의 쇼핑커넥트에서 확인하세요.'
+          : '서버가 황금키워드 후보를 검증하는 중입니다.';
         return;
       }
       qs('goldenBoardList').innerHTML = rows.map(function(item) {
@@ -5073,6 +5223,7 @@
           + '</div>'
           + '<div class="gk-kw">' + escapeHtml(item.keyword || '-') + '</div>'
           + '<div class="gk-sub">' + sub + '</div>'
+          + keywordIntentGuideHtml(item)
           + '<div class="gk-metrics">'
           +   '<div class="gk-m"><div class="gk-ml">검색량</div><div class="gk-mv">' + searchVolume + '</div></div>'
           +   '<div class="gk-m gk-hot"><div class="gk-ml">문서수</div><div class="gk-mv">' + documents + '</div></div>'
@@ -5084,8 +5235,8 @@
       }).join('');
     }
     function renderPublicGoldenBoard(payload) {
-      const primary = filterFreshGoldenItems(payload.publicPreview || []);
-      const backfill = filterFreshGoldenItems(payload.clientBackfill || []);
+      const primary = filterDisplayGoldenItems(payload.publicPreview || []);
+      const backfill = filterDisplayGoldenItems(payload.clientBackfill || []);
       const items = primary.concat(backfill).slice(0, 5);
       setGoldenSummary(
         payload.boardCount,
@@ -5101,7 +5252,7 @@
       renderGoldenRows(items, false, payload.boardTarget);
     }
     function renderProGoldenBoard(snapshot) {
-      const items = filterFreshGoldenItems((snapshot && snapshot.board) || []);
+      const items = filterDisplayGoldenItems((snapshot && snapshot.board) || []);
       setGoldenSummary(
         snapshot.boardCount || items.length,
         snapshot.boardTarget || 120,
@@ -5130,7 +5281,7 @@
       }
       try {
         const payload = await apiGet(endpoints.publicLiveGolden, false);
-        const freshPreview = filterFreshGoldenItems(payload.publicPreview || []);
+        const freshPreview = filterDisplayGoldenItems(payload.publicPreview || []);
         if (freshPreview.length < 5) {
           try {
             const signals = await apiGet(endpoints.publicSources, false);
