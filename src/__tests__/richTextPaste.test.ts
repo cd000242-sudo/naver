@@ -136,8 +136,10 @@ describe('buildMobileRichHtml', () => {
 
     expect(result.tableCount).toBe(1);
     expect(result.html).toContain('<table ');
-    expect(result.plainText).toContain('\uD56D\uBAA9');
-    expect(result.plainText).toContain('\uD655\uC778 \uD3EC\uC778\uD2B8');
+    // [2026-07-04] \uC18C\uC81C\uBAA9\uC774 \uC5C6\uC5B4 \uD56D\uBAA9 \uC5F4\uC774 \uC804\uBD80 "\uD575\uC2EC"\uC73C\uB85C \uB3D9\uC77C \u2192 \uBB34\uC758\uBBF8 \uB77C\uBCA8 \uC5F4 \uB4DC\uB86D(\uC815\uBCF4 0\u00B7\uC5B4\uC0C9 \uBC29\uC9C0).
+    //   \uD655\uC778 \uD3EC\uC778\uD2B8 \uD5E4\uB354\uB9CC \uB0A8\uACE0, "\uD575\uC2EC" \uBC18\uBCF5\uC740 \uC0AC\uB77C\uC9C4\uB2E4. (\uC18C\uC81C\uBAA9\uC774 \uC788\uC73C\uBA74 \uB77C\uBCA8\uC774 \uB2EC\uB77C \uC5F4 \uBCF4\uC874\uB428)
+    expect(result.plainText).not.toContain('\uD575\uC2EC'); // \uD575\uC2EC \uBC18\uBCF5 \uC81C\uAC70
+    expect(result.plainText).toContain('\uD655\uC778 \uD3EC\uC778\uD2B8'); // \uD655\uC778 \uD3EC\uC778\uD2B8 \uD5E4\uB354 \uBCF4\uC874
   });
 
   it('formats Q&A without standalone A labels and renders questions at 24px', () => {

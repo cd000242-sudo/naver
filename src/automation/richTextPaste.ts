@@ -760,10 +760,24 @@ function tocLinkStyle(theme: SoftHeadingTheme): string {
   ].join(';');
 }
 
-function markdownTableToHtml(lines: string[], theme: SoftTableTheme): { html: string; plain: string } {
-  const rows = lines.filter(line => line.includes('|') && !isTableDivider(line)).map(splitTableCells);
-  if (rows.length === 0) return { html: '', plain: '' };
+// [2026-07-04] 무의미한 라벨 열 제거 — 요약 표의 왼쪽 열이 본문 행마다 같은 라벨("핵심"×N, "항목"×N 등)로
+//   반복되면 정보가 0이고 어색하다(사용자 지적). 본문 2행 이상 + 2열 이상 + 첫 열이 전부 동일할 때만 그 열을
+//   드롭한다. 비교표(제품명·항목이 서로 다른 첫 열)는 영향 없음.
+function dropUniformLabelColumn(rows: string[][]): string[][] {
+  if (rows.length < 3) return rows; // header + 본문 2행 미만이면 판단 보류
+  const colCount = rows[0]?.length ?? 0;
+  if (colCount < 2) return rows;
+  const firstColBody = rows.slice(1).map((r) => (r[0] || '').trim());
+  const allSame = firstColBody.length >= 2 && firstColBody.every((v) => v && v === firstColBody[0]);
+  if (!allSame) return rows;
+  return rows.map((r) => r.slice(1)); // 헤더 포함 첫 열 제거
+}
 
+function markdownTableToHtml(lines: string[], theme: SoftTableTheme): { html: string; plain: string } {
+  const rawRows = lines.filter(line => line.includes('|') && !isTableDivider(line)).map(splitTableCells);
+  if (rawRows.length === 0) return { html: '', plain: '' };
+
+  const rows = dropUniformLabelColumn(rawRows);
   const [header, ...bodyRows] = rows;
   const headerHtml = header.map(cell => `<th style="${tableCellStyle(theme, 0, true)}">${escapeHtml(cell)}</th>`).join('');
   const bodyHtml = bodyRows
