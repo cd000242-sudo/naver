@@ -2037,6 +2037,280 @@
         return item && normalizeText(item.keyword);
       });
     }
+    function isEmptyKeywordResult(result) {
+      return !!(result && Array.isArray(result.keywords) && !keywordResultRows(result).length);
+    }
+    function isLocalApiLookupFeature(feature) {
+      return !!(feature && (feature.route === endpoints.keywordAnalysis || feature.route === endpoints.mindmap || feature.route === endpoints.golden || feature.route === endpoints.naverMate));
+    }
+    function normalizeSearchAdKey(value) {
+      return normalizeText(value).toLowerCase().replace(/[\s+]+/g, '');
+    }
+    function parseNaverMetricNumber(value) {
+      if (value === null || value === undefined || value === '') return null;
+      const raw = String(value).replace(/,/g, '').trim();
+      if (!raw || /^</.test(raw)) return null;
+      const n = Number(raw.replace(/[^0-9.]/g, ''));
+      return Number.isFinite(n) ? n : null;
+    }
+    function browserLocalApiSettingsState() {
+      const settings = readUserApiSettings();
+      return {
+        settings: settings,
+        searchAdReady: !!(settings.naverSearchAdAccessLicense && settings.naverSearchAdSecretKey && settings.naverSearchAdCustomerId),
+        openApiReady: !!(settings.naverClientId && settings.naverClientSecret),
+      };
+    }
+    async function hmacSha256Base64(message, secret) {
+      if (!window.crypto || !window.crypto.subtle || !window.TextEncoder) {
+        throw new Error('이 브라우저는 SearchAd 서명 생성에 필요한 Web Crypto를 지원하지 않습니다.');
+      }
+      const encoder = new TextEncoder();
+      const key = await window.crypto.subtle.importKey(
+        'raw',
+        encoder.encode(secret),
+        { name: 'HMAC', hash: 'SHA-256' },
+        false,
+        ['sign']
+      );
+      const signature = await window.crypto.subtle.sign('HMAC', key, encoder.encode(message));
+      let binary = '';
+      new Uint8Array(signature).forEach(function(byte) { binary += String.fromCharCode(byte); });
+      return btoa(binary);
+    }
+    function decodeHtmlText(value) {
+      const el = document.createElement('textarea');
+      el.innerHTML = String(value || '');
+      return el.value;
+    }
+    function searchAdKeywordFromItem(item) {
+      return normalizeText(decodeHtmlText(item && (item.relKeyword || item.keyword || item.keywordText || '')));
+    }
+    async function fetchBrowserSearchAdKeywordTool(seedKeywords) {
+      const state = browserLocalApiSettingsState();
+      if (!state.searchAdReady) throw new Error('네이버 검색광고 API 키가 필요합니다.');
+      const hints = uniqueKeywords((seedKeywords || []).map(function(keyword) {
+        return normalizeText(keyword).replace(/\s+/g, '');
+      }), 5);
+      if (!hints.length) return [];
+      const uri = '/keywordstool';
+      const method = 'GET';
+      const timestamp = String(Date.now());
+      const params = new URLSearchParams();
+      params.set('hintKeywords', hints.join(','));
+      params.set('showDetail', '1');
+      const signature = await hmacSha256Base64(timestamp + '.' + method + '.' + uri, state.settings.naverSearchAdSecretKey);
+      const res = await fetch('https://api.searchad.naver.com' + uri + '?' + params.toString(), {
+        method: method,
+        cache: 'no-store',
+        headers: {
+          'X-Timestamp': timestamp,
+          'X-API-KEY': state.settings.naverSearchAdAccessLicense,
+          'X-Signature': signature,
+          'X-Customer': state.settings.naverSearchAdCustomerId,
+        },
+      });
+      const payload = await res.json().catch(function() { return {}; });
+      if (!res.ok) {
+        const message = payload && (payload.message || payload.error) ? String(payload.message || payload.error) : 'HTTP ' + res.status;
+        throw new Error('네이버 검색광고 API 직접 호출 실패: ' + message);
+      }
+      return payload.keywordList || payload.relKeywordList || (payload.result && (payload.result.keywordList || payload.result.relKeywordList)) || [];
+    }
+    async function fetchBrowserNaverBlogDocumentCount(keyword) {
+      const state = browserLocalApiSettingsState();
+      if (!state.openApiReady) throw new Error('네이버 API Client ID/Secret이 필요합니다.');
+      const url = 'https://openapi.naver.com/v1/search/blog.json?query=' + encodeURIComponent(keyword) + '&display=1&sort=sim';
+      const res = await fetch(url, {
+        cache: 'no-store',
+        headers: {
+          'X-Naver-Client-Id': state.settings.naverClientId,
+          'X-Naver-Client-Secret': state.settings.naverClientSecret,
+        },
+      });
+      const payload = await res.json().catch(function() { return {}; });
+      if (!res.ok) {
+        const message = payload && (payload.message || payload.errorMessage || payload.error) ? String(payload.message || payload.errorMessage || payload.error) : 'HTTP ' + res.status;
+        throw new Error('네이버 블로그 OpenAPI 직접 호출 실패: ' + message);
+      }
+      const total = Number(payload.total);
+      return Number.isFinite(total) ? total : null;
+    }
+    async function fetchBrowserDocumentCounts(keywords, limit) {
+      const out = new Map();
+      const errors = [];
+      const rows = uniqueKeywords(keywords || [], limit || 24);
+      for (const keyword of rows) {
+        try {
+          const count = await fetchBrowserNaverBlogDocumentCount(keyword);
+          if (count !== null) out.set(normalizeSearchAdKey(keyword), count);
+          await new Promise(function(resolve) { setTimeout(resolve, 120); });
+        } catch (err) {
+          errors.push(err.message || String(err));
+          break;
+        }
+      }
+      return { counts: out, errors: errors };
+    }
+    function browserSearchAdMetricMap(items) {
+      const map = new Map();
+      (Array.isArray(items) ? items : []).forEach(function(item) {
+        const keyword = searchAdKeywordFromItem(item);
+        if (!keyword) return;
+        map.set(normalizeSearchAdKey(keyword), item);
+      });
+      return map;
+    }
+    function browserLocalGrade(totalSearchVolume, documentCount) {
+      const total = Number(totalSearchVolume);
+      const docs = Number(documentCount);
+      if (!Number.isFinite(total) || total <= 0 || !Number.isFinite(docs)) return '-';
+      const ratio = docs <= 0 ? total : total / Math.max(1, docs);
+      if (total >= 1000 && docs <= 5000 && ratio >= 5) return 'SSS';
+      if (total >= 500 && docs <= 10000 && ratio >= 3) return 'SS';
+      if (total >= 300 && ratio >= 2) return 'S';
+      if (total >= 100) return 'A';
+      return 'B';
+    }
+    function browserLocalPublishDecision(row) {
+      const grade = row && row.grade;
+      const score = grade === 'SSS' ? 98 : grade === 'SS' ? 88 : grade === 'S' ? 78 : 62;
+      const measured = !!(row && row.isMeasured);
+      return {
+        label: measured && (grade === 'SSS' || grade === 'SS') ? '발행 추천' : '검증 필요',
+        verdict: measured && (grade === 'SSS' || grade === 'SS') ? 'publish' : 'conditional',
+        score: measured ? score : null,
+        reasons: [measured ? '사용자 API 키로 직접 측정한 검색량과 문서수 기준입니다.' : '일부 지표가 API에서 응답되지 않아 추가 검증이 필요합니다.'],
+        nextAction: '네이버 검색 결과에서 최신 문서 품질과 공식 정보를 확인한 뒤 작성하세요.',
+      };
+    }
+    function browserLocalKeywordRow(keyword, searchAdItem, documentCount, index) {
+      const pc = searchAdItem ? parseNaverMetricNumber(searchAdItem.monthlyPcQcCnt) : null;
+      const mobile = searchAdItem ? parseNaverMetricNumber(searchAdItem.monthlyMobileQcCnt) : null;
+      const total = (pc !== null || mobile !== null) ? (Number(pc || 0) + Number(mobile || 0)) : null;
+      const cpc = searchAdItem ? (parseNaverMetricNumber(searchAdItem.monthlyAveCpc) || parseNaverMetricNumber(searchAdItem.monthlyAvePcCpc) || parseNaverMetricNumber(searchAdItem.monthlyAveMobileCpc)) : null;
+      const docs = documentCount === undefined ? null : documentCount;
+      const ratio = total !== null && docs !== null && Number(docs) > 0 ? total / Math.max(1, Number(docs)) : null;
+      const row = {
+        id: 'browser-local-api-' + index + '-' + normalizeSearchAdKey(keyword),
+        rank: index + 1,
+        keyword: keyword,
+        pcSearchVolume: pc,
+        mobileSearchVolume: mobile,
+        totalSearchVolume: total,
+        documentCount: docs,
+        goldenRatio: ratio,
+        competitionRatio: ratio,
+        cpc: cpc,
+        grade: browserLocalGrade(total, docs),
+        source: 'browser-local-api',
+        intent: '사용자 API 직접 실측',
+        isMeasured: total !== null && docs !== null,
+        searchVolumeSource: total !== null ? 'naver-searchad-browser' : undefined,
+        documentCountSource: docs !== null ? 'naver-openapi-browser' : undefined,
+        evidence: [
+          total !== null ? 'naver-searchad-browser' : '',
+          docs !== null ? 'naver-openapi-browser' : '',
+        ].filter(Boolean),
+      };
+      row.publishDecision = browserLocalPublishDecision(row);
+      return row;
+    }
+    function sortBrowserLocalRows(rows) {
+      return (rows || []).sort(function(a, b) {
+        const measuredDiff = Number(!!b.isMeasured) - Number(!!a.isMeasured);
+        if (measuredDiff) return measuredDiff;
+        const gradeOrder = { SSS: 5, SS: 4, S: 3, A: 2, B: 1, '-': 0 };
+        const gradeDiff = (gradeOrder[b.grade] || 0) - (gradeOrder[a.grade] || 0);
+        if (gradeDiff) return gradeDiff;
+        const ratioDiff = Number(b.goldenRatio || 0) - Number(a.goldenRatio || 0);
+        if (ratioDiff) return ratioDiff;
+        return Number(b.totalSearchVolume || 0) - Number(a.totalSearchVolume || 0);
+      });
+    }
+    async function buildBrowserLocalApiKeywordResult(feature, seed, mode) {
+      const keyword = normalizeText(seed);
+      if (!keyword) throw new Error('조회할 키워드를 입력하세요.');
+      const errors = [];
+      updateProgress(18, '저장된 네이버 검색광고 API 키로 후보와 PC/모바일 검색량을 직접 조회합니다.');
+      let searchAdItems = [];
+      try {
+        searchAdItems = await fetchBrowserSearchAdKeywordTool([keyword]);
+      } catch (err) {
+        errors.push(err.message || String(err));
+      }
+      const metricMap = browserSearchAdMetricMap(searchAdItems);
+      const related = searchAdItems.map(searchAdKeywordFromItem).filter(Boolean);
+      const targetCount = mode === 'mindmap-expansion' ? 50 : mode === 'golden-discovery' ? 30 : 30;
+      const candidates = uniqueKeywords([keyword].concat(related), targetCount);
+      if (!candidates.length) throw new Error('브라우저 로컬 API 후보가 비어 있습니다.');
+      updateProgress(58, '저장된 네이버 API 키로 블로그 문서수를 직접 조회합니다.');
+      const docResult = await fetchBrowserDocumentCounts(candidates, Math.min(24, candidates.length)).catch(function(err) {
+        errors.push(err.message || String(err));
+        return { counts: new Map(), errors: [err.message || String(err)] };
+      });
+      (docResult.errors || []).forEach(function(message) { if (errors.indexOf(message) < 0) errors.push(message); });
+      const rows = candidates.map(function(candidate, index) {
+        const key = normalizeSearchAdKey(candidate);
+        return browserLocalKeywordRow(candidate, metricMap.get(key) || null, docResult.counts.has(key) ? docResult.counts.get(key) : null, index);
+      }).filter(function(row) {
+        return row.totalSearchVolume !== null || row.documentCount !== null;
+      });
+      if (!rows.length) {
+        throw new Error('사용자 API 키 직접 조회 결과가 비어 있습니다. 브라우저 CORS 또는 API 권한 상태를 확인하세요. ' + errors.join(' / '));
+      }
+      const sorted = sortBrowserLocalRows(rows).map(function(row, index) {
+        row.rank = index + 1;
+        return row;
+      });
+      return {
+        ok: true,
+        clientLocalApi: true,
+        mode: mode || 'keyword-analysis',
+        source: 'browser-local-api',
+        keyword: keyword,
+        keywords: sorted,
+        diagnostics: { errors: errors },
+        summary: {
+          total: sorted.length,
+          measured: sorted.filter(function(row) { return row.isMeasured; }).length,
+          sss: sorted.filter(function(row) { return row.grade === 'SSS'; }).length,
+          elapsedMs: 0,
+        },
+      };
+    }
+    async function runBrowserLocalApiLookup(feature, seed, mode, reason) {
+      if (!isLocalApiLookupFeature(feature)) return null;
+      openProgress('브라우저 로컬 API 실측', '서버 결과가 비어 있어 저장된 사용자 API 키로 직접 조회합니다.');
+      try {
+        const result = await buildBrowserLocalApiKeywordResult(feature, seed, mode);
+        renderFeatureResult(feature, result);
+        setResult(result);
+        log('browser local API lookup completed: ' + result.keywords.length + ' rows' + (reason ? ' / ' + reason : ''));
+        completeProgress('브라우저 로컬 API 실측 결과를 표시했습니다.');
+        return result;
+      } catch (err) {
+        renderLookupInsight('브라우저 로컬 API 실측 실패', err.message || String(err), [
+          { label: '상태', value: 'API 확인 필요' },
+          { label: '방식', value: '브라우저 직접 호출' },
+          { label: '키워드', value: seed || '-' },
+          { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+        ], [
+          '<li><strong>확인할 항목</strong><span>환경설정/API 키에 네이버 API, 네이버 검색광고 API 키가 모두 저장되어 있는지 확인하세요. 브라우저 CORS가 막히면 서버 API가 다시 열려야 실측이 가능합니다.</span></li>',
+        ]);
+        failProgress(err.message || String(err));
+        return null;
+      }
+    }
+    function localApiLookupModeForFeature(feature, fallbackMode) {
+      if (feature && feature.route === endpoints.mindmap) return 'mindmap-expansion';
+      if (feature && feature.route === endpoints.golden) return 'golden-discovery';
+      return fallbackMode || 'keyword-analysis';
+    }
+    async function maybeRunBrowserLocalApiLookup(feature, seed, mode, reason) {
+      if (!isLocalApiLookupFeature(feature) || !normalizeText(seed)) return null;
+      return runBrowserLocalApiLookup(feature, seed, localApiLookupModeForFeature(feature, mode), reason);
+    }
     function liveSignalDerivedKeywords(signal) {
       const raw = normalizeText(signal && (signal.keyword || signal.title));
       const compact = raw.replace(/["'“”‘’()[]{}]/g, ' ').replace(/s+/g, ' ').trim();
@@ -5246,14 +5520,20 @@
           const payload = await apiGet(feature.route, true);
           if (feature.handler && payload.catalog && Array.isArray(payload.catalog.items)) {
             const matched = payload.catalog.items.filter(function(item) { return item.handler === feature.handler; });
-            renderFeatureResult(feature, { feature: feature.title, route: feature.route, matchedHandlers: matched }, { background: backgroundRun });
+            const getResult = { feature: feature.title, route: feature.route, matchedHandlers: matched };
+            renderFeatureResult(feature, getResult, { background: backgroundRun });
+            if (feature.id) featureRunState[feature.id] = 'completed';
+            log(feature.title + ' 서버 상태 확인 완료');
+            completeProgress('서버 상태 확인이 완료되었습니다.');
+            return getResult;
           } else {
-            renderFeatureResult(feature, payload.snapshot || payload.catalog || payload, { background: backgroundRun });
+            const getResult = payload.snapshot || payload.catalog || payload;
+            renderFeatureResult(feature, getResult, { background: backgroundRun });
+            if (feature.id) featureRunState[feature.id] = 'completed';
+            log(feature.title + ' 서버 상태 확인 완료');
+            completeProgress('서버 상태 확인이 완료되었습니다.');
+            return getResult;
           }
-          if (feature.id) featureRunState[feature.id] = 'completed';
-          log(feature.title + ' 서버 상태 확인 완료');
-          completeProgress('서버 상태 확인이 완료되었습니다.');
-          return;
         }
         if (feature.workflow === 'blueprint-draft') {
           updateProgress(22, '블루프린트를 생성하고 있습니다.');
@@ -5270,33 +5550,56 @@
           updateProgress(62, '초안을 생성하고 있습니다.');
           log(feature.title + ' 초안 생성 중');
           const draftPayload = await apiPost(endpoints.blueprintDraft, { blueprint: blueprint });
-          renderFeatureResult(feature, {
+          const workflowResult = {
             ok: draftPayload.ok !== false,
             workflow: 'blueprint-draft',
             blueprint: blueprintPayload.result || blueprintPayload,
             draft: draftPayload.result || draftPayload,
-          }, { background: backgroundRun });
+          };
+          renderFeatureResult(feature, workflowResult, { background: backgroundRun });
           if (feature.id) featureRunState[feature.id] = 'completed';
           log(feature.title + ' 완료');
           completeProgress('블루프린트와 초안 생성이 완료되었습니다.');
-          return;
+          return workflowResult;
         }
         if (feature.direct) {
           updateProgress(36, '서버에서 즉시 실행 중입니다.');
           const payload = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {}, { userApiCredentials: true });
-          renderFeatureResult(feature, payload.snapshot || payload.result || payload, { background: backgroundRun });
+          const directResult = payload.snapshot || payload.result || payload;
+          if (isEmptyKeywordResult(directResult)) {
+            if (isLocalApiLookupFeature(feature) && normalizeText(displayKeyword)) {
+              const localResult = await maybeRunBrowserLocalApiLookup(feature, displayKeyword, null, 'empty-direct-result');
+              if (localResult) {
+                if (feature.id) featureRunState[feature.id] = 'completed';
+                return localResult;
+              }
+              return directResult;
+            }
+          }
+          renderFeatureResult(feature, directResult, { background: backgroundRun });
           if (feature.id) featureRunState[feature.id] = 'completed';
           log(feature.title + ' 즉시 실행 완료');
           completeProgress('즉시 실행 결과가 정리되었습니다.');
-          return;
+          return directResult;
         }
         updateProgress(18, '서버 job을 접수하고 있습니다.');
         const created = await apiPost(feature.route, feature.payload ? feature.payload(q, runOptions) : {}, { userApiCredentials: true });
         const result = await pollJob(created);
+        if (isEmptyKeywordResult(result)) {
+          if (isLocalApiLookupFeature(feature) && normalizeText(displayKeyword)) {
+            const localResult = await maybeRunBrowserLocalApiLookup(feature, displayKeyword, null, 'empty-job-result');
+            if (localResult) {
+              if (feature.id) featureRunState[feature.id] = 'completed';
+              return localResult;
+            }
+            return result;
+          }
+        }
         renderFeatureResult(feature, result, { background: backgroundRun });
         if (feature.id) featureRunState[feature.id] = 'completed';
         log(feature.title + ' 완료');
         completeProgress('발굴 완료. 결과가 아래 영역에 정리되었습니다.');
+        return result;
       } catch (err) {
         if (feature && feature.id) featureRunState[feature.id] = 'failed';
         log(feature.title + ' 실패: ' + err.message);
@@ -5308,11 +5611,19 @@
           failProgress(err.message);
           return;
         }
+        const localErrorResult = await maybeRunBrowserLocalApiLookup(feature, displayKeyword, null, 'server-error');
+        if (localErrorResult) {
+          if (feature && feature.id) featureRunState[feature.id] = 'completed';
+          return localErrorResult;
+        }
+        if (isLocalApiLookupFeature(feature) && displayKeyword) {
+          return null;
+        }
         if (renderClientFeatureFallback(feature, displayKeyword, err)) {
           if (feature && feature.id) featureRunState[feature.id] = 'completed';
           updateProgress(100, '서버 연결 실패로 브라우저 자체 검색 후보를 표시했습니다.');
           completeProgress('서버 복구 전까지 브라우저 검색 후보를 먼저 확인하세요.');
-          return;
+          return { clientFallback: true, keyword: displayKeyword };
         }
         if (backgroundRun && feature && feature.id !== selectedToolId) {
           failProgress(err.message);
