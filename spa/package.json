@@ -6,7 +6,7 @@
   "description": "Leaders Pro 사이트 SPA — React 18 + Vite + TS",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && node scripts/generate-static-route-pages.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },
