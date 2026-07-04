@@ -733,12 +733,12 @@
     .mindmap-node:hover { border-color: rgba(53,211,153,.48); transform: translateY(-1px); }
     .trend-card { display: grid; gap: 10px; }
     .trend-bars {
-      height: 118px;
+      min-height: 148px;
       display: grid;
-      grid-template-columns: repeat(30, minmax(4px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
       align-items: end;
-      gap: 3px;
-      padding: 10px;
+      gap: 8px;
+      padding: 12px;
       border: 1px solid var(--line-soft);
       border-radius: 8px;
       background: var(--surface-2);
@@ -748,7 +748,22 @@
       border-radius: 6px 6px 0 0;
       background: linear-gradient(180deg, var(--gold), var(--green));
       box-shadow: 0 0 14px rgba(53,211,153,.16);
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 2px;
+      padding: 8px 4px;
+      font-style: normal;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: center;
     }
+    .trend-bar.mobile { background: linear-gradient(180deg, #0ea5e9, #10b981); }
+    .trend-bar.total { background: linear-gradient(180deg, #2563eb, #14b8a6); }
+    .trend-bar span { display: block; font-size: 11px; font-weight: 800; opacity: .9; }
+    .trend-empty { padding: 14px; border: 1px dashed var(--line); border-radius: 8px; background: var(--surface-2); color: var(--muted); }
     .trend-meta { display: flex; gap: 8px; flex-wrap: wrap; color: var(--muted); font-size: 12px; }
     .result-toolbar {
       display: grid;
@@ -2230,6 +2245,88 @@
       row.publishDecision = browserLocalPublishDecision(row);
       return row;
     }
+    function hasSearchVolumeMetric(row) {
+      return !!(row && (
+        Number(row.totalSearchVolume || 0) > 0
+        || Number(row.pcSearchVolume || 0) > 0
+        || Number(row.mobileSearchVolume || 0) > 0
+      ));
+    }
+    function hasMeasuredGraphMetric(row) {
+      return !!(hasSearchVolumeMetric(row) || (row && Number(row.documentCount || 0) > 0));
+    }
+    function upsertLastKeywordMetric(row) {
+      if (!row || !normalizeText(row.keyword)) return;
+      const key = normalizeSearchAdKey(row.keyword);
+      const current = lastKeywordResult && Array.isArray(lastKeywordResult.keywords) ? lastKeywordResult.keywords.slice() : [];
+      let replaced = false;
+      const rows = current.map(function(existing) {
+        if (normalizeSearchAdKey(existing && existing.keyword) !== key) return existing;
+        replaced = true;
+        return Object.assign({}, existing, row, { rank: existing.rank || row.rank || 1 });
+      });
+      if (!replaced) rows.unshift(Object.assign({}, row, { rank: 1 }));
+      rows.forEach(function(item, index) { item.rank = index + 1; });
+      lastKeywordResult = Object.assign({}, lastKeywordResult || { ok: true }, {
+        source: 'browser-local-api',
+        keywords: rows,
+        summary: {
+          total: rows.length,
+          measured: rows.filter(function(item) { return item && item.isMeasured; }).length,
+          sss: rows.filter(function(item) { return item && item.grade === 'SSS'; }).length,
+        },
+      });
+      renderKeywordRows(lastKeywordResult);
+    }
+    async function fetchBrowserLocalExactMetric(keyword) {
+      const clean = normalizeText(keyword);
+      if (!clean) throw new Error('조회할 키워드를 입력하세요.');
+      const errors = [];
+      let searchAdItems = [];
+      try {
+        updateProgress(28, '저장된 네이버 검색광고 API 키로 PC/모바일 검색량을 직접 조회합니다.');
+        searchAdItems = await fetchBrowserSearchAdKeywordTool([clean]);
+      } catch (err) {
+        errors.push(err.message || String(err));
+      }
+      const key = normalizeSearchAdKey(clean);
+      const metricMap = browserSearchAdMetricMap(searchAdItems);
+      const exactMetric = metricMap.get(key) || null;
+      let documentCount = null;
+      try {
+        updateProgress(68, '저장된 네이버 API 키로 블로그 문서수를 직접 조회합니다.');
+        documentCount = await fetchBrowserNaverBlogDocumentCount(clean);
+      } catch (err) {
+        errors.push(err.message || String(err));
+      }
+      const row = browserLocalKeywordRow(clean, exactMetric, documentCount, 0);
+      if (!hasMeasuredGraphMetric(row)) {
+        throw new Error(errors.length ? errors.join(' / ') : '사용자 API 키로 실측 검색량 또는 문서수를 확인하지 못했습니다.');
+      }
+      return { row: row, errors: errors };
+    }
+    function keywordTokenList(value) {
+      return normalizeText(value)
+        .replace(/[^0-9A-Za-z가-힣\s]/g, ' ')
+        .split(/\s+/)
+        .map(function(token) { return token.trim(); })
+        .filter(function(token) { return token.length >= 2; });
+    }
+    function allowBrowserLocalCandidate(seed, candidate, mode) {
+      const clean = normalizeText(candidate);
+      if (!clean) return false;
+      if (mode !== 'mindmap-expansion') return true;
+      if (clean.length > 48) return false;
+      if (/https?:|AEO|GEO|SEO|클릭|바로가기|제목보다|한 화면에서|검색 전 확인/i.test(clean)) return false;
+      const seedTokens = keywordTokenList(seed);
+      const candidateTokens = keywordTokenList(clean);
+      if (!seedTokens.length || !candidateTokens.length) return true;
+      return candidateTokens.some(function(token) {
+        return seedTokens.some(function(seedToken) {
+          return token === seedToken || token.indexOf(seedToken) >= 0 || seedToken.indexOf(token) >= 0;
+        });
+      }) || normalizeSearchAdKey(clean).indexOf(normalizeSearchAdKey(seed)) >= 0;
+    }
     function sortBrowserLocalRows(rows) {
       return (rows || []).sort(function(a, b) {
         const measuredDiff = Number(!!b.isMeasured) - Number(!!a.isMeasured);
@@ -2256,10 +2353,17 @@
       const metricMap = browserSearchAdMetricMap(searchAdItems);
       const related = searchAdItems.map(searchAdKeywordFromItem).filter(Boolean);
       const targetCount = mode === 'mindmap-expansion' ? 50 : mode === 'golden-discovery' ? 30 : 30;
-      const candidates = uniqueKeywords([keyword].concat(related), targetCount);
+      const contextKeywords = mode === 'mindmap-expansion'
+        ? buildLookupContextKeywords(keyword, 120).map(function(item) { return item && item.keyword; }).filter(Boolean)
+        : [];
+      const candidateLimit = mode === 'mindmap-expansion' ? targetCount * 2 : targetCount;
+      const candidates = uniqueKeywords([keyword].concat(related, contextKeywords), candidateLimit)
+        .filter(function(candidate) { return allowBrowserLocalCandidate(keyword, candidate, mode); })
+        .slice(0, candidateLimit);
       if (!candidates.length) throw new Error('브라우저 로컬 API 후보가 비어 있습니다.');
       updateProgress(58, '저장된 네이버 API 키로 블로그 문서수를 직접 조회합니다.');
-      const docResult = await fetchBrowserDocumentCounts(candidates, Math.min(24, candidates.length)).catch(function(err) {
+      const docLimit = mode === 'mindmap-expansion' ? Math.min(50, candidates.length) : Math.min(24, candidates.length);
+      const docResult = await fetchBrowserDocumentCounts(candidates, docLimit).catch(function(err) {
         errors.push(err.message || String(err));
         return { counts: new Map(), errors: [err.message || String(err)] };
       });
@@ -2273,7 +2377,7 @@
       if (!rows.length) {
         throw new Error('사용자 API 키 직접 조회 결과가 비어 있습니다. 브라우저 CORS 또는 API 권한 상태를 확인하세요. ' + errors.join(' / '));
       }
-      const sorted = sortBrowserLocalRows(rows).map(function(row, index) {
+      const sorted = sortBrowserLocalRows(rows).slice(0, targetCount).map(function(row, index) {
         row.rank = index + 1;
         return row;
       });
@@ -3023,28 +3127,49 @@
       const rows = Array.isArray(lastKeywordResult && lastKeywordResult.keywords) ? lastKeywordResult.keywords : [];
       return rows.find(function(row) { return normalizeText(row.keyword || '') === key; }) || rows.find(function(row) { return normalizeText(row.keyword || '').indexOf(key) >= 0 || key.indexOf(normalizeText(row.keyword || '')) >= 0; }) || null;
     }
-    function trendSeed(keyword) {
-      return String(keyword || '').split('').reduce(function(sum, ch) { return sum + ch.charCodeAt(0); }, 0);
+    function metricValue(row, key) {
+      const value = Number(row && row[key]);
+      return Number.isFinite(value) && value > 0 ? value : 0;
     }
-    function showTrendGraph(keyword) {
-      const row = findKeywordMetric(keyword);
-      const total = Math.max(0, Number((row && row.totalSearchVolume) || 0));
-      const pc = Math.max(0, Number((row && row.pcSearchVolume) || 0));
-      const mobile = Math.max(0, Number((row && row.mobileSearchVolume) || 0));
-      const docs = Math.max(0, Number((row && row.documentCount) || 0));
-      const seed = trendSeed(keyword);
-      const base = total > 0 ? total : Math.max(100, seed * 7);
-      const bars = Array.from({ length: 30 }, function(_, index) {
-        const wave = Math.sin((index + seed % 11) / 3) * 16;
-        const lift = index > 22 ? 12 : index > 14 ? 6 : 0;
-        const height = Math.max(12, Math.min(100, Math.round(42 + wave + lift + (base % 37))));
-        return '<i class="trend-bar" title="' + (index + 1) + '일" style="height:' + height + '%"></i>';
-      }).join('');
-      const rows = [
-        '<li><div class="trend-card"><div class="trend-bars" aria-label="30일 검색량 그래프">' + bars + '</div><div class="trend-meta"><span>현재 실측 전체 ' + fmt(total) + '</span><span>PC ' + fmt(pc) + '</span><span>모바일 ' + fmt(mobile) + '</span><span>문서 ' + fmt(docs) + '</span></div></div></li>',
+    function measuredTrendBar(label, value, max, className) {
+      const pct = value > 0 ? Math.max(12, Math.min(100, Math.round((value / Math.max(1, max)) * 100))) : 0;
+      return '<i class="trend-bar ' + escapeAttr(className || '') + '" title="' + escapeAttr(label + ' ' + fmt(value)) + '" style="height:' + pct + '%">'
+        + '<b>' + escapeHtml(label) + '</b><span>' + escapeHtml(fmt(value)) + '</span></i>';
+    }
+    function renderTrendGraphUnavailable(keyword, message, row) {
+      const docs = metricValue(row, 'documentCount');
+      renderLookupInsight(keyword + ' 검색량 그래프', message || '실측 검색량을 확인하지 못했습니다. 환경설정/API 키를 확인한 뒤 다시 조회하세요.', [
+        { label: '전체 검색량', value: '0' },
+        { label: 'PC', value: '0' },
+        { label: '모바일', value: '0' },
+        { label: '문서수', value: fmt(docs) },
+      ], [
+        '<li><div class="trend-empty">실측 검색량이 없어 그래프를 만들 수 없습니다. 네이버 검색광고 API 키와 네이버 API 키를 저장한 뒤 다시 실행하세요.</div></li>',
         '<li><strong>바로 실행</strong>' + keywordActionHtml(keyword) + '</li>',
-      ];
-      renderLookupInsight(keyword + ' 검색량 그래프', row ? '방금 서버가 측정한 PC/모바일 검색량을 기준으로 표시합니다.' : '현재 조회 결과에 없는 키워드라 검색 바로가기를 함께 제공합니다.', [
+      ]);
+      setActiveView('lookup', { load: false });
+    }
+    function renderMeasuredTrendGraph(keyword, row, sourceLabel, notes) {
+      const pc = metricValue(row, 'pcSearchVolume');
+      const mobile = metricValue(row, 'mobileSearchVolume');
+      const total = metricValue(row, 'totalSearchVolume') || pc + mobile;
+      const docs = metricValue(row, 'documentCount');
+      if (!hasSearchVolumeMetric(row)) {
+        renderTrendGraphUnavailable(keyword, notes || '검색광고 API에서 이 키워드의 PC/모바일 검색량을 확인하지 못했습니다.', row);
+        return;
+      }
+      const max = Math.max(pc, mobile, total, 1);
+      const bars = [
+        measuredTrendBar('PC', pc, max, 'pc'),
+        measuredTrendBar('모바일', mobile, max, 'mobile'),
+        measuredTrendBar('전체', total, max, 'total'),
+      ].join('');
+      const rows = [
+        '<li><div class="trend-card"><div class="trend-bars" aria-label="실측 검색량 그래프">' + bars + '</div><div class="trend-meta"><span>실측 출처 ' + escapeHtml(sourceLabel || '현재 결과') + '</span><span>전체 ' + fmt(total) + '</span><span>PC ' + fmt(pc) + '</span><span>모바일 ' + fmt(mobile) + '</span><span>문서 ' + fmt(docs) + '</span></div></div></li>',
+        notes ? '<li><span>' + escapeHtml(notes) + '</span></li>' : '',
+        '<li><strong>바로 실행</strong>' + keywordActionHtml(keyword) + '</li>',
+      ].filter(Boolean);
+      renderLookupInsight(keyword + ' 검색량 그래프', '가짜 30일 추정값이 아니라 현재 확보한 PC/모바일 실측값만 그래프로 표시합니다.', [
         { label: '전체 검색량', value: fmt(total) },
         { label: 'PC', value: fmt(pc) },
         { label: '모바일', value: fmt(mobile) },
@@ -3052,6 +3177,30 @@
       ], rows);
       setActiveView('lookup', { load: false });
       log('검색량 그래프 표시: ' + keyword);
+    }
+    async function showTrendGraph(keyword) {
+      const clean = normalizeText(keyword);
+      if (!clean) return;
+      setActiveView('lookup', { load: false });
+      let row = findKeywordMetric(clean);
+      if (hasSearchVolumeMetric(row)) {
+        renderMeasuredTrendGraph(clean, row, '서버/현재 결과', '');
+        return;
+      }
+      openProgress('검색량 그래프 실측 조회', '현재 결과에 실측값이 없어 브라우저에 저장된 사용자 API 키로 직접 조회합니다.');
+      try {
+        const exact = await fetchBrowserLocalExactMetric(clean);
+        row = exact.row;
+        upsertLastKeywordMetric(row);
+        const note = exact.errors && exact.errors.length
+          ? '일부 API 응답은 실패했습니다: ' + exact.errors.join(' / ')
+          : '저장된 네이버 검색광고 API와 네이버 OpenAPI로 방금 직접 조회했습니다.';
+        renderMeasuredTrendGraph(clean, row, '브라우저 로컬 API', note);
+        completeProgress('그래프 실측 조회가 완료되었습니다.');
+      } catch (err) {
+        renderTrendGraphUnavailable(clean, err.message || String(err), row);
+        failProgress(err.message || String(err));
+      }
     }
     function renderKeywordResultSummary(title, result) {
       const rows = Array.isArray(result && result.keywords) ? result.keywords : [];
@@ -6036,7 +6185,10 @@
         return;
       }
       if (action === 'trend') {
-        showTrendGraph(keyword);
+        showTrendGraph(keyword).catch(function(err) {
+          renderTrendGraphUnavailable(keyword, err.message || String(err), null);
+          failProgress(err.message || String(err));
+        });
         return;
       }
       if (action === 'mindmap') {
