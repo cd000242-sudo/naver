@@ -419,6 +419,35 @@ export async function applyContentPostProcessing(
   } catch (e) { console.warn(`[postProcess:${source}] riskIndicators 실패:`, e); }
 }
 
+// ✅ [SPEC-KEYWORD-ENDGAME Phase 2-B] 블루오션 자동선정 (옵트인) — 토글이 켜져 있으면 메인키워드의
+//   경쟁 낮은 연관어를 서브키워드로 keywordList에 추가한다(Mode A: 메인 유지, 주제 안 바뀜).
+//   광고 API 없어도 Tier 2로 저경쟁 롱테일 선정(keywordAnalyzer). 선정에 ~5~10초 걸려 기본 OFF,
+//   실패해도 생성은 계속. URL/키워드 두 생성 경로가 공유한다.
+async function augmentKeywordListWithBlueOcean(keywordList: string[]): Promise<void> {
+  const toggle = document.getElementById('blueocean-auto-select') as HTMLInputElement | null;
+  if (!toggle?.checked || keywordList.length === 0) return;
+  try {
+    appendLog('🌊 블루오션 키워드 자동선정 중... (경쟁 낮은 연관어 탐색, 잠시 소요)');
+    const bo = await (window.api as any).findBlueOceanKeywords?.(keywordList[0], 3);
+    const picked: string[] = (bo?.success && Array.isArray(bo.keywords))
+      ? bo.keywords.map((k: any) => String(k?.keyword || '').trim()).filter(Boolean)
+      : [];
+    const before = keywordList.length;
+    for (const kw of picked) {
+      if (kw && !keywordList.some(existing => existing.toLowerCase() === kw.toLowerCase())) {
+        keywordList.push(kw);
+      }
+    }
+    if (keywordList.length > before) {
+      appendLog(`✅ 블루오션 서브키워드 ${keywordList.length - before}개 추가: ${keywordList.slice(before).join(', ')}`);
+    } else {
+      appendLog('ℹ️ 블루오션 후보 없음 — 메인키워드로 진행 (광고 API 설정 시 정확도 상승)');
+    }
+  } catch (e) {
+    appendLog(`⚠️ 블루오션 자동선정 건너뜀(생성 계속): ${(e as Error).message}`);
+  }
+}
+
 export async function generateContentFromUrl(
   url: string,
   keywordsOverride?: string,
@@ -494,6 +523,7 @@ export async function generateContentFromUrl(
     keywordInputEl.value = safeKeywordsOverride;
   }
   const keywordList = keywords ? keywords.split(',').map(k => k.trim()).filter(k => k.length > 0) : [];
+  await augmentKeywordListWithBlueOcean(keywordList);
 
   // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 (선택). 40자 이내.
   const hookInputEl = document.getElementById('unified-hook-sentence') as HTMLInputElement | null;
@@ -1030,6 +1060,7 @@ export async function generateContentFromKeywords(
   // ✅ URL 기반과 동등한 품질을 위한 payload 구성
   // ✅ [2026-02-04] 방어 코드 추가: keywordList가 undefined인 경우 빈 배열로 처리
   const keywordList = normalizedKeywords?.keywordList || [];
+  await augmentKeywordListWithBlueOcean(keywordList); // ✅ 블루오션 자동선정 (옵트인) — 키워드 생성 경로
 
   const referenceDate = (() => {
     const raw = scheduleDate || '';

@@ -1237,7 +1237,15 @@
                                 키워드 입력
                             </label>
                             <input type="text" id="unified-keywords" placeholder="예: 건강, 다이어트, 운동"
-                                style="width: 100%; padding: 0.875rem; border: 1px solid var(--border-medium); border-radius: 8px; background: var(--bg-primary); color: var(--text-strong); font-size: 1rem; margin-bottom: 1rem;">
+                                style="width: 100%; padding: 0.875rem; border: 1px solid var(--border-medium); border-radius: 8px; background: var(--bg-primary); color: var(--text-strong); font-size: 1rem; margin-bottom: 0.5rem;">
+
+                            <!-- ✅ [SPEC-KEYWORD-ENDGAME Phase 2-B] 블루오션 자동선정 (옵트인, 기본 OFF) -->
+                            <label for="blueocean-auto-select"
+                                style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;"
+                                title="켜면 메인 키워드의 경쟁 낮은 연관어를 서브키워드로 자동 추가합니다(주제는 유지). 선정에 5~10초 정도 더 걸립니다. 광고 API 없어도 저경쟁 롱테일은 잡힙니다.">
+                                <input type="checkbox" id="blueocean-auto-select" style="width: 16px; height: 16px; cursor: pointer; accent-color: var(--primary);">
+                                <span>🌊 블루오션 키워드 자동선정 <span style="opacity: 0.7;">(경쟁 낮은 연관어를 서브로 추가 · +5~10초)</span></span>
+                            </label>
 
                             <!-- ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 후킹 1문장 슬롯 (선택) -->
                             <label for="unified-hook-sentence"
