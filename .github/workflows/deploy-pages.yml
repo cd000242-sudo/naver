@@ -63,6 +63,12 @@ jobs:
             ! -name 'fail.html' \
             ! -name 'leword-pro-web.html' \
             -exec cp _site/index.html {} \;
+          routes=(products detail leword-detail leword orbit pricing download chatbots reviews community lookup refund privacy terms)
+          for page in "${routes[@]}"; do
+            if [ -f "_site/${page}/index.html" ]; then
+              cp "_site/${page}/index.html" "_site/${page}.html"
+            fi
+          done
           # 4) Deep link fallback — 존재하지 않는 경로(/foo)도 SPA index 로
           cp _site/index.html _site/404.html
 
