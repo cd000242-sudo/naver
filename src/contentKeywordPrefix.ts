@@ -7,16 +7,39 @@
 import type { StructuredContent } from './contentGenerator';
 import { normalizeTitleWhitespace } from './contentTextHelpers';
 
-export function applyKeywordPrefixToTitle(title: string, keyword: string): string {
+export interface KeywordPrefixOptions {
+  /**
+   * [SPEC-KEYWORD-ENDGAME Phase 1] 제목 앞 3자 내 메인 키워드 강제.
+   * 기존 "토큰이 어디든 있으면 스킵" 조기탈출이 SEO 앞3자 요건을 뚫는 구멍이었다
+   * (예: "바꿨더니 효과 본 다이어트 식단" — 토큰 존재하나 선두 아님 → 스킵 → 경고만 뜨고 발행).
+   * true면 제목이 키워드로 시작하지 않을 때 조기탈출 없이 재배치 로직을 태운다.
+   */
+  ensureFront3?: boolean;
+}
+
+/** 스캐너(mainKeywordPositionScanner)와 동일 기준: 정규화 후 제목 앞 3자 == 키워드 앞 3자. */
+function titleStartsWithKeywordFront3(title: string, keyword: string): boolean {
+  const norm = (s: string) => String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  const t = norm(title);
+  const k = norm(keyword);
+  return Boolean(t && k && t.slice(0, 3) === k.slice(0, 3));
+}
+
+export function applyKeywordPrefixToTitle(title: string, keyword: string, options?: KeywordPrefixOptions): string {
   const cleanKeyword = (keyword || '').trim();
   if (!cleanKeyword) return (title || '').trim();
 
   const cleanTitle = (title || '').trim();
   if (!cleanTitle) return cleanKeyword;
 
+  // [Phase 1] 앞3자 강제 모드: 이미 선두면 무변경, 아니면 조기탈출 건너뛰고 재배치로 직행.
+  const front3Satisfied = titleStartsWithKeywordFront3(cleanTitle, cleanKeyword);
+  if (options?.ensureFront3 && front3Satisfied) return cleanTitle;
+
   // ✅ [2026-02-08] 강화된 중복 방지: 키워드의 모든 토큰이 이미 제목에 포함되어 있으면 접두사 불필요
+  //   (ensureFront3 모드에서는 이 조기탈출이 앞3자 구멍이므로 건너뛴다)
   const keywordTokens = cleanKeyword.split(/\s+/).filter(t => t.length >= 2);
-  if (keywordTokens.length > 0) {
+  if (!options?.ensureFront3 && keywordTokens.length > 0) {
     const titleLower = cleanTitle.toLowerCase();
     const allTokensPresent = keywordTokens.every(t => titleLower.includes(t.toLowerCase()));
     if (allTokensPresent) {
@@ -174,24 +197,26 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string): strin
   return clampTitleLength(merged, 70);
 }
 
-export function applyKeywordPrefixToStructuredContent(content: StructuredContent, keyword: string): void {
+export function applyKeywordPrefixToStructuredContent(content: StructuredContent, keyword: string, options?: KeywordPrefixOptions): void {
   const cleanKeyword = (keyword || '').trim();
   if (!content || !cleanKeyword) return;
+  // 사용자 지정 제목은 건드리지 않는다 (manualTitleLocked — 라이브 발행 신뢰).
+  if ((content as any).manualTitleLocked) return;
 
   if (content.selectedTitle) {
-    content.selectedTitle = applyKeywordPrefixToTitle(content.selectedTitle, cleanKeyword);
+    content.selectedTitle = applyKeywordPrefixToTitle(content.selectedTitle, cleanKeyword, options);
   }
 
   if (Array.isArray(content.titleAlternatives)) {
     content.titleAlternatives = content.titleAlternatives
-      .map(t => applyKeywordPrefixToTitle(t, cleanKeyword))
+      .map(t => applyKeywordPrefixToTitle(t, cleanKeyword, options))
       .filter(Boolean);
   }
 
   if (Array.isArray(content.titleCandidates)) {
     content.titleCandidates = content.titleCandidates.map(c => ({
       ...c,
-      text: applyKeywordPrefixToTitle(c.text, cleanKeyword),
+      text: applyKeywordPrefixToTitle(c.text, cleanKeyword, options),
     }));
   }
 }

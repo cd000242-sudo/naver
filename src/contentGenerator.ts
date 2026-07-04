@@ -1230,7 +1230,23 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
     } catch (e) {
       console.warn('[contentGenerator] catch ignored:', e);
     }
-    applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword);
+    // ✅ [SPEC-KEYWORD-ENDGAME Phase 1] SEO 모드는 제목 앞3자 강제(ensureFront3) — "토큰이 어디든
+    //   있으면 스킵" 조기탈출이 앞3자 요건을 뚫던 구멍을 닫는다. 다른 모드는 기존 동작 유지.
+    const _isSeoModeForKw = (source.contentMode || 'seo') === 'seo';
+    applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword, { ensureFront3: _isSeoModeForKw });
+    // ✅ [Phase 1] 서론 첫100자·결론 키워드 미배치도 경고→강제(콤마 리드인). SEO 모드만(홈판은
+    //   도입 4단 골격 보호 — 경고 유지).
+    if (_isSeoModeForKw) {
+      try {
+        const { enforceIntroConclusionKeyword } = require('./content/keywordPlacementEnforcer');
+        const placed = enforceIntroConclusionKeyword(finalContent, primaryKeyword);
+        if (placed.introPatched || placed.conclusionPatched) {
+          console.log(`[KeywordPlacement] 배치 강제: 서론=${placed.introPatched} 결론=${placed.conclusionPatched} (키워드 "${primaryKeyword}")`);
+        }
+      } catch (e) {
+        console.warn('[KeywordPlacement] 배치 강제 스킵:', (e as Error)?.message);
+      }
+    }
   }
   applyHomefeedNarrativeHookBlock(finalContent, source);
   applySeoQualityHookBlock(finalContent, source);  // ✅ [2026-03-06] SEO 런타임 품질 게이트
