@@ -327,7 +327,7 @@
       font-size: 12px;
     }
     .tiny-btn.pro { border-color: rgba(14,165,233,.48); color: var(--gold); background: rgba(14,165,233,.09); }
-    .tiny-btn.green { border-color: rgba(53,211,153,.44); color: #bdf7dd; background: rgba(53,211,153,.08); }
+    .tiny-btn.green { border-color: rgba(53,211,153,.44); color: #047857; background: rgba(53,211,153,.08); }
     .tiny-btn.blue { border-color: rgba(91,183,255,.44); color: #0369a1; background: rgba(91,183,255,.08); }
     .volume-cell { min-width: 96px; display: grid; gap: 5px; }
     .volume-cell strong { font-size: 12px; }
@@ -356,7 +356,7 @@
     table { width: 100%; border-collapse: collapse; min-width: 980px; }
     th, td { padding: 10px 11px; border-bottom: 1px solid rgba(159,177,200,.18); text-align: left; font-size: 13px; }
     th { color: var(--text-2); background: var(--surface-2); position: sticky; top: 0; }
-    td { color: #edf4ff; }
+    td { color: var(--text); }
     .grade {
       display: inline-flex;
       align-items: center;
@@ -373,18 +373,18 @@
     .grade.S { background: linear-gradient(135deg, var(--gold), #7DD3FC); color: #052016; }
     .grade.A { background: linear-gradient(135deg, var(--green), #9df5c7); color: #052016; }
     .publish-decision { display: flex; flex-direction: column; gap: 3px; min-width: 128px; line-height: 1.35; }
-    .publish-decision strong { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 3px 8px; background: rgba(159,177,200,.14); color: #dbe7f7; font-size: 11px; font-weight: 1000; }
-    .publish-decision.publish strong { background: rgba(53,211,153,.18); color: #9df5c7; border: 1px solid rgba(53,211,153,.36); }
+    .publish-decision strong { display: inline-flex; align-items: center; width: fit-content; border-radius: 999px; padding: 3px 8px; background: rgba(159,177,200,.14); color: var(--text-2); font-size: 11px; font-weight: 1000; }
+    .publish-decision.publish strong { background: rgba(53,211,153,.18); color: #047857; border: 1px solid rgba(53,211,153,.36); }
     .publish-decision.conditional strong { background: rgba(14,165,233,.16); color: #075985; border: 1px solid rgba(14,165,233,.32); }
-    .publish-decision.exclude strong { background: rgba(255,77,109,.14); color: #ff9aac; border: 1px solid rgba(255,77,109,.28); }
+    .publish-decision.exclude strong { background: rgba(255,77,109,.14); color: #b91c1c; border: 1px solid rgba(255,77,109,.28); }
     .publish-decision span { color: var(--muted); font-size: 11px; }
     .golden-decision { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 5px; }
     .golden-decision strong { border-radius: 999px; padding: 2px 7px; background: rgba(14,165,233,.14); color: #075985; font-size: 11px; }
     .golden-decision span { color: var(--muted); }
-    .shopping-pick { margin-top: 8px; display: grid; gap: 4px; max-width: 420px; padding: 8px; border: 1px solid rgba(53,211,153,.26); border-radius: 8px; background: rgba(53,211,153,.07); color: #dbe7f7; font-size: 11px; line-height: 1.45; }
+    .shopping-pick { margin-top: 8px; display: grid; gap: 4px; max-width: 420px; padding: 8px; border: 1px solid rgba(53,211,153,.26); border-radius: 8px; background: rgba(53,211,153,.07); color: #1c3a2d; font-size: 11px; line-height: 1.45; }
     .shopping-pick strong { color: #075985; }
     .shopping-pick span { display: block; color: var(--muted); }
-    .shopping-pick a { color: #8bd7ff; font-weight: 900; }
+    .shopping-pick a { color: #0369a1; font-weight: 900; }
     .feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
     .feature-card {
       padding: 14px;
@@ -2009,7 +2009,7 @@
       return escapeHtml(value).replace(new RegExp(String.fromCharCode(96), 'g'), '&#96;');
     }
     function normalizeText(value) {
-      return String(value || '').replace(/s+/g, ' ').trim();
+      return String(value || '').replace(/\s+/g, ' ').trim();
     }
     function currentLottoRound() {
       const firstDraw = Date.UTC(2002, 11, 7, 11, 35, 0);
@@ -2166,21 +2166,35 @@
       const docs = Number(documentCount);
       if (!Number.isFinite(total) || total <= 0 || !Number.isFinite(docs)) return '-';
       const ratio = docs <= 0 ? total : total / Math.max(1, docs);
+      const score = browserLocalKeywordQualityScore(total, docs);
       if (total >= 1000 && docs <= 5000 && ratio >= 5) return 'SSS';
       if (total >= 500 && docs <= 10000 && ratio >= 3) return 'SS';
-      if (total >= 300 && ratio >= 2) return 'S';
-      if (total >= 100) return 'A';
-      return 'B';
+      if (total >= 300 && docs <= 20000 && ratio >= 2) return 'S';
+      if (total >= 100 && docs <= 50000 && ratio >= 0.8 && score >= 55) return 'A';
+      if (total >= 100 || score >= 45) return 'B';
+      return '-';
+    }
+    function browserLocalKeywordQualityScore(totalSearchVolume, documentCount) {
+      const total = Math.max(0, Number(totalSearchVolume || 0));
+      const docs = Math.max(0, Number(documentCount || 0));
+      if (!total) return 0;
+      const ratio = docs <= 0 ? total : total / Math.max(1, docs);
+      const volumeScore = Math.min(42, Math.log10(total + 10) * 12);
+      const ratioScore = Math.min(44, Math.log10(ratio + 1) * 42);
+      const lowDocBonus = docs <= 5000 ? 14 : docs <= 20000 ? 8 : docs <= 50000 ? 3 : -10;
+      return Math.round(Math.max(0, Math.min(100, volumeScore + ratioScore + lowDocBonus)));
     }
     function browserLocalPublishDecision(row) {
       const grade = row && row.grade;
-      const score = grade === 'SSS' ? 98 : grade === 'SS' ? 88 : grade === 'S' ? 78 : 62;
+      const score = browserLocalKeywordQualityScore(row && row.totalSearchVolume, row && row.documentCount);
       const measured = !!(row && row.isMeasured);
+      const publishable = measured && (grade === 'SSS' || grade === 'SS');
+      const weak = measured && (grade === 'B' || grade === '-');
       return {
-        label: measured && (grade === 'SSS' || grade === 'SS') ? '발행 추천' : '검증 필요',
-        verdict: measured && (grade === 'SSS' || grade === 'SS') ? 'publish' : 'conditional',
+        label: publishable ? '발행 추천' : weak ? '제외 검토' : '검증 필요',
+        verdict: publishable ? 'publish' : weak ? 'exclude' : 'conditional',
         score: measured ? score : null,
-        reasons: [measured ? '사용자 API 키로 직접 측정한 검색량과 문서수 기준입니다.' : '일부 지표가 API에서 응답되지 않아 추가 검증이 필요합니다.'],
+        reasons: [measured ? (weak ? '검색량 대비 문서수가 많아 선점 가능성이 낮습니다.' : '사용자 API 키로 직접 측정한 검색량과 문서수 기준입니다.') : '일부 지표가 API에서 응답되지 않아 추가 검증이 필요합니다.'],
         nextAction: '네이버 검색 결과에서 최신 문서 품질과 공식 정보를 확인한 뒤 작성하세요.',
       };
     }
@@ -2312,17 +2326,57 @@
       return runBrowserLocalApiLookup(feature, seed, localApiLookupModeForFeature(feature, mode), reason);
     }
     function liveSignalDerivedKeywords(signal) {
+      const sourceValues = [];
+      function pushSourceValue(value) {
+        if (typeof value === 'string') {
+          sourceValues.push(value);
+          return;
+        }
+        if (value && typeof value === 'object') {
+          pushSourceValue(value.keyword || value.query || value.title || value.name || value.text);
+        }
+      }
+      [
+        signal && signal.keyword,
+        signal && signal.title,
+        signal && signal.query,
+        signal && signal.topic,
+        signal && signal.name,
+      ].forEach(pushSourceValue);
+      [
+        signal && signal.keywords,
+        signal && signal.relatedKeywords,
+        signal && signal.related,
+        signal && signal.suggestions,
+        signal && signal.autocomplete,
+        signal && signal.sourceKeywords,
+      ].forEach(function(list) {
+        if (Array.isArray(list)) list.forEach(pushSourceValue);
+      });
+      const sourceCandidates = [];
+      sourceValues.forEach(function(value) {
+        const keyword = normalizeText(value)
+          .replace(/["'“”‘’]/g, ' ')
+          .replace(/[()[\]{}]/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        const key = keyword.toLowerCase();
+        if (!keyword || keyword.length > 44) return;
+        if (sourceCandidates.some(function(item) { return item.toLowerCase() === key; })) return;
+        sourceCandidates.push(keyword);
+      });
+      return sourceCandidates;
       const raw = normalizeText(signal && (signal.keyword || signal.title));
-      const compact = raw.replace(/["'“”‘’()[]{}]/g, ' ').replace(/s+/g, ' ').trim();
+      const compact = raw.replace(/["'“”‘’]/g, ' ').replace(/[()[\]{}]/g, ' ').replace(/\s+/g, ' ').trim();
       const lower = compact.toLowerCase();
       const candidates = [compact];
-      if (/월드컵|대표팀|한국s*축구|태극전사|조별리그|손흥민|이강인|김민재|홍명보/.test(compact)) {
+      if (/월드컵|대표팀|한국\s*축구|태극전사|조별리그|손흥민|이강인|김민재|홍명보/.test(compact)) {
         if (/홍명보/.test(compact)) {
           candidates.push('홍명보 대표팀 명단');
           candidates.push('홍명보 월드컵 전술');
           candidates.push('홍명보 감독 교체 여론');
         }
-        if (/월드컵|조별리그|한국s*축구|태극전사/.test(compact)) {
+        if (/월드컵|조별리그|한국\s*축구|태극전사/.test(compact)) {
           candidates.push('한국 축구 월드컵 탈락 이유');
           candidates.push('월드컵 조별리그 탈락 한국 반응');
           candidates.push('한국 월드컵 다음 경기 일정');
@@ -2340,8 +2394,8 @@
     function liveSignalBackfillScore(keyword, signal, lane) {
       const text = normalizeText(keyword + ' ' + (signal && signal.title || '') + ' ' + (signal && signal.description || '') + ' ' + (lane && lane.label || ''));
       let score = Number(signal && signal.priority || 0);
-      const sports = /월드컵|대표팀|한국s*축구|태극전사|조별리그|손흥민|이강인|김민재|홍명보|FIFA/i.test(text);
-      const action = /일정|중계|명단|라인업|전술|교체|여론|반응|결과|하이라이트|상대전적|예매|티켓|탈락s*이유|평가/.test(text);
+      const sports = /월드컵|대표팀|한국\s*축구|태극전사|조별리그|손흥민|이강인|김민재|홍명보|FIFA/i.test(text);
+      const action = /일정|중계|명단|라인업|전술|교체|여론|반응|결과|하이라이트|상대전적|예매|티켓|탈락\s*이유|평가/.test(text);
       const policyNeed = /신청|지급|환급|대상|조건|일정|지원금|장려금|바우처|모집|감면/.test(text);
       const pureCelebrity = /배우|결혼|열애|딸|아내|럽스타|악플|논란|서운함|인증샷|데뷔|걸그룹|예능|스타/.test(text);
       if (sports) score += 600;
@@ -2385,7 +2439,7 @@
           const lane = candidate.lane || {};
           const signal = candidate.signal || {};
           return {
-            id: 'live-' + candidate.key.replace(/s+/g, '-'),
+            id: 'live-' + candidate.key.replace(/\s+/g, '-'),
             rank: (existingItems || []).length + index + 1,
             keyword: candidate.keyword,
             grade: 'LIVE',
@@ -2403,7 +2457,7 @@
       const rows = [];
       (Array.isArray(values) ? values : []).forEach(function(value) {
         const keyword = normalizeText(value);
-        const key = keyword.toLowerCase().replace(/s+/g, '');
+        const key = keyword.toLowerCase().replace(/\s+/g, '');
         if (!keyword || !key || seen.has(key)) return;
         if (!isFreshGoldenKeywordText(keyword)) return;
         if (keyword.length < 2 || keyword.length > 48) return;
@@ -2465,7 +2519,7 @@
     }
     function clientFallbackBoardItem(keyword, index, source) {
       return {
-        id: 'client-fallback-' + index + '-' + keyword.toLowerCase().replace(/s+/g, '-'),
+        id: 'client-fallback-' + index + '-' + keyword.toLowerCase().replace(/\s+/g, '-'),
         rank: index + 1,
         keyword: keyword,
         grade: 'LIVE',
@@ -2510,7 +2564,7 @@
     function isServerUnavailableError(message) {
       const text = String(message || '');
       if (isAuthErrorMessage(text)) return false;
-      if (/apis*key|API 키|필수 API|Unauthorized|Forbidden/i.test(text)) return false;
+      if (/api\s*key|API 키|필수 API|Unauthorized|Forbidden/i.test(text)) return false;
       return /Failed to fetch|NetworkError|Load failed|HTTP 404|HTTP 50d|timeout|ECONN|ENOTFOUND|fetch/i.test(text);
     }
     function renderClientFeatureFallback(feature, displayKeyword, error) {
@@ -3122,11 +3176,11 @@
       return rows.slice(0, limit || 50);
     }
     function buildLookupContextKeywords(seed, limit) {
-      const seedKey = normalizeText(seed).toLowerCase().replace(/s+/g, '');
+      const seedKey = normalizeText(seed).toLowerCase().replace(/\s+/g, '');
       const seen = new Set();
       return lastKeywordRows(limit || 80).filter(function(row) {
         const keyword = normalizeText(row && row.keyword);
-        const key = keyword.toLowerCase().replace(/s+/g, '');
+        const key = keyword.toLowerCase().replace(/\s+/g, '');
         if (!keyword || !key || key === seedKey || seen.has(key)) return false;
         seen.add(key);
         return true;
