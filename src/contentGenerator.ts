@@ -5528,6 +5528,27 @@ export async function generateStructuredContent(
         }
       }
 
+      // ✅ [SPEC-KEYWORD-ENDGAME Phase 3] 세부키워드 커버리지 게이트 (SEO 모드만) — 서브키워드
+      //   (사용자 추가분+블루오션)가 본문 어디에도 없으면 관련 소제목에 패치(롱테일 다면 노출).
+      //   본문 어디든 있으면 자연 커버로 무변경. fail-open.
+      if (mode === 'seo' && Array.isArray(parsed.headings)) {
+        try {
+          const _allKw: string[] = ((source.metadata as any)?.keywords || []).map((k: any) => String(k || '').trim()).filter(Boolean);
+          const _subKws = _allKw.slice(1);
+          if (_subKws.length > 0) {
+            const { enforceSubKeywordCoverage } = require('./content/subKeywordCoverageGate');
+            const cov = enforceSubKeywordCoverage(parsed, _subKws, { maxKeywords: 3 });
+            const covered = cov.items.filter((i: any) => i.inHeadings || i.inBody).length;
+            console.log(`[SubKwCoverage] 서브키워드 ${cov.items.length}개 중 자연커버 ${covered} · 패치 ${cov.patchedCount}`);
+            if (cov.patchedCount > 0) {
+              try { syncHeadingsWithBodyPlain(parsed); } catch { /* ignore */ }
+            }
+          }
+        } catch (e) {
+          console.warn('[SubKwCoverage] 게이트 스킵:', (e as Error)?.message);
+        }
+      }
+
       const customPromptAdherence = assessCustomPromptAdherence(parsed, source);
       if (customPromptAdherence.checked) {
         if (!parsed.quality) {
