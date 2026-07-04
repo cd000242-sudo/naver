@@ -2584,7 +2584,9 @@
       const payloadBody = feature.payload
         ? feature.payload(seed, { browserLocalFallback: true, mode: mode, reason: reason })
         : { keyword: seed, seedKeyword: seed, mode: mode };
-      updateProgress(74, '브라우저 CORS로 직접 호출이 막혀 사용자 API 키를 서버 실행기로 전달해 조회합니다.');
+      updateProgress(reason === 'user-api-primary' ? 34 : 74, reason === 'user-api-primary'
+        ? '환경설정에 저장된 사용자 API 키를 실행 요청에만 전달해 PC/모바일 검색량과 문서수를 조회합니다.'
+        : '브라우저 CORS로 직접 호출이 막혀 사용자 API 키를 실행 요청에만 전달해 조회합니다.');
       const created = await apiPost(feature.route, payloadBody, { userApiCredentials: true });
       const polled = await pollJob(created);
       const result = polled && (polled.snapshot || polled.result || polled);
@@ -2593,6 +2595,29 @@
       log('user API server executor lookup completed: ' + (feature.title || feature.route) + (reason ? ' / ' + reason : ''));
       completeProgress('사용자 API 키 기반 조회 결과를 표시했습니다.');
       return result;
+    }
+    async function runUserApiLookupFirst(feature, seed, mode) {
+      if (!isLocalApiLookupFeature(feature) || !normalizeText(seed)) return null;
+      openProgress('사용자 API 키로 조회하기', '환경설정에 저장된 사용자 API 키를 실행 요청에만 전달해 실측 데이터를 조회합니다.');
+      try {
+        return await runUserApiServerExecutorLookup(feature, seed, mode, 'user-api-primary');
+      } catch (err) {
+        const message = err && err.message ? err.message : String(err);
+        log('user API executor lookup failed: ' + message);
+        if (isServerUnavailableError(message)) {
+          return await runBrowserLocalApiLookup(feature, seed, mode, 'server-executor-fallback');
+        }
+        renderLookupInsight('사용자 API 키 조회 실패', message, [
+          { label: '상태', value: 'API 확인 필요' },
+          { label: '방식', value: '사용자 API 실행 요청' },
+          { label: '키워드', value: seed || '-' },
+          { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+        ], [
+          '<li><strong>확인할 항목</strong><span>환경설정/API 키에 네이버 API, 네이버 검색광고 API 키가 저장되어 있는지 확인하세요. 브라우저 CORS가 막히는 API는 사용자 키를 실행 요청에만 전달해 서버에서 대리 호출합니다.</span></li>',
+        ]);
+        failProgress(message);
+        return null;
+      }
     }
     async function runBrowserLocalApiLookup(feature, seed, mode, reason) {
       if (!isLocalApiLookupFeature(feature)) return null;
@@ -5994,7 +6019,7 @@
         log(feature.title + (ui.autoTriggered ? ' 자동 분석 시작' : ' 실행 시작'));
         openProgress(feature.title + ' 실행', '서버 요청을 준비하고 있습니다.', { minimized: ui.minimizeOnStart || backgroundRun });
         if (shouldRunBrowserLocalFirst(feature, null) && normalizeText(displayKeyword)) {
-          const localResult = await runBrowserLocalApiLookup(feature, displayKeyword, localApiLookupModeForFeature(feature, null), 'browser-local-primary');
+          const localResult = await runUserApiLookupFirst(feature, displayKeyword, localApiLookupModeForFeature(feature, null));
           if (localResult && feature.id) featureRunState[feature.id] = 'completed';
           return localResult;
         }
