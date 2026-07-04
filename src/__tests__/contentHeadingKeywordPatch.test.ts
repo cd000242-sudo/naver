@@ -14,6 +14,31 @@ describe('resolveHeadingKeywordCore', () => {
     expect(result.shouldPatch).toBe(false);
     expect(result.reason).toContain('person-issue');
   });
+
+  // [2026-07-04 실측 버그] 키워드 "비 오는 날 수건 쉰내" → 첫 토큰 "비"(1글자) 스킵 후
+  //   동사 관형형 "오는"이 핵심어로 뽑혀 소제목 2개에 "오는 " 접두가 붙어 발행됨.
+  it('동사 관형형(-는) 토큰은 핵심어로 뽑지 않는다 — 명사 토큰 우선 (오는 접두 회귀 잠금)', () => {
+    const core = resolveHeadingKeywordCore('비 오는 날 수건 쉰내');
+    expect(core.core).not.toBe('오는');
+    expect(core.core).toBe('수건');
+  });
+
+  it('관형형 아닌 일반 키워드 핵심어 추출은 기존 동작 유지 + 전부 관형형이면 폴백', () => {
+    expect(resolveHeadingKeywordCore('제습기 전기세').core).toBe('제습기');
+    expect(resolveHeadingKeywordCore('다이어트 식단').core).toBe('다이어트');
+    expect(resolveHeadingKeywordCore('오는 가는').core).toBe('오는'); // 폴백(기존 동작)
+  });
+});
+
+describe('applyHeadingKeywordPatch — 관형형 접두 회귀', () => {
+  it('어떤 소제목도 "오는 "으로 시작하지 않는다', () => {
+    const headings = [
+      { title: '단순 건조 문제 아닌 세균 번식의 결과입니다' },
+      { title: '수건 쉰내, 세균과 산패한 피지가 만드는 복합적인 문제입니다' },
+    ];
+    const result = applyHeadingKeywordPatch(headings, '비 오는 날 수건 쉰내', { maxPatches: 2 });
+    expect(result.headings.every((h) => !String(h.title).startsWith('오는 '))).toBe(true);
+  });
 });
 
 describe('applyHeadingKeywordPatch', () => {

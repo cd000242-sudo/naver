@@ -96,12 +96,23 @@ function hasPersonIssueTerm(tokens: string[]): boolean {
   return PERSON_ISSUE_TERMS.some((term) => joined.includes(term));
 }
 
+// [2026-07-04] 동사 관형형(-는: 오는/하는/되는/없는 …)은 키워드 '핵심어'가 될 수 없다.
+//   실측 버그: 키워드 "비 오는 날 수건 쉰내"에서 첫 토큰 "비"(1글자)가 스킵되고 "오는"이
+//   핵심어로 뽑혀 소제목 2개에 "오는 " 접두가 붙어 발행됨. 명사 토큰을 우선 선택한다.
+function isVerbalModifierToken(token: string): boolean {
+  return /[가-힣]는$/.test(token);
+}
+
 export function resolveHeadingKeywordCore(primaryKeyword: string): HeadingKeywordCoreResult {
   const raw = String(primaryKeyword || '').trim();
   if (!raw) return { core: '', shouldPatch: false, reason: 'empty-keyword' };
 
   const tokens = raw.split(/[\s,/\-]+/).map((token) => token.trim()).filter(Boolean);
-  const firstRaw = tokens.find((token) => stripKoreanTargetParticle(token).length >= 2) || raw;
+  const meaningful = tokens.filter((token) => stripKoreanTargetParticle(token).length >= 2);
+  // 관형형이 아닌 토큰 우선(명사 후보). 전부 관형형이면 기존 동작 폴백(첫 유의미 토큰).
+  const firstRaw = meaningful.find((token) => !isVerbalModifierToken(stripKoreanTargetParticle(token)))
+    || meaningful[0]
+    || raw;
   const core = stripKoreanTargetParticle(firstRaw);
 
   if (!core) return { core: '', shouldPatch: false, reason: `empty-core:${firstRaw}` };
