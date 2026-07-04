@@ -32,6 +32,12 @@ export async function ensureDirectory(): Promise<string> {
 
 // ✅ 이미지 저장 기본 경로 가져오기 (설정에서 사용자 지정 경로 또는 기본 경로)
 export async function getImageSaveBasePath(): Promise<string> {
+  // [2026-07-03] 테스트 격리 — TEST_MODE+GENERATED_IMAGES_DIR면 임시 폴더로 쓴다(ensureDirectory와
+  //   동일 규약). 이 가드가 없어 writeImageFile 테스트(bytesize-check/dedup/roundtrip-test 등)가
+  //   사용자의 실제 ~/Downloads/naver-blog-images에 타임스탬프 더미 폴더를 남기고 있었다.
+  if (process.env.TEST_MODE && process.env.GENERATED_IMAGES_DIR) {
+    return process.env.GENERATED_IMAGES_DIR;
+  }
   try {
     const { loadConfig } = await import('../configManager.js');
     const config = await loadConfig();
