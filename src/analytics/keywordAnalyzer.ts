@@ -96,6 +96,29 @@ function calcBlueOceanScore(searchVolume: number, blogCount: number): number {
   return Math.round(Math.min(maxAllowed, rawScore));
 }
 
+// [2026-07-04] Tier 2 — 광고 API(정확 검색량) 없이 블루오션 추정.
+//   calcBlueOceanScore는 searchVolume>0이 필수라, 광고 API 미설정(부업러 대부분) 사용자는
+//   블루오션 자동선정이 빈 결과가 된다. 이 함수는 검색량을 못 재는 대신 문서량(경쟁도, 검색
+//   API로 실측)을 주축으로 하고, 검색량 추정 등급과 연관검색어 순서(수요 프록시)를 보조로 써서
+//   '저경쟁 롱테일'을 안전하게 선별한다. (수요 정확도는 낮아도 경쟁도 축은 실측)
+export function estimateBlueOceanScoreWithoutAd(
+  searchVolumeEst: 'high' | 'medium' | 'low',
+  blogCount: number,
+  orderIndex: number,
+): { score: number; qualifies: boolean } {
+  // 1. 경쟁도(0~55) — calcBlueOceanScore와 동일 스케일(문서 적을수록 높음)
+  const logDocs = Math.log10(Math.max(blogCount, 1));
+  const competitionScore = Math.max(0, Math.min(55, 55 - (logDocs - 2) * 12.5));
+  // 2. 검색량 추정 등급 가중(0~30)
+  const demandEst = searchVolumeEst === 'high' ? 30 : searchVolumeEst === 'medium' ? 20 : 10;
+  // 3. 연관검색어 순서(앞쪽=인기, 0~15)
+  const orderScore = Math.max(0, 15 - orderIndex);
+  const score = Math.round(Math.min(100, competitionScore + demandEst + orderScore));
+  // 저경쟁(문서 ≤ 5만) + 최소 점수 — 광고 API 없이도 확실히 잡히는 후보
+  const qualifies = blogCount > 0 && blogCount <= 50000 && score >= 45;
+  return { score, qualifies };
+}
+
 export class KeywordAnalyzer {
   private cache: Map<string, { data: KeywordCompetition; expiry: number }> = new Map();
   private cacheExpiry = 30 * 60 * 1000; // 30분 캐시
@@ -769,45 +792,44 @@ export class KeywordAnalyzer {
         return [];
       }
       
-      // 2. 각 연관 키워드의 검색량/문서량 분석 (실제 데이터만)
-      for (const keyword of relatedKeywords.slice(0, 20)) {
+      // 2. 각 연관 키워드의 검색량/문서량 분석 (실제 데이터만). 순서(orderIndex)는 수요 프록시(Tier 2).
+      for (const [orderIndex, keyword] of relatedKeywords.slice(0, 20).entries()) {
         await sleep(300); // API 부하 방지
-        
+
         try {
           const analysis = await this.analyzeKeyword(keyword);
-          
-          // ✅ 핵심 블루오션 조건: 검색량 높고 문서량 낮음
-          // - 검색량: 월 1,000회 이상
-          // - 문서량(블로그 수): 10만 이하
-          // - 검색량/문서량 비율이 높을수록 좋음
-          
+
           let monthlySearchVolume = 0;
           if (analysis.naverAdData) {
             monthlySearchVolume = analysis.naverAdData.monthlyPcQcCnt + analysis.naverAdData.monthlyMobileQcCnt;
           }
-          
           const blogCount = analysis.blogCount || 0;
 
-          // ✅ [v1.4.64] 통합 스코어링 함수 사용
-          const blueOceanScore = calcBlueOceanScore(monthlySearchVolume, blogCount);
-
-          // ✅ 블루오션 필터링 조건 (엄격)
-          const hasSearchVolume = monthlySearchVolume >= 500;
-          const hasLowCompetition = blogCount <= 100000;
-          const hasGoodScore = blueOceanScore >= 50;
-          
-          if (hasSearchVolume && hasLowCompetition && hasGoodScore) {
-            results.push({
-              keyword,
-              score: Math.round(blueOceanScore),
-              searchVolume: monthlySearchVolume > 0 
-                ? `${monthlySearchVolume.toLocaleString()}회/월` 
-                : analysis.searchVolume,
-              competition: blogCount > 0 
-                ? `${blogCount.toLocaleString()}개` 
-                : analysis.competition,
-              reason: this.generateBlueOceanReason(analysis, monthlySearchVolume, blogCount),
-            });
+          if (monthlySearchVolume > 0) {
+            // ── Tier 1: 광고 API 정확 분석 (검색량↑·문서량↓) ──
+            const blueOceanScore = calcBlueOceanScore(monthlySearchVolume, blogCount);
+            if (monthlySearchVolume >= 500 && blogCount <= 100000 && blueOceanScore >= 50) {
+              results.push({
+                keyword,
+                score: Math.round(blueOceanScore),
+                searchVolume: `${monthlySearchVolume.toLocaleString()}회/월`,
+                competition: blogCount > 0 ? `${blogCount.toLocaleString()}개` : analysis.competition,
+                reason: this.generateBlueOceanReason(analysis, monthlySearchVolume, blogCount),
+              });
+            }
+          } else {
+            // ── Tier 2: 광고 API 없음 — 문서량(경쟁도) 주축 + 검색량 추정 + 연관어 순서 ──
+            //   검색량(수요)을 정확히 못 재도 '저경쟁 롱테일'은 문서량으로 확실히 잡힌다.
+            const fb = estimateBlueOceanScoreWithoutAd(analysis.searchVolume, blogCount, orderIndex);
+            if (fb.qualifies) {
+              results.push({
+                keyword,
+                score: fb.score,
+                searchVolume: `${analysis.searchVolume}(추정)`,
+                competition: blogCount > 0 ? `${blogCount.toLocaleString()}개` : analysis.competition,
+                reason: `경쟁 낮음(문서 ${blogCount.toLocaleString()}개) · 수요 추정 ${analysis.searchVolume} · 연관 상위권 (광고 API 없이 추정 — 정확 검색량은 광고 API 설정 시)`,
+              });
+            }
           }
         } catch (err) {
           console.warn(`[KeywordAnalyzer] ${keyword} 분석 실패:`, (err as Error).message);
