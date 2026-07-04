@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
 const templatePath = path.join(distDir, 'index.html');
-const siteOrigin = 'https://www.leaderspro.kr';
+const siteOrigin = 'https://leaderspro.kr';
 
 const routes = [
   {
