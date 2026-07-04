@@ -5,7 +5,7 @@ function Footer() {
         <footer style={{ padding: '60px 24px 40px', background: '#06060a', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
             <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
                 <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontWeight: 800, fontSize: 18, marginBottom: 20, color: '#fff' }}>
-                    <span style={{ width: 32, height: 32, borderRadius: 8, background: 'linear-gradient(135deg, #f5c842, #d4a012)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 900, color: '#1a1a2e' }}>👑</span>
+                    <img src="/favicon-32x32.png" alt="" aria-hidden="true" style={{ width: 32, height: 32, borderRadius: 8, display: 'block' }} />
                     <span>Leaders Pro</span>
                 </div>
                 <div style={{ display: 'flex', gap: 24, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 20 }}>
