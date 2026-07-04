@@ -2254,6 +2254,61 @@
       }
       return payload.keywordList || payload.relKeywordList || (payload.result && (payload.result.keywordList || payload.result.relKeywordList)) || [];
     }
+    async function fetchBrowserSearchAdKeywordToolBatches(seedKeywords, maxBatches) {
+      const seeds = uniqueKeywords(seedKeywords || [], Math.max(5, Number(maxBatches || 1) * 5));
+      const out = [];
+      const seen = new Set();
+      for (let index = 0; index < seeds.length; index += 5) {
+        const batch = seeds.slice(index, index + 5);
+        if (!batch.length) continue;
+        const items = await fetchBrowserSearchAdKeywordTool(batch);
+        (Array.isArray(items) ? items : []).forEach(function(item) {
+          const keyword = searchAdKeywordFromItem(item);
+          const key = normalizeSearchAdKey(keyword);
+          if (!key || seen.has(key)) return;
+          seen.add(key);
+          out.push(item);
+        });
+        if (index + 5 < seeds.length) {
+          updateProgress(Math.min(48, 24 + Math.round((index / Math.max(1, seeds.length)) * 22)), '마인드맵 확장 후보를 사용자 SearchAd API로 추가 조회하고 있습니다.');
+          await new Promise(function(resolve) { setTimeout(resolve, 140); });
+        }
+      }
+      return out;
+    }
+    function buildBrowserMindmapSeedHints(seed) {
+      const clean = normalizeText(seed);
+      if (!clean) return [];
+      const compact = clean.replace(/\s+/g, '');
+      const lower = clean.toLowerCase();
+      const hints = [clean, compact];
+      const issueSuffixes = ['이유', '원인', '전망', '일정', '후보', '논란', '정리', '반응', '경우의수', '다음일정', '핵심쟁점'];
+      const policySuffixes = ['신청', '신청방법', '대상', '조건', '금액', '지급일', '필요서류', '조회', '계산기', '변경사항', '마감'];
+      const shoppingSuffixes = ['추천', '후기', '가격', '비교', '순위', '단점', '장점', '사용법', '최저가', '가성비'];
+      const localSuffixes = ['후기', '추천', '비용', '예약', '비교', '주의사항', '준비물', '가격'];
+      const genericSuffixes = ['뜻', '방법', '후기', '추천', '정리', '비교', '조회', '주의사항', '전망', '원인'];
+      let suffixes = genericSuffixes;
+      if (/지원|정책|급여|환급|장려금|보조금|신청|세금|청년|정부|최저임금|임금|연금|보험|대출/.test(clean)) suffixes = policySuffixes.concat(issueSuffixes);
+      else if (/후보|감독|축구|야구|월드컵|올스타|선수|경기|순위|일정|논란|사퇴|선임/.test(clean)) suffixes = issueSuffixes.concat(['선임과정', '다음감독', '대표팀', '명단', '부상', '교체이유']);
+      else if (/청소기|가습기|노트북|모니터|카메라|이어폰|렌터카|렌트카|제품|출시|가격|구매|선풍기|에어컨|휴대폰|폰|컴퓨터|전자|가전/.test(clean) || lower.indexOf('iphone') >= 0) suffixes = shoppingSuffixes.concat(localSuffixes);
+      else if (/제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|맛집|렌터|렌트/.test(clean)) suffixes = localSuffixes.concat(genericSuffixes);
+      suffixes.forEach(function(suffix) {
+        hints.push(clean + ' ' + suffix);
+        hints.push(compact + suffix);
+      });
+      const tokens = keywordTokenList(clean);
+      if (tokens.length >= 2) {
+        tokens.forEach(function(token) {
+          if (token !== clean) {
+            hints.push(token + ' ' + clean);
+            hints.push(clean + ' ' + token + ' 이유');
+          }
+        });
+      }
+      return uniqueKeywords(hints, 36).filter(function(candidate) {
+        return allowBrowserLocalCandidate(clean, candidate, 'mindmap-expansion');
+      });
+    }
     async function fetchBrowserNaverBlogDocumentCount(keyword) {
       const state = browserLocalApiSettingsState();
       if (!state.openApiReady) throw new Error('네이버 API Client ID/Secret이 필요합니다.');
@@ -2467,24 +2522,27 @@
       const errors = [];
       updateProgress(18, '저장된 네이버 검색광고 API 키로 후보와 PC/모바일 검색량을 직접 조회합니다.');
       let searchAdItems = [];
+      const mindmapSeedHints = mode === 'mindmap-expansion' ? buildBrowserMindmapSeedHints(keyword) : [];
       try {
-        searchAdItems = await fetchBrowserSearchAdKeywordTool([keyword]);
+        searchAdItems = mode === 'mindmap-expansion'
+          ? await fetchBrowserSearchAdKeywordToolBatches([keyword].concat(mindmapSeedHints), 8)
+          : await fetchBrowserSearchAdKeywordTool([keyword]);
       } catch (err) {
         errors.push(err.message || String(err));
       }
       const metricMap = browserSearchAdMetricMap(searchAdItems);
       const related = searchAdItems.map(searchAdKeywordFromItem).filter(Boolean);
-      const targetCount = mode === 'mindmap-expansion' ? 50 : mode === 'golden-discovery' ? 30 : 30;
+      const targetCount = mode === 'mindmap-expansion' ? 80 : mode === 'golden-discovery' ? 30 : 30;
       const contextKeywords = mode === 'mindmap-expansion'
-        ? buildLookupContextKeywords(keyword, 120).map(function(item) { return item && item.keyword; }).filter(Boolean)
+        ? buildLookupContextKeywords(keyword, 160).map(function(item) { return item && item.keyword; }).filter(Boolean)
         : [];
-      const candidateLimit = mode === 'mindmap-expansion' ? targetCount * 2 : targetCount;
-      const candidates = uniqueKeywords([keyword].concat(related, contextKeywords), candidateLimit)
+      const candidateLimit = mode === 'mindmap-expansion' ? targetCount * 3 : targetCount;
+      const candidates = uniqueKeywords([keyword].concat(related, mindmapSeedHints, contextKeywords), candidateLimit)
         .filter(function(candidate) { return allowBrowserLocalCandidate(keyword, candidate, mode); })
         .slice(0, candidateLimit);
       if (!candidates.length) throw new Error('브라우저 로컬 API 후보가 비어 있습니다.');
       updateProgress(58, '저장된 네이버 API 키로 블로그 문서수를 직접 조회합니다.');
-      const docLimit = mode === 'mindmap-expansion' ? Math.min(50, candidates.length) : Math.min(24, candidates.length);
+      const docLimit = mode === 'mindmap-expansion' ? Math.min(80, candidates.length) : Math.min(24, candidates.length);
       const docResult = await fetchBrowserDocumentCounts(candidates, docLimit).catch(function(err) {
         errors.push(err.message || String(err));
         return { counts: new Map(), errors: [err.message || String(err)] };
@@ -2494,6 +2552,7 @@
         const key = normalizeSearchAdKey(candidate);
         return browserLocalKeywordRow(candidate, metricMap.get(key) || null, docResult.counts.has(key) ? docResult.counts.get(key) : null, index);
       }).filter(function(row) {
+        if (mode === 'mindmap-expansion') return row.totalSearchVolume !== null && row.documentCount !== null;
         return row.totalSearchVolume !== null || row.documentCount !== null;
       });
       if (!rows.length) {
@@ -2521,7 +2580,9 @@
     }
     async function runBrowserLocalApiLookup(feature, seed, mode, reason) {
       if (!isLocalApiLookupFeature(feature)) return null;
-      openProgress('브라우저 로컬 API 실측', '서버 결과가 비어 있어 저장된 사용자 API 키로 직접 조회합니다.');
+      openProgress('브라우저 로컬 API 실측', reason === 'browser-local-primary'
+        ? '정밀 키워드 분석과 마인드맵은 환경설정 API 키로 이 브라우저에서 직접 조회합니다. 서버 job은 건너뜁니다.'
+        : '서버 결과가 비어 있어 저장된 사용자 API 키로 직접 조회합니다.');
       try {
         const result = await buildBrowserLocalApiKeywordResult(feature, seed, mode);
         renderFeatureResult(feature, result);
@@ -2546,6 +2607,15 @@
       if (feature && feature.route === endpoints.mindmap) return 'mindmap-expansion';
       if (feature && feature.route === endpoints.golden) return 'golden-discovery';
       return fallbackMode || 'keyword-analysis';
+    }
+    function shouldRunBrowserLocalFirst(feature, mode) {
+      const explicitMode = mode || '';
+      return !!(feature && (
+        feature.route === endpoints.keywordAnalysis
+        || feature.route === endpoints.mindmap
+        || explicitMode === 'keyword-analysis'
+        || explicitMode === 'mindmap-expansion'
+      ));
     }
     async function maybeRunBrowserLocalApiLookup(feature, seed, mode, reason) {
       if (!isLocalApiLookupFeature(feature) || !normalizeText(seed)) return null;
@@ -5900,6 +5970,11 @@
         }
         log(feature.title + (ui.autoTriggered ? ' 자동 분석 시작' : ' 실행 시작'));
         openProgress(feature.title + ' 실행', '서버 요청을 준비하고 있습니다.', { minimized: ui.minimizeOnStart || backgroundRun });
+        if (shouldRunBrowserLocalFirst(feature, null) && normalizeText(displayKeyword)) {
+          const localResult = await runBrowserLocalApiLookup(feature, displayKeyword, localApiLookupModeForFeature(feature, null), 'browser-local-primary');
+          if (localResult && feature.id) featureRunState[feature.id] = 'completed';
+          return localResult;
+        }
         if (feature.method === 'GET') {
           updateProgress(30, '서버 상태를 불러오는 중입니다.');
           const payload = await apiGet(feature.route, true);
