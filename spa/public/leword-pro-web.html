@@ -2274,6 +2274,7 @@
       if (!keyword) return '';
       const compact = compactKeywordText(keyword);
       const knownTopics = [
+        '송지호 바다하늘길', '송지호 해수욕장', '송지호 둘레길', '송지호',
         '제주 렌터카 예약', '제주 렌터카', '렌터카 예약', '제주 여행', '제주 항공권', '제주 숙소',
         '근로장려금', '자녀장려금', '주휴수당', '최저임금', '문화누리카드', '청년인턴',
         '청년도약계좌', '국민내일배움카드', '실업급여', '기초연금', '육아휴직급여',
@@ -2296,6 +2297,10 @@
         ['금액', '금액 확인'],
         ['대상', '대상/자격'],
         ['조회', '조회 수요'],
+        ['입장료', '입장료 확인'],
+        ['주차', '주차 확인'],
+        ['위치', '위치 확인'],
+        ['소요시간', '소요시간 확인'],
         ['계산기', '계산/시뮬레이션'],
         ['일용직', '일용직 예외'],
         ['사용처', '사용처 확인'],
@@ -2316,6 +2321,28 @@
       if (month >= 3 && month <= 5) return '봄 여행·연휴 수요';
       return '여행 예약 수요';
     }
+    function songjihoSeaSkyPathProfile(topic, keyword) {
+      const text = normalizeText((topic || '') + ' ' + (keyword || ''));
+      const compact = compactKeywordText(text);
+      if (!/(송지호|바다하늘길)/.test(compact)) return null;
+      return {
+        kind: 'local',
+        label: '방문 전 확인형',
+        route: '지역 명소 롱테일',
+        meaning: '송지호 바다하늘길은 강원 고성 송지호·송지호해변 권역을 찾는 사람이 바다 조망 산책 동선과 포토 포인트로 인식하고 검색하는 장소형 키워드입니다. 검색량은 장소가 무엇인지보다 방문 직전에 입장료가 있는지, 주차가 되는지, 어디서 시작하는지, 해수욕장·둘레길과 같이 묶어 갈 수 있는지를 확인하려는 수요에서 생깁니다.',
+        action: '글은 “송지호 바다하늘길이 무엇인지”를 첫 문단에서 풀고, 바로 아래에 입장료 유무, 주차장, 위치, 소요시간, 해수욕장/둘레길 연계 동선, 비 오는 날·아이 동반 주의사항을 표로 정리해야 합니다. 단순 소개글보다 방문 전 체크리스트형으로 쓰면 초보 블로그도 검색 의도를 더 정확히 잡습니다.',
+        branches: [
+          '송지호 바다하늘길 입장료',
+          '송지호 바다하늘길 주차',
+          '송지호 바다하늘길 위치',
+          '송지호 바다하늘길 후기',
+          '송지호 바다하늘길 소요시간',
+          '송지호 해수욕장 바다하늘길',
+          '고성 송지호 바다하늘길',
+          '송지호 둘레길 코스',
+        ],
+      };
+    }
     function naverAutocompleteLikeBranches(seed) {
       const clean = normalizeText(seed);
       if (!clean) return [];
@@ -2325,6 +2352,11 @@
         const text = normalizeText(value);
         if (text) out.push(text);
       };
+      const songjihoProfile = songjihoSeaSkyPathProfile(clean, clean);
+      if (songjihoProfile) {
+        songjihoProfile.branches.forEach(push);
+        return domainSafeIntentBranches(clean, out, 10);
+      }
       if (/제주/.test(clean) && /(렌터카|렌트카|렌터|렌트)/.test(clean)) {
         const base = clean.indexOf('예약') >= 0 ? clean : '제주 렌터카 예약';
         push(base);
@@ -2366,6 +2398,8 @@
       return uniqueIntentBranches(out, 10);
     }
     function localExpansionBranches(topic, keyword) {
+      const songjihoProfile = songjihoSeaSkyPathProfile(topic, keyword);
+      if (songjihoProfile) return domainSafeIntentBranches(topic || keyword, songjihoProfile.branches, 8);
       const base = normalizeText(topic || keyword);
       const auto = naverAutocompleteLikeBranches(base);
       if (auto.length) return auto;
@@ -2373,6 +2407,8 @@
     }
     function localSearchWhy(topic, keyword) {
       const text = normalizeText((topic || '') + ' ' + (keyword || ''));
+      const songjihoProfile = songjihoSeaSkyPathProfile(topic, keyword);
+      if (songjihoProfile) return songjihoProfile.meaning;
       if (/제주/.test(text) && /(렌터카|렌트카|렌터|렌트)/.test(text)) {
         return '지금은 ' + currentSeasonLabel() + '라 제주 항공권·숙소를 확정한 사람들이 공항 이동, 완전자차 보험, 예약 가능 차량, 가격 비교, 픽업 시간을 확인하려고 검색합니다. 단순 예약어는 광고가 강하므로 블로그 글은 보험·주의사항·예약 시기 같은 정보형 롱테일로 잡아야 합니다.';
       }
@@ -2386,6 +2422,8 @@
     }
     function localCombinationIntent(topic, keyword) {
       const text = normalizeText((topic || '') + ' ' + (keyword || ''));
+      const songjihoProfile = songjihoSeaSkyPathProfile(topic, keyword);
+      if (songjihoProfile) return songjihoProfile.action;
       if (/제주/.test(text) && /(렌터카|렌트카|렌터|렌트)/.test(text)) {
         return '조합 의도는 예약 사이트를 나열하는 것이 아니라 성수기 가격 차이, 완전자차 보험, 공항 픽업, 차량 등급, 예약 취소 규정을 비교해 검색자가 결정을 끝내게 만드는 것입니다.';
       }
@@ -2430,14 +2468,14 @@
     }
     function keywordDomain(value) {
       const text = normalizeText(value).toLowerCase();
-      if (/(제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|호텔|펜션|항공권|렌터카|렌트카|맛집|축제|문화누리카드s*사용처)/.test(text)) return 'local';
+      if (/(송지호|바다하늘길|해수욕장|둘레길|제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|호텔|펜션|항공권|렌터카|렌트카|맛집|축제|문화누리카드s*사용처)/.test(text)) return 'local';
       if (/(지원금|장려금|수당|급여|환급|신청|정책|근로장려금|최저임금|주휴수당|문화누리카드|청년인턴|청년청약|실업급여)/.test(text)) return 'policy';
       if (/(감독|축구|야구|월드컵|kbo|선수|경기|순위|일정|홍명보|김민재|이강인|이재성)/i.test(text)) return 'sports';
       if (/(로봇청소기|청소기|공기청정기|제습기|에어컨|냉장고|노트북|아이폰|갤럭시|가격|추천|후기|구매|할인|최저가|제품|상품)/.test(text) && !/(지원금|장려금|수당|정책)/.test(text)) return 'shopping';
       if (/(지원금|장려금|급여|수당|정책|복지|신청|대상|지급일|정부|채용|인턴|연금|보험|세금|환급|최저임금|주휴수당|문화누리카드|청년도약계좌|내일배움카드)/.test(text)) return 'policy';
       if (/(월드컵|축구|야구|kbo|감독|선수|경기|순위|일정|하이라이트|축구협회|대표팀|이강인|김민재|이재성|손흥민|홍명보)/i.test(text)) return 'sports';
       if (/(구매|가격|최저가|할인|추천|순위|후기|비교|리뷰|쿠폰|배송|스펙|브랜드|제품|상품|가전|전자|청소기|로봇청소기|공기청정기|제습기|에어컨|냉장고|세탁기|노트북|태블릿|이어폰|마사지기|영양제|유산균|화장품|선크림|샴푸|운동화|가방|매트리스|캠핑|기저귀|카시트)/.test(text)) return 'shopping';
-      if (/(제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|맛집|렌터|렌트|항공권|호텔|펜션|축제|문화누리카드사용처)/.test(text)) return 'local';
+      if (/(송지호|바다하늘길|해수욕장|둘레길|제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|맛집|렌터|렌트|항공권|호텔|펜션|축제|문화누리카드사용처)/.test(text)) return 'local';
       return 'general';
     }
     function keywordDomainSignals(value) {
@@ -2446,7 +2484,7 @@
         policy: /(지원금|장려금|급여|수당|정책|복지|신청|대상|지급일|정부|채용|인턴|연금|보험|세금|환급|최저임금|주휴수당|문화누리카드|청년도약계좌|내일배움카드)/.test(text),
         sports: /(월드컵|축구|야구|kbo|감독|선수|경기|순위|일정|하이라이트|축구협회|대표팀|이강인|김민재|이재성|손흥민|홍명보)/i.test(text),
         shopping: /(구매|가격|최저가|할인|추천|순위|후기|비교|리뷰|쿠폰|배송|스펙|브랜드|제품|상품|가전|전자|청소기|로봇청소기|공기청정기|제습기|에어컨|냉장고|세탁기|노트북|태블릿|이어폰|마사지기|영양제|유산균|화장품|선크림|샴푸|운동화|가방|매트리스|캠핑|기저귀|카시트)/.test(text),
-        local: /(제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|맛집|렌터|렌트|항공권|호텔|펜션|축제|문화누리카드사용처)/.test(text),
+        local: /(송지호|바다하늘길|해수욕장|둘레길|제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|맛집|렌터|렌트|항공권|호텔|펜션|축제|문화누리카드사용처)/.test(text),
       };
     }
     function candidateFitsSeedDomain(seed, candidate) {
