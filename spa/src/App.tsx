@@ -29,6 +29,22 @@ function PageFallback() {
     );
 }
 
+function AdminRedirectPage() {
+    useEffect(() => {
+        window.location.replace('/admin/');
+    }, []);
+
+    return (
+        <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#0a0a0f', color: '#f8fafc', padding: 24 }}>
+            <div style={{ width: 'min(420px, 100%)', border: '1px solid rgba(201,168,76,0.36)', borderRadius: 18, padding: 28, background: 'rgba(255,255,255,0.04)', textAlign: 'center' }}>
+                <h1 style={{ margin: '0 0 10px', color: '#f5d76e', fontSize: 24 }}>관리자 페이지로 이동 중</h1>
+                <p style={{ margin: '0 0 20px', color: 'rgba(255,255,255,0.68)', lineHeight: 1.6 }}>잠시 후 관리자 전용 패널이 열립니다.</p>
+                <a href="/admin/" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minHeight: 44, padding: '0 18px', borderRadius: 12, background: '#d8b441', color: '#111827', fontWeight: 900, textDecoration: 'none' }}>바로 열기</a>
+            </div>
+        </div>
+    );
+}
+
 function App() {
     const location = useLocation();
 
@@ -39,6 +55,8 @@ function App() {
     return (
         <Suspense fallback={<PageFallback />}>
             <Routes>
+                <Route path="/admin" element={<AdminRedirectPage />} />
+                <Route path="/admin.html" element={<AdminRedirectPage />} />
                 <Route element={<Layout />}>
                     <Route path="/" element={<IndexPage />} />
                     <Route path="/index.html" element={<IndexPage />} />
