@@ -2234,6 +2234,84 @@
       const infoEscape = /(방법|팁|시기|주의사항|후기|준비물|보험 차이|완전자차|취소 규정)/.test(text);
       return commercialCore && directAction && !infoEscape;
     }
+    function liveNeedScore(row) {
+      if (!row) return 0;
+      if (isAmbiguousCompositeKeyword(row)) return -100;
+      if (isShoppingIntentKeywordRow(row)) return -60;
+      if (isAdDominatedKeywordRow(row)) return -50;
+      const total = rowNumber(row, 'totalSearchVolume') || 0;
+      const docs = rowNumber(row, 'documentCount');
+      const ratio = rowGoldenRatio(row) || 0;
+      const text = keywordRowSearchText(row);
+      let score = 0;
+      if (total >= 30000) score += 22;
+      else if (total >= 10000) score += 18;
+      else if (total >= 3000) score += 14;
+      else if (total >= 1000) score += 10;
+      else if (total >= 300) score += 6;
+      if (docs !== null) {
+        if (docs <= 300) score += 22;
+        else if (docs <= 1000) score += 18;
+        else if (docs <= 5000) score += 11;
+        else if (docs <= 12000) score += 4;
+        else score -= 12;
+      }
+      if (ratio >= 20) score += 24;
+      else if (ratio >= 10) score += 18;
+      else if (ratio >= 5) score += 12;
+      else if (ratio >= 2) score += 7;
+      else if (ratio > 0 && ratio < 1) score -= 16;
+      if (/(신청|대상|지급일|잔액|사용처|가맹점|온라인|비교|예약|취소|후보|전말|원인|일정|계산기|주의사항)/.test(text)) score += 18;
+      if (/live|realtime|source|measured|golden/i.test(normalizeText(row && row.source))) score += 5;
+      return score;
+    }
+    function goldenDisplayLane(row) {
+      const text = normalizeText([
+        row && row.keyword,
+        row && row.category,
+        row && row.categoryName,
+        row && row.source,
+        row && row.intent,
+      ].filter(Boolean).join(' '));
+      const lower = text.toLowerCase();
+      if (/(sports|sport|축구|야구|kbo|월드컵|농구|배구|골프|올스타|감독|선수)/i.test(lower)) return 'sports';
+      if (/(entertainment|broadcast|연예|방송|드라마|영화|시청률|가수|아이돌|배우|예능|콘서트|공연)/i.test(lower)) return 'entertainment';
+      if (/(education|school|교육|입시|수능|모의고사|등급컷|자격증|시험|채용|공채)/i.test(lower)) return 'education';
+      if (/(finance|stock|finance|부동산|청약|대출|금리|환율|주식|코인|세금|연말정산)/i.test(lower)) return 'finance';
+      if (/(tech|it|ai|테크|스마트폰|아이폰|갤럭시|게임|앱|보안|출시일)/i.test(lower)) return 'tech';
+      if (/(health|건강|질병|병원|의료|다이어트|영양제|치료|증상)/i.test(lower)) return 'health';
+      const domain = keywordDomain(text);
+      if (domain === 'policy') return 'policy';
+      if (domain === 'local') return 'local';
+      if (domain === 'shopping') return 'shopping';
+      if (domain === 'sports') return 'sports';
+      if (domain === 'entertainment') return 'entertainment';
+      return 'general';
+    }
+    function balanceGoldenDisplayItems(rows) {
+      const sorted = (rows || []).slice().sort(function(a, b) { return liveNeedScore(b) - liveNeedScore(a); });
+      const buckets = {};
+      sorted.forEach(function(row) {
+        const lane = goldenDisplayLane(row);
+        if (!buckets[lane]) buckets[lane] = [];
+        buckets[lane].push(row);
+      });
+      const laneOrder = Object.keys(buckets).sort(function(a, b) {
+        return liveNeedScore(buckets[b][0]) - liveNeedScore(buckets[a][0]);
+      });
+      const balanced = [];
+      let moved = true;
+      while (balanced.length < sorted.length && moved) {
+        moved = false;
+        laneOrder.forEach(function(lane) {
+          const next = buckets[lane] && buckets[lane].shift();
+          if (!next) return;
+          balanced.push(next);
+          moved = true;
+        });
+      }
+      return balanced;
+    }
     function isAmbiguousCompositeKeyword(row) {
       const raw = normalizeText(row && row.keyword);
       const keyword = compactKeywordText(raw);
@@ -2253,9 +2331,10 @@
       return isArticleTitleLikeKeyword(row && row.keyword) || isAmbiguousCompositeKeyword(row) || isShoppingIntentKeywordRow(row);
     }
     function filterDisplayGoldenItems(items) {
-      return filterFreshGoldenItems(items || []).filter(function(item) {
+      const publishableRows = filterFreshGoldenItems(items || []).filter(function(item) {
         return !shouldHideFromLiveGoldenBoard(item);
       });
+      return balanceGoldenDisplayItems(publishableRows);
     }
     function uniqueIntentBranches(items, limit) {
       const seen = new Set();
@@ -4902,6 +4981,7 @@
           '실측 검색량은 충분하지만 문서수와 직접 경쟁이 낮은 키워드',
           '신청/대상/지급일/잔액/사용처/비교/예약/취소/후보/전말처럼 검색자가 다음 행동을 하려는 키워드',
           '지금 왜 검색량이 붙는지 계절, 정책 일정, 가격 변동, 사건 후속 의문으로 설명 가능한 키워드',
+          '정책·여행에 편향되지 않고 스포츠/연예/생활/교육/금융/테크/지역 이슈를 함께 훑어 카테고리별로 다른 니즈를 찾은 키워드',
           '초보자가 표, 체크리스트, 비교표, Q&A, 구매 기준 글로 바로 작성할 수 있는 키워드',
           shoppingMode ? '키워드 뒤에 실제 판매 가능 제품과 구매 트리거가 이어지는 키워드' : '광고보다 블로그 답변이 클릭될 여지가 있는 정보형/판단형 키워드',
           naverMode ? '네이버 자동완성/연관검색어와 자연스럽게 이어지는 확장 키워드' : '원 키워드에서 독자의 후속 의문으로 이어지는 확장 키워드',
@@ -4913,12 +4993,14 @@
           '정례대화지급일처럼 서로 다른 도메인을 억지로 붙인 조합',
           '상품 키워드가 쇼핑커넥트가 아닌 탭에 섞이는 경우',
           '자동완성/연관어 근거 없이 접미사만 붙인 기계식 확장어',
+          '한 사이클 결과가 정책/여행/지원금/렌터카류로 과반 편중되고 다른 도메인 검토 근거가 없는 경우',
         ],
         rankingRubric: [
           '1순위: 검색량 대비 문서수가 낮고 SSS/SS 조건을 만족하는 실측 키워드',
           '2순위: 검색자의 불안, 궁금증, 비교 기준, 구매 기준이 제목에 바로 담기는 키워드',
           '3순위: 오늘/이번주 이슈나 계절성 때문에 검색량이 붙는 이유가 명확한 키워드',
           '4순위: 초보자가 30분 안에 표·체크리스트·FAQ 형태로 발행 가능한 키워드',
+          '동점권에서는 같은 카테고리 반복보다 다른 도메인의 숨은 니즈 키워드를 우선 노출',
           '감점: 광고 과다, 대형 포털/뉴스 독식, 문서수 과다, 의미 불명 조합, 단순 대형 이슈어',
         ],
         researchChecklist: [
@@ -4926,6 +5008,7 @@
           '검색자가 실제로 해결하려는 질문과 다음 행동을 분리',
           '자동완성/연관/후속 의문 키워드를 실측 가능한 후보로 제시',
           '블로그 글 제목으로 쓸 수 있는 조합 의도를 한 줄로 제시',
+          '결과 상위권이 특정 카테고리로 몰리면 스포츠/연예/생활/교육/테크/금융 후보를 재탐색',
           '실측값이 없으면 SSS처럼 표시하지 말고 측정 필요로 분리',
         ],
       };
