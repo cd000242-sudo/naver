@@ -5490,6 +5490,13 @@
       setTimeout(clearProLoginAutofillFromApiSettings, 750);
       setTimeout(clearProLoginAutofillFromApiSettings, 1500);
     }
+    function promptProRelogin(message) {
+      const safeMessage = message || 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.';
+      saveSession(null);
+      openLogin();
+      if (qs('loginMessage')) qs('loginMessage').textContent = safeMessage;
+      log('Pro board failed; session cleared: ' + safeMessage);
+    }
     function closeLogin() {
       qs('loginModal').classList.remove('open');
       qs('loginModal').setAttribute('aria-hidden', 'true');
@@ -6530,7 +6537,7 @@
             return;
           }
         } catch (err) {
-          log('Pro board failed, trying public board: ' + err.message);
+          promptProRelogin(err && err.message ? err.message : 'Pro 보드 권한을 확인할 수 없습니다. 다시 로그인하세요.');
         }
       }
       try {
