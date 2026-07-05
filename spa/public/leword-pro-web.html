@@ -288,11 +288,12 @@
       background: linear-gradient(135deg, rgba(245,158,11,.10), var(--surface-2));
     }
     /* 프로토타입 카드 그리드 (bright-v3 board card) */
-    .golden-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+    .golden-list { display: flex; flex-direction: column; gap: 10px; }
     .golden-row {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: minmax(220px, .85fr) minmax(360px, 1.45fr) minmax(230px, .7fr);
+      gap: 12px;
+      align-items: start;
       border: 1px solid var(--line);
       border-radius: 14px;
       background: var(--panel);
@@ -300,7 +301,10 @@
       box-shadow: var(--shadow-soft);
       transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
     }
-    .golden-row:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--green); }
+    .golden-row:hover { transform: translateY(-1px); box-shadow: var(--shadow); border-color: var(--green); }
+    .gk-main,
+    .gk-side { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+    .gk-why { min-width: 0; }
     .gk-top { display: flex; align-items: center; gap: 7px; }
     .gk-cat { font-size: 11px; font-weight: 700; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); padding: 3px 9px; border-radius: 7px; }
     .gk-rank { margin-left: auto; font-size: 12px; font-weight: 1000; color: var(--green); }
@@ -323,6 +327,8 @@
     .keyword-intent.shopping { border-color: rgba(53,211,153,.34); background: rgba(53,211,153,.09); }
     .keyword-intent.unclear { border-color: rgba(255,77,109,.26); background: rgba(255,77,109,.07); }
     .keyword-intent.policy { border-color: rgba(91,183,255,.28); background: rgba(91,183,255,.08); }
+    .keyword-intent.local { border-color: rgba(45,212,191,.34); background: rgba(45,212,191,.09); }
+    .keyword-intent.ad-risk { border-color: rgba(255,77,109,.28); background: rgba(255,77,109,.08); }
     .keyword-intent .tiny-btn { width: fit-content; min-height: 28px; padding: 5px 9px; }
     .intent-branches { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
     .intent-branch {
@@ -905,7 +911,7 @@
     }
     .welcome-summary {
       border: 1px solid rgba(14,165,233,.18);
-      border-radius: 14px;
+      border-radius: 12px;
       background: linear-gradient(135deg, rgba(14,165,233,.09), rgba(53,211,153,.08));
       color: #16362a;
       padding: 14px 15px;
@@ -1266,7 +1272,7 @@
       .quality-strip { grid-template-columns: 1fr 1fr; }
       .result-toolbar { grid-template-columns: 1fr; }
       .result-kpis { grid-template-columns: 1fr 1fr; }
-      .golden-row { grid-template-columns: 48px minmax(0, 1fr); }
+      .golden-row { grid-template-columns: 1fr; }
       .golden-row .grade { justify-self: start; }
       .golden-actions { grid-column: 1 / -1; justify-content: flex-start; }
       .sidebar { grid-template-columns: 1fr 1fr; }
@@ -2099,10 +2105,20 @@
       const keyword = compactKeywordText(row && row.keyword);
       const source = compactKeywordText((row && row.source) || '') + ' ' + compactKeywordText((row && row.intent) || '') + ' ' + compactKeywordText((row && row.category) || '');
       if (/(commerce|shopping|electronics|product|store|buying|sellable)/i.test(source)) return true;
+      if (/(로봇청소기|청소기|공기청정기|제습기|에어컨|냉장고|노트북|아이폰|갤럭시|마사지기|가습기|모니터|제품|상품)/.test(keyword) && !/(지원금|장려금|수당|정책|신청)/.test(keyword)) return true;
       if (/(구매|가격|최저가|할인|추천|순위|후기|비교|리뷰|쿠폰|배송|스펙|브랜드|제품|상품|가전|전자|청소기|로봇청소기|공기청정기|제습기|에어컨|냉장고|세탁기|노트북|태블릿|이어폰|마사지기|영양제|유산균|화장품|선크림|샴푸|운동화|가방|매트리스|캠핑|기저귀|카시트)/.test(keyword)) {
         return !/(지원금|급여|수당|정책|신청|대상|지급일|정부|복지|채용|인턴|장려금)/.test(keyword);
       }
       return /(상품|제품|구매 전환|쇼핑커넥트|쇼핑)/.test(text);
+    }
+    function isAdDominatedKeywordRow(row) {
+      const text = keywordRowSearchText(row);
+      const keyword = normalizeText(row && row.keyword);
+      if (!keyword) return false;
+      const commercialCore = /(렌터카|렌트카|렌터|렌트|호텔|숙소|펜션|항공권|보험|대출|카드|성형|이사|인터넷가입|정수기|에어컨설치|예약|가격비교|최저가|할인)/.test(text);
+      const directAction = /(예약|사이트|가격|비교|추천|견적|보험|할인|최저가|구매|신청)/.test(text);
+      const infoEscape = /(방법|팁|시기|주의사항|후기|준비물|보험 차이|완전자차|취소 규정)/.test(text);
+      return commercialCore && directAction && !infoEscape;
     }
     function isAmbiguousCompositeKeyword(row) {
       const raw = normalizeText(row && row.keyword);
@@ -2117,7 +2133,7 @@
       return markerCount >= 3 && (hasNoReadableSpacing || keyword.length >= 17);
     }
     function shouldHideFromLiveGoldenBoard(row) {
-      return isAmbiguousCompositeKeyword(row) || isShoppingIntentKeywordRow(row);
+      return isAmbiguousCompositeKeyword(row) || isShoppingIntentKeywordRow(row) || isAdDominatedKeywordRow(row);
     }
     function shouldHideFromMindmap(row) {
       return isAmbiguousCompositeKeyword(row) || isShoppingIntentKeywordRow(row);
@@ -2144,6 +2160,7 @@
       if (!keyword) return '';
       const compact = compactKeywordText(keyword);
       const knownTopics = [
+        '제주 렌터카 예약', '제주 렌터카', '렌터카 예약', '제주 여행', '제주 항공권', '제주 숙소',
         '근로장려금', '자녀장려금', '주휴수당', '최저임금', '문화누리카드', '청년인턴',
         '청년도약계좌', '국민내일배움카드', '실업급여', '기초연금', '육아휴직급여',
         '홍명보 감독', '대한축구협회', '월드컵', 'KBO 올스타전',
@@ -2176,6 +2193,74 @@
         if (text.indexOf(pair[0]) >= 0) modifiers.push(pair[1]);
       });
       return uniqueIntentBranches(modifiers, 5);
+    }
+    function currentSeasonLabel() {
+      const month = new Date().getMonth() + 1;
+      if (month >= 7 && month <= 8) return '여름휴가/방학 성수기';
+      if (month >= 9 && month <= 10) return '가을 여행 성수기';
+      if (month === 12 || month <= 2) return '겨울 방학·연말 여행 수요';
+      if (month >= 3 && month <= 5) return '봄 여행·연휴 수요';
+      return '여행 예약 수요';
+    }
+    function naverAutocompleteLikeBranches(seed) {
+      const clean = normalizeText(seed);
+      if (!clean) return [];
+      const compact = compactKeywordText(clean);
+      const out = [];
+      const push = function(value) {
+        const text = normalizeText(value);
+        if (text) out.push(text);
+      };
+      if (/제주/.test(clean) && /(렌터카|렌트카|렌터|렌트)/.test(clean)) {
+        const base = clean.indexOf('예약') >= 0 ? clean : '제주 렌터카 예약';
+        push(base);
+        push(base + ' 사이트');
+        push(base + ' 방법');
+        push(base + ' 팁');
+        push(base + ' 시기');
+        push(base + ' 비교');
+        push(base + ' 주의사항');
+        push('제주 렌터카 완전자차 보험');
+        push('제주공항 렌터카 예약');
+        return uniqueIntentBranches(out, 10);
+      }
+      if (/(렌터카|렌트카|숙소|호텔|펜션|항공권|여행|맛집|축제)/.test(clean)) {
+        ['사이트', '방법', '팁', '시기', '비교', '후기', '주의사항'].forEach(function(suffix) { push(clean + ' ' + suffix); });
+      } else if (/(지원금|장려금|수당|급여|환급|신청|정책|근로장려금|최저임금)/.test(clean)) {
+        const base = clean.replace(/s+(방법|대상|지급일|금액|서류|신청)$/g, '');
+        ['신청 방법', '대상', '지급일', '금액', '필요 서류', '조회', '주의사항'].forEach(function(suffix) { push(base + ' ' + suffix); });
+      } else if (/(감독|축구|야구|월드컵|KBO|선수|경기|순위|일정)/i.test(clean)) {
+        ['이유', '후보', '반응', '일정', '순위', '전망', '논란 정리'].forEach(function(suffix) { push(clean + ' ' + suffix); });
+      } else if (compact.length >= 4) {
+        ['이유', '방법', '비교', '후기', '주의사항'].forEach(function(suffix) { push(clean + ' ' + suffix); });
+      }
+      return uniqueIntentBranches(out, 10);
+    }
+    function localExpansionBranches(topic, keyword) {
+      const base = normalizeText(topic || keyword);
+      const auto = naverAutocompleteLikeBranches(base);
+      if (auto.length) return auto;
+      return uniqueIntentBranches([base + ' 예약 방법', base + ' 가격 비교', base + ' 후기', base + ' 주의사항', base + ' 추천 시기'], 6);
+    }
+    function localSearchWhy(topic, keyword) {
+      const text = normalizeText((topic || '') + ' ' + (keyword || ''));
+      if (/제주/.test(text) && /(렌터카|렌트카|렌터|렌트)/.test(text)) {
+        return '지금은 ' + currentSeasonLabel() + '라 제주 항공권·숙소를 확정한 사람들이 공항 이동, 완전자차 보험, 예약 가능 차량, 가격 비교, 픽업 시간을 확인하려고 검색합니다. 단순 예약어는 광고가 강하므로 블로그 글은 보험·주의사항·예약 시기 같은 정보형 롱테일로 잡아야 합니다.';
+      }
+      if (/(숙소|호텔|펜션|항공권)/.test(text)) {
+        return '여행 일정이 가까워질수록 가격, 위치, 취소 규정, 실제 후기를 비교하려는 수요가 붙습니다. 예약 버튼으로 바로 가기 전 확인해야 할 기준을 정리한 글이 체류 시간을 만들기 좋습니다.';
+      }
+      if (/(맛집|축제|여행)/.test(text)) {
+        return '방문 전 동선, 운영 시간, 예약 가능 여부, 실제 후기처럼 현장에서 실패하지 않기 위한 확인 검색이 붙습니다. 최신 일정과 이동 동선을 같이 보여줘야 의미가 있습니다.';
+      }
+      return '지역 키워드는 지금 방문하려는 사람이 비용, 일정, 위치, 실패 가능성을 줄이려고 검색합니다. 단어를 붙이기보다 실제 이동·예약·비교 기준을 중심으로 확장해야 합니다.';
+    }
+    function localCombinationIntent(topic, keyword) {
+      const text = normalizeText((topic || '') + ' ' + (keyword || ''));
+      if (/제주/.test(text) && /(렌터카|렌트카|렌터|렌트)/.test(text)) {
+        return '조합 의도는 예약 사이트를 나열하는 것이 아니라 성수기 가격 차이, 완전자차 보험, 공항 픽업, 차량 등급, 예약 취소 규정을 비교해 검색자가 결정을 끝내게 만드는 것입니다.';
+      }
+      return '조합 의도는 방문·예약 전에 확인해야 할 비용, 위치, 시간, 후기를 한 번에 비교하게 만드는 것입니다. 광고형 키워드는 피하고 정보형 확인 키워드로 재확장하세요.';
     }
     function policyExpansionBranches(topic, keyword) {
       const base = topic || keyword;
@@ -2216,6 +2301,10 @@
     }
     function keywordDomain(value) {
       const text = normalizeText(value).toLowerCase();
+      if (/(제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|호텔|펜션|항공권|렌터카|렌트카|맛집|축제|문화누리카드s*사용처)/.test(text)) return 'local';
+      if (/(지원금|장려금|수당|급여|환급|신청|정책|근로장려금|최저임금|주휴수당|문화누리카드|청년인턴|청년청약|실업급여)/.test(text)) return 'policy';
+      if (/(감독|축구|야구|월드컵|kbo|선수|경기|순위|일정|홍명보|김민재|이강인|이재성)/i.test(text)) return 'sports';
+      if (/(로봇청소기|청소기|공기청정기|제습기|에어컨|냉장고|노트북|아이폰|갤럭시|가격|추천|후기|구매|할인|최저가|제품|상품)/.test(text) && !/(지원금|장려금|수당|정책)/.test(text)) return 'shopping';
       if (/(지원금|장려금|급여|수당|정책|복지|신청|대상|지급일|정부|채용|인턴|연금|보험|세금|환급|최저임금|주휴수당|문화누리카드|청년도약계좌|내일배움카드)/.test(text)) return 'policy';
       if (/(월드컵|축구|야구|kbo|감독|선수|경기|순위|일정|하이라이트|축구협회|대표팀|이강인|김민재|이재성|손흥민|홍명보)/i.test(text)) return 'sports';
       if (/(구매|가격|최저가|할인|추천|순위|후기|비교|리뷰|쿠폰|배송|스펙|브랜드|제품|상품|가전|전자|청소기|로봇청소기|공기청정기|제습기|에어컨|냉장고|세탁기|노트북|태블릿|이어폰|마사지기|영양제|유산균|화장품|선크림|샴푸|운동화|가방|매트리스|캠핑|기저귀|카시트)/.test(text)) return 'shopping';
@@ -2316,6 +2405,16 @@
           branches: issueExpansionBranches(topic, keyword),
         };
       }
+      if (keywordDomain(keyword + ' ' + text) === 'local') {
+        return {
+          kind: 'local',
+          label: '여행/지역 실수요',
+          meaning: localSearchWhy(topic, keyword),
+          action: localCombinationIntent(topic, keyword),
+          route: '자동완성 롱테일',
+          branches: localExpansionBranches(topic, keyword),
+        };
+      }
       return null;
     }
     function keywordIntentGuide(row) {
@@ -2330,6 +2429,16 @@
           action: '핵심 주제 1개와 확인 의도 1개만 남긴 뒤 마인드맵으로 다시 확장하세요. 여러 의도를 한 제목에 다 넣으면 체류와 클릭이 동시에 약해집니다.',
           route: '검증 후 사용',
           branches: uniqueIntentBranches([topic + ' 방법', topic + ' 대상', topic + ' 지급일', topic + ' 후기', topic + ' 비교'], 5),
+        };
+      }
+      if (isAdDominatedKeywordRow(row)) {
+        return {
+          kind: 'ad-risk',
+          label: '광고 장악 주의',
+          meaning: localSearchWhy(topic, keyword),
+          action: '이 키워드는 예약·가격·최저가처럼 상단 광고와 예약 플랫폼이 클릭을 가져가기 쉬운 형태입니다. 그대로 쓰기보다 보험 차이, 예약 시기, 취소 규정, 공항 픽업처럼 광고가 덜한 정보형 자동완성 가지로 재확장하세요.',
+          route: '정보형 재확장',
+          branches: localExpansionBranches(topic, keyword),
         };
       }
       if (isShoppingIntentKeywordRow(row)) {
@@ -2504,6 +2613,9 @@
       const compact = clean.replace(/\s+/g, '');
       const lower = clean.toLowerCase();
       const hints = [clean, compact];
+      naverAutocompleteLikeBranches(clean).forEach(function(branch) {
+        hints.push(branch);
+      });
       const issueSuffixes = ['이유', '원인', '전망', '일정', '후보', '논란', '정리', '반응', '경우의수', '다음일정', '핵심쟁점'];
       const policySuffixes = ['신청', '신청방법', '대상', '조건', '금액', '지급일', '필요서류', '조회', '계산기', '변경사항', '마감'];
       const shoppingSuffixes = ['추천', '후기', '가격', '비교', '순위', '단점', '장점', '사용법', '최저가', '가성비'];
@@ -3586,6 +3698,15 @@
           nextAction: '쇼핑커넥트에서 제품 후보, 구매 포인트, 제목 초안을 확인하세요.',
         };
       }
+      if (isAdDominatedKeywordRow(row)) {
+        return {
+          label: '광고 장악 제외',
+          verdict: 'exclude',
+          score: browserLocalKeywordQualityScore(row && row.totalSearchVolume, row && row.documentCount),
+          reasons: ['상단이 광고·예약 플랫폼에 장악되기 쉬운 구매형 SERP라 블로그 외부유입 수익 키워드로는 우선순위를 낮춥니다.'],
+          nextAction: '마인드맵에서 보험, 주의사항, 예약 시기, 비교 기준처럼 광고가 덜한 정보형 롱테일로 재확장하세요.',
+        };
+      }
       if (isMeasuredDemandTooCrowded(row)) {
         return {
           label: '제외 검토',
@@ -3619,6 +3740,7 @@
     }
     function displayGradeForRow(row) {
       if (isAmbiguousCompositeKeyword(row)) return 'C';
+      if (isAdDominatedKeywordRow(row)) return 'C';
       return isMeasuredDemandTooCrowded(row) ? 'C' : ((row && row.grade) || '-');
     }
     function publishDecisionReason(decision) {
@@ -5579,7 +5701,10 @@
     function renderGoldenQuality(items, exact, boardCount, lockedCount) {
       const rows = Array.isArray(items) ? items : [];
       const measured = rows.filter(function(item) { return item.isMeasured !== false && (item.totalSearchVolume != null || item.documentCount != null || exact); }).length;
-      const topTier = rows.filter(function(item) { return item.grade === 'SSS' || item.grade === 'SS'; }).length;
+      const topTier = rows.filter(function(item) {
+        const grade = displayGradeForRow(item);
+        return grade === 'SSS' || grade === 'SS';
+      }).length;
       const profileLeak = rows.filter(function(item) { return isThinProfileKeywordText(item.keyword || ''); }).length;
       const categories = new Set(rows.map(function(item) { return normalizeText(item.category || item.source || 'unknown'); }).filter(Boolean));
       const visible = rows.length;
@@ -5610,7 +5735,7 @@
         return;
       }
       qs('goldenBoardList').innerHTML = rows.map(function(item) {
-        const grade = escapeHtml(item.grade || '');
+        const grade = escapeHtml(displayGradeForRow(item) || '');
         const searchVolume = exact ? fmt(item.totalSearchVolume) : escapeHtml(item.publicSearchVolumeLabel || '-');
         const documents = exact ? fmt(item.documentCount) : escapeHtml(item.publicDocumentCountLabel || '-');
         const ratio = exact ? fmt(item.goldenRatio) : '🔒';
@@ -5619,21 +5744,25 @@
           : escapeHtml(item.publicReason || '실측 후보');
         const cat = escapeHtml(item.category || item.categoryName || '');
         return '<article class="golden-row">'
+          + '<div class="gk-main">'
           + '<div class="gk-top">'
           +   '<span class="grade ' + grade + '">' + (grade || '-') + '</span>'
           +   (cat ? '<span class="gk-cat">' + cat + '</span>' : '')
-          +   '<span class="gk-rank">#' + escapeHtml(item.rank || '-') + '</span>'
+          +   '<span class="gk-rank">' + escapeHtml(item.rank || '-') + '</span>'
           + '</div>'
           + '<div class="gk-kw">' + escapeHtml(item.keyword || '-') + '</div>'
           + '<div class="gk-sub">' + sub + '</div>'
-          + keywordIntentGuideHtml(item)
+          + publishDecisionInline(item)
+          + '</div>'
+          + '<div class="gk-why">' + keywordIntentGuideHtml(item) + '</div>'
+          + '<div class="gk-side">'
           + '<div class="gk-metrics">'
           +   '<div class="gk-m"><div class="gk-ml">검색량</div><div class="gk-mv">' + searchVolume + '</div></div>'
           +   '<div class="gk-m gk-hot"><div class="gk-ml">문서수</div><div class="gk-mv">' + documents + '</div></div>'
           +   '<div class="gk-m gk-hot"><div class="gk-ml">비율</div><div class="gk-mv">' + ratio + '</div></div>'
           + '</div>'
-          + publishDecisionInline(item)
           + '<div class="golden-actions">' + keywordActionHtml(item.keyword || '') + '</div>'
+          + '</div>'
           + '</article>';
       }).join('');
     }
