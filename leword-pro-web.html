@@ -5302,6 +5302,21 @@
       } catch {}
       renderSession();
     }
+    async function validateRestoredSession() {
+      if (!hasActiveProSession()) return true;
+      try {
+        await apiGet(endpoints.apiStatus, true, 8000);
+        return true;
+      } catch (err) {
+        const message = err && err.message ? err.message : '';
+        if (isAuthErrorMessage(message)) {
+          promptProRelogin('Pro 세션이 만료되었습니다. 다시 로그인하면 전체 황금키워드 보드가 표시됩니다.');
+          return false;
+        }
+        log('Pro 세션 검증 보류: ' + (message || 'unknown'));
+        return true;
+      }
+    }
     function renderSession() {
       if (session && session.userId) rememberProLoginUserId(session.userId);
       const active = hasActiveProSession();
@@ -7305,6 +7320,8 @@
         } catch (authPublicErr) {
           log('LIVE golden authenticated public fallback failed: ' + (authPublicErr && authPublicErr.message ? authPublicErr.message : 'unknown'));
         }
+        promptProRelogin('Pro 세션 인증을 다시 확인해야 합니다. 다시 로그인하면 잠긴 120개 보드가 바로 열립니다.');
+        return;
       }
       try {
         const payload = await apiGet(endpoints.publicLiveGolden, false);
@@ -8417,7 +8434,9 @@
     renderCommerceDashboardLocked();
     setActiveView(initialViewId(), { load: false });
     loadHealth();
-    loadGoldenBoard();
+    validateRestoredSession().then(function(valid) {
+      if (valid) loadGoldenBoard();
+    });
     loadDownloads().catch(function() {});
     loadCommerceCatalog().catch(function(err) { log('구매 카탈로그 초기화 실패: ' + err.message); });
     loadCommerceDashboard(selectedCommercePeriod).catch(function(err) { log('매출 대시보드 초기화 실패: ' + err.message); });
@@ -8427,7 +8446,11 @@
     });
     sendCommerceAnalytics('pageview', 'pageview', { view: activeViewId }).catch(function() {});
     setInterval(loadHealth, 30000);
-    setInterval(loadGoldenBoard, 60000);
+    setInterval(function() {
+      validateRestoredSession().then(function(valid) {
+        if (valid) loadGoldenBoard();
+      });
+    }, 60000);
   </script>
 </body>
 </html>
