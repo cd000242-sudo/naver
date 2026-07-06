@@ -7229,7 +7229,7 @@
     }
     function normalizeProGoldenSnapshot(payload) {
       if (!payload || typeof payload !== 'object') return null;
-      const snapshot = payload.snapshot || payload.result || payload;
+      const snapshot = payload.proSnapshot || payload.snapshot || payload.result || payload;
       if (!snapshot || typeof snapshot !== 'object') return null;
       if (Array.isArray(snapshot.board)) return snapshot;
       if (Array.isArray(snapshot.items)) {
@@ -7246,8 +7246,17 @@
       }
       return null;
     }
+    function proGoldenBoardItems(snapshot) {
+      const raw = (snapshot && (snapshot.board || snapshot.items || snapshot.keywords || snapshot.publicPreview)) || [];
+      const target = Number(snapshot && snapshot.boardTarget) || 120;
+      const strict = filterDisplayGoldenItems(raw);
+      if (strict.length >= Math.min(20, raw.length) || strict.length >= target || strict.length === raw.length) {
+        return strict.slice(0, target);
+      }
+      return balanceGoldenDisplayItems(filterFreshGoldenItems(raw)).slice(0, target);
+    }
     function renderProGoldenBoard(snapshot) {
-      const items = filterDisplayGoldenItems((snapshot && (snapshot.board || snapshot.items || snapshot.keywords || snapshot.publicPreview)) || []);
+      const items = proGoldenBoardItems(snapshot);
       setGoldenSummary(
         snapshot.boardCount || items.length,
         snapshot.boardTarget || 120,
@@ -7282,6 +7291,19 @@
           } else {
             promptProRelogin(message || 'Pro 보드 권한을 확인할 수 없습니다. 다시 로그인하세요.');
           }
+        }
+      }
+      if (proSnapshotFallback && hasActiveProSession()) {
+        try {
+          const publicPayload = await apiGet(endpoints.publicLiveGolden, true);
+          const publicSnapshot = normalizeProGoldenSnapshot(publicPayload);
+          if (publicSnapshot) {
+            renderProGoldenBoard(publicSnapshot);
+            log('LIVE golden Pro board refreshed through authenticated public route: ' + ((publicSnapshot.board || []).length) + ' items');
+            return;
+          }
+        } catch (authPublicErr) {
+          log('LIVE golden authenticated public fallback failed: ' + (authPublicErr && authPublicErr.message ? authPublicErr.message : 'unknown'));
         }
       }
       try {
