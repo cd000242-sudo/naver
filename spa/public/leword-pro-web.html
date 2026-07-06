@@ -291,7 +291,7 @@
     .golden-list { display: flex; flex-direction: column; gap: 10px; }
     .golden-row {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(230px, 340px);
+      grid-template-columns: minmax(0, 1fr) minmax(230px, .42fr);
       gap: 12px;
       align-items: start;
       border: 1px solid var(--line);
@@ -304,11 +304,11 @@
     .golden-row:hover { transform: translateY(-1px); box-shadow: var(--shadow); border-color: var(--green); }
     .gk-main,
     .gk-side { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
-    .gk-why { min-width: 0; margin-top: 4px; }
+    .gk-why { grid-column: 1 / -1; min-width: 0; }
     .gk-top { display: flex; align-items: center; gap: 7px; }
     .gk-cat { font-size: 11px; font-weight: 700; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); padding: 3px 9px; border-radius: 7px; }
     .gk-rank { margin-left: auto; font-size: 12px; font-weight: 1000; color: var(--green); }
-    .gk-kw { font-size: 21px; font-weight: 1000; letter-spacing: 0; color: var(--text); overflow-wrap: anywhere; line-height: 1.26; }
+    .gk-kw { font-size: 18px; font-weight: 800; letter-spacing: -.3px; color: var(--text); overflow-wrap: anywhere; }
     .gk-sub { font-size: 12px; color: var(--muted2); margin-top: -4px; line-height: 1.4; }
     .keyword-intent {
       display: grid;
@@ -330,6 +330,139 @@
     .keyword-intent.local { border-color: rgba(45,212,191,.34); background: rgba(45,212,191,.09); }
     .keyword-intent.ad-risk { border-color: rgba(255,77,109,.28); background: rgba(255,77,109,.08); }
     .keyword-intent .tiny-btn { width: fit-content; min-height: 28px; padding: 5px 9px; }
+    .keyword-main-cell { display: grid; gap: 7px; min-width: 0; }
+    .keyword-main-cell strong { overflow-wrap: anywhere; }
+    .keyword-mini-branches { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+    .keyword-mini-branch {
+      border: 1px solid rgba(14,165,233,.24);
+      border-radius: 999px;
+      background: #F0F9FF;
+      color: #075985;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    .keyword-analysis-table-cell { padding: 0 !important; background: transparent !important; }
+    .keyword-analysis-stack { display: grid; gap: 14px; }
+    .keyword-analysis-card {
+      border: 1px solid rgba(16,185,129,.28);
+      border-radius: 8px;
+      background: #FFFFFF;
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+      box-shadow: 0 16px 38px rgba(15,42,29,.06);
+    }
+    .keyword-analysis-head {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .keyword-analysis-title {
+      color: var(--text);
+      font-size: 20px;
+      font-weight: 1000;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+    .keyword-analysis-meta { margin-top: 4px; color: var(--muted); font-size: 13px; }
+    .keyword-analysis-guide {
+      border: 1px solid rgba(14,165,233,.22);
+      border-radius: 8px;
+      background: #EFF8FF;
+      color: #17324D;
+      padding: 13px;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .keyword-analysis-guide strong {
+      display: block;
+      color: #0369A1;
+      font-size: 14px;
+      font-weight: 1000;
+      margin-bottom: 4px;
+    }
+    .keyword-analysis-related { display: grid; gap: 8px; }
+    .keyword-analysis-related strong { color: #065F46; font-size: 14px; }
+    .keyword-analysis-related-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .keyword-analysis-chip {
+      border: 1px solid rgba(14,165,233,.28);
+      border-radius: 999px;
+      background: #F0F9FF;
+      color: #075985;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 1000;
+      line-height: 1.2;
+    }
+    .keyword-analysis-metrics {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .keyword-analysis-metric {
+      border: 1px solid var(--line-soft);
+      border-radius: 8px;
+      background: #F6FBF7;
+      padding: 10px;
+      min-height: 70px;
+    }
+    .keyword-analysis-metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .keyword-analysis-metric strong {
+      display: block;
+      margin-top: 5px;
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 1000;
+      overflow-wrap: anywhere;
+    }
+    .keyword-analysis-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+    .keyword-detail-list { display: grid; gap: 10px; }
+    .keyword-detail-card {
+      border: 1px solid rgba(14,165,233,.22);
+      border-radius: 8px;
+      background: #FFFFFF;
+      padding: 12px;
+    }
+    .keyword-detail-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: start;
+      margin-bottom: 8px;
+    }
+    .keyword-detail-head strong { color: var(--text); font-size: 16px; overflow-wrap: anywhere; }
+    .keyword-detail-meta { color: var(--muted); font-size: 12px; font-weight: 800; }
+    .keyword-detail-card .keyword-intent { margin-top: 8px; }
+    .keyword-expansion-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--line-soft);
+      font-size: 12px;
+    }
+    .keyword-expansion-table th,
+    .keyword-expansion-table td {
+      border-bottom: 1px solid var(--line-soft);
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+      color: var(--text);
+    }
+    .keyword-expansion-table th { background: #F0F9FF; color: #075985; font-weight: 1000; }
+    .keyword-expansion-table tr:last-child td { border-bottom: 0; }
+    .keyword-expansion-table button { min-height: 28px; }
     .intent-branches { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
     .intent-branch {
       border: 1px solid rgba(14,165,233,.26);
@@ -341,44 +474,6 @@
       font-weight: 900;
       line-height: 1.2;
     }
-    .keyword-analysis-table-cell { padding: 0 !important; background: #F7FCFA; }
-    .keyword-analysis-stack { display: grid; gap: 10px; padding: 12px; }
-    .keyword-analysis-card {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
-      gap: 14px;
-      border: 1px solid rgba(20, 184, 166, .22);
-      border-radius: 10px;
-      background: #FFFFFF;
-      padding: 16px;
-      box-shadow: var(--shadow-soft);
-    }
-    .keyword-analysis-head { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
-    .keyword-analysis-title { margin: 0; color: var(--text); font-size: 22px; line-height: 1.25; font-weight: 1000; overflow-wrap: anywhere; }
-    .keyword-analysis-meta { color: var(--muted); font-size: 12px; font-weight: 800; }
-    .keyword-analysis-guide { margin-top: 10px; }
-    .keyword-analysis-guide .keyword-intent { max-width: none; font-size: 13px; line-height: 1.58; }
-    .keyword-analysis-guide .keyword-intent strong { font-size: 13px; }
-    .keyword-analysis-related { margin-top: 10px; display: grid; gap: 6px; }
-    .keyword-analysis-related strong { color: #075985; font-size: 13px; }
-    .keyword-analysis-related-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .keyword-analysis-chip {
-      border: 1px solid rgba(14,165,233,.28);
-      border-radius: 999px;
-      background: rgba(14,165,233,.08);
-      color: #0369a1;
-      padding: 6px 10px;
-      font-size: 12px;
-      font-weight: 1000;
-      line-height: 1.2;
-    }
-    .keyword-analysis-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; align-content: start; }
-    .keyword-analysis-metric { border: 1px solid var(--line); border-radius: 9px; background: var(--surface-2); padding: 10px; min-height: 62px; }
-    .keyword-analysis-metric strong { display: block; color: var(--text); font-size: 17px; line-height: 1.2; }
-    .keyword-analysis-metric span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; font-weight: 800; }
-    .keyword-analysis-actions { grid-column: 1 / -1; margin-top: 2px; }
-    .keyword-analysis-actions .result-actions { gap: 8px; }
-    .keyword-analysis-actions .tiny-btn { min-height: 36px; padding: 0 13px; font-size: 13px; }
     .gk-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .gk-m { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 8px; text-align: center; }
     .gk-m.gk-hot { background: rgba(53,211,153,.10); border-color: rgba(53,211,153,.28); }
@@ -388,8 +483,7 @@
     .rank { color: var(--gold); font-weight: 1000; }
     .golden-main strong { display: block; font-size: 15px; overflow-wrap: anywhere; }
     .golden-main span { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; line-height: 1.45; }
-    .golden-actions { grid-column: 1 / -1; display: flex; gap: 8px; justify-content: flex-start; flex-wrap: wrap; padding-top: 2px; }
-    .golden-actions .tiny-btn { min-height: 36px; padding: 0 13px; font-size: 13px; }
+    .golden-actions { display: flex; gap: 6px; justify-content: flex-end; flex-wrap: wrap; }
     .tiny-btn {
       min-height: 32px;
       border: 1px solid var(--line);
@@ -1357,7 +1451,7 @@
       .feature-grid, .ops-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 820px) {
-      .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist, .admin-ai-provider-grid, .agent-window-options, .admin-content-tools, .api-issue-grid, .mindmap-view, .mindmap-branches, .mindmap-row, .keyword-analysis-card, .keyword-analysis-metrics { grid-template-columns: 1fr; }
+      .metrics, .workbench, .lookup-row, .golden-stats, .ops-grid, .tool-tabs, .tool-form, .tool-detail-grid, .catalog-strip, .catalog-list, .download-grid, .settings-grid, .settings-checklist, .admin-ai-provider-grid, .agent-window-options, .admin-content-tools, .api-issue-grid, .mindmap-view, .mindmap-branches, .mindmap-row, .keyword-analysis-metrics { grid-template-columns: 1fr; }
       .quick-feature-dock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .quality-strip { grid-template-columns: 1fr 1fr; }
       .result-toolbar { grid-template-columns: 1fr; }
@@ -1457,7 +1551,6 @@
             </select>
             <button class="btn primary" type="submit">조회하기</button>
           </form>
-          <div class="tool-result-panel" id="lookupInsightPanel" hidden></div>
           <div class="table-wrap">
             <table>
               <thead>
@@ -1481,6 +1574,7 @@
               </tbody>
             </table>
           </div>
+          <div class="tool-result-panel" id="lookupInsightPanel" hidden></div>
         </section>
 
         <section class="panel main-view" id="features" data-view="features">
@@ -1979,6 +2073,7 @@
       health: apiUrl('/health'),
       session: apiUrl('/v1/web/session'),
       adminSettingsUnlock: apiUrl('/v1/admin/settings/unlock'),
+      adminAiWorkerStatus: apiUrl('/v1/admin/ai-worker/status'),
       adminSiteContent: apiUrl('/v1/admin/site-content'),
       adminCommerceDashboard: apiUrl('/v1/admin/commerce/dashboard'),
       publicSiteContent: apiUrl('/v1/public/site-content'),
@@ -2186,16 +2281,6 @@
         return isFreshGoldenKeywordText(item && item.keyword);
       });
     }
-    function isArticleTitleLikeKeyword(value) {
-      const raw = normalizeText(value);
-      const compact = compactKeywordText(raw);
-      if (!raw) return false;
-      if (/(보도참고자료|보도자료|브리핑|해명자료|설명자료|첨부파일|공고문|입장문)/.test(raw)) return true;
-      if (/(마감\s*결과|결과\s*\d{1,2}\.\d{1,2}|신청\s*·?\s*지급\s*마감)/.test(raw)) return true;
-      if (/(고유가피해지원금신청지급마감결과|피해지원금신청지급마감결과)/.test(compact)) return true;
-      const sentenceMarks = (raw.match(/[,.·]|신청|지급|마감|결과|발표|안내/g) || []).length;
-      return raw.length >= 24 && sentenceMarks >= 3 && !/(방법|대상|지급일|잔액|사용처|가맹점|온라인|후기|비교|주의사항|계산기|예매|후보|일정)$/.test(raw);
-    }
     function keywordResultRows(result) {
       return (Array.isArray(result && result.keywords) ? result.keywords : []).filter(function(item) {
         return item && normalizeText(item.keyword) && !isArticleTitleLikeKeyword(item.keyword);
@@ -2203,6 +2288,20 @@
     }
     function compactKeywordText(value) {
       return normalizeText(value).toLowerCase().replace(/\s+/g, '');
+    }
+    function isArticleTitleLikeKeyword(value) {
+      const text = normalizeText(value);
+      const compact = compactKeywordText(text);
+      if (!text || !compact) return true;
+      if (/(보도참고자료|보도자료|브리핑|해명자료|설명자료|첨부파일|공고문|입장문)/u.test(text)) return true;
+      if (/(마감\s*결과|결과\s*\d{1,2}\.\d{1,2}|고유가\s*피해지원금\s*신청.*지급\s*마감)/u.test(text)) return true;
+      if (/고유가피해지원금신청지급마감결과/u.test(compact)) return true;
+      const wordCount = (text.match(/\s+/g) || []).length + 1;
+      const hasUsefulModifier = /(방법|대상|자격|조건|지급일|잔액|사용처|가맹점|온라인|조회|신청|예약|예매|비교|후기|가격|보험|일정|후보|전망|계산기|마감일|서류|주의사항)/u.test(text);
+      if (/[.!?。]$/u.test(text) && text.length > 16) return true;
+      if (wordCount >= 6 && !hasUsefulModifier) return true;
+      if (compact.length > 34 && !hasUsefulModifier) return true;
+      return false;
     }
     function keywordRowSearchText(row) {
       return [
@@ -2234,15 +2333,60 @@
       const infoEscape = /(방법|팁|시기|주의사항|후기|준비물|보험 차이|완전자차|취소 규정)/.test(text);
       return commercialCore && directAction && !infoEscape;
     }
+    function hasTrafficNeedIntent(row) {
+      const text = keywordRowSearchText(row);
+      const keyword = normalizeText(row && row.keyword);
+      return /(신청|대상|자격|조건|지급일|입금일|조회|계산기|서류|마감|환급|사용처|예약 방법|예약 시기|취소|보험|완전자차|비교|후기|주의사항|예매|라인업|중계|일정|후보|전망|전말|이유|논란|반응|정리|방법|가격비교|실수령액|위반|신고|공식 확인|변경사항)/.test(text + ' ' + keyword);
+    }
+    function hasSearchDemandEdge(row) {
+      const total = rowNumber(row, 'totalSearchVolume');
+      const docs = rowNumber(row, 'documentCount');
+      const ratio = rowGoldenRatio(row);
+      if (total === null) return false;
+      if (docs === null) return total >= 500;
+      if (docs <= 0) return total >= 300;
+      if (total >= 1000 && docs <= 12000 && ratio !== null && ratio >= 1.5) return true;
+      if (total >= 300 && docs <= 5000 && ratio !== null && ratio >= 1.2) return true;
+      return total >= 100 && docs <= 1000 && ratio !== null && ratio >= 1;
+    }
+    function isCrossDomainNonsenseKeyword(rowOrText) {
+      const text = typeof rowOrText === 'string' ? normalizeText(rowOrText) : keywordRowSearchText(rowOrText);
+      if (!text) return false;
+      const compact = compactKeywordText(text);
+      const signals = keywordDomainSignals(text);
+      const culturalLocal = /문화누리카드/.test(text) && signals.local;
+      const travelPurchase = signals.local && /(렌터|렌트|숙소|호텔|펜션|항공권|예약|가격|비교|후기|취소|보험)/.test(text);
+      if (/(최저임금|주휴수당|근로장려금|자녀장려금|지원금|수당|급여|정책|복지).*(감독|감독후보|축구|월드컵|kbo|야구|선수)|(?:감독|축구|월드컵|kbo|야구|선수).*(최저임금|주휴수당|근로장려금|지원금|수당|급여|정책)/i.test(compact)) return true;
+      if (signals.policy && signals.sports) return true;
+      if (signals.policy && signals.shopping && !culturalLocal) return true;
+      if (signals.local && signals.sports) return true;
+      if (signals.shopping && signals.sports) return true;
+      if (signals.local && signals.shopping && !travelPurchase) return true;
+      return false;
+    }
+    function isLowTrafficCaptureKeyword(row) {
+      if (!row || !normalizeText(row.keyword)) return true;
+      const keyword = normalizeText(row.keyword);
+      if (isCrossDomainNonsenseKeyword(row)) return true;
+      if (/(프로필|몇부작|출연진|인물관계도|공식영상|로또|당첨번호|등급컷|시청률|재방송|다시보기|근황)/.test(keyword)) return true;
+      if (isAdDominatedKeywordRow(row)) return true;
+      const decision = row && row.aiJudge;
+      if (decision && decision.verdict === 'exclude') return true;
+      if ((row.grade === 'SSS' || row.grade === 'SS') && ((decision && decision.verdict === 'publish') || hasTrafficNeedIntent(row))) return false;
+      const measuredCrowded = isMeasuredDemandTooCrowded(row);
+      if (measuredCrowded && !hasTrafficNeedIntent(row)) return true;
+      if (!hasTrafficNeedIntent(row) && !hasSearchDemandEdge(row)) return true;
+      return false;
+    }
     function liveNeedScore(row) {
       if (!row) return 0;
-      if (isAmbiguousCompositeKeyword(row)) return -100;
+      if (isCrossDomainNonsenseKeyword(row) || isAmbiguousCompositeKeyword(row)) return -100;
       if (isShoppingIntentKeywordRow(row)) return -60;
       if (isAdDominatedKeywordRow(row)) return -50;
       const total = rowNumber(row, 'totalSearchVolume') || 0;
       const docs = rowNumber(row, 'documentCount');
       const ratio = rowGoldenRatio(row) || 0;
-      const text = keywordRowSearchText(row);
+      const judge = row && row.aiJudge;
       let score = 0;
       if (total >= 30000) score += 22;
       else if (total >= 10000) score += 18;
@@ -2261,7 +2405,9 @@
       else if (ratio >= 5) score += 12;
       else if (ratio >= 2) score += 7;
       else if (ratio > 0 && ratio < 1) score -= 16;
-      if (/(신청|대상|지급일|잔액|사용처|가맹점|온라인|비교|예약|취소|후보|전말|원인|일정|계산기|주의사항)/.test(text)) score += 18;
+      if (hasTrafficNeedIntent(row)) score += 20;
+      if (judge && judge.verdict === 'publish') score += 18;
+      if (judge && judge.needIntent === 'strong') score += 10;
       if (/live|realtime|source|measured|golden/i.test(normalizeText(row && row.source))) score += 5;
       return score;
     }
@@ -2316,7 +2462,8 @@
       const raw = normalizeText(row && row.keyword);
       const keyword = compactKeywordText(raw);
       if (!keyword) return false;
-      if (/(순위.*출시일|출시일.*순위|금액.*지급일|지급일.*금액|정례대화.*금액|금액.*정례대화|방법.*주의사항|주의사항.*정리|가격.*출시일|후기.*출시일|추천.*출시일|후보.*금액|격차.*후보)/.test(keyword)) return true;
+      if (isCrossDomainNonsenseKeyword(row)) return true;
+      if (/(순위.*출시일|출시일.*순위|금액.*지급일|지급일.*금액|정례대화.*(?:지급일|금액|대상|신청|수당)|(?:지급일|금액|대상|신청|수당).*정례대화|방법.*주의사항|주의사항.*정리|가격.*출시일|후기.*출시일|추천.*출시일|후보.*금액|격차.*후보)/.test(keyword)) return true;
       const markers = ['방법', '조회', '주의사항', '정리', '가격', '후기', '추천', '순위', '출시일', '금액', '지급일', '신청', '대상', '후보', '일정', '비교', '원룸'];
       const markerCount = markers.reduce(function(count, marker) {
         return count + (keyword.indexOf(marker) >= 0 ? 1 : 0);
@@ -2325,7 +2472,7 @@
       return markerCount >= 3 && (hasNoReadableSpacing || keyword.length >= 17);
     }
     function shouldHideFromLiveGoldenBoard(row) {
-      return isArticleTitleLikeKeyword(row && row.keyword) || isAmbiguousCompositeKeyword(row) || isShoppingIntentKeywordRow(row) || isAdDominatedKeywordRow(row);
+      return isArticleTitleLikeKeyword(row && row.keyword) || isAmbiguousCompositeKeyword(row) || isShoppingIntentKeywordRow(row) || isAdDominatedKeywordRow(row) || isLowTrafficCaptureKeyword(row);
     }
     function shouldHideFromMindmap(row) {
       return isArticleTitleLikeKeyword(row && row.keyword) || isAmbiguousCompositeKeyword(row) || isShoppingIntentKeywordRow(row);
@@ -2347,6 +2494,12 @@
         out.push(text);
       });
       return out.slice(0, limit || 6);
+    }
+    function domainSafeIntentBranches(seed, items, limit) {
+      return uniqueIntentBranches(items, limit || 10)
+        .filter(function(item) { return candidateFitsSeedDomain(seed, item); })
+        .filter(function(item) { return !isCrossDomainNonsenseKeyword(seed + ' ' + item); })
+        .slice(0, limit || 10);
     }
     function readableKeywordTopic(row) {
       const keyword = normalizeText(row && row.keyword);
@@ -2447,34 +2600,19 @@
         push(base + ' 주의사항');
         push('제주 렌터카 완전자차 보험');
         push('제주공항 렌터카 예약');
-        return uniqueIntentBranches(out, 10);
-      }
-      if (/문화누리카드/.test(clean)) {
-        [
-          '문화누리카드 잔액조회',
-          '문화누리카드 온라인 사용처',
-          '문화누리카드 가맹점',
-          '문화누리카드 사용처 조회',
-          '문화누리카드 오프라인 사용처',
-          '문화누리카드 영화 예매',
-          '문화누리카드 숙박 사용처',
-          '문화누리카드 네이버페이',
-          '문화누리카드 본인충전금 환불',
-          '문화누리카드 지역별 사용처',
-        ].forEach(push);
-        return uniqueIntentBranches(out, 10);
+        return domainSafeIntentBranches(clean, out, 10);
       }
       if (/(렌터카|렌트카|숙소|호텔|펜션|항공권|여행|맛집|축제)/.test(clean)) {
         ['사이트', '방법', '팁', '시기', '비교', '후기', '주의사항'].forEach(function(suffix) { push(clean + ' ' + suffix); });
       } else if (/(지원금|장려금|수당|급여|환급|신청|정책|근로장려금|최저임금)/.test(clean)) {
-        const base = clean.replace(/\s+(방법|대상|지급일|금액|서류|신청)$/g, '');
+        const base = clean.replace(/s+(방법|대상|지급일|금액|서류|신청)$/g, '');
         ['신청 방법', '대상', '지급일', '금액', '필요 서류', '조회', '주의사항'].forEach(function(suffix) { push(base + ' ' + suffix); });
-      } else if (/(감독|축구|야구|월드컵|KBO|선수|경기|순위|일정)/i.test(clean)) {
+      } else if (/(감독|축구|야구|월드컵|KBO|선수|경기|하이라이트|축구협회|대표팀|홍명보)/i.test(clean)) {
         ['이유', '후보', '반응', '일정', '순위', '전망', '논란 정리'].forEach(function(suffix) { push(clean + ' ' + suffix); });
       } else if (compact.length >= 4) {
         ['이유', '방법', '비교', '후기', '주의사항'].forEach(function(suffix) { push(clean + ' ' + suffix); });
       }
-      return uniqueIntentBranches(out, 10);
+      return domainSafeIntentBranches(clean, out, 10);
     }
     function localExpansionBranches(topic, keyword) {
       const songjihoProfile = songjihoSeaSkyPathProfile(topic, keyword);
@@ -2512,47 +2650,47 @@
       const base = topic || keyword;
       if (/근로장려금/.test(base)) {
         const year = (keyword.match(/202[0-9]/) || ['2026'])[0];
-        return [
+        return domainSafeIntentBranches(base, [
           year + ' 근로장려금 지급일',
           year + ' 근로장려금 신청기간',
           year + ' 근로장려금 대상자 확인',
           year + ' 근로장려금 금액 조회',
           year + ' 근로장려금 반기 정기 차이',
           year + ' 근로장려금 제외대상',
-        ];
+        ], 6);
       }
-      if (/주휴수당/.test(base)) return ['주휴수당 계산기 일용직', '주휴수당 조건 15시간', '주휴수당 미지급 신고', '주휴수당 계산법 예시', '알바 주휴수당 기준'];
-      if (/최저임금/.test(base)) return ['최저임금 월급 계산', '최저임금 주휴수당 포함', '최저임금 실수령액', '최저임금 위반 신고', '최저임금 격차 원인'];
-      if (/문화누리카드/.test(base)) return ['문화누리카드 잔액조회', '문화누리카드 온라인 사용처', '문화누리카드 가맹점', '문화누리카드 사용처 조회', '문화누리카드 오프라인 사용처', '문화누리카드 영화 예매', '문화누리카드 숙박 사용처', '문화누리카드 네이버페이', '문화누리카드 본인충전금 환불', '문화누리카드 지역별 사용처'];
-      return [base + ' 대상', base + ' 신청방법', base + ' 지급일', base + ' 필요서류', base + ' 제외대상'];
+      if (/주휴수당/.test(base)) return domainSafeIntentBranches(base, ['주휴수당 계산기 일용직', '주휴수당 조건 15시간', '주휴수당 미지급 신고', '주휴수당 계산법 예시', '알바 주휴수당 기준'], 5);
+      if (/최저임금/.test(base)) return domainSafeIntentBranches(base, ['최저임금 월급 계산', '최저임금 주휴수당 포함', '최저임금 실수령액', '최저임금 위반 신고', '최저임금 격차 원인'], 5);
+      if (/문화누리카드/.test(base)) return domainSafeIntentBranches(base, ['문화누리카드 사용처 조회', '문화누리카드 온라인 사용처', '문화누리카드 잔액조회', '문화누리카드 충전일', '문화누리카드 영화 예매'], 5);
+      return domainSafeIntentBranches(base, [base + ' 대상', base + ' 신청방법', base + ' 지급일', base + ' 필요서류', base + ' 제외대상'], 5);
     }
     function issueExpansionBranches(topic, keyword) {
       const base = topic || keyword;
-      if (/홍명보|축구협회|감독/.test(keyword)) {
-        return [
+      if (/홍명보|축구협회|감독/.test(keyword) && !isCrossDomainNonsenseKeyword(base + ' ' + keyword)) {
+        return domainSafeIntentBranches(base, [
           '홍명보 감독 다음 감독 후보',
           '홍명보 감독 선임 과정 논란',
           '대한축구협회 비리 전말',
           '이강인 이재성 투입 요청',
           '김민재 교체 항의 장면',
           '대한민국 축구대표팀 전술 문제',
-        ];
+        ], 6);
       }
-      if (/KBO|올스타전|야구/.test(keyword)) return ['KBO 올스타전 예매 방법', 'KBO 올스타전 라인업', 'KBO 올스타전 중계', 'KBO 올스타전 일정', 'KBO 올스타전 티켓 가격'];
-      return [base + ' 이유', base + ' 이후 전망', base + ' 핵심 쟁점', base + ' 다음 일정', base + ' 반응 정리'];
+      if (/KBO|올스타전|야구/.test(keyword)) return domainSafeIntentBranches(base, ['KBO 올스타전 예매 방법', 'KBO 올스타전 라인업', 'KBO 올스타전 중계', 'KBO 올스타전 일정', 'KBO 올스타전 티켓 가격'], 5);
+      return domainSafeIntentBranches(base, [base + ' 이유', base + ' 이후 전망', base + ' 핵심 쟁점', base + ' 다음 일정', base + ' 반응 정리'], 5);
     }
     function shoppingExpansionBranches(topic, keyword) {
       const base = topic || keyword;
-      return [base + ' 추천', base + ' 후기', base + ' 가격비교', base + ' 단점', base + ' 구매 전 확인'];
+      return domainSafeIntentBranches(base, [base + ' 추천', base + ' 후기', base + ' 가격비교', base + ' 단점', base + ' 구매 전 확인'], 5);
     }
     function keywordDomain(value) {
       const text = normalizeText(value).toLowerCase();
       if (/(송지호|바다하늘길|해수욕장|둘레길|제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|호텔|펜션|항공권|렌터카|렌트카|맛집|축제|문화누리카드s*사용처)/.test(text)) return 'local';
       if (/(지원금|장려금|수당|급여|환급|신청|정책|근로장려금|최저임금|주휴수당|문화누리카드|청년인턴|청년청약|실업급여)/.test(text)) return 'policy';
-      if (/(감독|축구|야구|월드컵|kbo|선수|경기|순위|일정|홍명보|김민재|이강인|이재성)/i.test(text)) return 'sports';
+      if (/(감독|축구|야구|월드컵|kbo|선수|경기|하이라이트|축구협회|대표팀|홍명보|김민재|이강인|이재성)/i.test(text)) return 'sports';
       if (/(로봇청소기|청소기|공기청정기|제습기|에어컨|냉장고|노트북|아이폰|갤럭시|가격|추천|후기|구매|할인|최저가|제품|상품)/.test(text) && !/(지원금|장려금|수당|정책)/.test(text)) return 'shopping';
       if (/(지원금|장려금|급여|수당|정책|복지|신청|대상|지급일|정부|채용|인턴|연금|보험|세금|환급|최저임금|주휴수당|문화누리카드|청년도약계좌|내일배움카드)/.test(text)) return 'policy';
-      if (/(월드컵|축구|야구|kbo|감독|선수|경기|순위|일정|하이라이트|축구협회|대표팀|이강인|김민재|이재성|손흥민|홍명보)/i.test(text)) return 'sports';
+      if (/(월드컵|축구|야구|kbo|감독|선수|경기|하이라이트|축구협회|대표팀|이강인|김민재|이재성|손흥민|홍명보)/i.test(text)) return 'sports';
       if (/(구매|가격|최저가|할인|추천|순위|후기|비교|리뷰|쿠폰|배송|스펙|브랜드|제품|상품|가전|전자|청소기|로봇청소기|공기청정기|제습기|에어컨|냉장고|세탁기|노트북|태블릿|이어폰|마사지기|영양제|유산균|화장품|선크림|샴푸|운동화|가방|매트리스|캠핑|기저귀|카시트)/.test(text)) return 'shopping';
       if (/(송지호|바다하늘길|해수욕장|둘레길|제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|맛집|렌터|렌트|항공권|호텔|펜션|축제|문화누리카드사용처)/.test(text)) return 'local';
       return 'general';
@@ -2561,7 +2699,7 @@
       const text = normalizeText(value).toLowerCase();
       return {
         policy: /(지원금|장려금|급여|수당|정책|복지|신청|대상|지급일|정부|채용|인턴|연금|보험|세금|환급|최저임금|주휴수당|문화누리카드|청년도약계좌|내일배움카드)/.test(text),
-        sports: /(월드컵|축구|야구|kbo|감독|선수|경기|순위|일정|하이라이트|축구협회|대표팀|이강인|김민재|이재성|손흥민|홍명보)/i.test(text),
+        sports: /(월드컵|축구|야구|kbo|감독|선수|경기|하이라이트|축구협회|대표팀|이강인|김민재|이재성|손흥민|홍명보)/i.test(text),
         shopping: /(구매|가격|최저가|할인|추천|순위|후기|비교|리뷰|쿠폰|배송|스펙|브랜드|제품|상품|가전|전자|청소기|로봇청소기|공기청정기|제습기|에어컨|냉장고|세탁기|노트북|태블릿|이어폰|마사지기|영양제|유산균|화장품|선크림|샴푸|운동화|가방|매트리스|캠핑|기저귀|카시트)/.test(text),
         local: /(송지호|바다하늘길|해수욕장|둘레길|제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|맛집|렌터|렌트|항공권|호텔|펜션|축제|문화누리카드사용처)/.test(text),
       };
@@ -2572,6 +2710,7 @@
       const combined = normalizeText(seed + ' ' + candidate);
       const isCulturalLocal = /문화누리카드/.test(combined) && candidateSignals.local;
       const isTravelPurchase = (seedSignals.local || candidateSignals.local) && /(렌터|렌트|숙소|호텔|펜션|항공권|맛집|여행)/.test(combined);
+      if (isCrossDomainNonsenseKeyword(combined)) return false;
       if (seedSignals.policy && candidateSignals.sports && !seedSignals.sports) return false;
       if (seedSignals.sports && candidateSignals.policy && !seedSignals.policy) return false;
       if (seedSignals.policy && candidateSignals.shopping && !seedSignals.shopping && !isCulturalLocal) return false;
@@ -2641,7 +2780,7 @@
           branches: policyExpansionBranches(topic, keyword),
         };
       }
-      if (/(sports|월드컵|축구|야구|감독|선수|경기|순위|일정|하이라이트|축구협회|대표팀|이강인|김민재|이재성|손흥민|홍명보)/i.test(text)) {
+      if (/(sports|월드컵|축구|야구|감독|선수|경기|하이라이트|축구협회|대표팀|이강인|김민재|이재성|손흥민|홍명보)/i.test(text)) {
         return {
           kind: 'issue',
           label: '후속 의문형',
@@ -2663,18 +2802,282 @@
       }
       return null;
     }
+    function agentObjectCandidates(row) {
+      return [
+        row,
+        row && row.agentInsight,
+        row && row.agentInference,
+        row && row.aiInsight,
+        row && row.aiInference,
+        row && row.keywordInsight,
+        row && row.intentInsight,
+        row && row.winnability,
+        row && row.publishDecision,
+        row && row.raw,
+        row && row.meta,
+      ].filter(function(item) { return item && typeof item === 'object'; });
+    }
+    function agentTextValue(row, keys) {
+      const containers = agentObjectCandidates(row);
+      for (let i = 0; i < containers.length; i += 1) {
+        for (let j = 0; j < keys.length; j += 1) {
+          const value = containers[i][keys[j]];
+          if (typeof value === 'string' && normalizeText(value)) return normalizeText(value);
+        }
+      }
+      return '';
+    }
+    function agentListValue(row, keys) {
+      const out = [];
+      const push = function(value) {
+        if (Array.isArray(value)) {
+          value.forEach(push);
+          return;
+        }
+        if (value && typeof value === 'object') {
+          push(value.keyword || value.query || value.text || value.title || value.name);
+          return;
+        }
+        const clean = normalizeText(value);
+        if (clean) out.push(clean);
+      };
+      const containers = agentObjectCandidates(row);
+      containers.forEach(function(item) {
+        keys.forEach(function(key) { push(item[key]); });
+      });
+      return uniqueIntentBranches(out, 18);
+    }
+    function agentReadableSubject(row) {
+      const keyword = normalizeText(row && row.keyword);
+      const provided = agentTextValue(row, ['topic', 'subject', 'coreTopic', 'entity', 'rootKeyword']);
+      if (provided) return provided;
+      const compact = compactKeywordText(keyword);
+      const known = [
+        ['송지호바다하늘길', '송지호 바다하늘길'],
+        ['문화누리카드', '문화누리카드'],
+        ['근로장려금', '근로장려금'],
+        ['자녀장려금', '자녀장려금'],
+        ['주휴수당', '주휴수당'],
+        ['최저임금', '최저임금'],
+        ['홍명보', '홍명보 감독'],
+        ['대한축구협회', '대한축구협회'],
+        ['제주렌터카', '제주 렌터카'],
+        ['제주렌트카', '제주 렌터카'],
+        ['KBO올스타전', 'KBO 올스타전'],
+      ];
+      for (let i = 0; i < known.length; i += 1) {
+        if (compact.indexOf(compactKeywordText(known[i][0])) >= 0) return known[i][1];
+      }
+      return keyword
+        .replace(/\b(202[0-9]|20[0-9]{2}|tistory|티스토리|blogspot)\b/gi, '')
+        .replace(/(사용처|지급일|신청방법|신청|대상자|대상|조회|잔액조회|금액|계산기|입장료|예약방법|예약|사이트|비교|후기|주의사항|방법|이유|전망|후보|일정|정리)+$/g, '')
+        .trim() || keyword;
+    }
+    function agentSemanticDomain(row) {
+      const text = keywordRowSearchText(row) + ' ' + normalizeText(row && row.keyword);
+      if (isCrossDomainNonsenseKeyword(row) || isAmbiguousCompositeKeyword(row)) return 'unclear';
+      if (/정례대화/.test(text) && /(지급일|금액|대상|신청|수당)/.test(text)) return 'unclear';
+      if (isShoppingIntentKeywordRow(row)) return 'shopping';
+      if (/문화누리카드/.test(text) && /(사용처|가맹점|온라인|잔액|충전|영화|숙박)/.test(text)) return 'policy-local';
+      return keywordDomain(text);
+    }
+    function agentSeasonContext() {
+      const month = new Date().getMonth() + 1;
+      if (month >= 7 && month <= 8) return '여름휴가와 방학 성수기';
+      if (month >= 9 && month <= 10) return '가을 여행과 추석 준비 시기';
+      if (month === 12 || month <= 2) return '연말정산·겨울방학·난방비 확인 시기';
+      if (month >= 3 && month <= 5) return '신학기·봄나들이·지원금 신청 시기';
+      return '월초 일정과 생활비 확인 시기';
+    }
+    function agentMeasuredContext(row) {
+      const total = intentMetricNumber(row, 'totalSearchVolume');
+      const pc = intentMetricNumber(row, 'pcSearchVolume');
+      const mobile = intentMetricNumber(row, 'mobileSearchVolume');
+      const docs = intentMetricNumber(row, 'documentCount');
+      const parts = [];
+      if (total !== null) parts.push('검색량 ' + fmt(total));
+      if (pc !== null || mobile !== null) parts.push('PC ' + fmt(pc || 0) + '/모바일 ' + fmt(mobile || 0));
+      if (docs !== null) parts.push('문서수 ' + fmt(docs));
+      return parts.length ? parts.join(' · ') + ' 실측을 기준으로 봅니다.' : '';
+    }
+    function agentInferredBranches(row, subject, domain) {
+      const keyword = normalizeText(row && row.keyword);
+      const provided = agentListValue(row, [
+        'autocompleteKeywords',
+        'autocomplete',
+        'relatedKeywords',
+        'expandedKeywords',
+        'expansionKeywords',
+        'mindmapKeywords',
+        'followUpKeywords',
+        'questionKeywords',
+        'clusterKeywords',
+        'branches',
+        'suggestions',
+      ]);
+      const seed = subject || keyword;
+      const out = [];
+      const push = function(value) {
+        const clean = normalizeText(value);
+        if (!clean) return;
+        if (/AEO|GEO|SEO|클릭|바로가기|제목보다|한 화면에서/i.test(clean)) return;
+        if (compactKeywordText(clean) === compactKeywordText(keyword)) return;
+        out.push(clean);
+      };
+      provided.forEach(push);
+      if (/송지호|바다하늘길/.test(seed + keyword)) {
+        [
+          '송지호 바다하늘길 입장료',
+          '송지호 바다하늘길 주차',
+          '송지호 바다하늘길 위치',
+          '송지호 바다하늘길 운영시간',
+          '송지호 바다하늘길 둘레길 코스',
+          '송지호 해수욕장 바다하늘길',
+          '고성 송지호 바다하늘길',
+        ].forEach(push);
+      } else if (/문화누리카드/.test(seed + keyword)) {
+        [
+          '문화누리카드 잔액조회',
+          '문화누리카드 온라인 사용처',
+          '문화누리카드 가맹점',
+          '문화누리카드 사용처 조회',
+          '문화누리카드 충전일',
+          '문화누리카드 영화 예매',
+          '문화누리카드 숙박 사용처',
+          '문화누리카드 오프라인 사용처',
+        ].forEach(push);
+      } else if (/제주/.test(seed + keyword) && /(렌터카|렌트카|렌터|렌트)/.test(seed + keyword)) {
+        [
+          '제주 렌터카 예약 사이트',
+          '제주 렌터카 예약 방법',
+          '제주 렌터카 예약 팁',
+          '제주 렌터카 예약 시기',
+          '제주 렌터카 보험 비교',
+          '제주 렌터카 완전자차',
+          '제주공항 렌터카 예약',
+        ].forEach(push);
+      } else if (/근로장려금/.test(seed + keyword)) {
+        const year = keywordYear(keyword, String(new Date().getFullYear()));
+        [
+          year + ' 근로장려금 지급일',
+          year + ' 근로장려금 대상자 확인',
+          year + ' 근로장려금 금액 조회',
+          year + ' 근로장려금 심사결과',
+          year + ' 근로장려금 반기 정기 차이',
+        ].forEach(push);
+      } else if (/최저임금/.test(seed + keyword)) {
+        ['최저임금 월급 계산', '최저임금 주휴수당 포함', '최저임금 실수령액', '최저임금 위반 신고', '최저임금 격차 원인'].forEach(push);
+      } else if (/주휴수당/.test(seed + keyword)) {
+        ['주휴수당 계산기', '주휴수당 조건 15시간', '주휴수당 미지급 신고', '알바 주휴수당 기준', '주휴수당 계산법 예시'].forEach(push);
+      } else if (/홍명보|축구협회|월드컵|대표팀|이강인|김민재|이재성/.test(seed + keyword)) {
+        [
+          '홍명보 감독 다음 감독 후보',
+          '홍명보 감독 선임 과정 논란',
+          '대한축구협회 비리 전말',
+          '이강인 이재성 투입 요청',
+          '김민재 교체 항의 장면',
+          '대한민국 축구대표팀 전술 문제',
+        ].forEach(push);
+      } else if (domain === 'shopping') {
+        ['구매 전 확인', '실사용 후기', '가격비교', '단점', '대체 제품 비교'].forEach(function(tail) { push(seed + ' ' + tail); });
+      } else if (domain === 'local' || domain === 'policy-local') {
+        ['위치', '운영시간', '주차', '예약 방법', '후기', '주의사항'].forEach(function(tail) { push(seed + ' ' + tail); });
+      } else if (domain === 'policy') {
+        ['대상', '신청방법', '지급일', '금액', '필요서류', '제외대상'].forEach(function(tail) { push(seed + ' ' + tail); });
+      } else if (domain === 'sports') {
+        ['이유', '후보', '반응', '일정', '전망', '논란 정리'].forEach(function(tail) { push(seed + ' ' + tail); });
+      } else {
+        ['뜻', '검색 이유', '확인 방법', '비교 기준', '주의사항'].forEach(function(tail) { push(seed + ' ' + tail); });
+      }
+      return domainSafeIntentBranches(keyword || seed, out, 10);
+    }
+    function agentInferredSearchReason(row, subject, domain) {
+      const keyword = normalizeText(row && row.keyword);
+      const provided = agentTextValue(row, ['searchVolumeReason', 'searchReason', 'whyTrending', 'demandReason', 'reason', 'meaning']);
+      if (provided) return provided;
+      const text = normalizeText(subject + ' ' + keyword + ' ' + keywordRowSearchText(row));
+      if (domain === 'unclear') return '"' + keyword + '"는 정책 지급어와 서로 다른 의도의 단어가 붙은 충돌형 후보입니다. 실제 이슈명인지, 기사 제목 조각이 붙은 것인지 먼저 소스 원문을 확인하고 원 키워드로 쓰지 않는 것이 안전합니다.';
+      if (/송지호|바다하늘길/.test(text)) return '송지호 바다하늘길은 강원 고성 송지호와 해변 산책 동선을 찾는 방문형 키워드입니다. 검색량은 장소 자체가 아니라 입장료, 주차, 운영시간, 해수욕장·둘레길과 함께 갈 수 있는지 확인하려는 여행 전 체크 수요에서 생깁니다.';
+      if (/문화누리카드/.test(text)) return '문화누리카드는 지급·충전 시점보다 실제로 어디서 쓸 수 있는지가 검색의 핵심입니다. 잔액, 온라인 사용처, 지역 가맹점, 영화·숙박 결제 가능 여부를 한 번에 확인하려는 수요가 붙습니다.';
+      if (/제주/.test(text) && /(렌터카|렌트카|렌터|렌트)/.test(text)) return agentSeasonContext() + '라 제주 항공권·숙소를 잡은 사람들이 공항 이동, 완전자차 보험, 차량 등급, 픽업 위치, 취소 규정을 비교하려고 검색합니다. 광고가 강한 예약어는 정보형 체크리스트로 풀어야 합니다.';
+      if (/근로장려금|자녀장려금/.test(text)) return '장려금 키워드는 신청 기간, 심사 결과, 지급일, 금액 확인처럼 개인별로 바로 확인해야 하는 정보가 몰릴 때 검색량이 붙습니다. 제도 설명보다 “내가 대상인지, 언제 얼마가 들어오는지”가 핵심입니다.';
+      if (/최저임금|주휴수당/.test(text)) return '임금 키워드는 발표 숫자보다 월급·실수령액·주휴수당 포함 여부가 실제 생활비와 바로 연결될 때 검색이 늘어납니다. 계산표와 위반 사례, 신고 기준을 같이 봐야 합니다.';
+      if (/홍명보|축구협회|월드컵|대표팀|이강인|김민재|이재성/.test(text)) return '축구 이슈는 기사 제목보다 이후 책임 소재, 다음 감독 후보, 선임 과정, 선수 기용 논란처럼 사람들이 다음에 확인하고 싶은 질문에서 검색량이 커집니다. 결과 요약보다 맥락과 다음 변수를 잡아야 합니다.';
+      if (/KBO|올스타전|야구/.test(text)) return '스포츠 일정 키워드는 예매, 라인업, 중계, 티켓 가격처럼 경기 전 행동으로 이어지는 정보가 붙을 때 검색량이 올라갑니다.';
+      if (domain === 'shopping') return '제품형 키워드는 가격과 후기만으로는 약합니다. 검색량은 구매 직전 불안, 대체 제품 비교, 실제 사용 장면, 단점 확인이 겹칠 때 생기므로 쇼핑커넥트에서 전환 가능한 제품까지 붙여야 합니다.';
+      if (domain === 'local') return '지역·방문 키워드는 비용, 위치, 운영시간, 주차, 후기처럼 현장에서 실패하지 않기 위한 확인 검색입니다. 최신 일정과 실제 이동 동선을 함께 설명해야 합니다.';
+      if (domain === 'policy') return '정책 키워드는 대상, 신청 기간, 지급일, 금액, 제외 조건처럼 놓치면 손해가 나는 확인 항목이 있을 때 반복 검색됩니다. 최신 기준과 예외 조건을 먼저 제시해야 합니다.';
+      return '검색량은 단어 자체보다 검색자가 지금 해결해야 할 의사결정에서 생깁니다. 이 후보는 소스 맥락, 최신 시점, 비교 기준, 다음 행동을 분리해 글감으로 검증해야 합니다.';
+    }
+    function agentInferredAction(row, subject, domain) {
+      const provided = agentTextValue(row, ['combinationIntent', 'usageIntent', 'publishingAngle', 'action', 'nextAction', 'writeRecommendation']);
+      if (provided) return provided;
+      const keyword = normalizeText(row && row.keyword);
+      const metric = agentMeasuredContext(row);
+      if (domain === 'unclear') return '원문 소스와 자동완성 응답을 다시 확인한 뒤 의미가 분명한 키워드만 남기세요. 지급일·금액·대상 같은 정책 행동어는 실제 제도명과 붙어야 발행 가치가 있습니다.';
+      if (domain === 'shopping') return '메인 황금보드에서는 제외하고 쇼핑커넥트에서 제품 후보, 구매 트리거, 실사용 단점, 대체 제품 비교까지 붙여 전환형 글감으로 판단하세요.';
+      if (/송지호|바다하늘길/.test(subject + keyword)) return '첫 문단에서 송지호 바다하늘길이 무엇인지 설명하고, 입장료·주차·운영시간·해수욕장 연계 동선을 표로 정리하세요. 마지막에는 당일 코스와 비 오는 날 대안까지 붙이면 체류가 생깁니다.';
+      if (/문화누리카드/.test(subject + keyword)) return '사용처를 나열하기보다 잔액조회, 온라인 사용처, 지역 가맹점, 결제 가능 업종을 표로 묶으세요. 검색자는 “지금 내 카드로 결제 가능한 곳”을 확인하려고 들어옵니다.';
+      if (/제주/.test(subject + keyword) && /(렌터카|렌트카)/.test(subject + keyword)) return '광고 예약 페이지와 정면 승부하지 말고 완전자차, 공항 픽업, 취소 규정, 성수기 가격 차이, 차량 등급 선택 기준으로 정보형 롱테일을 만드세요.';
+      if (domain === 'policy') return '본문 첫 화면에 대상·기간·금액·제외 조건 표를 두고, 아래에는 자주 틀리는 사례와 공식 확인 경로를 붙이세요. ' + metric;
+      if (domain === 'sports') return '단순 뉴스 요약이 아니라 원인, 책임 소재, 다음 후보, 일정, 당사자 반응을 묶어 후속 질문형 글로 구성하세요. ' + metric;
+      if (domain === 'local') return '방문 전 체크리스트형으로 위치, 비용, 시간, 예약 가능 여부, 후기, 대안을 한 화면에 보여주세요. ' + metric;
+      return '제목은 원 키워드만 반복하지 말고 검색자가 해결하려는 불안, 비교 기준, 다음 행동을 포함한 롱테일로 확장하세요. ' + metric;
+    }
+    function agentInferredKeywordGuide(row) {
+      const keyword = normalizeText(row && row.keyword);
+      if (!keyword) return null;
+      const domain = agentSemanticDomain(row);
+      const subject = agentReadableSubject(row);
+      const labelMap = {
+        unclear: '의도 충돌 후보',
+        shopping: '쇼핑커넥트 전용',
+        'policy-local': '지역 사용처·정책 니즈',
+        policy: '정책/신청형 니즈',
+        local: '방문/예약형 니즈',
+        sports: '후속 이슈형 니즈',
+        general: '검색 의도 추론',
+      };
+      const routeMap = {
+        unclear: '재검증 필요',
+        shopping: '쇼핑커넥트로 분리',
+        'policy-local': '사용처 확인 루트',
+        policy: '정보형 글감',
+        local: '방문 체크리스트',
+        sports: '이슈 맥락 루트',
+        general: '추론 보강 루트',
+      };
+      return {
+        kind: domain === 'unclear' ? 'unclear' : domain === 'shopping' ? 'shopping' : domain === 'sports' ? 'issue' : domain,
+        label: agentTextValue(row, ['intentLabel', 'label']) || labelMap[domain] || labelMap.general,
+        route: agentTextValue(row, ['route', 'monetizationRoute']) || routeMap[domain] || routeMap.general,
+        meaning: agentInferredSearchReason(row, subject, domain),
+        action: agentInferredAction(row, subject, domain),
+        branches: agentInferredBranches(row, subject, domain),
+      };
+    }
     function keywordIntentGuide(row) {
       const keyword = normalizeText(row && row.keyword);
       const topic = readableKeywordTopic(row);
       const modifiers = keywordModifiers(row);
+      const agentGuide = agentInferredKeywordGuide(row);
+      if (agentGuide) return agentGuide;
       if (isAmbiguousCompositeKeyword(row)) {
+        const compact = compactKeywordText(keyword);
+        const dialoguePaymentCollision = /정례대화.*(?:지급일|금액|대상|신청|수당)|(?:지급일|금액|대상|신청|수당).*정례대화/.test(compact);
         return {
           kind: 'unclear',
-          label: '의도 불명확',
-          meaning: '검색량이 있어도 여러 modifier가 한 줄에 붙어 검색자가 원하는 답이 흐립니다. 조합 자체가 자연 검색어인지 먼저 분해해야 합니다.',
-          action: '핵심 주제 1개와 확인 의도 1개만 남긴 뒤 마인드맵으로 다시 확장하세요. 여러 의도를 한 제목에 다 넣으면 체류와 클릭이 동시에 약해집니다.',
+          label: dialoguePaymentCollision ? '억지 조합 제외' : '의도 불명확',
+          meaning: dialoguePaymentCollision
+            ? '“정례대화”는 회담·외교·정치 이슈형 단어이고 “지급일”은 지원금·급여·정책형 행동어입니다. 두 의도가 붙으면 검색량이 있어도 검색자가 원하는 답을 특정할 수 없어 황금키워드로 쓰기 어렵습니다.'
+            : '검색량이 있어도 여러 modifier가 한 줄에 붙어 검색자가 원하는 답이 흐립니다. 조합 자체가 자연 검색어인지 먼저 분해해야 합니다.',
+          action: dialoguePaymentCollision
+            ? '정례대화 쪽은 “정례대화 결과, 의제, 합의문, 다음 일정, 관련주”처럼 이슈 후속 질문으로 다시 확장하고, 지급일 쪽은 실제 제도명과 붙여 별도 검증하세요.'
+            : '핵심 주제 1개와 확인 의도 1개만 남긴 뒤 마인드맵으로 다시 확장하세요. 여러 의도를 한 제목에 다 넣으면 체류와 클릭이 동시에 약해집니다.',
           route: '검증 후 사용',
-          branches: uniqueIntentBranches([topic + ' 방법', topic + ' 대상', topic + ' 지급일', topic + ' 후기', topic + ' 비교'], 5),
+          branches: dialoguePaymentCollision
+            ? uniqueIntentBranches(['정례대화 결과', '정례대화 의제', '정례대화 합의문', '정례대화 다음 일정', '정례대화 관련주'], 5)
+            : uniqueIntentBranches([topic + ' 방법', topic + ' 대상', topic + ' 지급일', topic + ' 후기', topic + ' 비교'], 5),
         };
       }
       if (isAdDominatedKeywordRow(row)) {
@@ -2713,7 +3116,7 @@
           branches: policyExpansionBranches(topic, keyword),
         };
       }
-      if (/(sports|월드컵|축구|야구|감독|선수|경기|순위|일정|하이라이트)/i.test(text)) {
+      if (/(sports|월드컵|축구|야구|감독|선수|경기|하이라이트|축구협회|대표팀|홍명보)/i.test(text)) {
         return {
           kind: 'issue',
           label: '이슈 해설형',
@@ -2732,8 +3135,62 @@
         branches: uniqueIntentBranches([topic + ' 뜻', topic + ' 이유', topic + ' 방법', topic + ' 비교', topic + ' 주의사항'], 5),
       };
     }
+    function intentMetricNumber(row, key) {
+      const n = Number(row && row[key]);
+      return Number.isFinite(n) ? n : null;
+    }
+    function measuredIntentEvidence(row) {
+      const total = intentMetricNumber(row, 'totalSearchVolume');
+      const pc = intentMetricNumber(row, 'pcSearchVolume');
+      const mobile = intentMetricNumber(row, 'mobileSearchVolume');
+      const docs = intentMetricNumber(row, 'documentCount');
+      const ratio = intentMetricNumber(row, 'goldenRatio');
+      const parts = [];
+      if (total !== null) parts.push('실측 검색량 ' + fmt(total));
+      if (pc !== null || mobile !== null) parts.push('PC ' + fmt(pc || 0) + ' / 모바일 ' + fmt(mobile || 0));
+      if (docs !== null) parts.push('문서수 ' + fmt(docs));
+      if (ratio !== null) parts.push('황금비 ' + fmt(ratio));
+      if (!parts.length) return '';
+      return parts.join(' · ') + ' 기준으로 수요와 공급 간격을 먼저 봅니다.';
+    }
+    function aiJudgeIntentEvidence(row) {
+      const judge = row && row.aiJudge;
+      if (!judge || typeof judge !== 'object') return '';
+      const verdict = judge.verdict === 'publish' ? '발행 추천' : judge.verdict === 'conditional' ? '조건부' : '제외';
+      const score = Number.isFinite(Number(judge.score)) ? '점수 ' + Math.round(Number(judge.score)) : '';
+      const reasons = Array.isArray(judge.reasons) ? judge.reasons.map(normalizeText).filter(Boolean).slice(0, 2).join(' · ') : '';
+      return [verdict, score, reasons].filter(Boolean).join(' · ');
+    }
+    function sourceIntentEvidence(row) {
+      const evidence = Array.isArray(row && row.evidence) ? row.evidence.map(normalizeText).filter(Boolean).slice(0, 2) : [];
+      const source = normalizeText(row && row.source);
+      const category = normalizeText(row && row.category);
+      const pieces = [];
+      if (source && !/persistent-measured-golden-cache/i.test(source)) pieces.push('소스 ' + source);
+      if (category) pieces.push('분류 ' + category);
+      if (evidence.length) pieces.push(evidence.join(' · '));
+      return pieces.join(' · ');
+    }
+    function enrichKeywordIntentGuide(row, guide) {
+      const metric = measuredIntentEvidence(row);
+      const ai = aiJudgeIntentEvidence(row);
+      const source = sourceIntentEvidence(row);
+      const meaningPieces = [guide.meaning, metric, source ? '수집 근거: ' + source : ''].filter(Boolean);
+      const actionPieces = [guide.action];
+      if (ai) actionPieces.push('판정 근거: ' + ai + '.');
+      if (guide.kind === 'ad-risk') {
+        actionPieces.push('광고형 원키워드는 상단 클릭을 빼앗기기 쉬우니 자동완성 가지 중 정보형·주의사항·비교형만 골라 다시 검증하세요.');
+      }
+      if (guide.kind === 'shopping') {
+        actionPieces.push('제품명만 쓰지 말고 구매 불안, 실제 사용 상황, 대체 제품 비교까지 연결해야 전환 가능성이 생깁니다.');
+      }
+      return Object.assign({}, guide, {
+        meaning: meaningPieces.join(' '),
+        action: actionPieces.join(' '),
+      });
+    }
     function keywordIntentGuideHtml(row) {
-      const guide = keywordIntentGuide(row);
+      const guide = enrichKeywordIntentGuide(row, keywordIntentGuide(row));
       const shoppingAction = guide.kind === 'shopping'
         ? '<button class="tiny-btn green" type="button" data-board-action="shopping" data-keyword="' + escapeAttr(row && row.keyword || '') + '">쇼핑커넥트로 보기</button>'
         : '';
@@ -2750,6 +3207,95 @@
         + branchHtml
         + shoppingAction
         + '</div>';
+    }
+    function keywordAutocompleteCandidates(row, limit) {
+      const keyword = normalizeText(row && row.keyword);
+      const guide = keywordIntentGuide(row);
+      const candidates = uniqueIntentBranches([].concat(
+        naverAutocompleteLikeBranches(keyword),
+        guide && guide.branches ? guide.branches : []
+      ).filter(function(branch) {
+        return candidateFitsSeedDomain(keyword, branch) && compactKeywordText(branch) !== compactKeywordText(keyword);
+      }), limit || 8);
+      return candidates;
+    }
+    function keywordMiniBranchesHtml(row) {
+      const branches = keywordAutocompleteCandidates(row, 5);
+      if (!branches.length) return '';
+      return '<div class="keyword-mini-branches">' + branches.map(function(branch) {
+        return '<button class="keyword-mini-branch" type="button" data-board-action="analyze" data-keyword="' + escapeAttr(branch) + '">' + escapeHtml(branch) + '</button>';
+      }).join('') + '</div>';
+    }
+    function keywordCompactCellHtml(row) {
+      return '<div class="keyword-main-cell"><strong>' + escapeHtml(row && row.keyword || '-') + '</strong>' + keywordMiniBranchesHtml(row) + '</div>';
+    }
+    function keywordExpansionTableHtml(seed, row, allRows) {
+      const sourceRows = Array.isArray(allRows) ? allRows : [];
+      const byKey = new Map();
+      sourceRows.forEach(function(item) {
+        const key = compactKeywordText(item && item.keyword);
+        if (key && !byKey.has(key)) byKey.set(key, item);
+      });
+      const branches = keywordAutocompleteCandidates(row, 8);
+      if (!branches.length) return '<div class="mindmap-empty">자동완성 확장 후보가 없습니다. 원 키워드를 더 구체화해서 다시 조회하세요.</div>';
+      return '<table class="keyword-expansion-table"><thead><tr><th>자동완성/확장 키워드</th><th>PC</th><th>모바일</th><th>전체</th><th>문서수</th><th>경쟁비</th><th>측정</th><th>실행</th></tr></thead><tbody>'
+        + branches.map(function(branch) {
+          const measured = byKey.get(compactKeywordText(branch));
+          return '<tr>'
+            + '<td><strong>' + escapeHtml(branch) + '</strong></td>'
+            + '<td>' + (measured ? fmtMeasuredMetric(measured, 'pcSearchVolume') : '-') + '</td>'
+            + '<td>' + (measured ? fmtMeasuredMetric(measured, 'mobileSearchVolume') : '-') + '</td>'
+            + '<td>' + (measured ? fmtMeasuredMetric(measured, 'totalSearchVolume') : '-') + '</td>'
+            + '<td>' + (measured ? fmtMeasuredMetric(measured, 'documentCount') : '-') + '</td>'
+            + '<td>' + (measured ? fmtMeasuredMetric(measured, 'goldenRatio') : '-') + '</td>'
+            + '<td>' + (measured && hasMeasuredKeywordMetrics(measured) ? '실측' : '측정 필요') + '</td>'
+            + '<td><button class="tiny-btn blue" type="button" data-board-action="analyze" data-keyword="' + escapeAttr(branch) + '">조회</button></td>'
+            + '</tr>';
+        }).join('')
+        + '</tbody></table>';
+    }
+    function keywordDetailCardHtml(seed, row, index, allRows) {
+      const keyword = normalizeText(row && row.keyword) || seed;
+      const displayGrade = displayGradeForRow(row);
+      return '<div class="keyword-detail-card">'
+        + '<div class="keyword-detail-head">'
+        + '<strong>' + fmt(index + 1) + '. ' + escapeHtml(keyword) + '</strong>'
+        + '<span class="keyword-detail-meta">전체 ' + fmt(row && row.totalSearchVolume) + ' · 문서 ' + fmt(row && row.documentCount) + ' · 등급 ' + escapeHtml(displayGrade) + '</span>'
+        + '</div>'
+        + keywordIntentGuideHtml(row)
+        + keywordExpansionTableHtml(seed, row, allRows)
+        + '</div>';
+    }
+    function renderKeywordAnalysisInsight(result, rows) {
+      const target = qs('lookupInsightPanel');
+      if (!target) return;
+      const list = Array.isArray(rows) ? rows.filter(function(row) { return row && normalizeText(row.keyword); }) : [];
+      if (!list.length) {
+        target.hidden = true;
+        target.innerHTML = '';
+        return;
+      }
+      const seed = normalizeText(result && (result.keyword || result.seedKeyword)) || compactKeywordInput();
+      const exact = list.find(function(row) { return compactKeywordText(row && row.keyword) === compactKeywordText(seed); }) || list[0];
+      const detailRows = uniqueKeywords([exact.keyword].concat(keywordAutocompleteCandidates(exact, 8)), 9).map(function(keyword) {
+        return list.find(function(row) { return compactKeywordText(row && row.keyword) === compactKeywordText(keyword); }) || {
+          keyword: keyword,
+          source: 'autocomplete-expansion',
+          measurementStatus: 'unmeasured',
+        };
+      });
+      target.hidden = false;
+      target.innerHTML = '<h3>정밀 분석 해석과 자동완성 확장</h3>'
+        + '<p>표에서는 실측값을 빠르게 보고, 아래에서는 이 키워드가 왜 뜨는지와 바로 확장할 자동완성 후보를 같이 확인합니다.</p>'
+        + resultKpiHtml([
+          { label: '분석 키워드', value: fmt(list.length) },
+          { label: '실측 완료', value: fmt(list.filter(hasMeasuredKeywordMetrics).length) },
+          { label: '확장 후보', value: fmt(detailRows.length) },
+          { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
+        ])
+        + '<div class="keyword-detail-list">' + detailRows.slice(0, 5).map(function(row, index) {
+          return keywordDetailCardHtml(seed, row, index, list);
+        }).join('') + '</div>';
     }
     function isEmptyKeywordResult(result) {
       return !!(result && Array.isArray(result.keywords) && !keywordResultRows(result).length);
@@ -3206,6 +3752,7 @@
           measured: sorted.filter(function(row) { return row.isMeasured; }).length,
           sss: sorted.filter(function(row) { return row.grade === 'SSS'; }).length,
           elapsedMs: 0,
+          agentAssist: agentAssistRequestPayload(feature.route, { keyword: keyword, seedKeyword: keyword }),
         },
       };
     }
@@ -3927,6 +4474,8 @@
       return mindmapSharesCore(seed, candidate) || candidateDomain === seedDomain || candidateDomain === 'general';
     }
     function mindmapSearchReason(seed, keyword) {
+      const inferred = agentInferredKeywordGuide({ keyword: keyword, seedKeyword: seed, source: 'mindmap-agent-inference' });
+      if (inferred && inferred.meaning) return inferred.meaning;
       const text = normalizeText(seed + ' ' + keyword);
       if (/(제주).*(렌터카|렌트카)/.test(text)) {
         return '여름휴가와 방학 성수기에는 제주 이동 동선, 공항 픽업, 보험 포함 여부, 차량 등급, 예약 취소 규정까지 한 번에 비교하려는 수요가 붙습니다. 광고형 예약 버튼보다 실제 예약 전 체크리스트와 가격 차이를 정리한 글이 체류 시간을 만들기 좋습니다.';
@@ -3946,6 +4495,8 @@
       return '검색량은 단어 자체보다 검색자가 지금 결정을 못 내리는 지점에서 생깁니다. 최신 시점, 비교 기준, 다음 행동, 예외 조건을 분리해서 설명하면 검색 의도와 체류 시간이 함께 살아납니다.';
     }
     function mindmapCombinationIntent(seed, keyword) {
+      const inferred = agentInferredKeywordGuide({ keyword: keyword, seedKeyword: seed, source: 'mindmap-agent-inference' });
+      if (inferred && inferred.action) return inferred.action;
       const text = normalizeText(seed + ' ' + keyword);
       if (/(제주).*(렌터카|렌트카)/.test(text)) {
         return '광고가 강한 예약 키워드는 그대로 쓰기보다 보험 차이, 예약 시기, 공항 픽업, 취소 규정, 차량 등급 비교처럼 정보형 롱테일로 확장해야 합니다.';
@@ -3960,6 +4511,8 @@
     }
     function mindmapIssueLongtailBranches(seed, row) {
       const keyword = normalizeText(row && row.keyword || seed);
+      const inferred = agentInferredKeywordGuide(Object.assign({}, row || {}, { keyword: keyword, seedKeyword: seed, source: 'mindmap-agent-inference' }));
+      if (inferred && inferred.branches && inferred.branches.length) return inferred.branches;
       const text = normalizeText(seed + ' ' + keyword);
       if (/(홍명보|축구|월드컵|감독)/.test(text)) {
         return [
@@ -4168,66 +4721,16 @@
         + '<button class="tiny-btn pro" type="button" data-board-action="analyze" data-keyword="' + safe + '">Pro 분석</button>'
         + '</div>';
     }
-    function keywordAnalysisMetricHtml(label, value) {
-      return '<div class="keyword-analysis-metric"><strong>' + escapeHtml(value) + '</strong><span>' + escapeHtml(label) + '</span></div>';
-    }
-    function naturalRelatedKeywords(row, limit) {
-      const keyword = normalizeText(row && row.keyword);
-      const topic = readableKeywordTopic(row);
-      const text = normalizeText(keyword + ' ' + topic);
-      if (/문화누리카드/.test(text)) {
-        return [
-          '문화누리카드 잔액조회',
-          '문화누리카드 온라인 사용처',
-          '문화누리카드 가맹점',
-          '문화누리카드 사용처 조회',
-          '문화누리카드 오프라인 사용처',
-          '문화누리카드 영화 예매',
-          '문화누리카드 숙박 사용처',
-          '문화누리카드 네이버페이',
-          '문화누리카드 본인충전금 환불',
-          '문화누리카드 지역별 사용처',
-        ].slice(0, limit || 10);
-      }
-      const guide = keywordIntentGuide(row || { keyword: keyword });
-      return uniqueIntentBranches([].concat(
-        guide && guide.branches ? guide.branches : [],
-        naverAutocompleteLikeBranches(keyword),
-        mindmapIssueLongtailBranches(keyword, row)
-      ), limit || 10);
-    }
-    function keywordAnalysisCardHtml(row, index) {
-      const keyword = normalizeText(row && row.keyword) || '-';
-      const displayGrade = displayGradeForRow(row);
-      const related = naturalRelatedKeywords(row, 10).filter(function(item) {
-        return compactKeywordText(item) !== compactKeywordText(keyword);
-      });
-      const relatedHtml = related.length
-        ? '<div class="keyword-analysis-related"><strong>자연 연관 키워드</strong><div class="keyword-analysis-related-chips">'
-          + related.map(function(item) {
-            return '<button class="keyword-analysis-chip" type="button" data-board-action="analyze" data-keyword="' + escapeAttr(item) + '">' + escapeHtml(item) + '</button>';
-          }).join('')
-          + '</div></div>'
-        : '';
-      return '<article class="keyword-analysis-card">'
-        + '<div class="keyword-analysis-main">'
-        + '<div class="keyword-analysis-head"><span class="rank">' + fmt(index + 1) + '</span><span class="grade ' + escapeHtml(displayGrade) + '">' + escapeHtml(displayGrade) + '</span><span class="keyword-analysis-meta">' + escapeHtml(row.source || '-') + '</span></div>'
-        + '<h3 class="keyword-analysis-title">' + escapeHtml(keyword) + '</h3>'
-        + '<div class="keyword-analysis-guide">' + keywordIntentGuideHtml(row) + shoppingProductPickHtml(row) + '</div>'
-        + relatedHtml
-        + '<div class="keyword-analysis-actions">' + keywordActionHtml(keyword) + '</div>'
-        + '</div>'
-        + '<div class="keyword-analysis-metrics">'
-        + keywordAnalysisMetricHtml('PC 검색량', fmt(row.pcSearchVolume))
-        + keywordAnalysisMetricHtml('모바일 검색량', fmt(row.mobileSearchVolume))
-        + keywordAnalysisMetricHtml('전체 검색량', fmt(row.totalSearchVolume))
-        + keywordAnalysisMetricHtml('문서수', fmt(row.documentCount))
-        + keywordAnalysisMetricHtml('경쟁비', fmt(row.goldenRatio))
-        + keywordAnalysisMetricHtml('CPC', fmt(row.cpc))
-        + '</div>'
-        + '</article>';
-    }
     function publishDecisionFor(row) {
+      if (isCrossDomainNonsenseKeyword(row)) {
+        return {
+          label: '의도 충돌',
+          verdict: 'exclude',
+          score: 0,
+          reasons: ['정책·스포츠·쇼핑·지역 의도가 한 키워드에 섞여 검색자가 원하는 답이 깨집니다.'],
+          nextAction: '원 주제 하나만 남기고 자동완성/마인드맵으로 다시 확장하세요.',
+        };
+      }
       if (isAmbiguousCompositeKeyword(row)) {
         return {
           label: '의도 불명확',
@@ -4253,6 +4756,15 @@
           score: browserLocalKeywordQualityScore(row && row.totalSearchVolume, row && row.documentCount),
           reasons: ['상단이 광고·예약 플랫폼에 장악되기 쉬운 구매형 SERP라 블로그 외부유입 수익 키워드로는 우선순위를 낮춥니다.'],
           nextAction: '마인드맵에서 보험, 주의사항, 예약 시기, 비교 기준처럼 광고가 덜한 정보형 롱테일로 재확장하세요.',
+        };
+      }
+      if (isLowTrafficCaptureKeyword(row)) {
+        return {
+          label: '트래픽 약함',
+          verdict: 'exclude',
+          score: liveNeedScore(row),
+          reasons: ['검색량만 있거나 조합이 넓어서 블로그가 클릭을 가져올 명확한 니즈가 약합니다.'],
+          nextAction: '신청/대상/지급일/비교/주의사항/후속 의문처럼 행동 의도가 드러나는 롱테일로 다시 검증하세요.',
         };
       }
       if (isMeasuredDemandTooCrowded(row)) {
@@ -4289,6 +4801,7 @@
     function displayGradeForRow(row) {
       if (isAmbiguousCompositeKeyword(row)) return 'C';
       if (isAdDominatedKeywordRow(row)) return 'C';
+      if (isLowTrafficCaptureKeyword(row)) return 'C';
       return isMeasuredDemandTooCrowded(row) ? 'C' : ((row && row.grade) || '-');
     }
     function publishDecisionReason(decision) {
@@ -4338,6 +4851,57 @@
       const n = Math.max(0, Number(value || 0));
       const pct = Math.max(5, Math.min(100, Math.round((Math.log10(n + 10) / 6) * 100)));
       return '<div class="volume-cell"><strong>' + fmt(n) + '</strong><span><i style="width:' + pct + '%"></i></span></div>';
+    }
+    function keywordAnalysisMetricHtml(label, value) {
+      return '<div class="keyword-analysis-metric"><span>' + escapeHtml(label) + '</span><strong>' + escapeHtml(value == null || value === '' ? '-' : String(value)) + '</strong></div>';
+    }
+    function naturalRelatedKeywords(row, limit) {
+      const keyword = normalizeText(row && row.keyword);
+      const compact = compactKeywordText(keyword);
+      const guide = keywordIntentGuide(row);
+      const seeds = [].concat(
+        agentListValue(row, ['autocompleteKeywords', 'autocomplete', 'relatedKeywords', 'expandedKeywords', 'expansionKeywords', 'mindmapKeywords', 'followUpKeywords', 'clusterKeywords', 'branches']),
+        naverAutocompleteLikeBranches(keyword),
+        guide && guide.branches ? guide.branches : []
+      );
+      return uniqueIntentBranches(seeds, limit || 10)
+        .filter(function(item) { return compactKeywordText(item) !== compact; })
+        .slice(0, limit || 10);
+    }
+    function keywordAnalysisCardHtml(row, index) {
+      const keyword = normalizeText(row && row.keyword) || '-';
+      const grade = displayGradeForRow(row);
+      const guide = enrichKeywordIntentGuide(row, keywordIntentGuide(row));
+      const related = naturalRelatedKeywords(row, 10);
+      const relatedHtml = related.length
+        ? '<div class="keyword-analysis-related"><strong>자연 연관키워드</strong><div class="keyword-analysis-related-chips">'
+          + related.map(function(branch) {
+              return '<button class="keyword-analysis-chip" type="button" data-board-action="analyze" data-keyword="' + escapeAttr(branch) + '">' + escapeHtml(branch) + '</button>';
+            }).join('')
+          + '</div></div>'
+        : '';
+      const meta = [
+        row && row.category ? row.category : '',
+        row && row.source ? row.source : '',
+      ].map(normalizeText).filter(Boolean).join(' · ');
+      return '<article class="keyword-analysis-card">'
+        + '<div class="keyword-analysis-head"><div><div class="keyword-analysis-title">' + escapeHtml((index + 1) + '. ' + keyword) + '</div>'
+        + (meta ? '<div class="keyword-analysis-meta">' + escapeHtml(meta) + '</div>' : '')
+        + '</div><span class="grade ' + escapeHtml(grade) + '">' + escapeHtml(grade) + '</span></div>'
+        + '<div class="keyword-analysis-guide"><strong>왜 검색량이 붙는가</strong>' + escapeHtml(guide.meaning || '검색자가 지금 확인해야 하는 대상, 금액, 일정, 조건을 빠르게 비교하려는 수요입니다.') + '</div>'
+        + '<div class="keyword-analysis-guide"><strong>조합 의도/활용</strong>' + escapeHtml(guide.action || '바로 답을 주는 표와 최신 확인 경로를 먼저 배치하고, 아래에 연관 질문을 이어 붙이세요.') + '</div>'
+        + relatedHtml
+        + '<div class="keyword-analysis-metrics">'
+        + keywordAnalysisMetricHtml('PC', fmt(row && row.pcSearchVolume))
+        + keywordAnalysisMetricHtml('모바일', fmt(row && row.mobileSearchVolume))
+        + keywordAnalysisMetricHtml('전체', fmt(row && row.totalSearchVolume))
+        + keywordAnalysisMetricHtml('문서수', fmt(row && row.documentCount))
+        + keywordAnalysisMetricHtml('경쟁비', fmt(rowGoldenRatio(row)))
+        + keywordAnalysisMetricHtml('CPC', fmt(row && row.cpc))
+        + '</div>'
+        + '<div class="keyword-analysis-actions">' + keywordActionHtml(keyword) + '</div>'
+        + shoppingProductPickHtml(row)
+        + '</article>';
     }
     function findKeywordMetric(keyword) {
       const key = normalizeText(keyword);
@@ -4772,6 +5336,8 @@
         provider: 'codex',
         codexCliLoggedIn: false,
         claudeCodeCliLoggedIn: false,
+        lastServerStatus: null,
+        lastCheckedAt: '',
         fiveHourWindow: true,
         mindmapAssist: true,
         keywordResearchAssist: true,
@@ -4786,6 +5352,8 @@
           provider: provider,
           codexCliLoggedIn: raw.codexCliLoggedIn === true,
           claudeCodeCliLoggedIn: raw.claudeCodeCliLoggedIn === true,
+          lastServerStatus: raw.lastServerStatus && typeof raw.lastServerStatus === 'object' ? raw.lastServerStatus : null,
+          lastCheckedAt: typeof raw.lastCheckedAt === 'string' ? raw.lastCheckedAt : '',
           fiveHourWindow: raw.fiveHourWindow !== false,
           mindmapAssist: raw.mindmapAssist !== false,
           keywordResearchAssist: raw.keywordResearchAssist !== false,
@@ -4798,23 +5366,51 @@
     function writeAdminAiWorkerSettings(settings) {
       localStorage.setItem(adminAiWorkerSettingsStorageKey, JSON.stringify(settings || defaultAdminAiWorkerSettings()));
     }
+    function adminAiWorkerServerWorker(settings, key) {
+      const status = settings && settings.lastServerStatus;
+      return status && status.workers && status.workers[key] ? status.workers[key] : null;
+    }
     function adminAiWorkerReadyState(settings) {
       const apiSettings = readUserApiSettings();
       if (settings.provider === 'api') {
-        const count = ['anthropicApiKey', 'manusApiKey', 'openaiApiKey'].filter(function(key) { return !!apiSettings[key]; }).length;
-        return { ready: count > 0, status: count > 0 ? 'ready' : 'missing', detail: count > 0 ? 'AI API 키 ' + count + '개 저장됨' : 'Claude/OpenAI/Manus API 키 중 하나 이상 필요' };
+        const serverApi = settings.lastServerStatus && settings.lastServerStatus.apiAssist;
+        const count = serverApi && Number.isFinite(Number(serverApi.count))
+          ? Number(serverApi.count)
+          : ['anthropicApiKey', 'manusApiKey', 'openaiApiKey'].filter(function(key) { return !!apiSettings[key]; }).length;
+        return { ready: count > 0, status: count > 0 ? 'ready' : 'missing', detail: count > 0 ? 'AI API 키 ' + count + '개 사용 가능' : 'Claude/OpenAI/Manus API 키 중 하나 이상 필요' };
       }
       if (settings.provider === 'claude-code') {
-        return { ready: !!settings.claudeCodeCliLoggedIn, status: settings.claudeCodeCliLoggedIn ? 'ready' : 'missing', detail: settings.claudeCodeCliLoggedIn ? 'Claude Code 서버 로그인 확인됨' : 'Claude Code 서버 로그인 확인 필요' };
+        const worker = adminAiWorkerServerWorker(settings, 'claudeCode');
+        if (worker) {
+          const ready = worker.loggedIn === true;
+          return {
+            ready: ready,
+            status: ready ? 'ready' : 'missing',
+            detail: ready ? 'Claude Code 서버 로그인 확인됨' : (worker.detail || 'Claude Code 서버 로그인 확인 필요'),
+          };
+        }
+        return { ready: !!settings.claudeCodeCliLoggedIn, status: settings.claudeCodeCliLoggedIn ? 'ready' : 'missing', detail: settings.claudeCodeCliLoggedIn ? 'Claude Code 서버 로그인 확인됨' : 'Claude Code 서버 상태 확인 필요' };
       }
-      return { ready: !!settings.codexCliLoggedIn, status: settings.codexCliLoggedIn ? 'ready' : 'missing', detail: settings.codexCliLoggedIn ? 'Codex 서버 로그인 확인됨' : 'Codex 서버 로그인 확인 필요' };
+      const worker = adminAiWorkerServerWorker(settings, 'codex');
+      if (worker) {
+        const ready = worker.loggedIn === true;
+        return {
+          ready: ready,
+          status: ready ? 'ready' : 'missing',
+          detail: ready ? 'Codex 서버 로그인 확인됨' : (worker.detail || 'Codex 서버 로그인 확인 필요'),
+        };
+      }
+      return { ready: !!settings.codexCliLoggedIn, status: settings.codexCliLoggedIn ? 'ready' : 'missing', detail: settings.codexCliLoggedIn ? 'Codex 서버 로그인 확인됨' : 'Codex 서버 상태 확인 필요' };
     }
     function collectAdminAiWorkerSettings() {
       const selected = document.querySelector('input[name="adminAiWorkerProvider"]:checked');
+      const previous = readAdminAiWorkerSettings();
       return {
         provider: selected ? selected.value : 'codex',
         codexCliLoggedIn: !!(qs('codexCliLoggedIn') && qs('codexCliLoggedIn').checked),
         claudeCodeCliLoggedIn: !!(qs('claudeCodeCliLoggedIn') && qs('claudeCodeCliLoggedIn').checked),
+        lastServerStatus: previous.lastServerStatus || null,
+        lastCheckedAt: previous.lastCheckedAt || '',
         fiveHourWindow: !!(qs('adminAiFiveHourWindow') && qs('adminAiFiveHourWindow').checked),
         mindmapAssist: !!(qs('adminAiMindmapAssist') && qs('adminAiMindmapAssist').checked),
         keywordResearchAssist: !!(qs('adminAiKeywordResearchAssist') && qs('adminAiKeywordResearchAssist').checked),
@@ -4831,6 +5427,23 @@
       target.innerHTML =
         '<div class="settings-check ' + adminStatus + '"><strong>관리자 권한 · ' + (isAdminSession() ? '확인됨' : '잠김') + '</strong><span>' + (isAdminSession() ? 'admin 세션에서만 작업자 선택이 저장됩니다.' : '관리자 계정으로 Pro 로그인해야 설정할 수 있습니다.') + '</span></div>'
         + '<div class="settings-check ' + state.status + '"><strong>' + escapeHtml(adminAiWorkerProviderLabel(settings.provider)) + ' · ' + (state.ready ? '사용 준비' : '확인 필요') + '</strong><span>' + escapeHtml(state.detail) + '</span></div>';
+      const codexWorker = adminAiWorkerServerWorker(settings, 'codex');
+      const claudeWorker = adminAiWorkerServerWorker(settings, 'claudeCode');
+      if (codexWorker || claudeWorker) {
+        [
+          ['Codex CLI', codexWorker],
+          ['Claude Code CLI', claudeWorker],
+        ].forEach(function(pair) {
+          const worker = pair[1];
+          if (!worker) return;
+          const ready = worker.loggedIn === true;
+          const status = ready ? 'ready' : 'missing';
+          const detail = worker.detail || (worker.installed ? '설치됨 · 로그인 상태 확인 필요' : '서버에서 CLI를 찾지 못했습니다.');
+          target.insertAdjacentHTML('beforeend',
+            '<div class="settings-check ' + status + '"><strong>' + escapeHtml(pair[0]) + ' · ' + (ready ? '로그인 확인' : '확인 필요') + '</strong><span>' + escapeHtml(detail) + '</span></div>'
+          );
+        });
+      }
       target.insertAdjacentHTML('beforeend', passwordStatusHtml);
     }
     function renderAdminAiWorkerStatusMessage(settings) {
@@ -4905,6 +5518,20 @@
         provider: settings.provider,
         providerLabel: adminAiWorkerProviderLabel(settings.provider),
         ready: state.ready,
+        serverVerified: !!settings.lastServerStatus,
+        checkedAt: settings.lastCheckedAt || null,
+        workers: settings.lastServerStatus && settings.lastServerStatus.workers ? {
+          codex: {
+            installed: !!(settings.lastServerStatus.workers.codex && settings.lastServerStatus.workers.codex.installed),
+            loggedIn: !!(settings.lastServerStatus.workers.codex && settings.lastServerStatus.workers.codex.loggedIn),
+            status: settings.lastServerStatus.workers.codex && settings.lastServerStatus.workers.codex.status,
+          },
+          claudeCode: {
+            installed: !!(settings.lastServerStatus.workers.claudeCode && settings.lastServerStatus.workers.claudeCode.installed),
+            loggedIn: !!(settings.lastServerStatus.workers.claudeCode && settings.lastServerStatus.workers.claudeCode.loggedIn),
+            status: settings.lastServerStatus.workers.claudeCode && settings.lastServerStatus.workers.claudeCode.status,
+          },
+        } : null,
         codexCliLoggedIn: settings.codexCliLoggedIn,
         claudeCodeCliLoggedIn: settings.claudeCodeCliLoggedIn,
         usageWindowHours: settings.fiveHourWindow === false ? null : 5,
@@ -4918,12 +5545,22 @@
         [endpoints.mindmap, 'mindmap-expansion'],
         [endpoints.golden, 'golden-discovery'],
         [endpoints.proTraffic, 'pro-traffic-hunter'],
+        [endpoints.adsense, 'adsense-keyword-hunter'],
         [endpoints.shoppingConnect, 'shopping-connect'],
         [endpoints.youtubeGolden, 'youtube-golden'],
         [endpoints.naverMate, 'naver-mate-hunter'],
         [endpoints.kin, 'kin-hidden-honey'],
+        [endpoints.blueprint, 'pro-blueprint'],
+        [endpoints.blueprintDraft, 'pro-blueprint-draft'],
+        [endpoints.revenue, 'pro-revenue'],
+        [endpoints.portfolioRevenue, 'portfolio-revenue'],
+        [endpoints.categoryRpm, 'category-rpm'],
         [endpoints.liveGoldenRun, 'live-golden-run'],
         [endpoints.prewarmRun, 'prewarm-run'],
+        [endpoints.rankTrackingRun, 'rank-tracking-run'],
+        [endpoints.rankTrackingManual, 'rank-tracking-manual'],
+        [endpoints.keywordGroups, 'keyword-groups'],
+        [endpoints.keywordExport, 'keyword-export'],
       ];
       for (const pair of pairs) {
         if (url === pair[0]) return pair[1];
@@ -4953,24 +5590,52 @@
         'remove-ad-dominated-low-value-keywords',
       ];
       if (featureId === 'mindmap-expansion') {
-        return common.concat(['expand-autocomplete-keywords', 'build-follow-up-question-clusters', 'measure-expanded-keyword-demand']);
+        return common.concat([
+          'expand-autocomplete-keywords',
+          'build-follow-up-question-clusters',
+          'measure-expanded-keyword-demand',
+        ]);
       }
       if (featureId === 'keyword-analysis') {
-        return common.concat(['attach-autocomplete-keywords', 'explain-combination-intent', 'compare-pc-mobile-demand']);
+        return common.concat([
+          'attach-autocomplete-keywords',
+          'explain-combination-intent',
+          'compare-pc-mobile-demand',
+        ]);
       }
       if (featureId === 'shopping-connect') {
-        return common.concat(['pick-sellable-products', 'explain-product-purchase-trigger', 'reject-non-commercial-news-keywords']);
+        return common.concat([
+          'pick-sellable-products',
+          'explain-product-purchase-trigger',
+          'reject-non-commercial-news-keywords',
+        ]);
       }
       if (featureId === 'naver-mate-hunter') {
-        return common.concat(['expand-naver-autocomplete', 'reject-too-broad-head-terms', 'rank-naver-friendly-longtails']);
+        return common.concat([
+          'expand-naver-autocomplete',
+          'reject-too-broad-head-terms',
+          'rank-naver-friendly-longtails',
+        ]);
       }
       if (featureId === 'kin-hidden-honey') {
-        return common.concat(['detect-question-intent', 'rank-answerable-information-needs', 'reject-generic-qna-keywords']);
+        return common.concat([
+          'detect-question-intent',
+          'rank-answerable-information-needs',
+          'reject-generic-qna-keywords',
+        ]);
       }
       if (featureId === 'youtube-golden') {
-        return common.concat(['cross-check-video-trend-to-blog-demand', 'detect-shorts-to-search-bridge', 'reject-view-only-keywords']);
+        return common.concat([
+          'cross-check-video-trend-to-blog-demand',
+          'detect-shorts-to-search-bridge',
+          'reject-view-only-keywords',
+        ]);
       }
-      return common.concat(['rank-actionable-traffic-keywords', 'explain-ranking-reason', 'build-publishable-longtail-angle']);
+      return common.concat([
+        'rank-actionable-traffic-keywords',
+        'explain-ranking-reason',
+        'build-publishable-longtail-angle',
+      ]);
     }
     function agentAssistHunterCharter(featureId) {
       const shoppingMode = featureId === 'shopping-connect';
@@ -5025,9 +5690,9 @@
         enabled: true,
         version: 'web-agent-assist-v1',
         mode: adminWorker ? 'admin-configured-worker' : 'server-default-worker',
-        featureId: featureId,
-        provider: provider,
-        providerLabel: providerLabel,
+        featureId,
+        provider,
+        providerLabel,
         seedKeyword: agentAssistSeedKeyword(payload) || null,
         mission: charter.mission,
         includeAiInference: true,
@@ -5056,6 +5721,18 @@
           includeBeginnerPublishingAngle: true,
           includeMonetizationRoute: true,
           rejectLowValueComposite: true,
+          outputFields: [
+            'searchVolumeReason',
+            'combinationIntent',
+            'autocompleteKeywords',
+            'relatedKeywords',
+            'expandedKeywords',
+            'subject',
+            'label',
+            'route',
+            'warning',
+          ],
+          explanationStyle: 'source-grounded-agent-inference',
         },
         serverVerified: adminWorker ? adminWorker.serverVerified === true : false,
         adminPreference: adminWorker ? null : {
@@ -5100,23 +5777,43 @@
       }
       openProgress('관리자 AI 작업자 연동상태 확인', 'Codex/Claude Code 로그인 확인값과 선택 작업자를 점검합니다.');
       try {
-        const settings = readAdminAiWorkerSettings();
-        const state = adminAiWorkerReadyState(settings);
-        updateProgress(55, adminAiWorkerProviderLabel(settings.provider) + ' 선택 상태를 확인합니다.');
-        renderAdminAiWorkerStatusMessage(settings);
+        const settings = collectAdminAiWorkerSettings();
+        const apiSettings = readUserApiSettings();
+        updateProgress(25, '서버에서 Codex/Claude Code CLI 설치와 로그인 상태를 확인합니다.');
+        const status = await apiPost(endpoints.adminAiWorkerStatus, {
+          selectedProvider: settings.provider,
+          apiAssist: {
+            anthropic: !!apiSettings.anthropicApiKey,
+            manus: !!apiSettings.manusApiKey,
+            openai: !!apiSettings.openaiApiKey,
+          },
+        });
+        updateProgress(75, '관리자 작업자 연동 결과를 화면에 반영합니다.');
+        const next = Object.assign({}, settings, {
+          codexCliLoggedIn: !!(status.workers && status.workers.codex && status.workers.codex.loggedIn),
+          claudeCodeCliLoggedIn: !!(status.workers && status.workers.claudeCode && status.workers.claudeCode.loggedIn),
+          lastServerStatus: status,
+          lastCheckedAt: status.checkedAt || new Date().toISOString(),
+        });
+        writeAdminAiWorkerSettings(next);
+        hydrateAdminAiWorkerSettingsForm();
+        hydrateAdminSiteContentSettings();
+        const state = adminAiWorkerReadyState(next);
+        renderAdminAiWorkerStatusMessage(next);
         setResult({
           adminAiWorker: {
             ok: state.ready,
-            storage: 'browser-local-admin-only',
-            provider: settings.provider,
-            providerLabel: adminAiWorkerProviderLabel(settings.provider),
-            codexCliLoggedIn: settings.codexCliLoggedIn,
-            claudeCodeCliLoggedIn: settings.claudeCodeCliLoggedIn,
+            storage: 'server-verified-admin',
+            provider: next.provider,
+            providerLabel: adminAiWorkerProviderLabel(next.provider),
+            codexCliLoggedIn: next.codexCliLoggedIn,
+            claudeCodeCliLoggedIn: next.claudeCodeCliLoggedIn,
             status: state.status,
             detail: state.detail,
+            serverStatus: status,
           },
         });
-        log('관리자 AI 작업자 확인: ' + adminAiWorkerProviderLabel(settings.provider) + '=' + state.status);
+        log('관리자 AI 작업자 확인: ' + adminAiWorkerProviderLabel(next.provider) + '=' + state.status);
         completeProgress(state.ready ? '관리자 AI 작업자 사용 준비가 확인되었습니다.' : state.detail);
       } catch (err) {
         qs('adminAiWorkerMessage').textContent = err.message;
@@ -6403,11 +7100,13 @@
       const rows = keywordResultRows(result);
       if (!rows.length) {
         qs('keywordRows').innerHTML = '<tr><td colspan="12" class="muted">서버 결과가 비어 있습니다. API 키 상태 또는 소스 장애를 확인하세요.</td></tr>';
+        renderKeywordAnalysisInsight(result, rows);
         return;
       }
       qs('keywordRows').innerHTML = '<tr><td colspan="12" class="keyword-analysis-table-cell"><div class="keyword-analysis-stack">'
-        + rows.slice(0, 120).map(function(row, index) { return keywordAnalysisCardHtml(row, index); }).join('')
+        + rows.slice(0, 80).map(function(row, index) { return keywordAnalysisCardHtml(row, index); }).join('')
         + '</div></td></tr>';
+      renderKeywordAnalysisInsight(result, rows);
     }
     function setGoldenSummary(boardCount, boardTarget, visibleCount, lockedCount, running, updatedAt, policy) {
       const target = boardTarget || 120;
@@ -6453,13 +7152,11 @@
     function renderGoldenRows(items, exact, target) {
       const limit = exact ? Math.max(60, Math.min(120, Number(target) || 120)) : 5;
       const freshRows = filterFreshGoldenItems(items || []);
-      const rows = freshRows.filter(function(item) {
-        return !shouldHideFromLiveGoldenBoard(item);
-      }).slice(0, limit);
+      const rows = filterDisplayGoldenItems(items || []).slice(0, limit);
       if (!rows.length) {
         qs('goldenBoardList').innerHTML = '';
         qs('goldenNotice').textContent = freshRows.length
-          ? '제품형 또는 의도 불명확 조합 키워드는 LIVE 보드에서 숨겼습니다. 제품 키워드는 추가 기능의 쇼핑커넥트에서 확인하세요.'
+          ? '제품형, 광고 장악형, 의도 충돌형, 트래픽 확보 가능성이 약한 키워드는 LIVE 보드에서 숨겼습니다. 제품 키워드는 추가 기능의 쇼핑커넥트에서 확인하세요.'
           : '서버가 황금키워드 후보를 검증하는 중입니다.';
         return;
       }
@@ -6482,7 +7179,6 @@
           + '<div class="gk-kw">' + escapeHtml(item.keyword || '-') + '</div>'
           + '<div class="gk-sub">' + sub + '</div>'
           + publishDecisionInline(item)
-          + '<div class="gk-why">' + keywordIntentGuideHtml(item) + '</div>'
           + '</div>'
           + '<div class="gk-side">'
           + '<div class="gk-metrics">'
@@ -6490,8 +7186,9 @@
           +   '<div class="gk-m gk-hot"><div class="gk-ml">문서수</div><div class="gk-mv">' + documents + '</div></div>'
           +   '<div class="gk-m gk-hot"><div class="gk-ml">비율</div><div class="gk-mv">' + ratio + '</div></div>'
           + '</div>'
-          + '</div>'
           + '<div class="golden-actions">' + keywordActionHtml(item.keyword || '') + '</div>'
+          + '</div>'
+          + '<div class="gk-why">' + keywordIntentGuideHtml(item) + '</div>'
           + '</article>';
       }).join('');
     }
