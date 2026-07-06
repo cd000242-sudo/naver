@@ -24,20 +24,30 @@ function FloatStack() {
             <style>{`
                 @media (max-width: 768px) {
                     .lp-float-link {
-                        right: 12px !important;
-                        width: 46px !important;
-                        min-width: 46px !important;
-                        height: 46px !important;
+                        right: 10px !important;
+                        width: 42px !important;
+                        min-width: 42px !important;
+                        height: 42px !important;
                         padding: 0 !important;
                         border-radius: 50% !important;
                         justify-content: center !important;
                         gap: 0 !important;
                     }
                     .lp-float-link span { display: none !important; }
-                    .lp-float-link > div { width: 28px !important; height: 28px !important; }
-                    .lp-float-chat { bottom: 18px !important; }
-                    .lp-float-room { bottom: 74px !important; }
-                    .lp-float-youtube { bottom: 130px !important; }
+                    .lp-float-link > div { width: 26px !important; height: 26px !important; }
+                    .lp-float-chat { bottom: calc(14px + env(safe-area-inset-bottom)) !important; }
+                    .lp-float-room { bottom: calc(66px + env(safe-area-inset-bottom)) !important; }
+                    .lp-float-youtube { bottom: calc(118px + env(safe-area-inset-bottom)) !important; }
+                }
+
+                @media (max-width: 420px) {
+                    .lp-float-link {
+                        right: 8px !important;
+                        width: 38px !important;
+                        min-width: 38px !important;
+                        height: 38px !important;
+                    }
+                    .lp-float-link > div { width: 24px !important; height: 24px !important; font-size: 12px !important; }
                 }
             `}</style>
             {/* 위→아래 순서: 음악(MusicPlayer bottom:200) / 유튜브(140) / 단톡방(80) / 1:1(20)

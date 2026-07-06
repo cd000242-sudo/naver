@@ -331,7 +331,7 @@ function PricingPage() {
                 backgroundAttachment: 'fixed',
             } : {}),
         }}>
-            <section style={{ padding: '140px 20px 80px', maxWidth: 1320, margin: '0 auto' }}>
+            <section className="pricing-page-shell" style={{ padding: '140px 20px 80px', maxWidth: 1320, margin: '0 auto' }}>
                 <section className="purchase-proof-showcase" aria-label="실제 발행 영상과 수익 성과 인증">
                     <div className="purchase-video-side">
                         <div className="purchase-section-eyebrow">REAL WORKFLOW</div>
@@ -382,7 +382,7 @@ function PricingPage() {
                 {pricingIntro}
 
                 {/* Product tabs */}
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 36, flexWrap: 'wrap' }}>
+                <div className="pricing-product-tabs" style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 36, flexWrap: 'wrap' }}>
                     {TAB_KEYS.map((k) => (
                         <button
                             key={k}
@@ -630,6 +630,71 @@ function PricingPage() {
 
                         .adsense-proof-card.featured {
                             grid-column: auto;
+                        }
+                    }
+
+                    @media (max-width: 640px) {
+                        .pricing-page-shell {
+                            padding: 104px 12px 54px !important;
+                        }
+
+                        .purchase-proof-showcase {
+                            gap: 14px;
+                            margin-bottom: 24px;
+                        }
+
+                        .purchase-video-side {
+                            padding: 14px;
+                            border-radius: 12px;
+                        }
+
+                        .purchase-section-eyebrow {
+                            min-height: 26px;
+                            font-size: 11px;
+                        }
+
+                        .purchase-video-side h3 {
+                            font-size: 24px;
+                        }
+
+                        .purchase-video-side > p {
+                            font-size: 13px;
+                            line-height: 1.65;
+                        }
+
+                        .purchase-main-video {
+                            padding: 10px;
+                            gap: 12px;
+                        }
+
+                        .purchase-main-video strong {
+                            font-size: 16px;
+                        }
+
+                        .pricing-product-tabs {
+                            display: grid !important;
+                            grid-template-columns: 1fr 1fr;
+                            gap: 8px !important;
+                            margin-bottom: 24px !important;
+                        }
+
+                        .pricing-product-tabs button {
+                            width: 100%;
+                            min-height: 44px;
+                            justify-content: center;
+                            padding: 10px 12px !important;
+                            font-size: 13px !important;
+                        }
+
+                        .pricing-plan-grid {
+                            grid-template-columns: 1fr !important;
+                            gap: 14px;
+                        }
+                    }
+
+                    @media (max-width: 420px) {
+                        .pricing-product-tabs {
+                            grid-template-columns: 1fr;
                         }
                     }
                 `}</style>

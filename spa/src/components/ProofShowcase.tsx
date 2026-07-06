@@ -276,6 +276,59 @@ export default function ProofShowcase({ className = '', compact = false, variant
                             margin-top: 126px;
                         }
                     }
+
+                    @media (max-width: 640px) {
+                        .proof-carousel {
+                            min-height: 500px;
+                            padding: 10px;
+                            border-radius: 12px;
+                        }
+
+                        .proof-carousel-stage {
+                            min-height: 470px;
+                        }
+
+                        .proof-carousel-summary {
+                            left: 10px;
+                            top: 10px;
+                            width: calc(100% - 20px);
+                            padding: 12px;
+                            gap: 4px;
+                        }
+
+                        .proof-carousel-summary strong {
+                            font-size: 16px;
+                            line-height: 1.3;
+                        }
+
+                        .proof-carousel-summary small {
+                            font-size: 11px;
+                        }
+
+                        .proof-carousel-image-shell {
+                            height: 300px;
+                            margin-top: 126px;
+                            border-radius: 10px;
+                        }
+
+                        .proof-carousel-image {
+                            padding: 10px;
+                        }
+
+                        .proof-carousel-dots {
+                            bottom: 16px;
+                            gap: 6px;
+                        }
+
+                        .proof-carousel-dots button {
+                            width: 8px;
+                            height: 8px;
+                        }
+
+                        .proof-carousel-dots button.active {
+                            width: 28px;
+                        }
+                    }
                 `}</style>
             </section>
         );
@@ -525,6 +578,39 @@ export default function ProofShowcase({ className = '', compact = false, variant
                     .proof-feature-card img {
                         height: auto;
                         max-height: 360px;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .proof-showcase {
+                        padding: 18px 14px;
+                        border-radius: 12px;
+                    }
+
+                    .proof-showcase-copy h3 {
+                        font-size: 27px;
+                        line-height: 1.25;
+                    }
+
+                    .proof-showcase-copy p {
+                        font-size: 14px;
+                        line-height: 1.65;
+                    }
+
+                    .proof-feature-card figcaption {
+                        padding: 14px;
+                    }
+
+                    .proof-feature-card strong {
+                        font-size: 18px;
+                    }
+
+                    .proof-feature-card img,
+                    .proof-naver-card img,
+                    .proof-showcase-compact .proof-naver-card img {
+                        max-height: 260px;
+                        object-fit: contain;
+                        background: #08111c;
                     }
                 }
             `}</style>

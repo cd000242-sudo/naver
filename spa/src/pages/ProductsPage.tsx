@@ -1152,15 +1152,16 @@ function ProductsPage() {
 
                 @media (max-width: 640px) {
                     .products-wrap {
-                        width: min(100% - 28px, 1180px);
+                        width: min(100% - 22px, 1180px);
                     }
 
                     .products-hero {
-                        padding: 96px 0 42px;
+                        padding: 88px 0 36px;
                     }
 
                     .products-hero h1 {
-                        font-size: 34px;
+                        font-size: 30px;
+                        line-height: 1.18;
                     }
 
                     .products-hero p,
@@ -1170,7 +1171,7 @@ function ProductsPage() {
                     }
 
                     .products-section {
-                        padding: 62px 0;
+                        padding: 50px 0;
                     }
 
                     .products-section-head h2,
@@ -1198,23 +1199,30 @@ function ProductsPage() {
                     }
 
                     .product-panel {
-                        padding: 18px;
+                        padding: 15px;
+                        border-radius: 12px;
                     }
 
                     .product-panel h3 {
-                        font-size: 28px;
+                        font-size: 24px;
+                        line-height: 1.25;
                     }
 
                     .product-panel h4 {
-                        font-size: 20px;
+                        font-size: 18px;
                     }
 
                     .products-media {
-                        min-height: 220px;
+                        min-height: 190px;
                     }
 
                     .suite-preview img {
-                        height: 220px;
+                        height: 190px;
+                    }
+
+                    .products-media img,
+                    .workflow-shots img {
+                        object-fit: contain;
                     }
 
                 }
