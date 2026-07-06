@@ -1,0 +1,298 @@
+/* ═══════════════════════════════════════════════════════════
+   Summer Theme — Haeundae bright daylight (light mode override)
+   Overrides the dark-mode :root and inline styles via !important.
+   Pair with summer-theme.js for sun-sparkle + ocean wave SVG.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Disable all cherry-blossom/dark artifacts ───────────── */
+.petal-container, .petal,
+.music-toggle, .music-hint { display: none !important; }
+
+/* ── v2 background: real beach photo (replaces SVG scenery) ─ */
+.summer-scenery,
+.summer-palm,
+.summer-sun,
+.summer-waves { display: none !important; }
+
+/* ── Override the dark mode root variables ───────────────── */
+:root {
+  --bg-deep:       #fff5dc !important;
+  --bg-primary:    #fef0c8 !important;
+  --bg-secondary:  rgba(255, 255, 255, 0.85) !important;
+  --bg-card:       rgba(255, 255, 255, 0.72) !important;
+  --bg-glass:      rgba(255, 255, 255, 0.55) !important;
+  --text-primary:  #14304d !important;
+  --text-secondary:#3d5876 !important;
+  --text-muted:    #8a9aae !important;
+  --border:        rgba(20, 48, 77, 0.10) !important;
+}
+
+/* ── Body: real beach photo background (cinematic) ────────── */
+body {
+  background:
+    url('images/hero-beach-bg.png') center top / cover no-repeat fixed,
+    #b3e0ee !important;
+  background-attachment: fixed !important;
+  color: #14304d !important;
+  min-height: 100vh !important;
+}
+
+/* ── body::after: soft readability veil + bottom fade ────── */
+body::after {
+  content: '' !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      rgba(255, 255, 255, 0.18) 55%,
+      rgba(255, 255, 255, 0.32) 100%) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  opacity: 1 !important;
+}
+
+/* ── Sections: transparent so the body gradient shows ────── */
+.section, .section-dark, .section-darker,
+section { background: transparent !important; }
+
+/* ── Cards: glassy white with soft shadow ────────────────── */
+.card, .review-card, .tip-card, .dynamic-review-card,
+.download-card, .product-card, .pricing-card, .order-step,
+.faq-item, .bank-info, .notice-card, .income-card,
+.review-write-section, .tip-write-section, .income-write-section,
+.community-tab, .order-container, .order-container.order-result,
+.stat-card, .login-card {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border: 1px solid rgba(20, 48, 77, 0.10) !important;
+  box-shadow: 0 6px 22px rgba(20, 48, 77, 0.08) !important;
+  color: #14304d !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+/* ── Navigation: glass white ─────────────────────────────── */
+.navbar {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  border-bottom: 1px solid rgba(20, 48, 77, 0.06) !important;
+}
+.nav-link, .nav-brand-text { color: #14304d !important; }
+.nav-link.active, .nav-link:hover { color: #C9A84C !important; }
+@media (max-width: 768px) {
+  .nav-links.mobile-open .nav-link { color: rgba(255, 255, 255, 0.92) !important; }
+  .nav-links.mobile-open .nav-link.active,
+  .nav-links.mobile-open .nav-link:hover { color: #F4D03F !important; }
+}
+
+/* ── Inputs / textareas / selects ────────────────────────── */
+input, textarea, select,
+.review-field, .tip-input,
+.download-input, .form-group input,
+.input-group input {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #14304d !important;
+  border: 1px solid rgba(20, 48, 77, 0.15) !important;
+}
+input::placeholder, textarea::placeholder {
+  color: #8a9aae !important;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #C9A84C !important;
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.18) !important;
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.site-footer, .footer-inner {
+  background: rgba(255, 255, 255, 0.75) !important;
+  color: #3d5876 !important;
+}
+.footer-links a, .footer-biz, .footer-copy { color: #3d5876 !important; }
+.footer-links a:hover { color: #C9A84C !important; }
+
+/* ── Typography color override for inline-styled bits ───── */
+h1, h2, h3, h4, h5, h6 { color: #14304d !important; }
+p, span, label, li, td, th { color: inherit; }
+
+/* ── Decorative gold accent stays the same ───────────────── */
+.gold, .accent-gold,
+.section-tag,
+.product-icon-lg { color: #14304d; }
+
+/* ── Beach scenery: sun + palm trees (added by JS) ───────── */
+.summer-scenery {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* The sun */
+.summer-sun {
+  position: absolute;
+  top: 60px;
+  right: 80px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffacd 0%, #ffe066 35%, #ffc107 70%, #ff9800 100%);
+  box-shadow:
+    0 0 60px rgba(255, 215, 0, 0.55),
+    0 0 120px rgba(255, 215, 0, 0.35),
+    0 0 200px rgba(255, 235, 100, 0.18);
+  animation: sunGlow 5s ease-in-out infinite;
+}
+@keyframes sunGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 60px rgba(255, 215, 0, 0.55),
+      0 0 120px rgba(255, 215, 0, 0.35),
+      0 0 200px rgba(255, 235, 100, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 80px rgba(255, 215, 0, 0.7),
+      0 0 160px rgba(255, 215, 0, 0.45),
+      0 0 240px rgba(255, 235, 100, 0.22);
+  }
+}
+
+/* Sun rays (rotating slowly) */
+.summer-sun::before {
+  content: '';
+  position: absolute;
+  inset: -50px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(255, 235, 100, 0.20) 0deg,
+      transparent 20deg,
+      rgba(255, 235, 100, 0.20) 40deg,
+      transparent 60deg,
+      rgba(255, 235, 100, 0.20) 80deg,
+      transparent 100deg,
+      rgba(255, 235, 100, 0.20) 120deg,
+      transparent 140deg,
+      rgba(255, 235, 100, 0.20) 160deg,
+      transparent 180deg,
+      rgba(255, 235, 100, 0.20) 200deg,
+      transparent 220deg,
+      rgba(255, 235, 100, 0.20) 240deg,
+      transparent 260deg,
+      rgba(255, 235, 100, 0.20) 280deg,
+      transparent 300deg,
+      rgba(255, 235, 100, 0.20) 320deg,
+      transparent 340deg
+    );
+  animation: sunRotate 60s linear infinite;
+  z-index: -1;
+}
+@keyframes sunRotate {
+  to { transform: rotate(360deg); }
+}
+
+/* Palm trees */
+.summer-palm {
+  position: absolute;
+  bottom: 120px;
+  width: 220px;
+  height: 360px;
+}
+.summer-palm.palm-left {
+  left: -25px;
+  transform: rotate(-12deg);
+  animation: palmSway 6s ease-in-out infinite;
+}
+.summer-palm.palm-right {
+  right: -25px;
+  transform: rotate(12deg) scaleX(-1);
+  animation: palmSway 6s ease-in-out infinite reverse;
+  animation-delay: -3s;
+}
+@keyframes palmSway {
+  0%, 100% { transform: rotate(-12deg) translateX(0); }
+  50% { transform: rotate(-9deg) translateX(4px); }
+}
+.summer-palm.palm-right { animation-name: palmSwayRight; }
+.summer-palm-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+}
+@keyframes palmSwayRight {
+  0%, 100% { transform: rotate(12deg) scaleX(-1) translateX(0); }
+  50% { transform: rotate(9deg) scaleX(-1) translateX(4px); }
+}
+
+@media (max-width: 768px) {
+  .summer-sun { top: 40px; right: 30px; width: 75px; height: 75px; }
+  .summer-sun::before { inset: -30px; }
+  .summer-palm { width: 120px; height: 180px; bottom: 100px; }
+  .summer-palm.palm-left { left: -50px; }
+  .summer-palm.palm-right { right: -50px; }
+}
+
+/* ── Bottom ocean wave band (kept; tuned for light bg) ───── */
+.summer-waves {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 160px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+.summer-waves svg { width: 100%; height: 100%; display: block; }
+.summer-waves .wave-shape {
+  animation: waveSlide 14s ease-in-out infinite;
+  transform-origin: center;
+}
+.summer-waves .wave-shape.layer-2 {
+  animation: waveSlide 22s ease-in-out infinite reverse;
+  opacity: 0.7;
+}
+.summer-waves .wave-shape.layer-3 {
+  animation: waveSlide 30s ease-in-out infinite;
+  opacity: 0.5;
+}
+@keyframes waveSlide {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-30px); }
+}
+
+/* ── Sun-sparkle particles (golden) ──────────────────────── */
+.summer-particles {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+}
+.summer-particles .sun-dot {
+  position: absolute;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #ffd966 60%, rgba(255,217,102,0) 100%);
+  box-shadow: 0 0 10px rgba(255,217,102,0.55), 0 0 20px rgba(255,217,102,0.3);
+  opacity: 0;
+  animation: sunFloat linear infinite;
+}
+.summer-particles .sun-dot.small {
+  width: 3px; height: 3px;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #fff2cc 60%, rgba(255,242,204,0) 100%);
+  box-shadow: 0 0 6px rgba(255,242,204,0.5);
+}
+@keyframes sunFloat {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.6); }
+  10%  { opacity: 0.85; }
+  50%  { transform: translate(25px, -40vh) scale(1); }
+  90%  { opacity: 0.5; }
+  100% { opacity: 0; transform: translate(60px, -110vh) scale(0.4); }
+}
+
+@media (max-width: 768px) {
+  .summer-waves { height: 110px; opacity: 0.75; }
+}

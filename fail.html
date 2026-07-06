@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>°áÁ¦ ½ÇÆĞ ? Leaders Pro</title>
-    <link rel="icon" type="image/jpeg" href="favicon.jpg"><text y='.9em' font-size='90'>??</text></svg>">
+    <title>ê²°ì œ ì‹¤íŒ¨ â€” Leaders Pro</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ğŸ‘‘</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="summer-theme.css">
 </head>
 
 <body>
@@ -25,22 +27,22 @@
                 <span class="nav-brand-text">Leaders Pro</span>
             </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link">È¨</a>
-                <a href="lookup.html" class="nav-link">ÁÖ¹®Á¶È¸</a>
+                <a href="index.html" class="nav-link">í™ˆ</a>
+                <a href="lookup.html" class="nav-link">ì£¼ë¬¸ ì¡°íšŒ</a>
             </div>
         </div>
     </nav>
 
     <div class="lookup-container" style="padding-top: 120px;">
         <div class="error-card" style="margin: 0; max-width: none;">
-            <div class="error-icon">??</div>
-            <div class="error-title" id="error-title">°áÁ¦°¡ ¿Ï·áµÇÁö ¾Ê¾Ò½À´Ï´Ù</div>
+            <div class="error-icon">ğŸ˜”</div>
+            <div class="error-title" id="error-title">ê²°ì œê°€ ì™„ë£Œë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤</div>
             <div class="error-message" id="error-message"></div>
             <a href="index.html" class="btn-retry">
-                ?? ´Ù½Ã ½ÃµµÇÏ±â
+                ğŸ”„ ë‹¤ì‹œ ì‹œë„í•˜ê¸°
             </a>
             <p style="margin-top: 20px; font-size: 0.8rem; color: var(--text-muted);">
-                ¹®Á¦°¡ Áö¼ÓµÇ¸é <a href="mailto:cd000242@gmail.com" style="color: var(--gold-primary);">cd000242@gmail.com</a>À¸·Î ¹®ÀÇÇØÁÖ¼¼¿ä.
+                ë¬¸ì œê°€ ì§€ì†ë˜ë©´ <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener" style="color: var(--gold-primary);">cd000242@gmail.com</a>ìœ¼ë¡œ ë¬¸ì˜í•´ì£¼ì„¸ìš”.
             </p>
         </div>
     </div>
@@ -52,12 +54,7 @@
                 <img src="logo.png" alt="Leaders Pro" class="footer-logo">
                 <span>Leaders Pro</span>
             </div>
-            <div class="footer-biz">
-                <p>»óÈ£: Leaders Pro | ´ëÇ¥: ¹Ú¼ºÇö | »ç¾÷ÀÚµî·Ï¹øÈ£: 515-97-01802</p>
-                <p>ÁÖ¼Ò: °æ³² ±èÇØ½Ã ÀåÀ¯·Î334¹ø±æ9</p>
-                <p>ÀÌ¸ŞÀÏ: tjdgus24280@naver.com | ÀüÈ­: 010-7545-1645</p>
-            </div>
-            <p class="footer-copy">¨Ï 2026 Leaders Pro. All rights reserved.</p>
+            <p class="footer-copy">Â© 2026 Leaders Pro. All rights reserved.</p>
         </div>
     </footer>
 
@@ -111,14 +108,16 @@
             initParticles();
             const params = new URLSearchParams(window.location.search);
             const code = params.get('code') || '';
-            const message = params.get('message') || '°áÁ¦°¡ Ãë¼ÒµÇ¾ú°Å³ª ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.';
+            const message = params.get('message') || 'ê²°ì œê°€ ì·¨ì†Œë˜ì—ˆê±°ë‚˜ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.';
 
             document.getElementById('error-message').textContent = message;
             if (code) {
-                document.getElementById('error-title').textContent = `°áÁ¦ ½ÇÆĞ (${code})`;
+                document.getElementById('error-title').textContent = `ê²°ì œ ì‹¤íŒ¨ (${code})`;
             }
         });
     </script>
+    <script src="music.js"></script>
+    <script src="summer-theme.js"></script>
 </body>
 
 </html>

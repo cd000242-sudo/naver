@@ -20,12 +20,9 @@
 // ========== Premium Mini Music Player ==========
 (function() {
     // === Config ===
+    // Phase 4: 여름 테마 — 단일 곡 무한 루프(YouTube playlist 파라미터로 무중단)
     const PLAYLIST = [
-        { id: 'r4EHi65fa-0', title: '🌸 Spring Breeze' },
-        { id: 'WYp9Eo9T3BA', title: '🌿 Peaceful Garden' },
-        { id: '1fueZCTYkpA', title: '☁️ Cloud Walk' },
-        { id: 'lTRiuFIWV54', title: '🎋 Bamboo Rain' },
-        { id: 'jfKfPfyJRdk', title: '🎵 Lofi Beats' },
+        { id: 'f4jS6yW83MU', title: '🎵 배경음악' },
     ];
     const STORAGE_KEY = 'lp_music_playing';
     const TRACK_KEY = 'lp_music_track';
@@ -34,8 +31,9 @@
 
     let player = null, isPlaying = false, apiReady = false;
     let currentTrack = parseInt(localStorage.getItem(TRACK_KEY) || '0') % PLAYLIST.length;
-    const userExplicitlyOff = localStorage.getItem(STORAGE_KEY) === 'false';
-    const shouldAutoPlay = !userExplicitlyOff;
+    // v3: 무조건 자동재생 (사용자 끔 상태 무시 — 사이트 정책)
+    const userExplicitlyOff = false;
+    const shouldAutoPlay = true;
     let expanded = false;
     let timeSaveInterval = null; // ← 주기적 시간 저장 인터벌
 
@@ -56,12 +54,18 @@
             display: flex; flex-direction: column; align-items: flex-end; gap: 0;
             font-family: 'Pretendard Variable', 'Inter', 'Noto Sans KR', sans-serif;
             transition: all 0.4s cubic-bezier(.4,0,.2,1);
+            /* The wrapper's bbox includes the (invisible-but-laid-out) playlist
+               panel above the FAB. Without pass-through, that empty space
+               (240×~380 on mobile) eats taps on whatever sits behind it
+               (hero CTA, mobile menu links, etc). Children re-enable hits. */
+            pointer-events: none;
         }
 
         /* ===== FAB (Floating Action Button) ===== */
         .lp-music-fab {
             display: flex; align-items: center; gap: 8px;
             height: 46px; padding: 0 16px 0 14px;
+            pointer-events: auto;
             border-radius: 23px;
             background: linear-gradient(135deg, rgba(255,183,197,0.35) 0%, rgba(255,107,138,0.25) 100%);
             border: 1px solid rgba(255,183,197,0.5);
@@ -70,6 +74,13 @@
             font-size: 14px; transition: all 0.3s;
             box-shadow: 0 4px 24px rgba(255,107,138,0.25), 0 0 0 0 rgba(255,183,197,0);
             position: relative; overflow: visible;
+        }
+        .lp-fab-play-icon {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b8a, #e0558e);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; color: #fff; flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(255,107,138,0.4);
         }
         .lp-music-fab:hover {
             transform: scale(1.05);
@@ -248,6 +259,9 @@
     // === Build DOM ===
     const wrapper = document.createElement('div');
     wrapper.className = 'lp-music-player';
+    // v7: Turbo Drive 페이지 이동 시 이 요소 유지 → 음악 끊김 0
+    wrapper.id = 'lp-music-player-root';
+    wrapper.setAttribute('data-turbo-permanent', '');
     wrapper.innerHTML = `
         <div class="lp-music-panel" id="lpmPanel">
             <div class="lp-panel-header">
@@ -269,9 +283,9 @@
             <div class="lp-playlist" id="lpmList"></div>
         </div>
         <div class="lp-music-fab entrance" id="lpmFab" title="🌸 음악 플레이어">
-            <span class="lp-fab-icon">🎵</span>
+            <div class="lp-fab-play-icon" id="lpmFabPlayIcon">▶</div>
             <div style="display:flex;flex-direction:column;gap:1px;">
-                <span class="lp-fab-label">Music</span>
+                <span class="lp-fab-label">♪ Music</span>
                 <span class="lp-fab-sublabel" id="lpmFabTrack">${PLAYLIST[currentTrack].title}</span>
             </div>
             <div class="lp-eq-bars" id="lpmEq">
@@ -298,30 +312,28 @@
 
     // Build playlist items
     function renderPlaylist() {
-        listEl.innerHTML = PLAYLIST.map((t, i) =>
-            `<div class="lp-pl-item ${i === currentTrack ? 'active' : ''}" data-idx="${i}">
-                <span class="lp-pl-num">${i === currentTrack ? '♪' : (i + 1)}</span>
-                <span class="lp-pl-name">${t.title}</span>
-            </div>`
-        ).join('');
-        listEl.querySelectorAll('.lp-pl-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const idx = parseInt(item.dataset.idx);
-                if (idx !== currentTrack) { loadTrack(idx); }
-            });
-        });
+        // 관리자에서 지정한 표시명을 유지합니다. YouTube 원본 제목은 사용자에게 노출하지 않습니다.
+        let nowPlayingTitle = PLAYLIST[currentTrack].title;
+        // Radio 자동 재생 표시 + 현재 곡
+        const radioLabel = '<div class="lp-pl-item active"><span class="lp-pl-num">♪</span><span class="lp-pl-name">' + nowPlayingTitle + '</span></div>';
+        const radioInfo = '<div style="font-size:10px; color:rgba(255,255,255,0.5); padding:6px 8px; text-align:center; border-top:1px solid rgba(255,255,255,0.06); margin-top:4px;">🔄 Radio 자동재생 — 비슷한 곡 자동 추가</div>';
+        listEl.innerHTML = radioLabel + radioInfo;
     }
     renderPlaylist();
 
     function updateUI() {
-        titleEl.textContent = PLAYLIST[currentTrack].title;
-        artEl.textContent = PLAYLIST[currentTrack].title.split(' ')[0]; // emoji
+        // 관리자에서 지정한 표시명을 유지합니다. YouTube 원본 제목은 사용자에게 노출하지 않습니다.
+        let currentTitle = PLAYLIST[currentTrack].title;
+        let currentEmoji = currentTitle.split(' ')[0];
+        titleEl.textContent = currentTitle;
+        artEl.textContent = currentEmoji;
         playBtn.textContent = isPlaying ? '⏸' : '▶';
         fab.classList.toggle('playing', isPlaying);
         eqEl.classList.toggle('active', isPlaying);
-        // Update FAB sub-label with current track name
+        const fabPlayIcon = document.getElementById('lpmFabPlayIcon');
+        if (fabPlayIcon) fabPlayIcon.textContent = isPlaying ? '⏸' : '▶';
         if (fabTrackEl) {
-            fabTrackEl.textContent = isPlaying ? PLAYLIST[currentTrack].title : '일시정지';
+            fabTrackEl.textContent = isPlaying ? currentTitle : '일시정지';
         }
         renderPlaylist();
     }
@@ -386,14 +398,22 @@
         updateUI();
     }
 
-    // === 재생 시간 저장/복원 (탭 이동 시 이어재생) ===
+    // === 재생 시간 저장/복원 (탭/페이지 이동 시 이어재생) ===
+    // v5: 페이지 전환 시 끊김 최소화 — 저장 빈도 단축 + pagehide/beforeunload 핸들러
     function saveCurrentTime() {
         if (apiReady && player && typeof player.getCurrentTime === 'function') {
             try {
                 const t = player.getCurrentTime();
                 if (t > 0) {
+                    // 비디오 ID도 같이 저장 (Radio 모드에서 곡 바뀌어도 정확한 위치 복귀)
+                    let videoId = '';
+                    try {
+                        const vd = player.getVideoData && player.getVideoData();
+                        if (vd && vd.video_id) videoId = vd.video_id;
+                    } catch {}
                     localStorage.setItem(TIME_KEY, t.toString());
                     localStorage.setItem(TIME_SAVE_KEY, Date.now().toString());
+                    if (videoId) localStorage.setItem(TIME_KEY + '_vid', videoId);
                 }
             } catch(e) {}
         }
@@ -401,7 +421,77 @@
 
     function startTimeSaving() {
         stopTimeSaving();
-        timeSaveInterval = setInterval(saveCurrentTime, 2000); // 2초마다 저장
+        timeSaveInterval = setInterval(saveCurrentTime, 500); // 2초 → 500ms (정밀도 ↑)
+    }
+
+    // 페이지 이동 직전 즉시 시간 저장 — 끊김 최소화
+    window.addEventListener('pagehide', saveCurrentTime, { passive: true });
+    window.addEventListener('beforeunload', saveCurrentTime, { passive: true });
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') saveCurrentTime();
+    }, { passive: true });
+
+    // v5: YouTube preconnect + 페이지 hover prefetch — 페이지 로딩 빨라짐 → 음악 끊김 ↓
+    (function injectPerformanceHints() {
+        const hosts = [
+            'https://www.youtube.com',
+            'https://s.ytimg.com',
+            'https://i.ytimg.com',
+            'https://www.youtube-nocookie.com',
+        ];
+        hosts.forEach(host => {
+            if (document.querySelector(`link[rel="preconnect"][href="${host}"]`)) return;
+            const link = document.createElement('link');
+            link.rel = 'preconnect';
+            link.href = host;
+            link.crossOrigin = '';
+            document.head.appendChild(link);
+        });
+        // hover prefetch — 사용자가 링크에 마우스 올리면 다음 페이지 미리 로드
+        document.addEventListener('mouseover', (e) => {
+            const a = e.target.closest && e.target.closest('a[href]');
+            if (!a || a.dataset.prefetched) return;
+            const href = a.href || '';
+            if (!href || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('#')) return;
+            // 외부 도메인 prefetch 안 함 (낭비)
+            try {
+                const url = new URL(href);
+                if (url.origin !== location.origin) return;
+            } catch { return; }
+            a.dataset.prefetched = '1';
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.href = href;
+            document.head.appendChild(link);
+        }, { passive: true });
+    })();
+
+    // ─────────────────────────────────────────────────
+    // v7: Turbo Drive 동적 로드 — 멀티페이지 → SPA-lite 변환
+    //   페이지 이동 시 fetch + DOM 부분 교체. body의 lp-music-player(data-turbo-permanent)는 유지
+    //   → 음악 끊김 0 (페이지 사이를 이동해도 같은 player 인스턴스 유지)
+    // ─────────────────────────────────────────────────
+    if (!window.__turboLoaded) {
+        window.__turboLoaded = true;
+        const turboScript = document.createElement('script');
+        turboScript.type = 'module';
+        turboScript.src = 'https://cdn.jsdelivr.net/npm/@hotwired/turbo@8/dist/turbo.es2017-esm.min.js';
+        turboScript.onerror = () => console.warn('[MUSIC] Turbo 로드 실패 — 폴백: normal navigation');
+        document.head.appendChild(turboScript);
+        // Turbo 활성화 후 prefetch 강화 (hover prefetch 와 시너지)
+        document.addEventListener('turbo:before-fetch-request', () => {
+            // 페이지 이동 직전 시간 저장 (Turbo는 unload 안 일으키므로 명시 호출)
+            try {
+                const player = window.__lpMusicPlayer;
+                if (player && typeof player.getCurrentTime === 'function') {
+                    const t = player.getCurrentTime();
+                    if (t > 0) {
+                        localStorage.setItem('lp_music_time', String(t));
+                        localStorage.setItem('lp_music_time_ts', String(Date.now()));
+                    }
+                }
+            } catch {}
+        });
     }
 
     function stopTimeSaving() {
@@ -452,29 +542,37 @@
             updateUI();
         } catch(e) {}
     }
+    // Phase 4 보강: 데스크탑에서 클릭/스크롤 없이 마우스만 움직여도 자동재생 트리거.
+    // mousemove는 once:true라 첫 1회만 실행되어 성능 영향 없음.
+    const AUTOPLAY_EVENTS = ['click','touchstart','scroll','keydown','mousedown','mousemove','pointerdown'];
     function onFirstInteraction() {
         tryAutoPlay();
-        ['click','touchstart','scroll','keydown'].forEach(ev => document.removeEventListener(ev, onFirstInteraction));
+        AUTOPLAY_EVENTS.forEach(ev => document.removeEventListener(ev, onFirstInteraction));
     }
     if (shouldAutoPlay) {
-        ['click','touchstart','scroll','keydown'].forEach(ev => document.addEventListener(ev, onFirstInteraction, { once: true }));
+        AUTOPLAY_EVENTS.forEach(ev => document.addEventListener(ev, onFirstInteraction, { once: true }));
     }
 
     window.onYouTubeIframeAPIReady = function() {
-        const resumeTime = getResumeTime();
+        // v5: 사용자 지정 URL 그대로 — youtube.com/watch?v=f4jS6yW83MU&list=RDf4jS6yW83MU&start_radio=1&t=16s
+        //   videoId = f4jS6yW83MU (관리자 표시명: 배경음악)
+        //   list = RDf4jS6yW83MU (Radio 자동재생 목록 — 비슷한 곡 자동 추가, start_radio=1 효과)
+        //   start = 16초 (t=16s 반영, resume time 무시 — 사용자 명시 요청)
         player = new YT.Player('yt-music-player', {
-            videoId: PLAYLIST[currentTrack].id,
+            videoId: 'f4jS6yW83MU',
             playerVars: {
-                autoplay: shouldAutoPlay ? 1 : 0,
-                start: resumeTime > 0 ? Math.floor(resumeTime) : 0, // ← 이어재생 위치
-                loop: 0, controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0
+                autoplay: 1,
+                start: 16,
+                listType: 'playlist',
+                list: 'RDf4jS6yW83MU',
+                controls: 0, disablekb: 1, fs: 0, modestbranding: 1, rel: 0
             },
             events: {
                 onReady: function() {
                     apiReady = true;
+                    window.__lpMusicPlayer = player;  // v7: Turbo 가 시간 저장에 접근
                     player.setVolume(40);
                     if (shouldAutoPlay) {
-                        // seekTo로 더 정밀하게 이어재생
                         if (resumeTime > 0) {
                             player.seekTo(resumeTime, true);
                         }
@@ -486,8 +584,9 @@
                     updateUI();
                 },
                 onStateChange: function(e) {
-                    if (e.data === YT.PlayerState.ENDED) {
-                        // Auto next track
+                    // v5: Radio playlist 사용 시 ENDED 자동처리 X (YT가 다음 곡 자동 진행)
+                    //   기존 loadTrack 호출은 loadVideoById 로 Radio 컨텍스트를 깨뜨려 멈춤 발생
+                    if (e.data === YT.PlayerState.ENDED && PLAYLIST.length > 1) {
                         loadTrack((currentTrack + 1) % PLAYLIST.length);
                     }
                     // YouTube가 실제로 재생 중인지 상태 동기화
@@ -501,6 +600,12 @@
                         stopTimeSaving();
                         updateUI();
                     }
+                },
+                // v5: Radio 모드 에러 핸들러 (next/prev/loadVideoById 실패 대응)
+                onError: function(e) {
+                    console.warn('[MUSIC] YT Error:', e?.data);
+                    // 영상 비공개/지역 차단 등 → 다음 곡 시도 (Radio가 있으면)
+                    try { if (player && player.nextVideo) player.nextVideo(); } catch {}
                 }
             }
         });

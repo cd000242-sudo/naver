@@ -1,11 +1,11 @@
-# Leaders Pro — 검색엔진 크롤링 정책
-# 모든 크롤러 전체 색인 허용. 관리자·내부 폴더만 차단.
+# Leaders Pro search engine policy.
+# Public pages and assets are crawlable. Admin/private backend paths stay blocked.
 
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /.gas-license-backend/
 
-# 네이버 / 다음 / Google / Bing 명시 허용
 User-agent: Yeti
 Allow: /
 
@@ -15,8 +15,19 @@ Allow: /
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
 User-agent: bingbot
 Allow: /
 
-Sitemap: https://www.leaderspro.kr/sitemap.xml
-Sitemap: https://www.leaderspro.kr/rss.xml
+Sitemap: https://leaderspro.kr/sitemap.xml
+Sitemap: https://leaderspro.kr/rss.xml
+
+#DaumWebMasterTool:39de53ce9f693648c5e3c97251cf818e122821d03792155e23aa71576b14253f:ksFZ/lHwL2tpa+rkCg0X3A==
