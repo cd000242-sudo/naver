@@ -7672,7 +7672,8 @@
     function renderGoldenRows(items, exact, target) {
       const limit = exact ? Math.max(60, Math.min(120, Number(target) || 120)) : 5;
       const freshRows = filterFreshGoldenItems(items || []);
-      const rows = filterDisplayGoldenItems(items || []).slice(0, limit);
+      const sourceRows = exact ? (Array.isArray(items) ? items : []) : filterDisplayGoldenItems(items || []);
+      const rows = sourceRows.slice(0, limit);
       if (!rows.length) {
         qs('goldenBoardList').innerHTML = '';
         qs('goldenNotice').textContent = freshRows.length
@@ -7759,10 +7760,23 @@
       const raw = (snapshot && (snapshot.board || snapshot.items || snapshot.keywords || snapshot.publicPreview)) || [];
       const target = Number(snapshot && snapshot.boardTarget) || 120;
       const strict = filterDisplayGoldenItems(raw);
-      if (strict.length >= Math.min(20, raw.length) || strict.length >= target || strict.length === raw.length) {
+      if (strict.length >= target || strict.length === raw.length) {
         return strict.slice(0, target);
       }
-      return balanceGoldenDisplayItems(filterFreshGoldenItems(raw)).slice(0, target);
+      const balanced = balanceGoldenDisplayItems(filterFreshGoldenItems(raw));
+      if (balanced.length >= Math.min(target, raw.length)) return balanced.slice(0, target);
+      const seen = new Set(balanced.map(function(item) {
+        return normalizeText(item && item.keyword).toLowerCase();
+      }).filter(Boolean));
+      const filled = balanced.slice();
+      raw.forEach(function(item) {
+        if (filled.length >= target) return;
+        const key = normalizeText(item && item.keyword).toLowerCase();
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        filled.push(item);
+      });
+      return filled.slice(0, target);
     }
     function renderProGoldenBoard(snapshot) {
       const items = proGoldenBoardItems(snapshot);
