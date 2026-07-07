@@ -1237,6 +1237,40 @@
       font-size: 12px;
       line-height: 1.45;
     }
+    .login-remember-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      border: 1px solid rgba(20,60,35,.1);
+      border-radius: 12px;
+      background: #F8FCF9;
+      color: #1d3325;
+      padding: 10px 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .login-remember-row input {
+      width: 18px;
+      height: 18px;
+      accent-color: #16a34a;
+      flex: 0 0 auto;
+    }
+    .login-remember-row span {
+      display: grid;
+      gap: 2px;
+      line-height: 1.35;
+    }
+    .login-remember-row strong {
+      color: #173121;
+      font-size: 13px;
+      font-weight: 1000;
+    }
+    .login-remember-row small {
+      color: #718177;
+      font-size: 11px;
+      font-weight: 700;
+    }
     .pro-login-dialog .login-license {
       margin-top: 4px;
       border: 1px solid rgba(22,163,74,.18);
@@ -1921,6 +1955,13 @@
           <label for="proLoginAccountPassword">비밀번호</label>
           <input class="input" id="proLoginAccountPassword" name="leword-pro-account-password" type="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore="true" data-form-type="other" readonly required />
         </div>
+        <label class="login-remember-row" for="proLoginRemember">
+          <input id="proLoginRemember" type="checkbox" autocomplete="off" />
+          <span>
+            <strong>아이디/비밀번호 자동기억하기</strong>
+            <small>체크한 경우에만 이 브라우저에 저장됩니다.</small>
+          </span>
+        </label>
         <details class="login-license">
           <summary>라이선스 키로 인증하기</summary>
           <div class="login-license-body">
@@ -2142,6 +2183,8 @@
     let selectedCommercePeriod = 'today';
     const userApiSettingsStorageKey = 'leword.pro.userApiSettings.v1';
     const proLoginIdStorageKey = 'leword.pro.lastLoginId.v1';
+    const proLoginRememberStorageKey = 'leword.pro.rememberLogin.v1';
+    const proLoginCredentialsStorageKey = 'leword.pro.savedCredentials.v1';
     const adminAiWorkerSettingsStorageKey = 'leword.pro.adminAiWorkerSettings.v1';
     const adminSettingsUnlockStorageKey = 'leword.pro.adminSettingsUnlocked.v1';
     const analyticsVisitorStorageKey = 'leword.analytics.visitor.v1';
@@ -6280,10 +6323,17 @@
       } catch (err) {}
       setTimeout(function() {
         prepareFreshProLoginFields(false);
+        hydrateRememberedProLoginFields();
         qs('proLoginAccountId').focus();
       }, 250);
-      setTimeout(clearProLoginAutofillFromApiSettings, 750);
-      setTimeout(clearProLoginAutofillFromApiSettings, 1500);
+      setTimeout(function() {
+        clearProLoginAutofillFromApiSettings();
+        hydrateRememberedProLoginFields();
+      }, 750);
+      setTimeout(function() {
+        clearProLoginAutofillFromApiSettings();
+        hydrateRememberedProLoginFields();
+      }, 1500);
     }
     function promptProRelogin(message) {
       const safeMessage = message || 'Pro 로그인 세션이 만료되었습니다. 다시 로그인하세요.';
@@ -6838,6 +6888,58 @@
         return '';
       }
     }
+    function readRememberedProLoginCredentials() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(proLoginCredentialsStorageKey) || '{}');
+        if (!raw || raw.remember !== true) return null;
+        const userId = String(raw.userId || '').trim();
+        const password = String(raw.password || '');
+        if (!userId || !password) return null;
+        return { userId: userId, password: password };
+      } catch (err) {
+        return null;
+      }
+    }
+    function clearRememberedProLoginCredentials() {
+      try {
+        localStorage.removeItem(proLoginRememberStorageKey);
+        localStorage.removeItem(proLoginCredentialsStorageKey);
+      } catch (err) {}
+    }
+    function writeRememberedProLoginCredentials(userId, password, remember) {
+      if (!remember) {
+        clearRememberedProLoginCredentials();
+        return;
+      }
+      const saved = {
+        remember: true,
+        userId: String(userId || '').trim(),
+        password: String(password || ''),
+        updatedAt: new Date().toISOString(),
+      };
+      if (!saved.userId || !saved.password) {
+        clearRememberedProLoginCredentials();
+        return;
+      }
+      try {
+        localStorage.setItem(proLoginRememberStorageKey, '1');
+        localStorage.setItem(proLoginCredentialsStorageKey, JSON.stringify(saved));
+      } catch (err) {}
+    }
+    function hydrateRememberedProLoginFields() {
+      const saved = readRememberedProLoginCredentials();
+      const checkbox = qs('proLoginRemember');
+      if (checkbox) checkbox.checked = !!saved;
+      if (!saved) return;
+      const userInput = qs('proLoginAccountId');
+      const passwordInput = qs('proLoginAccountPassword');
+      if (userInput && !userInput.value) userInput.value = saved.userId;
+      if (passwordInput && !passwordInput.value) passwordInput.value = saved.password;
+    }
+    function persistCurrentProLoginRememberChoice(userId, password) {
+      const checkbox = qs('proLoginRemember');
+      writeRememberedProLoginCredentials(userId, password, !!(checkbox && checkbox.checked));
+    }
     function proLoginInputIds() {
       return ['proLoginAccountId', 'proLoginAccountPassword'];
     }
@@ -7032,6 +7134,7 @@
       setApiKeyVisibility(id, input.dataset.apiVisible !== 'true');
     }
     function loginCredentialValues() {
+      const remembered = readRememberedProLoginCredentials();
       return [
         qs('proLoginAccountId') && qs('proLoginAccountId').value,
         qs('proLoginAccountPassword') && qs('proLoginAccountPassword').value,
@@ -7039,6 +7142,8 @@
         qs('adminUserPassword') && qs('adminUserPassword').value,
         session && session.userId,
         storedProLoginUserId(),
+        remembered && remembered.userId,
+        remembered && remembered.password,
       ].concat(recentLoginCredentialValues || [])
         .map(function(value) { return String(value || '').trim(); })
         .filter(function(value, index, list) { return value.length >= 3 && list.indexOf(value) === index; });
@@ -8232,6 +8337,18 @@
     qs('loginClose').addEventListener('click', closeLogin);
     qs('loginCancel').addEventListener('click', closeLogin);
     qs('loginModal').addEventListener('click', function(event) { if (event.target.id === 'loginModal') closeLogin(); });
+    if (qs('proLoginRemember')) {
+      qs('proLoginRemember').addEventListener('change', function(event) {
+        if (!event.target.checked) {
+          clearRememberedProLoginCredentials();
+          return;
+        }
+        persistCurrentProLoginRememberChoice(
+          qs('proLoginAccountId') && qs('proLoginAccountId').value,
+          qs('proLoginAccountPassword') && qs('proLoginAccountPassword').value
+        );
+      });
+    }
     qs('welcomeClose').addEventListener('click', closeWelcomeModal);
     qs('welcomeSettings').addEventListener('click', function() {
       closeWelcomeModal();
@@ -8261,6 +8378,7 @@
         if (licenseCode) loginPayload.licenseCode = licenseCode;
         const payload = await apiPost(endpoints.session, loginPayload);
         if (!payload.session || !payload.session.accessToken) throw new Error(payload.message || '세션 발급 실패');
+        persistCurrentProLoginRememberChoice(userId, password);
         rememberProLoginUserId(userId);
         saveSession(Object.assign({}, payload.session, { userId: payload.session.userId || userId }));
         clearLoginCredentialAutofillFromApiSettings(false);
@@ -8283,6 +8401,7 @@
       } catch (err) {
         const message = err && err.message ? err.message : String(err);
         if (shouldUseOfflineProLoginFallback(userId, password, err)) {
+          persistCurrentProLoginRememberChoice(userId, password);
           rememberProLoginUserId(userId);
           saveSession(createOfflineProSession(userId, message));
           clearLoginCredentialAutofillFromApiSettings(false);
