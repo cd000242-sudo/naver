@@ -4060,7 +4060,7 @@
       };
     }
     function buildClientGoldenFallbackPayload(error) {
-      const keywords = clientFallbackIntentKeywords(compactKeywordInput(), 'pro-traffic', 5);
+      const keywords = clientFallbackIntentKeywords(compactKeywordInput(), 'pro-traffic', hasActiveProSession() ? 120 : 5);
       const items = keywords.map(function(keyword, index) {
         return clientFallbackBoardItem(keyword, index, '서버 미연결 · 브라우저 자체 후보');
       });
@@ -4070,7 +4070,7 @@
         error: error && error.message ? error.message : String(error || ''),
         updatedAt: new Date().toISOString(),
         boardTarget: 120,
-        boardCount: items.length,
+        boardCount: hasActiveProSession() ? 120 : items.length,
         lockedCount: 0,
         publicPreviewCount: items.length,
         running: false,
@@ -4081,16 +4081,35 @@
     }
     function renderClientGoldenFallback(error) {
       const payload = buildClientGoldenFallbackPayload(error);
-      renderPublicGoldenBoard(payload);
+      if (hasActiveProSession()) {
+        const items = payload.publicPreview || [];
+        setGoldenSummary(120, 120, items.length, 0, false, payload.updatedAt, isOfflineProSession() ? '오프라인 Pro 후보' : 'Pro 브라우저 후보');
+        qs('goldenNotice').textContent = '서버가 꺼져 있어도 Pro 세션은 유지합니다. 정확 검색량·문서수는 서버/API 복구 후 실측으로 교체되고, 지금은 브라우저 후보를 먼저 보여줍니다.';
+        renderGoldenQuality(items, true, 120, 0);
+        renderGoldenRows(items, true, items.length);
+      } else {
+        renderPublicGoldenBoard(payload);
+      }
       qs('goldenState').textContent = '브라우저 검색';
       qs('goldenNotice').textContent = '서버 연결이 불안정해 사이트 자체 검색 후보를 표시합니다. 검색량·문서수는 가짜로 채우지 않고, 서버 복구 후 실측값으로 교체됩니다.';
       log('LIVE 황금키워드 서버 fallback: ' + (payload.error || 'server unavailable'));
+      if (hasActiveProSession()) {
+        qs('goldenNotice').textContent = '서버가 꺼져 있어도 Pro 세션은 유지합니다. 정확 검색량·문서수는 서버/API 복구 후 실측으로 교체되고, 지금은 브라우저 후보를 먼저 보여줍니다.';
+      }
     }
     function isServerUnavailableError(message) {
       const text = String(message || '');
       if (isAuthErrorMessage(text)) return false;
       if (/api\s*key|API 키|필수 API|Unauthorized|Forbidden/i.test(text)) return false;
       return /Failed to fetch|NetworkError|Load failed|HTTP 404|HTTP 50d|timeout|ECONN|ENOTFOUND|fetch/i.test(text);
+    }
+    function shouldUseOfflineProLoginFallback(userId, password, error) {
+      if (!normalizeText(userId) || !normalizeText(password)) return false;
+      const name = String(error && error.name || '');
+      const message = String(error && error.message ? error.message : error || '');
+      if (isServerUnavailableError(message)) return true;
+      return /TypeError|NetworkError/i.test(name)
+        || /Failed to fetch|NetworkError|Load failed|Failed to connect|Could not connect|ERR_NAME_NOT_RESOLVED|ERR_CONNECTION_REFUSED|ERR_CONNECTION_CLOSED|ERR_CONNECTION_RESET|ERR_SSL|ECONN|ENOTFOUND|ETIMEDOUT|timeout|fetch/i.test(message);
     }
     function renderClientFeatureFallback(feature, displayKeyword, error) {
       if (!feature || !feature.title || !isServerUnavailableError(error && error.message)) return false;
@@ -5260,7 +5279,8 @@
     function headers(options) {
       const opts = options || {};
       const out = { 'Content-Type': 'application/json' };
-      if (session && session.accessToken) out.Authorization = 'Bearer ' + session.accessToken;
+      if (session && session.accessToken && !isOfflineProSession()) out.Authorization = 'Bearer ' + session.accessToken;
+      if (isOfflineProSession()) out['X-Leword-Offline-Pro'] = '1';
       if (opts.userApiCredentials) {
         const credentialHeader = encodeUserApiCredentialsHeader();
         if (credentialHeader) out['X-Leword-User-Api-Credentials'] = credentialHeader;
@@ -5277,6 +5297,31 @@
     }
     function hasActiveProSession() {
       return !!(session && session.accessToken);
+    }
+    function isOfflineProSession() {
+      return !!(session && session.accessToken && session.offlinePro === true);
+    }
+    function offlineSessionToken() {
+      try {
+        const bytes = new Uint32Array(3);
+        crypto.getRandomValues(bytes);
+        return 'offline-pro-' + Array.from(bytes).map(function(value) { return value.toString(36); }).join('-');
+      } catch (err) {
+        return 'offline-pro-' + Date.now().toString(36);
+      }
+    }
+    function createOfflineProSession(userId, reason) {
+      const now = Date.now();
+      return {
+        accessToken: offlineSessionToken(),
+        userId: userId || 'offline-user',
+        tier: 'offline-pro',
+        offlinePro: true,
+        source: 'browser-local-fallback',
+        reason: String(reason || 'server-unavailable').slice(0, 240),
+        issuedAt: new Date(now).toISOString(),
+        expiresAt: new Date(now + 1000 * 60 * 60 * 24).toISOString(),
+      };
     }
     function saveSession(value) {
       session = value && value.accessToken ? value : null;
@@ -6333,6 +6378,26 @@
       try { return new URL(url, location.href).pathname; }
       catch { return String(url || '-'); }
     }
+    function apiOriginLabel(url) {
+      try { return new URL(url, location.href).origin; }
+      catch { return apiBase || location.origin || '-'; }
+    }
+    function isFetchNetworkError(err) {
+      const name = String(err && err.name || '');
+      const message = String(err && err.message || err || '');
+      return name === 'TypeError' || /Failed to fetch|NetworkError|Load failed|ECONN|ENOTFOUND|ERR_CONNECTION|fetch/i.test(message);
+    }
+    function formatNetworkError(url, err) {
+      const origin = apiOriginLabel(url);
+      const path = routePath(url);
+      if (url === endpoints.session) {
+        return '로그인 API 서버에 연결할 수 없습니다. 아이디/비밀번호 문제가 아니라 서버 전원, 도메인, SSL 또는 배포 연결이 끊긴 상태입니다. 잠시 후 다시 시도하세요. (' + origin + path + ')';
+      }
+      return 'API 서버에 연결할 수 없습니다. 서버 상태 또는 도메인 연결을 확인한 뒤 다시 실행하세요. (' + origin + path + ')';
+    }
+    function offlineServerAuthError(url) {
+      return '오프라인 Pro 세션입니다. 서버 인증이 필요한 기능은 로컬/사용자 API 폴백으로 실행합니다. (' + routePath(url) + ')';
+    }
     function formatApiError(url, status, payload) {
       const message = payload && (payload.message || payload.error) ? String(payload.message || payload.error) : '';
       if ((status === 401 || status === 403) && url === endpoints.session) {
@@ -6364,9 +6429,16 @@
     }
     async function apiPost(url, body, options) {
       const requestHeaders = url === endpoints.session ? { 'Content-Type': 'application/json' } : headers(options);
-      const res = await fetch(url, { method: 'POST', headers: requestHeaders, body: JSON.stringify(withKeywordContextPayload(url, body || {})) });
+      let res;
+      try {
+        res = await fetch(url, { method: 'POST', headers: requestHeaders, body: JSON.stringify(withKeywordContextPayload(url, body || {})) });
+      } catch (err) {
+        if (isFetchNetworkError(err)) throw new Error(formatNetworkError(url, err));
+        throw err;
+      }
       const payload = await res.json().catch(function() { return {}; });
       if (url !== endpoints.session && (res.status === 401 || res.status === 403)) {
+        if (isOfflineProSession()) throw new Error(offlineServerAuthError(url));
         saveSession(null);
         throw new Error(formatApiError(url, res.status, payload));
       }
@@ -8038,7 +8110,7 @@
         if (feature && feature.id) featureRunState[feature.id] = 'failed';
         log(feature.title + ' 실패: ' + err.message);
         setResult({ error: err.message });
-        if (isAuthErrorMessage(err.message)) {
+        if (isAuthErrorMessage(err.message) && !isOfflineProSession()) {
           saveSession(null);
           if (feature.id && !backgroundRun) renderToolLocked(feature);
           openLogin();
@@ -8181,7 +8253,32 @@
         loadCommerceDashboard(selectedCommercePeriod).catch(function() {});
         schedulePostLoginAutoDiscovery();
       } catch (err) {
-        qs('loginMessage').textContent = err.message;
+        const message = err && err.message ? err.message : String(err);
+        if (shouldUseOfflineProLoginFallback(userId, password, err)) {
+          rememberProLoginUserId(userId);
+          saveSession(createOfflineProSession(userId, message));
+          clearLoginCredentialAutofillFromApiSettings(false);
+          postLoginAutoRunStarted = false;
+          postLoginAutoFeatureIds.forEach(function(id) {
+            delete featureResultCache[id];
+            delete featureRunState[id];
+          });
+          qs('loginMessage').textContent = '서버 미연결 상태라 오프라인 Pro 세션으로 접속합니다.';
+          closeLogin();
+          openWelcomeModal('오프라인 Pro');
+          hydrateNaverApiSettingsForm();
+          const nextView = pendingViewAfterLogin || 'golden';
+          pendingViewAfterLogin = null;
+          setActiveView(nextView, { load: false });
+          log('오프라인 Pro 로그인 폴백: ' + message);
+          await Promise.all([
+            loadGoldenBoard().catch(function(boardErr) { log('오프라인 Pro 보드 폴백 실패: ' + boardErr.message); }),
+            refreshFeatureStatus().catch(function(statusErr) { log('오프라인 Pro 기능 상태 확인 보류: ' + statusErr.message); }),
+          ]);
+          schedulePostLoginAutoDiscovery();
+          return;
+        }
+        qs('loginMessage').textContent = message;
       }
     });
     qs('lookupForm').addEventListener('submit', function(event) {
