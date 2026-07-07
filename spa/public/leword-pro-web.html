@@ -4019,6 +4019,28 @@
       const roots = clientFallbackRoots(seed);
       const variants = [];
       roots.forEach(function(root) {
+        variants.push(root);
+      });
+      const tailsByRoot = roots.map(function(root) {
+        if (featureId === 'shopping') return ['추천', '가격 비교', '후기', '구매 전 확인', '가성비'];
+        if (featureId === 'naver-mate') return ['신청방법', '조건', '조회', '일정', '준비물'];
+        if (featureId === 'kin') return ['질문', '해결방법', '주의사항', '기준', '실제 후기'];
+        if (featureId === 'youtube') return ['쇼츠', '반응', '요약', '하이라이트', '논란 정리'];
+        return ['이유', '일정', '방법', '정리', '전망'];
+      });
+      const maxTailCount = tailsByRoot.reduce(function(max, tails) { return Math.max(max, tails.length); }, 0);
+      for (let tailIndex = 0; tailIndex < maxTailCount; tailIndex += 1) {
+        roots.forEach(function(root, rootIndex) {
+          const tail = tailsByRoot[rootIndex][tailIndex];
+          if (tail) variants.push(root + ' ' + tail);
+        });
+      }
+      return uniqueKeywords(variants, limit || 12);
+    }
+    function clientFallbackSeedExpansionKeywords(seed, featureId, limit) {
+      const roots = clientFallbackRoots(seed);
+      const variants = [];
+      roots.forEach(function(root) {
         if (featureId === 'shopping') {
           variants.push(root + ' 추천', root + ' 가격 비교', root + ' 후기', root + ' 구매 전 확인', root + ' 가성비');
         } else if (featureId === 'naver-mate') {
@@ -4060,7 +4082,7 @@
       };
     }
     function buildClientGoldenFallbackPayload(error) {
-      const keywords = clientFallbackIntentKeywords(compactKeywordInput(), 'pro-traffic', hasActiveProSession() ? 120 : 5);
+      const keywords = clientFallbackIntentKeywords('', 'pro-traffic', hasActiveProSession() ? 120 : 5);
       const items = keywords.map(function(keyword, index) {
         return clientFallbackBoardItem(keyword, index, '서버 미연결 · 브라우저 자체 후보');
       });
@@ -4114,7 +4136,7 @@
     function renderClientFeatureFallback(feature, displayKeyword, error) {
       if (!feature || !feature.title || !isServerUnavailableError(error && error.message)) return false;
       const featureId = feature.id || (feature.route === endpoints.golden ? 'pro-traffic' : 'keyword-analysis');
-      const keywords = clientFallbackIntentKeywords(displayKeyword || compactKeywordInput(), featureId, 12);
+      const keywords = clientFallbackSeedExpansionKeywords(displayKeyword || compactKeywordInput(), featureId, 12);
       if (!keywords.length) return false;
       const rows = keywords.map(function(keyword, index) {
         return '<li><strong>' + escapeHtml(keyword) + '</strong><span>서버 실측 대기 · 브라우저 검색 후보 #' + (index + 1) + '</span>' + keywordActionHtml(keyword) + '</li>';
