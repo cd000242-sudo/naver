@@ -67,6 +67,7 @@ import {
   type PrePublishExpectations,
   type PrePublishStats,
 } from './automation/prePublishAssertion.js';
+import { collectEditorFrameForensics, formatEditorFrameForensics } from './automation/editorFrameForensics.js';
 import { formatSilentFailureSummary, recordSilentFailure, resetSilentFailureCounts } from './automation/silentFailureCounter.js';
 import {
   classifyBlogWriteNavigationUrl,
@@ -120,6 +121,10 @@ import {
   getPublishButtonSelectors,
   getPublishModalIndicatorSelectors,
 } from './automation/publishModalSelectorPolicy.js';
+import {
+  getSaveButtonSelectors,
+  SAVE_BUTTON_TEXT_CANDIDATES,
+} from './automation/publishSaveButtonPolicy.js';
 import { resolveNaverRunOptions } from './automation/runOptionsPolicy.js';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
@@ -425,6 +430,7 @@ export class NaverBlogAutomation {
   // ✅ [Phase 1-1] 셀렉터 레지스트리에서 가져온 상수 (하위 호환)
   private readonly PUBLISH_BUTTON_SELECTORS = getAllSelectors(SELECTORS.publish.publishButton);
   private readonly CONFIRM_PUBLISH_SELECTORS = getAllSelectors(SELECTORS.publish.confirmPublishButton);
+  private readonly SAVE_BUTTON_SELECTORS = getSaveButtonSelectors(getAllSelectors(SELECTORS.publish.saveButton));
   private readonly LOGIN_BUTTON_SELECTORS = getAllSelectors(SELECTORS.login.loginButton);
   private readonly LOGIN_ID_INPUT_SELECTORS = getAllSelectors(SELECTORS.login.idInput);
   private readonly LOGIN_PASSWORD_INPUT_SELECTORS = getAllSelectors(SELECTORS.login.pwInput);
@@ -4599,8 +4605,62 @@ export class NaverBlogAutomation {
   }
 
   /**
-   * 날짜/시간 설정 (네이버 UI에 맞춤)
+   * Find the Naver editor save button when CSS module selectors drift.
    */
+  private async findVisibleSaveButtonFallback(frame: Frame): Promise<ElementHandle<Element> | null> {
+    const textCandidates: string[] = [...SAVE_BUTTON_TEXT_CANDIDATES];
+    const handle = await frame.evaluateHandle((textCandidates) => {
+      const isVisible = (el: HTMLElement): boolean => {
+        const rect = el.getBoundingClientRect();
+        const style = window.getComputedStyle(el);
+        return rect.width > 0
+          && rect.height > 0
+          && style.display !== 'none'
+          && style.visibility !== 'hidden'
+          && style.opacity !== '0';
+      };
+
+      const normalize = (value: unknown): string => String(value ?? '').replace(/\s+/g, '').trim();
+      const buttons = Array.from(document.querySelectorAll('button, [role="button"]')) as HTMLElement[];
+
+      for (const button of buttons) {
+        if (!isVisible(button)) continue;
+
+        const clickArea = button.getAttribute('data-click-area') || '';
+        const testId = button.getAttribute('data-testid') || '';
+        const className = String(button.className || '');
+        if (clickArea.includes('tpb.save') || /save/i.test(testId) || className.includes('save_btn')) {
+          return button;
+        }
+
+        const textValues = [
+          button.textContent,
+          button.getAttribute('aria-label'),
+          button.getAttribute('title'),
+        ];
+        if (textValues.some((value) => textCandidates.includes(normalize(value)))) {
+          return button;
+        }
+      }
+
+      return null;
+    }, textCandidates);
+
+    const element = handle.asElement();
+    if (!element) {
+      await handle.dispose().catch(() => undefined);
+      return null;
+    }
+
+    const isElement = await element.evaluate((el: Node) => el instanceof HTMLElement).catch(() => false);
+    if (!isElement) {
+      await element.dispose().catch(() => undefined);
+      return null;
+    }
+
+    return element as ElementHandle<Element>;
+  }
+
   /**
    * 날짜/시간 설정 (수정됨 - 자동으로 3가지 방식 시도)
    */
@@ -4736,11 +4796,18 @@ export class NaverBlogAutomation {
             frame = refreshedFrame;
             stats = await collectPrePublishStats(refreshedFrame);
           }
-          if (isEditorBodyUnreadable(stats)) {
+          const skipPrePublishReport = isEditorBodyUnreadable(stats);
+          if (skipPrePublishReport) {
             this.log('[PrePublish] SmartEditor body read looks like toolbar/image chrome. Continuing publish instead of blocking on a false verification result.');
             this.emitTailDebugSnapshot('pre-publish-body-unreadable-fail-open', expectations, stats);
-            return;
+            // [2026-07-08 계측] 발행 직전까지 0으로 읽히면 내부 프레임 정체를 기록(읽기 전용) —
+            //   editor-body-not-readable 근본원인(네비게이션/DOM소실/오프레임) 확정용.
+            try {
+              const forensics = await collectEditorFrameForensics(this.ensurePage(), frame);
+              this.log(formatEditorFrameForensics(forensics));
+            } catch { /* best-effort */ }
           }
+          if (!skipPrePublishReport) {
           // [SPEC-STABILITY-2026 R6] 정의적 수정: 본문이 기대치보다 한참 짧게 읽히면
           // 단발 판독을 진짜 누락으로 단정하지 않는다. 라이브 에디터는 리플로우/비동기
           // 카드 변환 도중 일시적으로 부분만 읽힐 수 있으므로, 안정 대기 + 프레임 재획득으로
@@ -4803,6 +4870,7 @@ export class NaverBlogAutomation {
               throw new Error(`PRE_PUBLISH_BLOCKED:발행 직전 검사 실패 — ${detail}. 누락된 글이 발행되지 않도록 중단합니다.${hashtagDebug}`);
             }
           }
+          }
         }
       } catch (assertErr) {
         // [R6] 의도된 차단은 그대로 위로 — 검사 인프라 오류만 fail-open
@@ -4816,11 +4884,7 @@ export class NaverBlogAutomation {
       if (mode === 'draft') {
         this.log('🔄 블로그 글 임시저장 중...');
         // 임시저장 버튼 찾기 (제공된 셀렉터 사용)
-        const saveButtonSelectors = [
-          'button.save_btn__bzc5B[data-click-area="tpb.save"]',
-          'button.save_btn__bzc5B',
-          'button[data-click-area="tpb.save"]',
-        ];
+        const saveButtonSelectors = this.SAVE_BUTTON_SELECTORS;
 
         let saveButton: ElementHandle<Element> | null = null;
         for (const selector of saveButtonSelectors) {
@@ -4829,6 +4893,11 @@ export class NaverBlogAutomation {
             return null;
           });
           if (saveButton) break;
+        }
+
+        if (!saveButton) {
+          this.log('⚠️ 저장 버튼 셀렉터 실패 → 텍스트/속성 기반 fallback 시도');
+          saveButton = await this.findVisibleSaveButtonFallback(frame);
         }
 
         if (!saveButton) {
@@ -7419,6 +7488,14 @@ export class NaverBlogAutomation {
         `[TailFrame] ${stage}: refreshed stats body=${refreshedStats?.bodyChars ?? -1}, ` +
         `cards=${refreshedStats?.linkCardCount ?? -1}, dividers=${refreshedStats?.dividerCount ?? -1}`
       );
+      // [2026-07-08 계측] 재획득 후에도 0이면 내부 프레임의 정체(URL/문서상태/컴포넌트 수)를 기록해
+      //   "네비게이션 vs DOM 소실 vs 잘못된 프레임" 세 가설을 다음 발생 시 확정한다(읽기 전용).
+      if (refreshedStats && isEditorBodyUnreadable(refreshedStats)) {
+        try {
+          const forensics = await collectEditorFrameForensics(page, frame);
+          this.log(formatEditorFrameForensics(forensics));
+        } catch { /* best-effort */ }
+      }
     };
 
     const recollectHashtagStatsAfterUnreadable = async (
