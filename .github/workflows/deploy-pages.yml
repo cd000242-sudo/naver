@@ -71,6 +71,9 @@ jobs:
             fi
           done
           # 4) Deep link fallback — 존재하지 않는 경로(/foo)도 SPA index 로
+          if [ -f "_site/admin/index.html" ]; then
+            cp "_site/admin/index.html" "_site/admin.html"
+          fi
           cp _site/index.html _site/404.html
 
       - name: Setup Pages

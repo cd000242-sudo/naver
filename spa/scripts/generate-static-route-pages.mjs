@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
 const templatePath = path.join(distDir, 'index.html');
+const legacyAdminPath = path.resolve(__dirname, '..', '..', 'admin', 'index.html');
 const siteOrigin = 'https://leaderspro.kr';
 
 const routes = [
@@ -131,6 +132,17 @@ for (const route of routes) {
   const routeDir = path.join(distDir, route.path);
   fs.mkdirSync(routeDir, { recursive: true });
   fs.writeFileSync(path.join(routeDir, 'index.html'), routeHtml(template, route), 'utf8');
+}
+
+if (fs.existsSync(legacyAdminPath)) {
+  const adminDir = path.join(distDir, 'admin');
+  fs.mkdirSync(adminDir, { recursive: true });
+  const adminHtml = fs.readFileSync(legacyAdminPath, 'utf8');
+  fs.writeFileSync(path.join(adminDir, 'index.html'), adminHtml, 'utf8');
+  fs.writeFileSync(path.join(distDir, 'admin.html'), adminHtml, 'utf8');
+  console.log('Copied legacy admin panel to dist/admin/index.html and dist/admin.html.');
+} else {
+  console.warn(`Legacy admin panel was not found: ${legacyAdminPath}`);
 }
 
 console.log(`Generated ${routes.length} static route pages for search crawlers.`);

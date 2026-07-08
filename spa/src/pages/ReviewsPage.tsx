@@ -250,8 +250,8 @@ function ReviewsPage() {
 
     return (
         <div style={{ position: 'relative', zIndex: 1 }}>
-            <section style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, marginBottom: 42, flexWrap: 'wrap' }}>
+            <section className="reviews-page-shell" style={{ padding: '140px 20px 100px', maxWidth: 1200, margin: '0 auto' }}>
+                <div className="reviews-page-head" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 20, marginBottom: 42, flexWrap: 'wrap' }}>
                     <div>
                         <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>REVIEWS</span>
                         <h1 style={{ fontSize: 'clamp(30px, 4vw, 46px)', fontWeight: 900, marginBottom: 12, letterSpacing: 0 }}>실제 사용자 후기</h1>
@@ -284,9 +284,9 @@ function ReviewsPage() {
                         <p style={{ margin: 0, color: 'rgba(255,255,255,0.62)', lineHeight: 1.7 }}>더미 후기는 표시하지 않습니다. 실제 수익인증과 후기가 승인되면 이곳에 노출됩니다.</p>
                     </div>
                 ) : (
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 22 }}>
+                    <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 22 }}>
                         {testimonials.map((t, i) => (
-                            <article key={`${t.author}-${i}`} style={{ background: 'rgba(18,18,26,0.78)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, overflow: 'hidden', boxShadow: '0 18px 52px rgba(0,0,0,0.22)' }}>
+                            <article className="review-card" key={`${t.author}-${i}`} style={{ background: 'rgba(18,18,26,0.78)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, overflow: 'hidden', boxShadow: '0 18px 52px rgba(0,0,0,0.22)' }}>
                                 {t.image && (
                                     <div style={{ background: '#080d14', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                                         {t.mediaType === 'video' ? (
@@ -321,6 +321,48 @@ function ReviewsPage() {
                 )}
             </section>
 
+            <style>{`
+                @media (max-width: 640px) {
+                    .reviews-page-shell {
+                        padding: 104px 14px 64px !important;
+                    }
+
+                    .reviews-page-head {
+                        align-items: flex-start !important;
+                        margin-bottom: 26px !important;
+                    }
+
+                    .reviews-page-head h1 {
+                        font-size: 30px !important;
+                        line-height: 1.2 !important;
+                    }
+
+                    .reviews-page-head button {
+                        width: 100%;
+                    }
+
+                    .reviews-grid {
+                        grid-template-columns: 1fr !important;
+                        gap: 16px !important;
+                    }
+
+                    .review-card img,
+                    .review-card video {
+                        height: 190px !important;
+                    }
+
+                    .review-modal-panel {
+                        width: 100% !important;
+                        max-height: calc(100dvh - 20px) !important;
+                        border-radius: 10px !important;
+                    }
+
+                    .reviews-contact-grid {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            `}</style>
+
             {modalOpen && (
                 <div
                     role="dialog"
@@ -340,6 +382,7 @@ function ReviewsPage() {
                     }}
                 >
                     <div
+                        className="review-modal-panel"
                         onClick={(event) => event.stopPropagation()}
                         style={{
                             width: 'min(620px, 100%)',
@@ -391,7 +434,7 @@ function ReviewsPage() {
                                 </div>
                             )}
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 12, marginBottom: 12 }}>
+                            <div className="reviews-contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 12, marginBottom: 12 }}>
                                 <input type="text" placeholder="닉네임 선택" maxLength={20} value={author} onChange={(e) => setAuthor(e.target.value)} style={inputBase} />
                                 <input type="email" placeholder="이메일 필수, 공개 시 마스킹" value={email} onChange={(e) => setEmail(e.target.value)} style={inputBase} />
                             </div>
