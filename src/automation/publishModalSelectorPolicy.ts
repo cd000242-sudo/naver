@@ -24,6 +24,9 @@ export function getPublishModalIndicatorSelectors(): string[] {
     'button.confirm_btn__WEaBq',
     PUBLISH_SELECTORS.categoryButton.primary,
     PUBLISH_SELECTORS.immediateRadio.primary,
+    PUBLISH_SELECTORS.scheduleRadio.primary,
+    ...getAllSelectors(PUBLISH_SELECTORS.scheduleRadio),
+    'input[name="radio_time"]',
   ]);
 }
 
@@ -36,6 +39,22 @@ export function getImmediatePublishOptionSelectors(): string[] {
     '[role="radio"][data-value="publish"]',
     'input[value="publish"]',
     'input[type="radio"][value="publish"]',
+  ]);
+}
+
+export function getSchedulePublishOptionSelectors(extraSelectors: readonly string[] = []): string[] {
+  return unique([
+    PUBLISH_SELECTORS.scheduleRadio.primary,
+    ...getAllSelectors(PUBLISH_SELECTORS.scheduleRadio),
+    ...getAllSelectors(PUBLISH_SELECTORS.scheduleRadioByValue),
+    ...getAllSelectors(PUBLISH_SELECTORS.scheduleRadioLabel),
+    ...extraSelectors,
+    'label[for="radio_time2"]',
+    '[data-value="schedule"]:not(button)',
+    '[role="radio"][data-value="schedule"]',
+    'input[value="schedule"]',
+    'input[type="radio"][value="schedule"]',
+    'input[type="radio"][value="pre"]',
   ]);
 }
 

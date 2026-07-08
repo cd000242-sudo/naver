@@ -9,6 +9,12 @@ import {
 } from './selectors';
 import { recordSilentFailure } from './silentFailureCounter.js';
 import { validateScheduleDate } from './scheduleDatePolicy.js';
+import {
+  getConfirmPublishSelectors,
+  getPublishButtonSelectors,
+  getPublishModalIndicatorSelectors,
+  getSchedulePublishOptionSelectors,
+} from './publishModalSelectorPolicy.js';
 
 // ── selectCategoryInPublishModal ──
 
@@ -1193,11 +1199,7 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
 
     // 1단계: 발행 버튼 클릭 (✅ [2026-03-24 FIX] 재시도 + 모달 열림 확인 강화)
     self.log('📌 1단계: 발행 모달 열기');
-    const publishBtnSelectors = [
-      'button[data-click-area="tpb.publish"]',
-      'button.publish_btn__m9KHH[data-click-area="tpb.publish"]',
-      'button.publish_btn__m9KHH',
-    ];
+    const publishBtnSelectors = getPublishButtonSelectors(getAllSelectors(SELECTORS.publish.publishButton));
 
     // ✅ 발행 버튼 찾기: frame + page 양쪽
     let publishButton = await self.waitForAnySelector(frame, publishBtnSelectors, 10000);
@@ -1231,14 +1233,7 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
     }
 
     // ✅ [2026-03-24 FIX] 발행 모달 열기 재시도 (최대 3회)
-    const modalIndicatorSelectors = [
-      'input#radio_time1',
-      'input#radio_time2',
-      'input[name="radio_time"]',
-      '[data-click-area="tpb*i.category"]',
-      'button[data-testid="seOnePublishBtn"]',
-      'button[data-click-area="tpb*i.publish"]',
-    ];
+    const modalIndicatorSelectors = getPublishModalIndicatorSelectors();
     let modalOpened = false;
     const MAX_MODAL_CLICKS = 3;
 
@@ -1278,7 +1273,7 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
     // 2단계: 예약발행 라디오 버튼 선택 (정확한 셀렉터!)
     self.log('📌 2단계: 예약발행 옵션 선택');
 
-    const scheduleRadioSelectors = [
+    const legacyScheduleRadioSelectors = [
       'input#radio_time2',  // ✅ 가장 확실함!
       'input[name="radio_time"][value="pre"]',
       'input[type="radio"][value="pre"]',
@@ -1286,6 +1281,8 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
     ];
 
     // ✅ [2026-04-11 FIX] 라디오 버튼 탐색을 함수로 추출 — 재시도 가능하게
+    const scheduleRadioSelectors = getSchedulePublishOptionSelectors(legacyScheduleRadioSelectors);
+
     const findScheduleRadio = async (): Promise<any> => {
       // 1차: frame에서 CSS 셀렉터로 찾기 (타임아웃 10초로 증가)
       let radio = await self.waitForAnySelector(frame, scheduleRadioSelectors, 10000);
@@ -1438,11 +1435,7 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
     self.log('📌 4단계: 예약발행 확인');
 
     // ✅ [2026-03-24 FIX] 확인 버튼 — frame + page 양쪽 + 텍스트 폴백
-    const confirmSelectors = [
-      'button[data-testid="seOnePublishBtn"]',
-      'button[data-click-area="tpb*i.publish"]',
-      'button.confirm_btn__WEaBq',
-    ];
+    const confirmSelectors = getConfirmPublishSelectors(getAllSelectors(SELECTORS.publish.confirmPublishButton));
     let confirmButton = await self.waitForAnySelector(frame, confirmSelectors, 5000);
     if (!confirmButton) {
       self.log('⚠️ frame에서 확인 버튼 미발견, page에서 재시도...');
