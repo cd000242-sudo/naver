@@ -1,3 +1,5 @@
+import { getVerifiedRealBlogCategoryName, getVerifiedRealBlogCategoryValue } from '../utils/realBlogCategoryPolicy.js';
+
 // ============================================
 // unifiedDOMCache.ts — renderer.ts에서 추출한 DOM 캐시 시스템
 // Phase 5B-2: UnifiedDOMCache 객체
@@ -192,19 +194,13 @@ const UnifiedDOMCache = {
   },
 
   getRealCategory(): string | undefined {
-    return (document.getElementById('real-blog-category-select') as HTMLSelectElement)?.value || undefined;
+    const select = document.getElementById('real-blog-category-select') as HTMLSelectElement | null;
+    return getVerifiedRealBlogCategoryValue(select);
   },
 
   getRealCategoryName(): string | undefined {
-    const select = document.getElementById('real-blog-category-select') as HTMLSelectElement;
-    if (select && select.selectedIndex >= 0) {
-      const selectedOption = select.options[select.selectedIndex];
-      if (!selectedOption?.value) {
-        return undefined;
-      }
-      return selectedOption?.text?.trim() || undefined;
-    }
-    return undefined;
+    const select = document.getElementById('real-blog-category-select') as HTMLSelectElement | null;
+    return getVerifiedRealBlogCategoryName(select);
   }
 };
 

@@ -604,12 +604,14 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
   }
 
   const _textOnlyPublishFlag = !_forceImageGeneration && rawPipeline.textOnlyPublish === 'true';
+  const _headingImageNoneFlag = !_forceImageGeneration && rawPipeline.headingImageMode === 'none';
   const _domSkipImagesFlag = !_forceImageGeneration && getDomSkipImagesChecked();
   const _skipImagesFlag = options?.skipImages === true
     || _textOnlyPublishFlag
+    || _headingImageNoneFlag
     || _domSkipImagesFlag;
   if (_skipImagesFlag) {
-    console.warn('[generateImagesWithCostSafety] 🚫 skipImages/textOnlyPublish=true → 유료 이미지 API 호출 전면 차단');
+    console.warn('[generateImagesWithCostSafety] 🚫 skipImages/textOnlyPublish/headingImageMode=none → 유료 이미지 API 호출 전면 차단');
     return { success: true, images: [], message: '이미지 없이 발행 설정으로 차단됨' };
   }
 

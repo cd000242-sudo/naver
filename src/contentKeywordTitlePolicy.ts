@@ -1,3 +1,5 @@
+import { collapseDuplicateLeadingYearTitle } from './contentTitleYearGuard';
+
 export interface KeywordTitleSourceLike {
   useKeywordAsTitle?: boolean;
   keywordForTitle?: string;
@@ -9,7 +11,9 @@ export interface KeywordTitleSourceLike {
 }
 
 function normalizeTitleCandidate(value: unknown): string {
-  return String(value || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+  return collapseDuplicateLeadingYearTitle(
+    String(value || '').replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim()
+  );
 }
 
 function firstKeywordFrom(value: unknown): string {

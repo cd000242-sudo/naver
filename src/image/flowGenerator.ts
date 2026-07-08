@@ -487,7 +487,15 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
             const closed = cachedPage.isClosed();
             if (!closed) {
                 await cachedPage.title();
-                return cachedPage;
+                const cachedLoggedIn = await isLoggedInToFlow(cachedPage).catch(() => false);
+                if (cachedLoggedIn) return cachedPage;
+                flowWarn('[Flow] cached page is alive but login session is missing - reopening visible login flow');
+                try { await cachedContext?.close().catch(() => {}); } catch { /* ignore */ }
+                cachedContext = null;
+                cachedPage = null;
+                cachedProjectUrl = null;
+                _networkListenerInstalled = false;
+                _networkImageQueue = [];
             }
         } catch (err) {
             flowWarn(`[Flow] 캐시 페이지 stale — 재생성: ${(err as Error).message.substring(0, 80)}`);

@@ -1026,8 +1026,10 @@ async function extractProductNameFromUrl(url: string): Promise<string> {
       // ✅ Puppeteer 시도 (빠르게 실패 처리)
       try {
         const puppeteer = await import('puppeteer');
+        const executablePath = await getChromiumExecutablePath();
         const browser = await puppeteer.default.launch({
           headless: true,
+          executablePath: executablePath || undefined,
           args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -1129,7 +1131,12 @@ async function extractProductNameFromUrl(url: string): Promise<string> {
     // 5. 마지막 수단: Puppeteer로 페이지 제목 추출
     try {
       const puppeteer = await import('puppeteer');
-      const browser = await puppeteer.default.launch({ headless: true });
+      const executablePath = await getChromiumExecutablePath();
+      const browser = await puppeteer.default.launch({
+        headless: true,
+        executablePath: executablePath || undefined,
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      });
       const page = await browser.newPage();
       await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36');
       await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 });

@@ -8,6 +8,7 @@
 import type { ImageRequestItem, GeneratedImage } from './types.js';
 import { writeImageFile } from './imageUtils.js';
 import path from 'path';
+import { getChromiumExecutablePath } from '../browserUtils.js';
 
 // ==========================================
 // 1. 설정 및 상수 분리 (Maintainability)
@@ -101,8 +102,10 @@ export class NaverImageScraper {
       this.puppeteer = await import('puppeteer');
     }
     if (!this.browser) {
+      const executablePath = await getChromiumExecutablePath();
       this.browser = await this.puppeteer.launch({
         headless: true,
+        executablePath: executablePath || undefined,
         args: [
           '--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage',
           '--disable-gpu', '--disable-extensions', '--mute-audio'

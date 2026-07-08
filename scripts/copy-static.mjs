@@ -170,6 +170,7 @@ try {
     'titleUtils.js',
     'errorUtils.js',
     'categoryNormalizeUtils.js',
+    'realBlogCategoryPolicy.js',
     'textFormatUtils.js',
     'time24Select.js',  // ✅ [2026-03-24] 예약 시간 선택 UI 컴포넌트 (continuousPublishing, scheduleManager, multiAccountManager에서 사용)
     // ✅ [v2.10.83 HOTFIX] 의존 없는 pure utils — accountSettingsManager/renderer.ts보다 *먼저* inline 필수.

@@ -1,3 +1,5 @@
+import { collapseDuplicateLeadingYearTitle } from '../../contentTitleYearGuard.js';
+
 /**
  * ✅ [2026-01-25 모듈화] 제목 처리 유틸리티
  * 
@@ -24,9 +26,9 @@
  */
 export function applyKeywordPrefixToTitle(title: string, keyword: string): string {
     const cleanKeyword = (keyword || '').trim();
-    if (!cleanKeyword) return (title || '').trim();
+    if (!cleanKeyword) return collapseDuplicateLeadingYearTitle((title || '').trim());
 
-    const cleanTitle = (title || '').trim();
+    const cleanTitle = collapseDuplicateLeadingYearTitle((title || '').trim());
     if (!cleanTitle) return cleanKeyword;
 
     // ✅ [2026-02-08] 강화된 중복 방지: 키워드의 모든 토큰이 이미 제목에 포함되어 있으면 접두사 불필요
@@ -79,5 +81,7 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string): strin
     }
 
     rest = rest.replace(/^[\s\-–—:|·•.,!?]+/, '').trim();
-    return rest ? `${cleanKeyword} ${rest}`.replace(/\s+/g, ' ').trim() : cleanKeyword;
+    return collapseDuplicateLeadingYearTitle(
+        rest ? `${cleanKeyword} ${rest}`.replace(/\s+/g, ' ').trim() : cleanKeyword
+    );
 }

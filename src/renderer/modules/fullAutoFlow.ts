@@ -1765,7 +1765,7 @@ function collectFullAutoFormData() {
     const generator = UnifiedDOMCache.getGenerator();
     const targetAge = 'all';
     const imageSource = UnifiedDOMCache.getImageSource();
-    const skipImages = pipelineCfg.image.textOnlyPublish;
+    const skipImages = pipelineCfg.image.textOnlyPublish || pipelineCfg.image.headingImageMode === 'none';
     const publishMode = document.getElementById('unified-publish-mode')?.value
         || 'publish';
     let scheduleDate;
@@ -1820,7 +1820,12 @@ function collectFullAutoFormData() {
         contentTemplate,
         toneStyle,
         keywordAsTitle,
-        keywordTitlePrefix
+        keywordTitlePrefix,
+        headingImageMode: pipelineCfg.image.headingImageMode,
+        imageStyle: pipelineCfg.image.imageStyle,
+        imageRatio: pipelineCfg.image.imageRatio,
+        thumbnailImageRatio: pipelineCfg.image.thumbnailImageRatio,
+        subheadingImageRatio: pipelineCfg.image.subheadingImageRatio,
     };
 }
 function validateFullAutoFormData(data) {
@@ -3225,6 +3230,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     else {
         appendLog(`⏭️ 공정위 문구 비활성 (모드='${formData.contentMode || 'normal'}', 결정근거=${ftcSource})`);
     }
+    const resolvedBlogCategoryName = String(formData.categoryName || '').trim() || undefined;
     const payload = {
         naverId: naverId,
         naverPassword: naverPassword,
@@ -3245,8 +3251,8 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         toneStyle: formData.toneStyle,
         postId: currentPostId || undefined,
         thumbnailPath: thumbnailPath,
-        categoryName: formData.categoryName || formData.category,
-        ...((() => { console.log(`[executeBlogPublishing] 📂 IPC categoryName: "${formData.categoryName || formData.category || '(없음)'}"`); return {}; })()),
+        categoryName: resolvedBlogCategoryName,
+        ...((() => { console.log(`[executeBlogPublishing] 📂 IPC categoryName: "${resolvedBlogCategoryName || '(없음)'}"`); return {}; })()),
         ctaText: formData.skipCta ? undefined : ctaText,
         ctaLink: formData.skipCta ? undefined : ctaLink,
         ctas: formData.skipCta ? [] : resolvedCtas,

@@ -361,6 +361,7 @@ export async function handleFullAutoPublish(): Promise<void> {
   try {
     const guardImageSource = UnifiedDOMCache.getImageSource();
     const skipImagesForGuard = pipelineCfg.image.textOnlyPublish
+      || pipelineCfg.image.headingImageMode === 'none'
       || ((document.getElementById('unified-skip-images') as HTMLInputElement | null)?.checked === true);
     if (!skipImagesForGuard) {
       const passed = await runOpenAIImageGuard(guardImageSource);
@@ -531,8 +532,14 @@ export async function handleFullAutoPublish(): Promise<void> {
       }
     }
 
+    // ✅ [2026-01-28 FIX] 이미지 모달의 'textOnlyPublish' 설정 우선 적용
+    const skipImagesFromStorage = pipelineCfg.image.textOnlyPublish;
+    const skipImagesFromHeadingMode = pipelineCfg.image.headingImageMode === 'none';
+    const skipImagesFromDom = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
+    const skipImages = skipImagesFromStorage || skipImagesFromHeadingMode || skipImagesFromDom;
+
     // ✅ [2026-02-02 FIX] 콘텐츠 생성 완료 직후 이미지 미리보기 영역에 플레이스홀더 표시
-    if (headingCount > 0 && structuredContent.headings) {
+    if (!skipImages && headingCount > 0 && structuredContent.headings) {
       const placeholderImages = structuredContent.headings.map((h: any, idx: number) => ({
         heading: String(h.title || h.text || `이미지 ${idx + 1}`).trim().substring(0, 15),
         url: '', // 플레이스홀더 (빈 URL)
@@ -557,15 +564,11 @@ export async function handleFullAutoPublish(): Promise<void> {
     const selectedBtnDiag = document.querySelector('.unified-img-source-btn.selected') as HTMLElement;
     console.log(`[FullAutoPublish] 🔍🔍🔍 선택된 버튼 data-source = "${selectedBtnDiag?.dataset?.source || '(없음)'}"`);
 
-    // ✅ [2026-01-28 FIX] 이미지 모달의 'textOnlyPublish' 설정 우선 적용
-    const skipImagesFromStorage = pipelineCfg.image.textOnlyPublish;
-    const skipImagesFromDom = (document.getElementById('unified-skip-images') as HTMLInputElement)?.checked || false;
-    const skipImages = skipImagesFromStorage || skipImagesFromDom;
-    console.log(`[FullAutoPublish] 이미지 건너뛰기 설정 - Storage: ${skipImagesFromStorage}, DOM: ${skipImagesFromDom}, 최종: ${skipImages}`);
+    console.log(`[FullAutoPublish] 이미지 건너뛰기 설정 - Storage: ${skipImagesFromStorage}, HeadingModeNone: ${skipImagesFromHeadingMode}, DOM: ${skipImagesFromDom}, 최종: ${skipImages}`);
     // ✅ [2026-01-28] 사용자에게도 알림 - 이미지 건너뛰기 상태 명시
     if (skipImages) {
-      appendLog(`⚠️ 이미지 없이 발행합니다 (텍스트만 발행 설정 활성화됨)`);
-      modal.addLog(`⚠️ 이미지 생성 건너뛰기 (textOnlyPublish=true)`);
+      appendLog(`⚠️ 이미지 없이 발행합니다 (이미지 없음 설정 활성화됨)`);
+      modal.addLog(`⚠️ 이미지 생성 건너뛰기 (${skipImagesFromHeadingMode ? 'headingImageMode=none' : 'textOnlyPublish=true'})`);
     }
 
     let fullAutoImageRunId = 0;

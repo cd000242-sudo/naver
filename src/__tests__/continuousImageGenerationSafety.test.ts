@@ -147,7 +147,7 @@ describe('continuous and multi-account image generation safety', () => {
     expect(mainCode).toMatch(/await abortImageGeneration\(\)/);
   });
 
-  it('allows the large progress preview image to open a full-size preview', () => {
+  it('allows progress grid images to open a full-size preview', () => {
     const code = read('renderer/components/ProgressModal.ts');
 
     expect(code).toMatch(/private openFullImagePreview/);
@@ -156,9 +156,9 @@ describe('continuous and multi-account image generation safety', () => {
     expect(code).toMatch(/Close preview/);
     expect(code).toMatch(/removeEventListener\('keydown'/);
     expect(code).toMatch(/document\.createElement\('img'\)/);
-    expect(code).toMatch(/mainPreview\.style\.cursor\s*=\s*'zoom-in'/);
-    expect(code).toMatch(/mainPreview\.onclick\s*=\s*\(\)\s*=>\s*\{[\s\S]{0,120}?this\.openFullImagePreview/);
-    expect(code).toMatch(/targetItem\.onclick\s*=\s*\(\)\s*=>\s*\{[\s\S]{0,160}?this\.updateMainPreviewDirect/);
+    expect(code).toMatch(/private\s+renderProgressImageTile/);
+    expect(code).toMatch(/targetItem\.onclick\s*=\s*\(\)\s*=>\s*\{[\s\S]{0,180}?this\.openFullImagePreview/);
+    expect(code).toMatch(/this\.hideMainProgressPreview\(\)/);
   });
 
   it('restores the progress preview grid after the modal is minimized', () => {

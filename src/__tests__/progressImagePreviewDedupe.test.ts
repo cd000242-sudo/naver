@@ -32,10 +32,14 @@ describe('progress image preview duplicate guards', () => {
     expect(progressModal).toMatch(/중복 이미지 제외/);
   });
 
-  it('keeps generated bitmaps out of the small progress grid', () => {
-    expect(progressModal).toContain('The generated bitmap is shown only in the large preview');
-    expect(progressModal).toMatch(/private\s+renderProgressStatusTile/);
-    expect(progressModal).not.toMatch(/appendChild\(imgEl\)/);
+  it('renders generated bitmaps directly in a stable progress grid', () => {
+    expect(progressModal).toMatch(/private\s+renderStableProgressImageGrid/);
+    expect(progressModal).toMatch(/private\s+renderProgressImageTile/);
+    expect(progressModal).toMatch(/private\s+renderSingleProgressImageInGrid/);
+    expect(progressModal).toMatch(/imgEl\.src\s*=\s*toFileUrlSafe\(src\)/);
+    expect(progressModal).toMatch(/targetItem\.appendChild\(imgEl\)/);
+    expect(progressModal).toMatch(/this\.hideMainProgressPreview\(\)/);
+    expect(progressModal).not.toContain('The generated bitmap is shown only in the large preview');
   });
 
   it('keeps full-auto thumbnail canonical and first for publishing', () => {

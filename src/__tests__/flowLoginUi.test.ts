@@ -49,4 +49,17 @@ describe('Flow login UI wiring', () => {
     expect(studio).toContain('wireSelectFlowRow');
     expect(studio).toContain("rowId: 'imgstudio-flow-login'");
   });
+
+  it('uses the interactive Flow login path before image generation and settings connection success', () => {
+    const settings = read('renderer/components/HeadingImageSettings.ts');
+    const headingGen = read('renderer/modules/headingImageGen.ts');
+    const studio = read('renderer/modules/imageGenStudio.ts');
+    const flow = read('image/flowGenerator.ts');
+
+    expect(settings).toContain('api.flowLogin');
+    expect(headingGen).toContain('api.flowLogin');
+    expect(studio).toContain('_ensureStudioFlowLogin(engine.value)');
+    expect(studio).toContain('api.flowLogin()');
+    expect(flow).toContain('cached page is alive but login session is missing');
+  });
 });

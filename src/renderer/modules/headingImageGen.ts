@@ -906,8 +906,11 @@ export function initHeadingImageGeneration(): void {
         if (imageSource === 'flow') {
           appendLog('🔍 Flow 연결 확인 중... (Google AI Pro 무료 쿼터 / labs.google 세션)', 'images-log-output');
           try {
-            const flowResult = await (window as any).api.testFlowConnection();
-            if (!flowResult.ok) {
+            const flowResult = (window as any).api.flowLogin
+              ? await (window as any).api.flowLogin()
+              : await (window as any).api.testFlowConnection();
+            const flowLoggedIn = Boolean(flowResult?.loggedIn ?? flowResult?.ok);
+            if (!flowLoggedIn) {
               appendLog(`❌ ${flowResult.message}`, 'images-log-output');
               alert(`❌ Flow 사용을 위해 Google 로그인이 필요합니다.\n\n원인: ${flowResult.message}\n\nFlow는 labs.google의 Google AI Pro 구독자 무료 쿼터를 사용합니다.\n\n👉 이미지 설정 모달 → "🔗 Google 계정 연동" 버튼 클릭 → labs.google.com 로그인 진행하세요.\n\n로그인 안 했다면 다른 엔진(나노바나나 2 / ImageFX / DeepInfra)을 선택하세요.`);
               generateImagesBtnMain.disabled = false;

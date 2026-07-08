@@ -271,7 +271,7 @@ export class ProgressModal {
     }
 
     private ensureImagePreviewContainer(): void {
-        const grid = document.getElementById('progress-image-grid');
+        const grid = document.getElementById('progress-image-grid') as HTMLElement;
         const mainPreview = document.getElementById('progress-main-preview');
         if (grid && mainPreview) return;
         this.createImageGridContainer();
@@ -860,10 +860,228 @@ export class ProgressModal {
         modal.focus();
     }
 
+    private hideMainProgressPreview(): void {
+        const mainPreview = document.getElementById('progress-main-preview') as HTMLElement | null;
+        if (!mainPreview) return;
+
+        mainPreview.style.display = 'none';
+        mainPreview.innerHTML = '';
+        mainPreview.style.cursor = 'default';
+        mainPreview.title = '';
+        mainPreview.onclick = null;
+    }
+
+    private applyProgressImageGridLayout(grid: HTMLElement, count: number): void {
+        grid.style.display = count > 0 ? 'grid' : 'none';
+        grid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(126px, 1fr))';
+        grid.style.gap = '8px';
+        grid.style.maxHeight = count > 6 ? '360px' : 'none';
+        grid.style.overflowY = count > 6 ? 'auto' : 'visible';
+        grid.style.paddingRight = count > 6 ? '4px' : '0';
+        grid.style.alignItems = 'stretch';
+    }
+
+    private prepareProgressImageTile(targetItem: HTMLElement, index: number, isPlaceholder: boolean): void {
+        targetItem.className = isPlaceholder ? 'progress-grid-placeholder-tile grid-item-fade-in' : 'progress-grid-image-tile grid-item-fade-in';
+        targetItem.style.cssText = `
+            position: relative;
+            aspect-ratio: 4 / 3;
+            min-height: 116px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid ${index === this.currentImageIndex && !isPlaceholder ? '#3b82f6' : 'var(--border-light)'};
+            background: var(--bg-tertiary);
+            cursor: ${isPlaceholder ? 'default' : 'zoom-in'};
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            animation-delay: ${index * 0.04}s;
+            opacity: 0;
+        `;
+    }
+
+    private renderProgressPlaceholderTile(targetItem: HTMLElement, heading: string, index: number): void {
+        this.prepareProgressImageTile(targetItem, index, true);
+        targetItem.innerHTML = '';
+        targetItem.onclick = null;
+        targetItem.onmouseenter = null;
+        targetItem.onmouseleave = null;
+
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--text-muted); text-align:center; padding:8px;';
+
+        const spinner = document.createElement('div');
+        spinner.style.cssText = 'font-size:1.25rem; animation:pulse 1.5s infinite;';
+        spinner.textContent = '...';
+
+        const label = document.createElement('div');
+        label.style.cssText = 'font-size:0.68rem; line-height:1.25; max-width:100%; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;';
+        label.textContent = heading || `Image ${index + 1}`;
+
+        wrap.appendChild(spinner);
+        wrap.appendChild(label);
+        targetItem.appendChild(wrap);
+    }
+
+    private highlightProgressGridImage(grid: HTMLElement | null, selectedIndex: number): void {
+        if (!grid) return;
+        const items = grid.querySelectorAll(':scope > div');
+        items.forEach((item, idx) => {
+            const el = item as HTMLElement;
+            el.style.borderColor = idx === selectedIndex ? '#3b82f6' : 'var(--border-light)';
+        });
+    }
+
+    private renderProgressImageTile(targetItem: HTMLElement, image: ProgressPreviewImage, index: number, selected: boolean = false): void {
+        const src = getProgressImageSource(image);
+        const heading = String(image.heading || `Image ${index + 1}`);
+
+        this.currentImageIndex = selected ? index : this.currentImageIndex;
+        this.prepareProgressImageTile(targetItem, index, false);
+        targetItem.innerHTML = '';
+        targetItem.title = heading;
+        targetItem.style.borderColor = selected ? '#3b82f6' : 'var(--border-light)';
+
+        const imgEl = document.createElement('img');
+        imgEl.src = toFileUrlSafe(src);
+        imgEl.alt = heading;
+        imgEl.loading = 'lazy';
+        imgEl.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block;';
+        imgEl.onerror = () => {
+            targetItem.style.background = 'var(--bg-tertiary)';
+            targetItem.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.72rem;text-align:center;padding:8px;">Image preview unavailable</div>';
+        };
+        targetItem.appendChild(imgEl);
+
+        const badge = document.createElement('div');
+        badge.style.cssText = 'position:absolute; top:6px; left:6px; background:rgba(15,23,42,0.82); color:white; font-size:10px; font-weight:800; padding:2px 7px; border-radius:6px; line-height:1.4;';
+        badge.textContent = String(index + 1);
+
+        const label = document.createElement('div');
+        label.style.cssText = 'position:absolute; left:0; right:0; bottom:0; padding:18px 8px 7px; background:linear-gradient(transparent, rgba(0,0,0,0.75)); color:white; font-size:0.72rem; font-weight:700; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
+        label.textContent = heading;
+
+        targetItem.appendChild(badge);
+        targetItem.appendChild(label);
+
+        targetItem.onmouseenter = () => {
+            targetItem.style.transform = 'translateY(-1px)';
+            targetItem.style.boxShadow = '0 6px 18px rgba(59, 130, 246, 0.24)';
+        };
+        targetItem.onmouseleave = () => {
+            targetItem.style.transform = 'translateY(0)';
+            targetItem.style.boxShadow = 'none';
+        };
+        targetItem.onclick = () => {
+            this.currentImageIndex = index;
+            this.highlightProgressGridImage(targetItem.parentElement as HTMLElement | null, index);
+            this.openFullImagePreview(src, heading);
+        };
+    }
+
+    private renderStableProgressImageGrid(grid: HTMLElement, images: ProgressPreviewImage[]): void {
+        this.hideMainProgressPreview();
+        grid.innerHTML = '';
+        this.applyProgressImageGridLayout(grid, images.length);
+
+        images.forEach((img, idx) => {
+            const src = getProgressImageSource(img);
+            const isPlaceholder = !src || (img as any).isPlaceholder;
+            const wrapper = document.createElement('div');
+            if (isPlaceholder) {
+                this.renderProgressPlaceholderTile(wrapper, img.heading || `Image ${idx + 1}`, idx);
+            } else {
+                this.renderProgressImageTile(wrapper, img, idx, idx === 0);
+            }
+            grid.appendChild(wrapper);
+        });
+    }
+
+    private renderSingleProgressImageInGrid(
+        previewIndex: number,
+        previewTotal: number | undefined,
+        image: ProgressPreviewImage,
+        grid: HTMLElement,
+        countEl: HTMLElement | null,
+        imageInfo: HTMLElement | null,
+        titleEl: HTMLElement | null
+    ): boolean {
+        this.hideMainProgressPreview();
+
+        const existingItems = grid.querySelectorAll(':scope > div').length;
+        const totalCount = previewTotal || Math.max(previewIndex + 1, existingItems);
+        if (existingItems === 0 && totalCount > 0) {
+            this.currentImages = [];
+            grid.innerHTML = '';
+            this.applyProgressImageGridLayout(grid, totalCount);
+
+            for (let i = 0; i < totalCount; i++) {
+                const placeholder = document.createElement('div');
+                this.renderProgressPlaceholderTile(placeholder, `Image ${i + 1}`, i);
+                grid.appendChild(placeholder);
+                this.currentImages.push({ url: '', heading: `Image ${i + 1}`, isPlaceholder: true } as any);
+            }
+
+            if (titleEl) titleEl.textContent = '이미지 생성 중';
+            if (countEl) countEl.textContent = `0/${totalCount}개`;
+            if (imageInfo) imageInfo.style.display = 'flex';
+        } else {
+            this.applyProgressImageGridLayout(grid, Math.max(totalCount, existingItems));
+        }
+
+        while (grid.querySelectorAll(':scope > div').length <= previewIndex) {
+            const placeholderIndex = grid.querySelectorAll(':scope > div').length;
+            const placeholder = document.createElement('div');
+            this.renderProgressPlaceholderTile(placeholder, `Image ${placeholderIndex + 1}`, placeholderIndex);
+            grid.appendChild(placeholder);
+            this.currentImages.push({ url: '', heading: `Image ${placeholderIndex + 1}`, isPlaceholder: true } as any);
+        }
+
+        const targetItem = grid.querySelectorAll(':scope > div')[previewIndex] as HTMLElement | undefined;
+        const incomingKey = getProgressImageKey(image);
+        if (incomingKey) {
+            const duplicateIndex = this.currentImages.findIndex((existing, existingIndex) =>
+                existingIndex !== previewIndex &&
+                !(existing as any)?.isPlaceholder &&
+                getProgressImageKey(existing) === incomingKey
+            );
+            if (duplicateIndex !== -1) {
+                if (targetItem) {
+                    targetItem.innerHTML = '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-muted);font-size:0.72rem;padding:8px;">Duplicate image skipped</div>';
+                    targetItem.style.border = '1px dashed var(--border-light)';
+                    targetItem.style.background = 'var(--bg-tertiary)';
+                }
+                if (previewIndex < this.currentImages.length) {
+                    this.currentImages[previewIndex] = { url: '', heading: 'Duplicate image skipped', isPlaceholder: true };
+                }
+                console.warn(`[ProgressModal] duplicate live image ignored: target=${previewIndex + 1}, existing=${duplicateIndex + 1}`);
+                return true;
+            }
+        }
+
+        if (previewIndex < this.currentImages.length) {
+            this.currentImages[previewIndex] = image;
+        } else {
+            this.currentImages.push(image);
+        }
+
+        if (targetItem) {
+            this.renderProgressImageTile(targetItem, image, previewIndex, true);
+            this.highlightProgressGridImage(grid, previewIndex);
+        }
+
+        const completedCount = this.currentImages.filter((img) => {
+            const s = getProgressImageSource(img);
+            return !!s && !(img as any).isPlaceholder;
+        }).length;
+
+        if (countEl) countEl.textContent = `${completedCount}/${this.currentImages.length}개`;
+        if (imageInfo) imageInfo.style.display = 'flex';
+        return true;
+    }
+
     // ✅ [2026-02-13 RENEWAL] 이미지 그리드 표시 + 메인 미리보기 업데이트 (전폭 200px 레이아웃)
     showImages(images: ProgressPreviewImage[], title: string = '수집된 이미지') {
         this.ensureImagePreviewContainer();
-        const grid = document.getElementById('progress-image-grid');
+        const grid = document.getElementById('progress-image-grid') as HTMLElement;
         const countEl = document.getElementById('progress-image-count');
         const titleEl = document.getElementById('progress-image-title');
         const mainPreview = document.getElementById('progress-main-preview');
@@ -887,6 +1105,9 @@ export class ProgressModal {
         // ✅ [2026-02-13] 캐러셀용 이미지 배열 저장
         this.currentImages = previewImages;
         this.currentImageIndex = 0;
+
+        this.renderStableProgressImageGrid(grid, previewImages);
+        return;
 
         // ✅ 메인 미리보기 헬퍼 함수 (200px 전폭 + 화살표 네비게이션)
         const updateMainPreview = (src: string, heading: string, isPlaceholder: boolean, imgIndex?: number) => {
@@ -1009,9 +1230,8 @@ export class ProgressModal {
                     </div>
                 `;
             } else {
-                // The generated bitmap is shown only in the large preview.
-                // The small strip is a status/navigation strip so the same
-                // image does not appear twice in the modal.
+                // Legacy fallback path. The active path above renders actual
+                // generated images directly in the stable progress grid.
                 this.renderProgressStatusTile(wrapper, img.heading || `이미지 ${idx + 1}`, idx, idx === 0);
             }
 
@@ -1093,6 +1313,10 @@ export class ProgressModal {
 
         const src = getProgressImageSource(image);
         if (!src) return;
+
+        if (this.renderSingleProgressImageInGrid(previewIndex, previewTotal, image, grid, countEl, imageInfo, titleEl)) {
+            return;
+        }
 
         // ✅ 첫 호출 시 자동 플레이스홀더 초기화
         const existingItems = grid.querySelectorAll(':scope > div').length;
@@ -1338,6 +1562,7 @@ export class ProgressModal {
             grid.style.display = 'none';
         }
         if (mainPreview) {
+            mainPreview.style.display = 'none';
             mainPreview.innerHTML = `
                 <div style="color: var(--text-muted); text-align: center; font-size: 0.85rem;">
                     <div style="font-size: 2.5rem; margin-bottom: 6px;">🖼️</div>

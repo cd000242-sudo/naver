@@ -76,6 +76,7 @@ import { shouldRunAutoImageSearch, runAutoImageSearch, injectAutoCollectCheckbox
 (window as any).runAutoImageSearch = runAutoImageSearch;
 // ✅ [2026-01-25 모듈화] 카테고리 모달 유틸리티
 import { initCategorySelectionListener } from './utils/categoryModalUtils.js';
+import { markRealBlogCategoryOption } from './utils/realBlogCategoryPolicy.js';
 // ✅ [2026-01-25 모듈화] 앱 이벤트 핸들러
 import { initAllAppEventHandlers } from './utils/appEventsHandler.js';
 // ✅ [2026-01-25 모듈화] 전체 자동 발행 유틸리티
@@ -3404,6 +3405,7 @@ function initRealCategorySync(): void {
           const option = document.createElement('option');
           option.value = cat.name;
           option.textContent = cat.name;
+          markRealBlogCategoryOption(option, cat.id);
           categorySelect.appendChild(option);
         });
 

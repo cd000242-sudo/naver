@@ -123,6 +123,8 @@ async function _run(): Promise<void> {
   const includeText = (document.getElementById('imgstudio-include-text') as HTMLInputElement | null)?.checked ?? false;
   const total = prompts.length * count;
 
+  if (!(await _ensureStudioFlowLogin(engine.value))) return;
+
   const estimate = total * engine.costKrw;
   if (estimate >= COST_CONFIRM_THRESHOLD) {
     const ok = window.confirm(
@@ -203,6 +205,39 @@ async function _run(): Promise<void> {
     cleanup?.();
     _busy = false;
     _setGenerateDisabled(false);
+  }
+}
+
+async function _ensureStudioFlowLogin(engineValue: string): Promise<boolean> {
+  if (engineValue !== 'flow') return true;
+
+  const api = (window as any).api;
+  if (!api?.flowLogin) {
+    _setStatus('Flow 로그인 API를 사용할 수 없습니다.', 'error');
+    return false;
+  }
+
+  _setGenerateDisabled(true);
+  _setStatus('Flow 로그인 확인 중... 필요한 경우 Chrome 로그인 창이 열립니다.', 'info');
+  try {
+    const result = await api.flowLogin();
+    if (result?.loggedIn) {
+      const user = result.userInfo?.email || result.userInfo?.name || '';
+      _setStatus(`Flow 로그인 확인 완료${user ? `: ${user}` : ''}`, 'info');
+      return true;
+    }
+
+    const message = result?.message || 'Flow 로그인이 필요합니다.';
+    _setStatus(message, 'error');
+    window.alert?.(`Flow 이미지 생성을 위해 Google Flow 로그인이 필요합니다.\n\n${message}`);
+    _setGenerateDisabled(false);
+    return false;
+  } catch (err: any) {
+    const message = err?.message || String(err);
+    _setStatus(`Flow 로그인 확인 실패: ${message}`, 'error');
+    window.alert?.(`Flow 로그인 상태를 확인하지 못했습니다.\n\n${message}`);
+    _setGenerateDisabled(false);
+    return false;
   }
 }
 

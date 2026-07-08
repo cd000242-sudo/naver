@@ -5,6 +5,7 @@
  */
 
 import type { StructuredContent } from './contentGenerator';
+import { collapseDuplicateLeadingYearTitle } from './contentTitleYearGuard';
 import { normalizeTitleWhitespace } from './contentTextHelpers';
 
 export interface KeywordPrefixOptions {
@@ -27,9 +28,9 @@ function titleStartsWithKeywordFront3(title: string, keyword: string): boolean {
 
 export function applyKeywordPrefixToTitle(title: string, keyword: string, options?: KeywordPrefixOptions): string {
   const cleanKeyword = (keyword || '').trim();
-  if (!cleanKeyword) return (title || '').trim();
+  if (!cleanKeyword) return collapseDuplicateLeadingYearTitle((title || '').trim());
 
-  const cleanTitle = (title || '').trim();
+  const cleanTitle = collapseDuplicateLeadingYearTitle((title || '').trim());
   if (!cleanTitle) return cleanKeyword;
 
   // [Phase 1] 앞3자 강제 모드: 이미 선두면 무변경, 아니면 조기탈출 건너뛰고 재배치로 직행.
@@ -86,7 +87,7 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
 
   const clampTitleLength = (s: string, maxLen: number): string => {
     // ✅ [2026-02-24] removeDuplicatePhrases 제거 (3중 실행 방지, 순수 길이 제한만)
-    const t = normalizeWhitespace(String(s || '')).trim();
+    const t = collapseDuplicateLeadingYearTitle(normalizeWhitespace(String(s || '')).trim());
     if (!t) return '';
     if (t.length <= maxLen) return t;
 
@@ -126,7 +127,7 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
     }
 
     // ✅ [2026-02-02 FIX] 끝 정리: 불완전한 문자 제거 (+, &, |, 등)
-    return cut.replace(/[\s\-–—:|·•,+&|/\\]+$/g, '').trim();
+    return collapseDuplicateLeadingYearTitle(cut.replace(/[\s\-–—:|·•,+&|/\\]+$/g, '').trim());
   };
 
 

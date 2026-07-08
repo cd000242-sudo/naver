@@ -1,6 +1,7 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import puppeteer, { Browser, Page } from 'puppeteer';
+import { getChromiumExecutablePath } from './browserUtils.js';
 
 // ========================================
 // 타입 정의
@@ -272,8 +273,10 @@ export class ImageLibrary {
     try {
       // ✅ [2026-05-26 v2.10.369 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — imageLibrary 1/2]
       //   뉴스 이미지 크롤링 — Chrome native headless('new')로 봇 시그니처 감소 (UX 영향 0).
+      const executablePath = await getChromiumExecutablePath();
       browser = await puppeteer.launch({
         headless: 'new' as any,
+        executablePath: executablePath || undefined,
         args: [
           '--no-sandbox', 
           '--disable-setuid-sandbox',
@@ -387,8 +390,10 @@ export class ImageLibrary {
     try {
       // ✅ [2026-05-26 v2.10.370 SPEC-NAVER-PROTECTION-2026 P3 Fix 3.4 — imageLibrary 2/2]
       //   블로그 이미지 크롤링 (네이버 블로그 직접 노출 영역) — Chrome native headless('new').
+      const executablePath = await getChromiumExecutablePath();
       browser = await puppeteer.launch({
         headless: 'new' as any,
+        executablePath: executablePath || undefined,
         args: [
           '--no-sandbox', 
           '--disable-setuid-sandbox',

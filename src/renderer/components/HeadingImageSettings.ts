@@ -2135,8 +2135,10 @@ export function createHeadingImageModal(): void {
       // ── Step 2/2: Flow 연결 테스트 (ImageFX 제거됨) ───────────
       if (textEl) textEl.textContent = `⏳ Step 2/2: Flow 연결 확인 중...`;
       try {
-        const flowResult = await (window as any).api.testFlowConnection();
-        flowOk = Boolean(flowResult?.ok ?? flowResult?.success);
+        const flowResult = (window as any).api.flowLogin
+          ? await (window as any).api.flowLogin()
+          : await (window as any).api.testFlowConnection();
+        flowOk = Boolean(flowResult?.loggedIn ?? flowResult?.ok ?? flowResult?.success);
         flowMsg = flowResult?.message || (flowOk ? '정상' : '실패');
         console.log(`[HeadingImageSettings] ${flowOk ? '✅' : '⚠️'} Step 2/2: Flow = ${flowMsg}`);
       } catch (e: any) {
@@ -2186,8 +2188,10 @@ export function createHeadingImageModal(): void {
     if (textEl) textEl.textContent = '⏳ 연결 테스트 중...';
     if (statusEl) statusEl.style.color = '#3b82f6';
     try {
-      const result = await (window as any).api.testFlowConnection();
-      if (result?.ok) {
+      const result = (window as any).api.flowLogin
+        ? await (window as any).api.flowLogin()
+        : await (window as any).api.testFlowConnection();
+      if (result?.loggedIn ?? result?.ok) {
         if (dotEl) dotEl.style.background = '#22c55e';
         if (textEl) textEl.textContent = `✅ ${result.message || '연결 성공'}`;
         if (statusEl) statusEl.style.color = '#22c55e';

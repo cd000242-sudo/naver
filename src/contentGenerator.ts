@@ -242,6 +242,7 @@ import {
   applyKeywordAsTitleLock,
   resolveKeywordAsTitleValue,
 } from './contentKeywordTitlePolicy';
+import { collapseDuplicateLeadingYearTitle } from './contentTitleYearGuard';
 // [Phase 3-21/v2.10.167] SEO+homefeed 결과 병합 (finalizeStructuredContent export 통해 cycle 안전)
 import { mergeSeoWithHomefeedOverlay } from './contentMergeOverlay';
 // [Phase 3-8/v2.10.146] 제목 품질 scoring data + retry feedback
@@ -1174,17 +1175,20 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
 
   try {
     if (finalContent.selectedTitle) {
-      finalContent.selectedTitle = cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(finalContent.selectedTitle))));
+      finalContent.selectedTitle = collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(finalContent.selectedTitle)))));
+    }
+    if ((finalContent as any).title) {
+      (finalContent as any).title = collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars((finalContent as any).title)))));
     }
     if (Array.isArray(finalContent.titleAlternatives)) {
       finalContent.titleAlternatives = finalContent.titleAlternatives
-        .map((t) => cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(t)))))
+        .map((t) => collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(t))))))
         .filter(Boolean);
     }
     if (Array.isArray(finalContent.titleCandidates)) {
       finalContent.titleCandidates = finalContent.titleCandidates.map((c: any) => ({
         ...c,
-        text: cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(c?.text)))),
+        text: collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(c?.text))))),
       }));
     }
 
