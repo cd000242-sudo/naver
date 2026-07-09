@@ -475,6 +475,34 @@
       line-height: 1.2;
     }
     .gk-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .golden-category-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .golden-cat-tab {
+      min-height: 30px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--muted);
+      padding: 5px 11px;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .golden-cat-tab small { font-weight: 800; opacity: 0.72; margin-left: 3px; }
+    .golden-cat-tab.active { border-color: rgba(14,165,233,.5); background: rgba(14,165,233,.10); color: #0369a1; }
+    .gk-flags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; }
+    .gk-flag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--muted);
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    .gk-flag.good { border-color: rgba(53,211,153,.34); background: rgba(53,211,153,.09); color: #047857; }
+    .gk-flag.info { border-color: rgba(14,165,233,.3); background: rgba(14,165,233,.08); color: #0369a1; }
+    .gk-flag.warn { border-color: rgba(249,115,22,.3); background: rgba(249,115,22,.08); color: #c2410c; }
     .gk-m { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 8px; text-align: center; }
     .gk-m.gk-hot { background: rgba(53,211,153,.10); border-color: rgba(53,211,153,.28); }
     .gk-ml { font-size: 10.5px; color: var(--muted2); }
@@ -1566,6 +1594,7 @@
           <div class="quality-strip" id="goldenQualityStrip"></div>
           <div id="goldenNotice" class="locked">황금키워드 보드를 불러오는 중입니다.</div>
           <button class="btn primary public-preview-cta" type="button" id="goldenMoreLogin">더 많은 황금키워드 보러가기</button>
+          <div class="golden-category-tabs" id="goldenCategoryTabs" style="display:none;"></div>
           <div class="golden-list" id="goldenBoardList" style="margin-top:10px;"></div>
         </section>
 
@@ -2384,125 +2413,11 @@
       }
       return normalizeText(root) || original;
     }
-    function normalizeMindmapSeedPhrase(value) {
-      let text = normalizeText(value);
-      if (!text) return '';
-      text = text
-        .replace(/^(?:선택한s*)?(?:실시간s*)?키워드(?:에서|의)?s*/u, '')
-        .replace(/^(?:검색자가s*)?(?:바로s*)?(?:이어(?:서)?s*)?(?:칠|찾을)s*만한s*/u, '')
-        .replace(/^(?:특히|특허|특정)?s*기간(?:에는|은|에)?s*/u, '')
-        .replace(/^(?:지금|오늘|이번|최근)s+(?!(?:근로장려금|자녀장려금|지원금|최저임금|주휴수당))/u, '')
-        .replace(/(?:확장s*)?키워드(?:입니다)?$/u, '')
-        .replace(/(?:검색s*)?(?:후보|의문|카드)$/u, '');
-      return normalizeText(text);
-    }
     function mindmapSeedRoot(value) {
-      const clean = normalizeMindmapSeedPhrase(value);
+      const clean = normalizeText(value);
       if (!clean) return '';
       const root = stripMindmapIntentTail(clean);
       return compactKeywordText(root).length >= 2 ? root : clean;
-    }
-    function keywordYearFromText(value, fallback) {
-      const matched = normalizeText(value).match(/20[0-9]{2}/);
-      return matched ? matched[0] : (fallback || '2026');
-    }
-    function combineMindmapRootTail(rootValue, tailValue) {
-      const root = normalizeText(rootValue);
-      const tail = normalizeText(tailValue);
-      if (!root || !tail) return '';
-      const rootKey = compactKeywordText(root);
-      const tailKey = compactKeywordText(tail);
-      if (!tailKey || rootKey.endsWith(tailKey)) return root;
-      return normalizeText(root + ' ' + tail);
-    }
-    function inferMindmapSeedIntentAgent(value) {
-      const clean = normalizeMindmapSeedPhrase(value);
-      const fallbackRoot = mindmapSeedRoot(clean);
-      const text = normalizeText(clean + ' ' + fallbackRoot);
-      const compact = compactKeywordText(text);
-      const year = keywordYearFromText(text, '2026');
-      let root = fallbackRoot || clean;
-      let domain = 'general';
-      let tails = [];
-      let branches = [];
-      const setBranches = function(items) {
-        branches = uniqueIntentBranches((items || []).map(function(item) {
-          return normalizeText(item);
-        }).filter(Boolean), 12);
-      };
-      if (/육아휴직|육아기근로시간|출산휴가|배우자출산휴가|부모급여|아동수당/.test(text)) {
-        domain = 'policy';
-        root = /육아휴직/.test(text) ? (/급여/.test(text) ? '육아휴직 급여' : '육아휴직') : root;
-        if (/육아기근로시간/.test(text)) root = '육아기 근로시간 단축';
-        if (/출산휴가/.test(text) && !/배우자/.test(text)) root = '출산휴가';
-        if (/배우자출산휴가/.test(text)) root = '배우자 출산휴가';
-        if (/부모급여/.test(text)) root = '부모급여';
-        if (/아동수당/.test(text)) root = '아동수당';
-        tails = ['대상', '신청방법', '급여 조건', '기간', '필요서류', '지급일', '사후지급금', '사업주 거부'];
-        setBranches([
-          combineMindmapRootTail(root, '대상'),
-          combineMindmapRootTail(root, '신청방법'),
-          combineMindmapRootTail(root, '급여 조건'),
-          combineMindmapRootTail(root, '기간'),
-          combineMindmapRootTail(root, '필요서류'),
-          combineMindmapRootTail(root, '지급일'),
-          combineMindmapRootTail(root, '사후지급금'),
-          combineMindmapRootTail(root, '사업주 거부'),
-        ]);
-      } else if (/근로장려금|자녀장려금/.test(text)) {
-        domain = 'policy';
-        root = year + ' ' + (/자녀장려금/.test(text) ? '자녀장려금' : '근로장려금');
-        tails = ['지급일', '신청기간', '대상자 확인', '금액 조회', '심사결과', '반기 정기 차이', '누락 이의신청'];
-        setBranches(tails.map(function(tail) { return combineMindmapRootTail(root, tail); }));
-      } else if (/문화누리카드/.test(text)) {
-        domain = 'policy-local';
-        root = '문화누리카드';
-        setBranches(['문화누리카드 잔액조회', '문화누리카드 온라인 사용처', '문화누리카드 가맹점', '문화누리카드 사용처 조회', '문화누리카드 충전일', '문화누리카드 영화 예매', '문화누리카드 숙박 사용처']);
-        tails = branches.map(function(item) { return item.replace(/^문화누리카드s*/u, ''); });
-      } else if (/송지호|바다하늘길/.test(text)) {
-        domain = 'local';
-        root = '송지호 바다하늘길';
-        setBranches(['송지호 바다하늘길 입장료', '송지호 바다하늘길 주차', '송지호 바다하늘길 위치', '송지호 바다하늘길 운영시간', '송지호 바다하늘길 소요시간', '송지호 해수욕장 바다하늘길', '고성 송지호 바다하늘길', '송지호 둘레길 코스']);
-        tails = branches.map(function(item) { return item.replace(/^송지호s*바다하늘길s*/u, ''); });
-      } else if (/제주/.test(text) && /(렌터카|렌트카|렌터|렌트)/.test(text)) {
-        domain = 'local';
-        root = '제주 렌터카 예약';
-        setBranches(['제주 렌터카 예약 사이트', '제주 렌터카 예약 방법', '제주 렌터카 예약 시기', '제주 렌터카 보험 비교', '제주 렌터카 완전자차', '제주공항 렌터카 예약', '제주 렌터카 취소 수수료']);
-        tails = branches.map(function(item) { return item.replace(/^제주s*렌터카s*예약s*/u, ''); });
-      } else if (/홍명보|축구협회|대한축구협회|월드컵|대표팀|이강인|김민재|이재성/.test(text)) {
-        domain = 'sports';
-        root = /축구협회|대한축구협회/.test(text) ? '대한축구협회' : /홍명보/.test(text) ? '홍명보 감독' : '대한민국 축구대표팀';
-        setBranches(['홍명보 감독 다음 감독 후보', '홍명보 감독 선임 과정 논란', '대한축구협회 비리 전말', '이강인 이재성 투입 요청', '김민재 교체 항의 장면', '대한민국 축구대표팀 전술 문제']);
-        tails = ['다음 감독 후보', '선임 과정 논란', '축구협회 비리 전말', '선수 기용 논란', '전술 문제', '월드컵 예선 경우의 수'];
-      } else if (isHousingKeywordText(text)) {
-        domain = 'housing';
-        root = mindmapSeedRoot(text);
-        if (/원룸/.test(text) && /(비용|가격|금액|월세|보증금|관리비)/.test(text)) root = '원룸 비용';
-        if (/원룸/.test(text) && /(입주|이사)/.test(text)) root = '원룸 입주';
-        if (/오피스텔/.test(text) && /(비용|가격|금액|월세|보증금|관리비)/.test(text)) root = '오피스텔 비용';
-        tails = ['월세', '보증금', '관리비', '입주 비용', '전입신고', '계약 전 확인', '이사 비용', '주의사항'];
-        setBranches(tails.map(function(tail) { return combineMindmapRootTail(root, tail); }));
-      } else if (/지원금|장려금|수당|급여|환급|신청|정책|최저임금|주휴수당|청년|내일배움카드|청년도약계좌|실업급여|기초연금/.test(text)) {
-        domain = 'policy';
-        root = fallbackRoot || clean;
-        tails = ['대상', '신청방법', '지급일', '금액', '필요서류', '조회', '제외대상', '주의사항'];
-        setBranches(tails.map(function(tail) { return combineMindmapRootTail(root, tail); }));
-      } else if (/로봇청소기|청소기|공기청정기|제습기|에어컨|냉장고|노트북|아이폰|갤럭시|가격|추천|후기|구매|할인|최저가|제품|상품/.test(text) && !/(지원금|장려금|수당|정책)/.test(text)) {
-        domain = 'shopping';
-        root = fallbackRoot || clean;
-        tails = ['실사용 후기', '가격 비교', '단점', '대체 제품 비교', '구매 전 확인'];
-        setBranches(tails.map(function(tail) { return combineMindmapRootTail(root, tail); }));
-      } else {
-        tails = ['뜻', '검색 이유', '확인 방법', '비교 기준', '주의사항'];
-        setBranches(tails.map(function(tail) { return combineMindmapRootTail(root, tail); }));
-      }
-      return {
-        seed: clean,
-        root: normalizeText(root),
-        domain: domain,
-        tails: uniqueIntentBranches(tails, 12),
-        branches: uniqueIntentBranches(branches, 12),
-      };
     }
     const HOUSING_KEYWORD_RE = /(원룸|월세|전세|보증금|관리비|전입신고|오피스텔|자취방|방구하기|입주|이사|임대차|임대|임차|부동산|계약갱신|월세방|전세방)/;
     const PRODUCT_LAUNCH_INTENT_RE = /(출시일|발매일|출고일|공개일|사전예약|예약구매|런칭|론칭|스펙|공식영상)/;
@@ -2526,9 +2441,7 @@
         || PRODUCT_HOUSING_CONTEXT_CHAIN_RE.test(compact);
     }
     function semanticMindmapDomain(value) {
-      const text = normalizeMindmapSeedPhrase(value).toLowerCase();
-      const profile = inferMindmapSeedIntentAgent(text);
-      if (profile && profile.domain && profile.domain !== 'general') return profile.domain === 'policy-local' ? 'local' : profile.domain;
+      const text = normalizeText(value).toLowerCase();
       if (isHousingKeywordText(text)) return 'housing';
       if (/(송지호|바다하늘길|해수욕장|둘레길|제주|서울|부산|대구|인천|광주|대전|울산|강릉|속초|여행|숙소|호텔|펜션|항공권|렌터카|렌트카|맛집|축제|문화누리카드s*사용처)/.test(text)) return 'local';
       if (/(지원금|장려금|수당|급여|환급|신청|정책|근로장려금|최저임금|주휴수당|문화누리카드|청년인턴|청년청약|실업급여)/.test(text)) return 'policy';
@@ -2537,10 +2450,8 @@
       return 'general';
     }
     function semanticMindmapSeedRoot(value) {
-      const clean = normalizeMindmapSeedPhrase(value);
+      const clean = normalizeText(value);
       if (!clean) return '';
-      const profile = inferMindmapSeedIntentAgent(clean);
-      if (profile && profile.root && compactKeywordText(profile.root).length >= 2) return profile.root;
       if (isHousingKeywordText(clean)) {
         const withoutLaunch = normalizeText(clean.replace(PRODUCT_LAUNCH_INTENT_G, ' '));
         const root = mindmapSeedRoot(withoutLaunch);
@@ -2553,7 +2464,7 @@
     }
     function repairMindmapCandidate(seed, candidate) {
       const seedDomain = semanticMindmapDomain(seed);
-      let clean = normalizeMindmapSeedPhrase(candidate);
+      let clean = normalizeText(candidate);
       if (!clean) return '';
       if (isAwkwardMindmapCompound(seed, clean)) return '';
       if (seedDomain === 'housing' || isHousingKeywordText(clean)) {
@@ -2568,7 +2479,7 @@
       return normalizeText(clean);
     }
     function semanticMindmapCandidateAllowed(seed, candidate) {
-      const clean = normalizeMindmapSeedPhrase(candidate);
+      const clean = normalizeText(candidate);
       if (!clean) return false;
       if (isAwkwardMindmapCompound(seed, clean)) return false;
       const seedDomain = semanticMindmapDomain(seed);
@@ -2585,8 +2496,7 @@
       return true;
     }
     function appendMindmapTail(rootValue, tailValue) {
-      const profile = inferMindmapSeedIntentAgent(rootValue);
-      const root = (profile && profile.root) || semanticMindmapSeedRoot(rootValue);
+      const root = semanticMindmapSeedRoot(rootValue);
       const tail = normalizeText(tailValue);
       if (!root || !tail) return '';
       const rootKey = compactKeywordText(root);
@@ -2595,9 +2505,7 @@
       return normalizeText(root + ' ' + tail);
     }
     function mindmapTailSetForSeed(seed) {
-      const profile = inferMindmapSeedIntentAgent(seed);
-      if (profile && profile.tails && profile.tails.length && profile.domain !== 'general') return profile.tails;
-      const text = normalizeMindmapSeedPhrase(seed);
+      const text = normalizeText(seed);
       const lower = text.toLowerCase();
       if (/지원|정책|급여|환급|장려금|보조금|신청|세금|청년|정부|최저임금|임금|연금|보험|대출|문화누리카드/.test(text)) {
         return ['대상', '신청 방법', '조건', '금액', '지급일', '필요 서류', '조회', '제외대상', '주의사항'];
@@ -2820,7 +2728,7 @@
     }
     function filterDisplayGoldenItems(items) {
       const publishableRows = filterFreshGoldenItems(items || []).filter(function(item) {
-        return !shouldHideFromLiveGoldenBoard(item);
+        return !shouldHideFromLiveGoldenBoard(item) && displayGradeForRow(item) !== 'C';
       });
       return balanceGoldenDisplayItems(publishableRows);
     }
@@ -2889,6 +2797,102 @@
       });
       return uniqueIntentBranches(modifiers, 5);
     }
+    // 키워드 토큰 → 검색자가 확인하려는 것(의미 단위). 긴 토큰 우선 매칭 + 매칭 구간 마스킹으로
+    // 중복 해석 방지('환급일'이 '환급'·'일정'으로 이중 매칭되지 않게). 전부 키워드 자체에서 파생된
+    // 매칭 사실만 사용한다 — 카테고리 보일러플레이트 대체용.
+    const KEYWORD_NEED_TOKENS = [
+      ['신청방법', '어떻게 신청하는지(절차)'],
+      ['신청기간', '언제까지 신청할 수 있는지(기간)'],
+      ['제외대상', '어떤 경우에 제외되는지'],
+      ['필요서류', '무엇을 준비해야 하는지(필요 서류)'],
+      ['운영시간', '언제 여는지(운영시간)'],
+      ['주의사항', '조심해야 할 점'],
+      ['환급일', '환급금이 언제 들어오는지(환급 시점)'],
+      ['지급일', '언제 지급되는지(지급 시점)'],
+      ['계산기', '내 경우 얼마인지 바로 계산하는 방법'],
+      ['최저가', '어디가 가장 싼지'],
+      ['사용처', '어디서 쓸 수 있는지'],
+      ['가맹점', '쓸 수 있는 매장이 어디인지'],
+      ['입장료', '입장료가 얼마인지'],
+      ['준비물', '무엇을 챙겨야 하는지'],
+      ['티켓팅', '티켓팅 시점과 요령'],
+      ['대상자', '본인이 대상에 해당하는지(자격)'],
+      ['부작용', '부작용과 주의점'],
+      ['환급', '얼마를 돌려받는지(환급금)'],
+      ['신청', '어떻게 신청하는지(절차)'],
+      ['대상', '본인이 대상에 해당하는지(자격)'],
+      ['자격', '자격 요건을 충족하는지'],
+      ['조건', '적용 조건이 무엇인지'],
+      ['제외', '어떤 경우에 제외되는지'],
+      ['서류', '무엇을 준비해야 하는지(필요 서류)'],
+      ['금액', '금액이 얼마인지'],
+      ['얼마', '얼마인지'],
+      ['조회', '내 내역·상태를 바로 확인하는 방법'],
+      ['후기', '먼저 해본 사람의 실제 경험'],
+      ['비교', '어떤 선택이 나은지 비교 기준'],
+      ['차이', '무엇이 다른지'],
+      ['추천', '고르기 좋은 후보'],
+      ['가격', '가격이 얼마인지'],
+      ['비용', '비용이 얼마나 드는지'],
+      ['예매', '언제 어떻게 예매하는지'],
+      ['예약', '예약 방법과 시점'],
+      ['일정', '일정이 언제인지'],
+      ['날짜', '날짜가 언제인지'],
+      ['마감', '마감이 언제인지'],
+      ['주차', '주차가 되는지'],
+      ['위치', '어디에 있는지'],
+      ['잔액', '잔액을 확인하는 방법'],
+      ['해지', '해지 방법과 불이익'],
+      ['방법', '구체적인 방법'],
+      ['이유', '왜 그런지(원인)'],
+      ['뜻', '무슨 뜻인지'],
+    ];
+    function koreanJosa(word, withFinal, withoutFinal) {
+      // 괄호 보충어는 조사 판정에서 제외 — "…해당하는지(자격)" 는 '지' 기준으로 '를'.
+      const clean = normalizeText(word).replace(/\([^)]*\)/g, '').replace(/[)\]”"']+$/, '').trim();
+      const last = clean.charCodeAt(clean.length - 1);
+      if (last >= 0xac00 && last <= 0xd7a3) return (last - 0xac00) % 28 > 0 ? withFinal : withoutFinal;
+      return withFinal;
+    }
+    function keywordSemanticMeaning(row) {
+      const keyword = normalizeText(row && row.keyword);
+      if (!keyword) return '';
+      let compact = compactKeywordText(keyword);
+      const topic = readableKeywordTopic(row);
+      const needs = [];
+      const matchedTokens = [];
+      KEYWORD_NEED_TOKENS.forEach(function(pair) {
+        const idx = compact.indexOf(pair[0]);
+        if (idx < 0 || needs.indexOf(pair[1]) >= 0) return;
+        needs.push(pair[1]);
+        matchedTokens.push(pair[0]);
+        compact = compact.slice(0, idx) + '■'.repeat(pair[0].length) + compact.slice(idx + pair[0].length);
+      });
+      if (!needs.length) return '';
+      // 토픽 라벨 꼬리의 의도 토큰을 반복 제거해 "…신청"에 대해 어떻게 신청하는지…" 식 중복을 방지.
+      let topicLabel = normalizeText(topic);
+      let strippedTail = true;
+      while (strippedTail && topicLabel) {
+        strippedTail = false;
+        KEYWORD_NEED_TOKENS.forEach(function(pair) {
+          const tailRe = new RegExp(pair[0] + '\s*$');
+          if (tailRe.test(topicLabel)) {
+            topicLabel = topicLabel.replace(tailRe, '').trim();
+            strippedTail = true;
+          }
+        });
+      }
+      const hasDistinctTopic = topicLabel
+        && compactKeywordText(topicLabel) !== compactKeywordText(keyword)
+        && matchedTokens.every(function(token) { return compactKeywordText(topicLabel).indexOf(token) < 0; });
+      const subject = hasDistinctTopic ? '“' + topicLabel + '”에 대해 ' : '';
+      const needList = needs.slice(0, 3);
+      const lastNeed = needList[needList.length - 1];
+      return '“' + keyword + '”' + koreanJosa(keyword, '은', '는') + ' ' + subject + needList.join(', ')
+        + koreanJosa(lastNeed, '을', '를')
+        + (needList.length > 1 ? ' 한 번에 확인하려는 검색입니다.' : ' 확인하려는 검색입니다.')
+        + ' 답이 시점과 개인 조건에 따라 달라지는 질문이라 필요한 순간마다 같은 검색이 반복됩니다.';
+    }
     function currentSeasonLabel() {
       const month = new Date().getMonth() + 1;
       if (month >= 7 && month <= 8) return '여름휴가/방학 성수기';
@@ -2951,7 +2955,7 @@
       return base + ' 본문은 단어 꼬리 조합이 아니라 보증금, 월세, 관리비, 중개보수, 이사비, 전입신고, 하자 체크를 한 화면에서 비교하게 만들어야 합니다. 제목은 비용·계약 전 확인·입주 준비처럼 실제 행동 기준으로 잡고, 제품 출시일·발매일류 표현은 제외하세요.';
     }
     function naverAutocompleteLikeBranches(seed) {
-      const clean = normalizeMindmapSeedPhrase(seed);
+      const clean = normalizeText(seed);
       if (!clean) return [];
       const compact = compactKeywordText(clean);
       const out = [];
@@ -2959,11 +2963,6 @@
         const text = normalizeText(value);
         if (text) out.push(text);
       };
-      const profile = inferMindmapSeedIntentAgent(clean);
-      if (profile && profile.branches && profile.branches.length && profile.domain !== 'general') {
-        profile.branches.forEach(push);
-        return domainSafeIntentBranches(profile.root || clean, out, 10);
-      }
       const songjihoProfile = songjihoSeaSkyPathProfile(clean, clean);
       if (songjihoProfile) {
         songjihoProfile.branches.forEach(push);
@@ -3034,10 +3033,6 @@
       return '조합 의도는 방문·예약 전에 확인해야 할 비용, 위치, 시간, 후기를 한 번에 비교하게 만드는 것입니다. 광고형 키워드는 피하고 정보형 확인 키워드로 재확장하세요.';
     }
     function policyExpansionBranches(topic, keyword) {
-      const profile = inferMindmapSeedIntentAgent(topic || keyword);
-      if (profile && profile.domain && /policy/.test(profile.domain) && profile.branches && profile.branches.length) {
-        return domainSafeIntentBranches(profile.root || topic || keyword, profile.branches, 8);
-      }
       const base = mindmapSeedRoot(topic || keyword);
       if (/근로장려금/.test(base)) {
         const year = (String(keyword || '').match(/202[0-9]/) || ['2026'])[0];
@@ -3058,10 +3053,6 @@
       }), 5);
     }
     function issueExpansionBranches(topic, keyword) {
-      const profile = inferMindmapSeedIntentAgent(topic || keyword);
-      if (profile && profile.domain === 'sports' && profile.branches && profile.branches.length) {
-        return domainSafeIntentBranches(profile.root || topic || keyword, profile.branches, 8);
-      }
       const base = mindmapSeedRoot(topic || keyword);
       if (/홍명보|축구협회|감독/.test(keyword) && !isCrossDomainNonsenseKeyword(base + ' ' + keyword)) {
         return domainSafeIntentBranches(base, [
@@ -3079,11 +3070,7 @@
       }), 5);
     }
     function shoppingExpansionBranches(topic, keyword) {
-      const profile = inferMindmapSeedIntentAgent(topic || keyword);
-      const base = (profile && profile.root) || mindmapSeedRoot(topic || keyword);
-      if (profile && profile.domain === 'shopping' && profile.branches && profile.branches.length) {
-        return domainSafeIntentBranches(base, profile.branches, 8);
-      }
+      const base = mindmapSeedRoot(topic || keyword);
       return domainSafeIntentBranches(base, ['추천', '후기', '가격 비교', '단점', '구매 전 확인'].map(function(tail) {
         return appendMindmapTail(base, tail);
       }), 5);
@@ -3148,7 +3135,6 @@
       if (/자녀장려금/.test(base)) return year + '년 소득·자녀 조건과 근로장려금 동시 수급 여부가 헷갈려 대상자 확인, 지급액, 지급일 검색이 반복됩니다.';
       if (/주휴수당/.test(base)) return '알바·일용직·단시간 근로자가 15시간 기준, 결근, 퇴사, 미지급 신고 여부를 즉시 계산해야 해서 검색량이 붙습니다.';
       if (/최저임금/.test(base)) return '월급·실수령액·주휴수당 포함 여부가 사업주와 근로자 모두에게 돈으로 바로 연결되어 계산/격차/위반 신고 검색이 생깁니다.';
-      if (/육아휴직|육아기근로시간|출산휴가|부모급여|아동수당/.test(base)) return '근로자와 보호자가 대상, 기간, 급여 조건, 신청서류, 사후지급금, 사업주 거부 대응을 한 번에 확인해야 해서 검색량이 붙습니다. 제도 설명보다 내 상황에 바로 적용되는 조건과 지급 흐름이 핵심입니다.';
       if (/문화누리카드/.test(base)) return '잔액은 있는데 내 지역에서 실제 결제 가능한 가맹점이 어디인지 모르는 상황이라 지역명+사용처+온라인/영화/숙소 조합 검색이 붙습니다.';
       if (/청년인턴/.test(base)) return '모집기간, 지원자격, 급여, 정규직 전환 가능성이 기관마다 달라서 공고를 보기 전 핵심 조건을 빠르게 확인하려는 수요입니다.';
       if (/청년도약계좌/.test(base)) return '소득구간, 정부기여금, 중도해지, 만기 수령액이 가입 판단을 좌우해 계산형/조건형 검색이 반복됩니다.';
@@ -3160,7 +3146,6 @@
       if (/근로장려금/.test(base)) return '조합 의도는 “근로장려금”에 연도, 지급일, 대상자 확인, 금액 조회를 붙여 개인별 수급 가능성을 바로 판단하려는 것입니다. 제목은 지급일 하나로 시작하되 본문 첫 화면에 대상·금액·제외조건 표를 같이 둬야 합니다.';
       if (/주휴수당/.test(base)) return '조합 의도는 근로형태와 계산 기준을 붙여 “내 근무표에서 받을 수 있나”를 판단하려는 것입니다. 계산기, 예시, 미지급 신고 순서로 연결해야 체류가 생깁니다.';
       if (/최저임금/.test(base)) return '조합 의도는 최저임금 숫자 자체보다 월급·실수령·주휴 포함 여부로 실제 급여가 얼마나 달라지는지 확인하는 것입니다. 계산표와 위반 사례를 분리하세요.';
-      if (/육아휴직|육아기근로시간|출산휴가|부모급여|아동수당/.test(base)) return '조합 의도는 제도명에 대상, 신청방법, 급여 조건, 기간, 필요서류, 지급일, 회사 거부 대응을 붙여 “내가 지금 신청 가능한지”를 판단하려는 것입니다. 첫 화면은 대상/조건/지급 흐름 표, 그 아래는 사례형 질문으로 이어가야 합니다.';
       if (/문화누리카드/.test(base)) return '조합 의도는 카드 혜택 설명이 아니라 “내 지역/온라인에서 지금 쓸 수 있는 곳”을 찾는 것입니다. 지역 사용처, 잔액조회, 결제 가능 업종을 한 글 안에서 이어야 합니다.';
       if (/청년인턴/.test(base)) return '조합 의도는 공고를 하나씩 열기 전에 지원 가능성, 급여, 접수 마감, 전환 가능성을 압축 비교하려는 것입니다. 기관별 조건표가 핵심입니다.';
       return '조합 의도는 제도명에 대상·기간·금액·신청 행동을 붙여 내 상황에서 바로 실행 가능한지 판단하려는 것입니다. 본문은 정의보다 조건표와 예외 사례가 먼저 와야 합니다.';
@@ -3270,11 +3255,9 @@
       return uniqueIntentBranches(out, 18);
     }
     function agentReadableSubject(row) {
-      const keyword = normalizeMindmapSeedPhrase(row && row.keyword);
+      const keyword = normalizeText(row && row.keyword);
       const provided = agentTextValue(row, ['topic', 'subject', 'coreTopic', 'entity', 'rootKeyword']);
       if (provided) return provided;
-      const profile = inferMindmapSeedIntentAgent(keyword);
-      if (profile && profile.root && profile.domain !== 'general') return profile.root;
       const compact = compactKeywordText(keyword);
       const known = [
         ['송지호바다하늘길', '송지호 바다하늘길'],
@@ -3298,11 +3281,9 @@
         .trim() || keyword;
     }
     function agentSemanticDomain(row) {
-      const text = keywordRowSearchText(row) + ' ' + normalizeMindmapSeedPhrase(row && row.keyword);
+      const text = keywordRowSearchText(row) + ' ' + normalizeText(row && row.keyword);
       if (isCrossDomainNonsenseKeyword(row) || isAmbiguousCompositeKeyword(row)) return 'unclear';
       if (/정례대화/.test(text) && /(지급일|금액|대상|신청|수당)/.test(text)) return 'unclear';
-      const profile = inferMindmapSeedIntentAgent(text);
-      if (profile && profile.domain && profile.domain !== 'general') return profile.domain;
       if (isHousingKeywordText(text)) return 'housing';
       if (isShoppingIntentKeywordRow(row)) return 'shopping';
       if (/문화누리카드/.test(text) && /(사용처|가맹점|온라인|잔액|충전|영화|숙박)/.test(text)) return 'policy-local';
@@ -3431,7 +3412,6 @@
       if (provided) return provided;
       const text = normalizeText(subject + ' ' + keyword + ' ' + keywordRowSearchText(row));
       if (domain === 'unclear') return '"' + keyword + '"는 정책 지급어와 서로 다른 의도의 단어가 붙은 충돌형 후보입니다. 실제 이슈명인지, 기사 제목 조각이 붙은 것인지 먼저 소스 원문을 확인하고 원 키워드로 쓰지 않는 것이 안전합니다.';
-      if (/육아휴직|육아기근로시간|출산휴가|부모급여|아동수당/.test(text)) return '이 키워드는 회사·근로자·보호자가 대상, 기간, 급여 조건, 신청 서류, 사후지급 여부를 동시에 확인해야 하는 제도형 검색입니다. 검색량은 “지금 내 상황에서 신청 가능한가, 얼마를 언제 받나, 회사가 거부하면 어떻게 하나”라는 실제 행동 질문에서 붙습니다.';
       if (/송지호|바다하늘길/.test(text)) return '송지호 바다하늘길은 강원 고성 송지호와 해변 산책 동선을 찾는 방문형 키워드입니다. 검색량은 장소 자체가 아니라 입장료, 주차, 운영시간, 해수욕장·둘레길과 함께 갈 수 있는지 확인하려는 여행 전 체크 수요에서 생깁니다.';
       if (domain === 'housing' || isHousingKeywordText(text)) return housingSearchWhy(subject, keyword);
       if (/문화누리카드/.test(text)) return '문화누리카드는 지급·충전 시점보다 실제로 어디서 쓸 수 있는지가 검색의 핵심입니다. 잔액, 온라인 사용처, 지역 가맹점, 영화·숙박 결제 가능 여부를 한 번에 확인하려는 수요가 붙습니다.';
@@ -3451,7 +3431,6 @@
       const keyword = normalizeText(row && row.keyword);
       const metric = agentMeasuredContext(row);
       if (domain === 'unclear') return '원문 소스와 자동완성 응답을 다시 확인한 뒤 의미가 분명한 키워드만 남기세요. 지급일·금액·대상 같은 정책 행동어는 실제 제도명과 붙어야 발행 가치가 있습니다.';
-      if (/육아휴직|육아기근로시간|출산휴가|부모급여|아동수당/.test(subject + ' ' + keyword)) return '본문 첫 화면에 대상, 신청방법, 급여 조건, 기간, 필요서류, 지급일, 사후지급금, 회사 거부 대응을 표로 나누세요. 키워드를 억지로 이어 붙이지 말고 사용자가 실제로 다음에 확인할 질문을 소제목으로 분리해야 합니다. ' + metric;
       if (domain === 'housing' || isHousingKeywordText(subject + ' ' + keyword)) return housingCombinationIntent(subject, keyword) + ' ' + metric;
       if (domain === 'shopping') return '메인 황금보드에서는 제외하고 쇼핑커넥트에서 제품 후보, 구매 트리거, 실사용 단점, 대체 제품 비교까지 붙여 전환형 글감으로 판단하세요.';
       if (/송지호|바다하늘길/.test(subject + keyword)) return '첫 문단에서 송지호 바다하늘길이 무엇인지 설명하고, 입장료·주차·운영시간·해수욕장 연계 동선을 표로 정리하세요. 마지막에는 당일 코스와 비 오는 날 대안까지 붙이면 체류가 생깁니다.';
@@ -3619,7 +3598,10 @@
       const metric = measuredIntentEvidence(row);
       const ai = aiJudgeIntentEvidence(row);
       const source = sourceIntentEvidence(row);
-      const meaningPieces = [guide.meaning, metric, source ? '수집 근거: ' + source : ''].filter(Boolean);
+      // 정보형 가이드(policy/issue/need)는 카테고리 보일러플레이트 대신 키워드 자체를 해석한
+      // 의미 설명으로 대체 — "이 키워드가 무엇을 확인하려는 검색인지"를 먼저 말한다.
+      const semantic = ['policy', 'issue', 'need'].indexOf(guide.kind) >= 0 ? keywordSemanticMeaning(row) : '';
+      const meaningPieces = [semantic || guide.meaning, metric, source ? '수집 근거: ' + source : ''].filter(Boolean);
       const actionPieces = [guide.action];
       if (ai) actionPieces.push('판정 근거: ' + ai + '.');
       if (guide.kind === 'ad-risk') {
@@ -5440,6 +5422,8 @@
       return !!(row && row.isMeasured !== false && total !== null && total >= 100 && docs !== null && docs > total && ratio !== null && ratio < 1);
     }
     function displayGradeForRow(row) {
+      // 급등 레인은 서버 기회지수 게이트를 통과한 트래픽 상품 — 정보형 정직화 강등을 적용하지 않는다.
+      if (row && row.lane === 'traffic-surge') return (row && row.grade) || '-';
       if (row && row.source === 'browser-fallback' && row.isMeasured === false) return row.grade || '검증';
       if (isAmbiguousCompositeKeyword(row)) return 'C';
       if (isAdDominatedKeywordRow(row)) return 'C';
@@ -7942,7 +7926,7 @@
       qs('goldenLockedCount').textContent = String(lockedCount || 0);
       qs('goldenState').textContent = running ? '발굴중' : '대기';
       qs('goldenProgress').style.width = pct + '%';
-      qs('goldenPolicy').textContent = policy || '하위 5개 공개';
+      qs('goldenPolicy').textContent = policy || '실측 검증 5선 공개';
       qs('goldenUpdated').textContent = updatedAt ? '최근 갱신 ' + fmtTime(updatedAt) : '업데이트 대기';
     }
     function isThinProfileKeywordText(keyword) {
@@ -7967,7 +7951,7 @@
       qs('goldenQualityStrip').innerHTML = [
         exact
           ? qualityPill('실측률', fmt(measured) + '/' + fmt(visible), 'PC·모바일·문서수 기준', measured >= visible ? 'good' : 'warn')
-          : qualityPill('무료 미리보기', fmt(visible) + '개', '하위 후보만 노출', 'warn'),
+          : qualityPill('무료 미리보기', fmt(visible) + '개', '실측 통과 후보만 노출', 'warn'),
         qualityPill('프로필 누출', fmt(profileLeak), profileLeak === 0 ? '차단 정상' : '검토 필요', profileLeak === 0 ? 'good' : 'warn'),
         qualityPill('카테고리 다양성', fmt(categories.size), '도배 방지 캡 적용', categories.size >= Math.min(4, visible) ? 'good' : 'warn'),
         exact
@@ -7975,11 +7959,103 @@
           : qualityPill(lockCount > 0 ? 'Pro 잠금' : 'Pro 공개', fmt(lockCount), lockCount > 0 ? '상위 보드 보호' : '세션 잠금 해제', lockCount > 0 ? 'warn' : 'good'),
       ].join('');
     }
+    // 카테고리 탭: 보드를 카테고리/주제별로 나눠 보는 표시 필터(Pro 전용). 데이터는 서버가 준
+    // category 필드 그대로 사용 — 표시용 분류일 뿐 순위·등급에 영향 없음.
+    const GOLDEN_CATEGORY_LABELS = {
+      'traffic-surge': '🔥 실시간 급등',
+      policy: '정책/지원금', finance: '재테크/금융', health: '건강', life_tips: '생활꿀팁',
+      it: 'IT', ai_tool: 'AI도구', game: '게임', shopping: '쇼핑', electronics: '가전/전자',
+      home_life: '리빙/생활', fashion: '패션', beauty: '뷰티', food: '맛집/음식', recipe: '레시피',
+      travel_domestic: '국내여행', travel_overseas: '해외여행', sports: '스포츠', celebrity: '연예',
+      broadcast: '방송', education: '교육', parenting: '육아', pet: '반려동물',
+      live_issue: '실시간이슈', live: '실시간', all: '종합',
+    };
+    let goldenCategoryFilter = '';
+    let lastGoldenRowsArgs = null;
+    function goldenCategoryKeyOf(item) {
+      if (item && item.lane === 'traffic-surge') return 'traffic-surge';
+      return normalizeText(item && (item.category || item.categoryName) || '').toLowerCase() || 'live';
+    }
+    function goldenCategoryLabelOf(key) {
+      return GOLDEN_CATEGORY_LABELS[key] || key;
+    }
+    function renderGoldenCategoryTabs(rows, exact) {
+      const tabs = qs('goldenCategoryTabs');
+      if (!tabs) return;
+      if (!exact || !rows.length) {
+        tabs.style.display = 'none';
+        tabs.innerHTML = '';
+        return;
+      }
+      const counts = new Map();
+      rows.forEach(function(item) {
+        const key = goldenCategoryKeyOf(item);
+        counts.set(key, (counts.get(key) || 0) + 1);
+      });
+      // 급등 레인은 항상 첫 탭(전체 다음) — 시의성이 생명인 상품이라 노출 우선.
+      const ordered = Array.from(counts.entries()).sort(function(a, b) {
+        if (a[0] === 'traffic-surge') return -1;
+        if (b[0] === 'traffic-surge') return 1;
+        return b[1] - a[1];
+      });
+      if (goldenCategoryFilter && !counts.has(goldenCategoryFilter)) goldenCategoryFilter = '';
+      tabs.style.display = 'flex';
+      tabs.innerHTML = [
+        '<button class="golden-cat-tab' + (goldenCategoryFilter ? '' : ' active') + '" type="button" data-golden-category="">전체<small>' + fmt(rows.length) + '</small></button>',
+      ].concat(ordered.map(function(entry) {
+        const active = goldenCategoryFilter === entry[0] ? ' active' : '';
+        return '<button class="golden-cat-tab' + active + '" type="button" data-golden-category="' + escapeAttr(entry[0]) + '">'
+          + escapeHtml(goldenCategoryLabelOf(entry[0])) + '<small>' + fmt(entry[1]) + '</small></button>';
+      })).join('');
+    }
+    function goldenMeasuredFlagsHtml(item, exact) {
+      if (!exact || !item) return '';
+      const flags = [];
+      if (item.lane === 'traffic-surge') {
+        flags.push('<span class="gk-flag warn" title="트렌딩 헤드의 자동완성 실수요 확장 · 기회지수(실측 검색량/문서수) 게이트 통과">🔥 실시간 급등</span>');
+        if (item.surgeNewEntry === true) {
+          flags.push('<span class="gk-flag good" title="우리 자동완성 스냅샷 기준 최근 48시간 내 처음 등장한 제안어 — 수요가 막 형성되는 단계">🆕 자동완성 신규 진입</span>');
+        }
+      }
+      if (item.valueGrade) {
+        const tone = item.valueGrade === 'S+' || item.valueGrade === 'S' ? 'good' : item.valueGrade === 'C' ? 'warn' : 'info';
+        flags.push('<span class="gk-flag ' + tone + '" title="' + escapeHtml(item.valueSummary || '12게이트 가치검증 통과율 기반') + '">가치게이트 ' + escapeHtml(item.valueGrade) + '</span>');
+      }
+      if (item.serpMeasured === true && typeof item.winnable === 'boolean') {
+        flags.push(item.winnable
+          ? '<span class="gk-flag good" title="네이버 검색결과 상위 블록 실측 기준">실측 SERP 진입 가능</span>'
+          : '<span class="gk-flag warn" title="네이버 검색결과 상위 블록 실측 기준">실측 SERP 진입 어려움</span>');
+      }
+      if (item.vacancyReliable === true && Number.isFinite(Number(item.vacancySlots))) {
+        const slots = Number(item.vacancySlots);
+        flags.push('<span class="gk-flag ' + (slots > 0 ? 'good' : 'info') + '" title="' + escapeHtml(item.vacancyAction || '상위 10개 노출 슬롯 실측') + '">'
+          + (slots > 0 ? '상위10 빈집 ' + fmt(slots) + '칸' : '상위10 빈집 없음') + '</span>');
+      }
+      if (item.briefMeasured === true && Number(item.briefRecommendedWords) > 0) {
+        const mustInclude = Array.isArray(item.briefMustInclude) && item.briefMustInclude.length
+          ? '필수 포함: ' + item.briefMustInclude.slice(0, 8).join(', ')
+          : '경쟁 상위글 본문 실측 기준';
+        flags.push('<span class="gk-flag info" title="' + escapeHtml(mustInclude) + '">권장 분량 ' + fmt(Number(item.briefRecommendedWords)) + '자·경쟁 실측</span>');
+      }
+      if (!flags.length) return '';
+      return '<div class="gk-flags">' + flags.join('') + '</div>';
+    }
     function renderGoldenRows(items, exact, target) {
+      lastGoldenRowsArgs = { items: items, exact: exact, target: target };
       const limit = exact ? Math.max(60, Math.min(120, Number(target) || 120)) : 5;
       const freshRows = filterFreshGoldenItems(items || []);
       const sourceRows = exact ? (Array.isArray(items) ? items : []) : filterDisplayGoldenItems(items || []);
-      const rows = sourceRows.slice(0, limit);
+      renderGoldenCategoryTabs(sourceRows, exact);
+      let filteredRows = exact && goldenCategoryFilter
+        ? sourceRows.filter(function(item) { return goldenCategoryKeyOf(item) === goldenCategoryFilter; })
+        : sourceRows;
+      if (goldenCategoryFilter === 'traffic-surge') {
+        // 급등 레인은 기회지수(실측 검색량/문서수) 내림차순 — 경쟁 공백이 큰 순.
+        filteredRows = filteredRows.slice().sort(function(a, b) {
+          return (Number(b && b.goldenRatio) || 0) - (Number(a && a.goldenRatio) || 0);
+        });
+      }
+      const rows = filteredRows.slice(0, limit);
       if (!rows.length) {
         qs('goldenBoardList').innerHTML = '';
         qs('goldenNotice').textContent = freshRows.length
@@ -8006,6 +8082,7 @@
           + '</div>'
           + '<div class="gk-kw">' + escapeHtml(item.keyword || '-') + '</div>'
           + '<div class="gk-sub">' + sub + '</div>'
+          + goldenMeasuredFlagsHtml(item, exact)
           + publishDecisionInline(item)
           + '</div>'
           + '<div class="gk-side">'
@@ -8034,7 +8111,7 @@
         lockedCount,
         payload.running,
         payload.updatedAt,
-        payload.previewPolicyLabel || '하위 5개 공개'
+        payload.previewPolicyLabel || '실측 검증 5선 공개'
       );
       qs('goldenNotice').textContent = '무료 맛보기는 실측 통과 후보 5개만 보여줍니다. 더 많은 황금키워드와 정확 검색량·문서수·황금비율은 Pro 로그인 후 확인하세요.';
       if (proFallback) {
@@ -8064,7 +8141,10 @@
       return null;
     }
     function proGoldenBoardItems(snapshot) {
-      const raw = (snapshot && (snapshot.board || snapshot.items || snapshot.keywords || snapshot.publicPreview)) || [];
+      // 표시 정직화(displayGradeForRow)가 C 로 강등하는 행(비율 역전·트래픽 포착 약함 등)은
+      // 보드 채움 백필로도 노출하지 않는다 — C 는 황금키워드 기준 미달.
+      const raw = ((snapshot && (snapshot.board || snapshot.items || snapshot.keywords || snapshot.publicPreview)) || [])
+        .filter(function(item) { return displayGradeForRow(item) !== 'C'; });
       const target = Number(snapshot && snapshot.boardTarget) || 120;
       const strict = filterDisplayGoldenItems(raw);
       if (strict.length >= target || strict.length === raw.length) {
@@ -9227,6 +9307,14 @@
       const target = event.target.closest('[data-catalog-run]');
       if (!target) return;
       runCatalogItem(target.getAttribute('data-catalog-run'));
+    });
+    document.addEventListener('click', function(event) {
+      const tab = event.target.closest('[data-golden-category]');
+      if (!tab) return;
+      goldenCategoryFilter = tab.getAttribute('data-golden-category') || '';
+      if (lastGoldenRowsArgs) {
+        renderGoldenRows(lastGoldenRowsArgs.items, lastGoldenRowsArgs.exact, lastGoldenRowsArgs.target);
+      }
     });
     document.addEventListener('click', function(event) {
       const target = event.target.closest('[data-board-action]');
