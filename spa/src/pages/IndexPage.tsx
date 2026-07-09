@@ -1013,7 +1013,7 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                             <a key={idea.label} className="source-idea-card" href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
                                 <span>{idea.tag}</span>
                                 <strong>{idea.label}</strong>
-                                <small>확장 적합도 {idea.score}</small>
+                                <small>{idea.reason}</small>
                                 <p>{idea.title}</p>
                             </a>
                         ))}
@@ -2838,6 +2838,12 @@ function IndexPage() {
                 }
 
                 @media (max-width: 900px) {
+                    /* 데스크톱 고정 높이(540px) 그대로면 마인드맵 패널이 상자 밖으로 흘러
+                       수익 인증·액션 버튼 위로 겹친다 — 모바일은 내용 높이를 따라간다. */
+                    .hero-content {
+                        height: auto;
+                    }
+
                     .hero-realtime-board {
                         width: 100%;
                         height: auto;
