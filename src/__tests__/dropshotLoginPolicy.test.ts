@@ -5,6 +5,24 @@ import { describe, expect, it } from 'vitest';
 const source = readFileSync(join(process.cwd(), 'src', 'image', 'dropshotLogin.ts'), 'utf8');
 
 describe('Dropshot login success policy', () => {
+  it('keeps the visible login browser open when the initial board navigation times out', () => {
+    const helperIndex = source.indexOf('async function tryOpenDropshotBoard');
+    const visibleLoginIndex = source.indexOf('ctx = await launchBrowser(profileDir, false);');
+    const pollingIndex = source.indexOf('let userClosed = false;', visibleLoginIndex);
+
+    expect(helperIndex).toBeGreaterThan(-1);
+    expect(visibleLoginIndex).toBeGreaterThan(-1);
+    expect(pollingIndex).toBeGreaterThan(visibleLoginIndex);
+
+    const visibleStartupBlock = source.slice(visibleLoginIndex, pollingIndex);
+    expect(visibleStartupBlock).toContain('await tryOpenDropshotBoard(page, onLog);');
+    expect(visibleStartupBlock).not.toContain('await page.goto(BOARD_URL');
+
+    const helperBlock = source.slice(helperIndex, source.indexOf('/**', helperIndex + 1));
+    expect(helperBlock).toContain('keeping login window open');
+    expect(helperBlock).toContain('return false;');
+  });
+
   it('does not treat a closed login window as a successful saved session', () => {
     const earlyFailureIndex = source.indexOf('if (!detected) {');
     const headlessCacheIndex = source.indexOf('const hctx: any = await launchBrowser(profileDir, true);');

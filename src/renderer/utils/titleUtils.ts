@@ -1,4 +1,26 @@
-import { collapseDuplicateLeadingYearTitle } from '../../contentTitleYearGuard.js';
+function collapseDuplicateLeadingYearTitle(title: string): string {
+    let next = String(title || '')
+        .replace(/[\r\n]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    if (!next) return '';
+
+    let previous = '';
+    const duplicateLeadingYear = /^((?:19|20)\d{2})(\uB144)?\s+\1(\uB144)?(?=\s|$)/u;
+    while (previous !== next) {
+        previous = next;
+        next = next
+            .replace(duplicateLeadingYear, (_match, year: string, firstSuffix?: string, secondSuffix?: string) => {
+                const suffix = firstSuffix || secondSuffix ? '\uB144' : '';
+                return `${year}${suffix}`;
+            })
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    return next;
+}
 
 /**
  * ✅ [2026-01-25 모듈화] 제목 처리 유틸리티

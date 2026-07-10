@@ -15,6 +15,21 @@ import {
 } from './dropshotBrowser.js';
 import { getCachedPage, getCachedContext, setCached, clearCached } from './dropshotSession.js';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function tryOpenDropshotBoard(page: any, onLog?: (m: string) => void): Promise<boolean> {
+  try {
+    await page.goto(BOARD_URL, {
+      waitUntil: 'domcontentloaded',
+      timeout: 90_000,
+    });
+    return true;
+  } catch (err) {
+    const message = (err as Error)?.message ?? String(err);
+    onLog?.(`[Dropshot] initial board navigation failed; keeping login window open for manual retry: ${message.slice(0, 180)}`);
+    return false;
+  }
+}
+
 /**
  * Headless-only login check — fast, no visible window, no 5-minute wait.
  * Reuses the cached page when present to avoid a second persistent-context
@@ -87,10 +102,7 @@ export async function dropshotLogin(
     ctx = await launchBrowser(profileDir, false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let page = ctx.pages()[0] || (await ctx.newPage());
-    await page.goto(BOARD_URL, {
-      waitUntil: 'domcontentloaded',
-      timeout: 45000,
-    });
+    await tryOpenDropshotBoard(page, onLog);
 
     // Cognito 토큰이 보이면 = 로그인 완료. 폴링하다 감지되면 자동으로 창을 닫는다.
     // 사용자가 직접 창을 닫으면 그것도 종료 신호로 처리한다(fallback).
@@ -170,7 +182,7 @@ export async function dropshotLogin(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const hctx: any = await launchBrowser(profileDir, true);
     const hpage = hctx.pages()[0] || (await hctx.newPage());
-    await hpage.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
+    await tryOpenDropshotBoard(hpage, onLog);
     await new Promise((r) => setTimeout(r, 4000));
     await openDropshotImageWorkspace(hpage, onLog);
     const finalLoggedIn = await isLoggedIn(hpage);
