@@ -6,9 +6,22 @@
 const NOTICE_KEY = 'app_notice_html_v1';
 const FAQ_KEY = 'app_faq_json_v1';
 const DISMISS_KEY = 'app_notice_dismiss_date';
-const ADMIN_PASSWORD = '2021645';
 
 type FaqItem = { q: string; a: string };
+type NoticeDisplayElements = {
+  modal: HTMLElement;
+  content: HTMLElement;
+  faqHost: HTMLElement;
+};
+
+const SAFE_NOTICE_TAGS = new Set([
+  'A', 'B', 'BR', 'DIV', 'EM', 'FONT', 'H1', 'H2', 'H3', 'H4',
+  'I', 'IMG', 'LI', 'OL', 'P', 'SPAN', 'STRONG', 'U', 'UL',
+]);
+const SAFE_NOTICE_STYLE_PROPS = new Set([
+  'background-color', 'color', 'font-size', 'font-style', 'font-weight',
+  'text-align', 'text-decoration',
+]);
 
 function todayStr(): string {
   try { return new Date().toISOString().slice(0, 10); } catch { return ''; }
@@ -29,6 +42,118 @@ function escapeHtml(s: string): string {
   return d.innerHTML;
 }
 
+function isSafeNoticeUrl(value: string, allowImageData = false): boolean {
+  const trimmed = String(value || '').trim();
+  const lower = trimmed.toLowerCase();
+  if (!trimmed || lower.includes('javascript:')) return false;
+  if (allowImageData && /^data:image\/(?:png|jpe?g|gif|webp);base64,/i.test(trimmed)) return true;
+  return /^(https?:|mailto:)/i.test(trimmed);
+}
+
+function sanitizeNoticeStyle(value: string): string {
+  return String(value || '')
+    .split(';')
+    .map((chunk) => {
+      const separator = chunk.indexOf(':');
+      if (separator <= 0) return '';
+      const name = chunk.slice(0, separator).trim().toLowerCase();
+      const styleValue = chunk.slice(separator + 1).trim();
+      const lowerValue = styleValue.toLowerCase();
+      if (!SAFE_NOTICE_STYLE_PROPS.has(name)) return '';
+      if (!styleValue || /url\s*\(|expression\s*\(|javascript:|[<>]/i.test(lowerValue)) return '';
+      return `${name}: ${styleValue}`;
+    })
+    .filter(Boolean)
+    .join('; ');
+}
+
+function sanitizeNoticeElement(el: Element): void {
+  const tag = el.tagName.toUpperCase();
+  if (!SAFE_NOTICE_TAGS.has(tag)) {
+    const parent = el.parentNode;
+    if (!parent) return;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+    return;
+  }
+
+  Array.from(el.attributes).forEach((attr) => {
+    const name = attr.name.toLowerCase();
+    const value = attr.value || '';
+    if (attr.name.startsWith('on')) {
+      el.removeAttribute(attr.name);
+      return;
+    }
+    if (name === 'style') {
+      const safeStyle = sanitizeNoticeStyle(value);
+      if (safeStyle) el.setAttribute('style', safeStyle);
+      else el.removeAttribute(attr.name);
+      return;
+    }
+    if (tag === 'A' && name === 'href') {
+      if (isSafeNoticeUrl(value)) {
+        el.setAttribute('href', value.trim());
+        el.setAttribute('target', '_blank');
+        el.setAttribute('rel', 'noopener noreferrer');
+      } else {
+        el.removeAttribute(attr.name);
+      }
+      return;
+    }
+    if (tag === 'IMG' && name === 'src') {
+      if (isSafeNoticeUrl(value, true)) el.setAttribute('src', value.trim());
+      else el.removeAttribute(attr.name);
+      return;
+    }
+    if (tag === 'IMG' && name === 'alt') return;
+    if (tag === 'FONT' && ['color', 'face', 'size'].includes(name) && !/[<>]/.test(value)) return;
+    el.removeAttribute(attr.name);
+  });
+}
+
+function sanitizeNoticeHtml(raw: string): string {
+  const template = document.createElement('template');
+  template.innerHTML = String(raw || '');
+
+  const visit = (node: Node): void => {
+    Array.from(node.childNodes).forEach(visit);
+    if (node.nodeType === 8) {
+      node.parentNode?.removeChild(node);
+      return;
+    }
+    if (node.nodeType === 1) sanitizeNoticeElement(node as Element);
+  };
+
+  visit(template.content);
+  return template.innerHTML;
+}
+
+function getNoticeDisplayElements(): NoticeDisplayElements | null {
+  const content = document.querySelector<HTMLElement>('#notice-display-content');
+  const faqHost = document.querySelector<HTMLElement>('#notice-faq-display');
+  const modal = content ? content.closest<HTMLElement>('#notice-modal') : null;
+
+  if (!modal || !content || !faqHost) return null;
+  return { modal, content, faqHost };
+}
+
+async function verifyAdminPin(pin: string): Promise<{ success: boolean; message?: string }> {
+  const input = String(pin || '').trim();
+  if (!input) return { success: false, message: '관리자 PIN을 입력해주세요.' };
+
+  const api = (window as any).api;
+  if (typeof api?.verifyAdminPin === 'function') {
+    return api.verifyAdminPin(input);
+  }
+
+  const electronAPI = (window as any).electronAPI;
+  if (typeof electronAPI?.invoke === 'function') {
+    return electronAPI.invoke('admin:verifyPin', input);
+  }
+
+  return { success: false, message: '관리자 인증 API를 사용할 수 없습니다.' };
+}
+
 function renderFaqDisplay(host: HTMLElement, faq: FaqItem[]): void {
   if (!faq.length) { host.innerHTML = ''; return; }
   host.innerHTML = `<h4 style="color:var(--text-gold); margin:0 0 0.6rem; font-size:1.05rem;">❓ 자주 묻는 질문</h4>` +
@@ -40,7 +165,7 @@ function renderFaqDisplay(host: HTMLElement, faq: FaqItem[]): void {
 }
 
 /** 공지가 있고 오늘 안 봤으면 센터에 표시. */
-function showNoticeIfAny(): void {
+export function showNoticeIfAny(): void {
   const notice = getNotice();
   const faq = getFaq();
   if (!notice.trim() && !faq.length) return;
@@ -48,22 +173,33 @@ function showNoticeIfAny(): void {
   try { dismissed = localStorage.getItem(DISMISS_KEY) || ''; } catch { /* ignore */ }
   if (dismissed === todayStr()) return;
 
-  const modal = document.getElementById('notice-modal');
-  const content = document.getElementById('notice-display-content');
-  const faqHost = document.getElementById('notice-faq-display');
-  if (!modal || !content || !faqHost) return;
-  content.innerHTML = notice; // 관리자 작성 리치 HTML
+  const elements = getNoticeDisplayElements();
+  if (!elements) return;
+  const { modal, content, faqHost } = elements;
+
+  document.querySelectorAll<HTMLElement>('#notice-modal').forEach((candidate) => {
+    if (candidate !== modal) {
+      candidate.style.display = 'none';
+      candidate.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  content.innerHTML = sanitizeNoticeHtml(notice);
   renderFaqDisplay(faqHost, faq);
   modal.style.display = 'flex';
   modal.setAttribute('aria-hidden', 'false');
 }
 
 function closeNotice(): void {
-  const modal = document.getElementById('notice-modal');
+  const modal = getNoticeDisplayElements()?.modal || null;
   const dontShow = document.getElementById('notice-dont-show-today') as HTMLInputElement | null;
   if (dontShow?.checked) {
     try { localStorage.setItem(DISMISS_KEY, todayStr()); } catch { /* ignore */ }
   }
+  document.querySelectorAll<HTMLElement>('#notice-modal').forEach((candidate) => {
+    candidate.style.display = 'none';
+    candidate.setAttribute('aria-hidden', 'true');
+  });
   if (modal) { modal.style.display = 'none'; modal.setAttribute('aria-hidden', 'true'); }
 }
 
@@ -92,7 +228,7 @@ function openAdminEditor(): void {
   if (!editor || !noticeEditor || !faqList) return;
   if (gate) gate.style.display = 'none';
   editor.style.display = 'block';
-  noticeEditor.innerHTML = getNotice();
+  noticeEditor.innerHTML = sanitizeNoticeHtml(getNotice());
   faqList.innerHTML = '';
   const faq = getFaq();
   if (faq.length) faq.forEach((f) => addFaqRow(faqList, f.q, f.a));
@@ -104,7 +240,7 @@ function saveAdmin(): void {
   const faqList = document.getElementById('admin-faq-list');
   if (!noticeEditor || !faqList) return;
   try {
-    localStorage.setItem(NOTICE_KEY, noticeEditor.innerHTML);
+    localStorage.setItem(NOTICE_KEY, sanitizeNoticeHtml(noticeEditor.innerHTML));
     const rows = Array.from(faqList.querySelectorAll('.admin-faq-row'));
     const faq: FaqItem[] = rows.map((r) => ({
       q: (r.querySelector('.admin-faq-q') as HTMLInputElement)?.value.trim() || '',
@@ -143,15 +279,34 @@ export function initNoticeAdmin(): void {
   });
 
   // 잠금 해제
-  const tryUnlock = (): void => {
+  const tryUnlock = async (): Promise<void> => {
     const pw = document.getElementById('admin-password-input') as HTMLInputElement | null;
     const err = document.getElementById('admin-gate-error');
-    if (pw?.value === ADMIN_PASSWORD) { if (err) err.style.display = 'none'; openAdminEditor(); }
-    else if (err) err.style.display = 'block';
+    if (err) {
+      err.style.display = 'none';
+      err.textContent = '';
+    }
+
+    try {
+      const result = await verifyAdminPin(pw?.value || '');
+      if (result.success) {
+        openAdminEditor();
+        return;
+      }
+      if (err) {
+        err.textContent = result.message || '관리자 PIN이 올바르지 않습니다.';
+        err.style.display = 'block';
+      }
+    } catch (error) {
+      if (err) {
+        err.textContent = `관리자 PIN 확인 실패: ${(error as Error).message}`;
+        err.style.display = 'block';
+      }
+    }
   };
-  document.getElementById('admin-unlock-btn')?.addEventListener('click', tryUnlock);
+  document.getElementById('admin-unlock-btn')?.addEventListener('click', () => { void tryUnlock(); });
   document.getElementById('admin-password-input')?.addEventListener('keydown', (e) => {
-    if ((e as KeyboardEvent).key === 'Enter') tryUnlock();
+    if ((e as KeyboardEvent).key === 'Enter') void tryUnlock();
   });
 
   // 리치 편집 툴바
@@ -191,5 +346,8 @@ export function initNoticeAdmin(): void {
   document.getElementById('admin-save-btn')?.addEventListener('click', saveAdmin);
 
   // 앱 로드 시 공지 표시
+  (window as any).showNoticeIfAny = showNoticeIfAny;
   showNoticeIfAny();
+  setTimeout(showNoticeIfAny, 250);
+  setTimeout(showNoticeIfAny, 1000);
 }

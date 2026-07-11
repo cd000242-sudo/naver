@@ -13,7 +13,7 @@ import {
   getProfileDir,
   type DropshotLoginStatus,
 } from './dropshotBrowser.js';
-import { getCachedPage, getCachedContext, setCached, clearCached } from './dropshotSession.js';
+import { getCachedPage, getCachedContext, clearCached, closeBrowserCache } from './dropshotSession.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function tryOpenDropshotBoard(page: any, onLog?: (m: string) => void): Promise<boolean> {
@@ -30,6 +30,16 @@ async function tryOpenDropshotBoard(page: any, onLog?: (m: string) => void): Pro
   }
 }
 
+async function closeLoginVerificationContext(ctx: unknown): Promise<void> {
+  try {
+    if (ctx && typeof (ctx as { close?: unknown }).close === 'function') {
+      await (ctx as { close: () => Promise<void> }).close();
+    }
+  } catch {
+    // best-effort cleanup; the login result should not depend on close errors
+  }
+}
+
 /**
  * Headless-only login check — fast, no visible window, no 5-minute wait.
  * Reuses the cached page when present to avoid a second persistent-context
@@ -40,12 +50,19 @@ export async function checkDropshotLogin(
 ): Promise<DropshotLoginStatus> {
   const cachedPage = getCachedPage();
   if (cachedPage) {
+    let cachedLoggedIn = false;
     try {
-      if (await isLoggedIn(cachedPage)) {
-        return { loggedIn: true, message: '✅ 로그인됨 (Cognito 세션 확인)' };
-      }
+      cachedLoggedIn = await isLoggedIn(cachedPage);
     } catch {
       // cached page unusable — fall through to a fresh headless check
+    }
+    try {
+      await closeBrowserCache();
+    } catch {
+      // best-effort cleanup before opening a short-lived check context
+    }
+    if (cachedLoggedIn) {
+      return { loggedIn: true, message: '✅ 로그인됨 (Cognito 세션 확인)' };
     }
   }
   const profileDir = getProfileDir();
@@ -195,10 +212,9 @@ export async function dropshotLogin(
       clearCached();
       return { loggedIn: false, message: '⚠️ 로그인이 확인되지 않았습니다(토큰 없음). 다시 로그인해 주세요.' };
     }
-    setCached(hctx, hpage);
-    return (await isLoggedIn(hpage))
-      ? { loggedIn: true, message: '✅ 로그인 완료 — 세션이 저장되었습니다.' }
-      : { loggedIn: false, message: '⚠️ 로그인이 확인되지 않았습니다(토큰 없음). 다시 로그인해 주세요.' };
+    await closeLoginVerificationContext(hctx);
+    clearCached();
+    return { loggedIn: true, message: '✅ 로그인 완료 — 세션이 저장되었습니다.' };
   } catch (err) {
     try {
       if (ctx) await ctx.close();

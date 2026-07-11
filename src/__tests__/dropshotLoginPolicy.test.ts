@@ -39,18 +39,33 @@ describe('Dropshot login success policy', () => {
     expect(earlyFailureBlock).toContain('로그인 창이 닫혔지만 로그인 완료 신호가 감지되지 않았습니다');
   });
 
-  it('stores the Dropshot session only after the final headless token check passes', () => {
+  it('closes any cached browser context during a login status check', () => {
+    const checkIndex = source.indexOf('export async function checkDropshotLogin');
+    const loginIndex = source.indexOf('export async function dropshotLogin', checkIndex);
+
+    expect(checkIndex).toBeGreaterThan(-1);
+    expect(loginIndex).toBeGreaterThan(checkIndex);
+
+    const checkBlock = source.slice(checkIndex, loginIndex);
+    expect(checkBlock).toContain('const cachedPage = getCachedPage();');
+    expect(checkBlock).toContain('await closeBrowserCache();');
+    expect(checkBlock).not.toContain('setCached(');
+  });
+
+  it('closes the final headless verification browser after interactive login succeeds', () => {
     const finalCheckIndex = source.indexOf('const finalLoggedIn = await isLoggedIn(hpage);');
-    const setCachedIndex = source.indexOf('setCached(hctx, hpage);');
+    const closeSuccessIndex = source.indexOf('await closeLoginVerificationContext(hctx);', finalCheckIndex);
+    const successReturnIndex = source.indexOf('return { loggedIn: true', finalCheckIndex);
 
     expect(finalCheckIndex).toBeGreaterThan(-1);
-    expect(setCachedIndex).toBeGreaterThan(-1);
-    expect(finalCheckIndex).toBeLessThan(setCachedIndex);
+    expect(closeSuccessIndex).toBeGreaterThan(finalCheckIndex);
+    expect(successReturnIndex).toBeGreaterThan(closeSuccessIndex);
 
-    const finalCheckBlock = source.slice(finalCheckIndex, setCachedIndex);
+    const finalCheckBlock = source.slice(finalCheckIndex, successReturnIndex);
     expect(finalCheckBlock).toContain('if (!finalLoggedIn)');
     expect(finalCheckBlock).toContain('await hctx.close();');
     expect(finalCheckBlock).toContain('clearCached();');
     expect(finalCheckBlock).toContain('loggedIn: false');
+    expect(source).not.toContain('setCached(hctx, hpage);');
   });
 });

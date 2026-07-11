@@ -806,6 +806,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     // extractBodyForHeading 복잡한 파싱을 완전 우회하여 100% 편집 반영 보장
     if (structured._bodyManuallyEdited && headings.length > 0) {
       self.log('📝 [편집 감지] 사용자가 수정한 내용을 heading 위치 기반으로 직접 분할합니다.');
+      const headingsHaveManualContent = headings.every((h: any) =>
+        String(h?.content || '').trim().length > 0
+      );
 
       // heading title 위치를 순차적으로 찾기 (중복 방지)
       const positions: { title: string; headingIdx: number; pos: number; len: number }[] = [];
@@ -838,6 +841,12 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         // 마무리는 마지막 heading.content에 자연 포함됨 → 별도 타이핑 스킵
         structured.conclusion = '';
         self.log('   ✅ 편집 분할 완료 (마무리는 마지막 소제목에 통합)');
+      } else if (headingsHaveManualContent) {
+        // 붙여넣기/LLM 분류 과정에서 표시용 소제목은 번호가 제거될 수 있다.
+        // 예: 원문 "⑨ 응급약품" → 표시용 "응급약품". 이때 title indexOf가 실패해도
+        // 이미 추출된 heading.content가 가장 정확하므로 균등분할로 덮어쓰지 않는다.
+        structured.conclusion = '';
+        self.log('   ✅ [편집 분할] heading title 매칭 실패 - 기존 heading.content 보존');
       } else {
         // ✅ [2026-02-28 FIX] heading title 매칭 실패 시 bodyText 균등 분할로 폴백
         // extractBodyForHeading이 실패해서 cleanBody가 빈 문자열이 되는 것 방지
@@ -2041,10 +2050,17 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           // 이미지 건너뛰기 모드일 때
           const cFrame = (await self.getAttachedFrame());
           let cBody = '';
-          // ✅ [2026-02-27 FIX] bodyText 추출 우선 — heading.content는 stale할 수 있음
-          cBody = self.extractBodyForHeading(bodyText, heading.title, i, headings.length, headings).trim();
-          if (cBody.length < 30 && heading.content && heading.content.trim().length > 30) {
+          if (structured._bodyManuallyEdited && heading.content && heading.content.trim().length > 0) {
+            // 반자동 붙여넣기/편집은 renderer에서 소제목별 content를 이미 추출한다.
+            // 표시용 소제목이 정규화되어 원문과 달라져도 원문 순서를 보존한다.
             cBody = heading.content.trim();
+            self.log(`   ✅ [편집 반영] 이미지 없음 경로 heading.content 직접 사용: ${cBody.length}자`);
+          } else {
+            // ✅ [2026-02-27 FIX] bodyText 추출 우선 — heading.content는 stale할 수 있음
+            cBody = self.extractBodyForHeading(bodyText, heading.title, i, headings.length, headings).trim();
+            if (cBody.length < 30 && heading.content && heading.content.trim().length > 30) {
+              cBody = heading.content.trim();
+            }
           }
 
           if (cBody.trim()) {

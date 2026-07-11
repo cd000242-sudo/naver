@@ -2183,14 +2183,21 @@
       });
 
       confirmBtn?.addEventListener('click', async () => {
-        if (passwordInput.value === '@qkrtjdgus12') { // 변경된 관리자 비밀번호
+        try {
+          const result = await ipcRenderer.invoke('admin:verifyPin', passwordInput.value.trim());
+          if (!result?.success) {
+            alert(result?.message || '관리자 PIN이 올바르지 않습니다.');
+            return;
+          }
+
           authSection.style.display = 'none';
           controlPanel.style.display = 'block';
 
           const config = await ipcRenderer.invoke('config:get');
           enableTrialCheckbox.checked = config?.enableFreeTrialButton ?? true;
-        } else {
-          alert('비밀번호가 올바르지 않습니다.');
+        } catch (error) {
+          console.error('[Login] 관리자 PIN 확인 실패:', error);
+          alert('관리자 PIN 확인 중 오류가 발생했습니다.');
         }
       });
 

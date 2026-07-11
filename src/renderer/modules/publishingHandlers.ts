@@ -1904,6 +1904,20 @@ function reSyncHeadingsContent(headings: any[], editedBody: string): any[] {
   // ✅ [2026-03-26 FIX] 2단계: 매칭 실패한 heading이 있으면 균등 분배 폴백
   const unmatchedCount = results.filter((r: any) => !r._matched && r.title).length;
   if (unmatchedCount > 0 && unmatchedCount === results.filter((r: any) => r.title).length) {
+    const allHeadingsHaveContent = results
+      .filter((r: any) => r.title)
+      .every((r: any) => String(r?.content || '').trim().length > 0);
+
+    if (allHeadingsHaveContent) {
+      // 붙여넣기 분석에서 이미 소제목별 본문이 잡힌 경우, 표시용 소제목과
+      // 원문 소제목이 달라져도 균등분할로 덮어쓰면 문단 순서가 섞인다.
+      console.log(`[reSyncHeadingsContent] ✅ 모든 소제목 매칭 실패 - 기존 heading.content 보존 (${unmatchedCount}개)`);
+      return results.map((r: any) => {
+        const { _matched, ...rest } = r;
+        return rest;
+      });
+    }
+
     // 모든 heading이 매칭 실패 → editedBody를 균등 분배
     console.log(`[reSyncHeadingsContent] ⚠️ 모든 소제목 매칭 실패 (${unmatchedCount}개) → 균등 분배 폴백`);
     const lines = editedBody.split('\n').filter((l: string) => l.trim().length > 0);
