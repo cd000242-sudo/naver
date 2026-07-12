@@ -32,8 +32,8 @@ describe('scheduled post lookup policy', () => {
   });
 
   it('rejects malformed schedule dates without throwing during logging', () => {
-    expect(parseScheduledDate('2026-07-11 10:05')?.toISOString())
-      .toBe('2026-07-11T01:05:00.000Z');
+    expect(parseScheduledDate('2026-07-11 10:05'))
+      .toEqual(new Date(2026, 6, 11, 10, 5));
     expect(parseScheduledDate('not-a-date')).toBeNull();
     expect(parseScheduledDate('')).toBeNull();
   });

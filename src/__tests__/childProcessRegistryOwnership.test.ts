@@ -1,5 +1,5 @@
 import { EventEmitter } from 'node:events';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const spawnMock = vi.hoisted(() => vi.fn());
 
@@ -14,16 +14,25 @@ import {
 
 class FakeTaskkill extends EventEmitter {}
 
+const originalPlatform = process.platform;
+
 describe('child process registry ownership', () => {
   beforeEach(() => {
+    Object.defineProperty(process, 'platform', { value: 'win32' });
     spawnMock.mockReset();
     for (const child of getTrackedChildren()) untrackChild(child.pid);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+    for (const child of getTrackedChildren()) untrackChild(child.pid);
+    Object.defineProperty(process, 'platform', { value: originalPlatform });
   });
 
   it('retains a PID when taskkill fails and the process is still alive', async () => {
     const taskkill = new FakeTaskkill();
     spawnMock.mockReturnValue(taskkill);
-    const killSpy = vi.spyOn(process, 'kill').mockImplementation(() => true);
+    vi.spyOn(process, 'kill').mockImplementation(() => true);
     trackChild(51_001, 'stuck-child');
 
     const cleanup = killAllTrackedChildren();
@@ -33,14 +42,12 @@ describe('child process registry ownership', () => {
     expect(getTrackedChildren()).toEqual([
       expect.objectContaining({ pid: 51_001, label: 'stuck-child' }),
     ]);
-    killSpy.mockRestore();
-    untrackChild(51_001);
   });
 
   it('untracks a PID only after taskkill completes and the process is gone', async () => {
     const taskkill = new FakeTaskkill();
     spawnMock.mockReturnValue(taskkill);
-    const killSpy = vi.spyOn(process, 'kill').mockImplementation(() => {
+    vi.spyOn(process, 'kill').mockImplementation(() => {
       throw Object.assign(new Error('not found'), { code: 'ESRCH' });
     });
     trackChild(51_002, 'closed-child');
@@ -50,6 +57,5 @@ describe('child process registry ownership', () => {
     await cleanup;
 
     expect(getTrackedChildren()).toEqual([]);
-    killSpy.mockRestore();
   });
 });
