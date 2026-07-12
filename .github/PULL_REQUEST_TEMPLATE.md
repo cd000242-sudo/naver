@@ -1,33 +1,33 @@
-## What Changed
-<!-- Describe the specific changes made in this PR -->
+## 변경 목적
 
-## Why This Change
-<!-- Explain the motivation and context for this change -->
+<!-- 해결하려는 문제와 이 변경이 필요한 이유를 설명해 주세요. -->
 
-## Testing Done
-<!-- Describe the testing you performed to validate your changes -->
-- [ ] Manual testing completed
-- [ ] Automated tests pass locally (`node tests/run-all.js`)
-- [ ] Edge cases considered and tested
+## 주요 변경 사항
 
-## Type of Change
-- [ ] `fix:` Bug fix
-- [ ] `feat:` New feature
-- [ ] `refactor:` Code refactoring
-- [ ] `docs:` Documentation
-- [ ] `test:` Tests
-- [ ] `chore:` Maintenance/tooling
-- [ ] `ci:` CI/CD changes
+<!-- 검토자가 빠르게 이해할 수 있도록 핵심 변경을 항목별로 작성해 주세요. -->
 
-## Security & Quality Checklist
-- [ ] No secrets or API keys committed (ghp_, sk-, AKIA, xoxb, xoxp patterns checked)
-- [ ] JSON files validate cleanly
-- [ ] Shell scripts pass shellcheck (if applicable)
-- [ ] Pre-commit hooks pass locally (if configured)
-- [ ] No sensitive data exposed in logs or output
-- [ ] Follows conventional commits format
+## 검증 결과
 
-## Documentation
-- [ ] Updated relevant documentation
-- [ ] Added comments for complex logic
-- [ ] README updated (if needed)
+<!-- 실행한 명령과 결과를 작성해 주세요. 실행하지 못한 검증이 있다면 이유를 남겨 주세요. -->
+
+- [ ] `npm run lint`
+- [ ] `npm test`
+- [ ] `npm run build`
+- [ ] `npm run verify:release`
+
+## 영향 및 위험
+
+- 계정, 세션, API 키 또는 개인정보 처리에 미치는 영향:
+  <!-- 영향이 없다면 없음이라고 쓰고, 영향이 있다면 완화 방법과 검증 결과를 설명해 주세요. -->
+
+- [ ] 보안 및 개인정보 영향을 검토하고 위에 설명했습니다.
+- [ ] 외부 URL, 크롤링, 이미지 다운로드 또는 브라우저 자동화 경계를 검토했습니다.
+- [ ] 기존 동작과 하위 호환성에 미치는 영향을 설명했습니다.
+- [ ] UI 변경이 있다면 전후 스크린샷을 첨부했습니다.
+
+## 제출 전 확인
+
+- [ ] 관련 테스트를 추가하거나 기존 테스트가 충분한 이유를 설명했습니다.
+- [ ] 실제 비밀정보와 개인 데이터가 포함되지 않았습니다.
+- [ ] 필요한 README 또는 사용자 문서를 업데이트했습니다.
+- [ ] 변경 범위가 하나의 목적에 집중되어 있습니다.
