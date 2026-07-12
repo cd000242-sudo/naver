@@ -5,6 +5,38 @@ export interface SemiAutoExtractedHeading {
   source: string;
 }
 
+export interface SemiAutoExtractedDocument {
+  introduction: string;
+  headings: SemiAutoExtractedHeading[];
+}
+
+export type SemiAutoPublishStructureStrategy = 'body-sections' | 'existing-sections' | 'plain-body';
+
+export interface SemiAutoPublishStructureOptions {
+  bodyIsAuthoritative?: boolean;
+  existingIntroduction?: string;
+}
+
+export interface SemiAutoPublishStructure extends SemiAutoExtractedDocument {
+  strategy: SemiAutoPublishStructureStrategy;
+  orderLocked: boolean;
+}
+
+interface SemiAutoHeadingMatch {
+  lineIndex: number;
+  title: string;
+}
+
+export function isCurrentSemiAutoPasteRevision(
+  currentRevision: number,
+  expectedRevision: number,
+  currentBody: string,
+  pastedSnapshot: string,
+): boolean {
+  return Number(currentRevision) === Number(expectedRevision)
+    && String(currentBody) === String(pastedSnapshot);
+}
+
 export function normalizeSemiAutoHeadingTitle(raw: string): string {
   return String(raw || '')
     .trim()
@@ -17,7 +49,7 @@ export function normalizeSemiAutoHeadingTitle(raw: string): string {
     .trim();
 }
 
-export function isSemiAutoHeadingCandidate(lines: string[], index: number): boolean {
+export function isSemiAutoHeadingCandidate(lines: readonly string[], index: number): boolean {
   const raw = String(lines[index] || '').trim();
   if (!raw) return false;
   if (/^(?:#\S+\s*){2,}$/u.test(raw)) return false;
@@ -25,13 +57,14 @@ export function isSemiAutoHeadingCandidate(lines: string[], index: number): bool
   if (/^[-*•]\s+/.test(raw)) return false;
 
   const title = normalizeSemiAutoHeadingTitle(raw);
-  if (title.length < 3 || title.length > 80) return false;
+  const hasExplicitHeadingMarker = /^\s{0,3}#{1,4}\s+/.test(raw)
+    || /^\s*(?:소제목|제목|heading|section)\s*\d*\s*[:：.\-]/i.test(raw)
+    || /^\s*[\[(【]\s*(?:소제목|제목|heading|section)/i.test(raw)
+    || /^\s*\d{1,2}\s*[\).:：-]\s+\S/.test(raw);
+  if (title.length < (hasExplicitHeadingMarker ? 2 : 3) || title.length > 80) return false;
   if (/^(?:본문|해시태그|태그|요약|마무리)$/u.test(title)) return false;
 
-  if (/^\s{0,3}#{1,4}\s+/.test(raw)) return true;
-  if (/^\s*(?:소제목|제목|heading|section)\s*\d*\s*[:：.\-]/i.test(raw)) return true;
-  if (/^\s*[\[(【]\s*(?:소제목|제목|heading|section)/i.test(raw)) return true;
-  if (/^\s*\d{1,2}\s*[\).:：-]\s+\S/.test(raw) && !/[.!?。？！]\s*$/.test(title)) return true;
+  if (hasExplicitHeadingMarker && !/[.!?。？！]\s*$/.test(title)) return true;
 
   const prevBlank = index === 0 || String(lines[index - 1] || '').trim().length === 0;
   const nextNonEmpty = lines.slice(index + 1).find((line) => String(line || '').trim().length > 0)?.trim() || '';
@@ -53,9 +86,8 @@ export function isSemiAutoHeadingCandidate(lines: string[], index: number): bool
   return prevBlank && nextNonEmpty.length > 0 && !sentenceLike && !startsLikeQuote && (title.length <= 34 || hasHeadingKeyword);
 }
 
-export function extractSemiAutoHeadingsFromBody(body: string): SemiAutoExtractedHeading[] {
-  const lines = String(body || '').split(/\r?\n/);
-  const matches: Array<{ lineIndex: number; title: string }> = [];
+function findSemiAutoHeadingMatches(lines: readonly string[]): SemiAutoHeadingMatch[] {
+  const matches: SemiAutoHeadingMatch[] = [];
   const seen = new Set<string>();
 
   lines.forEach((line, index) => {
@@ -67,7 +99,18 @@ export function extractSemiAutoHeadingsFromBody(body: string): SemiAutoExtracted
     matches.push({ lineIndex: index, title });
   });
 
-  return matches.map((match, index) => {
+  return matches;
+}
+
+export function extractSemiAutoDocumentFromBody(body: string): SemiAutoExtractedDocument {
+  const lines = String(body || '').split(/\r?\n/);
+  const matches = findSemiAutoHeadingMatches(lines);
+
+  if (matches.length === 0) {
+    return { introduction: '', headings: [] };
+  }
+
+  const headings = matches.map((match, index) => {
     const next = matches[index + 1]?.lineIndex ?? lines.length;
     const content = lines
       .slice(match.lineIndex + 1, next)
@@ -80,4 +123,60 @@ export function extractSemiAutoHeadingsFromBody(body: string): SemiAutoExtracted
       source: 'semi-auto:manual-body-heading',
     };
   });
+
+  return {
+    introduction: lines.slice(0, matches[0].lineIndex).join('\n').trim(),
+    headings,
+  };
+}
+
+export function extractSemiAutoHeadingsFromBody(body: string): SemiAutoExtractedHeading[] {
+  return extractSemiAutoDocumentFromBody(body).headings;
+}
+
+export function resolveSemiAutoPublishStructure(
+  body: string,
+  existingHeadings: readonly any[] = [],
+  options: SemiAutoPublishStructureOptions = {},
+): SemiAutoPublishStructure {
+  const normalizedBody = String(body || '').replace(/\r\n/g, '\n').trim();
+  const extracted = extractSemiAutoDocumentFromBody(normalizedBody);
+
+  if (extracted.headings.length > 0) {
+    return {
+      introduction: extracted.introduction,
+      headings: extracted.headings.map((heading) => ({ ...heading })),
+      strategy: 'body-sections',
+      orderLocked: true,
+    };
+  }
+
+  const completeExistingHeadings = existingHeadings
+    .filter((heading) => String(heading?.title || '').trim().length > 0)
+    .map((heading) => ({
+      ...heading,
+      title: String(heading.title || '').trim(),
+      content: String(heading.content || heading.summary || '').trim(),
+    }));
+  const canPreserveExisting = completeExistingHeadings.length > 0
+    && completeExistingHeadings.every((heading) => heading.content.length > 0);
+
+  if (options.bodyIsAuthoritative !== true && canPreserveExisting) {
+    return {
+      introduction: String(options.existingIntroduction || '').trim(),
+      headings: completeExistingHeadings,
+      strategy: 'existing-sections',
+      orderLocked: true,
+    };
+  }
+
+  // A pasted body with no reliable section markers is safer as one immutable
+  // body than as guessed equal chunks. This guarantees that paragraph order is
+  // preserved even when stale headings exist from a previously loaded article.
+  return {
+    introduction: normalizedBody,
+    headings: [],
+    strategy: 'plain-body',
+    orderLocked: true,
+  };
 }

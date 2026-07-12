@@ -70,10 +70,26 @@ describe('qualityEvaluator — Phase 1 통합 평가', () => {
       headings: [{ title: '사용 후기', content: '' }],
       mode: 'affiliate',
       contentMode: 'affiliate',
+      affiliateEvidenceMode: 'first_party',
     };
     const result = evaluate(input);
     expect(result.modeScore.details.priceSpec).toBeGreaterThan(0);
     expect(result.modeScore.details.usageExperience).toBeGreaterThan(0);
+  });
+
+  it('affiliate 리뷰 종합형은 가짜 체험담을 보상하지 않고 안전성 실패로 돌린다', () => {
+    const result = evaluate({
+      body: '제가 직접 한 달 써보니 가족도 좋아하더라고요. 지금 안 사면 손해예요.',
+      title: '한 달 써본 모노팬 솔직 후기',
+      rawText: '상품명 모노팬. 구매자 후기에는 저속 소음이 작다는 의견과 최고 풍량 소리가 크다는 의견이 있다.',
+      mode: 'affiliate',
+      contentMode: 'affiliate',
+      affiliateEvidenceMode: 'review_synthesis',
+    });
+
+    expect(result.modeScore.details.evidenceIntegrity).toBeLessThan(10);
+    expect(result.safetyScore.score).toBeLessThan(50);
+    expect(result.decision).toBe('regenerate');
   });
 
   it('AI 보고체 다수 글은 humanlike 낮음', () => {

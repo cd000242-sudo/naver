@@ -11,11 +11,15 @@ import { generateWithDeepInfra } from './image/deepinfraGenerator.js';
 import { generateWithNaver } from './image/naverImageGenerator.js';
 import { generateWithOpenAIImage } from './image/openaiImageGenerator.js';
 import { generateWithLeonardoAI } from './image/leonardoAIGenerator.js';
-import { generateWithImageFx } from './image/imageFxGenerator.js';
+import { cleanupImageFxBrowser, generateWithImageFx } from './image/imageFxGenerator.js';
 import { generateWithFlow, resetFlowState } from './image/flowGenerator.js';
 import { generateWithProdia } from './image/prodiaGenerator.js';
 // ✅ [v2.11.7] 리더스 나노바나나 무제한 (dropshot)
 import { generateWithDropshot } from './image/dropshotGenerator.js';
+import {
+  abortDropshotGenerations,
+  closeAllDropshotContexts,
+} from './image/dropshotSession.js';
 
 import { downloadAndSaveImage } from './image/imageUtils.js';
 import { getImageErrorMessage } from './image/imageErrorMessages.js';
@@ -33,11 +37,47 @@ export { downloadAndSaveImage };
 
 // ✅ [100점 수정] 이미지 생성 중지 함수 export
 export async function abortImageGeneration(): Promise<void> {
-  abortNanoBananaImageGeneration();
-  try {
-    await resetFlowState();
-  } catch (error) {
-    console.warn('[ImageGenerator] Flow 상태 초기화 실패 (abort 계속 진행):', (error as Error).message);
+  // Invalidate running and queued Dropshot requests before closing their page.
+  // Otherwise a Target-closed retry can reopen the browser after the user stops.
+  abortDropshotGenerations();
+  const cleanupTasks = [
+    {
+      label: 'Nano Banana',
+      run: async (): Promise<void> => {
+        abortNanoBananaImageGeneration();
+      },
+    },
+    {
+      label: 'Flow',
+      run: async (): Promise<void> => {
+        await resetFlowState();
+      },
+    },
+    {
+      label: 'ImageFX',
+      run: async (): Promise<void> => {
+        await cleanupImageFxBrowser();
+      },
+    },
+    {
+      label: 'Dropshot',
+      run: async (): Promise<void> => {
+        await closeAllDropshotContexts();
+      },
+    },
+  ];
+
+  const results = await Promise.allSettled(cleanupTasks.map(task => task.run()));
+  const failures: string[] = [];
+  results.forEach((result, index) => {
+    if (result.status === 'rejected') {
+      const reason = result.reason instanceof Error ? result.reason.message : String(result.reason);
+      failures.push(`${cleanupTasks[index].label}: ${reason}`);
+      console.warn(`[ImageGenerator] ${cleanupTasks[index].label} 상태 초기화 실패 (abort 계속 진행):`, reason);
+    }
+  });
+  if (failures.length > 0) {
+    throw new Error(`IMAGE_ABORT_CLEANUP_INCOMPLETE: cleanup task(s) failed - ${failures.join('; ')}`);
   }
 }
 
@@ -706,7 +746,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     } catch (dropshotError) {
       const rawMsg = (dropshotError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ 리더스 나노바나나 무제한 실패:`, rawMsg);
-      throw new Error(`[리더스 나노바나나 무제한] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. Dropshot Pro 구독 미완료 또는 만료\n2. 로그인 세션 만료 (재로그인 필요)\n3. Dropshot UI 구조 변경\n4. 브라우저 실행 실패 (Chrome/Edge 설치 필요)`);
+      throw new Error(`[리더스 나노바나나 무제한] 이미지 생성 실패: ${rawMsg}\n\n💡 가능한 원인:\n1. Dropshot Pro 구독 미완료 또는 만료\n2. 로그인 세션 만료 (재로그인 필요)\n3. Dropshot UI 구조 변경\n4. 브라우저 실행 실패 (Chrome/Edge 설치 필요)\n5. Dropshot 모델 서버 일시 장애`);
     }
   }
 

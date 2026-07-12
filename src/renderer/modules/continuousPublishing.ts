@@ -4,6 +4,7 @@
 // ============================================
 
 import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByIdx } from '../utils/time24Select';
+import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
 import type { ContinuousQueueItem } from '../types/index';
 import { resolvePublishModeAfterScheduleRemoved } from './continuousPublishModeHelpers';
 // ✅ [v2.10.288] subImageMode import 제거 — line 10-12에 명시된 패턴 적용.
@@ -52,6 +53,7 @@ const META_CRITIQUE_PHRASES: readonly string[] = [
 declare const toastManager: { success: (msg: string, duration?: number) => void; error: (msg: string, duration?: number) => void; warning: (msg: string, duration?: number) => void; info: (msg: string, duration?: number) => void };
 // ✅ [v2.10.84] openaiImageGuard.js가 빌드 시 같은 스코프에 inline됨 → declare로 호출
 declare function runOpenAIImageGuard(imageSource: string): Promise<boolean>;
+declare function resolveInterruptedPublishStatus<T extends string>(publishStarted: boolean, beforeCommitStatus: T): 'uncertain' | T;
 declare const ImageManager: { getAll: () => any[]; getAllImages: () => any[]; setAll: (imgs: any[]) => void; add: (img: any) => void; clear: () => void; clearAll: () => void; count: () => number; headings: any[]; setImage: (key: string | number, img: any) => void; hasImage: (key: string | number) => boolean; imageMap: Map<string, any[]>; setHeadings: (h: any[]) => void; unsetHeadings: Set<string>; getImagesByHeading: (heading: string) => any[]; removeImage: (key: string | number, idx?: number) => void; addImage: (heading: string, img: any) => void };
 declare const UnifiedDOMCache: { getImageSource: () => string; [key: string]: any };
 declare const appendLog: (msg: string, logOutputId?: string) => void;
@@ -86,7 +88,6 @@ declare function loadGeneratedPosts(naverId?: string): any[];
 declare function loadAllGeneratedPosts(): any[];
 declare function saveGeneratedPostFromData(content: any, images?: any[], opts?: any): string | null;
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
-declare function applyKeywordPrefixToTitle(title: string, keyword: string): string;
 declare function revokeAllImageDataUrls(): void;
 
 // ═══════════════════════════════════════════════════════════════════
@@ -108,11 +109,17 @@ declare function revokeAllImageDataUrls(): void;
  * - '카테고리 분석 취소' 같은 거짓 양성 방지
  */
 class UserCancelledError extends Error {
-  constructor(message = '사용자가 작업을 취소했습니다.') {
+  readonly operationPending: boolean;
+
+  constructor(message = '사용자가 작업을 취소했습니다.', operationPending = false) {
     super(message);
     this.name = 'UserCancelledError';
+    this.operationPending = operationPending;
   }
 }
+
+const CONTINUOUS_DRAIN_TIMEOUT_MS = 30_000;
+let _continuousDrainPromise: Promise<void> | null = null;
 
 /**
  * ✅ [2026-04-03 FIX] 중지 신호 감지 래퍼 — 장시간 await 중에도 즉시 중단
@@ -122,25 +129,67 @@ class UserCancelledError extends Error {
  * 해결: 500ms마다 중지 플래그를 폴링, 감지 즉시 UserCancelledError throw.
  *       원본 Promise는 백그라운드에서 완료되지만 결과는 무시됨.
  */
-function withStopCheck<T>(promise: Promise<T>): Promise<T> {
-  return new Promise((resolve, reject) => {
-    let settled = false;
-
-    const interval = setInterval(() => {
+async function withStopCheck<T>(
+  promise: Promise<T>,
+  options: { kind?: 'content' | 'publish' } = {},
+): Promise<T> {
+  let interval: ReturnType<typeof setInterval> | null = null;
+  const stopSignal = new Promise<never>((_, reject) => {
+    interval = setInterval(() => {
       if (!isContinuousMode || (window as any).stopFullAutoPublish) {
-        clearInterval(interval);
-        if (!settled) {
-          settled = true;
-          reject(new UserCancelledError());
-        }
+        if (interval) clearInterval(interval);
+        interval = null;
+        reject(new UserCancelledError());
       }
     }, 500);
-
-    promise.then(
-      (value) => { clearInterval(interval); if (!settled) { settled = true; resolve(value); } },
-      (error) => { clearInterval(interval); if (!settled) { settled = true; reject(error); } }
-    );
   });
+
+  try {
+    return await Promise.race([promise, stopSignal]);
+  } catch (error) {
+    if (!(error instanceof UserCancelledError)) throw error;
+
+    const contentRequestId = String((window as any)._activeContentGenerationRequestId || '') || undefined;
+    await Promise.allSettled([
+      Promise.resolve().then(() => window.api.cancelAutomation({
+        source: 'continuous-stop-check',
+        reason: 'continuous mode stopped',
+        contentRequestId,
+      })),
+      Promise.resolve().then(() => (window.api as any).abortImageGeneration?.()),
+    ]);
+
+    const settledResult = promise.then(
+      value => ({ state: 'fulfilled' as const, value }),
+      reason => ({ state: 'rejected' as const, reason }),
+    );
+    const drain = settledResult.then(() => undefined);
+    _continuousDrainPromise = drain;
+    void drain.finally(() => {
+      if (_continuousDrainPromise === drain) _continuousDrainPromise = null;
+    });
+
+    const drained = await Promise.race([
+      settledResult,
+      new Promise<{ state: 'pending' }>(resolve => {
+        setTimeout(() => resolve({ state: 'pending' }), CONTINUOUS_DRAIN_TIMEOUT_MS);
+      }),
+    ]);
+
+    if (drained.state === 'pending') {
+      throw new UserCancelledError(
+        '중지 요청을 전달했지만 진행 중인 작업의 결과가 아직 미확정입니다.',
+        true,
+      );
+    }
+    if (options.kind === 'publish' && (window as any)._lastPublishOutcome === 'success') {
+      if (drained.state === 'fulfilled') return drained.value;
+    }
+
+    throw new UserCancelledError();
+  } finally {
+    if (interval) clearInterval(interval);
+  }
 }
 
 /**
@@ -539,11 +588,22 @@ export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): vo
 
   // ✅ [FIX] 현재 진행 중인 자동화 작업 취소
   try {
-    window.api.cancelAutomation().catch((err: any) => {
+    window.api.cancelAutomation({
+      source: 'continuous-stop',
+      reason: `continuous mode ${reason}`,
+      contentRequestId: String((window as any)._activeContentGenerationRequestId || '') || undefined,
+    }).catch((err: any) => {
       console.warn('[Continuous] 자동화 취소 중 오류 (무시 가능):', err);
     });
   } catch (e) {
     console.warn('[Continuous] cancelAutomation 호출 실패:', e);
+  }
+  try {
+    (window.api as any).abortImageGeneration?.().catch((err: any) => {
+      console.warn('[Continuous] 이미지 생성 취소 중 오류:', err);
+    });
+  } catch (e) {
+    console.warn('[Continuous] abortImageGeneration 호출 실패:', e);
   }
 
   // ✅ [FIX] 중지 시 큐를 초기화하지 않음 - 대기 중인 항목은 유지
@@ -589,7 +649,7 @@ export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): vo
   // ✅ [FIX] 진행 중(processing)이던 항목을 'cancelled' 상태로 변경
   continuousQueueV2.forEach(item => {
     if (item.status === 'processing') {
-      item.status = 'cancelled'; // cancelled 상태로 변경
+      item.status = (item as any)._publishStarted ? 'uncertain' : 'cancelled';
     }
   });
 
@@ -1240,17 +1300,8 @@ function applyContinuousTitleOverrides(item: ContinuousQueueItem, structuredCont
   }
 
   if (keyword) {
-    // ✅ [2026-02-08 FIX] 강화된 중복 방지: 키워드의 모든 토큰(2자 이상)이 이미 제목에 포함되어 있으면 건너뜀
-    // startsWith만으로는 키워드가 제목 중간에 있을 때 중복이 발생하므로 includes로 강화
-    const keywordTokens = keyword.split(/\s+/).filter((t: string) => t.length >= 2);
-    const titleLower = finalTitle.toLowerCase();
-    const allTokensPresent = keywordTokens.length > 0 && keywordTokens.every((t: string) => titleLower.includes(t.toLowerCase()));
-    if (!allTokensPresent) {
-      finalTitle = applyKeywordPrefixToTitleContinuous(finalTitle, keyword);
-      console.log('[ContinuousTitle] 키워드 접두사 적용:', { keyword, finalTitle });
-    } else {
-      console.log('[ContinuousTitle] 키워드 토큰 모두 포함됨, 건너뜀:', { keyword, finalTitle });
-    }
+    finalTitle = applyKeywordPrefixToTitle(finalTitle, keyword);
+    console.log('[ContinuousTitle] 키워드 접두사/중복 정규화:', { keyword, finalTitle });
   }
 
   // ✅ [2026-03-10 FIX] 최종 방어선: finalTitle이 여전히 URL이면 적용하지 않음
@@ -3062,7 +3113,8 @@ const statusColors: Record<string, string> = {
   'processing': '#f59e0b',
   'completed': '#10b981',
   'failed': '#ef4444',
-  'cancelled': '#f97316'  // 주황색 - 중지됨
+  'cancelled': '#f97316',  // 주황색 - 중지됨
+  'uncertain': '#facc15',
 };
 
 const toneStyleNames: Record<string, string> = {
@@ -3211,7 +3263,7 @@ function renderQueueListV2(): void {
           </div>
         ` : `
           <span style="margin-left: auto; font-size: 0.7rem; color: ${statusColors[item.status]};">
-            ${item.status === 'processing' ? '⏳ 발행 중' : item.status === 'completed' ? '✅ 완료' : item.status === 'cancelled' ? '🛑 중지됨' : '❌ 실패'}
+            ${item.status === 'processing' ? '⏳ 발행 중' : item.status === 'completed' ? '✅ 완료' : item.status === 'cancelled' ? '🛑 중지됨' : item.status === 'uncertain' ? '결과 확인 필요' : '❌ 실패'}
           </span>
         `}
       </div>
@@ -3897,7 +3949,7 @@ function showQueueFullViewModal(): void {
               <span>⏱️ ${intervalText}</span>
               <span>•</span>
               <span style="color: ${statusColors[item.status]}; font-weight: 700;">
-                ${item.status === 'pending' ? '⏳ 대기 중' : item.status === 'processing' ? '🔄 진행 중' : item.status === 'completed' ? '✅ 완료' : item.status === 'cancelled' ? '🛑 중지됨' : '⚠️ 실패'}
+                ${item.status === 'pending' ? '⏳ 대기 중' : item.status === 'processing' ? '🔄 진행 중' : item.status === 'completed' ? '✅ 완료' : item.status === 'cancelled' ? '🛑 중지됨' : item.status === 'uncertain' ? '결과 확인 필요' : '⚠️ 실패'}
               </span>
             </div>
             ${(item.ctaType && item.ctaType !== 'none') ? `
@@ -4167,6 +4219,10 @@ async function waitWithInterrupt(seconds: number): Promise<boolean> {
 
 // ✅ 연속 발행 V2 시작
 async function startContinuousPublishingV2(): Promise<void> {
+  if (_continuousDrainPromise) {
+    toastManager.warning('중지한 작업의 종료를 확인 중입니다. 완료될 때까지 재시작을 차단합니다.');
+    return;
+  }
   if (continuousQueueV2.length === 0) {
     toastManager.warning('발행할 항목이 없습니다. 먼저 항목을 추가해주세요.');
     return;
@@ -4187,6 +4243,11 @@ async function startContinuousPublishingV2(): Promise<void> {
     recoverableItems.forEach(i => { i.status = 'pending'; });
     console.log(`[Continuous] 🔄 ${recoverableItems.length}개 실패/중단 항목을 pending으로 리셋 (재시도)`);
     toastManager.info(`이전 실패 ${recoverableItems.length}개 항목을 다시 시도합니다`);
+  }
+
+  const uncertainItems = continuousQueueV2.filter(i => i.status === 'uncertain');
+  if (uncertainItems.length > 0) {
+    toastManager.warning(`발행 결과 미확정 ${uncertainItems.length}건은 중복 발행 방지를 위해 자동 재시도하지 않습니다.`);
   }
 
   const pendingItems = continuousQueueV2.filter(i => i.status === 'pending');
@@ -4520,7 +4581,8 @@ async function startContinuousPublishingV2(): Promise<void> {
         // 'skip': 이미지 없이 발행, 'saved': 저장된 이미지 사용 (AI 생성 불필요)
         const skipImages = item.imageSource === 'skip'
           || item.imageSource === 'saved'
-          || itemPipelineCfg.image.textOnlyPublish;
+          || itemPipelineCfg.image.textOnlyPublish
+          || itemPipelineCfg.image.headingImageMode === 'none';
         if (!skipImages) {
           updateContinuousProgressModal({
             step: '이미지 생성 중...',
@@ -4713,6 +4775,11 @@ async function startContinuousPublishingV2(): Promise<void> {
             : undefined,
           imageSource: skipImages ? 'skip' : item.imageSource,
           skipImages,
+          imageStyle: itemPipelineCfg.image.imageStyle,
+          headingImageMode: itemPipelineCfg.image.headingImageMode,
+          imageRatio: itemPipelineCfg.image.imageRatio,
+          thumbnailImageRatio: itemPipelineCfg.image.thumbnailImageRatio,
+          subheadingImageRatio: itemPipelineCfg.image.subheadingImageRatio,
           publishMode: item.publishMode || 'publish', // ✅ [2026-04-11 FIX] undefined 방지
           // ✅ [2026-03-11 FIX] scheduleDate + scheduleTime → 'YYYY-MM-DD HH:mm' 정규화
           // 방어 로직: scheduleDate에 T나 공백으로 시간이 포함되어 있어도 날짜만 추출 후 scheduleTime과 합성
@@ -4778,7 +4845,8 @@ async function startContinuousPublishingV2(): Promise<void> {
         }
 
         // ✅ [2026-04-03 FIX] withStopCheck 래퍼: 발행 중에도 중지 즉시 반응
-        await withStopCheck(executeUnifiedAutomation(formData));
+        (item as any)._publishStarted = true;
+        await withStopCheck(executeUnifiedAutomation(formData), { kind: 'publish' });
 
         // [2026-07-02 FIX] 발행 실패를 '완료'로 오보하던 버그 차단.
         //   executeUnifiedAutomation은 내부 withErrorHandling이 모든 에러를 삼키고 정상
@@ -4795,6 +4863,7 @@ async function startContinuousPublishingV2(): Promise<void> {
       }
 
       item.status = 'completed';
+      delete (item as any)._publishStarted;
       // Memory hygiene: drop heavy payload references after success.
       // Queue length is preserved (previous-post chaining uses idx > i lookups),
       // but the LLM/image/links payload is freed so 1000-queue runs do not retain
@@ -4855,7 +4924,11 @@ async function startContinuousPublishingV2(): Promise<void> {
         || errMsg.includes('취소했습니다')
         || errMsg.includes('취소됨');
       if (isUserCancelled || !isContinuousMode || (window as any).stopFullAutoPublish) {
-        item.status = 'cancelled' as any;
+        item.status = resolveInterruptedPublishStatus(
+          Boolean((item as any)._publishStarted),
+          'cancelled',
+        );
+        delete (item as any)._publishStarted;
         appendLog(`⏹️ 사용자 중지 → 발행을 종료합니다.`);
         // ✅ [2026-04-11 FIX] 중지 시에도 메모리 정리 — 이미지/콘텐츠 잔존으로 다음 발행 오염 방지
         try {
@@ -4896,6 +4969,18 @@ async function startContinuousPublishingV2(): Promise<void> {
         console.log('[Continuous] 🧹 실패 후 상태 정리 완료 (ImageManager + 전역 변수)');
       } catch (cleanupErr) {
         console.warn('[Continuous] 상태 정리 오류 (무시):', cleanupErr);
+      }
+
+      if ((item as any)._publishStarted) {
+        item.status = resolveInterruptedPublishStatus(true, 'failed');
+        delete (item as any)._publishStarted;
+        appendLog(`⚠️ 발행 호출 이후 결과를 확정하지 못했습니다. 중복 발행 방지를 위해 자동 재시도하지 않습니다.`);
+        updateContinuousProgressModal({
+          step: '발행 결과 확인 필요',
+          log: `네이버 블로그에서 "${item.value.substring(0, 30)}"의 발행 여부를 확인해주세요.`,
+          percentage: (currentIdx / totalCount) * 100,
+        });
+        continue;
       }
 
       _consecutiveFailCount++;
@@ -5214,7 +5299,8 @@ export async function executeContinuousPublish(structuredContent: any, publishMo
   // ✅ [2026-03-07 FIX] 이미지 건너뛰기 조건 확장
   const skipImages = imageSource === 'skip'
     || imageSource === 'saved'
-    || pipelineCfg.image.textOnlyPublish;
+    || pipelineCfg.image.textOnlyPublish
+    || pipelineCfg.image.headingImageMode === 'none';
 
   // ✅ 연속발행: 썸네일 텍스트 포함 옵션
   const includeThumbnailTextEl = document.getElementById('continuous-include-thumbnail-text') as HTMLInputElement | null;
@@ -5227,7 +5313,7 @@ export async function executeContinuousPublish(structuredContent: any, publishMo
     generator: UnifiedDOMCache.getGenerator(), // ✅ [2026-02-22 FIX] perplexity 지원
     toneStyle: (document.getElementById('unified-tone-style') as HTMLInputElement)?.value || 'friendly',
     structuredContent,
-    imageSource: skipImages ? getFullAutoImageSource() : imageSource,
+    imageSource: skipImages ? 'skip' : imageSource,
     skipImages,
     publishMode, // publish, draft, schedule
     scheduleDate,

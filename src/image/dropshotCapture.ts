@@ -10,12 +10,18 @@
  */
 
 import {
+  closeAllDropshotContexts,
   ensurePage,
   ensureDropshotControls,
   downloadAsFileBuffer,
+  endDropshotGeneration,
   invalidateBrowserCache,
+  getDropshotGenerationEpoch,
   getGenerationChain,
+  isDropshotGenerationAborted,
+  sanitizeDropshotErrorMessage,
   setGenerationChain,
+  tryBeginDropshotGeneration,
   openDropshotImageWorkspace,
   PROMPT_SELECTOR,
   type DropshotResult,
@@ -24,6 +30,15 @@ import {
 const BOARD_URL =
   'https://aistudio.dropshot.io/ko/workspace/board?panel=image&imageModelName=google/nano-banana-pro';
 const MAX_RETRIES = 3;
+const DROPSHOT_GENERATION_ABORTED = 'IMAGE_GENERATION_ABORTED';
+
+function createAbortedResult(): DropshotResult {
+  return {
+    ok: false,
+    dataUrl: '',
+    error: `${DROPSHOT_GENERATION_ABORTED}: 이미지 생성을 중지했습니다.`,
+  };
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function fillVisiblePrompt(page: any, prompt: string): Promise<boolean> {
@@ -56,6 +71,53 @@ async function fillVisiblePrompt(page: any, prompt: string): Promise<boolean> {
     target.dispatchEvent(new Event('change', { bubbles: true }));
     return true;
   }, prompt);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function readVisiblePromptValue(page: any): Promise<string> {
+  return await page.evaluate(() => {
+    const isVisible = (el: Element): boolean => {
+      const rect = (el as HTMLElement).getBoundingClientRect();
+      const style = window.getComputedStyle(el as HTMLElement);
+      return rect.width > 80 && rect.height > 20 && style.visibility !== 'hidden' && style.display !== 'none';
+    };
+    const target = Array.from(
+      document.querySelectorAll('textarea, [contenteditable="true"], div[role="textbox"]'),
+    ).find((element) => isVisible(element) && !(element as HTMLInputElement).disabled) as HTMLElement | undefined;
+    if (!target) return '';
+    if (target instanceof HTMLTextAreaElement || target instanceof HTMLInputElement) {
+      return target.value || '';
+    }
+    return target.innerText || target.textContent || '';
+  });
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function readDropshotGenerationError(page: any): Promise<string | null> {
+  return await page.evaluate(() => {
+    const phrases = [
+      '\uC54C \uC218 \uC5C6\uB294 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4',
+      '\uC774\uB7F0, \uBB38\uC81C\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4',
+      '\uC0AC\uC6A9\uD55C \uD06C\uB808\uB527\uC740 \uD658\uBD88\uB418\uC5C8\uC73C\uB2C8',
+      'unknown error occurred',
+      'something went wrong',
+      'generation failed',
+    ];
+    const visibleTexts = Array.from(document.querySelectorAll('body *'))
+      .filter((element) => {
+        const rect = (element as HTMLElement).getBoundingClientRect();
+        const style = window.getComputedStyle(element as HTMLElement);
+        return rect.width > 20 && rect.height > 10 && style.display !== 'none' && style.visibility !== 'hidden';
+      })
+      .map((element) => ((element as HTMLElement).innerText || element.textContent || '').trim())
+      .filter((text) => {
+        const lower = text.toLowerCase();
+        return phrases.some((phrase) => lower.includes(phrase.toLowerCase()));
+      })
+      .sort((a, b) => a.length - b.length);
+    const visibleText = visibleTexts[0];
+    return visibleText ? visibleText.replace(/\s+/g, ' ').slice(0, 220) : null;
+  });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -210,6 +272,21 @@ async function collectDropshotCandidateKeys(page: any): Promise<string[]> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function collectStableDropshotCandidateKeys(page: any): Promise<string[]> {
+  const collected = new Set<string>();
+  let unchangedRounds = 0;
+
+  for (let round = 0; round < 8 && unchangedRounds < 3; round += 1) {
+    const beforeSize = collected.size;
+    for (const key of await collectDropshotCandidateKeys(page)) collected.add(key);
+    unchangedRounds = collected.size === beforeSize ? unchangedRounds + 1 : 0;
+    if (unchangedRounds < 3) await new Promise((resolve) => setTimeout(resolve, 350));
+  }
+
+  return [...collected];
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function readFirstNewDropshotImageDataUrl(page: any, beforeKeys: string[]): Promise<string | null> {
   return await page.evaluate(async (before: string[]) => {
     type Candidate = {
@@ -249,6 +326,8 @@ async function readFirstNewDropshotImageDataUrl(page: any, beforeKeys: string[])
         lower.includes('/icons/') ||
         lower.includes('/icon/') ||
         lower.includes('/sample/') ||
+        lower.includes('generation-error-fallback') ||
+        lower.includes('error-fallback') ||
         lower.includes('logo') ||
         lower.endsWith('.svg');
     };
@@ -268,16 +347,13 @@ async function readFirstNewDropshotImageDataUrl(page: any, beforeKeys: string[])
     Array.from(document.querySelectorAll('img')).forEach((img) => {
       const el = img as HTMLImageElement;
       const rect = el.getBoundingClientRect();
-      const width = el.naturalWidth || rect.width || el.width;
-      const height = el.naturalHeight || rect.height || el.height;
+      const style = window.getComputedStyle(el);
+      if (style.visibility === 'hidden' || style.display === 'none' || style.opacity === '0') return;
+      const renderedWidth = rect.width;
+      const renderedHeight = rect.height;
+      if (!isVisibleRect(rect)) return;
       [el.currentSrc, el.src, ...parseSrcset(el.getAttribute('srcset'))].forEach((src) =>
-        addUrl('img', src || '', width, height),
-      );
-    });
-
-    Array.from(document.querySelectorAll('source[srcset]')).forEach((source) => {
-      parseSrcset((source as HTMLSourceElement).getAttribute('srcset')).forEach((src) =>
-        addUrl('source', src, minWidth, minHeight),
+        addUrl('img', src || '', renderedWidth, renderedHeight),
       );
     });
 
@@ -290,26 +366,20 @@ async function readFirstNewDropshotImageDataUrl(page: any, beforeKeys: string[])
       if (bgUrl) addUrl('background', bgUrl, rect.width, rect.height);
     });
 
-    Array.from(document.querySelectorAll('a[href]')).forEach((anchor) => {
-      const el = anchor as HTMLAnchorElement;
-      const rect = el.getBoundingClientRect();
-      addUrl('link', el.href || '', rect.width || minWidth, rect.height || minHeight);
-    });
-
     Array.from(document.querySelectorAll('canvas')).forEach((canvas) => {
       const el = canvas as HTMLCanvasElement;
       const rect = el.getBoundingClientRect();
-      const width = el.width || rect.width;
-      const height = el.height || rect.height;
-      if (width < minWidth || height < minHeight) return;
+      const renderedWidth = rect.width;
+      const renderedHeight = rect.height;
+      if (!isVisibleRect(rect)) return;
       try {
         const data = el.toDataURL('image/png');
         candidates.push({
-          key: `canvas:${data.slice(0, 512)}:${width}x${height}`,
+          key: `canvas:${data.slice(0, 512)}:${renderedWidth}x${renderedHeight}`,
           src: data,
           kind: 'canvas',
-          width,
-          height,
+          width: renderedWidth,
+          height: renderedHeight,
         });
       } catch {
         // Cross-origin canvas; skip.
@@ -365,16 +435,28 @@ async function makeDropshotImageInternal(
     referenceImageList?: string[];
   } = {},
   onLog?: (m: string) => void,
+  capturedEpoch = getDropshotGenerationEpoch(),
 ): Promise<DropshotResult> {
   let lastError: string | null = null;
 
+  const wasAborted = (): boolean => isDropshotGenerationAborted(capturedEpoch);
+  const stopAbortedGeneration = async (): Promise<DropshotResult> => {
+    onLog?.('[리더스 나노바나나] 이미지 생성 중지 요청을 확인했습니다.');
+    await closeAllDropshotContexts().catch(() => undefined);
+    return createAbortedResult();
+  };
+
   try {
+    if (wasAborted()) return await stopAbortedGeneration();
     const page = await ensurePage(onLog);
+    if (wasAborted()) return await stopAbortedGeneration();
 
     // §12.2 — ensure unlimited mode + counter=1
     await ensureDropshotControls(page, onLog);
+    if (wasAborted()) return await stopAbortedGeneration();
 
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      if (wasAborted()) return await stopAbortedGeneration();
       onLog?.(
         `[리더스 나노바나나] 이미지 생성 중... (시도 ${attempt}/${MAX_RETRIES})`,
       );
@@ -383,16 +465,13 @@ async function makeDropshotImageInternal(
         // 1. Ensure we are on the image workspace. Dropshot can land on /ko home
         // even with a valid session, so use the resilient workspace opener.
         const workspaceReady = await openDropshotImageWorkspace(page, onLog);
+        if (wasAborted()) return await stopAbortedGeneration();
         if (!workspaceReady) {
           throw new Error('Dropshot image workspace prompt was not found');
         }
         await ensureDropshotControls(page, onLog);
 
-        // 2. Snapshot existing result candidates before generation (NEW-only detection)
-        const beforeKeys = await collectDropshotCandidateKeys(page);
-        const beforeSrcs = beforeKeys;
-
-        // 3. i2i mode — upload reference images via setInputFiles
+        // 2. i2i mode — upload reference images via setInputFiles
         const refList = (options.referenceImageList || []).slice(0, 4);
         if (refList.length > 0) {
           onLog?.(
@@ -420,6 +499,7 @@ async function makeDropshotImageInternal(
                   `[리더스 나노바나나] reference ${buffers.length}장 업로드 완료`,
                 );
                 await new Promise((r) => setTimeout(r, 2500));
+                if (wasAborted()) return await stopAbortedGeneration();
               } catch (e) {
                 onLog?.(
                   `[리더스 나노바나나] reference 업로드 실패: ${(e as Error).message?.slice(0, 100)}`,
@@ -433,26 +513,46 @@ async function makeDropshotImageInternal(
           }
         }
 
-        // 4. Fill the visible prompt input. Do not depend on a fixed Korean
+        // 3. Fill the visible prompt input. Do not depend on a fixed Korean
         // placeholder because Dropshot changes copy per locale/release.
         await page.waitForSelector(PROMPT_SELECTOR, { timeout: 15000 });
+        if (wasAborted()) return await stopAbortedGeneration();
         const promptFilled = await fillVisiblePrompt(page, prompt);
         if (!promptFilled) {
           throw new Error('Dropshot prompt input was not visible');
         }
         await new Promise((r) => setTimeout(r, 1000));
+        if (wasAborted()) return await stopAbortedGeneration();
+        const expectedPrompt = prompt.replace(/\s+/g, ' ').trim();
+        const actualPrompt = (await readVisiblePromptValue(page)).replace(/\s+/g, ' ').trim();
+        if (actualPrompt !== expectedPrompt) {
+          throw new Error('Dropshot prompt value did not match the requested prompt');
+        }
         await ensureDropshotControls(page, onLog);
 
-        // 5. Click generate. Prefer text/aria labels, then the nearest enabled
+        // Capture a settled baseline immediately before clicking. Delayed
+        // sidebar thumbnails must never be accepted as a generated result.
+        const beforeKeys = await collectStableDropshotCandidateKeys(page);
+
+        // 4. Click generate. Prefer text/aria labels, then the nearest enabled
         // button to the prompt, then Enter as a final fallback.
         const clicked = await clickGenerate(page);
         if (!clicked) await page.keyboard.press('Enter');
 
-        // 6. Wait for NEW result image (max 90 seconds)
+        // 5. Wait for a newly rendered large result image (max 90 seconds)
         const startTs = Date.now();
         let foundDataUrl: string | null = null;
         while (Date.now() - startTs < 90_000) {
+          if (wasAborted()) return await stopAbortedGeneration();
           await new Promise((r) => setTimeout(r, 2000));
+          if (wasAborted()) return await stopAbortedGeneration();
+
+          if (Date.now() - startTs >= 5_000) {
+            const generationError = await readDropshotGenerationError(page);
+            if (generationError) {
+              throw new Error(`Dropshot generation failed: ${generationError}`);
+            }
+          }
 
           const broadDataUrl = await readFirstNewDropshotImageDataUrl(page, beforeKeys);
           if (broadDataUrl) {
@@ -460,66 +560,6 @@ async function makeDropshotImageInternal(
             break;
           }
 
-          // base64 data URL
-          const dataUrl: string | null = await page.evaluate(
-            (before: string[]) => {
-              const beforeSet = new Set(before);
-              return (
-                Array.from(document.querySelectorAll('img')).find(
-                  (i: HTMLImageElement) => {
-                    const src = i.src || '';
-                    return (
-                      src.startsWith('data:image/') &&
-                      i.naturalWidth > 200 &&
-                      !src.includes('icons/') &&
-                      !beforeSet.has(src)
-                    );
-                  },
-                )?.src || null
-              );
-            },
-            beforeSrcs,
-          );
-          if (dataUrl) {
-            foundDataUrl = dataUrl;
-            break;
-          }
-
-          // CDN URL → blob → dataURL
-          const cdnUrl: string | null = await page.evaluate(
-            (before: string[]) => {
-              const beforeSet = new Set(before);
-              return (
-                Array.from(document.querySelectorAll('img')).find(
-                  (i: HTMLImageElement) => {
-                    const src = i.src || '';
-                    return (
-                      src.includes('cdn.aistudio.dropshot.io') &&
-                      !src.includes('/icons/') &&
-                      !src.includes('/sample/') &&
-                      i.naturalWidth > 200 &&
-                      !beforeSet.has(src)
-                    );
-                  },
-                )?.src || null
-              );
-            },
-            beforeSrcs,
-          );
-          if (cdnUrl) {
-            const blobDataUrl: string = await page.evaluate(async (url: string) => {
-              const r = await fetch(url);
-              const blob = await r.blob();
-              return await new Promise<string>((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onloadend = () => resolve(reader.result as string);
-                reader.onerror = () => reject(new Error('blob read failed'));
-                reader.readAsDataURL(blob);
-              });
-            }, cdnUrl);
-            foundDataUrl = blobDataUrl;
-            break;
-          }
         }
 
         if (foundDataUrl) {
@@ -532,21 +572,27 @@ async function makeDropshotImageInternal(
           `[리더스 나노바나나] ${lastError} (시도 ${attempt})`,
         );
       } catch (e) {
-        lastError = (e as Error).message || String(e);
+        if (wasAborted()) return await stopAbortedGeneration();
+        lastError = sanitizeDropshotErrorMessage(e, 300) || '이미지 생성 중 오류가 발생했습니다.';
         onLog?.(`[리더스 나노바나나] 시도 ${attempt} 실패: ${lastError}`);
         if (
           lastError &&
           (lastError.includes('Target closed') ||
             lastError.includes('WebSocket'))
         ) {
-          invalidateBrowserCache();
+          await invalidateBrowserCache();
         }
       }
     }
 
     return { ok: false, dataUrl: '', error: lastError || 'unknown' };
   } catch (e) {
-    return { ok: false, dataUrl: '', error: (e as Error).message || String(e) };
+    if (wasAborted()) return await stopAbortedGeneration();
+    return {
+      ok: false,
+      dataUrl: '',
+      error: sanitizeDropshotErrorMessage(e, 300) || '이미지 생성 중 오류가 발생했습니다.',
+    };
   }
 }
 
@@ -559,10 +605,21 @@ export async function makeDropshotImage(
   options: { referenceImageList?: string[] } = {},
   onLog?: (m: string) => void,
 ): Promise<DropshotResult> {
-  const next = getGenerationChain().then(() =>
-    makeDropshotImageInternal(prompt, options, onLog),
-  );
-  // Prevent one failure from blocking the chain
-  setGenerationChain(next.catch(() => undefined as unknown));
-  return next;
+  if (!tryBeginDropshotGeneration()) {
+    const error = '로그인 또는 로그인 확인이 진행 중입니다. 완료 후 이미지를 다시 생성해주세요.';
+    onLog?.(`[리더스 나노바나나] ${error}`);
+    return { ok: false, dataUrl: '', error };
+  }
+
+  try {
+    const capturedEpoch = getDropshotGenerationEpoch();
+    const next = getGenerationChain().then(() =>
+      makeDropshotImageInternal(prompt, options, onLog, capturedEpoch),
+    );
+    // Prevent one failure from blocking the chain.
+    setGenerationChain(next.catch(() => undefined as unknown));
+    return await next;
+  } finally {
+    endDropshotGeneration();
+  }
 }

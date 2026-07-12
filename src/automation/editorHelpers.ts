@@ -35,7 +35,11 @@ import {
   getExpectedLinkCardMin,
   planEditorTail,
 } from './editorTailPlan.js';
-import { countExpectedPublishImages } from './prePublishAssertion.js';
+import {
+  buildExpectedOrderAnchors,
+  countExpectedArticleTables,
+  countExpectedPublishImages,
+} from './prePublishAssertion.js';
 import {
   applyTailHashtagsAfterCards,
   insertPreviousPostTailBlock,
@@ -382,7 +386,7 @@ export async function typeBodyWithRetry(self: any,
 
     if (rich.html) {
       self.log(`   ✨ [리치입력] 모바일 단락 ${rich.paragraphCount}개, 하이라이트 ${rich.highlightCount}개, 표 ${rich.tableCount}개`);
-      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText);
+      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount);
       if (pasteResult.ok) {
         self.log(`   ✅ [리치입력] HTML 붙여넣기 완료 (표 ${pasteResult.beforeTables}→${pasteResult.afterTables})`);
 
@@ -399,6 +403,10 @@ export async function typeBodyWithRetry(self: any,
         await page.keyboard.press('Enter');
         await self.delay(self.DELAYS.MEDIUM);
         return;
+      }
+
+      if (pasteResult.safeToFallback === false) {
+        throw new Error(`EDITOR_PARTIAL_INSERT_UNRECOVERED: ${pasteResult.reason || '리치 본문 삽입 위치 또는 롤백을 확인할 수 없습니다.'}`);
       }
 
       self.log(`   ⚠️ [리치입력] 모든 붙여넣기 재시도 실패 → 최후 안전 키보드 입력 fallback: ${pasteResult.reason || 'unknown'}`);
@@ -601,7 +609,7 @@ export async function typeBodyWithRetry(self: any,
 
     // Enter 후 DOM 안정화 대기
     await self.delay(self.DELAYS.SHORT);
-  }, 3, '본문 입력');
+  }, 1, '본문 입력');
 }
 
 // ── applyStructuredContent ──
@@ -804,7 +812,14 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       self.log(`⚠️ [편집 검증] bodyText≠resolved.content! bodyText(${bodyText.length}자) vs content(${resolved.content.length}자)`);
     }
     // extractBodyForHeading 복잡한 파싱을 완전 우회하여 100% 편집 반영 보장
-    if (structured._bodyManuallyEdited && headings.length > 0) {
+    if (structured._bodyManuallyEdited && structured._manualSectionOrderLocked && headings.length > 0) {
+      // The renderer parsed these sections from the exact textarea snapshot at
+      // publish time. Re-searching normalized titles in the body can match an
+      // earlier mention and attach the following paragraphs to the wrong
+      // heading, so the canonical heading.content order is immutable here.
+      structured.conclusion = '';
+      self.log(`🧭 [편집 순서 잠금] 원문에서 확정한 ${headings.length}개 섹션을 재분할 없이 사용합니다.`);
+    } else if (structured._bodyManuallyEdited && headings.length > 0) {
       self.log('📝 [편집 감지] 사용자가 수정한 내용을 heading 위치 기반으로 직접 분할합니다.');
       const headingsHaveManualContent = headings.every((h: any) =>
         String(h?.content || '').trim().length > 0
@@ -891,6 +906,12 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
     // ✅ 쇼핑커넥트 모드 감지 (for 루프 밖에서 미리 체크)
     const isShoppingConnectModeGlobal = resolved.contentMode === 'affiliate' || !!resolved.affiliateLink;
+    self.__affiliateProductImageLinkAttached = false;
+    const attachAffiliateProductLinkOnce = async (): Promise<void> => {
+      if (!resolved.affiliateLink || self.__affiliateProductImageLinkAttached === true) return;
+      await self.attachLinkToLastImage(resolved.affiliateLink);
+      self.__affiliateProductImageLinkAttached = true;
+    };
 
     // ✅ [2026-02-24 FIX] 서론에 썸네일이 실제로 삽입되었는지 추적
     let thumbnailInsertedInIntro = false;
@@ -987,7 +1008,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                 thumbnailInsertedInIntro = true;
                 usedImagePaths.add(thumbnailPath);
                 if (resolved.affiliateLink) {
-                  await self.attachLinkToLastImage(resolved.affiliateLink);
+                  await attachAffiliateProductLinkOnce();
                 }
               }
             } else {
@@ -1026,7 +1047,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                 usedImagePaths.add(overlayPath);
                 if (imagePath) usedImagePaths.add(imagePath);
                 if (resolved.affiliateLink) {
-                  await self.attachLinkToLastImage(resolved.affiliateLink);
+                  await attachAffiliateProductLinkOnce();
                 }
 
                 // ✅ [2026-03-26 FIX] 대표이미지에 추가 이미지가 있으면 오버레이 후 순차 삽입
@@ -1964,7 +1985,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
                   // 표 이미지에도 제휴 링크 삽입
                   if (resolved.affiliateLink) {
-                    await self.attachLinkToLastImage(resolved.affiliateLink);
+                    await attachAffiliateProductLinkOnce();
                   }
                   self.log(`   ✅ 제품 스펙 표 이미지 삽입 완료`);
                 } else {
@@ -2000,7 +2021,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
                   // ✅ 장단점 표 이미지에도 제휴 링크 삽입
                   if (resolved.affiliateLink) {
-                    await self.attachLinkToLastImage(resolved.affiliateLink);
+                    await attachAffiliateProductLinkOnce();
                   }
                   self.log(`   ✅ 장단점 비교 표 이미지 삽입 완료`);
                 }
@@ -2038,7 +2059,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
                 await self.delay(1000);
 
                 // ✅ 배너에 제휴 링크 삽입
-                await self.attachLinkToLastImage(resolved.affiliateLink);
+                await attachAffiliateProductLinkOnce();
                 self.log(`   ✅ 2번 섹션 CTA 배너 + 제휴 링크 삽입 완료`);
               } catch (bannerError) {
                 self.log(`   ⚠️ 2번 섹션 CTA 배너 생성 실패: ${(bannerError as Error).message} `);
@@ -2205,13 +2226,13 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     let tailLinkCardInserted = false;
     let tailLinkCardReady = false;
     if (!resolved.skipCta && resolved.affiliateLink && effectiveCtas.length === 0) {
-      // 🛒 쇼핑커넥트 자동 CTA 생성 (구매 결심 유도 후킹 문구)
+      // 쇼핑커넥트 자동 CTA: 구매 압박 없이 현재 상품 조건 확인만 안내한다.
       const hookTexts = [
-        '🔥 지금 바로 확인하기 →',
-        '✨ 특가 혜택 보러가기 →',
-        '🎁 한정 수량 확인하기 →',
-        '💰 최저가로 구매하기 →',
-        '🛒 품절 전에 확인하기 →'
+        '현재 가격과 옵션 확인하기 →',
+        '상품 정보 자세히 보기 →',
+        '실구매 후기 더 보기 →',
+        '상세 규격 확인하기 →',
+        '배송·교환 조건 확인하기 →'
       ];
       const randomHook = hookTexts[Math.floor(Math.random() * hookTexts.length)];
       effectiveCtas = [{ text: randomHook, link: resolved.affiliateLink }];
@@ -2440,7 +2461,14 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         // that S16 skipped as a previous-post duplicate.
         expectedLinkCardMin: getExpectedLinkCardMin(previousPostTailInserted, effectiveCtas),
         expectedDividerMin: previousPostTailInserted ? 1 : 0,
+        expectedTableMin: countExpectedArticleTables(
+          resolved.structuredContent?.bodyPlain || resolved.content || ''
+        ),
         expectedHashtags: hashtagsToApply,
+        expectedOrderedAnchors: buildExpectedOrderAnchors(
+          bodyText,
+          headings.map((heading: any) => String(heading?.title || '')),
+        ),
       };
     } catch {
       // expectations are best-effort observation data
@@ -2467,7 +2495,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
     (self as any).__editorContentApplied = true;
     self.log('\n✅ 구조화된 콘텐츠 작성이 완료되었습니다.');
-  }, 3, '콘텐츠 적용');
+  // Every mutating sub-step has its own bounded retry. Re-running this entire
+  // writer after a mid-document failure duplicates already inserted sections
+  // and can reorder the final post, so the outer transaction is single-shot.
+  }, 1, '콘텐츠 적용');
 }
 
 // ── setFontSize ──

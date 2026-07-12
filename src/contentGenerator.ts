@@ -43,6 +43,12 @@ import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from '
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
 import { assessQuality90Gate } from './content/quality90Gate.js';
+import {
+  auditAffiliateAuthenticity,
+  buildAffiliateAuthenticityContract,
+  buildAffiliateTitleEvidenceDirective,
+  classifyAffiliateEvidence,
+} from './content/affiliateAuthenticity.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
 import { validateContent as runValidationPipeline } from './services/contentValidationPipeline.js';
 import { loadAeoRules } from './aeoRulesManager.js';
@@ -515,9 +521,13 @@ async function generateTitleOnlyPatch(source: ContentSource, mode: PromptMode, c
     // 강제 금지 지시 주입
     titlePrompt += '\n\n🚫🚫🚫 [v1.4.47 강제 규칙 — 위반 시 0점]\n' +
       '1. 제목에 숫자+기간 단위(N주/N개월/N년/한 달/반년) 절대 사용 금지\n' +
-      '2. 체험 표현은 "직접 써본", "꾸준히 써본", "오래 써본", "써보니", "써본 후기" 사용\n' +
+      '2. 실제 경험 근거가 없는 체험·기간·가족 반응을 만들지 않기\n' +
       '3. 구체성이 필요하면 금액/비율/개수/조건/방법/대상/비교 등을 사용\n' +
       '4. 위 규칙 위반 시 제목 후보는 0점 처리됩니다.\n';
+
+    if (mode === 'affiliate') {
+      titlePrompt += `\n\n${buildAffiliateTitleEvidenceDirective(source)}`;
+    }
 
     // ✅ [v1.4.82] 현재 년도를 컨텍스트로 주입 — "오랜 기간" 마스킹으로 AI가 년도를 모르는 문제 해결
     // 정부지원금/법규/시즌성 글에서 "2026년 정부 지원금" 같은 년도 표기 필요 시 AI가 실제 년도 사용
@@ -532,7 +542,7 @@ async function generateTitleOnlyPatch(source: ContentSource, mode: PromptMode, c
   const defaultTitleRules = mode === 'homefeed'
     ? `[필수 공식] {인물/상품명} + {마이크로 디테일} + {감정/공감 트리거}`
     : mode === 'affiliate'
-      ? `[필수 공식] {상품명(브랜드+모델명만)}, {체험/상황 표현} {자연어 후기}. 단어 나열 금지, 자연어 문장형 필수. 기간 수치(N주/N개월) 사용 금지 — "직접 써본", "꾸준히 쓴" 등 표현 사용.`
+      ? `[필수 공식] {상품명(브랜드+모델명만)} + {구매 판단이 갈리는 구체 조건}. 단어 나열과 근거 없는 체험 표현 금지.`
       : `[필수 공식] {메인 키워드} + {구체성(금액/비율/개수/조건/방법/대상 중 택1)} + {클릭 트리거}. 기간 수치는 매 글마다 다양화 필수.`;
 
   const schema = `Output ONLY valid JSON. NO markdown.\n\n{"selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`;
@@ -564,11 +574,12 @@ ${mode === 'affiliate' ? `
 ⛔⛔⛔ [쇼핑커넥트 절대 규칙 — 위반 시 0점]
 1. 상품명의 모든 키워드를 넣지 마세요. "브랜드명 + 모델명"만 사용하세요.
    ❌ "린백 컴퓨터 학생 책상 의자 린백 후기" (키워드 나열 = 0점)
-   ✅ "린백 LB221HA, 직접 써본 솔직 후기" (자연어 문장 = 100점)
+   ✅ "린백 LB221HA, 허리가 예민하면 볼 부분" (구체 판단 기준 = 100점)
 2. 키워드를 나열하지 마세요. 자연스러운 한 문장으로 쓰세요.
 3. 같은 단어를 제목에 2번 이상 쓰지 마세요. (예: "린백...린백" → 0점)
 4. originalTitle을 그대로 쓰거나 단어를 재배열하면 0점입니다.
 5. 반드시 25~45자 이내.
+${buildAffiliateTitleEvidenceDirective(source)}
 ` : ''}
 ${mode === 'homefeed' && subKeywords ? `
 ⚠️ [필수] 서브키워드 중 1~2개를 제목에 반드시 포함하세요!
@@ -1553,6 +1564,8 @@ export interface ContentSource {
   productReviews?: string[];  // 리뷰 텍스트 배열 (최대 5개)
   productReviewImages?: string[]; // 포토리뷰 이미지 URL
   previousTitles?: string[]; // ✅ [2026-02-09 v2] 이전 생성 제목 (연속발행 중복 방지)
+  /** Fail-closed originality policy context injected before the model call. */
+  contentPolicyPrompt?: string;
   manualTitleOverride?: string; // User-entered title that must not be rewritten by AI/SEO title logic
   useKeywordAsTitle?: boolean; // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 (제목 생성/평가 건너뛰기)
   keywordForTitle?: string; // ✅ [2026-02-24] useKeywordAsTitle=true 일 때 사용할 키워드 원문
@@ -1961,6 +1974,7 @@ export function buildModeBasedPrompt(
     // P0 review guard (SPEC-REVIEW-001): detect missing review data before
     // assembling the prompt so downstream blocks can branch on it.
     const reviewAvailable = isReviewAvailable(source.productReviews);
+    const affiliateEvidence = classifyAffiliateEvidence(source);
     const reviewGuardOn = isReviewGuardEnabled();
 
     systemPromptResult = buildFullPrompt('seo', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt, (source as any).hookHint, buildRecentWinnersBlock(source));
@@ -1975,9 +1989,9 @@ export function buildModeBasedPrompt(
     // a neutral curator voice bound strictly to the supplied spec/price.
     const requestedArticleType = source.articleType || 'shopping_review';
     let shoppingArticleType = requestedArticleType;
-    if (!reviewAvailable && reviewGuardOn && requestedArticleType === 'shopping_review') {
+    if (affiliateEvidence.mode === 'spec_only' && reviewGuardOn && requestedArticleType === 'shopping_review') {
       shoppingArticleType = 'shopping_spec_analysis';
-      console.log('[PromptBuilder] 🔄 articleType auto-promoted: shopping_review → shopping_spec_analysis (reviews=0, SPEC-REVIEW-001 option C)');
+      console.log('[PromptBuilder] 🔄 articleType auto-promoted: shopping_review → shopping_spec_analysis (작성자 경험/구매자 리뷰 없음)');
     }
     const shoppingPrompt = loadShoppingPrompt(shoppingArticleType, toneStyle);
 
@@ -1995,15 +2009,17 @@ export function buildModeBasedPrompt(
     // P0 review guard: append the no-experience block AFTER the shopping prompt
     // so recency effect keeps the model constrained even when earlier archetype
     // instructions demand experiential writing.
-    if (!reviewAvailable && reviewGuardOn) {
+    if (affiliateEvidence.mode === 'spec_only' && reviewGuardOn) {
       systemPromptResult += `\n\n${buildReviewGuardBlock({
         reviewCount: 0,
         hasSpec: Boolean(source.productSpec),
         hasPrice: Boolean(source.productPrice),
       })}`;
       console.log('[PromptBuilder] 🔒 P0 review guard applied: reviews=0 (SPEC-REVIEW-001)');
+    } else if (affiliateEvidence.mode === 'first_party') {
+      console.log('[PromptBuilder] 사용자 실사용 메모 확인 — P0 리뷰 부재 가드 미적용');
     } else if (reviewAvailable) {
-      console.log(`[PromptBuilder] 리뷰 데이터 확인: ${Array.isArray(source.productReviews) ? source.productReviews.length : 0}건 — guard 미적용`);
+      console.log(`[PromptBuilder] 구매자 리뷰 확인: ${Array.isArray(source.productReviews) ? source.productReviews.length : 0}건 — REVIEW_SYNTHESIS 적용`);
     } else if (!reviewGuardOn) {
       console.warn('[PromptBuilder] ⚠️ REVIEW_GUARD_V1=false — guard 비활성 상태로 발행');
     }
@@ -2129,6 +2145,13 @@ export function buildModeBasedPrompt(
   if (isReviewType) {
     systemPrompt = appendReviewAnalysisPrompt(systemPrompt, true);
     console.log(`[PromptBuilder] 리뷰형 구매 전 분석 프롬프트 추가됨`);
+  }
+
+  // 쇼핑 글의 화자 근거 계약은 모든 오버레이와 리뷰 분석 지시 뒤에 둔다.
+  // 구매자 리뷰를 작성자 실사용으로 오인하는 회귀를 이 마지막 계약에서 차단한다.
+  if (contentMode === 'affiliate') {
+    systemPrompt += `\n\n${buildAffiliateAuthenticityContract(source)}`;
+    console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}`);
   }
 
   console.log(`[PromptBuilder] 2축 분리 프롬프트 생성: mode=${mode}, category=${categoryHint || 'general'}, isFullAuto=${isFullAuto}, isReviewType=${isReviewType}`);
@@ -4601,7 +4624,7 @@ export async function generateStructuredContent(
 
   // ✅ [핵심 수정] 에러 페이지 크롤링 감지 - 쇼핑커넥트 모드에서만 캡차/에러 페이지 방지
   // ✅ [2026-01-21 FIX] SEO/홈피드 모드에서는 이 로직을 건너뜀 (키워드에 '오류' 포함 시 오작동 방지)
-  const isShoppingConnectMode = source.isReviewType === true ||
+  const isShoppingConnectMode = source.contentMode === 'affiliate' || source.isReviewType === true ||
     (source.url && (source.url.includes('smartstore.naver.com') ||
       source.url.includes('brand.naver.com') ||
       source.url.includes('naver.me')));
@@ -4789,20 +4812,20 @@ export async function generateStructuredContent(
   const warningMinChars = Math.round(minChars * 0.50); // 경고 기준 50%
 
   let extraInstruction = '';
+  let supplementalInstructionInitialized = false;
   let lastFailReason = ''; // ✅ [2026-03-23] 실패 원인 추적
   let _fidelityRetryUsed = false; // ✅ [Phase 7-B] Source Fidelity 자동 재시도 1회 가드
   let _qualityGateRetryUsed = false; // ✅ [v2.10.178 Phase 2] qualityGate decision='regenerate' 재시도 1회 가드
   let _quality90FollowupRetryUsed = false; // 90점 미달 patch 후에도 부족하면 추가 전체 재생성 1회
   let _distinctnessJudgeUsed = false; // ✅ [Gap C 시맨틱] 섹션 변별 LLM 판정 — 생성당 1회만 호출(비용 가드)
+  let _affiliateAuthenticityRetryUsed = false;
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
   const signal = options.signal;
 
   for (let attempt = 0; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
       // ✅ [2026-04-03] 매 시도 전 abort 체크
-      if (signal?.aborted) {
-        throw new Error('사용자가 콘텐츠 생성을 취소했습니다.');
-      }
+      throwIfContentGenerationAborted(signal);
 
       // 재시도 전 대기 (Rate Limit 회피)
       if (attempt > 0) {
@@ -4810,9 +4833,7 @@ export async function generateStructuredContent(
         console.log(`[ContentGenerator] 재시도 ${attempt}/${MAX_ATTEMPTS}: ${delay / 1000}초 대기 후 재개`);
         await sleepWithAbort(delay, signal);
         // ✅ [2026-04-03] 대기 후에도 abort 체크
-        if (signal?.aborted) {
-          throw new Error('사용자가 콘텐츠 생성을 취소했습니다.');
-        }
+        throwIfContentGenerationAborted(signal);
       }
 
       // 재시도 시에도 동일한 분량 요청 (일관성 유지)
@@ -4822,10 +4843,11 @@ export async function generateStructuredContent(
 
       console.log(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: 요청 글자수 ${adjustedMinChars}자`);
 
-      // ✅ 수집된 이미지가 있으면 프롬프트에 이미지 정보 포함 (참고용)
-      if (source.images && source.images.length > 0) {
-        extraInstruction += `\n\n[참고 이미지 정보]\n사용 가능한 제품/현장 이미지 ${source.images.length}장이 있습니다. 본문 작성 시 이를 염두에 두고 생동감 있게 묘사해주세요.`;
-      }
+      if (!supplementalInstructionInitialized) {
+        // 이미지 존재는 제품을 직접 보거나 사용했다는 증거가 아니다.
+        if (source.images && source.images.length > 0) {
+          extraInstruction += `\n\n[참고 이미지 정보]\n사용 가능한 제품 이미지 ${source.images.length}장이 있습니다. 이미지에서 확인되지 않은 감각·크기·사용 장면은 만들지 마세요.`;
+        }
 
       // ✅ [2026-01-21 FIX] 쇼핑커넥트 모드: 제품 리뷰 블로그 스타일 지시문 추가
       // 쇼핑몰 후기글이 아닌 "개인 블로그 제품 리뷰글" 스타일로 작성
@@ -4843,113 +4865,21 @@ export async function generateStructuredContent(
 📦 [상품 카테고리: ${categoryResult.categoryKorean}] - 필수 준수
 ════════════════════════════════════════
 
-⚠️ 이 상품은 "${categoryResult.categoryKorean}" 카테고리입니다.
-반드시 이 카테고리에 맞는 표현만 사용하세요!
-
+이 상품은 "${categoryResult.categoryKorean}" 카테고리로 분류됐습니다.
+- 카테고리에 맞는 어휘라도 제품 정보·사용자 경험·구매자 후기에 실제로 있는 내용만 사용합니다.
+- 식품의 맛·향·식감, 화장품의 발림성·흡수감, 의류의 착용감, 가전의 소음·설치감처럼 직접 확인이 필요한 표현은 근거 없이 만들지 않습니다.
+- 다른 카테고리의 상투어를 섞지 않습니다.
 `;
-          // 카테고리별 금지 표현 및 권장 표현
-          if (categoryResult.category === 'food') {
-            categoryGuidance += `
-⛔ [식품/농산물 - 절대 금지 표현]:
-- "조립이 필요 없는", "설치가 간편한" → 가전제품용! 식품에 사용 금지!
-- "배터리 수명", "충전 속도" → 전자제품용! 식품에 사용 금지!
-- "사이즈", "핏", "착용감" → 의류용! 식품에 사용 금지!
-
-✅ [식품/농산물 - 권장 표현]:
-- 신선도, 당도, 과즙, 풍미, 식감, 맛, 향
-- "개봉 후 빠른 소비 권장", "냉장/냉동 보관"
-- "유기농", "GAP 인증", "친환경", "국내산", "제철"
-- "한 입 베어물면", "입 안 가득 퍼지는"
-`;
-          } else if (categoryResult.category === 'electronics') {
-            categoryGuidance += `
-✅ [가전/전자제품 - 사용 가능 표현]:
-- 조립, 설치, 배터리, 충전, 소음, 전력, 성능
-- "설치가 간편한", "조립이 필요 없는"
-- "배터리 수명", "충전 속도", "소음 레벨"
-
-⛔ [가전제품 - 금지 표현]:
-- "당도", "신선도", "과즙" → 식품용!
-- "착용감", "핏", "사이즈" → 의류용!
-`;
-          } else if (categoryResult.category === 'cosmetics') {
-            categoryGuidance += `
-✅ [화장품/스킨케어 - 사용 가능 표현]:
-- 발림성, 흡수력, 촉촉함, 보습, 피부결
-- "피부에 바르는 순간", "하루 종일 촉촉"
-
-⛔ [화장품 - 금지 표현]:
-- "조립", "설치", "충전" → 가전용!
-- "당도", "신선도" → 식품용!
-`;
-          } else if (categoryResult.category === 'fashion') {
-            categoryGuidance += `
-✅ [의류/패션 - 사용 가능 표현]:
-- 사이즈, 핏, 착용감, 신축성, 통기성, 소재
-- "몸에 딱 맞는", "입자마자 편한"
-
-⛔ [의류 - 금지 표현]:
-- "조립", "설치", "충전" → 가전용!
-- "당도", "신선도", "과즙" → 식품용!
-`;
-          } else if (categoryResult.category === 'furniture') {
-            categoryGuidance += `
-✅ [가구/인테리어 - 사용 가능 표현]:
-- 조립, 설치, 배치, 공간, 원목, 내구성
-- "조립이 간편한", "설치가 쉬운"
-
-⛔ [가구 - 금지 표현]:
-- "당도", "신선도", "과즙" → 식품용!
-- "착용감", "핏" → 의류용!
-`;
-          }
         }
 
         extraInstruction += categoryGuidance;
-        extraInstruction += `
-
-════════════════════════════════════════
-🛒 [제품 리뷰 블로그 스타일 - 필수 적용]
-════════════════════════════════════════
-
-⚠️ 중요: 이 글은 "쇼핑몰 구매 후기"가 아닙니다!
-당신은 개인 블로거로서 직접 제품을 사용해본 경험을 바탕으로 한 "제품 리뷰 블로그 포스트"를 작성하는 것입니다.
-
-✅ 필수 스타일:
-1. **1인칭 경험 기반**: "저는 OO 제품을 2주 정도 사용해봤어요", "직접 써보니까..."
-2. **솔직한 장단점 서술**: 장점만 나열하지 말고, 단점도 솔직하게 언급 (신뢰도 ↑)
-3. **구체적 사용 경험**: "배송 받자마자", "처음 열어봤을 때", "일주일 써보니"
-4. **비교 분석**: 비슷한 제품과 비교하거나, 이전에 쓰던 것과 비교
-5. **추천 대상 명시**: "이런 분들한테 추천해요", "이런 분은 피하세요"
-6. **실제 사용 팁**: 본인만의 활용법, 꿀팁 공유
-
-❌ 절대 금지 (쇼핑몰 후기 스타일):
-- "상품이 도착했습니다", "포장이 꼼꼼했어요" (택배 후기 X)
-- "가격 대비 만족", "배송 빨랐습니다" (단순 구매평 X)
-- "5점 만점에 5점입니다" (점수 평가 X)
-- "재구매 의사 있습니다" (쇼핑몰 후기 상투어 X)
-- "판매자님 친절하셨어요" (판매자 평가 X)
-
-✅ 제목/소제목 예시:
-- "OO 제품 2주 실사용 후기, 진짜 효과 있었을까?"
-- "OO vs XX 비교, 직접 써보고 내린 결론"
-- "OO 제품 솔직 리뷰, 장점 3가지 & 아쉬운 점 2가지"
-- "OO 이거 살까 말까? 고민하는 분들 보세요"
-
-✅ 서론 예시:
-"요즘 OO 제품이 핫하길래 저도 한번 써봤어요.
-솔직히 처음엔 반신반의했는데, 막상 2주 정도 써보니까 느낀 점이 꽤 많더라고요.
-오늘은 제가 직접 느낀 장단점 솔직하게 풀어볼게요."
-
-✅ 본문 구조:
-1번 소제목: 제품 첫인상 (개봉기 아님, 사용 시작 느낌)
-2~4번 소제목: 실제 사용 경험, 효과, 비교
-5~6번 소제목: 장단점 정리, 추천 대상
-마무리: 총평 + "이런 분께 추천/비추천"
-
-기억하세요: 당신은 쇼핑몰 판매자가 아닌 "제품을 직접 써본 블로거"입니다!
-`;
-        console.log('[ContentGenerator] 🛒 쇼핑커넥트 모드: 제품 리뷰 블로그 스타일 지시문 적용됨');
+        extraInstruction += `\n\n[쇼핑커넥트 문체 보정]
+- 쇼핑몰 구매평이나 광고 문안이 아니라, 친한 친구에게 구매 판단 기준을 알려주는 글로 쓴다.
+- 장점과 단점을 따로 나열하는 데 그치지 말고 어떤 상황에서 장점·불편이 되는지 구체적으로 연결한다.
+- 작성자 실사용 여부는 AFFILIATE AUTHENTICITY CONTRACT의 근거 모드를 따른다.`;
+        console.log('[ContentGenerator] 🛒 쇼핑커넥트 모드: 근거 기반 친구 말투 보정 적용');
+      }
+        supplementalInstructionInitialized = true;
       }
 
       let metrics: { searchVolume?: number; documentCount?: number } | undefined;
@@ -4989,6 +4919,15 @@ export async function generateStructuredContent(
       // ✅ 모드별 프롬프트 및 온도 설정 가져오기
       const mode = (source.contentMode || 'seo') as PromptMode;
       let systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
+
+      if (extraInstruction.trim()) {
+        systemPrompt += `\n\n[RUNTIME RETRY AND CONTEXT INSTRUCTIONS]\n${extraInstruction.trim()}`;
+      }
+
+      if (source.contentPolicyPrompt) {
+        systemPrompt = `${source.contentPolicyPrompt}\n\n${systemPrompt}`;
+        console.log('[ContentPolicy] Recent-post context injected before model generation.');
+      }
 
       // ✅ [v2.10.192 Phase 3.9] 자동 학습 보완 지시 — 누적 SERP history에서 자주 미달하는 신호 자동 추출
       //   첫 글~4건 글까지는 데이터 부족 → skip (silent)
@@ -5051,9 +4990,9 @@ export async function generateStructuredContent(
         // ✅ [2026-04-03 FIX] signal abort 시 즉시 reject하는 래퍼
         const withAbortRace = <T>(promise: Promise<T>): Promise<T> => {
           if (!signal) return promise;
-          if (signal.aborted) return Promise.reject(new Error('사용자가 콘텐츠 생성을 취소했습니다.'));
+          if (signal.aborted) return Promise.reject(createContentGenerationAbortError(signal));
           return new Promise<T>((resolve, reject) => {
-            const onAbort = () => reject(new Error('사용자가 콘텐츠 생성을 취소했습니다.'));
+            const onAbort = () => reject(createContentGenerationAbortError(signal));
             signal.addEventListener('abort', onAbort, { once: true });
             promise.then(
               (v) => { signal.removeEventListener('abort', onAbort); resolve(v); },
@@ -6037,6 +5976,9 @@ export async function generateStructuredContent(
             contentMode: source.contentMode,
             toneStyle: source.toneStyle,
             categoryHint: source.categoryHint,
+            affiliateEvidenceMode: source.contentMode === 'affiliate'
+              ? classifyAffiliateEvidence(source).mode
+              : undefined,
           });
           const _modeLabelMap: Record<string, string> = { seo: 'SEO', homefeed: '홈판', affiliate: '제휴', business: '비즈니스', custom: '커스텀', mate: '메이트' };
           const _modeLabel = _modeLabelMap[_modeForGate] || _modeForGate;
@@ -6144,6 +6086,9 @@ export async function generateStructuredContent(
                   contentMode: source.contentMode,
                   toneStyle: source.toneStyle,
                   categoryHint: source.categoryHint,
+                  affiliateEvidenceMode: source.contentMode === 'affiliate'
+                    ? classifyAffiliateEvidence(source).mode
+                    : undefined,
                 });
                 _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);
                 console.log(`[QualityGate90] patch 후 재평가: mode=${_gateResult.modeScore.score}/100 · final=${_gateResult.finalScore}/100 · human=${_gateResult.humanlikeScore.score}/100 · miss=${_quality90Assessment.miss}`);
@@ -6280,6 +6225,43 @@ export async function generateStructuredContent(
         // ✅ [2026 100점] 쇼핑커넥트 모드: 금지 패턴 자동 검증
         const contentMode = source.contentMode || 'seo';
         if (contentMode === 'affiliate') {
+          const evidenceMode = classifyAffiliateEvidence(source).mode;
+          const authenticity = auditAffiliateAuthenticity({
+            title: optimized.selectedTitle,
+            body: optimized.bodyPlain,
+            evidenceMode,
+          });
+
+          if (authenticity.score < 85 && !_affiliateAuthenticityRetryUsed && attempt < MAX_ATTEMPTS) {
+            _affiliateAuthenticityRetryUsed = true;
+            extraInstruction = `${authenticity.retryDirective}\n${extraInstruction}`;
+            lastFailReason = `쇼핑 진정성 ${authenticity.score}/100: ${authenticity.issues.map(issue => issue.code).join(', ')}`;
+            console.warn(`[Shopping Authenticity] 재작성: ${lastFailReason}`);
+            continue;
+          }
+
+          if (authenticity.score < 85) {
+            const reasons = authenticity.issues.map(issue => issue.message).join(' / ');
+            throw new Error(`쇼핑커넥트 진정성 검수 미통과(${authenticity.score}/100). 자동 발행을 중단했습니다: ${reasons}`);
+          }
+
+          if (!optimized.quality) {
+            optimized.quality = {
+              aiDetectionRisk: 'low',
+              legalRisk: 'safe',
+              seoScore: 0,
+              originalityScore: 0,
+              readabilityScore: 0,
+              warnings: [],
+            };
+          }
+          (optimized.quality as any).affiliateAuthenticity = {
+            score: authenticity.score,
+            evidenceMode,
+            hardFail: authenticity.hardFail,
+          };
+          console.log(`[Shopping Authenticity] 통과: ${authenticity.score}/100 (${evidenceMode})`);
+
           const validation = validateShoppingConnectContent(optimized);
           if (validation.score < 100) {
             console.warn(`[Shopping Connect] ⚠️ 품질 점수: ${validation.score}/100`);

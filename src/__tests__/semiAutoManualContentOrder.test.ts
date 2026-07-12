@@ -35,18 +35,13 @@ describe('semi-auto manual content order guards', () => {
     expect(fullBodyExtractionIndex).toBeGreaterThan(directContentIndex);
   });
 
-  it('does not let semi-auto pre-publish resync overwrite parsed heading.content with uniform chunks', () => {
-    const reSyncStart = publishingHandlers.indexOf('function reSyncHeadingsContent');
-    const reSyncEnd = publishingHandlers.indexOf('export async function handleSemiAutoPublish', reSyncStart);
-    const reSyncBlock = publishingHandlers.slice(reSyncStart, reSyncEnd);
+  it('builds the publish snapshot directly from the current body instead of legacy resync chunks', () => {
+    const publishStart = publishingHandlers.indexOf('export async function handleSemiAutoPublish');
+    const publishBlock = publishingHandlers.slice(publishStart);
 
-    expect(reSyncBlock).toContain('const allHeadingsHaveContent =');
-    expect(reSyncBlock).toContain('기존 heading.content 보존');
-
-    const preserveIndex = reSyncBlock.indexOf('기존 heading.content 보존');
-    const uniformFallbackIndex = reSyncBlock.indexOf('editedBody를 균등 분배');
-
-    expect(preserveIndex).toBeGreaterThan(-1);
-    expect(uniformFallbackIndex).toBeGreaterThan(preserveIndex);
+    expect(publishBlock).toContain('resolveSemiAutoPublishStructure(content, existingSemiAutoHeadings');
+    expect(publishBlock).not.toContain('reSyncHeadingsContent(existingSemiAutoHeadings, content)');
+    expect(publishBlock).toContain('_manualSectionOrderLocked: semiAutoPublishStructure.orderLocked');
+    expect(publishBlock).toContain('introduction: semiAutoPublishStructure.introduction');
   });
 });

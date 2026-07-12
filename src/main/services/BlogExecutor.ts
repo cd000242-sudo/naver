@@ -17,6 +17,12 @@ import { Logger } from '../utils/logger.js';
 import { sendLog, sendStatus, sendProgress } from '../utils/ipcHelpers.js';
 import { classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
 import { isConcreteNaverBlogPostUrl } from '../../automation/publishOutcomeResolver.js';
+import {
+    prepareContentPolicyForPublish,
+    recordContentPolicyPublication,
+    type PreparedContentPolicyPublish,
+} from '../../contentPolicy/policyService.js';
+import { PublicationStateStore } from '../../contentPolicy/publicationStateStore.js';
 
 // ✅ [Phase 4B] ExecutionDependencies는 types/automation.ts에서 정의 — 재export
 export type ExecutionDependencies = IExecutionDependencies;
@@ -586,28 +592,31 @@ export async function executePublishing(
  */
 export async function cleanup(
     payload: PostCyclePayload,
-    accountId?: string
+    accountId?: string,
+    publishSucceeded = false
 ): Promise<void> {
     const deps = getDependencies();
 
-    // 발행 카운트 증가
-    if (accountId && deps.blogAccountManager) {
-        deps.blogAccountManager.incrementPublishCount(accountId);
-    }
+    if (publishSucceeded) {
+        // 발행 카운트 증가
+        if (accountId && deps.blogAccountManager) {
+            deps.blogAccountManager.incrementPublishCount(accountId);
+        }
 
-    // 일일 카운트 증가
-    if (deps.incrementTodayCount) {
-        await deps.incrementTodayCount();
-    }
+        // 일일 카운트 증가
+        if (deps.incrementTodayCount) {
+            await deps.incrementTodayCount();
+        }
 
-    // ✅ [2026-05-26 v2.10.378 SPEC-NAVER-PROTECTION-2026 P2 Fix 2.1]
-    //   계정별 빈도 카운터 증가 (다계정 격리). 기존 글로벌 카운터는 backward compat으로 유지.
-    if (accountId) {
-        try {
-            const { incrementForAccount } = await import('../../postLimitManagerPerAccount.js');
-            await incrementForAccount(accountId);
-        } catch (perAccountErr) {
-            console.warn('[BlogExecutor] perAccount post limit 증가 실패 (무시):', (perAccountErr as Error).message);
+        // ✅ [2026-05-26 v2.10.378 SPEC-NAVER-PROTECTION-2026 P2 Fix 2.1]
+        //   계정별 빈도 카운터 증가 (다계정 격리). 기존 글로벌 카운터는 backward compat으로 유지.
+        if (accountId) {
+            try {
+                const { incrementForAccount } = await import('../../postLimitManagerPerAccount.js');
+                await incrementForAccount(accountId);
+            } catch (perAccountErr) {
+                console.warn('[BlogExecutor] perAccount post limit 증가 실패 (무시):', (perAccountErr as Error).message);
+            }
         }
     }
 
@@ -668,6 +677,8 @@ export async function runFullPostCycle(
     const startTime = Date.now();
     let accountId: string | undefined;
     let finalResult: PostCycleResult;
+    let effectivePayload = payload;
+    let preparedPolicy: PreparedContentPolicyPublish<PostCyclePayload> | null = null;
 
     try {
         // 1. 설정 동기화
@@ -710,6 +721,24 @@ export async function runFullPostCycle(
             };
         }
 
+        // Fail closed before browser creation. Every renderer flow, including
+        // multi-account publishing, converges on this main-process boundary.
+        preparedPolicy = await prepareContentPolicyForPublish(effectivePayload, {
+            userDataPath: app.getPath('userData'),
+            env: process.env,
+        });
+        effectivePayload = preparedPolicy.payload;
+        if (!preparedPolicy.allowed) {
+            const reasons = preparedPolicy.reasons.join(',') || 'BLOCK_POLICY_DECISION';
+            const message = `CONTENT_POLICY_BLOCKED:${reasons}`;
+            sendLog(`🛡️ 콘텐츠 정책 차단: ${reasons}`);
+            const failure = classifyPublishFailure(message);
+            sendStatus({ success: false, message, failureCode: failure.code });
+            AutomationService.stopRunning();
+            return { success: false, message, failureCode: failure.code };
+        }
+        sendLog(`✅ 콘텐츠 정책 통과 (${preparedPolicy.policyResult.quality_report.total_score}점, 최근 글 ${preparedPolicy.policyResult.similarity_report.compared_post_count}건 비교)`);
+
         // 6. 브라우저 세션 관리
         const automation = await getOrCreateBrowserSession(account);
         AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — stale guard 오판 방지
@@ -717,7 +746,7 @@ export async function runFullPostCycle(
         // 7. 이미지 처리 (실패해도 발행은 계속)
         let processedImages: ProcessedImage[] = [];
         try {
-            const imageResult = await processImages(payload);
+            const imageResult = await processImages(effectivePayload);
             processedImages = imageResult.images || [];
             AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — 이미지 처리 후 갱신
         } catch (imageError) {
@@ -737,7 +766,7 @@ export async function runFullPostCycle(
         }
 
         // 9. 발행 실행
-        const result = await executePublishing(automation, payload, processedImages);
+        const result = await executePublishing(automation, effectivePayload, processedImages);
         AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — 발행 완료 후 갱신
 
         // 10. 성공 시 정리
@@ -751,6 +780,31 @@ export async function runFullPostCycle(
             failureCode: result.failureCode,
         };
 
+        if (result.success
+            && preparedPolicy
+            && effectivePayload.publishMode !== 'draft'
+            && effectivePayload.publishMode !== 'schedule') {
+            try {
+                await recordContentPolicyPublication({
+                    userDataPath: app.getPath('userData'),
+                    articleId: preparedPolicy.articleId,
+                    accountId: accountId || account.naverId,
+                    payload: effectivePayload,
+                    policyResult: preparedPolicy.policyResult,
+                    publishedUrl: result.url,
+                });
+            } catch (policyRecordError) {
+                const reason = `POLICY_POST_PUBLISH_RECORD_FAILED:${(policyRecordError as Error).message}`;
+                Logger.error('[BlogExecutor] 정책 발행 원장 기록 실패', policyRecordError as Error);
+                sendLog(`⚠️ ${reason} — 후속 자동발행을 일시 중지합니다.`);
+                try {
+                    await new PublicationStateStore(app.getPath('userData')).pauseAll(reason);
+                } catch (pauseError) {
+                    Logger.error('[BlogExecutor] 정책 자동중지 저장 실패', pauseError as Error);
+                }
+            }
+        }
+
     } catch (error) {
         const message = (error as Error).message || '알 수 없는 오류가 발생했습니다.';
         Logger.error('[BlogExecutor] 발행 사이클 오류', error as Error);
@@ -760,7 +814,7 @@ export async function runFullPostCycle(
         AutomationService.stopRunning();
         // ✅ [v1.4.55 FIX] cleanup을 await — 브라우저 종료 전에 리턴하면 다음 발행 hang
         try {
-            await cleanup(payload, accountId);
+            await cleanup(effectivePayload, accountId, false);
         } catch (e) {
             Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error);
         }
@@ -773,7 +827,7 @@ export async function runFullPostCycle(
     //    stopRunning()은 이미 호출했으므로 isRunning() 중복 오류는 없음
     AutomationService.stopRunning();
     try {
-        await cleanup(payload, accountId);
+        await cleanup(effectivePayload, accountId, finalResult.success === true);
     } catch (e) {
         Logger.error('[BlogExecutor] cleanup 오류 (무시됨)', e as Error);
     }

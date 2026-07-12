@@ -225,12 +225,17 @@ interface AutomationAPI {
   resetGeminiUsageTracker: () => Promise<{ success: boolean; message?: string }>;
   setGeminiCreditBudget: (budget: number) => Promise<{ success: boolean; message?: string }>;
   runAutomation: (payload: RendererAutomationPayload) => Promise<RendererStatus>;
+  getContentPolicyDashboard: (limit?: number) => Promise<{ success: boolean; dashboard?: any; message?: string }>;
+  pauseContentPolicyPublishing: (reason: string) => Promise<{ success: boolean; state?: any; message?: string }>;
+  resumeContentPolicyPublishing: (approval: { approvedBy: string; rootCauseReviewed: boolean; manualTestVerified: boolean }) => Promise<{ success: boolean; state?: any; message?: string }>;
+  verifyContentPolicyManualTest: (request: { url: string; title: string; keyword: string }) => Promise<{ success: boolean; state?: any; checks?: any[]; message?: string }>;
   // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고)
   generateDiagnosticReport?: (context?: { lastError?: string; stage?: string }) => Promise<{ ok: boolean; savedPath: string; report: string }>;
   // ✅ [SPEC-DEFAMATION-2026 P1] 발행 경계 위험 게이트 — 실존인물 미확인 단정 조회
   checkCelebrityRisk?: (payload: RendererAutomationPayload) => Promise<{ risky: boolean; samples: string[]; source: 'legalRisk' | 'scan' | 'none' }>;
   // Excel 관련 API 제거됨
-  cancelAutomation: () => Promise<boolean>;
+  cancelAutomation: (metadata?: { source?: string; reason?: string; contentRequestId?: string }) => Promise<boolean>;
+  cancelContentGeneration: (request: { requestId: string; reason?: string }) => Promise<{ success: boolean; aborted: boolean; requestId?: string }>;
   freeActivate: () => Promise<{ success: boolean; message?: string }>;
   forceQuit: () => Promise<{ success: boolean }>;
   getQuotaStatus: () => Promise<{ success: boolean; isFree: boolean; quota: any }>;

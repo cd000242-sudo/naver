@@ -15,6 +15,24 @@ interface TrackedChild {
 
 const trackedChildren = new Map<number, TrackedChild>();
 
+function isProcessAlive(pid: number): boolean {
+  try {
+    process.kill(pid, 0);
+    return true;
+  } catch (error) {
+    return (error as NodeJS.ErrnoException)?.code === 'EPERM';
+  }
+}
+
+async function waitForProcessExit(pid: number, timeoutMs: number): Promise<boolean> {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (!isProcessAlive(pid)) return true;
+    await new Promise((resolve) => setTimeout(resolve, 50));
+  }
+  return !isProcessAlive(pid);
+}
+
 /**
  * 자식 프로세스 PID 추적 등록
  *   spawn 직후 child.pid가 있으면 호출
@@ -60,19 +78,31 @@ export async function killAllTrackedChildren(): Promise<void> {
           tk.on('exit', () => resolve());
           tk.on('error', () => resolve());
         });
-        // eslint-disable-next-line no-console
-        console.log(`[ChildRegistry] ✅ taskkill ${child.label} (pid=${child.pid})`);
+        const exited = await waitForProcessExit(child.pid, 500);
+        if (exited) {
+          untrackChild(child.pid);
+          // eslint-disable-next-line no-console
+          console.log(`[ChildRegistry] ✅ taskkill ${child.label} (pid=${child.pid})`);
+        } else {
+          // eslint-disable-next-line no-console
+          console.warn(`[ChildRegistry] ⚠️ ${child.label} (pid=${child.pid}) 종료 미확인 — 추적 유지`);
+        }
       } else {
         try {
           process.kill(child.pid, 'SIGTERM');
-          // 1초 후 SIGKILL 폴백
-          setTimeout(() => {
+          if (!(await waitForProcessExit(child.pid, 500))) {
             try { process.kill(child.pid, 'SIGKILL'); } catch { /* ignore */ }
-          }, 1000);
+          }
         } catch (e) {
           // 이미 종료됐거나 권한 없음
           // eslint-disable-next-line no-console
           console.warn(`[ChildRegistry] kill ${child.label} 실패:`, (e as Error).message);
+        }
+        if (await waitForProcessExit(child.pid, 500)) {
+          untrackChild(child.pid);
+        } else {
+          // eslint-disable-next-line no-console
+          console.warn(`[ChildRegistry] ⚠️ ${child.label} (pid=${child.pid}) 종료 미확인 — 추적 유지`);
         }
       }
     } catch (e) {
@@ -80,7 +110,6 @@ export async function killAllTrackedChildren(): Promise<void> {
       console.warn(`[ChildRegistry] ${child.label} 종료 중 오류:`, (e as Error).message);
     }
   }
-  trackedChildren.clear();
 }
 
 export function getTrackedChildren(): ReadonlyArray<TrackedChild> {

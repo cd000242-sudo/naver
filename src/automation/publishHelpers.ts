@@ -9,6 +9,7 @@ import {
 } from './selectors';
 import { recordSilentFailure } from './silentFailureCounter.js';
 import { validateScheduleDate } from './scheduleDatePolicy.js';
+import { createSchedulePublishOutcomeUnknownError } from './schedulePublishCommitPolicy.js';
 import {
   getConfirmPublishSelectors,
   getPublishButtonSelectors,
@@ -1190,6 +1191,7 @@ export async function debugPublishModal(self: any): Promise<void> {
 export async function publishScheduled(self: any, scheduleDate: string): Promise<void> {
   const frame = (await self.getAttachedFrame());
   const page = self.ensurePage();
+  let confirmationAttempted = false;
 
   self.log(`📅 예약발행 시작: ${scheduleDate}`);
 
@@ -1489,6 +1491,9 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
       throw new Error('확인 버튼을 찾을 수 없습니다. 스크린샷을 확인하세요.');
     }
 
+    // Irreversible boundary: a click may reach Naver even if the browser
+    // context closes before Puppeteer receives the acknowledgement.
+    confirmationAttempted = true;
     await confirmButton.click();
     await self.delay(2000);
 
@@ -1521,6 +1526,11 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
     } catch (screenshotError) {
       recordSilentFailure('publish:error-screenshot');
       self.log('⚠️ 스크린샷 저장 실패 (무시됨)');
+    }
+
+    if (confirmationAttempted) {
+      self.log('예약 확인 이후 결과 미확정: 중복 예약 방지를 위해 자동 재시도를 차단합니다.');
+      throw createSchedulePublishOutcomeUnknownError(error);
     }
 
     await page.keyboard.press('Escape').catch(() => { });

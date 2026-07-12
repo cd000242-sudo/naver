@@ -3,7 +3,10 @@
 // 로컬 폴더에서 이미지를 스캔하고 소제목에 매핑하는 유틸리티
 // ═══════════════════════════════════════════════════════════════════
 
-import { shouldGenerateImageForHeading } from '../components/HeadingImageSettings.js';
+import {
+  shouldGenerateImageForHeading,
+  type HeadingImageMode,
+} from '../components/HeadingImageSettings.js';
 
 declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
 
@@ -34,6 +37,40 @@ const THUMBNAIL_KEYWORDS = ['썸네일', 'thumbnail', 'thumb', '대표'];
 /** 5MB 리사이즈 임계값 */
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
+const HEADING_IMAGE_MODES = new Set<HeadingImageMode>([
+  'all',
+  'thumbnail-only',
+  'odd-only',
+  'even-only',
+  'none',
+]);
+
+function normalizeHeadingImageMode(value: unknown): HeadingImageMode {
+  return typeof value === 'string' && HEADING_IMAGE_MODES.has(value as HeadingImageMode)
+    ? value as HeadingImageMode
+    : 'all';
+}
+
+function selectHeadingsForMode(
+  headings: LoadLocalFolderOptions['headings'],
+  mode: HeadingImageMode
+): LoadLocalFolderOptions['headings'] {
+  const hasExplicitThumbnail = headings.some(heading => heading.isThumbnail || heading.isIntro);
+  let bodyIndex = 0;
+
+  return headings.filter((heading, index) => {
+    const isExplicitThumbnail = heading.isThumbnail === true || heading.isIntro === true;
+    if (isExplicitThumbnail) {
+      return shouldGenerateImageForHeading(mode, 0, true);
+    }
+
+    bodyIndex += 1;
+    const isFallbackThumbnail = !hasExplicitThumbnail && index === 0;
+    return shouldGenerateImageForHeading(mode, bodyIndex, false)
+      || (isFallbackThumbnail && shouldGenerateImageForHeading(mode, 0, true));
+  });
+}
+
 /**
  * 로컬 폴더 스캔 → 파싱 → heading 매핑
  * @param folderPath  선택된 폴더 절대 경로
@@ -42,12 +79,19 @@ const MAX_FILE_SIZE = 5 * 1024 * 1024;
  */
 export async function parseLocalFolderImages(
   folderPath: string,
-  headings: Array<{ title: string; isThumbnail?: boolean; isIntro?: boolean }>
+  headings: Array<{ title: string; isThumbnail?: boolean; isIntro?: boolean }>,
+  headingImageMode: HeadingImageMode = 'all'
 ): Promise<LocalFolderImage[]> {
+  const mode = normalizeHeadingImageMode(headingImageMode);
   // ✅ [Issue #5 FIX] trailing 슬래시/백슬래시 정규화
   folderPath = folderPath.replace(/[\\/]+$/, '');
   console.log(`[LocalFolder] 📂 폴더 스캔 시작: ${folderPath}`);
   console.log(`[LocalFolder] 소제목 ${headings.length}개`);
+
+  if (mode === 'none') {
+    console.log('[LocalFolder] 🚫 headingImageMode=none → 폴더 스캔 건너뜀');
+    return [];
+  }
 
   // 1. 폴더 존재 확인 (기존 IPC 재활용)
   try {
@@ -156,7 +200,8 @@ export async function parseLocalFolderImages(
 
   // 7a. 썸네일 → isThumbnail/isIntro heading 또는 첫 번째 heading
   const thumbHeading = headings.find(h => h.isThumbnail || h.isIntro) || headings[0];
-  if (thumbnails.length > 0 && thumbHeading) {
+  const shouldIncludeThumbnail = shouldGenerateImageForHeading(mode, 0, true);
+  if (shouldIncludeThumbnail && thumbnails.length > 0 && thumbHeading) {
     result.push({
       heading: thumbHeading.title,
       filePath: thumbnails[0].fullPath,
@@ -165,7 +210,7 @@ export async function parseLocalFolderImages(
       isThumbnail: true
     });
     console.log(`[LocalFolder] 🖼️ 썸네일: ${thumbnails[0].fileName} → "${thumbHeading.title}"`);
-  } else if (thumbnails.length === 0 && numbered.length > 0) {
+  } else if (shouldIncludeThumbnail && thumbnails.length === 0 && numbered.length > 0) {
     // 썸네일 파일 없으면 1번 이미지를 썸네일로 복제
     if (thumbHeading) {
       result.push({
@@ -186,7 +231,8 @@ export async function parseLocalFolderImages(
   let imageIdx = 0;
   for (let i = 0; i < remainingHeadings.length && imageIdx < numbered.length; i++) {
     // ✅ [Issue #4 FIX] headingImageMode 적용 (홀수/짝수/썸네일만 모드)
-    if (!shouldGenerateImageForHeading(i, false)) {
+    const headingIndex = i + 1;
+    if (!shouldGenerateImageForHeading(mode, headingIndex, false)) {
       console.log(`[LocalFolder] ⏭️ 소제목 "${remainingHeadings[i].title}" → headingImageMode에 의해 스킵`);
       continue;
     }
@@ -235,6 +281,10 @@ export interface LoadLocalFolderOptions {
   ) => Promise<any[]>;
   /** AI 폴백 시 추가 옵션 (stopCheck, onProgress, allowThumbnailText 등) */
   aiOptions?: Record<string, any>;
+  /** 호출자가 시작 시점에 확정한 소제목 이미지 모드 */
+  headingImageMode?: HeadingImageMode;
+  /** 호출자가 시작 시점에 확정한 AI 폴백 provider */
+  fallbackProvider?: string;
 }
 
 /** 로컬 폴더 로드 결과 */
@@ -259,16 +309,34 @@ export async function loadLocalFolderWithFallback(
 ): Promise<LoadLocalFolderResult> {
   const { headings, postTitle, onLog, aiFallbackFn, aiOptions = {} } = options;
   const log = onLog || ((msg: string) => console.log(`[LocalFolder] ${msg}`));
+  const headingImageMode = normalizeHeadingImageMode(
+    options.headingImageMode ?? aiOptions.headingImageMode
+  );
+  const targetHeadings = selectHeadingsForMode(headings, headingImageMode);
+  const fallbackProvider = options.fallbackProvider
+    ?? (typeof aiOptions.fallbackProvider === 'string' ? aiOptions.fallbackProvider : undefined);
+
+  if (targetHeadings.length === 0) {
+    log('🚫 headingImageMode=none → 로컬/AI 이미지 생성을 건너뜁니다', 'info');
+    return { images: [], source: 'empty', localCount: 0, aiCount: 0 };
+  }
 
   const folderPath = localStorage.getItem('localFolderPath');
   const fallbackMode = localStorage.getItem('localFolderFallback') || 'skip';
+  const safeProvider = fallbackMode === 'ai-generate' && aiFallbackFn
+    ? getSafeAiProvider(fallbackProvider)
+    : undefined;
+  const resolvedAiOptions = {
+    ...aiOptions,
+    headingImageMode,
+    ...(safeProvider ? { fallbackProvider: safeProvider } : {}),
+  };
 
   // 1. 폴더 미선택
   if (!folderPath) {
     if (fallbackMode === 'ai-generate' && aiFallbackFn) {
       log('⚠️ 이미지 폴더 미선택 → AI 이미지로 생성합니다', 'warning');
-      const safeProvider = getSafeAiProvider();
-      const aiImgs = await aiFallbackFn(safeProvider, headings, postTitle, aiOptions);
+      const aiImgs = await aiFallbackFn(safeProvider!, targetHeadings, postTitle, resolvedAiOptions);
       return { images: aiImgs, source: 'ai', localCount: 0, aiCount: aiImgs.length };
     }
     log('⚠️ 이미지 폴더 미선택 → 이미지 없이 발행합니다', 'warning');
@@ -279,13 +347,12 @@ export async function loadLocalFolderWithFallback(
   log('📂 로컬 폴더에서 이미지 로드 중...', 'info');
   let localImages: LocalFolderImage[] = [];
   try {
-    localImages = await parseLocalFolderImages(folderPath, headings);
+    localImages = await parseLocalFolderImages(folderPath, headings, headingImageMode);
   } catch (e) {
     const errMsg = (e as Error).message;
     if (fallbackMode === 'ai-generate' && aiFallbackFn) {
       log(`⚠️ 폴더 이미지 로드 실패: ${errMsg} → AI 이미지로 생성합니다`, 'warning');
-      const safeProvider = getSafeAiProvider();
-      const aiImgs = await aiFallbackFn(safeProvider, headings, postTitle, aiOptions);
+      const aiImgs = await aiFallbackFn(safeProvider!, targetHeadings, postTitle, resolvedAiOptions);
       return { images: aiImgs, source: 'ai', localCount: 0, aiCount: aiImgs.length };
     }
     log(`⚠️ 폴더 이미지 로드 실패: ${errMsg} → 이미지 없이 발행합니다`, 'warning');
@@ -296,8 +363,7 @@ export async function loadLocalFolderWithFallback(
   if (localImages.length === 0) {
     if (fallbackMode === 'ai-generate' && aiFallbackFn) {
       log('⚠️ 폴더에 이미지 없음 → AI 이미지 생성', 'warning');
-      const safeProvider = getSafeAiProvider();
-      const aiImgs = await aiFallbackFn(safeProvider, headings, postTitle, aiOptions);
+      const aiImgs = await aiFallbackFn(safeProvider!, targetHeadings, postTitle, resolvedAiOptions);
       return { images: aiImgs, source: 'ai', localCount: 0, aiCount: aiImgs.length };
     }
     log('⚠️ 폴더에 이미지가 없습니다 → 이미지 없이 발행합니다', 'warning');
@@ -308,15 +374,14 @@ export async function loadLocalFolderWithFallback(
   log(`✅ 로컬 이미지 ${localImages.length}장 로드 완료`, 'success');
 
   // 5. 부족분 AI 폴백
-  if (localImages.length < headings.length && fallbackMode === 'ai-generate' && aiFallbackFn) {
-    const shortage = headings.length - localImages.length;
+  if (localImages.length < targetHeadings.length && fallbackMode === 'ai-generate' && aiFallbackFn) {
+    const shortage = targetHeadings.length - localImages.length;
     log(`⚠️ 이미지 부족 ${shortage}장 → AI 폴백 생성`, 'warning');
     const localHeadingSet = new Set(localImages.map(img => img.heading));
-    const missingHeadings = headings.filter(h => !localHeadingSet.has(h.title));
+    const missingHeadings = targetHeadings.filter(h => !localHeadingSet.has(h.title));
     if (missingHeadings.length > 0) {
       try {
-        const safeProvider = getSafeAiProvider();
-        const aiImgs = await aiFallbackFn(safeProvider, missingHeadings, postTitle, aiOptions);
+        const aiImgs = await aiFallbackFn(safeProvider!, missingHeadings, postTitle, resolvedAiOptions);
         const merged = [...localImages, ...aiImgs];
         log(`✅ 병합: 로컬 ${localImages.length}장 + AI ${aiImgs.length}장 = 총 ${merged.length}장`, 'success');
         return { images: merged, source: 'mixed', localCount: localImages.length, aiCount: aiImgs.length };
@@ -333,7 +398,12 @@ export async function loadLocalFolderWithFallback(
  *  Priority: user-selected fallback engine > main image source > nano-banana-pro
  *  [Phase 7.1-f] main source read goes through the pipeline accessor;
  *  localFolderFallbackEngine is a flow-local key and stays a direct read. */
-function getSafeAiProvider(): string {
+function getSafeAiProvider(fallbackProvider?: string): string {
+  if (fallbackProvider !== undefined) {
+    const picked = fallbackProvider.trim() || 'nano-banana-pro';
+    return picked === 'local-folder' ? 'nano-banana-pro' : picked;
+  }
+
   const explicit = localStorage.getItem('localFolderFallbackEngine');
   const main = readRawPipelineSettings().fullAutoImageSource;
   const picked = explicit || main || 'nano-banana-pro';

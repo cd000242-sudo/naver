@@ -1,0 +1,115 @@
+version: 1
+policy_name: naver_blog_originality_and_exposure_guard
+purpose: >
+  검색의도 불일치, 반복 구조, 유사문서, 사실 조작, 무검수 대량 발행,
+  누락 상태에서의 연속 발행을 자동 차단한다.
+disclaimer: >
+  이 설정은 검색 노출이나 상위 노출을 보장하지 않는다.
+  모든 임계값은 플랫폼 공식 기준이 아닌 초기 엔지니어링 휴리스틱이다.
+
+inputs:
+  required: [primary_keyword, target_reader, business_facts, recent_posts]
+  recommended: [secondary_keywords, region, service, related_questions, source_materials, cta]
+
+intent:
+  min_score: 85
+  answer_within_body_ratio: 0.15
+  allowed_types: [informational, local, transactional, comparison, urgent, aftercare]
+  fatal_mismatch: true
+
+content:
+  headings_min: 4
+  headings_max: 7
+  faq_min: 3
+  faq_max: 5
+  cta_max_count: 1
+  fixed_keyword_density: false
+  primary_keyword_in_title_max: 1
+  prohibit_keyword_stuffing: true
+  prohibit_fabricated_firsthand_experience: true
+  prohibit_unsupported_prices_and_results: true
+
+rotation:
+  exclude_recent_structure_count: 5
+  topic_angles:
+    - process
+    - preparation_checklist
+    - cost_factors
+    - storage_and_sorting
+    - donation_and_disposal
+    - legal_and_privacy
+    - common_mistakes
+    - time_and_scheduling
+    - first_party_case
+    - faq
+    - local_guide
+    - aftercare
+
+similarity:
+  compare_recent_posts_min: 20
+  compare_recent_posts_recommended: 50
+  title_token_jaccard_max: 0.60
+  intro_char_ngram_cosine_max: 0.65
+  exact_sentence_reuse_ratio_max: 0.08
+  body_embedding_cosine_max: 0.90
+  heading_overlap_max: 0.50
+  repeated_opening_window: 10
+  repeated_opening_max_occurrences: 1
+  rewrite_limit: 2
+  whitelist_fields: [company_name, address, fixed_disclosure, legal_notice]
+
+quality_gate:
+  pass_score: 85
+  weights:
+    intent_match: 30
+    reader_value: 20
+    originality: 20
+    first_party_information: 15
+    readability_and_accuracy: 10
+    anti_spam_safety: 5
+  fatal_errors:
+    - keyword_body_mismatch
+    - fabricated_fact
+    - copied_or_lightly_paraphrased_source
+    - excessive_similarity
+    - missing_required_input
+
+publication:
+  require_decision: PASS
+  min_interval_minutes_env: MIN_PUBLISH_INTERVAL_MINUTES
+  daily_cap_env: DAILY_PUBLISH_CAP
+  prevent_consecutive_same_template: true
+  prevent_consecutive_same_structure: true
+  prevent_consecutive_same_angle: true
+  disallow_when_paused: true
+
+monitoring:
+  allowed_statuses: [PENDING_INDEX, INDEXED, MISSING_SUSPECT, MISSING_CONFIRMED, CHECK_ERROR]
+  minimum_cross_checks: 2
+  single_third_party_result_is_not_final: true
+  on_first_confirmed_missing: PAUSE_SAME_TEMPLATE
+  on_two_consecutive_confirmed_missing: PAUSE_ALL
+  auto_delete_on_missing: false
+  auto_republish_on_missing: false
+  require_root_cause_analysis: true
+  require_manual_test_before_resume: true
+
+logging:
+  required_fields:
+    - article_id
+    - input_hash
+    - selected_intent
+    - topic_angle
+    - structure_type
+    - template_id
+    - similarity_scores
+    - quality_score
+    - rewrite_count
+    - decision
+    - block_reasons
+    - prompt_version
+    - model_version
+    - policy_version
+    - publish_time
+    - exposure_status
+    - exposure_checks

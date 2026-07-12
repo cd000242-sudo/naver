@@ -106,7 +106,8 @@ describe('content generation timeout policy', () => {
     expect(apiClientSrc).toMatch(/abortStaleContentGeneration/);
     expect(apiClientSrc).toMatch(/apiMethod !== 'generateStructuredContent'/);
     expect(apiClientSrc).toMatch(/clearTimeout\(timeoutId\)/);
-    expect(apiClientSrc).toMatch(/cancelAutomation/);
+    expect(apiClientSrc).toMatch(/cancelContentGeneration/);
+    expect(apiClientSrc).toMatch(/requestId/);
   });
 
   it('bounds image generation waits in full-auto instead of allowing stuck IPC calls', () => {

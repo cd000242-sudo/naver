@@ -4,7 +4,10 @@
 // ═══════════════════════════════════════════════════════════════════
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
-import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
+import {
+  extractSemiAutoHeadingsFromBody,
+  resolveSemiAutoPublishStructure,
+} from '../utils/semiAutoHeadingExtractor.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -1711,6 +1714,7 @@ export async function handleMultiAccountPublish(): Promise<void> {
         naverPassword: credResult.credentials.naverPassword,
         url: mainSettings.url,
         keywords: mainSettings.keywords,
+        contentPolicyContext: (window as any).currentStructuredContent?.contentPolicyContext,
         title: preferredTitle || undefined,
         generator: mainSettings.generator,
         imageSource: mainSettings.imageSource,
@@ -1877,7 +1881,12 @@ function extractSemiAutoHeadingsFromBodyLegacy(body: string): any[] {
  * resolveRunOptions에서 structuredContent.bodyPlain이 payload.content보다 우선하므로
  * headings[].content도 편집된 본문과 동기화 필수
  */
-function reSyncHeadingsContent(headings: any[], editedBody: string): any[] {
+function _reSyncHeadingsContentLegacy(headings: any[], editedBody: string): any[] {
+  const canonical = resolveSemiAutoPublishStructure(editedBody, headings || [], {
+    bodyIsAuthoritative: true,
+  });
+  if (canonical.orderLocked) return canonical.headings;
+
   if (!headings || !headings.length || !editedBody) return headings || [];
 
   // ✅ [2026-03-26 FIX] 1단계: heading title 위치 기반 재분할 시도
@@ -1942,6 +1951,7 @@ function reSyncHeadingsContent(headings: any[], editedBody: string): any[] {
 export async function handleSemiAutoPublish(): Promise<any> {
   // ✅ 반자동 모드 설정
   (window as any).currentAutomationMode = 'semi-auto';
+  (window as any).__semiAutoPasteRevision = Number((window as any).__semiAutoPasteRevision || 0) + 1;
   const semiPipelineCfg = resolvePipelineConfig('full-auto');
 
   // 먼저 콘텐츠가 생성되었는지 확인
@@ -2034,10 +2044,11 @@ export async function handleSemiAutoPublish(): Promise<any> {
   );
 
   const existingSemiAutoHeadings = Array.isArray(structuredContent.headings) ? structuredContent.headings : [];
-  const syncedSemiAutoHeadings = reSyncHeadingsContent(existingSemiAutoHeadings, content);
-  const resolvedSemiAutoHeadings = syncedSemiAutoHeadings.length > 0
-    ? syncedSemiAutoHeadings
-    : extractSemiAutoHeadingsFromBody(content);
+  const semiAutoPublishStructure = resolveSemiAutoPublishStructure(content, existingSemiAutoHeadings, {
+    bodyIsAuthoritative: true,
+    existingIntroduction: structuredContent.introduction || '',
+  });
+  const resolvedSemiAutoHeadings = semiAutoPublishStructure.headings;
 
   const updatedStructuredContent = {
     ...structuredContent,
@@ -2047,9 +2058,13 @@ export async function handleSemiAutoPublish(): Promise<any> {
     hashtags: publishHashtags,
     // ✅ [2026-02-27 FIX] 소제목 content를 편집된 본문에서 재파싱 (이미지-소제목 매칭 정확도)
     headings: resolvedSemiAutoHeadings,
+    introduction: semiAutoPublishStructure.introduction,
+    conclusion: '',
     // ✅ [2026-03-26 FIX] 사용자 수정 플래그 명시적 설정 — spread에만 의존 금지
     // applyStructuredContent에서 이 플래그로 heading.content 직접 사용 분기가 결정됨
     _bodyManuallyEdited: true,
+    _manualSectionOrderLocked: semiAutoPublishStructure.orderLocked,
+    _manualStructureStrategy: semiAutoPublishStructure.strategy,
   };
 
   // ✅ [2026-03-26 DEBUG] 반자동 발행 데이터 무결성 검증 로그

@@ -158,6 +158,18 @@ function getElements(): SettingsModalElements {
     return elements;
 }
 
+function isBrowserPreview(): boolean {
+    return (window as any).api?.__browserPreview === true;
+}
+
+function configureBrowserPreviewSaveButton(saveBtn: HTMLElement | null): void {
+    if (!isBrowserPreview() || !(saveBtn instanceof HTMLButtonElement)) return;
+
+    saveBtn.disabled = true;
+    saveBtn.setAttribute('aria-disabled', 'true');
+    saveBtn.title = '브라우저 미리보기에서는 환경설정을 저장할 수 없습니다. 앱에서 실행해 주세요.';
+}
+
 // ==================== 모달 열기/닫기 ====================
 
 export function openSettingsModal(): void {
@@ -166,6 +178,8 @@ export function openSettingsModal(): void {
         console.error('[SettingsModal] 모달 요소를 찾을 수 없습니다.');
         return;
     }
+
+    configureBrowserPreviewSaveButton(els.saveBtn);
 
     // ✅ [2026-01-27] 다른 모달들 먼저 닫기 (중첩 방지)
     const modalsToClose = [
@@ -344,6 +358,10 @@ async function loadCurrentSettings(): Promise<void> {
 async function saveSettings(): Promise<void> {
     try {
         const els = getElements();
+        if (isBrowserPreview()) {
+            (window as any).toastManager?.warning?.('브라우저 미리보기에서는 환경설정을 저장할 수 없습니다. 앱에서 실행해 주세요.');
+            return;
+        }
         const currentConfig = await (window as any).api.getConfig();
 
         // API 키 수집 (마스킹되지 않은 실제 값 사용)

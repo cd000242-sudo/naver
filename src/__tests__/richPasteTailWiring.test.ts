@@ -165,6 +165,20 @@ describe('rich paste tail wiring', () => {
     expect(pasteFn).toMatch(/method:\s*'paste-event-html'/);
     expect(pasteFn).toMatch(/method:\s*'clipboard-plain'/);
     expect(pasteFn).toMatch(/buildPasteFailureReason/);
+    expect(pasteFn).toMatch(/rollbackPartialPaste/);
+  });
+
+  it('never stacks a fallback paste on top of a partial native paste', () => {
+    const code = read('automation/richTextPaste.ts');
+    const pasteFn = code.slice(code.indexOf('export async function pasteRichHtmlAtCursor'));
+    const nativeVerification = pasteFn.indexOf('const inserted = isPasteVisible');
+    const rollback = pasteFn.indexOf('rollbackPartialPaste', nativeVerification);
+    const eventFallback = pasteFn.indexOf('dispatchRichPasteEventAtCursor', nativeVerification);
+    const plainFallback = pasteFn.indexOf('pastePlainTextAtCursor', nativeVerification);
+
+    expect(rollback).toBeGreaterThan(nativeVerification);
+    expect(rollback).toBeLessThan(eventFallback);
+    expect(rollback).toBeLessThan(plainFallback);
   });
 
   it('verifies the SmartEditor model caret before native clipboard paste', () => {
@@ -176,7 +190,7 @@ describe('rich paste tail wiring', () => {
     const caretReady = pasteFn.indexOf('const pasteCaretReady = await ensureTailTypingReady');
     const clipboardWrite = pasteFn.indexOf('const writeInPage = await page.evaluate');
     const secondCaretReady = pasteFn.indexOf('const postClipboardCaretReady = await ensureTailTypingReady');
-    const ctrlV = pasteFn.indexOf("await page.keyboard.press('V')");
+    const ctrlV = pasteFn.indexOf("await pressControlShortcut(page, 'V')");
     expect(caretReady).toBeGreaterThan(-1);
     expect(clipboardWrite).toBeGreaterThan(caretReady);
     expect(secondCaretReady).toBeGreaterThan(clipboardWrite);

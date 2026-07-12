@@ -32,12 +32,16 @@ export function bindDropshotLogin(ids: DropshotLoginIds): void {
   if (loginBtn && !loginBtn.dataset.dsBound) {
     loginBtn.dataset.dsBound = '1';
     loginBtn.addEventListener('click', async () => {
+      if (loginBtn.disabled) return;
+      loginBtn.disabled = true;
       dsSetStatus(ids.statusId, '🔗 로그인 진행 중… 필요 시 브라우저 창이 열립니다 (최대 5분).', 'info');
       try {
         const r = await api?.dropshotLogin?.();
         dsSetStatus(ids.statusId, r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '로그인 실패'}`, r?.loggedIn ? 'ok' : 'error');
       } catch (e) {
         dsSetStatus(ids.statusId, `⚠️ 로그인 오류: ${(e as Error)?.message ?? e}`, 'error');
+      } finally {
+        loginBtn.disabled = false;
       }
     });
   }
@@ -45,12 +49,16 @@ export function bindDropshotLogin(ids: DropshotLoginIds): void {
   if (checkBtn && !checkBtn.dataset.dsBound) {
     checkBtn.dataset.dsBound = '1';
     checkBtn.addEventListener('click', async () => {
+      if (checkBtn.disabled) return;
+      checkBtn.disabled = true;
       dsSetStatus(ids.statusId, '⏳ 로그인 상태 확인 중…', 'info');
       try {
         const r = await api?.checkDropshotLogin?.();
         dsSetStatus(ids.statusId, r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '미로그인'}`, r?.loggedIn ? 'ok' : 'error');
       } catch (e) {
         dsSetStatus(ids.statusId, `⚠️ 확인 오류: ${(e as Error)?.message ?? e}`, 'error');
+      } finally {
+        checkBtn.disabled = false;
       }
     });
   }

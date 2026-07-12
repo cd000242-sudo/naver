@@ -1,176 +1,215 @@
 /**
- * 🍌 Dropshot image engine — page lifecycle + public facade.
- *
- * Uses Playwright UI automation to access the nano-banana-pro model on dropshot.io.
- * Direct API access is blocked by Cognito token refresh flow inside the page JS —
- * UI automation is the only viable approach (verified: 11 API attempts all failed 401).
- *
- * Cost (accurate):
- * - Pro subscribers (monthly ₩74,000–₩99,000): zero marginal cost per image (isUnlimited: true)
- * - Free users: creditCost 75/image within daily/monthly quota
- *
- * Internal identifier: dropshot
- * User-facing label: 🍌 리더스 나노바나나 무제한
- *
- * This module owns the shared page-acquisition (ensurePage) and re-exports the
- * browser/login/session helpers so existing importers keep a single entry point.
+ * Dropshot image engine page lifecycle and compatibility facade.
+ * Persistent contexts are cached only after auth and workspace readiness pass.
  */
 
 import {
-  BOARD_URL,
-  launchBrowser,
-  isLoggedIn,
-  openDropshotImageWorkspace,
-  getProfileDir,
-} from './dropshotBrowser.js';
-import { getCachedPage, getCachedContext, setCached, clearCached } from './dropshotSession.js';
-
-// Public facade re-exports (importers depend on dropshotCore as the single entry point).
-export {
   ensureDropshotControls,
-  downloadAsFileBuffer,
+  getProfileDir,
+  isLoggedIn,
+  launchBrowser,
+  minimizeDropshotWindow,
+  navigateToDropshotBoard,
+  navigateToDropshotLogin,
+  openDropshotImageWorkspace,
+} from './dropshotBrowser.js';
+import {
+  clearCached,
+  closeTrackedDropshotContext,
+  closeBrowserCache,
+  DropshotCleanupIncompleteError,
+  getCachedContext,
+  getCachedPage,
+  setCached,
+} from './dropshotSession.js';
+
+export {
   buildDropshotPrompt,
+  downloadAsFileBuffer,
   openDropshotImageWorkspace,
   PROMPT_SELECTOR,
-  type DropshotResult,
+  sanitizeDropshotErrorMessage,
   type DropshotLoginStatus,
+  type DropshotResult,
 } from './dropshotBrowser.js';
+export { ensureDropshotControls };
 export {
-  getGenerationChain,
-  setGenerationChain,
-  invalidateBrowserCache,
   closeBrowserCache,
+  closeAllDropshotContexts,
+  endDropshotGeneration,
+  getDropshotGenerationEpoch,
+  getGenerationChain,
+  invalidateBrowserCache,
+  isDropshotGenerationAborted,
+  setGenerationChain,
+  tryBeginDropshotGeneration,
 } from './dropshotSession.js';
 export { checkDropshotLogin, dropshotLogin } from './dropshotLogin.js';
 
 let _ensurePagePromise: Promise<unknown> | null = null;
 
+async function closeContext(context: unknown): Promise<void> {
+  const closed = await closeTrackedDropshotContext(context);
+  if (!closed) {
+    throw new DropshotCleanupIncompleteError();
+  }
+}
+
+export function assertDropshotNavigationOpened(opened: boolean): void {
+  if (!opened) {
+    throw new Error('Dropshot 사이트 연결 시간이 초과되었습니다. 잠시 후 다시 시도해주세요.');
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function ensurePage(onLog?: (m: string) => void): Promise<any> {
-  if (_ensurePagePromise) {
-    await _ensurePagePromise;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const cachedPage = getCachedPage();
-    if (cachedPage && getCachedContext()) {
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        await (cachedPage as any).evaluate(() => document.readyState);
-        if (await isLoggedIn(cachedPage)) {
-          return cachedPage;
-        }
-        clearCached();
-      } catch {
-        // fall through to re-init
-      }
-    }
+async function getHealthyCachedPage(onLog?: (m: string) => void): Promise<any | null> {
+  const page = getCachedPage();
+  const context = getCachedContext();
+  if (!page || !context) {
+    if (page || context) await closeBrowserCache();
+    return null;
   }
 
-  let lockResolve!: (value: unknown) => void;
-  _ensurePagePromise = new Promise<unknown>((r) => {
-    lockResolve = r;
-  });
   try {
-    return await _ensurePageInternal(onLog);
+    await (page as any).evaluate(() => document.readyState);
+    if (!(await isLoggedIn(page))) {
+      await closeBrowserCache();
+      return null;
+    }
+    if (!(await openDropshotImageWorkspace(page, onLog))) {
+      await closeBrowserCache();
+      return null;
+    }
+    return page;
+  } catch {
+    await closeBrowserCache();
+    return null;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function ensurePage(onLog?: (m: string) => void): Promise<any> {
+  if (_ensurePagePromise) return await _ensurePagePromise;
+
+  const cachedPage = await getHealthyCachedPage(onLog);
+  if (cachedPage) return cachedPage;
+  if (_ensurePagePromise) return await _ensurePagePromise;
+
+  const pending = _ensurePageInternal(onLog);
+  _ensurePagePromise = pending;
+  try {
+    return await pending;
   } finally {
-    _ensurePagePromise = null;
-    lockResolve(undefined);
+    if (_ensurePagePromise === pending) _ensurePagePromise = null;
   }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
-  const cachedPage = getCachedPage();
-  if (cachedPage && getCachedContext()) {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (cachedPage as any).evaluate(() => document.readyState);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await openDropshotImageWorkspace(cachedPage, onLog);
-      if (await isLoggedIn(cachedPage)) {
-        return cachedPage;
-      }
-      clearCached();
-    } catch {
-      clearCached();
-    }
-  }
-
   const profileDir = getProfileDir();
-  onLog?.('[리더스 나노바나나] 브라우저 준비 중...');
-
-  // Attempt 1: headless session check
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let context: any = await launchBrowser(profileDir, true);
-  let page = context.pages()[0] || (await context.newPage());
-  await page.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
-  await new Promise((r) => setTimeout(r, 5000));
-  await openDropshotImageWorkspace(page, onLog);
+  let context: any = null;
 
-  if (await isLoggedIn(page)) {
-    onLog?.('[리더스 나노바나나] 로그인 세션 확인');
-    setCached(context, page);
-    return page;
-  }
+  try {
+    onLog?.('[리더스 나노바나나] 저장된 로그인 세션 확인 중...');
+    context = await launchBrowser(profileDir, true);
+    const headlessProbePage = context.pages()[0] || (await context.newPage());
+    const boardOpened = await navigateToDropshotBoard(headlessProbePage, onLog);
+    assertDropshotNavigationOpened(boardOpened);
+    const initialAuthenticated = await isLoggedIn(headlessProbePage);
 
-  // Attempt 2: show visible window for login (max 5 minutes)
-  onLog?.('[리더스 나노바나나] 로그인 필요 → 브라우저 표시 (최대 5분)');
-  await context.close();
-  context = await launchBrowser(profileDir, false);
-  page = context.pages()[0] || (await context.newPage());
-    await page.goto(BOARD_URL, {
-      waitUntil: 'domcontentloaded',
-      timeout: 45000,
-    });
+    if (initialAuthenticated) {
+      const workspaceReady = await openDropshotImageWorkspace(headlessProbePage, onLog);
+      if (workspaceReady) {
+        try {
+          await ensureDropshotControls(headlessProbePage, onLog);
+          setCached(context, headlessProbePage);
+          context = null;
+          onLog?.('[리더스 나노바나나] 준비 완료');
+          return headlessProbePage;
+        } catch (controlError) {
+          onLog?.(
+            `[리더스 나노바나나] 구독 로그인을 확인하려고 브라우저를 엽니다: ${(controlError as Error).message?.slice(0, 120)}`,
+          );
+        }
+      }
+    }
 
-  let loggedIn = false;
-  for (let i = 0; i < 60; i++) {
-    await new Promise((r) => setTimeout(r, 5000));
+    await closeContext(context);
+    context = null;
+
+    onLog?.('[리더스 나노바나나] 로그인이 필요합니다. 브라우저에서 로그인해주세요 (최대 5분).');
+    context = await launchBrowser(profileDir, false);
+    let page = context.pages()[0] || (await context.newPage());
+    const loginBoardOpened = await navigateToDropshotBoard(page, onLog);
+    assertDropshotNavigationOpened(loginBoardOpened);
+
+    let userClosed = false;
     try {
-      const pages = context.pages();
-      page =
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        pages.find((p: any) => {
+      context.on('close', () => {
+        userClosed = true;
+      });
+    } catch {
+      // Optional EventEmitter API.
+    }
+
+    let loggedIn = false;
+    for (let i = 0; i < 60; i += 1) {
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+      if (userClosed) break;
+
+      try {
+        const pages = context.pages();
+        if (!pages || pages.length === 0) {
+          userClosed = true;
+          break;
+        }
+        page = pages.find((candidate: any) => {
           try {
-            return p.url().includes('dropshot.io');
+            return candidate.url().includes('dropshot.io');
           } catch {
             return false;
           }
         }) || pages[pages.length - 1];
-      if (await isLoggedIn(page)) {
-        loggedIn = true;
-        await openDropshotImageWorkspace(page, onLog);
-        break;
+
+        if (await isLoggedIn(page)) {
+          if (!(await openDropshotImageWorkspace(page, onLog))) {
+            onLog?.('[리더스 나노바나나] 로그인 확인됨 - 이미지 작업 화면 연결 대기 중...');
+            continue;
+          }
+          try {
+            await ensureDropshotControls(page, onLog);
+            loggedIn = true;
+            break;
+          } catch {
+            onLog?.('[리더스 나노바나나] 무제한 구독 로그인을 브라우저에서 완료해주세요.');
+            await navigateToDropshotLogin(page, onLog);
+            continue;
+          }
+        }
+      } catch {
+        // OAuth page transitions can temporarily detach the active page.
       }
-    } catch {
-      continue;
-    }
-    if (i % 6 === 5) {
-      onLog?.(
-        `[리더스 나노바나나] 로그인 대기 (${Math.round(((i + 1) * 5) / 60)}분 경과)`,
-      );
-    }
-  }
 
-  if (!loggedIn) {
-    await context.close();
-    throw new Error('[리더스 나노바나나] 로그인 시간 초과');
-  }
+      if (i % 6 === 5) {
+        onLog?.(`[리더스 나노바나나] 로그인 대기 (${Math.round(((i + 1) * 5) / 60)}분 경과)`);
+      }
+    }
 
-  // Attempt 3: close visible, re-enter headless
-  await context.close();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const hctx: any = await launchBrowser(profileDir, true);
-  const hpage = hctx.pages()[0] || (await hctx.newPage());
-  await hpage.goto(BOARD_URL, { waitUntil: 'domcontentloaded', timeout: 45000 });
-  await new Promise((r) => setTimeout(r, 4000));
-  await openDropshotImageWorkspace(hpage, onLog);
-  if (!(await isLoggedIn(hpage))) {
-    await hctx.close();
+    if (!loggedIn) {
+      throw new Error(userClosed
+        ? '로그인 창이 닫혔지만 유효한 로그인 토큰이 확인되지 않았습니다.'
+        : '로그인 시간이 초과되었습니다.');
+    }
+
+    await minimizeDropshotWindow(page, onLog);
+    setCached(context, page);
+    context = null;
+    onLog?.('[리더스 나노바나나] 준비 완료');
+    return page;
+  } catch (error) {
+    await closeContext(context);
     clearCached();
-    throw new Error('[리더스 나노바나나 무제한] 로그인 세션 저장 확인 실패 — 로그인 완료 후 다시 시도해주세요.');
+    throw error;
   }
-
-  setCached(hctx, hpage);
-  onLog?.('[리더스 나노바나나] 준비 완료');
-  return hpage;
 }

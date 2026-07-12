@@ -2,6 +2,7 @@ import { spawn } from 'child_process';
 import ffmpegPath from 'ffmpeg-static';
 import path from 'path';
 import fs from 'fs/promises';
+import { trackChild, untrackChild } from '../runtime/childProcessRegistry.js';
 
 /**
  * MP4 비디오를 GIF로 변환
@@ -43,6 +44,8 @@ export async function convertMp4ToGif(mp4Path: string, options: { fps?: number; 
         ];
 
         const ffmpeg: any = spawn(ffmpegPath as string, args);
+        const ffmpegPid = ffmpeg.pid;
+        trackChild(ffmpegPid, 'ffmpeg:gif-converter');
 
         // [v2.10.154] 60초 timeout — debugger agent 발견: ffmpeg 좀비 prevention
         //   기존: close 이벤트만 대기 → 상위 throw/timeout 시 ffmpeg 고아
@@ -57,12 +60,14 @@ export async function convertMp4ToGif(mp4Path: string, options: { fps?: number; 
 
         ffmpeg.on('error', (err: any) => {
             clearTimeout(timeoutId);
+            if (ffmpegPid) untrackChild(ffmpegPid);
             console.error('[GifConverter] ffmpeg 오류:', err);
             reject(err);
         });
 
         ffmpeg.on('close', (code: number) => {
             clearTimeout(timeoutId);
+            if (ffmpegPid) untrackChild(ffmpegPid);
             if (code === 0) {
                 console.log(`[GifConverter] ✅ 변환 완료: ${gifPath}`);
                 resolve(gifPath);

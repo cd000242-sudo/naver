@@ -19,6 +19,13 @@ export const BACKUP_KEY_PREFIX = 'naver_blog_backup_';
 const BACKUP_INTERVAL = 300000; // 5분
 const MAX_BACKUPS = 5; // ✅ [2026-03-24 FIX] 10→5 축소 (각 백업 최대 2MB → 총 10MB 이하로 제한)
 
+function getAutosavePostId(structuredContent: any): string | undefined {
+    const postId = typeof structuredContent?._postId === 'string'
+        ? structuredContent._postId.trim()
+        : '';
+    return postId || undefined;
+}
+
 // ═══════════════════════════════════════════════════════════════
 // 콜백 주입 (renderer.ts 커플링 제거용)
 // ═══════════════════════════════════════════════════════════════
@@ -109,6 +116,7 @@ export function handleCrash(error: any, context: string): void {
         autosaveContent({
             timestamp: Date.now(),
             mode,
+            postId: getAutosavePostId(structuredContent),
             structuredContent,
             generatedImages: (window as any).imageManagementGeneratedImages || []
         });
@@ -232,6 +240,7 @@ export function createBackup(): void {
         const backupData: AutosaveData = {
             timestamp: Date.now(),
             mode,
+            postId: getAutosavePostId(structuredContent),
             structuredContent,
             generatedImages: slimImages
         };
@@ -295,6 +304,7 @@ export function startAutosave(): void {
             autosaveContent({
                 timestamp: Date.now(),
                 mode,
+                postId: getAutosavePostId(structuredContent),
                 structuredContent,
                 generatedImages: generatedImages || []
             });

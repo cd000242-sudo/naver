@@ -208,9 +208,22 @@ describe('Dropshot capture result detection', () => {
     expect(code).toMatch(/blob:/);
   });
 
-  it('uses broad result detection before the legacy img-only fallback', () => {
-    expect(code).toMatch(/const beforeKeys = await collectDropshotCandidateKeys\(page\)/);
+  it('uses a settled baseline and one strict rendered-result detector', () => {
+    expect(code).toMatch(/const beforeKeys = await collectStableDropshotCandidateKeys\(page\)/);
     expect(code).toMatch(/readFirstNewDropshotImageDataUrl\(page,\s*beforeKeys\)/);
+    expect(code).not.toMatch(/i\.naturalWidth > 200/);
+  });
+});
+
+describe('Dropshot failure propagation', () => {
+  const generatorCode = read('image/dropshotGenerator.ts');
+  const imageGeneratorCode = read('imageGenerator.ts');
+
+  it('propagates the last provider error instead of collapsing it into a generic zero-result message', () => {
+    expect(generatorCode).toMatch(/let lastFailure/);
+    expect(generatorCode).toMatch(/results\.length === 0 && lastFailure/);
+    expect(generatorCode).toMatch(/throw new Error\(lastFailure\)/);
+    expect(imageGeneratorCode).toMatch(/Dropshot 모델 서버 일시 장애/);
   });
 });
 

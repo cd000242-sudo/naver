@@ -17,6 +17,7 @@
 import type { SubScore, EvaluationInput } from '../qualityEvaluator';
 import { checkSourceFidelity } from '../sourceFidelityCheck';
 import { checkHallucination, inferHallucinationCategory } from '../hallucinationCheck';
+import { auditAffiliateAuthenticity } from '../affiliateAuthenticity';
 
 const FORBIDDEN_PATTERNS: { pattern: RegExp; label: string }[] = [
   { pattern: /알아보겠습니다|살펴보겠습니다|시작하겠습니다|마치겠습니다/, label: 'AI 보고체' },
@@ -120,8 +121,30 @@ export function evaluateSafety(input: EvaluationInput): SubScore {
     delete details.fidelity;
   }
 
+  let finalScore = Math.round(Math.max(0, Math.min(100, total)));
+
+  if (input.mode === 'affiliate' && input.affiliateEvidenceMode) {
+    const authenticity = auditAffiliateAuthenticity({
+      title: input.title,
+      body,
+      evidenceMode: input.affiliateEvidenceMode,
+    });
+    details.affiliateAuthenticity = authenticity.score;
+    if (authenticity.hardFail) {
+      finalScore = Math.min(finalScore, 35);
+      for (const issue of authenticity.issues.filter(item => item.hard)) {
+        issues.push(`쇼핑 진정성 하드 실패: ${issue.message}`);
+      }
+      suggestions.push('작성자 실사용 근거·구매자 후기·스펙을 구분해 전체 문장을 다시 작성');
+    } else if (authenticity.score < 85) {
+      finalScore = Math.min(finalScore, authenticity.score);
+      issues.push(...authenticity.issues.map(issue => `쇼핑 진정성: ${issue.message}`));
+      suggestions.push('광고 기획 문구와 상투어를 지우고 구체 조건·한계·대상 독자로 다시 표현');
+    }
+  }
+
   return {
-    score: Math.round(Math.max(0, Math.min(100, total))),
+    score: finalScore,
     details,
     issues,
     suggestions,

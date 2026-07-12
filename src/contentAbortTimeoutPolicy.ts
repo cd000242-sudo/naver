@@ -1,12 +1,17 @@
 import { normalizeErrorMessage } from './contentErrorDiagnostics';
 
-export function createContentGenerationAbortError(): Error {
+export function createContentGenerationAbortError(signal?: AbortSignal): Error {
+  const reason = signal?.reason;
+  const reasonText = reason instanceof Error ? reason.message : String(reason || '');
+  if (/renderer api timeout|response timeout|응답.*시간.*초과/i.test(reasonText)) {
+    return new Error('콘텐츠 생성 응답 대기 시간이 초과되어 해당 요청을 중단했습니다.');
+  }
   return new Error('사용자가 콘텐츠 생성을 취소했습니다.');
 }
 
 export function throwIfContentGenerationAborted(signal?: AbortSignal): void {
   if (signal?.aborted) {
-    throw createContentGenerationAbortError();
+    throw createContentGenerationAbortError(signal);
   }
 }
 
@@ -22,7 +27,7 @@ export function sleepWithAbort(ms: number, signal?: AbortSignal): Promise<void> 
     if (signal) {
       onAbort = () => {
         if (timer) clearTimeout(timer);
-        reject(createContentGenerationAbortError());
+        reject(createContentGenerationAbortError(signal));
       };
       signal.addEventListener('abort', onAbort, { once: true });
     }
@@ -51,7 +56,7 @@ export function withProviderTimeout<T>(
 
     timer = setTimeout(() => reject(new Error(label)), timeoutMs);
     if (signal) {
-      onAbort = () => reject(createContentGenerationAbortError());
+      onAbort = () => reject(createContentGenerationAbortError(signal));
       signal.addEventListener('abort', onAbort, { once: true });
     }
 
@@ -89,7 +94,7 @@ export function createProviderTimeoutSignal(
   }, timeoutMs);
 
   if (externalSignal) {
-    onExternalAbort = () => abortOnce(createContentGenerationAbortError());
+    onExternalAbort = () => abortOnce(createContentGenerationAbortError(externalSignal));
     if (externalSignal.aborted) {
       onExternalAbort();
     } else {
@@ -108,7 +113,7 @@ export function createProviderTimeoutSignal(
     },
     normalizeError: (error: unknown) => {
       if (timedOut) return new Error(label);
-      if (externalSignal?.aborted) return createContentGenerationAbortError();
+      if (externalSignal?.aborted) return createContentGenerationAbortError(externalSignal);
 
       const message = normalizeErrorMessage(error).toLowerCase();
       if (controller.signal.aborted && (
@@ -117,7 +122,7 @@ export function createProviderTimeoutSignal(
         message.includes('aborted') ||
         message.includes('ecanceled')
       )) {
-        return createContentGenerationAbortError();
+        return createContentGenerationAbortError(externalSignal);
       }
 
       return error instanceof Error ? error : new Error(String(error));

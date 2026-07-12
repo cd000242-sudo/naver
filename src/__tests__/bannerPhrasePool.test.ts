@@ -69,4 +69,17 @@ describe('bannerPhrasePool', () => {
         expect(banners.size).toBeGreaterThanOrEqual(10);
         expect(ctas.size).toBeGreaterThanOrEqual(10);
     });
+
+    it('does not inject unsupported urgency, ranking, discount, or review claims', () => {
+        const publishedCopy = [...BANNER_HOOK_POOL, ...CTA_HOOK_POOL].join('\n');
+        const unsupportedClaims = [
+            '오늘만', '품절', '한정 수량', '최저가', '카테고리 1위',
+            '리뷰 4.8', '수만 명', '가장 잘 팔린', '사은품', '무료배송',
+            '정가보다', '24시간', '놓치면 후회', '고민 말고 바로 구매',
+        ];
+
+        for (const claim of unsupportedClaims) {
+            expect(publishedCopy).not.toContain(claim);
+        }
+    });
 });

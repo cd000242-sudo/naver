@@ -19,6 +19,7 @@
  */
 
 import type { SubScore, EvaluationInput } from '../qualityEvaluator';
+import { auditAffiliateAuthenticity } from '../affiliateAuthenticity';
 
 const SELF_CORRECTION = ['아 근데', '사실은', '근데 다시', '솔직히', '막상', '의외로', '처음엔', '그런데 보니', '알고보니', '생각해보니'];
 const INFORMAL = ['좀', '막', '되게', '엄청', '정말', '진짜', '완전', '대박', '제일', '꽤'];
@@ -258,19 +259,34 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
     total += 7;
   }
 
-  // 7. 직접 경험 신호 (15점) — v2.10.182 신규
-  //   2026 네이버 E-E-A-T 핵심: "직접 가봤/실제 써본/제가 찍은" 등 *경험 증거*
-  //   네이버 통합탭은 *AI가 쓴 듯한* 글을 누락 → 직접 경험 표현이 노출의 최대 신호
+  // 7. 경험/근거 화자 정합성 (15점)
+  // 직접 경험은 실제 first-party 근거가 있을 때만 가산한다. 리뷰 종합/스펙 글은
+  // 가짜 체험을 만들지 않고 출처에 맞게 설명하는 것이 사람다운 글이다.
   const expCount = countMatches(body, DIRECT_EXPERIENCE_SIGNALS);
   const expPer1000 = (expCount / Math.max(1, body.length)) * 1000;
   let expScore = 0;
-  if (expPer1000 >= 3) expScore = 15;
+  const affiliateEvidenceMode = input.affiliateEvidenceMode;
+  if (input.mode === 'affiliate' && affiliateEvidenceMode && affiliateEvidenceMode !== 'first_party') {
+    const authenticity = auditAffiliateAuthenticity({
+      title: input.title,
+      body,
+      evidenceMode: affiliateEvidenceMode,
+    });
+    const fabricated = authenticity.issues.some(issue => issue.code === 'FABRICATED_FIRST_PERSON');
+    if (fabricated) {
+      expScore = 0;
+      issues.push('실사용 근거 없는 1인칭 체험 표현 — 자연스러움이 아니라 신뢰 훼손 신호');
+      suggestions.push('리뷰 종합형은 구매자 의견으로 귀속하고, 스펙형은 확인된 조건과 판단 기준으로 서술');
+    } else {
+      expScore = 15;
+    }
+  } else if (expPer1000 >= 3) expScore = 15;
   else if (expPer1000 >= 1.5) expScore = 10;
   else if (expPer1000 >= 0.5) expScore = 5;
   else {
     expScore = 1;
-    issues.push('직접 경험 표현 부재 — 2026 네이버 E-E-A-T 최대 신호 부족');
-    suggestions.push('"직접 가봤어요", "제가 써본 결과", "찍은 사진 보면" 같은 *경험 증거* 2~3회 배치');
+    issues.push('직접 경험 표현 부재 — 제공된 경험 근거가 있다면 구체적인 장면을 반영할 필요가 있음');
+    suggestions.push('실제 경험 근거가 있을 때만 사용 상황·관찰·판단을 1~2곳에 구체적으로 반영');
   }
   details.directExperience = expScore;
   details.experienceDensityPer1000 = Math.round(expPer1000 * 10) / 10;

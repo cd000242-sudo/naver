@@ -25,15 +25,25 @@ describe('Dropshot unlimited mode safety', () => {
   it('refuses generation when zero-cost mode is not confirmed', () => {
     expect(browserCode).toMatch(/refusing to generate to avoid coin spend/);
     expect(browserCode).toMatch(/throw new Error/);
+    expect(browserCode).not.toContain('controls 설정 오류 (무시)');
   });
 
   it('checks controls again after prompt input and before clicking generate', () => {
-    expect(captureCode).toMatch(/await ensureDropshotControls\(page, onLog\);\s*[\r\n]+\s*\/\/ 5\. Click generate/);
+    const promptCheck = captureCode.indexOf('const actualPrompt =');
+    const controlsCheck = captureCode.indexOf('await ensureDropshotControls(page, onLog);', promptCheck);
+    const settledBaseline = captureCode.indexOf('await collectStableDropshotCandidateKeys(page)', controlsCheck);
+    const generateClick = captureCode.indexOf('await clickGenerate(page)', settledBaseline);
+    expect(promptCheck).toBeGreaterThan(-1);
+    expect(controlsCheck).toBeGreaterThan(promptCheck);
+    expect(settledBaseline).toBeGreaterThan(controlsCheck);
+    expect(generateClick).toBeGreaterThan(settledBaseline);
   });
 
   it('can close cached Dropshot browser contexts after sequential tests', () => {
     expect(sessionCode).toMatch(/closeBrowserCache/);
-    expect(sessionCode).toMatch(/await .*\.close\(\)/);
+    expect(sessionCode).toMatch(/withCleanupTimeout/);
+    expect(sessionCode).toMatch(/closeTrackedDropshotContext/);
+    expect(sessionCode).toMatch(/Keep ownership so a later shutdown\/abort pass/);
   });
 
   it('does not treat workspace text as a valid login session without auth tokens', () => {
@@ -44,14 +54,38 @@ describe('Dropshot unlimited mode safety', () => {
     expect(browserCode).toMatch(/\(idToken\|accessToken\)\$/);
     expect(browserCode).not.toMatch(/idToken\|accessToken\|refreshToken/);
     expect(browserCode).toMatch(/document\.cookie/);
+    expect(browserCode).toMatch(/expiresAtSeconds \* 1000 > nowMs/);
+    expect(browserCode).not.toMatch(/val\.length\s*>\s*20/);
     expect(browserCode).not.toMatch(/hasAccountChrome/);
     expect(browserCode).not.toMatch(/hasWorkspaceNav/);
   });
 
   it('rechecks cached and headless Dropshot pages before marking the session ready', () => {
-    expect(coreCode).toMatch(/if\s*\(await isLoggedIn\(cachedPage\)\)\s*{\s*return cachedPage;\s*}/);
-    expect(coreCode).toMatch(/로그인 세션 저장 확인 실패/);
-    expect(coreCode).toMatch(/if\s*\(!\(await isLoggedIn\(hpage\)\)\)\s*{/);
+    const cachedAuth = coreCode.indexOf('if (!(await isLoggedIn(page)))');
+    const cachedWorkspace = coreCode.indexOf('if (!(await openDropshotImageWorkspace(page, onLog)))', cachedAuth);
+    const cachedReturn = coreCode.indexOf('return page;', cachedWorkspace);
+    expect(cachedAuth).toBeGreaterThan(-1);
+    expect(cachedWorkspace).toBeGreaterThan(cachedAuth);
+    expect(cachedReturn).toBeGreaterThan(cachedWorkspace);
+
+    const initialBoard = coreCode.indexOf('await navigateToDropshotBoard(headlessProbePage, onLog)');
+    const initialAuth = coreCode.indexOf('await isLoggedIn(headlessProbePage)', initialBoard);
+    const initialWorkspace = coreCode.indexOf('await openDropshotImageWorkspace(headlessProbePage, onLog)', initialBoard);
+    const initialControls = coreCode.indexOf('await ensureDropshotControls(headlessProbePage, onLog)', initialWorkspace);
+    const initialCache = coreCode.indexOf('setCached(context, headlessProbePage);', initialControls);
+    expect(initialBoard).toBeGreaterThan(-1);
+    expect(initialAuth).toBeGreaterThan(initialBoard);
+    expect(initialWorkspace).toBeGreaterThan(initialBoard);
+    expect(initialControls).toBeGreaterThan(initialWorkspace);
+    expect(initialCache).toBeGreaterThan(initialControls);
+
+    const visibleControls = coreCode.lastIndexOf('await ensureDropshotControls(page, onLog)');
+    const visibleMinimize = coreCode.indexOf('await minimizeDropshotWindow(page, onLog)', visibleControls);
+    const visibleCache = coreCode.indexOf('setCached(context, page);', visibleMinimize);
+    expect(visibleControls).toBeGreaterThan(initialCache);
+    expect(visibleMinimize).toBeGreaterThan(visibleControls);
+    expect(visibleCache).toBeGreaterThan(visibleMinimize);
+    expect(coreCode.slice(visibleControls)).not.toContain('launchBrowser(profileDir, true)');
     expect(coreCode).toMatch(/clearCached\(\)/);
   });
 });

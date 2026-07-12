@@ -1,3 +1,5 @@
+import './utils/browserPreviewBridge.js';
+
 // [v-auto-sync] Top-level version banner — must appear in user console on every load.
 //   If missing, user has NOT installed this build.
 import { APP_VERSION } from '../runtime/version.generated.js';
@@ -36,6 +38,8 @@ import { syncHeadingVideoInPromptItems, openApplyVideoToHeadingModal, removeHead
 import { handleFullAutoPublish, handleMultiAccountPublish, handleSemiAutoPublish } from './modules/publishingHandlers.js';
 import { executeFullAutoFlow, executeSemiAutoFlow, updateUnifiedPreview, updateUnifiedImagePreview, initFullAutoImageSourceSelection, initFullAutoExecution, collectFullAutoFormData, validateFullAutoFormData, executeFullAutoAutomation, generateFullAutoContent, displayContentInAllTabs, generateImagesForContent, generateLibraryImagesForHeadings, generateAIImagesForHeadings, executeBlogPublishing } from './modules/fullAutoFlow.js';
 import { generateContentFromUrl, normalizeKeywordsForGeneration, generateContentFromKeywords, disableFullAutoPublishButton, enableFullAutoPublishButton, enableSemiAutoPublishButton, autoGenerateCTA, autoFillCTAFromContent, fillSemiAutoFields, paraphraseContent } from './modules/contentGeneration.js';
+import { initArticleTableComposer } from './modules/articleTableComposer.js';
+import { initContentPolicyDashboard } from './modules/contentPolicyDashboard.js';
 import { undoLastImageChange } from './modules/undoImageChange.js';
 import { collectFormData } from './modules/formAndAutomation.js';
 import { resolveFirstHeadingTitleForThumbnail, initThumbnailGenerator, updateThumbnailPreview } from './modules/thumbnailPreview.js';
@@ -51,9 +55,18 @@ import { HeadingImageMode, getHeadingImageMode, setHeadingImageMode, openHeading
 import './components/PromptEditModal.js';
 // ✅ [2026-01-25 모듈화] 초기화 가드 및 UI 락 시스템
 import { InitializationGuard, clearImageGenerationLocks, runUiActionLocked } from './utils/stabilityUtils.js';
+import { tryAcquirePipelineRun, releasePipelineRun } from './utils/pipelineRunCoordinator.js';
+(window as any).__pipelineRunCoordinator = Object.freeze({
+  tryAcquirePipelineRun,
+  releasePipelineRun,
+});
 // ✅ [2026-01-25 모듈화] HTML 유틸리티
 import { escapeHtml, removeMarkdownBold } from './utils/htmlUtils.js';
-import { extractSemiAutoHeadingsFromBody } from './utils/semiAutoHeadingExtractor.js';
+import {
+  extractSemiAutoDocumentFromBody,
+  extractSemiAutoHeadingsFromBody,
+  isCurrentSemiAutoPasteRevision,
+} from './utils/semiAutoHeadingExtractor.js';
 // ✅ [2026-01-25 모듈화] 이미지 비용 유틸리티
 import { isCostRiskImageProvider, getCostRiskProviderLabel, getTodayKey } from './utils/imageCostUtils.js';
 // ✅ [2026-01-25 모듈화] 쇼핑커넥트 유틸리티
@@ -153,6 +166,7 @@ import { createTime24Select, bindTime24Events } from './utils/time24Select.js';
 import {
   applyKeywordPrefixToTitle
 } from './utils/titleUtils.js';
+import { normalizeHashtags } from './utils/hashtagUtils.js';
 // ✅ [2026-01-25 모듈화] 프롬프트 오버라이드 유틸리티
 import {
   getManualEnglishPromptOverridesStore,
@@ -755,6 +769,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ✅ [v2.10.191 Phase 3.8.3] SERP 추이 서브탭 wiring
   initSerpHistoryPanel();
+  initContentPolicyDashboard();
 
   // ✅ [2026-01-25] 환경설정 저장 버튼 이벤트 리스너 (CSP 우회)
   const saveBtn = document.getElementById('save-settings-btn');
@@ -1683,6 +1698,13 @@ function updateProgress(percent: number, status: string): void {
     const payload = collectFormData(skipImages);
     if (!payload) return;
 
+    const runLease = tryAcquirePipelineRun('legacy');
+    if (!runLease) {
+      alert('다른 자동화 작업이 실행 중입니다. 완료 후 다시 시도해주세요.');
+      return;
+    }
+
+    try {
     automationRunning = true;
     if (runButton) runButton.disabled = true;
     if (publishOnlyButton) publishOnlyButton.disabled = true;
@@ -1796,6 +1818,9 @@ function updateProgress(percent: number, status: string): void {
         updateProgress(0, '');
       }, 3000);
     }
+    } finally {
+      releasePipelineRun(runLease);
+    }
   }
 
   // 자동화 취소
@@ -1806,7 +1831,11 @@ function updateProgress(percent: number, status: string): void {
     if (!confirmed) return;
 
     try {
-      await window.api.cancelAutomation();
+      await window.api.cancelAutomation({
+        source: 'renderer-legacy-cancel',
+        reason: 'operator confirmed cancel',
+        contentRequestId: String((window as any)._activeContentGenerationRequestId || '') || undefined,
+      });
       appendLog('⏹️ 자동화가 취소되었습니다.');
       automationRunning = false;
       if (runButton) runButton.disabled = false;
@@ -4093,8 +4122,13 @@ async function initUnifiedTab(): Promise<void> {
       }
     } catch { /* intro 추출 실패는 무시 — 소제목 이미지 흐름은 그대로 */ }
     if (semiAutoHeadingAnalyzeTimer) clearTimeout(semiAutoHeadingAnalyzeTimer);
+    const analysisRevision = Number((window as any).__semiAutoPasteRevision || 0);
     semiAutoHeadingAnalyzeTimer = setTimeout(() => {
       semiAutoHeadingAnalyzeTimer = null;
+      if (Number((window as any).__semiAutoPasteRevision || 0) !== analysisRevision) {
+        console.log('[SemiAuto] 오래된 소제목 분석 작업 폐기 (본문 변경 또는 발행 시작)');
+        return;
+      }
       try {
         void autoAnalyzeHeadings(sc);
       } catch (error) {
@@ -4105,8 +4139,18 @@ async function initUnifiedTab(): Promise<void> {
 
   function _syncSemiAutoManualHeadings(sc: any, body: string): void {
     if (!sc || !body || body.trim().length < 20) return;
-    const extracted = _extractSemiAutoManualHeadings(body);
-    if (extracted.length === 0) return;
+    const extractedDocument = extractSemiAutoDocumentFromBody(body);
+    const extracted = extractedDocument.headings;
+    if (extracted.length === 0) {
+      if (sc._manualPasted === true) {
+        sc.headings = [];
+        sc.introduction = body.trim();
+        sc.conclusion = '';
+        sc._manualSectionOrderLocked = true;
+        sc._manualStructureStrategy = 'plain-body';
+      }
+      return;
+    }
     const currentSignature = Array.isArray(sc.headings)
       ? sc.headings.map((h: any) => String(h?.title || '').trim()).filter(Boolean).join('|')
       : '';
@@ -4117,8 +4161,16 @@ async function initUnifiedTab(): Promise<void> {
     //   발행 시 'bodyText 균등분배' 폴백 → 서론 중복·섹션 본문 유실이 발생했다.
     const currentHasContent = Array.isArray(sc.headings)
       && sc.headings.some((h: any) => String(h?.content || '').trim().length > 0);
-    if (currentSignature === nextSignature && currentHasContent) return;
+    if (currentSignature === nextSignature && currentHasContent) {
+      sc.introduction = extractedDocument.introduction;
+      sc._manualSectionOrderLocked = true;
+      sc._manualStructureStrategy = 'body-sections';
+      return;
+    }
     sc.headings = extracted;
+    sc.introduction = extractedDocument.introduction;
+    sc._manualSectionOrderLocked = true;
+    sc._manualStructureStrategy = 'body-sections';
     _scheduleSemiAutoHeadingAnalysis(sc); // introduction/썸네일 세팅은 여기 안에서 처리(양 경로 공유)
   }
 
@@ -4166,12 +4218,14 @@ async function initUnifiedTab(): Promise<void> {
       }
       const sc = _ensureSemiAutoStructuredContent();
       if (sc) {
+        sc._manualPasted = true;
         // [2026-07-02 FIX] 붙여넣기 소제목에 반드시 본문(content)을 붙인다.
         //   기존: parsed.headings(제목 문자열)만 map → content 없는 headings → 발행 시
         //   editorHelpers의 'bodyText 균등분배' 폴백이 서론을 소제목마다 중복 타이핑하고
         //   섹션 본문을 유실시켰다(실측 버그). 본문에서 소제목+내용을 직접 추출해 content를
         //   보존하고, 마커/LLM이 정제한 제목과 개수가 맞으면 제목만 그 값을 신뢰한다.
-        const extractedWithContent = _extractSemiAutoManualHeadings(semiAutoContent.value);
+        const extractedDocument = extractSemiAutoDocumentFromBody(semiAutoContent.value);
+        const extractedWithContent = extractedDocument.headings;
         let parsedHeadings: Array<{ title: string; content?: string; prompt: string; source: string }>;
         if (extractedWithContent.length > 0 && parsed.headings.length === extractedWithContent.length) {
           parsedHeadings = extractedWithContent.map((h, i) => ({
@@ -4187,6 +4241,9 @@ async function initUnifiedTab(): Promise<void> {
         }
         if (parsedHeadings.length > 0) {
           sc.headings = parsedHeadings;
+          sc.introduction = extractedDocument.introduction;
+          sc._manualSectionOrderLocked = true;
+          sc._manualStructureStrategy = 'body-sections';
           _scheduleSemiAutoHeadingAnalysis(sc);
         }
       }
@@ -4197,10 +4254,28 @@ async function initUnifiedTab(): Promise<void> {
     };
 
     semiAutoContent.addEventListener('paste', () => {
+      const pasteRevision = Number((window as any).__semiAutoPasteRevision || 0) + 1;
+      (window as any).__semiAutoPasteRevision = pasteRevision;
       setTimeout(async () => {
+        if (!isCurrentSemiAutoPasteRevision(
+          Number((window as any).__semiAutoPasteRevision || 0),
+          pasteRevision,
+          semiAutoContent.value,
+          semiAutoContent.value,
+        )) return;
         const pasted = semiAutoContent.value;
+        const pastedSnapshot = pasted;
+        const isCurrentPaste = (): boolean =>
+          isCurrentSemiAutoPasteRevision(
+            Number((window as any).__semiAutoPasteRevision || 0),
+            pasteRevision,
+            semiAutoContent.value,
+            pastedSnapshot,
+          );
+        const pasteSc = _ensureSemiAutoStructuredContent();
+        if (pasteSc) pasteSc._manualPasted = true;
         if (!pasted || pasted.trim().length < 20) {
-          _syncContent();
+          if (isCurrentPaste()) _syncContent();
           return;
         }
 
@@ -4209,6 +4284,7 @@ async function initUnifiedTab(): Promise<void> {
         const markerHit = !!(parsed.title || parsed.hashtags || (parsed.body !== null && parsed.body !== pasted.trim()));
 
         if (markerHit) {
+          if (!isCurrentPaste()) return;
           _applyParsed(parsed);
           _syncContent();
           return;
@@ -4224,6 +4300,10 @@ async function initUnifiedTab(): Promise<void> {
             return;
           }
           const result = await api.pasteClassify(pasted);
+          if (!isCurrentPaste()) {
+            console.log('[Paste] 오래된 비동기 분류 결과 폐기 (본문 변경 또는 발행 시작)');
+            return;
+          }
           if (result?.success && (result.title || result.hashtags || result.headings?.length)) {
             _applyParsed({
               title: result.title || null,
@@ -4231,6 +4311,7 @@ async function initUnifiedTab(): Promise<void> {
               hashtags: result.hashtags || null,
               headings: result.headings || [],
             });
+            _syncContent();
             console.log(`[Paste] LLM 분류 성공: title=${!!result.title}, hashtags=${!!result.hashtags}, headings=${result.headings?.length}개`);
           } else {
             console.warn('[Paste] LLM 분류 실패:', result?.error);
@@ -4239,7 +4320,7 @@ async function initUnifiedTab(): Promise<void> {
         } catch (e) {
           console.warn('[Paste] LLM 분류 호출 에러:', e);
         } finally {
-          _syncContent();
+          if (isCurrentPaste()) _syncContent();
         }
       }, 0);
     });
@@ -4249,7 +4330,7 @@ async function initUnifiedTab(): Promise<void> {
     const _syncHashtags = () => {
       const sc = (window as any).currentStructuredContent;
       if (sc) {
-        sc.hashtags = semiAutoHashtags.value;
+        sc.hashtags = normalizeHashtags(semiAutoHashtags.value);
       }
     };
     semiAutoHashtags.addEventListener('input', _syncHashtags);
@@ -5658,7 +5739,7 @@ URL: ${firstUrl}
 
     if (titleInput) titleInput.value = restoredContent.selectedTitle || '';
     if (contentArea) contentArea.value = restoredContent.bodyPlain || restoredContent.content || '';
-    if (hashtagsInput) hashtagsInput.value = (restoredContent.hashtags || []).join(', ');
+    if (hashtagsInput) hashtagsInput.value = normalizeHashtags(restoredContent.hashtags).join(' ');
 
     // ✅ 생성된 콘텐츠 미리보기 업데이트 (unified-preview-*)
     updateUnifiedPreview(restoredContent);
@@ -6578,7 +6659,11 @@ function initStopButton(): void {
 
         // 진행 중인 자동화 중지
         if (automationRunning) {
-          await window.api.cancelAutomation();
+          await window.api.cancelAutomation({
+            source: 'unified-stop-button',
+            reason: 'operator stop',
+            contentRequestId: String((window as any)._activeContentGenerationRequestId || '') || undefined,
+          });
           appendLog('⏹️ 발행/수집/생성이 중지되었습니다.');
         }
 
@@ -7412,7 +7497,7 @@ function toggleSemiAutoSection(show: boolean): void {
   if (show) {
     try {
       const structuredContent = (window as any).currentStructuredContent;
-      fillSemiAutoFields(structuredContent);
+      if (structuredContent) fillSemiAutoFields(structuredContent, { persist: false });
     } catch (e) {
       console.warn('[renderer] catch ignored:', e);
     }
@@ -7685,6 +7770,8 @@ function resetAllFields(): void {
     // ✅ [2026-01-22] 쇼핑커넥트 관련 UI 필드 초기화 (캐시 방지)
     const affiliateLinkInput = document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement;
     if (affiliateLinkInput) affiliateLinkInput.value = '';
+    const personalExperienceInput = document.getElementById('shopping-connect-personal-experience') as HTMLTextAreaElement;
+    if (personalExperienceInput) personalExperienceInput.value = '';
 
     const batchLinkInput = document.getElementById('batch-link-input') as HTMLInputElement;
     if (batchLinkInput) batchLinkInput.value = '';
@@ -7810,7 +7897,7 @@ function syncIntegratedPreviewFromInputs(): void {
     const sc = (window as any).currentStructuredContent;
     sc.selectedTitle = titleInput?.value || '';
     sc.bodyPlain = contentArea?.value || '';
-    sc.hashtags = hashtagsInput?.value.split(/\s+/).filter(h => h.startsWith('#')) || [];
+    sc.hashtags = normalizeHashtags(hashtagsInput?.value);
   }
 }
 
@@ -7830,6 +7917,13 @@ function restoreFromBackup(timestamp: number): void {
     }
 
     const backup: AutosaveData = JSON.parse(data);
+    const restoredContent = backup.structuredContent
+      ? {
+          ...backup.structuredContent,
+          _postId: backup.postId || backup.structuredContent._postId || '',
+          hashtags: normalizeHashtags(backup.structuredContent.hashtags),
+        }
+      : null;
 
     // 모드 전환
     const modeBtn = document.querySelector(`.unified-mode-btn[data-mode="${backup.mode}"]`) as HTMLButtonElement;
@@ -7838,10 +7932,13 @@ function restoreFromBackup(timestamp: number): void {
     }
 
     // 콘텐츠 복구
-    if (backup.structuredContent) {
-      (window as any).currentStructuredContent = backup.structuredContent;
-      fillSemiAutoFields(backup.structuredContent);
-      updateUnifiedPreview(backup.structuredContent);
+    if (restoredContent) {
+      currentPostId = restoredContent._postId || null;
+      (window as any).currentStructuredContent = restoredContent;
+      fillSemiAutoFields(restoredContent, { persist: false });
+      startAutosave();
+      startAutoBackup();
+      updateUnifiedPreview(restoredContent);
     }
 
     // 이미지 복구 (✅ prompt 필드 보장)
@@ -7855,7 +7952,7 @@ function restoreFromBackup(timestamp: number): void {
       generatedImages = imagesWithPrompt;
       // ✅ [2026-02-12 P1 FIX #20] ImageManager 연동 + sync 추가
       try {
-        hydrateImageManagerFromImages(backup.structuredContent, imagesWithPrompt);
+        hydrateImageManagerFromImages(restoredContent, imagesWithPrompt);
       } catch { /* ignore */ }
       try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
     }
@@ -7895,6 +7992,13 @@ async function askAutosaveRecoveryChoice(timeSinceMinutes: number): Promise<bool
 async function restoreAutosavedContent(): Promise<void> {
   const saved = loadAutosavedContent();
   if (!saved) return;
+  const restoredContent = saved.structuredContent
+    ? {
+        ...saved.structuredContent,
+        _postId: saved.postId || saved.structuredContent._postId || '',
+        hashtags: normalizeHashtags(saved.structuredContent.hashtags),
+      }
+    : null;
 
   const timeSince = Math.floor((Date.now() - saved.timestamp) / 1000 / 60); // 분 단위
 
@@ -7936,12 +8040,15 @@ async function restoreAutosavedContent(): Promise<void> {
     }
 
     // 콘텐츠 복구
-    if (saved.structuredContent) {
-      (window as any).currentStructuredContent = saved.structuredContent;
+    if (restoredContent) {
+      currentPostId = restoredContent._postId || null;
+      (window as any).currentStructuredContent = restoredContent;
 
       // ✅ [Fix] 반자동 편집 섹션 강제 표시 및 데이터 채우기 (백업 복원 시)
       setTimeout(() => {
-        fillSemiAutoFields(saved.structuredContent);
+        fillSemiAutoFields(restoredContent, { persist: false });
+        startAutosave();
+        startAutoBackup();
         // 섹션 강제 표시
         const semiAutoSection = document.getElementById('unified-semi-auto-section');
         if (semiAutoSection) {
@@ -7950,7 +8057,7 @@ async function restoreAutosavedContent(): Promise<void> {
         }
       }, 300);
 
-      updateUnifiedPreview(saved.structuredContent);
+      updateUnifiedPreview(restoredContent);
       appendLog('✅ 콘텐츠 및 반자동 편집창 복구 완료');
     }
 
@@ -7966,7 +8073,7 @@ async function restoreAutosavedContent(): Promise<void> {
       appendLog(`✅ 이미지 ${imagesWithPrompt.length}개 복구 완료`);
 
       try {
-        hydrateImageManagerFromImages(saved.structuredContent, imagesWithPrompt);
+        hydrateImageManagerFromImages(restoredContent, imagesWithPrompt);
       } catch (e) {
         console.warn('[renderer] catch ignored:', e);
       }
@@ -7975,11 +8082,11 @@ async function restoreAutosavedContent(): Promise<void> {
     }
 
     // ✅ 복구 완료 후 자동 소제목 분석
-    if (saved.structuredContent?.headings?.length > 0) {
+    if (restoredContent?.headings?.length > 0) {
       setTimeout(async () => {
         try {
           appendLog('🔍 자동 소제목 분석 시작...');
-          await autoAnalyzeHeadings(saved.structuredContent);
+          await autoAnalyzeHeadings(restoredContent);
           appendLog('✅ 소제목 분석 완료!');
         } catch (error) {
           appendLog(`⚠️ 소제목 자동 분석 실패: ${(error as Error).message}`);
@@ -7988,8 +8095,8 @@ async function restoreAutosavedContent(): Promise<void> {
     }
 
     // ✅ CTA 자동 생성
-    if (saved.structuredContent) {
-      autoGenerateCTA(saved.structuredContent);
+    if (restoredContent) {
+      autoGenerateCTA(restoredContent);
     }
 
     // ✅ [v2.7.92] 자동저장 복원 후 반자동/풀오토 발행 버튼 직접 활성화
@@ -9029,6 +9136,17 @@ async function executeUnifiedAutomation(formData: any): Promise<any> {
   if (!(await celebrityPublishGate(formData))) return null;
 
   const startBtn = document.getElementById('unified-start-btn') as HTMLButtonElement;
+  const runLease = tryAcquirePipelineRun('unified');
+  if (!runLease) {
+    (window as any)._lastPublishOutcome = null;
+    (window as any)._lastPipelineError = 'PIPELINE_BUSY';
+    toastManager.warning('다른 자동화 작업이 실행 중입니다. 완료 후 다시 시도해주세요.');
+    return null;
+  }
+  const originalButtonState = {
+    disabled: startBtn?.disabled ?? false,
+    html: startBtn?.innerHTML ?? '',
+  };
 
   // 진행률 표시 초기화
   const progressContainer = document.createElement('div');
@@ -9056,27 +9174,18 @@ async function executeUnifiedAutomation(formData: any): Promise<any> {
 
   // ✅ [v2.10.13] 발행 결과 마커 reset — 후처리 에러로 인한 잘못된 '실패' 토스트 차단용
   (window as any)._lastPublishOutcome = null;
+  (window as any)._lastPipelineError = null;
 
-  const result = await withErrorHandling(async () => {
-    if (formData.mode === 'full-auto') {
-      // 풀오토 모드 실행 (기존 로직 재사용)
-      return await executeFullAutoFlow(formData);
-    } else {
-      // 반자동 모드 실행
-      return await executeSemiAutoFlow(formData);
-    }
-  }, 'UnifiedExecution');
-
-  // 진행률 표시 제거 및 버튼 복구
-  setTimeout(() => {
-    if (progressContainer.parentNode) {
-      progressContainer.parentNode.removeChild(progressContainer);
-    }
-    if (startBtn) {
-      startBtn.disabled = false;
-      startBtn.innerHTML = '<span style="font-size: 1.75rem;">🚀</span><span>발행 중...</span>';
-    }
-  }, 2000);
+  try {
+    const result = await withErrorHandling(async () => {
+      if (formData.mode === 'full-auto') {
+        // 풀오토 모드 실행 (기존 로직 재사용)
+        return await executeFullAutoFlow(formData);
+      } else {
+        // 반자동 모드 실행
+        return await executeSemiAutoFlow(formData);
+      }
+    }, 'UnifiedExecution');
 
   if (!result) {
     // ✅ [v2.10.13] 잘못된 '실패' 토스트 차단
@@ -9145,7 +9254,15 @@ async function executeUnifiedAutomation(formData: any): Promise<any> {
   // ✅ [2026-04-18 FIX] 결과 반환 (호출자 await 가능하도록)
   //    handleSemiAutoPublish → executeUnifiedAutomation → executeSemiAutoFlow 체인의 automationResult
   //    배치 multi-account publish가 status event 리스너/타임아웃 없이 직접 결과 받도록
-  return result;
+    return result;
+  } finally {
+    progressContainer.remove();
+    if (startBtn) {
+      startBtn.disabled = originalButtonState.disabled;
+      startBtn.innerHTML = originalButtonState.html;
+    }
+    releasePipelineRun(runLease);
+  }
 }
 
 // ✅ UI 스레드 양보 헬퍼 (Electron 응답 없음 방지)
@@ -10519,6 +10636,7 @@ initToolsHubModal();
 initBestProductModal();
 initGeminiSelectionUI();
 initContentModeHelpAndSmartPublish();
+initArticleTableComposer();
 // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 3] Image narrative mode (사진→글, 글소스 옵션으로 통합)
 // Quick Mode 제거됨 — imageNarrativeMode 단일 경로로 통합.
 initImageNarrativeMode();

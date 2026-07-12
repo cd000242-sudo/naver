@@ -238,10 +238,12 @@ export function setSubheadingRatio(ratio: ImageAspectRatio): void {
   console.log(`[HeadingImageSettings] 소제목 비율 설정: ${ratio}`);
 }
 
-// ✅ [2026-01-29] 소제목 인덱스가 현재 모드에서 이미지를 생성해야 하는지 확인
-export function shouldGenerateImageForHeading(headingIndex: number, isThumbnail: boolean = false): boolean {
-  const mode = safeLocalStorageGet('headingImageMode', 'all') as HeadingImageMode;
-
+// ✅ [2026-01-29] 소제목 인덱스가 지정된 모드에서 이미지를 생성해야 하는지 확인
+export function shouldGenerateImageForHeading(
+  mode: HeadingImageMode,
+  headingIndex: number,
+  isThumbnail: boolean = false
+): boolean {
   switch (mode) {
     case 'all':
       return true;
@@ -260,6 +262,13 @@ export function shouldGenerateImageForHeading(headingIndex: number, isThumbnail:
     default:
       return true;
   }
+}
+
+function shouldGenerateImageForCurrentMode(
+  headingIndex: number,
+  isThumbnail: boolean = false
+): boolean {
+  return shouldGenerateImageForHeading(getHeadingImageMode(), headingIndex, isThumbnail);
 }
 
 // ✅ [2026-01-29] 현재 headingImageMode 표시 텍스트 반환
@@ -1467,22 +1476,32 @@ export function createHeadingImageModal(): void {
       const s = document.getElementById('hsettings-ds-status');
       if (s) { s.textContent = msg; s.style.color = color; }
     };
+    const dsLoginBtn = document.getElementById('hsettings-ds-login-btn') as HTMLButtonElement | null;
+    const dsCheckBtn = document.getElementById('hsettings-ds-check-btn') as HTMLButtonElement | null;
     document.getElementById('hsettings-ds-login-btn')?.addEventListener('click', async () => {
+      if (!dsLoginBtn || dsLoginBtn.disabled) return;
+      dsLoginBtn.disabled = true;
       setDsStatus('🔗 로그인 진행 중… 필요 시 브라우저 창이 열립니다 (최대 5분).', '#92400e');
       try {
         const r = await (window as any).api?.dropshotLogin?.();
         setDsStatus(r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '로그인 실패'}`, r?.loggedIn ? '#059669' : '#b91c1c');
       } catch (e) {
         setDsStatus(`⚠️ 로그인 오류: ${(e as Error)?.message ?? e}`, '#b91c1c');
+      } finally {
+        dsLoginBtn.disabled = false;
       }
     });
     document.getElementById('hsettings-ds-check-btn')?.addEventListener('click', async () => {
+      if (!dsCheckBtn || dsCheckBtn.disabled) return;
+      dsCheckBtn.disabled = true;
       setDsStatus('⏳ 로그인 상태 확인 중…', '#92400e');
       try {
         const r = await (window as any).api?.checkDropshotLogin?.();
         setDsStatus(r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '미로그인'}`, r?.loggedIn ? '#059669' : '#b91c1c');
       } catch (e) {
         setDsStatus(`⚠️ 확인 오류: ${(e as Error)?.message ?? e}`, '#b91c1c');
+      } finally {
+        dsCheckBtn.disabled = false;
       }
     });
   }
@@ -2916,7 +2935,8 @@ export async function openImageQuotaDashboard(): Promise<void> {
 (window as any).getSubheadingRatio = getSubheadingRatio;
 (window as any).setThumbnailRatio = setThumbnailRatio;
 (window as any).setSubheadingRatio = setSubheadingRatio;
-(window as any).shouldGenerateImageForHeading = shouldGenerateImageForHeading;
+(window as any).shouldGenerateImageForHeading = shouldGenerateImageForCurrentMode;
+(window as any).shouldGenerateImageForHeadingMode = shouldGenerateImageForHeading;
 (window as any).getHeadingImageModeDisplayText = getHeadingImageModeDisplayText;
 (window as any).openHeadingImageModal = openHeadingImageModal;
 (window as any).closeHeadingImageModal = closeHeadingImageModal;
@@ -2987,7 +3007,8 @@ export function initHeadingImageButton(): void {
 (window as any).getSubheadingRatio = getSubheadingRatio;
 (window as any).setThumbnailRatio = setThumbnailRatio;
 (window as any).setSubheadingRatio = setSubheadingRatio;
-(window as any).shouldGenerateImageForHeading = shouldGenerateImageForHeading;
+(window as any).shouldGenerateImageForHeading = shouldGenerateImageForCurrentMode;
+(window as any).shouldGenerateImageForHeadingMode = shouldGenerateImageForHeading;
 (window as any).getHeadingImageModeDisplayText = getHeadingImageModeDisplayText;
 (window as any).openHeadingImageModal = openHeadingImageModal;
 (window as any).closeHeadingImageModal = closeHeadingImageModal;

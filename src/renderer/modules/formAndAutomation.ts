@@ -487,12 +487,16 @@ const aiProgressModal = {
           this.hide();
           (window as any)._contentGenerationCancelled = true;
           (window as any).stopFullAutoPublish = true;
-          if (automationRunning) {
+          const requestId = String((window as any)._activeContentGenerationRequestId || '');
+          if (requestId) {
+            void (window as any).api?.cancelContentGeneration?.({
+              requestId,
+              reason: 'AI progress modal cancel button',
+            });
+          } else if (automationRunning) {
             cancelAutomation();
-          } else {
-            try { (window as any).api?.cancelAutomation?.(); } catch { /* ignore */ }
-            try { appendLog?.('⏹️ 글 생성 취소 요청 — 진행 중인 응답은 백그라운드에서 폐기됩니다.'); } catch { /* ignore */ }
           }
+          try { appendLog?.('⏹️ 글 생성 취소 요청 — 해당 생성 작업만 중단합니다.'); } catch { /* ignore */ }
         }
       } else {
         this.hide();
@@ -513,7 +517,14 @@ const aiProgressModal = {
         if (confirm('글 생성을 취소하시겠습니까?')) {
           this.hide();
           (window as any)._contentGenerationCancelled = true;
-          try { appendLog?.('⏹️ 글 생성 취소 요청 — 진행 중인 응답은 백그라운드에서 폐기됩니다.'); } catch { /* ignore */ }
+          const requestId = String((window as any)._activeContentGenerationRequestId || '');
+          if (requestId) {
+            void (window as any).api?.cancelContentGeneration?.({
+              requestId,
+              reason: 'AI progress modal close button',
+            });
+          }
+          try { appendLog?.('⏹️ 글 생성 취소 요청 — 해당 생성 작업만 중단합니다.'); } catch { /* ignore */ }
         }
       } else {
         this.hide();

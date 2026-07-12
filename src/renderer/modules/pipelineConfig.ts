@@ -12,10 +12,12 @@ export interface ImagePipelineConfig {
   headingImageMode: string;
   thumbnailTextInclude: boolean;
   textOnlyPublish: boolean;
+  imageSource: string;
   imageStyle: string;
   imageRatio: string;
   thumbnailImageRatio: string;
   subheadingImageRatio: string;
+  fallbackPolicy: string;
 }
 
 export interface ShoppingConnectPipelineConfig {
@@ -42,6 +44,22 @@ export interface PipelineConfig {
   shopping: ShoppingConnectPipelineConfig;
   disclosure: DisclosurePipelineConfig;
   safety: SafetyPipelineConfig;
+}
+
+export interface PipelineFormDataSnapshot extends Record<string, unknown> {
+  pipelineConfigSnapshot: PipelineConfig;
+  headingImageMode: string;
+  includeThumbnailText: boolean;
+  skipImages: boolean;
+  imageSource: string;
+  imageStyle: string;
+  imageRatio: string;
+  thumbnailImageRatio: string;
+  subheadingImageRatio: string;
+  imageFallbackPolicy: string;
+  scSubImageMode: ShoppingSubImageMode;
+  scAIImageEngine: string;
+  scAutoThumbnailSetting: boolean;
 }
 
 function pipelineReadString(key: string, fallback: string): string {
@@ -157,17 +175,19 @@ function normalizePositiveInt(value: string | null, fallback: number): number {
 
 export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   const raw = readRawPipelineSettings();
-  return {
+  const config: PipelineConfig = {
     flow,
     resolvedAt: Date.now(),
     image: {
       headingImageMode: pipelineReadString('headingImageMode', 'all'),
       thumbnailTextInclude: pipelineReadBool('thumbnailTextInclude'),
       textOnlyPublish: pipelineReadBool('textOnlyPublish'),
+      imageSource: raw.fullAutoImageSource || raw.globalImageSource || 'nano-banana-pro',
       imageStyle: pipelineReadString('imageStyle', 'realistic'),
       imageRatio: pipelineReadString('imageRatio', '1:1'),
       thumbnailImageRatio: pipelineReadString('thumbnailImageRatio', '1:1'),
       subheadingImageRatio: pipelineReadString('subheadingImageRatio', '1:1'),
+      fallbackPolicy: raw.imageFallbackPolicy || 'engine-only',
     },
     shopping: {
       subImageMode: normalizeShoppingSubImageMode(raw),
@@ -183,5 +203,67 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       adbIpChangeEnabled: raw.adbIpChangeEnabled === 'true',
       adbIpChangeEvery: normalizePositiveInt(raw.adbIpChangeEvery, 1),
     },
+  };
+
+  Object.freeze(config.image);
+  Object.freeze(config.shopping);
+  Object.freeze(config.disclosure);
+  Object.freeze(config.safety);
+  return Object.freeze(config);
+}
+
+function nonEmptyString(value: unknown, fallback: string): string {
+  const normalized = String(value ?? '').trim();
+  return normalized || fallback;
+}
+
+function isPipelineConfigForFlow(value: unknown, flow: PipelineFlow): value is PipelineConfig {
+  if (!value || typeof value !== 'object') return false;
+  const candidate = value as Partial<PipelineConfig>;
+  return candidate.flow === flow
+    && Boolean(candidate.image)
+    && Boolean(candidate.shopping)
+    && Boolean(candidate.disclosure)
+    && Boolean(candidate.safety);
+}
+
+/** Captures every mutable publish setting once for a single pipeline item. */
+export function createPipelineFormDataSnapshot<T extends Record<string, any>>(
+  flow: PipelineFlow,
+  input: T,
+): T & PipelineFormDataSnapshot {
+  const existing = input?.pipelineConfigSnapshot;
+  const config = isPipelineConfigForFlow(existing, flow)
+    ? existing
+    : resolvePipelineConfig(flow);
+  const headingImageMode = nonEmptyString(input?.headingImageMode, config.image.headingImageMode);
+  const imageSource = nonEmptyString(input?.imageSource, config.image.imageSource);
+  const explicitSubImageMode = input?.scSubImageMode;
+  const scSubImageMode: ShoppingSubImageMode = explicitSubImageMode === 'ai' || explicitSubImageMode === 'collected'
+    ? explicitSubImageMode
+    : config.shopping.subImageMode;
+
+  return {
+    ...input,
+    pipelineConfigSnapshot: config,
+    headingImageMode,
+    includeThumbnailText: typeof input?.includeThumbnailText === 'boolean'
+      ? input.includeThumbnailText
+      : config.image.thumbnailTextInclude,
+    skipImages: input?.skipImages === true
+      || config.image.textOnlyPublish
+      || headingImageMode === 'none'
+      || imageSource === 'skip',
+    imageSource,
+    imageStyle: nonEmptyString(input?.imageStyle, config.image.imageStyle),
+    imageRatio: nonEmptyString(input?.imageRatio, config.image.imageRatio),
+    thumbnailImageRatio: nonEmptyString(input?.thumbnailImageRatio, config.image.thumbnailImageRatio),
+    subheadingImageRatio: nonEmptyString(input?.subheadingImageRatio, config.image.subheadingImageRatio),
+    imageFallbackPolicy: nonEmptyString(input?.imageFallbackPolicy, config.image.fallbackPolicy),
+    scSubImageMode,
+    scAIImageEngine: nonEmptyString(input?.scAIImageEngine, config.shopping.aiImageEngine),
+    scAutoThumbnailSetting: typeof input?.scAutoThumbnailSetting === 'boolean'
+      ? input.scAutoThumbnailSetting
+      : config.shopping.autoThumbnail,
   };
 }

@@ -1577,10 +1577,13 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
       }, image.provider).catch(() => undefined);
     }
 
-    // ✅ 문서너비 맞추기 + 링크 삽입
+    // 문서너비 맞추기 + 대표 상품 이미지 1장에만 제휴 링크 삽입.
+    // 동일 링크를 모든 이미지에 반복하면 정보글보다 광고글처럼 보이고 정책 위험도 커진다.
     try {
-      if (linkUrl) {
+      const shouldAttachAffiliateLink = Boolean(linkUrl) && self.__affiliateProductImageLinkAttached !== true;
+      if (shouldAttachAffiliateLink) {
         await self.setImageSizeAndAttachLink(linkUrl);
+        self.__affiliateProductImageLinkAttached = true;
       } else {
         await setImageSizeToDocumentWidth(self);
       }

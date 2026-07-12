@@ -1,6 +1,7 @@
 import Parser from 'rss-parser';
 import * as iconv from 'iconv-lite';
 import type { ContentSource, ContentGeneratorProvider, ArticleType } from './contentGenerator.js';
+import type { ContentPolicyPayloadContext } from './contentPolicy/policyService.js';
 import { smartCrawler } from './crawler/smartCrawler.js';
 import { getProxyUrl, reportProxyFailed, reportProxySuccess } from './crawler/utils/proxyManager.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
@@ -1607,10 +1608,13 @@ export interface SourceAssemblyInput {
   naverClientSecret?: string;
   /** 리뷰형 글 여부 (구매전환 유도) */
   isReviewType?: boolean;
+  /** 사용자가 직접 입력한 실사용 메모. 구매자 리뷰와 구분한다. */
+  personalExperience?: string;
   /** 사용자 정의 프롬프트 (추가 지시사항) */
   customPrompt?: string;
   /** ✅ [2026-02-09 v2] 이전 생성 제목 (연속발행 중복 방지) */
   previousTitles?: string[];
+  contentPolicyContext?: ContentPolicyPayloadContext;
 }
 
 export interface AssembledSource {
@@ -5872,8 +5876,8 @@ async function fetchSingleSource(url: string, options?: { naverClientId?: string
             const priceNum = parsePrice(productInfo.price);
             const priceLine = priceNum !== null ? `가격: ${priceNum.toLocaleString()}원\n` : '';
             const salesLine = priceNum !== null
-              ? `현재 네이버 스마트스토어에서 ${priceNum.toLocaleString()}원에 판매 중이며,\n많은 고객들에게 사랑받고 있습니다.\n`
-              : '네이버 스마트스토어에서 판매 중인 상품입니다.\n';
+              ? `수집 시점 표시 가격: ${priceNum.toLocaleString()}원\n`
+              : '';
             const brand = storeName;
             const productDescription = productInfo.description || '';
 
@@ -5886,13 +5890,10 @@ ${priceLine}브랜드: ${brand}
 판매처: 네이버 스마트스토어
 
 === 제품 상세 정보 ===
-${productDescription || `${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.`}
+${productDescription}
 
-=== 제품 특징 ===
-${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
+=== 수집된 판매 정보 ===
 ${salesLine}
-이 제품의 주요 특징은 품질과 가격 대비 만족도가 높은 것으로 알려져 있습니다.
-실제 구매자들의 리뷰를 참고하면 더욱 현명한 구매 결정을 내릴 수 있습니다.
 `;
             images = productInfo.mainImage ? [productInfo.mainImage, ...(productInfo.galleryImages || [])] : [];
 
@@ -6192,8 +6193,8 @@ export async function assembleContentSource(input: SourceAssemblyInput): Promise
           const priceNum = parsePrice(productInfo.price);
           const priceLine = priceNum !== null ? `가격: ${priceNum.toLocaleString()}원\n` : '';
           const salesLine = priceNum !== null
-            ? `현재 네이버 스마트스토어에서 ${priceNum.toLocaleString()}원에 판매 중이며,\n많은 고객들에게 사랑받고 있습니다.\n`
-            : '네이버 스마트스토어에서 판매 중인 상품입니다.\n';
+            ? `수집 시점 표시 가격: ${priceNum.toLocaleString()}원\n`
+            : '';
           const brand = storeName;
           const category = 'shopping'; // crawlFromAffiliateLink는 카테고리 정보 없음
 
@@ -6224,13 +6225,10 @@ ${priceLine}브랜드: ${brand}
 판매처: 네이버 스마트스토어
 
 === 제품 상세 정보 ===
-${productDescription || `${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.`}
+${productDescription}
 ${reviewSection}
-=== 제품 특징 ===
-${productName}은(는) ${brand}에서 판매하는 인기 상품입니다.
+=== 수집된 판매 정보 ===
 ${salesLine}
-이 제품의 주요 특징은 품질과 가격 대비 만족도가 높은 것으로 알려져 있습니다.
-실제 구매자들의 리뷰를 참고하면 더욱 현명한 구매 결정을 내릴 수 있습니다.
 `,
             productPrice: priceNum !== null ? `${priceNum.toLocaleString()}원` : undefined,
             productSpec: productDescription.length >= 80 ? productDescription : undefined,
@@ -6252,6 +6250,7 @@ ${salesLine}
             targetTraffic: 'viral',
             targetAge: input.targetAge ?? 'all',
             isReviewType: true,
+            personalExperience: input.personalExperience,
             images: productInfo.mainImage ? [productInfo.mainImage, ...(productInfo.galleryImages || [])] : [],
             // ✅ [2026-02-01 FIX] collectedImages에도 저장하여 renderer에서 중복 크롤링 방지
             collectedImages: productInfo.mainImage ? [productInfo.mainImage, ...(productInfo.galleryImages || [])] : [],
@@ -6274,8 +6273,8 @@ ${salesLine}
               const retryPriceNum = parsePrice(retryInfo.price);
               const retryPriceLine = retryPriceNum !== null ? `가격: ${retryPriceNum.toLocaleString()}원\n` : '';
               const retrySalesLine = retryPriceNum !== null
-                ? `현재 네이버 스마트스토어에서 ${retryPriceNum.toLocaleString()}원에 판매 중이며,\n많은 고객들에게 사랑받고 있습니다.\n`
-                : '네이버 스마트스토어에서 판매 중인 상품입니다.\n';
+                ? `수집 시점 표시 가격: ${retryPriceNum.toLocaleString()}원\n`
+                : '';
               const retryDesc = retryInfo.description || '';
               console.log(`   🎯 재시도 성공: "${retryName}" (${retryPriceNum !== null ? retryPriceNum.toLocaleString() + '원' : '가격 미수집'})`);
               const retryReviews = Array.isArray(retryInfo.reviewTexts) ? retryInfo.reviewTexts : [];
@@ -6283,7 +6282,7 @@ ${salesLine}
                 sourceType: 'custom_text',
                 url: rssUrlInput,
                 title: retryName,
-                rawText: `\n상품명: ${retryName}\n${retryPriceLine}브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc || `${retryName}은(는) ${storeName}에서 판매하는 인기 상품입니다.`}\n${retryReviews.length > 0 ? `\n=== 실제 구매자 리뷰 (발췌) ===\n${retryReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n` : ''}\n=== 제품 특징 ===\n${retryName}은(는) ${storeName}에서 판매하는 인기 상품입니다.\n${retrySalesLine}`,
+                rawText: `\n상품명: ${retryName}\n${retryPriceLine}브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc}\n${retryReviews.length > 0 ? `\n=== 실제 구매자 리뷰 (발췌) ===\n${retryReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n` : ''}\n=== 수집된 판매 정보 ===\n${retrySalesLine}`,
                 productPrice: retryPriceNum !== null ? `${retryPriceNum.toLocaleString()}원` : undefined,
                 productSpec: retryDesc.length >= 80 ? retryDesc : undefined,
                 productReviews: retryReviews.length > 0 ? retryReviews : undefined,
@@ -6295,6 +6294,7 @@ ${salesLine}
                 targetTraffic: 'viral',
                 targetAge: input.targetAge ?? 'all',
                 isReviewType: true,
+                personalExperience: input.personalExperience,
                 images: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
                 collectedImages: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
               };
@@ -6315,22 +6315,28 @@ ${salesLine}
           const retryInfo = await retryCrawl(rssUrlInput);
           if (retryInfo && retryInfo.name && retryInfo.name !== '상품명을 불러올 수 없습니다') {
             const retryName = retryInfo.name;
-            const retryPrice = retryInfo.price || 0;
+            const retryPriceNum = parsePrice(retryInfo.price);
+            const retryPriceLine = retryPriceNum !== null ? `가격: ${retryPriceNum.toLocaleString()}원\n` : '';
             const retryDesc = retryInfo.description || '';
-            console.log(`   🎯 재시도 성공: "${retryName}" (${retryPrice.toLocaleString()}원)`);
+            const retryReviews = Array.isArray(retryInfo.reviewTexts) ? retryInfo.reviewTexts : [];
+            console.log(`   🎯 재시도 성공: "${retryName}" (${retryPriceNum !== null ? retryPriceNum.toLocaleString() + '원' : '가격 미수집'})`);
             const retrySource: ContentSource = {
               sourceType: 'custom_text',
               url: rssUrlInput,
               title: retryName,
-              rawText: `\n상품명: ${retryName}\n가격: ${retryPrice.toLocaleString()}원\n브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc || `${retryName}은(는) ${storeName}에서 판매하는 인기 상품입니다.`}\n`,
+              rawText: `\n상품명: ${retryName}\n${retryPriceLine}브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc}\n${retryReviews.length > 0 ? `\n=== 실제 구매자 리뷰 (발췌) ===\n${retryReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n` : ''}`,
+              productPrice: retryPriceNum !== null ? `${retryPriceNum.toLocaleString()}원` : undefined,
+              productSpec: retryDesc.length >= 80 ? retryDesc : undefined,
+              productReviews: retryReviews.length > 0 ? retryReviews : undefined,
               crawledTime: new Date().toISOString(),
               categoryHint: 'shopping_review',
-              metadata: { keywords: [retryName, storeName].filter(Boolean), productInfo: { name: retryName, price: retryPrice, brand: storeName, description: retryDesc } },
+              metadata: { keywords: [retryName, storeName].filter(Boolean), productInfo: { name: retryName, price: retryPriceNum, brand: storeName, description: retryDesc } },
               generator: input.generator ?? 'gemini',
               articleType: (input as any).articleType || 'shopping_review',
               targetTraffic: 'viral',
               targetAge: input.targetAge ?? 'all',
               isReviewType: true,
+              personalExperience: input.personalExperience,
               images: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
               collectedImages: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
             };
@@ -6989,6 +6995,7 @@ ${salesLine}
     targetTraffic: 'viral',
     targetAge: input.targetAge ?? 'all',
     isReviewType: input.isReviewType ?? false, // ✅ 리뷰형 여부 전달
+    personalExperience: input.personalExperience,
     customPrompt: input.customPrompt, // ✅ 사용자 정의 프롬프트 전달
     images: extractedImages.length > 0 ? extractedImages : undefined, // ✅ 수집된 이미지 목록 전달
     previousTitles: input.previousTitles, // ✅ [2026-02-09 v2] 이전 생성 제목 전달 (연속발행 중복 방지)

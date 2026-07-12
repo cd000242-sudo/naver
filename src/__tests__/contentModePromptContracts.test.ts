@@ -49,6 +49,10 @@ describe('콘텐츠 모드 프롬프트 계약', () => {
     expect(prompt).toContain('리뷰 데이터 부재');
     expect(prompt).toContain('체험 서술 전면 금지');
     expect(prompt).toContain('과대광고');
+    expect(prompt).toContain('구매자 리뷰는 작성자 본인의 경험이 아니다');
+    expect(prompt).toContain('친한 친구');
+    expect(prompt).not.toContain('이 제품을 구매해서 사용한 실제 소비자');
+    expect(prompt).not.toContain('2주 정도 사용해봤어요');
   });
 
   it('업체홍보는 광고법/의료광고법과 입력 연락처 보존을 강제한다', () => {

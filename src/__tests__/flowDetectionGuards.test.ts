@@ -30,5 +30,28 @@ describe('flow generation detection guards', () => {
     expect(code).toMatch(/getMediaUrlRedirect\\\?name=/);
     // network race must filter against the known-id baseline
     expect(code).toMatch(/knownIds/);
+    expect(code).not.toContain('id === null || !knownIds.includes(id)');
+    expect(code).toMatch(/zero_states/);
+    expect(code).toMatch(/landing_page/);
+  });
+
+  it('never attaches an uncorrelated late result and quarantines unresolved work', () => {
+    expect(code).not.toMatch(/waitForLateFlowResult/);
+    expect(code).not.toMatch(/FLOW_LATE_RESULT_GRACE_MS/);
+    expect(code).toMatch(/const page = await recreateFlowContext\(\)/);
+    expect(code).toMatch(/await resetFlowState\(\)/);
+    expect(code).toMatch(/const PIPELINE_ENABLED = false/);
+    expect(code).toMatch(/FLOW_QUOTA_EXCEEDED/);
+  });
+
+  it('isolates every sequential prompt before submit and has no concurrent opt-in bypass', () => {
+    const start = code.indexOf('export async function generateSingleImageWithFlow');
+    const end = code.indexOf('// v2.6.7 — 중복 가드 상수', start);
+    const single = code.slice(start, end);
+    expect(start).toBeGreaterThanOrEqual(0);
+    expect(single.indexOf('const page = await recreateFlowContext()')).toBeGreaterThanOrEqual(0);
+    expect(single.indexOf('const page = await recreateFlowContext()')).toBeLessThan(single.indexOf('await submitPromptOnly(page, prompt)'));
+    expect(code).not.toContain('FLOW_PIPELINE_ENABLED');
+    expect(code).toContain('const PIPELINE_ENABLED = false');
   });
 });

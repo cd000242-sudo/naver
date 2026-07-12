@@ -30,7 +30,7 @@ describe('연속발행 완료 오보 방지 가드', () => {
   });
 
   it('발행 직후 _lastPublishOutcome === "success"를 확인한 뒤에만 completed로 마킹한다', () => {
-    const publishIdx = continuous.indexOf('await withStopCheck(executeUnifiedAutomation(formData));');
+    const publishIdx = continuous.indexOf("await withStopCheck(executeUnifiedAutomation(formData), { kind: 'publish' });");
     const guardIdx = continuous.indexOf("_lastPublishOutcome !== 'success'");
     const completedIdx = continuous.indexOf("item.status = 'completed';");
 

@@ -16,6 +16,7 @@ import { promises as fs } from 'fs';
 import { getProxyUrl } from './crawler/utils/proxyManager.js';
 import { emitSessionEvent } from './session/sessionEventLogger.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
+import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
 
 // ✅ [2026-03-27 FIX] Stealth Plugin — 모든 evasion 모듈 명시적 활성화
 // 기본 설정에서 일부 모듈(chrome.csi 등)이 비활성화되어 있을 수 있으므로 명시적으로 설정
@@ -107,6 +108,9 @@ class BrowserSessionManager {
 
     // 발행 직전 서버 세션 실측은 외부 네트워크 경로라 무한 대기하면 전체 발행이 멈춘다.
     private readonly SERVER_SESSION_CHECK_TIMEOUT_MS = 8 * 1000;
+
+    // Browser shutdown is best-effort, but it must never block app cleanup indefinitely.
+    private readonly BROWSER_CLOSE_TIMEOUT_MS = 5 * 1000;
 
     // Reconnect defense constants
     private readonly RECONNECT_MAX_RETRIES = 3;
@@ -298,7 +302,10 @@ class BrowserSessionManager {
                 emitSessionEvent('proxy_change', accountId, existingSession.createdAt, { oldProxy, newProxy });
                 console.log(`[BrowserSessionManager] 🔄 기존 세션 폐기 후 새 Chrome으로 재시작합니다...`);
                 // ✅ [v1.4.79] Bug 9 — 프록시 변경은 Chrome 재기동 필수이므로 locked라도 force=true
-                await this.closeSession(accountId, true);
+                const proxySessionClosed = await this.closeSession(accountId, true);
+                if (!proxySessionClosed) {
+                    throw new Error('BROWSER_SESSION_CLEANUP_INCOMPLETE: 프록시 변경 전 기존 브라우저를 종료하지 못했습니다. 잠시 후 다시 시도해주세요.');
+                }
                 // fall through → 아래 새 세션 생성으로 진행
             } else {
                 // Stage 1: WebSocket gate — fast check
@@ -312,8 +319,10 @@ class BrowserSessionManager {
                     // ✅ [v1.4.78] 잠긴 세션은 수명 체크를 절대 건너뛰고 항상 재사용
                     if (!existingSession.locked && sessionAge > this.SESSION_MAX_AGE) {
                         console.log(`[BrowserSessionManager] ⏰ 세션 수명 초과 (${Math.floor(sessionAge / 60000)}분), 재생성...`);
-                        await this.closeSession(accountId, true);
-                        this.sessions.delete(accountId);
+                        const expiredSessionClosed = await this.closeSession(accountId, true);
+                        if (!expiredSessionClosed) {
+                            throw new Error('BROWSER_SESSION_CLEANUP_INCOMPLETE: 만료된 브라우저 세션을 종료하지 못했습니다. 잠시 후 다시 시도해주세요.');
+                        }
                     } else {
                         console.log(`[BrowserSessionManager] ✅ 기존 세션 재사용: ${accountId.substring(0, 3)}*** (수명: ${Math.floor(sessionAge / 60000)}분)`);
                         existingSession.lastActivity = Date.now();
@@ -344,8 +353,12 @@ class BrowserSessionManager {
                     } else {
                         console.log(`[BrowserSessionManager] ⚠️ 재연결 실패, 세션 재생성...`);
                     }
-                    // All retries exhausted — drop and recreate
-                    this.sessions.delete(accountId);
+                    // All retries exhausted — close must succeed before ownership
+                    // can be dropped or a second browser may contend for profile.
+                    const disconnectedSessionClosed = await this.closeSession(accountId, true);
+                    if (!disconnectedSessionClosed) {
+                        throw new Error('BROWSER_SESSION_CLEANUP_INCOMPLETE: 연결이 끊긴 브라우저 세션을 정리하지 못했습니다. 잠시 후 다시 시도해주세요.');
+                    }
                 }
             }
         }
@@ -923,30 +936,36 @@ class BrowserSessionManager {
      * 특정 계정 세션 종료
      * ✅ [v1.4.79] Bug D1 — force=false(기본)면 잠긴 세션 보호. 앱 종료/재로그인은 force=true 사용
      */
-    async closeSession(accountId: string, force: boolean = false): Promise<void> {
+    async closeSession(accountId: string, force: boolean = false): Promise<boolean> {
         const session = this.sessions.get(accountId);
-        if (!session) return;
+        if (!session) return true;
         if (session.locked && !force) {
             console.log(`[BrowserSessionManager] 🔒 ${accountId.substring(0, 3)}*** 잠긴 세션 — closeSession 보호 (force=true 필요)`);
-            return;
+            return false;
         }
-        // [v2.10.156] zombieRecovery 추적 해제 — 정상 close는 lock 제거
-        try {
-            const zombieRecovery = require('./runtime/zombieRecovery.js');
-            const browserPid = session.browser.process()?.pid;
-            if (browserPid) zombieRecovery.untrackBrowserPid(browserPid);
-        } catch { /* ignore */ }
 
         try {
-            await session.browser.close();
+            await withCleanupTimeout(
+                () => session.browser.close(),
+                this.BROWSER_CLOSE_TIMEOUT_MS,
+                `browser.close:${accountId.substring(0, 3)}***`,
+            );
+            // Ownership is released only after close definitively succeeds.
+            try {
+                const zombieRecovery = require('./runtime/zombieRecovery.js');
+                const browserPid = session.browser.process()?.pid;
+                if (browserPid) zombieRecovery.untrackBrowserPid(browserPid);
+            } catch { /* ignore */ }
+            this.sessions.delete(accountId);
+            if (this.activeAccountId === accountId) {
+                this.activeAccountId = null;
+            }
             console.log(`[BrowserSessionManager] 🔚 세션 종료: ${accountId.substring(0, 3)}***`);
             emitSessionEvent('close', accountId, session.createdAt);
+            return true;
         } catch (e) {
             console.log(`[BrowserSessionManager] ⚠️ 세션 종료 중 오류: ${(e as Error).message}`);
-        }
-        this.sessions.delete(accountId);
-        if (this.activeAccountId === accountId) {
-            this.activeAccountId = null;
+            return false;
         }
     }
 
@@ -1175,21 +1194,20 @@ class BrowserSessionManager {
             console.warn('[BrowserSessionManager] ⚠️ ping 완료 대기 타임아웃(10초) — 강제 진행');
         }
 
-        const closePromises: Promise<void>[] = [];
-        for (const [accountId, session] of this.sessions) {
-            closePromises.push(
-                session.browser.close()
-                    .then(() => console.log(`[BrowserSessionManager] ✅ ${accountId.substring(0, 3)}*** 세션 종료됨`))
-                    .catch((e) => console.log(`[BrowserSessionManager] ⚠️ ${accountId.substring(0, 3)}*** 세션 종료 실패: ${(e as Error).message}`))
-            );
+        const accountIds = [...this.sessions.keys()];
+        const results = await Promise.all(
+            accountIds.map((accountId) => this.closeSession(accountId, true)),
+        );
+        const failedCount = results.filter((closed) => !closed).length;
+
+        if (failedCount === 0) {
+            this.activeAccountId = null;
+            console.log('[BrowserSessionManager] ✅ 모든 세션 종료 완료');
+            emitSessionEvent('close_all', 'all', 0);
+        } else {
+            console.warn(`[BrowserSessionManager] ⚠️ ${failedCount}개 세션 정리 미완료 — 소유권을 유지하고 다음 종료 단계에서 재시도합니다.`);
+            throw new Error(`Browser session cleanup incomplete: ${failedCount} session(s) remain owned`);
         }
-
-        await Promise.all(closePromises);
-        this.sessions.clear();
-        this.activeAccountId = null;
-
-        console.log(`[BrowserSessionManager] ✅ 모든 세션 종료 완료`);
-        emitSessionEvent('close_all', 'all', 0);
     }
 
     /**

@@ -5,6 +5,7 @@ import type {
   StructuredContent,
   TrafficStrategy,
 } from './contentGenerator.js';
+import { classifyAffiliateEvidence } from './content/affiliateAuthenticity.js';
 
 export function resolveCategoryLabel(articleType: ArticleType): string {
   switch (articleType) {
@@ -204,11 +205,14 @@ export function generateCTA(
 }
 
 export function generateSelfComments(source: ContentSource, content: StructuredContent): string[] {
-  const first =
-    source.personalExperience ??
-    '안녕하세요, 작성자예요! 직접 써보고 느낀 부분 위주로 정리해봤습니다. 궁금한 점 있으면 편하게 질문 주세요.';
-  const second = `이 정보가 도움이 되셨기를 바랍니다.`;
-  const third = `추가로 궁금한 점이 있으시면 댓글로 남겨주세요.`;
+  const evidence = classifyAffiliateEvidence(source);
+  const first = evidence.mode === 'first_party'
+    ? evidence.personalExperience
+    : evidence.mode === 'review_synthesis'
+      ? '제품 정보와 구매자 후기를 겹쳐 보면서 판단이 갈릴 부분까지 정리했어요.'
+      : '확인된 제품 정보만 기준으로, 구매 전에 볼 조건을 정리했어요.';
+  const second = '가격이나 옵션은 바뀔 수 있으니 결제 전 상품 페이지를 다시 확인해주세요.';
+  const third = '제가 놓친 조건이나 더 궁금한 부분이 있다면 댓글로 남겨주세요.';
   return [first, second, third];
 }
 

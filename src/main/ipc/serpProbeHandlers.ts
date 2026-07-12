@@ -24,6 +24,8 @@ import {
 } from '../../analytics/publishedPostTracker.js';
 import { checkPostExposure, checkBatchExposure } from '../../analytics/exposureChecker.js';
 import { computeCalibration, type CalibrationResult } from '../../analytics/calibration.js';
+import { runExposureCrossChecks } from '../../contentPolicy/exposureCrossChecker.js';
+import { processExposureMonitoring } from '../../contentPolicy/exposureMonitoringService.js';
 
 export interface ProbeRequest {
   keyword: string;
@@ -238,17 +240,38 @@ export function registerSerpProbeHandlers(): void {
       const results = await checkBatchExposure(targets, { delayMs: req.delayMs ?? 1500 });
       let updated = 0;
       for (const r of results) {
-        if (r.result.fetchSuccess) {
-          recordExposureCheck(userDataPath, r.id, {
-            checkedAt: r.result.checkedAt,
-            hoursAfter: r.hoursAfter,
-            searchedKeyword: r.result.searchedKeyword,
-            position: r.result.position,
-            hasSmartblock: r.result.hasSmartblock,
-            notes: r.result.notes,
-          });
-          updated++;
-        }
+        const trackedPost = needCheck.find((post) => post.id === r.id);
+        if (!trackedPost) throw new Error('EXPOSURE_TRACKED_POST_NOT_FOUND');
+        const recorded = recordExposureCheck(userDataPath, r.id, {
+          checkedAt: r.result.checkedAt,
+          hoursAfter: r.hoursAfter,
+          searchedKeyword: r.result.searchedKeyword,
+          position: r.result.position,
+          hasSmartblock: r.result.hasSmartblock,
+          notes: r.result.notes,
+        });
+        if (!recorded) throw new Error('LEGACY_EXPOSURE_RECORD_FAILED');
+        const checks = await runExposureCrossChecks({
+          articleId: trackedPost.id,
+          title: trackedPost.title,
+          keyword: trackedPost.keyword,
+          blogId: trackedPost.blogId,
+          logNo: trackedPost.logNo,
+          url: trackedPost.url,
+        }, { integratedResult: r.result });
+        await processExposureMonitoring({
+          userDataPath,
+          target: {
+            trackerId: trackedPost.id,
+            title: trackedPost.title,
+            keyword: trackedPost.keyword,
+            blogId: trackedPost.blogId,
+            logNo: trackedPost.logNo,
+            url: trackedPost.url,
+          },
+          checks,
+        });
+        updated++;
       }
       return { ok: true, checked: needCheck.length, updated };
     } catch (err) {

@@ -26,6 +26,7 @@ import { evaluateAffiliate } from './evaluators/affiliateEval';
 import { evaluateHumanlike } from './evaluators/humanlikeEval';
 import { evaluateSafety } from './evaluators/safetyEval';
 import { evaluateOfficialExposure } from './officialExposureRubric';
+import type { AffiliateEvidenceMode } from './affiliateAuthenticity';
 
 export type Mode = 'seo' | 'homefeed' | 'affiliate' | 'business' | 'custom' | 'mate';
 export type Decision = 'pass' | 'patch' | 'regenerate';
@@ -65,6 +66,8 @@ export interface EvaluationInput {
   readonly contentMode?: string;
   readonly toneStyle?: string;
   readonly categoryHint?: string;
+  /** 쇼핑 글의 작성자 경험 근거. 구매자 리뷰는 first_party가 아니다. */
+  readonly affiliateEvidenceMode?: AffiliateEvidenceMode;
 }
 
 const WEIGHTS: Readonly<Record<Mode, Weights>> = {

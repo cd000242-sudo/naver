@@ -844,7 +844,7 @@
                                 <strong>🏅 네이버 메이트 모드:</strong> AI 브리핑 인용과 주제 전문성 신호를 목표로 하는 답변형 콘텐츠를 생성합니다. 한 주제 집중, 근거 중심, 정책 위험 최소화 구조를 적용합니다.
                             </div>
                             <div id="content-mode-description-affiliate" style="display: none;">
-                                <strong>🛏️ 쇼핑 커넥트 모드:</strong> 네이버 쇼핑 커넥트 활동을 위한 구매 전환 글을 생성합니다. 모든 이미지에 제휴 링크가 삽입됩니다.
+                                <strong>🛏️ 쇼핑 커넥트 모드:</strong> 네이버 쇼핑 커넥트 활동을 위한 구매 판단 글을 생성합니다. 대표 이미지와 글 하단에 제휴 링크가 배치됩니다.
                             </div>
                             <div id="content-mode-description-custom" style="display: none;">
                                 <strong>✏️ 사용자정의 모드:</strong> 아래에 직접 프롬프트를 입력하여 원하는 형태의 글을 생성합니다.
@@ -962,11 +962,24 @@
                                 </label>
                                 <select id="shopping-connect-review-format"
                                     style="width: 100%; padding: 0.75rem; background: var(--bg-primary); border: 2px solid rgba(245, 158, 11, 0.4); border-radius: var(--radius-md); color: var(--text-strong); font-size: 0.9rem; font-weight: 600; cursor: pointer;">
-                                    <option value="shopping_review">📦 사용후기 — 직접 써본 체험 후기</option>
-                                    <option value="shopping_expert_review">🔍 전문 리뷰 — 전문가 관점 분석</option>
+                                    <option value="shopping_review">📦 사용자 관점 — 내 경험 또는 구매자 후기 종합</option>
+                                    <option value="shopping_expert_review">🔍 꼼꼼 분석 — 스펙과 구매 조건 중심</option>
                                 </select>
                                 <p style="margin-top: 0.4rem; font-size: 0.7rem; color: var(--text-muted);">
-                                    💡 사용후기: 체험 중심 | 전문 리뷰: 스펙 분석 + 비교 + 가성비 설득
+                                    실제 사용 메모가 없으면 구매자 후기 종합형 또는 스펙 구매 가이드로 작성됩니다.
+                                </p>
+                            </div>
+
+                            <div style="margin-bottom: 1rem;">
+                                <label for="shopping-connect-personal-experience"
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-strong); font-size: 0.85rem;">
+                                    직접 사용한 내용 <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 500;">선택</span>
+                                </label>
+                                <textarea id="shopping-connect-personal-experience" maxlength="4000"
+                                    placeholder="예: 거실에서 10일 사용. 1단은 잘 때도 괜찮았지만 3단은 소리가 컸음. 손잡이가 좁아 오래 들면 불편했음."
+                                    style="width: 100%; min-height: 96px; padding: 0.75rem; background: var(--bg-primary); border: 2px solid rgba(245, 158, 11, 0.4); border-radius: var(--radius-md); color: var(--text-strong); font-size: 0.86rem; line-height: 1.55; resize: vertical;"></textarea>
+                                <p style="margin-top: 0.4rem; font-size: 0.72rem; color: var(--text-muted);">
+                                    직접 겪은 기간·상황·좋았던 점·불편한 점만 입력하세요. 빈칸이면 작성자 체험 표현을 사용하지 않습니다.
                                 </p>
                             </div>
 
@@ -983,7 +996,7 @@
                                     placeholder="https://link.coupang.com/... 또는 11번가 제휴 링크 (스마트스토어 X)"
                                     style="width: 100%; padding: 0.75rem; background: var(--bg-primary); border: 2px solid rgba(245, 158, 11, 0.4); border-radius: var(--radius-md); color: var(--text-strong); font-size: 0.9rem;">
                                 <p style="margin-top: 0.4rem; font-size: 0.75rem; color: var(--text-muted);">
-                                    모든 이미지에 이 링크가 자동으로 삽입됩니다.
+                                    대표 상품 이미지 1장과 글 하단 확인 영역에 연결됩니다.
                                 </p>
                             </div>
 
@@ -1971,6 +1984,10 @@
                         style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
                         📈 성과 추적
                     </button>
+                    <button type="button" class="analytics-subtab" data-subtab="content-policy"
+                        style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
+                        🛡 콘텐츠 정책
+                    </button>
                 </div>
 
                 <!-- ✅ [v2.10.191 Phase 3.8.3] SERP 추이 서브패널 -->
@@ -2219,6 +2236,70 @@
                         <h4 style="margin: 0 0 1rem 0; color: var(--text-strong);">📈 추적 중인 글</h4>
                         <div id="tracking-posts-list" style="color: var(--text-muted); font-style: italic;">추적 중인 글이
                             없습니다.</div>
+                    </div>
+                </div>
+
+                <div id="subtab-content-policy" class="analytics-subpanel" style="display: none;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:0.75rem; flex-wrap:wrap; margin-bottom:1rem;">
+                        <div style="display:flex; align-items:center; gap:0.75rem; min-width:0;">
+                            <h3 style="margin:0; color:var(--text-strong);">콘텐츠 정책</h3>
+                            <span id="content-policy-state-badge" style="min-width:74px; text-align:center; padding:0.35rem 0.65rem; border-radius:6px; border:1px solid var(--border-medium); font-size:0.8rem; font-weight:800;">확인 중</span>
+                        </div>
+                        <div style="display:flex; gap:0.5rem;">
+                            <button type="button" id="content-policy-refresh-btn" title="새로고침"
+                                style="width:40px; height:40px; border:1px solid var(--border-medium); border-radius:6px; background:var(--bg-tertiary); color:var(--text-strong); cursor:pointer; font-size:1rem;">↻</button>
+                            <button type="button" id="content-policy-pause-btn"
+                                style="height:40px; padding:0 1rem; border:1px solid rgba(239,68,68,.55); border-radius:6px; background:rgba(239,68,68,.12); color:#ef4444; font-weight:700; cursor:pointer;">자동발행 중단</button>
+                        </div>
+                    </div>
+
+                    <div id="content-policy-summary" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:0.65rem; margin-bottom:1rem;"></div>
+
+                    <div id="content-policy-pause-reason" style="display:none; margin-bottom:1rem; padding:0.8rem 1rem; border-left:4px solid #ef4444; background:rgba(239,68,68,.08); color:var(--text-strong);"></div>
+
+                    <div id="content-policy-resume-panel" style="display:none; border-top:1px solid var(--border-light); border-bottom:1px solid var(--border-light); padding:1rem 0; margin-bottom:1rem;">
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:0.65rem; align-items:end; margin-bottom:1rem;">
+                            <label style="display:grid; gap:0.35rem; color:var(--text-muted); font-size:0.78rem;">수동 테스트 글 URL
+                                <input id="content-policy-test-url" type="url" placeholder="https://blog.naver.com/..."
+                                    style="min-width:0; height:40px; padding:0 0.7rem; border:1px solid var(--border-medium); border-radius:6px; background:var(--bg-primary); color:var(--text-strong);">
+                            </label>
+                            <label style="display:grid; gap:0.35rem; color:var(--text-muted); font-size:0.78rem;">정확한 제목
+                                <input id="content-policy-test-title" type="text" maxlength="200"
+                                    style="min-width:0; height:40px; padding:0 0.7rem; border:1px solid var(--border-medium); border-radius:6px; background:var(--bg-primary); color:var(--text-strong);">
+                            </label>
+                            <label style="display:grid; gap:0.35rem; color:var(--text-muted); font-size:0.78rem;">검색 키워드
+                                <input id="content-policy-test-keyword" type="text" maxlength="200"
+                                    style="min-width:0; height:40px; padding:0 0.7rem; border:1px solid var(--border-medium); border-radius:6px; background:var(--bg-primary); color:var(--text-strong);">
+                            </label>
+                            <button type="button" id="content-policy-verify-test-btn"
+                                style="height:40px; padding:0 1rem; border:1px solid #3b82f6; border-radius:6px; background:rgba(59,130,246,.12); color:#60a5fa; font-weight:800; cursor:pointer;">노출 검증</button>
+                        </div>
+                        <div id="content-policy-test-status" style="min-height:20px; margin-bottom:0.8rem; color:var(--text-muted); font-size:0.82rem;"></div>
+                        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:0.75rem; align-items:center;">
+                            <input id="content-policy-approver" type="text" maxlength="80" placeholder="승인자 이름"
+                                style="min-width:0; height:40px; padding:0 0.75rem; border:1px solid var(--border-medium); border-radius:6px; background:var(--bg-primary); color:var(--text-strong);">
+                            <label style="display:flex; align-items:center; gap:0.4rem; color:var(--text-strong); white-space:nowrap;"><input id="content-policy-root-cause" type="checkbox"> 원인 검토</label>
+                            <label style="display:flex; align-items:center; gap:0.4rem; color:var(--text-strong); white-space:nowrap;"><input id="content-policy-manual-test" type="checkbox"> 수동 테스트 확인</label>
+                            <button type="button" id="content-policy-resume-btn"
+                                style="height:40px; padding:0 1rem; border:0; border-radius:6px; background:#10b981; color:white; font-weight:800; cursor:pointer;">자동발행 재개</button>
+                        </div>
+                    </div>
+
+                    <div style="overflow:auto; border:1px solid var(--border-light); border-radius:6px;">
+                        <table style="width:100%; min-width:760px; border-collapse:collapse; color:var(--text-strong); font-size:0.82rem;">
+                            <thead style="background:var(--bg-tertiary);">
+                                <tr>
+                                    <th style="padding:0.65rem; text-align:left;">시간</th>
+                                    <th style="padding:0.65rem; text-align:left;">글</th>
+                                    <th style="padding:0.65rem; text-align:left;">판정</th>
+                                    <th style="padding:0.65rem; text-align:left;">품질</th>
+                                    <th style="padding:0.65rem; text-align:left;">유사도</th>
+                                    <th style="padding:0.65rem; text-align:left;">노출</th>
+                                    <th style="padding:0.65rem; text-align:left;">차단 사유</th>
+                                </tr>
+                            </thead>
+                            <tbody id="content-policy-audit-rows"></tbody>
+                        </table>
                     </div>
                 </div>
             </section>
@@ -7083,7 +7164,7 @@
                                         placeholder="https://link.coupang.com/... 또는 11번가 제휴 링크 (스마트스토어 X)"
                                         style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid rgba(245, 158, 11, 0.4); background: var(--bg-primary); color: var(--text-strong); font-size: 0.85rem;">
                                     <p style="margin-top: 0.25rem; font-size: 0.65rem; color: var(--text-muted);">
-                                        모든 이미지에 이 링크가 자동으로 삽입됩니다.
+                                        대표 상품 이미지 1장과 글 하단 확인 영역에 연결됩니다.
                                     </p>
                                 </div>
                                 <!-- [v2.11.x] AI 영상(VEO) 변환 옵션 제거 — AI 영상 기능 폐지 -->
@@ -9648,7 +9729,7 @@
                                 placeholder="https://link.coupang.com/... 또는 11번가 제휴 링크"
                                 style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid rgba(245, 158, 11, 0.4); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem;">
                             <p style="margin: 0.25rem 0 0 0; font-size: 0.65rem; color: var(--text-muted);">
-                                모든 이미지에 이 링크가 자동으로 삽입됩니다.
+                                대표 상품 이미지 1장과 글 하단 확인 영역에 연결됩니다.
                             </p>
                         </div>
 
@@ -9820,7 +9901,7 @@
                                 placeholder="https://link.coupang.com/... 또는 11번가 제휴 링크 (스마트스토어 X)"
                                 style="width: 100%; padding: 0.6rem; border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.4); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.85rem;">
                             <p style="margin: 0.3rem 0 0 0; font-size: 0.7rem; color: var(--text-muted);">
-                                모든 이미지에 이 링크가 자동으로 삽입됩니다.
+                                대표 상품 이미지 1장과 글 하단 확인 영역에 연결됩니다.
                             </p>
                         </div>
 
@@ -11980,7 +12061,7 @@
                         <h3 style="color: #f59e0b; margin: 0 0 1rem 0; font-size: 1.1rem;">🛒 쇼핑 커넥트 모드란?</h3>
                         <p style="color: var(--text-strong); margin: 0 0 1rem 0; line-height: 1.7;">
                             <strong>네이버 쇼핑 커넥트 활동</strong>을 위한 구매 전환 글을 생성합니다.<br>
-                            모든 이미지에 제휴 링크가 자동 삽입되며, 인용구 4 스타일이 적용됩니다.
+                            대표 이미지와 글 하단 상품 확인 영역을 사용하며, 과도한 반복 링크는 넣지 않습니다.
                         </p>
                         <div
                             style="background: rgba(239, 68, 68, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 0.75rem; border: 1px solid rgba(239, 68, 68, 0.3);">
@@ -12012,7 +12093,7 @@
                             <div style="font-weight: 700; color: var(--text-gold); margin-bottom: 0.5rem;">✨ 특징
                             </div>
                             <ul style="margin: 0; padding-left: 1.25rem; color: var(--text-muted); line-height: 1.8;">
-                                <li>모든 이미지에 제휴 링크 자동 삽입</li>
+                                <li>대표 상품 이미지 1장과 글 하단에 제휴 링크 배치</li>
                                 <li>인용구 4 스타일 (밑줄 강조) 적용</li>
                                 <li>고정 문구: "이 포스팅은 네이버 쇼핑 커넥트 활동의 일환..."</li>
                                 <li>후킹 이미지 영상 변환 옵션 (VEO)</li>

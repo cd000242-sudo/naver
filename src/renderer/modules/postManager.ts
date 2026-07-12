@@ -3,7 +3,7 @@
 // renderer.ts에서 추출된 글 저장/로드/삭제/복사/미리보기/내보내기/가져오기 기능
 // ═══════════════════════════════════════════════════════════════════
 
-import type { GeneratedPost } from '../types/index.js';
+import type { GeneratedPost, GeneratedPostStructuredContent } from '../types/index.js';
 import { GENERATED_POSTS_KEY, getCurrentNaverId } from '../utils/postStorageUtils.js';
 import { safeLocalStorageSetItem } from '../utils/storageUtils.js';
 import { normalizeCategory } from '../utils/categoryNormalizeUtils.js';
@@ -13,6 +13,7 @@ import { formatContentForPreview } from '../utils/textFormatUtils.js';
 import { getRequiredImageBasePath } from '../utils/imageHelpers.js';
 import { refreshGeneratedPostsList, loadGeneratedPostToFields } from './postListUI.js';
 import { normalizeImageForStorage } from '../utils/imageStorageNormalize.js';
+import { normalizeHashtags } from '../utils/hashtagUtils.js';
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
 declare let currentPostId: string | null;
@@ -258,6 +259,46 @@ let _postsCacheLoadedAt = 0;
 const POSTS_CACHE_TTL_MS = 100;
 export function _invalidatePostsCache(): void { _postsCache = null; }
 
+function normalizeGeneratedPostForLoad(post: GeneratedPost): GeneratedPost {
+  const postId = typeof post.id === 'string' ? post.id.trim() : '';
+  const storedStructuredContent: Record<string, any> = post.structuredContent
+    && typeof post.structuredContent === 'object'
+    && !Array.isArray(post.structuredContent)
+    ? post.structuredContent
+    : {};
+  const postHashtags = normalizeHashtags(post.hashtags);
+  const structuredHashtags = normalizeHashtags(storedStructuredContent.hashtags);
+  const hashtags = postHashtags.length > 0 ? postHashtags : structuredHashtags;
+  const structuredContent: GeneratedPostStructuredContent = {
+    ...storedStructuredContent,
+    _postId: postId,
+    hashtags: [...hashtags],
+  };
+
+  return {
+    ...post,
+    id: postId,
+    hashtags: [...hashtags],
+    structuredContent,
+  };
+}
+
+function parseGeneratedPosts(data: string | null): GeneratedPost[] {
+  if (!data) return [];
+
+  const parsed: unknown = JSON.parse(data);
+  if (!Array.isArray(parsed)) return [];
+
+  return parsed
+    .filter((post): post is GeneratedPost => (
+      Boolean(post)
+      && typeof post === 'object'
+      && typeof post.id === 'string'
+      && post.id.trim().length > 0
+    ))
+    .map(normalizeGeneratedPostForLoad);
+}
+
 // ✅ [2026-01-24 FIX] 계정별 분리 제거 - 전역 저장소에서 모든 글 로드
 export function loadGeneratedPosts(naverId?: string): GeneratedPost[] {
   const now = Date.now();
@@ -269,7 +310,7 @@ export function loadGeneratedPosts(naverId?: string): GeneratedPost[] {
 
   try {
     const data = localStorage.getItem(GENERATED_POSTS_KEY);
-    const posts: GeneratedPost[] = data ? JSON.parse(data) : [];
+    const posts = parseGeneratedPosts(data);
     _postsCache = posts;
     _postsCacheLoadedAt = now;
     return posts;
@@ -295,7 +336,7 @@ export function loadGeneratedPost(postId: string): GeneratedPost | null {
   try {
     const globalData = localStorage.getItem(GENERATED_POSTS_KEY);
     if (globalData) {
-      const allPosts: GeneratedPost[] = JSON.parse(globalData);
+      const allPosts = parseGeneratedPosts(globalData);
       return allPosts.find(p => p.id === postId) || null;
     }
   } catch { /* ignore */ }
@@ -328,6 +369,7 @@ export function saveGeneratedPostFromData(
     const resolvedCategory = normalizeGeneratedPostCategoryKey(rawCategory);
 
     const normalizedImages = (images || []).map(normalizeImageForStorage);
+    const normalizedHashtags = normalizeHashtags(structuredContent?.hashtags);
 
     // ✅ [2026-03-29 FIX] localStorage 할당량 초과 방지: structuredContent 경량화
     // ✅ [v2.10.286 BUG-FIX] 미리보기에서 본문이 안 보이는 회귀 — heading.content를 lightHeadings에서 누락했기 때문.
@@ -338,9 +380,10 @@ export function saveGeneratedPostFromData(
       title: h.title || '',
       content: h.content || h.summary || '',
     }));
-    const lightStructuredContent = {
+    const lightStructuredContent: GeneratedPostStructuredContent = {
+      _postId: postId,
       selectedTitle: structuredContent?.selectedTitle || '',
-      hashtags: structuredContent?.hashtags || [],
+      hashtags: normalizedHashtags,
       articleType: structuredContent?.articleType || '',
       category: structuredContent?.category || '',
       toneStyle: structuredContent?.toneStyle || '',
@@ -386,7 +429,7 @@ export function saveGeneratedPostFromData(
       id: postId,
       title: structuredContent?.selectedTitle || '',
       content: fullBody, // 전체 본문 (잘림 없음)
-      hashtags: structuredContent?.hashtags || [],
+      hashtags: normalizedHashtags,
       headings: lightHeadings,
       structuredContent: lightStructuredContent,
       createdAt: now,
@@ -405,18 +448,18 @@ export function saveGeneratedPostFromData(
       quality: lightQuality,
     };
 
-    posts.unshift(post);
-    if (posts.length > 100) posts.pop();
+    const postsToSave = [post, ...posts].slice(0, 100);
 
     // ✅ [2026-01-24 FIX] 전역 저장소에 저장
     const storageKey = GENERATED_POSTS_KEY;
     console.log(`[SavePost] 저장소: ${storageKey}, naverId: ${post.naverId || '(미지정)'}`);
-    const saveSuccess = safeLocalStorageSetItem(storageKey, JSON.stringify(posts));
+    const saveSuccess = safeLocalStorageSetItem(storageKey, JSON.stringify(postsToSave));
 
     if (!saveSuccess) {
       console.error('[SavePost] ❌ localStorage 저장 실패!');
       return null;
     }
+    _invalidatePostsCache();
 
     // ✅ [Bug Fix] 저장 검증
     try {
@@ -451,6 +494,18 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
   try {
     const posts = loadGeneratedPosts();
     const title = structuredContent.selectedTitle || '';
+    const hasStructuredPostId = Object.prototype.hasOwnProperty.call(structuredContent, '_postId');
+    const structuredPostId = typeof structuredContent._postId === 'string'
+      ? structuredContent._postId.trim()
+      : '';
+    const identifiedPost = structuredPostId
+      ? posts.find((post) => post.id === structuredPostId)
+      : undefined;
+    const normalizedHashtags = normalizeHashtags(structuredContent.hashtags);
+
+    if (hasStructuredPostId) {
+      currentPostId = identifiedPost?.id || null;
+    }
 
     // [2026-05-27 작업 19] 같은 글 흐름 강제 update — currentPostId가 살아 있고 그 ID로 posts에 존재하면
     //   isUpdate=true로 변환. 5초 가드는 단계 사이 빈 시간이 길면 무력 (이미지 생성+발행 흐름은 분 단위)
@@ -550,9 +605,10 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
     const lightHeadings2 = (structuredContent.headings || []).map((h: any) => ({
       title: h.title || '',
     }));
-    const lightStructuredContent2 = {
+    const lightStructuredContent2: GeneratedPostStructuredContent = {
+      _postId: postId,
       selectedTitle: structuredContent.selectedTitle || '',
-      hashtags: structuredContent.hashtags || [],
+      hashtags: normalizedHashtags,
       articleType: structuredContent.articleType || '',
       category: structuredContent.category || '',
       toneStyle: structuredContent.toneStyle || '',
@@ -591,7 +647,7 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
       id: postId,
       title: structuredContent.selectedTitle || '',
       content: fullBody2, // 전체 본문 (잘림 없음)
-      hashtags: structuredContent.hashtags || [],
+      hashtags: normalizedHashtags,
       headings: lightHeadings2,
       structuredContent: lightStructuredContent2,
       quality: lightQuality2,
@@ -743,13 +799,13 @@ export function copyGeneratedPost(postId: string): void {
     const posts = loadGeneratedPosts();
     const newPostId = `post_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-    const copiedPost: GeneratedPost = {
+    const copiedPost = normalizeGeneratedPostForLoad({
       ...post,
       id: newPostId,
       createdAt: new Date().toISOString(),
       title: `${post.title} (복사본)`,
       naverId: naverId || post.naverId // 현재 계정으로 설정
-    };
+    });
 
     posts.unshift(copiedPost);
     if (posts.length > 100) posts.pop();
@@ -1150,11 +1206,14 @@ function showImportPostsSelectionModal(importedPosts: GeneratedPost[]): void {
 export async function importSelectedPosts(selectedPosts: GeneratedPost[]): Promise<void> {
   try {
     const existingPosts = loadGeneratedPosts();
-    const newPosts = selectedPosts.map(post => ({
-      ...post,
-      id: `post_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`, // 새 ID 생성
-      createdAt: new Date().toISOString() // 새 생성일
-    }));
+    const newPosts = selectedPosts.map((post) => {
+      const newPostId = `post_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      return normalizeGeneratedPostForLoad({
+        ...post,
+        id: newPostId,
+        createdAt: new Date().toISOString(),
+      });
+    });
 
     const merged = [...newPosts, ...existingPosts];
     const unique = merged.filter((post, index, self) =>

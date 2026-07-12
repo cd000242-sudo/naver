@@ -12,9 +12,13 @@ export interface PrePublishExpectations {
   expectedImageMin: number;
   expectedLinkCardMin: number;
   expectedDividerMin: number;
+  /** Minimum number of real table components expected in SmartEditor. */
+  expectedTableMin?: number;
   forbiddenMarkers?: string[];
   /** Hashtags the tail stage typed — each must appear in the editor body. */
   expectedHashtags?: string[];
+  /** Section/body anchors that must appear in this exact order. */
+  expectedOrderedAnchors?: string[];
 }
 
 export interface PrePublishStats {
@@ -22,6 +26,8 @@ export interface PrePublishStats {
   imageCount: number;
   linkCardCount: number;
   dividerCount: number;
+  /** Visible, deduplicated table components in the editor document. */
+  tableCount?: number;
   leakedMarkers: string[];
   /** Raw editor text — used for hashtag presence (optional for old callers). */
   bodyText?: string;
@@ -145,6 +151,86 @@ export function countExpectedPublishImages(images: unknown): number {
   }).length;
 }
 
+export function countExpectedArticleTables(content: unknown): number {
+  const text = String(content || '');
+  if (!text.trim()) return 0;
+
+  const htmlTableCount = (text.match(/<table(?:\s|>)/gi) || []).length;
+  const markdownSeparator = /^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$/;
+  const markdownTableCount = text
+    .split(/\r?\n/)
+    .filter((line) => markdownSeparator.test(line))
+    .length;
+
+  return htmlTableCount + markdownTableCount;
+}
+
+function normalizeOrderText(value: string): string {
+  return String(value || '')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/\*\*/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function normalizeHeadingAnchor(value: string): string {
+  return normalizeOrderText(value)
+    .replace(/^#{1,4}\s+/, '')
+    .replace(/^\s*(?:소제목|제목|heading|section)\s*\d*\s*[:：.\-]\s*/i, '')
+    .replace(/^\s*[\[(【]\s*(?:소제목|제목|heading|section)\s*\d*\s*[\])】]\s*/i, '')
+    .replace(/^(?:[•\-–—*]\s*)?(?:제\s*\d+\s*장\s*|STEP\s*\d+\s*|[①-⑳]\s*|\d{1,2}[).]\s*)/i, '')
+    .replace(/[\s\-–—:|·•,]+$/g, '')
+    .trim();
+}
+
+function normalizeBodyAnchor(value: string): string {
+  return normalizeOrderText(value)
+    .replace(/^#{1,4}\s+/, '')
+    .replace(/^(?:Q|A)\d*\s*[:：.)]\s*/i, '')
+    .replace(/^(?:[-*•]\s+|\d{1,2}[.)]\s+)/, '')
+    .replace(/^[“"'‘’]+/, '')
+    .trim();
+}
+
+export function buildExpectedOrderAnchors(body: string, headingTitles: readonly string[] = []): string[] {
+  const headingAnchors = headingTitles
+    .map(normalizeHeadingAnchor)
+    .filter((anchor) => anchor.length >= 2)
+    .map((anchor) => anchor.slice(0, 48));
+  if (headingAnchors.length >= 2) return headingAnchors;
+
+  const paragraphs = String(body || '')
+    .split(/\n{2,}/)
+    .map((block) => {
+      const firstMeaningfulLine = block
+        .split(/\r?\n/)
+        .map(normalizeBodyAnchor)
+        .find((line) => line.length >= 8);
+      return firstMeaningfulLine || normalizeBodyAnchor(block);
+    })
+    .filter((paragraph) => paragraph.length >= 8);
+  if (paragraphs.length === 0) return headingAnchors;
+
+  const selected = paragraphs.length <= 3
+    ? paragraphs
+    : [paragraphs[0], paragraphs[Math.floor(paragraphs.length / 2)], paragraphs[paragraphs.length - 1]];
+  const bodyAnchors = selected.map((paragraph) => paragraph.slice(0, 36));
+  return Array.from(new Set([...headingAnchors, ...bodyAnchors]));
+}
+
+export function areExpectedAnchorsInOrder(bodyText: string, anchors: readonly string[]): boolean {
+  const normalizedBody = normalizeOrderText(bodyText);
+  let cursor = 0;
+  for (const rawAnchor of anchors) {
+    const anchor = normalizeOrderText(rawAnchor);
+    if (!anchor) continue;
+    const foundAt = normalizedBody.indexOf(anchor, cursor);
+    if (foundAt < 0) return false;
+    cursor = foundAt + anchor.length;
+  }
+  return true;
+}
+
 export function evaluatePrePublishReport(
   stats: PrePublishStats,
   expectations: PrePublishExpectations
@@ -187,6 +273,16 @@ export function evaluatePrePublishReport(
     },
   ];
 
+  const expectedTableMin = Math.max(0, expectations.expectedTableMin || 0);
+  if (expectedTableMin > 0) {
+    checks.push({
+      name: 'table-count',
+      pass: (stats.tableCount || 0) >= expectedTableMin,
+      expected: `>= ${expectedTableMin}`,
+      actual: String(stats.tableCount || 0),
+    });
+  }
+
   // 2026-06-11 live incident: hashtags were typed (log confirmed) but the
   // published post had none — the tail landed outside the component model.
   // Presence in the editor body is the closest pre-publish signal we have.
@@ -198,6 +294,17 @@ export function evaluatePrePublishReport(
       pass: missing.length === 0,
       expected: `${expectedHashtags.length}개 본문 포함`,
       actual: missing.length === 0 ? 'all present' : `누락: ${missing.join(', ')}`,
+    });
+  }
+
+  const expectedOrderedAnchors = expectations.expectedOrderedAnchors || [];
+  if (expectedOrderedAnchors.length > 0) {
+    const ordered = areExpectedAnchorsInOrder(stats.bodyText || '', expectedOrderedAnchors);
+    checks.push({
+      name: 'section-order',
+      pass: ordered,
+      expected: `${expectedOrderedAnchors.length}개 앵커 순차 배치`,
+      actual: ordered ? 'ordered' : 'missing or out of order',
     });
   }
 
@@ -297,7 +404,8 @@ export function isEditorBodyUnreadable(stats: PrePublishStats | null | undefined
     !text &&
     stats.imageCount === 0 &&
     stats.linkCardCount === 0 &&
-    stats.dividerCount === 0
+    stats.dividerCount === 0 &&
+    (stats.tableCount || 0) === 0
   ) || isEditorChromeOnlyText(text, stats.bodyChars);
 }
 
@@ -357,6 +465,7 @@ export function selectPrePublishBodyText(
 export const BLOCKING_CHECKS: ReadonlySet<string> = new Set([
   'body-min-chars',
   'image-count',
+  'table-count',
   'marker-leak',
 ]);
 
@@ -484,6 +593,17 @@ export async function collectPrePublishStats(
       'img.se-image-resource, .se-module-image img, .se-component-image img'
     )).filter((el) => isVisibleElement(el)).length;
 
+    const tableRoots = new Set<Element>();
+    searchScope.querySelectorAll([
+      'table',
+      '.se-component-table',
+      '.se-component.se-table',
+      '[data-name="table"]',
+    ].join(',')).forEach((el) => {
+      if (!isVisibleElement(el)) return;
+      tableRoots.add(el.closest('.se-component') || el);
+    });
+
     // Same selector pool as waitForLinkCard; dedup nested matches by their
     // component root so one card never counts twice.
     const linkSelectors = [
@@ -517,6 +637,7 @@ export async function collectPrePublishStats(
       imageCount,
       linkCardCount: cardRoots.size,
       dividerCount: dividerTextRuns + dividerComponents,
+      tableCount: tableRoots.size,
     };
   }, {
     rootSelectors: [...SMART_EDITOR_ROOT_SELECTORS],
@@ -531,6 +652,7 @@ export async function collectPrePublishStats(
     imageCount: raw.imageCount,
     linkCardCount: raw.linkCardCount,
     dividerCount: raw.dividerCount,
+    tableCount: raw.tableCount,
     leakedMarkers: findLeakedMarkers(selectedBody.text, markers),
     bodyText: selectedBody.text,
     bodySource: selectedBody.source,

@@ -9,6 +9,10 @@
 // ── Generator 유니온 타입 (한 곳에서만 관리) ──
 export type GeneratorType = 'gemini' | 'openai' | 'claude' | 'perplexity';
 
+export interface FillSemiAutoFieldsOptions {
+    persist?: boolean;
+}
+
 // ── 자동화 이미지 ──
 export type RendererAutomationImage = {
     heading: string;
@@ -93,7 +97,7 @@ export interface ContinuousQueueItem {
     scheduleDate?: string;
     scheduleTime?: string;
     scheduleType?: 'app-schedule' | 'naver-server';
-    status: 'pending' | 'processing' | 'completed' | 'failed' | 'cancelled';
+    status: 'pending' | 'processing' | 'completed' | 'failed' | 'cancelled' | 'uncertain';
     ctaType?: string;
     ctaUrl?: string;
     ctaText?: string;
@@ -133,13 +137,24 @@ export interface ContinuousQueueItem {
 }
 
 // ── 생성된 글 ──
+export interface GeneratedPostStructuredContent {
+    _postId: string;
+    hashtags: string[];
+    selectedTitle?: string;
+    articleType?: string;
+    category?: string;
+    toneStyle?: string;
+    headings?: any[];
+    [key: string]: any;
+}
+
 export interface GeneratedPost {
     id: string;
     title: string;
     content: string;
     hashtags: string[];
     headings: any[];
-    structuredContent?: any; // StructuredContent (global.d.ts ambient)
+    structuredContent?: GeneratedPostStructuredContent;
     createdAt: string;
     updatedAt?: string;
     images?: Array<{ heading?: string; filePath?: string; previewDataUrl?: string; provider?: string; savedToLocal?: boolean; url?: string; thumbnail?: string }>;
@@ -194,6 +209,7 @@ export interface ErrorLog {
 export interface AutosaveData {
     timestamp: number;
     mode: 'full-auto' | 'semi-auto';
+    postId?: string;
     structuredContent?: any;
     formData?: any;
     generatedImages?: any[];

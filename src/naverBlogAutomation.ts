@@ -43,7 +43,7 @@ import {
 } from './automation/selectors';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, humanKeyboardType } from './automation/typingUtils.js';
-import { buildMobileRichHtml, ensureTailTypingReady, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
+import { buildMobileRichHtml, ensureTailTypingReady, focusLastEditableLine, pasteRichHtmlAtCursor, pickRichArticleThemes } from './automation/richTextPaste.js';
 import {
   collectEditorTitleDiagnostics,
   findEditorTitleInputElement,
@@ -126,6 +126,14 @@ import {
   SAVE_BUTTON_TEXT_CANDIDATES,
 } from './automation/publishSaveButtonPolicy.js';
 import { resolveNaverRunOptions } from './automation/runOptionsPolicy.js';
+import {
+  isSchedulePublishOutcomeUnknown,
+  SCHEDULE_PUBLISH_OUTCOME_UNKNOWN,
+} from './automation/schedulePublishCommitPolicy.js';
+import {
+  createImmediatePublishOutcomeUnknownError,
+  isImmediatePublishOutcomeUnknown,
+} from './automation/immediatePublishCommitPolicy.js';
 
 // ✅ [2026-02-24] 네이버 에디터 자동완성 팝업(파파고/내돈내산 스티커) 방지 래퍼
 // ✅ [2026-03-27 FIX] 매번 Escape 전송 → 팝업 존재 시에만 조건부 Escape
@@ -407,6 +415,7 @@ export class NaverBlogAutomation {
   private browser: Browser | null = null;
   private mainFrame: Frame | null = null;
   private cancelRequested = false;
+  private immediatePublishCommitAttempted = false;
   private _prosConsAlreadyInserted = false; // ✅ [2026-02-19] 장단점 표 중복 삽입 방지 플래그
 
   // ✅ Ghost Cursor 인스턴스 (사람 같은 마우스 이동)
@@ -4537,16 +4546,22 @@ export class NaverBlogAutomation {
 
     if (rich.html) {
       this.log(`✨ 리치 본문 붙여넣기 시도: ${rich.paragraphCount}개 모바일 단락, ${rich.highlightCount}개 하이라이트, ${rich.tableCount}개 표`);
-      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText);
+      const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount);
       if (pasteResult.ok) {
         this.log(`✅ 리치 본문 입력 완료 (${pasteResult.afterChars - pasteResult.beforeChars}자 증가, 표 ${pasteResult.beforeTables}→${pasteResult.afterTables})`);
         return;
       }
 
+      if (pasteResult.safeToFallback === false) {
+        throw new Error(`EDITOR_PARTIAL_INSERT_UNRECOVERED: ${pasteResult.reason || '본문 붙여넣기 위치 또는 롤백을 확인할 수 없습니다.'}`);
+      }
+
       this.log(`⚠️ 리치 본문 붙여넣기 실패 → 기존 타이핑 fallback: ${pasteResult.reason || 'unknown'}`);
     }
 
-    // 클릭 완전 제거 - 현재 커서 위치에서 바로 시작
+    // Rich paste가 안전하게 롤백된 뒤 tail probe만 일시 실패했을 수 있다.
+    // 키보드 fallback 직전 마지막 본문 단락을 실제 클릭해 모델 커서를 복구한다.
+    await focusLastEditableLine(page, frame).catch(() => undefined);
     for (let line = 0; line < repeatCount; line += 1) {
       this.ensureNotCancelled();
       // ✅ [2026-05-23 A3] 본문 타이핑 인간화 — 고정 20ms 대신 가우시안 분산
@@ -4766,6 +4781,7 @@ export class NaverBlogAutomation {
   }
 
   async publishBlogPost(mode: PublishMode, scheduleDate?: string, scheduleMethod: 'datetime-local' | 'individual-inputs' = 'datetime-local'): Promise<void> {
+    if (mode === 'publish') this.immediatePublishCommitAttempted = false;
     // ✅ [2026-02-07 FIX] 발행 모드 명시적 로깅 (디버깅용)
     this.log(`📋 publishBlogPost 호출됨 → mode: "${mode}", scheduleDate: "${scheduleDate || 'undefined'}", scheduleMethod: "${scheduleMethod}"`);
     // ✅ [2026-02-16 DEBUG] 카테고리 이름 확인
@@ -5403,6 +5419,7 @@ export class NaverBlogAutomation {
               const beforeUrl = this.ensurePage().url();
               this.log(`📌 발행 전 URL: ${beforeUrl}`);
 
+              this.immediatePublishCommitAttempted = true;
               await confirmPublishButton.click();
               await this.delay(1000); // ✅ 클릭 후 대기 시간 증가
 
@@ -5519,6 +5536,7 @@ export class NaverBlogAutomation {
 
               if (retryClickable) {
                 const beforeUrl = this.ensurePage().url();
+                this.immediatePublishCommitAttempted = true;
                 await confirmPublishButton.click();
                 await this.delay(1000);
 
@@ -5704,6 +5722,7 @@ export class NaverBlogAutomation {
             const beforeUrl = this.ensurePage().url();
             this.log(`📌 발행 전 URL: ${beforeUrl}`);
 
+            this.immediatePublishCommitAttempted = true;
             await confirmPublishButton.click();
             await this.delay(1000);
 
@@ -5811,6 +5830,10 @@ export class NaverBlogAutomation {
             break; // 성공 시 루프 탈출
           } catch (scheduleError) {
             lastScheduleError = scheduleError as Error;
+            if (isSchedulePublishOutcomeUnknown(scheduleError)) {
+              this.log('예약 확인 버튼 이후 결과가 미확정되어 자동 재시도를 중단합니다.');
+              throw scheduleError;
+            }
             this.log(`❌ 예약발행 실패 (시도 ${scheduleAttempt}/${MAX_SCHEDULE_RETRIES}, 목표: ${scheduleDate}): ${lastScheduleError.message}`);
 
             if (scheduleAttempt < MAX_SCHEDULE_RETRIES) {
@@ -6289,6 +6312,14 @@ export class NaverBlogAutomation {
         return result;
       } catch (error) {
         lastError = error as Error;
+        if (
+          this.immediatePublishCommitAttempted
+          && !isImmediatePublishOutcomeUnknown(lastError)
+        ) {
+          const commitError = createImmediatePublishOutcomeUnknownError(lastError);
+          this.log('즉시 발행 확인 버튼 이후 결과가 미확정되어 자동 재시도를 중단합니다.');
+          throw commitError;
+        }
         const errorMsg = lastError.message || '';
         const isContentApplyOperation =
           operationName.includes('콘텐츠 적용') ||
@@ -6306,6 +6337,7 @@ export class NaverBlogAutomation {
         const terminalErrors = [
           // [R11/A-4] 발행 미확인은 블라인드 재시도 시 이중 발행 위험 — 즉시 중단
           'PUBLISH_UNCONFIRMED',
+          SCHEDULE_PUBLISH_OUTCOME_UNKNOWN,
           // [R8/A-2] 발행 모달이 열리지 않은 상태에서 계속 진행하면 카테고리/확인 버튼 오작동 위험
           'PUBLISH_MODAL_NOT_OPENED',
           // [R8-1] 카테고리가 목록에 없음은 결정적 실패 — 재시도 무의미
@@ -6315,6 +6347,9 @@ export class NaverBlogAutomation {
           // Tail/hashtag failures happen after the main body is already in the
           // editor. Retrying the whole writer risks duplicate body blocks.
           'POST_TAIL_INCOMPLETE',
+          // A partial/misplaced paste that could not be rolled back must stop.
+          // Retrying would append another copy and scramble the article further.
+          'EDITOR_PARTIAL_INSERT_UNRECOVERED',
         ];
         if (terminalErrors.some(fe => errorMsg.includes(fe))) {
           this.log(`   ❌ ${operationName} 결정적 오류 (재시도 불가): ${errorMsg}`);
@@ -6632,23 +6667,17 @@ export class NaverBlogAutomation {
         panels.forEach(p => (p as HTMLElement).style.display = 'none');
       }).catch(() => { });
 
-      // ✅ 2. 본문 포커스 및 커서 위치 설정
-      await frame.evaluate(() => {
-        const body = document.querySelector('.se-section-text, .se-main-container, .se-component-content') as HTMLElement;
-        if (body) {
-          body.focus();
-          const selection = window.getSelection();
-          if (selection) {
-            const range = document.createRange();
-            let lastNode: Node = body;
-            while (lastNode.lastChild) lastNode = lastNode.lastChild;
-            range.setStartAfter(lastNode);
-            range.collapse(true);
-            selection.removeAllRanges();
-            selection.addRange(range);
-          }
-        }
-      });
+      // SmartEditor의 화면 DOM selection은 실제 모델 커서를 움직이지 않는다.
+      // 매 소제목 직전에 sentinel로 문서의 진짜 끝을 검증하지 않으면 인용구가
+      // 이전 섹션 중간에 삽입되어 완성 글의 순서가 뒤섞일 수 있다.
+      const subtitleTailReady = await ensureTailTypingReady(
+        page,
+        frame,
+        (message: string) => this.log(message),
+      );
+      if (!subtitleTailReady) {
+        throw new Error('소제목 입력 위치를 문서 끝으로 확정하지 못했습니다. 잘못된 위치 삽입을 차단합니다.');
+      }
       await this.delay(this.DELAYS.SHORT);
 
       // ✅ 3. 인용구 삽입 (스타일에 따라 선택)
@@ -6691,7 +6720,7 @@ export class NaverBlogAutomation {
 
       await page.keyboard.press('Enter');
       await this.delay(this.DELAYS.MEDIUM);
-    }, 3, '소제목(인용구) 입력');
+    }, 1, '소제목(인용구) 입력');
   }
 
   // 인용구 삽입 헬퍼
@@ -8166,13 +8195,19 @@ export class NaverBlogAutomation {
         await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
         if (resolvedOptions.publishMode === 'publish') {
           await this.verifyImmediatePublishOutcome(beforePublishUrl);
+          this.immediatePublishCommitAttempted = false;
         }
       } catch (error) {
+        const publishError = resolvedOptions.publishMode === 'publish'
+          && this.immediatePublishCommitAttempted
+          ? createImmediatePublishOutcomeUnknownError(error)
+          : error;
+        this.immediatePublishCommitAttempted = false;
         if (editorContentApplied) {
           postContentAppliedPublishFailure = true;
-          throwPostContentAppliedPublishError(error);
+          throwPostContentAppliedPublishError(publishError);
         }
-        throw error;
+        throw publishError;
       }
       this.log('🎉 포스팅이 성공적으로 완료되었습니다!');
       const modeText = resolvedOptions.publishMode === 'draft' ? '임시저장' :
@@ -8599,13 +8634,19 @@ export class NaverBlogAutomation {
         await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
         if (resolvedOptions.publishMode === 'publish') {
           await this.verifyImmediatePublishOutcome(beforePublishUrl);
+          this.immediatePublishCommitAttempted = false;
         }
       } catch (error) {
+        const publishError = resolvedOptions.publishMode === 'publish'
+          && this.immediatePublishCommitAttempted
+          ? createImmediatePublishOutcomeUnknownError(error)
+          : error;
+        this.immediatePublishCommitAttempted = false;
         if (editorContentApplied) {
           postContentAppliedPublishFailure = true;
-          throwPostContentAppliedPublishError(error);
+          throwPostContentAppliedPublishError(publishError);
         }
-        throw error;
+        throw publishError;
       }
 
       // ✅ 자동화 완료 후 에디터를 편집 가능한 상태로 활성화

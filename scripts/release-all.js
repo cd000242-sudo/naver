@@ -253,9 +253,12 @@ async function main() {
   const startTime = Date.now();
 
   try {
-    // ═══ Step 1: TypeScript 빌드 ═══
-    if (!executeStep(1, totalSteps, 'TypeScript 빌드 (tsc)', 'npm run build')) {
-      fail('빌드 실패 — 릴리즈 중단');
+    // ═══ Step 1: 회귀 방지 게이트 (lint + full tests + build) ═══
+    if (!executeStep(1, totalSteps, '회귀 방지 게이트 (lint + tests + build)', 'node scripts/release-gate.js', {
+      timeout: 900000,
+      showOutput: true,
+    })) {
+      fail('회귀 방지 게이트 실패 — 릴리즈 중단');
       allSuccess = false;
       return;
     }

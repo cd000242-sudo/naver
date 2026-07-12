@@ -13,6 +13,8 @@ import { spawn } from 'child_process';
 import { generateSingleLeonardoAIImage } from '../../image/leonardoAIGenerator.js';
 // [SPEC-FREEZE-GUARD-001-P2 R2 / v2.10.261] Base64 디코딩 워커 분리 — 1MB+ Gemini/Veo inlineData
 import { decodeBase64Async } from '../utils/base64Async.js';
+import { sanitizeDropshotErrorMessage } from '../../image/dropshotBrowser.js';
+import { trackChild, untrackChild } from '../../runtime/childProcessRegistry.js';
 
 // ffmpeg-static 경로 (GIF 변환용)
 let ffmpegPath: string | null = null;
@@ -93,7 +95,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
             const { checkDropshotLogin } = await import('../../image/dropshotCore.js');
             return await checkDropshotLogin();
         } catch (error: any) {
-            return { loggedIn: false, message: `세션 확인 실패: ${error.message}` };
+            return { loggedIn: false, message: `세션 확인 실패: ${sanitizeDropshotErrorMessage(error)}` };
         }
     });
 
@@ -103,7 +105,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
             const { dropshotLogin } = await import('../../image/dropshotCore.js');
             return await dropshotLogin();
         } catch (error: any) {
-            return { loggedIn: false, message: `로그인 실패: ${error.message}` };
+            return { loggedIn: false, message: `로그인 실패: ${sanitizeDropshotErrorMessage(error)}` };
         }
     });
 
@@ -1095,6 +1097,8 @@ export function registerMediaHandlers(ctx: IpcContext): void {
             return new Promise((resolve) => {
                 const args = ['-y', '-i', sourcePath, '-vf', filter, gifPath];
                 const ffmpeg = spawn(ffmpegPath as string, args);
+                const ffmpegPid = ffmpeg.pid;
+                trackChild(ffmpegPid, 'ffmpeg:ipc-mp4-to-gif');
 
                 // [v2.10.154] 60초 timeout — ffmpeg 좀비 prevention
                 const timeoutId = setTimeout(() => {
@@ -1107,12 +1111,14 @@ export function registerMediaHandlers(ctx: IpcContext): void {
 
                 ffmpeg.on('error', (err) => {
                     clearTimeout(timeoutId);
+                    if (ffmpegPid) untrackChild(ffmpegPid);
                     console.error('[mediaHandlers] ffmpeg 오류:', err);
                     resolve({ success: false, message: err.message });
                 });
 
                 ffmpeg.on('close', (code) => {
                     clearTimeout(timeoutId);
+                    if (ffmpegPid) untrackChild(ffmpegPid);
                     if (code === 0) {
                         console.log(`[mediaHandlers] ✅ GIF 변환 완료: ${gifPath}`);
                         resolve({ success: true, gifPath });
@@ -1170,6 +1176,8 @@ export function registerMediaHandlers(ctx: IpcContext): void {
                 ];
 
                 const ffmpeg = spawn(ffmpegPath as string, args);
+                const ffmpegPid = ffmpeg.pid;
+                trackChild(ffmpegPid, 'ffmpeg:ipc-ken-burns');
 
                 // [v2.10.154] KenBurns 비디오는 더 오래 걸릴 수 있어 90초 timeout
                 const timeoutId = setTimeout(() => {
@@ -1182,12 +1190,14 @@ export function registerMediaHandlers(ctx: IpcContext): void {
 
                 ffmpeg.on('error', (err) => {
                     clearTimeout(timeoutId);
+                    if (ffmpegPid) untrackChild(ffmpegPid);
                     console.error('[mediaHandlers] KenBurns ffmpeg 오류:', err);
                     resolve({ success: false, message: err.message });
                 });
 
                 ffmpeg.on('close', (code) => {
                     clearTimeout(timeoutId);
+                    if (ffmpegPid) untrackChild(ffmpegPid);
                     if (code === 0) {
                         console.log(`[mediaHandlers] ✅ KenBurns 영상 생성 완료: ${outputPath}`);
                         resolve({ success: true, filePath: outputPath, fileName });

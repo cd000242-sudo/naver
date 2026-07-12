@@ -19,4 +19,22 @@ describe('Dropshot generate button policy', () => {
     expect(code).toMatch(/horizontallyAligned/);
     expect(code).toMatch(/belowPrompt/);
   });
+
+  it('verifies that the controlled prompt contains the requested text before clicking', () => {
+    expect(code).toMatch(/readVisiblePromptValue/);
+    expect(code).toMatch(/Dropshot prompt value did not match the requested prompt/);
+  });
+
+  it('accepts only large rendered result images and ignores lazy sidebar thumbnails', () => {
+    expect(code).toMatch(/const renderedWidth = rect\.width/);
+    expect(code).toMatch(/const renderedHeight = rect\.height/);
+    expect(code).not.toMatch(/el\.naturalWidth \|\| rect\.width/);
+    expect(code).not.toMatch(/i\.naturalWidth > 200/);
+  });
+
+  it('rejects the Dropshot generation-error fallback and retries instead of reporting success', () => {
+    expect(code).toMatch(/generation-error-fallback/);
+    expect(code).toMatch(/readDropshotGenerationError/);
+    expect(code).toMatch(/Dropshot generation failed:/);
+  });
 });

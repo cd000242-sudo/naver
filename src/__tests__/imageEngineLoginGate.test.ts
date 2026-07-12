@@ -26,6 +26,20 @@ describe('image engine login gating', () => {
     expect(dsCheckIdx).toBeGreaterThan(-1);
   });
 
+  it('disables Dropshot login buttons while an IPC request is in flight', () => {
+    const sharedUi = read('renderer/modules/dropshotLoginUi.ts');
+    const headingSettings = read('renderer/components/HeadingImageSettings.ts');
+
+    expect(sharedUi).toContain('loginBtn.disabled = true;');
+    expect(sharedUi).toContain('loginBtn.disabled = false;');
+    expect(sharedUi).toContain('checkBtn.disabled = true;');
+    expect(sharedUi).toContain('checkBtn.disabled = false;');
+    expect(headingSettings).toContain('dsLoginBtn.disabled = true;');
+    expect(headingSettings).toContain('dsLoginBtn.disabled = false;');
+    expect(headingSettings).toContain('dsCheckBtn.disabled = true;');
+    expect(headingSettings).toContain('dsCheckBtn.disabled = false;');
+  });
+
   it('resets the stale thumbnailOnly flag exactly once at checkbox init', () => {
     const code = read('renderer/renderer.ts');
     expect(code).toContain("thumbnailOnlyResetV2");

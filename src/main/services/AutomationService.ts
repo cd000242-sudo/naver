@@ -147,8 +147,8 @@ class AutomationServiceImpl {
         if (this.currentInstance) {
             this.currentInstance.cancel().catch(() => { });
         }
-        // ✅ [2026-04-03] 진행 중인 AI API 호출 즉시 중단
-        this.abortGeneralOperation();
+        // Content/image generation has operation-scoped cancellation. Internal
+        // publish timeouts must not abort an unrelated generation request.
     }
 
     /**
@@ -437,6 +437,7 @@ export interface PostCyclePayload {
     title?: string;
     content?: string;
     structuredContent?: any;
+    contentPolicyContext?: import('../../contentPolicy/policyService.js').ContentPolicyPayloadContext;
     lines?: string[];
     selectedHeadings?: string[];
     hashtags?: string[];
@@ -484,6 +485,7 @@ export interface PostCyclePayload {
     postId?: string;
     useIntelligentImagePlacement?: boolean;
     onlyImagePlacement?: boolean;
+    businessInfo?: Record<string, unknown>;
 }
 
 /**

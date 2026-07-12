@@ -28,10 +28,12 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
       headingImageMode: 'all',
       thumbnailTextInclude: false,
       textOnlyPublish: false,
+      imageSource: 'nano-banana-pro',
       imageStyle: 'realistic',
       imageRatio: '1:1',
       thumbnailImageRatio: '1:1',
       subheadingImageRatio: '1:1',
+      fallbackPolicy: 'engine-only',
     });
     expect(cfg.shopping).toEqual({
       subImageMode: 'collected',

@@ -89,7 +89,7 @@ describe('continuous and multi-account image generation safety', () => {
     expect(imageGeneratorCode).toMatch(/sequential:\s*shouldForceSequentialImages/);
     expect(imageGeneratorCode).toMatch(/forceModelKey[\s\S]{0,160}?shouldForceSequentialImages/);
     expect(flowCode).toMatch(/options\?: \{ forceFreshContext\?: boolean; sequential\?: boolean \}/);
-    expect(flowCode).toMatch(/&& !options\?\.sequential/);
+    expect(flowCode).toMatch(/const PIPELINE_ENABLED = false/);
     // 2026-06-11: net-queue detection is UUID-filtered now — the raw
     // slice-only pattern returned the PREVIOUS generation's image (mix-up).
     expect(flowCode).toMatch(/_networkImageQueue\.slice\(queueStartSize\)\.filter/);
@@ -134,13 +134,13 @@ describe('continuous and multi-account image generation safety', () => {
     const imageGeneratorCode = read('imageGenerator.ts');
     const mainCode = read('main.ts');
 
-    expect(flowCode).toMatch(/FLOW_SINGLE_IMAGE_WAIT_TIMEOUT_MS\s*=\s*180000/);
+    expect(flowCode).toMatch(/FLOW_SINGLE_IMAGE_WAIT_TIMEOUT_MS\s*=\s*FLOW_RESULT_WAIT_TIMEOUT_MS/);
     expect(flowCode).toMatch(/FLOW_SINGLE_IMAGE_MAX_RETRIES\s*=\s*2/);
     expect(flowCode).toMatch(/FLOW_SEQUENTIAL_IMAGE_STABILIZE_MS\s*=\s*30_000/);
     expect(flowCode).toMatch(/getFlowSequentialImageStabilizeMs/);
     expect(flowCode).toMatch(/다음 이미지 전 안정화 대기/);
-    expect(flowCode).toMatch(/timeout\/stuck 감지 — 새 프로젝트로 격리 후 재시도/);
-    expect(flowCode).toMatch(/await ensureFlowProject\(page, true\)/);
+    expect(flowCode).toMatch(/timeout\/stuck 감지 — BrowserContext 격리/);
+    expect(flowCode).toMatch(/await resetFlowState\(\)/);
     expect(classifierCode).toMatch(/FLOW_IMAGE_TIMEOUT[\s\S]{0,220}?skip-heading/);
     expect(imageGeneratorCode).toMatch(/abortNanoBananaImageGeneration\(\)/);
     expect(imageGeneratorCode).toMatch(/await resetFlowState\(\)/);

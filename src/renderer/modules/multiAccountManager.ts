@@ -1,6 +1,8 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/multiAccountManager.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
+import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
+import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initMultiAccountManager = initMultiAccountManager;
 exports.generateImagesForAutomation = generateImagesForAutomation;
@@ -386,7 +388,11 @@ function resolveImageProviderFallback() {
         'nano-banana-pro';
 }
 async function generateImagesForAutomation(provider, headings, postTitle, options = {}) {
-    const flightKey = String(postTitle || '').trim();
+    const flightKey = [
+        String(options.flightScope || 'global').trim(),
+        String(provider || 'unknown').trim(),
+        String(postTitle || '').trim(),
+    ].join('::');
     const startedAt = flightKey ? _giaInFlight.get(flightKey) : undefined;
     if (flightKey && startedAt !== undefined) {
         const elapsedMs = Date.now() - startedAt;
@@ -1802,7 +1808,6 @@ async function initMultiAccountPublishModal() {
         const editingQueueId = window.currentEditingQueueId;
         if (editingQueueId) {
             const { url, keyword } = items[0];
-            const existingItem = publishQueue.find(q => q.id === editingQueueId);
             const updatedItem = {
                 id: editingQueueId,
                 accountId,
@@ -1821,11 +1826,12 @@ async function initMultiAccountPublishModal() {
                 includeThumbnailText,
                 useAiImage,
                 createProductThumbnail,
-                publishMode: existingItem?.publishMode || publishMode,
-                scheduleDate: existingItem?.scheduleDate,
-                scheduleTime: existingItem?.scheduleTime,
-                scheduleType: existingItem?.scheduleType,
+                publishMode: publishMode,
+                scheduleDate: scheduleDate,
+                scheduleTime: scheduleTime,
+                scheduleType: scheduleType,
                 scheduleInterval,
+                pipelineStatus: 'pending',
                 affiliateLink,
                 videoOption,
                 manualThumbnail: manualThumbnailForQueue,
@@ -1853,6 +1859,7 @@ async function initMultiAccountPublishModal() {
             items.forEach(({ url, keyword }) => {
                 const queueItem = {
                     id: `queue-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                    pipelineStatus: 'pending',
                     accountId,
                     accountName,
                     sourceUrl: url,
@@ -2889,7 +2896,29 @@ async function initMultiAccountPublishModal() {
             progressTitle.textContent = '풀오토 다중계정 발행';
         let totalSuccess = 0;
         let totalFail = 0;
-        const queueSnapshot = [...publishQueue];
+        publishQueue = publishQueue.map(item => ({
+            ...item,
+            pipelineStatus: item.pipelineStatus === 'processing'
+                ? 'pending'
+                : item.pipelineStatus === 'publishing'
+                    ? 'uncertain'
+                    : item.pipelineStatus,
+        }));
+        const uncertainCount = publishQueue.filter(item => item.pipelineStatus === 'uncertain').length;
+        if (uncertainCount > 0) {
+            toastManager.warning(`발행 결과 미확정 ${uncertainCount}건은 중복 발행 방지를 위해 자동 재시도하지 않습니다.`);
+        }
+        const queueSnapshot = publishQueue.filter(item => item.pipelineStatus !== 'completed' && item.pipelineStatus !== 'uncertain');
+        if (queueSnapshot.length === 0) {
+            renderQueue();
+            isPublishing = false;
+            if (startBtn) {
+                startBtn.disabled = false;
+                startBtn.innerHTML = startBtnOriginalHtml;
+            }
+            destroyMAFloatingBar();
+            return;
+        }
         const totalItems = queueSnapshot.length;
         const primaryImageSource = String(queueSnapshot.find((item) => !!item.imageSource)?.imageSource
             || getFullAutoImageSource?.()
@@ -2962,6 +2991,17 @@ async function initMultiAccountPublishModal() {
                 console.log(`[BUG-4 FIX v2] 예약 정보 자동 보정: ${item.scheduleDate} ${item.scheduleTime}`);
             }
         }
+        const runLease = window.__pipelineRunCoordinator?.tryAcquirePipelineRun?.('multi-account') || null;
+        if (!runLease) {
+            isPublishing = false;
+            if (startBtn) {
+                startBtn.disabled = false;
+                startBtn.innerHTML = startBtnOriginalHtml;
+            }
+            destroyMAFloatingBar();
+            toastManager.warning('다른 자동화 작업이 실행 중입니다. 완료 후 다시 시도해주세요.');
+            return;
+        }
         try {
             for (let i = 0; i < queueSnapshot.length && !stopRequested && !window.stopFullAutoPublish; i++) {
                 const queueItem = queueSnapshot[i];
@@ -2969,6 +3009,9 @@ async function initMultiAccountPublishModal() {
                 // apply from the NEXT account/post (design §2.2).
                 const itemPipelineCfg = resolvePipelineConfig('multi-account');
                 let generatedPostId = null;
+                let publishStarted = false;
+                let publishConfirmed = false;
+                queueItem.pipelineStatus = 'processing';
                 const TOTAL_SUB_STEPS = 4;
                 resetMASteps();
                 currentProgressPercent = (i / totalItems) * 100;
@@ -3154,6 +3197,7 @@ async function initMultiAccountPublishModal() {
                             }
                         }
                     }
+                    structuredContent = applyPendingArticleTablesToGeneratedContent(structuredContent);
                     try {
                         window.currentStructuredContent = structuredContent;
                         await autoAnalyzeHeadings(structuredContent);
@@ -3290,6 +3334,7 @@ async function initMultiAccountPublishModal() {
                                 },
                                 aiFallbackFn: generateImagesForAutomation,
                                 aiOptions: {
+                                    flightScope: queueItem.accountId || queueItem.id,
                                     headingImageMode: itemPipelineCfg.image.headingImageMode,
                                     fallbackProvider: resolveImageProviderFallback(),
                                     stopCheck: () => stopRequested || window.stopFullAutoPublish,
@@ -3305,6 +3350,7 @@ async function initMultiAccountPublishModal() {
                         else if (imageSource === 'naver') {
                             addMALog(`🔍 네이버 이미지 검색 시작 (키워드: ${structuredContent.keywords?.[0] || structuredContent.selectedTitle})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
+                                flightScope: queueItem.accountId || queueItem.id,
                                 headingImageMode: itemPipelineCfg.image.headingImageMode,
                                 fallbackProvider: resolveImageProviderFallback(),
                                 allowThumbnailText: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
@@ -3324,6 +3370,7 @@ async function initMultiAccountPublishModal() {
                             };
                             addMALog(`🎨 AI 이미지 생성 시작 (엔진: ${_maSourceNames[imageSource] || imageSource})`, 'info');
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
+                                flightScope: queueItem.accountId || queueItem.id,
                                 headingImageMode: itemPipelineCfg.image.headingImageMode,
                                 fallbackProvider: resolveImageProviderFallback(),
                                 allowThumbnailText: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
@@ -3635,15 +3682,28 @@ async function initMultiAccountPublishModal() {
                         previousPostUrl: queueItem?.previousPostUrl || (queueItem.ctaType === 'previous-post' ? queueItem?.ctaUrl : undefined) || undefined,
                         previousPostTitle: queueItem?.previousPostTitle || (queueItem.ctaType === 'previous-post' && queueItem?.ctaText ? String(queueItem.ctaText).replace(/^[\s📖👉:\-]+/, '').trim() : undefined) || undefined,
                         thumbnailPath: extractedThumbnailPath || undefined,
+                        contentPolicyContext: buildRendererContentPolicyContext({
+                            title: String(structuredContent?.selectedTitle || '').trim(),
+                            content: structuredContent?.bodyPlain || structuredContent?.content || '',
+                            keywords: queueItem.sourceKeyword || structuredContent?.keywords || [],
+                            structuredContent: structuredContent || {},
+                            businessInfo: queueItem.businessInfo || queueItem?.formData?.businessInfo,
+                            contentMode: queueItem.contentMode,
+                            accountId: queueItem.accountId,
+                            blogId: credResult.credentials.naverId,
+                            cta: String((queueItem?.formData?.ctaText ?? queueItem.ctaText) || '').trim(),
+                        }),
                     };
                     console.log('[FullAuto] 발행 옵션:', publishOptions);
                     console.log(`[🔍 DIAG-2 IPC전달] publishMode=${publishOptions.publishMode}, scheduleDate=${publishOptions.scheduleDate}, scheduleTime=${publishOptions.scheduleTime}, scheduleType=${publishOptions.scheduleType}`);
+                    publishStarted = true;
+                    queueItem.pipelineStatus = 'publishing';
                     const result = await window.api.multiAccountPublish([queueItem.accountId], publishOptions);
                     console.log('[FullAuto] 발행 결과:', result);
-                    if (stopRequested || window.stopFullAutoPublish) {
-                        break;
-                    }
                     if (result.success && result.results?.[0]?.success) {
+                        publishConfirmed = true;
+                        queueItem.pipelineStatus = 'completed';
+                        totalSuccess++;
                         updateMAStep('ma-step-publish', 'completed');
                         const publishedUrl = result.results?.[0]?.url;
                         if (publishedUrl && structuredContent?.selectedTitle) {
@@ -3669,7 +3729,6 @@ async function initMultiAccountPublishModal() {
                         }
                         addMALog(`✅ ${queueItem.accountName}: 발행 성공!`, 'success');
                         addProgressItem(`✅ [${i + 1}/${totalItems}] ${queueItem.accountName}: 발행 성공!`, 'success');
-                        totalSuccess++;
                         if (queueItem.ctaType === 'previous-post' && publishedUrl) {
                             for (let j = i + 1; j < queueSnapshot.length; j++) {
                                 const nextItem = queueSnapshot[j];
@@ -3690,12 +3749,31 @@ async function initMultiAccountPublishModal() {
                     else {
                         throw new Error(result.results?.[0]?.message || '발행 실패');
                     }
+                    if (stopRequested || window.stopFullAutoPublish) {
+                        break;
+                    }
                 }
                 catch (error) {
-                    updateMAStep('ma-step-publish', 'error');
-                    addMALog(`❌ ${queueItem.accountName}: ${error.message}`, 'error');
-                    addProgressItem(`❌ [${i + 1}/${totalItems}] ${queueItem.accountName}: ${error.message}`, 'error');
-                    totalFail++;
+                    if (publishConfirmed) {
+                        addMALog(`⚠️ ${queueItem.accountName}: 발행은 성공했지만 후처리에 실패했습니다. ${error.message}`, 'warning');
+                    }
+                    else {
+                        const stopped = stopRequested || window.stopFullAutoPublish;
+                        if (publishStarted) {
+                            queueItem.pipelineStatus = resolveInterruptedPublishStatus(true, 'failed');
+                            addMALog(`⚠️ ${queueItem.accountName}: 발행 결과를 확정하지 못해 자동 재시도에서 제외합니다. 네이버에서 확인해주세요.`, 'warning');
+                        }
+                        else if (stopped) {
+                            queueItem.pipelineStatus = resolveInterruptedPublishStatus(false, 'pending');
+                        }
+                        else {
+                            queueItem.pipelineStatus = 'failed';
+                        }
+                        updateMAStep('ma-step-publish', 'error');
+                        addMALog(`❌ ${queueItem.accountName}: ${error.message}`, 'error');
+                        addProgressItem(`❌ [${i + 1}/${totalItems}] ${queueItem.accountName}: ${error.message}`, 'error');
+                        totalFail++;
+                    }
                 }
                 if (i < queueSnapshot.length - 1 && !stopRequested && !window.stopFullAutoPublish) {
                     try {
@@ -3736,13 +3814,12 @@ async function initMultiAccountPublishModal() {
             }
         }
         finally {
+            window.__pipelineRunCoordinator?.releasePipelineRun?.(runLease);
             isPublishing = false;
             const wasStopped = stopRequested || window.stopFullAutoPublish;
             destroyMAFloatingBar();
-            if (!wasStopped) {
-                publishQueue = [];
-                renderQueue();
-            }
+            publishQueue = publishQueue.filter(item => item.pipelineStatus !== 'completed');
+            renderQueue();
             updateMAProgress(totalItems, totalItems, '완료', wasStopped ? '⏹️ 발행이 중지되었습니다.' : '🎉 모든 발행 완료!');
             addMALog(wasStopped ? '⏹️ 발행이 중지되었습니다.' : `🎉 모든 발행 완료! (성공: ${totalSuccess}, 실패: ${totalFail})`, wasStopped ? 'warning' : 'success');
             try {
@@ -3809,6 +3886,15 @@ async function initMultiAccountPublishModal() {
         stopRequested = true;
         isPublishing = false;
         window.stopFullAutoPublish = true;
+        publishQueue = publishQueue.map(item => ({
+            ...item,
+            pipelineStatus: item.pipelineStatus === 'publishing'
+                ? resolveInterruptedPublishStatus(true, 'pending')
+                : item.pipelineStatus === 'processing'
+                    ? resolveInterruptedPublishStatus(false, 'pending')
+                    : item.pipelineStatus,
+        }));
+        renderQueue();
         destroyMAFloatingBar();
         try {
             await window.api.multiAccountCancel();
@@ -3816,7 +3902,11 @@ async function initMultiAccountPublishModal() {
         catch (e) {
         }
         try {
-            await window.api.cancelAutomation();
+            await window.api.cancelAutomation({
+                source: 'multi-account-stop',
+                reason: 'operator stop',
+                contentRequestId: String((window as any)._activeContentGenerationRequestId || '') || undefined,
+            });
         }
         catch (e) {
         }

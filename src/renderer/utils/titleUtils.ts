@@ -1,4 +1,4 @@
-function collapseDuplicateLeadingYearTitle(title: string): string {
+export function collapseDuplicateLeadingYearTitle(title: string): string {
     let next = String(title || '')
         .replace(/[\r\n]+/g, ' ')
         .replace(/\s+/g, ' ')

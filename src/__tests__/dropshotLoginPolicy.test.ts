@@ -17,55 +17,51 @@ describe('Dropshot login success policy', () => {
     const visibleStartupBlock = source.slice(visibleLoginIndex, pollingIndex);
     expect(visibleStartupBlock).toContain('await tryOpenDropshotBoard(page, onLog);');
     expect(visibleStartupBlock).not.toContain('await page.goto(BOARD_URL');
-
-    const helperBlock = source.slice(helperIndex, source.indexOf('/**', helperIndex + 1));
-    expect(helperBlock).toContain('keeping login window open');
-    expect(helperBlock).toContain('return false;');
   });
 
-  it('does not treat a closed login window as a successful saved session', () => {
-    const earlyFailureIndex = source.indexOf('if (!detected) {');
-    const headlessCacheIndex = source.indexOf('const hctx: any = await launchBrowser(profileDir, true);');
-
-    expect(earlyFailureIndex).toBeGreaterThan(-1);
-    expect(headlessCacheIndex).toBeGreaterThan(-1);
-    expect(earlyFailureIndex).toBeLessThan(headlessCacheIndex);
-
-    expect(source).toContain('pages.length === 0');
-    const earlyFailureBlock = source.slice(earlyFailureIndex, headlessCacheIndex);
-    expect(earlyFailureBlock).toContain('userClosed');
-    expect(earlyFailureBlock).toContain('clearCached();');
-    expect(earlyFailureBlock).toContain('loggedIn: false');
-    expect(earlyFailureBlock).toContain('로그인 창이 닫혔지만 로그인 완료 신호가 감지되지 않았습니다');
-  });
-
-  it('closes any cached browser context during a login status check', () => {
-    const checkIndex = source.indexOf('export async function checkDropshotLogin');
-    const loginIndex = source.indexOf('export async function dropshotLogin', checkIndex);
+  it('does not close a valid cached generation session during a status check', () => {
+    const checkIndex = source.indexOf('async function checkDropshotLoginInternal');
+    const loginIndex = source.indexOf('async function dropshotLoginInternal', checkIndex);
+    const checkBlock = source.slice(checkIndex, loginIndex);
+    const cachedSuccessIndex = checkBlock.indexOf('if (cachedLoggedIn)');
+    const cachedWorkspaceIndex = checkBlock.indexOf('await openDropshotImageWorkspace(cachedPage, onLog)', cachedSuccessIndex);
+    const cachedControlsIndex = checkBlock.indexOf('await ensureDropshotControls(cachedPage, onLog)', cachedWorkspaceIndex);
+    const cachedReturnIndex = checkBlock.indexOf('return { loggedIn: true', cachedControlsIndex);
+    const cacheCloseIndex = checkBlock.indexOf('await closeBrowserCache();');
 
     expect(checkIndex).toBeGreaterThan(-1);
-    expect(loginIndex).toBeGreaterThan(checkIndex);
-
-    const checkBlock = source.slice(checkIndex, loginIndex);
-    expect(checkBlock).toContain('const cachedPage = getCachedPage();');
-    expect(checkBlock).toContain('await closeBrowserCache();');
-    expect(checkBlock).not.toContain('setCached(');
+    expect(cachedSuccessIndex).toBeGreaterThan(-1);
+    expect(cachedWorkspaceIndex).toBeGreaterThan(cachedSuccessIndex);
+    expect(cachedControlsIndex).toBeGreaterThan(cachedWorkspaceIndex);
+    expect(cachedReturnIndex).toBeGreaterThan(cachedControlsIndex);
+    expect(cacheCloseIndex).toBeGreaterThan(cachedReturnIndex);
   });
 
-  it('closes the final headless verification browser after interactive login succeeds', () => {
-    const finalCheckIndex = source.indexOf('const finalLoggedIn = await isLoggedIn(hpage);');
-    const closeSuccessIndex = source.indexOf('await closeLoginVerificationContext(hctx);', finalCheckIndex);
-    const successReturnIndex = source.indexOf('return { loggedIn: true', finalCheckIndex);
+  it('deduplicates repeated login and status-check requests', () => {
+    expect(source).toContain('let _loginPromise: Promise<DropshotLoginStatus> | null = null;');
+    expect(source).toContain('let _checkPromise: Promise<DropshotLoginStatus> | null = null;');
+    expect(source).toContain('if (_loginPromise) return _loginPromise;');
+    expect(source).toContain('if (_checkPromise) return _checkPromise;');
+  });
 
-    expect(finalCheckIndex).toBeGreaterThan(-1);
-    expect(closeSuccessIndex).toBeGreaterThan(finalCheckIndex);
-    expect(successReturnIndex).toBeGreaterThan(closeSuccessIndex);
+  it('reuses the exact visible context that confirmed zero-cost unlimited mode', () => {
+    const detectedIndex = source.indexOf('if (!detected)');
+    const successIndex = source.indexOf('return { loggedIn: true', detectedIndex);
+    const successBlock = source.slice(detectedIndex, successIndex);
+    const minimizeIndex = successBlock.indexOf('await minimizeDropshotWindow(page, onLog)');
+    const cacheIndex = successBlock.indexOf('setCached(ctx, page)');
+    const closeIndex = successBlock.lastIndexOf('closeLoginVerificationContext(ctx)');
 
-    const finalCheckBlock = source.slice(finalCheckIndex, successReturnIndex);
-    expect(finalCheckBlock).toContain('if (!finalLoggedIn)');
-    expect(finalCheckBlock).toContain('await hctx.close();');
-    expect(finalCheckBlock).toContain('clearCached();');
-    expect(finalCheckBlock).toContain('loggedIn: false');
-    expect(source).not.toContain('setCached(hctx, hpage);');
+    expect(minimizeIndex).toBeGreaterThan(-1);
+    expect(cacheIndex).toBeGreaterThan(minimizeIndex);
+    expect(successBlock).not.toContain('launchBrowser(profileDir, true)');
+    expect(closeIndex).toBeLessThan(minimizeIndex);
+  });
+
+  it('releases operation ownership through finally blocks', () => {
+    expect(source).toContain('tryBeginDropshotLogin()');
+    expect(source).toContain('tryBeginDropshotCheck()');
+    expect(source).toMatch(/_loginPromise\s*=\s*dropshotLoginInternal[\s\S]*finally[\s\S]*endDropshotLogin\(\)/);
+    expect(source).toMatch(/_checkPromise\s*=\s*checkDropshotLoginInternal[\s\S]*finally[\s\S]*endDropshotCheck\(\)/);
   });
 });

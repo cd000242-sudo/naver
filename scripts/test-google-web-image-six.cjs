@@ -169,6 +169,17 @@ async function runWithHardTimeout(provider, count, timeoutMinutes, task) {
   }
 }
 
+async function cleanupProvider(provider) {
+  if (provider !== 'flow') return;
+  try {
+    const { resetFlowState } = require('../dist/image/flowGenerator.js');
+    await resetFlowState();
+    log('flow: browser state cleaned up');
+  } catch (error) {
+    log(`flow: cleanup warning ${error?.message || error}`);
+  }
+}
+
 async function testProvider(provider, count, config, timeoutMinutes) {
   const normalizedProvider = provider === 'gpt-image-2' ? 'openai-image' : provider;
   const { generateImages } = require('../dist/imageGenerator.js');
@@ -270,6 +281,8 @@ async function main() {
       };
       results.push(failed);
       log(`${provider}: failed ${String(failed.error).slice(0, 500)}`);
+    } finally {
+      await cleanupProvider(provider);
     }
   }
 

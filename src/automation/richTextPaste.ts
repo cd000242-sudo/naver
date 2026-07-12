@@ -1,4 +1,4 @@
-import type { Frame, Page } from 'puppeteer';
+import type { Frame, KeyInput, Page } from 'puppeteer';
 
 export interface MobileRichHtmlOptions {
   maxChunkChars?: number;
@@ -25,10 +25,26 @@ export interface RichPasteResult {
   ok: boolean;
   method: 'clipboard-html' | 'paste-event-html' | 'clipboard-plain' | 'none';
   reason?: string;
+  safeToFallback?: boolean;
   beforeChars: number;
   afterChars: number;
   beforeTables: number;
   afterTables: number;
+}
+
+export interface PasteRollbackState {
+  restored: boolean;
+  tailReady: boolean;
+}
+
+export function resolvePasteRollbackPolicy(state: PasteRollbackState): {
+  safeToFallback: boolean;
+  canContinuePasteFallback: boolean;
+} {
+  return {
+    safeToFallback: state.restored,
+    canContinuePasteFallback: state.restored && state.tailReady,
+  };
 }
 
 export interface SoftTableTheme {
@@ -1554,19 +1570,58 @@ async function grantClipboardPermission(page: Page, frame: Frame): Promise<void>
 export function isPasteVisible(
   before: { chars: number; tables: number; text: string },
   after: { chars: number; tables: number; text: string },
-  trimmedPlain: string
+  trimmedPlain: string,
+  expectedTableDelta = 0,
 ): boolean {
-  const expected = trimmedPlain.replace(/\s+/g, ' ').trim().length;
-  const delta = after.chars - before.chars;
-  if (expected <= 60) {
-    const needle = trimmedPlain.replace(/\s+/g, ' ').slice(0, 12);
-    const normalizedAfter = after.text.replace(/\s+/g, ' ');
-    return (needle.length > 0 && normalizedAfter.includes(needle)) ||
-      delta > Math.min(20, expected / 2) ||
-      after.tables > before.tables;
+  const normalize = (value: string): string => String(value || '')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const expectedText = normalize(trimmedPlain);
+  const beforeText = normalize(before.text);
+  const afterText = normalize(after.text);
+  const expected = expectedText.length;
+  if (expected === 0 || afterText.length === 0) return false;
+  if (expectedTableDelta > 0 && after.tables - before.tables < expectedTableDelta) return false;
+
+  // A section paste is append-only. Character growth alone cannot distinguish
+  // a correct tail paste from the same block inserted at an old caret in the
+  // middle of the post, which was the source of shuffled semi-auto articles.
+  if (beforeText && !afterText.startsWith(beforeText)) return false;
+
+  const rawDelta = Math.max(0, after.chars - before.chars);
+  const normalizedDelta = Math.max(0, afterText.length - beforeText.length);
+  const coverage = Math.max(rawDelta, normalizedDelta) / expected;
+  const minimumCoverage = expected <= 60 ? 0.6 : (after.tables > before.tables ? 0.72 : 0.82);
+  if (coverage < minimumCoverage) return false;
+
+  const anchorSize = Math.min(24, Math.max(8, Math.floor(expected / 8)));
+  const anchorAt = (start: number): string => expectedText
+    .slice(Math.max(0, Math.min(start, expected - anchorSize)), Math.max(0, Math.min(start, expected - anchorSize)) + anchorSize)
+    .trim();
+  const anchorCandidates = expected <= anchorSize * 2
+    ? [expectedText]
+    : [
+        anchorAt(0),
+        anchorAt(Math.floor((expected - anchorSize) / 2)),
+        anchorAt(expected - anchorSize),
+      ];
+  const anchors = Array.from(new Set(
+    anchorCandidates.filter((anchor) => anchor.length >= Math.min(6, expected)),
+  ));
+
+  let cursor = Math.max(0, beforeText.length - 2);
+  for (const anchor of anchors) {
+    const foundAt = afterText.indexOf(anchor, cursor);
+    if (foundAt < 0) return false;
+    cursor = foundAt + anchor.length;
   }
-  const coverage = delta / expected;
-  return coverage >= 0.6 || (after.tables > before.tables && coverage >= 0.45);
+
+  const lastAnchor = anchors[anchors.length - 1];
+  if (!lastAnchor) return false;
+  const lastAnchorAt = afterText.lastIndexOf(lastAnchor);
+  const trailingChars = afterText.length - (lastAnchorAt + lastAnchor.length);
+  return lastAnchorAt >= 0 && trailingChars <= 8;
 }
 
 function buildPasteFailureReason(
@@ -1577,6 +1632,52 @@ function buildPasteFailureReason(
 ): string {
   const needle = trimmedPlain.replace(/\s+/g, ' ').slice(0, 24);
   return `${reason} (beforeChars=${before.chars}, afterChars=${after.chars}, beforeTables=${before.tables}, afterTables=${after.tables}, needle="${needle}")`;
+}
+
+function normalizeEditorSnapshotText(value: string): string {
+  return String(value || '')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+async function pressControlShortcut(page: Page, key: KeyInput): Promise<void> {
+  await page.keyboard.down('Control');
+  try {
+    await page.keyboard.press(key);
+  } finally {
+    await page.keyboard.up('Control').catch(() => undefined);
+  }
+}
+
+async function rollbackPartialPaste(
+  page: Page,
+  frame: Frame,
+  before: { chars: number; tables: number; text: string },
+  current: { chars: number; tables: number; text: string },
+): Promise<PasteRollbackState> {
+  const matchesBefore = (snapshot: { chars: number; tables: number; text: string }): boolean =>
+    normalizeEditorSnapshotText(snapshot.text) === normalizeEditorSnapshotText(before.text)
+    && snapshot.tables === before.tables;
+
+  if (matchesBefore(current)) {
+    const tailReady = await ensureTailTypingReady(page, frame).catch(() => false);
+    return { restored: true, tailReady };
+  }
+
+  await page.bringToFront().catch(() => undefined);
+  await page.evaluate(() => window.focus()).catch(() => undefined);
+  await pressControlShortcut(page, 'Z').catch(() => undefined);
+
+  for (let attempt = 0; attempt < 12; attempt += 1) {
+    await new Promise(resolve => setTimeout(resolve, 250));
+    const restored = await readEditorStats(frame);
+    if (!matchesBefore(restored)) continue;
+    const tailReady = await ensureTailTypingReady(page, frame).catch(() => false);
+    return { restored: true, tailReady };
+  }
+
+  return { restored: false, tailReady: false };
 }
 
 async function dispatchRichPasteEventAtCursor(
@@ -1683,11 +1784,10 @@ async function pastePlainTextAtCursor(page: Page, frame: Frame, plainText: strin
 
   if (!writeResult.ok) return writeResult;
 
-  await focusLastEditableLine(page, frame).catch(() => undefined);
+  const tailReady = await ensureTailTypingReady(page, frame).catch(() => false);
+  if (!tailReady) return { ok: false, reason: 'editor tail caret unavailable before plain paste' };
   await new Promise(resolve => setTimeout(resolve, 120));
-  await page.keyboard.down('Control');
-  await page.keyboard.press('V');
-  await page.keyboard.up('Control');
+  await pressControlShortcut(page, 'V');
   return { ok: true };
 }
 
@@ -2495,7 +2595,8 @@ export async function pasteRichHtmlAtCursor(
   page: Page,
   frame: Frame,
   html: string,
-  plainText: string
+  plainText: string,
+  expectedTableCount = 0,
 ): Promise<RichPasteResult> {
   const before = await readEditorStats(frame);
   const trimmedHtml = String(html || '').trim();
@@ -2506,6 +2607,7 @@ export async function pasteRichHtmlAtCursor(
       ok: false,
       method: 'none',
       reason: 'empty rich payload',
+      safeToFallback: true,
       beforeChars: before.chars,
       afterChars: before.chars,
       beforeTables: before.tables,
@@ -2519,7 +2621,16 @@ export async function pasteRichHtmlAtCursor(
     await resetInlineFormattingState(page, frame).catch(() => undefined);
     const pasteCaretReady = await ensureTailTypingReady(page, frame).catch(() => false);
     if (!pasteCaretReady) {
-      await focusLastEditableLine(page, frame).catch(() => undefined);
+      return {
+        ok: false,
+        method: 'none',
+        reason: 'editor tail caret unavailable before rich paste',
+        safeToFallback: true,
+        beforeChars: before.chars,
+        afterChars: before.chars,
+        beforeTables: before.tables,
+        afterTables: before.tables,
+      };
     }
     await new Promise(resolve => setTimeout(resolve, 120));
     await grantClipboardPermission(page, frame).catch(() => undefined);
@@ -2579,6 +2690,7 @@ export async function pasteRichHtmlAtCursor(
         ok: false,
         method: 'none',
         reason: writeResult.reason || 'clipboard write failed',
+        safeToFallback: true,
         beforeChars: before.chars,
         afterChars: after.chars,
         beforeTables: before.tables,
@@ -2588,12 +2700,19 @@ export async function pasteRichHtmlAtCursor(
 
     const postClipboardCaretReady = await ensureTailTypingReady(page, frame).catch(() => false);
     if (!postClipboardCaretReady) {
-      await focusLastEditableLine(page, frame);
+      return {
+        ok: false,
+        method: 'none',
+        reason: 'editor tail caret unavailable after clipboard write',
+        safeToFallback: true,
+        beforeChars: before.chars,
+        afterChars: before.chars,
+        beforeTables: before.tables,
+        afterTables: before.tables,
+      };
     }
     await new Promise(resolve => setTimeout(resolve, 150));
-    await page.keyboard.down('Control');
-    await page.keyboard.press('V');
-    await page.keyboard.up('Control');
+    await pressControlShortcut(page, 'V');
 
     // [2026-06-22] Slow-client fix: a long article can take several seconds to
     // finish rendering after Ctrl+V on slower machines. The old single fixed-wait
@@ -2606,7 +2725,7 @@ export async function pasteRichHtmlAtCursor(
       let lastChars = -1;
       let stableReads = 0;
       while (Date.now() - pollStart < 6000) {
-        if (isPasteVisible(before, after, trimmedPlain)) break;
+        if (isPasteVisible(before, after, trimmedPlain, expectedTableCount)) break;
         if (after.chars === lastChars) {
           stableReads += 1;
           if (stableReads >= 3) break; // count stalled → paste won't grow further
@@ -2618,7 +2737,7 @@ export async function pasteRichHtmlAtCursor(
         after = await readEditorStats(frame);
       }
     }
-    const inserted = isPasteVisible(before, after, trimmedPlain);
+    const inserted = isPasteVisible(before, after, trimmedPlain, expectedTableCount);
 
     if (inserted) {
       return {
@@ -2631,11 +2750,40 @@ export async function pasteRichHtmlAtCursor(
       };
     }
 
+    const nativeRollback = resolvePasteRollbackPolicy(
+      await rollbackPartialPaste(page, frame, before, after),
+    );
+    if (!nativeRollback.safeToFallback) {
+      return {
+        ok: false,
+        method: 'none',
+        reason: buildPasteFailureReason('native paste was partial or misplaced and rollback could not be verified', before, after, trimmedPlain),
+        safeToFallback: false,
+        beforeChars: before.chars,
+        afterChars: after.chars,
+        beforeTables: before.tables,
+        afterTables: after.tables,
+      };
+    }
+    if (!nativeRollback.canContinuePasteFallback) {
+      return {
+        ok: false,
+        method: 'none',
+        reason: buildPasteFailureReason('native paste rollback succeeded but rich-paste tail re-anchor was unavailable', before, after, trimmedPlain),
+        safeToFallback: true,
+        beforeChars: before.chars,
+        afterChars: before.chars,
+        beforeTables: before.tables,
+        afterTables: before.tables,
+      };
+    }
+
     const eventResult = await dispatchRichPasteEventAtCursor(frame, trimmedHtml, trimmedPlain);
+    let afterEvent = await readEditorStats(frame);
     if (eventResult.ok) {
       await new Promise(resolve => setTimeout(resolve, 900));
-      const afterEvent = await readEditorStats(frame);
-      if (isPasteVisible(before, afterEvent, trimmedPlain)) {
+      afterEvent = await readEditorStats(frame);
+      if (isPasteVisible(before, afterEvent, trimmedPlain, expectedTableCount)) {
         return {
           ok: true,
           method: 'paste-event-html',
@@ -2647,11 +2795,57 @@ export async function pasteRichHtmlAtCursor(
       }
     }
 
+    const eventRollback = resolvePasteRollbackPolicy(
+      await rollbackPartialPaste(page, frame, before, afterEvent),
+    );
+    if (!eventRollback.safeToFallback) {
+      return {
+        ok: false,
+        method: 'none',
+        reason: buildPasteFailureReason('paste-event fallback was partial or misplaced and rollback could not be verified', before, afterEvent, trimmedPlain),
+        safeToFallback: false,
+        beforeChars: before.chars,
+        afterChars: afterEvent.chars,
+        beforeTables: before.tables,
+        afterTables: afterEvent.tables,
+      };
+    }
+    if (!eventRollback.canContinuePasteFallback) {
+      return {
+        ok: false,
+        method: 'none',
+        reason: buildPasteFailureReason('paste-event rollback succeeded but plain-paste tail re-anchor was unavailable', before, afterEvent, trimmedPlain),
+        safeToFallback: true,
+        beforeChars: before.chars,
+        afterChars: before.chars,
+        beforeTables: before.tables,
+        afterTables: before.tables,
+      };
+    }
+
+    if (expectedTableCount > 0) {
+      return {
+        ok: false,
+        method: 'none',
+        reason: buildPasteFailureReason(
+          `SmartEditor flattened ${expectedTableCount} expected table(s); plain-text fallback is blocked`,
+          before,
+          afterEvent,
+          trimmedPlain,
+        ),
+        safeToFallback: false,
+        beforeChars: before.chars,
+        afterChars: before.chars,
+        beforeTables: before.tables,
+        afterTables: before.tables,
+      };
+    }
+
     const plainResult = await pastePlainTextAtCursor(page, frame, trimmedPlain);
     if (plainResult.ok) {
       await new Promise(resolve => setTimeout(resolve, 900));
       const afterPlain = await readEditorStats(frame);
-      if (isPasteVisible(before, afterPlain, trimmedPlain)) {
+      if (isPasteVisible(before, afterPlain, trimmedPlain, expectedTableCount)) {
         return {
           ok: true,
           method: 'clipboard-plain',
@@ -2662,10 +2856,14 @@ export async function pasteRichHtmlAtCursor(
           afterTables: afterPlain.tables,
         };
       }
+      const plainRollback = resolvePasteRollbackPolicy(
+        await rollbackPartialPaste(page, frame, before, afterPlain),
+      );
       return {
         ok: false,
         method: 'none',
         reason: buildPasteFailureReason('plain paste verification failed', before, afterPlain, trimmedPlain),
+        safeToFallback: plainRollback.safeToFallback,
         beforeChars: before.chars,
         afterChars: afterPlain.chars,
         beforeTables: before.tables,
@@ -2683,6 +2881,7 @@ export async function pasteRichHtmlAtCursor(
       ok: false,
       method: 'none',
       reason: buildPasteFailureReason(fallbackReason, before, finalStats, trimmedPlain),
+      safeToFallback: true,
       beforeChars: before.chars,
       afterChars: finalStats.chars,
       beforeTables: before.tables,
@@ -2690,10 +2889,13 @@ export async function pasteRichHtmlAtCursor(
     };
   } catch (error) {
     const after = await readEditorStats(frame);
+    const rollback = await rollbackPartialPaste(page, frame, before, after)
+      .catch((): PasteRollbackState => ({ restored: false, tailReady: false }));
     return {
       ok: false,
       method: 'none',
       reason: error instanceof Error ? error.message : String(error),
+      safeToFallback: resolvePasteRollbackPolicy(rollback).safeToFallback,
       beforeChars: before.chars,
       afterChars: after.chars,
       beforeTables: before.tables,

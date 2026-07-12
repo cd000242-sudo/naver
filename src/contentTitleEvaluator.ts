@@ -137,6 +137,8 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     { condition: mode === 'affiliate' && /(vs\s|vs\.|비교분석)/.test(t.toLowerCase()), points: 40, reason: '쇼핑: 비교 표현 (상품 1개뿐)' },
     // 쇼핑커넥트: 에러 페이지 키워드
     { condition: mode === 'affiliate' && /(에러|오류|캡차|접속|차단)/.test(t), points: 50, reason: '쇼핑: 에러 페이지 키워드' },
+    { condition: mode === 'affiliate' && /(오늘만|최저가|품절\s*임박|한정\s*수량|놓치면\s*후회|안\s*사면\s*손해|지금\s*바로\s*구매)/.test(t), points: 60, reason: '쇼핑: 근거 없는 긴급·판매 압박 문구' },
+    { condition: mode === 'affiliate' && /(인생템|필수템|가성비\s*(?:갑|최고)|카테고리\s*1위|베스트셀러)/.test(t), points: 40, reason: '쇼핑: 광고성 만능 수식어' },
     // ✅ [2026-02-10 FIX] 콜론+따옴표 패턴 — AI가 구조를 리터럴로 해석한 부자연스러운 제목
     { condition: /[:：]\s*["'\u201C\u201D\u2018\u2019\u300C\u300D]/.test(t), points: 50, reason: '콜론+따옴표 패턴' },
     // ✅ [2026-02-10 FIX] 제목에 따옴표 포함 — 블로그 제목에 부적절
@@ -179,14 +181,14 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     { condition: /\d/.test(t), points: 5, reason: '숫자 포함 (구체성)' },
     { condition: /(\?|일까|할까|인가요)/.test(t), points: 5, reason: '질문형 종결 (호기심)' },
     // 홈피드 외 모드에서만 솔직 표현 가점
-    { condition: mode !== 'homefeed' && /(솔직히|사실|실제로|진짜)/.test(t), points: 3, reason: '솔직한 표현 (신뢰)' },
-    { condition: /(몰랐던|숨겨진|비밀|반전)/.test(t), points: 5, reason: '발견 요소 (클릭 유도)' },
+    { condition: mode !== 'homefeed' && mode !== 'affiliate' && /(솔직히|사실|실제로|진짜)/.test(t), points: 3, reason: '솔직한 표현 (신뢰)' },
+    { condition: mode !== 'affiliate' && /(몰랐던|숨겨진|비밀|반전)/.test(t), points: 5, reason: '발견 요소 (클릭 유도)' },
     { condition: mode === 'seo' && t.length >= 20 && t.length <= 35, points: 5, reason: 'SEO 이상적 길이 (20~35자)' },
     // ✅ [v3] 홈피드 전용 보너스
     { condition: mode === 'homefeed' && t.length >= 28 && t.length <= 55, points: 5, reason: '홈피드 이상적 길이 (28~55자, 사건성 긴 제목 허용)' },
-    { condition: /(절대|반드시|꼭|무조건)/.test(t) && /(마세요|하세요|해야|안 됩니다)/.test(t), points: 5, reason: '행동 유도 (강한 지시)' },
+    { condition: mode !== 'affiliate' && /(절대|반드시|꼭|무조건)/.test(t) && /(마세요|하세요|해야|안 됩니다)/.test(t), points: 5, reason: '행동 유도 (강한 지시)' },
     // 홈피드 외 모드에서만 변화/비포애프터 가점
-    { condition: mode !== 'homefeed' && /(전|후|변화|달라)/.test(t), points: 3, reason: '변화/비포애프터 요소' },
+    { condition: mode !== 'homefeed' && mode !== 'affiliate' && /(전|후|변화|달라)/.test(t), points: 3, reason: '변화/비포애프터 요소' },
   ];
   for (const b of bonuses) {
     if (b.condition) {

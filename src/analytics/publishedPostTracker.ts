@@ -120,6 +120,20 @@ export function trackPublishedPost(
   }
 }
 
+/** Idempotent registration used by the main-process policy pipeline. */
+export function ensureTrackedPublishedPost(
+  userDataPath: string,
+  post: Omit<PublishedPost, 'id'>,
+  maxPosts: number = DEFAULT_MAX_POSTS,
+): { ok: boolean; id?: string } {
+  const existing = loadPublishedPosts(userDataPath).find((item) => (
+    item.url === post.url
+    || (item.blogId === post.blogId && item.logNo === post.logNo)
+  ));
+  if (existing) return { ok: true, id: existing.id };
+  return trackPublishedPost(userDataPath, post, maxPosts);
+}
+
 /**
  * 발행 후 N시간 지난 글만 — 노출 검증 대상.
  *   exposureChecker가 자동 폴링 시 사용.

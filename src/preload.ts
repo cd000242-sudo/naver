@@ -2,6 +2,8 @@ import { contextBridge, ipcRenderer } from 'electron';
 import type { AppConfig } from './configManager.js';
 import type { StructuredContent } from './contentGenerator.js';
 import type { SourceAssemblyInput } from './sourceAssembler.js';
+import type { ContentPolicyDashboard } from './contentPolicy/operatorService.js';
+import type { PublicationState } from './contentPolicy/types.js';
 
 type AutomationPayload = {
   naverId: string;
@@ -70,8 +72,19 @@ type ImageLibraryItem = {
 contextBridge.exposeInMainWorld('api', {
   runAutomation: (payload: AutomationPayload) =>
     ipcRenderer.invoke('automation:run', payload),
+  getContentPolicyDashboard: (limit?: number): Promise<{ success: boolean; dashboard?: ContentPolicyDashboard; message?: string }> =>
+    ipcRenderer.invoke('contentPolicy:getDashboard', limit),
+  pauseContentPolicyPublishing: (reason: string): Promise<{ success: boolean; state?: PublicationState; message?: string }> =>
+    ipcRenderer.invoke('contentPolicy:pause', reason),
+  resumeContentPolicyPublishing: (approval: { approvedBy: string; rootCauseReviewed: boolean; manualTestVerified: boolean }): Promise<{ success: boolean; state?: PublicationState; message?: string }> =>
+    ipcRenderer.invoke('contentPolicy:resume', approval),
+  verifyContentPolicyManualTest: (request: { url: string; title: string; keyword: string }): Promise<{ success: boolean; state?: PublicationState; checks?: any[]; message?: string }> =>
+    ipcRenderer.invoke('contentPolicy:verifyManualTest', request),
   // Excel 관련 API 제거됨
-  cancelAutomation: () => ipcRenderer.invoke('automation:cancel'),
+  cancelAutomation: (metadata?: { source?: string; reason?: string; contentRequestId?: string }) =>
+    ipcRenderer.invoke('automation:cancel', metadata),
+  cancelContentGeneration: (request: { requestId: string; reason?: string }): Promise<{ success: boolean; aborted: boolean; requestId?: string }> =>
+    ipcRenderer.invoke('automation:cancelContentGeneration', request),
   // ✅ [2026-02-23 FIX] 이미지 생성 전체 상태 초기화
   resetImageState: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('automation:resetImageState'),

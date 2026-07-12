@@ -91,6 +91,16 @@ describe('contentEngagementStrategy', () => {
     expect(generateSelfComments(makeSource({ personalExperience: '직접 써봤습니다.' }), makeContent())[0]).toBe('직접 써봤습니다.');
   });
 
+  it('작성자 경험이 없으면 자동 댓글에서도 직접 써봤다고 위장하지 않는다', () => {
+    const comments = generateSelfComments(makeSource({
+      contentMode: 'affiliate',
+      productReviews: ['무게는 가볍지만 최고 단계 소리는 크다는 구매자 후기'],
+    }), makeContent());
+
+    expect(comments[0]).toContain('구매자 후기');
+    expect(comments[0]).not.toContain('직접 써');
+  });
+
   it('keeps optimal publish time rules stable', () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2026-06-13T00:00:00+09:00'));

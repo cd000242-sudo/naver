@@ -1,11 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'fs';
 import {
+  countExpectedArticleTables,
   countExpectedPublishImages,
+  buildExpectedOrderAnchors,
   evaluatePrePublishReport,
   findLeakedMarkers,
   formatHashtagPresenceDiagnostics,
   formatPrePublishReport,
+  getBlockingFailures,
   getHashtagPresenceDiagnostics,
   getMissingExpectedHashtags,
   isEditorChromeOnlyText,
@@ -104,6 +107,92 @@ describe('evaluatePrePublishReport', () => {
     );
     expect(report.pass).toBe(false);
     expect(report.checks.find((c) => c.name === 'marker-leak')?.pass).toBe(false);
+  });
+
+  it('hard-blocks publishing when a planned table is missing from SmartEditor', () => {
+    const missing = evaluatePrePublishReport(
+      { ...okStats, tableCount: 0 },
+      { ...expectations, expectedTableMin: 1 },
+    );
+    const present = evaluatePrePublishReport(
+      { ...okStats, tableCount: 1 },
+      { ...expectations, expectedTableMin: 1 },
+    );
+
+    expect(missing.checks.find((check) => check.name === 'table-count')?.pass).toBe(false);
+    expect(getBlockingFailures(missing).some((check) => check.name === 'table-count')).toBe(true);
+    expect(present.checks.find((check) => check.name === 'table-count')?.pass).toBe(true);
+  });
+
+  it('reports a post whose section anchors exist but are out of order without using the ambiguous text check as a hard block', () => {
+    const orderedAnchors = ['갈비탕과 곰탕', '전복죽', '닭죽'];
+    const orderedText = '갈비탕과 곰탕 본문 전복죽 본문 닭죽 본문';
+    const shuffledText = '전복죽 본문 갈비탕과 곰탕 본문 닭죽 본문';
+    const ordered = evaluatePrePublishReport(
+      { ...okStats, bodyText: orderedText },
+      { ...expectations, expectedOrderedAnchors: orderedAnchors },
+    );
+    const shuffled = evaluatePrePublishReport(
+      { ...okStats, bodyText: shuffledText },
+      { ...expectations, expectedOrderedAnchors: orderedAnchors },
+    );
+
+    expect(ordered.checks.find((check) => check.name === 'section-order')?.pass).toBe(true);
+    expect(shuffled.checks.find((check) => check.name === 'section-order')?.pass).toBe(false);
+    expect(getBlockingFailures(shuffled).some((check) => check.name === 'section-order')).toBe(false);
+  });
+
+  it('builds stable beginning/middle/end anchors for a plain pasted body', () => {
+    const body = [
+      '첫 문단은 반드시 앞에 있어야 합니다.',
+      '중간 문단은 영양 정보를 설명합니다.',
+      '마지막 문단은 선택 기준을 정리합니다.',
+    ].join('\n\n');
+    const anchors = buildExpectedOrderAnchors(body, []);
+
+    expect(anchors.length).toBeGreaterThanOrEqual(3);
+    expect(anchors[0]).toContain('첫 문단');
+    expect(anchors[anchors.length - 1]).toContain('마지막 문단');
+  });
+
+  it('normalizes heading anchors exactly like the subtitle writer', () => {
+    expect(buildExpectedOrderAnchors('', [
+      '1. 갈비탕과 곰탕:',
+      '[소제목 2] 전복죽',
+      '③ 닭죽',
+    ])).toEqual(['갈비탕과 곰탕', '전복죽', '닭죽']);
+  });
+
+  it('uses marker-free text anchors for Q/A and list-style plain bodies', () => {
+    const anchors = buildExpectedOrderAnchors([
+      'Q1: 여름철 보양식은 어떻게 고르나요?',
+      '',
+      '- 소화가 잘되는 음식을 먼저 고릅니다.',
+      '',
+      'A1: 몸 상태에 맞춰 양을 조절합니다.',
+    ].join('\n'), []);
+
+    expect(anchors).toEqual([
+      '여름철 보양식은 어떻게 고르나요?',
+      '소화가 잘되는 음식을 먼저 고릅니다.',
+      '몸 상태에 맞춰 양을 조절합니다.',
+    ]);
+  });
+});
+
+describe('countExpectedArticleTables', () => {
+  it('counts valid markdown and HTML tables without counting ordinary pipes', () => {
+    const content = [
+      '| Item | Value |',
+      '| --- | --- |',
+      '| Basic | 10 |',
+      '',
+      'A | B is ordinary prose here.',
+      '',
+      '<table><tr><td>One</td></tr></table>',
+    ].join('\n');
+
+    expect(countExpectedArticleTables(content)).toBe(2);
   });
 });
 
@@ -444,7 +533,12 @@ describe('renderer publish tail diagnostics', () => {
 describe('R6 staged blocking', () => {
   it('blocks only on deterministic checks', async () => {
     const { BLOCKING_CHECKS, getBlockingFailures, evaluatePrePublishReport } = await import('../automation/prePublishAssertion.js');
-    expect([...BLOCKING_CHECKS].sort()).toEqual(['body-min-chars', 'image-count', 'marker-leak']);
+    expect([...BLOCKING_CHECKS].sort()).toEqual([
+      'body-min-chars',
+      'image-count',
+      'marker-leak',
+      'table-count',
+    ]);
     const report = evaluatePrePublishReport(
       { bodyChars: 10, imageCount: 0, linkCardCount: 0, dividerCount: 0, leakedMarkers: [], bodyText: '' },
       { minBodyChars: 500, expectedImageMin: 1, expectedLinkCardMin: 2, expectedDividerMin: 1 }

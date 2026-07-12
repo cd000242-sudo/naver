@@ -1,6 +1,8 @@
 // @ts-nocheck
 // Restored from dist/renderer/modules/fullAutoFlow.js after source encoding damage; keep runtime parity with the last successful build.
 "use strict";
+import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
+import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
@@ -548,6 +550,7 @@ function friendlyErrorMessage(error) {
     return `⚠️ 오류가 발생했습니다: ${error?.message || String(error)}`;
 }
 async function executeFullAutoFlow(formData) {
+    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
     if (!window.isContinuousMode) {
         window.stopFullAutoPublish = false;
     }
@@ -706,9 +709,7 @@ async function executeFullAutoFlow(formData) {
             console.log('[FullAuto] ♻️ formData.imageManagementImages 경로로 복구');
         }
         await yieldToUI();
-        const scSubImageMode = (formData.scSubImageSource === 'ai' || formData.scSubImageSource === 'collected')
-            ? formData.scSubImageSource
-            : resolvePipelineConfig('full-auto').shopping.subImageMode;
+        const scSubImageMode = formData.scSubImageMode;
         const isCollectedMode = formData.contentMode === 'affiliate' && scSubImageMode === 'collected';
         if (isCollectedMode && finalImages.length === 0) {
             const collectedFromContent = structuredContent.collectedImages || structuredContent.images || formData.collectedImages || [];
@@ -897,7 +898,7 @@ async function executeFullAutoFlow(formData) {
                     // [Phase 7.1-d] formData snapshot first (set by flow entry); raw
                     // accessor fallback covers callers that do not populate it
                     // (image-narrative paths) — behavior unchanged.
-                    const _headingImageModeForThumb = formData?.headingImageMode || readRawPipelineSettings().headingImageMode || 'all';
+                    const _headingImageModeForThumb = formData.headingImageMode;
                     let dedicatedThumbnailImage = null;
                     if (_headingImageModeForThumb === 'none') {
                         console.log('[FullAuto] 🚫 headingImageMode=none: 전용 썸네일 생성도 건너뜁니다.');
@@ -906,8 +907,7 @@ async function executeFullAutoFlow(formData) {
                     else
                         try {
                             const thumbnailAllowText = !!formData.includeThumbnailText;
-                            const globalImgSettings = getGlobalImageSettings();
-                            const thumbImageStyle = formData.imageStyle || globalImgSettings.imageStyle || '';
+                            const thumbImageStyle = formData.imageStyle;
                             let thumbnailPrompt;
                             try {
                                 const aiTranslated = await generateEnglishPromptForHeading(fullAutoTitle, formData.keywords, thumbImageStyle);
@@ -935,7 +935,7 @@ async function executeFullAutoFlow(formData) {
                                 isContinuousMode: !!isContinuousMode,
                                 category: formData.category || formData.categoryName || '',
                                 referenceImagePath,
-                                imageRatio: globalImgSettings.thumbnailRatio || globalImgSettings.imageRatio || '1:1',
+                                imageRatio: formData.thumbnailImageRatio || formData.imageRatio,
                                 thumbnailTextInclude: thumbnailAllowText,
                                 imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoThumbnailImageTimeoutMs(currentProvider)),
                             });
@@ -968,7 +968,7 @@ async function executeFullAutoFlow(formData) {
                             }).filter(Boolean);
                             // formData carries the live checkbox state for single
                             // full-auto; headingImageMode covers every other flow.
-                            const isThumbnailOnly = formData.thumbnailOnly === true || (formData?.headingImageMode || readRawPipelineSettings().headingImageMode) === 'thumbnail-only';
+                            const isThumbnailOnly = formData.thumbnailOnly === true || formData.headingImageMode === 'thumbnail-only';
                             if (isThumbnailOnly) {
                                 console.log('[FullAuto] 📷 썸네일만 생성 모드: 소제목 이미지 없이 전용 썸네일만 사용');
                                 return [];
@@ -977,7 +977,7 @@ async function executeFullAutoFlow(formData) {
                         })(),
                         category: formData.category || formData.categoryName || '',
                         referenceImagePath,
-                        imageRatio: (getGlobalImageSettings().subheadingRatio || getGlobalImageSettings().imageRatio || '1:1'),
+                        imageRatio: formData.subheadingImageRatio || formData.imageRatio,
                         thumbnailTextInclude: false,
                         longRunImageGeneration: true,
                         isContinuousMode: !!isContinuousMode,
@@ -1213,7 +1213,7 @@ async function executeFullAutoFlow(formData) {
     }
 }
 async function executeSemiAutoFlow(formData) {
-    formData = formData || {};
+    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
     formData._semiAutoMode = true;
     if (!window.isContinuousMode) {
         window.stopFullAutoPublish = false;
@@ -1802,6 +1802,7 @@ function collectFullAutoFormData() {
         || document.getElementById('unified-manual-title')?.value?.trim()
         || undefined;
     return {
+        pipelineConfigSnapshot: pipelineCfg,
         urls,
         keywords,
         title: manualTitleOverride || title,
@@ -1826,6 +1827,10 @@ function collectFullAutoFormData() {
         imageRatio: pipelineCfg.image.imageRatio,
         thumbnailImageRatio: pipelineCfg.image.thumbnailImageRatio,
         subheadingImageRatio: pipelineCfg.image.subheadingImageRatio,
+        imageFallbackPolicy: pipelineCfg.image.fallbackPolicy,
+        scSubImageMode: pipelineCfg.shopping.subImageMode,
+        scAIImageEngine: pipelineCfg.shopping.aiImageEngine,
+        scAutoThumbnailSetting: pipelineCfg.shopping.autoThumbnail,
     };
 }
 function validateFullAutoFormData(data) {
@@ -1866,6 +1871,7 @@ function validateFullAutoFormData(data) {
     return true;
 }
 async function executeFullAutoAutomation(formData) {
+    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
     const startBtn = document.getElementById('full-auto-start-btn');
     const progressContainer = document.createElement('div');
     progressContainer.id = 'full-auto-progress-container';
@@ -2181,6 +2187,13 @@ async function generateFullAutoContent(formData) {
         ? String(businessInfo?.researchUrl || '').trim()
         : '';
     const manualTitleOverride = getManualTitleOverride(formData);
+    const contentPolicyContext = buildRendererContentPolicyContext({
+        title: manualTitleOverride || titleStr || keywordList[0] || cleanedKeywords,
+        content: draftText || '',
+        keywords: keywordList,
+        businessInfo,
+        contentMode: formData.contentMode || 'seo',
+    });
     const payload = {
         assembly: {
             generator: formData.generator,
@@ -2197,6 +2210,7 @@ async function generateFullAutoContent(formData) {
             articleType: formData.articleType,
             toneStyle: formData.toneStyle || formData.tone,
             businessInfo,
+            contentPolicyContext,
             manualTitleOverride,
             useKeywordAsTitle: formData.keywordAsTitle || false,
             keywordForTitle: formData.keywordAsTitle ? (cleanedKeywords || titleStr || keywordList.join(' ')) : undefined,
@@ -2307,8 +2321,9 @@ async function generateFullAutoContent(formData) {
             appendLog(`📸 쇼핑몰/사이트에서 ${newImages.length}장의 제품 이미지를 확보했습니다.`);
         }
     }
-    console.log('[FullAuto] 구조화 콘텐츠 생성 완료:', result.content);
-    return result.content;
+    const tableEnhancedContent = applyPendingArticleTablesToGeneratedContent(result.content);
+    console.log('[FullAuto] 구조화 콘텐츠 생성 완료:', tableEnhancedContent);
+    return tableEnhancedContent;
 }
 async function displayContentInAllTabs(structuredContent) {
     appendLog('📋 생성된 콘텐츠를 통합 탭에 표시합니다.');
@@ -2431,6 +2446,7 @@ async function generateLibraryImagesForHeadings(headings, formData) {
     return images;
 }
 async function generateAIImagesForHeadings(headings, formData) {
+    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
     if (!headings || !Array.isArray(headings)) {
         console.warn('[AI Images] headings is undefined or not an array, failing image generation');
         appendLog('⚠️ 소제목 정보가 없어 이미지 생성을 중단합니다.');
@@ -2438,15 +2454,13 @@ async function generateAIImagesForHeadings(headings, formData) {
     }
     // [Phase 7.1-d] Raw accessor fallbacks — formData (flow-entry snapshot)
     // stays first; raw reads cover un-populating callers (image-narrative).
-    const _rawPipeline = readRawPipelineSettings();
-    const _skipImagesFlag = formData?.skipImages === true
-        || _rawPipeline.textOnlyPublish === 'true';
+    const _skipImagesFlag = formData.skipImages === true;
     if (_skipImagesFlag) {
         console.log('[AI Images] 🚫 skipImages/textOnlyPublish=true → 유료 이미지 API 호출 차단');
         appendLog('🚫 이미지 없이 발행: generateAIImagesForHeadings 호출 차단 (유료 API 비용 방지)');
         return [];
     }
-    const _resolvedHeadingImageMode = formData?.headingImageMode || _rawPipeline.headingImageMode;
+    const _resolvedHeadingImageMode = formData.headingImageMode;
     const _thumbnailOnly = formData.thumbnailOnly === true || _resolvedHeadingImageMode === 'thumbnail-only';
     const _headingImageMode = _resolvedHeadingImageMode || 'all';
     if (_headingImageMode === 'none') {
@@ -2459,19 +2473,10 @@ async function generateAIImagesForHeadings(headings, formData) {
         appendLog(`📷 썸네일만 생성 모드: 소제목 이미지 ${headings.length}개 생성을 건너뜁니다.`);
         headings = [];
     }
-    const globalSettings = getGlobalImageSettings();
-    let currentUiImageSource = '';
-    try {
-        currentUiImageSource = UnifiedDOMCache.getImageSource?.() || '';
-    }
-    catch {
-        currentUiImageSource = '';
-    }
-    let imageSource = currentUiImageSource || formData.imageSource || globalSettings.imageSource;
-    formData.imageSource = imageSource;
-    const imageStyle = formData.imageStyle || globalSettings.imageStyle;
-    const imageRatio = formData.imageRatio || globalSettings.imageRatio;
-    const imageFallbackPolicy = formData.imageFallbackPolicy || globalSettings.imageFallbackPolicy || _rawPipeline.imageFallbackPolicy || 'engine-only';
+    const imageSource = formData.imageSource;
+    const imageStyle = formData.imageStyle;
+    const imageRatio = formData.imageRatio;
+    const imageFallbackPolicy = formData.imageFallbackPolicy;
     console.log(`[AI Images] 이미지 생성 시작 - 소스: ${imageSource}, 스타일: ${imageStyle}, 비율: ${imageRatio}, 폴백정책: ${imageFallbackPolicy}, 소제목 개수: ${headings.length}`);
     const sourceNames = {
         'local-folder': '📂 내 폴더 (로컬)',
@@ -2943,11 +2948,12 @@ async function retryRunAutomationAfterRecoverablePublishFailure(apiClient, paylo
     throw new Error(retryErrorMsg);
 }
 async function executeBlogPublishing(structuredContent, generatedImages, formData) {
+    formData = createPipelineFormDataSnapshot('full-auto', formData || {});
     if (window.stopFullAutoPublish === true) {
         appendLog('⏹️ 발행 시작 전 취소 감지 → 건너뜁니다.');
         throw new Error('사용자가 작업을 취소했습니다.');
     }
-    const pipelineCfg = resolvePipelineConfig('full-auto');
+    const pipelineCfg = formData.pipelineConfigSnapshot;
     const modal = window.currentProgressModal;
     appendLog('📤 블로그 발행을 준비합니다.');
     showUnifiedProgress(85, '블로그 발행 준비 중...', '네이버 계정 정보를 확인하고 있습니다.');
@@ -3231,6 +3237,17 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         appendLog(`⏭️ 공정위 문구 비활성 (모드='${formData.contentMode || 'normal'}', 결정근거=${ftcSource})`);
     }
     const resolvedBlogCategoryName = String(formData.categoryName || '').trim() || undefined;
+    const contentPolicyContext = buildRendererContentPolicyContext({
+        title: preferredTitle || structuredContent.selectedTitle || '',
+        content: finalContent,
+        keywords: formData.keywords || structuredContent.keywords || [],
+        structuredContent,
+        businessInfo: formData.contentMode === 'business' ? (window._businessInfo || undefined) : undefined,
+        contentMode: formData.contentMode || 'seo',
+        accountId: naverId,
+        blogId: naverId,
+        cta: formData.skipCta ? undefined : ctaText,
+    });
     const payload = {
         naverId: naverId,
         naverPassword: naverPassword,
@@ -3262,6 +3279,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         affiliateLink: formData.affiliateLink,
         // [2026-06-12] 업체홍보 문의 표 이미지용 — 발행 단계에 연락 채널 전달
         businessInfo: formData.contentMode === 'business' ? (window._businessInfo || undefined) : undefined,
+        contentPolicyContext,
         previousPostTitle: formData.previousPostTitle || undefined,
         previousPostUrl: formData.previousPostUrl || undefined,
         customBannerPath: formData.customBannerPath || window.customBannerPath || undefined,

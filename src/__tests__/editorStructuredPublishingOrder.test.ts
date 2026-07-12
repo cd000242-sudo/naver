@@ -53,6 +53,47 @@ describe('structured editor publishing order', () => {
     expect(focusBeforeTyping).toBeLessThan(typingLoop);
   });
 
+  it('verifies the true document tail before inserting every subtitle', () => {
+    const automationSource = readFileSync(
+      new URL('../naverBlogAutomation.ts', import.meta.url),
+      'utf8',
+    );
+    const start = automationSource.indexOf('private async typeSubtitleWithRetry');
+    const end = automationSource.indexOf('// 인용구 삽입 헬퍼', start);
+    const subtitleWriter = automationSource.slice(start, end);
+    const tailGuard = subtitleWriter.indexOf('ensureTailTypingReady');
+    const quotationInsert = subtitleWriter.indexOf('insertQuotation');
+
+    expect(tailGuard).toBeGreaterThan(-1);
+    expect(tailGuard).toBeLessThan(quotationInsert);
+    expect(subtitleWriter).not.toContain('range.setStartAfter(lastNode)');
+  });
+
+  it('never retries the entire structured writer after any editor mutation', () => {
+    const applyStart = editorHelpersSource.indexOf('export async function applyStructuredContent');
+    const applyEnd = editorHelpersSource.indexOf('// ── setFontSize', applyStart);
+    const structuredWriter = editorHelpersSource.slice(applyStart, applyEnd);
+
+    expect(structuredWriter).toContain("}, 1, '콘텐츠 적용');");
+    expect(structuredWriter).not.toContain("}, 3, '콘텐츠 적용');");
+  });
+
+  it('does not blindly retry partially mutated subtitle or body blocks', () => {
+    const bodyStart = editorHelpersSource.indexOf('export async function typeBodyWithRetry');
+    const bodyEnd = editorHelpersSource.indexOf('// ── applyStructuredContent', bodyStart);
+    const bodyWriter = editorHelpersSource.slice(bodyStart, bodyEnd);
+    const automationSource = readFileSync(
+      new URL('../naverBlogAutomation.ts', import.meta.url),
+      'utf8',
+    );
+    const subtitleStart = automationSource.indexOf('private async typeSubtitleWithRetry');
+    const subtitleEnd = automationSource.indexOf('// 인용구 삽입 헬퍼', subtitleStart);
+    const subtitleWriter = automationSource.slice(subtitleStart, subtitleEnd);
+
+    expect(bodyWriter).toContain("}, 1, '본문 입력');");
+    expect(subtitleWriter).toContain("}, 1, '소제목(인용구) 입력');");
+  });
+
   it('recovers section body from heading.content when bodyPlain has no heading markers', () => {
     expect(editorHelpersSource).toContain('bodyTextHasHeadingMarkers');
     expect(editorHelpersSource).toContain('[본문복구] heading.content 우선 사용');

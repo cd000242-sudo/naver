@@ -9,6 +9,7 @@ import { Frame, Page } from 'puppeteer';
 import { safeKeyboardType } from './typingUtils.js';
 import { generateCtaBannerImage } from '../image/tableImageGenerator.js';
 import { pickBannerHook, pickCtaHook } from './bannerPhrasePool.js';
+import { setImageSizeToDocumentWidth } from './imageHelpers.js';
 import {
   SELECTORS,
   findElement,
@@ -149,9 +150,10 @@ export async function insertEnhancedCta(
         self.log(`   ⏳ 배너 이미지 렌더링 대기 중...`);
         await self.delay(2000);
 
-        // ✅ 배너 이미지에 제휴 링크 삽입
-        await self.attachLinkToLastImage(url);
-        self.log(`   ✅ 배너 이미지 + 제휴 링크 삽입 완료`);
+        // 배너는 시각 안내만 담당하고 링크는 아래 상품 URL 1곳에만 둔다.
+        // 배너와 링크 카드에 같은 URL을 이중 연결하면 광고성이 커지고 반복 링크가 된다.
+        await setImageSizeToDocumentWidth(self).catch(() => undefined);
+        self.log(`   ✅ CTA 배너 이미지 삽입 완료 (링크 중복 없음)`);
 
         // ✅ [핵심] 이미지 선택 해제 - Escape 눌러서 커서를 텍스트 모드로 전환
         await page.keyboard.press('Escape');

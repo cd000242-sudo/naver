@@ -7,6 +7,7 @@
  */
 
 import type { ContentSource } from './contentGenerator';
+import { classifyAffiliateEvidence } from './content/affiliateAuthenticity';
 
 /**
  * SEO 모드 제목의 치명적 이슈 감지.
@@ -228,6 +229,14 @@ export function computeAffiliateTitleCriticalIssues(title: string, source: Conte
     issues.push('금지 패턴 포함');
   }
 
+  const evidenceMode = classifyAffiliateEvidence(source).mode;
+  if (evidenceMode !== 'first_party') {
+    const unsupportedExperienceTitle = /써보|사용해보|직접\s*(?:써|사용|구매)|내돈내산|실사용|(?:한\s*달|\d+\s*(?:일|주|개월))\s*(?:써|사용)/i;
+    if (unsupportedExperienceTitle.test(t)) {
+      issues.push('작성자 실사용 근거 없는 체험형 제목');
+    }
+  }
+
   // 4. 가격대-키워드 정합성 검증
   const priceStr = String(source.productPrice || source.productInfo?.price || '').replace(/[^0-9]/g, '');
   const price = parseInt(priceStr) || 0;
@@ -252,8 +261,8 @@ export function computeAffiliateTitleCriticalIssues(title: string, source: Conte
     '추천', '후기', '리뷰', '구매', '사용', '만족', '솔직',
     '가성비', '비교', '장단점', '꿀팁', '선택', '최신', '인기',
     '2026', '2025', '신제품', '핫딜', '특가', '할인',
-    '진짜', '찐', '리얼', '현실', '솔직히', '깨달은', '써보고', '써본',
-    '대박', '후회', '실패', '꿀템', '인생', '개월', '주간'
+    '현실', '장단점', '선택', '체크', '조건', '소음', '크기', '무게',
+    '가격', '옵션', '구성', '후기에서', '구매 전', '맞을까'
   ];
   const hasTrigger = affiliateTriggers.some(x => t.includes(x));
   if (!hasTrigger) {

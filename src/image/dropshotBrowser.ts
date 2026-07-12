@@ -10,9 +10,14 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 import * as os from 'node:os';
+import { trackDropshotContext, untrackDropshotContext } from './dropshotSession.js';
+import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
 
 export const BOARD_URL =
   'https://aistudio.dropshot.io/ko/workspace/board?panel=image&imageModelName=google/nano-banana-pro';
+export const DROPSHOT_HOME_URL = 'https://aistudio.dropshot.io/ko';
+export const DROPSHOT_LOGIN_URL =
+  'https://aistudio.dropshot.io/ko/logIn?redirectTo=%2Fko%2Fworkspace%2Fboard';
 const PROFILE_NAME = 'dropshot-profile';
 const PROFILE_ROOT = '.better-life-naver';
 export const PROMPT_SELECTOR =
@@ -43,6 +48,241 @@ export interface DropshotLaunchOptions {
    * completed login cannot make later generation windows visible again.
    */
   allowForceVisible?: boolean;
+}
+
+const COGNITO_TOKEN_KEY = /CognitoIdentityServiceProvider\..+\.(idToken|accessToken)$/i;
+const MAX_DROPSHOT_JWT_LENGTH = 16_384;
+const MAX_DROPSHOT_JWT_PAYLOAD_LENGTH = 12_288;
+const MAX_DROPSHOT_STORAGE_ENTRIES = 256;
+
+interface DropshotStorageState {
+  readonly cookies?: ReadonlyArray<{
+    readonly name?: string;
+    readonly value?: string;
+    readonly domain?: string;
+  }>;
+  readonly origins?: ReadonlyArray<{
+    readonly origin?: string;
+    readonly localStorage?: ReadonlyArray<{ readonly name?: string; readonly value?: string }>;
+  }>;
+}
+
+function isDropshotHost(value: string): boolean {
+  const host = String(value || '').trim().toLowerCase().replace(/^\.+/, '');
+  return host === 'dropshot.io' || host.endsWith('.dropshot.io');
+}
+
+function isDropshotOrigin(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && isDropshotHost(url.hostname);
+  } catch {
+    return false;
+  }
+}
+
+export function isDropshotExplicitLoginUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    if (!isDropshotHost(url.hostname)) return false;
+    const path = url.pathname.toLowerCase();
+    return path.includes('/login') || path.includes('/sign-in') || path.includes('/signin');
+  } catch {
+    return false;
+  }
+}
+
+export function sanitizeDropshotErrorMessage(error: unknown, maxLength = 180): string {
+  const safeLength = Number.isFinite(maxLength) && maxLength > 0 ? Math.floor(maxLength) : 180;
+  return sanitizeUserVisibleError(error).slice(0, safeLength);
+}
+
+export function isUsableDropshotJwt(value: unknown, nowMs = Date.now()): boolean {
+  if (typeof value !== 'string') return false;
+  if (value.length === 0 || value.length > MAX_DROPSHOT_JWT_LENGTH) return false;
+  const parts = value.split('.');
+  if (parts.length !== 3 || parts.some((part) => !part)) return false;
+  if (parts[1]!.length > MAX_DROPSHOT_JWT_PAYLOAD_LENGTH) return false;
+
+  try {
+    const payload = JSON.parse(Buffer.from(parts[1]!, 'base64url').toString('utf8')) as { exp?: unknown };
+    const expiresAtSeconds = Number(payload.exp);
+    return Number.isFinite(expiresAtSeconds) && expiresAtSeconds * 1000 > nowMs;
+  } catch {
+    return false;
+  }
+}
+
+export function hasDropshotAuthInStorageState(
+  state: DropshotStorageState | null | undefined,
+  nowMs = Date.now(),
+): boolean {
+  if (!state) return false;
+
+  let inspected = 0;
+  for (const origin of state.origins ?? []) {
+    if (!isDropshotOrigin(origin.origin ?? '')) continue;
+    for (const entry of origin.localStorage ?? []) {
+      if (inspected >= MAX_DROPSHOT_STORAGE_ENTRIES) return false;
+      inspected += 1;
+      if (COGNITO_TOKEN_KEY.test(entry.name ?? '') && isUsableDropshotJwt(entry.value, nowMs)) {
+        return true;
+      }
+    }
+  }
+
+  for (const cookie of state.cookies ?? []) {
+    if (inspected >= MAX_DROPSHOT_STORAGE_ENTRIES) return false;
+    inspected += 1;
+    if (!isDropshotHost(cookie.domain ?? '')) continue;
+    if (COGNITO_TOKEN_KEY.test(cookie.name ?? '') && isUsableDropshotJwt(cookie.value, nowMs)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function isLoggedInFromStorageState(context: any): Promise<boolean> {
+  try {
+    return hasDropshotAuthInStorageState(await context.storageState());
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * A persistent Chromium profile does not expose origin localStorage through
+ * storageState until that origin has been opened in the current process.
+ * Navigation callers therefore must confirm a rendered Dropshot document
+ * before using this signal as a login verdict.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function waitForDropshotPageRender(page: any, timeoutMs = 12_000): Promise<boolean> {
+  const safeTimeout = Number.isFinite(timeoutMs) && timeoutMs > 0
+    ? Math.max(500, Math.floor(timeoutMs))
+    : 12_000;
+
+  const renderedPredicate = () => {
+    const host = String(window.location.hostname || '').toLowerCase();
+    if (host !== 'dropshot.io' && !host.endsWith('.dropshot.io')) return false;
+
+    const body = document.body;
+    if (!body) return false;
+    const bodyStyle = window.getComputedStyle(body);
+    const bodyRect = body.getBoundingClientRect();
+    if (
+      bodyStyle.display === 'none' ||
+      bodyStyle.visibility === 'hidden' ||
+      bodyRect.width < 200 ||
+      bodyRect.height < 120
+    ) {
+      return false;
+    }
+
+    const text = String(body.innerText || body.textContent || '').replace(/\s+/g, ' ').trim();
+    const visibleUi = Array.from(
+      body.querySelectorAll('main, nav, form, button, a, input, textarea, [role="button"], [role="textbox"]'),
+    ).some((element) => {
+      const rect = (element as HTMLElement).getBoundingClientRect();
+      const style = window.getComputedStyle(element as HTMLElement);
+      return rect.width > 20 && rect.height > 12 && style.display !== 'none' && style.visibility !== 'hidden';
+    });
+
+    return text.length >= 12 && visibleUi;
+  };
+
+  try {
+    await page.waitForFunction(renderedPredicate, undefined, {
+      timeout: safeTimeout,
+      polling: 250,
+    });
+  } catch {
+    // Read once more below. The final poll can race the timeout boundary.
+  }
+
+  try {
+    const pageUrl = typeof page?.url === 'function' ? String(page.url()) : '';
+    if (!isDropshotOrigin(pageUrl)) return false;
+    return !!(await page.evaluate(renderedPredicate));
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Opens Dropshot without allowing a slow SPA route to leak a raw page.goto
+ * error into the login UI. The home page is enough to read the shared
+ * Cognito session and gives interactive login a usable fallback screen.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function navigateToDropshotBoard(
+  page: any,
+  onLog?: (m: string) => void,
+  timeoutMs = 45_000,
+): Promise<boolean> {
+  const safeTimeout = Number.isFinite(timeoutMs) && timeoutMs > 0 ? timeoutMs : 45_000;
+
+  try {
+    await page.goto(BOARD_URL, {
+      waitUntil: 'commit',
+      timeout: safeTimeout,
+    });
+    if (await waitForDropshotPageRender(page, Math.min(12_000, safeTimeout))) return true;
+
+    onLog?.('[Dropshot] 보드 응답은 도착했지만 화면이 비어 있어 한 번 새로고침합니다.');
+    if (typeof page?.reload === 'function') {
+      try {
+        await page.reload({
+          waitUntil: 'commit',
+          timeout: Math.min(safeTimeout, 30_000),
+        });
+        if (await waitForDropshotPageRender(page, Math.min(12_000, safeTimeout))) return true;
+      } catch (reloadError) {
+        onLog?.(`[Dropshot] 빈 화면 새로고침 실패: ${sanitizeDropshotErrorMessage(reloadError)}`);
+      }
+    }
+  } catch (boardError) {
+    const boardMessage = sanitizeDropshotErrorMessage(boardError);
+    onLog?.(`[Dropshot] 보드 연결 지연, 로그인 홈으로 재시도합니다: ${boardMessage}`);
+  }
+
+  try {
+    await page.goto(DROPSHOT_HOME_URL, {
+      waitUntil: 'commit',
+      timeout: Math.min(safeTimeout, 20_000),
+    });
+    const rendered = await waitForDropshotPageRender(page, Math.min(10_000, safeTimeout));
+    if (!rendered) {
+      onLog?.('[Dropshot] 로그인 홈 응답은 도착했지만 실제 화면이 렌더링되지 않았습니다.');
+    }
+    return rendered;
+  } catch (homeError) {
+    const homeMessage = sanitizeDropshotErrorMessage(homeError);
+    onLog?.(`[Dropshot] 사이트 연결 실패. 브라우저 창은 유지합니다: ${homeMessage}`);
+    return false;
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function navigateToDropshotLogin(
+  page: any,
+  onLog?: (m: string) => void,
+): Promise<boolean> {
+  try {
+    await page.goto(DROPSHOT_LOGIN_URL, {
+      waitUntil: 'commit',
+      timeout: 30_000,
+    });
+    const rendered = await waitForDropshotPageRender(page, 12_000);
+    if (rendered) {
+      onLog?.('[리더스 나노바나나] 구독 계정 로그인 화면을 열었습니다.');
+    }
+    return rendered;
+  } catch (error) {
+    onLog?.(`[Dropshot] 구독 로그인 화면 열기 실패: ${sanitizeDropshotErrorMessage(error)}`);
+    return false;
+  }
 }
 
 export function getProfileDir(): string {
@@ -77,6 +317,9 @@ export async function launchBrowser(
       '--disable-blink-features=AutomationControlled',
       '--no-sandbox',
       '--disable-dev-shm-usage',
+      '--disable-background-timer-throttling',
+      '--disable-backgrounding-occluded-windows',
+      '--disable-renderer-backgrounding',
       '--lang=ko-KR,ko',
       '--window-size=1280,900',
     ],
@@ -105,6 +348,12 @@ export async function launchBrowser(
       const opts: any = channel ? { ...baseOptions, channel } : baseOptions;
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const ctx: any = await chromium.launchPersistentContext(profileDir, opts);
+      trackDropshotContext(ctx);
+      try {
+        ctx.on('close', () => untrackDropshotContext(ctx));
+      } catch {
+        // The explicit close helpers also untrack contexts.
+      }
       try {
         await ctx.addInitScript(stealthInit);
       } catch {
@@ -119,27 +368,51 @@ export async function launchBrowser(
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function minimizeDropshotWindow(
+  page: any,
+  onLog?: (m: string) => void,
+): Promise<boolean> {
+  let cdpSession: any = null;
+  try {
+    const context = typeof page?.context === 'function' ? page.context() : null;
+    if (!context || typeof context.newCDPSession !== 'function') return false;
+    cdpSession = await context.newCDPSession(page);
+    const { windowId } = await cdpSession.send('Browser.getWindowForTarget');
+    await cdpSession.send('Browser.setWindowBounds', {
+      windowId,
+      bounds: { windowState: 'minimized' },
+    });
+    onLog?.('[리더스 나노바나나] 로그인 창을 최소화하고 동일한 무제한 세션을 유지합니다.');
+    return true;
+  } catch (error) {
+    onLog?.(`[Dropshot] 로그인 창 최소화 실패: ${sanitizeDropshotErrorMessage(error)}`);
+    return false;
+  } finally {
+    try {
+      await cdpSession?.detach?.();
+    } catch {
+      // The page can close while the CDP session is detaching.
+    }
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function isLoggedIn(page: any): Promise<boolean> {
   try {
-    // ✅ [v2.11.50] 정확한 로그인 신호 = 살아있는 Cognito 세션 JWT(idToken/accessToken)뿐.
-    //   라이브 확인: dropshot은 이 토큰을 쿠키에 저장한다
-    //   (CognitoIdentityServiceProvider.<clientId>.<user>.idToken/accessToken) → localStorage·쿠키 양쪽을 본다.
-    //   ⚠️ refreshToken은 반드시 제외한다: (1) opaque 문자열이라 JWT가 아니고 (2) 로그아웃 후에도
-    //   쿠키에 잔존한다(라이브 재확인). 포함하면 아래 쿠키 길이 폴백(val.length>20)에 걸려
-    //   "로그아웃인데 로그인됨" false positive가 재발한다 — 이것이 2ed04e1e 회귀의 정확한 원인이며
-    //   사용자 라이브 테스트(v2.11.48)에서 "로그인 완료 오탐 + 로그인창 즉시 닫힘"으로 재현됐다.
-    //   idToken/accessToken만 signOut 시 제거되는 살아있는 세션 신호. LastAuthUser/deviceKey 등 "기기 기억" 키도 제외.
-    const loggedIn = await page.evaluate(() => {
-      const isJwt = (v: string | null): boolean => {
-        if (!v) return false;
-        const parts = v.split('.');
-        return parts.length === 3 && parts.every((p) => p.length > 0);
-      };
+    const pageUrl = typeof page?.url === 'function' ? String(page.url()) : '';
+    if (!isDropshotOrigin(pageUrl) || isDropshotExplicitLoginUrl(pageUrl)) return false;
+
+    const context = typeof page?.context === 'function' ? page.context() : null;
+    if (context && (await isLoggedInFromStorageState(context))) return true;
+
+    const candidates: Array<{ name: string; value: string }> = await page.evaluate(() => {
+      const values: Array<{ name: string; value: string }> = [];
       const TOKEN_KEY = /CognitoIdentityServiceProvider\..+\.(idToken|accessToken)$/i;
       try {
         for (let i = 0; i < localStorage.length; i++) {
           const k = localStorage.key(i) || '';
-          if (TOKEN_KEY.test(k) && isJwt(localStorage.getItem(k))) return true;
+          const value = localStorage.getItem(k) || '';
+          if (TOKEN_KEY.test(k)) values.push({ name: k, value });
         }
       } catch {
         // localStorage 접근 불가
@@ -152,16 +425,16 @@ export async function isLoggedIn(page: any): Promise<boolean> {
           if (!TOKEN_KEY.test(name)) continue;
           let decoded = val;
           try { decoded = decodeURIComponent(val); } catch { /* keep raw */ }
-          // 쿠키 값이 JWT면 확실. 인코딩/길이 변형이 있어도 토큰 쿠키 존재 + 긴 값이면
-          // 살아있는 세션으로 인정(이 쿠키는 로그아웃 시 제거됨).
-          if (isJwt(decoded) || val.length > 20) return true;
+          values.push({ name, value: decoded });
         }
       } catch {
         // cookie 접근 불가
       }
-      return false;
+      return values;
     });
-    return !!loggedIn;
+    return candidates.some(({ name, value }) =>
+      COGNITO_TOKEN_KEY.test(name) && isUsableDropshotJwt(value),
+    );
   } catch {
     return false;
   }
@@ -209,10 +482,7 @@ export async function openDropshotImageWorkspace(
 ): Promise<boolean> {
   try {
     if (!page.url().includes('workspace/board') || !page.url().includes('panel=image')) {
-      await page.goto(BOARD_URL, {
-        waitUntil: 'domcontentloaded',
-        timeout: 45000,
-      });
+      if (!(await navigateToDropshotBoard(page, onLog))) return false;
       await new Promise((r) => setTimeout(r, 4000));
     }
 
@@ -225,10 +495,7 @@ export async function openDropshotImageWorkspace(
       if (await isImageWorkspaceReady(page)) return true;
     }
 
-    await page.goto(BOARD_URL, {
-      waitUntil: 'domcontentloaded',
-      timeout: 45000,
-    });
+    if (!(await navigateToDropshotBoard(page, onLog))) return false;
     await new Promise((r) => setTimeout(r, 5000));
     return await isImageWorkspaceReady(page);
   } catch (e) {
@@ -347,6 +614,40 @@ export async function readDropshotControlState(page: any): Promise<DropshotContr
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function waitForDropshotControlConfirmation(
+  page: any,
+  timeoutMs = 12_000,
+): Promise<DropshotControlState> {
+  const deadline = Date.now() + timeoutMs;
+  let lastState: DropshotControlState = {
+    unlimitedModeOn: null,
+    zeroCost: false,
+    generateButtonText: '',
+    hasUnlimitedCopy: false,
+    switchCount: 0,
+  };
+
+  while (Date.now() < deadline) {
+    const pageUrl = typeof page?.url === 'function' ? String(page.url()) : '';
+    if (isDropshotExplicitLoginUrl(pageUrl)) {
+      throw new Error(
+        'Dropshot subscription login is required before unlimited mode can be confirmed.',
+      );
+    }
+
+    try {
+      lastState = await readDropshotControlState(page);
+      if (lastState.unlimitedModeOn === true && lastState.zeroCost) return lastState;
+    } catch {
+      // A toggle can replace the SPA document or redirect to the subscription login page.
+    }
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+
+  return lastState;
+}
+
 /** Ensure unlimited mode toggle ON + counter set to 1 (idempotent). */
 export async function ensureDropshotControls(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -354,6 +655,27 @@ export async function ensureDropshotControls(
   onLog?: (m: string) => void,
 ): Promise<void> {
   try {
+    // Set the count before enabling unlimited mode because the toggle may
+    // replace the SPA document or redirect to the subscription login page.
+    await page.evaluate(() => {
+      const numberInputs = Array.from(
+        document.querySelectorAll('input[type="number"]'),
+      );
+      for (const inp of numberInputs) {
+        const v = Number((inp as HTMLInputElement).value);
+        if (v >= 2 && v <= 10) {
+          const descriptor = Object.getOwnPropertyDescriptor(
+            window.HTMLInputElement.prototype,
+            'value',
+          );
+          const setter = descriptor?.set;
+          if (setter) setter.call(inp, '1');
+          inp.dispatchEvent(new Event('input', { bubbles: true }));
+          inp.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+    });
+
     // 1. Enable unlimited mode toggle. Dropshot changes its switch markup often,
     // so identify the target by nearby "unlimited" copy when possible and fall
     // back to the single visible switch only when there is no ambiguity.
@@ -418,31 +740,10 @@ export async function ensureDropshotControls(
     });
     if (toggleResult.toggled) {
       onLog?.('[dropshot] unlimited mode switch enabled');
-      await new Promise((r) => setTimeout(r, 1200));
     }
 
-    // 2. Set counter to 1 (React-controlled input requires native setter)
-    await page.evaluate(() => {
-      const numberInputs = Array.from(
-        document.querySelectorAll('input[type="number"]'),
-      );
-      for (const inp of numberInputs) {
-        const v = Number((inp as HTMLInputElement).value);
-        if (v >= 2 && v <= 10) {
-          const descriptor = Object.getOwnPropertyDescriptor(
-            window.HTMLInputElement.prototype,
-            'value',
-          );
-          const setter = descriptor?.set;
-          if (setter) setter.call(inp, '1');
-          inp.dispatchEvent(new Event('input', { bubbles: true }));
-          inp.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-      }
-    });
-    await new Promise((r) => setTimeout(r, 500));
-    const state = await readDropshotControlState(page);
-    const switchConfirmed = state.unlimitedModeOn !== false;
+    const state = await waitForDropshotControlConfirmation(page);
+    const switchConfirmed = state.unlimitedModeOn === true;
     if (!switchConfirmed || !state.zeroCost) {
       throw new Error(
         `Dropshot unlimited/zero-cost mode was not confirmed; refusing to generate to avoid coin spend. ` +
@@ -457,8 +758,10 @@ export async function ensureDropshotControls(
     if (message.includes('refusing to generate to avoid coin spend')) {
       throw e;
     }
-    onLog?.(
-      `[리더스 나노바나나] controls 설정 오류 (무시): ${(e as Error).message?.slice(0, 80)}`,
+    const safeMessage = sanitizeDropshotErrorMessage(e, 220);
+    onLog?.(`[리더스 나노바나나] 무제한 모드 확인 실패: ${safeMessage}`);
+    throw new Error(
+      `Dropshot unlimited/zero-cost mode was not confirmed; refusing to generate to avoid coin spend. ${safeMessage}`,
     );
   }
 }

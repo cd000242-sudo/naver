@@ -62,10 +62,12 @@ describe('Session Reconnect Defense — Stage gates', () => {
       expect(code).toMatch(/locked[\s\S]{0,300}attemptReconnect/);
     });
 
-    it('locked session path: reconnect exhausted then locked guard then delete', () => {
-      // After reconnect fails: locked guard check appears before sessions.delete
-      // Verified in the else-branch: if (existingSession.locked) warn → sessions.delete
-      expect(code).toMatch(/existingSession\.locked[\s\S]{0,300}sessions\.delete/);
+    it('locked session path retains ownership until browser close succeeds', () => {
+      // Reconnect exhaustion must close through the ownership-aware helper.
+      // A timeout blocks recreation instead of orphaning the old browser.
+      expect(code).toMatch(/existingSession\.locked[\s\S]{0,900}disconnectedSessionClosed/);
+      expect(code).toContain('if (!disconnectedSessionClosed)');
+      expect(code).toContain('BROWSER_SESSION_CLEANUP_INCOMPLETE');
     });
 
     it('locked session logs warning before forced close', () => {

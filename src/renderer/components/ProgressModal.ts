@@ -155,9 +155,26 @@ export class ProgressModal {
             (window as any)._contentGenerationCancelled = true;
             (window as any).stopFullAutoPublish = true;
             (window as any).stopBatchPublish = true;
-            try { (window as any).api?.cancelAutomation?.(); } catch { /* ignore */ }
+            const requestId = String((window as any)._activeContentGenerationRequestId || '');
+            let scopedAbort = false;
+            if (requestId) {
+                try {
+                    const result = await (window as any).api?.cancelContentGeneration?.({
+                        requestId,
+                        reason: 'progress modal stop button',
+                    });
+                    scopedAbort = result?.aborted === true;
+                } catch { /* ignore */ }
+            }
             if (this.onStopRequest) {
                 try { await this.onStopRequest(); } catch (e: any) { console.warn('[ProgressModal] onStopRequest 실패:', e?.message); }
+            } else if (!scopedAbort) {
+                try {
+                    await (window as any).api?.cancelAutomation?.({
+                        source: 'progress-modal',
+                        reason: 'stop button outside content generation',
+                    });
+                } catch { /* ignore */ }
             }
             this.hide();
         };

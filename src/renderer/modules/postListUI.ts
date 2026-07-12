@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 import { extractDisplayUrl, validateBlobReferences } from '../utils/imageDisplayHelpers.js';
+import { normalizeHashtags } from '../utils/hashtagUtils.js';
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
 declare let currentStructuredContent: any;
@@ -53,6 +54,63 @@ declare function _invalidatePostsCache(): void;
 
 let refreshInFlight = false;
 let refreshQueued = false;
+
+type GeneratedPostFieldData = {
+  title?: unknown;
+  content?: unknown;
+  hashtags?: unknown;
+};
+
+function dispatchCompletedFieldEvents(
+  fields: Array<HTMLInputElement | HTMLTextAreaElement | null>,
+): void {
+  fields.filter(
+    (field): field is HTMLInputElement | HTMLTextAreaElement => Boolean(field),
+  ).forEach((field) => {
+    field.dispatchEvent(new Event('input', { bubbles: true }));
+  });
+}
+
+/** Populates the editable post fields before exposing their completed state to listeners. */
+export function populateGeneratedPostFields(
+  post: GeneratedPostFieldData,
+  postId: string,
+  normalizeBody: (text: string) => string = normalizeReadableBodyText,
+): void {
+  const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement | null;
+  const contentTextarea = document.getElementById('unified-generated-content') as HTMLTextAreaElement | null;
+  const hashtagsInput = document.getElementById('unified-generated-hashtags') as HTMLInputElement | null;
+  const imageTitleInput = document.getElementById('image-title') as HTMLInputElement | null;
+  const title = String(post.title || '');
+  const rawContent = String(post.content || '');
+  const normalizedContent = normalizeBody(rawContent);
+  const finalContent = normalizedContent.trim() ? normalizedContent : rawContent;
+  const hashtags = normalizeHashtags(post.hashtags);
+
+  if (titleInput) {
+    titleInput.value = title;
+    titleInput.readOnly = false;
+  }
+  if (contentTextarea) {
+    contentTextarea.value = finalContent;
+    contentTextarea.readOnly = false;
+    console.log(`[loadGeneratedPost] 본문 로드: raw=${rawContent.length}자, normalized=${normalizedContent.length}자, final=${finalContent.length}자, postId=${postId}`);
+    if (rawContent.length > 0 && normalizedContent.trim().length === 0) {
+      console.warn(`[loadGeneratedPost] ⚠️ normalize가 본문을 전부 제거함 → 원본 raw로 fallback (postId=${postId})`);
+    }
+  } else {
+    console.warn(`[loadGeneratedPost] ⚠️ unified-generated-content textarea가 DOM에 없음 (postId=${postId})`);
+  }
+  if (hashtagsInput) {
+    hashtagsInput.value = hashtags.join(' ');
+    hashtagsInput.readOnly = false;
+  }
+  if (imageTitleInput) {
+    imageTitleInput.value = title;
+  }
+
+  dispatchCompletedFieldEvents([titleInput, contentTextarea, hashtagsInput]);
+}
 
 export function refreshGeneratedPostsList(): void {
   if (refreshInFlight) {
@@ -974,16 +1032,24 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
   generatedImages = [];
   (window as any).imageManagementGeneratedImages = [];
   ImageManager.clear(); // ✅ ImageManager도 초기화 (이전 글의 이미지 매핑 제거)
-  currentPostId = postId; // ✅ 현재 글 ID 설정
+  currentPostId = post.id; // ✅ 저장된 글의 canonical ID 사용
 
   // structuredContent 재구성
   // ✅ [v2.10.277] quality 복원 — 글 불러오기 시 4개 위험 지표(AI/SEO/법적/일일권장) 표시
+  const restoredHashtags = normalizeHashtags(post.hashtags);
+  const storedStructuredContent = post.structuredContent
+    && typeof post.structuredContent === 'object'
+    && !Array.isArray(post.structuredContent)
+    ? post.structuredContent
+    : {};
   const structuredContent: any = {
+    ...storedStructuredContent,
+    _postId: post.id,
     selectedTitle: post.title,
     bodyPlain: post.content,
     content: post.content,
-    hashtags: post.hashtags || [],
-    headings: post.headings || [],
+    hashtags: restoredHashtags,
+    headings: post.headings || storedStructuredContent.headings || [],
     quality: (post as any).quality || undefined,
   };
 
@@ -1003,44 +1069,12 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
     }, 100);
   }
 
-  // ✅ 반자동 모드 필드에 채우기 (수정 가능)
-  const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
-  const contentTextarea = document.getElementById('unified-generated-content') as HTMLTextAreaElement;
-  const hashtagsInput = document.getElementById('unified-generated-hashtags') as HTMLInputElement;
-  const imageTitleInput = document.getElementById('image-title') as HTMLInputElement;
-
-  if (titleInput) {
-    titleInput.value = post.title;
-    titleInput.readOnly = false; // 수정 가능하게
-    // Trigger input event so syncIntegratedPreviewFromInputs() reflects the title.
-    titleInput.dispatchEvent(new Event('input', { bubbles: true }));
-  }
-  // ✅ [v2.10.225] 사용자 보고: "본문내용이 싹다날아갓네"
-  //   대응: normalize 후 빈 문자열이면 원본 raw로 fallback + 진단 로그
-  if (contentTextarea) {
-    const rawContent = String(post.content || '');
-    const normalized = normalizeReadableBodyText(rawContent);
-    const finalContent = normalized.trim() ? normalized : rawContent;
-    contentTextarea.value = finalContent;
-    contentTextarea.readOnly = false;
-    // Dispatch input event so syncIntegratedPreviewFromInputs() updates the preview body.
-    // Setting .value programmatically does not fire the input event, causing the
-    // preview to show only headings/images while the body text remains blank.
-    contentTextarea.dispatchEvent(new Event('input', { bubbles: true }));
-    console.log(`[loadGeneratedPost] 본문 로드: raw=${rawContent.length}자, normalized=${normalized.length}자, final=${finalContent.length}자, postId=${postId}`);
-    if (rawContent.length > 0 && normalized.trim().length === 0) {
-      console.warn(`[loadGeneratedPost] ⚠️ normalize가 본문을 전부 제거함 → 원본 raw로 fallback (postId=${postId})`);
-    }
-  } else {
-    console.warn(`[loadGeneratedPost] ⚠️ unified-generated-content textarea가 DOM에 없음 (postId=${postId})`);
-  }
-  if (hashtagsInput) {
-    hashtagsInput.value = (post.hashtags || []).join(' ');
-    hashtagsInput.readOnly = false; // 수정 가능하게
-  }
-  if (imageTitleInput) {
-    imageTitleInput.value = post.title;
-  }
+  // 모든 필드 값을 먼저 채운 뒤 이벤트를 발생시켜 중간 상태 저장을 방지합니다.
+  populateGeneratedPostFields({
+    title: post.title,
+    content: post.content,
+    hashtags: restoredHashtags,
+  }, post.id);
 
   // ✅ 이미지 불러오기 (저장된 이미지 경로 사용 및 검증)
   if (post.images && post.images.length > 0) {

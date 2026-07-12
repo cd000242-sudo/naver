@@ -687,11 +687,25 @@ export async function initPriceInfoModal(): Promise<void> {
   const externalApiDailyImageLimit = document.getElementById('external-api-daily-image-limit') as HTMLInputElement;
   const externalApiUsageText = document.getElementById('external-api-usage-text') as HTMLParagraphElement;
   const saveSettingsBtn = document.getElementById('save-settings-btn') as HTMLButtonElement;
+  const settingsApi = (window as any).api;
+  const isBrowserPreview = settingsApi?.__browserPreview === true;
+  const hasSettingsBridge = !isBrowserPreview && typeof settingsApi?.getConfig === 'function';
+
+  // The static browser preview does not receive Electron's preload bridge.
+  // Render safe defaults there instead of treating the missing bridge as a settings failure.
+  if (!hasSettingsBridge) {
+    console.info('[Settings] Browser preview detected. Electron settings bridge is unavailable.');
+    if (saveSettingsBtn) {
+      saveSettingsBtn.disabled = true;
+      saveSettingsBtn.setAttribute('aria-disabled', 'true');
+      saveSettingsBtn.title = '브라우저 미리보기에서는 환경설정을 저장할 수 없습니다. 앱에서 실행해 주세요.';
+    }
+  }
 
   // 설정 로드
   try {
     console.log('[Settings] 설정 로드 시작...');
-    const config = await window.api.getConfig();
+    const config = hasSettingsBridge ? await settingsApi.getConfig() : {};
     console.log('[Settings] 설정 로드 성공:', Object.keys(config || {}).length, '개 항목');
 
     if (!config) {
@@ -699,7 +713,9 @@ export async function initPriceInfoModal(): Promise<void> {
       throw new Error('설정을 불러올 수 없습니다 (null/undefined)');
     }
 
-    const isPackaged = await window.api.isPackaged();
+    const isPackaged = typeof settingsApi?.isPackaged === 'function'
+      ? await settingsApi.isPackaged()
+      : true;
     console.log('[Settings] 배포 모드:', isPackaged);
 
     // 사용자 프로필 필드
@@ -1153,8 +1169,15 @@ export async function initPriceInfoModal(): Promise<void> {
   (window as any).saveSettingsHandler = async function (): Promise<void> {
     try {
 
-        const isPackaged = await window.api.isPackaged();
-        const currentConfig = await window.api.getConfig().catch(() => ({}));
+        if (!hasSettingsBridge || typeof settingsApi?.saveConfig !== 'function') {
+          toastManager.warning('브라우저 미리보기에서는 환경설정을 저장할 수 없습니다. 앱에서 실행해 주세요.');
+          return;
+        }
+
+        const isPackaged = typeof settingsApi?.isPackaged === 'function'
+          ? await settingsApi.isPackaged()
+          : true;
+        const currentConfig = await settingsApi.getConfig().catch(() => ({}));
 
         // 사용자 프로필 필드
         const userDisplayName = document.getElementById('user-display-name') as HTMLInputElement;

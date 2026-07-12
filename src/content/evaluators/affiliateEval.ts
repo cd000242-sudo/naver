@@ -16,10 +16,11 @@
  */
 
 import type { SubScore, EvaluationInput } from '../qualityEvaluator';
+import { auditAffiliateAuthenticity } from '../affiliateAuthenticity';
 
 const USAGE_TONE = ['직접 써', '직접 사용', '사용해보', '써본', '겪어', '경험해', '체험', '실제로', '한 달', '일주일', '며칠'];
 const COMPARISON = ['비교', '대비', '차이', '장점', '단점', '아쉬운', '좋은 점', '나쁜 점', 'vs', '대신', '반면'];
-const CTA_WORDS = ['추천', '권', '구매', '확인', '알아보', '둘러보', '한정', '특가', '할인', '쿠폰', '링크'];
+const CTA_WORDS = ['추천', '권', '구매', '확인', '알아보', '둘러보', '상품 페이지', '링크'];
 const SHOPPING_CLICHE = ['재구매', '배송 빨랐', '재구매 의사', '강추', '인생템', '갓성비', '5점 만점', '100% 만족', '강력 추천'];
 const RECOMMEND_TARGET = ['추천드려', '에게 추천', '이런 분', '하시는 분', '필요하신 분', '고민하시', '워킹맘', '직장인', '주부', '학생', '신혼', '어린이'];
 
@@ -70,16 +71,36 @@ export function evaluateAffiliate(input: EvaluationInput): SubScore {
   details.priceSpec = psScore;
   total += psScore;
 
-  // 3. 사용 경험 톤 (20점) — 직접 써본 듯한 표현
+  // 3. 근거 정합성 (20점)
+  // 구매자 리뷰는 작성자의 실사용 증거가 아니다. 근거 모드에 맞는 화자만 만점 처리한다.
+  const evidenceMode = input.affiliateEvidenceMode ?? 'spec_only';
+  const authenticity = auditAffiliateAuthenticity({
+    title,
+    body,
+    evidenceMode,
+  });
+  const evidenceIssues = authenticity.issues.filter(issue =>
+    issue.code === 'FABRICATED_FIRST_PERSON'
+    || issue.code === 'MISSING_REVIEW_ATTRIBUTION'
+    || issue.code === 'UNSUPPORTED_SOCIAL_PROOF'
+  );
   const usageCount = countMatches(body, USAGE_TONE);
-  let useScore = 0;
-  if (usageCount >= 3) useScore = 20;
-  else if (usageCount >= 1) useScore = 12;
-  else {
-    useScore = 4;
-    issues.push('사용 경험 표현 부재 — "직접 써본" 톤 부족');
-    suggestions.push('"한 달 써봤어요", "직접 사용해보니", "처음 받았을 때" 같은 체험 표현 배치');
+  let useScore = 20;
+  if (evidenceIssues.some(issue => issue.hard)) {
+    useScore = 0;
+    issues.push('작성자 경험 근거와 본문 화자가 불일치 — 구매자 리뷰를 내 경험처럼 쓰거나 근거 없는 반응을 만들었음');
+    suggestions.push('실사용 메모가 없으면 1인칭 체험을 지우고, 구매자 후기 또는 스펙의 출처를 분명히 밝힐 것');
+  } else if (evidenceIssues.length > 0) {
+    useScore = 10;
+    issues.push(...evidenceIssues.map(issue => issue.message));
+    suggestions.push('후기 종합형은 반복 의견과 갈리는 의견을 구매자 후기라고 필요한 곳에서만 귀속할 것');
+  } else if (evidenceMode === 'first_party' && usageCount === 0) {
+    useScore = 14;
+    issues.push('사용자가 제공한 실제 경험이 본문에 충분히 반영되지 않음');
+    suggestions.push('제공된 실사용 메모 안의 구체 상황·장단점만 1인칭으로 자연스럽게 반영');
   }
+  details.evidenceIntegrity = useScore;
+  // 기존 UI/테스트 호환용 키. 의미는 이제 "가짜 체험량"이 아니라 근거 정합성이다.
   details.usageExperience = useScore;
   total += useScore;
 

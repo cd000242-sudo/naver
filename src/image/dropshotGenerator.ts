@@ -99,6 +99,7 @@ export async function generateWithDropshot(
   ) => void,
 ): Promise<GeneratedImage[]> {
   const results: GeneratedImage[] = [];
+  let lastFailure = '';
   // Per-batch dedup tracking sets (shared across items within one call)
   const usedSha256 = new Set<string>();
   const usedAHashes: bigint[] = [];
@@ -141,6 +142,7 @@ export async function generateWithDropshot(
       );
 
       if (!result.ok || !result.dataUrl) {
+        lastFailure = result.error || 'Dropshot image generation failed';
         console.warn(
           `[리더스 나노바나나] [${idx + 1}/${items.length}] 생성 실패: ${result.error}`,
         );
@@ -210,6 +212,10 @@ export async function generateWithDropshot(
       results.push(generatedImage);
       onImageGenerated?.(generatedImage, idx, items.length);
     }
+  }
+
+  if (results.length === 0 && lastFailure) {
+    throw new Error(lastFailure);
   }
 
   return results;

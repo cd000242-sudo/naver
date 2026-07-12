@@ -17,4 +17,10 @@ describe('Dropshot browser visibility policy', () => {
     expect(code).toMatch(/options\.allowForceVisible === true/);
     expect(code).toMatch(/const effectiveHeadless = forceVisible \? false : headless/);
   });
+
+  it('minimizes a verified visible login context instead of destroying its subscription session', () => {
+    expect(code).toMatch(/export async function minimizeDropshotWindow/);
+    expect(code).toMatch(/Browser\.getWindowForTarget/);
+    expect(code).toMatch(/windowState:\s*'minimized'/);
+  });
 });

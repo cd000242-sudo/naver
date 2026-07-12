@@ -7,11 +7,33 @@
  * without circular imports.
  */
 
+import { withCleanupTimeout } from '../runtime/cleanupTimeout.js';
+
 let cachedContext: unknown = null;
 let cachedPage: unknown = null;
+const trackedContexts = new Set<unknown>();
 
 /** Serialize all generation calls — single shared browser page. */
 let _generationChain: Promise<unknown> = Promise.resolve();
+let pendingGenerations = 0;
+let loginActive = false;
+let checkActive = false;
+let generationEpoch = 0;
+
+export class DropshotCleanupIncompleteError extends Error {
+  readonly code = 'DROPSHOT_CLEANUP_INCOMPLETE';
+
+  constructor(message = 'Dropshot browser context cleanup did not complete') {
+    super(message);
+    this.name = 'DropshotCleanupIncompleteError';
+  }
+}
+
+export interface DropshotOperationState {
+  readonly pendingGenerations: number;
+  readonly loginActive: boolean;
+  readonly checkActive: boolean;
+}
 
 export function getCachedPage(): unknown {
   return cachedPage;
@@ -24,6 +46,7 @@ export function getCachedContext(): unknown {
 export function setCached(ctx: unknown, page: unknown): void {
   cachedContext = ctx;
   cachedPage = page;
+  trackDropshotContext(ctx);
 }
 
 export function clearCached(): void {
@@ -39,18 +62,115 @@ export function setGenerationChain(p: Promise<unknown>): void {
   _generationChain = p;
 }
 
-/** Invalidate cached browser context (called on fatal errors). */
-export function invalidateBrowserCache(): void {
-  cachedPage = null;
-  cachedContext = null;
+export function getDropshotGenerationEpoch(): number {
+  return generationEpoch;
+}
+
+/** Invalidates every generation that captured an older epoch. */
+export function abortDropshotGenerations(): number {
+  generationEpoch += 1;
+  return generationEpoch;
+}
+
+export function isDropshotGenerationAborted(capturedEpoch: number): boolean {
+  return capturedEpoch !== generationEpoch;
+}
+
+export function trackDropshotContext(context: unknown): void {
+  if (context) trackedContexts.add(context);
+}
+
+export function untrackDropshotContext(context: unknown): void {
+  if (context) trackedContexts.delete(context);
+}
+
+export function getDropshotOperationState(): DropshotOperationState {
+  return { pendingGenerations, loginActive, checkActive };
+}
+
+export function tryBeginDropshotGeneration(): boolean {
+  if (loginActive || checkActive) return false;
+  pendingGenerations += 1;
+  return true;
+}
+
+export function endDropshotGeneration(): void {
+  pendingGenerations = Math.max(0, pendingGenerations - 1);
+}
+
+export function tryBeginDropshotLogin(): boolean {
+  if (pendingGenerations > 0 || loginActive || checkActive) return false;
+  loginActive = true;
+  return true;
+}
+
+export function endDropshotLogin(): void {
+  loginActive = false;
+}
+
+export function tryBeginDropshotCheck(): boolean {
+  if (pendingGenerations > 0 || loginActive || checkActive) return false;
+  checkActive = true;
+  return true;
+}
+
+export function endDropshotCheck(): void {
+  checkActive = false;
+}
+
+export async function closeTrackedDropshotContext(
+  context: unknown,
+  timeoutMs = 5_000,
+): Promise<boolean> {
+  if (!context || typeof (context as { close?: unknown }).close !== 'function') {
+    untrackDropshotContext(context);
+    return true;
+  }
+
+  try {
+    await withCleanupTimeout(
+      () => (context as { close: () => Promise<void> }).close(),
+      timeoutMs,
+      'Dropshot browser context',
+    );
+    untrackDropshotContext(context);
+    return true;
+  } catch {
+    // Keep ownership so a later shutdown/abort pass can try this context again.
+    return false;
+  }
 }
 
 /** Close and clear the cached browser context. Useful for tests and shutdown. */
-export async function closeBrowserCache(): Promise<void> {
+export async function closeBrowserCache(timeoutMs = 5_000): Promise<void> {
   const context = cachedContext;
   cachedPage = null;
   cachedContext = null;
-  if (context && typeof (context as { close?: unknown }).close === 'function') {
-    await (context as { close: () => Promise<void> }).close();
+  const closed = await closeTrackedDropshotContext(context, timeoutMs);
+  if (!closed) {
+    throw new DropshotCleanupIncompleteError();
   }
+}
+
+/** Close every context, including visible login windows not stored in the cache. */
+export async function closeAllDropshotContexts(timeoutMs = 5_000): Promise<void> {
+  const contexts = new Set(trackedContexts);
+  if (cachedContext) contexts.add(cachedContext);
+
+  cachedPage = null;
+  cachedContext = null;
+
+  const results = await Promise.all(
+    [...contexts].map((context) => closeTrackedDropshotContext(context, timeoutMs)),
+  );
+  if (results.some((closed) => !closed)) {
+    throw new DropshotCleanupIncompleteError(
+      'One or more Dropshot browser contexts could not be closed before the deadline',
+    );
+  }
+}
+
+/** Fatal browser errors must close the old persistent context before relaunch. */
+export async function invalidateBrowserCache(): Promise<void> {
+  await closeBrowserCache();
 }

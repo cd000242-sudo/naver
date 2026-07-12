@@ -6,6 +6,16 @@
 import { toastManager } from '../utils/uiManagers.js';
 import { GENERATED_POSTS_KEY } from '../utils/postStorageUtils.js';
 import { createTime24Select, bindTime24Events } from '../utils/time24Select';
+import { selectScheduledPostCandidate } from '../../scheduler/scheduledPostLookupPolicy.js';
+
+function escapeHtml(value: unknown): string {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
 
 // TS 컴파일용 — 런타임에서는 renderer.ts의 동일 스코프 함수 사용
 declare function showErrorAlertModal(title: string, message: string): void;
@@ -37,7 +47,7 @@ export function showRescheduleModal(postId: string, title: string, onConfirm: (n
         <div style="width: 48px; height: 48px; background: rgba(245, 158, 11, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📅</div>
         <div>
           <h3 style="margin: 0; color: var(--text-strong); font-size: 1.2rem;">예약 시간 변경</h3>
-          <p style="margin: 0.25rem 0 0 0; color: var(--text-muted); font-size: 0.85rem;">${title}</p>
+          <p style="margin: 0.25rem 0 0 0; color: var(--text-muted); font-size: 0.85rem;">${escapeHtml(title)}</p>
         </div>
       </div>
       <div style="margin-bottom: 1.5rem;">
@@ -175,6 +185,11 @@ export async function initScheduleManagement(): Promise<void> {
                 }
 
                 scheduledPostsList.innerHTML = filteredPosts.map((post: any) => {
+                    const safeTitle = escapeHtml(post.title || '제목 없음');
+                    const safePostId = escapeHtml(post.postId || '');
+                    const safeScheduleId = escapeHtml(post.id || '');
+                    const safePublishedUrl = escapeHtml(post.publishedUrl || '');
+                    const safeError = escapeHtml(post.error || '알 수 없는 오류가 발생했습니다.');
                     const scheduleDate = new Date(post.scheduleDate);
                     const now = new Date();
                     const isPast = scheduleDate < now;
@@ -201,6 +216,10 @@ export async function initScheduleManagement(): Promise<void> {
                         statusText = '❌ 취소됨'; statusColor = '#ef4444'; statusIcon = '❌';
                     } else if (post.status === 'failed') {
                         statusText = '⚠️ 발행 실패'; statusColor = '#ef4444'; statusIcon = '⚠️';
+                    } else if (post.status === 'uncertain') {
+                        statusText = '🔎 결과 확인 필요'; statusColor = '#f59e0b'; statusIcon = '🔎';
+                    } else if (post.status === 'publishing') {
+                        statusText = '⏳ 발행 확인 중'; statusColor = '#f59e0b'; statusIcon = '⏳';
                     } else if (isPast) {
                         statusText = '⏰ 발행 대기'; statusColor = '#f59e0b'; statusIcon = '⏰';
                     } else {
@@ -209,18 +228,18 @@ export async function initScheduleManagement(): Promise<void> {
 
                     const titleClickable = post.status === 'published' && post.publishedUrl;
                     const titleHtml = titleClickable
-                        ? `<a href="${post.publishedUrl}" target="_blank" style="font-size: 1.2rem; font-weight: 600; color: var(--primary); margin: 0; text-decoration: none; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${post.title || '제목 없음'} 🔗</a>`
-                        : `<h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-strong); margin: 0;">${post.title || '제목 없음'}</h3>`;
+                        ? `<a href="${safePublishedUrl}" target="_blank" style="font-size: 1.2rem; font-weight: 600; color: var(--primary); margin: 0; text-decoration: none; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">${safeTitle} 🔗</a>`
+                        : `<h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-strong); margin: 0;">${safeTitle}</h3>`;
 
                     return `
             <div style="background: var(--bg-secondary); border: 2px solid var(--border-light); border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; transition: all 0.3s;">
               <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                 ${titleHtml}
                 <div style="display: flex; gap: 0.5rem;">
-                  <button type="button" class="scheduled-post-preview" data-post-id="${post.postId || ''}" data-title="${(post.title || '').replace(/"/g, '&quot;')}" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                  <button type="button" class="scheduled-post-preview" data-post-id="${safePostId}" data-title="${safeTitle}" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
                     👁️ 미리보기
                   </button>
-                  <button type="button" class="scheduled-post-remove" data-post-id="${post.id}" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
+                  <button type="button" class="scheduled-post-remove" data-post-id="${safeScheduleId}" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s;">
                     🗑️ 삭제
                   </button>
                 </div>
@@ -244,25 +263,25 @@ export async function initScheduleManagement(): Promise<void> {
                   ${post.publishedUrl ? `
                     <div>
                       <span style="color: var(--text-muted);">🔗 발행 URL:</span>
-                      <a href="#" class="external-link-btn" data-url="${post.publishedUrl}" style="color: var(--primary); font-weight: 600; margin-left: 0.5rem; text-decoration: none; cursor: pointer;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">바로가기</a>
+                      <a href="#" class="external-link-btn" data-url="${safePublishedUrl}" style="color: var(--primary); font-weight: 600; margin-left: 0.5rem; text-decoration: none; cursor: pointer;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">바로가기</a>
                     </div>
                   ` : ''}
                 </div>
               ` : ''}
-              ${post.status === 'failed' ? `
+              ${post.status === 'failed' || post.status === 'uncertain' ? `
                 <div style="margin-top: 1rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px;">
                   <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
                     <span style="font-size: 1.25rem;">⚠️</span>
-                    <strong>발행 실패</strong>
+                    <strong>${post.status === 'uncertain' ? '발행 결과 확인 필요' : '발행 실패'}</strong>
                   </div>
                   <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0 0 1rem 0; line-height: 1.5;">
-                    ${post.error || '알 수 없는 오류가 발생했습니다.'}
+                    ${safeError}
                   </p>
                   <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                    <button type="button" class="scheduled-post-reschedule" data-post-id="${post.id}" data-title="${(post.title || '').replace(/"/g, '&quot;')}" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">
+                    <button type="button" class="scheduled-post-reschedule" data-post-id="${safeScheduleId}" data-title="${safeTitle}" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">
                       📅 시간 변경 후 재시도
                     </button>
-                    <button type="button" class="scheduled-post-retry" data-post-id="${post.id}" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">
+                    <button type="button" class="scheduled-post-retry" data-post-id="${safeScheduleId}" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">
                       🔄 즉시 재시도
                     </button>
                   </div>
@@ -281,30 +300,11 @@ export async function initScheduleManagement(): Promise<void> {
 
                         try {
                             const generatedPosts = JSON.parse(localStorage.getItem(GENERATED_POSTS_KEY) || '[]');
-                            let postData;
-                            if (postId && postId.trim() && postId !== 'null' && postId !== 'undefined') {
-                                postData = generatedPosts.find((p: any) => p.id === postId);
-                            }
-
-                            if (!postData && title) {
-                                postData = generatedPosts.find((p: any) => p.title === title);
-                                if (!postData) {
-                                    const normalizedTitle = title.toLowerCase().replace(/[^a-z0-9가-힣]/g, '');
-                                    postData = generatedPosts.find((p: any) => {
-                                        const normalizedPostTitle = (p.title || '').toLowerCase().replace(/[^a-z0-9가-힣]/g, '');
-                                        return normalizedPostTitle.includes(normalizedTitle) || normalizedTitle.includes(normalizedPostTitle);
-                                    });
-                                }
-                                if (!postData && generatedPosts.length > 0) {
-                                    postData = generatedPosts.sort((a: any, b: any) => {
-                                        return new Date(b.updatedAt || b.createdAt || 0).getTime() - new Date(a.updatedAt || a.createdAt || 0).getTime();
-                                    })[0];
-                                    toastManager.warning('⚠️ 정확한 글을 찾지 못해 가장 최근 글을 표시합니다.');
-                                }
-                            }
+                            const lookup = selectScheduledPostCandidate(generatedPosts, postId, title);
+                            const postData = lookup.post;
 
                             if (!postData) {
-                                toastManager.error('❌ 글 데이터를 찾을 수 없습니다.');
+                                toastManager.error('❌ 예약에 연결된 정확한 글 데이터를 찾을 수 없습니다.');
                                 return;
                             }
 

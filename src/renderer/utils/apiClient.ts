@@ -9,6 +9,14 @@ import { toastManager } from './uiManagers.js';
 // appendLog는 renderer.ts에서 정의되어 window에 노출됨
 declare const appendLog: (message: string, logId?: string) => void;
 
+function createContentGenerationRequestId(): string {
+    const cryptoApi = globalThis.crypto as Crypto | undefined;
+    if (typeof cryptoApi?.randomUUID === 'function') {
+        return `content-${cryptoApi.randomUUID()}`;
+    }
+    return `content-${Date.now()}-${Math.random().toString(36).slice(2, 12)}`;
+}
+
 export interface ApiRequestOptions {
     retryCount?: number;
     retryDelay?: number;
@@ -29,6 +37,7 @@ export class EnhancedApiClient {
     private static instance: EnhancedApiClient;
     private cache: Map<string, { data: any; timestamp: number }> = new Map();
     private pendingRequests: Map<string, Promise<any>> = new Map();
+    private activeContentGeneration: { cacheKey: string; requestId: string } | null = null;
 
     // ✅ [2026-01-29] Circuit Breaker 통합 (연속 실패 시 일시 중단)
     private circuitBreaker = {
@@ -102,17 +111,17 @@ export class EnhancedApiClient {
         console.log('[API] 🔄 Circuit Breaker 수동 리셋');
     }
 
-    private async abortStaleContentGeneration(apiMethod: string): Promise<void> {
-        if (apiMethod !== 'generateStructuredContent') return;
+    private async abortStaleContentGeneration(apiMethod: string, requestId?: string): Promise<void> {
+        if (apiMethod !== 'generateStructuredContent' || !requestId) return;
 
-        const cancelAutomation = (window as any).api?.cancelAutomation;
-        if (typeof cancelAutomation !== 'function') return;
+        const cancelContentGeneration = (window as any).api?.cancelContentGeneration;
+        if (typeof cancelContentGeneration !== 'function') return;
 
         try {
-            console.warn('[API] generateStructuredContent timeout — main 생성 작업 abort 요청');
-            await cancelAutomation();
+            console.warn(`[API] generateStructuredContent timeout — scoped abort 요청 (${requestId})`);
+            await cancelContentGeneration({ requestId, reason: 'renderer API timeout' });
         } catch (cancelError) {
-            console.warn('[API] generateStructuredContent timeout abort 실패(계속 진행):', cancelError);
+            console.warn('[API] generateStructuredContent scoped abort 실패(계속 진행):', cancelError);
         }
     }
 
@@ -164,14 +173,36 @@ export class EnhancedApiClient {
             return await this.pendingRequests.get(cacheKey);
         }
 
+        if (apiMethod === 'generateStructuredContent' && this.activeContentGeneration) {
+            console.warn(`[API] 다른 글 생성이 이미 진행 중: ${this.activeContentGeneration.requestId}`);
+            return {
+                success: false,
+                error: '다른 글 생성이 이미 진행 중입니다. 완료 또는 취소 후 다시 시도해주세요.'
+            };
+        }
+
+        let requestId: string | undefined;
+        let effectiveArgs = args;
+        if (apiMethod === 'generateStructuredContent') {
+            const first = args[0] && typeof args[0] === 'object' ? args[0] as Record<string, unknown> : {};
+            const suppliedId = typeof first.requestId === 'string' ? first.requestId.trim() : '';
+            requestId = /^[A-Za-z0-9._:-]{1,128}$/.test(suppliedId)
+                ? suppliedId
+                : createContentGenerationRequestId();
+            effectiveArgs = [{ ...first, requestId }, ...args.slice(1)];
+            (window as any)._activeContentGenerationRequestId = requestId;
+            this.activeContentGeneration = { cacheKey, requestId };
+        }
+
         const requestPromise = this.executeWithRetry<T>(
             apiMethod,
-            args,
+            effectiveArgs,
             retryCount,
             retryDelay,
             timeout,
             cacheKey,
-            cache
+            cache,
+            requestId,
         );
 
         this.pendingRequests.set(cacheKey, requestPromise);
@@ -181,6 +212,12 @@ export class EnhancedApiClient {
             return result;
         } finally {
             this.pendingRequests.delete(cacheKey);
+            if (requestId && (window as any)._activeContentGenerationRequestId === requestId) {
+                (window as any)._activeContentGenerationRequestId = undefined;
+            }
+            if (requestId && this.activeContentGeneration?.requestId === requestId) {
+                this.activeContentGeneration = null;
+            }
         }
     }
 
@@ -192,7 +229,8 @@ export class EnhancedApiClient {
         retryDelay: number,
         timeout: number,
         cacheKey: string,
-        cache: boolean
+        cache: boolean,
+        requestId?: string,
     ): Promise<ApiResponse<T>> {
         let lastError: Error | null = null;
 
@@ -297,7 +335,7 @@ export class EnhancedApiClient {
                 // ✅ 타임아웃 오류 - 네트워크 환경에 따라 재시도
                 if (isTimeoutError) {
                     console.log(`[API] ${apiMethod} - 응답 대기 중... (네트워크 환경에 따라 시간이 걸릴 수 있습니다)`);
-                    await this.abortStaleContentGeneration(apiMethod);
+                    await this.abortStaleContentGeneration(apiMethod, requestId);
 
                     // 마지막 시도가 아니면 계속 재시도
                     if (attempt < retryCount && apiMethod !== 'generateStructuredContent') {

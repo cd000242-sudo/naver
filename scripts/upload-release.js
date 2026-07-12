@@ -154,6 +154,7 @@ function gitPush() {
             'src/',
             'public/',
             'scripts/',
+            'config/',
             `tmp/release-notes-v${VERSION}.md`,
             '.agent/workflows/'
         ];
@@ -173,17 +174,13 @@ function gitPush() {
             // unstage 대상이 없으면 무시
         }
 
-        // 커밋 (변경사항 없으면 스킵)
-        try {
-            const status = execSync('git status --porcelain', opts).trim();
-            if (status) {
-                execSync(`git commit -m "v${VERSION} release"`, opts);
-                console.log(`   ✅ 커밋 완료: v${VERSION} release`);
-            } else {
-                console.log('   ⏭️ 변경사항 없음, 커밋 스킵');
-            }
-        } catch (e) {
-            console.log('   ⏭️ 커밋 스킵 (이미 커밋됨)');
+        // 스테이징된 릴리스 파일이 있으면 반드시 커밋한다.
+        const stagedFiles = execSync('git diff --cached --name-only', opts).trim();
+        if (stagedFiles) {
+            execSync(`git commit -m "v${VERSION} release"`, opts);
+            console.log(`   ✅ 커밋 완료: v${VERSION} release`);
+        } else {
+            console.log('   ⏭️ 스테이징된 변경사항 없음, 커밋 스킵');
         }
 
         // 태그
@@ -200,11 +197,12 @@ function gitPush() {
             execSync(`git push "${pushUrl}" main "${TAG}" 2>&1`, opts);
             console.log('   ✅ Push 완료');
         } catch (e) {
-            // push 실패해도 릴리즈 업로드는 계속 진행
-            console.log(`   ⚠️ Push 실패 (릴리즈 업로드는 계속): ${e.message.substring(0, 100)}`);
+            console.log(`   ❌ Push 실패: ${e.message.substring(0, 100)}`);
+            throw new Error('Git push failed');
         }
     } catch (error) {
-        console.log(`   ⚠️ Git 작업 실패 (계속 진행): ${error.message.substring(0, 100)}`);
+        console.log(`   ❌ Git 작업 실패: ${error.message.substring(0, 100)}`);
+        throw error;
     }
 }
 

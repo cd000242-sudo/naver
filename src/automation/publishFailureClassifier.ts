@@ -1,5 +1,6 @@
 export type PublishFailureCode =
   | 'USER_CANCELLED'
+  | 'PUBLISH_OUTCOME_UNKNOWN'
   | 'BROWSER_CLOSED'
   | 'LOGIN_CHALLENGE'
   | 'EDITOR_NOT_READY'
@@ -31,6 +32,10 @@ function includesAny(value: string, patterns: readonly string[]): boolean {
 
 export function classifyPublishFailure(input: unknown): PublishFailureClassification {
   const message = toMessage(input);
+
+  if (includesAny(message, ['PUBLISH_UNCONFIRMED', 'SCHEDULE_PUBLISH_OUTCOME_UNKNOWN'])) {
+    return { code: 'PUBLISH_OUTCOME_UNKNOWN', retryable: false, userActionRequired: true };
+  }
 
   if (includesAny(message, ['취소', 'cancelled', 'canceled', 'user cancelled', 'user canceled'])) {
     return { code: 'USER_CANCELLED', retryable: false, userActionRequired: false };

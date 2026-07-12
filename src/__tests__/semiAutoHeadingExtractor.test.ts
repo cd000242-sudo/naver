@@ -1,7 +1,85 @@
 import { describe, expect, it } from 'vitest';
-import { extractSemiAutoHeadingsFromBody } from '../renderer/utils/semiAutoHeadingExtractor';
+import {
+  extractSemiAutoDocumentFromBody,
+  extractSemiAutoHeadingsFromBody,
+  isCurrentSemiAutoPasteRevision,
+  resolveSemiAutoPublishStructure,
+} from '../renderer/utils/semiAutoHeadingExtractor';
 
 describe('semi-auto manual heading extractor', () => {
+  it('rejects stale async paste results after publish starts or the textarea changes', () => {
+    expect(isCurrentSemiAutoPasteRevision(7, 7, '현재 본문', '현재 본문')).toBe(true);
+    expect(isCurrentSemiAutoPasteRevision(8, 7, '현재 본문', '현재 본문')).toBe(false);
+    expect(isCurrentSemiAutoPasteRevision(7, 7, '사용자가 다시 고친 본문', '이전 붙여넣기 본문')).toBe(false);
+  });
+  it('locks publish sections to the pasted body order instead of stale heading order', () => {
+    const body = [
+      '여름철에는 소화가 편한 보양식을 고르는 것이 중요합니다.',
+      '',
+      '1. 갈비탕과 곰탕',
+      '고기를 오래 끓여 만든 국물 요리입니다.',
+      '단백질을 보충하는 데 도움이 됩니다.',
+      '',
+      '2. 전복죽',
+      '소화가 잘되고 부담이 적습니다.',
+      '회복기 식사로도 자주 선택됩니다.',
+      '',
+      '3. 닭죽',
+      '수분 보충과 함께 부드럽게 영양을 섭취할 수 있습니다.',
+    ].join('\n');
+
+    const staleHeadings = [
+      { title: '닭죽', content: '잘못 저장된 닭죽 본문' },
+      { title: '전복죽', content: '잘못 저장된 전복죽 본문' },
+      { title: '갈비탕과 곰탕', content: '잘못 저장된 갈비탕 본문' },
+    ];
+
+    const document = extractSemiAutoDocumentFromBody(body);
+    expect(document.introduction).toBe('여름철에는 소화가 편한 보양식을 고르는 것이 중요합니다.');
+    expect(document.headings.map((heading) => heading.title)).toEqual([
+      '갈비탕과 곰탕',
+      '전복죽',
+      '닭죽',
+    ]);
+
+    const resolved = resolveSemiAutoPublishStructure(body, staleHeadings, {
+      bodyIsAuthoritative: true,
+      existingIntroduction: '오래된 도입부',
+    });
+    expect(resolved.strategy).toBe('body-sections');
+    expect(resolved.orderLocked).toBe(true);
+    expect(resolved.headings.map((heading) => heading.title)).toEqual([
+      '갈비탕과 곰탕',
+      '전복죽',
+      '닭죽',
+    ]);
+    expect(resolved.headings[1]?.content).toContain('회복기 식사');
+    expect(resolved.headings[1]?.content).not.toContain('단백질을 보충');
+  });
+
+  it('publishes an unstructured pasted body once instead of evenly redistributing it', () => {
+    const body = [
+      '완성된 글의 첫 문단입니다.',
+      '',
+      '이 글은 별도 소제목 표식 없이 문단 순서 자체가 중요합니다.',
+      '',
+      '마지막 문단은 반드시 맨 아래에 있어야 합니다.',
+    ].join('\n');
+    const staleHeadings = [
+      { title: '예전 소제목 1', content: '' },
+      { title: '예전 소제목 2', content: '' },
+    ];
+
+    const resolved = resolveSemiAutoPublishStructure(body, staleHeadings, {
+      bodyIsAuthoritative: true,
+      existingIntroduction: '',
+    });
+
+    expect(resolved.strategy).toBe('plain-body');
+    expect(resolved.headings).toEqual([]);
+    expect(resolved.introduction).toBe(body);
+    expect(resolved.orderLocked).toBe(true);
+  });
   it('detects chatbot-style plain-text headings even when blank lines follow headings', () => {
     const body = [
       '이순재를 다시 떠올리게 한 건 하이킥이 아니라 마지막 대상이었다',

@@ -6,6 +6,11 @@
 // ✅ renderer.ts의 전역 변수/함수 참조
 import { extractSemiAutoHeadingsFromBody } from '../utils/semiAutoHeadingExtractor.js';
 import { ensureAgentEngineReady } from '../utils/agentModeGuard.js';
+import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
+import { normalizeHashtags } from '../utils/hashtagUtils.js';
+import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
+import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
+import type { FillSemiAutoFieldsOptions } from '../types/index.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -100,7 +105,6 @@ declare function isPaywallPayload(payload: any): boolean;
 declare function activatePaywall(...args: any[]): void;
 declare function getReviewHeadingSeed(...args: any[]): any;
 declare function applyReviewHeadingPrefix(...args: any[]): void;
-declare function applyKeywordPrefixToTitleContinuous(...args: any[]): any;
 
 const CONTENT_GENERATION_TIMEOUT_MS = 360000;
 const CONTENT_GENERATION_RETRY_COUNT = 0;
@@ -464,6 +468,7 @@ export async function generateContentFromUrl(
   (window as any).generatedImages = []; // ✅ [2026-01-21] 연속 발행용 이미지 변수도 초기화
   (window as any).imageManagementGeneratedImages = [];
   ImageManager.clear(); // ✅ ImageManager 초기화 (이전 글의 이미지 매핑 제거)
+  currentPostId = null; // 새 URL 글이 이전 글을 덮어쓰지 않도록 편집 ID 초기화
   // ✅ [v2.10.26] 글생성 취소 플래그 초기화 (이전 취소 상태 잔존 방지)
   (window as any)._contentGenerationCancelled = false;
   // ✅ 활성 모달 결정 (suppressModal이면 메인 진행 모달 사용, 아니면 개별 모달)
@@ -551,6 +556,17 @@ export async function generateContentFromUrl(
   };
   const categoryHint = categoryHintMap[articleType] || '';
   const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
+  const businessInfo = collectBusinessInfo(contentMode);
+  const personalExperience = contentMode === 'affiliate'
+    ? ((document.getElementById('shopping-connect-personal-experience') as HTMLTextAreaElement | null)?.value || '').trim().slice(0, 4000) || undefined
+    : undefined;
+  const contentPolicyContext = buildRendererContentPolicyContext({
+    title: manualTitleOverride || keywordList[0] || url,
+    content: '',
+    keywords: keywordList,
+    businessInfo,
+    contentMode,
+  });
 
   // ✅ 리뷰형이면 로그 출력
   if (isReviewType) {
@@ -571,9 +587,11 @@ export async function generateContentFromUrl(
       isReviewType, // ✅ 리뷰형 여부 전달
       // ✅ [2026-02-09 v2] 연속발행 시 이전 제목 히스토리 전달 (중복 방지)
       previousTitles: ((window as any)._previousTitles as string[]) || undefined,
-      businessInfo: collectBusinessInfo(contentMode), // ✅ [v1.4.24]
+      businessInfo,
+      contentPolicyContext,
       hookHint, // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 (선택)
       manualTitleOverride,
+      personalExperience,
     }
   };
 
@@ -622,7 +640,7 @@ export async function generateContentFromUrl(
     showUnifiedProgress(70, '📝 응답 처리 중...', `${engineLabel(generator)} 엔진 응답을 분석하고 있습니다`);
 
     const result = apiResponse.data;
-    const structuredContent = result.content;
+    let structuredContent = result.content;
     applyManualTitleOverrideToContent(structuredContent, manualTitleOverride);
 
     // ✅ [2026-03-07 FIX] 스크래핑된 콘텐츠에서 원본 블로거 메타데이터 제거
@@ -638,23 +656,13 @@ export async function generateContentFromUrl(
     const _rawCoreKeyword = (keywords || '').split(',').map((k) => k.trim()).filter(Boolean)[0] || '';
     const coreKeyword = /^https?:\/\//i.test(_rawCoreKeyword) ? '' : _rawCoreKeyword;
     if (!manualTitleOverride && coreKeyword) {
-      // ✅ [2026-02-08 FIX] 강화된 중복 방지: 키워드의 모든 토큰이 이미 제목에 포함되어 있으면 건너뜀
       const currentTitle = String(structuredContent.selectedTitle || structuredContent.title || '');
       // ✅ [2026-03-10 FIX] currentTitle이 URL이면 키워드 접두사 적용 건너뛰
       if (/^https?:\/\//i.test(currentTitle.trim())) {
         console.warn(`[GenerateContent] ⚠️ currentTitle이 URL이므로 키워드 접두사 건너뛰: "${currentTitle.substring(0, 60)}"`);
       } else {
-        const keywordTokens = coreKeyword.split(/\s+/).filter((t: string) => t.length >= 2);
-        const titleLower = currentTitle.toLowerCase();
-        const allTokensPresent = keywordTokens.length > 0 && keywordTokens.every((t: string) => titleLower.includes(t.toLowerCase()));
-
-        if (!allTokensPresent) {
-          structuredContent.selectedTitle = applyKeywordPrefixToTitleContinuous(currentTitle, coreKeyword);
-          console.log('[GenerateContent] 키워드 접두사 적용:', { coreKeyword, result: structuredContent.selectedTitle });
-        } else {
-          structuredContent.selectedTitle = currentTitle;
-          console.log('[GenerateContent] 키워드 토큰 모두 포함됨, 건너뜀:', { coreKeyword, title: currentTitle });
-        }
+        structuredContent.selectedTitle = applyKeywordPrefixToTitle(currentTitle, coreKeyword);
+        console.log('[GenerateContent] 키워드 접두사/중복 정규화:', { coreKeyword, result: structuredContent.selectedTitle });
       } // ✅ [2026-03-10] URL 방어 블록 닫는 괄호
       // titleAlternatives와 titleCandidates는 중복 체크 없이 그대로 유지 (contentGenerator.ts에서 이미 처리됨)
     }
@@ -672,15 +680,16 @@ export async function generateContentFromUrl(
           const seoResult = await (window as any).api.generateSeoTitle(productName);
           if (seoResult?.success && seoResult.title && seoResult.title !== productName) {
             const originalTitle = structuredContent.selectedTitle || '';
-            structuredContent.selectedTitle = seoResult.title;
+            const normalizedSeoTitle = applyKeywordPrefixToTitle(seoResult.title, coreKeyword);
+            structuredContent.selectedTitle = normalizedSeoTitle;
             // ✅ UI 필드도 동시 업데이트
             try {
               const titleInput1 = document.getElementById('unified-generated-title') as HTMLInputElement;
-              if (titleInput1) titleInput1.value = seoResult.title;
+              if (titleInput1) titleInput1.value = normalizedSeoTitle;
               const titleInput2 = document.getElementById('unified-title') as HTMLInputElement;
-              if (titleInput2) titleInput2.value = seoResult.title;
+              if (titleInput2) titleInput2.value = normalizedSeoTitle;
             } catch { }
-            appendLog(`✅ SEO 제목: "${originalTitle}" → "${seoResult.title}"`);
+            appendLog(`✅ SEO 제목: "${originalTitle}" → "${normalizedSeoTitle}"`);
           }
         } catch (seoErr) {
           console.warn('[GenerateContent] SEO 제목 생성 실패:', seoErr);
@@ -693,6 +702,7 @@ export async function generateContentFromUrl(
 
     // ✅ [2026-01-20 버그수정] 생성된 콘텐츠를 전역 상태에 저장 (필수!)
     // 이 저장이 누락되면 풀오토 발행에서 콘텐츠를 찾을 수 없어 실패함
+    structuredContent = applyPendingArticleTablesToGeneratedContent(structuredContent);
     currentStructuredContent = structuredContent;
     (window as any).currentStructuredContent = structuredContent;
     console.log('[GenerateContent] currentStructuredContent 저장 완료:', structuredContent?.selectedTitle);
@@ -1103,6 +1113,17 @@ export async function generateContentFromKeywords(
   };
   const categoryHint = categoryHintMap[articleType] || '';
   const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
+  const businessInfo = collectBusinessInfo(contentMode);
+  const personalExperience = contentMode === 'affiliate'
+    ? ((document.getElementById('shopping-connect-personal-experience') as HTMLTextAreaElement | null)?.value || '').trim().slice(0, 4000) || undefined
+    : undefined;
+  const contentPolicyContext = buildRendererContentPolicyContext({
+    title: manualTitleOverride || title || keywordList[0] || keywords,
+    content: crawledText || '',
+    keywords: keywordList,
+    businessInfo,
+    contentMode,
+  });
 
   // ✅ 리뷰형/정보형 선택 확인 (키워드 생성에서도 반영)
   const selectedContentType = (window as any).selectedContentType || 'info';
@@ -1145,8 +1166,10 @@ export async function generateContentFromKeywords(
       // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 옵션 전달 (메인 프로세스에서 제목 조작 건너뛰기)
       useKeywordAsTitle: (window as any)._keywordTitleOptions?.useKeywordAsTitle || false,
       keywordForTitle: (window as any)._keywordTitleOptions?.keyword || undefined,
-      businessInfo: collectBusinessInfo(contentMode), // ✅ [v1.4.24]
+      businessInfo,
+      contentPolicyContext,
       manualTitleOverride,
+      personalExperience,
     }
   };
 
@@ -1193,7 +1216,7 @@ export async function generateContentFromKeywords(
     }
 
     const result = apiResponse.data;
-    const structuredContent = result.content;
+    let structuredContent = result.content;
     applyManualTitleOverrideToContent(structuredContent, manualTitleOverride);
 
     // ✅ [2026-02-13] 키워드 제목 옵션 후처리 (AI 생성된 제목을 사용자 설정에 맞게 조정)
@@ -1248,6 +1271,7 @@ export async function generateContentFromKeywords(
 
     // ✅ [2026-01-20 버그수정] 생성된 콘텐츠를 전역 상태에 저장 (필수!)
     // generateContentFromUrl과 동일한 버그였음 - 풀오토 키워드 발행 실패 원인
+    structuredContent = applyPendingArticleTablesToGeneratedContent(structuredContent);
     currentStructuredContent = structuredContent;
     (window as any).currentStructuredContent = structuredContent;
     console.log('[GenerateContentKeywords] currentStructuredContent 저장 완료:', structuredContent?.selectedTitle);
@@ -1417,7 +1441,10 @@ export function autoFillCTAFromContent(): void {
 }
 
 // 반자동 모드 필드에 콘텐츠 채우기 (통합 및 강화됨)
-export function fillSemiAutoFields(structuredContent: any): void {
+export function fillSemiAutoFields(
+  structuredContent: any,
+  options: FillSemiAutoFieldsOptions = {},
+): void {
   console.log('[fillSemiAutoFields] Called with:', JSON.stringify(structuredContent).substring(0, 100) + '...');
 
   // 반자동 모드 섹션 표시
@@ -1444,6 +1471,11 @@ export function fillSemiAutoFields(structuredContent: any): void {
     console.error('[fillSemiAutoFields] structuredContent is null or undefined!');
     return;
   }
+
+  structuredContent = {
+    ...structuredContent,
+    hashtags: normalizeHashtags(structuredContent.hashtags),
+  };
 
   // 제목 필드 채움 (수정 가능)
   const titleInput = document.getElementById('unified-generated-title') as HTMLInputElement;
@@ -1516,10 +1548,8 @@ export function fillSemiAutoFields(structuredContent: any): void {
 
   // 해시태그 필드 채움 (수정 가능)
   const hashtagsInput = document.getElementById('unified-generated-hashtags') as HTMLInputElement;
-  if (hashtagsInput && structuredContent.hashtags) {
-    const hashtagsStr = Array.isArray(structuredContent.hashtags)
-      ? structuredContent.hashtags.join(' ')
-      : structuredContent.hashtags;
+  if (hashtagsInput) {
+    const hashtagsStr = structuredContent.hashtags.join(' ');
     console.log('[fillSemiAutoFields] Updating hashtags:', hashtagsStr);
     hashtagsInput.value = hashtagsStr;
     hashtagsInput.readOnly = false;
@@ -1533,12 +1563,6 @@ export function fillSemiAutoFields(structuredContent: any): void {
   (window as any).currentStructuredContent = structuredContent;
 
 
-  // ✅ 생성된 글 목록에 저장 (postId 반환)
-  const postId = saveGeneratedPost(structuredContent);
-  if (postId) {
-    currentPostId = postId; // 전역 변수에 저장 (이미지 생성 시 사용)
-  }
-
   // ✅ 이미지 관리 탭 제목 필드도 자동으로 채우기
   const imageTitleInput = document.getElementById('image-title') as HTMLInputElement;
   if (imageTitleInput && structuredContent.selectedTitle) {
@@ -1546,14 +1570,29 @@ export function fillSemiAutoFields(structuredContent: any): void {
     appendLog(`📝 이미지 관리 탭 제목도 자동 입력: "${structuredContent.selectedTitle}"`);
   }
 
-  // ✅ 자동 저장 및 백업 시작
-  startAutosave();
-  startAutoBackup();
-  // ✅ [2026-03-23 FIX] errorAndAutosave.ts에서 이미 시작하므로 여기서는 debug만
-  console.debug('[contentGeneration] 자동 저장/백업 시작됨');
+  const shouldPersist = options.persist !== false;
+  if (shouldPersist) {
+    const postId = saveGeneratedPost(structuredContent);
+    if (postId) {
+      currentPostId = postId;
+      structuredContent = { ...structuredContent, _postId: postId };
+    }
+  } else {
+    const restoredPostId = typeof structuredContent._postId === 'string'
+      ? structuredContent._postId.trim()
+      : '';
+    currentPostId = restoredPostId || null;
+  }
 
-  // ✅ 생성된 글 목록 새로고침
-  refreshGeneratedPostsList();
+  currentStructuredContent = structuredContent;
+  (window as any).currentStructuredContent = structuredContent;
+
+  if (shouldPersist) {
+    startAutosave();
+    startAutoBackup();
+    console.debug('[contentGeneration] 자동 저장/백업 시작됨');
+    refreshGeneratedPostsList();
+  }
 
   // ✅ [New] 미리보기 즉시 동기화
   syncIntegratedPreviewFromInputs();
@@ -1819,10 +1858,11 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
     const result = apiResponse.data;
 
     // ✅ [결함 #6] API 응답 구조 검증
-    const structuredContent = result.content;
+    let structuredContent = result.content;
     if (!structuredContent || typeof structuredContent !== 'object') {
       throw new Error('페러프레이징 응답 데이터가 유효하지 않습니다.');
     }
+    structuredContent = applyPendingArticleTablesToGeneratedContent(structuredContent);
 
     // 필드에 개선된 글 채우기 (검증 후 반영)
     if (titleInput && structuredContent.selectedTitle && typeof structuredContent.selectedTitle === 'string') {

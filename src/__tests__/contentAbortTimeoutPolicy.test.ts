@@ -75,4 +75,13 @@ describe('content abort and timeout policy', () => {
     );
     timeout.dispose();
   });
+
+  it('does not blame the user for a renderer response timeout', () => {
+    const controller = new AbortController();
+    controller.abort('renderer API timeout');
+
+    expect(() => throwIfContentGenerationAborted(controller.signal)).toThrow(
+      '콘텐츠 생성 응답 대기 시간이 초과되어 해당 요청을 중단했습니다.',
+    );
+  });
 });

@@ -7,6 +7,17 @@ import { startEventLoopWatchdog } from './diagnostics/eventLoopWatchdog.js';
 import { detectLowSpec, logLowSpecStatus } from './diagnostics/lowSpecMode.js';
 import { globalLimiter } from './runtime/adaptiveLimiter.js';
 import { initSessionTracking, shouldDisableGpuFromHistory, getRecentFreezeAvg } from './runtime/runtimeStats.js';
+import { withCleanupTimeout } from './runtime/cleanupTimeout.js';
+import {
+  sanitizeRendererIpcResult,
+  sanitizeUserVisibleError,
+} from './runtime/userVisibleError.js';
+import { ExclusiveLeaseCoordinator } from './runtime/exclusiveLease.js';
+import { withAbortableDeadline } from './runtime/abortableDeadline.js';
+import { ScopedAbortRegistry } from './runtime/scopedAbortRegistry.js';
+import {
+  parseScheduledDate,
+} from './scheduler/scheduledPostLookupPolicy.js';
 // ✅ [v2.7.53] modelRegistry SSOT
 import { CLAUDE_MODELS } from './runtime/modelRegistry.js';
 import { isDirectLaunchLewordAsset, selectLewordReleaseAsset } from './utils/lewordReleaseAssets.js';
@@ -150,7 +161,21 @@ import {
 //   기존: app 부팅 시 xlsx 모듈 (~1.5MB) 평가됨 → cold start 비용
 //   수정: main.ts에서 미사용이라 제거. 실제 사용처는 자체 require/import 보유.
 import fs from 'fs/promises';
-import { loadScheduledPosts, saveScheduledPost, removeScheduledPost, getAllScheduledPosts, handleRecurringPost, rescheduleScheduledPost, retryScheduledPost as retryScheduledPostFn, type ScheduledPost } from './scheduledPostsManager.js';
+import {
+  loadScheduledPosts,
+  saveScheduledPost,
+  removeScheduledPost,
+  getAllScheduledPosts,
+  handleRecurringPost,
+  rescheduleScheduledPost,
+  retryScheduledPost as retryScheduledPostFn,
+  requireConcreteNaverPostUrl,
+  createPublishedScheduledPostState,
+  createFailedScheduledPostState,
+  createPublishingScheduledPostState,
+  resolveScheduledPostStateAfterError,
+  type ScheduledPost,
+} from './scheduledPostsManager.js';
 import fsSync from 'fs';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
@@ -163,6 +188,7 @@ import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdatin
 // v2.7.1: 앱 종료 시 Flow/ImageFX persistent context 쿠키 flush — 매번 로그인 강제 방지
 import { resetFlowState } from './image/flowGenerator.js';
 import { cleanupImageFxBrowser } from './image/imageFxGenerator.js';
+import { closeAllDropshotContexts as closeDropshotBrowserContexts } from './image/dropshotSession.js';
 
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
 // ✅ [리팩토링] 새로운 모듈화된 유틸리티 및 서비스
@@ -184,6 +210,10 @@ import { registerEngagementHandlers } from './main/ipc/engagementHandlers.js';
 import { registerImageTableHandlers } from './main/ipc/imageTableHandlers.js';
 // ✅ [v2.10.203] SERP 프로브 + publishedPostTracker handlers — 끝판왕 시스템 IPC 등록 누락 fix
 import { registerSerpProbeHandlers } from './main/ipc/serpProbeHandlers.js';
+import { registerContentPolicyHandlers } from './main/ipc/contentPolicyHandlers.js';
+import { loadContentPolicy } from './contentPolicy/policyLoader.js';
+import { PublicationStateStore } from './contentPolicy/publicationStateStore.js';
+import { evaluatePublicationAvailability } from './contentPolicy/publishGuard.js';
 import { registerAgentHandlers } from './main/ipc/agentHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 
@@ -210,6 +240,7 @@ let _globalErrorCount = 0;
 const _recentErrors: string[] = [];
 
 function notifyRendererOfError(errorType: string, message: string) {
+  message = sanitizeUserVisibleError(message);
   try {
     const { BrowserWindow: BW } = require('electron');
     const win = BW.getAllWindows().find((w: any) => !w.isDestroyed());
@@ -282,13 +313,14 @@ if (ipcMain && typeof ipcMain.handle === 'function') {
           const _level = _dur >= 1000 ? '🚨 SEVERE' : _dur >= 200 ? '🐌 HEAVY' : '⚠️';
           console.warn(`[IPCTiming] ${_level} "${channel}" ${_dur.toFixed(0)}ms`);
         }
-        return result;
+        return sanitizeRendererIpcResult(result);
       } catch (error) {
         const _dur = performance.now() - _start;
         const msg = (error as Error).message || '알 수 없는 오류';
         console.error(`[SafeIPC] ❌ "${channel}" 핸들러 에러 (${_dur.toFixed(0)}ms): ${msg}`);
         console.error(`[SafeIPC] Stack:`, (error as Error).stack?.split('\n').slice(0, 3).join('\n'));
-        return { success: false, message: `[${channel}] ${msg}`, error: msg };
+        const safeMsg = sanitizeUserVisibleError(msg);
+        return { success: false, message: `[${channel}] ${safeMsg}`, error: safeMsg };
       }
     });
   };
@@ -305,6 +337,7 @@ import {
   handleAutomationCancel,
   handleCloseBrowser,
   setMainWindowRef,
+  getExecutionLock,
   setExecutionLock,  // ✅ [FIX-6] 실행 잠금 설정
   type AutomationRequest as BlogAutomationRequest,
 } from './main/ipc/blogHandlers.js';
@@ -1358,7 +1391,10 @@ function _forwardConsoleToRenderer(level: 'log' | 'warn' | 'error', args: any[])
   try {
     const win = mainWindow && !mainWindow.isDestroyed() ? mainWindow : BrowserWindow.getAllWindows()[0];
     if (!win || win.isDestroyed()) return;
-    win.webContents.send('main:console', { level, msg });
+    win.webContents.send('main:console', {
+      level,
+      msg: sanitizeUserVisibleError(msg),
+    });
   } catch { /* 렌더러 미준비 또는 파괴됨 — 무시 */ }
 }
 
@@ -1398,6 +1434,77 @@ function setAutomationRunning(running: boolean): void {
   }
 }
 
+interface DirectAutomationLeaseHandle {
+  readonly owner: string;
+  release(): boolean;
+}
+
+const directAutomationLeaseCoordinator = new ExclusiveLeaseCoordinator();
+let scheduledPostsCronRunning = false;
+const SCHEDULED_AUTOMATION_TIMEOUT_MS = 15 * 60 * 1000;
+const SCHEDULED_AUTOMATION_CLEANUP_TIMEOUT_MS = 10_000;
+
+async function stopScheduledAutomation(bot: NaverBlogAutomation): Promise<void> {
+  await Promise.allSettled([
+    bot.cancel(),
+    bot.closeBrowser(),
+  ]);
+}
+
+async function acquireDirectAutomationLease(
+  owner: string,
+  maxWaitMs = 0,
+): Promise<DirectAutomationLeaseHandle | null> {
+  const deadline = Date.now() + Math.max(0, maxWaitMs);
+
+  while (true) {
+    const ipcLock = getExecutionLock();
+    if (!ipcLock && !AutomationService.isRunning()) {
+      const lease = directAutomationLeaseCoordinator.tryAcquire(owner);
+      if (lease) {
+        // Recheck after obtaining the local token. All operations below are
+        // synchronous, so no second main-process task can enter this boundary.
+        if (getExecutionLock() || AutomationService.isRunning()) {
+          directAutomationLeaseCoordinator.release(lease);
+        } else {
+          let resolveDirectLock!: () => void;
+          const directLock = new Promise<void>((resolve) => {
+            resolveDirectLock = resolve;
+          });
+          setExecutionLock(directLock);
+          setAutomationRunning(true);
+          AutomationService.updateLastRunTime();
+
+          const heartbeat = setInterval(() => {
+            AutomationService.updateLastRunTime();
+          }, 30_000);
+          let released = false;
+
+          return Object.freeze({
+            owner: lease.owner,
+            release: (): boolean => {
+              if (released) return false;
+              released = true;
+              clearInterval(heartbeat);
+              const didRelease = directAutomationLeaseCoordinator.release(lease);
+              resolveDirectLock();
+              if (getExecutionLock() === directLock) {
+                setExecutionLock(null);
+                setAutomationRunning(false);
+              }
+              return didRelease;
+            },
+          });
+        }
+      }
+    }
+
+    const remaining = deadline - Date.now();
+    if (remaining <= 0) return null;
+    await new Promise((resolve) => setTimeout(resolve, Math.min(500, remaining)));
+  }
+}
+
 let appConfig: AppConfig = {};
 const trendMonitor = new TrendMonitor();
 const patternAnalyzer = new PatternAnalyzer();
@@ -1406,6 +1513,8 @@ const smartScheduler = new SmartScheduler(); // ✅ 최적 시간 자동 예약 
 
 // ✅ [2026-03-14 FIX] SmartScheduler 발행 콜백 설정 — 예약 시간 도달 시 실제 발행 실행
 smartScheduler.setPublishCallback(async (post) => {
+  let directLease: DirectAutomationLeaseHandle | null = null;
+  let schedulerAccountKey = '';
   console.log(`[SmartScheduler] 발행 콜백 실행: ${post.title}`);
   try {
     const config = await loadConfig();
@@ -1415,36 +1524,54 @@ smartScheduler.setPublishCallback(async (post) => {
     if (!naverId || !naverPassword) {
       throw new Error('네이버 계정 정보가 설정되지 않았습니다.');
     }
+
+    directLease = await acquireDirectAutomationLease(`smart-scheduler:${post.id}`, 15 * 60 * 1000);
+    if (!directLease) {
+      throw new Error('PIPELINE_BUSY: 다른 발행 작업이 장시간 실행 중이어서 스마트 예약 발행을 시작하지 못했습니다.');
+    }
     
     sendLog(`🚀 SmartScheduler 예약 발행 시작: ${post.title}`);
     
-    // 새 자동화 인스턴스 생성
-    const schedulerBot = new NaverBlogAutomation({
-      naverId,
-      naverPassword,
-      headless: false,
-      slowMo: 50,
-    }, (msg: string) => { console.log(msg); sendLog(msg); });
-    
-    const runResult = await schedulerBot.run({
-      title: post.title,
-      content: post.keyword || post.title, // SmartScheduler는 키워드 기반이므로 keyword를 content로 전달
-      publishMode: 'publish',
-    });
-    
-    await schedulerBot.closeBrowser().catch(() => undefined);
-    
-    const publishedUrl = resolvePublishedUrl(
-      runResult,
-      () => schedulerBot.getPublishedUrl(),
-      `https://blog.naver.com/${naverId}`,
+    schedulerAccountKey = naverId.trim().toLowerCase();
+
+    const runResult = await withAbortableDeadline(
+      () => AutomationService.executePostCycle({
+        naverId,
+        naverPassword,
+        title: post.title,
+        content: post.keyword || post.title, // SmartScheduler는 키워드 기반이므로 keyword를 content로 전달
+        publishMode: 'publish',
+        postId: post.id,
+      }),
+      {
+        timeoutMs: SCHEDULED_AUTOMATION_TIMEOUT_MS,
+        cleanupTimeoutMs: SCHEDULED_AUTOMATION_CLEANUP_TIMEOUT_MS,
+        operationLabel: `SmartScheduler publish ${post.id}`,
+        onTimeout: async () => {
+          AutomationService.requestCancel();
+          await AutomationService.closeSession(schedulerAccountKey).catch(() => undefined);
+        },
+      },
     );
+    
+    if (!runResult.success) {
+      throw new Error('SCHEDULED_PUBLISH_FAILED: SmartScheduler publish did not succeed');
+    }
+
+    const publishedUrl = requireConcreteNaverPostUrl(resolvePublishedUrl(
+      runResult,
+      () => runResult.url || '',
+      `https://blog.naver.com/${naverId}`,
+    ));
     sendLog(`✅ SmartScheduler 예약 발행 완료: ${post.title}`);
     return publishedUrl;
   } catch (error) {
     console.error(`[SmartScheduler] 발행 콜백 실패:`, error);
-    sendLog(`❌ SmartScheduler 예약 발행 실패: ${(error as Error).message}`);
+    sendLog(`❌ SmartScheduler 예약 발행 실패: ${sanitizeUserVisibleError(error)}`);
     throw error;
+  } finally {
+    if (schedulerAccountKey) AutomationService.delete(schedulerAccountKey);
+    directLease?.release();
   }
 });
 // ✅ [v2.10.42] 부팅 freeze 차단 — 7개 module-level 인스턴스 lazy 생성
@@ -1528,7 +1655,7 @@ const DEFAULT_ICON_SVG = `
 `;
 
 function sendLog(message: string): void {
-  mainWindow?.webContents.send('automation:log', message);
+  mainWindow?.webContents.send('automation:log', sanitizeUserVisibleError(message));
 }
 
 function sendStatus(status: {
@@ -1538,7 +1665,10 @@ function sendStatus(status: {
   url?: string;
   failureCode?: string;
 }): void {
-  mainWindow?.webContents.send('automation:status', status);
+  const rendererStatus = status.success || !status.message
+    ? status
+    : { ...status, message: sanitizeUserVisibleError(status.message) };
+  mainWindow?.webContents.send('automation:status', rendererStatus);
 }
 
 // ✅ [2026-03-02] 메인 프로세스 console 인터셉트 → 렌더러 로그 전달
@@ -1602,7 +1732,7 @@ function installConsoleForwarder(): void {
     _isForwarding = true;
     try {
       const msg = args.map(a => typeof a === 'string' ? a : String(a)).join(' ');
-      mainWindow.webContents.send('automation:log', msg);
+      mainWindow.webContents.send('automation:log', sanitizeUserVisibleError(msg));
     } finally {
       _isForwarding = false;
     }
@@ -1888,7 +2018,7 @@ async function createWindow(): Promise<void> {
         }
         if (tray) { tray.destroy(); tray = null; }
         app.quit();
-        setTimeout(() => process.exit(0), 10000);
+        setTimeout(() => process.exit(0), 25000);
       };
 
       ipcMain.on('quit-confirm-response', handleResponse);
@@ -2961,13 +3091,26 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
 });
 
 
-ipcMain.handle('automation:cancel', async () => {
+ipcMain.handle('automation:cancel', async (_event, metadata?: unknown) => {
   // ✅ [리팩토링] 통합 검증
   const check = await validateLicenseOnly();
   if (!check.valid) return check.response;
 
   // ✅ [2026-04-03 FIX] 항상 취소 요청 — AI 콘텐츠 생성/이미지 생성도 즉시 abort
   // automationRunning이 false여도 generateStructuredContent가 돌고 있을 수 있음
+  const cancelMeta = metadata && typeof metadata === 'object'
+    ? metadata as Record<string, unknown>
+    : {};
+  const cancelSource = typeof cancelMeta.source === 'string' ? cancelMeta.source.slice(0, 100) : 'legacy-renderer';
+  const cancelReason = typeof cancelMeta.reason === 'string' ? cancelMeta.reason.slice(0, 300) : 'operator cancel';
+  const contentRequestId = typeof cancelMeta.contentRequestId === 'string'
+    ? cancelMeta.contentRequestId.trim()
+    : '';
+  const abortedGenerations = contentRequestId
+    ? Number(contentGenerationAbortRegistry.abort(contentRequestId, `${cancelSource}: ${cancelReason}`))
+    : 0;
+  await abortImageGeneration().catch(() => undefined);
+  console.warn(`[CancelTrace] scope=automation source=${cancelSource} generationAborts=${abortedGenerations} reason=${cancelReason}`);
   AutomationService.requestCancel();
   // ✅ [2026-04-06 FIX] 항상 stopRunning 호출 — 새 엔진 사용 시 automation=null이라
   // 아래 early return에서 stopRunning이 호출되지 않아 재실행 시 "이미 실행 중" 에러 발생
@@ -3942,6 +4085,7 @@ registerImageTableHandlers();
 //   사용자 콘솔 에러: "No handler registered for 'serp:historyStats'" / 'publishedPost:calibration'
 //   원인: registerAllHandlers 내부에 있는데 main.ts가 개별 호출 패턴이라 미호출
 registerSerpProbeHandlers();
+registerContentPolicyHandlers();
 // ✅ miscHandlers: content:collectFromPlatforms 등 — 연속발행에서 크롤링 시 필요
 import { registerMiscHandlers } from './main/ipc/miscHandlers.js';
 registerMiscHandlers();
@@ -4324,6 +4468,16 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
     return publishCheck.response;
   }
 
+  const multiAccountLease = await acquireDirectAutomationLease(
+    `multi-account:${Date.now()}`,
+  );
+  if (!multiAccountLease) {
+    return {
+      success: false,
+      message: '다른 발행 작업이 실행 중입니다. 완료 후 다중계정 발행을 다시 시작해주세요.',
+    };
+  }
+
   try {
     // ✅ [2026-05-25 FIX] Stale cancelRequested 자동 리셋 (v2.6.4 HOTFIX 동일 패턴, multiAccount:publish 누락분)
     //   원인: 이전 발행 중지 → AutomationService.cancelRequested = true 잔류
@@ -4448,6 +4602,20 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
       try {
         sendLog(`👤 [${account.name}] 발행 시작...`);
 
+        const publicationAvailability = evaluatePublicationAvailability({
+          state: await new PublicationStateStore(app.getPath('userData')).load(),
+          accountId,
+          now: new Date(),
+          config: await loadContentPolicy(),
+          env: process.env,
+        });
+        if (!publicationAvailability.allowed) {
+          const reason = publicationAvailability.reasons.join(', ');
+          sendLog(`⛔ [${account.name}] 콘텐츠·이미지 생성 전 발행 정책 차단: ${reason}`);
+          results.push({ accountId, success: false, message: `CONTENT_POLICY_BLOCKED:${reason}` });
+          continue;
+        }
+
         //  콘텐츠 소스 가져오기
         const contentSource = blogAccountManager.getNextContentSource(accountId);
 
@@ -4460,6 +4628,9 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
         // ✅ [2026-01-19 BUG FIX v2] preGeneratedContent도 확인 (renderer에서 이 이름으로 전달함)
         const preGenerated = options?.preGeneratedContent || options?.structuredContent;
+        let resolvedContentPolicyContext = options?.contentPolicyContext
+          || preGenerated?.contentPolicyContext
+          || preGenerated?.structuredContent?.contentPolicyContext;
         const normalizePublishHashtags = (...sources: any[]): string[] => {
           const seen = new Set<string>();
           const tags: string[] = [];
@@ -4486,6 +4657,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         // options에 이미 콘텐츠가 있으면 그대로 사용 (renderer에서 미리 생성된 경우)
         if (preGenerated) {
           structuredContent = preGenerated.structuredContent || preGenerated;
+          resolvedContentPolicyContext = resolvedContentPolicyContext
+            || structuredContent?.contentPolicyContext;
           // ✅ [2026-02-21 FIX] options.title이 명시적으로 있으면 최우선 사용 (preGenerated.title보다 우선)
           // preGenerated.title이 stale(이전 발행) 상태일 수 있기 때문에, options.title이 있으면 그것을 신뢰
           const preGenTitle = preGenerated.title || structuredContent?.selectedTitle;
@@ -4518,7 +4691,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
             const currentConfig = await loadConfig();
             const multiAccountProvider = options?.generator || currentConfig?.defaultAiProvider || 'gemini';
             console.log(`[다중계정] 🔄 AI Provider: ${multiAccountProvider} (options.generator: ${options?.generator}, config.defaultAiProvider: ${currentConfig?.defaultAiProvider})`);
-            const source = {
+            const source: any = {
               type: contentSource.type === 'keyword' ? 'keyword' : 'url',
               value: String(sourceValue),
               targetAge: accountSettings?.targetAge || 'all',
@@ -4528,6 +4701,36 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               affiliateUrl: options?.affiliateLink || accountSettings?.affiliateLink,  // ✅ [2026-02-16 FIX] renderer 전달값 우선
             };
 
+            const { loadContentPolicy: loadMultiPolicy } = await import('./contentPolicy/policyLoader.js');
+            const { prepareGenerationPolicyContext: prepareMultiPolicy } = await import('./contentPolicy/generationContext.js');
+            const optionFacts = Object.entries(options?.businessInfo || {})
+              .filter(([, value]) => ['string', 'number', 'boolean'].includes(typeof value) && String(value).trim())
+              .map(([key, value]) => `${key}: ${String(value).trim()}`);
+            const sourceText = String(sourceValue || '').trim();
+            const multiPolicy = await prepareMultiPolicy({
+              userDataPath: app.getPath('userData'),
+              config: await loadMultiPolicy(),
+              context: options?.contentPolicyContext,
+              fallbackInput: {
+                primary_keyword: contentSource.type === 'keyword' ? sourceText : String(options?.title || '').trim(),
+                target_reader: accountSettings?.targetAge === 'all'
+                  ? 'Naver blog readers'
+                  : `${accountSettings?.targetAge || 'all'} readers`,
+                business_facts: optionFacts.length > 0
+                  ? optionFacts
+                  : (!/^https?:\/\//i.test(sourceText) && sourceText.length >= 20 ? [sourceText] : []),
+                source_materials: !/^https?:\/\//i.test(sourceText) && sourceText.length >= 20
+                  ? [{ type: 'user_provided', title: 'multi-account-source', content: sourceText }]
+                  : [],
+                account_id: accountId,
+                blog_id: account.naverId,
+              },
+            });
+            if (!multiPolicy.allowed) {
+              throw new Error(`[CONTENT_POLICY_BLOCKED] Manual review required: ${multiPolicy.reasons.join(', ')}`);
+            }
+            source.contentPolicyPrompt = multiPolicy.prompt;
+
             const generated = await withAbortCheck(
               generateStructuredContent(source as any, {
                 provider: multiAccountProvider,
@@ -4536,7 +4739,17 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               abortController.signal
             );
 
-            structuredContent = generated;
+            resolvedContentPolicyContext = {
+              input: {
+                ...multiPolicy.input,
+                recent_posts: undefined,
+              },
+              recentPostsSnapshot: multiPolicy.input.recent_posts,
+            };
+            structuredContent = {
+              ...generated,
+              contentPolicyContext: resolvedContentPolicyContext,
+            };
             title = (generated as any).selectedTitle || `${sourceValue} 관련 글`;
             content = (generated as any).bodyPlain || (generated as any).body || '';
             sendLog(`   ✅ 콘텐츠 생성 완료: "${(title || '').substring(0, 30)}..." (${(content || '').length}자)`);
@@ -4831,6 +5044,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           content,      // ✅ 생성된 콘텐츠
           // ✅ [2026-02-21 FIX] structuredContent.selectedTitle도 최종 제목으로 동기화
           structuredContent: structuredContent ? { ...structuredContent, selectedTitle: title } : undefined,
+          contentPolicyContext: resolvedContentPolicyContext || structuredContent?.contentPolicyContext,
           hashtags: normalizePublishHashtags(options?.hashtags, structuredContent?.hashtags, preGenerated?.hashtags),
           generatedImages: generatedImages.length > 0 ? generatedImages : undefined, // ✅ 이미지
           // ✅ [2026-01-24 FIX] CTA 관련 설정 명시적 전달
@@ -4932,6 +5146,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
     const errorMsg = (error as Error).message;
     sendLog(`❌ 다중계정 발행 오류: ${errorMsg}`);
     return { success: false, message: `다중계정 발행 실패: ${errorMsg}` };
+  } finally {
+    multiAccountLease.release();
   }
 });
 
@@ -4944,6 +5160,7 @@ ipcMain.handle('multiAccount:cancel', async () => {
   multiAccountAbortFlag = true;
   AutomationService.setMultiAccountAbort(true);
   AutomationService.requestCancel(); // BlogExecutor의 isCancelRequested() 체크도 트리거
+  await abortImageGeneration().catch(() => undefined);
   AutomationService.abortCurrentOperation(); // ✅ 진행 중인 API 호출 즉시 abort!
 
   // ✅ 현재 실행 중인 자동화 인스턴스의 브라우저도 닫기
@@ -4981,14 +5198,44 @@ ipcMain.handle('multiAccount:cancel', async () => {
 // Gemini/OpenAI/Claude 호출부가 자체 재시도와 타임아웃을 갖고 있으므로
 // IPC 레벨에서 전체 글생성 파이프라인을 다시 돌리지 않는다.
 const GENERATE_STRUCTURED_CONTENT_RETRIES = 0;
+const contentGenerationAbortRegistry = new ScopedAbortRegistry('content-generation');
+
+ipcMain.handle(
+  'automation:cancelContentGeneration',
+  async (_event, request: unknown): Promise<{ success: boolean; aborted: boolean; requestId?: string }> => {
+    const value = request && typeof request === 'object' ? request as Record<string, unknown> : {};
+    const requestId = typeof value.requestId === 'string' ? value.requestId.trim() : '';
+    const reason = typeof value.reason === 'string' ? value.reason.trim().slice(0, 300) : 'renderer request';
+    if (!requestId) {
+      console.warn(`[CancelTrace] scope=content-generation rejected=no-request-id reason=${reason}`);
+      return { success: false, aborted: false };
+    }
+    const aborted = contentGenerationAbortRegistry.abort(requestId, reason);
+    console.warn(`[CancelTrace] scope=content-generation requestId=${requestId} aborted=${aborted} reason=${reason}`);
+    return { success: true, aborted, requestId };
+  },
+);
 
 ipcMain.handle(
   'automation:generateStructuredContent',
   async (
     _event,
-    payload: { assembly: SourceAssemblyInput },
+    payload: { assembly: SourceAssemblyInput; requestId?: string },
   ): Promise<{ success: boolean; content?: StructuredContent; message?: string; imageCount?: number }> => {
+    if (!payload || typeof payload !== 'object' || !payload.assembly || typeof payload.assembly !== 'object') {
+      console.warn('[Generation] 잘못된 IPC 입력 거부: assembly가 없습니다.');
+      return { success: false, message: '글 생성 입력값이 올바르지 않습니다.' };
+    }
+    const activeGenerationIds = contentGenerationAbortRegistry.activeIds();
+    if (activeGenerationIds.length > 0) {
+      console.warn(`[Generation] 동시 실행 거부: active=${activeGenerationIds.join(',')}`);
+      return { success: false, message: '다른 글 생성이 이미 진행 중입니다. 완료 또는 취소 후 다시 시도해주세요.' };
+    }
     // ✅ 실행 직전 최신 설정 강제 동기화 (API 키 정합성 보장)
+    const generationOperation = contentGenerationAbortRegistry.begin(payload.requestId);
+    const generationRequestId = generationOperation.id;
+    console.log(`[Generation:${generationRequestId}] 시작`);
+
     try {
       const currentConfig = await loadConfig();
       applyConfigToEnv(currentConfig);
@@ -5097,7 +5344,7 @@ ipcMain.handle(
       }
 
       // ✅ contentMode 전달 (SEO / 홈판 모드)
-      const contentMode = (payload.assembly as any).contentMode as 'seo' | 'homefeed' | 'mate' | undefined;
+      const contentMode = (payload.assembly as any).contentMode as 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business' | 'mate' | undefined;
       if (contentMode) {
         source.contentMode = contentMode;
       }
@@ -5118,6 +5365,13 @@ ipcMain.handle(
       const isReviewType = (payload.assembly as any).isReviewType as boolean | undefined;
       if (isReviewType) {
         source.isReviewType = isReviewType;
+      }
+
+      const personalExperience = String((payload.assembly as any).personalExperience || '').trim().slice(0, 4000);
+      if (personalExperience) {
+        source.personalExperience = personalExperience;
+        source.rawText = `${source.rawText}\n\n=== 작성자 직접 사용 메모 ===\n${personalExperience}`.trim();
+        console.log(`[Main] 쇼핑 실사용 메모 전달: ${personalExperience.length}자`);
       }
 
       // ✅ 사용자 정의 프롬프트 전달
@@ -5170,6 +5424,55 @@ ipcMain.handle(
       }
 
       console.log('[Main] 구조화 콘텐츠 생성 시작');
+      // Run the fail-closed policy preflight after source collection and before the model call.
+      const { loadContentPolicy } = await import('./contentPolicy/policyLoader.js');
+      const { prepareGenerationPolicyContext } = await import('./contentPolicy/generationContext.js');
+      const rawKeywordInput = (payload.assembly as any).keywords;
+      const policyKeywords = Array.isArray(rawKeywordInput)
+        ? rawKeywordInput.map((value: unknown) => String(value || '').trim()).filter(Boolean)
+        : String(rawKeywordInput || '').split(/[,;\n]/).map((value) => value.trim()).filter(Boolean);
+      const businessFacts = Object.entries(source.businessInfo || {})
+        .filter(([, value]) => ['string', 'number', 'boolean'].includes(typeof value) && String(value).trim())
+        .map(([key, value]) => `${key}: ${String(value).trim()}`);
+      const sourceFacts = businessFacts.length > 0
+        ? businessFacts
+        : String(source.rawText || '')
+          .split(/\n+/)
+          .map((value) => value.trim())
+          .filter((value) => value.length >= 20)
+          .slice(0, 20);
+      const sourceMaterials = source.rawText?.trim()
+        ? [{
+          type: source.url ? 'reference' as const : 'user_provided' as const,
+          title: source.title || policyKeywords[0] || 'generation-source',
+          content: source.rawText,
+          url: source.url,
+          source_id: 'assembled-source',
+        }]
+        : [];
+      const generationPolicy = await prepareGenerationPolicyContext({
+        userDataPath: app.getPath('userData'),
+        config: await loadContentPolicy(),
+        context: (payload.assembly as any).contentPolicyContext,
+        fallbackInput: {
+          primary_keyword: policyKeywords[0] || source.title || '',
+          secondary_keywords: policyKeywords.slice(1),
+          target_reader: targetAge === 'all' ? 'Naver blog readers' : `${targetAge} readers`,
+          business_facts: sourceFacts,
+          source_materials: sourceMaterials,
+          related_questions: policyKeywords.slice(0, 10),
+          account_id: String((payload.assembly as any).accountId || '').trim() || undefined,
+          blog_id: String((payload.assembly as any).blogId || '').trim() || undefined,
+        },
+      });
+      if (!generationPolicy.allowed) {
+        const reasonText = generationPolicy.reasons.join(', ');
+        console.error(`[ContentPolicy] Generation blocked: ${reasonText}`);
+        throw new Error(`[CONTENT_POLICY_BLOCKED] Manual review required: ${reasonText}`);
+      }
+      source.contentPolicyPrompt = generationPolicy.prompt;
+      console.log(`[ContentPolicy] Generation preflight passed with ${generationPolicy.input.recent_posts?.length || 0} recent posts.`);
+
       console.log('[Main] Provider:', provider);
       console.log('[Main] TargetAge:', targetAge);
       console.log('[Main] ContentMode:', contentMode || 'seo (기본값)');
@@ -5205,9 +5508,7 @@ ipcMain.handle(
         // 이전 abort된 controller 폐기 (다음 줄에서 새로 생성)
       }
 
-      // ✅ [2026-04-03 FIX] 콘텐츠 생성 전 AbortController 생성 — 중지 시 즉시 abort
-      const genAbortController = AutomationService.createGeneralAbortController();
-      const genSignal = genAbortController.signal;
+      const genSignal = generationOperation.controller.signal;
 
       // ✅ [Phase 3B] 네트워크/타임아웃 에러 시 자동 재시도 (최대 2회, exponential backoff)
       const content = await withRetry(
@@ -5229,6 +5530,13 @@ ipcMain.handle(
           },
         }
       );
+
+      (content as any).contentPolicyContext = {
+        input: {
+          ...generationPolicy.input,
+          recent_posts: undefined,
+        },
+      };
 
       if (warnings.length) {
         content.quality.warnings = Array.from(new Set([...(content.quality.warnings ?? []), ...warnings]));
@@ -5313,6 +5621,7 @@ ipcMain.handle(
       }
 
       console.log('[Main] 구조화 콘텐츠 생성 완료');
+      console.log(`[Generation:${generationRequestId}] 완료`);
 
       // ✅ 글생성은 쿼터 소비 안함 (발행 시에만 1세트로 카운트)
       return { success: true, content, imageCount };
@@ -5332,6 +5641,9 @@ ipcMain.handle(
       } catch { /* 직렬화 실패는 무시 */ }
 
       return { success: false, message };
+    } finally {
+      contentGenerationAbortRegistry.release(generationRequestId, generationOperation.controller);
+      console.log(`[Generation:${generationRequestId}] 정리`);
     }
   },
 );
@@ -7306,32 +7618,59 @@ if (!gotTheLock) {
 
 // ★ 앱 종료 시 서버 로그아웃 호출 (중복 로그인 차단 해제)
 let isQuittingForLogout = false;
+let quitCoordinationInProgress = false;
 
 app.on('before-quit', (event) => {
   if (isE2ETestMode()) return;
 
-  if (isQuittingForLogout) return; // 재귀 방지 (logoutFromServer 완료 후 app.quit() 재호출 시)
+  if (isQuittingForLogout) return;
   event.preventDefault();
-  isQuittingForLogout = true;
+  if (quitCoordinationInProgress) return;
+  quitCoordinationInProgress = true;
 
-  console.log('[Main] before-quit: 서버 로그아웃 시도 (최대 2초 대기)...');
+  void (async () => {
+    const hasActiveAutomation = automationRunning || Boolean(automation) || automationMap.size > 0;
+    const userAlreadyConfirmed = (globalThis as any).isQuitting === true;
+    if (hasActiveAutomation && !userAlreadyConfirmed) {
+      const result = await dialog.showMessageBox({
+        type: 'warning',
+        buttons: ['강제 종료', '취소'],
+        defaultId: 1,
+        cancelId: 1,
+        title: '자동화 실행 중',
+        message: '자동화 세션이 활성화되어 있습니다. 모든 작업을 중단하고 종료할까요?',
+        detail: '강제 종료를 선택하면 진행 중인 브라우저와 자식 프로세스를 정리합니다.',
+      });
+      if (result.response !== 0) {
+        quitCoordinationInProgress = false;
+        (globalThis as any).isQuitting = false;
+        return;
+      }
+    }
 
-  const logoutPromise = import('./licenseManager.js')
-    .then((lm) => lm.logoutFromServer())
-    .catch((err) => console.warn('[Main] before-quit 로그아웃 실패 (무시):', err));
+    (globalThis as any).isQuitting = true;
+    console.log('[Main] before-quit: 로그아웃과 자원 정리 시작');
+    const logoutPromise = import('./licenseManager.js')
+      .then((lm) => lm.logoutFromServer());
 
-  // ✅ 사용자 보고 (v2.10.350): 종료 버튼 누른 후 종료 너무 느림
-  //   Google Apps Script logout 응답이 cold start 시 5초 이상 걸려 종료 지연
-  //   2초 race timeout 추가 → logout 응답 안 와도 즉시 app.quit() 진행
-  //   logout 자체는 백그라운드로 계속 진행 (best-effort)
-  const timeoutPromise = new Promise<void>((resolve) => setTimeout(() => {
-    console.warn('[Main] before-quit: 로그아웃 응답 2초 초과 — 즉시 종료 진행');
-    resolve();
-  }, 2000));
+    const results = await Promise.allSettled([
+      withCleanupTimeout(() => logoutPromise, 2_000, 'server logout'),
+      withCleanupTimeout(() => _runFullCleanup('before-quit'), 20_000, 'full app cleanup'),
+    ]);
+    for (const result of results) {
+      if (result.status === 'rejected') {
+        console.warn('[Main] before-quit 정리 경고:', (result.reason as Error)?.message || result.reason);
+      }
+    }
 
-  Promise.race([logoutPromise, timeoutPromise]).finally(() => {
-    console.log('[Main] before-quit: 종료 진행');
-    app.quit(); // 로그아웃 완료 또는 2초 timeout 후 실제 종료
+    isQuittingForLogout = true;
+    console.log('[Main] before-quit: 정리 완료, 종료 진행');
+    app.quit();
+    setTimeout(() => process.exit(0), 2_000);
+  })().catch((error) => {
+    console.error('[Main] before-quit 조정 실패:', error);
+    isQuittingForLogout = true;
+    app.quit();
   });
 });
 
@@ -7632,14 +7971,14 @@ app.whenReady().then(async () => {
 
     // ✅ [2026-05-26 v2.10.383 SPEC-CONVERSION-001 Tier 1 #1+#4]
     //   exposurePoller — published-posts.json 자동 폴링 + attribution 페어링
-    //   env EXPOSURE_POLLER_ENABLED=true 설정 시에만 시작 (opt-in = dead code 회귀 0).
+    //   Content policy requires monitoring by default. Set EXPOSURE_POLLER_ENABLED=false only for maintenance.
     //   기본 6시간 주기 (EXPOSURE_POLLER_INTERVAL_HOURS override).
     try {
-      const exposureEnabled = (process.env.EXPOSURE_POLLER_ENABLED || '').trim().toLowerCase() === 'true';
+      const exposureEnabled = (process.env.EXPOSURE_POLLER_ENABLED || '').trim().toLowerCase() !== 'false';
       if (exposureEnabled) {
         const { startExposurePolling } = require('./analytics/exposurePoller.js');
         startExposurePolling(app.getPath('userData'));
-        console.log('[Main] exposurePoller 시작 (env EXPOSURE_POLLER_ENABLED=true)');
+        console.log('[Main] exposurePoller 시작 (기본 활성)');
       }
     } catch (exposureErr) {
       console.warn('[Main] exposurePoller 시작 실패 (무시):', (exposureErr as Error).message);
@@ -7941,16 +8280,26 @@ app.whenReady().then(async () => {
 
     // ✅ 예약 발행 실행 (1분마다 체크)
     cron.schedule('* * * * *', async () => {
+      if (scheduledPostsCronRunning) {
+        console.log('[Scheduler] 이전 1분 예약 점검이 아직 실행 중이므로 이번 틱을 건너뜁니다.');
+        return;
+      }
+      scheduledPostsCronRunning = true;
       try {
         const scheduledPosts = await loadScheduledPosts();
         const now = new Date();
 
         for (const post of scheduledPosts) {
-          // ✅ 날짜 파싱 수정: "2025-12-12 02:09" 형식을 "2025-12-12T02:09:00" ISO 형식으로 변환
-          const scheduleDateStr = post.scheduleDate.includes('T')
-            ? post.scheduleDate
-            : post.scheduleDate.replace(' ', 'T') + ':00';
-          const scheduleDate = new Date(scheduleDateStr);
+          const scheduleDate = parseScheduledDate(post.scheduleDate);
+          if (!scheduleDate) {
+            const invalidDateError = Object.assign(
+              new Error('예약 시간이 올바른 YYYY-MM-DD HH:mm 형식이 아닙니다.'),
+              { code: 'INVALID_SCHEDULE_DATE' },
+            );
+            await saveScheduledPost(createFailedScheduledPostState(post, invalidDateError));
+            sendLog(`❌ 예약 발행 실패: "${post.title}"의 예약 시간을 확인해주세요.`);
+            continue;
+          }
 
           // ✅ 디버깅: 날짜 파싱 결과 확인
           console.log(`[Scheduler] 📅 예약 체크: "${post.title}"`);
@@ -7968,10 +8317,23 @@ app.whenReady().then(async () => {
             if (!mainWindow || mainWindow.isDestroyed()) {
               console.error(`[Scheduler] ❌ 메인 윈도우가 없습니다. 앱이 실행 중이어야 합니다.`);
               sendLog(`❌ 예약 발행 실패: 앱이 실행 중이어야 합니다.`);
-              post.status = 'cancelled';
-              await saveScheduledPost(post);
+              const failedPost = createFailedScheduledPostState(
+                post,
+                new Error('Main window is unavailable for scheduled publishing'),
+              );
+              await saveScheduledPost(failedPost);
               continue;
             }
+
+            const directLease = await acquireDirectAutomationLease(`scheduled-post:${post.id}`);
+            if (!directLease) {
+              sendLog(`예약 발행 대기: 다른 발행 작업이 실행 중이므로 "${post.title}"은 다음 점검에서 다시 시도합니다.`);
+              continue;
+            }
+
+            let schedulerAutomation: NaverBlogAutomation | null = null;
+            let normalizedId = '';
+            let confirmedPublishedPost: ScheduledPost | null = null;
 
             try {
               // ✅ localStorage에서 생성된 글 데이터 가져오기 (postId 또는 title로 검색)
@@ -8005,6 +8367,10 @@ app.whenReady().then(async () => {
                     
                     const postId = ${JSON.stringify(post.postId)};
                     const title = ${JSON.stringify(post.title)};
+                    const hasAuthoritativePostId = typeof postId === 'string'
+                      && postId.trim()
+                      && postId !== 'null'
+                      && postId !== 'undefined';
                     
                     debugInfo.searchPostId = postId;
                     debugInfo.searchTitle = title;
@@ -8012,38 +8378,27 @@ app.whenReady().then(async () => {
                     let foundPost = null;
                     
                     // 1. postId로 정확히 찾기
-                    if (postId && postId.trim() && postId !== 'null' && postId !== 'undefined') {
+                    if (hasAuthoritativePostId) {
                       foundPost = posts.find(p => p.id === postId);
                       debugInfo.step1_postId = foundPost ? 'found' : 'not_found';
                     }
                     
-                    // 2. 정확한 제목으로 찾기
-                    if (!foundPost && title) {
+                    // 2. postId가 없는 이전 예약만 정확한 제목으로 찾기
+                    if (!hasAuthoritativePostId && !foundPost && title) {
                       foundPost = posts.find(p => p.title === title);
                       debugInfo.step2_exactTitle = foundPost ? 'found' : 'not_found';
                     }
                     
-                    // 3. 유사한 제목으로 찾기 (정규화)
-                    if (!foundPost && title) {
+                    // 3. 구두점/공백만 다른 동일 제목 허용 (부분 일치 금지)
+                    if (!hasAuthoritativePostId && !foundPost && title) {
                       const normalizeTitle = (t) => (t || '').trim().toLowerCase().replace(/[^a-z0-9가-힣]/g, '');
                       const normalizedSearchTitle = normalizeTitle(title);
                       foundPost = posts.find(p => {
                         const normalizedPostTitle = normalizeTitle(p.title);
-                        return normalizedPostTitle === normalizedSearchTitle || 
-                               normalizedPostTitle.includes(normalizedSearchTitle) ||
-                               normalizedSearchTitle.includes(normalizedPostTitle);
+                        return normalizedSearchTitle.length > 0
+                          && normalizedPostTitle === normalizedSearchTitle;
                       });
-                      debugInfo.step3_similarTitle = foundPost ? 'found' : 'not_found';
-                    }
-                    
-                    // 4. 가장 최근 글 사용 (fallback)
-                    if (!foundPost && posts.length > 0) {
-                      foundPost = posts.sort((a, b) => {
-                        const timeA = new Date(a.updatedAt || a.createdAt || 0).getTime();
-                        const timeB = new Date(b.updatedAt || b.createdAt || 0).getTime();
-                        return timeB - timeA;
-                      })[0];
-                      debugInfo.step4_fallback = foundPost ? foundPost.title : 'not_found';
+                      debugInfo.step3_normalizedTitle = foundPost ? 'found' : 'not_found';
                     }
                     
                     if (foundPost) {
@@ -8075,8 +8430,7 @@ app.whenReady().then(async () => {
                 console.log(`[Scheduler] 검색할 title: ${generatedPosts.debug.searchTitle}`);
                 console.log(`[Scheduler] Step 1 (postId 검색): ${generatedPosts.debug.step1_postId || 'skipped'}`);
                 console.log(`[Scheduler] Step 2 (정확한 제목): ${generatedPosts.debug.step2_exactTitle || 'skipped'}`);
-                console.log(`[Scheduler] Step 3 (유사 제목): ${generatedPosts.debug.step3_similarTitle || 'skipped'}`);
-                console.log(`[Scheduler] Step 4 (fallback): ${generatedPosts.debug.step4_fallback || 'skipped'}`);
+                console.log(`[Scheduler] Step 3 (정규화 동일 제목): ${generatedPosts.debug.step3_normalizedTitle || 'skipped'}`);
                 console.log(`[Scheduler] 최종 결과: ${generatedPosts.debug.finalResult}`);
                 if (generatedPosts.debug.foundTitle) {
                   console.log(`[Scheduler] ✅ 찾은 글: ${generatedPosts.debug.foundTitle} (ID: ${generatedPosts.debug.foundId})`);
@@ -8132,8 +8486,8 @@ app.whenReady().then(async () => {
               sendLog(`🖼️ 이미지 ${images.length}개 준비 완료`);
 
               // ✅ 다중계정 세션 맵 활용 (기존 세션 있으면 재사용)
-              const normalizedId = accountNaverId.trim().toLowerCase();
-              let schedulerAutomation = automationMap.get(normalizedId);
+              normalizedId = accountNaverId.trim().toLowerCase();
+              schedulerAutomation = automationMap.get(normalizedId) || null;
 
               if (schedulerAutomation) {
                 console.log(`[Scheduler] 기존 "${accountNaverId}" 세션 재사용`);
@@ -8150,6 +8504,9 @@ app.whenReady().then(async () => {
                 automationMap.set(normalizedId, schedulerAutomation);
                 automation = schedulerAutomation; // 하위 호환성 유지
               }
+
+              AutomationService.set(normalizedId, schedulerAutomation);
+              AutomationService.setCurrentInstance(schedulerAutomation);
 
               const runOptions: RunOptions = {
                 title: postData.title,
@@ -8170,31 +8527,54 @@ app.whenReady().then(async () => {
               console.log(`[Scheduler] 자동화 실행 시작: ${postData.title}`);
               sendLog(`🚀 예약 발행 실행 중: ${postData.title}`);
 
-              const automationResult = await schedulerAutomation.run(runOptions);
+              // Durable in-flight marker: a crash after this point is reconciled
+              // to "uncertain" instead of being blindly published again.
+              await saveScheduledPost(createPublishingScheduledPostState(post));
 
-              console.log(`[Scheduler] ✅ 예약 발행 성공: ${postData.title}`);
-              sendLog(`✅ 예약 발행 완료: ${postData.title}`);
+              const activeSchedulerAutomation = schedulerAutomation;
+              const automationResult = await withAbortableDeadline(
+                () => AutomationService.executePostCycle({
+                  ...runOptions,
+                  naverId: accountNaverId,
+                  naverPassword: accountNaverPassword,
+                  postId: postData.id || post.postId || post.id,
+                  businessInfo: postData.businessInfo,
+                  contentPolicyContext: postData.contentPolicyContext
+                    || postData.structuredContent?.contentPolicyContext,
+                } as any),
+                {
+                  timeoutMs: SCHEDULED_AUTOMATION_TIMEOUT_MS,
+                  cleanupTimeoutMs: SCHEDULED_AUTOMATION_CLEANUP_TIMEOUT_MS,
+                  operationLabel: `scheduled publish ${post.id}`,
+                  onTimeout: () => stopScheduledAutomation(activeSchedulerAutomation),
+                },
+              );
 
-              // ✅ 백그라운드 작업이므로 브라우저 정리 (단, 직접 명시적으로 keepBrowserOpen을 할 수 없으므로 일단 닫음)
-              await schedulerAutomation.closeBrowser().catch(() => undefined);
-              automationMap.delete(normalizedId);
-              if (automation === schedulerAutomation) automation = null;
+              if (!automationResult.success) {
+                throw new Error('SCHEDULED_PUBLISH_FAILED: automation did not report success');
+              }
 
               // ✅ 발행된 글 URL 가져오기 (실제 발행 URL 우선, 없을 때만 블로그 홈 fallback)
-              const publishedUrl = resolvePublishedUrl(
+              const resolvedPublishedUrl = resolvePublishedUrl(
                 automationResult,
-                () => schedulerAutomation.getPublishedUrl(),
+                () => activeSchedulerAutomation.getPublishedUrl(),
                 `https://blog.naver.com/${accountNaverId}`,
               );
 
-              // ✅ 상태를 published로 변경하고 발행 정보 저장
-              post.status = 'published';
-              post.publishedAt = new Date().toISOString();
-              post.publishedUrl = publishedUrl;
-              await saveScheduledPost(post);
+              const publishedPost = createPublishedScheduledPostState(post, resolvedPublishedUrl);
+              // From this point the remote outcome is known. No local/UI
+              // post-processing failure may downgrade it to failed/uncertain.
+              confirmedPublishedPost = publishedPost;
+              await saveScheduledPost(publishedPost);
 
               // ✅ 반복 일정 처리
-              await handleRecurringPost(post);
+              await handleRecurringPost(publishedPost).catch((recurringError) => {
+                console.error('[Scheduler] 반복 일정 후처리 실패:', recurringError);
+                sendLog(`⚠️ 발행은 완료됐지만 다음 반복 일정 생성에 실패했습니다: ${sanitizeUserVisibleError(recurringError)}`);
+              });
+
+              console.log(`[Scheduler] ✅ 예약 발행 성공: ${postData.title}`);
+              sendLog(`✅ 예약 발행 완료: ${postData.title}`);
 
               // ✅ UI에 알림 전송
               mainWindow?.webContents.send('automation:log', `✅ 예약 발행 완료: ${post.title}`);
@@ -8205,10 +8585,31 @@ app.whenReady().then(async () => {
               sendLog(`🆕 다음 글 작성을 위해 필드를 초기화합니다...`);
 
             } catch (publishError) {
+              const stateAfterError = resolveScheduledPostStateAfterError(
+                post,
+                publishError,
+                confirmedPublishedPost,
+              );
+              if (stateAfterError.status === 'published') {
+                const safePostCommitError = sanitizeUserVisibleError(publishError);
+                console.error(`[Scheduler] 발행 완료 후 로컬 후처리 실패: ${post.title}`, publishError);
+                await saveScheduledPost(stateAfterError).catch((persistError) => {
+                  console.error('[Scheduler] 발행 완료 상태 재저장 실패:', persistError);
+                });
+                sendLog(`⚠️ "${post.title}" 발행은 완료됐지만 로컬 후처리 중 오류가 있었습니다: ${safePostCommitError}`);
+                mainWindow?.webContents.send('automation:status', {
+                  success: true,
+                  message: `발행 완료: ${post.title} (일부 후처리 확인 필요)`,
+                  url: stateAfterError.publishedUrl,
+                });
+                continue;
+              }
               const errorMsg = (publishError as Error).message;
-              const failureCode = classifyPublishFailure(publishError).code;
+              const failedPost = stateAfterError;
+              const safeErrorMsg = failedPost.error || sanitizeUserVisibleError(publishError);
+              const failureCode = failedPost.failureCode || classifyPublishFailure(publishError).code;
               console.error(`[Scheduler] ❌ 예약 발행 실패: ${post.title}`, errorMsg);
-              sendLog(`❌ 예약 발행 실패: ${post.title} - ${errorMsg}`);
+              sendLog(`❌ 예약 발행 실패: ${post.title} - ${safeErrorMsg}`);
 
               // ✅ 치명적 에러 (브라우저 세션 종료) 감지
               const fatalErrors = ['Target closed', 'detached Frame', 'Protocol error', 'Session closed', 'Browser is closed'];
@@ -8229,19 +8630,32 @@ app.whenReady().then(async () => {
                 }
               }
 
-              // ✅ 실패 시 상태를 cancelled로 변경
-              post.status = 'cancelled';
-              await saveScheduledPost(post);
+              await saveScheduledPost(failedPost);
 
               // ✅ UI에 오류 알림
-              mainWindow?.webContents.send('automation:log', `❌ 예약 발행 실패: ${post.title} - ${errorMsg}`);
-              mainWindow?.webContents.send('automation:status', { success: false, message: `예약 발행 실패: ${errorMsg}`, failureCode });
+              mainWindow?.webContents.send('automation:log', `❌ 예약 발행 실패: ${post.title} - ${safeErrorMsg}`);
+              mainWindow?.webContents.send('automation:status', { success: false, message: `예약 발행 실패: ${safeErrorMsg}`, failureCode });
+            } finally {
+              await schedulerAutomation?.closeBrowser().catch(() => undefined);
+              if (normalizedId && automationMap.get(normalizedId) === schedulerAutomation) {
+                automationMap.delete(normalizedId);
+              }
+              if (normalizedId && AutomationService.get(normalizedId) === schedulerAutomation) {
+                AutomationService.delete(normalizedId);
+              }
+              if (schedulerAutomation && AutomationService.getCurrentInstance() === schedulerAutomation) {
+                AutomationService.setCurrentInstance(null);
+              }
+              if (automation === schedulerAutomation) automation = null;
+              directLease.release();
             }
           }
         }
       } catch (error) {
         console.error('[Scheduler] 예약 발행 처리 중 오류:', (error as Error).message);
-        sendLog(`⚠️ 예약 발행 처리 중 오류: ${(error as Error).message}`);
+        sendLog(`⚠️ 예약 발행 처리 중 오류: ${sanitizeUserVisibleError(error)}`);
+      } finally {
+        scheduledPostsCronRunning = false;
       }
     });
 
@@ -8392,7 +8806,22 @@ app.whenReady().then(async () => {
 //   배경: 사용자 보고 "버벅거림" 진짜 원인 — 매 비정상 종료마다 puppeteer Chrome 좀비 1~2개 누적.
 //   1주일 후 7~14개 → 1~3GB RAM 점유 → 시스템 전체 느려짐. 재부팅 시 회복.
 //   해결: 정상/비정상 모든 경로에 동일 cleanup 호출 + 다중 호출 방지 가드.
-let _cleanupRan = false;
+let _cleanupPromise: Promise<void> | null = null;
+const CLEANUP_STEP_TIMEOUT_MS = 5_000;
+
+async function runCleanupStep(
+  label: string,
+  task: () => void | PromiseLike<void>,
+  timeoutMs = CLEANUP_STEP_TIMEOUT_MS,
+): Promise<boolean> {
+  try {
+    await withCleanupTimeout(task, timeoutMs, label);
+    return true;
+  } catch (error) {
+    console.warn(`[Main] cleanup step failed (${label}):`, (error as Error)?.message || error);
+    return false;
+  }
+}
 
 // [v2.10.155] 종료 모달 IPC — renderer가 cleanup 진행 상황 표시
 function _notifyCleanupModal(payload: { phase: 'start' | 'progress' | 'done'; message: string; count?: number }): void {
@@ -8406,67 +8835,95 @@ function _notifyCleanupModal(payload: { phase: 'start' | 'progress' | 'done'; me
 }
 
 async function _runFullCleanup(reason: string): Promise<void> {
-  if (_cleanupRan) return;
-  _cleanupRan = true;
-  console.log(`[Main] 🧹 cleanup 시작 (reason: ${reason})`);
+  if (_cleanupPromise) return _cleanupPromise;
 
-  // [v2.10.155] 사용자에게 모달 표시 — 종료 경로일 때만 (uncaughtException 등 비상은 skip)
-  const showModal = reason === 'window-all-closed' || reason === 'SIGTERM' || reason === 'SIGINT' || reason === 'before-quit';
-  if (showModal) {
-    _notifyCleanupModal({ phase: 'start', message: '🧹 좀비 프로세스 정리 중...' });
-  }
-
-  // BrowserSessionManager 세션 정리
-  if (showModal) _notifyCleanupModal({ phase: 'progress', message: '브라우저 세션 종료 중...' });
-  await browserSessionManager.closeAllSessions().catch((e) => console.warn('[Main] closeAllSessions 실패:', e?.message));
-
-  // 진행 중인 automation cancel
-  if (showModal) _notifyCleanupModal({ phase: 'progress', message: '자동화 작업 중단 중...' });
-  const closePromises: Promise<void>[] = [];
-  if (automation) {
-    closePromises.push(automation.cancel().catch(() => undefined));
-  }
-  for (const instance of automationMap.values()) {
-    if (instance !== automation) {
-      closePromises.push(instance.cancel().catch(() => undefined));
+  _cleanupPromise = (async () => {
+    console.log(`[Main] 🧹 cleanup 시작 (reason: ${reason})`);
+    const showModal = reason === 'window-all-closed' || reason === 'SIGTERM' || reason === 'SIGINT' || reason === 'before-quit';
+    if (showModal) {
+      _notifyCleanupModal({ phase: 'start', message: '🧹 종료 자원 정리 중...' });
+      _notifyCleanupModal({ phase: 'progress', message: '브라우저와 자동화 작업 종료 중...' });
     }
-  }
-  await Promise.allSettled(closePromises);
-  automationMap.clear();
-  automation = null;
 
-  // Flow/ImageFX persistent context — 쿠키 flush 보장
-  if (showModal) _notifyCleanupModal({ phase: 'progress', message: 'Flow/ImageFX 컨텍스트 정리 중...' });
-  await resetFlowState().catch((e) => console.warn('[Main] Flow context close 실패:', e?.message));
-  await cleanupImageFxBrowser().catch((e) => console.warn('[Main] ImageFX cleanup 실패:', e?.message));
+    const [browserSessionsClean, automationInstancesClean] = await Promise.all([
+      runCleanupStep('browser sessions', () => browserSessionManager.closeAllSessions(), 12_000),
+      runCleanupStep('automation instances', async () => {
+        const closePromises: Promise<void>[] = [];
+        if (automation) closePromises.push(automation.cancel());
+        for (const instance of automationMap.values()) {
+          if (instance !== automation) closePromises.push(instance.cancel());
+        }
+        const closeResults = await Promise.allSettled(closePromises);
+        if (closeResults.some((result) => result.status === 'rejected')) {
+          throw new Error('One or more automation instances did not close');
+        }
+        automationMap.clear();
+        automation = null;
+        automationRunning = false;
+      }, 8_000),
+    ]);
 
-  // 추적 등록한 모든 자식 프로세스 taskkill /T /F (LEWORD 등)
-  if (showModal) _notifyCleanupModal({ phase: 'progress', message: '자식 프로세스 정리 중...' });
-  let killedCount = 0;
-  try {
-    const { killAllTrackedChildren, getTrackedChildren } = require('./runtime/childProcessRegistry.js');
-    killedCount = (getTrackedChildren?.() || []).length;
-    await killAllTrackedChildren();
-  } catch (e) {
-    console.warn('[Main] 자식 프로세스 정리 실패:', (e as Error)?.message);
-  }
+    if (showModal) _notifyCleanupModal({ phase: 'progress', message: '이미지 브라우저 컨텍스트 정리 중...' });
+    const [flowContextClean, imageFxContextClean, dropshotContextsClean] = await Promise.all([
+      runCleanupStep('Flow context', () => resetFlowState()),
+      runCleanupStep('ImageFX context', () => cleanupImageFxBrowser()),
+      runCleanupStep('Dropshot contexts', () => closeDropshotBrowserContexts()),
+    ]);
 
-  // [v2.10.155] zombieRecovery lock 정리 (정상 종료) — 다음 시작 시 좀비 없음 처리
-  try {
-    const zombieRecovery = require('./runtime/zombieRecovery');
-    zombieRecovery.clearLockOnNormalExit();
-  } catch { /* ignore */ }
+    if (showModal) _notifyCleanupModal({ phase: 'progress', message: '자식 프로세스와 타이머 정리 중...' });
+    let killedCount = 0;
+    const trackedChildrenClean = await runCleanupStep('tracked child processes', async () => {
+      const { killAllTrackedChildren, getTrackedChildren } = require('./runtime/childProcessRegistry.js');
+      killedCount = (getTrackedChildren?.() || []).length;
+      await killAllTrackedChildren();
+      const remainingCount = (getTrackedChildren?.() || []).length;
+      if (remainingCount > 0) {
+        throw new Error(`${remainingCount} tracked child process(es) remain alive`);
+      }
+    }, 8_000);
 
-  try { trendMonitor.stop(); } catch { /* ignore */ }
+    const resourceCleanupComplete = browserSessionsClean
+      && automationInstancesClean
+      && flowContextClean
+      && imageFxContextClean
+      && dropshotContextsClean
+      && trackedChildrenClean;
 
-  if (showModal) {
-    _notifyCleanupModal({
-      phase: 'done',
-      message: killedCount > 0 ? `✅ ${killedCount}개 프로세스 정리 완료` : '✅ 정리 완료',
-      count: killedCount,
-    });
-  }
-  console.log(`[Main] ✅ cleanup 완료 (reason: ${reason}, killed: ${killedCount})`);
+    const backgroundCleanupSteps = [
+      runCleanupStep('Gemini usage flush', () => flushGeminiUsage()),
+      runCleanupStep('event loop watchdog', () => {
+        const { stopEventLoopWatchdog } = require('./diagnostics/eventLoopWatchdog.js');
+        stopEventLoopWatchdog();
+      }),
+      runCleanupStep('selector periodic check', () => {
+        const { stopPeriodicCheck } = require('./automation/selectors/remoteUpdate.js');
+        stopPeriodicCheck();
+      }),
+      runCleanupStep('trend monitor', () => trendMonitor.stop()),
+    ];
+    if (resourceCleanupComplete) {
+      backgroundCleanupSteps.push(runCleanupStep('zombie recovery lock', () => {
+        const zombieRecovery = require('./runtime/zombieRecovery');
+        zombieRecovery.clearLockOnNormalExit();
+      }));
+    } else {
+      console.warn('[Main] zombie recovery lock retained because owned resource cleanup is incomplete');
+    }
+    await Promise.all(backgroundCleanupSteps);
+
+    if (showModal) {
+      _notifyCleanupModal({
+        phase: 'done',
+        message: resourceCleanupComplete
+          ? (killedCount > 0 ? `✅ ${killedCount}개 프로세스 정리 완료` : '✅ 정리 완료')
+          : '⚠️ 일부 자원 정리 미완료 - 다음 실행에서 복구합니다.',
+        count: killedCount,
+      });
+    }
+    console.log(`[Main] cleanup 완료 (reason: ${reason}, killed: ${killedCount}, complete: ${resourceCleanupComplete})`);
+  })();
+
+  return _cleanupPromise;
 }
 
 app.on('window-all-closed', async () => {
@@ -8509,50 +8966,6 @@ process.on('uncaughtException', async (error: Error) => {
   } finally {
     clearTimeout(timeoutId);
     process.exit(1);
-  }
-});
-
-app.on('before-quit', async (event) => {
-  if (automationRunning || automation || automationMap.size > 0) {
-    // 이미 종료 절차 중이면 무시
-    if ((globalThis as any).isQuitting) return;
-    (globalThis as any).isQuitting = true;
-
-    event.preventDefault();
-    const result = await dialog.showMessageBox({
-      type: 'warning',
-      buttons: ['강제 종료', '취소'],
-      defaultId: 1,
-      cancelId: 1,
-      title: '자동화 실행 중',
-      message: '자동화 세션이 활성화되어 있거나 실행 중입니다. 강제로 종료하시겠습니까?',
-      detail: '강제 종료를 선택하면 모든 브라우저 세션이 즉시 종료됩니다.',
-    });
-
-    if (result.response === 0) {
-      const closePromises: Promise<void>[] = [];
-      if (automation) {
-        closePromises.push(automation.cancel().catch(() => undefined));
-      }
-      for (const instance of automationMap.values()) {
-        if (instance !== automation) {
-          closePromises.push(instance.cancel().catch(() => undefined));
-        }
-      }
-      await Promise.allSettled(closePromises);
-      automationMap.clear();
-      automation = null;
-      automationRunning = false;
-      app.quit();
-
-      // ✅ [Fix] 강제 종료 시에도 프로세스가 완전히 종료되도록
-      setTimeout(() => {
-        console.log('[Main] Forcing process exit after force quit...');
-        process.exit(0);
-      }, 1000);
-    } else {
-      (globalThis as any).isQuitting = false;
-    }
   }
 });
 
@@ -8719,45 +9132,3 @@ function translatePuppeteerError(error: Error): string {
 }
 
 // ✅ [2026-04-03] seo:generateTitle → src/main/ipc/miscHandlers.ts로 이관
-
-// ✅ [2026-03-19] 앱 종료 시 Gemini 사용량 메모리 누적분 안전 저장
-app.on('before-quit', async () => {
-  try {
-    await flushGeminiUsage();
-    console.log('[App] ✅ Gemini 사용량 flush 완료');
-  } catch (e) {
-    console.warn('[App] Gemini flush 실패:', (e as Error).message);
-  }
-
-  // v2.7.1: 마지막 안전망 — window-all-closed가 안 탔을 경우(트레이/Cmd-Q)에도
-  // Flow/ImageFX persistent context를 강제 close해 쿠키 flush 보장.
-  try {
-    await resetFlowState();
-    console.log('[App] ✅ Flow context flush 완료');
-  } catch (e) {
-    console.warn('[App] Flow flush 실패:', (e as Error).message);
-  }
-  try {
-    await cleanupImageFxBrowser();
-    console.log('[App] ✅ ImageFX context flush 완료');
-  } catch (e) {
-    console.warn('[App] ImageFX flush 실패:', (e as Error).message);
-  }
-  // ✅ [v2.7.48] before-quit 마지막 안전망 — 자식 프로세스 일괄 종료
-  try {
-    const { killAllTrackedChildren } = require('./runtime/childProcessRegistry.js');
-    await killAllTrackedChildren();
-    console.log('[App] ✅ 자식 프로세스 정리 완료');
-  } catch (e) {
-    console.warn('[App] 자식 프로세스 정리 실패:', (e as Error).message);
-  }
-  // [v2.10.110] eventLoopWatchdog + selector remoteUpdate setInterval 정리 (Agent O LEAK-1/5)
-  try {
-    const { stopEventLoopWatchdog } = require('./diagnostics/eventLoopWatchdog.js');
-    stopEventLoopWatchdog();
-  } catch { /* ignore */ }
-  try {
-    const { stopPeriodicCheck } = require('./automation/selectors/remoteUpdate.js');
-    stopPeriodicCheck();
-  } catch { /* ignore */ }
-});

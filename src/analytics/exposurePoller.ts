@@ -7,7 +7,7 @@
  * past their 24/48/72h window and runs the exposure check, persisting results
  * back to the published-posts.json store.
  *
- * Opt-in via env EXPOSURE_POLLER_ENABLED=true. Default interval 6 hours
+ * Enabled by default. EXPOSURE_POLLER_ENABLED=false is a maintenance-only opt-out. Default interval 6 hours
  * (EXPOSURE_POLLER_INTERVAL_HOURS override).
  *
  * Safe to import in main process only — uses fs synchronously and triggers
@@ -21,6 +21,9 @@ import {
   type PublishedPost,
 } from './publishedPostTracker.js';
 import { checkBatchExposure } from './exposureChecker.js';
+import { runExposureCrossChecks } from '../contentPolicy/exposureCrossChecker.js';
+import { processExposureMonitoring } from '../contentPolicy/exposureMonitoringService.js';
+import { PublicationStateStore } from '../contentPolicy/publicationStateStore.js';
 
 const DEFAULT_INTERVAL_HOURS = 6;
 const HOUR_MS = 60 * 60 * 1000;
@@ -64,24 +67,54 @@ export async function runExposurePollOnce(userDataPath: string): Promise<{
         }));
 
       if (batchInput.length === 0) {
+        await new PublicationStateStore(userDataPath).pauseAll('EXPOSURE_TARGET_METADATA_UNAVAILABLE');
         summary.push({ checkpoint: hoursAfter, candidates: due.length, recorded: 0 });
         continue;
+      }
+      if (batchInput.length !== due.length) {
+        await new PublicationStateStore(userDataPath).pauseAll('EXPOSURE_TARGET_METADATA_INCOMPLETE');
       }
 
       const results = await checkBatchExposure(batchInput);
       let recorded = 0;
       for (const r of results) {
         try {
+          const trackedPost = due.find((post) => post.id === r.id);
+          if (!trackedPost) throw new Error('EXPOSURE_TRACKED_POST_NOT_FOUND');
           const ok = recordExposureCheck(userDataPath, r.id, {
             checkedAt: new Date().toISOString(),
             hoursAfter: r.hoursAfter,
+            searchedKeyword: r.result.searchedKeyword,
             position: r.result.position,
             hasSmartblock: r.result.hasSmartblock,
             notes: r.result.notes,
           } as PublishedPost['exposureChecks'] extends Array<infer C> | undefined ? C : never);
-          if (ok) recorded++;
-        } catch {
-          // single record failure must not abort the batch
+          if (!ok) throw new Error('LEGACY_EXPOSURE_RECORD_FAILED');
+
+          const checks = await runExposureCrossChecks({
+            articleId: trackedPost.id,
+            title: trackedPost.title,
+            keyword: trackedPost.keyword,
+            blogId: trackedPost.blogId,
+            logNo: trackedPost.logNo,
+            url: trackedPost.url,
+          }, { integratedResult: r.result });
+          await processExposureMonitoring({
+            userDataPath,
+            target: {
+              trackerId: trackedPost.id,
+              title: trackedPost.title,
+              keyword: trackedPost.keyword,
+              blogId: trackedPost.blogId,
+              logNo: trackedPost.logNo,
+              url: trackedPost.url,
+            },
+            checks,
+          });
+          recorded++;
+        } catch (error) {
+          console.warn(`[ExposurePoller] post ${r.id} monitoring failed:`, (error as Error).message);
+          await new PublicationStateStore(userDataPath).pauseAll('EXPOSURE_MONITOR_FAILURE');
         }
       }
       summary.push({ checkpoint: hoursAfter, candidates: batchInput.length, recorded });
