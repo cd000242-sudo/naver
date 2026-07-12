@@ -408,6 +408,7 @@ try {
     'dropshotLoginUi.js',
       'articleTableComposer.js',
       'contentPolicyDashboard.js',
+      'revenueOperationsDashboard.js',
   ];
   let modulesSource = '';
   for (const modFile of modulesFiles) {

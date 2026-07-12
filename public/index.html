@@ -226,6 +226,7 @@
             <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="post-list">📋 생성된 글 목록</button>
             <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="images">🖼️ 이미지 생성·관리</button>
             <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="image-tools">🎨 썸네일 배너 생성기</button>
+            <button type="button" class="tab-button" role="tab" aria-selected="false" data-tab="analytics">📊 분석 도구</button>
             <!-- [v2.11.x] 스케줄 관리 탭 제거 — 앱 스케줄 모드 폐지(네이버 예약발행으로 일원화).
                  탭 패널/scheduleManager 백엔드는 도달 불가 dead로 남김(후속 정리). -->
         </div>
@@ -1984,6 +1985,10 @@
                         style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
                         📈 성과 추적
                     </button>
+                    <button type="button" class="analytics-subtab" data-subtab="revenue"
+                        style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
+                        💰 수익 운영실
+                    </button>
                     <button type="button" class="analytics-subtab" data-subtab="content-policy"
                         style="flex: 1; min-width: 120px; padding: 0.75rem 1rem; border: none; border-radius: var(--radius-md); background: transparent; color: var(--text-muted); cursor: pointer; font-weight: 600; transition: all 0.2s;">
                         🛡 콘텐츠 정책
@@ -2043,7 +2048,7 @@
                 </div>
 
                 <!-- LEWORD redirect 카드 (기존 키워드 분석 자리) -->
-                <div style="margin-bottom: 1.5rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(184, 134, 11, 0.08)); border: 2px solid #D4AF37; border-radius: 12px; text-align: center;">
+                <div id="analytics-leword-redirect" style="margin-bottom: 1.5rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(184, 134, 11, 0.08)); border: 2px solid #D4AF37; border-radius: 12px; text-align: center;">
                     <div style="font-size: 1.6rem; margin-bottom: 0.5rem;">🔍</div>
                     <h3 style="margin: 0 0 0.5rem 0; color: #D4AF37;">키워드 분석은 LEWORD 사용</h3>
                     <p style="margin: 0 0 1rem 0; color: var(--text-muted); font-size: 0.9rem;">
@@ -2237,6 +2242,100 @@
                         <div id="tracking-posts-list" style="color: var(--text-muted); font-style: italic;">추적 중인 글이
                             없습니다.</div>
                     </div>
+                </div>
+
+                <div id="subtab-revenue" class="analytics-subpanel revenue-operations" style="display: none;">
+                    <div class="revenue-ops-header">
+                        <div>
+                            <h3>수익 운영실</h3>
+                            <span id="revenue-proof-badge" class="revenue-proof-badge" data-status="no_data">실적 없음</span>
+                        </div>
+                        <button type="button" id="revenue-refresh-btn" class="revenue-icon-button" title="수익 데이터 새로고침" aria-label="수익 데이터 새로고침">↻</button>
+                    </div>
+
+                    <div id="revenue-warning" class="revenue-inline-status" role="status" aria-live="polite"></div>
+                    <p class="revenue-evidence-note">입력한 실제 정산 자료를 기준으로 계산하며 외부 플랫폼의 정산 인증을 대신하지 않습니다.</p>
+                    <div id="revenue-kpi-grid" class="revenue-kpi-grid"></div>
+
+                    <section class="revenue-band" aria-labelledby="revenue-goal-heading">
+                        <div class="revenue-band-heading">
+                            <h4 id="revenue-goal-heading">월 순이익 목표</h4>
+                            <span id="revenue-proof-reason"></span>
+                        </div>
+                        <div class="revenue-goal-control">
+                            <input id="revenue-monthly-target" type="number" inputmode="numeric" min="0" max="1000000000000" step="10000" placeholder="목표 금액">
+                            <span>원</span>
+                            <button type="button" id="revenue-save-goal-btn" class="revenue-primary-button">목표 저장</button>
+                        </div>
+                        <div id="revenue-month-evidence" class="revenue-month-evidence"></div>
+                    </section>
+
+                    <section class="revenue-band" aria-labelledby="revenue-entry-heading">
+                        <div class="revenue-band-heading">
+                            <h4 id="revenue-entry-heading">실제 정산 입력</h4>
+                            <span>추정 수익은 입력하지 않습니다.</span>
+                        </div>
+                        <form id="revenue-entry-form" class="revenue-entry-form">
+                            <label>정산일<input id="revenue-entry-date" name="occurredOn" type="date" required></label>
+                            <label>수익 채널
+                                <select id="revenue-entry-channel" name="channel" required>
+                                    <option value="adpost">애드포스트</option>
+                                    <option value="shopping-connect">쇼핑커넥트</option>
+                                    <option value="affiliate">기타 제휴</option>
+                                    <option value="sponsorship">협찬·광고</option>
+                                    <option value="service">대행·서비스</option>
+                                    <option value="other">기타</option>
+                                </select>
+                            </label>
+                            <label>실매출<input name="grossRevenue" type="number" inputmode="numeric" min="0" max="1000000000000" step="1" value="0" required></label>
+                            <label>직접 비용<input name="cost" type="number" inputmode="numeric" min="0" max="1000000000000" step="1" value="0" required></label>
+                            <label>클릭<input name="clicks" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="0"></label>
+                            <label>전환<input name="conversions" type="number" inputmode="numeric" min="0" max="1000000000" step="1" value="0"></label>
+                            <label>글 제목<input name="title" type="text" maxlength="200" placeholder="수익이 발생한 글"></label>
+                            <label>글 URL<input name="postUrl" type="url" maxlength="500" placeholder="https://blog.naver.com/..."></label>
+                            <label>카테고리<input name="category" type="text" maxlength="80" placeholder="리빙, 건강 등"></label>
+                            <label>계정<input name="accountId" type="text" maxlength="120" placeholder="블로그 계정 구분"></label>
+                            <label class="revenue-form-wide">메모<input name="note" type="text" maxlength="500" placeholder="정산 기준 또는 캠페인"></label>
+                            <div class="revenue-form-actions">
+                                <button type="submit" id="revenue-add-entry-btn" class="revenue-primary-button">실적 추가</button>
+                            </div>
+                        </form>
+                    </section>
+
+                    <section class="revenue-band" aria-labelledby="revenue-actions-heading">
+                        <div class="revenue-band-heading"><h4 id="revenue-actions-heading">다음 실행안</h4></div>
+                        <ol id="revenue-actions" class="revenue-actions"></ol>
+                    </section>
+
+                    <section class="revenue-band" aria-labelledby="revenue-channel-heading">
+                        <div class="revenue-band-heading"><h4 id="revenue-channel-heading">채널별 실적</h4></div>
+                        <div class="revenue-table-wrap">
+                            <table class="revenue-table">
+                                <thead><tr><th>채널</th><th>매출</th><th>비용</th><th>순이익</th><th>매출 비중</th><th>전환율</th><th>ROI</th></tr></thead>
+                                <tbody id="revenue-channel-rows"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section class="revenue-band" aria-labelledby="revenue-content-heading">
+                        <div class="revenue-band-heading"><h4 id="revenue-content-heading">90일 수익 상위 글</h4></div>
+                        <div class="revenue-table-wrap">
+                            <table class="revenue-table">
+                                <thead><tr><th>글</th><th>카테고리</th><th>매출</th><th>순이익</th><th>전환</th></tr></thead>
+                                <tbody id="revenue-content-rows"></tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section class="revenue-band" aria-labelledby="revenue-ledger-heading">
+                        <div class="revenue-band-heading"><h4 id="revenue-ledger-heading">최근 수익 원장</h4></div>
+                        <div class="revenue-table-wrap">
+                            <table class="revenue-table revenue-ledger-table">
+                                <thead><tr><th>정산일</th><th>채널</th><th>글</th><th>매출</th><th>비용</th><th>순이익</th><th></th></tr></thead>
+                                <tbody id="revenue-entry-rows"></tbody>
+                            </table>
+                        </div>
+                    </section>
                 </div>
 
                 <div id="subtab-content-policy" class="analytics-subpanel" style="display: none;">

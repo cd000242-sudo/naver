@@ -551,10 +551,11 @@ function friendlyErrorMessage(error) {
 }
 async function executeFullAutoFlow(formData) {
     formData = createPipelineFormDataSnapshot('full-auto', formData || {});
-    if (!window.isContinuousMode) {
+    const isContinuousInvocation = window.isContinuousMode === true;
+    if (!isContinuousInvocation) {
         window.stopFullAutoPublish = false;
     }
-    const modal = window.currentProgressModal;
+    const modal = resolveFullAutoProgressModal(window.currentProgressModal, isContinuousInvocation);
     const checkShouldStop = () => {
         if (isFullAutoStopRequested(modal)) {
             appendLog('⏹️ 사용자가 작업을 취소했습니다.');
@@ -1153,7 +1154,16 @@ async function executeFullAutoFlow(formData) {
         modal?.addLog(`✅ 이미지 ${finalImages.length}개 준비 완료`);
         modal?.setStep(3, 'active', '로그인 중...');
         checkShouldStop();
-        autoLinkPreviousPost(formData, modal);
+        try {
+            autoLinkPreviousPost(formData, modal);
+        }
+        catch (linkError) {
+            // Previous-post lookup is optional enrichment. Corrupt or migrated
+            // local history must never block login after images are ready.
+            console.warn('[FullAuto] previous-post lookup failed; continuing publish:', linkError);
+            appendLog('⚠️ 이전글 자동 연결을 건너뛰고 네이버 발행을 계속합니다.');
+            modal?.addLog?.('⚠️ 이전글 연결 건너뜀 — 발행 계속');
+        }
         const automationResult = await executeBlogPublishing(structuredContent, finalImages, formData);
         if (currentPostId && automationResult?.success) {
             const publishedUrl = automationResult.url || automationResult.postUrl || automationResult.blogUrl;
@@ -1215,7 +1225,8 @@ async function executeFullAutoFlow(formData) {
 async function executeSemiAutoFlow(formData) {
     formData = createPipelineFormDataSnapshot('full-auto', formData || {});
     formData._semiAutoMode = true;
-    if (!window.isContinuousMode) {
+    const isContinuousInvocation = window.isContinuousMode === true;
+    if (!isContinuousInvocation) {
         window.stopFullAutoPublish = false;
     }
     const checkSemiAutoStop = () => {
@@ -2954,7 +2965,10 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         throw new Error('사용자가 작업을 취소했습니다.');
     }
     const pipelineCfg = formData.pipelineConfigSnapshot;
-    const modal = window.currentProgressModal;
+    const modal = resolveFullAutoProgressModal(
+        window.currentProgressModal,
+        window.isContinuousMode === true,
+    );
     appendLog('📤 블로그 발행을 준비합니다.');
     showUnifiedProgress(85, '블로그 발행 준비 중...', '네이버 계정 정보를 확인하고 있습니다.');
     modal?.setProgress(60, '네이버 계정 확인 중...');
@@ -3339,6 +3353,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
     showUnifiedProgress(92, '블로그 로그인 중...', '네이버 계정으로 로그인하고 있습니다.');
     modal?.setProgress(70, '네이버 로그인 중...');
     showUnifiedProgress(95, '콘텐츠 발행 중...', '네이버 블로그에 콘텐츠를 업로드하고 있습니다.');
+    window._publishAutomationDispatched = true;
+    window._publishAutomationDispatchedAt = Date.now();
+    appendLog('📤 네이버 로그인·발행 엔진으로 작업을 전달했습니다.');
     const apiResponse = await apiClient.call('runAutomation', [payload], {
         retryCount: 0,
         retryDelay: 5000,

@@ -40,6 +40,7 @@ import { executeFullAutoFlow, executeSemiAutoFlow, updateUnifiedPreview, updateU
 import { generateContentFromUrl, normalizeKeywordsForGeneration, generateContentFromKeywords, disableFullAutoPublishButton, enableFullAutoPublishButton, enableSemiAutoPublishButton, autoGenerateCTA, autoFillCTAFromContent, fillSemiAutoFields, paraphraseContent } from './modules/contentGeneration.js';
 import { initArticleTableComposer } from './modules/articleTableComposer.js';
 import { initContentPolicyDashboard } from './modules/contentPolicyDashboard.js';
+import { initRevenueOperationsDashboard } from './modules/revenueOperationsDashboard.js';
 import { undoLastImageChange } from './modules/undoImageChange.js';
 import { collectFormData } from './modules/formAndAutomation.js';
 import { resolveFirstHeadingTitleForThumbnail, initThumbnailGenerator, updateThumbnailPreview } from './modules/thumbnailPreview.js';
@@ -93,7 +94,7 @@ import { markRealBlogCategoryOption } from './utils/realBlogCategoryPolicy.js';
 // ✅ [2026-01-25 모듈화] 앱 이벤트 핸들러
 import { initAllAppEventHandlers } from './utils/appEventsHandler.js';
 // ✅ [2026-01-25 모듈화] 전체 자동 발행 유틸리티
-import { isFullAutoStopRequested, requestStopFullAutoPublish, normalizeReviewHeadingSeed, applyReviewHeadingPrefix } from './utils/fullAutoUtils.js';
+import { isFullAutoStopRequested, requestStopFullAutoPublish, resolveFullAutoProgressModal, normalizeReviewHeadingSeed, applyReviewHeadingPrefix } from './utils/fullAutoUtils.js';
 // ✅ [2026-01-25 모듈화] 소제목 키 및 파일 URL 유틸리티
 import { toFileUrlMaybe, normalizeHeadingKeyForVideoCache } from './utils/headingKeyUtils.js';
 // ✅ [2026-01-25 모듈화] Veo 진행 오버레이
@@ -770,6 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ✅ [v2.10.191 Phase 3.8.3] SERP 추이 서브탭 wiring
   initSerpHistoryPanel();
   initContentPolicyDashboard();
+  initRevenueOperationsDashboard();
 
   // ✅ [2026-01-25] 환경설정 저장 버튼 이벤트 리스너 (CSP 우회)
   const saveBtn = document.getElementById('save-settings-btn');
@@ -1558,6 +1560,7 @@ function getGlobalState<T>(key: 'content' | 'images' | 'running' | 'postId'): T 
 // ✅ [v1.4.59] let 복원 — ESLint prefer-const가 `declare let` 기반 재할당을 감지 못해 const로 잘못 변경했던 버그 수정
 // 다른 모듈(continuousPublishing.ts 등)에서 이 변수들을 재할당하므로 반드시 let
 let isContinuousMode = false;
+(window as any).isContinuousMode = isContinuousMode;
 let continuousCountdown = 0;
 let continuousInterval: NodeJS.Timeout | null = null;
 let continuousQueue: string[] = []; // 연속 발행할 URL/콘텐츠 큐
@@ -9132,6 +9135,10 @@ async function celebrityPublishGate(formData: any): Promise<boolean> {
 }
 
 async function executeUnifiedAutomation(formData: any): Promise<any> {
+  // This marks the renderer/main boundary, not merely entry into full-auto.
+  // Continuous mode can safely retry failures that happen before dispatch.
+  (window as any)._publishAutomationDispatched = false;
+
   // ✅ [SPEC-DEFAMATION-2026 P1 (C)] 발행 전 위험 게이트 — 취소 시 발행 중단(진행률 UI 생성 전)
   if (!(await celebrityPublishGate(formData))) return null;
 

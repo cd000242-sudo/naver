@@ -90,6 +90,11 @@ declare function saveGeneratedPostFromData(content: any, images?: any[], opts?: 
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
 declare function revokeAllImageDataUrls(): void;
 
+function setContinuousModeState(active: boolean): void {
+  isContinuousMode = active;
+  (window as any).isContinuousMode = active;
+}
+
 // ═══════════════════════════════════════════════════════════════════
 // ✅ [2026-03-23] 네이버 캡차 방지 — 강화된 안전 발행 간격 시스템
 // 
@@ -415,7 +420,7 @@ export function startContinuousMode(urls: string[]): void {
   }
 
   console.log('[Continuous] 연속 발행 모드 시작 준비');
-  isContinuousMode = true;
+  setContinuousModeState(true);
   // ✅ [2026-03-11 FIX] 새 연속발행 시작 시 이전 중지 플래그 초기화
   (window as any).stopFullAutoPublish = false;
   (window as any).stopBatchPublish = false;
@@ -580,7 +585,7 @@ export function stopContinuousMode(reason: 'manual' | 'complete' = 'manual'): vo
     _enhancedQueueTimer = null;
   }
 
-  isContinuousMode = false;
+  setContinuousModeState(false);
 
   // ✅ [FIX] 전역 중지 플래그 설정 - 진행 중인 모든 발행 중지
   (window as any).stopFullAutoPublish = true;
@@ -4280,7 +4285,7 @@ async function startContinuousPublishingV2(): Promise<void> {
     console.warn('[Continuous] 이미지 엔진 가드 실행 실패 (계속 진행):', guardErr?.message);
   }
 
-  isContinuousMode = true;
+  setContinuousModeState(true);
 
   // ✅ [2026-03-11 FIX] 새 연속발행 시작 시 이전 중지 플래그 초기화
   // resetAfterPublish()에서 리셋을 제거했으므로, 새 발행 시작 지점에서 명시적으로 리셋
@@ -4844,6 +4849,20 @@ async function startContinuousPublishingV2(): Promise<void> {
           throw new UserCancelledError();
         }
 
+        // Reassert both continuous states immediately before the shared
+        // full-auto flow. A stale modal must not cancel this handoff after
+        // Flow has already completed its images.
+        setContinuousModeState(true);
+        const preparedImageCount = Array.isArray((window as any).generatedImages)
+          ? (window as any).generatedImages.length
+          : 0;
+        appendLog(`✅ ${skipImages ? '텍스트 콘텐츠' : `이미지 ${preparedImageCount}장`} 준비 완료. 네이버 로그인 및 발행 단계로 이동합니다.`);
+        updateContinuousProgressModal({
+          step: '네이버 로그인 준비 중...',
+          log: `[${currentIdx}/${totalCount}] 발행 브라우저로 작업을 넘기고 있습니다.`,
+          percentage: Math.max(0, (currentIdx / totalCount) * 100 - 5),
+        });
+
         // ✅ [2026-04-03 FIX] withStopCheck 래퍼: 발행 중에도 중지 즉시 반응
         (item as any)._publishStarted = true;
         await withStopCheck(executeUnifiedAutomation(formData), { kind: 'publish' });
@@ -4917,6 +4936,7 @@ async function startContinuousPublishingV2(): Promise<void> {
 
     } catch (error) {
       const errMsg = (error as Error).message || '';
+      const publishWasDispatched = (window as any)._publishAutomationDispatched === true;
 
       // ✅ [2026-04-11 FIX] instanceof + 메시지 텍스트 양쪽으로 사용자 취소 판별
       // 이미지 생성/콘텐츠 생성 등 하위 모듈에서 일반 Error로 취소를 throw하는 경우 대응
@@ -4925,7 +4945,7 @@ async function startContinuousPublishingV2(): Promise<void> {
         || errMsg.includes('취소됨');
       if (isUserCancelled || !isContinuousMode || (window as any).stopFullAutoPublish) {
         item.status = resolveInterruptedPublishStatus(
-          Boolean((item as any)._publishStarted),
+          Boolean((item as any)._publishStarted && publishWasDispatched),
           'cancelled',
         );
         delete (item as any)._publishStarted;
@@ -4971,7 +4991,7 @@ async function startContinuousPublishingV2(): Promise<void> {
         console.warn('[Continuous] 상태 정리 오류 (무시):', cleanupErr);
       }
 
-      if ((item as any)._publishStarted) {
+      if ((item as any)._publishStarted && publishWasDispatched) {
         item.status = resolveInterruptedPublishStatus(true, 'failed');
         delete (item as any)._publishStarted;
         appendLog(`⚠️ 발행 호출 이후 결과를 확정하지 못했습니다. 중복 발행 방지를 위해 자동 재시도하지 않습니다.`);
@@ -4981,6 +5001,11 @@ async function startContinuousPublishingV2(): Promise<void> {
           percentage: (currentIdx / totalCount) * 100,
         });
         continue;
+      }
+
+      if ((item as any)._publishStarted) {
+        delete (item as any)._publishStarted;
+        appendLog('⚠️ 네이버 자동화 호출 전에 발행 준비가 중단되었습니다. 중복 위험이 없어 1회 재시도합니다.');
       }
 
       _consecutiveFailCount++;
@@ -5108,7 +5133,7 @@ async function startContinuousPublishingV2(): Promise<void> {
 
   // 완료 처리
   if (isContinuousMode) {
-    isContinuousMode = false;
+    setContinuousModeState(false);
     if (startBtn) (startBtn as HTMLElement).style.display = 'flex';
     if (stopBtn) (stopBtn as HTMLElement).style.display = 'none';
     if (statusIndicator) statusIndicator.style.background = '#10b981';
@@ -5192,7 +5217,7 @@ function skipNextFiveItemsV2(): void {
 
 export function startContinuousModeEnhanced(queue: typeof continuousPublishQueue): void {
   continuousPublishQueue = [...queue];
-  isContinuousMode = true;
+  setContinuousModeState(true);
   // ✅ [2026-03-11 FIX] 새 연속발행 시작 시 이전 중지 플래그 초기화
   (window as any).stopFullAutoPublish = false;
   (window as any).stopBatchPublish = false;

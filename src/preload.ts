@@ -4,6 +4,7 @@ import type { StructuredContent } from './contentGenerator.js';
 import type { SourceAssemblyInput } from './sourceAssembler.js';
 import type { ContentPolicyDashboard } from './contentPolicy/operatorService.js';
 import type { PublicationState } from './contentPolicy/types.js';
+import type { RevenueDashboard, RevenueEntry, RevenueEntryInput, RevenueSettings } from './analytics/revenueOperations.js';
 
 type AutomationPayload = {
   naverId: string;
@@ -80,6 +81,14 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('contentPolicy:resume', approval),
   verifyContentPolicyManualTest: (request: { url: string; title: string; keyword: string }): Promise<{ success: boolean; state?: PublicationState; checks?: any[]; message?: string }> =>
     ipcRenderer.invoke('contentPolicy:verifyManualTest', request),
+  getRevenueDashboard: (): Promise<{ success: boolean; dashboard?: RevenueDashboard; message?: string }> =>
+    ipcRenderer.invoke('revenue:getDashboard'),
+  addRevenueEntry: (input: RevenueEntryInput): Promise<{ success: boolean; entry?: RevenueEntry; dashboard?: RevenueDashboard; message?: string }> =>
+    ipcRenderer.invoke('revenue:addEntry', input),
+  removeRevenueEntry: (id: string): Promise<{ success: boolean; dashboard?: RevenueDashboard; message?: string }> =>
+    ipcRenderer.invoke('revenue:removeEntry', id),
+  updateRevenueSettings: (input: Partial<RevenueSettings>): Promise<{ success: boolean; settings?: RevenueSettings; dashboard?: RevenueDashboard; message?: string }> =>
+    ipcRenderer.invoke('revenue:updateSettings', input),
   // Excel 관련 API 제거됨
   cancelAutomation: (metadata?: { source?: string; reason?: string; contentRequestId?: string }) =>
     ipcRenderer.invoke('automation:cancel', metadata),

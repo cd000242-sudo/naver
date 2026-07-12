@@ -211,6 +211,7 @@ import { registerImageTableHandlers } from './main/ipc/imageTableHandlers.js';
 // ✅ [v2.10.203] SERP 프로브 + publishedPostTracker handlers — 끝판왕 시스템 IPC 등록 누락 fix
 import { registerSerpProbeHandlers } from './main/ipc/serpProbeHandlers.js';
 import { registerContentPolicyHandlers } from './main/ipc/contentPolicyHandlers.js';
+import { registerRevenueOperationsHandlers } from './main/ipc/revenueOperationsHandlers.js';
 import { loadContentPolicy } from './contentPolicy/policyLoader.js';
 import { PublicationStateStore } from './contentPolicy/publicationStateStore.js';
 import { evaluatePublicationAvailability } from './contentPolicy/publishGuard.js';
@@ -4086,6 +4087,7 @@ registerImageTableHandlers();
 //   원인: registerAllHandlers 내부에 있는데 main.ts가 개별 호출 패턴이라 미호출
 registerSerpProbeHandlers();
 registerContentPolicyHandlers();
+registerRevenueOperationsHandlers();
 // ✅ miscHandlers: content:collectFromPlatforms 등 — 연속발행에서 크롤링 시 필요
 import { registerMiscHandlers } from './main/ipc/miscHandlers.js';
 registerMiscHandlers();

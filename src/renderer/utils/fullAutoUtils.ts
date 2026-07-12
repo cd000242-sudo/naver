@@ -71,6 +71,17 @@ export function isFullAutoStopRequested(modal?: ProgressModal | null): boolean {
 }
 
 /**
+ * Continuous publishing owns a separate progress modal. Reusing the last
+ * full-auto modal can inherit `cancelled=true` and stop before Naver login.
+ */
+export function resolveFullAutoProgressModal(
+    modal?: ProgressModal | null,
+    isContinuous = getWindowState().isContinuousMode === true,
+): ProgressModal | null {
+    return isContinuous ? null : (modal ?? null);
+}
+
+/**
  * 전체 자동 발행 중지 요청
  */
 export async function requestStopFullAutoPublish(): Promise<void> {
@@ -108,6 +119,7 @@ export function applyReviewHeadingPrefix(structuredContent: any, seed: string): 
 // 전역 노출 (하위 호환성)
 (window as any).isFullAutoStopRequested = isFullAutoStopRequested;
 (window as any).requestStopFullAutoPublish = requestStopFullAutoPublish;
+(window as any).resolveFullAutoProgressModal = resolveFullAutoProgressModal;
 
 /**
  * ✅ [2026-01-29 NEW] 발행 완료 후 전체 상태 초기화
@@ -126,7 +138,8 @@ export function resetAfterPublish(): void {
     // 이 플래그들은 새로운 발행 시작 시에만 리셋됨 (renderer.ts 발행 버튼 클릭 핸들러)
     // setWindowState('stopFullAutoPublish', false);  // ❌ 삭제: 경쟁 조건 방지
     // setWindowState('stopBatchPublish', false);     // ❌ 삭제: 경쟁 조건 방지
-    setWindowState('isContinuousMode', false);
+    // Continuous mode is owned by continuousPublishing.ts. Resetting it here
+    // between posts desynchronizes the lexical and window states.
     setWindowState('stopRequested', false);
     setWindowState('isPublishing', false);
     setWindowState('isGeneratingContent', false);

@@ -1,3 +1,10 @@
+import type {
+  RevenueDashboard,
+  RevenueEntry,
+  RevenueEntryInput,
+  RevenueSettings,
+} from '../analytics/revenueOperations.js';
+
 type RiskLevel = 'low' | 'medium' | 'high';
 type LegalRiskLevel = 'safe' | 'caution' | 'danger';
 
@@ -229,6 +236,10 @@ interface AutomationAPI {
   pauseContentPolicyPublishing: (reason: string) => Promise<{ success: boolean; state?: any; message?: string }>;
   resumeContentPolicyPublishing: (approval: { approvedBy: string; rootCauseReviewed: boolean; manualTestVerified: boolean }) => Promise<{ success: boolean; state?: any; message?: string }>;
   verifyContentPolicyManualTest: (request: { url: string; title: string; keyword: string }) => Promise<{ success: boolean; state?: any; checks?: any[]; message?: string }>;
+  getRevenueDashboard: () => Promise<{ success: boolean; dashboard?: RevenueDashboard; message?: string }>;
+  addRevenueEntry: (input: RevenueEntryInput) => Promise<{ success: boolean; entry?: RevenueEntry; dashboard?: RevenueDashboard; message?: string }>;
+  removeRevenueEntry: (id: string) => Promise<{ success: boolean; dashboard?: RevenueDashboard; message?: string }>;
+  updateRevenueSettings: (input: Partial<RevenueSettings>) => Promise<{ success: boolean; settings?: RevenueSettings; dashboard?: RevenueDashboard; message?: string }>;
   // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고)
   generateDiagnosticReport?: (context?: { lastError?: string; stage?: string }) => Promise<{ ok: boolean; savedPath: string; report: string }>;
   // ✅ [SPEC-DEFAMATION-2026 P1] 발행 경계 위험 게이트 — 실존인물 미확인 단정 조회

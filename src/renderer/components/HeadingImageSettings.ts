@@ -2943,6 +2943,10 @@ export async function openImageQuotaDashboard(): Promise<void> {
 (window as any).openImageQuotaDashboard = openImageQuotaDashboard;
 
 // DOM 로드 후 버튼 자동 삽입
+export function shouldShowHeadingImageButtonForTab(tab: string | null): boolean {
+  return tab === 'unified' || tab === 'images' || tab === 'image-tools';
+}
+
 export function initHeadingImageButton(): void {
   // 이미 존재하면 스킵
   if (document.getElementById('heading-image-setting-btn')) {
@@ -2953,7 +2957,7 @@ export function initHeadingImageButton(): void {
   setTimeout(() => {
     const btn = document.createElement('button');
     btn.id = 'heading-image-setting-btn';
-    btn.innerHTML = '⚡ 메인 풀오토 이미지 설정';
+    btn.textContent = '⚡ 메인 풀오토 이미지 설정';
 
     // ✅ [2026-01-28] 플로팅 버튼 - 금색 테마 + 검은 테두리 + 반짝거리는 애니메이션
     btn.style.cssText = `
@@ -2988,9 +2992,24 @@ export function initHeadingImageButton(): void {
     });
     btn.addEventListener('click', () => openHeadingImageModal());
 
-    // ✅ 항상 body에 플로팅 버튼으로 추가
+    const syncHeadingImageButtonVisibility = (tab: string | null): void => {
+      const visible = shouldShowHeadingImageButtonForTab(tab);
+      btn.style.display = visible ? 'block' : 'none';
+      btn.setAttribute('aria-hidden', String(!visible));
+      btn.tabIndex = visible ? 0 : -1;
+    };
+
+    syncHeadingImageButtonVisibility(
+      document.querySelector('.tab-button.active')?.getAttribute('data-tab') || null,
+    );
+    document.addEventListener('click', (event) => {
+      const tabButton = (event.target as Element | null)?.closest<HTMLElement>('.tab-button[data-tab]');
+      if (tabButton) syncHeadingImageButtonVisibility(tabButton.dataset.tab || null);
+    });
+
+    // 관련 작업 탭에서만 표시되는 플로팅 버튼으로 추가
     document.body.appendChild(btn);
-    console.log('[HeadingImageSettings] ✅ 플로팅 버튼 항상 표시됨 (금색 테마)');
+    console.log('[HeadingImageSettings] ✅ 이미지 작업 탭 전용 플로팅 버튼 준비됨');
   }, 500);
 }
 

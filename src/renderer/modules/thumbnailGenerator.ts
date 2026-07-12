@@ -2302,6 +2302,9 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       const targetPanel = document.getElementById(`subtab-${subtab}`);
       if (targetPanel) targetPanel.style.display = 'block';
+
+      const lewordRedirect = document.getElementById('analytics-leword-redirect');
+      if (lewordRedirect) lewordRedirect.style.display = subtab === 'serp-history' ? 'block' : 'none';
     });
   });
 
