@@ -26,11 +26,15 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 ## **GNU General Public License v3.0**
 
-The following components are licensed under GNU General Public License v3.0 reproduced below:
+The following components are licensed under GNU General Public License v3.0 or later, with the license text reproduced below:
 
-**FFmpeg 7.0.2**, Copyright (c) 2000-2024 the FFmpeg developers
+**ffmpeg-static 5.3.0**, including the bundled **FFmpeg 6.1.1** executable
 
-Source Code: [https://ffmpeg.org/releases/ffmpeg-7.0.2.tar.xz](https://ffmpeg.org/releases/ffmpeg-7.0.2.tar.xz)
+Binary provenance: [ffmpeg-static b6.1.1 release](https://github.com/eugeneware/ffmpeg-static/releases/tag/b6.1.1)
+
+Upstream source: [FFmpeg 6.1.1 archive](https://ffmpeg.org/releases/ffmpeg-6.1.1.tar.xz) and [`n6.1.1` source revision (`e38092ef93`)](https://github.com/FFmpeg/FFmpeg/tree/e38092ef93)
+
+The packaged executable's `-version` output reports a GPLv3-enabled static build. Platform-specific binary providers and build provenance are documented by [ffmpeg-static](https://github.com/eugeneware/ffmpeg-static#sources-of-the-binaries). Distributors must also provide the complete corresponding source for the exact binary, including applicable linked-library source and build material; see the [FFmpeg distribution checklist](docs/FFMPEG_COMPLIANCE.md).
 
 **License Text:**
 
@@ -402,4 +406,4 @@ This license becomes null and void if any of the above conditions are not met.
 
 DISCLAIMER
 
-THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.  
+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
