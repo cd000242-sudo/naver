@@ -20,6 +20,7 @@ import {
   SHOPPING_EXPERT_TITLE_FORMULAS,
   CATEGORY_FORMULA_PRIORITY,
   SOURCE_REQUIRED_FORMULA_IDS,
+  FIRST_PARTY_REQUIRED_FORMULA_IDS,
 } from './contentTitleFormulas';
 
 /**
@@ -39,6 +40,7 @@ import {
  * @param articleType - shopping_expert_review 등 세부 타입
  * @param hasSource - 근거 자료(URL/뉴스/RAG) 존재 여부. false면 이슈픽 계열(익명공개/인용파편)
  *                    공식을 스킵 — 실존 인물 사실 날조 차단. 기본 true(미지정 시 동작 보존).
+ * @param hasFirstPartyEvidence - 사용자 작성자 경험 메모 존재 여부. URL/리뷰만으로 true가 되지 않음.
  */
 export function selectTitleFormula(
   mode: PromptMode,
@@ -47,6 +49,7 @@ export function selectTitleFormula(
   categoryHint?: string,
   articleType?: string,
   hasSource: boolean = true,
+  hasFirstPartyEvidence: boolean = false,
 ): TitleFormula {
   // affiliate 전용 공식 풀 — shopping_expert_review는 별도 풀 (후기형 표현 금지)
   const isShoppingExpert = mode === 'affiliate' && articleType === 'shopping_expert_review';
@@ -76,7 +79,8 @@ export function selectTitleFormula(
   }
   const isBlocked = (id: string): boolean =>
     (skipDurationFormulas && DURATION_FORMULA_IDS.includes(id))
-    || (!hasSource && SOURCE_REQUIRED_FORMULA_IDS.includes(id));
+    || (!hasSource && SOURCE_REQUIRED_FORMULA_IDS.includes(id))
+    || (!hasFirstPartyEvidence && FIRST_PARTY_REQUIRED_FORMULA_IDS.includes(id));
 
   // 카테고리 우선 공식이 있으면 먼저 시도
   if (categoryHint && CATEGORY_FORMULA_PRIORITY[categoryHint]) {

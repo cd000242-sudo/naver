@@ -96,22 +96,16 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     // 키워드 유사도 80% 이상
     { condition: Boolean(normalizedKeyword && normalizedTitle.startsWith(normalizedKeyword) && (normalizedTitle.length - normalizedKeyword.length) / normalizedTitle.length < 0.2), points: 40, reason: '키워드와 너무 유사' },
     // ✅ [2026-02-09 강화] 길이 기준 엄격화 (SEO 기준: 25~40자)
-    { condition: mode === 'seo' && t.length > 40, points: 30, reason: 'SEO: 40자 초과 (검색 잘림)' },
-    // ✅ [v2.10.87] 홈피드 제목 길이 골든존 확장 — Manus 분석(평균 43.8자, 최대 67자) 반영.
-    //   사건성·갈등성 긴 제목은 사람들이 멈춰 봄. 28~55자가 새 골든존.
-    { condition: mode === 'homefeed' && t.length > 58, points: 60, reason: '홈피드: 58자 초과 (사건성 제목도 55자 이내)' },
+    { condition: mode === 'seo' && t.length > 42, points: 30, reason: 'SEO: 42자 초과 (검색 잘림)' },
+    { condition: mode === 'homefeed' && t.length > 42, points: 60, reason: '홈피드: 42자 초과 (모바일 첫 화면 가독성 저하)' },
     { condition: t.length > 65, points: 40, reason: '65자 초과 (심각한 잘림)' },
     // 길이 부족
     { condition: t.length < 15, points: 20, reason: '15자 미만 (정보 부족)' },
-    // SEO 모드: 키워드 뒤쪽 배치
-    { condition: Boolean(mode === 'seo' && kw && t.toLowerCase().indexOf(kw.split(' ')[0]?.toLowerCase() || '') > 10), points: 25, reason: 'SEO: 키워드가 뒤쪽에 배치' },
     // 홈판 모드: AI티 나는 표현
     // ✅ [v1.4.48 Stage A.4] 홈피드 AI티 패턴 대폭 확장 (5개 → 14개)
     //   추가: 반전, 소름, 난리, 대박, 공개, 충격적, 경악적, 진실, 폭로
     //   원인: 기존 5개만으로는 AI 생성 제목의 90%를 못 잡음
     { condition: mode === 'homefeed' && /(충격|경악|눈물바다|진짜 이유|알고보니|반전|소름|난리|대박 공개|충격적|경악적|폭로|진실 공개|이게 가능|실화)/.test(t), points: 40, reason: '홈판: 뻔한 AI티 표현' },
-    // 숫자/구체성 없음 (SEO)
-    { condition: mode === 'seo' && !/\d/.test(t) && !/(언제|어떻게|얼마|몇|할까|일까)/.test(t), points: 15, reason: 'SEO: 숫자/구체성 없음' },
     // 대괄호 브랜드 표기
     { condition: /^\[.+\]/.test(t), points: 30, reason: '대괄호 브랜드 표기' },
     // 플레이스홀더 누출
@@ -178,15 +172,12 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
   // ✅ [v1.4.48 Stage A.3] 홈피드에서 "변화/비포애프터" 가점 제거
   //   원인: hf_before_after 공식과 결합 → 이중 가점으로 해당 공식 과선택
   const bonuses: { condition: boolean; points: number; reason: string }[] = [
-    { condition: /\d/.test(t), points: 5, reason: '숫자 포함 (구체성)' },
     { condition: /(\?|일까|할까|인가요)/.test(t), points: 5, reason: '질문형 종결 (호기심)' },
     // 홈피드 외 모드에서만 솔직 표현 가점
     { condition: mode !== 'homefeed' && mode !== 'affiliate' && /(솔직히|사실|실제로|진짜)/.test(t), points: 3, reason: '솔직한 표현 (신뢰)' },
-    { condition: mode !== 'affiliate' && /(몰랐던|숨겨진|비밀|반전)/.test(t), points: 5, reason: '발견 요소 (클릭 유도)' },
-    { condition: mode === 'seo' && t.length >= 20 && t.length <= 35, points: 5, reason: 'SEO 이상적 길이 (20~35자)' },
+    { condition: mode === 'seo' && t.length >= 22 && t.length <= 40, points: 5, reason: 'SEO 이상적 길이 (22~40자)' },
     // ✅ [v3] 홈피드 전용 보너스
-    { condition: mode === 'homefeed' && t.length >= 28 && t.length <= 55, points: 5, reason: '홈피드 이상적 길이 (28~55자, 사건성 긴 제목 허용)' },
-    { condition: mode !== 'affiliate' && /(절대|반드시|꼭|무조건)/.test(t) && /(마세요|하세요|해야|안 됩니다)/.test(t), points: 5, reason: '행동 유도 (강한 지시)' },
+    { condition: mode === 'homefeed' && t.length >= 28 && t.length <= 42, points: 5, reason: '홈피드 이상적 길이 (28~42자)' },
     // 홈피드 외 모드에서만 변화/비포애프터 가점
     { condition: mode !== 'homefeed' && mode !== 'affiliate' && /(전|후|변화|달라)/.test(t), points: 3, reason: '변화/비포애프터 요소' },
   ];

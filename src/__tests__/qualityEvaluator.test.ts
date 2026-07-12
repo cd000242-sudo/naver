@@ -156,7 +156,7 @@ describe('qualityEvaluator — Phase 1 통합 평가', () => {
     expect(result.safetyScore.details.fidelity).toBeUndefined();
   });
 
-  it('Phase 2.5.1 — 구체 수치(단위 포함)는 일반 숫자보다 높은 SEO 점수', () => {
+  it('근거 없는 구체 수치는 SEO 가산점이 아니라 안전성 실패가 된다', () => {
     const baseInput = {
       title: '무선 충전기 비교',
       headings: [{ title: 'A', content: '' }, { title: 'B', content: '' }],
@@ -166,14 +166,18 @@ describe('qualityEvaluator — Phase 1 통합 평가', () => {
     const withConcrete = evaluate({
       ...baseInput,
       body: '무선 충전기를 30분 충전했더니 5000mAh 배터리가 80% 찼어요. 가격은 3만원대이고 무게 200g 정도입니다. 한 달 써본 결과 만족도 95%입니다.',
+      rawText: '무선 충전기 제품 정보는 충전 방식과 호환 기기를 확인해야 합니다.',
+      firstPartyEvidenceAvailable: false,
     });
     const withRawNumbers = evaluate({
       ...baseInput,
       body: '무선 충전기를 충전했더니 30 5000 80 3 200 1 95 같은 숫자가 많이 나옵니다. 어느 정도 충전이 되었습니다.',
     });
-    // 구체 수치가 일반 숫자보다 높은 점수 (또는 동등)
-    expect(withConcrete.modeScore.details.concreteNumberCount).toBeGreaterThan(0);
-    expect(withConcrete.modeScore.details.numbersLists).toBeGreaterThanOrEqual(withRawNumbers.modeScore.details.numbersLists);
+    // 단위가 붙었다는 이유만으로 점수를 주지 않고, 원문에 없으면 안전 게이트가 차단한다.
+    expect(withConcrete.modeScore.details.evidenceIntegrity).toBeLessThan(100);
+    expect(withConcrete.safetyScore.score).toBeLessThan(50);
+    expect(withConcrete.decision).toBe('regenerate');
+    expect(withRawNumbers.safetyScore.score).toBeGreaterThan(withConcrete.safetyScore.score);
   });
 
   it('Phase 2.5.2 — AI 도입부 클리셰는 humanlike 점수 차감', () => {
@@ -181,6 +185,7 @@ describe('qualityEvaluator — Phase 1 통합 평가', () => {
       body: '솔직히 처음엔 의심했어요. 한 달 써보니 진짜 좋더라고요. 막상 받아보니 디자인도 깔끔하고 가벼웠어요. 1500g 정도라 들고다니기 편해요. 의외로 배터리도 오래가서 만족스러워요. 사실은 가격이 좀 부담이었는데 막상 써보니 가성비 좋네요.',
       title: '한 달 후기',
       mode: 'homefeed' as const,
+      firstPartyEvidenceAvailable: true,
     };
     const cliche: EvaluationInput = {
       body: '안녕하세요. 오늘은 무선 충전기에 대해 소개해드리겠습니다. 이번 포스팅에서는 사용 방법을 안내해드리겠습니다. 많은 분들이 궁금해하시는 부분을 살펴보겠습니다. 결론적으로 말하자면 매우 좋은 제품입니다. 도움이 되셨길 바랍니다.',
@@ -193,7 +198,7 @@ describe('qualityEvaluator — Phase 1 통합 평가', () => {
     expect(c2.humanlikeScore.issues.some(i => i.includes('AI 클리셰'))).toBe(true);
   });
 
-  it('Phase 2.5.3 — 직접 경험 표현은 humanlike 가산점', () => {
+  it('사용자 경험 근거가 있을 때만 직접 경험 표현을 humanlike 가산점으로 인정', () => {
     const baseInput = {
       title: '제품 후기',
       mode: 'homefeed' as const,
@@ -201,10 +206,12 @@ describe('qualityEvaluator — Phase 1 통합 평가', () => {
     const noExp = evaluate({
       ...baseInput,
       body: '이 제품은 가격이 적당하고 디자인이 좋습니다. 성능도 좋고 사용감이 부드럽습니다. 무게는 적당하고 휴대성도 괜찮습니다.',
+      firstPartyEvidenceAvailable: true,
     });
     const withExp = evaluate({
       ...baseInput,
       body: '제가 직접 한 달 써봤는데 실제로 만족스러웠어요. 제가 찍은 사진 보면 디자인이 깔끔하더라고요. 실사용 한 결과 가성비 진짜 좋아요. 직접 가봤더니 매장 직원도 친절했어요.',
+      firstPartyEvidenceAvailable: true,
     });
     expect(withExp.humanlikeScore.details.directExperience).toBeGreaterThan(noExp.humanlikeScore.details.directExperience);
   });

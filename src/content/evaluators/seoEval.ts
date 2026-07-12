@@ -1,241 +1,159 @@
 /**
- * SEO 모드 평가기 — 끝판왕 Phase 1 (v2.10.177)
- *
- * 평가 항목 (가중치 합 100):
- *   1. 키워드 밀도 1.5~3% (18점)
- *   2. 키워드 첫 문단 출현 (15점)
- *   3. 소제목 키워드 변형 (15점)
- *   4. H2/H3 구조 2~4개 (15점)
- *   5. 본문 길이 1500자+ (10점)
- *   6. 메타디스크립션 강도 (첫 120자 키워드+훅) (10점)
- *   7. 숫자/리스트 신호 (10점)
- *   8. 토픽 어휘 밀도 (연관어 의미장 커버리지) (7점)
- *
- * v2.11: primary 키워드 단일 밀도(#1) 비중을 25→18로 낮추고, 토픽 의미장 커버리지(#8, 7점)를
- *   신설. 현대 네이버(C-Rank/DIA+ 토픽 권위)는 단일 키워드 반복보다 주제 폭(연관어)을 보상하며,
- *   키워드 스터핑은 AI 탐지·스팸 신호. 연관어 미지정 시 #8은 중립(페널티 없음).
- *
- * reviewer 진단 CRITICAL: 기존 analyzeNaverScore는 boolean includes만 체크 → 실제 밀도/배치 무측정.
- *   본 모듈이 실측 신호로 평가.
+ * SEO 평가기.
+ * 키워드 밀도와 숫자 개수가 아니라 검색 의도 충족, 근거 정합성,
+ * 주제 범위, 읽기 쉬운 구조를 평가한다.
  */
 
 import type { SubScore, EvaluationInput } from '../qualityEvaluator';
 import { evaluateOfficialExposure } from '../officialExposureRubric';
+import { auditEvidenceIntegrity, collectUnsupportedConcreteClaims } from '../evidenceIntegrity';
+
+const ANSWER_CUES = /핵심|먼저|기준|조건|순서|방법|차이|이유|확인|주의|가능|필요|해당|결론|key answer|short answer|first check|criterion|condition|order|method|difference|reason|caution|conclusion/i;
+const CAUTIOUS_CUES = /확인이 필요|자료 기준|경우에 따라|조건에 따라|다를 수|단정하기 어렵|공식.*확인|check the official|depending on|may differ|source does not confirm/i;
+const CONCRETE_PATTERN = /-?\d[\d,]*(?:\.\d+)?\s*(?:%|퍼센트|원|천원|만원|억원|일|주|개월|달|년|시간|분|초|kg|g|cm|mm|mAh|GB|TB|Hz|점|명|건|회)/gi;
 
 function countKeyword(text: string, keyword: string): number {
-  if (!keyword) return 0;
+  if (!text || !keyword) return 0;
   const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const matches = text.match(new RegExp(escaped, 'gi'));
-  return matches ? matches.length : 0;
+  return text.match(new RegExp(escaped, 'gi'))?.length || 0;
 }
 
-function calcKeywordDensity(text: string, keyword: string): number {
-  if (!keyword || !text) return 0;
-  const charCount = text.length;
-  const keywordCount = countKeyword(text, keyword);
-  // 한국어 기준: 키워드 출현 횟수 × 키워드 길이 / 전체 글자 수
-  return (keywordCount * keyword.length) / Math.max(1, charCount);
+function keywordDensity(text: string, keyword: string): number {
+  if (!text || !keyword) return 0;
+  return (countKeyword(text, keyword) * keyword.length / Math.max(1, text.length)) * 100;
 }
 
-function getFirstParagraph(text: string, maxChars: number = 250): string {
-  const paragraphs = text.split(/\n\n+/);
-  return (paragraphs[0] || '').slice(0, maxChars);
+function splitSentences(text: string): string[] {
+  return text.split(/[.!?。\n]+/).map((part) => part.trim()).filter(Boolean);
 }
 
 export function evaluateSeo(input: EvaluationInput): SubScore {
   const body = input.body || '';
   const title = input.title || '';
   const headings = input.headings || [];
-  const primaryKw = input.primaryKeyword || '';
-
+  const primary = String(input.primaryKeyword || '').trim();
+  const firstScreen = body.slice(0, 350);
+  const grounding = input.groundingText || input.rawText || '';
   const details: Record<string, number> = {};
   const issues: string[] = [];
   const suggestions: string[] = [];
   let total = 0;
 
-  // 1. 키워드 밀도 1.5~3%  (18점) — v2.11: primary 단일 키워드 과중 완화(25→18), 잔여 7점은 #8 토픽 커버리지로 이전
-  if (primaryKw) {
-    const density = calcKeywordDensity(body, primaryKw);
-    const densityPct = density * 100;
-    let densityScore = 0;
-    if (densityPct >= 1.5 && densityPct <= 3.0) {
-      densityScore = 18;
-    } else if (densityPct >= 1.0 && densityPct < 1.5) {
-      densityScore = 13;
-      issues.push(`키워드 밀도 ${densityPct.toFixed(1)}% — 1.5% 미만 (under-stuffing)`);
-    } else if (densityPct > 3.0 && densityPct <= 5.0) {
-      densityScore = 13;
-      issues.push(`키워드 밀도 ${densityPct.toFixed(1)}% — 3% 초과 (over-stuffing 위험)`);
-    } else if (densityPct > 5.0) {
-      densityScore = 6;
-      issues.push(`키워드 밀도 ${densityPct.toFixed(1)}% — 5% 초과 (네이버 SEO 스팸 감지 위험)`);
-    } else {
-      densityScore = 4;
-      issues.push(`키워드 "${primaryKw}" 거의 미사용 — 본문에 8~12회 배치 필요`);
+  // 1. 자연스러운 키워드 사용 (15). 앞 3글자나 최소 밀도는 요구하지 않는다.
+  const bodyKeywordCount = primary ? countKeyword(body, primary) : 0;
+  const densityPct = primary ? keywordDensity(body, primary) : 0;
+  let keywordScore = 12;
+  if (primary) {
+    const titleOrIntro = title.toLowerCase().includes(primary.toLowerCase())
+      || firstScreen.toLowerCase().includes(primary.toLowerCase());
+    const stuffing = densityPct > 4 || bodyKeywordCount > Math.max(10, Math.ceil(body.length / 250));
+    keywordScore = (titleOrIntro ? 9 : 3) + (!stuffing ? 6 : 0);
+    if (!titleOrIntro) {
+      issues.push(`메인 주제 "${primary}"가 제목과 첫 화면에서 명확하지 않음`);
+      suggestions.push('키워드를 기계적으로 앞에 붙이지 말고 제목 또는 첫 답변 문장에 한 번 명확히 사용');
     }
-    details.keywordDensity = densityScore;
-    details.keywordDensityPct = Math.round(densityPct * 100) / 100;
-    total += densityScore;
-  } else {
-    details.keywordDensity = 11; // 키워드 미지정 시 평균 부여
-    total += 11;
-  }
-
-  // 2. 키워드 첫 문단 출현 (15점)
-  if (primaryKw) {
-    const firstPara = getFirstParagraph(body);
-    if (firstPara.toLowerCase().includes(primaryKw.toLowerCase())) {
-      details.keywordInFirstPara = 15;
-      total += 15;
-    } else {
-      details.keywordInFirstPara = 0;
-      issues.push(`첫 문단(첫 250자)에 키워드 "${primaryKw}" 없음 — SEO 신호 약함`);
-      suggestions.push('첫 문단에 메인 키워드를 자연스럽게 배치하라');
+    if (stuffing) {
+      issues.push(`키워드 반복 과다 (${bodyKeywordCount}회, ${densityPct.toFixed(1)}%)`);
+      suggestions.push('반복 키워드를 조건·예외·세부 개념·동의어로 바꿔 검색 의도 범위를 넓히기');
     }
-  } else {
-    details.keywordInFirstPara = 10;
-    total += 10;
+  }
+  details.keywordDensity = keywordScore;
+  details.keywordDensityPct = Math.round(densityPct * 100) / 100;
+  total += keywordScore;
+
+  // 2. 첫 화면의 직접 답변 (20)
+  const firstScreenHasTopic = primary
+    ? firstScreen.toLowerCase().includes(primary.toLowerCase())
+    : firstScreen.length >= 50;
+  const firstScreenHasAnswer = ANSWER_CUES.test(firstScreen);
+  const firstScreenScore = (firstScreenHasTopic ? 9 : 3) + (firstScreenHasAnswer ? 11 : 4);
+  details.keywordInFirstPara = firstScreenScore;
+  details.metaSnippet = firstScreenScore;
+  total += firstScreenScore;
+  if (firstScreenScore < 16) {
+    issues.push('첫 화면에서 검색 질문의 답과 적용 조건이 바로 보이지 않음');
+    suggestions.push('첫 2~3문장에 짧은 답, 적용 조건, 다음에 확인할 내용을 순서대로 제시');
   }
 
-  // 3. 소제목 키워드 변형 (15점)
-  if (primaryKw && headings.length > 0) {
-    let kwHeadingCount = 0;
-    for (const h of headings) {
-      const ht = (h.title || '').toLowerCase();
-      if (ht.includes(primaryKw.toLowerCase())) kwHeadingCount++;
-    }
-    const ratio = kwHeadingCount / headings.length;
-    let hScore = 0;
-    if (ratio >= 0.3 && ratio <= 0.7) {
-      hScore = 15;
-    } else if (ratio > 0.7) {
-      hScore = 10;
-      issues.push(`소제목 ${kwHeadingCount}/${headings.length}개가 키워드 포함 — 과밀 (스팸 위험)`);
-    } else if (ratio >= 0.15) {
-      hScore = 10;
-      issues.push(`소제목 ${kwHeadingCount}/${headings.length}개만 키워드 포함 — 더 자연스러운 변형 권장`);
-    } else {
-      hScore = 5;
-      issues.push(`소제목에 키워드 거의 없음 — 1~2개 변형 형태로 배치 권장`);
-    }
-    details.headingKeyword = hScore;
-    total += hScore;
-  } else {
-    details.headingKeyword = 10;
-    total += 10;
-  }
+  // 3. 소제목의 질문 범위와 중복 억제 (15)
+  const normalizedHeadings = headings
+    .map((heading) => String(heading.title || '').toLowerCase().replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  const uniqueHeadingRatio = normalizedHeadings.length > 0
+    ? new Set(normalizedHeadings).size / normalizedHeadings.length
+    : 0;
+  const keywordHeadingCount = primary
+    ? normalizedHeadings.filter((heading) => heading.includes(primary.toLowerCase())).length
+    : 0;
+  const keywordHeadingRatio = normalizedHeadings.length > 0 ? keywordHeadingCount / normalizedHeadings.length : 0;
+  let headingScore = normalizedHeadings.length >= 3 && normalizedHeadings.length <= 7 ? 9 : 4;
+  headingScore += uniqueHeadingRatio >= 0.9 ? 4 : uniqueHeadingRatio >= 0.7 ? 2 : 0;
+  headingScore += keywordHeadingRatio <= 0.5 ? 2 : 0;
+  details.headingKeyword = headingScore;
+  total += headingScore;
+  if (keywordHeadingRatio > 0.5) issues.push('소제목 절반 이상에 동일 메인 키워드가 반복됨');
 
-  // 4. H2/H3 구조 2~4개 (15점)
-  const headCount = headings.length;
-  let structScore = 0;
-  if (headCount >= 2 && headCount <= 4) {
-    structScore = 15;
-  } else if (headCount === 5) {
-    structScore = 12;
-  } else if (headCount === 1 || headCount === 6) {
-    structScore = 8;
-    issues.push(`소제목 ${headCount}개 — 권장 2~4개 (가독성/SEO 균형)`);
-  } else {
-    structScore = 3;
-    issues.push(`소제목 ${headCount}개 — 구조 불균형 (SEO 신호 약함)`);
-  }
-  details.structure = structScore;
-  total += structScore;
+  // 4. 읽기 쉬운 구조와 충분한 설명 (15)
+  const sentences = splitSentences(body);
+  const paragraphs = body.split(/\n{2,}/).map((part) => part.trim()).filter(Boolean);
+  const averageSentenceLength = sentences.length > 0
+    ? sentences.reduce((sum, sentence) => sum + sentence.length, 0) / sentences.length
+    : 0;
+  const structureScore = normalizedHeadings.length >= 3 && normalizedHeadings.length <= 7 ? 10 : 5;
+  const readable = paragraphs.length >= 3 && averageSentenceLength >= 12 && averageSentenceLength <= 90;
+  const lengthScore = readable ? 5 : 2;
+  details.structure = structureScore;
+  details.bodyLength = lengthScore;
+  total += structureScore + lengthScore;
+  if (!readable) suggestions.push('소제목 3~7개, 한 문단 한 판단, 모바일에서 읽히는 문장 길이로 정리');
 
-  // 5. 본문 길이 (10점)
-  let lenScore = 0;
-  if (body.length >= 1500 && body.length <= 4000) {
-    lenScore = 10;
-  } else if (body.length >= 1200 && body.length < 1500) {
-    lenScore = 7;
-    issues.push(`본문 ${body.length}자 — 1500자 미달 (SEO 신호 약함)`);
-  } else if (body.length > 4000) {
-    lenScore = 7;
-  } else {
-    lenScore = 3;
-    issues.push(`본문 ${body.length}자 — 너무 짧음 (SEO 노출 불리)`);
-  }
-  details.bodyLength = lenScore;
-  total += lenScore;
-
-  // 6. 메타디스크립션 강도 (10점) — 첫 120자에 키워드 + 훅
-  const firstSnippet = body.slice(0, 120);
-  let metaScore = 0;
-  const hasKwInSnippet = primaryKw ? firstSnippet.toLowerCase().includes(primaryKw.toLowerCase()) : true;
-  const hasHook = /\?|솔직히|진짜|놀라|꿀팁|정리|비교|추천|방법|총정리/.test(firstSnippet);
-  if (hasKwInSnippet && hasHook) metaScore = 10;
-  else if (hasKwInSnippet || hasHook) metaScore = 6;
-  else {
-    metaScore = 3;
-    issues.push('검색 스니펫(첫 120자) — 키워드 또는 훅 부족');
-    suggestions.push('첫 120자에 키워드 + 호기심 유발 표현 배치 (검색 클릭률 직결)');
-  }
-  details.metaSnippet = metaScore;
-  total += metaScore;
-
-  // 7. 숫자/리스트 신호 (10점)
-  // ✅ [v2.10.182 Phase 2.5.1] 2026 네이버 알고리즘 대응 — *구체 수치(단위 포함)* 가산점
-  //   AI는 구체 수치를 "검증 가능한 정보"로 분류 (네이버 DIA+ 2026)
-  //   예: "10~15분", "300g", "3만원", "12.5%" — 단순 숫자 보다 *훨씬 강한* SEO 신호
-  const numberCount = (body.match(/\d+/g) ?? []).length;
-  const listCount = (body.match(/^[\s•·\-*]?\s*\d+[.)]/gm) ?? []).length;
-  // 구체 수치 (단위 포함) — 시간/무게/가격/비율/수량 단위
-  const concreteNumberPattern = /\d+(?:[.,]\d+)?(?:~\d+(?:[.,]\d+)?)?\s*(?:분|초|시간|일|주|개월|년|kg|g|cm|mm|m|km|ml|L|원|만원|천원|%|배|회|개|명|인분|평|위|등)/g;
-  const concreteCount = (body.match(concreteNumberPattern) ?? []).length;
-  let listScore = 0;
-  // 구체 수치 3개+ + 리스트 1개+ → 10점 만점
-  if (concreteCount >= 3 && listCount >= 1) listScore = 10;
-  else if (concreteCount >= 3) listScore = 9;       // 구체 수치만 강해도 우대
-  else if (numberCount >= 5 && listCount >= 2) listScore = 8;
-  else if (concreteCount >= 1) listScore = 7;
-  else if (numberCount >= 3) listScore = 5;
-  else if (numberCount >= 1) listScore = 3;
-  else {
-    listScore = 1;
-    issues.push('숫자/구체 수치 없음 — 2026 네이버 알고리즘 핵심 SEO 신호 부재');
-    suggestions.push('구체 수치 (단위 포함) 추가: "10~15분", "300g", "3만원", "12.5%" 같은 형태');
-  }
-  details.numbersLists = listScore;
-  details.concreteNumberCount = concreteCount;
-  total += listScore;
-
-  // 8. 토픽 어휘 밀도 — 연관어 의미장 커버리지 (7점)
-  // C-Rank/DIA+ 토픽 권위: 단일 키워드 반복보다 주제 폭(연관어 분산)이 상위노출에 유리하고,
-  // 키워드 스터핑(AI 탐지·스팸 신호)을 억제. 연관어 미지정 시 측정 불가 → 페널티 없이 중립(7).
-  const secondary = (input.secondaryKeywords || []).filter(k => k && k.trim().length > 0);
-  let topicScore = 0;
-  if (secondary.length === 0) {
-    topicScore = 7;
-    details.topicCoverage = 1;
-  } else {
-    const lowerBody = body.toLowerCase();
-    const covered = secondary.filter(k => lowerBody.includes(k.toLowerCase())).length;
-    const coverage = covered / secondary.length;
-    if (coverage >= 0.6) topicScore = 7;
-    else if (coverage >= 0.35) topicScore = 5;
-    else if (coverage >= 0.15) topicScore = 3;
-    else {
-      topicScore = 1;
-      issues.push(`연관 토픽 어휘 커버리지 낮음 (${covered}/${secondary.length}) — 의미장 확장 필요 (C-Rank 토픽 권위)`);
-      suggestions.push('연관 검색어·세부 토픽 어휘를 본문에 자연스럽게 분산하라 (키워드 반복 대신 주제 폭 확장)');
-    }
-    details.topicCoverage = Math.round(coverage * 100) / 100;
-  }
-  details.topicVocabulary = topicScore;
+  // 5. 연관 주제 범위 (10)
+  const secondary = (input.secondaryKeywords || []).map((keyword) => keyword.trim()).filter(Boolean);
+  const covered = secondary.filter((keyword) => body.toLowerCase().includes(keyword.toLowerCase())).length;
+  const coverage = secondary.length > 0 ? covered / secondary.length : 1;
+  const topicScore = coverage >= 0.6 ? 10 : coverage >= 0.3 ? 7 : 3;
+  details.topicVocabulary = coverage >= 0.6 ? 7 : coverage >= 0.3 ? 5 : 2;
+  details.topicCoverage = Math.round(coverage * 100) / 100;
   total += topicScore;
+  if (topicScore <= 3) suggestions.push('동일 키워드 반복 대신 검색자가 함께 묻는 조건·서류·예외·비교 항목을 확장');
 
-  const legacyScore = Math.round(Math.max(0, Math.min(100, total)));
+  // 6. 근거 정합성 (20). 숫자가 없어서 감점하지 않고, 입력에 없는 숫자를 감점한다.
+  const evidence = auditEvidenceIntegrity({
+    title,
+    body,
+    groundingText: grounding,
+    firstPartyEvidenceAvailable: input.firstPartyEvidenceAvailable === true,
+  });
+  const unsupportedConcrete = collectUnsupportedConcreteClaims(`${title}\n${body}`, grounding);
+  const concreteCount = body.match(CONCRETE_PATTERN)?.length || 0;
+  const hasGrounding = grounding.trim().length >= 50;
+  let evidenceScore = evidence.hardFail ? 0 : hasGrounding ? 20 : CAUTIOUS_CUES.test(body) ? 17 : 13;
+  details.numbersLists = evidenceScore;
+  details.concreteNumberCount = concreteCount - unsupportedConcrete.length;
+  details.evidenceIntegrity = evidence.score;
+  total += evidenceScore;
+  if (evidence.hardFail) {
+    issues.push(...evidence.issues.map((issue) => issue.message));
+    suggestions.push('입력에 없는 작성자 경험·수치·기간·금액을 삭제하고 조건·절차·공식 확인처로 대체');
+  }
+
+  // 7. 판단을 돕는 구조화 정보 (5). 주제에 맞는 한 가지면 충분하다.
+  const structured = /^\s*(?:[-*]|\d+[.)])\s+/m.test(body) || /\|.+\|/.test(body) || /체크|순서|기준|주의/.test(body);
+  details.utility = structured ? 5 : 2;
+  total += details.utility;
+
+  const intentFirstScore = Math.round(Math.max(0, Math.min(100, total)));
   const officialExposure = evaluateOfficialExposure(input);
   const officialDetails = Object.fromEntries(
     Object.entries(officialExposure.details).map(([key, value]) => [`official_${key}`, value]),
   );
-  const blendedScore = Math.round((legacyScore * 0.4) + (officialExposure.score * 0.6));
+  const blendedScore = Math.round((intentFirstScore * 0.7) + (officialExposure.score * 0.3));
 
   return {
-    score: Math.round(Math.max(0, Math.min(100, blendedScore))),
+    score: Math.max(0, Math.min(100, blendedScore)),
     details: {
       ...details,
-      legacySeoScore: legacyScore,
+      legacySeoScore: intentFirstScore,
       officialExposureScore: officialExposure.score,
       ...officialDetails,
     },

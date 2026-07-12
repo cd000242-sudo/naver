@@ -101,6 +101,15 @@ Q. What is the safest next action?
 A. The safest next action is to correct the account, save a screenshot, and contact the support desk only if the rejection remains.
 `.trim();
 
+const accountEvidence = `
+This is a first-party review of 12 recent support fund account error cases.
+In 8 cases the account holder name did not match, in 3 cases the account number had one wrong digit, and in 1 case the deposit returned after 4 days.
+The official application page and the bank app should show the same holder name.
+A returned deposit may appear after 3-5 days, and the review found a returned-deposit notice after 3 days in the relevant case.
+The source recommends checking the holder name, account number, returned deposit, and missing-document status before submitting again.
+Duplicate submission can make the review harder to track, while a screenshot helps the support desk inspect the remaining rejection.
+`.trim();
+
 const run = (input: EvaluationInput) => evaluate(input);
 
 describe('90-point golden quality targets', () => {
@@ -118,6 +127,9 @@ describe('90-point golden quality targets', () => {
         { title: 'FAQ about support fund account error' },
       ],
       body: seoBody,
+      rawText: accountEvidence,
+      groundingText: accountEvidence,
+      firstPartyEvidenceAvailable: true,
     });
 
     expect(result.modeScore.score).toBeGreaterThanOrEqual(90);
@@ -129,14 +141,20 @@ describe('90-point golden quality targets', () => {
     const result = run({
       mode: 'homefeed',
       contentMode: 'homefeed',
-      title: 'Honestly, one account-name mistake delayed the payment for 4 days',
+      title: 'Support fund account error: check the holder name first',
       primaryKeyword: 'support fund account error',
       headings: [
         { title: 'The small mismatch most people miss' },
         { title: 'Why the deposit comes back even when the page looks complete' },
         { title: 'The quick check I would save before reapplying' },
       ],
-      body: homefeedBody,
+      body: homefeedBody.replace(
+        'Honestly, I thought this was just another small form mistake.',
+        'Honestly, I thought this support fund account error was just another small form mistake. The useful check is the account holder name.',
+      ),
+      rawText: accountEvidence,
+      groundingText: accountEvidence,
+      firstPartyEvidenceAvailable: true,
     });
 
     expect(result.modeScore.score).toBeGreaterThanOrEqual(90);
@@ -157,6 +175,8 @@ describe('90-point golden quality targets', () => {
         { title: 'FAQ with safe decision criteria' },
       ],
       body: mateBody,
+      rawText: accountEvidence,
+      groundingText: accountEvidence,
     });
 
     expect(result.modeScore.score).toBeGreaterThanOrEqual(90);

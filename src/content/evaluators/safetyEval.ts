@@ -18,6 +18,7 @@ import type { SubScore, EvaluationInput } from '../qualityEvaluator';
 import { checkSourceFidelity } from '../sourceFidelityCheck';
 import { checkHallucination, inferHallucinationCategory } from '../hallucinationCheck';
 import { auditAffiliateAuthenticity } from '../affiliateAuthenticity';
+import { auditEvidenceIntegrity } from '../evidenceIntegrity';
 
 const FORBIDDEN_PATTERNS: { pattern: RegExp; label: string }[] = [
   { pattern: /알아보겠습니다|살펴보겠습니다|시작하겠습니다|마치겠습니다/, label: 'AI 보고체' },
@@ -140,6 +141,25 @@ export function evaluateSafety(input: EvaluationInput): SubScore {
       finalScore = Math.min(finalScore, authenticity.score);
       issues.push(...authenticity.issues.map(issue => `쇼핑 진정성: ${issue.message}`));
       suggestions.push('광고 기획 문구와 상투어를 지우고 구체 조건·한계·대상 독자로 다시 표현');
+    }
+  } else {
+    const evidence = auditEvidenceIntegrity({
+      title: input.title,
+      body,
+      groundingText: input.groundingText || rawText,
+      firstPartyEvidenceAvailable: input.firstPartyEvidenceAvailable === true,
+    });
+    details.evidenceIntegrity = evidence.score;
+    if (evidence.hardFail) {
+      finalScore = Math.min(finalScore, 35);
+      for (const issue of evidence.issues) {
+        const examples = issue.examples.length > 0 ? ` (${issue.examples.join(', ')})` : '';
+        const label = issue.code === 'UNSUPPORTED_FIRST_PERSON'
+          ? '근거 없는 1인칭 체험'
+          : '근거 없는 구체 수치';
+        issues.push(`${label}: ${issue.message}${examples}`);
+      }
+      suggestions.push('작성자 경험, 수치, 기간, 금액은 입력 근거가 있을 때만 남기고 나머지는 조건·절차·확인처로 바꿔 작성');
     }
   }
 

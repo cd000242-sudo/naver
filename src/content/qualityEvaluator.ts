@@ -66,6 +66,10 @@ export interface EvaluationInput {
   readonly contentMode?: string;
   readonly toneStyle?: string;
   readonly categoryHint?: string;
+  /** 사용자가 명시적으로 제공한 작성자 본인 경험 근거가 있는지 여부. */
+  readonly firstPartyEvidenceAvailable?: boolean;
+  /** 제목·원문·사용자 경험 메모를 합친 사실 대조용 텍스트. */
+  readonly groundingText?: string;
   /** 쇼핑 글의 작성자 경험 근거. 구매자 리뷰는 first_party가 아니다. */
   readonly affiliateEvidenceMode?: AffiliateEvidenceMode;
 }

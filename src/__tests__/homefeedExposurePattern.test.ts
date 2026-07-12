@@ -1,39 +1,36 @@
 /**
- * Home-feed exposure skeleton — the all-engine base-prompt body structure.
- *
- * Injected into buildFullPrompt('homefeed') so every engine (API + agent) and every flow
- * (반자동/풀오토/연속/다중계정) shares the same verified structure. These guard the key
- * invariants decoded from 20 live top-exposure posts.
+ * Homefeed exposure guidance shared by every engine and publishing flow.
+ * These tests keep the guidance evidence-first and prevent fixed viral templates.
  */
 
-import { describe, it, expect } from 'vitest';
-import { buildHomefeedExposureSkeleton } from '../content/homefeedExposurePattern';
+import { describe, expect, it } from 'vitest';
 
-// Note: buildFullPrompt('homefeed') injection is verified by the build (the require resolves,
-// same pattern as neoHookTitles) + code review. buildFullPrompt itself depends on the Electron
-// app (app.getAppPath) and is not unit-testable under vitest, so only the helper is tested here.
+import { buildHomefeedExposureSkeleton } from '../content/homefeedExposurePattern';
 
 describe('buildHomefeedExposureSkeleton', () => {
   const block = buildHomefeedExposureSkeleton();
 
-  it('carries the 7-point winning structure', () => {
-    expect(block).toContain('도입 4단'); // intro: observation→twist→name→promise
-    expect(block).toContain('정체를 숨긴 경우'); // reveal identity in first paragraph
-    expect(block).toContain('1~3문장'); // short paragraphs
-    expect(block).toContain('서로 다른 정보 단위'); // no section repetition
-    expect(block).toContain('댓글 유도'); // comment-CTA close
+  it('keeps the opening useful without forcing a fixed viral structure', () => {
+    expect(block).toContain('구체 상황과 핵심 답');
+    expect(block).toContain('주체를 생략했다면');
+    expect(block).toContain('1~3문장');
+    expect(block).toContain('서로 다른 정보 단위');
+    expect(block).toContain('필요 없으면 넣지 않는다');
+    expect(block).not.toContain('도입 4단 구성');
   });
 
-  it('caps interjections while keeping the tone voice (frequency, not 어미)', () => {
-    expect(block).toContain('어미·문체는 그대로 유지');
-    expect(block).toContain('3회 이하');
+  it('keeps the selected voice without quota-driven interjections', () => {
+    expect(block).toContain('어미·문체는 유지');
+    expect(block).toContain('표현 개수보다 문맥과 자연스러움');
+    expect(block).not.toContain('3회 이하');
   });
 
-  it('forbids fabrication (facts from source only)', () => {
+  it('forbids unsupported facts and experience', () => {
     expect(block).toContain('날조');
+    expect(block).toContain('입력 자료와 정확히 일치');
   });
 
   it('exposes the marker that buildFullPrompt gates on for homefeed', () => {
-    expect(block).toContain('홈판 상위노출 본문 골격');
+    expect(block).toContain('홈판 상위노출 본문 원칙');
   });
 });

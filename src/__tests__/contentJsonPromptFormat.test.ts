@@ -25,8 +25,8 @@ describe('contentJsonPromptFormat', () => {
     expect(prompt).toContain('FAQ 4~6개');
     expect(prompt).toContain('출처 없는 "공식 가이드/최신 가이드" 표현은 절대 금지');
     expect(prompt).toContain('"introduction": "도입부 (첫 300자 안에 직접 답변)"');
-    expect(prompt).toContain('2열 마크다운 표');
-    expect(prompt).toContain('글자수: 최소 2000자 이상');
+    expect(prompt).toContain('최대 2열 마크다운');
+    expect(prompt).toContain('목표 글자수: 2000자 안팎');
     expect(prompt).toContain('네이버 메이트 테스트 원문');
   });
 

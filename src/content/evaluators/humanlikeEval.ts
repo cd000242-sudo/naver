@@ -20,6 +20,7 @@
 
 import type { SubScore, EvaluationInput } from '../qualityEvaluator';
 import { auditAffiliateAuthenticity } from '../affiliateAuthenticity';
+import { auditEvidenceIntegrity } from '../evidenceIntegrity';
 
 const SELF_CORRECTION = ['아 근데', '사실은', '근데 다시', '솔직히', '막상', '의외로', '처음엔', '그런데 보니', '알고보니', '생각해보니'];
 const INFORMAL = ['좀', '막', '되게', '엄청', '정말', '진짜', '완전', '대박', '제일', '꽤'];
@@ -181,15 +182,16 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
     total += 9;
   }
 
-  // 3. 자기 정정 마커 (12점)
+  // 3. 전환 표현 절제 (12점)
+  // 전환어를 의무화하면 모든 글이 "솔직히/막상/사실은"으로 도배된다.
   const selfCorrCount = countMatches(body, SELF_CORRECTION_SIGNALS);
   let scScore = 0;
-  if (selfCorrCount >= 3) scScore = 12;
-  else if (selfCorrCount >= 1) scScore = 8;
+  if (selfCorrCount <= 2) scScore = 12;
+  else if (selfCorrCount <= 4) scScore = 8;
   else {
-    scScore = 2;
-    issues.push('자기 정정/전환 마커 부재 — 사람 글의 자연스러운 흐름 부족');
-    suggestions.push('"아 근데", "사실은", "막상", "처음엔" 같은 전환 표현 2~3회 배치');
+    scScore = 3;
+    issues.push(`전환 표현 ${selfCorrCount}회 — 자연스러운 흐름보다 AI식 말투 장식에 가까움`);
+    suggestions.push('솔직히/막상/사실은 같은 전환어를 지우고 문장 내용 자체로 흐름을 연결');
   }
   details.selfCorrection = scScore;
   total += scScore;
@@ -198,12 +200,12 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
   const informalCount = countMatches(body, INFORMAL_SIGNALS);
   const informalPer1000 = (informalCount / Math.max(1, body.length)) * 1000;
   let infScore = 0;
-  if (informalPer1000 >= 2 && informalPer1000 <= 10) infScore = 8;
-  else if (informalPer1000 >= 1) infScore = 5;
+  if (informalPer1000 <= 10) infScore = 8;
+  else if (informalPer1000 <= 15) infScore = 5;
   else {
     infScore = 1;
-    issues.push('비공식 어휘 부족 — 문어체 강함 (AI 보고체 의심)');
-    suggestions.push('"좀/막/되게/엄청" 같은 구어체 어휘 자연스럽게 분산');
+    issues.push('구어체 장식이 과도해 실제 대화보다 연출된 말투로 보임');
+    suggestions.push('좀/막/진짜/엄청 같은 장식어를 구체 상황과 판단 이유로 교체');
   }
   details.informalWords = infScore;
   total += infScore;
@@ -228,7 +230,7 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
   if (aiClicheCount >= 3) {
     aiScore = 0;
     issues.push(`AI 클리셰 ${aiClicheCount}회 출현 — 2026 통합탭 누락 주범 (안녕하세요/오늘은/소개해드리겠습니다 등)`);
-    suggestions.push('AI 도입부/진행/결론 클리셰 *전부 삭제* — 1인칭 경험으로 시작');
+    suggestions.push('AI 도입부/진행/결론 클리셰를 삭제하고 독자의 질문이나 구체 상황에서 바로 시작');
   } else if (aiClicheCount === 2) {
     aiScore = 5;
     issues.push(`AI 클리셰 ${aiClicheCount}회 — 2026 통합탭 노출 약화`);
@@ -237,6 +239,12 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
   }
   details.noAiCliche = aiScore;
   total += aiScore;
+  if (aiClicheCount >= 3) {
+    const reportPenalty = Math.min(24, 12 + ((aiClicheCount - 3) * 3));
+    details.aiReportPenalty = -reportPenalty;
+    total -= reportPenalty;
+    issues.push('AI 보고체/클리셰가 연속되어 실제 작성자의 판단 흐름이 보이지 않음');
+  }
 
   // 6. 어휘 다양성 (12점)
   if (body.length >= 500) {
@@ -280,13 +288,26 @@ export function evaluateHumanlike(input: EvaluationInput): SubScore {
     } else {
       expScore = 15;
     }
-  } else if (expPer1000 >= 3) expScore = 15;
-  else if (expPer1000 >= 1.5) expScore = 10;
-  else if (expPer1000 >= 0.5) expScore = 5;
-  else {
-    expScore = 1;
-    issues.push('직접 경험 표현 부재 — 제공된 경험 근거가 있다면 구체적인 장면을 반영할 필요가 있음');
-    suggestions.push('실제 경험 근거가 있을 때만 사용 상황·관찰·판단을 1~2곳에 구체적으로 반영');
+  } else if (input.mode !== 'affiliate' && input.firstPartyEvidenceAvailable !== true) {
+    const evidence = auditEvidenceIntegrity({
+      title: input.title,
+      body,
+      groundingText: input.groundingText || input.rawText || '',
+      firstPartyEvidenceAvailable: false,
+    });
+    const fabricated = evidence.issues.some((issue) => issue.code === 'UNSUPPORTED_FIRST_PERSON');
+    if (fabricated) {
+      expScore = 0;
+      issues.push('사용자 경험 근거 없는 1인칭 체험은 사람다움이 아니라 신뢰 훼손 신호');
+      suggestions.push('독자 상황, 확인된 사실, 판단 이유로 바꾸고 작성자 체험처럼 말하지 않기');
+    } else {
+      expScore = 15;
+    }
+  } else if (expCount > 0) {
+    expScore = 15;
+  } else {
+    expScore = 10;
+    suggestions.push('사용자 제공 경험이 있다면 입력에 적힌 장면·관찰·한계 중 한두 곳만 구체적으로 반영');
   }
   details.directExperience = expScore;
   details.experienceDensityPer1000 = Math.round(expPer1000 * 10) / 10;

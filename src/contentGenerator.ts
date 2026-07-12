@@ -34,6 +34,7 @@ import fsSync from 'fs';
 import path from 'path';
 import { JSON_SCHEMA_DESCRIPTION } from './contentGenerator/schema';
 import { humanizeContent, humanizeHtmlContent, analyzeAiDetectionRisk, resetHumanizerLog } from './aiHumanizer.js';
+import { resolveHumanizeIntensity } from './contentHumanizationPolicy.js';
 import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, resetOptimizerLog, detectCategory } from './contentOptimizer.js';
 import { analyzeContentBySemantic, isLlmRubricEnabled } from './contentSemanticScoring.js';
 import { buildPersonaCard } from './authgrDefense.js';
@@ -49,6 +50,11 @@ import {
   buildAffiliateTitleEvidenceDirective,
   classifyAffiliateEvidence,
 } from './content/affiliateAuthenticity.js';
+import {
+  buildEvidenceAndIntentFinalContract,
+  buildTitleEvidenceFinalContract,
+  hasExplicitFirstPartyEvidence,
+} from './content/evidenceIntegrity.js';
 // ✅ [2026-04-20 SPEC-HOMEFEED-100/SEO-100] 실전 통합 훅
 import { validateContent as runValidationPipeline } from './services/contentValidationPipeline.js';
 import { loadAeoRules } from './aeoRulesManager.js';
@@ -540,10 +546,10 @@ async function generateTitleOnlyPatch(source: ContentSource, mode: PromptMode, c
 
   // ✅ [v1.4.47] 기본 규칙 (프롬프트 로드 실패 시 폴백) — 하드코딩된 기간 예시 제거
   const defaultTitleRules = mode === 'homefeed'
-    ? `[필수 공식] {인물/상품명} + {마이크로 디테일} + {감정/공감 트리거}`
+    ? `[제목 방향] 메인 주제 + 독자의 구체 상황·차이·판단 기준 중 내용에 맞는 한 가지. 근거 없는 감정과 반응 금지.`
     : mode === 'affiliate'
-      ? `[필수 공식] {상품명(브랜드+모델명만)} + {구매 판단이 갈리는 구체 조건}. 단어 나열과 근거 없는 체험 표현 금지.`
-      : `[필수 공식] {메인 키워드} + {구체성(금액/비율/개수/조건/방법/대상 중 택1)} + {클릭 트리거}. 기간 수치는 매 글마다 다양화 필수.`;
+      ? `[제목 방향] {상품명(브랜드+모델명)} + 입력에서 확인된 구매 판단 기준. 단어 나열과 근거 없는 체험 표현 금지.`
+      : `[제목 방향] 메인 주제 + 독자의 질문에 답하는 조건·방법·대상 중 입력 근거에 맞는 한 가지. 클릭 트리거와 숫자 개수 강제 금지.`;
 
   const schema = `Output ONLY valid JSON. NO markdown.\n\n{"selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`;
 
@@ -567,8 +573,8 @@ ${mode === 'homefeed' ? `
 ⛔⛔⛔ [홈피드 절대 규칙 — 위반 시 0점]
 1. 같은 단어를 제목에 2번 이상 쓰지 마세요. (예: "침대 배치 공식 침대 배치" → 0점)
 2. 키워드를 나열하지 마세요. 자연스러운 한 문장으로 쓰세요.
-3. 반드시 28~55자 이내. 55자를 넘기면 무조건 0점입니다. (사건성 긴 제목은 사람들이 멈춰 봄)
-4. 서브키워드는 1~2개만 자연스럽게 포함. 3개 이상 나열 금지.
+3. 28~42자를 권장하되, 사실과 고유명사를 훼손해 길이를 맞추지 마세요.
+4. 서브키워드는 문장 이해에 실제로 필요할 때만 사용하고 나열하지 마세요.
 ` : ''}
 ${mode === 'affiliate' ? `
 ⛔⛔⛔ [쇼핑커넥트 절대 규칙 — 위반 시 0점]
@@ -581,17 +587,9 @@ ${mode === 'affiliate' ? `
 5. 반드시 25~45자 이내.
 ${buildAffiliateTitleEvidenceDirective(source)}
 ` : ''}
-${mode === 'homefeed' && subKeywords ? `
-⚠️ [필수] 서브키워드 중 1~2개를 제목에 반드시 포함하세요!
-→ 서브키워드가 빠지면 네이버 AI가 토픽 분류를 못해서 홈피드 노출 자체가 불가능합니다.
-→ "자연스럽게 녹이세요"가 아니라 "반드시 드러내세요"입니다.
-→ 단, 같은 단어를 2번 쓰면 0점! 나열식 금지!
-` : ''}
-${(mode === 'seo' || mode === 'mate') && subKeywords ? `
-💡 [권장] 서브키워드 중 1개를 제목에 자연스럽게 포함하세요.
-→ 검색 의도 명확화 + AI 브리핑 인용 정확도 향상.
-→ 단, 2개 이상 나열은 -30점 (base.prompt 0점 표 "억지 나열" 규칙).
-→ 메인 키워드는 앞 3글자, 서브키워드는 문장 중간/후미 권장.
+${(mode === 'homefeed' || mode === 'seo' || mode === 'mate') && subKeywords ? `
+💡 [보조 키워드]
+서브키워드는 제목의 의미가 더 분명해질 때만 1개 이하로 사용할 수 있습니다. 위치와 개수를 강제하지 말고 나열하지 마세요.
 ` : ''}
 ${source.customPrompt ? `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -652,14 +650,23 @@ JSON:
   let prevScore = 0;
   let prevIssues: string[] = [];
   const usedFormulaIds: string[] = [];
+  const titleEvidenceContract = buildTitleEvidenceFinalContract(source, mode);
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
       // ✅ [v2] 매 시도마다 다른 공식 패턴 선택
       // ✅ [v1.4.57] articleType 전달 — shopping_expert_review 전용 풀 분기에 필수
-      const formula = selectTitleFormula(mode, attempt, usedFormulaIds, categoryHint, source.articleType, hasGroundingSource(source));
+      const formula = selectTitleFormula(
+        mode,
+        attempt,
+        usedFormulaIds,
+        categoryHint,
+        source.articleType,
+        hasGroundingSource(source),
+        hasExplicitFirstPartyEvidence(source),
+      );
       usedFormulaIds.push(formula.id);
-      const formulaInstruction = `\n\n🎯 [이번에 사용할 제목 공식: ${formula.name}]\n${formula.instruction}\n예시: "${formula.example}"\n⚠️ 반드시 위 공식 패턴을 적용하세요.`;
+      const formulaInstruction = `\n\n🎯 [이번 제목 방향 참고: ${formula.name}]\n${formula.instruction}\n예시: "${formula.example}"\n⚠️ 예시는 입력 근거와 맞을 때만 참고하고 사실·자연스러움과 충돌하면 사용하지 마세요.`;
 
       // ✅ [v2] 재시도 시 이전 실패 피드백
       const retryFeedback = buildTitleRetryFeedback(attempt, prevTitle, prevScore, prevIssues);
@@ -669,7 +676,7 @@ JSON:
       //   기본 'same': 본문과 동일 (현재 동작 유지, silent 폴백 0)
       //   'gpt-mini'/'gemini-flash'/'haiku': 사용자 명시 선택 → 부수 작업만 분리
       const titleTemp = 0.7 + (attempt * 0.05);
-      const titlePromptFull = prompt + formulaInstruction + previousTitlesPrompt + retryFeedback;
+      const titlePromptFull = `${prompt}${formulaInstruction}${previousTitlesPrompt}${retryFeedback}\n\n${titleEvidenceContract}`;
       let raw: string;
       // 부수 작업 모델 결정 (사용자 명시 선택 — silent 폴백 0)
       let subProvider: 'same' | 'gpt-mini' | 'gemini-flash' | 'haiku' = 'same';
@@ -1245,23 +1252,9 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
     } catch (e) {
       console.warn('[contentGenerator] catch ignored:', e);
     }
-    // ✅ [SPEC-KEYWORD-ENDGAME Phase 1] SEO 모드는 제목 앞3자 강제(ensureFront3) — "토큰이 어디든
-    //   있으면 스킵" 조기탈출이 앞3자 요건을 뚫던 구멍을 닫는다. 다른 모드는 기존 동작 유지.
-    const _isSeoModeForKw = (source.contentMode || 'seo') === 'seo';
-    applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword, { ensureFront3: _isSeoModeForKw });
-    // ✅ [Phase 1] 서론 첫100자·결론 키워드 미배치도 경고→강제(콤마 리드인). SEO 모드만(홈판은
-    //   도입 4단 골격 보호 — 경고 유지).
-    if (_isSeoModeForKw) {
-      try {
-        const { enforceIntroConclusionKeyword } = require('./content/keywordPlacementEnforcer');
-        const placed = enforceIntroConclusionKeyword(finalContent, primaryKeyword);
-        if (placed.introPatched || placed.conclusionPatched) {
-          console.log(`[KeywordPlacement] 배치 강제: 서론=${placed.introPatched} 결론=${placed.conclusionPatched} (키워드 "${primaryKeyword}")`);
-        }
-      } catch (e) {
-        console.warn('[KeywordPlacement] 배치 강제 스킵:', (e as Error)?.message);
-      }
-    }
+    // 제목에 주제가 완전히 빠진 경우만 보완한다. 이미 들어간 키워드를 첫 3글자로
+    // 옮기거나 서론·결론에 다시 삽입하면 자연스러운 문장과 검색 의도가 훼손된다.
+    applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword);
   }
   applyHomefeedNarrativeHookBlock(finalContent, source);
   applySeoQualityHookBlock(finalContent, source);  // ✅ [2026-03-06] SEO 런타임 품질 게이트
@@ -2147,13 +2140,6 @@ export function buildModeBasedPrompt(
     console.log(`[PromptBuilder] 리뷰형 구매 전 분석 프롬프트 추가됨`);
   }
 
-  // 쇼핑 글의 화자 근거 계약은 모든 오버레이와 리뷰 분석 지시 뒤에 둔다.
-  // 구매자 리뷰를 작성자 실사용으로 오인하는 회귀를 이 마지막 계약에서 차단한다.
-  if (contentMode === 'affiliate') {
-    systemPrompt += `\n\n${buildAffiliateAuthenticityContract(source)}`;
-    console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}`);
-  }
-
   console.log(`[PromptBuilder] 2축 분리 프롬프트 생성: mode=${mode}, category=${categoryHint || 'general'}, isFullAuto=${isFullAuto}, isReviewType=${isReviewType}`);
 
   const jsonOutputFormat = buildContentJsonOutputFormat({
@@ -2168,7 +2154,17 @@ export function buildModeBasedPrompt(
     minChars,
   });
 
-  return `${systemPrompt}\n\n${jsonOutputFormat}`.trim();
+  let finalContract = '';
+  if (contentMode === 'affiliate') {
+    finalContract = buildAffiliateAuthenticityContract(source);
+    console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}`);
+  } else if (contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate' || contentMode === 'business' || contentMode === 'custom') {
+    finalContract = buildEvidenceAndIntentFinalContract(source, contentMode);
+    console.log(`[PromptBuilder] 근거·의도 최종 계약 적용: ${contentMode}, firstParty=${hasExplicitFirstPartyEvidence(source)}`);
+  }
+
+  // This contract must be last so category and JSON-output rules cannot override evidence safety.
+  return `${systemPrompt}\n\n${jsonOutputFormat}${finalContract ? `\n\n${finalContract}` : ''}`.trim();
 }
 
 // ✅ [2026-02-11] 데드코드 제거 완료
@@ -3186,7 +3182,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
   const perplexityToneGuide = `[Perplexity 작성 톤 가이드 — 절대 준수]
 1. AI 보고체 절대 금지: "알아보겠습니다", "살펴보겠습니다", "시작하겠습니다", "마치겠습니다", "도움이 되셨으면" 등 *대화 진행 안내 문장* 일체 사용 금지.
 2. 검색 인용 톤 금지: "~에 따르면", "출처에 의하면", "최근 보도에 따르면" 같은 *기사체 인용 표현* 사용 금지. 자연스러운 설명체로 풀어 쓰되, 기사 문장을 그대로 베껴 적지 마라.
-3. 인간적 표현 활용: "솔직히", "개인적으로", "의외로", "생각보다", "막상", "처음에는", "사실은" 같은 *체감 표현*을 본문 2~4회 이상 자연스럽게 배치.
+3. 인간적 표현은 개수를 맞추지 않는다. 구체적인 맥락·판단 이유·예외로 자연스럽게 쓰고, "솔직히/막상/사실은" 같은 상투어를 반복하지 않는다.
 4. 문장 길이: 평균 30~70자 한 문장. 한 호흡으로 읽히는 짧고 부드러운 흐름. 문단당 3~5문장.
 5. 사실 그라운딩 (최우선): 검색 결과·원본 자료에 없는 수치·비율·통계·처리 기간·성공률·날짜는 절대 만들어내지 마라. 확인되지 않으면 "공식 안내 기준으로 확인이 필요하다"처럼 정직하게 처리하고, "보장됩니다" 같은 단정 표현은 금지. 직접 경험하지 않은 일을 경험한 것처럼 쓰지 마라.
 
@@ -5335,17 +5331,14 @@ export async function generateStructuredContent(
             console.log(`[TitlePatch] costSaver ON — SEO 제목 LLM 패치 생략, 로컬 보정 적용: ${issues.join(', ')}`);
           }
 
-          // ✅ [2026-02-09 v2] 패치 후 재검증: 키워드가 앞쪽에 없으면 강제 앞배치 (최후 펴대백)
+          // 패치 후에는 키워드 포함 여부만 경고한다. 앞쪽 강제 이동은 제목 의미를 깨뜨릴 수 있다.
           if (seoKeyword && parsed.selectedTitle) {
             const kwWords = seoKeyword.trim().split(/[\s,/\-]+/).filter((w: string) => w.length >= 2);
             const firstKwWord = kwWords[0] || seoKeyword.trim();
             const patchedTitle = parsed.selectedTitle.trim();
             const kwIdx = patchedTitle.indexOf(firstKwWord);
-            if (kwIdx < 0 || kwIdx > 10) {
-              // ✅ [v2] 키워드가 앞 10자 이내에 없으면 강제 배치 (최후 펴대백)
-              const titleWithoutKw = patchedTitle.replace(new RegExp(firstKwWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '').replace(/^[,\s]+/, '').trim();
-              parsed.selectedTitle = `${firstKwWord} ${titleWithoutKw}`.trim();
-              console.log(`[TitlePatch] ⚠️ SEO 키워드 강제 앞배치 (최후 펴대백): "${parsed.selectedTitle}"`);
+            if (kwIdx < 0) {
+              console.warn(`[TitlePatch] SEO 제목에 핵심 주제어가 없음. 다음 품질 게이트에서 재평가: "${patchedTitle}"`);
             }
           }
         }
@@ -5383,18 +5376,8 @@ export async function generateStructuredContent(
             console.log(`[TitlePatch] costSaver ON — 홈판 제목 LLM 패치 생략, 로컬 보정 적용: ${titleIssues.join(', ')}`);
           }
 
-          // ✅ [2026-02-09 v2] 패치 후 재검증: 키워드가 앞쪽에 없으면 강제 앞배치 (최후 펴대백)
-          if (hfKeyword && parsed.selectedTitle) {
-            const kwWords = hfKeyword.trim().split(/[\s,/\-]+/).filter((w: string) => w.length >= 2);
-            const firstKwWord = kwWords[0] || hfKeyword.trim();
-            const patchedTitle = parsed.selectedTitle.trim();
-            const kwIdx = patchedTitle.indexOf(firstKwWord);
-            if (kwIdx < 0 || kwIdx > 10) {
-              const titleWithoutKw = patchedTitle.replace(new RegExp(firstKwWord.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '').replace(/^[,\s]+/, '').trim();
-              parsed.selectedTitle = `${firstKwWord} ${titleWithoutKw}`.trim();
-              console.log(`[TitlePatch] ⚠️ 홈판 키워드 강제 앞배치 (최후 펴대백): "${parsed.selectedTitle}"`);
-            }
-          }
+          // 제목 패치 결과는 품질 게이트에서 다시 평가한다. 사후 문자열 재배치는
+          // 제목의 의미와 자연스러운 호흡을 깨뜨리므로 수행하지 않는다.
         }
 
         // ✅ 비용 절감 모드 기본 ON — 도입부 재작성 비활성화 (사용자 명시 OFF 시에만 동작)
@@ -5820,12 +5803,9 @@ export async function generateStructuredContent(
         const riskAnalysis = analyzeAiDetectionRisk(optimized.bodyPlain || '');
         console.log(`[ContentGenerator] AI 탐지 위험도: ${riskAnalysis.score}/100`);
 
-        // ✅ [v1.4.35] humanize 항상 strong — "사람보다 사람처럼" 작성 우선
-        // 기존 문제: AI가 깔끔하게 만들수록 위험도 점수 낮음 → light로 떨어짐
-        //           → light는 4단계 스킵 (어미 다양화, 동의어, 개인 표현, 감탄사)
-        //           → 결과적으로 humanize가 거의 안 되고 로봇 같은 글 생성
-        // 변경: 항상 strong 적용. 위험도 점수는 quality 메타로만 사용.
-        const humanizeIntensity: 'strong' = 'strong';
+        // SEO/Homefeed/Mate는 개인 표현·감탄사·동의어를 새로 삽입하지 않는다.
+        // 의미와 근거를 보존하는 cleanup만 적용한다.
+        const humanizeIntensity = resolveHumanizeIntensity((source.contentMode || 'seo') as PromptMode);
 
         // Humanize 적용
         if (optimized.bodyPlain) {
@@ -5976,6 +5956,10 @@ export async function generateStructuredContent(
             contentMode: source.contentMode,
             toneStyle: source.toneStyle,
             categoryHint: source.categoryHint,
+            firstPartyEvidenceAvailable: hasExplicitFirstPartyEvidence(source),
+            groundingText: [source.title, source.rawText, source.personalExperience]
+              .filter(Boolean)
+              .join('\n'),
             affiliateEvidenceMode: source.contentMode === 'affiliate'
               ? classifyAffiliateEvidence(source).mode
               : undefined,
@@ -6086,6 +6070,10 @@ export async function generateStructuredContent(
                   contentMode: source.contentMode,
                   toneStyle: source.toneStyle,
                   categoryHint: source.categoryHint,
+                  firstPartyEvidenceAvailable: hasExplicitFirstPartyEvidence(source),
+                  groundingText: [source.title, source.rawText, source.personalExperience]
+                    .filter(Boolean)
+                    .join('\n'),
                   affiliateEvidenceMode: source.contentMode === 'affiliate'
                     ? classifyAffiliateEvidence(source).mode
                     : undefined,

@@ -30,9 +30,9 @@ export function computeSeoTitleCriticalIssues(title: string, primaryKeyword?: st
   }
   const len = t.length;
   if (len < 22) issues.push('제목 너무 짧음');
-  if (len > 40) issues.push('제목 너무 김');
+  if (len > 42) issues.push('제목 너무 김');
 
-  // 키워드 앞쪽 배치 검증 (앞 3~5글자 내 배치 필수)
+  // 검색 주제 포함 여부만 검증한다. 앞 3~5글자 강제는 자연스러운 제목을 깨뜨린다.
   if (primaryKeyword) {
     const kw = primaryKeyword.trim();
     const kwWords = kw.split(/[\s,/\-]+/).filter(w => w.length >= 2);
@@ -41,8 +41,6 @@ export function computeSeoTitleCriticalIssues(title: string, primaryKeyword?: st
     const kwIndex = t.indexOf(firstKwWord);
     if (kwIndex < 0) {
       issues.push(`키워드 미포함 (${firstKwWord})`);
-    } else if (kwIndex > 5) {
-      issues.push(`키워드 앞배치 실패 (${kwIndex}번째 위치)`);
     }
   }
 
@@ -54,16 +52,13 @@ export function computeSeoTitleCriticalIssues(title: string, primaryKeyword?: st
   }
 
   // 트리거 검증 — 0점 패턴 제외 실질적 클릭 트리거만 인정
-  const hasNumber = /\d/.test(t);
   const goodSeoTriggers = [
-    '놓치면', '손해', '안 하면', '모르면', '해봤더니', '써보니', '써봤는데',
-    '달라졌', '바뀌었', '놀랐', '할까', '일까', '어떨까',
-    '비교', '차이', '해결', '꿀팁', '효과', '최신',
-    '진짜', '실제', '직접', '비밀', '몰랐던', '이유',
-    '아꼈', '할인', '절약', '만에', '확인'
+    '대상', '조건', '기준', '순서', '절차', '서류', '비교', '차이',
+    '해결', '주의', '이유', '확인', '선택', '언제', '얼마', '어떻게',
+    '할까', '일까', '어떨까', '가능', '방법'
   ];
   const hasGoodTrigger = goodSeoTriggers.some(x => t.includes(x));
-  if (!hasNumber && !hasGoodTrigger) issues.push('숫자/클릭트리거 부재');
+  if (!hasGoodTrigger) issues.push('검색 의도/판단 기준이 제목에 드러나지 않음');
 
   // 설명체/딱딱한 어미 금지
   const forbiddenSeoPatterns = ['에 대해', '에 관한', '입니다', '합니다', '알아보겠', '하는 법'];
@@ -85,11 +80,11 @@ export function computeHomefeedTitleCriticalIssues(title: string, primaryKeyword
     return issues;
   }
   const len = t.length;
-  // 토픽 매칭 글자수 기준 28~45자
+  // 홈판 제목 단일 기준: 28~42자
   if (len < 28) issues.push('제목 너무 짧음 (28자 미만, 서브키워드 공간 부족)');
-  if (len > 45) issues.push('제목 너무 김 (45자 초과)');
+  if (len > 42) issues.push('제목 너무 김 (42자 초과)');
 
-  // 키워드 앞쪽 배치 검증
+  // 홈판은 자연스러운 위치에 주제를 한 번 포함하면 충분하다.
   if (primaryKeyword) {
     const kw = primaryKeyword.trim();
     const kwWords = kw.split(/[\s,/\-]+/).filter(w => w.length >= 2);
@@ -98,8 +93,6 @@ export function computeHomefeedTitleCriticalIssues(title: string, primaryKeyword
     const kwIndex = t.indexOf(firstKwWord);
     if (kwIndex < 0) {
       issues.push(`키워드 미포함 (${firstKwWord})`);
-    } else if (kwIndex > 5) {
-      issues.push(`키워드 앞배치 실패 (${kwIndex}번째 위치)`);
     }
   }
 
@@ -121,32 +114,18 @@ export function computeHomefeedTitleCriticalIssues(title: string, primaryKeyword
     issues.push('뻔한 정보성 종결 (홈판 0점 패턴)');
   }
 
-  // 감정/경험 트리거 + 체험/결과 트리거 (토픽 매칭 100점 공식)
-  const emotionTriggers = [
-    // 체험 증명형
-    '써보니', '써봤는데', '써본', '써보고', '써봤더니', '써봤어요',
-    '사용 후', '개월', '주간', '일 차', '해봤더니', '해봤는데',
-    '다녀온', '다녀왔', '가봤', '방문', '먹어봤',
-    // 결과 공개형
-    '효과', '달라진', '달라졌', '바뀌었', '후회', '포기',
-    // 호기심 유발형
-    '왜 그랬', '의외', '예상 외', '몰랐던', '놀라운',
-    // 공감형
-    '그랬어요', '저도', '다들', '느꼈', '공감',
-    // 발견형
-    '90%', '놓치', '손해', '숨겨', '비밀',
-    // 반전/변화형
-    '결국', '알고보니', '반전', '비교',
-    // 시의성 공감형
-    '요즘', '최근', '올해', '이번',
-    // 감정 트리거
-    '진짜', '직접', '현장', '실시간', '반응', '근황', '결과',
-    '소식', '순간', '모습', '이유', '놀랐', '소름',
-    '난리', '대박', '감동', '궁금', '고민', '당황',
-    '침묵', '뒷이야기', '비결', '경험'
+  // 감정어가 아니라 독자가 얻을 가치·판단 기준을 검증한다.
+  const valueTriggers = [
+    '조건', '기준', '순서', '차이', '이유', '확인', '주의', '비교',
+    '선택', '고민', '헷갈', '놓치', '달라진', '결과', '반응', '근황',
+    '할까', '일까', '어떻게', '왜', '먼저', '전에'
   ];
-  const hasEmotionTrigger = emotionTriggers.some(x => t.includes(x));
-  if (!hasEmotionTrigger) issues.push('감정/경험/체험 트리거 부재');
+  const hasValueTrigger = valueTriggers.some(x => t.includes(x));
+  if (!hasValueTrigger) issues.push('독자 가치/판단 기준이 제목에 드러나지 않음');
+
+  if (/(충격|경악|소름|대박|폭로|진실\s*공개|알고보니|난리|실화)/.test(t)) {
+    issues.push('과장·클릭베이트 표현 포함');
+  }
 
   // 금지 표현
   const forbiddenTitlePatterns = ['왜?', '왜일까?', '에 대해', '에 관한', '알아보겠습니다', '입니다', '합니다'];

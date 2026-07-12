@@ -1,4 +1,8 @@
 import type { EvaluationInput, SubScore } from './qualityEvaluator';
+import {
+  auditEvidenceIntegrity,
+  collectSupportedConcreteClaims,
+} from './evidenceIntegrity';
 
 const clamp = (value: number, min: number, max: number): number => Math.min(Math.max(value, min), max);
 
@@ -138,19 +142,15 @@ const buildModeIntentBonus = (input: EvaluationInput, text: string): number => {
 
   if (input.mode === 'homefeed') {
     const intro = text.slice(0, 250);
-    const hasScene = includesAny(intro, [
-      'I ',
-      'my ',
-      'felt',
-      'noticed',
-      '\uc800\ub294',
-      '\uc81c\uac00',
-      '\ub9c9\uc0c1',
-      '\uc194\uc9c1\ud788',
-      '\uadf8\ub0e5',
+    const hasSituation = includesAny(intro, [
+      'when', 'before', 'first', 'confusing', 'check',
+      '\ucc98\uc74c', '\uba3c\uc800', '\ud5f7\uac08', '\uace0\ubbfc', '\ubd88\ud3b8', '\ud655\uc778', '\ud560 \ub54c',
     ]);
-    const hasReaderQuestion = /[?]|\uae4c|\uc694/.test(intro);
-    return (hasScene ? 6 : 0) + (hasReaderQuestion ? 4 : 0);
+    const hasValue = includesAny(intro, [
+      'criterion', 'difference', 'reason', 'order', 'caution',
+      '\uae30\uc900', '\ucc28\uc774', '\uc774\uc720', '\uc21c\uc11c', '\uc8fc\uc758',
+    ]);
+    return (hasSituation ? 6 : 0) + (hasValue ? 4 : 0);
   }
 
   const hasSearchIntentAnswer = includesAny(text.slice(0, 350), [
@@ -174,6 +174,13 @@ export function evaluateOfficialExposure(input: EvaluationInput): SubScore {
   const paragraphs = splitParagraphs(body);
   const sentences = splitSentences(body);
   const primaryKeyword = input.primaryKeyword || '';
+  const groundingText = input.groundingText || input.rawText || '';
+  const evidenceAudit = auditEvidenceIntegrity({
+    title,
+    body,
+    groundingText,
+    firstPartyEvidenceAvailable: input.firstPartyEvidenceAvailable === true,
+  });
 
   const issues: string[] = [];
   const suggestions: string[] = [];
@@ -207,15 +214,28 @@ export function evaluateOfficialExposure(input: EvaluationInput): SubScore {
   }
 
   const concreteNumberCount = countConcreteNumbers(text);
+  const unsupportedConcreteCount = evidenceAudit.issues
+    .filter((issue) => issue.code === 'UNSUPPORTED_CONCRETE_CLAIM')
+    .reduce((sum, issue) => sum + issue.examples.length, 0);
+  const supportedConcreteCount = collectSupportedConcreteClaims(text, groundingText).length;
   const sourceSignalCount = countSourceSignals(text);
-  const experienceSignalCount = countExperienceSignals(text);
+  const experienceSignalCount = input.firstPartyEvidenceAvailable === true
+    ? countExperienceSignals(text)
+    : 0;
   details.concreteNumberCount = concreteNumberCount;
+  details.supportedConcreteNumberCount = supportedConcreteCount;
+  details.unsupportedConcreteNumberCount = unsupportedConcreteCount;
   details.sourceSignalCount = sourceSignalCount;
   details.experienceSignalCount = experienceSignalCount;
   const earlyStructuredBlocks = countStructuredBlocks(text);
   const decisionEvidenceBonus = input.mode === 'mate' ? earlyStructuredBlocks * 2 : 0;
   details.evidenceExperience = clamp(
-    concreteNumberCount * 2 + sourceSignalCount * 2 + experienceSignalCount * 3 + decisionEvidenceBonus,
+    (groundingText.trim().length >= 50 ? 8 : 5)
+      + supportedConcreteCount * 2
+      + Math.min(4, sourceSignalCount)
+      + experienceSignalCount * 2
+      + decisionEvidenceBonus
+      - unsupportedConcreteCount * 5,
     0,
     20,
   );
@@ -257,10 +277,8 @@ export function evaluateOfficialExposure(input: EvaluationInput): SubScore {
   }
 
   const hasFreshness = /\b20\d{2}\b|\d{4}[.-]\d{1,2}|updated|latest|current|\ucd5c\uc2e0|\uae30\uc900|\uc5c5\ub370\uc774\ud2b8/.test(text);
-  details.freshness = hasFreshness ? 10 : 4;
-  if (!hasFreshness) {
-    suggestions.push('Add a safe freshness marker only when the source supports it.');
-  }
+  const freshnessSupported = !hasFreshness || /\b20\d{2}\b|\d{4}[.-]\d{1,2}|updated|latest|current|\ucd5c\uc2e0|\uae30\uc900|\uc5c5\ub370\uc774\ud2b8/.test(groundingText);
+  details.freshness = freshnessSupported ? 10 : 2;
 
   const structuredBlocks = countStructuredBlocks(text);
   const citeableAnswerAtoms = countCiteableAnswerAtoms(text);
@@ -277,9 +295,21 @@ export function evaluateOfficialExposure(input: EvaluationInput): SubScore {
     '\ubc18\ub4dc\uc2dc',
     '\ubcf4\uc7a5',
   ]);
-  details.trustSafety = clamp(14 - (unsafePromise ? 6 : 0) - (repeated ? 5 : 0) + (sourceSignalCount > 0 ? 2 : 0), 0, 14);
+  details.trustSafety = clamp(
+    14
+      - (unsafePromise ? 6 : 0)
+      - (repeated ? 5 : 0)
+      - (evidenceAudit.hardFail ? 10 : 0)
+      + (sourceSignalCount > 0 ? 2 : 0),
+    0,
+    14,
+  );
   if (unsafePromise) {
     issues.push('absolute promise expression detected');
+  }
+  if (evidenceAudit.hardFail) {
+    issues.push(...evidenceAudit.issues.map((issue) => issue.message));
+    suggestions.push('Remove unsupported firsthand claims and concrete figures; use source-backed conditions and verification steps.');
   }
 
   const modeBonus = buildModeIntentBonus(input, text);

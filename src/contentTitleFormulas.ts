@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-7/v2.10.145] contentGenerator god file decomposition — title formula patterns.
  *
  * Pure data tables (no runtime state). External consumers: ctrCombat.ts (comment only),
@@ -61,151 +61,165 @@ export const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
   // ────── 체험 계열 (온도 1~2단계) ──────
   {
     id: 'hf_duration_exp', name: '①체험형',
-    instruction: '장기 사용 체험을 기반으로 신뢰도 높이기. 기간 수치(N주/N개월)를 절대 명시하지 말고 "오래 써보니", "꾸준히 써본 결과" 같은 표현 사용. 서브키워드 필수. 28~55자.',
+    instruction: '장기 사용 체험을 기반으로 신뢰도 높이기. 기간 수치(N주/N개월)를 절대 명시하지 말고 "오래 써보니", "꾸준히 써본 결과" 같은 표현 사용. 서브키워드 필수. 28~42자.',
     example: '무선 청소기 다이슨 꾸준히 써보니 생각이 바뀌었어요'
   },
   {
     id: 'hf_direct_exp', name: '②직접해봄형',
-    instruction: '"직접 해봤더니" 구조로 1인칭 체험 결과 전달. 서브키워드 포함 필수. 28~55자.',
+    instruction: '"직접 해봤더니" 구조로 1인칭 체험 결과 전달. 서브키워드 포함 필수. 28~42자.',
     example: '전기세 절약 이 방법 해봤더니 월 3만원 줄었어요'
   },
   {
     id: 'hf_before_after', name: '③전후비교형',
-    instruction: '"바꿨더니" 구조로 변화 전후를 극적 대비. 서브키워드로 토픽 분류 보장. 28~55자.',
+    instruction: '"바꿨더니" 구조로 변화 전후를 극적 대비. 서브키워드로 토픽 분류 보장. 28~42자.',
     example: '거실 조명 바꿨더니 분위기가 완전 달라졌어요'
   },
   {
     id: 'hf_accumulated', name: '④누적후기형',
-    instruction: '누적된 사용 후기 + 솔직 평가. 기간 수치(N주/N개월)를 절대 명시하지 말고 "써본 후기", "오래 써본 결과" 같은 표현 사용. 서브키워드 필수. 28~55자.',
+    instruction: '누적된 사용 후기 + 솔직 평가. 기간 수치(N주/N개월)를 절대 명시하지 말고 "써본 후기", "오래 써본 결과" 같은 표현 사용. 서브키워드 필수. 28~42자.',
     example: '공기청정기 위닉스 써본 후기, 비염에 진짜 효과 있음?'
   },
   // ────── 반응 계열 (온도 2~3단계) ──────
   {
     id: 'hf_others_reaction', name: '⑤타인반응형',
-    instruction: '타인의 놀라운/의외 반응을 활용하여 CTR 극대화. 서브키워드 앞에 배치. 28~55자.',
+    instruction: '타인의 놀라운/의외 반응을 활용하여 CTR 극대화. 서브키워드 앞에 배치. 28~42자.',
     example: '원룸 인테리어 바꿨더니 친구가 이사했냐고 물어봄'
   },
   {
     id: 'hf_unexpected', name: '⑥의외발견형',
-    instruction: '예상과 다른 결과/의외의 사실 강조. 서브키워드로 토픽 매칭 보장. 28~55자.',
+    instruction: '예상과 다른 결과/의외의 사실 강조. 서브키워드로 토픽 매칭 보장. 28~42자.',
     example: '다이어트 식단만 바꿨는데 운동보다 효과 있었어요'
   },
   {
     id: 'hf_comments', name: '⑦댓글반응형',
-    instruction: '댓글/SNS/팬 반응을 활용한 사회적 증거 제목. 연예/스포츠에 최적. 28~55자.',
+    instruction: '댓글/SNS/팬 반응을 활용한 사회적 증거 제목. 연예/스포츠에 최적. 28~42자.',
     example: '뉴진스 컴백 무대 직캠 올렸더니 해외 팬 반응 뜨거워'
   },
   {
     id: 'hf_spread', name: '⑧주변전파형',
-    instruction: '정보를 알려줬을 때 주변의 반응을 강조. 서브키워드 필수 포함. 28~55자.',
+    instruction: '정보를 알려줬을 때 주변의 반응을 강조. 서브키워드 필수 포함. 28~42자.',
     example: '연말정산 환급 방법 알려줬더니 직장 동료들 난리'
   },
   // ────── 정보 계열 (온도 1단계) ──────
   {
     id: 'hf_simple_summary', name: '⑨간단정리형',
-    instruction: '"달라진 점, 간단히 정리" 구조. 사회/경제/정책 카테고리에 최적. 서브키워드 필수. 28~55자.',
+    instruction: '"달라진 점, 간단히 정리" 구조. 사회/경제/정책 카테고리에 최적. 서브키워드 필수. 28~42자.',
     example: '2025 최저임금 달라진 점, 알바생 입장에서 정리했어요'
   },
   {
     id: 'hf_miss_loss', name: '⑩놓치면손해형',
-    instruction: '"확인했는데 놓치기 쉬운 점" 구조로 손실회피 심리 자극. 서브키워드 필수. 28~55자.',
+    instruction: '"확인했는데 놓치기 쉬운 점" 구조로 손실회피 심리 자극. 서브키워드 필수. 28~42자.',
     example: '청년지원금 신청 자격 확인했는데 90%가 놓치는 조건 하나'
   },
   {
     id: 'hf_applicability', name: '⑪해당확인형',
-    instruction: '"이런 분 해당, 확인해보세요" 구조. 타깃 독자 특정. 서브키워드 필수. 28~55자.',
+    instruction: '"이런 분 해당, 확인해보세요" 구조. 타깃 독자 특정. 서브키워드 필수. 28~42자.',
     example: '국민연금 조기수령 이런 분 해당, 금액 차이 확인해보세요'
   },
   {
     id: 'hf_comparison', name: '⑫비교분석형',
-    instruction: '두 대상을 직접 비교한 결과 제시. 서브키워드 2개 포함 권장. 28~55자.',
+    instruction: '두 대상을 직접 비교한 결과 제시. 서브키워드 2개 포함 권장. 28~42자.',
     example: '아이폰16 카메라 갤럭시25 비교, 직접 찍어보고 정리'
   },
   // ────── 공감 계열 (온도 2단계) ──────
   {
     id: 'hf_me_too', name: '⑬나도그랬어형',
-    instruction: '"저도 그랬는데" 구조로 독자 동질감 형성. 해결책 암시. 서브키워드 필수. 28~55자.',
+    instruction: '"저도 그랬는데" 구조로 독자 동질감 형성. 해결책 암시. 서브키워드 필수. 28~42자.',
     example: '전세사기 불안했는데 저도 그랬어요, 이것만 확인하세요'
   },
   {
     id: 'hf_confession', name: '⑭솔직고백형',
-    instruction: '"솔직히 후회한/아쉬운" 구조로 진솔한 감정 전달. 기간 수치 명시 금지. 서브키워드 필수. 28~55자.',
+    instruction: '"솔직히 후회한/아쉬운" 구조로 진솔한 감정 전달. 기간 수치 명시 금지. 서브키워드 필수. 28~42자.',
     example: '테슬라 모델3 타보니 솔직히 후회한 점 하나'
   },
   {
     id: 'hf_common_worry', name: '⑮모두의고민형',
-    instruction: '"다들 고민하시죠, 해결법" 구조. 보편적 걱정 → 해결 흐름. 서브키워드 필수. 28~55자.',
+    instruction: '"다들 고민하시죠, 해결법" 구조. 보편적 걱정 → 해결 흐름. 서브키워드 필수. 28~42자.',
     example: '적금 금리 떨어질 때 다들 고민하시죠, 대안 정리해봤어요'
   },
   // ────── 호기심 계열 (온도 2단계) ──────
   {
     id: 'hf_reason_tracking', name: '⑯이유추적형',
-    instruction: '"왜 이런지 찾아봤더니" 구조. 호기심 자극 후 정보 약속. 서브키워드 필수. 28~55자.',
+    instruction: '"왜 이런지 찾아봤더니" 구조. 호기심 자극 후 정보 약속. 서브키워드 필수. 28~42자.',
     example: '삼성전자 주가 왜 이렇게 빠졌는지 찾아봤더니'
   },
   {
     id: 'hf_hidden_truth', name: '⑰숨겨진진실형',
-    instruction: '"알고 보니 반전" 구조. 기존 상식 뒤집기. 서브키워드 필수. 28~55자.',
+    instruction: '"알고 보니 반전" 구조. 기존 상식 뒤집기. 서브키워드 필수. 28~42자.',
     example: '에어컨 전기세 알고 보니 설정 온도보다 중요한 게 있었음'
   },
   {
     id: 'hf_after_story', name: '⑱그후이야기형',
-    instruction: '"그 후 결과" 구조. 사건/행동 이후 변화 추적. 서브키워드 필수. 28~55자.',
+    instruction: '"그 후 결과" 구조. 사건/행동 이후 변화 추적. 서브키워드 필수. 28~42자.',
     example: '손흥민 부상 복귀 그 후 경기력 변화, 동료 반응까지'
   },
   // ────── 결과 계열 (온도 1~2단계) ──────
   {
     id: 'hf_numeric_proof', name: '⑲수치증명형',
-    instruction: '구체적 숫자(금액/비율/수량/횟수)로 결과 증명. 기간(N주/N개월) 대신 금액/비율/개수 우선 사용. 서브키워드 필수. 28~55자.',
+    instruction: '구체적 숫자(금액/비율/수량/횟수)로 결과 증명. 기간(N주/N개월) 대신 금액/비율/개수 우선 사용. 서브키워드 필수. 28~42자.',
     example: '블로그 수익 애드센스로 월 50만원 찍은 방법'
   },
   {
     id: 'hf_final_choice', name: '⑳최종선택형',
-    instruction: '"고민 끝에 선택한 이유" 구조. 비교 후 결론 제시. 서브키워드 2개 권장. 28~55자.',
+    instruction: '"고민 끝에 선택한 이유" 구조. 비교 후 결론 제시. 서브키워드 2개 권장. 28~42자.',
     example: '노트북 맥북 레노버 고민 끝에 선택한 이유'
   },
   // ────── [v2.10.87] 사건성·갈등성 계열 (Manus 분석 기반 — 홈판 노출 40% 비중) ──────
   {
     id: 'hf_conflict_against', name: '㉑반대·갈등형',
-    instruction: '"반대에도 + 선택/결과 + 의외 결말" 구조. 가족·이웃·전문가 반대를 전면화. 후킹 요소: 갈등(필수) + 결과 반전. 28~55자.',
+    instruction: '"반대에도 + 선택/결과 + 의외 결말" 구조. 가족·이웃·전문가 반대를 전면화. 후킹 요소: 갈등(필수) + 결과 반전. 28~42자.',
     example: '주변 반대 무릅쓰고 산 구축 아파트, 1년 뒤 가격 갈렸다'
   },
   {
     id: 'hf_named_event', name: '㉒실명·사건형',
-    instruction: '실명/지역명/제도명 + 사건/논란/근황 + 의문 결합. Manus 분석상 홈판 메인의 50%가 실명 후킹. 28~55자. 단 입력 자료에 명시된 실명만 사용 (날조 금지).',
+    instruction: '실명/지역명/제도명 + 사건/논란/근황 + 의문 결합. Manus 분석상 홈판 메인의 50%가 실명 후킹. 28~42자. 단 입력 자료에 명시된 실명만 사용 (날조 금지).',
     example: '분당 재건축 기대감 큰데 매수자가 망설이는 이유'
   },
   {
     id: 'hf_loss_warning', name: '㉓손실경고형',
-    instruction: '"믿었는데 + 못 받았다 / 놓쳤다 / 손해 봤다" 구조. 손실회피 심리 + 실제 사건. 후킹: 갈등 + 손실. 28~55자.',
+    instruction: '"믿었는데 + 못 받았다 / 놓쳤다 / 손해 봤다" 구조. 손실회피 심리 + 실제 사건. 후킹: 갈등 + 손실. 28~42자.',
     example: '전세보증보험 믿었는데 못 받은 세입자, 어디서 갈렸나'
   },
   {
     id: 'hf_current_buzz', name: '㉔현재성·이벤트형',
-    instruction: '"요즘/이번 주/오늘 + 화제/난리/반응" 구조. 최신성 + 집단 반응. Manus 분석상 55%가 현재성 후킹. 28~55자.',
+    instruction: '"요즘/이번 주/오늘 + 달라진 상황/관심 지점" 구조. 입력 자료가 증명하는 현재성만 사용하고 집단 반응을 만들지 않는다. 28~42자.',
     example: '요즘 실수요자들이 다시 보는 구축 아파트, 이유는'
   },
   {
     id: 'hf_event_question', name: '㉕사건의문형',
-    instruction: '"왜 + 사건/결과 + 진짜 이유는?" 구조. 의문형 + 구체 사건. 단순 의문보다 사건 결합이 강함. 28~55자.',
+    instruction: '"왜 + 사건/결과 + 진짜 이유는?" 구조. 의문형 + 구체 사건. 단순 의문보다 사건 결합이 강함. 28~42자.',
     example: '왜 같은 단지인데 한 동만 더 비쌀까, 이유는 따로 있었다'
   },
   // ────── [홈판 상위노출 실측 분석] 이슈픽 계열 — 자료(URL/뉴스) 기반일 때만 사용 ──────
   {
     id: 'hf_hidden_identity', name: '㉖익명공개형',
-    instruction: '주체(인물/대상)를 제목에서 숨겨 "누구지?" 궁금증으로 클릭 유발. "의외의 OO", "이 OO", "톱스타 OO", "OO의 정체" 활용. ⛔ 입력 자료에 명시된 실제 사실만 사용 — 인물 정보·이력 날조 절대 금지. 28~55자.',
+    instruction: '주체(인물/대상)를 제목에서 숨겨 "누구지?" 궁금증으로 클릭 유발. "의외의 OO", "이 OO", "톱스타 OO", "OO의 정체" 활용. ⛔ 입력 자료에 명시된 실제 사실만 사용 — 인물 정보·이력 날조 절대 금지. 28~42자.',
     example: "'이 정도 학력일 줄은 몰랐다' 서울대 출신의 의외의 방송인"
   },
   {
     id: 'hf_quote_fragment', name: '㉗인용파편형',
-    instruction: '충격적인 대사·반응 한 조각을 따옴표로 앞세우고 말줄임표(..)로 긴장을 만든 뒤 핵심 정보·궁금증으로 잇기. "인용파편.." + 핵심 + 꼬리 구조. ⛔ 입력 자료에 있는 실제 발언·사실만 사용, 날조 금지. 28~55자.',
+    instruction: '맥락을 바꾸는 실제 발언 한 조각을 따옴표로 제시하고 핵심 정보·질문으로 잇는다. 자극적으로 왜곡하거나 말줄임표를 습관처럼 쓰지 않는다. ⛔ 입력 자료에 있는 실제 발언·사실만 사용, 날조 금지. 28~42자.',
     example: '"속옷 안 팔린다더니.." 직접 모델 도전, 반전 근황은'
   },
 ];
 
 // ✅ [홈판 이슈픽] 자료(URL/뉴스/RAG) 없이는 환각 위험이 커 선택에서 제외되는 공식.
 //   selectTitleFormula(hasSource=false)일 때 스킵 — 실존 인물 사실 날조 차단.
-export const SOURCE_REQUIRED_FORMULA_IDS = ['hf_hidden_identity', 'hf_quote_fragment'];
+export const SOURCE_REQUIRED_FORMULA_IDS = [
+  'concrete_result', 'loss_aversion', 'timeline',
+  'hf_others_reaction', 'hf_comments', 'hf_spread', 'hf_numeric_proof',
+  'hf_conflict_against', 'hf_named_event', 'hf_loss_warning', 'hf_current_buzz',
+  'hf_hidden_identity', 'hf_quote_fragment',
+];
+
+// 작성자 본인의 실제 경험 메모가 있을 때만 선택할 수 있는 제목 공식.
+// URL·뉴스·구매자 리뷰는 근거 자료일 뿐 작성자의 1인칭 경험이 아니다.
+export const FIRST_PARTY_REQUIRED_FORMULA_IDS = [
+  'first_person',
+  'hf_duration_exp', 'hf_direct_exp', 'hf_before_after', 'hf_accumulated',
+  'hf_comparison', 'hf_me_too', 'hf_confession', 'hf_final_choice',
+  'af_comma_link', 'af_duration', 'af_switch', 'af_gift', 'af_proscons',
+];
 
 // ✅ [2026-03-13] 쇼핑커넥트 전용 제목 공식 8개 — 제품 후기 최적화
 export const AFFILIATE_TITLE_FORMULAS: TitleFormula[] = [

@@ -1,32 +1,19 @@
-// Home-feed exposure skeleton — the verified body structure of posts that actually reached
-// Naver's home feed top slots (decoded from 20 live top-exposure posts).
-//
-// This is injected into the BASE homefeed prompt (buildFullPrompt), so EVERY engine
-// (Gemini/OpenAI/Claude/Perplexity/agent) and EVERY flow (반자동/풀오토/연속/다중계정) gets it
-// through the single shared pipeline — not just the agent path.
-//
-// Conflict note: the casual tone tables (e.g. community_fan) push "ㄹㅇ·찐 호들갑 어휘". The real
-// winners are calm. So point 4 keeps the tone's 어미/문체 but caps interjection frequency — it
-// governs frequency, not voice, to avoid fighting [STYLE OVERRIDE].
+// Shared Homefeed body principles. This block is injected through buildFullPrompt so
+// API and agent engines use the same evidence-first structure in every publishing flow.
 
-/**
- * Build the home-feed exposure skeleton block for direct LLM consumption.
- * Appended late in the homefeed prompt for recency. Category-agnostic structure;
- * the hidden-identity step (2) only triggers when the title withholds the subject.
- */
+/** Build the late Homefeed guidance block used by every content engine. */
 export function buildHomefeedExposureSkeleton(): string {
   return `
 ═══════════════════════════════════════════
-🏠 [홈판 상위노출 본문 골격 — 실측 패턴, 반드시 그대로 따를 것]
+🏠 [홈판 상위노출 본문 원칙 - 근거 우선, 주제별 적용]
 ═══════════════════════════════════════════
-실제 네이버 홈피드 상단에 노출된 글들의 공통 구조입니다.
 
-1. 도입 4단 구성: [일반 관찰/상황] → [반전·긴장] → [주인공·핵심 호명] → [읽을 이유 약속]
-2. 제목이 정체를 숨긴 경우(예: "의외의 연예인", "톱스타 여배우"), 본문 첫 단락에서 바로 누구/무엇인지 공개해 호기심을 즉시 해소
-3. 단락은 1~3문장으로 짧게 끊고, 단락 사이를 비워 모바일 가독성을 확보
-4. [STYLE OVERRIDE]의 어미·문체는 그대로 유지하되, 호들갑·감탄사 "빈도"만 이 골격을 우선 적용해 절제: 과한 감탄("헐/ㄹㅇ/와/대박/미쳤다")은 상위노출 글에서 오히려 드뭅니다. 추임새·감탄사는 글 전체 3회 이하
-5. 소제목은 호기심형(질문·대비)으로 달되, 본문 첫 1~2문장에서 그 소제목의 질문에 바로·정확히 답한다. 줄듯 말듯 미루기·어영부영 마무리·핵심을 다음 소제목으로 넘기기 금지 — [핵심 답 먼저] → [맥락·디테일로 살 붙이기]. 각 소제목은 서로 다른 정보 단위(같은 결론 반복 금지)
-6. 구체 팩트·숫자·고유명사로 신뢰와 흥미를 동시에 (입력 자료에 있는 사실만 — 날조 절대 금지). "자료를 보면/확인해보면" 같은 근거 표현을 매 문장 붙이진 말되, 확인된 사실만 단정한다(출처는 꼭 필요한 1~2곳만). ⚠️ 실존 인물의 미확인 사생활·범죄·의혹(열애·이혼·학폭·마약 등)은 단정도 암시도 하지 말 것 — 확정 안 된 부정 사안은 "확인 안 됨"으로 완화하지 말고 아예 빼라(허위조작정보법 위반 소지). 공식 발표·판결 등 확정된 사실만 다룬다
-7. 마무리는 요약 한 줄 + 독자에게 묻는 댓글 유도 문장("여러분은 ~ 어떠셨나요?")
+1. 첫 화면에서 독자의 구체 상황과 핵심 답을 함께 보여준다. 반전이나 감정 장면이 어울리지 않는 주제에는 억지로 넣지 않는다.
+2. 제목이 주체를 생략했다면 본문 첫 단락에서 바로 공개한다. 클릭을 위해 불필요하게 정체나 결론을 숨기지 않는다.
+3. 모바일 문단은 보통 1~3문장으로 쓰되, 완결된 생각을 줄 수에 맞추려고 자르지 않는다.
+4. [STYLE OVERRIDE]의 어미·문체는 유지하되 호들갑, 감탄사, 유행어로 사람을 흉내 내지 않는다. 표현 개수보다 문맥과 자연스러움을 우선한다.
+5. 소제목은 질문·기준·비교·주의점 등 내용에 맞게 변주하고, 첫 1~2문장에서 그 소제목의 핵심 답을 준다. 각 소제목은 서로 다른 정보 단위를 맡는다.
+6. 구체 팩트·숫자·고유명사는 입력 자료와 정확히 일치할 때만 사용한다. 자료 없는 경험·타인 반응·공식성·최신성을 날조하지 않는다. 실존 인물의 미확인 사생활·범죄·의혹은 단정하거나 암시하지 않는다.
+7. 마무리는 핵심 판단을 짧게 정리한다. 댓글·저장·공유 유도는 독자에게 실제 도움이 되고 자연스러울 때만 하나를 선택하며, 필요 없으면 넣지 않는다.
 ═══════════════════════════════════════════`;
 }

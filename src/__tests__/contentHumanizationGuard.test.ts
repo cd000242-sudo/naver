@@ -89,7 +89,11 @@ describe('회귀방지 net: 사람다움/AI탐지 분별력', () => {
 
   describe('evaluateHumanlike', () => {
     it('사람스러운 본문이 AI스러운 본문보다 사람다움 점수가 높다', () => {
-      const human = evaluateHumanlike({ body: HUMAN_LIKE, mode: 'seo' });
+      const human = evaluateHumanlike({
+        body: HUMAN_LIKE,
+        mode: 'seo',
+        firstPartyEvidenceAvailable: true,
+      });
       const ai = evaluateHumanlike({ body: AI_LIKE, mode: 'seo' });
       expect(human.score).toBeGreaterThan(ai.score);
     });

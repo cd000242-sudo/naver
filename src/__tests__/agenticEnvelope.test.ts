@@ -34,7 +34,7 @@ describe('wrapAsAgenticTask', () => {
   it('names the quality rubric the agent must self-critique against', () => {
     const wrapped = wrapAsAgenticTask(base);
     expect(wrapped).toContain('상투어');
-    expect(wrapped).toContain('E-E-A-T');
+    expect(wrapped).toContain('입력 근거와 일치');
     expect(wrapped).toContain('JSON 스키마');
   });
 
@@ -64,11 +64,11 @@ describe('wrapAsAgenticTask', () => {
     expect(wrapAsAgenticTask(base, 'photo')).toContain('사진');
   });
 
-  it('homefeed focus references the base body skeleton (no duplication) for self-critique', () => {
+  it('homefeed focus preserves evidence-aware mobile rhythm without forced engagement', () => {
     const hf = wrapAsAgenticTask(base, 'homefeed');
-    expect(hf).toContain('홈판 상위노출 본문 골격'); // self-critique against the base-prompt skeleton
-    expect(hf).toContain('추임새 절제');
-    expect(hf).toContain('댓글 CTA');
+    expect(hf).toContain('사용자 경험 메모가 없으면 작성자 체험을 만들지 않았는가');
+    expect(hf).toContain('짧은 단락과 변별된 소제목');
+    expect(hf).toContain('댓글·저장·공유를 기계적으로 모두 요구하지 않았는가');
   });
 
   it('normalizes mode aliases (shopping -> affiliate, image-narrative -> photo)', () => {

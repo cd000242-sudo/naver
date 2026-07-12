@@ -85,8 +85,11 @@ describe('tone persona naturalness', () => {
     expect(prompt).toContain('내 얘기 같은 첫 화면');
     expect(prompt).toContain('저장할 이유');
     expect(prompt).toContain('댓글 달 거리');
-    expect(prompt).toContain('스크롤 정지 문장');
+    expect(prompt).toContain('구체적인 독자 상황 또는 판단 기준');
+    expect(prompt).toContain('억지로 넣지 않는다');
     expect(prompt).toContain('모바일 피드 리듬');
+    expect(prompt.lastIndexOf('■ 근거 제한 (페르소나보다 우선)'))
+      .toBeGreaterThan(prompt.lastIndexOf('■ 페르소나:'));
     expect(prompt).not.toContain('이모지 3~5개');
     expect(prompt).not.toContain('격식 0%, 수다 리듬 우선');
   });

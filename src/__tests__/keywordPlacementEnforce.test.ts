@@ -1,7 +1,7 @@
 /**
  * keywordPlacementEnforce.test.ts
  *
- * SPEC-KEYWORD-ENDGAME Phase 1 — 키워드 배치 "경고만" → 강제 검증.
+ * 키워드 배치 helper의 하위 호환성과 실제 생성 경로의 비강제 정책을 함께 검증한다.
  * (1) 제목 앞3자: "토큰이 어디든 있으면 스킵" 조기탈출이 앞3자 요건을 뚫던 구멍을
  *     ensureFront3 옵션이 닫는다(SEO 모드). 기존(옵션 없음) 동작은 불변 잠금.
  * (2) 서론 첫100자·결론: 키워드 미배치 시 콤마 리드인 강제 + 멱등성.
@@ -75,11 +75,11 @@ describe('서론/결론 키워드 강제 (콤마 리드인)', () => {
   });
 });
 
-describe('finalize 배선 잠금 (SEO 게이트)', () => {
-  it('contentGenerator가 ensureFront3 + enforceIntroConclusionKeyword를 SEO 모드 게이트로 호출한다', () => {
+describe('finalize 배선 잠금 (의도 우선 SEO)', () => {
+  it('contentGenerator는 제목·서론·결론에 키워드를 강제 재배치하지 않는다', () => {
     const src = readFileSync(join(__dirname, '..', 'contentGenerator.ts'), 'utf8');
-    expect(src).toContain('ensureFront3: _isSeoModeForKw');
-    expect(src).toContain('enforceIntroConclusionKeyword');
-    expect(src).toContain("(source.contentMode || 'seo') === 'seo'");
+    expect(src).not.toContain('ensureFront3: _isSeoModeForKw');
+    expect(src).not.toContain('enforceIntroConclusionKeyword(finalContent, primaryKeyword)');
+    expect(src).toContain('applyKeywordPrefixToStructuredContent(finalContent, primaryKeyword);');
   });
 });
