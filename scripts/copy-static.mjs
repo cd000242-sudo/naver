@@ -1,6 +1,7 @@
 import { cp, mkdir, access, readFile, writeFile, readdir } from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { sanitizeRendererRuntimeDependency } from './rendererRuntimeDependencyInline.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -338,6 +339,30 @@ try {
   // utils에 components 추가
   utilsSource += componentsSource;
 
+  // Renderer modules import these shared image-policy files from outside
+  // src/renderer. The CommonJS concatenator removes require(), so their
+  // implementations must be inlined before every renderer consumer.
+  const rendererRuntimeDependencyFiles = [
+    {
+      label: 'image/referenceImagePolicy.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'referenceImagePolicy.js'),
+    },
+    {
+      label: 'image/shoppingReferenceGeneration.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'shoppingReferenceGeneration.js'),
+    },
+  ];
+
+  let rendererRuntimeDependencySource = '';
+  for (const dependency of rendererRuntimeDependencyFiles) {
+    await access(dependency.filePath);
+    const content = sanitizeRendererRuntimeDependency(
+      await readFile(dependency.filePath, 'utf-8'),
+    );
+    rendererRuntimeDependencySource += `\n// ===== ${dependency.label} inlined =====\n${content}\n`;
+    console.log(`Inlined ${dependency.label}`);
+  }
+
   // ✅ [2026-02-24] modules 디렉토리 인라인 (renderer.ts에서 추출된 대규모 모듈)
   const modulesDir = path.join(projectRoot, 'dist', 'renderer', 'modules');
   const modulesFiles = [
@@ -410,7 +435,7 @@ try {
       'contentPolicyDashboard.js',
       'revenueOperationsDashboard.js',
   ];
-  let modulesSource = '';
+  let modulesSource = rendererRuntimeDependencySource;
   for (const modFile of modulesFiles) {
     const modPath = path.join(modulesDir, modFile);
     try {
@@ -751,6 +776,14 @@ ${sanitized}`;
   const REQUIRED_RENDERER_RUNTIME_SYMBOLS = [
     'collapseDuplicateLeadingYearTitle',
     'applyKeywordPrefixToTitle',
+    'deduplicateReferenceImages',
+    'extractShoppingReferenceSource',
+    'isShoppingReferenceImageEngine',
+    'resolveShoppingImageGenerationPolicy',
+    'resolveShoppingRepresentativeReference',
+    'resolveShoppingCollectedImagePlacement',
+    'resolveUsableShoppingReferenceSource',
+    'createShoppingRepresentativeThumbnail',
   ];
   const missingRuntimeSymbols = REQUIRED_RENDERER_RUNTIME_SYMBOLS.filter((symbol) => {
     const escaped = symbol.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

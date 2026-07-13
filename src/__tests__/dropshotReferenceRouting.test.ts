@@ -49,10 +49,10 @@ describe('dropshot reference image routing', () => {
   it('keeps main IPC references URL-first and representative-only for shopping connect', () => {
     const main = readSource('src/main.ts');
 
-    expect(main).toContain('const representativeUrl = extractReferenceImageUrl(representativeImage);');
-    expect(main).toContain('referenceImageUrl: representativeUrl');
-    expect(main).toContain('referenceImagePath: representativeUrl');
-    expect(main).toContain('referenceImageList: [representativeUrl]');
+    expect(main).toContain('const shoppingReference = resolveShoppingRepresentativeReference(collectedImages);');
+    expect(main).toContain('const representativeUrl = shoppingReference.referenceUrl;');
+    expect(main).toContain('applyShoppingRepresentativeReference(options.items, representativeUrl)');
+    expect(main).not.toContain('if (item.referenceImagePath || item.referenceImageUrl) return');
     expect(main).toContain(".filter((url: string) => /^https?:\\/\\//i.test(String(url || '')))");
   });
 });

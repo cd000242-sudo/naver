@@ -5,6 +5,8 @@
 // defined HERE and nowhere else; three flows must never interpret the same
 // key with different defaults again.
 
+import { isShoppingReferenceImageEngine } from '../../image/shoppingReferenceGeneration.js';
+
 export type PipelineFlow = 'full-auto' | 'continuous' | 'multi-account';
 export type ShoppingSubImageMode = 'ai' | 'collected';
 
@@ -141,6 +143,7 @@ const DEFAULT_FTC_DISCLOSURE_TEXT =
   '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.';
 
 const SHOPPING_AI_ENGINE_NAMES = new Set([
+  'nano-banana',
   'nano-banana-pro',
   'nano-banana-2',
   'openai-image',
@@ -156,6 +159,40 @@ const SHOPPING_AI_ENGINE_NAMES = new Set([
   'flow',
   'dropshot',
 ]);
+
+const DEFAULT_SHOPPING_REFERENCE_ENGINE = 'nano-banana-2';
+
+const SHOPPING_ENGINE_ALIASES: Readonly<Record<string, string>> = {
+  'gpt-image-2': 'openai-image',
+};
+
+function normalizeShoppingConnectAIEngineCandidate(value: unknown): string {
+  const raw = String(value || '').trim();
+  const normalized = SHOPPING_ENGINE_ALIASES[raw] || raw;
+  return isShoppingReferenceImageEngine(normalized) ? normalized : '';
+}
+
+export function normalizeShoppingConnectAIEngine(value: unknown): string {
+  return normalizeShoppingConnectAIEngineCandidate(value) || DEFAULT_SHOPPING_REFERENCE_ENGINE;
+}
+
+export function resolveShoppingConnectAIEngineFromRaw(
+  raw: Pick<
+    RawPipelineSettings,
+    'scAIImageEngine' | 'scSubImageSource' | 'fullAutoImageSource' | 'globalImageSource'
+  >,
+): string {
+  for (const candidate of [
+    raw.scAIImageEngine,
+    raw.scSubImageSource,
+    raw.fullAutoImageSource,
+    raw.globalImageSource,
+  ]) {
+    const normalized = normalizeShoppingConnectAIEngineCandidate(candidate);
+    if (normalized) return normalized;
+  }
+  return DEFAULT_SHOPPING_REFERENCE_ENGINE;
+}
 
 function normalizeShoppingSubImageMode(raw: RawPipelineSettings): ShoppingSubImageMode {
   const explicit = raw.scSubImageMode;
@@ -191,7 +228,7 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
     },
     shopping: {
       subImageMode: normalizeShoppingSubImageMode(raw),
-      aiImageEngine: raw.scAIImageEngine || 'nano-banana-pro',
+      aiImageEngine: resolveShoppingConnectAIEngineFromRaw(raw),
       autoThumbnail: raw.scAutoThumbnailSetting === 'true',
     },
     disclosure: {
@@ -261,7 +298,8 @@ export function createPipelineFormDataSnapshot<T extends Record<string, any>>(
     subheadingImageRatio: nonEmptyString(input?.subheadingImageRatio, config.image.subheadingImageRatio),
     imageFallbackPolicy: nonEmptyString(input?.imageFallbackPolicy, config.image.fallbackPolicy),
     scSubImageMode,
-    scAIImageEngine: nonEmptyString(input?.scAIImageEngine, config.shopping.aiImageEngine),
+    scAIImageEngine: normalizeShoppingConnectAIEngineCandidate(input?.scAIImageEngine)
+      || config.shopping.aiImageEngine,
     scAutoThumbnailSetting: typeof input?.scAutoThumbnailSetting === 'boolean'
       ? input.scAutoThumbnailSetting
       : config.shopping.autoThumbnail,

@@ -3,6 +3,11 @@
 "use strict";
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
+import {
+    createShoppingRepresentativeThumbnail,
+    resolveShoppingRepresentativeReference,
+    resolveUsableShoppingReferenceSource,
+} from '../../image/shoppingReferenceGeneration.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initMultiAccountManager = initMultiAccountManager;
 exports.generateImagesForAutomation = generateImagesForAutomation;
@@ -433,7 +438,22 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         console.warn(`[generateImagesForAutomation] ⚠️ provider가 유효하지 않음("${provider}")! fallback 적용: "${fallbackProvider}"`);
         provider = fallbackProvider;
     }
-    const includeThumbnailText = options.thumbnailTextInclude ?? options.allowThumbnailText ?? false;
+    const isShoppingConnect = options.isShoppingConnect === true;
+    const shoppingReference = isShoppingConnect
+        ? resolveShoppingRepresentativeReference(options.collectedImages || [], options.referenceImagePath)
+        : { representative: null, referenceUrl: '' };
+    const usableShoppingReferenceUrl = isShoppingConnect
+        ? await resolveUsableShoppingReferenceSource(
+            shoppingReference.representative,
+            window.api.checkFileExists,
+        )
+        : '';
+    if (isShoppingConnect && !usableShoppingReferenceUrl) {
+        throw new Error('쇼핑커넥트 대표 상품 이미지가 없어 원본 썸네일과 소제목 AI 이미지를 만들 수 없습니다.');
+    }
+    const includeThumbnailText = isShoppingConnect
+        ? false
+        : (options.thumbnailTextInclude ?? options.allowThumbnailText ?? false);
     console.log(`[generateImagesForAutomation] 🖼️ allowThumbnailText = ${includeThumbnailText}, provider = ${provider}`);
     // [SPEC-STABILITY-2026 R4 diagnostics] Tag every generation run so
     // overlapping runs for the same post are visible in user logs, and record
@@ -526,7 +546,11 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             isThumbnail: isThumb,
             originalIndex: headingIdx,
             allowText: isThumb ? includeThumbnailText : false,
-            referenceImagePath: h.referenceImagePath || options.referenceImagePath
+            referenceImagePath: isShoppingConnect
+                ? usableShoppingReferenceUrl
+                : (h.referenceImagePath || options.referenceImagePath),
+            referenceImageUrl: isShoppingConnect ? usableShoppingReferenceUrl : undefined,
+            referenceImageList: isShoppingConnect ? [usableShoppingReferenceUrl] : undefined,
         });
     }
     if (items.length === 0 && postTitle) {
@@ -536,7 +560,9 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             isThumbnail: true,
             originalIndex: 0,
             allowText: includeThumbnailText,
-            referenceImagePath: options.referenceImagePath
+            referenceImagePath: isShoppingConnect ? usableShoppingReferenceUrl : options.referenceImagePath,
+            referenceImageUrl: isShoppingConnect ? usableShoppingReferenceUrl : undefined,
+            referenceImageList: isShoppingConnect ? [usableShoppingReferenceUrl] : undefined,
         });
     }
     const itemsForGeneration = getSequentialImageItemsForMode(items, _headingImageMode);
@@ -572,6 +598,14 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
     const sequentialImages = [];
     for (let itemIndex = 0; itemIndex < itemsForGeneration.length; itemIndex++) {
         const item = itemsForGeneration[itemIndex];
+        if (isShoppingConnect && item.isThumbnail === true) {
+            sequentialImages.push(createShoppingRepresentativeThumbnail(
+                usableShoppingReferenceUrl,
+                item.heading || postTitle,
+            ));
+            onProgress?.(`🛒 [${itemIndex + 1}/${_displayCount}] 대표 상품 원본을 썸네일로 배치했습니다.`);
+            continue;
+        }
         let itemSucceeded = false;
         for (let attempt = 1; attempt <= MAX_RETRIES && !itemSucceeded; attempt++) {
             try {
@@ -595,6 +629,7 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
                     regenerate: false,
                     referenceImagePath: item.referenceImagePath || options.referenceImagePath,
                     collectedImages: options.collectedImages,
+                    isShoppingConnect,
                     thumbnailTextInclude: item.isThumbnail === true ? includeThumbnailText : false,
                     headingImageMode: 'all',
                     imageFallbackPolicy: 'engine-only',
@@ -2061,7 +2096,7 @@ async function initMultiAccountPublishModal() {
         radio.addEventListener('change', (e) => {
             const value = e.target.value;
             setSubImageMode(value === 'collected' ? 'collected' : 'ai');
-            if (value === 'nano-banana' || value === 'nano-banana-2' || value === 'nano-banana-pro' || value === 'openai-image' || value === 'flow' || value === 'prodia') {
+            if (value === 'nano-banana-2' || value === 'openai-image' || value === 'dropshot') {
                 localStorage.setItem('scAIImageEngine', value);
                 localStorage.setItem('fullAutoImageSource', value);
                 localStorage.setItem('globalImageSource', value);
@@ -3217,7 +3252,12 @@ async function initMultiAccountPublishModal() {
                         ? [{ title: structuredContent.selectedTitle || '🖼️ 썸네일', content: structuredContent.introduction, isThumbnail: true, isIntro: true }, ...rawHeadingsMA]
                         : rawHeadingsMA;
                     try {
-                        const imageSource = queueItem.imageSource || getFullAutoImageSource();
+                        const scSubImageModePre = itemPipelineCfg.shopping.subImageMode;
+                        const isShoppingAiMode = queueItem.contentMode === 'affiliate' && scSubImageModePre === 'ai';
+                        const imageSource = isShoppingAiMode
+                            ? itemPipelineCfg.shopping.aiImageEngine
+                            : (queueItem.imageSource || getFullAutoImageSource());
+                        let shoppingCollectedImages = [];
                         const skipImages = queueItem.skipImages === true
                             || (window.isImageSkipEnabled?.() === true)
                             || imageSource === 'skip';
@@ -3232,7 +3272,9 @@ async function initMultiAccountPublishModal() {
                                         url: imgUrl,
                                         filePath: imgUrl,
                                         heading: idx === 0 ? '대표 이미지' : `제품 이미지 ${idx + 1}`,
-                                        provider: 'collected'
+                                        provider: 'collected',
+                                        source: idx === 0 ? 'product-main' : 'product-gallery',
+                                        isRepresentative: idx === 0,
                                     }));
                                     if (structuredContent) {
                                         if (typeof saveCollectedShoppingImagesToLocal === 'function') {
@@ -3247,6 +3289,23 @@ async function initMultiAccountPublishModal() {
                                         structuredContent.collectedImages = generatedImages;
                                         structuredContent.images = [...generatedImages];
                                         window.currentStructuredContent = structuredContent;
+                                    }
+                                    shoppingCollectedImages = [...generatedImages];
+                                    if (isShoppingAiMode) {
+                                        generatedImages = [];
+                                        addMALog('🛒 대표이미지는 원본 썸네일과 AI 소제목 이미지의 참조로만 사용합니다.', 'info');
+                                    }
+                                    else if (generatedImages.length > 0) {
+                                        const collectedReference = resolveShoppingRepresentativeReference(generatedImages);
+                                        const collectedReferenceUrl = await resolveUsableShoppingReferenceSource(
+                                            collectedReference.representative,
+                                            window.api.checkFileExists,
+                                        );
+                                        generatedImages = [...collectedReference.images];
+                                        generatedImages[0] = createShoppingRepresentativeThumbnail(
+                                            collectedReferenceUrl,
+                                            structuredContent.selectedTitle || '쇼핑 대표 썸네일',
+                                        );
                                     }
                                     addMALog(`✅ 제품 이미지 ${collectResult.images.length}장 수집 완료`, 'success');
                                     addProgressItem(`   ✅ 제품 이미지 ${collectResult.images.length}장 수집 완료`, 'success');
@@ -3263,7 +3322,6 @@ async function initMultiAccountPublishModal() {
                                 addMALog(`⚠️ 이미지 수집 오류: ${collectError.message?.substring(0, 50)} - AI 이미지로 대체`, 'warning');
                             }
                         }
-                        const scSubImageModePre = itemPipelineCfg.shopping.subImageMode;
                         if (generatedImages.length > 0 && queueItem.contentMode === 'affiliate') {
                             const shouldMatchCollected = scSubImageModePre === 'collected';
                             if (shouldMatchCollected && (structuredContent.headings || []).length > 0) {
@@ -3289,7 +3347,7 @@ async function initMultiAccountPublishModal() {
                                     console.error('[FullAuto] 이미지 매칭 실패:', matchErr);
                                 }
                             }
-                            if (queueItem.includeThumbnailText && generatedImages.length > 0) {
+                            if (queueItem.contentMode !== 'affiliate' && queueItem.includeThumbnailText && generatedImages.length > 0) {
                                 try {
                                     const thumbnailImg = generatedImages[0];
                                     const thumbnailPath = typeof thumbnailImg === 'string'
@@ -3314,6 +3372,15 @@ async function initMultiAccountPublishModal() {
                                 }
                             }
                         }
+                        const shoppingReference = isShoppingAiMode
+                            ? resolveShoppingRepresentativeReference(shoppingCollectedImages)
+                            : { representative: null, referenceUrl: '', images: [] };
+                        const shoppingReferencePath = isShoppingAiMode
+                            ? await resolveUsableShoppingReferenceSource(
+                                shoppingReference.representative,
+                                window.api.checkFileExists,
+                            ) || undefined
+                            : undefined;
                         const alreadyHasImages = generatedImages.length > 0;
                         if (skipImages) {
                             addMALog('⏭️ 이미지 생성 건너뛰기 (사용자 설정)', 'info');
@@ -3353,8 +3420,11 @@ async function initMultiAccountPublishModal() {
                                 flightScope: queueItem.accountId || queueItem.id,
                                 headingImageMode: itemPipelineCfg.image.headingImageMode,
                                 fallbackProvider: resolveImageProviderFallback(),
-                                allowThumbnailText: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
-                                thumbnailTextInclude: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
+                                allowThumbnailText: isShoppingAiMode ? false : (itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText),
+                                thumbnailTextInclude: isShoppingAiMode ? false : (itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText),
+                                isShoppingConnect: queueItem.contentMode === 'affiliate',
+                                collectedImages: isShoppingAiMode ? shoppingReference.images : undefined,
+                                referenceImagePath: isShoppingAiMode ? shoppingReferencePath : undefined,
                                 stopCheck: () => stopRequested || window.stopFullAutoPublish,
                                 onProgress: (msg) => {
                                     addMALog(msg, 'info');
@@ -3373,8 +3443,11 @@ async function initMultiAccountPublishModal() {
                                 flightScope: queueItem.accountId || queueItem.id,
                                 headingImageMode: itemPipelineCfg.image.headingImageMode,
                                 fallbackProvider: resolveImageProviderFallback(),
-                                allowThumbnailText: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
-                                thumbnailTextInclude: itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText,
+                                allowThumbnailText: isShoppingAiMode ? false : (itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText),
+                                thumbnailTextInclude: isShoppingAiMode ? false : (itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText),
+                                isShoppingConnect: queueItem.contentMode === 'affiliate',
+                                collectedImages: isShoppingAiMode ? shoppingReference.images : undefined,
+                                referenceImagePath: isShoppingAiMode ? shoppingReferencePath : undefined,
                                 stopCheck: () => stopRequested || window.stopFullAutoPublish,
                                 onProgress: (msg) => {
                                     addMALog(msg, 'info');
@@ -3387,6 +3460,11 @@ async function initMultiAccountPublishModal() {
                     catch (imgErr) {
                         console.error('[FullAuto] 이미지 생성 중 오류:', imgErr);
                         addMALog(`⚠️ 이미지 생성 중 오류 발생: ${imgErr.message}`, 'warning');
+                        const shoppingAiImagesRequired = queueItem.contentMode === 'affiliate' && itemPipelineCfg.shopping.subImageMode === 'ai';
+                        if (shoppingAiImagesRequired) {
+                            addMALog('❌ 쇼핑커넥트 AI 이미지 생성에 실패해 발행을 중단합니다. 대표이미지와 선택한 이미지 엔진을 확인해주세요.', 'error');
+                            throw imgErr;
+                        }
                     }
                     try {
                         if (Array.isArray(generatedImages) && generatedImages.length > 0) {

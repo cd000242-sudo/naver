@@ -9,6 +9,7 @@ type SanitizableHeading = {
 type SanitizableContent = {
   selectedTitle?: string;
   title?: string;
+  content?: string;
   introduction?: string;
   conclusion?: string;
   bodyPlain?: string;
@@ -79,6 +80,27 @@ export function stripFakeSourcePhrases(text: string): string {
     .trim();
 
   return out;
+}
+
+/**
+ * Removes machine-like inline citation labels from publishable prose.
+ * Natural attribution such as "보건복지부 자료에 따르면" is intentionally kept.
+ */
+export function stripInlineSourceMarkers(text: string): string {
+  if (!text) return text;
+
+  return text
+    .replace(/[\[［【]\s*출처\s*[:：]\s*[^\]］】\r\n]{1,300}[\]］】]/g, ' ')
+    .replace(/\(\s*출처\s*[:：]\s*[^)\r\n]{1,300}\)/g, ' ')
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/[ \t]+([,.;:!?。，；：！？])/g, '$1')
+    .replace(/[ \t]+\r?\n/g, '\n')
+    .replace(/\r?\n[ \t]+/g, '\n')
+    .trim();
+}
+
+export function sanitizePublishableSourceText(text: string): string {
+  return stripInlineSourceMarkers(stripFakeSourcePhrases(text));
 }
 
 export function stripMetaCritiqueLines(s: string | undefined): string | undefined {
@@ -176,15 +198,18 @@ export function sanitizeContentFakeSources(content: SanitizableContent): number 
   let count = 0;
   const tryFix = (s: string | undefined): string | undefined => {
     if (!s) return s;
-    const fixed = stripFakeSourcePhrases(s);
+    const fixed = sanitizePublishableSourceText(s);
     if (fixed !== s) count++;
     return fixed;
   };
 
   if (content.selectedTitle) content.selectedTitle = tryFix(content.selectedTitle)!;
   if (content.title) content.title = tryFix(content.title);
+  if (content.content) content.content = tryFix(content.content);
   if (content.introduction) content.introduction = tryFix(content.introduction)!;
   if (content.conclusion) content.conclusion = tryFix(content.conclusion)!;
+  if (content.bodyPlain) content.bodyPlain = tryFix(content.bodyPlain);
+  if (content.bodyHtml) content.bodyHtml = tryFix(content.bodyHtml);
   if (Array.isArray(content.headings)) {
     for (const h of content.headings) {
       if (h.title) h.title = tryFix(h.title);
@@ -198,4 +223,16 @@ export function sanitizeContentFakeSources(content: SanitizableContent): number 
   }
 
   return count;
+}
+
+export function sanitizeContentFakeSourcesCopy<T extends SanitizableContent>(content: T): T {
+  const copy = {
+    ...content,
+    ...(Array.isArray(content.headings)
+      ? { headings: content.headings.map(heading => ({ ...heading })) }
+      : {}),
+  } as T;
+
+  sanitizeContentFakeSources(copy);
+  return copy;
 }

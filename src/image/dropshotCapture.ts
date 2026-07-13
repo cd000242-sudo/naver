@@ -433,6 +433,7 @@ async function makeDropshotImageInternal(
   prompt: string,
   options: {
     referenceImageList?: string[];
+    requireReferenceImage?: boolean;
   } = {},
   onLog?: (m: string) => void,
   capturedEpoch = getDropshotGenerationEpoch(),
@@ -473,6 +474,7 @@ async function makeDropshotImageInternal(
 
         // 2. i2i mode — upload reference images via setInputFiles
         const refList = (options.referenceImageList || []).slice(0, 4);
+        let referenceUploaded = false;
         if (refList.length > 0) {
           onLog?.(
             `[리더스 나노바나나] reference ${refList.length}장 업로드 중...`,
@@ -495,6 +497,7 @@ async function makeDropshotImageInternal(
             if (fileInput) {
               try {
                 await fileInput.setInputFiles(buffers);
+                referenceUploaded = true;
                 onLog?.(
                   `[리더스 나노바나나] reference ${buffers.length}장 업로드 완료`,
                 );
@@ -507,10 +510,16 @@ async function makeDropshotImageInternal(
               }
             } else {
               onLog?.(
-                '[리더스 나노바나나] reference 업로드 input 못 찾음 → 텍스트→이미지로 진행',
+                options.requireReferenceImage
+                  ? '[리더스 나노바나나] reference 업로드 input을 찾지 못해 쇼핑 이미지 생성을 중단합니다.'
+                  : '[리더스 나노바나나] reference 업로드 input 못 찾음 → 텍스트→이미지로 진행',
               );
             }
           }
+        }
+
+        if (options.requireReferenceImage && !referenceUploaded) {
+          throw new Error('SHOPPING_REFERENCE_UPLOAD_FAILED: 대표 상품 이미지 업로드를 확인하지 못해 text-to-image 대체 없이 중단했습니다.');
         }
 
         // 3. Fill the visible prompt input. Do not depend on a fixed Korean
@@ -602,7 +611,7 @@ async function makeDropshotImageInternal(
  */
 export async function makeDropshotImage(
   prompt: string,
-  options: { referenceImageList?: string[] } = {},
+  options: { referenceImageList?: string[]; requireReferenceImage?: boolean } = {},
   onLog?: (m: string) => void,
 ): Promise<DropshotResult> {
   if (!tryBeginDropshotGeneration()) {

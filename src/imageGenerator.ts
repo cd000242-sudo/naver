@@ -26,8 +26,18 @@ import { getImageErrorMessage } from './image/imageErrorMessages.js';
 import {
   deduplicateReferenceImages,
   extractReferenceImageUrl,
-  selectRepresentativeReferenceImage,
 } from './image/referenceImagePolicy.js';
+import {
+  applyShoppingRepresentativeReference,
+  buildShoppingReferencePrompt,
+  createShoppingRepresentativeThumbnail,
+  isShoppingReferenceImageEngine,
+  resolveShoppingRepresentativeReference,
+} from './image/shoppingReferenceGeneration.js';
+import {
+  buildAppManagedReferenceImageRoots,
+  loadReferenceImageData,
+} from './image/referenceImageLoader.js';
 import { thumbnailService } from './thumbnailService.js';
 import { AutomationService } from './main/services/AutomationService.js'; // ✅ [2026-01-29 FIX] 중지 체크용
 import * as fs from 'fs/promises';
@@ -109,6 +119,26 @@ function collectReferenceImageUrls(...sources: unknown[]): string[] {
   return deduplicateReferenceImages(candidates)
     .map(extractReferenceImageUrl)
     .filter(Boolean);
+}
+
+async function resolveManagedReferenceImageRoots(): Promise<string[]> {
+  let customImageSavePath = '';
+  let userDataRoot = '';
+  let tempRoot = '';
+  try {
+    const { loadConfig } = await import('./configManager.js');
+    customImageSavePath = String((await loadConfig()).customImageSavePath || '').trim();
+  } catch {
+    // Default managed roots remain available when config is not initialized.
+  }
+  try {
+    const electronApp = (await import('electron')).app;
+    userDataRoot = electronApp.getPath('userData');
+    tempRoot = electronApp.getPath('temp');
+  } catch {
+    // Tests and non-Electron callers use the default managed roots.
+  }
+  return buildAppManagedReferenceImageRoots(customImageSavePath, userDataRoot, tempRoot);
 }
 
 function annotateEngineTrace(
@@ -358,13 +388,45 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     uniqueCollectedImages,
     options.referenceImagePath,
   );
-  const representativeCandidate = selectRepresentativeReferenceImage([
+  const shoppingItemReferenceCandidates = options.isShoppingConnect
+    ? options.items.flatMap(item => [
+        item.referenceImageUrl,
+        item.referenceImagePath,
+        ...(item.referenceImageList || []),
+      ])
+    : [];
+  const shoppingReferenceCandidates = [
     ...uniqueCollectedImages,
     ...(options.crawledImages || []),
-    options.referenceImagePath,
-  ]);
-  const representativeReferenceUrl = normalizeReferenceImageUrl(representativeCandidate) || crawledImages[0] || '';
-  const orderedCollectedImages = representativeCandidate
+    ...shoppingItemReferenceCandidates,
+  ].filter(candidate => normalizeReferenceImageUrl(candidate));
+  let shoppingReference = resolveShoppingRepresentativeReference(
+    shoppingReferenceCandidates,
+    normalizeReferenceImageUrl(options.referenceImagePath) || undefined,
+  );
+  let representativeCandidate = shoppingReference.representative;
+  let representativeReferenceUrl = shoppingReference.referenceUrl || crawledImages[0] || '';
+  if (options.isShoppingConnect && representativeCandidate) {
+    const allowedReferenceRoots = await resolveManagedReferenceImageRoots();
+    try {
+      const loadedReference = await loadReferenceImageData(representativeCandidate, {
+        allowedLocalRoots: allowedReferenceRoots,
+      });
+      representativeReferenceUrl = loadedReference?.source || '';
+    } catch {
+      shoppingReference = resolveShoppingRepresentativeReference(shoppingReferenceCandidates);
+      representativeCandidate = shoppingReference.representative;
+      const loadedFallback = representativeCandidate
+        ? await loadReferenceImageData(representativeCandidate, {
+            allowedLocalRoots: allowedReferenceRoots,
+          })
+        : null;
+      representativeReferenceUrl = loadedFallback?.source || '';
+    }
+  }
+  const orderedCollectedImages = options.isShoppingConnect
+    ? [representativeReferenceUrl, ...shoppingReference.images].filter(Boolean)
+    : representativeCandidate
     ? [
         representativeCandidate,
         ...uniqueCollectedImages.filter(image => image !== representativeCandidate),
@@ -374,38 +436,70 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     console.log(`[이미지생성] 🖼️ 중복 제거 후 참조 이미지 ${crawledImages.length}개 감지 → 대표 이미지 1장 기반 img2img 활성화`);
   }
 
-  const items = options.items
-    .map((item, idx) => ({
-      heading: item.heading,
-      prompt: String(item.prompt || '').trim(),
-      isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
-      allowText: shouldAllowTextForImageItem(item, options), // text is thumbnail-only in auto publish contexts
-      englishPrompt: item.englishPrompt,
-      category: item.category || options.category || '', // ✅ [2026-02-12] options.category 폴백 → DeepInfra 카테고리별 스타일 적용
-      referenceImagePath: item.referenceImagePath || options.referenceImagePath, // ✅ 전역 참조 이미지 적용
-      // ✅ [2026-01-28] 크롤링 이미지를 referenceImageUrl에 할당 (img2img 활성화)
-      referenceImageUrl: normalizeReferenceImageUrl(item.referenceImageUrl)
-        || normalizeReferenceImageUrl(item.referenceImagePath)
-        || (options.isShoppingConnect ? representativeReferenceUrl : crawledImages[idx])
-        || crawledImages[0],
-      referenceImageList: collectReferenceImageUrls(
-        (item as any).referenceImageList,
-        item.referenceImageUrl,
-        item.referenceImagePath,
-        options.isShoppingConnect ? representativeReferenceUrl : crawledImages[idx],
-        options.isShoppingConnect ? undefined : crawledImages[0],
-      ).slice(0, options.isShoppingConnect ? 1 : 4),
-      originalIndex: (item as any).originalIndex, // ✅ [2026-01-24] 원래 인덱스 보존
-      // ✅ [2026-02-08] 이미지 스타일/비율 전달 (모든 엔진에서 사용)
-      imageStyle: (item as any).imageStyle || (options as any).imageStyle, // ✅ [2026-02-18 FIX] options.imageStyle 폴백 추가 (full-auto에서 per-item에 없음)
-      imageRatio: (item as any).imageRatio || (options as any).imageRatio, // ✅ [2026-02-18 FIX] options.imageRatio 폴백 추가
-    }))
+  const shoppingThumbnailItem = options.isShoppingConnect
+    ? options.items.find(item => item.isThumbnail === true)
+    : undefined;
+  const shoppingOriginalThumbnails: GeneratedImage[] = shoppingThumbnailItem && representativeReferenceUrl
+    ? [createShoppingRepresentativeThumbnail(
+        representativeCandidate || representativeReferenceUrl,
+        shoppingThumbnailItem.heading || options.postTitle,
+        representativeReferenceUrl,
+      )]
+    : [];
+  const generationSourceItems = options.isShoppingConnect
+    ? options.items.filter(item => item.isThumbnail !== true)
+    : options.items;
+
+  const mappedItems = generationSourceItems
+    .map((item, idx) => {
+      const allowText = shouldAllowTextForImageItem(item, options);
+      const basePrompt = String(item.englishPrompt || item.prompt || '').trim();
+      const prompt = options.isShoppingConnect
+        ? buildShoppingReferencePrompt(basePrompt, item.heading, allowText)
+        : String(item.prompt || '').trim();
+
+      return {
+        heading: item.heading,
+        prompt,
+        isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
+        allowText, // text is thumbnail-only in auto publish contexts
+        englishPrompt: options.isShoppingConnect ? prompt : item.englishPrompt,
+        category: item.category || options.category || '', // ✅ [2026-02-12] options.category 폴백 → DeepInfra 카테고리별 스타일 적용
+        referenceImagePath: item.referenceImagePath || options.referenceImagePath, // ✅ 전역 참조 이미지 적용
+        // ✅ [2026-01-28] 크롤링 이미지를 referenceImageUrl에 할당 (img2img 활성화)
+        referenceImageUrl: normalizeReferenceImageUrl(item.referenceImageUrl)
+          || normalizeReferenceImageUrl(item.referenceImagePath)
+          || (options.isShoppingConnect ? representativeReferenceUrl : crawledImages[idx])
+          || crawledImages[0],
+        referenceImageList: collectReferenceImageUrls(
+          (item as any).referenceImageList,
+          item.referenceImageUrl,
+          item.referenceImagePath,
+          options.isShoppingConnect ? representativeReferenceUrl : crawledImages[idx],
+          options.isShoppingConnect ? undefined : crawledImages[0],
+        ).slice(0, options.isShoppingConnect ? 1 : 4),
+        originalIndex: (item as any).originalIndex, // ✅ [2026-01-24] 원래 인덱스 보존
+        // ✅ [2026-02-08] 이미지 스타일/비율 전달 (모든 엔진에서 사용)
+        imageStyle: (item as any).imageStyle || (options as any).imageStyle, // ✅ [2026-02-18 FIX] options.imageStyle 폴백 추가 (full-auto에서 per-item에 없음)
+        imageRatio: (item as any).imageRatio || (options as any).imageRatio, // ✅ [2026-02-18 FIX] options.imageRatio 폴백 추가
+      };
+    });
+  const items = (options.isShoppingConnect && representativeReferenceUrl
+    ? applyShoppingRepresentativeReference(mappedItems, representativeReferenceUrl)
+    : mappedItems)
     .filter((item) => item.prompt.length > 0);
+  const finalizeImages = (images: GeneratedImage[]): GeneratedImage[] => [
+    ...shoppingOriginalThumbnails,
+    ...preserveThumbnailFlags(images, items),
+  ];
 
   // ✅ [2026-02-04] 생성할 이미지 수 로그 (items 선언 후)
   console.log(`[이미지생성] 🖼️ 생성할 이미지 수: ${items.length}개`);
 
   if (items.length === 0) {
+    if (shoppingOriginalThumbnails.length > 0) {
+      return shoppingOriginalThumbnails;
+    }
     throw new Error('이미지를 생성할 소제목과 프롬프트를 확인해주세요.');
   }
   if (options.isShoppingConnect && !representativeReferenceUrl) {
@@ -424,8 +518,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   //   - nano-banana-pro (Gemini img2img, 기본 gemini-3-1-flash = 나노바나나2)
   //   - openai-image (gpt-image-2 = 덕트테이프, image 파라미터로 참조 이미지 주입)
   // 그 외 엔진(Leonardo/DeepInfra/ImageFX 등)은 제품이 변형되므로 수집 이미지 그대로 사용
-  const SHOPPING_REFERENCE_ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image', 'dropshot'];
-  if (options.isShoppingConnect && !SHOPPING_REFERENCE_ENGINES.includes(normalizedProvider)) {
+  if (options.isShoppingConnect && !isShoppingReferenceImageEngine(normalizedProvider)) {
     throw new Error(
       `[${displayName}] 쇼핑 AI 이미지는 대표 상품 이미지를 레퍼런스로 생성해야 합니다. `
       + '현재 엔진은 레퍼런스 생성을 지원하지 않아 원본 이미지를 대신 배치하지 않고 중단했습니다. '
@@ -451,11 +544,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         apiKeys?.openaiApiKey
       );
       console.log(`[이미지생성] ✅ 덕트테이프(gpt-image-2)로 ${openaiImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(openaiImages, {
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(openaiImages, {
         requestedProvider,
         actualProvider: 'openai-image',
         policy: fallbackPolicy,
-      }), 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
+      }), 'openai-image', options.postTitle, options.thumbnailTextInclude, items));
     } catch (openaiError) {
       console.warn(`[ImageGenerator] ⚠️ 덕트테이프 실패:`, (openaiError as Error).message);
       const userMsg = getImageErrorMessage(openaiError);
@@ -488,12 +581,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         apiKeys?.openaiApiKey
       );
       console.log(`[이미지생성] ✅ GPT 이미지 시리즈로 ${migratedImages.length}개 생성 완료 (레거시 설정 자동 전환)`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(migratedImages, {
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(migratedImages, {
         requestedProvider,
         actualProvider: 'openai-image',
         policy: fallbackPolicy,
         fallbackReason: reason,
-      }), 'openai-image', options.postTitle, options.thumbnailTextInclude, items), items);
+      }), 'openai-image', options.postTitle, options.thumbnailTextInclude, items));
     } catch (migrationError) {
       console.error(`[ImageGenerator] ❌ gpt-image-1 자동 마이그레이션 실패:`, (migrationError as Error).message);
       const userMsg = getImageErrorMessage(migrationError);
@@ -516,11 +609,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         orderedCollectedImages as string[]  // 대표 상품 이미지 후보 (중복 제거됨)
       );
       console.log(`[이미지생성] ✅ Leonardo AI로 ${leonardoImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(leonardoImages, {
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(leonardoImages, {
         requestedProvider,
         actualProvider: 'leonardoai',
         policy: fallbackPolicy,
-      }), 'leonardoai', options.postTitle, options.thumbnailTextInclude, items), items);
+      }), 'leonardoai', options.postTitle, options.thumbnailTextInclude, items));
     } catch (leonardoError) {
       console.warn(`[ImageGenerator] ⚠️ Leonardo AI 실패:`, (leonardoError as Error).message);
       const userMsg = getImageErrorMessage(leonardoError);
@@ -542,11 +635,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         onImageGenerated
       );
       console.log(`[이미지생성] ✅ ImageFX로 ${imageFxImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(imageFxImages, {
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(imageFxImages, {
         requestedProvider,
         actualProvider: 'imagefx',
         policy: fallbackPolicy,
-      }), 'imagefx', options.postTitle, options.thumbnailTextInclude, items), items);
+      }), 'imagefx', options.postTitle, options.thumbnailTextInclude, items));
     } catch (imageFxError) {
       const rawMsg = (imageFxError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ ImageFX 실패:`, rawMsg);
@@ -592,11 +685,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         throw new Error('Flow가 0건 반환 — 상세 원인은 이전 로그(sendImageLog) 참고. 쿼터/세션/안전필터/API 구조 변경 가능성.');
       }
       console.log(`[이미지생성] ✅ Flow로 ${flowImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(flowImages, {
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(flowImages, {
         requestedProvider,
         actualProvider: 'flow',
         policy: fallbackPolicy,
-      }), 'flow', options.postTitle, options.thumbnailTextInclude, items), items);
+      }), 'flow', options.postTitle, options.thumbnailTextInclude, items));
     } catch (flowError) {
       const rawMsg = (flowError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ Flow 실패:`, rawMsg);
@@ -622,11 +715,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       if (prodiaImages.length === 0) {
         throw new Error('Prodia가 0건을 반환했습니다. API 키, 크레딧, 모델 제한을 확인해주세요.');
       }
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(prodiaImages, {
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(prodiaImages, {
         requestedProvider,
         actualProvider: 'prodia',
         policy: fallbackPolicy,
-      }), 'prodia', options.postTitle, options.thumbnailTextInclude, items), items);
+      }), 'prodia', options.postTitle, options.thumbnailTextInclude, items));
     } catch (prodiaError) {
       const userMsg = getImageErrorMessage(prodiaError);
       throw new Error(`[Prodia] ${userMsg}`);
@@ -650,11 +743,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         throw new Error('리더스 나노바나나 무제한 0건 반환 — 로그인/세션/쿼터 확인 필요');
       }
       console.log(`[이미지생성] ✅ 리더스 나노바나나 무제한으로 ${dropshotImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(dropshotImages, {
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(dropshotImages, {
         requestedProvider,
         actualProvider: 'dropshot',
         policy: fallbackPolicy,
-      }), 'dropshot', options.postTitle, options.thumbnailTextInclude, items), items);
+      }), 'dropshot', options.postTitle, options.thumbnailTextInclude, items));
     } catch (dropshotError) {
       const rawMsg = (dropshotError as Error).message || '';
       console.warn(`[ImageGenerator] ⚠️ 리더스 나노바나나 무제한 실패:`, rawMsg);
@@ -679,11 +772,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       );
       console.log(`[이미지생성] ✅ 딥인프라 FLUX-2로 ${deepinfraImages.length}개 이미지 생성 완료!`);
       // ✅ [2026-01-30 FIX] DeepInfra도 텍스트 오버레이 적용 (한글 텍스트 지원 안함)
-      return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(deepinfraImages, {
+      return finalizeImages(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(deepinfraImages, {
         requestedProvider,
         actualProvider: 'deepinfra',
         policy: fallbackPolicy,
-      }), 'deepinfra', options.postTitle, options.thumbnailTextInclude, items), items);
+      }), 'deepinfra', options.postTitle, options.thumbnailTextInclude, items));
     } catch (deepinfraError) {
       console.warn(`[ImageGenerator] ⚠️ DeepInfra 실패:`, (deepinfraError as Error).message);
       const userMsg = getImageErrorMessage(deepinfraError);
@@ -693,11 +786,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
 
   // 네이버 선택 시
   if (normalizedProvider === 'naver') {
-    return preserveThumbnailFlags(annotateEngineTrace(await generateWithNaver(items, options.postTitle, options.postId, options.regenerate, options.sourceUrl, options.articleUrl), {
+    return finalizeImages(annotateEngineTrace(await generateWithNaver(items, options.postTitle, options.postId, options.regenerate, options.sourceUrl, options.articleUrl), {
       requestedProvider,
       actualProvider: 'naver',
       policy: fallbackPolicy,
-    }), items);
+    }));
   }
 
   // ✅ [v1.4.80] 'local-folder'는 renderer에서 별도 처리되어야 하는 값
@@ -731,11 +824,11 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         shouldForceSequentialImages,
       );
       console.log(`[이미지생성] ✅ ${modelLabel} ${nanoBananaImages.length}개 이미지 생성 완료!`);
-      return preserveThumbnailFlags(annotateEngineTrace(nanoBananaImages, {
+      return finalizeImages(annotateEngineTrace(nanoBananaImages, {
         requestedProvider,
         actualProvider: normalizedProvider,
         policy: fallbackPolicy,
-      }), items);
+      }));
     } catch (geminiError: any) {
       if (options.isShoppingConnect) {
         throw new Error(
@@ -773,12 +866,12 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       shouldForceSequentialImages
     );
     console.log(`[이미지생성] ✅ 폴백 나노 바나나 프로(Gemini)로 ${fallbackImages.length}개 이미지 생성 완료!`);
-    return preserveThumbnailFlags(annotateEngineTrace(fallbackImages, {
+    return finalizeImages(annotateEngineTrace(fallbackImages, {
       requestedProvider,
       actualProvider: 'nano-banana-pro',
       policy: fallbackPolicy,
       fallbackReason: unsupportedReason,
-    }), items);
+    }));
   } catch (fallbackError) {
     throw new Error(`이미지 생성 실패: 지원하지 않는 이미지 제공자(${options.provider}) 및 Gemini 폴백 실패 - ${(fallbackError as Error).message}`);
   }

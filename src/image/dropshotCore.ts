@@ -8,7 +8,6 @@ import {
   getProfileDir,
   isLoggedIn,
   launchBrowser,
-  minimizeDropshotWindow,
   navigateToDropshotBoard,
   navigateToDropshotLogin,
   openDropshotImageWorkspace,
@@ -22,6 +21,7 @@ import {
   getCachedPage,
   setCached,
 } from './dropshotSession.js';
+import { reopenDropshotHeadlessGenerationContext } from './dropshotHeadlessSession.js';
 
 export {
   buildDropshotPrompt,
@@ -202,13 +202,13 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
         : '로그인 시간이 초과되었습니다.');
     }
 
-    await minimizeDropshotWindow(page, onLog);
-    setCached(context, page);
+    await closeContext(context);
     context = null;
     onLog?.('[리더스 나노바나나] 준비 완료');
-    return page;
+    const hiddenPage = await reopenDropshotHeadlessGenerationContext(profileDir, onLog);
+    return hiddenPage;
   } catch (error) {
-    await closeContext(context);
+    if (context) await closeContext(context);
     clearCached();
     throw error;
   }

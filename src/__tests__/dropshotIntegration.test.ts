@@ -163,7 +163,7 @@ describe('Dropshot dropshotCore — buildDropshotPrompt', () => {
     const { buildDropshotPrompt } = await import('../image/dropshotCore');
     const result = buildDropshotPrompt('귀여운 강아지');
     expect(result).toContain('귀여운 강아지');
-    expect(result).toMatch(/시네마틱|사실적|한국적/);
+    expect(result).toContain('realistic 4K product photograph');
   });
 
   it('long prompt (>= 50 chars) is not enhanced with quality suffix', async () => {
@@ -181,8 +181,8 @@ describe('Dropshot dropshotCore — buildDropshotPrompt', () => {
     const r1 = buildDropshotPrompt('테스트');
     const r2 = buildDropshotPrompt('테스트');
     // Both should contain variation seed but they will differ
-    expect(r1).toMatch(/버전-/);
-    expect(r2).toMatch(/버전-/);
+    expect(r1).toMatch(/variation-/);
+    expect(r2).toMatch(/variation-/);
     // Statistically they should differ (different random nonce)
     // (there is an extremely small chance they are equal — acceptable)
     expect(r1).not.toEqual(r2);

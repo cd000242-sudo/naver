@@ -5,9 +5,14 @@ import { applyPendingArticleTablesToGeneratedContent } from './articleTableCompo
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
     deduplicateReferenceImages,
-    extractReferenceImageUrl,
-    selectRepresentativeReferenceImage,
 } from '../../image/referenceImagePolicy.js';
+import {
+    createShoppingRepresentativeThumbnail,
+    isShoppingReferenceImageEngine,
+    resolveShoppingCollectedImagePlacement,
+    resolveShoppingRepresentativeReference,
+    resolveUsableShoppingReferenceSource,
+} from '../../image/shoppingReferenceGeneration.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
@@ -734,6 +739,12 @@ async function executeFullAutoFlow(formData) {
         await yieldToUI();
         const scSubImageMode = formData.scSubImageMode;
         const isCollectedMode = formData.contentMode === 'affiliate' && scSubImageMode === 'collected';
+        const isShoppingAiMode = formData.contentMode === 'affiliate' && scSubImageMode === 'ai';
+        if (isShoppingAiMode && finalImages.length > 0) {
+            // Product crawl output is reference material in AI mode, never final body output.
+            finalImages = [];
+            appendLog('🛒 쇼핑커넥트 AI 모드: 수집 이미지는 대표이미지 참조로만 사용합니다.');
+        }
         if (isCollectedMode && finalImages.length === 0) {
             const collectedFromContent = structuredContent.collectedImages || structuredContent.images || formData.collectedImages || [];
             if (collectedFromContent.length > 0) {
@@ -875,7 +886,9 @@ async function executeFullAutoFlow(formData) {
                 }));
                 modal?.showImages(placeholderImages, `🎨 이미지 생성 중... (${_friendlySource})`);
             }
-            const originalProvider = formData.imageSource;
+            const originalProvider = isShoppingAiMode
+                ? (formData.scAIImageEngine || formData.imageSource)
+                : formData.imageSource;
             const IMAGE_GEN_MAX_RETRIES = getFullAutoImageMaxAttempts(originalProvider);
             let imageGenSuccess = false;
             const imageGenerationStartedAt = Date.now();
@@ -914,9 +927,25 @@ async function executeFullAutoFlow(formData) {
                     const _rawFullAutoTitle = structuredContent.selectedTitle || structuredContent.title || '';
                     const fullAutoTitle = /^https?:\/\//i.test(String(_rawFullAutoTitle)) ? '' : _rawFullAutoTitle;
                     let referenceImagePath = '';
-                    const collectedImgs = window.imageManagementGeneratedImages || window.generatedImages || [];
+                    const collectedImgs = structuredContent.collectedImages
+                        || formData.collectedImages
+                        || window.imageManagementGeneratedImages
+                        || window.generatedImages
+                        || [];
+                    const shoppingReference = isShoppingAiMode
+                        ? resolveShoppingRepresentativeReference(collectedImgs)
+                        : { representative: null, referenceUrl: '' };
+                    const usableShoppingReferenceUrl = isShoppingAiMode
+                        ? await resolveUsableShoppingReferenceSource(
+                            shoppingReference.representative,
+                            window.api.checkFileExists,
+                        )
+                        : '';
                     if (collectedImgs.length > 0) {
-                        referenceImagePath = collectedImgs[0].filePath || collectedImgs[0].url;
+                        referenceImagePath = usableShoppingReferenceUrl
+                            || collectedImgs[0].filePath
+                            || collectedImgs[0].url
+                            || (typeof collectedImgs[0] === 'string' ? collectedImgs[0] : '');
                     }
                     // [Phase 7.1-d] formData snapshot first (set by flow entry); raw
                     // accessor fallback covers callers that do not populate it
@@ -926,6 +955,21 @@ async function executeFullAutoFlow(formData) {
                     if (_headingImageModeForThumb === 'none') {
                         console.log('[FullAuto] 🚫 headingImageMode=none: 전용 썸네일 생성도 건너뜁니다.');
                         appendLog('🚫 이미지 없이 모드: 썸네일 포함 모든 이미지 생성 건너뛰기');
+                    }
+                    else if (isShoppingAiMode) {
+                        if (!usableShoppingReferenceUrl) {
+                            throw new Error('쇼핑커넥트 대표 상품 이미지가 없어 원본 썸네일과 소제목 AI 이미지를 만들 수 없습니다.');
+                        }
+                        dedicatedThumbnailImage = registerFullAutoThumbnailImage(
+                            createShoppingRepresentativeThumbnail(
+                                usableShoppingReferenceUrl,
+                                fullAutoTitle || '쇼핑 대표 썸네일',
+                            ),
+                            'collected',
+                            formData,
+                            fullAutoTitle || '쇼핑 대표 썸네일',
+                        );
+                        appendLog('🛒 쇼핑커넥트: 대표 상품 이미지를 원본 그대로 썸네일로 사용합니다.');
                     }
                     else
                         try {
@@ -1004,6 +1048,8 @@ async function executeFullAutoFlow(formData) {
                         thumbnailTextInclude: false,
                         longRunImageGeneration: true,
                         isContinuousMode: !!isContinuousMode,
+                        isShoppingConnect: isShoppingAiMode,
+                        collectedImages: isShoppingAiMode ? collectedImgs : undefined,
                         imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoBodyImageTimeoutMs(currentProvider, headings.length)),
                     });
                     if (imageResult?.success && imageResult.images && imageResult.images.length > 0) {
@@ -2558,24 +2604,33 @@ async function generateAIImagesForHeadings(headings, formData) {
     }
     const thumbnailTextCheckbox = document.getElementById('thumbnail-text-option');
     const thumbnailFromStorage = _rawPipeline.thumbnailTextInclude === 'true';
-    const SC_FAKE_AI_ENGINES = [
-        'imagefx', 'dall-e-3', 'leonardoai', 'deepinfra', 'deepinfra-flux',
-        'stability', 'falai', 'prodia', 'pollinations', 'flow',
-    ];
-    if (isShoppingConnect && SC_FAKE_AI_ENGINES.includes(imageSource)) {
-        console.log(`[AI Images] 🛒 쇼핑커넥트 + ${imageSource}: img2img 미지원 — 사용자 선택 그대로 실행 (제품 정확도 미보장)`);
-        appendLog(`⚠️ "${imageSource}"는 img2img 미지원 — 제품 외형이 다르게 생성될 수 있습니다. 정확한 재현을 원하시면 [🍌 나노바나나] 또는 [🦆 덕트테이프]를 선택하세요.`);
+    if (isShoppingConnect && formData.scSubImageMode === 'ai' && !isShoppingReferenceImageEngine(imageSource)) {
+        console.warn(`[AI Images] 쇼핑커넥트 + ${imageSource}: 대표 상품 이미지 기반 img2img 미지원`);
+        const message = `"${imageSource}"는 쇼핑 대표이미지 기반 AI 생성을 지원하지 않습니다. 나노바나나2, 덕트테이프, 리더스 나노바나나프로 무제한 중 하나를 선택해주세요.`;
+        appendLog(`⚠️ ${message}`);
+        throw new Error(message);
     }
-    const includeThumbnailText = isShoppingConnect ? true : (formData.includeThumbnailText ??
+    const includeThumbnailText = isShoppingConnect ? false : (formData.includeThumbnailText ??
         thumbnailFromStorage ??
         thumbnailTextCheckbox?.checked ?? false);
     if (isShoppingConnect) {
-        console.log(`[AI Images] ✅ 쇼핑커넥트 모드: 썸네일 텍스트 포함 자동 활성화`);
+        console.log(`[AI Images] ✅ 쇼핑커넥트 모드: 대표 상품 원본을 썸네일로 보존 (텍스트 합성 없음)`);
     }
     let collectedImages = isShoppingConnect
         ? (formData.collectedImages || currentStructuredContent?.collectedImages || currentStructuredContent?.images || [])
         : [];
     collectedImages = deduplicateReferenceImages(collectedImages);
+    const shoppingReference = resolveShoppingCollectedImagePlacement(collectedImages);
+    const collectedBodyImages = shoppingReference.subheadingImages;
+    const representativeImageUrl = isShoppingConnect
+        ? await resolveUsableShoppingReferenceSource(
+            shoppingReference.representative,
+            window.api.checkFileExists,
+        )
+        : shoppingReference.referenceUrl;
+    if (isShoppingConnect && shoppingReference.images.length > 0) {
+        collectedImages = shoppingReference.images;
+    }
     if (isShoppingConnect && collectedImages.length === 0) {
         console.log(`[AI Images] ⚠️ 수집된 이미지 없음 - AI 생성으로 진행`);
         appendLog(`⚠️ 수집된 이미지가 없습니다. AI 이미지 생성으로 진행합니다.`);
@@ -2583,7 +2638,7 @@ async function generateAIImagesForHeadings(headings, formData) {
     else if (isShoppingConnect && collectedImages.length > 0) {
         console.log(`[AI Images] ✅ 글 생성 시 수집된 이미지 ${collectedImages.length}개 재사용 (재크롤링 안함)`);
     }
-    if (isShoppingConnect && collectedImages.length > 0) {
+    if (isShoppingConnect && useCollectedImagesDirectly && collectedImages.length > 0) {
         appendLog(`🛒 쇼핑 커넥트 모드: ${collectedImages.length}개 수집 이미지를 참조로 사용합니다.`);
         if (collectedImages.length >= headings.length) {
             try {
@@ -2625,9 +2680,7 @@ async function generateAIImagesForHeadings(headings, formData) {
         }
     }
     collectedImages = deduplicateReferenceImages(collectedImages);
-    const representativeImage = selectRepresentativeReferenceImage(collectedImages);
-    const representativeImageUrl = extractReferenceImageUrl(representativeImage);
-    if (isShoppingConnect && collectedImages.length > 0) {
+    if (isShoppingConnect && useCollectedImagesDirectly && collectedImages.length > 0) {
         appendLog(`🧹 수집 이미지 중복 제거 완료: 고유 이미지 ${collectedImages.length}개`);
     }
     if (isShoppingConnect && !representativeImageUrl) {
@@ -2635,19 +2688,14 @@ async function generateAIImagesForHeadings(headings, formData) {
         throw new Error(`쇼핑커넥트 ${modeLabel}에 필요한 대표 상품 이미지가 없습니다. 상품 이미지 수집 결과를 확인해주세요.`);
     }
     let dedicatedShopThumbnail = null;
-    if (useCollectedImagesDirectly && representativeImageUrl) {
-        dedicatedShopThumbnail = {
-            url: representativeImageUrl,
-            filePath: representativeImageUrl,
-            heading: (currentStructuredContent?.selectedTitle || formData.postTitle || formData.title || '🖼️ 썸네일'),
-            isThumbnail: true,
-            isCollectedImage: true,
-            source: 'collected',
-            provider: 'collected',
-        };
-        appendLog(`🛒 쇼핑커넥트: 수집 이미지를 썸네일로 사용 (텍스트 오버레이는 발행 시 적용)`);
+    if (isShoppingConnect && representativeImageUrl) {
+        dedicatedShopThumbnail = createShoppingRepresentativeThumbnail(
+            representativeImageUrl,
+            currentStructuredContent?.selectedTitle || formData.postTitle || formData.title || '쇼핑 대표 썸네일',
+        );
+        appendLog(`🛒 쇼핑커넥트: 대표 상품 이미지를 원본 그대로 썸네일로 사용합니다.`);
     }
-    else if (!isShoppingConnect || !useCollectedImagesDirectly) {
+    else if (!isShoppingConnect) {
         try {
             let shopTitle = currentStructuredContent?.selectedTitle || formData.postTitle || formData.title || '';
             if (/^https?:\/\//i.test(shopTitle.trim())) {
@@ -2736,9 +2784,12 @@ async function generateAIImagesForHeadings(headings, formData) {
             else {
                 ref = await resolveReferenceImageForHeadingAsync(String(heading.title || heading || '').trim());
             }
-            if (isShoppingConnect && collectedImages.length > 0 && !useAiImageChecked) {
-                const collectedImg = collectedImages[i % collectedImages.length];
-                const imgUrl = typeof collectedImg === 'string' ? collectedImg : (collectedImg?.url || collectedImg?.filePath || collectedImg?.thumbnailUrl || '');
+            if (isShoppingConnect && collectedBodyImages.length > 0 && !useAiImageChecked) {
+                const collectedImg = collectedBodyImages[i % collectedBodyImages.length];
+                const imgUrl = await resolveUsableShoppingReferenceSource(
+                    collectedImg,
+                    window.api.checkFileExists,
+                );
                 if (imgUrl) {
                     console.log(`[AI Images] 🛒 쇼핑커넥트: ${i + 1}번 → 수집 이미지 직접 사용: ${imgUrl.substring(0, 60)}...`);
                     appendLog(`✅ [${i + 1}/${headings.length}] "${String(headingTitle).substring(0, 20)}" 수집 이미지 적용 완료!`);

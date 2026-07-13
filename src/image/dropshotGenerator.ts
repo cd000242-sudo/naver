@@ -69,7 +69,7 @@ export async function generateWithDropshot(
   postTitle?: string,
   postId?: string,
   _isFullAuto?: boolean,
-  _isShoppingConnect?: boolean,
+  isShoppingConnect: boolean = false,
   stopCheck?: () => boolean,
   onImageGenerated?: (
     img: GeneratedImage,
@@ -102,6 +102,9 @@ export async function generateWithDropshot(
       item.referenceImagePath,
     ).slice(0, 4);
     const hasRef = refUrls.length > 0;
+    if (isShoppingConnect && !hasRef) {
+      throw new Error('SHOPPING_REFERENCE_IMAGE_REQUIRED: 리더스 나노바나나프로 무제한에 전달할 대표 상품 이미지가 없습니다.');
+    }
 
     const onLog = (m: string) => console.log(m);
 
@@ -116,7 +119,10 @@ export async function generateWithDropshot(
 
       const result = await makeDropshotImage(
         promptForAttempt,
-        hasRef ? { referenceImageList: refUrls } : {},
+        {
+          ...(hasRef ? { referenceImageList: refUrls } : {}),
+          requireReferenceImage: isShoppingConnect,
+        },
         onLog,
       );
 

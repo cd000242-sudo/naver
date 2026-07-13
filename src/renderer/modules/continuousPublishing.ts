@@ -7,6 +7,10 @@ import { createTime24Select, bindTime24Events, setTime24Value, setTime24ValueByI
 import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
 import type { ContinuousQueueItem } from '../types/index';
 import { resolvePublishModeAfterScheduleRemoved } from './continuousPublishModeHelpers';
+import {
+  resolveShoppingRepresentativeReference,
+  resolveUsableShoppingReferenceSource,
+} from '../../image/shoppingReferenceGeneration.js';
 // ✅ [v2.10.288] subImageMode import 제거 — line 10-12에 명시된 패턴 적용.
 //   렌더러 빌드 스크립트가 require()를 정규식 삭제 → subImageMode_1 is not defined 회귀 차단.
 type SubImageMode = 'ai' | 'collected';
@@ -2313,7 +2317,7 @@ export function initContinuousPublishingV2(): void {
       const normalizedValue = value === 'dall-e-3' ? 'openai-image' : value;
       // ✅ [2026-05-18] mode 분리: 'collected'만 collected, 그 외는 AI 엔진 선택으로 간주
       setSubImageMode(normalizedValue === 'collected' ? 'collected' : 'ai');
-      if (normalizedValue === 'nano-banana' || normalizedValue === 'nano-banana-2' || normalizedValue === 'nano-banana-pro' || normalizedValue === 'openai-image' || normalizedValue === 'dall-e-3' || normalizedValue === 'flow' || normalizedValue === 'prodia') {
+      if (normalizedValue === 'nano-banana-2' || normalizedValue === 'openai-image' || normalizedValue === 'dropshot') {
         // AI 엔진 선택 — 전역 AI 이미지 소스와 sync (반자동 드롭다운도 업데이트)
         localStorage.setItem('scAIImageEngine', normalizedValue);
         localStorage.setItem('fullAutoImageSource', normalizedValue);
@@ -4609,12 +4613,8 @@ async function startContinuousPublishingV2(): Promise<void> {
             // ✅ [2026-01-28] 이미지 설정 전역 적용 (localStorage에서 읽음)
             // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화 — 키 충돌 mismatch 해결
             const scSubImageMode = itemPipelineCfg.shopping.subImageMode;
-            // If the post already carries collected product images, honor them
-            // even when the mode key normalized away from 'collected' — falling
-            // through to AI generation here caused slow retry grinds instead of
-            // using the images we already have.
-            const hasPreCollectedImages = ((finalStructuredContent as any)?.collectedImages?.length ?? 0) > 0;
-            const isCollectedMode = item.contentMode === 'affiliate' && (scSubImageMode === 'collected' || hasPreCollectedImages);
+            const isCollectedMode = item.contentMode === 'affiliate' && scSubImageMode === 'collected';
+            const isShoppingAiMode = item.contentMode === 'affiliate' && scSubImageMode === 'ai';
 
             // ✅ [2026-03-07 FIX] 쇼핑커넥트 수집 이미지 모드일 때 AI 이미지 생성 완전 스킵
             // executeFullAutoFlow의 isCollectedMode 로직(L332-440)이 수집 이미지를 직접 처리함
@@ -4667,8 +4667,22 @@ async function startContinuousPublishingV2(): Promise<void> {
                   ? finalStructuredContent.collectedImages
                   : (window as any).imageManagementGeneratedImages || (window as any).generatedImages || []);
 
+                const shoppingCollectedImgs = isShoppingAiMode ? collectedImgs : undefined;
+                const shoppingReference = isShoppingAiMode
+                  ? resolveShoppingRepresentativeReference(shoppingCollectedImgs)
+                  : { representative: null, referenceUrl: '', images: [] };
+                const representativeImagePath = isShoppingAiMode
+                  ? await resolveUsableShoppingReferenceSource(
+                      shoppingReference.representative,
+                      window.api.checkFileExists,
+                    ) || undefined
+                  : undefined;
+                const effectiveImageSource = isShoppingAiMode
+                  ? itemPipelineCfg.shopping.aiImageEngine
+                  : item.imageSource;
+
                 generatedImgs = await generateImagesForAutomation(
-                  item.imageSource,
+                  effectiveImageSource,
                   headings,
                   finalStructuredContent.selectedTitle,
                   {
@@ -4681,8 +4695,11 @@ async function startContinuousPublishingV2(): Promise<void> {
                       const modalLog = document.getElementById('continuous-progress-log');
                       if (modalLog) modalLog.textContent = msg;
                     },
-                    allowThumbnailText: includeThumbnailText, // ✅ 썸네일 텍스트 포함 옵션 전달
-                    collectedImages: undefined
+                    allowThumbnailText: isShoppingAiMode ? false : includeThumbnailText,
+                    thumbnailTextInclude: isShoppingAiMode ? false : includeThumbnailText,
+                    isShoppingConnect: item.contentMode === 'affiliate',
+                    collectedImages: isShoppingAiMode ? shoppingReference.images : shoppingCollectedImgs,
+                    referenceImagePath: representativeImagePath,
                   }
                 );
               }

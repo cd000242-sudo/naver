@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 const source = readFileSync(join(process.cwd(), 'src', 'image', 'dropshotLogin.ts'), 'utf8');
+const headlessSource = readFileSync(join(process.cwd(), 'src', 'image', 'dropshotHeadlessSession.ts'), 'utf8');
 
 describe('Dropshot login success policy', () => {
   it('keeps the visible login browser open when the initial board navigation times out', () => {
@@ -44,18 +45,20 @@ describe('Dropshot login success policy', () => {
     expect(source).toContain('if (_checkPromise) return _checkPromise;');
   });
 
-  it('reuses the exact visible context that confirmed zero-cost unlimited mode', () => {
+  it('persists login, closes the visible context, and validates a hidden generation session', () => {
     const detectedIndex = source.indexOf('if (!detected)');
     const successIndex = source.indexOf('return { loggedIn: true', detectedIndex);
     const successBlock = source.slice(detectedIndex, successIndex);
-    const minimizeIndex = successBlock.indexOf('await minimizeDropshotWindow(page, onLog)');
-    const cacheIndex = successBlock.indexOf('setCached(ctx, page)');
-    const closeIndex = successBlock.lastIndexOf('closeLoginVerificationContext(ctx)');
+    const closeIndex = successBlock.lastIndexOf('await closeLoginVerificationContext(ctx)');
+    const hiddenValidationIndex = successBlock.indexOf('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)', closeIndex);
 
-    expect(minimizeIndex).toBeGreaterThan(-1);
-    expect(cacheIndex).toBeGreaterThan(minimizeIndex);
-    expect(successBlock).not.toContain('launchBrowser(profileDir, true)');
-    expect(closeIndex).toBeLessThan(minimizeIndex);
+    expect(closeIndex).toBeGreaterThan(-1);
+    expect(hiddenValidationIndex).toBeGreaterThan(closeIndex);
+    expect(successBlock).not.toContain('setCached(ctx, page)');
+    expect(successBlock).not.toContain('minimizeDropshotWindow');
+    expect(headlessSource).toContain('launchBrowser(profileDir, true)');
+    expect(headlessSource).toContain('await ensureDropshotControls(page, onLog)');
+    expect(headlessSource).toContain('setCached(context, page)');
   });
 
   it('releases operation ownership through finally blocks', () => {

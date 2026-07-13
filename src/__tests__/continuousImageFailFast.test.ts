@@ -39,8 +39,12 @@ describe('continuous publishing image fail-fast', () => {
     expect(code).toContain('__continuousImgFailStreak = 0');
   });
 
-  it('honors pre-collected images even when the sub-image mode key drifted', () => {
+  it('does not let collected reference images override the selected AI sub-image mode', () => {
     const code = read('renderer/modules/continuousPublishing.ts');
-    expect(code).toContain('hasPreCollectedImages');
+    expect(code).toContain("const isCollectedMode = item.contentMode === 'affiliate' && scSubImageMode === 'collected'");
+    expect(code).toContain("const isShoppingAiMode = item.contentMode === 'affiliate' && scSubImageMode === 'ai'");
+    expect(code).toContain('const effectiveImageSource = isShoppingAiMode');
+    expect(code).toContain('itemPipelineCfg.shopping.aiImageEngine');
+    expect(code).not.toContain('|| hasPreCollectedImages');
   });
 });

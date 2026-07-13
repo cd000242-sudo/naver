@@ -1,3 +1,9 @@
+import {
+    isShoppingReferenceImageEngine,
+    type ShoppingReferenceImageEngine,
+} from '../../image/shoppingReferenceGeneration.js';
+import { resolveShoppingConnectAIEngineFromRaw } from '../modules/pipelineConfig.js';
+
 export type ShoppingConnectLinkKind =
     | 'shopping-connect'
     | 'naver-short'
@@ -207,8 +213,11 @@ export function getShoppingConnectImagePool(): any[] {
  *   - openai-image    (gpt-image-2 = 덕테이프)
  * 이 화이트리스트는 "AI 이미지 엔진 선택 드롭다운" 용도로만 쓰임.
  */
-const SHOPPING_CONNECT_ALLOWED_ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image', 'flow', 'prodia'] as const;
-export type ShoppingConnectAIEngine = typeof SHOPPING_CONNECT_ALLOWED_ENGINES[number];
+export type ShoppingConnectAIEngine = ShoppingReferenceImageEngine;
+
+export function isShoppingConnectAIEngine(engine: unknown): engine is ShoppingConnectAIEngine {
+    return isShoppingReferenceImageEngine(engine);
+}
 
 /**
  * ✅ [v2.7.28] 차단 대상은 제품을 가짜로 만들어내는 text-only AI 엔진만.
@@ -217,7 +226,7 @@ export type ShoppingConnectAIEngine = typeof SHOPPING_CONNECT_ALLOWED_ENGINES[nu
  */
 const SHOPPING_CONNECT_BLOCKED_FAKE_AI = [
     'imagefx', 'dall-e-3', 'leonardoai', 'deepinfra', 'deepinfra-flux',
-    'stability', 'falai', 'pollinations',
+    'stability', 'falai', 'pollinations', 'flow', 'prodia',
 ];
 
 export function shouldBlockEngineForShoppingConnect(engine: string): boolean {
@@ -234,17 +243,14 @@ export const SC_AI_ENGINE_STORAGE_KEY = 'scAIImageEngine';
 
 export function getShoppingConnectAIEngine(): ShoppingConnectAIEngine {
     try {
-        const stored = localStorage.getItem(SC_AI_ENGINE_STORAGE_KEY);
-        if (stored && (SHOPPING_CONNECT_ALLOWED_ENGINES as readonly string[]).includes(stored)) {
-            return stored as ShoppingConnectAIEngine;
-        }
-        // 초기값: 반자동 드롭다운이 허용 엔진이면 그 값, 아니면 나노바나나2 기본
-        const fullAuto = localStorage.getItem('fullAutoImageSource');
-        if (fullAuto && (SHOPPING_CONNECT_ALLOWED_ENGINES as readonly string[]).includes(fullAuto)) {
-            return fullAuto as ShoppingConnectAIEngine;
-        }
+        return resolveShoppingConnectAIEngineFromRaw({
+            scAIImageEngine: localStorage.getItem(SC_AI_ENGINE_STORAGE_KEY),
+            scSubImageSource: localStorage.getItem('scSubImageSource'),
+            fullAutoImageSource: localStorage.getItem('fullAutoImageSource'),
+            globalImageSource: localStorage.getItem('globalImageSource'),
+        }) as ShoppingConnectAIEngine;
     } catch { /* noop */ }
-    return 'nano-banana-pro';
+    return 'nano-banana-2';
 }
 
 export function setShoppingConnectAIEngine(engine: ShoppingConnectAIEngine, syncFullAuto: boolean = true): void {

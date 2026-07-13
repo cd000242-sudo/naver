@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import fs from 'fs';
 import path from 'path';
-import { resolvePipelineConfig } from '../renderer/modules/pipelineConfig';
+import { createPipelineFormDataSnapshot, resolvePipelineConfig } from '../renderer/modules/pipelineConfig';
 
 /**
  * SPEC-STABILITY-2026 Phase 7.1 — PipelineConfig.
@@ -37,7 +37,7 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     });
     expect(cfg.shopping).toEqual({
       subImageMode: 'collected',
-      aiImageEngine: 'nano-banana-pro',
+      aiImageEngine: 'nano-banana-2',
       autoThumbnail: false,
     });
     expect(cfg.disclosure).toEqual({
@@ -87,6 +87,76 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
       scSubImageSource: 'openai-image',
     });
     expect(resolvePipelineConfig('full-auto').shopping.subImageMode).toBe('ai');
+  });
+
+  it.each(['openai-image', 'dropshot', 'nano-banana-pro'])(
+    '구버전 fullAutoImageSource의 참조 엔진 %s를 그대로 승계한다',
+    (engine) => {
+      (globalThis as any).localStorage = makeStorage({
+        scSubImageMode: 'ai',
+        fullAutoImageSource: engine,
+      });
+
+      expect(resolvePipelineConfig('full-auto').shopping.aiImageEngine).toBe(engine);
+    },
+  );
+
+  it('명시 쇼핑 엔진이 무효면 유효한 구버전 엔진까지 계속 탐색한다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      scAIImageEngine: 'flow',
+      fullAutoImageSource: 'dropshot',
+    });
+
+    expect(resolvePipelineConfig('continuous').shopping.aiImageEngine).toBe('dropshot');
+  });
+
+  it('구버전 gpt-image-2 이름은 실행 가능한 openai-image로 승계한다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      fullAutoImageSource: 'gpt-image-2',
+    });
+
+    expect(resolvePipelineConfig('multi-account').shopping.aiImageEngine).toBe('openai-image');
+  });
+
+  it('명시 쇼핑 엔진이 구버전 전역 엔진보다 우선한다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      scAIImageEngine: 'openai-image',
+      fullAutoImageSource: 'dropshot',
+    });
+
+    expect(resolvePipelineConfig('full-auto').shopping.aiImageEngine).toBe('openai-image');
+  });
+
+  it.each(['flow', 'prodia', 'imagefx'])('참조 이미지를 보장하지 못하는 저장 엔진 %s는 안전한 기본값으로 복구한다', (engine) => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      scAIImageEngine: engine,
+    });
+
+    expect(resolvePipelineConfig('full-auto').shopping.aiImageEngine).toBe('nano-banana-2');
+  });
+
+  it('호출자가 넘긴 오래된 쇼핑 AI 엔진도 스냅샷 경계에서 복구한다', () => {
+    const snapshot = createPipelineFormDataSnapshot('continuous', {
+      scSubImageMode: 'ai',
+      scAIImageEngine: 'flow',
+    });
+
+    expect(snapshot.scAIImageEngine).toBe('nano-banana-2');
+  });
+
+  it('스냅샷도 구버전 저장 엔진을 실행 시점까지 보존한다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      fullAutoImageSource: 'dropshot',
+    });
+
+    const snapshot = createPipelineFormDataSnapshot('continuous', {});
+    expect(snapshot.scAIImageEngine).toBe('dropshot');
+    expect(snapshot.pipelineConfigSnapshot.shopping.aiImageEngine).toBe('dropshot');
   });
 
   it('빈 문자열 저장값은 직독(|| 기본값)과 동일하게 기본값으로 떨어진다', () => {

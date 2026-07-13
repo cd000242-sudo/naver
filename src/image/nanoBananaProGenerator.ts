@@ -4,11 +4,18 @@
  */
 
 import type { ImageRequestItem, GeneratedImage } from './types.js';
+import {
+  buildReferenceSafeFallbackParts,
+  canUseReferenceFreeImageFallback,
+} from './shoppingReferenceGeneration.js';
+import {
+  buildAppManagedReferenceImageRoots,
+  loadReferenceImageData,
+} from './referenceImageLoader.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { getImageErrorMessage } from './imageErrorMessages.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
-import { promises as fs } from 'fs';
 import sharp from 'sharp';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 // [SPEC-FREEZE-GUARD-001-P2 R3 / v2.10.262] Base64 디코딩 워커 분리 — 1MB+ Gemini/Imagen 4 inline data
@@ -205,7 +212,7 @@ function addToUsedUrls(url: string): void {
 }
 
 // ✅ [2026-01-29] 쇼핑커넥트 라이프스타일 전용 스타일 (쇼핑커넥트는 비즈니스 요구사항이므로 유지)
-const SHOPPING_CONNECT_LIFESTYLE_STYLE = `Premium lifestyle photography, Korean person (20-40s) using the product, luxury Korean setting, warm natural lighting, Instagram-worthy aspirational aesthetic, Samsung/LG ad quality.`;
+const SHOPPING_CONNECT_LIFESTYLE_STYLE = `Premium realistic product photography grounded in the uploaded reference image. Choose the scene type from the current article section: natural use, installation, component detail, scale, comparison, maintenance, or environment. Preserve the exact product identity, use natural lighting, and avoid generic advertising composition.`;
 
 // ✅ [2026-03-01] 인물 필수 / 제외 카테고리 목록 (하드코딩 → personRule만 제공)
 const PERSON_REQUIRED_CATEGORIES = [
@@ -510,7 +517,7 @@ export async function generateWithNanoBananaPro(
   isFullAuto: boolean = false,
   providedApiKey?: string,
   isShoppingConnect?: boolean,
-  collectedImages?: string[],
+  collectedImages?: unknown[],
   stopCheck?: () => boolean,  // ✅ 중지 여부 확인 콜백
   onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,  // ✅ [2026-02-13] 이미지 완성 즉시 콜백
   productData?: { name?: string; price?: string; brand?: string; category?: string },  // ✅ [2026-02-23 FIX] 제품 가격 정보 → 스펙 표 정확도 향상
@@ -557,11 +564,15 @@ export async function generateWithNanoBananaPro(
 
     // ✅ [2026-01-24 FIX] 수집된 이미지 유사도 필터링 (스티커가 붙은 같은 이미지 중복 제거)
     let filteredCollectedImages = collectedImages || [];
-    if (isShoppingConnect && collectedImages && collectedImages.length > 1) {
+    const shouldFilterRemoteShoppingReferences = isShoppingConnect
+      && collectedImages
+      && collectedImages.length > 1
+      && collectedImages.every(image => typeof image === 'string' && /^https?:\/\//i.test(image));
+    if (shouldFilterRemoteShoppingReferences) {
       try {
         const { filterSimilarImages } = await import('./imageUtils.js');
         console.log(`[NanoBananaPro] 🔍 수집된 이미지 유사도 필터링 시작 (${collectedImages.length}개)...`);
-        filteredCollectedImages = await filterSimilarImages(collectedImages, 12); // threshold=12 (약간 관대하게)
+        filteredCollectedImages = await filterSimilarImages(collectedImages as string[], 12); // threshold=12 (약간 관대하게)
         console.log(`[NanoBananaPro] ✅ 유사 이미지 필터링 완료: ${collectedImages.length}개 → ${filteredCollectedImages.length}개`);
       } catch (filterError) {
         console.warn(`[NanoBananaPro] ⚠️ 유사 이미지 필터링 실패, 원본 사용:`, (filterError as Error).message);
@@ -574,6 +585,20 @@ export async function generateWithNanoBananaPro(
 
     const configModule = await import('../configManager.js');
     const config = await configModule.loadConfig();
+    let userDataRoot = '';
+    let tempRoot = '';
+    try {
+      const electronApp = require('electron').app;
+      userDataRoot = electronApp.getPath('userData');
+      tempRoot = electronApp.getPath('temp');
+    } catch {
+      // Unit tests and early startup may not have an initialized Electron app.
+    }
+    const allowedReferenceRoots = buildAppManagedReferenceImageRoots(
+      (config as any).customImageSavePath,
+      userDataRoot,
+      tempRoot,
+    );
 
     const todayKey = new Date().toISOString().split('T')[0];
 
@@ -614,25 +639,18 @@ export async function generateWithNanoBananaPro(
     if (filteredCollectedImages && filteredCollectedImages.length > 0) {
       try {
         const firstImage = filteredCollectedImages[0];
-        const candidateUrl = typeof firstImage === 'string'
-          ? firstImage
-          : ((firstImage as any)?.url || (firstImage as any)?.thumbnailUrl || '');
+        const loadedReference = await loadReferenceImageData(firstImage, {
+          timeoutMs: 15_000,
+          allowedLocalRoots: allowedReferenceRoots,
+        });
 
-        if (candidateUrl && /^https?:\/\//i.test(candidateUrl)) {
-          console.log(`[NanoBananaPro] 🚀 [사전 캐싱] 참조 이미지 다운로드 시작: ${candidateUrl.substring(0, 80)}...`);
-          const cacheStartTime = Date.now();
-          const axios = (await import('axios')).default;
-          const fetched = await axios.get(candidateUrl, { responseType: 'arraybuffer', timeout: 15000 });
-          const buf = Buffer.from(fetched.data);
-          if (buf && buf.length > 0) {
-            cachedReferenceImage = {
-              data: buf.toString('base64'),
-              mimeType: String(fetched.headers?.['content-type'] || 'image/png'),
-            };
-            const elapsed = Date.now() - cacheStartTime;
-            console.log(`[NanoBananaPro] ✅ [사전 캐싱 완료] ${Math.round(buf.length / 1024)}KB, ${elapsed}ms — 이후 ${items.length - 1}번의 재다운로드 절약`);
-          }
+        if (loadedReference) {
+          cachedReferenceImage = {
+            data: loadedReference.buffer.toString('base64'),
+            mimeType: loadedReference.mimeType,
+          };
         }
+
       } catch (cacheErr: any) {
         console.warn(`[NanoBananaPro] ⚠️ [사전 캐싱 실패] 개별 다운로드로 fallback: ${cacheErr.message}`);
       }
@@ -725,7 +743,8 @@ export async function generateWithNanoBananaPro(
                 items.length,
                 cachedReferenceImage,
                 keyPool,
-                isModelLocked
+                isModelLocked,
+                allowedReferenceRoots,
               );
 
             if (result) {
@@ -820,7 +839,8 @@ export async function generateWithNanoBananaPro(
             items.length,
             cachedReferenceImage,  // ✅ [2026-02-13 SPEED] 사전 캐싱된 참조 이미지
             keyPool,  // ✅ [2026-02-13] 키 풀 전달 (429 시 자동 로테이션)
-            isModelLocked  // ✅ [v2.10.335] 모델 잠금 전달
+            isModelLocked,  // ✅ [v2.10.335] 모델 잠금 전달
+            allowedReferenceRoots,
           );
 
           if (result) {
@@ -992,7 +1012,7 @@ async function generateSingleImageWithGemini(
   isFullAuto?: boolean,
   apiKey?: string,
   isShoppingConnect?: boolean,
-  collectedImages?: string[],
+  collectedImages?: unknown[],
   usedImageHashes?: Set<string>,
   usedImageAHashes?: bigint[],
   signal?: AbortSignal,  // ✅ [100점 수정] 중지 신호
@@ -1000,6 +1020,7 @@ async function generateSingleImageWithGemini(
   cachedReferenceImage?: { data: string; mimeType: string } | null,  // ✅ [2026-02-13 SPEED]
   keyPool?: GeminiKeyPool,  // ✅ [2026-02-13] 키 풀 (429 시 자동 로테이션)
   isModelLocked?: boolean,  // ✅ [v2.10.335] 사용자 명시 엔진 선택 시 true — 모델 자동 교체 전면 금지
+  allowedReferenceRoots: string[] = [],
 ): Promise<GeneratedImage | null> {
 
   // 썸네일 크롭 헬퍼
@@ -1054,6 +1075,7 @@ async function generateSingleImageWithGemini(
   let prompt = '';        // 기본값 (try 블록에서 재설정) — 루프 밖으로 이동
   const lastApiKey = apiKey; // ✅ [2026-02-21] 마지막 사용 API 키 추적 (안전망용)
   let lastSelectedModel = ''; // ✅ [2026-04-06] 마지막 선택 모델 추적 (최종 안전망 로테이션용)
+  let lastRequestParts: Array<any> = [];
 
   attemptLoop:
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
@@ -1093,10 +1115,10 @@ async function generateSingleImageWithGemini(
       let categoryStyleToUse: string;
       let personRuleToUse: string;
       if (isShoppingConnect && collectedImages && collectedImages.length > 0) {
-        // 쇼핑커넥트: 라이프스타일 이미지 전용 스타일 (사람이 제품 사용하는 장면)
+        // 쇼핑커넥트: 소제목에 맞는 장면을 고르되 대표 상품의 정체성은 고정한다.
         categoryStyleToUse = SHOPPING_CONNECT_LIFESTYLE_STYLE;
-        personRuleToUse = 'Korean person (20-40s) using the product naturally. Authentic Korean facial features. Never Western/Caucasian.';
-        console.log(`[NanoBananaPro] 🛒 쇼핑커넥트 라이프스타일 스타일 적용 (인물 + 제품 사용 장면)`);
+        personRuleToUse = 'Include a Korean person only when the section naturally requires one. Otherwise show the exact product without a person in the section-appropriate setting.';
+        console.log(`[NanoBananaPro] 🛒 쇼핑커넥트 소제목 맥락형 제품 장면 적용`);
       } else {
         categoryStyleToUse = ''; // AI가 주제에서 직접 비주얼 추론
         personRuleToUse = getPersonRule(item.category);
@@ -1137,19 +1159,6 @@ async function generateSingleImageWithGemini(
       // ===== Axios 호출 준비 =====
       const axios = (await import('axios')).default;
 
-      const normalizeLocalPath = (raw: string): string => {
-        const v = String(raw || '').trim();
-        if (!v) return '';
-        return v.replace(/^file:\/\//i, '').replace(/^\/+/, '');
-      };
-
-      const inferMimeType = (p: string): string => {
-        const s = String(p || '').toLowerCase();
-        if (s.endsWith('.jpg') || s.endsWith('.jpeg')) return 'image/jpeg';
-        if (s.endsWith('.webp')) return 'image/webp';
-        return 'image/png';
-      };
-
       // ===== 레퍼런스 이미지 처리 =====
       const parts: Array<any> = [];
       let referenceImageLoaded = false;
@@ -1169,39 +1178,24 @@ async function generateSingleImageWithGemini(
       try {
         const rawRefPath = String((item as any).referenceImagePath || '').trim();
         const rawRefUrl = String((item as any).referenceImageUrl || '').trim();
+        const loadedItemReference = !referenceImageLoaded
+          ? await loadReferenceImageData({
+              referenceImagePath: rawRefPath,
+              referenceImageUrl: rawRefUrl,
+            }, {
+              timeoutMs: 25_000,
+              allowedLocalRoots: allowedReferenceRoots,
+            })
+          : null;
 
-        // ✅ [2026-01-21 FIX] referenceImagePath가 URL인지 먼저 확인
-        // URL이면 urlRef로 처리, 아니면 localRef로 처리
-        const isRefPathUrl = /^https?:\/\//i.test(rawRefPath);
-
-        const localRef = isRefPathUrl ? '' : normalizeLocalPath(rawRefPath);
-        const urlRef = isRefPathUrl ? rawRefPath : (rawRefUrl && /^https?:\/\//i.test(rawRefUrl) ? rawRefUrl : '');
-
-        if (!referenceImageLoaded && localRef) {
-          const buf = await fs.readFile(localRef);
-          if (buf && buf.length > 0) {
-            parts.push({
-              inlineData: {
-                data: buf.toString('base64'),
-                mimeType: inferMimeType(localRef),
-              },
-            });
-            referenceImageLoaded = true;
-            console.log(`[NanoBananaPro] ✅ 로컬 참조 이미지 로드: ${localRef}`);
-          }
-        } else if (!referenceImageLoaded && urlRef) {
-          const fetched = await axios.get(urlRef, { responseType: 'arraybuffer', timeout: 25000 });
-          const buf = Buffer.from(fetched.data);
-          if (buf && buf.length > 0) {
-            parts.push({
-              inlineData: {
-                data: buf.toString('base64'),
-                mimeType: String(fetched.headers?.['content-type'] || inferMimeType(urlRef) || 'image/png'),
-              },
-            });
-            referenceImageLoaded = true;
-            console.log(`[NanoBananaPro] ✅ URL 참조 이미지 로드: ${urlRef}`);
-          }
+        if (loadedItemReference) {
+          parts.push({
+            inlineData: {
+              data: loadedItemReference.buffer.toString('base64'),
+              mimeType: loadedItemReference.mimeType,
+            },
+          });
+          referenceImageLoaded = true;
         }
 
         // ✅ [핵심 수정 2026-01-19] 참조 이미지가 없으면 collectedImages에서 첫 번째 이미지(1번 제품 이미지) 사용
@@ -1209,30 +1203,22 @@ async function generateSingleImageWithGemini(
         // ✅ [버그 수정] collectedImages는 객체 배열 { url, thumbnailUrl, ... } 또는 문자열 배열일 수 있음
         if (!referenceImageLoaded && collectedImages && collectedImages.length > 0) {
           const firstImage = collectedImages[0];
-          // 객체({ url: "...", thumbnailUrl: "..." })인지 문자열인지 판별
-          const candidateUrl = typeof firstImage === 'string'
-            ? firstImage
-            : ((firstImage as any)?.url || (firstImage as any)?.thumbnailUrl || '');
+          const loadedCollectedReference = await loadReferenceImageData(firstImage, {
+            timeoutMs: 25_000,
+            allowedLocalRoots: allowedReferenceRoots,
+          });
 
-          if (candidateUrl && /^https?:\/\//i.test(candidateUrl)) {
-            try {
-              console.log(`[NanoBananaPro] 🔄 1번 제품 이미지를 참조하여 AI 생성: ${candidateUrl.substring(0, 80)}...`);
-              const fetched = await axios.get(candidateUrl, { responseType: 'arraybuffer', timeout: 25000 });
-              const buf = Buffer.from(fetched.data);
-              if (buf && buf.length > 0) {
-                parts.push({
-                  inlineData: {
-                    data: buf.toString('base64'),
-                    mimeType: String(fetched.headers?.['content-type'] || 'image/png'),
-                  },
-                });
-                referenceImageLoaded = true;
-                console.log(`[NanoBananaPro] ✅ collectedImages 참조 이미지 로드 성공 (${Math.round(buf.length / 1024)}KB)`);
-              }
-            } catch (collectedErr: any) {
-              console.warn(`[NanoBananaPro] ⚠️ collectedImages 참조 이미지 로드 실패: ${collectedErr.message}`);
-            }
-          } else {
+          if (loadedCollectedReference) {
+            parts.push({
+              inlineData: {
+                data: loadedCollectedReference.buffer.toString('base64'),
+                mimeType: loadedCollectedReference.mimeType,
+              },
+            });
+            referenceImageLoaded = true;
+          }
+
+          if (!referenceImageLoaded) {
             console.warn(`[NanoBananaPro] ⚠️ collectedImages[0]에서 유효한 URL을 찾을 수 없음: ${JSON.stringify(firstImage).substring(0, 100)}`);
           }
         }
@@ -1240,7 +1226,15 @@ async function generateSingleImageWithGemini(
         console.warn(`[NanoBananaPro] ⚠️ 참조 이미지 로드 실패: ${err.message}`);
       }
 
+      if (isShoppingConnect && !referenceImageLoaded) {
+        throw new Error('SHOPPING_REFERENCE_LOAD_FAILED: 나노바나나가 대표 상품 이미지를 불러오지 못해 text-to-image 대체 없이 중단했습니다.');
+      }
+
       parts.push({ text: prompt });
+      lastRequestParts = parts.map((part: any) => ({
+        ...part,
+        ...(part.inlineData ? { inlineData: { ...part.inlineData } } : {}),
+      }));
 
       // ===== 이미지 품질 티어 시스템: 모델 동적 선택 =====
       const configModule = await import('../configManager.js');
@@ -1356,7 +1350,10 @@ async function generateSingleImageWithGemini(
         ];
 
         // 현재 선택된 모델은 이미 실패했으므로 건너뜀
-        const chainToTry = FALLBACK_CHAIN.filter(f => f.model !== selectedModel);
+        const chainToTry = FALLBACK_CHAIN.filter(f => (
+          f.model !== selectedModel
+          && (f.type !== 'imagen' || canUseReferenceFreeImageFallback(isShoppingConnect))
+        ));
         console.log(`[NanoBananaPro] ⚡ 4단계 폴백 시작 (현재 모델: ${selectedModel} 제외, ${chainToTry.length}개 후보)`);
 
         for (let step = 0; step < chainToTry.length; step++) {
@@ -1461,6 +1458,11 @@ async function generateSingleImageWithGemini(
 
       // ===== [2026-02-22] Imagen 4 직접 선택 시 별도 :predict 엔드포인트 사용 =====
       if (selectedModel === 'imagen-4.0-generate-001') {
+        if (!canUseReferenceFreeImageFallback(isShoppingConnect)) {
+          throw new Error(
+            'SHOPPING_REFERENCE_FALLBACK_BLOCKED: Imagen 4는 대표 상품 이미지 참조를 유지할 수 없어 쇼핑커넥트에서 사용하지 않습니다.',
+          );
+        }
         console.log(`[NanoBananaPro] 🖼️ Imagen 4 직접 선택 모드 → :predict 엔드포인트 사용`);
         const effectiveRatio = isShoppingConnect ? '1:1' : imageRatio;
         const imagen4Result = await generateImageWithImagen4(
@@ -1854,6 +1856,12 @@ async function generateSingleImageWithGemini(
 
   console.log(`[NanoBananaPro] 🛡️ 최종 안전망: ${FINAL_ROTATION.length}개 나노바나나 모델 순차 시도 (실패 모델: ${lastSelectedModel})`);
 
+  const finalFallbackParts = buildReferenceSafeFallbackParts(
+    lastRequestParts,
+    prompt || item.heading,
+    isShoppingConnect === true,
+  );
+
   for (const fallback of FINAL_ROTATION) {
     try {
       console.log(`[NanoBananaPro] 🛡️ 최종 안전망 시도: ${fallback.name} (${fallback.model})`);
@@ -1872,7 +1880,7 @@ async function generateSingleImageWithGemini(
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt || item.heading }] }],
+            contents: [{ parts: finalFallbackParts }],
             generationConfig: {
               responseModalities: ['TEXT', 'IMAGE'],
               temperature: 1.0,

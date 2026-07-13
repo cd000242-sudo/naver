@@ -67,9 +67,9 @@ import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage
 import { generateImages, resetAllImageState, abortImageGeneration } from './imageGenerator.js';
 import { deduplicateSourceImagesByContent } from './image/sourceImageDeduplicator.js';
 import {
-  extractReferenceImageUrl,
-  selectRepresentativeReferenceImage,
-} from './image/referenceImagePolicy.js';
+  applyShoppingRepresentativeReference,
+  resolveShoppingRepresentativeReference,
+} from './image/shoppingReferenceGeneration.js';
 import { generateEnglishPromptMain } from './main/utils/mainPromptInference.js';
 // (stabilityGenerator removed - deprecated provider)
 import { convertMp4ToGif } from './image/gifConverter.js'; // ✅ 추가
@@ -78,6 +78,10 @@ import { getDailyLimit, getTodayCount, incrementTodayCount, setDailyLimit } from
 // ✅ [v2.10.301] 다중계정 봇감지 백오프 + 계정별 로그인 시차 — 10팀 검증에서 botBackoff dead code 발견
 import { isAccountBackedOff, getBotBackoff, computeLoginStaggerDelayMs } from './utils/botBackoff.js';
 import { generateStructuredContent, removeOrdinalHeadingLabelsFromBody } from './contentGenerator.js';
+import {
+  sanitizeContentFakeSourcesCopy,
+  sanitizePublishableSourceText,
+} from './contentSanitizers.js';
 import {
   applyManualTitleOverrideInPlace,
   normalizeManualTitleOverride,
@@ -3344,29 +3348,21 @@ ipcMain.handle(
       if (isShoppingConnect && Array.isArray(collectedImages) && collectedImages.length > 0 && options.items) {
         const dedupResult = await deduplicateSourceImagesByContent(collectedImages, { maxCandidates: 12 });
         collectedImages = dedupResult.images;
-        const representativeImage = selectRepresentativeReferenceImage(collectedImages);
-        const representativeUrl = extractReferenceImageUrl(representativeImage);
+        const shoppingReference = resolveShoppingRepresentativeReference(collectedImages);
+        const representativeUrl = shoppingReference.referenceUrl;
         console.log(`[Main] 🛒 쇼핑커넥트 수집 이미지 중복 제거: ${rawCollectedImages.length}개 → ${collectedImages.length}개 (제거 ${dedupResult.removedCount}개)`);
         if (!representativeUrl) {
           throw new Error('쇼핑 AI 생성에 사용할 대표 상품 이미지를 확인하지 못했습니다. 상품 이미지 수집 결과를 확인해주세요.');
         }
-        collectedImages = [
-          representativeImage,
-          ...collectedImages.filter((image: any) => image !== representativeImage),
-        ];
+        collectedImages = shoppingReference.images;
+        const referencedItems = applyShoppingRepresentativeReference(options.items, representativeUrl);
+        referencedItems.forEach((item, idx) => {
+          console.log(`[Main]   📎 소제목 ${idx + 1} (${item.heading?.substring(0, 20) || ''}) → 공통 대표 이미지 참조`);
+        });
         options = {
           ...options,
           collectedImages: collectedImages as string[],
-          items: options.items.map((item, idx) => {
-            if (item.referenceImagePath || item.referenceImageUrl) return { ...item };
-            console.log(`[Main]   📎 소제목 ${idx + 1} (${item.heading?.substring(0, 20) || ''}) → 공통 대표 이미지 참조`);
-            return {
-              ...item,
-              referenceImageUrl: representativeUrl,
-              referenceImagePath: representativeUrl,
-              referenceImageList: [representativeUrl],
-            };
-          }),
+          items: referencedItems,
         };
       }
 
@@ -4831,14 +4827,19 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
         // options에 이미 콘텐츠가 있으면 그대로 사용 (renderer에서 미리 생성된 경우)
         if (preGenerated) {
-          structuredContent = preGenerated.structuredContent || preGenerated;
+          const rawStructuredContent = preGenerated.structuredContent || preGenerated;
+          structuredContent = rawStructuredContent && typeof rawStructuredContent === 'object'
+            ? sanitizeContentFakeSourcesCopy(rawStructuredContent)
+            : rawStructuredContent;
           resolvedContentPolicyContext = resolvedContentPolicyContext
             || structuredContent?.contentPolicyContext;
           // ✅ [2026-02-21 FIX] options.title이 명시적으로 있으면 최우선 사용 (preGenerated.title보다 우선)
           // preGenerated.title이 stale(이전 발행) 상태일 수 있기 때문에, options.title이 있으면 그것을 신뢰
           const preGenTitle = preGenerated.title || structuredContent?.selectedTitle;
-          title = options?.title || preGenTitle || title;
-          content = preGenerated.content || structuredContent?.bodyPlain || content;
+          const resolvedTitle = options?.title || preGenTitle || title;
+          const resolvedBody = preGenerated.content || structuredContent?.bodyPlain || structuredContent?.content || content;
+          title = resolvedTitle ? sanitizePublishableSourceText(String(resolvedTitle)) : resolvedTitle;
+          content = resolvedBody ? sanitizePublishableSourceText(String(resolvedBody)) : resolvedBody;
           generatedImages = preGenerated.generatedImages || generatedImages;
           const mergedHashtags = normalizePublishHashtags(options?.hashtags, preGenerated.hashtags, structuredContent?.hashtags);
           if (structuredContent && mergedHashtags.length > 0) {
@@ -8751,16 +8752,26 @@ app.whenReady().then(async () => {
               AutomationService.set(normalizedId, schedulerAutomation);
               AutomationService.setCurrentInstance(schedulerAutomation);
 
+              const sanitizedScheduledTitle = sanitizePublishableSourceText(String(postData.title || ''));
+              const sanitizedScheduledContent = sanitizePublishableSourceText(String(postData.content || ''));
+              const rawScheduledStructuredContent = postData.structuredContent || {
+                selectedTitle: sanitizedScheduledTitle,
+                headings: postData.headings || [],
+                bodyPlain: sanitizedScheduledContent,
+                content: sanitizedScheduledContent,
+                hashtags: postData.hashtags || []
+              };
+              const sanitizedScheduledStructuredContent = sanitizeContentFakeSourcesCopy({
+                ...rawScheduledStructuredContent,
+                selectedTitle: rawScheduledStructuredContent.selectedTitle || sanitizedScheduledTitle,
+                bodyPlain: rawScheduledStructuredContent.bodyPlain || sanitizedScheduledContent,
+                content: rawScheduledStructuredContent.content || sanitizedScheduledContent,
+              });
+
               const runOptions: RunOptions = {
-                title: postData.title,
-                content: postData.content, // ✅ content 필드 사용
-                structuredContent: postData.structuredContent || {
-                  selectedTitle: postData.title,
-                  headings: postData.headings || [],
-                  bodyPlain: postData.content, // ✅ content 필드 사용
-                  content: postData.content, // ✅ content 필드 사용
-                  hashtags: postData.hashtags || []
-                },
+                title: sanitizedScheduledTitle,
+                content: sanitizedScheduledContent,
+                structuredContent: sanitizedScheduledStructuredContent,
                 hashtags: postData.hashtags || [],
                 images: images,
                 publishMode: 'publish', // ✅ 즉시 발행 (예약이 아님!)

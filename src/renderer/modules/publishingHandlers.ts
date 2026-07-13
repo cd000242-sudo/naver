@@ -8,6 +8,14 @@ import {
   extractSemiAutoHeadingsFromBody,
   resolveSemiAutoPublishStructure,
 } from '../utils/semiAutoHeadingExtractor.js';
+import {
+  createShoppingRepresentativeThumbnail,
+  extractShoppingReferenceSource,
+  resolveShoppingCollectedImagePlacement,
+  resolveShoppingImageGenerationPolicy,
+  resolveShoppingRepresentativeReference,
+  resolveUsableShoppingReferenceSource,
+} from '../../image/shoppingReferenceGeneration.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -764,7 +772,9 @@ export async function handleFullAutoPublish(): Promise<void> {
             url: imgUrl,
             filePath: imgUrl,
             heading: `제품 이미지 ${idx + 1}`,
-            provider: 'collected'
+            provider: 'collected',
+            source: idx === 0 ? 'product-main' : 'product-gallery',
+            isRepresentative: idx === 0,
           }));
 
           // 기존 이미지와 병합
@@ -966,30 +976,39 @@ export async function handleFullAutoPublish(): Promise<void> {
         // ✅ [2026-01-31 FIX] 쇼핑커넥트 모드에서 "수집 이미지 사용" 설정 확인
         // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화
         const scSubImageMode = pipelineCfg.shopping.subImageMode;
-        const isShoppingConnectCollected = formData.contentMode === 'affiliate' && scSubImageMode === 'collected';
+        const shoppingImagePolicy = resolveShoppingImageGenerationPolicy({
+          isShoppingConnect: formData.contentMode === 'affiliate',
+          useAiImage: Boolean(formData.useAiImage),
+          subImageMode: scSubImageMode,
+          referenceCount: collectedImgs.length,
+        });
+        const { isShoppingConnectCollected } = shoppingImagePolicy;
 
         if (isShoppingConnectCollected) {
           console.log('[FullAutoPublish] 🛒 쇼핑커넥트 수집 이미지 모드 → AI 생성 스킵');
         }
 
-        if (formData.useAiImage && !isShoppingConnectCollected) {
+        if (shoppingImagePolicy.shouldGenerateAi) {
           // ✅ A. AI 이미지 생성 모드
           // ✅ [2026-02-02 FIX] 쇼핑커넥트 모드에서도 썸네일/1번 소제목 중복 방지!
           // 썸네일은 collectedImgs[0] 사용, AI 생성은 나머지 소제목에만 적용
-          if (formData.contentMode === 'affiliate' && collectedImgs.length > 0) {
+          if (shoppingImagePolicy.shouldUseShoppingReferenceAi) {
             // ✅ 쇼핑커넥트 AI 모드: 썸네일은 수집 이미지, 나머지는 AI 생성
             modal.addLog('🛒 쇼핑커넥트 AI 모드: 썸네일=수집이미지, 소제목=AI');
 
-            // 1. 썸네일 처리 (collectedImgs[0])
-            const thumbnailImg = collectedImgs[0];
-            // ✅ [2026-02-02 FIX] 문자열 URL이든 객체든 모두 처리
-            const thumbnailPath = typeof thumbnailImg === 'string'
-              ? thumbnailImg
-              : (thumbnailImg?.filePath || thumbnailImg?.url || '');
+            const shoppingReference = resolveShoppingRepresentativeReference(collectedImgs);
+            const thumbnailImg = shoppingReference.representative;
+            const thumbnailPath = await resolveUsableShoppingReferenceSource(
+              thumbnailImg,
+              window.api.checkFileExists,
+            );
+            if (!thumbnailImg || !thumbnailPath) {
+              throw new Error('쇼핑커넥트 대표 상품 이미지가 없어 원본 썸네일과 소제목 AI 이미지를 만들 수 없습니다.');
+            }
             console.log('[쇼핑커넥트 AI 모드] 썸네일 경로:', thumbnailPath?.substring(0, 50));
 
             if (thumbnailPath) {
-              if (formData.includeThumbnailText) {
+              if (formData.includeThumbnailText && formData.contentMode !== 'affiliate') {
                 modal.addLog('🎨 수집 이미지에 텍스트 오버레이 중...');
                 try {
                   // ✅ [2026-02-04 FIX] 수집 이미지 URL에 직접 텍스트 오버레이
@@ -1051,11 +1070,20 @@ export async function handleFullAutoPublish(): Promise<void> {
             }
 
             // 2. 나머지 소제목은 AI 이미지 생성 (1번 소제목부터)
+            if (thumbnailPath && generatedImgs.length > 0) {
+              generatedImgs[0] = createShoppingRepresentativeThumbnail(
+                thumbnailImg,
+                structuredContent.selectedTitle || title,
+                thumbnailPath,
+              );
+            }
+
             const headingsForAI = structuredContent.headings || [];
             if (headingsForAI.length > 0) {
+              const representativeImagePath = thumbnailPath;
               modal.addLog(`🎨 ${headingsForAI.length}개 소제목 AI 이미지 생성 시작...`);
               const aiImgs = await generateImagesForAutomationSafely(
-                imageSource,
+                pipelineCfg.shopping.aiImageEngine,
                 headingsForAI,
                 structuredContent.selectedTitle || title,
                 {
@@ -1063,11 +1091,9 @@ export async function handleFullAutoPublish(): Promise<void> {
                   onProgress: (msg: any) => modal.addLog(msg),
                   allowThumbnailText: false, // 소제목에는 텍스트 합성 안 함
                   thumbnailTextInclude: false,
-                  // ✅ [2026-02-02 FIX] 문자열 URL도 처리
-                  referenceImagePath: typeof collectedImgs[1] === 'string'
-                    ? collectedImgs[1]
-                    : (collectedImgs[1]?.filePath || collectedImgs[1]?.url || referenceImagePath),
-                  collectedImages: collectedImgs.slice(1) // 썸네일 제외한 이미지
+                  isShoppingConnect: true,
+                  referenceImagePath: representativeImagePath,
+                  collectedImages: shoppingReference.images,
                 }
               );
               generatedImgs.push(...aiImgs);
@@ -1127,20 +1153,35 @@ export async function handleFullAutoPublish(): Promise<void> {
           // includeThumbnailText가 켜져 있으면 썸네일 이미지에만 텍스트 합성
           const usedImagePaths = new Set<string>();
           const headingsArray = structuredContent.headings || [];
+          const directShoppingReference = resolveShoppingRepresentativeReference(collectedImgs);
+          const directShoppingPlacement = resolveShoppingCollectedImagePlacement(collectedImgs);
+          const directShoppingImages = formData.contentMode === 'affiliate'
+            ? directShoppingPlacement.images
+            : collectedImgs;
 
           // ✅ 썸네일 이미지 처리 (collectedImgs[0])
-          const thumbnailImg = collectedImgs[0];
+          const thumbnailImg = formData.contentMode === 'affiliate'
+            ? directShoppingReference.representative
+            : collectedImgs[0];
           // ✅ [2026-02-02 FIX] 문자열 URL이든 객체든 모두 처리
-          const thumbnailPath = typeof thumbnailImg === 'string'
-            ? thumbnailImg
-            : (thumbnailImg?.filePath || thumbnailImg?.url || '');
+          const thumbnailPath = formData.contentMode === 'affiliate'
+            ? await resolveUsableShoppingReferenceSource(
+                thumbnailImg,
+                window.api.checkFileExists,
+              )
+            : (typeof thumbnailImg === 'string'
+                ? thumbnailImg
+                : (thumbnailImg?.filePath || thumbnailImg?.url || ''));
+          if (formData.contentMode === 'affiliate' && !thumbnailPath) {
+            throw new Error('SHOPPING_REPRESENTATIVE_THUMBNAIL_REQUIRED: 대표 상품 이미지 원본을 찾을 수 없어 발행을 중단했습니다.');
+          }
           if (thumbnailPath) {
             usedImagePaths.add(thumbnailPath);
 
             // ✅ [2026-03-16 FIX] 수집 이미지 모드(B 경로)에서도 텍스트 오버레이 적용!
             // 기존: "향후 처리"로 방치 → 텍스트 오버레이 누락 버그
             // 수정: A 경로(line 587-635)와 동일하게 createProductThumbnail IPC 호출
-            if (formData.includeThumbnailText) {
+            if (formData.includeThumbnailText && formData.contentMode !== 'affiliate') {
               modal.addLog('🎨 [B경로] 수집 이미지에 텍스트 오버레이 중...');
               try {
                 const overlayResult = await window.api.createProductThumbnail(
@@ -1199,7 +1240,17 @@ export async function handleFullAutoPublish(): Promise<void> {
           }
 
           // ✅ 소제목용 이미지는 collectedImgs[1]부터 시작 (썸네일과 중복 방지!)
-          const headingImages = collectedImgs.slice(1);
+          if (formData.contentMode === 'affiliate' && thumbnailPath && generatedImgs.length > 0) {
+            generatedImgs[0] = createShoppingRepresentativeThumbnail(
+              thumbnailImg,
+              structuredContent.selectedTitle || title,
+              thumbnailPath,
+            );
+          }
+
+          const headingImages = formData.contentMode === 'affiliate'
+            ? directShoppingPlacement.subheadingImages
+            : directShoppingImages.slice(1);
           let headingImgIdx = 0;
 
           for (let idx = 0; idx < headingsArray.length; idx++) {
@@ -1213,9 +1264,11 @@ export async function handleFullAutoPublish(): Promise<void> {
             while (!path && headingImgIdx < headingImages.length) {
               const candidate = headingImages[headingImgIdx];
               // ✅ [2026-02-02 FIX] 문자열 URL도 처리
-              const candidatePath = typeof candidate === 'string'
-                ? candidate
-                : (candidate?.filePath || candidate?.url || '');
+              const candidatePath = formData.contentMode === 'affiliate'
+                ? await resolveUsableShoppingReferenceSource(candidate, window.api.checkFileExists)
+                : (typeof candidate === 'string'
+                    ? candidate
+                    : extractShoppingReferenceSource(candidate));
               headingImgIdx++; // ✅ 항상 증가 (중복이든 아니든 다음 이미지로 이동)
               if (candidatePath && !usedImagePaths.has(candidatePath)) {
                 path = candidatePath;

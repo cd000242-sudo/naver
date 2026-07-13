@@ -9,7 +9,6 @@ import {
   getProfileDir,
   isLoggedIn,
   launchBrowser,
-  minimizeDropshotWindow,
   navigateToDropshotBoard,
   navigateToDropshotLogin,
   openDropshotImageWorkspace,
@@ -26,10 +25,10 @@ import {
   getCachedContext,
   getCachedPage,
   getDropshotOperationState,
-  setCached,
   tryBeginDropshotCheck,
   tryBeginDropshotLogin,
 } from './dropshotSession.js';
+import { reopenDropshotHeadlessGenerationContext } from './dropshotHeadlessSession.js';
 
 let _loginPromise: Promise<DropshotLoginStatus> | null = null;
 let _checkPromise: Promise<DropshotLoginStatus> | null = null;
@@ -227,9 +226,12 @@ async function dropshotLoginInternal(
       };
     }
 
-    await minimizeDropshotWindow(page, onLog);
-    setCached(ctx, page);
+    // Closing the persistent context flushes auth state to the shared profile.
+    // Generation reopens that profile headlessly, so this window cannot linger.
+    await closeLoginVerificationContext(ctx);
     ctx = null;
+    clearCached();
+    await reopenDropshotHeadlessGenerationContext(profileDir, onLog);
     return { loggedIn: true, message: '로그인 완료 - 무제한 생성 세션이 준비되었습니다.' };
   } catch (error) {
     await closeLoginVerificationContext(ctx);

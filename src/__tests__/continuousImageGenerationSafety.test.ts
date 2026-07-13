@@ -188,7 +188,7 @@ describe('continuous and multi-account image generation safety', () => {
     expect(fullAutoCode).toContain('thumbnailTextInclude: includeThumbnailText');
     expect(fullAutoCode).toContain('allowText: false');
     expect(fullAutoCode).toContain('thumbnailTextInclude: false');
-    expect(multiAccountCode).toMatch(/const includeThumbnailText = options\.thumbnailTextInclude \?\? options\.allowThumbnailText \?\? false/);
+    expect(multiAccountCode).toMatch(/const includeThumbnailText = isShoppingConnect[\s\S]{0,100}?\? false[\s\S]{0,100}?options\.thumbnailTextInclude \?\? options\.allowThumbnailText \?\? false/);
     expect(multiAccountCode).toMatch(/allowText:\s*isThumb \? includeThumbnailText : false/);
     expect(multiAccountCode).toMatch(/thumbnailTextInclude:\s*item\.isThumbnail === true \? includeThumbnailText : false/);
     expect(imageGeneratorCode).toMatch(/function shouldAllowTextForImageItem/);
@@ -197,7 +197,8 @@ describe('continuous and multi-account image generation safety', () => {
     expect(imageGeneratorCode).toMatch(/return item\?\.isThumbnail === true/);
     expect(imageGeneratorCode).toMatch(/item\?\.isThumbnail === true && item\?\.allowText !== false/);
     expect(imageGeneratorCode).toMatch(/shouldApplyThumbnailTextOverlay\(img,\s*i,\s*items\)/);
-    expect(imageGeneratorCode).toMatch(/allowText:\s*shouldAllowTextForImageItem\(item, options\)/);
+    expect(imageGeneratorCode).toMatch(/const allowText = shouldAllowTextForImageItem\(item, options\)/);
+    expect(imageGeneratorCode).toMatch(/\n\s*allowText,\s*\/\/ text is thumbnail-only/);
   });
 
   it('auto-links previous posts for mate mode and preserves publish hashtags', () => {

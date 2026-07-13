@@ -10,6 +10,9 @@ function read(rel: string): string {
 
 describe('Dropshot browser visibility policy', () => {
   const code = read('image/dropshotBrowser.ts');
+  const loginCode = read('image/dropshotLogin.ts');
+  const coreCode = read('image/dropshotCore.ts');
+  const headlessCode = read('image/dropshotHeadlessSession.ts');
 
   it('keeps post-login generation hidden unless debug visibility is explicitly allowed', () => {
     expect(code).toMatch(/interface DropshotLaunchOptions/);
@@ -18,9 +21,17 @@ describe('Dropshot browser visibility policy', () => {
     expect(code).toMatch(/const effectiveHeadless = forceVisible \? false : headless/);
   });
 
-  it('minimizes a verified visible login context instead of destroying its subscription session', () => {
-    expect(code).toMatch(/export async function minimizeDropshotWindow/);
-    expect(code).toMatch(/Browser\.getWindowForTarget/);
-    expect(code).toMatch(/windowState:\s*'minimized'/);
+  it('closes the visible login context after the persistent profile is saved', () => {
+    expect(loginCode).toContain('await closeLoginVerificationContext(ctx);');
+    expect(loginCode).toContain('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)');
+    expect(loginCode).not.toContain('setCached(ctx, page);');
+    expect(loginCode).not.toContain('await minimizeDropshotWindow(page, onLog);');
+  });
+
+  it('reopens generation in headless mode after an interactive login fallback', () => {
+    expect(coreCode).toContain('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)');
+    expect(headlessCode).toContain('launchBrowser(profileDir, true)');
+    expect(headlessCode).toContain('setCached(context, page)');
+    expect(coreCode).not.toMatch(/await minimizeDropshotWindow\(page, onLog\);\s*setCached\(context, page\)/);
   });
 });

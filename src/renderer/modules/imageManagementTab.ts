@@ -441,7 +441,7 @@ export async function initImageManagementTab(): Promise<void> {
         localStorage.setItem('fullAutoImageSource', normalizedSource);
         console.log(`[Renderer] 🔄 fullAutoImageSource 동기화: "${normalizedSource}"${normalizedSource !== selectedSource ? ` (정규화: "${selectedSource}" → "${normalizedSource}")` : ''}`);
         // [v1.6.3] 쇼핑 커넥트 AI 엔진(nano-banana-pro|openai-image)이면 scAIImageEngine + 라디오도 sync
-        if (selectedSource === 'nano-banana-2' || selectedSource === 'nano-banana-pro' || selectedSource === 'nano-banana' || selectedSource === 'openai-image') {
+        if (selectedSource === 'nano-banana-2' || selectedSource === 'openai-image' || selectedSource === 'dropshot') {
           localStorage.setItem('scAIImageEngine', selectedSource);
           // ✅ [2026-05-18] 엔진 이름을 scSubImageSource에 쓰지 않는다. mode='ai'만 저장.
           setSubImageMode('ai');

@@ -13,6 +13,7 @@ describe('Dropshot unlimited mode safety', () => {
   const captureCode = read('image/dropshotCapture.ts');
   const sessionCode = read('image/dropshotSession.ts');
   const coreCode = read('image/dropshotCore.ts');
+  const headlessCode = read('image/dropshotHeadlessSession.ts');
 
   it('reads unlimited switch state and zero-cost generate button state', () => {
     expect(browserCode).toMatch(/readDropshotControlState/);
@@ -80,12 +81,22 @@ describe('Dropshot unlimited mode safety', () => {
     expect(initialCache).toBeGreaterThan(initialControls);
 
     const visibleControls = coreCode.lastIndexOf('await ensureDropshotControls(page, onLog)');
-    const visibleMinimize = coreCode.indexOf('await minimizeDropshotWindow(page, onLog)', visibleControls);
-    const visibleCache = coreCode.indexOf('setCached(context, page);', visibleMinimize);
+    const visibleClose = coreCode.indexOf('await closeContext(context);', visibleControls);
+    const hiddenReopen = coreCode.indexOf('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)', visibleClose);
     expect(visibleControls).toBeGreaterThan(initialCache);
-    expect(visibleMinimize).toBeGreaterThan(visibleControls);
-    expect(visibleCache).toBeGreaterThan(visibleMinimize);
-    expect(coreCode.slice(visibleControls)).not.toContain('launchBrowser(profileDir, true)');
+    expect(visibleClose).toBeGreaterThan(visibleControls);
+    expect(hiddenReopen).toBeGreaterThan(visibleClose);
+
+    const helperStart = headlessCode.indexOf('export async function reopenDropshotHeadlessGenerationContext');
+    const hiddenLaunch = headlessCode.indexOf('launchBrowser(profileDir, true)', helperStart);
+    const hiddenControls = headlessCode.indexOf('await ensureDropshotControls(page, onLog)', hiddenLaunch);
+    const hiddenCache = headlessCode.indexOf('setCached(context, page);', hiddenControls);
+    expect(helperStart).toBeGreaterThan(-1);
+    expect(hiddenLaunch).toBeGreaterThan(helperStart);
+    expect(hiddenControls).toBeGreaterThan(hiddenLaunch);
+    expect(hiddenCache).toBeGreaterThan(hiddenControls);
+    expect(coreCode).not.toContain('minimizeDropshotWindow');
+    expect(headlessCode).not.toContain('minimizeDropshotWindow');
     expect(coreCode).toMatch(/clearCached\(\)/);
   });
 });

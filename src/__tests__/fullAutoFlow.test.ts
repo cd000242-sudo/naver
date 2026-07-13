@@ -219,7 +219,9 @@ describe('full-auto image failure policy', () => {
   const source = readFileSync(new URL('../renderer/modules/fullAutoFlow.ts', import.meta.url), 'utf8');
 
   it('retries image generation on the selected engine only', () => {
-    expect(source).toMatch(/const originalProvider = formData\.imageSource/);
+    expect(source).toContain('const originalProvider = isShoppingAiMode');
+    expect(source).toContain('? (formData.scAIImageEngine || formData.imageSource)');
+    expect(source).toContain(': formData.imageSource');
     expect(source).toMatch(/return originalProvider/);
     expect(source).not.toMatch(/const FALLBACK_CHAIN/);
   });

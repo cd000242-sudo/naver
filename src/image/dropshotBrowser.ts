@@ -803,17 +803,18 @@ export async function downloadAsFileBuffer(
 
 /** Build an enhanced + variation-seeded prompt (§12.3). */
 export function buildDropshotPrompt(raw: string): string {
-  const hasKorean = /[가-힯]/.test(raw);
-  const isShort = raw.length < 50;
+  const normalized = String(raw || '').trim();
+  const hasKorean = /[가-힣]/.test(normalized);
+  const isShort = normalized.length < 50;
   const enhanced =
     hasKorean && isShort
-      ? `${raw} — 본 주제를 직관적으로 표현하는 사실적 사진, 한국적 배경, 자연광, 시네마틱 4K, 텍스트 없음`
-      : raw;
+      ? `${normalized}. Create a realistic 4K product photograph that directly visualizes this topic, with natural lighting, a context-appropriate setting, and no text.`
+      : normalized;
 
   const nonce = Math.random().toString(36).slice(2, 8);
   const variationSeed = Date.now().toString(36);
   return (
     enhanced +
-    ` (버전-${variationSeed}-${nonce}: 매번 완전히 다른 구도와 시점, 다른 인물/배경/소품 — 이전 결과와 절대 같으면 안 됨)`
+    ` (variation-${variationSeed}-${nonce}: use a distinct camera angle, viewpoint, composition, lighting, and background; do not duplicate previous outputs.)`
   );
 }

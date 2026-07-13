@@ -29,6 +29,7 @@ const AI_ENGINE_WHITELIST = new Set([
     'prodia',
     'pollinations',
     'flow',
+    'dropshot',
 ]);
 
 export type SubImageMode = 'ai' | 'collected';

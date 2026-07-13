@@ -13,6 +13,12 @@ import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { STYLE_PROMPT_MAP, isNoPersonCategory, getImageDiversityHints } from './imageStyles.js';
 import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
+import {
+    buildAppManagedReferenceImageRoots,
+    createReferenceImageDataUrl,
+    loadReferenceImageData,
+    type LoadedReferenceImageData,
+} from './referenceImageLoader.js';
 // [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — gpt-image-2 b64_json 1.18MB+
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 
@@ -35,11 +41,24 @@ export async function generateWithOpenAIImage(
     providedApiKey?: string,
     isShoppingConnect: boolean = false,
     onImageGenerated?: (image: GeneratedImage, index: number, total: number) => void,  // ✅ [2026-02-27] 실시간 콜백
-    collectedImages?: string[],  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
+    collectedImages?: unknown[],  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
     overrideModel?: string,       // v2.7.15: 호출자가 모델 강제 지정 (예: 'dall-e-3')
     fallbackOpenAIApiKey?: string,
 ): Promise<GeneratedImage[]> {
     const config = await loadConfig();
+    let userDataRoot = '';
+    let tempRoot = '';
+    try {
+        userDataRoot = app.getPath('userData');
+        tempRoot = app.getPath('temp');
+    } catch {
+        // Unit tests and early startup may not have an initialized Electron app.
+    }
+    const allowedReferenceRoots = buildAppManagedReferenceImageRoots(
+        (config as any).customImageSavePath,
+        userDataRoot,
+        tempRoot,
+    );
     // ✅ [v2.7.33] 키 source 명시 — 사용자 진단 시 어느 입력란을 채워야 하는지 즉시 보임
     let apiKey: string | undefined;
     let keySource = 'unknown';
@@ -73,25 +92,24 @@ export async function generateWithOpenAIImage(
     console.log(`[OpenAI-Image] 🎨 총 ${items.length}개 이미지 생성 시작 (모델: ${resolvedModel}, 키 source: ${keySource}, 키 길이: ${apiKey.length})`);
 
     // ✅ [2026-03-03] 참조 이미지 사전 캐싱 (쇼핑커넥트 수집 이미지)
-    let cachedReferenceBase64: string | null = null;
+    let cachedReferenceImage: LoadedReferenceImageData | null = null;
     if (isShoppingConnect && collectedImages && collectedImages.length > 0) {
         try {
             const firstImage = collectedImages[0];
-            const candidateUrl = typeof firstImage === 'string'
-                ? firstImage
-                : ((firstImage as any)?.url || (firstImage as any)?.thumbnailUrl || '');
-            if (candidateUrl && /^https?:\/\//i.test(candidateUrl)) {
-                console.log(`[OpenAI-Image] 🖼️ 참조 이미지 다운로드: ${candidateUrl.substring(0, 80)}...`);
-                const refResponse = await axios.get(candidateUrl, { responseType: 'arraybuffer', timeout: 15000 });
-                const refBuf = Buffer.from(refResponse.data);
-                if (refBuf && refBuf.length > 0) {
-                    cachedReferenceBase64 = refBuf.toString('base64');
-                    console.log(`[OpenAI-Image] ✅ 참조 이미지 캐싱 완료 (${Math.round(refBuf.length / 1024)}KB) → img2img 모드 활성화`);
-                }
+            const loadedReference = await loadReferenceImageData(firstImage, {
+                timeoutMs: 15_000,
+                allowedLocalRoots: allowedReferenceRoots,
+            });
+            if (loadedReference) {
+                cachedReferenceImage = loadedReference;
+                console.log(`[OpenAI-Image] ✅ 참조 이미지 캐싱 완료 (${Math.round(loadedReference.buffer.length / 1024)}KB) → img2img 모드 활성화`);
             }
         } catch (refErr: any) {
-            console.warn(`[OpenAI-Image] ⚠️ 참조 이미지 다운로드 실패: ${refErr.message} → text-to-image로 진행`);
+            console.warn(`[OpenAI-Image] ⚠️ 참조 이미지 로드 실패: ${refErr.message}`);
         }
+    }
+    if (isShoppingConnect && !cachedReferenceImage) {
+        throw new Error('SHOPPING_REFERENCE_LOAD_FAILED: 덕트테이프가 대표 상품 이미지를 불러오지 못해 text-to-image 대체 없이 중단했습니다.');
     }
 
     const results: GeneratedImage[] = [];
@@ -159,11 +177,7 @@ export async function generateWithOpenAIImage(
             }
 
             if (isShoppingConnect) {
-                if (cachedReferenceBase64) {
-                    prompt = `${textDirective} Based on the provided product reference image, create a premium lifestyle photograph showing this exact product being used by a Korean person (20-40s). ${dh.angle}, ${dh.framing}, ${prompt}, luxury Korean lifestyle setting, ${dh.lighting}, ${dh.focus}, maintain the product's exact appearance and design from the reference.`;
-                } else {
-                    prompt = `${textDirective} ${dh.angle}, ${dh.framing}, Premium lifestyle photography with Korean person, ${dh.personAction}, using or enjoying the product, ${prompt}, luxury lifestyle setting, ${dh.lighting}, ${dh.focus}.`;
-                }
+                prompt = `${textDirective} Based on the provided product reference image, create a realistic premium product photograph that specifically visualizes the current article section. ${dh.angle}, ${dh.framing}, ${prompt}, ${dh.lighting}, ${dh.focus}. Include a Korean person only when the section topic naturally requires a person using, wearing, holding, or interacting with the product; otherwise use a product-only detail, installation, comparison, component, or environment scene. Maintain the product's exact appearance and design from the reference.`;
             } else if (!isRealistic) {
                 prompt = `${textDirective} ${stylePromptText}, ${prompt}.`;
             } else {
@@ -216,8 +230,8 @@ export async function generateWithOpenAIImage(
 
                     // gpt-image-1은 image 파라미터로 참조 이미지 전달 가능
                     // dall-e-3는 image 파라미터 미지원 (text-to-image only)
-                    if (cachedReferenceBase64 && !isDallE3) {
-                        requestBody.image = `data:image/png;base64,${cachedReferenceBase64}`;
+                    if (cachedReferenceImage && !isDallE3) {
+                        requestBody.image = createReferenceImageDataUrl(cachedReferenceImage);
                         console.log(`[OpenAI-Image] 🖼️ 참조 이미지를 image 파라미터로 전달 (img2img 모드)`);
                     }
 

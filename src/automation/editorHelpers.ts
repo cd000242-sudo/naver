@@ -957,8 +957,6 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           // ✅ 쇼핑커넥트: 수집된 제품 이미지 + 텍스트 오버레이로 썸네일 생성
           self.log(`   🛒 쇼핑커넥트: 수집 이미지 기반 썸네일 생성 중...`);
           try {
-            const { generateThumbnailWithTextOverlay } = await import('../image/tableImageGenerator.js');
-            const blogTitle = resolved.title || structured.selectedTitle || '상품 리뷰';
 
             // 수집된 이미지 찾기 (collectedImages → resolved.images 중 collected → 기타)
             let productImagePath = '';
@@ -998,9 +996,9 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             }
 
             if (productImagePath) {
-              const thumbnailPath = await generateThumbnailWithTextOverlay(productImagePath, blogTitle);
+              const thumbnailPath = productImagePath;
               if (thumbnailPath) {
-                self.log(`   ✅ 수집 이미지 + 텍스트 오버레이 썸네일 생성 완료`);
+                self.log(`   ✅ 대표 상품 이미지를 원본 그대로 썸네일로 사용`);
                 await self.insertBase64ImageAtCursor(thumbnailPath);
                 // ✅ [2026-02-26 FIX] 썸네일 삽입 후 에디터 렌더링 확인 (대기 시간 500ms→2000ms + 폴링 검증)
                 await self.delay(2000);
@@ -1027,7 +1025,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         const imageProvider = firstIntroImage?.provider || '';
         const isNanoBanana = imageProvider === 'nano-banana-pro' || imageProvider === 'pollinations';
 
-        if (resolved.includeThumbnailText && !isNanoBanana) {
+        const preserveOriginalThumbnail = isShoppingConnectModeGlobal
+          || firstIntroImage?.preserveOriginal === true
+          || firstIntroImage?.disableTextOverlay === true;
+        if (resolved.includeThumbnailText && !isNanoBanana && !preserveOriginalThumbnail) {
           // ✅ 나노바나나프로 외 엔진: AI 이미지 위에 SVG 텍스트 오버레이 적용
           self.log(`   🎨 AI 생성 썸네일에 SVG 텍스트 오버레이 적용 중... (엔진: ${imageProvider})`);
           try {
