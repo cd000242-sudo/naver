@@ -10,6 +10,7 @@
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 import * as os from 'node:os';
+import { fileURLToPath } from 'node:url';
 import { trackDropshotContext, untrackDropshotContext } from './dropshotSession.js';
 import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
 
@@ -771,6 +772,18 @@ export async function downloadAsFileBuffer(
   url: string,
 ): Promise<{ name: string; mimeType: string; buffer: Buffer } | null> {
   try {
+    const raw = String(url || '').trim();
+    const localPath = /^file:\/\//i.test(raw) ? fileURLToPath(raw) : raw;
+    if (/^(?:[a-z]:[\\/]|\\\\|\/)/i.test(localPath) && fs.existsSync(localPath)) {
+      const buffer = fs.readFileSync(localPath);
+      const ext = path.extname(localPath).toLowerCase();
+      const mimeType = ext === '.png'
+        ? 'image/png'
+        : ext === '.webp'
+          ? 'image/webp'
+          : 'image/jpeg';
+      return { name: path.basename(localPath), mimeType, buffer };
+    }
     const res = await fetch(url);
     if (!res.ok) return null;
     const buf = Buffer.from(await res.arrayBuffer());

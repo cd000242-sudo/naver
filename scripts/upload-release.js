@@ -152,6 +152,7 @@ function gitPush() {
             'package.json',
             'package-lock.json',
             'src/',
+            'e2e/',
             'public/',
             'scripts/',
             'config/',

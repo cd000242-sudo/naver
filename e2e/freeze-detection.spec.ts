@@ -19,10 +19,16 @@
 
 import { test, expect, _electron as electron, ElectronApplication, Page } from '@playwright/test';
 import path from 'path';
-import { closeElectronApp, waitForMainWindow } from './electronTestUtils';
+import {
+  closeElectronApp,
+  createElectronTestProfile,
+  type ElectronTestProfile,
+  waitForMainWindow,
+} from './electronTestUtils';
 
 let app: ElectronApplication;
 let mainWindow: Page;
+let testProfile: ElectronTestProfile;
 
 interface LongTaskRecord {
   duration: number;
@@ -60,6 +66,7 @@ async function collectLongTasks(page: Page, durationMs: number): Promise<LongTas
 }
 
 test.beforeAll(async () => {
+  testProfile = await createElectronTestProfile('bln-freeze-e2e-');
   const mainPath = path.join(__dirname, '..', 'dist', 'main.js');
   app = await electron.launch({
     args: [mainPath],
@@ -67,8 +74,7 @@ test.beforeAll(async () => {
     timeout: 60_000,
     env: {
       ...process.env,
-      NODE_ENV: 'test',
-      E2E_TEST: '1',
+      ...testProfile.env,
     },
   });
   mainWindow = await waitForMainWindow(app);
@@ -76,6 +82,7 @@ test.beforeAll(async () => {
 
 test.afterAll(async () => {
   await closeElectronApp(app);
+  await testProfile?.cleanup();
 });
 
 test('앱 시작 직후 5초간 LongTask 누적 < 2000ms', async () => {

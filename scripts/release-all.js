@@ -247,7 +247,7 @@ async function main() {
   banner(`Better Life Naver v${VERSION} — 릴리즈 파이프라인`);
   console.log(`  ${DIM}시작: ${new Date().toLocaleString('ko-KR')}${RESET}`);
 
-  const totalSteps = 7;
+  const totalSteps = 8;
   let needsRestore = false; // reset-config-for-pack 이후 true → 실패 시 자동 복구
   let allSuccess = true;
   const startTime = Date.now();
@@ -281,23 +281,33 @@ async function main() {
       return;
     }
 
-    // ═══ Step 4: 민감정보 복원 ═══
-    if (!executeStep(4, totalSteps, '민감정보 복원', 'node scripts/restore-after-pack.js', { showOutput: true })) {
+    // ═══ Step 4: 패키지 앱 클린 프로필 스모크 ═══
+    if (!executeStep(4, totalSteps, '패키지 앱 클린 프로필 스모크', 'node scripts/packaged-app-smoke.mjs', {
+      timeout: 180000,
+      showOutput: true,
+    })) {
+      fail('패키지 앱 스모크 실패 — 릴리즈 중단');
+      allSuccess = false;
+      return;
+    }
+
+    // ═══ Step 5: 민감정보 복원 ═══
+    if (!executeStep(5, totalSteps, '민감정보 복원', 'node scripts/restore-after-pack.js', { showOutput: true })) {
       // 복원 실패는 WARNING (수동 복원 가능)
       warn('복원 실패 — git checkout src/renderer/renderer.ts 로 수동 복원하세요');
       // 복원은 이미 시도했으므로 needsRestore = false
     }
     needsRestore = false; // 복원 완료 (또는 시도 완료)
 
-    // ═══ Step 5: latest.yml SHA512 동기화 ═══
-    if (!executeStep(5, totalSteps, 'latest.yml SHA512 동기화', 'node scripts/fix-latest-yml.js', { showOutput: true })) {
+    // ═══ Step 6: latest.yml SHA512 동기화 ═══
+    if (!executeStep(6, totalSteps, 'latest.yml SHA512 동기화', 'node scripts/fix-latest-yml.js', { showOutput: true })) {
       fail('latest.yml 생성 실패 — 릴리즈 중단');
       allSuccess = false;
       return;
     }
 
-    // ═══ Step 6: GitHub 릴리즈 업로드 ═══
-    if (!executeStep(6, totalSteps, 'GitHub 릴리즈 업로드', 'node scripts/upload-release.js', {
+    // ═══ Step 7: GitHub 릴리즈 업로드 ═══
+    if (!executeStep(7, totalSteps, 'GitHub 릴리즈 업로드', 'node scripts/upload-release.js', {
       timeout: 600000, // 10분 (385MB 업로드)
       showOutput: true,
     })) {
@@ -306,10 +316,10 @@ async function main() {
       return;
     }
 
-    // ═══ Step 7: GitHub fresh-fetch 검증 (auto-update 안전망) ═══
+    // ═══ Step 8: GitHub fresh-fetch 검증 (auto-update 안전망) ═══
     // upload-release.js의 verify가 이미 자체 검증하지만, 별도 fresh-fetch로
     // 부분 업로드 / 파이프라인 우회 케이스를 한 번 더 차단한다.
-    stepHeader(7, totalSteps, 'GitHub 자산 fresh-fetch 검증');
+    stepHeader(8, totalSteps, 'GitHub 자산 fresh-fetch 검증');
     try {
       const verifyResult = await verifyReleaseAssets(VERSION);
       if (verifyResult.ok) {

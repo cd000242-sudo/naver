@@ -1,6 +1,13 @@
 import { ContentPolicyAuditStore } from './auditStore.js';
 import { ensureTrackedPublishedPost } from '../analytics/publishedPostTracker.js';
+import { extractNaverBlogPostIdentity } from '../automation/publishOutcomeResolver.js';
+import { resolveScheduledPublishAt } from '../scheduler/appScheduleQueue.js';
 import { runContentPolicyPipeline } from './orchestrator.js';
+import {
+  approveRecentPostManualReview,
+  isOnlyRecentPostManualReviewReasons,
+  recentPostManualReviewReasons,
+} from './manualReview.js';
 import { loadContentPolicy } from './policyLoader.js';
 import { PublicationStateStore } from './publicationStateStore.js';
 import { evaluatePublishGuard } from './publishGuard.js';
@@ -40,6 +47,9 @@ export interface ContentPolicyPayload {
   keywords?: string | string[];
   structuredContent?: Record<string, any>;
   publishMode?: 'draft' | 'publish' | 'schedule';
+  scheduleDate?: string;
+  scheduleTime?: string;
+  scheduleType?: 'app-schedule' | 'naver-server';
   contentMode?: string;
   postId?: string;
   generator?: string;
@@ -48,6 +58,7 @@ export interface ContentPolicyPayload {
   contentPolicyContext?: ContentPolicyPayloadContext;
   _semiAutoMode?: boolean;
   _publishFlow?: PublishFlow;
+  _contentPolicyManualReviewApproved?: boolean;
 }
 
 export interface PrepareContentPolicyOptions {
@@ -60,6 +71,8 @@ export interface PrepareContentPolicyOptions {
 export interface PreparedContentPolicyPublish<T extends ContentPolicyPayload = ContentPolicyPayload> {
   allowed: boolean;
   reasons: string[];
+  manualReviewRequired: boolean;
+  manualReviewReasons: string[];
   articleId: string;
   policyResult: ContentPolicyResult;
   payload: T;
@@ -163,6 +176,12 @@ function auditRecord(
     rewrite_count: result.rewrite_count,
     decision: result.decision,
     block_reasons: [...result.block_reasons],
+    manual_review: result.manual_review
+      ? {
+        ...result.manual_review,
+        reasons: [...result.manual_review.reasons],
+      }
+      : undefined,
     prompt_version: result.prompt_version,
     model_version: result.model_version,
     policy_version: result.policy_version,
@@ -195,8 +214,16 @@ async function resolveRecentPosts(
     await repository.mergeSnapshot(snapshot);
   }
   const stored = await repository.loadRecentPosts(50);
-  if (stored.ok) return stored;
-  if (context?.recentPostsResult?.ok) return context.recentPostsResult;
+  if (stored.ok && stored.posts.length > 0) return stored;
+  if (context?.recentPostsResult?.ok) {
+    return {
+      ...context.recentPostsResult,
+      posts: context.recentPostsResult.posts.map((post) => ({
+        ...post,
+        headings: [...post.headings],
+      })),
+    };
+  }
   return stored;
 }
 
@@ -250,6 +277,9 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   const stateStore = new PublicationStateStore(options.userDataPath);
   const config = await loadContentPolicy(options.policyPath ? { policyPath: options.policyPath } : {});
   const draft = draftFromPayload(payload);
+  const knownArticleId = stringValue(payload.postId);
+  const excludeOwnScheduledReservation = payload.publishMode === 'schedule'
+    || payload._publishFlow === 'app_scheduler';
   const contextMissing = !payload.contentPolicyContext?.input;
   const baseInput = payload.contentPolicyContext?.input || fallbackInput(payload, draft);
   const reconciledInput = reconcilePublishPolicyInput(baseInput, draft, {
@@ -270,7 +300,11 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   const effectiveInput: ContentPolicyInput = {
     ...reconciledInput,
     recent_posts: recentPostsResult.ok
-      ? recentPostsResult.posts.map((post) => ({ ...post, headings: [...post.headings] }))
+      ? recentPostsResult.posts
+        .filter((post) => !excludeOwnScheduledReservation
+          || !knownArticleId
+          || post.article_id !== knownArticleId)
+        .map((post) => ({ ...post, headings: [...post.headings] }))
       : undefined,
     account_id: reconciledInput.account_id || stringValue(payload.accountId || payload.naverId) || undefined,
     blog_id: reconciledInput.blog_id || stringValue(payload.naverId) || undefined,
@@ -282,23 +316,36 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
     recentPostsResult,
     modelVersion: stringValue(payload.geminiModel || payload.generator) || 'existing-draft-adapter',
   });
+  if (payload._contentPolicyManualReviewApproved === true) {
+    policyResult = approveRecentPostManualReview(policyResult, now.toISOString());
+  }
   const articleId = stringValue(payload.postId) || `policy-${policyResult.input_hash.slice(0, 20)}`;
 
   let guardReasons: string[] = [];
   if (policyResult.decision === 'PASS') {
     try {
       const state = await stateStore.load();
-      const guard = evaluatePublishGuard({
+      const scheduledAt = payload.publishMode === 'schedule'
+        ? resolveScheduledPublishAt(payload.scheduleDate, payload.scheduleTime)
+        : null;
+      if (payload.publishMode === 'schedule' && !scheduledAt) {
+        guardReasons = ['BLOCK_INVALID_SCHEDULE_DATE'];
+        policyResult = blockForStorageFailure(policyResult, ...guardReasons);
+      } else {
+        const guard = evaluatePublishGuard({
         policyResult,
         state,
         accountId: effectiveInput.account_id || 'default-account',
-        now,
+        now: scheduledAt?.date || now,
         config,
         env: options.env,
-        enforceCadence: payload.publishMode !== 'draft' && payload.publishMode !== 'schedule',
-      });
-      guardReasons = [...guard.reasons];
-      if (!guard.allowed) policyResult = blockForStorageFailure(policyResult, ...guardReasons);
+        enforceCadence: payload.publishMode !== 'draft',
+        currentArticleId: articleId,
+        excludeCurrentArticle: excludeOwnScheduledReservation,
+        });
+        guardReasons = [...guard.reasons];
+        if (!guard.allowed) policyResult = blockForStorageFailure(policyResult, ...guardReasons);
+      }
     } catch {
       guardReasons = ['BLOCK_PUBLICATION_STATE_UNAVAILABLE'];
       policyResult = blockForStorageFailure(policyResult, guardReasons[0]);
@@ -312,9 +359,12 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   }
 
   const preparedPayload = applyResultToPayload(payload, policyResult, effectiveInput);
+  const finalReasons = [...new Set([...policyResult.block_reasons, ...guardReasons])];
   return {
     allowed: policyResult.decision === 'PASS' && policyResult.publication.allowed && guardReasons.length === 0,
-    reasons: [...new Set([...policyResult.block_reasons, ...guardReasons])],
+    reasons: finalReasons,
+    manualReviewRequired: isOnlyRecentPostManualReviewReasons(finalReasons),
+    manualReviewReasons: recentPostManualReviewReasons(finalReasons),
     articleId,
     policyResult,
     payload: preparedPayload,
@@ -333,15 +383,15 @@ export async function recordContentPolicyPublication(input: {
   const publishedAt = input.publishedAt || new Date();
   const draft = draftFromPayload(input.payload);
   const publishedUrl = stringValue(input.publishedUrl);
-  const urlMatch = publishedUrl.match(/^https:\/\/blog\.naver\.com\/([^/?#]+)\/(\d+)(?:[/?#]|$)/i);
-  if (!urlMatch) throw new Error('POLICY_EXPOSURE_TARGET_INVALID');
+  const identity = extractNaverBlogPostIdentity(publishedUrl);
+  if (!identity) throw new Error('POLICY_EXPOSURE_TARGET_INVALID');
   const quality = input.policyResult.quality_report;
   const tracked = ensureTrackedPublishedPost(input.userDataPath, {
     publishedAt: publishedAt.toISOString(),
     keyword: input.payload.contentPolicyContext?.input.primary_keyword || draft.title,
     mode: stringValue(input.payload.contentMode) || 'seo',
-    blogId: urlMatch[1],
-    logNo: urlMatch[2],
+    blogId: identity.blogId,
+    logNo: identity.logNo,
     url: publishedUrl,
     title: draft.title,
     evaluator: {
@@ -399,4 +449,57 @@ export async function recordContentPolicyPublication(input: {
     exposure_checks: [],
   });
 
+}
+
+export async function recordContentPolicyReservation(input: {
+  userDataPath: string;
+  articleId: string;
+  accountId: string;
+  payload: ContentPolicyPayload;
+  policyResult: ContentPolicyResult;
+  scheduledAt: Date;
+}): Promise<void> {
+  if (!(input.scheduledAt instanceof Date) || !Number.isFinite(input.scheduledAt.getTime())) {
+    throw new Error('POLICY_RESERVATION_DATE_INVALID');
+  }
+  const draft = draftFromPayload(input.payload);
+  const repository = new RecentPostsRepository(input.userDataPath);
+  const stateStore = new PublicationStateStore(input.userDataPath);
+  const auditStore = new ContentPolicyAuditStore(input.userDataPath);
+  const scheduledAt = input.scheduledAt.toISOString();
+
+  await repository.record({
+    article_id: input.articleId,
+    title: draft.title,
+    intro: draft.introduction,
+    headings: draft.headings.map((heading) => heading.title).filter(Boolean),
+    body: draft.body_markdown,
+    topic_angle: input.policyResult.uniqueness_plan.topic_angle,
+    structure_type: input.policyResult.uniqueness_plan.structure_type,
+    business_facts: [...(input.payload.contentPolicyContext?.input.business_facts || [])],
+    related_questions: [...(input.payload.contentPolicyContext?.input.related_questions || [])],
+    published_at: scheduledAt,
+    exposure_status: 'PENDING_INDEX',
+    template_id: input.policyResult.publication.template_id,
+  });
+  await stateStore.recordPublication({
+    article_id: input.articleId,
+    account_id: input.accountId,
+    published_at: scheduledAt,
+    template_id: input.policyResult.publication.template_id,
+    structure_type: input.policyResult.uniqueness_plan.structure_type,
+    topic_angle: input.policyResult.uniqueness_plan.topic_angle,
+    exposure_status: 'PENDING_INDEX',
+  });
+  await auditStore.append({
+    ...auditRecord(
+      input.articleId,
+      input.payload.contentPolicyContext?.input || fallbackInput(input.payload, draft),
+      input.policyResult,
+      new Date().toISOString(),
+    ),
+    publish_time: scheduledAt,
+    exposure_status: 'PENDING_INDEX',
+    exposure_checks: [],
+  });
 }

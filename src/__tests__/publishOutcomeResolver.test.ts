@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  extractNaverBlogPostIdentity,
   formatPublishGuardLog,
   isConcreteNaverBlogPostUrl,
   isNaverEditorUrl,
@@ -8,6 +9,16 @@ import {
 } from '../automation/publishOutcomeResolver';
 
 describe('publish outcome URL helpers', () => {
+  it('extracts the same identity from path and logNo query URLs', () => {
+    expect(extractNaverBlogPostIdentity('https://blog.naver.com/test/223000001')).toEqual({
+      blogId: 'test',
+      logNo: '223000001',
+    });
+    expect(extractNaverBlogPostIdentity(
+      'https://blog.naver.com/PostView.naver?blogId=test&logNo=223000001',
+    )).toEqual({ blogId: 'test', logNo: '223000001' });
+  });
+
   it('detects concrete Naver post URLs', () => {
     expect(isConcreteNaverBlogPostUrl('https://blog.naver.com/test/223000001')).toBe(true);
     expect(isConcreteNaverBlogPostUrl('https://blog.naver.com/PostView.naver?blogId=test&logNo=223000001')).toBe(true);

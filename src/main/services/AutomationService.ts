@@ -440,6 +440,8 @@ export interface PostCyclePayload {
     contentPolicyContext?: import('../../contentPolicy/policyService.js').ContentPolicyPayloadContext;
     _publishFlow?: import('../../contentPolicy/policyService.js').PublishFlow;
     _semiAutoMode?: boolean;
+    _contentPolicyManualReviewApproved?: boolean;
+    _contentPolicyManualReviewPromptAllowed?: boolean;
     lines?: string[];
     selectedHeadings?: string[];
     hashtags?: string[];
@@ -522,6 +524,8 @@ export interface PostCycleResult {
     url?: string;
     cancelled?: boolean;
     failureCode?: import('../../automation/publishFailureClassifier.js').PublishFailureCode;
+    manualReviewRequired?: boolean;
+    manualReviewReasons?: string[];
     structuredContent?: any;
 }
 

@@ -1,4 +1,35 @@
 import type { ElectronApplication, Page } from '@playwright/test';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+
+export interface ElectronTestProfile {
+  root: string;
+  env: NodeJS.ProcessEnv;
+  cleanup: () => Promise<void>;
+}
+
+export async function createElectronTestProfile(prefix: string): Promise<ElectronTestProfile> {
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), prefix));
+  const userDataDir = path.join(root, 'userdata');
+  const appDataDir = path.join(root, 'appdata');
+  const localAppDataDir = path.join(root, 'localappdata');
+  await Promise.all(
+    [userDataDir, appDataDir, localAppDataDir].map((dir) => fs.mkdir(dir, { recursive: true })),
+  );
+
+  return {
+    root,
+    env: {
+      NODE_ENV: 'test',
+      E2E_TEST: '1',
+      E2E_USER_DATA_DIR: userDataDir,
+      APPDATA: appDataDir,
+      LOCALAPPDATA: localAppDataDir,
+    },
+    cleanup: () => fs.rm(root, { recursive: true, force: true }),
+  };
+}
 
 function isMainWindow(page: Page): boolean {
   const url = page.url().replace(/\\/g, '/');

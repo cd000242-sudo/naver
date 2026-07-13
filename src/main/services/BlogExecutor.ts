@@ -20,9 +20,20 @@ import { isConcreteNaverBlogPostUrl } from '../../automation/publishOutcomeResol
 import {
     prepareContentPolicyForPublish,
     recordContentPolicyPublication,
+    recordContentPolicyReservation,
     type PreparedContentPolicyPublish,
 } from '../../contentPolicy/policyService.js';
 import { PublicationStateStore } from '../../contentPolicy/publicationStateStore.js';
+import {
+    createAppScheduledPost,
+    persistAppScheduledPostSafely,
+    resolveScheduledPublishAt,
+} from '../../scheduler/appScheduleQueue.js';
+import {
+    getAllScheduledPosts,
+    removeScheduledPost,
+    saveScheduledPost,
+} from '../../scheduledPostsManager.js';
 
 // ✅ [Phase 4B] ExecutionDependencies는 types/automation.ts에서 정의 — 재export
 export type ExecutionDependencies = IExecutionDependencies;
@@ -729,6 +740,17 @@ export async function runFullPostCycle(
         });
         effectivePayload = preparedPolicy.payload;
         if (!preparedPolicy.allowed) {
+            if (preparedPolicy.manualReviewRequired) {
+                const message = '최근 발행 글 비교 자료가 충분하지 않아 직접 검수가 필요합니다. 원고와 이미지는 그대로 유지됩니다.';
+                sendLog('🛡️ 최근 글 비교 자료가 부족해 사용자 검수를 기다립니다.');
+                AutomationService.stopRunning();
+                return {
+                    success: false,
+                    message,
+                    manualReviewRequired: true,
+                    manualReviewReasons: [...preparedPolicy.manualReviewReasons],
+                };
+            }
             const reasons = preparedPolicy.reasons.join(',') || 'BLOCK_POLICY_DECISION';
             const unsupportedClaims = preparedPolicy.policyResult.quality_report.unsupported_claims.slice(0, 3);
             const unsupportedDetail = unsupportedClaims.length > 0
@@ -741,7 +763,45 @@ export async function runFullPostCycle(
             AutomationService.stopRunning();
             return { success: false, message, failureCode: failure.code };
         }
+        if (preparedPolicy.policyResult.manual_review?.approved) {
+            sendLog('✅ 최근 글 비교 수동 검수 승인 확인');
+        }
         sendLog(`✅ 콘텐츠 정책 통과 (${preparedPolicy.policyResult.quality_report.total_score}점, 최근 글 ${preparedPolicy.policyResult.similarity_report.compared_post_count}건 비교)`);
+
+        if (effectivePayload.publishMode === 'schedule' && effectivePayload.scheduleType === 'app-schedule') {
+            const schedulePolicy = preparedPolicy;
+            const scheduledPost = createAppScheduledPost({
+                postId: effectivePayload.postId,
+                title: effectivePayload.structuredContent?.selectedTitle || effectivePayload.title,
+                scheduleDate: effectivePayload.scheduleDate,
+                scheduleTime: effectivePayload.scheduleTime,
+                contentPolicyManualReviewApproved:
+                    effectivePayload._contentPolicyManualReviewApproved === true,
+                scheduledAccountId: accountId,
+                scheduledNaverId: account.naverId,
+            });
+            const previousScheduledPost = (await getAllScheduledPosts())
+                .find((post) => post.id === scheduledPost.id);
+            await persistAppScheduledPostSafely(scheduledPost, {
+                save: saveScheduledPost,
+                reserve: () => recordContentPolicyReservation({
+                    userDataPath: app.getPath('userData'),
+                    articleId: schedulePolicy.articleId,
+                    accountId: accountId || account.naverId,
+                    payload: effectivePayload,
+                    policyResult: schedulePolicy.policyResult,
+                    scheduledAt: new Date(scheduledPost.scheduleDate.replace(' ', 'T')),
+                }),
+                rollback: previousScheduledPost
+                    ? () => saveScheduledPost(previousScheduledPost)
+                    : () => removeScheduledPost(scheduledPost.id),
+            });
+            const message = `APP_SCHEDULE_QUEUED:${scheduledPost.id}:${scheduledPost.scheduleDate}`;
+            sendLog(`📅 앱 예약 발행 저장: ${scheduledPost.scheduleDate}`);
+            AutomationService.stopRunning();
+            await cleanup(effectivePayload, accountId, false);
+            return { success: true, message };
+        }
 
         // 6. 브라우저 세션 관리
         const automation = await getOrCreateBrowserSession(account);
@@ -784,19 +844,32 @@ export async function runFullPostCycle(
             failureCode: result.failureCode,
         };
 
-        if (result.success
-            && preparedPolicy
-            && effectivePayload.publishMode !== 'draft'
-            && effectivePayload.publishMode !== 'schedule') {
+        if (result.success && preparedPolicy && effectivePayload.publishMode !== 'draft') {
             try {
-                await recordContentPolicyPublication({
-                    userDataPath: app.getPath('userData'),
-                    articleId: preparedPolicy.articleId,
-                    accountId: accountId || account.naverId,
-                    payload: effectivePayload,
-                    policyResult: preparedPolicy.policyResult,
-                    publishedUrl: result.url,
-                });
+                if (effectivePayload.publishMode === 'schedule') {
+                    const scheduledAt = resolveScheduledPublishAt(
+                        effectivePayload.scheduleDate,
+                        effectivePayload.scheduleTime,
+                    );
+                    if (!scheduledAt) throw new Error('POLICY_RESERVATION_DATE_INVALID');
+                    await recordContentPolicyReservation({
+                        userDataPath: app.getPath('userData'),
+                        articleId: preparedPolicy.articleId,
+                        accountId: accountId || account.naverId,
+                        payload: effectivePayload,
+                        policyResult: preparedPolicy.policyResult,
+                        scheduledAt: scheduledAt.date,
+                    });
+                } else {
+                    await recordContentPolicyPublication({
+                        userDataPath: app.getPath('userData'),
+                        articleId: preparedPolicy.articleId,
+                        accountId: accountId || account.naverId,
+                        payload: effectivePayload,
+                        policyResult: preparedPolicy.policyResult,
+                        publishedUrl: result.url,
+                    });
+                }
             } catch (policyRecordError) {
                 const reason = `POLICY_POST_PUBLISH_RECORD_FAILED:${(policyRecordError as Error).message}`;
                 Logger.error('[BlogExecutor] 정책 발행 원장 기록 실패', policyRecordError as Error);

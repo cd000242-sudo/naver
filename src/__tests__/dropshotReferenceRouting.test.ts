@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { normalizeReferenceImageUrl } from '../imageGenerator.js';
+import { normalizeDropshotReferenceUrl } from '../image/dropshotGenerator.js';
 
 const root = process.cwd();
 
@@ -15,7 +16,16 @@ describe('dropshot reference image routing', () => {
     expect(normalizeReferenceImageUrl({ url: 'https://shop-phinf.pstatic.net/official.jpg' })).toBe('https://shop-phinf.pstatic.net/official.jpg');
     expect(normalizeReferenceImageUrl({ thumbnailUrl: 'https://shop-phinf.pstatic.net/thumb.jpg' })).toBe('https://shop-phinf.pstatic.net/thumb.jpg');
     expect(normalizeReferenceImageUrl({ referenceImagePath: 'https://shop-phinf.pstatic.net/ref.jpg' })).toBe('https://shop-phinf.pstatic.net/ref.jpg');
-    expect(normalizeReferenceImageUrl('C:/local/product.png')).toBe('');
+    expect(normalizeReferenceImageUrl('C:/local/product.png')).toBe('C:/local/product.png');
+  });
+
+  it('preserves local references at the final Dropshot adapter boundary', () => {
+    expect(normalizeDropshotReferenceUrl('C:\\images\\representative.png'))
+      .toBe('C:\\images\\representative.png');
+    expect(normalizeDropshotReferenceUrl({ filePath: 'C:/images/representative.png' }))
+      .toBe('C:/images/representative.png');
+    expect(normalizeDropshotReferenceUrl('https://shop-phinf.pstatic.net/main.jpg'))
+      .toBe('https://shop-phinf.pstatic.net/main.jpg');
   });
 
   it('routes shopping collected images into item referenceImageUrl/referenceImageList', () => {

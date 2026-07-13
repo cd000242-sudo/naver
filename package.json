@@ -1,6 +1,6 @@
 {
   "name": "better-life-naver",
-  "version": "2.11.99",
+  "version": "2.11.100",
   "description": "Better Life Naver - 네이버 블로그 자동화 앱으로 더 나은 삶을 만들어가세요. Electron, Node.js, TypeScript, and Puppeteer.",
   "author": "Better Life Team",
   "license": "AGPL-3.0-or-later",
@@ -37,6 +37,7 @@
     "release:mac": "npm run verify:release && node scripts/build-mac.js --arch both --publish",
     "release:mac:unsigned": "npm run verify:release && node scripts/build-mac.js --arch both --unsigned",
     "self-test": "npm run build && node scripts/self-test.mjs",
+    "self-test:built": "node scripts/self-test.mjs",
     "start:daily": "npm run build && node dist/scheduler/daily.js",
     "start:monitor": "npm run build && node dist/monitor/realtime.js",
     "start:learning": "npm run build && node dist/learning/analyzer.js",
@@ -59,10 +60,12 @@
     "test:image-model-settings": "ts-node src/tests/testImageModelSettings.ts",
     "test:schedule-calendar": "ts-node src/tests/testScheduleCalendar.ts",
     "e2e": "npm run build && playwright test",
+    "e2e:built": "playwright test",
     "e2e:ui": "playwright test --ui",
     "dist:setup": "npm run verify:release && node scripts/reset-config-for-pack.js && electron-builder --win nsis && node scripts/restore-after-pack.js",
     "release": "npm run verify:release && node scripts/reset-config-for-pack.js && electron-builder --win nsis && node scripts/restore-after-pack.js",
     "release:full": "node scripts/release-all.js",
+    "packaged-smoke": "node scripts/packaged-app-smoke.mjs",
     "probe:serp": "node scripts/probe-serp.mjs"
   },
   "dependencies": {

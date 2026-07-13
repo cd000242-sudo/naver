@@ -3,6 +3,10 @@ import { generateDraft } from './draftGenerator.js';
 import { repairUnsupportedClaims } from './claimRepair.js';
 import { validatePolicyInput } from './inputValidator.js';
 import { generateOutline } from './outlineGenerator.js';
+import {
+  isRecentPostManualReviewReason,
+  recentPostManualReviewReasons,
+} from './manualReview.js';
 import { evaluateQuality, passesQualityGate } from './qualityGate.js';
 import { analyzeSearchIntent } from './searchIntentAnalyzer.js';
 import { analyzeSimilarity, hasSourceCopySignal } from './similarityGuard.js';
@@ -159,9 +163,13 @@ function buildBlockedResult(input: {
   modelVersion: string;
 }): ContentPolicyResult {
   const uniqueReasons = [...new Set(input.reasons)];
+  const manualReviewReasons = recentPostManualReviewReasons(uniqueReasons);
   return {
     decision: 'BLOCK',
     block_reasons: uniqueReasons,
+    manual_review: manualReviewReasons.length > 0
+      ? { required: true, reasons: manualReviewReasons, approved: false }
+      : undefined,
     intent: input.intent,
     uniqueness_plan: input.plan,
     article: {
@@ -223,6 +231,8 @@ export async function runContentPolicyPipeline(
 
   const validation = validatePolicyInput(input, draft, options.config);
   const inputReasons = [...new Set([...availabilityReasons, ...validation.blockReasons])];
+  const blockingInputReasons = inputReasons.filter((reason) => !isRecentPostManualReviewReason(reason));
+  const manualReviewReasons = recentPostManualReviewReasons(inputReasons);
   stageTrace.push(trace('InputValidator', inputReasons.length === 0 ? 'PASS' : 'BLOCK', inputReasons));
 
   const intent = analyzeSearchIntent(input, draft);
@@ -234,7 +244,7 @@ export async function runContentPolicyPipeline(
   const plan = buildUniquenessPlan(input, intent, options.config);
   stageTrace.push(trace('TopicDiversifier', 'PASS', plan.difference_from_recent_posts));
 
-  if (inputReasons.length > 0) {
+  if (blockingInputReasons.length > 0) {
     stageTrace.push(trace('OutlineGenerator', 'SKIP', ['INPUT_BLOCKED']));
     stageTrace.push(trace('DraftGenerator', 'SKIP', ['INPUT_BLOCKED']));
     stageTrace.push(trace('SimilarityGuard', 'SKIP', ['INPUT_BLOCKED']));
@@ -281,7 +291,7 @@ export async function runContentPolicyPipeline(
       plan,
       similarity,
       quality,
-      reasons: ['BLOCK_KEYWORD_BODY_MISMATCH'],
+      reasons: [...manualReviewReasons, 'BLOCK_KEYWORD_BODY_MISMATCH'],
       rewriteCount,
       stageTrace,
       promptVersion,
@@ -302,7 +312,7 @@ export async function runContentPolicyPipeline(
       plan,
       similarity,
       quality,
-      reasons: ['BLOCK_COPIED_SOURCE'],
+      reasons: [...manualReviewReasons, 'BLOCK_COPIED_SOURCE'],
       rewriteCount,
       stageTrace,
       promptVersion,
@@ -342,6 +352,7 @@ export async function runContentPolicyPipeline(
 
   if (!passed) {
     const blockReasons = [
+      ...manualReviewReasons,
       ...(currentIntent.keyword_intent_mismatch ? ['BLOCK_KEYWORD_BODY_MISMATCH'] : []),
       ...(hasSourceCopySignal(similarity) ? ['BLOCK_COPIED_SOURCE'] : []),
       ...(similarity.risk !== 'LOW' ? ['BLOCK_EXCESSIVE_SIMILARITY'] : []),
@@ -359,6 +370,25 @@ export async function runContentPolicyPipeline(
       similarity,
       quality,
       reasons: blockReasons,
+      rewriteCount,
+      stageTrace,
+      promptVersion,
+      modelVersion,
+    });
+  }
+
+  if (manualReviewReasons.length > 0) {
+    stageTrace.push(trace('PublishGuard', 'BLOCK', manualReviewReasons));
+    stageTrace.push(trace('ExposureMonitor', 'SKIP', ['MANUAL_REVIEW_REQUIRED']));
+    return buildBlockedResult({
+      policyInput: input,
+      draft: workingDraft,
+      config: options.config,
+      intent: currentIntent,
+      plan,
+      similarity,
+      quality,
+      reasons: manualReviewReasons,
       rewriteCount,
       stageTrace,
       promptVersion,

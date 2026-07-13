@@ -9,6 +9,7 @@ import {
   createFailedScheduledPostState,
   createPublishingScheduledPostState,
   getAllScheduledPosts,
+  handleRecurringPost,
   loadScheduledPosts,
   saveScheduledPost,
   createPublishedScheduledPostState,
@@ -220,6 +221,25 @@ describe('scheduled publish state integrity', () => {
       publishRunId: publishing.publishRunId,
     });
   });
+
+  it('requires a fresh recent-post review for each recurring occurrence', async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-07-11T01:00:00.000Z'));
+    const published = makeScheduledPost({
+      id: 'recurring-reviewed',
+      recurrence: 'daily',
+      contentPolicyManualReviewApproved: true,
+      status: 'published',
+      publishedAt: '2026-07-11T00:59:00.000Z',
+      publishedUrl: concretePostUrl,
+    });
+
+    await handleRecurringPost(published);
+
+    const next = (await getAllScheduledPosts()).find((post) => post.status === 'scheduled');
+    expect(next).toBeDefined();
+    expect(next?.contentPolicyManualReviewApproved).toBe(false);
+  });
 });
 
 describe('main scheduler publish integrity wiring', () => {
@@ -239,6 +259,12 @@ describe('main scheduler publish integrity wiring', () => {
       .toBeLessThan(smartSchedulerBlock.lastIndexOf('return publishedUrl'));
   });
 
+  it('settles publish quota for SmartScheduler through the shared lease', () => {
+    expect(smartSchedulerBlock).toContain('acquireScheduledPublishQuota');
+    expect(smartSchedulerBlock).toContain('smartSchedulerQuotaLease.commit()');
+    expect(smartSchedulerBlock).toContain('smartSchedulerQuotaLease?.rollback()');
+  });
+
   it('persists cron scheduler success and failure through integrity state builders', () => {
     expect(scheduledPostsCronBlock).toContain('createPublishedScheduledPostState');
     expect(scheduledPostsCronBlock).toContain('createFailedScheduledPostState');
@@ -246,6 +272,15 @@ describe('main scheduler publish integrity wiring', () => {
     expect(scheduledPostsCronBlock).not.toContain('normalizedPostTitle.includes');
     expect(scheduledPostsCronBlock).not.toContain('step4_fallback');
     expect(scheduledPostsCronBlock).not.toContain("post.status = 'cancelled'");
+  });
+
+  it('binds due-time execution to the queued account and a transactional quota lease', () => {
+    expect(scheduledPostsCronBlock).toContain('resolveScheduledAccountCredentials');
+    expect(scheduledPostsCronBlock).toContain('post.scheduledAccountId');
+    expect(scheduledPostsCronBlock).toContain('post.scheduledNaverId');
+    expect(scheduledPostsCronBlock).toContain('acquireScheduledPublishQuota');
+    expect(scheduledPostsCronBlock).toContain('scheduledQuotaLease.commit()');
+    expect(scheduledPostsCronBlock).toContain('scheduledQuotaLease?.rollback()');
   });
 });
 

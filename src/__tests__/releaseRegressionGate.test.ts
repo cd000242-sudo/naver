@@ -9,10 +9,13 @@ describe('release regression gate', () => {
   const gate = fs.readFileSync(path.join(root, 'scripts/release-gate.js'), 'utf8');
   const uploader = fs.readFileSync(path.join(root, 'scripts/upload-release.js'), 'utf8');
 
-  it('runs lint, the full test suite, and build before packaging', () => {
+  it('runs static, behavioral, IPC, runtime, and Electron gates before packaging', () => {
     expect(gate).toContain("['run', 'lint', '--', '--quiet']");
     expect(gate).toContain("['test']");
     expect(gate).toContain("['run', 'build']");
+    expect(gate).toContain("['run', 'lint:ipc']");
+    expect(gate).toContain("['run', 'self-test:built']");
+    expect(gate).toContain("['run', 'e2e:built']");
   });
 
   it('blocks the full GitHub release pipeline on the shared gate', () => {
@@ -24,8 +27,19 @@ describe('release regression gate', () => {
     expect(uploadIndex).toBeGreaterThan(builderIndex);
   });
 
+  it('boots the packaged app with a clean profile before GitHub upload', () => {
+    const smokeIndex = releaseAll.indexOf('node scripts/packaged-app-smoke.mjs');
+    const uploadIndex = releaseAll.indexOf('node scripts/upload-release.js');
+    expect(smokeIndex).toBeGreaterThan(-1);
+    expect(uploadIndex).toBeGreaterThan(smokeIndex);
+  });
+
   it('commits the default policy config needed on a clean user machine', () => {
     expect(uploader).toContain("'config/'");
+  });
+
+  it('commits the Electron E2E suite that enforces the release gate', () => {
+    expect(uploader).toContain("'e2e/'");
   });
 
   it('does not publish a release when the source push fails', () => {

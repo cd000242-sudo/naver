@@ -79,15 +79,15 @@ export class RecentPostsRepository {
 
   async loadRecentPosts(limit = 50): Promise<RecentPostsLoadResult> {
     const boundedLimit = Math.max(1, Math.min(MAX_STORED_POSTS, Math.floor(limit)));
+    let primaryStoreAvailable = false;
     try {
       const primary = await this.readArrayFile(this.filePath);
-      return {
-        ok: true,
-        posts: primary.map(normalizeRecentPost).filter((post): post is RecentPostRecord => Boolean(post && isComparable(post)))
-          .sort(newestFirst)
-          .slice(0, boundedLimit),
-        source: STORE_NAME,
-      };
+      primaryStoreAvailable = true;
+      const posts = primary.map(normalizeRecentPost)
+        .filter((post): post is RecentPostRecord => Boolean(post && isComparable(post)))
+        .sort(newestFirst)
+        .slice(0, boundedLimit);
+      if (posts.length > 0) return { ok: true, posts, source: STORE_NAME };
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
         return { ok: false, code: 'RECENT_POSTS_CORRUPT', message: (error as Error).message };
@@ -100,9 +100,13 @@ export class RecentPostsRepository {
         .filter((post): post is RecentPostRecord => Boolean(post && isComparable(post)))
         .sort(newestFirst)
         .slice(0, boundedLimit);
+      if (posts.length === 0 && primaryStoreAvailable) {
+        return { ok: true, posts: [], source: STORE_NAME };
+      }
       return { ok: true, posts, source: LEGACY_PUBLISHED_STORE_NAME };
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+        if (primaryStoreAvailable) return { ok: true, posts: [], source: STORE_NAME };
         return {
           ok: false,
           code: 'RECENT_POSTS_UNAVAILABLE',

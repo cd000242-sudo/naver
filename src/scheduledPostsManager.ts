@@ -16,6 +16,9 @@ export interface ScheduledPost {
   createdAt: string; // ISO 형식
   status: 'scheduled' | 'publishing' | 'published' | 'failed' | 'uncertain' | 'cancelled';
   publishMode?: 'draft' | 'publish' | 'schedule';
+  contentPolicyManualReviewApproved?: boolean;
+  scheduledAccountId?: string;
+  scheduledNaverId?: string;
   publishedAt?: string; // ✅ 실제 발행 완료 시간
   publishedUrl?: string; // ✅ 발행된 글 URL
   error?: string;
@@ -338,6 +341,7 @@ export async function handleRecurringPost(post: ScheduledPost): Promise<void> {
       scheduleDate: nextScheduleDate,
       lastPublished: new Date().toISOString(),
       status: 'scheduled',
+      contentPolicyManualReviewApproved: false,
       publishedAt: undefined,
       publishedUrl: undefined,
       error: undefined,

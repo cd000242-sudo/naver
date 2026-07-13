@@ -18,6 +18,9 @@ const steps = [
   { label: 'ESLint', args: ['run', 'lint', '--', '--quiet'] },
   { label: 'Full test suite', args: ['test'] },
   { label: 'TypeScript + renderer build', args: ['run', 'build'] },
+  { label: 'IPC contract', args: ['run', 'lint:ipc'] },
+  { label: 'Runtime self-test', args: ['run', 'self-test:built'] },
+  { label: 'Electron UI E2E', args: ['run', 'e2e:built'] },
 ];
 
 for (const step of steps) {

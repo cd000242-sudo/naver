@@ -56,4 +56,50 @@ describe('PublishGuard', () => {
     expect(decision.allowed).toBe(false);
     expect(decision.reasons).toContain('BLOCK_CONSECUTIVE_PATTERN');
   });
+
+  it('does not let a distant future reservation block the current interval', async () => {
+    const state = createInitialPublicationState();
+    state.history = [{
+      article_id: 'future-reservation',
+      account_id: 'account-a',
+      published_at: '2026-01-03T12:00:00.000Z',
+      template_id: 'other-template',
+      structure_type: 'other-structure',
+      topic_angle: 'other-angle',
+    }];
+
+    const decision = evaluatePublishGuard({
+      policyResult: makePassPolicyResult(),
+      state,
+      accountId: 'account-a',
+      now: new Date('2026-01-02T12:00:00.000Z'),
+      config: await loadContentPolicy(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '30' },
+    });
+
+    expect(decision.reasons).not.toContain('BLOCK_MIN_PUBLISH_INTERVAL');
+  });
+
+  it('blocks when the nearest future reservation is inside the interval', async () => {
+    const state = createInitialPublicationState();
+    state.history = [{
+      article_id: 'near-future-reservation',
+      account_id: 'account-a',
+      published_at: '2026-01-02T12:10:00.000Z',
+      template_id: 'other-template',
+      structure_type: 'other-structure',
+      topic_angle: 'other-angle',
+    }];
+
+    const decision = evaluatePublishGuard({
+      policyResult: makePassPolicyResult(),
+      state,
+      accountId: 'account-a',
+      now: new Date('2026-01-02T12:00:00.000Z'),
+      config: await loadContentPolicy(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '30' },
+    });
+
+    expect(decision.reasons).toContain('BLOCK_MIN_PUBLISH_INTERVAL');
+  });
 });

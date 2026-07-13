@@ -49,6 +49,11 @@ describe('self-test wiring (6.3)', () => {
     expect(orchestrator).toContain('dist/tests/automationSmoke.js');
     expect(orchestrator).toContain("SELF_TEST: '1'");
     expect(orchestrator).toContain("E2E_TEST: '1'");
+    expect(orchestrator).toContain('E2E_USER_DATA_DIR');
+    expect(orchestrator).toContain("fs.mkdtempSync(path.join(os.tmpdir(), 'bln-self-test-'))");
     expect(orchestrator).toContain('delete process.env.ELECTRON_RUN_AS_NODE');
+    expect(orchestrator).not.toContain('process.exit(');
+    expect(orchestrator).toContain('finally {');
+    expect(orchestrator).toContain('fs.rmSync(isolatedRoot, { recursive: true, force: true })');
   });
 });

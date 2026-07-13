@@ -219,10 +219,10 @@ describe('Dropshot failure propagation', () => {
   const generatorCode = read('image/dropshotGenerator.ts');
   const imageGeneratorCode = read('imageGenerator.ts');
 
-  it('propagates the last provider error instead of collapsing it into a generic zero-result message', () => {
+  it('fails the whole batch when any requested image is missing', () => {
     expect(generatorCode).toMatch(/let lastFailure/);
-    expect(generatorCode).toMatch(/results\.length === 0 && lastFailure/);
-    expect(generatorCode).toMatch(/throw new Error\(lastFailure\)/);
+    expect(generatorCode).toMatch(/assertCompleteDropshotBatch\(results, items\.length, lastFailure\)/);
+    expect(generatorCode).toMatch(/IMAGE_BATCH_INCOMPLETE/);
     expect(imageGeneratorCode).toMatch(/Dropshot 모델 서버 일시 장애/);
   });
 });

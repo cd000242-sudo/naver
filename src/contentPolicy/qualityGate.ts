@@ -222,7 +222,8 @@ function configuredFatalErrors(
     hasSourceCopySignal(context.similarity) ? 'copied_or_lightly_paraphrased_source' : null,
     context.similarity.risk === 'HIGH' ? 'excessive_similarity' : null,
     context.config.inputs.required.some((field) => (
-      (field !== 'business_facts' || context.input.business_facts_applicable !== false)
+      field !== 'recent_posts'
+      && (field !== 'business_facts' || context.input.business_facts_applicable !== false)
       && !inputFieldPresent(context.input, field)
     ))
       ? 'missing_required_input'

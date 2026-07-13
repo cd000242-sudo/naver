@@ -28,6 +28,8 @@ export interface PublicationAvailabilityInput {
 export interface PublishGuardInput extends PublicationAvailabilityInput {
   policyResult: ContentPolicyResult;
   enforceCadence?: boolean;
+  currentArticleId?: string;
+  excludeCurrentArticle?: boolean;
 }
 
 export interface PublishGuardDecision {
@@ -63,10 +65,15 @@ function localDayKey(date: Date): string {
 function readAccountHistory(
   history: readonly PublicationHistoryEntry[],
   accountId: string,
+  currentArticleId?: string,
+  excludeCurrentArticle = false,
 ): { entries: PublicationHistoryEntry[]; invalid: boolean } {
   let invalid = false;
   const entries = history
     .filter((entry) => entry.account_id === accountId)
+    .filter((entry) => !excludeCurrentArticle
+      || !currentArticleId
+      || entry.article_id !== currentArticleId)
     .filter((entry) => {
       const timestamp = Date.parse(entry.published_at);
       if (Number.isFinite(timestamp)) return true;
@@ -130,13 +137,33 @@ function addCadenceReasons(
     reasons.add('BLOCK_INVALID_PUBLISH_GUARD_CONFIG');
   }
 
-  const accountHistory = readAccountHistory(state.history, accountId);
+  const currentArticleId = 'currentArticleId' in input
+    ? String(input.currentArticleId || '').trim()
+    : '';
+  const excludeCurrentArticle = 'excludeCurrentArticle' in input
+    && input.excludeCurrentArticle === true;
+  const accountHistory = readAccountHistory(
+    state.history,
+    accountId,
+    currentArticleId,
+    excludeCurrentArticle,
+  );
   if (accountHistory.invalid) reasons.add('BLOCK_INVALID_PUBLICATION_HISTORY');
-  const latest = accountHistory.entries[0];
+  const previous = accountHistory.entries.find(
+    (entry) => Date.parse(entry.published_at) <= now.getTime(),
+  );
+  const next = [...accountHistory.entries].reverse().find(
+    (entry) => Date.parse(entry.published_at) > now.getTime(),
+  );
 
-  if (interval.enabled && latest) {
-    const elapsedMinutes = (now.getTime() - Date.parse(latest.published_at)) / 60_000;
-    if (elapsedMinutes < interval.value) reasons.add('BLOCK_MIN_PUBLISH_INTERVAL');
+  if (interval.enabled) {
+    const adjacentEntries = [previous, next].filter(
+      (entry): entry is PublicationHistoryEntry => Boolean(entry),
+    );
+    const tooClose = adjacentEntries.some((entry) => (
+      Math.abs(now.getTime() - Date.parse(entry.published_at)) / 60_000 < interval.value
+    ));
+    if (tooClose) reasons.add('BLOCK_MIN_PUBLISH_INTERVAL');
   }
 
   if (dailyCap.enabled) {
@@ -147,7 +174,10 @@ function addCadenceReasons(
     if (publicationsToday >= dailyCap.value) reasons.add('BLOCK_DAILY_PUBLISH_CAP');
   }
 
-  if (policyResult && hasConsecutivePattern(policyResult, latest, config)) {
+  if (policyResult && (
+    hasConsecutivePattern(policyResult, previous, config)
+    || hasConsecutivePattern(policyResult, next, config)
+  )) {
     reasons.add('BLOCK_CONSECUTIVE_PATTERN');
   }
 }

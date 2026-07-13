@@ -161,6 +161,12 @@ export interface PolicyStageTrace {
 export interface ContentPolicyResult {
   decision: PolicyDecision;
   block_reasons: string[];
+  manual_review?: {
+    required: boolean;
+    reasons: string[];
+    approved: boolean;
+    approved_at?: string;
+  };
   intent: IntentAnalysis;
   uniqueness_plan: UniquenessPlan;
   article: {
@@ -352,6 +358,7 @@ export interface AuditRecord {
   rewrite_count: number;
   decision: PolicyDecision;
   block_reasons: string[];
+  manual_review?: ContentPolicyResult['manual_review'];
   prompt_version: string;
   model_version: string;
   policy_version: string;

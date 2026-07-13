@@ -22,42 +22,21 @@ import {
 } from './imageHashUtils.js';
 import { buildDropshotPrompt } from './dropshotCore.js';
 import { makeDropshotImage } from './dropshotCapture.js';
+import { extractReferenceImageUrl } from './referenceImagePolicy.js';
 
 const MAX_DEDUP_ATTEMPTS = 3;
-const HTTP_URL_RE = /^https?:\/\//i;
 
-function normalizeDropshotReferenceUrl(value: unknown): string {
-  if (!value) return '';
-  if (typeof value === 'string') {
-    const trimmed = value.trim();
-    return HTTP_URL_RE.test(trimmed) ? trimmed : '';
-  }
-  if (typeof value !== 'object') return '';
-
-  const image = value as {
-    referenceImageUrl?: string;
-    url?: string;
-    filePath?: string;
-    thumbnailUrl?: string;
-    savedToLocal?: string;
-    referenceImagePath?: string;
-    src?: string;
-  };
-  const candidates = [
-    image.referenceImageUrl,
-    image.url,
-    image.filePath,
-    image.thumbnailUrl,
-    image.savedToLocal,
-    image.referenceImagePath,
-    image.src,
-  ];
-
-  for (const candidate of candidates) {
-    const normalized = normalizeDropshotReferenceUrl(candidate);
-    if (normalized) return normalized;
-  }
-  return '';
+export function assertCompleteDropshotBatch<T>(
+  results: readonly T[],
+  expectedCount: number,
+  lastFailure?: string,
+): void {
+  if (results.length === expectedCount) return;
+  const detail = lastFailure || 'Dropshot returned an incomplete image batch';
+  throw new Error(`IMAGE_BATCH_INCOMPLETE:${results.length}/${expectedCount}:${detail}`);
+}
+export function normalizeDropshotReferenceUrl(value: unknown): string {
+  return extractReferenceImageUrl(value);
 }
 
 function collectDropshotReferenceUrls(...sources: unknown[]): string[] {
@@ -218,9 +197,7 @@ export async function generateWithDropshot(
     }
   }
 
-  if (results.length === 0 && lastFailure) {
-    throw new Error(lastFailure);
-  }
+  assertCompleteDropshotBatch(results, items.length, lastFailure);
 
   return results;
 }

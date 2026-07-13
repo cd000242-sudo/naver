@@ -55,23 +55,37 @@ export function isNaverBlogUrl(value: string): boolean {
   return isNaverBlogDomainUrl(value);
 }
 
-export function isConcreteNaverBlogPostUrl(value: string): boolean {
+export interface NaverBlogPostIdentity {
+  blogId: string;
+  logNo: string;
+}
+
+export function extractNaverBlogPostIdentity(value: string): NaverBlogPostIdentity | null {
   if (!isNaverBlogUrl(value) || isNaverEditorUrl(value)) {
-    return false;
+    return null;
   }
 
   try {
     const parsed = new URL(value);
     const logNo = parsed.searchParams.get('logNo');
-    if (logNo && /^\d+$/.test(logNo)) {
-      return true;
+    const queryBlogId = parsed.searchParams.get('blogId');
+    if (logNo && /^\d+$/.test(logNo) && queryBlogId?.trim()) {
+      return { blogId: queryBlogId.trim(), logNo };
     }
 
     const segments = parsed.pathname.split('/').filter(Boolean);
-    return segments.length >= 2 && /^\d+$/.test(segments[1]);
+    if (segments.length >= 2 && /^\d+$/.test(segments[1])) {
+      return { blogId: decodeURIComponent(segments[0]), logNo: segments[1] };
+    }
+    return null;
   } catch {
-    return /blog\.naver\.com\/[^/\s]+\/\d+/i.test(value);
+    const match = value.match(/blog\.naver\.com\/([^/\s?#]+)\/(\d+)/i);
+    return match ? { blogId: match[1], logNo: match[2] } : null;
   }
+}
+
+export function isConcreteNaverBlogPostUrl(value: string): boolean {
+  return extractNaverBlogPostIdentity(value) !== null;
 }
 
 function changedCandidates(input: ImmediatePublishOutcomeInput): string[] {

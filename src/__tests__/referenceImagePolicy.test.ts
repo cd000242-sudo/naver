@@ -46,4 +46,23 @@ describe('referenceImagePolicy', () => {
 
     expect(extractReferenceImageUrl(representative)).toBe('https://shop.example.com/gallery/second.jpg');
   });
+
+  it('keeps local-only reference images and deduplicates path variants', () => {
+    const images = [
+      { filePath: 'C:\\images\\product-main.png', source: 'gallery' },
+      { savedToLocal: 'C:/images/product-main.png', source: 'gallery' },
+      { referenceImagePath: 'C:/images/product-detail.png', source: 'detail' },
+    ];
+
+    const unique = deduplicateReferenceImages(images);
+    expect(unique).toHaveLength(2);
+    expect(extractReferenceImageUrl(selectRepresentativeReferenceImage(unique))).toBe(
+      'C:\\images\\product-main.png',
+    );
+  });
+
+  it('does not discard an image merely because no stable identity is available', () => {
+    const anonymous = { imageBase64: 'ZmFrZQ==', source: 'gallery' };
+    expect(deduplicateReferenceImages([anonymous])).toEqual([anonymous]);
+  });
 });

@@ -1,6 +1,10 @@
 export type ReferenceImageCandidate = string | Record<string, unknown>;
 
 const HTTP_URL_RE = /^https?:\/\//i;
+const FILE_URL_RE = /^file:\/\//i;
+const WINDOWS_PATH_RE = /^(?:[a-z]:[\\/]|\\\\)/i;
+const POSIX_PATH_RE = /^\//;
+const DATA_IMAGE_RE = /^data:image\//i;
 const REVIEW_SOURCE_RE = /review|user|ugc|comment|후기|리뷰/i;
 const PRODUCT_SOURCE_RE = /gallery|product|main|primary|representative|official|detail|상품|대표|추가이미지/i;
 const UI_ASSET_RE = /(?:^|[\/_-])(logo|icon|sprite|badge|avatar|profile|banner)(?:[\/_\-.]|$)/i;
@@ -8,7 +12,13 @@ const UI_ASSET_RE = /(?:^|[\/_-])(logo|icon|sprite|badge|avatar|profile|banner)(
 export function extractReferenceImageUrl(candidate: unknown): string {
   if (typeof candidate === 'string') {
     const value = candidate.trim();
-    return HTTP_URL_RE.test(value) ? value : '';
+    return HTTP_URL_RE.test(value)
+      || FILE_URL_RE.test(value)
+      || WINDOWS_PATH_RE.test(value)
+      || POSIX_PATH_RE.test(value)
+      || DATA_IMAGE_RE.test(value)
+      ? value
+      : '';
   }
   if (!candidate || typeof candidate !== 'object') return '';
 
@@ -55,6 +65,12 @@ export function buildReferenceImageIdentity(candidate: unknown): string {
 
   const rawUrl = extractReferenceImageUrl(candidate);
   if (!rawUrl) return '';
+  if (DATA_IMAGE_RE.test(rawUrl)) {
+    return `data:${rawUrl.length}:${rawUrl.slice(-32)}`.toLowerCase();
+  }
+  if (!HTTP_URL_RE.test(rawUrl)) {
+    return `path:${normalizeVariantStem(rawUrl.replace(/^file:\/\//i, '').replace(/\\/g, '/'))}`.toLowerCase();
+  }
   try {
     const parsed = new URL(rawUrl);
     const normalizedPath = normalizeVariantStem(decodeURIComponent(parsed.pathname)).replace(/\/{2,}/g, '/');
@@ -70,7 +86,11 @@ export function deduplicateReferenceImages<T>(images: readonly T[] | null | unde
 
   for (const image of images || []) {
     const identity = buildReferenceImageIdentity(image);
-    if (!identity || seen.has(identity)) continue;
+    if (!identity) {
+      result.push(image);
+      continue;
+    }
+    if (seen.has(identity)) continue;
     seen.add(identity);
     result.push(image);
   }
@@ -102,4 +122,3 @@ export function selectRepresentativeReferenceImage<T>(images: readonly T[] | nul
     return score > best.score ? { candidate, score } : best;
   }, { candidate: unique[0], score: representativeScore(unique[0], 0) }).candidate;
 }
-

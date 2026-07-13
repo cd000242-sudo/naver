@@ -53,7 +53,7 @@ describe('generation policy context', () => {
     expect(result.prompt).toContain(recentPosts[0].exposure_status!);
   });
 
-  it('blocks generation when fewer than the configured minimum posts are available', async () => {
+  it('continues generation but requires publish review when fewer than the minimum posts are available', async () => {
     const userDataPath = await tempDir();
     const recentPosts = makeRecentPosts(19);
     const config = await loadContentPolicy();
@@ -68,9 +68,10 @@ describe('generation policy context', () => {
       },
     });
 
-    expect(result.allowed).toBe(false);
+    expect(result.allowed).toBe(true);
     expect(result.reasons).toContain('BLOCK_INSUFFICIENT_RECENT_POSTS');
     expect(result.manualReviewRequired).toBe(true);
+    expect(result.prompt).toContain(recentPosts[0].title);
   });
 
   it('does not require business facts for a generic informational article', async () => {
@@ -115,7 +116,7 @@ describe('generation policy context', () => {
     expect(result.reasons).toContain('BLOCK_MISSING_FACTS');
   });
 
-  it('fails closed when both renderer and main-process history are unavailable', async () => {
+  it('allows draft generation but keeps publish review required when all history is unavailable', async () => {
     const userDataPath = await tempDir();
     const config = await loadContentPolicy();
 
@@ -132,8 +133,9 @@ describe('generation policy context', () => {
       },
     });
 
-    expect(result.allowed).toBe(false);
+    expect(result.allowed).toBe(true);
     expect(result.reasons).toContain('BLOCK_RECENT_POSTS_UNAVAILABLE');
+    expect(result.manualReviewRequired).toBe(true);
     expect(result.prompt).toBe('');
   });
 

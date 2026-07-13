@@ -1,4 +1,5 @@
 import { validatePolicyInput } from './inputValidator.js';
+import { isOnlyRecentPostManualReviewReasons } from './manualReview.js';
 import { PublicationStateStore } from './publicationStateStore.js';
 import { evaluatePublicationAvailability } from './publishGuard.js';
 import { RecentPostsRepository } from './recentPostsRepository.js';
@@ -179,9 +180,10 @@ export async function prepareGenerationPolicyContext(
   }
 
   if (!recentPostsResult.ok) {
+    const reasons = [...new Set([...operationalReasons, loadFailureReason(recentPostsResult)])];
     return {
-      allowed: false,
-      reasons: [...new Set([...operationalReasons, loadFailureReason(recentPostsResult)])],
+      allowed: isOnlyRecentPostManualReviewReasons(reasons),
+      reasons,
       manualReviewRequired: true,
       input: cloneInput(baseInput),
       recentPostsResult,
@@ -200,9 +202,11 @@ export async function prepareGenerationPolicyContext(
   }
   reasons.push(...validatePolicyInput(input, undefined, options.config).blockReasons);
   const uniqueReasons = [...new Set(reasons)];
+  const generationAllowed = uniqueReasons.length === 0
+    || isOnlyRecentPostManualReviewReasons(uniqueReasons);
 
   return {
-    allowed: uniqueReasons.length === 0,
+    allowed: generationAllowed,
     reasons: uniqueReasons,
     manualReviewRequired: uniqueReasons.length > 0,
     input,
@@ -210,6 +214,6 @@ export async function prepareGenerationPolicyContext(
       ...recentPostsResult,
       posts: recentPosts.map(clonePost),
     },
-    prompt: uniqueReasons.length === 0 ? buildRecentPostsGenerationPrompt(input) : '',
+    prompt: generationAllowed ? buildRecentPostsGenerationPrompt(input) : '',
   };
 }

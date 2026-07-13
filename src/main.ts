@@ -1,4 +1,5 @@
 import { app, BrowserWindow, dialog, ipcMain, nativeImage, NativeImage, shell, Notification, Tray, Menu } from 'electron';
+import './runtime/e2eUserDataBootstrap.js';
 // ✅ [v2.7.28] IPC 이중 등록 가드 — 다른 IPC 등록 이전에 반드시 첫 import
 import './main/ipc/registerOnce.js';
 import path from 'path';
@@ -113,6 +114,11 @@ import { PatternAnalyzer } from './learning/patternAnalyzer.js';
 import { PostAnalytics, type PostPerformance } from './analytics/postAnalytics.js';
 import { SmartScheduler, type ScheduledPost as SmartScheduledPost } from './scheduler/smartScheduler.js';
 import { resolvePublishedUrl } from './scheduler/publishedUrlResolver.js';
+import { resolveScheduledAccountCredentials } from './scheduler/scheduledAccountResolver.js';
+import {
+  acquireScheduledPublishQuota,
+  type ScheduledPublishQuotaLease,
+} from './scheduler/scheduledPublishQuota.js';
 import { classifyPublishFailure } from './automation/publishFailureClassifier.js';
 import { isConcreteNaverBlogPostUrl } from './automation/publishOutcomeResolver.js';
 import { KeywordAnalyzer, type KeywordCompetition, type BlueOceanKeyword } from './analytics/keywordAnalyzer.js';
@@ -222,6 +228,11 @@ import { PublicationStateStore } from './contentPolicy/publicationStateStore.js'
 import { evaluatePublicationAvailability } from './contentPolicy/publishGuard.js';
 import { registerAgentHandlers } from './main/ipc/agentHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
+import { captureE2EPublishPayload } from './main/e2ePublishCapture.js';
+import {
+  executeWithContentPolicyManualReview,
+  type ContentPolicyManualReviewRequest,
+} from './main/contentPolicyManualReview.js';
 
 function requiresImmediatePublishedPostUrl(payload: any): boolean {
   return String(payload?.publishMode || 'publish') === 'publish';
@@ -1257,6 +1268,26 @@ function getIsPackaged(): boolean {
 let mainWindow: BrowserWindow | null = null;
 let tray: Tray | null = null; // ✅ 시스템 트레이
 
+async function confirmContentPolicyManualReview(
+  request: ContentPolicyManualReviewRequest,
+): Promise<boolean> {
+  const articleTitle = request.title ? `\n\n대상 글: ${request.title.slice(0, 100)}` : '';
+  const options = {
+    type: 'warning' as const,
+    title: '최근 글 비교 확인',
+    message: '최근 발행 글 기록이 충분하지 않습니다.',
+    detail: `중복 여부를 자동으로 충분히 비교할 수 없습니다.${articleTitle}\n\n현재 원고의 제목, 본문, 소제목을 직접 확인했다면 이번 글만 계속 발행할 수 있습니다. 다른 품질·안전 검사는 그대로 적용됩니다.`,
+    buttons: ['검토 후 이번 글 발행', '취소'],
+    defaultId: 1,
+    cancelId: 1,
+    noLink: true,
+  };
+  const response = mainWindow && !mainWindow.isDestroyed()
+    ? await dialog.showMessageBox(mainWindow, options)
+    : await dialog.showMessageBox(options);
+  return response.response === 0;
+}
+
 // ✅ [v2.10.34] Splash 화면 — 부팅 체감 시간 단축 (검은 화면 0.1초 이내 splash 표시)
 //   기존: app.whenReady → 백업/서버싱크/라이선스 등 직렬 게이트 → 사용자 화면은 검은색 ~20초
 //   수정: app.whenReady 첫줄에서 splash window 즉시 표시 → 백그라운드에서 게이트 진행 → 로그인/메인 ready 시 splash close
@@ -1588,6 +1619,7 @@ async function prepareSmartScheduledContent(
 // ✅ [2026-03-14 FIX] SmartScheduler 발행 콜백 설정 — 예약 시간 도달 시 실제 발행 실행
 smartScheduler.setPublishCallback(async (post) => {
   let directLease: DirectAutomationLeaseHandle | null = null;
+  let smartSchedulerQuotaLease: ScheduledPublishQuotaLease | null = null;
   let schedulerAccountKey = '';
   console.log(`[SmartScheduler] 발행 콜백 실행: ${post.title}`);
   try {
@@ -1618,8 +1650,7 @@ smartScheduler.setPublishCallback(async (post) => {
     
     schedulerAccountKey = naverId.trim().toLowerCase();
 
-    const runResult = await withAbortableDeadline(
-      () => AutomationService.executePostCycle({
+    const smartSchedulerPayload = {
         naverId,
         naverPassword,
         title: preparedContent.title,
@@ -1627,8 +1658,31 @@ smartScheduler.setPublishCallback(async (post) => {
         structuredContent: preparedContent.structuredContent,
         contentPolicyContext: preparedContent.contentPolicyContext,
         _publishFlow: 'smart_scheduler',
+        _contentPolicyManualReviewPromptAllowed: true,
         publishMode: 'publish',
-        postId: post.id,
+       postId: post.id,
+      } as const;
+    smartSchedulerQuotaLease = await acquireScheduledPublishQuota({
+      validate: async () => {
+        if (!(await ensureLicenseValid())) {
+          return { allowed: false, message: '라이선스 인증이 필요합니다.' };
+        }
+        const quotaCheck = await enforceFreeTier('publish', 1);
+        return quotaCheck.allowed
+          ? { allowed: true }
+          : {
+              allowed: false,
+              message: String(quotaCheck.response?.message || '무료 발행 한도를 확인해주세요.'),
+            };
+      },
+      isFreeTierUser,
+      consume: () => consumeQuota('publish', 1),
+      refund: () => refundQuota('publish', 1),
+    });
+    const runResult = await withAbortableDeadline(
+      () => executeWithContentPolicyManualReview(smartSchedulerPayload, {
+        execute: (approvedPayload) => AutomationService.executePostCycle(approvedPayload as any),
+        confirm: confirmContentPolicyManualReview,
       }),
       {
         timeoutMs: SCHEDULED_AUTOMATION_TIMEOUT_MS,
@@ -1650,6 +1704,7 @@ smartScheduler.setPublishCallback(async (post) => {
       () => runResult.url || '',
       `https://blog.naver.com/${naverId}`,
     ));
+    smartSchedulerQuotaLease.commit();
     sendLog(`✅ SmartScheduler 예약 발행 완료: ${post.title}`);
     return publishedUrl;
   } catch (error) {
@@ -1657,6 +1712,9 @@ smartScheduler.setPublishCallback(async (post) => {
     sendLog(`❌ SmartScheduler 예약 발행 실패: ${sanitizeUserVisibleError(error)}`);
     throw error;
   } finally {
+    await smartSchedulerQuotaLease?.rollback().catch((quotaError) => {
+      console.error('[SmartScheduler] 예약 발행 쿼터 정리 실패:', quotaError);
+    });
     if (schedulerAccountKey) AutomationService.delete(schedulerAccountKey);
     directLease?.release();
   }
@@ -3029,6 +3087,9 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: unknown) =>
 
 
 ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
+  const isLocalAppSchedule = payload.publishMode === 'schedule' && payload.scheduleType === 'app-schedule';
+  const e2eCapture = await captureE2EPublishPayload(payload as any, process.env, !app.isPackaged);
+  if (e2eCapture) return e2eCapture;
   // ============================================
   //  [리팩토링] 새 엔진으로 완전 위임
   // ============================================
@@ -3039,8 +3100,10 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
   // 자동 다운로드한다. dev(Chrome 있음)↔배포(Chrome 없는 고객) 브라우저 변인을 제거해 모든
   // 사용자가 동일한 브라우저로 발행하게 만든다. 진행률은 기존 진행 모달(sendLog)에 표시.
   try {
-    const { ensureChromiumAvailable } = await import('./browserInstaller.js');
-    await ensureChromiumAvailable((_pct, message) => sendLog(`🌐 ${message}`));
+    if (!isLocalAppSchedule) {
+      const { ensureChromiumAvailable } = await import('./browserInstaller.js');
+      await ensureChromiumAvailable((_pct, message) => sendLog(`🌐 ${message}`));
+    }
   } catch (browserErr: any) {
     const msg = `발행용 브라우저 준비 실패: ${browserErr?.message || browserErr}. 인터넷 연결을 확인한 뒤 다시 시도해주세요.`;
     console.error(`[Main] ${msg}`);
@@ -3085,7 +3148,7 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
   // ✅ [2026-03-01 FIX] 선차감 패턴: 발행 전에 쿼터를 먼저 차감
   let preConsumed = false;
   const isFreeUser = await AuthUtils.isFreeTierUser();
-  if (isFreeUser) {
+  if (isFreeUser && !isLocalAppSchedule) {
     try {
       const newState = await consumeQuota('publish', 1);
       preConsumed = true;
@@ -3099,7 +3162,10 @@ ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
   const runPromise = (async () => {
     try {
       //  새 엔진 호출 (BlogExecutor.runFullPostCycle 실행)
-      const result = await AutomationService.executePostCycle(payload as any);
+      const result = await executeWithContentPolicyManualReview(payload as any, {
+        execute: (approvedPayload) => AutomationService.executePostCycle(approvedPayload as any),
+        confirm: confirmContentPolicyManualReview,
+      });
       assertImmediatePublishResultUrl(result, payload);
 
       //  결과 반환
@@ -4831,7 +4897,10 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               },
             });
             if (!multiPolicy.allowed) {
-              throw new Error(`[CONTENT_POLICY_BLOCKED] Manual review required: ${multiPolicy.reasons.join(', ')}`);
+              throw new Error(`[CONTENT_POLICY_BLOCKED] Generation stopped: ${multiPolicy.reasons.join(', ')}`);
+            }
+            if (multiPolicy.manualReviewRequired) {
+              sendLog('   🛡️ 최근 글 비교는 발행 직전 사용자 검수로 확인합니다.');
             }
             source.contentPolicyPrompt = multiPolicy.prompt;
 
@@ -5193,7 +5262,10 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         }
 
         //  새 엔진 호출
-        let result = await AutomationService.executePostCycle(payload as any);
+        let result = await executeWithContentPolicyManualReview(payload as any, {
+          execute: (approvedPayload) => AutomationService.executePostCycle(approvedPayload as any),
+          confirm: confirmContentPolicyManualReview,
+        });
         try {
           assertImmediatePublishResultUrl(result, payload);
         } catch (guardError) {
@@ -5578,10 +5650,14 @@ ipcMain.handle(
       if (!generationPolicy.allowed) {
         const reasonText = generationPolicy.reasons.join(', ');
         console.error(`[ContentPolicy] Generation blocked: ${reasonText}`);
-        throw new Error(`[CONTENT_POLICY_BLOCKED] Manual review required: ${reasonText}`);
+        throw new Error(`[CONTENT_POLICY_BLOCKED] Generation stopped: ${reasonText}`);
       }
       source.contentPolicyPrompt = generationPolicy.prompt;
-      console.log(`[ContentPolicy] Generation preflight passed with ${generationPolicy.input.recent_posts?.length || 0} recent posts.`);
+      if (generationPolicy.manualReviewRequired) {
+        console.warn(`[ContentPolicy] Generation continues with ${generationPolicy.input.recent_posts?.length || 0} recent posts; publish review is pending.`);
+      } else {
+        console.log(`[ContentPolicy] Generation preflight passed with ${generationPolicy.input.recent_posts?.length || 0} recent posts.`);
+      }
 
       console.log('[Main] Provider:', provider);
       console.log('[Main] TargetAge:', targetAge);
@@ -5703,6 +5779,9 @@ ipcMain.handle(
         const reasonText = generatedContentGuard.reasons.join(', ') || 'BLOCK_MANUAL_REVIEW_REQUIRED';
         console.error(`[ContentPolicy] Generated draft blocked before image generation: ${reasonText}`);
         throw new Error(`[CONTENT_POLICY_BLOCKED] ${reasonText}${unsupportedText}`);
+      }
+      if (generatedContentGuard.manualReviewRequired) {
+        console.warn('[ContentPolicy] Draft quality passed; recent-post comparison requires publish-time review.');
       }
       if (generatedContentGuard.policyResult.rewrite_count > 0) {
         console.log(`[ContentPolicy] Generated draft repaired before image generation (${generatedContentGuard.policyResult.rewrite_count}회).`);
@@ -7713,7 +7792,7 @@ try {
   _fs2.appendFileSync(dbg, `\n[${new Date().toISOString()}] Before requestSingleInstanceLock\n`);
 } catch(e) { /* 스타트업 디버그 로그 실패 — Logger 미초기화 상태이므로 무시 */ }
 
-const gotTheLock = app.requestSingleInstanceLock();
+const gotTheLock = isE2ETestMode() || app.requestSingleInstanceLock();
 
 try {
   const _fs2 = require('fs');
@@ -8468,6 +8547,7 @@ app.whenReady().then(async () => {
             let schedulerAutomation: NaverBlogAutomation | null = null;
             let normalizedId = '';
             let confirmedPublishedPost: ScheduledPost | null = null;
+            let scheduledQuotaLease: ScheduledPublishQuotaLease | null = null;
 
             try {
               // ✅ localStorage에서 생성된 글 데이터 가져오기 (postId 또는 title로 검색)
@@ -8586,12 +8666,34 @@ app.whenReady().then(async () => {
 
               // ✅ 네이버 계정 정보 가져오기
               const accountConfig = await loadConfig();
-              const accountNaverId = accountConfig.savedNaverId || '';
-              const accountNaverPassword = accountConfig.savedNaverPassword || '';
+              const scheduledAccount = resolveScheduledAccountCredentials({
+                scheduledAccountId: post.scheduledAccountId,
+                scheduledNaverId: post.scheduledNaverId,
+                configuredNaverId: accountConfig.savedNaverId,
+                configuredNaverPassword: accountConfig.savedNaverPassword,
+                accounts: blogAccountManager.getAllAccounts(),
+                getCredentials: (accountId) => blogAccountManager.getAccountCredentials(accountId),
+              });
+              const accountNaverId = scheduledAccount.naverId;
+              const accountNaverPassword = scheduledAccount.naverPassword;
 
-              if (!accountNaverId || !accountNaverPassword) {
-                throw new Error('네이버 계정 정보가 설정되지 않았습니다. 환경설정에서 "계정 정보 기억하기"를 체크해주세요.');
-              }
+              scheduledQuotaLease = await acquireScheduledPublishQuota({
+                validate: async () => {
+                  if (!(await ensureLicenseValid())) {
+                    return { allowed: false, message: '라이선스 인증이 필요합니다.' };
+                  }
+                  const quotaCheck = await enforceFreeTier('publish', 1);
+                  return quotaCheck.allowed
+                    ? { allowed: true }
+                    : {
+                        allowed: false,
+                        message: String(quotaCheck.response?.message || '무료 발행 한도를 확인해주세요.'),
+                      };
+                },
+                isFreeTierUser,
+                consume: () => consumeQuota('publish', 1),
+                refund: () => refundQuota('publish', 1),
+              });
 
               console.log(`[Scheduler] 네이버 계정 확인 완료: ${accountNaverId}`);
               sendLog(`🔐 네이버 계정 확인 완료`);
@@ -8666,8 +8768,7 @@ app.whenReady().then(async () => {
               await saveScheduledPost(createPublishingScheduledPostState(post));
 
               const activeSchedulerAutomation = schedulerAutomation;
-              const automationResult = await withAbortableDeadline(
-                () => AutomationService.executePostCycle({
+              const scheduledPublishPayload = {
                   ...runOptions,
                   naverId: accountNaverId,
                   naverPassword: accountNaverPassword,
@@ -8675,8 +8776,16 @@ app.whenReady().then(async () => {
                   businessInfo: postData.businessInfo,
                   contentPolicyContext: postData.contentPolicyContext
                     || postData.structuredContent?.contentPolicyContext,
+                  _contentPolicyManualReviewApproved:
+                    post.contentPolicyManualReviewApproved === true,
                   _publishFlow: 'app_scheduler',
-                } as any),
+                  _contentPolicyManualReviewPromptAllowed: true,
+                } as any;
+              const automationResult = await withAbortableDeadline(
+                () => executeWithContentPolicyManualReview(scheduledPublishPayload, {
+                  execute: (approvedPayload) => AutomationService.executePostCycle(approvedPayload as any),
+                  confirm: confirmContentPolicyManualReview,
+                }),
                 {
                   timeoutMs: SCHEDULED_AUTOMATION_TIMEOUT_MS,
                   cleanupTimeoutMs: SCHEDULED_AUTOMATION_CLEANUP_TIMEOUT_MS,
@@ -8697,6 +8806,7 @@ app.whenReady().then(async () => {
               );
 
               const publishedPost = createPublishedScheduledPostState(post, resolvedPublishedUrl);
+              scheduledQuotaLease.commit();
               // From this point the remote outcome is known. No local/UI
               // post-processing failure may downgrade it to failed/uncertain.
               confirmedPublishedPost = publishedPost;
@@ -8726,6 +8836,7 @@ app.whenReady().then(async () => {
                 confirmedPublishedPost,
               );
               if (stateAfterError.status === 'published') {
+                scheduledQuotaLease?.commit();
                 const safePostCommitError = sanitizeUserVisibleError(publishError);
                 console.error(`[Scheduler] 발행 완료 후 로컬 후처리 실패: ${post.title}`, publishError);
                 await saveScheduledPost(stateAfterError).catch((persistError) => {
@@ -8738,6 +8849,13 @@ app.whenReady().then(async () => {
                   url: stateAfterError.publishedUrl,
                 });
                 continue;
+              }
+              if (stateAfterError.status === 'uncertain') {
+                scheduledQuotaLease?.commit();
+              } else {
+                await scheduledQuotaLease?.rollback().catch((quotaError) => {
+                  console.error('[Scheduler] 예약 발행 쿼터 환불 실패:', quotaError);
+                });
               }
               const errorMsg = (publishError as Error).message;
               const failedPost = stateAfterError;
@@ -8771,6 +8889,9 @@ app.whenReady().then(async () => {
               mainWindow?.webContents.send('automation:log', `❌ 예약 발행 실패: ${post.title} - ${safeErrorMsg}`);
               mainWindow?.webContents.send('automation:status', { success: false, message: `예약 발행 실패: ${safeErrorMsg}`, failureCode });
             } finally {
+              await scheduledQuotaLease?.rollback().catch((quotaError) => {
+                console.error('[Scheduler] 예약 발행 쿼터 정리 실패:', quotaError);
+              });
               await schedulerAutomation?.closeBrowser().catch(() => undefined);
               if (normalizedId && automationMap.get(normalizedId) === schedulerAutomation) {
                 automationMap.delete(normalizedId);

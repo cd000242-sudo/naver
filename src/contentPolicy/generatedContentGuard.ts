@@ -1,4 +1,5 @@
 import { runContentPolicyPipeline } from './orchestrator.js';
+import { isOnlyRecentPostManualReviewReasons } from './manualReview.js';
 import type {
   ArticleDraft,
   ContentPolicyConfig,
@@ -17,6 +18,7 @@ export interface GeneratedContentGuardOptions<T extends Record<string, any>> {
 
 export interface GeneratedContentGuardResult<T extends Record<string, any>> {
   allowed: boolean;
+  manualReviewRequired: boolean;
   reasons: string[];
   content: T;
   policyResult: ContentPolicyResult;
@@ -72,7 +74,9 @@ function applyResult<T extends Record<string, any>>(content: T, result: ContentP
     ...content,
     contentPolicy: result,
   };
-  if (result.decision === 'PASS' && result.rewrite_count > 0) {
+  const canApplyRewrite = result.decision === 'PASS'
+    || isOnlyRecentPostManualReviewReasons(result.block_reasons);
+  if (canApplyRewrite && result.rewrite_count > 0) {
     next.selectedTitle = result.article.title;
     next.summary = result.article.summary;
     next.introduction = result.article.introduction;
@@ -97,7 +101,9 @@ export async function guardGeneratedContent<T extends Record<string, any>>(
   });
 
   return {
-    allowed: policyResult.decision === 'PASS' && policyResult.publication.allowed,
+    allowed: (policyResult.decision === 'PASS' && policyResult.publication.allowed)
+      || isOnlyRecentPostManualReviewReasons(policyResult.block_reasons),
+    manualReviewRequired: isOnlyRecentPostManualReviewReasons(policyResult.block_reasons),
     reasons: [...policyResult.block_reasons],
     content: applyResult(options.structuredContent, policyResult),
     policyResult,

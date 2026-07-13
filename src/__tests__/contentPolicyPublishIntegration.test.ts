@@ -2,7 +2,11 @@ import fs from 'fs/promises';
 import os from 'os';
 import path from 'path';
 import { afterEach, describe, expect, it } from 'vitest';
-import { prepareContentPolicyForPublish, recordContentPolicyPublication } from '../contentPolicy/policyService';
+import {
+  prepareContentPolicyForPublish,
+  recordContentPolicyPublication,
+  recordContentPolicyReservation,
+} from '../contentPolicy/policyService';
 import { loadPublishedPosts } from '../analytics/publishedPostTracker';
 import { PublicationStateStore } from '../contentPolicy/publicationStateStore';
 import { ContentPolicyAuditStore } from '../contentPolicy/auditStore';
@@ -142,6 +146,10 @@ describe('content policy publish integration', () => {
     async (publishFlow, publishMode, semiAutoMode) => {
       const payload = payloadWithContext();
       payload.publishMode = publishMode;
+      if (publishMode === 'schedule') {
+        (payload as any).scheduleDate = '2026-02-02';
+        (payload as any).scheduleTime = '09:30';
+      }
       payload._publishFlow = publishFlow;
       payload._semiAutoMode = semiAutoMode;
       payload.keywords = ['과거에 생성한 전혀 다른 키워드'];
@@ -368,13 +376,6 @@ describe('content policy publish integration', () => {
     expect(loadPublishedPosts(userDataPath)).toHaveLength(0);
   });
 
-  it('does not register a server reservation as an already published exposure target', async () => {
-    const source = await fs.readFile(path.resolve(process.cwd(), 'src/main/services/BlogExecutor.ts'), 'utf8');
-    expect(source).toMatch(
-      /if \(result\.success[\s\S]{0,300}effectivePayload\.publishMode !== 'schedule'[\s\S]{0,600}recordContentPolicyPublication/,
-    );
-  });
-
   it('audits the final PublishGuard BLOCK instead of a stale pipeline PASS', async () => {
     const userDataPath = await tempDir();
     await new PublicationStateStore(userDataPath).pauseAll('operator pause');
@@ -391,7 +392,7 @@ describe('content policy publish integration', () => {
     expect(audits[0].block_reasons).toContain('BLOCK_PUBLISH_PAUSED');
   });
 
-  it('applies cadence limits only to immediate publishing, not draft or future schedule creation', async () => {
+  it('skips cadence for drafts but evaluates schedules at their target time', async () => {
     const now = new Date('2026-02-01T12:00:00.000Z');
     const env = { MIN_PUBLISH_INTERVAL_MINUTES: '60', DAILY_PUBLISH_CAP: '1' };
 
@@ -411,25 +412,131 @@ describe('content policy publish integration', () => {
       now,
     });
 
-    for (const publishMode of ['draft', 'schedule'] as const) {
-      const userDataPath = await tempDir();
-      await new PublicationStateStore(userDataPath).recordPublication({
-        article_id: `recent-${publishMode}`,
+    const draftDir = await tempDir();
+    await new PublicationStateStore(draftDir).recordPublication({
+        article_id: 'recent-draft',
         account_id: 'account-a',
         published_at: new Date(now.getTime() - 5 * 60_000).toISOString(),
         template_id: 'other-template',
         structure_type: 'other-structure',
         topic_angle: 'other-angle',
         exposure_status: 'INDEXED',
-      });
-      const payload = payloadWithContext();
-      payload.publishMode = publishMode;
-      const result = await prepareContentPolicyForPublish(payload, { userDataPath, env, now });
-      expect(result.allowed).toBe(true);
-    }
+    });
+    const draftPayload = payloadWithContext();
+    draftPayload.publishMode = 'draft';
+    const draft = await prepareContentPolicyForPublish(draftPayload, { userDataPath: draftDir, env, now });
+
+    const scheduleDir = await tempDir();
+    await new PublicationStateStore(scheduleDir).recordPublication({
+      article_id: 'recent-schedule',
+      account_id: 'account-a',
+      published_at: new Date(2026, 1, 1, 12, 5).toISOString(),
+      template_id: 'other-template',
+      structure_type: 'other-structure',
+      topic_angle: 'other-angle',
+      exposure_status: 'INDEXED',
+    });
+    const schedulePayload = payloadWithContext() as any;
+    schedulePayload.publishMode = 'schedule';
+    schedulePayload.scheduleDate = '2026-02-01';
+    schedulePayload.scheduleTime = '12:30';
+    const schedule = await prepareContentPolicyForPublish(schedulePayload, {
+      userDataPath: scheduleDir,
+      env,
+      now,
+    });
 
     expect(immediate.allowed).toBe(false);
     expect(immediate.reasons).toContain('BLOCK_MIN_PUBLISH_INTERVAL');
     expect(immediate.reasons).toContain('BLOCK_DAILY_PUBLISH_CAP');
+    expect(draft.allowed).toBe(true);
+    expect(schedule.allowed).toBe(false);
+    expect(schedule.reasons).toContain('BLOCK_MIN_PUBLISH_INTERVAL');
+    expect(schedule.reasons).toContain('BLOCK_DAILY_PUBLISH_CAP');
+  });
+
+  it('records a reservation and lets the same article replace its own slot later', async () => {
+    const userDataPath = await tempDir();
+    const payload = payloadWithContext() as any;
+    payload.postId = 'scheduled-post-1';
+    payload.publishMode = 'schedule';
+    payload.scheduleDate = '2026-02-02';
+    payload.scheduleTime = '09:30';
+    const prepared = await prepareContentPolicyForPublish(payload, {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '60', DAILY_PUBLISH_CAP: '1' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(prepared.allowed).toBe(true);
+    await recordContentPolicyReservation({
+      userDataPath,
+      articleId: prepared.articleId,
+      accountId: 'account-a',
+      payload: prepared.payload,
+      policyResult: prepared.policyResult,
+      scheduledAt: new Date(2026, 1, 2, 9, 30),
+    });
+    expect(loadPublishedPosts(userDataPath)).toHaveLength(0);
+
+    const repeated = await prepareContentPolicyForPublish(payload, {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '60', DAILY_PUBLISH_CAP: '1' },
+      now: new Date('2026-02-02T09:29:00.000Z'),
+    });
+    expect(repeated.allowed).toBe(true);
+  });
+
+  it('does not let an already published local post id bypass cadence on republish', async () => {
+    const userDataPath = await tempDir();
+    const payload = payloadWithContext() as any;
+    payload.postId = 'already-published-local-id';
+    const first = await prepareContentPolicyForPublish(payload, {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '60', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+    expect(first.allowed).toBe(true);
+
+    await recordContentPolicyPublication({
+      userDataPath,
+      articleId: first.articleId,
+      accountId: 'account-a',
+      payload: first.payload,
+      policyResult: first.policyResult,
+      publishedUrl: 'https://blog.naver.com/account-a/223000002',
+      publishedAt: new Date('2026-02-01T12:01:00.000Z'),
+    });
+
+    const repeated = await prepareContentPolicyForPublish(payload, {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '60', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:02:00.000Z'),
+    });
+
+    expect(repeated.allowed).toBe(false);
+    expect(repeated.reasons).toContain('BLOCK_EXCESSIVE_SIMILARITY');
+  });
+
+  it('records query-style Naver post URLs without pausing the publication ledger', async () => {
+    const userDataPath = await tempDir();
+    const prepared = await prepareContentPolicyForPublish(payloadWithContext(), {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+    });
+
+    await expect(recordContentPolicyPublication({
+      userDataPath,
+      articleId: prepared.articleId,
+      accountId: 'account-a',
+      payload: prepared.payload,
+      policyResult: prepared.policyResult,
+      publishedUrl: 'https://blog.naver.com/PostView.naver?blogId=account-a&logNo=223000001',
+    })).resolves.toBeUndefined();
+
+    expect(loadPublishedPosts(userDataPath)[0]).toMatchObject({
+      blogId: 'account-a',
+      logNo: '223000001',
+    });
   });
 });
