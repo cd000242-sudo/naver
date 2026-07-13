@@ -39,10 +39,23 @@ export function removeUnsupportedClaimSentences(
 }
 
 function fallbackIntroduction(input: ContentPolicyInput): string {
-  const fact = input.business_facts.map((item) => item.trim()).find(Boolean);
-  return fact
-    ? `${input.primary_keyword}에서 확인된 핵심 정보는 ${fact}`
-    : `${input.primary_keyword}의 세부 조건은 공식 안내에서 최신 내용을 확인해 주세요.`;
+  const topic = input.primary_keyword
+    .split(/[｜|\n\r]/u)
+    .map((part) => part.trim())
+    .find(Boolean)
+    ?.slice(0, 60) || '이 주제';
+  return `${topic} 정보를 확인할 때는 실제 조건과 공식 안내를 함께 살펴보는 것이 좋습니다. 아래에서 필요한 기준을 순서대로 정리합니다.`;
+}
+
+function fallbackHeadingTitle(index: number): string {
+  const titles = [
+    '핵심 내용부터 살펴보기',
+    '적용 조건 확인하기',
+    '확인 방법과 준비 과정',
+    '주의할 점과 대안',
+    '마지막으로 점검할 내용',
+  ];
+  return titles[index] || `추가로 살펴볼 내용 ${index - titles.length + 1}`;
 }
 
 export function repairUnsupportedClaims(
@@ -63,7 +76,7 @@ export function repairUnsupportedClaims(
   const introduction = removeUnsupportedClaimSentences(draft.introduction, unsupportedClaims) || fallbackIntro;
   const headings = draft.headings.map((heading, index) => ({
     title: removeUnsupportedClaimSentences(heading.title, unsupportedClaims)
-      || `${input.primary_keyword} 확인 사항 ${index + 1}`,
+      || fallbackHeadingTitle(index),
     content: removeUnsupportedClaimSentences(heading.content, unsupportedClaims)
       || '세부 조건은 제공된 자료와 공식 판매 페이지에서 다시 확인해 주세요.',
   }));

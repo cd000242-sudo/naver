@@ -12,6 +12,7 @@ import type { TableRow } from '../image/tableImageGenerator.js';
 import { searchShopping, stripHtmlTags, type ShoppingItem } from '../naverSearchApi.js';
 // ✅ [2026-04-21] 네이버 스토어 가격 다중 폴백 (난독화 class 변경 대응)
 import { extractNaverStorePrice } from './naverStorePriceExtractor.js';
+import { mergeOfficialNaverProductGallery } from './shopping/utils/officialNaverProductGallery.js';
 
 /**
  * Apply 5-stage price fallback when the primary extraction yielded 0 or empty.
@@ -648,6 +649,7 @@ export interface AffiliateProductInfo {
     mainImage: string | null;       // 대표 사진 1장
     galleryImages: string[];        // 추가 사진 리스트 (갤러리)
     detailImages: string[];         // 상세페이지(본문) 사진 리스트
+    reviewImages?: string[];        // 구매후기 사진 (공식 갤러리와 분리)
     // ✅ [2026-01-21] 제품 상세 설명 추가 (AI 리뷰 작성용)
     description?: string;           // 제품 설명, 특징, 스펙 등 전체 텍스트
     // [2026-06-12] JSON-LD 기반 리뷰/평점 — P0 리뷰 가드(SPEC-REVIEW-001) 입력.
@@ -669,6 +671,27 @@ export async function crawlBrandStoreProduct(
 ): Promise<AffiliateProductInfo | null> {
     console.log(`[BrandStore] 🚀 Playwright + Stealth 크롤링 시작!`);
     console.log(`[BrandStore] 📎 브랜드: ${brandName}, 상품ID: ${productId}`);
+
+    // The provider pipeline is the maintained brand-store crawler. The legacy
+    // block below launches two independent persistent browsers and can spend
+    // several minutes retrying the same page. Use it only as an explicit
+    // diagnostic fallback so normal users always get a bounded response.
+    try {
+        const { crawlBrandStoreAffiliateProduct } = await import('./shopping/brandStoreAffiliateCrawler.js');
+        const modernResult = await crawlBrandStoreAffiliateProduct(originalUrl);
+        if (modernResult) {
+            console.log(`[BrandStore] ✅ 통합 Provider 성공: ${modernResult.price.toLocaleString()}원, 공식 이미지 ${modernResult.galleryImages.length}장`);
+            return modernResult as AffiliateProductInfo;
+        }
+        console.warn('[BrandStore] ⚠️ 통합 Provider가 검증 가능한 상품 정보를 반환하지 못했습니다.');
+    } catch (error) {
+        console.warn(`[BrandStore] ⚠️ 통합 Provider 실패: ${(error as Error).message}`);
+    }
+
+    if (process.env.BETTER_LIFE_ENABLE_LEGACY_BRAND_CRAWLER !== '1') {
+        console.warn('[BrandStore] 🛡️ 장시간 대기하는 레거시 이중 브라우저 폴백을 생략합니다.');
+        return null;
+    }
 
     let context: any = null;
     let browser: any = null;
@@ -2633,31 +2656,12 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
           await releasePage(bcPage);
           bcPage = null;
 
-          // Merge order: clicked (render-confirmed) → alt-gallery → JSON-LD.
-          // Gallery shots stay ahead of review pics; review images only fill
-          // in AFTER the full gallery (allImages order below).
-          {
-            const seenBases = new Set(galleryImages.map((u) => u.split('?')[0]));
-            let recovered = 0;
-            for (const url of [...altImages, ...jsonLdInfo.images]) {
-              const base = url.split('?')[0];
-              // dthumb proxy urls carry their source in the query string —
-              // stripping it 404s (live 실측: 발행물 빈 이미지 슬롯), and
-              // non shop-phinf hosts (g-selected 등) reject ?type=m1000_pd
-              // (다운로드 실측 404). Only direct shop-phinf image files
-              // survive the ?type= re-append.
-              if (!/^https?:\/\/shop-phinf\.pstatic\.net\/.+\.(jpe?g|png|webp)$/i.test(base)) continue;
-              if (seenBases.has(base)) continue;
-              seenBases.add(base);
-              galleryImages.push(base + '?type=m1000_pd');
-              recovered += 1;
-            }
-            if (recovered > 0) {
-              console.log(`[AffiliateCrawler] 🧬 갤러리 복구: +${recovered}장 (alt ${altImages.length} · json-ld ${jsonLdInfo.images.length} · 클릭 ${galleryImages.length - recovered})`);
-            }
-          }
-
-          const allImages = [...galleryImages, ...reviewImages];
+          const allImages = mergeOfficialNaverProductGallery(
+            galleryImages,
+            altImages,
+            jsonLdInfo.images,
+          );
+          console.log(`[AffiliateCrawler] 🧬 공식 갤러리 확정: ${allImages.length}장 (클릭 ${galleryImages.length} · alt ${altImages.length} · json-ld ${jsonLdInfo.images.length})`);
           const priceNum = parseInt((productData.price || '').replace(/[^0-9]/g, '')) || 0;
           const description = [
             productData.ogDesc || '',
@@ -2675,6 +2679,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
               mainImage: allImages[0] || null,
               galleryImages: allImages,
               detailImages: [],
+              reviewImages,
               description: description || jsonLdInfo.description || `${productData.productName} 상품입니다.`,
               reviewTexts: jsonLdInfo.reviewTexts,
               reviewCount: jsonLdInfo.reviewCount,

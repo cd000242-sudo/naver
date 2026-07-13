@@ -15,6 +15,41 @@ export interface AdditionalImageCandidate {
     order: number;
 }
 
+function readImageUrl(img: HTMLImageElement): string {
+    const srcset = img.getAttribute('srcset');
+    const srcsetUrl = srcset
+        ? srcset.split(',').map(part => part.trim().split(/\s+/)[0]).filter(Boolean).pop() || ''
+        : '';
+    return (
+        img.getAttribute('data-src') ||
+        img.getAttribute('data-original') ||
+        img.getAttribute('data-lazy-src') ||
+        img.currentSrc ||
+        img.src ||
+        srcsetUrl
+    ).replace(/&amp;/g, '&');
+}
+
+/** 대표 상품 이미지 URL. 리뷰·추천상품과 섞이지 않는 안정적인 alt 속성만 사용한다. */
+export function collectRepresentativeImageUrl(): string {
+    const selectors = [
+        'img[alt="대표이미지"]',
+        'img[aria-label="대표이미지"]',
+        'img[title="대표이미지"]',
+        '[data-shp-area="topi.image"] img',
+    ];
+
+    for (const selector of selectors) {
+        try {
+            const image = document.querySelector(selector) as HTMLImageElement | null;
+            if (!image) continue;
+            const url = readImageUrl(image);
+            if (/^https?:\/\//i.test(url)) return url;
+        } catch { /* try the next stable selector */ }
+    }
+    return '';
+}
+
 /**
  * PHASE 0 공식 상품 갤러리 URL 수집.
  * 네이버 상품 갤러리는 작은 썸네일이 `alt="추가이미지N"` 형태로 렌더되는 경우가 많다.
@@ -23,27 +58,6 @@ export interface AdditionalImageCandidate {
 export function collectAdditionalImageUrls(): AdditionalImageCandidate[] {
     const seen = new Set<string>();
     const results: AdditionalImageCandidate[] = [];
-
-    const readSrcset = (srcset: string | null | undefined): string => {
-        if (!srcset) return '';
-        const parts = srcset
-            .split(',')
-            .map(part => part.trim().split(/\s+/)[0])
-            .filter(Boolean);
-        return parts[parts.length - 1] || '';
-    };
-
-    const readUrl = (img: HTMLImageElement): string => {
-        return (
-            img.getAttribute('data-src') ||
-            img.getAttribute('data-original') ||
-            img.getAttribute('data-lazy-src') ||
-            img.currentSrc ||
-            img.src ||
-            readSrcset(img.getAttribute('srcset')) ||
-            ''
-        ).replace(/&amp;/g, '&');
-    };
 
     const selectors = [
         'img[alt^="추가이미지"]',
@@ -57,7 +71,7 @@ export function collectAdditionalImageUrls(): AdditionalImageCandidate[] {
         try {
             document.querySelectorAll(sel).forEach(node => {
                 const img = node as HTMLImageElement;
-                const url = readUrl(img);
+                const url = readImageUrl(img);
                 if (!url || !/^https?:\/\//i.test(url) || url.startsWith('data:')) return;
 
                 const alt = (

@@ -2,6 +2,8 @@ import type { EvaluationResult, Mode } from './qualityEvaluator';
 
 export const QUALITY90_TARGET_SCORE = 90;
 export const QUALITY90_FALLBACK_MIN_SCORE = 80;
+export const QUALITY90_FALLBACK_MIN_MODE_SCORE = 75;
+export const QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE = 70;
 export const QUALITY90_FALLBACK_MIN_SAFETY_SCORE = 70;
 
 const QUALITY90_MODES = new Set<Mode>(['seo', 'homefeed', 'mate', 'affiliate']);
@@ -10,8 +12,11 @@ const HUMANLIKE_90_MODES = new Set<Mode>(['homefeed', 'affiliate']);
 export interface Quality90GateAssessment {
   readonly enabled: boolean;
   readonly passed: boolean;
+  readonly targetReached: boolean;
+  readonly nearTargetAccepted: boolean;
   readonly miss: boolean;
   readonly reasons: readonly string[];
+  readonly blockingReasons: readonly string[];
   readonly directive: string;
 }
 
@@ -25,13 +30,13 @@ export function canAcceptQuality90Fallback(
 ): boolean {
   if (!isQuality90Mode(mode) || result.decision !== 'pass') return false;
 
-  const meetsCoreFloor = result.modeScore.score >= QUALITY90_FALLBACK_MIN_SCORE
+  const meetsCoreFloor = result.modeScore.score >= QUALITY90_FALLBACK_MIN_MODE_SCORE
     && result.finalScore >= QUALITY90_FALLBACK_MIN_SCORE
     && result.safetyScore.score >= QUALITY90_FALLBACK_MIN_SAFETY_SCORE;
   if (!meetsCoreFloor) return false;
 
   return !HUMANLIKE_90_MODES.has(mode as Mode)
-    || result.humanlikeScore.score >= QUALITY90_FALLBACK_MIN_SCORE;
+    || result.humanlikeScore.score >= QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE;
 }
 
 function buildScoreReason(label: string, score: number): string | null {
@@ -41,26 +46,48 @@ function buildScoreReason(label: string, score: number): string | null {
 }
 
 export function assessQuality90Gate(
-  result: Pick<EvaluationResult, 'modeScore' | 'humanlikeScore' | 'safetyScore' | 'finalScore' | 'retryDirective'>,
+  result: Pick<EvaluationResult, 'modeScore' | 'humanlikeScore' | 'safetyScore' | 'finalScore' | 'decision' | 'retryDirective'>,
   mode: string,
 ): Quality90GateAssessment {
   if (!isQuality90Mode(mode)) {
     return {
       enabled: false,
       passed: true,
+      targetReached: false,
+      nearTargetAccepted: false,
       miss: false,
       reasons: [],
+      blockingReasons: [],
       directive: '',
     };
   }
 
-  const reasons = [
+  const targetReasons = [
     buildScoreReason('modeScore', result.modeScore.score),
     buildScoreReason('finalScore', result.finalScore),
     HUMANLIKE_90_MODES.has(mode as Mode) ? buildScoreReason('humanlikeScore', result.humanlikeScore.score) : null,
   ].filter((reason): reason is string => Boolean(reason));
 
-  const passed = reasons.length === 0;
+  const blockingReasons = [
+    result.modeScore.score < QUALITY90_FALLBACK_MIN_MODE_SCORE
+      ? `publication modeScore ${result.modeScore.score}<${QUALITY90_FALLBACK_MIN_MODE_SCORE}`
+      : null,
+    result.finalScore < QUALITY90_FALLBACK_MIN_SCORE
+      ? `publication finalScore ${result.finalScore}<${QUALITY90_FALLBACK_MIN_SCORE}`
+      : null,
+    result.safetyScore.score < QUALITY90_FALLBACK_MIN_SAFETY_SCORE
+      ? `publication safetyScore ${result.safetyScore.score}<${QUALITY90_FALLBACK_MIN_SAFETY_SCORE}`
+      : null,
+    HUMANLIKE_90_MODES.has(mode as Mode)
+      && result.humanlikeScore.score < QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE
+      ? `publication humanlikeScore ${result.humanlikeScore.score}<${QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE}`
+      : null,
+    result.decision !== 'pass' ? `publication decision ${result.decision}!=pass` : null,
+  ].filter((reason): reason is string => Boolean(reason));
+  const targetReached = targetReasons.length === 0;
+  const passed = canAcceptQuality90Fallback(result, mode);
+  const nearTargetAccepted = passed && !targetReached;
+  const reasons = [...targetReasons, ...blockingReasons];
   const issueLines = [
     ...result.modeScore.issues.slice(0, 3),
     ...result.humanlikeScore.issues.slice(0, HUMANLIKE_90_MODES.has(mode as Mode) ? 3 : 1),
@@ -75,14 +102,15 @@ export function assessQuality90Gate(
   const directive = passed
     ? ''
     : [
-        `[QualityGate 90+ HARD TARGET — ${mode} 모드]`,
+        `[QualityGate 90+ 목표 / 발행 하한 보정 — ${mode} 모드]`,
         `현재 점수: mode=${result.modeScore.score}, final=${result.finalScore}, humanlike=${result.humanlikeScore.score}, safety=${result.safetyScore.score}`,
         `미달 항목: ${reasons.join(', ')}`,
         '',
-        '반드시 실제 최종 글이 아래 조건을 만족하도록 전체 톤과 구조를 다시 보정하세요.',
-        `- ${mode} 모드 점수 ${QUALITY90_TARGET_SCORE}점 이상`,
-        `- 종합 점수 ${QUALITY90_TARGET_SCORE}점 이상`,
-        ...(HUMANLIKE_90_MODES.has(mode as Mode) ? [`- 사람다움 점수 ${QUALITY90_TARGET_SCORE}점 이상`] : []),
+        '90점은 개선 목표이며, 아래 자동 발행 하한을 먼저 충족하도록 톤과 구조를 보정하세요.',
+        `- ${mode} 모드 점수 ${QUALITY90_FALLBACK_MIN_MODE_SCORE}점 이상`,
+        `- 종합 점수 ${QUALITY90_FALLBACK_MIN_SCORE}점 이상`,
+        `- 안전성 점수 ${QUALITY90_FALLBACK_MIN_SAFETY_SCORE}점 이상`,
+        ...(HUMANLIKE_90_MODES.has(mode as Mode) ? [`- 사람다움 점수 ${QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE}점 이상`] : []),
         ...(mode === 'affiliate' ? [
           '- 광고 문구처럼 밀어붙이지 말고 친한 사람에게 설명하듯 구체적인 판단 이유, 맞는 사람, 맞지 않는 사람을 함께 제시',
           '- 제공된 실제 사실과 후기 범위 밖의 직접 사용 경험, 성능 단정, 사회적 반응은 만들지 않기',
@@ -97,8 +125,11 @@ export function assessQuality90Gate(
   return {
     enabled: true,
     passed,
+    targetReached,
+    nearTargetAccepted,
     miss: !passed,
     reasons,
+    blockingReasons,
     directive,
   };
 }

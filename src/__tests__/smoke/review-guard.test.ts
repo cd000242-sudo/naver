@@ -110,6 +110,9 @@ describe('SPEC-REVIEW-001 P0 — reviewGuard helpers', () => {
     // Data inventory must list the supplied fields
     expect(block).toContain('스펙');
     expect(block).toContain('가격');
+    expect(block).toContain('후기/리뷰/사용기/체험기');
+    expect(block).toContain('수집 당시 판매 페이지 표시값');
+    expect(block).not.toContain('현재 [입력된 가격]에 판매되고 있습니다');
   });
 
   it('buildReviewGuardBlock omits missing data from the inventory line', () => {

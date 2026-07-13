@@ -105,6 +105,25 @@ function cloneDraft(draft: ArticleDraft): ArticleDraft {
   };
 }
 
+function compactTopic(primaryKeyword: string): string {
+  const firstSegment = primaryKeyword
+    .split(/[｜|\n\r]/u)
+    .map((part) => part.trim())
+    .find(Boolean) || '이 주제';
+  if (firstSegment.length <= 60) return firstSegment;
+  const shortened = firstSegment.slice(0, 60).replace(/\s+\S*$/u, '').trim();
+  return shortened || firstSegment.slice(0, 60).trim();
+}
+
+function rewriteIntroductionForSimilarity(input: ContentPolicyInput, attempt: number): string {
+  const topic = compactTopic(input.primary_keyword);
+  const variants = [
+    `${topic} 정보를 찾고 있다면 눈에 띄는 문구보다 실제 사용 조건과 확인해야 할 기준을 함께 살펴보는 편이 좋습니다. 필요한 부분부터 차근차근 정리해 보겠습니다.`,
+    `${topic} 관련 선택을 앞두고 있다면 내 상황에 맞는 조건인지부터 확인해 보세요. 핵심 기준과 주의할 점을 순서대로 살펴보겠습니다.`,
+  ];
+  return variants[(Math.max(1, attempt) - 1) % variants.length];
+}
+
 function internalRewrite(
   draft: ArticleDraft,
   input: ContentPolicyInput,
@@ -121,23 +140,26 @@ function internalRewrite(
   if (quality.unsupported_claims.length > 0 && !hasNonClaimReason) {
     return original;
   }
-  const directFact = input.business_facts[attempt % Math.max(1, input.business_facts.length)] || '';
-  const directIntro = directFact
-    ? `${input.primary_keyword}에서 먼저 확인할 핵심은 ${directFact}`
-    : `${input.primary_keyword}에 대한 핵심 판단 기준부터 확인합니다.`;
+  const shouldRewriteIntroduction = reasons.some((reason) => (
+    reason === 'INTRO_NGRAM_COSINE_EXCEEDED'
+    || reason === 'REPEATED_OPENING_PATTERN'
+  ));
+  const originalIntroduction = original.introduction.trim();
+  const directIntro = shouldRewriteIntroduction || !originalIntroduction
+    ? rewriteIntroductionForSimilarity(input, attempt)
+    : originalIntroduction;
   let body = original.body_markdown;
-  if (original.introduction && body.includes(original.introduction)) {
+  if (directIntro !== originalIntroduction && original.introduction && body.includes(original.introduction)) {
     body = body.replace(original.introduction, directIntro);
-  } else {
+  } else if (!originalIntroduction && !body.startsWith(directIntro)) {
     body = `${directIntro}\n\n${body}`.trim();
   }
 
-  let headings = original.headings;
-  if (reasons.some((reason) => reason.includes('HEADING') || reason.includes('STRUCTURE')) && headings.length > 1) {
-    const offset = attempt % headings.length;
-    headings = [...headings.slice(offset), ...headings.slice(0, offset)];
-    body = [directIntro, ...headings.flatMap((heading) => [`## ${heading.title}`, heading.content])].join('\n\n');
-  }
+  // Heading overlap is not a license to rotate sections. Reordering titles
+  // without rewriting their content caused published articles to appear
+  // scrambled. A real rewriteDraft callback may rewrite wording, but this
+  // deterministic fallback always preserves semantic order.
+  const headings = original.headings.map((heading) => ({ ...heading }));
 
   return {
     ...original,

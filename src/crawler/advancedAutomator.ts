@@ -1,5 +1,5 @@
 import { BrowserContext, Page } from 'playwright';
-import { createCursor, GhostCursor } from 'ghost-cursor';
+import { createCursor, type Cursor } from 'ghost-cursor-playwright';
 
 /**
  * High-Fidelity Interaction Engine (AdvancedAutomator)
@@ -9,7 +9,7 @@ import { createCursor, GhostCursor } from 'ghost-cursor';
 export class AdvancedAutomator {
   private browserContent: BrowserContext | null = null;
   private page: Page | null = null;
-  private cursor: GhostCursor | null = null;
+  private cursor: Cursor | null = null;
 
   /**
    * 확률론적 가우시안 지연 시간 생성
@@ -77,7 +77,7 @@ export class AdvancedAutomator {
       }
 
       // 커서를 베지에 곡선 기반으로 유기적 이동
-      await this.cursor.click(selector);
+      await this.cursor.actions.click({ target: selector });
       
       // 클릭 직후 잔여 동작(여운) 대기
       await this.randomWait(500, 200);
@@ -101,7 +101,7 @@ export class AdvancedAutomator {
       if (!isVisible) return false;
 
       // 입력란 클릭
-      await this.cursor.click(selector);
+      await this.cursor.actions.click({ target: selector });
       await this.randomWait(300, 100);
 
       // 텍스트 한 글자씩 타이핑
@@ -127,7 +127,7 @@ export class AdvancedAutomator {
   public async attach(context: BrowserContext, page: Page): Promise<void> {
     this.browserContent = context;
     this.page = page;
-    this.cursor = createCursor(page as any);
+    this.cursor = await createCursor(page as any, { debug: false });
     console.log('[AdvancedAutomator] Ghost-Cursor Attach 완료.');
   }
 
@@ -155,7 +155,7 @@ export class AdvancedAutomator {
       const randomX = Math.floor(Math.random() * (innerWidth * 0.8)) + (innerWidth * 0.1);
       const randomY = Math.floor(Math.random() * (innerHeight * 0.8)) + (innerHeight * 0.1);
       
-      await this.cursor.moveTo({ x: randomX, y: randomY });
+      await this.cursor.actions.move({ x: randomX, y: randomY });
       await this.randomWait(1000, 400);
 
       // 약간의 스크롤

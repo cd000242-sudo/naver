@@ -41,6 +41,9 @@ function getFaq(): FaqItem[] {
     return Array.isArray(arr) ? arr.filter((x) => x && typeof x.q === 'string' && typeof x.a === 'string') : [];
   } catch { return []; }
 }
+function hasLocalNotice(): boolean {
+  return Boolean(getNotice().trim() || getFaq().length);
+}
 function escapeHtml(s: string): string {
   const d = document.createElement('div');
   d.textContent = s;
@@ -196,20 +199,15 @@ function renderFaqDisplay(host: HTMLElement, faq: FaqItem[]): void {
       </div>`).join('');
 }
 
-/** 공지가 있고 오늘 안 봤으면 센터에 표시. */
-export function showNoticeIfAny(): void {
-  if (pendingServerNotice) {
-    showServerNotice(pendingServerNotice);
-    return;
-  }
+function showLocalNoticeIfAny(): boolean {
   const notice = getNotice();
   const faq = getFaq();
-  if (!notice.trim() && !faq.length) return;
+  if (!notice.trim() && !faq.length) return false;
   const fingerprint = fingerprintNotice('local', notice, faq);
-  if (isDismissedToday(fingerprint, true)) return;
+  if (isDismissedToday(fingerprint, true)) return false;
 
   const elements = getNoticeDisplayElements();
-  if (!elements) return;
+  if (!elements) return false;
   const { modal, content, faqHost } = elements;
 
   document.querySelectorAll<HTMLElement>('#notice-modal').forEach((candidate) => {
@@ -220,16 +218,34 @@ export function showNoticeIfAny(): void {
   });
 
   content.innerHTML = sanitizeNoticeHtml(notice);
+  content.style.whiteSpace = 'normal';
   renderFaqDisplay(faqHost, faq);
   activeNoticeFingerprint = fingerprint;
   activeNoticeRequiresQuit = false;
   modal.style.display = 'flex';
   modal.setAttribute('aria-hidden', 'false');
+  return true;
+}
+
+/** 공지가 있고 오늘 안 봤으면 센터에 표시. */
+export function showNoticeIfAny(): void {
+  // The in-app admin editor is the operator's explicit latest choice on this
+  // device. A stale server cache must not overwrite it after authentication.
+  if (hasLocalNotice()) {
+    showLocalNoticeIfAny();
+    return;
+  }
+  if (pendingServerNotice) showServerNotice(pendingServerNotice);
 }
 
 export function showServerNotice(noticeContent: string): void {
   pendingServerNotice = String(noticeContent || '').trim();
   if (!pendingServerNotice) return;
+
+  if (hasLocalNotice()) {
+    showLocalNoticeIfAny();
+    return;
+  }
 
   const fingerprint = fingerprintNotice('server', pendingServerNotice);
   if (isDismissedToday(fingerprint, false)) return;
@@ -238,7 +254,7 @@ export function showServerNotice(noticeContent: string): void {
   if (!elements) return;
   const { modal, content, faqHost } = elements;
 
-  content.textContent = pendingServerNotice;
+  content.innerHTML = sanitizeNoticeHtml(pendingServerNotice);
   content.style.whiteSpace = 'pre-wrap';
   faqHost.innerHTML = '';
   activeNoticeFingerprint = fingerprint;
@@ -330,10 +346,12 @@ function saveAdmin(): void {
     })).filter((f) => f.q || f.a);
     localStorage.setItem(FAQ_KEY, JSON.stringify(faq));
     localStorage.removeItem(DISMISS_KEY); // 변경됐으니 다시 보이게
+    closedNoticeFingerprints.clear();
   } catch { /* ignore */ }
   const modal = document.getElementById('admin-modal');
   if (modal) { modal.style.display = 'none'; modal.setAttribute('aria-hidden', 'true'); }
   if ((window as any).showToast) (window as any).showToast('✅ 공지/FAQ가 저장되었습니다.', 'success');
+  showNoticeIfAny();
 }
 
 export function initNoticeAdmin(): void {

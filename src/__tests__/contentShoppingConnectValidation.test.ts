@@ -1,10 +1,20 @@
 import { describe, expect, it } from 'vitest';
 import {
+  canPublishShoppingConnectQuality,
   detectBannedHeadingPatterns,
+  SHOPPING_CONNECT_PUBLISH_MIN_SCORE,
+  SHOPPING_CONNECT_TARGET_SCORE,
   validateShoppingConnectContent,
 } from '../contentShoppingConnectValidation.js';
 
 describe('contentShoppingConnectValidation', () => {
+  it('treats 90 as the target while allowing safe pass-level scores to publish', () => {
+    expect(SHOPPING_CONNECT_TARGET_SCORE).toBe(90);
+    expect(SHOPPING_CONNECT_PUBLISH_MIN_SCORE).toBe(80);
+    expect(canPublishShoppingConnectQuality(83)).toBe(true);
+    expect(canPublishShoppingConnectQuality(79)).toBe(false);
+  });
+
   it('uses the active generation threshold and visible body text for length scoring', () => {
     const result = validateShoppingConnectContent({
       bodyPlain: '가 '.repeat(800).trim(),

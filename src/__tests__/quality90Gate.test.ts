@@ -3,6 +3,8 @@ import {
   assessQuality90Gate,
   canAcceptQuality90Fallback,
   isQuality90Mode,
+  QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE,
+  QUALITY90_FALLBACK_MIN_MODE_SCORE,
   QUALITY90_TARGET_SCORE,
 } from '../content/quality90Gate';
 import type { EvaluationResult, SubScore } from '../content/qualityEvaluator';
@@ -27,10 +29,10 @@ const evaluation = (overrides: Partial<EvaluationResult>): EvaluationResult => (
 });
 
 describe('quality90Gate', () => {
-  it('accepts only a safe pass-level result after bounded 90-point repairs are exhausted', () => {
+  it('accepts a safe pass-level result without treating 90 as an absolute publication floor', () => {
     expect(canAcceptQuality90Fallback(evaluation({
-      modeScore: subScore(86),
-      finalScore: 84,
+      modeScore: subScore(77),
+      finalScore: 83,
       safetyScore: subScore(95),
       humanlikeScore: subScore(78),
       decision: 'pass',
@@ -41,7 +43,7 @@ describe('quality90Gate', () => {
       modeScore: subScore(86),
       finalScore: 84,
       safetyScore: subScore(95),
-      humanlikeScore: subScore(79),
+      humanlikeScore: subScore(QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE - 1),
       decision: 'pass',
     }), 'affiliate')).toBe(false);
 
@@ -50,6 +52,13 @@ describe('quality90Gate', () => {
       finalScore: 82,
       safetyScore: subScore(45),
       decision: 'regenerate',
+    }), 'seo')).toBe(false);
+
+    expect(canAcceptQuality90Fallback(evaluation({
+      modeScore: subScore(QUALITY90_FALLBACK_MIN_MODE_SCORE - 1),
+      finalScore: 83,
+      safetyScore: subScore(95),
+      decision: 'pass',
     }), 'seo')).toBe(false);
   });
 
@@ -70,27 +79,34 @@ describe('quality90Gate', () => {
     expect(result).toMatchObject({
       enabled: true,
       passed: true,
+      targetReached: true,
+      nearTargetAccepted: false,
       miss: false,
       reasons: [],
       directive: '',
     });
   });
 
-  it('treats an 80-point pass decision as a miss for actual generation', () => {
+  it('publishes the reported mode 77 and final 83 case as a near-target pass', () => {
     const result = assessQuality90Gate(evaluation({
-      modeScore: subScore(88, ['answer-first evidence is weak'], ['add decision criteria']),
-      finalScore: 86,
+      modeScore: subScore(77, ['answer-first evidence is weak'], ['add decision criteria']),
+      finalScore: 83,
       decision: 'pass',
     }), 'seo');
 
-    expect(result.miss).toBe(true);
-    expect(result.reasons).toContain('modeScore 88<90');
-    expect(result.reasons).toContain('finalScore 86<90');
-    expect(result.directive).toContain('QualityGate 90+ HARD TARGET');
-    expect(result.directive).toContain('add decision criteria');
+    expect(result).toMatchObject({
+      enabled: true,
+      passed: true,
+      targetReached: false,
+      nearTargetAccepted: true,
+      miss: false,
+      directive: '',
+    });
+    expect(result.reasons).toContain('modeScore 77<90');
+    expect(result.reasons).toContain('finalScore 83<90');
   });
 
-  it('requires homefeed humanlike score to reach 90 as well', () => {
+  it('allows a safe near-target homefeed result when humanlike reaches its publication floor', () => {
     const result = assessQuality90Gate(evaluation({
       mode: 'homefeed',
       modeScore: subScore(93),
@@ -98,12 +114,12 @@ describe('quality90Gate', () => {
       humanlikeScore: subScore(72, ['too report-like'], ['add conversational transitions']),
     }), 'homefeed');
 
-    expect(result.miss).toBe(true);
+    expect(result.miss).toBe(false);
+    expect(result.nearTargetAccepted).toBe(true);
     expect(result.reasons).toContain('humanlikeScore 72<90');
-    expect(result.directive).toContain('사람다움 점수 90점 이상');
   });
 
-  it('requires affiliate content to reach 90 for mode, final, and humanlike scores', () => {
+  it('allows a safe near-target affiliate result instead of forcing another rewrite', () => {
     const result = assessQuality90Gate(evaluation({
       mode: 'affiliate',
       modeScore: subScore(94),
@@ -111,9 +127,28 @@ describe('quality90Gate', () => {
       humanlikeScore: subScore(84, ['too promotional'], ['replace ad copy with grounded observations']),
     }), 'affiliate');
 
-    expect(result.miss).toBe(true);
+    expect(result.miss).toBe(false);
+    expect(result.nearTargetAccepted).toBe(true);
     expect(result.reasons).toContain('humanlikeScore 84<90');
-    expect(result.directive).toContain('친한 사람에게 설명하듯');
+  });
+
+  it('keeps blocking results below the publication floors or with a non-pass decision', () => {
+    const lowMode = assessQuality90Gate(evaluation({
+      modeScore: subScore(QUALITY90_FALLBACK_MIN_MODE_SCORE - 1),
+      finalScore: 83,
+      safetyScore: subScore(95),
+      decision: 'pass',
+    }), 'seo');
+    expect(lowMode).toMatchObject({ passed: false, nearTargetAccepted: false, miss: true });
+    expect(lowMode.directive).toContain('QualityGate 90+');
+
+    const unsafe = assessQuality90Gate(evaluation({
+      modeScore: subScore(95),
+      finalScore: 91,
+      safetyScore: subScore(45),
+      decision: 'regenerate',
+    }), 'seo');
+    expect(unsafe).toMatchObject({ passed: false, nearTargetAccepted: false, miss: true });
   });
 
   it('does not gate business mode', () => {

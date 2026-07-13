@@ -31,4 +31,16 @@ describe('content policy source evidence', () => {
       articleType: 'general',
     })).toBe('reference');
   });
+
+  it('converts crawler-only labels into reader-safe evidence sentences', () => {
+    const facts = extractPolicyFactLines([
+      '상품명: 지엠지모터스 쿨썸 시트커버',
+      '수집 시점 표시 가격: 47,158원',
+      '판매처: 네이버 스마트스토어',
+    ].join('\n'));
+
+    expect(facts).toContain('상품명은 지엠지모터스 쿨썸 시트커버입니다.');
+    expect(facts).toContain('수집 당시 판매 페이지에 표시된 가격은 47,158원입니다.');
+    expect(facts.join(' ')).not.toContain('수집 시점 표시 가격:');
+  });
 });

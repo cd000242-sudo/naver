@@ -20,5 +20,8 @@ describe('affiliate price bridge', () => {
     const prompt = buildModeBasedPrompt(source, 'affiliate', undefined, 1800);
 
     expect(prompt).toContain('45,800원');
+    expect(prompt).toContain('수집 당시 판매 페이지 표시값');
+    expect(prompt).not.toContain('현재 45,800원에 판매 중');
+    expect(prompt).not.toContain('현재 네이버 스마트스토어에서 45,800원');
   });
 });

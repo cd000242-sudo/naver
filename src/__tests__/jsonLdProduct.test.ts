@@ -62,6 +62,30 @@ describe('parseProductJsonLd', () => {
     expect(info.reviewTexts.length).toBeLessThanOrEqual(5);
     expect(new Set(info.reviewTexts).size).toBe(info.reviewTexts.length);
   });
+
+  it('uses the authoritative Offer price from the live Naver product schema', () => {
+    const liveProductScript = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: '[국내생산] 통풍시트 자동차 시트커버 차량용 윈드포스',
+      description: '[지엠지모터스] 자동차용품 전문점 꾸미자닷컴',
+      image: 'https://shop-phinf.pstatic.net/main.jpg?type=o1000',
+      offers: {
+        '@type': 'Offer',
+        price: 45800,
+        priceCurrency: 'KRW',
+        availability: 'http://schema.org/InStock',
+        url: 'https://smartstore.naver.com/main/products/2884318642',
+      },
+    });
+
+    const info = parseProductJsonLd([liveProductScript]);
+
+    expect(info.price).toBe('45,800원');
+    expect(info.priceCurrency).toBe('KRW');
+    expect(info.availability).toBe('http://schema.org/InStock');
+    expect(info.canonicalUrl).toBe('https://smartstore.naver.com/main/products/2884318642');
+  });
 });
 
 // Dead-wiring 재발 방지: productReviews/productSpec/productPrice는 2026-01-30
@@ -91,6 +115,15 @@ describe('쇼핑커넥트 풀스펙 배선 가드 (dead-wiring 방지)', () => {
     const src = fs.readFileSync(path.join(process.cwd(), 'src', 'sourceAssembler.ts'), 'utf-8');
     expect(src).toContain('extractLabeledPrice(baseBody)');
     expect(src).toContain('productPrice: assembledProductPrice');
+  });
+
+  it('keeps review photos out of the official gallery result', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const src = fs.readFileSync(path.join(process.cwd(), 'src', 'crawler', 'productSpecCrawler.ts'), 'utf-8');
+    expect(src).toContain('mergeOfficialNaverProductGallery');
+    expect(src).toContain('reviewImages,');
+    expect(src).not.toContain('const allImages = [...galleryImages, ...reviewImages]');
   });
 });
 

@@ -1,6 +1,12 @@
 // @vitest-environment happy-dom
 import { describe, it, expect, beforeEach } from 'vitest';
-import { collectAdditionalImageUrls, collectReviewImageUrls, clickReviewTab, extractBrandProductInfo } from '../crawler/shopping/providers/brandStore/brandStoreDom.js';
+import {
+    collectAdditionalImageUrls,
+    collectRepresentativeImageUrl,
+    collectReviewImageUrls,
+    clickReviewTab,
+    extractBrandProductInfo,
+} from '../crawler/shopping/providers/brandStore/brandStoreDom.js';
 import { upscaleUrl } from '../crawler/shopping/utils/imageUrlUtils.js';
 
 describe('collectAdditionalImageUrls', () => {
@@ -44,6 +50,24 @@ describe('collectAdditionalImageUrls', () => {
         expect(collectAdditionalImageUrls().map(item => item.url)).toEqual([
             'https://shop-phinf.pstatic.net/a.jpg?type=f40',
             'https://shop-phinf.pstatic.net/b.jpg?type=f40',
+        ]);
+    });
+
+    it('keeps the representative and official gallery separate from reviews and recommendations', () => {
+        document.body.innerHTML =
+            '<img alt="대표이미지" src="https://shop-phinf.pstatic.net/main.jpg?type=o1000">' +
+            '<img alt="추가이미지0" src="https://shop-phinf.pstatic.net/add-0.jpg?type=f40">' +
+            '<img alt="추가이미지1" src="https://shop-phinf.pstatic.net/add-1.jpg?type=f40">' +
+            '<img alt="추가이미지2" src="https://shop-phinf.pstatic.net/add-1.jpg?type=f80">' +
+            '<img alt="review_image" src="https://checkout.phinf.pstatic.net/review.jpg">' +
+            '<img alt="추천상품" src="https://shop-phinf.pstatic.net/recommended.jpg">';
+
+        expect(collectRepresentativeImageUrl()).toBe(
+            'https://shop-phinf.pstatic.net/main.jpg?type=o1000',
+        );
+        expect(collectAdditionalImageUrls().map(item => item.url)).toEqual([
+            'https://shop-phinf.pstatic.net/add-0.jpg?type=f40',
+            'https://shop-phinf.pstatic.net/add-1.jpg?type=f40',
         ]);
     });
 });

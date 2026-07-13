@@ -180,7 +180,8 @@ describe('Price-zero bug — valid prices must still render', () => {
       );
 
       expect(prompt).toContain(`💰 가격: ${expectedFormatted}`);
-      expect(prompt).toContain(`"현재 ${expectedFormatted}에 판매 중"`);
+      expect(prompt).toContain(`수집 당시 판매 페이지 표시값은 ${expectedFormatted}`);
+      expect(prompt).not.toContain(`"현재 ${expectedFormatted}에 판매 중"`);
       expect(prompt).not.toContain('가격 정보가 수집되지 않았습니다');
     });
   }

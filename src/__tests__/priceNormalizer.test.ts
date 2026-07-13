@@ -107,6 +107,16 @@ describe('parsePrice — valid inputs', () => {
   it('floors fractional numbers', () => {
     expect(parsePrice(15370.9)).toBe(15370);
   });
+
+  it('treats a JSON-LD decimal suffix as decimals instead of concatenating it', () => {
+    expect(parsePrice('47158.00')).toBe(47158);
+    expect(parsePrice('47,158.00원')).toBe(47158);
+  });
+
+  it('rejects text containing multiple different numeric values', () => {
+    expect(parsePrice('47,158원 20% 할인')).toBeNull();
+    expect(parsePrice('정가 55,000원 판매가 47,158원')).toBeNull();
+  });
 });
 
 describe('formatPrice', () => {
@@ -128,6 +138,10 @@ describe('formatPrice', () => {
 
   it('preserves existing formatting "15,370원" as-is', () => {
     expect(formatPrice('15,370원')).toBe('15,370원');
+  });
+
+  it('formats JSON-LD decimal prices without multiplying them by 100', () => {
+    expect(formatPrice('47158.00')).toBe('47,158원');
   });
 });
 

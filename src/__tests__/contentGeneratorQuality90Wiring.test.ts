@@ -21,9 +21,11 @@ describe('contentGenerator QualityGate90 wiring', () => {
     expect(source).toContain('quality90Miss: _quality90Assessment.miss');
   });
 
-  it('does not allow an 80-point pass decision to skip regeneration in target modes', () => {
+  it('regenerates only blocking misses and recognizes near-target publication passes', () => {
     expect(source).toContain("(_gateResult.decision === 'regenerate' || _quality90Assessment?.miss)");
     expect(source).toContain('QualityGate90 ${_quality90Assessment.reasons.join');
+    expect(source).toContain('_quality90Assessment.nearTargetAccepted');
+    expect(source).toContain('90점 목표 근접 통과');
     expect(source).toContain('continue; // for 루프 다음 attempt');
   });
 
@@ -39,14 +41,14 @@ describe('contentGenerator QualityGate90 wiring', () => {
     expect(source).toContain('_quality90Assessment?.miss');
     expect(source).toContain('!_quality90FollowupRetryUsed');
     expect(source).toContain('patch 후에도 90점 미달');
-    expect(source).toContain('QualityGate90 target still missed after bounded retries');
+    expect(source).toContain('QualityGate90 publication floor still missed after bounded retries');
   });
 
-  it('accepts only a safe pass-level fallback and still blocks lower-quality results after bounded repair', () => {
+  it('uses the centralized gate result and blocks only publication-floor misses after bounded repair', () => {
     expect(source).toContain('QUALITY_TARGET_NOT_MET');
     expect(source).toContain('_quality90Assessment?.miss && attempt === MAX_ATTEMPTS');
-    expect(source).toContain('canAcceptQuality90Fallback(_gateResult, _modeForGate)');
-    expect(source).toContain('if (quality90FallbackAccepted)');
-    expect(source).toContain('90점 품질 기준을 충족하지 못해 자동 발행을 중단했습니다');
+    expect(source).not.toContain('canAcceptQuality90Fallback(_gateResult, _modeForGate)');
+    expect(source).toContain('_quality90Assessment.blockingReasons.join');
+    expect(source).toContain('자동 발행 하한을 충족하지 못해 발행을 중단했습니다');
   });
 });

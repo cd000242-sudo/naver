@@ -116,6 +116,26 @@ describe('extractNaverStorePrice — stage 1 JSON-LD', () => {
     expect(result.stage).toBeNull();
     expect(result.price).toBeNull();
   });
+
+  it('does not concatenate the decimal suffix in a string price', () => {
+    installDocumentStub({
+      selectors: {
+        'script[type="application/ld+json"]': [
+          {
+            textContent: JSON.stringify({
+              '@type': 'Product',
+              offers: { '@type': 'Offer', price: '47158.00', priceCurrency: 'KRW' },
+            }),
+          },
+        ],
+      },
+    });
+
+    const result = extractNaverStorePrice();
+
+    expect(result.stage).toBe(1);
+    expect(result.price).toBe('47,158원');
+  });
 });
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -137,12 +157,30 @@ describe('extractNaverStorePrice — stage 2 meta', () => {
   });
 });
 
+describe('extractNaverStorePrice — stage 3 price elements', () => {
+  it('does not pick the first card when several different product prices exist', () => {
+    installDocumentStub({
+      selectors: {
+        '[class*="price"], [class*="Price"]': [
+          { textContent: '판매가 25,000원', tagName: 'STRONG', closest: () => null },
+          { textContent: '판매가 47,158원', tagName: 'STRONG', closest: () => null },
+        ],
+      },
+    });
+
+    const result = extractNaverStorePrice();
+
+    expect(result.stage).toBeNull();
+    expect(result.price).toBeNull();
+  });
+});
+
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // Stage 5: Page-text regex (last resort)
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 describe('extractNaverStorePrice — stage 5 text regex', () => {
-  it('picks the MAX "N,NNN원" mention from body text', () => {
+  it('prefers an explicitly labelled product price over shipping and coupon amounts', () => {
     installDocumentStub({
       bodyText:
         '배송비 3,000원 무료배송 기준 50,000원 제품가 1,178,610원 쿠폰할인 200,000원',
@@ -150,6 +188,24 @@ describe('extractNaverStorePrice — stage 5 text regex', () => {
     const result = extractNaverStorePrice();
     expect(result.stage).toBe(5);
     expect(result.price).toBe('1,178,610원');
+  });
+
+  it('returns null instead of guessing when several unlabeled prices are present', () => {
+    installDocumentStub({ bodyText: '추천 상품 25,000원 함께 본 상품 47,158원 적립 기준 80,000원' });
+
+    const result = extractNaverStorePrice();
+
+    expect(result.stage).toBeNull();
+    expect(result.price).toBeNull();
+  });
+
+  it('does not treat a shipping-price label as the product price', () => {
+    installDocumentStub({ bodyText: '배송 가격: 3,000원' });
+
+    const result = extractNaverStorePrice();
+
+    expect(result.stage).toBeNull();
+    expect(result.price).toBeNull();
   });
 
   it('returns null when body has no price mentions', () => {
@@ -226,13 +282,13 @@ describe('extractNaverStorePrice — reproduces 2026-04-21 TV case', () => {
     expect(result.stage).toBe(1);
   });
 
-  it('extracts from body text when JSON-LD is missing', () => {
+  it('prefers the labelled sale price when JSON-LD is missing', () => {
     installDocumentStub({
       bodyText:
         '중복쿠폰 LG전자 QNED TV. 정가 1,382,000원. 할인가 1,178,610원. 배송비 무료.',
     });
     const result = extractNaverStorePrice();
-    expect(result.price).toBe('1,382,000원'); // stage 5 picks MAX
+    expect(result.price).toBe('1,178,610원');
     expect(result.stage).toBe(5);
   });
 });

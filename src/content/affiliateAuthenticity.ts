@@ -18,6 +18,8 @@ export interface AffiliateEvidenceClassification {
 export type AffiliateAuthenticityIssueCode =
   | 'FABRICATED_FIRST_PERSON'
   | 'MISSING_REVIEW_ATTRIBUTION'
+  | 'UNSUPPORTED_REVIEW_TITLE'
+  | 'UNSAFE_CURRENT_PRICE_CLAIM'
   | 'UNSUPPORTED_SOCIAL_PROOF'
   | 'UNSUPPORTED_URGENCY'
   | 'PRESSURE_SALES_COPY'
@@ -59,6 +61,9 @@ const FIRST_PERSON_USAGE_PATTERNS: readonly RegExp[] = [
 ];
 
 const REVIEW_ATTRIBUTION_PATTERN = /구매자\s*후기|사용자\s*후기|실구매\s*후기|후기(?:를|에서|에는|들을|들을\s*보면)|리뷰(?:를|에서|에는|들을|들을\s*보면)|구매자(?:들은|가|들이)|사용자(?:들은|가|들이)/i;
+const REVIEW_STYLE_TITLE_PATTERN = /후기|리뷰|사용기|체험기/i;
+const CURRENT_PRICE_VALUE_PATTERN = /(?:현재|지금)[^.\n]{0,40}?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?\s*원/i;
+const PRICE_SNAPSHOT_QUALIFIER_PATTERN = /수집\s*(?:당시|시점)|크롤링\s*당시|가격(?:은|이)?\s*변동|결제\s*전[^.\n]{0,24}?확인/i;
 
 const UNSUPPORTED_SOCIAL_PROOF_PATTERNS: readonly RegExp[] = [
   /수만\s*명이\s*선택/i,
@@ -94,6 +99,7 @@ const PRESSURE_SALES_PATTERNS: readonly RegExp[] = [
 const AI_AGENCY_PATTERNS: readonly RegExp[] = [
   /이번\s*(?:포스팅|글)에서는/i,
   /알아보겠습니다|살펴보겠습니다|소개해\s*드리겠습니다/i,
+  /고민\s*해결할\s*수\s*있을까요/i,
   /구매\s*욕구(?:를|가)/i,
   /행동\s*유도|전환율|소유욕\s*자극/i,
   /핵심\s*포인트|결정적\s*포인트/i,
@@ -175,7 +181,8 @@ export function buildAffiliateTitleEvidenceDirective(input: AffiliateEvidenceInp
   return `[쇼핑 제목 근거 모드: SPEC_ONLY — 작성자 실사용 근거 없음]
 - "써보니/직접 써본/실사용/한 달 사용/내돈내산"을 금지한다.
 - 제품명 + 확인된 핵심 스펙 + 누구에게 맞는지 또는 구매 전 확인할 조건으로 제목을 만든다.
-- 후기, 인기, 만족도, 판매량을 암시하지 않는다.`;
+- 리뷰 데이터가 없으므로 제목의 후기/리뷰/사용기/체험기 표기 자체를 금지한다.
+- 인기, 만족도, 판매량을 암시하지 않는다.`;
 }
 
 export function buildAffiliateAuthenticityContract(input: AffiliateEvidenceInput): string {
@@ -208,7 +215,7 @@ ${modeInstruction}
 6. "안녕하세요/오늘은/알아보겠습니다/핵심 포인트/총정리" 같은 AI 보고체와 광고 기획 용어를 쓰지 않는다.
 7. "진짜/완전/솔직히/거든요/잖아요/더라고요"는 사람 흉내용 장식이 아니다. 글 전체에서 필요한 만큼만 쓰고 같은 표현을 반복하지 않는다.
 8. 최저가·오늘만·품절 임박·판매 1위·별점·무료배송·쿠폰은 입력에 명시돼도 시점이 바뀔 수 있으므로 본문에서 단정하지 않는다.
-9. 구매 링크 안내는 마지막에 1회만 둔다. 압박하지 말고 현재 가격·옵션·배송 조건을 결제 전에 확인하라고 말한다.
+9. 입력 가격은 수집 당시 판매 페이지 표시값이다. "현재 N원에 판매 중"으로 단정하지 말고 최신 가격·옵션·배송 조건을 결제 전에 확인하라고 말한다.
 10. 독자가 글을 읽고 "좋다는 말"이 아니라 "나한테 맞는지 판단할 근거"를 가져가게 한다.
 
 ${titleDirective}`;
@@ -228,6 +235,17 @@ function hasFabricatedFirstPerson(text: string): boolean {
     if (REVIEW_ATTRIBUTION_PATTERN.test(sentence)) return false;
     return FIRST_PERSON_USAGE_PATTERNS.some(pattern => pattern.test(sentence));
   });
+}
+
+function hasUnsafeCurrentPriceClaim(text: string): boolean {
+  return text
+    .split(/(?<=[.!?。！？]|\n)/u)
+    .map(sentence => sentence.trim())
+    .filter(Boolean)
+    .some(sentence => (
+      CURRENT_PRICE_VALUE_PATTERN.test(sentence)
+      && !PRICE_SNAPSHOT_QUALIFIER_PATTERN.test(sentence)
+    ));
 }
 
 function makeRetryDirective(issues: readonly AffiliateAuthenticityIssue[]): string {
@@ -263,6 +281,24 @@ export function auditAffiliateAuthenticity(input: AffiliateAuthenticityAuditInpu
       code: 'MISSING_REVIEW_ATTRIBUTION',
       message: '구매자 리뷰를 종합한 글이지만 후기 출처가 드러나지 않습니다.',
       penalty: 15,
+      hard: false,
+    });
+  }
+
+  if (input.evidenceMode === 'spec_only' && REVIEW_STYLE_TITLE_PATTERN.test(title)) {
+    add({
+      code: 'UNSUPPORTED_REVIEW_TITLE',
+      message: '리뷰 근거가 없는데 제목이 후기·리뷰·사용기·체험기를 표방했습니다.',
+      penalty: 35,
+      hard: true,
+    });
+  }
+
+  if (hasUnsafeCurrentPriceClaim(fullText)) {
+    add({
+      code: 'UNSAFE_CURRENT_PRICE_CLAIM',
+      message: '수집 가격을 현재 판매가로 단정했습니다. 수집 시점을 밝히고 결제 전 재확인을 안내해야 합니다.',
+      penalty: 20,
       hard: false,
     });
   }

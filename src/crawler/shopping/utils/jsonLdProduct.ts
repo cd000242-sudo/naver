@@ -7,14 +7,27 @@
 // Pure function over raw <script type="application/ld+json"> contents so it
 // is unit-testable without a browser.
 
+import { formatPrice } from '../../../services/priceNormalizer.js';
+
 export interface JsonLdProductInfo {
   name?: string;
   description?: string;
+  price?: string;
+  priceCurrency?: string;
+  availability?: string;
+  canonicalUrl?: string;
   reviewTexts: string[];
   reviewCount?: number;
   rating?: string;
   /** Product gallery images — string, string[] and ImageObject forms. */
   images: string[];
+}
+
+interface JsonLdOfferInfo {
+  price?: string;
+  priceCurrency?: string;
+  availability?: string;
+  canonicalUrl?: string;
 }
 
 const MAX_REVIEW_TEXTS = 5;
@@ -70,6 +83,35 @@ function extractReviewTexts(review: unknown): string[] {
   return texts;
 }
 
+function extractOfferInfo(offers: unknown): JsonLdOfferInfo {
+  const candidates = Array.isArray(offers) ? offers : offers ? [offers] : [];
+
+  for (const candidate of candidates) {
+    if (!candidate || typeof candidate !== 'object') continue;
+    const offer = candidate as Record<string, unknown>;
+    const priceSpec = offer.priceSpecification && typeof offer.priceSpecification === 'object'
+      ? offer.priceSpecification as Record<string, unknown>
+      : undefined;
+    const normalizedPrice = formatPrice(
+      offer.price ?? offer.lowPrice ?? priceSpec?.price,
+    );
+    if (!normalizedPrice) continue;
+
+    return {
+      price: normalizedPrice,
+      priceCurrency: typeof (offer.priceCurrency ?? priceSpec?.priceCurrency) === 'string'
+        ? String(offer.priceCurrency ?? priceSpec?.priceCurrency).trim()
+        : undefined,
+      availability: typeof offer.availability === 'string'
+        ? offer.availability.trim()
+        : undefined,
+      canonicalUrl: typeof offer.url === 'string' ? offer.url.trim() : undefined,
+    };
+  }
+
+  return {};
+}
+
 /** Parse raw ld+json script contents into product info. Malformed JSON is skipped. */
 export function parseProductJsonLd(rawScripts: ReadonlyArray<string | null | undefined>): JsonLdProductInfo {
   const products: Record<string, unknown>[] = [];
@@ -90,6 +132,13 @@ export function parseProductJsonLd(rawScripts: ReadonlyArray<string | null | und
     }
     if (!result.description && typeof product.description === 'string' && product.description.trim()) {
       result.description = product.description.trim();
+    }
+    if (!result.price) {
+      const offerInfo = extractOfferInfo(product.offers);
+      result.price = offerInfo.price;
+      result.priceCurrency = offerInfo.priceCurrency;
+      result.availability = offerInfo.availability;
+      result.canonicalUrl = offerInfo.canonicalUrl;
     }
     if (result.reviewTexts.length < MAX_REVIEW_TEXTS) {
       const more = extractReviewTexts(product.review);

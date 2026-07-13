@@ -45,7 +45,6 @@ import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGu
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
 import {
   assessQuality90Gate,
-  canAcceptQuality90Fallback,
   isQuality90Mode,
 } from './content/quality90Gate.js';
 import {
@@ -188,7 +187,10 @@ import {
 import { ProviderRequestGate } from './contentProviderRequestGate.js';
 import { optimizeForViral } from './contentViralOptimizer.js';
 import {
+  canPublishShoppingConnectQuality,
   detectBannedHeadingPatterns as detectBannedHeadingPatternsImpl,
+  SHOPPING_CONNECT_PUBLISH_MIN_SCORE,
+  SHOPPING_CONNECT_TARGET_SCORE,
   validateShoppingConnectContent as validateShoppingConnectContentImpl,
 } from './contentShoppingConnectValidation.js';
 import {
@@ -6022,7 +6024,9 @@ export async function generateStructuredContent(
           }
           _quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);
           if (_quality90Assessment.miss) {
-            console.warn(`[QualityGate90] 🚧 실제 결과 90점 미달 — ${_quality90Assessment.reasons.join(', ')}`);
+            console.warn(`[QualityGate90] 🚧 자동 발행 하한 미달 — ${_quality90Assessment.blockingReasons.join(', ')}`);
+          } else if (_quality90Assessment.nearTargetAccepted) {
+            console.warn(`[QualityGate90] 90점 목표 근접 통과 — mode=${_gateResult.modeScore.score}, final=${_gateResult.finalScore}`);
           } else if (_quality90Assessment.enabled) {
             console.log(`[QualityGate90] ✅ 실제 결과 90점 기준 통과 (${_modeForGate})`);
           }
@@ -6035,9 +6039,17 @@ export async function generateStructuredContent(
               humanlikeScore: _gateResult.humanlikeScore.score,
               decision: _gateResult.decision,
               quality90Target: _quality90Assessment.enabled ? 90 : null,
+              quality90TargetReached: _quality90Assessment.targetReached,
+              quality90NearTargetAccepted: _quality90Assessment.nearTargetAccepted,
               quality90Miss: _quality90Assessment.miss,
               quality90Reasons: _quality90Assessment.reasons,
             };
+            if (_quality90Assessment.nearTargetAccepted) {
+              optimized.quality.warnings = [
+                ...(optimized.quality.warnings || []),
+                `QualityGate90 목표 근접 통과: mode=${_gateResult.modeScore.score}, final=${_gateResult.finalScore}`,
+              ];
+            }
           }
         } catch (gateErr) {
           console.warn('[QualityGate] 평가 실패 (정상 흐름 유지):', (gateErr as Error)?.message);
@@ -6134,6 +6146,8 @@ export async function generateStructuredContent(
                 (optimized.quality as any).qualityGate.safetyScore = _gateResult.safetyScore.score;
                 (optimized.quality as any).qualityGate.humanlikeScore = _gateResult.humanlikeScore.score;
                 (optimized.quality as any).qualityGate.decision = _gateResult.decision;
+                (optimized.quality as any).qualityGate.quality90TargetReached = _quality90Assessment?.targetReached ?? false;
+                (optimized.quality as any).qualityGate.quality90NearTargetAccepted = _quality90Assessment?.nearTargetAccepted ?? false;
                 (optimized.quality as any).qualityGate.quality90Miss = _quality90Assessment?.miss ?? false;
                 (optimized.quality as any).qualityGate.quality90Reasons = _quality90Assessment?.reasons ?? [];
               }
@@ -6169,30 +6183,16 @@ export async function generateStructuredContent(
         }
 
         if (_quality90Assessment?.miss && attempt === MAX_ATTEMPTS) {
-          const quality90FallbackAccepted = Boolean(
-            _gateResult && canAcceptQuality90Fallback(_gateResult, _modeForGate),
-          );
           if (optimized.quality) {
             optimized.quality.warnings = [
               ...(optimized.quality.warnings || []),
-              quality90FallbackAccepted
-                ? `QualityGate90 target missed after bounded retries; accepted safe pass-level fallback: ${_quality90Assessment.reasons.join(', ')}`
-                : `QualityGate90 target still missed after bounded retries: ${_quality90Assessment.reasons.join(', ')}`,
+              `QualityGate90 publication floor still missed after bounded retries: ${_quality90Assessment.blockingReasons.join(', ')}`,
             ];
-            if (quality90FallbackAccepted && (optimized.quality as any).qualityGate) {
-              (optimized.quality as any).qualityGate.quality90FallbackAccepted = true;
-            }
           }
-          if (quality90FallbackAccepted) {
-            console.warn(
-              `[QualityGate90] 최종 결과가 90점 목표에는 미달했지만 안전한 통과 하한을 충족해 발행을 계속합니다: ${_quality90Assessment.reasons.join(', ')}`,
-            );
-          } else {
-            throw new Error(
-              `[QUALITY_TARGET_NOT_MET] 90점 품질 기준을 충족하지 못해 자동 발행을 중단했습니다. `
-              + `미달 항목: ${_quality90Assessment.reasons.join(', ')}`,
-            );
-          }
+          throw new Error(
+            `[QUALITY_TARGET_NOT_MET] 자동 발행 하한을 충족하지 못해 발행을 중단했습니다. `
+            + `미달 항목: ${_quality90Assessment.blockingReasons.join(', ')}`,
+          );
         }
 
         // ✅ [v2.10.187 Phase 3.6+] 자동 SERP 벤치마크 — opt-out 방식
@@ -6321,18 +6321,19 @@ export async function generateStructuredContent(
           console.log(`[Shopping Authenticity] 통과: ${authenticity.score}/100 (${evidenceMode})`);
 
           const validation = validateShoppingConnectContent(optimized, validationMinChars);
-          if (validation.score < 90 && !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS) {
+          const shoppingQualityPublishable = canPublishShoppingConnectQuality(validation.score);
+          if (!shoppingQualityPublishable && !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS) {
             _shoppingValidationRetryUsed = true;
             const corrections = validation.feedback
               .filter(message => message.startsWith('❌') || message.startsWith('⚠️'))
               .join('\n- ');
-            extraInstruction = `[쇼핑커넥트 품질 재작성]\n- ${corrections}\n광고 문구가 아닌 실제 구매 판단 정보로 보완하고 90점 이상이 되도록 다시 작성하세요.\n${extraInstruction}`;
-            console.warn(`[Shopping Connect] 품질 ${validation.score}/100 — 90점 이상을 위해 전체 재작성`);
+            extraInstruction = `[쇼핑커넥트 품질 재작성]\n- ${corrections}\n광고 문구가 아닌 실제 구매 판단 정보로 보완하고 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점 이상, 목표 ${SHOPPING_CONNECT_TARGET_SCORE}점에 가깝게 다시 작성하세요.\n${extraInstruction}`;
+            console.warn(`[Shopping Connect] 품질 ${validation.score}/100 — 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점 이상을 위해 전체 재작성`);
             continue;
           }
-          if (validation.score < 90) {
+          if (!shoppingQualityPublishable) {
             throw new Error(
-              `[QUALITY_TARGET_NOT_MET] 쇼핑커넥트 품질이 ${validation.score}/100으로 90점 기준에 미달해 자동 발행을 중단했습니다. `
+              `[QUALITY_TARGET_NOT_MET] 쇼핑커넥트 품질이 ${validation.score}/100으로 안전 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점에 미달해 자동 발행을 중단했습니다. `
               + validation.feedback.filter(message => message.startsWith('❌') || message.startsWith('⚠️')).join(' / '),
             );
           }
@@ -6340,8 +6341,13 @@ export async function generateStructuredContent(
             (optimized.quality as any).shoppingValidation = {
               score: validation.score,
               passed: true,
+              targetReached: validation.score >= SHOPPING_CONNECT_TARGET_SCORE,
+              nearTargetAccepted: validation.score < SHOPPING_CONNECT_TARGET_SCORE,
               feedback: validation.feedback,
             };
+          }
+          if (validation.score < SHOPPING_CONNECT_TARGET_SCORE) {
+            console.warn(`[Shopping Connect] 90점 목표 근접 통과: ${validation.score}/100 (발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE})`);
           }
           if (validation.score < 100) {
             console.warn(`[Shopping Connect] ⚠️ 품질 점수: ${validation.score}/100`);

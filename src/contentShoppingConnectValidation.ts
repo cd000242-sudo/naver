@@ -1,5 +1,12 @@
 import { visibleCharacterCount } from './contentTextMetrics.js';
 
+export const SHOPPING_CONNECT_TARGET_SCORE = 90;
+export const SHOPPING_CONNECT_PUBLISH_MIN_SCORE = 80;
+
+export function canPublishShoppingConnectQuality(score: number): boolean {
+  return Number.isFinite(score) && score >= SHOPPING_CONNECT_PUBLISH_MIN_SCORE;
+}
+
 const BANNED_HEADING_PATTERNS = [
   '삶의 질이 달라졌', '삶의 질이 달라졌네요', '삶의 질이 달라졌어요',
   '실제 체감하는 성능 변화', '실제 체감하는 변화', '체감하는 성능 변화',

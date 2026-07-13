@@ -29,6 +29,22 @@ const INVALID_TOKENS = [
   'undefined',
 ];
 
+const PRICE_NUMBER_TOKEN = /\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)+|\d+/g;
+
+function parseNumericPriceToken(token: string): number | null {
+  const normalized = token.trim();
+  if (!normalized) return null;
+
+  // A dotted value with only three-digit groups is treated as a localized
+  // thousands separator. Otherwise the dot is a decimal separator, as used
+  // by JSON-LD values such as "47158.00".
+  const numericValue = /^\d{1,3}(?:\.\d{3})+$/u.test(normalized)
+    ? Number(normalized.replace(/\./g, ''))
+    : Number(normalized.replace(/,/g, ''));
+  if (!Number.isFinite(numericValue) || numericValue <= 0) return null;
+  return Math.floor(numericValue);
+}
+
 /**
  * Parse any raw price input into a positive KRW integer.
  * Returns null for zero, negative, missing, or non-numeric values.
@@ -49,13 +65,16 @@ export function parsePrice(raw: unknown): number | null {
     if (str.includes(token)) return null;
   }
 
-  const digitsOnly = str.replace(/[^\d]/g, '');
-  if (!digitsOnly) return null;
+  if (/(?:^|\s)-\s*\d/u.test(str)) return null;
 
-  const num = parseInt(digitsOnly, 10);
-  if (!Number.isFinite(num) || num <= 0) return null;
+  const numericTokens = str.match(PRICE_NUMBER_TOKEN) ?? [];
+  if (numericTokens.length !== 1) return null;
 
-  return num;
+  const tokenIndex = str.indexOf(numericTokens[0]);
+  const suffix = str.slice(tokenIndex + numericTokens[0].length).trimStart();
+  if (suffix.startsWith('%')) return null;
+
+  return parseNumericPriceToken(numericTokens[0]);
 }
 
 /**
@@ -76,7 +95,7 @@ export function formatPrice(raw: unknown): string | null {
 export function extractLabeledPrice(text: unknown): string | null {
   if (typeof text !== 'string' || !text.trim()) return null;
 
-  const labeledPricePattern = /(?:\uC218\uC9D1\s*\uC2DC\uC810\s*\uD45C\uC2DC\s*\uAC00\uACA9|\uAC00\uACA9)\s*[:：]\s*([₩￦]?\s*\d[\d,]*(?:\s*\uC6D0)?)/g;
+  const labeledPricePattern = /(?:\uC218\uC9D1\s*\uC2DC\uC810\s*\uD45C\uC2DC\s*\uAC00\uACA9|\uAC00\uACA9)\s*[:：]\s*([₩￦]?\s*\d[\d,]*(?:\.\d+)?(?:\s*\uC6D0)?)/g;
   for (const match of text.matchAll(labeledPricePattern)) {
     const normalized = formatPrice(match[1]);
     if (normalized) return normalized;

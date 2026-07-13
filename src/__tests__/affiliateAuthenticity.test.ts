@@ -47,6 +47,62 @@ describe('affiliate authenticity contract', () => {
     expect(directive).toContain('구매자 후기에서 확인된');
   });
 
+  it('리뷰가 전혀 없으면 제목의 후기·리뷰 표기도 금지한다', () => {
+    const directive = buildAffiliateTitleEvidenceDirective({
+      productSpec: '3단 풍속',
+      productPrice: '45,800원',
+    });
+
+    expect(directive).toContain('후기/리뷰/사용기/체험기');
+
+    const report = auditAffiliateAuthenticity({
+      title: '지엠지모터스 쿨썸 시트커버 후기',
+      body: '제품 페이지의 스펙과 구매 전 확인할 조건을 정리했습니다.',
+      evidenceMode: 'spec_only',
+    });
+
+    expect(report.hardFail).toBe(true);
+    expect(report.issues.some(issue => issue.code === 'UNSUPPORTED_REVIEW_TITLE')).toBe(true);
+  });
+
+  it('수집 가격을 현재 판매가로 단정하면 재작성 대상으로 잡는다', () => {
+    const unsafe = auditAffiliateAuthenticity({
+      title: '지엠지모터스 쿨썸 시트커버 구매 전 확인',
+      body: '현재 네이버 스마트스토어에서 45,800원에 판매되고 있습니다.',
+      evidenceMode: 'spec_only',
+    });
+    const safe = auditAffiliateAuthenticity({
+      title: '지엠지모터스 쿨썸 시트커버 구매 전 확인',
+      body: '수집 당시 판매 페이지 표시 가격은 45,800원이었으며 최신 가격과 옵션은 결제 전에 확인해야 합니다.',
+      evidenceMode: 'spec_only',
+    });
+
+    expect(unsafe.score).toBeLessThan(85);
+    expect(unsafe.issues.some(issue => issue.code === 'UNSAFE_CURRENT_PRICE_CLAIM')).toBe(true);
+    expect(safe.issues.some(issue => issue.code === 'UNSAFE_CURRENT_PRICE_CLAIM')).toBe(false);
+  });
+
+  it('쉼표 없는 현재 가격 단정도 재작성 대상으로 잡는다', () => {
+    const report = auditAffiliateAuthenticity({
+      title: '지엠지모터스 쿨썸 시트커버 구매 전 확인',
+      body: '현재 가격은 45800원입니다.',
+      evidenceMode: 'spec_only',
+    });
+
+    expect(report.issues.some(issue => issue.code === 'UNSAFE_CURRENT_PRICE_CLAIM')).toBe(true);
+  });
+
+  it('내용 없는 고민 해결 질문으로 시작하는 AI 도입부를 잡는다', () => {
+    const report = auditAffiliateAuthenticity({
+      title: '지엠지모터스 쿨썸 시트커버 구매 전 확인',
+      body: '고민 해결할 수 있을까요? 여름철 차량 운전 시 등 땀으로 불편함을 느끼는 분들이 많습니다.',
+      evidenceMode: 'spec_only',
+    });
+
+    expect(report.score).toBeLessThan(85);
+    expect(report.issues.some(issue => issue.code === 'AI_AGENCY_VOICE')).toBe(true);
+  });
+
   it('리뷰 종합 글에서 가짜 1인칭 사용담은 하드 실패한다', () => {
     const report = auditAffiliateAuthenticity({
       title: '한 달 써본 모노팬 F3 솔직 후기',

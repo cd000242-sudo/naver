@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import fs from 'fs';
 import path from 'path';
+import { mergeOfficialNaverProductGallery } from '../crawler/shopping/utils/officialNaverProductGallery.js';
 
 /**
  * SPEC-STABILITY-2026 쇼핑커넥트 갤러리 전량 배치 계약.
@@ -19,8 +20,14 @@ describe('쇼핑커넥트 갤러리 전량 배치 (2026-06-12)', () => {
   });
 
   it('크롤러는 확장자 없는 프록시 URL(dthumb)을 갤러리에 넣지 않는다', () => {
-    const src = read('src', 'crawler', 'productSpecCrawler.ts');
-    expect(src).toMatch(/\\.\(jpe\?g\|png\|webp\)\$\/i\.test\(base\)/);
+    const images = mergeOfficialNaverProductGallery(
+      ['https://shop-phinf.pstatic.net/product/main.jpg?type=m1000_pd'],
+      ['https://shop-phinf.pstatic.net/dthumb?src=proxy-image'],
+    );
+
+    expect(images).toEqual([
+      'https://shop-phinf.pstatic.net/product/main.jpg?type=m1000_pd',
+    ]);
   });
 });
 

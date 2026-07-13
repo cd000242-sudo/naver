@@ -15,7 +15,14 @@ import {
     ProductInfo,
 } from '../types.js';
 import { upscaleUrl, isJunkUrl, normalizeUrl } from '../utils/imageUrlUtils.js';
-import { collectAdditionalImageUrls, collectReviewImageUrls, clickReviewTab, extractBrandProductInfo } from './brandStore/brandStoreDom.js';
+import { parseProductJsonLd } from '../utils/jsonLdProduct.js';
+import {
+    collectAdditionalImageUrls,
+    collectRepresentativeImageUrl,
+    collectReviewImageUrls,
+    clickReviewTab,
+    extractBrandProductInfo,
+} from './brandStore/brandStoreDom.js';
 
 // Puppeteer는 동적 import로 가져옴 (Electron 환경 호환)
 let puppeteer: typeof import('puppeteer');
@@ -120,6 +127,11 @@ export class BrandStoreProvider extends BaseProvider {
                 };
             }
 
+            const jsonLdRaw = await page.evaluate(() => Array.from(
+                document.querySelectorAll('script[type="application/ld+json"]')
+            ).map((element) => element.textContent || '')).catch(() => [] as string[]);
+            const jsonLdInfo = parseProductJsonLd(jsonLdRaw);
+
             const allImages: { url: string; type: string }[] = [];
             const seenNorms = new Set<string>();
 
@@ -132,6 +144,14 @@ export class BrandStoreProvider extends BaseProvider {
                 seenNorms.add(norm);
                 allImages.push({ url, type });
             };
+
+            // JSON-LD Product.image is the authoritative representative image.
+            // Add it before thumbnails so duplicate gallery markup cannot demote it.
+            jsonLdInfo.images.forEach((imageUrl, index) => {
+                addImg(imageUrl, index === 0 ? 'main' : 'gallery');
+            });
+            const representativeImage = await page.evaluate(collectRepresentativeImageUrl).catch(() => '');
+            if (representativeImage) addImg(representativeImage, 'main');
 
             // ═══════════════════════════════════════════════════
             // PHASE 0: 갤러리 썸네일 클릭 → 큰 이미지 추출
@@ -149,18 +169,6 @@ export class BrandStoreProvider extends BaseProvider {
                     console.log(`[BrandStore:Playwright] ✅ 추가이미지 ${Math.max(thumbImgs.length, thumbCandidates.length)}개 발견 (viewport 2560x1440)`);
 
                     // 대표이미지 먼저 수집 (alt="대표이미지" 모바일/데스크톱 둘 다 시도)
-                    let mainImgEl = await page.$('img[alt="대표이미지"]');
-                    if (!mainImgEl) {
-                        // 데스크톱 페이지 폴백: 첫 번째 추가이미지의 부모 a 클릭한 결과로 잡힌 큰 이미지
-                        mainImgEl = await page.$('[data-shp-area="topi.image"] img, .product-detail__main-image img, [class*="ProductImage_main"] img');
-                    }
-                    if (mainImgEl) {
-                        const mainSrc = await mainImgEl.evaluate((img: HTMLImageElement) =>
-                            img.getAttribute('data-src') || img.src || ''
-                        );
-                        if (mainSrc) addImg(mainSrc, 'main');
-                    }
-
                     const directThumbUrls: string[] = [];
                     for (const candidate of thumbCandidates) {
                         if (candidate?.url) {
@@ -345,7 +353,15 @@ export class BrandStoreProvider extends BaseProvider {
             console.log(`[BrandStore:Playwright] 📋 우선순위 정렬: 메인 ${mainImages.length} → 갤러리 ${galleryImages.length} → 갤러리폴백 ${galleryFallbackImages.length} → 리뷰 ${reviewImages.length}`);
 
             // 제품 정보 추출
-            const productInfo = await page.evaluate(extractBrandProductInfo) as ProductInfo;
+            const domProductInfo = await page.evaluate(extractBrandProductInfo) as ProductInfo;
+            const productInfo: ProductInfo = {
+                ...domProductInfo,
+                name: jsonLdInfo.name || domProductInfo.name,
+                price: jsonLdInfo.price || domProductInfo.price,
+                description: jsonLdInfo.description || domProductInfo.description,
+                availability: jsonLdInfo.availability || domProductInfo.availability,
+                canonicalUrl: jsonLdInfo.canonicalUrl || domProductInfo.canonicalUrl,
+            };
 
             await releasePage(page);
 

@@ -5875,9 +5875,6 @@ async function fetchSingleSource(url: string, options?: { naverClientId?: string
             const productName = productInfo.name;
             const priceNum = parsePrice(productInfo.price);
             const priceLine = priceNum !== null ? `가격: ${priceNum.toLocaleString()}원\n` : '';
-            const salesLine = priceNum !== null
-              ? `수집 시점 표시 가격: ${priceNum.toLocaleString()}원\n`
-              : '';
             const brand = storeName;
             const productDescription = productInfo.description || '';
 
@@ -5891,9 +5888,6 @@ ${priceLine}브랜드: ${brand}
 
 === 제품 상세 정보 ===
 ${productDescription}
-
-=== 수집된 판매 정보 ===
-${salesLine}
 `;
             images = productInfo.mainImage ? [productInfo.mainImage, ...(productInfo.galleryImages || [])] : [];
 
@@ -6192,9 +6186,6 @@ export async function assembleContentSource(input: SourceAssemblyInput): Promise
           const productName = productInfo.name;
           const priceNum = parsePrice(productInfo.price);
           const priceLine = priceNum !== null ? `가격: ${priceNum.toLocaleString()}원\n` : '';
-          const salesLine = priceNum !== null
-            ? `수집 시점 표시 가격: ${priceNum.toLocaleString()}원\n`
-            : '';
           const brand = storeName;
           const category = 'shopping'; // crawlFromAffiliateLink는 카테고리 정보 없음
 
@@ -6227,8 +6218,6 @@ ${priceLine}브랜드: ${brand}
 === 제품 상세 정보 ===
 ${productDescription}
 ${reviewSection}
-=== 수집된 판매 정보 ===
-${salesLine}
 `,
             productPrice: priceNum !== null ? `${priceNum.toLocaleString()}원` : undefined,
             productSpec: productDescription.length >= 80 ? productDescription : undefined,
@@ -6272,9 +6261,6 @@ ${salesLine}
               const retryName = retryInfo.name;
               const retryPriceNum = parsePrice(retryInfo.price);
               const retryPriceLine = retryPriceNum !== null ? `가격: ${retryPriceNum.toLocaleString()}원\n` : '';
-              const retrySalesLine = retryPriceNum !== null
-                ? `수집 시점 표시 가격: ${retryPriceNum.toLocaleString()}원\n`
-                : '';
               const retryDesc = retryInfo.description || '';
               console.log(`   🎯 재시도 성공: "${retryName}" (${retryPriceNum !== null ? retryPriceNum.toLocaleString() + '원' : '가격 미수집'})`);
               const retryReviews = Array.isArray(retryInfo.reviewTexts) ? retryInfo.reviewTexts : [];
@@ -6282,7 +6268,7 @@ ${salesLine}
                 sourceType: 'custom_text',
                 url: rssUrlInput,
                 title: retryName,
-                rawText: `\n상품명: ${retryName}\n${retryPriceLine}브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc}\n${retryReviews.length > 0 ? `\n=== 실제 구매자 리뷰 (발췌) ===\n${retryReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n` : ''}\n=== 수집된 판매 정보 ===\n${retrySalesLine}`,
+                rawText: `\n상품명: ${retryName}\n${retryPriceLine}브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc}\n${retryReviews.length > 0 ? `\n=== 실제 구매자 리뷰 (발췌) ===\n${retryReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n` : ''}`,
                 productPrice: retryPriceNum !== null ? `${retryPriceNum.toLocaleString()}원` : undefined,
                 productSpec: retryDesc.length >= 80 ? retryDesc : undefined,
                 productReviews: retryReviews.length > 0 ? retryReviews : undefined,
