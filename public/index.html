@@ -4574,7 +4574,7 @@
 
         <!-- 환경설정 모달 -->
         <!-- ✅ 공지사항 모달 (프리미엄 디자인) -->
-        <div id="notice-modal" class="modal-backdrop" aria-hidden="true" style="display: none; z-index: 20000;">
+        <div id="legacy-notice-modal-v1" class="modal-backdrop" aria-hidden="true" hidden inert style="display: none; z-index: 20000;">
             <div class="modal-panel"
                 style="background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1a2e 100%); border: 2px solid var(--border-gold); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(212, 175, 55, 0.15); border-radius: 24px; max-width: 550px; width: 90%; position: relative; overflow: hidden;">
 
@@ -4600,12 +4600,12 @@
                         </div>
                     </div>
 
-                    <div id="notice-content"
+                    <div id="legacy-notice-content-v1"
                         style="color: var(--text-strong); font-size: 1.05rem; line-height: 1.7; background: rgba(255, 255, 255, 0.03); padding: 1.5rem; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 2rem; white-space: pre-wrap; word-break: break-word;">
                         <!-- 공지사항 내용이 여기에 들어갑니다 -->
                     </div>
 
-                    <button type="button" id="close-notice-btn"
+                    <button type="button" id="legacy-close-notice-btn-v1"
                         style="width: 100%; padding: 1.1rem; background: linear-gradient(135deg, var(--accent), #b45309); color: white; border: none; border-radius: 14px; font-weight: 800; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); transition: transform 0.2s, box-shadow 0.2s; letter-spacing: 0.5px;">
                         확인했습니다
                     </button>
@@ -13150,10 +13150,10 @@
 
 
     <!-- ✅ 공지사항 모달 (커스텀) -->
-    <div id="notice-modal" class="modal-backdrop" aria-hidden="true" style="display: none; z-index: 30000;">
+    <div id="legacy-notice-modal-v2" class="modal-backdrop" aria-hidden="true" hidden inert style="display: none; z-index: 30000;">
         <div class="modal-panel"
             style="background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(212, 175, 55, 0.1) 100%); border: 2px solid var(--border-gold); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); max-width: 600px; width: 95%; border-radius: 16px;">
-            <button type="button" class="modal-close" id="close-notice-btn"
+            <button type="button" class="modal-close" id="legacy-close-notice-btn-v2"
                 style="position: absolute; top: 1rem; right: 1rem; z-index: 10;">×</button>
 
             <h2
@@ -13163,14 +13163,14 @@
             </h2>
 
             <div class="modal-content" style="max-height: 60vh; overflow-y: auto;">
-                <div id="notice-content"
+                <div id="legacy-notice-content-v2"
                     style="color: var(--text-white); line-height: 1.8; white-space: pre-wrap; font-size: 1rem;">
                     공지사항 내용을 불러오고 있습니다...
                 </div>
             </div>
 
             <div class="modal-actions" style="margin-top: 2rem;">
-                <button type="button" onclick="document.getElementById('notice-modal').style.display='none'"
+                <button type="button" onclick="document.getElementById('legacy-notice-modal-v2').style.display='none'"
                     style="width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #000; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);">
                     확인
                 </button>

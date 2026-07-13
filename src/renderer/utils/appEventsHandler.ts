@@ -4,6 +4,8 @@
  * - 공지사항 모달, 종료 카운트다운, 전역 에러 핸들러
  */
 
+import { showServerNotice } from '../modules/noticeAdmin.js';
+
 // ✅ [2026-03-23] translateGeminiError import 제거 — errorAndAutosave.ts로 이관됨
 
 /**
@@ -39,34 +41,7 @@ export function initNoticeModalListener(): void {
     if (!window.api || !window.api.on) return;
 
     window.api.on('app:show-notice', (noticeContent: string) => {
-        const modal = document.getElementById('notice-modal');
-        const contentEl = document.getElementById('notice-content');
-        const closeBtn = document.getElementById('close-notice-btn');
-
-        if (modal && contentEl) {
-            contentEl.textContent = noticeContent;
-            modal.style.display = 'flex';
-
-            // 점검 모드 키워드 감지
-            const isMaintenanceMode = String(noticeContent).includes('점검') ||
-                String(noticeContent).includes('서비스 중단') ||
-                String(noticeContent).includes('이용 제한');
-
-            const closeHandler = () => {
-                modal.style.display = 'none';
-                if (isMaintenanceMode && typeof (window as any).api?.forceQuit === 'function') {
-                    (window as any).api.forceQuit();
-                }
-            };
-
-            closeBtn?.addEventListener('click', closeHandler, { once: true });
-
-            if (!isMaintenanceMode) {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) closeHandler();
-                }, { once: true });
-            }
-        }
+        showServerNotice(noticeContent);
     });
 }
 

@@ -1519,6 +1519,7 @@ export interface SyncResult {
   isBlocked?: boolean;
   versionCheckEnabled?: boolean;
   serviceEnabled?: boolean;
+  noticeEnabled?: boolean;
   notice?: string;
   error?: string;
 }
@@ -1559,13 +1560,15 @@ export async function syncWithServer(serverUrl?: string): Promise<SyncResult> {
     const result = await response.json();
     console.log('[LicenseManager] 서버 동기화 응답:', result);
 
+    const noticeEnabled = result.noticeEnabled !== false;
     return {
       ok: result.ok !== false,
       minVersion: result.minVersion,
       isBlocked: result.isBlocked === true,
       versionCheckEnabled: result.versionCheckEnabled !== false,
       serviceEnabled: result.serviceEnabled !== false,
-      notice: result.message || result.notice || '',
+      noticeEnabled,
+      notice: noticeEnabled ? (result.message || result.notice || '') : '',
     };
   } catch (error) {
     console.error('[LicenseManager] 서버 동기화 오류:', error);

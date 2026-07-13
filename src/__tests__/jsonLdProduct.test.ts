@@ -84,6 +84,14 @@ describe('쇼핑커넥트 풀스펙 배선 가드 (dead-wiring 방지)', () => {
     expect(src).toMatch(/productPrice: priceNum !== null/);
     expect(src).toContain('=== 실제 구매자 리뷰');
   });
+
+  it('preserves a collected price through the merged short-url source path', async () => {
+    const fs = await import('fs');
+    const path = await import('path');
+    const src = fs.readFileSync(path.join(process.cwd(), 'src', 'sourceAssembler.ts'), 'utf-8');
+    expect(src).toContain('extractLabeledPrice(baseBody)');
+    expect(src).toContain('productPrice: assembledProductPrice');
+  });
 });
 
 // 라이브 실측 2: 갤러리 썸네일 클릭 셀렉터도 부패 — 갤러리 11장 중 1장만

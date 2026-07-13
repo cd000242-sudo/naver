@@ -9,6 +9,26 @@ export interface ExpansionRetryInstructionInput extends ExpansionTargetInput {
   minChars: number;
 }
 
+export interface FinalQualityEvaluationInput {
+  visibleChars: number;
+  validationMinChars: number;
+  warningMinChars: number;
+  attempt: number;
+  maxAttempts: number;
+}
+
+export function shouldRunFinalQualityEvaluation(input: FinalQualityEvaluationInput): boolean {
+  const visibleChars = Math.max(0, Math.round(Number(input.visibleChars) || 0));
+  const validationMinChars = Math.max(1, Math.round(Number(input.validationMinChars) || 1));
+  const warningMinChars = Math.max(0, Math.round(Number(input.warningMinChars) || 0));
+  const attempt = Math.max(0, Math.round(Number(input.attempt) || 0));
+  const maxAttempts = Math.max(0, Math.round(Number(input.maxAttempts) || 0));
+
+  return attempt >= maxAttempts
+    && visibleChars >= warningMinChars
+    && visibleChars < validationMinChars;
+}
+
 export function resolveExpansionTargetChars(input: ExpansionTargetInput): number {
   const requestedMinChars = Math.max(0, Math.round(Number(input.requestedMinChars) || 0));
   const attempt = Math.max(0, Math.round(Number(input.attempt) || 0));

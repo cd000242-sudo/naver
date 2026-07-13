@@ -682,14 +682,10 @@ try {
   // time24Select_1.functionName -> functionName
   sanitized = sanitized.replace(/time24Select_1\.(\w+)/g, '$1');
 
-  // ✅ [2026-01-25] 브라우저에서 실행 불가능한 utils 함수 호출 주석 처리
-  // 이 함수들은 별도 모듈에 정의되어 있어서 인라인 없이는 사용 불가
-  // ✅ [2026-01-27] initSettingsModal, initSettingsModalFunc는 인라인되어 정상 동작하므로 제외
+  // 브라우저 번들에서 실행할 수 없는 호출만 제거한다.
+  // appEventsHandler는 위에서 인라인되므로 초기화 호출을 제거하면 IPC 이벤트가 전부 끊긴다.
   const utilsFunctionsToComment = [
-    'initAllAppEventHandlers',
     'initCategorySelectionListener',
-    // 'initSettingsModal',       // ✅ [2026-01-27] 인라인됨 - 주석 처리 불필요
-    // 'initSettingsModalFunc',   // ✅ [2026-01-27] 인라인됨 - 주석 처리 불필요
     'cleanupAllMemoryManagers',
   ];
   utilsFunctionsToComment.forEach(funcName => {
@@ -763,6 +759,23 @@ ${sanitized}`;
   if (missingRuntimeSymbols.length > 0) {
     throw new Error(
       `Renderer runtime helper missing after inlining: ${missingRuntimeSymbols.join(', ')}`,
+    );
+  }
+
+  // Required side-effect initializers must survive CommonJS stripping and inlining.
+  // A missing call leaves the UI running but silently disconnects main-process events.
+  const REQUIRED_RENDERER_BOOTSTRAP_CALLS = [
+    {
+      name: 'initAllAppEventHandlers',
+      pattern: /\binitAllAppEventHandlers\s*\(\s*\)\s*;/,
+    },
+  ];
+  const missingBootstrapCalls = REQUIRED_RENDERER_BOOTSTRAP_CALLS
+    .filter(({ pattern }) => !pattern.test(finalRenderer))
+    .map(({ name }) => name);
+  if (missingBootstrapCalls.length > 0) {
+    throw new Error(
+      `Renderer bootstrap call missing after inlining: ${missingBootstrapCalls.join(', ')}`,
     );
   }
 

@@ -69,6 +69,23 @@ export function formatPrice(raw: unknown): string | null {
 }
 
 /**
+ * Recover an explicitly labelled product price from assembled crawler text.
+ * This intentionally ignores bare numbers so product ids and model numbers
+ * cannot be mistaken for prices.
+ */
+export function extractLabeledPrice(text: unknown): string | null {
+  if (typeof text !== 'string' || !text.trim()) return null;
+
+  const labeledPricePattern = /(?:\uC218\uC9D1\s*\uC2DC\uC810\s*\uD45C\uC2DC\s*\uAC00\uACA9|\uAC00\uACA9)\s*[:：]\s*([₩￦]?\s*\d[\d,]*(?:\s*\uC6D0)?)/g;
+  for (const match of text.matchAll(labeledPricePattern)) {
+    const normalized = formatPrice(match[1]);
+    if (normalized) return normalized;
+  }
+
+  return null;
+}
+
+/**
  * Predicate form for conditional rendering in prompts.
  */
 export function hasValidPrice(raw: unknown): boolean {

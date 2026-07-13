@@ -1,7 +1,37 @@
 import { describe, expect, it } from 'vitest';
-import { buildContentExpansionRetryInstruction, resolveExpansionTargetChars } from '../contentLengthRetryPolicy';
+import {
+  buildContentExpansionRetryInstruction,
+  resolveExpansionTargetChars,
+  shouldRunFinalQualityEvaluation,
+} from '../contentLengthRetryPolicy';
 
 describe('contentLengthRetryPolicy', () => {
+  it('runs quality evaluation for a near-threshold final result instead of aborting before scoring', () => {
+    expect(shouldRunFinalQualityEvaluation({
+      visibleChars: 1297,
+      validationMinChars: 1500,
+      warningMinChars: 1000,
+      attempt: 2,
+      maxAttempts: 2,
+    })).toBe(true);
+
+    expect(shouldRunFinalQualityEvaluation({
+      visibleChars: 1297,
+      validationMinChars: 1500,
+      warningMinChars: 1000,
+      attempt: 1,
+      maxAttempts: 2,
+    })).toBe(false);
+
+    expect(shouldRunFinalQualityEvaluation({
+      visibleChars: 999,
+      validationMinChars: 1500,
+      warningMinChars: 1000,
+      attempt: 2,
+      maxAttempts: 2,
+    })).toBe(false);
+  });
+
   it('increases the retry target by 20 percent per attempt and caps at the safe max', () => {
     expect(resolveExpansionTargetChars({ requestedMinChars: 3000, attempt: 0, safeMaxChars: 80000 })).toBe(3000);
     expect(resolveExpansionTargetChars({ requestedMinChars: 3000, attempt: 1, safeMaxChars: 80000 })).toBe(3600);

@@ -43,7 +43,11 @@ import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoO
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
-import { assessQuality90Gate, isQuality90Mode } from './content/quality90Gate.js';
+import {
+  assessQuality90Gate,
+  canAcceptQuality90Fallback,
+  isQuality90Mode,
+} from './content/quality90Gate.js';
 import {
   auditAffiliateAuthenticity,
   buildAffiliateAuthenticityContract,
@@ -125,7 +129,10 @@ import { buildCustomModeOverridePrompt } from './contentCustomModePrompt.js';
 import { applyFactCheckHardConstraint } from './contentFactCheckConstraint.js';
 import { appendReviewAnalysisPrompt } from './contentReviewAnalysisPrompt.js';
 import { appendShoppingOfficialSafetyGuard } from './contentShoppingPromptAddons.js';
-import { buildContentExpansionRetryInstruction } from './contentLengthRetryPolicy.js';
+import {
+  buildContentExpansionRetryInstruction,
+  shouldRunFinalQualityEvaluation,
+} from './contentLengthRetryPolicy.js';
 import {
   prependDuplicatePatternRetryInstruction,
   prependFaithfulnessRetryInstruction,
@@ -188,7 +195,8 @@ import {
   optimizeHeadingsForMode,
   syncHeadingsWithBodyPlain,
 } from './contentHeadingOptimizer.js';
-import { characterCount } from './contentTextMetrics.js';
+import { characterCount, visibleCharacterCount } from './contentTextMetrics.js';
+import { formatPrice } from './services/priceNormalizer.js';
 import { cleanEscapeSequences } from './contentEscapeCleanup.js';
 import { filterExaggeratedContent } from './contentExaggerationFilter.js';
 import { removeDuplicateHeadings } from './contentDuplicateCleanup.js';
@@ -1701,8 +1709,11 @@ export function detectBannedHeadingPatterns(headings: Array<{ title: string }>):
   return detectBannedHeadingPatternsImpl(headings);
 }
 
-export function validateShoppingConnectContent(content: StructuredContent): { score: number; feedback: string[] } {
-  return validateShoppingConnectContentImpl(content);
+export function validateShoppingConnectContent(
+  content: StructuredContent,
+  minimumBodyChars?: number,
+): { score: number; feedback: string[] } {
+  return validateShoppingConnectContentImpl(content, { minimumBodyChars });
 }
 
 // ✅ [2026-02-11] getCurrentSeason() 제거 — 인라인 템플릿 전용이었음
@@ -1965,10 +1976,13 @@ export function buildModeBasedPrompt(
     // 🛒 [쇼핑커넥트 2026] .prompt 파일 모듈화 + articleType 분기
     // shopping_review → affiliate/shopping_review.prompt (사용후기)
     // shopping_expert_review → affiliate/shopping_expert_review.prompt (전문 리뷰)
+    const productPriceForPrompt = formatPrice(source.productPrice)
+      ?? formatPrice(source.productInfo?.price)
+      ?? undefined;
     const productInfoForPrompt = {
       name: source.productInfo?.name || source.title,
       spec: source.productSpec,
-      price: source.productPrice,
+      price: productPriceForPrompt,
       reviews: source.productReviews,
     };
 
@@ -2014,7 +2028,7 @@ export function buildModeBasedPrompt(
       systemPromptResult += `\n\n${buildReviewGuardBlock({
         reviewCount: 0,
         hasSpec: Boolean(source.productSpec),
-        hasPrice: Boolean(source.productPrice),
+        hasPrice: Boolean(productPriceForPrompt),
       })}`;
       console.log('[PromptBuilder] 🔒 P0 review guard applied: reviews=0 (SPEC-REVIEW-001)');
     } else if (affiliateEvidence.mode === 'first_party') {
@@ -5747,7 +5761,11 @@ export async function generateStructuredContent(
         }));
       }
 
-      const plainLength = characterCount(optimized.bodyPlain, minChars);
+      const compactLength = characterCount(optimized.bodyPlain, minChars);
+      const plainLength = visibleCharacterCount(optimized.bodyPlain);
+      if (plainLength !== compactLength) {
+        console.log(`[ContentGenerator] 본문 분량: 표시 ${plainLength}자 / 공백 제외 ${compactLength}자`);
+      }
 
       // ✅ [Phase 7-B] Source Fidelity 자동 재시도 (한 호출에 1회만)
       // 길이 검증 *전에* — fidelity 미달이면 LLM에 누락 fact 명시해 재요청.
@@ -5793,9 +5811,24 @@ export async function generateStructuredContent(
         } catch (_e) { /* fidelity 모듈 실패 시 정상 흐름 */ }
       }
 
+      // Final near-threshold output still deserves the real quality/safety
+      // evaluation. Aborting before scoring discarded otherwise usable posts.
+      const finalNearThresholdQualityEvaluation = isQuality90Mode(generationQualityMode)
+        && shouldRunFinalQualityEvaluation({
+          visibleChars: plainLength,
+          validationMinChars,
+          warningMinChars,
+          attempt,
+          maxAttempts: MAX_ATTEMPTS,
+        });
+      if (finalNearThresholdQualityEvaluation) {
+        console.warn(
+          `[ContentGenerator] 최종 본문이 권장 분량보다 짧지만 품질 검사를 계속합니다: ${plainLength}자 / 권장 ${validationMinChars}자`,
+        );
+      }
+
       // 검증: 질과 길이의 균형
-      // 80% 이상이면 완전 통과
-      if (plainLength >= validationMinChars) {
+      if (plainLength >= validationMinChars || finalNearThresholdQualityEvaluation) {
         // ✅ 성공 통계 업데이트
         stats.success++;
         if (attempt === 0) stats.attempts.first++;
@@ -6136,16 +6169,30 @@ export async function generateStructuredContent(
         }
 
         if (_quality90Assessment?.miss && attempt === MAX_ATTEMPTS) {
+          const quality90FallbackAccepted = Boolean(
+            _gateResult && canAcceptQuality90Fallback(_gateResult, _modeForGate),
+          );
           if (optimized.quality) {
             optimized.quality.warnings = [
               ...(optimized.quality.warnings || []),
-              `QualityGate90 target still missed after bounded retries: ${_quality90Assessment.reasons.join(', ')}`,
+              quality90FallbackAccepted
+                ? `QualityGate90 target missed after bounded retries; accepted safe pass-level fallback: ${_quality90Assessment.reasons.join(', ')}`
+                : `QualityGate90 target still missed after bounded retries: ${_quality90Assessment.reasons.join(', ')}`,
             ];
+            if (quality90FallbackAccepted && (optimized.quality as any).qualityGate) {
+              (optimized.quality as any).qualityGate.quality90FallbackAccepted = true;
+            }
           }
-          throw new Error(
-            `[QUALITY_TARGET_NOT_MET] 90점 품질 기준을 충족하지 못해 자동 발행을 중단했습니다. `
-            + `미달 항목: ${_quality90Assessment.reasons.join(', ')}`,
-          );
+          if (quality90FallbackAccepted) {
+            console.warn(
+              `[QualityGate90] 최종 결과가 90점 목표에는 미달했지만 안전한 통과 하한을 충족해 발행을 계속합니다: ${_quality90Assessment.reasons.join(', ')}`,
+            );
+          } else {
+            throw new Error(
+              `[QUALITY_TARGET_NOT_MET] 90점 품질 기준을 충족하지 못해 자동 발행을 중단했습니다. `
+              + `미달 항목: ${_quality90Assessment.reasons.join(', ')}`,
+            );
+          }
         }
 
         // ✅ [v2.10.187 Phase 3.6+] 자동 SERP 벤치마크 — opt-out 방식
@@ -6273,7 +6320,7 @@ export async function generateStructuredContent(
           };
           console.log(`[Shopping Authenticity] 통과: ${authenticity.score}/100 (${evidenceMode})`);
 
-          const validation = validateShoppingConnectContent(optimized);
+          const validation = validateShoppingConnectContent(optimized, validationMinChars);
           if (validation.score < 90 && !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS) {
             _shoppingValidationRetryUsed = true;
             const corrections = validation.feedback
@@ -6333,7 +6380,7 @@ export async function generateStructuredContent(
       }
 
       // ✅ [v1.4.14] 50% 이상이면 경고만 하고 통과 (재시도 비용 절감) - 60→50%로 완화
-      const minAcceptableChars = Math.round(minChars * 0.50); // 50% 기준
+      const minAcceptableChars = warningMinChars; // 50% 기준
       if (plainLength >= minAcceptableChars) {
         if (isQuality90Mode(generationQualityMode)) {
           if (attempt < MAX_ATTEMPTS) {

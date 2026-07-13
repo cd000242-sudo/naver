@@ -5,7 +5,7 @@ import type { ContentPolicyPayloadContext } from './contentPolicy/policyService.
 import { smartCrawler } from './crawler/smartCrawler.js';
 import { getProxyUrl, reportProxyFailed, reportProxySuccess } from './crawler/utils/proxyManager.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
-import { formatPriceOrEmpty, hasValidPrice, parsePrice } from './services/priceNormalizer.js';
+import { extractLabeledPrice, formatPriceOrEmpty, hasValidPrice, parsePrice } from './services/priceNormalizer.js';
 import { validateProductInfo } from './schemas/productInfoSchema.js';
 // 이미지 라이브러리 기능 제거됨 - 네이버 블로그 크롤링도 제거
 // import { extractImagesFromHtml, extractImagesFromRss, collectImages } from './imageLibrary.js';
@@ -6975,6 +6975,10 @@ ${salesLine}
     return 'general';
   };
 
+  const assembledProductPrice = isNaverStoreUrl
+    ? extractLabeledPrice(baseBody) ?? undefined
+    : undefined;
+
   const source: ContentSource = {
     sourceType: urlPatterns.length > 0 ? 'naver_news' : 'custom_text',
     url: allUrls.length > 0 ? (allUrls.length === 1 ? allUrls[0] : allUrls.join(', ')) : undefined,
@@ -6998,6 +7002,7 @@ ${salesLine}
     personalExperience: input.personalExperience,
     customPrompt: input.customPrompt, // ✅ 사용자 정의 프롬프트 전달
     images: extractedImages.length > 0 ? extractedImages : undefined, // ✅ 수집된 이미지 목록 전달
+    productPrice: assembledProductPrice,
     previousTitles: input.previousTitles, // ✅ [2026-02-09 v2] 이전 생성 제목 전달 (연속발행 중복 방지)
   };
 

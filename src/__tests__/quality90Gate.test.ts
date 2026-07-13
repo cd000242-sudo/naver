@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { assessQuality90Gate, isQuality90Mode, QUALITY90_TARGET_SCORE } from '../content/quality90Gate';
+import {
+  assessQuality90Gate,
+  canAcceptQuality90Fallback,
+  isQuality90Mode,
+  QUALITY90_TARGET_SCORE,
+} from '../content/quality90Gate';
 import type { EvaluationResult, SubScore } from '../content/qualityEvaluator';
 
 const subScore = (score: number, issues: readonly string[] = [], suggestions: readonly string[] = []): SubScore => ({
@@ -22,6 +27,32 @@ const evaluation = (overrides: Partial<EvaluationResult>): EvaluationResult => (
 });
 
 describe('quality90Gate', () => {
+  it('accepts only a safe pass-level result after bounded 90-point repairs are exhausted', () => {
+    expect(canAcceptQuality90Fallback(evaluation({
+      modeScore: subScore(86),
+      finalScore: 84,
+      safetyScore: subScore(95),
+      humanlikeScore: subScore(78),
+      decision: 'pass',
+    }), 'seo')).toBe(true);
+
+    expect(canAcceptQuality90Fallback(evaluation({
+      mode: 'affiliate',
+      modeScore: subScore(86),
+      finalScore: 84,
+      safetyScore: subScore(95),
+      humanlikeScore: subScore(79),
+      decision: 'pass',
+    }), 'affiliate')).toBe(false);
+
+    expect(canAcceptQuality90Fallback(evaluation({
+      modeScore: subScore(88),
+      finalScore: 82,
+      safetyScore: subScore(45),
+      decision: 'regenerate',
+    }), 'seo')).toBe(false);
+  });
+
   it('enables the hard target for SEO, homefeed, mate, and affiliate modes', () => {
     expect(isQuality90Mode('seo')).toBe(true);
     expect(isQuality90Mode('homefeed')).toBe(true);

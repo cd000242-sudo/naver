@@ -1,3 +1,5 @@
+import { visibleCharacterCount } from './contentTextMetrics.js';
+
 const BANNED_HEADING_PATTERNS = [
   '삶의 질이 달라졌', '삶의 질이 달라졌네요', '삶의 질이 달라졌어요',
   '실제 체감하는 성능 변화', '실제 체감하는 변화', '체감하는 성능 변화',
@@ -19,9 +21,14 @@ const BANNED_HEADING_PATTERNS = [
 ];
 
 export type ShoppingConnectValidationContent = {
+  bodyPlain?: string;
   headings?: Array<{ title: string; content?: string }>;
   conclusion?: string;
 };
+
+export interface ShoppingConnectValidationOptions {
+  minimumBodyChars?: number;
+}
 
 export function detectBannedHeadingPatterns(headings: Array<{ title: string }>): string[] {
   const detectedPatterns: string[] = [];
@@ -42,7 +49,10 @@ export function detectBannedHeadingPatterns(headings: Array<{ title: string }>):
   return detectedPatterns;
 }
 
-export function validateShoppingConnectContent(content: ShoppingConnectValidationContent): { score: number; feedback: string[] } {
+export function validateShoppingConnectContent(
+  content: ShoppingConnectValidationContent,
+  options: ShoppingConnectValidationOptions = {},
+): { score: number; feedback: string[] } {
   const feedback: string[] = [];
   let score = 100;
 
@@ -66,10 +76,12 @@ export function validateShoppingConnectContent(content: ShoppingConnectValidatio
     feedback.push('✅ 금지 패턴 없음');
   }
 
-  const totalChars = content.headings?.reduce((sum, heading) => sum + (heading.content?.length || 0), 0) || 0;
-  if (totalChars < 2500) {
+  const minimumBodyChars = Math.max(1, Math.round(Number(options.minimumBodyChars) || 2500));
+  const headingBody = content.headings?.map(heading => heading.content || '').join('\n\n') || '';
+  const totalChars = visibleCharacterCount(content.bodyPlain || headingBody);
+  if (totalChars < minimumBodyChars) {
     score -= 15;
-    feedback.push(`⚠️ 본문 ${totalChars}자 (2500자 이상 권장)`);
+    feedback.push(`⚠️ 본문 ${totalChars}자 (${minimumBodyChars}자 이상 권장)`);
   } else {
     feedback.push(`✅ 본문 ${totalChars}자`);
   }

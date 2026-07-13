@@ -427,6 +427,9 @@ const BUILD_RELEASE_DATE = new Date('2025-02-16T00:00:00Z');
 
 let loginWindow: BrowserWindow | null = null;
 let isLicenseValid = false;
+let latestActiveNotice = process.env.E2E_TEST === '1'
+  ? String(process.env.E2E_ACTIVE_NOTICE || '').trim()
+  : '';
 
 function isE2ETestMode(): boolean {
   return process.env.E2E_TEST === '1';
@@ -767,7 +770,10 @@ async function performServerSync(isBackground: boolean = false): Promise<{ allow
     }
 
     debugLog('[Main] performServerSync: 서버 동기화 성공');
-    return { allowed: true, notice: syncResult.notice };
+    latestActiveNotice = syncResult.noticeEnabled === false
+      ? ''
+      : String(syncResult.notice || '').trim();
+    return { allowed: true, notice: latestActiveNotice };
 
   } catch (error) {
     debugLog(`[Main] performServerSync: 오류 발생 - ${(error as Error).message}`);
@@ -4213,6 +4219,7 @@ const _earlyCtx = {
 registerLicenseHandlers(_earlyCtx);
 // ✅ app:getVersion — 로그인 창에서 버전 표시용 (systemHandlers는 app.whenReady() 이후에 등록)
 try { ipcMain.handle('app:getVersion', async () => app.getVersion()); } catch { /* 이미 등록됨 */ }
+ipcMain.handle('app:getActiveNotice', async (): Promise<string> => latestActiveNotice);
 // ✅ openExternalUrl — 로그인 창 구매문의 버튼용
 try { ipcMain.handle('openExternalUrl', async (_e: any, url: string) => {
   // ✅ [v2.7.56 SEC-V2-H3] file:/javascript: 차단
@@ -8962,46 +8969,50 @@ app.whenReady().then(async () => {
     //         (pre-launch sync 7294라인이 이미 점검/차단/버전 게이트 처리 → 여기는 사실상 중복)
     //   수정: setImmediate로 background 실행, 공지사항은 mainWindow.webContents.send로 후속 전달
     //   회귀: deny 결과는 background에서 app.quit() 호출 (보안 게이트 유지)
-    debugLog('[Main] Performing server sync (background)...');
-    setImmediate(async () => {
-      try {
-        const syncResult = await performServerSync(true);
+    if (isE2ETestMode()) {
+      debugLog('[Main] E2E_TEST mode: skipping background server sync');
+    } else {
+      debugLog('[Main] Performing server sync (background)...');
+      setImmediate(async () => {
+        try {
+          const syncResult = await performServerSync(true);
 
-        if (!syncResult.allowed) {
-          if (syncResult.error === 'VERSION_TOO_OLD_UPDATING') {
-            debugLog('[Main] Background sync paused while auto-update is in progress');
+          if (!syncResult.allowed) {
+            if (syncResult.error === 'VERSION_TOO_OLD_UPDATING') {
+              debugLog('[Main] Background sync paused while auto-update is in progress');
+              return;
+            }
+            debugLog(`[Main] Server sync denied access (background): ${syncResult.error}`);
+            app.quit();
             return;
           }
-          debugLog(`[Main] Server sync denied access (background): ${syncResult.error}`);
-          app.quit();
-          return;
-        }
 
-        // ✅ 공지사항이 있으면 렌더러로 전송 (커스텀 모달 표시)
-        if (syncResult.notice && syncResult.notice.trim()) {
-          const sendNotice = (): void => {
+          // ✅ 공지사항이 있으면 렌더러로 전송 (커스텀 모달 표시)
+          if (syncResult.notice && syncResult.notice.trim()) {
+            const sendNotice = (): void => {
+              if (mainWindow && !mainWindow.isDestroyed()) {
+                setTimeout(() => {
+                  if (mainWindow && !mainWindow.isDestroyed()) {
+                    mainWindow.webContents.send('app:show-notice', syncResult.notice);
+                    debugLog('[Main] Notice sent to renderer');
+                  }
+                }, 1000);
+              }
+            };
+
             if (mainWindow && !mainWindow.isDestroyed()) {
-              setTimeout(() => {
-                if (mainWindow && !mainWindow.isDestroyed()) {
-                  mainWindow.webContents.send('app:show-notice', syncResult.notice);
-                  debugLog('[Main] Notice sent to renderer');
-                }
-              }, 1000);
-            }
-          };
-
-          if (mainWindow && !mainWindow.isDestroyed()) {
-            if (mainWindow.webContents.isLoading()) {
-              mainWindow.webContents.once('did-finish-load', sendNotice);
-            } else {
-              sendNotice();
+              if (mainWindow.webContents.isLoading()) {
+                mainWindow.webContents.once('did-finish-load', sendNotice);
+              } else {
+                sendNotice();
+              }
             }
           }
+        } catch (err) {
+          debugLog(`[Main] Background server sync failed: ${(err as Error).message}`);
         }
-      } catch (err) {
-        debugLog(`[Main] Background server sync failed: ${(err as Error).message}`);
-      }
-    });
+      });
+    }
 
     // ✅ 무료 사용자 핑 및 사용자 활동 기록 (비동기, 백그라운드)
     // 저장된 네이버 계정 정보도 함께 전송

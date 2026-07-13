@@ -14,6 +14,11 @@ type NoticeDisplayElements = {
   faqHost: HTMLElement;
 };
 
+let pendingServerNotice = '';
+let activeNoticeFingerprint = '';
+let activeNoticeRequiresQuit = false;
+const closedNoticeFingerprints = new Set<string>();
+
 const SAFE_NOTICE_TAGS = new Set([
   'A', 'B', 'BR', 'DIV', 'EM', 'FONT', 'H1', 'H2', 'H3', 'H4',
   'I', 'IMG', 'LI', 'OL', 'P', 'SPAN', 'STRONG', 'U', 'UL',
@@ -40,6 +45,33 @@ function escapeHtml(s: string): string {
   const d = document.createElement('div');
   d.textContent = s;
   return d.innerHTML;
+}
+
+function fingerprintNotice(source: 'local' | 'server', content: string, faq: FaqItem[] = []): string {
+  const value = `${source}\n${content}\n${JSON.stringify(faq)}`;
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < value.length; i++) {
+    hash ^= value.charCodeAt(i);
+    hash = Math.imul(hash, 0x01000193);
+  }
+  return `${source}:${(hash >>> 0).toString(16).padStart(8, '0')}`;
+}
+
+function isDismissedToday(fingerprint: string, acceptLegacyDate: boolean): boolean {
+  if (closedNoticeFingerprints.has(fingerprint)) return true;
+  try {
+    const raw = localStorage.getItem(DISMISS_KEY) || '';
+    if (acceptLegacyDate && raw === todayStr()) return true;
+    if (!raw.startsWith('{')) return false;
+    const saved = JSON.parse(raw) as { date?: string; fingerprint?: string };
+    return saved.date === todayStr() && saved.fingerprint === fingerprint;
+  } catch {
+    return false;
+  }
+}
+
+function isMaintenanceNotice(content: string): boolean {
+  return ['점검', '서비스 중단', '이용 제한'].some((keyword) => content.includes(keyword));
 }
 
 function isSafeNoticeUrl(value: string, allowImageData = false): boolean {
@@ -166,12 +198,15 @@ function renderFaqDisplay(host: HTMLElement, faq: FaqItem[]): void {
 
 /** 공지가 있고 오늘 안 봤으면 센터에 표시. */
 export function showNoticeIfAny(): void {
+  if (pendingServerNotice) {
+    showServerNotice(pendingServerNotice);
+    return;
+  }
   const notice = getNotice();
   const faq = getFaq();
   if (!notice.trim() && !faq.length) return;
-  let dismissed = '';
-  try { dismissed = localStorage.getItem(DISMISS_KEY) || ''; } catch { /* ignore */ }
-  if (dismissed === todayStr()) return;
+  const fingerprint = fingerprintNotice('local', notice, faq);
+  if (isDismissedToday(fingerprint, true)) return;
 
   const elements = getNoticeDisplayElements();
   if (!elements) return;
@@ -186,21 +221,68 @@ export function showNoticeIfAny(): void {
 
   content.innerHTML = sanitizeNoticeHtml(notice);
   renderFaqDisplay(faqHost, faq);
+  activeNoticeFingerprint = fingerprint;
+  activeNoticeRequiresQuit = false;
   modal.style.display = 'flex';
   modal.setAttribute('aria-hidden', 'false');
+}
+
+export function showServerNotice(noticeContent: string): void {
+  pendingServerNotice = String(noticeContent || '').trim();
+  if (!pendingServerNotice) return;
+
+  const fingerprint = fingerprintNotice('server', pendingServerNotice);
+  if (isDismissedToday(fingerprint, false)) return;
+
+  const elements = getNoticeDisplayElements();
+  if (!elements) return;
+  const { modal, content, faqHost } = elements;
+
+  content.textContent = pendingServerNotice;
+  content.style.whiteSpace = 'pre-wrap';
+  faqHost.innerHTML = '';
+  activeNoticeFingerprint = fingerprint;
+  activeNoticeRequiresQuit = isMaintenanceNotice(pendingServerNotice);
+  modal.style.display = 'flex';
+  modal.setAttribute('aria-hidden', 'false');
+}
+
+async function hydrateActiveServerNotice(): Promise<void> {
+  try {
+    const getActiveNotice = (window as any).api?.getActiveNotice;
+    if (typeof getActiveNotice !== 'function') return;
+    const notice = await getActiveNotice();
+    if (String(notice || '').trim()) showServerNotice(notice);
+  } catch (error) {
+    console.warn('[Notice] active notice recovery failed:', error);
+  }
 }
 
 function closeNotice(): void {
   const modal = getNoticeDisplayElements()?.modal || null;
   const dontShow = document.getElementById('notice-dont-show-today') as HTMLInputElement | null;
+  const shouldForceQuit = activeNoticeRequiresQuit;
+  activeNoticeRequiresQuit = false;
+  if (activeNoticeFingerprint) closedNoticeFingerprints.add(activeNoticeFingerprint);
   if (dontShow?.checked) {
-    try { localStorage.setItem(DISMISS_KEY, todayStr()); } catch { /* ignore */ }
+    try {
+      localStorage.setItem(DISMISS_KEY, JSON.stringify({
+        date: todayStr(),
+        fingerprint: activeNoticeFingerprint,
+      }));
+    } catch { /* ignore */ }
   }
   document.querySelectorAll<HTMLElement>('#notice-modal').forEach((candidate) => {
     candidate.style.display = 'none';
     candidate.setAttribute('aria-hidden', 'true');
   });
   if (modal) { modal.style.display = 'none'; modal.setAttribute('aria-hidden', 'true'); }
+  const forceQuit = (window as any).api?.forceQuit;
+  if (shouldForceQuit && typeof forceQuit === 'function') {
+    void Promise.resolve(forceQuit()).catch((error) => {
+      console.error('[Notice] maintenance shutdown failed:', error);
+    });
+  }
 }
 
 // ── 관리자 편집 ───────────────────────────────────────────────
@@ -347,7 +429,9 @@ export function initNoticeAdmin(): void {
 
   // 앱 로드 시 공지 표시
   (window as any).showNoticeIfAny = showNoticeIfAny;
+  (window as any).showServerNotice = showServerNotice;
   showNoticeIfAny();
+  void hydrateActiveServerNotice();
   setTimeout(showNoticeIfAny, 250);
   setTimeout(showNoticeIfAny, 1000);
 }

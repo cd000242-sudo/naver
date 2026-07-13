@@ -324,6 +324,8 @@ contextBridge.exposeInMainWorld('api', {
       // 시스템
       'app:update-available',
       'app:update-downloaded',
+      'app:show-notice',
+      'app:shutdown-countdown',
       'window:focus',
       // 트레이/알림
       'tray:show-modal',
@@ -427,6 +429,7 @@ contextBridge.exposeInMainWorld('api', {
       return '';
     }
   },
+  getActiveNotice: (): Promise<string> => ipcRenderer.invoke('app:getActiveNotice'),
   isPackaged: async (): Promise<boolean> => {
     try {
       return await ipcRenderer.invoke('app:isPackaged');

@@ -58,4 +58,23 @@ describe('admin security guards', () => {
     expect(noticeAdmin).toContain('setTimeout(showNoticeIfAny, 250)');
     expect(noticeAdmin).toContain('setTimeout(showNoticeIfAny, 1000)');
   });
+
+  it('keeps the server notice channel live and recoverable after renderer startup races', () => {
+    const preload = read('src', 'preload.ts');
+    const main = read('src', 'main.ts');
+    const appEvents = read('src', 'renderer', 'utils', 'appEventsHandler.ts');
+
+    expect(preload).toContain("'app:show-notice'");
+    expect(preload).toContain("ipcRenderer.invoke('app:getActiveNotice')");
+    expect(main).toContain("ipcMain.handle('app:getActiveNotice'");
+    expect(appEvents).toContain('showServerNotice(noticeContent)');
+  });
+
+  it('has exactly one canonical notice modal and no duplicate notice IDs', () => {
+    const html = read('public', 'index.html');
+
+    expect(html.match(/id="notice-modal"/g) || []).toHaveLength(1);
+    expect(html.match(/id="notice-display-content"/g) || []).toHaveLength(1);
+    expect(html.match(/id="notice-content"/g) || []).toHaveLength(0);
+  });
 });

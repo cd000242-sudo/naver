@@ -1,10 +1,29 @@
 import { describe, it, expect } from 'vitest';
 import {
+  extractLabeledPrice,
   parsePrice,
   formatPrice,
   hasValidPrice,
   formatPriceOrEmpty,
 } from '../services/priceNormalizer';
+
+describe('extractLabeledPrice', () => {
+  it('restores the collected price from assembled shopping source text', () => {
+    const sourceText = [
+      '상품명: 차량용 통풍시트',
+      '가격: 45,800원',
+      '수집 시점 표시 가격: 45,800원',
+    ].join('\n');
+
+    expect(extractLabeledPrice(sourceText)).toBe('45,800원');
+  });
+
+  it('ignores unlabeled numbers and invalid labeled prices', () => {
+    expect(extractLabeledPrice('상품번호 2884318642')).toBeNull();
+    expect(extractLabeledPrice('가격: 0원')).toBeNull();
+    expect(extractLabeledPrice('가격 정보 없음')).toBeNull();
+  });
+});
 
 describe('parsePrice — reproduction cases for "0원에 판매중" bug', () => {
   it('returns null for number 0 (품절/단종 상품)', () => {

@@ -9,6 +9,9 @@ export interface ElectronTestProfile {
   cleanup: () => Promise<void>;
 }
 
+const delay = (milliseconds: number) =>
+  new Promise<void>((resolve) => setTimeout(resolve, milliseconds));
+
 export async function createElectronTestProfile(prefix: string): Promise<ElectronTestProfile> {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), prefix));
   const userDataDir = path.join(root, 'userdata');
@@ -27,7 +30,13 @@ export async function createElectronTestProfile(prefix: string): Promise<Electro
       APPDATA: appDataDir,
       LOCALAPPDATA: localAppDataDir,
     },
-    cleanup: () => fs.rm(root, { recursive: true, force: true }),
+    cleanup: () =>
+      fs.rm(root, {
+        recursive: true,
+        force: true,
+        maxRetries: 10,
+        retryDelay: 200,
+      }),
   };
 }
 
@@ -59,10 +68,21 @@ export async function closeElectronApp(app: ElectronApplication | undefined): Pr
   const childProcess = app.process();
   await Promise.race([
     app.close(),
-    new Promise((resolve) => setTimeout(resolve, 5_000)),
+    delay(5_000),
   ]).catch(() => undefined);
 
   if (!childProcess.killed && childProcess.exitCode === null) {
     childProcess.kill();
   }
+
+  if (childProcess.exitCode === null) {
+    await Promise.race([
+      new Promise<void>((resolve) => childProcess.once('exit', () => resolve())),
+      delay(5_000),
+    ]);
+  }
+
+  // Chromium dictionary and cache workers can release their Windows handles
+  // a moment after the parent process exits.
+  await delay(250);
 }

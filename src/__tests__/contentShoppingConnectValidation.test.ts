@@ -5,6 +5,20 @@ import {
 } from '../contentShoppingConnectValidation.js';
 
 describe('contentShoppingConnectValidation', () => {
+  it('uses the active generation threshold and visible body text for length scoring', () => {
+    const result = validateShoppingConnectContent({
+      bodyPlain: '가 '.repeat(800).trim(),
+      headings: [
+        { title: '구성 확인', content: '구성 설명' },
+        { title: '사용 조건', content: '조건 설명' },
+        { title: '구매 전 체크', content: '확인 설명' },
+      ],
+      conclusion: '쇼핑커넥트 활동으로 수수료가 발생할 수 있습니다.',
+    }, { minimumBodyChars: 1500 });
+
+    expect(result.score).toBe(100);
+  });
+
   it('detects banned shopping-connect heading templates', () => {
     const detected = detectBannedHeadingPatterns([
       { title: '이것 하나로 끝나는 주방 관리' },

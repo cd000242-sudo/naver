@@ -390,6 +390,7 @@ interface AutomationAPI {
   checkPatchFile: () => Promise<boolean>;
   getDeviceId: () => Promise<string>;
   getAppVersion: () => Promise<string>; // ✅ [2026-02-05] 앱 버전 반환
+  getActiveNotice?: () => Promise<string>;
   isPackaged: () => Promise<boolean>;
   testLicenseServer: (serverUrl?: string) => Promise<{ success: boolean; message: string; response?: any }>;
   networkOptimize: () => Promise<{ success: boolean; message: string; results: string[] }>; // ✅ 원클릭 네트워크 최적화

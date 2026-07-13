@@ -1,6 +1,8 @@
 import type { EvaluationResult, Mode } from './qualityEvaluator';
 
 export const QUALITY90_TARGET_SCORE = 90;
+export const QUALITY90_FALLBACK_MIN_SCORE = 80;
+export const QUALITY90_FALLBACK_MIN_SAFETY_SCORE = 70;
 
 const QUALITY90_MODES = new Set<Mode>(['seo', 'homefeed', 'mate', 'affiliate']);
 const HUMANLIKE_90_MODES = new Set<Mode>(['homefeed', 'affiliate']);
@@ -15,6 +17,21 @@ export interface Quality90GateAssessment {
 
 export function isQuality90Mode(mode: string): mode is Extract<Mode, 'seo' | 'homefeed' | 'mate' | 'affiliate'> {
   return QUALITY90_MODES.has(mode as Mode);
+}
+
+export function canAcceptQuality90Fallback(
+  result: Pick<EvaluationResult, 'modeScore' | 'humanlikeScore' | 'safetyScore' | 'finalScore' | 'decision'>,
+  mode: string,
+): boolean {
+  if (!isQuality90Mode(mode) || result.decision !== 'pass') return false;
+
+  const meetsCoreFloor = result.modeScore.score >= QUALITY90_FALLBACK_MIN_SCORE
+    && result.finalScore >= QUALITY90_FALLBACK_MIN_SCORE
+    && result.safetyScore.score >= QUALITY90_FALLBACK_MIN_SAFETY_SCORE;
+  if (!meetsCoreFloor) return false;
+
+  return !HUMANLIKE_90_MODES.has(mode as Mode)
+    || result.humanlikeScore.score >= QUALITY90_FALLBACK_MIN_SCORE;
 }
 
 function buildScoreReason(label: string, score: number): string | null {

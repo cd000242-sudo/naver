@@ -6,8 +6,17 @@ const contentGeneratorPath = path.join(process.cwd(), 'src', 'contentGenerator.t
 const source = fs.readFileSync(contentGeneratorPath, 'utf8');
 
 describe('contentGenerator QualityGate90 wiring', () => {
+  it('sends a near-threshold final body through the real quality gate before deciding', () => {
+    expect(source).toContain('isQuality90Mode(generationQualityMode)');
+    expect(source).toContain('&& shouldRunFinalQualityEvaluation({');
+    expect(source).toContain('plainLength >= validationMinChars || finalNearThresholdQualityEvaluation');
+    expect(source).toContain('validateShoppingConnectContent(optimized, validationMinChars)');
+  });
+
   it('assesses the actual optimized body before returning generated content', () => {
-    expect(source).toContain("import { assessQuality90Gate, isQuality90Mode } from './content/quality90Gate.js';");
+    expect(source).toContain("from './content/quality90Gate.js';");
+    expect(source).toContain('assessQuality90Gate,');
+    expect(source).toContain('isQuality90Mode,');
     expect(source).toContain('_quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);');
     expect(source).toContain('quality90Miss: _quality90Assessment.miss');
   });
@@ -33,9 +42,11 @@ describe('contentGenerator QualityGate90 wiring', () => {
     expect(source).toContain('QualityGate90 target still missed after bounded retries');
   });
 
-  it('blocks the result after bounded repair instead of publishing a sub-90 target-mode article', () => {
+  it('accepts only a safe pass-level fallback and still blocks lower-quality results after bounded repair', () => {
     expect(source).toContain('QUALITY_TARGET_NOT_MET');
     expect(source).toContain('_quality90Assessment?.miss && attempt === MAX_ATTEMPTS');
+    expect(source).toContain('canAcceptQuality90Fallback(_gateResult, _modeForGate)');
+    expect(source).toContain('if (quality90FallbackAccepted)');
     expect(source).toContain('90점 품질 기준을 충족하지 못해 자동 발행을 중단했습니다');
   });
 });
