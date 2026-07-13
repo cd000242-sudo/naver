@@ -218,6 +218,9 @@ type RendererAutomationPayload = {
   affiliateLink?: string; // ✅ 제휴마케팅 링크 추가
   useAffiliateVideo?: boolean; // ✅ 쇼핑 비디오 변환 옵션 추가
   contentMode?: string; // ✅ 콘텐츠 모드 추가
+  contentPolicyContext?: any;
+  _publishFlow?: 'direct' | 'legacy_form' | 'semi_auto' | 'full_auto' | 'continuous' | 'multi_account' | 'app_scheduler' | 'smart_scheduler';
+  _semiAutoMode?: boolean;
 };
 
 type RendererStatus =

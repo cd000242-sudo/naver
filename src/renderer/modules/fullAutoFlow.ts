@@ -3,6 +3,11 @@
 "use strict";
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
+import {
+    deduplicateReferenceImages,
+    extractReferenceImageUrl,
+    selectRepresentativeReferenceImage,
+} from '../../image/referenceImagePolicy.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
 exports.resolveImageManagerKeys = resolveImageManagerKeys;
@@ -511,6 +516,23 @@ function isRetryableImageError(error) {
 function friendlyErrorMessage(error) {
     const rawMessage = String(error?.message || error || '');
     const msg = rawMessage.toLowerCase();
+    if (/BLOCK_KEYWORD_BODY_MISMATCH/i.test(rawMessage)) {
+        return '⛔ 제목과 본문 주제가 서로 달라 안전 검사에서 발행을 중단했습니다.\n반자동 편집에서 최종 제목과 본문이 같은 주제인지 확인한 뒤 다시 발행해 주세요.';
+    }
+    if (/BLOCK_RECENT_POSTS_UNAVAILABLE|BLOCK_INSUFFICIENT_RECENT_POSTS/i.test(rawMessage)) {
+        return '⛔ 최근 발행글 비교 자료를 확인할 수 없어 중복 발행을 막았습니다.\n글과 이미지는 유지됩니다. 진단 리포트를 저장한 뒤 다시 시도해 주세요.';
+    }
+    if (/BLOCK_COPIED_SOURCE|BLOCK_EXCESSIVE_SIMILARITY/i.test(rawMessage)) {
+        return '⛔ 기존 글 또는 참고 자료와 유사한 문장이 많아 발행을 중단했습니다.\n표현과 구성을 충분히 다르게 편집한 뒤 다시 발행해 주세요.';
+    }
+    if (/BLOCK_FABRICATED_FACT|BLOCK_UNSUPPORTED_CLAIM|BLOCK_FORBIDDEN_CLAIM/i.test(rawMessage)) {
+        const claimText = rawMessage.match(/문제 문장:\s*(.+)/i)?.[1]?.trim();
+        const detail = claimText ? `\n확인되지 않은 문장: ${claimText}` : '';
+        return `⛔ 자료에서 확인되지 않은 가격·효과·수치 표현이 남아 있어 안전하게 발행을 중단했습니다.${detail}\n글과 이미지는 유지되므로 해당 문장을 확인한 뒤 다시 발행해 주세요.`;
+    }
+    if (/CONTENT_POLICY_BLOCKED/i.test(rawMessage)) {
+        return '⛔ 콘텐츠 안전·품질 검사에서 발행을 중단했습니다.\n글과 이미지는 유지되므로 진단 리포트의 차단 사유를 확인한 뒤 다시 발행해 주세요.';
+    }
     if (/IMAGEFX_BOT_DETECTED|FLOW_BOT_DETECTED|봇감지 의심/i.test(rawMessage)) {
         const body = rawMessage.replace(/^(IMAGEFX_BOT_DETECTED|FLOW_BOT_DETECTED):/, '').trim();
         return body || '⚠️ Google 봇감지 의심입니다. 한도가 아닐 가능성이 큽니다. 다른 이미지 엔진(나노바나나/DeepInfra)으로 전환하거나 Google 계정을 변경해주세요.';
@@ -2251,6 +2273,15 @@ async function generateFullAutoContent(formData) {
             catch { }
             throw new Error(userMsg);
         }
+        if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errMsg)) {
+            const userMsg = friendlyErrorMessage({ message: errMsg });
+            appendLog(userMsg);
+            try {
+                alert(`🛡️ 발행 안전검사에서 중단됨\n\n${userMsg}`);
+            }
+            catch { }
+            throw new Error(userMsg);
+        }
         appendLog('❌ 콘텐츠 생성에 실패했습니다.');
         throw new Error(errMsg);
     }
@@ -2484,7 +2515,11 @@ async function generateAIImagesForHeadings(headings, formData) {
         appendLog(`📷 썸네일만 생성 모드: 소제목 이미지 ${headings.length}개 생성을 건너뜁니다.`);
         headings = [];
     }
-    const imageSource = formData.imageSource;
+    const isShoppingConnect = formData.isShoppingConnect === true || formData.contentMode === 'affiliate';
+    const useCollectedImagesDirectly = isShoppingConnect && formData.scSubImageMode === 'collected';
+    const imageSource = isShoppingConnect && formData.scSubImageMode === 'ai'
+        ? (formData.scAIImageEngine || formData.imageSource)
+        : formData.imageSource;
     const imageStyle = formData.imageStyle;
     const imageRatio = formData.imageRatio;
     const imageFallbackPolicy = formData.imageFallbackPolicy;
@@ -2502,6 +2537,9 @@ async function generateAIImagesForHeadings(headings, formData) {
         'naver': '네이버 이미지 검색',
         'imagefx': 'ImageFX (Google Labs, 제한 가능)',
         'flow': 'Flow (Nano Banana Pro, AI Pro 무료)',
+        'dropshot': '리더스 나노바나나 무제한',
+        'nano-banana': '나노바나나',
+        'nano-banana-2': '나노바나나2',
         'openai-image': 'OpenAI DALL-E',
         'leonardoai': 'Leonardo AI',
     };
@@ -2520,7 +2558,6 @@ async function generateAIImagesForHeadings(headings, formData) {
     }
     const thumbnailTextCheckbox = document.getElementById('thumbnail-text-option');
     const thumbnailFromStorage = _rawPipeline.thumbnailTextInclude === 'true';
-    const isShoppingConnect = formData.isShoppingConnect === true || formData.contentMode === 'affiliate';
     const SC_FAKE_AI_ENGINES = [
         'imagefx', 'dall-e-3', 'leonardoai', 'deepinfra', 'deepinfra-flux',
         'stability', 'falai', 'prodia', 'pollinations', 'flow',
@@ -2538,6 +2575,7 @@ async function generateAIImagesForHeadings(headings, formData) {
     let collectedImages = isShoppingConnect
         ? (formData.collectedImages || currentStructuredContent?.collectedImages || currentStructuredContent?.images || [])
         : [];
+    collectedImages = deduplicateReferenceImages(collectedImages);
     if (isShoppingConnect && collectedImages.length === 0) {
         console.log(`[AI Images] ⚠️ 수집된 이미지 없음 - AI 생성으로 진행`);
         appendLog(`⚠️ 수집된 이미지가 없습니다. AI 이미지 생성으로 진행합니다.`);
@@ -2586,24 +2624,30 @@ async function generateAIImagesForHeadings(headings, formData) {
             }
         }
     }
-    let dedicatedShopThumbnail = null;
+    collectedImages = deduplicateReferenceImages(collectedImages);
+    const representativeImage = selectRepresentativeReferenceImage(collectedImages);
+    const representativeImageUrl = extractReferenceImageUrl(representativeImage);
     if (isShoppingConnect && collectedImages.length > 0) {
-        const firstCollected = collectedImages[0];
-        const thumbUrl = typeof firstCollected === 'string' ? firstCollected : (firstCollected?.url || firstCollected?.filePath || firstCollected?.thumbnailUrl || '');
-        if (thumbUrl) {
-            dedicatedShopThumbnail = {
-                url: thumbUrl,
-                filePath: thumbUrl,
-                heading: (currentStructuredContent?.selectedTitle || formData.postTitle || formData.title || '🖼️ 썸네일'),
-                isThumbnail: true,
-                isCollectedImage: true,
-                source: 'collected',
-                provider: 'collected',
-            };
-            appendLog(`🛒 쇼핑커넥트: 수집 이미지를 썸네일로 사용 (텍스트 오버레이는 발행 시 적용)`);
-        }
+        appendLog(`🧹 수집 이미지 중복 제거 완료: 고유 이미지 ${collectedImages.length}개`);
     }
-    else if (!isShoppingConnect) {
+    if (isShoppingConnect && !representativeImageUrl) {
+        const modeLabel = useCollectedImagesDirectly ? '수집 이미지 직접 사용' : '대표 이미지 기반 AI 생성';
+        throw new Error(`쇼핑커넥트 ${modeLabel}에 필요한 대표 상품 이미지가 없습니다. 상품 이미지 수집 결과를 확인해주세요.`);
+    }
+    let dedicatedShopThumbnail = null;
+    if (useCollectedImagesDirectly && representativeImageUrl) {
+        dedicatedShopThumbnail = {
+            url: representativeImageUrl,
+            filePath: representativeImageUrl,
+            heading: (currentStructuredContent?.selectedTitle || formData.postTitle || formData.title || '🖼️ 썸네일'),
+            isThumbnail: true,
+            isCollectedImage: true,
+            source: 'collected',
+            provider: 'collected',
+        };
+        appendLog(`🛒 쇼핑커넥트: 수집 이미지를 썸네일로 사용 (텍스트 오버레이는 발행 시 적용)`);
+    }
+    else if (!isShoppingConnect || !useCollectedImagesDirectly) {
         try {
             let shopTitle = currentStructuredContent?.selectedTitle || formData.postTitle || formData.title || '';
             if (/^https?:\/\//i.test(shopTitle.trim())) {
@@ -2631,6 +2675,11 @@ async function generateAIImagesForHeadings(headings, formData) {
                         englishPrompt: thumbnailPrompt,
                         isThumbnail: true,
                         allowText: thumbnailAllowText,
+                        ...(representativeImageUrl ? {
+                            referenceImagePath: representativeImageUrl,
+                            referenceImageUrl: representativeImageUrl,
+                            referenceImageList: [representativeImageUrl],
+                        } : {}),
                     }],
                 postTitle: shopTitle,
                 isFullAuto: formData.mode === 'full-auto',
@@ -2638,6 +2687,8 @@ async function generateAIImagesForHeadings(headings, formData) {
                 isContinuousMode: !!isContinuousMode,
                 imageRatio: globalSettings.thumbnailRatio || globalSettings.imageRatio || '1:1',
                 thumbnailTextInclude: includeThumbnailText,
+                isShoppingConnect: isShoppingConnect,
+                collectedImages: collectedImages,
                 imageFallbackPolicy,
                 imageGenerationTimeoutMs: getFullAutoThumbnailImageTimeoutMs(imageSource),
             });
@@ -2667,18 +2718,20 @@ async function generateAIImagesForHeadings(headings, formData) {
             appendLog(`🎨 [${i + 1}/${headings.length}] "${String(headingTitle).substring(0, 20)}" 이미지 생성 시작...`);
             const isThumbnail = false;
             const shouldIncludeText = false;
-            const useAiImageChecked = document.getElementById('unified-use-ai-image')?.checked ?? true;
+            const useAiImageChecked = isShoppingConnect
+                ? formData.scSubImageMode === 'ai'
+                : (formData.useAiImage ?? true);
             const englishPrompt = await generateEnglishPromptForHeading(heading, formData.keywords, imageStyle);
             console.log(`[AI Images] ${i + 1}/${headings.length} - 스타일: ${imageStyle}, 프롬프트: ${englishPrompt}`);
             console.log(`[AI Images] ${i + 1}번 소제목 - heading: "${heading.title}", isThumbnail: ${isThumbnail}, allowText: ${shouldIncludeText}, useAiImage: ${useAiImageChecked} (쇼핑커넥트: ${isShoppingConnect})`);
             let ref = {};
-            if (isShoppingConnect && collectedImages.length > 0) {
-                const refImg = collectedImages[i % collectedImages.length];
-                const refUrl = typeof refImg === 'string' ? refImg : (refImg?.url || refImg?.filePath || refImg?.thumbnailUrl);
-                if (refUrl) {
-                    ref = { referenceImagePath: refUrl };
-                    console.log(`[AI Images] 🛒 쇼핑 커넥트 참조 이미지 적용: ${refUrl}`);
-                }
+            if (isShoppingConnect && representativeImageUrl) {
+                ref = {
+                    referenceImagePath: representativeImageUrl,
+                    referenceImageUrl: representativeImageUrl,
+                    referenceImageList: [representativeImageUrl],
+                };
+                console.log(`[AI Images] 🛒 쇼핑 커넥트 공통 대표 이미지 참조 적용: ${representativeImageUrl}`);
             }
             else {
                 ref = await resolveReferenceImageForHeadingAsync(String(heading.title || heading || '').trim());
@@ -3299,6 +3352,10 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         customBannerPath: formData.customBannerPath || window.customBannerPath || undefined,
         autoBannerGenerate: formData.autoBannerGenerate || false,
         includeThumbnailText: formData.includeThumbnailText ?? false,
+        _publishFlow: formData._semiAutoMode === true
+            ? 'semi_auto'
+            : (window.isContinuousMode === true ? 'continuous' : 'full_auto'),
+        _semiAutoMode: formData._semiAutoMode === true,
         skipBotBackoff: formData._semiAutoMode === true,
     };
     emitRendererPublishTailDebug('renderer-payload-before-runAutomation', payload, {
@@ -3371,6 +3428,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         if (blockPostContentAppliedPublishRetry(errorMsg)) {
             throw new Error(errorMsg);
         }
+        if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errorMsg)) {
+            throw new Error(friendlyErrorMessage({ message: errorMsg }));
+        }
         const detachedFrameRetryResult = await retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg);
         if (detachedFrameRetryResult) {
             return detachedFrameRetryResult;
@@ -3421,6 +3481,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
             appendLog('⚠️ 이전 자동화가 아직 실행 중입니다. 발행이 실행되지 않았습니다.');
             appendLog('💡 잠시 후 다시 시도하거나, 브라우저 닫기 후 재시도해주세요.');
             throw new Error('이전 자동화가 아직 실행 중입니다. 완료 후 다시 시도해주세요.');
+        }
+        if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errorMsg)) {
+            throw new Error(friendlyErrorMessage({ message: errorMsg }));
         }
         if (blockPostContentAppliedPublishRetry(errorMsg)) {
             throw new Error(errorMsg);

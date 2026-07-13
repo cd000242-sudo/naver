@@ -112,6 +112,26 @@ describe('friendlyErrorMessage', () => {
     const msg = friendlyErrorMessage('timeout occurred');
     expect(msg).toContain('시간이 초과');
   });
+
+  it('explains a fabricated-fact policy block without presenting it as an image failure', () => {
+    const msg = friendlyErrorMessage({
+      message: 'CONTENT_POLICY_BLOCKED:BLOCK_FABRICATED_FACT\n문제 문장: 45,800원에 판매되고 있습니다',
+    });
+
+    expect(msg).toContain('자료에서 확인되지 않은');
+    expect(msg).toContain('45,800원');
+    expect(msg).not.toContain('이미지 생성');
+  });
+
+  it('explains a genuine title-body mismatch without calling it a fabricated fact', () => {
+    const msg = friendlyErrorMessage({
+      message: 'CONTENT_POLICY_BLOCKED:BLOCK_KEYWORD_BODY_MISMATCH',
+    });
+
+    expect(msg).toContain('제목과 본문 주제');
+    expect(msg).toContain('반자동 편집');
+    expect(msg).not.toContain('가격·효과·수치');
+  });
 });
 
 describe('detached Naver login frame publish retry guard', () => {

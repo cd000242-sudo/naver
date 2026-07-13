@@ -169,7 +169,8 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
       expect(content).toMatch(/const\s+baseMaxAttempts\s*=\s*provider\s*===\s*'openai'\s*\?\s*openAiContentMaxAttempts\s*:\s*costPolicy\.maxAttempts/);
       expect(content).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
       expect(content).toMatch(/const\s+promptRepairMinAttempts\s*=\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
-      expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*Math\.max\(baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts\)/);
+      expect(content).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*isQuality90Mode\(generationQualityMode\)\s*\?\s*2\s*:\s*0/);
+      expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*Math\.max\(baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts\)/);
       expect(failurePolicy).toMatch(/SAME_ENGINE_RECOVERY/);
     });
 

@@ -1,5 +1,6 @@
 import { createHash } from 'crypto';
 import { generateDraft } from './draftGenerator.js';
+import { repairUnsupportedClaims } from './claimRepair.js';
 import { validatePolicyInput } from './inputValidator.js';
 import { generateOutline } from './outlineGenerator.js';
 import { evaluateQuality, passesQualityGate } from './qualityGate.js';
@@ -106,8 +107,16 @@ function internalRewrite(
   plan: UniquenessPlan,
   reasons: readonly string[],
   attempt: number,
+  quality: QualityReport,
 ): ArticleDraft {
-  const original = cloneDraft(draft);
+  const original = repairUnsupportedClaims(draft, input, quality.unsupported_claims);
+  const hasNonClaimReason = reasons.some((reason) => (
+    reason !== 'FABRICATED_FACT'
+    && !reason.startsWith('UNSUPPORTED_CLAIM:')
+  ));
+  if (quality.unsupported_claims.length > 0 && !hasNonClaimReason) {
+    return original;
+  }
   const directFact = input.business_facts[attempt % Math.max(1, input.business_facts.length)] || '';
   const directIntro = directFact
     ? `${input.primary_keyword}에서 먼저 확인할 핵심은 ${directFact}`
@@ -158,6 +167,8 @@ function buildBlockedResult(input: {
     article: {
       title: input.draft.title,
       summary: input.draft.summary,
+      introduction: input.draft.introduction,
+      headings: input.draft.headings.map((heading) => ({ ...heading })),
       body_markdown: input.draft.body_markdown,
       faq: input.draft.faq.map((item) => ({ ...item })),
       cta: input.draft.cta,
@@ -182,6 +193,8 @@ function buildBlockedResult(input: {
 function rewriteReasons(similarity: SimilarityReport, quality: QualityReport, config: ContentPolicyConfig): string[] {
   const reasons = [...similarity.matched_patterns];
   if (quality.total_score < config.quality_gate.pass_score) reasons.push('QUALITY_SCORE_BELOW_THRESHOLD');
+  if (quality.fatal_errors.includes('fabricated_fact')) reasons.push('FABRICATED_FACT');
+  reasons.push(...quality.unsupported_claims.map((claim) => `UNSUPPORTED_CLAIM:${claim}`));
   return [...new Set(reasons)];
 }
 
@@ -312,7 +325,7 @@ export async function runContentPolicyPipeline(
         reasons,
         attempt: rewriteCount,
       })
-      : internalRewrite(workingDraft, input, plan, reasons, rewriteCount);
+      : internalRewrite(workingDraft, input, plan, reasons, rewriteCount, quality);
     currentIntent = analyzeSearchIntent(input, workingDraft);
     similarity = await analyzeSimilarity(input, workingDraft, options.config);
     quality = evaluateQuality(input, workingDraft, currentIntent, similarity, options.config);
@@ -363,6 +376,8 @@ export async function runContentPolicyPipeline(
     article: {
       title: workingDraft.title,
       summary: workingDraft.summary,
+      introduction: workingDraft.introduction,
+      headings: workingDraft.headings.map((heading) => ({ ...heading })),
       body_markdown: workingDraft.body_markdown,
       faq: workingDraft.faq.map((item) => ({ ...item })),
       cta: workingDraft.cta,

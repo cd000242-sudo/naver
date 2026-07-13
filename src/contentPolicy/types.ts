@@ -54,6 +54,8 @@ export interface RecentPostRecord {
 }
 
 export interface ContentPolicyInput {
+  input_origin?: 'generated' | 'semi_auto_manual' | 'final_draft_payload';
+  business_facts_applicable?: boolean;
   primary_keyword: string;
   secondary_keywords?: string[];
   region?: string;
@@ -164,6 +166,8 @@ export interface ContentPolicyResult {
   article: {
     title: string;
     summary: string;
+    introduction?: string;
+    headings?: ArticleHeading[];
     body_markdown: string;
     faq: ArticleFaq[];
     cta: string;

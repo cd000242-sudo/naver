@@ -22,11 +22,11 @@ const evaluation = (overrides: Partial<EvaluationResult>): EvaluationResult => (
 });
 
 describe('quality90Gate', () => {
-  it('enables the hard target only for SEO, homefeed, and mate modes', () => {
+  it('enables the hard target for SEO, homefeed, mate, and affiliate modes', () => {
     expect(isQuality90Mode('seo')).toBe(true);
     expect(isQuality90Mode('homefeed')).toBe(true);
     expect(isQuality90Mode('mate')).toBe(true);
-    expect(isQuality90Mode('affiliate')).toBe(false);
+    expect(isQuality90Mode('affiliate')).toBe(true);
     expect(isQuality90Mode('business')).toBe(false);
   });
 
@@ -69,14 +69,27 @@ describe('quality90Gate', () => {
 
     expect(result.miss).toBe(true);
     expect(result.reasons).toContain('humanlikeScore 72<90');
-    expect(result.directive).toContain('홈판 사람다움 점수 90점 이상');
+    expect(result.directive).toContain('사람다움 점수 90점 이상');
   });
 
-  it('does not gate non-target modes', () => {
+  it('requires affiliate content to reach 90 for mode, final, and humanlike scores', () => {
+    const result = assessQuality90Gate(evaluation({
+      mode: 'affiliate',
+      modeScore: subScore(94),
+      finalScore: 92,
+      humanlikeScore: subScore(84, ['too promotional'], ['replace ad copy with grounded observations']),
+    }), 'affiliate');
+
+    expect(result.miss).toBe(true);
+    expect(result.reasons).toContain('humanlikeScore 84<90');
+    expect(result.directive).toContain('친한 사람에게 설명하듯');
+  });
+
+  it('does not gate business mode', () => {
     const result = assessQuality90Gate(evaluation({
       modeScore: subScore(40),
       finalScore: 45,
-    }), 'affiliate');
+    }), 'business');
 
     expect(result).toMatchObject({
       enabled: false,

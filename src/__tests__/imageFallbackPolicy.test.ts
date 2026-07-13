@@ -18,14 +18,15 @@ describe('image fallback policy contract', () => {
     expect(src).toMatch(/fallbackUsed\?:\s*boolean/);
   });
 
-  it('imageGenerator blocks implicit fallbacks unless guarantee mode is selected', () => {
+  it('imageGenerator blocks implicit fallbacks and never substitutes collected originals for shopping AI', () => {
     const src = read('imageGenerator.ts');
     expect(src).toMatch(/normalizeImageFallbackPolicy\(options\.imageFallbackPolicy\)/);
     expect(src).toMatch(/FALLBACK_REQUIRES_CONFIRMATION/);
     expect(src).toMatch(/createFallbackPolicyError/);
-    expect(src).toMatch(/if \(!shouldUseAutomaticFallback\(fallbackPolicy\)\)\s*\{\s*throw createFallbackPolicyError\(requestedProvider,\s*'collected-image'/);
+    expect(src).not.toMatch(/createFallbackPolicyError\(requestedProvider,\s*'collected-image'/);
     expect(src).toMatch(/if \(!shouldUseAutomaticFallback\(fallbackPolicy\)\)\s*\{\s*throw createFallbackPolicyError\(requestedProvider,\s*'openai-image'/);
-    expect(src).toMatch(/actualProvider:\s*'collected-image'/);
+    expect(src).not.toMatch(/actualProvider:\s*'collected-image'/);
+    expect(src).not.toContain('convertCollectedImagesToResults');
     expect(src).toMatch(/requestedProvider/);
     expect(src).toMatch(/fallbackReason/);
   });

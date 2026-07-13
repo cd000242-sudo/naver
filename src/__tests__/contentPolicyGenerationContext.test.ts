@@ -73,6 +73,48 @@ describe('generation policy context', () => {
     expect(result.manualReviewRequired).toBe(true);
   });
 
+  it('does not require business facts for a generic informational article', async () => {
+    const userDataPath = await tempDir();
+    const recentPosts = makeRecentPosts(20);
+    const result = await prepareGenerationPolicyContext({
+      userDataPath,
+      config: await loadContentPolicy(),
+      context: {
+        input: makePolicyInput({
+          input_origin: 'generated',
+          business_facts_applicable: false,
+          business_facts: [],
+          recent_posts: recentPosts,
+        }),
+        recentPostsSnapshot: recentPosts,
+      },
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.reasons).not.toContain('BLOCK_MISSING_FACTS');
+  });
+
+  it('still requires verified facts for business and affiliate content', async () => {
+    const userDataPath = await tempDir();
+    const recentPosts = makeRecentPosts(20);
+    const result = await prepareGenerationPolicyContext({
+      userDataPath,
+      config: await loadContentPolicy(),
+      context: {
+        input: makePolicyInput({
+          input_origin: 'generated',
+          business_facts_applicable: true,
+          business_facts: [],
+          recent_posts: recentPosts,
+        }),
+        recentPostsSnapshot: recentPosts,
+      },
+    });
+
+    expect(result.allowed).toBe(false);
+    expect(result.reasons).toContain('BLOCK_MISSING_FACTS');
+  });
+
   it('fails closed when both renderer and main-process history are unavailable', async () => {
     const userDataPath = await tempDir();
     const config = await loadContentPolicy();

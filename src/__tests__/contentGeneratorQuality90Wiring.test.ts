@@ -7,7 +7,7 @@ const source = fs.readFileSync(contentGeneratorPath, 'utf8');
 
 describe('contentGenerator QualityGate90 wiring', () => {
   it('assesses the actual optimized body before returning generated content', () => {
-    expect(source).toContain("import { assessQuality90Gate } from './content/quality90Gate.js';");
+    expect(source).toContain("import { assessQuality90Gate, isQuality90Mode } from './content/quality90Gate.js';");
     expect(source).toContain('_quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);');
     expect(source).toContain('quality90Miss: _quality90Assessment.miss');
   });
@@ -31,5 +31,11 @@ describe('contentGenerator QualityGate90 wiring', () => {
     expect(source).toContain('!_quality90FollowupRetryUsed');
     expect(source).toContain('patch 후에도 90점 미달');
     expect(source).toContain('QualityGate90 target still missed after bounded retries');
+  });
+
+  it('blocks the result after bounded repair instead of publishing a sub-90 target-mode article', () => {
+    expect(source).toContain('QUALITY_TARGET_NOT_MET');
+    expect(source).toContain('_quality90Assessment?.miss && attempt === MAX_ATTEMPTS');
+    expect(source).toContain('90점 품질 기준을 충족하지 못해 자동 발행을 중단했습니다');
   });
 });

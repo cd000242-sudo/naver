@@ -43,7 +43,7 @@ import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoO
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
-import { assessQuality90Gate } from './content/quality90Gate.js';
+import { assessQuality90Gate, isQuality90Mode } from './content/quality90Gate.js';
 import {
   auditAffiliateAuthenticity,
   buildAffiliateAuthenticityContract,
@@ -1027,8 +1027,16 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
       content: _resultBodyForGates || (finalContent as any).bodyPlain || '',
       category: inferredCategory as any,
       strictness: 'moderate',
+      mode: source.contentMode || 'seo',
     });
     finalContent.quality = finalContent.quality ?? ({ warnings: [], score: 0 } as any);
+    (finalContent.quality as any).prePublishGate = {
+      allowed: gateResult.allowed,
+      score: gateResult.score,
+      blockers: gateResult.blockers,
+      warnings: gateResult.warnings,
+      estimatedRiskImpact: gateResult.estimatedRiskImpact,
+    };
     if (!gateResult.allowed) {
       console.warn(`[QualityGate] ⛔ 차단 사유: ${gateResult.blockers.join(' / ')} (점수 ${gateResult.score}, 위험도 ${gateResult.estimatedRiskImpact})`);
       if (Array.isArray((finalContent.quality as any).warnings)) {
@@ -4759,9 +4767,11 @@ export async function generateStructuredContent(
   const baseMaxAttempts = provider === 'openai' ? openAiContentMaxAttempts : costPolicy.maxAttempts;
   const sameEngineReliabilityMinAttempts = readNonNegativeIntegerEnv('CONTENT_SAME_ENGINE_MIN_ATTEMPTS', 1);
   const promptRepairMinAttempts = source.customPrompt?.trim() ? 2 : 0;
-  const MAX_ATTEMPTS = Math.max(baseMaxAttempts, sameEngineReliabilityMinAttempts, promptRepairMinAttempts);
+  const generationQualityMode = String(source.contentMode || 'seo');
+  const qualityTargetMinAttempts = isQuality90Mode(generationQualityMode) ? 2 : 0;
+  const MAX_ATTEMPTS = Math.max(baseMaxAttempts, sameEngineReliabilityMinAttempts, promptRepairMinAttempts, qualityTargetMinAttempts);
   const RETRY_DELAYS = [0, 1200, 2000, 3000, 4500, 6000, 8000];
-  console.log(`[ContentGenerator] 비용 정책: costSaver=${costPolicy.costSaverOn ? 'ON' : 'OFF'}, same-engine retries=${MAX_ATTEMPTS}, reliability=${sameEngineReliabilityMinAttempts}, promptRepair=${promptRepairMinAttempts}`);
+  console.log(`[ContentGenerator] 비용 정책: costSaver=${costPolicy.costSaverOn ? 'ON' : 'OFF'}, same-engine retries=${MAX_ATTEMPTS}, reliability=${sameEngineReliabilityMinAttempts}, promptRepair=${promptRepairMinAttempts}, quality90=${qualityTargetMinAttempts}`);
 
   // ✅ Gemini 전용 강화 재시도 시스템
   // provider 내부 재시도 위에 전체 파이프라인 재실행이 겹치지 않도록 기본 1회만 허용.
@@ -4815,6 +4825,7 @@ export async function generateStructuredContent(
   let _quality90FollowupRetryUsed = false; // 90점 미달 patch 후에도 부족하면 추가 전체 재생성 1회
   let _distinctnessJudgeUsed = false; // ✅ [Gap C 시맨틱] 섹션 변별 LLM 판정 — 생성당 1회만 호출(비용 가드)
   let _affiliateAuthenticityRetryUsed = false;
+  let _shoppingValidationRetryUsed = false;
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
   const signal = options.signal;
 
@@ -6118,11 +6129,23 @@ export async function generateStructuredContent(
           continue;
         }
 
-        if (_quality90Assessment?.miss && optimized.quality) {
-          optimized.quality.warnings = [
-            ...(optimized.quality.warnings || []),
-            `QualityGate90 target still missed after bounded retries: ${_quality90Assessment.reasons.join(', ')}`,
-          ];
+        if (_quality90Assessment?.miss && attempt < MAX_ATTEMPTS) {
+          console.warn(`[QualityGate90] 🔁 90점 미달 결과를 반환하지 않고 남은 동일 엔진 시도를 사용합니다 (${attempt + 1}/${MAX_ATTEMPTS + 1})`);
+          extraInstruction = `${_quality90Assessment.directive}\n${extraInstruction}`;
+          continue;
+        }
+
+        if (_quality90Assessment?.miss && attempt === MAX_ATTEMPTS) {
+          if (optimized.quality) {
+            optimized.quality.warnings = [
+              ...(optimized.quality.warnings || []),
+              `QualityGate90 target still missed after bounded retries: ${_quality90Assessment.reasons.join(', ')}`,
+            ];
+          }
+          throw new Error(
+            `[QUALITY_TARGET_NOT_MET] 90점 품질 기준을 충족하지 못해 자동 발행을 중단했습니다. `
+            + `미달 항목: ${_quality90Assessment.reasons.join(', ')}`,
+          );
         }
 
         // ✅ [v2.10.187 Phase 3.6+] 자동 SERP 벤치마크 — opt-out 방식
@@ -6251,6 +6274,28 @@ export async function generateStructuredContent(
           console.log(`[Shopping Authenticity] 통과: ${authenticity.score}/100 (${evidenceMode})`);
 
           const validation = validateShoppingConnectContent(optimized);
+          if (validation.score < 90 && !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS) {
+            _shoppingValidationRetryUsed = true;
+            const corrections = validation.feedback
+              .filter(message => message.startsWith('❌') || message.startsWith('⚠️'))
+              .join('\n- ');
+            extraInstruction = `[쇼핑커넥트 품질 재작성]\n- ${corrections}\n광고 문구가 아닌 실제 구매 판단 정보로 보완하고 90점 이상이 되도록 다시 작성하세요.\n${extraInstruction}`;
+            console.warn(`[Shopping Connect] 품질 ${validation.score}/100 — 90점 이상을 위해 전체 재작성`);
+            continue;
+          }
+          if (validation.score < 90) {
+            throw new Error(
+              `[QUALITY_TARGET_NOT_MET] 쇼핑커넥트 품질이 ${validation.score}/100으로 90점 기준에 미달해 자동 발행을 중단했습니다. `
+              + validation.feedback.filter(message => message.startsWith('❌') || message.startsWith('⚠️')).join(' / '),
+            );
+          }
+          if (optimized.quality) {
+            (optimized.quality as any).shoppingValidation = {
+              score: validation.score,
+              passed: true,
+              feedback: validation.feedback,
+            };
+          }
           if (validation.score < 100) {
             console.warn(`[Shopping Connect] ⚠️ 품질 점수: ${validation.score}/100`);
             validation.feedback.forEach(f => console.log(`[Shopping Connect] ${f}`));
@@ -6290,6 +6335,24 @@ export async function generateStructuredContent(
       // ✅ [v1.4.14] 50% 이상이면 경고만 하고 통과 (재시도 비용 절감) - 60→50%로 완화
       const minAcceptableChars = Math.round(minChars * 0.50); // 50% 기준
       if (plainLength >= minAcceptableChars) {
+        if (isQuality90Mode(generationQualityMode)) {
+          if (attempt < MAX_ATTEMPTS) {
+            lastFailReason = `90점 품질 모드 본문 길이 미달: ${plainLength}자 / 최소 검증선 ${validationMinChars}자`;
+            extraInstruction = buildContentExpansionRetryInstruction({
+              plainLength,
+              minChars,
+              requestedMinChars,
+              attempt,
+              safeMaxChars: SAFE_MAX_CHARS,
+            });
+            console.warn(`[QualityGate90] ${lastFailReason} — 짧은 결과를 반환하지 않고 재작성`);
+            continue;
+          }
+          throw new Error(
+            `[QUALITY_TARGET_NOT_MET] 90점 품질 검사를 실행할 최소 분량에 미달해 자동 발행을 중단했습니다. `
+            + `현재 ${plainLength}자 / 최소 ${validationMinChars}자`,
+          );
+        }
         console.warn(`[ContentGenerator] 글자수 경고: ${plainLength}자 (목표: ${minChars}자, ${Math.round((plainLength / minChars) * 100)}%)`);
 
         // ✅ 경고 후 통과도 성공으로 카운트
@@ -6332,6 +6395,12 @@ export async function generateStructuredContent(
 
       // 60% 미만일 때만 재시도
       if (attempt === MAX_ATTEMPTS) {
+        if (isQuality90Mode(generationQualityMode)) {
+          throw new Error(
+            `[QUALITY_TARGET_NOT_MET] 본문이 ${plainLength}자로 너무 짧아 90점 품질 기준을 검증할 수 없습니다. `
+            + `최소 ${validationMinChars}자 이상으로 다시 생성해주세요.`,
+          );
+        }
         // ✅ [2026-03-23 FIX] 최종 시도에서는 글자수에 관계없이 항상 경고 후 통과
         // 이전: 50% 미만이면 throw → 발행 전체 실패
         // 수정: 짧은 글이라도 발행하는 것이 에러보다 나음

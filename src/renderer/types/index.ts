@@ -81,6 +81,9 @@ export type RendererAutomationPayload = {
     autoBannerGenerate?: boolean;
     previousPostTitle?: string;
     previousPostUrl?: string;
+    contentPolicyContext?: any;
+    _publishFlow?: 'direct' | 'legacy_form' | 'semi_auto' | 'full_auto' | 'continuous' | 'multi_account' | 'app_scheduler' | 'smart_scheduler';
+    _semiAutoMode?: boolean;
 };
 
 // ── 연속발행 큐 아이템 ──

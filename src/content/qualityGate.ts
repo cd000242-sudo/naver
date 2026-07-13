@@ -68,24 +68,27 @@ export function prePublishGate(params: {
   category: CTRCategory;
   bloggerIdentity?: BloggerIdentity;
   strictness?: 'lenient' | 'moderate' | 'strict';
+  mode?: string;
 }): PrePublishGateResult {
-  const { title, content, category, bloggerIdentity, strictness = 'moderate' } = params;
+  const { title, content, category, bloggerIdentity, strictness = 'moderate', mode = 'homefeed' } = params;
   const blockers: string[] = [];
   const warnings: string[] = [];
   const recommendations: string[] = [];
   let score = 100;
 
   // 1. 제목 CTR 점수
-  const titleScore = scoreTitleForHomefeed(title, category);
-  if (titleScore.score < 40) {
-    blockers.push(`제목 CTR 점수 ${titleScore.score}점 (권장 70+)`);
-    score -= 30;
-  } else if (titleScore.score < 60) {
-    warnings.push(`제목 CTR 점수 ${titleScore.score}점 (개선 권장)`);
-    score -= 10;
-  }
-  if (titleScore.suggestions.some(s => s.includes('AI 뻔한 표현'))) {
-    blockers.push('제목에 AI 클리셰 감지');
+  if (mode === 'homefeed') {
+    const titleScore = scoreTitleForHomefeed(title, category);
+    if (titleScore.score < 40) {
+      blockers.push(`제목 CTR 점수 ${titleScore.score}점 (권장 70+)`);
+      score -= 30;
+    } else if (titleScore.score < 60) {
+      warnings.push(`제목 CTR 점수 ${titleScore.score}점 (개선 권장)`);
+      score -= 10;
+    }
+    if (titleScore.suggestions.some(s => s.includes('AI 뻔한 표현'))) {
+      blockers.push('제목에 AI 클리셰 감지');
+    }
   }
 
   // 2. Blogger Identity 검증
@@ -104,7 +107,12 @@ export function prePublishGate(params: {
   // 3. 저품질 신호 스캔
   const detectedSignals: LowQualitySignal[] = [];
   for (const signal of LOW_QUALITY_SIGNALS) {
-    if (signal.pattern.test(content) || signal.pattern.test(title)) {
+    signal.pattern.lastIndex = 0;
+    const contentMatched = signal.pattern.test(content);
+    signal.pattern.lastIndex = 0;
+    const titleMatched = signal.pattern.test(title);
+    signal.pattern.lastIndex = 0;
+    if (contentMatched || titleMatched) {
       detectedSignals.push(signal);
       if (signal.severity === 'critical') {
         blockers.push(`${signal.name}: ${signal.impact}`);

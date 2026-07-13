@@ -159,18 +159,22 @@ export async function generateWithDropshot(
       const ext = match[1] === 'jpeg' ? 'jpg' : match[1];
       const buffer = Buffer.from(match[2], 'base64');
 
-      // Duplicate check via probeDuplicate (buffer-based, flowGenerator pattern)
-      if (dedupAttempt < MAX_DEDUP_ATTEMPTS - 1) {
-        const probe = await probeDuplicate(buffer, usedSha256, usedAHashes);
-        if (probe.isDuplicate || probe.isSimilar) {
+      // 마지막 시도까지 반드시 검사한다. 최종 중복을 성공으로 저장하면 이후
+      // 발행 단계에서는 복구할 방법이 없으므로 부분 결과로 처리해 상위에서 중단한다.
+      const probe = await probeDuplicate(buffer, usedSha256, usedAHashes);
+      if (probe.isDuplicate || probe.isSimilar) {
+        if (dedupAttempt < MAX_DEDUP_ATTEMPTS - 1) {
           console.log(
             `[리더스 나노바나나] [${idx + 1}] 중복 감지 → 재생성 (시도 ${dedupAttempt + 1})`,
           );
           continue;
         }
-        // Commit hashes so subsequent items can also dedup against this one
-        commitHashes(probe, usedSha256, usedAHashes);
+        lastFailure = `IMAGE_DUPLICATE_EXHAUSTED: "${item.heading}" 이미지가 ${MAX_DEDUP_ATTEMPTS}회 모두 기존 결과와 중복되었습니다.`;
+        console.warn(`[리더스 나노바나나] ${lastFailure}`);
+        break;
       }
+      // Commit hashes so subsequent items can also dedup against this one
+      commitHashes(probe, usedSha256, usedAHashes);
 
       // Write to disk
       const saved = await writeImageFile(

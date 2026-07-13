@@ -2,6 +2,8 @@
 // [2026-02-26] formAndAutomation.ts - 폼 데이터 수집 + 자동화 실행/취소
 // ═══════════════════════════════════════════════════════════════════
 
+import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
+
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
 declare let currentPostId: string | null;
@@ -63,6 +65,7 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
   const payload: RendererAutomationPayload = {
     naverId,
     naverPassword,
+    _publishFlow: 'legacy_form',
     generator: (generatorSelect?.value as 'gemini' | 'openai' | 'claude' | 'perplexity') || UnifiedDOMCache.getGenerator(), // ✅ [2026-02-22 FIX]
     skipImages,
     targetAge: (targetAgeSelect?.value as '20s' | '30s' | '40s' | '50s' | 'all') || 'all',
@@ -384,6 +387,17 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
   if (contentModeInput?.value) {
     (payload as any).contentMode = contentModeInput.value;
   }
+
+  payload.contentPolicyContext = buildRendererContentPolicyContext({
+    title: String(payload.title || payload.structuredContent?.selectedTitle || '').trim(),
+    content: String(payload.content || payload.structuredContent?.bodyPlain || payload.structuredContent?.content || '').trim(),
+    keywords: payload.keywords || payload.structuredContent?.keywords || [],
+    structuredContent: payload.structuredContent || {},
+    contentMode: payload.contentMode || 'seo',
+    accountId: naverId,
+    blogId: naverId,
+    cta: payload.ctaText,
+  });
 
   return payload;
 }

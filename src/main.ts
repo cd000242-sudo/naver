@@ -64,6 +64,11 @@ try {
 import cron from 'node-cron';
 import { NaverBlogAutomation, RunOptions, type PublishMode, type AutomationImage } from './naverBlogAutomation.js';
 import { generateImages, resetAllImageState, abortImageGeneration } from './imageGenerator.js';
+import { deduplicateSourceImagesByContent } from './image/sourceImageDeduplicator.js';
+import {
+  extractReferenceImageUrl,
+  selectRepresentativeReferenceImage,
+} from './image/referenceImagePolicy.js';
 import { generateEnglishPromptMain } from './main/utils/mainPromptInference.js';
 // (stabilityGenerator removed - deprecated provider)
 import { convertMp4ToGif } from './image/gifConverter.js'; // ✅ 추가
@@ -1512,6 +1517,74 @@ const patternAnalyzer = new PatternAnalyzer();
 const postAnalytics = new PostAnalytics(); // ✅ 발행 후 성과 추적
 const smartScheduler = new SmartScheduler(); // ✅ 최적 시간 자동 예약 발행
 
+async function prepareSmartScheduledContent(
+  post: SmartScheduledPost,
+  config: AppConfig,
+  naverId: string,
+): Promise<{
+  title: string;
+  content: string;
+  structuredContent: any;
+  contentPolicyContext: import('./contentPolicy/policyService.js').ContentPolicyPayloadContext;
+}> {
+  const keyword = String(post.keyword || post.title || '').trim();
+  if (!keyword) throw new Error('SMART_SCHEDULER_KEYWORD_REQUIRED');
+
+  const { loadContentPolicy } = await import('./contentPolicy/policyLoader.js');
+  const { prepareGenerationPolicyContext } = await import('./contentPolicy/generationContext.js');
+  const generationPolicy = await prepareGenerationPolicyContext({
+    userDataPath: app.getPath('userData'),
+    config: await loadContentPolicy(),
+    fallbackInput: {
+      input_origin: 'final_draft_payload',
+      business_facts_applicable: false,
+      primary_keyword: keyword,
+      target_reader: '예약한 주제를 검색하는 네이버 블로그 독자',
+      business_facts: ['사용자가 SmartScheduler에 발행할 주제를 직접 등록했다.'],
+      source_materials: [],
+      account_id: naverId,
+      blog_id: naverId,
+    },
+  });
+  if (!generationPolicy.allowed) {
+    throw new Error(`CONTENT_POLICY_BLOCKED:${generationPolicy.reasons.join(',') || 'BLOCK_SMART_SCHEDULER_GENERATION'}`);
+  }
+
+  const source: any = {
+    type: 'keyword',
+    value: keyword,
+    targetAge: 'all',
+    toneStyle: 'friendly',
+    contentMode: 'seo',
+    manualTitleOverride: String(post.title || '').trim() || undefined,
+    contentPolicyPrompt: generationPolicy.prompt,
+  };
+  const generated = await generateStructuredContent(source, {
+    provider: (config.defaultAiProvider || 'gemini') as any,
+    minChars: Number((config as any).minCharCount) || 2500,
+  } as any);
+  const title = String((generated as any).selectedTitle || post.title || '').trim();
+  const content = String((generated as any).bodyPlain || (generated as any).body || (generated as any).content || '').trim();
+  if (!title || content.length < 100) {
+    throw new Error('SMART_SCHEDULER_GENERATED_DRAFT_INCOMPLETE');
+  }
+
+  const contentPolicyContext = {
+    input: {
+      ...generationPolicy.input,
+      recent_posts: undefined,
+    },
+    recentPostsSnapshot: generationPolicy.input.recent_posts,
+    recentPostsResult: generationPolicy.recentPostsResult,
+  };
+  return {
+    title,
+    content,
+    structuredContent: { ...generated, selectedTitle: title, bodyPlain: content, content, contentPolicyContext },
+    contentPolicyContext,
+  };
+}
+
 // ✅ [2026-03-14 FIX] SmartScheduler 발행 콜백 설정 — 예약 시간 도달 시 실제 발행 실행
 smartScheduler.setPublishCallback(async (post) => {
   let directLease: DirectAutomationLeaseHandle | null = null;
@@ -1532,6 +1605,16 @@ smartScheduler.setPublishCallback(async (post) => {
     }
     
     sendLog(`🚀 SmartScheduler 예약 발행 시작: ${post.title}`);
+    sendLog(`✍️ SmartScheduler 완성 원고 생성 중: ${post.keyword || post.title}`);
+    const preparedContent = await withAbortableDeadline(
+      () => prepareSmartScheduledContent(post, config, naverId),
+      {
+        timeoutMs: SCHEDULED_AUTOMATION_TIMEOUT_MS,
+        cleanupTimeoutMs: SCHEDULED_AUTOMATION_CLEANUP_TIMEOUT_MS,
+        operationLabel: `SmartScheduler content generation ${post.id}`,
+        onTimeout: () => AutomationService.requestCancel(),
+      },
+    );
     
     schedulerAccountKey = naverId.trim().toLowerCase();
 
@@ -1539,8 +1622,11 @@ smartScheduler.setPublishCallback(async (post) => {
       () => AutomationService.executePostCycle({
         naverId,
         naverPassword,
-        title: post.title,
-        content: post.keyword || post.title, // SmartScheduler는 키워드 기반이므로 keyword를 content로 전달
+        title: preparedContent.title,
+        content: preparedContent.content,
+        structuredContent: preparedContent.structuredContent,
+        contentPolicyContext: preparedContent.contentPolicyContext,
+        _publishFlow: 'smart_scheduler',
         publishMode: 'publish',
         postId: post.id,
       }),
@@ -3176,26 +3262,40 @@ ipcMain.handle(
 
       };
 
-      // ✅ 쇼핑커넥트 모드: 수집된 이미지를 각 item의 referenceImagePath로 배분
+      // 쇼핑 AI: 수집 이미지는 결과물이 아니라 대표 상품 레퍼런스로만 사용한다.
       const isShoppingConnect = (options as any).isShoppingConnect === true;
-      const collectedImages = (options as any).collectedImages || [];
+      const rawCollectedImages = Array.isArray((options as any).collectedImages)
+        ? (options as any).collectedImages
+        : [];
+      let collectedImages = rawCollectedImages;
 
       if (isShoppingConnect && Array.isArray(collectedImages) && collectedImages.length > 0 && options.items) {
-        console.log(`[Main] 🛒 쇼핑커넥트: ${collectedImages.length}개 수집 이미지를 참조 이미지로 배분`);
-        options.items.forEach((item, idx) => {
-          // 각 소제목에 수집 이미지를 순환 할당 (이미지 개수보다 소제목이 많을 수 있음)
-          const refImg = collectedImages[idx % collectedImages.length];
-          if (refImg && !item.referenceImagePath && !item.referenceImageUrl) {
-            const refUrl = typeof refImg === 'string' ? refImg : (refImg.referenceImageUrl || refImg.url || refImg.filePath || refImg.thumbnailUrl || refImg.referenceImagePath);
-            if (refUrl) {
-              if (/^https?:\/\//i.test(String(refUrl))) {
-                (item as any).referenceImageUrl = refUrl;
-              }
-              (item as any).referenceImagePath = refUrl;
-              console.log(`[Main]   📎 소제목 ${idx + 1} (${item.heading?.substring(0, 20) || ''}) → 참조: ${String(refUrl).substring(0, 60)}...`);
-            }
-          }
-        });
+        const dedupResult = await deduplicateSourceImagesByContent(collectedImages, { maxCandidates: 12 });
+        collectedImages = dedupResult.images;
+        const representativeImage = selectRepresentativeReferenceImage(collectedImages);
+        const representativeUrl = extractReferenceImageUrl(representativeImage);
+        console.log(`[Main] 🛒 쇼핑커넥트 수집 이미지 중복 제거: ${rawCollectedImages.length}개 → ${collectedImages.length}개 (제거 ${dedupResult.removedCount}개)`);
+        if (!representativeUrl) {
+          throw new Error('쇼핑 AI 생성에 사용할 대표 상품 이미지를 확인하지 못했습니다. 상품 이미지 수집 결과를 확인해주세요.');
+        }
+        collectedImages = [
+          representativeImage,
+          ...collectedImages.filter((image: any) => image !== representativeImage),
+        ];
+        options = {
+          ...options,
+          collectedImages: collectedImages as string[],
+          items: options.items.map((item, idx) => {
+            if (item.referenceImagePath || item.referenceImageUrl) return { ...item };
+            console.log(`[Main]   📎 소제목 ${idx + 1} (${item.heading?.substring(0, 20) || ''}) → 공통 대표 이미지 참조`);
+            return {
+              ...item,
+              referenceImageUrl: representativeUrl,
+              referenceImagePath: representativeUrl,
+              referenceImageList: [representativeUrl],
+            };
+          }),
+        };
       }
 
       // ✅ [FIX] isShoppingConnect 및 collectedImages를 options에 명시적으로 설정
@@ -3227,11 +3327,11 @@ ipcMain.handle(
               (options as any).crawledImages = urlImages;
               console.log(`[Main] ✅ URL에서 ${urlImages.length}개 이미지 크롤링 완료 → img2img 활성화`);
 
-              // 각 item에 referenceImageUrl 배분
+              // 쇼핑 AI는 모든 항목에 같은 대표 이미지를 적용한다.
               if (options.items) {
                 options.items.forEach((item: any, idx: number) => {
                   if (!item.referenceImageUrl && !item.referenceImagePath) {
-                    item.referenceImageUrl = urlImages[idx % urlImages.length];
+                    item.referenceImageUrl = isShoppingConnect ? urlImages[0] : urlImages[idx % urlImages.length];
                     console.log(`[Main]   📎 [${idx + 1}] "${(item.heading || '').substring(0, 20)}" → img2img 참조`);
                   }
                 });
@@ -4714,6 +4814,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               config: await loadMultiPolicy(),
               context: options?.contentPolicyContext,
               fallbackInput: {
+                input_origin: 'generated',
+                business_facts_applicable: source.contentMode === 'business' || source.contentMode === 'affiliate',
                 primary_keyword: contentSource.type === 'keyword' ? sourceText : String(options?.title || '').trim(),
                 target_reader: accountSettings?.targetAge === 'all'
                   ? 'Naver blog readers'
@@ -5047,6 +5149,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           // ✅ [2026-02-21 FIX] structuredContent.selectedTitle도 최종 제목으로 동기화
           structuredContent: structuredContent ? { ...structuredContent, selectedTitle: title } : undefined,
           contentPolicyContext: resolvedContentPolicyContext || structuredContent?.contentPolicyContext,
+          _publishFlow: 'multi_account',
           hashtags: normalizePublishHashtags(options?.hashtags, structuredContent?.hashtags, preGenerated?.hashtags),
           generatedImages: generatedImages.length > 0 ? generatedImages : undefined, // ✅ 이미지
           // ✅ [2026-01-24 FIX] CTA 관련 설정 명시적 전달
@@ -5429,6 +5532,7 @@ ipcMain.handle(
       // Run the fail-closed policy preflight after source collection and before the model call.
       const { loadContentPolicy } = await import('./contentPolicy/policyLoader.js');
       const { prepareGenerationPolicyContext } = await import('./contentPolicy/generationContext.js');
+      const generationPolicyConfig = await loadContentPolicy();
       const rawKeywordInput = (payload.assembly as any).keywords;
       const policyKeywords = Array.isArray(rawKeywordInput)
         ? rawKeywordInput.map((value: unknown) => String(value || '').trim()).filter(Boolean)
@@ -5436,16 +5540,18 @@ ipcMain.handle(
       const businessFacts = Object.entries(source.businessInfo || {})
         .filter(([, value]) => ['string', 'number', 'boolean'].includes(typeof value) && String(value).trim())
         .map(([key, value]) => `${key}: ${String(value).trim()}`);
-      const sourceFacts = businessFacts.length > 0
-        ? businessFacts
-        : String(source.rawText || '')
-          .split(/\n+/)
-          .map((value) => value.trim())
-          .filter((value) => value.length >= 20)
-          .slice(0, 20);
+      const { extractPolicyFactLines, resolvePolicySourceMaterialType } = await import('./contentPolicy/sourceEvidence.js');
+      const sourceFacts = Array.from(new Set([
+        ...businessFacts,
+        ...extractPolicyFactLines(String(source.rawText || ''), 50),
+      ])).slice(0, 50);
       const sourceMaterials = source.rawText?.trim()
         ? [{
-          type: source.url ? 'reference' as const : 'user_provided' as const,
+          type: resolvePolicySourceMaterialType({
+            url: source.url,
+            contentMode,
+            articleType: source.articleType,
+          }),
           title: source.title || policyKeywords[0] || 'generation-source',
           content: source.rawText,
           url: source.url,
@@ -5454,9 +5560,11 @@ ipcMain.handle(
         : [];
       const generationPolicy = await prepareGenerationPolicyContext({
         userDataPath: app.getPath('userData'),
-        config: await loadContentPolicy(),
+        config: generationPolicyConfig,
         context: (payload.assembly as any).contentPolicyContext,
         fallbackInput: {
+          input_origin: 'generated',
+          business_facts_applicable: contentMode === 'business' || contentMode === 'affiliate',
           primary_keyword: policyKeywords[0] || source.title || '',
           secondary_keywords: policyKeywords.slice(1),
           target_reader: targetAge === 'all' ? 'Naver blog readers' : `${targetAge} readers`,
@@ -5513,7 +5621,7 @@ ipcMain.handle(
       const genSignal = generationOperation.controller.signal;
 
       // ✅ [Phase 3B] 네트워크/타임아웃 에러 시 자동 재시도 (최대 2회, exponential backoff)
-      const content = await withRetry(
+      let content = await withRetry(
         () => {
           // ✅ [2026-04-03] 매 시도마다 abort 체크
           if (genSignal.aborted) throw new Error('사용자가 작업을 취소했습니다.');
@@ -5574,6 +5682,30 @@ ipcMain.handle(
         }
       } catch (validationErr: any) {
         console.warn('[Main] ⚠️ Phase 3 fact 검증 중 예외 — graceful skip:', validationErr?.message || validationErr);
+      }
+
+      // DraftGenerator 직후 정책 검증을 완료해야 이미지 생성 비용을 쓰기 전에
+      // 근거 없는 가격·효과 문장을 재작성하거나 안전하게 차단할 수 있다.
+      const { guardGeneratedContent } = await import('./contentPolicy/generatedContentGuard.js');
+      const generatedContentGuard = await guardGeneratedContent({
+        structuredContent: content as any,
+        input: generationPolicy.input,
+        config: generationPolicyConfig,
+        recentPostsResult: generationPolicy.recentPostsResult,
+        modelVersion: String(provider || 'generated-content-post-guard'),
+      });
+      content = generatedContentGuard.content as StructuredContent;
+      if (!generatedContentGuard.allowed) {
+        const unsupported = generatedContentGuard.policyResult.quality_report.unsupported_claims.slice(0, 3);
+        const unsupportedText = unsupported.length > 0
+          ? `\n문제 문장: ${unsupported.join(' | ')}`
+          : '';
+        const reasonText = generatedContentGuard.reasons.join(', ') || 'BLOCK_MANUAL_REVIEW_REQUIRED';
+        console.error(`[ContentPolicy] Generated draft blocked before image generation: ${reasonText}`);
+        throw new Error(`[CONTENT_POLICY_BLOCKED] ${reasonText}${unsupportedText}`);
+      }
+      if (generatedContentGuard.policyResult.rewrite_count > 0) {
+        console.log(`[ContentPolicy] Generated draft repaired before image generation (${generatedContentGuard.policyResult.rewrite_count}회).`);
       }
 
       // ✅ [v2.10.228 → v2.10.229] 자동 관련글 링크 삽입 — 발행 직전 본문 끝에 관련글 추가 (체류시간 ↑)
@@ -8543,6 +8675,7 @@ app.whenReady().then(async () => {
                   businessInfo: postData.businessInfo,
                   contentPolicyContext: postData.contentPolicyContext
                     || postData.structuredContent?.contentPolicyContext,
+                  _publishFlow: 'app_scheduler',
                 } as any),
                 {
                   timeoutMs: SCHEDULED_AUTOMATION_TIMEOUT_MS,

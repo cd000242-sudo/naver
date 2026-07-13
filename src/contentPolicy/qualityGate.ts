@@ -24,6 +24,7 @@ export interface QualityGateContext {
 
 const RISKY_CLAIM = /(?:\d[\d,.]*\s*(?:원|만원|천원|억원|%|퍼센트|명|건|회)|100\s*%|상위\s*노출|보장|무조건|모두가?\s*만족|완벽(?:히|한)?|반드시\s*(?:해결|성공))/u;
 const FIRSTHAND_CLAIM = /(?:지난(?:달|주|해)|현장에서|고객\s*\d|저희가\s*직접|직접\s*(?:작업|처리)|실제\s*(?:사례|경험))/u;
+const EXPLICIT_NO_GUARANTEE = /(?:단정(?:하|하기|할)\S*\s*(?:어렵|힘들|없)|보장(?:하|할)\S*\s*(?:어렵|없|않)|100\s*%?\s*(?:아니|보장되지|확실하지)|완벽(?:히|한)?\S*\s*(?:아니|보장되지|확실하지)|차량마다\s*(?:다르|달라)|최신\s*(?:가격|조건)\S*\s*확인)/u;
 
 function weightedScore(weight: number, factor: number): number {
   const safeFactor = Number.isFinite(factor) ? Math.min(1, Math.max(0, factor)) : 0;
@@ -92,6 +93,9 @@ function originalityFactor(similarity: SimilarityReport): number {
 
 function firstPartyFactor(context: QualityGateContext): number {
   const { input, draft } = context;
+  if (input.business_facts_applicable === false) return 1;
+  if ((input.input_origin === 'semi_auto_manual' || input.input_origin === 'final_draft_payload')
+    && input.business_facts_applicable !== true) return 1;
   if (input.business_facts.length === 0) return 0;
 
   const body = articleBody(draft);
@@ -158,7 +162,8 @@ function unsupportedClaims(input: ContentPolicyInput, draft: ArticleDraft): stri
   const article = wholeArticle(draft);
   const evidence = evidenceTexts(input);
   const riskySentences = splitNormalizedSentences(article, 6).filter((sentence) => (
-    RISKY_CLAIM.test(sentence) || FIRSTHAND_CLAIM.test(sentence)
+    (RISKY_CLAIM.test(sentence) || FIRSTHAND_CLAIM.test(sentence))
+    && !EXPLICIT_NO_GUARANTEE.test(sentence)
   ));
   const unsupportedRiskySentences = riskySentences.filter((claim) => !isSupportedClaim(claim, evidence));
   const forbiddenClaims = (input.forbidden_claims ?? []).filter((claim) => (
@@ -216,7 +221,10 @@ function configuredFatalErrors(
     unsupported.length > 0 ? 'fabricated_fact' : null,
     hasSourceCopySignal(context.similarity) ? 'copied_or_lightly_paraphrased_source' : null,
     context.similarity.risk === 'HIGH' ? 'excessive_similarity' : null,
-    context.config.inputs.required.some((field) => !inputFieldPresent(context.input, field))
+    context.config.inputs.required.some((field) => (
+      (field !== 'business_facts' || context.input.business_facts_applicable !== false)
+      && !inputFieldPresent(context.input, field)
+    ))
       ? 'missing_required_input'
       : null,
   ].filter((error): error is string => error !== null);

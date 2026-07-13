@@ -4,6 +4,7 @@ import { runContentPolicyPipeline } from './orchestrator.js';
 import { loadContentPolicy } from './policyLoader.js';
 import { PublicationStateStore } from './publicationStateStore.js';
 import { evaluatePublishGuard } from './publishGuard.js';
+import { reconcilePublishPolicyInput } from './publishInputReconciler.js';
 import { RecentPostsRepository } from './recentPostsRepository.js';
 import type {
   ArticleDraft,
@@ -20,6 +21,16 @@ export interface ContentPolicyPayloadContext {
   recentPostsResult?: RecentPostsLoadResult;
 }
 
+export type PublishFlow =
+  | 'direct'
+  | 'legacy_form'
+  | 'semi_auto'
+  | 'full_auto'
+  | 'continuous'
+  | 'multi_account'
+  | 'app_scheduler'
+  | 'smart_scheduler';
+
 export interface ContentPolicyPayload {
   naverId?: string;
   accountId?: string;
@@ -35,6 +46,8 @@ export interface ContentPolicyPayload {
   geminiModel?: string;
   businessInfo?: Record<string, unknown>;
   contentPolicyContext?: ContentPolicyPayloadContext;
+  _semiAutoMode?: boolean;
+  _publishFlow?: PublishFlow;
 }
 
 export interface PrepareContentPolicyOptions {
@@ -102,10 +115,13 @@ function draftFromPayload(payload: ContentPolicyPayload): ArticleDraft {
 }
 
 function fallbackInput(payload: ContentPolicyPayload, draft: ArticleDraft): ContentPolicyInput {
+  const payloadKeywords = stringArray((payload as Record<string, unknown>).keywords);
   return {
-    primary_keyword: stringValue((payload as Record<string, unknown>).keywords) || draft.title,
-    target_reader: '수동 검수 대상 독자',
-    business_facts: [],
+    input_origin: 'final_draft_payload',
+    business_facts_applicable: payload.contentMode === 'business' || payload.contentMode === 'affiliate',
+    primary_keyword: payloadKeywords[0] || draft.title,
+    target_reader: '최종 원고의 주제를 확인하는 독자',
+    business_facts: ['발행 경계에서 최종 제목과 본문을 기준으로 원고를 다시 확인했다.'],
     recent_posts: undefined,
     related_questions: draft.faq.map((item) => item.question).filter(Boolean),
     template_id: stringValue(payload.structuredContent?.template_id || payload.structuredContent?.templateId)
@@ -187,6 +203,7 @@ async function resolveRecentPosts(
 function applyResultToPayload<T extends ContentPolicyPayload>(
   payload: T,
   result: ContentPolicyResult,
+  effectiveInput: ContentPolicyInput,
 ): T {
   const structured: Record<string, any> = {
     ...(payload.structuredContent || {}),
@@ -194,6 +211,10 @@ function applyResultToPayload<T extends ContentPolicyPayload>(
   };
   if (result.decision === 'PASS' && result.rewrite_count > 0) {
     structured.selectedTitle = result.article.title;
+    structured.introduction = result.article.introduction;
+    if (result.article.headings) {
+      structured.headings = result.article.headings.map((heading) => ({ ...heading }));
+    }
     structured.bodyPlain = result.article.body_markdown;
     structured.content = result.article.body_markdown;
     structured.summary = result.article.summary;
@@ -205,6 +226,17 @@ function applyResultToPayload<T extends ContentPolicyPayload>(
     title: result.decision === 'PASS' && result.rewrite_count > 0 ? result.article.title : payload.title,
     content: result.decision === 'PASS' && result.rewrite_count > 0 ? result.article.body_markdown : payload.content,
     structuredContent: structured,
+    contentPolicyContext: {
+      ...(payload.contentPolicyContext || {}),
+      input: {
+        ...effectiveInput,
+        business_facts: [...effectiveInput.business_facts],
+        secondary_keywords: effectiveInput.secondary_keywords ? [...effectiveInput.secondary_keywords] : undefined,
+        source_materials: effectiveInput.source_materials?.map((source) => ({ ...source })),
+        related_questions: effectiveInput.related_questions ? [...effectiveInput.related_questions] : undefined,
+        recent_posts: effectiveInput.recent_posts?.map((post) => ({ ...post, headings: [...post.headings] })),
+      },
+    },
   };
 }
 
@@ -218,7 +250,12 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   const stateStore = new PublicationStateStore(options.userDataPath);
   const config = await loadContentPolicy(options.policyPath ? { policyPath: options.policyPath } : {});
   const draft = draftFromPayload(payload);
+  const contextMissing = !payload.contentPolicyContext?.input;
   const baseInput = payload.contentPolicyContext?.input || fallbackInput(payload, draft);
+  const reconciledInput = reconcilePublishPolicyInput(baseInput, draft, {
+    semiAutoMode: payload._semiAutoMode === true,
+    contextMissing,
+  });
 
   let recentPostsResult: RecentPostsLoadResult;
   try {
@@ -231,12 +268,12 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
     };
   }
   const effectiveInput: ContentPolicyInput = {
-    ...baseInput,
+    ...reconciledInput,
     recent_posts: recentPostsResult.ok
       ? recentPostsResult.posts.map((post) => ({ ...post, headings: [...post.headings] }))
       : undefined,
-    account_id: baseInput.account_id || stringValue(payload.accountId || payload.naverId) || undefined,
-    blog_id: baseInput.blog_id || stringValue(payload.naverId) || undefined,
+    account_id: reconciledInput.account_id || stringValue(payload.accountId || payload.naverId) || undefined,
+    blog_id: reconciledInput.blog_id || stringValue(payload.naverId) || undefined,
   };
   let policyResult = await runContentPolicyPipeline({
     input: effectiveInput,
@@ -258,6 +295,7 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
         now,
         config,
         env: options.env,
+        enforceCadence: payload.publishMode !== 'draft' && payload.publishMode !== 'schedule',
       });
       guardReasons = [...guard.reasons];
       if (!guard.allowed) policyResult = blockForStorageFailure(policyResult, ...guardReasons);
@@ -273,7 +311,7 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
     policyResult = blockForStorageFailure(policyResult, 'BLOCK_AUDIT_LOG_UNAVAILABLE');
   }
 
-  const preparedPayload = applyResultToPayload(payload, policyResult);
+  const preparedPayload = applyResultToPayload(payload, policyResult, effectiveInput);
   return {
     allowed: policyResult.decision === 'PASS' && policyResult.publication.allowed && guardReasons.length === 0,
     reasons: [...new Set([...policyResult.block_reasons, ...guardReasons])],

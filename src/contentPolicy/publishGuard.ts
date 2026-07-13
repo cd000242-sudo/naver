@@ -27,6 +27,7 @@ export interface PublicationAvailabilityInput {
 
 export interface PublishGuardInput extends PublicationAvailabilityInput {
   policyResult: ContentPolicyResult;
+  enforceCadence?: boolean;
 }
 
 export interface PublishGuardDecision {
@@ -181,6 +182,6 @@ export function evaluatePublishGuard(input: PublishGuardInput): PublishGuardDeci
     return { allowed: false, reasons: [...reasons] };
   }
 
-  addCadenceReasons(reasons, input);
+  if (input.enforceCadence !== false) addCadenceReasons(reasons, input);
   return { allowed: reasons.size === 0, reasons: [...reasons] };
 }

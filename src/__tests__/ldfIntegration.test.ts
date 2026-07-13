@@ -43,6 +43,19 @@ describe('Phase B — qualityGate 통합', () => {
     });
     expect(r).toBeDefined();
   });
+
+  it('affiliate mode is not incorrectly blocked by the homefeed-only CTR title rule', () => {
+    const r = prePublishGate({
+      title: '무선 선풍기 구매 전 확인한 크기와 충전 방식',
+      content: '제품 사양과 구매 전 확인할 기준을 실제 제공 정보에 맞춰 정리했습니다. '.repeat(60),
+      category: 'lifestyle',
+      mode: 'affiliate',
+    });
+
+    expect(r.allowed).toBe(true);
+    expect(r.blockers.some((blocker) => blocker.includes('CTR'))).toBe(false);
+    expect(r.score).toBeGreaterThanOrEqual(80);
+  });
 });
 
 describe('Phase B — revenueEngine 카테고리 메타', () => {

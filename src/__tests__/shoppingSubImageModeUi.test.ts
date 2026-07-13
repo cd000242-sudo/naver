@@ -55,4 +55,12 @@ describe('메인 이미지 설정 쇼핑커넥트 섹션 제거 (이설 완료)'
     expect(ph).toContain('scSubImageSource');
     expect(store).toContain("(window as any).setSubImageMode = setSubImageMode");
   });
+
+  it('풀오토 생성기는 숨은 체크박스가 아니라 스냅샷의 쇼핑 이미지 모드와 엔진을 따른다', () => {
+    const fullAuto = fs.readFileSync(path.join(process.cwd(), 'src', 'renderer', 'modules', 'fullAutoFlow.ts'), 'utf-8');
+
+    expect(fullAuto).toContain("formData.scSubImageMode === 'ai'");
+    expect(fullAuto).toContain('formData.scAIImageEngine || formData.imageSource');
+    expect(fullAuto).not.toContain("document.getElementById('unified-use-ai-image')?.checked ?? true");
+  });
 });

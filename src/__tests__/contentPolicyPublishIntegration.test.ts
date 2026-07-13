@@ -61,6 +61,190 @@ describe('content policy publish integration', () => {
     expect(payload.structuredContent.contentPolicy).toBeUndefined();
   });
 
+  it('publishes the repaired body and heading model after removing unsupported claims', async () => {
+    const payload = payloadWithContext();
+    const unsupported = '국내생산 윈드포스 기술을 적용한 이 시트커버는 45,800원에 판매되고 있습니다.';
+    payload.content = `${payload.content}\n\n${unsupported}`;
+    payload.structuredContent.bodyPlain = payload.content;
+    payload.structuredContent.content = payload.content;
+    payload.structuredContent.headings = payload.structuredContent.headings.map((heading: any, index: number) => index === 0
+      ? { ...heading, content: `${heading.content} ${unsupported}` }
+      : { ...heading });
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath: await tempDir(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.policyResult.rewrite_count).toBe(1);
+    expect(result.payload.content).not.toContain('45,800원');
+    expect(result.payload.structuredContent.bodyPlain).not.toContain('45,800원');
+    expect(result.payload.structuredContent.headings[0].content).not.toContain('45,800원');
+    expect(payload.content).toContain('45,800원');
+  });
+
+  it('rebases stale generation keywords to the final pasted article in semi-auto mode', async () => {
+    const payload = payloadWithContext();
+    payload._semiAutoMode = true;
+    payload.keywords = ['2026 꼼수장학금 신청 방법'];
+    payload.contentPolicyContext.input.primary_keyword = '2026 꼼수장학금 신청 방법';
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath: await tempDir(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.policyResult.decision).toBe('PASS');
+    expect(result.policyResult.block_reasons).not.toContain('BLOCK_KEYWORD_BODY_MISMATCH');
+    expect(result.payload.contentPolicyContext?.input.primary_keyword).toBe('부산 유품 정리 준비 순서와 귀중품 보관 기준');
+    expect(result.payload.contentPolicyContext?.input.input_origin).toBe('semi_auto_manual');
+    expect(result.payload.contentPolicyContext?.input.business_facts).toContain(
+      '작업 전 가족이 귀중품을 먼저 확인한다.',
+    );
+    expect(result.payload.contentPolicyContext?.input.business_facts).not.toContain(payload.title);
+  });
+
+  it('does not bypass forbidden-claim blocking after semi-auto context rebasing', async () => {
+    const payload = payloadWithContext();
+    const unsupported = '이 서비스는 누구에게나 100% 해결을 보장합니다.';
+    payload._semiAutoMode = true;
+    payload.keywords = ['2026 꼼수장학금 신청 방법'];
+    payload.contentPolicyContext.input.primary_keyword = '2026 꼼수장학금 신청 방법';
+    payload.content = `${payload.content}\n\n${unsupported}`;
+    payload.structuredContent.bodyPlain = payload.content;
+    payload.structuredContent.content = payload.content;
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath: await tempDir(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(false);
+    expect(result.policyResult.block_reasons).toContain('BLOCK_FORBIDDEN_CLAIM');
+  });
+
+  it.each([
+    ['full_auto', 'publish', false],
+    ['continuous', 'publish', false],
+    ['multi_account', 'publish', false],
+    ['legacy_form', 'publish', false],
+    ['app_scheduler', 'publish', false],
+    ['full_auto', 'draft', false],
+    ['full_auto', 'schedule', false],
+    ['semi_auto', 'publish', true],
+  ] as const)(
+    'reconciles stale policy context for %s / %s without bypassing the final draft guard',
+    async (publishFlow, publishMode, semiAutoMode) => {
+      const payload = payloadWithContext();
+      payload.publishMode = publishMode;
+      payload._publishFlow = publishFlow;
+      payload._semiAutoMode = semiAutoMode;
+      payload.keywords = ['과거에 생성한 전혀 다른 키워드'];
+      payload.contentPolicyContext.input.primary_keyword = '과거에 생성한 전혀 다른 키워드';
+
+      const result = await prepareContentPolicyForPublish(payload, {
+        userDataPath: await tempDir(),
+        env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+        now: new Date('2026-02-01T12:00:00.000Z'),
+      });
+
+      expect(result.allowed).toBe(true);
+      expect(result.policyResult.block_reasons).not.toContain('BLOCK_KEYWORD_BODY_MISMATCH');
+      expect(result.payload.contentPolicyContext?.input.primary_keyword).toBe(payload.title);
+    },
+  );
+
+  it.each([
+    ['full_auto', false],
+    ['continuous', false],
+    ['multi_account', false],
+    ['legacy_form', false],
+    ['app_scheduler', false],
+    ['semi_auto', true],
+  ] as const)('blocks a genuinely unrelated final title and body for %s', async (publishFlow, semiAutoMode) => {
+    const payload = payloadWithContext();
+    payload._publishFlow = publishFlow;
+    payload._semiAutoMode = semiAutoMode;
+    payload.title = '제주도 렌터카 보험 비교와 예약 방법';
+    payload.structuredContent.selectedTitle = payload.title;
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath: await tempDir(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(false);
+    expect(result.policyResult.block_reasons).toContain('BLOCK_KEYWORD_BODY_MISMATCH');
+  });
+
+  it('recovers an old scheduled or legacy payload without embedded policy context', async () => {
+    const userDataPath = await tempDir();
+    await new RecentPostsRepository(userDataPath).mergeSnapshot(makeRecentPosts());
+    const payload = payloadWithContext();
+    delete (payload as any).contentPolicyContext;
+    (payload as any)._publishFlow = 'app_scheduler';
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.payload.contentPolicyContext?.input.input_origin).toBe('final_draft_payload');
+    expect(result.payload.contentPolicyContext?.input.primary_keyword).toBe(payload.title);
+  });
+
+  it('preserves only final-body evidence when affiliate or business keywords are stale', async () => {
+    const payload = payloadWithContext();
+    payload.contentMode = 'affiliate';
+    payload._publishFlow = 'full_auto';
+    payload.contentPolicyContext.input.business_facts_applicable = true;
+    payload.contentPolicyContext.input.primary_keyword = '과거에 생성한 전혀 다른 상품 키워드';
+    payload.contentPolicyContext.input.business_facts = [
+      '작업 전 가족이 귀중품을 먼저 확인한다.',
+      '현재 원고와 무관한 오래된 상품은 99,000원이다.',
+    ];
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath: await tempDir(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.payload.contentPolicyContext?.input.business_facts).toContain(
+      '작업 전 가족이 귀중품을 먼저 확인한다.',
+    );
+    expect(result.payload.contentPolicyContext?.input.business_facts).not.toContain(
+      '현재 원고와 무관한 오래된 상품은 99,000원이다.',
+    );
+  });
+
+  it('still blocks a genuinely unrelated title and body in semi-auto mode', async () => {
+    const payload = payloadWithContext();
+    payload._semiAutoMode = true;
+    payload.title = '제주도 렌터카 보험 비교와 예약 방법';
+    payload.structuredContent.selectedTitle = payload.title;
+    payload.keywords = ['과거 생성 키워드'];
+    payload.contentPolicyContext.input.primary_keyword = '과거 생성 키워드';
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath: await tempDir(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(false);
+    expect(result.policyResult.block_reasons).toContain('BLOCK_KEYWORD_BODY_MISMATCH');
+  });
+
   it('blocks and requires manual review when neither renderer nor repository provides recent posts', async () => {
     const payload = payloadWithContext();
     payload.contentPolicyContext.input.recent_posts = undefined;
@@ -88,6 +272,49 @@ describe('content policy publish integration', () => {
     expect(guard).toBeGreaterThan(-1);
     expect(browser).toBeGreaterThan(guard);
     expect(source).toContain('CONTENT_POLICY_BLOCKED');
+  });
+
+  it('forwards the semi-auto mode marker to the main-process policy boundary', async () => {
+    const source = await fs.readFile(path.resolve(process.cwd(), 'src/renderer/modules/fullAutoFlow.ts'), 'utf8');
+    expect(source).toContain('_semiAutoMode: formData._semiAutoMode === true');
+  });
+
+  it('wires every renderer and main-process publish entry to the shared policy contract', async () => {
+    const legacyForm = await fs.readFile(path.resolve(process.cwd(), 'src/renderer/modules/formAndAutomation.ts'), 'utf8');
+    const fullAuto = await fs.readFile(path.resolve(process.cwd(), 'src/renderer/modules/fullAutoFlow.ts'), 'utf8');
+    const main = await fs.readFile(path.resolve(process.cwd(), 'src/main.ts'), 'utf8');
+
+    expect(legacyForm).toContain('buildRendererContentPolicyContext');
+    expect(legacyForm).toContain("_publishFlow: 'legacy_form'");
+    expect(fullAuto).toContain("? 'semi_auto'");
+    expect(fullAuto).toContain("? 'continuous'");
+    expect(fullAuto).toContain(": 'full_auto'");
+    expect(main).toContain("_publishFlow: 'multi_account'");
+    expect(main).toContain("_publishFlow: 'app_scheduler'");
+    expect(main).toContain("_publishFlow: 'smart_scheduler'");
+  });
+
+  it('generates a complete SmartScheduler draft before entering the publish boundary', async () => {
+    const main = await fs.readFile(path.resolve(process.cwd(), 'src/main.ts'), 'utf8');
+    const callbackStart = main.indexOf('smartScheduler.setPublishCallback');
+    const generation = main.indexOf('prepareSmartScheduledContent', callbackStart);
+    const publishing = main.indexOf('AutomationService.executePostCycle', callbackStart);
+
+    expect(generation).toBeGreaterThan(callbackStart);
+    expect(publishing).toBeGreaterThan(generation);
+    expect(main.slice(callbackStart, generation)).toContain('withAbortableDeadline');
+    expect(main.slice(callbackStart, publishing)).not.toContain('content: post.keyword || post.title');
+  });
+
+  it('runs the generated-draft policy guard before images are handed to full auto', async () => {
+    const source = await fs.readFile(path.resolve(process.cwd(), 'src/main.ts'), 'utf8');
+    const generation = source.indexOf('generateStructuredContent(source');
+    const postGenerationGuard = source.indexOf('guardGeneratedContent');
+    const imageHandoff = source.indexOf('if (source.images && source.images.length > 0)', postGenerationGuard);
+
+    expect(generation).toBeGreaterThan(-1);
+    expect(postGenerationGuard).toBeGreaterThan(generation);
+    expect(imageHandoff).toBeGreaterThan(postGenerationGuard);
   });
 
   it('always registers successful policy publications for exposure polling without duplicates', async () => {
@@ -162,5 +389,47 @@ describe('content policy publish integration', () => {
     expect(result.reasons).toContain('BLOCK_PUBLISH_PAUSED');
     expect(audits[0].decision).toBe('BLOCK');
     expect(audits[0].block_reasons).toContain('BLOCK_PUBLISH_PAUSED');
+  });
+
+  it('applies cadence limits only to immediate publishing, not draft or future schedule creation', async () => {
+    const now = new Date('2026-02-01T12:00:00.000Z');
+    const env = { MIN_PUBLISH_INTERVAL_MINUTES: '60', DAILY_PUBLISH_CAP: '1' };
+
+    const immediateDir = await tempDir();
+    await new PublicationStateStore(immediateDir).recordPublication({
+      article_id: 'recent-immediate',
+      account_id: 'account-a',
+      published_at: new Date(now.getTime() - 5 * 60_000).toISOString(),
+      template_id: 'other-template',
+      structure_type: 'other-structure',
+      topic_angle: 'other-angle',
+      exposure_status: 'INDEXED',
+    });
+    const immediate = await prepareContentPolicyForPublish(payloadWithContext(), {
+      userDataPath: immediateDir,
+      env,
+      now,
+    });
+
+    for (const publishMode of ['draft', 'schedule'] as const) {
+      const userDataPath = await tempDir();
+      await new PublicationStateStore(userDataPath).recordPublication({
+        article_id: `recent-${publishMode}`,
+        account_id: 'account-a',
+        published_at: new Date(now.getTime() - 5 * 60_000).toISOString(),
+        template_id: 'other-template',
+        structure_type: 'other-structure',
+        topic_angle: 'other-angle',
+        exposure_status: 'INDEXED',
+      });
+      const payload = payloadWithContext();
+      payload.publishMode = publishMode;
+      const result = await prepareContentPolicyForPublish(payload, { userDataPath, env, now });
+      expect(result.allowed).toBe(true);
+    }
+
+    expect(immediate.allowed).toBe(false);
+    expect(immediate.reasons).toContain('BLOCK_MIN_PUBLISH_INTERVAL');
+    expect(immediate.reasons).toContain('BLOCK_DAILY_PUBLISH_CAP');
   });
 });

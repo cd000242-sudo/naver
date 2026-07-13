@@ -438,6 +438,8 @@ export interface PostCyclePayload {
     content?: string;
     structuredContent?: any;
     contentPolicyContext?: import('../../contentPolicy/policyService.js').ContentPolicyPayloadContext;
+    _publishFlow?: import('../../contentPolicy/policyService.js').PublishFlow;
+    _semiAutoMode?: boolean;
     lines?: string[];
     selectedHeadings?: string[];
     hashtags?: string[];

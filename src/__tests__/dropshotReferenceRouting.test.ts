@@ -36,11 +36,13 @@ describe('dropshot reference image routing', () => {
     expect(dropshot).toContain('referenceImageList: refUrls');
   });
 
-  it('keeps main IPC references URL-first for shopping connect', () => {
+  it('keeps main IPC references URL-first and representative-only for shopping connect', () => {
     const main = readSource('src/main.ts');
 
-    expect(main).toContain('(item as any).referenceImageUrl = refUrl');
-    expect(main).toContain('refImg.referenceImageUrl || refImg.url || refImg.filePath || refImg.thumbnailUrl || refImg.referenceImagePath');
+    expect(main).toContain('const representativeUrl = extractReferenceImageUrl(representativeImage);');
+    expect(main).toContain('referenceImageUrl: representativeUrl');
+    expect(main).toContain('referenceImagePath: representativeUrl');
+    expect(main).toContain('referenceImageList: [representativeUrl]');
     expect(main).toContain(".filter((url: string) => /^https?:\\/\\//i.test(String(url || '')))");
   });
 });

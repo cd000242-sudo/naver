@@ -79,7 +79,9 @@ export function validatePolicyInput(
   draft?: ArticleDraft,
   config?: ContentPolicyConfig,
 ): PolicyInputValidationResult {
-  const requiredFields = config?.inputs.required ?? DEFAULT_REQUIRED_FIELDS;
+  const requiredFields = (config?.inputs.required ?? DEFAULT_REQUIRED_FIELDS).filter((field) => (
+    field !== 'business_facts' || input.business_facts_applicable !== false
+  ));
   const missingFields = requiredFields.filter((field) => !isRequiredValuePresent(input, field));
   const blockReasons = missingFields.map(
     (field) => REQUIRED_FIELD_REASONS[field] ?? `BLOCK_MISSING_${field.toUpperCase()}`,

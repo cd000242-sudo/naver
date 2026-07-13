@@ -2,7 +2,8 @@ import type { EvaluationResult, Mode } from './qualityEvaluator';
 
 export const QUALITY90_TARGET_SCORE = 90;
 
-const QUALITY90_MODES = new Set<Mode>(['seo', 'homefeed', 'mate']);
+const QUALITY90_MODES = new Set<Mode>(['seo', 'homefeed', 'mate', 'affiliate']);
+const HUMANLIKE_90_MODES = new Set<Mode>(['homefeed', 'affiliate']);
 
 export interface Quality90GateAssessment {
   readonly enabled: boolean;
@@ -12,7 +13,7 @@ export interface Quality90GateAssessment {
   readonly directive: string;
 }
 
-export function isQuality90Mode(mode: string): mode is Extract<Mode, 'seo' | 'homefeed' | 'mate'> {
+export function isQuality90Mode(mode: string): mode is Extract<Mode, 'seo' | 'homefeed' | 'mate' | 'affiliate'> {
   return QUALITY90_MODES.has(mode as Mode);
 }
 
@@ -39,18 +40,18 @@ export function assessQuality90Gate(
   const reasons = [
     buildScoreReason('modeScore', result.modeScore.score),
     buildScoreReason('finalScore', result.finalScore),
-    mode === 'homefeed' ? buildScoreReason('humanlikeScore', result.humanlikeScore.score) : null,
+    HUMANLIKE_90_MODES.has(mode as Mode) ? buildScoreReason('humanlikeScore', result.humanlikeScore.score) : null,
   ].filter((reason): reason is string => Boolean(reason));
 
   const passed = reasons.length === 0;
   const issueLines = [
     ...result.modeScore.issues.slice(0, 3),
-    ...result.humanlikeScore.issues.slice(0, mode === 'homefeed' ? 3 : 1),
+    ...result.humanlikeScore.issues.slice(0, HUMANLIKE_90_MODES.has(mode as Mode) ? 3 : 1),
     ...result.safetyScore.issues.slice(0, 2),
   ];
   const suggestionLines = [
     ...result.modeScore.suggestions.slice(0, 3),
-    ...result.humanlikeScore.suggestions.slice(0, mode === 'homefeed' ? 3 : 1),
+    ...result.humanlikeScore.suggestions.slice(0, HUMANLIKE_90_MODES.has(mode as Mode) ? 3 : 1),
     ...result.safetyScore.suggestions.slice(0, 2),
   ];
 
@@ -64,7 +65,11 @@ export function assessQuality90Gate(
         '반드시 실제 최종 글이 아래 조건을 만족하도록 전체 톤과 구조를 다시 보정하세요.',
         `- ${mode} 모드 점수 ${QUALITY90_TARGET_SCORE}점 이상`,
         `- 종합 점수 ${QUALITY90_TARGET_SCORE}점 이상`,
-        ...(mode === 'homefeed' ? [`- 홈판 사람다움 점수 ${QUALITY90_TARGET_SCORE}점 이상`] : []),
+        ...(HUMANLIKE_90_MODES.has(mode as Mode) ? [`- 사람다움 점수 ${QUALITY90_TARGET_SCORE}점 이상`] : []),
+        ...(mode === 'affiliate' ? [
+          '- 광고 문구처럼 밀어붙이지 말고 친한 사람에게 설명하듯 구체적인 판단 이유, 맞는 사람, 맞지 않는 사람을 함께 제시',
+          '- 제공된 실제 사실과 후기 범위 밖의 직접 사용 경험, 성능 단정, 사회적 반응은 만들지 않기',
+        ] : []),
         '- 독자가 바로 저장하거나 인용할 수 있는 결론, 기준, 예외, 체크리스트, 표/FAQ를 자연스럽게 포함',
         '- AI 보고체, 일반론, 딱딱한 ~다 종결을 줄이고 실제 사람이 설명하는 문장 흐름으로 수정',
         issueLines.length > 0 ? `\n우선 해결할 문제:\n${issueLines.map((issue) => `- ${issue}`).join('\n')}` : '',

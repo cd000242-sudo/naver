@@ -730,7 +730,11 @@ export async function runFullPostCycle(
         effectivePayload = preparedPolicy.payload;
         if (!preparedPolicy.allowed) {
             const reasons = preparedPolicy.reasons.join(',') || 'BLOCK_POLICY_DECISION';
-            const message = `CONTENT_POLICY_BLOCKED:${reasons}`;
+            const unsupportedClaims = preparedPolicy.policyResult.quality_report.unsupported_claims.slice(0, 3);
+            const unsupportedDetail = unsupportedClaims.length > 0
+                ? `\n문제 문장: ${unsupportedClaims.join(' | ')}`
+                : '';
+            const message = `CONTENT_POLICY_BLOCKED:${reasons}${unsupportedDetail}`;
             sendLog(`🛡️ 콘텐츠 정책 차단: ${reasons}`);
             const failure = classifyPublishFailure(message);
             sendStatus({ success: false, message, failureCode: failure.code });

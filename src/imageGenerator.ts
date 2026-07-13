@@ -23,10 +23,14 @@ import {
 
 import { downloadAndSaveImage } from './image/imageUtils.js';
 import { getImageErrorMessage } from './image/imageErrorMessages.js';
+import {
+  deduplicateReferenceImages,
+  extractReferenceImageUrl,
+  selectRepresentativeReferenceImage,
+} from './image/referenceImagePolicy.js';
 import { thumbnailService } from './thumbnailService.js';
 import { AutomationService } from './main/services/AutomationService.js'; // ✅ [2026-01-29 FIX] 중지 체크용
 import * as fs from 'fs/promises';
-import * as path from 'path';
 
 
 // Re-export types for backward compatibility
@@ -85,63 +89,26 @@ export async function abortImageGeneration(): Promise<void> {
 export { resetAllImageState };
 
 const FALLBACK_CONFIRM_MARKER = 'FALLBACK_REQUIRES_CONFIRMATION';
-const HTTP_URL_RE = /^https?:\/\//i;
-
-type ReferenceImageLike = string | {
-  url?: string;
-  thumbnailUrl?: string;
-  filePath?: string;
-  savedToLocal?: string;
-  referenceImageUrl?: string;
-  referenceImagePath?: string;
-  src?: string;
-};
-type ReferenceImageObject = Exclude<ReferenceImageLike, string>;
 
 export function normalizeReferenceImageUrl(value: unknown): string {
-  if (!value) return '';
-  if (typeof value === 'string') {
-    const trimmed = value.trim();
-    return HTTP_URL_RE.test(trimmed) ? trimmed : '';
-  }
-  if (typeof value !== 'object') return '';
-
-  const image = value as ReferenceImageObject;
-  const candidates = [
-    image.referenceImageUrl,
-    image.url,
-    image.filePath,
-    image.thumbnailUrl,
-    image.savedToLocal,
-    image.referenceImagePath,
-    image.src,
-  ];
-
-  for (const candidate of candidates) {
-    const normalized = normalizeReferenceImageUrl(candidate);
-    if (normalized) return normalized;
-  }
-  return '';
+  return extractReferenceImageUrl(value);
 }
 
 function collectReferenceImageUrls(...sources: unknown[]): string[] {
-  const urls: string[] = [];
-  const seen = new Set<string>();
+  const candidates: unknown[] = [];
 
   const add = (value: unknown): void => {
     if (Array.isArray(value)) {
       for (const item of value) add(item);
       return;
     }
-    const url = normalizeReferenceImageUrl(value);
-    if (url && !seen.has(url)) {
-      seen.add(url);
-      urls.push(url);
-    }
+    if (normalizeReferenceImageUrl(value)) candidates.push(value);
   };
 
   for (const source of sources) add(source);
-  return urls;
+  return deduplicateReferenceImages(candidates)
+    .map(extractReferenceImageUrl)
+    .filter(Boolean);
 }
 
 function annotateEngineTrace(
@@ -322,67 +289,6 @@ async function applyKoreanTextOverlayIfNeeded(
   return result;
 }
 
-/**
- * ✅ [2026-03-03] 수집 이미지를 GeneratedImage[] 형태로 변환
- * 쇼핑커넥트에서 비-Gemini 엔진 또는 Gemini 실패 시 수집 이미지를 그대로 사용
- */
-async function convertCollectedImagesToResults(
-  collectedImages: unknown[] | undefined,
-  items: { heading: string }[],
-  postTitle?: string,
-  postId?: string
-): Promise<GeneratedImage[]> {
-  const images = collectedImages || [];
-  if (images.length === 0) {
-    console.warn('[ImageGenerator] ⚠️ 수집 이미지 없음 → 빈 배열 반환');
-    return [];
-  }
-
-  console.log(`[ImageGenerator] 🛒 수집 이미지 ${images.length}개를 블로그 이미지로 변환 중...`);
-
-  const results: GeneratedImage[] = [];
-
-  for (let i = 0; i < Math.min(items.length, images.length); i++) {
-    const imageUrl = normalizeReferenceImageUrl(images[i]);
-    if (!imageUrl) continue;
-
-    try {
-      // 이미지 다운로드
-      const response = await (await import('axios')).default.get(imageUrl, {
-        responseType: 'arraybuffer',
-        timeout: 15000,
-        headers: { 'Referer': 'https://brand.naver.com/' }
-      });
-      const buffer = Buffer.from(response.data);
-
-      if (buffer.length < 1000) {
-        console.warn(`[ImageGenerator] ⚠️ [${i + 1}] 이미지 크기 너무 작음 (${buffer.length}B) → 스킵`);
-        continue;
-      }
-
-      // 파일 저장
-      const savedResult = await (await import('./image/imageUtils.js')).writeImageFile(
-        buffer, 'png', items[i]?.heading || `product-${i + 1}`, postTitle, postId
-      );
-
-      results.push({
-        heading: items[i]?.heading || `제품 이미지 ${i + 1}`,
-        filePath: savedResult.savedToLocal || savedResult.filePath,
-        provider: 'collected' as any,
-        previewDataUrl: savedResult.previewDataUrl,
-        savedToLocal: savedResult.savedToLocal
-      });
-
-      console.log(`[ImageGenerator] ✅ [${i + 1}/${items.length}] 수집 이미지 저장 완료`);
-    } catch (err: any) {
-      console.warn(`[ImageGenerator] ⚠️ [${i + 1}] 수집 이미지 다운로드 실패: ${err.message}`);
-    }
-  }
-
-  console.log(`[ImageGenerator] 📊 수집 이미지 변환 완료: ${results.length}/${items.length}개`);
-  return results;
-}
-
 export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   openaiApiKey?: string;
   geminiApiKey?: string; // ✅ Gemini 키
@@ -446,13 +352,26 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   assertProviderFn(normalizedProvider as ImageProvider);
 
   // ✅ [2026-01-28] 크롤링 이미지가 있으면 각 item에 분배 (img2img 활성화)
+  const uniqueCollectedImages = deduplicateReferenceImages(options.collectedImages || []);
   const crawledImages = collectReferenceImageUrls(
     options.crawledImages || [],
-    options.collectedImages || [],
+    uniqueCollectedImages,
     options.referenceImagePath,
   );
+  const representativeCandidate = selectRepresentativeReferenceImage([
+    ...uniqueCollectedImages,
+    ...(options.crawledImages || []),
+    options.referenceImagePath,
+  ]);
+  const representativeReferenceUrl = normalizeReferenceImageUrl(representativeCandidate) || crawledImages[0] || '';
+  const orderedCollectedImages = representativeCandidate
+    ? [
+        representativeCandidate,
+        ...uniqueCollectedImages.filter(image => image !== representativeCandidate),
+      ]
+    : uniqueCollectedImages;
   if (crawledImages.length > 0) {
-    console.log(`[이미지생성] 🖼️ 대표/수집 이미지 ${crawledImages.length}개 감지 → img2img reference 활성화`);
+    console.log(`[이미지생성] 🖼️ 중복 제거 후 참조 이미지 ${crawledImages.length}개 감지 → 대표 이미지 1장 기반 img2img 활성화`);
   }
 
   const items = options.items
@@ -467,15 +386,15 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       // ✅ [2026-01-28] 크롤링 이미지를 referenceImageUrl에 할당 (img2img 활성화)
       referenceImageUrl: normalizeReferenceImageUrl(item.referenceImageUrl)
         || normalizeReferenceImageUrl(item.referenceImagePath)
-        || crawledImages[idx]
+        || (options.isShoppingConnect ? representativeReferenceUrl : crawledImages[idx])
         || crawledImages[0],
       referenceImageList: collectReferenceImageUrls(
         (item as any).referenceImageList,
         item.referenceImageUrl,
         item.referenceImagePath,
-        crawledImages[idx],
-        crawledImages[0],
-      ).slice(0, 4),
+        options.isShoppingConnect ? representativeReferenceUrl : crawledImages[idx],
+        options.isShoppingConnect ? undefined : crawledImages[0],
+      ).slice(0, options.isShoppingConnect ? 1 : 4),
       originalIndex: (item as any).originalIndex, // ✅ [2026-01-24] 원래 인덱스 보존
       // ✅ [2026-02-08] 이미지 스타일/비율 전달 (모든 엔진에서 사용)
       imageStyle: (item as any).imageStyle || (options as any).imageStyle, // ✅ [2026-02-18 FIX] options.imageStyle 폴백 추가 (full-auto에서 per-item에 없음)
@@ -489,6 +408,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   if (items.length === 0) {
     throw new Error('이미지를 생성할 소제목과 프롬프트를 확인해주세요.');
   }
+  if (options.isShoppingConnect && !representativeReferenceUrl) {
+    throw new Error('쇼핑 AI 이미지는 대표 상품 이미지를 레퍼런스로 생성합니다. 수집된 대표 이미지가 없어 원본 대체 없이 중단했습니다.');
+  }
 
   // ✅ [2026-01-29 FIX] 중지 요청 체크 - 이미지 생성 시작 전
   if (AutomationService.isCancelRequested()) {
@@ -496,29 +418,19 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     return [];
   }
 
-  // ✅ [v1.6.3] 쇼핑커넥트 AI 엔진 화이트리스트
+  // 쇼핑 AI 모드는 수집 원본을 결과로 대체하지 않는다. 수집 이미지는 오직
+  // 대표 레퍼런스로만 쓰고, 레퍼런스 생성이 불가능하면 명확히 실패한다.
   // 쇼핑커넥트에서는 img2img 지원 엔진만 제품 이미지를 정확히 재현 가능:
   //   - nano-banana-pro (Gemini img2img, 기본 gemini-3-1-flash = 나노바나나2)
   //   - openai-image (gpt-image-2 = 덕트테이프, image 파라미터로 참조 이미지 주입)
   // 그 외 엔진(Leonardo/DeepInfra/ImageFX 등)은 제품이 변형되므로 수집 이미지 그대로 사용
-  const SC_IMG2IMG_ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image'];
-  if (options.isShoppingConnect && !SC_IMG2IMG_ENGINES.includes(normalizedProvider)) {
-    const reason = `쇼핑커넥트 모드에서 ${displayName}는 제품 외형을 정확히 재현할 수 없어 수집 이미지 대체가 필요합니다.`;
-    if (!shouldUseAutomaticFallback(fallbackPolicy)) {
-      throw createFallbackPolicyError(requestedProvider, 'collected-image', fallbackPolicy, reason);
-    }
-    console.log(`[이미지생성] 🛒 쇼핑커넥트 모드: ${displayName}는 제품 재현 불가 → 수집 이미지 직접 사용 (결과 보장 모드)`);
-    const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
-    if (collectedResults.length === 0) {
-      throw new Error(`[${displayName}] ${reason}\n수집 이미지가 없어 대체 결과를 만들 수 없습니다.`);
-    }
-    const traced = annotateEngineTrace(collectedResults, {
-      requestedProvider,
-      actualProvider: 'collected-image',
-      policy: fallbackPolicy,
-      fallbackReason: reason,
-    });
-    return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(traced, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
+  const SHOPPING_REFERENCE_ENGINES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'openai-image', 'dropshot'];
+  if (options.isShoppingConnect && !SHOPPING_REFERENCE_ENGINES.includes(normalizedProvider)) {
+    throw new Error(
+      `[${displayName}] 쇼핑 AI 이미지는 대표 상품 이미지를 레퍼런스로 생성해야 합니다. `
+      + '현재 엔진은 레퍼런스 생성을 지원하지 않아 원본 이미지를 대신 배치하지 않고 중단했습니다. '
+      + '나노바나나, OpenAI 이미지, 또는 리더스 나노바나나 무제한을 선택해주세요.',
+    );
   }
 
 
@@ -534,7 +446,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         apiKeys?.openaiImageApiKey,
         options.isShoppingConnect || false,
         onImageGenerated,
-        options.collectedImages,
+        orderedCollectedImages as string[],
         undefined,
         apiKeys?.openaiApiKey
       );
@@ -570,7 +482,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         apiKeys?.openaiImageApiKey,
         options.isShoppingConnect || false,
         onImageGenerated,
-        options.collectedImages,
+        orderedCollectedImages as string[],
         // 'dall-e-3' 모델 강제 지정 제거 — 기본 gpt-image-1 사용
         undefined,
         apiKeys?.openaiApiKey
@@ -601,7 +513,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         apiKeys?.leonardoaiApiKey,
         options.isShoppingConnect || false,
         onImageGenerated,  // ✅ [2026-02-27] 실시간 콜백 전달
-        options.collectedImages  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
+        orderedCollectedImages as string[]  // 대표 상품 이미지 후보 (중복 제거됨)
       );
       console.log(`[이미지생성] ✅ Leonardo AI로 ${leonardoImages.length}개 이미지 생성 완료!`);
       return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(annotateEngineTrace(leonardoImages, {
@@ -763,7 +675,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         apiKeys?.deepinfraApiKey,
         options.isShoppingConnect || false, // ✅ [2026-02-12] 쇼핑커넥트 모드 전달
         onImageGenerated,  // ✅ [2026-02-27] 실시간 콜백 전달
-        options.collectedImages  // ✅ [2026-03-03] 수집 이미지 참조 (img2img)
+        orderedCollectedImages as string[]  // 대표 상품 이미지 후보 (중복 제거됨)
       );
       console.log(`[이미지생성] ✅ 딥인프라 FLUX-2로 ${deepinfraImages.length}개 이미지 생성 완료!`);
       // ✅ [2026-01-30 FIX] DeepInfra도 텍스트 오버레이 적용 (한글 텍스트 지원 안함)
@@ -811,7 +723,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.isFullAuto,
         apiKeys?.geminiApiKey,
         options.isShoppingConnect,
-        options.collectedImages,
+        orderedCollectedImages as string[],
         options.stopCheck,
         onImageGenerated,
         (options as any).productData,
@@ -826,22 +738,10 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       }), items);
     } catch (geminiError: any) {
       if (options.isShoppingConnect) {
-        const reason = `Gemini 계열 엔진 실패 후 쇼핑커넥트 수집 이미지 대체가 필요합니다. 원본 오류: ${geminiError.message}`;
-        if (!shouldUseAutomaticFallback(fallbackPolicy)) {
-          throw createFallbackPolicyError(requestedProvider, 'collected-image', fallbackPolicy, reason);
-        }
-        console.warn(`[ImageGenerator] ⚠️ Gemini 실패 → 쇼핑커넥트 수집 이미지로 폴백 (결과 보장 모드): ${geminiError.message}`);
-        const collectedResults = await convertCollectedImagesToResults(options.collectedImages || crawledImages, items, options.postTitle, options.postId);
-        if (collectedResults.length === 0) {
-          throw new Error(`[${modelLabel}] ${reason}\n수집 이미지가 없어 대체 결과를 만들 수 없습니다.`);
-        }
-        const traced = annotateEngineTrace(collectedResults, {
-          requestedProvider,
-          actualProvider: 'collected-image',
-          policy: fallbackPolicy,
-          fallbackReason: reason,
-        });
-        return preserveThumbnailFlags(await applyKoreanTextOverlayIfNeeded(traced, 'collected', options.postTitle, options.thumbnailTextInclude, items), items);
+        throw new Error(
+          `[${modelLabel}] 대표 상품 이미지 기반 AI 생성에 실패했습니다. `
+          + `수집 원본은 대신 배치하지 않았습니다. 원본 오류: ${geminiError.message}`,
+        );
       }
       throw geminiError;
     }
@@ -865,7 +765,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
       options.isFullAuto,
       apiKeys?.geminiApiKey,
       options.isShoppingConnect,
-      options.collectedImages,
+      orderedCollectedImages as string[],
       options.stopCheck,
       onImageGenerated,
       (options as any).productData,

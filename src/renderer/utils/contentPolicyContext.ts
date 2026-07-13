@@ -182,6 +182,8 @@ export function buildRendererContentPolicyContext(
     ...flattenStrings(source.businessInfo),
   ])).filter(Boolean);
   const input: ContentPolicyInput = {
+    input_origin: 'generated',
+    business_facts_applicable: source.contentMode === 'business' || source.contentMode === 'affiliate',
     primary_keyword: primaryKeyword,
     secondary_keywords: keywords.slice(1).length > 0
       ? keywords.slice(1)
