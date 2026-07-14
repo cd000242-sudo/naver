@@ -7,6 +7,28 @@ export function canPublishShoppingConnectQuality(score: number): boolean {
   return Number.isFinite(score) && score >= SHOPPING_CONNECT_PUBLISH_MIN_SCORE;
 }
 
+export interface ShoppingConnectQualityDisposition {
+  readonly passed: boolean;
+  readonly qualityFloorReached: boolean;
+  readonly advisoryAccepted: boolean;
+  readonly targetReached: boolean;
+  readonly nearTargetAccepted: boolean;
+}
+
+export function resolveShoppingConnectQualityDisposition(
+  score: number,
+): ShoppingConnectQualityDisposition {
+  const qualityFloorReached = canPublishShoppingConnectQuality(score);
+  const targetReached = Number.isFinite(score) && score >= SHOPPING_CONNECT_TARGET_SCORE;
+  return {
+    passed: qualityFloorReached,
+    qualityFloorReached,
+    advisoryAccepted: !qualityFloorReached,
+    targetReached,
+    nearTargetAccepted: qualityFloorReached && !targetReached,
+  };
+}
+
 const BANNED_HEADING_PATTERNS = [
   '삶의 질이 달라졌', '삶의 질이 달라졌네요', '삶의 질이 달라졌어요',
   '실제 체감하는 성능 변화', '실제 체감하는 변화', '체감하는 성능 변화',

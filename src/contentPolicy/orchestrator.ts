@@ -7,7 +7,11 @@ import {
   isRecentPostManualReviewReason,
   recentPostManualReviewReasons,
 } from './manualReview.js';
-import { evaluateQuality, passesQualityGate } from './qualityGate.js';
+import {
+  evaluateQuality,
+  passesQualityGate,
+  passesQualitySafetyGate,
+} from './qualityGate.js';
 import { analyzeSearchIntent } from './searchIntentAnalyzer.js';
 import { analyzeSimilarity, hasSourceCopySignal } from './similarityGuard.js';
 import { buildUniquenessPlan } from './topicDiversifier.js';
@@ -365,12 +369,24 @@ export async function runContentPolicyPipeline(
     if (currentIntent.keyword_intent_mismatch || hasSourceCopySignal(similarity)) break;
   }
 
+  const similarityPassed = !hasSourceCopySignal(similarity) && similarity.risk === 'LOW';
+  const qualitySafetyPassed = passesQualitySafetyGate(quality);
+  const qualityBelowTarget = quality.total_score < options.config.quality_gate.pass_score;
   const passed = !currentIntent.keyword_intent_mismatch
-    && !hasSourceCopySignal(similarity)
-    && similarity.risk === 'LOW'
-    && passesQualityGate(quality, options.config);
-  stageTrace.push(trace('SimilarityGuard', passed ? 'PASS' : 'BLOCK', similarity.matched_patterns));
-  stageTrace.push(trace('QualityGate', passed ? 'PASS' : 'BLOCK', quality.fatal_errors));
+    && similarityPassed
+    && qualitySafetyPassed;
+  stageTrace.push(trace(
+    'SimilarityGuard',
+    similarityPassed ? 'PASS' : 'BLOCK',
+    similarity.matched_patterns,
+  ));
+  stageTrace.push(trace(
+    'QualityGate',
+    qualitySafetyPassed ? 'PASS' : 'BLOCK',
+    qualitySafetyPassed && qualityBelowTarget
+      ? ['QUALITY_SCORE_BELOW_TARGET_ACCEPTED']
+      : quality.fatal_errors,
+  ));
 
   if (!passed) {
     const blockReasons = [
@@ -379,7 +395,6 @@ export async function runContentPolicyPipeline(
       ...(hasSourceCopySignal(similarity) ? ['BLOCK_COPIED_SOURCE'] : []),
       ...(similarity.risk !== 'LOW' ? ['BLOCK_EXCESSIVE_SIMILARITY'] : []),
       ...quality.fatal_errors.map((reason) => `BLOCK_${reason.toUpperCase()}`),
-      ...(quality.total_score < options.config.quality_gate.pass_score ? ['BLOCK_QUALITY_SCORE'] : []),
     ];
     stageTrace.push(trace('PublishGuard', 'BLOCK', blockReasons));
     stageTrace.push(trace('ExposureMonitor', 'SKIP', ['NOT_PUBLISHED']));

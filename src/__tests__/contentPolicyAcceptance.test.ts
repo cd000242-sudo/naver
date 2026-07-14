@@ -66,6 +66,42 @@ describe('content policy acceptance cases', () => {
     expect(result.uniqueness_plan.topic_angle).not.toBe('process');
   });
 
+  it('accepts a score-only miss after bounded repair attempts', async () => {
+    const baseConfig = await loadContentPolicy();
+    const config = {
+      ...baseConfig,
+      similarity: {
+        ...baseConfig.similarity,
+        rewrite_limit: 1,
+      },
+      quality_gate: {
+        ...baseConfig.quality_gate,
+        pass_score: 100,
+      },
+    };
+
+    const result = await runContentPolicyPipeline({
+      input: makePolicyInput(),
+      draft: makeGoodDraft({
+        summary: '',
+        faq: [],
+        cta: '',
+      }),
+      config,
+    });
+
+    expect(result.quality_report.total_score).toBeLessThan(config.quality_gate.pass_score);
+    expect(result.quality_report.fatal_errors).toEqual([]);
+    expect(result.rewrite_count).toBe(config.similarity.rewrite_limit);
+    expect(result.decision).toBe('PASS');
+    expect(result.block_reasons).not.toContain('BLOCK_QUALITY_SCORE');
+    expect(result.stage_trace.find((stage) => stage.stage === 'QualityGate')).toEqual({
+      stage: 'QualityGate',
+      status: 'PASS',
+      reasons: ['QUALITY_SCORE_BELOW_TARGET_ACCEPTED'],
+    });
+  });
+
   it('blocks missing facts before draft publication', async () => {
     const input = makePolicyInput({ business_facts: [] });
     const draft = makeGoodDraft({

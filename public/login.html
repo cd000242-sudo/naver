@@ -1199,6 +1199,49 @@
         : FREE_TRIAL_DAILY_PUBLISH_LIMIT;
     }
 
+    const AUTHENTICATION_FAILURE_PATTERNS = [
+      /invalid credentials?|unauthorized|forbidden|wrong password|incorrect password/i,
+      /user (?:was )?not found|user does not exist|account (?:was )?not found/i,
+      /license (?:is )?(?:invalid|expired|not found)|already logged in|device limit/i,
+      /이미\s*사용(?:된|\s*중인)?\s*(?:라이선스\s*)?(?:코드|아이디|계정)/i,
+      /(?:유효하지\s*않|잘못된|만료된).{0,20}(?:라이선스|라이센스|코드)/i,
+      /(?:아이디|비밀번호|계정|사용자).{0,30}(?:올바르지|일치하지|잘못|없습니다|찾을 수 없|잠김|차단|거부)/i,
+      /(?:올바르지|일치하지|잘못|찾을 수 없|잠김|차단|거부).{0,30}(?:아이디|비밀번호|계정|사용자)/i,
+      /(?:인증|로그인|라이선스|세션|기기|접근|등록).{0,30}(?:실패|오류|거부|차단|만료|종료|초과|중복|유효하지|필요)/i,
+      /(?:실패|오류|거부|차단|만료|종료|초과|중복|유효하지).{0,30}(?:인증|로그인|라이선스|세션|기기|접근|등록)/i,
+      /(?:서버|네트워크|연결|응답).{0,30}(?:실패|오류|시간 초과|불안정|없습니다)/i,
+    ];
+
+    function resolveServerAuthenticationError(fallback, ...candidates) {
+      const trustedMessage = candidates
+        .map((candidate) => typeof candidate === 'string' ? candidate.trim() : '')
+        .find((candidate) => candidate && AUTHENTICATION_FAILURE_PATTERNS.some((pattern) => pattern.test(candidate)));
+      return trustedMessage || fallback;
+    }
+
+    const SERVICE_MAINTENANCE_MESSAGE = '현재 서비스 점검 중입니다. 잠시 후 다시 시도해주세요.';
+
+    function isServiceDisabledResponse(response) {
+      return response?.serviceEnabled === false
+        || String(response?.code || '').trim().toUpperCase() === 'SERVICE_DISABLED'
+        || String(response?.error || '').trim().toUpperCase() === 'SERVICE_DISABLED';
+    }
+
+    function resolveLoginAuthenticationResultError(result, rawResponse, fallback) {
+      if (isServiceDisabledResponse(result)
+        || isServiceDisabledResponse(rawResponse)
+        || String(result?.message || '').trim() === SERVICE_MAINTENANCE_MESSAGE) {
+        return SERVICE_MAINTENANCE_MESSAGE;
+      }
+
+      return resolveServerAuthenticationError(
+        fallback,
+        result?.message,
+        rawResponse?.error,
+        rawResponse?.message,
+      );
+    }
+
     let deviceId = '';
 
     // 기기 ID 가져오기
@@ -1339,31 +1382,21 @@
               }
             }
 
-            // ✅ 실제 서버 응답 확인: debugInfo.verify.fullResponse에서 체크
+            // 원본 응답은 진단에만 사용하고, 성공 여부는 메인 프로세스의 정규화 결과를 따른다.
             const verifyResponse = result?.debugInfo?.verify?.fullResponse;
 
-            // 서버 응답의 ok와 valid를 반드시 확인
-            if (verifyResponse && verifyResponse.ok !== false && verifyResponse.valid !== false) {
+            if (result?.valid === true) {
               // 자동 로그인 성공
-              console.log('[Login] ✅ 자동 로그인 성공 - verifyResponse.ok:', verifyResponse.ok, 'verifyResponse.valid:', verifyResponse.valid);
+              console.log('[Login] ✅ 자동 로그인 성공');
               await ipcRenderer.invoke('login:success');
               window.close();
             } else {
               // 자동 로그인 실패
-              let errorMessage = '자동 로그인에 실패했습니다. 다시 로그인해주세요.';
-
-              if (verifyResponse) {
-                if (verifyResponse.ok === false) {
-                  errorMessage = verifyResponse.error || verifyResponse.message || '서버에서 인증을 거부했습니다.';
-                  console.error('[Login] ❌ 자동 로그인 서버 거부:', errorMessage);
-                } else if (verifyResponse.valid === false) {
-                  errorMessage = verifyResponse.message || verifyResponse.error || '인증에 실패했습니다.';
-                  console.error('[Login] ❌ 자동 로그인 인증 실패:', errorMessage);
-                }
-              } else if (!result.valid) {
-                errorMessage = result.message || '자동 로그인에 실패했습니다. 다시 로그인해주세요.';
-                console.error('[Login] ❌ 자동 로그인 실패 - result.valid:', result.valid, 'result.message:', result.message);
-              }
+              const errorMessage = resolveLoginAuthenticationResultError(
+                result,
+                verifyResponse,
+                '자동 로그인에 실패했습니다. 다시 로그인해주세요.',
+              );
 
               console.log('[Login] ❌ 자동 로그인 실패:', errorMessage);
               showError(errorMessage);
@@ -1813,13 +1846,12 @@
             }
           }
 
-          // ✅ 실제 서버 응답 확인: debugInfo.verify.fullResponse에서 체크
+          // 원본 응답은 진단에만 사용하고, 성공 여부는 메인 프로세스의 정규화 결과를 따른다.
           const verifyResponse = result?.debugInfo?.verify?.fullResponse;
 
-          // 재인증 모드에서는 verifyResponse의 ok와 valid를 확인
-          if (verifyResponse && verifyResponse.ok !== false && verifyResponse.valid !== false) {
+          if (result?.valid === true) {
             // 재인증 성공
-            console.log('[Login] ✅ 재인증 성공 - verifyResponse.ok:', verifyResponse.ok, 'verifyResponse.valid:', verifyResponse.valid);
+            console.log('[Login] ✅ 재인증 성공');
 
             // 기억하기 체크박스가 체크되어 있으면 저장
             if (rememberCheckbox?.checked) {
@@ -1853,20 +1885,12 @@
             return;
           } else {
             // ❌ 재인증 실패
-            let errorMessage = '아이디 또는 비밀번호가 올바르지 않습니다.';
-
-            if (verifyResponse) {
-              if (verifyResponse.ok === false) {
-                errorMessage = verifyResponse.error || verifyResponse.message || '서버에서 인증을 거부했습니다.';
-                console.error('[Login] ❌ 서버 거부:', errorMessage);
-              } else if (verifyResponse.valid === false) {
-                errorMessage = verifyResponse.message || verifyResponse.error || '인증에 실패했습니다.';
-                console.error('[Login] ❌ 인증 실패:', errorMessage);
-              }
-            } else if (!result.valid) {
-              errorMessage = result.message || '아이디 또는 비밀번호가 올바르지 않습니다.';
-              console.error('[Login] ❌ 재인증 실패 - result.valid:', result.valid, 'result.message:', result.message);
-            }
+            const errorMessage = resolveLoginAuthenticationResultError(
+              result,
+              verifyResponse,
+              '아이디 또는 비밀번호가 올바르지 않습니다.',
+            );
+            console.error('[Login] ❌ 재인증 실패 - result.valid:', result?.valid, 'message:', errorMessage);
 
             showError(errorMessage);
             if (loginButton) {
@@ -1949,12 +1973,9 @@
           console.log('🔍 [licenseManager] ========================================');
         }
 
-        // ✅ 초기 인증 모드: 실제 서버 응답 확인
-        // [수정] 지나치게 엄격한 체크(registerResponse.ok === true) 대신 
-        // 메인 프로세스에서 최종 판정한 result.valid 또는 
-        // 서버의 명시적 거부(ok === false)가 아닌 경우를 성공으로 간주
+        // 원본 응답은 진단/표시 정보에만 사용하고, 성공 여부는 메인 프로세스의 정규화 결과를 따른다.
         const registerResponse = result?.debugInfo?.register?.fullResponse;
-        const isActuallyValid = result?.valid === true || (registerResponse && registerResponse.ok !== false && registerResponse.valid !== false);
+        const isActuallyValid = result?.valid === true;
 
         if (isActuallyValid) {
           // 인증 성공 - 축하 메시지 표시
@@ -2041,12 +2062,15 @@
           }, 3500); // 3.5초 후 이동
         } else {
           // ❌ 에러 처리: 등록 실패
-          let errorMessage = '라이선스 등록에 실패했습니다.';
+          let errorMessage = resolveLoginAuthenticationResultError(
+            result,
+            registerResponse,
+            '라이선스 등록에 실패했습니다.',
+          );
 
           if (registerResponse) {
             if (registerResponse.ok === false) {
               // 서버가 명시적으로 거부한 경우 (used 상태가 저장되지 않음)
-              errorMessage = registerResponse.error || registerResponse.message || '서버에서 등록을 거부했습니다.';
               console.error('[Login] ❌ 서버 거부 (등록되지 않음, used 상태 저장 안 됨):', errorMessage);
               console.error('[Login] ❌ debugInfo.register.fullResponse:', JSON.stringify(registerResponse, null, 2));
 
@@ -2061,7 +2085,6 @@
               }
             } else if (registerResponse.valid === false) {
               // 인증 실패
-              errorMessage = registerResponse.message || registerResponse.error || '인증에 실패했습니다.';
               console.error('[Login] ❌ 인증 실패:', errorMessage);
               console.error('[Login] ❌ debugInfo.register.fullResponse:', JSON.stringify(registerResponse, null, 2));
             } else {
@@ -2072,7 +2095,6 @@
             }
           } else {
             // registerResponse가 없는 경우 (debugInfo가 없거나 register 정보가 없는 경우)
-            errorMessage = '서버 연결에 일시적인 문제가 발생했습니다. 잠시 후 다시 시도해주세요.';
             console.error('[Login] ❌ 인증 실패 - registerResponse가 없음');
             console.error('[Login] ❌ result:', result);
             console.error('[Login] ❌ result.debugInfo:', result?.debugInfo);

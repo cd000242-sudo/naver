@@ -2,6 +2,7 @@ import { app, BrowserWindow } from 'electron';
 import fs from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
+import { resolveAuthenticationFailureMessage } from './auth/authFailureMessagePolicy.js';
 
 /**
  * 영어 에러 메시지를 한글로 변환하는 유틸리티 함수
@@ -151,10 +152,7 @@ function isMaintenanceResponse(result: any): boolean {
 }
 
 function getServerErrorMessage(result: any, fallback: string): string {
-  if (isMaintenanceResponse(result)) {
-    return result?.message || result?.notice || '현재 서비스 점검 중입니다. 잠시 후 다시 시도해주세요.';
-  }
-  return result?.message || result?.error || fallback;
+  return resolveAuthenticationFailureMessage(result, fallback);
 }
 
 // ✅ [v2.10.274] TTL + write-guard state for revalidateLicense
@@ -657,14 +655,15 @@ export async function registerLicense(
       }
 
       // 초기 등록 시 만료일 정보가 없을 수 있음 (서버에서 등록 시점부터 계산)
-      const errorMsg = result.error || result.message || '';
-      const isExpiresAtMissing = errorMsg && (
-        errorMsg.includes('만료일') && errorMsg.includes('없') ||
-        errorMsg.toLowerCase().includes('expires') && (errorMsg.toLowerCase().includes('missing') || errorMsg.toLowerCase().includes('no'))
+      const rawErrorMsg = result.error || result.message || '';
+      const isExpiresAtMissing = rawErrorMsg && (
+        rawErrorMsg.includes('만료일') && rawErrorMsg.includes('없') ||
+        rawErrorMsg.toLowerCase().includes('expires') && (rawErrorMsg.toLowerCase().includes('missing') || rawErrorMsg.toLowerCase().includes('no'))
       );
 
       // 만료일 정보가 없다는 메시지만 있고, 실제로 등록은 성공한 경우 (초기 등록 시나리오)
-      if (!result.ok && result.ok !== undefined && !isExpiresAtMissing) {
+      if ((result.ok === false || result.valid === false) && !isExpiresAtMissing) {
+        const errorMsg = resolveAuthenticationFailureMessage(result, '라이선스 등록에 실패했습니다. 입력 정보를 확인해주세요.');
         const translatedMsg = translateErrorMessage(typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
         console.error('[LicenseManager] 서버 오류:', errorMsg);
         console.error('[LicenseManager] 서버 응답 전체:', JSON.stringify(result, null, 2));
@@ -818,7 +817,7 @@ export async function verifyLicenseWithCredentials(
         };
       }
 
-      if (!result.ok && result.ok !== undefined) {
+      if (result.ok === false || result.valid === false) {
         // ★ 중복 로그인 차단 에러 처리
         if (result.code === 'ALREADY_LOGGED_IN') {
           console.warn('[LicenseManager] 중복 로그인 차단:', result.error);
@@ -1114,7 +1113,7 @@ export async function verifyLicense(
       console.log('🔍 [licenseManager] ========================================');
 
       // Apps Script 응답 형식에 맞게 처리
-      if (!result.ok && result.ok !== undefined) {
+      if (result.ok === false || result.valid === false) {
         const errorMsg = getServerErrorMessage(result, '라이선스 코드가 유효하지 않습니다.');
         const translatedMsg = translateErrorMessage(typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
         return {

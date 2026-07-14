@@ -4,6 +4,7 @@ import {
   detectBannedHeadingPatterns,
   SHOPPING_CONNECT_PUBLISH_MIN_SCORE,
   SHOPPING_CONNECT_TARGET_SCORE,
+  resolveShoppingConnectQualityDisposition,
   validateShoppingConnectContent,
 } from '../contentShoppingConnectValidation.js';
 
@@ -13,6 +14,24 @@ describe('contentShoppingConnectValidation', () => {
     expect(SHOPPING_CONNECT_PUBLISH_MIN_SCORE).toBe(80);
     expect(canPublishShoppingConnectQuality(83)).toBe(true);
     expect(canPublishShoppingConnectQuality(79)).toBe(false);
+  });
+
+  it('records below-floor results as advisory acceptance instead of a quality pass', () => {
+    expect(resolveShoppingConnectQualityDisposition(79)).toEqual({
+      passed: false,
+      qualityFloorReached: false,
+      advisoryAccepted: true,
+      targetReached: false,
+      nearTargetAccepted: false,
+    });
+
+    expect(resolveShoppingConnectQualityDisposition(83)).toEqual({
+      passed: true,
+      qualityFloorReached: true,
+      advisoryAccepted: false,
+      targetReached: false,
+      nearTargetAccepted: true,
+    });
   });
 
   it('uses the active generation threshold and visible body text for length scoring', () => {

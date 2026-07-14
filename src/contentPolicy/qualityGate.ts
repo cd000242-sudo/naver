@@ -301,3 +301,7 @@ export function passesQualityGate(report: QualityReport, config: ContentPolicyCo
   return report.fatal_errors.length === 0
     && report.total_score >= config.quality_gate.pass_score;
 }
+
+export function passesQualitySafetyGate(report: QualityReport): boolean {
+  return report.fatal_errors.length === 0;
+}

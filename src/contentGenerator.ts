@@ -57,7 +57,9 @@ import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGu
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
 import {
   assessQuality90Gate,
+  getCriticalQuality90SafetyReasons,
   isQuality90Mode,
+  resolveFinalQuality90Disposition,
 } from './content/quality90Gate.js';
 import {
   auditAffiliateAuthenticity,
@@ -199,8 +201,8 @@ import {
 import { ProviderRequestGate } from './contentProviderRequestGate.js';
 import { optimizeForViral } from './contentViralOptimizer.js';
 import {
-  canPublishShoppingConnectQuality,
   detectBannedHeadingPatterns as detectBannedHeadingPatternsImpl,
+  resolveShoppingConnectQualityDisposition,
   SHOPPING_CONNECT_PUBLISH_MIN_SCORE,
   SHOPPING_CONNECT_TARGET_SCORE,
   validateShoppingConnectContent as validateShoppingConnectContentImpl,
@@ -6317,15 +6319,29 @@ export async function generateStructuredContent(
         }
 
         if (_quality90Assessment?.miss && attempt === MAX_ATTEMPTS) {
-          if (optimized.quality) {
-            optimized.quality.warnings = [
-              ...(optimized.quality.warnings || []),
-              `QualityGate90 publication floor still missed after bounded retries: ${_quality90Assessment.blockingReasons.join(', ')}`,
-            ];
+          const quality90FinalDisposition = resolveFinalQuality90Disposition(_quality90Assessment);
+          const criticalSafetyReasons = getCriticalQuality90SafetyReasons(_quality90Assessment);
+          if (quality90FinalDisposition === 'BLOCK_SAFETY') {
+            throw new Error(
+              `[CONTENT_SAFETY_BLOCKED] 근거 검증이 필요한 안전 신호가 남아 발행을 중단했습니다: ${criticalSafetyReasons.join(', ')}`,
+            );
           }
-          throw new Error(
-            `[QUALITY_TARGET_NOT_MET] 자동 발행 하한을 충족하지 못해 발행을 중단했습니다. `
-            + `미달 항목: ${_quality90Assessment.blockingReasons.join(', ')}`,
+          const quality90AdvisoryAccepted = quality90FinalDisposition === 'ADVISORY';
+          if (optimized.quality) {
+            optimized.quality = {
+              ...optimized.quality,
+              warnings: [
+                ...(optimized.quality.warnings || []),
+                `QualityGate90 target still missed after bounded retries: ${_quality90Assessment.blockingReasons.join(', ')}`,
+              ],
+            };
+            (optimized.quality as any).qualityGate = {
+              ...((optimized.quality as any).qualityGate || {}),
+              quality90AdvisoryAccepted,
+            };
+          }
+          console.warn(
+            `[QualityGate90] 보정 횟수를 모두 사용해 경고와 함께 다음 안전검사로 진행: ${_quality90Assessment.blockingReasons.join(', ')}`,
           );
         }
 
@@ -6432,9 +6448,14 @@ export async function generateStructuredContent(
             continue;
           }
 
-          if (authenticity.score < 85) {
+          if (authenticity.hardFail) {
             const reasons = authenticity.issues.map(issue => issue.message).join(' / ');
-            throw new Error(`쇼핑커넥트 진정성 검수 미통과(${authenticity.score}/100). 자동 발행을 중단했습니다: ${reasons}`);
+            throw new Error(`[CONTENT_SAFETY_BLOCKED] 쇼핑커넥트 근거 검수 미통과: ${reasons}`);
+          }
+
+          const affiliateAuthenticityAdvisoryAccepted = authenticity.score < 85;
+          if (affiliateAuthenticityAdvisoryAccepted) {
+            console.warn(`[Shopping Authenticity] 보정 후 ${authenticity.score}/100 결과를 경고와 함께 다음 안전검사로 진행`);
           }
 
           if (!optimized.quality) {
@@ -6451,11 +6472,13 @@ export async function generateStructuredContent(
             score: authenticity.score,
             evidenceMode,
             hardFail: authenticity.hardFail,
+            advisoryAccepted: affiliateAuthenticityAdvisoryAccepted,
           };
-          console.log(`[Shopping Authenticity] 통과: ${authenticity.score}/100 (${evidenceMode})`);
+          console.log(`[Shopping Authenticity] 검수 완료: ${authenticity.score}/100 (${evidenceMode})`);
 
           const validation = validateShoppingConnectContent(optimized, validationMinChars);
-          const shoppingQualityPublishable = canPublishShoppingConnectQuality(validation.score);
+          const shoppingQualityDisposition = resolveShoppingConnectQualityDisposition(validation.score);
+          const shoppingQualityPublishable = shoppingQualityDisposition.qualityFloorReached;
           if (!shoppingQualityPublishable && !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS) {
             _shoppingValidationRetryUsed = true;
             const corrections = validation.feedback
@@ -6465,22 +6488,20 @@ export async function generateStructuredContent(
             console.warn(`[Shopping Connect] 품질 ${validation.score}/100 — 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점 이상을 위해 전체 재작성`);
             continue;
           }
-          if (!shoppingQualityPublishable) {
-            throw new Error(
-              `[QUALITY_TARGET_NOT_MET] 쇼핑커넥트 품질이 ${validation.score}/100으로 안전 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점에 미달해 자동 발행을 중단했습니다. `
-              + validation.feedback.filter(message => message.startsWith('❌') || message.startsWith('⚠️')).join(' / '),
+          const shoppingQualityAdvisoryAccepted = shoppingQualityDisposition.advisoryAccepted;
+          if (shoppingQualityAdvisoryAccepted) {
+            console.warn(
+              `[Shopping Connect] 보정 횟수를 모두 사용해 품질 ${validation.score}/100 결과를 경고와 함께 다음 안전검사로 진행`,
             );
           }
           if (optimized.quality) {
             (optimized.quality as any).shoppingValidation = {
               score: validation.score,
-              passed: true,
-              targetReached: validation.score >= SHOPPING_CONNECT_TARGET_SCORE,
-              nearTargetAccepted: validation.score < SHOPPING_CONNECT_TARGET_SCORE,
+              ...shoppingQualityDisposition,
               feedback: validation.feedback,
             };
           }
-          if (validation.score < SHOPPING_CONNECT_TARGET_SCORE) {
+          if (shoppingQualityDisposition.nearTargetAccepted) {
             console.warn(`[Shopping Connect] 90점 목표 근접 통과: ${validation.score}/100 (발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE})`);
           }
           if (validation.score < 100) {
@@ -6535,9 +6556,8 @@ export async function generateStructuredContent(
             console.warn(`[QualityGate90] ${lastFailReason} — 짧은 결과를 반환하지 않고 재작성`);
             continue;
           }
-          throw new Error(
-            `[QUALITY_TARGET_NOT_MET] 90점 품질 검사를 실행할 최소 분량에 미달해 자동 발행을 중단했습니다. `
-            + `현재 ${plainLength}자 / 최소 ${validationMinChars}자`,
+          console.warn(
+            `[QualityGate90] 권장 분량 미달 결과를 경고와 함께 반환: ${plainLength}자 / 권장 ${validationMinChars}자`,
           );
         }
         console.warn(`[ContentGenerator] 글자수 경고: ${plainLength}자 (목표: ${minChars}자, ${Math.round((plainLength / minChars) * 100)}%)`);
@@ -6583,9 +6603,8 @@ export async function generateStructuredContent(
       // 60% 미만일 때만 재시도
       if (attempt === MAX_ATTEMPTS) {
         if (isQuality90Mode(generationQualityMode)) {
-          throw new Error(
-            `[QUALITY_TARGET_NOT_MET] 본문이 ${plainLength}자로 너무 짧아 90점 품질 기준을 검증할 수 없습니다. `
-            + `최소 ${validationMinChars}자 이상으로 다시 생성해주세요.`,
+          console.warn(
+            `[QualityGate90] 권장 분량 미달 결과를 경고와 함께 반환: ${plainLength}자 / 권장 ${validationMinChars}자`,
           );
         }
         // ✅ [2026-03-23 FIX] 최종 시도에서는 글자수에 관계없이 항상 경고 후 통과

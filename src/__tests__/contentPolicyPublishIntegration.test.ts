@@ -173,6 +173,42 @@ describe('content policy publish integration', () => {
     ['multi_account', false],
     ['legacy_form', false],
     ['app_scheduler', false],
+    ['smart_scheduler', false],
+    ['semi_auto', true],
+  ] as const)(
+    'does not hard-block a score-only quality miss in the %s flow',
+    async (publishFlow, semiAutoMode) => {
+      const payload = payloadWithContext();
+      payload._publishFlow = publishFlow;
+      payload._semiAutoMode = semiAutoMode;
+      payload.structuredContent = {
+        ...payload.structuredContent,
+        summary: '',
+        headings: [],
+        faq: [],
+        cta: '',
+      };
+
+      const result = await prepareContentPolicyForPublish(payload, {
+        userDataPath: await tempDir(),
+        env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+        now: new Date('2026-02-01T12:00:00.000Z'),
+      });
+
+      expect(result.policyResult.quality_report.total_score).toBeLessThan(85);
+      expect(result.policyResult.quality_report.fatal_errors).toEqual([]);
+      expect(result.policyResult.block_reasons).not.toContain('BLOCK_QUALITY_SCORE');
+      expect(result.policyResult.decision).toBe('PASS');
+      expect(result.allowed).toBe(true);
+    },
+  );
+
+  it.each([
+    ['full_auto', false],
+    ['continuous', false],
+    ['multi_account', false],
+    ['legacy_form', false],
+    ['app_scheduler', false],
     ['semi_auto', true],
   ] as const)('blocks a genuinely unrelated final title and body for %s', async (publishFlow, semiAutoMode) => {
     const payload = payloadWithContext();

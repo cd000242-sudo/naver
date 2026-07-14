@@ -41,15 +41,30 @@ describe('contentGenerator QualityGate90 wiring', () => {
     expect(source).toContain('_quality90Assessment?.miss');
     expect(source).toContain('!_quality90FollowupRetryUsed');
     expect(source).toContain('patch 후에도 90점 미달');
-    expect(source).toContain('QualityGate90 publication floor still missed after bounded retries');
+    expect(source).toContain('QualityGate90 target still missed after bounded retries');
   });
 
-  it('uses the centralized gate result and blocks only publication-floor misses after bounded repair', () => {
-    expect(source).toContain('QUALITY_TARGET_NOT_MET');
+  it('uses the centralized gate result without hard-blocking score-only misses after bounded repair', () => {
+    expect(source).not.toContain('QUALITY_TARGET_NOT_MET');
     expect(source).toContain('_quality90Assessment?.miss && attempt === MAX_ATTEMPTS');
     expect(source).not.toContain('canAcceptQuality90Fallback(_gateResult, _modeForGate)');
     expect(source).not.toMatch(/modeScore(?:\.score)?\s*<\s*75/);
     expect(source).toContain('_quality90Assessment.blockingReasons.join');
-    expect(source).toContain('자동 발행 하한을 충족하지 못해 발행을 중단했습니다');
+    expect(source).toContain("quality90AdvisoryAccepted = quality90FinalDisposition === 'ADVISORY'");
+    expect(source).toContain('보정 횟수를 모두 사용해 경고와 함께 다음 안전검사로 진행');
+    expect(source).not.toContain('자동 발행 하한을 충족하지 못해 발행을 중단했습니다');
+  });
+
+  it('keeps shopping score and final length misses advisory after bounded retries', () => {
+    expect(source).toContain('shoppingQualityAdvisoryAccepted = shoppingQualityDisposition.advisoryAccepted');
+    expect(source).toContain('affiliateAuthenticityAdvisoryAccepted = authenticity.score < 85');
+    expect(source).toContain('if (authenticity.hardFail)');
+    expect(source).toContain('권장 분량 미달 결과를 경고와 함께 반환');
+    expect(source).not.toContain('90점 품질 검사를 실행할 최소 분량에 미달해 자동 발행을 중단했습니다');
+  });
+
+  it('keeps evidence-backed safety failures blocking after score-only misses become advisory', () => {
+    expect(source).toContain('getCriticalQuality90SafetyReasons,');
+    expect(source).toContain('[CONTENT_SAFETY_BLOCKED]');
   });
 });

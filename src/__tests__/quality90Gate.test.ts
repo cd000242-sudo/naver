@@ -2,10 +2,12 @@ import { describe, expect, it } from 'vitest';
 import {
   assessQuality90Gate,
   canAcceptQuality90Fallback,
+  getCriticalQuality90SafetyReasons,
   isQuality90Mode,
   QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE,
   QUALITY90_FALLBACK_MIN_MODE_SCORE,
   QUALITY90_TARGET_SCORE,
+  resolveFinalQuality90Disposition,
 } from '../content/quality90Gate';
 import type { EvaluationResult, SubScore } from '../content/qualityEvaluator';
 
@@ -130,6 +132,8 @@ describe('quality90Gate', () => {
       miss: true,
     });
     expect(result.blockingReasons).toContain('publication criticalSafety HALLUCINATION_SIGNAL');
+    expect(getCriticalQuality90SafetyReasons(result)).toEqual(['HALLUCINATION_SIGNAL']);
+    expect(resolveFinalQuality90Disposition(result)).toBe('BLOCK_SAFETY');
   });
 
   it.each(['seo', 'homefeed', 'mate', 'affiliate'] as const)(
@@ -153,8 +157,22 @@ describe('quality90Gate', () => {
         blockingReasons: [],
         directive: '',
       });
+      expect(getCriticalQuality90SafetyReasons(result)).toEqual([]);
     },
   );
+
+  it('treats a score-only final miss as advisory after bounded repair', () => {
+    const result = assessQuality90Gate(evaluation({
+      modeScore: subScore(68),
+      finalScore: 72,
+      safetyScore: subScore(95),
+      decision: 'patch',
+    }), 'seo');
+
+    expect(result.miss).toBe(true);
+    expect(getCriticalQuality90SafetyReasons(result)).toEqual([]);
+    expect(resolveFinalQuality90Disposition(result)).toBe('ADVISORY');
+  });
 
   it.each(['seo', 'homefeed', 'mate', 'affiliate'] as const)(
     'keeps blocking content below the tolerated publication floor for %s mode',

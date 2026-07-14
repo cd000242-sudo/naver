@@ -47,6 +47,27 @@ export interface Quality90GateAssessment {
   readonly directive: string;
 }
 
+const CRITICAL_SAFETY_PREFIX = 'publication criticalSafety ';
+
+export function getCriticalQuality90SafetyReasons(
+  assessment: Pick<Quality90GateAssessment, 'blockingReasons'>,
+): readonly string[] {
+  return assessment.blockingReasons
+    .filter(reason => reason.startsWith(CRITICAL_SAFETY_PREFIX))
+    .map(reason => reason.slice(CRITICAL_SAFETY_PREFIX.length));
+}
+
+export type FinalQuality90Disposition = 'PASS' | 'ADVISORY' | 'BLOCK_SAFETY';
+
+export function resolveFinalQuality90Disposition(
+  assessment: Pick<Quality90GateAssessment, 'miss' | 'blockingReasons'>,
+): FinalQuality90Disposition {
+  if (!assessment.miss) return 'PASS';
+  return getCriticalQuality90SafetyReasons(assessment).length > 0
+    ? 'BLOCK_SAFETY'
+    : 'ADVISORY';
+}
+
 export function isQuality90Mode(mode: string): mode is Extract<Mode, 'seo' | 'homefeed' | 'mate' | 'affiliate'> {
   return QUALITY90_MODES.has(mode as Mode);
 }
