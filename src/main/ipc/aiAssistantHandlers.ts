@@ -9,6 +9,10 @@ import { ipcMain } from 'electron';
 import { masterAgent } from '../../agents/masterAgent.js';
 import { getWelcomeMessage } from '../../agents/persona.js';
 import { loadConfig, applyConfigToEnv, saveConfig } from '../../configManager.js';
+import {
+    GEMINI_TEXT_MODELS,
+    normalizeGeminiTextModelId,
+} from '../../runtime/modelRegistry.js';
 
 /**
  * aiAssistant:* 4개 IPC 일괄 등록.
@@ -63,49 +67,20 @@ export function registerAiAssistantHandlers(): void {
             const config = await loadConfig() as any;
             let configChanged = false;
 
-            // 1. Gemini 모델 수정 - ✅ [2026-04-09] Stable 모델만 사용
-            const validModels = [
-                'gemini-2.5-flash',
-                'gemini-2.5-flash-lite',
-                'gemini-2.5-pro',
-            ];
-
-            // 죽은/차단된 모델은 품질·속도 균형이 가장 무난한 Flash로 마이그레이션
-            const modelMigrationMap: Record<string, string> = {
-                'gemini-3-pro': 'gemini-2.5-flash',
-                'gemini-3-flash': 'gemini-2.5-flash',
-                'gemini-3-pro-preview': 'gemini-2.5-flash',
-                'gemini-3-flash-preview': 'gemini-2.5-flash',
-                'gemini-3.1-pro-preview': 'gemini-2.5-flash',
-                'gemini-3.1-flash-preview': 'gemini-2.5-flash',
-                'gemini-2.5-pro-preview': 'gemini-2.5-flash',
-                'gemini-2.0-flash': 'gemini-2.5-flash',
-                'gemini-2.0-flash-exp': 'gemini-2.5-flash',
-                'gemini-1.5-flash': 'gemini-2.5-flash',
-                'gemini-1.5-flash-latest': 'gemini-2.5-flash',
-                'gemini-1.5-pro': 'gemini-2.5-flash',
-                'gemini-1.5-pro-latest': 'gemini-2.5-flash',
-                'gemini-1.5-flash-8b': 'gemini-2.5-flash',
-            };
-
-            // 저장된 모델이 마이그레이션 대상인 경우 자동 변환
-            if (config.geminiModel && modelMigrationMap[config.geminiModel]) {
+            // 1. Upgrade saved text models through the registry SSOT.
+            if (config.geminiModel) {
                 const oldModel = config.geminiModel;
-                config.geminiModel = modelMigrationMap[config.geminiModel];
-                configChanged = true;
-                fixResults.push({ action: 'Gemini 모델 마이그레이션', success: true, message: `${oldModel} → ${config.geminiModel}로 자동 변환됨` });
-            }
-
-            if (config.geminiModel && !validModels.includes(config.geminiModel)) {
-                config.geminiModel = 'gemini-2.5-flash';
-                configChanged = true;
-                fixResults.push({ action: 'Gemini 모델', success: true, message: '권장 모델(gemini-2.5-flash)로 변경됨' });
+                config.geminiModel = normalizeGeminiTextModelId(oldModel);
+                if (oldModel !== config.geminiModel) {
+                    configChanged = true;
+                    fixResults.push({ action: 'Gemini 모델 마이그레이션', success: true, message: `${oldModel} → ${config.geminiModel}로 자동 변환됨` });
+                }
             }
 
             if (!config.geminiModel) {
-                config.geminiModel = 'gemini-2.5-flash';
+                config.geminiModel = GEMINI_TEXT_MODELS.FLASH;
                 configChanged = true;
-                fixResults.push({ action: 'Gemini 모델 설정', success: true, message: '기본 모델 설정됨 (Flash)' });
+                fixResults.push({ action: 'Gemini 모델 설정', success: true, message: `기본 모델 설정됨 (${GEMINI_TEXT_MODELS.FLASH})` });
             }
 
             // 설정 저장

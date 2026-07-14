@@ -2,10 +2,10 @@
  * v1.4.81 비용표/환경설정 현대화 회귀 방지
  *
  * 검증 대상:
- *  1. 환경설정 라디오 버튼 현행 모델만 노출 (Haiku 4.5 / Opus 4.7 / ₩210)
+ *  1. 환경설정 라디오 버튼 현행 모델만 노출 (Haiku 4.5 / Sonnet 5 / Fable 5)
  *  2. 비용표 모달 이미지 엔진 소개에 Flow/ImageFX 무료 엔진 포함
  *  3. FAQ/가이드 모달에 Deprecated 엔진 이름(DALL-E 3 / Stability AI 단독) 미노출
- *  4. Gemini 2.5 Flash 무료 쿼터 3곳(드롭다운 2개 + 비용표 1개) 숫자 통일 (250/일)
+ *  4. Gemini 최신 모델과 프로젝트별 동적 한도 안내 일치
  *  5. 이미지 소스 드롭다운에 Flow 옵션 존재
  */
 import { describe, it, expect } from 'vitest';
@@ -29,14 +29,13 @@ describe('v1.4.81 — 비용표·환경설정 현대화', () => {
       expect(html).not.toMatch(/<span>💜 Claude Haiku 3\.5<\/span>/);
     });
 
-    it('Claude Opus 4.7 라벨 존재 (4.6 폐기)', () => {
-      expect(html).toMatch(/Claude Opus 4\.7/);
+    it('Claude Fable 5 프리미엄 라벨 존재', () => {
+      expect(html).toMatch(/Claude Fable 5/);
       expect(html).not.toMatch(/<span>👑 Claude Opus 4\.6<\/span>/);
     });
 
-    it('Opus 4.7 가격 ₩210 반영 (구 ₩735 제거)', () => {
-      // Opus 4.7 section에는 ₩210이 존재해야 하고, ₩735 가격 라벨은 사라져야 함
-      expect(html).toMatch(/Claude Opus 4\.7[\s\S]{0,2000}?₩210/);
+    it('Fable 5 공식 입력 단가 $10 반영 (구 ₩735 제거)', () => {
+      expect(html).toMatch(/Claude Fable 5[\s\S]{0,2000}?\$10/);
       expect(html).not.toMatch(/1편당 ₩735/);
     });
 
@@ -79,18 +78,16 @@ describe('v1.4.81 — 비용표·환경설정 현대화', () => {
     });
   });
 
-  describe('Gemini 2.5 Flash 무료 쿼터 3곳 통일', () => {
-    it('선택 드롭다운(option) 2개 모두 250/일 사용', () => {
-      const matches = html.match(/Gemini 2\.5 Flash \(무료 \d+\/일/g) || [];
-      // 최소 2개는 반드시 노출되어야 하고 모두 250/일로 통일
-      expect(matches.length).toBeGreaterThanOrEqual(2);
-      matches.forEach((m) => {
-        expect(m).toMatch(/무료 250\/일/);
-      });
+  describe('Gemini 최신 모델과 동적 프로젝트 한도 안내', () => {
+    it('선택 화면은 최신 3단계 모델을 표시하고 고정 무료 한도를 주장하지 않는다', () => {
+      const matches = html.match(/Gemini (?:3\.1 Flash-Lite|3\.5 Flash|3\.1 Pro Preview)/g) || [];
+      expect(matches.length).toBeGreaterThanOrEqual(3);
+      expect(html).toMatch(/Google AI Studio/);
+      expect(html).not.toMatch(/무료 (?:100|250|1,000)\/일/);
     });
 
-    it('비용표 모달에서 Gemini 2.5 Flash 무료 250/일 쿼터 일관', () => {
-      expect(html).toMatch(/Gemini 2\.5 Flash[\s\S]{0,200}?250/);
+    it('비용표 모달에서 Gemini 3.5 Flash 한도를 AI Studio에서 확인하도록 안내한다', () => {
+      expect(html).toMatch(/Gemini 3\.5 Flash[\s\S]{0,300}?AI Studio 확인/);
     });
   });
 

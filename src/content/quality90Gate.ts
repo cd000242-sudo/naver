@@ -11,6 +11,31 @@ export const QUALITY90_FALLBACK_MIN_SAFETY_SCORE = 70;
 const QUALITY90_MODES = new Set<Mode>(['seo', 'homefeed', 'mate', 'affiliate']);
 const HUMANLIKE_90_MODES = new Set<Mode>(['homefeed', 'affiliate']);
 
+function getCriticalSafetyReasons(
+  safetyScore: Pick<EvaluationResult['safetyScore'], 'details'>,
+): readonly string[] {
+  const details = safetyScore.details;
+  const reasons: string[] = [];
+  const hasSourceFidelity = Number.isFinite(details.fidelity);
+  const expectedHallucinationScore = hasSourceFidelity ? 25 : 50;
+
+  if (Number.isFinite(details.hallucination)
+      && details.hallucination < expectedHallucinationScore) {
+    reasons.push('HALLUCINATION_SIGNAL');
+  }
+  if (hasSourceFidelity && details.fidelity < 60) {
+    reasons.push('SOURCE_FIDELITY_SIGNAL');
+  }
+  if (Number.isFinite(details.evidenceIntegrity) && details.evidenceIntegrity < 100) {
+    reasons.push('EVIDENCE_INTEGRITY_SIGNAL');
+  }
+  if (Number.isFinite(details.affiliateAuthenticity) && details.affiliateAuthenticity < 85) {
+    reasons.push('AFFILIATE_AUTHENTICITY_SIGNAL');
+  }
+
+  return reasons;
+}
+
 export interface Quality90GateAssessment {
   readonly enabled: boolean;
   readonly passed: boolean;
@@ -31,6 +56,7 @@ export function canAcceptQuality90Fallback(
   mode: string,
 ): boolean {
   if (!isQuality90Mode(mode) || result.decision !== 'pass') return false;
+  if (getCriticalSafetyReasons(result.safetyScore).length > 0) return false;
 
   const meetsCoreFloor = result.modeScore.score >= QUALITY90_FALLBACK_MIN_MODE_SCORE
     && result.finalScore >= QUALITY90_FALLBACK_MIN_SCORE
@@ -70,6 +96,7 @@ export function assessQuality90Gate(
     HUMANLIKE_90_MODES.has(mode as Mode) ? buildScoreReason('humanlikeScore', result.humanlikeScore.score) : null,
   ].filter((reason): reason is string => Boolean(reason));
 
+  const criticalSafetyReasons = getCriticalSafetyReasons(result.safetyScore);
   const blockingReasons = [
     result.modeScore.score < QUALITY90_FALLBACK_MIN_MODE_SCORE
       ? `publication modeScore ${result.modeScore.score}<${QUALITY90_FALLBACK_MIN_MODE_SCORE}`
@@ -85,6 +112,7 @@ export function assessQuality90Gate(
       ? `publication humanlikeScore ${result.humanlikeScore.score}<${QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE}`
       : null,
     result.decision !== 'pass' ? `publication decision ${result.decision}!=pass` : null,
+    ...criticalSafetyReasons.map((reason) => `publication criticalSafety ${reason}`),
   ].filter((reason): reason is string => Boolean(reason));
   const targetReached = targetReasons.length === 0;
   const passed = canAcceptQuality90Fallback(result, mode);

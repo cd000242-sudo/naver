@@ -208,8 +208,8 @@ export function getShoppingConnectImagePool(): any[] {
 /**
  * Shopping-connect AI engine whitelist (img2img 가능 — 제품 정체성 유지).
  *   - nano-banana     (Gemini img2img, gemini-2.5-flash-image)
- *   - nano-banana-2   (Gemini img2img, gemini-3.1-flash-image-preview)
- *   - nano-banana-pro (Gemini img2img, gemini-3-pro-image-preview)
+ *   - nano-banana-2   (Gemini img2img, gemini-3.1-flash-image)
+ *   - nano-banana-pro (Gemini img2img, gemini-3-pro-image)
  *   - openai-image    (gpt-image-2 = 덕테이프)
  * 이 화이트리스트는 "AI 이미지 엔진 선택 드롭다운" 용도로만 쓰임.
  */

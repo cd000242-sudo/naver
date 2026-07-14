@@ -1,3 +1,8 @@
+import {
+  resolveTextModelProfile,
+  type TextModelTier,
+} from './runtime/modelRegistry.js';
+
 export type GeminiPlanType = 'auto' | 'free' | 'paid';
 
 export interface GeminiKeyExecutionPlanInput {
@@ -15,6 +20,7 @@ export interface GeminiKeyExecutionPlan {
 export interface ContentGenerationCostPolicyInput {
   costSaverMode?: boolean;
   geminiUseFreeQuotaBeforePaid?: boolean;
+  primaryGeminiTextModel?: string;
 }
 
 export interface ContentGenerationCostPolicy {
@@ -24,6 +30,8 @@ export interface ContentGenerationCostPolicy {
   allowLlmIntroPatch: boolean;
   allowQualityGateSelfCritique: boolean;
   useFreeQuotaBeforePaid: boolean;
+  modelTier: TextModelTier;
+  qualityDirective: string;
 }
 
 function normalizeKeyList(keys: Array<string | undefined | null>): string[] {
@@ -66,18 +74,49 @@ export function resolveContentGenerationCostPolicy(
   env: Record<string, string | undefined> = process.env,
 ): ContentGenerationCostPolicy {
   const costSaverOn = config?.costSaverMode !== false;
-  const maxAttempts = parseAttemptOverride(env.CONTENT_MAX_ATTEMPTS) ?? (costSaverOn ? 1 : 2);
-  // Extra LLM patches run after the main article call. They can improve a
-  // title/intro edge case, but they also turn one user action into multiple
-  // provider requests and can burn low-tier RPM. Keep them explicit opt-in.
-  const allowExpensiveLlmPatch = !costSaverOn && env.CONTENT_ALLOW_EXTRA_LLM_PATCHES === '1';
+  const modelProfile = resolveTextModelProfile(config?.primaryGeminiTextModel);
+  const tierAttemptBudget: Record<TextModelTier, number> = {
+    value: 1,
+    balanced: 2,
+    premium: 3,
+  };
+  const defaultAttemptBudget = Math.max(tierAttemptBudget[modelProfile.tier], costSaverOn ? 1 : 2);
+  const maxAttempts = parseAttemptOverride(env.CONTENT_MAX_ATTEMPTS) ?? defaultAttemptBudget;
+
+  // Balanced and premium models get one localized repair phase before another
+  // full rewrite. Value stays economical, while hard Quality90 misses remain
+  // protected by the mandatory self-critique path in contentGenerator.
+  const patchOverride = env.CONTENT_ALLOW_EXTRA_LLM_PATCHES;
+  const allowLocalizedRepair = patchOverride === '0'
+    ? false
+    : patchOverride === '1' || modelProfile.tier !== 'value';
 
   return {
     costSaverOn,
     maxAttempts,
-    allowLlmTitlePatch: allowExpensiveLlmPatch,
-    allowLlmIntroPatch: allowExpensiveLlmPatch,
-    allowQualityGateSelfCritique: allowExpensiveLlmPatch,
+    allowLlmTitlePatch: allowLocalizedRepair,
+    allowLlmIntroPatch: allowLocalizedRepair,
+    allowQualityGateSelfCritique: allowLocalizedRepair,
     useFreeQuotaBeforePaid: config?.geminiUseFreeQuotaBeforePaid !== false,
+    modelTier: modelProfile.tier,
+    qualityDirective: buildModelTierQualityDirective(modelProfile.tier),
   };
+}
+
+export function buildModelTierQualityDirective(tier: TextModelTier): string {
+  const auditDepth = tier === 'premium'
+    ? 'Run two silent review-and-rewrite passes before the final answer.'
+    : tier === 'balanced'
+      ? 'Run one silent review-and-rewrite pass before the final answer.'
+      : 'Run one concise silent quality audit before the final answer.';
+
+  return `[MODEL TIER QUALITY CONTRACT: ${tier}]
+Perform a silent quality audit of the complete article.
+${auditDepth}
+Target a quality score of 90 or higher on the first complete draft.
+- Return valid JSON in exactly the schema requested by the main prompt.
+- Keep the title, introduction, section order, conclusion, and keyword intent coherent.
+- Make every section concrete, useful, non-repetitive, and natural to a Korean reader.
+- Do not invent facts, prices, experiences, sources, benefits, or specifications.
+- Resolve weaknesses silently; never output this audit, hidden reasoning, or a score.`;
 }

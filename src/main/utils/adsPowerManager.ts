@@ -14,7 +14,7 @@ let _adsPowerApiKey = '';
 
 export function setAdsPowerApiKey(key: string): void {
   _adsPowerApiKey = key;
-  console.log(`[AdsPower] API Key ${key ? '설정됨' : '해제됨'} (${key ? key.substring(0, 8) + '...' : 'empty'})`);
+  console.log(`[AdsPower] API Key ${key ? '설정됨' : '해제됨'}`);
 }
 
 export function getAdsPowerApiKey(): string {

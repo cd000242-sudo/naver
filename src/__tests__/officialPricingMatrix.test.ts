@@ -23,6 +23,9 @@ const content = fs.readFileSync(SRC, 'utf-8');
 describe('v1.4.77 — 공식 가격 매트릭스 (2026-04)', () => {
   describe('OpenAI 텍스트', () => {
     it("gpt-5.4 output은 $15 (이전 $10 버그 수정)", () => {
+      expect(content).toMatch(/'gpt-5\.6-luna':\s*\{\s*input:\s*1\.00[^}]*output:\s*6\.00/);
+      expect(content).toMatch(/'gpt-5\.6-terra':\s*\{\s*input:\s*2\.50[^}]*output:\s*15\.00/);
+      expect(content).toMatch(/'gpt-5\.6-sol':\s*\{\s*input:\s*5\.00[^}]*output:\s*30\.00/);
       expect(content).toMatch(/'gpt-5\.4':\s*\{\s*input:\s*2\.50[^}]*output:\s*15\.00/);
     });
 
@@ -45,6 +48,9 @@ describe('v1.4.77 — 공식 가격 매트릭스 (2026-04)', () => {
 
   describe('Claude (Anthropic)', () => {
     it("Opus 4.5는 $5/$25 (이전 $15/$75 버그 수정 — 3배 과다)", () => {
+      expect(content).toMatch(/'claude-haiku-4-5-20251001':\s*\{\s*input:\s*1\.00[^}]*output:\s*5\.00/);
+      expect(content).toMatch(/'claude-sonnet-5':\s*\{\s*input:\s*3\.00[^}]*output:\s*15\.00/);
+      expect(content).toMatch(/'claude-fable-5':\s*\{\s*input:\s*10\.00[^}]*output:\s*50\.00/);
       expect(content).toMatch(/'claude-opus-4-5':\s*\{\s*input:\s*5\.00[^}]*output:\s*25\.00/);
     });
 
@@ -87,6 +93,10 @@ describe('v1.4.77 — 공식 가격 매트릭스 (2026-04)', () => {
 
   describe('Gemini (calculateCost 내 인라인 가격)', () => {
     it("Flash input은 $0.30 (이전 $0.10 버그 수정 — 3배 과소)", () => {
+      expect(content).toMatch(/3\.1-flash-lite[\s\S]{0,160}?pInput\s*=\s*0\.25[\s\S]{0,160}?pOutput\s*=\s*1\.50/);
+      expect(content).toMatch(/3\.5-flash[\s\S]{0,160}?pInput\s*=\s*1\.50[\s\S]{0,160}?pOutput\s*=\s*9\.00/);
+      expect(content).toMatch(/3\.1-pro[\s\S]{0,240}?pInput\s*=\s*isLongContext\s*\?\s*4\.00\s*:\s*2\.00/);
+      expect(content).toMatch(/3\.1-pro[\s\S]{0,320}?pOutput\s*=\s*isLongContext\s*\?\s*18\.00\s*:\s*12\.00/);
       expect(content).toMatch(/pInput\s*=\s*0\.30/);
     });
 
@@ -104,7 +114,7 @@ describe('v1.4.77 — 공식 가격 매트릭스 (2026-04)', () => {
     });
 
     it("Gemini 3 Pro 신규 분기 존재", () => {
-      expect(content).toMatch(/gemini-3|3-pro/i);
+      expect(content).toMatch(/3\.1-pro/i);
       expect(content).toMatch(/pInput\s*=\s*isLongContext\s*\?\s*4\.00\s*:\s*2\.00/);
       expect(content).toMatch(/pOutput\s*=\s*isLongContext\s*\?\s*18\.00\s*:\s*12\.00/);
     });

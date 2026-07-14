@@ -12,6 +12,7 @@ import { tmpdir } from 'os';
 import { join } from 'path';
 import { spawnCollect } from './spawnHelper.js';
 import { classifyExit } from './parse.js';
+import { buildCodexSubscriptionEnv } from './subscriptionEnv.js';
 import { AgentCliError } from './types.js';
 
 export interface CodexRunOptions {
@@ -57,6 +58,7 @@ export async function runCodex(prompt: string, opts: CodexRunOptions = {}): Prom
       stdin: prompt,
       timeoutMs,
       signal,
+      env: buildCodexSubscriptionEnv(),
     });
 
     if (res.code !== 0) {

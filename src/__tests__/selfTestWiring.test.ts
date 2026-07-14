@@ -44,6 +44,15 @@ describe('self-test wiring (6.3)', () => {
     expect(selfTestSource).toContain("process.env.SELF_TEST === '1'");
   });
 
+  it('destroys every self-test window before exiting the packaged process', () => {
+    expect(selfTestSource).toContain('BrowserWindow.getAllWindows()');
+    expect(selfTestSource).toContain('app.getAppMetrics()');
+    expect(selfTestSource).toContain("process.kill(childProcessId, 'SIGKILL')");
+    expect(selfTestSource).toMatch(/if \(!window\.isDestroyed\(\)\) window\.destroy\(\)/);
+    expect(selfTestSource).toContain("window.webContents.once('destroyed', onWindowDestroyed)");
+    expect(selfTestSource).toContain('app.exit(exitCode)');
+  });
+
   it('orchestrator runs both stages and strips ELECTRON_RUN_AS_NODE', () => {
     const orchestrator = read('scripts', 'self-test.mjs');
     expect(orchestrator).toContain('dist/tests/automationSmoke.js');

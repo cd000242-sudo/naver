@@ -127,7 +127,7 @@ function ensureConfigPath(userId) {
 }
 function loadConfig() {
     return __awaiter(this, void 0, void 0, function () {
-        var filePath, isPackaged, raw, parsed, geminiModel_1, DEPRECATED_MODELS, oldModel, normalizedConfig_1, hasHyphenKeys, migratedConfig, migrateError_1, compatibleConfig, error_1, err, defaultConfig, writeError_1;
+        var filePath, isPackaged, raw, parsed, geminiModel_1, primaryGeminiTextModel_1, modelMigrationMap, oldModel, normalizedConfig_1, hasHyphenKeys, migratedConfig, migrateError_1, compatibleConfig, error_1, err, defaultConfig, writeError_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, ensureConfigPath()];
@@ -148,13 +148,32 @@ function loadConfig() {
                         console.log('[Config] 📦 패키지 모드: 사용자 설정 유지');
                     }
                     geminiModel_1 = parsed.geminiModel;
-                    DEPRECATED_MODELS = ['gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-pro', 'gemini-pro-vision'];
-                    if (geminiModel_1 && DEPRECATED_MODELS.some(function (m) { return geminiModel_1.includes(m); })) {
+                    primaryGeminiTextModel_1 = parsed.primaryGeminiTextModel;
+                    modelMigrationMap = {
+                        'gemini-2.5-flash-lite': 'gemini-3.1-flash-lite',
+                        'gemini-2.5-flash': 'gemini-3.5-flash',
+                        'gemini-2.5-pro': 'gemini-3.1-pro-preview',
+                        'gemini-2.5-pro-preview': 'gemini-3.1-pro-preview',
+                        'gemini-3.1-flash-preview': 'gemini-3.5-flash',
+                        'gemini-3-flash-preview': 'gemini-3.5-flash',
+                        'gemini-3-pro-preview': 'gemini-3.1-pro-preview',
+                        'gemini-1.5-pro': 'gemini-3.1-pro-preview',
+                        'gemini-1.5-flash': 'gemini-3.5-flash',
+                        'gemini-1.5-flash-8b': 'gemini-3.1-flash-lite',
+                        'gemini-pro': 'gemini-3.1-pro-preview',
+                        'gemini-pro-vision': 'gemini-3.1-pro-preview',
+                        'gemini-2.0-flash': 'gemini-3.5-flash',
+                        'gemini-2.0-flash-001': 'gemini-3.5-flash'
+                    };
+                    if (geminiModel_1 && modelMigrationMap[geminiModel_1]) {
                         oldModel = geminiModel_1;
-                        geminiModel_1 = 'gemini-3-flash-preview'; // 새 기본 모델로 자동 전환
+                        geminiModel_1 = modelMigrationMap[geminiModel_1];
                         console.log("[Config] \u26A0\uFE0F \uAD6C \uBAA8\uB378(".concat(oldModel, ") \u2192 \uC0C8 \uBAA8\uB378(").concat(geminiModel_1, ")\uB85C \uC790\uB3D9 \uB9C8\uC774\uADF8\uB808\uC774\uC158"));
                     }
-                    normalizedConfig_1 = __assign(__assign({}, parsed), { geminiModel: geminiModel_1, 
+                    if (primaryGeminiTextModel_1 && modelMigrationMap[primaryGeminiTextModel_1]) {
+                        primaryGeminiTextModel_1 = modelMigrationMap[primaryGeminiTextModel_1];
+                    }
+                    normalizedConfig_1 = __assign(__assign({}, parsed), { geminiModel: geminiModel_1, primaryGeminiTextModel: primaryGeminiTextModel_1,
                         // 하이픈 형식 키가 있으면 카멜케이스로 변환 (값이 있으면 우선 사용)
                         geminiApiKey: parsed.geminiApiKey || parsed['gemini-api-key'] || undefined, openaiApiKey: parsed.openaiApiKey || parsed['openai-api-key'] || undefined, claudeApiKey: parsed.claudeApiKey || parsed['claude-api-key'] || undefined, pexelsApiKey: parsed.pexelsApiKey || parsed['pexels-api-key'] || undefined, prodiaToken: undefined, unsplashApiKey: parsed.unsplashApiKey || parsed['unsplash-api-key'] || undefined, pixabayApiKey: parsed.pixabayApiKey || parsed['pixabay-api-key'] || undefined, stabilityApiKey: undefined, naverDatalabClientId: parsed.naverDatalabClientId || parsed['naver-datalab-client-id'] || undefined, naverDatalabClientSecret: parsed.naverDatalabClientSecret || parsed['naver-datalab-client-secret'] || undefined, 
                         // ✅ [2026-01-25] 네이버 검색 API 키 추가
@@ -220,20 +239,20 @@ function loadConfig() {
                     console.log('[Config] 설정 파일 로드 성공:', filePath);
                     console.log('[Config] 로드된 키 개수:', Object.keys(compatibleConfig).length);
                     if (compatibleConfig.geminiApiKey) {
-                        console.log('[Config] Gemini API 키 존재:', compatibleConfig.geminiApiKey.substring(0, 10) + '...');
+                        console.log('[Config] Gemini API 키 존재: 설정됨');
                     }
                     if (compatibleConfig.openaiApiKey) {
-                        console.log('[Config] OpenAI API 키 존재:', compatibleConfig.openaiApiKey.substring(0, 10) + '...');
+                        console.log('[Config] OpenAI API 키 존재: 설정됨');
                     }
                     if (compatibleConfig.claudeApiKey) {
-                        console.log('[Config] Claude API 키 존재:', compatibleConfig.claudeApiKey.substring(0, 10) + '...');
+                        console.log('[Config] Claude API 키 존재: 설정됨');
                     }
                     if (compatibleConfig.pexelsApiKey) {
-                        console.log('[Config] Pexels API 키 존재:', compatibleConfig.pexelsApiKey.substring(0, 10) + '...');
+                        console.log('[Config] Pexels API 키 존재: 설정됨');
                     }
                     // 네이버 아이디/비밀번호 저장 상태 확인
                     if (compatibleConfig.savedNaverId) {
-                        console.log('[Config] 저장된 네이버 아이디 존재:', compatibleConfig.savedNaverId.substring(0, 3) + '***');
+                        console.log('[Config] 저장된 네이버 아이디 존재: 설정됨');
                     }
                     if (compatibleConfig.savedNaverPassword) {
                         console.log('[Config] 저장된 네이버 비밀번호 존재:', '***');
@@ -454,7 +473,7 @@ function applyConfigToEnv(config) {
     if (config.rememberCredentials) {
         if (config.savedNaverId) {
             process.env.NAVER_ID = config.savedNaverId;
-            console.log('[Config] NAVER_ID 환경변수 설정됨:', config.savedNaverId.substring(0, 3) + '***');
+            console.log('[Config] NAVER_ID 환경변수 설정됨');
         }
         if (config.savedNaverPassword) {
             process.env.NAVER_PASSWORD = config.savedNaverPassword;

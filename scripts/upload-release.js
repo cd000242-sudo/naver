@@ -12,7 +12,7 @@
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync, execSync } = require('child_process');
 
 // ─── GH_TOKEN 자동 로드 (.env.release → 환경변수 순서) ────────
 function loadGHToken() {
@@ -192,10 +192,9 @@ function gitPush() {
             console.log(`   ⏭️ 태그 이미 존재: ${TAG}`);
         }
 
-        // Push (토큰 포함 URL)
-        const pushUrl = `https://${GITHUB_TOKEN}@github.com/${OWNER}/${REPO}.git`;
+        // Push through the configured credential helper. Never put tokens in argv or logs.
         try {
-            execSync(`git push "${pushUrl}" main "${TAG}" 2>&1`, opts);
+            execFileSync('git', ['push', 'origin', 'main', TAG], opts);
             console.log('   ✅ Push 완료');
         } catch (e) {
             console.log(`   ❌ Push 실패: ${e.message.substring(0, 100)}`);

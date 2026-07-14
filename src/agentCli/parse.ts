@@ -81,6 +81,23 @@ export function parseClaudeEnvelope(stdout: string): string {
   throw new AgentCliError('empty_output', 'claude', 'claude 응답에 result가 없습니다.', raw.slice(0, 500));
 }
 
+/** True only for wording that means the account has no active Claude Code entitlement. */
+export function isSubscriptionInactiveMessage(text: string): boolean {
+  const hay = String(text ?? '').toLowerCase();
+  return [
+    /(?:claude\s+)?subscription.{0,50}(?:expired|inactive|ended|cancelled|canceled|lapsed)/,
+    /(?:expired|inactive|ended|cancelled|canceled|lapsed).{0,50}(?:claude\s+)?subscription/,
+    /(?:requires?|need).{0,40}(?:an?\s+)?active.{0,25}(?:subscription|pro|max|plan)/,
+    /(?:no|without|does not have).{0,30}(?:active|paid).{0,30}(?:subscription|plan|entitlement)/,
+    /(?:upgrade|renew).{0,50}(?:subscription|plan).{0,30}(?:continue|use claude code)/,
+    /(?:upgrade|renew).{0,40}(?:claude\s+)?(?:pro|max).{0,30}(?:continue|use claude code)/,
+    /not (?:eligible|entitled) to (?:access|use) claude code/,
+    /구독.{0,20}(?:만료|종료|비활성|해지)/,
+    /(?:만료|종료|비활성|해지).{0,20}구독/,
+    /활성.{0,20}(?:구독|요금제|플랜).{0,20}필요/,
+  ].some((pattern) => pattern.test(hay));
+}
+
 /**
  * Classify a non-zero CLI exit into a stable error code by scanning stderr/stdout.
  * Conservative: only flags rate-limit / auth when the wording is explicit, else nonzero_exit.
@@ -92,9 +109,13 @@ export function classifyExit(
 ): AgentErrorCode {
   const hay = `${stderr}\n${stdout}`.toLowerCase();
 
-  // Windows shell:true surfaces a missing .cmd shim as a cmd.exe exit, not an ENOENT event.
+  // Legacy Windows releases surfaced missing .cmd shims through cmd.exe text.
   if (/is not recognized as an internal or external command|command not found|no such file or directory/.test(hay)) {
     return 'not_installed';
+  }
+
+  if (isSubscriptionInactiveMessage(hay)) {
+    return 'subscription_inactive';
   }
 
   if (

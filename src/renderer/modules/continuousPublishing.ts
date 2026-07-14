@@ -5381,10 +5381,10 @@ export async function testApiKeysAndFullAuto() {
     // 1. 현재 설정된 API 키들 확인
     const config = await window.api.getConfig();
     console.log('[Test] 현재 설정:', {
-      'gemini-api-key': config['gemini-api-key'] ? config['gemini-api-key'].substring(0, 20) + '...' : '없음',
-      'openai-api-key': config['openai-api-key'] ? config['openai-api-key'].substring(0, 20) + '...' : '없음',
-      'claude-api-key': config['claude-api-key'] ? config['claude-api-key'].substring(0, 20) + '...' : '없음',
-      'pexels-api-key': config['pexels-api-key'] ? config['pexels-api-key'].substring(0, 20) + '...' : '없음'
+      'gemini-api-key': config['gemini-api-key'] ? '설정됨' : '없음',
+      'openai-api-key': config['openai-api-key'] ? '설정됨' : '없음',
+      'claude-api-key': config['claude-api-key'] ? '설정됨' : '없음',
+      'pexels-api-key': config['pexels-api-key'] ? '설정됨' : '없음'
     });
 
     appendLog('🔑 API 키 상태 확인 중...');

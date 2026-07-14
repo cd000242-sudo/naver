@@ -479,7 +479,7 @@ function getSeoKeywordsWithGemini(productName) {
                         return [2 /*return*/, []];
                     }
                     genAI = new GoogleGenerativeAI(apiKey);
-                    model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+                    model = genAI.getGenerativeModel({ model: 'gemini-3.1-flash-lite' });
                     prompt_1 = "\uB2F9\uC2E0\uC740 \uB124\uC774\uBC84 \uC1FC\uD551 SEO \uC804\uBB38\uAC00\uC785\uB2C8\uB2E4.\n\n\uB2E4\uC74C \uC81C\uD488\uC5D0 \uB300\uD574 \uC0AC\uC6A9\uC790\uB4E4\uC774 \uB124\uC774\uBC84\uC5D0\uC11C \uC2E4\uC81C\uB85C \uAC80\uC0C9\uD560 \uAC83 \uAC19\uC740 \uC138\uBD80 \uD0A4\uC6CC\uB4DC 2-3\uAC1C\uB97C \uCD94\uCC9C\uD574\uC8FC\uC138\uC694.\n\n\uC81C\uD488\uBA85: ".concat(productName.trim(), "\n\n\uADDC\uCE59:\n1. \uC81C\uD488\uBA85\uC5D0 \uC774\uBBF8 \uD3EC\uD568\uB41C \uB2E8\uC5B4\uB294 \uC81C\uC678\n2. \uAD6C\uB9E4 \uC758\uB3C4\uAC00 \uC788\uB294 \uAC80\uC0C9 \uD0A4\uC6CC\uB4DC (\uC608: \uD6C4\uAE30, \uBE44\uAD50, \uC131\uB2A5, \uC18C\uC74C, \uC804\uAE30\uC138 \uB4F1)\n3. \uAC01 \uD0A4\uC6CC\uB4DC\uB294 1-2\uB2E8\uC5B4\uB85C \uC9E7\uAC8C\n4. JSON \uBC30\uC5F4 \uD615\uC2DD\uC73C\uB85C\uB9CC \uC751\uB2F5 (\uC608: [\"\uD6C4\uAE30\", \"\uC804\uAE30\uC138\", \"\uC18C\uC74C\"])\n\n\uC751\uB2F5:");
                     return [4 /*yield*/, model.generateContent(prompt_1)];
                 case 3:

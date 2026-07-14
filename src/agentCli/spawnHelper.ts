@@ -3,10 +3,12 @@
 // Korean encoding: the prompt is written to stdin as a UTF-8 Buffer (a PowerShell pipe
 // mangles non-ASCII, but a direct Node stdin write does not). Output is read as UTF-8.
 //
-// Windows: codex/claude are installed as .cmd shims. Node 20 refuses to spawn .cmd with
-// shell:false, so we use shell:true and pre-quote any argument containing whitespace.
+// Windows: codex/claude may be installed as .cmd shims. We resolve the shim's real .exe/.js
+// target and keep shell:false so renderer-controlled values never reach cmd.exe parsing.
 
-import { spawn } from 'child_process';
+import { spawn, spawnSync } from 'child_process';
+import { existsSync, readFileSync } from 'fs';
+import { delimiter, dirname, extname, isAbsolute, resolve } from 'path';
 import { AgentCliError, type AgentProvider } from './types.js';
 
 export interface SpawnResult {
@@ -30,10 +32,78 @@ export interface SpawnArgs {
 
 const DEFAULT_TIMEOUT_MS = 180_000;
 
-/** Quote an argument for cmd.exe when shell:true is in effect on Windows. */
-function quoteWinArg(arg: string): string {
-  if (!/[\s&|<>^"]/.test(arg)) return arg;
-  return `"${arg.replace(/"/g, '\\"')}"`;
+interface SpawnTarget {
+  command: string;
+  prefixArgs: string[];
+}
+
+function resolveNpmCmdShim(shimPath: string): SpawnTarget | undefined {
+  try {
+    const source = readFileSync(shimPath, 'utf8');
+    const baseDir = dirname(shimPath);
+
+    for (const match of source.matchAll(/"%dp0%\\([^"\r\n]+\.exe)"/gi)) {
+      const executable = resolve(baseDir, match[1]);
+      if (existsSync(executable)) return { command: executable, prefixArgs: [] };
+    }
+
+    for (const match of source.matchAll(/"%dp0%\\([^"\r\n]+\.js)"/gi)) {
+      const script = resolve(baseDir, match[1]);
+      if (existsSync(script)) return { command: process.execPath, prefixArgs: [script] };
+    }
+  } catch {
+    // The caller will attempt a direct spawn and receive a typed failure.
+  }
+  return undefined;
+}
+
+/** Resolve Windows npm shims to their real executable without invoking cmd.exe. */
+export function resolveWindowsSpawnTarget(command: string): SpawnTarget {
+  if (process.platform !== 'win32') return { command, prefixArgs: [] };
+
+  if (isAbsolute(command)) {
+    if (extname(command).toLowerCase() === '.cmd') {
+      return resolveNpmCmdShim(command) ?? { command, prefixArgs: [] };
+    }
+    return { command, prefixArgs: [] };
+  }
+
+  // Do not rely on where.exe first: it writes using the active OEM code page, which can
+  // corrupt a Korean (or otherwise non-ASCII) Windows profile path when Node decodes it.
+  const pathEntries = String(process.env.Path || process.env.PATH || '')
+    .split(delimiter)
+    .map((entry) => entry.trim().replace(/^"|"$/g, ''))
+    .filter(Boolean);
+  for (const entry of pathEntries) {
+    const executable = resolve(entry, `${command}.exe`);
+    if (existsSync(executable)) return { command: executable, prefixArgs: [] };
+
+    const shim = resolve(entry, `${command}.cmd`);
+    if (!existsSync(shim)) continue;
+    const resolved = resolveNpmCmdShim(shim);
+    if (resolved) return resolved;
+  }
+
+  const lookup = spawnSync('where.exe', [command], {
+    encoding: 'utf8',
+    windowsHide: true,
+    shell: false,
+  });
+  const candidates = String(lookup.stdout || '')
+    .split(/\r?\n/)
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  const executable = candidates.find((candidate) => extname(candidate).toLowerCase() === '.exe');
+  if (executable) return { command: executable, prefixArgs: [] };
+
+  for (const candidate of candidates) {
+    if (extname(candidate).toLowerCase() !== '.cmd') continue;
+    const resolved = resolveNpmCmdShim(candidate);
+    if (resolved) return resolved;
+  }
+
+  return { command, prefixArgs: [] };
 }
 
 /**
@@ -59,18 +129,14 @@ export function spawnCollect(opts: SpawnArgs): Promise<SpawnResult> {
       return;
     }
 
-    const isWin = process.platform === 'win32';
-    // With shell:true Node does not auto-quote; quote the command (e.g. a path containing
-    // spaces) and any argument that needs it. A bare name like "codex" stays unquoted so
-    // cmd.exe resolves it via PATHEXT to codex.cmd.
-    const finalCommand = isWin ? quoteWinArg(command) : command;
-    const finalArgs = isWin ? args.map(quoteWinArg) : args;
+    const target = resolveWindowsSpawnTarget(command);
+    const finalArgs = [...target.prefixArgs, ...args];
 
-    const child = spawn(finalCommand, finalArgs, {
+    const child = spawn(target.command, finalArgs, {
       cwd,
       env: env ?? process.env,
       windowsHide: true,
-      shell: isWin,
+      shell: false,
     });
 
     let stdout = '';

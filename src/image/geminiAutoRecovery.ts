@@ -43,21 +43,13 @@ export async function detectGeminiTierAndModels(apiKey: string): Promise<GeminiT
   }
 
   const baseUrl = 'https://generativelanguage.googleapis.com/v1beta';
-  // ✅ [v2.7.23] 검증된 후보 + 하위 변형까지 포함 (Google 모델 ID 변경 추적)
-  //   사용자 제보: Tier 1인데도 400 → 모델 ID 자체가 존재하지 않을 가능성
-  //   대응: 여러 변형을 후보에 포함해 실제 작동하는 ID 자동 탐지
-  // ✅ [v2.10.334] gemini-3 이미지 모델 복원 — Google 공식 문서 검증 완료.
-  //   GET /models 조회로 실제 키 접근 가능 여부를 거르므로, 후보에 넣어도
-  //   접근 불가 키는 자연히 available에서 제외됨(안전).
+  // Official stable model IDs only. Ended preview IDs must never re-enter recovery.
   const candidates = [
-    'gemini-3-pro-image-preview',                  // 나노바나나 프로 (Gemini 3 Pro Image)
-    'gemini-3.1-flash-image-preview',              // 나노바나나2 (Gemini 3.1 Flash Image)
+    'gemini-3-pro-image',                          // 나노바나나 프로 (Gemini 3 Pro Image)
+    'gemini-3.1-flash-image',                      // 나노바나나2 (Gemini 3.1 Flash Image)
+    'gemini-3.1-flash-lite-image',                 // 최신 가성비 안정 모델
     'gemini-2.5-flash-image',                      // 나노바나나 구버전 GA — 모든 Tier 작동
-    'gemini-2.5-flash-image-preview',              // GA의 preview 변형
-    'gemini-2.0-flash-preview-image-generation',   // 무료 등급 작동
-    'gemini-2.0-flash-exp-image-generation',       // 구 실험 (호환)
-    'imagen-4.0-generate-001',                     // Imagen 정식 — Tier 1+
-    'imagen-4.0-generate-preview-06-06',           // Imagen preview
+    'imagen-4.0-generate-001',                     // 직접 선택 진단용 (2026-08-17 종료 예정)
   ];
 
   const available: string[] = [];
@@ -98,7 +90,7 @@ export async function detectGeminiTierAndModels(apiKey: string): Promise<GeminiT
   }
 
   // Tier 추정 — Pro 모델 액세스 가능하면 Tier 1+
-  const hasProAccess = available.some(m => m.includes('pro') || m.includes('preview'));
+  const hasProAccess = available.some(m => m.includes('pro') || m.includes('imagen'));
   const hasFlashOnly = available.length > 0 && !hasProAccess;
   let tier: GeminiTierInfo['tier'];
   if (hasProAccess) tier = 'tier1';
@@ -141,13 +133,10 @@ export async function pickWorkingImageModel(
 
   // 2. 작동 가능 모델 중 가장 가까운 동급 선택 — 신형 우선
   const PREFERENCE_ORDER = [
-    'gemini-3-pro-image-preview',                // 나노바나나 프로, 1순위
-    'gemini-3.1-flash-image-preview',            // 나노바나나2
+    'gemini-3-pro-image',                        // 나노바나나 프로, 1순위
+    'gemini-3.1-flash-image',                    // 나노바나나2
+    'gemini-3.1-flash-lite-image',               // 최신 가성비 안정 모델
     'gemini-2.5-flash-image',                    // 구버전 GA
-    'gemini-2.5-flash-image-preview',            // 변형
-    'gemini-2.0-flash-preview-image-generation', // 무료 등급
-    'gemini-2.0-flash-exp-image-generation',     // 구 실험 (호환)
-    'imagen-4.0-generate-001',                   // Imagen
   ];
   for (const candidate of PREFERENCE_ORDER) {
     if (info.availableImageModels.includes(candidate)) {
@@ -295,14 +284,11 @@ export async function diagnoseGeminiAccess(apiKey: string): Promise<{
       .map((m: any) => (m.name || '').replace('models/', ''));
 
     const appCandidates = [
-      'gemini-3-pro-image-preview',
-      'gemini-3.1-flash-image-preview',
+      'gemini-3-pro-image',
+      'gemini-3.1-flash-image',
+      'gemini-3.1-flash-lite-image',
       'gemini-2.5-flash-image',
-      'gemini-2.5-flash-image-preview',
-      'gemini-2.0-flash-preview-image-generation',
-      'gemini-2.0-flash-exp-image-generation',
       'imagen-4.0-generate-001',
-      'imagen-4.0-generate-preview-06-06',
     ];
     const appUsedModels = appCandidates.map(id => ({
       id,

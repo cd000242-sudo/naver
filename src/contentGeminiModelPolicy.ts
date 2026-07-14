@@ -1,3 +1,8 @@
+import {
+  GEMINI_TEXT_MODELS,
+  normalizeGeminiTextModelId,
+} from './runtime/modelRegistry.js';
+
 export interface GeminiModelChainConfig {
   primaryGeminiTextModel?: string;
   geminiModel?: string;
@@ -11,11 +16,13 @@ export interface GeminiModelChain {
 }
 
 export function buildGeminiModelChain(config?: GeminiModelChainConfig): GeminiModelChain {
-  const defaultModel = 'gemini-2.5-flash';
+  const defaultModel = GEMINI_TEXT_MODELS.FLASH;
 
   let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || defaultModel;
   if (!primaryModel.startsWith('gemini-')) {
-    primaryModel = defaultModel;
+    throw new Error(`TEXT_MODEL_PROVIDER_MISMATCH: expected=gemini, selected=${primaryModel}`);
+  } else {
+    primaryModel = normalizeGeminiTextModelId(primaryModel);
   }
 
   const isPro = primaryModel.includes('-pro');

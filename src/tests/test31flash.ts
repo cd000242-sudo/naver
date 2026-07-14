@@ -1,5 +1,5 @@
 /**
- * gemini-3.1-flash-image-preview 이미지 생성 테스트
+ * gemini-3.1-flash-image 이미지 생성 테스트
  * 실행: npx ts-node src/tests/test31flash.ts
  */
 
@@ -38,10 +38,10 @@ async function test31Flash() {
         return;
     }
 
-    console.log(`\n🔑 API 키: ${apiKey.substring(0, 15)}...`);
+    console.log(`\n🔑 API 키: 설정됨 (길이 ${apiKey.length})`);
     console.log(`⏰ ${new Date().toLocaleString('ko-KR')}\n`);
 
-    const model = 'gemini-3.1-flash-image-preview';
+    const model = 'gemini-3.1-flash-image';
     const prompt = 'Generate a beautiful image of a cozy Korean cafe interior with warm lighting. Photorealistic style, 8K UHD quality.';
 
     console.log(`📡 모델: ${model}`);

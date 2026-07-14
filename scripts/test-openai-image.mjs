@@ -16,7 +16,7 @@ if (!apiKey) {
   console.error('❌ OPENAI_API_KEY 환경변수 없음. .env 또는 셸에 설정 후 재실행.');
   process.exit(1);
 }
-console.log(`🔑 API 키 감지 (length=${apiKey.length}, prefix=${apiKey.slice(0, 7)}...)`);
+console.log(`🔑 API 키 감지 (length=${apiKey.length})`);
 
 const OPENAI_URL = 'https://api.openai.com/v1/images/generations';
 const TEST_PROMPT = 'A simple red apple on a white background, professional product photography';

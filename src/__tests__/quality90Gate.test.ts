@@ -9,9 +9,14 @@ import {
 } from '../content/quality90Gate';
 import type { EvaluationResult, SubScore } from '../content/qualityEvaluator';
 
-const subScore = (score: number, issues: readonly string[] = [], suggestions: readonly string[] = []): SubScore => ({
+const subScore = (
+  score: number,
+  issues: readonly string[] = [],
+  suggestions: readonly string[] = [],
+  details: Readonly<Record<string, number>> = {},
+): SubScore => ({
   score,
-  details: {},
+  details,
   issues,
   suggestions,
 });
@@ -106,6 +111,27 @@ describe('quality90Gate', () => {
     expect(result.reasons).toContain('finalScore 83<90');
   });
 
+  it('never accepts a numeric near-pass while factual safety signals remain unresolved', () => {
+    const result = assessQuality90Gate(evaluation({
+      modeScore: subScore(88),
+      finalScore: 84,
+      safetyScore: subScore(
+        88,
+        ['hallucination warning'],
+        ['remove unsupported claim'],
+        { fidelity: 60, hallucination: 13, evidenceIntegrity: 100 },
+      ),
+      decision: 'pass',
+    }), 'seo');
+
+    expect(result).toMatchObject({
+      passed: false,
+      nearTargetAccepted: false,
+      miss: true,
+    });
+    expect(result.blockingReasons).toContain('publication criticalSafety HALLUCINATION_SIGNAL');
+  });
+
   it.each(['seo', 'homefeed', 'mate', 'affiliate'] as const)(
     'accepts the one-point publication-floor tolerance for %s mode',
     (mode) => {
@@ -189,6 +215,9 @@ describe('quality90Gate', () => {
     }), 'seo');
     expect(lowMode).toMatchObject({ passed: false, nearTargetAccepted: false, miss: true });
     expect(lowMode.directive).toContain('QualityGate 90+');
+    expect(lowMode.directive).toContain('현재 점수');
+    expect(lowMode.directive).toContain('자동 발행 하한');
+    expect(lowMode.directive).not.toMatch(/[媛吏諛]/);
 
     const unsafe = assessQuality90Gate(evaluation({
       modeScore: subScore(95),

@@ -13,6 +13,7 @@ import {
   sanitizeRendererIpcResult,
   sanitizeUserVisibleError,
 } from './runtime/userVisibleError.js';
+import { redactKnownAccountId, scrubText } from './debug/privacyScrubber.js';
 import { ExclusiveLeaseCoordinator } from './runtime/exclusiveLease.js';
 import { withAbortableDeadline } from './runtime/abortableDeadline.js';
 import { ScopedAbortRegistry } from './runtime/scopedAbortRegistry.js';
@@ -20,7 +21,7 @@ import {
   parseScheduledDate,
 } from './scheduler/scheduledPostLookupPolicy.js';
 // ✅ [v2.7.53] modelRegistry SSOT
-import { CLAUDE_MODELS } from './runtime/modelRegistry.js';
+import { CLAUDE_MODELS, GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
 import { isDirectLaunchLewordAsset, selectLewordReleaseAsset } from './utils/lewordReleaseAssets.js';
 
 // ✅ [2026-04-03] 앱 시작 디버그 로그 (silent crash 진단용)
@@ -1432,7 +1433,8 @@ function _forwardConsoleToRenderer(level: 'log' | 'warn' | 'error', args: any[])
   }).join(' ');
 
   // 1) 파일에 항상 기록 (응답없음 상태에서도 안전)
-  _writeToFile(level, msg);
+  const scrubbedMsg = scrubText(msg).text;
+  _writeToFile(level, scrubbedMsg);
 
   // 2) 렌더러 DevTools로 전송 (가능하면)
   try {
@@ -1440,7 +1442,7 @@ function _forwardConsoleToRenderer(level: 'log' | 'warn' | 'error', args: any[])
     if (!win || win.isDestroyed()) return;
     win.webContents.send('main:console', {
       level,
-      msg: sanitizeUserVisibleError(msg),
+      msg: sanitizeUserVisibleError(scrubbedMsg),
     });
   } catch { /* 렌더러 미준비 또는 파괴됨 — 무시 */ }
 }
@@ -3061,7 +3063,7 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: unknown) =>
       resetVisionBudget();
     }
     // 글 생성 AI 키 (사용자 요청: vision도 동일 모델 사용)
-    const textGenerator = (cfg as any).primaryGeminiTextModel || 'gemini-2.5-flash';
+    const textGenerator = (cfg as any).primaryGeminiTextModel || GEMINI_TEXT_MODELS.FLASH;
     const apiKeys = {
       gemini: (cfg as any).geminiApiKey || '',
       claude: (cfg as any).claudeApiKey || '',
@@ -3991,7 +3993,7 @@ ipcMain.handle('apiKey:validate', async (_event, provider: string, apiKey: strin
             },
             timeout: 15000,
           });
-          const model = resp.data?.model || 'claude-3-haiku';
+          const model = resp.data?.model || CLAUDE_MODELS.HAIKU;
 
           // ✅ [2026-03-20] Anthropic은 API 키로 잔액 조회 불가 (세션 쿠키 필요)
           // 앱 내 누적 사용량만 표시, 정확한 잔액은 대시보드에서 확인
@@ -4749,7 +4751,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
       const backoffRec = getBotBackoff(accountId);
       if (backoffRec) {
         const waitHours = Math.ceil((backoffRec.expiresAt - Date.now()) / 3_600_000);
-        sendLog(`⏸️ [${accountId}] 봇감지 backoff 중 (${backoffRec.reason}) — ${waitHours}시간 후 자동 해제. 건너뜀.`);
+        sendLog(`⏸️ 계정 봇감지 backoff 중 (${backoffRec.reason}) — ${waitHours}시간 후 자동 해제. 건너뜀.`);
         results.push({
           accountId,
           success: false,
@@ -6499,8 +6501,8 @@ ipcMain.handle('library:collectByKeywords', async (_event, title: string): Promi
       console.warn(`[Main] 환경 설정에서 네이버 데이터랩 Client ID와 Secret을 입력해주세요.`);
     } else {
       console.log(`[Main] 네이버 검색 API 키 확인됨`);
-      console.log(`[Main] - Client ID: ${clientId.substring(0, 10)}... (길이: ${clientId.length})`);
-      console.log(`[Main] - Client Secret: ***${clientSecret.substring(clientSecret.length - 4)} (길이: ${clientSecret.length})`);
+      console.log(`[Main] - Client ID: 설정됨 (길이: ${clientId.length})`);
+      console.log(`[Main] - Client Secret: 설정됨 (길이: ${clientSecret.length})`);
       console.log(`[Main] 참고: 네이버 검색 API를 사용하려면 개발자 센터에서 "검색" 서비스를 활성화해야 합니다.`);
       console.log(`[Main] 데이터랩 API만 활성화되어 있으면 401 오류가 발생할 수 있습니다.`);
       
@@ -8421,8 +8423,9 @@ app.whenReady().then(async () => {
         // ✅ [2026-03-02] sendLog 주입 → 브라우저 자동화 로그가 UI에 실시간 표시
         // ✅ [2026-03-23] accountProxyUrl → 계정별 프록시 우선, 미설정 시 글로벌 SmartProxy 폴백
         return new NaverBlogAutomation({ naverId, naverPassword, accountProxyUrl }, (msg: string) => {
-          console.log(msg);  // 터미널에도 출력
-          sendLog(msg);      // 렌더러 UI에도 전달
+          const safeMsg = redactKnownAccountId(msg, naverId);
+          console.log(safeMsg);  // 터미널에도 출력
+          sendLog(safeMsg);      // 렌더러 UI에도 전달
         });
       },
       blogAccountManager,
@@ -8703,7 +8706,7 @@ app.whenReady().then(async () => {
                 refund: () => refundQuota('publish', 1),
               });
 
-              console.log(`[Scheduler] 네이버 계정 확인 완료: ${accountNaverId}`);
+              console.log('[Scheduler] 네이버 계정 확인 완료');
               sendLog(`🔐 네이버 계정 확인 완료`);
 
               // ✅ 이미지 경로 복원
@@ -8734,17 +8737,21 @@ app.whenReady().then(async () => {
               schedulerAutomation = automationMap.get(normalizedId) || null;
 
               if (schedulerAutomation) {
-                console.log(`[Scheduler] 기존 "${accountNaverId}" 세션 재사용`);
+                console.log('[Scheduler] 기존 계정 세션 재사용');
                 automation = schedulerAutomation;
               } else {
-                console.log(`[Scheduler] 새 브라우저 세션 시작 (${accountNaverId})`);
+                console.log('[Scheduler] 새 브라우저 세션 시작');
                 // ✅ [2026-03-02] sendLog 주입 → 예약발행 자동화 로그도 UI에 표시
                 schedulerAutomation = new NaverBlogAutomation({
                   naverId: accountNaverId,
                   naverPassword: accountNaverPassword,
                   headless: false,
                   slowMo: 50,
-                }, (msg: string) => { console.log(msg); sendLog(msg); });
+                }, (msg: string) => {
+                  const safeMsg = redactKnownAccountId(msg, accountNaverId);
+                  console.log(safeMsg);
+                  sendLog(safeMsg);
+                });
                 automationMap.set(normalizedId, schedulerAutomation);
                 automation = schedulerAutomation; // 하위 호환성 유지
               }
@@ -9327,7 +9334,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
       const currentConfig = await loadConfig();
       applyConfigToEnv(currentConfig);
       const { routeTextToVision, isAgentTextProvider } = await import('./runtime/modelRegistry.js');
-      const textEngine = (currentConfig as any).primaryGeminiTextModel || 'gemini-2.5-flash';
+      const textEngine = (currentConfig as any).primaryGeminiTextModel || GEMINI_TEXT_MODELS.FLASH;
       routedProvider = routeTextToVision(textEngine).vendor;
       narrativeTextProvider = isAgentTextProvider(textEngine) ? textEngine : routedProvider;
       console.log(`[Main] vision:infer-and-write — 글로벌 엔진(${textEngine}) → vision=${routedProvider}, text=${narrativeTextProvider}`);

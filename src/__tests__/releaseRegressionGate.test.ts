@@ -46,6 +46,12 @@ describe('release regression gate', () => {
     expect(uploader).toContain("throw new Error('Git push failed')");
   });
 
+  it('returns a failing shell exit code even when an early release stage aborts', () => {
+    expect(releaseAll).toMatch(
+      /finally \{[\s\S]{0,900}?if \(!allSuccess\) process\.exitCode = 1/,
+    );
+  });
+
   it('fails closed when a staged release commit cannot be created', () => {
     expect(uploader).toContain('git diff --cached --name-only');
     expect(uploader).not.toContain('커밋 스킵 (이미 커밋됨)');

@@ -118,7 +118,7 @@ function stripHtmlTags(str: string): string {
  */
 function log401Error(apiType: string, clientId?: string): void {
   console.error(`[네이버 검색 API] ${apiType} 인증 실패 (401)`);
-  console.error(`[네이버 검색 API] Client ID: ${clientId ? `${clientId.substring(0, 8)}...` : '없음'}`);
+  console.error(`[네이버 검색 API] Client ID: ${clientId ? '설정됨' : '없음'}`);
   console.error(`[네이버 검색 API] → 개발자센터에서 API 키 확인 필요: https://developers.naver.com`);
 }
 

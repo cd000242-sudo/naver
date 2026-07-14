@@ -197,7 +197,7 @@ export async function getOrCreateBrowserSession(
     let automation = AutomationService.get(normalizedId);
 
     if (automation) {
-        sendLog(`♻️ 기존 "${account.naverId}" 브라우저 세션을 사용합니다.`);
+        sendLog('♻️ 기존 계정 브라우저 세션을 사용합니다.');
         return automation;
     }
 

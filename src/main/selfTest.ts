@@ -69,6 +69,46 @@ async function runHandshakes(mainWindow: BrowserWindow, rendererErrors: readonly
     `renderer errors ${rendererErrors.length}`,
   );
 
-  // app.exit skips before-quit logout waits — deterministic teardown for CI.
-  setTimeout(() => app.exit(pass ? 0 : 1), 300);
+  teardownSelfTest(pass ? 0 : 1);
+}
+
+function teardownSelfTest(exitCode: number): void {
+  const childProcessIds = new Set(
+    app.getAppMetrics()
+      .map((metric) => metric.pid)
+      .filter((pid) => Number.isSafeInteger(pid) && pid > 0 && pid !== process.pid),
+  );
+  let hasExited = false;
+  const exitApp = (): void => {
+    if (hasExited) return;
+    hasExited = true;
+    for (const childProcessId of childProcessIds) {
+      try {
+        process.kill(childProcessId, 'SIGKILL');
+      } catch {
+        // The child already exited after BrowserWindow.destroy().
+      }
+    }
+    app.exit(exitCode);
+  };
+
+  const windows = BrowserWindow.getAllWindows().filter((window) => !window.isDestroyed());
+  if (windows.length === 0) {
+    setTimeout(exitApp, 150);
+    return;
+  }
+
+  let remainingWindows = windows.length;
+  const onWindowDestroyed = (): void => {
+    remainingWindows -= 1;
+    if (remainingWindows === 0) setTimeout(exitApp, 150);
+  };
+
+  for (const window of windows) {
+    window.webContents.once('destroyed', onWindowDestroyed);
+    if (!window.isDestroyed()) window.destroy();
+  }
+
+  // A renderer crash must not leave the smoke process hanging forever.
+  setTimeout(exitApp, 2_000);
 }

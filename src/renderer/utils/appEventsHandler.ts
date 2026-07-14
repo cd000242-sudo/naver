@@ -37,12 +37,29 @@ export function navigateToBannerTab(): void {
 /**
  * 공지사항 모달 이벤트 리스너 초기화
  */
+let noticeListenerRegistered = false;
+let noticeListenerRetryTimer: ReturnType<typeof setTimeout> | null = null;
+
 export function initNoticeModalListener(): void {
-    if (!window.api || !window.api.on) return;
+    if (noticeListenerRegistered) {
+        (window as any).__noticeListenerReady = true;
+        return;
+    }
+    if (!window.api || !window.api.on) {
+        if (noticeListenerRetryTimer === null) {
+            noticeListenerRetryTimer = setTimeout(() => {
+                noticeListenerRetryTimer = null;
+                initNoticeModalListener();
+            }, 50);
+        }
+        return;
+    }
 
     window.api.on('app:show-notice', (noticeContent: string) => {
         showServerNotice(noticeContent);
     });
+    noticeListenerRegistered = true;
+    (window as any).__noticeListenerReady = true;
 }
 
 /**

@@ -14,6 +14,10 @@ import { tmpdir } from 'os';
 import { join } from 'path';
 import { spawnCollect } from './spawnHelper.js';
 import { classifyExit, parseClaudeEnvelope } from './parse.js';
+import {
+  buildClaudeSubscriptionEnv,
+  CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
+} from './subscriptionEnv.js';
 import { AgentCliError } from './types.js';
 
 export interface ClaudeRunOptions {
@@ -33,7 +37,12 @@ export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Pr
   const dir = await mkdtemp(join(tmpdir(), 'agentcli-claude-'));
 
   try {
-    const args = ['-p', '--output-format', 'json', '--dangerously-skip-permissions'];
+    const args = [
+      '-p',
+      '--output-format', 'json',
+      '--permission-mode', 'plan',
+      ...CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
+    ];
     if (model) args.push('--model', model);
 
     const res = await spawnCollect({
@@ -44,6 +53,7 @@ export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Pr
       stdin: prompt,
       timeoutMs,
       signal,
+      env: buildClaudeSubscriptionEnv(),
     });
 
     if (res.code !== 0) {

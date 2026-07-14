@@ -49,7 +49,7 @@ function getApiKey() {
 }
 
 async function runTest() {
-    console.log('🔍 [Full-Scan] 생존 가능한 무료 Gemini 모델 탐색 시작...');
+    console.log('🔍 [Full-Scan] 현재 Gemini 텍스트 모델 접근 상태 확인...');
 
     const apiKey = getApiKey();
     if (!apiKey) {
@@ -57,20 +57,15 @@ async function runTest() {
         process.exit(1);
     }
 
-    console.log(`🔑 API Key: ${apiKey.substring(0, 10)}...`);
+    console.log(`🔑 API Key: configured (length=${apiKey.length})`);
 
     const genAI = new GoogleGenerativeAI(apiKey);
 
-    // 테스트할 후보군 (우선순위 순)
+    // 현재 value → balanced → premium 모델 순서
     const candidates = [
-        'gemini-2.0-flash-exp', // (할당량 초과 의심)
-        'gemini-1.5-flash',     // (Alias)
-        'gemini-1.5-flash-001', // (Specific Version 1)
-        'gemini-1.5-flash-002', // (Specific Version 2 - experimental)
-        'gemini-1.5-flash-8b',  // (Lite version)
-        'gemini-1.5-pro',       // (High quality)
-        'gemini-pro',           // (Legacy 1.0)
-        'gemini-1.0-pro'        // (Legacy 1.0 explicit)
+        'gemini-3.1-flash-lite',
+        'gemini-3.5-flash',
+        'gemini-3.1-pro-preview',
     ];
 
     let foundWorkingModel = null;

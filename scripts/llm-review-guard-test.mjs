@@ -21,7 +21,7 @@ const require = createRequire(import.meta.url);
 const { buildReviewGuardBlock } = require('../dist/content/reviewGuard.js');
 const { scanForbiddenPhrases } = require('../dist/content/forbiddenPhrases.js');
 
-const MODEL = process.env.LLM_TEST_MODEL || 'gpt-4o-mini';
+const MODEL = process.env.LLM_TEST_MODEL || 'gpt-5.6-luna';
 
 const FIXTURES = [
   {

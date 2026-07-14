@@ -37,6 +37,21 @@ describe('parseCritiqueResponse', () => {
 });
 
 describe('selfCritiqueAndRewrite', () => {
+  it('sends a readable Korean repair prompt instead of mojibake', async () => {
+    const captured: string[] = [];
+    const modelCall = vi.fn().mockImplementation(async (prompt: string) => {
+      captured.push(prompt);
+      return JSON.stringify({ rewrote: false, body: LONG_BODY });
+    });
+
+    await selfCritiqueAndRewrite(LONG_BODY, FAKE_PERSONA, modelCall, '도입부를 자연스럽게 고치세요.');
+
+    expect(captured[0]).toContain('당신은 한국어 블로그 글의 편집자입니다');
+    expect(captured[0]).toContain('JSON으로만 답하세요');
+    expect(captured[0]).toContain('도입부를 자연스럽게 고치세요.');
+    expect(captured[0]).not.toMatch(/[媛吏諛]/);
+  });
+
   it('skips when body is too short', async () => {
     const geminiCall = vi.fn();
     const result = await selfCritiqueAndRewrite('짧은 본문', FAKE_PERSONA, geminiCall);

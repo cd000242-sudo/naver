@@ -9,6 +9,7 @@
 
 import { runCodex } from './codexRunner.js';
 import { runClaude } from './claudeRunner.js';
+import { clearAgentDetectionCache, detectAgent } from './detect.js';
 import { tryExtractJson } from './parse.js';
 import {
   AgentCliError,
@@ -16,8 +17,9 @@ import {
   type AgentGenerateResult,
   type AgentProvider,
 } from './types.js';
+import { normalizeAgentGenerateOptions } from './validation.js';
 
-export { detectAgent } from './detect.js';
+export { clearAgentDetectionCache, detectAgent } from './detect.js';
 export * from './types.js';
 
 /** True when the value is a provider this service can route to. */
@@ -31,19 +33,43 @@ export function isAgentProvider(value: unknown): value is AgentProvider {
  *         or (when a schema is supplied) non-JSON output.
  */
 export async function generateWithAgent(opts: AgentGenerateOptions): Promise<AgentGenerateResult> {
-  const { provider, prompt, schema, model, timeoutMs, signal } = opts;
+  const normalized = normalizeAgentGenerateOptions(
+    opts as unknown as Record<string, unknown>,
+  );
+  const { provider, prompt, schema, model, timeoutMs, signal } = normalized;
 
-  if (!isAgentProvider(provider)) {
-    throw new AgentCliError('spawn_failed', 'codex', `지원하지 않는 에이전트 provider입니다: ${String(provider)}`);
+  // Protect every caller, including background flows that never pass through the renderer.
+  // Detection is cached briefly, so this does not make a second entitlement request.
+  const status = await detectAgent(provider, { forceRefresh: true });
+  if (!status.installed) {
+    throw new AgentCliError('not_installed', provider, `${provider} CLI가 설치되어 있지 않습니다.`);
   }
-  if (typeof prompt !== 'string' || !prompt.trim()) {
-    throw new AgentCliError('spawn_failed', provider, '프롬프트가 비어 있습니다.');
+  if (!status.loggedIn) {
+    throw new AgentCliError('not_logged_in', provider, `${provider} 구독 로그인이 필요합니다.`, status.detail);
+  }
+  if (!status.available) {
+    const code = status.errorCode ?? 'nonzero_exit';
+    const message = code === 'subscription_inactive'
+      ? `${provider} 구독 인증이 만료되었거나 API 과금 방식으로 로그인되어 있습니다. 구독 계정으로 다시 로그인해주세요.`
+      : code === 'rate_limited'
+        ? `${provider} 구독 사용 한도가 소진되었습니다. 한도 초기화 후 다시 시도해주세요.`
+        : status.detail || `${provider} 에이전트를 현재 사용할 수 없습니다.`;
+    throw new AgentCliError(code, provider, message, status.detail);
   }
 
   const started = Date.now();
-  const text = provider === 'codex'
-    ? await runCodex(prompt, { schema, model, timeoutMs, signal })
-    : await runClaude(prompt, { schema, model, timeoutMs, signal });
+  let text: string;
+  try {
+    text = provider === 'codex'
+      ? await runCodex(prompt, { schema, model, timeoutMs, signal })
+      : await runClaude(prompt, { schema, model, timeoutMs, signal });
+  } catch (error) {
+    if (error instanceof AgentCliError
+        && ['not_logged_in', 'subscription_inactive', 'rate_limited'].includes(error.code)) {
+      clearAgentDetectionCache(provider);
+    }
+    throw error;
+  }
   const durationMs = Date.now() - started;
 
   let json: unknown | undefined;

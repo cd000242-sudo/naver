@@ -29,7 +29,7 @@ async function main() {
   }
 
   console.log(`🐙 SPIKE A1: 세션 재사용 실증 시작`);
-  console.log(`   계정: ${naverId.substring(0, 3)}***`);
+  console.log(`   계정: ${naverId ? '설정됨' : '없음'}`);
   console.log('');
 
   // dist/ 빌드 결과 사용 (TS 직접 실행 시 electron import 문제 회피)

@@ -5,7 +5,7 @@
  * LLMProvider 인터페이스를 Anthropic SDK 호출로 충족.
  *
  * 적용 best practice (claude-api skill):
- *   - 기본 모델: claude-opus-4-8
+ *   - 기본 모델: claude-fable-5
  *   - thinking: adaptive (Opus 4.7+ 표준)
  *   - sampling 파라미터(temperature/top_p/top_k) 자동 strip — Opus 4.7+에서 400 방지
  *   - max_tokens > 16,000 시 streaming + finalMessage() 자동 사용 (timeout 회피)
@@ -20,15 +20,14 @@
  */
 
 import type { LLMProvider, LLMCompleteOptions } from '../draftWriter';
+import {
+  CLAUDE_MODELS,
+  supportsClaudeTemperature,
+} from '../../runtime/modelRegistry.js';
 
-const DEFAULT_MODEL = 'claude-opus-4-8';
+const DEFAULT_MODEL = CLAUDE_MODELS.FABLE;
 const DEFAULT_MAX_TOKENS = 16_000;
 const STREAM_THRESHOLD = 16_000;
-
-// Opus 4.7+ (4.7/4.8/4.9, 5.x)는 sampling 파라미터 미지원 — strip 필요. 4.6 이하는 허용.
-function isOpusSamplingDeprecated(model: string): boolean {
-  return /^claude-opus-4-[7-9]/.test(model) || /^claude-opus-[5-9]/.test(model);
-}
 
 export interface AnthropicMessageBlock {
   readonly type: string;
@@ -117,7 +116,7 @@ function buildMessageParams(
   };
 
   // Opus 4.7+는 sampling 파라미터 받지 않음 — 명시 strip
-  if (!isOpusSamplingDeprecated(model) && typeof options?.temperature === 'number') {
+  if (supportsClaudeTemperature(model) && typeof options?.temperature === 'number') {
     params.temperature = options.temperature;
   }
 

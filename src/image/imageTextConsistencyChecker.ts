@@ -4,13 +4,14 @@
  * 네이버 QUMA-VL 대응: 발행 전 이미지와 텍스트의 시각적 일관성을 검증하여
  * 불일치로 인한 랭킹 하락을 방지한다.
  *
- * - Gemini Vision API (gemini-2.5-flash) 사용
+ * - Gemini Vision API (gemini-3.5-flash) 사용
  * - fail-open 전략: API 실패 시 score 50 반환
  * - 로컬 파일 자동 base64 변환
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { GEMINI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -45,7 +46,7 @@ interface GeminiResponse {
 // Constants
 // ---------------------------------------------------------------------------
 
-const GEMINI_MODEL = 'gemini-2.5-flash';
+const GEMINI_MODEL = GEMINI_TEXT_MODELS.FLASH_LITE;
 const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 const RELEVANCE_THRESHOLD = 40;
 const MAX_CONCURRENT = 5;

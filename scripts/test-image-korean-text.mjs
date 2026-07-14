@@ -11,8 +11,8 @@
  *   - 키가 없는 엔진은 SKIP 처리하고 안내를 출력한다 (비치명적).
  *
  * 검증 모델 ID (src/runtime/imageEngineCatalog.ts SSOT와 일치해야 함):
- *   나노바나나2   → gemini-3.1-flash-image-preview
- *   나노바나나프로 → gemini-3-pro-image-preview
+ *   나노바나나2   → gemini-3.1-flash-image
+ *   나노바나나프로 → gemini-3-pro-image
  *   나노바나나     → gemini-2.5-flash-image
  *   덕테이프       → gpt-image-2
  */
@@ -31,8 +31,8 @@ const PROMPT =
   `as given with no broken or garbled glyphs. Simple modern background, high contrast.`;
 
 const ENGINES = [
-  { name: '나노바나나2', kind: 'gemini', model: 'gemini-3.1-flash-image-preview' },
-  { name: '나노바나나프로', kind: 'gemini', model: 'gemini-3-pro-image-preview' },
+  { name: '나노바나나2', kind: 'gemini', model: 'gemini-3.1-flash-image' },
+  { name: '나노바나나프로', kind: 'gemini', model: 'gemini-3-pro-image' },
   { name: '나노바나나', kind: 'gemini', model: 'gemini-2.5-flash-image' },
   { name: '덕테이프', kind: 'openai', model: 'gpt-image-2' },
 ];

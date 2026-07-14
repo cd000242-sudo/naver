@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buildIsolatedPackagedAppEnv,
   findPackagedExecutable,
+  removeIsolatedSmokeRoot,
 } from '../../scripts/lib/packaged-smoke-lib.mjs';
 
 describe('packaged app smoke helpers', () => {
@@ -31,5 +32,39 @@ describe('packaged app smoke helpers', () => {
     expect(env.SELF_TEST).toBe('1');
     expect(env.E2E_TEST).toBe('1');
     expect(env.ELECTRON_RUN_AS_NODE).toBeUndefined();
+  });
+
+  it('retries transient Windows profile locks before declaring cleanup failure', () => {
+    let attempts = 0;
+    const delays: number[] = [];
+
+    removeIsolatedSmokeRoot('C:\\temp\\packaged-smoke', {
+      rmSync: () => {
+        attempts += 1;
+        if (attempts < 3) {
+          throw Object.assign(new Error('locked'), { code: 'EBUSY' });
+        }
+      },
+      sleep: (delayMs: number) => delays.push(delayMs),
+      maxAttempts: 4,
+      baseDelayMs: 10,
+    });
+
+    expect(attempts).toBe(3);
+    expect(delays).toEqual([10, 20]);
+  });
+
+  it('does not retry non-transient cleanup failures', () => {
+    let attempts = 0;
+
+    expect(() => removeIsolatedSmokeRoot('C:\\temp\\packaged-smoke', {
+      rmSync: () => {
+        attempts += 1;
+        throw Object.assign(new Error('access denied'), { code: 'EACCES' });
+      },
+      sleep: () => undefined,
+    })).toThrow('access denied');
+
+    expect(attempts).toBe(1);
   });
 });

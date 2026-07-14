@@ -6,6 +6,7 @@
 import { ipcMain } from 'electron';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { loadConfig } from '../../configManager.js';
+import { GEMINI_TEXT_MODELS } from '../../runtime/modelRegistry.js';
 
 interface PasteClassifyResult {
     success: boolean;
@@ -52,12 +53,11 @@ export function registerPasteClassifyHandlers(): void {
 
             const genAI = new GoogleGenerativeAI(apiKey);
             const model = genAI.getGenerativeModel({
-                model: 'gemini-2.5-flash-lite', // 저렴 + 빠름 (분류 용도)
+                model: GEMINI_TEXT_MODELS.FLASH_LITE,
                 generationConfig: {
                     temperature: 0.1, // 결정적 분류
                     maxOutputTokens: 4096,
                     responseMimeType: 'application/json',
-                    thinkingConfig: { thinkingBudget: 0 } as any, // Flash에서만
                 } as any,
             });
 

@@ -17,6 +17,7 @@ import { initImageNarrativeUpload, getUploadedImages, clearUploadedImages, addFi
 import { showReviewPanel, hideReviewPanel, isReviewComplete, getReviewEdits } from './imageNarrativeReview.js';
 import { executeFullAutoFlow } from './fullAutoFlow.js';
 import type { NarrativePlan, VisionProvider } from '../../imageNarrative/types.js';
+import { GEMINI_TEXT_MODELS } from '../../runtime/modelRegistry.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -161,7 +162,7 @@ async function _runQuickInference(): Promise<void> {
     // [v2.11.6] 환경설정의 글 생성 모델을 읽어 vision provider 매핑. 사용자가 OpenAI/Claude
     //   선택했으면 같은 vendor로 vision도 호출 (modelRegistry routeTextToVision 의도 재현).
     //   Perplexity 는 vision 미지원이라 gemini fallback (visionRouter도 동일 정책).
-    let textKey = 'gemini-2.5-flash';
+    let textKey = GEMINI_TEXT_MODELS.FLASH;
     try {
       const cfg = await (window as any).api?.getConfig?.();
       textKey = cfg?.primaryGeminiTextModel || cfg?.geminiModel || textKey;

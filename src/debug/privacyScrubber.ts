@@ -142,6 +142,16 @@ export function maskAccountId(accountId: string | undefined): string {
   return '****' + accountId.slice(-4);
 }
 
+/** Removes a known account identifier from operational logs without exposing any fragment. */
+export function redactKnownAccountId(message: string, accountId: string | undefined): string {
+  const input = String(message ?? '');
+  const normalizedAccountId = String(accountId ?? '').trim();
+  if (!normalizedAccountId) return input;
+
+  const escapedAccountId = normalizedAccountId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return input.replace(new RegExp(escapedAccountId, 'gi'), '[NAVER_ACCOUNT]');
+}
+
 /**
  * PRIVACY_REPORT.txt 내용 생성 — 사용자가 개발자에게 보내기 전 검증용
  */

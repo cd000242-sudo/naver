@@ -17,7 +17,7 @@ async function testDraftPublish(): Promise<void> {
     process.exit(1);
   }
 
-  console.log(`✅ 네이버 계정: ${naverId.substring(0, 3)}***`);
+  console.log(`✅ 네이버 계정: ${naverId ? '설정됨' : '없음'}`);
   console.log('📝 테스트 제목: [임시발행 테스트] 자동화 테스트 포스트');
   console.log('📝 테스트 내용: 이것은 임시 발행 테스트입니다.\n');
 

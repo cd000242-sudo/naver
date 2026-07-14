@@ -12,6 +12,7 @@ export type AgentProvider = 'codex' | 'claude';
 export type AgentErrorCode =
   | 'not_installed'    // binary missing on PATH (ENOENT)
   | 'not_logged_in'    // CLI present but no active subscription session
+  | 'subscription_inactive' // OAuth remains, but the paid plan/entitlement is inactive
   | 'rate_limited'     // subscription window / weekly cap exhausted
   | 'timeout'          // no response within the deadline
   | 'aborted'          // caller cancelled via AbortSignal
@@ -71,6 +72,10 @@ export interface AgentCliStatus {
   installed: boolean;
   version?: string;
   loggedIn: boolean;
+  /** True only after the current account is confirmed usable for an agent request. */
+  available: boolean;
+  /** Stable reason when available is false. */
+  errorCode?: AgentErrorCode;
   /** Human-readable detail (e.g. "Logged in using ChatGPT"). */
   detail?: string;
 }

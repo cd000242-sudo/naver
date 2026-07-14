@@ -16,7 +16,7 @@ async function testLogin() {
     process.exit(1);
   }
   
-  console.log(`📝 테스트 계정: ${naverId.substring(0, 3)}***`);
+  console.log(`📝 테스트 계정: ${naverId ? '설정됨' : '없음'}`);
   console.log('');
   
   const automation = new NaverBlogAutomation({

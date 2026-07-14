@@ -66,6 +66,12 @@ describe('parse.parseClaudeEnvelope', () => {
 });
 
 describe('parse.classifyExit', () => {
+  it('flags an expired or inactive Claude subscription separately from login expiry', () => {
+    expect(classifyExit('claude', 'Your Claude subscription has expired.')).toBe('subscription_inactive');
+    expect(classifyExit('claude', 'Claude Code requires an active Pro or Max plan. Upgrade to continue.'))
+      .toBe('subscription_inactive');
+  });
+
   it('flags rate/usage limits', () => {
     expect(classifyExit('codex', 'Error: usage limit reached')).toBe('rate_limited');
     expect(classifyExit('claude', 'HTTP 429 Too Many Requests')).toBe('rate_limited');
@@ -139,7 +145,7 @@ describe('spawnCollect — real node child (no CLI / no quota)', () => {
         provider: 'codex',
         timeoutMs: 5_000,
       });
-      // Windows shell:true → cmd.exe exits non-zero instead of emitting an ENOENT event.
+      // Some Windows launch failures resolve with a non-zero status instead of ENOENT.
       expect(res.code).not.toBe(0);
     } catch (e) {
       // POSIX direct spawn → ENOENT → AgentCliError(not_installed).

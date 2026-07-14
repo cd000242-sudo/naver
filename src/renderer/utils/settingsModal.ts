@@ -8,6 +8,7 @@
 import {
     isMaskedSecretValue,
 } from '../../security/secretValueUtils.js';
+import { normalizeGeminiTextModelId } from '../../runtime/modelRegistry.js';
 
 // ==================== 타입 정의 ====================
 
@@ -314,7 +315,10 @@ async function loadCurrentSettings(): Promise<void> {
         // ✅ [v2.10.221] 글 생성 엔진(primaryGeminiTextModel) 라디오 버튼 모달 열릴 때마다 디스크 값으로 복원
         // 기존: initPriceInfoModal()의 DOMContentLoaded 1회 실행에 의존 → 사용자가 라디오 만지고 저장 안 하면 다음 열 때 변경분 잔존
         // 수정: 모달 열 때마다 디스크 값으로 강제 동기화 → "왜 기억 못 함?" 해결
-        const savedTextModel = (config as any).primaryGeminiTextModel || 'gemini-2.5-flash';
+        const rawSavedTextModel = (config as any).primaryGeminiTextModel || 'gemini-3.5-flash';
+        const savedTextModel = String(rawSavedTextModel).startsWith('gemini-')
+            ? normalizeGeminiTextModelId(rawSavedTextModel)
+            : rawSavedTextModel;
         const textModelRadios = document.getElementsByName('primaryGeminiTextModel') as NodeListOf<HTMLInputElement>;
         if (textModelRadios.length > 0) {
             textModelRadios.forEach(r => { r.checked = (r.value === savedTextModel); });
@@ -333,16 +337,17 @@ async function loadCurrentSettings(): Promise<void> {
         const navStatusEl = document.getElementById('nav-text-engine-status');
         if (navStatusEl) {
             const modelLabels: Record<string, string> = {
-                'gemini-2.5-flash-lite': '💰 Gemini 2.5 Flash-Lite (~₩15/글)',
-                'gemini-2.5-flash': '⚖️ Gemini 2.5 Flash (~₩80/글) ★ 기본',
-                'gemini-2.5-pro': '👑 Gemini 2.5 Pro (~₩300/글)',
+                'gemini-3.1-flash-lite': '💰 Gemini 3.1 Flash-Lite (가성비)',
+                'gemini-3.5-flash': '⚖️ Gemini 3.5 Flash (균형) ★ 기본',
+                'gemini-3.1-pro-preview': '👑 Gemini 3.1 Pro Preview (프리미엄)',
                 'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
-                'openai-gpt4o-mini': '🧠 GPT-4.1 mini (~₩16/글)',
-                'openai-gpt41': '⚖️ GPT-4.1 (~₩60/글)',
-                'openai-gpt4o-search': '🔎 GPT-4o Search (~₩101 + ₩35/검색)',
-                'claude-haiku': '🎭 Claude Haiku (~₩30/글)',
-                'claude-sonnet': '📜 Claude Sonnet 4.6 (~₩240/글)',
-                'claude-opus': '👑 Claude Opus (~₩900/글)',
+                'openai-gpt4o-mini': '🧠 GPT-5.6 Luna (가성비)',
+                'openai-gpt41': '⚖️ GPT-5.6 Terra (균형)',
+                'openai-gpt4o': '🚀 GPT-5.6 Sol (프리미엄)',
+                'openai-gpt4o-search': '🔎 GPT-5.6 웹 검색 (Responses API)',
+                'claude-haiku': '🎭 Claude Haiku 4.5 (가성비)',
+                'claude-sonnet': '📜 Claude Sonnet 5 (균형)',
+                'claude-opus': '👑 Claude Fable 5 (프리미엄)',
             };
             navStatusEl.textContent = `현재: ${modelLabels[savedTextModel] || savedTextModel}`;
         }
@@ -388,7 +393,7 @@ async function saveSettings(): Promise<void> {
             naverClientId: naverClientId,
             naverClientSecret: naverClientSecret,
             defaultAiProvider: els.defaultAiProviderSelect?.value as 'gemini' | 'perplexity' | 'openai' | 'claude' || 'gemini',
-            geminiModel: els.geminiModelSelect?.value || 'gemini-2.5-flash',
+            geminiModel: els.geminiModelSelect?.value || 'gemini-3.5-flash',
             perplexityModel: els.perplexityModelSelect?.value || 'sonar',
         };
 
@@ -507,7 +512,7 @@ export function initSettingsModal(): void {
         // ✅ [2026-03-24] 캐시 관리 이벤트
         setupCacheSettings();
 
-        // SPEC-MIGRATION-2026 M3 P2: GPT-4o Search 선택 시 1회 비용 안내 모달 (opt-in).
+        // GPT-5 Search API 선택 시 1회 비용 안내 모달 (opt-in).
         //   feedback_no_fallback — 사용자가 의도하지 않은 검색 호출 비용을 명시 인지하도록 confirm.
         setupOpenAISearchCostConsent();
 
@@ -517,7 +522,7 @@ export function initSettingsModal(): void {
     }
 }
 
-// SPEC-MIGRATION-2026 M3 P2: GPT-4o Search 선택 1회 비용 동의 모달.
+// GPT-5.6 web search selection: one-time cost consent.
 //   동작: 라디오 change 이벤트에서 'openai-gpt4o-search' 선택 시 confirm 노출.
 //   1회 동의 후 sessionStorage 플래그로 동일 세션 내 재노출 방지.
 //   사용자가 취소하면 이전 모델로 자동 revert.
@@ -558,9 +563,8 @@ function setupOpenAISearchCostConsent(): void {
                 return;
             }
             const ok = window.confirm(
-                'GPT-4o Search Preview는 웹 검색 호출당 추가 비용이 발생합니다.\n\n' +
-                '· 기본 글 생성: 약 ₩101 ($0.072)\n' +
-                '· 검색 호출 1회당: 약 ₩35 ($0.025)\n\n' +
+                'GPT-5.6 웹 검색은 모델 토큰 비용과 웹 검색 비용이 함께 발생합니다.\n\n' +
+                '요금은 OpenAI 정책과 사용량에 따라 달라질 수 있으므로 공식 가격표를 확인해 주세요.\n\n' +
                 '실시간 정보가 필요한 글에서만 권장합니다. 계속하시겠습니까?'
             );
             if (ok) {
@@ -571,7 +575,7 @@ function setupOpenAISearchCostConsent(): void {
                 // revert
                 const revertTo = previousValue && previousValue !== SEARCH_VALUE
                     ? previousValue
-                    : 'gemini-2.5-flash';
+                    : 'gemini-3.5-flash';
                 const target = document.querySelector<HTMLInputElement>(
                     `input[name="primaryGeminiTextModel"][value="${revertTo}"]`
                 );
@@ -582,7 +586,7 @@ function setupOpenAISearchCostConsent(): void {
             }
         });
     });
-    console.log('[SettingsModal][M3P2] GPT-4o Search 비용 동의 리스너 등록 완료');
+    console.log('[SettingsModal][M3P2] GPT-5 Search API 비용 동의 리스너 등록 완료');
 }
 
 // ✅ [2026-01-27] 설정 섹션 페이지 전환 기능 (모달 내 서브페이지)

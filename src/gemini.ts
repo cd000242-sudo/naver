@@ -1,8 +1,10 @@
 import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
 import { buildSystemPromptFromHint, type PromptMode } from './promptLoader.js';
 import { loadConfig, saveConfig } from './configManager.js';
-import { GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
-import { GEMINI_TEXT_FREE_TIER_LIMITS } from './geminiQuotaPolicy.js';
+import {
+  GEMINI_TEXT_MODELS,
+  normalizeGeminiTextModelId,
+} from './runtime/modelRegistry.js';
 
 // ==================== 타입 정의 ====================
 
@@ -31,20 +33,20 @@ interface GenerateResult {
 // ==================== 상수 ====================
 
 // 기본 모델은 품질·속도 균형이 가장 무난한 Flash.
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const DEFAULT_MODEL = process.env.GEMINI_MODEL || GEMINI_TEXT_MODELS.FLASH;
 
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
 // [v1.4.49] 실측 기반 정확한 무료 할당량 표시
 export const AVAILABLE_MODELS = [
-  { id: 'gemini-2.5-flash', name: `Gemini 2.5 Flash (무료 ${GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-flash'].rpd}/일 · 기본 추천)`, tier: 'standard' },
-  { id: 'gemini-2.5-flash-lite', name: `Gemini 2.5 Flash-Lite (무료 ${GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-flash-lite'].rpd}/일 · 대량 생성)`, tier: 'budget' },
-  { id: 'gemini-2.5-pro', name: `Gemini 2.5 Pro (무료 ${GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-pro'].rpd}/일 · 고품질)`, tier: 'premium' },
+  { id: GEMINI_TEXT_MODELS.FLASH, name: 'Gemini 3.5 Flash (균형 · 기본 추천)', tier: 'standard' },
+  { id: GEMINI_TEXT_MODELS.FLASH_LITE, name: 'Gemini 3.1 Flash-Lite (가성비 · 대량 생성)', tier: 'budget' },
+  { id: GEMINI_TEXT_MODELS.PRO, name: 'Gemini 3.1 Pro Preview (프리미엄)', tier: 'premium' },
 ];
 
 const BASE_FALLBACK_MODELS = [
-  'gemini-2.5-flash',
-  'gemini-2.5-flash-lite',
-  'gemini-2.5-pro',
+  GEMINI_TEXT_MODELS.FLASH,
+  GEMINI_TEXT_MODELS.FLASH_LITE,
+  GEMINI_TEXT_MODELS.PRO,
 ];
 
 // ✅ [v1.4.44] 사용자 선택 모델만 사용 — 타 모델 자동 폴백 제거
@@ -65,7 +67,7 @@ export function getConfiguredModel(): string {
 }
 
 const MODEL_ENFORCEMENT_ERROR =
-  '지원되지 않는 Gemini 모델입니다. gemini-2.5-flash / gemini-2.5-flash-lite / gemini-2.5-pro 중에서 선택해주세요.';
+  `지원되지 않는 Gemini 모델입니다. ${GEMINI_TEXT_MODELS.FLASH_LITE} / ${GEMINI_TEXT_MODELS.FLASH} / ${GEMINI_TEXT_MODELS.PRO} 중에서 선택해주세요.`;
 
 // ✅ 시스템 프롬프트는 .prompt 파일에서 로드됩니다.
 // - SEO 모드: src/prompts/seo/base.prompt + 카테고리별 .prompt
@@ -135,7 +137,7 @@ function resolveModelName(): string {
     throw new Error(`⏳ [사용량 초과] Gemini API 할당량이 소진되었습니다. 다른 AI 엔진(Claude/OpenAI)으로 전환하거나 잠시 후 다시 시도해주세요. (감지된 모델: ${configuredModel})`);
   }
 
-  return configuredModel;
+  return normalizeGeminiTextModelId(configuredModel);
 }
 
 // ==================== 기존 호환성 함수 ====================
@@ -283,10 +285,9 @@ export async function generateBlogContent(
 
   let lastError: Error | null = null;
 
-  // ✅ [v1.4.44] 반드시 성공 전략 — limit:0 시 폴백 모델 동적 추가
+  // Keep the user-selected tier. Provider errors must never silently change models.
   const userModel = resolveModelName();
   const modelsToTry = [userModel];
-  const fallbackCandidates = ['gemini-2.5-flash', 'gemini-2.5-flash-lite'].filter(m => m !== userModel);
 
   // 재시도 루프
   for (let retry = 0; retry < maxRetries; retry++) {
@@ -304,7 +305,7 @@ export async function generateBlogContent(
             systemInstruction: { role: 'system', parts: [{ text: splitPrompt.system }] },
             generationConfig: {
               temperature: 0.95,
-              maxOutputTokens: 4096,
+              maxOutputTokens: modelName === GEMINI_TEXT_MODELS.PRO ? 16384 : modelName === GEMINI_TEXT_MODELS.FLASH ? 12288 : 8192,
               topP: 0.95,
               topK: 50,
             },
@@ -393,13 +394,10 @@ export async function generateBlogContent(
           const isLimitZero = errorMessage.includes('limit: 0') || errorMessage.includes('free_tier');
           const isServerError = errorMessage.includes('503') || errorMessage.includes('500') || errorMessage.includes('unavailable');
 
-          // ✅ [v1.4.44] limit:0 → 폴백 모델 추가 후 전환
+          // A zero quota is terminal for the selected model. Do not silently
+          // downgrade or upgrade because that changes cost and output quality.
           if (isQuota && isLimitZero) {
-            console.warn(`🚫 [Gemini] ${modelName} 무료 할당량 0 → 폴백 모델 전환`);
-            for (const fb of fallbackCandidates) {
-              if (!modelsToTry.includes(fb)) { modelsToTry.push(fb); }
-            }
-            break;
+            throw new Error(`🚫 [${modelName}] 현재 프로젝트의 API 할당량이 0입니다. AI Studio에서 모델 접근 권한과 결제 상태를 확인해주세요.`);
           }
 
           // ✅ [v1.4.44] 429 RPM → 지수 백오프 재시도
@@ -616,7 +614,7 @@ JSON만 출력하세요. 설명 없이.`;
       const _p = _u.promptTokenCount || 0;
       const _t = _u.totalTokenCount || 0;
       const _o = _t > _p ? _t - _p : (_u.candidatesTokenCount || 0);
-      trackGeminiUsage('gemini-2.5-flash', _p, _o);
+      trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, _p, _o);
     }
 
     // JSON 파싱
@@ -706,7 +704,7 @@ export async function extractCoreSubject(
       const _p = _u2.promptTokenCount || 0;
       const _t = _u2.totalTokenCount || 0;
       const _o = _t > _p ? _t - _p : (_u2.candidatesTokenCount || 0);
-      trackGeminiUsage('gemini-2.5-flash', _p, _o);
+      trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, _p, _o);
     }
 
     console.log(`[Gemini] 핵심 주제 추출: "${title}" → "${text}"`);
@@ -789,7 +787,7 @@ JSON만 출력하세요. 설명 없이.`;
       const _p = _u3.promptTokenCount || 0;
       const _t = _u3.totalTokenCount || 0;
       const _o = _t > _p ? _t - _p : (_u3.candidatesTokenCount || 0);
-      trackGeminiUsage('gemini-2.5-flash', _p, _o);
+      trackGeminiUsage(GEMINI_TEXT_MODELS.FLASH, _p, _o);
     }
 
     // JSON 배열 파싱

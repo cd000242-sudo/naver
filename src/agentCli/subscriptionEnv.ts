@@ -1,0 +1,86 @@
+// Subscription agents run outside the Electron process. Pass only operating-system
+// values needed to locate the executable, user profile, cached login, and TLS roots.
+// Every application secret is denied by default, including future variables that this
+// module does not know about yet.
+const SHARED_SUBSCRIPTION_ENV_KEYS = new Set([
+  'PATH',
+  'PATHEXT',
+  'SYSTEMROOT',
+  'WINDIR',
+  'SYSTEMDRIVE',
+  'COMSPEC',
+  'TEMP',
+  'TMP',
+  'TMPDIR',
+  'HOME',
+  'USERPROFILE',
+  'HOMEDRIVE',
+  'HOMEPATH',
+  'APPDATA',
+  'LOCALAPPDATA',
+  'PROGRAMDATA',
+  'PROGRAMFILES',
+  'PROGRAMFILES(X86)',
+  'PROGRAMW6432',
+  'XDG_CONFIG_HOME',
+  'XDG_DATA_HOME',
+  'XDG_CACHE_HOME',
+  'LANG',
+  'LANGUAGE',
+  'LC_ALL',
+  'LC_CTYPE',
+  'TERM',
+  'COLORTERM',
+  'NO_COLOR',
+  'FORCE_COLOR',
+  'SHELL',
+  'ELECTRON_RUN_AS_NODE',
+  'SSL_CERT_FILE',
+  'SSL_CERT_DIR',
+  'NODE_EXTRA_CA_CERTS',
+]);
+
+const CLAUDE_SUBSCRIPTION_ENV_KEYS = new Set([
+  ...SHARED_SUBSCRIPTION_ENV_KEYS,
+  'CLAUDE_CONFIG_DIR',
+]);
+
+const CODEX_SUBSCRIPTION_ENV_KEYS = new Set([
+  ...SHARED_SUBSCRIPTION_ENV_KEYS,
+  'CODEX_HOME',
+]);
+
+function pickSubscriptionEnv(
+  source: NodeJS.ProcessEnv,
+  allowedKeys: ReadonlySet<string>,
+): NodeJS.ProcessEnv {
+  return Object.fromEntries(
+    Object.entries(source).filter(([key, value]) => (
+      value !== undefined && allowedKeys.has(key.toUpperCase())
+    )),
+  );
+}
+
+/**
+ * Keep subscription calls independent from user/project helpers, tools, and MCP servers.
+ * OAuth credentials still load normally; only customization sources are isolated.
+ */
+export const CLAUDE_SUBSCRIPTION_ISOLATION_ARGS = [
+  '--safe-mode',
+  '--setting-sources', 'local',
+  '--disallowedTools', '*',
+  '--strict-mcp-config',
+  '--no-session-persistence',
+] as const;
+
+export function buildClaudeSubscriptionEnv(
+  source: NodeJS.ProcessEnv = process.env,
+): NodeJS.ProcessEnv {
+  return pickSubscriptionEnv(source, CLAUDE_SUBSCRIPTION_ENV_KEYS);
+}
+
+export function buildCodexSubscriptionEnv(
+  source: NodeJS.ProcessEnv = process.env,
+): NodeJS.ProcessEnv {
+  return pickSubscriptionEnv(source, CODEX_SUBSCRIPTION_ENV_KEYS);
+}

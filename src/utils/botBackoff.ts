@@ -44,7 +44,7 @@ export function recordBotBackoff(
     expiresAt: now + hours * 60 * 60 * 1000,
   };
   backoffMap.set(accountId, record);
-  console.log(`[BotBackoff] ${accountId} (${reason}) backed off for ${hours}h until ${new Date(record.expiresAt).toISOString()}`);
+  console.log(`[BotBackoff] account (${reason}) backed off for ${hours}h until ${new Date(record.expiresAt).toISOString()}`);
   return record;
 }
 

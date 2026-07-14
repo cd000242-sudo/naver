@@ -8,6 +8,7 @@
 
 import { loadConfig } from './configManager.js';
 import { isMaskedSecretValue } from './security/secretValueUtils.js';
+import { GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
 
 // ==================== 타입 정의 ====================
 
@@ -472,7 +473,7 @@ export async function getSeoKeywordsWithGemini(productName: string): Promise<str
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
+        const model = genAI.getGenerativeModel({ model: GEMINI_TEXT_MODELS.FLASH_LITE });
 
         const prompt = `당신은 네이버 쇼핑 SEO 전문가입니다.
 

@@ -23,6 +23,19 @@ Write in Korean about "네이버 블로그 모바일 가독성". bodyPlain must 
 
 const SETTINGS = loadSettings();
 
+const CURRENT_MODELS = Object.freeze({
+  gemini: Object.freeze({ value: 'gemini-3.1-flash-lite', balanced: 'gemini-3.5-flash', premium: 'gemini-3.1-pro-preview' }),
+  openai: Object.freeze({ value: 'gpt-5.6-luna', balanced: 'gpt-5.6-terra', premium: 'gpt-5.6-sol' }),
+  claude: Object.freeze({ value: 'claude-haiku-4-5-20251001', balanced: 'claude-sonnet-5', premium: 'claude-fable-5' }),
+});
+
+function normalizeGeminiModel(value) {
+  const model = String(value || '').trim();
+  if (/flash-lite/.test(model)) return CURRENT_MODELS.gemini.value;
+  if (/pro/.test(model)) return CURRENT_MODELS.gemini.premium;
+  return CURRENT_MODELS.gemini.balanced;
+}
+
 function appDataRoot() {
   return process.env.APPDATA || join(homedir(), 'AppData', 'Roaming');
 }
@@ -159,12 +172,16 @@ function sleep(ms) {
 async function runGemini() {
   const apiKey = getKey(['GEMINI_API_KEY', 'GOOGLE_API_KEY'], ['geminiApiKey', 'geminiApiKeys']);
   if (!apiKey) return skipped('gemini', 'GEMINI_API_KEY not configured');
-  const model = process.env.GEMINI_MODEL || getSettingModel('geminiModel') || 'gemini-2.5-flash';
+  const model = process.env.GEMINI_MODEL || normalizeGeminiModel(getSettingModel('geminiModel'));
   const genAI = new GoogleGenerativeAI(apiKey);
   const request = (signal) => genAI.getGenerativeModel({ model }).generateContent(
     {
       contents: [{ role: 'user', parts: [{ text: CHECK_PROMPT }] }],
-      generationConfig: { temperature: 0.3, maxOutputTokens: 900 },
+      generationConfig: {
+        temperature: 0.3,
+        maxOutputTokens: 8192,
+        responseMimeType: 'application/json',
+      },
     },
     { signal },
   );
@@ -180,29 +197,42 @@ async function runOpenAI() {
   const apiKey = getKey(['OPENAI_API_KEY'], ['openaiApiKey']);
   if (!apiKey) return skipped('openai', 'OPENAI_API_KEY not configured');
   const selected = getSettingModel('primaryGeminiTextModel');
+  const useWebSearch = selected === 'openai-gpt4o-search';
   const mapped = selected === 'openai-gpt41'
-    ? 'gpt-4.1'
+    ? CURRENT_MODELS.openai.balanced
     : selected === 'openai-gpt4o'
-      ? 'gpt-4o'
+      ? CURRENT_MODELS.openai.premium
       : selected === 'openai-gpt4o-search'
-        ? 'gpt-4o-search-preview'
+        ? CURRENT_MODELS.openai.balanced
         : selected === 'openai-gpt4o-mini'
-          ? 'gpt-4.1-mini'
-          : 'gpt-4.1';
+          ? CURRENT_MODELS.openai.value
+          : CURRENT_MODELS.openai.balanced;
   const model = process.env.OPENAI_STRUCTURED_MODEL || process.env.OPENAI_MODEL || mapped;
   const client = new OpenAI({ apiKey });
-  const request = (signal) => client.chat.completions.create(
-    {
+  const request = (signal) => useWebSearch
+    ? client.responses.create({
+        model,
+        input: CHECK_PROMPT,
+        tools: [{ type: 'web_search' }],
+        max_output_tokens: 2400,
+        reasoning: { effort: 'high' },
+        text: { format: { type: 'json_object' } },
+        store: false,
+      }, { signal })
+    : client.chat.completions.create({
       model,
       messages: [{ role: 'user', content: CHECK_PROMPT }],
-      max_completion_tokens: 900,
-      ...(model.includes('search-preview') ? {} : { temperature: 0.3, response_format: { type: 'json_object' } }),
-    },
-    { signal },
-  );
+      max_completion_tokens: 2400,
+      response_format: { type: 'json_object' },
+      ...(model.startsWith('gpt-5.6-')
+        ? { reasoning_effort: model === CURRENT_MODELS.openai.value ? 'medium' : 'high' }
+        : { temperature: 0.3 }),
+    }, { signal });
   const { promise } = withTimeout(request, DEFAULT_TIMEOUT_MS, 'OpenAI');
   const response = await promise;
-  const text = response.choices?.[0]?.message?.content || '';
+  const text = useWebSearch
+    ? response.output_text || ''
+    : response.choices?.[0]?.message?.content || '';
   const json = extractJson(text);
   assertContentShape('openai', json);
   return passed('openai', model, text.length);
@@ -213,17 +243,17 @@ async function runClaude() {
   if (!apiKey) return skipped('claude', 'CLAUDE_API_KEY not configured');
   const selected = getSettingModel('primaryGeminiTextModel');
   const mapped = selected === 'claude-haiku'
-    ? 'claude-haiku-4-5-20251001'
+    ? CURRENT_MODELS.claude.value
     : selected === 'claude-opus'
-      ? 'claude-opus-4-7'
-      : 'claude-sonnet-4-6';
+      ? CURRENT_MODELS.claude.premium
+      : CURRENT_MODELS.claude.balanced;
   const model = process.env.CLAUDE_STRUCTURED_MODEL || process.env.CLAUDE_MODEL || mapped;
   const client = new Anthropic({ apiKey });
   const request = (signal) => client.messages.create(
     {
       model,
-      max_tokens: 900,
-      temperature: 0.3,
+      max_tokens: 1600,
+      ...(/^claude-(?:fable-5|sonnet-5)/.test(model) ? {} : { temperature: 0.3 }),
       messages: [{ role: 'user', content: CHECK_PROMPT }],
     },
     { signal },

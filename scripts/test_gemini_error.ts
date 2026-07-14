@@ -25,12 +25,13 @@ async function testGeminiImage() {
         console.error('API KEY NOT FOUND');
         return;
     }
-    console.log('KEY: ' + apiKey.substring(0, 15) + '...');
+    console.log('KEY: configured (length=' + apiKey.length + ')');
     console.log('TIME: ' + new Date().toISOString());
 
     const models = [
-        'gemini-2.0-flash-exp',
-        'gemini-2.0-flash-preview-image-generation',
+        'gemini-3.1-flash-lite-image',
+        'gemini-3.1-flash-image',
+        'gemini-3-pro-image',
     ];
 
     const testPrompt = 'Generate a simple photograph of a coffee cup on a wooden table. Warm lighting. Photorealistic.';

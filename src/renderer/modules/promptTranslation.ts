@@ -5,6 +5,12 @@
 // ═══════════════════════════════════════════════════════════════════
 
 import { generateEnglishPromptForHeadingSync } from './headingImageGen.js';
+import {
+    CLAUDE_MODELS,
+    GEMINI_TEXT_MODELS,
+    OPENAI_TEXT_MODELS,
+    normalizeGeminiTextModelId,
+} from '../../runtime/modelRegistry.js';
 
 // ✅ 번역 캐시 (최대 100개, 모든 모델 공유)
 export const _promptTranslationCache = new Map<string, string>();
@@ -112,7 +118,8 @@ async function generateEnglishPromptWithGemini(headingText: string, imageStyle?:
             return null;
         }
 
-        const geminiModel = (config as any).geminiTextModel || 'gemini-2.5-flash';
+        const savedGeminiModel = String((config as any).geminiModel || (config as any).geminiTextModel || '');
+        const geminiModel = normalizeGeminiTextModelId(savedGeminiModel || GEMINI_TEXT_MODELS.FLASH);
 
         const response = await fetchWithTimeout(
             `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent`,
@@ -176,13 +183,13 @@ async function generateEnglishPromptWithOpenAI(headingText: string, imageStyle?:
                 'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-                model: 'gpt-4.1',
+                model: OPENAI_TEXT_MODELS.LUNA,
                 messages: [
                     { role: 'system', content: `You are an image prompt generator. Output ONLY the raw English prompt. No greetings, no explanations, no markdown, no "Here is". Just the prompt text.` },
                     { role: 'user', content: getTranslationPrompt(headingText, imageStyle, contentContext) }
                 ],
-                max_tokens: 200,
-                temperature: 0.7
+                max_completion_tokens: 800,
+                reasoning_effort: 'medium'
             })
         });
 
@@ -230,7 +237,7 @@ async function generateEnglishPromptWithClaude(headingText: string, imageStyle?:
                 'anthropic-dangerous-direct-browser-access': 'true'
             },
             body: JSON.stringify({
-                model: 'claude-haiku-4-5-20251001', // ✅ [v1.4.44] 프롬프트 번역은 Haiku로 충분 (비용 1/5)
+                model: CLAUDE_MODELS.HAIKU,
                 max_tokens: 200,
                 messages: [
                     { role: 'user', content: getTranslationPrompt(headingText, imageStyle, contentContext) }

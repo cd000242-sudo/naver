@@ -13,6 +13,16 @@
  *   'agent-codex' → ChatGPT 구독(codex), 'agent-claude' → Claude 구독(claude CLI).
  *   SSOT: 렌더러 매핑·메인 라우팅·콘텐츠 분기가 모두 이 목록/헬퍼를 참조한다.
  */
+import {
+  GEMINI_TEXT_MODELS,
+  normalizeGeminiTextModelId,
+} from './geminiTextModelNormalization.js';
+
+export {
+  GEMINI_TEXT_MODELS,
+  normalizeGeminiTextModelId,
+} from './geminiTextModelNormalization.js';
+
 export const AGENT_TEXT_PROVIDERS = ['agent-codex', 'agent-claude'] as const;
 
 export type AgentTextProvider = (typeof AGENT_TEXT_PROVIDERS)[number];
@@ -32,10 +42,12 @@ export function agentTextProviderToCli(value: AgentTextProvider): 'codex' | 'cla
  *   Source: docs.claude.com / console.anthropic.com models
  */
 export const CLAUDE_MODELS = {
-  /** 최고 성능 — Opus 4.8 (2026-05-28 GA, $5/$25, 4.7와 동가) */
-  OPUS: 'claude-opus-4-8',
-  /** 균형 — Sonnet 4.6 */
-  SONNET: 'claude-sonnet-4-6',
+  /** Premium: most capable generally available Claude model. */
+  FABLE: 'claude-fable-5',
+  /** Legacy property retained so older call sites select the same premium tier. */
+  OPUS: 'claude-fable-5',
+  /** Balanced: latest speed/intelligence model. */
+  SONNET: 'claude-sonnet-5',
   /** 가성비 — Haiku 4.5 (정식 ID, 날짜 suffix 포함) */
   HAIKU: 'claude-haiku-4-5-20251001',
 } as const;
@@ -44,29 +56,20 @@ export const CLAUDE_MODELS = {
  * Google Gemini Text (2026-04 기준 검증)
  *   Source: ai.google.dev/gemini-api/docs/models
  */
-export const GEMINI_TEXT_MODELS = {
-  /** Flash — 빠르고 저렴 (기본) */
-  FLASH: 'gemini-2.5-flash',
-  /** Pro — 고품질 */
-  PRO: 'gemini-2.5-pro',
-} as const;
-
 /**
- * Google Gemini Image (2026-05 기준 재검증 — Google 공식 문서 + GET /models)
- *   v2.7.24가 gemini-3.x 이미지 프리뷰를 "미존재 ID"로 잘못 단정했으나, 2026-05 재검증 결과
- *   gemini-3.1-flash-image-preview(나노바나나2, 2026-02-26 출시)와
- *   gemini-3-pro-image-preview(나노바나나 프로) 모두 실재하는 정식 모델로 확인됨.
- *   접근 불가(400) 시 isBadModelError 핸들러가 STANDARD로 안전 폴백한다.
+ * Google Gemini Image (2026-07 공식 모델 문서 기준)
+ *   Nano Banana 2/Pro의 preview ID는 2026-06-25 종료되었다.
+ *   안정 ID를 기본으로 사용하고, 접근 불가 시 STANDARD로 안전 폴백한다.
  */
 export const GEMINI_IMAGE_MODELS = {
   /** 나노바나나 (구버전) — 정식 GA, 모든 사용자 작동 (이미지 퀄 좋음, 한글 텍스트 약함) */
   STANDARD: 'gemini-2.5-flash-image',
+  /** Value: latest stable Nano Banana image model. */
+  NANO_BANANA_LITE: 'gemini-3.1-flash-lite-image',
   /** 나노바나나2 — Gemini 3.1 Flash Image (적정 가격, 한글 텍스트 가능) */
-  NANO_BANANA_2: 'gemini-3.1-flash-image-preview',
+  NANO_BANANA_2: 'gemini-3.1-flash-image',
   /** 나노바나나 프로 — Gemini 3 Pro Image (최고 품질·한글 최강, 고가) */
-  NANO_BANANA_PRO: 'gemini-3-pro-image-preview',
-  /** 무료 실험 (preview suffix 형태) */
-  FREE_EXP: 'gemini-2.0-flash-preview-image-generation',
+  NANO_BANANA_PRO: 'gemini-3-pro-image',
 } as const;
 
 /**
@@ -101,22 +104,159 @@ export const OPENAI_IMAGE_MODELS = {
  * OpenAI Text (gpt-4o/gpt-4o-mini는 2026-03-31 sunset → gpt-4.1 계열로 교체됨)
  */
 export const OPENAI_TEXT_MODELS = {
-  /** GPT-4.1 — 메인 */
-  GPT_41: 'gpt-4.1',
-  /** GPT-4.1 mini — 번역·이미지 분석 (1/5 가격) */
-  GPT_41_MINI: 'gpt-4.1-mini',
+  /** Value: current cost-sensitive GPT-5.6 model. */
+  LUNA: 'gpt-5.6-luna',
+  /** Balanced: current GPT-5.6 model. */
+  TERRA: 'gpt-5.6-terra',
+  /** Premium: current flagship GPT-5.6 model. */
+  SOL: 'gpt-5.6-sol',
+  /** Legacy properties retained for secondary call sites. */
+  GPT_41: 'gpt-5.6-terra',
+  GPT_41_MINI: 'gpt-5.6-luna',
 } as const;
+
+export type TextModelTier = 'value' | 'balanced' | 'premium';
+export type ApiTextVendor = 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent';
+export type OpenAiReasoningEffort = 'medium' | 'high';
+
+export interface TextModelProfile {
+  selector: string;
+  vendor: ApiTextVendor;
+  tier: TextModelTier;
+  model: string;
+  displayName: string;
+  reasoningEffort?: OpenAiReasoningEffort;
+}
+
+/** Claude models with adaptive thinking reject legacy sampling controls. */
+export function supportsClaudeTemperature(modelId: unknown): boolean {
+  const model = String(modelId || '').trim().toLowerCase();
+  if (/^claude-(?:fable|sonnet)-5(?:-|$)/.test(model)) return false;
+
+  const claude4 = model.match(/^claude-(?:opus|sonnet)-4-(\d+)(?:-|$)/);
+  if (claude4 && Number(claude4[1]) >= 7) return false;
+
+  const laterMajor = model.match(/^claude-(?:opus|sonnet)-(\d+)(?:-|$)/);
+  return !laterMajor || Number(laterMajor[1]) < 5;
+}
+
+const profile = (
+  selector: string,
+  vendor: ApiTextVendor,
+  tier: TextModelTier,
+  model: string,
+  displayName: string,
+  reasoningEffort?: OpenAiReasoningEffort,
+): TextModelProfile => ({
+  selector,
+  vendor,
+  tier,
+  model,
+  displayName,
+  ...(reasoningEffort ? { reasoningEffort } : {}),
+});
+
+/** Resolve UI/config selectors to the one API model that is actually called. */
+export function resolveTextModelProfile(value: unknown): TextModelProfile {
+  const selector = String(value || '').trim();
+
+  if (!selector) {
+    return profile(selector, 'gemini', 'balanced', GEMINI_TEXT_MODELS.FLASH, 'Gemini 3.5 Flash');
+  }
+
+  if (selector === GEMINI_TEXT_MODELS.FLASH_LITE || selector === 'gemini-2.5-flash-lite') {
+    return profile(selector, 'gemini', 'value', GEMINI_TEXT_MODELS.FLASH_LITE, 'Gemini 3.1 Flash-Lite');
+  }
+  if (selector === GEMINI_TEXT_MODELS.PRO || selector === 'gemini-2.5-pro') {
+    return profile(selector, 'gemini', 'premium', GEMINI_TEXT_MODELS.PRO, 'Gemini 3.1 Pro Preview');
+  }
+  if (selector.startsWith('gemini-')) {
+    const model = normalizeGeminiTextModelId(selector);
+    const tier: TextModelTier = model === GEMINI_TEXT_MODELS.FLASH_LITE
+      ? 'value'
+      : model === GEMINI_TEXT_MODELS.PRO ? 'premium' : 'balanced';
+    const displayName = tier === 'value'
+      ? 'Gemini 3.1 Flash-Lite'
+      : tier === 'premium' ? 'Gemini 3.1 Pro Preview' : 'Gemini 3.5 Flash';
+    return profile(selector, 'gemini', tier, model, displayName);
+  }
+
+  if (selector === 'openai-gpt4o-mini' || selector === 'openai-gpt56-luna' || selector === OPENAI_TEXT_MODELS.LUNA) {
+    return profile(selector, 'openai', 'value', OPENAI_TEXT_MODELS.LUNA, 'GPT-5.6 Luna', 'medium');
+  }
+  if (selector === 'openai-gpt41' || selector === 'openai-gpt56-terra' || selector === OPENAI_TEXT_MODELS.TERRA) {
+    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-5.6 Terra', 'high');
+  }
+  if (selector === 'openai-gpt4o' || selector === 'openai-gpt56-sol' || selector === OPENAI_TEXT_MODELS.SOL) {
+    return profile(selector, 'openai', 'premium', OPENAI_TEXT_MODELS.SOL, 'GPT-5.6 Sol', 'high');
+  }
+  if (selector === 'openai-gpt4o-search') {
+    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-5.6 Terra + Web Search', 'high');
+  }
+  if (selector.startsWith('gpt-')) {
+    const explicitModel = selector;
+    const tier: TextModelTier = /(?:mini|nano|luna)/i.test(explicitModel) ? 'value' : 'balanced';
+    return profile(selector, 'openai', tier, explicitModel, explicitModel, explicitModel.startsWith('gpt-5.6-') ? (tier === 'value' ? 'medium' : 'high') : undefined);
+  }
+  if (selector.startsWith('openai-')) {
+    throw new Error(`UNSUPPORTED_TEXT_MODEL_SELECTOR: ${selector}`);
+  }
+
+  if (selector === 'claude-haiku' || selector === CLAUDE_MODELS.HAIKU) {
+    return profile(selector, 'claude', 'value', CLAUDE_MODELS.HAIKU, 'Claude Haiku 4.5');
+  }
+  if (selector === 'claude-opus' || selector === 'claude-fable' || selector === CLAUDE_MODELS.FABLE) {
+    return profile(selector, 'claude', 'premium', CLAUDE_MODELS.FABLE, 'Claude Fable 5');
+  }
+  if (selector === 'claude-sonnet' || selector === CLAUDE_MODELS.SONNET) {
+    return profile(selector, 'claude', 'balanced', CLAUDE_MODELS.SONNET, 'Claude Sonnet 5');
+  }
+  if (selector.startsWith('claude-')) {
+    const tier: TextModelTier = /haiku/i.test(selector)
+      ? 'value'
+      : /(?:opus|fable)/i.test(selector) ? 'premium' : 'balanced';
+    return profile(selector, 'claude', tier, selector, selector);
+  }
+
+  if (selector === 'perplexity-sonar') {
+    return profile(selector, 'perplexity', 'balanced', 'sonar', 'Perplexity Sonar');
+  }
+  if (isAgentTextProvider(selector)) {
+    return profile(selector, 'agent', 'premium', selector, selector === 'agent-codex' ? 'Codex Agent' : 'Claude Agent');
+  }
+
+  throw new Error(`UNSUPPORTED_TEXT_MODEL_SELECTOR: ${selector}`);
+}
+
+/** Resolve an intentional provider default, but never cross providers silently. */
+export function resolveTextModelProfileForVendor(
+  value: unknown,
+  expectedVendor: ApiTextVendor,
+  defaultSelector: string,
+  explicitOverride?: unknown,
+): TextModelProfile {
+  const overrideSelector = String(explicitOverride || '').trim();
+  const selector = overrideSelector || String(value || '').trim() || defaultSelector;
+  const resolved = resolveTextModelProfile(selector);
+  if (resolved.vendor !== expectedVendor) {
+    throw new Error(
+      `TEXT_MODEL_PROVIDER_MISMATCH: expected=${expectedVendor}, selected=${selector}, actual=${resolved.vendor}`,
+    );
+  }
+  return resolved;
+}
 
 /**
  * ✅ [v2.7.62] Vision-capable 모델 (이미지 분석/관련성 평가용)
  *   reviewer 권고에 따라 SSOT에 추가 — 직접 문자열 리터럴 금지
  */
 export const VISION_MODELS = {
-  GEMINI_FLASH: 'gemini-2.5-flash',
-  GEMINI_PRO: 'gemini-2.5-pro',
-  CLAUDE_SONNET: 'claude-sonnet-4-6',
-  OPENAI_41: 'gpt-4.1',
-  OPENAI_41_MINI: 'gpt-4.1-mini',
+  GEMINI_FLASH_LITE: GEMINI_TEXT_MODELS.FLASH_LITE,
+  GEMINI_FLASH: GEMINI_TEXT_MODELS.FLASH,
+  GEMINI_PRO: GEMINI_TEXT_MODELS.PRO,
+  CLAUDE_SONNET: CLAUDE_MODELS.SONNET,
+  OPENAI_41: OPENAI_TEXT_MODELS.TERRA,
+  OPENAI_41_MINI: OPENAI_TEXT_MODELS.LUNA,
 } as const;
 
 /**
@@ -125,6 +265,9 @@ export const VISION_MODELS = {
  *   Perplexity는 vision 미지원 → Gemini Flash 폴백 (사용자 동의 필요)
  */
 export type TextGeneratorKey =
+  | 'gemini-3.1-flash-lite'
+  | 'gemini-3.5-flash'
+  | 'gemini-3.1-pro-preview'
   | 'gemini-2.5-flash-lite'
   | 'gemini-2.5-flash'
   | 'gemini-2.5-pro'
@@ -151,10 +294,14 @@ export interface VisionRouting {
 
 export function routeTextToVision(textKey: string): VisionRouting {
   switch (textKey) {
+    case 'gemini-3.1-flash-lite':
+      return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH_LITE, vendor: 'gemini', fellBack: false };
     case 'gemini-2.5-flash-lite':
       return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: true, reason: 'Lite는 vision 없음 → Flash로 자동' };
+    case 'gemini-3.5-flash':
     case 'gemini-2.5-flash':
       return { provider: 'gemini-flash', model: VISION_MODELS.GEMINI_FLASH, vendor: 'gemini', fellBack: false };
+    case 'gemini-3.1-pro-preview':
     case 'gemini-2.5-pro':
       return { provider: 'gemini-pro', model: VISION_MODELS.GEMINI_PRO, vendor: 'gemini', fellBack: false };
     case 'claude-sonnet':
@@ -187,19 +334,23 @@ export const NANO_BANANA_USER_KEY_TO_MODEL: Record<string, { model: string; reso
   'gemini-3-pro': { model: GEMINI_IMAGE_MODELS.NANO_BANANA_PRO, resolution: '1K' },
   'gemini-3-1-flash': { model: GEMINI_IMAGE_MODELS.NANO_BANANA_2, resolution: '1K' },
   'gemini-2.5-flash': { model: GEMINI_IMAGE_MODELS.STANDARD, resolution: '1K' },
-  'gemini-2.0-flash-exp': { model: GEMINI_IMAGE_MODELS.FREE_EXP, resolution: '1K' },
   'imagen-4': { model: IMAGEN_MODELS.V4, resolution: '1K' },
 };
 
 /**
  * 가짜/미존재 모델 ID 카탈로그 (코드에 잔존하면 회귀)
  *   회귀 가드 테스트가 이 배열을 사용해 코드에서 발견 시 fail.
- *   ⚠️ gemini-3-pro-image-preview / gemini-3.1-flash-image-preview는 2026-05 재검증으로
- *      실재 모델임이 확인되어 본 목록에서 제외, VERIFIED_IMAGE_MODELS로 이동했다.
+ *   종료된 preview ID도 포함해 실제 API 호출로 되살아나지 않도록 차단한다.
  */
 export const FAKE_MODEL_IDS_BANNED = [
-  // preview suffix 없는 형태 — 미존재 (preview 형태만 실재)
-  'gemini-3.1-flash-image',
+  // Gemini 3 image preview IDs — 2026-06-25 shutdown
+  'gemini-3.1-flash-image-preview',
+  'gemini-3-pro-image-preview',
+  // Previous image generations — shutdown and no longer callable
+  'gemini-2.5-flash-image-preview',
+  'gemini-2.0-flash-preview-image-generation',
+  'gemini-2.0-flash-exp-image-generation',
+  'imagen-4.0-generate-preview-06-06',
   'gemini-3-flash',
   // gpt-4o*는 2026-03-31 deprecate
   'gpt-4o',
@@ -207,15 +358,15 @@ export const FAKE_MODEL_IDS_BANNED = [
 ] as const;
 
 /**
- * 검증된 이미지 생성 모델 ID 화이트리스트 (Google 공식 문서 + GET /models 확인, 2026-05)
+ * 검증된 이미지 생성 모델 ID 화이트리스트 (Google 공식 문서 확인, 2026-07)
  *   회귀 가드: UI 엔진이 라우팅하는 모델 ID는 반드시 이 목록에 속해야 한다.
  *   FAKE_MODEL_IDS_BANNED 제거로 사라질 뻔한 가드를 양성 화이트리스트로 대체·강화한다.
  */
 export const VERIFIED_IMAGE_MODELS = [
   'gemini-2.5-flash-image',
-  'gemini-3.1-flash-image-preview',
-  'gemini-3-pro-image-preview',
-  'gemini-2.0-flash-preview-image-generation',
+  'gemini-3.1-flash-lite-image',
+  'gemini-3.1-flash-image',
+  'gemini-3-pro-image',
   'imagen-4.0-generate-001',
   'gpt-image-1.5',
   'gpt-image-2',

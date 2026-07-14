@@ -146,8 +146,8 @@ contextBridge.exposeInMainWorld('api', {
   generateContent: (prompt: string): Promise<GenerateContentResult> =>
     ipcRenderer.invoke('automation:generateContent', prompt),
   // ✅ 에이전트 모드(codex/claude 구독 연동) — 설치/로그인 상태 + 글생성 브리지
-  agentStatus: (provider: 'codex' | 'claude'): Promise<{ success: boolean; status?: { provider: string; installed: boolean; version?: string; loggedIn: boolean; detail?: string }; message?: string }> =>
-    ipcRenderer.invoke('agent:status', provider),
+  agentStatus: (provider: 'codex' | 'claude', options?: { forceRefresh?: boolean }): Promise<{ success: boolean; status?: { provider: string; installed: boolean; version?: string; loggedIn: boolean; available: boolean; errorCode?: string; detail?: string }; message?: string }> =>
+    ipcRenderer.invoke('agent:status', provider, options),
   agentGenerate: (payload: { provider: 'codex' | 'claude'; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }): Promise<{ success: boolean; provider?: string; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:generate', payload),
   agentInstall: (provider: 'codex' | 'claude'): Promise<{ success: boolean; version?: string; code?: string; message?: string }> =>

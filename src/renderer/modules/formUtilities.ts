@@ -38,7 +38,7 @@ export async function initCredentialsSave(): Promise<void> {
       // 저장된 값 표시
       if (config.savedNaverId) {
         naverIdInput.value = config.savedNaverId;
-        console.log('[자격증명] 네이버 아이디 자동 입력:', config.savedNaverId.substring(0, 3) + '***');
+        console.log('[자격증명] 네이버 아이디 자동 입력 완료');
       }
 
       if (config.savedNaverPassword) {

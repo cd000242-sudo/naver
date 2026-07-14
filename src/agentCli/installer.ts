@@ -9,6 +9,7 @@
 import { spawnCollect } from './spawnHelper.js';
 import { classifyExit } from './parse.js';
 import { AgentCliError, type AgentProvider } from './types.js';
+import { requireAgentProvider } from './validation.js';
 
 /** Verified global npm package names (npm ls -g, 2026-06). */
 export const AGENT_NPM_PACKAGES: Record<AgentProvider, string> = {
@@ -25,6 +26,7 @@ const LOGIN_TIMEOUT_MS = 300_000;
  * @throws AgentCliError on npm failure or if the binary is still missing afterwards.
  */
 export async function installAgent(provider: AgentProvider): Promise<{ version?: string }> {
+  provider = requireAgentProvider(provider);
   const pkg = AGENT_NPM_PACKAGES[provider];
   const res = await spawnCollect({
     command: 'npm',
@@ -42,7 +44,8 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
     );
   }
 
-  const { detectAgent } = await import('./detect.js');
+  const { clearAgentDetectionCache, detectAgent } = await import('./detect.js');
+  clearAgentDetectionCache(provider);
   const status = await detectAgent(provider);
   if (!status.installed) {
     throw new AgentCliError(
@@ -66,6 +69,7 @@ function loginCommand(provider: AgentProvider): { command: string; args: string[
  * @throws AgentCliError if login fails or times out.
  */
 export async function loginAgent(provider: AgentProvider): Promise<void> {
+  provider = requireAgentProvider(provider);
   const { command, args } = loginCommand(provider);
   const res = await spawnCollect({
     command,
@@ -82,6 +86,8 @@ export async function loginAgent(provider: AgentProvider): Promise<void> {
       (res.stderr || res.stdout || '').slice(0, 800),
     );
   }
+  const { clearAgentDetectionCache } = await import('./detect.js');
+  clearAgentDetectionCache(provider);
 }
 
 /** Logout command per provider (clears stored subscription auth). */
@@ -96,6 +102,7 @@ function logoutCommand(provider: AgentProvider): { command: string; args: string
  * @throws AgentCliError if logout fails.
  */
 export async function logoutAgent(provider: AgentProvider): Promise<void> {
+  provider = requireAgentProvider(provider);
   const { command, args } = logoutCommand(provider);
   const res = await spawnCollect({ command, args, provider, timeoutMs: 60_000 });
 
@@ -107,4 +114,6 @@ export async function logoutAgent(provider: AgentProvider): Promise<void> {
       (res.stderr || res.stdout || '').slice(0, 800),
     );
   }
+  const { clearAgentDetectionCache } = await import('./detect.js');
+  clearAgentDetectionCache(provider);
 }

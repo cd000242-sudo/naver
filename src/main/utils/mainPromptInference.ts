@@ -6,7 +6,12 @@
 
 import { loadConfig } from '../../configManager.js';
 // ✅ [v2.7.52] modelRegistry SSOT
-import { OPENAI_TEXT_MODELS, CLAUDE_MODELS } from '../../runtime/modelRegistry.js';
+import {
+  OPENAI_TEXT_MODELS,
+  CLAUDE_MODELS,
+  GEMINI_TEXT_MODELS,
+  normalizeGeminiTextModelId,
+} from '../../runtime/modelRegistry.js';
 
 // ✅ 프롬프트 캐시 (최대 100개)
 const _mainPromptCache = new Map<string, string>();
@@ -68,7 +73,7 @@ CRITICAL RULES:
 async function tryGemini(headingText: string, imageStyle?: string, apiKey?: string, geminiModel?: string): Promise<string | null> {
   if (!apiKey) return null;
   try {
-    const model = geminiModel || 'gemini-2.5-flash';
+    const model = normalizeGeminiTextModelId(geminiModel || GEMINI_TEXT_MODELS.FLASH);
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
       {
@@ -96,14 +101,13 @@ async function tryOpenAI(headingText: string, imageStyle?: string, apiKey?: stri
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
       body: JSON.stringify({
-        // ✅ [v1.4.77] gpt-4o-mini → gpt-4.1-mini (2026-03-31 sunset 회피, 동급 가성비)
-        model: OPENAI_TEXT_MODELS.GPT_41_MINI,
+        model: OPENAI_TEXT_MODELS.LUNA,
         messages: [
           { role: 'system', content: `You are an expert AI image prompt engineer for ${imageStyle || 'realistic'} style. Output ONLY the English prompt.` },
           { role: 'user', content: getTranslationPrompt(headingText, imageStyle) },
         ],
-        max_tokens: 200,
-        temperature: 0.7,
+        max_completion_tokens: 800,
+        reasoning_effort: 'medium',
       }),
     });
     if (!response.ok) return null;

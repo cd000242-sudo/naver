@@ -3,8 +3,8 @@
 //
 // 동작:
 // 1. %APPDATA%/better-life-naver/settings.json 에서 Gemini API 키 로드
-// 2. Pro 모델 호출 (무료 Tier는 limit:0 으로 차단, 유료는 통과)
-// 3. Flash 빠른 연속 호출 (RPM 12회 — 무료 10회 초과 테스트)
+// 2. 최신 Pro 모델 접근 확인
+// 3. 최신 Flash 연속 호출로 현재 프로젝트 한도 동작 확인
 // 4. 최종 판정
 
 import { readFileSync } from 'fs';
@@ -45,7 +45,7 @@ async function main() {
     process.exit(1);
   }
 
-  log(GREEN, `✓ API 키 로드 (${apiKey.substring(0, 6)}...${apiKey.substring(apiKey.length - 4)}, 길이 ${apiKey.length})`);
+  log(GREEN, `✓ API 키 로드 (길이 ${apiKey.length})`);
 
   const extraKeys = (settings.geminiApiKeys || []).filter(k => k && k !== apiKey);
   if (extraKeys.length > 0) {
@@ -53,11 +53,11 @@ async function main() {
   }
   console.log('');
 
-  // ━━━ TEST 1: Pro 모델 호출 (유료 Tier 확인) ━━━
-  log(BOLD, '📍 TEST 1: Gemini 2.5 Pro 호출 (무료 차단, 유료 통과)');
+  // ━━━ TEST 1: 최신 Pro 모델 접근 확인 ━━━
+  log(BOLD, '📍 TEST 1: Gemini 3.1 Pro Preview 접근 확인');
   try {
     const res = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent',
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent',
       {
         method: 'POST',
         headers: {
@@ -76,7 +76,7 @@ async function main() {
 
     if (res.ok) {
       log(GREEN, '  ✅ Pro 모델 호출 성공');
-      log(GREEN + BOLD, '  → 🎉 유료 Tier 1 확인됨! (무료는 Pro 차단)');
+      log(GREEN + BOLD, '  → 최신 Pro 모델 접근 가능');
       try {
         const data = JSON.parse(body);
         const usage = data.usageMetadata;
@@ -87,8 +87,8 @@ async function main() {
     } else {
       const bodyShort = body.substring(0, 500);
       if (bodyShort.includes('limit: 0') || bodyShort.includes('FreeTier')) {
-        log(RED, '  ❌ 여전히 무료 Tier — Pro는 limit: 0 (완전 차단)');
-        log(YELLOW, '     billing 연결이 완료되지 않았거나 프로젝트가 다릅니다');
+        log(RED, '  ❌ 현재 프로젝트에서 Pro 한도가 0입니다');
+        log(YELLOW, '     프로젝트 등급·과금 연결·모델 접근 권한을 AI Studio에서 확인하세요');
       } else if (res.status === 429) {
         log(YELLOW, '  ⚠️ 429 (Rate Limit) — 다른 원인 가능');
       } else {
@@ -102,8 +102,8 @@ async function main() {
   console.log('');
 
   // ━━━ TEST 2: Flash 빠른 연속 호출 (RPM 확인) ━━━
-  log(BOLD, '📍 TEST 2: Flash 연속 12회 호출 (무료 RPM=10, 유료 RPM=1000)');
-  log(CYAN, '  (무료는 11번째부터 429, 유료는 전부 성공)');
+  log(BOLD, '📍 TEST 2: Gemini 3.5 Flash 연속 12회 호출');
+  log(CYAN, '  (정확한 RPM·TPM·RPD는 프로젝트별 AI Studio 한도를 따릅니다)');
 
   let success = 0;
   let rateLimit = 0;
@@ -114,7 +114,7 @@ async function main() {
     const start = Date.now();
     try {
       const res = await fetch(
-        'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent',
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent',
         {
           method: 'POST',
           headers: {
@@ -147,7 +147,7 @@ async function main() {
       other++;
       results.push(`  ${i.toString().padStart(2)}. ❌ err: ${e.message}`);
     }
-    // 매우 짧은 간격 (0.5초) — 무료 RPM 10 초과 유도
+    // 짧은 간격으로 현재 프로젝트의 실제 rate-limit 응답을 확인
     await new Promise(r => setTimeout(r, 500));
   }
 
@@ -163,16 +163,15 @@ async function main() {
   console.log('');
 
   if (success === 12) {
-    log(GREEN + BOLD, '✅ Tier 1 (paid) 확인 — 12/12 모두 통과');
-    log(GREEN, '   무료 RPM 10을 초과했는데 rate limit 없음');
-    log(GREEN, '   → 카드 등록 + billing 연결 완료');
+    log(GREEN + BOLD, '✅ Gemini 3.5 Flash 12/12 호출 통과');
+    log(GREEN, '   정확한 프로젝트 등급과 잔여 한도는 AI Studio에서 확인하세요');
     log(CYAN, '');
     log(CYAN, '💡 다음 단계:');
-    log(CYAN, '   1. 앱 설정 → Gemini → 플랜 타입을 "paid" 로 변경');
-    log(CYAN, '   2. 모델: gemini-2.5-flash 또는 flash-lite 선택');
+    log(CYAN, '   1. 앱 설정 → Gemini → 플랜 타입은 자동 감지 유지');
+    log(CYAN, '   2. 모델: Gemini 3.1 Flash-Lite / 3.5 Flash / 3.1 Pro Preview 중 선택');
     log(CYAN, '   3. v1.4.50 Safety Lock 예산 $50 정도로 설정 (월 실제 $3~5 수준)');
   } else if (rateLimit >= 2) {
-    log(YELLOW + BOLD, '🟡 여전히 Free Tier — Rate Limit에 걸림');
+    log(YELLOW + BOLD, '🟡 현재 프로젝트 Rate Limit에 걸림');
     log(YELLOW, '   가능한 원인:');
     log(YELLOW, '   1. billing 계정은 등록했지만 이 API 키의 프로젝트에 미연결');
     log(YELLOW, '   2. billing 프로세스가 완료되는 데 1~2시간 지연');

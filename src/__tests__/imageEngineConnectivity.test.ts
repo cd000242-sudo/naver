@@ -67,8 +67,38 @@ describe('Gemini image billing failures', () => {
 
   it('prevents prepaid billing failures from entering the failed-image retry rounds', () => {
     expect(genCode).toMatch(/new Promise<GeneratedImage \| null>\(\(resolve, reject\)/);
-    expect(genCode).toMatch(/isGeminiImageBillingRequiredError\(error\)[\s\S]{0,120}?reject\(error\)/);
-    expect(genCode).toMatch(/billingFailure[\s\S]{0,160}?throw \(billingFailure as PromiseRejectedResult\)\.reason/);
+    expect(genCode).toMatch(
+      /isTerminalGeminiImageError\(error\)[\s\S]{0,260}?reject\(terminalBatchError\)/,
+    );
+    expect(genCode).toMatch(
+      /terminalPolicyFailure[\s\S]{0,300}?isTerminalGeminiImageError/,
+    );
+    expect(genCode).toMatch(
+      /if \(terminalPolicyFailure\)[\s\S]{0,120}?throw \(terminalPolicyFailure as PromiseRejectedResult\)\.reason/,
+    );
+  });
+
+  it('propagates terminal errors through retry and final fetch fallback paths', () => {
+    expect(genCode).toMatch(
+      /catch \(retryError: any\) \{[\s\S]{0,160}?isTerminalGeminiImageError\(retryError\)[\s\S]{0,80}?throw retryError/,
+    );
+    expect(genCode).toMatch(
+      /createGeminiImageHttpError\(response\)[\s\S]{0,180}?isTerminalGeminiImageError\(httpError\)[\s\S]{0,80}?throw httpError/,
+    );
+    expect(genCode).toMatch(
+      /catch \(fallbackErr: any\) \{[\s\S]{0,160}?isTerminalGeminiImageError\(fallbackErr\)[\s\S]{0,80}?throw fallbackErr/,
+    );
+  });
+
+  it('shares terminal batch errors with the queue and gates parallel launch behind one probe', () => {
+    expect(genCode).toContain('let terminalBatchError');
+    expect(genCode).toMatch(/initialProbeComplete\s*\?\s*PARALLEL_LIMIT\s*:\s*1/);
+    expect(genCode).toMatch(
+      /isTerminalGeminiImageError\(error\)[\s\S]{0,260}?terminalBatchError[\s\S]{0,220}?sessionAbortController\.abort/,
+    );
+    expect(genCode).toMatch(
+      /if \(terminalBatchError\)[\s\S]{0,180}?reject\(terminalBatchError\)/,
+    );
   });
 });
 

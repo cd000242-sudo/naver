@@ -2,7 +2,7 @@
  * Gemini Vision adapter for the image-narrative inference pipeline.
  *
  * Uses @google/generative-ai SDK (already installed).
- * Model: gemini-2.5-flash (VISION_MODELS.GEMINI_FLASH from modelRegistry).
+ * Model: gemini-3.5-flash (VISION_MODELS.GEMINI_FLASH from modelRegistry).
  *
  * JSON output is enforced via responseSchema (structured output).
  * On JSON parse failure the adapter throws so the router can fall back.

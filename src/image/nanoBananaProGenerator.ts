@@ -14,6 +14,12 @@ import {
 } from './referenceImageLoader.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { getImageErrorMessage } from './imageErrorMessages.js';
+import {
+  assertCurrentGeminiImageModelConfiguration,
+  assertCurrentGeminiImageModelSelection,
+  isImageModelSelectionRequiredError,
+  type ValidatedGeminiImageModelConfiguration,
+} from './legacyImageModelPolicy.js';
 import { PromptBuilder } from './promptBuilder.js';
 import { trackApiUsage } from '../apiUsageTracker.js';
 import sharp from 'sharp';
@@ -71,15 +77,39 @@ function createGeminiImageBillingRequiredError(message: string): Error {
   return new Error(`${GEMINI_IMAGE_BILLING_REQUIRED_MARKER}: Gemini image generation prepaid credits are depleted. Please add credits or change the image engine. ${message}`);
 }
 
+export function isTerminalGeminiImageError(error: unknown): boolean {
+  return isGeminiImageBillingRequiredError(error)
+    || isImageModelSelectionRequiredError(error);
+}
+
+export async function createGeminiImageHttpError(response: {
+  ok: boolean;
+  status: number;
+  text: () => Promise<string>;
+}): Promise<Error> {
+  let responseBody = '';
+  try {
+    responseBody = (await response.text()).slice(0, 2_000);
+  } catch {
+    responseBody = '';
+  }
+
+  const detail = `HTTP ${response.status}${responseBody ? `: ${responseBody}` : ''}`;
+  return isGeminiImageBillingRequiredMessage(detail)
+    ? createGeminiImageBillingRequiredError(detail)
+    : new Error(detail);
+}
+
 const MODEL_COST_KRW: Record<string, number> = {
-  // ✅ [v2.10.334] 실제 모델별 추정 단가 (Google 공식 단가 기준, 환율 ₩1,380)
+  // Google official per-image estimates converted at ₩1,380/USD.
   //   gemini-2.5-flash-image: $0.039/장 ≈ ₩54
-  //   gemini-3.1-flash-image-preview: 나노바나나2 (Flash) — 추정 ₩97
-  //   gemini-3-pro-image-preview: 나노바나나 프로 — $0.134/장 ≈ ₩185
-  'gemini-3.1-flash-image-preview': 97,    // 나노바나나2 (Gemini 3.1 Flash Image)
-  'gemini-3-pro-image-preview': 185,       // 나노바나나 프로 (Gemini 3 Pro Image)
+  //   gemini-3.1-flash-lite-image: $0.0336/장 ≈ ₩46
+  //   gemini-3.1-flash-image: 나노바나나2 (Flash) — 추정 ₩97
+  //   gemini-3-pro-image: 나노바나나 프로 — $0.134/장 ≈ ₩185
+  'gemini-3.1-flash-lite-image': 46,
+  'gemini-3.1-flash-image': 97,    // 나노바나나2 (Gemini 3.1 Flash Image)
+  'gemini-3-pro-image': 185,       // 나노바나나 프로 (Gemini 3 Pro Image)
   'gemini-2.5-flash-image': 54,            // 나노바나나 구버전 (~₩54/장)
-  'gemini-2.0-flash-exp-image-generation': 0, // 무료
   'imagen-4.0-generate-001': 100,          // 이미지4 (~₩100)
 };
 
@@ -285,7 +315,7 @@ class GeminiKeyPool {
       if (now - time > 3600000) { // 1시간
         this.exhaustedKeys.delete(key);
         this.exhaustedAt.delete(key);
-        console.log(`[KeyPool] 🔄 키 ${key.substring(0, 10)}... 복구 (1시간 경과)`);
+        console.log('[KeyPool] 🔄 API 키 복구 (1시간 경과, 키 내용 비공개)');
       }
     }
 
@@ -310,14 +340,14 @@ class GeminiKeyPool {
     const exhaustedKey = this.keys[this.currentIndex];
     this.exhaustedKeys.add(exhaustedKey);
     this.exhaustedAt.set(exhaustedKey, Date.now());
-    console.log(`[KeyPool] ❌ 키 ${exhaustedKey.substring(0, 10)}... 할당량 소진 → 로테이션`);
+    console.log('[KeyPool] ❌ API 키 할당량 소진 → 로테이션 (키 내용 비공개)');
 
     // 다음 사용 가능한 키 찾기
     this.currentIndex = (this.currentIndex + 1) % this.keys.length;
     const nextKey = this.getCurrentKey();
 
     if (nextKey) {
-      console.log(`[KeyPool] ✅ 새 키로 전환: ${nextKey.substring(0, 10)}... (${this.getAvailableCount()}/${this.keys.length} 사용 가능)`);
+      console.log(`[KeyPool] ✅ 새 키로 전환 (${this.getAvailableCount()}/${this.keys.length} 사용 가능, 키 내용 비공개)`);
     } else {
       console.error(`[KeyPool] ⛔ 모든 API 키(${this.keys.length}개)가 할당량 소진됨!`);
     }
@@ -344,8 +374,8 @@ class GeminiKeyPool {
 // ✅ [2026-03-02] 스마트 RPM 쓰로틀러 (분당 요청 횟수 제한 자동 관리)
 // ✅ [v2.6.2] 적응형 쓰로틀러 — 429 없으면 점진 상향, 429 발생 시 자동 감속
 // Gemini 이미지 모델 RPM (공식 2026-04):
-//   - gemini-3-pro-image-preview: Tier 1 = 10 RPM
-//   - gemini-3.1-flash-image-preview: Tier 1 = 60 RPM (Flash는 6배 높음)
+//   - gemini-3-pro-image: Tier 1 = 10 RPM
+//   - gemini-3.1-flash-image: Tier 1 = 60 RPM (Flash는 6배 높음)
 //   - gemini-2.5-flash-image: Tier 1 = 10 RPM (이전 세대)
 //   Tier 2+ (결제 >$100): 모두 1,000 RPM
 class GeminiRpmThrottler {
@@ -416,7 +446,7 @@ class GeminiRpmThrottler {
 // [v2.6.2] 전역 RPM 쓰로틀러
 // ✅ [v2.10.333] 상한 30→10 정정. MODEL_MAP상 실제 호출 모델은 항상
 //   gemini-2.5-flash-image (Tier 1 = 10 RPM, 위 322~325줄 공식 수치).
-//   기존 30은 미존재 모델 gemini-3.1-flash-image-preview(60 RPM) 기준이라
+//   기존 30은 Flash Image(60 RPM) 기준이라
 //   실한도의 3배를 통과시켜 스스로 429를 유발 → 연속발행 4개째 실패.
 //   Tier 2+ 사용자는 환경변수 GEMINI_RPM_CEILING으로 상향 가능.
 const getCeilingRpm = (): number => {
@@ -524,14 +554,6 @@ export async function generateWithNanoBananaPro(
   forceModelKey?: string,  // v2.7.16: 호출자가 명시적으로 모델 강제 ('gemini-3-1-flash' = 나노바나나2, 'gemini-3-pro' = 나노바나나프로)
   forceSequential?: boolean,
 ): Promise<GeneratedImage[]> {
-  // v2.7.16: forceModelKey가 주어지면 config의 nanoBananaMainModel/SubModel을 일시 오버라이드
-  if (forceModelKey) {
-    const cm = await import('../configManager.js');
-    const cfg = await cm.loadConfig();
-    (cfg as any).nanoBananaMainModel = forceModelKey;
-    (cfg as any).nanoBananaSubModel = forceModelKey;
-    console.log(`[NanoBananaPro] 🎯 forceModelKey="${forceModelKey}" — config 일시 오버라이드`);
-  }
   // ✅ [v2.10.335] 사용자가 그리드/드롭다운에서 엔진을 명시 선택하면 forceModelKey가 설정된다.
   //   이 경우 모델을 잠가서(자동 교체 전면 금지) "나노바나나프로 선택 → gemini-3-pro로만 작동"을
   //   보장한다. 접근 불가 시엔 silent 대체 없이 명확히 실패·안내한다.
@@ -542,6 +564,14 @@ export async function generateWithNanoBananaPro(
   // ✅ [2026-02-13] 키 풀 초기화 (다중 키 로테이션 지원)
   const configModuleForKeys = await import('../configManager.js');
   const configForKeys = await configModuleForKeys.loadConfig();
+  const preflightModelKey = forceModelKey?.trim();
+  const validatedModelConfiguration = assertCurrentGeminiImageModelConfiguration(
+    preflightModelKey || (configForKeys as any).nanoBananaMainModel || 'gemini-3-1-flash',
+    preflightModelKey || (configForKeys as any).nanoBananaSubModel || 'gemini-3-1-flash',
+  );
+  if (preflightModelKey) {
+    console.log(`[NanoBananaPro] 🎯 forceModelKey="${preflightModelKey}" — 배치 전체 모델 고정`);
+  }
   const keyPool = initKeyPool(primaryApiKey || undefined, (configForKeys as any).geminiApiKeys);
   globalKeyPool = keyPool;
 
@@ -676,16 +706,38 @@ export async function generateWithNanoBananaPro(
 
     // 병렬 처리를 위한 세마포어 (동시 실행 제한)
     let activeCount = 0;
+    let terminalBatchError: unknown = null;
+    let initialProbeComplete = false;
     const queue: Array<() => Promise<void>> = [];
 
+    const drainTerminalQueue = () => {
+      while (queue.length > 0) {
+        const task = queue.shift();
+        if (task) void task();
+      }
+    };
+
     const runNext = () => {
-      while (activeCount < PARALLEL_LIMIT && queue.length > 0) {
+      if (terminalBatchError) {
+        drainTerminalQueue();
+        return;
+      }
+
+      // The first request is a billing/model-access probe. Parallel work only
+      // starts after it succeeds so a terminal provider error cannot fan out.
+      const launchLimit = initialProbeComplete ? PARALLEL_LIMIT : 1;
+      while (activeCount < launchLimit && queue.length > 0) {
         const task = queue.shift();
         if (task) {
           activeCount++;
           task().finally(() => {
             activeCount--;
-            runNext();
+            initialProbeComplete = true;
+            if (terminalBatchError) {
+              drainTerminalQueue();
+            } else {
+              runNext();
+            }
           });
         }
       }
@@ -695,6 +747,11 @@ export async function generateWithNanoBananaPro(
     const generatePromises = items.map((item, i) => {
       return new Promise<GeneratedImage | null>((resolve, reject) => {
         const task = async () => {
+          if (terminalBatchError) {
+            reject(terminalBatchError);
+            return;
+          }
+
           // 중지 여부 확인
           if (stopCheck && stopCheck()) {
             console.log(`[NanoBananaPro] ⏹️ 중지 요청됨 - 이미지 ${i + 1} 건너뜀`);
@@ -731,6 +788,7 @@ export async function generateWithNanoBananaPro(
                 modifiedItem,
                 i,
                 isThumbnail,
+                validatedModelConfiguration,
                 postTitle,
                 postId,
                 isFullAuto,
@@ -759,8 +817,12 @@ export async function generateWithNanoBananaPro(
               resolve(null);
             }
           } catch (error: any) {
-            if (isGeminiImageBillingRequiredError(error)) {
-              reject(error);
+            if (isTerminalGeminiImageError(error)) {
+              terminalBatchError = terminalBatchError || error;
+              if (!sessionAbortController.signal.aborted) {
+                sessionAbortController.abort(terminalBatchError);
+              }
+              reject(terminalBatchError);
               return;
             }
             if (error.name === 'CanceledError' || error.name === 'AbortError') {
@@ -786,9 +848,11 @@ export async function generateWithNanoBananaPro(
     if (rejectedResults.length > 0) {
       console.warn(`[NanoBananaPro] ${rejectedResults.length}/${settledResults.length} image generations failed`);
     }
-    const billingFailure = rejectedResults.find((r) => isGeminiImageBillingRequiredError((r as PromiseRejectedResult).reason));
-    if (billingFailure) {
-      throw (billingFailure as PromiseRejectedResult).reason;
+    const terminalPolicyFailure = rejectedResults.find((result) => (
+      isTerminalGeminiImageError((result as PromiseRejectedResult).reason)
+    ));
+    if (terminalPolicyFailure) {
+      throw (terminalPolicyFailure as PromiseRejectedResult).reason;
     }
 
     // ✅ [2026-03-11 FIX] 실패 재시도 2라운드로 증가 - 원래 엔진 성공률 극대화
@@ -827,6 +891,7 @@ export async function generateWithNanoBananaPro(
             item,
             failedIdx,
             isThumbnail,
+            validatedModelConfiguration,
             postTitle,
             postId,
             isFullAuto,
@@ -853,6 +918,9 @@ export async function generateWithNanoBananaPro(
             }
           }
         } catch (retryError: any) {
+          if (isTerminalGeminiImageError(retryError)) {
+            throw retryError;
+          }
           console.warn(`[NanoBananaPro] ⚠️ [재시도 실패] "${item.heading}": ${retryError.message}`);
         }
 
@@ -1007,6 +1075,7 @@ async function generateSingleImageWithGemini(
   item: ImageRequestItem,
   index: number,
   isThumbnail: boolean,
+  validatedModelConfiguration: ValidatedGeminiImageModelConfiguration,
   postTitle?: string,
   postId?: string,
   isFullAuto?: boolean,
@@ -1236,44 +1305,31 @@ async function generateSingleImageWithGemini(
         ...(part.inlineData ? { inlineData: { ...part.inlineData } } : {}),
       }));
 
-      // ===== 이미지 품질 티어 시스템: 모델 동적 선택 =====
-      const configModule = await import('../configManager.js');
-      const config = await configModule.loadConfig();
-
-      // ✅ [2026-01-16] 환경설정에서 Nano Banana Pro 모델 설정 읽어오기
-      // nanoBananaMainModel: 대표/썸네일 이미지 (통합)
-      // nanoBananaSubModel: 본문 서브 이미지
-      const userMainModel = (config as any).nanoBananaMainModel || 'gemini-3-1-flash';
-      const userSubModel = (config as any).nanoBananaSubModel || 'gemini-3-1-flash';  // ✅ [2026-03-01] 기본값 gemini-3-1-flash로 변경 (나노바나나2)
-
-      // ✅ [2026-01-18] 디버그 로그: 어떤 모델이 설정에서 로드되었는지 확인
-      console.log(`[NanoBananaPro] 📋 환경설정 모델: Main="${(config as any).nanoBananaMainModel || '(미설정→gemini-3-1-flash)'}", Sub="${(config as any).nanoBananaSubModel || '(미설정→gemini-3-1-flash)'}"`);  // ✅ [2026-03-01] 기본값 나노바나나2
+      // ===== 이미지 품질 티어 시스템: 사전검증 모델 선택 =====
+      // The immutable batch preflight result is the only model source here. This
+      // keeps forceModelKey and the actual billed API request in lockstep.
+      const userMainModel = validatedModelConfiguration.mainModel;
+      const userSubModel = validatedModelConfiguration.subModel;
       console.log(`[NanoBananaPro] 📋 적용 모델: Main="${userMainModel}", Sub="${userSubModel}"`);
 
       // 모델 매핑 (설정값 → API 모델명)
-      // ✅ [2026-02-20] 기본 모델을 gemini-2.5-flash-image로 변경
-      // - gemini-2.0-flash-exp: 🆓 무료 실험 모델, 한글 정확도 높음
+      // Current UI keys route to live stable models. Retired free-model settings
+      // are rejected explicitly so they cannot trigger an unexpected paid request.
       // - gemini-2.5-flash-image: 1K 해상도, 비용 ~$0.034/장 (Pro 대비 4배 저렴)
-      // - gemini-3-pro-image-preview: 4K/1K 해상도, 최고 품질, 비용 ~$0.134/장
-      // ✅ [v2.10.334] 실제 모델 ID 복원 — Google 공식 문서 검증 완료.
-      //   v2.7.24가 gemini-3.1-flash-image-preview / gemini-3-pro-image-preview를
-      //   "미존재 ID"로 잘못 단정해 구형 gemini-2.5-flash-image로 강등했으나,
-      //   둘 다 실재하는 정식 모델(Gemini 3.1 Flash Image / Gemini 3 Pro Image)이고
-      //   한글 텍스트 렌더링이 구형보다 강함 → 복원.
+      // - gemini-3-pro-image: 4K/1K 해상도, 최고 품질, 비용 ~$0.134/장
+      // ✅ [2026-07] 종료된 preview ID를 공식 안정 ID로 승격.
       //   접근 불가(400) 시 isBadModelError 핸들러가 gemini-2.5-flash-image로 자동 폴백.
       const MODEL_MAP: Record<string, { model: string; resolution: string }> = {
         // 사용자 UI: "나노바나나 프로 4K"
-        'gemini-3-pro-4k': { model: 'gemini-3-pro-image-preview', resolution: '4K' },
+        'gemini-3-pro-4k': { model: 'gemini-3-pro-image', resolution: '4K' },
         // 사용자 UI: "나노바나나 프로"
-        'gemini-3-pro': { model: 'gemini-3-pro-image-preview', resolution: '1K' },
+        'gemini-3-pro': { model: 'gemini-3-pro-image', resolution: '1K' },
         // 사용자 UI: "나노바나나2" — Gemini 3.1 Flash Image
-        'gemini-3-1-flash': { model: 'gemini-3.1-flash-image-preview', resolution: '1K' },
+        'gemini-3-1-flash': { model: 'gemini-3.1-flash-image', resolution: '1K' },
         // Imagen 4 — Tier 1+ 작동 확인됨
         'imagen-4': { model: 'imagen-4.0-generate-001', resolution: '1K' },
         // 나노바나나 (구버전 — Gemini 2.5 Flash Image)
         'gemini-2.5-flash': { model: 'gemini-2.5-flash-image', resolution: '1K' },
-        // 무료 실험 모델 (preview 형식 ID)
-        'gemini-2.0-flash-exp': { model: 'gemini-2.0-flash-preview-image-generation', resolution: '1K' },
       };
 
       // 이미지 유형에 따라 모델 결정 (썸네일과 대표 이미지 통합)
@@ -1286,20 +1342,23 @@ async function generateSingleImageWithGemini(
       const effectiveBatchSize = batchSize ?? 1;
       const isFirstInBatch = index === 0 && effectiveBatchSize > 1;
       const isMainOrThumbnail = isThumbnail === true || isFirstInBatch;
+      const requestedModelKey = assertCurrentGeminiImageModelSelection(
+        isMainOrThumbnail ? userMainModel : userSubModel,
+      );
 
       if (isMainOrThumbnail) {
         // 대표/썸네일 이미지: nanoBananaMainModel 사용 (통합)
-        const configForMain = MODEL_MAP[userMainModel] || { model: 'gemini-2.5-flash-image', resolution: '1K' };
+        const configForMain = MODEL_MAP[requestedModelKey] || { model: 'gemini-2.5-flash-image', resolution: '1K' };
         selectedModel = configForMain.model;
         selectedResolution = configForMain.resolution;
         const imageType = isThumbnail ? '썸네일' : '대표';
-        console.log(`[NanoBananaPro] 🖼️ ${imageType} 이미지: ${userMainModel} (${selectedModel}, ${selectedResolution})`);
+        console.log(`[NanoBananaPro] 🖼️ ${imageType} 이미지: ${requestedModelKey} (${selectedModel}, ${selectedResolution})`);
       } else {
         // 본문 서브 이미지: nanoBananaSubModel 사용
-        const configForSub = MODEL_MAP[userSubModel] || { model: 'gemini-2.5-flash-image', resolution: '1K' };
+        const configForSub = MODEL_MAP[requestedModelKey] || { model: 'gemini-2.5-flash-image', resolution: '1K' };
         selectedModel = configForSub.model;
         selectedResolution = configForSub.resolution;
-        console.log(`[NanoBananaPro] 📷 서브 이미지: ${userSubModel} (${selectedModel}, ${selectedResolution})`);
+        console.log(`[NanoBananaPro] 📷 서브 이미지: ${requestedModelKey} (${selectedModel}, ${selectedResolution})`);
       }
       lastSelectedModel = selectedModel; // ✅ [2026-04-06] 최종 안전망용 추적
 
@@ -1338,15 +1397,11 @@ async function generateSingleImageWithGemini(
       if (global503FallbackActive && !isModelLocked) {
         const effectiveRatio = isShoppingConnect ? '1:1' : imageRatio;
 
-        // ✅ [2026-04-06] 폴백 체인: 나노바나나 계열만 로테이션 (Imagen 4 제거)
-        // Imagen 4는 서버 과부하 시 동일하게 실패하므로, Gemini 모델 간 로테이션이 더 안정적
-        // ✅ [v2.7.24] 검증된 정식 모델 ID만 사용 (가짜 ID 제거)
-        //   gemini-3.1-flash-image-preview, gemini-3-pro-image-preview는 미존재 ID
-        //   → 폴백 체인에서 완전 제거
-        const FALLBACK_CHAIN = [
+        // Stable Nano Banana models only. Imagen 4 is deprecated and is no longer an automatic fallback.
+        const FALLBACK_CHAIN: Array<{ name: string; model: string; type: 'gemini' | 'imagen' }> = [
+          { name: '나노바나나2', model: 'gemini-3.1-flash-image', type: 'gemini' },
+          { name: '나노바나나 라이트', model: 'gemini-3.1-flash-lite-image', type: 'gemini' },
           { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image', type: 'gemini' },
-          { name: '나노바나나(무료)', model: 'gemini-2.0-flash-preview-image-generation', type: 'gemini' },
-          { name: 'Imagen 4', model: 'imagen-4.0-generate-001', type: 'imagen' },
         ];
 
         // 현재 선택된 모델은 이미 실패했으므로 건너뜀
@@ -1647,6 +1702,9 @@ async function generateSingleImageWithGemini(
       throw new Error(`Gemini 응답에서 이미지를 찾을 수 없습니다 (finishReason: ${candidates?.[0]?.finishReason || 'unknown'})`);
 
     } catch (error: any) {
+      if (isTerminalGeminiImageError(error)) {
+        throw error;
+      }
       const errorMessage = error?.message || '알 수 없는 오류';
       const statusCode = error?.response?.status || (errorMessage.match(/(\d{3})/)?.[1]);
 
@@ -1658,7 +1716,7 @@ async function generateSingleImageWithGemini(
       }
       // ✅ [v2.7.20 HOTFIX] 400 Bad Request — 모델명 잘못/access 차단 진단
       //   사용자 제보: "제미나이 키는 정확한데 400 오류"
-      //   원인: gemini-3.1-flash-image-preview 등 모델명이 사용자 Tier 또는 지역에서 미지원
+      //   원인: 선택한 이미지 모델이 사용자 Tier 또는 지역에서 미지원
       //   대응: 안정 모델(gemini-2.5-flash-image)로 즉시 전환 + 명확한 안내
       const isBadModelError = statusCode === 400 && (
         errorMessage.toLowerCase().includes('model') ||
@@ -1805,10 +1863,11 @@ async function generateSingleImageWithGemini(
           global503FallbackActive = true;
           global503FallbackStartTime = Date.now();
 
-          // ✅ [v2.7.24] 검증된 정식 ID만 사용 — 가짜 ID 완전 제거
+          // 검증된 안정 ID만 사용한다.
           const NANO_ROTATION = [
-            { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image' },                       // 검증된 정식 GA
-            { name: '나노바나나(무료)', model: 'gemini-2.0-flash-preview-image-generation' },    // 무료 등급 작동
+            { name: '나노바나나2', model: 'gemini-3.1-flash-image' },
+            { name: '나노바나나 라이트', model: 'gemini-3.1-flash-lite-image' },
+            { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image' },
           ].filter(m => m.model !== lastSelectedModel);
 
           let rotationSuccess = false;
@@ -1848,10 +1907,11 @@ async function generateSingleImageWithGemini(
 
   // ===== 🔥 [2026-04-06] 최종 안전망: 나노바나나 계열 전체 로테이션 =====
   // 선택 모델 재시도 실패 후 → 다른 나노바나나 모델을 순차 시도
-  // ✅ [v2.7.24] 검증된 정식 ID만 유지 (gemini-3.x 프리뷰는 미존재)
+  // Stable models only; ended preview/experimental IDs are permanently excluded.
   const FINAL_ROTATION = [
+    { name: '나노바나나2', model: 'gemini-3.1-flash-image' },
+    { name: '나노바나나 라이트', model: 'gemini-3.1-flash-lite-image' },
     { name: '나노바나나(정식)', model: 'gemini-2.5-flash-image' },
-    { name: '나노바나나(무료)', model: 'gemini-2.0-flash-preview-image-generation' },
   ].filter(m => m.model !== lastSelectedModel); // 이미 실패한 모델 제외
 
   console.log(`[NanoBananaPro] 🛡️ 최종 안전망: ${FINAL_ROTATION.length}개 나노바나나 모델 순차 시도 (실패 모델: ${lastSelectedModel})`);
@@ -1892,7 +1952,11 @@ async function generateSingleImageWithGemini(
       geminiRpmThrottler.recordCall();
 
       if (!response.ok) {
-        console.warn(`[NanoBananaPro] ⚠️ ${fallback.name} 최종 안전망 HTTP ${response.status} → 다음 모델`);
+        const httpError = await createGeminiImageHttpError(response);
+        if (isTerminalGeminiImageError(httpError)) {
+          throw httpError;
+        }
+        console.warn(`[NanoBananaPro] ⚠️ ${fallback.name} 최종 안전망 ${httpError.message} → 다음 모델`);
         continue;
       }
 
@@ -1928,6 +1992,9 @@ async function generateSingleImageWithGemini(
       }
       console.warn(`[NanoBananaPro] ⚠️ ${fallback.name} 최종 안전망: 이미지 파트 없음 → 다음 모델`);
     } catch (fallbackErr: any) {
+      if (isTerminalGeminiImageError(fallbackErr)) {
+        throw fallbackErr;
+      }
       console.error(`[NanoBananaPro] ❌ ${fallback.name} 최종 안전망 실패:`, fallbackErr?.message);
     }
   }
@@ -2027,7 +2094,7 @@ ABSOLUTE REQUIREMENTS:
   try {
     const axios = (await import('axios')).default;
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent`,  // ✅ [v2.7.24] 정식 GA로 통합 (gemini-3-pro-image-preview는 미존재 ID)
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent`,
       {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
@@ -2109,7 +2176,7 @@ ABSOLUTE REQUIREMENTS:
   try {
     const axios = (await import('axios')).default;
     const response = await axios.post(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent`,  // ✅ [v2.7.24] 정식 GA로 통합 (gemini-3-pro-image-preview는 미존재 ID)
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent`,
       {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {

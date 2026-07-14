@@ -15,6 +15,7 @@ import { generateSingleLeonardoAIImage } from '../../image/leonardoAIGenerator.j
 import { decodeBase64Async } from '../utils/base64Async.js';
 import { sanitizeDropshotErrorMessage } from '../../image/dropshotBrowser.js';
 import { trackChild, untrackChild } from '../../runtime/childProcessRegistry.js';
+import { resolveStylePreviewEngine } from '../../image/stylePreviewEnginePolicy.js';
 
 // ffmpeg-static 경로 (GIF 변환용)
 let ffmpegPath: string | null = null;
@@ -177,6 +178,13 @@ export function registerImageHandlers(ctx: IpcContext): void {
     safeHandle('style-preview:generate', async (_event, options: { style: string; engine?: string }) => {
         try {
             const style = options.style || 'realistic';
+            const route = resolveStylePreviewEngine(options.engine);
+            if (!route || route.kind !== 'flow') {
+                return {
+                    success: false,
+                    error: `STYLE_PREVIEW_ENGINE_UNSUPPORTED: ${String(options.engine || '')}`,
+                };
+            }
             const dir = path.join(app.getPath('userData'), 'style-previews');
             await fsp.mkdir(dir, { recursive: true });
 
@@ -428,15 +436,21 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     break;
                 }
 
+                case 'nano-banana':
+                case 'nano-banana-2':
                 case 'nano-banana-pro': {
                     // 나노바나나프로 (Gemini)
+                    const route = resolveStylePreviewEngine(imageSource);
+                    if (!route || route.kind !== 'gemini' || !route.model) {
+                        return { success: false, error: `IMAGE_ENGINE_UNSUPPORTED: ${String(imageSource)}` };
+                    }
                     const geminiApiKey = (config as any).geminiApiKey;
                     if (!geminiApiKey) {
                         return { success: false, error: 'Gemini API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
                     }
 
                     const response = await axios.post(
-                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent`,
+                        `https://generativelanguage.googleapis.com/v1beta/models/${route.model}:generateContent`,
                         {
                             contents: [{ parts: [{ text: fullPrompt }] }],
                             generationConfig: {
@@ -662,42 +676,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
                 }
 
                 default: {
-                    // 기본: 나노바나나프로 폴백
-                    console.log(`[imageHandlers] 알 수 없는 엔진 "${imageSource}", 나노바나나프로로 폴백`);
-                    const geminiApiKey = (config as any).geminiApiKey;
-                    if (!geminiApiKey) {
-                        return { success: false, error: 'Gemini API 키가 설정되지 않았습니다. 환경설정에서 입력해주세요.' };
-                    }
-
-                    const response = await axios.post(
-                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent`,
-                        {
-                            contents: [{ parts: [{ text: fullPrompt }] }],
-                            generationConfig: {
-                                responseModalities: ['Text', 'Image']
-                            }
-                        },
-                        {
-                            headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey },
-                            timeout: 120000
-                        }
-                    );
-
-                    const candidates = response.data?.candidates;
-                    if (candidates?.[0]?.content?.parts) {
-                        for (const part of candidates[0].content.parts) {
-                            if (part.inlineData?.data) {
-                                // [SPEC-FREEZE-GUARD-001-P2 R2] 워커 디코딩 (1MB+ fallback inline data)
-                                const buffer = await decodeBase64Async(part.inlineData.data);
-                                const fileName = `test-${style}-fallback-${Date.now()}.png`;
-                                const filePath = path.join(saveDir, fileName);
-                                await fsp.writeFile(filePath, buffer);
-                                result = { success: true, path: filePath };
-                                break;
-                            }
-                        }
-                    }
-                    break;
+                    return { success: false, error: `IMAGE_ENGINE_UNSUPPORTED: ${String(imageSource)}` };
                 }
             }
 
@@ -805,13 +784,14 @@ export function registerImageHandlers(ctx: IpcContext): void {
             const configModule = await import('../../configManager.js');
             const config = await configModule.loadConfig();
             const requestedSource = engine || (config as any).globalImageSource || 'nano-banana-pro';
-            // ✅ [v2.7.57] ImageFX(Flow) 엔진은 Google 로그인 필요 + 120s 타임아웃 위험 → preview는 Pollinations 강제
-            //   - Disney/2D 등 복잡한 스타일에서 FLOW_IMAGE_TIMEOUT 발생
-            //   - preview는 화질보다 속도가 우선 (Pollinations 무료/공개/빠름)
-            const imageSource = requestedSource === 'imagefx' ? 'pollinations' : requestedSource;
-            if (requestedSource !== imageSource) {
-                console.log(`[imageHandlers] 🔁 스타일 미리보기: ${requestedSource} → ${imageSource}로 폴백 (속도 우선)`);
+            const route = resolveStylePreviewEngine(requestedSource);
+            if (!route) {
+                return {
+                    success: false,
+                    error: `STYLE_PREVIEW_ENGINE_UNSUPPORTED: ${String(requestedSource)}`,
+                };
             }
+            const imageSource = route.engine;
 
             console.log(`[imageHandlers] 🖼️ 스타일 미리보기 생성: style=${style}, engine=${imageSource}`);
 
@@ -828,7 +808,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
             const basePrompt = previewPromptMap[style] || previewPromptMap['realistic'];
 
             // ✅ 나노바나나프로(Gemini)만 텍스트 포함 가능, 나머지는 NO TEXT 필수
-            const isGeminiEngine = imageSource === 'nano-banana-pro' || imageSource === 'gemini';
+            const isGeminiEngine = route.kind === 'gemini';
             const noTextSuffix = isGeminiEngine ? '' : ', NO TEXT, NO LETTERS, NO WRITING, NO WATERMARK';
             const fullPrompt = basePrompt + noTextSuffix;
 
@@ -849,7 +829,7 @@ export function registerImageHandlers(ctx: IpcContext): void {
 
             const cacheDir = path.join(app.getPath('userData'), 'style-previews');
             await fsp.mkdir(cacheDir, { recursive: true });
-            const cachePath = path.join(cacheDir, `${style}.png`);
+            const cachePath = path.join(cacheDir, `${style}-${route.cacheKey}.png`);
 
             let result: any = null;
 
@@ -860,9 +840,8 @@ export function registerImageHandlers(ctx: IpcContext): void {
                 'flux-schnell': 'black-forest-labs/FLUX-1-schnell'
             };
 
-            switch (imageSource) {
-                case 'deepinfra':
-                case 'deepinfra-flux': {
+            switch (route.kind) {
+                case 'deepinfra': {
                     const deepinfraApiKey = (config as any).deepinfraApiKey;
                     if (!deepinfraApiKey) return { success: false, error: 'DeepInfra API 키가 설정되지 않았습니다.' };
 
@@ -883,12 +862,12 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     break;
                 }
 
-                case 'nano-banana-pro': {
+                case 'gemini': {
                     const geminiApiKey = (config as any).geminiApiKey;
                     if (!geminiApiKey) return { success: false, error: 'Gemini API 키가 설정되지 않았습니다.' };
 
                     const response = await axios.post(
-                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp-image-generation:generateContent`,
+                        `https://generativelanguage.googleapis.com/v1beta/models/${route.model}:generateContent`,
                         { contents: [{ parts: [{ text: finalPrompt }] }], generationConfig: { responseModalities: ['Text', 'Image'] } },
                         { headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey }, timeout: 120000 }
                     );
@@ -980,31 +959,25 @@ export function registerImageHandlers(ctx: IpcContext): void {
                     break;
                 }
 
-                default: {
-                    // 기본 폴백: Gemini
-                    const geminiApiKey = (config as any).geminiApiKey;
-                    if (!geminiApiKey) return { success: false, error: 'Gemini API 키가 설정되지 않았습니다.' };
-
-                    const response = await axios.post(
-                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent`,
-                        { contents: [{ parts: [{ text: finalPrompt }] }], generationConfig: { responseModalities: ['Text', 'Image'] } },
-                        { headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey }, timeout: 120000 }
+                case 'flow': {
+                    const { generateWithFlow } = await import('../../image/flowGenerator.js');
+                    const flowImages = await generateWithFlow(
+                        [{ heading: `style-preview-${style}`, englishPrompt: finalPrompt } as any],
+                        `style-preview-${style}`,
+                        `preview-${Date.now()}`,
                     );
-
-                    const candidates = response.data?.candidates;
-                    if (candidates?.[0]?.content?.parts) {
-                        for (const part of candidates[0].content.parts) {
-                            if (part.inlineData?.data) {
-                                // [SPEC-FREEZE-GUARD-001-P2 R2] 워커 디코딩 (1MB+ Gemini cache 저장)
-                                const cacheBuffer = await decodeBase64Async(part.inlineData.data);
-                                await fsp.writeFile(cachePath, cacheBuffer);
-                                result = { success: true, path: cachePath };
-                                break;
-                            }
-                        }
-                    }
+                    const flowPath = flowImages?.[0]?.filePath;
+                    if (!flowPath) return { success: false, error: 'Flow 이미지 생성 결과가 없습니다.' };
+                    await fsp.copyFile(flowPath, cachePath);
+                    result = { success: true, path: cachePath };
                     break;
                 }
+
+                default:
+                    return {
+                        success: false,
+                        error: `STYLE_PREVIEW_ENGINE_UNSUPPORTED: ${String(requestedSource)}`,
+                    };
             }
 
             if (result?.success) {

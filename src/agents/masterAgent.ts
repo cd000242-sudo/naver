@@ -21,7 +21,7 @@ export class MasterAgent {
   private context: ChatContext;
   private formatter: ResponseFormatter;
   private geminiModel: any = null;
-  private geminiModelName: string = 'gemini-2.5-flash';
+  private geminiModelName: string = GEMINI_TEXT_MODELS.FLASH;
   private genAI: GoogleGenerativeAI | null = null;
 
   constructor(context?: ChatContext) {
@@ -41,9 +41,7 @@ export class MasterAgent {
         this.genAI = genAI;
 
         const preferredModels = [
-          'gemini-2.5-flash',
-          'gemini-2.5-flash-lite',
-          'gemini-2.5-pro',
+          GEMINI_TEXT_MODELS.FLASH,
         ];
 
         let lastError: unknown = null;
@@ -518,12 +516,12 @@ export class MasterAgent {
         }
 
         // 6. Gemini 모델 검증
-        const validModels = ['gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.5-pro'];
+        const validModels = [GEMINI_TEXT_MODELS.FLASH, GEMINI_TEXT_MODELS.FLASH_LITE, GEMINI_TEXT_MODELS.PRO];
         if (config.geminiModel && !validModels.includes(config.geminiModel)) {
           issues.push({
             category: '🤖 AI 모델',
             problem: `알 수 없는 Gemini 모델: ${config.geminiModel}`,
-            solution: '권장 모델(gemini-2.5-flash)로 자동 변경할 수 있습니다',
+            solution: `권장 모델(${GEMINI_TEXT_MODELS.FLASH})로 자동 변경할 수 있습니다`,
             autoFixable: true,
             fixAction: 'fixGeminiModel'
           });
@@ -735,9 +733,7 @@ export class MasterAgent {
         : '';
 
       const modelsToTry = [
-        'gemini-2.5-flash',
-        'gemini-2.5-flash-lite',
-        'gemini-2.5-pro',
+        GEMINI_TEXT_MODELS.FLASH,
       ];
 
       const result = await this.generateWithModelFallback(

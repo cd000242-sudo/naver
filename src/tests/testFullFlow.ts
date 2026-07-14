@@ -25,9 +25,9 @@ async function testFullFlow() {
   }
   
   console.log('📝 테스트 설정:');
-  console.log(`   네이버 계정: ${naverId.substring(0, 3)}***`);
-  console.log(`   Gemini API: ${geminiApiKey.substring(0, 10)}...`);
-  console.log(`   Pexels API: ${pexelsApiKey ? pexelsApiKey.substring(0, 10) + '...' : '없음 (DALL-E 사용)'}`);
+  console.log(`   네이버 계정: ${naverId ? '설정됨' : '없음'}`);
+  console.log(`   Gemini API: ${geminiApiKey ? '설정됨' : '없음'}`);
+  console.log(`   Pexels API: ${pexelsApiKey ? '설정됨' : '없음 (DALL-E 사용)'}`);
   console.log('');
   
   let structuredContent: any = null;

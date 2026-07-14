@@ -1,13 +1,68 @@
-// Install / login detection for the agent CLIs (drives the UI status badge).
-// Best-effort and side-effect free: never throws — always resolves to an AgentCliStatus.
+// Install, authentication, and live entitlement detection for subscription-backed agents.
+// A stored OAuth credential is not proof of an active plan, so Claude receives one tiny,
+// cached readiness request before the app reports it as available.
 
-import { access } from 'fs/promises';
-import { homedir } from 'os';
+import { mkdtemp, rm } from 'fs/promises';
+import { tmpdir } from 'os';
 import { join } from 'path';
+import {
+  classifyExit,
+  isSubscriptionInactiveMessage,
+  tryExtractJson,
+} from './parse.js';
 import { spawnCollect } from './spawnHelper.js';
-import type { AgentCliStatus, AgentProvider } from './types.js';
+import {
+  buildClaudeSubscriptionEnv,
+  buildCodexSubscriptionEnv,
+  CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
+} from './subscriptionEnv.js';
+import type {
+  AgentCliStatus,
+  AgentErrorCode,
+  AgentProvider,
+} from './types.js';
 
 const DETECT_TIMEOUT_MS = 8_000;
+const ENTITLEMENT_TIMEOUT_MS = 25_000;
+const STATUS_CACHE_TTL_MS = 30_000;
+
+interface LoginProbe {
+  loggedIn: boolean;
+  detail?: string;
+  subscriptionType?: string;
+  authMethod?: string;
+  errorCode?: AgentErrorCode;
+}
+
+export interface AgentDetectionOptions {
+  /** Ignore the short UI cache. Generation paths must set this to true. */
+  forceRefresh?: boolean;
+}
+
+interface EntitlementProbe {
+  available: boolean;
+  errorCode?: AgentErrorCode;
+  detail?: string;
+}
+
+const statusCache = new Map<AgentProvider, { checkedAt: number; status: AgentCliStatus }>();
+
+export function clearAgentDetectionCache(provider?: AgentProvider): void {
+  if (provider) statusCache.delete(provider);
+  else statusCache.clear();
+}
+
+function cacheStatus(status: AgentCliStatus): AgentCliStatus {
+  const immutableStatus = { ...status };
+  statusCache.set(status.provider, { checkedAt: Date.now(), status: immutableStatus });
+  return immutableStatus;
+}
+
+function getCachedStatus(provider: AgentProvider): AgentCliStatus | undefined {
+  const entry = statusCache.get(provider);
+  if (!entry || Date.now() - entry.checkedAt >= STATUS_CACHE_TTL_MS) return undefined;
+  return { ...entry.status };
+}
 
 /** Probe `<cli> --version`; ENOENT (or any error) means not installed. */
 async function probeVersion(provider: AgentProvider): Promise<string | undefined> {
@@ -17,83 +72,288 @@ async function probeVersion(provider: AgentProvider): Promise<string | undefined
       args: ['--version'],
       provider,
       timeoutMs: DETECT_TIMEOUT_MS,
+      env: provider === 'codex' ? buildCodexSubscriptionEnv() : buildClaudeSubscriptionEnv(),
     });
-    if (res.code === 0) {
-      return (res.stdout || res.stderr).trim() || undefined;
-    }
+    if (res.code === 0) return (res.stdout || res.stderr).trim() || undefined;
   } catch {
-    // not installed / spawn failure → undefined
+    // Missing binary or an unusable shim.
   }
   return undefined;
 }
 
-/** codex exposes `codex login status` ("Logged in using ChatGPT"). */
-async function probeCodexLogin(): Promise<{ loggedIn: boolean; detail?: string }> {
+/** Codex exposes `codex login status` (for example, "Logged in using ChatGPT"). */
+async function probeCodexLogin(): Promise<LoginProbe> {
   try {
     const res = await spawnCollect({
       command: 'codex',
       args: ['login', 'status'],
       provider: 'codex',
       timeoutMs: DETECT_TIMEOUT_MS,
+      env: buildCodexSubscriptionEnv(),
     });
     const out = (res.stdout || res.stderr).trim();
-    return { loggedIn: res.code === 0 && /logged in/i.test(out), detail: out || undefined };
+    const subscriptionLogin = res.code === 0 && /logged in using chatgpt/i.test(out);
+    const anyLogin = res.code === 0 && /logged in/i.test(out);
+    if (subscriptionLogin) {
+      return { loggedIn: true, detail: out };
+    }
+    if (anyLogin) {
+      return {
+        loggedIn: true,
+        detail: 'Codex is using a non-ChatGPT billing route. Sign out and log in with ChatGPT.',
+        errorCode: 'subscription_inactive',
+      };
+    }
+    return {
+      loggedIn: false,
+      detail: out || undefined,
+      errorCode: 'not_logged_in',
+    };
   } catch {
-    return { loggedIn: false };
+    return { loggedIn: false, errorCode: 'not_logged_in' };
   }
 }
 
+function isExplicitlyInactiveSubscription(subscriptionType: string | undefined): boolean {
+  const normalized = String(subscriptionType ?? '').trim().toLowerCase();
+  return /^(?:free|none|null|inactive|expired|cancelled|canceled|lapsed|ended)$/.test(normalized);
+}
+
+function hasNonSubscriptionAuthSource(status: Record<string, unknown>, raw: string): boolean {
+  const authMethod = String(status.authMethod ?? '').trim().toLowerCase();
+  const apiProvider = String(status.apiProvider ?? '').trim().toLowerCase();
+  const apiKeySource = String(status.apiKeySource ?? '').trim().toLowerCase();
+  const subscriptionAuth = authMethod === 'claude.ai' || authMethod === 'oauth_token';
+
+  if (!subscriptionAuth) return true;
+  if (apiProvider && apiProvider !== 'firstparty' && apiProvider !== 'first_party') return true;
+  if (apiKeySource
+      && /api.?key.?helper|anthropic_api_key|environment|console|gateway|bedrock|vertex|foundry/.test(apiKeySource)) {
+    return true;
+  }
+  return /api.?key.?helper|apps?.?gateway|bedrock|vertex|foundry|pay.?as.?you.?go/i.test(raw);
+}
+
 /**
- * claude exposes `claude auth status` (JSON: { loggedIn, authMethod, subscriptionType, ... }).
- * Falls back to the ~/.claude/.credentials.json check if the JSON cannot be read.
+ * Read Claude OAuth state. Readiness requires structured auth provenance from a current CLI;
+ * credential-file presence and an unstructured "Logged in" message are never sufficient.
  */
-async function probeClaudeLogin(): Promise<{ loggedIn: boolean; detail?: string }> {
+async function probeClaudeLogin(): Promise<LoginProbe> {
   try {
     const res = await spawnCollect({
       command: 'claude',
       args: ['auth', 'status'],
       provider: 'claude',
       timeoutMs: DETECT_TIMEOUT_MS,
+      env: buildClaudeSubscriptionEnv(),
     });
-    const out = (res.stdout || res.stderr).trim();
-    try {
-      const j = JSON.parse(out) as { loggedIn?: boolean; authMethod?: string; subscriptionType?: string };
-      if (j && j.loggedIn === true) {
-        const detail = j.subscriptionType
-          ? `${j.authMethod || 'claude.ai'} · ${j.subscriptionType}`
-          : (j.authMethod || '로그인됨');
-        return { loggedIn: true, detail };
-      }
-      return { loggedIn: false };
-    } catch {
-      // Non-JSON output — fall back to the credentials file existence check.
-      try {
-        await access(join(homedir(), '.claude', '.credentials.json'));
-        return { loggedIn: true, detail: 'credentials.json 확인됨' };
-      } catch {
-        return { loggedIn: false };
-      }
+    const out = `${res.stdout}\n${res.stderr}`.trim();
+    if (res.code !== 0) {
+      const errorCode = classifyExit('claude', res.stderr, res.stdout);
+      return {
+        loggedIn: errorCode === 'subscription_inactive',
+        errorCode,
+        detail: entitlementDetail(errorCode, out),
+      };
     }
+    const parsed = tryExtractJson(out);
+
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      const status = parsed as Record<string, unknown>;
+      const loggedIn = status.loggedIn === true;
+      const subscriptionType = typeof status.subscriptionType === 'string'
+        ? status.subscriptionType
+        : undefined;
+      const authMethod = typeof status.authMethod === 'string' ? status.authMethod : undefined;
+
+      if (!loggedIn) return { loggedIn: false, errorCode: 'not_logged_in' };
+      if (!subscriptionType) {
+        return {
+          loggedIn: false,
+          errorCode: 'subscription_inactive',
+          detail: 'Claude 구독 유형을 확인할 수 없습니다. 최신 Claude Code로 업데이트한 뒤 Claude.ai 유료 구독 계정으로 다시 로그인해주세요.',
+        };
+      }
+      if (isSubscriptionInactiveMessage(out) || isExplicitlyInactiveSubscription(subscriptionType)) {
+        return {
+          loggedIn: true,
+          subscriptionType,
+          authMethod,
+          errorCode: 'subscription_inactive',
+          detail: 'Claude 로그인은 유지되어 있지만 활성 유료 구독이 없습니다.',
+        };
+      }
+      if (hasNonSubscriptionAuthSource(status, out)) {
+        return {
+          loggedIn: true,
+          subscriptionType,
+          authMethod,
+          errorCode: 'subscription_inactive',
+          detail: 'Claude API 키, Console, 클라우드 또는 게이트웨이 인증이 감지되었습니다. 구독 모드는 Claude.ai 유료 구독 로그인만 사용합니다.',
+        };
+      }
+
+      const detail = subscriptionType
+        ? `${authMethod || 'claude.ai'} · ${subscriptionType}`
+        : (authMethod || 'Claude OAuth 로그인 확인');
+      return { loggedIn: true, subscriptionType, authMethod, detail };
+    }
+
+    if (isSubscriptionInactiveMessage(out)) {
+      return {
+        loggedIn: true,
+        errorCode: 'subscription_inactive',
+        detail: 'Claude 구독 기간이 만료되었거나 활성 구독이 없습니다.',
+      };
+    }
+
+    return {
+      loggedIn: false,
+      errorCode: 'subscription_inactive',
+      detail: 'Claude 인증 출처를 안전하게 확인할 수 없습니다. 최신 Claude Code로 업데이트한 뒤 Claude.ai 유료 구독 계정으로 다시 로그인해주세요.',
+    };
   } catch {
-    return { loggedIn: false };
+    return { loggedIn: false, errorCode: 'not_logged_in' };
   }
 }
 
-/**
- * Detect install + login status for one provider. Always resolves (never rejects).
- */
-export async function detectAgent(provider: AgentProvider): Promise<AgentCliStatus> {
+function entitlementDetail(errorCode: AgentErrorCode, raw: string): string {
+  if (errorCode === 'subscription_inactive') {
+    return 'Claude 구독 기간이 만료되었거나 현재 계정에 활성 Claude Code 구독이 없습니다.';
+  }
+  if (errorCode === 'rate_limited') {
+    return 'Claude 구독 사용 한도가 소진되었습니다. 한도 초기화 후 다시 확인해주세요.';
+  }
+  if (errorCode === 'not_logged_in') {
+    return 'Claude 로그인이 만료되었습니다. 다시 로그인해주세요.';
+  }
+  if (errorCode === 'timeout') {
+    return 'Claude 구독 권한 확인 시간이 초과되었습니다. 네트워크 상태를 확인해주세요.';
+  }
+  return raw.trim().slice(0, 300) || 'Claude 구독 사용 권한을 확인하지 못했습니다.';
+}
+
+/** Execute one minimal, tool-free turn so stale OAuth cannot masquerade as entitlement. */
+async function probeClaudeEntitlement(): Promise<EntitlementProbe> {
+  const cwd = await mkdtemp(join(tmpdir(), 'agentcli-claude-status-'));
+  try {
+    const res = await spawnCollect({
+      command: 'claude',
+      args: [
+        '-p',
+        '--output-format', 'json',
+        '--max-turns', '1',
+        '--permission-mode', 'plan',
+        ...CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
+      ],
+      provider: 'claude',
+      cwd,
+      stdin: 'Reply with exactly READY. Do not use tools.',
+      timeoutMs: ENTITLEMENT_TIMEOUT_MS,
+      env: buildClaudeSubscriptionEnv(),
+    });
+    const raw = `${res.stderr}\n${res.stdout}`.trim();
+    if (res.code !== 0) {
+      const errorCode = classifyExit('claude', res.stderr, res.stdout);
+      return { available: false, errorCode, detail: entitlementDetail(errorCode, raw) };
+    }
+
+    const parsed = tryExtractJson(res.stdout);
+    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
+      const envelope = parsed as Record<string, unknown>;
+      if (envelope.is_error === true) {
+        const errorText = String(envelope.result ?? raw);
+        const errorCode = classifyExit('claude', errorText, raw);
+        return { available: false, errorCode, detail: entitlementDetail(errorCode, errorText) };
+      }
+      if (typeof envelope.result === 'string' && envelope.result.trim()) {
+        return { available: true };
+      }
+    }
+
+    return {
+      available: false,
+      errorCode: 'empty_output',
+      detail: 'Claude 구독 권한 확인 응답이 비어 있습니다.',
+    };
+  } catch (error) {
+    const candidate = error as { code?: AgentErrorCode; message?: string; detail?: string };
+    const errorCode = candidate.code ?? classifyExit('claude', candidate.message ?? '', candidate.detail ?? '');
+    return {
+      available: false,
+      errorCode,
+      detail: entitlementDetail(errorCode, `${candidate.message ?? ''}\n${candidate.detail ?? ''}`),
+    };
+  } finally {
+    await rm(cwd, { recursive: true, force: true }).catch(() => { /* best effort */ });
+  }
+}
+
+/** Detect install, authentication, and actual subscription availability. Never rejects. */
+export async function detectAgent(
+  provider: AgentProvider,
+  options: AgentDetectionOptions = {},
+): Promise<AgentCliStatus> {
+  if (!options.forceRefresh) {
+    const cached = getCachedStatus(provider);
+    if (cached) return cached;
+  }
+
   const version = await probeVersion(provider);
   if (!version) {
-    return { provider, installed: false, loggedIn: false };
+    return cacheStatus({
+      provider,
+      installed: false,
+      loggedIn: false,
+      available: false,
+      errorCode: 'not_installed',
+    });
   }
 
   const login = provider === 'codex' ? await probeCodexLogin() : await probeClaudeLogin();
-  return {
+  if (!login.loggedIn) {
+    return cacheStatus({
+      provider,
+      installed: true,
+      version,
+      loggedIn: false,
+      available: false,
+      errorCode: login.errorCode ?? 'not_logged_in',
+      detail: login.detail,
+    });
+  }
+
+  if (login.errorCode) {
+    return cacheStatus({
+      provider,
+      installed: true,
+      version,
+      loggedIn: true,
+      available: false,
+      errorCode: login.errorCode,
+      detail: login.detail,
+    });
+  }
+
+  if (provider === 'codex') {
+    return cacheStatus({
+      provider,
+      installed: true,
+      version,
+      loggedIn: true,
+      available: true,
+      detail: login.detail,
+    });
+  }
+
+  const entitlement = await probeClaudeEntitlement();
+  return cacheStatus({
     provider,
     installed: true,
     version,
-    loggedIn: login.loggedIn,
-    detail: login.detail,
-  };
+    loggedIn: true,
+    available: entitlement.available,
+    errorCode: entitlement.errorCode,
+    detail: entitlement.detail || login.detail,
+  });
 }

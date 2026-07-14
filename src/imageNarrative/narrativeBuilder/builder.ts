@@ -260,10 +260,10 @@ async function callOpenAIProvider(
 
   const response = await client.chat.completions.create(
     {
-      model: OPENAI_TEXT_MODELS.GPT_41,
+      model: OPENAI_TEXT_MODELS.TERRA,
       messages: [{ role: 'user', content: prompt }],
-      temperature: 0.6,
-      max_tokens: 8192, // 2048 → 8192: JSON truncation 방지 (위 Gemini 동일 사유)
+      reasoning_effort: 'high',
+      max_completion_tokens: 16384,
       response_format: { type: 'json_object' },
     },
     { signal },
@@ -284,7 +284,7 @@ async function callClaudeProvider(
   const message = await client.messages.create(
     {
       model: CLAUDE_MODELS.SONNET,
-      max_tokens: 8192, // 2048 → 8192: JSON truncation 방지 (위 Gemini 동일 사유)
+      max_tokens: 16384,
       messages: [{ role: 'user', content: prompt }],
     },
     { signal },

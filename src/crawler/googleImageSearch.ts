@@ -9,6 +9,7 @@ import { launchAdaptedBrowser, createOptimizedAdaptedPage } from '../automation/
 import { isUIGarbage, deduplicateImages, normalizeImageUrl } from './utils/imageUtils.js';
 import { isNewsOrWatermarkedImage } from './utils/imageUtils.js';
 import { filterImagesByRelevance } from './imageRelevanceScorer.js';
+import { GEMINI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 export interface GoogleImageResult {
     url: string;           // 원본 이미지 URL
@@ -282,7 +283,7 @@ export async function searchImagesForHeadings(
                             try {
                                 const { filtered } = await filterImagesByRelevance(pool, heading, mainKeyword, {
                                     enabled: true,
-                                    textGenerator: options.textGenerator || 'gemini-2.5-flash',
+                                    textGenerator: options.textGenerator || GEMINI_TEXT_MODELS.FLASH,
                                     apiKeys: options.apiKeys,
                                     threshold: options.relevanceThreshold,
                                 });
@@ -364,7 +365,7 @@ export async function searchImagesForHeadings(
                     if (aiCheck && candidates.length > 0) {
                         const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
                             enabled: true,
-                            textGenerator: options!.textGenerator || 'gemini-2.5-flash',
+                            textGenerator: options!.textGenerator || GEMINI_TEXT_MODELS.FLASH,
                             apiKeys: options!.apiKeys || {},
                             threshold: options!.relevanceThreshold,
                         });
@@ -456,7 +457,7 @@ export async function searchImagesForHeadings(
                         if (aiCheck && candidates.length > 0) {
                             const { filtered } = await filterImagesByRelevance(candidates, heading, mainKeyword, {
                                 enabled: true,
-                                textGenerator: options!.textGenerator || 'gemini-2.5-flash',
+                                textGenerator: options!.textGenerator || GEMINI_TEXT_MODELS.FLASH,
                                 apiKeys: options!.apiKeys || {},
                                 threshold: options!.relevanceThreshold,
                             });

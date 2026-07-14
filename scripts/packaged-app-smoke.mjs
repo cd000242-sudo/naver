@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import {
   buildIsolatedPackagedAppEnv,
   findPackagedExecutable,
+  removeIsolatedSmokeRoot,
 } from './lib/packaged-smoke-lib.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -43,5 +44,5 @@ try {
   }
   console.log('[packaged-smoke] PASS');
 } finally {
-  fs.rmSync(isolatedRoot, { recursive: true, force: true });
+  removeIsolatedSmokeRoot(isolatedRoot);
 }

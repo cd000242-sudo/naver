@@ -156,38 +156,38 @@ describe('v1.4.13 — 발행 타임아웃 25분', () => {
 describe('Gemini 모델 체인 (자동 폴백 제거, v1.4.42+)', () => {
   it('config 없을 때 기본 모델은 gemini-2.5-flash (free 플랜 기본값)', () => {
     const { primaryModel, isPro } = buildGeminiModelChain();
-    expect(primaryModel).toBe('gemini-2.5-flash');
+    expect(primaryModel).toBe('gemini-3.5-flash');
     expect(isPro).toBe(false);
   });
 
   it('v1.4.42 — 자동 폴백 제거: uniqueModels는 1개(사용자 선택)만 반환', () => {
     const { uniqueModels } = buildGeminiModelChain();
     expect(uniqueModels).toHaveLength(1);
-    expect(uniqueModels[0]).toBe('gemini-2.5-flash');
+    expect(uniqueModels[0]).toBe('gemini-3.5-flash');
   });
 
   it('v1.4.42 — Pro 모델 선택 시 Pro만 반환 (flash 폴백 없음)', () => {
     const { uniqueModels, isPro } = buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-2.5-pro' });
     expect(isPro).toBe(true);
     expect(uniqueModels).toHaveLength(1);
-    expect(uniqueModels[0]).toBe('gemini-2.5-pro');
+    expect(uniqueModels[0]).toBe('gemini-3.1-pro-preview');
   });
 
-  it('비-Gemini 모델명 입력 시 gemini-2.5-flash로 폴백 (잘못된 입력 방어)', () => {
-    const { primaryModel } = buildGeminiModelChain({ primaryGeminiTextModel: 'openai-gpt41' });
-    expect(primaryModel).toBe('gemini-2.5-flash');
+  it('비-Gemini 모델명 입력 시 무음 폴백 없이 공급자 불일치를 알린다', () => {
+    expect(() => buildGeminiModelChain({ primaryGeminiTextModel: 'openai-gpt41' }))
+      .toThrow('TEXT_MODEL_PROVIDER_MISMATCH');
   });
 
   it('v1.4.42 — Flash-Lite 명시 선택 시 Flash-Lite만 반환 (flash 폴백 없음)', () => {
     const { primaryModel, uniqueModels } = buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-2.5-flash-lite' });
-    expect(primaryModel).toBe('gemini-2.5-flash-lite');
+    expect(primaryModel).toBe('gemini-3.1-flash-lite');
     expect(uniqueModels).toHaveLength(1);
-    expect(uniqueModels[0]).toBe('gemini-2.5-flash-lite');
+    expect(uniqueModels[0]).toBe('gemini-3.1-flash-lite');
   });
 
   it('paid 플랜 기본 모델은 안정 우선 gemini-2.5-flash', () => {
     const { primaryModel, isPro } = buildGeminiModelChain({ geminiPlanType: 'paid' });
-    expect(primaryModel).toBe('gemini-2.5-flash');
+    expect(primaryModel).toBe('gemini-3.5-flash');
     expect(isPro).toBe(false);
   });
 });

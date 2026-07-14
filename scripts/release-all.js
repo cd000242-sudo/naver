@@ -357,6 +357,7 @@ async function main() {
         fail('자동 복구 실패 — git checkout src/renderer/renderer.ts 로 수동 복원하세요');
       }
     }
+    if (!allSuccess) process.exitCode = 1;
   }
 
   // ─── 최종 리포트 ───

@@ -284,9 +284,9 @@ class AutomationServiceImpl {
         if (auto) {
             try {
                 await auto.closeBrowser();
-                console.log(`[AutomationService] Session closed for ${accountId}`);
+                console.log('[AutomationService] Account session closed');
             } catch (e) {
-                console.warn(`[AutomationService] Failed to close session for ${accountId}:`, e);
+                console.warn('[AutomationService] Failed to close account session:', e);
             } finally {
                 this.automationMap.delete(accountId);
             }

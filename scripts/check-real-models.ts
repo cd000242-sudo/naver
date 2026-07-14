@@ -16,8 +16,9 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 // 테스트할 모델 목록 (사용자 우려 모델 집중 테스트)
 const candidateModels = [
-    'gemini-1.5-flash',       // 사용자가 안 된다고 기억하는 모델 (검증 필수)
-    'gemini-2.0-flash-exp',   // 대안
+    'gemini-3.1-flash-lite',
+    'gemini-3.5-flash',
+    'gemini-3.1-pro-preview',
 ];
 
 async function testModel(modelName: string) {

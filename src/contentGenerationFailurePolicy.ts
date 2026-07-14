@@ -5,6 +5,13 @@ function normalizeContentGenerationErrorMessage(error: unknown): string {
 }
 
 export function isTerminalContentGenerationError(error: unknown): boolean {
+  const errorCode = typeof error === 'object' && error !== null
+    ? String((error as { code?: unknown }).code ?? '')
+    : '';
+  if (['not_installed', 'not_logged_in', 'subscription_inactive', 'rate_limited'].includes(errorCode)) {
+    return true;
+  }
+
   const msg = normalizeContentGenerationErrorMessage(error).toLowerCase();
   if (!msg) return false;
 

@@ -20,17 +20,8 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
   describe('출력 토큰 상한 축소 유지', () => {
     const content = read('contentGenerator.ts');
 
-    it('Gemini Flash maxOutputTokens는 8192 이하 (Pro는 thinking 필요로 16384 허용)', () => {
-      // ✅ [v2.10.207] 모델별 분기 패턴 — Flash=8192, Pro=16384
-      // 정규식 매칭: maxOutputTokens: <조건> ? <PRO값> : <FLASH값>
-      const match = content.match(/maxOutputTokens:\s*\/[^/]+\/i\.test\(modelName\)\s*\?\s*(\d+)\s*:\s*(\d+)/);
-      expect(match).toBeTruthy();
-      const proValue = parseInt(match![1], 10);
-      const flashValue = parseInt(match![2], 10);
-      // Flash는 8192 이하 (비용 절감)
-      expect(flashValue).toBeLessThanOrEqual(8192);
-      // Pro는 thinking 토큰 + 응답 토큰 합산이라 16384 허용
-      expect(proValue).toBeLessThanOrEqual(16384);
+    it('Gemini tier token budgets stay bounded while reserving thinking output', () => {
+      expect(content).toMatch(/maxOutputTokens:\s*isPro\s*\?\s*16384\s*:\s*modelName\s*===\s*GEMINI_TEXT_MODELS\.FLASH\s*\?\s*12288\s*:\s*8192/);
     });
 
     it('OpenAI max_completion_tokens는 8192 이하', () => {
@@ -39,17 +30,14 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
       expect(content).not.toMatch(/max_completion_tokens:\s*8192,/);
     });
 
-    it('Claude max_tokens는 8192 이하', () => {
-      // buildRequest 블록의 max_tokens 추출
-      const match = content.match(/buildRequest\s*=\s*\(withCache:[\s\S]{0,200}?max_tokens:\s*(\d+)/);
-      expect(match).toBeTruthy();
-      expect(parseInt(match![1], 10)).toBeLessThanOrEqual(8192);
+    it('Claude adaptive models reserve 16384 tokens and other models stay at 8192', () => {
+      expect(content).toMatch(/max_tokens:\s*usesAdaptiveThinking\s*\?\s*16384\s*:\s*8192/);
     });
 
     it('60000 같은 과대 상한이 본문 생성 경로에 남아있지 않음', () => {
       // 주석 외부에서 maxOutputTokens: 60000이 있는지 검사
       const lines = content.split('\n');
-      const violations = lines.filter((line, i) => {
+      const violations = lines.filter((line) => {
         const trimmed = line.trim();
         if (trimmed.startsWith('//')) return false;
         if (trimmed.startsWith('*')) return false;
@@ -61,17 +49,20 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
 
   describe('OpenAI 모델 매핑 — UI 라벨 = 실제 호출 1:1', () => {
     const content = read('contentGenerator.ts');
+    const registry = read('runtime/modelRegistry.ts');
 
-    it("'openai-gpt41' 분기는 gpt-4.1 호출", () => {
-      expect(content).toMatch(/openai-gpt41[\s\S]{0,300}openAIModels\s*=\s*\[\s*['"]gpt-4\.1['"]\s*\]/);
+    it("'openai-gpt41' maps to GPT-5.6 Terra", () => {
+      expect(registry).toMatch(/TERRA:\s*'gpt-5\.6-terra'/);
+      expect(content).toMatch(/resolveTextModelProfileForVendor\(\s*uiSelectedModel/);
     });
 
-    it("'openai-gpt4o-mini' 분기는 gpt-4.1-mini 호출", () => {
-      expect(content).toMatch(/openai-gpt4o-mini[\s\S]{0,300}openAIModels\s*=\s*\[\s*['"]gpt-4\.1-mini['"]\s*\]/);
+    it("'openai-gpt4o-mini' maps to GPT-5.6 Luna", () => {
+      expect(registry).toMatch(/'openai-gpt4o-mini'[\s\S]{0,300}OPENAI_TEXT_MODELS\.LUNA/);
     });
 
-    it("'openai-gpt4o' 분기는 gpt-4o 호출", () => {
-      expect(content).toMatch(/openai-gpt4o'[\s\S]{0,300}openAIModels\s*=\s*\[\s*['"]gpt-4o['"]\s*\]/);
+    it("'openai-gpt4o' maps to GPT-5.6 Sol", () => {
+      expect(registry).toMatch(/'openai-gpt4o'[\s\S]{0,300}OPENAI_TEXT_MODELS\.SOL/);
+      expect(content).toMatch(/reasoning_effort/);
     });
 
     it('OpenAI 폴백 배열은 단일 모델만 허용 (크로스 모델 폴백 금지)', () => {
@@ -84,6 +75,31 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
         expect(elements.length).toBe(1);
       }
     });
+  });
+
+  describe('quality repair provider consistency', () => {
+    const content = read('contentGenerator.ts');
+
+    it('runs self-critique through the user-selected provider instead of hardcoded Gemini', () => {
+      expect(content).toMatch(/callSelectedProviderForQualityRepair/);
+      expect(content).toMatch(/selfCritiqueAndRewrite\([\s\S]{0,500}?callSelectedProviderForQualityRepair/);
+      expect(content).not.toMatch(/selfCritiqueAndRewrite\([\s\S]{0,500}?\(prompt:\s*string\)\s*=>\s*callGemini/);
+    });
+  });
+
+  it('uses the shared Claude sampling policy for explicit model overrides', () => {
+    const content = read('contentGenerator.ts');
+    expect(content).toMatch(/supportsClaudeTemperature\(modelName\)/);
+  });
+
+  it('uses strict provider resolution and the current OpenAI search model', () => {
+    const content = read('contentGenerator.ts');
+    expect(content).toMatch(/resolveTextModelProfileForVendor\(/);
+    expect(content).toContain('openAIModels = [OPENAI_TEXT_MODELS.TERRA]');
+    expect(content).toContain('buildOpenAiSearchResponseParams');
+    expect(content).toContain('callOpenAIResponsesRest');
+    expect(content).not.toContain('gpt-5-search-api');
+    expect(content).not.toContain("openAIModels = ['gpt-4o-search-preview']");
   });
 
   describe('이미지 기본 엔진 — schnell(저가) 고정', () => {
@@ -166,7 +182,7 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     });
 
     it('OpenAI content generation gets a bounded same-engine repair budget without cross-engine fallback', () => {
-      expect(content).toMatch(/const\s+baseMaxAttempts\s*=\s*provider\s*===\s*'openai'\s*\?\s*openAiContentMaxAttempts\s*:\s*costPolicy\.maxAttempts/);
+      expect(content).toMatch(/const\s+baseMaxAttempts\s*=\s*provider\s*===\s*'openai'[\s\S]{0,120}?Math\.max\(openAiContentMaxAttempts,\s*costPolicy\.maxAttempts\)/);
       expect(content).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
       expect(content).toMatch(/const\s+promptRepairMinAttempts\s*=\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
       expect(content).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*isQuality90Mode\(generationQualityMode\)\s*\?\s*2\s*:\s*0/);
@@ -220,11 +236,22 @@ describe('Live content engine diagnostics and secret safety', () => {
     expect(configManager).toMatch(/looks masked; keeping existing environment value instead/);
   });
 
-  it('content engine live smoke test runs providers sequentially with app-equivalent OpenAI mapping', () => {
+  it('content engine live smoke test runs providers sequentially with the current three-tier mappings', () => {
     expect(engineScript).not.toMatch(/Promise\.all\(runners/);
     expect(engineScript).toMatch(/for \(const \[index, \[provider, fn\]\] of enabledRunners\.entries\(\)\)/);
-    expect(engineScript).toMatch(/selected === 'openai-gpt4o-mini'[\s\S]{0,80}\? 'gpt-4\.1-mini'[\s\S]{0,80}: 'gpt-4\.1'/);
+    expect(engineScript).toMatch(/openai:[\s\S]{0,180}?value:\s*'gpt-5\.6-luna'[\s\S]{0,180}?balanced:\s*'gpt-5\.6-terra'[\s\S]{0,180}?premium:\s*'gpt-5\.6-sol'/);
+    expect(engineScript).toMatch(/claude:[\s\S]{0,220}?value:\s*'claude-haiku-4-5-20251001'[\s\S]{0,220}?balanced:\s*'claude-sonnet-5'[\s\S]{0,220}?premium:\s*'claude-fable-5'/);
+    expect(engineScript).toMatch(/selected === 'openai-gpt4o-mini'[\s\S]{0,100}?CURRENT_MODELS\.openai\.value/);
     expect(engineScript).toMatch(/function\s+isMaskedSecretValue/);
+  });
+
+  it('explicit OpenAI and Claude model overrides are provider-validated before single-model execution', () => {
+    expect(content).toMatch(/selectedOpenAiProfile\s*=\s*resolveTextModelProfileForVendor\([\s\S]{0,180}?customModel/);
+    expect(content).toMatch(/selectedClaudeProfile\s*=\s*resolveTextModelProfileForVendor\([\s\S]{0,180}?customModel/);
+    expect(content).toMatch(/const\s+modelsToTry\s*=\s*openAIModels/);
+    expect(content).toMatch(/const\s+modelsToTry\s*=\s*claudeModels/);
+    expect(engineScript).toMatch(/process\.env\.OPENAI_STRUCTURED_MODEL\s*\|\|\s*process\.env\.OPENAI_MODEL\s*\|\|\s*mapped/);
+    expect(engineScript).toMatch(/process\.env\.CLAUDE_STRUCTURED_MODEL\s*\|\|\s*process\.env\.CLAUDE_MODEL\s*\|\|\s*mapped/);
   });
 
   it('app-based content engine smoke test uses Electron config decryption path', () => {

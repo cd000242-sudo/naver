@@ -16,7 +16,7 @@
  * 7. [NEW] AI Vision 분류 — 의심 이미지를 Gemini/OpenAI Vision으로 최종 판정
  */
 
-import { OPENAI_TEXT_MODELS } from '../runtime/modelRegistry.js';
+import { GEMINI_TEXT_MODELS, OPENAI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 interface ImageAnalysisResult {
     url: string;
@@ -209,7 +209,7 @@ async function classifyWithGemini(
         const mimeType = imageUrl.toLowerCase().includes('.png') ? 'image/png' : 'image/jpeg';
 
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`,
+            `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_TEXT_MODELS.FLASH_LITE}:generateContent`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey },
@@ -279,8 +279,7 @@ async function classifyWithOpenAI(
                     'Authorization': `Bearer ${openaiApiKey}`,
                 },
                 body: JSON.stringify({
-                    // ✅ [v2.7.53] modelRegistry SSOT 적용 (이전: gpt-4.1-mini literal)
-                    model: OPENAI_TEXT_MODELS.GPT_41_MINI,
+                    model: OPENAI_TEXT_MODELS.LUNA,
                     messages: [{
                         role: 'user',
                         content: [
@@ -302,8 +301,8 @@ Respond with ONLY one word: "product" or "non-product". Nothing else.`,
                             },
                         ],
                     }],
-                    max_tokens: 10,
-                    temperature: 0,
+                    max_completion_tokens: 512,
+                    reasoning_effort: 'medium',
                 }),
                 signal: AbortSignal.timeout(15000),
             }

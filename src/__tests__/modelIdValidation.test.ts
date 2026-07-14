@@ -20,6 +20,114 @@ function read(rel: string): string {
   return fs.readFileSync(path.join(ROOT, rel), 'utf-8');
 }
 
+it('keeps the live content-engine smoke test on the same current model matrix', () => {
+  const smoke = read('../scripts/test-content-engines.mjs');
+  expect(smoke).toContain("value: 'gemini-3.1-flash-lite'");
+  expect(smoke).toContain("balanced: 'gemini-3.5-flash'");
+  expect(smoke).toContain("premium: 'gemini-3.1-pro-preview'");
+  expect(smoke).toContain("value: 'gpt-5.6-luna'");
+  expect(smoke).toContain("balanced: 'gpt-5.6-terra'");
+  expect(smoke).toContain("premium: 'gpt-5.6-sol'");
+  expect(smoke).toContain("balanced: 'claude-sonnet-5'");
+  expect(smoke).toContain("premium: 'claude-fable-5'");
+  expect(smoke).toContain('reasoning_effort');
+  expect(smoke).toContain("tools: [{ type: 'web_search' }]");
+  expect(smoke).toContain('client.responses.create');
+  expect(smoke).not.toContain("'gpt-5-search-api'");
+  expect(smoke).not.toContain("'gpt-4o-search-preview'");
+  expect(read('../scripts/diagnose-openai-access.mjs')).not.toContain("'gpt-4o-search-preview'");
+});
+
+it('shows the current OpenAI search model name instead of the retired preview branding', () => {
+  const publicHtml = read('../public/index.html');
+  const settingsModal = read('renderer/utils/settingsModal.ts');
+  const priceInfoModal = read('renderer/modules/priceInfoModal.ts');
+  for (const code of [publicHtml, settingsModal, priceInfoModal]) {
+    expect(code).not.toContain('GPT-4o Search');
+    expect(code).toContain('GPT-5.6 웹 검색');
+  }
+});
+
+it('keeps shipped JavaScript and manual diagnostics on current models', () => {
+  const shippedSearchApi = read('naverSearchApi.js');
+  expect(shippedSearchApi).toContain("model: 'gemini-3.1-flash-lite'");
+  expect(shippedSearchApi).not.toContain("model: 'gemini-2.0-flash'");
+
+  const imageDiagnostics = [
+    read('tests/testGeminiImage.ts'),
+    read('../scripts/test_gemini_error.ts'),
+  ];
+  for (const code of imageDiagnostics) {
+    expect(code).toContain('gemini-3.1-flash-lite-image');
+    expect(code).not.toMatch(/gemini-(?:1\.5|2\.0)-/);
+  }
+
+  const textDiagnostic = read('../scripts/verify-gemini-1.5.ts');
+  expect(textDiagnostic).toContain('gemini-3.5-flash');
+  expect(textDiagnostic).not.toMatch(/gemini-(?:1\.0|1\.5|2\.0)-/);
+});
+
+it('shows the current Claude value model when the connectivity response omits a model id', () => {
+  const main = read('main.ts');
+  expect(main).toContain('resp.data?.model || CLAUDE_MODELS.HAIKU');
+  expect(main).not.toContain("resp.data?.model || 'claude-3-haiku'");
+});
+
+it('never logs API key prefixes in content provider diagnostics', () => {
+  const content = read('contentGenerator.ts');
+  expect(content).not.toMatch(/perplexityApiKey[^\n]*substring/);
+  expect(content).not.toMatch(/PERPLEXITY_API_KEY[^\n]*substring/);
+  expect(content).toMatch(/perplexityApiKey:\s*config\?\.perplexityApiKey\s*\?\s*'\(설정됨\)'/);
+});
+
+it('never prints raw API key prefixes or suffixes in runtime and diagnostic logs', () => {
+  const secretAwareFiles = [
+    read('configManager.js'),
+    read('image/deepinfraGenerator.ts'),
+    read('main/ipc/configHandlers.ts'),
+    read('tests/test31flash.ts'),
+    read('tests/testFullFlow.ts'),
+    read('tests/testGeminiImage.ts'),
+    read('../scripts/check-gemini-tier.mjs'),
+    read('../scripts/test-openai-image.mjs'),
+    read('../scripts/test_gemini_error.ts'),
+    read('../scripts/verify-gemini-1.5.ts'),
+  ];
+
+  for (const code of secretAwareFiles) {
+    expect(code).not.toMatch(/[A-Za-z]*[Aa]piKey\.(?:substring|slice)\s*\(/);
+  }
+
+  const contentGenerator = read('contentGenerator.ts');
+  const apiHandlers = read('main/ipc/apiHandlers.ts');
+  const adsPowerManager = read('main/utils/adsPowerManager.ts');
+  const nanoBanana = read('image/nanoBananaProGenerator.ts');
+  const continuousPublishing = read('renderer/modules/continuousPublishing.ts');
+
+  expect(contentGenerator).not.toMatch(/(?:trimmedKey|nextKey)\.substring\s*\(/);
+  expect(apiHandlers).not.toMatch(/key\.substring\s*\(/);
+  expect(adsPowerManager).not.toMatch(/key\.substring\s*\(/);
+  expect(nanoBanana).not.toMatch(/(?:key|nextKey)\.substring\s*\(/);
+  expect(continuousPublishing).not.toMatch(/api-key[^\n]*substring\s*\(/);
+});
+
+it('routes explicit sub-work models without process-wide environment mutation', () => {
+  const content = read('contentGenerator.ts');
+  expect(content).not.toMatch(/process\.env\.(?:OPENAI|CLAUDE)_STRUCTURED_MODEL\s*=/);
+  expect(content).toContain('modelOverride: OPENAI_TEXT_MODELS.LUNA');
+  expect(content).toContain('modelOverride: GEMINI_TEXT_MODELS.FLASH');
+  expect(content).toContain('modelOverride: CLAUDE_MODELS.HAIKU');
+});
+
+it('does not print Naver credential fragments or full account ids in reviewed runtime paths', () => {
+  const main = read('main.ts');
+  const automation = read('naverBlogAutomation.ts');
+  expect(main).not.toMatch(/clientId\.substring|clientSecret\.substring/);
+  expect(main).not.toMatch(/console\.log\([^\n]*\$\{accountNaverId\}/);
+  expect(automation).not.toMatch(/this\.log\([^\n]*\$\{accountId\}/);
+  expect(main).toContain('redactKnownAccountId');
+});
+
 describe('v1.4.77 — 실존 모델 ID 매트릭스 (2026-04)', () => {
   describe('OpenAI: sunset 임박 ID 호출 금지', () => {
     it("gpt-4o / gpt-4o-mini 직접 호출이 실제 코드에서 제거됨 (2026-03-31 sunset)", () => {
@@ -37,9 +145,9 @@ describe('v1.4.77 — 실존 모델 ID 매트릭스 (2026-04)', () => {
     it("번역·이미지 분석은 gpt-4.1-mini로 교체됨 (literal 또는 modelRegistry SSOT)", () => {
       // ✅ [v2.7.52] modelRegistry import도 인정 (OPENAI_TEXT_MODELS.GPT_41_MINI)
       const promptInference = read('main/utils/mainPromptInference.ts');
-      expect(promptInference).toMatch(/model:\s*(?:['"]gpt-4\.1-mini['"]|OPENAI_TEXT_MODELS\.GPT_41_MINI)/);
+      expect(promptInference).toMatch(/model:\s*OPENAI_TEXT_MODELS\.LUNA/);
       const shoppingAnalyzer = read('image/shoppingImageAnalyzer.ts');
-      expect(shoppingAnalyzer).toMatch(/model:\s*(?:['"]gpt-4\.1-mini['"]|OPENAI_TEXT_MODELS\.GPT_41_MINI)/);
+      expect(shoppingAnalyzer).toMatch(/model:\s*OPENAI_TEXT_MODELS\.LUNA/);
     });
 
     it("DALL-E 3 직접 호출 없음 (2026-05-12 제거 예정)", () => {
@@ -93,20 +201,27 @@ describe('v1.4.77 — 실존 모델 ID 매트릭스 (2026-04)', () => {
 
   describe('Gemini: 실존 모델 ID 매핑', () => {
     it("Nano Banana 매핑 — gemini-3 이미지 모델(프로/2)이 실제 ID로 복원됨 (v2.10.334+)", () => {
-      // ✅ [v2.10.334] Google 공식 문서 검증: gemini-3-pro-image-preview(나노바나나 프로),
-      //   gemini-3.1-flash-image-preview(나노바나나2)는 실재하는 정식 모델.
-      //   v2.7.24가 "미존재 ID"로 잘못 단정해 구형 gemini-2.5-flash-image로 강등했던 것을
-      //   정정 — MODEL_MAP에 실제 ID로 복원. 한글 텍스트 렌더링 회귀 수정.
+      // Google 공식 안정 ID를 사용하며 종료된 preview ID는 호출하지 않는다.
       const gen = read('image/nanoBananaProGenerator.ts');
-      expect(gen).toMatch(/model:\s*['"]gemini-3-pro-image-preview['"]/);
-      expect(gen).toMatch(/model:\s*['"]gemini-3\.1-flash-image-preview['"]/);
+      expect(gen).toMatch(/model:\s*['"]gemini-3-pro-image['"]/);
+      expect(gen).toMatch(/model:\s*['"]gemini-3\.1-flash-image['"]/);
       // 구버전 나노바나나(gemini-2.5-flash-image)도 선택지로 유지
       expect(gen).toMatch(/model:\s*['"]gemini-2\.5-flash-image['"]/);
     });
 
-    it("Gemini 2.0 Flash Exp은 image-generation suffix 형태로만 호출 (무료 실험 모델, 2026-06-01 shutdown 예정)", () => {
+    it('종료된 Gemini 이미지 모델 대신 Flash-Lite 안정 모델을 자동 폴백에 사용', () => {
       const gen = read('image/nanoBananaProGenerator.ts');
-      expect(gen).toMatch(/gemini-2\.0-flash-exp-image-generation/);
+      const recovery = read('image/geminiAutoRecovery.ts');
+      const handlers = read('main/ipc/imageHandlers.ts');
+      const stylePolicy = read('image/stylePreviewEnginePolicy.ts');
+      expect(gen).toMatch(/gemini-3\.1-flash-lite-image/);
+      expect(recovery).toMatch(/gemini-3\.1-flash-lite-image/);
+      expect(stylePolicy).toMatch(/GEMINI_IMAGE_MODELS\.NANO_BANANA_LITE/);
+      for (const code of [gen, recovery, handlers]) {
+        expect(code).not.toMatch(/gemini-2\.0-flash-(?:preview|exp)-image-generation/);
+        expect(code).not.toMatch(/gemini-2\.5-flash-image-preview/);
+        expect(code).not.toMatch(/imagen-4\.0-generate-preview-06-06/);
+      }
     });
 
     it("텍스트 본문 생성은 gemini-2.5 계열만 (stable)", () => {

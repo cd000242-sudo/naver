@@ -84,21 +84,21 @@ function resolveConfiguredModels(settings) {
   const selected = readConfigValue(settings, 'primaryGeminiTextModel')?.value || '';
   const structured = process.env.OPENAI_STRUCTURED_MODEL || process.env.OPENAI_MODEL || '';
   const mapped = selected === 'openai-gpt41'
-    ? 'gpt-4.1'
+    ? 'gpt-5.6-terra'
     : selected === 'openai-gpt4o'
-      ? 'gpt-4o'
+      ? 'gpt-5.6-sol'
       : selected === 'openai-gpt4o-search'
-        ? 'gpt-4o-search-preview'
+        ? 'gpt-5.6-terra'
         : selected === 'openai-gpt4o-mini'
-          ? 'gpt-4.1-mini'
+          ? 'gpt-5.6-luna'
           : '';
 
   return [...new Set([
     structured,
     mapped,
-    'gpt-4.1-mini',
-    'gpt-4.1',
-    'gpt-4o',
+    'gpt-5.6-luna',
+    'gpt-5.6-terra',
+    'gpt-5.6-sol',
   ].filter(Boolean))];
 }
 

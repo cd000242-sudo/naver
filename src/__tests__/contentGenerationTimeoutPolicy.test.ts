@@ -199,7 +199,8 @@ describe('content generation timeout policy', () => {
 
   it('keeps hidden post-generation LLM patch calls explicit opt-in', () => {
     expect(costPolicySrc).toMatch(/CONTENT_ALLOW_EXTRA_LLM_PATCHES/);
-    expect(costPolicySrc).toMatch(/!costSaverOn\s*&&\s*env\.CONTENT_ALLOW_EXTRA_LLM_PATCHES\s*===\s*'1'/);
+    expect(costPolicySrc).toMatch(/patchOverride\s*===\s*'0'/);
+    expect(costPolicySrc).toMatch(/patchOverride\s*===\s*'1'\s*\|\|\s*modelProfile\.tier\s*!==\s*'value'/);
   });
 
   it('does not advertise an unsafe Gemini RPM ceiling for high-spec machines', () => {

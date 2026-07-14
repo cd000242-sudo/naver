@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GEMINI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 // 카테고리별 애드포스트 전략
 const ADPOST_STRATEGIES: Record<string, string> = {
@@ -213,7 +214,7 @@ export class TwoStageGenerator {
     const stage1Start = Date.now();
 
     const model1 = this.client.getGenerativeModel({
-      model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
+      model: process.env.GEMINI_MODEL || GEMINI_TEXT_MODELS.FLASH,
       generationConfig: {
         temperature: 0.7,
         maxOutputTokens: 2048, // ✅ 1024 → 2048로 증가 (소제목 잘림 완전 방지)
@@ -253,7 +254,7 @@ JSON:
     const stage2Start = Date.now();
 
     const model2 = this.client.getGenerativeModel({
-      model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
+      model: process.env.GEMINI_MODEL || GEMINI_TEXT_MODELS.FLASH,
       generationConfig: {
         temperature: 0.8,
         maxOutputTokens: 8192, // ✅ 4096 → 8192로 증가 (본문 잘림 완전 방지)

@@ -60,44 +60,57 @@ describe('Gemini cost optimizer policy', () => {
     expect(plan.freeQuotaFirst).toBe(false);
   });
 
-  it('defaults to one regeneration retry while cost saver is on', () => {
-    expect(resolveContentGenerationCostPolicy({}).maxAttempts).toBe(1);
-    expect(resolveContentGenerationCostPolicy({ costSaverMode: true }).maxAttempts).toBe(1);
-    expect(resolveContentGenerationCostPolicy({ costSaverMode: false }).maxAttempts).toBe(2);
+  it('uses tier-aware retry budgets while preserving a bounded pipeline', () => {
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.1-flash-lite' }).maxAttempts).toBe(1);
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.5-flash' }).maxAttempts).toBe(2);
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.1-pro-preview' }).maxAttempts).toBe(3);
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'openai-gpt41' }).maxAttempts).toBe(2);
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'claude-opus' }).maxAttempts).toBe(3);
   });
 
-  it('disables hidden extra LLM patch calls unless explicitly opted in', () => {
-    const defaultPolicy = resolveContentGenerationCostPolicy({});
-    expect(defaultPolicy.allowLlmTitlePatch).toBe(false);
-    expect(defaultPolicy.allowLlmIntroPatch).toBe(false);
-    expect(defaultPolicy.allowQualityGateSelfCritique).toBe(false);
+  it('keeps value economical and enables localized repair for balanced and premium tiers', () => {
+    const valuePolicy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'openai-gpt4o-mini' });
+    expect(valuePolicy.modelTier).toBe('value');
+    expect(valuePolicy.allowLlmTitlePatch).toBe(false);
+    expect(valuePolicy.allowLlmIntroPatch).toBe(false);
+    expect(valuePolicy.allowQualityGateSelfCritique).toBe(false);
 
-    const premiumPolicy = resolveContentGenerationCostPolicy({ costSaverMode: false });
-    expect(premiumPolicy.allowLlmTitlePatch).toBe(false);
-    expect(premiumPolicy.allowLlmIntroPatch).toBe(false);
-    expect(premiumPolicy.allowQualityGateSelfCritique).toBe(false);
+    const balancedPolicy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'claude-sonnet' });
+    expect(balancedPolicy.modelTier).toBe('balanced');
+    expect(balancedPolicy.allowLlmTitlePatch).toBe(true);
+    expect(balancedPolicy.allowLlmIntroPatch).toBe(true);
+    expect(balancedPolicy.allowQualityGateSelfCritique).toBe(true);
 
-    const explicitExtraWorkPolicy = resolveContentGenerationCostPolicy(
-      { costSaverMode: false },
-      { CONTENT_ALLOW_EXTRA_LLM_PATCHES: '1' },
-    );
-    expect(explicitExtraWorkPolicy.allowLlmTitlePatch).toBe(true);
-    expect(explicitExtraWorkPolicy.allowLlmIntroPatch).toBe(true);
-    expect(explicitExtraWorkPolicy.allowQualityGateSelfCritique).toBe(true);
+    const premiumPolicy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'openai-gpt4o' });
+    expect(premiumPolicy.modelTier).toBe('premium');
+    expect(premiumPolicy.allowLlmTitlePatch).toBe(true);
+    expect(premiumPolicy.allowLlmIntroPatch).toBe(true);
+    expect(premiumPolicy.allowQualityGateSelfCritique).toBe(true);
   });
 
-  it('keeps expensive patch opt-in off when cost saver is on even if env is set', () => {
-    const costSaverPolicy = resolveContentGenerationCostPolicy(
-      { costSaverMode: true },
-      { CONTENT_ALLOW_EXTRA_LLM_PATCHES: '1' },
+  it('allows operators to disable extra localized repair without weakening hard gates', () => {
+    const disabledPolicy = resolveContentGenerationCostPolicy(
+      { primaryGeminiTextModel: 'gemini-3.1-pro-preview' },
+      { CONTENT_ALLOW_EXTRA_LLM_PATCHES: '0' },
     );
-    expect(costSaverPolicy.allowLlmTitlePatch).toBe(false);
-    expect(costSaverPolicy.allowLlmIntroPatch).toBe(false);
-    expect(costSaverPolicy.allowQualityGateSelfCritique).toBe(false);
+    expect(disabledPolicy.allowLlmTitlePatch).toBe(false);
+    expect(disabledPolicy.allowLlmIntroPatch).toBe(false);
+    expect(disabledPolicy.allowQualityGateSelfCritique).toBe(false);
   });
 
   it('lets an environment override raise the attempt budget deliberately', () => {
     expect(resolveContentGenerationCostPolicy({}, { CONTENT_MAX_ATTEMPTS: '3' }).maxAttempts).toBe(3);
-    expect(resolveContentGenerationCostPolicy({}, { CONTENT_MAX_ATTEMPTS: 'not-a-number' }).maxAttempts).toBe(1);
+    expect(resolveContentGenerationCostPolicy(
+      { primaryGeminiTextModel: 'gemini-3.1-flash-lite' },
+      { CONTENT_MAX_ATTEMPTS: 'not-a-number' },
+    ).maxAttempts).toBe(1);
+  });
+
+  it('injects a silent quality audit that never permits invented facts', () => {
+    const policy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.5-flash' });
+    expect(policy.qualityDirective).toContain('silent quality audit');
+    expect(policy.qualityDirective).toContain('Do not invent');
+    expect(policy.qualityDirective).toContain('valid JSON');
+    expect(policy.qualityDirective).toContain('90');
   });
 });

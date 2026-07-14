@@ -2,7 +2,7 @@
  * OpenAI Vision adapter for the image-narrative inference pipeline.
  *
  * Uses the openai SDK (already installed).
- * Model: gpt-4.1 (VISION_MODELS.OPENAI_41 from modelRegistry).
+ * Model: gpt-5.6-terra (VISION_MODELS.OPENAI_41 from modelRegistry).
  *
  * response_format: json_schema (strict) enforces the output schema.
  * Integrates with openaiRpmThrottler to avoid RPM limit hits.

@@ -138,6 +138,9 @@ try {
   // 누락 시 dist/public/renderer.js에서 require가 제거된 뒤 함수만 남아 ReferenceError가 발생한다.
   const runtimeDir = path.join(projectRoot, 'dist', 'runtime');
   const runtimeModules = [
+    // Renderer settings/prompt modules import text-model helpers directly.
+    // CommonJS imports are stripped below, so the registry must exist first.
+    'geminiTextModelNormalization.js',
     'imageProviderMigration.js',
   ];
   let runtimeSource = '';
@@ -774,6 +777,7 @@ ${sanitized}`;
   // Runtime-only helpers can be referenced after CommonJS imports are stripped.
   // Fail the build here instead of shipping a renderer-only ReferenceError.
   const REQUIRED_RENDERER_RUNTIME_SYMBOLS = [
+    'normalizeGeminiTextModelId',
     'collapseDuplicateLeadingYearTitle',
     'applyKeywordPrefixToTitle',
     'deduplicateReferenceImages',

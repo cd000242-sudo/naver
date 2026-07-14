@@ -61,6 +61,35 @@ describe('notice admin runtime delivery', () => {
     expect(document.getElementById('notice-modal')?.style.display).toBe('flex');
   });
 
+  it('does not let a late startup cache response overwrite a newer live notice', async () => {
+    let resolveCachedNotice: ((notice: string) => void) | undefined;
+    (window as any).api.getActiveNotice = vi.fn(() => new Promise<string>((resolve) => {
+      resolveCachedNotice = resolve;
+    }));
+    const module = await import('../renderer/modules/noticeAdmin') as any;
+
+    module.initNoticeAdmin();
+    module.showServerNotice('방금 도착한 최신 공지');
+    resolveCachedNotice?.('시작 전에 저장된 이전 공지');
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(document.getElementById('notice-display-content')?.textContent).toBe('방금 도착한 최신 공지');
+  });
+
+  it('skips startup cache recovery when a live notice arrived before admin initialization', async () => {
+    (window as any).api.getActiveNotice = vi.fn(async () => '시작 전에 저장된 이전 공지');
+    const module = await import('../renderer/modules/noticeAdmin') as any;
+
+    module.showServerNotice('인증 직후 도착한 최신 공지');
+    module.initNoticeAdmin();
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect((window as any).api.getActiveNotice).not.toHaveBeenCalled();
+    expect(document.getElementById('notice-display-content')?.textContent).toBe('인증 직후 도착한 최신 공지');
+  });
+
   it('keeps the locally authored admin notice ahead of a stale server notice', async () => {
     localStorage.setItem(
       'app_notice_html_v1',
@@ -133,5 +162,18 @@ describe('notice admin runtime delivery', () => {
     document.getElementById('admin-save-btn')?.click();
     expect(document.getElementById('notice-modal')?.style.display).toBe('flex');
     expect(document.getElementById('notice-display-content')?.textContent).toBe('Operator notice');
+  });
+
+  it('registers the server notice IPC listener once and exposes readiness', async () => {
+    const on = vi.fn(() => () => undefined);
+    (window as any).api.on = on;
+    const events = await import('../renderer/utils/appEventsHandler') as any;
+
+    events.initNoticeModalListener();
+    events.initNoticeModalListener();
+
+    expect(on).toHaveBeenCalledTimes(1);
+    expect(on).toHaveBeenCalledWith('app:show-notice', expect.any(Function));
+    expect((window as any).__noticeListenerReady).toBe(true);
   });
 });

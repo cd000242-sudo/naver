@@ -28,14 +28,14 @@ async function testGeminiImageGeneration() {
         return;
     }
 
-    console.log(`\n🔑 API 키: ${apiKey.substring(0, 15)}...`);
+    console.log(`\n🔑 API 키: 설정됨 (길이 ${apiKey.length})`);
     console.log(`⏰ 테스트 시간: ${new Date().toLocaleString('ko-KR')}\n`);
 
     // 테스트할 모델들
     const models = [
-        'gemini-3-pro-image-preview',
-        'gemini-2.5-flash-image',
-        'gemini-2.0-flash-exp'
+        'gemini-3.1-flash-lite-image',
+        'gemini-3.1-flash-image',
+        'gemini-3-pro-image',
     ];
 
     const testPrompt = 'Generate a simple image of a cute orange cat sitting on a white background. The cat should be looking at the camera. Photorealistic style.';

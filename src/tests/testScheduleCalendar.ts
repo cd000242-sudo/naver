@@ -28,7 +28,7 @@ async function testScheduleCalendar(): Promise<void> {
     process.exit(1);
   }
 
-  console.log(`✅ 네이버 계정: ${naverId.substring(0, 3)}***`);
+  console.log(`✅ 네이버 계정: ${naverId ? '설정됨' : '없음'}`);
 
   const automation = new NaverBlogAutomation(
     {

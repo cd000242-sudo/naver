@@ -3,6 +3,7 @@
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import OpenAI from 'openai';
+import { GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
 
 export type MatcherConfig = {
     provider: 'gemini' | 'perplexity';
@@ -67,7 +68,7 @@ async function matchWithGemini(
 ): Promise<number[]> {
     const client = new GoogleGenerativeAI(config.geminiApiKey!);
     const model = client.getGenerativeModel({
-        model: config.geminiModel || process.env.GEMINI_MODEL || 'gemini-2.5-flash',
+        model: config.geminiModel || process.env.GEMINI_MODEL || GEMINI_TEXT_MODELS.FLASH_LITE,
         generationConfig: {
             temperature: 0.2,
             maxOutputTokens: 512,

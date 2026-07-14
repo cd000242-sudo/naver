@@ -2508,7 +2508,7 @@ export class NaverBlogAutomation {
         }, this.options.naverId);
       }
     }
-    this.log(`✅ 아이디 입력 완료: ${this.options.naverId.substring(0, 3)}***`);
+    this.log('✅ 아이디 입력 완료');
 
     // ✅ [2026-03-27 FIX] bvsd 대응: ID→PW 이동을 Tab vs 마우스 클릭 랜덤화 (70:30)
     // bvsd._data._tseq가 Tab 이벤트와 Mouse 이벤트 모두 수집 → 실제 사용자처럼 랜덤
@@ -3471,7 +3471,7 @@ export class NaverBlogAutomation {
                 const accountId = (this as any).naverId || (this as any).accountId || 'unknown';
                 if (accountId && accountId !== 'unknown') {
                   recordBotBackoff(accountId, firstError.type);
-                  this.log(`🛡️ [Backoff] ${accountId}: ${firstError.type} 감지 → 봇 점수 자연 감소 위해 일정 시간 자동 발행 제외됩니다.`);
+                  this.log(`🛡️ [Backoff] ${firstError.type} 감지 → 봇 점수 자연 감소 위해 일정 시간 자동 발행 제외됩니다.`);
                 }
               } catch { /* silent */ }
               continue; // 사용자가 해결할 수 있으므로 대기 계속
@@ -3492,7 +3492,7 @@ export class NaverBlogAutomation {
                 const accountId = (this as any).naverId || (this as any).accountId || 'unknown';
                 if (accountId && accountId !== 'unknown') {
                   recordBotBackoff(accountId, 'captcha');
-                  this.log(`🛡️ [Backoff] ${accountId}: 캡차 감지 → 봇 점수 자연 감소 위해 일정 시간 자동 발행 제외됩니다.`);
+                  this.log('🛡️ [Backoff] 캡차 감지 → 봇 점수 자연 감소 위해 일정 시간 자동 발행 제외됩니다.');
                 }
               } catch { /* silent */ }
 
@@ -8471,7 +8471,7 @@ export class NaverBlogAutomation {
           if (backoff) {
             const remainMs = backoff.expiresAt - Date.now();
             const remainMin = Math.round(remainMs / 60000);
-            this.log(`🛡️ [Backoff] ${accountId}: ${backoff.reason} 감지로 자동 발행 일시 제외 중 (남은 시간: ${Math.floor(remainMin / 60)}h ${remainMin % 60}m)`);
+            this.log(`🛡️ [Backoff] ${backoff.reason} 감지로 자동 발행 일시 제외 중 (남은 시간: ${Math.floor(remainMin / 60)}h ${remainMin % 60}m)`);
             this.log('   💡 봇 점수 자연 감소를 위해 잠시 쉽니다. 다음 실행 시 자동 회복됩니다.');
             throw new Error(`이 계정은 봇 감지로 자동 발행이 일시 중단되었습니다 (${backoff.reason}). 약 ${Math.floor(remainMin / 60)}시간 ${remainMin % 60}분 후 자동 회복됩니다.`);
           }

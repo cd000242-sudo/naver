@@ -10,12 +10,15 @@ import {
   normalizeSecretConfig,
   stripSecretSchemaArtifacts,
 } from './security/secretValueUtils.js';
+import {
+  normalizeGeminiTextModelId,
+} from './runtime/modelRegistry.js';
 
 export interface AppConfig {
   geminiApiKey?: string;
   geminiApiKeys?: string[]; // ✅ [2026-02-13] 다중 Gemini API 키 (429 할당량 자동 로테이션)
   geminiUseFreeQuotaBeforePaid?: boolean;
-  geminiModel?: 'gemini-2.5-flash' | 'gemini-2.5-flash-lite' | 'gemini-2.5-pro' | string; // ✅ Stable 모델만 hint, string으로 확장 허용
+  geminiModel?: 'gemini-3.1-flash-lite' | 'gemini-3.5-flash' | 'gemini-3.1-pro-preview' | string;
   openaiApiKey?: string;
   pexelsApiKey?: string;
   unsplashApiKey?: string;
@@ -156,7 +159,7 @@ export interface AppConfig {
   deepinfraApiKey?: string;
 
   // ✅ Gemini 텍스트 생성 주 모델 선택
-  primaryGeminiTextModel?: 'gemini-2.5-pro' | 'gemini-2.5-flash' | 'gemini-2.5-flash-lite' | string;
+  primaryGeminiTextModel?: 'gemini-3.1-pro-preview' | 'gemini-3.5-flash' | 'gemini-3.1-flash-lite' | string;
 
   // ✅ [v1.4.3] Google Search Grounding 옵션 (기본 OFF — 호출당 $0.035 추가 비용 방지)
   enableSearchGrounding?: boolean;
@@ -470,31 +473,25 @@ export async function loadConfig(): Promise<AppConfig> {
     // 주의: 패키지 생성 시에만 초기화되어야 하며, 사용자가 저장한 값은 그대로 유지되어야 함
     // 초기화는 scripts/reset-config-for-pack.js에서만 수행됨
 
-    // ✅ [2026-04-09 FIX] 텍스트 생성용 죽은 Gemini 모델을 stable로 마이그레이션
-    // exact match 사용 — 이미지 모델(gemini-2.0-flash-exp 등)은 다른 필드라 건드리지 않음
-    const DEAD_TEXT_MODELS = new Set([
-      'gemini-1.5-pro', 'gemini-1.5-flash', 'gemini-1.5-flash-8b',
-      'gemini-pro', 'gemini-pro-vision',
-      'gemini-3.1-flash-preview', 'gemini-3-flash-preview',
-      'gemini-3.1-pro-preview', 'gemini-3-pro-preview',
-      'gemini-2.0-flash', 'gemini-2.0-flash-001',
-    ]);
-    // 마이그레이션 기본값은 품질·속도 균형이 가장 무난한 Flash로 유지
+    // Upgrade saved Gemini text selections to the current equivalent tier.
     let geminiModel = parsed.geminiModel;
-    if (geminiModel && DEAD_TEXT_MODELS.has(geminiModel)) {
+    if (typeof geminiModel === 'string' && geminiModel.startsWith('gemini-')) {
       const oldModel = geminiModel;
-      geminiModel = 'gemini-2.5-flash';
-      console.log(`[Config] ⚠️ geminiModel(${oldModel}) → ${geminiModel}로 자동 마이그레이션`);
+      geminiModel = normalizeGeminiTextModelId(geminiModel);
+      if (oldModel !== geminiModel) {
+        console.log(`[Config] geminiModel(${oldModel}) -> ${geminiModel} 자동 마이그레이션`);
+      }
     }
 
-    // ✅ primaryGeminiTextModel도 동일 마이그레이션 (Gemini ID인 경우만)
+    // Non-Gemini provider selectors are preserved as-is.
     let primaryGeminiTextModel = parsed.primaryGeminiTextModel;
     if (primaryGeminiTextModel && typeof primaryGeminiTextModel === 'string' &&
-        primaryGeminiTextModel.startsWith('gemini-') &&
-        DEAD_TEXT_MODELS.has(primaryGeminiTextModel)) {
+        primaryGeminiTextModel.startsWith('gemini-')) {
       const oldModel = primaryGeminiTextModel;
-      primaryGeminiTextModel = 'gemini-2.5-flash';
-      console.log(`[Config] ⚠️ primaryGeminiTextModel(${oldModel}) → ${primaryGeminiTextModel}로 자동 마이그레이션`);
+      primaryGeminiTextModel = normalizeGeminiTextModelId(primaryGeminiTextModel);
+      if (oldModel !== primaryGeminiTextModel) {
+        console.log(`[Config] primaryGeminiTextModel(${oldModel}) -> ${primaryGeminiTextModel} 자동 마이그레이션`);
+      }
     }
 
     // 하이픈 형식 키를 카멜케이스로 변환 (하위 호환성)
@@ -1028,7 +1025,9 @@ export function applyConfigToEnv(config: AppConfig): void {
   // primaryGeminiTextModel은 'claude-haiku', 'openai-gpt4o', 'perplexity-sonar' 등
   // 비-Gemini 값을 가질 수 있으므로, gemini- 접두사가 있는 값만 GEMINI_MODEL에 설정
   const rawModel = config.primaryGeminiTextModel || config.geminiModel;
-  const geminiModel = (rawModel && rawModel.startsWith('gemini-')) ? rawModel : undefined;
+  const geminiModel = (rawModel && rawModel.startsWith('gemini-'))
+    ? normalizeGeminiTextModelId(rawModel)
+    : undefined;
   if (geminiModel) {
     process.env.GEMINI_MODEL = geminiModel;
     console.log('[Config] GEMINI_MODEL 설정됨:', geminiModel);

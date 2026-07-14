@@ -15,6 +15,7 @@ import { AutomationService } from '../main/services/AutomationService.js'; // �
 import sharp from 'sharp'; // ✅ [2026-01-30] 이미지 하단 텍스트 영역 크롭용
 // [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — FLUX/Redux b64_json 1MB+
 import { decodeBase64Async } from '../main/utils/base64Async.js';
+import { GEMINI_TEXT_MODELS, OPENAI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 // ✅ [2026-03-01] 인물 규칙 함수 — 카테고리별 인물 포함/제외 + 한국인 하드코딩
 // AI 추론 기반: 하드코딩 카테고리 스타일 제거, 인물 규칙만 제공
@@ -144,20 +145,20 @@ Complete image prompt:`;
             const response = await axios.post(
                 'https://api.openai.com/v1/chat/completions',
                 {
-                    model: 'gpt-4.1',
+                    model: OPENAI_TEXT_MODELS.LUNA,
                     messages: [
                         { role: 'system', content: `You are an expert AI image prompt engineer for ${imageStyle || 'realistic'} style. Output ONLY the English prompt, nothing else.` },
                         { role: 'user', content: promptText }
                     ],
-                    max_tokens: 150,
-                    temperature: 0.7
+                    max_completion_tokens: 800,
+                    reasoning_effort: 'medium'
                 },
                 {
                     headers: {
                         'Authorization': `Bearer ${openaiApiKey}`,
                         'Content-Type': 'application/json'
                     },
-                    timeout: 8000 // 8초 타임아웃
+                    timeout: 30_000
                 }
             );
 
@@ -188,14 +189,14 @@ Complete image prompt:`;
     if (geminiApiKey) {
         try {
             const response = await axios.post(
-                `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`,
+                `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_TEXT_MODELS.FLASH_LITE}:generateContent`,
                 {
                     contents: [{ parts: [{ text: promptText }] }],
-                    generationConfig: { temperature: 0.7, maxOutputTokens: 150, topP: 0.9 }
+                    generationConfig: { temperature: 0.7, maxOutputTokens: 1024, topP: 0.9 }
                 },
                 {
                     headers: { 'Content-Type': 'application/json', 'x-goog-api-key': geminiApiKey },
-                    timeout: 5000
+                    timeout: 30_000
                 }
             );
 
@@ -709,7 +710,7 @@ export async function generateSingleDeepInfraImage(
         console.log(`[DeepInfra] 모델 자동 변환: "${requestedModel}" → "${finalModel}"`);
     }
 
-    console.log(`[DeepInfra] 🔵 API 호출 시작 — URL: ${DEEPINFRA_API_URL}, model: ${finalModel}, size: ${options.size || '1024x1024'}, key prefix: ${apiKey.slice(0, 6)}***`);
+    console.log(`[DeepInfra] 🔵 API 호출 시작 — URL: ${DEEPINFRA_API_URL}, model: ${finalModel}, size: ${options.size || '1024x1024'}, key=설정됨`);
 
     try {
         // OpenAI 호환 API 호출 (공식 문서: https://deepinfra.com/black-forest-labs/FLUX-2-dev/api)

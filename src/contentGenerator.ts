@@ -16,8 +16,15 @@ import type { ImageNarrativeContext } from './imageNarrative/types.js';
 // ✅ [2026-01-25] Perplexity 추가
 import { generatePerplexityContent, translatePerplexityError } from './perplexity.js';
 // ✅ [v2.7.52] modelRegistry SSOT
-import { CLAUDE_MODELS, GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
-import { getGeminiFreeTierDailyLimit, formatGeminiFreeTierSummary } from './geminiQuotaPolicy.js';
+import {
+  CLAUDE_MODELS,
+  GEMINI_TEXT_MODELS,
+  OPENAI_TEXT_MODELS,
+  resolveTextModelProfile,
+  resolveTextModelProfileForVendor,
+  supportsClaudeTemperature,
+} from './runtime/modelRegistry.js';
+import { getGeminiFreeTierLimit, formatGeminiFreeTierSummary } from './geminiQuotaPolicy.js';
 import {
   buildGeminiKeyExecutionPlan,
   resolveContentGenerationCostPolicy,
@@ -27,6 +34,11 @@ import {
 import JSON5 from 'json5';
 import { getGeminiModel } from './gemini.js';
 import { trackApiUsage } from './apiUsageTracker.js';
+import {
+  buildOpenAiSearchResponseParams,
+  extractOpenAiResponseText,
+  readOpenAiResponseUsage,
+} from './openaiResponses.js';
 // ✅ [2026-02-11] getRelatedKeywords import 제거 — 인라인 템플릿 전용이었음
 import { app, BrowserWindow } from 'electron';
 import fs from 'fs/promises';
@@ -696,18 +708,21 @@ JSON:
       } catch { /* 기본 same */ }
 
       if (subProvider === 'gpt-mini') {
-        // 사용자 명시: 부수만 GPT-4.1 mini (저렴)
-        process.env.OPENAI_STRUCTURED_MODEL = 'gpt-4.1-mini';
-        raw = await callOpenAI(titlePromptFull, titleTemp, 650);
-        delete process.env.OPENAI_STRUCTURED_MODEL;
+        // 사용자 명시: 부수 작업은 최신 가성비 GPT 모델 사용
+        raw = await callOpenAI(titlePromptFull, titleTemp, 650, undefined, {
+          modelOverride: OPENAI_TEXT_MODELS.LUNA,
+        });
       } else if (subProvider === 'gemini-flash') {
         // 사용자 명시: 부수만 Gemini Flash (가장 저렴)
-        raw = await callGemini(titlePromptFull, titleTemp, 650, { useGrounding: false });
+        raw = await callGemini(titlePromptFull, titleTemp, 650, {
+          useGrounding: false,
+          modelOverride: GEMINI_TEXT_MODELS.FLASH,
+        });
       } else if (subProvider === 'haiku') {
         // 사용자 명시: 부수만 Claude Haiku
-        process.env.CLAUDE_STRUCTURED_MODEL = 'claude-haiku-4-5-20251001';
-        raw = await callClaude(titlePromptFull, titleTemp, 650);
-        delete process.env.CLAUDE_STRUCTURED_MODEL;
+        raw = await callClaude(titlePromptFull, titleTemp, 650, undefined, {
+          modelOverride: CLAUDE_MODELS.HAIKU,
+        });
       } else {
         // 기본 'same': 본문과 동일 모델
         if (provider === 'agent-codex' || provider === 'agent-claude') {
@@ -1838,6 +1853,76 @@ async function callOpenAIChatCompletionsRest(
   }
 }
 
+async function callOpenAIResponsesRest(
+  apiKey: string,
+  params: Record<string, unknown>,
+  timeoutMs: number,
+  externalSignal?: AbortSignal,
+  diagnosticsEnabled = false,
+): Promise<any> {
+  const timeoutLabel = `OpenAI Responses API 호출 시간 초과 (${timeoutMs / 1000}초)`;
+  const requestAbort = createProviderTimeoutSignal(timeoutMs, timeoutLabel, externalSignal);
+  const baseUrl = (process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1').replace(/\/+$/, '');
+  const modelName = String(params.model || '(unknown)');
+  const requestStart = Date.now();
+
+  try {
+    if (typeof fetch !== 'function') {
+      throw new Error('현재 실행 환경에서 fetch API를 사용할 수 없습니다.');
+    }
+    const response = await fetch(`${baseUrl}/responses`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
+      signal: requestAbort.signal,
+    });
+    const responseText = await response.text();
+    let payload: any = null;
+    try {
+      payload = responseText ? JSON.parse(responseText) : null;
+    } catch {
+      payload = { raw: responseText };
+    }
+
+    if (!response.ok) {
+      const apiError: any = new Error(
+        payload?.error?.message || payload?.raw || `OpenAI Responses API HTTP ${response.status}`,
+      );
+      apiError.status = response.status;
+      apiError.code = payload?.error?.code;
+      apiError.type = payload?.error?.type;
+      apiError.param = payload?.error?.param;
+      apiError.headers = response.headers;
+      apiError.response = { status: response.status, headers: response.headers };
+      apiError.error = payload?.error;
+      throw apiError;
+    }
+
+    if (diagnosticsEnabled) {
+      const usage = readOpenAiResponseUsage(payload);
+      emitOpenAiDiagnosticLog(
+        `RESPONSES_OK status=${response.status} model=${modelName} elapsedMs=${Date.now() - requestStart} ` +
+        `inputTokens=${usage.inputTokens} outputTokens=${usage.outputTokens} textLength=${extractOpenAiResponseText(payload).length}`,
+      );
+    }
+    return payload;
+  } catch (error) {
+    if (diagnosticsEnabled) {
+      emitOpenAiDiagnosticLog(
+        `RESPONSES_ERROR kind=${classifyOpenAiDiagnosticError(error)} model=${modelName} ` +
+        `elapsedMs=${Date.now() - requestStart} message="${normalizeErrorMessage(error).slice(0, 220)}"`,
+        'error',
+      );
+    }
+    throw requestAbort.normalizeError(error);
+  } finally {
+    requestAbort.dispose();
+  }
+}
+
 async function runOpenAiDiagnosticPreflight(
   apiKey: string,
   modelName: string,
@@ -2528,7 +2613,12 @@ function cleanExpiredCaches(): void {
   }
 }
 
-async function callGemini(prompt: string, temperature: number = 0.9, minChars: number = 2000, options: { useGrounding?: boolean; signal?: AbortSignal } = {}): Promise<string> {
+async function callGemini(
+  prompt: string,
+  temperature: number = 0.9,
+  minChars: number = 2000,
+  options: { useGrounding?: boolean; signal?: AbortSignal; modelOverride?: string } = {},
+): Promise<string> {
   const timeoutMs = getTimeoutMs(minChars);
 
   // ✅ 설정 로드
@@ -2604,7 +2694,10 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
   }
 
   // 2. 모델 설정 — 사용자가 선택한 모델만 사용 (다른 모델로 몰래 전환 금지)
-  const { primaryModel, isPro } = buildGeminiModelChain(config as any);
+  const geminiModelConfig = options.modelOverride
+    ? { ...config, primaryGeminiTextModel: options.modelOverride }
+    : config;
+  const { primaryModel, isPro } = buildGeminiModelChain(geminiModelConfig as any);
   const modelsToTry = [primaryModel];
   const geminiPlanLabel = config?.geminiPlanType === 'paid'
     ? '유료'
@@ -2742,9 +2835,8 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             temperature: activeTemperature,
             topP: 0.95,
             topK: 40,
-            // ✅ [v2.10.207] Pro 모델은 thinking 기반 → maxOutputTokens 16384로 증가 (thinking + 응답 합산)
-            //   Flash/Lite는 8192 유지 (비용 절감)
-            maxOutputTokens: /2\.5-pro/i.test(modelName) ? 16384 : 8192,
+            // Reserve enough output for thinking plus the final structured article.
+            maxOutputTokens: isPro ? 16384 : modelName === GEMINI_TEXT_MODELS.FLASH ? 12288 : 8192,
             // ✅ [v2.10.207] thinkingBudget=0은 *Flash/Lite만* — Pro는 thinking이 모델 핵심
             //   기존: modelName.includes('2.5') → Pro까지 thinking 끔 → "루프가 비정상 종료됨" 회귀
             //   변경: 2.5-flash / 2.5-flash-lite 만 thinking 끔 (Pro는 thinking 정상 사용)
@@ -2983,7 +3075,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           })()
         );
         if (isDailyQuotaExhausted) {
-          console.error(`❌ [Gemini] ${modelName} 일일 무료 할당량 소진 → 재시도 무의미`);
+          console.error(`❌ [Gemini] ${modelName} 프로젝트 일일 요청 할당량 소진 → 재시도 무의미`);
           // 다른 키가 있으면 키 로테이션 시도
           const nextKey = getNextKey();
           if (nextKey) {
@@ -2992,11 +3084,15 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
             continue;
           }
           // ✅ [v1.4.64] 무료/유료 계정 구분하여 안내
-          const dailyLimit = getGeminiFreeTierDailyLimit(modelName);
+          const quotaPolicy = getGeminiFreeTierLimit(modelName);
+          const dailyLimit = quotaPolicy?.rpd ?? null;
+          const dailyLimitLabel = dailyLimit ? `(${dailyLimit.toLocaleString()}회/일)` : '';
+          const freeTierAvailable = quotaPolicy?.freeTierAvailable !== false;
+          const quotaLabel = freeTierAvailable ? '오늘의 무료 할당량' : '현재 프로젝트의 일일 요청 할당량';
           throw new Error(
-            `⏳ [${modelName}] 오늘의 무료 할당량(${dailyLimit}회/일)을 모두 사용했습니다.\n\n` +
+            `⏳ [${modelName}] ${quotaLabel}${dailyLimitLabel}을 모두 사용했습니다.\n\n` +
             `📌 현재 모드: ${geminiPlanLabel}\n\n` +
-            (isPaidPlan
+            (isPaidPlan || !freeTierAvailable
               ? `💡 유료 계정인데 한도 초과가 발생했다면:\n` +
                 `  → Google AI Studio에서 분당/일일 요청 한도를 확인하세요.\n` +
                 `  → 한도 상향 요청이 필요할 수 있습니다.\n`
@@ -3021,7 +3117,7 @@ async function callGemini(prompt: string, temperature: number = 0.9, minChars: n
           // 다른 키가 있으면 먼저 키 교체 시도 (대기 없이 즉시)
           const nextKey = getNextKey();
           if (nextKey) {
-            console.log(`🔑 [Gemini] 키 로테이션: ${trimmedKey.substring(0, 10)}... → ${nextKey.substring(0, 10)}...`);
+            console.log('🔑 [Gemini] API 키 로테이션 완료 (키 내용 비공개)');
             trimmedKey = nextKey;
             continue; // 대기 없이 즉시 재시도
           }
@@ -3151,8 +3247,8 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
     console.log('[Perplexity] Config 로드 결과:', {
       hasConfig: !!config,
       configKeys: config ? Object.keys(config).filter(k => k.toLowerCase().includes('perplexity')) : [],
-      perplexityApiKey: config?.perplexityApiKey ? `${config.perplexityApiKey.substring(0, 8)}...` : '(없음)',
-      envKey: process.env.PERPLEXITY_API_KEY ? `${process.env.PERPLEXITY_API_KEY.substring(0, 8)}...` : '(없음)',
+      perplexityApiKey: config?.perplexityApiKey ? '(설정됨)' : '(없음)',
+      envKey: process.env.PERPLEXITY_API_KEY ? '(설정됨)' : '(없음)',
     });
     const configKey = config?.perplexityApiKey?.trim() || '';
     const envKey = process.env.PERPLEXITY_API_KEY?.trim() || '';
@@ -3362,7 +3458,13 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
 }
 
 // ✅ [2026-01-25] callOpenAI 함수 - 기존 OpenAI API 호출 로직
-async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: number = 2000, signal?: AbortSignal): Promise<string> {
+async function callOpenAI(
+  prompt: string,
+  temperature: number = 0.9,
+  minChars: number = 2000,
+  signal?: AbortSignal,
+  options: { modelOverride?: string } = {},
+): Promise<string> {
   console.log('[OpenAI] JSON 형식 준수 요청 - 유니코드 이스케이프 4자리, 쉼표 필수');
 
   // ✅ [2026-02-24 FIX] 방어적 설정 로드 (callGemini/callPerplexity 패턴 통일)
@@ -3427,33 +3529,29 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
     );
   }
 
-  // ✅ [v1.4.77] UI 선택 모델 = 실제 호출 모델 1:1. 크로스 모델 폴백 없음.
+  // UI selector -> current API model is resolved by the registry SSOT.
+  // Legacy selector values remain valid so existing user configs upgrade in place.
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
+  const customModel = options.modelOverride?.trim()
+    || process.env.OPENAI_STRUCTURED_MODEL?.trim()
+    || '';
+  const selectedOpenAiProfile = resolveTextModelProfileForVendor(
+    uiSelectedModel,
+    'openai',
+    'openai-gpt41',
+    customModel,
+  );
   let openAIModels: string[];
-  if (uiSelectedModel === 'openai-gpt4o-mini') {
-    openAIModels = ['gpt-4.1-mini'];
-    console.log('[OpenAI] 🧠 GPT-4.1 mini — 폴백 없음');
-  } else if (uiSelectedModel === 'openai-gpt41') {
-    openAIModels = ['gpt-4.1'];
-    console.log('[OpenAI] ⚖️ GPT-4.1 — 폴백 없음');
-  } else if (uiSelectedModel === 'openai-gpt4o') {
-    openAIModels = ['gpt-4o'];
-    console.log('[OpenAI] 🚀 GPT-4o — 폴백 없음');
-  } else if (uiSelectedModel === 'openai-gpt4o-search') {
-    // [2026-05-28 M3 P2] SPEC-MIGRATION-2026 — web search grounding for OpenAI.
-    //   gpt-4o-search-preview is the only OpenAI text model that supports
-    //   web_search_options today. Response is plain text (no json_object),
-    //   so downstream parser must accept text fallback.
-    openAIModels = ['gpt-4o-search-preview'];
-    console.log('[OpenAI] 🔎 GPT-4o Search Preview — Web grounding ON');
+  const useOpenAIGrounding = !customModel && uiSelectedModel === 'openai-gpt4o-search';
+  if (!customModel && uiSelectedModel === 'openai-gpt4o-search') {
+    openAIModels = [OPENAI_TEXT_MODELS.TERRA];
+    console.log('[OpenAI] 🔎 GPT-5.6 Terra Responses API — web_search ON');
   } else {
-    openAIModels = ['gpt-4.1'];
-    console.log('[OpenAI] ⚖️ GPT-4.1 (기본) — 폴백 없음');
+    const activeProfile = selectedOpenAiProfile;
+    openAIModels = [activeProfile.model];
+    console.log(`[OpenAI] ${activeProfile.displayName} (${activeProfile.tier}) — 폴백 없음`);
   }
-  const useOpenAIGrounding = uiSelectedModel === 'openai-gpt4o-search';
-
-  const customModel = process.env.OPENAI_STRUCTURED_MODEL;
-  const modelsToTry = customModel ? [customModel] : openAIModels;
+  const modelsToTry = openAIModels;
 
   let lastError: Error | null = null;
   const timeoutMs = getTimeoutMs(minChars);
@@ -3486,10 +3584,7 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
         // ✅ [2026-03-16] system/user 분리: AI 규칙 인식률 향상
         const { system: oaiSystem, user: oaiUser } = splitPromptByMarker(prompt);
 
-        // ✅ [v2.10.28] OpenAI SDK signal 전달 — 사용자 취소 시 fetch 즉시 abort
-        // [2026-05-28 M3 P2] search-preview 모델 분기: web_search_options ON,
-        //   response_format/json_object/temperature/top_p 미지원 → 평문 + 파서 fallback.
-        const isSearchPreview = modelName.includes('search-preview');
+        const isSearchModel = useOpenAIGrounding;
         const baseParams: any = {
           model: modelName,
           messages: [
@@ -3498,58 +3593,83 @@ async function callOpenAI(prompt: string, temperature: number = 0.9, minChars: n
           ],
           max_completion_tokens: maxCompletionTokens,
         };
-        if (isSearchPreview) {
-          baseParams.web_search_options = {};
-        } else {
-          baseParams.temperature = temperature;
-          baseParams.top_p = 0.9;
+        if (!isSearchModel) {
+          const activeProfile = resolveTextModelProfile(modelName);
+          if (modelName.startsWith('gpt-5.6-')) {
+            baseParams.reasoning_effort = activeProfile.reasoningEffort || selectedOpenAiProfile.reasoningEffort || 'high';
+          } else {
+            baseParams.temperature = temperature;
+            baseParams.top_p = 0.9;
+          }
           baseParams.response_format = { type: 'json_object' };
         }
         let response: any;
-        try {
-          response = await callOpenAIChatCompletionsRest(directOpenAiApiKey, baseParams, timeoutMs, signal, diagnosticsEnabled);
-        } catch (restError) {
-          const restMessage = normalizeErrorMessage(restError).toLowerCase();
-          if (!restMessage.includes('fetch api를 사용할 수 없습니다') && !restMessage.includes('fetch api')) {
-            throw restError;
-          }
-
-          console.warn('[OpenAI] native fetch 사용 불가 → SDK 보조 경로로 동일 모델 1회 호출');
-          const timeoutLabel = `OpenAI API 호출 시간 초과 (${timeoutMs / 1000}초)`;
-          const requestAbort = createProviderTimeoutSignal(timeoutMs, timeoutLabel, signal);
+        if (isSearchModel) {
+          response = await callOpenAIResponsesRest(
+            directOpenAiApiKey,
+            buildOpenAiSearchResponseParams({
+              model: modelName,
+              system: oaiSystem,
+              user: oaiUser,
+              maxOutputTokens: maxCompletionTokens,
+            }),
+            timeoutMs,
+            signal,
+            diagnosticsEnabled,
+          );
+        } else {
           try {
-            const createPromise = client.chat.completions.create(
-              baseParams,
-              {
-                signal: requestAbort.signal,
-                timeout: timeoutMs,
-                maxRetries: 0,
-              } as any,
-            );
+            response = await callOpenAIChatCompletionsRest(directOpenAiApiKey, baseParams, timeoutMs, signal, diagnosticsEnabled);
+          } catch (restError) {
+            const restMessage = normalizeErrorMessage(restError).toLowerCase();
+            if (!restMessage.includes('fetch api를 사용할 수 없습니다') && !restMessage.includes('fetch api')) {
+              throw restError;
+            }
 
-            response = await withProviderTimeout(
-              createPromise,
-              timeoutMs,
-              timeoutLabel,
-              signal,
-            );
-          } catch (requestError) {
-            throw requestAbort.normalizeError(requestError);
-          } finally {
-            requestAbort.dispose();
+            console.warn('[OpenAI] native fetch 사용 불가 → SDK 보조 경로로 동일 모델 1회 호출');
+            const timeoutLabel = `OpenAI API 호출 시간 초과 (${timeoutMs / 1000}초)`;
+            const requestAbort = createProviderTimeoutSignal(timeoutMs, timeoutLabel, signal);
+            try {
+              const createPromise = client.chat.completions.create(
+                baseParams,
+                {
+                  signal: requestAbort.signal,
+                  timeout: timeoutMs,
+                  maxRetries: 0,
+                } as any,
+              );
+
+              response = await withProviderTimeout(
+                createPromise,
+                timeoutMs,
+                timeoutLabel,
+                signal,
+              );
+            } catch (requestError) {
+              throw requestAbort.normalizeError(requestError);
+            } finally {
+              requestAbort.dispose();
+            }
           }
         }
         // ✅ [2026-05-25 v2.10.356] 호출 성공 기록 — RPM 적응형 가속에 활용
         openaiRpmThrottler.recordCall();
-        const text = response.choices[0]?.message?.content?.trim() || '';
+        const text = isSearchModel
+          ? extractOpenAiResponseText(response)
+          : response.choices[0]?.message?.content?.trim() || '';
 
         if (!text) throw new Error('빈 응답');
 
         // ✅ [2026-03-19] 사용량 추적
-        const oaiUsage = (response as any).usage;
+        const oaiUsage = isSearchModel
+          ? readOpenAiResponseUsage(response)
+          : {
+              inputTokens: (response as any).usage?.prompt_tokens || 0,
+              outputTokens: (response as any).usage?.completion_tokens || 0,
+            };
         trackApiUsage('openai', {
-          inputTokens: oaiUsage?.prompt_tokens || 0,
-          outputTokens: oaiUsage?.completion_tokens || 0,
+          inputTokens: oaiUsage.inputTokens,
+          outputTokens: oaiUsage.outputTokens,
           model: modelName,
         });
 
@@ -3749,7 +3869,13 @@ async function callAgent(
   return result.text;
 }
 
-async function callClaude(prompt: string, temperature: number = 0.9, minChars: number = 2000, signal?: AbortSignal): Promise<string> {
+async function callClaude(
+  prompt: string,
+  temperature: number = 0.9,
+  minChars: number = 2000,
+  signal?: AbortSignal,
+  options: { modelOverride?: string } = {},
+): Promise<string> {
   console.log('[Claude] JSON 형식 준수 요청 - 유니코드 이스케이프 4자리, 쉼표 필수');
 
   // ✅ [2026-02-24 FIX] 방어적 설정 로드 (callGemini/callPerplexity 패턴 통일)
@@ -3780,28 +3906,22 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
   }
   const client = getAnthropicClient(configClaudeKey);
 
-  // ✅ [v1.4.44] 사용자 선택 모델 강제 — 다른 모델로 자동 폴백 제거
-  // Haiku 선택 시 Sonnet으로 폴백되면 비용이 3~5배 증가하는 문제 해결
+  // Resolve legacy UI selectors through the registry; never cross-model fallback.
   const uiSelectedModel = config?.primaryGeminiTextModel || '';
-  let claudeModels: string[];
-  if (uiSelectedModel === 'claude-haiku') {
-    claudeModels = [CLAUDE_MODELS.HAIKU];
-    console.log('[Claude] 💜 UI 선택: Claude Haiku 4.5 (가성비 모드) — 폴백 없음');
-  } else if (uiSelectedModel === 'claude-sonnet') {
-    claudeModels = [CLAUDE_MODELS.SONNET];
-    console.log('[Claude] 📜 UI 선택: Claude Sonnet 4.6 (균형 모드) — 폴백 없음');
-  } else if (uiSelectedModel === 'claude-opus') {
-    claudeModels = [CLAUDE_MODELS.OPUS];
-    console.log('[Claude] 👑 UI 선택: Claude Opus 4.8 (최고 성능 모드) — 폴백 없음');
-  } else {
-    // 기본 (claude provider로 왔지만 specific 모델 미지정)
-    claudeModels = [CLAUDE_MODELS.SONNET];
-    console.log('[Claude] ✨ 기본 모드: Claude Sonnet 4.6');
-  }
+  const customModel = options.modelOverride?.trim()
+    || process.env.CLAUDE_STRUCTURED_MODEL?.trim()
+    || '';
+  const selectedClaudeProfile = resolveTextModelProfileForVendor(
+    uiSelectedModel,
+    'claude',
+    'claude-sonnet',
+    customModel,
+  );
+  const claudeModels = [selectedClaudeProfile.model];
+  console.log(`[Claude] UI 선택: ${selectedClaudeProfile.displayName} (${selectedClaudeProfile.tier}) — 폴백 없음`);
 
   // 환경 변수로 지정된 모델이 있으면 대체
-  const customModel = process.env.CLAUDE_STRUCTURED_MODEL;
-  const modelsToTry = customModel ? [customModel] : claudeModels;
+  const modelsToTry = claudeModels;
 
   let lastError: Error | null = null;
   const maxAttemptsPerModel = 99;
@@ -3850,14 +3970,13 @@ async function callClaude(prompt: string, temperature: number = 0.9, minChars: n
         const cacheOptIn = process.env.CLAUDE_PROMPT_CACHE_ENABLED === '1';
         const useSystemCache = cacheOptIn && !cacheDisabled && !!claudeSystem && claudeSystem.length >= CACHE_MIN_CHARS;
 
-        // ✅ [v2.7.65] Claude Opus 4.7부터 temperature 파라미터 deprecate
-        //   사용자 보고: 400 invalid_request_error "`temperature` is deprecated for this model"
-        //   조치: Opus 4.7+ 모델은 temperature 미전송, Sonnet/Haiku는 기존 유지
-        const isOpusDeprecatedTemp = /^claude-opus-4-[7-9]|^claude-opus-[5-9]/.test(modelName);
+        // Adaptive-thinking models reject/deprecate temperature. Omitting it
+        // lets the current Claude model apply its native quality policy.
+        const usesAdaptiveThinking = !supportsClaudeTemperature(modelName);
         const buildRequest = (withCache: boolean): any => ({
           model: modelName,
-          max_tokens: 8192,
-          ...(isOpusDeprecatedTemp ? {} : { temperature: temperature }),
+          max_tokens: usesAdaptiveThinking ? 16384 : 8192,
+          ...(usesAdaptiveThinking ? {} : { temperature: temperature }),
           ...(claudeSystem
             ? {
                 system: withCache
@@ -4472,11 +4591,8 @@ export async function researchWithGeminiGrounding(keyword: string): Promise<{
     const { GoogleGenerativeAI } = await import('@google/generative-ai');
     const client = new GoogleGenerativeAI(apiKey.trim());
 
-    // ✅ Google Search grounding이 지원되는 stable 모델만 사용
-    const modelsToTry = [
-      'gemini-2.5-flash',
-      'gemini-2.5-pro',
-    ];
+    // Research uses the current balanced model; no hidden cross-tier fallback.
+    const modelsToTry = [GEMINI_TEXT_MODELS.FLASH];
 
     const researchPrompt = `
 당신은 전문 리서치 어시스턴트입니다. 아래 키워드/주제에 대해 Google 검색을 통해 최신 정보를 수집하고, 
@@ -4780,14 +4896,16 @@ export async function generateStructuredContent(
   console.log(`[ContentGenerator] 사용 엔진: ${provider} (목표: ${minChars}자)`);
 
   const openAiContentMaxAttempts = readNonNegativeIntegerEnv('OPENAI_CONTENT_MAX_ATTEMPTS', 0);
-  const baseMaxAttempts = provider === 'openai' ? openAiContentMaxAttempts : costPolicy.maxAttempts;
+  const baseMaxAttempts = provider === 'openai'
+    ? Math.max(openAiContentMaxAttempts, costPolicy.maxAttempts)
+    : costPolicy.maxAttempts;
   const sameEngineReliabilityMinAttempts = readNonNegativeIntegerEnv('CONTENT_SAME_ENGINE_MIN_ATTEMPTS', 1);
   const promptRepairMinAttempts = source.customPrompt?.trim() ? 2 : 0;
   const generationQualityMode = String(source.contentMode || 'seo');
   const qualityTargetMinAttempts = isQuality90Mode(generationQualityMode) ? 2 : 0;
   const MAX_ATTEMPTS = Math.max(baseMaxAttempts, sameEngineReliabilityMinAttempts, promptRepairMinAttempts, qualityTargetMinAttempts);
   const RETRY_DELAYS = [0, 1200, 2000, 3000, 4500, 6000, 8000];
-  console.log(`[ContentGenerator] 비용 정책: costSaver=${costPolicy.costSaverOn ? 'ON' : 'OFF'}, same-engine retries=${MAX_ATTEMPTS}, reliability=${sameEngineReliabilityMinAttempts}, promptRepair=${promptRepairMinAttempts}, quality90=${qualityTargetMinAttempts}`);
+  console.log(`[ContentGenerator] 품질 정책: tier=${costPolicy.modelTier}, costSaver=${costPolicy.costSaverOn ? 'ON' : 'OFF'}, same-engine retries=${MAX_ATTEMPTS}, reliability=${sameEngineReliabilityMinAttempts}, promptRepair=${promptRepairMinAttempts}, quality90=${qualityTargetMinAttempts}`);
 
   // ✅ Gemini 전용 강화 재시도 시스템
   // provider 내부 재시도 위에 전체 파이프라인 재실행이 겹치지 않도록 기본 1회만 허용.
@@ -4844,6 +4962,20 @@ export async function generateStructuredContent(
   let _shoppingValidationRetryUsed = false;
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
   const signal = options.signal;
+
+  const callSelectedProviderForQualityRepair = (
+    prompt: string,
+    expectedBodyChars = 1500,
+  ): Promise<string> => {
+    const repairChars = Math.min(4500, Math.max(1500, expectedBodyChars));
+    if (provider === 'agent-codex' || provider === 'agent-claude') {
+      return callAgent(provider, prompt, { signal, raw: true });
+    }
+    if (provider === 'openai') return callOpenAI(prompt, 0.2, repairChars, signal);
+    if (provider === 'claude') return callClaude(prompt, 0.2, repairChars, signal);
+    if (provider === 'perplexity') return callPerplexity(prompt, 0.2, repairChars, signal);
+    return callGemini(prompt, 0.2, repairChars, { useGrounding: false, signal });
+  };
 
   for (let attempt = 0; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
@@ -4942,6 +5074,8 @@ export async function generateStructuredContent(
       // ✅ 모드별 프롬프트 및 온도 설정 가져오기
       const mode = (source.contentMode || 'seo') as PromptMode;
       let systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
+
+      systemPrompt += `\n\n${costPolicy.qualityDirective}`;
 
       if (extraInstruction.trim()) {
         systemPrompt += `\n\n[RUNTIME RETRY AND CONTEXT INSTRUCTIONS]\n${extraInstruction.trim()}`;
@@ -5933,7 +6067,7 @@ export async function generateStructuredContent(
             const critiqued = await selfCritiqueAndRewrite(
               optimized.bodyPlain,
               personaCard,
-              (prompt: string) => callGemini(prompt, 0.3, 100, { useGrounding: false }),
+              (prompt: string) => callSelectedProviderForQualityRepair(prompt, optimized.bodyPlain?.length || 1500),
             );
             if (critiqued.rewrote) {
               console.log(`[ContentGenerator] ✍️ Self-critique 재작성 적용 (${critiqued.source})`);
@@ -5953,7 +6087,7 @@ export async function generateStructuredContent(
         const naverScore = useLlmRubric
           ? await analyzeContentBySemantic(
               optimized.bodyPlain || '',
-              (prompt: string) => callGemini(prompt, 0.2, 100, { useGrounding: false }),
+              (prompt: string) => callSelectedProviderForQualityRepair(prompt, 1500),
               deterministicFallback,
             )
           : deterministicFallback();
@@ -6107,7 +6241,7 @@ export async function generateStructuredContent(
             const _patchResult = await selfCritiqueAndRewrite(
               optimized.bodyPlain,
               _patchPersona,
-              (prompt: string) => callGemini(prompt, 0.3, 100, { useGrounding: false }),
+              (prompt: string) => callSelectedProviderForQualityRepair(prompt, optimized.bodyPlain?.length || 1500),
               _quality90Assessment?.directive || _gateResult.retryDirective || '',
             );
             if (_patchResult.rewrote) {

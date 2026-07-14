@@ -108,7 +108,7 @@ export function registerConfigHandlers(ctx: ConfigHandlerContext): void {
         // ✅ [2026-03-30] Perplexity API 키 저장 확인 로그
         if (nextConfig.perplexityApiKey && nextConfig.perplexityApiKey.trim()) {
             const keyLength = nextConfig.perplexityApiKey.trim().length;
-            ctx.sendLog(`✅ Perplexity API 키 저장됨 (길이: ${keyLength}자, 접두사: ${nextConfig.perplexityApiKey.substring(0, 5)}...)`);
+            ctx.sendLog(`✅ Perplexity API 키 저장됨 (길이: ${keyLength}자)`);
             console.log('[Main] Perplexity API 키 환경변수 설정 확인:', process.env.PERPLEXITY_API_KEY ? '설정됨' : '설정 안됨');
         } else {
             console.log('[Main] ⚠️ Perplexity API 키 미저장 (config에 없음)');

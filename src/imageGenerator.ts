@@ -351,7 +351,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   const fallbackPolicy = normalizeImageFallbackPolicy(options.imageFallbackPolicy);
   console.log(`[이미지생성] 🧭 엔진 실패 시 동작: ${fallbackPolicy}`);
   // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana / nano-banana-2 / nano-banana-pro는
-  //   각각 별개 모델(gemini-2.5-flash-image / 3.1-flash-image-preview / 3-pro-image-preview)로
+  //   각각 별개 안정 모델(gemini-2.5-flash-image / 3.1-flash-image / 3-pro-image)로
   //   라우팅된다. v2.7.28의 통합 정규화는 제거됨.
   // ✅ [엔진명 한글 매핑]
   const providerDisplayNames: Record<string, string> = {

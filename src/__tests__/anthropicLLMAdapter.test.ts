@@ -34,19 +34,19 @@ function createMock(response: AnthropicMessageResponse): AnthropicMessagesAPI & 
 }
 
 describe('createAnthropicLLMAdapter — 정상 흐름', () => {
-  it('기본 모델 claude-opus-4-8 + adaptive thinking + sampling strip', async () => {
+  it('uses Claude Fable 5 with adaptive thinking and sampling stripped', async () => {
     const api = createMock(makeResponse('hello'));
     const adapter = createAnthropicLLMAdapter({ messagesAPI: api });
     expect(adapter.type).toBe('anthropic');
-    expect(adapter.defaultModel).toBe('claude-opus-4-8');
+    expect(adapter.defaultModel).toBe('claude-fable-5');
 
     const r = await adapter.complete('test prompt', { temperature: 0.7 });
     expect(r).toBe('hello');
     expect(api.createMock).toHaveBeenCalledTimes(1);
     const params = api.createMock.mock.calls[0][0];
-    expect(params.model).toBe('claude-opus-4-8');
+    expect(params.model).toBe('claude-fable-5');
     expect(params.thinking).toEqual({ type: 'adaptive' });
-    // Opus 4.8은 temperature strip
+    // Fable 5 uses always-on adaptive thinking, so sampling is omitted.
     expect(params.temperature).toBeUndefined();
     expect(params.messages[0]).toEqual({ role: 'user', content: 'test prompt' });
   });
@@ -61,6 +61,17 @@ describe('createAnthropicLLMAdapter — 정상 흐름', () => {
     const params = api.createMock.mock.calls[0][0];
     expect(params.temperature).toBe(0.5);
     expect(params.thinking).toEqual({ type: 'adaptive' });
+  });
+
+  it('explicit Opus 4.7 override strips temperature', async () => {
+    const api = createMock(makeResponse('ok'));
+    const adapter = createAnthropicLLMAdapter({
+      messagesAPI: api,
+      defaultModel: 'claude-opus-4-7',
+    });
+    await adapter.complete('test', { temperature: 0.5 });
+    const params = api.createMock.mock.calls[0][0];
+    expect(params.temperature).toBeUndefined();
   });
 
   it('thinkingDisplay=summarized 설정 반영', async () => {

@@ -7,6 +7,7 @@ import { loadConfig, saveConfig } from '../../configManager.js';
 import { flushGeminiUsage, getGeminiUsageSnapshot } from '../../gemini.js';
 import { flushAllApiUsage, getApiUsageSnapshot, resetApiUsage, type ApiProvider } from '../../apiUsageTracker.js';
 import { GEMINI_TEXT_FREE_TIER_LIMITS, formatGeminiFreeTierSummary } from '../../geminiQuotaPolicy.js';
+import { GEMINI_TEXT_MODELS } from '../../runtime/modelRegistry.js';
 
 /**
  * API/Gemini 핸들러 등록
@@ -53,7 +54,7 @@ export function registerApiHandlers(_ctx: IpcContext): void {
             }
 
             const key = apiKey.trim();
-            console.log(`[Gemini] 🔍 할당량 확인 시작 - API 키 길이: ${key.length}자, 접두사: ${key.substring(0, 6)}...`);
+            console.log(`[Gemini] 🔍 할당량 확인 시작 - API 키 길이: ${key.length}자`);
             const axios = (await import('axios')).default;
             const baseUrl = 'https://generativelanguage.googleapis.com/v1beta';
 
@@ -71,7 +72,7 @@ export function registerApiHandlers(_ctx: IpcContext): void {
                 const respData = modelsErr?.response?.data;
                 const errorDetail = respData?.error?.message || respData?.error?.status || JSON.stringify(respData || {}).substring(0, 200);
                 console.error(`[Gemini] ❌ 모델 목록 조회 실패 - HTTP ${status}, 상세: ${errorDetail}`);
-                console.error(`[Gemini]   API 키 길이: ${key.length}자, 접두사: ${key.substring(0, 6)}...`);
+                console.error(`[Gemini]   API 키 길이: ${key.length}자`);
                 // ✅ [v2.7.21 HOTFIX] 400 false-positive 수정
                 //   사용자 제보: "키는 정확한데 400 오류뜨면서 키가 정확하지 않다고 뜬다"
                 //   원인: 400은 키 무효가 아닌 다양한 사유 (요청 형식/모델 미지원/지역 제한 등)
@@ -83,16 +84,16 @@ export function registerApiHandlers(_ctx: IpcContext): void {
                         respStatus === 'INVALID_ARGUMENT' && /api[\s_-]*key/i.test(detailLower)
                         || /api[\s_-]*key[\s_-]*not[\s_-]*valid|api_key_invalid|invalid api key/i.test(detailLower);
                     if (isKeyInvalid) {
-                        return { success: false, message: `❌ API 키가 유효하지 않습니다 (HTTP 400).\n상세: ${errorDetail}\n\n키 길이: ${key.length}자 | 접두사: ${key.substring(0, 6)}...\n\n💡 Google AI Studio에서 키를 다시 확인해주세요.` };
+                        return { success: false, message: `❌ API 키가 유효하지 않습니다 (HTTP 400).\n상세: ${errorDetail}\n\n키 길이: ${key.length}자\n\n💡 Google AI Studio에서 키를 다시 확인해주세요.` };
                     }
                     // 키 문제 아닌 400 — 다른 안내
                     return {
                         success: false,
-                        message: `⚠️ API 호출 거부 (HTTP 400) — 키 자체는 작동할 수 있습니다.\n상세: ${errorDetail}\n\n가능한 원인:\n• 요청 형식 문제 (앱 자동 수정됨)\n• 일부 모델이 사용자 Tier에서 미지원 (자동 폴백 작동)\n• 지역 제한 (한국에서 일부 preview 모델 차단)\n\n키 길이: ${key.length}자 | 접두사: ${key.substring(0, 6)}...\n💡 키가 맞다고 확신하면 발행을 시도해 보세요. 안정 모델로 자동 폴백됩니다.`,
+                        message: `⚠️ API 호출 거부 (HTTP 400) — 키 자체는 작동할 수 있습니다.\n상세: ${errorDetail}\n\n가능한 원인:\n• 요청 형식 문제\n• 선택한 모델이 사용자 Tier에서 미지원\n• 지역 제한\n\n키 길이: ${key.length}자\n💡 키와 선택 모델의 사용 권한을 확인해주세요.`,
                     };
                 }
                 if (status === 401 || status === 403) {
-                    return { success: false, message: `❌ API 키가 유효하지 않습니다 (HTTP ${status}).\n상세: ${errorDetail}\n\n키 길이: ${key.length}자 | 접두사: ${key.substring(0, 6)}...\n\n💡 Google AI Studio에서 키를 다시 확인해주세요.` };
+                    return { success: false, message: `❌ API 키가 유효하지 않습니다 (HTTP ${status}).\n상세: ${errorDetail}\n\n키 길이: ${key.length}자\n\n💡 Google AI Studio에서 키를 다시 확인해주세요.` };
                 }
                 if (status === 429) {
                     return { success: false, message: '⚠️ API 요청 한도 초과 (429). 잠시 후 다시 시도해주세요.' };
@@ -111,7 +112,7 @@ export function registerApiHandlers(_ctx: IpcContext): void {
             let testCallResult: any = null;
             try {
                 const testResp = await axios.post(
-                    `${baseUrl}/models/gemini-2.5-flash:generateContent`,
+                    `${baseUrl}/models/${GEMINI_TEXT_MODELS.FLASH_LITE}:generateContent`,
                     { contents: [{ parts: [{ text: 'Hi' }] }] },
                     {
                         headers: { 'x-goog-api-key': key, 'Content-Type': 'application/json' },
@@ -150,25 +151,25 @@ export function registerApiHandlers(_ctx: IpcContext): void {
 
             // ✅ [v1.4.49] Google 공식 가격표 + 실측 기반 정확한 한도 (2026-04 기준)
             // 출처: https://ai.google.dev/gemini-api/docs/rate-limits
-            const flashLimit = GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-flash'];
-            const liteLimit = GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-flash-lite'];
-            const proLimit = GEMINI_TEXT_FREE_TIER_LIMITS['gemini-2.5-pro'];
+            const flashLimit = GEMINI_TEXT_FREE_TIER_LIMITS[GEMINI_TEXT_MODELS.FLASH];
+            const liteLimit = GEMINI_TEXT_FREE_TIER_LIMITS[GEMINI_TEXT_MODELS.FLASH_LITE];
+            const proLimit = GEMINI_TEXT_FREE_TIER_LIMITS[GEMINI_TEXT_MODELS.PRO];
 
             const freePlanInfo = {
                 label: '🆓 무료 (Free tier)',
                 limits: {
                     // Flash 2.5 기준 (실측)
-                    rpm: flashLimit.rpm,
-                    rpd: flashLimit.rpd,
-                    tpm: flashLimit.tpm.toLocaleString(),
+                    rpm: flashLimit.rpm ?? 'AI Studio 확인',
+                    rpd: flashLimit.rpd ?? 'AI Studio 확인',
+                    tpm: flashLimit.tpm?.toLocaleString() ?? 'AI Studio 확인',
                     note: formatGeminiFreeTierSummary(),
                 },
                 pricing: {
                     flash_input: '$0 (무료)',
                     flash_output: '$0 (무료)',
-                    flash_lite_input: `$0 (무료, ${liteLimit.rpd.toLocaleString()}회/일)`,
-                    pro_input: `$0 (무료, ${proLimit.rpd.toLocaleString()}회/일)`,
-                    pro_output: '$0 (무료)',
+                    flash_lite_input: liteLimit.freeTierAvailable ? '$0 (프로젝트 한도 내)' : '무료 티어 없음',
+                    pro_input: proLimit.freeTierAvailable ? '$0 (프로젝트 한도 내)' : '무료 티어 없음',
+                    pro_output: proLimit.freeTierAvailable ? '$0 (프로젝트 한도 내)' : '무료 티어 없음',
                     note: '무료 한도는 API 키가 아니라 Google AI Studio 프로젝트 단위입니다. 429가 나면 RPM/TPM/RPD 중 하나를 넘은 상태입니다.',
                 },
             };
@@ -181,12 +182,12 @@ export function registerApiHandlers(_ctx: IpcContext): void {
                     note: '유료 한도는 프로젝트 사용량 등급에 따라 달라집니다. 결제 프로젝트와 별도 무료 프로젝트 키를 보조 키 풀에 넣으면 무료 한도를 먼저 사용할 수 있습니다.',
                 },
                 pricing: {
-                    flash_input: '$0.30 / 1M tokens',
-                    flash_output: '$2.50 / 1M tokens',
-                    flash_lite_input: '$0.10 / 1M tokens',
-                    flash_lite_output: '$0.40 / 1M tokens',
-                    pro_input: '$1.25 / 1M tokens',
-                    pro_output: '$10.00 / 1M tokens',
+                    flash_input: '$1.50 / 1M tokens',
+                    flash_output: '$9.00 / 1M tokens',
+                    flash_lite_input: '$0.25 / 1M tokens',
+                    flash_lite_output: '$1.50 / 1M tokens',
+                    pro_input: '$2.00 / 1M tokens (200K 이하)',
+                    pro_output: '$12.00 / 1M tokens (200K 이하)',
                     note: '대량 생성은 Flash-Lite가 가장 저렴합니다. 비용 추정은 실제 usageMetadata의 입력/출력/생각 토큰을 기준으로 누적됩니다.',
                 },
             };

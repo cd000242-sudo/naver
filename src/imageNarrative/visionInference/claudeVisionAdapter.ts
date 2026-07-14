@@ -2,7 +2,7 @@
  * Claude Vision adapter for the image-narrative inference pipeline.
  *
  * Uses @anthropic-ai/sdk (already installed).
- * Model: claude-sonnet-4-6 (VISION_MODELS.CLAUDE_SONNET from modelRegistry).
+ * Model: claude-sonnet-5 (VISION_MODELS.CLAUDE_SONNET from modelRegistry).
  *
  * Anthropic has no response_format=json_schema, so JSON is enforced via the
  * shared JSON_SCHEMA_INSTRUCTION prompt and parsed with safeParseJson, mirroring

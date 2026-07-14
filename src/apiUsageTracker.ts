@@ -46,7 +46,11 @@ export interface TrackingInput {
  *  API 유지: gpt-4.1 계열 (ChatGPT 2026-02-13 은퇴했지만 API는 유지)
  */
 const OPENAI_TEXT_PRICING: Record<string, { input: number; cachedInput: number; output: number }> = {
-  // 현역 플래그십 (gpt-5.x) — 2026-04 기준 공식 권장
+  // Current GPT-5.6 value / balanced / premium tiers.
+  'gpt-5.6-luna':    { input: 1.00, cachedInput: 0.10, output: 6.00 },
+  'gpt-5.6-terra':   { input: 2.50, cachedInput: 0.25, output: 15.00 },
+  'gpt-5.6-sol':     { input: 5.00, cachedInput: 0.50, output: 30.00 },
+  // Legacy prices retained for historical usage records.
   'gpt-5.4':         { input: 2.50, cachedInput: 0.25,  output: 15.00 },
   'gpt-5.4-mini':    { input: 0.75, cachedInput: 0.075, output: 4.50 },
   'gpt-5.4-nano':    { input: 0.20, cachedInput: 0.020, output: 1.25 },
@@ -57,7 +61,7 @@ const OPENAI_TEXT_PRICING: Record<string, { input: number; cachedInput: number; 
   // ⚠️ 2026-03-31 API 제거 예정 — 호환용으로만 유지 (호출 금지)
   'gpt-4o':          { input: 2.50, cachedInput: 1.25,  output: 10.00 },
   'gpt-4o-mini':     { input: 0.15, cachedInput: 0.075, output: 0.60 },
-  'default':         { input: 2.50, cachedInput: 0.25,  output: 15.00 }, // gpt-5.4 기준 안전 폴백
+  'default':         { input: 2.50, cachedInput: 0.25,  output: 15.00 },
 };
 
 /** OpenAI 이미지 모델 가격 ($/장) — 2026-04 공식 기준
@@ -113,12 +117,15 @@ const OPENAI_IMAGE_PRICING: Record<string, number> = {
  *  Opus 4.1 / 4.0은 레거시 단가($15/$75) 유지.
  */
 const CLAUDE_PRICING: Record<string, { input: number; output: number }> = {
-  // Latest tier (현행 플래그십)
+  // Current value / balanced / premium tiers.
+  'claude-fable-5':           { input: 10.00, output: 50.00 },
+  'claude-sonnet-5':          { input: 3.00,  output: 15.00 },
+  'claude-haiku-4-5-20251001': { input: 1.00, output: 5.00 },
+  'claude-haiku-4-5':         { input: 1.00,  output: 5.00 },
+  // Historical models retained for usage records.
   'claude-opus-4-8':         { input: 5.00,  output: 25.00 },  // 2026-05-28 GA
   'claude-opus-4-7':         { input: 5.00,  output: 25.00 },  // 2026-04-16 출시 (이전 플래그십, API 가용)
   'claude-sonnet-4-6':       { input: 3.00,  output: 15.00 },  // 2026-02-17 출시
-  'claude-haiku-4-5':        { input: 1.00,  output: 5.00 },
-  'claude-haiku-4-5-20251001': { input: 1.00, output: 5.00 },  // snapshot
   // Legacy tier (여전히 API 가용)
   'claude-opus-4-6':         { input: 5.00,  output: 25.00 },
   'claude-opus-4-5':         { input: 5.00,  output: 25.00 },  // 2025-11-24 67% 인하
@@ -203,15 +210,15 @@ function calculateCost(provider: ApiProvider, input: TrackingInput): number {
       const totalTokens = inTok + outTok;
       const isLongContext = totalTokens > 200_000;
       let pInput: number, pOutput: number;
-      if (lower.includes('gemini-3') || lower.includes('3.1-pro') || lower.includes('3.1-flash')) {
-        // Gemini 3.1 Pro / Flash (2026-02-19 출시, 3-pro-preview는 2026-03-26 shutdown됨)
-        if (lower.includes('flash')) {
-          pInput = isLongContext ? 0.60 : 0.30;
-          pOutput = isLongContext ? 5.00 : 2.50;
-        } else {
-          pInput = isLongContext ? 4.00 : 2.00;
-          pOutput = isLongContext ? 18.00 : 12.00;
-        }
+      if (lower.includes('3.1-flash-lite')) {
+        pInput = 0.25;
+        pOutput = 1.50;
+      } else if (lower.includes('3.5-flash')) {
+        pInput = 1.50;
+        pOutput = 9.00;
+      } else if (lower.includes('3.1-pro')) {
+        pInput = isLongContext ? 4.00 : 2.00;
+        pOutput = isLongContext ? 18.00 : 12.00;
       } else if (lower.includes('flash-lite') || lower.includes('flash_lite')) {
         pInput = 0.10;   // ← 수정: 0.025 → 0.10 (4배 과소)
         pOutput = 0.40;  // ← 수정: 0.10 → 0.40 (4배 과소)

@@ -35,7 +35,10 @@ test.afterAll(async () => {
 test('main notice event crosses preload and opens the canonical modal', async () => {
   const notice = '인증 완료 후 표시되는 공지\n두 번째 줄';
 
-  await mainWindow.waitForFunction(() => typeof (window as any).showServerNotice === 'function');
+  await mainWindow.waitForFunction(() => (
+    typeof (window as any).showServerNotice === 'function'
+    && (window as any).__noticeListenerReady === true
+  ));
   await mainWindow.evaluate(() => {
     (window as any).__noticeE2EProbe = [];
     (window as any).api.on('app:show-notice', (message: string) => {
@@ -67,6 +70,8 @@ test('main notice event crosses preload and opens the canonical modal', async ()
   const modal = mainWindow.locator('#notice-modal');
   await expect(modal).toBeVisible();
   await expect(modal).toHaveAttribute('aria-hidden', 'false');
+  await expect(mainWindow.locator('#notice-display-content')).toHaveText(notice);
+  await mainWindow.waitForTimeout(350);
   await expect(mainWindow.locator('#notice-display-content')).toHaveText(notice);
   await expect(mainWindow.locator('[id="notice-modal"]')).toHaveCount(1);
 });

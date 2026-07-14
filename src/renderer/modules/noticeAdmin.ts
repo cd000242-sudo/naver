@@ -15,6 +15,7 @@ type NoticeDisplayElements = {
 };
 
 let pendingServerNotice = '';
+let serverNoticeRevision = 0;
 let activeNoticeFingerprint = '';
 let activeNoticeRequiresQuit = false;
 const closedNoticeFingerprints = new Set<string>();
@@ -239,6 +240,7 @@ export function showNoticeIfAny(): void {
 }
 
 export function showServerNotice(noticeContent: string): void {
+  serverNoticeRevision += 1;
   pendingServerNotice = String(noticeContent || '').trim();
   if (!pendingServerNotice) return;
 
@@ -264,10 +266,16 @@ export function showServerNotice(noticeContent: string): void {
 }
 
 async function hydrateActiveServerNotice(): Promise<void> {
+  // The listener is registered before the rest of the renderer initializes.
+  // If a live notice already arrived, an older startup-cache value must never
+  // be fetched and applied over it.
+  if (pendingServerNotice) return;
+  const revisionAtStart = serverNoticeRevision;
   try {
     const getActiveNotice = (window as any).api?.getActiveNotice;
     if (typeof getActiveNotice !== 'function') return;
     const notice = await getActiveNotice();
+    if (pendingServerNotice || serverNoticeRevision !== revisionAtStart) return;
     if (String(notice || '').trim()) showServerNotice(notice);
   } catch (error) {
     console.warn('[Notice] active notice recovery failed:', error);

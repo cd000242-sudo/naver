@@ -3,6 +3,7 @@ import {
   buildSameEngineRecoveryInstruction,
   isTerminalContentGenerationError,
 } from '../contentGenerationFailurePolicy.js';
+import { AgentCliError } from '../agentCli/types.js';
 
 describe('content generation failure policy', () => {
   it('treats credential, billing, and safety failures as terminal', () => {
@@ -15,6 +16,19 @@ describe('content generation failure policy', () => {
     expect(isTerminalContentGenerationError(new Error('429 RESOURCE_EXHAUSTED: RPM/TPM rate limit'))).toBe(false);
     expect(isTerminalContentGenerationError(new Error('request timeout while waiting for response'))).toBe(false);
     expect(isTerminalContentGenerationError(new Error('Connection error'))).toBe(false);
+  });
+
+  it('stops immediately for agent subscription state that cannot recover by retrying', () => {
+    expect(isTerminalContentGenerationError(new AgentCliError(
+      'subscription_inactive',
+      'claude',
+      'Claude 구독 기간이 만료되었습니다.',
+    ))).toBe(true);
+    expect(isTerminalContentGenerationError(new AgentCliError(
+      'rate_limited',
+      'claude',
+      'Claude 구독 사용 한도가 소진되었습니다.',
+    ))).toBe(true);
   });
 
   it('builds a compact same-engine recovery prompt without cross-engine fallback language', () => {
