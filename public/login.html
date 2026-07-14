@@ -981,7 +981,7 @@
     </div>
 
     <button type="button" id="free-use-button" class="free-use-button" style="margin-top: 0; margin-bottom: 18px;">👑 매일
-      발행 2회 무료 사용하기</button>
+      발행 3회 무료 사용하기</button>
 
     <div id="error-message" class="error-message"></div>
 
@@ -1068,7 +1068,7 @@
         <div class="trial-modal-header">
           <span class="trial-icon">👑</span>
           <h2>무료 체험 시작하기</h2>
-          <p>간단한 정보 입력 후 매일 2회 무료 체험이 가능합니다</p>
+          <p>간단한 정보 입력 후 매일 3회 무료 체험이 가능합니다</p>
         </div>
 
         <div class="trial-form-group">
@@ -1189,6 +1189,15 @@
     const ipcRenderer = window.electronAPI || (typeof require !== 'undefined' ? require('electron').ipcRenderer : null);
     const KAKAO_OPEN_CHAT_URL = 'https://open.kakao.com/o/sPcaslwh';
     const LICENSE_PURCHASE_URL = 'https://cd000242-sudo.github.io/naver/';
+    const FREE_TRIAL_DAILY_PUBLISH_LIMIT = 3;
+    const FREE_TRIAL_BUTTON_TEXT = `👑 매일 발행 ${FREE_TRIAL_DAILY_PUBLISH_LIMIT}회 무료 사용하기`;
+
+    function resolveFreeTrialPublishLimit(status) {
+      const reportedLimit = Number(status?.quota?.limits?.publish);
+      return Number.isFinite(reportedLimit) && reportedLimit > 0
+        ? reportedLimit
+        : FREE_TRIAL_DAILY_PUBLISH_LIMIT;
+    }
 
     let deviceId = '';
 
@@ -1591,7 +1600,7 @@
         try {
           const status = await ipcRenderer.invoke('quota:getStatus');
           const used = Number(status?.quota?.usage?.publish) || 0;
-          const limit = 2;
+          const limit = resolveFreeTrialPublishLimit(status);
           if (status?.success && status?.isFree && (status?.quota?.isPaywalled || used >= limit)) {
             const paywallModal = document.getElementById('paywall-modal-backdrop');
             if (paywallModal) paywallModal.style.display = 'flex';
@@ -1679,7 +1688,7 @@
             if (errorMsg) { errorMsg.textContent = msg; errorMsg.classList.add('show'); }
           }
           if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '🚀 체험 시작하기'; }
-          if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+          if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = FREE_TRIAL_BUTTON_TEXT; }
           if (loginButton) loginButton.disabled = false;
           return;
         }
@@ -1700,7 +1709,7 @@
         document.getElementById('trial-modal-backdrop').style.display = 'none';
         showInfoModal(
           '✅ 환영합니다!',
-          '무료 2회 발행 가능합니다.\nPro 버전은 오픈채팅으로 문의해주세요.'
+          `무료 ${FREE_TRIAL_DAILY_PUBLISH_LIMIT}회 발행 가능합니다.\nPro 버전은 오픈채팅으로 문의해주세요.`
         );
         window.setTimeout(async () => {
           try { await ipcRenderer.invoke('login:success'); } catch (e) { /* ignore */ }
@@ -1709,7 +1718,7 @@
       } catch (error) {
         if (errorMsg) { errorMsg.textContent = `오류: ${error.message}`; errorMsg.classList.add('show'); }
         if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '🚀 체험 시작하기'; }
-        if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+        if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = FREE_TRIAL_BUTTON_TEXT; }
         if (loginButton) loginButton.disabled = false;
       }
     });
@@ -2127,12 +2136,12 @@
             if (status?.success && status?.isFree) {
               // 할당량 초과 체크
               const used = Number(status?.quota?.usage?.publish) || 0;
-              const limit = 2;
+              const limit = resolveFreeTrialPublishLimit(status);
               if (status?.quota?.isPaywalled || used >= limit) {
                 console.log('[Login] ⚠️ 무료체험 할당량 소진 — 페이월 표시');
                 const paywallModal = document.getElementById('paywall-modal-backdrop');
                 if (paywallModal) paywallModal.style.display = 'flex';
-                if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+                if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = FREE_TRIAL_BUTTON_TEXT; }
                 initAdminPanel();
                 return;
               }
@@ -2145,11 +2154,11 @@
             } else {
               // 무료체험 상태가 아님 (만료 등) → 일반 로그인 화면 표시
               console.log('[Login] ⚠️ 무료체험 상태 확인 실패 — 일반 로그인 화면 표시');
-              if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+              if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = FREE_TRIAL_BUTTON_TEXT; }
             }
           } catch (autoErr) {
             console.error('[Login] 무료체험 자동 로그인 실패:', autoErr);
-            if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = '👑 매일 발행 2회 무료 사용하기'; }
+            if (freeBtn) { freeBtn.disabled = false; freeBtn.textContent = FREE_TRIAL_BUTTON_TEXT; }
           }
         }
       } catch (e) {

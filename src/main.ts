@@ -141,6 +141,7 @@ import { decodeBase64Async } from './main/utils/base64Async.js';
 import { attachSelfTest } from './main/selfTest.js';
 import { ThumbnailGenerator } from './content/thumbnailGenerator.js';
 import { canConsume as canConsumeQuota, consume as consumeQuota, refund as refundQuota, getStatus as getQuotaStatus, resetAll as resetAllQuota, type QuotaLimits, type QuotaType } from './quotaManager.js';
+import { createFreeTrialQuotaLimits } from './freeTrialPolicy.js';
 import { BlogAccountManager } from './account/blogAccountManager.js';
 import { TitleABTester } from './content/titleABTester.js';
 import { CommentResponder } from './engagement/commentResponder.js';
@@ -905,13 +906,7 @@ async function reportUserActivity(accounts?: NaverAccountInfo[]): Promise<void> 
 type PaywallCode = 'PAYWALL';
 
 async function getFreeQuotaLimits(): Promise<QuotaLimits> {
-  const limit = 2;
-  return {
-    publish: limit,
-    content: limit,
-    media: Number.MAX_SAFE_INTEGER,
-    imageApi: 500,  // ✅ [2026-03-02] 일일 이미지 API 기본 한도
-  };
+  return createFreeTrialQuotaLimits();
 }
 
 async function isFreeTierUser(): Promise<boolean> {

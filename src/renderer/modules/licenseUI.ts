@@ -5,6 +5,7 @@
 
 import { toastManager } from '../utils/uiManagers.js';
 import { initAccountSettings, onAccountLogin, onAccountLogout } from './accountSettingsManager.js';
+import { FREE_TRIAL_DAILY_PUBLISH_LIMIT } from '../../freeTrialPolicy.js';
 
 // TS 컴파일용 — 런타임에서는 renderer.ts의 동일 스코프 함수 사용
 declare function appendLog(message: string, logOutputId?: string): void;
@@ -183,10 +184,10 @@ export async function initLicenseBadge(): Promise<void> {
 
             // ✅ 발행 쿼터만 체크 (글생성+발행 = 1세트)
             const usedPublish = Number((q as any)?.usage?.publish) || 0;
-            const limitPublish = Number((q as any)?.limits?.publish) || 2;
+            const limitPublish = Number((q as any)?.limits?.publish) || FREE_TRIAL_DAILY_PUBLISH_LIMIT;
             const remaining = Math.max(0, limitPublish - usedPublish);
 
-            // ✅ "0/2" 형태로 표시
+            // ✅ "사용량/한도" 형태로 표시
             const isExhausted = remaining <= 0;
             const color = isExhausted ? '#ef4444' : '#22c55e';
             const text = `${usedPublish}/${limitPublish}`;

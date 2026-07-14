@@ -5,6 +5,7 @@ import { app } from 'electron';
 import { loadLicense, getDeviceId, type LicenseInfo } from '../../licenseManager.js';
 import { loadConfig } from '../../configManager.js';
 import { canConsume as canConsumeQuota, getStatus as getQuotaStatus, type QuotaLimits, type QuotaType } from '../../quotaManager.js';
+import { createFreeTrialQuotaLimits } from '../../freeTrialPolicy.js';
 import { Logger } from './logger.js';
 
 /**
@@ -126,13 +127,7 @@ export async function isFreeTierUser(): Promise<boolean> {
  * 무료 티어 한도 가져오기
  */
 export async function getFreeQuotaLimits(): Promise<QuotaLimits> {
-    const limit = 2;
-    return {
-        publish: limit,
-        content: limit,
-        media: Number.MAX_SAFE_INTEGER,
-        imageApi: 500,  // ✅ [2026-03-02] 일일 이미지 API 기본 한도
-    };
+    return createFreeTrialQuotaLimits();
 }
 
 /**
