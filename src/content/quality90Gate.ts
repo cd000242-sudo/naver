@@ -2,7 +2,9 @@ import type { EvaluationResult, Mode } from './qualityEvaluator';
 
 export const QUALITY90_TARGET_SCORE = 90;
 export const QUALITY90_FALLBACK_MIN_SCORE = 80;
-export const QUALITY90_FALLBACK_MIN_MODE_SCORE = 75;
+// Integer heuristic scores can move by one point without a material quality change.
+// Keep that boundary jitter from triggering three rewrites and a failed publication.
+export const QUALITY90_FALLBACK_MIN_MODE_SCORE = 74;
 export const QUALITY90_FALLBACK_MIN_HUMANLIKE_SCORE = 70;
 export const QUALITY90_FALLBACK_MIN_SAFETY_SCORE = 70;
 

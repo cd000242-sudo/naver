@@ -48,6 +48,7 @@ describe('contentGenerator QualityGate90 wiring', () => {
     expect(source).toContain('QUALITY_TARGET_NOT_MET');
     expect(source).toContain('_quality90Assessment?.miss && attempt === MAX_ATTEMPTS');
     expect(source).not.toContain('canAcceptQuality90Fallback(_gateResult, _modeForGate)');
+    expect(source).not.toMatch(/modeScore(?:\.score)?\s*<\s*75/);
     expect(source).toContain('_quality90Assessment.blockingReasons.join');
     expect(source).toContain('자동 발행 하한을 충족하지 못해 발행을 중단했습니다');
   });

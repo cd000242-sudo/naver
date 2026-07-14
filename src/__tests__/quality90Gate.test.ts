@@ -106,6 +106,54 @@ describe('quality90Gate', () => {
     expect(result.reasons).toContain('finalScore 83<90');
   });
 
+  it.each(['seo', 'homefeed', 'mate', 'affiliate'] as const)(
+    'accepts the one-point publication-floor tolerance for %s mode',
+    (mode) => {
+      const result = assessQuality90Gate(evaluation({
+        mode,
+        modeScore: subScore(74),
+        finalScore: 83,
+        safetyScore: subScore(95),
+        humanlikeScore: subScore(78),
+        decision: 'pass',
+      }), mode);
+
+      expect(result).toMatchObject({
+        enabled: true,
+        passed: true,
+        targetReached: false,
+        nearTargetAccepted: true,
+        miss: false,
+        blockingReasons: [],
+        directive: '',
+      });
+    },
+  );
+
+  it.each(['seo', 'homefeed', 'mate', 'affiliate'] as const)(
+    'keeps blocking content below the tolerated publication floor for %s mode',
+    (mode) => {
+      const result = assessQuality90Gate(evaluation({
+        mode,
+        modeScore: subScore(QUALITY90_FALLBACK_MIN_MODE_SCORE - 1),
+        finalScore: 83,
+        safetyScore: subScore(95),
+        humanlikeScore: subScore(78),
+        decision: 'pass',
+      }), mode);
+
+      expect(result).toMatchObject({
+        enabled: true,
+        passed: false,
+        nearTargetAccepted: false,
+        miss: true,
+      });
+      expect(result.blockingReasons).toEqual([
+        `publication modeScore 73<${QUALITY90_FALLBACK_MIN_MODE_SCORE}`,
+      ]);
+    },
+  );
+
   it('allows a safe near-target homefeed result when humanlike reaches its publication floor', () => {
     const result = assessQuality90Gate(evaluation({
       mode: 'homefeed',
