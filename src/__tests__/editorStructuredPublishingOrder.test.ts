@@ -47,7 +47,7 @@ describe('structured editor publishing order', () => {
   it('re-anchors the caret (click) right before the keyboard typing fallback', () => {
     const fallbackLog = editorHelpersSource.indexOf('최후 안전 키보드 입력 fallback');
     const focusBeforeTyping = editorHelpersSource.indexOf('await focusLastEditableLine(page, frame)');
-    const typingLoop = editorHelpersSource.indexOf('const paragraphs = normalizedText');
+    const typingLoop = editorHelpersSource.indexOf('const paragraphs = fallbackText');
     expect(fallbackLog).toBeGreaterThan(-1);
     expect(focusBeforeTyping).toBeGreaterThan(fallbackLog);
     expect(focusBeforeTyping).toBeLessThan(typingLoop);

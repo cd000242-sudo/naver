@@ -490,6 +490,10 @@ export interface PostCyclePayload {
     useIntelligentImagePlacement?: boolean;
     onlyImagePlacement?: boolean;
     businessInfo?: Record<string, unknown>;
+    _contentQualityV3PublishOwnerKey?: string;
+    _contentQualityV3PostId?: string;
+    _contentQualityV3Required?: true;
+    _contentQualityV3PublishHandoff?: import('../../contentQualityV3/publishHandoffStore.js').ContentQualityV3PublishHandoff;
 }
 
 /**

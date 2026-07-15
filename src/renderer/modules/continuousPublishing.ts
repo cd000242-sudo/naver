@@ -4802,6 +4802,8 @@ async function startContinuousPublishingV2(): Promise<void> {
           imageRatio: itemPipelineCfg.image.imageRatio,
           thumbnailImageRatio: itemPipelineCfg.image.thumbnailImageRatio,
           subheadingImageRatio: itemPipelineCfg.image.subheadingImageRatio,
+          scSubImageMode: itemPipelineCfg.shopping.subImageMode,
+          scAIImageEngine: itemPipelineCfg.shopping.aiImageEngine,
           publishMode: item.publishMode || 'publish', // ✅ [2026-04-11 FIX] undefined 방지
           // ✅ [2026-03-11 FIX] scheduleDate + scheduleTime → 'YYYY-MM-DD HH:mm' 정규화
           // 방어 로직: scheduleDate에 T나 공백으로 시간이 포함되어 있어도 날짜만 추출 후 scheduleTime과 합성
@@ -5367,8 +5369,10 @@ export async function executeContinuousPublish(structuredContent: any, publishMo
     headingImageMode: pipelineCfg.image.headingImageMode,
     imageRatio: pipelineCfg.image.imageRatio,
     thumbnailImageRatio: pipelineCfg.image.thumbnailImageRatio,
-    subheadingImageRatio: pipelineCfg.image.subheadingImageRatio,
-  };
+     subheadingImageRatio: pipelineCfg.image.subheadingImageRatio,
+     scSubImageMode: pipelineCfg.shopping.subImageMode,
+     scAIImageEngine: pipelineCfg.shopping.aiImageEngine,
+   };
 
   await executeUnifiedAutomation(formData);
 }

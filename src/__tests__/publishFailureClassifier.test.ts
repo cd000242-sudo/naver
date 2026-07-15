@@ -2,6 +2,20 @@ import { describe, expect, it } from 'vitest';
 import { classifyPublishFailure } from '../automation/publishFailureClassifier';
 
 describe('classifyPublishFailure', () => {
+  it('treats V3 publish handoff failures as terminal user-action conditions', () => {
+    expect(classifyPublishFailure('[content-quality-v3-publish-handoff] missing_handoff')).toEqual({
+      code: 'PUBLISH_CONDITION',
+      retryable: false,
+      userActionRequired: true,
+    });
+
+    expect(classifyPublishFailure('[content-quality-v3-publication] untrusted_provenance')).toEqual({
+      code: 'PUBLISH_CONDITION',
+      retryable: false,
+      userActionRequired: true,
+    });
+  });
+
   it('classifies browser session crashes as retryable', () => {
     expect(classifyPublishFailure('Protocol error: Target closed')).toEqual({
       code: 'BROWSER_CLOSED',

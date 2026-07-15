@@ -437,8 +437,9 @@ describe('pre-publish assertion wiring (observation mode)', () => {
     const code = read('naverBlogAutomation.ts');
     const start = code.indexOf('async publishBlogPost(');
     expect(start).toBeGreaterThan(-1);
-    // [2026-07-08] 6000 → 7000: editor-body-not-readable 포렌식 계측 추가로 메서드 앞부분이 길어짐.
-    const head = code.slice(start, start + 7000);
+    const end = code.indexOf('private async applyPlainContent(', start);
+    expect(end).toBeGreaterThan(start);
+    const head = code.slice(start, end);
     expect(head).toMatch(/collectPrePublishStats\(/);
     expect(head).toMatch(/evaluatePrePublishReport\(/);
     expect(head).toMatch(/repairMissingHashtagsBeforePublish\(/);

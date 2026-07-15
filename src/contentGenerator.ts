@@ -1,4 +1,4 @@
-﻿import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from '@anthropic-ai/sdk';
 import OpenAI from 'openai';
 // ✅ [2026-05-25 v2.10.356] OpenAI RPM preemptive throttler + 누진 backoff
 // ✅ [2026-06-02] 호출 간 최소 간격(10s) + 30→60→90→120 누진 backoff
@@ -20,6 +20,7 @@ import {
   CLAUDE_MODELS,
   GEMINI_TEXT_MODELS,
   OPENAI_TEXT_MODELS,
+  isAgentTextProvider,
   resolveTextModelProfile,
   resolveTextModelProfileForVendor,
   supportsClaudeTemperature,
@@ -81,6 +82,45 @@ import { processAutoPublishContent, getRecentPeriods, recordSelectedTitle, type 
 import { trendAnalyzer } from './agents/trendAnalyzer.js';
 import { loadConfig, getConfigSync } from './configManager.js';
 import { isMaskedSecretValue } from './security/secretValueUtils.js';
+import { runContentPipeline } from './contentPipeline/facade.js';
+import { validatePublishableContent } from './contentPipeline/resultContract.js';
+import {
+  assertResolvedContentGeneratorProviderAllowed,
+  type AgentProductPolicyContext,
+} from './agentCli/productPolicy.js';
+import {
+  buildContentQualityV3Prompt,
+  createContentQualityV3InitialPromptOptions,
+} from './contentQualityV3/prompt.js';
+import { CONTENT_QUALITY_V3_OUTPUT_SCHEMA } from './contentQualityV3/schema.js';
+import {
+  resolveContentQualityV3GeminiGroundingOverride,
+  supportsContentQualityV3NativeSchema,
+} from './contentQualityV3/providerPolicy.js';
+import {
+  CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY,
+  createContentQualityV3GeminiRequestEnvelope,
+  createContentQualityV3GeminiSdkRequest,
+  type ContentQualityV3StrictSingleCallPolicy,
+} from './contentQualityV3/geminiRequestContract.js';
+import { shouldRunLegacySemanticPostDraftMutation } from './contentQualityV3/postDraftMutationPolicy.js';
+import {
+  buildContentQualityV3FinalizationRetryInstruction,
+  decideContentQualityV3Finalization,
+  finalizeContentQualityV3Draft,
+  materializeContentQualityV3ForLegacyConsumers,
+} from './contentQualityV3/finalizer.js';
+import { resolveContentQualityV3TitleContract } from './contentQualityV3/titleContract.js';
+import { evaluateContentQualityV3AffiliateGuard } from './contentQualityV3/affiliateGuard.js';
+import {
+  enforceContentQualityV3BusinessGuard as enforceSharedContentQualityV3BusinessGuard,
+} from './contentQualityV3/businessGuard.js';
+import { resolveProductionContentQualityV3Activation } from './contentQualityV3/releaseActivation.js';
+import { registerContentQualityV3GeneratedContent } from './contentQualityV3/publicationBoundary.js';
+import {
+  buildGeminiGenerationConfig,
+  resolveGeminiEmptyResponseRetryTemperature,
+} from './contentGeminiSamplingPolicy.js';
 // [Phase 3-1/v2.10.139] god file 분해 1단계 — pure string helper 추출
 import {
   removeEmojis,
@@ -463,7 +503,13 @@ function runPostGenValidator(content: any, source: any): void {
 
 // [Phase 3-8/v2.10.146] ISSUE_ACTION_MAP + buildTitleRetryFeedback -> contentTitleQuality.ts
 
-async function generateTitleOnlyPatch(source: ContentSource, mode: PromptMode, categoryHint?: string, provider?: string): Promise<{
+async function generateTitleOnlyPatch(
+  source: ContentSource,
+  mode: PromptMode,
+  categoryHint?: string,
+  provider?: string,
+  agentProductPolicyContext?: AgentProductPolicyContext,
+): Promise<{
   selectedTitle?: string;
   titleCandidates?: TitleCandidate[];
   titleAlternatives?: string[];
@@ -728,7 +774,7 @@ JSON:
       } else {
         // 기본 'same': 본문과 동일 모델
         if (provider === 'agent-codex' || provider === 'agent-claude') {
-          raw = await callAgent(provider, titlePromptFull, { mode });
+          raw = await callAgent(provider, titlePromptFull, { mode, agentProductPolicyContext });
         } else if (provider === 'perplexity') {
           raw = await callPerplexity(titlePromptFull, titleTemp, 650);
         } else if (provider === 'openai') {
@@ -880,7 +926,12 @@ JSON:
 
 // [Phase 3-9/v2.10.147] evaluateTitleQuality -> contentTitleEvaluator.ts
 
-async function generateHomefeedIntroOnlyPatch(source: ContentSource, current: StructuredContent, provider?: string): Promise<{ introduction?: string } | null> {
+async function generateHomefeedIntroOnlyPatch(
+  source: ContentSource,
+  current: StructuredContent,
+  provider?: string,
+  agentProductPolicyContext?: AgentProductPolicyContext,
+): Promise<{ introduction?: string } | null> {
   const categoryHint = source.categoryHint as string | undefined;
   const systemPrompt = buildFullPrompt('homefeed', categoryHint, false, undefined, undefined, (source as any).hookHint, buildRecentWinnersBlock(source));
   const selectedTitle = String(current?.selectedTitle || '').trim();
@@ -918,7 +969,7 @@ JSON:
     // ✅ [v2.10.56] silent 폴백 회귀 — 사용자 선택 provider 그대로 (자동 폴백 금지 원칙)
     let raw: string;
     if (provider === 'agent-codex' || provider === 'agent-claude') {
-      raw = await callAgent(provider, prompt, { mode: 'homefeed' });
+      raw = await callAgent(provider, prompt, { mode: 'homefeed', agentProductPolicyContext });
     } else if (provider === 'perplexity') {
       raw = await callPerplexity(prompt, 0.9, 450);
     } else if (provider === 'openai') {
@@ -939,7 +990,23 @@ JSON:
 
 // [Phase 3-21/v2.10.167] mergeSeoWithHomefeedOverlay -> contentMergeOverlay.ts
 
-export function finalizeStructuredContent(content: StructuredContent, source: ContentSource): StructuredContent {
+export function finalizeStructuredContent(
+  content: StructuredContent,
+  source: ContentSource,
+  promptVariant: ContentPromptVariant = 'legacy',
+): StructuredContent {
+  if (promptVariant === 'v3') {
+    const finalization = finalizeContentQualityV3Draft(content, {
+      titleContract: resolveContentQualityV3TitleContract(source),
+    });
+    if (!finalization.ok) {
+      throw new Error(`[content-quality-v3] ${finalization.issueCode}`);
+    }
+    return finalization.content;
+  }
+
+  const allowLegacyOrdinalHeadingMarkerFix =
+    shouldRunLegacySemanticPostDraftMutation(promptVariant, 'apply-ordinal-heading-marker-fix');
   let finalContent = removeEmojisFromContent(content);
   finalContent = removeInternalStructureMarkersFromContent(finalContent);
 
@@ -1162,7 +1229,9 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   finalContent = ensureContentParagraphBreaks(finalContent);
 
   // ✅ 소제목 길이 제한 (60자 이내로 완화 - 너무 짧으면 정보 전달력 하락)
-  finalContent = truncateHeadingTitles(finalContent, 60);
+  if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'truncate-heading-titles')) {
+    finalContent = truncateHeadingTitles(finalContent, 60);
+  }
 
   const manualTitleOverride = normalizeManualTitleOverride((source as any).manualTitleOverride);
   if (manualTitleOverride) {
@@ -1186,7 +1255,9 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
     } catch { /* ignore */ }
 
     applyHomefeedNarrativeHookBlock(finalContent, source);
-    try { applyOrdinalHeadingMarkerFix(finalContent); } catch { /* ignore */ }
+    if (allowLegacyOrdinalHeadingMarkerFix) {
+      try { applyOrdinalHeadingMarkerFix(finalContent); } catch { /* ignore */ }
+    }
     finalContent = removeInternalStructureMarkersFromContent(finalContent);
 
     runPostGenValidator(finalContent, source);
@@ -1219,7 +1290,9 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
     } catch { /* ignore */ }
 
     applyHomefeedNarrativeHookBlock(finalContent, source);
-    try { applyOrdinalHeadingMarkerFix(finalContent); } catch { /* ignore */ }
+    if (allowLegacyOrdinalHeadingMarkerFix) {
+      try { applyOrdinalHeadingMarkerFix(finalContent); } catch { /* ignore */ }
+    }
     finalContent = removeInternalStructureMarkersFromContent(finalContent);
 
     runPostGenValidator(finalContent, source);
@@ -1227,22 +1300,24 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   }
 
   try {
-    if (finalContent.selectedTitle) {
-      finalContent.selectedTitle = collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(finalContent.selectedTitle)))));
-    }
-    if ((finalContent as any).title) {
-      (finalContent as any).title = collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars((finalContent as any).title)))));
-    }
-    if (Array.isArray(finalContent.titleAlternatives)) {
-      finalContent.titleAlternatives = finalContent.titleAlternatives
-        .map((t) => collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(t))))))
-        .filter(Boolean);
-    }
-    if (Array.isArray(finalContent.titleCandidates)) {
-      finalContent.titleCandidates = finalContent.titleCandidates.map((c: any) => ({
-        ...c,
-        text: collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(c?.text))))),
-      }));
+    if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'cleanup-title-tokens')) {
+      if (finalContent.selectedTitle) {
+        finalContent.selectedTitle = collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(finalContent.selectedTitle)))));
+      }
+      if ((finalContent as any).title) {
+        (finalContent as any).title = collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars((finalContent as any).title)))));
+      }
+      if (Array.isArray(finalContent.titleAlternatives)) {
+        finalContent.titleAlternatives = finalContent.titleAlternatives
+          .map((t) => collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(t))))))
+          .filter(Boolean);
+      }
+      if (Array.isArray(finalContent.titleCandidates)) {
+        finalContent.titleCandidates = finalContent.titleCandidates.map((c: any) => ({
+          ...c,
+          text: collapseDuplicateLeadingYearTitle(cleanupColonQuotePattern(cleanupTrailingTitleTokens(cleanupStartingTitleTokens(sanitizeTitleSpecialChars(c?.text))))),
+        }));
+      }
     }
 
     // 본문 전체 클리닝 (?: 등 제거)
@@ -1266,7 +1341,10 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   }
 
   // ✅ 제품/쇼핑/IT 리뷰: 상품명 prefix 우선 적용 (제목이 상품명으로 반드시 시작)
-  if (isReviewArticleType(source?.articleType)) {
+  if (
+    isReviewArticleType(source?.articleType)
+    && shouldRunLegacySemanticPostDraftMutation(promptVariant, 'apply-keyword-prefix-to-structured-content')
+  ) {
     const productName = getReviewProductName(source);
     if (productName) {
       applyKeywordPrefixToStructuredContent(finalContent, productName);
@@ -1275,7 +1353,10 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   const primaryKeyword = (source.metadata as any)?.keywords?.[0]
     ? String((source.metadata as any).keywords[0]).trim()
     : '';
-  if (primaryKeyword) {
+  if (
+    primaryKeyword
+    && shouldRunLegacySemanticPostDraftMutation(promptVariant, 'apply-keyword-prefix-to-structured-content')
+  ) {
     try {
       const pn = isReviewArticleType(source?.articleType) ? String(getReviewProductName(source) || '').trim() : '';
       const n = (s: string) => String(s || '').replace(/[\s\-–—:|·•.,!?()\[\]{}"']/g, '').toLowerCase();
@@ -1293,10 +1374,12 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
   }
   applyHomefeedNarrativeHookBlock(finalContent, source);
   applySeoQualityHookBlock(finalContent, source);  // ✅ [2026-03-06] SEO 런타임 품질 게이트
-  try {
-    applyOrdinalHeadingMarkerFix(finalContent);
-  } catch (e) {
-    console.warn('[contentGenerator] catch ignored:', e);
+  if (allowLegacyOrdinalHeadingMarkerFix) {
+    try {
+      applyOrdinalHeadingMarkerFix(finalContent);
+    } catch (e) {
+      console.warn('[contentGenerator] catch ignored:', e);
+    }
   }
   sanitizeStructuredContentClaims(finalContent);
   finalContent = removeInternalStructureMarkersFromContent(finalContent);
@@ -1317,14 +1400,16 @@ export function finalizeStructuredContent(content: StructuredContent, source: Co
       if (finalCheck.score < 50) {
         console.warn(`[FinalQualityGate] ⚠️ 최종 제목 품질 미달 (${finalCheck.score}점): "${finalContent.selectedTitle}"`);
         console.warn(`[FinalQualityGate]   issues: ${finalCheck.issues.join(', ')}`);
-        // 접두사로 인한 훼손 → cleanup만 재적용하여 복구 시도
-        finalContent.selectedTitle = removeDuplicatePhrasesFromTitle(
-          cleanupColonQuotePattern(cleanupTrailingTitleTokens(
-            cleanupStartingTitleTokens(sanitizeTitleSpecialChars(finalContent.selectedTitle))
-          ))
-        ).trim();
-        const rescueCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint, source.articleType);
-        console.log(`[FinalQualityGate] 복구 후: "${finalContent.selectedTitle}" (${rescueCheck.score}점)`);
+        if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'repair-title-after-quality-gate')) {
+          // 접두사로 인한 훼손 → cleanup만 재적용하여 복구 시도
+          finalContent.selectedTitle = removeDuplicatePhrasesFromTitle(
+            cleanupColonQuotePattern(cleanupTrailingTitleTokens(
+              cleanupStartingTitleTokens(sanitizeTitleSpecialChars(finalContent.selectedTitle))
+            ))
+          ).trim();
+          const rescueCheck = evaluateTitleQuality(finalContent.selectedTitle, String(finalPK), finalMode, finalCategoryHint, source.articleType);
+          console.log(`[FinalQualityGate] 복구 후: "${finalContent.selectedTitle}" (${rescueCheck.score}점)`);
+        }
       }
     } catch (e) {
       console.error('[FinalQualityGate] 검증 실패:', e);
@@ -1717,11 +1802,17 @@ export interface StructuredContent {
   };
   collectedImages?: string[]; // ✅ 소스에서 수집된 이미지 확인용
 }
-interface GenerateOptions {
+export interface GenerateOptions {
   provider?: ContentGeneratorProvider;
   minChars?: number;
   contentMode?: 'seo' | 'homefeed' | 'mate'; // ✅ SEO/홈판/네이버 메이트 노출 최적화 모드
   signal?: AbortSignal; // ✅ [2026-04-03] 중지 시 즉시 AI API 호출 abort
+  /** @deprecated Ignored by the public production boundary. */
+  contentPipelineMode?: unknown;
+  /** @deprecated Ignored by the public production boundary. */
+  v3Allowlist?: readonly string[];
+  /** Opaque main-process policy context; plain renderer objects fail closed. */
+  agentProductPolicyContext?: AgentProductPolicyContext;
 }
 
 export function detectBannedHeadingPatterns(headings: Array<{ title: string }>): string[] {
@@ -2453,6 +2544,13 @@ export function validateBusinessContent(content: StructuredContent, source: Cont
   return { hasCritical: violations.length > 0, violations, warnings };
 }
 
+export function enforceContentQualityV3BusinessGuard(
+  content: Readonly<StructuredContent>,
+  source: ContentSource,
+): StructuredContent {
+  return enforceSharedContentQualityV3BusinessGuard(content, source);
+}
+
 /**
  * ⚡ 목표 글자수에 따라 동적 타임아웃 계산
  * - 배포 환경 안정성: 네트워크 환경이 다양하므로 충분한 시간 제공
@@ -2619,16 +2717,28 @@ async function callGemini(
   prompt: string,
   temperature: number = 0.9,
   minChars: number = 2000,
-  options: { useGrounding?: boolean; signal?: AbortSignal; modelOverride?: string } = {},
+  options: {
+    useGrounding?: boolean;
+    signal?: AbortSignal;
+    modelOverride?: string;
+    schema?: Record<string, unknown>;
+    useModelDefaultSampling?: boolean;
+    executionPolicy?: ContentQualityV3StrictSingleCallPolicy;
+  } = {},
 ): Promise<string> {
   const timeoutMs = getTimeoutMs(minChars);
+  const strictSingleCall =
+    options.executionPolicy === CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY;
+  const strictRequestEnvelope = strictSingleCall
+    ? createContentQualityV3GeminiRequestEnvelope(prompt)
+    : undefined;
 
   // ✅ 설정 로드
   let config: any = null;
   try {
     const { loadConfig, applyConfigToEnv } = await import('./configManager.js');
     config = await loadConfig();
-    applyConfigToEnv(config);
+    if (!strictSingleCall) applyConfigToEnv(config);
   } catch (e) {
     console.warn('[ContentGenerator] Config 로드 실패:', e);
   }
@@ -2652,11 +2762,13 @@ async function callGemini(
   // ✅ [2026-03-16] promptSplitter 모듈로 system/user 분리
   // 기존 37줄 하드코딩 systemInstructionText 제거 → .prompt 파일의 규칙이 그대로 system으로 전달
   // ✅ [v1.4.51] geminiUserText/temperature를 mutable로 — 빈 응답 회복 시 프롬프트 증강
-  const { system: geminiSystemText, user: geminiUserTextOriginal } = splitPromptByMarker(prompt);
+  const { system: geminiSystemText, user: geminiUserTextOriginal } = strictRequestEnvelope
+    ? { system: strictRequestEnvelope.systemText, user: strictRequestEnvelope.userText }
+    : splitPromptByMarker(prompt);
   let geminiUserText = geminiUserTextOriginal;
   let activeTemperature = temperature;
   let promptAugmentationCount = 0;
-  const MAX_PROMPT_AUGMENTATIONS = 2;
+  const MAX_PROMPT_AUGMENTATIONS = strictSingleCall ? 0 : 2;
 
   // 1. API 키 로드 — 다중 키 로테이션 지원
   const configGeminiKey = config?.geminiApiKey?.trim() || '';
@@ -2676,12 +2788,17 @@ async function callGemini(
   const extraKeys: string[] = rawExtraKeys
     .map((k: string) => k.trim())
     .filter((k: string) => k && !isMaskedSecretValue(k));
-  const keyPlan = buildGeminiKeyExecutionPlan({
-    primaryApiKey,
-    extraApiKeys: extraKeys,
-    planType: config?.geminiPlanType,
-    useFreeQuotaBeforePaid: config?.geminiUseFreeQuotaBeforePaid,
-  });
+  const keyPlan = strictSingleCall
+    ? Object.freeze({
+      keys: Object.freeze(primaryApiKey ? [primaryApiKey] : []),
+      freeQuotaFirst: false,
+    })
+    : buildGeminiKeyExecutionPlan({
+      primaryApiKey,
+      extraApiKeys: extraKeys,
+      planType: config?.geminiPlanType,
+      useFreeQuotaBeforePaid: config?.geminiUseFreeQuotaBeforePaid,
+    });
   const allApiKeys = keyPlan.keys;
   if (allApiKeys.length === 0) throw new Error('Gemini API 키가 설정되지 않았습니다.');
   let currentKeyIdx = 0;
@@ -2696,8 +2813,9 @@ async function callGemini(
   }
 
   // 2. 모델 설정 — 사용자가 선택한 모델만 사용 (다른 모델로 몰래 전환 금지)
-  const geminiModelConfig = options.modelOverride
-    ? { ...config, primaryGeminiTextModel: options.modelOverride }
+  const effectiveModelOverride = strictRequestEnvelope?.model ?? options.modelOverride;
+  const geminiModelConfig = effectiveModelOverride
+    ? { ...config, primaryGeminiTextModel: effectiveModelOverride }
     : config;
   const { primaryModel, isPro } = buildGeminiModelChain(geminiModelConfig as any);
   const modelsToTry = [primaryModel];
@@ -2711,9 +2829,10 @@ async function callGemini(
 
   let lastError: Error | null = null;
   // ✅ [v1.4.64] 재시도 3회로 축소 — 실패 확정까지 4분→1분 이하
-  const perModelMaxRetries = 3;
+  const perModelMaxRetries = strictSingleCall ? 1 : 3;
   const geminiRateLimitPatienceMs = getGeminiRateLimitPatienceMs(config);
   let geminiRateLimitWaitedMs = 0;
+  let providerCallCount = 0;
 
   for (let i = 0; i < modelsToTry.length; i++) {
     const modelName = modelsToTry[i];
@@ -2733,14 +2852,16 @@ async function callGemini(
         //    cacheManager.create가 본문 생성 전 Gemini API 1회를 추가로 사용하므로
         //    Tier 1/RPM 낮은 프로젝트에서는 "버튼 1회"가 "API 2회"가 되어 429가 쉽게 난다.
         //    비용 절감이 필요한 고한도 프로젝트만 ENV GEMINI_CACHE_ENABLED=1로 명시 opt-in.
-        const cacheEligibility = resolveGeminiPromptCacheEligibility({
-          modelName,
-          systemTextLength: geminiSystemText.length,
-          isKeySupported: isGeminiCacheSupportedForKey(trimmedKey),
-          cacheEnabledEnv: process.env.GEMINI_CACHE_ENABLED,
-          cacheDisabledEnv: process.env.GEMINI_CACHE_DISABLED,
-        });
-        const cacheEnabled = cacheEligibility.enabled;
+        const cacheEligibility = strictSingleCall
+          ? { enabled: false, minCacheChars: 0, reason: 'env-disabled' as const }
+          : resolveGeminiPromptCacheEligibility({
+            modelName,
+            systemTextLength: geminiSystemText.length,
+            isKeySupported: isGeminiCacheSupportedForKey(trimmedKey),
+            cacheEnabledEnv: process.env.GEMINI_CACHE_ENABLED,
+            cacheDisabledEnv: process.env.GEMINI_CACHE_DISABLED,
+          });
+        const cacheEnabled = !strictSingleCall && cacheEligibility.enabled;
         let cachedContentName: string | undefined;
 
         if (cacheEnabled) {
@@ -2808,12 +2929,14 @@ async function callGemini(
         //   원문 자체가 fact source이므로 그라운딩을 꺼도 환상(hallucination)이 생기지 않는다.
         const configGrounding = (config as any)?.enableSearchGrounding !== false;
         const isRawTextMode = (geminiUserTextOriginal || '').length > 500;
-        const useGrounding = (options.useGrounding !== false) && configGrounding && !isRawTextMode;
+        const useGrounding = strictRequestEnvelope
+          ? strictRequestEnvelope.useGrounding
+          : (options.useGrounding !== false) && configGrounding && !isRawTextMode;
         if (isRawTextMode) {
           console.log('[Gemini] 📄 원문 모드 감지 (user > 500자) → 그라운딩 OFF (RECITATION 회피, 원문이 fact source)');
         }
 
-        const resultCacheAllowed = minChars < 1000;
+        const resultCacheAllowed = !strictSingleCall && minChars < 1000;
         const resultCacheKey = resultCacheAllowed ? getGeminiResultCacheKey({
           modelName,
           systemText: geminiSystemText,
@@ -2828,22 +2951,20 @@ async function callGemini(
         }
 
         // 캐시 사용 시 systemInstruction 중복 금지 (캐시에 이미 포함)
-        const requestConfig: any = {
+        const requestConfig: any = strictRequestEnvelope
+          ? createContentQualityV3GeminiSdkRequest(strictRequestEnvelope)
+          : {
           contents: [{ role: 'user', parts: [{ text: geminiUserText }] }],
           ...(!cachedContentName && geminiSystemText
             ? { systemInstruction: { role: 'system', parts: [{ text: geminiSystemText }] } }
             : {}),
-          generationConfig: {
-            temperature: activeTemperature,
-            topP: 0.95,
-            topK: 40,
-            // Reserve enough output for thinking plus the final structured article.
-            maxOutputTokens: isPro ? 16384 : modelName === GEMINI_TEXT_MODELS.FLASH ? 12288 : 8192,
-            // ✅ [v2.10.207] thinkingBudget=0은 *Flash/Lite만* — Pro는 thinking이 모델 핵심
-            //   기존: modelName.includes('2.5') → Pro까지 thinking 끔 → "루프가 비정상 종료됨" 회귀
-            //   변경: 2.5-flash / 2.5-flash-lite 만 thinking 끔 (Pro는 thinking 정상 사용)
-            ...(/2\.5-flash/i.test(modelName) ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
-          } as any,
+          generationConfig: buildGeminiGenerationConfig({
+            activeTemperature,
+            modelName,
+            isPro,
+            schema: options.schema,
+            useModelDefaultSampling: options.useModelDefaultSampling,
+          }) as any,
           // ✅ [v1.4.51] 3) safetySettings BLOCK_NONE — SAFETY false positive 박멸
           // 한국어 블로그(의료/금융/법률/관계) 키워드가 기본 BLOCK_MEDIUM_AND_ABOVE에 자주 걸림
           // BLOCK_NONE으로 설정해도 Google이 강제 차단하는 최상위 콘텐츠는 여전히 막힘 → 안전
@@ -2894,6 +3015,13 @@ async function callGemini(
 
         console.log(`[Gemini] 🚀 ${modelName} 호출 (Search Grounding: ${useGrounding ? 'ON +$0.035' : 'OFF (비용 절감)'})${cachedContentName ? ' [캐시 시도 ✅]' : ''}`);
         await throttleGeminiRequest(modelName, config, options.signal);
+        if (
+          strictSingleCall
+          && providerCallCount >= CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY.maxProviderCalls
+        ) {
+          throw new Error('[content-quality-v3] provider_call_budget_exhausted');
+        }
+        providerCallCount += 1;
         const streamPromise = invokeStream();
         const streamResult = await withProviderTimeout(
           streamPromise,
@@ -2984,6 +3112,7 @@ async function callGemini(
       } catch (error) {
         // ✅ [v1.4.50] Safety Lock 에러는 재시도/폴백 금지 — 즉시 상위로 전파
         if (error instanceof BudgetExceededError) throw error;
+        if (strictSingleCall) throw error;
 
         // ✅ [v1.4.51] 빈 응답 에러 — 프롬프트 증강으로 무조건 회복
         // BLOCK_NONE + thinkingBudget 0 + 60K maxOutput으로 거의 안 뜨지만,
@@ -3009,9 +3138,14 @@ async function callGemini(
               guard += ' (재요청) 이전 응답이 비어있었습니다. 반드시 응답을 생성해주세요.';
             }
             geminiUserText = geminiUserTextOriginal + guard;
-            // temperature 살짝 상승 — 동일 입력 반복 방지 (cap 1.0)
-            activeTemperature = Math.min(1.0, activeTemperature + 0.1);
-            console.warn(`[Gemini] 🔄 빈 응답 회복 #${promptAugmentationCount} (${error.finishReason}) → 프롬프트 증강 + temp ${activeTemperature.toFixed(2)}`);
+            activeTemperature = resolveGeminiEmptyResponseRetryTemperature(
+              activeTemperature,
+              options.useModelDefaultSampling === true,
+            );
+            const samplingLog = options.useModelDefaultSampling
+              ? '모델 기본 sampling 유지'
+              : `temp ${activeTemperature.toFixed(2)}`;
+            console.warn(`[Gemini] 🔄 빈 응답 회복 #${promptAugmentationCount} (${error.finishReason}) → 프롬프트 증강 + ${samplingLog}`);
             continue; // 같은 modelRetryCount, 다음 attempt
           }
 
@@ -3594,7 +3728,7 @@ async function callOpenAI(
             { role: 'user' as const, content: oaiUser },
           ],
           max_completion_tokens: maxCompletionTokens,
-        };
+          };
         if (!isSearchModel) {
           const activeProfile = resolveTextModelProfile(modelName);
           if (modelName.startsWith('gpt-5.6-')) {
@@ -3834,7 +3968,7 @@ function getAnthropicClient(apiKey?: string): Anthropic {
 }
 
 
-// ✅ 에이전트 모드 — 사용자 본인 codex/claude 구독 CLI로 글 생성 (API 토큰 과금 0).
+// ✅ 에이전트 모드 — 사용자 본인 codex/claude 구독 CLI로 글 생성 (별도 API 키 불필요, 플랜 한도 적용).
 //   모든 글생성 모드(SEO/홈피드/쇼핑/사진)가 공유하는 agentCli 서비스를 호출한다(중복 구현 금지).
 //   silent 폴백 절대 금지: 미설치/미로그인/한도소진은 AgentCliError 그대로 throw → 차단형 모달.
 interface CallAgentOptions {
@@ -3843,6 +3977,12 @@ interface CallAgentOptions {
   mode?: string;
   /** When true, send the prompt as-is (no writing envelope). Use for judge/eval calls. */
   raw?: boolean;
+  /** Native structured-output schema. Only explicit V3 generation supplies this. */
+  schema?: Record<string, unknown>;
+  /** Disable the legacy autonomous-writing wrapper when the prompt is already complete. */
+  agenticEnvelope?: boolean;
+  /** Opaque main-process product-policy context for the final CLI boundary. */
+  agentProductPolicyContext?: AgentProductPolicyContext;
 }
 
 async function callAgent(
@@ -3850,23 +3990,35 @@ async function callAgent(
   prompt: string,
   opts: CallAgentOptions = {},
 ): Promise<string> {
-  const { signal, mode, raw } = opts;
+  const {
+    signal,
+    mode,
+    raw,
+    schema,
+    agenticEnvelope,
+    agentProductPolicyContext,
+  } = opts;
   const { generateWithAgent } = await import('./agentCli/index.js');
   const { wrapAsAgenticTask, AGENTIC_TIMEOUT_MS } = await import('./agentCli/agenticEnvelope.js');
   const { agentTextProviderToCli } = await import('./runtime/modelRegistry.js');
   const cliProvider = agentTextProviderToCli(provider);
   // Activate the CLI's own reasoning loop (analyze -> draft -> self-critique -> revise -> JSON)
-  // instead of a one-shot pass. Iteration runs inside one subscription call (API cost 0).
+  // instead of a one-shot pass. Iteration runs inside one subscription call (plan usage applies).
   // Judge/eval calls (raw) skip the writing envelope — they are not content generation.
-  const agenticPrompt = raw ? prompt : wrapAsAgenticTask(prompt, mode);
+  const shouldWrapAgenticEnvelope = !raw && agenticEnvelope !== false;
+  const agenticPrompt = shouldWrapAgenticEnvelope ? wrapAsAgenticTask(prompt, mode) : prompt;
   const modeTag = raw ? 'raw' : (mode || 'generic');
-  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (자율 반복 모드: ${modeTag}, API 과금 0)`);
-  const result = await generateWithAgent({
-    provider: cliProvider,
-    prompt: agenticPrompt,
-    timeoutMs: AGENTIC_TIMEOUT_MS,
-    signal,
-  });
+  console.log(`[Agent] 🤖 ${cliProvider} 구독 CLI로 콘텐츠 생성 시작 (자율 반복 모드: ${modeTag}, 별도 API 키 불필요 · 플랜 한도 적용)`);
+  const result = await generateWithAgent(
+    {
+      provider: cliProvider,
+      prompt: agenticPrompt,
+      schema,
+      timeoutMs: AGENTIC_TIMEOUT_MS,
+      signal,
+    },
+    agentProductPolicyContext,
+  );
   console.log(`[Agent] ✅ ${cliProvider} 응답 수신 (${result.durationMs}ms, ${result.text.length}자)`);
   return result.text;
 }
@@ -4709,10 +4861,24 @@ export async function researchWithGeminiGrounding(keyword: string): Promise<{
   }
 }
 
-export async function generateStructuredContent(
+type ContentPromptVariant = 'legacy' | 'v3';
+
+/**
+ * Post-draft model calls below use legacy prompts or unstructured responses.
+ * Only the exact legacy driver may execute them; unknown runtime values fail closed.
+ */
+export function shouldRunLegacyPostDraftLlm(promptVariant: unknown): boolean {
+  return promptVariant === 'legacy';
+}
+
+async function generateStructuredContentInternal(
   source: ContentSource,
   options: GenerateOptions = {},
+  promptVariant: ContentPromptVariant,
 ): Promise<StructuredContent> {
+  const allowLegacyPostDraftLlm = shouldRunLegacyPostDraftLlm(promptVariant);
+  const isV3Prompt = promptVariant === 'v3';
+
   // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] image-narrative mode branch
   if (source.contentMode === 'image-narrative') {
     const { buildNarrativeContent } = await import('./imageNarrative/narrativeBuilder/builder.js');
@@ -4722,6 +4888,19 @@ export async function generateStructuredContent(
     if (!imgOpts?.images?.length) {
       throw new Error('[image-narrative] imageNarrative.images 배열이 비어 있습니다.');
     }
+
+    // ✅ 에이전트 모드: vision 추론은 vendor로(위), 글 작성만 구독 CLI로 분리.
+    //   글로벌 엔진(primaryGeminiTextModel)이 agent-*면 텍스트 provider로 승격.
+    let narrativeTextProvider: string = imgOpts.provider ?? 'gemini';
+    try {
+      const cfg = await loadConfig();
+      const textEngine = (cfg as any)?.primaryGeminiTextModel;
+      if (isAgentTextProvider(textEngine)) narrativeTextProvider = textEngine;
+    } catch { /* config 로드 실패 시 vision provider 유지 */ }
+    assertResolvedContentGeneratorProviderAllowed(
+      narrativeTextProvider,
+      options.agentProductPolicyContext,
+    );
 
     const imageInputs = imgOpts.images.map((img, i) => ({
       imageId: `img-${i}`,
@@ -4735,26 +4914,26 @@ export async function generateStructuredContent(
       context: imgOpts.context,
     });
 
-    // ✅ 에이전트 모드: vision 추론은 vendor로(위), 글 작성만 구독 CLI로 분리.
-    //   글로벌 엔진(primaryGeminiTextModel)이 agent-*면 텍스트 provider로 승격.
-    let narrativeTextProvider: string = imgOpts.provider ?? 'gemini';
-    try {
-      const { isAgentTextProvider } = await import('./runtime/modelRegistry.js');
-      const { loadConfig } = await import('./configManager.js');
-      const cfg = await loadConfig();
-      const textEngine = (cfg as any)?.primaryGeminiTextModel;
-      if (isAgentTextProvider(textEngine)) narrativeTextProvider = textEngine;
-    } catch { /* config 로드 실패 시 vision provider 유지 */ }
-
     return buildNarrativeContent(plan, {
       provider: narrativeTextProvider as any,
       context: imgOpts.context,
+      agentProductPolicyContext: options.agentProductPolicyContext,
     });
   }
 
   if (!source?.rawText || !source.rawText.trim()) {
     throw new Error('원본 텍스트가 비어 있습니다. 키워드 또는 URL을 다시 확인해주세요.');
   }
+  // Resolve and enforce the final text provider before acquiring capacity or calling a model.
+  let provider = options.provider ?? source.generator ?? 'gemini';
+  assertResolvedContentGeneratorProviderAllowed(provider, options.agentProductPolicyContext);
+  if (promptVariant === 'v3' && !supportsContentQualityV3NativeSchema(provider)) {
+    throw new Error('[content-quality-v3] provider_schema_unavailable');
+  }
+  const userSelectedProvider = provider; // ✅ [2026-04-11] 사용자가 선택한 원래 엔진 보존 (폴백 방지용)
+  // ✅ 기본 글자수: 3000자 (풍부한 내용 + 최적 분량, 양보다 질 최극상)
+  let minChars = options.minChars ?? 2500; // ✅ [v1.4.14] 3000→2500 (출력 토큰 -15%, SEO 안전 1500자 이상 유지)
+
   // ✅ [v2.7.27] Adaptive Limiter — 메인 스레드 lag 발생 시 동시성 자동 다운
   const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
   const release = await globalLimiter.acquire('content');
@@ -4851,27 +5030,38 @@ export async function generateStructuredContent(
   //   }
   // }
 
-  // 글자수에 따라 최적 provider 자동 선택
-  let provider = options.provider ?? source.generator ?? 'gemini';
-  const userSelectedProvider = provider; // ✅ [2026-04-11] 사용자가 선택한 원래 엔진 보존 (폴백 방지용)
-  // ✅ 기본 글자수: 3000자 (풍부한 내용 + 최적 분량, 양보다 질 최극상)
-  let minChars = options.minChars ?? 2500; // ✅ [v1.4.14] 3000→2500 (출력 토큰 -15%, SEO 안전 1500자 이상 유지)
-
   // ✅ [v1.4.5] config 로드 (Lite Mode 설정 확인용)
   let config: any = null;
-  try {
-    const { loadConfig } = await import('./configManager.js');
-    config = await loadConfig();
-  } catch (e) {
-    // config 로드 실패 시 무시 (기본값 사용)
+  if (!isV3Prompt) {
+    try {
+      const { loadConfig } = await import('./configManager.js');
+      config = await loadConfig();
+    } catch (e) {
+      // config 로드 실패 시 무시 (기본값 사용)
+    }
   }
-  const costPolicy: ContentGenerationCostPolicy = resolveContentGenerationCostPolicy(config);
+  const costPolicy: ContentGenerationCostPolicy = isV3Prompt
+    ? Object.freeze({
+      costSaverOn: true,
+      maxAttempts: 0,
+      allowLlmTitlePatch: false,
+      allowLlmIntroPatch: false,
+      allowQualityGateSelfCritique: false,
+      useFreeQuotaBeforePaid: false,
+      modelTier: 'value',
+      qualityDirective: '',
+    })
+    : resolveContentGenerationCostPolicy(config);
 
   // [SPEC-PROMPT-2026-REFRESH Phase 3-A / v2.10.235] AI 탭 친화 모드 활성 시 minChars 상향
   //   조건: aiTabFriendlyMode === true (사용자 명시 ON) + mode === 'seo'
   //   동작: minChars를 6000으로 상향 (AI 탭 채택 평균 6,000~8,000자).
   //   주의: 자료 외 사실 채우기 금지 — Phase 1 F1~F4 룰이 자동 적용되어 자료 부족 영역은 (자료 부족) 명시.
-  if (config?.aiTabFriendlyMode === true && (source.contentMode === 'seo' || source.contentMode === 'mate' || !source.contentMode)) {
+  if (
+    promptVariant !== 'v3'
+    && config?.aiTabFriendlyMode === true
+    && (source.contentMode === 'seo' || source.contentMode === 'mate' || !source.contentMode)
+  ) {
     if (minChars < 6000) {
       console.log(`[ContentGenerator] 🎯 AI 탭 친화 모드 활성 — minChars ${minChars} → 6000자 상향`);
       minChars = 6000;
@@ -4885,7 +5075,7 @@ export async function generateStructuredContent(
   //   동작: source에 강한 abstention 지시 플래그 세팅 → buildModeBasedPrompt에서 추가 룰 inject.
   //   비용 경고: Sonnet은 Gemini Flash 대비 토큰 ×10 비용 — 사용자 명시 동의 필수.
   //   Gemini Flash 사용자도 base.prompt의 F6 abstention 룰이 적용되므로 무료 효과 일부 누림.
-  if (config?.claudeAbstentionMode === true && provider === 'claude') {
+  if (!isV3Prompt && config?.claudeAbstentionMode === true && provider === 'claude') {
     console.log('[ContentGenerator] 🛡️ Claude Sonnet abstention 모드 활성 — 환각률 ↓, 토큰 ×10 비용');
     (source as any).claudeAbstentionStrong = true;
   }
@@ -4897,22 +5087,36 @@ export async function generateStructuredContent(
   }
   console.log(`[ContentGenerator] 사용 엔진: ${provider} (목표: ${minChars}자)`);
 
-  const openAiContentMaxAttempts = readNonNegativeIntegerEnv('OPENAI_CONTENT_MAX_ATTEMPTS', 0);
+  const openAiContentMaxAttempts = isV3Prompt
+    ? 0
+    : readNonNegativeIntegerEnv('OPENAI_CONTENT_MAX_ATTEMPTS', 0);
   const baseMaxAttempts = provider === 'openai'
     ? Math.max(openAiContentMaxAttempts, costPolicy.maxAttempts)
     : costPolicy.maxAttempts;
-  const sameEngineReliabilityMinAttempts = readNonNegativeIntegerEnv('CONTENT_SAME_ENGINE_MIN_ATTEMPTS', 1);
-  const promptRepairMinAttempts = source.customPrompt?.trim() ? 2 : 0;
+  const sameEngineReliabilityMinAttempts = isV3Prompt
+    ? 0
+    : readNonNegativeIntegerEnv('CONTENT_SAME_ENGINE_MIN_ATTEMPTS', 1);
+  const promptRepairMinAttempts = !isV3Prompt && source.customPrompt?.trim() ? 2 : 0;
   const generationQualityMode = String(source.contentMode || 'seo');
-  const qualityTargetMinAttempts = isQuality90Mode(generationQualityMode) ? 2 : 0;
-  const MAX_ATTEMPTS = Math.max(baseMaxAttempts, sameEngineReliabilityMinAttempts, promptRepairMinAttempts, qualityTargetMinAttempts);
+  const qualityTargetMinAttempts = !isV3Prompt && isQuality90Mode(generationQualityMode) ? 2 : 0;
+  const configuredMaxAttempts = Math.max(
+    baseMaxAttempts,
+    sameEngineReliabilityMinAttempts,
+    promptRepairMinAttempts,
+    qualityTargetMinAttempts,
+  );
+  const MAX_ATTEMPTS = isV3Prompt
+    ? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY.maxTopLevelRetries
+    : configuredMaxAttempts;
   const RETRY_DELAYS = [0, 1200, 2000, 3000, 4500, 6000, 8000];
   console.log(`[ContentGenerator] 품질 정책: tier=${costPolicy.modelTier}, costSaver=${costPolicy.costSaverOn ? 'ON' : 'OFF'}, same-engine retries=${MAX_ATTEMPTS}, reliability=${sameEngineReliabilityMinAttempts}, promptRepair=${promptRepairMinAttempts}, quality90=${qualityTargetMinAttempts}`);
 
   // ✅ Gemini 전용 강화 재시도 시스템
   // provider 내부 재시도 위에 전체 파이프라인 재실행이 겹치지 않도록 기본 1회만 허용.
   let networkErrorCount = 0;
-  const GEMINI_MAX_RETRIES = Math.max(0, Number(process.env.GEMINI_NETWORK_MAX_RETRIES ?? 1));
+  const GEMINI_MAX_RETRIES = isV3Prompt
+    ? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY.maxNetworkRetries
+    : Math.max(0, Number(process.env.GEMINI_NETWORK_MAX_RETRIES ?? 1));
   const GEMINI_RETRY_DELAYS = [1200, 2000, 3000, 4500, 6000, 8000, 10000];
 
   if (provider === 'gemini') {
@@ -4920,19 +5124,23 @@ export async function generateStructuredContent(
   }
 
   // ✅ 성공률 통계 추적
-  const statsFile = path.join(app.getPath('userData'), 'content-generation-stats.json');
+  const statsFile = promptVariant === 'v3'
+    ? undefined
+    : path.join(app.getPath('userData'), 'content-generation-stats.json');
   let stats = { total: 0, success: 0, failed: 0, attempts: { first: 0, second: 0, third: 0, fourth: 0 } };
 
-  try {
-    if (fsSync.existsSync(statsFile)) {
-      const statsData = fsSync.readFileSync(statsFile, 'utf-8');
-      stats = JSON.parse(statsData);
+  if (statsFile) {
+    try {
+      if (fsSync.existsSync(statsFile)) {
+        const statsData = fsSync.readFileSync(statsFile, 'utf-8');
+        stats = JSON.parse(statsData);
+      }
+    } catch (error) {
+      console.warn('[ContentGenerator] 통계 파일 읽기 실패, 새로 시작:', (error as Error).message);
     }
-  } catch (error) {
-    console.warn('[ContentGenerator] 통계 파일 읽기 실패, 새로 시작:', (error as Error).message);
-  }
 
-  stats.total++;
+    stats.total++;
+  }
 
   // LLM이 목표치보다 짧게 생성되는 경향을 보완하기 위해
   // 연령대/사용자 설정 최소 글자수(minChars)에 적절한 여유를 두고 요청합니다.
@@ -4962,6 +5170,7 @@ export async function generateStructuredContent(
   let _distinctnessJudgeUsed = false; // ✅ [Gap C 시맨틱] 섹션 변별 LLM 판정 — 생성당 1회만 호출(비용 가드)
   let _affiliateAuthenticityRetryUsed = false;
   let _shoppingValidationRetryUsed = false;
+  let v3TitleContractRetriesUsed = 0;
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
   const signal = options.signal;
 
@@ -4971,7 +5180,11 @@ export async function generateStructuredContent(
   ): Promise<string> => {
     const repairChars = Math.min(4500, Math.max(1500, expectedBodyChars));
     if (provider === 'agent-codex' || provider === 'agent-claude') {
-      return callAgent(provider, prompt, { signal, raw: true });
+      return callAgent(provider, prompt, {
+        signal,
+        raw: true,
+        agentProductPolicyContext: options.agentProductPolicyContext,
+      });
     }
     if (provider === 'openai') return callOpenAI(prompt, 0.2, repairChars, signal);
     if (provider === 'claude') return callClaude(prompt, 0.2, repairChars, signal);
@@ -5001,6 +5214,7 @@ export async function generateStructuredContent(
       console.log(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: 요청 글자수 ${adjustedMinChars}자`);
 
       if (!supplementalInstructionInitialized) {
+        if (!isV3Prompt) {
         // 이미지 존재는 제품을 직접 보거나 사용했다는 증거가 아니다.
         if (source.images && source.images.length > 0) {
           extraInstruction += `\n\n[참고 이미지 정보]\n사용 가능한 제품 이미지 ${source.images.length}장이 있습니다. 이미지에서 확인되지 않은 감각·크기·사용 장면은 만들지 마세요.`;
@@ -5036,37 +5250,40 @@ export async function generateStructuredContent(
 - 작성자 실사용 여부는 AFFILIATE AUTHENTICITY CONTRACT의 근거 모드를 따른다.`;
         console.log('[ContentGenerator] 🛒 쇼핑커넥트 모드: 근거 기반 친구 말투 보정 적용');
       }
+        }
         supplementalInstructionInitialized = true;
       }
 
       let metrics: { searchVolume?: number; documentCount?: number } | undefined;
-      try {
-        const primaryKeyword = getPrimaryKeywordFromSource(source);
-        if (primaryKeyword) {
-          console.log(`[ContentGenerator] 키워드 "${primaryKeyword}" 지표 수집 시작...`);
-          const config = await loadConfig();
-          const searchVol = await trendAnalyzer.getSearchVolume(
-            primaryKeyword,
-            config.naverAdApiKey || '',
-            config.naverAdSecretKey || '',
-            config.naverAdCustomerId || ''
-          );
-          const docCount = await trendAnalyzer.getDocumentCount(
-            primaryKeyword,
-            config.naverDatalabClientId || '',
-            config.naverDatalabClientSecret || ''
-          );
+      if (!isV3Prompt) {
+        try {
+          const primaryKeyword = getPrimaryKeywordFromSource(source);
+          if (primaryKeyword) {
+            console.log(`[ContentGenerator] 키워드 "${primaryKeyword}" 지표 수집 시작...`);
+            const config = await loadConfig();
+            const searchVol = await trendAnalyzer.getSearchVolume(
+              primaryKeyword,
+              config.naverAdApiKey || '',
+              config.naverAdSecretKey || '',
+              config.naverAdCustomerId || ''
+            );
+            const docCount = await trendAnalyzer.getDocumentCount(
+              primaryKeyword,
+              config.naverDatalabClientId || '',
+              config.naverDatalabClientSecret || ''
+            );
 
-          if (searchVol >= 0 || docCount > 0) {
-            metrics = {
-              searchVolume: searchVol >= 0 ? searchVol : undefined,
-              documentCount: docCount > 0 ? docCount : undefined
-            };
-            console.log(`[ContentGenerator] ✅ "${primaryKeyword}" 지표 주입 완료: 검색량 ${searchVol}, 문서량 ${docCount}`);
+            if (searchVol >= 0 || docCount > 0) {
+              metrics = {
+                searchVolume: searchVol >= 0 ? searchVol : undefined,
+                documentCount: docCount > 0 ? docCount : undefined
+              };
+              console.log(`[ContentGenerator] ✅ "${primaryKeyword}" 지표 주입 완료: 검색량 ${searchVol}, 문서량 ${docCount}`);
+            }
           }
+        } catch (err) {
+          console.warn('[ContentGenerator] ⚠️ 네이버 지표 수집 실패 (무시하고 진행):', (err as Error).message);
         }
-      } catch (err) {
-        console.warn('[ContentGenerator] ⚠️ 네이버 지표 수집 실패 (무시하고 진행):', (err as Error).message);
       }
 
       // ✅ [2026-02-11] buildPrompt() 데드 호출 제거 - buildModeBasedPrompt()만 사용
@@ -5075,65 +5292,72 @@ export async function generateStructuredContent(
       // ✅ 다양성 극대화를 위해 temperature 높임 (매번 다른 글 생성)
       // ✅ 모드별 프롬프트 및 온도 설정 가져오기
       const mode = (source.contentMode || 'seo') as PromptMode;
-      let systemPrompt = buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
+      let systemPrompt = isV3Prompt
+        ? buildContentQualityV3Prompt(createContentQualityV3InitialPromptOptions({
+            mode,
+            source,
+            minChars,
+          }))
+        : buildModeBasedPrompt(source, mode, metrics, adjustedMinChars);
 
-      systemPrompt += `\n\n${costPolicy.qualityDirective}`;
+      if (!isV3Prompt) {
+        systemPrompt += `\n\n${costPolicy.qualityDirective}`;
 
-      if (extraInstruction.trim()) {
-        systemPrompt += `\n\n[RUNTIME RETRY AND CONTEXT INSTRUCTIONS]\n${extraInstruction.trim()}`;
-      }
-
-      if (source.contentPolicyPrompt) {
-        systemPrompt = `${source.contentPolicyPrompt}\n\n${systemPrompt}`;
-        console.log('[ContentPolicy] Recent-post context injected before model generation.');
-      }
-
-      // ✅ [v2.10.192 Phase 3.9] 자동 학습 보완 지시 — 누적 SERP history에서 자주 미달하는 신호 자동 추출
-      //   첫 글~4건 글까지는 데이터 부족 → skip (silent)
-      //   5건+ 누적 시 가장 자주 미달한 신호 top 2를 prompt prefix로 주입
-      //   추정 효과 0 — 실측 SERP 비교 결과 기반
-      try {
-        const { buildAdaptiveLearningDirective } = await import('./analytics/serpHistory.js');
-        const { app } = await import('electron');
-        const userDataPath = app.getPath('userData');
-        const adaptiveDirective = buildAdaptiveLearningDirective(userDataPath, 30, 2);
-        if (adaptiveDirective) {
-          systemPrompt = adaptiveDirective + '\n' + systemPrompt;
-          console.log('[AdaptiveLearning] 📚 자동 학습 보완 지시 주입 (누적 history 기반)');
+        if (extraInstruction.trim()) {
+          systemPrompt += `\n\n[RUNTIME RETRY AND CONTEXT INSTRUCTIONS]\n${extraInstruction.trim()}`;
         }
-      } catch { /* silent — 정상 흐름 유지 */ }
 
-      // ✅ [v2.10.173] URL 모드 전용 강화 지시 — 사용자 요청 "원본 100% + 더 좋은 퀄리티"
-      //   사용자 보고: "URL로 글생성을 한다면 URL원본보다 훨씬 퀄리티 좋고 잘써줘야되고
-      //                원본내용이 100% 다들어있어야되는거아닌가요??"
-      //   조치: URL 모드일 때 system 프롬프트 앞에 *원본 보존 + 퀄리티 업그레이드* 지시 prepend
-      const urlModeDirective = buildUrlModeDirective(source);
-      if (urlModeDirective) {
-        systemPrompt = urlModeDirective + systemPrompt;
-        console.log('[ContentGenerator] 📜 URL 모드 강화 지시 prepend (원본 100% + 퀄리티 업그레이드)');
+        if (source.contentPolicyPrompt) {
+          systemPrompt = `${source.contentPolicyPrompt}\n\n${systemPrompt}`;
+          console.log('[ContentPolicy] Recent-post context injected before model generation.');
+        }
+
+        // Legacy-only prompt augmentation. V3 keeps one compact, cache-stable system contract.
+        try {
+          const { buildAdaptiveLearningDirective } = await import('./analytics/serpHistory.js');
+          const { app } = await import('electron');
+          const userDataPath = app.getPath('userData');
+          const adaptiveDirective = buildAdaptiveLearningDirective(userDataPath, 30, 2);
+          if (adaptiveDirective) {
+            systemPrompt = adaptiveDirective + '\n' + systemPrompt;
+            console.log('[AdaptiveLearning] 📚 자동 학습 보완 지시 주입 (누적 history 기반)');
+          }
+        } catch { /* silent — 정상 흐름 유지 */ }
+
+        const urlModeDirective = buildUrlModeDirective(source);
+        if (urlModeDirective) {
+          systemPrompt = urlModeDirective + systemPrompt;
+          console.log('[ContentGenerator] 📜 URL 모드 강화 지시 prepend (원본 100% + 퀄리티 업그레이드)');
+        }
+
+        const phase4SkipDict =
+          isLlmRubricEnabled({ useLlmRubric: (source as any).useLlmRubric })
+          || (source as any).skipDictInjection === true;
+        if (phase4SkipDict) {
+          const personaCard = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
+          systemPrompt = personaCard + '\n' + systemPrompt;
+          console.log('[ContentGenerator] 🎭 페르소나 카드 prepend (skipDictInjection 모드)');
+        }
       }
 
-      // Phase 4: skipDictInjection 토글 ON 시 페르소나 카드를 시스템 프롬프트 헤더에 prepend.
-      // 후처리 어휘 주입이 꺼진 모드에서 LLM이 글 전체 동안 일관된 화자 페르소나를 유지하도록 보강.
-      const phase4SkipDict =
-        isLlmRubricEnabled({ useLlmRubric: (source as any).useLlmRubric })
-        || (source as any).skipDictInjection === true;
-      if (phase4SkipDict) {
-        const personaCard = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
-        systemPrompt = personaCard + '\n' + systemPrompt;
-        console.log('[ContentGenerator] 🎭 페르소나 카드 prepend (skipDictInjection 모드)');
-      }
-
-      // ✅ [v2.10.172] 사용자 요청 — Gemini 본문 생성은 *반드시* grounding ON (팩트 보장)
+      // ✅ [v2.10.172] 레거시 Gemini 본문 생성은 *반드시* grounding ON (팩트 보장)
       //   기존 (v1.4.4 ~ v2.10.171): smartGrounding 동적 결정
       //     - URL 모드: rawText < 1000 → ON, 그 외 OFF (v2.10.170 비용 절감)
       //     - 키워드 모드: rawText < 2000 OR !hasKeywordInRawText → ON
-      //   변경: 본문 생성은 항상 grounding ON. 사용자 enableSearchGrounding 토글만 따름.
+      //   변경: 레거시 본문 생성은 항상 grounding ON. 사용자 enableSearchGrounding 토글만 따름.
       //   사유: "팩트가 꼭 필요" — 환각/추정 차단이 비용 $0.035/글보다 우선
+      // Content Quality V3는 고정 upstream 근거만 사용해 비용과 품질 평가를 재현할 수 있도록
+      // primary schema 호출의 grounding을 끈다. 별도 upstream 리서치/근거 수집은 유지한다.
       const rawTextLen = (source.rawText || '').length;
       const isUrlMode = !!source.url || source.sourceType === 'naver_news' || source.sourceType === 'daum_news';
       const smartGrounding = true;
-      console.log(`[ContentGenerator] 🧠 Grounding: ON (강제) | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
+      const primaryDraftGrounding =
+        resolveContentQualityV3GeminiGroundingOverride(promptVariant) ?? smartGrounding;
+      if (isV3Prompt) {
+        console.log('[ContentGenerator] 🧠 V3 schema generation: Grounding OFF (fixed upstream evidence; reproducible cost/quality gate)');
+      } else {
+        console.log(`[ContentGenerator] 🧠 Grounding: ON (강제) | mode=${isUrlMode ? 'URL' : 'KEYWORD'}, rawText=${rawTextLen}자`);
+      }
 
       // ✅ [Phase 7.4-y] 모드별 호출 온도는 contentTemperaturePolicy 단일 소스에서 관리.
       const temperature = resolvePromptTemperature(mode);
@@ -5162,7 +5386,13 @@ export async function generateStructuredContent(
 
         // ✅ [v2.10.28] signal을 callX에 직접 전달 — SDK 레벨 fetch abort
         if (provider === 'agent-codex' || provider === 'agent-claude') {
-          rawResponse = await withAbortRace(callAgent(provider, systemPrompt, { signal, mode }));
+          rawResponse = await withAbortRace(callAgent(provider, systemPrompt, {
+            signal,
+            mode,
+            agenticEnvelope: !isV3Prompt,
+            schema: isV3Prompt ? CONTENT_QUALITY_V3_OUTPUT_SCHEMA : undefined,
+            agentProductPolicyContext: options.agentProductPolicyContext,
+          }));
         } else if (provider === 'openai') {
           rawResponse = await withAbortRace(callOpenAI(systemPrompt, temperature, adjustedMinChars, signal));
         } else if (provider === 'claude') {
@@ -5171,8 +5401,14 @@ export async function generateStructuredContent(
           // ✅ [2026-01-25] Perplexity AI (Sonar) 실시간 검색 기반 콘텐츠 생성
           rawResponse = await withAbortRace(callPerplexity(systemPrompt, temperature, adjustedMinChars, signal));
         } else {
-          // ✅ [v1.4.4] 동적 Grounding 결정 적용
-          rawResponse = await withAbortRace(callGemini(systemPrompt, temperature, adjustedMinChars, { useGrounding: smartGrounding, signal }));
+          // 레거시는 기존 grounding을 유지하고 exact V3 schema 호출만 OFF.
+          rawResponse = await withAbortRace(callGemini(systemPrompt, temperature, adjustedMinChars, {
+            useGrounding: primaryDraftGrounding,
+            signal,
+            executionPolicy: isV3Prompt
+              ? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY
+              : undefined,
+          }));
         }
         raw = rawResponse; // Assign rawResponse to raw for subsequent processing
         console.log(`[ContentGenerator] API 완료: ${provider} (${Date.now() - apiStart}ms)`);
@@ -5274,22 +5510,26 @@ export async function generateStructuredContent(
 
         // ✅ [2026-04-11 FIX] 제목 개행 제거 — AI가 selectedTitle에 줄바꿈을 넣으면
         // 제목이 잘리거나 본문 첫 줄이 제목에 포함되는 버그 발생
-        if (parsed.selectedTitle && typeof parsed.selectedTitle === 'string') {
-          parsed.selectedTitle = parsed.selectedTitle.replace(/[\r\n]+/g, ' ').trim();
-        }
-        if (Array.isArray(parsed.titleCandidates)) {
-          parsed.titleCandidates = parsed.titleCandidates.map((c: any) => ({
-            ...c,
-            text: typeof c?.text === 'string' ? c.text.replace(/[\r\n]+/g, ' ').trim() : c?.text,
-          }));
+        if (!isV3Prompt) {
+          if (parsed.selectedTitle && typeof parsed.selectedTitle === 'string') {
+            parsed.selectedTitle = parsed.selectedTitle.replace(/[\r\n]+/g, ' ').trim();
+          }
+          if (Array.isArray(parsed.titleCandidates)) {
+            parsed.titleCandidates = parsed.titleCandidates.map((c: any) => ({
+              ...c,
+              text: typeof c?.text === 'string' ? c.text.replace(/[\r\n]+/g, ' ').trim() : c?.text,
+            }));
+          }
         }
 
-        const looseRecovery = recoverLooseStructuredContentFields(parsed);
-        if (looseRecovery.bodyRecovered || looseRecovery.headingsRecovered) {
-          console.warn(
-            `[ContentGenerator] 느슨한 AI 응답 구조 복구: ` +
-            `body=${looseRecovery.bodySource || 'none'}, headings=${looseRecovery.headingsSource || 'none'}`
-          );
+        if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'recover-loose-structured-content-fields')) {
+          const looseRecovery = recoverLooseStructuredContentFields(parsed);
+          if (looseRecovery.bodyRecovered || looseRecovery.headingsRecovered) {
+            console.warn(
+              `[ContentGenerator] 느슨한 AI 응답 구조 복구: ` +
+              `body=${looseRecovery.bodySource || 'none'}, headings=${looseRecovery.headingsSource || 'none'}`
+            );
+          }
         }
       } catch (parseError) {
         console.error(`[ContentGenerator] 시도 ${attempt + 1}/${MAX_ATTEMPTS + 1}: JSON 파싱 실패 - 재시도 필요:`, (parseError as Error).message);
@@ -5308,9 +5548,72 @@ export async function generateStructuredContent(
         }
       }
 
+      if (isV3Prompt) {
+        const v3TitleContract = resolveContentQualityV3TitleContract(source);
+        const v3Finalization = finalizeContentQualityV3Draft(parsed, {
+          titleContract: v3TitleContract,
+        });
+        const v3Decision = decideContentQualityV3Finalization(v3Finalization, {
+          attempt,
+          maxAttempts: MAX_ATTEMPTS,
+          titleContractRetriesUsed: v3TitleContractRetriesUsed,
+        });
+        v3TitleContractRetriesUsed = v3Decision.titleContractRetriesUsed;
+
+        if (v3Decision.action === 'return') {
+          const v3BusinessContent = source.contentMode === 'business'
+            ? enforceContentQualityV3BusinessGuard(v3Decision.content, source)
+            : v3Decision.content;
+          const v3GuardDecision = source.contentMode === 'affiliate'
+            ? evaluateContentQualityV3AffiliateGuard({
+              content: v3Decision.content,
+              source,
+              minimumBodyChars: validationMinChars,
+              authenticityRetryAvailable: !_affiliateAuthenticityRetryUsed && attempt < MAX_ATTEMPTS,
+              shoppingQualityRetryAvailable: !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS,
+            })
+            : { action: 'accept' as const, content: v3BusinessContent };
+
+          if (v3GuardDecision.action === 'retry-authenticity') {
+            _affiliateAuthenticityRetryUsed = true;
+            lastFailReason = v3GuardDecision.reason;
+            extraInstruction = `${v3GuardDecision.instruction}\n${extraInstruction}`;
+            continue;
+          }
+          if (v3GuardDecision.action === 'retry-shopping-quality') {
+            _shoppingValidationRetryUsed = true;
+            lastFailReason = v3GuardDecision.reason;
+            extraInstruction = `${v3GuardDecision.instruction}\n${extraInstruction}`;
+            continue;
+          }
+          if (v3GuardDecision.action === 'fail') {
+            throw new Error(v3GuardDecision.message);
+          }
+
+          return registerContentQualityV3GeneratedContent(
+            materializeContentQualityV3ForLegacyConsumers(v3GuardDecision.content),
+            { source, minimumBodyChars: validationMinChars },
+          );
+        }
+
+        lastFailReason = `[content-quality-v3] ${v3Decision.issueCode}`;
+        console.warn(`[ContentGenerator] ${lastFailReason}`);
+        if (v3Decision.action === 'retry') {
+          extraInstruction = buildContentQualityV3FinalizationRetryInstruction(
+            v3Decision.issueCode,
+            v3TitleContract,
+          );
+          continue;
+        }
+        throw new Error(`[content-quality-v3] ${v3Decision.issueCode}`);
+      }
+
       // ✅ CRITICAL: bodyPlain 복구 로직 (Gemini가 'body' 필드로 반환하는 경우 처리)
       // AI가 bodyPlain 대신 body로 반환하거나, headings에만 content가 있는 경우 복구
-      if (!parsed.bodyPlain || parsed.bodyPlain.trim().length === 0) {
+      if (
+        shouldRunLegacySemanticPostDraftMutation(promptVariant, 'recover-missing-body-plain')
+        && (!parsed.bodyPlain || parsed.bodyPlain.trim().length === 0)
+      ) {
         // 1차: 'body' 필드에서 복구 시도
         if ((parsed as any).body && typeof (parsed as any).body === 'string' && (parsed as any).body.trim().length > 0) {
           parsed.bodyPlain = (parsed as any).body;
@@ -5356,10 +5659,14 @@ export async function generateStructuredContent(
 
       // ⚠️ CRITICAL: 중복 소제목 제거 (AI가 같은 소제목을 반복하는 경우)
       if (parsed.bodyPlain && parsed.headings && parsed.headings.length > 0) {
-        parsed.bodyPlain = removeDuplicateHeadings(parsed.bodyPlain, parsed.headings);
+        if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'remove-duplicate-headings')) {
+          parsed.bodyPlain = removeDuplicateHeadings(parsed.bodyPlain, parsed.headings);
+        }
 
         // ⚠️ CRITICAL: 전체 글 구조 반복 감지 및 제거
-        parsed.bodyPlain = removeRepeatedFullContent(parsed.bodyPlain, parsed.headings);
+        if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'remove-repeated-full-content')) {
+          parsed.bodyPlain = removeRepeatedFullContent(parsed.bodyPlain, parsed.headings);
+        }
       }
 
       // ⚠️ 소제목 순서 및 중복 검증 (첫 시도 실패 → 1회 재시도 → 통과)
@@ -5412,27 +5719,35 @@ export async function generateStructuredContent(
         parsed.quality.warnings.push(`검증 경고: ${validationErrors.slice(0, 2).join(', ')}`);
       }
 
-      validateStructuredContent(parsed, source);
+      if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'validate-structured-content')) {
+        validateStructuredContent(parsed, source);
+      }
 
       // ✅ 제목 전체가 그대로 붙어버린 소제목들에서 제목 부분을 한 번 더 제거 (모드/카테고리 무관 공통 처리)
-      stripSelectedTitlePrefixFromHeadings(parsed);
+      if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'strip-selected-title-prefix-from-headings')) {
+        stripSelectedTitlePrefixFromHeadings(parsed);
+      }
 
       // ✅ [2026-07-03] 소제목 앞 "{화제 인물}까지 " 매달린 훅 제거 (실명 강제 프롬프트 오버적용).
       //   (a) 즉시 반복("박지성까지 박지성...")은 컨텍스트 무관, (b) 제목 주어 매달림("박지성까지 팬들이...")은
       //   연예/스포츠 등 인물 중심 글에서만(맛집 "김치찌개까지 맛있는" 통합형 오탐 방지).
-      let _personCentricHeadings = false;
-      try {
-        const { inferHallucinationCategory } = require('./content/hallucinationCheck');
-        _personCentricHeadings = inferHallucinationCategory({
-          contentMode: source.contentMode,
-          toneStyle: source.toneStyle,
-          categoryHint: source.categoryHint,
-        }) === 'celebrity';
-      } catch { /* best-effort */ }
-      stripLeadingSubjectHookFromHeadings(parsed, _personCentricHeadings);
+      if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'strip-leading-subject-hook-from-headings')) {
+        let _personCentricHeadings = false;
+        try {
+          const { inferHallucinationCategory } = require('./content/hallucinationCheck');
+          _personCentricHeadings = inferHallucinationCategory({
+            contentMode: source.contentMode,
+            toneStyle: source.toneStyle,
+            categoryHint: source.categoryHint,
+          }) === 'celebrity';
+        } catch { /* best-effort */ }
+        stripLeadingSubjectHookFromHeadings(parsed, _personCentricHeadings);
+      }
 
       // ✅ [소제목 최적화 마스터 모듈] - 구조 검증 후, 모드별 헤딩 타이틀만 보정
-      optimizeHeadingsForMode(parsed, source);
+      if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'optimize-headings-for-mode')) {
+        optimizeHeadingsForMode(parsed, source);
+      }
 
       // ✅ [소제목 본문 동기화] - Stage 1 짧은 소제목을 Stage 2 본문의 전체 소제목으로 업데이트
       syncHeadingsWithBodyPlain(parsed);
@@ -5462,13 +5777,19 @@ export async function generateStructuredContent(
         }
       }
 
-      if (!_useKwTitle && (mode === 'seo' || mode === 'mate')) {
+      if (allowLegacyPostDraftLlm && !_useKwTitle && (mode === 'seo' || mode === 'mate')) {
         const seoKeyword = getPrimaryKeywordFromSource(source);
         const issues = computeSeoTitleCriticalIssues(parsed.selectedTitle, seoKeyword);
         if (issues.length > 0 && attempt < MAX_ATTEMPTS) {
           if (costPolicy.allowLlmTitlePatch) {
             try {
-              const patch = await generateTitleOnlyPatch(source, 'seo', source.categoryHint, provider);
+              const patch = await generateTitleOnlyPatch(
+                source,
+                'seo',
+                source.categoryHint,
+                provider,
+                options.agentProductPolicyContext,
+              );
               if (patch.selectedTitle) parsed.selectedTitle = patch.selectedTitle;
               if (patch.titleCandidates && patch.titleCandidates.length > 0) {
                 parsed.titleCandidates = patch.titleCandidates;
@@ -5507,13 +5828,19 @@ export async function generateStructuredContent(
         }
       }
 
-      if (!_useKwTitle && mode === 'homefeed') {
+      if (allowLegacyPostDraftLlm && !_useKwTitle && mode === 'homefeed') {
         const hfKeyword = getPrimaryKeywordFromSource(source);
         const titleIssues = computeHomefeedTitleCriticalIssues(parsed.selectedTitle, hfKeyword);
         if (titleIssues.length > 0 && attempt < MAX_ATTEMPTS) {
           if (costPolicy.allowLlmTitlePatch) {
             try {
-              const patch = await generateTitleOnlyPatch(source, 'homefeed', source.categoryHint, provider);
+              const patch = await generateTitleOnlyPatch(
+                source,
+                'homefeed',
+                source.categoryHint,
+                provider,
+                options.agentProductPolicyContext,
+              );
               if (patch.selectedTitle) parsed.selectedTitle = patch.selectedTitle;
               if (patch.titleCandidates && patch.titleCandidates.length > 0) {
                 parsed.titleCandidates = patch.titleCandidates;
@@ -5545,8 +5872,13 @@ export async function generateStructuredContent(
 
         // ✅ 비용 절감 모드 기본 ON — 도입부 재작성 비활성화 (사용자 명시 OFF 시에만 동작)
         const introIssues = computeHomefeedIntroCriticalIssues(parsed.introduction);
-        if (introIssues.length > 0 && attempt < MAX_ATTEMPTS && costPolicy.allowLlmIntroPatch) {
-          const patch = await generateHomefeedIntroOnlyPatch(source, parsed, provider);
+        if (allowLegacyPostDraftLlm && introIssues.length > 0 && attempt < MAX_ATTEMPTS && costPolicy.allowLlmIntroPatch) {
+          const patch = await generateHomefeedIntroOnlyPatch(
+            source,
+            parsed,
+            provider,
+            options.agentProductPolicyContext,
+          );
           if (patch?.introduction) {
             parsed.introduction = patch.introduction;
             if (!parsed.quality) {
@@ -5575,7 +5907,11 @@ export async function generateStructuredContent(
 
       // ✅ [v1.4.18] 소제목 키워드 누락 사후 패치 — 재시도 없이 즉시 보정
       // SEO/홈판 모드에서 메인 키워드가 빠진 소제목을 자동으로 키워드 포함 형태로 변환
-      if ((mode === 'seo' || mode === 'homefeed' || mode === 'mate') && Array.isArray(parsed.headings)) {
+      if (
+        shouldRunLegacySemanticPostDraftMutation(promptVariant, 'apply-heading-keyword-patch')
+        && (mode === 'seo' || mode === 'homefeed' || mode === 'mate')
+        && Array.isArray(parsed.headings)
+      ) {
         const primaryKw = getPrimaryKeywordFromSource(source);
         if (primaryKw) {
           // ✅ [v2.10.227] 사용자 보고: 소제목 "5월 5월 25일 이후 잔액 소멸 이유" (5월 중복)
@@ -5620,7 +5956,11 @@ export async function generateStructuredContent(
       // ✅ [SPEC-KEYWORD-ENDGAME Phase 3] 세부키워드 커버리지 게이트 (SEO 모드만) — 서브키워드
       //   (사용자 추가분+블루오션)가 본문 어디에도 없으면 관련 소제목에 패치(롱테일 다면 노출).
       //   본문 어디든 있으면 자연 커버로 무변경. fail-open.
-      if (mode === 'seo' && Array.isArray(parsed.headings)) {
+      if (
+        shouldRunLegacySemanticPostDraftMutation(promptVariant, 'enforce-sub-keyword-coverage')
+        && mode === 'seo'
+        && Array.isArray(parsed.headings)
+      ) {
         try {
           const _allKw: string[] = ((source.metadata as any)?.keywords || []).map((k: any) => String(k || '').trim()).filter(Boolean);
           const _subKws = _allKw.slice(1);
@@ -5773,7 +6113,8 @@ export async function generateStructuredContent(
       //   "각 H2가 서로 다른 정보 단위인가"를 직접 묻는다. 기본 OFF, ungrounded 키워드 글 한정,
       //   생성당 1회만 호출(비용 가드), fail-open(판정 실패는 통과 처리).
       if (
-        isSemanticDistinctnessJudgeEnabled()
+        allowLegacyPostDraftLlm
+        && isSemanticDistinctnessJudgeEnabled()
         && !_distinctnessJudgeUsed
         && mode !== 'affiliate'
         && !isShoppingConnectMode
@@ -5783,7 +6124,13 @@ export async function generateStructuredContent(
         const judgeCaller = async (jp: string): Promise<string> => {
           const jt = 0.2; // 결정적 JSON 유도
           const jc = 300; // <1000 → 60초 타임아웃 + 짧은 JSON 응답 길이거부 없음 (각 호출 내부 타임아웃+signal로 abort)
-          if (provider === 'agent-codex' || provider === 'agent-claude') return callAgent(provider, jp, { signal, raw: true });
+          if (provider === 'agent-codex' || provider === 'agent-claude') {
+            return callAgent(provider, jp, {
+              signal,
+              raw: true,
+              agentProductPolicyContext: options.agentProductPolicyContext,
+            });
+          }
           if (provider === 'openai') return callOpenAI(jp, jt, jc, signal);
           if (provider === 'claude') return callClaude(jp, jt, jc, signal);
           if (provider === 'perplexity') return callPerplexity(jp, jt, jc, signal);
@@ -5822,12 +6169,18 @@ export async function generateStructuredContent(
       // ✅ [2026-02-01] 쇼핑커넥트(affiliate) 모드 제목 검증 및 패치
       // ✅ [FIX] 모든 시도에서 제목 패치 적용 (attempt < MAX_ATTEMPTS 조건 제거)
       // ✅ [2026-02-04 FIX] isShoppingConnectMode도 체크하여 URL 기반 쇼핑커넥트에서도 제목 패치 작동
-      if (!_useKwTitle && (isShoppingConnectMode || mode === 'affiliate')) {
+      if (allowLegacyPostDraftLlm && !_useKwTitle && (isShoppingConnectMode || mode === 'affiliate')) {
         const titleIssues = computeAffiliateTitleCriticalIssues(parsed.selectedTitle, source);
         if (titleIssues.length > 0 && costPolicy.allowLlmTitlePatch) {
           try {
             console.log(`[ContentGenerator] 🛒 쇼핑커넥트 제목 이슈 감지: ${titleIssues.join(', ')}`);
-            const patch = await generateTitleOnlyPatch(source, 'affiliate', source.categoryHint, provider);
+            const patch = await generateTitleOnlyPatch(
+              source,
+              'affiliate',
+              source.categoryHint,
+              provider,
+              options.agentProductPolicyContext,
+            );
             if (patch.selectedTitle) {
               console.log(`[ContentGenerator] ✅ 제목 패치 적용: "${patch.selectedTitle}"`);
               parsed.selectedTitle = patch.selectedTitle;
@@ -5857,10 +6210,17 @@ export async function generateStructuredContent(
         }
       }
 
-      const optimized = optimizeForViral(parsed, source);
+      const optimized = shouldRunLegacySemanticPostDraftMutation(promptVariant, 'optimize-for-viral')
+        ? optimizeForViral(parsed, source)
+        : parsed;
 
       // ⚡ 과대광고 필터링 (AI 대신 후처리로 이동 - 타임아웃 방지)
-      if (optimized.bodyPlain) {
+      // V3에서는 광범위 치환(수치·의학·가격 표현 포함)이 사실 의미를 바꿀 수 있어 전체 스킵.
+      // HTML/가짜 출처/escape/internal-marker 등 검증 가능한 subtractive cleanup은 아래에서 유지한다.
+      if (
+        shouldRunLegacySemanticPostDraftMutation(promptVariant, 'filter-exaggerated-content')
+        && optimized.bodyPlain
+      ) {
         console.log('[ContentGenerator] 과대광고 필터링 적용 중...');
         optimized.bodyPlain = filterExaggeratedContent(optimized.bodyPlain);
       }
@@ -5968,11 +6328,13 @@ export async function generateStructuredContent(
       // 검증: 질과 길이의 균형
       if (plainLength >= validationMinChars || finalNearThresholdQualityEvaluation) {
         // ✅ 성공 통계 업데이트
-        stats.success++;
-        if (attempt === 0) stats.attempts.first++;
-        else if (attempt === 1) stats.attempts.second++;
-        else if (attempt === 2) stats.attempts.third++;
-        else if (attempt === 3) stats.attempts.fourth++;
+        if (statsFile) {
+          stats.success++;
+          if (attempt === 0) stats.attempts.first++;
+          else if (attempt === 1) stats.attempts.second++;
+          else if (attempt === 2) stats.attempts.third++;
+          else if (attempt === 3) stats.attempts.fourth++;
+        }
 
         const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
         console.log(`[ContentGenerator] ✅ 성공! (시도 ${attempt + 1}번째) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
@@ -5990,39 +6352,47 @@ export async function generateStructuredContent(
         const humanizeIntensity = resolveHumanizeIntensity((source.contentMode || 'seo') as PromptMode);
 
         // Humanize 적용
-        if (optimized.bodyPlain) {
+        if (
+          shouldRunLegacySemanticPostDraftMutation(promptVariant, 'humanize-content')
+          && optimized.bodyPlain
+        ) {
           optimized.bodyPlain = humanizeContent(optimized.bodyPlain, humanizeIntensity, false, source.toneStyle);
         }
-        if (optimized.bodyHtml) {
+        if (
+          shouldRunLegacySemanticPostDraftMutation(promptVariant, 'humanize-html-content')
+          && optimized.bodyHtml
+        ) {
           optimized.bodyHtml = humanizeHtmlContent(optimized.bodyHtml, humanizeIntensity);
         }
 
         // ✅ [v2.10.361] Perplexity 팩트 검증 + 자동 재작성 (사용자 체크박스 ON 시에만)
         //   환각/거짓 사실 의심 문장 자동 탐지 + 사실 기반 재작성. 비용 ~₩50~150/편.
-        try {
-          const _config = await loadConfig().catch(() => null);
-          if ((_config as any)?.usePerplexityFactCheck === true && optimized.bodyPlain) {
-            const { factCheckAndRewrite } = await import('./perplexityFactCheck.js');
-            const _topic = String((source as any).title || (source as any).keyword || (source as any).primaryKeyword || '').slice(0, 100);
-            const { corrected, result } = await factCheckAndRewrite(optimized.bodyPlain, _topic);
-            if (result.suspicious.length > 0) {
-              optimized.bodyPlain = corrected;
-              // bodyHtml에도 동일 치환 (간단 string replace — exact match)
-              if (optimized.bodyHtml) {
-                for (const item of result.suspicious) {
-                  if (optimized.bodyHtml.includes(item.original)) {
-                    optimized.bodyHtml = optimized.bodyHtml.replace(item.original, item.replacement);
+        if (allowLegacyPostDraftLlm) {
+          try {
+            const _config = await loadConfig().catch(() => null);
+            if ((_config as any)?.usePerplexityFactCheck === true && optimized.bodyPlain) {
+              const { factCheckAndRewrite } = await import('./perplexityFactCheck.js');
+              const _topic = String((source as any).title || (source as any).keyword || (source as any).primaryKeyword || '').slice(0, 100);
+              const { corrected, result } = await factCheckAndRewrite(optimized.bodyPlain, _topic);
+              if (result.suspicious.length > 0) {
+                optimized.bodyPlain = corrected;
+                // bodyHtml에도 동일 치환 (간단 string replace — exact match)
+                if (optimized.bodyHtml) {
+                  for (const item of result.suspicious) {
+                    if (optimized.bodyHtml.includes(item.original)) {
+                      optimized.bodyHtml = optimized.bodyHtml.replace(item.original, item.replacement);
+                    }
                   }
                 }
+                console.log(`[ContentGenerator] 🌐 Perplexity 팩트검증: ${result.suspicious.length}개 의심 문장 자동 재작성 (${(result.durationMs / 1000).toFixed(1)}s)`);
+              } else {
+                console.log(`[ContentGenerator] 🌐 Perplexity 팩트검증: 의심 문장 없음 (${(result.durationMs / 1000).toFixed(1)}s)`);
               }
-              console.log(`[ContentGenerator] 🌐 Perplexity 팩트검증: ${result.suspicious.length}개 의심 문장 자동 재작성 (${(result.durationMs / 1000).toFixed(1)}s)`);
-            } else {
-              console.log(`[ContentGenerator] 🌐 Perplexity 팩트검증: 의심 문장 없음 (${(result.durationMs / 1000).toFixed(1)}s)`);
             }
+          } catch (factCheckErr: any) {
+            // 팩트 검증 실패는 글 생성 자체 실패가 아니므로 swallow + warn
+            console.warn('[ContentGenerator] Perplexity 팩트검증 실패 (글은 그대로 사용):', factCheckErr?.message || factCheckErr);
           }
-        } catch (factCheckErr: any) {
-          // 팩트 검증 실패는 글 생성 자체 실패가 아니므로 swallow + warn
-          console.warn('[ContentGenerator] Perplexity 팩트검증 실패 (글은 그대로 사용):', factCheckErr?.message || factCheckErr);
         }
 
         // quality에 AI 탐지 정보 추가
@@ -6056,15 +6426,17 @@ export async function generateStructuredContent(
           isLlmRubricEnabled({ useLlmRubric: (source as any).useLlmRubric })
           || (source as any).skipDictInjection === true;
         if (optimized.bodyPlain) {
-          optimized.bodyPlain = optimizeContentForNaver(
-            optimized.bodyPlain,
-            source.toneStyle,
-            false,
-            { skipDictInjection },
-          );
+          if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'optimize-content-for-naver')) {
+            optimized.bodyPlain = optimizeContentForNaver(
+              optimized.bodyPlain,
+              source.toneStyle,
+              false,
+              { skipDictInjection },
+            );
+          }
 
           // Phase 5: Self-critique 2-pass — LLM이 자기 글을 페르소나 관점에서 점검 + 부분 재작성
-          if (isSelfCritiqueEnabled({ enableSelfCritique: (source as any).enableSelfCritique })) {
+          if (allowLegacyPostDraftLlm && isSelfCritiqueEnabled({ enableSelfCritique: (source as any).enableSelfCritique })) {
             const personaCard = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
             const critiqued = await selfCritiqueAndRewrite(
               optimized.bodyPlain,
@@ -6079,12 +6451,16 @@ export async function generateStructuredContent(
             }
           }
         }
-        if (optimized.bodyHtml) {
+        if (
+          shouldRunLegacySemanticPostDraftMutation(promptVariant, 'optimize-html-for-naver')
+          && optimized.bodyHtml
+        ) {
           optimized.bodyHtml = optimizeHtmlForNaver(optimized.bodyHtml);
         }
 
         // 네이버 점수 분석 — LLM rubric (semantic) vs deterministic keyword counter
-        const useLlmRubric = isLlmRubricEnabled({ useLlmRubric: (source as any).useLlmRubric });
+        const useLlmRubric = allowLegacyPostDraftLlm
+          && isLlmRubricEnabled({ useLlmRubric: (source as any).useLlmRubric });
         const deterministicFallback = () => analyzeNaverScore(optimized.bodyPlain || '');
         const naverScore = useLlmRubric
           ? await analyzeContentBySemantic(
@@ -6229,7 +6605,8 @@ export async function generateStructuredContent(
           && _gateResult.humanlikeScore.score < 55;
         const _quality90HardMiss = Boolean(_quality90Assessment?.miss);
         if (
-          _gateResult
+          allowLegacyPostDraftLlm
+          && _gateResult
           && optimized.bodyPlain
           && (_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss)
           && (costPolicy.allowQualityGateSelfCritique || _quality90HardMiss)
@@ -6293,7 +6670,7 @@ export async function generateStructuredContent(
           } catch (patchErr) {
             console.warn('[QualityGate] patch 실패 (정상 흐름 유지):', (patchErr as Error)?.message);
           }
-        } else if (_gateResult && optimized.quality && (_gateResult.decision === 'patch' || _humanFloorMiss)) {
+        } else if (allowLegacyPostDraftLlm && _gateResult && optimized.quality && (_gateResult.decision === 'patch' || _humanFloorMiss)) {
           optimized.quality.warnings = [
             ...(optimized.quality.warnings || []),
             `QualityGate LLM patch skipped by cost saver (${_humanFloorMiss ? `human=${_gateResult.humanlikeScore.score}` : `final=${_gateResult.finalScore}`})`,
@@ -6529,15 +6906,17 @@ export async function generateStructuredContent(
           }
         }
 
-        // 통계 파일 저장
-        try {
-          await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
-        } catch (error) {
-          console.warn('[ContentGenerator] 통계 파일 저장 실패:', (error as Error).message);
+        // 통계 파일 저장 (exact V3는 영속 통계를 사용하지 않음)
+        if (statsFile) {
+          try {
+            await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
+          } catch (error) {
+            console.warn('[ContentGenerator] 통계 파일 저장 실패:', (error as Error).message);
+          }
         }
 
         // ✅ 최종 구조화 및 클리닝 (이모지, [공지], ?: 등 제거)
-        return finalizeStructuredContent(optimized, source);
+        return finalizeStructuredContent(optimized, source, promptVariant);
       }
 
       // ✅ [v1.4.14] 50% 이상이면 경고만 하고 통과 (재시도 비용 절감) - 60→50%로 완화
@@ -6563,20 +6942,24 @@ export async function generateStructuredContent(
         console.warn(`[ContentGenerator] 글자수 경고: ${plainLength}자 (목표: ${minChars}자, ${Math.round((plainLength / minChars) * 100)}%)`);
 
         // ✅ 경고 후 통과도 성공으로 카운트
-        stats.success++;
-        if (attempt === 0) stats.attempts.first++;
-        else if (attempt === 1) stats.attempts.second++;
-        else if (attempt === 2) stats.attempts.third++;
-        else if (attempt === 3) stats.attempts.fourth++;
+        if (statsFile) {
+          stats.success++;
+          if (attempt === 0) stats.attempts.first++;
+          else if (attempt === 1) stats.attempts.second++;
+          else if (attempt === 2) stats.attempts.third++;
+          else if (attempt === 3) stats.attempts.fourth++;
+        }
 
         const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
         console.log(`[ContentGenerator] ✅ 경고 후 통과 (시도 ${attempt + 1}번째) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
 
         // 통계 파일 저장
-        try {
-          await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
-        } catch (error) {
-          console.warn('[ContentGenerator] 통계 파일 저장 실패:', (error as Error).message);
+        if (statsFile) {
+          try {
+            await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
+          } catch (error) {
+            console.warn('[ContentGenerator] 통계 파일 저장 실패:', (error as Error).message);
+          }
         }
         // 경고를 quality에 추가
         if (!optimized.quality) {
@@ -6597,7 +6980,7 @@ export async function generateStructuredContent(
         );
 
         // ✅ 이모지 자동 제거 (AI가 생성한 이모지 제거)
-        return finalizeStructuredContent(optimized, source);
+        return finalizeStructuredContent(optimized, source, promptVariant);
       }
 
       // 60% 미만일 때만 재시도
@@ -6639,21 +7022,25 @@ export async function generateStructuredContent(
         }
 
         // ✅ 성공 통계 (경고 후 통과)
-        stats.success++;
-        if (attempt === 0) stats.attempts.first++;
-        else if (attempt === 1) stats.attempts.second++;
-        else if (attempt === 2) stats.attempts.third++;
-        else if (attempt === 3) stats.attempts.fourth++;
+        if (statsFile) {
+          stats.success++;
+          if (attempt === 0) stats.attempts.first++;
+          else if (attempt === 1) stats.attempts.second++;
+          else if (attempt === 2) stats.attempts.third++;
+          else if (attempt === 3) stats.attempts.fourth++;
+        }
         const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
         console.log(`[ContentGenerator] ✅ 최종 경고 후 통과 (시도 ${attempt + 1}번째) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
 
-        try {
-          await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
-        } catch (error) {
-          console.warn('[ContentGenerator] 통계 파일 저장 실패:', (error as Error).message);
+        if (statsFile) {
+          try {
+            await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
+          } catch (error) {
+            console.warn('[ContentGenerator] 통계 파일 저장 실패:', (error as Error).message);
+          }
         }
 
-        return finalizeStructuredContent(optimized, source);
+        return finalizeStructuredContent(optimized, source, promptVariant);
       }
 
       // 재시도 시 목표치 증가
@@ -6672,23 +7059,27 @@ export async function generateStructuredContent(
     } catch (error) {
       // 오류 처리
       const errMsg = (error as Error).message || '알 수 없는 오류';
-      const terminalError = isTerminalContentGenerationError(error);
+      const terminalError = (
+        promptVariant === 'v3' && errMsg.startsWith('[content-quality-v3] ')
+      ) || isTerminalContentGenerationError(error);
 
       // ✅ [v1.4.41] 매번 lastFailReason 설정 (마지막 시도 포함) — "알 수 없음" 방지
       lastFailReason = errMsg.substring(0, 300);
 
       if (terminalError || attempt === MAX_ATTEMPTS) {
-        // ✅ 실패 통계 업데이트
-        stats.failed++;
+        // ✅ 실패 통계 업데이트 (exact V3는 영속 통계를 사용하지 않음)
+        if (statsFile) stats.failed++;
         const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
         console.error(`[ContentGenerator] ❌ 실패! (${terminalError ? '재시도 불가 오류' : '최대 시도 횟수 초과'}) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
         console.error(`[ContentGenerator] 마지막 에러: ${errMsg}`);
 
         // 통계 파일 저장
-        try {
-          await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
-        } catch (saveError) {
-          console.warn('[ContentGenerator] 통계 파일 저장 실패:', (saveError as Error).message);
+        if (statsFile) {
+          try {
+            await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
+          } catch (saveError) {
+            console.warn('[ContentGenerator] 통계 파일 저장 실패:', (saveError as Error).message);
+          }
         }
 
         // ✅ [v1.4.41] 원본 에러 메시지를 보존하여 throw — 사용자가 진짜 원인을 알 수 있도록
@@ -6702,15 +7093,17 @@ export async function generateStructuredContent(
   }
 
   // ✅ 모든 시도 실패
-  stats.failed++;
+  if (statsFile) stats.failed++;
   const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
   console.error(`[ContentGenerator] ❌ 실패! (모든 시도 실패) | 전체 성공률: ${successRate}% (${stats.success}/${stats.total})`);
 
   // 통계 파일 저장
-  try {
-    await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
-  } catch (saveError) {
-    console.warn('[ContentGenerator] 통계 파일 저장 실패:', (saveError as Error).message);
+  if (statsFile) {
+    try {
+      await fs.writeFile(statsFile, JSON.stringify(stats, null, 2), 'utf-8');
+    } catch (saveError) {
+      console.warn('[ContentGenerator] 통계 파일 저장 실패:', (saveError as Error).message);
+    }
   }
 
   // ✅ [v1.4.41] 의미 있는 에러 메시지 — "알 수 없음" 대신 구체적 가이드
@@ -6721,6 +7114,46 @@ export async function generateStructuredContent(
     // ✅ [v2.7.27] Adaptive Limiter 슬롯 반환
     release();
   }
+}
+
+export async function generateStructuredContent(
+  source: ContentSource,
+  options: GenerateOptions = {},
+): Promise<StructuredContent> {
+  const activation = resolveProductionContentQualityV3Activation(
+    source.contentMode,
+    options.provider,
+  );
+  return runContentPipeline<ContentSource, GenerateOptions, StructuredContent>({
+    requestedMode: activation.requestedMode,
+    contentMode: source.contentMode,
+    v3Allowlist: activation.v3Allowlist,
+    source,
+    options,
+    legacy: (legacySource, legacyOptions) => generateStructuredContentInternal(
+      legacySource,
+      legacyOptions,
+      'legacy',
+    ),
+    v3: (v3Source, v3Options) => generateStructuredContentInternal(
+      v3Source,
+      v3Options,
+      'v3',
+    ),
+    validate: validatePublishableContent,
+  });
+}
+
+/**
+ * Candidate runtime hook owned by the evaluation-only facade. Production code
+ * must call generateStructuredContent so release activation cannot be forged
+ * through request options.
+ */
+export async function runContentQualityV3CandidateRuntimeForEvaluationOnly(
+  source: ContentSource,
+  options: Omit<GenerateOptions, 'contentPipelineMode' | 'v3Allowlist'> = {},
+): Promise<StructuredContent> {
+  return generateStructuredContentInternal(source, options, 'v3');
 }
 
 /**

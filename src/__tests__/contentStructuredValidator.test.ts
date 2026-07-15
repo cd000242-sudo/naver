@@ -68,6 +68,67 @@ describe('contentStructuredValidator', () => {
     expect(content.headings.length).toBeGreaterThan(0);
   });
 
+  it('turns the V3 empty bodyHtml fixture into well-formed paragraph HTML', () => {
+    const content = baseContent({
+      bodyHtml: '',
+      bodyPlain: '첫 문단입니다.\n줄바꿈은 같은 문단입니다.\n\n둘째 문단입니다.',
+    });
+
+    validateStructuredContent(content, baseSource());
+
+    expect(content.bodyHtml).toBe(
+      '<p>첫 문단입니다.<br>줄바꿈은 같은 문단입니다.</p>\n<p>둘째 문단입니다.</p>',
+    );
+    expect(content.bodyHtml).not.toMatch(/<\s+p\s+>/i);
+    expect(content.bodyHtml).not.toMatch(/<\s*\/\s*p\s+>/i);
+  });
+
+  it('escapes tag-shaped bodyPlain text before promoting it to bodyHtml', () => {
+    const content = baseContent({
+      bodyHtml: '',
+      bodyPlain: '<script>alert("x")</script> & <img onerror="boom">\n문자 그대로의 <태그>',
+    });
+
+    validateStructuredContent(content, baseSource());
+
+    expect(content.bodyHtml).toBe(
+      '<p>&lt;script&gt;alert("x")&lt;/script&gt; &amp; &lt;img onerror="boom"&gt;<br>문자 그대로의 &lt;태그&gt;</p>',
+    );
+    expect(content.bodyHtml).not.toContain('<script');
+    expect(content.bodyHtml).not.toContain('<img');
+  });
+
+  it('escapes headings-only recovery while preserving ordinary legacy text', () => {
+    const unsafe = baseContent({
+      bodyHtml: '',
+      bodyPlain: '',
+      headings: [{
+        title: '<b>소</b>',
+        content: '<i>본</i>',
+        summary: '',
+        keywords: [],
+        imagePrompt: '',
+      }],
+    });
+    const ordinary = baseContent({
+      bodyHtml: '',
+      bodyPlain: '',
+      headings: [{
+        title: '일반 제목',
+        content: '일반 본문',
+        summary: '',
+        keywords: [],
+        imagePrompt: '',
+      }],
+    });
+
+    validateStructuredContent(unsafe, baseSource());
+    validateStructuredContent(ordinary, baseSource());
+
+    expect(unsafe.bodyHtml).toBe('<h2>&lt;b&gt;소&lt;/b&gt;</h2>\n<p>&lt;i&gt;본&lt;/i&gt;</p>');
+    expect(ordinary.bodyHtml).toBe('<h2>일반 제목</h2>\n<p>일반 본문</p>');
+  });
+
   it('replaces leaked prompt titles with the first safe alternative', () => {
     const content = baseContent({
       selectedTitle: '테스트 키워드 SEO 최적화 제목 작성 가이드',

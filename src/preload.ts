@@ -5,6 +5,25 @@ import type { SourceAssemblyInput } from './sourceAssembler.js';
 import type { ContentPolicyDashboard } from './contentPolicy/operatorService.js';
 import type { PublicationState } from './contentPolicy/types.js';
 import type { RevenueDashboard, RevenueEntry, RevenueEntryInput, RevenueSettings } from './analytics/revenueOperations.js';
+import type { AgentCliStatus, AgentProvider } from './agentCli/types.js';
+
+type AgentLoginProgress = Readonly<{
+  provider: AgentProvider;
+  sessionId: string;
+  phase: 'manual-url-ready';
+} | {
+  provider: AgentProvider;
+  sessionId: string;
+  phase: 'code-required';
+  attempt: number;
+}>;
+
+type AgentLoginActionResult = {
+  success: boolean;
+  code?: string;
+  message?: string;
+  state?: 'opening' | 'opened' | 'retryable';
+};
 
 type AutomationPayload = {
   naverId: string;
@@ -44,6 +63,13 @@ type AutomationPayload = {
   affiliateLink?: string; // ✅ 추가: 제휴 링크 (쇼핑커넥트 모드)
   contentMode?: 'affiliate' | 'seo' | 'homefeed' | 'custom' | 'business' | 'mate'; // ✅ 추가: 콘텐츠 모드 (쇼핑커넥트/일반/네이버 메이트)
   isFullAuto?: boolean; // ✅ 추가: 풀오토 모드 여부 (인덱스 기반 이미지 매칭용)
+  _contentQualityV3PostId?: string;
+  _contentQualityV3Required?: true;
+  _contentQualityV3PublishHandoff?: {
+    handle: string;
+    publicationIdentity: string;
+    originalContentSha256: string;
+  };
 };
 
 type AutomationStatus =
@@ -146,16 +172,27 @@ contextBridge.exposeInMainWorld('api', {
   generateContent: (prompt: string): Promise<GenerateContentResult> =>
     ipcRenderer.invoke('automation:generateContent', prompt),
   // ✅ 에이전트 모드(codex/claude 구독 연동) — 설치/로그인 상태 + 글생성 브리지
-  agentStatus: (provider: 'codex' | 'claude', options?: { forceRefresh?: boolean }): Promise<{ success: boolean; status?: { provider: string; installed: boolean; version?: string; loggedIn: boolean; available: boolean; errorCode?: string; detail?: string }; message?: string }> =>
+  agentStatus: (provider: AgentProvider, options?: { forceRefresh?: boolean }): Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:status', provider, options),
-  agentGenerate: (payload: { provider: 'codex' | 'claude'; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }): Promise<{ success: boolean; provider?: string; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
+  agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }): Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:generate', payload),
-  agentInstall: (provider: 'codex' | 'claude'): Promise<{ success: boolean; version?: string; code?: string; message?: string }> =>
+  agentInstall: (provider: AgentProvider): Promise<{ success: boolean; version?: string; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:install', provider),
-  agentLogin: (provider: 'codex' | 'claude'): Promise<{ success: boolean; code?: string; message?: string }> =>
+  agentLogin: (provider: AgentProvider): Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:login', provider),
+  onAgentLoginProgress: (listener: (progress: AgentLoginProgress) => void): (() => void) => {
+    const handler = (_event: Electron.IpcRendererEvent, progress: AgentLoginProgress): void => listener(progress);
+    ipcRenderer.on('agent:login-progress', handler);
+    return () => { ipcRenderer.removeListener('agent:login-progress', handler); };
+  },
+  agentLoginOpenBrowser: (provider: AgentProvider, sessionId: string): Promise<AgentLoginActionResult> =>
+    ipcRenderer.invoke('agent:login-open-browser', provider, sessionId),
+  agentLoginSubmitCode: (provider: AgentProvider, sessionId: string, attempt: number, code: string): Promise<AgentLoginActionResult> =>
+    ipcRenderer.invoke('agent:login-submit-code', provider, sessionId, attempt, code),
+  agentLoginCancel: (provider: AgentProvider, sessionId: string): Promise<AgentLoginActionResult> =>
+    ipcRenderer.invoke('agent:login-cancel', provider, sessionId),
   // 계정 전환용 로그아웃 (다른 구독 계정으로 재로그인)
-  agentLogout: (provider: 'codex' | 'claude'): Promise<{ success: boolean; code?: string; message?: string }> =>
+  agentLogout: (provider: AgentProvider): Promise<{ success: boolean; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:logout', provider),
   // 프록시 설정 여부 (다중계정 no-proxy 시 간격 자동 강화용)
   proxyIsConfigured: (): Promise<boolean> => ipcRenderer.invoke('proxy:isConfigured'),

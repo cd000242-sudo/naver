@@ -125,10 +125,18 @@ export class ToastManager {
       transition: all 0.3s ease;
     `;
 
-        toast.innerHTML = `
-      <div style="flex: 1;">${message}</div>
-      <button style="background: transparent; border: none; color: white; font-size: 18px; cursor: pointer; padding: 0; line-height: 1;" onclick="this.parentElement.remove()">×</button>
-    `;
+        const messageElement = document.createElement('div');
+        messageElement.style.flex = '1';
+        messageElement.textContent = message;
+
+        const closeButton = document.createElement('button');
+        closeButton.type = 'button';
+        closeButton.setAttribute('aria-label', '알림 닫기');
+        closeButton.style.cssText = 'background: transparent; border: none; color: white; font-size: 18px; cursor: pointer; padding: 0; line-height: 1;';
+        closeButton.textContent = '×';
+        closeButton.addEventListener('click', () => toast.remove());
+
+        toast.append(messageElement, closeButton);
 
         this.container.appendChild(toast);
 

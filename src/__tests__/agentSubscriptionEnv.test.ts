@@ -1,10 +1,29 @@
 import { describe, expect, it } from 'vitest';
 import {
+  buildNpmInstallEnv,
   buildClaudeSubscriptionEnv,
   buildCodexSubscriptionEnv,
 } from '../agentCli/subscriptionEnv';
 
 describe('subscription agent environment isolation', () => {
+  it('keeps a custom npm global prefix only for the installer environment', () => {
+    const source = {
+      PATH: 'C:\\tools',
+      TEMP: 'C:\\temp',
+      NPM_CONFIG_PREFIX: 'C:\\Users\\tester\\npm-global',
+      NPM_TOKEN: 'must-not-leak',
+      OPENAI_API_KEY: 'must-not-leak',
+    };
+
+    expect(buildNpmInstallEnv(source)).toEqual({
+      PATH: 'C:\\tools',
+      TEMP: 'C:\\temp',
+      NPM_CONFIG_PREFIX: 'C:\\Users\\tester\\npm-global',
+    });
+    expect(buildCodexSubscriptionEnv(source)).not.toHaveProperty('NPM_CONFIG_PREFIX');
+    expect(buildClaudeSubscriptionEnv(source)).not.toHaveProperty('NPM_CONFIG_PREFIX');
+  });
+
   it('allows only runtime and Claude profile paths while dropping every unrelated secret', () => {
     const env = buildClaudeSubscriptionEnv({
       PATH: 'C:\\tools',
@@ -28,6 +47,7 @@ describe('subscription agent environment isolation', () => {
       GEMINI_API_KEY: 'gemini-secret',
       GH_TOKEN: 'github-secret',
       HTTPS_PROXY: 'https://user:password@proxy.example',
+      NO_PROXY: 'localhost,127.0.0.1',
       UNRELATED_APP_SECRET: 'must-not-leak',
     });
 
@@ -36,6 +56,8 @@ describe('subscription agent environment isolation', () => {
       TEMP: 'C:\\temp',
       USERPROFILE: 'C:\\Users\\tester',
       CLAUDE_CONFIG_DIR: 'C:\\profiles\\claude',
+      HTTPS_PROXY: 'https://user:password@proxy.example',
+      NO_PROXY: 'localhost,127.0.0.1',
     });
   });
 
@@ -53,6 +75,7 @@ describe('subscription agent environment isolation', () => {
       ANTHROPIC_API_KEY: 'anthropic-secret',
       GH_TOKEN: 'github-secret',
       HTTPS_PROXY: 'https://user:password@proxy.example',
+      NO_PROXY: 'localhost,127.0.0.1',
       UNRELATED_APP_SECRET: 'must-not-leak',
     });
 
@@ -61,6 +84,8 @@ describe('subscription agent environment isolation', () => {
       TEMP: 'C:\\temp',
       USERPROFILE: 'C:\\Users\\tester',
       CODEX_HOME: 'C:\\profiles\\codex',
+      HTTPS_PROXY: 'https://user:password@proxy.example',
+      NO_PROXY: 'localhost,127.0.0.1',
     });
   });
 });

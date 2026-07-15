@@ -24,6 +24,12 @@ function authResult(subscriptionType = 'pro') {
   };
 }
 
+function deferred<T>() {
+  let resolve!: (value: T) => void;
+  const promise = new Promise<T>((done) => { resolve = done; });
+  return Object.freeze({ promise, resolve });
+}
+
 describe('detectAgent Claude subscription entitlement', () => {
   beforeEach(() => {
     spawnMock.mockReset();
@@ -52,12 +58,48 @@ describe('detectAgent Claude subscription entitlement', () => {
       installed: true,
       loggedIn: true,
       available: true,
+      availabilityCheck: 'live',
       errorCode: undefined,
     });
     expect(spawnMock).toHaveBeenCalledTimes(3);
     const entitlementCall = spawnMock.mock.calls[2][0];
     expect(entitlementCall.args).toContain('--max-turns');
     expect(entitlementCall.env.ANTHROPIC_API_KEY).toBeUndefined();
+  });
+
+  it('keeps a successful noisy version probe installed without exposing logs or secret URLs', async () => {
+    spawnMock
+      .mockResolvedValueOnce({
+        code: 0,
+        stdout: '[Startup-Async] exposurePoller started\ntoken=secret-token',
+        stderr: 'Proxy https://alice:secret@proxy.example failed',
+      })
+      .mockResolvedValueOnce(authResult('free'));
+
+    const status = await detectAgent('claude');
+
+    expect(status.installed).toBe(true);
+    expect(status.version).toBe('Claude Code');
+    expect(JSON.stringify(status)).not.toContain('Startup-Async');
+    expect(JSON.stringify(status)).not.toContain('secret-token');
+    expect(JSON.stringify(status)).not.toContain('proxy.example');
+  });
+
+  it('fails closed when the entitlement response is not exactly READY', async () => {
+    spawnMock
+      .mockResolvedValueOnce(versionResult())
+      .mockResolvedValueOnce(authResult('pro'))
+      .mockResolvedValueOnce({
+        code: 0,
+        stdout: JSON.stringify({ is_error: false, result: 'READY and available' }),
+        stderr: '',
+      });
+
+    await expect(detectAgent('claude')).resolves.toMatchObject({
+      loggedIn: true,
+      available: false,
+      errorCode: 'bad_json',
+    });
   });
 
   it('recognizes an explicitly free or inactive auth status without claiming readiness', async () => {
@@ -110,6 +152,22 @@ describe('detectAgent Claude subscription entitlement', () => {
       available: false,
       errorCode: 'rate_limited',
     });
+  });
+
+  it('redacts proxy credentials from renderer-facing entitlement detail', async () => {
+    spawnMock
+      .mockResolvedValueOnce(versionResult())
+      .mockResolvedValueOnce(authResult('pro'))
+      .mockResolvedValueOnce({
+        code: 1,
+        stdout: '',
+        stderr: 'Proxy https://alice:s3cr3t@proxy.example failed unexpectedly',
+      });
+
+    const status = await detectAgent('claude');
+
+    expect(status.detail).not.toContain('s3cr3t');
+    expect(status.detail).toContain('[redacted]');
   });
 
   it('rejects apiKeyHelper and gateway auth sources before any billed probe can run', async () => {
@@ -232,6 +290,23 @@ describe('detectAgent Claude subscription entitlement', () => {
 });
 
 describe('detectAgent Codex subscription authentication', () => {
+  it('extracts an ANSI-wrapped version from mixed output without forwarding surrounding logs', async () => {
+    spawnMock
+      .mockResolvedValueOnce({
+        code: 0,
+        stdout: '[IPC] handlers registered\n\u001b[32mcodex-cli 0.141.0\u001b[0m',
+        stderr: 'https://auth.openai.com/oauth/authorize?token=secret',
+      })
+      .mockResolvedValueOnce({ code: 0, stdout: 'Logged in using ChatGPT', stderr: '' });
+
+    const status = await detectAgent('codex');
+
+    expect(status.version).toBe('Codex CLI 0.141.0');
+    expect(JSON.stringify(status)).not.toContain('handlers registered');
+    expect(JSON.stringify(status)).not.toContain('oauth/authorize');
+    expect(JSON.stringify(status)).not.toContain('secret');
+  });
+
   beforeEach(() => {
     spawnMock.mockReset();
     clearAgentDetectionCache();
@@ -249,8 +324,43 @@ describe('detectAgent Codex subscription authentication', () => {
 
     const status = await detectAgent('codex');
 
-    expect(status).toMatchObject({ loggedIn: true, available: true });
+    expect(status).toMatchObject({
+      loggedIn: true,
+      available: true,
+      availabilityCheck: 'authentication',
+    });
     expect(spawnMock.mock.calls[1][0].env.OPENAI_API_KEY).toBeUndefined();
+  });
+
+  it('checks both status streams and gives explicit logout text precedence', async () => {
+    spawnMock
+      .mockResolvedValueOnce(versionResult())
+      .mockResolvedValueOnce({
+        code: 0,
+        stdout: 'Update warning',
+        stderr: 'Logged in using ChatGPT',
+      });
+
+    await expect(detectAgent('codex')).resolves.toMatchObject({
+      loggedIn: true,
+      available: true,
+    });
+
+    clearAgentDetectionCache('codex');
+    spawnMock.mockReset();
+    spawnMock
+      .mockResolvedValueOnce(versionResult())
+      .mockResolvedValueOnce({
+        code: 0,
+        stdout: 'Not logged in using ChatGPT',
+        stderr: 'Logged in using ChatGPT',
+      });
+
+    await expect(detectAgent('codex')).resolves.toMatchObject({
+      loggedIn: false,
+      available: false,
+      errorCode: 'not_logged_in',
+    });
   });
 
   it('fails closed when Codex is authenticated with an API key', async () => {
@@ -265,5 +375,28 @@ describe('detectAgent Codex subscription authentication', () => {
       available: false,
       errorCode: 'subscription_inactive',
     });
+  });
+
+  it('does not let an older in-flight detection overwrite a newer verified cache entry', async () => {
+    const staleAuth = deferred<{ code: number; stdout: string; stderr: string }>();
+    spawnMock
+      .mockResolvedValueOnce(versionResult())
+      .mockReturnValueOnce(staleAuth.promise)
+      .mockResolvedValueOnce(versionResult())
+      .mockResolvedValueOnce({ code: 0, stdout: 'Logged in using ChatGPT', stderr: '' });
+
+    const staleDetection = detectAgent('codex', { forceRefresh: true });
+    await vi.waitFor(() => expect(spawnMock).toHaveBeenCalledTimes(2));
+
+    clearAgentDetectionCache('codex');
+    const verified = await detectAgent('codex', { forceRefresh: true });
+    expect(verified).toMatchObject({ loggedIn: true, available: true });
+
+    staleAuth.resolve({ code: 1, stdout: '', stderr: 'Not logged in' });
+    await expect(staleDetection).resolves.toMatchObject({ loggedIn: false, available: false });
+
+    const cached = await detectAgent('codex');
+    expect(cached).toMatchObject({ loggedIn: true, available: true });
+    expect(spawnMock).toHaveBeenCalledTimes(4);
   });
 });

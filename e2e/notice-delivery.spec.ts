@@ -1,7 +1,7 @@
 import { expect, test, _electron as electron, type ElectronApplication, type Page } from '@playwright/test';
 import path from 'node:path';
 import {
-  closeElectronApp,
+  closeElectronTestSession,
   createElectronTestProfile,
   type ElectronTestProfile,
   waitForMainWindow,
@@ -28,8 +28,7 @@ test.beforeAll(async () => {
 });
 
 test.afterAll(async () => {
-  await closeElectronApp(app);
-  await testProfile?.cleanup();
+  await closeElectronTestSession(app, testProfile);
 });
 
 test('main notice event crosses preload and opens the canonical modal', async () => {

@@ -4,7 +4,7 @@ const MAX_USER_ERROR_LENGTH = 240;
 const ANSI_ESCAPE_PATTERN = /[\u001B\u009B][[\]()#;?]*(?:(?:(?:;[-a-zA-Z\d/#&.:=?%@~_]+)*|[a-zA-Z\d]+(?:;[-a-zA-Z\d/#&.:=?%@~_]*)*)?\u0007|(?:(?:\d{1,4}(?:;\d{0,4})*)?[\dA-PR-TZcf-nq-uy=><~]))/g;
 const CREDENTIAL_PATTERN = /\b(api[\s_-]*key|access[\s_-]*token|refresh[\s_-]*token|id[\s_-]*token|authorization|bearer|token|password|secret)\b\s*[:=]\s*(?:"[^"]*"|'[^']*'|[^\s|,;]+)/gi;
 const JWT_PATTERN = /\beyJ[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]*\b/g;
-const URL_USERINFO_PATTERN = /(https?:\/\/)[^\s\/@:]+(?::[^\s\/@]*)?@/gi;
+const URL_USERINFO_PATTERN = /((?:https?|socks4a?|socks5h?):\/\/)[^\s\/@:]+(?::[^\s\/@]*)?@/gi;
 const WINDOWS_PATH_PATTERN = /(?:\b[A-Za-z]:\\|\\\\)(?:[^\\\r\n:*?"<>|]+\\)+[^,;|)"\r\n]*/g;
 const UNC_PATH_PATTERN = /\\\\[^\s\\/]+\\[^\r\n|]+/g;
 const POSIX_PRIVATE_PATH_PATTERN = /\/(?:Users|home|root|tmp|private\/var|var\/folders)\/[^\s,;|)"']+/g;
@@ -18,11 +18,14 @@ function readErrorMessage(error: unknown): string {
   return String(error ?? '');
 }
 
-function redactUrlQueries(message: string): string {
-  return message.replace(/https?:\/\/[^\s?#)]+(?:\?[^\s)]*)?/gi, (url) => {
-    const queryIndex = url.indexOf('?');
-    return queryIndex >= 0 ? url.slice(0, queryIndex) : url;
-  });
+function redactUrlPrivateSuffixes(message: string): string {
+  return message.replace(
+    /(?:https?|socks4a?|socks5h?):\/\/[^\s?#)]+(?:\?[^\s#)]*)?(?:#[^\s)]*)?/gi,
+    (url) => {
+      const privateSuffixIndex = url.search(/[?#]/);
+      return privateSuffixIndex >= 0 ? url.slice(0, privateSuffixIndex) : url;
+    },
+  );
 }
 
 /**
@@ -58,7 +61,7 @@ export function sanitizeUserVisibleError(error: unknown): string {
     .replace(UNC_PATH_PATTERN, '[internal path]')
     .replace(POSIX_PRIVATE_PATH_PATTERN, '[internal path]');
 
-  message = redactUrlQueries(message)
+  message = redactUrlPrivateSuffixes(message)
     .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
     .replace(/\s+/g, ' ')
     .replace(/\s*[|,-]\s*$/, '')

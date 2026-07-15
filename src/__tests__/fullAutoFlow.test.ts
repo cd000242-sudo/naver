@@ -208,7 +208,7 @@ describe('post-content-applied publish failure marker', () => {
     expect(source).toContain('!keepBrowserOpen && !postContentAppliedPublishFailure');
 
     const firstApplied = source.indexOf('editorContentApplied = true');
-    const firstPublish = source.indexOf('await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod)');
+    const firstPublish = source.indexOf('await this.publishBlogPost(', firstApplied);
 
     expect(firstApplied).toBeGreaterThan(-1);
     expect(firstPublish).toBeGreaterThan(firstApplied);

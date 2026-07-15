@@ -3,6 +3,7 @@
 // ═══════════════════════════════════════════════════════════════════
 
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
+import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -271,7 +272,7 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
       return Array.isArray(generatedImages) ? generatedImages : [];
     })();
 
-    const imagesForPublish = (() => {
+    const selectedImagesForPublish = (() => {
       try {
         if (payload.structuredContent) {
           return filterImagesForPublish(payload.structuredContent, imagesForPayload);
@@ -281,6 +282,10 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
       }
       return imagesForPayload;
     })();
+    const imagesForPublish = normalizePublishImageSequence(
+      payload.structuredContent,
+      selectedImagesForPublish,
+    );
 
     if (imagesForPublish.length > 0) {
       payload.generatedImages = imagesForPublish

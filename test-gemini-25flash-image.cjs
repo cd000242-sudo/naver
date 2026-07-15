@@ -1,12 +1,15 @@
 /**
- * Gemini 2.5 Flash Image 테스트 (새 API 키)
+ * Gemini 2.5 Flash Image 테스트 (환경 변수 API 키)
  * 모델: gemini-2.5-flash-image vs gemini-3-pro-image-preview
  */
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const apiKey = 'AIzaSyAtjFG4IP1xlTSgAfQVUJI-dpOcju3KBAY';
+const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+if (!apiKey) {
+    throw new Error('Missing Gemini API key. Set GEMINI_API_KEY or GOOGLE_API_KEY.');
+}
 
 const TESTS = [
     {
@@ -86,7 +89,7 @@ async function testGenerate(test) {
 }
 
 async function main() {
-    console.log('🚀 Gemini 이미지 모델 비교 테스트 (새 API 키)');
+    console.log('🚀 Gemini 이미지 모델 비교 테스트 (환경 변수 API 키)');
     const results = [];
     for (let i = 0; i < TESTS.length; i++) {
         const r = await testGenerate(TESTS[i]);

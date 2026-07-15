@@ -4,6 +4,7 @@ import type {
   RevenueEntryInput,
   RevenueSettings,
 } from '../analytics/revenueOperations.js';
+import type { AgentCliStatus, AgentProvider } from '../agentCli/types.js';
 
 type RiskLevel = 'low' | 'medium' | 'high';
 type LegalRiskLevel = 'safe' | 'caution' | 'danger';
@@ -76,6 +77,13 @@ interface StructuredContent {
   viralHooks?: ViralHooks;
   trafficStrategy?: TrafficStrategy;
   postPublishActions?: PostPublishActions;
+  _contentQualityV3PostId?: string;
+  _contentQualityV3Required?: true;
+  _contentQualityV3PublishHandoff?: {
+    handle: string;
+    publicationIdentity: string;
+    originalContentSha256: string;
+  };
 }
 
 type ArticleType =
@@ -188,6 +196,9 @@ type RendererAutomationPayload = {
   lines?: string[];
   selectedHeadings?: string[];
   structuredContent?: StructuredContent;
+  _contentQualityV3PostId?: string;
+  _contentQualityV3Required?: true;
+  _contentQualityV3PublishHandoff?: StructuredContent['_contentQualityV3PublishHandoff'];
   generatedImages?: RendererAutomationImage[];
   hashtags?: string[];
   generator?: 'gemini' | 'openai' | 'claude' | 'perplexity';
@@ -227,6 +238,24 @@ type RendererStatus =
   | { success: true }
   | { success: false; cancelled?: boolean; message?: string };
 
+type AgentLoginProgress = Readonly<{
+  provider: AgentProvider;
+  sessionId: string;
+  phase: 'manual-url-ready';
+} | {
+  provider: AgentProvider;
+  sessionId: string;
+  phase: 'code-required';
+  attempt: number;
+}>;
+
+interface AgentLoginActionResult {
+  readonly success: boolean;
+  readonly code?: string;
+  readonly message?: string;
+  readonly state?: 'opening' | 'opened' | 'retryable';
+}
+
 interface AutomationAPI {
   // ✅ [2026-03-18] Gemini API 할당량 확인 (정확한 공식 데이터 기반)
   checkGeminiQuota: (apiKey: string) => Promise<{ success: boolean; message?: string; data?: { keyValid: boolean; userPlanType: string; planLabel: string; totalModels: number; flashModels: string[]; proModels: string[]; limits: { rpm: number | string; rpd: number | string; tpm: string }; pricing: { flash_input: string; flash_output: string; pro_input: string; pro_output: string; note: string }; testCallResult: { promptTokens?: number; outputTokens?: number; totalTokens?: number; error?: string } | null; usageTracker?: { totalInputTokens: number; totalOutputTokens: number; totalCalls: number; estimatedCostUSD: number; lastUpdated?: string; firstTracked?: string }; creditBudget?: number } }>;
@@ -254,6 +283,15 @@ interface AutomationAPI {
   forceQuit: () => Promise<{ success: boolean }>;
   getQuotaStatus: () => Promise<{ success: boolean; isFree: boolean; quota: any }>;
   generateContent: (prompt: string) => Promise<{ success: boolean; content?: string; message?: string }>;
+  agentStatus: (provider: AgentProvider, options?: { forceRefresh?: boolean }) => Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }>;
+  agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }) => Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }>;
+  agentInstall: (provider: AgentProvider) => Promise<{ success: boolean; version?: string; code?: string; message?: string }>;
+  agentLogin: (provider: AgentProvider) => Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }>;
+  onAgentLoginProgress: (listener: (progress: AgentLoginProgress) => void) => () => void;
+  agentLoginOpenBrowser: (provider: AgentProvider, sessionId: string) => Promise<AgentLoginActionResult>;
+  agentLoginSubmitCode: (provider: AgentProvider, sessionId: string, attempt: number, code: string) => Promise<AgentLoginActionResult>;
+  agentLoginCancel: (provider: AgentProvider, sessionId: string) => Promise<AgentLoginActionResult>;
+  agentLogout: (provider: AgentProvider) => Promise<{ success: boolean; code?: string; message?: string }>;
   generateStructuredContent: (request: StructuredGenerationRequest) => Promise<{ success: boolean; content?: StructuredContent; message?: string; imageCount?: number }>;
   // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 포함
   generateTestImage: (options: {

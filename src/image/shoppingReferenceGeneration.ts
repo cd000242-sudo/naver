@@ -1,4 +1,5 @@
 import {
+  buildReferenceImageIdentity,
   deduplicateReferenceImages,
   extractReferenceImageUrl,
   selectRepresentativeReferenceImage,
@@ -116,6 +117,146 @@ export interface ShoppingRepresentativeThumbnail extends Record<string, unknown>
   preserveOriginal: true;
   disableTextOverlay: true;
   allowText: false;
+}
+
+export interface ShoppingAiPublishImagesResult<T> {
+  images: T[];
+  removedCollectedCount: number;
+  removedDuplicateCount: number;
+}
+
+/**
+ * Generation uses zero-based body indices. The final publish normalizer
+ * reserves slot zero for the representative thumbnail and rebases bodies.
+ */
+export interface ShoppingBodyHeadingSlot<T> {
+  heading: T;
+  originalIndex: number;
+}
+
+export function selectShoppingBodyHeadingSlotsForMode<T>(
+  headings: readonly T[] | null | undefined,
+  mode: unknown,
+): ShoppingBodyHeadingSlot<T>[] {
+  const source = [...(headings || [])].map((heading, originalIndex) => ({
+    heading,
+    originalIndex,
+  }));
+  const normalizedMode = String(mode || 'all');
+  if (normalizedMode === 'none' || normalizedMode === 'thumbnail-only') return [];
+  if (normalizedMode !== 'odd-only' && normalizedMode !== 'even-only') return source;
+
+  return source.filter(slot => {
+    const oneBasedBodySlot = slot.originalIndex + 1;
+    return normalizedMode === 'odd-only'
+      ? oneBasedBodySlot % 2 === 1
+      : oneBasedBodySlot % 2 === 0;
+  });
+}
+
+export function selectShoppingBodyHeadingsForMode<T>(
+  headings: readonly T[] | null | undefined,
+  mode: unknown,
+): T[] {
+  return selectShoppingBodyHeadingSlotsForMode(headings, mode).map(slot => slot.heading);
+}
+
+export interface ShoppingAiBatchItem {
+  heading?: unknown;
+  isThumbnail?: boolean;
+  originalIndex?: unknown;
+}
+
+export interface ShoppingAiBatchPlanOptions<T extends ShoppingAiBatchItem> {
+  items: readonly T[] | null | undefined;
+  headingImageMode: unknown;
+  representative: unknown;
+  representativeUrl?: unknown;
+  postTitle?: unknown;
+}
+
+export interface ShoppingAiBatchPlan<T extends ShoppingAiBatchItem> {
+  bodyItems: T[];
+  representativeThumbnail: ShoppingRepresentativeThumbnail;
+}
+
+/**
+ * Builds the same shopping image layout for every publishing flow. The
+ * representative original always owns thumbnail slot zero, even when the
+ * generated article has no explicit introduction item.
+ */
+export function createShoppingAiBatchPlan<T extends ShoppingAiBatchItem>(
+  options: ShoppingAiBatchPlanOptions<T>,
+): ShoppingAiBatchPlan<T> {
+  const allItems = [...(options.items || [])];
+  const thumbnailItem = allItems.find(item => item?.isThumbnail === true);
+  const indexedBodyItems = allItems
+    .filter(item => item?.isThumbnail !== true)
+    .map((item, originalIndex) => ({ ...item, originalIndex }) as T);
+  const bodyItems = selectShoppingBodyHeadingsForMode(
+    indexedBodyItems,
+    options.headingImageMode,
+  );
+
+  return {
+    bodyItems,
+    representativeThumbnail: createShoppingRepresentativeThumbnail(
+      options.representative,
+      thumbnailItem?.heading || options.postTitle,
+      options.representativeUrl,
+    ),
+  };
+}
+
+export interface ShoppingAiBodySlot {
+  heading?: unknown;
+  title?: unknown;
+  text?: unknown;
+  originalHeading?: unknown;
+  originalIndex?: unknown;
+}
+
+function normalizeShoppingBodySlotHeading(candidate: unknown): string {
+  if (typeof candidate === 'string') {
+    return candidate.trim().replace(/\s+/g, ' ').toLocaleLowerCase();
+  }
+  if (!candidate || typeof candidate !== 'object') return '';
+  const slot = candidate as ShoppingAiBodySlot;
+  return String(slot.heading || slot.title || slot.text || slot.originalHeading || '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLocaleLowerCase();
+}
+
+function normalizeShoppingBodySlotIndex(candidate: unknown): number | null {
+  if (!candidate || typeof candidate !== 'object') return null;
+  const value = Number((candidate as ShoppingAiBodySlot).originalIndex);
+  return Number.isInteger(value) && value >= 0 ? value : null;
+}
+
+/**
+ * Prepared shopping images may be reused only when they still belong to the
+ * exact current heading slots. Count-only checks can silently reuse an odd
+ * batch after the user switches to even placement.
+ */
+export function doShoppingAiBodySlotsMatch(
+  preparedImages: readonly unknown[] | null | undefined,
+  expectedSlots: readonly unknown[] | null | undefined,
+): boolean {
+  const prepared = [...(preparedImages || [])];
+  const expected = [...(expectedSlots || [])];
+  if (prepared.length !== expected.length) return false;
+
+  return expected.every((expectedSlot, index) => {
+    const preparedSlot = prepared[index];
+    const preparedHeading = normalizeShoppingBodySlotHeading(preparedSlot);
+    const expectedHeading = normalizeShoppingBodySlotHeading(expectedSlot);
+    if (!preparedHeading || !expectedHeading || preparedHeading !== expectedHeading) return false;
+
+    const expectedIndex = normalizeShoppingBodySlotIndex(expectedSlot);
+    if (expectedIndex === null) return true;
+    return normalizeShoppingBodySlotIndex(preparedSlot) === expectedIndex;
+  });
 }
 
 export interface ReferenceSafeImageRequestPart {
@@ -305,6 +446,77 @@ export function createShoppingRepresentativeThumbnail(
     disableTextOverlay: true,
     allowText: false,
   };
+}
+
+function extractShoppingPublishOutputIdentity(candidate: unknown): string {
+  if (typeof candidate === 'string') return buildReferenceImageIdentity(candidate);
+  if (!candidate || typeof candidate !== 'object') return '';
+  const image = candidate as Record<string, unknown>;
+  const stableHash = String(image.sha256 || image.contentHash || image.imageHash || '').trim();
+  if (stableHash) return buildReferenceImageIdentity({ contentHash: stableHash });
+  for (const field of ['savedToLocal', 'filePath', 'previewDataUrl', 'url', 'src'] as const) {
+    const identity = buildReferenceImageIdentity(image[field]);
+    if (identity) return identity;
+  }
+  return '';
+}
+
+function isCollectedShoppingOutput(candidate: unknown): boolean {
+  if (!candidate || typeof candidate !== 'object') return false;
+  const image = candidate as Record<string, unknown>;
+  const source = String(image.source || '').trim().toLowerCase();
+  const provider = String(image.provider || '').trim().toLowerCase();
+  return image.isCollectedImage === true
+    || source === 'collected'
+    || provider === 'collected'
+    || provider === 'collected-image';
+}
+
+/**
+ * Final shopping-AI boundary: the representative original is the only
+ * collected image allowed in publish output. Body slots accept unique AI
+ * results only; collected gallery images remain reference inputs.
+ */
+export function resolveShoppingAiPublishImages<T>(
+  representativeThumbnail: T | null | undefined,
+  generatedImages: readonly T[] | null | undefined,
+  collectedImages: readonly unknown[] | null | undefined,
+): ShoppingAiPublishImagesResult<T> {
+  const collectedIdentities = new Set<string>();
+  for (const candidate of collectedImages || []) {
+    for (const source of getShoppingReferenceSources(candidate)) {
+      const identity = buildReferenceImageIdentity(source);
+      if (identity) collectedIdentities.add(identity);
+    }
+  }
+
+  const images: T[] = representativeThumbnail ? [representativeThumbnail] : [];
+  const seenGenerated = new Set<string>();
+  let removedCollectedCount = 0;
+  let removedDuplicateCount = 0;
+
+  for (const candidate of generatedImages || []) {
+    if (candidate === representativeThumbnail) continue;
+    const image = candidate as unknown as Record<string, unknown>;
+    if (image?.isShoppingRepresentativeThumbnail === true || image?.isThumbnail === true) {
+      removedCollectedCount += 1;
+      continue;
+    }
+
+    const identity = extractShoppingPublishOutputIdentity(candidate);
+    if (isCollectedShoppingOutput(candidate) || (identity && collectedIdentities.has(identity))) {
+      removedCollectedCount += 1;
+      continue;
+    }
+    if (identity && seenGenerated.has(identity)) {
+      removedDuplicateCount += 1;
+      continue;
+    }
+    if (identity) seenGenerated.add(identity);
+    images.push(candidate);
+  }
+
+  return { images, removedCollectedCount, removedDuplicateCount };
 }
 
 export function applyShoppingRepresentativeReference<T extends object>(

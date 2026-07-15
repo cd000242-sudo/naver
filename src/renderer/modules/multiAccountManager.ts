@@ -4,10 +4,13 @@
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
+    createShoppingAiBatchPlan,
     createShoppingRepresentativeThumbnail,
+    resolveShoppingAiPublishImages,
     resolveShoppingRepresentativeReference,
     resolveUsableShoppingReferenceSource,
 } from '../../image/shoppingReferenceGeneration.js';
+import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initMultiAccountManager = initMultiAccountManager;
 exports.generateImagesForAutomation = generateImagesForAutomation;
@@ -508,8 +511,8 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         }
     }
     const items = [];
-    for (const h of headings) {
-        const headingIdx = headings.indexOf(h);
+    for (let headingIdx = 0; headingIdx < headings.length; headingIdx++) {
+        const h = headings[headingIdx];
         const title = h.title || h.text || h.heading || (typeof h === 'string' ? h : '');
         if (!title || title.trim() === '')
             continue;
@@ -565,8 +568,21 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
             referenceImageList: isShoppingConnect ? [usableShoppingReferenceUrl] : undefined,
         });
     }
-    const itemsForGeneration = getSequentialImageItemsForMode(items, _headingImageMode);
-    const _displayCount = itemsForGeneration.length;
+    const shoppingBatchPlan = isShoppingConnect
+        ? createShoppingAiBatchPlan({
+            items,
+            headingImageMode: _headingImageMode,
+            representative: shoppingReference.representative || usableShoppingReferenceUrl,
+            representativeUrl: usableShoppingReferenceUrl,
+            postTitle,
+        })
+        : null;
+    const itemsForGeneration = shoppingBatchPlan
+        ? shoppingBatchPlan.bodyItems
+        : getSequentialImageItemsForMode(items, _headingImageMode);
+    const _displayCount = shoppingBatchPlan
+        ? shoppingBatchPlan.bodyItems.length + 1
+        : itemsForGeneration.length;
     onProgress?.(`🚀 이미지 생성 시작: ${_displayCount}개 (Provider: ${provider}, run #${runId})`);
     onProgress?.('🧵 안정성을 위해 이미지를 1개씩 순차 생성합니다.');
     if (_displayCount === 0) {
@@ -596,6 +612,62 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
     const MAX_RETRIES = isFlowProvider ? 2 : 3;
     let lastError = null;
     const sequentialImages = [];
+    if (isShoppingConnect) {
+        if (stopCheck && stopCheck())
+            return [];
+        const representativeThumbnail = shoppingBatchPlan.representativeThumbnail;
+        const bodyItems = shoppingBatchPlan.bodyItems;
+        if (bodyItems.length === 0) {
+            onProgress?.(`✅ [run #${runId}] 대표 상품 원본 1장을 썸네일로 배치했습니다.`);
+            return [representativeThumbnail];
+        }
+        onProgress?.(`🎨 [run #${runId}] 쇼핑 소제목 ${bodyItems.length}개를 한 배치로 생성합니다.`);
+        const batchResult = await generateImagesWithCostSafety({
+            provider,
+            items: shoppingBatchPlan.bodyItems,
+            postTitle,
+            regenerate: false,
+            referenceImagePath: usableShoppingReferenceUrl,
+            collectedImages: options.collectedImages,
+            isShoppingConnect: true,
+            thumbnailTextInclude: false,
+            headingImageMode: 'all',
+            imageFallbackPolicy: 'engine-only',
+            isMultiAccount: true,
+            longRunImageGeneration: true,
+            imageGenerationTimeoutMs: BATCH_TIMEOUT_MS,
+        });
+        if (stopCheck && stopCheck())
+            return [];
+        if (!batchResult?.success || !Array.isArray(batchResult.images)) {
+            throw new Error(batchResult?.message || '쇼핑 AI 이미지 배치 생성 결과가 없습니다.');
+        }
+
+        const normalizedBatchImages = batchResult.images.map((img, index) => {
+            const fallbackItem = bodyItems[index];
+            return {
+                ...img,
+                heading: img?.heading || fallbackItem?.heading,
+                isThumbnail: img?.isThumbnail ?? fallbackItem?.isThumbnail ?? false,
+                originalIndex: img?.originalIndex ?? fallbackItem?.originalIndex,
+            };
+        });
+        const safeBatch = resolveShoppingAiPublishImages(
+            representativeThumbnail,
+            normalizedBatchImages,
+            options.collectedImages,
+        );
+        const expectedBodyCount = bodyItems.length;
+        const actualBodyCount = safeBatch.images.length - 1;
+        if (actualBodyCount !== expectedBodyCount) {
+            throw new Error(
+                `SHOPPING_AI_IMAGE_BATCH_INCOMPLETE: AI 소제목 이미지 ${actualBodyCount}/${expectedBodyCount}개만 고유 결과로 확인되었습니다. `
+                + `수집 원본 ${safeBatch.removedCollectedCount}개, 중복 ${safeBatch.removedDuplicateCount}개를 차단했습니다.`,
+            );
+        }
+        onProgress?.(`✅ [run #${runId}] 대표 원본 1장 + AI 소제목 ${actualBodyCount}장 확인 완료`);
+        return safeBatch.images;
+    }
     for (let itemIndex = 0; itemIndex < itemsForGeneration.length; itemIndex++) {
         const item = itemsForGeneration[itemIndex];
         if (isShoppingConnect && item.isThumbnail === true) {
@@ -3287,7 +3359,7 @@ async function initMultiAccountPublishModal() {
                                             }
                                         }
                                         structuredContent.collectedImages = generatedImages;
-                                        structuredContent.images = [...generatedImages];
+                                        structuredContent.images = isShoppingAiMode ? [] : [...generatedImages];
                                         window.currentStructuredContent = structuredContent;
                                     }
                                     shoppingCollectedImages = [...generatedImages];
@@ -3682,15 +3754,16 @@ async function initMultiAccountPublishModal() {
                         addMALog(`📅 예약 시간: ${queueItem.scheduleDate} ${queueItem.scheduleTime} (타입: ${queueItem.scheduleType || 'naver-server'})`, 'info');
                     }
                     addProgressItem(`   🚀 ${queueItem.accountName} 발행 중...`, 'info');
+                    const publishImages = normalizePublishImageSequence(structuredContent, generatedImages);
                     let extractedThumbnailPath;
-                    if (Array.isArray(generatedImages) && generatedImages.length > 0) {
-                        const thumbImg = generatedImages.find((img) => img.isThumbnail === true);
+                    if (publishImages.length > 0) {
+                        const thumbImg = publishImages.find((img) => img.isThumbnail === true);
                         if (thumbImg) {
                             extractedThumbnailPath = thumbImg.filePath || thumbImg.url || undefined;
                             console.log(`[FullAuto] 🖼️ 썸네일 추출 (isThumbnail): ${extractedThumbnailPath?.substring(0, 80)}`);
                         }
-                        if (!extractedThumbnailPath && generatedImages[0]) {
-                            extractedThumbnailPath = generatedImages[0].filePath || generatedImages[0].url || undefined;
+                        if (!extractedThumbnailPath && publishImages[0]) {
+                            extractedThumbnailPath = publishImages[0].filePath || publishImages[0].url || undefined;
                             console.log(`[FullAuto] 🖼️ 썸네일 폴백 (첫 이미지): ${extractedThumbnailPath?.substring(0, 80)}`);
                         }
                     }
@@ -3745,7 +3818,7 @@ async function initMultiAccountPublishModal() {
                             content: structuredContent.bodyPlain || structuredContent.content,
                             hashtags: (structuredContent.hashtags || []).join(' '),
                             structuredContent: structuredContent,
-                            generatedImages: generatedImages,
+                            generatedImages: publishImages,
                         } : null,
                         keepBrowserOpen: true,
                         includeThumbnailText: queueItem.includeThumbnailText ?? false,

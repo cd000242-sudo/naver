@@ -17,6 +17,7 @@ describe('copy-static runtime inline contract', () => {
     expect(copyStaticSource).toContain('rendererRuntimeDependencyFiles');
     expect(copyStaticSource).toContain("'referenceImagePolicy.js'");
     expect(copyStaticSource).toContain("'shoppingReferenceGeneration.js'");
+    expect(copyStaticSource).toContain("'publishImageSequence.js'");
 
     for (const symbol of [
       'deduplicateReferenceImages',
@@ -27,6 +28,7 @@ describe('copy-static runtime inline contract', () => {
       'resolveShoppingCollectedImagePlacement',
       'resolveUsableShoppingReferenceSource',
       'createShoppingRepresentativeThumbnail',
+      'normalizePublishImageSequence',
     ]) {
       expect(copyStaticSource).toContain(`'${symbol}'`);
     }

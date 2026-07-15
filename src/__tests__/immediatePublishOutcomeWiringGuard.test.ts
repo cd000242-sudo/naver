@@ -5,7 +5,9 @@ describe('immediate publish outcome wiring guard', () => {
   const source = readFileSync('src/naverBlogAutomation.ts', 'utf8');
 
   it('validates immediate publish outcome after every high-level publish call', () => {
-    const publishCalls = source.match(/await this\.publishBlogPost\(resolvedOptions\.publishMode, resolvedOptions\.scheduleDate, resolvedOptions\.scheduleMethod\);/g) || [];
+    const publishCalls = source.match(
+      /await this\.publishBlogPost\(\s*resolvedOptions\.publishMode,\s*resolvedOptions\.scheduleDate,\s*resolvedOptions\.scheduleMethod,\s*runOptions,\s*\);/g,
+    ) || [];
     const beforeUrlCaptures = source.match(/const beforePublishUrl = this\.page\?\.url\(\) \|\| '';/g) || [];
     const guards = source.match(/this\.verifyImmediatePublishOutcome\(beforePublishUrl\);/g) || [];
 

@@ -65,6 +65,46 @@ describe('sanitizeUserVisibleError', () => {
     expect(result).toContain('[internal path]');
   });
 
+  it.each(['socks4', 'socks4a', 'socks5', 'socks5h'])(
+    'redacts credential-bearing %s proxy URLs',
+    (scheme) => {
+      const result = sanitizeUserVisibleError(
+        `ALL_PROXY=${scheme}://proxy-user:proxy-pass@proxy.example.com:1080`,
+      );
+
+      expect(result).not.toContain('proxy-user');
+      expect(result).not.toContain('proxy-pass');
+      expect(result).toContain(`${scheme}://[redacted]@proxy.example.com:1080`);
+    },
+  );
+
+  it('removes an OAuth URL fragment instead of exposing its keys or values', () => {
+    const result = sanitizeUserVisibleError(
+      'Login callback failed at https://auth.example.com/callback#code=oauth-secret&state=state-secret',
+    );
+
+    expect(result).toContain('https://auth.example.com/callback');
+    expect(result).not.toContain('code=');
+    expect(result).not.toContain('oauth-secret');
+    expect(result).not.toContain('state=');
+    expect(result).not.toContain('state-secret');
+  });
+
+  it.each(['http', 'https', 'socks4', 'socks4a', 'socks5', 'socks5h'])(
+    'removes all query and fragment data from %s URLs',
+    (scheme) => {
+      const result = sanitizeUserVisibleError(
+        `Proxy failed at ${scheme}://proxy-user:proxy-pass@proxy.example.com:1080/route?session_key=query-secret#route_key=fragment-secret`,
+      );
+
+      expect(result).toContain(`${scheme}://[redacted]@proxy.example.com:1080/route`);
+      expect(result).not.toContain('session_key');
+      expect(result).not.toContain('query-secret');
+      expect(result).not.toContain('route_key');
+      expect(result).not.toContain('fragment-secret');
+    },
+  );
+
   it('sanitizes failure payloads without mutating successful IPC results', () => {
     const failed = {
       success: false,

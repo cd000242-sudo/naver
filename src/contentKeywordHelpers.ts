@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-18/v2.10.164] contentGenerator god file decomposition — keyword preprocessing helpers.
  *
  * 입력 키워드/source 전처리:

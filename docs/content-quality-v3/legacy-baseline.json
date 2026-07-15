@@ -1,0 +1,551 @@
+{
+  "algorithm": "sha256",
+  "files": [
+    {
+      "bytes": 8010,
+      "path": "src/content/evaluators/affiliateEval.ts",
+      "sha256": "53d04a8e121c5cba53e2f5f0e9ff5884a502853136440d6ce2f728b0c1fe49df"
+    },
+    {
+      "bytes": 7964,
+      "path": "src/content/evaluators/homefeedEval.ts",
+      "sha256": "4a2a9207da7943d237d1cf7c6651ad619eed3003a99b7b186d98863c08416577"
+    },
+    {
+      "bytes": 14385,
+      "path": "src/content/evaluators/humanlikeEval.ts",
+      "sha256": "3702ae6d097d1a9b29ba862e7847a38c3b80fb77b42bba45bad10157747126e2"
+    },
+    {
+      "bytes": 7091,
+      "path": "src/content/evaluators/safetyEval.ts",
+      "sha256": "08a82604bc6ac43c237f7c0575e957c848a51f0e825efc5e5804cf5e8dddee14"
+    },
+    {
+      "bytes": 8587,
+      "path": "src/content/evaluators/seoEval.ts",
+      "sha256": "d2a6ffff8b86a7d30855c70dab5a2d1413315380623320b8e8a1b553214a6a55"
+    },
+    {
+      "bytes": 8214,
+      "path": "src/content/quality90Gate.ts",
+      "sha256": "3ddddded90a7199ad7880e5dce52819c28518785d40e558926c6eb0ddd6f8288"
+    },
+    {
+      "bytes": 6223,
+      "path": "src/content/qualityEvaluator.ts",
+      "sha256": "3b1bc6b807b3adc4d22ef7a67085e7de6248422e61b3a9beab712ea82882943f"
+    },
+    {
+      "bytes": 21121,
+      "path": "src/contentJsonPromptFormat.ts",
+      "sha256": "8135e04b29178ea6382d6315c6f183c0993ccf8cf64e6661274484400849b02b"
+    },
+    {
+      "bytes": 84943,
+      "path": "src/promptLoader.ts",
+      "sha256": "a5459aacbaa677b73d31e96d87dc819f37ac567303d895a7bcacd2c938450158"
+    },
+    {
+      "bytes": 1466,
+      "path": "src/prompts/affiliate/chain/editor.prompt",
+      "sha256": "b6f2db6a44313d6e5a739ad67acef296243bdd645483d5016286a49998faf36a"
+    },
+    {
+      "bytes": 975,
+      "path": "src/prompts/affiliate/chain/faq.prompt",
+      "sha256": "f234b5844b1310a3703a7f3ee2922c63380b0e1be33c1162896218a6dd4001a1"
+    },
+    {
+      "bytes": 2980,
+      "path": "src/prompts/affiliate/chain/stage1_classify.prompt",
+      "sha256": "ed99e2425adfbc23e7fb1890b45151b707d7ea212b3f99662792dc19123b696d"
+    },
+    {
+      "bytes": 392,
+      "path": "src/prompts/affiliate/chain/stage2_persona.prompt",
+      "sha256": "865a03af479729a7b508ccf2b229dc2d36870f6e9ce0ee11d730f1bd0c2a7115"
+    },
+    {
+      "bytes": 2011,
+      "path": "src/prompts/affiliate/chain/stage3_draft.prompt",
+      "sha256": "a439854cf881991fb0a21ce4111fe18abc2192dc09d1472c1b7d7a96ccb4c853"
+    },
+    {
+      "bytes": 600,
+      "path": "src/prompts/affiliate/chain/stage4_factgate.prompt",
+      "sha256": "02dcf1d6f8a61d66b9b6a6b7e03f030cdf543a4c006e8ef37adb2356540a550b"
+    },
+    {
+      "bytes": 2193,
+      "path": "src/prompts/affiliate/chain/stage5_optimize.prompt",
+      "sha256": "d3d3c81e4bc94ebc3e7d3f243b97415b8075a5cf1ce9e242724fdf81a6706762"
+    },
+    {
+      "bytes": 3276,
+      "path": "src/prompts/affiliate/shopping_expert_review.prompt",
+      "sha256": "d70f5a667f6dc8a9412d281054d775389df1df75b49a00afe6a8d153ee2ee894"
+    },
+    {
+      "bytes": 3996,
+      "path": "src/prompts/affiliate/shopping_review.prompt",
+      "sha256": "d90e1860cdf882c5ecee6f992c1800c8c6b82482523ea49e29e752687e6fde46"
+    },
+    {
+      "bytes": 3201,
+      "path": "src/prompts/affiliate/shopping_spec_analysis.prompt",
+      "sha256": "3b8bf2279ab52266952b68cb0f11b2e79ef0c976b13ee35dad9b472522392b6c"
+    },
+    {
+      "bytes": 2849,
+      "path": "src/prompts/automation.prompt",
+      "sha256": "0505ef4f13a90fa858285440cf0b716dcf1ef89e1bd11adb699cb7341bb349bf"
+    },
+    {
+      "bytes": 10159,
+      "path": "src/prompts/business/base.prompt",
+      "sha256": "cbbff06e1ab4f7007db644c16a5789171b18f9544216dc1e4a8ff00f3d2e571b"
+    },
+    {
+      "bytes": 1287,
+      "path": "src/prompts/business/construction.prompt",
+      "sha256": "21d14415b228bcbbb13ce84398bff2208ed5b3289058f6c5497e76872014bc2c"
+    },
+    {
+      "bytes": 1301,
+      "path": "src/prompts/business/local.prompt",
+      "sha256": "b1e8b886ef06e7e9cf9d6b093648352cd288e5bdc32e52969e7b4f9b2fdd5f6e"
+    },
+    {
+      "bytes": 2268,
+      "path": "src/prompts/business/medical.prompt",
+      "sha256": "83f7864f61bc4ad234478560a1b7e62106a16a03f28003a9abdf3e04460d375a"
+    },
+    {
+      "bytes": 1237,
+      "path": "src/prompts/business/professional.prompt",
+      "sha256": "0273f3f4e4f1e09e45cbe18331cde03e83d8ccf01d43a5a6e3b725b8df975f3b"
+    },
+    {
+      "bytes": 9240,
+      "path": "src/prompts/homefeed/base.prompt",
+      "sha256": "756ce6a2246e97b25f7d4873165dd9f530b0aecf0413597a1aa2e3522f301e63"
+    },
+    {
+      "bytes": 655,
+      "path": "src/prompts/homefeed/entertainment.prompt",
+      "sha256": "3bd84ed163914bcea7cbab6dba82762cc6722af464fce155687bc8cafc2e5f54"
+    },
+    {
+      "bytes": 722,
+      "path": "src/prompts/homefeed/fashion.prompt",
+      "sha256": "8327a90a1b3673e6b0b3bf413d42cee2dd53d968a5f00295a28e445a9e7e369f"
+    },
+    {
+      "bytes": 692,
+      "path": "src/prompts/homefeed/food.prompt",
+      "sha256": "a78d72c185817118ae970f54cc3c2a80d65080a71ef92bee711cb4fcd154fdac"
+    },
+    {
+      "bytes": 698,
+      "path": "src/prompts/homefeed/health.prompt",
+      "sha256": "6bf8a4e17ac753e18597cd1ceecae8658fb7e98bb3d41e12f5f7f7c689a038ad"
+    },
+    {
+      "bytes": 629,
+      "path": "src/prompts/homefeed/it.prompt",
+      "sha256": "95ab9f0b08de86cc5e0ffc60cc14a67c2d001fcf8f0b4d105f0aa8c12da93666"
+    },
+    {
+      "bytes": 702,
+      "path": "src/prompts/homefeed/life.prompt",
+      "sha256": "acf8c9d4cd12bc37b7feaff709800124e1db85d5b6b1f483998407f52dd7abb5"
+    },
+    {
+      "bytes": 669,
+      "path": "src/prompts/homefeed/living.prompt",
+      "sha256": "23c9578213e007515d54a2bc254bb80640a56323a3209ebcebd36dff9668f15a"
+    },
+    {
+      "bytes": 654,
+      "path": "src/prompts/homefeed/parenting.prompt",
+      "sha256": "8582f377db1b43634b88825dc4dc11d903792fa2516486ff52152a2c81a9b883"
+    },
+    {
+      "bytes": 618,
+      "path": "src/prompts/homefeed/pet.prompt",
+      "sha256": "7fb88011fe1b93858b504810edc1cbe5dbcae06bf8ed87a813f6c7f6a25245f7"
+    },
+    {
+      "bytes": 720,
+      "path": "src/prompts/homefeed/society.prompt",
+      "sha256": "f1ad41dd3d8edb2b10105686e381147ea5c1151efd4dda3687dfa33cdd8aa3de"
+    },
+    {
+      "bytes": 650,
+      "path": "src/prompts/homefeed/sports.prompt",
+      "sha256": "7e21f123f43932b40dd7ed96a9e6610115d83f97dc1e26cf8aaecf3d90a4811a"
+    },
+    {
+      "bytes": 639,
+      "path": "src/prompts/homefeed/tips.prompt",
+      "sha256": "2755e71db624b35d441e0c4465e60a2d4b60c7cd58f7e4f031ffd6c233bd0d4d"
+    },
+    {
+      "bytes": 654,
+      "path": "src/prompts/homefeed/travel.prompt",
+      "sha256": "297f055005becbab210fa7ce4eaec633d22992f678b31d482f6e1a11603b57d2"
+    },
+    {
+      "bytes": 6425,
+      "path": "src/prompts/imageNarrative/base.prompt",
+      "sha256": "da95c6b7523599198df38e5ddf18667200ee76856b8735f2293aeebb7f3a6631"
+    },
+    {
+      "bytes": 2950,
+      "path": "src/prompts/imageNarrative/daily.prompt",
+      "sha256": "12163aaf66cc472727f73d5cab5cdce3f6995c516972efc07102d48bf2c89cc9"
+    },
+    {
+      "bytes": 3116,
+      "path": "src/prompts/imageNarrative/food.prompt",
+      "sha256": "890f8ca83c609322e81a322005bcb4e08db51197b97fbff5e6d633fb08e5fe18"
+    },
+    {
+      "bytes": 3043,
+      "path": "src/prompts/imageNarrative/lodging.prompt",
+      "sha256": "f0263c671bebdfea4ebc4358359308de1d83ab31e88701ff6a9ba991a8a5c8c0"
+    },
+    {
+      "bytes": 2976,
+      "path": "src/prompts/imageNarrative/review.prompt",
+      "sha256": "5be427247b35e42c837c22f21b7e2f7dfeca0e6a181f29dc0841640706074e4e"
+    },
+    {
+      "bytes": 3249,
+      "path": "src/prompts/imageNarrative/travel.prompt",
+      "sha256": "0dfe666b2cb5d2dddd5e1e196f822340b1cbfa7dc410aa1911dd6fc47efadf00"
+    },
+    {
+      "bytes": 10612,
+      "path": "src/prompts/mate/base.prompt",
+      "sha256": "a9210ad20c26b9fd0bfa6838359eeac996bf0346bce961f4d6814dda203ec177"
+    },
+    {
+      "bytes": 2095,
+      "path": "src/prompts/seo/ai-tab-friendly.prompt",
+      "sha256": "84e897df7bb08641a4379eaa6f96187be8b4b4b55496285cd27fd20a59ba6194"
+    },
+    {
+      "bytes": 47806,
+      "path": "src/prompts/seo/base.prompt",
+      "sha256": "d2d0bd86a92fa86bbf233d45185d6aec3e893c5621350671a1dead64525eae41"
+    },
+    {
+      "bytes": 818,
+      "path": "src/prompts/seo/entertainment.prompt",
+      "sha256": "5a4eb54322998fbe5f4484648bc78ea983f32a2ac3410a5065e014447028bb99"
+    },
+    {
+      "bytes": 735,
+      "path": "src/prompts/seo/fashion.prompt",
+      "sha256": "06f9b63226667a7c35ad1559cbcf0095c355aa7bfee68ea01d8a44994e5c51b2"
+    },
+    {
+      "bytes": 708,
+      "path": "src/prompts/seo/food.prompt",
+      "sha256": "961a228419a993808bde4485f6db7c217f7748c048112fac59e9fc5f5a7e75c1"
+    },
+    {
+      "bytes": 8556,
+      "path": "src/prompts/seo/geo-overlay.prompt",
+      "sha256": "e742c0d366aace2b9b3072a2a6b1c494d5807a69daf00478435f8dbf67082efa"
+    },
+    {
+      "bytes": 748,
+      "path": "src/prompts/seo/health.prompt",
+      "sha256": "3159144444e76a8c6fe891eb988c813d316e5c1e9a892355e03f8e956841d1f4"
+    },
+    {
+      "bytes": 663,
+      "path": "src/prompts/seo/it.prompt",
+      "sha256": "5cd7203e33bffb93f0de7af1a78b0e8ad5559ead0e7fe0e5b5175594394f9cc5"
+    },
+    {
+      "bytes": 729,
+      "path": "src/prompts/seo/life.prompt",
+      "sha256": "56f79da169a0d005adbaadc90398d5f21724b21727f5c8dcf1949c3a215b8071"
+    },
+    {
+      "bytes": 695,
+      "path": "src/prompts/seo/living.prompt",
+      "sha256": "b03020765ade0d7e36329c2a263c0cc82f70567779fc5cc8d2bd2ad06f3df5c7"
+    },
+    {
+      "bytes": 681,
+      "path": "src/prompts/seo/parenting.prompt",
+      "sha256": "812c345a01aad983878848f8903157e8d09317d6e74369e55a3515c0bab4fbf1"
+    },
+    {
+      "bytes": 668,
+      "path": "src/prompts/seo/pet.prompt",
+      "sha256": "929bada39da516b82b03f6fb315451843ee14a02714b2da292bd16d31868cb73"
+    },
+    {
+      "bytes": 764,
+      "path": "src/prompts/seo/society.prompt",
+      "sha256": "5b497f0deabae93d45062a23927283d053093379e91b1be70379691007e3c25b"
+    },
+    {
+      "bytes": 629,
+      "path": "src/prompts/seo/sports.prompt",
+      "sha256": "428f0489157b13f91d82b6efe705a4a4051c5dd8f2c59a5e0966d45f3d63548f"
+    },
+    {
+      "bytes": 651,
+      "path": "src/prompts/seo/tips.prompt",
+      "sha256": "5f47cdd08680884e10c2533a8eae214a67205b8b5976c0b754b10d2e2d2b63e6"
+    },
+    {
+      "bytes": 725,
+      "path": "src/prompts/seo/travel.prompt",
+      "sha256": "df2243ee0708b8e8bd8896aee50ed26d3bf4a411bad7ac76d3378fadec6fd02c"
+    },
+    {
+      "bytes": 4138,
+      "path": "src/prompts/shared/exposure-structure.prompt",
+      "sha256": "473a6c4cb4e921e6a59767f027758a8c23c46758727f58624371a6cf250f46b6"
+    },
+    {
+      "bytes": 2795,
+      "path": "src/prompts/shared/homefeed-90-quality.prompt",
+      "sha256": "5af34d758e5b2af64655379076b7209bd381b16026b6fd4889fce6499204688d"
+    },
+    {
+      "bytes": 4043,
+      "path": "src/prompts/shared/human-writing-anti-pattern.prompt",
+      "sha256": "69af06dc5b6e4da6f528fec12f795b9d8b698056891675994b134bdc54d006fb"
+    },
+    {
+      "bytes": 954,
+      "path": "src/prompts/shared/mate-90-quality.prompt",
+      "sha256": "02878f38eaaa14b85ee64b66a7f3dcfeb3e6ed28ccfc0c217b69aa6082919adc"
+    },
+    {
+      "bytes": 2510,
+      "path": "src/prompts/shared/official-exposure-rubric.prompt",
+      "sha256": "636fc57a4c755472661ad48c4deb6c0b59a9ea1a0a0dfab2a722f1dec347b3ec"
+    },
+    {
+      "bytes": 893,
+      "path": "src/prompts/shared/seo-90-quality.prompt",
+      "sha256": "5383516238283eba0f2f200f449ecb04c52956e9a9bafd8e4197a51335d5861d"
+    },
+    {
+      "bytes": 3116,
+      "path": "src/prompts/shared/situation-depth.prompt",
+      "sha256": "4727feab11742a7a528444e04c4b378a812450911fabad31eb18740a5e6a952c"
+    },
+    {
+      "bytes": 10445,
+      "path": "src/prompts/shared/strong-headings.prompt",
+      "sha256": "1e066a4a61cce2d3ed66ef45412af10b7fde08136375cb3fa1e7b9bb50f12fa6"
+    },
+    {
+      "bytes": 4906,
+      "path": "src/prompts/title/affiliate.prompt",
+      "sha256": "773704303fa04d771c59cfe55efb1407c41ce48a8f017b658e89c59883f97b57"
+    },
+    {
+      "bytes": 6987,
+      "path": "src/prompts/title/affiliate/base.prompt",
+      "sha256": "fb0c44fd65808bbe2fb6d436588cae447b4fa271455b373eadcc763e094ee7b4"
+    },
+    {
+      "bytes": 2551,
+      "path": "src/prompts/title/affiliate/fashion.prompt",
+      "sha256": "2d55dc4e40978c57c811c21f46a681fbe91aa86519f4f3e4b1a4a1c043f19318"
+    },
+    {
+      "bytes": 2779,
+      "path": "src/prompts/title/affiliate/health.prompt",
+      "sha256": "b0cdb36f81fd73b2d11461f9dd86843c82cfb3648a46c1ba99e7dfb0a8f5a53e"
+    },
+    {
+      "bytes": 2515,
+      "path": "src/prompts/title/affiliate/it.prompt",
+      "sha256": "a25abb033703b793e1f7818ef3b61202e940b4b061ea8237cdd9df60ff88c0ef"
+    },
+    {
+      "bytes": 2525,
+      "path": "src/prompts/title/affiliate/living.prompt",
+      "sha256": "dad374086762a151f82f567c3f04f2b111519b66aca5889e0d3f715e03393215"
+    },
+    {
+      "bytes": 6138,
+      "path": "src/prompts/title/business/base.prompt",
+      "sha256": "24b81deb5d550963a88f92a074c8cd8f9d9b2b46b9cf990b67c76a540b22459c"
+    },
+    {
+      "bytes": 7321,
+      "path": "src/prompts/title/homefeed.prompt",
+      "sha256": "072b23f6b08acc42591912a89e9c97ed34701dcd9157084d1612e9ad195c8f7a"
+    },
+    {
+      "bytes": 16446,
+      "path": "src/prompts/title/homefeed/base.prompt",
+      "sha256": "343956e827f94f039b16fa9ab30462a3dce5a1b00ded715cf1be20b65495eee4"
+    },
+    {
+      "bytes": 7844,
+      "path": "src/prompts/title/homefeed/entertainment.prompt",
+      "sha256": "1cdc430072bab1cbeabff6c5cd2a0a0d2ef3a06256a5049159bd5ca222205b38"
+    },
+    {
+      "bytes": 7054,
+      "path": "src/prompts/title/homefeed/fashion.prompt",
+      "sha256": "865171af799f74592f163947a5b3c9dca32dfeae066161634b479164daa6389f"
+    },
+    {
+      "bytes": 6996,
+      "path": "src/prompts/title/homefeed/food.prompt",
+      "sha256": "e3b8fcc4af3880e2f9158ed33221bac751b719b0e5d6a6ffcd6c3f03e27ac701"
+    },
+    {
+      "bytes": 8651,
+      "path": "src/prompts/title/homefeed/health.prompt",
+      "sha256": "af0e75f96a6ec130aad2dcaff28bf2495fe8738913443e875570fcc3355dcdfd"
+    },
+    {
+      "bytes": 7548,
+      "path": "src/prompts/title/homefeed/it.prompt",
+      "sha256": "236a5b2bee0cc34e64cc6d4620f945ce8d14773648da8d15e5544ecdbfa19621"
+    },
+    {
+      "bytes": 7593,
+      "path": "src/prompts/title/homefeed/life.prompt",
+      "sha256": "38e818b4cadc635bb10279e53fd96704f35c0214a4be5e2107d79d85725bd46d"
+    },
+    {
+      "bytes": 6941,
+      "path": "src/prompts/title/homefeed/living.prompt",
+      "sha256": "360b4a72cdd1eae10d5681700c2f1289b7ca649d0e1e1266ffc5e8a9954514c7"
+    },
+    {
+      "bytes": 7021,
+      "path": "src/prompts/title/homefeed/parenting.prompt",
+      "sha256": "3ad040b8445c57c197a3a9f5b98a5bc9a7996d02968799ee8a5e33c80b4817ac"
+    },
+    {
+      "bytes": 7145,
+      "path": "src/prompts/title/homefeed/pet.prompt",
+      "sha256": "faab73377fc4a4e1fbec2a2ae06a6e497fe6cffa3e48c3d648f221503f54bc60"
+    },
+    {
+      "bytes": 7037,
+      "path": "src/prompts/title/homefeed/society.prompt",
+      "sha256": "b550488f24faa4a30c4b8cc00134c9ace0c392adb61d9f45a9de921f5428c5d5"
+    },
+    {
+      "bytes": 7078,
+      "path": "src/prompts/title/homefeed/sports.prompt",
+      "sha256": "6b6ac97bcf676432171c765c34d37f6bc63bc8ff875398eed499916100e6e567"
+    },
+    {
+      "bytes": 6431,
+      "path": "src/prompts/title/homefeed/tips.prompt",
+      "sha256": "d285f8efb81a303acf036df31c615e483f6914c1269e7fd35df1ade1aa8a72a2"
+    },
+    {
+      "bytes": 6936,
+      "path": "src/prompts/title/homefeed/travel.prompt",
+      "sha256": "37b7981dfa0592a6ccaeb0b8bd515655b3fb798b73d5fbd8c8d762d226c70478"
+    },
+    {
+      "bytes": 3352,
+      "path": "src/prompts/title/seo.prompt",
+      "sha256": "98174f66987211fd0da3dfcb569a4dc150c60ac097cfdc62583c4f09d060261b"
+    },
+    {
+      "bytes": 8421,
+      "path": "src/prompts/title/seo/base.prompt",
+      "sha256": "e210dbe565572dec412f51a8a7208d3566827bf54b04c73c80240700819da51e"
+    },
+    {
+      "bytes": 2123,
+      "path": "src/prompts/title/seo/entertainment.prompt",
+      "sha256": "95f244fdb45cad9251667b4283c2df80621fde7f6e9b8b3e168ce6f4ec342216"
+    },
+    {
+      "bytes": 2507,
+      "path": "src/prompts/title/seo/fashion.prompt",
+      "sha256": "e408a17bc9c7171e81ed295860122d7f45aef0df37f16859a45a201455cacee8"
+    },
+    {
+      "bytes": 2045,
+      "path": "src/prompts/title/seo/food.prompt",
+      "sha256": "98cfa53364147e9d6544b7c01c2c90c7eca5e9e412b75f2f9b7f28958cc0fa11"
+    },
+    {
+      "bytes": 2572,
+      "path": "src/prompts/title/seo/health.prompt",
+      "sha256": "bb3d818b3fc582661060d8828122eb379f9fa802d414642fe1059e9fab8f1987"
+    },
+    {
+      "bytes": 2513,
+      "path": "src/prompts/title/seo/it.prompt",
+      "sha256": "695917f0fafa04230fbec78cfacbb854926b73afbb3cf0130a96b0f8e905a572"
+    },
+    {
+      "bytes": 2486,
+      "path": "src/prompts/title/seo/life.prompt",
+      "sha256": "cb6ea08de378fb7ef1fe4e57900387f50f03a670d8723c4598456cb01b263605"
+    },
+    {
+      "bytes": 1944,
+      "path": "src/prompts/title/seo/living.prompt",
+      "sha256": "505a24e399887c3900bde3dfff6e2b0187f2651acee066d0cd18778a5478b35e"
+    },
+    {
+      "bytes": 1931,
+      "path": "src/prompts/title/seo/parenting.prompt",
+      "sha256": "856150ce211204409c2b1a68ef2c8af6d57b86737356bc1d664a98bfce2f6e57"
+    },
+    {
+      "bytes": 1962,
+      "path": "src/prompts/title/seo/pet.prompt",
+      "sha256": "0dc06bf6b0ef3892f1b4a97e5178e904c3a2a2bfbff0e16c3b1d16bee4bac6d5"
+    },
+    {
+      "bytes": 1631,
+      "path": "src/prompts/title/seo/society.prompt",
+      "sha256": "a8f3be3753e8b02fc87595a5bfc670bdd73ecf5c464a1902620aeea750132601"
+    },
+    {
+      "bytes": 2044,
+      "path": "src/prompts/title/seo/sports.prompt",
+      "sha256": "555035eaaf47cba8992819a23508437c2b8f0f2804f574216d496f3637c44fec"
+    },
+    {
+      "bytes": 1566,
+      "path": "src/prompts/title/seo/tips.prompt",
+      "sha256": "70c68dfe417c3afa52322297139acac38e6584aebe9ef533a4d109e81f851ed5"
+    },
+    {
+      "bytes": 2457,
+      "path": "src/prompts/title/seo/travel.prompt",
+      "sha256": "a857dd0da81d573174df61e61c61938f4f532d164345f69cb4623578e2f64d4f"
+    },
+    {
+      "bytes": 16572,
+      "path": "src/runtime/modelRegistry.ts",
+      "sha256": "e308cdf8a9b97587cf9d97d5bc8adf42489e119b048cf23b51b4f04b331b871c"
+    }
+  ],
+  "metadata": {
+    "nodeVersion": "v20.20.2",
+    "platform": "win32",
+    "repositoryHead": "015f68f72257a7eb380f0e0a0e60dbe7f91aadf5"
+  },
+  "schemaVersion": 1
+}

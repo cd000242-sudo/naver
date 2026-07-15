@@ -64,7 +64,7 @@ describe('shopping provider reference enforcement', () => {
       originalUrl: 'https://expired.example/product.png',
     }, { fetchRemote, allowedLocalRoots: [os.tmpdir()] });
 
-    expect(loaded?.source).toBe(localPath);
+    expect(loaded?.source).toBe(fs.realpathSync(localPath));
     expect(loaded?.buffer.equals(localBytes)).toBe(true);
     expect(fetchRemote).not.toHaveBeenCalled();
   });

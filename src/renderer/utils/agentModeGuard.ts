@@ -12,10 +12,15 @@ interface AgentStatusLike {
 }
 
 function unavailableReason(provider: 'codex' | 'claude', status?: AgentStatusLike): string {
+  const providerLabel = provider === 'codex' ? 'Codex' : 'Claude';
+  if (status?.errorCode === 'provider_disabled') {
+    return status.detail
+      || '배포 앱에서는 Claude 구독 로그인을 지원하지 않습니다. Claude API 키를 사용해주세요.';
+  }
   if (!status?.installed) return `${provider} CLI가 설치되어 있지 않습니다.`;
   if (!status.loggedIn) return `${provider} 구독 로그인이 필요합니다.`;
   if (status.errorCode === 'subscription_inactive') {
-    return 'Claude 구독 기간이 만료되었거나 활성 Claude Code 구독이 없습니다.';
+    return `${providerLabel} 구독 기간이 만료되었거나 활성 ${providerLabel} 구독이 없습니다.`;
   }
   if (status.errorCode === 'rate_limited') {
     return `${provider} 구독 사용 한도가 소진되었습니다. 한도 초기화 후 다시 시도해주세요.`;
@@ -31,7 +36,7 @@ function showBlockingMessage(message: string): void {
 export async function ensureAgentEngineReady(generator: string): Promise<boolean> {
   if (generator !== 'agent-codex' && generator !== 'agent-claude') return true;
 
-  const api = (window as any).api;
+  const api = window.api;
   const provider: 'codex' | 'claude' = generator === 'agent-codex' ? 'codex' : 'claude';
   if (typeof api?.agentStatus !== 'function') {
     showBlockingMessage(
@@ -46,8 +51,11 @@ export async function ensureAgentEngineReady(generator: string): Promise<boolean
     if (response?.success && status?.available === true) return true;
 
     const reason = unavailableReason(provider, status);
-    const action = status?.errorCode === 'subscription_inactive'
-      ? 'Claude 구독을 갱신한 뒤 환경설정에서 계정을 다시 로그인해주세요.'
+    const providerLabel = provider === 'codex' ? 'Codex' : 'Claude';
+    const action = status?.errorCode === 'provider_disabled'
+      ? '환경설정의 API 키에서 Claude API 키를 등록한 뒤 Claude 엔진을 선택해주세요.'
+      : status?.errorCode === 'subscription_inactive'
+      ? `${providerLabel} 구독을 갱신한 뒤 환경설정에서 계정을 다시 로그인해주세요.`
       : !status?.installed
         ? '환경설정의 AI 텍스트 엔진 카드에서 CLI를 설치해주세요.'
         : '환경설정의 AI 텍스트 엔진 카드에서 로그인 또는 계정 전환을 진행해주세요.';

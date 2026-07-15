@@ -5,6 +5,7 @@
 // ============================================
 
 import type { StructuredContent } from '../../contentGenerator.js';
+import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
 
 // 전역 스코프 의존성
 declare let generatedImages: any[];
@@ -233,16 +234,14 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
 
   // ✅ [2026-02-24 FIX] 썸네일 이미지를 분리하여 보존
   // structuredContent.headings에는 썸네일이 포함되어 있지 않으므로
-  // 아래 heading 매칭 루프에서 누락됨 → 미리 추출하여 결과 맨 뒤에 배치
+  // 아래 heading 매칭 루프에서 누락됨 → 미리 추출하여 결과 맨 앞에 배치
   const thumbnailImages = (images || []).filter((img: any) => {
     if (img?.isThumbnail === true) return true;
     const h = String(img?.heading || '').trim().toLowerCase();
     return h.includes('썸네일') || h.includes('thumbnail');
-  });
-  // ✅ [2026-02-24 FIX] 썸네일에 isThumbnail 플래그 명시적 설정
-  thumbnailImages.forEach((img: any) => { img.isThumbnail = true; });
+  }).map((img: any) => ({ ...img, isThumbnail: true }));
   if (thumbnailImages.length > 0) {
-    console.log(`[filterImagesForPublish] ✅ 썸네일 이미지 ${thumbnailImages.length}개 보존 (뒤에 배치)`);
+    console.log(`[filterImagesForPublish] ✅ 썸네일 이미지 ${thumbnailImages.length}개 보존 (맨 앞에 배치)`);
   }
 
   // ✅ [2026-02-24 FIX] 썸네일 이미지 filePath 집합 (중복 방지용)
@@ -397,7 +396,11 @@ function filterImagesForPublish(structuredContent: any, images: any[]): any[] {
   // ✅ [2026-03-04 FIX v5] 썸네일을 맨 앞에 배치하여 네이버 에디터에 첫 번째로 삽입
   // 기존: 맨 뒤 배치 → 네이버가 마지막 이미지를 대표사진으로 선택하는 버그 발생
   // 수정: 맨 앞 배치 → 네이버가 첫 번째 이미지를 대표사진으로 정상 인식
-  return [...thumbnailImages.map(normalizeImageSyncPublishImage), ...result.map(normalizeImageSyncPublishImage)];
+  return normalizePublishImageSequence(
+    structuredContent,
+    [...thumbnailImages.map(normalizeImageSyncPublishImage), ...result.map(normalizeImageSyncPublishImage)],
+    { originalIndexBase: 1 },
+  );
 }
 
 export { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImagesFromImageManager, filterImagesForPublish };

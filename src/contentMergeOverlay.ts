@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-21/v2.10.167] contentGenerator god file decomposition — SEO+homefeed merge overlay.
  *
  * Hybrid 모드 결과 병합 — SEO 본문 + 홈피드 상단 레이어. 제목 후보 2.0:8.0 가중치로 재채점.

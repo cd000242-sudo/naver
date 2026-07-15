@@ -9,6 +9,10 @@ import {
     isMaskedSecretValue,
 } from '../../security/secretValueUtils.js';
 import { normalizeGeminiTextModelId } from '../../runtime/modelRegistry.js';
+import {
+    resolvePersistedTextModelConfig,
+    resolveTextModelSelection,
+} from './agentProductPolicyUi.js';
 
 // ==================== 타입 정의 ====================
 
@@ -163,6 +167,16 @@ function isBrowserPreview(): boolean {
     return (window as any).api?.__browserPreview === true;
 }
 
+async function isClaudeSubscriptionDisabled(): Promise<boolean> {
+    const api = (window as any).api;
+    if (typeof api?.isPackaged !== 'function') return true;
+    try {
+        return await api.isPackaged() !== false;
+    } catch {
+        return true;
+    }
+}
+
 function configureBrowserPreviewSaveButton(saveBtn: HTMLElement | null): void {
     if (!isBrowserPreview() || !(saveBtn instanceof HTMLButtonElement)) return;
 
@@ -276,7 +290,24 @@ export function closeSettingsModal(): void {
 
 async function loadCurrentSettings(): Promise<void> {
     try {
-        const config = await (window as any).api.getConfig();
+        const api = (window as any).api;
+        const loadedConfig = await api.getConfig();
+        const rawLoadedTextModel = loadedConfig.primaryGeminiTextModel || 'gemini-3.5-flash';
+        const normalizedLoadedConfig = String(rawLoadedTextModel).startsWith('gemini-')
+            ? { ...loadedConfig, primaryGeminiTextModel: normalizeGeminiTextModelId(rawLoadedTextModel) }
+            : loadedConfig;
+        const persistedTextModel = resolvePersistedTextModelConfig(
+            normalizedLoadedConfig,
+            await isClaudeSubscriptionDisabled(),
+        );
+        if (persistedTextModel.changed && !isBrowserPreview()) {
+            try {
+                await api.saveConfig(persistedTextModel.config);
+            } catch (error) {
+                console.warn('[SettingsModal] 비활성 Claude 구독 설정 자동 마이그레이션 저장 실패:', error);
+            }
+        }
+        const config = persistedTextModel.config as Record<string, any>;
         const els = getElements();
 
         // API 키 로드
@@ -315,10 +346,7 @@ async function loadCurrentSettings(): Promise<void> {
         // ✅ [v2.10.221] 글 생성 엔진(primaryGeminiTextModel) 라디오 버튼 모달 열릴 때마다 디스크 값으로 복원
         // 기존: initPriceInfoModal()의 DOMContentLoaded 1회 실행에 의존 → 사용자가 라디오 만지고 저장 안 하면 다음 열 때 변경분 잔존
         // 수정: 모달 열 때마다 디스크 값으로 강제 동기화 → "왜 기억 못 함?" 해결
-        const rawSavedTextModel = (config as any).primaryGeminiTextModel || 'gemini-3.5-flash';
-        const savedTextModel = String(rawSavedTextModel).startsWith('gemini-')
-            ? normalizeGeminiTextModelId(rawSavedTextModel)
-            : rawSavedTextModel;
+        const savedTextModel = persistedTextModel.selection.model;
         const textModelRadios = document.getElementsByName('primaryGeminiTextModel') as NodeListOf<HTMLInputElement>;
         if (textModelRadios.length > 0) {
             textModelRadios.forEach(r => { r.checked = (r.value === savedTextModel); });
@@ -379,6 +407,14 @@ async function saveSettings(): Promise<void> {
         const deepinfraKey = readApiInput(els.deepinfraApiKeyInput, currentConfig.deepinfraApiKey);
         const naverClientId = els.naverClientIdInput?.value || '';
         const naverClientSecret = readApiInput(els.naverClientSecretInput, currentConfig.naverClientSecret);
+        const selectedTextModel = (
+            document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement | null
+        )?.value || currentConfig.primaryGeminiTextModel;
+        const safeTextSelection = resolveTextModelSelection(
+            selectedTextModel,
+            claudeKey,
+            await isClaudeSubscriptionDisabled(),
+        );
 
         // 업데이트할 설정
         const updatedConfig: Record<string, any> = {
@@ -392,7 +428,8 @@ async function saveSettings(): Promise<void> {
             deepinfraApiKey: deepinfraKey, // ✅ [2026-01-26] DeepInfra 저장
             naverClientId: naverClientId,
             naverClientSecret: naverClientSecret,
-            defaultAiProvider: els.defaultAiProviderSelect?.value as 'gemini' | 'perplexity' | 'openai' | 'claude' || 'gemini',
+            primaryGeminiTextModel: safeTextSelection.model,
+            defaultAiProvider: safeTextSelection.provider,
             geminiModel: els.geminiModelSelect?.value || 'gemini-3.5-flash',
             perplexityModel: els.perplexityModelSelect?.value || 'sonar',
         };
@@ -401,7 +438,7 @@ async function saveSettings(): Promise<void> {
         await (window as any).api.saveConfig(updatedConfig);
 
         // ✅ [2026-02-22 FIX] 저장 후 unified-generator 즉시 동기화
-        const savedProvider = updatedConfig.defaultAiProvider || 'gemini';
+        const savedProvider = safeTextSelection.provider;
         const unifiedGeneratorEl = document.getElementById('unified-generator') as HTMLInputElement;
         if (unifiedGeneratorEl) {
             unifiedGeneratorEl.value = savedProvider;

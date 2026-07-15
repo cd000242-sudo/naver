@@ -3,6 +3,13 @@ import {
   executePublishing,
   injectDependencies,
 } from '../main/services/BlogExecutor';
+import {
+  beginMainProcessEditorCommitCandidate,
+  bindMainProcessEditorCommitCandidate,
+  bindMainProcessEditorVisibleSnapshot,
+  invokeMainProcessBeforePublishCommit,
+  recordMainProcessEditorCommitSemantic,
+} from '../automation/publishCommitHook.js';
 
 const flows = [
   'direct',
@@ -93,5 +100,72 @@ describe('runtime publish execution matrix', () => {
 
     expect(result.success).toBe(false);
     expect(result.message).toMatch(/PUBLISH_UNCONFIRMED/);
+  });
+
+  it('does not consume the trusted hook when browser preflight fails before the final click', async () => {
+    const beforeCommit = vi.fn(async () => undefined);
+    const run = vi.fn(async () => ({
+      success: false,
+      message: 'PRE_PUBLISH_BLOCKED:test preflight failure',
+    }));
+
+    const result = await executePublishing({ run } as any, {
+      title: 'Retryable title',
+      content: 'Retryable body',
+      structuredContent: { selectedTitle: 'Retryable title', bodyPlain: 'Retryable body' },
+      publishMode: 'publish',
+    }, [], beforeCommit);
+
+    expect(result.success).toBe(false);
+    expect(beforeCommit).not.toHaveBeenCalled();
+    expect(Object.keys(run.mock.calls[0][0])).not.toContain('beforePublishCommit');
+  });
+
+  it('consumes the trusted hook exactly once when automation reaches the final click boundary', async () => {
+    const beforeCommit = vi.fn(async () => undefined);
+    const run = vi.fn(async (options: Record<string, unknown>) => {
+      const resolved = {
+        structuredContent: options.structuredContent,
+        skipImages: options.skipImages,
+      };
+      beginMainProcessEditorCommitCandidate(options, resolved, { structured: true });
+      recordMainProcessEditorCommitSemantic(resolved, { kind: 'title', text: 'Commit title' });
+      recordMainProcessEditorCommitSemantic(resolved, { kind: 'body-source', text: 'Commit body' });
+      recordMainProcessEditorCommitSemantic(resolved, { kind: 'hashtags', values: [] });
+      bindMainProcessEditorCommitCandidate(options, resolved, options.structuredContent);
+      bindMainProcessEditorVisibleSnapshot(options, {
+        title: 'Commit title',
+        bodyText: 'Commit body',
+        linkCards: [],
+        bareUrls: [],
+        externalAnchorUrls: [],
+        opaqueVisualCount: 0,
+      });
+      await invokeMainProcessBeforePublishCommit(options);
+      return {
+        success: true,
+        url: 'https://blog.naver.com/runtime-test/223000002',
+      };
+    });
+
+    const result = await executePublishing({ run } as any, {
+      title: 'Commit title',
+      content: 'Commit body',
+      structuredContent: { selectedTitle: 'Commit title', bodyPlain: 'Commit body' },
+      publishMode: 'publish',
+      skipImages: true,
+    }, [], beforeCommit);
+
+    expect(result.success).toBe(true);
+    expect(beforeCommit).toHaveBeenCalledTimes(1);
+    expect(run.mock.calls[0][0].skipImages).toBe(true);
+    expect(beforeCommit).toHaveBeenCalledWith(expect.objectContaining({
+      validatedArticle: expect.objectContaining({
+        title: 'Commit title',
+        bodyPlain: 'Commit body',
+      }),
+    }));
+    await expect(invokeMainProcessBeforePublishCommit(run.mock.calls[0][0]))
+      .rejects.toThrow('[content-quality-v3-publish-commit] hook_replayed');
   });
 });

@@ -30,22 +30,14 @@ const UnifiedDOMCache = {
     //    0과금 엔진(본인 구독 CLI)이다. 드롭다운(#unified-generator)에 남은 stale API 값이
     //    이 선택을 덮어써 반자동에서 API로 과금되던 버그 차단 — 에이전트 라디오를 최우선.
     //    (풀오토는 드롭다운이 gemini라 우연히 동작했고, 반자동은 stale 값에 가로채였음.)
-    const selectedModelTop = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value;
-    if (selectedModelTop === 'agent-codex' || selectedModelTop === 'agent-claude') {
-      if (this.unifiedGenerator) this.unifiedGenerator.value = selectedModelTop;
-      return selectedModelTop;
-    }
-
-    // ✅ [2026-02-22 FIX] unified-generator hidden input 우선,
-    // 동기화 누락 시 primaryGeminiTextModel 라디오 버튼에서 직접 파생
-    const hiddenValue = this.unifiedGenerator?.value;
-    if (hiddenValue && hiddenValue !== 'gemini') {
-      return hiddenValue; // 명시적으로 설정된 값 (perplexity, openai, claude 등)
-    }
-
-    // ✅ 방어 코드: hidden input이 'gemini' 또는 빈 값이면 라디오 버튼 직접 확인
-    const selectedModel = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value;
+    const selectedTextModelRadio = document.querySelector(
+      'input[name="primaryGeminiTextModel"]:checked',
+    ) as HTMLInputElement | null;
+    const selectedModelTop = selectedTextModelRadio?.value;
     const modelToProvider: Record<string, string> = {
+      'gemini-3.1-flash-lite': 'gemini',
+      'gemini-3.5-flash': 'gemini',
+      'gemini-3.1-pro-preview': 'gemini',
       'perplexity-sonar': 'perplexity',
       'openai-gpt4o': 'openai',
       'openai-gpt4o-mini': 'openai',
@@ -54,11 +46,42 @@ const UnifiedDOMCache = {
       'claude-haiku': 'claude',
       'claude-sonnet': 'claude',
       'claude-opus': 'claude',
-      // ✅ 에이전트 모드 — 사용자 본인 codex/claude 구독 CLI (API 과금 0)
       'agent-codex': 'agent-codex',
       'agent-claude': 'agent-claude',
     };
-    const derivedProvider = modelToProvider[selectedModel];
+    if (
+      !selectedTextModelRadio?.disabled
+      && (selectedModelTop === 'agent-codex' || selectedModelTop === 'agent-claude')
+    ) {
+      if (this.unifiedGenerator) this.unifiedGenerator.value = selectedModelTop;
+      return selectedModelTop;
+    }
+
+    // ✅ [2026-02-22 FIX] unified-generator hidden input 우선,
+    // 동기화 누락 시 primaryGeminiTextModel 라디오 버튼에서 직접 파생
+    const rawHiddenValue = this.unifiedGenerator?.value;
+    const selectedProvider = !selectedTextModelRadio?.disabled && selectedModelTop
+      ? modelToProvider[selectedModelTop]
+      : undefined;
+    const hiddenValue = rawHiddenValue === 'agent-claude'
+      ? selectedProvider && selectedProvider !== 'agent-claude'
+        ? selectedProvider
+        : 'gemini'
+      : rawHiddenValue;
+    if (this.unifiedGenerator && hiddenValue && hiddenValue !== rawHiddenValue) {
+      this.unifiedGenerator.value = hiddenValue;
+    }
+    if (hiddenValue && hiddenValue !== 'gemini') {
+      return hiddenValue; // 명시적으로 설정된 값 (perplexity, openai, claude 등)
+    }
+
+    // ✅ 방어 코드: hidden input이 'gemini' 또는 빈 값이면 라디오 버튼 직접 확인
+    const selectedModel = selectedTextModelRadio?.value;
+    const derivedProvider = selectedTextModelRadio?.disabled
+      ? undefined
+      : selectedModel
+        ? modelToProvider[selectedModel]
+        : undefined;
     if (derivedProvider) {
       // hidden input도 동기화
       if (this.unifiedGenerator) {

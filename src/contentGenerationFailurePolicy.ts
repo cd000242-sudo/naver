@@ -14,6 +14,8 @@ export function isTerminalContentGenerationError(error: unknown): boolean {
 
   const msg = normalizeContentGenerationErrorMessage(error).toLowerCase();
   if (!msg) return false;
+  if (msg.startsWith('[content_safety_blocked]')) return true;
+  if (msg.startsWith('[content-quality-v3-publication]')) return true;
 
   const terminalPatterns = [
     /사용자가.*취소|aborted|aborterror|원본 텍스트가 비어|크롤링 실패|에러 페이지/,

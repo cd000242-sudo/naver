@@ -33,6 +33,13 @@ function includesAny(value: string, patterns: readonly string[]): boolean {
 export function classifyPublishFailure(input: unknown): PublishFailureClassification {
   const message = toMessage(input);
 
+  if (includesAny(message, [
+    '[content-quality-v3-publish-handoff]',
+    '[content-quality-v3-publication]',
+  ])) {
+    return { code: 'PUBLISH_CONDITION', retryable: false, userActionRequired: true };
+  }
+
   if (includesAny(message, ['PUBLISH_UNCONFIRMED', 'SCHEDULE_PUBLISH_OUTCOME_UNKNOWN'])) {
     return { code: 'PUBLISH_OUTCOME_UNKNOWN', retryable: false, userActionRequired: true };
   }

@@ -4,12 +4,15 @@
  */
 const axios = require('axios');
 
-const API_KEY = 'AIzaSyCZRoRk9Rf_yy5DUUzNKUDNB-74NV4ohKg';
+const API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+if (!API_KEY) {
+    throw new Error('Missing Gemini API key. Set GEMINI_API_KEY or GOOGLE_API_KEY.');
+}
 const MODEL = 'gemini-3-pro-image-preview';
 
 async function testQuota() {
     console.log('=== Gemini API 할당량 테스트 ===');
-    console.log(`API Key: ${API_KEY.substring(0, 10)}...${API_KEY.substring(API_KEY.length - 4)}`);
+    console.log('API key: loaded from environment');
     console.log(`Model: ${MODEL}`);
     console.log('');
 

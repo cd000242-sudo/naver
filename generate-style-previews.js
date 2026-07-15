@@ -4,7 +4,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const API_KEY = 'AIzaSyBx5DIw--uL2MCv3bskwEhTDbYYSew8t4I';
+const API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+if (!API_KEY) {
+    throw new Error('Missing Gemini API key. Set GEMINI_API_KEY or GOOGLE_API_KEY.');
+}
 const MODEL = 'gemini-3-pro-image-preview';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`;
 
@@ -71,7 +74,7 @@ async function generateImage(prompt) {
 async function main() {
     console.log('🎨 스타일 예시이미지 생성 시작 (Gemini 3 Pro - 대학교 캠퍼스 생활)');
     console.log(`📡 모델: ${MODEL}`);
-    console.log(`🔑 API 키: ${API_KEY.substring(0, 15)}...\n`);
+    console.log('API key: loaded from environment');
 
     const outputDir = path.join(__dirname, 'public', 'style-previews');
     if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });

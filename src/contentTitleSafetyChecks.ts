@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-17/v2.10.163] contentGenerator god file decomposition — title safety checks.
  *
  * 제목 안전성 검증:

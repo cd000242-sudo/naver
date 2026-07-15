@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-15/v2.10.161] contentGenerator god file decomposition — homefeed/seo body hooks.
  *
  * 본문 작성 후 품질 게이트/훅 적용 — 도입부 길이, 서브키워드 밀도, 스크롤 트리거,

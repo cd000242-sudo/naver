@@ -10,7 +10,13 @@
  * - 시간당 한도 (canPublishHourly) 계정별 독립
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
+import { app } from 'electron';
+import { afterEach, describe, it, expect, beforeEach, vi } from 'vitest';
+
+const electronMock = vi.hoisted(() => ({ userDataPath: '' }));
 
 // app.getPath mock (Electron 없이 테스트 가능하게)
 vi.mock('electron', () => ({
@@ -19,8 +25,14 @@ vi.mock('electron', () => ({
       // OS temp dir 사용 (test 격리)
       const os = require('os');
       const path = require('path');
-      return path.join(os.tmpdir(), `postLimitPerAccountTest_${Date.now()}_${Math.random()}`);
+      return electronMock.userDataPath || path.join(os.tmpdir(), `postLimitPerAccountTest_${Date.now()}_${Math.random()}`);
     },
+  },
+}));
+
+vi.mock('./mocks/electron', () => ({
+  app: {
+    getPath: () => electronMock.userDataPath,
   },
 }));
 
@@ -33,8 +45,29 @@ import {
 } from '../postLimitManagerPerAccount';
 
 describe('P2 perAccount post limit', () => {
+  let userDataPath = '';
+
   beforeEach(async () => {
+    userDataPath = fs.mkdtempSync(path.join(os.tmpdir(), 'post-limit-per-account-'));
+    electronMock.userDataPath = userDataPath;
     await resetAllAccounts();
+  });
+
+  afterEach(() => {
+    fs.rmSync(userDataPath, { recursive: true, force: true });
+    electronMock.userDataPath = '';
+  });
+
+  it('uses one writable OS-temp userData directory for the whole test', () => {
+    const firstPath = app.getPath('userData');
+    const secondPath = app.getPath('userData');
+    const relativeToTemp = path.relative(os.tmpdir(), firstPath);
+
+    expect(firstPath).toBe(userDataPath);
+    expect(firstPath).toBe(secondPath);
+    expect(relativeToTemp).not.toBe('..');
+    expect(relativeToTemp.startsWith(`..${path.sep}`)).toBe(false);
+    expect(() => fs.accessSync(firstPath, fs.constants.W_OK)).not.toThrow();
   });
 
   it('빈 store에서 getTodayCountForAccount → 0', async () => {

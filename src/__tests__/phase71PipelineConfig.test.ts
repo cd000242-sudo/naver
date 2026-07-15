@@ -18,6 +18,7 @@ const makeStorage = (data: Record<string, string>) => ({
 
 afterEach(() => {
   delete (globalThis as any).localStorage;
+  delete (globalThis as any).document;
 });
 
 describe('resolvePipelineConfig — 기본값 동등성', () => {
@@ -89,6 +90,23 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     expect(resolvePipelineConfig('full-auto').shopping.subImageMode).toBe('ai');
   });
 
+  it('uses the checked continuous shopping engine instead of stale storage', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'collected',
+      scSubImageSource: 'collected',
+      scAIImageEngine: 'nano-banana-2',
+    });
+    (globalThis as any).document = {
+      querySelector: (selector: string) => selector === 'input[name="continuous-modal-shopping-subimage-source"]:checked'
+        ? { value: 'dropshot' }
+        : null,
+    };
+
+    const config = resolvePipelineConfig('continuous');
+    expect(config.shopping.subImageMode).toBe('ai');
+    expect(config.shopping.aiImageEngine).toBe('dropshot');
+  });
+
   it.each(['openai-image', 'dropshot', 'nano-banana-pro'])(
     '구버전 fullAutoImageSource의 참조 엔진 %s를 그대로 승계한다',
     (engine) => {
@@ -128,6 +146,25 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     });
 
     expect(resolvePipelineConfig('full-auto').shopping.aiImageEngine).toBe('openai-image');
+  });
+
+  it.each([
+    ['full-auto', 'input[name="sc-subimage-mode-inline-radio"]:checked'],
+    ['continuous', 'input[name="continuous-modal-shopping-subimage-source"]:checked'],
+    ['multi-account', 'input[name="ma-shopping-subimage-source"]:checked'],
+  ] as const)('%s 발행 직전 화면에서 선택한 쇼핑 AI 모드가 오래된 저장값보다 우선한다', (flow, checkedSelector) => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'collected',
+      scSubImageSource: 'collected',
+      scAIImageEngine: 'dropshot',
+    });
+    (globalThis as any).document = {
+      querySelector: (selector: string) => selector === checkedSelector
+        ? { value: 'ai' }
+        : null,
+    };
+
+    expect(resolvePipelineConfig(flow).shopping.subImageMode).toBe('ai');
   });
 
   it.each(['flow', 'prodia', 'imagefx'])('참조 이미지를 보장하지 못하는 저장 엔진 %s는 안전한 기본값으로 복구한다', (engine) => {

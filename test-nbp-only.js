@@ -2,7 +2,10 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-const KEY = 'AIzaSyAtjFG4IP1xlTSgAfQVUJI-dpOcju3KBAY';
+const KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+if (!KEY) {
+    throw new Error('Missing Gemini API key. Set GEMINI_API_KEY or GOOGLE_API_KEY.');
+}
 const model = 'gemini-3-pro-image-preview';
 const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${KEY}`;
 const prompt = 'Hyper-realistic Korean cafe interior, warm morning light, latte art on wooden table, cozy atmosphere. NO TEXT NO WATERMARK';

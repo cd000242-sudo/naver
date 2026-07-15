@@ -6,7 +6,7 @@
 //
 // 蹂?紐⑤뱢? FTC ?쒖꽦 ?щ? + ?띿뒪?몃? 寃곗젙?섎뒗 ?⑥씪 SSOT ?⑥닔瑜??쒓났?쒕떎.
 
-const DEFAULT_FTC_TEXT = '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.';
+import { DEFAULT_AFFILIATE_FTC_DISCLOSURE } from '../../automation/ftcDisclosurePresets.js';
 
 interface FtcResolverOptions {
   /** ?ъ슜??諛쒗뻾 紐⑤뱶 */
@@ -87,7 +87,7 @@ export function resolveFtcSetting(options: FtcResolverOptions = {}): FtcResoluti
         }
       } catch { /* ignore */ }
       if (!text && isAffiliateMode) {
-        text = DEFAULT_FTC_TEXT;
+        text = DEFAULT_AFFILIATE_FTC_DISCLOSURE;
       }
     }
   }

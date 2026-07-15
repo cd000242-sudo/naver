@@ -1,7 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const API_KEY = 'AIzaSyAtjFG4IP1xlTSgAfQVUJI-dpOcju3KBAY';
+const API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+if (!API_KEY) {
+    throw new Error('Missing Gemini API key. Set GEMINI_API_KEY or GOOGLE_API_KEY.');
+}
 const RESULTS_FILE = path.join(__dirname, 'test-results-503.txt');
 
 let output = '';
@@ -63,7 +66,7 @@ async function testModel({ name, model }) {
 async function main() {
     log('=== Nano Banana Pro 503 Test ===');
     log(`Date: ${new Date().toISOString()}`);
-    log(`API Key: ${API_KEY.substring(0, 12)}... (${API_KEY.length} chars)`);
+    log('API key: loaded from environment');
 
     for (const m of MODELS) {
         await testModel(m);

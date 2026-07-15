@@ -8,6 +8,16 @@
 import { toastManager } from '../utils/uiManagers.js';
 import { rememberPlan } from '../utils/geminiPlanMemo.js';
 import { normalizeGeminiTextModelId } from '../../runtime/modelRegistry.js';
+import {
+  createAgentStatusRefreshCoordinator,
+  type AgentStatusProvider,
+} from '../utils/agentStatusRefreshCoordinator.js';
+import { runAgentLoginWithCodeFallback } from '../utils/agentLoginCodePrompt.js';
+import {
+  formatAgentVersionLabel,
+  resolvePersistedTextModelConfig,
+  resolveTextModelSelection,
+} from '../utils/agentProductPolicyUi.js';
 
 // renderer.ts 전역 함수/변수 참조 (런타임에 존재)
 declare function initMultiAccountManager(): Promise<void>;
@@ -27,13 +37,64 @@ function setShown(el: HTMLElement | null, on: boolean, mode: 'inline-block' | 'f
   if (el) el.style.display = on ? mode : 'none';
 }
 
+const agentStatusRefreshCoordinator = createAgentStatusRefreshCoordinator();
+let claudeSubscriptionDisabled = true;
+
+interface RefreshAgentStatusOptions {
+  readonly providers?: readonly AgentStatusProvider[];
+  readonly forceRefresh?: boolean;
+}
+
+function applyClaudeSubscriptionSelectorPolicy(disabled: boolean): void {
+  claudeSubscriptionDisabled = disabled;
+  const querySelector = (document as Document & {
+    querySelector?: Document['querySelector'];
+  }).querySelector?.bind(document);
+  if (!querySelector) return;
+  const radio = querySelector(
+    'input[name="primaryGeminiTextModel"][value="agent-claude"]',
+  ) as HTMLInputElement | null;
+  if (!radio) return;
+
+  const card = radio.closest('label');
+  radio.disabled = disabled;
+  if (disabled) {
+    radio.setAttribute('aria-disabled', 'true');
+    card?.setAttribute('aria-disabled', 'true');
+    card?.setAttribute('title', '배포 앱에서는 Claude API 키 방식을 사용해주세요.');
+    if (card) {
+      card.style.cursor = 'not-allowed';
+      card.style.opacity = '0.55';
+    }
+  } else {
+    radio.removeAttribute('aria-disabled');
+    card?.removeAttribute('aria-disabled');
+    card?.removeAttribute('title');
+    if (card) {
+      card.style.cursor = 'pointer';
+      card.style.opacity = '';
+    }
+  }
+
+  if (!disabled || !radio.checked) return;
+  const claudeApiKey = (document.getElementById('claude-api-key') as HTMLInputElement | null)?.value;
+  const safeSelection = resolveTextModelSelection('agent-claude', claudeApiKey, true);
+  const fallback = querySelector(
+    `input[name="primaryGeminiTextModel"][value="${safeSelection.model}"]`,
+  ) as HTMLInputElement | null;
+  radio.checked = false;
+  if (fallback) fallback.checked = true;
+  const unifiedGenerator = document.getElementById('unified-generator') as HTMLInputElement | null;
+  if (unifiedGenerator) unifiedGenerator.value = safeSelection.provider;
+}
+
 /**
  * \uC124\uCE58/\uB85C\uADF8\uC778 \uBC84\uD2BC\uC5D0 \uD074\uB9AD \uD578\uB4E4\uB7EC \uBC14\uC778\uB529 (\uD480\uC790\uB3D9 \u2014 \uC571\uC5D0\uC11C npm \uC124\uCE58/OAuth \uB85C\uADF8\uC778 \uC2E4\uD589).
  * onclick \uB300\uC785\uC774\uB77C \uBC18\uBCF5 \uD638\uCD9C\uB3FC\uB3C4 \uB204\uC801\uB418\uC9C0 \uC54A\uB294\uB2E4. \uC644\uB8CC \uD6C4 \uC0C1\uD0DC\uB97C \uC7AC\uC870\uD68C\uD574 \uBC43\uC9C0/\uBC84\uD2BC\uC744 \uAC31\uC2E0\uD55C\uB2E4.
  */
 function bindAgentAction(
   btn: HTMLButtonElement | null,
-  provider: 'codex' | 'claude',
+  provider: AgentStatusProvider,
   action: 'install' | 'login',
   statusEl: HTMLElement,
 ): void {
@@ -41,27 +102,43 @@ function bindAgentAction(
   btn.onclick = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const api = (window as any).api;
+    const api = window.api;
     const fn = action === 'install' ? api?.agentInstall : api?.agentLogin;
     if (typeof fn !== 'function') return;
+    const actionLease = agentStatusRefreshCoordinator.beginAction(provider);
     const orig = btn.textContent;
     btn.disabled = true;
-    btn.textContent = action === 'install' ? '\u23F3 \uC124\uCE58 \uC911... (\uCD5C\uB300 2\uBD84)' : '\u23F3 \uBE0C\uB77C\uC6B0\uC800\uC5D0\uC11C \uB85C\uADF8\uC778 \uC644\uB8CC...';
-    statusEl.textContent = action === 'install' ? '\u23F3 npm \uC804\uC5ED \uC124\uCE58 \uC911...' : '\u23F3 \uB85C\uADF8\uC778 \uC9C4\uD589 \uC911 (\uBE0C\uB77C\uC6B0\uC800 \uD655\uC778)...';
+    btn.textContent = action === 'install' ? '\u23F3 \uC124\uCE58 \uC911... (\uCD5C\uB300 2\uBD84)' : '\u23F3 \uB85C\uADF8\uC778 \uC900\uBE44 \uC911...';
+    statusEl.textContent = action === 'install' ? '\u23F3 npm \uC804\uC5ED \uC124\uCE58 \uC911...' : '\u23F3 \uB85C\uADF8\uC778 \uC8FC\uC18C \uC900\uBE44 \uC911...';
     statusEl.style.color = '#6b7280';
     try {
-      const res = await fn(provider);
+      const res = action === 'login'
+        ? await runAgentLoginWithCodeFallback({
+          provider,
+          mountElement: btn.parentElement ?? statusEl,
+          statusElement: statusEl,
+          api,
+          startLogin: () => api.agentLogin(provider),
+        })
+        : await fn(provider);
       if (res?.success) {
-        toastManager.success(action === 'install' ? '\u2705 CLI \uC124\uCE58 \uC644\uB8CC' : '\u2705 \uB85C\uADF8\uC778 \uC644\uB8CC');
+        const loginStatus = action === 'login' && 'status' in res ? res.status : undefined;
+        if (action === 'login' && loginStatus?.available !== true) {
+          toastManager.warning(`\u26A0\uFE0F \uB85C\uADF8\uC778\uC740 \uD655\uC778\uB410\uC9C0\uB9CC \uD604\uC7AC \uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4: ${loginStatus?.detail || '\uAD6C\uB3C5 \uC0C1\uD0DC\uB97C \uD655\uC778\uD574\uC8FC\uC138\uC694'}`);
+        } else {
+          toastManager.success(action === 'install' ? '\u2705 CLI \uC124\uCE58 \uC644\uB8CC' : '\u2705 \uB85C\uADF8\uC778 \uC644\uB8CC');
+        }
       } else {
         toastManager.error(`\u274C ${action === 'install' ? '\uC124\uCE58' : '\uB85C\uADF8\uC778'} \uC2E4\uD328: ${res?.message || '\uC54C \uC218 \uC5C6\uB294 \uC624\uB958'}`);
       }
     } catch (err) {
       toastManager.error(`\u274C \uC624\uB958: ${(err as Error).message}`);
     } finally {
-      btn.disabled = false;
-      btn.textContent = orig;
-      void refreshAgentStatusBadges(); // \uC0C1\uD0DC \uC7AC\uC870\uD68C \u2192 \uBC43\uC9C0/\uBC84\uD2BC \uC790\uB3D9 \uAC31\uC2E0
+      if (agentStatusRefreshCoordinator.endAction(actionLease)) {
+        btn.disabled = false;
+        btn.textContent = orig;
+        await refreshAgentStatusBadges({ providers: [provider], forceRefresh: false });
+      }
     }
   };
 }
@@ -72,16 +149,17 @@ function bindAgentAction(
  */
 function bindAgentSwitch(
   btn: HTMLButtonElement | null,
-  provider: 'codex' | 'claude',
+  provider: AgentStatusProvider,
   statusEl: HTMLElement,
 ): void {
   if (!btn) return;
   btn.onclick = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    const api = (window as any).api;
+    const api = window.api;
     if (typeof api?.agentLogout !== 'function' || typeof api?.agentLogin !== 'function') return;
     if (!confirm(`${provider} \uACC4\uC815\uC744 \uB85C\uADF8\uC544\uC6C3\uD558\uACE0 \uB2E4\uB978 \uACC4\uC815\uC73C\uB85C \uB2E4\uC2DC \uB85C\uADF8\uC778\uD560\uAE4C\uC694?`)) return;
+    const actionLease = agentStatusRefreshCoordinator.beginAction(provider);
     const orig = btn.textContent;
     btn.disabled = true;
     btn.textContent = '\u23F3 \uB85C\uADF8\uC544\uC6C3 \uC911...';
@@ -93,20 +171,32 @@ function bindAgentSwitch(
         toastManager.error(`\u274C \uB85C\uADF8\uC544\uC6C3 \uC2E4\uD328: ${out?.message || '\uC54C \uC218 \uC5C6\uB294 \uC624\uB958'}`);
         return;
       }
-      btn.textContent = '\u23F3 \uBE0C\uB77C\uC6B0\uC800\uC5D0\uC11C \uB85C\uADF8\uC778 \uC644\uB8CC...';
-      statusEl.textContent = '\u23F3 \uC0C8 \uACC4\uC815 \uB85C\uADF8\uC778 \uC9C4\uD589 \uC911 (\uBE0C\uB77C\uC6B0\uC800 \uD655\uC778)...';
-      const login = await api.agentLogin(provider);
+      btn.textContent = '\u23F3 \uC0C8 \uACC4\uC815 \uB85C\uADF8\uC778 \uC900\uBE44 \uC911...';
+      statusEl.textContent = '\u23F3 \uC0C8 \uACC4\uC815 \uB85C\uADF8\uC778 \uC8FC\uC18C \uC900\uBE44 \uC911...';
+      const login = await runAgentLoginWithCodeFallback({
+        provider,
+        mountElement: btn.parentElement ?? statusEl,
+        statusElement: statusEl,
+        api,
+        startLogin: () => api.agentLogin(provider),
+      });
       if (login?.success) {
-        toastManager.success('\u2705 \uACC4\uC815 \uC804\uD658 \uC644\uB8CC');
+        if (login.status?.available !== true) {
+          toastManager.warning(`\u26A0\uFE0F \uACC4\uC815\uC740 \uC5F0\uACB0\uB410\uC9C0\uB9CC \uD604\uC7AC \uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4: ${login.status?.detail || '\uAD6C\uB3C5 \uC0C1\uD0DC\uB97C \uD655\uC778\uD574\uC8FC\uC138\uC694'}`);
+        } else {
+          toastManager.success('\u2705 \uACC4\uC815 \uC804\uD658 \uC644\uB8CC');
+        }
       } else {
         toastManager.error(`\u274C \uB85C\uADF8\uC778 \uC2E4\uD328: ${login?.message || '\uC54C \uC218 \uC5C6\uB294 \uC624\uB958'}`);
       }
     } catch (err) {
       toastManager.error(`\u274C \uC624\uB958: ${(err as Error).message}`);
     } finally {
-      btn.disabled = false;
-      btn.textContent = orig;
-      void refreshAgentStatusBadges();
+      if (agentStatusRefreshCoordinator.endAction(actionLease)) {
+        btn.disabled = false;
+        btn.textContent = orig;
+        await refreshAgentStatusBadges({ providers: [provider], forceRefresh: false });
+      }
     }
   };
 }
@@ -116,16 +206,23 @@ function bindAgentSwitch(
  * \uAE00\uC0DD\uC131 \uC5D4\uC9C4 \uC124\uC815 \uB85C\uB4DC \uC2DC \uD638\uCD9C \u2014 agent:status IPC\uB85C \uC2E4\uC81C \uC0C1\uD0DC\uB97C \uC870\uD68C\uD574 \uCE74\uB4DC\uC5D0 \uD45C\uAE30\uD55C\uB2E4.
  * \uBBF8\uC124\uCE58 \u2192 \uC790\uB3D9\uC124\uCE58 \uBC84\uD2BC, \uBBF8\uB85C\uADF8\uC778 \u2192 \uB85C\uADF8\uC778 \uBC84\uD2BC\uC744 \uB178\uCD9C\uD55C\uB2E4(\uD480\uC790\uB3D9).
  */
-async function refreshAgentStatusBadges(): Promise<void> {
-  const api = (window as any).api;
+export async function refreshAgentStatusBadges(
+  options: RefreshAgentStatusOptions = {},
+): Promise<void> {
+  const api = window.api;
   if (!api?.agentStatus) return;
   const targets = [
     { provider: 'codex', elId: 'agent-codex-status', actionsId: 'agent-codex-actions', installId: 'agent-codex-install-btn', loginId: 'agent-codex-login-btn', switchId: 'agent-codex-switch-btn' },
     { provider: 'claude', elId: 'agent-claude-status', actionsId: 'agent-claude-actions', installId: 'agent-claude-install-btn', loginId: 'agent-claude-login-btn', switchId: 'agent-claude-switch-btn' },
   ] as const;
-  await Promise.all(targets.map(async (t) => {
+  const selectedProviders = new Set(options.providers ?? targets.map((target) => target.provider));
+  const selectedTargets = targets.filter((target) => selectedProviders.has(target.provider));
+
+  await Promise.all(selectedTargets.map(async (t) => {
     const el = document.getElementById(t.elId);
     if (!el) return;
+    const refreshLease = agentStatusRefreshCoordinator.beginRefresh(t.provider);
+    if (!refreshLease) return;
     const actions = document.getElementById(t.actionsId);
     const installBtn = document.getElementById(t.installId) as HTMLButtonElement | null;
     const loginBtn = document.getElementById(t.loginId) as HTMLButtonElement | null;
@@ -137,13 +234,23 @@ async function refreshAgentStatusBadges(): Promise<void> {
     setShown(loginBtn, false);
     setShown(switchBtn, false);
     try {
-      const res = await api.agentStatus(t.provider);
+      const res = await api.agentStatus(t.provider, { forceRefresh: options.forceRefresh === true });
+      if (!agentStatusRefreshCoordinator.canApply(refreshLease)) return;
       const s = res?.status;
       if (!res?.success || !s) {
         el.textContent = '\u26A0\uFE0F \uC0C1\uD0DC \uD655\uC778 \uC2E4\uD328 \u2014 \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4';
         el.style.color = '#b45309';
         return;
       }
+      if (t.provider === 'claude') {
+        applyClaudeSubscriptionSelectorPolicy(s.errorCode === 'provider_disabled');
+      }
+      if (s.errorCode === 'provider_disabled') {
+        el.textContent = `\u26D4 ${s.detail || 'Claude 구독 에이전트는 배포 앱에서 비활성화되어 있습니다. 환경설정에서 Claude API 키를 사용해주세요.'}`;
+        el.style.color = '#6b7280';
+        return;
+      }
+      const versionLabel = formatAgentVersionLabel(t.provider, s.version);
       if (!s.installed) {
         el.textContent = '\u2B07\uFE0F \uBBF8\uC124\uCE58 \u2014 \uC790\uB3D9 \uC124\uCE58\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4';
         el.style.color = '#b91c1c';
@@ -153,7 +260,7 @@ async function refreshAgentStatusBadges(): Promise<void> {
         return;
       }
       if (!s.loggedIn) {
-        el.textContent = `\u2705 \uC124\uCE58\uB428(${s.version || '?'}) \u00B7 \u274C \uB85C\uADF8\uC778 \uD544\uC694`;
+        el.textContent = `\u2705 \uC124\uCE58\uB428(${versionLabel}) \u00B7 \u274C \uB85C\uADF8\uC778 \uD544\uC694`;
         el.style.color = '#b45309';
         setShown(actions, true, 'flex');
         setShown(loginBtn, true);
@@ -163,28 +270,28 @@ async function refreshAgentStatusBadges(): Promise<void> {
       if (s.available !== true) {
         const subscriptionInactive = s.errorCode === 'subscription_inactive';
         const rateLimited = s.errorCode === 'rate_limited';
+        const providerLabel = t.provider === 'codex' ? 'Codex' : 'Claude';
         el.textContent = subscriptionInactive
-          ? '\u274C Claude \uAD6C\uB3C5 \uAE30\uAC04 \uB9CC\uB8CC \uB610\uB294 \uD65C\uC131 \uAD6C\uB3C5 \uC5C6\uC74C \u2014 \uAC31\uC2E0 \uD6C4 \uB2E4\uC2DC \uB85C\uADF8\uC778'
+          ? `\u274C ${providerLabel} \uAD6C\uB3C5 \uAE30\uAC04 \uB9CC\uB8CC \uB610\uB294 \uC0AC\uC6A9 \uBD88\uAC00 \u2014 \uACC4\uC815 \uC804\uD658 \uD6C4 \uB2E4\uC2DC \uC5F0\uACB0`
           : rateLimited
-            ? '\u23F3 \uAD6C\uB3C5 \uC0AC\uC6A9 \uD55C\uB3C4 \uC18C\uC9C4 \u2014 \uCD08\uAE30\uD654 \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4'
-            : `\u26A0\uFE0F \uC0AC\uC6A9 \uAD8C\uD55C \uD655\uC778 \uC2E4\uD328 \u2014 ${s.detail || '\uB2E4\uC2DC \uB85C\uADF8\uC778\uD574\uC8FC\uC138\uC694'}`;
+            ? `\u23F3 ${providerLabel} \uAD6C\uB3C5 \uC0AC\uC6A9 \uD55C\uB3C4 \uC18C\uC9C4 \u2014 \uCD08\uAE30\uD654 \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4`
+            : `\u26A0\uFE0F ${providerLabel} \uC0AC\uC6A9 \uAD8C\uD55C \uD655\uC778 \uC2E4\uD328 \u2014 ${s.detail || '\uC0C1\uD0DC\uB97C \uB2E4\uC2DC \uD655\uC778\uD574\uC8FC\uC138\uC694'}`;
         el.style.color = subscriptionInactive ? '#b91c1c' : '#b45309';
         setShown(actions, true, 'flex');
-        if (!rateLimited) {
-          setShown(loginBtn, true);
-          bindAgentAction(loginBtn, t.provider, 'login', el);
-        }
         setShown(switchBtn, true);
         bindAgentSwitch(switchBtn, t.provider, el);
         return;
       }
-      el.textContent = `\u2705 \uC900\uBE44\uB428 \u2014 ${s.detail || s.version || '\uB85C\uADF8\uC778 \uC0C1\uD0DC'}`;
+      el.textContent = s.availabilityCheck === 'authentication'
+        ? `\u2705 \uB85C\uADF8\uC778 \uD655\uC778\uB428 \u2014 \uC2E4\uC81C \uC0AC\uC6A9 \uAC00\uB2A5 \uC5EC\uBD80\uB294 \uCCAB \uC0DD\uC131 \uC2DC \uD655\uC778 (${versionLabel})`
+        : `\u2705 \uC900\uBE44\uB428 \u2014 ${s.detail || versionLabel}`;
       el.style.color = '#15803d';
       // \u2705 [v2.11.49] \uB85C\uADF8\uC778 \uC0C1\uD0DC\uC77C \uB54C "\uACC4\uC815 \uC804\uD658" \uBC84\uD2BC \uB178\uCD9C (\uB85C\uADF8\uC544\uC6C3 \u2192 \uB2E4\uB978 \uACC4\uC815 \uC7AC\uB85C\uADF8\uC778)
       setShown(actions, true, 'flex');
       setShown(switchBtn, true);
       bindAgentSwitch(switchBtn, t.provider, el);
     } catch {
+      if (!agentStatusRefreshCoordinator.canApply(refreshLease)) return;
       el.textContent = '\u26A0\uFE0F \uC0C1\uD0DC \uD655\uC778 \uC2E4\uD328 \u2014 \uC7A0\uC2DC \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4';
       el.style.color = '#b45309';
     }
@@ -724,7 +831,7 @@ export async function initPriceInfoModal(): Promise<void> {
   // 설정 로드
   try {
     console.log('[Settings] 설정 로드 시작...');
-    const config = hasSettingsBridge ? await settingsApi.getConfig() : {};
+    let config: any = hasSettingsBridge ? await settingsApi.getConfig() : {};
     console.log('[Settings] 설정 로드 성공:', Object.keys(config || {}).length, '개 항목');
 
     if (!config) {
@@ -736,6 +843,23 @@ export async function initPriceInfoModal(): Promise<void> {
       ? await settingsApi.isPackaged()
       : true;
     console.log('[Settings] 배포 모드:', isPackaged);
+
+    const rawLoadedTextModel = config.primaryGeminiTextModel || 'gemini-3.5-flash';
+    const normalizedLoadedConfig = String(rawLoadedTextModel).startsWith('gemini-')
+      ? { ...config, primaryGeminiTextModel: normalizeGeminiTextModelId(rawLoadedTextModel) }
+      : config;
+    const persistedTextModel = resolvePersistedTextModelConfig(
+      normalizedLoadedConfig,
+      isPackaged,
+    );
+    if (persistedTextModel.changed && hasSettingsBridge) {
+      try {
+        await settingsApi.saveConfig(persistedTextModel.config);
+      } catch (error) {
+        console.warn('[Settings] 비활성 Claude 구독 설정 자동 마이그레이션 저장 실패:', error);
+      }
+    }
+    config = persistedTextModel.config;
 
     // 사용자 프로필 필드
     const userDisplayName = document.getElementById('user-display-name') as HTMLInputElement;
@@ -861,8 +985,8 @@ export async function initPriceInfoModal(): Promise<void> {
           'openai-gpt4o-search': '🔎 GPT-5.6 웹 검색 (Responses API)',
           'claude-sonnet': '📜 Claude Sonnet 5 (균형)',
           'claude-opus': '👑 Claude Fable 5 (프리미엄)',
-          'agent-codex': '🤖 에이전트 (Codex 구독 · API 과금 0)',
-          'agent-claude': '🤖 에이전트 (Claude 구독 · API 과금 0)',
+          'agent-codex': '🤖 에이전트 (Codex · 별도 API 키 불필요)',
+          'agent-claude': '🤖 에이전트 (Claude 구독 · 배포 앱 비활성)',
         };
         navStatusEl.textContent = `현재: ${modelNames[activeTextModel] || activeTextModel}`;
       }
@@ -1233,6 +1357,14 @@ export async function initPriceInfoModal(): Promise<void> {
         const naverAdSecretKeyValue = readSecretInputValue('naver-ad-secret-key', currentConfig?.naverAdSecretKey);
         const leonardoaiApiKeyValue = readSecretInputValue('leonardoai-api-key', currentConfig?.leonardoaiApiKey);
         const deepinfraApiKeyValue = readSecretInputValue('deepinfra-api-key', currentConfig?.deepinfraApiKey);
+        const selectedTextModel = (
+          document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement | null
+        )?.value;
+        const safeTextSelection = resolveTextModelSelection(
+          selectedTextModel,
+          claudeApiKeyValue,
+          claudeSubscriptionDisabled,
+        );
 
         let config: any = {
           dailyPostLimit: parseInt(dailyPostLimit?.value || '3'),
@@ -1287,7 +1419,7 @@ export async function initPriceInfoModal(): Promise<void> {
           claudeAbstentionMode: (document.getElementById('claude-abstention-mode') as HTMLInputElement | null)?.checked || false,
           // ✅ [v2.10.186 Phase 3.6] 자동 SERP 벤치마크 토글 (기본 OFF — 옵트인)
           autoSerpBenchmark: (document.getElementById('auto-serp-benchmark') as HTMLInputElement | null)?.checked || false,
-          primaryGeminiTextModel: (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value || 'gemini-3.5-flash', // 기본값 Flash (품질·속도 균형)
+          primaryGeminiTextModel: safeTextSelection.model, // product policy 적용 후 안전한 텍스트 모델
           // ✅ [2026-06-05] Gemini 자동 모드 저장
           //   더 이상 무료/유료를 묻지 않는다. 라디오가 없거나 값이 깨져도 auto로 저장해
           //   연속발행 중 플랜 모달/수동 선택 회귀를 막는다.
@@ -1305,7 +1437,7 @@ export async function initPriceInfoModal(): Promise<void> {
           openaiApiKey: openaiApiKeyValue, // ✅ [2026-02-22] OpenAI API
           claudeApiKey: claudeApiKeyValue, // ✅ [2026-02-22] Claude API
           perplexityApiKey: perplexityApiKeyValue, // ✅ [2026-03-30] Perplexity API 키 저장 누락 수정
-          defaultAiProvider: (() => { const m = (document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement)?.value; return (m === 'agent-codex' || m === 'agent-claude') ? m : m === 'perplexity-sonar' ? 'perplexity' : (m === 'openai-gpt4o' || m === 'openai-gpt4o-mini' || m === 'openai-gpt41' || m === 'openai-gpt4o-search') ? 'openai' : (m === 'claude-haiku' || m === 'claude-sonnet' || m === 'claude-opus') ? 'claude' : 'gemini'; })(),
+          defaultAiProvider: safeTextSelection.provider,
         };
 
 
@@ -1390,7 +1522,7 @@ export async function initPriceInfoModal(): Promise<void> {
                 'claude-sonnet': '📜 Claude Sonnet 5',
                 'claude-opus': '👑 Claude Fable 5',
                 'agent-codex': '🤖 에이전트 (Codex 구독)',
-                'agent-claude': '🤖 에이전트 (Claude 구독)',
+                'agent-claude': '🤖 에이전트 (Claude 구독 · 배포 앱 비활성)',
               };
               statusEl.textContent = `현재: ${names[config.primaryGeminiTextModel] || config.primaryGeminiTextModel}`;
             }

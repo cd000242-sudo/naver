@@ -352,7 +352,7 @@ describe('content policy publish integration', () => {
 
   it('runs the generated-draft policy guard before images are handed to full auto', async () => {
     const source = await fs.readFile(path.resolve(process.cwd(), 'src/main.ts'), 'utf8');
-    const generation = source.indexOf('generateStructuredContent(source');
+    const generation = source.indexOf('generateStructuredContentWithProductPolicy(source');
     const postGenerationGuard = source.indexOf('guardGeneratedContent');
     const imageHandoff = source.indexOf('if (source.images && source.images.length > 0)', postGenerationGuard);
 

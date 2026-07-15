@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-14/v2.10.160] contentGenerator god file decomposition — title prefix helpers.
  *
  * 제품명/제목 prefix 처리 — review 글에서 소제목이 전체 제목으로 시작할 때 prefix 제거.

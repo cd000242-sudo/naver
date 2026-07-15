@@ -1188,7 +1188,11 @@ export async function debugPublishModal(self: any): Promise<void> {
 /**
  * 네이버 블로그 예약발행 (완벽 수정 버전 - 자동으로 최적 방식 선택)
  */
-export async function publishScheduled(self: any, scheduleDate: string): Promise<void> {
+export async function publishScheduled(
+  self: any,
+  scheduleDate: string,
+  beforeIrreversibleCommit?: () => Promise<void>,
+): Promise<void> {
   const frame = (await self.getAttachedFrame());
   const page = self.ensurePage();
   let confirmationAttempted = false;
@@ -1493,6 +1497,7 @@ export async function publishScheduled(self: any, scheduleDate: string): Promise
 
     // Irreversible boundary: a click may reach Naver even if the browser
     // context closes before Puppeteer receives the acknowledgement.
+    await beforeIrreversibleCommit?.();
     confirmationAttempted = true;
     await confirmButton.click();
     await self.delay(2000);

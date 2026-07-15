@@ -6,7 +6,10 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const apiKey = 'AIzaSyAtjFG4IP1xlTSgAfQVUJI-dpOcju3KBAY';
+const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+if (!apiKey) {
+    throw new Error('Missing Gemini API key. Set GEMINI_API_KEY or GOOGLE_API_KEY.');
+}
 
 const TESTS = [
     {

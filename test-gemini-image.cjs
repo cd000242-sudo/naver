@@ -1,14 +1,17 @@
 /**
- * Gemini 3 이미지 생성 테스트 (새 API 키)
+ * Gemini 3 이미지 생성 테스트 (환경 변수 API 키)
  */
 const fs = require('fs');
 const path = require('path');
 
-// 새 API 키 직접 사용
-const apiKey = 'AIzaSyCZRoRk9Rf_yy5DUUzNKUDNB-74NV4ohKg';
+// 환경 변수에서 API 키 로드
+const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+if (!apiKey) {
+    throw new Error('Missing Gemini API key. Set GEMINI_API_KEY or GOOGLE_API_KEY.');
+}
 
 async function test() {
-    console.log('🚀 새 API 키로 Gemini 3 테스트...');
+    console.log('🚀 환경 변수 API 키로 Gemini 3 테스트...');
     console.log('⏳ 생성 중... (30초~1분 소요)');
 
     const startTime = Date.now();

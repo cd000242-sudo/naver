@@ -64,11 +64,42 @@ describe('shopping AI reference pipeline', () => {
     expect(publishing).toContain('referenceImagePath: representativeImagePath');
   });
 
+  it('generates shopping subheading images as one batch so content dedupe spans every heading', () => {
+    const sharedGenerator = read('renderer/modules/multiAccountManager.ts');
+    const fullAuto = read('renderer/modules/fullAutoFlow.ts');
+
+    expect(sharedGenerator).toContain('createShoppingAiBatchPlan({');
+    expect(sharedGenerator).toContain('items: shoppingBatchPlan.bodyItems');
+    expect(sharedGenerator).toContain('resolveShoppingAiPublishImages(');
+    expect(fullAuto).toContain('const shoppingBatchItems =');
+    expect(fullAuto).toContain('items: shoppingBatchItems');
+    expect(fullAuto).toContain('resolveShoppingAiPublishImages(');
+  });
+
   it('stops multi-account shopping publish when reference image generation fails', () => {
     const multi = read('renderer/modules/multiAccountManager.ts');
 
     expect(multi).toContain("queueItem.contentMode === 'affiliate' && itemPipelineCfg.shopping.subImageMode === 'ai'");
     expect(multi).toContain('throw imgErr;');
+  });
+
+  it('keeps collected gallery images out of every shopping AI output boundary', () => {
+    const continuous = read('renderer/modules/continuousPublishing.ts');
+    const multi = read('renderer/modules/multiAccountManager.ts');
+    const publishing = read('renderer/modules/publishingHandlers.ts');
+    const fullAuto = read('renderer/modules/fullAutoFlow.ts');
+
+    expect(continuous).toContain('scSubImageMode: itemPipelineCfg.shopping.subImageMode');
+    expect(continuous).toContain('scAIImageEngine: itemPipelineCfg.shopping.aiImageEngine');
+    expect(multi).toContain('structuredContent.images = isShoppingAiMode ? []');
+    expect(publishing).toContain('const headingsForAI = selectShoppingBodyHeadingsForMode(');
+    expect(publishing).toContain("headingImageMode: 'all'");
+    expect(fullAuto).toContain('const shoppingHeadingSlotsForBatch = selectShoppingBodyHeadingSlotsForMode(');
+    expect(fullAuto).toContain('const preparedShoppingImages = resolveShoppingAiPublishImages(');
+    expect(fullAuto).toContain('doShoppingAiBodySlotsMatch(');
+    expect(fullAuto).not.toMatch(/if \(isShoppingAiMode && finalImages\.length > 0\) \{\s*\/\/ Product crawl output[\s\S]{0,250}finalImages = \[\];/);
+    expect(fullAuto).toContain('const fullAutoBodySlots =');
+    expect(fullAuto).toContain('const fullAutoBodyItems = fullAutoBodySlots.map');
   });
 
   it('bypasses provider generation and text overlay for shopping thumbnail items', () => {

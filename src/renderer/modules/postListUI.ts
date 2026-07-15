@@ -1019,6 +1019,25 @@ export function togglePostsView(): void {
 }
 
 // ✅ 생성된 글을 필드에 불러오기
+export function reconstructGeneratedPostStructuredContent(post: any): any {
+  const restoredHashtags = normalizeHashtags(post?.hashtags);
+  const storedStructuredContent = post?.structuredContent
+    && typeof post.structuredContent === 'object'
+    && !Array.isArray(post.structuredContent)
+    ? post.structuredContent
+    : {};
+  return {
+    ...storedStructuredContent,
+    _postId: post?.id,
+    selectedTitle: post?.title,
+    bodyPlain: post?.content,
+    content: post?.content,
+    hashtags: restoredHashtags,
+    headings: post?.headings || storedStructuredContent.headings || [],
+    quality: post?.quality || undefined,
+  };
+}
+
 export async function loadGeneratedPostToFields(postId: string): Promise<void> {
   const post = loadGeneratedPost(postId);
   if (!post) {
@@ -1037,21 +1056,7 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
   // structuredContent 재구성
   // ✅ [v2.10.277] quality 복원 — 글 불러오기 시 4개 위험 지표(AI/SEO/법적/일일권장) 표시
   const restoredHashtags = normalizeHashtags(post.hashtags);
-  const storedStructuredContent = post.structuredContent
-    && typeof post.structuredContent === 'object'
-    && !Array.isArray(post.structuredContent)
-    ? post.structuredContent
-    : {};
-  const structuredContent: any = {
-    ...storedStructuredContent,
-    _postId: post.id,
-    selectedTitle: post.title,
-    bodyPlain: post.content,
-    content: post.content,
-    hashtags: restoredHashtags,
-    headings: post.headings || storedStructuredContent.headings || [],
-    quality: (post as any).quality || undefined,
-  };
+  const structuredContent = reconstructGeneratedPostStructuredContent(post);
 
   currentStructuredContent = structuredContent as any;
   (window as any).currentStructuredContent = structuredContent;

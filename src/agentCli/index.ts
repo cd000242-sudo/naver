@@ -2,7 +2,7 @@
 //
 // Shared by both content paths (contentGenerator + imageNarrative/narrativeBuilder) and by
 // the 'agent:generate' IPC handler. Routes a prompt to the user's local codex/claude CLI so
-// generation runs inside their subscription quota with zero API token cost.
+// generation uses the applicable subscription usage pool without a separate API key.
 //
 // No silent fallback: a failure throws a typed AgentCliError. Callers decide how to surface it
 // (the renderer shows a blocking modal with install/login guidance — never a quiet downgrade).
@@ -18,6 +18,10 @@ import {
   type AgentProvider,
 } from './types.js';
 import { normalizeAgentGenerateOptions } from './validation.js';
+import {
+  assertResolvedContentGeneratorProviderAllowed,
+  type AgentProductPolicyContext,
+} from './productPolicy.js';
 
 export { clearAgentDetectionCache, detectAgent } from './detect.js';
 export * from './types.js';
@@ -32,14 +36,24 @@ export function isAgentProvider(value: unknown): value is AgentProvider {
  * @throws AgentCliError on missing input, install/login problems, rate limits, timeouts,
  *         or (when a schema is supplied) non-JSON output.
  */
-export async function generateWithAgent(opts: AgentGenerateOptions): Promise<AgentGenerateResult> {
+export async function generateWithAgent(
+  opts: AgentGenerateOptions,
+  productPolicyContext?: AgentProductPolicyContext,
+): Promise<AgentGenerateResult> {
   const normalized = normalizeAgentGenerateOptions(
     opts as unknown as Record<string, unknown>,
   );
   const { provider, prompt, schema, model, timeoutMs, signal } = normalized;
 
+  // Final execution boundary: a new call site cannot silently bypass packaged-app policy.
+  assertResolvedContentGeneratorProviderAllowed(
+    provider === 'claude' ? 'agent-claude' : 'agent-codex',
+    productPolicyContext,
+  );
+
   // Protect every caller, including background flows that never pass through the renderer.
-  // Detection is cached briefly, so this does not make a second entitlement request.
+  // UI badges may use the short status cache, but the final execution boundary must observe
+  // external logout/auth-route changes before a request can consume subscription or API usage.
   const status = await detectAgent(provider, { forceRefresh: true });
   if (!status.installed) {
     throw new AgentCliError('not_installed', provider, `${provider} CLI가 설치되어 있지 않습니다.`);

@@ -163,7 +163,7 @@ describe('generation policy context', () => {
     const source = await fs.readFile(path.resolve(process.cwd(), 'src/main.ts'), 'utf8');
     const handlerStart = source.indexOf("ipcMain.handle('multiAccount:publish'");
     const gate = source.indexOf('evaluatePublicationAvailability({', handlerStart);
-    const contentGeneration = source.indexOf('generateStructuredContent(source as any', handlerStart);
+    const contentGeneration = source.indexOf('generateStructuredContentWithProductPolicy(source as any', handlerStart);
     const imageGeneration = source.indexOf('generateImages({', handlerStart);
 
     expect(handlerStart).toBeGreaterThan(-1);

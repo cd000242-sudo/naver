@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-20/v2.10.166] contentGenerator god file decomposition — keyword prefix + review title.
  *
  * 키워드/제품명 prefix 보장 + review 제목 정제. 모두 pure (console.log only).

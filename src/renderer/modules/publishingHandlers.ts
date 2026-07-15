@@ -11,11 +11,14 @@ import {
 import {
   createShoppingRepresentativeThumbnail,
   extractShoppingReferenceSource,
+  resolveShoppingAiPublishImages,
   resolveShoppingCollectedImagePlacement,
   resolveShoppingImageGenerationPolicy,
   resolveShoppingRepresentativeReference,
   resolveUsableShoppingReferenceSource,
+  selectShoppingBodyHeadingsForMode,
 } from '../../image/shoppingReferenceGeneration.js';
+import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -653,6 +656,10 @@ export async function handleFullAutoPublish(): Promise<void> {
       (document.getElementById('thumbnail-text-include') as HTMLInputElement)?.checked || false;
     console.log(`[FullAutoPublish] 썸네일 텍스트 포함: ${includeThumbnailText}`);
 
+    const selectedShoppingSubImageMode = pipelineCfg.shopping.subImageMode;
+    const selectedUseAiImage = resolvedContentModeForPublish === 'affiliate'
+      ? selectedShoppingSubImageMode === 'ai'
+      : ((document.getElementById('unified-use-ai-image') as HTMLInputElement)?.checked ?? true);
     const formData = {
       mode: 'full-auto',
       generator: UnifiedDOMCache.getGenerator(), // ✅ [2026-02-22 FIX] perplexity 지원
@@ -683,7 +690,7 @@ export async function handleFullAutoPublish(): Promise<void> {
       generatedHashtags: publishHashtags.join(' '),
       skipCta: skipCta, // ✅ 체크박스 값 반영
       categoryName: UnifiedDOMCache.getRealCategoryName(), // ✅ [2026-02-11 FIX] 카테고리 이름(text) 전달
-      useAiImage: (document.getElementById('unified-use-ai-image') as HTMLInputElement)?.checked ?? true,
+      useAiImage: selectedUseAiImage,
       includeThumbnailText, // ✅ 옵션 추가
       createProductThumbnail: (document.getElementById('unified-create-product-thumbnail') as HTMLInputElement)?.checked ?? false,
       // ✅ [2026-02-19] 제휴링크 자동 감지 (URL 필드에서 자동 감지)
@@ -698,7 +705,23 @@ export async function handleFullAutoPublish(): Promise<void> {
       imageRatio: pipelineCfg.image.imageRatio,
       thumbnailImageRatio: pipelineCfg.image.thumbnailImageRatio,
       subheadingImageRatio: pipelineCfg.image.subheadingImageRatio,
+      scSubImageMode: selectedShoppingSubImageMode,
+      scAIImageEngine: pipelineCfg.shopping.aiImageEngine,
     };
+
+    const isShoppingAiImageMode = formData.contentMode === 'affiliate'
+      && formData.scSubImageMode === 'ai';
+    if (isShoppingAiImageMode && structuredContent) {
+      const referencePool = resolveShoppingRepresentativeReference([
+        ...(structuredContent.collectedImages || []),
+        ...(structuredContent.images || []),
+      ]).images;
+      structuredContent.collectedImages = referencePool;
+      structuredContent.images = [];
+      (window as any).generatedImages = [];
+      (window as any).imageManagementGeneratedImages = [];
+      appendLog('🛒 쇼핑 AI 모드: 대표이미지 참조 풀과 최종 발행 이미지 배열을 분리했습니다.');
+    }
 
     // ✅ [2026-02-16 DEBUG] categoryName 전달 상태 진단 (터미널에 출력)
     console.log(`[FullAutoPublish] 📂 categoryName 체크: "${formData.categoryName || '(없음)'}"`);
@@ -792,22 +815,31 @@ export async function handleFullAutoPublish(): Promise<void> {
           }
 
           const existing = (window as any).imageManagementGeneratedImages || [];
-          (window as any).imageManagementGeneratedImages = [...collectedImages, ...existing];
+          if (!isShoppingAiImageMode) {
+            (window as any).imageManagementGeneratedImages = [...collectedImages, ...existing];
+          }
           console.log('[FullAutoPublish] 제품 이미지 수집 완료:', collectedImages.length);
 
           // ✅ [2026-02-27 FIX] 수집된 이미지를 이미지 관리탭에 즈시 표시
-          try {
-            displayGeneratedImages([...collectedImages, ...existing]);
-            updatePromptItemsWithImages([...collectedImages, ...existing]);
-          } catch (displayErr) {
-            console.warn('[FullAutoPublish] 이미지 표시 실패 (무시):', (displayErr as Error).message);
+          if (!isShoppingAiImageMode) {
+            try {
+              displayGeneratedImages([...collectedImages, ...existing]);
+              updatePromptItemsWithImages([...collectedImages, ...existing]);
+            } catch (displayErr) {
+              console.warn('[FullAutoPublish] 이미지 표시 실패 (무시):', (displayErr as Error).message);
+            }
           }
 
           // ✅ [2026-01-21 FIX] currentStructuredContent.images에도 저장 (generateImagesWithCostSafety에서 참조)
           if (structuredContent) {
-            structuredContent.images = [...collectedImages, ...(structuredContent.images || [])];
+            structuredContent.images = isShoppingAiImageMode
+              ? []
+              : [...collectedImages, ...(structuredContent.images || [])];
             // ✅ [2026-02-01 FIX] collectedImages에도 저장하여 generateAIImagesForHeadings에서 중복 크롤링 방지
-            structuredContent.collectedImages = [...collectedImages, ...(structuredContent.collectedImages || [])];
+            structuredContent.collectedImages = resolveShoppingRepresentativeReference([
+              ...collectedImages,
+              ...(structuredContent.collectedImages || []),
+            ]).images;
             currentStructuredContent = structuredContent;
             (window as any).currentStructuredContent = structuredContent;
             console.log('[FullAutoPublish] structuredContent.images/collectedImages에 수집 이미지 동기화:', structuredContent.images.length);
@@ -889,23 +921,32 @@ export async function handleFullAutoPublish(): Promise<void> {
               modal.addLog(`📁 추가 수집 이미지 저장 위치: ${localSourceSaveResult.folderPath}`);
             }
 
-            (window as any).imageManagementGeneratedImages = [...existing, ...newImages];
+            if (!isShoppingAiImageMode) {
+              (window as any).imageManagementGeneratedImages = [...existing, ...newImages];
+            }
             console.log(`[FullAutoPublish] 소스 URL 이미지 ${newImages.length}개 추가 (총 ${(window as any).imageManagementGeneratedImages.length}개)`);
 
             // structuredContent에도 동기화
             if (structuredContent) {
-              structuredContent.images = [...(structuredContent.images || []), ...newImages];
+              structuredContent.images = isShoppingAiImageMode
+                ? []
+                : [...(structuredContent.images || []), ...newImages];
               // ✅ [2026-02-01 FIX] collectedImages에도 동기화
-              structuredContent.collectedImages = [...(structuredContent.collectedImages || []), ...newImages];
+              structuredContent.collectedImages = resolveShoppingRepresentativeReference([
+                ...(structuredContent.collectedImages || []),
+                ...newImages,
+              ]).images;
               (window as any).currentStructuredContent = structuredContent;
             }
 
             // ✅ [2026-02-27 FIX] 추가 수집 이미지도 이미지 관리탭에 표시
-            try {
-              displayGeneratedImages((window as any).imageManagementGeneratedImages);
-              updatePromptItemsWithImages((window as any).imageManagementGeneratedImages);
-            } catch (displayErr) {
-              console.warn('[FullAutoPublish] 이미지 표시 실패 (무시):', (displayErr as Error).message);
+            if (!isShoppingAiImageMode) {
+              try {
+                displayGeneratedImages((window as any).imageManagementGeneratedImages);
+                updatePromptItemsWithImages((window as any).imageManagementGeneratedImages);
+              } catch (displayErr) {
+                console.warn('[FullAutoPublish] 이미지 표시 실패 (무시):', (displayErr as Error).message);
+              }
             }
           } else {
             modal.addLog('ℹ️ 소스 URL에서 추가 이미지 없음');
@@ -1078,7 +1119,10 @@ export async function handleFullAutoPublish(): Promise<void> {
               );
             }
 
-            const headingsForAI = structuredContent.headings || [];
+            const headingsForAI = selectShoppingBodyHeadingsForMode(
+              structuredContent.headings || [],
+              formData.headingImageMode,
+            );
             if (headingsForAI.length > 0) {
               const representativeImagePath = thumbnailPath;
               modal.addLog(`🎨 ${headingsForAI.length}개 소제목 AI 이미지 생성 시작...`);
@@ -1092,6 +1136,7 @@ export async function handleFullAutoPublish(): Promise<void> {
                   allowThumbnailText: false, // 소제목에는 텍스트 합성 안 함
                   thumbnailTextInclude: false,
                   isShoppingConnect: true,
+                  headingImageMode: 'all',
                   referenceImagePath: representativeImagePath,
                   collectedImages: shoppingReference.images,
                 }
@@ -1336,6 +1381,33 @@ export async function handleFullAutoPublish(): Promise<void> {
         if (!(window as any).isFullAutoImageRunCurrent?.(fullAutoImageRunId, imageSource)) {
           appendLog('♻️ 이전 이미지 엔진의 늦은 결과를 폐기했습니다. 새 이미지 생성 결과만 사용합니다.');
           return;
+        }
+
+        if (isShoppingAiImageMode) {
+          const representativeThumbnail = generatedImgs.find((img: any) => img?.isShoppingRepresentativeThumbnail === true)
+            || generatedImgs.find((img: any) => img?.isThumbnail === true);
+          if (!representativeThumbnail) {
+            throw new Error('SHOPPING_REPRESENTATIVE_THUMBNAIL_REQUIRED: 쇼핑 AI 결과에 대표 원본 썸네일이 없습니다.');
+          }
+          const safeShoppingImages = resolveShoppingAiPublishImages(
+            representativeThumbnail,
+            generatedImgs.filter((img: any) => img !== representativeThumbnail),
+            structuredContent?.collectedImages || [],
+          );
+          const headingMode = String(formData.headingImageMode || 'all');
+          const expectedBodyCount = selectShoppingBodyHeadingsForMode(
+            structuredContent?.headings || [],
+            headingMode,
+          ).length;
+          const actualBodyCount = safeShoppingImages.images.length - 1;
+          if (actualBodyCount !== expectedBodyCount) {
+            throw new Error(
+              `SHOPPING_AI_IMAGE_BATCH_INCOMPLETE: AI 소제목 이미지 ${actualBodyCount}/${expectedBodyCount}개만 고유 결과로 확인되었습니다. `
+              + `수집 원본 ${safeShoppingImages.removedCollectedCount}개, 중복 ${safeShoppingImages.removedDuplicateCount}개를 차단했습니다.`,
+            );
+          }
+          generatedImgs = safeShoppingImages.images;
+          modal.addLog(`✅ 대표이미지 원본 1장 + AI 소제목 ${actualBodyCount}장 최종 검증 완료`);
         }
 
         (window as any).generatedImages = generatedImgs;
@@ -1745,7 +1817,10 @@ export async function handleMultiAccountPublish(): Promise<void> {
       // ✅ [2026-03-18 FIX] renderer에서 이미 생성된 이미지를 publishOptions에 포함
       // main.ts L5958 (직접 경로) + L5972 (preGeneratedContent 내부 경로) 양쪽 활성화
       const maImages = ImageManager.getAllImages();
-      const normalizedImagesForMultiAccount = (Array.isArray(maImages) ? maImages : [])
+      const normalizedImagesForMultiAccount = normalizePublishImageSequence(
+        (window as any).currentStructuredContent,
+        Array.isArray(maImages) ? maImages : [],
+      )
         .map((img: any) => ({
           ...img,
           filePath: img?.filePath || img?.url || img?.previewDataUrl,
@@ -2313,7 +2388,10 @@ export async function handleSemiAutoPublish(): Promise<any> {
   const linkPreviousPostChecked = (document.getElementById('unified-link-previous-post') as HTMLInputElement | null)?.checked === true;
 
   // ✅ 이미지 객체 정규화: main 프로세스에서 filePath가 없으면 드랍될 수 있어서 여기서 보강
-  const normalizedImagesForPublish = (Array.isArray(imageManagementImages) ? imageManagementImages : [])
+  const normalizedImagesForPublish = normalizePublishImageSequence(
+    updatedStructuredContent,
+    Array.isArray(imageManagementImages) ? imageManagementImages : [],
+  )
     .map((img: any) => {
       const filePath = img?.filePath || img?.url || img?.previewDataUrl;
       return {

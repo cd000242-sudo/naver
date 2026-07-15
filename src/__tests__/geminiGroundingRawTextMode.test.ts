@@ -20,8 +20,10 @@ describe('Gemini 원문 모드 그라운딩 OFF', () => {
     expect(code).toMatch(/isRawTextMode\s*=\s*\(geminiUserTextOriginal[\s\S]{0,40}?\.length\s*>\s*500/);
   });
 
-  it('useGrounding이 원문 모드(!isRawTextMode)로 게이트된다', () => {
-    expect(code).toMatch(/const useGrounding\s*=[\s\S]{0,120}?!isRawTextMode/);
+  it('V3 strict 값은 그대로 사용하고 레거시만 원문 모드로 게이트한다', () => {
+    expect(code).toMatch(
+      /const useGrounding\s*=\s*strictRequestEnvelope\s*\?\s*strictRequestEnvelope\.useGrounding\s*:\s*\(options\.useGrounding\s*!==\s*false\)\s*&&\s*configGrounding\s*&&\s*!isRawTextMode\s*;/,
+    );
   });
 
   it('Perplexity 경로도 원문 모드 검색 비활성화 정책을 유지한다 (정합성)', () => {

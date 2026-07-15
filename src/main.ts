@@ -80,6 +80,53 @@ import { getDailyLimit, getTodayCount, incrementTodayCount, setDailyLimit } from
 import { isAccountBackedOff, getBotBackoff, computeLoginStaggerDelayMs } from './utils/botBackoff.js';
 import { generateStructuredContent, removeOrdinalHeadingLabelsFromBody } from './contentGenerator.js';
 import {
+  beginContentQualityV3Publication,
+  enforceContentQualityV3PublicationBoundary,
+  forkContentQualityV3PublicationTicket,
+  type ContentQualityV3PublicationTicket,
+} from './contentQualityV3/publicationBoundary.js';
+import {
+  CONTENT_QUALITY_V3_POST_ID_FIELD,
+  CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD,
+  CONTENT_QUALITY_V3_REQUIRED_FIELD,
+  contentQualityV3PublishHandoffStore,
+  enforceContentQualityV3PublishPayload,
+  type ContentQualityV3PublishHandoff,
+} from './contentQualityV3/publishHandoffStore.js';
+import { ContentQualityV3DurableProvenanceRegistry } from './contentQualityV3/durableProvenanceRegistry.js';
+import {
+  assertResolvedContentGeneratorProviderAllowed,
+  createAgentProductPolicyContext,
+} from './agentCli/productPolicy.js';
+
+function createMainAgentProductPolicyContext() {
+  return createAgentProductPolicyContext({
+    allowClaudeSubscription: !app.isPackaged,
+  });
+}
+
+function generateStructuredContentWithProductPolicy(
+  source: Parameters<typeof generateStructuredContent>[0],
+  options?: Parameters<typeof generateStructuredContent>[1],
+): ReturnType<typeof generateStructuredContent> {
+  const productPolicyContext = createMainAgentProductPolicyContext();
+  assertResolvedContentGeneratorProviderAllowed(
+    options?.provider ?? source.generator,
+    productPolicyContext,
+  );
+  return generateStructuredContent(source, {
+    ...options,
+    agentProductPolicyContext: productPolicyContext,
+  });
+}
+
+function createContentQualityV3RendererOwnerKey(event: Electron.IpcMainInvokeEvent): string {
+  const webContentsId = event.sender.id;
+  const processId = event.senderFrame?.processId ?? -1;
+  const routingId = event.senderFrame?.routingId ?? -1;
+  return `renderer:${webContentsId}:process:${processId}:frame:${routingId}`;
+}
+import {
   sanitizeContentFakeSourcesCopy,
   sanitizePublishableSourceText,
 } from './contentSanitizers.js';
@@ -196,7 +243,7 @@ import {
 import fsSync from 'fs';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
-import { createHash } from 'crypto';
+import { createHash, randomUUID } from 'crypto';
 import { getBlogRecentPosts } from './rssSearcher.js';
 import { browserSessionManager } from './browserSessionManager.js';
 
@@ -1260,6 +1307,9 @@ type AutomationRequest = {
   isFullAuto?: boolean; // ✅ 풀오토 모드 여부 (인덱스 기반 이미지 매칭용)
   previousPostTitle?: string; // ✅ [신규] 같은 카테고리 이전글 제목
   previousPostUrl?: string; // ✅ [신규] 같은 카테고리 이전글 URL
+  _contentQualityV3PostId?: string;
+  _contentQualityV3Required?: true;
+  _contentQualityV3PublishHandoff?: ContentQualityV3PublishHandoff;
 };
 
 // isPackaged는 지연 초기화 (app이 ready된 후에만 사용 가능)
@@ -1559,11 +1609,14 @@ async function prepareSmartScheduledContent(
   post: SmartScheduledPost,
   config: AppConfig,
   naverId: string,
+  publishOwnerKey: string,
 ): Promise<{
   title: string;
   content: string;
   structuredContent: any;
   contentPolicyContext: import('./contentPolicy/policyService.js').ContentPolicyPayloadContext;
+  contentQualityV3PostId?: string;
+  contentQualityV3PublishHandoff?: ContentQualityV3PublishHandoff;
 }> {
   const keyword = String(post.keyword || post.title || '').trim();
   if (!keyword) throw new Error('SMART_SCHEDULER_KEYWORD_REQUIRED');
@@ -1597,10 +1650,14 @@ async function prepareSmartScheduledContent(
     manualTitleOverride: String(post.title || '').trim() || undefined,
     contentPolicyPrompt: generationPolicy.prompt,
   };
-  const generated = await generateStructuredContent(source, {
+  const generated = await generateStructuredContentWithProductPolicy(source, {
     provider: (config.defaultAiProvider || 'gemini') as any,
     minChars: Number((config as any).minCharCount) || 2500,
   } as any);
+  const contentQualityV3PublicationTicket = beginContentQualityV3Publication(generated);
+  const contentQualityV3PublishTicket = forkContentQualityV3PublicationTicket(
+    contentQualityV3PublicationTicket,
+  );
   const title = String((generated as any).selectedTitle || post.title || '').trim();
   const content = String((generated as any).bodyPlain || (generated as any).body || (generated as any).content || '').trim();
   if (!title || content.length < 100) {
@@ -1615,11 +1672,24 @@ async function prepareSmartScheduledContent(
     recentPostsSnapshot: generationPolicy.input.recent_posts,
     recentPostsResult: generationPolicy.recentPostsResult,
   };
+  const structuredContent = enforceContentQualityV3PublicationBoundary(
+    { ...generated, selectedTitle: title, bodyPlain: content, content, contentPolicyContext },
+    contentQualityV3PublicationTicket,
+  ) as StructuredContent;
+  const contentQualityV3Issuance = contentQualityV3PublishTicket
+    ? await contentQualityV3PublishHandoffStore.issue(
+        publishOwnerKey,
+        structuredContent,
+        contentQualityV3PublishTicket,
+      )
+    : undefined;
   return {
-    title,
-    content,
-    structuredContent: { ...generated, selectedTitle: title, bodyPlain: content, content, contentPolicyContext },
+    title: structuredContent.selectedTitle,
+    content: structuredContent.bodyPlain,
+    structuredContent,
     contentPolicyContext,
+    contentQualityV3PostId: contentQualityV3Issuance?.postId,
+    contentQualityV3PublishHandoff: contentQualityV3Issuance?.handoff,
   };
 }
 
@@ -1628,6 +1698,7 @@ smartScheduler.setPublishCallback(async (post) => {
   let directLease: DirectAutomationLeaseHandle | null = null;
   let smartSchedulerQuotaLease: ScheduledPublishQuotaLease | null = null;
   let schedulerAccountKey = '';
+  let smartSchedulerPublishOwnerKey = '';
   console.log(`[SmartScheduler] 발행 콜백 실행: ${post.title}`);
   try {
     const config = await loadConfig();
@@ -1645,8 +1716,9 @@ smartScheduler.setPublishCallback(async (post) => {
     
     sendLog(`🚀 SmartScheduler 예약 발행 시작: ${post.title}`);
     sendLog(`✍️ SmartScheduler 완성 원고 생성 중: ${post.keyword || post.title}`);
+    smartSchedulerPublishOwnerKey = `smart-scheduler:${post.id}:${randomUUID()}`;
     const preparedContent = await withAbortableDeadline(
-      () => prepareSmartScheduledContent(post, config, naverId),
+      () => prepareSmartScheduledContent(post, config, naverId, smartSchedulerPublishOwnerKey),
       {
         timeoutMs: SCHEDULED_AUTOMATION_TIMEOUT_MS,
         cleanupTimeoutMs: SCHEDULED_AUTOMATION_CLEANUP_TIMEOUT_MS,
@@ -1664,6 +1736,12 @@ smartScheduler.setPublishCallback(async (post) => {
         content: preparedContent.content,
         structuredContent: preparedContent.structuredContent,
         contentPolicyContext: preparedContent.contentPolicyContext,
+        _contentQualityV3PublishOwnerKey: smartSchedulerPublishOwnerKey,
+        [CONTENT_QUALITY_V3_POST_ID_FIELD]: preparedContent.contentQualityV3PostId,
+        [CONTENT_QUALITY_V3_REQUIRED_FIELD]: preparedContent.contentQualityV3PublishHandoff
+          ? true
+          : undefined,
+        [CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD]: preparedContent.contentQualityV3PublishHandoff,
         _publishFlow: 'smart_scheduler',
         _contentPolicyManualReviewPromptAllowed: true,
         publishMode: 'publish',
@@ -1722,6 +1800,9 @@ smartScheduler.setPublishCallback(async (post) => {
     await smartSchedulerQuotaLease?.rollback().catch((quotaError) => {
       console.error('[SmartScheduler] 예약 발행 쿼터 정리 실패:', quotaError);
     });
+    if (smartSchedulerPublishOwnerKey) {
+      await contentQualityV3PublishHandoffStore.releaseOwner(smartSchedulerPublishOwnerKey);
+    }
     if (schedulerAccountKey) AutomationService.delete(schedulerAccountKey);
     directLease?.release();
   }
@@ -3094,6 +3175,29 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: unknown) =>
 
 
 ipcMain.handle('automation:run', async (_event, payload: AutomationRequest) => {
+  const contentQualityV3OwnerKey = createContentQualityV3RendererOwnerKey(_event);
+  const nestedHandoff = payload?.structuredContent
+    && typeof payload.structuredContent === 'object'
+    ? (payload.structuredContent as unknown as Record<string, unknown>)[CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD]
+    : undefined;
+  const nestedV3Required = payload?.structuredContent
+    && typeof payload.structuredContent === 'object'
+    ? (payload.structuredContent as unknown as Record<string, unknown>)[CONTENT_QUALITY_V3_REQUIRED_FIELD]
+    : undefined;
+  const nestedV3PostId = payload?.structuredContent
+    && typeof payload.structuredContent === 'object'
+    ? (payload.structuredContent as unknown as Record<string, unknown>)[CONTENT_QUALITY_V3_POST_ID_FIELD]
+    : undefined;
+  payload = {
+    ...payload,
+    _contentQualityV3PublishOwnerKey: contentQualityV3OwnerKey,
+    [CONTENT_QUALITY_V3_POST_ID_FIELD]:
+      (payload as any)?.[CONTENT_QUALITY_V3_POST_ID_FIELD] ?? nestedV3PostId,
+    [CONTENT_QUALITY_V3_REQUIRED_FIELD]:
+      (payload as any)?.[CONTENT_QUALITY_V3_REQUIRED_FIELD] ?? nestedV3Required,
+    [CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD]:
+      (payload as any)?.[CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD] ?? nestedHandoff,
+  } as AutomationRequest;
   const isLocalAppSchedule = payload.publishMode === 'schedule' && payload.scheduleType === 'app-schedule';
   const e2eCapture = await captureE2EPublishPayload(payload as any, process.env, !app.isPackaged);
   if (e2eCapture) return e2eCapture;
@@ -3791,7 +3895,7 @@ ipcMain.handle('automation:generateContent', async (_event, prompt: string) => {
     } else {
       // OpenAI/Claude/Perplexity: generateStructuredContent의 provider-aware 경로 사용
       const source = { rawText: prompt ?? '', title: '', contentMode: 'seo' as const, sourceType: 'custom_text' as const };
-      const result = await generateStructuredContent(source, { provider } as any);
+      const result = await generateStructuredContentWithProductPolicy(source, { provider } as any);
       content = result?.bodyPlain || result?.bodyHtml || '';
       if (!content?.trim()) {
         throw new Error(`${provider} 엔진으로 콘텐츠를 생성하지 못했습니다.`);
@@ -4239,7 +4343,10 @@ try { ipcMain.handle('app:minimize-to-tray', async () => {
 registerQuotaHandlers(_earlyCtx);
 registerApiHandlers(_earlyCtx);
 // ✅ 에이전트 모드(codex/claude 구독 연동 글생성) IPC — 의존성 없음, 최상위 등록
-registerAgentHandlers();
+registerAgentHandlers({
+  trustedRendererPath: path.join(publicPath, 'index.html'),
+  allowClaudeSubscription: !app.isPackaged,
+});
 // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고) — 환경별 버그 즉시 진단
 registerDiagnosticsHandlers();
 // ✅ [SPEC-DEFAMATION-2026 P1] 발행 경계 위험 게이트 — 저장본/붙여넣기 재발행 사각지대 커버
@@ -4598,6 +4705,44 @@ ipcMain.handle('blog:fetchCategories', async (_event, arg: string | { naverId?: 
 
 //  다중계정 동시발행 (executePostCycle 기반)
 ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], options: any) => {
+  const multiAccountHandoffRunId = randomUUID();
+  const multiAccountRendererOwnerKey = createContentQualityV3RendererOwnerKey(_event);
+  const preGeneratedForHandoff = options?.preGeneratedContent || options?.structuredContent;
+  if (preGeneratedForHandoff || options?.title || options?.content) {
+    const preGeneratedStructuredContent = preGeneratedForHandoff?.structuredContent
+      || preGeneratedForHandoff;
+    const preGeneratedHandoff = options?.[CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD]
+      ?? preGeneratedStructuredContent?.[CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD];
+    const preGeneratedV3PostId = options?.[CONTENT_QUALITY_V3_POST_ID_FIELD]
+      ?? preGeneratedStructuredContent?.[CONTENT_QUALITY_V3_POST_ID_FIELD];
+    const preGeneratedV3Required = options?.[CONTENT_QUALITY_V3_REQUIRED_FIELD]
+      ?? preGeneratedStructuredContent?.[CONTENT_QUALITY_V3_REQUIRED_FIELD];
+    try {
+      const preflightPayload = {
+        ...options,
+        title: options?.title || preGeneratedStructuredContent?.selectedTitle,
+        content: options?.content || preGeneratedStructuredContent?.bodyPlain,
+        structuredContent: preGeneratedStructuredContent,
+        _contentQualityV3PublishOwnerKey: multiAccountRendererOwnerKey,
+        [CONTENT_QUALITY_V3_POST_ID_FIELD]: preGeneratedV3PostId,
+        [CONTENT_QUALITY_V3_REQUIRED_FIELD]: preGeneratedV3Required,
+        [CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD]: preGeneratedHandoff,
+      };
+      const guarded = await enforceContentQualityV3PublishPayload(
+        contentQualityV3PublishHandoffStore,
+        preflightPayload,
+        { consume: false },
+      );
+      if (guarded !== preflightPayload) {
+        return {
+          success: false,
+          message: 'CONTENT_QUALITY_V3_MULTI_ACCOUNT_PREGENERATED_UNSUPPORTED: V3 글은 계정별로 새로 생성해 발행해주세요.',
+        };
+      }
+    } catch (error) {
+      return { success: false, message: sanitizeUserVisibleError(error) };
+    }
+  }
   // ============================================
   //  [리팩토링] executePostCycle 기반 다중계정 발행
   // 기존 350줄  50줄 루프 위임
@@ -4767,6 +4912,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         continue;
       }
 
+      const contentQualityV3PublishOwnerKey =
+        `multi-account:${multiAccountHandoffRunId}:account:${accountId}`;
       try {
         sendLog(`👤 [${account.name}] 발행 시작...`);
 
@@ -4789,6 +4936,10 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
         // ✅ [2026-01-19 BUG FIX] 콘텐츠 생성 로직 추가 (이전: 폴백 값 "제목 테스트" 사용 버그)
         let structuredContent: any = null;
+        let contentQualityV3PublicationTicket: ContentQualityV3PublicationTicket | undefined;
+        let contentQualityV3PublishTicket: ContentQualityV3PublicationTicket | undefined;
+        let contentQualityV3PostId: string | undefined;
+        let contentQualityV3PublishHandoff: ContentQualityV3PublishHandoff | undefined;
         let title = options?.title || undefined;
         let content = options?.content || undefined;
         let generatedImages = options?.generatedImages || options?.images || [];
@@ -4910,11 +5061,15 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
             source.contentPolicyPrompt = multiPolicy.prompt;
 
             const generated = await withAbortCheck(
-              generateStructuredContent(source as any, {
+              generateStructuredContentWithProductPolicy(source as any, {
                 provider: multiAccountProvider,
                 minChars: accountSettings?.minCharCount || 4000,
               }),
               abortController.signal
+            );
+            contentQualityV3PublicationTicket = beginContentQualityV3Publication(generated);
+            contentQualityV3PublishTicket = forkContentQualityV3PublicationTicket(
+              contentQualityV3PublicationTicket,
             );
 
             resolvedContentPolicyContext = {
@@ -4928,8 +5083,21 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
               ...generated,
               contentPolicyContext: resolvedContentPolicyContext,
             };
-            title = (generated as any).selectedTitle || `${sourceValue} 관련 글`;
-            content = (generated as any).bodyPlain || (generated as any).body || '';
+            structuredContent = enforceContentQualityV3PublicationBoundary(
+              structuredContent,
+              contentQualityV3PublicationTicket,
+            );
+            if (contentQualityV3PublishTicket) {
+              const contentQualityV3Issuance = await contentQualityV3PublishHandoffStore.issue(
+                contentQualityV3PublishOwnerKey,
+                structuredContent,
+                contentQualityV3PublishTicket,
+              );
+              contentQualityV3PostId = contentQualityV3Issuance.postId;
+              contentQualityV3PublishHandoff = contentQualityV3Issuance.handoff;
+            }
+            title = structuredContent.selectedTitle || `${sourceValue} 관련 글`;
+            content = structuredContent.bodyPlain || (generated as any).body || '';
             sendLog(`   ✅ 콘텐츠 생성 완료: "${(title || '').substring(0, 30)}..." (${(content || '').length}자)`);
           } catch (genError) {
             // ✅ [2026-03-11] AbortError는 중지 요청으로 처리
@@ -5221,9 +5389,17 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           title,        // ✅ 생성된 제목
           content,      // ✅ 생성된 콘텐츠
           // ✅ [2026-02-21 FIX] structuredContent.selectedTitle도 최종 제목으로 동기화
-          structuredContent: structuredContent ? { ...structuredContent, selectedTitle: title } : undefined,
+          structuredContent: contentQualityV3PublicationTicket
+            ? structuredContent
+            : structuredContent ? { ...structuredContent, selectedTitle: title } : undefined,
           contentPolicyContext: resolvedContentPolicyContext || structuredContent?.contentPolicyContext,
           _publishFlow: 'multi_account',
+          _contentQualityV3PublishOwnerKey: contentQualityV3PublishHandoff
+            ? contentQualityV3PublishOwnerKey
+            : undefined,
+          [CONTENT_QUALITY_V3_POST_ID_FIELD]: contentQualityV3PostId,
+          [CONTENT_QUALITY_V3_REQUIRED_FIELD]: contentQualityV3PublishHandoff ? true : undefined,
+          [CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD]: contentQualityV3PublishHandoff,
           hashtags: normalizePublishHashtags(options?.hashtags, structuredContent?.hashtags, preGenerated?.hashtags),
           generatedImages: generatedImages.length > 0 ? generatedImages : undefined, // ✅ 이미지
           // ✅ [2026-01-24 FIX] CTA 관련 설정 명시적 전달
@@ -5310,6 +5486,8 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         const errorMsg = (error as Error).message;
         results.push({ accountId, success: false, message: errorMsg, failureCode: classifyPublishFailure(error).code });
         sendLog(`❌ [${account.name}] 발행 오류: ${errorMsg}`);
+      } finally {
+        await contentQualityV3PublishHandoffStore.releaseOwner(contentQualityV3PublishOwnerKey);
       }
     }
 
@@ -5416,6 +5594,7 @@ ipcMain.handle(
     // ✅ 실행 직전 최신 설정 강제 동기화 (API 키 정합성 보장)
     const generationOperation = contentGenerationAbortRegistry.begin(payload.requestId);
     const generationRequestId = generationOperation.id;
+    const contentQualityV3OwnerKey = createContentQualityV3RendererOwnerKey(_event);
     console.log(`[Generation:${generationRequestId}] 시작`);
 
     try {
@@ -5706,7 +5885,7 @@ ipcMain.handle(
         () => {
           // ✅ [2026-04-03] 매 시도마다 abort 체크
           if (genSignal.aborted) throw new Error('사용자가 작업을 취소했습니다.');
-          return generateStructuredContent(source, { provider, minChars, signal: genSignal } as any);
+          return generateStructuredContentWithProductPolicy(source, { provider, minChars, signal: genSignal } as any);
         },
         {
           maxRetries: GENERATE_STRUCTURED_CONTENT_RETRIES,
@@ -5720,6 +5899,10 @@ ipcMain.handle(
             console.log(`[Main] ⚠️ 콘텐츠 생성 재시도 (${attempt}/${GENERATE_STRUCTURED_CONTENT_RETRIES}): ${error.message}`);
           },
         }
+      );
+      const contentQualityV3PublicationTicket = beginContentQualityV3Publication(content);
+      const contentQualityV3PublishTicket = forkContentQualityV3PublicationTicket(
+        contentQualityV3PublicationTicket,
       );
 
       (content as any).contentPolicyContext = {
@@ -5836,6 +6019,28 @@ ipcMain.handle(
           source: 'crawled'
         }));
         console.log(`[Main] ✅ 크롤링 이미지 ${source.images.length}개를 collectedImages에 저장`);
+      }
+      content = enforceContentQualityV3PublicationBoundary(
+        content,
+        contentQualityV3PublicationTicket,
+      ) as StructuredContent;
+
+      if (contentQualityV3PublishTicket) {
+        const contentQualityV3Issuance = await contentQualityV3PublishHandoffStore.issue(
+          contentQualityV3OwnerKey,
+          content,
+          contentQualityV3PublishTicket,
+        );
+        content = Object.freeze({
+          ...content,
+          [CONTENT_QUALITY_V3_POST_ID_FIELD]: contentQualityV3Issuance.postId,
+          [CONTENT_QUALITY_V3_REQUIRED_FIELD]: true,
+          [CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD]: contentQualityV3Issuance.handoff,
+        }) as StructuredContent;
+      } else {
+        // Only a completed trusted legacy generation may clear a prior V3
+        // requirement; renderer-controlled publish data cannot downgrade it.
+        await contentQualityV3PublishHandoffStore.releaseOwner(contentQualityV3OwnerKey);
       }
 
       console.log('[Main] 구조화 콘텐츠 생성 완료');
@@ -8167,6 +8372,20 @@ async function clearCacheOnVersionChange(): Promise<void> {
 
 app.whenReady().then(async () => {
   try {
+    const contentQualityV3ProvenanceRegistry = new ContentQualityV3DurableProvenanceRegistry({
+      userDataPath: app.getPath('userData'),
+    });
+    contentQualityV3PublishHandoffStore.configureProvenanceRegistry(
+      contentQualityV3ProvenanceRegistry,
+    );
+    try {
+      await contentQualityV3ProvenanceRegistry.beginSession();
+    } catch (provenanceError) {
+      console.error(
+        '[ContentQualityV3] Durable provenance recovery failed; publishing remains fail-closed.',
+        provenanceError,
+      );
+    }
     // ✅ [v2.10.34] 체감 부팅 시간 단축 — splash 화면 즉시 표시
     //   사용자 보고: '앱 부팅 시 20초 응답없음'. 백그라운드 게이트는 그대로 진행하되
     //   사용자에게는 즉시 splash가 보임. 로그인/메인 윈도우 준비되면 splash close.
@@ -8793,6 +9012,12 @@ app.whenReady().then(async () => {
                   naverId: accountNaverId,
                   naverPassword: accountNaverPassword,
                   postId: postData.id || post.postId || post.id,
+                  [CONTENT_QUALITY_V3_POST_ID_FIELD]:
+                    sanitizedScheduledStructuredContent?.[CONTENT_QUALITY_V3_POST_ID_FIELD],
+                  [CONTENT_QUALITY_V3_REQUIRED_FIELD]:
+                    sanitizedScheduledStructuredContent?.[CONTENT_QUALITY_V3_REQUIRED_FIELD],
+                  [CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD]:
+                    sanitizedScheduledStructuredContent?.[CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD],
                   businessInfo: postData.businessInfo,
                   contentPolicyContext: postData.contentPolicyContext
                     || postData.structuredContent?.contentPolicyContext,
@@ -9340,6 +9565,8 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
     const effectiveProvider = (routedProvider ?? normalized.provider) as typeof normalized.provider;
     // 글 작성 단계 provider — 에이전트 모드면 CLI, 아니면 vision vendor와 동일.
     const textProvider = (narrativeTextProvider ?? effectiveProvider) as typeof normalized.provider;
+    const productPolicyContext = createMainAgentProductPolicyContext();
+    assertResolvedContentGeneratorProviderAllowed(textProvider, productPolicyContext);
 
     // Convert plain base64 objects to ImageInput format
     const imageInputs = normalized.images.map((img) => ({
@@ -9360,6 +9587,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
       targetChars: normalized.targetChars,
       toneStyle: normalized.toneStyle,
       context: normalized.context,
+      agentProductPolicyContext: productPolicyContext,
     });
     const manualTitle = normalizeManualTitleOverride(payload?.manualTitle);
     if (manualTitle) {

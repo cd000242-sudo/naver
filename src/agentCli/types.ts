@@ -10,6 +10,7 @@ export type AgentProvider = 'codex' | 'claude';
 
 /** Stable error codes so the renderer can branch (modal copy, install button, etc.). */
 export type AgentErrorCode =
+  | 'provider_disabled' // product policy blocks this subscription-backed provider
   | 'not_installed'    // binary missing on PATH (ENOENT)
   | 'not_logged_in'    // CLI present but no active subscription session
   | 'subscription_inactive' // OAuth remains, but the paid plan/entitlement is inactive
@@ -74,6 +75,8 @@ export interface AgentCliStatus {
   loggedIn: boolean;
   /** True only after the current account is confirmed usable for an agent request. */
   available: boolean;
+  /** Whether availability came from auth metadata only or a live minimal request. */
+  availabilityCheck?: 'authentication' | 'live';
   /** Stable reason when available is false. */
   errorCode?: AgentErrorCode;
   /** Human-readable detail (e.g. "Logged in using ChatGPT"). */

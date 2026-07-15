@@ -10,6 +10,7 @@ import {
   isSubscriptionInactiveMessage,
   tryExtractJson,
 } from './parse.js';
+import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
 import { spawnCollect } from './spawnHelper.js';
 import {
   buildClaudeSubscriptionEnv,
@@ -21,6 +22,10 @@ import type {
   AgentErrorCode,
   AgentProvider,
 } from './types.js';
+import {
+  agentVersionFallbackLabel,
+  parseAgentVersionOutput,
+} from './version.js';
 
 const DETECT_TIMEOUT_MS = 8_000;
 const ENTITLEMENT_TIMEOUT_MS = 25_000;
@@ -46,15 +51,31 @@ interface EntitlementProbe {
 }
 
 const statusCache = new Map<AgentProvider, { checkedAt: number; status: AgentCliStatus }>();
+const detectionRevisions = new Map<AgentProvider, number>();
 
-export function clearAgentDetectionCache(provider?: AgentProvider): void {
-  if (provider) statusCache.delete(provider);
-  else statusCache.clear();
+function advanceDetectionRevision(provider: AgentProvider): number {
+  const next = (detectionRevisions.get(provider) ?? 0) + 1;
+  detectionRevisions.set(provider, next);
+  return next;
 }
 
-function cacheStatus(status: AgentCliStatus): AgentCliStatus {
+export function clearAgentDetectionCache(provider?: AgentProvider): void {
+  if (provider) {
+    statusCache.delete(provider);
+    advanceDetectionRevision(provider);
+    return;
+  }
+
+  statusCache.clear();
+  advanceDetectionRevision('codex');
+  advanceDetectionRevision('claude');
+}
+
+function cacheStatus(status: AgentCliStatus, revision: number): AgentCliStatus {
   const immutableStatus = { ...status };
-  statusCache.set(status.provider, { checkedAt: Date.now(), status: immutableStatus });
+  if (detectionRevisions.get(status.provider) === revision) {
+    statusCache.set(status.provider, { checkedAt: Date.now(), status: immutableStatus });
+  }
   return immutableStatus;
 }
 
@@ -74,7 +95,10 @@ async function probeVersion(provider: AgentProvider): Promise<string | undefined
       timeoutMs: DETECT_TIMEOUT_MS,
       env: provider === 'codex' ? buildCodexSubscriptionEnv() : buildClaudeSubscriptionEnv(),
     });
-    if (res.code === 0) return (res.stdout || res.stderr).trim() || undefined;
+    if (res.code === 0) {
+      return parseAgentVersionOutput(provider, res.stdout, res.stderr)
+        ?? agentVersionFallbackLabel(provider);
+    }
   } catch {
     // Missing binary or an unusable shim.
   }
@@ -91,11 +115,22 @@ async function probeCodexLogin(): Promise<LoginProbe> {
       timeoutMs: DETECT_TIMEOUT_MS,
       env: buildCodexSubscriptionEnv(),
     });
-    const out = (res.stdout || res.stderr).trim();
-    const subscriptionLogin = res.code === 0 && /logged in using chatgpt/i.test(out);
-    const anyLogin = res.code === 0 && /logged in/i.test(out);
+    const out = `${res.stdout}\n${res.stderr}`.trim();
+    const safeOut = out ? sanitizeUserVisibleError(out) : undefined;
+    const statusLines = out
+      .replace(/\u001b\[[0-?]*[ -/]*[@-~]/g, '')
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+    const explicitlyLoggedOut = statusLines.some((line) => /\bnot\s+logged\s+in\b/i.test(line));
+    const subscriptionLogin = res.code === 0
+      && !explicitlyLoggedOut
+      && statusLines.some((line) => /^logged in using chatgpt[.!]?$/i.test(line));
+    const anyLogin = res.code === 0
+      && !explicitlyLoggedOut
+      && statusLines.some((line) => /^logged in(?: using .+)?[.!]?$/i.test(line));
     if (subscriptionLogin) {
-      return { loggedIn: true, detail: out };
+      return { loggedIn: true, detail: safeOut };
     }
     if (anyLogin) {
       return {
@@ -106,7 +141,7 @@ async function probeCodexLogin(): Promise<LoginProbe> {
     }
     return {
       loggedIn: false,
-      detail: out || undefined,
+      detail: safeOut,
       errorCode: 'not_logged_in',
     };
   } catch {
@@ -230,7 +265,9 @@ function entitlementDetail(errorCode: AgentErrorCode, raw: string): string {
   if (errorCode === 'timeout') {
     return 'Claude 구독 권한 확인 시간이 초과되었습니다. 네트워크 상태를 확인해주세요.';
   }
-  return raw.trim().slice(0, 300) || 'Claude 구독 사용 권한을 확인하지 못했습니다.';
+  return raw.trim()
+    ? sanitizeUserVisibleError(raw)
+    : 'Claude 구독 사용 권한을 확인하지 못했습니다.';
 }
 
 /** Execute one minimal, tool-free turn so stale OAuth cannot masquerade as entitlement. */
@@ -267,7 +304,12 @@ async function probeClaudeEntitlement(): Promise<EntitlementProbe> {
         return { available: false, errorCode, detail: entitlementDetail(errorCode, errorText) };
       }
       if (typeof envelope.result === 'string' && envelope.result.trim()) {
-        return { available: true };
+        if (envelope.result.trim() === 'READY') return { available: true };
+        return {
+          available: false,
+          errorCode: 'bad_json',
+          detail: 'Claude 구독 권한 확인 응답이 예상한 READY 형식과 다릅니다.',
+        };
       }
     }
 
@@ -298,6 +340,7 @@ export async function detectAgent(
     const cached = getCachedStatus(provider);
     if (cached) return cached;
   }
+  const detectionRevision = advanceDetectionRevision(provider);
 
   const version = await probeVersion(provider);
   if (!version) {
@@ -307,7 +350,7 @@ export async function detectAgent(
       loggedIn: false,
       available: false,
       errorCode: 'not_installed',
-    });
+    }, detectionRevision);
   }
 
   const login = provider === 'codex' ? await probeCodexLogin() : await probeClaudeLogin();
@@ -320,7 +363,7 @@ export async function detectAgent(
       available: false,
       errorCode: login.errorCode ?? 'not_logged_in',
       detail: login.detail,
-    });
+    }, detectionRevision);
   }
 
   if (login.errorCode) {
@@ -332,7 +375,7 @@ export async function detectAgent(
       available: false,
       errorCode: login.errorCode,
       detail: login.detail,
-    });
+    }, detectionRevision);
   }
 
   if (provider === 'codex') {
@@ -342,8 +385,9 @@ export async function detectAgent(
       version,
       loggedIn: true,
       available: true,
+      availabilityCheck: 'authentication',
       detail: login.detail,
-    });
+    }, detectionRevision);
   }
 
   const entitlement = await probeClaudeEntitlement();
@@ -353,7 +397,8 @@ export async function detectAgent(
     version,
     loggedIn: true,
     available: entitlement.available,
+    availabilityCheck: 'live',
     errorCode: entitlement.errorCode,
     detail: entitlement.detail || login.detail,
-  });
+  }, detectionRevision);
 }

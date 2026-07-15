@@ -16,12 +16,28 @@ vi.mock('../agentCli/codexRunner', () => ({
 }));
 
 import { generateWithAgent } from '../agentCli';
+import { createAgentProductPolicyContext } from '../agentCli/productPolicy';
 
 describe('generateWithAgent readiness preflight', () => {
   beforeEach(() => {
     detectMock.mockReset();
     claudeRunMock.mockReset();
     codexRunMock.mockReset();
+  });
+
+  it('fails closed at the final CLI execution boundary without a trusted product-policy context', async () => {
+    detectMock.mockResolvedValue({
+      provider: 'claude',
+      installed: true,
+      loggedIn: true,
+      available: true,
+    });
+
+    await expect(generateWithAgent({ provider: 'claude', prompt: '글을 작성해줘' }))
+      .rejects.toMatchObject({ code: 'provider_disabled', provider: 'claude' });
+
+    expect(detectMock).not.toHaveBeenCalled();
+    expect(claudeRunMock).not.toHaveBeenCalled();
   });
 
   it('blocks every Claude generation entry point when the subscription is inactive', async () => {
@@ -34,7 +50,11 @@ describe('generateWithAgent readiness preflight', () => {
       detail: 'Claude 구독 기간이 만료되었습니다.',
     });
 
-    await expect(generateWithAgent({ provider: 'claude', prompt: '글을 작성해줘' }))
+    const developmentContext = createAgentProductPolicyContext({ allowClaudeSubscription: true });
+    await expect(generateWithAgent(
+      { provider: 'claude', prompt: '글을 작성해줘' },
+      developmentContext,
+    ))
       .rejects.toMatchObject({ code: 'subscription_inactive', provider: 'claude' });
     expect(detectMock).toHaveBeenCalledWith('claude', { forceRefresh: true });
     expect(claudeRunMock).not.toHaveBeenCalled();
@@ -49,9 +69,61 @@ describe('generateWithAgent readiness preflight', () => {
     });
     claudeRunMock.mockResolvedValue('완성된 글');
 
-    const result = await generateWithAgent({ provider: 'claude', prompt: '글을 작성해줘' });
+    const developmentContext = createAgentProductPolicyContext({ allowClaudeSubscription: true });
+    const result = await generateWithAgent(
+      { provider: 'claude', prompt: '글을 작성해줘' },
+      developmentContext,
+    );
 
     expect(result.text).toBe('완성된 글');
     expect(claudeRunMock).toHaveBeenCalledOnce();
   });
+
+  it.each([
+    [
+      'an external API-key login',
+      {
+        provider: 'codex',
+        installed: true,
+        loggedIn: true,
+        available: false,
+        errorCode: 'subscription_inactive',
+        detail: 'Codex is using a non-ChatGPT billing route.',
+      },
+      'subscription_inactive',
+    ],
+    [
+      'an external logout',
+      {
+        provider: 'codex',
+        installed: true,
+        loggedIn: false,
+        available: false,
+        errorCode: 'not_logged_in',
+      },
+      'not_logged_in',
+    ],
+  ] as const)(
+    'force-refreshes a cached ChatGPT status before generation after %s',
+    async (_transition, refreshedStatus, expectedCode) => {
+      const cachedChatGptStatus = {
+        provider: 'codex',
+        installed: true,
+        loggedIn: true,
+        available: true,
+        availabilityCheck: 'authentication',
+      } as const;
+      detectMock.mockImplementation((
+        _provider: string,
+        options?: { forceRefresh?: boolean },
+      ) => Promise.resolve(options?.forceRefresh ? refreshedStatus : cachedChatGptStatus));
+      codexRunMock.mockResolvedValue('must not run');
+
+      await expect(generateWithAgent({ provider: 'codex', prompt: 'write a post' }))
+        .rejects.toMatchObject({ code: expectedCode, provider: 'codex' });
+
+      expect(detectMock).toHaveBeenCalledWith('codex', { forceRefresh: true });
+      expect(codexRunMock).not.toHaveBeenCalled();
+    },
+  );
 });

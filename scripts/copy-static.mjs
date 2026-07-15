@@ -25,6 +25,7 @@ try {
   console.log('📦 Copied prompts folder to dist/prompts');
 } catch (e) {
   console.warn('⚠️ prompts folder not found or copy failed:', e.message);
+  throw e;
 }
 
 // ✅ assets 폴더 복사 (시스템 트레이 아이콘 등)
@@ -221,6 +222,9 @@ try {
     'uiManagers.js',
     // ✅ 에이전트 모드 사전 가드 — contentGeneration.ts에서 import (toastManager 의존 → uiManagers 뒤).
     'agentModeGuard.js',
+    'agentProductPolicyUi.js',
+    'agentStatusRefreshCoordinator.js',
+    'agentLoginCodePrompt.js',
     'apiClient.js',
     'postStorageUtils.js',
     'contentPolicyContext.js',
@@ -353,6 +357,10 @@ try {
     {
       label: 'image/shoppingReferenceGeneration.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'shoppingReferenceGeneration.js'),
+    },
+    {
+      label: 'image/publishImageSequence.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'publishImageSequence.js'),
     },
   ];
 
@@ -788,6 +796,7 @@ ${sanitized}`;
     'resolveShoppingCollectedImagePlacement',
     'resolveUsableShoppingReferenceSource',
     'createShoppingRepresentativeThumbnail',
+    'normalizePublishImageSequence',
   ];
   const missingRuntimeSymbols = REQUIRED_RENDERER_RUNTIME_SYMBOLS.filter((symbol) => {
     const escaped = symbol.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -813,6 +822,58 @@ ${sanitized}`;
   if (missingBootstrapCalls.length > 0) {
     throw new Error(
       `Renderer bootstrap call missing after inlining: ${missingBootstrapCalls.join(', ')}`,
+    );
+  }
+
+  // Content Quality V3 publication provenance crosses several files that are
+  // concatenated into one browser script. Verify the assembled, pre-minified
+  // source so a missing module, order drift, or CommonJS rewrite cannot strip
+  // the fail-closed marker/capability before the renderer invokes main.
+  const REQUIRED_CONTENT_QUALITY_V3_RENDERER_OUTPUT_TOKENS = [
+    'executeUnifiedAutomation',
+    'executeFullAutoFlow',
+    'executeSemiAutoFlow',
+    '_contentQualityV3PostId',
+    '_contentQualityV3Required',
+    '_contentQualityV3PublishHandoff',
+    'runAutomation',
+  ];
+  const REQUIRED_CONTENT_QUALITY_V3_RENDERER_RELAY_PATTERNS = [
+    {
+      name: 'unified publication entrypoint',
+      pattern: /\basync\s+function\s+executeUnifiedAutomation\s*\(\s*formData\s*\)/,
+    },
+    {
+      name: 'full-auto publication delegation',
+      pattern: /\breturn\s+await\s+executeFullAutoFlow\s*\(\s*formData\s*\)/,
+    },
+    {
+      name: 'semi-auto publication delegation',
+      pattern: /\breturn\s+await\s+executeSemiAutoFlow\s*\(\s*formData\s*\)/,
+    },
+    {
+      name: 'durable V3 post identity relay',
+      pattern: /_contentQualityV3PostId\s*:\s*structuredContent\?\._contentQualityV3PostId/,
+    },
+    {
+      name: 'V3 required marker relay',
+      pattern: /_contentQualityV3Required\s*:\s*structuredContent\?\._contentQualityV3Required/,
+    },
+    {
+      name: 'V3 one-shot handoff relay',
+      pattern: /_contentQualityV3PublishHandoff\s*:\s*structuredContent\?\._contentQualityV3PublishHandoff/,
+    },
+    {
+      name: 'main automation IPC dispatch',
+      pattern: /\.call\s*\(\s*['"]runAutomation['"]\s*,\s*\[\s*payload\s*\]/,
+    },
+  ];
+  const missingContentQualityV3RendererRelay = REQUIRED_CONTENT_QUALITY_V3_RENDERER_RELAY_PATTERNS
+    .filter(({ pattern }) => !pattern.test(finalRenderer))
+    .map(({ name }) => name);
+  if (missingContentQualityV3RendererRelay.length > 0) {
+    throw new Error(
+      `Content Quality V3 renderer relay missing after inlining: ${missingContentQualityV3RendererRelay.join(', ')}`,
     );
   }
 
@@ -877,6 +938,15 @@ ${sanitized}`;
     }
   } else {
     console.log('📋 [v2.10.80] ECC_SKIP_MINIFY=1 → minify 생략');
+  }
+
+  const missingContentQualityV3RendererOutput =
+    REQUIRED_CONTENT_QUALITY_V3_RENDERER_OUTPUT_TOKENS
+      .filter((token) => !toWrite.includes(token));
+  if (missingContentQualityV3RendererOutput.length > 0) {
+    throw new Error(
+      `Content Quality V3 renderer output missing after minification: ${missingContentQualityV3RendererOutput.join(', ')}`,
+    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

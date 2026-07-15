@@ -102,9 +102,21 @@ function normalizeAutomationImages(images: any[] | undefined, log?: (message: st
   });
 }
 
+function materializeWriterOwnedStructuredContent(
+  value: StructuredContent | undefined,
+): StructuredContent | undefined {
+  if (!value) return undefined;
+  const requiresMutableCopy = Object.isFrozen(value)
+    || (value as StructuredContent & { _contentQualityV3Required?: boolean })
+      ._contentQualityV3Required === true;
+  return requiresMutableCopy ? structuredClone(value) : value;
+}
+
 export function resolveNaverRunOptions(input: ResolveNaverRunOptionsInput): Record<string, any> {
   const { runOptions, defaults, log } = input;
-  const structured = runOptions.structuredContent as StructuredContent | undefined;
+  const structured = materializeWriterOwnedStructuredContent(
+    runOptions.structuredContent as StructuredContent | undefined,
+  );
   const scheduleDate = normalizeScheduleDateForRunOptions(runOptions);
   const ctas = normalizeCtas(runOptions);
   assertValidCtaLinks(ctas);

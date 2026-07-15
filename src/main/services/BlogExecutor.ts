@@ -9,6 +9,10 @@ import { app } from 'electron';
 import fs from 'fs/promises';
 // [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — 외부 입력 data URL
 import { decodeBase64Async } from '../utils/base64Async.js';
+import {
+    normalizePublishImageSequence,
+    resolvePublishImageSourceLocation,
+} from '../../image/publishImageSequence.js';
 
 // ✅ [Phase 4B] 순환 의존성 방지를 위한 인터페이스 import
 import type { IExecutionDependencies, IAutomationInstance } from '../../types/automation.js';
@@ -17,6 +21,11 @@ import { Logger } from '../utils/logger.js';
 import { sendLog, sendStatus, sendProgress } from '../utils/ipcHelpers.js';
 import { classifyPublishFailure } from '../../automation/publishFailureClassifier.js';
 import { isConcreteNaverBlogPostUrl } from '../../automation/publishOutcomeResolver.js';
+import {
+    assertMainProcessEditorCommitTextOnly,
+    attachMainProcessBeforePublishCommit,
+    type EditorCommitCandidate,
+} from '../../automation/publishCommitHook.js';
 import {
     prepareContentPolicyForPublish,
     recordContentPolicyPublication,
@@ -34,6 +43,13 @@ import {
     removeScheduledPost,
     saveScheduledPost,
 } from '../../scheduledPostsManager.js';
+import {
+    ContentQualityV3PublishHandoffError,
+    contentQualityV3PublishHandoffStore,
+    enforceContentQualityV3PublishPayload,
+    hasContentQualityV3ProvenanceSignal,
+} from '../../contentQualityV3/publishHandoffStore.js';
+import { enforceContentQualityV3EditorCommit } from '../../contentQualityV3/editorCommitBoundary.js';
 
 // ✅ [Phase 4B] ExecutionDependencies는 types/automation.ts에서 정의 — 재export
 export type ExecutionDependencies = IExecutionDependencies;
@@ -241,8 +257,9 @@ export async function processImages(
         const uniqueImages: BlogImage[] = [];
 
         for (const img of payload.collectedImages) {
-            const url = img.url || img.thumbnailUrl || img.filePath || '';
-            if (!url) continue;
+            const sourceLocation = resolvePublishImageSourceLocation(img);
+            const url = img.url || img.thumbnailUrl || sourceLocation;
+            if (!sourceLocation || !url) continue;
 
             // URL에서 기본 이미지 식별자 추출 (중복 감지)
             const baseUrl = url
@@ -260,7 +277,7 @@ export async function processImages(
             seenBaseUrls.add(basePattern);
             uniqueImages.push({
                 heading: img.heading || img.title || '',
-                filePath: img.url || img.thumbnailUrl || img.filePath,
+                filePath: sourceLocation,
                 provider: 'collected',
                 alt: img.alt || '',
                 caption: img.caption || '',
@@ -277,6 +294,12 @@ export async function processImages(
                 ? payload.images
                 : [];
     }
+
+    sourceImages = normalizePublishImageSequence(
+        payload.structuredContent,
+        sourceImages,
+        { thumbnailPath: payload.thumbnailPath },
+    ) as BlogImage[];
 
     if (sourceImages.length === 0 || payload.skipImages) {
         sendLog(`ℹ️ 이미지 없음 또는 건너뛰기 (scSubImageSource: ${payload.scSubImageSource}, collectedImages: ${payload.collectedImages?.length || 0})`);
@@ -448,7 +471,8 @@ export async function processImages(
 export async function executePublishing(
     automation: IAutomationInstance,
     payload: PostCyclePayload,
-    processedImages: ProcessedImage[]
+    processedImages: ProcessedImage[],
+    beforePublishCommit?: (candidate: EditorCommitCandidate) => Promise<void>,
 ): Promise<{ success: boolean; url?: string; message?: string; failureCode?: import('../../automation/publishFailureClassifier.js').PublishFailureCode }> {
     // 취소 체크
     if (AutomationService.isCancelRequested()) {
@@ -503,7 +527,7 @@ export async function executePublishing(
 
         sendLog(`📝 최종 제목: ${finalTitle?.substring(0, 40)}...`);
 
-        const result = await automation.run({
+        const runOptions = {
             title: finalTitle,
             content: payload.content,
             lines: payload.lines,
@@ -512,6 +536,7 @@ export async function executePublishing(
             images: processedImages,
             collectedImages: payload.collectedImages, // ✅ [2026-01-19] 수집된 제품 이미지 전달 (썸네일용)
             publishMode: payload.publishMode,
+            skipImages: payload.skipImages,
             // ✅ [2026-05-25 v2.10.355] 반자동 모드 시 봇 감지 백오프 우회 (payload.skipBotBackoff → automation.run runOptions)
             skipBotBackoff: (payload as any).skipBotBackoff === true,
             // ✅ [2026-02-08 FIX] scheduleDate + scheduleTime 합성 (네이버 예약발행 'YYYY-MM-DD HH:mm' 형식 필수)
@@ -570,7 +595,13 @@ export async function executePublishing(
             previousPostTitle: payload.previousPostTitle,
             previousPostUrl: payload.previousPostUrl,
             isFullAuto: payload.isFullAuto,
-        });
+        };
+        if (beforePublishCommit) {
+            attachMainProcessBeforePublishCommit(runOptions, beforePublishCommit, {
+                requiresVisibleSnapshot: true,
+            });
+        }
+        const result = await automation.run(runOptions);
 
         assertImmediatePublishResultUrl(result, payload);
 
@@ -690,8 +721,19 @@ export async function runFullPostCycle(
     let finalResult: PostCycleResult;
     let effectivePayload = payload;
     let preparedPolicy: PreparedContentPolicyPublish<PostCyclePayload> | null = null;
+    let acceptedV3Provenance = false;
 
     try {
+        const deps = getDependencies();
+        const incomingV3Provenance = hasContentQualityV3ProvenanceSignal(effectivePayload);
+        effectivePayload = await enforceContentQualityV3PublishPayload(
+            contentQualityV3PublishHandoffStore,
+            effectivePayload,
+            { consume: false },
+        ) as PostCyclePayload;
+        acceptedV3Provenance = incomingV3Provenance
+            || hasContentQualityV3ProvenanceSignal(effectivePayload);
+
         // 1. 설정 동기화
         await syncConfiguration();
 
@@ -703,7 +745,6 @@ export async function runFullPostCycle(
         sendLog('🚀 발행 사이클 시작');
 
         // 3. Gemini 모델 설정
-        const deps = getDependencies();
         if (payload.geminiModel && deps.setGeminiModel) {
             deps.setGeminiModel(payload.geminiModel);
             sendLog(`🤖 Gemini 모델: ${payload.geminiModel}`);
@@ -768,6 +809,30 @@ export async function runFullPostCycle(
         }
         sendLog(`✅ 콘텐츠 정책 통과 (${preparedPolicy.policyResult.quality_report.total_score}점, 최근 글 ${preparedPolicy.policyResult.similarity_report.compared_post_count}건 비교)`);
 
+        // Revalidate and canonicalize the policy-transformed payload without
+        // consuming it. Consumption is attached later at the browser's common
+        // final confirmation-click boundary, after login, editor application,
+        // pre-publish checks, modal setup, and button discovery.
+        effectivePayload = await enforceContentQualityV3PublishPayload(
+            contentQualityV3PublishHandoffStore,
+            effectivePayload,
+            { consume: false },
+        ) as PostCyclePayload;
+
+        const currentV3Provenance = hasContentQualityV3ProvenanceSignal(effectivePayload);
+        if (acceptedV3Provenance && !currentV3Provenance) {
+            throw new ContentQualityV3PublishHandoffError('invalid_handoff_state');
+        }
+        acceptedV3Provenance = acceptedV3Provenance || currentV3Provenance;
+        const requiredMarker = acceptedV3Provenance;
+        if (requiredMarker && effectivePayload.publishMode !== 'draft') {
+            // V3 remains text-only until every raster/embed producer has a
+            // source-bound attestation. Enforce this before browser creation or
+            // image processing, then repeat the check on the resolved writer
+            // options at the final-click path.
+            assertMainProcessEditorCommitTextOnly(effectivePayload);
+        }
+
         if (effectivePayload.publishMode === 'schedule' && effectivePayload.scheduleType === 'app-schedule') {
             const schedulePolicy = preparedPolicy;
             const scheduledPost = createAppScheduledPost({
@@ -830,7 +895,18 @@ export async function runFullPostCycle(
         }
 
         // 9. 발행 실행
-        const result = await executePublishing(automation, effectivePayload, processedImages);
+        const result = await executePublishing(
+            automation,
+            effectivePayload,
+            processedImages,
+            requiredMarker && effectivePayload.publishMode !== 'draft' ? async (candidate) => {
+                await enforceContentQualityV3EditorCommit(
+                    contentQualityV3PublishHandoffStore,
+                    effectivePayload,
+                    candidate,
+                );
+            } : undefined,
+        );
         AutomationService.updateLastRunTime(); // ✅ [FIX-1] heartbeat — 발행 완료 후 갱신
 
         // 10. 성공 시 정리

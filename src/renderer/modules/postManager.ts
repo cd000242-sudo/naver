@@ -259,6 +259,76 @@ let _postsCacheLoadedAt = 0;
 const POSTS_CACHE_TTL_MS = 100;
 export function _invalidatePostsCache(): void { _postsCache = null; }
 
+const V3_REQUIRED_FIELD = '_contentQualityV3Required';
+const V3_HANDOFF_FIELD = '_contentQualityV3PublishHandoff';
+const V3_POST_ID_FIELD = '_contentQualityV3PostId';
+const V3_POST_ID_PATTERN = /^v3d_[A-Za-z0-9_-]{43}$/;
+const V3_HANDLE_PATTERN = /^v3h_[A-Za-z0-9_-]{32,128}$/;
+const V3_IDENTITY_PATTERN = /^v3p_[A-Za-z0-9_-]{32,128}$/;
+const V3_SHA256_PATTERN = /^[a-f0-9]{64}$/;
+
+function snapshotContentQualityV3PersistenceFields(
+  structuredContent: unknown,
+): Record<string, unknown> {
+  if (!structuredContent || typeof structuredContent !== 'object' || Array.isArray(structuredContent)) {
+    return {};
+  }
+  try {
+    const requiredProperty = Object.getOwnPropertyDescriptor(structuredContent, V3_REQUIRED_FIELD);
+    const handoffProperty = Object.getOwnPropertyDescriptor(structuredContent, V3_HANDOFF_FIELD);
+    const postIdProperty = Object.getOwnPropertyDescriptor(structuredContent, V3_POST_ID_FIELD);
+    const hasRequiredSignal = requiredProperty?.value === true
+      || handoffProperty !== undefined
+      || postIdProperty !== undefined;
+    if (!hasRequiredSignal) return {};
+
+    const provenancePostId = postIdProperty && 'value' in postIdProperty
+      ? postIdProperty.value
+      : undefined;
+    const persistedPostId = typeof provenancePostId === 'string'
+      && V3_POST_ID_PATTERN.test(provenancePostId)
+      ? provenancePostId
+      : undefined;
+    const requiredFields = persistedPostId
+      ? { [V3_POST_ID_FIELD]: persistedPostId, [V3_REQUIRED_FIELD]: true }
+      : { [V3_REQUIRED_FIELD]: true };
+
+    const handoff = handoffProperty && 'value' in handoffProperty
+      ? handoffProperty.value
+      : undefined;
+    if (!handoff || typeof handoff !== 'object' || Array.isArray(handoff)) {
+      return requiredFields;
+    }
+    const prototype = Object.getPrototypeOf(handoff);
+    const descriptors = Object.getOwnPropertyDescriptors(handoff);
+    const keys = Reflect.ownKeys(handoff);
+    if (
+      (prototype !== Object.prototype && prototype !== null)
+      || keys.length !== 3
+      || keys.some(key => typeof key !== 'string')
+    ) return requiredFields;
+
+    const handle = descriptors.handle?.value;
+    const publicationIdentity = descriptors.publicationIdentity?.value;
+    const originalContentSha256 = descriptors.originalContentSha256?.value;
+    if (
+      typeof handle !== 'string'
+      || !V3_HANDLE_PATTERN.test(handle)
+      || typeof publicationIdentity !== 'string'
+      || !V3_IDENTITY_PATTERN.test(publicationIdentity)
+      || typeof originalContentSha256 !== 'string'
+      || !V3_SHA256_PATTERN.test(originalContentSha256)
+    ) return requiredFields;
+
+    return {
+      ...requiredFields,
+      [V3_HANDOFF_FIELD]: { handle, publicationIdentity, originalContentSha256 },
+    };
+  } catch {
+    return { [V3_REQUIRED_FIELD]: true };
+  }
+}
+
 function normalizeGeneratedPostForLoad(post: GeneratedPost): GeneratedPost {
   const postId = typeof post.id === 'string' ? post.id.trim() : '';
   const storedStructuredContent: Record<string, any> = post.structuredContent
@@ -387,6 +457,7 @@ export function saveGeneratedPostFromData(
       articleType: structuredContent?.articleType || '',
       category: structuredContent?.category || '',
       toneStyle: structuredContent?.toneStyle || '',
+      ...snapshotContentQualityV3PersistenceFields(structuredContent),
     };
 
     // ✅ [2026-03-29 FIX] 이미지 base64 데이터 URL 제거 (1개당 수백KB)
@@ -612,6 +683,8 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
       articleType: structuredContent.articleType || '',
       category: structuredContent.category || '',
       toneStyle: structuredContent.toneStyle || '',
+      ...snapshotContentQualityV3PersistenceFields(existingPost?.structuredContent),
+      ...snapshotContentQualityV3PersistenceFields(structuredContent),
     };
     const lightImages2 = (normalizedImagesForSave || []).map((img: any) => ({
       heading: img.heading || '',

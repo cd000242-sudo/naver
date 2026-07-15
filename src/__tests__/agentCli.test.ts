@@ -7,11 +7,11 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { mkdtempSync, writeFileSync, rmSync } from 'fs';
+import { existsSync, mkdirSync, mkdtempSync, writeFileSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { tryExtractJson, parseClaudeEnvelope, classifyExit } from '../agentCli/parse';
-import { spawnCollect } from '../agentCli/spawnHelper';
+import { resolveWindowsSpawnTarget, spawnCollect } from '../agentCli/spawnHelper';
 import { AgentCliError } from '../agentCli/types';
 
 describe('parse.tryExtractJson', () => {
@@ -101,12 +101,66 @@ describe('spawnCollect — real node child (no CLI / no quota)', () => {
   const echoScript = () => join(dir, 'echo.js');
   const exitScript = () => join(dir, 'exit.js');
   const sleepScript = () => join(dir, 'sleep.js');
+  const floodScript = () => join(dir, 'flood.js');
+  const treeParentScript = () => join(dir, 'tree-parent.js');
+  const treeMarker = () => join(dir, 'tree-grandchild-survived.txt');
+  const treeReadyMarker = () => join(dir, 'tree-grandchild-ready.txt');
+  const npmShim = () => join(dir, 'codex.cmd');
+  const npmShimScript = () => join(dir, 'codex-cli.js');
+  const variableNpmShim = () => join(dir, 'npm.cmd');
+  const variableNpmNode = () => join(dir, 'node.exe');
+  const variableNpmCli = () => join(dir, 'node_modules', 'npm', 'bin', 'npm-cli.js');
+  const standardAgentShim = () => join(dir, 'claude.cmd');
+  const standardAgentCli = () => join(dir, 'node_modules', '@anthropic-ai', 'claude-code', 'cli.js');
+  const escapeShimDir = () => join(dir, 'escape-bin');
+  const escapeShim = () => join(escapeShimDir(), 'escape-agent.cmd');
+  const escapeTarget = () => join(dir, 'outside.js');
 
   beforeAll(() => {
     dir = mkdtempSync(join(tmpdir(), 'agentcli-test-'));
     writeFileSync(echoScript(), 'const c=[];process.stdin.on("data",d=>c.push(d));process.stdin.on("end",()=>process.stdout.write(Buffer.concat(c)));', 'utf8');
     writeFileSync(exitScript(), 'console.log("hello");process.exit(3);', 'utf8');
     writeFileSync(sleepScript(), 'setTimeout(()=>{},60000);', 'utf8');
+    writeFileSync(floodScript(), 'process.stdout.write("x".repeat(2048));', 'utf8');
+    writeFileSync(treeParentScript(), [
+      'const { spawn } = require("child_process");',
+      'const marker = process.argv[2];',
+      'const readyMarker = process.argv[3];',
+      'const code = `setTimeout(() => require("fs").writeFileSync(process.argv[1], "alive"), 1000);`;',
+      'const child = spawn(process.execPath, ["-e", code, marker], { stdio: "ignore", windowsHide: true });',
+      'require("fs").writeFileSync(readyMarker, String(child.pid));',
+      'child.unref();',
+      'setInterval(() => {}, 60000);',
+    ].join('\n'), 'utf8');
+    writeFileSync(npmShimScript(), 'process.stdout.write(process.env.ELECTRON_RUN_AS_NODE || "");', 'utf8');
+    writeFileSync(npmShim(), '@"%dp0%\\codex-cli.js" %*\r\n', 'utf8');
+    mkdirSync(join(dir, 'node_modules', 'npm', 'bin'), { recursive: true });
+    mkdirSync(join(dir, 'node_modules', '@anthropic-ai', 'claude-code'), { recursive: true });
+    mkdirSync(escapeShimDir(), { recursive: true });
+    writeFileSync(variableNpmNode(), '', 'utf8');
+    writeFileSync(variableNpmCli(), 'process.stdout.write("npm");', 'utf8');
+    writeFileSync(standardAgentCli(), 'process.stdout.write("claude");', 'utf8');
+    writeFileSync(standardAgentShim(), [
+      '@ECHO off',
+      'IF EXIST "%dp0%\\node.exe" (',
+      '  SET "_prog=%dp0%\\node.exe"',
+      ') ELSE (',
+      '  SET "_prog=node"',
+      ')',
+      '"%_prog%" "%dp0%\\node_modules\\@anthropic-ai\\claude-code\\cli.js" %*',
+      '',
+    ].join('\r\n'), 'utf8');
+    writeFileSync(escapeTarget(), 'process.stdout.write("escaped");', 'utf8');
+    writeFileSync(escapeShim(), '@"%dp0%\\..\\outside.js" %*\r\n', 'utf8');
+    writeFileSync(variableNpmShim(), [
+      '@ECHO OFF',
+      'SETLOCAL',
+      'SET "NODE_EXE=%~dp0\\node.exe"',
+      'SET "NPM_PREFIX_JS=%~dp0\\node_modules\\npm\\bin\\npm-prefix.js"',
+      'SET "NPM_CLI_JS=%~dp0\\node_modules\\npm\\bin\\npm-cli.js"',
+      '"%NODE_EXE%" "%NPM_CLI_JS%" %*',
+      '',
+    ].join('\r\n'), 'utf8');
   });
 
   afterAll(() => {
@@ -135,6 +189,115 @@ describe('spawnCollect — real node child (no CLI / no quota)', () => {
     });
     expect(res.code).toBe(3);
     expect(res.stdout.trim()).toBe('hello');
+  });
+
+  const windowsIt = process.platform === 'win32' ? it : it.skip;
+  windowsIt('runs npm JavaScript shims with packaged Electron in Node mode', async () => {
+    const env = { ...process.env };
+    delete env.ELECTRON_RUN_AS_NODE;
+
+    const res = await spawnCollect({
+      command: npmShim(),
+      args: [],
+      provider: 'codex',
+      env,
+      timeoutMs: 10_000,
+    });
+
+    expect(res.code).toBe(0);
+    expect(res.stdout).toBe('1');
+    expect(env.ELECTRON_RUN_AS_NODE).toBeUndefined();
+  });
+
+  windowsIt('resolves commands only from the caller-provided PATH', () => {
+    const target = resolveWindowsSpawnTarget('codex', {
+      PATH: dir,
+      PATHEXT: '.EXE;.CMD',
+      SYSTEMROOT: process.env.SYSTEMROOT,
+    });
+
+    expect(target.command).toBe(process.execPath);
+    expect(target.prefixArgs).toEqual([npmShimScript()]);
+  });
+
+  it('terminates a CLI that exceeds the bounded output budget', async () => {
+    await expect(spawnCollect({
+      command: NODE,
+      args: [floodScript()],
+      provider: 'codex',
+      timeoutMs: 10_000,
+      maxOutputBytes: 512,
+    })).rejects.toMatchObject({ code: 'spawn_failed' });
+  });
+
+  windowsIt('resolves the variable-indirection format used by the current npm.cmd', () => {
+    const target = resolveWindowsSpawnTarget('npm', {
+      PATH: dir,
+      PATHEXT: '.EXE;.CMD',
+      SYSTEMROOT: process.env.SYSTEMROOT,
+    });
+
+    expect(target).toMatchObject({
+      command: variableNpmNode(),
+      prefixArgs: [variableNpmCli()],
+    });
+  });
+
+  windowsIt('preserves the CLI script in a standard npm agent shim with adjacent node.exe', () => {
+    const target = resolveWindowsSpawnTarget('claude', {
+      PATH: dir,
+      PATHEXT: '.EXE;.CMD',
+      SYSTEMROOT: process.env.SYSTEMROOT,
+    });
+
+    expect(target).toMatchObject({
+      command: variableNpmNode(),
+      prefixArgs: [standardAgentCli()],
+    });
+  });
+
+  windowsIt('rejects relative PATH entries even when they resolve from the current directory', () => {
+    const originalCwd = process.cwd();
+    try {
+      process.chdir(dir);
+      expect(resolveWindowsSpawnTarget('claude', {
+        PATH: '.',
+        PATHEXT: '.EXE;.CMD',
+        SYSTEMROOT: process.env.SYSTEMROOT,
+      })).toBeUndefined();
+    } finally {
+      process.chdir(originalCwd);
+    }
+  });
+
+  windowsIt('rejects shim targets that escape their PATH directory', () => {
+    expect(resolveWindowsSpawnTarget('escape-agent', {
+      PATH: escapeShimDir(),
+      PATHEXT: '.EXE;.CMD',
+      SYSTEMROOT: process.env.SYSTEMROOT,
+    })).toBeUndefined();
+  });
+
+  windowsIt('does not resolve a command from the current working directory', () => {
+    const command = 'cwd-only-agent';
+    const cwdShim = join(dir, `${command}.cmd`);
+    const cwdScript = join(dir, `${command}.js`);
+    writeFileSync(cwdScript, 'process.stdout.write("unsafe");', 'utf8');
+    writeFileSync(cwdShim, `@"%dp0%\\${command}.js" %*\r\n`, 'utf8');
+
+    const originalCwd = process.cwd();
+    try {
+      process.chdir(dir);
+      const target = resolveWindowsSpawnTarget(command, {
+        PATH: join(dir, 'not-on-path'),
+        PATHEXT: '.EXE;.CMD',
+        SYSTEMROOT: process.env.SYSTEMROOT,
+      });
+
+      expect(target).toBeUndefined();
+    } finally {
+      process.chdir(originalCwd);
+    }
   });
 
   it('signals a missing binary (ENOENT on POSIX, non-zero cmd exit on Windows)', async () => {
@@ -166,6 +329,29 @@ describe('spawnCollect — real node child (no CLI / no quota)', () => {
     } catch (e) {
       expect((e as AgentCliError).code).toBe('timeout');
     }
+  });
+
+  windowsIt('terminates a confirmed Windows grandchild on abort', async () => {
+    const controller = new AbortController();
+    const result = spawnCollect({
+      command: NODE,
+      args: [treeParentScript(), treeMarker(), treeReadyMarker()],
+      provider: 'codex',
+      timeoutMs: 10_000,
+      signal: controller.signal,
+    });
+
+    for (let attempt = 0; attempt < 100 && !existsSync(treeReadyMarker()); attempt += 1) {
+      await new Promise((resolve) => setTimeout(resolve, 20));
+    }
+    const grandchildStarted = existsSync(treeReadyMarker());
+    controller.abort();
+
+    expect(grandchildStarted).toBe(true);
+    await expect(result).rejects.toMatchObject({ code: 'aborted' });
+
+    await new Promise((resolve) => setTimeout(resolve, 1_200));
+    expect(existsSync(treeMarker())).toBe(false);
   });
 
   it('rejects with aborted when the signal fires', async () => {

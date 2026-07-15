@@ -7,16 +7,131 @@ import {
   buildReferenceSafeFallbackParts,
   buildShoppingReferencePrompt,
   canUseReferenceFreeImageFallback,
+  createShoppingAiBatchPlan,
   createShoppingRepresentativeThumbnail,
+  doShoppingAiBodySlotsMatch,
   isShoppingReferenceImageEngine,
   isShoppingSelectableReferenceEngine,
+  resolveShoppingAiPublishImages,
   resolveShoppingCollectedImagePlacement,
   resolveShoppingImageGenerationPolicy,
   resolveShoppingRepresentativeReference,
   resolveUsableShoppingReferenceSource,
+  selectShoppingBodyHeadingSlotsForMode,
+  selectShoppingBodyHeadingsForMode,
 } from '../image/shoppingReferenceGeneration';
 
 describe('shopping representative image-to-image policy', () => {
+  it('applies odd/even body placement with the thumbnail occupying slot zero', () => {
+    const headings = ['first', 'second', 'third', 'fourth'];
+
+    expect(selectShoppingBodyHeadingsForMode(headings, 'odd-only'))
+      .toEqual(['first', 'third']);
+    expect(selectShoppingBodyHeadingsForMode(headings, 'even-only'))
+      .toEqual(['second', 'fourth']);
+    expect(selectShoppingBodyHeadingsForMode(headings, 'thumbnail-only')).toEqual([]);
+    expect(selectShoppingBodyHeadingsForMode(headings, 'all')).toEqual(headings);
+  });
+
+  it('always plans an original representative thumbnail when there is no introduction item', () => {
+    const representative = {
+      filePath: 'C:\\images\\product-main.jpg',
+      isRepresentative: true,
+    };
+    const items = [
+      { heading: 'first', isThumbnail: false },
+      { heading: 'second', isThumbnail: false },
+      { heading: 'third', isThumbnail: false },
+    ];
+
+    const plan = createShoppingAiBatchPlan({
+      items,
+      headingImageMode: 'odd-only',
+      representative,
+      representativeUrl: representative.filePath,
+      postTitle: 'Product review',
+    });
+
+    expect(plan.representativeThumbnail).toMatchObject({
+      filePath: representative.filePath,
+      isThumbnail: true,
+      isShoppingRepresentativeThumbnail: true,
+      preserveOriginal: true,
+    });
+    expect(plan.bodyItems.map(item => item.heading)).toEqual(['first', 'third']);
+    expect(plan.bodyItems.map(item => item.originalIndex)).toEqual([0, 2]);
+
+    const generatedBody = plan.bodyItems.map((item, index) => ({
+      ...item,
+      filePath: `C:\\generated\\body-${index + 1}.png`,
+      provider: 'dropshot',
+    }));
+    const published = resolveShoppingAiPublishImages<Record<string, unknown>>(
+      plan.representativeThumbnail,
+      generatedBody,
+      [representative],
+    );
+    expect(published.images[0]).toBe(plan.representativeThumbnail);
+    expect(published.images.slice(1).map(image => image.heading)).toEqual(['first', 'third']);
+  });
+
+  it('keeps body parity stable whether an introduction thumbnail item exists or not', () => {
+    const bodyItems = [
+      { heading: 'first', isThumbnail: false },
+      { heading: 'second', isThumbnail: false },
+      { heading: 'third', isThumbnail: false },
+      { heading: 'fourth', isThumbnail: false },
+    ];
+    const base = {
+      headingImageMode: 'even-only',
+      representative: 'C:\\images\\product-main.jpg',
+      representativeUrl: 'C:\\images\\product-main.jpg',
+      postTitle: 'Product review',
+    };
+
+    const withoutIntroduction = createShoppingAiBatchPlan({ ...base, items: bodyItems });
+    const withIntroduction = createShoppingAiBatchPlan({
+      ...base,
+      items: [{ heading: 'Product review', isThumbnail: true }, ...bodyItems],
+    });
+
+    expect(withoutIntroduction.bodyItems.map(item => item.heading)).toEqual(['second', 'fourth']);
+    expect(withIntroduction.bodyItems.map(item => item.heading)).toEqual(['second', 'fourth']);
+    expect(withIntroduction.bodyItems.map(item => item.originalIndex)).toEqual([1, 3]);
+    expect(withIntroduction.representativeThumbnail.heading).toBe('Product review');
+  });
+
+  it('rejects a same-count prepared batch when its heading slots belong to another mode', () => {
+    const preparedOdd = [
+      { heading: 'first', originalIndex: 0 },
+      { heading: 'third', originalIndex: 2 },
+    ];
+    const expectedEven = [
+      { heading: 'second', originalIndex: 1 },
+      { heading: 'fourth', originalIndex: 3 },
+    ];
+
+    expect(doShoppingAiBodySlotsMatch(preparedOdd, expectedEven)).toBe(false);
+    expect(doShoppingAiBodySlotsMatch(expectedEven, expectedEven)).toBe(true);
+    expect(doShoppingAiBodySlotsMatch(
+      [{ filePath: 'C:\\generated\\body-1.png' }],
+      [{ heading: 'first', originalIndex: 0 }],
+    )).toBe(false);
+  });
+
+  it('preserves source positions when duplicate heading text is filtered by odd/even mode', () => {
+    const duplicateHeadings = ['same', 'same', 'same', 'same'];
+    const oddSlots = selectShoppingBodyHeadingSlotsForMode(duplicateHeadings, 'odd-only');
+    const evenSlots = selectShoppingBodyHeadingSlotsForMode(duplicateHeadings, 'even-only');
+
+    expect(oddSlots.map(slot => slot.originalIndex)).toEqual([0, 2]);
+    expect(evenSlots.map(slot => slot.originalIndex)).toEqual([1, 3]);
+    expect(doShoppingAiBodySlotsMatch(
+      oddSlots.map(slot => ({ heading: slot.heading, originalIndex: slot.originalIndex })),
+      evenSlots.map(slot => ({ heading: slot.heading, originalIndex: slot.originalIndex })),
+    )).toBe(false);
+  });
+
   it.each([
     'nano-banana-2',
     'nano-banana-pro',
@@ -188,6 +303,45 @@ describe('shopping representative image-to-image policy', () => {
     expect(prompt).toContain('exact same product');
     expect(prompt).toContain('reference image');
     expect(prompt).toContain('Do not replace');
+  });
+
+  it('keeps only the original representative plus unique AI-generated body images', () => {
+    const representative = createShoppingRepresentativeThumbnail(
+      {
+        url: 'https://shop.example.com/product-main.jpg',
+        isRepresentative: true,
+      },
+      'Product review',
+    );
+    const generatedA = {
+      filePath: 'C:\\generated\\heading-a.png',
+      provider: 'dropshot',
+      referenceImageUrl: representative.url,
+    };
+    const generatedB = {
+      filePath: 'C:\\generated\\heading-b.png',
+      provider: 'dropshot',
+      referenceImageUrl: representative.url,
+    };
+
+    const resolved = resolveShoppingAiPublishImages(
+      representative,
+      [
+        generatedA,
+        { filePath: representative.url, provider: 'collected-image' },
+        { ...generatedA },
+        { filePath: 'https://shop.example.com/product-detail.jpg', source: 'collected' },
+        generatedB,
+      ],
+      [
+        { url: representative.url, isRepresentative: true },
+        { url: 'https://shop.example.com/product-detail.jpg' },
+      ],
+    );
+
+    expect(resolved.images).toEqual([representative, generatedA, generatedB]);
+    expect(resolved.removedCollectedCount).toBe(2);
+    expect(resolved.removedDuplicateCount).toBe(1);
   });
 
   it('preserves the uploaded representative image in shopping fallback requests', () => {

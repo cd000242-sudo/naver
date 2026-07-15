@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-16/v2.10.162] contentGenerator god file decomposition — StructuredContent transforms.
  *
  * 본문/제목/소제목 일괄 변환 — 이모지 제거, 줄바꿈 정규화, 문단 자동 분리, 소제목 marker fix.

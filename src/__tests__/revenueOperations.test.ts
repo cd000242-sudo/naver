@@ -12,6 +12,10 @@ const settings: RevenueSettings = {
   currency: 'KRW',
 };
 
+function localDateTime(year: number, month: number, day: number, hour = 12): Date {
+  return new Date(year, month - 1, day, hour, 0, 0, 0);
+}
+
 function entry(overrides: Partial<RevenueEntry> = {}): RevenueEntry {
   return {
     id: 'entry-1',
@@ -77,7 +81,7 @@ describe('revenueOperations validation', () => {
 });
 
 describe('buildRevenueDashboard', () => {
-  const now = new Date('2026-07-13T12:00:00+09:00');
+  const now = localDateTime(2026, 7, 13);
 
   it('does not claim full-time viability without actual data', () => {
     const result = buildRevenueDashboard([], settings, now);
@@ -133,7 +137,7 @@ describe('buildRevenueDashboard', () => {
   });
 
   it('includes an entry from today in the trailing 90-day total before noon', () => {
-    const earlyMorning = new Date('2026-07-13T02:00:00+09:00');
+    const earlyMorning = localDateTime(2026, 7, 13, 2);
     const result = buildRevenueDashboard([entry({ occurredOn: '2026-07-13' })], settings, earlyMorning);
 
     expect(result.trailing90Days.netProfit).toBe(1_000_000);
@@ -147,7 +151,7 @@ describe('buildRevenueDashboard', () => {
     const result = buildRevenueDashboard(
       [...history, entry({ id: 'current-only' })],
       settings,
-      new Date('2026-07-13T12:00:00+09:00'),
+      localDateTime(2026, 7, 13),
     );
 
     expect(result.currentMonth.forecastConfidence).toBe('low');

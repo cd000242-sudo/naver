@@ -127,6 +127,23 @@ import {
 } from './automation/publishSaveButtonPolicy.js';
 import { resolveNaverRunOptions } from './automation/runOptionsPolicy.js';
 import {
+  beginMainProcessEditorCommitCandidate,
+  bindMainProcessEditorVisibleSnapshot,
+  bindMainProcessEditorCommitCandidate,
+  invokeMainProcessBeforePublishCommit,
+  recordMainProcessEditorCommitSemantic,
+  requiresMainProcessEditorVisibleSnapshot,
+} from './automation/publishCommitHook.js';
+import {
+  assertEditorVisibleSnapshotUnchanged,
+  collectEditorVisibleSnapshot,
+} from './automation/editorVisibleSnapshot.js';
+import {
+  materializeEditorPlainFallbackText,
+  normalizeEditorSubtitleText,
+  normalizeEditorTitleText,
+} from './automation/editorWriterTextSemantics.js';
+import {
   isSchedulePublishOutcomeUnknown,
   SCHEDULE_PUBLISH_OUTCOME_UNKNOWN,
 } from './automation/schedulePublishCommitPolicy.js';
@@ -4430,15 +4447,14 @@ export class NaverBlogAutomation {
     this.log('ℹ️ 닫을 팝업이 없거나 이미 닫혀있습니다.');
   }
 
-  async inputTitle(title: string): Promise<void> {
+  async inputTitle(title: string): Promise<string> {
     let frame = (await this.getAttachedFrame());
     const page = this.ensurePage();
     this.ensureNotCancelled();
     this.log('🔄 제목 입력 중...');
 
     // 제목이 문자열인지 확인 + 개행 제거 (개행 시 본문으로 밀림 방지)
-    const titleText = (typeof title === 'string' ? title : String(title || ''))
-      .replace(/[\r\n]+/g, ' ').trim();
+    const titleText = normalizeEditorTitleText(title);
     if (!titleText) {
       throw new Error('제목이 비어있습니다.');
     }
@@ -4523,9 +4539,10 @@ export class NaverBlogAutomation {
     await this.delay(100); // Enter 후 안정화 대기
 
     this.log(`✅ 제목 '${title}' 입력 완료 → 본문 영역으로 이동 완료`);
+    return titleText;
   }
 
-  async typePlainContent(content: string, lines: number): Promise<void> {
+  async typePlainContent(content: string, lines: number): Promise<string> {
     const page = this.ensurePage();
     const frame = (await this.getAttachedFrame());
     this.ensureNotCancelled();
@@ -4549,7 +4566,7 @@ export class NaverBlogAutomation {
       const pasteResult = await pasteRichHtmlAtCursor(page, frame, rich.html, rich.plainText, rich.tableCount);
       if (pasteResult.ok) {
         this.log(`✅ 리치 본문 입력 완료 (${pasteResult.afterChars - pasteResult.beforeChars}자 증가, 표 ${pasteResult.beforeTables}→${pasteResult.afterTables})`);
-        return;
+        return rich.plainText;
       }
 
       if (pasteResult.safeToFallback === false) {
@@ -4573,6 +4590,7 @@ export class NaverBlogAutomation {
     }
 
     this.log(`✅ 본문을 ${repeatCount}줄 성공적으로 입력했습니다.`);
+    return materializeEditorPlainFallbackText(content, repeatCount);
   }
 
   /**
@@ -4689,8 +4707,11 @@ export class NaverBlogAutomation {
   /**
    * 네이버 블로그 예약발행 (완벽 수정 버전 - 자동으로 최적 방식 선택)
    */
-  private async publishScheduled(scheduleDate: string): Promise<void> {
-    return await publishHelpers.publishScheduled(this, scheduleDate);
+  private async publishScheduled(
+    scheduleDate: string,
+    beforeIrreversibleCommit?: () => Promise<void>,
+  ): Promise<void> {
+    return await publishHelpers.publishScheduled(this, scheduleDate, beforeIrreversibleCommit);
   }
 
   private async repairMissingHashtagsBeforePublish(
@@ -4780,8 +4801,28 @@ export class NaverBlogAutomation {
     }
   }
 
-  async publishBlogPost(mode: PublishMode, scheduleDate?: string, scheduleMethod: 'datetime-local' | 'individual-inputs' = 'datetime-local'): Promise<void> {
+  async publishBlogPost(
+    mode: PublishMode,
+    scheduleDate?: string,
+    scheduleMethod: 'datetime-local' | 'individual-inputs' = 'datetime-local',
+    runOptions?: object,
+  ): Promise<void> {
     if (mode === 'publish') this.immediatePublishCommitAttempted = false;
+    const beforeIrreversibleCommit = async (): Promise<void> => {
+      if (!runOptions) return;
+      let validatedSnapshot: Awaited<ReturnType<typeof collectEditorVisibleSnapshot>> | undefined;
+      if (requiresMainProcessEditorVisibleSnapshot(runOptions)) {
+        const snapshotFrame = await this.getAttachedFrame();
+        validatedSnapshot = await collectEditorVisibleSnapshot(snapshotFrame);
+        bindMainProcessEditorVisibleSnapshot(runOptions, validatedSnapshot);
+      }
+      await invokeMainProcessBeforePublishCommit(runOptions);
+      if (validatedSnapshot) {
+        const finalSnapshotFrame = await this.getAttachedFrame();
+        const finalSnapshot = await collectEditorVisibleSnapshot(finalSnapshotFrame);
+        assertEditorVisibleSnapshotUnchanged(validatedSnapshot, finalSnapshot);
+      }
+    };
     // ✅ [2026-02-07 FIX] 발행 모드 명시적 로깅 (디버깅용)
     this.log(`📋 publishBlogPost 호출됨 → mode: "${mode}", scheduleDate: "${scheduleDate || 'undefined'}", scheduleMethod: "${scheduleMethod}"`);
     // ✅ [2026-02-16 DEBUG] 카테고리 이름 확인
@@ -5419,6 +5460,7 @@ export class NaverBlogAutomation {
               const beforeUrl = this.ensurePage().url();
               this.log(`📌 발행 전 URL: ${beforeUrl}`);
 
+              await beforeIrreversibleCommit();
               this.immediatePublishCommitAttempted = true;
               await confirmPublishButton.click();
               await this.delay(1000); // ✅ 클릭 후 대기 시간 증가
@@ -5536,6 +5578,7 @@ export class NaverBlogAutomation {
 
               if (retryClickable) {
                 const beforeUrl = this.ensurePage().url();
+                await beforeIrreversibleCommit();
                 this.immediatePublishCommitAttempted = true;
                 await confirmPublishButton.click();
                 await this.delay(1000);
@@ -5722,6 +5765,7 @@ export class NaverBlogAutomation {
             const beforeUrl = this.ensurePage().url();
             this.log(`📌 발행 전 URL: ${beforeUrl}`);
 
+            await beforeIrreversibleCommit();
             this.immediatePublishCommitAttempted = true;
             await confirmPublishButton.click();
             await this.delay(1000);
@@ -5825,7 +5869,7 @@ export class NaverBlogAutomation {
                 }
               }
             }
-            await this.publishScheduled(scheduleDate);
+            await this.publishScheduled(scheduleDate, beforeIrreversibleCommit);
             scheduleSuccess = true;
             break; // 성공 시 루프 탈출
           } catch (scheduleError) {
@@ -5859,11 +5903,23 @@ export class NaverBlogAutomation {
     this.log('📝 단순 본문을 입력합니다...');
     this.ensureNotCancelled();
     (this as any).__richPasteThemes = pickRichArticleThemes();
-    await this.inputTitle(resolved.title);
+    const appliedTitle = await this.inputTitle(resolved.title);
+    recordMainProcessEditorCommitSemantic(resolved, {
+      kind: 'title',
+      text: appliedTitle,
+    });
     await editorHelpers.setupMobileViewAndCenterAlign(this).catch((error: Error) => {
       this.log(`⚠️ 모바일 화면 모드 설정 실패 (계속 진행): ${error.message}`);
     });
-    await this.typePlainContent(resolved.content, resolved.lines);
+    const appliedBody = await this.typePlainContent(resolved.content, resolved.lines);
+    recordMainProcessEditorCommitSemantic(resolved, {
+      kind: 'body-source',
+      text: appliedBody,
+    });
+    recordMainProcessEditorCommitSemantic(resolved, {
+      kind: 'hashtags',
+      values: [],
+    });
     (this as any).__editorContentApplied = true;
   }
 
@@ -6655,9 +6711,9 @@ export class NaverBlogAutomation {
     text: string,
     fontSize: number,
     quotationStyle: 'line' | 'bracket' | 'underline' = 'line'
-  ): Promise<void> {
-    await this.retry(async () => {
-      const normalizedText = this.normalizeSubtitleText(text);
+  ): Promise<string> {
+    return await this.retry(async () => {
+      const normalizedText = normalizeEditorSubtitleText(text);
       this.log(`   → 소제목(인용구) 입력 시작: "${normalizedText}"`);
 
       // ✅ 1. 기본 준비 (패널 닫기 등)
@@ -6720,6 +6776,7 @@ export class NaverBlogAutomation {
 
       await page.keyboard.press('Enter');
       await this.delay(this.DELAYS.MEDIUM);
+      return normalizedText;
     }, 1, '소제목(인용구) 입력');
   }
 
@@ -6748,21 +6805,7 @@ export class NaverBlogAutomation {
   }
 
   private normalizeSubtitleText(raw: string): string {
-    let t = String(raw || '').trim();
-    if (!t) return '';
-
-    t = t.replace(/\*\*/g, '');
-    t = t.replace(/^#+\s*/, ''); // ✅ 최우선: Markdown 해시 (#) 제거
-    t = t.replace(/^\s*(?:제\s*)?\d+\s*번째\s*소제목\s*[:：]\s*/i, '');
-    t = t.replace(/^\s*(?:첫|두|세|네|다섯|여섯|일곱|여덟|아홉|열)\s*번째\s*소제목\s*[:：]\s*/i, '');
-    t = t.replace(/^\s*소제목\s*[:：]\s*/i, '');
-    t = t.replace(/^(?:[•\-–—*]\s*)?(?:제\s*\d+\s*장\s*|STEP\s*\d+\s*|Step\s*\d+\s*|[①-⑳]\s*|\d{1,2}[).]\s*)/i, '');
-    t = t.replace(/[\s\-–—:|·•,]+$/g, '').trim();
-    t = t.replace(/\s+/g, ' ').trim();
-    if (!t) return String(raw || '').trim();
-    // ✅ 소제목 글자 수 제한 완화 (네이버 블로그는 긴 소제목도 허용)
-    // 기존: 45자 초과 시 42자로 잘라서 ... 추가 → 제거!
-    return t;
+    return normalizeEditorSubtitleText(raw);
   }
 
 
@@ -6772,7 +6815,7 @@ export class NaverBlogAutomation {
     page: Page,
     text: string,
     fontSize: number = 19
-  ): Promise<void> {
+  ): Promise<string> {
     return await editorHelpers.typeBodyWithRetry(this, frame, page, text, fontSize);
   }
 
@@ -8125,6 +8168,9 @@ export class NaverBlogAutomation {
   async runPostOnly(runOptions: RunOptions = {}, keepBrowserOpen: boolean = true): Promise<void> {
     this.cancelRequested = false;
     const resolvedOptions = this.resolveRunOptions(runOptions);
+    beginMainProcessEditorCommitCandidate(runOptions, resolvedOptions, {
+      structured: Boolean(resolvedOptions.structuredContent),
+    });
     let editorContentApplied = false;
     let postContentAppliedPublishFailure = false;
     (this as any).__editorMainBodyApplied = false;
@@ -8189,10 +8235,20 @@ export class NaverBlogAutomation {
       }
       editorContentApplied = true;
       (this as any).__editorContentApplied = true;
+      bindMainProcessEditorCommitCandidate(
+        runOptions,
+        resolvedOptions,
+        resolvedOptions.structuredContent,
+      );
 
       const beforePublishUrl = this.page?.url() || '';
       try {
-        await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
+        await this.publishBlogPost(
+          resolvedOptions.publishMode,
+          resolvedOptions.scheduleDate,
+          resolvedOptions.scheduleMethod,
+          runOptions,
+        );
         if (resolvedOptions.publishMode === 'publish') {
           await this.verifyImmediatePublishOutcome(beforePublishUrl);
           this.immediatePublishCommitAttempted = false;
@@ -8492,6 +8548,9 @@ export class NaverBlogAutomation {
     }
 
     const resolvedOptions = this.resolveRunOptions(runOptions);
+    beginMainProcessEditorCommitCandidate(runOptions, resolvedOptions, {
+      structured: Boolean(resolvedOptions.structuredContent),
+    });
 
     // ✅ [2026-02-15 FIX] RunOptions에서 전달된 categoryName을 this.options에 동기화
     // selectCategoryInPublishModal()은 this.options.categoryName을 참조하므로,
@@ -8626,12 +8685,22 @@ export class NaverBlogAutomation {
       }
       editorContentApplied = true;
       (this as any).__editorContentApplied = true;
+      bindMainProcessEditorCommitCandidate(
+        runOptions,
+        resolvedOptions,
+        resolvedOptions.structuredContent,
+      );
 
       // ✅ [2026-02-17] 전환점 로깅: 콘텐츠 작성 → 발행 프로세스
       this.log('\n🔄 콘텐츠 작성 완료 → 발행 프로세스 시작...');
       const beforePublishUrl = this.page?.url() || '';
       try {
-        await this.publishBlogPost(resolvedOptions.publishMode, resolvedOptions.scheduleDate, resolvedOptions.scheduleMethod);
+        await this.publishBlogPost(
+          resolvedOptions.publishMode,
+          resolvedOptions.scheduleDate,
+          resolvedOptions.scheduleMethod,
+          runOptions,
+        );
         if (resolvedOptions.publishMode === 'publish') {
           await this.verifyImmediatePublishOutcome(beforePublishUrl);
           this.immediatePublishCommitAttempted = false;

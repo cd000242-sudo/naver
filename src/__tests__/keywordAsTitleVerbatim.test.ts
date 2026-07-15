@@ -30,15 +30,21 @@ describe('keyword-as-title verbatim', () => {
   });
 
   it('skips the seo title patch block under verbatim mode', () => {
-    expect(gen).toContain("if (!_useKwTitle && (mode === 'seo' || mode === 'mate'))");
+    expect(gen).toMatch(
+      /if\s*\(\s*allowLegacyPostDraftLlm\s*&&\s*!_useKwTitle\s*&&\s*\(mode\s*===\s*'seo'\s*\|\|\s*mode\s*===\s*'mate'\)\s*\)/,
+    );
   });
 
   it('skips the homefeed title patch block under verbatim mode', () => {
-    expect(gen).toContain("if (!_useKwTitle && mode === 'homefeed')");
+    expect(gen).toMatch(
+      /if\s*\(\s*allowLegacyPostDraftLlm\s*&&\s*!_useKwTitle\s*&&\s*mode\s*===\s*'homefeed'\s*\)/,
+    );
   });
 
   it('skips the affiliate/shopping title patch block under verbatim mode', () => {
-    expect(gen).toContain("if (!_useKwTitle && (isShoppingConnectMode || mode === 'affiliate'))");
+    expect(gen).toMatch(
+      /if\s*\(\s*allowLegacyPostDraftLlm\s*&&\s*!_useKwTitle\s*&&\s*\(isShoppingConnectMode\s*\|\|\s*mode\s*===\s*'affiliate'\)\s*\)/,
+    );
   });
 
   it('finalizeStructuredContent returns early for verbatim (no downstream title cleanup)', () => {

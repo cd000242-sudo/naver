@@ -13,7 +13,10 @@ function flushLog() {
     fs.writeFileSync(path.join(__dirname, 'test-nbp-result.txt'), logLines.join('\n'), 'utf-8');
 }
 
-const API_KEY = 'AIzaSyAtjFG4IP1xlTSgAfQVUJI-dpOcju3KBAY';
+const API_KEY = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+if (!API_KEY) {
+    throw new Error('Missing Gemini API key. Set GEMINI_API_KEY or GOOGLE_API_KEY.');
+}
 
 async function testGemini3Pro() {
     log('[TEST 1] Gemini 3 Pro Image Preview (:generateContent)');
@@ -106,7 +109,7 @@ async function testImagen4() {
 
 async function main() {
     log('=== NanoBananaPro Test v3 ===');
-    log(`API Key: ${API_KEY.substring(0, 10)}...`);
+    log('API key: loaded from environment');
     log(`Time: ${new Date().toISOString()}\n`);
 
     // Gemini 3 Pro test

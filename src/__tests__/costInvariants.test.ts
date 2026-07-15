@@ -10,6 +10,8 @@
 import { describe, it, expect } from 'vitest';
 import * as fs from 'fs';
 import * as path from 'path';
+import { buildGeminiGenerationConfig } from '../contentGeminiSamplingPolicy.js';
+import { GEMINI_TEXT_MODELS } from '../runtime/modelRegistry.js';
 
 const ROOT = path.resolve(__dirname, '..');
 function read(relative: string): string {
@@ -21,7 +23,42 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     const content = read('contentGenerator.ts');
 
     it('Gemini tier token budgets stay bounded while reserving thinking output', () => {
-      expect(content).toMatch(/maxOutputTokens:\s*isPro\s*\?\s*16384\s*:\s*modelName\s*===\s*GEMINI_TEXT_MODELS\.FLASH\s*\?\s*12288\s*:\s*8192/);
+      expect(content).toMatch(
+        /generationConfig:\s*buildGeminiGenerationConfig\(\{\s*activeTemperature,\s*modelName,\s*isPro,\s*schema:\s*options\.schema,\s*useModelDefaultSampling:\s*options\.useModelDefaultSampling,\s*\}\)/,
+      );
+
+      // Provider capacity is higher, but these are deliberate product cost caps.
+      // Current Gemini 3 models keep their default thinking; only the legacy 2.5
+      // branch may inject thinkingBudget: 0.
+      const currentTierConfigs = [
+        buildGeminiGenerationConfig({
+          activeTemperature: 0.5,
+          modelName: GEMINI_TEXT_MODELS.FLASH_LITE,
+          isPro: false,
+          useModelDefaultSampling: true,
+        }),
+        buildGeminiGenerationConfig({
+          activeTemperature: 0.5,
+          modelName: GEMINI_TEXT_MODELS.FLASH,
+          isPro: false,
+        }),
+        buildGeminiGenerationConfig({
+          activeTemperature: 0.5,
+          modelName: GEMINI_TEXT_MODELS.PRO,
+          isPro: true,
+        }),
+      ];
+
+      expect(currentTierConfigs.map((config) => config.maxOutputTokens)).toEqual([
+        8192,
+        12288,
+        16384,
+      ]);
+      expect(currentTierConfigs.every((config) => (
+        typeof config.maxOutputTokens === 'number'
+        && config.maxOutputTokens <= 16384
+      ))).toBe(true);
+      expect(currentTierConfigs.every((config) => !('thinkingConfig' in config))).toBe(true);
     });
 
     it('OpenAI max_completion_tokens는 8192 이하', () => {
@@ -183,10 +220,11 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
 
     it('OpenAI content generation gets a bounded same-engine repair budget without cross-engine fallback', () => {
       expect(content).toMatch(/const\s+baseMaxAttempts\s*=\s*provider\s*===\s*'openai'[\s\S]{0,120}?Math\.max\(openAiContentMaxAttempts,\s*costPolicy\.maxAttempts\)/);
-      expect(content).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
-      expect(content).toMatch(/const\s+promptRepairMinAttempts\s*=\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
-      expect(content).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*isQuality90Mode\(generationQualityMode\)\s*\?\s*2\s*:\s*0/);
-      expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*Math\.max\(baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts\)/);
+      expect(content).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
+      expect(content).toMatch(/const\s+promptRepairMinAttempts\s*=\s*!isV3Prompt\s*&&\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
+      expect(content).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*!isV3Prompt\s*&&\s*isQuality90Mode\(generationQualityMode\)\s*\?\s*2\s*:\s*0/);
+      expect(content).toMatch(/const\s+configuredMaxAttempts\s*=\s*Math\.max\(\s*baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts,?\s*\)/);
+      expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
       expect(failurePolicy).toMatch(/SAME_ENGINE_RECOVERY/);
     });
 

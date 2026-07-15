@@ -123,14 +123,14 @@ describe('content generation timeout policy', () => {
     expect(fullAutoSrc).toMatch(/FULL_AUTO_IMAGE_MAX_ATTEMPTS\s*=\s*3/);
     expect(fullAutoSrc).toMatch(/FULL_AUTO_IMAGE_TOTAL_BUDGET_MS\s*=\s*35 \* 60 \* 1000/);
     expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(getFullAutoThumbnailImageTimeoutMs\(currentProvider\)\)/);
-    expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(getFullAutoBodyImageTimeoutMs\(currentProvider,\s*headings\.length\)\)/);
+    expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(getFullAutoBodyImageTimeoutMs\(currentProvider,\s*fullAutoBodyItems\.length\)\)/);
   });
 
   it('uses the first regeneration budget to repair custom prompt drift instead of passing weak output', () => {
     expect(promptAdherenceSrc).toMatch(/export\s+type\s+PromptAdherenceReport/);
     expect(promptAdherenceSrc).toMatch(/export\s+function\s+assessCustomPromptAdherence/);
     expect(promptAdherenceSrc).toMatch(/PROMPT_ADHERENCE_REPAIR/);
-    expect(generatorSrc).toMatch(/const\s+promptRepairMinAttempts\s*=\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
+    expect(generatorSrc).toMatch(/const\s+promptRepairMinAttempts\s*=\s*!isV3Prompt\s*&&\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
     expect(generatorSrc).toMatch(/const\s+customPromptAdherence\s*=\s*assessCustomPromptAdherence\(parsed,\s*source\)/);
     expect(generatorSrc).toMatch(/!customPromptAdherence\.passed\s*&&\s*attempt\s*<\s*MAX_ATTEMPTS/);
     expect(generatorSrc).toMatch(/customPromptAdherence\.retryInstruction/);
@@ -140,12 +140,15 @@ describe('content generation timeout policy', () => {
     expect(failurePolicySrc).toMatch(/function\s+isTerminalContentGenerationError/);
     expect(failurePolicySrc).toMatch(/function\s+buildSameEngineRecoveryInstruction/);
     expect(generatorSrc).toMatch(/CONTENT_SAME_ENGINE_MIN_ATTEMPTS/);
-    expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
-    expect(generatorSrc).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*isQuality90Mode\(generationQualityMode\)\s*\?\s*2\s*:\s*0/);
-    expect(generatorSrc).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*Math\.max\(baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts\)/);
+    expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
+    expect(generatorSrc).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*!isV3Prompt\s*&&\s*isQuality90Mode\(generationQualityMode\)\s*\?\s*2\s*:\s*0/);
+    expect(generatorSrc).toMatch(/const\s+configuredMaxAttempts\s*=\s*Math\.max\(\s*baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts,?\s*\)/);
+    expect(generatorSrc).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
     expect(failurePolicySrc).toMatch(/SAME_ENGINE_RECOVERY/);
     expect(failurePolicySrc).toMatch(/다른 AI 엔진으로 전환하지 않습니다/);
-    expect(generatorSrc).toMatch(/const\s+terminalError\s*=\s*isTerminalContentGenerationError\(error\)/);
+    expect(generatorSrc).toMatch(
+      /const\s+terminalError\s*=\s*\(\s*promptVariant\s*===\s*'v3'\s*&&\s*errMsg\.startsWith\('\[content-quality-v3\] '\)\s*\)\s*\|\|\s*isTerminalContentGenerationError\(error\)/,
+    );
     expect(generatorSrc).toMatch(/terminalError\s*\|\|\s*attempt\s*===\s*MAX_ATTEMPTS/);
   });
 

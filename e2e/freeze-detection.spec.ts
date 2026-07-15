@@ -20,7 +20,7 @@
 import { test, expect, _electron as electron, ElectronApplication, Page } from '@playwright/test';
 import path from 'path';
 import {
-  closeElectronApp,
+  closeElectronTestSession,
   createElectronTestProfile,
   type ElectronTestProfile,
   waitForMainWindow,
@@ -81,8 +81,7 @@ test.beforeAll(async () => {
 });
 
 test.afterAll(async () => {
-  await closeElectronApp(app);
-  await testProfile?.cleanup();
+  await closeElectronTestSession(app, testProfile);
 });
 
 test('앱 시작 직후 5초간 LongTask 누적 < 2000ms', async () => {

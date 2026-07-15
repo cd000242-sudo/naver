@@ -16,6 +16,19 @@ import {
   normalizeTitleWhitespace,
 } from './contentTextHelpers';
 
+function escapePlainTextForHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function plainTextToHtml(value: string): string {
+  return escapePlainTextForHtml(value)
+    .replace(/\r\n?/g, '\n')
+    .replace(/\n/g, '<br>');
+}
+
 export function validateStructuredContent(content: StructuredContent, source?: ContentSource): void {
   if (!content) throw new Error('AI 응답에 본문이 없습니다. 자동 재시도 중입니다... 계속 실패하면 다른 AI 엔진(Gemini/Claude/OpenAI)으로 전환해주세요.');
 
@@ -109,17 +122,17 @@ export function validateStructuredContent(content: StructuredContent, source?: C
       // bodyPlain을 HTML로 변환
       content.bodyHtml = content.bodyPlain
         .split('\n\n')
-        .map(p => `< p > ${p.replace(/\n/g, '<br>')} </p>`)
+        .map(p => `<p>${plainTextToHtml(p)}</p>`)
         .join('\n');
       console.warn('[validateStructuredContent] bodyHtml 누락 → bodyPlain에서 복구');
     } else if (content.headings && content.headings.length > 0) {
       // headings에서 본문 생성 (content 또는 summary 사용)
       const bodyParts: string[] = [];
       content.headings.forEach(h => {
-        if (h.title) bodyParts.push(`<h2>${h.title}</h2>`);
+        if (h.title) bodyParts.push(`<h2>${plainTextToHtml(h.title)}</h2>`);
         // ✅ content 또는 summary 중 있는 것 사용
         const bodyText = h.content || h.summary || '';
-        if (bodyText) bodyParts.push(`<p>${bodyText}</p>`);
+        if (bodyText) bodyParts.push(`<p>${plainTextToHtml(bodyText)}</p>`);
       });
       content.bodyHtml = bodyParts.join('\n');
       // ✅ bodyPlain도 content 또는 summary 사용

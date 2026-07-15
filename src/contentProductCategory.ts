@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-12/v2.10.150] contentGenerator god file decomposition — product category detection.
  *
  * 상품명/추가 컨텍스트에서 카테고리(food/electronics/cosmetics/...)를 자동 감지.

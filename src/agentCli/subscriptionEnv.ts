@@ -38,6 +38,12 @@ const SHARED_SUBSCRIPTION_ENV_KEYS = new Set([
   'SSL_CERT_FILE',
   'SSL_CERT_DIR',
   'NODE_EXTRA_CA_CERTS',
+  // Keep standard OS network routing. Provider credentials and custom API/base URL
+  // variables remain denied because this module is allowlist-only.
+  'HTTP_PROXY',
+  'HTTPS_PROXY',
+  'NO_PROXY',
+  'ALL_PROXY',
 ]);
 
 const CLAUDE_SUBSCRIPTION_ENV_KEYS = new Set([
@@ -48,6 +54,13 @@ const CLAUDE_SUBSCRIPTION_ENV_KEYS = new Set([
 const CODEX_SUBSCRIPTION_ENV_KEYS = new Set([
   ...SHARED_SUBSCRIPTION_ENV_KEYS,
   'CODEX_HOME',
+]);
+
+const NPM_INSTALL_ENV_KEYS = new Set([
+  ...SHARED_SUBSCRIPTION_ENV_KEYS,
+  // Preserve the user's chosen global install location without forwarding npm
+  // registry credentials or arbitrary npm configuration to the subprocess.
+  'NPM_CONFIG_PREFIX',
 ]);
 
 function pickSubscriptionEnv(
@@ -83,4 +96,10 @@ export function buildCodexSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {
   return pickSubscriptionEnv(source, CODEX_SUBSCRIPTION_ENV_KEYS);
+}
+
+export function buildNpmInstallEnv(
+  source: NodeJS.ProcessEnv = process.env,
+): NodeJS.ProcessEnv {
+  return pickSubscriptionEnv(source, NPM_INSTALL_ENV_KEYS);
 }

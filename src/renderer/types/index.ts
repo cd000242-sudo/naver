@@ -37,6 +37,13 @@ export type RendererAutomationPayload = {
     lines?: string[];
     selectedHeadings?: string[];
     structuredContent?: any; // StructuredContent (global.d.ts ambient)
+    _contentQualityV3PostId?: string;
+    _contentQualityV3Required?: true;
+    _contentQualityV3PublishHandoff?: {
+        handle: string;
+        publicationIdentity: string;
+        originalContentSha256: string;
+    };
     generatedImages?: RendererAutomationImage[];
     hashtags?: string[];
     generator?: GeneratorType;

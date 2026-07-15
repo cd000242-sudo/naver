@@ -12,6 +12,24 @@ describe('content generation failure policy', () => {
     expect(isTerminalContentGenerationError(new Error('content policy violation'))).toBe(true);
   });
 
+  it('treats the stable application safety-block prefix as terminal only at the start', () => {
+    expect(isTerminalContentGenerationError(new Error(
+      '[CONTENT_SAFETY_BLOCKED] affiliate evidence audit failed',
+    ))).toBe(true);
+    expect(isTerminalContentGenerationError(new Error(
+      'transient provider diagnostic mentioned [CONTENT_SAFETY_BLOCKED] later',
+    ))).toBe(false);
+  });
+
+  it('treats the stable V3 publication-boundary prefix as terminal only at the start', () => {
+    expect(isTerminalContentGenerationError(new Error(
+      '[content-quality-v3-publication] affiliate_shopping_quality_failed',
+    ))).toBe(true);
+    expect(isTerminalContentGenerationError(new Error(
+      'transient diagnostic mentioned [content-quality-v3-publication] later',
+    ))).toBe(false);
+  });
+
   it('keeps transient provider pressure repairable by the selected engine', () => {
     expect(isTerminalContentGenerationError(new Error('429 RESOURCE_EXHAUSTED: RPM/TPM rate limit'))).toBe(false);
     expect(isTerminalContentGenerationError(new Error('request timeout while waiting for response'))).toBe(false);

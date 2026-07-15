@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { expect, test, _electron as electron, type ElectronApplication, type Page } from '@playwright/test';
 import {
-  closeElectronApp,
+  closeElectronTestSession,
   createElectronTestProfile,
   type ElectronTestProfile,
   waitForMainWindow,
@@ -88,8 +88,7 @@ test.beforeAll(async () => {
 });
 
 test.afterAll(async () => {
-  await closeElectronApp(app);
-  await testProfile?.cleanup();
+  await closeElectronTestSession(app, testProfile);
 });
 
 test('semi-auto UI preserves pasted article order through the main IPC handoff', async () => {

@@ -17,6 +17,8 @@ if (!npmCli) {
 const steps = [
   { label: 'ESLint', args: ['run', 'lint', '--', '--quiet'] },
   { label: 'Full test suite', args: ['test'] },
+  { label: 'Agent regression coverage', args: ['run', 'test:coverage:agent'] },
+  { label: 'Content Quality V3 regression coverage', args: ['run', 'test:coverage:content-v3'] },
   { label: 'TypeScript + renderer build', args: ['run', 'build'] },
   { label: 'IPC contract', args: ['run', 'lint:ipc'] },
   { label: 'Runtime self-test', args: ['run', 'self-test:built'] },

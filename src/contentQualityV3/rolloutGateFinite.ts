@@ -1,0 +1,47 @@
+import type { RolloutGateAggregate } from './rolloutGate.js';
+
+export function hasOnlyFiniteRolloutGateNumbers(aggregate: RolloutGateAggregate): boolean {
+  const numericValues: readonly (number | null)[] = [
+    aggregate.providerCases.total,
+    aggregate.providerCases.completed,
+    aggregate.providerCases.pass,
+    aggregate.providerCases.productFail,
+    aggregate.providerCases.infraExternal,
+    aggregate.providerCases.notRun,
+    aggregate.providerCases.requiredCompleted,
+    ...aggregate.strata.flatMap(item => [item.completed, item.requiredCompleted]),
+    aggregate.schemaPassRate,
+    aggregate.publishableRate,
+    aggregate.criticalHallucinationCount,
+    aggregate.fakeFirstPersonCount,
+    aggregate.unsupportedCurrentNumberCount,
+    aggregate.meanCandidateQualityScore,
+    aggregate.meanLegacyQualityScore,
+    aggregate.meanQualityDelta,
+    aggregate.medianCostRatio,
+    aggregate.p95LatencyRatio,
+    aggregate.koreanPairwise.total,
+    aggregate.koreanPairwise.required,
+    aggregate.koreanPairwise.candidateWins,
+    aggregate.koreanPairwise.ties,
+    aggregate.koreanPairwise.legacyWins,
+    aggregate.koreanPairwise.candidateWinRate,
+    aggregate.koreanPairwise.tieRate,
+    aggregate.koreanPairwise.winOrTieRate,
+    aggregate.koreanPairwise.winOrTieWilsonLowerBound,
+    aggregate.koreanPairwise.coveredCases,
+    aggregate.koreanPairwise.requiredCases,
+    aggregate.koreanPairwise.coveredStrata,
+    aggregate.koreanPairwise.requiredStrata,
+    aggregate.koreanPairwise.minimumJudgmentsPerCase,
+    aggregate.koreanPairwise.maximumJudgmentsPerCase,
+    aggregate.koreanPairwise.minimumJudgmentsPerStratum,
+    aggregate.koreanPairwise.maximumJudgmentsPerStratum,
+    aggregate.koreanPairwise.candidatePositionA,
+    aggregate.koreanPairwise.candidatePositionB,
+    aggregate.koreanPairwise.uniqueRaters,
+    aggregate.koreanPairwise.uniqueRuns,
+  ];
+
+  return numericValues.every(value => value === null || Number.isFinite(value));
+}

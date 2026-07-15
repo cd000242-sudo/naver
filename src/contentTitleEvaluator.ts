@@ -1,4 +1,4 @@
-﻿/**
+/**
  * [Phase 3-9/v2.10.147] contentGenerator god file decomposition — evaluateTitleQuality.
  *
  * Pure-ish function (console.log side-effect only). Dependencies:

@@ -65,6 +65,10 @@ export interface AutomationRequest {
     postId?: string;
     useIntelligentImagePlacement?: boolean;
     onlyImagePlacement?: boolean;
+    _contentQualityV3PublishOwnerKey?: string;
+    _contentQualityV3PostId?: string;
+    _contentQualityV3Required?: true;
+    _contentQualityV3PublishHandoff?: import('../../contentQualityV3/publishHandoffStore.js').ContentQualityV3PublishHandoff;
 }
 
 export interface AutomationResponse {

@@ -57,7 +57,7 @@ describe('progress image preview duplicate guards', () => {
     expect(progressModal).toMatch(/image\?\.filePath\s*\|\|\s*image\?\.savedToLocal\s*\|\|\s*image\?\.url/);
     expect(imageSyncService).toMatch(/function\s+getImageSyncPathLike/);
     expect(imageSyncService).toMatch(/image\.filePath\s*\|\|\s*image\.savedToLocal\s*\|\|\s*image\.url\s*\|\|\s*image\.previewDataUrl/);
-    expect(imageSyncService).toMatch(/return\s+\[\.\.\.thumbnailImages\.map\(normalizeImageSyncPublishImage\),\s*\.\.\.result\.map\(normalizeImageSyncPublishImage\)\]/);
+    expect(imageSyncService).toMatch(/normalizePublishImageSequence\(\s*structuredContent,\s*\[\.\.\.thumbnailImages\.map\(normalizeImageSyncPublishImage\),\s*\.\.\.result\.map\(normalizeImageSyncPublishImage\)\]/);
   });
 
   it('keeps cost-risk image listener from double-rendering progress grid images', () => {

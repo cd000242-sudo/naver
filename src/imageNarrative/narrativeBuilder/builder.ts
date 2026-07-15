@@ -21,6 +21,7 @@ import type {
   VisionProvider,
 } from '../types.js';
 import type { StructuredContent } from '../../contentGenerator.js';
+import type { AgentProductPolicyContext } from '../../agentCli/productPolicy.js';
 
 // Resolved at runtime relative to this file: ../../prompts/imageNarrative/
 const PROMPT_DIR = join(__dirname, '..', '..', '..', 'src', 'prompts', 'imageNarrative');
@@ -48,6 +49,8 @@ export interface BuilderOptions {
   readonly context?: ImageNarrativeContext;
   /** AbortSignal to cancel a long-running generation. */
   readonly signal?: AbortSignal;
+  /** Opaque main-process context required by subscription-backed agent execution. */
+  readonly agentProductPolicyContext?: AgentProductPolicyContext;
 }
 
 // ---------------------------------------------------------------------------
@@ -168,6 +171,7 @@ async function callProvider(
   userPrompt: string,
   provider: NarrativeTextProvider,
   signal?: AbortSignal,
+  agentProductPolicyContext?: AgentProductPolicyContext,
 ): Promise<string> {
   const fullPrompt = `${systemPrompt}\n\n---\n\n${userPrompt}`;
 
@@ -182,7 +186,7 @@ async function callProvider(
     case 'agent-claude':
       // 에이전트 모드 — 사용자 본인 구독 CLI로 글 작성 (공유 agentCli 서비스, 중복 구현 금지).
       // silent 폴백 금지: 실패는 AgentCliError 그대로 throw.
-      return callAgentProvider(provider, fullPrompt, signal);
+      return callAgentProvider(provider, fullPrompt, signal, agentProductPolicyContext);
     default:
       // deepinfra — fall back to gemini
       return callGeminiProvider(fullPrompt, signal);
@@ -193,6 +197,7 @@ async function callAgentProvider(
   provider: 'agent-codex' | 'agent-claude',
   prompt: string,
   signal?: AbortSignal,
+  agentProductPolicyContext?: AgentProductPolicyContext,
 ): Promise<string> {
   const { generateWithAgent } = await import('../../agentCli/index.js');
   const { wrapAsAgenticTask, AGENTIC_TIMEOUT_MS } = await import('../../agentCli/agenticEnvelope.js');
@@ -200,12 +205,15 @@ async function callAgentProvider(
   const cliProvider = agentTextProviderToCli(provider);
   // Same autonomous-iteration upgrade as the main content path: one-shot -> internal loop.
   // 'photo' tailors the self-critique to image-grounded writing.
-  const result = await generateWithAgent({
-    provider: cliProvider,
-    prompt: wrapAsAgenticTask(prompt, 'photo'),
-    timeoutMs: AGENTIC_TIMEOUT_MS,
-    signal,
-  });
+  const result = await generateWithAgent(
+    {
+      provider: cliProvider,
+      prompt: wrapAsAgenticTask(prompt, 'photo'),
+      timeoutMs: AGENTIC_TIMEOUT_MS,
+      signal,
+    },
+    agentProductPolicyContext,
+  );
   return result.text;
 }
 
@@ -557,6 +565,7 @@ export async function buildNarrativeContent(
     userPrompt,
     provider,
     options.signal,
+    options.agentProductPolicyContext,
   );
 
   if (!rawResponse || !rawResponse.trim()) {

@@ -8,10 +8,13 @@ import {
 } from '../../image/referenceImagePolicy.js';
 import {
     createShoppingRepresentativeThumbnail,
+    doShoppingAiBodySlotsMatch,
     isShoppingReferenceImageEngine,
+    resolveShoppingAiPublishImages,
     resolveShoppingCollectedImagePlacement,
     resolveShoppingRepresentativeReference,
     resolveUsableShoppingReferenceSource,
+    selectShoppingBodyHeadingSlotsForMode,
 } from '../../image/shoppingReferenceGeneration.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.emitLog = emitLog;
@@ -518,9 +521,16 @@ function isRetryableImageError(error) {
         msg.includes('결과가 비어있음') || msg.includes('결과 없음') ||
         msg.includes('이미지 없이 발행');
 }
+function isContentQualityV3TerminalError(error) {
+    const message = String(error?.message || error || '');
+    return /\[content-quality-v3-(?:publication|publish-handoff|durable-provenance)\]/i.test(message);
+}
 function friendlyErrorMessage(error) {
     const rawMessage = String(error?.message || error || '');
     const msg = rawMessage.toLowerCase();
+    if (isContentQualityV3TerminalError(rawMessage)) {
+        return '콘텐츠 원본 검증 정보가 만료되었거나 최종 글이 안전 기준을 통과하지 못해 발행을 중단했습니다. 글을 다시 생성한 뒤 발행해 주세요.';
+    }
     if (/BLOCK_KEYWORD_BODY_MISMATCH/i.test(rawMessage)) {
         return '⛔ 제목과 본문 주제가 서로 달라 안전 검사에서 발행을 중단했습니다.\n반자동 편집에서 최종 제목과 본문이 같은 주제인지 확인한 뒤 다시 발행해 주세요.';
     }
@@ -741,9 +751,50 @@ async function executeFullAutoFlow(formData) {
         const isCollectedMode = formData.contentMode === 'affiliate' && scSubImageMode === 'collected';
         const isShoppingAiMode = formData.contentMode === 'affiliate' && scSubImageMode === 'ai';
         if (isShoppingAiMode && finalImages.length > 0) {
-            // Product crawl output is reference material in AI mode, never final body output.
-            finalImages = [];
-            appendLog('🛒 쇼핑커넥트 AI 모드: 수집 이미지는 대표이미지 참조로만 사용합니다.');
+            const preparedReferences = resolveShoppingRepresentativeReference([
+                ...(structuredContent.collectedImages || []),
+                ...(formData.collectedImages || []),
+            ]);
+            const preparedRepresentative = finalImages.find((image) => image?.isShoppingRepresentativeThumbnail === true)
+                || finalImages.find((image) => image?.isThumbnail === true
+                    && ['collected', 'collected-image'].includes(String(image?.provider || '').toLowerCase()))
+                || (preparedReferences.representative
+                    ? createShoppingRepresentativeThumbnail(
+                        preparedReferences.representative,
+                        structuredContent.selectedTitle || structuredContent.title || formData.title,
+                      )
+                    : null);
+            const preparedShoppingImages = resolveShoppingAiPublishImages(
+                preparedRepresentative,
+                finalImages.filter((image) => image !== preparedRepresentative),
+                preparedReferences.images,
+            );
+            const allPreparedHeadings = structuredContent.headings || [];
+            const expectedPreparedBodySlots = selectShoppingBodyHeadingSlotsForMode(
+                allPreparedHeadings,
+                formData.headingImageMode,
+            ).map(slot => ({
+                heading: typeof slot.heading === 'string'
+                    ? slot.heading
+                    : (slot.heading?.title || slot.heading?.text || slot.heading?.heading || ''),
+                originalIndex: slot.originalIndex,
+            }));
+            const preparedShoppingBodyImages = preparedShoppingImages.images.slice(preparedRepresentative ? 1 : 0);
+            const expectedPreparedBodyCount = expectedPreparedBodySlots.length;
+            const preparedShoppingBodyCount = preparedShoppingBodyImages.length;
+            const preparedBodySlotsMatch = doShoppingAiBodySlotsMatch(
+                preparedShoppingBodyImages,
+                expectedPreparedBodySlots,
+            );
+            if (preparedRepresentative && preparedBodySlotsMatch) {
+                finalImages = preparedShoppingImages.images;
+                appendLog(`🛒 준비된 대표 원본 1장 + AI 소제목 ${preparedShoppingBodyCount}장을 재사용합니다.`);
+            }
+            else {
+                finalImages = [];
+                ImageManager.clear?.();
+                appendLog(`🛒 수집 원본 또는 불완전한 기존 결과를 제외하고 AI 이미지를 새로 생성합니다. (${preparedShoppingBodyCount}/${expectedPreparedBodyCount})`);
+            }
         }
         if (isCollectedMode && finalImages.length === 0) {
             const collectedFromContent = structuredContent.collectedImages || structuredContent.images || formData.collectedImages || [];
@@ -1018,30 +1069,34 @@ async function executeFullAutoFlow(formData) {
                         catch (thumbErr) {
                             appendLog(`⚠️ [풀오토] 전용 썸네일 생성 오류: ${thumbErr.message}`);
                         }
+                    const fullAutoBodySlots = isShoppingAiMode
+                        ? selectShoppingBodyHeadingSlotsForMode(headings, formData.headingImageMode)
+                        : ((formData.thumbnailOnly === true || formData.headingImageMode === 'thumbnail-only')
+                            ? []
+                            : headings.map((heading, originalIndex) => ({ heading, originalIndex })));
+                    const fullAutoBodyItems = fullAutoBodySlots.map((slot) => {
+                        const h = slot.heading;
+                        const title = String(h.title || h.text || h.heading || (typeof h === 'string' ? h : '')).trim();
+                        const prompt = String(h.imagePrompt || h.prompt || title || 'Abstract Image').trim();
+                        return {
+                            heading: title || 'Image',
+                            prompt,
+                            englishPrompt: prompt,
+                            isThumbnail: false,
+                            allowText: false,
+                            originalIndex: slot.originalIndex,
+                        };
+                    });
+                    if (fullAutoBodyItems.length === 0 && dedicatedThumbnailImage) {
+                        finalImages = [dedicatedThumbnailImage];
+                        imageGenSuccess = true;
+                        appendLog('🖼️ 썸네일 전용 모드: 대표이미지만 사용합니다.');
+                        break;
+                    }
                     const imageResult = await generateImagesWithCostSafety({
                         provider: currentProvider,
                         title: fullAutoTitle,
-                        items: (() => {
-                            const allItems = headings.map((h, idx) => {
-                                const title = String(h.title || h.text || (typeof h === 'string' ? h : '')).trim();
-                                const prompt = String(h.imagePrompt || h.prompt || title || 'Abstract Image').trim();
-                                return {
-                                    heading: title || '이미지',
-                                    prompt: prompt,
-                                    englishPrompt: prompt,
-                                    isThumbnail: false,
-                                    allowText: false
-                                };
-                            }).filter(Boolean);
-                            // formData carries the live checkbox state for single
-                            // full-auto; headingImageMode covers every other flow.
-                            const isThumbnailOnly = formData.thumbnailOnly === true || formData.headingImageMode === 'thumbnail-only';
-                            if (isThumbnailOnly) {
-                                console.log('[FullAuto] 📷 썸네일만 생성 모드: 소제목 이미지 없이 전용 썸네일만 사용');
-                                return [];
-                            }
-                            return allItems;
-                        })(),
+                        items: fullAutoBodyItems,
                         category: formData.category || formData.categoryName || '',
                         referenceImagePath,
                         imageRatio: formData.subheadingImageRatio || formData.imageRatio,
@@ -1050,14 +1105,35 @@ async function executeFullAutoFlow(formData) {
                         isContinuousMode: !!isContinuousMode,
                         isShoppingConnect: isShoppingAiMode,
                         collectedImages: isShoppingAiMode ? collectedImgs : undefined,
-                        imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoBodyImageTimeoutMs(currentProvider, headings.length)),
+                        imageGenerationTimeoutMs: getBoundedImageTimeoutMs(getFullAutoBodyImageTimeoutMs(currentProvider, fullAutoBodyItems.length)),
                     });
                     if (imageResult?.success && imageResult.images && imageResult.images.length > 0) {
-                        const normalizedBodyImages = imageResult.images.map((img) => normalizeFullAutoImageForPipeline(img, { isThumbnail: false }));
-                        finalImages = [
-                            ...(dedicatedThumbnailImage ? [dedicatedThumbnailImage] : []),
-                            ...normalizedBodyImages,
-                        ];
+                        const normalizedBodyImages = imageResult.images.map((img, index) => normalizeFullAutoImageForPipeline({
+                            ...img,
+                            heading: img?.heading || fullAutoBodyItems[index]?.heading,
+                            originalIndex: img?.originalIndex ?? fullAutoBodyItems[index]?.originalIndex,
+                        }, { isThumbnail: false }));
+                        if (isShoppingAiMode) {
+                            const safeGeneratedShoppingImages = resolveShoppingAiPublishImages(
+                                dedicatedThumbnailImage,
+                                normalizedBodyImages,
+                                collectedImgs,
+                            );
+                            const actualShoppingBodyCount = safeGeneratedShoppingImages.images.length - (dedicatedThumbnailImage ? 1 : 0);
+                            if (actualShoppingBodyCount !== fullAutoBodyItems.length) {
+                                throw new Error(
+                                    `SHOPPING_AI_IMAGE_BATCH_INCOMPLETE: AI 소제목 이미지 ${actualShoppingBodyCount}/${fullAutoBodyItems.length}개만 고유 결과로 확인되었습니다. `
+                                    + `수집 원본 ${safeGeneratedShoppingImages.removedCollectedCount}개, 중복 ${safeGeneratedShoppingImages.removedDuplicateCount}개를 차단했습니다.`,
+                                );
+                            }
+                            finalImages = safeGeneratedShoppingImages.images;
+                        }
+                        else {
+                            finalImages = [
+                                ...(dedicatedThumbnailImage ? [dedicatedThumbnailImage] : []),
+                                ...normalizedBodyImages,
+                            ];
+                        }
                         resolveImageManagerKeys(normalizedBodyImages, headings).forEach(({ img, headingKey }) => {
                             const imagePath = getFullAutoImagePath(img);
                             ImageManager.addImage(headingKey, {
@@ -2319,7 +2395,7 @@ async function generateFullAutoContent(formData) {
             catch { }
             throw new Error(userMsg);
         }
-        if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errMsg)) {
+        if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errMsg) || isContentQualityV3TerminalError(errMsg)) {
             const userMsg = friendlyErrorMessage({ message: errMsg });
             appendLog(userMsg);
             try {
@@ -2379,7 +2455,9 @@ async function generateFullAutoContent(formData) {
         else {
             sourceUrl = formData?.sourceUrl || result.content?.sourceUrl || '';
         }
-        if (sourceUrl && /^https?:\/\//i.test(sourceUrl)) {
+        const shoppingAiReferenceOnly = (formData?.contentMode === 'affiliate' || formData?.isShoppingConnect === true)
+            && formData?.scSubImageMode === 'ai';
+        if (sourceUrl && /^https?:\/\//i.test(sourceUrl) && !shoppingAiReferenceOnly) {
             const runFn = window.runAutoImageSearch;
             const ImageManager = window.ImageManager;
             const syncFn = window.syncGlobalImagesFromImageManager || (() => { });
@@ -2399,8 +2477,22 @@ async function generateFullAutoContent(formData) {
     if (result.content.collectedImages && result.content.collectedImages.length > 0) {
         console.log(`[FullAuto] 수집된 이미지 ${result.content.collectedImages.length}장을 참조 이미지로 등록합니다.`);
         const win = window;
-        const existingUrls = new Set([...generatedImages, ...(win.imageManagementGeneratedImages || [])]);
-        const newImages = result.content.collectedImages.filter((url) => !existingUrls.has(url));
+        const shoppingAiReferenceOnly = (formData?.contentMode === 'affiliate' || formData?.isShoppingConnect === true)
+            && formData?.scSubImageMode === 'ai';
+        const existingUrls = new Set([...generatedImages, ...(win.imageManagementGeneratedImages || [])]
+            .map((image) => typeof image === 'string' ? image : (image?.filePath || image?.url || ''))
+            .filter(Boolean));
+        const newImages = shoppingAiReferenceOnly
+            ? []
+            : result.content.collectedImages.filter((image) => {
+                const identity = typeof image === 'string' ? image : (image?.filePath || image?.url || '');
+                return identity && !existingUrls.has(identity);
+            });
+        if (shoppingAiReferenceOnly) {
+            generatedImages.length = 0;
+            win.imageManagementGeneratedImages = [];
+            appendLog('🛒 쇼핑 AI 모드: 수집 이미지는 대표이미지 참조 풀에만 보관합니다.');
+        }
         if (newImages.length > 0) {
             generatedImages.push(...newImages);
             if (!win.imageManagementGeneratedImages)
@@ -2756,6 +2848,73 @@ async function generateAIImagesForHeadings(headings, formData) {
             appendLog(`⚠️ 전용 썸네일 생성 오류: ${thumbErr.message}`);
         }
     }
+    if (isShoppingConnect && !useCollectedImagesDirectly && headings.length > 0) {
+        const shoppingHeadingSlotsForBatch = selectShoppingBodyHeadingSlotsForMode(headings, _headingImageMode);
+        const shoppingBatchItems = [];
+        for (let i = 0; i < shoppingHeadingSlotsForBatch.length; i++) {
+            if (isFullAutoStopRequested()) return [];
+            const headingSlot = shoppingHeadingSlotsForBatch[i];
+            const heading = headingSlot.heading;
+            const headingTitle = heading.title || heading || `이미지 ${i + 1}`;
+            appendLog(`🎨 [${i + 1}/${shoppingHeadingSlotsForBatch.length}] "${String(headingTitle).substring(0, 20)}" 프롬프트 준비 중...`);
+            const englishPrompt = await generateEnglishPromptForHeading(heading, formData.keywords, imageStyle);
+            shoppingBatchItems.push({
+                heading: heading.title || headingTitle,
+                prompt: englishPrompt,
+                englishPrompt,
+                isThumbnail: false,
+                allowText: false,
+                imageStyle,
+                imageRatio: formData.subheadingImageRatio || imageRatio,
+                referenceImagePath: representativeImageUrl,
+                referenceImageUrl: representativeImageUrl,
+                referenceImageList: [representativeImageUrl],
+                originalIndex: headingSlot.originalIndex,
+            });
+        }
+
+        appendLog(`🎨 쇼핑 소제목 ${shoppingBatchItems.length}개를 한 배치로 생성해 중복을 검사합니다.`);
+        const shoppingBatchResult = await generateImagesWithCostSafety({
+            provider: imageSource,
+            items: shoppingBatchItems,
+            postTitle: currentStructuredContent?.selectedTitle,
+            postId: currentPostId || undefined,
+            isFullAuto: formData.mode === 'full-auto',
+            longRunImageGeneration: true,
+            isContinuousMode: !!isContinuousMode,
+            isShoppingConnect: true,
+            collectedImages,
+            referenceImagePath: representativeImageUrl,
+            thumbnailTextInclude: false,
+            imageFallbackPolicy,
+            imageGenerationTimeoutMs: getFullAutoBodyImageTimeoutMs(imageSource, shoppingBatchItems.length),
+        });
+        if (!shoppingBatchResult?.success || !Array.isArray(shoppingBatchResult.images)) {
+            throw new Error(shoppingBatchResult?.message || '쇼핑 AI 이미지 배치 생성 결과가 없습니다.');
+        }
+
+        const normalizedBatchImages = shoppingBatchResult.images.map((img, index) => ({
+            ...img,
+            heading: img?.heading || shoppingBatchItems[index]?.heading,
+            isThumbnail: false,
+            originalIndex: img?.originalIndex ?? shoppingBatchItems[index]?.originalIndex,
+        }));
+        const safeBatch = resolveShoppingAiPublishImages(
+            dedicatedShopThumbnail,
+            normalizedBatchImages,
+            collectedImages,
+        );
+        const actualBodyCount = safeBatch.images.length - (dedicatedShopThumbnail ? 1 : 0);
+        if (actualBodyCount !== shoppingBatchItems.length) {
+            throw new Error(
+                `SHOPPING_AI_IMAGE_BATCH_INCOMPLETE: AI 소제목 이미지 ${actualBodyCount}/${shoppingBatchItems.length}개만 고유 결과로 확인되었습니다. `
+                + `수집 원본 ${safeBatch.removedCollectedCount}개, 중복 ${safeBatch.removedDuplicateCount}개를 차단했습니다.`,
+            );
+        }
+        appendLog(`✅ 대표이미지 원본 1장 + AI 소제목 이미지 ${actualBodyCount}장 확인 완료`);
+        return safeBatch.images;
+    }
+
     const generateOne = async (heading, i) => {
         try {
             if (isFullAutoStopRequested()) {
@@ -3374,6 +3533,9 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         lines: finalContent.split('\n'),
         hashtags: structuredContent.hashtags,
         structuredContent: structuredContent,
+        _contentQualityV3PostId: structuredContent?._contentQualityV3PostId,
+        _contentQualityV3Required: structuredContent?._contentQualityV3Required,
+        _contentQualityV3PublishHandoff: structuredContent?._contentQualityV3PublishHandoff,
         generatedImages: normalizedImagesForPayload,
         imageMode: formData.skipImages ? 'skip' : 'full-auto',
         skipImages: formData.skipImages || false,
@@ -3479,7 +3641,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         if (blockPostContentAppliedPublishRetry(errorMsg)) {
             throw new Error(errorMsg);
         }
-        if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errorMsg)) {
+        if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errorMsg) || isContentQualityV3TerminalError(errorMsg)) {
             throw new Error(friendlyErrorMessage({ message: errorMsg }));
         }
         const detachedFrameRetryResult = await retryRunAutomationAfterDetachedLoginFrame(apiClient, payload, errorMsg);
@@ -3533,7 +3695,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
             appendLog('💡 잠시 후 다시 시도하거나, 브라우저 닫기 후 재시도해주세요.');
             throw new Error('이전 자동화가 아직 실행 중입니다. 완료 후 다시 시도해주세요.');
         }
-        if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errorMsg)) {
+        if (/CONTENT_POLICY_BLOCKED|BLOCK_FABRICATED_FACT/i.test(errorMsg) || isContentQualityV3TerminalError(errorMsg)) {
             throw new Error(friendlyErrorMessage({ message: errorMsg }));
         }
         if (blockPostContentAppliedPublishRetry(errorMsg)) {

@@ -194,7 +194,44 @@ export function resolveShoppingConnectAIEngineFromRaw(
   return DEFAULT_SHOPPING_REFERENCE_ENGINE;
 }
 
-function normalizeShoppingSubImageMode(raw: RawPipelineSettings): ShoppingSubImageMode {
+interface ShoppingUiSelection {
+  subImageMode: ShoppingSubImageMode;
+  aiImageEngine: string;
+}
+
+function readShoppingSelectionFromUi(flow: PipelineFlow): ShoppingUiSelection | null {
+  try {
+    if (typeof document === 'undefined') return null;
+    const selector = flow === 'continuous'
+      ? 'input[name="continuous-modal-shopping-subimage-source"]:checked'
+      : flow === 'multi-account'
+        ? 'input[name="ma-shopping-subimage-source"]:checked'
+        : 'input[name="sc-subimage-mode-inline-radio"]:checked';
+    const selected = document.querySelector(selector) as HTMLInputElement | null;
+    const value = String(selected?.value || '').trim();
+    if (value === 'collected') {
+      return { subImageMode: 'collected', aiImageEngine: '' };
+    }
+    if (value === 'ai') {
+      return { subImageMode: 'ai', aiImageEngine: '' };
+    }
+    if (SHOPPING_AI_ENGINE_NAMES.has(value)) {
+      return {
+        subImageMode: 'ai',
+        aiImageEngine: normalizeShoppingConnectAIEngineCandidate(value),
+      };
+    }
+  } catch {
+    // The publish snapshot can still fall back to persisted settings.
+  }
+  return null;
+}
+
+function normalizeShoppingSubImageMode(
+  raw: RawPipelineSettings,
+  uiSelection: ShoppingSubImageMode | null = null,
+): ShoppingSubImageMode {
+  if (uiSelection) return uiSelection;
   const explicit = raw.scSubImageMode;
   if (explicit === 'ai' || explicit === 'collected') return explicit;
 
@@ -212,6 +249,7 @@ function normalizePositiveInt(value: string | null, fallback: number): number {
 
 export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   const raw = readRawPipelineSettings();
+  const currentShoppingSelection = readShoppingSelectionFromUi(flow);
   const config: PipelineConfig = {
     flow,
     resolvedAt: Date.now(),
@@ -227,8 +265,8 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       fallbackPolicy: raw.imageFallbackPolicy || 'engine-only',
     },
     shopping: {
-      subImageMode: normalizeShoppingSubImageMode(raw),
-      aiImageEngine: resolveShoppingConnectAIEngineFromRaw(raw),
+      subImageMode: normalizeShoppingSubImageMode(raw, currentShoppingSelection?.subImageMode || null),
+      aiImageEngine: currentShoppingSelection?.aiImageEngine || resolveShoppingConnectAIEngineFromRaw(raw),
       autoThumbnail: raw.scAutoThumbnailSetting === 'true',
     },
     disclosure: {
