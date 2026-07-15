@@ -58,9 +58,7 @@ import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGu
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
 import {
   assessQuality90Gate,
-  getCriticalQuality90SafetyReasons,
   isQuality90Mode,
-  resolveFinalQuality90Disposition,
 } from './content/quality90Gate.js';
 import {
   auditAffiliateAuthenticity,
@@ -4876,8 +4874,10 @@ async function generateStructuredContentInternal(
   options: GenerateOptions = {},
   promptVariant: ContentPromptVariant,
 ): Promise<StructuredContent> {
-  const allowLegacyPostDraftLlm = shouldRunLegacyPostDraftLlm(promptVariant);
   const isV3Prompt = promptVariant === 'v3';
+  const allowLegacyPostDraftLlm = shouldRunLegacyPostDraftLlm(promptVariant);
+  const allowPaidPostGenerationRepair =
+    !isV3Prompt && process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR === '1';
 
   // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] image-narrative mode branch
   if (source.contentMode === 'image-narrative') {
@@ -5090,15 +5090,21 @@ async function generateStructuredContentInternal(
   const openAiContentMaxAttempts = isV3Prompt
     ? 0
     : readNonNegativeIntegerEnv('OPENAI_CONTENT_MAX_ATTEMPTS', 0);
-  const baseMaxAttempts = provider === 'openai'
-    ? Math.max(openAiContentMaxAttempts, costPolicy.maxAttempts)
-    : costPolicy.maxAttempts;
-  const sameEngineReliabilityMinAttempts = isV3Prompt
+  const agentContentMaxAttempts = isV3Prompt
+    ? 0
+    : readNonNegativeIntegerEnv('AGENT_CONTENT_MAX_ATTEMPTS', 0);
+  const isAgentProvider = provider === 'agent-codex' || provider === 'agent-claude';
+  const baseMaxAttempts = isAgentProvider
+    ? agentContentMaxAttempts
+    : provider === 'openai'
+      ? Math.max(openAiContentMaxAttempts, costPolicy.maxAttempts)
+      : costPolicy.maxAttempts;
+  const sameEngineReliabilityMinAttempts = isV3Prompt || isAgentProvider
     ? 0
     : readNonNegativeIntegerEnv('CONTENT_SAME_ENGINE_MIN_ATTEMPTS', 1);
-  const promptRepairMinAttempts = !isV3Prompt && source.customPrompt?.trim() ? 2 : 0;
+  const promptRepairMinAttempts = 0;
   const generationQualityMode = String(source.contentMode || 'seo');
-  const qualityTargetMinAttempts = !isV3Prompt && isQuality90Mode(generationQualityMode) ? 2 : 0;
+  const qualityTargetMinAttempts = 0;
   const configuredMaxAttempts = Math.max(
     baseMaxAttempts,
     sameEngineReliabilityMinAttempts,
@@ -5675,7 +5681,7 @@ async function generateStructuredContentInternal(
       const isLastAttempt = attempt >= MAX_ATTEMPTS;
       const duplicateContentValidation = detectDuplicateContent(parsed.bodyPlain || '', parsed.headings, isLastAttempt);
 
-      if (!duplicateContentValidation.valid && attempt < MAX_ATTEMPTS) {
+      if (allowPaidPostGenerationRepair && !duplicateContentValidation.valid && attempt < MAX_ATTEMPTS) {
         const errs = duplicateContentValidation.errors.slice(0, 3).join(', ');
         console.warn(`[ContentGenerator] 중복/패턴 하드게이트 실패: ${errs}`);
         lastFailReason = `중복/패턴 감지: ${errs}`;
@@ -5694,7 +5700,7 @@ async function generateStructuredContentInternal(
         ];
 
         // ✅ 첫 번째 시도에서만 한 번 재시도 (속도와 품질 균형)
-        if (attempt === 0) {
+        if (allowPaidPostGenerationRepair && attempt < MAX_ATTEMPTS) {
           console.warn(`[ContentGenerator] 검증 실패 (1회 재시도): ${validationErrors.slice(0, 2).join(', ')}`);
           extraInstruction = prependValidationRetryInstruction(extraInstruction);
           continue; // 한 번만 재시도
@@ -5998,7 +6004,7 @@ async function generateStructuredContentInternal(
           missingFeatures: customPromptAdherence.missingFeatures,
         };
 
-        if (!customPromptAdherence.passed && attempt < MAX_ATTEMPTS) {
+        if (allowPaidPostGenerationRepair && !customPromptAdherence.passed && attempt < MAX_ATTEMPTS) {
           lastFailReason = `사용자 프롬프트 미준수: ${customPromptAdherence.issues.join(' / ')}`;
           console.warn(`[PromptAdherence] 🔁 자동 보정 재시도: ${lastFailReason}`);
           extraInstruction = `${customPromptAdherence.retryInstruction}\n${extraInstruction}`;
@@ -6066,7 +6072,7 @@ async function generateStructuredContentInternal(
       // ✅ [2026-05-31 S2] attempt===0 한정 → attempt < MAX_ATTEMPTS 로 확대.
       //   2회 이상 시도에서도 일반론 도망이 감지되면 재생성(여전히 MAX_ATTEMPTS로 bounded).
       //   기존엔 첫 시도만 잡아 재시도 중 다시 일반론이 나와도 통과되던 갭(분석 팀3) 차단.
-      if (platitudeReportRef && platitudeReportRef.exceedsThreshold && attempt < MAX_ATTEMPTS) {
+      if (allowPaidPostGenerationRepair && platitudeReportRef && platitudeReportRef.exceedsThreshold && attempt < MAX_ATTEMPTS) {
         console.warn(`[ContentGenerator] 🔄 Faithfulness 실패 — 재시도(attempt ${attempt}): ${platitudeReportRef.reason}`);
         lastFailReason = `Faithfulness 실패: ${platitudeReportRef.reason}`;
         const platitudeList = platitudeReportRef.matchedTriggers.slice(0, 5).join(', ');
@@ -6139,7 +6145,7 @@ async function generateStructuredContentInternal(
         const verdict = await judgeSectionDistinctness(parsed, judgeCaller);
         if (verdict.judged && !verdict.distinct) {
           console.warn(`[DistinctnessJudge] 🔁 섹션 중복 감지: ${verdict.reason}`);
-          if (attempt < MAX_ATTEMPTS) {
+          if (allowPaidPostGenerationRepair && attempt < MAX_ATTEMPTS) {
             lastFailReason = `섹션 중복(시맨틱): ${verdict.reason}`;
             extraInstruction = prependSectionDistinctnessRetryInstruction(extraInstruction);
             continue;
@@ -6267,7 +6273,7 @@ async function generateStructuredContentInternal(
 
       // ✅ [Phase 7-B] Source Fidelity 자동 재시도 (한 호출에 1회만)
       // 길이 검증 *전에* — fidelity 미달이면 LLM에 누락 fact 명시해 재요청.
-      if (!_fidelityRetryUsed && (source.url || (source.rawText ?? '').length >= 500) && attempt < MAX_ATTEMPTS) {
+      if (allowPaidPostGenerationRepair && !_fidelityRetryUsed && (source.url || (source.rawText ?? '').length >= 500) && attempt < MAX_ATTEMPTS) {
         try {
           const { checkSourceFidelity, extractResultBody, buildFidelityRetryInstruction } = require('./content/sourceFidelityCheck');
           const _rb = extractResultBody(optimized as any);
@@ -6572,7 +6578,8 @@ async function generateStructuredContentInternal(
         //   v2.10.179: decision='regenerate' 전체 — finalScore < 60도 포함 (근본적 미달)
         //   여전히 1회 한도 (_qualityGateRetryUsed) + attempt 여유 조건
         if (
-          _gateResult
+          allowPaidPostGenerationRepair
+          && _gateResult
           && (_gateResult.decision === 'regenerate' || _quality90Assessment?.miss)
           && !_qualityGateRetryUsed
           && attempt < MAX_ATTEMPTS
@@ -6605,7 +6612,8 @@ async function generateStructuredContentInternal(
           && _gateResult.humanlikeScore.score < 55;
         const _quality90HardMiss = Boolean(_quality90Assessment?.miss);
         if (
-          allowLegacyPostDraftLlm
+          allowPaidPostGenerationRepair
+          && allowLegacyPostDraftLlm
           && _gateResult
           && optimized.bodyPlain
           && (_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss)
@@ -6679,7 +6687,8 @@ async function generateStructuredContentInternal(
         }
 
         if (
-          _quality90Assessment?.miss
+          allowPaidPostGenerationRepair
+          && _quality90Assessment?.miss
           && !_quality90FollowupRetryUsed
           && attempt < MAX_ATTEMPTS
         ) {
@@ -6689,36 +6698,28 @@ async function generateStructuredContentInternal(
           continue;
         }
 
-        if (_quality90Assessment?.miss && attempt < MAX_ATTEMPTS) {
+        if (allowPaidPostGenerationRepair && _quality90Assessment?.miss && attempt < MAX_ATTEMPTS) {
           console.warn(`[QualityGate90] 🔁 90점 미달 결과를 반환하지 않고 남은 동일 엔진 시도를 사용합니다 (${attempt + 1}/${MAX_ATTEMPTS + 1})`);
           extraInstruction = `${_quality90Assessment.directive}\n${extraInstruction}`;
           continue;
         }
 
-        if (_quality90Assessment?.miss && attempt === MAX_ATTEMPTS) {
-          const quality90FinalDisposition = resolveFinalQuality90Disposition(_quality90Assessment);
-          const criticalSafetyReasons = getCriticalQuality90SafetyReasons(_quality90Assessment);
-          if (quality90FinalDisposition === 'BLOCK_SAFETY') {
-            throw new Error(
-              `[CONTENT_SAFETY_BLOCKED] 근거 검증이 필요한 안전 신호가 남아 발행을 중단했습니다: ${criticalSafetyReasons.join(', ')}`,
-            );
-          }
-          const quality90AdvisoryAccepted = quality90FinalDisposition === 'ADVISORY';
+        if (_quality90Assessment?.miss) {
           if (optimized.quality) {
             optimized.quality = {
               ...optimized.quality,
               warnings: [
                 ...(optimized.quality.warnings || []),
-                `QualityGate90 target still missed after bounded retries: ${_quality90Assessment.blockingReasons.join(', ')}`,
+                `QualityGate90 경고 후 계속: ${_quality90Assessment.blockingReasons.join(', ')}`,
               ],
             };
             (optimized.quality as any).qualityGate = {
               ...((optimized.quality as any).qualityGate || {}),
-              quality90AdvisoryAccepted,
+              quality90AdvisoryAccepted: true,
             };
           }
           console.warn(
-            `[QualityGate90] 보정 횟수를 모두 사용해 경고와 함께 다음 안전검사로 진행: ${_quality90Assessment.blockingReasons.join(', ')}`,
+            `[QualityGate90] 경고 후 계속: ${_quality90Assessment.blockingReasons.join(', ')}`,
           );
         }
 
@@ -6817,7 +6818,7 @@ async function generateStructuredContentInternal(
             evidenceMode,
           });
 
-          if (authenticity.score < 85 && !_affiliateAuthenticityRetryUsed && attempt < MAX_ATTEMPTS) {
+          if (allowPaidPostGenerationRepair && authenticity.score < 85 && !_affiliateAuthenticityRetryUsed && attempt < MAX_ATTEMPTS) {
             _affiliateAuthenticityRetryUsed = true;
             extraInstruction = `${authenticity.retryDirective}\n${extraInstruction}`;
             lastFailReason = `쇼핑 진정성 ${authenticity.score}/100: ${authenticity.issues.map(issue => issue.code).join(', ')}`;
@@ -6825,14 +6826,9 @@ async function generateStructuredContentInternal(
             continue;
           }
 
-          if (authenticity.hardFail) {
-            const reasons = authenticity.issues.map(issue => issue.message).join(' / ');
-            throw new Error(`[CONTENT_SAFETY_BLOCKED] 쇼핑커넥트 근거 검수 미통과: ${reasons}`);
-          }
-
-          const affiliateAuthenticityAdvisoryAccepted = authenticity.score < 85;
+          const affiliateAuthenticityAdvisoryAccepted = authenticity.score < 85 || authenticity.hardFail;
           if (affiliateAuthenticityAdvisoryAccepted) {
-            console.warn(`[Shopping Authenticity] 보정 후 ${authenticity.score}/100 결과를 경고와 함께 다음 안전검사로 진행`);
+            console.warn(`[Shopping Authenticity] 쇼핑커넥트 진정성 경고 후 계속: ${authenticity.score}/100`);
           }
 
           if (!optimized.quality) {
@@ -6856,7 +6852,7 @@ async function generateStructuredContentInternal(
           const validation = validateShoppingConnectContent(optimized, validationMinChars);
           const shoppingQualityDisposition = resolveShoppingConnectQualityDisposition(validation.score);
           const shoppingQualityPublishable = shoppingQualityDisposition.qualityFloorReached;
-          if (!shoppingQualityPublishable && !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS) {
+          if (allowPaidPostGenerationRepair && !shoppingQualityPublishable && !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS) {
             _shoppingValidationRetryUsed = true;
             const corrections = validation.feedback
               .filter(message => message.startsWith('❌') || message.startsWith('⚠️'))
@@ -6868,7 +6864,7 @@ async function generateStructuredContentInternal(
           const shoppingQualityAdvisoryAccepted = shoppingQualityDisposition.advisoryAccepted;
           if (shoppingQualityAdvisoryAccepted) {
             console.warn(
-              `[Shopping Connect] 보정 횟수를 모두 사용해 품질 ${validation.score}/100 결과를 경고와 함께 다음 안전검사로 진행`,
+              `[Shopping Connect] 쇼핑커넥트 품질 경고 후 계속: ${validation.score}/100`,
             );
           }
           if (optimized.quality) {
@@ -6923,7 +6919,7 @@ async function generateStructuredContentInternal(
       const minAcceptableChars = warningMinChars; // 50% 기준
       if (plainLength >= minAcceptableChars) {
         if (isQuality90Mode(generationQualityMode)) {
-          if (attempt < MAX_ATTEMPTS) {
+          if (allowPaidPostGenerationRepair && attempt < MAX_ATTEMPTS) {
             lastFailReason = `90점 품질 모드 본문 길이 미달: ${plainLength}자 / 최소 검증선 ${validationMinChars}자`;
             extraInstruction = buildContentExpansionRetryInstruction({
               plainLength,
@@ -6932,7 +6928,7 @@ async function generateStructuredContentInternal(
               attempt,
               safeMaxChars: SAFE_MAX_CHARS,
             });
-            console.warn(`[QualityGate90] ${lastFailReason} — 짧은 결과를 반환하지 않고 재작성`);
+            console.warn(`[QualityGate90] ${lastFailReason} — 명시적 유료 보정으로 재작성`);
             continue;
           }
           console.warn(

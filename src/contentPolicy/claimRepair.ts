@@ -1,5 +1,5 @@
 import { normalizeText } from './textMetrics.js';
-import type { ArticleDraft, ContentPolicyInput } from './types.js';
+import type { ArticleDraft, ContentPolicyInput, ContentPolicyResult } from './types.js';
 
 const SENTENCE_CHUNKS = /[^.!?。！？]+[.!?。！？]+|[^.!?。！？]+$/gu;
 
@@ -99,5 +99,128 @@ export function repairUnsupportedClaims(
     })),
     cta: removeUnsupportedClaimSentences(draft.cta, unsupportedClaims),
     source_ids: draft.source_ids ? [...draft.source_ids] : undefined,
+  };
+}
+
+const HARD_CONTENT_POLICY_REASONS = new Set([
+  'BLOCK_EMPTY_DRAFT',
+  'BLOCK_MISSING_PRIMARY_KEYWORD',
+]);
+
+function sameDraft(left: ArticleDraft, right: ArticleDraft): boolean {
+  return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function draftFromPolicyResult(result: ContentPolicyResult): ArticleDraft {
+  return {
+    title: result.article.title,
+    summary: result.article.summary,
+    introduction: result.article.introduction || '',
+    headings: (result.article.headings || []).map((heading) => ({ ...heading })),
+    body_markdown: result.article.body_markdown,
+    faq: result.article.faq.map((item) => ({ ...item })),
+    cta: result.article.cta,
+  };
+}
+
+export interface DeclaredClaimRepairResult {
+  draft: ArticleDraft;
+  advisoryReasons: string[];
+  rewriteCount: number;
+}
+
+export function repairDeclaredForbiddenClaims(
+  draft: ArticleDraft,
+  input: ContentPolicyInput,
+): DeclaredClaimRepairResult {
+  const declaredClaims = (input.forbidden_claims || []).map((claim) => claim.trim()).filter(Boolean);
+  const searchableDraft = normalizeText([
+    draft.title,
+    draft.summary,
+    draft.introduction,
+    draft.body_markdown,
+    ...draft.headings.flatMap((heading) => [heading.title, heading.content]),
+    ...draft.faq.flatMap((item) => [item.question, item.answer]),
+    draft.cta,
+  ].join('\n'));
+  const matchingClaims = declaredClaims.filter((claim) => (
+    searchableDraft.includes(normalizeText(claim))
+  ));
+  const repaired = repairUnsupportedClaims(draft, input, matchingClaims);
+  const changed = !sameDraft(draft, repaired);
+  return {
+    draft: repaired,
+    advisoryReasons: changed ? ['BLOCK_FORBIDDEN_CLAIM'] : [],
+    rewriteCount: changed ? 1 : 0,
+  };
+}
+
+export interface AdvisoryContentPolicyResult {
+  policyResult: ContentPolicyResult;
+  advisoryReasons: string[];
+}
+
+/**
+ * Converts content-quality findings into diagnostics after deterministic repair.
+ * Empty/unusable drafts remain blocked; operational publish guards run later and
+ * remain fail-closed.
+ */
+export function acceptContentPolicyAdvisories(
+  result: ContentPolicyResult,
+  input: ContentPolicyInput,
+  initialAdvisoryReasons: readonly string[] = [],
+  initialRewriteCount = 0,
+): AdvisoryContentPolicyResult {
+  const resultDraft = draftFromPolicyResult(result);
+  const repairedDraft = repairUnsupportedClaims(
+    resultDraft,
+    input,
+    result.quality_report.unsupported_claims,
+  );
+  const repairedUnsupportedClaim = !sameDraft(resultDraft, repairedDraft);
+  const hardReasons = result.block_reasons.filter((reason) => HARD_CONTENT_POLICY_REASONS.has(reason));
+  const contentAdvisories = result.block_reasons.filter((reason) => !HARD_CONTENT_POLICY_REASONS.has(reason));
+  const advisoryReasons = [...new Set([
+    ...initialAdvisoryReasons,
+    ...contentAdvisories,
+    ...(repairedUnsupportedClaim ? ['BLOCK_UNSUPPORTED_CLAIM'] : []),
+  ])];
+  const accepted = hardReasons.length === 0;
+  const rewriteCount = result.rewrite_count
+    + initialRewriteCount
+    + (repairedUnsupportedClaim && result.rewrite_count === 0 ? 1 : 0);
+
+  return {
+    advisoryReasons,
+    policyResult: {
+      ...result,
+      decision: accepted ? 'PASS' : 'BLOCK',
+      block_reasons: accepted ? [] : [...hardReasons],
+      manual_review: accepted && result.manual_review
+        ? { ...result.manual_review, required: false, reasons: [] }
+        : result.manual_review
+          ? { ...result.manual_review, reasons: [...result.manual_review.reasons] }
+          : undefined,
+      article: {
+        title: repairedDraft.title,
+        summary: repairedDraft.summary,
+        introduction: repairedDraft.introduction,
+        headings: repairedDraft.headings.map((heading) => ({ ...heading })),
+        body_markdown: repairedDraft.body_markdown,
+        faq: repairedDraft.faq.map((item) => ({ ...item })),
+        cta: repairedDraft.cta,
+      },
+      publication: {
+        ...result.publication,
+        allowed: accepted,
+        manual_review_required: !accepted && result.publication.manual_review_required,
+      },
+      rewrite_count: rewriteCount,
+      stage_trace: result.stage_trace.map((item) => ({
+        ...item,
+        status: accepted && item.status === 'BLOCK' ? 'REWRITE' : item.status,
+        reasons: [...item.reasons],
+      })),
+    },
   };
 }

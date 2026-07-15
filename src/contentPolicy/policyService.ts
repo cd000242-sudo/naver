@@ -11,6 +11,10 @@ import {
 import { loadContentPolicy } from './policyLoader.js';
 import { PublicationStateStore } from './publicationStateStore.js';
 import { evaluatePublishGuard } from './publishGuard.js';
+import {
+  acceptContentPolicyAdvisories,
+  repairDeclaredForbiddenClaims,
+} from './claimRepair.js';
 import { reconcilePublishPolicyInput } from './publishInputReconciler.js';
 import { RecentPostsRepository } from './recentPostsRepository.js';
 import type {
@@ -71,6 +75,7 @@ export interface PrepareContentPolicyOptions {
 export interface PreparedContentPolicyPublish<T extends ContentPolicyPayload = ContentPolicyPayload> {
   allowed: boolean;
   reasons: string[];
+  advisoryReasons: string[];
   manualReviewRequired: boolean;
   manualReviewReasons: string[];
   articleId: string;
@@ -236,7 +241,7 @@ function applyResultToPayload<T extends ContentPolicyPayload>(
     ...(payload.structuredContent || {}),
     contentPolicy: result,
   };
-  if (result.decision === 'PASS' && result.rewrite_count > 0) {
+  if (result.rewrite_count > 0) {
     structured.selectedTitle = result.article.title;
     structured.introduction = result.article.introduction;
     if (result.article.headings) {
@@ -250,8 +255,8 @@ function applyResultToPayload<T extends ContentPolicyPayload>(
   }
   return {
     ...payload,
-    title: result.decision === 'PASS' && result.rewrite_count > 0 ? result.article.title : payload.title,
-    content: result.decision === 'PASS' && result.rewrite_count > 0 ? result.article.body_markdown : payload.content,
+    title: result.rewrite_count > 0 ? result.article.title : payload.title,
+    content: result.rewrite_count > 0 ? result.article.body_markdown : payload.content,
     structuredContent: structured,
     contentPolicyContext: {
       ...(payload.contentPolicyContext || {}),
@@ -309,9 +314,10 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
     account_id: reconciledInput.account_id || stringValue(payload.accountId || payload.naverId) || undefined,
     blog_id: reconciledInput.blog_id || stringValue(payload.naverId) || undefined,
   };
+  const declaredClaimRepair = repairDeclaredForbiddenClaims(draft, effectiveInput);
   let policyResult = await runContentPolicyPipeline({
     input: effectiveInput,
-    draft,
+    draft: declaredClaimRepair.draft,
     config,
     recentPostsResult,
     modelVersion: stringValue(payload.geminiModel || payload.generator) || 'existing-draft-adapter',
@@ -319,6 +325,13 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   if (payload._contentPolicyManualReviewApproved === true) {
     policyResult = approveRecentPostManualReview(policyResult, now.toISOString());
   }
+  const advisory = acceptContentPolicyAdvisories(
+    policyResult,
+    effectiveInput,
+    declaredClaimRepair.advisoryReasons,
+    declaredClaimRepair.rewriteCount,
+  );
+  policyResult = advisory.policyResult;
   const articleId = stringValue(payload.postId) || `policy-${policyResult.input_hash.slice(0, 20)}`;
 
   let guardReasons: string[] = [];
@@ -363,6 +376,7 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   return {
     allowed: policyResult.decision === 'PASS' && policyResult.publication.allowed && guardReasons.length === 0,
     reasons: finalReasons,
+    advisoryReasons: advisory.advisoryReasons,
     manualReviewRequired: isOnlyRecentPostManualReviewReasons(finalReasons),
     manualReviewReasons: recentPostManualReviewReasons(finalReasons),
     articleId,

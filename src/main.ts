@@ -5971,6 +5971,11 @@ ipcMain.handle(
       if (generatedContentGuard.manualReviewRequired) {
         console.warn('[ContentPolicy] Draft quality passed; recent-post comparison requires publish-time review.');
       }
+      if (generatedContentGuard.advisoryReasons.length > 0) {
+        console.warn(
+          `[ContentPolicy] 품질/정책 경고 후 이미지 단계 계속: ${generatedContentGuard.advisoryReasons.join(', ')}`,
+        );
+      }
       if (generatedContentGuard.policyResult.rewrite_count > 0) {
         console.log(`[ContentPolicy] Generated draft repaired before image generation (${generatedContentGuard.policyResult.rewrite_count}회).`);
       }

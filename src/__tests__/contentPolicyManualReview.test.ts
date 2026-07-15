@@ -89,7 +89,7 @@ describe('recent-post manual review workflow', () => {
     expect(result.reasons).toContain('BLOCK_RECENT_POSTS_UNAVAILABLE');
   });
 
-  it('keeps a quality-passing generated draft for image generation while review is pending', async () => {
+  it('keeps a quality-passing generated draft for image generation with an advisory', async () => {
     const draft = makeGoodDraft();
     const result = await guardGeneratedContent({
       structuredContent: {
@@ -111,7 +111,8 @@ describe('recent-post manual review workflow', () => {
     });
 
     expect(result.allowed).toBe(true);
-    expect(result.manualReviewRequired).toBe(true);
+    expect(result.manualReviewRequired).toBe(false);
+    expect(result.advisoryReasons).toContain('BLOCK_RECENT_POSTS_UNAVAILABLE');
     expect(result.policyResult.quality_report.total_score).toBeGreaterThan(0);
   });
 
@@ -161,7 +162,7 @@ describe('recent-post manual review workflow', () => {
     expect(result.policyResult.similarity_report.compared_post_count).toBe(20);
   });
 
-  it('never lets recent-post approval bypass a real title/body mismatch', async () => {
+  it('keeps a title/body mismatch advisory after recent-post approval', async () => {
     const payload = {
       ...payloadWithoutRecentPosts(),
       title: '제주 렌터카 보험 비교와 예약 방법',
@@ -177,8 +178,8 @@ describe('recent-post manual review workflow', () => {
       now: new Date('2026-07-13T12:00:00.000Z'),
     });
 
-    expect(result.allowed).toBe(false);
-    expect(result.policyResult.block_reasons).toContain('BLOCK_KEYWORD_BODY_MISMATCH');
+    expect(result.allowed).toBe(true);
+    expect(result.advisoryReasons).toContain('BLOCK_KEYWORD_BODY_MISMATCH');
   });
 
   it('reuses the exact payload and executes only once more after approval', async () => {

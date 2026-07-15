@@ -1,5 +1,8 @@
 import { runContentPolicyPipeline } from './orchestrator.js';
-import { isOnlyRecentPostManualReviewReasons } from './manualReview.js';
+import {
+  acceptContentPolicyAdvisories,
+  repairDeclaredForbiddenClaims,
+} from './claimRepair.js';
 import type {
   ArticleDraft,
   ContentPolicyConfig,
@@ -20,6 +23,7 @@ export interface GeneratedContentGuardResult<T extends Record<string, any>> {
   allowed: boolean;
   manualReviewRequired: boolean;
   reasons: string[];
+  advisoryReasons: string[];
   content: T;
   policyResult: ContentPolicyResult;
 }
@@ -74,9 +78,7 @@ function applyResult<T extends Record<string, any>>(content: T, result: ContentP
     ...content,
     contentPolicy: result,
   };
-  const canApplyRewrite = result.decision === 'PASS'
-    || isOnlyRecentPostManualReviewReasons(result.block_reasons);
-  if (canApplyRewrite && result.rewrite_count > 0) {
+  if (result.rewrite_count > 0) {
     next.selectedTitle = result.article.title;
     next.summary = result.article.summary;
     next.introduction = result.article.introduction;
@@ -92,19 +94,30 @@ function applyResult<T extends Record<string, any>>(content: T, result: ContentP
 export async function guardGeneratedContent<T extends Record<string, any>>(
   options: GeneratedContentGuardOptions<T>,
 ): Promise<GeneratedContentGuardResult<T>> {
-  const policyResult = await runContentPolicyPipeline({
+  const declaredClaimRepair = repairDeclaredForbiddenClaims(
+    toDraft(options.structuredContent),
+    options.input,
+  );
+  const evaluatedPolicyResult = await runContentPolicyPipeline({
     input: options.input,
-    draft: toDraft(options.structuredContent),
+    draft: declaredClaimRepair.draft,
     config: options.config,
     recentPostsResult: options.recentPostsResult,
     modelVersion: options.modelVersion || 'generated-content-post-guard',
   });
+  const advisory = acceptContentPolicyAdvisories(
+    evaluatedPolicyResult,
+    options.input,
+    declaredClaimRepair.advisoryReasons,
+    declaredClaimRepair.rewriteCount,
+  );
+  const policyResult = advisory.policyResult;
 
   return {
-    allowed: (policyResult.decision === 'PASS' && policyResult.publication.allowed)
-      || isOnlyRecentPostManualReviewReasons(policyResult.block_reasons),
-    manualReviewRequired: isOnlyRecentPostManualReviewReasons(policyResult.block_reasons),
+    allowed: policyResult.decision === 'PASS' && policyResult.publication.allowed,
+    manualReviewRequired: policyResult.publication.manual_review_required,
     reasons: [...policyResult.block_reasons],
+    advisoryReasons: advisory.advisoryReasons,
     content: applyResult(options.structuredContent, policyResult),
     policyResult,
   };

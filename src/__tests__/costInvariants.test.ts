@@ -218,11 +218,11 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
       expect(content).toMatch(/openaiRpmThrottler\.throttle\(\s*getOpenAiMinIntervalMs\(modelName,\s*maxCompletionTokens\),\s*signal\s*\)/);
     });
 
-    it('OpenAI content generation gets a bounded same-engine repair budget without cross-engine fallback', () => {
-      expect(content).toMatch(/const\s+baseMaxAttempts\s*=\s*provider\s*===\s*'openai'[\s\S]{0,120}?Math\.max\(openAiContentMaxAttempts,\s*costPolicy\.maxAttempts\)/);
-      expect(content).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
-      expect(content).toMatch(/const\s+promptRepairMinAttempts\s*=\s*!isV3Prompt\s*&&\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
-      expect(content).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*!isV3Prompt\s*&&\s*isQuality90Mode\(generationQualityMode\)\s*\?\s*2\s*:\s*0/);
+    it('keeps structural retries bounded while agent drafts default to one paid call', () => {
+      expect(content).toMatch(/const\s+baseMaxAttempts\s*=\s*isAgentProvider[\s\S]{0,180}?Math\.max\(openAiContentMaxAttempts,\s*costPolicy\.maxAttempts\)/);
+      expect(content).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\|\|\s*isAgentProvider\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
+      expect(content).toMatch(/const\s+promptRepairMinAttempts\s*=\s*0/);
+      expect(content).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*0/);
       expect(content).toMatch(/const\s+configuredMaxAttempts\s*=\s*Math\.max\(\s*baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts,?\s*\)/);
       expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
       expect(failurePolicy).toMatch(/SAME_ENGINE_RECOVERY/);

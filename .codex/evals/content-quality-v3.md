@@ -204,7 +204,7 @@ workspace root.
 The final reviewed manifest contains 636 files, including the renderer save/restore,
 semi-auto/full-auto relay, main-process handoff, browser execution, and Worker entry
 paths. Its reviewed SHA-256 is
-`8dd751bd4b98557476b4b743870ec4a1d67de0bd32e7f8fde58ddc262ecdc456`.
+`9a0d7444bae9545ba1c8c91be4ebb195c61850f3e9cfb9b535192ffb55f409cd`.
 
 Each file must be strict UTF-8 without BOM. CRLF is the only canonicalization and
 becomes LF; a lone CR or invalid UTF-8 is rejected. SHA-256 input uses a domain

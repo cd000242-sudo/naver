@@ -83,13 +83,10 @@ export function resolveContentGenerationCostPolicy(
   const defaultAttemptBudget = Math.max(tierAttemptBudget[modelProfile.tier], costSaverOn ? 1 : 2);
   const maxAttempts = parseAttemptOverride(env.CONTENT_MAX_ATTEMPTS) ?? defaultAttemptBudget;
 
-  // Balanced and premium models get one localized repair phase before another
-  // full rewrite. Value stays economical, while hard Quality90 misses remain
-  // protected by the mandatory self-critique path in contentGenerator.
+  // Post-generation LLM patches spend another paid request. Keep them strictly
+  // opt-in so a usable first draft is never discarded by a score-only gate.
   const patchOverride = env.CONTENT_ALLOW_EXTRA_LLM_PATCHES;
-  const allowLocalizedRepair = patchOverride === '0'
-    ? false
-    : patchOverride === '1' || modelProfile.tier !== 'value';
+  const allowLocalizedRepair = patchOverride === '1';
 
   return {
     costSaverOn,

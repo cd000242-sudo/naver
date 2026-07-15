@@ -73,4 +73,30 @@ describe('content policy fabricated-fact recovery', () => {
     expect(result.content.bodyPlain).not.toContain('45,800원');
     expect(result.content.headings[0].content).not.toContain('45,800원');
   });
+
+  it('removes a declared forbidden sentence and continues to the image stage with an advisory', async () => {
+    const unsupported = '이 서비스는 누구에게나 100% 해결을 보장합니다.';
+    const draft = makeGoodDraft();
+    const input = makePolicyInput({ forbidden_claims: [unsupported] });
+    const result = await guardGeneratedContent({
+      structuredContent: {
+        selectedTitle: draft.title,
+        summary: draft.summary,
+        introduction: draft.introduction,
+        headings: draft.headings,
+        bodyPlain: `${draft.body_markdown}\n\n${unsupported}`,
+        content: `${draft.body_markdown}\n\n${unsupported}`,
+        faq: draft.faq,
+        cta: draft.cta,
+      },
+      input,
+      config: await loadContentPolicy(),
+      recentPostsResult: { ok: true, posts: input.recent_posts || [], source: 'test' },
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.manualReviewRequired).toBe(false);
+    expect(result.advisoryReasons).toContain('BLOCK_FORBIDDEN_CLAIM');
+    expect(result.content.bodyPlain).not.toContain('100% 해결을 보장');
+  });
 });

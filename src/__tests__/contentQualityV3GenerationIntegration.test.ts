@@ -123,12 +123,11 @@ describe('Content Quality V3 production wiring', () => {
     expect(generator).toMatch(/if \(allowLegacyPostDraftLlm\) \{\s*try \{[\s\S]{0,500}factCheckAndRewrite/);
     expect(generator).toMatch(/if \(allowLegacyPostDraftLlm && isSelfCritiqueEnabled/);
     expect(generator).toMatch(/const useLlmRubric = allowLegacyPostDraftLlm\s*&& isLlmRubricEnabled/);
-    expect(generator).toMatch(/if \(\s*allowLegacyPostDraftLlm\s*&&\s*_gateResult[\s\S]{0,900}selfCritiqueAndRewrite/);
+    expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*_gateResult[\s\S]{0,900}selfCritiqueAndRewrite/);
 
-    expect(generator).toMatch(/if \(\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate' \|\| _quality90Assessment\?\.miss\)/);
-    expect(generator).not.toMatch(/if \(\s*allowLegacyPostDraftLlm\s*&&\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate'/);
-    expect(generator).toMatch(/if \(\s*_quality90Assessment\?\.miss\s*&& !_quality90FollowupRetryUsed\s*&& attempt < MAX_ATTEMPTS/);
-    expect(generator).toMatch(/if \(_quality90Assessment\?\.miss && attempt < MAX_ATTEMPTS\)/);
+    expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate' \|\| _quality90Assessment\?\.miss\)/);
+    expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_quality90Assessment\?\.miss\s*&& !_quality90FollowupRetryUsed\s*&& attempt < MAX_ATTEMPTS/);
+    expect(generator).toMatch(/if \(allowPaidPostGenerationRepair && _quality90Assessment\?\.miss && attempt < MAX_ATTEMPTS\)/);
   });
 
   it('keeps every semantic deterministic post-draft mutator behind the exact legacy policy', () => {
@@ -226,7 +225,7 @@ describe('Content Quality V3 production wiring', () => {
     expect(generator).toMatch(/const deterministicFallback = \(\) => analyzeNaverScore\(optimized\.bodyPlain \|\| ''\)/);
     expect(generator).toMatch(/checkSourceFidelity\(/);
     expect(generator).toMatch(/checkHallucination\(/);
-    expect(generator).toMatch(/if \(\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate' \|\| _quality90Assessment\?\.miss\)/);
+    expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate' \|\| _quality90Assessment\?\.miss\)/);
   });
 
   it('keeps production shadow dormant until side effects and comparison telemetry are isolated', () => {

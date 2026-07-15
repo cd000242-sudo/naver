@@ -112,7 +112,7 @@ describe('content policy publish integration', () => {
     expect(result.payload.contentPolicyContext?.input.business_facts).not.toContain(payload.title);
   });
 
-  it('does not bypass forbidden-claim blocking after semi-auto context rebasing', async () => {
+  it('removes a forbidden sentence and continues with an advisory after semi-auto context rebasing', async () => {
     const payload = payloadWithContext();
     const unsupported = '이 서비스는 누구에게나 100% 해결을 보장합니다.';
     payload._semiAutoMode = true;
@@ -128,8 +128,10 @@ describe('content policy publish integration', () => {
       now: new Date('2026-02-01T12:00:00.000Z'),
     });
 
-    expect(result.allowed).toBe(false);
-    expect(result.policyResult.block_reasons).toContain('BLOCK_FORBIDDEN_CLAIM');
+    expect(result.allowed).toBe(true);
+    expect(result.advisoryReasons).toContain('BLOCK_FORBIDDEN_CLAIM');
+    expect(result.payload.content).not.toContain('100% 해결을 보장');
+    expect(result.payload.structuredContent.bodyPlain).not.toContain('100% 해결을 보장');
   });
 
   it.each([
@@ -210,7 +212,7 @@ describe('content policy publish integration', () => {
     ['legacy_form', false],
     ['app_scheduler', false],
     ['semi_auto', true],
-  ] as const)('blocks a genuinely unrelated final title and body for %s', async (publishFlow, semiAutoMode) => {
+  ] as const)('warns but continues for a genuinely unrelated final title and body in %s', async (publishFlow, semiAutoMode) => {
     const payload = payloadWithContext();
     payload._publishFlow = publishFlow;
     payload._semiAutoMode = semiAutoMode;
@@ -223,8 +225,8 @@ describe('content policy publish integration', () => {
       now: new Date('2026-02-01T12:00:00.000Z'),
     });
 
-    expect(result.allowed).toBe(false);
-    expect(result.policyResult.block_reasons).toContain('BLOCK_KEYWORD_BODY_MISMATCH');
+    expect(result.allowed).toBe(true);
+    expect(result.advisoryReasons).toContain('BLOCK_KEYWORD_BODY_MISMATCH');
   });
 
   it('recovers an old scheduled or legacy payload without embedded policy context', async () => {
@@ -271,7 +273,7 @@ describe('content policy publish integration', () => {
     );
   });
 
-  it('still blocks a genuinely unrelated title and body in semi-auto mode', async () => {
+  it('still warns but continues for an unrelated title and body in semi-auto mode', async () => {
     const payload = payloadWithContext();
     payload._semiAutoMode = true;
     payload.title = '제주도 렌터카 보험 비교와 예약 방법';
@@ -285,11 +287,11 @@ describe('content policy publish integration', () => {
       now: new Date('2026-02-01T12:00:00.000Z'),
     });
 
-    expect(result.allowed).toBe(false);
-    expect(result.policyResult.block_reasons).toContain('BLOCK_KEYWORD_BODY_MISMATCH');
+    expect(result.allowed).toBe(true);
+    expect(result.advisoryReasons).toContain('BLOCK_KEYWORD_BODY_MISMATCH');
   });
 
-  it('blocks and requires manual review when neither renderer nor repository provides recent posts', async () => {
+  it('warns and continues when recent-post comparison data is unavailable', async () => {
     const payload = payloadWithContext();
     payload.contentPolicyContext.input.recent_posts = undefined;
     payload.contentPolicyContext.recentPostsSnapshot = [];
@@ -303,9 +305,9 @@ describe('content policy publish integration', () => {
       env: { MIN_PUBLISH_INTERVAL_MINUTES: '0' },
     });
 
-    expect(result.allowed).toBe(false);
-    expect(result.policyResult.block_reasons).toContain('BLOCK_RECENT_POSTS_UNAVAILABLE');
-    expect(result.policyResult.publication.manual_review_required).toBe(true);
+    expect(result.allowed).toBe(true);
+    expect(result.advisoryReasons).toContain('BLOCK_RECENT_POSTS_UNAVAILABLE');
+    expect(result.policyResult.publication.manual_review_required).toBe(false);
   });
 
   it('wires the guard before browser creation in the common BlogExecutor flow', async () => {
@@ -551,7 +553,8 @@ describe('content policy publish integration', () => {
     });
 
     expect(repeated.allowed).toBe(false);
-    expect(repeated.reasons).toContain('BLOCK_EXCESSIVE_SIMILARITY');
+    expect(repeated.reasons).toContain('BLOCK_MIN_PUBLISH_INTERVAL');
+    expect(repeated.advisoryReasons).toContain('BLOCK_EXCESSIVE_SIMILARITY');
   });
 
   it('records query-style Naver post URLs without pausing the publication ledger', async () => {

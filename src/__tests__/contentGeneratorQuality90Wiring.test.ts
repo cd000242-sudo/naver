@@ -5,66 +5,38 @@ import { describe, expect, it } from 'vitest';
 const contentGeneratorPath = path.join(process.cwd(), 'src', 'contentGenerator.ts');
 const source = fs.readFileSync(contentGeneratorPath, 'utf8');
 
-describe('contentGenerator QualityGate90 wiring', () => {
-  it('sends a near-threshold final body through the real quality gate before deciding', () => {
-    expect(source).toContain('isQuality90Mode(generationQualityMode)');
-    expect(source).toContain('&& shouldRunFinalQualityEvaluation({');
-    expect(source).toContain('plainLength >= validationMinChars || finalNearThresholdQualityEvaluation');
-    expect(source).toContain('validateShoppingConnectContent(optimized, validationMinChars)');
+describe('contentGenerator post-generation quality policy', () => {
+  it('keeps the first usable draft instead of reserving calls for quality targets', () => {
+    expect(source).toContain('const promptRepairMinAttempts = 0;');
+    expect(source).toContain('const qualityTargetMinAttempts = 0;');
+    expect(source).toContain("readNonNegativeIntegerEnv('AGENT_CONTENT_MAX_ATTEMPTS', 0)");
+    expect(source).toContain("provider === 'agent-codex' || provider === 'agent-claude'");
   });
 
-  it('assesses the actual optimized body before returning generated content', () => {
-    expect(source).toContain("from './content/quality90Gate.js';");
-    expect(source).toContain('assessQuality90Gate,');
-    expect(source).toContain('isQuality90Mode,');
-    expect(source).toContain('_quality90Assessment = assessQuality90Gate(_gateResult, _modeForGate);');
-    expect(source).toContain('quality90Miss: _quality90Assessment.miss');
+  it('requires explicit opt-in before any paid post-generation repair', () => {
+    expect(source).toContain('const allowPaidPostGenerationRepair =');
+    expect(source).toContain("process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR === '1'");
+    expect(source).toContain('allowPaidPostGenerationRepair && !customPromptAdherence.passed');
+    expect(source).toContain('allowPaidPostGenerationRepair && platitudeReportRef');
+    expect(source).toContain('allowPaidPostGenerationRepair && !_fidelityRetryUsed');
   });
 
-  it('regenerates only blocking misses and recognizes near-target publication passes', () => {
-    expect(source).toContain("(_gateResult.decision === 'regenerate' || _quality90Assessment?.miss)");
-    expect(source).toContain('QualityGate90 ${_quality90Assessment.reasons.join');
-    expect(source).toContain('_quality90Assessment.nearTargetAccepted');
-    expect(source).toContain('90점 목표 근접 통과');
-    expect(source).toContain('continue; // for 루프 다음 attempt');
+  it('records QualityGate90 misses as warnings without regeneration or safety-score throws', () => {
+    expect(source).toContain('QualityGate90 경고 후 계속');
+    expect(source).toContain('quality90AdvisoryAccepted: true');
+    expect(source).not.toContain('QualityGate90 target still missed after bounded retries');
+    expect(source).not.toMatch(/throw new Error\(\s*`\[CONTENT_SAFETY_BLOCKED\][\s\S]{0,220}?criticalSafetyReasons/);
   });
 
-  it('forces self-critique correction for 90-point misses even when cost saver would skip ordinary patches', () => {
-    expect(source).toContain('const _quality90HardMiss = Boolean(_quality90Assessment?.miss);');
-    expect(source).toContain("(_gateResult.decision === 'patch' || _humanFloorMiss || _quality90HardMiss)");
-    expect(source).toContain('(costPolicy.allowQualityGateSelfCritique || _quality90HardMiss)');
-    expect(source).toContain('patch 후 재평가');
+  it('keeps shopping quality and authenticity findings advisory', () => {
+    expect(source).toContain('쇼핑커넥트 진정성 경고 후 계속');
+    expect(source).toContain('쇼핑커넥트 품질 경고 후 계속');
+    expect(source).not.toContain('throw new Error(`[CONTENT_SAFETY_BLOCKED] 쇼핑커넥트 근거 검수 미통과');
   });
 
-  it('uses a bounded follow-up regeneration when the forced patch still misses 90', () => {
-    expect(source).toContain('let _quality90FollowupRetryUsed = false;');
-    expect(source).toContain('_quality90Assessment?.miss');
-    expect(source).toContain('!_quality90FollowupRetryUsed');
-    expect(source).toContain('patch 후에도 90점 미달');
-    expect(source).toContain('QualityGate90 target still missed after bounded retries');
-  });
-
-  it('uses the centralized gate result without hard-blocking score-only misses after bounded repair', () => {
-    expect(source).not.toContain('QUALITY_TARGET_NOT_MET');
-    expect(source).toContain('_quality90Assessment?.miss && attempt === MAX_ATTEMPTS');
-    expect(source).not.toContain('canAcceptQuality90Fallback(_gateResult, _modeForGate)');
-    expect(source).not.toMatch(/modeScore(?:\.score)?\s*<\s*75/);
-    expect(source).toContain('_quality90Assessment.blockingReasons.join');
-    expect(source).toContain("quality90AdvisoryAccepted = quality90FinalDisposition === 'ADVISORY'");
-    expect(source).toContain('보정 횟수를 모두 사용해 경고와 함께 다음 안전검사로 진행');
-    expect(source).not.toContain('자동 발행 하한을 충족하지 못해 발행을 중단했습니다');
-  });
-
-  it('keeps shopping score and final length misses advisory after bounded retries', () => {
-    expect(source).toContain('shoppingQualityAdvisoryAccepted = shoppingQualityDisposition.advisoryAccepted');
-    expect(source).toContain('affiliateAuthenticityAdvisoryAccepted = authenticity.score < 85');
-    expect(source).toContain('if (authenticity.hardFail)');
+  it('returns short but usable content without a quality-driven paid rewrite', () => {
+    expect(source).toContain('allowPaidPostGenerationRepair && attempt < MAX_ATTEMPTS');
     expect(source).toContain('권장 분량 미달 결과를 경고와 함께 반환');
-    expect(source).not.toContain('90점 품질 검사를 실행할 최소 분량에 미달해 자동 발행을 중단했습니다');
-  });
-
-  it('keeps evidence-backed safety failures blocking after score-only misses become advisory', () => {
-    expect(source).toContain('getCriticalQuality90SafetyReasons,');
-    expect(source).toContain('[CONTENT_SAFETY_BLOCKED]');
+    expect(source).not.toContain('짧은 결과를 반환하지 않고 재작성');
   });
 });

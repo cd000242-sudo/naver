@@ -807,7 +807,11 @@ export async function runFullPostCycle(
         if (preparedPolicy.policyResult.manual_review?.approved) {
             sendLog('✅ 최근 글 비교 수동 검수 승인 확인');
         }
-        sendLog(`✅ 콘텐츠 정책 통과 (${preparedPolicy.policyResult.quality_report.total_score}점, 최근 글 ${preparedPolicy.policyResult.similarity_report.compared_post_count}건 비교)`);
+        if (preparedPolicy.advisoryReasons.length > 0) {
+            sendLog(`⚠️ 품질/정책 경고 후 발행 계속: ${preparedPolicy.advisoryReasons.join(', ')}`);
+        } else {
+            sendLog(`✅ 콘텐츠 정책 통과 (${preparedPolicy.policyResult.quality_report.total_score}점, 최근 글 ${preparedPolicy.policyResult.similarity_report.compared_post_count}건 비교)`);
+        }
 
         // Revalidate and canonicalize the policy-transformed payload without
         // consuming it. Consumption is attached later at the browser's common

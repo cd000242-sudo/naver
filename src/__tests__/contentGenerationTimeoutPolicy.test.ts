@@ -126,13 +126,13 @@ describe('content generation timeout policy', () => {
     expect(fullAutoSrc).toMatch(/imageGenerationTimeoutMs:\s*getBoundedImageTimeoutMs\(getFullAutoBodyImageTimeoutMs\(currentProvider,\s*fullAutoBodyItems\.length\)\)/);
   });
 
-  it('uses the first regeneration budget to repair custom prompt drift instead of passing weak output', () => {
+  it('records custom prompt drift without spending another request unless explicitly opted in', () => {
     expect(promptAdherenceSrc).toMatch(/export\s+type\s+PromptAdherenceReport/);
     expect(promptAdherenceSrc).toMatch(/export\s+function\s+assessCustomPromptAdherence/);
     expect(promptAdherenceSrc).toMatch(/PROMPT_ADHERENCE_REPAIR/);
-    expect(generatorSrc).toMatch(/const\s+promptRepairMinAttempts\s*=\s*!isV3Prompt\s*&&\s*source\.customPrompt\?\.trim\(\)\s*\?\s*2\s*:\s*0/);
+    expect(generatorSrc).toMatch(/const\s+promptRepairMinAttempts\s*=\s*0/);
     expect(generatorSrc).toMatch(/const\s+customPromptAdherence\s*=\s*assessCustomPromptAdherence\(parsed,\s*source\)/);
-    expect(generatorSrc).toMatch(/!customPromptAdherence\.passed\s*&&\s*attempt\s*<\s*MAX_ATTEMPTS/);
+    expect(generatorSrc).toMatch(/allowPaidPostGenerationRepair\s*&&\s*!customPromptAdherence\.passed\s*&&\s*attempt\s*<\s*MAX_ATTEMPTS/);
     expect(generatorSrc).toMatch(/customPromptAdherence\.retryInstruction/);
   });
 
@@ -140,8 +140,9 @@ describe('content generation timeout policy', () => {
     expect(failurePolicySrc).toMatch(/function\s+isTerminalContentGenerationError/);
     expect(failurePolicySrc).toMatch(/function\s+buildSameEngineRecoveryInstruction/);
     expect(generatorSrc).toMatch(/CONTENT_SAME_ENGINE_MIN_ATTEMPTS/);
-    expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
-    expect(generatorSrc).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*!isV3Prompt\s*&&\s*isQuality90Mode\(generationQualityMode\)\s*\?\s*2\s*:\s*0/);
+    expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\|\|\s*isAgentProvider\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
+    expect(generatorSrc).toMatch(/const\s+agentContentMaxAttempts\s*=\s*isV3Prompt[\s\S]{0,100}?AGENT_CONTENT_MAX_ATTEMPTS',\s*0/);
+    expect(generatorSrc).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*0/);
     expect(generatorSrc).toMatch(/const\s+configuredMaxAttempts\s*=\s*Math\.max\(\s*baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts,?\s*\)/);
     expect(generatorSrc).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
     expect(failurePolicySrc).toMatch(/SAME_ENGINE_RECOVERY/);
@@ -202,8 +203,8 @@ describe('content generation timeout policy', () => {
 
   it('keeps hidden post-generation LLM patch calls explicit opt-in', () => {
     expect(costPolicySrc).toMatch(/CONTENT_ALLOW_EXTRA_LLM_PATCHES/);
-    expect(costPolicySrc).toMatch(/patchOverride\s*===\s*'0'/);
-    expect(costPolicySrc).toMatch(/patchOverride\s*===\s*'1'\s*\|\|\s*modelProfile\.tier\s*!==\s*'value'/);
+    expect(costPolicySrc).toMatch(/allowLocalizedRepair\s*=\s*patchOverride\s*===\s*'1'/);
+    expect(costPolicySrc).not.toMatch(/modelProfile\.tier\s*!==\s*'value'/);
   });
 
   it('does not advertise an unsafe Gemini RPM ceiling for high-spec machines', () => {

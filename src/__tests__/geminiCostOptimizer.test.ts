@@ -68,7 +68,7 @@ describe('Gemini cost optimizer policy', () => {
     expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'claude-opus' }).maxAttempts).toBe(3);
   });
 
-  it('keeps value economical and enables localized repair for balanced and premium tiers', () => {
+  it('keeps localized paid repair disabled by default for every model tier', () => {
     const valuePolicy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'openai-gpt4o-mini' });
     expect(valuePolicy.modelTier).toBe('value');
     expect(valuePolicy.allowLlmTitlePatch).toBe(false);
@@ -77,25 +77,25 @@ describe('Gemini cost optimizer policy', () => {
 
     const balancedPolicy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'claude-sonnet' });
     expect(balancedPolicy.modelTier).toBe('balanced');
-    expect(balancedPolicy.allowLlmTitlePatch).toBe(true);
-    expect(balancedPolicy.allowLlmIntroPatch).toBe(true);
-    expect(balancedPolicy.allowQualityGateSelfCritique).toBe(true);
+    expect(balancedPolicy.allowLlmTitlePatch).toBe(false);
+    expect(balancedPolicy.allowLlmIntroPatch).toBe(false);
+    expect(balancedPolicy.allowQualityGateSelfCritique).toBe(false);
 
     const premiumPolicy = resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'openai-gpt4o' });
     expect(premiumPolicy.modelTier).toBe('premium');
-    expect(premiumPolicy.allowLlmTitlePatch).toBe(true);
-    expect(premiumPolicy.allowLlmIntroPatch).toBe(true);
-    expect(premiumPolicy.allowQualityGateSelfCritique).toBe(true);
+    expect(premiumPolicy.allowLlmTitlePatch).toBe(false);
+    expect(premiumPolicy.allowLlmIntroPatch).toBe(false);
+    expect(premiumPolicy.allowQualityGateSelfCritique).toBe(false);
   });
 
-  it('allows operators to disable extra localized repair without weakening hard gates', () => {
-    const disabledPolicy = resolveContentGenerationCostPolicy(
+  it('allows operators to explicitly opt in to extra localized repair', () => {
+    const enabledPolicy = resolveContentGenerationCostPolicy(
       { primaryGeminiTextModel: 'gemini-3.1-pro-preview' },
-      { CONTENT_ALLOW_EXTRA_LLM_PATCHES: '0' },
+      { CONTENT_ALLOW_EXTRA_LLM_PATCHES: '1' },
     );
-    expect(disabledPolicy.allowLlmTitlePatch).toBe(false);
-    expect(disabledPolicy.allowLlmIntroPatch).toBe(false);
-    expect(disabledPolicy.allowQualityGateSelfCritique).toBe(false);
+    expect(enabledPolicy.allowLlmTitlePatch).toBe(true);
+    expect(enabledPolicy.allowLlmIntroPatch).toBe(true);
+    expect(enabledPolicy.allowQualityGateSelfCritique).toBe(true);
   });
 
   it('lets an environment override raise the attempt budget deliberately', () => {
