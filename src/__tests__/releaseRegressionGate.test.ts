@@ -18,6 +18,19 @@ describe('release regression gate', () => {
     expect(gate).toContain("['run', 'e2e:built']");
   });
 
+  it('materializes generated runtime version data before lint and tests', () => {
+    const syncIndex = gate.indexOf("args: ['scripts/sync-build-define.mjs'], runWithNode: true");
+    const lintIndex = gate.indexOf("['run', 'lint', '--', '--quiet']");
+    const testIndex = gate.indexOf("['test']");
+
+    expect(syncIndex).toBeGreaterThan(-1);
+    expect(lintIndex).toBeGreaterThan(syncIndex);
+    expect(testIndex).toBeGreaterThan(syncIndex);
+    expect(gate).toContain(
+      'const commandArgs = step.runWithNode ? step.args : [npmCli, ...step.args];',
+    );
+  });
+
   it('blocks the full GitHub release pipeline on the shared gate', () => {
     const gateIndex = releaseAll.indexOf('node scripts/release-gate.js');
     const builderIndex = releaseAll.indexOf('npx electron-builder');

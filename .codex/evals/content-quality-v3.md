@@ -148,7 +148,7 @@ Status: `IMPLEMENTED_BUT_NOT_PROMOTED`
 
 ## Current evidence
 
-- Project-wide tests: 575 files and 5438/5438 tests passing.
+- Project-wide tests: 575 files and 5440/5440 tests passing.
 - Agent regression coverage: 20 files and 201/201 tests passing; statements 90.16%,
   branches 80.42%, functions 92.48%, and lines 92.62%.
 - V3 regression coverage: 47 files and 743/743 tests passing; statements 89.26%,
@@ -204,7 +204,7 @@ workspace root.
 The final reviewed manifest contains 636 files, including the renderer save/restore,
 semi-auto/full-auto relay, main-process handoff, browser execution, and Worker entry
 paths. Its reviewed SHA-256 is
-`d03175e8e3c804608614ac595ba0b7e0fc6306cf4ded7d9a517170a35889b306`.
+`8dd751bd4b98557476b4b743870ec4a1d67de0bd32e7f8fde58ddc262ecdc456`.
 
 Each file must be strict UTF-8 without BOM. CRLF is the only canonicalization and
 becomes LF; a lone CR or invalid UTF-8 is rejected. SHA-256 input uses a domain

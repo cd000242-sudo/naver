@@ -15,6 +15,7 @@ if (!npmCli) {
   process.exit(1);
 }
 const steps = [
+  { label: 'Build define sync', args: ['scripts/sync-build-define.mjs'], runWithNode: true },
   { label: 'ESLint', args: ['run', 'lint', '--', '--quiet'] },
   { label: 'Full test suite', args: ['test'] },
   { label: 'Agent regression coverage', args: ['run', 'test:coverage:agent'] },
@@ -27,7 +28,8 @@ const steps = [
 
 for (const step of steps) {
   console.log(`\n[ReleaseGate] ${step.label}`);
-  const result = spawnSync(process.execPath, [npmCli, ...step.args], {
+  const commandArgs = step.runWithNode ? step.args : [npmCli, ...step.args];
+  const result = spawnSync(process.execPath, commandArgs, {
     cwd: ROOT,
     stdio: 'inherit',
     windowsHide: true,
