@@ -394,7 +394,7 @@ interface AutomationAPI {
   getLibraryCategories: () => Promise<string[]>;
   deleteLibraryImage: (id: string) => Promise<boolean>;
   collectLibraryImages: (options: { query: string; sources: string[]; count: number }) => Promise<{ success: boolean; count: number; message?: string }>;
-  batchCollectLibraryImages: (categories: string[]) => Promise<{ success: boolean; message?: string }>;
+  batchCollectLibraryImages: (categories: string[]) => Promise<{ success: boolean; count?: number; message?: string }>;
   getImageLibraryStats: () => Promise<{ totalImages: number; categories: number; totalSize: string; sources: Record<string, number> }>;
   autoCollectImages: (data: {
     title: string;
@@ -684,7 +684,15 @@ interface AutomationAPI {
     images: Array<{ url: string; heading: string }>,
     title: string,
     options?: { destination?: 'title-subfolder' | 'configured-root' },
-  ) => Promise<{ success: boolean; savedImages: any[]; folderPath?: string; error?: string }>; // ✅ 여러 이미지 일괄 저장
+  ) => Promise<{
+    success: boolean;
+    partial?: boolean;
+    successCount?: number;
+    failCount?: number;
+    savedImages: any[];
+    folderPath?: string;
+    error?: string;
+  }>; // ✅ 여러 이미지 일괄 저장
   // 여러 플랫폼에서 콘텐츠 수집 (할루시네이션 방지)
   collectContentFromPlatforms: (keyword: string, options?: { maxPerSource?: number }) => Promise<{ success: boolean; collectedText?: string; sourceCount?: number; urls?: string[]; message?: string }>;
   // 저장된 이미지 관리

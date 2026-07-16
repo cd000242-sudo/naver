@@ -267,7 +267,7 @@ contextBridge.exposeInMainWorld('api', {
   deleteLibraryImage: (id: string): Promise<boolean> => ipcRenderer.invoke('library:deleteImage', id),
   collectLibraryImages: (options: { query: string; sources: string[]; count: number }): Promise<{ success: boolean; count: number; message?: string }> =>
     ipcRenderer.invoke('library:collectImages', options),
-  batchCollectLibraryImages: (categories: string[]): Promise<{ success: boolean; message?: string }> =>
+  batchCollectLibraryImages: (categories: string[]): Promise<{ success: boolean; count?: number; message?: string }> =>
     ipcRenderer.invoke('library:batchCollect', categories),
   getImageLibraryStats: (): Promise<{ totalImages: number; categories: number; totalSize: string; sources: Record<string, number> }> =>
     ipcRenderer.invoke('library:getStats'),
@@ -839,7 +839,15 @@ contextBridge.exposeInMainWorld('api', {
     images: Array<{ url: string; heading: string }>,
     title: string,
     options?: { destination?: 'title-subfolder' | 'configured-root' },
-  ): Promise<{ success: boolean; savedImages: any[]; folderPath?: string; error?: string }> =>
+  ): Promise<{
+    success: boolean;
+    partial?: boolean;
+    successCount?: number;
+    failCount?: number;
+    savedImages: any[];
+    folderPath?: string;
+    error?: string;
+  }> =>
     ipcRenderer.invoke('image:downloadAndSaveMultiple', images, title, options),
   // 여러 플랫폼에서 콘텐츠 수집 (할루시네이션 방지)
   collectContentFromPlatforms: (keyword: string, options?: { maxPerSource?: number }): Promise<{ success: boolean; collectedText?: string; sourceCount?: number; urls?: string[]; message?: string }> =>

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  allowsPaidEmptyResponseRetry,
   buildGeminiKeyExecutionPlan,
   resolveContentGenerationCostPolicy,
 } from '../geminiCostOptimizer';
@@ -60,12 +61,12 @@ describe('Gemini cost optimizer policy', () => {
     expect(plan.freeQuotaFirst).toBe(false);
   });
 
-  it('uses tier-aware retry budgets while preserving a bounded pipeline', () => {
-    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.1-flash-lite' }).maxAttempts).toBe(1);
-    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.5-flash' }).maxAttempts).toBe(2);
-    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.1-pro-preview' }).maxAttempts).toBe(3);
-    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'openai-gpt41' }).maxAttempts).toBe(2);
-    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'claude-opus' }).maxAttempts).toBe(3);
+  it('uses exactly one paid top-level request by default for every model tier', () => {
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.1-flash-lite' }).maxAttempts).toBe(0);
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.5-flash' }).maxAttempts).toBe(0);
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'gemini-3.1-pro-preview' }).maxAttempts).toBe(0);
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'openai-gpt41' }).maxAttempts).toBe(0);
+    expect(resolveContentGenerationCostPolicy({ primaryGeminiTextModel: 'claude-opus' }).maxAttempts).toBe(0);
   });
 
   it('keeps localized paid repair disabled by default for every model tier', () => {
@@ -103,7 +104,13 @@ describe('Gemini cost optimizer policy', () => {
     expect(resolveContentGenerationCostPolicy(
       { primaryGeminiTextModel: 'gemini-3.1-flash-lite' },
       { CONTENT_MAX_ATTEMPTS: 'not-a-number' },
-    ).maxAttempts).toBe(1);
+    ).maxAttempts).toBe(0);
+  });
+
+  it('requires explicit consent before retrying a potentially billed empty response', () => {
+    expect(allowsPaidEmptyResponseRetry({})).toBe(false);
+    expect(allowsPaidEmptyResponseRetry({ CONTENT_ALLOW_PAID_EMPTY_RESPONSE_RETRY: '0' })).toBe(false);
+    expect(allowsPaidEmptyResponseRetry({ CONTENT_ALLOW_PAID_EMPTY_RESPONSE_RETRY: '1' })).toBe(true);
   });
 
   it('injects a silent quality audit that never permits invented facts', () => {

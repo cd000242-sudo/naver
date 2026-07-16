@@ -241,14 +241,17 @@ export class ImageLibrary {
   /**
    * 일괄 수집 (호환성을 위해 추가)
    */
-  async batchCollect(categories: string[]): Promise<void> {
+  async batchCollect(categories: string[]): Promise<number> {
+    let collectedCount = 0;
     for (const category of categories) {
-      await this.collectImages(category, { count: 20 });
+      const collected = await this.collectImages(category, { count: 20 });
+      collectedCount += collected.length;
       // API 속도 제한 방지
       await new Promise(r => setTimeout(r, 1000));
     }
 
     this.logger('✅ 일괄 수집 완료');
+    return collectedCount;
   }
 
   /**

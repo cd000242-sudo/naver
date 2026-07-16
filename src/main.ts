@@ -4914,6 +4914,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
 
       const contentQualityV3PublishOwnerKey =
         `multi-account:${multiAccountHandoffRunId}:account:${accountId}`;
+      let accountQuotaLease: ScheduledPublishQuotaLease | undefined;
       try {
         sendLog(`👤 [${account.name}] 발행 시작...`);
 
@@ -5422,18 +5423,12 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           loginStaggerMs: computeLoginStaggerDelayMs(i),
         };
 
-        // ✅ [2026-03-01 FIX] 선차감 패턴: 계정별 발행 전 쿼터 차감
-        let accountPreConsumed = false;
-        const isFreeUser = await isFreeTierUser();
-        if (isFreeUser) {
-          try {
-            await consumeQuota('publish', 1);
-            accountPreConsumed = true;
-            console.log(`[다중계정] 무료 사용자: publish 쿼터 선차감 (${account.name})`);
-          } catch (qe) {
-            console.error(`[다중계정] 쿼터 선차감 오류 (${account.name}):`, qe);
-          }
-        }
+        accountQuotaLease = await acquireScheduledPublishQuota({
+          validate: async () => ({ allowed: true }),
+          isFreeTierUser,
+          consume: () => consumeQuota('publish', 1),
+          refund: () => refundQuota('publish', 1),
+        });
 
         // ✅ [2026-03-11 FIX] 발행 직전 중지 체크 (abort 체크포인트 #4)
         if (AutomationService.isMultiAccountAborted()) {
@@ -5469,16 +5464,9 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         });
 
         if (result.success) {
-          // ✅ 선차감 유지 (환불 없음)
+          accountQuotaLease.commit();
           sendLog(`✅ [${account.name}] 발행 성공: ${result.url || '완료'}`);
         } else {
-          // ✅ 발행 실패 → 선차감 환불
-          if (accountPreConsumed) {
-            try {
-              await refundQuota('publish', 1);
-              console.log(`[다중계정] 발행 실패: 쿼터 환불 (${account.name})`);
-            } catch (re) { console.error(`[다중계정] 쿼터 환불 오류:`, re); }
-          }
           sendLog(`❌ [${account.name}] 발행 실패: ${result.message}`);
         }
 
@@ -5487,6 +5475,11 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
         results.push({ accountId, success: false, message: errorMsg, failureCode: classifyPublishFailure(error).code });
         sendLog(`❌ [${account.name}] 발행 오류: ${errorMsg}`);
       } finally {
+        try {
+          await accountQuotaLease?.rollback();
+        } catch (refundError) {
+          console.error(`[다중계정] 발행 미완료 쿼터 환불 오류 (${account.name}):`, refundError);
+        }
         await contentQualityV3PublishHandoffStore.releaseOwner(contentQualityV3PublishOwnerKey);
       }
     }
@@ -6194,7 +6187,7 @@ ipcMain.handle('library:collectImages', async (_event, options: { query: string;
   }
 });
 
-ipcMain.handle('library:batchCollect', async (_event, categories: string[]): Promise<{ success: boolean; message?: string }> => {
+ipcMain.handle('library:batchCollect', async (_event, categories: string[]): Promise<{ success: boolean; count?: number; message?: string }> => {
   // ✅ 실행 직전 최신 설정 강제 동기화
   try {
     const config = await loadConfig();
@@ -6219,9 +6212,9 @@ ipcMain.handle('library:batchCollect', async (_event, categories: string[]): Pro
       return { success: false, message: '이미지 라이브러리 초기화 실패' };
     }
 
-    await imageLibrary.batchCollect(categories);
-    const result = { success: true };
-    if (await isFreeTierUser()) {
+    const collectedCount = await imageLibrary.batchCollect(categories);
+    const result = { success: collectedCount > 0, count: collectedCount };
+    if (result.count > 0 && (await isFreeTierUser())) {
       await consumeQuota('media', 1);
     }
     return result;

@@ -136,11 +136,11 @@ describe('content generation timeout policy', () => {
     expect(generatorSrc).toMatch(/customPromptAdherence\.retryInstruction/);
   });
 
-  it('keeps generation on the selected engine while giving recoverable failures one same-engine repair', () => {
+  it('keeps generation on the selected engine without a paid repair unless explicitly opted in', () => {
     expect(failurePolicySrc).toMatch(/function\s+isTerminalContentGenerationError/);
     expect(failurePolicySrc).toMatch(/function\s+buildSameEngineRecoveryInstruction/);
     expect(generatorSrc).toMatch(/CONTENT_SAME_ENGINE_MIN_ATTEMPTS/);
-    expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\|\|\s*isAgentProvider\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*1\)/);
+    expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\|\|\s*isAgentProvider\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*0\)/);
     expect(generatorSrc).toMatch(/const\s+agentContentMaxAttempts\s*=\s*isV3Prompt[\s\S]{0,100}?AGENT_CONTENT_MAX_ATTEMPTS',\s*0/);
     expect(generatorSrc).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*0/);
     expect(generatorSrc).toMatch(/const\s+configuredMaxAttempts\s*=\s*Math\.max\(\s*baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts,?\s*\)/);

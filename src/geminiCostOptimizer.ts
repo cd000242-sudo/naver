@@ -34,6 +34,12 @@ export interface ContentGenerationCostPolicy {
   qualityDirective: string;
 }
 
+export function allowsPaidEmptyResponseRetry(
+  env: Record<string, string | undefined> = process.env,
+): boolean {
+  return env.CONTENT_ALLOW_PAID_EMPTY_RESPONSE_RETRY === '1';
+}
+
 function normalizeKeyList(keys: Array<string | undefined | null>): string[] {
   const seen = new Set<string>();
   const normalized: string[] = [];
@@ -75,13 +81,10 @@ export function resolveContentGenerationCostPolicy(
 ): ContentGenerationCostPolicy {
   const costSaverOn = config?.costSaverMode !== false;
   const modelProfile = resolveTextModelProfile(config?.primaryGeminiTextModel);
-  const tierAttemptBudget: Record<TextModelTier, number> = {
-    value: 1,
-    balanced: 2,
-    premium: 3,
-  };
-  const defaultAttemptBudget = Math.max(tierAttemptBudget[modelProfile.tier], costSaverOn ? 1 : 2);
-  const maxAttempts = parseAttemptOverride(env.CONTENT_MAX_ATTEMPTS) ?? defaultAttemptBudget;
+  // A generated-but-rejected replacement is still a paid provider request.
+  // Default to one top-level request (zero retries) for every tier; operators
+  // may deliberately opt in through CONTENT_MAX_ATTEMPTS.
+  const maxAttempts = parseAttemptOverride(env.CONTENT_MAX_ATTEMPTS) ?? 0;
 
   // Post-generation LLM patches spend another paid request. Keep them strictly
   // opt-in so a usable first draft is never discarded by a score-only gate.

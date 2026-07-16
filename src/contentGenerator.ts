@@ -27,6 +27,7 @@ import {
 } from './runtime/modelRegistry.js';
 import { getGeminiFreeTierLimit, formatGeminiFreeTierSummary } from './geminiQuotaPolicy.js';
 import {
+  allowsPaidEmptyResponseRetry,
   buildGeminiKeyExecutionPlan,
   resolveContentGenerationCostPolicy,
   type ContentGenerationCostPolicy,
@@ -1813,6 +1814,8 @@ export interface GenerateOptions {
   agentProductPolicyContext?: AgentProductPolicyContext;
 }
 
+const allowPaidEmptyResponseRetry = allowsPaidEmptyResponseRetry(process.env);
+
 export function detectBannedHeadingPatterns(headings: Array<{ title: string }>): string[] {
   return detectBannedHeadingPatternsImpl(headings);
 }
@@ -3117,6 +3120,12 @@ async function callGemini(
         // RECITATION(safetySettings 무시)이나 잔여 SAFETY는 프롬프트 증강으로 회복
         if (error instanceof GeminiEmptyResponseError) {
           lastError = error;
+          if (!allowPaidEmptyResponseRetry) {
+            throw new Error(
+              `${buildGeminiEmptyResponseUserMessage(modelName)}\n` +
+              '추가 비용을 막기 위해 빈 응답 자동 재호출은 실행하지 않았습니다.',
+            );
+          }
 
           // 프롬프트 증강 시도 (최대 2회 — 1회: 가드 추가, 2회: 더 강한 가드 + temp 상승)
           if (promptAugmentationCount < MAX_PROMPT_AUGMENTATIONS) {
@@ -3569,11 +3578,19 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         );
       }
 
+      const isBillableEmptyResponse =
+        errorMessage.includes('빈 응답') || errorMessage.includes('empty');
+      if (isBillableEmptyResponse && !allowPaidEmptyResponseRetry) {
+        throw new Error(
+          `Perplexity가 빈 응답을 반환했습니다. 추가 비용을 막기 위해 자동 재호출하지 않았습니다. 원본 오류: ${lastError.message}`,
+        );
+      }
+
       const isRetryable =
         errorMessage.includes('500') || errorMessage.includes('502') || errorMessage.includes('503') ||
         errorMessage.includes('server error') || errorMessage.includes('internal') ||
         errorMessage.includes('timeout') || errorMessage.includes('시간 초과') ||
-        errorMessage.includes('빈 응답') || errorMessage.includes('empty') ||
+        (isBillableEmptyResponse && allowPaidEmptyResponseRetry) ||
         errorMessage.includes('network') || errorMessage.includes('fetch') ||
         errorMessage.includes('econnreset') || errorMessage.includes('econnrefused');
       if (isRetryable && transientRetryCount < maxTransientRetries) {
@@ -4304,13 +4321,21 @@ async function callClaude(
         }
 
         // 4) 재시도 가능한 에러 → 대기 후 재시도 (같은 모델)
+        const isBillableEmptyResponse =
+          errorMessage.includes('비어 있습니다') || errorMessage.includes('empty');
+        if (isBillableEmptyResponse && !allowPaidEmptyResponseRetry) {
+          throw new Error(
+            `Claude가 빈 응답을 반환했습니다. 추가 비용을 막기 위해 자동 재호출하지 않았습니다. 원본 오류: ${(error as Error).message}`,
+          );
+        }
+
         const isRetryable =
           errorMessage.includes('overloaded') ||
           errorMessage.includes('529') || // Anthropic overloaded
           errorMessage.includes('500') || errorMessage.includes('502') || errorMessage.includes('503') ||
           errorMessage.includes('server error') || errorMessage.includes('internal error') ||
           errorMessage.includes('시간 초과') || errorMessage.includes('timeout') ||
-          errorMessage.includes('비어 있습니다') || errorMessage.includes('empty') ||
+          (isBillableEmptyResponse && allowPaidEmptyResponseRetry) ||
           errorMessage.includes('network') || errorMessage.includes('fetch') ||
           errorMessage.includes('econnreset') || errorMessage.includes('econnrefused');
 
@@ -5101,7 +5126,7 @@ async function generateStructuredContentInternal(
       : costPolicy.maxAttempts;
   const sameEngineReliabilityMinAttempts = isV3Prompt || isAgentProvider
     ? 0
-    : readNonNegativeIntegerEnv('CONTENT_SAME_ENGINE_MIN_ATTEMPTS', 1);
+    : readNonNegativeIntegerEnv('CONTENT_SAME_ENGINE_MIN_ATTEMPTS', 0);
   const promptRepairMinAttempts = 0;
   const generationQualityMode = String(source.contentMode || 'seo');
   const qualityTargetMinAttempts = 0;

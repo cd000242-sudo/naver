@@ -20,6 +20,7 @@ import {
     resolveBatchImageDirectory,
     type BatchImageDestination,
 } from './imageDownloadPathPolicy.js';
+import { summarizeBatchImageDownloads } from './imageDownloadResultPolicy.js';
 
 export function registerImageDownloadHandlers(): void {
     ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string, category?: string) => {
@@ -325,13 +326,20 @@ export function registerImageDownloadHandlers(): void {
                 savedImages.push(r);
             }
 
-            const successCount = results.filter(r => r !== null).length;
-            const failCount = images.length - successCount;
+            const summary = summarizeBatchImageDownloads(results, images.length);
 
-            console.log(`[Main] 📊 다운로드 결과: 성공 ${successCount}개, 실패 ${failCount}개`);
+            console.log(`[Main] 📊 다운로드 결과: 성공 ${summary.successCount}개, 실패 ${summary.failCount}개`);
 
-            const response = { success: true, savedImages, folderPath: imagesPath };
-            if ((response.savedImages?.length ?? 0) > 0 && (await isFreeTierUser())) {
+            const response = {
+                success: summary.success,
+                partial: summary.partial,
+                successCount: summary.successCount,
+                failCount: summary.failCount,
+                savedImages,
+                folderPath: imagesPath,
+                ...(summary.success ? {} : { error: '이미지를 저장하지 못했습니다.' }),
+            };
+            if (summary.shouldConsumeQuota && (await isFreeTierUser())) {
                 await consumeQuota('media', 1);
             }
             return response;
