@@ -235,6 +235,8 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
   if (currentStructuredContent) {
     if (ftcEnabled && ftcText) {
       currentStructuredContent.ftcDisclosure = ftcText;
+    } else {
+      delete currentStructuredContent.ftcDisclosure;
     }
     payload.structuredContent = currentStructuredContent;
     // ✅ [2026-02-01 FIX] selectedTitle (패치된 제목)이 우선, 없으면 titleInput 사용

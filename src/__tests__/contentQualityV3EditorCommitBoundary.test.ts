@@ -414,14 +414,14 @@ describe('Content Quality V3 actual editor commit boundary', () => {
     )).resolves.toMatchObject({ title: prepared.initial.selectedTitle });
   });
 
-  it('rejects a custom FTC supplement before comparing its punctuation variant', async () => {
+  it('allows the exact user-authored FTC supplement at the beginning of the final DOM body', async () => {
     const prepared = await prepare();
     const customFtc = '이 글에는 사용자 지정 광고 고지 문구가 포함됩니다.';
     const candidate = makeCandidate(prepared.initial, {}, [
-      { kind: 'custom-ftc', text: `${customFtc}!` },
+      { kind: 'custom-ftc', text: customFtc },
     ], [], [], Object.freeze({
       title: prepared.initial.selectedTitle,
-      bodyText: `${makeVisibleBody(prepared.initial)}\n${customFtc}!`,
+      bodyText: `${customFtc}\n${makeVisibleBody(prepared.initial)}`,
       linkCards: Object.freeze([]),
       bareUrls: Object.freeze([]),
       externalAnchorUrls: Object.freeze([]),
@@ -432,7 +432,28 @@ describe('Content Quality V3 actual editor commit boundary', () => {
       prepared.store,
       prepared.payload,
       candidate,
-    )).rejects.toThrow('[content-quality-v3-publish-commit] invalid_candidate');
+    )).resolves.toBeUndefined();
+  });
+
+  it('rejects a punctuation-changed custom FTC supplement before the final click', async () => {
+    const prepared = await prepare();
+    const customFtc = '이 글에는 사용자 지정 광고 고지 문구가 포함됩니다.';
+    const candidate = makeCandidate(prepared.initial, {}, [
+      { kind: 'custom-ftc', text: customFtc },
+    ], [], [], Object.freeze({
+      title: prepared.initial.selectedTitle,
+      bodyText: `${customFtc}!\n${makeVisibleBody(prepared.initial)}`,
+      linkCards: Object.freeze([]),
+      bareUrls: Object.freeze([]),
+      externalAnchorUrls: Object.freeze([]),
+      opaqueVisualCount: 0,
+    }));
+
+    await expect(enforceContentQualityV3EditorCommit(
+      prepared.store,
+      prepared.payload,
+      candidate,
+    )).rejects.toThrow('[content-quality-v3-publish-commit] visible_body_mismatch');
     await expect(enforceContentQualityV3PublishPayload(
       prepared.store,
       prepared.payload,

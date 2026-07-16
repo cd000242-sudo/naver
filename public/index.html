@@ -1832,14 +1832,12 @@
                 <!-- ❌ 진행률 표시 제거됨 (이미 모달로 표시하므로 불필요) -->
                 <!-- unified-only-progress-container는 더 이상 사용하지 않음 -->
 
-                <!-- ✅ 생성된 글 목록 보기 (접기/펼치기 가능, 기본 펼침) - 반자동 편집 아래 배치 -->
-                <div id="unified-only-posts-list" class="field collapsible-section"
+                <!-- ✅ 생성된 글 보관함 (항상 펼침) - 반자동 편집 아래 배치 -->
+                <div id="unified-only-posts-list" class="field posts-library-shell"
                     style="display: block; margin-top: 2rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 0; border-radius: var(--radius-lg); border: 2px solid rgba(16, 185, 129, 0.3); margin-bottom: 2rem; overflow: hidden;">
 
-                    <!-- 접기/펼치기 헤더 -->
-                    <div id="posts-list-header"
-                        style="padding: 1rem 1.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1)); cursor: pointer; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(16, 185, 129, 0.2);"
-                        onclick="togglePostsListSection()">
+                    <div id="posts-list-header" class="posts-library-header"
+                        style="padding: 1rem 1.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1)); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(16, 185, 129, 0.2);">
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <span style="font-size: 1.5rem;">📚</span>
                             <span style="font-weight: 700; color: var(--text-strong); font-size: 1.1rem;">생성된 글
@@ -1847,21 +1845,17 @@
                             <span id="posts-count-badge"
                                 style="background: var(--primary); color: white; padding: 0.25rem 0.5rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">0</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="font-size: 0.85rem; color: var(--text-muted);" id="posts-list-toggle-hint">클릭하여
-                                접기</span>
-                            <span id="posts-list-toggle-icon"
-                                style="font-size: 1.25rem; transition: transform 0.3s; transform: rotate(180deg);">▼</span>
-                        </div>
+                        <span class="posts-library-status">저장된 글을 바로 불러와 이어서 편집하세요</span>
                     </div>
 
-                    <!-- 접히는 콘텐츠 영역 -->
-                    <div id="posts-list-content" style="display: block; padding: 1.5rem;">
-                        <div
+                    <div id="posts-list-content" class="posts-library-content" style="display: block; padding: 1.5rem;">
+                        <div class="posts-library-toolbar"
                             style="display: flex; align-items: center; justify-content: flex-end; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
                             <input type="text" id="posts-search-input" placeholder="🔍 제목 검색..."
+                                aria-label="생성된 글 제목 검색"
                                 style="padding: 0.5rem 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.875rem; background: var(--bg-primary); color: var(--text-strong); min-width: 150px;">
                             <select id="posts-filter-select"
+                                aria-label="생성된 글 필터"
                                 style="padding: 0.5rem 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.875rem; background: var(--bg-primary); color: var(--text-strong); cursor: pointer;">
                                 <option value="all">전체</option>
                                 <option value="with-images">이미지 있음</option>
@@ -1873,6 +1867,7 @@
                                 <option value="unpublished">미발행</option>
                             </select>
                             <select id="posts-sort-select"
+                                aria-label="생성된 글 정렬"
                                 style="padding: 0.5rem 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.875rem; background: var(--bg-primary); color: var(--text-strong); cursor: pointer;">
                                 <option value="newest">최신순</option>
                                 <option value="oldest">오래된순</option>
@@ -1903,12 +1898,13 @@
                                 style="padding: 0.5rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.875rem; cursor: pointer;">🔄
                                 새로고침</button>
                         </div>
-                        <div id="generated-posts-list"
-                            style="max-height: 500px; overflow-y: auto; background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light);">
+                        <div id="generated-posts-list" class="posts-library-list"
+                            style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light);">
                             <div
                                 style="color: var(--text-muted); font-style: italic; text-align: center; padding: 2rem;">
                                 생성된 글이 없습니다.</div>
                         </div>
+                        <div id="posts-load-status" class="posts-visually-hidden" role="status" aria-live="polite"></div>
                     </div>
                 </div>
 

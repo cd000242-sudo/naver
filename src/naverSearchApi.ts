@@ -10,6 +10,26 @@ import { loadConfig } from './configManager.js';
 import { isMaskedSecretValue } from './security/secretValueUtils.js';
 import { GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
 
+const UNSUPPORTED_SHOPPING_TITLE_EVIDENCE_PATTERN = /후기|리뷰|내돈내산|실사용|써보|사용기|체험기|솔직|최고|최저가|역대급|강력\s*추천|무조건|필수템|인생템|갓성비|가성비\s*갑|1위|품절\s*임박|오늘만/i;
+
+export const SHOPPING_TITLE_FALLBACK_KEYWORDS = Object.freeze([
+    '선택 기준', '구매 전 체크', '비교 기준', '어떤 분께 맞을까',
+]);
+
+export function filterShoppingTitleEvidenceSafeKeywords(keywords: readonly string[]): string[] {
+    return [...new Set(keywords.map(keyword => String(keyword || '').trim()))]
+        .filter(keyword => keyword.length >= 2 && !UNSUPPORTED_SHOPPING_TITLE_EVIDENCE_PATTERN.test(keyword));
+}
+
+export function sanitizeShoppingConnectFallbackTitle(title: string): string {
+    return String(title || '')
+        .replace(/(?:솔직\s*)?(?:후기|리뷰)|내돈내산|실사용|직접\s*써본|써보니|사용해보니|사용기|체험기/gi, ' ')
+        .replace(/최고|최저가|역대급|강력\s*추천|무조건|필수템|인생템|갓성비|가성비\s*갑|\b1위\b|품절\s*임박|오늘만/gi, ' ')
+        .replace(/\s+/g, ' ')
+        .replace(/^[\s,|·:\-]+|[\s,|·:\-]+$/g, '')
+        .trim();
+}
+
 // ==================== 타입 정의 ====================
 
 export interface NaverSearchConfig {
@@ -565,8 +585,7 @@ export async function getNaverAutocomplete(keyword: string): Promise<string[]> {
  * 3. 차별화 후킹 멘트 조합 (클릭 유도)
  * 4. 자연스러운 문장 구성
  * 
- * 예: "삼성 비스포크 AI콤보 세탁기건조기 일체형 1등급 화이트 WD80F25CHW"
- * → "삼성 비스포크 AI콤보 내돈내산 1년 사용 솔직후기 전기료 공개"
+ * 리뷰/실사용 근거를 받지 않는 경로이므로 후기·내돈내산 같은 체험 키워드는 만들지 않는다.
  */
 export async function generateShoppingConnectTitle(
     productName: string,
@@ -579,68 +598,26 @@ export async function generateShoppingConnectTitle(
     const cleanName = productName.trim();
 
     // ✅ 1. 핵심 제품명 추출 (모델번호, 색상, 등급 등 제거)
-    const coreProductName = extractCoreProductName(cleanName);
+    const extractedProductName = extractCoreProductName(cleanName);
+    const coreProductName = sanitizeShoppingConnectFallbackTitle(extractedProductName)
+        || sanitizeShoppingConnectFallbackTitle(cleanName)
+        || '상품';
     console.log(`[SEO] 핵심 제품명 추출: "${cleanName}" → "${coreProductName}"`);
 
-    // ✅ 2. 네이버 자동완성으로 세부키워드 가져오기 (1차)
-    let autocompleteKeywords: string[] = [];
-    try {
-        const autocompleteResults = await getNaverAutocomplete(coreProductName);
-        const coreWords = coreProductName.toLowerCase().split(/\s+/);
+    // 생성 본문의 근거를 받지 못하는 폴백 경로에서는 자동완성의 체험·성능 암시를
+    // 제목 사실처럼 승격하지 않는다. 비용과 네트워크 호출이 없는 판단형 문구만 쓴다.
+    const autocompleteKeywords: string[] = [];
 
-        for (const suggestion of autocompleteResults) {
-            let remaining = suggestion;
-            for (const word of coreWords) {
-                if (word.length >= 2) {
-                    remaining = remaining.replace(new RegExp(word, 'gi'), '').trim();
-                }
-            }
-            const keywords = remaining.split(/\s+/).filter(k =>
-                k.length >= 2 &&
-                !coreWords.includes(k.toLowerCase()) &&
-                !autocompleteKeywords.includes(k)
-            );
-            autocompleteKeywords.push(...keywords);
-        }
-        autocompleteKeywords = [...new Set(autocompleteKeywords)].slice(0, 8);
-        console.log(`[SEO] 자동완성 키워드 (1차): [${autocompleteKeywords.join(', ')}] (${autocompleteKeywords.length}개)`);
-    } catch (error) {
-        console.warn(`[SEO] 자동완성 실패: ${(error as Error).message}`);
-    }
-
-    // ✅ 3. 자동완성 키워드 부족 시 Gemini AI 폴백 (2차)
+    // ✅ 3. 자동완성이 부족하면 비용 없는 판단형 키워드로 결정론적 보충
     if (autocompleteKeywords.length < 3) {
-        console.log(`[SEO] 자동완성 키워드 부족 (${autocompleteKeywords.length}개) → Gemini AI 폴백 호출`);
-        try {
-            const geminiKeywords = await getSeoKeywordsWithGemini(coreProductName);
-            // 중복 제거 후 추가
-            for (const gk of geminiKeywords) {
-                if (!autocompleteKeywords.includes(gk) && !coreProductName.toLowerCase().includes(gk.toLowerCase())) {
-                    autocompleteKeywords.push(gk);
-                }
-            }
-            console.log(`[SEO] Gemini 보강 후 키워드: [${autocompleteKeywords.join(', ')}] (${autocompleteKeywords.length}개)`);
-        } catch (error) {
-            console.warn(`[SEO] Gemini 폴백 실패: ${(error as Error).message}`);
-        }
-    }
-
-    // ✅ 4. 그래도 부족하면 범용 SEO 키워드 풀에서 보충 (3차)
-    if (autocompleteKeywords.length < 3) {
-        console.log(`[SEO] 키워드 여전히 부족 (${autocompleteKeywords.length}개) → 범용 SEO 키워드 보충`);
-        const universalSeoKeywords = [
-            '후기', '추천', '비교', '장단점', '솔직후기', '실사용',
-            '가성비', '내돈내산', '총정리', '꿀팁', '사용법', '리뷰'
-        ];
-        // 랜덤 셔플 후 부족분 보충
-        const shuffled = universalSeoKeywords.sort(() => Math.random() - 0.5);
-        for (const uk of shuffled) {
+        console.log(`[SEO] 자동완성 키워드 부족 (${autocompleteKeywords.length}개) → 안전 키워드 보충`);
+        for (const uk of SHOPPING_TITLE_FALLBACK_KEYWORDS) {
             if (autocompleteKeywords.length >= 5) break;
             if (!autocompleteKeywords.includes(uk) && !coreProductName.toLowerCase().includes(uk.toLowerCase())) {
                 autocompleteKeywords.push(uk);
             }
         }
-        console.log(`[SEO] 범용 보충 후 키워드: [${autocompleteKeywords.join(', ')}] (${autocompleteKeywords.length}개)`);
+        console.log(`[SEO] 안전 키워드 보충 후: [${autocompleteKeywords.join(', ')}] (${autocompleteKeywords.length}개)`);
     }
 
     // ✅ 5. 100점 SEO 제목 조합
@@ -675,7 +652,8 @@ export async function generateShoppingConnectTitle(
         }
     }
 
-    console.log(`[SEO Title 100점] "${cleanName}" → "${finalTitle}" (키워드 ${keywordsInTitle.length}개 포함)`);
+    finalTitle = sanitizeShoppingConnectFallbackTitle(finalTitle).slice(0, 55).trim();
+    console.log(`[SEO Title 근거 안전 폴백] "${cleanName}" → "${finalTitle}" (판단 키워드 ${keywordsInTitle.length}개 포함)`);
     return finalTitle;
 }
 

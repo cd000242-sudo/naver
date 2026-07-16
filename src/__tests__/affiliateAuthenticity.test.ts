@@ -5,9 +5,30 @@ import {
   buildAffiliateAuthenticityContract,
   buildAffiliateTitleEvidenceDirective,
   classifyAffiliateEvidence,
+  resolveAffiliateContentLengthTarget,
 } from '../content/affiliateAuthenticity';
 
 describe('affiliate authenticity contract', () => {
+  it('keeps sparse spec-only shopping copy concise instead of padding it with repeated cautions', () => {
+    expect(resolveAffiliateContentLengthTarget({
+      title: '고요아 냉풍기 에어쿨러 이동식 에어컨',
+      rawText: '고요아 냉풍기 에어쿨러 이동식 에어컨 가격 239,000원',
+      productPrice: '239,000원',
+    }, 2500)).toBe(1300);
+
+    expect(resolveAffiliateContentLengthTarget({
+      rawText: '상세 제품 설명 '.repeat(130),
+      productSpec: '크기, 무게, 소비전력, 구성품, 소재, 작동 방식과 관리법 '.repeat(18),
+      productPrice: '239,000원',
+    }, 2500)).toBe(1300);
+
+    expect(resolveAffiliateContentLengthTarget({
+      rawText: '상품 상세 정보',
+      productSpec: '크기 320mm, 높이 680mm, 무게 4.8kg, 소비전력 65W, 물통 5L, 풍량 3단, 타이머 8시간, 구성품: 본체·리모컨',
+      productPrice: '239,000원',
+    }, 2500)).toBe(2500);
+  });
+
   it('사용자가 직접 입력한 경험만 first_party로 인정한다', () => {
     expect(classifyAffiliateEvidence({
       personalExperience: '퇴근 뒤 거실에서 일주일 동안 사용했고, 저속에서는 조용했지만 최고 단계는 소리가 컸어요.',

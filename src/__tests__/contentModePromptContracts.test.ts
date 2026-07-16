@@ -55,6 +55,19 @@ describe('콘텐츠 모드 프롬프트 계약', () => {
     expect(prompt).not.toContain('2주 정도 사용해봤어요');
   });
 
+  it('쇼핑커넥트는 사실 기반 구매 매력과 확인 문구 예산을 함께 강제한다', () => {
+    const reviewPrompt = read('prompts/affiliate/shopping_review.prompt');
+    const specPrompt = read('prompts/affiliate/shopping_spec_analysis.prompt');
+
+    for (const prompt of [reviewPrompt, specPrompt]) {
+      expect(prompt).toContain('문제 → 확인된 속성 → 생활상 이익');
+      expect(prompt).toContain('가장 잘 맞는 사람');
+      expect(prompt).toContain('확인 계열 표현은 글 전체 최대 2회');
+      expect(prompt).toContain('CTA는 마지막 1회');
+    }
+    expect(reviewPrompt).not.toContain('목표는 상품을 띄우는 글이 아니다');
+  });
+
   it('업체홍보는 광고법/의료광고법과 입력 연락처 보존을 강제한다', () => {
     const prompt = read('prompts/business/base.prompt');
     expect(prompt).toContain('입력된 값만 사용');

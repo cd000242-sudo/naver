@@ -11,6 +11,7 @@ import {
   resolveShoppingConnectQualityDisposition,
   validateShoppingConnectContent,
 } from '../contentShoppingConnectValidation.js';
+import { stripModelGeneratedShoppingDisclosures } from '../contentShoppingDisclosure.js';
 import { recoverContentQualityV3BodyHtml } from './finalizer.js';
 
 const AFFILIATE_AUTHENTICITY_TARGET_SCORE = 85;
@@ -77,12 +78,14 @@ function repairAffiliateHardFailures(
   content: Readonly<StructuredContent>,
   evidenceMode: AffiliateEvidenceMode,
 ): { content: StructuredContent; repaired: boolean } {
-  const selectedTitle = repairAffiliateTitle(content.selectedTitle, evidenceMode);
-  const body = removeHardAffiliateSentences(content.bodyPlain, evidenceMode);
-  const introduction = removeHardAffiliateSentences(content.introduction, evidenceMode);
-  const conclusion = removeHardAffiliateSentences(content.conclusion, evidenceMode);
+  const disclosureRepair = stripModelGeneratedShoppingDisclosures(content);
+  const workingContent = disclosureRepair.content;
+  const selectedTitle = repairAffiliateTitle(workingContent.selectedTitle, evidenceMode);
+  const body = removeHardAffiliateSentences(workingContent.bodyPlain, evidenceMode);
+  const introduction = removeHardAffiliateSentences(workingContent.introduction, evidenceMode);
+  const conclusion = removeHardAffiliateSentences(workingContent.conclusion, evidenceMode);
   let headingChanged = false;
-  const headings = content.headings.map((heading, index) => {
+  const headings = workingContent.headings.map((heading, index) => {
     const safeTitle = hasHardAffiliateIssue(heading.title, evidenceMode, true)
       ? `상품 정보 ${index + 1}`
       : heading.title;
@@ -94,31 +97,32 @@ function repairAffiliateHardFailures(
       content: safeContent.text || SAFE_AFFILIATE_BODY_FALLBACK,
     };
   });
-  const repaired = selectedTitle !== content.selectedTitle
+  const repaired = disclosureRepair.repaired
+    || selectedTitle !== workingContent.selectedTitle
     || body.changed
     || introduction.changed
     || conclusion.changed
     || headingChanged;
-  if (!repaired) return { content: content as StructuredContent, repaired: false };
+  if (!repaired) return { content: workingContent, repaired: false };
 
   const bodyPlain = body.text || SAFE_AFFILIATE_BODY_FALLBACK;
   return {
     repaired: true,
     content: {
-      ...content,
+      ...workingContent,
       selectedTitle,
       bodyPlain,
       bodyHtml: recoverContentQualityV3BodyHtml(bodyPlain),
       content: bodyPlain,
       introduction: introduction.changed
         ? (introduction.text || SAFE_AFFILIATE_BODY_FALLBACK)
-        : content.introduction,
+        : workingContent.introduction,
       conclusion: conclusion.text,
       headings,
       quality: {
-        ...content.quality,
+        ...workingContent.quality,
         warnings: Array.from(new Set([
-          ...(content.quality?.warnings || []),
+          ...(workingContent.quality?.warnings || []),
           AFFILIATE_LOCAL_REPAIR_WARNING,
         ])),
       },

@@ -14,6 +14,17 @@ import {
 // ✅ [v2.10.288] subImageMode import 제거 — line 10-12에 명시된 패턴 적용.
 //   렌더러 빌드 스크립트가 require()를 정규식 삭제 → subImageMode_1 is not defined 회귀 차단.
 type SubImageMode = 'ai' | 'collected';
+function sanitizeContinuousPostExternalUrl(value: unknown): string {
+  const raw = String(value ?? '').trim();
+  if (!raw || raw.length > 8_192) return '';
+  try {
+    const parsed = new URL(raw);
+    return /^https?:$/u.test(parsed.protocol) ? parsed.toString() : '';
+  } catch {
+    return '';
+  }
+}
+
 function getSubImageMode(): SubImageMode {
   try {
     const mode = resolvePipelineConfig('continuous').shopping.subImageMode;
@@ -2384,7 +2395,7 @@ export function initContinuousPublishingV2(): void {
     try {
       // 생성된 포스트 목록 로드
       const posts = loadGeneratedPosts();
-      const publishedPosts = posts.filter((p: any) => p.publishedUrl && p.publishedUrl.trim() !== '');
+      const publishedPosts = posts.filter((p: any) => sanitizeContinuousPostExternalUrl(p.publishedUrl));
 
       if (publishedPosts.length === 0) {
         toastManager.warning('발행된 이전 글이 없습니다. 먼저 글을 발행한 뒤 다시 시도하세요.');
@@ -2402,19 +2413,24 @@ export function initContinuousPublishingV2(): void {
               <button type="button" id="prev-post-modal-close" style="font-size: 1.5rem; border: none; background: transparent; color: var(--text-muted); cursor: pointer;">&times;</button>
             </div>
             <div style="padding: 1rem; max-height: 50vh; overflow-y: auto;">
-              ${publishedPosts.map((post: any) => `
-                <div class="prev-post-item" data-url="${post.publishedUrl}" data-title="${escapeHtml(post.title || '무제')}" 
+              ${publishedPosts.map((post: any) => {
+                const safeUrl = sanitizeContinuousPostExternalUrl(post.publishedUrl);
+                const safeTitle = escapeHtml(post.title || '무제');
+                const safeCategory = escapeHtml(categoryNames[post.category] || post.category || '일반');
+                return `
+                <div class="prev-post-item" data-url="${escapeHtml(safeUrl)}" data-title="${safeTitle}"
                   style="padding: 0.75rem; margin-bottom: 0.5rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer; transition: all 0.2s;"
                   onmouseover="this.style.borderColor='#3b82f6'; this.style.background='rgba(59, 130, 246, 0.1)';"
                   onmouseout="this.style.borderColor='var(--border-light)'; this.style.background='rgba(255,255,255,0.03)';">
                   <div style="font-weight: 600; color: var(--text-strong); font-size: 0.9rem; margin-bottom: 0.25rem;">
-                    📄 ${escapeHtml(post.title || '무제')}
+                    📄 ${safeTitle}
                   </div>
                   <div style="font-size: 0.75rem; color: var(--text-muted);">
-                    ${post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('ko-KR') : '발행일 없음'} | ${categoryNames[post.category] || post.category || '일반'}
+                    ${post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('ko-KR') : '발행일 없음'} | ${safeCategory}
                   </div>
                 </div>
-              `).join('')}
+              `;
+              }).join('')}
             </div>
           </div>
         </div>
@@ -2575,7 +2591,7 @@ async function showContinuousPrevPostModal(): Promise<void> {
     // loadGeneratedPosts()로 로컬 저장된 글 가져오기
     const allPosts = loadGeneratedPosts();
     // 발행된 글만 필터링 (publishedUrl이 있는 글)
-    const publishedPosts = allPosts.filter((p: any) => p.publishedUrl && p.publishedUrl.trim());
+    const publishedPosts = allPosts.filter((p: any) => sanitizeContinuousPostExternalUrl(p.publishedUrl));
 
     if (publishedPosts.length === 0) {
       // 발행된 글이 없으면 모든 글 표시
@@ -2594,15 +2610,19 @@ async function showContinuousPrevPostModal(): Promise<void> {
                                 <div style="padding: 0.5rem; background: var(--bg-tertiary); border-radius: 6px; margin-bottom: 0.75rem; font-size: 0.85rem; color: var(--text-muted);" >
               📝 총 ${allPosts.length}개 글(발행됨: ${publishedPosts.length}개)
                 </div>
-            ${postsToShow.slice(0, 20).map((p: any) => `
-                <div style="padding: 0.75rem; border-bottom: 1px solid var(--border-light); cursor: pointer; transition: background 0.2s;" class="prev-post-row" data-url="${p.publishedUrl || ''}" data-title="${(p.title || '').replace(/"/g, '&quot;')}">
-                    <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-strong);">${p.title || '(제목 없음)'}</div>
+            ${postsToShow.slice(0, 20).map((p: any) => {
+              const safeUrl = sanitizeContinuousPostExternalUrl(p.publishedUrl);
+              const safeTitle = escapeHtml(p.title || '(제목 없음)');
+              return `
+                <div style="padding: 0.75rem; border-bottom: 1px solid var(--border-light); cursor: pointer; transition: background 0.2s;" class="prev-post-row" data-url="${escapeHtml(safeUrl)}" data-title="${safeTitle}">
+                    <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-strong);">${safeTitle}</div>
                     <div style="font-size: 0.75rem; color: var(--text-muted);">
-                      ${p.publishedUrl ? '✅ 발행됨' : '⏳ 미발행'} | ${new Date(p.createdAt || Date.now()).toLocaleDateString('ko-KR')}
+                      ${safeUrl ? '✅ 발행됨' : '⏳ 미발행'} | ${new Date(p.createdAt || Date.now()).toLocaleDateString('ko-KR')}
                     </div>
-                    ${p.publishedUrl ? `<div style="font-size: 0.7rem; color: var(--primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.publishedUrl}</div>` : ''}
+                    ${safeUrl ? `<div style="font-size: 0.7rem; color: var(--primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(safeUrl)}</div>` : ''}
                 </div>
-            `).join('')
+            `;
+            }).join('')
       }
               </div>
                 `;

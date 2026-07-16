@@ -106,7 +106,7 @@ describe('SPEC-REVIEW-001 P0 — reviewGuard helpers', () => {
     expect(block).toContain('Type A');
     expect(block).toContain('입력 데이터 인벤토리');
     expect(block).toContain('독자 페르소나 후킹');
-    expect(block).toContain('외부 신뢰 이관');
+    expect(block).toContain('검증 필요 정보 이관');
     // Data inventory must list the supplied fields
     expect(block).toContain('스펙');
     expect(block).toContain('가격');

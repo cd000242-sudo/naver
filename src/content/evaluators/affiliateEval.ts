@@ -20,7 +20,7 @@ import { auditAffiliateAuthenticity } from '../affiliateAuthenticity';
 
 const USAGE_TONE = ['직접 써', '직접 사용', '사용해보', '써본', '겪어', '경험해', '체험', '실제로', '한 달', '일주일', '며칠'];
 const COMPARISON = ['비교', '대비', '차이', '장점', '단점', '아쉬운', '좋은 점', '나쁜 점', 'vs', '대신', '반면'];
-const CTA_WORDS = ['추천', '권', '구매', '확인', '알아보', '둘러보', '상품 페이지', '링크'];
+const CTA_WORDS = ['추천', '권', '구매', '후보', '비교해', '상품 페이지', '링크'];
 const SHOPPING_CLICHE = ['재구매', '배송 빨랐', '재구매 의사', '강추', '인생템', '갓성비', '5점 만점', '100% 만족', '강력 추천'];
 const RECOMMEND_TARGET = ['추천드려', '에게 추천', '이런 분', '하시는 분', '필요하신 분', '고민하시', '워킹맘', '직장인', '주부', '학생', '신혼', '어린이'];
 
@@ -130,8 +130,8 @@ export function evaluateAffiliate(input: EvaluationInput): SubScore {
     issues.push('CTA가 글 전반에만 배치 — 후반 강화 권장 (전환율 ↑)');
   } else {
     ctaScore = 3;
-    issues.push('CTA(추천/확인/구매) 표현 부재');
-    suggestions.push('글 마무리에 "~분께 추천", "확인해보세요" 같은 자연스러운 CTA 1~2회');
+    issues.push('CTA(적합 대상/구매 후보/비교 안내) 표현 부재');
+    suggestions.push('글 마지막에 가장 잘 맞는 독자에게 옵션과 최종가 비교를 1회 안내');
   }
   details.ctaPosition = ctaScore;
   total += ctaScore;

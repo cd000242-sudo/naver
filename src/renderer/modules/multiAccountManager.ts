@@ -11,6 +11,7 @@ import {
     resolveUsableShoppingReferenceSource,
 } from '../../image/shoppingReferenceGeneration.js';
 import { normalizePublishImageSequence } from '../../image/publishImageSequence.js';
+import { escapeHtml } from '../utils/htmlUtils.js';
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.initMultiAccountManager = initMultiAccountManager;
 exports.generateImagesForAutomation = generateImagesForAutomation;
@@ -26,6 +27,18 @@ const MULTI_ACCOUNT_UI_IMAGE_SOURCES = new Set(['dropshot', 'flow', 'imagefx']);
 const MULTI_ACCOUNT_SLOW_IMAGE_SOURCES = new Set(['nano-banana-pro', 'nano-banana-2', 'openai-image', 'leonardoai']);
 const FLOW_AUTOMATION_IMAGE_ITEM_TIMEOUT_MS = 7 * 60 * 1000;
 const FLOW_AUTOMATION_BATCH_MAX_TIMEOUT_MS = 18 * 60 * 1000;
+function sanitizeMultiAccountExternalUrl(value) {
+    const raw = String(value || '').trim();
+    if (!raw || raw.length > 8192)
+        return '';
+    try {
+        const parsed = new URL(raw);
+        return /^https?:$/u.test(parsed.protocol) ? parsed.toString() : '';
+    }
+    catch {
+        return '';
+    }
+}
 function isFlowAutomationProvider(provider) {
     return String(provider || '').trim() === 'flow';
 }
@@ -2264,15 +2277,19 @@ async function initMultiAccountPublishModal() {
           <div style="padding: 0.5rem; background: var(--bg-tertiary); border-radius: 6px; margin-bottom: 0.75rem; font-size: 0.85rem; color: var(--text-muted);">
             📝 총 ${allPosts.length}개 글 (발행됨: ${publishedPosts.length}개)
           </div>
-          ${postsToShow.slice(0, 20).map((p) => `
-            <div style="padding: 0.75rem; border-bottom: 1px solid var(--border-light); cursor: pointer; transition: background 0.2s;" class="ma-prev-post-row" data-url="${p.publishedUrl || ''}" data-title="${(p.title || '').replace(/"/g, '&quot;')}">
-              <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-strong);">${p.title || '(제목 없음)'}</div>
+          ${postsToShow.slice(0, 20).map((p) => {
+                const safeUrl = sanitizeMultiAccountExternalUrl(p.publishedUrl);
+                const safeTitle = escapeHtml(p.title || '(제목 없음)');
+                return `
+            <div style="padding: 0.75rem; border-bottom: 1px solid var(--border-light); cursor: pointer; transition: background 0.2s;" class="ma-prev-post-row" data-url="${escapeHtml(safeUrl)}" data-title="${safeTitle}">
+              <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-strong);">${safeTitle}</div>
               <div style="font-size: 0.75rem; color: var(--text-muted);">
-                ${p.publishedUrl ? '✅ 발행됨' : '⏳ 미발행'} | ${new Date(p.createdAt || Date.now()).toLocaleDateString('ko-KR')}
+                ${safeUrl ? '✅ 발행됨' : '⏳ 미발행'} | ${new Date(p.createdAt || Date.now()).toLocaleDateString('ko-KR')}
               </div>
-              ${p.publishedUrl ? `<div style="font-size: 0.7rem; color: var(--primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.publishedUrl}</div>` : ''}
+              ${safeUrl ? `<div style="font-size: 0.7rem; color: var(--primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(safeUrl)}</div>` : ''}
             </div>
-          `).join('')}
+          `;
+            }).join('')}
         </div>
       `;
             modal.querySelectorAll('.ma-prev-post-row').forEach(row => {
@@ -3240,6 +3257,7 @@ async function initMultiAccountPublishModal() {
                             addMALog(`⚖️ 공정위 문구 삽입됨 (${_ftcSource}): "${_ftcText.substring(0, 30)}..."`, 'info');
                         }
                         else {
+                            delete structuredContent.ftcDisclosure;
                             console.log(`[FullAuto] ⏭️ 공정위 문구 비활성 (모드='${queueItem.contentMode || 'seo'}', 결정근거=${_ftcSource})`);
                         }
                     }
@@ -3282,10 +3300,11 @@ async function initMultiAccountPublishModal() {
                         const isUrl = (str) => /^https?:\/\//i.test(str.trim());
                         const rawTitle = String(structuredContent.title || '').trim();
                         const rawSelectedTitle = String(structuredContent.selectedTitle || '').trim();
+                        const hasEvidenceBoundTitle = rawSelectedTitle.length >= 3 && !isUrl(rawSelectedTitle);
                         const productName = (!rawTitle || isUrl(rawTitle))
                             ? (isUrl(rawSelectedTitle) ? '' : rawSelectedTitle)
                             : rawTitle;
-                        if (productName && productName.length >= 3) {
+                        if (!hasEvidenceBoundTitle && productName && productName.length >= 3) {
                             try {
                                 addMALog('🔍 SEO 100점 제목 생성 중... (자동완성 키워드 3개 이상 조합)', 'info');
                                 const seoResult = await window.api.generateSeoTitle(productName);

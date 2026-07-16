@@ -53,6 +53,7 @@ export type ShoppingConnectValidationContent = {
   bodyPlain?: string;
   headings?: Array<{ title: string; content?: string }>;
   conclusion?: string;
+  ftcDisclosure?: string;
 };
 
 export interface ShoppingConnectValidationOptions {
@@ -115,12 +116,29 @@ export function validateShoppingConnectContent(
     feedback.push(`✅ 본문 ${totalChars}자`);
   }
 
-  const conclusionText = content.conclusion || '';
-  if (!conclusionText.includes('쇼핑커넥트') && !conclusionText.includes('수수료')) {
-    score -= 10;
-    feedback.push('⚠️ 쇼핑커넥트 고지 문구 누락');
+  const fullText = [content.bodyPlain || headingBody, content.conclusion || ''].join('\n');
+  const verificationCount = (fullText.match(/확인|상세\s*페이지|단정하기\s*어렵/gi) || []).length;
+  if (verificationCount > 2) {
+    score -= 25;
+    feedback.push(`⚠️ 확인 안내 반복 ${verificationCount}회 (가격 안내와 마지막 CTA 중심으로 축소 권장)`);
   } else {
-    feedback.push('✅ 쇼핑커넥트 고지 문구 포함');
+    feedback.push(`✅ 확인 안내 반복 없음 (${verificationCount}회)`);
+  }
+
+  const hasValueLink = /(?:구성|용량|크기|무게|방식|재질|기능|풍량|소비전력|타이머|단계).{0,70}(?:활용하기\s*편|편하|간편|쉬워|덜|줄여|절약|옮기|휴대|보관|관리|넉넉|빠르|쾌적|시원|따뜻|부담을\s*낮)|(?:활용하기\s*편|편하|간편|쉬운|덜|줄여|절약|옮기|휴대|보관|관리|넉넉|빠른|쾌적|시원|따뜻).{0,70}(?:사람|분|환경|공간|상황|사용)/i.test(fullText);
+  if (!hasValueLink) {
+    score -= 15;
+    feedback.push('⚠️ 제품 속성과 생활상 이익 연결 부족');
+  } else {
+    feedback.push('✅ 제품 속성과 생활상 이익 연결');
+  }
+
+  const disclosureText = String(content.ftcDisclosure || '').trim();
+  const hasDisclosure = disclosureText.length > 0;
+  if (!hasDisclosure) {
+    feedback.push('ℹ️ 공정위 문구는 글 생성문이 아닌 발행 설정에서 원문 그대로 별도 삽입');
+  } else {
+    feedback.push('✅ 사용자 설정 공정위 문구 삽입 경로 확인');
   }
 
   console.log(`[Shopping Connect] 📊 콘텐츠 품질 점수: ${score}/100`);

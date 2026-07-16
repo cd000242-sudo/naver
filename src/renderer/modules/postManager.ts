@@ -11,7 +11,12 @@ import { escapeHtml } from '../utils/htmlUtils.js';
 import { toFileUrlMaybe } from '../utils/headingKeyUtils.js';
 import { formatContentForPreview } from '../utils/textFormatUtils.js';
 import { getRequiredImageBasePath } from '../utils/imageHelpers.js';
-import { refreshGeneratedPostsList, loadGeneratedPostToFields } from './postListUI.js';
+import {
+  escapeGeneratedPostAttribute,
+  refreshGeneratedPostsList,
+  loadGeneratedPostToFields,
+  sanitizeGeneratedPostExternalUrl,
+} from './postListUI.js';
 import { normalizeImageForStorage } from '../utils/imageStorageNormalize.js';
 import { normalizeHashtags } from '../utils/hashtagUtils.js';
 
@@ -22,6 +27,15 @@ declare const ImageManager: any;
 declare const UnifiedDOMCache: any;
 declare function appendLog(msg: string): void;
 declare function readUnifiedCtasFromUi(): Array<{ text: string; link?: string }>;
+
+function resolveSafePreviewImageUrl(value: unknown): string {
+  const raw = String(value ?? '').trim();
+  if (!raw) return '';
+  const resolved = toFileUrlMaybe(raw);
+  if (/^file:\/\/\//iu.test(resolved)) return resolved;
+  if (/^data:image\/(?:png|jpe?g|webp|gif);base64,[a-z0-9+/=\s]+$/iu.test(resolved)) return resolved;
+  return sanitizeGeneratedPostExternalUrl(resolved);
+}
 
 // ═══════════════════════════════════════════════════════════════════
 // 카테고리 정규화 유틸리티
@@ -911,9 +925,12 @@ export function previewGeneratedPost(postId: string): void {
 
     // 썸네일 (첫 번째 이미지)
     const thumbnailImage = images.length > 0 ? images[0] : null;
-    const thumbnailHtml = thumbnailImage ? `
+    const thumbnailUrl = resolveSafePreviewImageUrl(
+      thumbnailImage?.previewDataUrl || thumbnailImage?.filePath || thumbnailImage?.url,
+    );
+    const thumbnailHtml = thumbnailUrl ? `
       <div style="margin-bottom: 1.5rem; text-align: center;">
-        <img src="${toFileUrlMaybe(thumbnailImage.previewDataUrl || thumbnailImage.filePath || thumbnailImage.url || '')}"
+        <img src="${escapeGeneratedPostAttribute(thumbnailUrl)}"
              style="max-width: 100%; max-height: 400px; border-radius: 8px; object-fit: contain;"
              onerror="this.style.display='none';">
       </div>
@@ -923,7 +940,7 @@ export function previewGeneratedPost(postId: string): void {
     const introduction = (post as any).introduction;
     const introHtml = introduction ? `
       <div style="margin-bottom: 2rem; line-height: 1.8; color: var(--text-strong);">
-        ${introduction.split('\n').map((p: string) => `<p style="margin-bottom: 0.75rem;">${p}</p>`).join('')}
+        ${String(introduction).split('\n').map((p: string) => `<p style="margin-bottom: 0.75rem;">${escapeHtml(p)}</p>`).join('')}
       </div>
     ` : '';
 
@@ -955,22 +972,25 @@ export function previewGeneratedPost(postId: string): void {
           heading.content || heading.summary || _fallbackChunks[index] || '';
         // 소제목 이미지 (썸네일 제외하고 인덱스+1)
         const headingImage = images[index + 1] || null;
+        const headingImageUrl = resolveSafePreviewImageUrl(
+          headingImage?.previewDataUrl || headingImage?.filePath || headingImage?.url,
+        );
 
         contentHtml += `
           <div style="margin-bottom: 2rem;">
             <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--primary); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--primary);">
-              ${headingTitle}
+              ${escapeHtml(String(headingTitle))}
             </h3>
-            ${headingImage ? `
+            ${headingImageUrl ? `
               <div style="margin-bottom: 1rem; text-align: center;">
-                <img src="${toFileUrlMaybe(headingImage.previewDataUrl || headingImage.filePath || headingImage.url || '')}"
+                <img src="${escapeGeneratedPostAttribute(headingImageUrl)}"
                      style="max-width: 100%; max-height: 350px; border-radius: 8px; object-fit: contain;"
                      onerror="this.style.display='none';">
               </div>
             ` : ''}
             ${headingContent ? `
               <div style="line-height: 1.8; color: var(--text-strong);">
-                ${headingContent.split('\n').map((p: string) => `<p style="margin-bottom: 0.75rem;">${p}</p>`).join('')}
+                ${String(headingContent).split('\n').map((p: string) => `<p style="margin-bottom: 0.75rem;">${escapeHtml(p)}</p>`).join('')}
               </div>
             ` : ''}
           </div>
@@ -985,7 +1005,7 @@ export function previewGeneratedPost(postId: string): void {
     const conclusion = (post as any).conclusion;
     const conclusionHtml = conclusion ? `
       <div style="margin-top: 2rem; padding: 1rem; background: var(--bg-tertiary); border-radius: 8px; line-height: 1.8; color: var(--text-strong);">
-        ${conclusion.split('\n').map((p: string) => `<p style="margin-bottom: 0.5rem;">${p}</p>`).join('')}
+        ${String(conclusion).split('\n').map((p: string) => `<p style="margin-bottom: 0.5rem;">${escapeHtml(p)}</p>`).join('')}
       </div>
     ` : '';
 
@@ -1004,7 +1024,7 @@ export function previewGeneratedPost(postId: string): void {
       <button type="button" class="close-preview-btn" style="position: absolute; top: 1rem; right: 1rem; background: var(--bg-tertiary); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 1.25rem; display: flex; align-items: center; justify-content: center;">×</button>
 
       <!-- 제목 -->
-      <h2 style="margin: 0 0 0.5rem 0; color: var(--text-strong); font-size: 1.75rem; padding-right: 2rem; line-height: 1.4;">${post.title || '(제목 없음)'}</h2>
+      <h2 style="margin: 0 0 0.5rem 0; color: var(--text-strong); font-size: 1.75rem; padding-right: 2rem; line-height: 1.4;">${escapeHtml(post.title || '(제목 없음)')}</h2>
       <div style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-light);">
         📅 ${dateStr} | 📄 ${post.content.length.toLocaleString()}자 | 🖼️ ${post.images?.length || 0}개 이미지
       </div>
@@ -1018,15 +1038,15 @@ export function previewGeneratedPost(postId: string): void {
       ${post.hashtags.length > 0 ? `
         <div style="margin-bottom: 1.5rem;">
           <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-            ${post.hashtags.map(tag => `<span style="background: var(--bg-tertiary); padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.875rem; color: var(--primary);">#${tag.replace(/^#/, '')}</span>`).join('')}
+            ${post.hashtags.map(tag => `<span style="background: var(--bg-tertiary); padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.875rem; color: var(--primary);">#${escapeHtml(String(tag).replace(/^#/, ''))}</span>`).join('')}
           </div>
         </div>
       ` : ''}
 
       <!-- 버튼 -->
       <div style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
-        <button type="button" class="load-from-preview-btn" data-post-id="${postId}" style="flex: 1; padding: 0.75rem; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">📂 불러오기</button>
-        ${post.publishedUrl ? `<button type="button" class="open-published-btn" data-url="${post.publishedUrl}" style="padding: 0.75rem 1.5rem; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔗 발행글 보기</button>` : ''}
+        <button type="button" class="load-from-preview-btn" data-post-id="${escapeGeneratedPostAttribute(postId)}" style="flex: 1; padding: 0.75rem; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">📂 불러오기</button>
+        ${sanitizeGeneratedPostExternalUrl(post.publishedUrl) ? `<button type="button" class="open-published-btn" data-url="${escapeGeneratedPostAttribute(sanitizeGeneratedPostExternalUrl(post.publishedUrl))}" style="padding: 0.75rem 1.5rem; background: #10b981; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">🔗 발행글 보기</button>` : ''}
         <button type="button" class="close-preview-btn" style="padding: 0.75rem 1.5rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 8px; cursor: pointer;">닫기</button>
       </div>
     </div>
@@ -1219,9 +1239,9 @@ function showImportPostsSelectionModal(importedPosts: GeneratedPost[]): void {
             <label style="display: flex; align-items: start; gap: 0.75rem; cursor: pointer;">
               <input type="checkbox" class="import-post-checkbox" data-index="${index}" checked style="margin-top: 0.25rem; width: 18px; height: 18px; cursor: pointer;">
               <div style="flex: 1;">
-                <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.25rem;">${post.title || '(제목 없음)'}</div>
+                <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.25rem;">${escapeHtml(post.title || '(제목 없음)')}</div>
                 <div style="font-size: 0.75rem; color: var(--text-muted);">
-                  📄 ${post.content.length.toLocaleString()}자 | 🖼️ ${post.images?.length || 0}개 | 📑 ${post.headings?.length || 0}개
+                  📄 ${String(post.content || '').length.toLocaleString()}자 | 🖼️ ${post.images?.length || 0}개 | 📑 ${post.headings?.length || 0}개
                 </div>
               </div>
             </label>
@@ -1392,7 +1412,7 @@ export function showPostSelectionModal(
     <div style="display:flex; gap: 0.5rem; align-items:center; margin-bottom: 0.75rem; flex-wrap: wrap;">
       <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">카테고리</div>
       <select id="post-category-filter" style="flex: 1; min-width: 180px; padding: 0.45rem 0.6rem; border-radius: 8px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong);">
-        <option value="${allCategoryKey}">전체</option>
+        <option value="${escapeGeneratedPostAttribute(allCategoryKey)}">전체</option>
         ${categories
       .map((k) => `<option value="${escapeHtml(k)}">${escapeHtml(getGeneratedPostCategoryLabel(k))}</option>`)
       .join('')}
@@ -1408,7 +1428,7 @@ export function showPostSelectionModal(
           <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
             <span style="font-size: 1.5rem; line-height: 1;">${post.publishedUrl ? '✅' : '⏳'}</span>
             <div style="flex: 1; min-width: 0;">
-              <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${post.title || '제목 없음'}</div>
+              <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(post.title || '제목 없음')}</div>
               <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.25rem;">
                 ${post.createdAt ? new Date(post.createdAt).toLocaleDateString('ko-KR') : '날짜 없음'}
                 ${post.publishedAt ? ' • 발행: ' + new Date(post.publishedAt).toLocaleDateString('ko-KR') : ''}
@@ -1419,7 +1439,7 @@ export function showPostSelectionModal(
               </div>
               ${post.publishedUrl ? `
                 <div style="font-size: 0.75rem; color: #10b981; background: rgba(16, 185, 129, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">
-                  🔗 ${post.publishedUrl.length > 50 ? post.publishedUrl.substring(0, 50) + '...' : post.publishedUrl}
+                  🔗 ${escapeHtml(post.publishedUrl.length > 50 ? post.publishedUrl.substring(0, 50) + '...' : post.publishedUrl)}
                 </div>
               ` : `
                 <div style="font-size: 0.75rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block;">

@@ -487,8 +487,6 @@ export function initContentModeHelpAndSmartPublish() {
     const previewSection = document.getElementById('unified-preview-section');
     const semiAutoSection = document.getElementById('unified-semi-auto-section');
     const postsListContent = document.getElementById('posts-list-content');
-    const postsListToggleIcon = document.getElementById('posts-list-toggle-icon');
-    const postsListToggleHint = document.getElementById('posts-list-toggle-hint');
 
     if (hasGeneratedContent) {
       if (previewSection) previewSection.style.display = 'block';
@@ -498,12 +496,10 @@ export function initContentModeHelpAndSmartPublish() {
       if (semiAutoSection) semiAutoSection.style.display = 'block';
     }
 
-    // 글 목록은 항상 접힌 상태
+    // 글 보관함은 사용자가 즉시 확인할 수 있도록 항상 펼친 상태를 유지합니다.
     const postsListContainer = document.getElementById('unified-only-posts-list');
     if (postsListContainer) postsListContainer.style.display = 'block';
-    if (postsListContent) postsListContent.style.display = 'none';
-    if (postsListToggleIcon) postsListToggleIcon.style.transform = 'rotate(0deg)';
-    if (postsListToggleHint) postsListToggleHint.textContent = '클릭하여 펼치기';
+    if (postsListContent) postsListContent.style.display = 'block';
   }
 
   // 발행 모드 드롭다운 변경 시 버튼 스타일 업데이트 (기존 호환)
@@ -588,7 +584,13 @@ export function initContentModeHelpAndSmartPublish() {
 
   // 초기 상태 설정
   setTimeout(() => {
-    syncPublishMode('full-auto');
+    const pendingMode = (window as any).__pendingPublishMode;
+    const selectedMode = (document.getElementById('publish-mode-top-select') as HTMLSelectElement | null)?.value;
+    const initialMode = pendingMode === 'semi-auto' || selectedMode === 'semi-auto'
+      ? 'semi-auto'
+      : 'full-auto';
+    syncPublishMode(initialMode);
+    delete (window as any).__pendingPublishMode;
   }, 1000);
 
   // 전역 함수로 노출 (다른 곳에서도 사용 가능)
@@ -634,25 +636,10 @@ export function initContentModeHelpAndSmartPublish() {
   console.log('[TabSwitch] Switched to:', tab);
 };
 
-// ✅ 생성된 글 목록 접기/펼치기 토글
+// 이전 번들과 인라인 호출을 위한 호환 함수. 글 보관함은 항상 펼칩니다.
 (window as any).togglePostsListSection = function (): void {
   const content = document.getElementById('posts-list-content');
-  const icon = document.getElementById('posts-list-toggle-icon');
-  const hint = document.getElementById('posts-list-toggle-hint');
-
-  if (!content || !icon || !hint) return;
-
-  const isCollapsed = content.style.display === 'none';
-
-  if (isCollapsed) {
-    content.style.display = 'block';
-    icon.style.transform = 'rotate(180deg)';
-    hint.textContent = '클릭하여 접기';
-  } else {
-    content.style.display = 'none';
-    icon.style.transform = 'rotate(0deg)';
-    hint.textContent = '클릭하여 펼치기';
-  }
+  if (content) content.style.display = 'block';
 };
 
 // ✅ 로그 섹션 접기/펼치기 토글

@@ -5,6 +5,7 @@
 
 import { extractDisplayUrl, validateBlobReferences } from '../utils/imageDisplayHelpers.js';
 import { normalizeHashtags } from '../utils/hashtagUtils.js';
+import { escapeHtml } from '../utils/htmlUtils.js';
 
 // ✅ renderer.ts의 전역 변수/함수 참조 (인라인 빌드에서 동일 스코프)
 declare let currentStructuredContent: any;
@@ -19,7 +20,6 @@ declare let isGalleryView: boolean;
 declare let currentPostId: string;
 declare function appendLog(msg: string): void;
 declare function autoAnalyzeHeadings(structuredContent: any): Promise<void>;
-declare function escapeHtml(str: string): string;
 declare function getScheduleDateFromInput(inputId: string): string | undefined;
 declare function loadGeneratedPosts(): any[];
 declare function loadAllGeneratedPosts(): any[];
@@ -27,8 +27,6 @@ declare function loadGeneratedPost(postId: string): any;
 declare function saveGeneratedPosts(posts: any[]): void;
 declare function normalizeGeneratedPostCategoryKey(key: string): string;
 declare function getGeneratedPostCategoryLabel(key: string): string;
-declare function isGeneratedPostCategoryCollapsed(key: string): boolean;
-declare function setGeneratedPostCategoryCollapsed(key: string, collapsed: boolean): void;
 declare function getRequiredImageBasePath(): Promise<string>;
 declare function updateUnifiedImagePreview(headings: any[], images: any[]): void;
 declare function displayGeneratedImages(images: any[]): void;
@@ -54,6 +52,46 @@ declare function _invalidatePostsCache(): void;
 
 let refreshInFlight = false;
 let refreshQueued = false;
+let generatedPostRenderGeneration = 0;
+const delegatedPostListContainers = new WeakSet<HTMLElement>();
+
+export const GENERATED_POST_RENDER_CHUNK_SIZE = 24;
+
+export function escapeGeneratedPostAttribute(value: unknown): string {
+  return String(value ?? '')
+    .replace(/&/gu, '&amp;')
+    .replace(/</gu, '&lt;')
+    .replace(/>/gu, '&gt;')
+    .replace(/"/gu, '&quot;')
+    .replace(/'/gu, '&#039;')
+    .replace(/[\r\n\t]/gu, ' ');
+}
+
+export function sanitizeGeneratedPostExternalUrl(value: unknown): string {
+  const raw = String(value ?? '').trim();
+  if (!raw || raw.length > 8_192) return '';
+  try {
+    const parsed = new URL(raw);
+    return /^https?:$/u.test(parsed.protocol) ? parsed.toString() : '';
+  } catch {
+    return '';
+  }
+}
+
+export function sanitizeGeneratedPostImageUrl(value: unknown): string {
+  const raw = String(value ?? '').trim();
+  if (!raw) return '';
+  if (/^data:image\/(?:png|jpe?g|webp|gif);base64,[a-z0-9+/=\s]+$/iu.test(raw)) return raw;
+  return sanitizeGeneratedPostExternalUrl(raw);
+}
+
+export function chunkGeneratedPostItems<T>(items: readonly T[]): T[][] {
+  const chunks: T[][] = [];
+  for (let index = 0; index < items.length; index += GENERATED_POST_RENDER_CHUNK_SIZE) {
+    chunks.push(items.slice(index, index + GENERATED_POST_RENDER_CHUNK_SIZE));
+  }
+  return chunks;
+}
 
 type GeneratedPostFieldData = {
   title?: unknown;
@@ -145,6 +183,7 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
   const countBadge = document.getElementById('posts-count-badge');
 
   if (!listContainer) return;
+  const renderGeneration = ++generatedPostRenderGeneration;
 
   // ✅ [2026-01-23 FIX] 모든 계정의 글을 표시 (계정별 분리로 인해 안 보이는 문제 해결)
   let posts = loadAllGeneratedPosts();
@@ -262,19 +301,24 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
     //   onerror에서 한 번 markBrokenImage 등록되면 다음 렌더부터 placeholder만 표시.
     const isBroken = rawThumbnail && typeof (window as any).isBrokenImage === 'function'
       ? (window as any).isBrokenImage(rawThumbnail) : false;
-    const thumbnailImage = isBroken ? null : rawThumbnail;
+    const thumbnailImage = isBroken ? '' : sanitizeGeneratedPostImageUrl(rawThumbnail);
     const highlightedTitle = highlightText(post.title || '(제목 없음)', searchTerm);
+    const safePostId = escapeGeneratedPostAttribute(post.id);
+    const publishedUrl = sanitizeGeneratedPostExternalUrl(post.publishedUrl);
+    const safePublishedUrl = escapeGeneratedPostAttribute(publishedUrl);
+    const safeThumbnailImage = escapeGeneratedPostAttribute(thumbnailImage);
+    const safeAriaTitle = escapeGeneratedPostAttribute(post.title || '제목 없는 글');
 
     const favBorder = post.isFavorite ? 'rgba(251,191,36,0.6)' : 'var(--border-light)';
     const restShadow = '0 1px 2px rgba(0,0,0,0.06), 0 6px 18px rgba(0,0,0,0.07)';
     return `
-        <div class="post-item-gallery" data-post-id="${post.id}" style="background: var(--bg-secondary); border-radius: 16px; border: 1px solid ${favBorder}; overflow: hidden; cursor: pointer; position: relative; box-shadow: ${restShadow}; transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s cubic-bezier(.2,.8,.2,1), border-color .2s;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 32px rgba(0,0,0,0.18)'; this.style.borderColor='var(--primary)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='${restShadow}'; this.style.borderColor='${favBorder}'">
-          <input type="checkbox" class="post-checkbox" data-post-id="${post.id}" style="position: absolute; top: 0.6rem; left: 0.6rem; width: 18px; height: 18px; cursor: pointer; z-index: 10; accent-color: var(--primary);" onchange="event.stopPropagation(); updateBatchDeleteButton();">
+        <div class="post-item-gallery" data-post-id="${safePostId}" style="background: var(--bg-secondary); border-radius: 16px; border: 1px solid ${favBorder}; overflow: hidden; cursor: pointer; position: relative; box-shadow: ${restShadow}; transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s cubic-bezier(.2,.8,.2,1), border-color .2s;" onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 12px 32px rgba(0,0,0,0.18)'; this.style.borderColor='var(--primary)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='${restShadow}'; this.style.borderColor='${favBorder}'">
+          <input type="checkbox" class="post-checkbox" data-post-id="${safePostId}" aria-label="${safeAriaTitle} 선택" style="position: absolute; top: 0.6rem; left: 0.6rem; width: 18px; height: 18px; cursor: pointer; z-index: 10; accent-color: var(--primary);">
           ${post.isFavorite ? '<div style="position: absolute; top: 0.5rem; right: 0.6rem; font-size: 1.25rem; z-index: 10; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.35));">⭐</div>' : ''}
-          ${post.publishedUrl ? (() => { const pm = (post as any).publishMode; const badgeBg = pm === 'draft' ? 'linear-gradient(135deg,#3b82f6,#2563eb)' : pm === 'schedule' ? 'linear-gradient(135deg,#8b5cf6,#7c3aed)' : 'linear-gradient(135deg,#10b981,#059669)'; const badgeText = pm === 'draft' ? '📝 임시발행' : pm === 'schedule' ? '📅 예약발행' : '✅ 발행됨'; return `<div style="position: absolute; top: 0.6rem; left: 2.1rem; background: ${badgeBg}; color: white; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 700; z-index: 10; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2);" onclick="event.stopPropagation(); window.open('${post.publishedUrl}', '_blank');">${badgeText}</div>`; })() : ''}
+          ${publishedUrl ? (() => { const pm = (post as any).publishMode; const badgeBg = pm === 'draft' ? 'linear-gradient(135deg,#3b82f6,#2563eb)' : pm === 'schedule' ? 'linear-gradient(135deg,#8b5cf6,#7c3aed)' : 'linear-gradient(135deg,#10b981,#059669)'; const badgeText = pm === 'draft' ? '📝 임시발행' : pm === 'schedule' ? '📅 예약발행' : '✅ 발행됨'; return `<button type="button" class="open-url-btn" data-url="${safePublishedUrl}" style="position: absolute; top: 0.6rem; left: 2.1rem; background: ${badgeBg}; color: white; padding: 0.25rem 0.6rem; border: 0; border-radius: 999px; font-size: 0.72rem; font-weight: 700; z-index: 10; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">${badgeText}</button>`; })() : ''}
           ${thumbnailImage ? `
-            <div class="thumbnail-container" style="position: relative; width: 100%; height: 200px; overflow: hidden; background: var(--bg-tertiary); cursor: pointer;" onclick="event.stopPropagation(); showImageModal('${thumbnailImage}');">
-              <img src="${thumbnailImage}" style="width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'" onerror="window.markBrokenImage&&window.markBrokenImage('${thumbnailImage}'); this.style.display='none'; this.parentElement.innerHTML='<div style=\\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--text-muted)\\'>🖼️</div>';" />
+            <div class="thumbnail-container" data-image-url="${safeThumbnailImage}" style="position: relative; width: 100%; height: 200px; overflow: hidden; background: var(--bg-tertiary); cursor: pointer;">
+              <img src="${safeThumbnailImage}" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'" onerror="window.markBrokenImage&&window.markBrokenImage(this.src); this.style.display='none';" />
               <div style="position:absolute; left:0; right:0; bottom:0; height:56px; background:linear-gradient(transparent, rgba(0,0,0,0.28)); pointer-events:none;"></div>
             </div>
           ` : '<div style="width: 100%; height: 200px; background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary)); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--text-muted);">📄</div>'}
@@ -286,9 +330,9 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
               <span style="background:var(--bg-tertiary); padding:0.2rem 0.55rem; border-radius:999px;">📑 ${post.headings?.length || 0}</span>
             </div>
             <div style="display: flex; gap: 0.45rem; flex-wrap: wrap;">
-              ${post.publishedUrl ? `<button type="button" class="open-url-btn" data-url="${post.publishedUrl}" style="flex: 1; padding: 0.55rem; background: linear-gradient(135deg,#10b981,#059669); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;" title="발행된 글 열기">🔗 바로가기</button>` : ''}
-              <button type="button" class="load-post-btn" data-post-id="${post.id}" style="flex: 1; padding: 0.55rem; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">📂 불러오기</button>
-              <button type="button" class="preview-post-btn" data-post-id="${post.id}" style="flex: 1; padding: 0.55rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 10px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">👁️ 미리보기</button>
+              ${publishedUrl ? `<button type="button" class="open-url-btn" data-url="${safePublishedUrl}" style="flex: 1; padding: 0.55rem; background: linear-gradient(135deg,#10b981,#059669); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;" title="발행된 글 열기">🔗 바로가기</button>` : ''}
+              <button type="button" class="load-post-btn" data-post-id="${safePostId}" style="flex: 1; padding: 0.55rem; background: var(--primary); color: white; border: none; border-radius: 10px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">📂 불러오기</button>
+              <button type="button" class="preview-post-btn" data-post-id="${safePostId}" style="flex: 1; padding: 0.55rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 10px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">👁️ 미리보기</button>
             </div>
           </div>
         </div>
@@ -316,7 +360,7 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
       : null;
 
     // ✅ [2026-02-04] post.content가 undefined일 경우 방어
-    const safeContent = post.content || '';
+    const safeContent = String(post.content || '');
     const contentPreview = safeContent.length > 100
       ? safeContent.substring(0, 100) + '...'
       : safeContent;
@@ -326,20 +370,26 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
     // [Phase 1-2/v2.10.135] 동일 패턴 — broken 등록된 경로는 <img> 스킵.
     const isBroken = rawThumbnail && typeof (window as any).isBrokenImage === 'function'
       ? (window as any).isBrokenImage(rawThumbnail) : false;
-    const thumbnailImage = isBroken ? null : rawThumbnail;
+    const thumbnailImage = isBroken ? '' : sanitizeGeneratedPostImageUrl(rawThumbnail);
 
     const highlightedTitle = highlightText(post.title || '(제목 없음)', searchTerm);
     const highlightedPreview = highlightText(contentPreview, searchTerm);
+    const safePostId = escapeGeneratedPostAttribute(post.id);
+    const publishedUrl = sanitizeGeneratedPostExternalUrl(post.publishedUrl);
+    const safePublishedUrl = escapeGeneratedPostAttribute(publishedUrl);
+    const safeThumbnailImage = escapeGeneratedPostAttribute(thumbnailImage);
+    const safeAriaTitle = escapeGeneratedPostAttribute(post.title || '제목 없는 글');
+    const safeHashtags = escapeHtml((post.hashtags || []).slice(0, 3).map(String).join(', '));
 
     return `
-      <div class="post-item" data-post-id="${post.id}" style="padding: 1.1rem 1.2rem; margin-bottom: 0.85rem; background: var(--bg-secondary); border-radius: 14px; border: 1px solid ${post.isFavorite ? 'rgba(251,191,36,0.6)' : 'var(--border-light)'}; box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 4px 14px rgba(0,0,0,0.05); transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, border-color .2s; cursor: pointer; position: relative;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 10px 26px rgba(59,130,246,0.18)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='${post.isFavorite ? 'rgba(251,191,36,0.6)' : 'var(--border-light)'}'; this.style.boxShadow='0 1px 2px rgba(0,0,0,0.05), 0 4px 14px rgba(0,0,0,0.05)'; this.style.transform='translateY(0)'">
-        <input type="checkbox" class="post-checkbox" data-post-id="${post.id}" style="position: absolute; top: 0.5rem; left: 0.5rem; width: 18px; height: 18px; cursor: pointer; z-index: 10;" onchange="event.stopPropagation(); updateBatchDeleteButton();">
+      <div class="post-item" data-post-id="${safePostId}" style="padding: 1.1rem 1.2rem; margin-bottom: 0.85rem; background: var(--bg-secondary); border-radius: 14px; border: 1px solid ${post.isFavorite ? 'rgba(251,191,36,0.6)' : 'var(--border-light)'}; box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 4px 14px rgba(0,0,0,0.05); transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, border-color .2s; cursor: pointer; position: relative;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 10px 26px rgba(59,130,246,0.18)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='${post.isFavorite ? 'rgba(251,191,36,0.6)' : 'var(--border-light)'}'; this.style.boxShadow='0 1px 2px rgba(0,0,0,0.05), 0 4px 14px rgba(0,0,0,0.05)'; this.style.transform='translateY(0)'">
+        <input type="checkbox" class="post-checkbox" data-post-id="${safePostId}" aria-label="${safeAriaTitle} 선택" style="position: absolute; top: 0.5rem; left: 0.5rem; width: 18px; height: 18px; cursor: pointer; z-index: 10;">
         ${post.isFavorite ? '<div style="position: absolute; top: 0.5rem; right: 0.5rem; font-size: 1.25rem;">⭐</div>' : ''}
-        ${post.publishedUrl ? (() => { const pm = (post as any).publishMode; const badgeBg = pm === 'draft' ? '#3b82f6' : pm === 'schedule' ? '#8b5cf6' : '#10b981'; const badgeText = pm === 'draft' ? '📝 임시발행됨' : pm === 'schedule' ? '📅 예약발행됨' : '✅ 발행됨'; return `<div style="position: absolute; top: 0.5rem; left: 2rem; background: ${badgeBg}; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; cursor: pointer;" onclick="event.stopPropagation(); window.open('${post.publishedUrl}', '_blank');" title="클릭하여 발행된 글 열기">${badgeText}</div>`; })() : ''}
+        ${publishedUrl ? (() => { const pm = (post as any).publishMode; const badgeBg = pm === 'draft' ? '#3b82f6' : pm === 'schedule' ? '#8b5cf6' : '#10b981'; const badgeText = pm === 'draft' ? '📝 임시발행됨' : pm === 'schedule' ? '📅 예약발행됨' : '✅ 발행됨'; return `<button type="button" class="open-url-btn" data-url="${safePublishedUrl}" style="position: absolute; top: 0.5rem; left: 2rem; background: ${badgeBg}; color: white; padding: 0.25rem 0.5rem; border: 0; border-radius: 4px; font-size: 0.75rem; font-weight: 600; cursor: pointer;" title="클릭하여 발행된 글 열기">${badgeText}</button>`; })() : ''}
         <div style="display: flex; align-items: start; justify-content: space-between; gap: 1rem;">
           ${thumbnailImage ? `
-            <div class="thumbnail-container" style="flex-shrink: 0; width: 128px; height: 86px; border-radius: 12px; overflow: hidden; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" onclick="event.stopPropagation(); showImageModal('${thumbnailImage}');">
-              <img src="${thumbnailImage}" style="width: 100%; height: 100%; object-fit: cover;" onerror="window.markBrokenImage&&window.markBrokenImage('${thumbnailImage}'); this.style.display='none'; this.parentElement.innerHTML='🖼️';" />
+            <div class="thumbnail-container" data-image-url="${safeThumbnailImage}" style="flex-shrink: 0; width: 128px; height: 86px; border-radius: 12px; overflow: hidden; background: var(--bg-tertiary); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+              <img src="${safeThumbnailImage}" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover;" onerror="window.markBrokenImage&&window.markBrokenImage(this.src); this.style.display='none';" />
             </div>
           ` : ''}
           <div style="flex: 1; min-width: 0;">
@@ -352,33 +402,26 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
               <span>📄 ${(post.content?.length || 0).toLocaleString()}자</span>
               <span>📑 ${post.headings?.length || 0}개 소제목</span>
               <span>🖼️ ${post.images?.length || 0}개 이미지</span>
-              ${(post.hashtags?.length || 0) > 0 ? `<span>🏷️ ${(post.hashtags || []).slice(0, 3).join(', ')}${(post.hashtags?.length || 0) > 3 ? '...' : ''}</span>` : ''}
-              ${post.publishedUrl ? (() => { const pm = (post as any).publishMode; const statusColor = pm === 'draft' ? '#3b82f6' : pm === 'schedule' ? '#8b5cf6' : '#10b981'; const statusText = pm === 'draft' ? '📝 임시발행됨' : pm === 'schedule' ? '📅 예약발행됨' : '✅ 발행됨'; return `<span style="color: ${statusColor}; cursor: pointer; text-decoration: underline;" onclick="event.stopPropagation(); window.open('${post.publishedUrl}', '_blank');" title="클릭하여 발행된 글 열기">${statusText}</span>`; })() : '<span style="color: var(--text-muted);">⏳ 미발행</span>'}
+              ${(post.hashtags?.length || 0) > 0 ? `<span>🏷️ ${safeHashtags}${(post.hashtags?.length || 0) > 3 ? '...' : ''}</span>` : ''}
+              ${publishedUrl ? (() => { const pm = (post as any).publishMode; const statusColor = pm === 'draft' ? '#3b82f6' : pm === 'schedule' ? '#8b5cf6' : '#10b981'; const statusText = pm === 'draft' ? '📝 임시발행됨' : pm === 'schedule' ? '📅 예약발행됨' : '✅ 발행됨'; return `<button type="button" class="open-url-btn" data-url="${safePublishedUrl}" style="color: ${statusColor}; cursor: pointer; text-decoration: underline; background: transparent; border: 0; padding: 0;" title="클릭하여 발행된 글 열기">${statusText}</button>`; })() : '<span style="color: var(--text-muted);">⏳ 미발행</span>'}
             </div>
           </div>
           <div style="display: flex; flex-direction: column; gap: 0.5rem; flex-shrink: 0;">
-            ${post.publishedUrl ? `<button type="button" class="open-url-btn" data-url="${post.publishedUrl}" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;" title="발행된 글 열기">🔗 바로가기</button>` : ''}
-            <button type="button" class="favorite-post-btn" data-post-id="${post.id}" style="padding: 0.5rem 1rem; background: ${post.isFavorite ? '#fbbf24' : 'var(--bg-tertiary)'}; color: ${post.isFavorite ? 'white' : 'var(--text-strong)'}; border: 1px solid var(--border-light); border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">${post.isFavorite ? '⭐ 즐겨찾기 해제' : '☆ 즐겨찾기'}</button>
-            <button type="button" class="load-post-btn" data-post-id="${post.id}" style="padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">📂 불러오기</button>
-            <button type="button" class="copy-post-btn" data-post-id="${post.id}" style="padding: 0.5rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">📋 복사</button>
-            <button type="button" class="preview-post-btn" data-post-id="${post.id}" style="padding: 0.5rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">👁️ 미리보기</button>
-            <button type="button" class="open-folder-btn" data-post-id="${post.id}" style="padding: 0.5rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap; display: ${post.images && post.images.length > 0 ? 'block' : 'none'};">📁 폴더 열기</button>
-            <button type="button" class="reuse-images-btn" data-post-id="${post.id}" style="padding: 0.5rem 1rem; background: #8b5cf6; color: white; border: none; border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap; display: ${post.images && post.images.length > 0 ? 'block' : 'none'};" title="이 글의 이미지를 현재 작업에 재사용">🖼️ 이미지 재사용</button>
-            <button type="button" class="delete-post-btn" data-post-id="${post.id}" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">🗑️ 삭제</button>
+            ${publishedUrl ? `<button type="button" class="open-url-btn" data-url="${safePublishedUrl}" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;" title="발행된 글 열기">🔗 바로가기</button>` : ''}
+            <button type="button" class="favorite-post-btn" data-post-id="${safePostId}" style="padding: 0.5rem 1rem; background: ${post.isFavorite ? '#fbbf24' : 'var(--bg-tertiary)'}; color: ${post.isFavorite ? 'white' : 'var(--text-strong)'}; border: 1px solid var(--border-light); border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">${post.isFavorite ? '⭐ 즐겨찾기 해제' : '☆ 즐겨찾기'}</button>
+            <button type="button" class="load-post-btn" data-post-id="${safePostId}" style="padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">📂 불러오기</button>
+            <button type="button" class="copy-post-btn" data-post-id="${safePostId}" style="padding: 0.5rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">📋 복사</button>
+            <button type="button" class="preview-post-btn" data-post-id="${safePostId}" style="padding: 0.5rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">👁️ 미리보기</button>
+            <button type="button" class="open-folder-btn" data-post-id="${safePostId}" style="padding: 0.5rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap; display: ${post.images && post.images.length > 0 ? 'block' : 'none'};">📁 폴더 열기</button>
+            <button type="button" class="reuse-images-btn" data-post-id="${safePostId}" style="padding: 0.5rem 1rem; background: #8b5cf6; color: white; border: none; border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap; display: ${post.images && post.images.length > 0 ? 'block' : 'none'};" title="이 글의 이미지를 현재 작업에 재사용">🖼️ 이미지 재사용</button>
+            <button type="button" class="delete-post-btn" data-post-id="${safePostId}" style="padding: 0.5rem 1rem; background: #ef4444; color: white; border: none; border-radius: 9px; cursor: pointer; font-size: 0.84rem; font-weight: 600; white-space: nowrap;">🗑️ 삭제</button>
           </div>
         </div>
       </div>
     `;
   };
 
-  // ✅ [2026-02-26] 계정별 > 카테고리별 2단계 그룹핑
-  const ACCOUNT_COLLAPSE_PREFIX = 'generated_posts_account_collapsed:';
-  const isAccountCollapsed = (accountKey: string): boolean =>
-    localStorage.getItem(`${ACCOUNT_COLLAPSE_PREFIX}${accountKey}`) === '1';
-  const setAccountCollapsed = (accountKey: string, collapsed: boolean): void =>
-    localStorage.setItem(`${ACCOUNT_COLLAPSE_PREFIX}${accountKey}`, collapsed ? '1' : '0');
-
-  // 계정별 분류
+  // 계정별 > 카테고리별 2단계 그룹핑. 모든 그룹은 항상 펼칩니다.
   const accountMap = new Map<string, any[]>();
   for (const p of posts) {
     const acctKey = (p.naverId || '').trim().toLowerCase() || '__unassigned__';
@@ -388,9 +431,6 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
   }
 
   const uniqueAccounts = Array.from(accountMap.keys());
-  const isMultiAccount = uniqueAccounts.length > 1 || (uniqueAccounts.length === 1 && uniqueAccounts[0] !== '__unassigned__' && accountMap.size > 0);
-
-  // 카테고리 그룹 생성 헬퍼
   const buildCategoryGroups = (acctPosts: any[]) => {
     const catGroups = new Map<string, any[]>();
     for (const p of acctPosts) {
@@ -401,7 +441,6 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
     }
     const entries = Array.from(catGroups.entries()).map(([key, items]) => ({
       key, label: getGeneratedPostCategoryLabel(key), items,
-      collapsed: isGeneratedPostCategoryCollapsed(key),
     }));
     entries.sort((a, b) => {
       if (a.key === 'uncategorized' && b.key !== 'uncategorized') return 1;
@@ -413,32 +452,34 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
     return entries;
   };
 
-  // 카테고리 HTML 렌더링 헬퍼
-  const renderCategoryGroupHtml = (g: { key: string; label: string; items: any[]; collapsed: boolean }) => {
-    const icon = g.collapsed ? '▶' : '▼';
-    const bodyStyle = g.collapsed ? 'display:none;' : 'display:block;';
-    const collapsedBodyHtml = `
-      <div class="posts-category-body" style="${bodyStyle}">
-        <div style="padding: 0.75rem 1rem; color: var(--text-muted); font-size: 0.85rem;">
-          접힌 글 ${g.items.length}개
-        </div>
-      </div>`;
-    const bodyHtml = g.collapsed
-      ? collapsedBodyHtml
-      : isGalleryView
-      ? `<div class="posts-category-body" style="${bodyStyle}">
+  const pendingRenderGroups: Array<{ targetId: string; chunks: any[][] }> = [];
+  let renderGroupSequence = 0;
+  const renderCategoryGroupHtml = (g: { key: string; label: string; items: any[] }) => {
+    const chunks = chunkGeneratedPostItems(g.items);
+    const firstChunk = chunks.shift() || [];
+    const targetId = `posts-category-body-${renderGeneration}-${renderGroupSequence++}`;
+    if (chunks.length > 0) pendingRenderGroups.push({ targetId, chunks });
+    const renderItems = (items: any[]): string => items
+      .map(isGalleryView ? renderGalleryItem : renderListItem)
+      .join('');
+    const progressiveStatus = chunks.length > 0
+      ? `<div class="posts-progressive-status" role="status" aria-live="polite">나머지 글을 순서대로 불러오는 중...</div>`
+      : '';
+    const bodyHtml = isGalleryView
+      ? `<div class="posts-category-body" id="${targetId}">
            <div class="posts-category-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
-             ${g.items.map(renderGalleryItem).join('')}
+             ${renderItems(firstChunk)}
+             ${progressiveStatus}
            </div>
          </div>`
-      : `<div class="posts-category-body" style="${bodyStyle}">
-           ${g.items.map(renderListItem).join('')}
+      : `<div class="posts-category-body" id="${targetId}">
+           ${renderItems(firstChunk)}
+           ${progressiveStatus}
          </div>`;
     return `
-      <div class="posts-category-group" data-category-key="${escapeHtml(g.key)}" style="margin-bottom: 0.75rem;">
-        <div class="posts-category-header" data-category-key="${escapeHtml(g.key)}" style="display:flex; align-items:center; justify-content:space-between; gap: 0.75rem; padding: 0.6rem 0.9rem; border-radius: 8px; background: var(--bg-tertiary); border: 1px solid var(--border-light); cursor: pointer; user-select: none;">
+      <section class="posts-category-group" data-category-key="${escapeHtml(g.key)}" style="margin-bottom: 0.75rem;">
+        <div class="posts-category-header" style="display:flex; align-items:center; justify-content:space-between; gap: 0.75rem; padding: 0.6rem 0.9rem; border-radius: 8px; background: var(--bg-tertiary); border: 1px solid var(--border-light);">
           <div style="display:flex; align-items:center; gap: 0.6rem; min-width: 0;">
-            <span class="posts-category-toggle-icon" style="font-weight: 900; color: var(--text-strong);">${icon}</span>
             <div style="font-weight: 900; color: var(--text-strong); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(g.label)}</div>
           </div>
           <div style="display:flex; align-items:center; gap: 0.5rem; flex-shrink: 0;">
@@ -446,7 +487,7 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
           </div>
         </div>
         ${bodyHtml}
-      </div>`;
+      </section>`;
   };
 
   listContainer.style.display = 'block';
@@ -463,7 +504,6 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
       key: acctKey,
       label: acctKey === '__unassigned__' ? '📦 (계정 미지정)' : `📦 ${acctKey}`,
       posts: accountMap.get(acctKey) || [],
-      collapsed: isAccountCollapsed(acctKey),
     }));
     // 정렬: 미지정을 맨 뒤, 나머지는 글 수 내림차순
     accountEntries.sort((a, b) => {
@@ -473,176 +513,93 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
     });
 
     listContainer.innerHTML = accountEntries.map(acct => {
-      const acctIcon = acct.collapsed ? '▶' : '▼';
-      const acctBodyStyle = acct.collapsed ? 'display:none;' : 'display:block;';
       const catGroups = buildCategoryGroups(acct.posts);
-      const catHtml = acct.collapsed
-        ? `<div style="padding: 0.75rem 1rem; color: var(--text-muted); font-size: 0.85rem;">접힌 계정 글 ${acct.posts.length}개</div>`
-        : catGroups.map(renderCategoryGroupHtml).join('');
+      const catHtml = catGroups.map(renderCategoryGroupHtml).join('');
       return `
-        <div class="posts-account-group" data-account-key="${escapeHtml(acct.key)}" style="margin-bottom: 1.25rem;">
-          <div class="posts-account-header" data-account-key="${escapeHtml(acct.key)}" style="display:flex; align-items:center; justify-content:space-between; gap: 0.75rem; padding: 0.85rem 1rem; border-radius: 10px; background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08)); border: 1.5px solid rgba(59,130,246,0.25); cursor: pointer; user-select: none; margin-bottom: 0.5rem;">
+        <section class="posts-account-group" data-account-key="${escapeHtml(acct.key)}" style="margin-bottom: 1.25rem;">
+          <div class="posts-account-header" style="display:flex; align-items:center; justify-content:space-between; gap: 0.75rem; padding: 0.85rem 1rem; border-radius: 10px; background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08)); border: 1.5px solid rgba(59,130,246,0.25); margin-bottom: 0.5rem;">
             <div style="display:flex; align-items:center; gap: 0.6rem; min-width: 0;">
-              <span class="posts-account-toggle-icon" style="font-weight: 900; color: var(--primary);">${acctIcon}</span>
               <div style="font-weight: 900; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 1.05rem;">${escapeHtml(acct.label)}</div>
             </div>
             <div style="display:flex; align-items:center; gap: 0.5rem; flex-shrink: 0;">
               <span style="background: rgba(59,130,246,0.2); color: var(--primary); padding: 0.25rem 0.65rem; border-radius: 999px; font-size: 0.8rem; font-weight: 900;">${acct.posts.length}개</span>
             </div>
           </div>
-          <div class="posts-account-body" style="${acctBodyStyle} padding-left: 0.75rem;">
+          <div class="posts-account-body" style="padding-left: 0.75rem;">
             ${catHtml}
           </div>
-        </div>`;
+        </section>`;
     }).join('');
-
-    // 계정 헤더 접기/펼치기 이벤트
-    listContainer.querySelectorAll('.posts-account-header').forEach((headerEl) => {
-      headerEl.addEventListener('click', () => {
-        const acctKey = String((headerEl as HTMLElement).getAttribute('data-account-key') || '').trim();
-        if (!acctKey) return;
-        const groupEl = listContainer.querySelector(`.posts-account-group[data-account-key="${CSS.escape(acctKey)}"]`) as HTMLElement | null;
-        if (!groupEl) return;
-        const body = groupEl.querySelector('.posts-account-body') as HTMLElement | null;
-        const icon = groupEl.querySelector('.posts-account-toggle-icon') as HTMLElement | null;
-        if (!body) return;
-        const willCollapse = body.style.display !== 'none';
-        setAccountCollapsed(acctKey, willCollapse);
-        if (willCollapse) {
-          body.style.display = 'none';
-          if (icon) icon.textContent = '▶';
-        } else {
-          refreshGeneratedPostsList();
-        }
-      });
-    });
   }
 
-  // 카테고리 헤더 접기/펼치기 이벤트
-  listContainer.querySelectorAll('.posts-category-header').forEach((headerEl) => {
-    headerEl.addEventListener('click', () => {
-      const key = String((headerEl as HTMLElement).getAttribute('data-category-key') || '').trim();
-      if (!key) return;
-      const groupEl = listContainer.querySelector(`.posts-category-group[data-category-key="${CSS.escape(key)}"]`) as HTMLElement | null;
-      if (!groupEl) return;
-      const body = groupEl.querySelector('.posts-category-body') as HTMLElement | null;
-      const icon = groupEl.querySelector('.posts-category-toggle-icon') as HTMLElement | null;
-      if (!body) return;
-      const willCollapse = body.style.display !== 'none';
-      setGeneratedPostCategoryCollapsed(key, willCollapse);
-      if (willCollapse) {
-        body.style.display = 'none';
-        if (icon) icon.textContent = '▶';
-      } else {
-        refreshGeneratedPostsList();
-      }
-    });
-  });
-
   attachPostItemEventListeners(listContainer);
+
+  const scheduleProgressiveRender = (callback: () => void): void => {
+    const requestIdle = (window as any).requestIdleCallback as ((cb: () => void, options?: { timeout: number }) => number) | undefined;
+    if (typeof requestIdle === 'function') requestIdle(callback, { timeout: 120 });
+    else setTimeout(callback, 0);
+  };
+  const renderNextChunk = (): void => {
+    if (renderGeneration !== generatedPostRenderGeneration) return;
+    const pending = pendingRenderGroups.find(group => group.chunks.length > 0);
+    if (!pending) return;
+    const target = document.getElementById(pending.targetId);
+    const nextChunk = pending.chunks.shift() || [];
+    if (target && nextChunk.length > 0) {
+      const status = target.querySelector<HTMLElement>('.posts-progressive-status');
+      const html = nextChunk.map(isGalleryView ? renderGalleryItem : renderListItem).join('');
+      if (status) status.insertAdjacentHTML('beforebegin', html);
+      else target.insertAdjacentHTML('beforeend', html);
+      if (pending.chunks.length === 0) status?.remove();
+    }
+    scheduleProgressiveRender(renderNextChunk);
+  };
+  if (pendingRenderGroups.length > 0) scheduleProgressiveRender(renderNextChunk);
 }
 
 // ✅ 글 항목 이벤트 리스너 연결 (공통 함수)
 export function attachPostItemEventListeners(listContainer: HTMLElement): void {
-  // 글 항목 클릭 시 미리보기
-  listContainer.querySelectorAll('.post-item, .post-item-gallery').forEach(item => {
-    item.addEventListener('click', (e) => {
-      if ((e.target as HTMLElement).tagName === 'BUTTON' || (e.target as HTMLElement).tagName === 'INPUT') return;
-      const postId = (item as HTMLElement).getAttribute('data-post-id');
-      if (postId) previewGeneratedPost(postId);
-    });
+  if (delegatedPostListContainers.has(listContainer)) return;
+  delegatedPostListContainers.add(listContainer);
+
+  listContainer.addEventListener('change', (event) => {
+    const target = event.target as HTMLElement | null;
+    if (target?.closest('.post-checkbox')) updateBatchDeleteButton();
   });
 
-  // ✅ 일괄 선택 체크박스 이벤트
-  listContainer.querySelectorAll('.post-checkbox').forEach(checkbox => {
-    checkbox.addEventListener('change', (e) => {
-      e.stopPropagation();
-      updateBatchDeleteButton();
-    });
-  });
-
-  // 기존 이벤트 리스너들
-  listContainer.querySelectorAll('.favorite-post-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const postId = (e.target as HTMLElement).getAttribute('data-post-id');
-      if (postId) toggleFavoritePost(postId);
-    });
-  });
-
-  listContainer.querySelectorAll('.load-post-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const postId = (e.target as HTMLElement).getAttribute('data-post-id');
-      if (postId) loadGeneratedPostToFields(postId);
-    });
-  });
-
-  listContainer.querySelectorAll('.copy-post-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const postId = (e.target as HTMLElement).getAttribute('data-post-id');
-      if (postId) copyGeneratedPost(postId);
-    });
-  });
-
-  listContainer.querySelectorAll('.preview-post-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const postId = (e.target as HTMLElement).getAttribute('data-post-id');
-      if (postId) previewGeneratedPost(postId);
-    });
-  });
-
-  listContainer.querySelectorAll('.open-folder-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const postId = (e.target as HTMLElement).getAttribute('data-post-id');
-      if (postId) openPostImageFolder(postId);
-    });
-  });
-
-  // ✅ 발행된 글 바로가기 버튼 (외부 브라우저로 열기)
-  listContainer.querySelectorAll('.open-url-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const url = (e.target as HTMLElement).getAttribute('data-url');
-      if (url) {
-        window.api.openExternalUrl(url);
-      }
-    });
-  });
-
-  listContainer.querySelectorAll('.reuse-images-btn').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      const postId = (e.target as HTMLElement).getAttribute('data-post-id');
-      if (postId) {
-        await reusePostImages(postId);
-      }
-    });
-  });
-
-  listContainer.querySelectorAll('.delete-post-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const postId = (e.target as HTMLElement).getAttribute('data-post-id');
-      if (postId && confirm('이 글과 관련된 이미지 폴더도 함께 삭제됩니다. 정말 삭제하시겠습니까?')) {
+  listContainer.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement | null;
+    if (!target) return;
+    const thumbnail = target.closest<HTMLElement>('.thumbnail-container[data-image-url]');
+    if (thumbnail) {
+      event.stopPropagation();
+      const imageUrl = sanitizeGeneratedPostImageUrl(thumbnail.dataset.imageUrl);
+      if (imageUrl) showImageModal(imageUrl);
+      return;
+    }
+    const action = target.closest<HTMLElement>('button[data-post-id], button[data-url]');
+    if (action) {
+      event.stopPropagation();
+      const postId = action.dataset.postId || '';
+      if (action.classList.contains('favorite-post-btn') && postId) toggleFavoritePost(postId);
+      else if (action.classList.contains('load-post-btn') && postId) void loadGeneratedPostToFields(postId);
+      else if (action.classList.contains('copy-post-btn') && postId) copyGeneratedPost(postId);
+      else if (action.classList.contains('preview-post-btn') && postId) previewGeneratedPost(postId);
+      else if (action.classList.contains('open-folder-btn') && postId) openPostImageFolder(postId);
+      else if (action.classList.contains('reuse-images-btn') && postId) void reusePostImages(postId);
+      else if (action.classList.contains('open-url-btn') && action.dataset.url) window.api.openExternalUrl(action.dataset.url);
+      else if (action.classList.contains('delete-post-btn') && postId
+        && confirm('이 글과 관련된 이미지 폴더도 함께 삭제됩니다. 정말 삭제하시겠습니까?')) {
         deleteGeneratedPost(postId);
         refreshGeneratedPostsList();
       }
-    });
-  });
+      return;
+    }
 
-  // 썸네일 클릭 이벤트
-  listContainer.querySelectorAll('.thumbnail-container').forEach(container => {
-    container.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const img = container.querySelector('img');
-      if (img && img.src) {
-        showImageModal(img.src);
-      }
-    });
+    if (target.closest('input, a, .thumbnail-container')) return;
+    const item = target.closest<HTMLElement>('.post-item, .post-item-gallery');
+    const postId = item?.dataset.postId;
+    if (postId) previewGeneratedPost(postId);
   });
 }
 
@@ -1038,12 +995,80 @@ export function reconstructGeneratedPostStructuredContent(post: any): any {
   };
 }
 
+export function activateSemiAutoPublishEditor(): void {
+  (window as any).__pendingPublishMode = 'semi-auto';
+  document.querySelector<HTMLButtonElement>('[data-tab="unified"]')?.click();
+
+  const topSelect = document.getElementById('publish-mode-top-select') as HTMLSelectElement | null;
+  const bottomSelect = document.getElementById('publish-mode-select') as HTMLSelectElement | null;
+  if (topSelect) topSelect.value = 'semi-auto';
+  if (bottomSelect) bottomSelect.value = 'semi-auto';
+
+  const syncPublishMode = (window as any).syncPublishMode;
+  if (typeof syncPublishMode === 'function') {
+    syncPublishMode('semi-auto');
+  } else {
+    topSelect?.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  const semiAutoSection = document.getElementById('unified-semi-auto-section');
+  if (semiAutoSection) semiAutoSection.style.display = 'block';
+}
+
+let generatedPostLoadInFlight = false;
+
+function updateGeneratedPostLoadState(busy: boolean, message: string): void {
+  document.querySelectorAll<HTMLButtonElement>('.load-post-btn').forEach(button => {
+    button.disabled = busy;
+    button.setAttribute('aria-busy', busy ? 'true' : 'false');
+  });
+  const listContent = document.getElementById('posts-list-content');
+  if (listContent) listContent.setAttribute('aria-busy', busy ? 'true' : 'false');
+  const liveStatus = document.getElementById('posts-load-status');
+  if (liveStatus) liveStatus.textContent = message;
+}
+
+function finishGeneratedPostLoadState(message: string): void {
+  document.querySelectorAll<HTMLButtonElement>('.load-post-btn').forEach(button => {
+    button.disabled = false;
+    button.setAttribute('aria-busy', 'false');
+  });
+  const listContent = document.getElementById('posts-list-content');
+  if (listContent) listContent.setAttribute('aria-busy', 'false');
+  const liveStatus = document.getElementById('posts-load-status');
+  if (liveStatus) liveStatus.textContent = message;
+}
+
 export async function loadGeneratedPostToFields(postId: string): Promise<void> {
+  if (generatedPostLoadInFlight) {
+    updateGeneratedPostLoadState(true, '다른 글을 불러오는 중입니다. 잠시만 기다려 주세요.');
+    return;
+  }
+
+  generatedPostLoadInFlight = true;
+  updateGeneratedPostLoadState(true, '선택한 글을 반자동 편집 화면으로 불러오는 중입니다.');
+  let completionMessage = '글을 불러왔습니다. 반자동 편집 화면으로 이동했습니다.';
+  try {
+    await loadGeneratedPostToFieldsUnlocked(postId);
+  } catch (error) {
+    const message = (error as Error)?.message || '알 수 없는 오류';
+    completionMessage = `글을 불러오지 못했습니다: ${message}`;
+    appendLog(`⚠️ 생성된 글 불러오기 실패: ${message}`);
+    toastManager.error(`글을 불러오지 못했습니다: ${message}`);
+  } finally {
+    generatedPostLoadInFlight = false;
+    finishGeneratedPostLoadState(completionMessage);
+  }
+}
+
+async function loadGeneratedPostToFieldsUnlocked(postId: string): Promise<void> {
   const post = loadGeneratedPost(postId);
   if (!post) {
     alert('글을 찾을 수 없습니다.');
     return;
   }
+
+  activateSemiAutoPublishEditor();
 
   // ✅ 기존 콘텐츠 및 이미지 완전 초기화 (이전 글 데이터 충돌 방지)
   currentStructuredContent = null;
@@ -1080,6 +1105,16 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
     content: post.content,
     hashtags: restoredHashtags,
   }, post.id);
+
+  const focusEditor = () => {
+    const editor = document.getElementById('unified-semi-auto-section');
+    editor?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const titleInput = (document.getElementById('unified-generated-title')
+      || document.getElementById('unified-title')) as HTMLInputElement | null;
+    titleInput?.focus({ preventScroll: true });
+  };
+  if (typeof requestAnimationFrame === 'function') requestAnimationFrame(focusEditor);
+  else setTimeout(focusEditor, 0);
 
   // ✅ 이미지 불러오기 (저장된 이미지 경로 사용 및 검증)
   if (post.images && post.images.length > 0) {
@@ -1303,14 +1338,6 @@ export async function loadGeneratedPostToFields(postId: string): Promise<void> {
     if (ctaLinkInput) ctaLinkInput.value = (post as any).ctaLink || '';
     appendLog(`📎 CTA 복원: ${(post as any).ctaText}`);
   }
-
-  // ✅ 반자동 모드 섹션으로 스크롤
-  setTimeout(() => {
-    const semiAutoSection = document.getElementById('unified-semi-auto-section');
-    if (semiAutoSection) {
-      semiAutoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, 300);
 
   // ✅ 글 불러오기 완료 후 자동 소제목 분석
   if (structuredContent?.headings?.length > 0) {

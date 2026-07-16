@@ -11,7 +11,12 @@ export function formatContentForPreview(content: string): string {
     if (!content) return '<p style="color: var(--text-muted); font-style: italic;">본문 내용이 없습니다</p>';
 
     // ✅ 스마트 문단 분리
-    let processedContent = content;
+    let processedContent = String(content)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 
     // 1. 소제목 패턴 감지 및 줄바꿈 추가 (콜론으로 끝나는 짧은 문장)
     // 예: "정부, 쿠팡 사칭 피싱·스미싱 주의 경보 발령:" 

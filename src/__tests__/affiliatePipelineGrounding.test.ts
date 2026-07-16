@@ -5,6 +5,7 @@ import * as path from 'path';
 import { computeAffiliateTitleCriticalIssues } from '../contentTitleValidators';
 import { evaluateTitleQuality } from '../contentTitleEvaluator';
 import { buildModeBasedPrompt } from '../contentGenerator';
+import { buildSystemPromptFromHint } from '../promptLoader';
 
 const ROOT = path.resolve(__dirname, '..');
 const read = (relativePath: string): string => fs.readFileSync(path.join(ROOT, relativePath), 'utf8');
@@ -53,6 +54,28 @@ describe('affiliate pipeline grounding', () => {
     const jsonPrompt = read('contentJsonPromptFormat.ts');
     expect(jsonPrompt).toContain('[쇼핑커넥트 최종 출력 규칙]');
     expect(jsonPrompt).toContain('구매자 리뷰를 작성자 경험으로 바꾸지 않는다');
+  });
+
+  it('쇼핑 생성은 장문의 일반 SEO base 대신 전용 affiliate voice를 사용한다', () => {
+    const generator = read('contentGenerator.ts');
+    expect(generator).toContain("buildFullPrompt('affiliate'");
+    expect(generator).not.toContain("systemPromptResult = buildFullPrompt('seo', source.categoryHint");
+
+    const affiliateBase = buildSystemPromptFromHint('affiliate');
+    expect(affiliateBase).toContain('[AFFILIATE BASE — 근거 기반 구매 동행]');
+    expect(affiliateBase).not.toContain('10년 경력의 전문 블로그 콘텐츠 크리에이터');
+    expect(affiliateBase).toContain('모델은 공정위 문구를 생성·요약·수정·번역·반복하거나');
+  });
+
+  it('근거 검증을 마친 쇼핑 제목을 렌더러가 자동완성 제목으로 다시 덮지 않는다', () => {
+    const single = read('renderer/modules/contentGeneration.ts');
+    const publishing = read('renderer/modules/publishingHandlers.ts');
+    const multi = read('renderer/modules/multiAccountManager.ts');
+
+    expect(single).toContain('if (!hasEvidenceBoundTitle && productName');
+    expect(single).toContain('coreKeyword && !isShoppingConnectModeActive()');
+    expect(publishing).toContain('if (!hasEvidenceBoundTitle && productName');
+    expect(multi).toContain('if (!hasEvidenceBoundTitle && productName');
   });
 
   it('실제 사용 메모가 있으면 리뷰 0건이어도 spec 전용으로 잘못 강등하지 않는다', () => {

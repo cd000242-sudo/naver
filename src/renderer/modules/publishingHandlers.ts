@@ -516,10 +516,11 @@ export async function handleFullAutoPublish(): Promise<void> {
       const isUrl = (str: string) => /^https?:\/\//i.test(str.trim());
       const rawTitle = String(structuredContent.title || '').trim();
       const rawSelectedTitle = String(structuredContent.selectedTitle || '').trim();
+      const hasEvidenceBoundTitle = rawSelectedTitle.length >= 3 && !isUrl(rawSelectedTitle);
       const productName = (!rawTitle || isUrl(rawTitle))
         ? (isUrl(rawSelectedTitle) ? '' : rawSelectedTitle)
         : rawTitle;
-      if (productName && productName.length >= 3) {
+      if (!hasEvidenceBoundTitle && productName && productName.length >= 3) {
         try {
           modal.addLog(`📝 SEO 100점 제목 생성 중... (자동완성 키워드 3개 이상 조합)`);
           appendLog(`📝 SEO 제목 생성: 제품명="${productName}"`);

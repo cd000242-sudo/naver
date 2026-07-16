@@ -89,6 +89,69 @@ describe('Content Quality V3 affiliate guard', () => {
     expect(result.content.conclusion).not.toContain(unsafeSentence);
   });
 
+  it('removes model-authored disclosures while preserving the exact user FTC field', () => {
+    const userDisclosure = '[광고] 사용자가 직접 설정한 원문입니다.';
+    const modelDisclosure = '[광고] 이 글에는 제휴 링크가 포함될 수 있습니다.';
+    const commissionDisclosure = '쇼핑커넥트 활동으로 수수료가 발생할 수 있습니다.';
+    const result = evaluateContentQualityV3AffiliateGuard({
+      content: makeContent({
+        selectedTitle: '[광고] Product buying guide',
+        bodyPlain: `${modelDisclosure}\n${'Detailed product information. '.repeat(140)}`,
+        content: `${modelDisclosure}\n${'Detailed product information. '.repeat(140)}`,
+        introduction: `${commissionDisclosure}\nUseful introduction.`,
+        conclusion: commissionDisclosure,
+        headings: [
+          { title: '[광고] Key features', content: `${modelDisclosure}\nDetails`, summary: '', keywords: [], imagePrompt: '' },
+          { title: 'Who it suits', content: 'Details', summary: '', keywords: [], imagePrompt: '' },
+          { title: 'Checks before buying', content: 'Details', summary: '', keywords: [], imagePrompt: '' },
+        ],
+        ftcDisclosure: userDisclosure,
+      } as Partial<StructuredContent>),
+      source: { productSpec: 'weight 680g' },
+      minimumBodyChars: 1500,
+      authenticityRetryAvailable: false,
+      shoppingQualityRetryAvailable: false,
+    });
+
+    expect(result.action).toBe('accept');
+    if (result.action !== 'accept') throw new Error('expected accepted affiliate content');
+    expect(result.content.bodyPlain).not.toContain(modelDisclosure);
+    expect(result.content.selectedTitle).toBe('Product buying guide');
+    expect(result.content.content).not.toContain(modelDisclosure);
+    expect(result.content.introduction).not.toContain(commissionDisclosure);
+    expect(result.content.conclusion).not.toContain(commissionDisclosure);
+    expect(result.content.headings[0].content).not.toContain(modelDisclosure);
+    expect(result.content.headings[0].title).toBe('Key features');
+    expect((result.content as any).ftcDisclosure).toBe(userDisclosure);
+  });
+
+  it('sanitizes every title fallback when the selected title is only a disclosure', () => {
+    const disclosureOnlyTitle = '[광고] 이 글에는 제휴 링크가 포함될 수 있습니다.';
+    const result = evaluateContentQualityV3AffiliateGuard({
+      content: makeContent({
+        selectedTitle: disclosureOnlyTitle,
+        titleAlternatives: ['[광고] Alternative buying guide'],
+        titleCandidates: [
+          { text: '[광고] Candidate buying guide', score: 90, reasoning: 'grounded' },
+        ],
+        title: disclosureOnlyTitle,
+      } as Partial<StructuredContent>),
+      source: { productSpec: 'weight 680g' },
+      minimumBodyChars: 1500,
+      authenticityRetryAvailable: false,
+      shoppingQualityRetryAvailable: false,
+    });
+
+    expect(result.action).toBe('accept');
+    if (result.action !== 'accept') throw new Error('expected accepted affiliate content');
+    expect(result.content.selectedTitle).toBe('Candidate buying guide');
+    expect(result.content.titleCandidates.map(candidate => candidate.text))
+      .toEqual(['Candidate buying guide']);
+    expect(result.content.titleAlternatives).toEqual(['Alternative buying guide']);
+    expect((result.content as any).title).toBe('Candidate buying guide');
+    expect(JSON.stringify(result.content)).not.toContain('[광고]');
+  });
+
   it('requests a shopping-quality rewrite for a safe but structurally thin draft', () => {
     const result = evaluateContentQualityV3AffiliateGuard({
       content: makeContent({ bodyPlain: 'thin', headings: [], conclusion: '' }),
@@ -140,7 +203,7 @@ describe('Content Quality V3 affiliate guard', () => {
 
     expect(result.action).toBe('accept');
     if (result.action !== 'accept') throw new Error('expected accepted affiliate content');
-    expect((result.content.quality as any).shoppingValidation.score).toBe(90);
-    expect(result.content.quality.warnings).toContain('[쇼핑커넥트 검증] 품질 90/100');
+    expect((result.content.quality as any).shoppingValidation.score).toBe(75);
+    expect(result.content.quality.warnings).toContain('[쇼핑커넥트 검증] 품질 75/100');
   });
 });

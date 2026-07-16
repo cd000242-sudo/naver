@@ -225,10 +225,26 @@ function assertAllowedAdornments(candidate: EditorCommitCandidate): readonly str
   return Object.freeze(requiredFtcTexts);
 }
 
-function assertNoUserSupplements(candidate: EditorCommitCandidate): void {
+function assertAllowedUserSupplements(candidate: EditorCommitCandidate): readonly string[] {
   const value = ownValue(candidate, 'userSupplements');
   if (!Array.isArray(value) || value.length > 32) fail('invalid_candidate');
-  if (value.length > 0) fail('invalid_candidate');
+  if (value.length > 1) fail('invalid_candidate');
+  const requiredFtcTexts: string[] = [];
+  for (const supplement of value) {
+    if (!supplement || typeof supplement !== 'object' || Array.isArray(supplement)) {
+      fail('invalid_candidate');
+    }
+    const kind = ownValue(supplement, 'kind');
+    const text = readString(ownValue(supplement, 'text'));
+    if (
+      kind !== 'custom-ftc'
+      || !text.trim()
+      || text !== text.trim()
+      || text.length > 4_000
+    ) fail('invalid_candidate');
+    requiredFtcTexts.push(text);
+  }
+  return Object.freeze(requiredFtcTexts);
 }
 
 function readExternalLinkCards(candidate: EditorCommitCandidate): readonly Readonly<{
@@ -258,8 +274,10 @@ function readExternalLinkCards(candidate: EditorCommitCandidate): readonly Reado
 function assertVisibleSurface(
   candidate: EditorCommitCandidate,
 ): readonly string[] {
-  assertNoUserSupplements(candidate);
-  const requiredFtcTexts = assertAllowedAdornments(candidate);
+  const adornmentFtcTexts = assertAllowedAdornments(candidate);
+  const userFtcTexts = assertAllowedUserSupplements(candidate);
+  if (adornmentFtcTexts.length + userFtcTexts.length > 1) fail('invalid_candidate');
+  const requiredFtcTexts = Object.freeze([...adornmentFtcTexts, ...userFtcTexts]);
   const snapshot = readVisibleSnapshot(candidate);
   const article = projectionFromArticle(candidate.validatedArticle);
   if (!normalizedBytes(snapshot.title).equals(normalizedBytes(article.title))) {

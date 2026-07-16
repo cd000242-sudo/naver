@@ -3511,6 +3511,7 @@ async function executeBlogPublishing(structuredContent, generatedImages, formDat
         appendLog(`⚖️ 공정위 문구 설정됨 (${ftcSource}): "${ftcText.substring(0, 30)}..."`);
     }
     else {
+        delete structuredContent.ftcDisclosure;
         appendLog(`⏭️ 공정위 문구 비활성 (모드='${formData.contentMode || 'normal'}', 결정근거=${ftcSource})`);
     }
     const resolvedBlogCategoryName = String(formData.categoryName || '').trim() || undefined;

@@ -24,10 +24,13 @@ describe('generated post list performance policy', () => {
     expect(validateIndex).toBeGreaterThan(sortIndex);
   });
 
-  it('does not render every post card inside collapsed category/account groups', () => {
-    expect(code).toContain('collapsedBodyHtml');
-    expect(code).toContain('접힌 글 ${g.items.length}개');
-    expect(code).toContain('접힌 계정 글 ${acct.posts.length}개');
+  it('keeps account and category groups permanently expanded by product requirement', () => {
+    expect(code).not.toContain('collapsedBodyHtml');
+    expect(code).not.toContain('접힌 글 ${g.items.length}개');
+    expect(code).not.toContain('접힌 계정 글 ${acct.posts.length}개');
+    expect(code).toContain('모든 그룹은 항상 펼칩니다');
+    expect(code).toContain('GENERATED_POST_RENDER_CHUNK_SIZE = 24');
+    expect(code).toContain('delegatedPostListContainers');
   });
 
   it('escapes search terms before building highlight regex', () => {

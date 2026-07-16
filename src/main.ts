@@ -9168,6 +9168,7 @@ app.whenReady().then(async () => {
       debugLog('[Main] ⏳ 주기적 서버 동기화 시작 (5분 주기)...');
 
       // 2. 백그라운드 모드로 동기화 (다이얼로그 없음)
+      const noticeBeforeSync = latestActiveNotice;
       const syncResult = await performServerSync(true);
 
       // 3. 차단 사유 발생 시 강제 종료 절차 시작
@@ -9179,6 +9180,18 @@ app.whenReady().then(async () => {
         debugLog(`[Main] ⛔ 차단 사유 감지: ${syncResult.error}`);
         const reason = syncResult.error || 'SERVICE_DISABLED';
         await handleGracefulShutdown(reason);
+        return;
+      }
+
+      // 앱을 켜 둔 동안 운영자가 공지를 바꿔도 다음 실행까지 기다리지 않습니다.
+      // 동일 본문은 재전송하지 않아 모달 깜빡임을 방지합니다.
+      const hasNoticeState = Object.prototype.hasOwnProperty.call(syncResult, 'notice');
+      const changedNotice = String(syncResult.notice || '').trim();
+      if (hasNoticeState && changedNotice !== noticeBeforeSync && mainWindow && !mainWindow.isDestroyed()) {
+        mainWindow.webContents.send('app:show-notice', changedNotice);
+        debugLog(changedNotice
+          ? '[Main] Changed notice sent to renderer during periodic sync'
+          : '[Main] Notice clear state sent to renderer during periodic sync');
       }
     });
 

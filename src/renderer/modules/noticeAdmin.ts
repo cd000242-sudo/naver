@@ -17,6 +17,7 @@ type NoticeDisplayElements = {
 let pendingServerNotice = '';
 let serverNoticeRevision = 0;
 let activeNoticeFingerprint = '';
+let activeNoticeSource: 'local' | 'server' | null = null;
 let activeNoticeRequiresQuit = false;
 const closedNoticeFingerprints = new Set<string>();
 
@@ -51,21 +52,23 @@ function escapeHtml(s: string): string {
   return d.innerHTML;
 }
 
-function fingerprintNotice(source: 'local' | 'server', content: string, faq: FaqItem[] = []): string {
-  const value = `${source}\n${content}\n${JSON.stringify(faq)}`;
+function fingerprintNotice(content: string, faq: FaqItem[] = []): string {
+  const value = `${String(content || '').trim()}\n${JSON.stringify(faq)}`;
   let hash = 0x811c9dc5;
   for (let i = 0; i < value.length; i++) {
     hash ^= value.charCodeAt(i);
     hash = Math.imul(hash, 0x01000193);
   }
-  return `${source}:${(hash >>> 0).toString(16).padStart(8, '0')}`;
+  return `notice:${(hash >>> 0).toString(16).padStart(8, '0')}`;
 }
 
-function isDismissedToday(fingerprint: string, acceptLegacyDate: boolean): boolean {
+function isDismissedToday(fingerprint: string): boolean {
   if (closedNoticeFingerprints.has(fingerprint)) return true;
   try {
     const raw = localStorage.getItem(DISMISS_KEY) || '';
-    if (acceptLegacyDate && raw === todayStr()) return true;
+    // Legacy values only stored YYYY-MM-DD and therefore hid every notice for
+    // the day, including newly changed announcements. Only a fingerprinted
+    // dismissal may suppress a notice now.
     if (!raw.startsWith('{')) return false;
     const saved = JSON.parse(raw) as { date?: string; fingerprint?: string };
     return saved.date === todayStr() && saved.fingerprint === fingerprint;
@@ -204,8 +207,8 @@ function showLocalNoticeIfAny(): boolean {
   const notice = getNotice();
   const faq = getFaq();
   if (!notice.trim() && !faq.length) return false;
-  const fingerprint = fingerprintNotice('local', notice, faq);
-  if (isDismissedToday(fingerprint, true)) return false;
+  const fingerprint = fingerprintNotice(notice, faq);
+  if (isDismissedToday(fingerprint)) return false;
 
   const elements = getNoticeDisplayElements();
   if (!elements) return false;
@@ -222,6 +225,7 @@ function showLocalNoticeIfAny(): boolean {
   content.style.whiteSpace = 'normal';
   renderFaqDisplay(faqHost, faq);
   activeNoticeFingerprint = fingerprint;
+  activeNoticeSource = 'local';
   activeNoticeRequiresQuit = false;
   modal.style.display = 'flex';
   modal.setAttribute('aria-hidden', 'false');
@@ -230,27 +234,34 @@ function showLocalNoticeIfAny(): boolean {
 
 /** 공지가 있고 오늘 안 봤으면 센터에 표시. */
 export function showNoticeIfAny(): void {
-  // The in-app admin editor is the operator's explicit latest choice on this
-  // device. A stale server cache must not overwrite it after authentication.
-  if (hasLocalNotice()) {
-    showLocalNoticeIfAny();
+  // 서버의 현재 활성 공지가 최우선입니다. 과거 버전에서 저장된 로컬 공지/FAQ가
+  // 운영 공지를 가리는 회귀를 막고, 서버 공지가 없을 때만 로컬 공지를 사용합니다.
+  if (pendingServerNotice) {
+    showServerNotice(pendingServerNotice);
     return;
   }
-  if (pendingServerNotice) showServerNotice(pendingServerNotice);
+  if (hasLocalNotice()) showLocalNoticeIfAny();
 }
 
 export function showServerNotice(noticeContent: string): void {
   serverNoticeRevision += 1;
   pendingServerNotice = String(noticeContent || '').trim();
-  if (!pendingServerNotice) return;
-
-  if (hasLocalNotice()) {
-    showLocalNoticeIfAny();
+  if (!pendingServerNotice) {
+    if (activeNoticeSource === 'server') {
+      document.querySelectorAll<HTMLElement>('#notice-modal').forEach((candidate) => {
+        candidate.style.display = 'none';
+        candidate.setAttribute('aria-hidden', 'true');
+      });
+      activeNoticeFingerprint = '';
+      activeNoticeSource = null;
+      activeNoticeRequiresQuit = false;
+      if (hasLocalNotice()) showLocalNoticeIfAny();
+    }
     return;
   }
 
-  const fingerprint = fingerprintNotice('server', pendingServerNotice);
-  if (isDismissedToday(fingerprint, false)) return;
+  const fingerprint = fingerprintNotice(pendingServerNotice);
+  if (isDismissedToday(fingerprint)) return;
 
   const elements = getNoticeDisplayElements();
   if (!elements) return;
@@ -260,6 +271,7 @@ export function showServerNotice(noticeContent: string): void {
   content.style.whiteSpace = 'pre-wrap';
   faqHost.innerHTML = '';
   activeNoticeFingerprint = fingerprint;
+  activeNoticeSource = 'server';
   activeNoticeRequiresQuit = isMaintenanceNotice(pendingServerNotice);
   modal.style.display = 'flex';
   modal.setAttribute('aria-hidden', 'false');
@@ -286,6 +298,7 @@ function closeNotice(): void {
   const modal = getNoticeDisplayElements()?.modal || null;
   const dontShow = document.getElementById('notice-dont-show-today') as HTMLInputElement | null;
   const shouldForceQuit = activeNoticeRequiresQuit;
+  const closedSource = activeNoticeSource;
   activeNoticeRequiresQuit = false;
   if (activeNoticeFingerprint) closedNoticeFingerprints.add(activeNoticeFingerprint);
   if (dontShow?.checked) {
@@ -301,11 +314,16 @@ function closeNotice(): void {
     candidate.setAttribute('aria-hidden', 'true');
   });
   if (modal) { modal.style.display = 'none'; modal.setAttribute('aria-hidden', 'true'); }
+  activeNoticeFingerprint = '';
+  activeNoticeSource = null;
   const forceQuit = (window as any).api?.forceQuit;
   if (shouldForceQuit && typeof forceQuit === 'function') {
     void Promise.resolve(forceQuit()).catch((error) => {
       console.error('[Notice] maintenance shutdown failed:', error);
     });
+  }
+  if (closedSource === 'local' && pendingServerNotice) {
+    void Promise.resolve().then(() => showServerNotice(pendingServerNotice));
   }
 }
 

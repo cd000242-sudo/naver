@@ -65,6 +65,7 @@ import {
   buildAffiliateAuthenticityContract,
   buildAffiliateTitleEvidenceDirective,
   classifyAffiliateEvidence,
+  resolveAffiliateContentLengthTarget,
 } from './content/affiliateAuthenticity.js';
 import {
   buildEvidenceAndIntentFinalContract,
@@ -107,9 +108,11 @@ import {
   decideContentQualityV3Finalization,
   finalizeContentQualityV3Draft,
   materializeContentQualityV3ForLegacyConsumers,
+  recoverContentQualityV3BodyHtml,
 } from './contentQualityV3/finalizer.js';
 import { resolveContentQualityV3TitleContract } from './contentQualityV3/titleContract.js';
 import { evaluateContentQualityV3AffiliateGuard } from './contentQualityV3/affiliateGuard.js';
+import { stripModelGeneratedShoppingDisclosures } from './contentShoppingDisclosure.js';
 import {
   enforceContentQualityV3BusinessGuard as enforceSharedContentQualityV3BusinessGuard,
 } from './contentQualityV3/businessGuard.js';
@@ -2179,7 +2182,7 @@ export function buildModeBasedPrompt(
     const affiliateEvidence = classifyAffiliateEvidence(source);
     const reviewGuardOn = isReviewGuardEnabled();
 
-    systemPromptResult = buildFullPrompt('seo', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt, (source as any).hookHint, buildRecentWinnersBlock(source));
+    systemPromptResult = buildFullPrompt('affiliate', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt, (source as any).hookHint, buildRecentWinnersBlock(source));
 
     // ✅ .prompt 파일에서 쇼핑 프롬프트 로드 (articleType 기반 분기)
     // SPEC-REVIEW-001 option C: "사용후기" mode is logically inconsistent with
@@ -4981,6 +4984,13 @@ async function generateStructuredContentInternal(
   const userSelectedProvider = provider; // ✅ [2026-04-11] 사용자가 선택한 원래 엔진 보존 (폴백 방지용)
   // ✅ 기본 글자수: 3000자 (풍부한 내용 + 최적 분량, 양보다 질 최극상)
   let minChars = options.minChars ?? 2500; // ✅ [v1.4.14] 3000→2500 (출력 토큰 -15%, SEO 안전 1500자 이상 유지)
+  if (source.contentMode === 'affiliate') {
+    const evidenceSizedTarget = resolveAffiliateContentLengthTarget(source, minChars);
+    if (evidenceSizedTarget < minChars) {
+      console.log(`[ContentGenerator] 🛒 쇼핑 근거량 기반 분량 조정: ${minChars} → ${evidenceSizedTarget}자 (반복 경고문 방지)`);
+      minChars = evidenceSizedTarget;
+    }
+  }
 
   // ✅ [v2.7.27] Adaptive Limiter — 메인 스레드 lag 발생 시 동시성 자동 다운
   const { globalLimiter } = await import('./runtime/adaptiveLimiter.js');
@@ -6267,6 +6277,7 @@ async function generateStructuredContentInternal(
       const optimized = shouldRunLegacySemanticPostDraftMutation(promptVariant, 'optimize-for-viral')
         ? optimizeForViral(parsed, source)
         : parsed;
+      let finalStructuredContent = optimized;
 
       // ⚡ 과대광고 필터링 (AI 대신 후처리로 이동 - 타임아웃 방지)
       // V3에서는 광범위 치환(수치·의학·가격 표현 포함)이 사실 의미를 바꿀 수 있어 전체 스킵.
@@ -6859,10 +6870,18 @@ async function generateStructuredContentInternal(
         // ✅ [2026 100점] 쇼핑커넥트 모드: 금지 패턴 자동 검증
         const contentMode = source.contentMode || 'seo';
         if (contentMode === 'affiliate') {
+          const disclosureRepair = stripModelGeneratedShoppingDisclosures(optimized);
+          if (disclosureRepair.repaired) {
+            finalStructuredContent = {
+              ...disclosureRepair.content,
+              bodyHtml: recoverContentQualityV3BodyHtml(disclosureRepair.content.bodyPlain),
+            };
+            console.warn('[Shopping Connect] 모델이 생성한 공정위/제휴 고지 문구를 제거하고 사용자 설정 원문 경로를 유지합니다.');
+          }
           const evidenceMode = classifyAffiliateEvidence(source).mode;
           const authenticity = auditAffiliateAuthenticity({
-            title: optimized.selectedTitle,
-            body: optimized.bodyPlain,
+            title: finalStructuredContent.selectedTitle,
+            body: finalStructuredContent.bodyPlain,
             evidenceMode,
           });
 
@@ -6879,8 +6898,8 @@ async function generateStructuredContentInternal(
             console.warn(`[Shopping Authenticity] 쇼핑커넥트 진정성 경고 후 계속: ${authenticity.score}/100`);
           }
 
-          if (!optimized.quality) {
-            optimized.quality = {
+          if (!finalStructuredContent.quality) {
+            finalStructuredContent.quality = {
               aiDetectionRisk: 'low',
               legalRisk: 'safe',
               seoScore: 0,
@@ -6889,7 +6908,7 @@ async function generateStructuredContentInternal(
               warnings: [],
             };
           }
-          (optimized.quality as any).affiliateAuthenticity = {
+          (finalStructuredContent.quality as any).affiliateAuthenticity = {
             score: authenticity.score,
             evidenceMode,
             hardFail: authenticity.hardFail,
@@ -6897,7 +6916,7 @@ async function generateStructuredContentInternal(
           };
           console.log(`[Shopping Authenticity] 검수 완료: ${authenticity.score}/100 (${evidenceMode})`);
 
-          const validation = validateShoppingConnectContent(optimized, validationMinChars);
+          const validation = validateShoppingConnectContent(finalStructuredContent, validationMinChars);
           const shoppingQualityDisposition = resolveShoppingConnectQualityDisposition(validation.score);
           const shoppingQualityPublishable = shoppingQualityDisposition.qualityFloorReached;
           if (allowPaidPostGenerationRepair && !shoppingQualityPublishable && !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS) {
@@ -6915,8 +6934,8 @@ async function generateStructuredContentInternal(
               `[Shopping Connect] 쇼핑커넥트 품질 경고 후 계속: ${validation.score}/100`,
             );
           }
-          if (optimized.quality) {
-            (optimized.quality as any).shoppingValidation = {
+          if (finalStructuredContent.quality) {
+            (finalStructuredContent.quality as any).shoppingValidation = {
               score: validation.score,
               ...shoppingQualityDisposition,
               feedback: validation.feedback,
@@ -6930,8 +6949,8 @@ async function generateStructuredContentInternal(
             validation.feedback.forEach(f => console.log(`[Shopping Connect] ${f}`));
 
             // quality에 검증 결과 추가
-            if (!optimized.quality) {
-              optimized.quality = {
+            if (!finalStructuredContent.quality) {
+              finalStructuredContent.quality = {
                 aiDetectionRisk: 'low',
                 legalRisk: 'safe',
                 seoScore: 70,
@@ -6940,8 +6959,8 @@ async function generateStructuredContentInternal(
                 warnings: [],
               };
             }
-            optimized.quality.warnings = [
-              ...(optimized.quality.warnings || []),
+            finalStructuredContent.quality.warnings = [
+              ...(finalStructuredContent.quality.warnings || []),
               `[쇼핑커넥트 검증] 품질 ${validation.score}/100`,
               ...validation.feedback.filter(f => f.startsWith('❌') || f.startsWith('⚠️')),
             ];
@@ -6960,6 +6979,9 @@ async function generateStructuredContentInternal(
         }
 
         // ✅ 최종 구조화 및 클리닝 (이모지, [공지], ?: 등 제거)
+        if (finalStructuredContent !== optimized) {
+          return finalizeStructuredContent(finalStructuredContent, source, promptVariant);
+        }
         return finalizeStructuredContent(optimized, source, promptVariant);
       }
 

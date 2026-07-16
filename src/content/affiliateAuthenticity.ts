@@ -1,6 +1,8 @@
 export type AffiliateEvidenceMode = 'first_party' | 'review_synthesis' | 'spec_only';
 
 export interface AffiliateEvidenceInput {
+  readonly title?: unknown;
+  readonly rawText?: unknown;
   readonly personalExperience?: unknown;
   readonly productReviews?: unknown;
   readonly productSpec?: unknown;
@@ -144,6 +146,29 @@ function normaliseReviews(value: unknown): string[] {
     .slice(0, 20);
 }
 
+const CONCRETE_SPEC_UNIT_PATTERN = /\d+(?:[.,]\d+)?\s*(?:mm|cm|m|㎡|g|kg|ml|l|w|kw|v|mah|wh|db|hz|인치|단|단계|개|매|입|시간|분|초|개월|년|원|%)(?:\b|(?=\s|$|[가-힣]))/i;
+const TEXT_SPEC_VALUE_PATTERN = /(?:소재|재질|구성품?|방식|형태|색상|원산지|제조사|브랜드|호환|용도)\s*[:：=\-]?\s*([A-Za-z0-9가-힣][A-Za-z0-9가-힣·/+\-]{1,24})/i;
+const SPEC_LABEL_ONLY_PATTERN = /^(?:크기|사이즈|무게|중량|소비전력|전원|구성품?|소재|재질|방식|기능|용량|색상|관리법|작동 방식)$/i;
+
+function countUniqueConcreteEvidence(...values: unknown[]): number {
+  const facts = new Set<string>();
+  for (const value of values) {
+    const text = normaliseText(value);
+    const chunks = text
+      .split(/[\n\r,;|•·]+|(?<=[.!?])\s+/)
+      .map(chunk => chunk.replace(/\s+/g, ' ').trim())
+      .filter(chunk => chunk.length >= 3 && !SPEC_LABEL_ONLY_PATTERN.test(chunk));
+
+    for (const chunk of chunks) {
+      const textValueMatch = chunk.match(TEXT_SPEC_VALUE_PATTERN);
+      const hasTextValue = !!textValueMatch && !SPEC_LABEL_ONLY_PATTERN.test(textValueMatch[1] || '');
+      if (!CONCRETE_SPEC_UNIT_PATTERN.test(chunk) && !hasTextValue) continue;
+      facts.add(chunk.toLowerCase().replace(/[^a-z0-9가-힣%]+/g, ' ').trim());
+    }
+  }
+  return facts.size;
+}
+
 export function classifyAffiliateEvidence(input: AffiliateEvidenceInput): AffiliateEvidenceClassification {
   const personalExperience = meaningfulExperience(input.personalExperience);
   const reviews = normaliseReviews(input.productReviews);
@@ -159,6 +184,29 @@ export function classifyAffiliateEvidence(input: AffiliateEvidenceInput): Affili
     hasPrice: normaliseText(input.productPrice).length > 0,
     personalExperience,
   };
+}
+
+export function resolveAffiliateContentLengthTarget(
+  input: AffiliateEvidenceInput,
+  requestedMinChars: number,
+): number {
+  const requested = Math.max(1, Math.round(Number(requestedMinChars) || 1));
+  const evidence = classifyAffiliateEvidence(input);
+  if (evidence.mode !== 'spec_only') return requested;
+
+  const title = normaliseText(input.title);
+  const price = normaliseText(input.productPrice);
+  const spec = normaliseText(input.productSpec);
+  const rawText = normaliseText(input.rawText)
+    .replace(title, ' ')
+    .replace(price, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const concreteFactCount = countUniqueConcreteEvidence(spec, rawText);
+  if (concreteFactCount >= 6) return requested;
+  if (concreteFactCount >= 3) return Math.min(requested, 1800);
+  return Math.min(requested, 1300);
 }
 
 export function buildAffiliateTitleEvidenceDirective(input: AffiliateEvidenceInput): string {
@@ -217,6 +265,7 @@ ${modeInstruction}
 8. 최저가·오늘만·품절 임박·판매 1위·별점·무료배송·쿠폰은 입력에 명시돼도 시점이 바뀔 수 있으므로 본문에서 단정하지 않는다.
 9. 입력 가격은 수집 당시 판매 페이지 표시값이다. "현재 N원에 판매 중"으로 단정하지 말고 최신 가격·옵션·배송 조건을 결제 전에 확인하라고 말한다.
 10. 독자가 글을 읽고 "좋다는 말"이 아니라 "나한테 맞는지 판단할 근거"를 가져가게 한다.
+11. 허위 과장 없이 적합한 구매자의 구매 확신을 높인다. 제품의 확인된 속성을 생활상 이익과 연결하고, 가장 잘 맞는 사람을 구체적으로 좁힌다.
 
 ${titleDirective}`;
 }

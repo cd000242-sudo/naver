@@ -90,7 +90,7 @@ describe('notice admin runtime delivery', () => {
     expect(document.getElementById('notice-display-content')?.textContent).toBe('인증 직후 도착한 최신 공지');
   });
 
-  it('keeps the locally authored admin notice ahead of a stale server notice', async () => {
+  it('keeps the current server notice ahead of stale locally stored notice data', async () => {
     localStorage.setItem(
       'app_notice_html_v1',
       '<p style="color:#fbbf24"><strong>운영자가 저장한 최신 공지</strong></p>',
@@ -100,12 +100,11 @@ describe('notice admin runtime delivery', () => {
     module.showServerNotice('서버에 남아 있던 예전 공지');
 
     const content = document.getElementById('notice-display-content');
-    expect(content?.textContent).toContain('운영자가 저장한 최신 공지');
-    expect(content?.textContent).not.toContain('서버에 남아 있던 예전 공지');
-    expect(content?.querySelector('strong')).not.toBeNull();
+    expect(content?.textContent).toContain('서버에 남아 있던 예전 공지');
+    expect(content?.textContent).not.toContain('운영자가 저장한 최신 공지');
   });
 
-  it('does not replace a dismissed operator notice with a stale server notice', async () => {
+  it('falls back to an active server notice after the local operator notice was dismissed', async () => {
     localStorage.setItem('app_notice_html_v1', '<p>Operator notice</p>');
     const module = await import('../renderer/modules/noticeAdmin') as any;
     module.initNoticeAdmin();
@@ -113,8 +112,77 @@ describe('notice admin runtime delivery', () => {
     document.getElementById('notice-close-btn')?.click();
     module.showServerNotice('Stale server notice');
 
+    expect(document.getElementById('notice-modal')?.style.display).toBe('flex');
+    expect(document.getElementById('notice-display-content')?.textContent).toBe('Stale server notice');
+  });
+
+  it('replaces a visible local notice immediately when a current server notice arrives', async () => {
+    localStorage.setItem('app_notice_html_v1', '<p>Local notice</p>');
+    const module = await import('../renderer/modules/noticeAdmin') as any;
+    module.initNoticeAdmin();
+    module.showServerNotice('New server notice');
+
+    expect(document.getElementById('notice-modal')?.style.display).toBe('flex');
+    expect(document.getElementById('notice-display-content')?.textContent).toBe('New server notice');
+  });
+
+  it('does not let FAQ-only local state block a current server notice', async () => {
+    localStorage.setItem('app_faq_json_v1', JSON.stringify([{ q: 'old question', a: 'old answer' }]));
+    const module = await import('../renderer/modules/noticeAdmin') as any;
+
+    module.showServerNotice('Current server notice');
+
+    expect(document.getElementById('notice-display-content')?.textContent).toBe('Current server notice');
+    expect(document.getElementById('notice-faq-display')?.textContent).toBe('');
+  });
+
+  it('clears a disabled server notice and restores an available local notice', async () => {
+    localStorage.setItem('app_notice_html_v1', '<p>Local fallback notice</p>');
+    const module = await import('../renderer/modules/noticeAdmin') as any;
+    module.showServerNotice('Current server notice');
+
+    module.showServerNotice('');
+
+    expect(document.getElementById('notice-modal')?.style.display).toBe('flex');
+    expect(document.getElementById('notice-display-content')?.textContent).toBe('Local fallback notice');
+  });
+
+  it('does not reopen identical notice content just because its source changed', async () => {
+    localStorage.setItem('app_notice_html_v1', '<p>Same notice</p>');
+    const module = await import('../renderer/modules/noticeAdmin') as any;
+    module.initNoticeAdmin();
+    module.showServerNotice('<p>Same notice</p>');
+
+    document.getElementById('notice-close-btn')?.click();
+    await Promise.resolve();
+
     expect(document.getElementById('notice-modal')?.style.display).toBe('none');
-    expect(document.getElementById('notice-display-content')?.textContent).toBe('Operator notice');
+  });
+
+  it('preserves maintenance shutdown when the notice was queued behind a local notice', async () => {
+    localStorage.setItem('app_notice_html_v1', '<p>Local notice</p>');
+    const forceQuit = vi.fn();
+    (window as any).api.forceQuit = forceQuit;
+    const module = await import('../renderer/modules/noticeAdmin') as any;
+    module.initNoticeAdmin();
+    module.showServerNotice('서비스 점검으로 잠시 이용이 제한됩니다.');
+
+    document.getElementById('notice-close-btn')?.click();
+    await Promise.resolve();
+    document.getElementById('notice-confirm-btn')?.click();
+
+    expect(forceQuit).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not let a legacy date-only dismissal hide a newly changed notice', async () => {
+    localStorage.setItem('app_notice_html_v1', '<p>Changed operator notice</p>');
+    localStorage.setItem('app_notice_dismiss_date', new Date().toISOString().slice(0, 10));
+    const module = await import('../renderer/modules/noticeAdmin') as any;
+
+    module.showNoticeIfAny();
+
+    expect(document.getElementById('notice-modal')?.style.display).toBe('flex');
+    expect(document.getElementById('notice-display-content')?.textContent).toBe('Changed operator notice');
   });
 
   it('does not reopen a notice closed in this app session, but shows changed content', async () => {

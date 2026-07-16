@@ -655,7 +655,7 @@ export async function generateContentFromUrl(
     // ✅ [2026-03-15 FIX] coreKeyword가 URL이면 빈 문자열로 처리
     const _rawCoreKeyword = (keywords || '').split(',').map((k) => k.trim()).filter(Boolean)[0] || '';
     const coreKeyword = /^https?:\/\//i.test(_rawCoreKeyword) ? '' : _rawCoreKeyword;
-    if (!manualTitleOverride && coreKeyword) {
+    if (!manualTitleOverride && coreKeyword && !isShoppingConnectModeActive()) {
       const currentTitle = String(structuredContent.selectedTitle || structuredContent.title || '');
       // ✅ [2026-03-10 FIX] currentTitle이 URL이면 키워드 접두사 적용 건너뛰
       if (/^https?:\/\//i.test(currentTitle.trim())) {
@@ -674,7 +674,9 @@ export async function generateContentFromUrl(
       const _rawTitleForSeo = String(structuredContent.title || structuredContent.selectedTitle || '').trim();
       const _titleIsSeoUrl = /^https?:\/\//i.test(_rawTitleForSeo);
       const productName = _titleIsSeoUrl ? '' : _rawTitleForSeo;
-      if (productName && productName.length >= 3) {
+      const evidenceBoundTitle = String(structuredContent.selectedTitle || '').trim();
+      const hasEvidenceBoundTitle = evidenceBoundTitle.length >= 3 && !/^https?:\/\//i.test(evidenceBoundTitle);
+      if (!hasEvidenceBoundTitle && productName && productName.length >= 3) {
         try {
           appendLog(`📝 SEO 100점 제목 생성 중... (자동완성 키워드 3개 이상)`);
           const seoResult = await (window as any).api.generateSeoTitle(productName);
