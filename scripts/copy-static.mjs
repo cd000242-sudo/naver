@@ -187,6 +187,7 @@ try {
     'htmlUtils.js',
     'headingKeyUtils.js',
     'storageUtils.js',
+    'ftcModeTransition.js', // 공정위 문구는 사용자 소유 — 모드 변경 시 원문 보존
     'brokenImageRegistry.js',  // [Phase 1-2/v2.10.135] ERR_FILE_NOT_FOUND 영구 차단 — window.isBrokenImage/markBrokenImage 노출
     'dateUtils.js',
     'titleUtils.js',

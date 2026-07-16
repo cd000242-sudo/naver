@@ -788,7 +788,7 @@ export interface BloggerIdentity {
   forbiddenExpressions?: string[]; // ['대박', '충격', '미쳤어요']
 
   // 구매자 신뢰 4요소 (별도 레이어)
-  trustPrinciple?: string; // "광고는 항상 [광고] 표기, 단점도 솔직히"
+  trustPrinciple?: string; // "제휴 여부는 숨기지 않고 단점도 솔직히"
   comparisonHabit?: boolean; // 리뷰 시 비교 대상 언급 여부 (기본 true)
 }
 
@@ -810,7 +810,7 @@ export const DEFAULT_IDENTITY: BloggerIdentity = {
   avgSentenceLength: 'medium',
   negationStyle: 'soft',
   forbiddenExpressions: ['대박', '충격', '미쳤어요', '소름', '알아보겠습니다', '살펴보자'],
-  trustPrinciple: '광고는 [광고] 표기, 단점도 솔직히 쓰기',
+  trustPrinciple: '제휴 여부는 숨기지 않고 단점도 솔직히 쓰기',
   comparisonHabit: true,
 };
 
@@ -873,7 +873,8 @@ export function buildIdentityBlock(identity?: BloggerIdentity): string {
   → 유사 표현도 피하세요. "대박"류 감탄사 전부 배제.
 
 ■ 구매자 신뢰 원칙 (리뷰·제휴 글에서 의무):
-  ${id.trustPrinciple || '광고는 [광고] 표기, 단점도 솔직히'}
+  ${id.trustPrinciple || '제휴 여부는 숨기지 않고 단점도 솔직히'}
+  - 공정위·광고·제휴 고지 문구는 앱이 확정 원문을 별도로 삽입합니다. 본문이나 제목에서 생성·요약·변형·중복 삽입하지 마세요.
   ${id.comparisonHabit !== false ? '- 리뷰 글마다 비교 대상 1개 이상 언급 ("○○랑 비교했을 때")' : ''}
   - 단점 최소 1개 이상 명시 (무조건 찬양 금지)
   - 경력·실사용 기간은 사용자 입력에 실제 값이 있을 때만 사용

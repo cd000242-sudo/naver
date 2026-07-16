@@ -304,6 +304,48 @@ export function getProfileDir(): string {
   return dir;
 }
 
+function readPageUrl(page: unknown): string {
+  try {
+    return typeof (page as { url?: unknown })?.url === 'function'
+      ? String((page as { url: () => unknown }).url())
+      : '';
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * Reuse the newest Dropshot tab and remove only redundant blank tabs created
+ * by a persistent Chrome launch. OAuth and other non-blank tabs are preserved.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function selectDropshotPage(context: any): Promise<any> {
+  const currentPages = typeof context?.pages === 'function' ? context.pages() : [];
+  const pages = Array.isArray(currentPages) ? currentPages : [];
+  const dropshotPage = [...pages]
+    .reverse()
+    .find((page) => isDropshotOrigin(readPageUrl(page)));
+  const nonBlankPage = [...pages]
+    .reverse()
+    .find((page) => {
+      const url = readPageUrl(page);
+      return url.length > 0 && url !== 'about:blank';
+    });
+  const selectedPage = dropshotPage || nonBlankPage || pages[0] || await context.newPage();
+  const redundantBlankPages = pages.filter((page) => (
+    page !== selectedPage && readPageUrl(page) === 'about:blank'
+  ));
+
+  await Promise.all(redundantBlankPages.map(async (page) => {
+    try {
+      await page.close();
+    } catch {
+      // A browser can close its launch-created blank tab concurrently.
+    }
+  }));
+  return selectedPage;
+}
+
 export async function launchBrowser(
   profileDir: string,
   headless: boolean,

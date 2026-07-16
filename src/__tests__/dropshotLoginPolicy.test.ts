@@ -45,19 +45,20 @@ describe('Dropshot login success policy', () => {
     expect(source).toContain('if (_checkPromise) return _checkPromise;');
   });
 
-  it('reuses and minimizes the authenticated visible context without a close/reopen race', () => {
+  it('closes the authenticated visible context without immediately reopening the profile', () => {
     const detectedIndex = source.indexOf('if (!detected)');
     const successIndex = source.indexOf('return { loggedIn: true', detectedIndex);
     const successBlock = source.slice(detectedIndex, successIndex);
-    const adoptedIndex = successBlock.indexOf('// Reuse the exact context');
+    const adoptedIndex = successBlock.indexOf('// Persisted login data is flushed');
     const adoptedEnd = successBlock.indexOf('} catch (error)', adoptedIndex);
     const adoptedBlock = successBlock.slice(adoptedIndex, adoptedEnd);
 
     expect(adoptedIndex).toBeGreaterThan(-1);
     expect(adoptedEnd).toBeGreaterThan(adoptedIndex);
-    expect(adoptedBlock).toContain('setCached(ctx, page)');
-    expect(adoptedBlock).toContain('await minimizeDropshotWindow(page, onLog)');
-    expect(adoptedBlock).not.toContain('await closeLoginVerificationContext(ctx)');
+    expect(adoptedBlock).toContain('await closeLoginVerificationContext(ctx)');
+    expect(adoptedBlock).toContain('ctx = null');
+    expect(adoptedBlock).not.toContain('setCached(ctx, page)');
+    expect(adoptedBlock).not.toContain('await minimizeDropshotWindow(page, onLog)');
     expect(adoptedBlock).not.toContain('await reopenDropshotHeadlessGenerationContext');
     expect(headlessSource).toContain('launchBrowser(profileDir, true)');
     expect(headlessSource).toContain('setCached(context, page)');

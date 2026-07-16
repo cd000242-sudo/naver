@@ -8,10 +8,11 @@ import {
   getProfileDir,
   isLoggedIn,
   launchBrowser,
-  minimizeDropshotWindow,
   navigateToDropshotBoard,
   openDropshotImageWorkspace,
+  selectDropshotPage,
 } from './dropshotBrowser.js';
+import { reopenDropshotHeadlessGenerationContext } from './dropshotHeadlessSession.js';
 import {
   clearCached,
   closeTrackedDropshotContext,
@@ -111,7 +112,7 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
   try {
     onLog?.('[리더스 나노바나나] 저장된 로그인 세션 확인 중...');
     context = await launchBrowser(profileDir, true);
-    const headlessProbePage = context.pages()[0] || (await context.newPage());
+    const headlessProbePage = await selectDropshotPage(context);
     const boardOpened = await navigateToDropshotBoard(headlessProbePage, onLog);
     assertDropshotNavigationOpened(boardOpened);
     const initialAuthenticated = await isLoggedIn(headlessProbePage);
@@ -138,7 +139,7 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
 
     onLog?.('[리더스 나노바나나] 로그인이 필요합니다. 브라우저에서 로그인해주세요 (최대 5분).');
     context = await launchBrowser(profileDir, false);
-    let page = context.pages()[0] || (await context.newPage());
+    let page = await selectDropshotPage(context);
     const loginBoardOpened = await navigateToDropshotBoard(page, onLog);
     assertDropshotNavigationOpened(loginBoardOpened);
 
@@ -162,13 +163,7 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
           userClosed = true;
           break;
         }
-        page = pages.find((candidate: any) => {
-          try {
-            return candidate.url().includes('dropshot.io');
-          } catch {
-            return false;
-          }
-        }) || pages[pages.length - 1];
+        page = await selectDropshotPage(context);
 
         if (await isLoggedIn(page)) {
           loggedIn = true;
@@ -195,11 +190,12 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
         : '로그인 시간이 초과되었습니다.');
     }
 
-    setCached(context, page);
-    await minimizeDropshotWindow(page, onLog);
+    await closeContext(context);
     context = null;
-    onLog?.('[리더스 나노바나나] 준비 완료');
-    return page;
+    clearCached();
+    const headlessPage = await reopenDropshotHeadlessGenerationContext(profileDir, onLog);
+    onLog?.('[리더스 나노바나나] 로그인 창 종료 및 백그라운드 준비 완료');
+    return headlessPage;
   } catch (error) {
     if (context) await closeContext(context);
     clearCached();

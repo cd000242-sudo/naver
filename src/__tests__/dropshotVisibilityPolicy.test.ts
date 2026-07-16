@@ -21,16 +21,16 @@ describe('Dropshot browser visibility policy', () => {
     expect(code).toMatch(/const effectiveHeadless = forceVisible \? false : headless/);
   });
 
-  it('minimizes and caches the successful visible login context instead of relaunching', () => {
-    expect(loginCode).toContain('setCached(ctx, page);');
-    expect(loginCode).toContain('await minimizeDropshotWindow(page, onLog);');
+  it('closes the successful visible login context without an immediate relaunch', () => {
+    expect(loginCode).toContain('await closeLoginVerificationContext(ctx);');
+    expect(loginCode).not.toContain('await minimizeDropshotWindow(page, onLog);');
     expect(loginCode).not.toContain('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)');
   });
 
-  it('reuses the authenticated interactive generation context and keeps cold starts headless', () => {
-    expect(coreCode).toContain('await minimizeDropshotWindow(page, onLog)');
-    expect(coreCode).toContain('setCached(context, page)');
-    expect(coreCode).not.toContain('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)');
+  it('hands an authenticated interactive generation session back to a hidden context', () => {
+    expect(coreCode).not.toContain('await minimizeDropshotWindow(page, onLog)');
+    expect(coreCode).toContain('await closeContext(context)');
+    expect(coreCode).toContain('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)');
     expect(headlessCode).toContain('launchBrowser(profileDir, true)');
     expect(headlessCode).toContain('setCached(context, page)');
   });

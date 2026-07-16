@@ -5,6 +5,7 @@ const mocks = vi.hoisted(() => ({
   navigateToDropshotBoard: vi.fn(),
   isLoggedIn: vi.fn(),
   openDropshotImageWorkspace: vi.fn(),
+  selectDropshotPage: vi.fn(),
   ensureDropshotControls: vi.fn(),
   closeTrackedDropshotContext: vi.fn(),
   setCached: vi.fn(),
@@ -15,6 +16,7 @@ vi.mock('../image/dropshotBrowser.js', () => ({
   navigateToDropshotBoard: mocks.navigateToDropshotBoard,
   isLoggedIn: mocks.isLoggedIn,
   openDropshotImageWorkspace: mocks.openDropshotImageWorkspace,
+  selectDropshotPage: mocks.selectDropshotPage,
   ensureDropshotControls: mocks.ensureDropshotControls,
 }));
 
@@ -42,6 +44,7 @@ describe('Dropshot headless generation session', () => {
     mocks.navigateToDropshotBoard.mockResolvedValue(true);
     mocks.isLoggedIn.mockResolvedValue(true);
     mocks.openDropshotImageWorkspace.mockResolvedValue(true);
+    mocks.selectDropshotPage.mockResolvedValue(page);
     mocks.ensureDropshotControls.mockResolvedValue(undefined);
     mocks.closeTrackedDropshotContext.mockResolvedValue(true);
   });
@@ -65,5 +68,19 @@ describe('Dropshot headless generation session', () => {
 
     expect(mocks.setCached).not.toHaveBeenCalled();
     expect(mocks.closeTrackedDropshotContext).toHaveBeenCalledWith(context);
+  });
+
+  it('retries the hidden handoff when the persistent profile is still flushing', async () => {
+    vi.useFakeTimers();
+    mocks.launchBrowser
+      .mockRejectedValueOnce(new Error('profile is locked'))
+      .mockResolvedValueOnce(context);
+
+    const resultPromise = reopenDropshotHeadlessGenerationContext('profile-dir');
+    await vi.advanceTimersByTimeAsync(300);
+
+    await expect(resultPromise).resolves.toBe(page);
+    expect(mocks.launchBrowser).toHaveBeenCalledTimes(2);
+    vi.useRealTimers();
   });
 });

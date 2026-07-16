@@ -78,6 +78,7 @@ import './utils/subImageMode.js';
 import { isImageSkipEnabled, syncImageSkipUI } from './utils/imageSkipCheck.js';
 // ✅ [2026-01-25 모듈화] 스토리지 유틸리티
 import { safeLocalStorageSetItem } from './utils/storageUtils.js';
+import { resolveFtcModeTransition } from './utils/ftcModeTransition.js';
 // ✅ [2026-01-25 모듈화] Gemini 모델 동기화
 import { initGeminiModelSync } from './utils/geminiModelSync.js';
 // ✅ [2026-01-25 모듈화] 에러 유틸리티
@@ -6525,28 +6526,8 @@ URL: ${firstUrl}
         localStorage.setItem('ftcDisclosureText', defaultText);
       });
 
-      // ✅ 쇼핑커넥트 모드 자동 연동: affiliate 모드 선택 시 자동 ON
-      const contentModeSelect = document.getElementById('unified-content-mode') as HTMLSelectElement;
-      contentModeSelect?.addEventListener('change', () => {
-        if (contentModeSelect.value === 'affiliate' && !ftcCheckbox.checked) {
-          ftcCheckbox.checked = true;
-          ftcPanel.style.display = 'block';
-          ftcPreset.value = 'affiliate';
-          ftcTextarea.value = FTC_PRESETS.affiliate;
-          ftcTextarea.readOnly = true;
-          ftcTextarea.style.opacity = '0.7';
-          localStorage.setItem('ftcDisclosureEnabled', 'true');
-          localStorage.setItem('ftcDisclosurePreset', 'affiliate');
-          localStorage.setItem('ftcDisclosureText', FTC_PRESETS.affiliate);
-          updateBadge();
-        } else if (contentModeSelect.value !== 'affiliate' && ftcCheckbox.checked) {
-          // ✅ 비-쇼핑커넥트 전환 → 기본 해제 (사용자가 다시 수동 체크는 가능)
-          ftcCheckbox.checked = false;
-          ftcPanel.style.display = 'none';
-          localStorage.setItem('ftcDisclosureEnabled', 'false');
-          updateBadge();
-        }
-      });
+      // 모드 변경은 아래 단일 동기화 리스너가 ON/OFF만 결정한다.
+      // 프리셋과 문구는 사용자 소유이므로 여기서 변경하지 않는다.
     }
   }
 
@@ -6631,12 +6612,20 @@ URL: ${firstUrl}
     });
 
     document.getElementById('unified-content-mode')?.addEventListener('change', (e) => {
-      if ((e.target as HTMLSelectElement).value === 'affiliate') {
-        localStorage.setItem('ftcDisclosureEnabled', 'true');
-        localStorage.setItem('ftcDisclosurePreset', 'affiliate');
-        localStorage.setItem('ftcDisclosureText', FTC_PRESETS_SYNC.affiliate);
-        syncAllFtc();
-      }
+      const current = {
+        enabled: localStorage.getItem('ftcDisclosureEnabled') === 'true',
+        preset: localStorage.getItem('ftcDisclosurePreset') || 'affiliate',
+        text: localStorage.getItem('ftcDisclosureText') || '',
+      };
+      const next = resolveFtcModeTransition(
+        current,
+        (e.target as HTMLSelectElement).value,
+        FTC_PRESETS_SYNC,
+      );
+      localStorage.setItem('ftcDisclosureEnabled', String(next.enabled));
+      localStorage.setItem('ftcDisclosurePreset', next.preset);
+      localStorage.setItem('ftcDisclosureText', next.text);
+      syncAllFtc();
     });
   }
 

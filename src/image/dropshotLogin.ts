@@ -9,10 +9,10 @@ import {
   getProfileDir,
   isLoggedIn,
   launchBrowser,
-  minimizeDropshotWindow,
   navigateToDropshotBoard,
   openDropshotImageWorkspace,
   sanitizeDropshotErrorMessage,
+  selectDropshotPage,
   type DropshotLoginStatus,
 } from './dropshotBrowser.js';
 import {
@@ -130,7 +130,7 @@ async function checkDropshotLoginInternal(
     onLog?.('[리더스 나노바나나] 저장된 로그인 세션 확인 중...');
     ctx = await launchBrowser(profileDir, true);
 
-    const page = ctx.pages()[0] || (await ctx.newPage());
+    const page = await selectDropshotPage(ctx);
     const boardOpened = await navigateToDropshotBoard(page, onLog);
     if (!boardOpened) {
       return {
@@ -216,7 +216,7 @@ async function dropshotLoginInternal(
     onLog?.('[리더스 나노바나나] 로그인 브라우저 표시 - 로그인 완료 후 자동으로 확인합니다 (최대 10분).');
     ctx = await launchBrowser(profileDir, false);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let page = ctx.pages()[0] || (await ctx.newPage());
+    let page = await selectDropshotPage(ctx);
     await tryOpenDropshotBoard(page, onLog);
 
     let userClosed = false;
@@ -240,13 +240,7 @@ async function dropshotLoginInternal(
           userClosed = true;
           break;
         }
-        page = pages.find((candidate: any) => {
-          try {
-            return candidate.url().includes('dropshot.io');
-          } catch {
-            return false;
-          }
-        }) || pages[pages.length - 1];
+        page = await selectDropshotPage(ctx);
 
         const tokenReady = await isLoggedIn(page);
         if (tokenReady) {
@@ -286,16 +280,16 @@ async function dropshotLoginInternal(
       };
     }
 
-    // Reuse the exact context that received the OAuth tokens. Closing it and
-    // immediately reopening the same profile caused lock/flush races and login loops.
-    setCached(ctx, page);
-    await minimizeDropshotWindow(page, onLog);
+    // Persisted login data is flushed by a fully awaited close. Do not reopen
+    // the profile here: the next actual generation will create one hidden context.
+    await closeLoginVerificationContext(ctx);
     ctx = null;
+    clearCached();
     return authenticatedStatus(
       unlimitedReady,
       unlimitedReady
-        ? '로그인 완료 - 무제한·0비용 생성 세션이 준비되었습니다.'
-        : '로그인 완료 - 계정을 인식했습니다. 무제한·0비용 모드는 생성 전에 다시 확인합니다.',
+        ? '로그인 완료 - 무제한·0비용 상태를 확인했고 로그인 창을 닫았습니다.'
+        : '로그인 완료 - 계정을 인식했고 로그인 창을 닫았습니다. 무제한·0비용 모드는 생성 전에 다시 확인합니다.',
     );
   } catch (error) {
     if (ctx) await closeLoginVerificationContext(ctx);

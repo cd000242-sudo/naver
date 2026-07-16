@@ -6,6 +6,7 @@ const mocks = vi.hoisted(() => ({
   isLoggedIn: vi.fn(),
   launchBrowser: vi.fn(),
   minimizeDropshotWindow: vi.fn(),
+  selectDropshotPage: vi.fn(),
   navigateToDropshotBoard: vi.fn(),
   navigateToDropshotLogin: vi.fn(),
   openDropshotImageWorkspace: vi.fn(),
@@ -28,6 +29,7 @@ vi.mock('../image/dropshotBrowser.js', () => ({
   isLoggedIn: mocks.isLoggedIn,
   launchBrowser: mocks.launchBrowser,
   minimizeDropshotWindow: mocks.minimizeDropshotWindow,
+  selectDropshotPage: mocks.selectDropshotPage,
   navigateToDropshotBoard: mocks.navigateToDropshotBoard,
   navigateToDropshotLogin: mocks.navigateToDropshotLogin,
   openDropshotImageWorkspace: mocks.openDropshotImageWorkspace,
@@ -68,6 +70,9 @@ describe('Dropshot interactive login lifecycle', () => {
     mocks.closeTrackedDropshotContext.mockResolvedValue(true);
     mocks.closeBrowserCache.mockResolvedValue(undefined);
     mocks.minimizeDropshotWindow.mockResolvedValue(true);
+    mocks.selectDropshotPage.mockImplementation(async (context: { pages: () => unknown[]; newPage: () => Promise<unknown> }) => (
+      context.pages()[0] || context.newPage()
+    ));
   });
 
   it('returns an existing persisted login without opening a visible browser', async () => {
@@ -87,7 +92,7 @@ describe('Dropshot interactive login lifecycle', () => {
     expect(mocks.launchBrowser).not.toHaveBeenCalledWith('profile-dir', false);
   });
 
-  it('keeps the successful visible context and does not close/reopen it', async () => {
+  it('closes the successful visible login context before reporting completion', async () => {
     vi.useFakeTimers();
     const probePage = { id: 'probe-page' };
     const visiblePage = { id: 'visible-page', url: vi.fn(() => 'https://aistudio.dropshot.io/ko') };
@@ -107,9 +112,9 @@ describe('Dropshot interactive login lifecycle', () => {
 
     expect(mocks.launchBrowser).toHaveBeenNthCalledWith(1, 'profile-dir', true);
     expect(mocks.launchBrowser).toHaveBeenNthCalledWith(2, 'profile-dir', false);
-    expect(mocks.setCached).toHaveBeenCalledWith(visibleContext, visiblePage);
-    expect(mocks.minimizeDropshotWindow).toHaveBeenCalledWith(visiblePage, undefined);
     expect(mocks.closeTrackedDropshotContext).toHaveBeenCalledWith(probeContext);
-    expect(mocks.closeTrackedDropshotContext).not.toHaveBeenCalledWith(visibleContext);
+    expect(mocks.closeTrackedDropshotContext).toHaveBeenCalledWith(visibleContext);
+    expect(mocks.setCached).not.toHaveBeenCalledWith(visibleContext, visiblePage);
+    expect(mocks.minimizeDropshotWindow).not.toHaveBeenCalled();
   });
 });

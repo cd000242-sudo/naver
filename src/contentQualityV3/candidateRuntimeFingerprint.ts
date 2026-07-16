@@ -550,6 +550,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/utils/errorAndAutosave.ts',
   'src/renderer/utils/errorHandlerUtils.ts',
   'src/renderer/utils/errorUtils.ts',
+  'src/renderer/utils/ftcModeTransition.ts',
   'src/renderer/utils/fullAutoUtils.ts',
   'src/renderer/utils/geminiModelSync.ts',
   'src/renderer/utils/geminiPlanMemo.ts',
