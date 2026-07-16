@@ -118,7 +118,7 @@ describe('Content Quality V3 deterministic assessor', () => {
     expect(result.issueCodes).toEqual(['OUTPUT_NOT_PUBLISHABLE']);
   });
 
-  it('uses the evaluation case minimum length and exact title contract at publication parity', () => {
+  it('keeps affiliate length quality advisory while enforcing the exact title contract', () => {
     const affiliateCase = getCase('price-identity', 'affiliate');
     const belowAffiliateFloor = assessContentQualityV3Output(
       affiliateCase,
@@ -137,12 +137,15 @@ describe('Content Quality V3 deterministic assessor', () => {
       makeValidOutput(exactTitleCase),
     );
 
-    for (const result of [belowAffiliateFloor, wrongTitle]) {
-      expect(result.passed).toBe(false);
-      expect(result.schemaValid).toBe(false);
-      expect(result.publishable).toBe(false);
-      expect(result.issueCodes).toEqual(['OUTPUT_NOT_PUBLISHABLE']);
-    }
+    expect(belowAffiliateFloor.passed).toBe(true);
+    expect(belowAffiliateFloor.schemaValid).toBe(true);
+    expect(belowAffiliateFloor.publishable).toBe(true);
+    expect(belowAffiliateFloor.issueCodes).toEqual([]);
+
+    expect(wrongTitle.passed).toBe(false);
+    expect(wrongTitle.schemaValid).toBe(false);
+    expect(wrongTitle.publishable).toBe(false);
+    expect(wrongTitle.issueCodes).toEqual(['OUTPUT_NOT_PUBLISHABLE']);
   });
 
   it('applies the same final business safety guard used by publication', () => {

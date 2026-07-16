@@ -1,7 +1,10 @@
 import type { StructuredContent } from '../contentGenerator.js';
 import type { AffiliateEvidenceInput } from '../content/affiliateAuthenticity.js';
 import { EVALUATED_V3_CONTENT_MODES } from '../contentPipeline/mode.js';
-import { evaluateContentQualityV3AffiliateGuard } from './affiliateGuard.js';
+import {
+  evaluateContentQualityV3AffiliateGuard,
+  repairContentQualityV3AffiliateTitle,
+} from './affiliateGuard.js';
 import {
   enforceContentQualityV3BusinessGuard,
   snapshotContentQualityV3BusinessEvidence,
@@ -331,11 +334,9 @@ function validateVisibleInspection(
       minimumBodyChars: state.minimumBodyChars,
       authenticityRetryAvailable: false,
       shoppingQualityRetryAvailable: false,
+      allowLocalRepair: false,
     });
     if (decision.action !== 'accept') return 'affiliate_authenticity_failed';
-    if (!(decision.content.quality as any)?.shoppingValidation?.qualityFloorReached) {
-      return 'affiliate_shopping_quality_failed';
-    }
   }
   return undefined;
 }
@@ -558,8 +559,26 @@ function finalizeCoreCandidate(
     bodyPlain,
     content: bodyPlain,
   };
+  const resolveTitleContract = (
+    candidate: unknown,
+  ): ContentQualityV3TitleContract | undefined => {
+    const contract = options.titleContract;
+    if (options.contentMode !== 'affiliate' || !contract) return contract;
+    const selectedTitle = candidate && typeof candidate === 'object'
+      ? (candidate as { selectedTitle?: unknown }).selectedTitle
+      : undefined;
+    const actualTitle = typeof selectedTitle === 'string' ? selectedTitle : '';
+    const repairedExpectedTitle = repairContentQualityV3AffiliateTitle(
+      contract.expectedTitle,
+      options.affiliateEvidence ?? {},
+    );
+    if (repairedExpectedTitle === contract.expectedTitle || actualTitle !== repairedExpectedTitle) {
+      return contract;
+    }
+    return Object.freeze({ ...contract, expectedTitle: repairedExpectedTitle });
+  };
   const finalized = revalidateContentQualityV3FinalizedContent(synchronized, {
-    titleContract: options.titleContract,
+    titleContract: resolveTitleContract(synchronized),
   });
   if (!finalized.ok) return reject(finalized.issueCode);
 
@@ -594,12 +613,9 @@ function finalizeCoreCandidate(
   if (affiliateDecision.action !== 'accept') {
     return reject('affiliate_authenticity_failed');
   }
-  if (!(affiliateDecision.content.quality as any)?.shoppingValidation?.qualityFloorReached) {
-    return reject('affiliate_shopping_quality_failed');
-  }
 
   const revalidated = revalidateContentQualityV3FinalizedContent(affiliateDecision.content, {
-    titleContract: options.titleContract,
+    titleContract: resolveTitleContract(affiliateDecision.content),
   });
   if (!revalidated.ok) return reject(revalidated.issueCode);
   return acceptCoreContent(revalidated.content, options);

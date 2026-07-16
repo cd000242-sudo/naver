@@ -44,31 +44,49 @@ function makeContent(overrides: Partial<StructuredContent> = {}): StructuredCont
 }
 
 describe('Content Quality V3 affiliate guard', () => {
-  it('requests one authenticity rewrite before blocking a hard failure', () => {
+  it('repairs an unsupported review title locally without spending another model call', () => {
     const content = makeContent({
       selectedTitle: '\uC81C\uD488 \uC0AC\uC6A9 \uD6C4\uAE30',
     });
     const source = { productSpec: 'weight 680g' };
 
-    const retry = evaluateContentQualityV3AffiliateGuard({
+    const repaired = evaluateContentQualityV3AffiliateGuard({
       content,
       source,
       minimumBodyChars: 1500,
       authenticityRetryAvailable: true,
       shoppingQualityRetryAvailable: true,
     });
-    expect(retry.action).toBe('retry-authenticity');
+    expect(repaired.action).toBe('accept');
+    if (repaired.action !== 'accept') throw new Error('expected locally repaired affiliate content');
+    expect(repaired.content.selectedTitle).toBe('\uC81C\uD488 \uAD6C\uB9E4 \uC804 \uD655\uC778 \uAC00\uC774\uB4DC');
+    expect(repaired.content.quality.warnings).toContain(
+      '[\uC1FC\uD551\uCEE4\uB125\uD2B8 \uC790\uB3D9 \uAD50\uC815] \uC815\uCC45 \uC704\uD5D8 \uD45C\uD604\uC744 \uC81C\uAC70\uD558\uACE0 \uBC1C\uD589\uC744 \uACC4\uC18D\uD569\uB2C8\uB2E4.',
+    );
+  });
 
-    const blocked = evaluateContentQualityV3AffiliateGuard({
-      content,
-      source,
+  it('removes only hard-risk shopping sentences and preserves the remaining article', () => {
+    const unsafeSentence = '\uC624\uB298\uB9CC \uAD6C\uB9E4\uD560 \uC218 \uC788\uC73C\uB2C8 \uB193\uCE58\uBA74 \uD6C4\uD68C\uD569\uB2C8\uB2E4.';
+    const safeBody = 'Detailed product information. '.repeat(140);
+    const result = evaluateContentQualityV3AffiliateGuard({
+      content: makeContent({
+        bodyPlain: `${safeBody} ${unsafeSentence}`,
+        introduction: unsafeSentence,
+        conclusion: unsafeSentence,
+      }),
+      source: { productSpec: 'weight 680g' },
       minimumBodyChars: 1500,
       authenticityRetryAvailable: false,
-      shoppingQualityRetryAvailable: true,
+      shoppingQualityRetryAvailable: false,
     });
-    expect(blocked.action).toBe('fail');
-    if (blocked.action !== 'fail') throw new Error('expected affiliate safety failure');
-    expect(blocked.message).toContain('[CONTENT_SAFETY_BLOCKED]');
+
+    expect(result.action).toBe('accept');
+    if (result.action !== 'accept') throw new Error('expected locally repaired affiliate content');
+    expect(result.content.bodyPlain).toContain('Detailed product information.');
+    expect(result.content.bodyPlain).not.toContain(unsafeSentence);
+    expect(result.content.content).not.toContain(unsafeSentence);
+    expect(result.content.introduction).not.toContain(unsafeSentence);
+    expect(result.content.conclusion).not.toContain(unsafeSentence);
   });
 
   it('requests a shopping-quality rewrite for a safe but structurally thin draft', () => {

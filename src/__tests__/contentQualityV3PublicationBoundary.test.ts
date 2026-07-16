@@ -336,26 +336,52 @@ describe('Content Quality V3 publication boundary', () => {
       .toThrow('[content-quality-v3-publication] manual_title_mismatch');
   });
 
-  it('terminally blocks a final affiliate authenticity hard failure', () => {
+  it('repairs a final affiliate authenticity hard failure before publication', () => {
     const content = makeContent({ selectedTitle: '\uC81C\uD488 \uC0AC\uC6A9 \uD6C4\uAE30' });
     const ticket = attest(content, {
       contentMode: 'affiliate',
       productSpec: 'weight 680g',
     });
 
-    expect(() => enforceContentQualityV3PublicationBoundary(content, ticket))
-      .toThrow('[content-quality-v3-publication] affiliate_authenticity_failed');
+    const result = enforceContentQualityV3PublicationBoundary(content, ticket) as StructuredContent;
+
+    expect(result.selectedTitle).toBe('\uC81C\uD488 \uAD6C\uB9E4 \uC804 \uD655\uC778 \uAC00\uC774\uB4DC');
+    expect(result.quality.warnings).toContain(
+      '[\uC1FC\uD551\uCEE4\uB125\uD2B8 \uC790\uB3D9 \uAD50\uC815] \uC815\uCC45 \uC704\uD5D8 \uD45C\uD604\uC744 \uC81C\uAC70\uD558\uACE0 \uBC1C\uD589\uC744 \uACC4\uC18D\uD569\uB2C8\uB2E4.',
+    );
   });
 
-  it('terminally blocks final affiliate content below the shopping publication floor', () => {
+  it('removes a post-generation shopping pressure sentence instead of failing the post', () => {
+    const unsafeSentence = '\uC624\uB298\uB9CC \uAD6C\uB9E4\uD560 \uC218 \uC788\uC73C\uB2C8 \uB193\uCE58\uBA74 \uD6C4\uD68C\uD569\uB2C8\uB2E4.';
+    const content = makeContent({
+      bodyPlain: `${'Detailed product information. '.repeat(140)} ${unsafeSentence}`,
+      content: `${'Detailed product information. '.repeat(140)} ${unsafeSentence}`,
+      conclusion: unsafeSentence,
+    });
+    const ticket = attest(content, {
+      contentMode: 'affiliate',
+      productSpec: 'weight 680g',
+    });
+
+    const result = enforceContentQualityV3PublicationBoundary(content, ticket) as StructuredContent;
+
+    expect(result.bodyPlain).not.toContain(unsafeSentence);
+    expect(result.bodyHtml).not.toContain(unsafeSentence);
+    expect(result.content).not.toContain(unsafeSentence);
+    expect(result.conclusion).not.toContain(unsafeSentence);
+  });
+
+  it('keeps final affiliate quality below the publication floor as a warning', () => {
     const content = makeContent({ bodyPlain: 'thin', content: 'thin', headings: [], conclusion: '' });
     const ticket = attest(content, {
       contentMode: 'affiliate',
       productSpec: 'weight 680g',
     });
 
-    expect(() => enforceContentQualityV3PublicationBoundary(content, ticket))
-      .toThrow('[content-quality-v3-publication] affiliate_shopping_quality_failed');
+    const result = enforceContentQualityV3PublicationBoundary(content, ticket) as StructuredContent;
+
+    expect((result.quality as any).shoppingValidation.qualityFloorReached).toBe(false);
+    expect(result.quality.warnings.some(message => message.includes('품질'))).toBe(true);
   });
 
   it('terminally blocks a business draft made unsafe by post-generation mutation', () => {

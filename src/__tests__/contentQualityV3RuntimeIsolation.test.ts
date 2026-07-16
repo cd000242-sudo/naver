@@ -359,7 +359,7 @@ describe('Content Quality V3 runtime isolation', () => {
     expect(source).toEqual(sourceBefore);
   });
 
-  it('fails affiliate hard guards after one call without dynamic category pre-guidance', async () => {
+  it('repairs affiliate hard guards after one call without dynamic category pre-guidance', async () => {
     const unsafeDraft = JSON.stringify(makeDraft('제품 사용 후기'));
     geminiResponses.push(unsafeDraft, unsafeDraft, unsafeDraft, unsafeDraft);
     const source = Object.freeze({
@@ -370,12 +370,10 @@ describe('Content Quality V3 runtime isolation', () => {
     });
     const sourceBefore = structuredClone(source);
 
-    await expect(generateContentQualityV3CandidateForEvaluation(
+    const result = await generateContentQualityV3CandidateForEvaluation(
       source,
       v3Options(),
-    )).rejects.toMatchObject({
-      issueCode: 'candidate_execution_failed',
-    });
+    );
 
     expect(geminiModelNames).toEqual(['gemini-3.1-flash-lite']);
     expect(geminiRequests).toHaveLength(1);
@@ -383,7 +381,9 @@ describe('Content Quality V3 runtime isolation', () => {
     expect(JSON.stringify(geminiRequests)).not.toContain('PREPROMPT_DYNAMIC_CATEGORY_SENTINEL');
     expect(JSON.stringify(geminiRequests)).not.toContain('CONTENT_QUALITY_V3_RETRY');
     expect(JSON.stringify(geminiRequests)).not.toContain('[SAME_ENGINE_RECOVERY]');
-    expect(materializedV3Inputs).toHaveLength(0);
+    expect(materializedV3Inputs).toHaveLength(1);
+    expect(result.selectedTitle).toBe('제품 구매 전 확인 가이드');
+    expect((result.quality as any).shoppingValidation.qualityFloorReached).toBe(false);
     expect(source).toEqual(sourceBefore);
   });
 
