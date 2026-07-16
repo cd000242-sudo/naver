@@ -5,8 +5,7 @@ import {
 
 export type GeminiTextModelId =
   | typeof GEMINI_TEXT_MODELS.FLASH_LITE
-  | typeof GEMINI_TEXT_MODELS.FLASH
-  | typeof GEMINI_TEXT_MODELS.PRO;
+  | typeof GEMINI_TEXT_MODELS.FLASH;
 
 export interface GeminiFreeTierLimit {
   rpm: number | null;
@@ -33,17 +32,9 @@ export const GEMINI_TEXT_FREE_TIER_LIMITS: Record<GeminiTextModelId, GeminiFreeT
     rpm: null,
     tpm: null,
     rpd: null,
-    freeTierAvailable: true,
-    label: 'Gemini 3.5 Flash',
-    recommendation: '품질·속도 균형 기본 모델. 현재 한도는 AI Studio에서 확인합니다.',
-  }),
-  [GEMINI_TEXT_MODELS.PRO]: Object.freeze({
-    rpm: null,
-    tpm: null,
-    rpd: null,
     freeTierAvailable: false,
-    label: 'Gemini 3.1 Pro Preview',
-    recommendation: 'API 무료 티어가 없는 프리미엄 Preview 모델입니다.',
+    label: 'Gemini 3.5 Flash',
+    recommendation: '선불 유료 고품질 모델. 무료 사용은 Flash-Lite를 선택하세요.',
   }),
 });
 
@@ -61,8 +52,8 @@ export function getGeminiFreeTierDailyLimit(modelName: string): number | null {
 
 export function formatGeminiFreeTierSummary(): string {
   return [
-    'Flash 및 Flash-Lite의 활성 RPM·TPM·RPD는 Google AI Studio 프로젝트 화면에서 확인하세요.',
-    'Gemini 3.1 Pro Preview는 Gemini API 무료 티어가 없습니다.',
+    'Flash-Lite의 활성 RPM·TPM·RPD는 Google AI Studio 프로젝트 화면에서 확인하세요.',
+    'Gemini 3.5 Flash는 선불 유료 모델이며 앱은 Pro Preview를 제공하지 않습니다.',
     '한도는 API 키가 아니라 프로젝트 단위이며 RPD는 태평양 시간 자정에 초기화됩니다.',
   ].join(' · ');
 }

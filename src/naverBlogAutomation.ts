@@ -55,6 +55,10 @@ import {
   shouldRetryEditorReadiness,
 } from './automation/editorReadinessDiagnostics.js';
 import {
+  DRAFT_POPUP_CANCEL_SELECTORS,
+  isEditorDraftConflictMessage,
+} from './automation/editorDraftPopupPolicy.js';
+import {
   collectPrePublishStats,
   evaluatePrePublishReport,
   formatHashtagPresenceDiagnostics,
@@ -2090,7 +2094,7 @@ export class NaverBlogAutomation {
         message.includes('다른 페이지로 변경') ||
         message.includes('게시물이 삭제') ||
         message.includes('이미 발행') ||
-        message.includes('작성 중인 글');
+        isEditorDraftConflictMessage(message);
       if (isEditorStateAlert) {
         this.log(`🔔 [에디터 상태 충돌] 자동 수락: ${message.substring(0, 80)}`);
       } else {
@@ -4320,75 +4324,98 @@ export class NaverBlogAutomation {
     this.log('✅ 메인 프레임으로 성공적으로 전환했습니다.');
   }
 
-  private async closeDraftPopup(): Promise<void> {
-    const frame = (await this.getAttachedFrame());
+  private async closeDraftPopup(timeoutMs: number = 3500): Promise<boolean> {
+    const attachedFrame = (await this.getAttachedFrame());
     const page = this.ensurePage();
     this.ensureNotCancelled();
     this.log('🔄 [1/2] 작성중인 글 팝업 닫기 중...');
+    const mainFrame = page.mainFrame();
+    const deadline = Date.now() + Math.max(250, timeoutMs);
+    let everDetected = false;
 
-    await this.delay(500);
+    do {
+      const frames = Array.from(new Set<Frame>([
+        mainFrame,
+        attachedFrame,
+        ...page.frames(),
+      ]));
+      let detectedThisPass = false;
 
-    const draftPopupSelectors = [
-      'button.se-popup-button.se-popup-button-cancel',
-      '.se-popup-button-cancel',
-      'button.se-popup-button-cancel',
-      'button[type="button"].se-popup-button-cancel',
-    ];
+      for (const frame of frames) {
+        const outcome = await frame.evaluate((selectors) => {
+          const visible = (element: Element): element is HTMLElement => {
+            if (!(element instanceof HTMLElement)) return false;
+            const rect = element.getBoundingClientRect();
+            const style = window.getComputedStyle(element);
+            return rect.width > 0 && rect.height > 0
+              && style.display !== 'none'
+              && style.visibility !== 'hidden';
+          };
+          const isDraftCopy = (value: string): boolean => {
+            const text = String(value || '').replace(/\s+/g, ' ').trim();
+            return /작성\s*중인\s*글/.test(text)
+              || /이어서\s*작성/.test(text)
+              || /임시\s*저장(?:된)?\s*글.*작성/.test(text);
+          };
+          const dialogs = Array.from(document.querySelectorAll(
+            '[role="dialog"], .se-popup, [class*="se-popup"], [class*="popup_layer"], [class*="popup"]',
+          )).filter(visible);
+          const draftDialogs = dialogs.filter((dialog) => isDraftCopy(dialog.textContent || ''));
 
-    for (const selector of draftPopupSelectors) {
-      try {
-        const popupButton = await frame.waitForSelector(selector, {
-          visible: true,
-          timeout: 5000
-        }).catch((error) => {
-          this.log(`⚠️ [팝업 닫기] 실패: ${(error as Error).message}`);
-          return null;
-        });
-
-        if (popupButton) {
-          const isClickable = await popupButton.evaluate((el: Element) => {
-            const button = el as HTMLButtonElement;
-            const rect = button.getBoundingClientRect();
-            return rect.width > 0 && rect.height > 0 && !button.disabled && rect.top >= 0;
-          }).catch(() => false);
-
-          if (!isClickable) continue;
-
-          await popupButton.evaluate((el: Element) => {
-            (el as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'center' });
-          });
-          await this.delay(this.DELAYS.MEDIUM);
-
-          try {
-            await popupButton.click({ delay: 50 });
-            await this.delay(this.DELAYS.LONG);
-            this.log('✅ 작성중인 글 팝업 닫기 완료');
-            return;
-          } catch {
-            const jsClicked = await popupButton.evaluate((el: Element) => {
-              try {
-                (el as HTMLElement).click();
-                return true;
-              } catch {
-                return false;
-              }
-            }).catch(() => false);
-
-            if (jsClicked) {
-              await this.delay(this.DELAYS.LONG);
-              this.log('✅ 작성중인 글 팝업 닫기 완료');
-              return;
+          for (const dialog of draftDialogs) {
+            const buttons = Array.from(dialog.querySelectorAll('button, [role="button"], a')).filter(visible);
+            const freshPostButton = buttons.find((button) => /^(새\s*글\s*작성|새\s*글|아니요|취소|닫기)$/.test(
+              String(button.textContent || '').replace(/\s+/g, ' ').trim(),
+            ));
+            if (freshPostButton instanceof HTMLElement) {
+              freshPostButton.click();
+              return { detected: true, clicked: true };
             }
           }
+
+          for (const selector of selectors) {
+            const button = Array.from(document.querySelectorAll(selector)).find(visible);
+            if (!(button instanceof HTMLElement)) continue;
+            const container = button.closest(
+              '[role="dialog"], .se-popup, [class*="se-popup"], [class*="popup_layer"], [class*="popup"]',
+            );
+            if (container && isDraftCopy(container.textContent || '')) {
+              button.click();
+              return { detected: true, clicked: true };
+            }
+          }
+
+          return { detected: draftDialogs.length > 0, clicked: false };
+        }, [...DRAFT_POPUP_CANCEL_SELECTORS]).catch(() => ({ detected: false, clicked: false }));
+
+        detectedThisPass = detectedThisPass || outcome.detected;
+        everDetected = everDetected || outcome.detected;
+        if (outcome.clicked) {
+          await this.delay(450);
+          this.log(`✅ 작성중인 글 복구 팝업 닫기 완료 (${frame === mainFrame ? '최상위 페이지' : '에디터 프레임'})`);
+          return true;
         }
-      } catch (error) {
-        continue;
       }
+
+      if (everDetected && !detectedThisPass) {
+        this.log('✅ 작성중인 글 복구 팝업이 사라진 것을 확인했습니다.');
+        return true;
+      }
+
+      if (detectedThisPass) {
+        await page.keyboard.press('Escape').catch(() => undefined);
+        await this.delay(300);
+      } else {
+        await this.delay(250);
+      }
+    } while (Date.now() < deadline);
+
+    if (everDetected) {
+      throw new Error('EDITOR_DRAFT_POPUP_BLOCKED: 이전 작성중인 글 팝업을 닫지 못했습니다. 새 글 입력을 안전하게 중단합니다.');
     }
 
-    await page.keyboard.press('Escape');
-    await this.delay(500);
-    this.log('ℹ️ 작성중인 글 팝업이 없거나 ESC로 처리됨');
+    this.log('ℹ️ 작성중인 글 팝업 없음 — 새 글 입력 가능');
+    return false;
   }
 
   async closePopups(): Promise<void> {
@@ -4451,6 +4478,8 @@ export class NaverBlogAutomation {
     let frame = (await this.getAttachedFrame());
     const page = this.ensurePage();
     this.ensureNotCancelled();
+    // 초안 복구 팝업은 에디터 진입 후 늦게 나타날 수 있으므로 타이핑 직전에 재확인한다.
+    await this.closeDraftPopup(1600);
     this.log('🔄 제목 입력 중...');
 
     // 제목이 문자열인지 확인 + 개행 제거 (개행 시 본문으로 밀림 방지)
@@ -8201,6 +8230,10 @@ export class NaverBlogAutomation {
           await this.loginToNaver();
         }
       }
+
+      // run()뿐 아니라 브라우저 재사용/엑셀 발행 경로에서도 네이티브
+      // "작성중인 글" confirm을 항상 처리한다.
+      this.ensureDialogHandler();
 
       // 글쓰기 페이지로 이동
       await this.navigateToBlogWrite();

@@ -292,7 +292,7 @@ async function loadCurrentSettings(): Promise<void> {
     try {
         const api = (window as any).api;
         const loadedConfig = await api.getConfig();
-        const rawLoadedTextModel = loadedConfig.primaryGeminiTextModel || 'gemini-3.5-flash';
+        const rawLoadedTextModel = loadedConfig.primaryGeminiTextModel || 'gemini-3.1-flash-lite';
         const normalizedLoadedConfig = String(rawLoadedTextModel).startsWith('gemini-')
             ? { ...loadedConfig, primaryGeminiTextModel: normalizeGeminiTextModelId(rawLoadedTextModel) }
             : loadedConfig;
@@ -365,9 +365,8 @@ async function loadCurrentSettings(): Promise<void> {
         const navStatusEl = document.getElementById('nav-text-engine-status');
         if (navStatusEl) {
             const modelLabels: Record<string, string> = {
-                'gemini-3.1-flash-lite': '💰 Gemini 3.1 Flash-Lite (가성비)',
-                'gemini-3.5-flash': '⚖️ Gemini 3.5 Flash (균형) ★ 기본',
-                'gemini-3.1-pro-preview': '👑 Gemini 3.1 Pro Preview (프리미엄)',
+                'gemini-3.1-flash-lite': '💰 Gemini 3.1 Flash-Lite (무료 · 선불 추천) ★ 기본',
+                'gemini-3.5-flash': '⚖️ Gemini 3.5 Flash (선불 고품질)',
                 'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
                 'openai-gpt4o-mini': '🧠 GPT-5.6 Luna (가성비)',
                 'openai-gpt41': '⚖️ GPT-5.6 Terra (균형)',
@@ -430,7 +429,7 @@ async function saveSettings(): Promise<void> {
             naverClientSecret: naverClientSecret,
             primaryGeminiTextModel: safeTextSelection.model,
             defaultAiProvider: safeTextSelection.provider,
-            geminiModel: els.geminiModelSelect?.value || 'gemini-3.5-flash',
+            geminiModel: els.geminiModelSelect?.value || 'gemini-3.1-flash-lite',
             perplexityModel: els.perplexityModelSelect?.value || 'sonar',
         };
 
@@ -612,7 +611,7 @@ function setupOpenAISearchCostConsent(): void {
                 // revert
                 const revertTo = previousValue && previousValue !== SEARCH_VALUE
                     ? previousValue
-                    : 'gemini-3.5-flash';
+                    : 'gemini-3.1-flash-lite';
                 const target = document.querySelector<HTMLInputElement>(
                     `input[name="primaryGeminiTextModel"][value="${revertTo}"]`
                 );

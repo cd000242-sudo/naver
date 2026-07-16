@@ -53,6 +53,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/bodyTextCleanupPolicy.ts',
   'src/automation/chromeExecutablePolicy.ts',
   'src/automation/ctaHelpers.ts',
+  'src/automation/editorDraftPopupPolicy.ts',
   'src/automation/editorFrameForensics.ts',
   'src/automation/editorHelpers.ts',
   'src/automation/editorNavigationUrlPolicy.ts',

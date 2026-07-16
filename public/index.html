@@ -673,9 +673,8 @@
                             <select id="unified-gemini-model"
                                 style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: var(--radius-sm); font-size: 0.9rem;">
                                 <optgroup label="⭐ Stable (추천)">
-                                    <option value="gemini-3.5-flash" selected>💎 Gemini 3.5 Flash (균형 · 추천)</option>
-                                    <option value="gemini-3.1-flash-lite">⚡ Gemini 3.1 Flash-Lite (가성비 · 대량)</option>
-                                    <option value="gemini-3.1-pro-preview">🏆 Gemini 3.1 Pro Preview (프리미엄)</option>
+                                    <option value="gemini-3.1-flash-lite" selected>⚡ Gemini 3.1 Flash-Lite (무료 · 선불 추천)</option>
+                                    <option value="gemini-3.5-flash">💎 Gemini 3.5 Flash (선불 고품질)</option>
                                 </optgroup>
                             </select>
                             <input type="hidden" id="unified-generator" value="gemini">
@@ -1396,9 +1395,9 @@
                                 </p>
                                 <div style="font-size: 0.78rem; color: var(--text-muted); background: rgba(99,102,241,0.06); border: 1px solid rgba(99,102,241,0.15); border-radius: 8px; padding: 0.6rem 0.75rem; line-height: 1.65;">
                                     <strong style="color: var(--text-strong);">📊 사진 추론 추천 순위</strong><br/>
-                                    ① <strong>Gemini 3.1 Pro Preview</strong> · <strong>Claude Fable 5</strong> — 장면·맥락 해석이 가장 정확 (프리미엄)<br/>
+                                    ① <strong>Claude Fable 5</strong> — 장면·맥락 해석이 가장 정확 (프리미엄)<br/>
                                     ② <strong>GPT-5.6 Terra</strong> — 한국어 묘사와 추론의 균형이 우수<br/>
-                                    ③ <strong>Gemini 3.5 Flash</strong> — 빠르고 사진 분석이 안정적 (기본 추천)<br/>
+                                    ③ <strong>Gemini 3.5 Flash</strong> — 선불 사용 가능 · 빠르고 사진 분석이 안정적<br/>
                                     <span style="opacity:0.75;">※ Perplexity는 사진 분석을 지원하지 않아 Gemini Flash로 자동 전환됩니다.</span>
                                 </div>
                             </div>
@@ -4689,7 +4688,7 @@
                     <select id="sub-work-provider" style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.9rem;">
                         <option value="same">본문과 동일 모델 (기본 — silent 폴백 0)</option>
                         <option value="gpt-mini">GPT-5.6 Luna (가성비, 입력 $1/출력 $6)</option>
-                        <option value="gemini-flash">Gemini 3.5 Flash (균형, 입력 $1.50/출력 $9)</option>
+                        <option value="gemini-flash">Gemini 3.5 Flash (선불, 입력 $0.75/출력 $4.50)</option>
                         <option value="haiku">Claude Haiku 4.5 ($1/1M)</option>
                     </select>
                     <small style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-top: 0.3rem;">
@@ -5746,9 +5745,9 @@
                                     <!-- ═══ 🔷 GEMINI 엔진 ═══ -->
                                     <div style="font-size: 0.8rem; color: #6b7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; padding-left: 0.25rem;">🔷 Google Gemini</div>
 
-                                    <!-- 💡 [v1.4.32] Google Cloud 결제 등록자(=$300 크레딧 받은 분)는 무료 한도 적용 안 됨 — 모든 호출 유료 -->
+                                    <!-- Google 공식 무료/선불 모델 안내 -->
                                     <div style="font-size: 0.78rem; color: #92400e; background: #fef3c7; border-left: 3px solid #f59e0b; padding: 0.7rem 0.9rem; border-radius: 6px; margin-bottom: 0.5rem; line-height: 1.55;">
-                                        💡 <strong>가격 안내:</strong> 아래 표는 유료 전환 시 예상 비용입니다. 무료 티어는 Google AI Studio 프로젝트의 현재 사용량 등급에 따라 모델별 RPM·TPM·RPD 한도가 적용됩니다. 무료/유료 상태와 현재 한도는 AI Studio 프로젝트 화면에서 확인하세요.
+                                        💡 <strong>선불 사용자 기본:</strong> 신규 사용자는 무료 티어가 있는 Flash-Lite가 기본입니다. 더 높은 품질이 필요하면 선불 잔액으로 Flash를 선택하세요. Pro Preview는 앱에서 선택하지 않습니다.
                                         <br><br>
                                         💰 <strong>한도 확인:</strong> 무료 제공 여부와 RPM·TPM·RPD는 모델 및 프로젝트 등급에 따라 달라질 수 있습니다. 정확한 현재 한도는 <a href="https://aistudio.google.com/apikey" target="_blank" style="color: #b45309; text-decoration: underline; font-weight: 700;">Google AI Studio</a>의 해당 프로젝트에서 확인하세요.
                                     </div>
@@ -5767,10 +5766,10 @@
                                                 style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
                                                 <span>💰 Gemini 3.1 Flash-Lite</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #38bdf8, #0284c7); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(56, 189, 248, 0.3);">💰 가성비</span>
+                                                    style="background: linear-gradient(135deg, #38bdf8, #0284c7); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(56, 189, 248, 0.3);">무료 · 기본 추천</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
-                                                대량 발행 · 가장 저렴 · 빠른 속도</div>
+                                                API 무료 티어 지원 · 선불 전환 후에도 가장 저렴 · 대량 발행 추천</div>
                                             <div style="font-size: 0.8rem; color: #0369a1; font-weight: 700; margin-top: 0.3rem;">
                                                 📊 유료: 입력 $0.25 · 출력 $1.50 / 1M 토큰</div>
                                         </div>
@@ -5789,35 +5788,12 @@
                                                 style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
                                                 <span>⚖️ Gemini 3.5 Flash</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(20, 184, 166, 0.3);">⚖️ 균형 · 추천</span>
+                                                    style="background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(20, 184, 166, 0.3);">선불 고품질</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
-                                                품질·속도·가격 균형 · 일반 블로그 글에 최적</div>
+                                                선불 잔액 사용 · 품질·속도 균형 · 고품질 블로그 글</div>
                                             <div style="font-size: 0.8rem; color: #0d9488; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 유료: 입력 $1.50 · 출력 $9.00 / 1M 토큰</div>
-                                        </div>
-                                    </label>
-
-                                    <!-- 👑 Gemini 3.1 Pro Preview (프리미엄) -->
-                                    <label class="gemini-model-card"
-                                        style="cursor: pointer; border: 2px solid #d4af37; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #fffbeb, #fef3c7); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);">
-                                        <div
-                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #fef3c7; border-radius: 50%;">
-                                            <input type="radio" name="primaryGeminiTextModel"
-                                                value="gemini-3.1-pro-preview"
-                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #d4af37;">
-                                        </div>
-                                        <div style="flex: 1;">
-                                            <div
-                                                style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>👑 Gemini 3.1 Pro Preview</span>
-                                                <span
-                                                    style="background: linear-gradient(135deg, #d4af37, #f59e0b); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(212, 175, 55, 0.3);">👑 프리미엄</span>
-                                            </div>
-                                            <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
-                                                심층 추론 · 깊이 있는 글쓰기 · 최고 품질</div>
-                                            <div style="font-size: 0.8rem; color: #b45309; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 Preview · 현재 요금과 한도는 AI Studio에서 확인</div>
+                                                📊 선불 유료: 입력 $0.75 · 출력 $4.50 / 1M 토큰</div>
                                         </div>
                                     </label>
 
@@ -12602,25 +12578,18 @@
                     <tbody>
                         <!-- Gemini 최신 3단계 -->
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(34, 197, 94, 0.10);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #fcd34d;">💰 Gemini 3.1 Flash-Lite</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #fcd34d;">💰 Gemini 3.1 Flash-Lite <span style="color: #4ade80; font-size: 0.7rem; background: rgba(34,197,94,0.25); padding: 0.1rem 0.4rem; border-radius: 4px;">[★기본 추천]</span></td>
                             <td style="padding: 0.7rem; text-align: right; color: #4ade80;">AI Studio 확인</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩17</td>
                             <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩13</td>
                             <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">가성비</td>
                         </tr>
                         <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(34, 197, 94, 0.07);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #fcd34d;">⚖️ Gemini 3.5 Flash <span style="color: #4ade80; font-size: 0.7rem; background: rgba(34,197,94,0.25); padding: 0.1rem 0.4rem; border-radius: 4px;">[★기본 추천]</span></td>
-                            <td style="padding: 0.7rem; text-align: right; color: #4ade80;">AI Studio 확인</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩101</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩78</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">균형</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <td style="padding: 0.7rem; font-weight: bold; color: #c084fc;">👑 Gemini 3.1 Pro Preview</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #94a3b8;">유료 전용</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩134</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩104</td>
-                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">프리미엄</td>
+                            <td style="padding: 0.7rem; font-weight: bold; color: #fcd34d;">⚖️ Gemini 3.5 Flash</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #f59e0b;">무료 없음 · 선불</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fca5a5;">₩50</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #fbbf24;">₩39</td>
+                            <td style="padding: 0.7rem; text-align: right; color: #d1d5db;">고품질</td>
                         </tr>
 
                         <!-- OpenAI 계열 -->
@@ -12700,17 +12669,16 @@
                     <h5 style="margin: 0 0 0.5rem 0; color: #34d399; font-size: 0.95rem;">💵 $10 (약 ₩14,000) 충전 시 발행 가능 편수 <span style="font-size: 0.75rem; color: #b0bec5;">(일반 요금 기준)</span></h5>
                     <ul style="margin: 0; padding-left: 1.25rem; color: #e5e7eb; font-size: 0.85rem; line-height: 1.75;">
                         <li><strong style="color: #fcd34d;">Gemini 3.1 Flash-Lite</strong>: 약 <b>833편</b></li>
-                        <li><strong style="color: #fcd34d;">Gemini 3.5 Flash</strong>: 약 <b>138편</b></li>
-                        <li><strong style="color: var(--text-gold);">Gemini 3.1 Pro Preview</strong>: 약 <b>104편</b></li>
+                        <li><strong style="color: #fcd34d;">Gemini 3.5 Flash</strong>: 약 <b>277편</b></li>
                         <li><strong style="color: #34d399;">GPT-5.6 Luna</strong>: 약 <b>208편</b></li>
                         <li><strong style="color: #34d399;">GPT-5.6 Terra</strong>: 약 <b>83편</b></li>
                         <li><strong style="color: #34d399;">GPT-5.6 Sol</strong>: 약 <b>42편</b></li>
-                        <li><strong style="color: #f472b6;">Claude Haiku 4.5 <span style="color: #4ade80;">[★현재 기본값]</span></strong>: 약 <b>237편</b></li>
+                        <li><strong style="color: #f472b6;">Claude Haiku 4.5</strong>: 약 <b>237편</b></li>
                         <li><strong style="color: #f472b6;">Claude Sonnet 5</strong>: 약 <b>79편</b></li>
                         <li><strong style="color: #f472b6;">Claude Fable 5</strong>: 약 <b>24편</b></li>
                     </ul>
                     <div style="margin-top: 0.75rem; padding: 0.6rem; background: rgba(251, 191, 36, 0.08); border-left: 3px solid #fbbf24; border-radius: 4px; font-size: 0.78rem; color: #fde68a;">
-                        💡 절약 요금 (캐시 자동 적용) 시 <b>입력 토큰이 추가 절감</b> — 예: Haiku 기본값 사용 시 $10으로 약 <b>318편</b>까지 가능. (입력 12K·출력 6K 토큰 기준 추정 — 실제 글 길이에 따라 변동)
+                        💡 절약 요금 (캐시 자동 적용) 시 <b>입력 토큰이 추가 절감</b>됩니다. (입력 12K·출력 6K 토큰 기준 추정 — 실제 글 길이에 따라 변동)
                     </div>
                 </div>
 
@@ -13092,12 +13060,11 @@
                         </label>
                         <select id="settings-gemini-model"
                             style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem; cursor: pointer;">
-                            <option value="gemini-3.5-flash">🛡️ Gemini 3.5 Flash (균형 · 추천)</option>
-                            <option value="gemini-3.1-flash-lite">⚡ Gemini 3.1 Flash-Lite (가성비 · 대량)</option>
-                            <option value="gemini-3.1-pro-preview">👑 Gemini 3.1 Pro Preview (프리미엄)</option>
+                            <option value="gemini-3.1-flash-lite">⚡ Gemini 3.1 Flash-Lite (무료 · 선불 추천)</option>
+                            <option value="gemini-3.5-flash">🛡️ Gemini 3.5 Flash (선불 고품질)</option>
                         </select>
                         <p style="margin: 0.25rem 0 0; font-size: 0.75rem; color: #4ade80;">
-                            ⭐ Pro는 Preview 모델입니다. 현재 한도는 AI Studio에서 확인하세요.
+                            ⭐ 신규 사용자는 Flash-Lite가 기본입니다. 선불 잔액이 있으면 Flash를 선택할 수 있습니다.
                         </p>
                     </div>
 

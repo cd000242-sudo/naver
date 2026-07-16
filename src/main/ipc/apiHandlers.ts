@@ -151,25 +151,22 @@ export function registerApiHandlers(_ctx: IpcContext): void {
 
             // ✅ [v1.4.49] Google 공식 가격표 + 실측 기반 정확한 한도 (2026-04 기준)
             // 출처: https://ai.google.dev/gemini-api/docs/rate-limits
-            const flashLimit = GEMINI_TEXT_FREE_TIER_LIMITS[GEMINI_TEXT_MODELS.FLASH];
             const liteLimit = GEMINI_TEXT_FREE_TIER_LIMITS[GEMINI_TEXT_MODELS.FLASH_LITE];
-            const proLimit = GEMINI_TEXT_FREE_TIER_LIMITS[GEMINI_TEXT_MODELS.PRO];
 
             const freePlanInfo = {
                 label: '🆓 무료 (Free tier)',
                 limits: {
-                    // Flash 2.5 기준 (실측)
-                    rpm: flashLimit.rpm ?? 'AI Studio 확인',
-                    rpd: flashLimit.rpd ?? 'AI Studio 확인',
-                    tpm: flashLimit.tpm?.toLocaleString() ?? 'AI Studio 확인',
+                    rpm: liteLimit.rpm ?? 'AI Studio 확인',
+                    rpd: liteLimit.rpd ?? 'AI Studio 확인',
+                    tpm: liteLimit.tpm?.toLocaleString() ?? 'AI Studio 확인',
                     note: formatGeminiFreeTierSummary(),
                 },
                 pricing: {
-                    flash_input: '$0 (무료)',
-                    flash_output: '$0 (무료)',
+                    flash_input: '무료 티어 없음',
+                    flash_output: '무료 티어 없음',
                     flash_lite_input: liteLimit.freeTierAvailable ? '$0 (프로젝트 한도 내)' : '무료 티어 없음',
-                    pro_input: proLimit.freeTierAvailable ? '$0 (프로젝트 한도 내)' : '무료 티어 없음',
-                    pro_output: proLimit.freeTierAvailable ? '$0 (프로젝트 한도 내)' : '무료 티어 없음',
+                    pro_input: '앱에서 미지원 (Flash로 자동 전환)',
+                    pro_output: '앱에서 미지원 (Flash로 자동 전환)',
                     note: '무료 한도는 API 키가 아니라 Google AI Studio 프로젝트 단위입니다. 429가 나면 RPM/TPM/RPD 중 하나를 넘은 상태입니다.',
                 },
             };
@@ -182,12 +179,12 @@ export function registerApiHandlers(_ctx: IpcContext): void {
                     note: '유료 한도는 프로젝트 사용량 등급에 따라 달라집니다. 결제 프로젝트와 별도 무료 프로젝트 키를 보조 키 풀에 넣으면 무료 한도를 먼저 사용할 수 있습니다.',
                 },
                 pricing: {
-                    flash_input: '$1.50 / 1M tokens',
-                    flash_output: '$9.00 / 1M tokens',
+                    flash_input: '$0.75 / 1M tokens',
+                    flash_output: '$4.50 / 1M tokens',
                     flash_lite_input: '$0.25 / 1M tokens',
                     flash_lite_output: '$1.50 / 1M tokens',
-                    pro_input: '$2.00 / 1M tokens (200K 이하)',
-                    pro_output: '$12.00 / 1M tokens (200K 이하)',
+                    pro_input: '앱에서 미지원 (Flash로 자동 전환)',
+                    pro_output: '앱에서 미지원 (Flash로 자동 전환)',
                     note: '대량 생성은 Flash-Lite가 가장 저렴합니다. 비용 추정은 실제 usageMetadata의 입력/출력/생각 토큰을 기준으로 누적됩니다.',
                 },
             };

@@ -18,7 +18,7 @@ describe('Gemini free tier quota policy', () => {
       rpm: null,
       tpm: null,
       rpd: null,
-      freeTierAvailable: true,
+      freeTierAvailable: false,
     });
     expect(GEMINI_TEXT_FREE_TIER_LIMITS['gemini-3.1-flash-lite']).toMatchObject({
       rpm: null,
@@ -26,15 +26,13 @@ describe('Gemini free tier quota policy', () => {
       rpd: null,
       freeTierAvailable: true,
     });
-    expect(GEMINI_TEXT_FREE_TIER_LIMITS['gemini-3.1-pro-preview']).toMatchObject({
-      freeTierAvailable: false,
-    });
+    expect(GEMINI_TEXT_FREE_TIER_LIMITS).not.toHaveProperty('gemini-3.1-pro-preview');
   });
 
   it('renders a beginner-readable quota explanation', () => {
     const summary = formatGeminiFreeTierSummary();
     expect(summary).toContain('AI Studio');
-    expect(summary).toContain('무료 티어가 없습니다');
+    expect(summary).toContain('선불 유료 모델');
     expect(summary).toContain('프로젝트 단위');
     expect(summary).toContain('태평양 시간 자정');
   });

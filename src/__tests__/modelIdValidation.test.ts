@@ -24,7 +24,7 @@ it('keeps the live content-engine smoke test on the same current model matrix', 
   const smoke = read('../scripts/test-content-engines.mjs');
   expect(smoke).toContain("value: 'gemini-3.1-flash-lite'");
   expect(smoke).toContain("balanced: 'gemini-3.5-flash'");
-  expect(smoke).toContain("premium: 'gemini-3.1-pro-preview'");
+  expect(smoke).not.toContain("premium: 'gemini-3.1-pro-preview'");
   expect(smoke).toContain("value: 'gpt-5.6-luna'");
   expect(smoke).toContain("balanced: 'gpt-5.6-terra'");
   expect(smoke).toContain("premium: 'gpt-5.6-sol'");

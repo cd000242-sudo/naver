@@ -3139,7 +3139,7 @@ ipcMain.handle('search-images-for-headings', async (_event, payload: unknown) =>
       resetVisionBudget();
     }
     // 글 생성 AI 키 (사용자 요청: vision도 동일 모델 사용)
-    const textGenerator = (cfg as any).primaryGeminiTextModel || GEMINI_TEXT_MODELS.FLASH;
+    const textGenerator = (cfg as any).primaryGeminiTextModel || GEMINI_TEXT_MODELS.FLASH_LITE;
     const apiKeys = {
       gemini: (cfg as any).geminiApiKey || '',
       claude: (cfg as any).claudeApiKey || '',
@@ -9552,7 +9552,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
       const currentConfig = await loadConfig();
       applyConfigToEnv(currentConfig);
       const { routeTextToVision, isAgentTextProvider } = await import('./runtime/modelRegistry.js');
-      const textEngine = (currentConfig as any).primaryGeminiTextModel || GEMINI_TEXT_MODELS.FLASH;
+      const textEngine = (currentConfig as any).primaryGeminiTextModel || GEMINI_TEXT_MODELS.FLASH_LITE;
       routedProvider = routeTextToVision(textEngine).vendor;
       narrativeTextProvider = isAgentTextProvider(textEngine) ? textEngine : routedProvider;
       console.log(`[Main] vision:infer-and-write — 글로벌 엔진(${textEngine}) → vision=${routedProvider}, text=${narrativeTextProvider}`);

@@ -24,7 +24,7 @@ Write in Korean about "네이버 블로그 모바일 가독성". bodyPlain must 
 const SETTINGS = loadSettings();
 
 const CURRENT_MODELS = Object.freeze({
-  gemini: Object.freeze({ value: 'gemini-3.1-flash-lite', balanced: 'gemini-3.5-flash', premium: 'gemini-3.1-pro-preview' }),
+  gemini: Object.freeze({ value: 'gemini-3.1-flash-lite', balanced: 'gemini-3.5-flash' }),
   openai: Object.freeze({ value: 'gpt-5.6-luna', balanced: 'gpt-5.6-terra', premium: 'gpt-5.6-sol' }),
   claude: Object.freeze({ value: 'claude-haiku-4-5-20251001', balanced: 'claude-sonnet-5', premium: 'claude-fable-5' }),
 });
@@ -32,7 +32,7 @@ const CURRENT_MODELS = Object.freeze({
 function normalizeGeminiModel(value) {
   const model = String(value || '').trim();
   if (/flash-lite/.test(model)) return CURRENT_MODELS.gemini.value;
-  if (/pro/.test(model)) return CURRENT_MODELS.gemini.premium;
+  if (/pro/.test(model)) return CURRENT_MODELS.gemini.balanced;
   return CURRENT_MODELS.gemini.balanced;
 }
 

@@ -37,7 +37,6 @@ const UnifiedDOMCache = {
     const modelToProvider: Record<string, string> = {
       'gemini-3.1-flash-lite': 'gemini',
       'gemini-3.5-flash': 'gemini',
-      'gemini-3.1-pro-preview': 'gemini',
       'perplexity-sonar': 'perplexity',
       'openai-gpt4o': 'openai',
       'openai-gpt4o-mini': 'openai',

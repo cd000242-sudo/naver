@@ -21,8 +21,7 @@ export function initGeminiModelSync(): void {
         if (applying) return;
         applying = true;
         try {
-            // ✅ [2026-02-27] Gemini 2.5 Flash를 기본값으로 설정
-            const v = String(value || '').trim() || 'gemini-3.5-flash';
+            const v = String(value || '').trim() || 'gemini-3.1-flash-lite';
             if (unifiedSel && unifiedSel.value !== v) unifiedSel.value = v;
             if (settingsSel && settingsSel.value !== v) settingsSel.value = v;
         } finally {
@@ -33,9 +32,9 @@ export function initGeminiModelSync(): void {
     (async () => {
         try {
             const cfg = await window.api.getConfig();
-            applyValue((cfg as any)?.geminiModel || 'gemini-3.5-flash');
+            applyValue((cfg as any)?.geminiModel || 'gemini-3.1-flash-lite');
         } catch {
-            applyValue('gemini-3.5-flash');
+            applyValue('gemini-3.1-flash-lite');
         }
     })();
 
@@ -44,7 +43,7 @@ export function initGeminiModelSync(): void {
             const cfg = await window.api.getConfig();
             await window.api.saveConfig({
                 ...(cfg || {}),
-                geminiModel: String(value || '').trim() || 'gemini-3.5-flash',
+                geminiModel: String(value || '').trim() || 'gemini-3.1-flash-lite',
             });
         } catch (err) {
             console.error('[GeminiModelSync] saveConfig failed:', err);
@@ -52,13 +51,13 @@ export function initGeminiModelSync(): void {
     };
 
     unifiedSel?.addEventListener('change', async () => {
-        const v = String(unifiedSel.value || '').trim() || 'gemini-3.5-flash';
+        const v = String(unifiedSel.value || '').trim() || 'gemini-3.1-flash-lite';
         applyValue(v);
         await persist(v);
     });
 
     settingsSel?.addEventListener('change', async () => {
-        const v = String(settingsSel.value || '').trim() || 'gemini-3.5-flash';
+        const v = String(settingsSel.value || '').trim() || 'gemini-3.1-flash-lite';
         applyValue(v);
         await persist(v);
     });

@@ -161,23 +161,20 @@ export function resolveTextModelProfile(value: unknown): TextModelProfile {
   const selector = String(value || '').trim();
 
   if (!selector) {
-    return profile(selector, 'gemini', 'balanced', GEMINI_TEXT_MODELS.FLASH, 'Gemini 3.5 Flash');
+    return profile(selector, 'gemini', 'value', GEMINI_TEXT_MODELS.FLASH_LITE, 'Gemini 3.1 Flash-Lite');
   }
 
   if (selector === GEMINI_TEXT_MODELS.FLASH_LITE || selector === 'gemini-2.5-flash-lite') {
     return profile(selector, 'gemini', 'value', GEMINI_TEXT_MODELS.FLASH_LITE, 'Gemini 3.1 Flash-Lite');
   }
-  if (selector === GEMINI_TEXT_MODELS.PRO || selector === 'gemini-2.5-pro') {
-    return profile(selector, 'gemini', 'premium', GEMINI_TEXT_MODELS.PRO, 'Gemini 3.1 Pro Preview');
-  }
   if (selector.startsWith('gemini-')) {
     const model = normalizeGeminiTextModelId(selector);
     const tier: TextModelTier = model === GEMINI_TEXT_MODELS.FLASH_LITE
       ? 'value'
-      : model === GEMINI_TEXT_MODELS.PRO ? 'premium' : 'balanced';
+      : 'balanced';
     const displayName = tier === 'value'
       ? 'Gemini 3.1 Flash-Lite'
-      : tier === 'premium' ? 'Gemini 3.1 Pro Preview' : 'Gemini 3.5 Flash';
+      : 'Gemini 3.5 Flash';
     return profile(selector, 'gemini', tier, model, displayName);
   }
 

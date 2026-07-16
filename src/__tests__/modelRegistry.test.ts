@@ -52,7 +52,7 @@ describe('modelRegistry SSOT 회귀 가드', () => {
       vendor: 'gemini', tier: 'balanced', model: 'gemini-3.5-flash',
     });
     expect(resolveTextModelProfile('gemini-3.1-pro-preview')).toMatchObject({
-      vendor: 'gemini', tier: 'premium', model: 'gemini-3.1-pro-preview',
+      vendor: 'gemini', tier: 'balanced', model: 'gemini-3.5-flash',
     });
     expect(resolveTextModelProfile('openai-gpt4o-mini')).toMatchObject({
       vendor: 'openai', tier: 'value', model: 'gpt-5.6-luna', reasoningEffort: 'medium',
@@ -74,11 +74,11 @@ describe('modelRegistry SSOT 회귀 가드', () => {
     });
   });
 
-  it('migrates legacy Gemini selections to the equivalent current tier', () => {
+  it('migrates legacy Gemini selections to the supported prepaid matrix', () => {
     expect(normalizeGeminiTextModelId('gemini-2.5-flash-lite')).toBe('gemini-3.1-flash-lite');
     expect(normalizeGeminiTextModelId('gemini-2.5-flash')).toBe('gemini-3.5-flash');
-    expect(normalizeGeminiTextModelId('gemini-2.5-pro')).toBe('gemini-3.1-pro-preview');
-    expect(normalizeGeminiTextModelId('gemini-3.1-pro-preview')).toBe('gemini-3.1-pro-preview');
+    expect(normalizeGeminiTextModelId('gemini-2.5-pro')).toBe('gemini-3.5-flash');
+    expect(normalizeGeminiTextModelId('gemini-3.1-pro-preview')).toBe('gemini-3.5-flash');
     expect(normalizeGeminiTextModelId('gemini-future-explicit-model')).toBe('gemini-future-explicit-model');
   });
 

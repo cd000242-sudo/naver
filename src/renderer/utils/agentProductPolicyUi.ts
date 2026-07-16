@@ -24,7 +24,7 @@ const SAFE_CODEX_VERSION = new RegExp(`^Codex CLI ${SAFE_SEMVER}$`, 'i');
 const SAFE_CLAUDE_VERSION = new RegExp(`^Claude Code ${SAFE_SEMVER}$`, 'i');
 const SAFE_BARE_VERSION = new RegExp(`^v?${SAFE_SEMVER}$`, 'i');
 
-const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash';
+const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite';
 const DEFAULT_CLAUDE_API_MODEL = 'claude-haiku';
 
 function modelToProvider(model: string): SelectableTextProvider {

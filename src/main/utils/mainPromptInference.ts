@@ -73,7 +73,7 @@ CRITICAL RULES:
 async function tryGemini(headingText: string, imageStyle?: string, apiKey?: string, geminiModel?: string): Promise<string | null> {
   if (!apiKey) return null;
   try {
-    const model = normalizeGeminiTextModelId(geminiModel || GEMINI_TEXT_MODELS.FLASH);
+    const model = normalizeGeminiTextModelId(geminiModel || GEMINI_TEXT_MODELS.FLASH_LITE);
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
       {

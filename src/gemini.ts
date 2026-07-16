@@ -32,21 +32,19 @@ interface GenerateResult {
 
 // ==================== 상수 ====================
 
-// 기본 모델은 품질·속도 균형이 가장 무난한 Flash.
-const DEFAULT_MODEL = process.env.GEMINI_MODEL || GEMINI_TEXT_MODELS.FLASH;
+// 신규/빈 설정은 API 무료 티어가 있는 Flash-Lite를 사용한다.
+const DEFAULT_MODEL = process.env.GEMINI_MODEL || GEMINI_TEXT_MODELS.FLASH_LITE;
 
 // ✅ 사용 가능한 모델 목록 (환경설정에서 선택 가능)
 // [v1.4.49] 실측 기반 정확한 무료 할당량 표시
 export const AVAILABLE_MODELS = [
-  { id: GEMINI_TEXT_MODELS.FLASH, name: 'Gemini 3.5 Flash (균형 · 기본 추천)', tier: 'standard' },
-  { id: GEMINI_TEXT_MODELS.FLASH_LITE, name: 'Gemini 3.1 Flash-Lite (가성비 · 대량 생성)', tier: 'budget' },
-  { id: GEMINI_TEXT_MODELS.PRO, name: 'Gemini 3.1 Pro Preview (프리미엄)', tier: 'premium' },
+  { id: GEMINI_TEXT_MODELS.FLASH_LITE, name: 'Gemini 3.1 Flash-Lite (무료 · 선불 가성비 추천)', tier: 'budget' },
+  { id: GEMINI_TEXT_MODELS.FLASH, name: 'Gemini 3.5 Flash (선불 고품질)', tier: 'standard' },
 ];
 
 const BASE_FALLBACK_MODELS = [
-  GEMINI_TEXT_MODELS.FLASH,
   GEMINI_TEXT_MODELS.FLASH_LITE,
-  GEMINI_TEXT_MODELS.PRO,
+  GEMINI_TEXT_MODELS.FLASH,
 ];
 
 // ✅ [v1.4.44] 사용자 선택 모델만 사용 — 타 모델 자동 폴백 제거
@@ -67,7 +65,7 @@ export function getConfiguredModel(): string {
 }
 
 const MODEL_ENFORCEMENT_ERROR =
-  `지원되지 않는 Gemini 모델입니다. ${GEMINI_TEXT_MODELS.FLASH_LITE} / ${GEMINI_TEXT_MODELS.FLASH} / ${GEMINI_TEXT_MODELS.PRO} 중에서 선택해주세요.`;
+  `지원되지 않는 Gemini 모델입니다. ${GEMINI_TEXT_MODELS.FLASH_LITE} / ${GEMINI_TEXT_MODELS.FLASH} 중에서 선택해주세요.`;
 
 // ✅ 시스템 프롬프트는 .prompt 파일에서 로드됩니다.
 // - SEO 모드: src/prompts/seo/base.prompt + 카테고리별 .prompt

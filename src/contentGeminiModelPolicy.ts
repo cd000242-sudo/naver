@@ -16,7 +16,7 @@ export interface GeminiModelChain {
 }
 
 export function buildGeminiModelChain(config?: GeminiModelChainConfig): GeminiModelChain {
-  const defaultModel = GEMINI_TEXT_MODELS.FLASH;
+  const defaultModel = GEMINI_TEXT_MODELS.FLASH_LITE;
 
   let primaryModel = config?.primaryGeminiTextModel || config?.geminiModel || defaultModel;
   if (!primaryModel.startsWith('gemini-')) {

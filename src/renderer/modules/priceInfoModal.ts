@@ -858,7 +858,7 @@ export async function initPriceInfoModal(): Promise<void> {
       : true;
     console.log('[Settings] 배포 모드:', isPackaged);
 
-    const rawLoadedTextModel = config.primaryGeminiTextModel || 'gemini-3.5-flash';
+    const rawLoadedTextModel = config.primaryGeminiTextModel || 'gemini-3.1-flash-lite';
     const normalizedLoadedConfig = String(rawLoadedTextModel).startsWith('gemini-')
       ? { ...config, primaryGeminiTextModel: normalizeGeminiTextModelId(rawLoadedTextModel) }
       : config;
@@ -966,14 +966,14 @@ export async function initPriceInfoModal(): Promise<void> {
     // ✅ Gemini 모델 선택 로드
     const geminiModelSelect = document.getElementById('settings-gemini-model') as HTMLSelectElement;
     if (geminiModelSelect) {
-      geminiModelSelect.value = normalizeGeminiTextModelId(config.geminiModel || 'gemini-3.5-flash');
+      geminiModelSelect.value = normalizeGeminiTextModelId(config.geminiModel || 'gemini-3.1-flash-lite');
       console.log('[Settings] Gemini 모델 로드됨:', geminiModelSelect.value);
     }
 
     // ✅ Gemini 텍스트 주력 모델 라디오 버튼 로드
     // ✅ [v2.10.221] undefined여도 기본값 'gemini-2.5-flash'로 항상 라디오/라벨 복원
     {
-      const rawActiveTextModel = config.primaryGeminiTextModel || 'gemini-3.5-flash';
+      const rawActiveTextModel = config.primaryGeminiTextModel || 'gemini-3.1-flash-lite';
       const activeTextModel = String(rawActiveTextModel).startsWith('gemini-')
         ? normalizeGeminiTextModelId(rawActiveTextModel)
         : rawActiveTextModel;
@@ -989,9 +989,8 @@ export async function initPriceInfoModal(): Promise<void> {
       if (navStatusEl) {
         // [v1.4.32] 가격 표시 추가 — 사용자가 어떤 비용을 쓰는지 한눈에
         const modelNames: Record<string, string> = {
-          'gemini-3.1-flash-lite': '💰 Gemini 3.1 Flash-Lite (가성비)',
-          'gemini-3.5-flash': '⚖️ Gemini 3.5 Flash (균형) ★ 기본',
-          'gemini-3.1-pro-preview': '👑 Gemini 3.1 Pro Preview (프리미엄)',
+          'gemini-3.1-flash-lite': '💰 Gemini 3.1 Flash-Lite (무료 · 선불 추천) ★ 기본',
+          'gemini-3.5-flash': '⚖️ Gemini 3.5 Flash (선불 고품질)',
           'perplexity-sonar': '🔮 Perplexity Sonar (~₩32/글)',
           'openai-gpt4o-mini': '🧠 GPT-5.6 Luna (가성비)',
           'openai-gpt41': '⚖️ GPT-5.6 Terra (균형)',
@@ -1023,7 +1022,7 @@ export async function initPriceInfoModal(): Promise<void> {
     try {
       const unifiedGeminiModel = document.getElementById('unified-gemini-model') as HTMLSelectElement | null;
       if (unifiedGeminiModel) {
-        unifiedGeminiModel.value = normalizeGeminiTextModelId(config.geminiModel || 'gemini-3.5-flash');
+        unifiedGeminiModel.value = normalizeGeminiTextModelId(config.geminiModel || 'gemini-3.1-flash-lite');
       }
     } catch (e) {
       console.warn('[priceInfoModal] catch ignored:', e);
@@ -1514,7 +1513,7 @@ export async function initPriceInfoModal(): Promise<void> {
           try {
             const unifiedGeminiModel = document.getElementById('unified-gemini-model') as HTMLSelectElement | null;
             if (unifiedGeminiModel) {
-              unifiedGeminiModel.value = normalizeGeminiTextModelId(config.geminiModel || 'gemini-3.5-flash');
+              unifiedGeminiModel.value = normalizeGeminiTextModelId(config.geminiModel || 'gemini-3.1-flash-lite');
             }
             // ✅ [2026-02-22 FIX] 저장 후 unified-generator 즉시 동기화
             const unifiedGeneratorEl = document.getElementById('unified-generator') as HTMLInputElement | null;
@@ -1526,7 +1525,6 @@ export async function initPriceInfoModal(): Promise<void> {
             const statusEl = document.getElementById('nav-text-engine-status');
             if (statusEl && config.primaryGeminiTextModel) {
               const names: Record<string, string> = {
-                'gemini-3.1-pro-preview': 'Gemini 3.1 Pro Preview',
                 'gemini-3.5-flash': 'Gemini 3.5 Flash',
                 'gemini-3.1-flash-lite': 'Gemini 3.1 Flash-Lite',
                 'perplexity-sonar': '🔮 Perplexity AI',

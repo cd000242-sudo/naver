@@ -16,7 +16,7 @@ describe('agent product-policy UI selection', () => {
 
   it('normalizes disabled agent-claude to the Gemini default when no Claude key exists', () => {
     expect(resolveTextModelSelection('agent-claude', '', true)).toEqual({
-      model: 'gemini-3.5-flash',
+      model: 'gemini-3.1-flash-lite',
       provider: 'gemini',
     });
   });

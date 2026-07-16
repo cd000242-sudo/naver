@@ -44,6 +44,11 @@ export async function testLicenseCode(code: string): Promise<void> {
 // ============================================
 let licenseBadgeIntervalId: ReturnType<typeof setInterval> | null = null;
 
+/** ToastManager intentionally renders messages as text to prevent XSS. */
+export function formatWelcomeToastMessage(userLabel: string): string {
+    return `${String(userLabel || '회원').trim() || '회원'}님 환영합니다\nBetter Life Naver에 오신 것을 환영해요.`;
+}
+
 export async function initLicenseBadge(): Promise<void> {
     const licenseBadge = document.getElementById('license-badge') as HTMLDivElement;
     const licenseBadgeText = document.getElementById('license-badge-text') as HTMLSpanElement;
@@ -55,14 +60,6 @@ export async function initLicenseBadge(): Promise<void> {
 
     const floatingContainer = document.getElementById('right-floating-buttons') as HTMLDivElement | null;
     const leftStatusContainer = document.getElementById('left-status-badges') as HTMLDivElement | null;
-    const escapeHtml = (input: string): string =>
-        String(input)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-
     const ensureMemberBadge = (): HTMLDivElement | null => {
         if (!leftStatusContainer) return null;
         let memberBadge = document.getElementById('member-badge') as HTMLDivElement | null;
@@ -141,11 +138,7 @@ export async function initLicenseBadge(): Promise<void> {
         try {
             if (sessionStorage.getItem('welcome_shown_v1') === '1') return;
             sessionStorage.setItem('welcome_shown_v1', '1');
-            const safe = escapeHtml(userLabel);
-            toastManager.info(
-                `<div style="font-weight:800;font-size:14px;letter-spacing:0.2px;">${safe}님 환영합니다</div><div style="margin-top:4px;opacity:0.95;font-size:12px;">Better Life Naver에 오신 것을 환영해요.</div>`,
-                4200,
-            );
+            toastManager.info(formatWelcomeToastMessage(userLabel), 4200);
         } catch (e) {
             console.warn('[licenseUI] catch ignored:', e);
         }
