@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import HomeOperationsBoard from '../components/HomeOperationsBoard';
 import ParticlesCanvas from '../components/ParticlesCanvas';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
@@ -1442,6 +1443,8 @@ function IndexPage() {
                     ))}
                 </div>
             </section>
+
+            <HomeOperationsBoard />
 
             <style>{`
                 .hero-eyebrow {

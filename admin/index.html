@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleusercontent.com https://141.164.59.17.sslip.io; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
     <title>Leaders Pro — Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -966,6 +967,7 @@
                 </div>
                 <button type="submit" class="login-btn">로그인</button>
                 <p class="login-error" id="login-error">아이디 또는 비밀번호가 올바르지 않습니다.</p>
+                <p style="margin:12px 0 0;color:var(--text-secondary);font-size:.72rem;line-height:1.55;">로그인 정보는 브리핑의 서버 저장 권한 확인에도 사용되며, 비밀번호는 저장하지 않습니다.</p>
             </form>
         </div>
     </div>
@@ -1157,6 +1159,58 @@
                                 <textarea id="edit-hero-proofs" placeholder="/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg | 방문자 상승 흐름 | 콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다. | 조회수 80 | 네이버 블로그 일간현황 조회수 상승 성과 화면"></textarea>
                                 <p class="editor-help">한 줄에 한 장씩 입력합니다. 기본값은 압축된 성과 이미지 11장 전체입니다. 형식: 이미지경로 | 제목 | 설명 | 지표 | 이미지 설명</p>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-card" id="home-keyword-briefing-editor" style="margin-top:16px;">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+                            <div>
+                                <h4>부방장 키워드 브리핑</h4>
+                                <p class="editor-help">엑셀 캡처 이미지를 브라우저 안에서 OCR로 분석합니다. 분석 결과는 초안이며, 검토 후 <strong>홈에 저장</strong>을 눌러야 공개됩니다.</p>
+                            </div>
+                            <span id="keyword-briefing-revision" style="padding:6px 10px;border:1px solid rgba(68,215,182,.35);border-radius:999px;color:#44d7b6;font-size:.78rem;font-weight:800;">revision 0</span>
+                        </div>
+                        <div class="editor-field-grid" style="margin-top:14px;">
+                            <div class="editor-field full">
+                                <label>원본 이미지 선택 (PNG/JPG, 여러 장 가능)</label>
+                                <input id="keyword-briefing-images" type="file" accept="image/png,image/jpeg,image/webp" multiple>
+                                <p class="editor-help">이미지 원본은 서버에 저장하지 않고 파일명·크기·SHA-256만 증거로 저장합니다. 키워드 표 데이터만 공개됩니다.</p>
+                            </div>
+                            <div class="editor-field">
+                                <label>브리핑 제목</label>
+                                <input id="keyword-briefing-title" type="text" value="부방장 황금키워드 브리핑" maxlength="120">
+                            </div>
+                            <div class="editor-field">
+                                <label>작성자</label>
+                                <input id="keyword-briefing-author" type="text" value="부방장" maxlength="60">
+                            </div>
+                            <div class="editor-field full">
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                                    <button class="btn" type="button" id="keyword-briefing-analyze">이미지 분석</button>
+                                    <button class="btn" type="button" id="keyword-briefing-validate">표 다시 검증</button>
+                                    <button class="btn" type="button" id="keyword-briefing-reload">서버 최신본 불러오기</button>
+                                    <span id="keyword-briefing-status" style="font-size:.82rem;color:var(--text-secondary);">이미지를 선택한 뒤 분석하세요.</span>
+                                </div>
+                            </div>
+                            <div class="editor-field full" style="padding:14px;border:1px solid rgba(68,215,182,.22);border-radius:12px;background:rgba(68,215,182,.045);">
+                                <label>안전한 서버 저장 권한</label>
+                                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;align-items:center;">
+                                    <input id="keyword-briefing-api-id" type="text" placeholder="서버 관리자 ID" autocomplete="username">
+                                    <input id="keyword-briefing-api-password" type="password" placeholder="서버 관리자 비밀번호" autocomplete="current-password">
+                                    <button class="btn" type="button" id="keyword-briefing-api-connect">저장 권한 연결</button>
+                                </div>
+                                <p class="editor-help" id="keyword-briefing-api-status">브리핑 저장은 공개 GAS 토큰이 아닌 LEWORD 관리자 세션으로 보호됩니다. 비밀번호는 저장하지 않습니다.</p>
+                            </div>
+                            <div class="editor-field full">
+                                <label>검수용 표 — 키워드 / 검색량 / 블로그 문서수 / 기회지수</label>
+                                <textarea id="keyword-briefing-rows" rows="16" spellcheck="false" placeholder="키워드&#9;검색량&#9;블로그 문서수&#9;기회지수"></textarea>
+                                <p class="editor-help">기회지수는 검색량 ÷ (블로그 문서수 + 1)로 다시 계산됩니다. OCR 오독은 여기서 직접 고친 뒤 저장하세요.</p>
+                            </div>
+                        </div>
+                        <div id="keyword-briefing-preview" style="margin-top:14px;"></div>
+                        <div class="editor-save-bar" style="margin-top:14px;">
+                            <span style="font-size:.8rem;color:var(--text-secondary);">저장 전까지 현재 홈 브리핑은 바뀌지 않습니다.</span>
+                            <button class="btn btn-gold" type="button" id="keyword-briefing-publish">검수본을 홈에 저장</button>
                         </div>
                     </div>
                 </div>
@@ -1700,6 +1754,7 @@
     <!-- Save Toast -->
     <div class="save-toast" id="save-toast">✅ 저장되었습니다!</div>
 
+    <script src="/admin/keyword-briefing-tools.js"></script>
     <script>
         // ===== CONFIG =====
         // Auth: SHA-256 hashed credentials (never store plaintext)
@@ -1996,10 +2051,22 @@
                 sessionStorage.setItem('admin_auth', '1');
                 sessionStorage.setItem('lp_admin_logged_in', '1');
                 localStorage.setItem('lp_analytics_exclude', '1');
+                const apiIdInput = document.getElementById('keyword-briefing-api-id');
+                if (apiIdInput) apiIdInput.value = id;
+                let serverSession = null;
+                try {
+                    serverSession = await requestLewordAdminSession(id, pw, { silent: true });
+                } finally {
+                    document.getElementById('login-pw').value = '';
+                }
+                keywordBriefingApiAccessStatus(serverSession
+                    ? '서버 저장 권한이 연결되었습니다.'
+                    : '사이트 로그인은 완료됐지만 서버 저장 권한은 별도 연결이 필요합니다.', !serverSession);
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
                 switchTab('notices');
             } else {
+                document.getElementById('login-pw').value = '';
                 document.getElementById('login-error').classList.add('visible');
                 setTimeout(() => document.getElementById('login-error').classList.remove('visible'), 3000);
             }
@@ -2016,6 +2083,7 @@
         if (sessionStorage.getItem('admin_auth') === '1') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('dashboard').classList.add('active');
+            if (readLewordAdminSession()) keywordBriefingApiAccessStatus('서버 저장 권한 연결됨', false);
             setTimeout(() => switchTab('notices'), 100);
         }
 
@@ -4211,6 +4279,402 @@
             refreshEditorPreview();
         }
 
+        let keywordBriefingEditorState = {
+            revision: 0,
+            publishedAt: '',
+            sourceImages: [],
+            dirty: false,
+            persisted: false,
+            saving: false,
+            loadingSeed: false,
+            loadingRemote: false,
+            loadedRemote: false
+        };
+        let keywordBriefingLoadGeneration = 0;
+
+        function keywordBriefingTools() {
+            if (!window.KeywordBriefingTools) throw new Error('키워드 표 도구를 불러오지 못했습니다. 페이지를 새로고침하세요.');
+            return window.KeywordBriefingTools;
+        }
+
+        function keywordBriefingStatus(message, tone) {
+            const node = document.getElementById('keyword-briefing-status');
+            if (!node) return;
+            node.textContent = message;
+            node.style.color = tone === 'error' ? '#f5576c' : tone === 'success' ? '#44d7b6' : 'var(--text-secondary)';
+        }
+
+        function keywordBriefingApiAccessStatus(message, isError) {
+            const node = document.getElementById('keyword-briefing-api-status');
+            if (!node) return;
+            node.textContent = message;
+            node.style.color = isError ? '#f5576c' : '#44d7b6';
+        }
+
+        function setKeywordBriefingRevision(revision) {
+            const badge = document.getElementById('keyword-briefing-revision');
+            if (badge) badge.textContent = 'revision ' + Math.max(0, Number(revision) || 0);
+        }
+
+        function syncKeywordBriefingPublishButton() {
+            const button = document.getElementById('keyword-briefing-publish');
+            const unchangedPersistedSnapshot = keywordBriefingEditorState.persisted && !keywordBriefingEditorState.dirty;
+            if (button) {
+                button.disabled = unchangedPersistedSnapshot || keywordBriefingEditorState.saving;
+                button.title = unchangedPersistedSnapshot ? '저장된 브리핑에 변경 사항이 없습니다.' : '';
+            }
+            const reloadButton = document.getElementById('keyword-briefing-reload');
+            if (reloadButton) {
+                reloadButton.disabled = keywordBriefingEditorState.saving;
+                reloadButton.title = keywordBriefingEditorState.saving ? '저장이 끝난 뒤 최신본을 불러오세요.' : '';
+            }
+        }
+
+        function renderKeywordBriefingPreview() {
+            const target = document.getElementById('keyword-briefing-preview');
+            const textarea = document.getElementById('keyword-briefing-rows');
+            if (!target || !textarea) return;
+            const rows = keywordBriefingTools().parseKeywordTableText(textarea.value);
+            if (!rows.length) {
+                target.innerHTML = '<div style="padding:18px;border:1px dashed var(--border);border-radius:12px;color:var(--text-secondary);text-align:center;">분석된 키워드가 없습니다.</div>';
+                return;
+            }
+            const sorted = rows.slice().sort((a, b) => b.opportunity - a.opportunity).slice(0, 10);
+            const max = Math.max(1, ...sorted.map(row => row.opportunity));
+            target.innerHTML = '<div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px;"><strong>홈 차트 미리보기</strong><span style="font-size:.78rem;color:var(--text-secondary);">' + rows.length + '개 · 저장 전 초안</span></div><div style="display:grid;gap:7px;">' + sorted.map((row, index) => {
+                const width = Math.max(3, Math.round((row.opportunity / max) * 100));
+                return '<div style="display:grid;grid-template-columns:minmax(130px,1.5fr) minmax(120px,2fr) 72px;gap:10px;align-items:center;font-size:.8rem;"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + (index + 1) + '. ' + cmsEscape(row.keyword) + '</span><span style="height:9px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;"><i style="display:block;width:' + width + '%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#c9a84c,#44d7b6);"></i></span><strong style="text-align:right;color:#44d7b6;">' + row.opportunity.toLocaleString('ko-KR') + '</strong></div>';
+            }).join('') + '</div>';
+        }
+
+        function setKeywordBriefingEditor(briefing, options = {}) {
+            const hasRows = briefing && Array.isArray(briefing.rows) && briefing.rows.length > 0;
+            if (!hasRows) {
+                if (!options.skipSeed) loadKeywordBriefingSeed();
+                return;
+            }
+            const tools = keywordBriefingTools();
+            setValue('keyword-briefing-title', briefing.title || '부방장 황금키워드 브리핑');
+            setValue('keyword-briefing-author', briefing.author || '부방장');
+            setValue('keyword-briefing-rows', tools.rowsToTsv(briefing.rows));
+            keywordBriefingEditorState = {
+                revision: options.fromSeed ? 0 : Math.max(1, Number(briefing.revision) || 1),
+                publishedAt: briefing.publishedAt || '',
+                sourceImages: Array.isArray(briefing.sourceImages) ? briefing.sourceImages.slice(0, 12) : [],
+                dirty: false,
+                persisted: !options.fromSeed,
+                saving: false,
+                loadingSeed: false,
+                loadingRemote: false,
+                loadedRemote: !options.fromSeed
+            };
+            setKeywordBriefingRevision(keywordBriefingEditorState.revision);
+            keywordBriefingStatus(options.fromSeed ? '현재 정적 브리핑을 불러왔습니다. 저장하면 운영 콘텐츠로 고정됩니다.' : '저장된 브리핑을 불러왔습니다.', 'success');
+            renderKeywordBriefingPreview();
+            syncKeywordBriefingPublishButton();
+        }
+
+        async function loadKeywordBriefingSeed(options = {}) {
+            const generation = Number.isInteger(options.generation)
+                ? options.generation
+                : ++keywordBriefingLoadGeneration;
+            if (keywordBriefingEditorState.dirty && !options.force) return;
+            keywordBriefingEditorState.loadingSeed = true;
+            try {
+                const response = await fetch('/data/home-keyword-briefing-seed.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('seed not found');
+                const seed = await response.json();
+                if (generation !== keywordBriefingLoadGeneration || keywordBriefingEditorState.dirty) return;
+                setKeywordBriefingEditor(seed, { fromSeed: true, skipSeed: true });
+            } catch {
+                if (generation !== keywordBriefingLoadGeneration || keywordBriefingEditorState.dirty) return;
+                keywordBriefingEditorState.loadingSeed = false;
+                setKeywordBriefingRevision(0);
+                renderKeywordBriefingPreview();
+            } finally {
+                if (generation === keywordBriefingLoadGeneration) keywordBriefingEditorState.loadingSeed = false;
+            }
+        }
+
+        async function loadKeywordBriefingFromApi(options = {}) {
+            if (keywordBriefingEditorState.loadingRemote && !options.force) return;
+            if (keywordBriefingEditorState.dirty && !options.force) return;
+            if (keywordBriefingEditorState.loadedRemote && !options.force) return;
+            const generation = ++keywordBriefingLoadGeneration;
+            keywordBriefingEditorState.loadingRemote = true;
+            keywordBriefingStatus('서버 최신 브리핑을 확인하는 중입니다.', 'info');
+            try {
+                const response = await fetch(lewordApiUrl('/v1/public/home-keyword-briefing?ts=' + Date.now()), { cache: 'no-store' });
+                const payload = await response.json().catch(() => ({}));
+                if (!response.ok || payload.ok !== true) throw new Error(payload.message || '서버 브리핑 조회 실패');
+                if (generation !== keywordBriefingLoadGeneration || keywordBriefingEditorState.dirty) return;
+                if (payload.briefing && Array.isArray(payload.briefing.rows) && payload.briefing.rows.length) {
+                    setKeywordBriefingEditor(payload.briefing);
+                    keywordBriefingEditorState.loadedRemote = true;
+                    return;
+                }
+                keywordBriefingEditorState.loadingRemote = false;
+                keywordBriefingEditorState.loadedRemote = true;
+                await loadKeywordBriefingSeed({ generation });
+                keywordBriefingEditorState.loadedRemote = true;
+            } catch (error) {
+                if (generation !== keywordBriefingLoadGeneration || keywordBriefingEditorState.dirty) return;
+                keywordBriefingEditorState.loadingRemote = false;
+                keywordBriefingEditorState.loadedRemote = true;
+                keywordBriefingStatus('서버 저장본을 읽지 못해 정적 고정본을 표시합니다.', 'info');
+                await loadKeywordBriefingSeed({ generation });
+                keywordBriefingEditorState.loadedRemote = true;
+            }
+        }
+
+        function markKeywordBriefingDirty() {
+            keywordBriefingLoadGeneration += 1;
+            keywordBriefingEditorState.loadingSeed = false;
+            keywordBriefingEditorState.loadingRemote = false;
+            keywordBriefingEditorState.dirty = true;
+            keywordBriefingStatus('초안이 변경되었습니다. 검수 후 저장해야 홈에 반영됩니다.', 'info');
+            renderKeywordBriefingPreview();
+            syncKeywordBriefingPublishButton();
+        }
+
+        function collectKeywordBriefing() {
+            const rows = keywordBriefingTools().parseKeywordTableText(getValue('keyword-briefing-rows'));
+            if (!rows.length) return undefined;
+            return {
+                title: getValue('keyword-briefing-title') || '부방장 황금키워드 브리핑',
+                author: getValue('keyword-briefing-author') || '부방장',
+                formulaVersion: 'search-volume-divided-by-documents-plus-one-v1',
+                source: 'admin-image-ocr-reviewed',
+                sourceImages: keywordBriefingEditorState.sourceImages.slice(0, 12),
+                rows
+            };
+        }
+
+        function markKeywordBriefingSaved(briefing) {
+            if (!briefing) return;
+            keywordBriefingEditorState.revision = Math.max(1, Number(briefing.revision) || 1);
+            keywordBriefingEditorState.publishedAt = briefing.publishedAt || keywordBriefingEditorState.publishedAt;
+            keywordBriefingEditorState.dirty = false;
+            keywordBriefingEditorState.persisted = true;
+            setKeywordBriefingRevision(keywordBriefingEditorState.revision);
+            keywordBriefingStatus('운영 홈에 revision ' + keywordBriefingEditorState.revision + '을 저장했습니다.', 'success');
+            syncKeywordBriefingPublishButton();
+        }
+
+        async function connectKeywordBriefingApi() {
+            const userId = getValue('keyword-briefing-api-id');
+            const password = getValue('keyword-briefing-api-password');
+            if (!userId || !password) {
+                keywordBriefingApiAccessStatus('서버 관리자 ID와 비밀번호를 입력하세요.', true);
+                return null;
+            }
+            keywordBriefingApiAccessStatus('서버 저장 권한을 확인하는 중입니다.', false);
+            const session = await requestLewordAdminSession(userId, password, { silent: true });
+            setValue('keyword-briefing-api-password', '');
+            keywordBriefingApiAccessStatus(session
+                ? '서버 저장 권한이 연결되었습니다. 이 브라우저 탭에서만 유지됩니다.'
+                : '서버 저장 권한 연결에 실패했습니다. 서버 관리자 계정을 확인하세요.', !session);
+            return session;
+        }
+
+        async function publishKeywordBriefing() {
+            if (keywordBriefingEditorState.persisted && !keywordBriefingEditorState.dirty) {
+                keywordBriefingStatus('저장된 브리핑에 변경 사항이 없습니다.', 'info');
+                syncKeywordBriefingPublishButton();
+                return true;
+            }
+            const briefing = collectKeywordBriefing();
+            if (!briefing) {
+                keywordBriefingStatus('저장할 키워드 표가 없습니다.', 'error');
+                return false;
+            }
+            const session = lewordApiAdminSession || readLewordAdminSession();
+            if (!session?.accessToken) {
+                keywordBriefingApiAccessStatus('먼저 서버 저장 권한을 연결하세요.', true);
+                keywordBriefingStatus('공개 토큰으로는 저장하지 않습니다. 서버 관리자 세션이 필요합니다.', 'error');
+                return false;
+            }
+            const button = document.getElementById('keyword-briefing-publish');
+            const publishGeneration = keywordBriefingLoadGeneration;
+            keywordBriefingEditorState.saving = true;
+            syncKeywordBriefingPublishButton();
+            keywordBriefingStatus('검수본을 안전한 서버 저장소에 반영하는 중입니다.', 'info');
+            try {
+                const response = await fetch(lewordApiUrl('/v1/admin/home-keyword-briefing'), {
+                    method: 'PUT',
+                    headers: {
+                        Authorization: 'Bearer ' + session.accessToken,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        expectedRevision: keywordBriefingEditorState.revision,
+                        briefing
+                    })
+                });
+                const payload = await response.json().catch(() => ({}));
+                if (response.status === 401 || response.status === 403) {
+                    saveLewordAdminSession(null);
+                    keywordBriefingApiAccessStatus('서버 세션이 만료됐습니다. 저장 권한을 다시 연결하세요.', true);
+                    throw new Error('서버 관리자 인증이 만료되었습니다.');
+                }
+                if (response.status === 409) {
+                    throw new Error(payload.message || '다른 저장본이 먼저 반영됐습니다. 서버 최신본을 다시 불러오세요.');
+                }
+                if (!response.ok || payload.ok !== true || !payload.briefing) {
+                    throw new Error(payload.message || '브리핑 저장 실패');
+                }
+                if (publishGeneration !== keywordBriefingLoadGeneration) {
+                    keywordBriefingEditorState.revision = Math.max(1, Number(payload.briefing.revision) || 1);
+                    keywordBriefingEditorState.publishedAt = payload.briefing.publishedAt || keywordBriefingEditorState.publishedAt;
+                    keywordBriefingEditorState.persisted = true;
+                    setKeywordBriefingRevision(keywordBriefingEditorState.revision);
+                    keywordBriefingStatus('저장은 완료됐고, 저장 중 작성한 새 초안은 그대로 유지했습니다.', 'success');
+                    return true;
+                }
+                setKeywordBriefingEditor(payload.briefing);
+                markKeywordBriefingSaved(payload.briefing);
+                keywordBriefingApiAccessStatus('서버 저장 권한 연결됨', false);
+                return true;
+            } catch (error) {
+                keywordBriefingStatus(error.message || '브리핑 저장에 실패했습니다.', 'error');
+                return false;
+            } finally {
+                keywordBriefingEditorState.saving = false;
+                syncKeywordBriefingPublishButton();
+            }
+        }
+
+        function imageMetadata(file) {
+            return Promise.all([
+                file.arrayBuffer().then(buffer => crypto.subtle.digest('SHA-256', buffer)).then(hash => Array.from(new Uint8Array(hash)).map(byte => byte.toString(16).padStart(2, '0')).join('')),
+                new Promise((resolve, reject) => {
+                    const url = URL.createObjectURL(file);
+                    const image = new Image();
+                    image.onload = () => {
+                        const dimensions = { width: image.naturalWidth, height: image.naturalHeight };
+                        URL.revokeObjectURL(url);
+                        resolve(dimensions);
+                    };
+                    image.onerror = () => { URL.revokeObjectURL(url); reject(new Error('이미지 크기를 읽지 못했습니다.')); };
+                    image.src = url;
+                })
+            ]).then(([sha256, dimensions]) => ({ name: file.name, sha256, width: dimensions.width, height: dimensions.height }));
+        }
+
+        function loadTesseractBrowser() {
+            if (window.Tesseract) return Promise.resolve(window.Tesseract);
+            if (window.__leadersproTesseractPromise) return window.__leadersproTesseractPromise;
+            const loadPromise = new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = '/admin/vendor/tesseract/tesseract.min.js';
+                script.async = true;
+                script.onload = () => {
+                    if (window.Tesseract) resolve(window.Tesseract);
+                    else {
+                        script.remove();
+                        reject(new Error('OCR 라이브러리 초기화 실패'));
+                    }
+                };
+                script.onerror = () => {
+                    script.remove();
+                    reject(new Error('OCR 라이브러리를 내려받지 못했습니다. 네트워크를 확인하세요.'));
+                };
+                document.head.appendChild(script);
+            });
+            window.__leadersproTesseractPromise = loadPromise.catch(error => {
+                window.__leadersproTesseractPromise = null;
+                throw error;
+            });
+            return window.__leadersproTesseractPromise;
+        }
+
+        async function analyzeKeywordBriefingImages() {
+            const input = document.getElementById('keyword-briefing-images');
+            const button = document.getElementById('keyword-briefing-analyze');
+            const files = Array.from(input?.files || []).slice(0, 12);
+            if (!files.length) {
+                keywordBriefingStatus('먼저 PNG/JPG 이미지를 선택하세요.', 'error');
+                return;
+            }
+            if (files.some(file => file.size > 8 * 1024 * 1024)) {
+                keywordBriefingStatus('이미지는 장당 8MB 이하여야 합니다.', 'error');
+                return;
+            }
+            button.disabled = true;
+            let worker;
+            try {
+                const Tesseract = await loadTesseractBrowser();
+                worker = await Tesseract.createWorker('kor+eng', 1, {
+                    workerPath: location.origin + '/admin/vendor/tesseract/worker.min.js',
+                    corePath: location.origin + '/admin/vendor/tesseract/core',
+                    langPath: location.origin + '/admin/vendor/tesseract/lang',
+                    workerBlobURL: false,
+                    logger: progress => {
+                        const percent = Number.isFinite(progress.progress) ? ' ' + Math.round(progress.progress * 100) + '%' : '';
+                        keywordBriefingStatus('OCR ' + (progress.status || '분석 중') + percent, 'info');
+                    }
+                });
+                await worker.setParameters({ tessedit_pageseg_mode: '6', preserve_interword_spaces: '1' });
+                const rowGroups = [];
+                const sourceImages = [];
+                for (let index = 0; index < files.length; index += 1) {
+                    const file = files[index];
+                    keywordBriefingStatus((index + 1) + '/' + files.length + ' ' + file.name + ' 분석 중…', 'info');
+                    const metadata = await imageMetadata(file);
+                    const result = await worker.recognize(file, {}, { text: true, blocks: true });
+                    const rows = keywordBriefingTools().parseTesseractResult(result, metadata.width);
+                    rowGroups.push(rows);
+                    sourceImages.push(metadata);
+                }
+                const merged = keywordBriefingTools().mergeKeywordRowGroups(rowGroups);
+                if (!merged.length) throw new Error('표 행을 찾지 못했습니다. 이미지가 선명한지 확인하거나 표를 직접 붙여넣으세요.');
+                keywordBriefingEditorState.sourceImages = sourceImages;
+                setValue('keyword-briefing-rows', keywordBriefingTools().rowsToTsv(merged));
+                markKeywordBriefingDirty();
+                keywordBriefingStatus(merged.length + '개 키워드를 추출했습니다. 표를 검수한 뒤 저장하세요.', 'success');
+            } catch (error) {
+                keywordBriefingStatus(error.message || '이미지 분석에 실패했습니다.', 'error');
+            } finally {
+                if (worker) await worker.terminate().catch(() => undefined);
+                button.disabled = false;
+            }
+        }
+
+        function validateKeywordBriefingRows() {
+            const rows = keywordBriefingTools().parseKeywordTableText(getValue('keyword-briefing-rows'));
+            if (!rows.length) {
+                keywordBriefingStatus('검증할 표가 없습니다.', 'error');
+                return;
+            }
+            setValue('keyword-briefing-rows', keywordBriefingTools().rowsToTsv(rows));
+            markKeywordBriefingDirty();
+            keywordBriefingStatus(rows.length + '개 행의 숫자와 기회지수를 다시 검증했습니다.', 'success');
+        }
+
+        function installKeywordBriefingEditor() {
+            const root = document.getElementById('home-keyword-briefing-editor');
+            if (!root || root.dataset.ready === '1') return;
+            root.dataset.ready = '1';
+            ['keyword-briefing-title', 'keyword-briefing-author', 'keyword-briefing-rows'].forEach(id => {
+                document.getElementById(id)?.addEventListener('input', markKeywordBriefingDirty);
+            });
+            document.getElementById('keyword-briefing-analyze')?.addEventListener('click', analyzeKeywordBriefingImages);
+            document.getElementById('keyword-briefing-validate')?.addEventListener('click', validateKeywordBriefingRows);
+            document.getElementById('keyword-briefing-api-connect')?.addEventListener('click', connectKeywordBriefingApi);
+            document.getElementById('keyword-briefing-reload')?.addEventListener('click', async () => {
+                if (keywordBriefingEditorState.saving) {
+                    keywordBriefingStatus('저장이 끝난 뒤 서버 최신본을 불러오세요.', 'info');
+                    return;
+                }
+                if (keywordBriefingEditorState.dirty && !confirm('저장하지 않은 브리핑 초안을 버리고 서버 최신본을 불러오시겠습니까?')) return;
+                keywordBriefingEditorState.dirty = false;
+                keywordBriefingEditorState.loadedRemote = false;
+                await loadKeywordBriefingFromApi({ force: true });
+            });
+            document.getElementById('keyword-briefing-publish')?.addEventListener('click', publishKeywordBriefing);
+            syncKeywordBriefingPublishButton();
+        }
+
         function setEditorValues(content) {
             renderEditorDynamicForms();
             installCmsWorkbench();
@@ -4218,6 +4682,7 @@
             installCmsHomeRegionEditor();
             installCmsImagePickers();
             installEditorLiveBindings();
+            installKeywordBriefingEditor();
             const data = withEditorDefaults(content || {});
             const hero = data.hero || {};
             const pricingPage = data.pricing?.page || {};
@@ -4232,6 +4697,7 @@
             setValue('edit-hero-benefit', hero.benefit);
             setValue('edit-notice', hero.notice);
             setValue('edit-hero-proofs', proofsToText(hero.proofs));
+            void loadKeywordBriefingFromApi();
 
             setValue('pricing-page-eyebrow', pricingPage.eyebrow);
             setValue('pricing-tab-label', pricingPage.tabLabel);
@@ -4576,7 +5042,7 @@
                 data = collectEditorContent();
             } catch (err) {
                 showToast('❌ 제품 상세 JSON 형식이 올바르지 않습니다.');
-                return;
+                return false;
             }
 
             localStorage.setItem('lp_site_edits', JSON.stringify(data));
@@ -4589,8 +5055,10 @@
                 const json = await res.json();
                 if (!(json.ok || json.success)) throw new Error(json.error || json.message || '저장 실패');
                 showToast('✅ 서버에 저장했습니다. 실제 사이트가 이 데이터를 읽습니다.');
+                return true;
             } catch (err) {
                 showToast('⚠️ 브라우저에는 저장됨 · 서버 저장 실패: ' + err.message);
+                return false;
             }
         }
 

@@ -1,4 +1,7 @@
+import { normalizeKeywordBriefing, type HomeKeywordBriefing } from './homeKeywordBriefing';
+
 export const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+export const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
 
 export type SiteContent = {
     hero?: {
@@ -130,6 +133,19 @@ export type SiteContent = {
     updatedAt?: string;
 };
 
+export type HomeNotice = {
+    id: string;
+    badge: string;
+    date: string;
+    title: string;
+    summary: string;
+};
+
+export type HomeKeywordBriefingResult = {
+    briefing: HomeKeywordBriefing;
+    source: 'saved' | 'seed';
+};
+
 export type DownloadProductContent = {
     name?: string;
     version?: string;
@@ -194,6 +210,108 @@ export async function fetchSiteContent(): Promise<SiteContent | null> {
             window.clearTimeout(timeout);
         });
     return siteContentPromise;
+}
+
+const HOME_NOTICE_TIMEOUT_MS = 3200;
+const HOME_KEYWORD_SEED_URL = '/data/home-keyword-briefing-seed.json';
+
+function cleanPublicText(value: unknown, maxLength: number): string {
+    return String(value ?? '')
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/[\u0000-\u001f\u007f]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, maxLength);
+}
+
+function normalizeHomeNotice(value: unknown, index: number): HomeNotice | null {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+    const raw = value as Record<string, unknown>;
+    const title = cleanPublicText(raw.title, 140);
+    if (!title) return null;
+    const date = cleanPublicText(raw.date ?? raw.createdAt ?? raw.timestamp, 40);
+    return {
+        id: cleanPublicText(raw.id, 100) || `notice-${index + 1}-${date || 'undated'}`,
+        badge: cleanPublicText(raw.badge ?? raw.type, 30) || 'notice',
+        date,
+        title,
+        summary: cleanPublicText(raw.preview ?? raw.summary ?? raw.body ?? raw.detail, 260),
+    };
+}
+
+function noticeDateValue(value: string): number {
+    const normalized = value.replace(/[.\/]/g, '-');
+    const parsed = Date.parse(normalized);
+    return Number.isFinite(parsed) ? parsed : 0;
+}
+
+export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), HOME_NOTICE_TIMEOUT_MS);
+    try {
+        const response = await fetch(`${GAS_URL}?action=get-notices`, {
+            cache: 'no-store',
+            signal: controller.signal,
+        });
+        if (!response.ok) return [];
+        const payload = await response.json() as { success?: boolean; ok?: boolean; notices?: unknown[] };
+        if (!payload || (!payload.success && !payload.ok) || !Array.isArray(payload.notices)) return [];
+        return payload.notices
+            .map(normalizeHomeNotice)
+            .filter((notice): notice is HomeNotice => Boolean(notice))
+            .map((notice, index) => ({ notice, index }))
+            .sort((left, right) => noticeDateValue(right.notice.date) - noticeDateValue(left.notice.date) || left.index - right.index)
+            .slice(0, Math.max(1, Math.min(3, Math.floor(limit) || 3)))
+            .map(({ notice }) => notice);
+    } catch {
+        return [];
+    } finally {
+        window.clearTimeout(timeout);
+    }
+}
+
+async function fetchKeywordBriefingSeed(): Promise<HomeKeywordBriefing | null> {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), SITE_CONTENT_FETCH_TIMEOUT_MS);
+    try {
+        const response = await fetch(HOME_KEYWORD_SEED_URL, {
+            cache: 'default',
+            signal: controller.signal,
+        });
+        if (!response.ok) return null;
+        return normalizeKeywordBriefing(await response.json());
+    } catch {
+        return null;
+    } finally {
+        window.clearTimeout(timeout);
+    }
+}
+
+async function fetchSavedKeywordBriefing(): Promise<HomeKeywordBriefing | null> {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), SITE_CONTENT_FETCH_TIMEOUT_MS);
+    try {
+        const response = await fetch(`${LEWORD_API_BASE}/v1/public/home-keyword-briefing`, {
+            cache: 'no-store',
+            signal: controller.signal,
+        });
+        if (!response.ok) return null;
+        const payload = await response.json() as { ok?: boolean; briefing?: unknown };
+        return payload?.ok ? normalizeKeywordBriefing(payload.briefing) : null;
+    } catch {
+        return null;
+    } finally {
+        window.clearTimeout(timeout);
+    }
+}
+
+export async function fetchHomeKeywordBriefing(): Promise<HomeKeywordBriefingResult | null> {
+    const [saved, seed] = await Promise.all([
+        fetchSavedKeywordBriefing(),
+        fetchKeywordBriefingSeed(),
+    ]);
+    if (saved) return { briefing: saved, source: 'saved' };
+    return seed ? { briefing: seed, source: 'seed' } : null;
 }
 
 function runWhenIdle(task: () => void) {
