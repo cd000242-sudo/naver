@@ -81,4 +81,6 @@ export interface AgentCliStatus {
   errorCode?: AgentErrorCode;
   /** Human-readable detail (e.g. "Logged in using ChatGPT"). */
   detail?: string;
+  /** Present only on the direct result of an explicit login action. */
+  loginAction?: 'already_authenticated' | 'authenticated';
 }

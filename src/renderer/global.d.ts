@@ -286,7 +286,7 @@ interface AutomationAPI {
   agentStatus: (provider: AgentProvider, options?: { forceRefresh?: boolean }) => Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }>;
   agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }) => Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }>;
   agentInstall: (provider: AgentProvider) => Promise<{ success: boolean; version?: string; code?: string; message?: string }>;
-  agentLogin: (provider: AgentProvider) => Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }>;
+  agentLogin: (provider: AgentProvider) => Promise<{ success: boolean; status?: AgentCliStatus; authState?: 'already_authenticated' | 'authenticated'; code?: string; message?: string }>;
   onAgentLoginProgress: (listener: (progress: AgentLoginProgress) => void) => () => void;
   agentLoginOpenBrowser: (provider: AgentProvider, sessionId: string) => Promise<AgentLoginActionResult>;
   agentLoginSubmitCode: (provider: AgentProvider, sessionId: string, attempt: number, code: string) => Promise<AgentLoginActionResult>;

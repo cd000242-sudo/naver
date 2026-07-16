@@ -293,6 +293,10 @@ describe('agent status badge refresh ordering', () => {
 
     expect(elements.get('agent-codex-status')?.textContent).toContain('로그인 확인됨');
     expect(elements.get('agent-codex-status')?.textContent).not.toContain('준비됨');
+    expect(toastSuccess).toHaveBeenCalledWith(expect.stringContaining('로그인 자동 인식'));
+
+    await refreshAgentStatusBadges({ providers: ['codex'], forceRefresh: true });
+    expect(toastSuccess).toHaveBeenCalledTimes(1);
   });
 
   it('uses the verified post-login cache and reports authenticated-but-unavailable honestly', async () => {

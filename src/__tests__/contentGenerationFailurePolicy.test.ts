@@ -47,6 +47,16 @@ describe('content generation failure policy', () => {
       'claude',
       'Claude 구독 사용 한도가 소진되었습니다.',
     ))).toBe(true);
+    expect(isTerminalContentGenerationError(new AgentCliError(
+      'nonzero_exit',
+      'codex',
+      'Codex CLI가 오류 상태로 종료되었습니다.',
+    ))).toBe(true);
+    expect(isTerminalContentGenerationError(new AgentCliError(
+      'bad_json',
+      'codex',
+      'Codex 응답 형식이 잘못되었습니다.',
+    ))).toBe(true);
   });
 
   it('builds a compact same-engine recovery prompt without cross-engine fallback language', () => {

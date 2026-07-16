@@ -25,6 +25,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/agentCli/claudeRunner.ts',
   'src/agentCli/codexRunner.ts',
   'src/agentCli/detect.ts',
+  'src/agentCli/failureMessage.ts',
   'src/agentCli/index.ts',
   'src/agentCli/parse.ts',
   'src/agentCli/productPolicy.ts',

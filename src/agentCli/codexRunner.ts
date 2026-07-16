@@ -14,6 +14,7 @@ import { spawnCollect } from './spawnHelper.js';
 import { classifyExit } from './parse.js';
 import { buildCodexSubscriptionEnv } from './subscriptionEnv.js';
 import { AgentCliError } from './types.js';
+import { buildAgentFailureMessage } from './failureMessage.js';
 
 export interface CodexRunOptions {
   schema?: Record<string, unknown>;
@@ -62,10 +63,11 @@ export async function runCodex(prompt: string, opts: CodexRunOptions = {}): Prom
     });
 
     if (res.code !== 0) {
+      const code = classifyExit('codex', res.stderr, res.stdout);
       throw new AgentCliError(
-        classifyExit('codex', res.stderr, res.stdout),
+        code,
         'codex',
-        `codex가 비정상 종료했습니다 (code ${res.code}).`,
+        buildAgentFailureMessage('codex', code, res.stderr || res.stdout),
         (res.stderr || res.stdout || '').slice(0, 800),
       );
     }
@@ -78,7 +80,12 @@ export async function runCodex(prompt: string, opts: CodexRunOptions = {}): Prom
       text = '';
     }
     if (!text) {
-      throw new AgentCliError('empty_output', 'codex', 'codex가 빈 응답을 반환했습니다.', res.stderr.slice(0, 500));
+      throw new AgentCliError(
+        'empty_output',
+        'codex',
+        buildAgentFailureMessage('codex', 'empty_output', res.stderr),
+        res.stderr.slice(0, 500),
+      );
     }
     return text;
   } finally {

@@ -130,6 +130,32 @@ describe('agent authentication IPC state handoff', () => {
     expect(clearAgentDetectionCacheMock).not.toHaveBeenCalled();
   });
 
+  it('recognizes an existing Codex login before starting another OAuth session', async () => {
+    const status = Object.freeze({
+      provider: 'codex',
+      installed: true,
+      version: 'Codex CLI 0.142.2',
+      loggedIn: true,
+      available: true,
+      availabilityCheck: 'authentication',
+      detail: 'Logged in using ChatGPT',
+      loginAction: 'already_authenticated',
+    });
+    loginAgentMock.mockResolvedValue(status);
+    const event = ipcEvent();
+
+    const result = await handlers.get('agent:login')!(event, 'codex');
+
+    expect(result).toEqual({
+      success: true,
+      status,
+      authState: 'already_authenticated',
+    });
+    expect(loginAgentMock).toHaveBeenCalledOnce();
+    expect(event.sender.once).toHaveBeenCalledWith('destroyed', expect.any(Function));
+    expect(openExternalMock).not.toHaveBeenCalled();
+  });
+
   it('stores a streamed OAuth URL in main and opens it only after the owner explicitly clicks', async () => {
     const event = ipcEvent();
     const status = Object.freeze({

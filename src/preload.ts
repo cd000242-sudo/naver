@@ -178,7 +178,7 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('agent:generate', payload),
   agentInstall: (provider: AgentProvider): Promise<{ success: boolean; version?: string; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:install', provider),
-  agentLogin: (provider: AgentProvider): Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }> =>
+  agentLogin: (provider: AgentProvider): Promise<{ success: boolean; status?: AgentCliStatus; authState?: 'already_authenticated' | 'authenticated'; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:login', provider),
   onAgentLoginProgress: (listener: (progress: AgentLoginProgress) => void): (() => void) => {
     const handler = (_event: Electron.IpcRendererEvent, progress: AgentLoginProgress): void => listener(progress);

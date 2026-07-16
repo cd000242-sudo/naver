@@ -132,6 +132,14 @@ export async function loginAgent(
   hooks: AgentLoginHooks = {},
 ): Promise<AgentCliStatus> {
   provider = requireAgentProvider(provider);
+  const detection = await import('./detect.js');
+  const existingStatus = await detection.detectAgent(provider, { forceRefresh: true }).catch(() => undefined);
+  if (existingStatus?.loggedIn && existingStatus.available) {
+    return Object.freeze({
+      ...existingStatus,
+      loginAction: 'already_authenticated' as const,
+    });
+  }
   const { command, args } = loginCommand(provider);
   const observeLoginUrl = createAgentLoginUrlObserver(provider, (url) => {
     try { hooks.onLoginUrl?.(url); } catch { /* progress handoff is best-effort */ }
@@ -176,9 +184,8 @@ export async function loginAgent(
       sanitizeUserVisibleError(res.stderr || res.stdout || ''),
     );
   }
-  const { clearAgentDetectionCache, detectAgent } = await import('./detect.js');
-  clearAgentDetectionCache(provider);
-  const status = await detectAgent(provider, { forceRefresh: true });
+  detection.clearAgentDetectionCache(provider);
+  const status = await detection.detectAgent(provider, { forceRefresh: true });
   if (!status.loggedIn) {
     throw new AgentCliError(
       status.errorCode ?? 'not_logged_in',
@@ -186,7 +193,7 @@ export async function loginAgent(
       status.detail || `${provider} 구독 로그인 상태를 확인하지 못했습니다. 다시 로그인해주세요.`,
     );
   }
-  return status;
+  return Object.freeze({ ...status, loginAction: 'authenticated' as const });
 }
 
 /** Logout command per provider (clears stored subscription auth). */

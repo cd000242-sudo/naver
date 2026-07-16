@@ -326,7 +326,9 @@ export function registerAgentHandlers(options: RegisterAgentHandlerOptions): voi
           if (current?.sessionId === sessionId) setActiveLoginSession(validatedProvider, undefined);
         }
       });
-      return { success: true, status };
+      return status.loginAction
+        ? { success: true, status, authState: status.loginAction }
+        : { success: true, status };
     } catch (err) {
       const e = err as { code?: string; message?: string };
       return {

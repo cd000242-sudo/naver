@@ -130,6 +130,47 @@ describe('installAgent', () => {
 });
 
 describe('loginAgent', () => {
+  beforeEach(() => {
+    detectAgentMock.mockReset();
+    detectAgentMock
+      .mockResolvedValueOnce({
+        provider: 'codex',
+        installed: true,
+        loggedIn: false,
+        available: false,
+        errorCode: 'not_logged_in',
+      })
+      .mockResolvedValue({
+        provider: 'codex',
+        installed: true,
+        version: '0.141.0',
+        loggedIn: true,
+        available: true,
+        detail: 'Logged in using ChatGPT',
+      });
+  });
+
+  it('returns an explicit already-authenticated result without starting OAuth', async () => {
+    detectAgentMock.mockReset();
+    detectAgentMock.mockResolvedValue({
+      provider: 'codex',
+      installed: true,
+      version: '0.142.2',
+      loggedIn: true,
+      available: true,
+      availabilityCheck: 'authentication',
+      detail: 'Logged in using ChatGPT',
+    });
+
+    await expect(loginAgent('codex')).resolves.toMatchObject({
+      loggedIn: true,
+      available: true,
+      loginAction: 'already_authenticated',
+    });
+    expect(startSessionMock).not.toHaveBeenCalled();
+    expect(spawnMock).not.toHaveBeenCalled();
+  });
+
   it('codex → `codex login`', async () => {
     const status = await loginAgent('codex');
     const c = spawnMock.mock.calls[0][0];
@@ -328,6 +369,20 @@ describe('agent CLI subprocess environment isolation', () => {
     expect(installCall.env.NPM_CONFIG_PREFIX).toBe('C:\\Users\\tester\\npm-global');
 
     spawnMock.mockClear();
+    detectAgentMock
+      .mockResolvedValueOnce({
+        provider: 'codex',
+        installed: true,
+        loggedIn: false,
+        available: false,
+        errorCode: 'not_logged_in',
+      })
+      .mockResolvedValueOnce({
+        provider: 'codex',
+        installed: true,
+        loggedIn: true,
+        available: true,
+      });
     await loginAgent('codex');
     const loginCall = spawnMock.mock.calls[0][0];
     expect(loginCall.env.NAVER_PASSWORD).toBeUndefined();

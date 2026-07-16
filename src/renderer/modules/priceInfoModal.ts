@@ -38,6 +38,7 @@ function setShown(el: HTMLElement | null, on: boolean, mode: 'inline-block' | 'f
 }
 
 const agentStatusRefreshCoordinator = createAgentStatusRefreshCoordinator();
+const announcedAgentLoginTargets = new WeakSet<HTMLElement>();
 let claudeSubscriptionDisabled = true;
 
 interface RefreshAgentStatusOptions {
@@ -125,7 +126,15 @@ function bindAgentAction(
         const loginStatus = action === 'login' && 'status' in res ? res.status : undefined;
         if (action === 'login' && loginStatus?.available !== true) {
           toastManager.warning(`\u26A0\uFE0F \uB85C\uADF8\uC778\uC740 \uD655\uC778\uB410\uC9C0\uB9CC \uD604\uC7AC \uC0AC\uC6A9\uD560 \uC218 \uC5C6\uC2B5\uB2C8\uB2E4: ${loginStatus?.detail || '\uAD6C\uB3C5 \uC0C1\uD0DC\uB97C \uD655\uC778\uD574\uC8FC\uC138\uC694'}`);
+        } else if (
+          action === 'login'
+          && 'authState' in res
+          && res.authState === 'already_authenticated'
+        ) {
+          announcedAgentLoginTargets.add(statusEl);
+          toastManager.success(`\u2705 ${provider === 'codex' ? 'Codex' : 'Claude Code'} \uB85C\uADF8\uC778\uC774 \uC774\uBBF8 \uC790\uB3D9 \uC778\uC2DD\uB418\uC5B4 \uC788\uC2B5\uB2C8\uB2E4.`);
         } else {
+          if (action === 'login') announcedAgentLoginTargets.add(statusEl);
           toastManager.success(action === 'install' ? '\u2705 CLI \uC124\uCE58 \uC644\uB8CC' : '\u2705 \uB85C\uADF8\uC778 \uC644\uB8CC');
         }
       } else {
@@ -245,6 +254,7 @@ export async function refreshAgentStatusBadges(
       if (t.provider === 'claude') {
         applyClaudeSubscriptionSelectorPolicy(s.errorCode === 'provider_disabled');
       }
+      if (!s.loggedIn || !s.available) announcedAgentLoginTargets.delete(el);
       if (s.errorCode === 'provider_disabled') {
         el.textContent = `\u26D4 ${s.detail || 'Claude 구독 에이전트는 배포 앱에서 비활성화되어 있습니다. 환경설정에서 Claude API 키를 사용해주세요.'}`;
         el.style.color = '#6b7280';
@@ -286,6 +296,10 @@ export async function refreshAgentStatusBadges(
         ? `\u2705 \uB85C\uADF8\uC778 \uD655\uC778\uB428 \u2014 \uC2E4\uC81C \uC0AC\uC6A9 \uAC00\uB2A5 \uC5EC\uBD80\uB294 \uCCAB \uC0DD\uC131 \uC2DC \uD655\uC778 (${versionLabel})`
         : `\u2705 \uC900\uBE44\uB428 \u2014 ${s.detail || versionLabel}`;
       el.style.color = '#15803d';
+      if (t.provider === 'codex' && !announcedAgentLoginTargets.has(el)) {
+        announcedAgentLoginTargets.add(el);
+        toastManager.success('\u2705 Codex \uB85C\uADF8\uC778 \uC790\uB3D9 \uC778\uC2DD \uC644\uB8CC');
+      }
       // \u2705 [v2.11.49] \uB85C\uADF8\uC778 \uC0C1\uD0DC\uC77C \uB54C "\uACC4\uC815 \uC804\uD658" \uBC84\uD2BC \uB178\uCD9C (\uB85C\uADF8\uC544\uC6C3 \u2192 \uB2E4\uB978 \uACC4\uC815 \uC7AC\uB85C\uADF8\uC778)
       setShown(actions, true, 'flex');
       setShown(switchBtn, true);

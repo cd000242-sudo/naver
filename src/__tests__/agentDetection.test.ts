@@ -30,7 +30,7 @@ function deferred<T>() {
   return Object.freeze({ promise, resolve });
 }
 
-describe('detectAgent Claude subscription entitlement', () => {
+describe('detectAgent Claude subscription authentication', () => {
   beforeEach(() => {
     spawnMock.mockReset();
     clearAgentDetectionCache();
@@ -41,15 +41,10 @@ describe('detectAgent Claude subscription entitlement', () => {
     delete process.env.ANTHROPIC_API_KEY;
   });
 
-  it('marks Claude ready only after a live subscription entitlement probe succeeds', async () => {
+  it('uses auth metadata only and never spends a Claude turn during status detection', async () => {
     spawnMock
       .mockResolvedValueOnce(versionResult())
-      .mockResolvedValueOnce(authResult('pro'))
-      .mockResolvedValueOnce({
-        code: 0,
-        stdout: JSON.stringify({ is_error: false, result: 'READY' }),
-        stderr: '',
-      });
+      .mockResolvedValueOnce(authResult('pro'));
 
     const status = await detectAgent('claude');
 
@@ -58,13 +53,13 @@ describe('detectAgent Claude subscription entitlement', () => {
       installed: true,
       loggedIn: true,
       available: true,
-      availabilityCheck: 'live',
-      errorCode: undefined,
+      availabilityCheck: 'authentication',
     });
-    expect(spawnMock).toHaveBeenCalledTimes(3);
-    const entitlementCall = spawnMock.mock.calls[2][0];
-    expect(entitlementCall.args).toContain('--max-turns');
-    expect(entitlementCall.env.ANTHROPIC_API_KEY).toBeUndefined();
+    expect(spawnMock).toHaveBeenCalledTimes(2);
+    expect(spawnMock.mock.calls.map(([call]) => call.args)).not.toContainEqual(
+      expect.arrayContaining(['-p']),
+    );
+    expect(spawnMock.mock.calls[1][0].env.ANTHROPIC_API_KEY).toBeUndefined();
   });
 
   it('keeps a successful noisy version probe installed without exposing logs or secret URLs', async () => {
@@ -85,21 +80,22 @@ describe('detectAgent Claude subscription entitlement', () => {
     expect(JSON.stringify(status)).not.toContain('proxy.example');
   });
 
-  it('fails closed when the entitlement response is not exactly READY', async () => {
+  it('does not consume a queued generation-like result after auth succeeds', async () => {
     spawnMock
       .mockResolvedValueOnce(versionResult())
       .mockResolvedValueOnce(authResult('pro'))
       .mockResolvedValueOnce({
-        code: 0,
-        stdout: JSON.stringify({ is_error: false, result: 'READY and available' }),
-        stderr: '',
+        code: 1,
+        stdout: '',
+        stderr: 'this paid probe must never run',
       });
 
     await expect(detectAgent('claude')).resolves.toMatchObject({
       loggedIn: true,
-      available: false,
-      errorCode: 'bad_json',
+      available: true,
+      availabilityCheck: 'authentication',
     });
+    expect(spawnMock).toHaveBeenCalledTimes(2);
   });
 
   it('recognizes an explicitly free or inactive auth status without claiming readiness', async () => {
@@ -116,58 +112,6 @@ describe('detectAgent Claude subscription entitlement', () => {
       errorCode: 'subscription_inactive',
     });
     expect(spawnMock).toHaveBeenCalledTimes(2);
-  });
-
-  it('recognizes a subscription that expired while OAuth credentials remain logged in', async () => {
-    spawnMock
-      .mockResolvedValueOnce(versionResult())
-      .mockResolvedValueOnce(authResult('pro'))
-      .mockResolvedValueOnce({
-        code: 1,
-        stdout: '',
-        stderr: 'Your Claude subscription has expired. Renew your subscription to continue.',
-      });
-
-    const status = await detectAgent('claude');
-
-    expect(status).toMatchObject({
-      installed: true,
-      loggedIn: true,
-      available: false,
-      errorCode: 'subscription_inactive',
-    });
-    expect(status.detail).toContain('구독');
-  });
-
-  it('distinguishes a temporary usage limit from a lapsed subscription', async () => {
-    spawnMock
-      .mockResolvedValueOnce(versionResult())
-      .mockResolvedValueOnce(authResult('max'))
-      .mockResolvedValueOnce({ code: 1, stdout: '', stderr: '5-hour usage limit reached' });
-
-    const status = await detectAgent('claude');
-
-    expect(status).toMatchObject({
-      loggedIn: true,
-      available: false,
-      errorCode: 'rate_limited',
-    });
-  });
-
-  it('redacts proxy credentials from renderer-facing entitlement detail', async () => {
-    spawnMock
-      .mockResolvedValueOnce(versionResult())
-      .mockResolvedValueOnce(authResult('pro'))
-      .mockResolvedValueOnce({
-        code: 1,
-        stdout: '',
-        stderr: 'Proxy https://alice:s3cr3t@proxy.example failed unexpectedly',
-      });
-
-    const status = await detectAgent('claude');
-
-    expect(status.detail).not.toContain('s3cr3t');
-    expect(status.detail).toContain('[redacted]');
   });
 
   it('rejects apiKeyHelper and gateway auth sources before any billed probe can run', async () => {
@@ -228,20 +172,15 @@ describe('detectAgent Claude subscription entitlement', () => {
           subscriptionType: 'pro',
         }),
         stderr: '',
-      })
-      .mockResolvedValueOnce({
-        code: 0,
-        stdout: JSON.stringify({ is_error: false, result: 'READY' }),
-        stderr: '',
       });
 
     const status = await detectAgent('claude');
 
     expect(status).toMatchObject({
       available: true,
-      errorCode: undefined,
+      availabilityCheck: 'authentication',
     });
-    expect(spawnMock).toHaveBeenCalledTimes(3);
+    expect(spawnMock).toHaveBeenCalledTimes(2);
   });
 
   it('fails closed when an older Claude CLI cannot report structured auth provenance', async () => {
@@ -260,32 +199,23 @@ describe('detectAgent Claude subscription entitlement', () => {
     expect(spawnMock).toHaveBeenCalledTimes(2);
   });
 
-  it('force-refreshes entitlement for generation instead of trusting a ready UI cache', async () => {
+  it('force-refreshes auth metadata without running a paid readiness turn', async () => {
     spawnMock
       .mockResolvedValueOnce(versionResult())
-      .mockResolvedValueOnce(authResult('pro'))
-      .mockResolvedValueOnce({
-        code: 0,
-        stdout: JSON.stringify({ is_error: false, result: 'READY' }),
-        stderr: '',
-      });
+      .mockResolvedValueOnce(authResult('pro'));
     expect((await detectAgent('claude')).available).toBe(true);
 
     spawnMock
       .mockResolvedValueOnce(versionResult())
-      .mockResolvedValueOnce(authResult('pro'))
-      .mockResolvedValueOnce({
-        code: 1,
-        stdout: '',
-        stderr: 'Your Claude subscription has expired.',
-      });
+      .mockResolvedValueOnce(authResult('free'));
 
     const refreshed = await detectAgent('claude', { forceRefresh: true });
     expect(refreshed).toMatchObject({
       available: false,
       errorCode: 'subscription_inactive',
     });
-    expect(spawnMock).toHaveBeenCalledTimes(6);
+    expect(spawnMock).toHaveBeenCalledTimes(4);
+    expect(spawnMock.mock.calls.flatMap(([call]) => call.args)).not.toContain('-p');
   });
 });
 

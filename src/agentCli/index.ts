@@ -22,6 +22,7 @@ import {
   assertResolvedContentGeneratorProviderAllowed,
   type AgentProductPolicyContext,
 } from './productPolicy.js';
+import { buildAgentFailureMessage } from './failureMessage.js';
 
 export { clearAgentDetectionCache, detectAgent } from './detect.js';
 export * from './types.js';
@@ -93,7 +94,7 @@ export async function generateWithAgent(
       throw new AgentCliError(
         'bad_json',
         provider,
-        '에이전트가 JSON 형식이 아닌 응답을 반환했습니다.',
+        buildAgentFailureMessage(provider, 'bad_json'),
         text.slice(0, 500),
       );
     }

@@ -1,10 +1,5 @@
-// Install, authentication, and live entitlement detection for subscription-backed agents.
-// A stored OAuth credential is not proof of an active plan, so Claude receives one tiny,
-// cached readiness request before the app reports it as available.
-
-import { mkdtemp, rm } from 'fs/promises';
-import { tmpdir } from 'os';
-import { join } from 'path';
+// Install and authentication detection for subscription-backed agents.
+// Status checks are deliberately metadata-only: they must never spend a model turn.
 import {
   classifyExit,
   isSubscriptionInactiveMessage,
@@ -15,7 +10,6 @@ import { spawnCollect } from './spawnHelper.js';
 import {
   buildClaudeSubscriptionEnv,
   buildCodexSubscriptionEnv,
-  CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
 } from './subscriptionEnv.js';
 import type {
   AgentCliStatus,
@@ -28,7 +22,6 @@ import {
 } from './version.js';
 
 const DETECT_TIMEOUT_MS = 8_000;
-const ENTITLEMENT_TIMEOUT_MS = 25_000;
 const STATUS_CACHE_TTL_MS = 30_000;
 
 interface LoginProbe {
@@ -42,12 +35,6 @@ interface LoginProbe {
 export interface AgentDetectionOptions {
   /** Ignore the short UI cache. Generation paths must set this to true. */
   forceRefresh?: boolean;
-}
-
-interface EntitlementProbe {
-  available: boolean;
-  errorCode?: AgentErrorCode;
-  detail?: string;
 }
 
 const statusCache = new Map<AgentProvider, { checkedAt: number; status: AgentCliStatus }>();
@@ -169,6 +156,17 @@ function hasNonSubscriptionAuthSource(status: Record<string, unknown>, raw: stri
   return /api.?key.?helper|apps?.?gateway|bedrock|vertex|foundry|pay.?as.?you.?go/i.test(raw);
 }
 
+function claudeAuthenticationFailureDetail(errorCode: AgentErrorCode, raw: string): string {
+  if (errorCode === 'subscription_inactive') {
+    return 'Claude 로그인은 남아 있지만 현재 계정의 유료 구독을 확인하지 못했습니다.';
+  }
+  if (errorCode === 'not_logged_in') return 'Claude 로그인이 필요합니다.';
+  if (errorCode === 'timeout') return 'Claude 로그인 상태 확인 시간이 초과되었습니다.';
+  return raw.trim()
+    ? sanitizeUserVisibleError(raw)
+    : 'Claude 로그인 상태를 확인하지 못했습니다.';
+}
+
 /**
  * Read Claude OAuth state. Readiness requires structured auth provenance from a current CLI;
  * credential-file presence and an unstructured "Logged in" message are never sufficient.
@@ -188,7 +186,7 @@ async function probeClaudeLogin(): Promise<LoginProbe> {
       return {
         loggedIn: errorCode === 'subscription_inactive',
         errorCode,
-        detail: entitlementDetail(errorCode, out),
+        detail: claudeAuthenticationFailureDetail(errorCode, out),
       };
     }
     const parsed = tryExtractJson(out);
@@ -252,86 +250,7 @@ async function probeClaudeLogin(): Promise<LoginProbe> {
   }
 }
 
-function entitlementDetail(errorCode: AgentErrorCode, raw: string): string {
-  if (errorCode === 'subscription_inactive') {
-    return 'Claude 구독 기간이 만료되었거나 현재 계정에 활성 Claude Code 구독이 없습니다.';
-  }
-  if (errorCode === 'rate_limited') {
-    return 'Claude 구독 사용 한도가 소진되었습니다. 한도 초기화 후 다시 확인해주세요.';
-  }
-  if (errorCode === 'not_logged_in') {
-    return 'Claude 로그인이 만료되었습니다. 다시 로그인해주세요.';
-  }
-  if (errorCode === 'timeout') {
-    return 'Claude 구독 권한 확인 시간이 초과되었습니다. 네트워크 상태를 확인해주세요.';
-  }
-  return raw.trim()
-    ? sanitizeUserVisibleError(raw)
-    : 'Claude 구독 사용 권한을 확인하지 못했습니다.';
-}
-
-/** Execute one minimal, tool-free turn so stale OAuth cannot masquerade as entitlement. */
-async function probeClaudeEntitlement(): Promise<EntitlementProbe> {
-  const cwd = await mkdtemp(join(tmpdir(), 'agentcli-claude-status-'));
-  try {
-    const res = await spawnCollect({
-      command: 'claude',
-      args: [
-        '-p',
-        '--output-format', 'json',
-        '--max-turns', '1',
-        '--permission-mode', 'plan',
-        ...CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
-      ],
-      provider: 'claude',
-      cwd,
-      stdin: 'Reply with exactly READY. Do not use tools.',
-      timeoutMs: ENTITLEMENT_TIMEOUT_MS,
-      env: buildClaudeSubscriptionEnv(),
-    });
-    const raw = `${res.stderr}\n${res.stdout}`.trim();
-    if (res.code !== 0) {
-      const errorCode = classifyExit('claude', res.stderr, res.stdout);
-      return { available: false, errorCode, detail: entitlementDetail(errorCode, raw) };
-    }
-
-    const parsed = tryExtractJson(res.stdout);
-    if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
-      const envelope = parsed as Record<string, unknown>;
-      if (envelope.is_error === true) {
-        const errorText = String(envelope.result ?? raw);
-        const errorCode = classifyExit('claude', errorText, raw);
-        return { available: false, errorCode, detail: entitlementDetail(errorCode, errorText) };
-      }
-      if (typeof envelope.result === 'string' && envelope.result.trim()) {
-        if (envelope.result.trim() === 'READY') return { available: true };
-        return {
-          available: false,
-          errorCode: 'bad_json',
-          detail: 'Claude 구독 권한 확인 응답이 예상한 READY 형식과 다릅니다.',
-        };
-      }
-    }
-
-    return {
-      available: false,
-      errorCode: 'empty_output',
-      detail: 'Claude 구독 권한 확인 응답이 비어 있습니다.',
-    };
-  } catch (error) {
-    const candidate = error as { code?: AgentErrorCode; message?: string; detail?: string };
-    const errorCode = candidate.code ?? classifyExit('claude', candidate.message ?? '', candidate.detail ?? '');
-    return {
-      available: false,
-      errorCode,
-      detail: entitlementDetail(errorCode, `${candidate.message ?? ''}\n${candidate.detail ?? ''}`),
-    };
-  } finally {
-    await rm(cwd, { recursive: true, force: true }).catch(() => { /* best effort */ });
-  }
-}
-
-/** Detect install, authentication, and actual subscription availability. Never rejects. */
+/** Detect installation and authentication without issuing a model request. Never rejects. */
 export async function detectAgent(
   provider: AgentProvider,
   options: AgentDetectionOptions = {},
@@ -390,15 +309,13 @@ export async function detectAgent(
     }, detectionRevision);
   }
 
-  const entitlement = await probeClaudeEntitlement();
   return cacheStatus({
     provider,
     installed: true,
     version,
     loggedIn: true,
-    available: entitlement.available,
-    availabilityCheck: 'live',
-    errorCode: entitlement.errorCode,
-    detail: entitlement.detail || login.detail,
+    available: true,
+    availabilityCheck: 'authentication',
+    detail: login.detail,
   }, detectionRevision);
 }

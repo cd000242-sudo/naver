@@ -19,6 +19,7 @@ import {
   CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
 } from './subscriptionEnv.js';
 import { AgentCliError } from './types.js';
+import { buildAgentFailureMessage } from './failureMessage.js';
 
 export interface ClaudeRunOptions {
   /** Provided for API symmetry with codex; claude has no --output-schema, so it is unused here. */
@@ -57,10 +58,11 @@ export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Pr
     });
 
     if (res.code !== 0) {
+      const code = classifyExit('claude', res.stderr, res.stdout);
       throw new AgentCliError(
-        classifyExit('claude', res.stderr, res.stdout),
+        code,
         'claude',
-        `claude가 비정상 종료했습니다 (code ${res.code}).`,
+        buildAgentFailureMessage('claude', code, res.stderr || res.stdout),
         (res.stderr || res.stdout || '').slice(0, 800),
       );
     }

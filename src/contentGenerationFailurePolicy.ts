@@ -5,9 +5,12 @@ function normalizeContentGenerationErrorMessage(error: unknown): string {
 }
 
 export function isTerminalContentGenerationError(error: unknown): boolean {
-  const errorCode = typeof error === 'object' && error !== null
-    ? String((error as { code?: unknown }).code ?? '')
-    : '';
+  const errorRecord = typeof error === 'object' && error !== null
+    ? error as { code?: unknown; provider?: unknown }
+    : undefined;
+  const errorCode = String(errorRecord?.code ?? '');
+  const agentProvider = errorRecord?.provider === 'codex' || errorRecord?.provider === 'claude';
+  if (agentProvider && errorCode) return true;
   if (['not_installed', 'not_logged_in', 'subscription_inactive', 'rate_limited'].includes(errorCode)) {
     return true;
   }
