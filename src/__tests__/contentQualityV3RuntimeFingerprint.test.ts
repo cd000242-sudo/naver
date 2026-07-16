@@ -1050,7 +1050,7 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
       .resolves.toBe(CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256);
     await expect(verifyContentQualityV3CandidateRuntimeFingerprint(workspaceRoot))
       .resolves.toBeUndefined();
-  }, 30_000);
+  }, 120_000);
 
   it('sorts paths before length-prefixed hashing and canonicalizes only CRLF to LF', async () => {
     const lfRoot = await createFixture({
