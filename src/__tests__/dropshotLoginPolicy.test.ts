@@ -27,7 +27,7 @@ describe('Dropshot login success policy', () => {
     const cachedSuccessIndex = checkBlock.indexOf('if (cachedLoggedIn)');
     const cachedWorkspaceIndex = checkBlock.indexOf('await openDropshotImageWorkspace(cachedPage, onLog)', cachedSuccessIndex);
     const cachedControlsIndex = checkBlock.indexOf('await ensureDropshotControls(cachedPage, onLog)', cachedWorkspaceIndex);
-    const cachedReturnIndex = checkBlock.indexOf('return { loggedIn: true', cachedControlsIndex);
+    const cachedReturnIndex = checkBlock.indexOf('return authenticatedStatus(true', cachedControlsIndex);
     const cacheCloseIndex = checkBlock.indexOf('await closeBrowserCache();');
 
     expect(checkIndex).toBeGreaterThan(-1);
@@ -45,20 +45,36 @@ describe('Dropshot login success policy', () => {
     expect(source).toContain('if (_checkPromise) return _checkPromise;');
   });
 
-  it('persists login, closes the visible context, and validates a hidden generation session', () => {
+  it('reuses and minimizes the authenticated visible context without a close/reopen race', () => {
     const detectedIndex = source.indexOf('if (!detected)');
     const successIndex = source.indexOf('return { loggedIn: true', detectedIndex);
     const successBlock = source.slice(detectedIndex, successIndex);
-    const closeIndex = successBlock.lastIndexOf('await closeLoginVerificationContext(ctx)');
-    const hiddenValidationIndex = successBlock.indexOf('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)', closeIndex);
+    const adoptedIndex = successBlock.indexOf('// Reuse the exact context');
+    const adoptedEnd = successBlock.indexOf('} catch (error)', adoptedIndex);
+    const adoptedBlock = successBlock.slice(adoptedIndex, adoptedEnd);
 
-    expect(closeIndex).toBeGreaterThan(-1);
-    expect(hiddenValidationIndex).toBeGreaterThan(closeIndex);
-    expect(successBlock).not.toContain('setCached(ctx, page)');
-    expect(successBlock).not.toContain('minimizeDropshotWindow');
+    expect(adoptedIndex).toBeGreaterThan(-1);
+    expect(adoptedEnd).toBeGreaterThan(adoptedIndex);
+    expect(adoptedBlock).toContain('setCached(ctx, page)');
+    expect(adoptedBlock).toContain('await minimizeDropshotWindow(page, onLog)');
+    expect(adoptedBlock).not.toContain('await closeLoginVerificationContext(ctx)');
+    expect(adoptedBlock).not.toContain('await reopenDropshotHeadlessGenerationContext');
     expect(headlessSource).toContain('launchBrowser(profileDir, true)');
-    expect(headlessSource).toContain('await ensureDropshotControls(page, onLog)');
     expect(headlessSource).toContain('setCached(context, page)');
+  });
+
+  it('recognizes a valid token before requiring workspace or unlimited controls', () => {
+    const checkIndex = source.indexOf('async function checkDropshotLoginInternal');
+    const loginIndex = source.indexOf('async function dropshotLoginInternal', checkIndex);
+    const checkBlock = source.slice(checkIndex, loginIndex);
+    const authIndex = checkBlock.indexOf('if (cachedLoggedIn)');
+    const successIndex = checkBlock.indexOf('loggedIn: true', authIndex);
+    const controlsIndex = checkBlock.indexOf('ensureDropshotControls', authIndex);
+
+    expect(authIndex).toBeGreaterThan(-1);
+    expect(successIndex).toBeGreaterThan(authIndex);
+    expect(successIndex).toBeLessThan(controlsIndex);
+    expect(checkBlock).toContain("phase: 'authenticated'");
   });
 
   it('releases operation ownership through finally blocks', () => {

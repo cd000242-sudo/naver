@@ -5,6 +5,8 @@
  * - 상수 통합, 에러 핸들링 강화, 메모리 관리 개선
  */
 
+import { bindDropshotLogin, refreshDropshotLoginStatus } from '../modules/dropshotLoginUi.js';
+
 // ✅ [v2.10.288] subImageMode import 제거 — esbuild 회귀(XXX_1 is not defined) 차단.
 //   side-effect import는 renderer.ts:57에 있어 window.getSubImageMode 자동 등록됨.
 export type SubImageMode = 'ai' | 'collected';
@@ -1470,41 +1472,12 @@ export function createHeadingImageModal(): void {
     });
   });
 
-  // ✅ [SPEC-DROPSHOT-2026 2단계] dropshot 로그인/확인 버튼 (이 파일은 import 미사용 관례 → 인라인 배선)
-  {
-    const setDsStatus = (msg: string, color: string): void => {
-      const s = document.getElementById('hsettings-ds-status');
-      if (s) { s.textContent = msg; s.style.color = color; }
-    };
-    const dsLoginBtn = document.getElementById('hsettings-ds-login-btn') as HTMLButtonElement | null;
-    const dsCheckBtn = document.getElementById('hsettings-ds-check-btn') as HTMLButtonElement | null;
-    document.getElementById('hsettings-ds-login-btn')?.addEventListener('click', async () => {
-      if (!dsLoginBtn || dsLoginBtn.disabled) return;
-      dsLoginBtn.disabled = true;
-      setDsStatus('🔗 로그인 진행 중… 필요 시 브라우저 창이 열립니다 (최대 5분).', '#92400e');
-      try {
-        const r = await (window as any).api?.dropshotLogin?.();
-        setDsStatus(r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '로그인 실패'}`, r?.loggedIn ? '#059669' : '#b91c1c');
-      } catch (e) {
-        setDsStatus(`⚠️ 로그인 오류: ${(e as Error)?.message ?? e}`, '#b91c1c');
-      } finally {
-        dsLoginBtn.disabled = false;
-      }
-    });
-    document.getElementById('hsettings-ds-check-btn')?.addEventListener('click', async () => {
-      if (!dsCheckBtn || dsCheckBtn.disabled) return;
-      dsCheckBtn.disabled = true;
-      setDsStatus('⏳ 로그인 상태 확인 중…', '#92400e');
-      try {
-        const r = await (window as any).api?.checkDropshotLogin?.();
-        setDsStatus(r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '미로그인'}`, r?.loggedIn ? '#059669' : '#b91c1c');
-      } catch (e) {
-        setDsStatus(`⚠️ 확인 오류: ${(e as Error)?.message ?? e}`, '#b91c1c');
-      } finally {
-        dsCheckBtn.disabled = false;
-      }
-    });
-  }
+  // ✅ [SPEC-DROPSHOT-2026] 모든 화면이 하나의 로그인 상태와 중복 방지 로직을 공유합니다.
+  bindDropshotLogin({
+    loginBtnId: 'hsettings-ds-login-btn',
+    checkBtnId: 'hsettings-ds-check-btn',
+    statusId: 'hsettings-ds-status',
+  });
 
   // ✅ AI 엔진 서브 모달 확인 버튼
   document.getElementById('image-source-confirm')?.addEventListener('click', async () => {
@@ -1553,6 +1526,11 @@ export function createHeadingImageModal(): void {
     {
       const dsRow = document.getElementById('hsettings-dropshot-login');
       if (dsRow) dsRow.style.display = selectedSourceValue === 'dropshot' ? 'block' : 'none';
+      if (selectedSourceValue === 'dropshot') void refreshDropshotLoginStatus({
+        loginBtnId: 'hsettings-ds-login-btn',
+        checkBtnId: 'hsettings-ds-check-btn',
+        statusId: 'hsettings-ds-status',
+      });
     }
     // ✅ [SPEC-DROPSHOT-2026 3단계] Google 계정 연동은 imagefx/flow 선택 시에만 노출
     {
@@ -2656,6 +2634,11 @@ export function openHeadingImageModal(): void {
     {
       const dsRow = document.getElementById('hsettings-dropshot-login');
       if (dsRow) dsRow.style.display = currentSource === 'dropshot' ? 'block' : 'none';
+      if (currentSource === 'dropshot') void refreshDropshotLoginStatus({
+        loginBtnId: 'hsettings-ds-login-btn',
+        checkBtnId: 'hsettings-ds-check-btn',
+        statusId: 'hsettings-ds-status',
+      });
     }
     // ✅ [SPEC-DROPSHOT-2026 3단계] Google 계정 연동은 imagefx/flow 선택 시에만 노출
     {

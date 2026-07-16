@@ -8,8 +8,8 @@ import {
   getProfileDir,
   isLoggedIn,
   launchBrowser,
+  minimizeDropshotWindow,
   navigateToDropshotBoard,
-  navigateToDropshotLogin,
   openDropshotImageWorkspace,
 } from './dropshotBrowser.js';
 import {
@@ -21,7 +21,6 @@ import {
   getCachedPage,
   setCached,
 } from './dropshotSession.js';
-import { reopenDropshotHeadlessGenerationContext } from './dropshotHeadlessSession.js';
 
 export {
   buildDropshotPrompt,
@@ -77,8 +76,7 @@ async function getHealthyCachedPage(onLog?: (m: string) => void): Promise<any | 
       return null;
     }
     if (!(await openDropshotImageWorkspace(page, onLog))) {
-      await closeBrowserCache();
-      return null;
+      onLog?.('[리더스 나노바나나] 로그인은 유지되며 이미지 작업 화면은 생성 단계에서 다시 준비합니다.');
     }
     return page;
   } catch {
@@ -119,20 +117,20 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
     const initialAuthenticated = await isLoggedIn(headlessProbePage);
 
     if (initialAuthenticated) {
-      const workspaceReady = await openDropshotImageWorkspace(headlessProbePage, onLog);
-      if (workspaceReady) {
-        try {
+      try {
+        const workspaceReady = await openDropshotImageWorkspace(headlessProbePage, onLog);
+        if (workspaceReady) {
           await ensureDropshotControls(headlessProbePage, onLog);
-          setCached(context, headlessProbePage);
-          context = null;
-          onLog?.('[리더스 나노바나나] 준비 완료');
-          return headlessProbePage;
-        } catch (controlError) {
-          onLog?.(
-            `[리더스 나노바나나] 구독 로그인을 확인하려고 브라우저를 엽니다: ${(controlError as Error).message?.slice(0, 120)}`,
-          );
         }
+      } catch (controlError) {
+        onLog?.(
+          `[리더스 나노바나나] 로그인은 자동 인식됐으며 무제한·0비용 상태는 생성 전에 다시 확인합니다: ${(controlError as Error).message?.slice(0, 120)}`,
+        );
       }
+      setCached(context, headlessProbePage);
+      context = null;
+      onLog?.('[리더스 나노바나나] 저장된 로그인 자동 인식 완료');
+      return headlessProbePage;
     }
 
     await closeContext(context);
@@ -173,19 +171,14 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
         }) || pages[pages.length - 1];
 
         if (await isLoggedIn(page)) {
-          if (!(await openDropshotImageWorkspace(page, onLog))) {
-            onLog?.('[리더스 나노바나나] 로그인 확인됨 - 이미지 작업 화면 연결 대기 중...');
-            continue;
-          }
+          loggedIn = true;
           try {
-            await ensureDropshotControls(page, onLog);
-            loggedIn = true;
-            break;
+            const workspaceReady = await openDropshotImageWorkspace(page, onLog);
+            if (workspaceReady) await ensureDropshotControls(page, onLog);
           } catch {
-            onLog?.('[리더스 나노바나나] 무제한 구독 로그인을 브라우저에서 완료해주세요.');
-            await navigateToDropshotLogin(page, onLog);
-            continue;
+            onLog?.('[리더스 나노바나나] 로그인 완료 - 무제한·0비용 상태는 생성 전에 다시 확인합니다.');
           }
+          break;
         }
       } catch {
         // OAuth page transitions can temporarily detach the active page.
@@ -202,11 +195,11 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
         : '로그인 시간이 초과되었습니다.');
     }
 
-    await closeContext(context);
+    setCached(context, page);
+    await minimizeDropshotWindow(page, onLog);
     context = null;
     onLog?.('[리더스 나노바나나] 준비 완료');
-    const hiddenPage = await reopenDropshotHeadlessGenerationContext(profileDir, onLog);
-    return hiddenPage;
+    return page;
   } catch (error) {
     if (context) await closeContext(context);
     clearCached();

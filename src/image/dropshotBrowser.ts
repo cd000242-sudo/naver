@@ -24,9 +24,21 @@ const PROFILE_ROOT = '.better-life-naver';
 export const PROMPT_SELECTOR =
   'textarea, [contenteditable="true"], div[role="textbox"]';
 
+export type DropshotAuthPhase =
+  | 'unknown'
+  | 'checking'
+  | 'login_required'
+  | 'authenticated'
+  | 'unlimited_ready'
+  | 'expired'
+  | 'error';
+
 export interface DropshotLoginStatus {
   loggedIn: boolean;
   message: string;
+  phase: DropshotAuthPhase;
+  ready: boolean;
+  code?: string;
 }
 
 export interface DropshotResult {

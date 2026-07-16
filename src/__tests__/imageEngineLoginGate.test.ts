@@ -18,12 +18,20 @@ describe('image engine login gating', () => {
     );
   });
 
-  it('dropshot login/check remain click-initiated only (no auto-check on open)', () => {
-    const code = read('renderer/components/HeadingImageSettings.ts');
-    const dsLoginIdx = code.indexOf("hsettings-ds-login-btn')?.addEventListener('click'");
-    const dsCheckIdx = code.indexOf("hsettings-ds-check-btn')?.addEventListener('click'");
-    expect(dsLoginIdx).toBeGreaterThan(-1);
-    expect(dsCheckIdx).toBeGreaterThan(-1);
+  it('auto-checks Dropshot only after that engine is selected and never auto-starts login', () => {
+    const sharedUi = read('renderer/modules/dropshotLoginUi.ts');
+    const headingSettings = read('renderer/components/HeadingImageSettings.ts');
+
+    expect(sharedUi).toContain("sel.value === 'dropshot'");
+    expect(sharedUi).toContain('refreshDropshotLoginStatus(opts)');
+    expect(headingSettings).toContain("selectedSourceValue === 'dropshot'");
+    expect(headingSettings).toContain('refreshDropshotLoginStatus');
+    const refreshBlock = sharedUi.slice(
+      sharedUi.indexOf('export async function refreshDropshotLoginStatus'),
+      sharedUi.indexOf('export function bindDropshotLogin'),
+    );
+    expect(refreshBlock).toContain('checkDropshotLogin');
+    expect(refreshBlock).not.toContain('dropshotLogin');
   });
 
   it('disables Dropshot login buttons while an IPC request is in flight', () => {
@@ -31,13 +39,10 @@ describe('image engine login gating', () => {
     const headingSettings = read('renderer/components/HeadingImageSettings.ts');
 
     expect(sharedUi).toContain('loginBtn.disabled = true;');
-    expect(sharedUi).toContain('loginBtn.disabled = false;');
+    expect(sharedUi).toContain('loginBtn.disabled = dsLastStatus?.loggedIn === true;');
     expect(sharedUi).toContain('checkBtn.disabled = true;');
     expect(sharedUi).toContain('checkBtn.disabled = false;');
-    expect(headingSettings).toContain('dsLoginBtn.disabled = true;');
-    expect(headingSettings).toContain('dsLoginBtn.disabled = false;');
-    expect(headingSettings).toContain('dsCheckBtn.disabled = true;');
-    expect(headingSettings).toContain('dsCheckBtn.disabled = false;');
+    expect(headingSettings).toContain('bindDropshotLogin');
   });
 
   it('resets the stale thumbnailOnly flag exactly once at checkbox init', () => {

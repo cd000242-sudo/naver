@@ -1188,9 +1188,9 @@ contextBridge.exposeInMainWorld('api', {
   checkImageFxGoogleLogin: (): Promise<{ loggedIn: boolean; userName?: string; message: string }> =>
     ipcRenderer.invoke('imagefx:checkGoogleLogin'),
   // ✅ [SPEC-DROPSHOT-2026] 리더스 나노바나나 무제한 — 로그인 확인/로그인
-  checkDropshotLogin: (): Promise<{ loggedIn: boolean; message: string }> =>
+  checkDropshotLogin: (): Promise<{ loggedIn: boolean; message: string; phase: string; ready: boolean; code?: string }> =>
     ipcRenderer.invoke('dropshot:check-login'),
-  dropshotLogin: (): Promise<{ loggedIn: boolean; message: string }> =>
+  dropshotLogin: (): Promise<{ loggedIn: boolean; message: string; phase: string; ready: boolean; code?: string }> =>
     ipcRenderer.invoke('dropshot:login'),
   // ✅ [v1.4.80] Flow 연결 테스트 (Nano Banana Pro)
   testFlowConnection: (): Promise<{ ok: boolean; message: string; userInfo?: { email?: string; name?: string } }> =>

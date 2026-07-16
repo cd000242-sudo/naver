@@ -16,6 +16,18 @@ interface DropshotLoginIds {
   readonly statusId: string;
 }
 
+interface DropshotUiStatus {
+  readonly loggedIn: boolean;
+  readonly message: string;
+  readonly phase?: string;
+  readonly ready?: boolean;
+}
+
+const dsBindings = new Map<string, DropshotLoginIds>();
+let dsLastStatus: DropshotUiStatus | null = null;
+let dsRefreshPromise: Promise<DropshotUiStatus> | null = null;
+let dsLoginAnnounced = false;
+
 function dsSetStatus(statusId: string, text: string, kind: 'info' | 'ok' | 'error'): void {
   const el = document.getElementById(statusId);
   if (!el) return;
@@ -23,8 +35,71 @@ function dsSetStatus(statusId: string, text: string, kind: 'info' | 'ok' | 'erro
   el.style.color = kind === 'ok' ? '#10b981' : kind === 'error' ? '#ef4444' : 'var(--text-muted)';
 }
 
+function dsApplyStatus(ids: DropshotLoginIds, status: DropshotUiStatus): void {
+  const loginBtn = document.getElementById(ids.loginBtnId) as HTMLButtonElement | null;
+  const checkBtn = document.getElementById(ids.checkBtnId) as HTMLButtonElement | null;
+  const checking = status.phase === 'checking';
+
+  if (loginBtn) {
+    loginBtn.textContent = status.loggedIn ? '✅ 로그인됨' : '🔗 로그인';
+    loginBtn.disabled = status.loggedIn || checking;
+  }
+  if (checkBtn) checkBtn.disabled = checking;
+
+  dsSetStatus(
+    ids.statusId,
+    status.loggedIn ? `✅ ${status.message}` : checking ? `⏳ ${status.message}` : `⚠️ ${status.message}`,
+    status.loggedIn ? 'ok' : checking ? 'info' : 'error',
+  );
+}
+
+function dsPublishStatus(status: DropshotUiStatus): void {
+  dsLastStatus = status;
+  for (const ids of dsBindings.values()) dsApplyStatus(ids, status);
+
+  if (status.loggedIn && !dsLoginAnnounced) {
+    dsLoginAnnounced = true;
+    (window as any).toastManager?.success?.('✅ 리더스 나노바나나 로그인 계정을 자동으로 인식했습니다.');
+  }
+}
+
+/** Hidden status probe only. It never invokes the interactive login IPC. */
+export async function refreshDropshotLoginStatus(ids?: DropshotLoginIds): Promise<DropshotUiStatus> {
+  if (ids) dsBindings.set(ids.statusId, ids);
+  if (dsRefreshPromise) return dsRefreshPromise;
+
+  dsPublishStatus({ loggedIn: false, message: '저장된 로그인 확인 중…', phase: 'checking', ready: false });
+  const api = (window as any).api;
+  dsRefreshPromise = (async () => {
+    try {
+      const result = await api?.checkDropshotLogin?.();
+      const status: DropshotUiStatus = result ?? {
+        loggedIn: false,
+        message: '로그인 확인 API를 사용할 수 없습니다.',
+        phase: 'error',
+        ready: false,
+      };
+      dsPublishStatus(status);
+      return status;
+    } catch (error) {
+      const status: DropshotUiStatus = {
+        loggedIn: false,
+        message: `로그인 확인 오류: ${(error as Error)?.message ?? error}`,
+        phase: 'error',
+        ready: false,
+      };
+      dsPublishStatus(status);
+      return status;
+    } finally {
+      dsRefreshPromise = null;
+    }
+  })();
+  return dsRefreshPromise;
+}
+
 /** Binds the 로그인 / 로그인 확인 buttons to the dropshot IPC (idempotent). */
 export function bindDropshotLogin(ids: DropshotLoginIds): void {
+  dsBindings.set(ids.statusId, ids);
   const api = (window as any).api;
   const loginBtn = document.getElementById(ids.loginBtnId) as HTMLButtonElement | null;
   const checkBtn = document.getElementById(ids.checkBtnId) as HTMLButtonElement | null;
@@ -37,11 +112,11 @@ export function bindDropshotLogin(ids: DropshotLoginIds): void {
       dsSetStatus(ids.statusId, '🔗 로그인 진행 중… 필요 시 브라우저 창이 열립니다 (최대 5분).', 'info');
       try {
         const r = await api?.dropshotLogin?.();
-        dsSetStatus(ids.statusId, r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '로그인 실패'}`, r?.loggedIn ? 'ok' : 'error');
+        dsPublishStatus(r ?? { loggedIn: false, message: '로그인 실패', phase: 'error', ready: false });
       } catch (e) {
-        dsSetStatus(ids.statusId, `⚠️ 로그인 오류: ${(e as Error)?.message ?? e}`, 'error');
+        dsPublishStatus({ loggedIn: false, message: `로그인 오류: ${(e as Error)?.message ?? e}`, phase: 'error', ready: false });
       } finally {
-        loginBtn.disabled = false;
+        loginBtn.disabled = dsLastStatus?.loggedIn === true;
       }
     });
   }
@@ -53,8 +128,7 @@ export function bindDropshotLogin(ids: DropshotLoginIds): void {
       checkBtn.disabled = true;
       dsSetStatus(ids.statusId, '⏳ 로그인 상태 확인 중…', 'info');
       try {
-        const r = await api?.checkDropshotLogin?.();
-        dsSetStatus(ids.statusId, r?.loggedIn ? `✅ ${r.message}` : `⚠️ ${r?.message ?? '미로그인'}`, r?.loggedIn ? 'ok' : 'error');
+        await refreshDropshotLoginStatus(ids);
       } catch (e) {
         dsSetStatus(ids.statusId, `⚠️ 확인 오류: ${(e as Error)?.message ?? e}`, 'error');
       } finally {
@@ -62,6 +136,8 @@ export function bindDropshotLogin(ids: DropshotLoginIds): void {
       }
     });
   }
+
+  if (dsLastStatus) dsApplyStatus(ids, dsLastStatus);
 }
 
 /** Binds the login/check buttons to the Flow IPC (idempotent). */
@@ -117,7 +193,11 @@ export function wireSelectDropshotRow(opts: {
   bindDropshotLogin(opts);
   const sel = document.getElementById(opts.selectId) as HTMLSelectElement | null;
   if (!sel) return;
-  const sync = (): void => toggleDropshotRow(opts.rowId, sel.value === 'dropshot');
+  const sync = (): void => {
+    const selected = sel.value === 'dropshot';
+    toggleDropshotRow(opts.rowId, selected);
+    if (selected) void refreshDropshotLoginStatus(opts);
+  };
   sel.addEventListener('change', sync);
   sync();
 }

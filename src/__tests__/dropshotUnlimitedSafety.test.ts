@@ -61,7 +61,7 @@ describe('Dropshot unlimited mode safety', () => {
     expect(browserCode).not.toMatch(/hasWorkspaceNav/);
   });
 
-  it('rechecks cached and headless Dropshot pages before marking the session ready', () => {
+  it('rechecks zero-cost controls while reusing authenticated browser contexts', () => {
     const cachedAuth = coreCode.indexOf('if (!(await isLoggedIn(page)))');
     const cachedWorkspace = coreCode.indexOf('if (!(await openDropshotImageWorkspace(page, onLog)))', cachedAuth);
     const cachedReturn = coreCode.indexOf('return page;', cachedWorkspace);
@@ -81,11 +81,12 @@ describe('Dropshot unlimited mode safety', () => {
     expect(initialCache).toBeGreaterThan(initialControls);
 
     const visibleControls = coreCode.lastIndexOf('await ensureDropshotControls(page, onLog)');
-    const visibleClose = coreCode.indexOf('await closeContext(context);', visibleControls);
-    const hiddenReopen = coreCode.indexOf('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)', visibleClose);
+    const visibleCache = coreCode.indexOf('setCached(context, page);', visibleControls);
+    const visibleMinimize = coreCode.indexOf('await minimizeDropshotWindow(page, onLog)', visibleCache);
     expect(visibleControls).toBeGreaterThan(initialCache);
-    expect(visibleClose).toBeGreaterThan(visibleControls);
-    expect(hiddenReopen).toBeGreaterThan(visibleClose);
+    expect(visibleCache).toBeGreaterThan(visibleControls);
+    expect(visibleMinimize).toBeGreaterThan(visibleCache);
+    expect(coreCode).not.toContain('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)');
 
     const helperStart = headlessCode.indexOf('export async function reopenDropshotHeadlessGenerationContext');
     const hiddenLaunch = headlessCode.indexOf('launchBrowser(profileDir, true)', helperStart);
@@ -95,7 +96,7 @@ describe('Dropshot unlimited mode safety', () => {
     expect(hiddenLaunch).toBeGreaterThan(helperStart);
     expect(hiddenControls).toBeGreaterThan(hiddenLaunch);
     expect(hiddenCache).toBeGreaterThan(hiddenControls);
-    expect(coreCode).not.toContain('minimizeDropshotWindow');
+    expect(coreCode).toContain('minimizeDropshotWindow');
     expect(headlessCode).not.toContain('minimizeDropshotWindow');
     expect(coreCode).toMatch(/clearCached\(\)/);
   });
