@@ -90,6 +90,7 @@ export async function saveCollectedShoppingImagesToLocal(
     const saveResult = await api.downloadAndSaveMultipleImages(
       candidates.map((item) => ({ url: item.url, heading: item.heading })),
       title || 'shopping-images',
+      { destination: 'configured-root' },
     );
 
     const savedImages = Array.isArray(saveResult?.savedImages) ? saveResult.savedImages : [];

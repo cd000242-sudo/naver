@@ -835,8 +835,12 @@ contextBridge.exposeInMainWorld('api', {
     message?: string;
   }> => ipcRenderer.invoke('image:batchOptimizeSearchQueries', title, headings),
   // ✅ 여러 이미지 일괄 다운로드 및 저장
-  downloadAndSaveMultipleImages: (images: Array<{ url: string; heading: string }>, title: string): Promise<{ success: boolean; savedImages: any[]; folderPath?: string; error?: string }> =>
-    ipcRenderer.invoke('image:downloadAndSaveMultiple', images, title),
+  downloadAndSaveMultipleImages: (
+    images: Array<{ url: string; heading: string }>,
+    title: string,
+    options?: { destination?: 'title-subfolder' | 'configured-root' },
+  ): Promise<{ success: boolean; savedImages: any[]; folderPath?: string; error?: string }> =>
+    ipcRenderer.invoke('image:downloadAndSaveMultiple', images, title, options),
   // 여러 플랫폼에서 콘텐츠 수집 (할루시네이션 방지)
   collectContentFromPlatforms: (keyword: string, options?: { maxPerSource?: number }): Promise<{ success: boolean; collectedText?: string; sourceCount?: number; urls?: string[]; message?: string }> =>
     ipcRenderer.invoke('content:collectFromPlatforms', keyword, options),

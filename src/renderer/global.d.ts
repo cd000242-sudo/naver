@@ -680,7 +680,11 @@ interface AutomationAPI {
   // ✅ [100점 개선] URL에서 이미지 크롤링 API
   crawlImagesFromUrl: (url: string) => Promise<{ success: boolean; images?: string[]; title?: string; message?: string }>;
   downloadAndSaveImage: (imageUrl: string, title: string, index: number) => Promise<{ success: boolean; filePath?: string; error?: string }>; // ✅ 이미지 로컬 저장
-  downloadAndSaveMultipleImages: (images: Array<{ url: string; heading: string }>, title: string) => Promise<{ success: boolean; savedImages: any[]; folderPath?: string; error?: string }>; // ✅ 여러 이미지 일괄 저장
+  downloadAndSaveMultipleImages: (
+    images: Array<{ url: string; heading: string }>,
+    title: string,
+    options?: { destination?: 'title-subfolder' | 'configured-root' },
+  ) => Promise<{ success: boolean; savedImages: any[]; folderPath?: string; error?: string }>; // ✅ 여러 이미지 일괄 저장
   // 여러 플랫폼에서 콘텐츠 수집 (할루시네이션 방지)
   collectContentFromPlatforms: (keyword: string, options?: { maxPerSource?: number }) => Promise<{ success: boolean; collectedText?: string; sourceCount?: number; urls?: string[]; message?: string }>;
   // 저장된 이미지 관리

@@ -15,6 +15,11 @@ import { decodeBase64Async } from '../utils/base64Async.js';
 import { loadConfig } from '../../configManager.js';
 import { isFreeTierUser } from '../utils/authUtils.js';
 import { consume as consumeQuota } from '../../quotaManager.js';
+import {
+    buildBatchImageFileName,
+    resolveBatchImageDirectory,
+    type BatchImageDestination,
+} from './imageDownloadPathPolicy.js';
 
 export function registerImageDownloadHandlers(): void {
     ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string, category?: string) => {
@@ -127,7 +132,12 @@ export function registerImageDownloadHandlers(): void {
     });
 
     // [v2.10.254] image:downloadAndSaveMultiple — 다중 이미지 배치 다운로드 (BATCH=4 청크)
-    ipcMain.handle('image:downloadAndSaveMultiple', async (_event, images: Array<{ url: string; heading: string }>, title: string) => {
+    ipcMain.handle('image:downloadAndSaveMultiple', async (
+        _event,
+        images: Array<{ url: string; heading: string }>,
+        title: string,
+        options?: { destination?: BatchImageDestination },
+    ) => {
         console.log(`[Main] 🖼️ image:downloadAndSaveMultiple 호출 — 이미지 ${images?.length || 0}개, title="${title}"`);
 
         try {
@@ -135,6 +145,12 @@ export function registerImageDownloadHandlers(): void {
             const os = await import('os');
 
             const savedImages: any[] = [];
+            const destination: BatchImageDestination = options?.destination === 'configured-root'
+                ? 'configured-root'
+                : 'title-subfolder';
+            const batchToken = destination === 'configured-root'
+                ? (await import('crypto')).randomUUID().slice(0, 8)
+                : '';
             // ✅ [v2.10.54] safeTitle 정규식 보강 — 줄임표/가운뎃점/기타 유니코드 특수문자
             const safeTitle = (title || 'untitled')
                 .normalize('NFC')
@@ -165,13 +181,13 @@ export function registerImageDownloadHandlers(): void {
                 console.warn(`[Main] config 로드 실패 — fallback 사용: ${cfgErr?.message}`);
             }
 
-            let imagesPath = path.join(basePath, safeTitle);
+            let imagesPath = resolveBatchImageDirectory(basePath, safeTitle, destination);
             try {
                 await fsp.mkdir(imagesPath, { recursive: true });
                 console.log(`[Main] ✅ 이미지 저장 경로 생성: ${imagesPath}`);
             } catch (mkErr: any) {
                 console.warn(`[Main] ⚠️ basePath mkdir 실패 (${basePath}) → Downloads 폴백: ${mkErr?.message}`);
-                imagesPath = path.join(fallbackPath, safeTitle);
+                imagesPath = resolveBatchImageDirectory(fallbackPath, safeTitle, destination);
                 await fsp.mkdir(imagesPath, { recursive: true });
                 console.log(`[Main] ✅ 폴백 경로 생성: ${imagesPath}`);
             }
@@ -271,7 +287,14 @@ export function registerImageDownloadHandlers(): void {
                 try {
                     const ext = getExtensionFromContentType(result.contentType, img.url);
                     const safeHeading = img.heading.replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '').substring(0, 50);
-                    const fileName = `${i + 1}_${safeHeading}${ext}`;
+                    const fileName = buildBatchImageFileName(
+                        i,
+                        safeHeading,
+                        ext,
+                        safeTitle,
+                        destination,
+                        batchToken,
+                    );
                     const filePath = path.join(imagesPath, fileName);
 
                     await fsp.writeFile(filePath, result.buffer);
