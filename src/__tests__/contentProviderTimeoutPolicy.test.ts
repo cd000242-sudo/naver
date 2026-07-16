@@ -1,5 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { getContentProviderTimeoutMs } from '../contentProviderTimeoutPolicy';
+import {
+  getContentProviderTimeoutMs,
+  getOpenAiContentTimeoutMs,
+} from '../contentProviderTimeoutPolicy';
 
 describe('contentProviderTimeoutPolicy', () => {
   it('uses bounded generation timeouts by requested article length', () => {
@@ -19,5 +22,13 @@ describe('contentProviderTimeoutPolicy', () => {
   it('normalizes invalid input to the short-content timeout', () => {
     expect(getContentProviderTimeoutMs(Number.NaN)).toBe(60_000);
     expect(getContentProviderTimeoutMs(-100)).toBe(60_000);
+  });
+
+  it('gives GPT-5.6 long-form reasoning enough time without exceeding the renderer budget', () => {
+    expect(getOpenAiContentTimeoutMs(1800, 'gpt-5.6-sol')).toBe(240_000);
+    expect(getOpenAiContentTimeoutMs(1800, 'gpt-5.6-terra')).toBe(180_000);
+    expect(getOpenAiContentTimeoutMs(1800, 'gpt-5.6-luna')).toBe(90_000);
+    expect(getOpenAiContentTimeoutMs(650, 'gpt-5.6-sol')).toBe(120_000);
+    expect(getOpenAiContentTimeoutMs(12_000, 'gpt-5.6-sol')).toBe(240_000);
   });
 });

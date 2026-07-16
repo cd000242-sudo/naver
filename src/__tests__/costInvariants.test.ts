@@ -234,13 +234,12 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
       expect(content).toMatch(/error\s+instanceof\s+GeminiEmptyResponseError[\s\S]{0,260}!allowPaidEmptyResponseRetry/);
     });
 
-    it('OpenAI connection errors are retried and not mislabeled as unavailable model', () => {
+    it('OpenAI cost-ambiguous failures are classified without paid automatic retries', () => {
       expect(diagnostics).toMatch(/function\s+isOpenAiConnectionIssue/);
       expect(diagnostics).toMatch(/connection error/);
-      // v2.11.9 cost policy: OpenAI transient retries tightened 3 → 0 — the
-      // 10s call gap + progressive backoff scheduler handles transient errors.
       expect(content).toMatch(/maxTransientRetriesPerModel\s*=\s*0/);
-      expect(content).toMatch(/OpenAI API 연결 실패/);
+      expect(content).toMatch(/buildOpenAiGenerationFailureMessage/);
+      expect(content).not.toMatch(/회 재시도했지만 응답을 받지 못했습니다/);
     });
 
     it('provider wait messages never round sub-minute waits down to 0 minutes', () => {

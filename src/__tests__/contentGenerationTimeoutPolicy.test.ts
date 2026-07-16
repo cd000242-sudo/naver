@@ -81,12 +81,15 @@ describe('content generation timeout policy', () => {
     expect(generatorSrc).toMatch(/signal:\s*requestAbort\.signal/);
     expect(generatorSrc).toMatch(/requestAbort\.normalizeError\(requestError\)/);
     expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*0/);
+    expect(generatorSrc).toMatch(/const\s+isQuotaOrRateLimit\s*=\s*failure\.kind\s*===\s*'RATE_LIMIT'/);
+    expect(generatorSrc).not.toMatch(/failure\.kind\s*===\s*'RATE_LIMIT'\s*\|\|\s*isOpenAiRateLimitError/);
+    expect(generatorSrc).toMatch(/response\?\.choices\?\.\[0\]\?\.message\?\.content/);
     expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*5/);
     expect(generatorSrc).toMatch(/maxTransientRetries\s*=\s*5/);
     expect(generatorSrc).not.toMatch(/maxRetriesPerModel\s*=\s*4/);
   });
 
-  it('prints actionable OpenAI diagnostics on macOS before users report another black-box timeout', () => {
+  it('prints actionable OpenAI diagnostics on Windows and macOS without letting preflight block generation', () => {
     expect(generatorSrc).toMatch(/function\s+emitOpenAiDiagnosticLog/);
     expect(generatorSrc).toMatch(/BrowserWindow\.getAllWindows\(\)/);
     expect(generatorSrc).toMatch(/\[OpenAIDiag\]/);
@@ -97,9 +100,13 @@ describe('content generation timeout policy', () => {
     expect(generatorSrc).toMatch(/CHAT_REQUEST_START/);
     expect(generatorSrc).toMatch(/CHAT_RESPONSE_OK/);
     expect(generatorSrc).toMatch(/CHAT_REQUEST_ERROR/);
+    expect(generatorSrc).toMatch(/sanitizeOpenAiProviderMessage\(error\)/);
     expect(diagnosticsSrc).toMatch(/function\s+classifyOpenAiDiagnosticError/);
     expect(generatorSrc).toMatch(/classifyOpenAiDiagnosticError/);
     expect(generatorSrc).toMatch(/process\.platform\s*===\s*'darwin'/);
+    expect(generatorSrc).toMatch(/process\.platform\s*===\s*'win32'/);
+    expect(generatorSrc).toMatch(/PREFLIGHT_NON_BLOCKING/);
+    expect(generatorSrc).toMatch(/runOpenAiDiagnosticPreflight[\s\S]{0,220}\.catch\(/);
   });
 
   it('aborts the main content generation request after a renderer timeout', () => {

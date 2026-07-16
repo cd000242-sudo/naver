@@ -36,6 +36,18 @@ describe('content generation failure policy', () => {
     expect(isTerminalContentGenerationError(new Error('Connection error'))).toBe(false);
   });
 
+  it('treats cost-ambiguous OpenAI request failures as terminal at the outer pipeline', () => {
+    expect(isTerminalContentGenerationError(new Error(
+      '[OPENAI_REQUEST_FAILED:REQUEST_TIMEOUT] OpenAI 요청 실패',
+    ))).toBe(true);
+    expect(isTerminalContentGenerationError(new Error(
+      '[OPENAI_REQUEST_FAILED:OPENAI_SERVER_ERROR] OpenAI 요청 실패',
+    ))).toBe(true);
+    expect(isTerminalContentGenerationError(new Error(
+      '[OPENAI_REQUEST_FAILED:EMPTY_RESPONSE] OpenAI 요청 실패',
+    ))).toBe(true);
+  });
+
   it('stops immediately for agent subscription state that cannot recover by retrying', () => {
     expect(isTerminalContentGenerationError(new AgentCliError(
       'subscription_inactive',

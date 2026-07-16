@@ -16,6 +16,7 @@ describe('OpenAI Responses web search integration', () => {
 
     expect(params.model).toBe('gpt-5.6-terra');
     expect(params.tools).toEqual([{ type: 'web_search' }]);
+    expect(params.reasoning).toEqual({ effort: 'medium' });
     expect(params).not.toHaveProperty('web_search_options');
   });
 

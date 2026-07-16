@@ -215,7 +215,7 @@ async function runOpenAI() {
         input: CHECK_PROMPT,
         tools: [{ type: 'web_search' }],
         max_output_tokens: 2400,
-        reasoning: { effort: 'high' },
+        reasoning: { effort: 'medium' },
         text: { format: { type: 'json_object' } },
         store: false,
       }, { signal })
@@ -225,7 +225,7 @@ async function runOpenAI() {
       max_completion_tokens: 2400,
       response_format: { type: 'json_object' },
       ...(model.startsWith('gpt-5.6-')
-        ? { reasoning_effort: model === CURRENT_MODELS.openai.value ? 'medium' : 'high' }
+        ? { reasoning_effort: 'medium' }
         : { temperature: 0.3 }),
     }, { signal });
   const { promise } = withTimeout(request, DEFAULT_TIMEOUT_MS, 'OpenAI');

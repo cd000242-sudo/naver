@@ -19,7 +19,7 @@ export function buildOpenAiSearchResponseParams(
     input: input.user,
     tools: [{ type: 'web_search' }],
     max_output_tokens: input.maxOutputTokens,
-    reasoning: { effort: 'high' },
+    reasoning: { effort: 'medium' },
     text: { format: { type: 'json_object' } },
     store: false,
   };

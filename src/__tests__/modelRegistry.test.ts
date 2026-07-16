@@ -58,10 +58,10 @@ describe('modelRegistry SSOT 회귀 가드', () => {
       vendor: 'openai', tier: 'value', model: 'gpt-5.6-luna', reasoningEffort: 'medium',
     });
     expect(resolveTextModelProfile('openai-gpt41')).toMatchObject({
-      vendor: 'openai', tier: 'balanced', model: 'gpt-5.6-terra', reasoningEffort: 'high',
+      vendor: 'openai', tier: 'balanced', model: 'gpt-5.6-terra', reasoningEffort: 'medium',
     });
     expect(resolveTextModelProfile('openai-gpt4o')).toMatchObject({
-      vendor: 'openai', tier: 'premium', model: 'gpt-5.6-sol', reasoningEffort: 'high',
+      vendor: 'openai', tier: 'premium', model: 'gpt-5.6-sol', reasoningEffort: 'medium',
     });
     expect(resolveTextModelProfile('claude-haiku')).toMatchObject({
       vendor: 'claude', tier: 'value', model: 'claude-haiku-4-5-20251001',

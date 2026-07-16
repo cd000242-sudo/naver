@@ -182,18 +182,18 @@ export function resolveTextModelProfile(value: unknown): TextModelProfile {
     return profile(selector, 'openai', 'value', OPENAI_TEXT_MODELS.LUNA, 'GPT-5.6 Luna', 'medium');
   }
   if (selector === 'openai-gpt41' || selector === 'openai-gpt56-terra' || selector === OPENAI_TEXT_MODELS.TERRA) {
-    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-5.6 Terra', 'high');
+    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-5.6 Terra', 'medium');
   }
   if (selector === 'openai-gpt4o' || selector === 'openai-gpt56-sol' || selector === OPENAI_TEXT_MODELS.SOL) {
-    return profile(selector, 'openai', 'premium', OPENAI_TEXT_MODELS.SOL, 'GPT-5.6 Sol', 'high');
+    return profile(selector, 'openai', 'premium', OPENAI_TEXT_MODELS.SOL, 'GPT-5.6 Sol', 'medium');
   }
   if (selector === 'openai-gpt4o-search') {
-    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-5.6 Terra + Web Search', 'high');
+    return profile(selector, 'openai', 'balanced', OPENAI_TEXT_MODELS.TERRA, 'GPT-5.6 Terra + Web Search', 'medium');
   }
   if (selector.startsWith('gpt-')) {
     const explicitModel = selector;
     const tier: TextModelTier = /(?:mini|nano|luna)/i.test(explicitModel) ? 'value' : 'balanced';
-    return profile(selector, 'openai', tier, explicitModel, explicitModel, explicitModel.startsWith('gpt-5.6-') ? (tier === 'value' ? 'medium' : 'high') : undefined);
+    return profile(selector, 'openai', tier, explicitModel, explicitModel, explicitModel.startsWith('gpt-5.6-') ? 'medium' : undefined);
   }
   if (selector.startsWith('openai-')) {
     throw new Error(`UNSUPPORTED_TEXT_MODEL_SELECTOR: ${selector}`);

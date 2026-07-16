@@ -10,7 +10,6 @@ import {
   getOpenAiRateLimitPatienceMs,
   getOpenAiRateLimitWaitMs,
   isOpenAiHardQuotaError,
-  isOpenAiRateLimitError,
 } from './utils/openaiRpmThrottler.js';
 import type { ImageNarrativeContext } from './imageNarrative/types.js';
 // ✅ [2026-01-25] Perplexity 추가
@@ -148,12 +147,16 @@ import {
 } from './contentGenerationFailurePolicy.js';
 import { assessCustomPromptAdherence } from './contentPromptAdherence.js';
 import {
+  buildOpenAiGenerationFailureMessage,
+  classifyOpenAiFailure,
   classifyOpenAiDiagnosticError,
   formatWaitBudgetKo,
   formatWaitDurationKo,
   isOpenAiConnectionIssue,
   normalizeErrorMessage,
   readHeaderValue,
+  sanitizeOpenAiProviderMessage,
+  sanitizeOpenAiUrlForLog,
   safeStringifyError,
 } from './contentErrorDiagnostics.js';
 import { getAutoToneByCategory } from './contentTonePolicy.js';
@@ -193,7 +196,10 @@ import {
   prependSectionDistinctnessRetryInstruction,
   prependValidationRetryInstruction,
 } from './contentRetryPromptPolicy.js';
-import { getContentProviderTimeoutMs } from './contentProviderTimeoutPolicy.js';
+import {
+  getContentProviderTimeoutMs,
+  getOpenAiContentTimeoutMs,
+} from './contentProviderTimeoutPolicy.js';
 import {
   readNonNegativeIntegerEnv,
   readNonNegativeMsEnv,
@@ -1851,7 +1857,7 @@ function isOpenAiDiagnosticsEnabled(): boolean {
   const env = process.env.OPENAI_DIAGNOSTICS;
   if (env === '0' || env?.toLowerCase() === 'false') return false;
   if (env === '1' || env?.toLowerCase() === 'true') return true;
-  return process.platform === 'darwin';
+  return process.platform === 'darwin' || process.platform === 'win32';
 }
 
 async function callOpenAIChatCompletionsRest(
@@ -1884,7 +1890,7 @@ async function callOpenAIChatCompletionsRest(
         .reduce((a: number, b: number) => a + b, 0);
       emitOpenAiDiagnosticLog(
         `CHAT_REQUEST_START model=${modelName} maxTokens=${String((params as any).max_completion_tokens || '')} ` +
-        `timeoutMs=${timeoutMs} systemChars=${systemChars} userChars=${userChars} baseUrl=${baseUrl}`,
+        `timeoutMs=${timeoutMs} systemChars=${systemChars} userChars=${userChars} baseUrl=${sanitizeOpenAiUrlForLog(baseUrl)}`,
       );
     }
 
@@ -1937,7 +1943,7 @@ async function callOpenAIChatCompletionsRest(
     if (diagnosticsEnabled) {
       emitOpenAiDiagnosticLog(
         `CHAT_REQUEST_ERROR kind=${classifyOpenAiDiagnosticError(error)} model=${modelName} ` +
-        `elapsedMs=${Date.now() - requestStart} message="${normalizeErrorMessage(error).slice(0, 220)}"`,
+        `elapsedMs=${Date.now() - requestStart} message="${sanitizeOpenAiProviderMessage(error).slice(0, 220)}"`,
         'error',
       );
     }
@@ -2007,7 +2013,7 @@ async function callOpenAIResponsesRest(
     if (diagnosticsEnabled) {
       emitOpenAiDiagnosticLog(
         `RESPONSES_ERROR kind=${classifyOpenAiDiagnosticError(error)} model=${modelName} ` +
-        `elapsedMs=${Date.now() - requestStart} message="${normalizeErrorMessage(error).slice(0, 220)}"`,
+        `elapsedMs=${Date.now() - requestStart} message="${sanitizeOpenAiProviderMessage(error).slice(0, 220)}"`,
         'error',
       );
     }
@@ -2034,7 +2040,7 @@ async function runOpenAiDiagnosticPreflight(
   );
 
   emitOpenAiDiagnosticLog(
-    `PREFLIGHT_START baseUrl=${baseUrl} model=${modelName} platform=${process.platform}/${process.arch} ` +
+    `PREFLIGHT_START baseUrl=${sanitizeOpenAiUrlForLog(baseUrl)} model=${modelName} platform=${process.platform}/${process.arch} ` +
     `node=${process.versions.node || 'n/a'} electron=${process.versions.electron || 'n/a'} ` +
     `fetch=${typeof fetch} keyLength=${apiKey.length}`,
   );
@@ -2071,7 +2077,7 @@ async function runOpenAiDiagnosticPreflight(
       apiError.__openAiPreflightLogged = true;
       emitOpenAiDiagnosticLog(
         `PREFLIGHT_FAIL status=${response.status} kind=${classifyOpenAiDiagnosticError(apiError)} ` +
-        `elapsedMs=${Date.now() - startedAt} requestId=${requestId} message="${normalizeErrorMessage(apiError).slice(0, 220)}"`,
+        `elapsedMs=${Date.now() - startedAt} requestId=${requestId} message="${sanitizeOpenAiProviderMessage(apiError).slice(0, 220)}"`,
         'error',
       );
       throw apiError;
@@ -2089,7 +2095,7 @@ async function runOpenAiDiagnosticPreflight(
     if (!(error as any)?.__openAiPreflightLogged) {
       emitOpenAiDiagnosticLog(
         `PREFLIGHT_ERROR kind=${classifyOpenAiDiagnosticError(normalized)} elapsedMs=${Date.now() - startedAt} ` +
-        `message="${normalizeErrorMessage(normalized).slice(0, 220)}"`,
+        `message="${sanitizeOpenAiProviderMessage(normalized).slice(0, 220)}"`,
         'error',
       );
     }
@@ -3675,7 +3681,7 @@ async function callOpenAI(
   if (diagnosticsEnabled) {
     emitOpenAiDiagnosticLog(
       `CONFIG keySource=${configApiKey ? 'config.openaiApiKey' : 'OPENAI_API_KEY'} keyLength=${directOpenAiApiKey.length} ` +
-      `baseUrl=${(process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1').replace(/\/+$/, '')} ` +
+      `baseUrl=${sanitizeOpenAiUrlForLog(process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1')} ` +
       `platform=${process.platform}/${process.arch}`,
     );
   }
@@ -3705,13 +3711,13 @@ async function callOpenAI(
   const modelsToTry = openAIModels;
 
   let lastError: Error | null = null;
-  const timeoutMs = getTimeoutMs(minChars);
   const maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars);
   const maxAttemptsPerModel = 99;
   const maxTransientRetriesPerModel = 0;
   const openAiRateLimitPatienceMs = getOpenAiRateLimitPatienceMs();
 
   for (const modelName of modelsToTry) {
+    const timeoutMs = getOpenAiContentTimeoutMs(minChars, modelName);
     let rateLimitWaitedMs = 0;
     let rateLimitRetryCount = 0;
     let transientRetryCount = 0;
@@ -3720,11 +3726,6 @@ async function callOpenAI(
     for (let retry = 0; retry < maxAttemptsPerModel; retry++) {
       try {
         console.log(`[OpenAI] 시도: ${modelName} (${retry + 1}), 타임아웃: ${timeoutMs / 1000}초, 한도 대기 누적: ${Math.round(rateLimitWaitedMs / 1000)}초`);
-
-        if (diagnosticsEnabled && !preflightDone) {
-          await runOpenAiDiagnosticPreflight(directOpenAiApiKey, modelName, timeoutMs, signal);
-          preflightDone = true;
-        }
 
         // ✅ [2026-05-25 v2.10.356] preemptive throttling — RPM 한도 도달 직전이면 호출자 측에서 대기
         //   사용자 보고 "OpenAI 60s backoff 후에도 RPM 초과 자꾸 뜸" 근본 차단
@@ -3807,22 +3808,39 @@ async function callOpenAI(
         openaiRpmThrottler.recordCall();
         const text = isSearchModel
           ? extractOpenAiResponseText(response)
-          : response.choices[0]?.message?.content?.trim() || '';
-
-        if (!text) throw new Error('빈 응답');
+          : response?.choices?.[0]?.message?.content?.trim() || '';
 
         // ✅ [2026-03-19] 사용량 추적
         const oaiUsage = isSearchModel
           ? readOpenAiResponseUsage(response)
           : {
-              inputTokens: (response as any).usage?.prompt_tokens || 0,
-              outputTokens: (response as any).usage?.completion_tokens || 0,
+              inputTokens: (response as any)?.usage?.prompt_tokens || 0,
+              outputTokens: (response as any)?.usage?.completion_tokens || 0,
             };
         trackApiUsage('openai', {
           inputTokens: oaiUsage.inputTokens,
           outputTokens: oaiUsage.outputTokens,
           model: modelName,
         });
+
+        if (!text) {
+          const finishReason = isSearchModel
+            ? String(response?.status || response?.incomplete_details?.reason || 'unknown')
+            : String(response?.choices?.[0]?.finish_reason || 'unknown');
+          const reasoningTokens = Number(
+            response?.usage?.completion_tokens_details?.reasoning_tokens ||
+            response?.usage?.output_tokens_details?.reasoning_tokens ||
+            0,
+          );
+          const emptyResponseError: any = new Error(
+            `OpenAI 빈 응답 (finish_reason=${finishReason}, output_tokens=${oaiUsage.outputTokens}, reasoning_tokens=${reasoningTokens})`,
+          );
+          emptyResponseError.status = 200;
+          emptyResponseError.code = 'empty_response';
+          emptyResponseError.type = 'empty_model_output';
+          emptyResponseError.response = { status: 200 };
+          throw emptyResponseError;
+        }
 
         console.log(`[OpenAI] ✅ 성공: ${modelName}, ${text.length}자`);
         console.log(`[OpenAI] 📋 응답 미리보기: ${text.substring(0, 200)}...`);
@@ -3831,43 +3849,53 @@ async function callOpenAI(
       } catch (error) {
         lastError = error as Error;
         const errorMessage = (error as Error).message?.toLowerCase() || '';
-        const errorStr = safeStringifyError(error).toLowerCase();
+        const failure = classifyOpenAiFailure(error);
+
+        if (
+          diagnosticsEnabled &&
+          !preflightDone &&
+          failure.kind !== 'RATE_LIMIT' &&
+          failure.kind !== 'BILLING_OR_CREDIT'
+        ) {
+          preflightDone = true;
+          // PREFLIGHT_NON_BLOCKING: run the free /models diagnostic only after
+          // a paid request fails, so successful generations consume no extra RPM.
+          void runOpenAiDiagnosticPreflight(directOpenAiApiKey, modelName, timeoutMs, signal).catch((preflightError) => {
+            emitOpenAiDiagnosticLog(
+              `PREFLIGHT_NON_BLOCKING generationContinues=false kind=${classifyOpenAiDiagnosticError(preflightError)}`,
+              'warn',
+            );
+          });
+        }
 
         // ✅ [2026-02-24 FIX] 에러 분류: 즉시 실패 vs 재시도 가능 vs 다음 모델
 
         // 1) 인증 오류 → 즉시 throw (재시도 무의미)
-        const isAuthError = errorMessage.includes('401') || errorMessage.includes('403') ||
-          errorMessage.includes('unauthorized') || errorMessage.includes('forbidden') ||
-          errorMessage.includes('invalid api key') || errorMessage.includes('invalid_api_key');
-        if (isAuthError) {
-          throw new Error(`OpenAI API 키가 유효하지 않습니다. 환경설정에서 API 키를 확인해주세요.\n원본 오류: ${(error as Error).message}`);
+        if (failure.kind === 'AUTH_INVALID_KEY') {
+          throw new Error(buildOpenAiGenerationFailureMessage(error, modelName));
+        }
+        if (failure.kind === 'PROJECT_OR_PERMISSION_FORBIDDEN') {
+          throw new Error(buildOpenAiGenerationFailureMessage(error, modelName));
         }
 
         // 2) 결제/크레딧 오류 → 진짜 billing hard limit만 즉시 throw
         // ✅ [2026-04-09 FIX] 429 rate limit의 'quota' 키워드를 billing으로 오판하던 버그 수정
         // OpenAI 429 에러: "You exceeded your current quota" → 일시적 rate limit일 수 있음
         // 진짜 billing 에러: billing_hard_limit_reached, insufficient_quota (영구적)
-        const isHardBillingError = errorStr.includes('billing_hard_limit_reached') ||
-          errorMessage.includes('insufficient_quota') ||
-          (errorMessage.includes('billing') && !errorMessage.includes('429')) ||
-          (errorMessage.includes('payment') && errorMessage.includes('required'));
-        if (isHardBillingError) {
-          throw new Error(`OpenAI API 결제 한도에 도달했습니다. OpenAI 대시보드에서 결제 정보를 확인해주세요.\n원본 오류: ${(error as Error).message}`);
+        if (failure.kind === 'BILLING_OR_CREDIT') {
+          throw new Error(buildOpenAiGenerationFailureMessage(error, modelName));
         }
 
         // 3) 모델 없음 → 다음 모델로 즉시 이동 (재시도 불필요)
-        const isModelNotFound = errorMessage.includes('model') &&
-          (errorMessage.includes('not found') || errorMessage.includes('does not exist'));
-        if (isModelNotFound) {
-          console.log(`[OpenAI] ⚠️ 모델 ${modelName} 없음, 다음 모델 시도`);
-          break; // 이 모델의 재시도 루프 탈출 → 다음 모델
+        if (failure.kind === 'MODEL_NOT_FOUND_OR_NO_ACCESS') {
+          throw new Error(buildOpenAiGenerationFailureMessage(error, modelName));
         }
 
         // ✅ [v2.7.94] 429/quota/rate-limit → 명확한 안내 후 throw (자동 폴백 금지)
         //   사용자 지시: "다른걸로 폴백되면 그모델로하지 뭐하러 모델을 선택해서 하겠니"
         //   기존(v2.7.93까지): break로 다음 모델 자동 전환 → 사용자 선택 무시
         //   수정: throw로 명확한 원인 + 해결 방법 안내
-        const isQuotaOrRateLimit = isOpenAiRateLimitError(error, errorMessage);
+        const isQuotaOrRateLimit = failure.kind === 'RATE_LIMIT';
         if (isQuotaOrRateLimit) {
           // ✅ RPM 한도는 1분 단위로 복구 → 같은 모델 유지 + 누진 backoff retry
           //   v2.10.355까지: 60s 1회 retry → 사용자 보고 "재시도 후에도 실패"
@@ -3913,18 +3941,19 @@ async function callOpenAI(
 
         // 5) 서버/네트워크 에러 → 대기 후 재시도
         const isConnectionIssue = isOpenAiConnectionIssue(error, errorMessage);
-        const isRetryable =
-          errorMessage.includes('500') || errorMessage.includes('502') || errorMessage.includes('503') ||
-          errorMessage.includes('server error') || errorMessage.includes('internal error') ||
-          errorMessage.includes('시간 초과') || errorMessage.includes('timeout') ||
-          errorMessage.includes('빈 응답') || errorMessage.includes('empty') ||
-          errorMessage.includes('network') || errorMessage.includes('fetch') ||
-          errorMessage.includes('econnreset') || errorMessage.includes('econnrefused') ||
-          isConnectionIssue;
+        const isRetryable = [
+          'OPENAI_SERVER_ERROR',
+          'REQUEST_TIMEOUT',
+          'DNS_LOOKUP_FAILED',
+          'TLS_OR_CERTIFICATE_FAILED',
+          'SOCKET_CONNECTION_FAILED',
+          'NETWORK_FETCH_FAILED',
+          'EMPTY_RESPONSE',
+        ].includes(failure.kind);
 
         if (isRetryable) {
           const retryKind = isConnectionIssue ? '연결 오류' : '일시 오류';
-          console.log(`[OpenAI] ⚠️ ${modelName} ${retryKind} (${transientRetryCount + 1}/${maxTransientRetriesPerModel + 1}): ${(error as Error).message}`);
+          console.log(`[OpenAI] ⚠️ ${modelName} ${retryKind} (${transientRetryCount + 1}/${maxTransientRetriesPerModel + 1}): ${failure.providerMessage}`);
           if (transientRetryCount < maxTransientRetriesPerModel) {
             const delay = Math.min(5000 * Math.pow(2, transientRetryCount), 30000) + Math.floor(Math.random() * 1000);
             transientRetryCount++;
@@ -3936,33 +3965,27 @@ async function callOpenAI(
             await sleepWithAbort(delay, signal);
             continue; // 같은 모델 재시도
           }
-          throw new Error(
-            `OpenAI API 연결 실패로 같은 모델(${modelName})을 ${maxTransientRetriesPerModel + 1}회 재시도했지만 응답을 받지 못했습니다.\n\n` +
-            `📌 원인: 모델 문제가 아니라 PC/네트워크/방화벽/VPN/프록시/OpenAI 접속 경로의 일시적 연결 실패입니다.\n\n` +
-            `💡 해결 방법:\n` +
-            `  1) 인터넷 연결과 VPN/프록시/방화벽을 확인한 뒤 다시 실행하세요.\n` +
-            `  2) 같은 네트워크에서 https://api.openai.com 접속이 막히지 않는지 확인하세요.\n` +
-            `  3) 잠시 후 다시 실행하면 앱이 같은 OpenAI 모델로 재시도합니다.\n\n` +
-            `원본 오류: ${(error as Error).message}`
-          );
+          throw new Error(buildOpenAiGenerationFailureMessage(error, modelName, {
+            requestCount: transientRetryCount + 1,
+            automaticRetryCount: transientRetryCount,
+          }));
         }
 
-        // 5) 알 수 없는 에러 → 다음 모델로 이동 (이전: 즉시 throw)
-        console.log(`[OpenAI] ⚠️ ${modelName} 알 수 없는 오류, 다음 모델 시도: ${(error as Error).message}`);
-        break;
+        // 구조화되지 않은 4xx/알 수 없는 오류도 원본 원인을 보존하고 즉시 종료한다.
+        // 선택하지 않은 모델이나 새 유료 요청으로 조용히 전환하지 않는다.
+        throw new Error(buildOpenAiGenerationFailureMessage(error, modelName));
       }
     }
   }
 
-  if (lastError && isOpenAiConnectionIssue(lastError, lastError.message)) {
-    throw new Error(
-      `OpenAI API 연결 실패. 시도한 모델: ${modelsToTry.join(', ')}\n` +
-      `마지막 오류: ${lastError.message}\n\n` +
-      `모델(${modelsToTry.join(', ')})이 없어져서가 아니라 네트워크 연결이 실패한 상태입니다.`
-    );
+  if (lastError) {
+    throw new Error(buildOpenAiGenerationFailureMessage(lastError, modelsToTry.join(', ')));
   }
 
-  throw new Error(`OpenAI 모델 사용 불가. 시도한 모델: ${modelsToTry.join(', ')}\n마지막 오류: ${lastError?.message}`);
+  throw new Error(
+    '[OPENAI_REQUEST_FAILED:UNKNOWN]\n' +
+    `OpenAI 모델 요청을 시작하지 못했습니다. 선택 모델: ${modelsToTry.join(', ') || '(none)'}`,
+  );
 }
 
 
