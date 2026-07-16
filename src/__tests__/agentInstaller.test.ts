@@ -171,6 +171,28 @@ describe('loginAgent', () => {
     expect(spawnMock).not.toHaveBeenCalled();
   });
 
+  it('continues with OAuth when the preflight status check fails temporarily', async () => {
+    detectAgentMock.mockReset();
+    detectAgentMock
+      .mockRejectedValueOnce(new Error('temporary status failure'))
+      .mockResolvedValueOnce({
+        provider: 'codex',
+        installed: true,
+        version: '0.142.2',
+        loggedIn: true,
+        available: true,
+        detail: 'Logged in using ChatGPT',
+      });
+
+    await expect(loginAgent('codex')).resolves.toMatchObject({
+      loggedIn: true,
+      available: true,
+      loginAction: 'authenticated',
+    });
+    expect(startSessionMock).toHaveBeenCalledOnce();
+    expect(detectAgentMock).toHaveBeenCalledTimes(2);
+  });
+
   it('codex → `codex login`', async () => {
     const status = await loginAgent('codex');
     const c = spawnMock.mock.calls[0][0];
