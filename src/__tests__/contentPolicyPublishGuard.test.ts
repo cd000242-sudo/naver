@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { loadContentPolicy } from '../contentPolicy/policyLoader';
-import { evaluatePublishGuard } from '../contentPolicy/publishGuard';
+import { evaluatePublishGuard, partitionPublishGuardReasons } from '../contentPolicy/publishGuard';
 import { createInitialPublicationState } from '../contentPolicy/exposureMonitor';
 import { makePassPolicyResult } from './contentPolicyFixtures';
 
@@ -32,6 +32,37 @@ describe('PublishGuard', () => {
 
     expect(decision.allowed).toBe(false);
     expect(decision.reasons).toContain('BLOCK_PUBLISH_PAUSED');
+  });
+
+  it('downgrades only the consecutive-pattern quality heuristic to a warning', () => {
+    expect(partitionPublishGuardReasons([
+      'BLOCK_PUBLISH_PAUSED',
+      'BLOCK_MIN_PUBLISH_INTERVAL',
+      'BLOCK_DAILY_PUBLISH_CAP',
+      'BLOCK_CONSECUTIVE_PATTERN',
+    ])).toEqual({
+      blockingReasons: [
+        'BLOCK_PUBLISH_PAUSED',
+        'BLOCK_MIN_PUBLISH_INTERVAL',
+        'BLOCK_DAILY_PUBLISH_CAP',
+      ],
+      advisoryReasons: ['BLOCK_CONSECUTIVE_PATTERN'],
+    });
+  });
+
+  it('keeps invalid schedules and failed policy decisions as hard stops', () => {
+    expect(partitionPublishGuardReasons([
+      'BLOCK_INVALID_SCHEDULE_DATE',
+      'BLOCK_POLICY_DECISION',
+      'BLOCK_POLICY_PUBLICATION',
+    ])).toEqual({
+      blockingReasons: [
+        'BLOCK_INVALID_SCHEDULE_DATE',
+        'BLOCK_POLICY_DECISION',
+        'BLOCK_POLICY_PUBLICATION',
+      ],
+      advisoryReasons: [],
+    });
   });
 
   it('blocks a consecutive template, structure, or angle', async () => {

@@ -132,6 +132,19 @@ describe('friendlyErrorMessage', () => {
     expect(msg).toContain('반자동 편집');
     expect(msg).not.toContain('가격·효과·수치');
   });
+
+  it.each([
+    ['BLOCK_MIN_PUBLISH_INTERVAL', '발행 간격'],
+    ['BLOCK_DAILY_PUBLISH_CAP', '일일 발행 한도'],
+    ['BLOCK_PUBLISH_PAUSED', '발행 일시정지'],
+    ['BLOCK_INVALID_SCHEDULE_DATE', '예약 날짜'],
+  ])('shows the real operational block reason for %s', (reason, expected) => {
+    const msg = friendlyErrorMessage({ message: `CONTENT_POLICY_BLOCKED:${reason}` });
+
+    expect(msg).toContain(expected);
+    expect(msg).toContain(reason);
+    expect(msg).not.toContain('콘텐츠 안전·품질 검사에서');
+  });
 });
 
 describe('detached Naver login frame publish retry guard', () => {

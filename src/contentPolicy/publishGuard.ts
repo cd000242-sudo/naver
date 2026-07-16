@@ -37,6 +37,36 @@ export interface PublishGuardDecision {
   reasons: PublishGuardReason[];
 }
 
+export interface PublishGuardReasonDisposition {
+  blockingReasons: string[];
+  advisoryReasons: string[];
+}
+
+const ADVISORY_PUBLISH_GUARD_REASONS = new Set([
+  'BLOCK_CONSECUTIVE_PATTERN',
+]);
+
+/**
+ * Template/structure/angle repetition is a quality diversity diagnostic.
+ * Operational limits, invalid schedules, and pause controls remain hard stops.
+ */
+export function partitionPublishGuardReasons(
+  reasons: readonly string[],
+): PublishGuardReasonDisposition {
+  const blockingReasons: string[] = [];
+  const advisoryReasons: string[] = [];
+
+  for (const reason of [...new Set(reasons.filter(Boolean))]) {
+    if (ADVISORY_PUBLISH_GUARD_REASONS.has(reason)) {
+      advisoryReasons.push(reason);
+    } else {
+      blockingReasons.push(reason);
+    }
+  }
+
+  return { blockingReasons, advisoryReasons };
+}
+
 interface ParsedLimit {
   enabled: boolean;
   invalid: boolean;

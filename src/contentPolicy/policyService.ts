@@ -10,7 +10,7 @@ import {
 } from './manualReview.js';
 import { loadContentPolicy } from './policyLoader.js';
 import { PublicationStateStore } from './publicationStateStore.js';
-import { evaluatePublishGuard } from './publishGuard.js';
+import { evaluatePublishGuard, partitionPublishGuardReasons } from './publishGuard.js';
 import {
   acceptContentPolicyAdvisories,
   repairDeclaredForbiddenClaims,
@@ -335,6 +335,7 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   const articleId = stringValue(payload.postId) || `policy-${policyResult.input_hash.slice(0, 20)}`;
 
   let guardReasons: string[] = [];
+  let guardAdvisoryReasons: string[] = [];
   if (policyResult.decision === 'PASS') {
     try {
       const state = await stateStore.load();
@@ -356,8 +357,12 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
         currentArticleId: articleId,
         excludeCurrentArticle: excludeOwnScheduledReservation,
         });
-        guardReasons = [...guard.reasons];
-        if (!guard.allowed) policyResult = blockForStorageFailure(policyResult, ...guardReasons);
+        const guardDisposition = partitionPublishGuardReasons(guard.reasons);
+        guardReasons = [...guardDisposition.blockingReasons];
+        guardAdvisoryReasons = [...guardDisposition.advisoryReasons];
+        if (guardReasons.length > 0) {
+          policyResult = blockForStorageFailure(policyResult, ...guardReasons);
+        }
       }
     } catch {
       guardReasons = ['BLOCK_PUBLICATION_STATE_UNAVAILABLE'];
@@ -373,10 +378,14 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
 
   const preparedPayload = applyResultToPayload(payload, policyResult, effectiveInput);
   const finalReasons = [...new Set([...policyResult.block_reasons, ...guardReasons])];
+  const finalAdvisoryReasons = [...new Set([
+    ...advisory.advisoryReasons,
+    ...guardAdvisoryReasons,
+  ])];
   return {
     allowed: policyResult.decision === 'PASS' && policyResult.publication.allowed && guardReasons.length === 0,
     reasons: finalReasons,
-    advisoryReasons: advisory.advisoryReasons,
+    advisoryReasons: finalAdvisoryReasons,
     manualReviewRequired: isOnlyRecentPostManualReviewReasons(finalReasons),
     manualReviewReasons: recentPostManualReviewReasons(finalReasons),
     articleId,

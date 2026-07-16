@@ -525,6 +525,38 @@ function isContentQualityV3TerminalError(error) {
     const message = String(error?.message || error || '');
     return /\[content-quality-v3-(?:publication|publish-handoff|durable-provenance)\]/i.test(message);
 }
+const CONTENT_POLICY_BLOCK_REASON_LABELS = Object.freeze({
+    BLOCK_EMPTY_DRAFT: '발행할 본문이 비어 있습니다.',
+    BLOCK_MISSING_PRIMARY_KEYWORD: '글의 핵심 주제를 확인할 수 없습니다.',
+    BLOCK_MISSING_TARGET_READER: '글의 대상 독자 정보를 확인할 수 없습니다.',
+    BLOCK_MISSING_FACTS: '사업·제휴 글에 필요한 확인 근거가 없습니다.',
+    BLOCK_FABRICATED_FIRSTHAND_EXPERIENCE: '확인되지 않은 직접 경험 표현이 남아 있습니다.',
+    BLOCK_PUBLISH_PAUSED: '발행 일시정지 상태입니다.',
+    BLOCK_TEMPLATE_PAUSED: '현재 글 템플릿이 일시정지 상태입니다.',
+    BLOCK_STRUCTURE_PAUSED: '현재 글 구조가 일시정지 상태입니다.',
+    BLOCK_MIN_PUBLISH_INTERVAL: '설정된 최소 발행 간격이 지나지 않았습니다.',
+    BLOCK_DAILY_PUBLISH_CAP: '설정된 일일 발행 한도에 도달했습니다.',
+    BLOCK_INVALID_SCHEDULE_DATE: '예약 날짜 또는 시간이 올바르지 않습니다.',
+    BLOCK_INVALID_PUBLISH_GUARD_CONFIG: '발행 제한 설정값이 올바르지 않습니다.',
+    BLOCK_INVALID_PUBLICATION_HISTORY: '기존 발행 기록에 잘못된 값이 있습니다.',
+    BLOCK_PUBLICATION_STATE_UNAVAILABLE: '발행 상태 기록을 불러올 수 없습니다.',
+    BLOCK_AUDIT_LOG_UNAVAILABLE: '콘텐츠 진단 기록을 저장할 수 없습니다.',
+    BLOCK_POLICY_DECISION: '최종 콘텐츠 정책 판정이 완료되지 않았습니다.',
+    BLOCK_POLICY_PUBLICATION: '최종 콘텐츠 정책에서 발행이 허용되지 않았습니다.',
+    BLOCK_CONSECUTIVE_PATTERN: '직전 글과 템플릿·구조·관점이 연속으로 겹쳤습니다.',
+});
+function formatContentPolicyBlockedMessage(rawMessage) {
+    const reasonCodes = [...new Set(String(rawMessage || '').match(/BLOCK_[A-Z0-9_]+/g) || [])];
+    const reasonLines = reasonCodes.length > 0
+        ? reasonCodes.map((code) => `- ${CONTENT_POLICY_BLOCK_REASON_LABELS[code] || '분류되지 않은 정책 차단입니다.'} (${code})`)
+        : ['- 분류되지 않은 정책 차단입니다. (CONTENT_POLICY_BLOCKED)'];
+    return [
+        '⛔ 발행 필수 조건을 확인하지 못해 중단했습니다.',
+        '차단 사유:',
+        ...reasonLines,
+        '글과 이미지는 그대로 유지됩니다. 위 사유를 확인한 뒤 다시 발행해 주세요.',
+    ].join('\n');
+}
 function friendlyErrorMessage(error) {
     const rawMessage = String(error?.message || error || '');
     const msg = rawMessage.toLowerCase();
@@ -546,7 +578,7 @@ function friendlyErrorMessage(error) {
         return `⛔ 자료에서 확인되지 않은 가격·효과·수치 표현이 남아 있어 안전하게 발행을 중단했습니다.${detail}\n글과 이미지는 유지되므로 해당 문장을 확인한 뒤 다시 발행해 주세요.`;
     }
     if (/CONTENT_POLICY_BLOCKED/i.test(rawMessage)) {
-        return '⛔ 콘텐츠 안전·품질 검사에서 발행을 중단했습니다.\n글과 이미지는 유지되므로 진단 리포트의 차단 사유를 확인한 뒤 다시 발행해 주세요.';
+        return formatContentPolicyBlockedMessage(rawMessage);
     }
     if (/IMAGEFX_BOT_DETECTED|FLOW_BOT_DETECTED|봇감지 의심/i.test(rawMessage)) {
         const body = rawMessage.replace(/^(IMAGEFX_BOT_DETECTED|FLOW_BOT_DETECTED):/, '').trim();

@@ -71,6 +71,7 @@ export function reconcilePublishPolicyInput(
 ): ContentPolicyInput {
   const body = articleBody(draft);
   const finalKeyword = deriveFinalTitleKeyword(draft);
+  const targetReader = String(input.target_reader || '').trim() || '이 주제의 정보를 찾는 독자';
   const contextDrifted = tokenCoverage(input.primary_keyword, body) < 0.5;
   const titleContextDrifted = tokenCoverage(input.primary_keyword, draft.title) < 0.5;
   const mustUseFinalDraft = options.semiAutoMode
@@ -80,6 +81,7 @@ export function reconcilePublishPolicyInput(
   if (!mustUseFinalDraft) {
     return {
       ...input,
+      target_reader: targetReader,
       business_facts: [...input.business_facts],
       secondary_keywords: input.secondary_keywords ? [...input.secondary_keywords] : undefined,
       source_materials: input.source_materials?.map((source) => ({ ...source })),
@@ -94,6 +96,7 @@ export function reconcilePublishPolicyInput(
     return {
       ...input,
       primary_keyword: finalKeyword || draft.title.trim(),
+      target_reader: targetReader,
       business_facts: [...input.business_facts],
       secondary_keywords: input.secondary_keywords ? [...input.secondary_keywords] : undefined,
       source_materials: input.source_materials?.map((source) => ({ ...source })),

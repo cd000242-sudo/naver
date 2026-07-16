@@ -247,6 +247,21 @@ describe('content policy publish integration', () => {
     expect(result.payload.contentPolicyContext?.input.primary_keyword).toBe(payload.title);
   });
 
+  it('derives a neutral target reader when old payload metadata is blank', async () => {
+    const payload = payloadWithContext();
+    payload.contentPolicyContext.input.target_reader = '';
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath: await tempDir(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.reasons).not.toContain('BLOCK_MISSING_TARGET_READER');
+    expect(result.payload.contentPolicyContext?.input.target_reader).toBe('이 주제의 정보를 찾는 독자');
+  });
+
   it('preserves only final-body evidence when affiliate or business keywords are stale', async () => {
     const payload = payloadWithContext();
     payload.contentMode = 'affiliate';
@@ -493,6 +508,23 @@ describe('content policy publish integration', () => {
     expect(schedule.reasons).toContain('BLOCK_DAILY_PUBLISH_CAP');
   });
 
+  it('still blocks a scheduled publish when its target date is invalid', async () => {
+    const payload = payloadWithContext() as any;
+    payload.publishMode = 'schedule';
+    payload.scheduleDate = '';
+    payload.scheduleTime = '';
+
+    const result = await prepareContentPolicyForPublish(payload, {
+      userDataPath: await tempDir(),
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '60', DAILY_PUBLISH_CAP: '1' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(false);
+    expect(result.reasons).toContain('BLOCK_INVALID_SCHEDULE_DATE');
+    expect(result.advisoryReasons).not.toContain('BLOCK_INVALID_SCHEDULE_DATE');
+  });
+
   it('records a reservation and lets the same article replace its own slot later', async () => {
     const userDataPath = await tempDir();
     const payload = payloadWithContext() as any;
@@ -555,6 +587,42 @@ describe('content policy publish integration', () => {
     expect(repeated.allowed).toBe(false);
     expect(repeated.reasons).toContain('BLOCK_MIN_PUBLISH_INTERVAL');
     expect(repeated.advisoryReasons).toContain('BLOCK_EXCESSIVE_SIMILARITY');
+  });
+
+  it('warns but publishes when only the consecutive template/structure heuristic matches', async () => {
+    const userDataPath = await tempDir();
+    const firstPayload = payloadWithContext() as any;
+    firstPayload.postId = 'first-pattern-post';
+    const first = await prepareContentPolicyForPublish(firstPayload, {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+    expect(first.allowed).toBe(true);
+
+    await recordContentPolicyPublication({
+      userDataPath,
+      articleId: first.articleId,
+      accountId: 'account-a',
+      payload: first.payload,
+      policyResult: first.policyResult,
+      publishedUrl: 'https://blog.naver.com/account-a/223000003',
+      publishedAt: new Date('2026-02-01T12:01:00.000Z'),
+    });
+
+    const nextPayload = payloadWithContext() as any;
+    nextPayload.postId = 'next-pattern-post';
+    const next = await prepareContentPolicyForPublish(nextPayload, {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:02:00.000Z'),
+    });
+    const audits = await new ContentPolicyAuditStore(userDataPath).readRecent(10);
+
+    expect(next.allowed).toBe(true);
+    expect(next.reasons).toEqual([]);
+    expect(next.advisoryReasons).toContain('BLOCK_CONSECUTIVE_PATTERN');
+    expect(audits[0].decision).toBe('PASS');
   });
 
   it('records query-style Naver post URLs without pausing the publication ledger', async () => {
