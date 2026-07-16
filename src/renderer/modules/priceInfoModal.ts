@@ -39,15 +39,14 @@ function setShown(el: HTMLElement | null, on: boolean, mode: 'inline-block' | 'f
 
 const agentStatusRefreshCoordinator = createAgentStatusRefreshCoordinator();
 const announcedAgentLoginTargets = new WeakSet<HTMLElement>();
-let claudeSubscriptionDisabled = true;
+const claudeSubscriptionDisabled = false;
 
 interface RefreshAgentStatusOptions {
   readonly providers?: readonly AgentStatusProvider[];
   readonly forceRefresh?: boolean;
 }
 
-function applyClaudeSubscriptionSelectorPolicy(disabled: boolean): void {
-  claudeSubscriptionDisabled = disabled;
+function enableClaudeSubscriptionSelector(): void {
   const querySelector = (document as Document & {
     querySelector?: Document['querySelector'];
   }).querySelector?.bind(document);
@@ -58,35 +57,14 @@ function applyClaudeSubscriptionSelectorPolicy(disabled: boolean): void {
   if (!radio) return;
 
   const card = radio.closest('label');
-  radio.disabled = disabled;
-  if (disabled) {
-    radio.setAttribute('aria-disabled', 'true');
-    card?.setAttribute('aria-disabled', 'true');
-    card?.setAttribute('title', '배포 앱에서는 Claude API 키 방식을 사용해주세요.');
-    if (card) {
-      card.style.cursor = 'not-allowed';
-      card.style.opacity = '0.55';
-    }
-  } else {
-    radio.removeAttribute('aria-disabled');
-    card?.removeAttribute('aria-disabled');
-    card?.removeAttribute('title');
-    if (card) {
-      card.style.cursor = 'pointer';
-      card.style.opacity = '';
-    }
+  radio.disabled = false;
+  radio.removeAttribute('aria-disabled');
+  card?.removeAttribute('aria-disabled');
+  card?.removeAttribute('title');
+  if (card) {
+    card.style.cursor = 'pointer';
+    card.style.opacity = '';
   }
-
-  if (!disabled || !radio.checked) return;
-  const claudeApiKey = (document.getElementById('claude-api-key') as HTMLInputElement | null)?.value;
-  const safeSelection = resolveTextModelSelection('agent-claude', claudeApiKey, true);
-  const fallback = querySelector(
-    `input[name="primaryGeminiTextModel"][value="${safeSelection.model}"]`,
-  ) as HTMLInputElement | null;
-  radio.checked = false;
-  if (fallback) fallback.checked = true;
-  const unifiedGenerator = document.getElementById('unified-generator') as HTMLInputElement | null;
-  if (unifiedGenerator) unifiedGenerator.value = safeSelection.provider;
 }
 
 /**
@@ -252,14 +230,9 @@ export async function refreshAgentStatusBadges(
         return;
       }
       if (t.provider === 'claude') {
-        applyClaudeSubscriptionSelectorPolicy(s.errorCode === 'provider_disabled');
+        enableClaudeSubscriptionSelector();
       }
       if (!s.loggedIn || !s.available) announcedAgentLoginTargets.delete(el);
-      if (s.errorCode === 'provider_disabled') {
-        el.textContent = `\u26D4 ${s.detail || 'Claude 구독 에이전트는 배포 앱에서 비활성화되어 있습니다. 환경설정에서 Claude API 키를 사용해주세요.'}`;
-        el.style.color = '#6b7280';
-        return;
-      }
       const versionLabel = formatAgentVersionLabel(t.provider, s.version);
       if (!s.installed) {
         el.textContent = '\u2B07\uFE0F \uBBF8\uC124\uCE58 \u2014 \uC790\uB3D9 \uC124\uCE58\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4';
@@ -296,9 +269,10 @@ export async function refreshAgentStatusBadges(
         ? `\u2705 \uB85C\uADF8\uC778 \uD655\uC778\uB428 \u2014 \uC2E4\uC81C \uC0AC\uC6A9 \uAC00\uB2A5 \uC5EC\uBD80\uB294 \uCCAB \uC0DD\uC131 \uC2DC \uD655\uC778 (${versionLabel})`
         : `\u2705 \uC900\uBE44\uB428 \u2014 ${s.detail || versionLabel}`;
       el.style.color = '#15803d';
-      if (t.provider === 'codex' && !announcedAgentLoginTargets.has(el)) {
+      if (!announcedAgentLoginTargets.has(el)) {
         announcedAgentLoginTargets.add(el);
-        toastManager.success('\u2705 Codex \uB85C\uADF8\uC778 \uC790\uB3D9 \uC778\uC2DD \uC644\uB8CC');
+        const providerLabel = t.provider === 'codex' ? 'Codex' : 'Claude Code';
+        toastManager.success(`\u2705 ${providerLabel} \uB85C\uADF8\uC778 \uC790\uB3D9 \uC778\uC2DD \uC644\uB8CC`);
       }
       // \u2705 [v2.11.49] \uB85C\uADF8\uC778 \uC0C1\uD0DC\uC77C \uB54C "\uACC4\uC815 \uC804\uD658" \uBC84\uD2BC \uB178\uCD9C (\uB85C\uADF8\uC544\uC6C3 \u2192 \uB2E4\uB978 \uACC4\uC815 \uC7AC\uB85C\uADF8\uC778)
       setShown(actions, true, 'flex');
@@ -864,7 +838,7 @@ export async function initPriceInfoModal(): Promise<void> {
       : config;
     const persistedTextModel = resolvePersistedTextModelConfig(
       normalizedLoadedConfig,
-      isPackaged,
+      false,
     );
     if (persistedTextModel.changed && hasSettingsBridge) {
       try {
@@ -999,7 +973,7 @@ export async function initPriceInfoModal(): Promise<void> {
           'claude-sonnet': '📜 Claude Sonnet 5 (균형)',
           'claude-opus': '👑 Claude Fable 5 (프리미엄)',
           'agent-codex': '🤖 에이전트 (Codex · 별도 API 키 불필요)',
-          'agent-claude': '🤖 에이전트 (Claude 구독 · 배포 앱 비활성)',
+          'agent-claude': '🤖 에이전트 (Claude Code · 별도 API 키 불필요)',
         };
         navStatusEl.textContent = `현재: ${modelNames[activeTextModel] || activeTextModel}`;
       }
@@ -1534,7 +1508,7 @@ export async function initPriceInfoModal(): Promise<void> {
                 'claude-sonnet': '📜 Claude Sonnet 5',
                 'claude-opus': '👑 Claude Fable 5',
                 'agent-codex': '🤖 에이전트 (Codex 구독)',
-                'agent-claude': '🤖 에이전트 (Claude 구독 · 배포 앱 비활성)',
+                'agent-claude': '🤖 에이전트 (Claude Code 구독)',
               };
               statusEl.textContent = `현재: ${names[config.primaryGeminiTextModel] || config.primaryGeminiTextModel}`;
             }

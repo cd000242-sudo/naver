@@ -70,47 +70,61 @@ beforeEach(() => {
 });
 
 describe('agent authentication IPC state handoff', () => {
-  it('fails closed on every Claude subscription IPC boundary by default', async () => {
+  it('keeps every Claude Code IPC boundary available by default', async () => {
     registerAgentHandlers({ trustedRendererPath });
     const event = ipcEvent();
+    const status = Object.freeze({
+      provider: 'claude',
+      installed: true,
+      loggedIn: true,
+      available: true,
+    });
+    detectAgentMock.mockResolvedValue(status);
+    installAgentMock.mockResolvedValue({ status });
+    loginAgentMock.mockResolvedValue(status);
+    logoutAgentMock.mockResolvedValue(undefined);
+    generateWithAgentMock.mockResolvedValue({
+      provider: 'claude',
+      text: '완성된 글',
+      durationMs: 1,
+    });
 
     await expect(handlers.get('agent:status')!(event, 'claude')).resolves.toEqual({
       success: true,
-      status: {
-        provider: 'claude',
-        installed: false,
-        loggedIn: false,
-        available: false,
-        errorCode: 'provider_disabled',
-        detail: expect.stringContaining('Claude API 키'),
-      },
+      status,
     });
+    await expect(handlers.get('agent:install')!(event, 'claude')).resolves.toMatchObject({
+      success: true,
+    });
+    await expect(handlers.get('agent:login')!(event, 'claude')).resolves.toMatchObject({
+      success: true,
+      status,
+    });
+    await expect(handlers.get('agent:logout')!(event, 'claude')).resolves.toEqual({ success: true });
+    await expect(handlers.get('agent:generate')!(event, {
+      provider: 'claude',
+      prompt: '글을 작성해줘',
+    })).resolves.toMatchObject({ success: true, provider: 'claude', text: '완성된 글' });
 
-    const blockedMutations: ReadonlyArray<readonly [string, readonly unknown[]]> = [
-      ['agent:install', [event, 'claude']],
-      ['agent:login', [event, 'claude']],
+    for (const [channel, args] of [
       ['agent:login-open-browser', [event, 'claude', 'missing-session']],
       ['agent:login-submit-code', [event, 'claude', 'missing-session', 1, 'secret-code']],
       ['agent:login-cancel', [event, 'claude', 'missing-session']],
-      ['agent:logout', [event, 'claude']],
-      ['agent:generate', [event, { provider: 'claude', prompt: 'must never run' }]],
-    ];
-    for (const [channel, args] of blockedMutations) {
+    ] as const) {
       const result = await handlers.get(channel)!(...args);
-      expect(result).toMatchObject({
-        success: false,
-        code: 'provider_disabled',
-        message: expect.stringContaining('Claude API 키'),
-      });
+      expect(result.success).toBe(false);
+      expect(result.code).not.toBe('provider_disabled');
     }
 
-    expect(detectAgentMock).not.toHaveBeenCalled();
-    expect(installAgentMock).not.toHaveBeenCalled();
-    expect(loginAgentMock).not.toHaveBeenCalled();
-    expect(logoutAgentMock).not.toHaveBeenCalled();
-    expect(generateWithAgentMock).not.toHaveBeenCalled();
+    expect(detectAgentMock).toHaveBeenCalledWith('claude', { forceRefresh: false });
+    expect(installAgentMock).toHaveBeenCalledWith('claude');
+    expect(loginAgentMock).toHaveBeenCalledWith('claude', expect.any(Object));
+    expect(logoutAgentMock).toHaveBeenCalledWith('claude');
+    expect(generateWithAgentMock).toHaveBeenCalledWith(
+      expect.objectContaining({ provider: 'claude' }),
+      expect.any(Object),
+    );
     expect(openExternalMock).not.toHaveBeenCalled();
-    expect(event.sender.once).not.toHaveBeenCalled();
   });
 
   it('returns the exact verified login status without deleting its cache', async () => {

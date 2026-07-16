@@ -5,6 +5,7 @@ const aggregateInferencesMock = vi.hoisted(() => vi.fn());
 const buildNarrativeContentMock = vi.hoisted(() => vi.fn());
 const releaseLimiterMock = vi.hoisted(() => vi.fn());
 const acquireLimiterMock = vi.hoisted(() => vi.fn().mockResolvedValue(releaseLimiterMock));
+const generateWithAgentMock = vi.hoisted(() => vi.fn());
 
 vi.mock('../configManager.js', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../configManager.js')>()),
@@ -19,11 +20,15 @@ vi.mock('../imageNarrative/narrativeBuilder/builder', () => ({
 vi.mock('../runtime/adaptiveLimiter', () => ({
   globalLimiter: { acquire: acquireLimiterMock },
 }));
+vi.mock('../agentCli/index.js', () => ({
+  generateWithAgent: generateWithAgentMock,
+}));
 
 import { generateStructuredContent, type ContentSource } from '../contentGenerator';
 import { createAgentProductPolicyContext } from '../agentCli/productPolicy';
 
 const NARRATIVE_SENTINEL = new Error('NARRATIVE_PROVIDER_REACHED');
+const REGULAR_SENTINEL = new Error('REGULAR_PROVIDER_REACHED');
 
 function regularSource(generator: ContentSource['generator']): ContentSource {
   return {
@@ -52,30 +57,36 @@ beforeEach(() => {
   buildNarrativeContentMock.mockReset();
   releaseLimiterMock.mockReset();
   acquireLimiterMock.mockReset().mockResolvedValue(releaseLimiterMock);
+  generateWithAgentMock.mockReset().mockRejectedValue(REGULAR_SENTINEL);
   aggregateInferencesMock.mockResolvedValue({ sections: [] });
   buildNarrativeContentMock.mockRejectedValue(NARRATIVE_SENTINEL);
 });
 
 describe('resolved content provider product-policy boundary', () => {
-  it('blocks a normal agent-claude provider inside contentGenerator without reaching a model', async () => {
-    await expect(generateStructuredContent(regularSource('agent-claude'))).rejects.toMatchObject({
-      code: 'provider_disabled',
-      provider: 'claude',
-    });
+  it('allows a normal agent-claude provider to reach the local CLI', async () => {
+    await expect(generateStructuredContent(regularSource('agent-claude')))
+      .rejects.toThrow('REGULAR_PROVIDER_REACHED');
 
-    expect(acquireLimiterMock).not.toHaveBeenCalled();
+    expect(acquireLimiterMock).toHaveBeenCalled();
+    expect(generateWithAgentMock).toHaveBeenCalledWith(
+      expect.objectContaining({ provider: 'claude' }),
+      undefined,
+    );
   });
 
-  it('blocks image-narrative when saved configuration promotes Gemini to agent-claude', async () => {
+  it('allows image-narrative when saved configuration promotes Gemini to agent-claude', async () => {
     loadConfigMock.mockResolvedValue({ primaryGeminiTextModel: 'agent-claude' });
 
     await expect(generateStructuredContent(
       imageNarrativeSource('gemini'),
       { provider: 'gemini' } as any,
-    )).rejects.toMatchObject({ code: 'provider_disabled', provider: 'claude' });
+    )).rejects.toBe(NARRATIVE_SENTINEL);
 
-    expect(aggregateInferencesMock).not.toHaveBeenCalled();
-    expect(buildNarrativeContentMock).not.toHaveBeenCalled();
+    expect(aggregateInferencesMock).toHaveBeenCalled();
+    expect(buildNarrativeContentMock).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ provider: 'agent-claude' }),
+    );
   });
 
   it('keeps explicit local-development Claude subscription routing available', async () => {

@@ -93,7 +93,7 @@ describe('agent status badge refresh ordering', () => {
     expect(rendered).not.toContain('\n');
   });
 
-  it('renders provider_disabled as a stable Claude API-key path and hides every subscription action', async () => {
+  it('renders an uninstalled Claude Code CLI with install action and an enabled selector', async () => {
     const agentStatus = vi.fn().mockResolvedValue({
       success: true,
       status: {
@@ -101,8 +101,7 @@ describe('agent status badge refresh ordering', () => {
         installed: false,
         loggedIn: false,
         available: false,
-        errorCode: 'provider_disabled',
-        detail: '배포 앱에서는 Claude 구독 로그인을 지원하지 않습니다. Claude API 키를 사용해주세요.',
+        errorCode: 'not_installed',
       },
     });
     const elements = new Map<string, FakeElement>([
@@ -144,17 +143,16 @@ describe('agent status badge refresh ordering', () => {
 
     await refreshAgentStatusBadges({ providers: ['claude'], forceRefresh: true });
 
-    expect(elements.get('agent-claude-status')?.textContent).toContain('Claude API 키');
-    expect(elements.get('agent-claude-status')?.textContent).not.toContain('미설치');
-    expect(elements.get('agent-claude-actions')?.style.display).toBe('none');
-    expect(elements.get('agent-claude-install-btn')?.style.display).toBe('none');
+    expect(elements.get('agent-claude-status')?.textContent).toContain('미설치');
+    expect(elements.get('agent-claude-actions')?.style.display).toBe('flex');
+    expect(elements.get('agent-claude-install-btn')?.style.display).toBe('inline-block');
     expect(elements.get('agent-claude-login-btn')?.style.display).toBe('none');
     expect(elements.get('agent-claude-switch-btn')?.style.display).toBe('none');
-    expect(agentRadio.disabled).toBe(true);
-    expect(agentRadio.checked).toBe(false);
-    expect(claudeFallback.checked).toBe(true);
-    expect(cardAttributes.get('aria-disabled')).toBe('true');
-    expect(unifiedGenerator.value).toBe('claude');
+    expect(agentRadio.disabled).toBe(false);
+    expect(agentRadio.checked).toBe(true);
+    expect(claudeFallback.checked).toBe(false);
+    expect(cardAttributes.has('aria-disabled')).toBe(false);
+    expect(unifiedGenerator.value).toBe('agent-claude');
   });
 
   it('re-enables the Claude subscription selector when development status allows it', async () => {

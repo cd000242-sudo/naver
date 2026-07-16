@@ -25,19 +25,20 @@ describe('generateWithAgent readiness preflight', () => {
     codexRunMock.mockReset();
   });
 
-  it('fails closed at the final CLI execution boundary without a trusted product-policy context', async () => {
+  it('runs Claude Code at the final CLI boundary without a development-only context', async () => {
     detectMock.mockResolvedValue({
       provider: 'claude',
       installed: true,
       loggedIn: true,
       available: true,
     });
+    claudeRunMock.mockResolvedValue('완성된 글');
 
     await expect(generateWithAgent({ provider: 'claude', prompt: '글을 작성해줘' }))
-      .rejects.toMatchObject({ code: 'provider_disabled', provider: 'claude' });
+      .resolves.toMatchObject({ provider: 'claude', text: '완성된 글' });
 
-    expect(detectMock).not.toHaveBeenCalled();
-    expect(claudeRunMock).not.toHaveBeenCalled();
+    expect(detectMock).toHaveBeenCalledWith('claude', { forceRefresh: true });
+    expect(claudeRunMock).toHaveBeenCalledOnce();
   });
 
   it('blocks every Claude generation entry point when the subscription is inactive', async () => {

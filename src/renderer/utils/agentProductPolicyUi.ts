@@ -25,7 +25,6 @@ const SAFE_CLAUDE_VERSION = new RegExp(`^Claude Code ${SAFE_SEMVER}$`, 'i');
 const SAFE_BARE_VERSION = new RegExp(`^v?${SAFE_SEMVER}$`, 'i');
 
 const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite';
-const DEFAULT_CLAUDE_API_MODEL = 'claude-haiku';
 
 function modelToProvider(model: string): SelectableTextProvider {
   if (model === 'agent-codex' || model === 'agent-claude') return model;
@@ -42,27 +41,23 @@ function modelToProvider(model: string): SelectableTextProvider {
   return 'gemini';
 }
 
-/** Normalize a disabled subscription selection without affecting Codex or API-key routes. */
+/** Preserve the user's selected text engine; readiness is checked at generation time. */
 export function resolveTextModelSelection(
   selectedModel: string | undefined,
-  claudeApiKey: string | undefined,
-  claudeSubscriptionDisabled: boolean,
+  _claudeApiKey: string | undefined,
+  _claudeSubscriptionDisabled: boolean,
 ): SafeTextModelSelection {
-  let model = selectedModel || DEFAULT_GEMINI_MODEL;
-  if (claudeSubscriptionDisabled && model === 'agent-claude') {
-    model = claudeApiKey?.trim() ? DEFAULT_CLAUDE_API_MODEL : DEFAULT_GEMINI_MODEL;
-  }
+  const model = selectedModel || DEFAULT_GEMINI_MODEL;
   return Object.freeze({ model, provider: modelToProvider(model) });
 }
 
 /**
- * Permanently migrates the one persisted route that packaged builds cannot offer.
- * Safe/development selections retain the original object so callers never rewrite
- * unrelated configuration merely by opening a modal.
+ * Normalize the current selection without rewriting a saved Claude Code route.
+ * Opening settings must never silently replace the user's chosen provider.
  */
 export function resolvePersistedTextModelConfig(
   config: Readonly<Record<string, unknown>>,
-  claudeSubscriptionDisabled: boolean,
+  _claudeSubscriptionDisabled: boolean,
 ): PersistedTextModelMigration {
   const selectedModel = typeof config.primaryGeminiTextModel === 'string'
     ? config.primaryGeminiTextModel
@@ -76,28 +71,19 @@ export function resolvePersistedTextModelConfig(
   const selection = resolveTextModelSelection(
     selectedModel,
     claudeApiKey,
-    claudeSubscriptionDisabled,
+    false,
   );
-  const changed = claudeSubscriptionDisabled && (
-    selectedModel === 'agent-claude'
-    || persistedProvider === 'agent-claude'
-    || (
-      selectedModel !== undefined
-      && persistedProvider !== undefined
-      && persistedProvider !== selection.provider
-    )
-  );
+  const changed = selectedModel !== undefined
+    && persistedProvider !== undefined
+    && persistedProvider !== selection.provider;
+  if (!changed) return Object.freeze({ changed: false, selection, config });
 
-  if (!changed) {
-    return Object.freeze({ changed: false, selection, config });
-  }
-
-  const migratedConfig = Object.freeze({
+  const synchronizedConfig = Object.freeze({
     ...config,
     primaryGeminiTextModel: selection.model,
     defaultAiProvider: selection.provider,
   });
-  return Object.freeze({ changed: true, selection, config: migratedConfig });
+  return Object.freeze({ changed: true, selection, config: synchronizedConfig });
 }
 
 /** Renderer-side defense for legacy or compromised status payloads. */

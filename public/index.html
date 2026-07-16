@@ -6019,12 +6019,11 @@
                                     </div>
 
                                     <!-- 🤖 에이전트 모드 (Claude Code 구독) -->
-                                    <label id="agent-claude-card" class="gemini-model-card" aria-disabled="true"
-                                        title="상태 확인 중 — 배포 앱에서는 Claude API 키 방식을 사용합니다"
-                                        style="cursor: not-allowed; opacity: 0.55; border: 2px solid #a78bfa; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f5f3ff, #ede9fe); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(167, 139, 250, 0.15);">
+                                    <label id="agent-claude-card" class="gemini-model-card"
+                                        style="cursor: pointer; border: 2px solid #a78bfa; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f5f3ff, #ede9fe); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(167, 139, 250, 0.15);">
                                         <div
                                             style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ede9fe; border-radius: 50%;">
-                                            <input type="radio" name="primaryGeminiTextModel" value="agent-claude" disabled aria-disabled="true"
+                                            <input type="radio" name="primaryGeminiTextModel" value="agent-claude"
                                                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #7c3aed;">
                                         </div>
                                         <div style="flex: 1;">
@@ -6032,10 +6031,10 @@
                                                 style="font-weight: 800; color: #6d28d9; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
                                                 <span>🤖 에이전트 모드 (Claude Code 구독)</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">배포 앱 비활성</span>
+                                                    style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">별도 API 키 불필요</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #5b21b6; line-height: 1.4;">
-                                                배포 앱에서는 Claude 구독 로그인을 제공하지 않습니다 · Claude API 키 방식을 사용하세요</div>
+                                                Claude Code CLI 글생성 · Claude 구독 한도·크레딧 사용</div>
                                             <div id="agent-claude-status"
                                                 style="font-size: 0.8rem; color: #6b7280; font-weight: 700; margin-top: 0.3rem;">⏳ 상태 확인 중...</div>
                                         </div>
@@ -12539,7 +12538,7 @@
                     <p style="margin: 0; color: #e5e7eb; font-size: 0.92rem; line-height: 1.65;">
                         별도 OpenAI API 키 대신 <strong>본인의 ChatGPT 플랜 한도·크레딧</strong>으로 Codex CLI 글생성을 사용합니다.
                         플랜·작업 규모·현재 한도에 따라 사용 가능량과 추가 크레딧 비용이 달라질 수 있습니다. (글 전용 — 이미지는 아래 이미지 엔진 사용)<br>
-                        <span style="color: #a7f3d0; font-size: 0.85rem;">💡 배포 앱은 Claude 구독 로그인을 제공하지 않습니다. Claude는 환경설정의 Claude API 키 방식을 사용하세요.</span>
+                        <span style="color: #a7f3d0; font-size: 0.85rem;">💡 Claude Code는 본인의 로컬 CLI 로그인·구독 상태를 사용합니다. 각 공급자의 이용약관과 사용 한도를 준수해 주세요.</span>
                     </p>
                 </div>
 

@@ -5,12 +5,11 @@ import {
 } from './types.js';
 
 /**
- * Anthropic requires third-party products to use API-key authentication instead of
- * offering Claude.ai login or routing Free/Pro/Max subscription credentials.
- * https://code.claude.com/docs/en/legal-and-compliance#authentication-and-credential-use
+ * Product-level switches kept for IPC/API compatibility. Provider readiness is
+ * determined by the local CLI installation, login, subscription, and quota checks.
  */
 export interface AgentProductPolicyOptions {
-  /** Development/test escape hatch. Packaged applications must leave this false. */
+  /** Deprecated compatibility field. Claude Code is available in packaged builds. */
   readonly allowClaudeSubscription?: boolean;
 }
 
@@ -30,33 +29,15 @@ export type AgentProviderPolicyDecision = Readonly<
   }
 >;
 
-export const CLAUDE_SUBSCRIPTION_DISABLED_MESSAGE =
-  '배포 앱에서는 Claude 구독 로그인 및 구독 자격증명 기반 요청을 지원하지 않습니다. 환경설정에서 Claude API 키를 등록해 사용해주세요.';
-
 const CODEX_ENABLED = Object.freeze({ provider: 'codex', enabled: true } as const);
 const CLAUDE_ENABLED = Object.freeze({ provider: 'claude', enabled: true } as const);
-const CLAUDE_DISABLED = Object.freeze({
-  provider: 'claude',
-  enabled: false,
-  code: 'provider_disabled',
-  message: CLAUDE_SUBSCRIPTION_DISABLED_MESSAGE,
-} as const);
-const CLAUDE_DISABLED_STATUS = Object.freeze({
-  provider: 'claude',
-  installed: false,
-  loggedIn: false,
-  available: false,
-  errorCode: 'provider_disabled',
-  detail: CLAUDE_SUBSCRIPTION_DISABLED_MESSAGE,
-} as const satisfies AgentCliStatus);
 const trustedProductPolicyContexts = new WeakSet<object>();
 
 export function resolveAgentProviderPolicy(
   provider: AgentProvider,
-  options: AgentProductPolicyOptions = {},
+  _options: AgentProductPolicyOptions = {},
 ): AgentProviderPolicyDecision {
-  if (provider === 'codex') return CODEX_ENABLED;
-  return options.allowClaudeSubscription === true ? CLAUDE_ENABLED : CLAUDE_DISABLED;
+  return provider === 'codex' ? CODEX_ENABLED : CLAUDE_ENABLED;
 }
 
 export function assertAgentProviderAllowed(
@@ -81,10 +62,7 @@ export function assertContentGeneratorProviderAllowed(
   }
 }
 
-/**
- * Create an opaque context for trusted main-process calls. A renderer-supplied plain
- * object with the same fields is deliberately not accepted by the resolved-provider guard.
- */
+/** Create a branded context for compatibility with existing generation boundaries. */
 export function createAgentProductPolicyContext(
   options: AgentProductPolicyOptions = {},
 ): AgentProductPolicyContext {
@@ -105,12 +83,10 @@ export function assertResolvedContentGeneratorProviderAllowed(
   assertContentGeneratorProviderAllowed(generator, trustedOptions);
 }
 
-/** Return a stable status without probing the disabled CLI or its credentials. */
+/** No provider is product-disabled; normal CLI readiness checks always run. */
 export function getDisabledAgentStatus(
-  provider: AgentProvider,
-  options: AgentProductPolicyOptions = {},
+  _provider: AgentProvider,
+  _options: AgentProductPolicyOptions = {},
 ): AgentCliStatus | undefined {
-  return resolveAgentProviderPolicy(provider, options).enabled
-    ? undefined
-    : CLAUDE_DISABLED_STATUS;
+  return undefined;
 }

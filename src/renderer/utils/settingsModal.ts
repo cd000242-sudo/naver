@@ -167,16 +167,6 @@ function isBrowserPreview(): boolean {
     return (window as any).api?.__browserPreview === true;
 }
 
-async function isClaudeSubscriptionDisabled(): Promise<boolean> {
-    const api = (window as any).api;
-    if (typeof api?.isPackaged !== 'function') return true;
-    try {
-        return await api.isPackaged() !== false;
-    } catch {
-        return true;
-    }
-}
-
 function configureBrowserPreviewSaveButton(saveBtn: HTMLElement | null): void {
     if (!isBrowserPreview() || !(saveBtn instanceof HTMLButtonElement)) return;
 
@@ -298,7 +288,7 @@ async function loadCurrentSettings(): Promise<void> {
             : loadedConfig;
         const persistedTextModel = resolvePersistedTextModelConfig(
             normalizedLoadedConfig,
-            await isClaudeSubscriptionDisabled(),
+            false,
         );
         if (persistedTextModel.changed && !isBrowserPreview()) {
             try {
@@ -412,7 +402,7 @@ async function saveSettings(): Promise<void> {
         const safeTextSelection = resolveTextModelSelection(
             selectedTextModel,
             claudeKey,
-            await isClaudeSubscriptionDisabled(),
+            false,
         );
 
         // 업데이트할 설정

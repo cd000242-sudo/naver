@@ -11,17 +11,15 @@ import {
 } from '../agentCli/productPolicy';
 
 describe('agent product policy', () => {
-  it('fails closed for the Claude subscription route unless development explicitly allows it', () => {
+  it('keeps Claude Code enabled in development and packaged-app policy contexts', () => {
     const decision = resolveAgentProviderPolicy('claude');
 
     expect(decision).toMatchObject({
       provider: 'claude',
-      enabled: false,
-      code: 'provider_disabled',
+      enabled: true,
     });
-    expect(decision.message).toContain('Claude API 키');
     expect(Object.isFrozen(decision)).toBe(true);
-    expect(resolveAgentProviderPolicy('claude', { allowClaudeSubscription: false }).enabled).toBe(false);
+    expect(resolveAgentProviderPolicy('claude', { allowClaudeSubscription: false }).enabled).toBe(true);
     expect(resolveAgentProviderPolicy('claude', { allowClaudeSubscription: true }).enabled).toBe(true);
   });
 
@@ -30,35 +28,21 @@ describe('agent product policy', () => {
     expect(() => assertContentGeneratorProviderAllowed('agent-codex')).not.toThrow();
     expect(() => assertContentGeneratorProviderAllowed('claude')).not.toThrow();
     expect(() => assertContentGeneratorProviderAllowed('gemini')).not.toThrow();
-    expect(() => assertContentGeneratorProviderAllowed('agent-claude')).toThrowError(
-      expect.objectContaining({ code: 'provider_disabled', provider: 'claude' }),
-    );
+    expect(() => assertContentGeneratorProviderAllowed('agent-claude')).not.toThrow();
     expect(() => assertContentGeneratorProviderAllowed(
       'agent-claude',
       { allowClaudeSubscription: true },
     )).not.toThrow();
   });
 
-  it('exposes one immutable disabled status without probing installation or credentials', () => {
-    const status = getDisabledAgentStatus('claude');
-
-    expect(status).toEqual({
-      provider: 'claude',
-      installed: false,
-      loggedIn: false,
-      available: false,
-      errorCode: 'provider_disabled',
-      detail: expect.stringContaining('Claude API 키'),
-    });
-    expect(Object.isFrozen(status)).toBe(true);
+  it('never replaces normal CLI readiness probing with a product-disabled status', () => {
+    expect(getDisabledAgentStatus('claude')).toBeUndefined();
     expect(getDisabledAgentStatus('codex')).toBeUndefined();
     expect(getDisabledAgentStatus('claude', { allowClaudeSubscription: true })).toBeUndefined();
-    expect(() => assertAgentProviderAllowed('claude')).toThrowError(
-      expect.objectContaining({ code: 'provider_disabled' }),
-    );
+    expect(() => assertAgentProviderAllowed('claude')).not.toThrow();
   });
 
-  it('accepts development allowance only through an opaque policy context', () => {
+  it('preserves the opaque policy context without making it an availability gate', () => {
     const developmentContext = createAgentProductPolicyContext({
       allowClaudeSubscription: true,
     });
@@ -71,7 +55,7 @@ describe('agent product policy', () => {
     expect(() => assertResolvedContentGeneratorProviderAllowed(
       'agent-claude',
       { allowClaudeSubscription: true } as any,
-    )).toThrowError(expect.objectContaining({ code: 'provider_disabled' }));
+    )).not.toThrow();
     expect(() => assertResolvedContentGeneratorProviderAllowed('agent-codex')).not.toThrow();
     expect(() => assertResolvedContentGeneratorProviderAllowed('claude')).not.toThrow();
   });
@@ -80,9 +64,9 @@ describe('agent product policy', () => {
 describe('main-process policy wiring', () => {
   const mainSource = readFileSync(resolve(process.cwd(), 'src', 'main.ts'), 'utf8');
 
-  it('allows Claude subscription only in unpackaged development', () => {
+  it('allows Claude Code in packaged and unpackaged main-process handlers', () => {
     expect(mainSource).toMatch(
-      /registerAgentHandlers\(\{[\s\S]*?allowClaudeSubscription:\s*!app\.isPackaged[\s\S]*?\}\);/,
+      /registerAgentHandlers\(\{[\s\S]*?allowClaudeSubscription:\s*true[\s\S]*?\}\);/,
     );
   });
 
@@ -114,10 +98,14 @@ describe('main-process policy wiring', () => {
     expect(handlerSource).toContain('agentProductPolicyContext: productPolicyContext');
   });
 
-  it('ships the Claude subscription selector disabled until main confirms development allowance', () => {
+  it('ships the Claude Code selector enabled', () => {
     const html = readFileSync(resolve(process.cwd(), 'public', 'index.html'), 'utf8');
-    expect(html).toMatch(/id="agent-claude-card"[^>]*aria-disabled="true"/);
-    expect(html).toMatch(/value="agent-claude"[^>]*disabled[^>]*aria-disabled="true"/);
+    const cardStart = html.indexOf('id="agent-claude-card"');
+    const cardEnd = html.indexOf('id="agent-claude-actions"', cardStart);
+    const card = html.slice(cardStart, cardEnd);
+    expect(card).not.toContain('aria-disabled="true"');
+    expect(card).not.toMatch(/value="agent-claude"[^>]*\sdisabled(?:\s|>)/);
+    expect(card).toContain('별도 API 키 불필요');
   });
 
   it('describes Codex subscription usage without zero-cost or unlimited claims', () => {

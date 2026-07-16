@@ -101,7 +101,7 @@ import {
 
 function createMainAgentProductPolicyContext() {
   return createAgentProductPolicyContext({
-    allowClaudeSubscription: !app.isPackaged,
+    allowClaudeSubscription: true,
   });
 }
 
@@ -4345,7 +4345,7 @@ registerApiHandlers(_earlyCtx);
 // ✅ 에이전트 모드(codex/claude 구독 연동 글생성) IPC — 의존성 없음, 최상위 등록
 registerAgentHandlers({
   trustedRendererPath: path.join(publicPath, 'index.html'),
-  allowClaudeSubscription: !app.isPackaged,
+  allowClaudeSubscription: true,
 });
 // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고) — 환경별 버그 즉시 진단
 registerDiagnosticsHandlers();

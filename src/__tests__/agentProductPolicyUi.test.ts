@@ -7,41 +7,41 @@ import {
 } from '../renderer/utils/agentProductPolicyUi';
 
 describe('agent product-policy UI selection', () => {
-  it('normalizes disabled agent-claude to the API-key Claude route when a key exists', () => {
+  it('preserves agent-claude in packaged mode when a Claude API key also exists', () => {
     expect(resolveTextModelSelection('agent-claude', 'sk-ant-api-key', true)).toEqual({
-      model: 'claude-haiku',
-      provider: 'claude',
+      model: 'agent-claude',
+      provider: 'agent-claude',
     });
   });
 
-  it('normalizes disabled agent-claude to the Gemini default when no Claude key exists', () => {
+  it('preserves agent-claude in packaged mode without a Claude API key', () => {
     expect(resolveTextModelSelection('agent-claude', '', true)).toEqual({
-      model: 'gemini-3.1-flash-lite',
-      provider: 'gemini',
+      model: 'agent-claude',
+      provider: 'agent-claude',
     });
   });
 
-  it('immutably migrates a persisted disabled Claude subscription route', () => {
-    const stale = Object.freeze({
+  it('does not rewrite a persisted Claude Code subscription route', () => {
+    const saved = Object.freeze({
       primaryGeminiTextModel: 'agent-claude',
       defaultAiProvider: 'agent-claude',
       claudeApiKey: 'sk-ant-api-key',
       unrelated: 'preserved',
     });
 
-    const migration = resolvePersistedTextModelConfig(stale, true);
+    const migration = resolvePersistedTextModelConfig(saved, true);
 
     expect(migration).toMatchObject({
-      changed: true,
-      selection: { model: 'claude-haiku', provider: 'claude' },
+      changed: false,
+      selection: { model: 'agent-claude', provider: 'agent-claude' },
       config: {
-        primaryGeminiTextModel: 'claude-haiku',
-        defaultAiProvider: 'claude',
+        primaryGeminiTextModel: 'agent-claude',
+        defaultAiProvider: 'agent-claude',
         unrelated: 'preserved',
       },
     });
-    expect(migration.config).not.toBe(stale);
-    expect(stale.primaryGeminiTextModel).toBe('agent-claude');
+    expect(migration.config).toBe(saved);
+    expect(saved.primaryGeminiTextModel).toBe('agent-claude');
     expect(Object.isFrozen(migration)).toBe(true);
     expect(Object.isFrozen(migration.config)).toBe(true);
   });
@@ -63,7 +63,7 @@ describe('agent product-policy UI selection', () => {
     });
   });
 
-  it('repairs a stale disabled provider even when the persisted primary model is safe', () => {
+  it('repairs a mismatched provider without replacing the persisted primary model', () => {
     const config = Object.freeze({
       primaryGeminiTextModel: 'gemini-3.5-flash',
       defaultAiProvider: 'agent-claude',
@@ -130,7 +130,7 @@ describe('agent product-policy UI selection', () => {
     expect(source).toContain('defaultAiProvider: safeTextSelection.provider');
   });
 
-  it('migrates the blocked route on every settings load/save surface', () => {
+  it('normalizes model/provider consistency on every settings load/save surface', () => {
     const settingsModal = readFileSync(
       resolve(process.cwd(), 'src', 'renderer', 'utils', 'settingsModal.ts'),
       'utf8',
@@ -148,7 +148,7 @@ describe('agent product-policy UI selection', () => {
     expect(priceInfoModal).toContain('await settingsApi.saveConfig(persistedTextModel.config)');
   });
 
-  it('never markets packaged agent routing as free or Claude-subscription enabled', () => {
+  it('describes subscription routing without zero-cost or unlimited claims', () => {
     const html = readFileSync(
       resolve(process.cwd(), 'public', 'index.html'),
       'utf8',
@@ -170,7 +170,8 @@ describe('agent product-policy UI selection', () => {
     }
 
     expect(html).toContain('ChatGPT 플랜 한도·크레딧');
-    expect(html).toContain('Claude API 키');
-    expect(renderer).not.toContain("'agent-claude': '🤖 에이전트 (Claude 구독)'\n");
+    expect(html).toContain('Claude Code CLI 글생성');
+    expect(html).toContain('Claude 구독 한도·크레딧 사용');
+    expect(renderer).toContain("'agent-claude': '🤖 에이전트 (Claude Code 구독)'");
   });
 });
