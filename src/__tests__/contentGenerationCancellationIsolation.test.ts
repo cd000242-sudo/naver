@@ -5,8 +5,12 @@ import { describe, expect, it } from 'vitest';
 describe('content-generation cancellation isolation wiring', () => {
   it('uses a scoped registry instead of the shared general abort controller', () => {
     const source = fs.readFileSync(path.resolve(process.cwd(), 'src/main.ts'), 'utf8');
-    const start = source.indexOf("ipcMain.handle(\n  'automation:generateStructuredContent'");
-    const end = source.indexOf('// ✅ config:get / config:save', start);
+    const channel = source.indexOf("'automation:generateStructuredContent'");
+    const start = source.lastIndexOf('ipcMain.handle(', channel);
+    const end = source.indexOf('registerConfigHandlers({', start);
+    expect(channel).toBeGreaterThanOrEqual(0);
+    expect(start).toBeGreaterThanOrEqual(0);
+    expect(end).toBeGreaterThan(start);
     const handler = source.slice(start, end);
 
     expect(handler).toContain('contentGenerationAbortRegistry.begin');
