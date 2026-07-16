@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import HomeOperationsBoard from '../components/HomeOperationsBoard';
 import ParticlesCanvas from '../components/ParticlesCanvas';
@@ -1266,6 +1266,19 @@ function IndexPage() {
         setActiveSourceLaneId(laneId);
         setActiveSourceKeyword('');
     };
+    const handleSourceTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, laneId: SourceLaneId) => {
+        const laneIds = liveState.lanes.map((lane) => lane.id);
+        const currentIndex = laneIds.indexOf(laneId);
+        let nextLaneId: SourceLaneId | undefined;
+        if (event.key === 'ArrowRight') nextLaneId = laneIds[(currentIndex + 1) % laneIds.length];
+        if (event.key === 'ArrowLeft') nextLaneId = laneIds[(currentIndex - 1 + laneIds.length) % laneIds.length];
+        if (event.key === 'Home') nextLaneId = laneIds[0];
+        if (event.key === 'End') nextLaneId = laneIds[laneIds.length - 1];
+        if (!nextLaneId) return;
+        event.preventDefault();
+        selectSourceLane(nextLaneId);
+        window.requestAnimationFrame(() => document.getElementById(`home-live-source-tab-${nextLaneId}`)?.focus());
+    };
     const heroProofs = useMemo(() => {
         const configuredProofs = (siteContent?.hero?.proofs || [])
             .filter((proof) => Boolean(proof?.src))
@@ -1322,13 +1335,7 @@ function IndexPage() {
         <>
             {decorationsReady && <ParticlesCanvas />}
 
-            {/* ═══ HERO ═══ */}
-            <section className="home-hero" style={{ minHeight: 'calc(100vh - 80px)', display: 'grid', gridTemplateColumns: 'minmax(0, 980px) minmax(280px, 360px)', columnGap: 24, rowGap: 14, padding: '76px 24px 28px', maxWidth: 1412, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
-                <div className="hero-eyebrow">
-                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
-                    <span>PREMIUM AUTOMATION</span>
-                </div>
-                <div className="hero-content">
+            <HomeOperationsBoard realtimePanel={(
                     <div className="hero-realtime-board" aria-label="실시간 검색어">
                         <div className="hero-realtime-head">
                             <span>{liveStatusLabel}</span>
@@ -1341,11 +1348,15 @@ function IndexPage() {
                                 return (
                                     <button
                                         key={lane.id}
+                                        id={`home-live-source-tab-${lane.id}`}
                                         type="button"
                                         role="tab"
                                         aria-selected={isActive}
+                                        aria-controls="home-live-source-panel"
+                                        tabIndex={isActive ? 0 : -1}
                                         className={`hero-source-tab${isActive ? ' active' : ''}`}
                                         onClick={() => selectSourceLane(lane.id)}
+                                        onKeyDown={(event) => handleSourceTabKeyDown(event, lane.id)}
                                         style={{ borderColor: isActive ? lane.accent : 'rgba(255,255,255,0.13)', color: isActive ? '#061018' : 'rgba(255,255,255,0.74)', background: isActive ? lane.accent : 'rgba(255,255,255,0.045)' }}
                                     >
                                         <span style={{ background: isActive ? '#061018' : lane.accent }} />
@@ -1355,7 +1366,13 @@ function IndexPage() {
                                 );
                             })}
                         </div>
-                        <div className="hero-source-panel" style={{ borderColor: activeSourceLane.accent + '66', background: 'linear-gradient(135deg, ' + activeSourceLane.accent + '16, rgba(255,255,255,0.035))' }}>
+                        <div
+                            id="home-live-source-panel"
+                            className="hero-source-panel"
+                            role="tabpanel"
+                            aria-labelledby={`home-live-source-tab-${activeSourceLane.id}`}
+                            style={{ borderColor: activeSourceLane.accent + '66', background: 'linear-gradient(135deg, ' + activeSourceLane.accent + '16, rgba(255,255,255,0.035))' }}
+                        >
                             <div className="hero-source-panel-head">
                                 <span style={{ background: activeSourceLane.accent }} />
                                 <div>
@@ -1400,6 +1417,13 @@ function IndexPage() {
                             </div>
                         </div>
                     </div>
+            )} />
+
+            {/* ═══ HERO ═══ */}
+            <section className="home-hero" style={{ minHeight: 'auto', display: 'grid', gridTemplateColumns: 'minmax(280px, 820px)', columnGap: 24, rowGap: 14, padding: '8px 24px 56px', maxWidth: 1412, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
+                <div className="hero-eyebrow">
+                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
+                    <span>PREMIUM AUTOMATION</span>
                 </div>
                 <div className="hero-proof-stage" aria-label="실제 사용자 성과 이미지">
                     <div className="proof-summary">
@@ -1443,8 +1467,6 @@ function IndexPage() {
                     ))}
                 </div>
             </section>
-
-            <HomeOperationsBoard />
 
             <style>{`
                 .hero-eyebrow {
@@ -1492,21 +1514,21 @@ function IndexPage() {
                     border-radius: 999px;
                     background: rgba(68,215,182,0.14);
                     color: #44d7b6;
-                    font-size: 11px;
+                    font-size: 13px;
                     font-weight: 900;
                     letter-spacing: 0.08em;
                 }
 
                 .hero-realtime-head strong {
                     color: #fff;
-                    font-size: 14px;
+                    font-size: 19px;
                     font-weight: 900;
                 }
 
                 .hero-realtime-head small {
                     margin-left: auto;
                     color: rgba(255,255,255,0.58);
-                    font-size: 12px;
+                    font-size: 14px;
                     font-weight: 700;
                     white-space: nowrap;
                 }
@@ -1526,12 +1548,12 @@ function IndexPage() {
                 }
 
                 .hero-source-tab {
-                    min-height: 38px;
+                    min-height: 48px;
                     flex: 0 0 auto;
                     display: inline-flex;
                     align-items: center;
                     gap: 7px;
-                    padding: 8px 10px;
+                    padding: 10px 13px;
                     border: 1px solid rgba(255,255,255,0.13);
                     border-radius: 999px;
                     font: inherit;
@@ -1552,7 +1574,7 @@ function IndexPage() {
                 }
 
                 .hero-source-tab strong {
-                    font-size: 12px;
+                    font-size: 14px;
                     font-weight: 900;
                     white-space: nowrap;
                 }
@@ -1562,7 +1584,7 @@ function IndexPage() {
                     padding: 2px 5px;
                     border-radius: 999px;
                     background: rgba(255,255,255,0.16);
-                    font-size: 11px;
+                    font-size: 13px;
                     font-weight: 900;
                     text-align: center;
                 }
@@ -1605,13 +1627,13 @@ function IndexPage() {
                 .hero-source-panel-head p {
                     margin: 3px 0 0;
                     color: rgba(255,255,255,0.60);
-                    font-size: 12px;
-                    line-height: 1.38;
+                    font-size: 14px;
+                    line-height: 1.5;
                 }
 
                 .hero-source-panel-head small {
                     color: rgba(255,255,255,0.62);
-                    font-size: 12px;
+                    font-size: 14px;
                     font-weight: 900;
                     white-space: nowrap;
                 }
@@ -1719,9 +1741,9 @@ function IndexPage() {
                 }
 
                 .hero-source-row {
-                    min-height: 48px;
+                    min-height: 60px;
                     display: grid;
-                    grid-template-columns: minmax(0, 1fr) 46px;
+                    grid-template-columns: minmax(0, 1fr) 54px;
                     align-items: center;
                     gap: 6px;
                     padding: 0;
@@ -1757,7 +1779,7 @@ function IndexPage() {
                     justify-content: center;
                     background: rgba(255,255,255,0.10);
                     color: #fff;
-                    font-size: 11px;
+                    font-size: 13px;
                     font-weight: 900;
                 }
 
@@ -1765,8 +1787,8 @@ function IndexPage() {
                     display: block;
                     min-width: 0;
                     color: #fff;
-                    font-size: 14px;
-                    line-height: 1.28;
+                    font-size: 16px;
+                    line-height: 1.4;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -1775,8 +1797,8 @@ function IndexPage() {
                 .hero-source-row p {
                     margin: 2px 0 0;
                     color: rgba(255,255,255,0.58);
-                    font-size: 11px;
-                    line-height: 1.3;
+                    font-size: 14px;
+                    line-height: 1.45;
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
@@ -1784,14 +1806,14 @@ function IndexPage() {
 
                 .hero-source-row-main > small {
                     color: rgba(255,255,255,0.56);
-                    font-size: 12px;
+                    font-size: 13px;
                     font-weight: 900;
                     white-space: nowrap;
                 }
 
                 .hero-source-row-search {
-                    width: 40px;
-                    min-height: 32px;
+                    width: 48px;
+                    min-height: 48px;
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
@@ -1800,7 +1822,7 @@ function IndexPage() {
                     border: 1px solid rgba(255,255,255,0.14);
                     color: rgba(255,255,255,0.74);
                     text-decoration: none;
-                    font-size: 11px;
+                    font-size: 14px;
                     font-weight: 900;
                 }
 
@@ -2860,7 +2882,7 @@ function IndexPage() {
                         grid-template-columns: 1fr !important;
                         gap: 18px !important;
                         min-height: auto !important;
-                        padding: 92px 18px 44px !important;
+                        padding: 18px 18px 44px !important;
                     }
 
                     .hero-proof-stage {
@@ -2878,7 +2900,7 @@ function IndexPage() {
                 @media (max-width: 640px) {
                     .home-hero {
                         width: 100%;
-                        padding: 82px 12px 34px !important;
+                        padding: 12px 12px 34px !important;
                     }
 
                     .hero-realtime-board {
@@ -2991,8 +3013,8 @@ function IndexPage() {
                     }
 
                     .hero-source-row-search {
-                        width: 36px;
-                        min-height: 30px;
+                        width: 48px;
+                        min-height: 48px;
                         margin: 8px 5px 0 0;
                     }
 
@@ -3126,8 +3148,8 @@ function IndexPage() {
                     }
 
                     .hero-source-tab {
-                        min-height: 36px;
-                        padding: 7px 9px;
+                        min-height: 48px;
+                        padding: 9px 11px;
                     }
 
                     .hero-source-row {
@@ -3138,7 +3160,7 @@ function IndexPage() {
                         justify-self: start;
                         margin: 8px 0 0;
                         width: auto;
-                        min-width: 44px;
+                        min-width: 48px;
                         padding: 0 12px;
                     }
 

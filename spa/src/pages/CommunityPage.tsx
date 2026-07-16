@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
+import { fetchHomeNotices } from '../lib/siteOps';
 
 /**
  * 커뮤니티
@@ -30,27 +31,6 @@ interface CommunityCache {
 }
 
 const NOTICE_BADGE_LABEL: Record<string, string> = { important: '중요', update: '업데이트', event: '이벤트', tip: '안내' };
-
-const FALLBACK_NOTICES: Notice[] = [
-    {
-        badge: 'important', date: '2026.05.23',
-        title: 'Better Life Naver v2.10.337 — 안정성 11건 + 봇 우회 강화',
-        preview: '발행 간격 jitter, 사람형 타이핑, 세션 워밍업 등 안정성 진단 픽스 11건을 통합했습니다.',
-        body: 'v2.10.337 릴리즈가 배포되었습니다. 발행 간격에 ±40% 랜덤 jitter, 사람형 가우시안 타이핑, 세션 워밍업, 연속발행 try/catch 보호, AI 클리셰 금지어 제거 등이 포함되었습니다.',
-    },
-    {
-        badge: 'update', date: '2026.05.22',
-        title: '이미지 생성 모델 강화 — gpt-image-1.5 + 나노바나나 3종 분리',
-        preview: '새 이미지 모델과 품질 선택을 추가하고, 한글 텍스트 깨짐 회귀를 잡았습니다.',
-        body: 'gpt-image-1.5 모델 신규 지원 + 품질 선택, 나노바나나 3종 분리(Pro/2/기본), 썸네일만 모드 본문 중복 배치 버그 수정, Gemini 원문 모드 그라운딩 OFF.',
-    },
-    {
-        badge: 'tip', date: '2026.03.10',
-        title: '환불 정책 안내',
-        preview: '라이선스 코드 발급 후 7일 이내, 서비스 미사용 시 전액 환불이 가능합니다.',
-        body: '전액 환불: 발급 후 7일 이내 + 미사용. 부분 환불: 활성화 후 7일 이내. 환불 불가: 7일 초과 또는 정상 이용 후.',
-    },
-];
 
 const panelStyle: CSSProperties = {
     border: '1px solid rgba(255,255,255,0.10)',
@@ -175,7 +155,7 @@ async function fetchCommunityAction(action: string, signal: AbortSignal) {
 
 function CommunityPage() {
     const [tab, setTab] = useState<TabKey>('notices');
-    const [notices, setNotices] = useState<Notice[]>(FALLBACK_NOTICES);
+    const [notices, setNotices] = useState<Notice[]>([]);
     const [income, setIncome] = useState<Income[]>([]);
     const [tips, setTips] = useState<Tip[]>([]);
     const [loading, setLoading] = useState(true);
@@ -191,7 +171,7 @@ function CommunityPage() {
     const refreshCommunity = useCallback(async (silent = false) => {
         const cached = readCommunityCache();
         if (cached) {
-            setNotices(cached.notices.length ? cached.notices : FALLBACK_NOTICES);
+            setNotices(cached.notices);
             setIncome(cached.income);
             setTips(cached.tips);
             setLoading(false);
@@ -203,14 +183,14 @@ function CommunityPage() {
         const timer = window.setTimeout(() => controller.abort(), COMMUNITY_TIMEOUT_MS);
         try {
             const [noticeResult, incomeResult, tipResult] = await Promise.allSettled([
-                fetchCommunityAction('get-notices', controller.signal),
+                fetchHomeNotices(80),
                 fetchCommunityAction('income-list', controller.signal),
                 fetchCommunityAction('get-tips', controller.signal),
             ]);
 
-            const nextNotices = noticeResult.status === 'fulfilled' && noticeResult.value?.success
-                ? (noticeResult.value.notices || []).map(normalizeNotice).filter(Boolean) as Notice[]
-                : cached?.notices || FALLBACK_NOTICES;
+            const nextNotices = noticeResult.status === 'fulfilled'
+                ? noticeResult.value.map(normalizeNotice).filter(Boolean) as Notice[]
+                : cached?.notices || [];
             const nextIncome = incomeResult.status === 'fulfilled' && incomeResult.value?.success
                 ? (incomeResult.value.income || []).map(normalizeIncome).filter(Boolean) as Income[]
                 : cached?.income || [];
@@ -218,18 +198,18 @@ function CommunityPage() {
                 ? (tipResult.value.tips || []).map(normalizeTip).filter(Boolean) as Tip[]
                 : cached?.tips || [];
 
-            setNotices(nextNotices.length ? nextNotices : FALLBACK_NOTICES);
+            setNotices(nextNotices);
             setIncome(nextIncome);
             setTips(nextTips);
             writeCommunityCache({
-                notices: nextNotices.length ? nextNotices : FALLBACK_NOTICES,
+                notices: nextNotices,
                 income: nextIncome,
                 tips: nextTips,
                 cachedAt: Date.now(),
             });
         } catch {
             if (!cached) {
-                setNotices(FALLBACK_NOTICES);
+                setNotices([]);
                 setIncome([]);
                 setTips([]);
             }
@@ -382,6 +362,10 @@ function NoticesPanel({ notices, openIdx, onToggle }: { notices: Notice[]; openI
         }
     };
 
+    if (notices.length === 0) {
+        return <div style={{ ...panelStyle, maxWidth: 900, margin: '0 auto', padding: 34, color: 'rgba(255,255,255,0.68)', fontSize: 16, lineHeight: 1.7, textAlign: 'center' }}>현재 등록된 공지사항이 없습니다.</div>;
+    }
+
     return (
         <div style={{ maxWidth: 900, margin: '0 auto' }}>
             {notices.map((notice, index) => {
@@ -391,6 +375,15 @@ function NoticesPanel({ notices, openIdx, onToggle }: { notices: Notice[]; openI
                     <article
                         key={`${notice.title}-${index}`}
                         onClick={() => onToggle(index)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                onToggle(index);
+                            }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        aria-expanded={open}
                         style={{ ...panelStyle, padding: 24, marginBottom: 14, cursor: 'pointer' }}
                     >
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
@@ -399,12 +392,11 @@ function NoticesPanel({ notices, openIdx, onToggle }: { notices: Notice[]; openI
                         </div>
                         <h3 style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>{notice.title}</h3>
                         <p style={{ color: 'rgba(255,255,255,0.64)', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{notice.preview}</p>
-                        <div style={{ maxHeight: open ? 700 : 0, overflow: 'hidden', transition: 'max-height 0.25s ease' }}>
-                            <div
-                                style={{ paddingTop: 14, marginTop: 14, borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: 14, color: 'rgba(255,255,255,0.74)', lineHeight: 1.8 }}
-                                dangerouslySetInnerHTML={{ __html: notice.body }}
-                            />
-                        </div>
+                        {open && <div>
+                            <div style={{ paddingTop: 14, marginTop: 14, borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: 16, color: 'rgba(255,255,255,0.78)', lineHeight: 1.8, whiteSpace: 'pre-line', wordBreak: 'keep-all', overflowWrap: 'break-word' }}>
+                                {notice.body}
+                            </div>
+                        </div>}
                     </article>
                 );
             })}

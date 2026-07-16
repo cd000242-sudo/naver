@@ -139,6 +139,7 @@ export type HomeNotice = {
     date: string;
     title: string;
     summary: string;
+    body: string;
 };
 
 export type HomeKeywordBriefingResult = {
@@ -213,6 +214,7 @@ export async function fetchSiteContent(): Promise<SiteContent | null> {
 }
 
 const HOME_NOTICE_TIMEOUT_MS = 3200;
+const HOME_NOTICE_CACHE_KEY = 'leaderspro.homeNotices.cache.v2';
 const HOME_KEYWORD_SEED_URL = '/data/home-keyword-briefing-seed.json';
 
 function cleanPublicText(value: unknown, maxLength: number): string {
@@ -224,18 +226,33 @@ function cleanPublicText(value: unknown, maxLength: number): string {
         .slice(0, maxLength);
 }
 
+function cleanPublicMultilineText(value: unknown, maxLength: number): string {
+    return String(value ?? '')
+        .replace(/<\s*br\s*\/?>/gi, '\n')
+        .replace(/<\/(p|li|div|h[1-6])\s*>/gi, '\n')
+        .replace(/<[^>]*>/g, '')
+        .replace(/\r\n?/g, '\n')
+        .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '')
+        .replace(/[ \t]+\n/g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim()
+        .slice(0, maxLength);
+}
+
 function normalizeHomeNotice(value: unknown, index: number): HomeNotice | null {
     if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
     const raw = value as Record<string, unknown>;
-    const title = cleanPublicText(raw.title, 140);
+    const title = cleanPublicText(raw.title, 200);
     if (!title) return null;
     const date = cleanPublicText(raw.date ?? raw.createdAt ?? raw.timestamp, 40);
+    const body = cleanPublicMultilineText(raw.body ?? raw.detail ?? raw.preview ?? raw.summary, 8000);
     return {
         id: cleanPublicText(raw.id, 100) || `notice-${index + 1}-${date || 'undated'}`,
         badge: cleanPublicText(raw.badge ?? raw.type, 30) || 'notice',
         date,
         title,
-        summary: cleanPublicText(raw.preview ?? raw.summary ?? raw.body ?? raw.detail, 260),
+        summary: cleanPublicText(raw.preview ?? raw.summary ?? raw.body ?? raw.detail, 300),
+        body,
     };
 }
 
@@ -245,29 +262,94 @@ function noticeDateValue(value: string): number {
     return Number.isFinite(parsed) ? parsed : 0;
 }
 
-export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
+function normalizeHomeNoticeList(values: unknown[], limit: number): HomeNotice[] {
+    return values
+        .map(normalizeHomeNotice)
+        .filter((notice): notice is HomeNotice => Boolean(notice))
+        .map((notice, index) => ({ notice, index }))
+        .sort((left, right) => noticeDateValue(right.notice.date) - noticeDateValue(left.notice.date) || left.index - right.index)
+        .slice(0, Math.max(1, Math.min(100, Math.floor(limit) || 3)))
+        .map(({ notice }) => notice);
+}
+
+type HomeNoticeCacheSource = 'secure' | 'legacy';
+
+function readHomeNoticeCache(limit: number, requiredSource: HomeNoticeCacheSource): HomeNotice[] {
+    try {
+        const cached = JSON.parse(localStorage.getItem(HOME_NOTICE_CACHE_KEY) || 'null') as {
+            source?: HomeNoticeCacheSource;
+            notices?: unknown[];
+        } | null;
+        if (cached?.source !== requiredSource || !Array.isArray(cached.notices)) return [];
+        return normalizeHomeNoticeList(cached.notices, limit);
+    } catch {
+        return [];
+    }
+}
+
+function writeHomeNoticeCache(notices: HomeNotice[], source: HomeNoticeCacheSource) {
+    try {
+        localStorage.setItem(HOME_NOTICE_CACHE_KEY, JSON.stringify({ source, notices }));
+    } catch {
+        // Public rendering must not depend on cache writes.
+    }
+}
+
+type SavedHomeNoticesResult =
+    | { state: 'saved'; notices: HomeNotice[] }
+    | { state: 'uninitialized' }
+    | { state: 'unavailable' };
+
+async function fetchSavedHomeNotices(limit: number): Promise<SavedHomeNoticesResult> {
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), HOME_NOTICE_TIMEOUT_MS);
     try {
-        const response = await fetch(`${GAS_URL}?action=get-notices`, {
+        const response = await fetch(`${LEWORD_API_BASE}/v1/public/home-notices`, {
             cache: 'no-store',
             signal: controller.signal,
         });
-        if (!response.ok) return [];
-        const payload = await response.json() as { success?: boolean; ok?: boolean; notices?: unknown[] };
-        if (!payload || (!payload.success && !payload.ok) || !Array.isArray(payload.notices)) return [];
-        return payload.notices
-            .map(normalizeHomeNotice)
-            .filter((notice): notice is HomeNotice => Boolean(notice))
-            .map((notice, index) => ({ notice, index }))
-            .sort((left, right) => noticeDateValue(right.notice.date) - noticeDateValue(left.notice.date) || left.index - right.index)
-            .slice(0, Math.max(1, Math.min(3, Math.floor(limit) || 3)))
-            .map(({ notice }) => notice);
+        if (!response.ok) return { state: 'unavailable' };
+        const payload = await response.json() as { ok?: boolean; notices?: { notices?: unknown[] } | null };
+        if (payload?.ok !== true) return { state: 'unavailable' };
+        if (payload.notices === null) return { state: 'uninitialized' };
+        if (!Array.isArray(payload.notices?.notices)) return { state: 'unavailable' };
+        return { state: 'saved', notices: normalizeHomeNoticeList(payload.notices.notices, limit) };
     } catch {
-        return [];
+        return { state: 'unavailable' };
     } finally {
         window.clearTimeout(timeout);
     }
+}
+
+async function fetchLegacyHomeNotices(limit: number): Promise<HomeNotice[] | null> {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), HOME_NOTICE_TIMEOUT_MS);
+    try {
+        const response = await fetch(`${GAS_URL}?action=get-notices`, { cache: 'no-store', signal: controller.signal });
+        if (!response.ok) return null;
+        const payload = await response.json() as { success?: boolean; ok?: boolean; notices?: unknown[] };
+        if (!payload || (!payload.success && !payload.ok) || !Array.isArray(payload.notices)) return null;
+        return normalizeHomeNoticeList(payload.notices, limit);
+    } catch {
+        return null;
+    } finally {
+        window.clearTimeout(timeout);
+    }
+}
+
+export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
+    const saved = await fetchSavedHomeNotices(limit);
+    if (saved.state === 'saved') {
+        writeHomeNoticeCache(saved.notices, 'secure');
+        return saved.notices;
+    }
+    if (saved.state === 'unavailable') return readHomeNoticeCache(limit, 'secure');
+    const legacy = await fetchLegacyHomeNotices(limit);
+    if (legacy !== null) {
+        writeHomeNoticeCache(legacy, 'legacy');
+        return legacy;
+    }
+    return readHomeNoticeCache(limit, 'legacy');
 }
 
 async function fetchKeywordBriefingSeed(): Promise<HomeKeywordBriefing | null> {

@@ -943,6 +943,12 @@
         .trial-export-box.focused { outline:2px solid #ffd700; }
         @media (max-width:1180px) { .cms-editor-shell { grid-template-columns:1fr; } .cms-preview-pane { position:static; } }
         @media (max-width:760px) { .cms-preview-grid, .trial-export-grid { grid-template-columns:1fr; } .cms-media-tools { grid-template-columns:1fr; } .cms-thumb { width:100%; height:120px; } }
+        .home-ops-admin-grid { display:grid; grid-template-columns:140px 160px minmax(0,1fr); gap:12px; margin-bottom:10px; }
+        .home-ops-admin-actions { display:flex; gap:8px; flex-wrap:wrap; }
+        @media (max-width:760px) {
+            .home-ops-admin-grid { grid-template-columns:1fr; }
+            .home-ops-admin-actions .btn { min-height:44px; }
+        }
         /* CMS_WORKBENCH_V1_END */
 
     </style>
@@ -967,7 +973,7 @@
                 </div>
                 <button type="submit" class="login-btn">로그인</button>
                 <p class="login-error" id="login-error">아이디 또는 비밀번호가 올바르지 않습니다.</p>
-                <p style="margin:12px 0 0;color:var(--text-secondary);font-size:.72rem;line-height:1.55;">로그인 정보는 브리핑의 서버 저장 권한 확인에도 사용되며, 비밀번호는 저장하지 않습니다.</p>
+                <p style="margin:12px 0 0;color:var(--text-secondary);font-size:.72rem;line-height:1.55;">사이트 로그인은 화면 접근용입니다. 공지·키워드 발행은 별도 서버 관리자 계정으로 연결하며, 비밀번호는 저장하지 않습니다.</p>
             </form>
         </div>
     </div>
@@ -986,7 +992,7 @@
             <nav class="sidebar-nav">
                 <div class="nav-item active" data-tab="notices" onclick="switchTab('notices')">
                     <span class="nav-icon">📢</span>
-                    <span>공지사항</span>
+                    <span>홈 운영</span>
                 </div>
                 <div class="nav-item" data-tab="editor" onclick="switchTab('editor')">
                     <span class="nav-icon">✏️</span>
@@ -1151,8 +1157,8 @@
                                 <input id="edit-hero-benefit" type="text" placeholder="2,800+명이 사용 중">
                             </div>
                             <div class="editor-field">
-                                <label>공지사항</label>
-                                <input id="edit-notice" type="text" placeholder="공지사항이 없습니다.">
+                                <label>Hero 보조 문구 (현재 홈 미사용)</label>
+                                <input id="edit-notice" type="text" placeholder="실제 홈 공지는 사이드바의 홈 운영에서 관리하세요.">
                             </div>
                             <div class="editor-field full">
                                 <label>첫 화면 성과 이미지</label>
@@ -1638,17 +1644,36 @@
             <!-- TAB: Notices (Phase 6-B) -->
             <div class="tab-panel active" id="tab-notices">
                 <div class="page-header">
-                    <h1>공지사항</h1>
-                    <p>커뮤니티 공지 등록·수정·삭제. 변경사항은 community.html 공지 탭에 즉시 반영됩니다.</p>
+                    <h1>홈 운영</h1>
+                    <p>홈 공지사항과 부방장 황금키워드를 직접 수정·발행합니다. 저장하기 전에는 공개 화면이 바뀌지 않습니다.</p>
                 </div>
-                <div style="margin-bottom: 16px; padding: 12px 16px; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); border-radius: 10px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                    <span style="font-size: 0.85rem; color: var(--text-secondary);">처음이라면 기존 하드코딩 데이터(공지·수익·팁·후기 16건)를 시트로 가져오세요 →</span>
-                    <button class="btn btn-gold" onclick="seedDefaults()">📥 기본 데이터 가져오기</button>
+                <div style="margin-bottom:16px;padding:16px;background:rgba(68,215,182,0.08);border:1px solid rgba(68,215,182,0.24);border-radius:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+                    <div style="min-width:220px;flex:1;">
+                        <strong style="display:block;margin-bottom:4px;">부방장 키워드도 여기서 바로 관리하세요</strong>
+                        <span style="font-size:.88rem;color:var(--text-secondary);line-height:1.55;">이미지 OCR, 표 직접 수정, 검증, 홈 발행 화면으로 이동합니다.</span>
+                    </div>
+                    <button class="btn btn-gold" type="button" id="home-ops-open-keyword-briefing" onclick="openKeywordBriefingEditor()">부방장 황금키워드 수정</button>
+                    <a class="btn" href="../" target="_blank" rel="noreferrer" style="text-decoration:none;">운영 홈 확인</a>
                 </div>
-                <div class="form-card" style="padding: 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; margin-bottom: 24px;">
-                    <h3 id="notice-form-title" style="margin-bottom: 16px; font-size: 1.05rem;">📝 새 공지 작성</h3>
+                <div style="margin-bottom:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-glass);border-radius:10px;">
+                    <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
+                        <div>
+                            <strong style="display:block;margin-bottom:4px;">서버 저장 권한</strong>
+                            <span id="home-ops-api-status" style="font-size:.85rem;color:var(--text-secondary);">공지 발행용 서버 저장 권한은 별도 계정으로 연결합니다. 사이트 로그인 비밀번호와 다를 수 있습니다.</span>
+                        </div>
+                        <span id="home-notice-revision" style="padding:5px 9px;border:1px solid rgba(68,215,182,.35);border-radius:999px;color:#44d7b6;font-size:.78rem;font-weight:800;">notice revision 0</span>
+                    </div>
+                    <div class="home-ops-admin-grid">
+                        <input id="home-ops-api-id" type="text" placeholder="서버 관리자 ID" autocomplete="username" style="padding:10px;border-radius:8px;">
+                        <input id="home-ops-api-password" type="password" placeholder="서버 관리자 비밀번호" autocomplete="current-password" style="padding:10px;border-radius:8px;">
+                        <button class="btn" type="button" onclick="connectHomeOpsApi()">저장 권한 연결</button>
+                    </div>
+                </div>
+                <div class="form-card" id="home-notice-editor-form" style="padding: 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; margin-bottom: 24px;">
+                    <h3 id="notice-form-title" style="margin-bottom: 8px; font-size: 1.12rem;">📝 홈 공지 작성</h3>
+                    <p style="margin:0 0 16px;color:var(--text-secondary);font-size:.88rem;line-height:1.55;">최신 공지 3건이 홈 맨 위에 표시됩니다. 본문은 일반 텍스트로 입력하며 줄바꿈이 그대로 유지됩니다.</p>
                     <input type="hidden" id="notice-edit-id" value="">
-                    <div style="display: grid; grid-template-columns: 140px 160px 1fr; gap: 12px; margin-bottom: 10px;">
+                    <div class="home-ops-admin-grid">
                         <select id="notice-badge" style="padding: 10px; border-radius: 8px;">
                             <option value="important">중요</option>
                             <option value="update" selected>업데이트</option>
@@ -1659,9 +1684,9 @@
                         <input type="text" id="notice-title" placeholder="제목 (필수, 200자 이내)" style="padding: 10px; border-radius: 8px;">
                     </div>
                     <input type="text" id="notice-preview" placeholder="미리보기 — 한 줄 요약 (300자 이내)" style="width: 100%; padding: 10px; border-radius: 8px; margin-bottom: 8px;">
-                    <textarea id="notice-body" placeholder="본문 (필수, HTML 태그 일부 허용 — <p>, <ul>, <li>, <strong>, <a>)" rows="6" style="width: 100%; padding: 10px; border-radius: 8px; font-family: inherit; margin-bottom: 12px;"></textarea>
-                    <div style="display: flex; gap: 8px;">
-                        <button class="btn btn-gold" onclick="submitNotice()">💾 저장</button>
+                    <textarea id="notice-body" placeholder="본문 (필수, 일반 텍스트 · 줄바꿈 유지)" rows="8" style="width: 100%; padding: 12px; border-radius: 8px; font-family: inherit; font-size:1rem; line-height:1.65; margin-bottom: 12px;"></textarea>
+                    <div class="home-ops-admin-actions">
+                        <button class="btn btn-gold" id="home-notice-submit" data-home-notice-mutation="1" onclick="submitNotice()">💾 홈에 발행</button>
                         <button class="btn" onclick="resetNoticeForm()">↩️ 초기화</button>
                         <button class="btn" onclick="loadNotices()" style="margin-left: auto;">🔄 새로고침</button>
                     </div>
@@ -2053,15 +2078,11 @@
                 localStorage.setItem('lp_analytics_exclude', '1');
                 const apiIdInput = document.getElementById('keyword-briefing-api-id');
                 if (apiIdInput) apiIdInput.value = id;
-                let serverSession = null;
-                try {
-                    serverSession = await requestLewordAdminSession(id, pw, { silent: true });
-                } finally {
-                    document.getElementById('login-pw').value = '';
-                }
-                keywordBriefingApiAccessStatus(serverSession
-                    ? '서버 저장 권한이 연결되었습니다.'
-                    : '사이트 로그인은 완료됐지만 서버 저장 권한은 별도 연결이 필요합니다.', !serverSession);
+                const homeOpsApiIdInput = document.getElementById('home-ops-api-id');
+                if (homeOpsApiIdInput) homeOpsApiIdInput.value = id;
+                document.getElementById('login-pw').value = '';
+                keywordBriefingApiAccessStatus('사이트 로그인 완료 · 발행하려면 별도 서버 저장 권한을 연결하세요.', true);
+                homeOpsApiStatus('사이트 로그인 완료 · 발행하려면 별도 서버 저장 권한을 연결하세요.', true);
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
                 switchTab('notices');
@@ -2112,7 +2133,10 @@
             // Load data for the tab
             if (tabId === 'trial') loadTrialUsers();
             if (tabId === 'bank') loadBankOrders();
-            if (tabId === 'notices') loadNotices();
+            if (tabId === 'notices') {
+                if (!document.getElementById('notice-date')?.value.trim()) resetNoticeForm();
+                loadNotices();
+            }
             if (tabId === 'income') loadIncomeAdmin(currentIncomeFilter);
             if (tabId === 'reviews') loadReviewsAdmin(currentReviewFilter);
             if (tabId === 'tips') loadTipsAdmin(currentTipFilter);
@@ -2146,49 +2170,147 @@
 
         // ===== PHASE 6-B: NOTICES =====
         const NOTICE_BADGE_LABEL = { important: '중요', update: '업데이트', event: '이벤트', tip: '안내' };
+        let homeNoticeEditorState = { revision: 0, notices: [], saving: false, source: 'none' };
+        let homeNoticeLoadGeneration = 0;
         function escapeHtml_(s) {
             return String(s == null ? '' : s).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
         }
+        function plainNoticeText(value, maxLength) {
+            return String(value || '')
+                .replace(/<\s*br\s*\/?>/gi, '\n')
+                .replace(/<\/(p|li|div|h[1-6])\s*>/gi, '\n')
+                .replace(/<[^>]*>/g, '')
+                .replace(/\r\n?/g, '\n')
+                .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '')
+                .replace(/\n{3,}/g, '\n\n')
+                .trim()
+                .slice(0, maxLength);
+        }
+        function normalizeAdminNotice(raw, index) {
+            const date = plainNoticeText(raw?.date || raw?.createdAt || '', 40);
+            return {
+                id: plainNoticeText(raw?.id, 100) || 'legacy-notice-' + (index + 1),
+                badge: ['important', 'update', 'event', 'tip'].includes(raw?.badge) ? raw.badge : 'tip',
+                date,
+                title: plainNoticeText(raw?.title, 200),
+                preview: plainNoticeText(raw?.preview || raw?.summary || raw?.body, 300),
+                body: plainNoticeText(raw?.body || raw?.detail || raw?.preview, 8000)
+            };
+        }
+        function setHomeNoticeRevision(revision) {
+            const value = Math.max(0, Number(revision) || 0);
+            const node = document.getElementById('home-notice-revision');
+            if (node) node.textContent = 'notice revision ' + value;
+        }
+        function homeOpsApiStatus(message, isError) {
+            const node = document.getElementById('home-ops-api-status');
+            if (!node) return;
+            node.textContent = message;
+            node.style.color = isError ? '#f5576c' : '#44d7b6';
+        }
+        async function connectHomeOpsApi() {
+            const userId = document.getElementById('home-ops-api-id')?.value.trim() || '';
+            const passwordNode = document.getElementById('home-ops-api-password');
+            const password = passwordNode?.value || '';
+            if (!userId || !password) {
+                homeOpsApiStatus('서버 관리자 ID와 비밀번호를 입력하세요.', true);
+                return null;
+            }
+            homeOpsApiStatus('서버 저장 권한을 확인하는 중입니다.', false);
+            const session = await requestLewordAdminSession(userId, password, { silent: true });
+            if (passwordNode) passwordNode.value = '';
+            homeOpsApiStatus(session ? '서버 저장 권한이 연결되었습니다.' : '서버 저장 권한 연결에 실패했습니다.', !session);
+            return session;
+        }
+        function renderAdminNoticeList() {
+            const container = document.getElementById('notices-table-body');
+            const list = homeNoticeEditorState.notices;
+            setHomeNoticeRevision(homeNoticeEditorState.revision);
+            if (!list.length) {
+                container.innerHTML = '<div style="padding:32px;text-align:center;color:var(--text-secondary);">등록된 공지가 없습니다. 위 폼에서 새 공지를 작성하세요.</div>';
+                setNoticeMutationDisabled(homeNoticeEditorState.saving);
+                return;
+            }
+            container.innerHTML = list.map(n => {
+                const encodedId = encodeURIComponent(n.id);
+                return `
+                    <div style="padding:16px 20px;background:var(--bg-card);border:1px solid var(--border-glass);border-radius:10px;margin-bottom:10px;">
+                        <div style="display:flex;gap:12px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">
+                            <span style="padding:3px 10px;border-radius:14px;font-size:.76rem;font-weight:700;background:rgba(201,168,76,.15);color:var(--gold-primary,#c9a84c);">${escapeHtml_(NOTICE_BADGE_LABEL[n.badge] || n.badge)}</span>
+                            <span style="font-size:.86rem;color:var(--text-secondary);">${escapeHtml_(n.date)}</span>
+                            <span style="font-size:.74rem;color:var(--text-muted);margin-left:auto;font-family:monospace;">${escapeHtml_(n.id)}</span>
+                        </div>
+                        <div style="font-size:1rem;font-weight:700;line-height:1.5;margin-bottom:5px;">${escapeHtml_(n.title)}</div>
+                        <div style="font-size:.9rem;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;">${escapeHtml_(n.preview)}</div>
+                        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                            <button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="edit" data-notice-id="${escapeHtml_(encodedId)}">✏️ 수정</button>
+                            <button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="delete" data-notice-id="${escapeHtml_(encodedId)}">🗑️ 삭제</button>
+                        </div>
+                    </div>`;
+            }).join('');
+            container.querySelectorAll('[data-notice-action]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const encodedId = button.getAttribute('data-notice-id') || '';
+                    if (button.getAttribute('data-notice-action') === 'edit') editNoticeById(encodedId);
+                    if (button.getAttribute('data-notice-action') === 'delete') deleteNotice(encodedId);
+                });
+            });
+            setNoticeMutationDisabled(homeNoticeEditorState.saving);
+        }
+        function setNoticeMutationDisabled(disabled) {
+            document.querySelectorAll('#home-notice-editor-form input, #home-notice-editor-form select, #home-notice-editor-form textarea, #home-notice-editor-form button, [data-notice-action]').forEach(control => {
+                control.disabled = Boolean(disabled);
+                control.setAttribute('aria-busy', disabled ? 'true' : 'false');
+            });
+        }
         async function loadNotices() {
+            if (homeNoticeEditorState.saving) {
+                homeOpsApiStatus('공지 저장이 끝난 뒤 새로고침할 수 있습니다.', false);
+                return;
+            }
+            const loadGeneration = ++homeNoticeLoadGeneration;
             const container = document.getElementById('notices-table-body');
             container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>';
             try {
-                const res = await fetch(`${GAS_URL}?action=get-notices`).then(r => r.json());
-                if (res.success === false) throw new Error(res.message || '응답 실패');
-                const list = res.notices || [];
-                if (list.length === 0) {
-                    container.innerHTML = '<div style="padding: 32px; text-align: center; color: var(--text-secondary);">등록된 공지가 없습니다. 위 폼에서 새 공지를 작성하세요.</div>';
+                const response = await fetch(lewordApiUrl('/v1/public/home-notices?ts=' + Date.now()), { cache: 'no-store' });
+                const payload = await response.json().catch(() => ({}));
+                if (!response.ok || payload.ok !== true) throw new Error(payload.message || '서버 공지 조회 실패');
+                if (loadGeneration !== homeNoticeLoadGeneration || homeNoticeEditorState.saving) return;
+                if (payload.notices && Array.isArray(payload.notices.notices)) {
+                    homeNoticeEditorState = {
+                        revision: Math.max(0, Number(payload.notices.revision) || 0),
+                        notices: payload.notices.notices.map(normalizeAdminNotice).filter(n => n.title),
+                        saving: false,
+                        source: 'saved'
+                    };
+                    renderAdminNoticeList();
                     return;
                 }
-                container.innerHTML = list.map(n => `
-                    <div style="padding: 16px 20px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 10px; margin-bottom: 10px;">
-                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 6px; flex-wrap: wrap;">
-                            <span style="padding: 3px 10px; border-radius: 14px; font-size: 0.7rem; font-weight: 700; background: rgba(201,168,76,0.15); color: var(--gold-primary, #c9a84c);">${escapeHtml_(NOTICE_BADGE_LABEL[n.badge] || n.badge)}</span>
-                            <span style="font-size: 0.8rem; color: var(--text-secondary);">${escapeHtml_(n.date)}</span>
-                            <span style="font-size: 0.7rem; color: var(--text-muted); margin-left: auto; font-family: monospace;">${escapeHtml_(n.id)}</span>
-                        </div>
-                        <div style="font-weight: 600; margin-bottom: 4px;">${escapeHtml_(n.title)}</div>
-                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">${escapeHtml_(n.preview)}</div>
-                        <div style="display: flex; gap: 8px;">
-                            <button class="btn" onclick='editNoticeFromBtn(${JSON.stringify(n).replace(/'/g, "&#39;")})'>✏️ 수정</button>
-                            <button class="btn" onclick='deleteNotice("${escapeHtml_(n.id)}")'>🗑️ 삭제</button>
-                        </div>
-                    </div>
-                `).join('');
+                const legacy = await fetch(`${GAS_URL}?action=get-notices`, { cache: 'no-store' }).then(r => r.json());
+                if (loadGeneration !== homeNoticeLoadGeneration || homeNoticeEditorState.saving) return;
+                const legacyList = Array.isArray(legacy.notices) ? legacy.notices : [];
+                homeNoticeEditorState = { revision: 0, notices: legacyList.map(normalizeAdminNotice).filter(n => n.title), saving: false, source: 'legacy' };
+                renderAdminNoticeList();
             } catch (err) {
-                container.innerHTML = `<div style="padding: 24px; text-align: center; color: #ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}<br><small>GAS 재배포 필요 시 사용자에게 안내.</small></div>`;
+                if (loadGeneration !== homeNoticeLoadGeneration || homeNoticeEditorState.saving) return;
+                container.innerHTML = `<div style="padding:24px;text-align:center;color:#ff3b5c;">로딩 실패: ${escapeHtml_(err.message)}</div>`;
             }
         }
         function resetNoticeForm() {
             document.getElementById('notice-form-title').textContent = '📝 새 공지 작성';
             document.getElementById('notice-edit-id').value = '';
             document.getElementById('notice-badge').value = 'update';
-            document.getElementById('notice-date').value = new Date().toISOString().slice(0, 10).replace(/-/g, '.');
+            const now = new Date();
+            const localDate = [now.getFullYear(), String(now.getMonth() + 1).padStart(2, '0'), String(now.getDate()).padStart(2, '0')].join('.');
+            document.getElementById('notice-date').value = localDate;
             document.getElementById('notice-title').value = '';
             document.getElementById('notice-preview').value = '';
             document.getElementById('notice-body').value = '';
         }
-        function editNoticeFromBtn(n) {
+        function editNoticeById(encodedId) {
+            const id = decodeURIComponent(encodedId);
+            const n = homeNoticeEditorState.notices.find(item => item.id === id);
+            if (!n) { showToast('❌ 수정할 공지를 찾지 못했습니다'); return; }
             document.getElementById('notice-form-title').textContent = '✏️ 공지 수정 — ' + n.id;
             document.getElementById('notice-edit-id').value = n.id;
             document.getElementById('notice-badge').value = n.badge;
@@ -2198,44 +2320,76 @@
             document.getElementById('notice-body').value = n.body;
             document.getElementById('tab-notices').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+        async function saveHomeNoticeSnapshot(notices) {
+            if (homeNoticeEditorState.saving) throw new Error('공지 저장이 진행 중입니다. 잠시 후 다시 시도하세요.');
+            const session = lewordApiAdminSession || readLewordAdminSession();
+            if (!session?.accessToken || session.tier !== 'admin') {
+                homeOpsApiStatus('먼저 서버 저장 권한을 연결하세요.', true);
+                throw new Error('서버 관리자 저장 권한이 필요합니다.');
+            }
+            homeNoticeLoadGeneration += 1;
+            homeNoticeEditorState.saving = true;
+            setNoticeMutationDisabled(true);
+            try {
+                const response = await fetch(lewordApiUrl('/v1/admin/home-notices'), {
+                    method: 'PUT',
+                    headers: { Authorization: 'Bearer ' + session.accessToken, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        expectedRevision: homeNoticeEditorState.revision,
+                        notices: { notices }
+                    })
+                });
+                const payload = await response.json().catch(() => ({}));
+                if (response.status === 401 || response.status === 403) {
+                    saveLewordAdminSession(null);
+                    homeOpsApiStatus('서버 세션이 만료됐습니다. 저장 권한을 다시 연결하세요.', true);
+                    throw new Error('서버 관리자 인증이 만료되었습니다.');
+                }
+                if (response.status === 409) throw new Error('다른 공지가 먼저 저장됐습니다. 새로고침 후 다시 수정하세요.');
+                if (!response.ok || payload.ok !== true || !payload.notices) throw new Error(payload.message || '공지 저장 실패');
+                homeNoticeEditorState = {
+                    revision: Math.max(1, Number(payload.notices.revision) || 1),
+                    notices: (payload.notices.notices || []).map(normalizeAdminNotice).filter(n => n.title),
+                    saving: false,
+                    source: 'saved'
+                };
+                renderAdminNoticeList();
+                homeOpsApiStatus('서버 저장 권한 연결됨 · 홈 공지 저장 완료', false);
+                return payload.notices;
+            } finally {
+                homeNoticeEditorState.saving = false;
+                setNoticeMutationDisabled(false);
+            }
+        }
         async function submitNotice() {
             const id = document.getElementById('notice-edit-id').value;
-            const body = {
-                action: id ? 'update-notice' : 'submit-notice',
-                adminToken: ADMIN_TOKEN,
+            const bodyText = plainNoticeText(document.getElementById('notice-body').value, 8000);
+            const notice = {
+                id: id || 'notice-' + Date.now().toString(36),
                 badge: document.getElementById('notice-badge').value,
                 date: document.getElementById('notice-date').value.trim(),
-                title: document.getElementById('notice-title').value.trim(),
-                preview: document.getElementById('notice-preview').value.trim(),
-                body: document.getElementById('notice-body').value.trim(),
+                title: plainNoticeText(document.getElementById('notice-title').value, 200),
+                preview: plainNoticeText(document.getElementById('notice-preview').value, 300) || bodyText.replace(/\s+/g, ' ').slice(0, 300),
+                body: bodyText
             };
-            if (id) body.id = id;
-            if (!body.title || !body.body) { showToast('❌ 제목과 본문은 필수입니다'); return; }
+            if (!notice.title || !notice.body) { showToast('❌ 제목과 본문은 필수입니다'); return; }
+            const nextNotices = homeNoticeEditorState.notices.filter(item => item.id !== notice.id).concat(notice);
             try {
-                const res = await fetch(GAS_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(body),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                }).then(r => r.json());
-                if (res.success === false) throw new Error(res.message);
-                showToast(id ? '✅ 수정되었습니다' : '✅ 공지 등록 완료');
+                const saved = await saveHomeNoticeSnapshot(nextNotices);
+                if (!saved) throw new Error('공지 저장 결과를 확인하지 못했습니다.');
+                showToast(id ? '✅ 홈 공지를 수정했습니다' : '✅ 홈 공지를 발행했습니다');
                 resetNoticeForm();
-                loadNotices();
             } catch (err) {
                 showToast('❌ 저장 실패: ' + err.message);
             }
         }
-        async function deleteNotice(id) {
-            if (!confirm('이 공지를 삭제하시겠습니까?\n(soft delete — 시트에는 hidden=true로 표시되어 복구 가능)')) return;
+        async function deleteNotice(encodedId) {
+            const id = decodeURIComponent(encodedId);
+            if (!confirm('이 공지를 홈과 커뮤니티에서 삭제하시겠습니까?')) return;
             try {
-                const res = await fetch(GAS_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({ action: 'delete-notice', adminToken: ADMIN_TOKEN, id: id }),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-                }).then(r => r.json());
-                if (res.success === false) throw new Error(res.message);
+                const saved = await saveHomeNoticeSnapshot(homeNoticeEditorState.notices.filter(item => item.id !== id));
+                if (!saved) throw new Error('공지 삭제 결과를 확인하지 못했습니다.');
                 showToast('✅ 삭제 완료');
-                loadNotices();
             } catch (err) {
                 showToast('❌ 삭제 실패: ' + err.message);
             }
@@ -4277,6 +4431,17 @@
             document.querySelectorAll('.editor-subpanel').forEach(panel => panel.classList.toggle('active', panel.id === `editor-sub-${name}`));
             updateCmsPreviewToolbar();
             refreshEditorPreview();
+        }
+
+        function openKeywordBriefingEditor() {
+            switchTab('editor');
+            switchEditorSubtab('home');
+            window.setTimeout(() => {
+                const editor = document.getElementById('home-keyword-briefing-editor');
+                if (!editor) return;
+                editor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById('keyword-briefing-title')?.focus({ preventScroll: true });
+            }, 120);
         }
 
         let keywordBriefingEditorState = {
