@@ -37,6 +37,15 @@ describe('homepage operations layout', () => {
     expect(source).toContain("featured ? (notice.body || notice.summary) : notice.summary");
   });
 
+  it('prevents third-party embeds from widening the whole page on small screens', () => {
+    const globalCss = readFileSync(
+      join(process.cwd(), 'spa', 'src', 'styles', 'global.css'),
+      'utf8',
+    );
+
+    expect(globalCss).toMatch(/html,\s*body\s*\{[^}]*overflow-x:\s*(?:clip|hidden)/s);
+  });
+
   it('places the operations board before the marketing hero and moves realtime content into it', () => {
     const source = readFileSync(join(process.cwd(), 'spa', 'src', 'pages', 'IndexPage.tsx'), 'utf8');
     const boardIndex = source.indexOf('<HomeOperationsBoard realtimePanel={(');

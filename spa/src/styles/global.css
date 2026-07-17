@@ -18,7 +18,11 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 100%; min-height: 100%; }
+html, body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
 html { scroll-padding-top: 82px; }
 body {
     font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
