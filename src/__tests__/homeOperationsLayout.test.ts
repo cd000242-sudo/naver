@@ -41,6 +41,11 @@ describe('homepage operations layout', () => {
     expect(source).toMatch(/\.home-ops-table\s*\{[^}]*min-width:\s*820px/s);
     expect(source).toMatch(/\.home-ops-table-shell\s*\{[^}]*max-height:\s*none/s);
     expect(source).toMatch(/\.home-ops-table tbody th\s*\{[^}]*font-size:\s*16px/s);
+    expect(source).toContain('function KeywordMobileCards');
+    expect(source).toContain('className="home-ops-keyword-card"');
+    expect(source).toMatch(/@media \(max-width:\s*720px\)[\s\S]*?\.home-ops-table-shell\s*\{[^}]*display:\s*none/s);
+    expect(source).toMatch(/@media \(max-width:\s*720px\)[\s\S]*?\.home-ops-keyword-cards\s*\{[^}]*display:\s*grid/s);
+    expect(source).toMatch(/@media \(max-width:\s*720px\)[\s\S]*?\.home-ops-realtime-panel \.hero-source-body,[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\)\s*!important/s);
     expect(source).toMatch(/\.home-ops-community-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.15fr\)\s+minmax\(360px,\s*0\.85fr\)/s);
     expect(source).toMatch(/@media \(max-width:\s*960px\)[\s\S]*?\.home-ops-community-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s);
     expect(source).toMatch(/\.home-ops-notice-toggle\s*\{[^}]*min-height:\s*48px/s);
@@ -82,12 +87,13 @@ describe('homepage operations layout', () => {
 
   it('places the operations board before the marketing hero and moves realtime content into it', () => {
     const source = readFileSync(join(process.cwd(), 'spa', 'src', 'pages', 'IndexPage.tsx'), 'utf8');
-    const boardIndex = source.indexOf('<HomeOperationsBoard realtimePanel={(');
+    const boardIndex = source.indexOf('<HomeOperationsBoard proofFallbacks={communityProofFallbacks} realtimePanel={(');
     const heroIndex = source.indexOf('<section className="home-hero"');
 
     expect(boardIndex).toBeGreaterThan(-1);
     expect(heroIndex).toBeGreaterThan(-1);
     expect(boardIndex).toBeLessThan(heroIndex);
+    expect(source).toContain('const communityProofFallbacks = useMemo');
     expect(source).toContain('<div className="hero-realtime-board" aria-label="실시간 검색어">');
     expect(source).toContain('const handleSourceTabKeyDown =');
     expect(source).toContain('onKeyDown={(event) => handleSourceTabKeyDown(event, lane.id)}');

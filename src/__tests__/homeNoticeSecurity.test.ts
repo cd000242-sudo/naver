@@ -142,6 +142,40 @@ describe('secure home notices', () => {
     expect(result.items[0]).not.toHaveProperty('phone');
   });
 
+  it('does not expose built-in seeded income claims as public proof', async () => {
+    const fetchMock = vi.fn(async () => textResponse({
+      success: true,
+      income: [
+        {
+          id: 'I-seed-3',
+          amount: '월 200만원+',
+          author: '에이전시 대표 M님',
+          date: '2026.03',
+          desc: '마케팅 에이전시 운영. 클라이언트 블로그 12개를 Leaders Pro로 통합 관리.',
+        },
+        {
+          id: 'real-proof-1',
+          status: 'approved',
+          amount: '방문횟수 9,177 돌파',
+          author: '운영자',
+          desc: '실제 캡처 인증',
+          media: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg',
+        },
+      ],
+    }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    await expect(fetchCommunityIncomeProofs(3, { view: 'home' })).resolves.toMatchObject({
+      source: 'live',
+      items: [
+        {
+          amount: '방문횟수 9,177 돌파',
+          media: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg',
+        },
+      ],
+    });
+  });
+
   it('keeps the wider community fallback separate from the three-item home cache', async () => {
     const communityRows = Array.from({ length: 5 }, (_, index) => ({
       id: `community-${index + 1}`,

@@ -16,8 +16,17 @@ const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits:
 
 type HomeOperationsTab = 'deputy' | 'realtime';
 
+type HomeProofFallback = {
+    src?: string;
+    alt?: string;
+    title?: string;
+    desc?: string;
+    metric?: string;
+};
+
 interface HomeOperationsBoardProps {
     realtimePanel?: ReactNode;
+    proofFallbacks?: HomeProofFallback[];
 }
 
 function formatDate(value: string): string {
@@ -87,18 +96,15 @@ function NoticeCard({ notice, index, open, onToggle }: {
 }
 
 function IncomeProofCard({ proof }: { proof: CommunityIncomeProof }) {
+    if (!proof.media) return null;
     const mediaAlt = proof.mediaName || `${proof.author} 수익 인증`;
     return (
         <article className="home-ops-income-card">
             <div className="home-ops-income-visual">
-                {proof.media ? (
-                    proof.mediaType === 'video' ? (
-                        <video src={proof.media} controls playsInline preload="none" aria-label={mediaAlt} />
-                    ) : (
-                        <img src={proof.media} alt={mediaAlt} loading="lazy" decoding="async" referrerPolicy="no-referrer" />
-                    )
+                {proof.mediaType === 'video' ? (
+                    <video src={proof.media} controls playsInline preload="none" aria-label={mediaAlt} />
                 ) : (
-                    <strong>{proof.amount}</strong>
+                    <img src={proof.media} alt={mediaAlt} loading="lazy" decoding="async" referrerPolicy="no-referrer" />
                 )}
             </div>
             <div className="home-ops-income-copy">
@@ -110,6 +116,23 @@ function IncomeProofCard({ proof }: { proof: CommunityIncomeProof }) {
             </div>
         </article>
     );
+}
+
+function proofFallbackToIncomeProof(proof: HomeProofFallback, index: number): CommunityIncomeProof | null {
+    const src = String(proof.src || '').trim();
+    if (!src) return null;
+    const title = String(proof.title || proof.metric || '실제 인증 캡처').trim();
+    return {
+        id: `home-proof-fallback-${index + 1}-${src}`,
+        amount: title,
+        author: '실제 캡처 자료',
+        date: '',
+        desc: String(proof.desc || proof.alt || '운영자가 등록한 실제 인증 이미지입니다.').trim(),
+        tags: [],
+        media: src,
+        mediaType: 'image',
+        mediaName: String(proof.alt || title).trim(),
+    };
 }
 
 function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
@@ -166,7 +189,36 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
     );
 }
 
-function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
+function KeywordMobileCards({ rows }: { rows: HomeKeywordRow[] }) {
+    return (
+        <div className="home-ops-keyword-cards" aria-label={`부방장 키워드 모바일 목록 ${rows.length}행`}>
+            {rows.map((row, index) => (
+                <article className="home-ops-keyword-card" key={`mobile-${index}-${row.keyword}-${row.documentCount}`}>
+                    <div className="home-ops-keyword-card-head">
+                        <span>#{index + 1}</span>
+                        <strong>{row.keyword}</strong>
+                    </div>
+                    <dl>
+                        <div>
+                            <dt>검색량</dt>
+                            <dd>{numberFormatter.format(row.searchVolume)}</dd>
+                        </div>
+                        <div>
+                            <dt>문서수</dt>
+                            <dd>{numberFormatter.format(row.documentCount)}</dd>
+                        </div>
+                        <div>
+                            <dt>기회지수</dt>
+                            <dd>{decimalFormatter.format(row.opportunity)}</dd>
+                        </div>
+                    </dl>
+                </article>
+            ))}
+        </div>
+    );
+}
+
+function HomeOperationsBoard({ realtimePanel, proofFallbacks = [] }: HomeOperationsBoardProps) {
     const [notices, setNotices] = useState<HomeNotice[]>([]);
     const [openNoticeId, setOpenNoticeId] = useState<string | null>(null);
     const [incomeResult, setIncomeResult] = useState<CommunityIncomeProofResult | null>(null);
@@ -200,7 +252,14 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
     }, []);
 
     const briefing = briefingResult?.briefing || null;
-    const incomeProofs = incomeResult?.items || [];
+    const incomeProofs = (incomeResult?.items || []).filter((proof) => Boolean(proof.media));
+    const fallbackIncomeProofs = useMemo(() => (
+        proofFallbacks
+            .map(proofFallbackToIncomeProof)
+            .filter((proof): proof is CommunityIncomeProof => Boolean(proof))
+            .slice(0, 3)
+    ), [proofFallbacks]);
+    const displayIncomeProofs = incomeProofs.length > 0 ? incomeProofs : fallbackIncomeProofs;
     const chartRows = useMemo(() => briefing ? selectKeywordChartRows(briefing, 10) : [], [briefing]);
     const uniqueCount = useMemo(() => briefing ? uniqueKeywordCount(briefing.rows) : 0, [briefing]);
     const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, currentTab: HomeOperationsTab) => {
@@ -527,6 +586,60 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                 .home-ops-table tbody td:first-child { width: 44px; color: rgba(235,242,250,0.50); }
                 .home-ops-table tbody td:last-child { color: #58e8c8; font-weight: 900; }
                 .home-ops-table tbody tr:hover { background: rgba(68,215,182,0.055); }
+                .home-ops-keyword-cards { display: none; }
+                .home-ops-keyword-card {
+                    border: 1px solid rgba(255,255,255,0.10);
+                    border-radius: 10px;
+                    background: rgba(255,255,255,0.045);
+                    overflow: hidden;
+                }
+                .home-ops-keyword-card-head {
+                    display: grid;
+                    grid-template-columns: 42px minmax(0, 1fr);
+                    gap: 10px;
+                    align-items: start;
+                    padding: 14px;
+                    border-bottom: 1px solid rgba(255,255,255,0.07);
+                }
+                .home-ops-keyword-card-head span {
+                    color: #f4c95d;
+                    font-size: 15px;
+                    font-weight: 900;
+                }
+                .home-ops-keyword-card-head strong {
+                    min-width: 0;
+                    color: #f7fbff;
+                    font-size: 18px;
+                    line-height: 1.45;
+                    overflow-wrap: anywhere;
+                }
+                .home-ops-keyword-card dl {
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 1px;
+                    margin: 0;
+                    background: rgba(255,255,255,0.06);
+                }
+                .home-ops-keyword-card dl div {
+                    min-width: 0;
+                    padding: 12px 10px;
+                    background: rgba(8,14,24,0.94);
+                }
+                .home-ops-keyword-card dt {
+                    margin: 0 0 5px;
+                    color: rgba(235,242,250,0.62);
+                    font-size: 13px;
+                    font-weight: 800;
+                }
+                .home-ops-keyword-card dd {
+                    margin: 0;
+                    color: #fff;
+                    font-size: 16px;
+                    font-weight: 900;
+                    line-height: 1.35;
+                    word-break: break-word;
+                }
+                .home-ops-keyword-card dl div:last-child dd { color: #58e8c8; }
                 .home-ops-realtime-panel { padding: 18px; }
                 .home-ops-sr-only {
                     position: absolute;
@@ -571,11 +684,27 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                     .home-ops-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 14px 12px 0; }
                     .home-ops-chart-wrap { padding: 20px 14px; }
                     .home-ops-subhead { align-items: flex-start; flex-direction: column; }
-                    .home-ops-chart-row { grid-template-columns: minmax(0, 1fr) 112px; }
+                    .home-ops-chart-row { grid-template-columns: minmax(0, 1fr); }
+                    .home-ops-chart-label { grid-template-columns: 24px minmax(0, 1fr); }
+                    .home-ops-chart-label strong { white-space: normal; }
+                    .home-ops-chart-label small { grid-column: 2; }
+                    .home-ops-chart-track { grid-column: 1 / -1; }
+                    .home-ops-chart-row > small { grid-column: 1 / -1; grid-row: auto; text-align: left; }
                     .home-ops-table-title { align-items: flex-start; flex-direction: column; padding: 18px 14px 12px; }
                     .home-ops-table-title span { text-align: left; }
-                    .home-ops-table-shell { margin: 0 8px 14px; }
+                    .home-ops-table-shell { display: none; }
+                    .home-ops-keyword-cards { display: grid; gap: 10px; padding: 0 10px 16px; }
                     .home-ops-realtime-panel { padding: 10px; }
+                    .home-ops-realtime-panel .hero-source-tabs,
+                    .home-ops-realtime-panel .hero-source-body,
+                    .home-ops-realtime-panel .source-strategy-grid { grid-template-columns: minmax(0, 1fr) !important; }
+                    .home-ops-realtime-panel .hero-source-list-shell,
+                    .home-ops-realtime-panel .source-insight-panel { min-width: 0; }
+                    .home-ops-realtime-panel .hero-source-row-main { grid-template-columns: 32px minmax(0, 1fr) 48px; }
+                    .home-ops-realtime-panel .hero-source-row-main strong,
+                    .home-ops-realtime-panel .source-idea-card strong,
+                    .home-ops-realtime-panel .source-question-list strong,
+                    .home-ops-realtime-panel .source-cluster-list strong { white-space: normal; overflow-wrap: anywhere; }
                 }
             `}</style>
 
@@ -618,9 +747,9 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                         </div>
                         <Link to="/community">전체 보기·작성 →</Link>
                     </div>
-                    {incomeProofs.length > 0 ? (
+                    {displayIncomeProofs.length > 0 ? (
                         <div className="home-ops-income-list">
-                            {incomeProofs.map((proof) => <IncomeProofCard key={proof.id} proof={proof} />)}
+                            {displayIncomeProofs.map((proof) => <IncomeProofCard key={proof.id} proof={proof} />)}
                         </div>
                     ) : (
                         <div className="home-ops-empty">
@@ -705,6 +834,7 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                             <span id="home-ops-table-note">중복 행도 원문 그대로 보존 · 기회지수 = 검색량 ÷ (문서수 + 1) · 실시간 값이 아닌 고정 스냅샷</span>
                         </div>
                         <KeywordTable rows={briefing.rows} />
+                        <KeywordMobileCards rows={briefing.rows} />
                     </>
                 ) : (
                     <div className="home-ops-empty">{briefingLoading ? '저장된 키워드 브리핑을 불러오는 중입니다.' : '표시할 키워드 브리핑이 없습니다.'}</div>

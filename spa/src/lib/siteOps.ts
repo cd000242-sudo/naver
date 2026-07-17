@@ -535,11 +535,17 @@ function stableIncomeProofId(record: Record<string, unknown>, fingerprint: strin
     return `income-${hashIncomeProofId(identity)}`;
 }
 
+function isSeedIncomeRecord(record: Record<string, unknown>): boolean {
+    const id = cleanPublicText(firstString(record, ['id', 'proofId', 'incomeId']), 100);
+    return /^I-seed-\d+$/i.test(id);
+}
+
 function normalizeCommunityIncomeProof(
     value: unknown,
     view: CommunityIncomeView,
 ): CommunityIncomeProof | null {
     if (!isPublicRecord(value) || !isPublicIncomeRecord(value)) return null;
+    if (isSeedIncomeRecord(value)) return null;
 
     const rawAmount = maskContactText(cleanPublicText(firstString(value, ['amount', 'title']), 100));
     const author = maskContactText(cleanPublicText(firstString(value, ['author', 'name', 'nickname']), 80)) || '익명';

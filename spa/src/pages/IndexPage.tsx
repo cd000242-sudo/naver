@@ -1294,6 +1294,18 @@ function IndexPage() {
             allProofs.findIndex((item) => item.src === proof.src) === index
         ));
     }, [siteContent]);
+    const communityProofFallbacks = useMemo(() => {
+        const configuredProofs = (siteContent?.hero?.proofs || [])
+            .filter((proof) => Boolean(proof?.src))
+            .map((proof) => ({
+                src: String(proof.src || ''),
+                alt: proof.alt,
+                title: proof.title,
+                desc: proof.desc,
+                metric: proof.metric,
+            }));
+        return configuredProofs.length > 0 ? configuredProofs : DEFAULT_HERO_PROOFS;
+    }, [siteContent]);
     const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
     const homeBgImage = siteContent?.theme?.productsBgImage || siteContent?.theme?.pricingBgImage || '';
 
@@ -1335,7 +1347,7 @@ function IndexPage() {
         <>
             {decorationsReady && <ParticlesCanvas />}
 
-            <HomeOperationsBoard realtimePanel={(
+            <HomeOperationsBoard proofFallbacks={communityProofFallbacks} realtimePanel={(
                     <div className="hero-realtime-board" aria-label="실시간 검색어">
                         <div className="hero-realtime-head">
                             <span>{liveStatusLabel}</span>
