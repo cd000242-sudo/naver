@@ -52,6 +52,59 @@ function uniqueKeywordCount(rows: HomeKeywordRow[]): number {
     return new Set(rows.map((row) => row.keyword.toLocaleLowerCase('ko-KR').replace(/\s+/g, ''))).size;
 }
 
+type KeywordSearchProvider = 'naver' | 'daum' | 'google';
+
+const KEYWORD_SEARCH_PROVIDERS: Array<{ id: KeywordSearchProvider; label: string }> = [
+    { id: 'naver', label: '네이버' },
+    { id: 'daum', label: '다음' },
+    { id: 'google', label: '구글' },
+];
+
+function keywordSearchUrl(keyword: string, provider: KeywordSearchProvider): string {
+    const query = encodeURIComponent(keyword.trim());
+    if (provider === 'daum') return `https://search.daum.net/search?w=tot&q=${query}`;
+    if (provider === 'google') return `https://www.google.com/search?q=${query}`;
+    return `https://search.naver.com/search.naver?query=${query}`;
+}
+
+function KeywordSearchLink({
+    row,
+    provider,
+    children,
+    className,
+}: {
+    row: HomeKeywordRow;
+    provider: KeywordSearchProvider;
+    children: ReactNode;
+    className?: string;
+}) {
+    const target = KEYWORD_SEARCH_PROVIDERS.find((item) => item.id === provider);
+    const label = target?.label || provider;
+    return (
+        <a
+            className={className}
+            href={keywordSearchUrl(row.keyword, provider)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${row.keyword} ${label} 검색으로 바로가기`}
+        >
+            {children}
+        </a>
+    );
+}
+
+function KeywordSearchLinks({ row, compact = false }: { row: HomeKeywordRow; compact?: boolean }) {
+    return (
+        <div className={`home-ops-search-links${compact ? ' compact' : ''}`} aria-label={`${row.keyword} 검색 바로가기`}>
+            {KEYWORD_SEARCH_PROVIDERS.map((provider) => (
+                <KeywordSearchLink key={provider.id} row={row} provider={provider.id}>
+                    {provider.label}
+                </KeywordSearchLink>
+            ))}
+        </div>
+    );
+}
+
 function NoticeCard({ notice, index, open, onToggle }: {
     notice: HomeNotice;
     index: number;
@@ -145,8 +198,16 @@ function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
                     <div className="home-ops-chart-row" key={`${row.keyword}-${row.searchVolume}-${index}`}>
                         <div className="home-ops-chart-label">
                             <span>{index + 1}</span>
-                            <strong>{row.keyword}</strong>
-                            <small>{decimalFormatter.format(row.opportunity)}</small>
+                            <strong>
+                                <KeywordSearchLink row={row} provider="naver" className="home-ops-keyword-link">
+                                    {row.keyword}
+                                </KeywordSearchLink>
+                            </strong>
+                            <small>
+                                <KeywordSearchLink row={row} provider="daum" className="home-ops-opportunity-link">
+                                    {decimalFormatter.format(row.opportunity)}
+                                </KeywordSearchLink>
+                            </small>
                         </div>
                         <div className="home-ops-chart-track" aria-hidden="true">
                             <span style={{ width: `${width}%` }} />
@@ -171,16 +232,26 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
                         <th scope="col">검색량</th>
                         <th scope="col">블로그 문서수</th>
                         <th scope="col">기회지수</th>
+                        <th scope="col">바로가기</th>
                     </tr>
                 </thead>
                 <tbody>
                     {rows.map((row, index) => (
                         <tr key={`${index}-${row.keyword}-${row.documentCount}`}>
                             <td>{index + 1}</td>
-                            <th scope="row">{row.keyword}</th>
+                            <th scope="row">
+                                <KeywordSearchLink row={row} provider="naver" className="home-ops-keyword-link">
+                                    {row.keyword}
+                                </KeywordSearchLink>
+                            </th>
                             <td>{numberFormatter.format(row.searchVolume)}</td>
                             <td>{numberFormatter.format(row.documentCount)}</td>
-                            <td>{decimalFormatter.format(row.opportunity)}</td>
+                            <td className="home-ops-opportunity-cell">
+                                <KeywordSearchLink row={row} provider="daum" className="home-ops-opportunity-link">
+                                    {decimalFormatter.format(row.opportunity)}
+                                </KeywordSearchLink>
+                            </td>
+                            <td className="home-ops-search-cell"><KeywordSearchLinks row={row} /></td>
                         </tr>
                     ))}
                 </tbody>
@@ -196,7 +267,11 @@ function KeywordMobileCards({ rows }: { rows: HomeKeywordRow[] }) {
                 <article className="home-ops-keyword-card" key={`mobile-${index}-${row.keyword}-${row.documentCount}`}>
                     <div className="home-ops-keyword-card-head">
                         <span>#{index + 1}</span>
-                        <strong>{row.keyword}</strong>
+                        <strong>
+                            <KeywordSearchLink row={row} provider="naver" className="home-ops-keyword-link">
+                                {row.keyword}
+                            </KeywordSearchLink>
+                        </strong>
                     </div>
                     <dl>
                         <div>
@@ -209,9 +284,14 @@ function KeywordMobileCards({ rows }: { rows: HomeKeywordRow[] }) {
                         </div>
                         <div>
                             <dt>기회지수</dt>
-                            <dd>{decimalFormatter.format(row.opportunity)}</dd>
+                            <dd>
+                                <KeywordSearchLink row={row} provider="daum" className="home-ops-opportunity-link">
+                                    {decimalFormatter.format(row.opportunity)}
+                                </KeywordSearchLink>
+                            </dd>
                         </div>
                     </dl>
+                    <KeywordSearchLinks row={row} compact />
                 </article>
             ))}
         </div>
@@ -567,7 +647,7 @@ function HomeOperationsBoard({ realtimePanel, proofFallbacks = [] }: HomeOperati
                     scrollbar-gutter: stable;
                 }
                 .home-ops-table-shell:focus { border-color: rgba(68,215,182,0.68); box-shadow: 0 0 0 3px rgba(68,215,182,0.11); }
-                .home-ops-table { width: 100%; min-width: 820px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+                .home-ops-table { width: 100%; min-width: 980px; border-collapse: collapse; font-variant-numeric: tabular-nums; }
                 .home-ops-table th, .home-ops-table td { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.07); }
                 .home-ops-table thead th {
                     position: sticky;
@@ -584,8 +664,71 @@ function HomeOperationsBoard({ realtimePanel, proofFallbacks = [] }: HomeOperati
                 .home-ops-table tbody td { color: rgba(235,242,250,0.76); font-size: 16px; text-align: right; white-space: nowrap; }
                 .home-ops-table tbody th { color: #f3f8fc; font-size: 16px; font-weight: 780; line-height: 1.5; text-align: left; white-space: nowrap; }
                 .home-ops-table tbody td:first-child { width: 44px; color: rgba(235,242,250,0.50); }
-                .home-ops-table tbody td:last-child { color: #58e8c8; font-weight: 900; }
+                .home-ops-table tbody td.home-ops-opportunity-cell { color: #58e8c8; font-weight: 900; }
+                .home-ops-table tbody td.home-ops-search-cell { min-width: 178px; text-align: left; }
                 .home-ops-table tbody tr:hover { background: rgba(68,215,182,0.055); }
+                .home-ops-keyword-link,
+                .home-ops-opportunity-link {
+                    color: inherit;
+                    text-decoration: none;
+                    border-bottom: 1px solid rgba(244,201,93,0.42);
+                    transition: color .16s ease, border-color .16s ease, background .16s ease;
+                }
+                .home-ops-keyword-link:hover,
+                .home-ops-keyword-link:focus-visible {
+                    color: #f4c95d;
+                    border-color: rgba(244,201,93,0.92);
+                    outline: none;
+                }
+                .home-ops-opportunity-link {
+                    color: #58e8c8;
+                    border-color: rgba(88,232,200,0.44);
+                    font-weight: 950;
+                }
+                .home-ops-opportunity-link:hover,
+                .home-ops-opportunity-link:focus-visible {
+                    color: #9dffe8;
+                    border-color: rgba(157,255,232,0.92);
+                    outline: none;
+                }
+                .home-ops-search-links {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 7px;
+                    justify-content: flex-start;
+                    align-items: center;
+                }
+                .home-ops-search-links a {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 34px;
+                    padding: 0 11px;
+                    border: 1px solid rgba(244,201,93,0.36);
+                    border-radius: 999px;
+                    background: rgba(244,201,93,0.09);
+                    color: #ffe6a6;
+                    font-size: 14px;
+                    font-weight: 900;
+                    text-decoration: none;
+                    white-space: nowrap;
+                }
+                .home-ops-search-links a:hover,
+                .home-ops-search-links a:focus-visible {
+                    border-color: rgba(244,201,93,0.80);
+                    background: rgba(244,201,93,0.18);
+                    color: #fff2c8;
+                    outline: none;
+                }
+                .home-ops-search-links.compact {
+                    padding: 12px 14px 14px;
+                    border-top: 1px solid rgba(255,255,255,0.07);
+                }
+                .home-ops-search-links.compact a {
+                    flex: 1 1 86px;
+                    min-height: 40px;
+                    font-size: 15px;
+                }
                 .home-ops-keyword-cards { display: none; }
                 .home-ops-keyword-card {
                     border: 1px solid rgba(255,255,255,0.10);

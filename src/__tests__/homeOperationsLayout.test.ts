@@ -38,11 +38,21 @@ describe('homepage operations layout', () => {
 
     expect(source).toContain('word-break: keep-all');
     expect(source).toContain('overflow-wrap: break-word');
-    expect(source).toMatch(/\.home-ops-table\s*\{[^}]*min-width:\s*820px/s);
+    expect(source).toMatch(/\.home-ops-table\s*\{[^}]*min-width:\s*980px/s);
     expect(source).toMatch(/\.home-ops-table-shell\s*\{[^}]*max-height:\s*none/s);
     expect(source).toMatch(/\.home-ops-table tbody th\s*\{[^}]*font-size:\s*16px/s);
     expect(source).toContain('function KeywordMobileCards');
     expect(source).toContain('className="home-ops-keyword-card"');
+    expect(source).toContain("type KeywordSearchProvider = 'naver' | 'daum' | 'google'");
+    expect(source).toContain('https://search.naver.com/search.naver?query=');
+    expect(source).toContain('https://search.daum.net/search?w=tot&q=');
+    expect(source).toContain('https://www.google.com/search?q=');
+    expect(source).toContain('className="home-ops-keyword-link"');
+    expect(source).toContain('className="home-ops-opportunity-link"');
+    expect(source).toContain('className="home-ops-search-cell"><KeywordSearchLinks row={row} /></td>');
+    expect(source).toContain('<KeywordSearchLinks row={row} compact />');
+    expect(source).toContain('target="_blank"');
+    expect(source).toContain('rel="noopener noreferrer"');
     expect(source).toMatch(/@media \(max-width:\s*720px\)[\s\S]*?\.home-ops-table-shell\s*\{[^}]*display:\s*none/s);
     expect(source).toMatch(/@media \(max-width:\s*720px\)[\s\S]*?\.home-ops-keyword-cards\s*\{[^}]*display:\s*grid/s);
     expect(source).toMatch(/@media \(max-width:\s*720px\)[\s\S]*?\.home-ops-realtime-panel \.hero-source-body,[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\)\s*!important/s);
