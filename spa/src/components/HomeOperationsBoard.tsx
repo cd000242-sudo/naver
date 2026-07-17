@@ -1,8 +1,11 @@
 import { useEffect, useMemo, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
+    fetchCommunityIncomeProofs,
     fetchHomeKeywordBriefing,
     fetchHomeNotices,
+    type CommunityIncomeProof,
+    type CommunityIncomeProofResult,
     type HomeKeywordBriefingResult,
     type HomeNotice,
 } from '../lib/siteOps';
@@ -40,17 +43,71 @@ function uniqueKeywordCount(rows: HomeKeywordRow[]): number {
     return new Set(rows.map((row) => row.keyword.toLocaleLowerCase('ko-KR').replace(/\s+/g, ''))).size;
 }
 
-function NoticeCard({ notice, featured = false }: { notice: HomeNotice; featured?: boolean }) {
+function NoticeCard({ notice, index, open, onToggle }: {
+    notice: HomeNotice;
+    index: number;
+    open: boolean;
+    onToggle: () => void;
+}) {
     const badge = noticeBadge(notice.badge);
-    const detail = featured ? (notice.body || notice.summary) : notice.summary;
+    const buttonId = `home-notice-button-${index}`;
+    const contentId = `home-notice-content-${index}`;
+    const detail = notice.body || notice.summary;
     return (
-        <article className={`home-ops-notice${featured ? ' featured' : ''}`}>
-            <div className="home-ops-notice-meta">
-                <span style={{ color: badge.color, borderColor: `${badge.color}55`, background: `${badge.color}16` }}>{badge.label}</span>
-                <time>{formatDate(notice.date)}</time>
+        <article className={`home-ops-notice${open ? ' open' : ''}`}>
+            <h3>
+                <button
+                    id={buttonId}
+                    type="button"
+                    className="home-ops-notice-toggle"
+                    aria-expanded={open}
+                    aria-controls={contentId}
+                    onClick={onToggle}
+                >
+                    <span className="home-ops-notice-meta">
+                        <span className="home-ops-notice-badge" style={{ color: badge.color, borderColor: `${badge.color}55`, background: `${badge.color}16` }}>{badge.label}</span>
+                        <time dateTime={notice.date}>{formatDate(notice.date)}</time>
+                        <span className="home-ops-notice-indicator" aria-hidden="true">{open ? '−' : '+'}</span>
+                    </span>
+                    <span className="home-ops-notice-title">{notice.title}</span>
+                    {notice.summary && <span className="home-ops-notice-summary">{notice.summary}</span>}
+                </button>
+            </h3>
+            <div
+                id={contentId}
+                className="home-ops-notice-detail"
+                role="region"
+                aria-labelledby={buttonId}
+                hidden={!open}
+            >
+                <p>{detail}</p>
             </div>
-            <strong>{notice.title}</strong>
-            {detail && <p>{detail}</p>}
+        </article>
+    );
+}
+
+function IncomeProofCard({ proof }: { proof: CommunityIncomeProof }) {
+    const mediaAlt = proof.mediaName || `${proof.author} 수익 인증`;
+    return (
+        <article className="home-ops-income-card">
+            <div className="home-ops-income-visual">
+                {proof.media ? (
+                    proof.mediaType === 'video' ? (
+                        <video src={proof.media} controls playsInline preload="none" aria-label={mediaAlt} />
+                    ) : (
+                        <img src={proof.media} alt={mediaAlt} loading="lazy" decoding="async" referrerPolicy="no-referrer" />
+                    )
+                ) : (
+                    <strong>{proof.amount}</strong>
+                )}
+            </div>
+            <div className="home-ops-income-copy">
+                <span>실제 수익 인증</span>
+                <h3>{proof.amount}</h3>
+                <p>{proof.desc}</p>
+                <small>{proof.author}{proof.date ? ` · ${proof.date}` : ''}</small>
+                <Link to="/community">커뮤니티에서 크게 보기 →</Link>
+            </div>
         </article>
     );
 }
@@ -111,25 +168,39 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
 
 function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
     const [notices, setNotices] = useState<HomeNotice[]>([]);
+    const [openNoticeId, setOpenNoticeId] = useState<string | null>(null);
+    const [incomeResult, setIncomeResult] = useState<CommunityIncomeProofResult | null>(null);
     const [briefingResult, setBriefingResult] = useState<HomeKeywordBriefingResult | null>(null);
     const [activeTab, setActiveTab] = useState<HomeOperationsTab>('deputy');
-    const [loading, setLoading] = useState(true);
+    const [noticeLoading, setNoticeLoading] = useState(true);
+    const [incomeLoading, setIncomeLoading] = useState(true);
+    const [briefingLoading, setBriefingLoading] = useState(true);
 
     useEffect(() => {
         let active = true;
-        Promise.all([fetchHomeNotices(3), fetchHomeKeywordBriefing()])
-            .then(([latestNotices, latestBriefing]) => {
+        fetchHomeNotices(50)
+            .then((latestNotices) => {
                 if (!active) return;
                 setNotices(latestNotices);
-                setBriefingResult(latestBriefing);
+                setOpenNoticeId((current) => current ?? latestNotices[0]?.id ?? null);
             })
-            .finally(() => {
-                if (active) setLoading(false);
-            });
+            .catch(() => undefined)
+            .finally(() => { if (active) setNoticeLoading(false); });
+
+        fetchCommunityIncomeProofs(3, { view: 'home' })
+            .then((latestIncomeResult) => { if (active) setIncomeResult(latestIncomeResult); })
+            .catch(() => { if (active) setIncomeResult({ items: [], source: 'unavailable' }); })
+            .finally(() => { if (active) setIncomeLoading(false); });
+
+        fetchHomeKeywordBriefing()
+            .then((latestBriefing) => { if (active) setBriefingResult(latestBriefing); })
+            .catch(() => undefined)
+            .finally(() => { if (active) setBriefingLoading(false); });
         return () => { active = false; };
     }, []);
 
     const briefing = briefingResult?.briefing || null;
+    const incomeProofs = incomeResult?.items || [];
     const chartRows = useMemo(() => briefing ? selectKeywordChartRows(briefing, 10) : [], [briefing]);
     const uniqueCount = useMemo(() => briefing ? uniqueKeywordCount(briefing.rows) : 0, [briefing]);
     const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, currentTab: HomeOperationsTab) => {
@@ -193,7 +264,14 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                     box-shadow: 0 26px 70px rgba(0,0,0,0.28);
                     overflow: hidden;
                 }
-                .home-ops-notice-panel { margin-bottom: 18px; }
+                .home-ops-community-grid {
+                    display: grid;
+                    grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
+                    align-items: start;
+                    gap: 18px;
+                    margin-bottom: 18px;
+                }
+                .home-ops-community-grid > .home-ops-panel { min-width: 0; }
                 .home-ops-panel-head {
                     display: flex;
                     align-items: center;
@@ -203,57 +281,116 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                     border-bottom: 1px solid rgba(255,255,255,0.10);
                 }
                 .home-ops-panel-head strong { color: #fff; font-size: 20px; font-weight: 900; }
+                .home-ops-panel-head small { color: rgba(235,242,250,0.72); font-size: 16px; line-height: 1.55; }
                 .home-ops-panel-head a {
                     flex: 0 0 auto;
                     color: #f4c95d;
-                    font-size: 15px;
+                    font-size: 16px;
                     font-weight: 850;
                     text-decoration: none;
                 }
                 .home-ops-notices {
                     display: grid;
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
-                    gap: 12px;
-                    padding: 16px;
+                    gap: 10px;
+                    max-height: 640px;
+                    padding: 12px;
+                    overflow-y: auto;
+                    scrollbar-gutter: stable;
                 }
                 .home-ops-notice {
                     min-width: 0;
+                    border: 1px solid rgba(255,255,255,0.10);
+                    border-radius: 10px;
+                    background: rgba(255,255,255,0.04);
+                    overflow: hidden;
+                }
+                .home-ops-notice.open {
+                    border-color: rgba(244,201,93,0.30);
+                    background: linear-gradient(135deg, rgba(244,201,93,0.10), rgba(68,215,182,0.055));
+                }
+                .home-ops-notice h3 { margin: 0; }
+                .home-ops-notice-toggle {
+                    display: block;
+                    width: 100%;
+                    min-height: 48px;
                     padding: 18px;
+                    border: 0;
+                    background: transparent;
+                    color: inherit;
+                    font: inherit;
+                    text-align: left;
+                }
+                .home-ops-notice-toggle:focus-visible { outline: 3px solid rgba(68,215,182,0.62); outline-offset: -3px; }
+                .home-ops-notice-meta {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-bottom: 12px;
+                }
+                .home-ops-notice-badge {
+                    padding: 4px 8px;
+                    border: 1px solid;
+                    border-radius: 999px;
+                    font-size: 16px;
+                    font-weight: 900;
+                }
+                .home-ops-notice-meta time { color: rgba(235,242,250,0.72); font-size: 16px; }
+                .home-ops-notice-indicator { margin-left: auto; color: #f4c95d; font-size: 24px; font-weight: 900; line-height: 1; }
+                .home-ops-notice-title { display: block; color: #f7fbff; font-size: 19px; font-weight: 900; line-height: 1.5; }
+                .home-ops-notice-summary {
+                    display: block;
+                    margin-top: 7px;
+                    color: rgba(235,242,250,0.72);
+                    font-size: 16px;
+                    line-height: 1.65;
+                }
+                .home-ops-notice-detail {
+                    padding: 0 18px 20px;
+                    border-top: 1px solid rgba(255,255,255,0.08);
+                }
+                .home-ops-notice-detail p {
+                    margin: 18px 0 0;
+                    color: rgba(245,249,253,0.82);
+                    font-size: 17px;
+                    line-height: 1.8;
+                    white-space: pre-line;
+                }
+                .home-ops-income-list { display: grid; gap: 10px; padding: 12px; }
+                .home-ops-income-card {
+                    display: grid;
+                    grid-template-columns: 136px minmax(0, 1fr);
+                    min-width: 0;
+                    overflow: hidden;
                     border: 1px solid rgba(255,255,255,0.10);
                     border-radius: 10px;
                     background: rgba(255,255,255,0.04);
                 }
-                .home-ops-notice.featured {
-                    grid-column: 1 / -1;
-                    padding: 22px 24px;
-                    border-color: rgba(244,201,93,0.26);
-                    background: linear-gradient(135deg, rgba(244,201,93,0.10), rgba(68,215,182,0.055));
-                }
-                .home-ops-notice-meta {
+                .home-ops-income-visual {
+                    min-height: 136px;
                     display: flex;
                     align-items: center;
-                    justify-content: space-between;
-                    gap: 10px;
-                    margin-bottom: 12px;
+                    justify-content: center;
+                    overflow: hidden;
+                    background: linear-gradient(145deg, rgba(68,215,182,0.24), rgba(244,201,93,0.16));
                 }
-                .home-ops-notice-meta span {
-                    padding: 4px 8px;
-                    border: 1px solid;
-                    border-radius: 999px;
-                    font-size: 13px;
-                    font-weight: 900;
-                }
-                .home-ops-notice-meta time { color: rgba(235,242,250,0.58); font-size: 14px; }
-                .home-ops-notice > strong { display: block; color: #f7fbff; font-size: 18px; line-height: 1.5; }
-                .home-ops-notice.featured > strong { font-size: 21px; }
-                .home-ops-notice p {
-                    margin: 10px 0 0;
-                    color: rgba(235,242,250,0.72);
+                .home-ops-income-visual img,
+                .home-ops-income-visual video { width: 100%; height: 100%; min-height: 136px; object-fit: contain; display: block; }
+                .home-ops-income-visual > strong { padding: 10px; color: #f4c95d; font-size: 20px; line-height: 1.35; text-align: center; }
+                .home-ops-income-copy { min-width: 0; padding: 15px 16px; }
+                .home-ops-income-copy > span { color: #63efd0; font-size: 16px; font-weight: 900; }
+                .home-ops-income-copy h3 { margin: 5px 0 7px; color: #fff; font-size: 21px; line-height: 1.35; }
+                .home-ops-income-copy p {
+                    display: -webkit-box;
+                    margin: 0 0 9px;
+                    overflow: hidden;
+                    color: rgba(235,242,250,0.74);
                     font-size: 16px;
-                    line-height: 1.78;
-                    white-space: pre-line;
+                    line-height: 1.6;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 3;
                 }
-                .home-ops-notice.featured p { font-size: 17px; }
+                .home-ops-income-copy small { display: block; color: rgba(235,242,250,0.72); font-size: 16px; line-height: 1.5; }
+                .home-ops-income-copy a { display: inline-block; margin-top: 10px; color: #f4c95d; font-size: 16px; font-weight: 850; text-decoration: none; }
                 .home-ops-empty {
                     padding: 34px 22px;
                     color: rgba(235,242,250,0.68);
@@ -411,8 +548,8 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                     background: transparent;
                     box-shadow: none;
                 }
-                @media (max-width: 900px) {
-                    .home-ops-notices { grid-template-columns: 1fr; }
+                @media (max-width: 960px) {
+                    .home-ops-community-grid { grid-template-columns: minmax(0, 1fr); }
                     .home-ops-realtime-panel .hero-realtime-board { min-height: 0; }
                 }
                 @media (max-width: 720px) {
@@ -420,6 +557,13 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                     .home-ops-header h2 { font-size: clamp(29px, 9vw, 40px); }
                     .home-ops-header p { font-size: 16px; }
                     .home-ops-panel-head { align-items: flex-start; padding: 18px 16px; }
+                    .home-ops-notice-toggle { padding: 16px; }
+                    .home-ops-notice-detail { padding: 0 16px 18px; }
+                    .home-ops-income-card { grid-template-columns: minmax(0, 1fr); }
+                    .home-ops-income-visual,
+                    .home-ops-income-visual img,
+                    .home-ops-income-visual video { min-height: 200px; max-height: 360px; }
+                    .home-ops-income-visual img { min-height: 200px; max-height: 360px; }
                     .home-ops-tabs { grid-template-columns: 1fr; }
                     .home-ops-tab { min-height: 60px; }
                     .home-ops-brief-head { align-items: flex-start; flex-direction: column; padding: 20px 16px; }
@@ -437,23 +581,58 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
 
             <header className="home-ops-header">
                 <span className="home-ops-kicker">HOME OPERATIONS</span>
-                <h2 id="home-ops-title">공지와 부방장 황금키워드를 먼저 확인하세요</h2>
-                <p>중요한 운영 안내를 읽고, 매일 업데이트되는 부방장 키워드를 전체 폭으로 확인한 뒤 필요할 때 실시간 검색어로 전환할 수 있습니다.</p>
+                <h2 id="home-ops-title">공지사항과 실제 수익 인증을 한눈에 확인하세요</h2>
+                <p>공지는 제목을 눌러 편하게 접고 펼칠 수 있습니다. 최신 수익 인증을 함께 확인한 뒤, 매일 업데이트되는 부방장 황금키워드를 전체 폭으로 살펴보세요.</p>
             </header>
 
-            <aside className="home-ops-panel home-ops-notice-panel" data-home-ops-notices aria-label="최신 공지사항">
-                <div className="home-ops-panel-head">
-                    <strong>최신 공지사항</strong>
-                    <Link to="/community">공지 전체 보기 →</Link>
-                </div>
-                {notices.length > 0 ? (
-                    <div className="home-ops-notices">
-                        {notices.map((notice, index) => <NoticeCard key={`${notice.id}-${index}`} notice={notice} featured={index === 0} />)}
+            <div className="home-ops-community-grid" data-home-ops-community>
+                <aside className="home-ops-panel home-ops-notice-panel" data-home-ops-notices aria-label="공지사항">
+                    <div className="home-ops-panel-head">
+                        <div>
+                            <strong>공지사항</strong><br />
+                            <small>제목을 누르면 내용을 접거나 펼칠 수 있습니다.</small>
+                        </div>
                     </div>
-                ) : (
-                    <div className="home-ops-empty">{loading ? '최신 공지를 불러오는 중입니다.' : '등록된 공지는 커뮤니티에서 확인할 수 있습니다.'}</div>
-                )}
-            </aside>
+                    {notices.length > 0 ? (
+                        <div className="home-ops-notices">
+                            {notices.map((notice, index) => (
+                                <NoticeCard
+                                    key={notice.id || `notice-${index}`}
+                                    notice={notice}
+                                    index={index}
+                                    open={openNoticeId === notice.id}
+                                    onToggle={() => setOpenNoticeId((current) => current === notice.id ? null : notice.id)}
+                                />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="home-ops-empty">{noticeLoading ? '최신 공지를 불러오는 중입니다.' : '현재 등록된 공지사항이 없습니다.'}</div>
+                    )}
+                </aside>
+
+                <aside className="home-ops-panel home-ops-income-panel" data-home-ops-income aria-label="수익 인증">
+                    <div className="home-ops-panel-head">
+                        <div>
+                            <strong>수익 인증</strong><br />
+                            <small>{incomeResult?.source === 'cache' ? '최근 확인한 승인 자료입니다.' : incomeResult?.source === 'unavailable' ? '서버 연결 상태를 확인 중입니다.' : '승인된 실제 자료만 보여드립니다.'}</small>
+                        </div>
+                        <Link to="/community">전체 보기·작성 →</Link>
+                    </div>
+                    {incomeProofs.length > 0 ? (
+                        <div className="home-ops-income-list">
+                            {incomeProofs.map((proof) => <IncomeProofCard key={proof.id} proof={proof} />)}
+                        </div>
+                    ) : (
+                        <div className="home-ops-empty">
+                            {incomeLoading
+                                ? '수익 인증을 불러오는 중입니다.'
+                                : incomeResult?.source === 'unavailable'
+                                    ? '수익 인증을 일시적으로 불러오지 못했습니다. 잠시 후 다시 확인해주세요.'
+                                    : '현재 공개된 수익 인증이 없습니다.'}
+                        </div>
+                    )}
+                </aside>
+            </div>
 
             <div className="home-ops-tabs" role="tablist" aria-label="홈 키워드 보기 선택">
                 <button
@@ -528,7 +707,7 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                         <KeywordTable rows={briefing.rows} />
                     </>
                 ) : (
-                    <div className="home-ops-empty">{loading ? '저장된 키워드 브리핑을 불러오는 중입니다.' : '표시할 키워드 브리핑이 없습니다.'}</div>
+                    <div className="home-ops-empty">{briefingLoading ? '저장된 키워드 브리핑을 불러오는 중입니다.' : '표시할 키워드 브리핑이 없습니다.'}</div>
                 )}
             </div>
 

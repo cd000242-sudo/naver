@@ -1,36 +1,33 @@
 import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
-import { fetchHomeNotices } from '../lib/siteOps';
+import { fetchCommunityIncomeProofs, type CommunityIncomeProof } from '../lib/siteOps';
 
 /**
  * 커뮤니티
- * - 공지사항은 관리자 게시 흐름을 유지합니다.
- * - 수익 인증/활용 팁은 실제 서버 데이터만 노출하고, 이미지/동영상+글 작성 모달을 제공합니다.
- * - 로컬 캐시 선노출 후 서버 최신화로 체감 로딩을 줄입니다.
+ * - 공지사항은 홈에서 바로 확인하고, 커뮤니티는 수익 인증/활용 팁에 집중합니다.
+ * - 수익 인증은 홈과 동일한 공유 로더를 사용하고 로컬 미디어 캐시를 만들지 않습니다.
+ * - 활용 팁만 로컬 캐시로 먼저 보여준 뒤 서버 최신본으로 갱신합니다.
  */
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-const COMMUNITY_CACHE_KEY = 'leaderspro_community_cache_v2';
+const COMMUNITY_CACHE_KEY = 'leaderspro_community_cache_v3';
+const COMMUNITY_CACHE_TTL_MS = 15 * 60 * 1000;
 const COMMUNITY_TIMEOUT_MS = 4800;
+const COMMUNITY_RESPONSE_MAX_BYTES = 32 * 1024 * 1024;
+const COMMUNITY_DATA_MEDIA_MAX_CHARS = 32 * 1024 * 1024;
 const MAX_MEDIA_BYTES = 18 * 1024 * 1024;
 
-type TabKey = 'notices' | 'income' | 'tips';
+type TabKey = 'income' | 'tips';
 type WriteKind = 'income' | 'tips';
 
-interface Notice { badge: string; date: string; title: string; preview: string; body: string; }
 interface CommunityMedia { media?: string; mediaType?: 'image' | 'video'; mediaName?: string; }
-interface Income extends CommunityMedia { amount: string; author: string; date: string; desc: string; tags: string[]; email?: string; phone?: string; }
 interface Tip extends CommunityMedia { author?: string; title: string; detail: string; timestamp?: string; email?: string; phone?: string; }
 
 interface CommunityCache {
-    notices: Notice[];
-    income: Income[];
     tips: Tip[];
     cachedAt: number;
 }
-
-const NOTICE_BADGE_LABEL: Record<string, string> = { important: '중요', update: '업데이트', event: '이벤트', tip: '안내' };
 
 const panelStyle: CSSProperties = {
     border: '1px solid rgba(255,255,255,0.10)',
@@ -46,7 +43,7 @@ const fieldStyle: CSSProperties = {
     border: '1px solid rgba(255,255,255,0.12)',
     borderRadius: 8,
     color: '#fff',
-    fontSize: 14,
+    fontSize: 16,
     outline: 'none',
     boxSizing: 'border-box',
 };
@@ -58,50 +55,33 @@ function firstText(...values: unknown[]): string {
     return '';
 }
 
-function splitTags(value: unknown): string[] {
-    if (Array.isArray(value)) return value.map((tag) => String(tag).trim()).filter(Boolean);
-    if (typeof value === 'string') return value.split(',').map((tag) => tag.trim()).filter(Boolean);
-    return [];
-}
-
 function normalizeMedia(raw: any): CommunityMedia {
     const media = firstText(raw?.proofMedia, raw?.media, raw?.mediaUrl, raw?.proofImage, raw?.image, raw?.imageUrl, raw?.video, raw?.videoUrl);
+    let safeMedia = '';
+    if (/^data:(?:image\/(?:png|jpe?g|webp|gif|avif)|video\/(?:mp4|webm|ogg|quicktime));base64,/i.test(media)
+        && media.length <= COMMUNITY_DATA_MEDIA_MAX_CHARS) {
+        safeMedia = media;
+    } else if (media.startsWith('/') && !media.startsWith('//') && !media.includes('\\') && media.length <= 4096) {
+        safeMedia = media;
+    } else if (media.length <= 4096) {
+        try {
+            const parsed = new URL(media);
+            const hostname = parsed.hostname.toLocaleLowerCase();
+            const trustedHost = hostname === 'leaderspro.kr'
+                || hostname === 'www.leaderspro.kr'
+                || hostname === '141.164.59.17.sslip.io'
+                || hostname === 'script.googleusercontent.com'
+                || hostname.endsWith('.googleusercontent.com');
+            if (parsed.protocol === 'https:' && !parsed.username && !parsed.password && trustedHost) safeMedia = media;
+        } catch {
+            safeMedia = '';
+        }
+    }
     const mediaType = firstText(raw?.mediaType).startsWith('video') || media.startsWith('data:video') ? 'video' : 'image';
     return {
-        media,
-        mediaType: media ? mediaType : undefined,
-        mediaName: firstText(raw?.mediaName, raw?.imageName, raw?.fileName),
-    };
-}
-
-function normalizeNotice(raw: any): Notice | null {
-    const title = firstText(raw?.title);
-    if (!title) return null;
-    return {
-        badge: firstText(raw?.badge, 'tip'),
-        date: firstText(raw?.date, raw?.createdAt, ''),
-        title,
-        preview: firstText(raw?.preview, raw?.summary, raw?.body, ''),
-        body: firstText(raw?.body, raw?.detail, raw?.preview, ''),
-    };
-}
-
-function normalizeIncome(raw: any): Income | null {
-    const desc = firstText(raw?.desc, raw?.detail, raw?.reviewText, raw?.text);
-    const amount = firstText(raw?.amount, raw?.title);
-    const media = normalizeMedia(raw);
-    if (!desc && !media.media && !amount) return null;
-    const email = firstText(raw?.publicEmail, raw?.email);
-    const phone = firstText(raw?.publicPhone, raw?.phone);
-    return {
-        amount: amount || '수익 인증',
-        author: firstText(raw?.author, raw?.name, raw?.nickname, '익명'),
-        date: firstText(raw?.date, raw?.timestamp, raw?.createdAt, ''),
-        desc: maskContactText(desc || '수익인증 자료를 등록했습니다.'),
-        tags: splitTags(raw?.tags),
-        email: email ? (email.includes('*') ? email : maskEmail(email)) : '',
-        phone: phone ? (phone.includes('*') ? phone : maskPhone(phone)) : '',
-        ...media,
+        media: safeMedia || undefined,
+        mediaType: safeMedia ? mediaType : undefined,
+        mediaName: maskContactText(firstText(raw?.mediaName, raw?.imageName, raw?.fileName)).slice(0, 120) || undefined,
     };
 }
 
@@ -113,10 +93,10 @@ function normalizeTip(raw: any): Tip | null {
     const email = firstText(raw?.publicEmail, raw?.email);
     const phone = firstText(raw?.publicPhone, raw?.phone);
     return {
-        author: firstText(raw?.author, raw?.name, raw?.nickname, '익명'),
-        title: title || '활용 팁',
+        author: maskContactText(firstText(raw?.author, raw?.name, raw?.nickname, '익명')).slice(0, 80),
+        title: maskContactText(title || '활용 팁').slice(0, 160),
         detail: maskContactText(detail || '이미지/영상으로 공유한 활용 팁입니다.'),
-        timestamp: firstText(raw?.timestamp, raw?.createdAt, raw?.date),
+        timestamp: maskContactText(firstText(raw?.timestamp, raw?.createdAt, raw?.date)).slice(0, 40),
         email: email ? (email.includes('*') ? email : maskEmail(email)) : '',
         phone: phone ? (phone.includes('*') ? phone : maskPhone(phone)) : '',
         ...media,
@@ -128,19 +108,36 @@ function readCommunityCache(): CommunityCache | null {
         const raw = window.localStorage.getItem(COMMUNITY_CACHE_KEY);
         if (!raw) return null;
         const parsed = JSON.parse(raw) as CommunityCache;
-        if (!parsed || !Array.isArray(parsed.notices) || !Array.isArray(parsed.income) || !Array.isArray(parsed.tips)) return null;
-        return parsed;
+        if (!parsed || !Array.isArray(parsed.tips) || typeof parsed.cachedAt !== 'number') return null;
+        const age = Date.now() - parsed.cachedAt;
+        if (age < 0 || age > COMMUNITY_CACHE_TTL_MS) return null;
+        return {
+            tips: parsed.tips.map(normalizeTip).filter(Boolean).slice(0, 80) as Tip[],
+            cachedAt: parsed.cachedAt,
+        };
     } catch {
         return null;
     }
 }
 
-function writeCommunityCache(cache: CommunityCache) {
+function writeCommunityCache(tips: Tip[]) {
     try {
+        const cacheableTips = tips.slice(0, 80).map((tip) => {
+            const safe: Tip = {
+                author: tip.author,
+                title: tip.title,
+                detail: tip.detail,
+                timestamp: tip.timestamp,
+            };
+            if (tip.media && !tip.media.toLocaleLowerCase().startsWith('data:')) {
+                safe.media = tip.media;
+                safe.mediaType = tip.mediaType;
+                safe.mediaName = tip.mediaName;
+            }
+            return safe;
+        });
         window.localStorage.setItem(COMMUNITY_CACHE_KEY, JSON.stringify({
-            notices: cache.notices.slice(0, 80),
-            income: cache.income.slice(0, 80),
-            tips: cache.tips.slice(0, 80),
+            tips: cacheableTips,
             cachedAt: Date.now(),
         }));
     } catch {
@@ -148,18 +145,47 @@ function writeCommunityCache(cache: CommunityCache) {
     }
 }
 
-async function fetchCommunityAction(action: string, signal: AbortSignal) {
+async function readBoundedCommunityResponse(res: Response): Promise<unknown> {
+    const declaredLength = Number(res.headers.get('content-length') || '');
+    if (Number.isFinite(declaredLength) && declaredLength > COMMUNITY_RESPONSE_MAX_BYTES) throw new Error('community response too large');
+    if (!res.body) {
+        const text = await res.text();
+        if (new TextEncoder().encode(text).byteLength > COMMUNITY_RESPONSE_MAX_BYTES) throw new Error('community response too large');
+        return JSON.parse(text) as unknown;
+    }
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let bytes = 0;
+    let text = '';
+    try {
+        while (true) {
+            const chunk = await reader.read();
+            if (chunk.done) break;
+            bytes += chunk.value.byteLength;
+            if (bytes > COMMUNITY_RESPONSE_MAX_BYTES) {
+                await reader.cancel().catch(() => undefined);
+                throw new Error('community response too large');
+            }
+            text += decoder.decode(chunk.value, { stream: true });
+        }
+        return JSON.parse(text + decoder.decode()) as unknown;
+    } finally {
+        reader.releaseLock();
+    }
+}
+
+async function fetchCommunityAction(action: string, signal: AbortSignal): Promise<any> {
     const res = await fetch(`${GAS_URL}?action=${action}`, { cache: 'no-store', signal });
-    return res.json();
+    if (!res.ok) throw new Error('community request failed');
+    return readBoundedCommunityResponse(res);
 }
 
 function CommunityPage() {
-    const [tab, setTab] = useState<TabKey>('notices');
-    const [notices, setNotices] = useState<Notice[]>([]);
-    const [income, setIncome] = useState<Income[]>([]);
+    const [tab, setTab] = useState<TabKey>('income');
+    const [income, setIncome] = useState<CommunityIncomeProof[]>([]);
     const [tips, setTips] = useState<Tip[]>([]);
     const [loading, setLoading] = useState(true);
-    const [openNotice, setOpenNotice] = useState<number | null>(null);
+    const [incomeUnavailable, setIncomeUnavailable] = useState(false);
     const [writer, setWriter] = useState<WriteKind | null>(null);
 
     useEffect(() => {
@@ -171,48 +197,43 @@ function CommunityPage() {
     const refreshCommunity = useCallback(async (silent = false) => {
         const cached = readCommunityCache();
         if (cached) {
-            setNotices(cached.notices);
-            setIncome(cached.income);
             setTips(cached.tips);
-            setLoading(false);
-        } else if (!silent) {
+        }
+        if (!silent) {
             setLoading(true);
         }
 
         const controller = new AbortController();
         const timer = window.setTimeout(() => controller.abort(), COMMUNITY_TIMEOUT_MS);
         try {
-            const [noticeResult, incomeResult, tipResult] = await Promise.allSettled([
-                fetchHomeNotices(80),
-                fetchCommunityAction('income-list', controller.signal),
+            const incomePromise = fetchCommunityIncomeProofs(80, { view: 'community', signal: controller.signal });
+            const [incomeResult, tipResult] = await Promise.allSettled([
+                incomePromise,
                 fetchCommunityAction('get-tips', controller.signal),
             ]);
 
-            const nextNotices = noticeResult.status === 'fulfilled'
-                ? noticeResult.value.map(normalizeNotice).filter(Boolean) as Notice[]
-                : cached?.notices || [];
-            const nextIncome = incomeResult.status === 'fulfilled' && incomeResult.value?.success
-                ? (incomeResult.value.income || []).map(normalizeIncome).filter(Boolean) as Income[]
-                : cached?.income || [];
             const nextTips = tipResult.status === 'fulfilled' && tipResult.value?.success
                 ? (tipResult.value.tips || []).map(normalizeTip).filter(Boolean) as Tip[]
                 : cached?.tips || [];
 
-            setNotices(nextNotices);
-            setIncome(nextIncome);
-            setTips(nextTips);
-            writeCommunityCache({
-                notices: nextNotices,
-                income: nextIncome,
-                tips: nextTips,
-                cachedAt: Date.now(),
-            });
+            if (incomeResult.status === 'fulfilled') {
+                const unavailable = incomeResult.value.source === 'unavailable';
+                setIncomeUnavailable(unavailable);
+                if (!unavailable) setIncome(incomeResult.value.items);
+            } else {
+                setIncomeUnavailable(true);
+            }
+            if (tipResult.status === 'fulfilled' && tipResult.value?.success) {
+                setTips(nextTips);
+                writeCommunityCache(nextTips);
+            } else if (cached) {
+                setTips(cached.tips);
+            }
         } catch {
             if (!cached) {
-                setNotices([]);
-                setIncome([]);
                 setTips([]);
             }
+            setIncomeUnavailable(true);
         } finally {
             window.clearTimeout(timer);
             setLoading(false);
@@ -243,7 +264,7 @@ function CommunityPage() {
                     <div>
                         <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>COMMUNITY</span>
                         <h1 style={{ fontSize: 'clamp(30px, 4vw, 46px)', fontWeight: 900, marginBottom: 12 }}>Leaders Pro 커뮤니티</h1>
-                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>공지사항, 실제 수익 인증, 운영자가 직접 남긴 활용 팁을 확인하세요.</p>
+                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>실제 수익 인증과 운영자가 직접 남긴 활용 팁을 확인하세요. 공지사항은 홈에서 바로 확인할 수 있습니다.</p>
                     </div>
                     <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                         {tab === 'income' && <WriteButton label="수익인증 작성" onClick={() => setWriter('income')} />}
@@ -261,7 +282,6 @@ function CommunityPage() {
                 <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 34, flexWrap: 'wrap' }}>
                     {(
                         [
-                            ['notices', '공지사항'],
                             ['income', '수익 인증'],
                             ['tips', '활용 팁'],
                         ] as Array<[TabKey, string]>
@@ -291,7 +311,11 @@ function CommunityPage() {
                     </div>
                 )}
 
-                {tab === 'notices' && <NoticesPanel notices={notices} openIdx={openNotice} onToggle={(i) => setOpenNotice(openNotice === i ? null : i)} />}
+                {tab === 'income' && incomeUnavailable && (
+                    <div role="status" style={{ ...panelStyle, padding: 18, marginBottom: 18, color: '#ffd18a', fontSize: 16, lineHeight: 1.65 }}>
+                        수익 인증 최신 목록을 일시적으로 불러오지 못했습니다. 기존에 확인한 자료가 있으면 그대로 유지하며, 잠시 후 새로고침해주세요.
+                    </div>
+                )}
                 {tab === 'income' && <IncomePanel items={income} onWrite={() => setWriter('income')} />}
                 {tab === 'tips' && <TipsPanel items={tips} onWrite={() => setWriter('tips')} />}
             </section>
@@ -336,9 +360,9 @@ function WriteButton({ label, onClick }: { label: string; onClick: () => void })
 function MediaView({ item, height = 230 }: { item: CommunityMedia; height?: number }) {
     if (!item.media) return null;
     return item.mediaType === 'video' ? (
-        <video src={item.media} controls playsInline style={{ width: '100%', height, objectFit: 'cover', display: 'block', background: '#050812' }} />
+        <video src={item.media} controls playsInline preload="metadata" style={{ width: '100%', height, objectFit: 'contain', display: 'block', background: '#050812' }} />
     ) : (
-        <img src={item.media} alt={item.mediaName || '커뮤니티 첨부 이미지'} style={{ width: '100%', height, objectFit: 'cover', display: 'block', background: '#050812' }} />
+        <img src={item.media} alt={item.mediaName || '커뮤니티 첨부 이미지'} loading="lazy" decoding="async" referrerPolicy="no-referrer" style={{ width: '100%', height, objectFit: 'contain', display: 'block', background: '#050812' }} />
     );
 }
 
@@ -352,59 +376,7 @@ function EmptyState({ title, desc, action, onWrite }: { title: string; desc: str
     );
 }
 
-function NoticesPanel({ notices, openIdx, onToggle }: { notices: Notice[]; openIdx: number | null; onToggle: (i: number) => void }) {
-    const badgeColor = (badge: string) => {
-        switch (badge) {
-            case 'important': return { bg: 'rgba(255,92,117,0.15)', color: '#ff8798', border: 'rgba(255,92,117,0.30)' };
-            case 'update': return { bg: 'rgba(56,189,248,0.13)', color: '#7dd3fc', border: 'rgba(56,189,248,0.30)' };
-            case 'event': return { bg: 'rgba(68,215,182,0.13)', color: '#8ff5d4', border: 'rgba(68,215,182,0.30)' };
-            default: return { bg: 'rgba(244,201,93,0.12)', color: '#f4c95d', border: 'rgba(244,201,93,0.30)' };
-        }
-    };
-
-    if (notices.length === 0) {
-        return <div style={{ ...panelStyle, maxWidth: 900, margin: '0 auto', padding: 34, color: 'rgba(255,255,255,0.68)', fontSize: 16, lineHeight: 1.7, textAlign: 'center' }}>현재 등록된 공지사항이 없습니다.</div>;
-    }
-
-    return (
-        <div style={{ maxWidth: 900, margin: '0 auto' }}>
-            {notices.map((notice, index) => {
-                const open = openIdx === index;
-                const colors = badgeColor(notice.badge);
-                return (
-                    <article
-                        key={`${notice.title}-${index}`}
-                        onClick={() => onToggle(index)}
-                        onKeyDown={(event) => {
-                            if (event.key === 'Enter' || event.key === ' ') {
-                                event.preventDefault();
-                                onToggle(index);
-                            }
-                        }}
-                        role="button"
-                        tabIndex={0}
-                        aria-expanded={open}
-                        style={{ ...panelStyle, padding: 24, marginBottom: 14, cursor: 'pointer' }}
-                    >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
-                            <span style={{ padding: '4px 10px', borderRadius: 8, fontSize: 11, fontWeight: 900, background: colors.bg, color: colors.color, border: `1px solid ${colors.border}` }}>{NOTICE_BADGE_LABEL[notice.badge] || notice.badge}</span>
-                            <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 12 }}>{notice.date}</span>
-                        </div>
-                        <h3 style={{ fontSize: 18, fontWeight: 900, marginBottom: 8 }}>{notice.title}</h3>
-                        <p style={{ color: 'rgba(255,255,255,0.64)', fontSize: 14, lineHeight: 1.6, margin: 0 }}>{notice.preview}</p>
-                        {open && <div>
-                            <div style={{ paddingTop: 14, marginTop: 14, borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: 16, color: 'rgba(255,255,255,0.78)', lineHeight: 1.8, whiteSpace: 'pre-line', wordBreak: 'keep-all', overflowWrap: 'break-word' }}>
-                                {notice.body}
-                            </div>
-                        </div>}
-                    </article>
-                );
-            })}
-        </div>
-    );
-}
-
-function IncomePanel({ items, onWrite }: { items: Income[]; onWrite: () => void }) {
+function IncomePanel({ items, onWrite }: { items: CommunityIncomeProof[]; onWrite: () => void }) {
     if (items.length === 0) {
         return <EmptyState title="아직 공개된 수익인증이 없습니다" desc="더미 수익인증은 표시하지 않습니다. 실제 이미지/영상과 글이 승인되면 이곳에 노출됩니다." action="수익인증 작성" onWrite={onWrite} />;
     }
@@ -423,20 +395,19 @@ function IncomePanel({ items, onWrite }: { items: Income[]; onWrite: () => void 
                     <div style={{ padding: 20 }}>
                         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 12 }}>
                             <div>
-                                <b style={{ display: 'block', color: '#f4c95d', fontSize: 13, marginBottom: 6 }}>수익인증</b>
+                                <b style={{ display: 'block', color: '#f4c95d', fontSize: 16, marginBottom: 6 }}>수익인증</b>
                                 <h3 style={{ margin: 0, fontSize: 23, lineHeight: 1.2 }}>{item.amount}</h3>
                             </div>
-                            {item.date && <span style={{ color: 'rgba(255,255,255,0.48)', fontSize: 12, whiteSpace: 'nowrap' }}>{item.date}</span>}
+                            {item.date && <span style={{ color: 'rgba(255,255,255,0.68)', fontSize: 16, whiteSpace: 'nowrap' }}>{item.date}</span>}
                         </div>
-                        <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 14, lineHeight: 1.72, margin: '0 0 14px', whiteSpace: 'pre-wrap' }}>{item.desc}</p>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginBottom: 12 }}>
-                            <span style={{ color: '#fff', fontSize: 13, fontWeight: 900 }}>{item.author}</span>
-                            <span style={{ color: 'rgba(255,255,255,0.45)', fontSize: 11 }}>{item.phone || item.email}</span>
+                        <p style={{ color: 'rgba(255,255,255,0.78)', fontSize: 16, lineHeight: 1.72, margin: '0 0 14px', whiteSpace: 'pre-wrap' }}>{item.desc}</p>
+                        <div style={{ marginBottom: 12 }}>
+                            <span style={{ color: '#fff', fontSize: 16, fontWeight: 900 }}>{item.author}</span>
                         </div>
                         {item.tags.length > 0 && (
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                                 {item.tags.map((tag) => (
-                                    <span key={tag} style={{ background: 'rgba(244,201,93,0.10)', color: '#f4c95d', fontSize: 11, padding: '4px 9px', borderRadius: 999, border: '1px solid rgba(244,201,93,0.24)' }}>{tag}</span>
+                                    <span key={tag} style={{ background: 'rgba(244,201,93,0.10)', color: '#f4c95d', fontSize: 15, padding: '4px 9px', borderRadius: 999, border: '1px solid rgba(244,201,93,0.24)' }}>{tag}</span>
                                 ))}
                             </div>
                         )}
