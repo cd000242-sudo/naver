@@ -545,6 +545,21 @@
             gap: 7px;
         }
         .editor-field.full { grid-column: 1 / -1; }
+        .editor-copy-card {
+            grid-column: 1 / -1;
+            min-width: 0;
+            margin: 0;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255,255,255,.025);
+        }
+        .editor-copy-card legend {
+            padding: 0 8px;
+            color: var(--gold);
+            font-size: 17px;
+            font-weight: 900;
+        }
         .editor-field label {
             color: var(--text-secondary);
             font-size: 0.75rem;
@@ -572,6 +587,251 @@
         .editor-field select:focus,
         .editor-field textarea:focus {
             border-color: var(--gold);
+        }
+        .keyword-briefing-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+        .keyword-briefing-toolbar-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .keyword-briefing-toolbar,
+        .keyword-briefing-toolbar .btn {
+            font-size: 16px;
+        }
+        .keyword-briefing-table-shell {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(4,8,16,.55);
+        }
+        .keyword-briefing-table-shell:focus-visible {
+            outline: 3px solid rgba(201,168,76,.55);
+            outline-offset: 3px;
+        }
+        .keyword-briefing-edit-table {
+            width: 100%;
+            min-width: 980px;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        .keyword-briefing-edit-table th,
+        .keyword-briefing-edit-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            text-align: left;
+        }
+        .keyword-briefing-edit-table th {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background: #171d29;
+            color: #dbe4f3;
+            font-size: 16px;
+            white-space: nowrap;
+        }
+        .keyword-briefing-edit-table th:first-child,
+        .keyword-briefing-edit-table td:first-child { width: 52px; text-align: center; }
+        .keyword-briefing-edit-table th:nth-child(2) { width: 34%; }
+        .keyword-briefing-edit-table th:nth-child(3),
+        .keyword-briefing-edit-table th:nth-child(4) { width: 15%; }
+        .keyword-briefing-edit-table th:nth-child(5) { width: 14%; }
+        .keyword-briefing-edit-table th:last-child { width: 190px; }
+        .keyword-briefing-edit-table input {
+            width: 100%;
+            min-height: 42px;
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 8px;
+            background: rgba(255,255,255,.05);
+            color: var(--text-primary);
+            padding: 9px 10px;
+            font: inherit;
+            font-size: 16px;
+        }
+        .keyword-briefing-edit-table input:focus {
+            outline: 2px solid rgba(201,168,76,.45);
+            border-color: var(--gold);
+        }
+        .keyword-briefing-edit-table tr.needs-review { background: rgba(245,87,108,.07); }
+        .keyword-opportunity-value {
+            display: inline-flex;
+            align-items: center;
+            min-height: 42px;
+            font-weight: 900;
+            font-size: 16px;
+            color: var(--accent-green);
+        }
+        .keyword-row-issue {
+            display: block;
+            margin-top: 6px;
+            color: #ff9eaa;
+            font-size: 16px;
+            line-height: 1.45;
+        }
+        .keyword-row-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .keyword-row-actions button {
+            min-width: 44px;
+            min-height: 44px;
+            padding: 6px 9px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: rgba(255,255,255,.06);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .keyword-row-actions button:disabled {
+            opacity: .38;
+            cursor: not-allowed;
+            filter: grayscale(1);
+        }
+        .keyword-row-actions button[data-keyword-action="delete"] { color: #ff9eaa; }
+        .structured-content-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .structured-content-nav button {
+            min-height: 120px;
+            padding: 18px;
+            border: 1px solid rgba(201,168,76,.28);
+            border-radius: 14px;
+            background: linear-gradient(145deg, rgba(201,168,76,.09), rgba(255,255,255,.035));
+            color: var(--text-primary);
+            text-align: left;
+            cursor: pointer;
+            transition: transform .2s ease, border-color .2s ease, background .2s ease;
+        }
+        .structured-content-nav button:hover,
+        .structured-content-nav button:focus-visible,
+        .structured-content-nav button[aria-current="page"] {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+            background: rgba(201,168,76,.13);
+            outline: none;
+        }
+        .structured-content-nav strong { display: block; margin-bottom: 8px; font-size: 18px; }
+        .structured-content-nav span { color: var(--text-secondary); font-size: 16px; line-height: 1.55; }
+        .admin-content-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255,255,255,.025);
+        }
+        .admin-content-summary span {
+            padding: 10px 12px;
+            border-radius: 9px;
+            background: rgba(255,255,255,.04);
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        .admin-content-summary strong { color: var(--text-primary); }
+        .structured-row-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .structured-row-card {
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255,255,255,.025);
+        }
+        .structured-row-card-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .structured-row-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 10px;
+        }
+        .structured-row-fields label {
+            display: grid;
+            gap: 6px;
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        .structured-row-fields input {
+            width: 100%;
+            min-height: 44px;
+            padding: 9px 11px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: rgba(255,255,255,.05);
+            color: var(--text-primary);
+            font: inherit;
+            font-size: 16px;
+        }
+        .structured-row-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            max-width: 100%;
+        }
+        .structured-row-actions button {
+            min-width: 44px;
+            min-height: 44px;
+            padding: 7px 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: rgba(255,255,255,.06);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .structured-row-actions button:disabled { opacity: .38; cursor: not-allowed; }
+        .structured-row-actions button[data-structured-row-action="delete"] { color: #ff9eaa; }
+        .structured-row-add { margin-top: 10px; min-height: 44px; font-size: 16px; }
+        @media (max-width: 480px) {
+            .structured-row-actions { width: 100%; }
+        }
+        #tab-editor .editor-card h4 { font-size: 20px; line-height: 1.35; }
+        #tab-editor .editor-field label,
+        #tab-editor .editor-help,
+        #tab-editor .cms-region-block p,
+        #tab-editor .cms-proof-edit-head { font-size: 16px; line-height: 1.6; }
+        #tab-editor .editor-field input,
+        #tab-editor .editor-field select,
+        #tab-editor .editor-field textarea { font-size: 16px; line-height: 1.55; }
+        #tab-editor .btn,
+        #tab-editor .editor-subtab,
+        #tab-editor button:not(.editor-clear-btn) { min-height: 44px; font-size: 16px; }
+        .keyword-chart-row {
+            display: grid;
+            grid-template-columns: minmax(130px, 1.5fr) minmax(120px, 2fr) 72px;
+            gap: 10px;
+            align-items: center;
+            font-size: 16px;
+        }
+        .keyword-chart-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .keyword-chart-bar { height: 9px; border-radius: 999px; background: rgba(255,255,255,.07); overflow: hidden; }
+        .keyword-chart-value { text-align: right; color: #44d7b6; }
+        @media (max-width: 560px) {
+            .keyword-chart-row { grid-template-columns: minmax(0, 1fr) auto; gap: 7px 10px; }
+            .keyword-chart-bar { grid-column: 1 / -1; grid-row: 2; }
+            .keyword-chart-value { grid-column: 2; grid-row: 1; }
         }
         .editor-clear-wrap {
             position: relative;
@@ -1130,16 +1390,16 @@
                     <h1>사이트 편집</h1>
                     <p>메인 문구, 제품 상세, 요금제, 다운로드 링크를 저장하면 실제 사이트가 같은 데이터를 읽습니다.</p>
                 </div>
-                <div class="editor-subtabs">
-                    <button class="editor-subtab active" data-editor-subtab="home" onclick="switchEditorSubtab('home')">일반 편집</button>
-                    <button class="editor-subtab" data-editor-subtab="pricing" onclick="switchEditorSubtab('pricing')">구매/요금제</button>
-                    <button class="editor-subtab" data-editor-subtab="products" onclick="switchEditorSubtab('products')">제품정보</button>
-                    <button class="editor-subtab" data-editor-subtab="downloads" onclick="switchEditorSubtab('downloads')">다운로드</button>
-                                        <button class="editor-subtab" data-editor-subtab="site-content" onclick="switchEditorSubtab('site-content')">사이트 콘텐츠 관리</button>
-<button class="editor-subtab" data-editor-subtab="design" onclick="switchEditorSubtab('design')">디자인/고급</button>
+                <div class="editor-subtabs" role="tablist" aria-label="사이트 편집 영역">
+                    <button type="button" class="editor-subtab active" id="editor-tab-home" role="tab" aria-selected="true" aria-controls="editor-sub-home" tabindex="0" data-editor-subtab="home" onclick="switchEditorSubtab('home')">일반 편집</button>
+                    <button type="button" class="editor-subtab" id="editor-tab-pricing" role="tab" aria-selected="false" aria-controls="editor-sub-pricing" tabindex="-1" data-editor-subtab="pricing" onclick="switchEditorSubtab('pricing')">구매/요금제</button>
+                    <button type="button" class="editor-subtab" id="editor-tab-products" role="tab" aria-selected="false" aria-controls="editor-sub-products" tabindex="-1" data-editor-subtab="products" onclick="switchEditorSubtab('products')">제품정보</button>
+                    <button type="button" class="editor-subtab" id="editor-tab-downloads" role="tab" aria-selected="false" aria-controls="editor-sub-downloads" tabindex="-1" data-editor-subtab="downloads" onclick="switchEditorSubtab('downloads')">다운로드</button>
+                    <button type="button" class="editor-subtab" id="editor-tab-site-content" role="tab" aria-selected="false" aria-controls="editor-sub-site-content" tabindex="-1" data-editor-subtab="site-content" onclick="switchEditorSubtab('site-content')">사이트 콘텐츠 관리</button>
+                    <button type="button" class="editor-subtab" id="editor-tab-design" role="tab" aria-selected="false" aria-controls="editor-sub-design" tabindex="-1" data-editor-subtab="design" onclick="switchEditorSubtab('design')">디자인/고급</button>
                 </div>
 
-                <div id="editor-sub-home" class="editor-subpanel active">
+                <div id="editor-sub-home" class="editor-subpanel active" role="tabpanel" aria-labelledby="editor-tab-home" aria-hidden="false">
                     <div class="editor-card">
                         <h4>홈 첫 화면</h4>
                         <p class="editor-help">메인 페이지 Hero 영역과 공지 문구입니다. 줄바꿈은 그대로 사이트에 반영됩니다.</p>
@@ -1160,11 +1420,7 @@
                                 <label>Hero 보조 문구 (현재 홈 미사용)</label>
                                 <input id="edit-notice" type="text" placeholder="실제 홈 공지는 사이드바의 홈 운영에서 관리하세요.">
                             </div>
-                            <div class="editor-field full">
-                                <label>첫 화면 성과 이미지</label>
-                                <textarea id="edit-hero-proofs" placeholder="/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg | 방문자 상승 흐름 | 콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다. | 조회수 80 | 네이버 블로그 일간현황 조회수 상승 성과 화면"></textarea>
-                                <p class="editor-help">한 줄에 한 장씩 입력합니다. 기본값은 압축된 성과 이미지 11장 전체입니다. 형식: 이미지경로 | 제목 | 설명 | 지표 | 이미지 설명</p>
-                            </div>
+                            <input id="edit-hero-proofs" type="hidden">
                         </div>
                     </div>
 
@@ -1174,7 +1430,7 @@
                                 <h4>부방장 키워드 브리핑</h4>
                                 <p class="editor-help">엑셀 캡처 이미지를 브라우저 안에서 OCR로 분석합니다. 분석 결과는 초안이며, 검토 후 <strong>홈에 저장</strong>을 눌러야 공개됩니다.</p>
                             </div>
-                            <span id="keyword-briefing-revision" style="padding:6px 10px;border:1px solid rgba(68,215,182,.35);border-radius:999px;color:#44d7b6;font-size:.78rem;font-weight:800;">revision 0</span>
+                            <span id="keyword-briefing-revision" style="padding:6px 10px;border:1px solid rgba(68,215,182,.35);border-radius:999px;color:#44d7b6;font-size:16px;font-weight:800;">revision 0</span>
                         </div>
                         <div class="editor-field-grid" style="margin-top:14px;">
                             <div class="editor-field full">
@@ -1195,7 +1451,7 @@
                                     <button class="btn" type="button" id="keyword-briefing-analyze">이미지 분석</button>
                                     <button class="btn" type="button" id="keyword-briefing-validate">표 다시 검증</button>
                                     <button class="btn" type="button" id="keyword-briefing-reload">서버 최신본 불러오기</button>
-                                    <span id="keyword-briefing-status" style="font-size:.82rem;color:var(--text-secondary);">이미지를 선택한 뒤 분석하세요.</span>
+                                    <span id="keyword-briefing-status" role="status" aria-live="polite" style="font-size:16px;color:var(--text-secondary);">이미지를 선택한 뒤 분석하세요.</span>
                                 </div>
                             </div>
                             <div class="editor-field full" style="padding:14px;border:1px solid rgba(68,215,182,.22);border-radius:12px;background:rgba(68,215,182,.045);">
@@ -1209,19 +1465,40 @@
                             </div>
                             <div class="editor-field full">
                                 <label>검수용 표 — 키워드 / 검색량 / 블로그 문서수 / 기회지수</label>
-                                <textarea id="keyword-briefing-rows" rows="16" spellcheck="false" placeholder="키워드&#9;검색량&#9;블로그 문서수&#9;기회지수"></textarea>
-                                <p class="editor-help">기회지수는 검색량 ÷ (블로그 문서수 + 1)로 다시 계산됩니다. OCR 오독은 여기서 직접 고친 뒤 저장하세요.</p>
+                                <div class="keyword-briefing-toolbar">
+                                    <span id="keyword-briefing-row-count" role="status" aria-live="polite" style="color:var(--text-secondary);font-size:16px;">0개 행</span>
+                                    <div class="keyword-briefing-toolbar-actions">
+                                        <button class="btn" type="button" id="keyword-briefing-add-row">＋ 키워드 행 추가</button>
+                                        <button class="btn" type="button" id="keyword-briefing-sort">기회지수 높은순 정렬</button>
+                                    </div>
+                                </div>
+                                <div class="keyword-briefing-table-shell" tabindex="0" aria-describedby="keyword-briefing-scroll-help">
+                                    <table class="keyword-briefing-edit-table" aria-label="부방장 황금키워드 검수 표">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">키워드</th>
+                                                <th scope="col">검색량</th>
+                                                <th scope="col">블로그 문서수</th>
+                                                <th scope="col">기회지수</th>
+                                                <th scope="col">작업</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="keyword-briefing-table-body"></tbody>
+                                    </table>
+                                </div>
+                                <p class="editor-help" id="keyword-briefing-scroll-help" style="font-size:16px;"><strong>기회지수 자동 계산</strong> — 검색량 ÷ (블로그 문서수 + 1). 각 셀을 클릭해 바로 수정하고, 검수 필요 표시가 없어야 저장할 수 있습니다. 화면이 좁으면 표 영역을 좌우로 스크롤하세요.</p>
                             </div>
                         </div>
                         <div id="keyword-briefing-preview" style="margin-top:14px;"></div>
                         <div class="editor-save-bar" style="margin-top:14px;">
-                            <span style="font-size:.8rem;color:var(--text-secondary);">저장 전까지 현재 홈 브리핑은 바뀌지 않습니다.</span>
+                            <span style="font-size:16px;color:var(--text-secondary);">저장 전까지 현재 홈 브리핑은 바뀌지 않습니다.</span>
                             <button class="btn btn-gold" type="button" id="keyword-briefing-publish">검수본을 홈에 저장</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="editor-sub-pricing" class="editor-subpanel">
+                <div id="editor-sub-pricing" class="editor-subpanel" role="tabpanel" aria-labelledby="editor-tab-pricing" aria-hidden="true">
                     <div class="editor-card">
                         <h4>구매 탭 상단 문구</h4>
                         <div class="editor-field-grid">
@@ -1282,12 +1559,12 @@
 
                     <div class="editor-card" style="margin-top:16px;">
                         <h4>요금제 카드</h4>
-                        <p class="editor-help">카드 금액은 VAT 포함 금액입니다. 기능 목록은 한 줄에 하나씩 입력합니다.</p>
+                        <p class="editor-help">카드 금액은 VAT 포함 금액입니다. 기능 목록은 각 카드의 추가·위로·아래로·삭제 버튼으로 한 항목씩 편집하세요.</p>
                         <div class="editor-plan-stack" id="editor-plan-stack"></div>
                     </div>
                 </div>
 
-                <div id="editor-sub-products" class="editor-subpanel">
+                <div id="editor-sub-products" class="editor-subpanel" role="tabpanel" aria-labelledby="editor-tab-products" aria-hidden="true">
                     <div class="editor-card">
                         <h4>제품정보 페이지 문구</h4>
                         <div class="editor-field-grid">
@@ -1315,36 +1592,62 @@
                                 <label>마무리 버튼 2</label>
                                 <input id="products-page-final-secondary-cta" type="text" placeholder="네이버 무료 체험 다운로드">
                             </div>
-                            <div class="editor-field full">
-                                <label>선택 가이드 섹션</label>
-                                <textarea id="products-page-guide-copy" placeholder="CHOICE MAP&#10;지금 필요한 제품부터 고르면 됩니다&#10;처음에는 하나로 시작하고..."></textarea>
-                            </div>
-                            <div class="editor-field full">
-                                <label>제품 라인업 섹션</label>
-                                <textarea id="products-page-lineup-copy"></textarea>
-                            </div>
-                            <div class="editor-field full">
-                                <label>Best Fit 섹션</label>
-                                <textarea id="products-page-fit-copy"></textarea>
-                            </div>
-                            <div class="editor-field full">
-                                <label>One Suite 섹션</label>
-                                <textarea id="products-page-suite-copy"></textarea>
-                            </div>
-                            <div class="editor-field full">
-                                <label>비교 섹션</label>
-                                <textarea id="products-page-compare-copy"></textarea>
-                            </div>
-                            <div class="editor-field full">
-                                <label>마무리 섹션</label>
-                                <textarea id="products-page-final-copy"></textarea>
-                            </div>
+                            <fieldset class="editor-copy-card full">
+                                <legend>선택 가이드 섹션</legend>
+                                <div class="editor-field-grid">
+                                    <div class="editor-field"><label for="products-page-guide-kicker">상단 뱃지</label><input id="products-page-guide-kicker" type="text" placeholder="CHOICE MAP"></div>
+                                    <div class="editor-field"><label for="products-page-guide-title">제목</label><input id="products-page-guide-title" type="text"></div>
+                                    <div class="editor-field full"><label for="products-page-guide-desc">설명</label><textarea id="products-page-guide-desc"></textarea></div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="editor-copy-card full">
+                                <legend>제품 라인업 섹션</legend>
+                                <div class="editor-field-grid">
+                                    <div class="editor-field"><label for="products-page-lineup-kicker">상단 뱃지</label><input id="products-page-lineup-kicker" type="text"></div>
+                                    <div class="editor-field"><label for="products-page-lineup-title">제목</label><input id="products-page-lineup-title" type="text"></div>
+                                    <div class="editor-field full"><label for="products-page-lineup-desc">설명</label><textarea id="products-page-lineup-desc"></textarea></div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="editor-copy-card full">
+                                <legend>Best Fit 섹션</legend>
+                                <div class="editor-field-grid">
+                                    <div class="editor-field"><label for="products-page-fit-kicker">상단 뱃지</label><input id="products-page-fit-kicker" type="text"></div>
+                                    <div class="editor-field"><label for="products-page-fit-title">제목</label><input id="products-page-fit-title" type="text"></div>
+                                    <div class="editor-field full"><label for="products-page-fit-desc">설명</label><textarea id="products-page-fit-desc"></textarea></div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="editor-copy-card full">
+                                <legend>One Suite 섹션</legend>
+                                <div class="editor-field-grid">
+                                    <div class="editor-field"><label for="products-page-suite-kicker">상단 뱃지</label><input id="products-page-suite-kicker" type="text"></div>
+                                    <div class="editor-field"><label for="products-page-suite-title">제목</label><input id="products-page-suite-title" type="text"></div>
+                                    <div class="editor-field full"><label for="products-page-suite-desc">설명</label><textarea id="products-page-suite-desc"></textarea></div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="editor-copy-card full">
+                                <legend>비교 섹션</legend>
+                                <div class="editor-field-grid">
+                                    <div class="editor-field"><label for="products-page-compare-kicker">상단 뱃지</label><input id="products-page-compare-kicker" type="text"></div>
+                                    <div class="editor-field"><label for="products-page-compare-title">제목</label><input id="products-page-compare-title" type="text"></div>
+                                    <div class="editor-field full"><label for="products-page-compare-desc">설명</label><textarea id="products-page-compare-desc"></textarea></div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="editor-copy-card full">
+                                <legend>마무리 섹션</legend>
+                                <div class="editor-field-grid">
+                                    <div class="editor-field"><label for="products-page-final-kicker">상단 뱃지</label><input id="products-page-final-kicker" type="text"></div>
+                                    <div class="editor-field"><label for="products-page-final-title">제목</label><input id="products-page-final-title" type="text"></div>
+                                    <div class="editor-field full"><label for="products-page-final-desc">설명</label><textarea id="products-page-final-desc"></textarea></div>
+                                    <div class="editor-field"><label for="products-page-final-note">안내 문구</label><input id="products-page-final-note" type="text"></div>
+                                    <div class="editor-field"><label for="products-page-final-primary-cta">주요 버튼 문구</label><input id="products-page-final-primary-cta" type="text"></div>
+                                </div>
+                            </fieldset>
                         </div>
                     </div>
 
                     <div class="editor-card" style="margin-top:16px;">
                         <h4>제품별 카드/상세/이미지</h4>
-                        <p class="editor-help">이미지는 `/images/...` 또는 외부 URL을 넣으면 됩니다. 지표는 `100건 | 일 최대 자동 발행` 형식입니다.</p>
+                        <p class="editor-help">이미지는 `/images/...` 또는 외부 URL을 넣으면 됩니다. 지표·설명·추천 대상은 아래 행 추가 버튼으로 한 항목씩 편집하세요.</p>
                         <div class="editor-product-stack" id="editor-product-stack"></div>
                     </div>
 
@@ -1353,15 +1656,21 @@
                         <div class="editor-field-grid">
                             <div class="editor-field full">
                                 <label>선택 가이드 카드</label>
-                                <textarea id="products-page-guide-cards" placeholder="블로그 운영 자동화가 먼저라면 | Better Life Naver | 설명 | /detail"></textarea>
+                                <textarea id="products-page-guide-cards" hidden></textarea>
+                                <div class="structured-row-list" id="products-page-guide-cards-editor" data-structured-row-editor="guideCards"></div>
+                                <button class="btn structured-row-add" type="button" data-structured-row-add="guideCards">＋ 선택 가이드 카드 추가</button>
                             </div>
                             <div class="editor-field full">
                                 <label>Suite 흐름</label>
-                                <textarea id="products-page-suite-flow" placeholder="01 | LEWORD | 쓸 만한 키워드 후보를 찾고 경쟁도를 확인"></textarea>
+                                <textarea id="products-page-suite-flow" hidden></textarea>
+                                <div class="structured-row-list" id="products-page-suite-flow-editor" data-structured-row-editor="suiteFlow"></div>
+                                <button class="btn structured-row-add" type="button" data-structured-row-add="suiteFlow">＋ Suite 단계 추가</button>
                             </div>
                             <div class="editor-field full">
                                 <label>비교표</label>
-                                <textarea id="products-page-comparison" placeholder="주요 목적 | 네이버 블로그 성장 | 키워드 발굴 | 외부유입 채널 확장"></textarea>
+                                <textarea id="products-page-comparison" hidden></textarea>
+                                <div class="structured-row-list" id="products-page-comparison-editor" data-structured-row-editor="comparison"></div>
+                                <button class="btn structured-row-add" type="button" data-structured-row-add="comparison">＋ 비교 항목 추가</button>
                             </div>
                             <div class="editor-field">
                                 <label>상단 미리보기 이미지 1</label>
@@ -1383,7 +1692,7 @@
                     </div>
                 </div>
 
-                <div id="editor-sub-downloads" class="editor-subpanel">
+                <div id="editor-sub-downloads" class="editor-subpanel" role="tabpanel" aria-labelledby="editor-tab-downloads" aria-hidden="true">
                     <div class="editor-card">
                         <h4>다운로드 페이지 문구</h4>
                         <div class="editor-field-grid">
@@ -1412,17 +1721,21 @@
                     </div>
 
                 </div>
-                <div id="editor-sub-site-content" class="editor-subpanel">
+                <div id="editor-sub-site-content" class="editor-subpanel" role="tabpanel" aria-labelledby="editor-tab-site-content" aria-hidden="true">
                     <div class="editor-card">
-                        <h4>사이트 콘텐츠 관리</h4>
-                        <p class="editor-help">제품정보, 무료 챗봇, 구매 문구, 신규 제품 초안을 서버 저장 콘텐츠로 관리합니다.</p>
-                        <div class="editor-field full">
-                            <label>콘텐츠 JSON</label>
-                            <textarea id="admin-site-content-json" style="min-height:360px;" placeholder="서버 콘텐츠를 불러오면 여기에 표시됩니다."></textarea>
+                        <h4>사이트 콘텐츠 바로 수정</h4>
+                        <p class="editor-help">코드 형식 대신 수정할 영역을 누르세요. 서버에서 불러온 기존 항목과 앞으로 추가되는 필드는 그대로 보존됩니다.</p>
+                        <div class="structured-content-nav" aria-label="사이트 콘텐츠 수정 영역">
+                            <button type="button" data-content-editor-target="home" aria-controls="editor-sub-home" onclick="switchEditorSubtab('home', true)"><strong>🏠 홈 화면</strong><span>메인 문구, 성과 인증, 부방장 키워드</span></button>
+                            <button type="button" data-content-editor-target="pricing" aria-controls="editor-sub-pricing" onclick="switchEditorSubtab('pricing', true)"><strong>💳 구매·요금제</strong><span>가격, 결제 안내, 플랜별 혜택</span></button>
+                            <button type="button" data-content-editor-target="products" aria-controls="editor-sub-products" onclick="switchEditorSubtab('products', true)"><strong>📦 제품정보</strong><span>제품 카드, 설명, 이미지와 비교표</span></button>
+                            <button type="button" data-content-editor-target="downloads" aria-controls="editor-sub-downloads" onclick="switchEditorSubtab('downloads', true)"><strong>⬇️ 다운로드</strong><span>버전, 설치 파일, 플랫폼별 링크</span></button>
+                            <button type="button" data-content-editor-target="design" aria-controls="editor-sub-design" onclick="switchEditorSubtab('design', true)"><strong>🎨 디자인·음악</strong><span>배경, 강조 색상, 스킨과 음악</span></button>
                         </div>
+                        <div class="admin-content-summary" id="admin-site-content-summary" aria-live="polite"></div>
                         <div class="editor-save-bar">
-                            <button class="btn" type="button" onclick="loadEditorContent()">서버 콘텐츠 불러오기</button>
-                            <button class="btn btn-gold" type="button" onclick="saveEditorContent()">사이트 콘텐츠 저장</button>
+                            <button class="btn" type="button" data-site-content-reload onclick="loadEditorContent({ force: true, confirmDiscard: true })">서버 콘텐츠 불러오기</button>
+                            <button class="btn btn-gold" type="button" data-site-content-save onclick="saveEditorContent()">사이트 콘텐츠 저장</button>
                         </div>
                     </div>
                 </div>
@@ -1464,9 +1777,9 @@
                 </div>
 
 
-                <div id="editor-sub-design" class="editor-subpanel">
+                <div id="editor-sub-design" class="editor-subpanel" role="tabpanel" aria-labelledby="editor-tab-design" aria-hidden="true">
                     <div class="editor-card">
-                        <h4>디자인/고급 JSON</h4>
+                        <h4>디자인·고급 설정</h4>
                         <div class="editor-field-grid">
                             <div class="editor-field">
                                 <label>요금제 배경 이미지</label>
@@ -1485,20 +1798,16 @@
                                 <input id="theme-gold" type="text" placeholder="#FFD700">
                             </div>
                             <div class="editor-field full">
-                                <label>제품 상세 JSON 직접 편집</label>
-                                <textarea id="edit-products-json" spellcheck="false" style="min-height:180px;font-family:Consolas,monospace;" placeholder='{"naver":{"headline":"키워드 하나로 끝","bullets":["자동 글쓰기","자동 발행"]}}'></textarea>
-                            </div>
-                            <div class="editor-field full">
-                                <label>전체 저장 데이터 미리보기</label>
-                                <textarea id="edit-site-json-preview" spellcheck="false" readonly style="min-height:220px;font-family:Consolas,monospace;"></textarea>
+                                <label>제품 상세 수정</label>
+                                <button class="btn" type="button" data-content-editor-target="products" onclick="switchEditorSubtab('products')">제품별 카드와 상세 문구 수정하기</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="editor-save-bar">
-                    <button class="btn" onclick="loadEditorContent()">🔄 서버에서 불러오기</button>
+                    <button class="btn" data-site-content-reload onclick="loadEditorContent({ force: true, confirmDiscard: true })">🔄 서버에서 불러오기</button>
                     <button class="btn" onclick="resetEditorContent()">↩️ 초기화</button>
-                    <button class="btn btn-gold" onclick="saveEditorContent()">💾 서버에 저장하기</button>
+                    <button class="btn btn-gold" data-site-content-save onclick="saveEditorContent()">💾 서버에 저장하기</button>
                 </div>
             </div>
 
@@ -1780,6 +2089,7 @@
     <div class="save-toast" id="save-toast">✅ 저장되었습니다!</div>
 
     <script src="/admin/keyword-briefing-tools.js"></script>
+    <script src="/admin/structured-editor-tools.js"></script>
     <script>
         // ===== CONFIG =====
         // Auth: SHA-256 hashed credentials (never store plaintext)
@@ -3272,10 +3582,10 @@
 
         const EDITOR_PLAN_DEFS = [
             { id: 'free-naver', label: 'Better Life Naver 무료 체험' },
-            { id: 'disabled-license-bundle-monthly', label: '올인원 1개월' },
-            { id: 'disabled-license-bundle-quarterly', label: '올인원 3개월' },
-            { id: 'disabled-license-bundle-yearly', label: '올인원 1년' },
-            { id: 'disabled-license-bundle-lifetime', label: '올인원 영구제' }
+            { id: 'all-in-one-monthly', label: '올인원 1개월', legacyId: 'disabled-license-bundle-monthly' },
+            { id: 'all-in-one-quarterly', label: '올인원 3개월', legacyId: 'disabled-license-bundle-quarterly' },
+            { id: 'all-in-one-yearly', label: '올인원 1년', legacyId: 'disabled-license-bundle-yearly' },
+            { id: 'all-in-one-lifetime', label: '올인원 영구제', legacyId: 'disabled-license-bundle-lifetime' }
         ];
 
         const EDITOR_PRODUCT_DEFS = [
@@ -3397,7 +3707,7 @@
                         badgeText: '🎁 FREE',
                         features: ['Better Life Naver 체험', 'AI 콘텐츠 생성', '매일 2회 발행 제한', 'LEWORD·Orbit은 올인원 구매 후 이용']
                     },
-                    'disabled-license-bundle-monthly': {
+                    'all-in-one-monthly': {
                         name: '올인원 1개월',
                         desc: '3개 툴을 한 번에 가볍게 시작',
                         amount: 50000,
@@ -3408,7 +3718,7 @@
                         period: '/ 월(공급가)',
                         features: ['Better Life Naver 이용', 'LEWORD 키워드 분석 이용', 'Leadernam Orbit 이용', '이메일 고객 지원']
                     },
-                    'disabled-license-bundle-quarterly': {
+                    'all-in-one-quarterly': {
                         name: '올인원 3개월',
                         desc: '블로그 자동화 흐름을 안정적으로 운영',
                         amount: 120000,
@@ -3418,7 +3728,7 @@
                         monthly: '월 40,000원',
                         features: ['Better Life Naver 이용', 'LEWORD 전체 기능 이용', 'Leadernam Orbit 이용', '우선 고객 지원']
                     },
-                    'disabled-license-bundle-yearly': {
+                    'all-in-one-yearly': {
                         name: '올인원 1년',
                         desc: '가장 합리적인 전체 제품 기간권',
                         amount: 400000,
@@ -3429,7 +3739,7 @@
                         badgeText: '👑 BEST VALUE',
                         features: ['모든 자동화툴 기간 내 이용', '라이선스 기간 내 업데이트', '전용 커뮤니티 안내', '1:1 우선 지원']
                     },
-                    'disabled-license-bundle-lifetime': {
+                    'all-in-one-lifetime': {
                         name: '올인원 영구제',
                         desc: '한 번 구매로 장기 운영하는 영구 이용권',
                         amount: 1650000,
@@ -3584,63 +3894,62 @@
             }
         };
 
-        let productsJsonTouched = false;
+        let loadedSiteContentBase = {};
+        let loadedSiteContentProjection = {};
+        let siteContentEditorState = {
+            loaded: false,
+            loading: false,
+            saving: false,
+            dirty: false,
+            loadGeneration: 0,
+            editGeneration: 0
+        };
+
+        function syncSiteContentEditorActions() {
+            document.querySelectorAll('[data-site-content-reload]').forEach(button => {
+                button.disabled = siteContentEditorState.loading || siteContentEditorState.saving;
+            });
+            document.querySelectorAll('[data-site-content-save]').forEach(button => {
+                button.disabled = siteContentEditorState.loading || siteContentEditorState.saving;
+                button.textContent = siteContentEditorState.saving ? '저장 중…' : (button.closest('#editor-sub-site-content') ? '사이트 콘텐츠 저장' : '💾 서버에 저장하기');
+            });
+        }
+
+        function markSiteContentDirty() {
+            siteContentEditorState = {
+                ...siteContentEditorState,
+                dirty: true,
+                editGeneration: siteContentEditorState.editGeneration + 1
+            };
+            syncSiteContentEditorActions();
+        }
 
         function deepClone(obj) {
             return JSON.parse(JSON.stringify(obj || {}));
         }
 
-        function deepMerge(target, source) {
-            if (!source || typeof source !== 'object') return target;
-            Object.keys(source).forEach(key => {
-                const value = source[key];
-                if (value === undefined || value === null || value === '') return;
-                if (value && typeof value === 'object' && !Array.isArray(value)) {
-                    target[key] = deepMerge(target[key] && typeof target[key] === 'object' && !Array.isArray(target[key]) ? target[key] : {}, value);
-                } else {
-                    target[key] = value;
-                }
-            });
-            return target;
-        }
-
-        function normalizeLegacySiteEdits(saved) {
-            if (!saved || saved.hero || saved.pricing || saved.downloads || saved.products) return saved || {};
+        function normalizeEditorContent(content) {
+            const tools = window.AdminStructuredEditorTools;
+            if (!tools?.normalizeLegacyContent) throw new Error('구조화 편집 도구를 불러오지 못했습니다.');
+            const normalized = tools.normalizeLegacyContent(content || {});
+            if (!Array.isArray(normalized?.hero?.proofs)) return normalized;
             return {
+                ...normalized,
                 hero: {
-                    title: saved.heroTitle || '',
-                    desc: saved.heroDesc || '',
-                    benefit: saved.heroBenefit || '',
-                    notice: saved.notice || ''
-                },
-                downloads: {
-                    naver: { downloads: { windows: { url: saved.downloadUrls?.naver || '' } } },
-                    orbit: { downloads: { windows: { url: saved.downloadUrls?.orbit || '' } } },
-                    tistory: { downloads: { windows: { url: saved.downloadUrls?.tistory || '' } } },
-                    leword: { downloads: { windows: { url: saved.downloadUrls?.leword || '' } } }
+                    ...normalized.hero,
+                    proofs: normalized.hero.proofs.map((proof, index) => ({
+                        ...(proof && typeof proof === 'object' && !Array.isArray(proof) ? proof : {}),
+                        id: String(proof?.id || ('admin-proof-' + (index + 1)))
+                    }))
                 }
             };
         }
 
-        function mergeProofLists(savedProofs, defaultProofs) {
-            const result = (savedProofs || []).filter(proof => proof && proof.src);
-            const seen = new Set(result.map(proof => proof.src));
-            (defaultProofs || []).forEach(proof => {
-                if (proof && proof.src && !seen.has(proof.src)) {
-                    result.push(proof);
-                    seen.add(proof.src);
-                }
-            });
-            return result;
-        }
-
         function withEditorDefaults(content) {
-            const normalized = normalizeLegacySiteEdits(content || {});
-            const merged = deepMerge(deepClone(DEFAULT_SITE_CONTENT), normalized);
-            if (normalized?.hero && Array.isArray(normalized.hero.proofs)) {
-                merged.hero.proofs = mergeProofLists(normalized.hero.proofs, DEFAULT_SITE_CONTENT.hero.proofs);
-            }
-            return merged;
+            const normalized = normalizeEditorContent(content || {});
+            const tools = window.AdminStructuredEditorTools;
+            if (!tools?.mergeContent) throw new Error('구조화 편집 도구를 불러오지 못했습니다.');
+            return tools.mergeContent(DEFAULT_SITE_CONTENT, normalized);
         }
 
         function editorEl(id) {
@@ -3707,10 +4016,6 @@
         }
 
 
-        function arrayToLines(items) {
-            return (items || []).join('\n');
-        }
-
         function linesToArray(text) {
             return String(text || '').split(/\r?\n/).map(line => line.trim()).filter(Boolean);
         }
@@ -3723,12 +4028,190 @@
             return linesToArray(text).map(line => line.split('|').map(part => part.trim())).filter(row => row.length >= minCols);
         }
 
-        function metricsToText(metrics) {
-            return rowsToText(metrics || []);
+        const STRUCTURED_ROW_EDITOR_DEFS = Object.freeze({
+            guideCards: Object.freeze({
+                sourceId: 'products-page-guide-cards',
+                editorId: 'products-page-guide-cards-editor',
+                rowLabel: '선택 가이드',
+                columns: Object.freeze(['선택 기준', '제품명', '설명', '연결 링크'])
+            }),
+            suiteFlow: Object.freeze({
+                sourceId: 'products-page-suite-flow',
+                editorId: 'products-page-suite-flow-editor',
+                rowLabel: 'Suite 단계',
+                columns: Object.freeze(['단계', '제품·구간', '설명'])
+            }),
+            comparison: Object.freeze({
+                sourceId: 'products-page-comparison',
+                editorId: 'products-page-comparison-editor',
+                rowLabel: '비교 항목',
+                columns: Object.freeze(['항목', '네이버 자동화', 'LEWORD', 'Orbit'])
+            })
+        });
+        let structuredRowEditorState = { guideCards: [], suiteFlow: [], comparison: [] };
+        let structuredRowEditorsReady = false;
+
+        function getStructuredRowEditorDef(key) {
+            if (STRUCTURED_ROW_EDITOR_DEFS[key]) return STRUCTURED_ROW_EDITOR_DEFS[key];
+            const [kind, id] = String(key || '').split(':');
+            if (!kind || !id) return null;
+            if (kind === 'planFeatures' && EDITOR_PLAN_DEFS.some(plan => plan.id === id)) {
+                return {
+                    sourceId: `plan-${id}-features`,
+                    editorId: `plan-${id}-features-editor`,
+                    rowLabel: '기능',
+                    columns: ['기능 설명']
+                };
+            }
+            if (!EDITOR_PRODUCT_DEFS.some(product => product.id === id)) return null;
+            if (kind === 'productMetrics') {
+                return {
+                    sourceId: `product-${id}-metrics`,
+                    editorId: `product-${id}-metrics-editor`,
+                    rowLabel: '지표',
+                    columns: ['지표 값', '설명']
+                };
+            }
+            if (kind === 'productBullets') {
+                return {
+                    sourceId: `product-${id}-bullets`,
+                    editorId: `product-${id}-bullets-editor`,
+                    rowLabel: '설명',
+                    columns: ['설명 문구']
+                };
+            }
+            if (kind === 'productFit') {
+                return {
+                    sourceId: `product-${id}-fit`,
+                    editorId: `product-${id}-fit-editor`,
+                    rowLabel: '추천 대상',
+                    columns: ['추천 대상 문구']
+                };
+            }
+            return null;
         }
 
-        function textToMetrics(text) {
-            return textToRows(text, 2).map(row => [row[0], row.slice(1).join(' | ')]);
+        function normalizeStructuredEditorRows(key, rows) {
+            const def = getStructuredRowEditorDef(key);
+            if (!def) return [];
+            return (Array.isArray(rows) ? rows : []).map(row => {
+                const source = Array.isArray(row) ? row : [];
+                const visibleColumns = def.columns.map((_, columnIndex) => String(source[columnIndex] ?? ''));
+                const futureColumns = source.slice(def.columns.length).map(value => String(value ?? ''));
+                return visibleColumns.concat(futureColumns);
+            });
+        }
+
+        function syncStructuredRowSource(key) {
+            const def = getStructuredRowEditorDef(key);
+            if (!def) return;
+            setValue(def.sourceId, rowsToText(structuredRowEditorState[key] || []));
+        }
+
+        function readStructuredEditorRows(key) {
+            return normalizeStructuredEditorRows(key, structuredRowEditorState[key] || []);
+        }
+
+        function pruneEmptyStructuredEditorRows() {
+            let removedCount = 0;
+            Object.keys(structuredRowEditorState).forEach((key) => {
+                if (!getStructuredRowEditorDef(key)) return;
+                const rows = readStructuredEditorRows(key);
+                const nonEmptyRows = rows.filter(row => row.some(value => String(value || '').trim().length > 0));
+                if (nonEmptyRows.length === rows.length) return;
+                removedCount += rows.length - nonEmptyRows.length;
+                structuredRowEditorState = { ...structuredRowEditorState, [key]: nonEmptyRows };
+                syncStructuredRowSource(key);
+                renderStructuredRowEditor(key);
+            });
+            return removedCount;
+        }
+
+        function setStructuredEditorRows(key, rows) {
+            if (!getStructuredRowEditorDef(key)) return;
+            structuredRowEditorState = {
+                ...structuredRowEditorState,
+                [key]: normalizeStructuredEditorRows(key, rows)
+            };
+            syncStructuredRowSource(key);
+            renderStructuredRowEditor(key);
+        }
+
+        function renderStructuredRowEditor(key) {
+            const def = getStructuredRowEditorDef(key);
+            const target = def ? document.getElementById(def.editorId) : null;
+            if (!def || !target) return;
+            const rows = structuredRowEditorState[key] || [];
+            if (!rows.length) {
+                target.innerHTML = '<div style="padding:18px;border:1px dashed var(--border);border-radius:10px;color:var(--text-secondary);font-size:16px;text-align:center;">항목이 없습니다. 아래 추가 버튼을 누르세요.</div>';
+                return;
+            }
+            target.innerHTML = rows.map((row, rowIndex) => (
+                '<section class="structured-row-card" data-structured-row-key="' + key + '" data-structured-row-index="' + rowIndex + '">' +
+                    '<div class="structured-row-card-head"><strong>' + cmsEscape(def.rowLabel) + ' ' + (rowIndex + 1) + '</strong>' +
+                        '<div class="structured-row-actions">' +
+                            '<button type="button" data-structured-row-action="up" aria-label="' + (rowIndex + 1) + '번 항목 위로"' + (rowIndex === 0 ? ' disabled' : '') + '>↑ 위로</button>' +
+                            '<button type="button" data-structured-row-action="down" aria-label="' + (rowIndex + 1) + '번 항목 아래로"' + (rowIndex === rows.length - 1 ? ' disabled' : '') + '>↓ 아래로</button>' +
+                            '<button type="button" data-structured-row-action="delete" aria-label="' + (rowIndex + 1) + '번 항목 삭제">삭제</button>' +
+                        '</div></div>' +
+                    '<div class="structured-row-fields">' + def.columns.map((label, columnIndex) => (
+                        '<label>' + cmsEscape(label) + '<input type="text" data-structured-row-field="' + columnIndex + '" value="' + cmsEscape(row[columnIndex]) + '"></label>'
+                    )).join('') + '</div>' +
+                '</section>'
+            )).join('');
+        }
+
+        function updateStructuredRowEditor(key, updater) {
+            const current = readStructuredEditorRows(key).map(row => row.slice());
+            const next = updater(current);
+            setStructuredEditorRows(key, next);
+            markSiteContentDirty();
+            refreshEditorPreview();
+        }
+
+        function installStructuredRowEditors() {
+            if (structuredRowEditorsReady) return;
+            const editor = document.getElementById('tab-editor');
+            if (!editor) return;
+            structuredRowEditorsReady = true;
+            editor.addEventListener('click', event => {
+                const addButton = event.target.closest?.('[data-structured-row-add]');
+                if (addButton) {
+                    const key = addButton.dataset.structuredRowAdd;
+                    const def = getStructuredRowEditorDef(key);
+                    if (!def) return;
+                    updateStructuredRowEditor(key, rows => rows.concat([def.columns.map(() => '')]));
+                    requestAnimationFrame(() => document.querySelector('[data-structured-row-key="' + key + '"]:last-child input')?.focus());
+                    return;
+                }
+                const action = event.target.closest?.('[data-structured-row-action]');
+                const card = action?.closest?.('[data-structured-row-key]');
+                if (!action || !card) return;
+                const key = card.dataset.structuredRowKey;
+                const index = Number(card.dataset.structuredRowIndex);
+                updateStructuredRowEditor(key, rows => {
+                    if (!Number.isInteger(index) || index < 0 || index >= rows.length) return rows;
+                    if (action.dataset.structuredRowAction === 'delete') return rows.filter((_, rowIndex) => rowIndex !== index);
+                    const direction = action.dataset.structuredRowAction === 'up' ? -1 : 1;
+                    const targetIndex = index + direction;
+                    if (targetIndex < 0 || targetIndex >= rows.length) return rows;
+                    [rows[index], rows[targetIndex]] = [rows[targetIndex], rows[index]];
+                    return rows;
+                });
+            });
+            editor.addEventListener('input', event => {
+                const input = event.target.closest?.('[data-structured-row-field]');
+                const card = input?.closest?.('[data-structured-row-key]');
+                if (!input || !card) return;
+                const key = card.dataset.structuredRowKey;
+                const rowIndex = Number(card.dataset.structuredRowIndex);
+                const columnIndex = Number(input.dataset.structuredRowField);
+                const rows = readStructuredEditorRows(key).map(row => row.slice());
+                if (!rows[rowIndex] || !Number.isInteger(columnIndex) || columnIndex < 0 || columnIndex >= rows[rowIndex].length) return;
+                rows[rowIndex][columnIndex] = input.value;
+                structuredRowEditorState = { ...structuredRowEditorState, [key]: rows };
+                syncStructuredRowSource(key);
+            });
         }
 
         function proofsToText(proofs) {
@@ -3751,19 +4234,6 @@
             }));
         }
 
-        function copyBlockToText(kicker, title, desc) {
-            return [kicker || '', title || '', desc || ''].join('\n');
-        }
-
-        function textToCopyBlock(text) {
-            const lines = String(text || '').split(/\r?\n/);
-            return {
-                kicker: (lines[0] || '').trim(),
-                title: (lines[1] || '').trim(),
-                desc: lines.slice(2).join('\n').trim()
-            };
-        }
-
         function renderEditorDynamicForms() {
             const planStack = editorEl('editor-plan-stack');
             if (planStack && !planStack.dataset.rendered) {
@@ -3781,7 +4251,12 @@
                             <div class="editor-field"><label>정상 카드가</label><input id="plan-${plan.id}-future-card" type="number" min="0"></div>
                             <div class="editor-field"><label>월 환산</label><input id="plan-${plan.id}-monthly" type="text"></div>
                             <div class="editor-field"><label>이벤트 라벨</label><input id="plan-${plan.id}-event" type="text"></div>
-                            <div class="editor-field full"><label>기능 목록</label><textarea id="plan-${plan.id}-features"></textarea></div>
+                            <div class="editor-field full">
+                                <label>기능 목록</label>
+                                <textarea id="plan-${plan.id}-features" hidden aria-hidden="true"></textarea>
+                                <div class="structured-row-list" id="plan-${plan.id}-features-editor" data-structured-row-editor="planFeatures:${plan.id}"></div>
+                                <button class="btn structured-row-add" type="button" data-structured-row-add="planFeatures:${plan.id}">＋ 기능 추가</button>
+                            </div>
                         </div>
                     </div>
                 `).join('');
@@ -3804,9 +4279,24 @@
                             <div class="editor-field"><label>미디어 타입</label><select id="product-${product.id}-media-type"><option value="image">image</option><option value="video">video</option></select></div>
                             <div class="editor-field"><label>이미지/영상 경로</label><input id="product-${product.id}-media-src" type="text"></div>
                             <div class="editor-field"><label>이미지 설명</label><input id="product-${product.id}-media-alt" type="text"></div>
-                            <div class="editor-field full"><label>지표</label><textarea id="product-${product.id}-metrics" placeholder="100건 | 일 최대 자동 발행"></textarea></div>
-                            <div class="editor-field full"><label>불릿 설명</label><textarea id="product-${product.id}-bullets"></textarea></div>
-                            <div class="editor-field full"><label>추천 대상</label><textarea id="product-${product.id}-fit"></textarea></div>
+                            <div class="editor-field full">
+                                <label>지표</label>
+                                <textarea id="product-${product.id}-metrics" hidden aria-hidden="true"></textarea>
+                                <div class="structured-row-list" id="product-${product.id}-metrics-editor" data-structured-row-editor="productMetrics:${product.id}"></div>
+                                <button class="btn structured-row-add" type="button" data-structured-row-add="productMetrics:${product.id}">＋ 지표 추가</button>
+                            </div>
+                            <div class="editor-field full">
+                                <label>불릿 설명</label>
+                                <textarea id="product-${product.id}-bullets" hidden aria-hidden="true"></textarea>
+                                <div class="structured-row-list" id="product-${product.id}-bullets-editor" data-structured-row-editor="productBullets:${product.id}"></div>
+                                <button class="btn structured-row-add" type="button" data-structured-row-add="productBullets:${product.id}">＋ 설명 추가</button>
+                            </div>
+                            <div class="editor-field full">
+                                <label>추천 대상</label>
+                                <textarea id="product-${product.id}-fit" hidden aria-hidden="true"></textarea>
+                                <div class="structured-row-list" id="product-${product.id}-fit-editor" data-structured-row-editor="productFit:${product.id}"></div>
+                                <button class="btn structured-row-add" type="button" data-structured-row-add="productFit:${product.id}">＋ 추천 대상 추가</button>
+                            </div>
                         </div>
                     </div>
                 `).join('');
@@ -3861,12 +4351,6 @@
             enhanceEditorClearButtons(downloadStack || document);
             initLewordDownloadUploads();
             loadLewordDownloadStatus().catch(() => {});
-
-            const productsJson = editorEl('edit-products-json');
-            if (productsJson && !productsJson.dataset.bound) {
-                productsJson.addEventListener('input', () => { productsJsonTouched = true; });
-                productsJson.dataset.bound = '1';
-            }
         }
         function saveAdminAiWorkerSettings() {
             const provider = document.querySelector('input[name="admin-ai-worker-provider"]:checked')?.value || 'codex';
@@ -3985,10 +4469,11 @@
                 const addButton = event.target.closest('[data-cms-add-proof]');
                 if (addButton) {
                     const proofs = getCmsProofEditorValues();
-                    proofs.push({ src:'', title:'새 성과 카드', desc:'성과 설명을 입력하세요.', metric:'성과 지표', alt:'성과 이미지' });
+                    proofs.push({ id:'admin-proof-' + Date.now(), src:'', title:'새 성과 카드', desc:'성과 설명을 입력하세요.', metric:'성과 지표', alt:'성과 이미지' });
                     renderCmsProofEditorList(proofs);
                     setCmsActiveHomeArea('proof-' + (proofs.length - 1), { scroll:true });
                     syncCmsHomeRegionEditorToSource({ force:true });
+                    markSiteContentDirty();
                     refreshEditorPreview();
                     return;
                 }
@@ -3999,6 +4484,7 @@
                     renderCmsProofEditorList(proofs);
                     setCmsActiveHomeArea('proof-' + Math.max(0, index - 1), { scroll:true });
                     syncCmsHomeRegionEditorToSource({ force:true });
+                    markSiteContentDirty();
                     refreshEditorPreview();
                     return;
                 }
@@ -4023,6 +4509,7 @@
                         field.value = url;
                         syncCmsHomeRegionEditorToSource({ force:true });
                         refreshCmsRegionThumbs();
+                        markSiteContentDirty();
                         refreshEditorPreview();
                     }
                     fileInput.value = '';
@@ -4054,7 +4541,7 @@
             const list = document.getElementById('cms-proof-editor-list');
             if (!list) return;
             list.innerHTML = (proofs || []).map((proof, index) => `
-                <article class="cms-proof-edit-card" data-cms-proof-card="1" data-cms-proof-index="${index}">
+                <article class="cms-proof-edit-card" data-cms-proof-card="1" data-cms-proof-index="${index}" data-cms-proof-id="${cmsEscape(proof.id || ('admin-proof-' + (index + 1)))}">
                     <div class="cms-proof-edit-head"><span>#${index + 1} 성과 카드</span><button type="button" data-cms-remove-proof="${index}">삭제</button></div>
                     <div class="editor-field full">
                         <label>이미지</label>
@@ -4088,6 +4575,7 @@
         }
         function getCmsProofEditorValues() {
             return Array.from(document.querySelectorAll('#cms-proof-editor-list [data-cms-proof-card]')).map(card => compactObject({
+                id: (card.getAttribute('data-cms-proof-id') || '').trim(),
                 src: (card.querySelector('[data-cms-proof-field="src"]')?.value || '').trim(),
                 title: (card.querySelector('[data-cms-proof-field="title"]')?.value || '').trim(),
                 desc: (card.querySelector('[data-cms-proof-field="desc"]')?.value || '').trim(),
@@ -4154,13 +4642,9 @@
             cmsEditorBindingsReady = true;
             const onChange = event => {
                 const target = event.target;
-                if (!target || target.id === 'edit-site-json-preview') return;
-                if (target.id === 'admin-site-content-json') {
-                    cmsPreviewMode = 'site-content';
-                    updateCmsPreviewToolbar();
-                    renderCmsPreview(getAdminSiteContentDraft());
-                    return;
-                }
+                if (!target) return;
+                if (target.closest && target.closest('#home-keyword-briefing-editor')) return;
+                markSiteContentDirty();
                 refreshEditorPreview();
                 if (target.matches && target.matches('[data-cms-image-input="1"]')) updateCmsImageThumb(target);
             };
@@ -4181,7 +4665,7 @@
         function installCmsSkinControls() {
             const panel = document.getElementById('editor-sub-design');
             if (!panel || document.getElementById('cms-skin-controls')) return;
-            panel.insertAdjacentHTML('afterbegin', '<div class="editor-card" id="cms-skin-controls" style="margin-bottom:16px;"><h4>스킨/음악 미리보기 편집</h4><p class="editor-help">JSON을 직접 만지지 않고 스킨을 고르거나 .md 스킨 파일을 불러와 배경, 골드 컬러, 음악 설정을 적용합니다.</p><input id="cms-skin-name" type="hidden"><div class="cms-skin-grid"><button type="button" class="cms-skin-option" data-cms-skin="beach" style="background-image:url(/images/hero-beach-bg-fast.jpg)">오션 프리미엄</button><button type="button" class="cms-skin-option" data-cms-skin="midnight" style="background:linear-gradient(135deg,#06131f,#1f2638)">미드나잇 골드</button><button type="button" class="cms-skin-option" data-cms-skin="studio" style="background:linear-gradient(135deg,#14100b,#3b2b12)">스튜디오 럭스</button><button type="button" class="cms-skin-option" data-cms-skin="clean" style="background:linear-gradient(135deg,#eef3f6,#c9d6df);color:#111;box-shadow:none;">클린 라이트</button></div><div class="editor-field-grid"><div class="editor-field full"><label>.md 스킨 불러오기/편집</label><textarea id="cms-skin-md" spellcheck="false" placeholder="skin: ocean-premium&#10;pricingBgImage: /images/hero-beach-bg-fast.jpg&#10;gold: #FFD700&#10;musicTitle: 배경음악&#10;musicVideoId: f4jS6yW83MU"></textarea><div style="margin-top:8px;"><button class="cms-small-action" type="button" id="cms-skin-md-upload">.md 스킨 파일 선택</button><input id="cms-skin-md-file" type="file" accept=".md,text/markdown,text/plain" hidden></div></div><div class="editor-field"><label>음악 제목</label><input id="cms-music-title" type="text" placeholder="배경음악"></div><div class="editor-field"><label>YouTube 영상 ID</label><input id="cms-music-video-id" type="text" placeholder="f4jS6yW83MU"></div><div class="editor-field"><label>YouTube 플레이리스트 ID</label><input id="cms-music-playlist-id" type="text" placeholder="RDf4jS6yW83MU"></div><div class="editor-field"><label>시작 초</label><input id="cms-music-start-sec" type="number" min="0" step="1" placeholder="16"></div><div class="editor-field full"><label>직접 음악 파일/URL</label><input id="cms-music-audio-url" type="text" placeholder="오디오 URL 또는 파일 선택 데이터"><div class="cms-media-tools"><div class="cms-thumb" id="cms-audio-preview">AUDIO</div><button type="button" id="cms-audio-file-button">음악 파일 선택</button><input id="cms-audio-file-input" type="file" accept="audio/*" hidden></div></div></div></div>');
+            panel.insertAdjacentHTML('afterbegin', '<div class="editor-card" id="cms-skin-controls" style="margin-bottom:16px;"><h4>스킨/음악 미리보기 편집</h4><p class="editor-help">코드 형식 대신 스킨 버튼을 고르거나 .md 스킨 파일을 불러와 배경, 골드 컬러, 음악 설정을 적용합니다.</p><input id="cms-skin-name" type="hidden"><div class="cms-skin-grid"><button type="button" class="cms-skin-option" data-cms-skin="beach" style="background-image:url(/images/hero-beach-bg-fast.jpg)">오션 프리미엄</button><button type="button" class="cms-skin-option" data-cms-skin="midnight" style="background:linear-gradient(135deg,#06131f,#1f2638)">미드나잇 골드</button><button type="button" class="cms-skin-option" data-cms-skin="studio" style="background:linear-gradient(135deg,#14100b,#3b2b12)">스튜디오 럭스</button><button type="button" class="cms-skin-option" data-cms-skin="clean" style="background:linear-gradient(135deg,#eef3f6,#c9d6df);color:#111;box-shadow:none;">클린 라이트</button></div><div class="editor-field-grid"><div class="editor-field full"><label>.md 스킨 불러오기/편집</label><textarea id="cms-skin-md" spellcheck="false" placeholder="skin: ocean-premium&#10;pricingBgImage: /images/hero-beach-bg-fast.jpg&#10;gold: #FFD700&#10;musicTitle: 배경음악&#10;musicVideoId: f4jS6yW83MU"></textarea><div style="margin-top:8px;"><button class="cms-small-action" type="button" id="cms-skin-md-upload">.md 스킨 파일 선택</button><input id="cms-skin-md-file" type="file" accept=".md,text/markdown,text/plain" hidden></div></div><div class="editor-field"><label>음악 제목</label><input id="cms-music-title" type="text" placeholder="배경음악"></div><div class="editor-field"><label>YouTube 영상 ID</label><input id="cms-music-video-id" type="text" placeholder="f4jS6yW83MU"></div><div class="editor-field"><label>YouTube 플레이리스트 ID</label><input id="cms-music-playlist-id" type="text" placeholder="RDf4jS6yW83MU"></div><div class="editor-field"><label>시작 초</label><input id="cms-music-start-sec" type="number" min="0" step="1" placeholder="16"></div><div class="editor-field full"><label>직접 음악 파일/URL</label><input id="cms-music-audio-url" type="text" placeholder="오디오 URL 또는 파일 선택 데이터"><div class="cms-media-tools"><div class="cms-thumb" id="cms-audio-preview">AUDIO</div><button type="button" id="cms-audio-file-button">음악 파일 선택</button><input id="cms-audio-file-input" type="file" accept="audio/*" hidden></div></div></div></div>');
             panel.querySelectorAll('[data-cms-skin]').forEach(button => button.addEventListener('click', () => applyCmsSkinPreset(button.getAttribute('data-cms-skin'))));
             const mdButton = document.getElementById('cms-skin-md-upload');
             const mdFile = document.getElementById('cms-skin-md-file');
@@ -4207,6 +4691,7 @@
                         setValue('cms-music-audio-url', String(reader.result || ''));
                         const preview = document.getElementById('cms-audio-preview');
                         if (preview) preview.innerHTML = '<audio controls src="' + cmsEscape(String(reader.result || '')) + '" style="width:100%;height:42px;"></audio>';
+                        markSiteContentDirty();
                         refreshEditorPreview();
                     };
                     reader.readAsDataURL(file);
@@ -4224,6 +4709,7 @@
             setValue('cms-skin-md', 'skin: ' + preset.label + '\npricingBgImage: ' + preset.bg + '\nproductsBgImage: ' + preset.bg + '\ndownloadBgImage: ' + preset.bg + '\ngold: ' + preset.gold);
             document.querySelectorAll('[data-cms-skin]').forEach(button => button.classList.toggle('active', button.getAttribute('data-cms-skin') === name));
             installCmsImagePickers();
+            markSiteContentDirty();
             refreshEditorPreview();
         }
         function applyCmsSkinMarkdown(text) {
@@ -4240,6 +4726,7 @@
             if (pairs.musicvideoid) setValue('cms-music-video-id', pairs.musicvideoid);
             if (pairs.musicplaylistid) setValue('cms-music-playlist-id', pairs.musicplaylistid);
             if (pairs.musicstartsec) setValue('cms-music-start-sec', pairs.musicstartsec);
+            markSiteContentDirty();
             refreshEditorPreview();
         }
         function installCmsImagePickers() {
@@ -4249,24 +4736,6 @@
                 if (!/(bg-image$|-image$|-media-src$|-preview-\d+-src$|-workflow-\d+-src$)/.test(id)) return;
                 enhanceCmsImageInput(input);
             });
-            const proofArea = document.getElementById('edit-hero-proofs');
-            if (proofArea && proofArea.dataset.proofPicker !== '1') {
-                proofArea.dataset.proofPicker = '1';
-                const wrap = document.createElement('div');
-                wrap.className = 'cms-media-tools';
-                wrap.innerHTML = '<div class="cms-thumb">성과 이미지</div><button type="button">성과 이미지 추가</button><input type="file" accept="image/*" multiple hidden>';
-                proofArea.insertAdjacentElement('afterend', wrap);
-                const button = wrap.querySelector('button');
-                const fileInput = wrap.querySelector('input');
-                button.addEventListener('click', () => fileInput.click());
-                fileInput.addEventListener('change', async () => {
-                    const files = Array.from(fileInput.files || []);
-                    const lines = await Promise.all(files.map(file => readFileAsDataUrl(file).then(url => url + ' | ' + file.name + ' | 직접 선택한 성과 이미지 | - | ' + file.name)));
-                    proofArea.value = [proofArea.value.trim(), ...lines].filter(Boolean).join('\n');
-                    proofArea.dispatchEvent(new Event('input', { bubbles:true }));
-                    fileInput.value = '';
-                });
-            }
             document.querySelectorAll('[data-cms-image-input="1"]').forEach(input => updateCmsImageThumb(input));
         }
         function enhanceCmsImageInput(input) {
@@ -4310,22 +4779,8 @@
             thumb.innerHTML = src ? '<img src="' + cmsEscape(src) + '" alt="미리보기">' : '이미지 없음';
         }
         function getAdminSiteContentDraft(fallback = {}) {
-            const textarea = document.getElementById('admin-site-content-json');
-            const raw = textarea ? textarea.value.trim() : '';
-            if (!raw) return fallback || {};
-            try {
-                return JSON.parse(raw);
-            } catch {
-                return {
-                    hero: {
-                        title: 'JSON 형식을 확인해주세요',
-                        desc: '사이트 콘텐츠 관리 JSON에 쉼표, 따옴표, 중괄호 오류가 있습니다.'
-                    },
-                    products: {},
-                    pricing: { plans: {} },
-                    downloads: {}
-                };
-            }
+            const source = fallback && Object.keys(fallback).length ? fallback : loadedSiteContentBase;
+            return deepClone(source || {});
         }
         function renderCmsPreview(rawContent) {
             const target = document.getElementById('cms-live-preview');
@@ -4359,7 +4814,7 @@
                 const products = Object.values(draft.products || {}).slice(0, 4);
                 const pricingPlans = Object.values(draft.pricing?.plans || {}).slice(0, 3);
                 const downloads = EDITOR_PRODUCT_DEFS.map(def => draft.downloads?.[def.id] || null).filter(Boolean).slice(0, 3);
-                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">SITE CONTENT</span><h3 class="cms-preview-title">' + cmsEscape(hero.title || '사이트 콘텐츠 미리보기') + '</h3><p class="cms-preview-desc">' + cmsEscape(hero.desc || 'JSON을 수정하면 제품, 요금제, 다운로드 초안이 이 영역에 바로 표시됩니다.') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' +
+                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">SITE CONTENT</span><h3 class="cms-preview-title">' + cmsEscape(hero.title || '사이트 콘텐츠 미리보기') + '</h3><p class="cms-preview-desc">' + cmsEscape(hero.desc || '영역 버튼을 눌러 수정하면 제품, 요금제, 다운로드 초안이 이 영역에 바로 표시됩니다.') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' +
                     products.map(product => '<article class="cms-preview-card">' + (cmsSafeImage(product.media?.src) ? '<img src="' + cmsEscape(product.media.src) + '" alt="">' : '') + '<h4>' + cmsEscape(product.name || product.headline || '제품') + '</h4><p>' + cmsEscape(product.desc || product.subtitle || product.href || '') + '</p></article>').join('') +
                     pricingPlans.map(plan => '<article class="cms-preview-card"><h4>' + cmsEscape(plan.name || '요금제') + '</h4><p>' + cmsEscape(plan.desc || plan.period || '') + '</p></article>').join('') +
                     downloads.map(item => '<article class="cms-preview-card">' + (cmsSafeImage(item.image) ? '<img src="' + cmsEscape(item.image) + '" alt="">' : '') + '<h4>' + cmsEscape(item.name || '다운로드') + '</h4><p>' + cmsEscape(item.version || '') + '</p></article>').join('') +
@@ -4425,12 +4880,58 @@
         // CMS_WORKBENCH_V1_END
 
 
-        function switchEditorSubtab(name) {
-            cmsPreviewMode = ['home', 'pricing', 'products', 'downloads', 'design', 'site-content'].includes(name) ? name : 'home';
-            document.querySelectorAll('.editor-subtab').forEach(btn => btn.classList.toggle('active', btn.dataset.editorSubtab === name));
-            document.querySelectorAll('.editor-subpanel').forEach(panel => panel.classList.toggle('active', panel.id === `editor-sub-${name}`));
+        function switchEditorSubtab(name, focusPanel = false) {
+            const activeName = ['home', 'pricing', 'products', 'downloads', 'design', 'site-content'].includes(name) ? name : 'home';
+            cmsPreviewMode = activeName;
+            document.querySelectorAll('.editor-subtab').forEach(btn => {
+                const isActive = btn.dataset.editorSubtab === activeName;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                btn.tabIndex = isActive ? 0 : -1;
+            });
+            document.querySelectorAll('[data-content-editor-target]').forEach(button => {
+                if (button.dataset.contentEditorTarget === activeName) button.setAttribute('aria-current', 'page');
+                else button.removeAttribute('aria-current');
+            });
+            let activePanel = null;
+            document.querySelectorAll('.editor-subpanel').forEach(panel => {
+                const isActive = panel.id === `editor-sub-${activeName}`;
+                panel.classList.toggle('active', isActive);
+                panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+                if (isActive) activePanel = panel;
+            });
             updateCmsPreviewToolbar();
             refreshEditorPreview();
+            if (focusPanel && activePanel) {
+                requestAnimationFrame(() => {
+                    const heading = activePanel.querySelector('h4, h3, h2');
+                    if (!heading) return;
+                    heading.setAttribute('tabindex', '-1');
+                    heading.focus({ preventScroll: true });
+                    activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+        }
+
+        function installEditorSubtabKeyboard() {
+            const tablist = document.querySelector('.editor-subtabs[role="tablist"]');
+            if (!tablist || tablist.dataset.keyboardReady === '1') return;
+            tablist.dataset.keyboardReady = '1';
+            tablist.addEventListener('keydown', event => {
+                if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+                const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+                const currentIndex = tabs.indexOf(event.target.closest?.('[role="tab"]'));
+                if (currentIndex < 0 || tabs.length === 0) return;
+                event.preventDefault();
+                let nextIndex = currentIndex;
+                if (event.key === 'Home') nextIndex = 0;
+                else if (event.key === 'End') nextIndex = tabs.length - 1;
+                else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                else nextIndex = (currentIndex + 1) % tabs.length;
+                const nextTab = tabs[nextIndex];
+                switchEditorSubtab(nextTab.dataset.editorSubtab);
+                nextTab.focus();
+            });
         }
 
         function openKeywordBriefingEditor() {
@@ -4448,6 +4949,8 @@
             revision: 0,
             publishedAt: '',
             sourceImages: [],
+            rows: [],
+            invalidCount: 0,
             dirty: false,
             persisted: false,
             saving: false,
@@ -4484,9 +4987,12 @@
         function syncKeywordBriefingPublishButton() {
             const button = document.getElementById('keyword-briefing-publish');
             const unchangedPersistedSnapshot = keywordBriefingEditorState.persisted && !keywordBriefingEditorState.dirty;
+            const hasInvalidRows = keywordBriefingEditorState.invalidCount > 0;
             if (button) {
-                button.disabled = unchangedPersistedSnapshot || keywordBriefingEditorState.saving;
-                button.title = unchangedPersistedSnapshot ? '저장된 브리핑에 변경 사항이 없습니다.' : '';
+                button.disabled = unchangedPersistedSnapshot || keywordBriefingEditorState.saving || hasInvalidRows;
+                button.title = hasInvalidRows
+                    ? '검수 필요 행을 모두 수정하거나 삭제한 뒤 저장하세요.'
+                    : unchangedPersistedSnapshot ? '저장된 브리핑에 변경 사항이 없습니다.' : '';
             }
             const reloadButton = document.getElementById('keyword-briefing-reload');
             if (reloadButton) {
@@ -4495,21 +5001,145 @@
             }
         }
 
+        function keywordBriefingDraftRows(values = keywordBriefingEditorState.rows) {
+            return keywordBriefingTools().prepareKeywordDraftRows(values);
+        }
+
+        function setKeywordBriefingRows(values) {
+            const rows = keywordBriefingDraftRows(values);
+            keywordBriefingEditorState = {
+                ...keywordBriefingEditorState,
+                rows,
+                invalidCount: rows.filter(row => row.issues.length > 0).length
+            };
+            renderKeywordBriefingTable();
+            renderKeywordBriefingPreview();
+            syncKeywordBriefingPublishButton();
+        }
+
+        function renderKeywordBriefingTable() {
+            const body = document.getElementById('keyword-briefing-table-body');
+            const count = document.getElementById('keyword-briefing-row-count');
+            const rows = keywordBriefingEditorState.rows || [];
+            if (count) {
+                count.textContent = rows.length + '개 행' + (keywordBriefingEditorState.invalidCount ? ' · 검수 필요 ' + keywordBriefingEditorState.invalidCount + '개' : ' · 검수 완료');
+                count.style.color = keywordBriefingEditorState.invalidCount ? '#ff9eaa' : 'var(--accent-green)';
+            }
+            if (!body) return;
+            if (!rows.length) {
+                body.innerHTML = '<tr><td colspan="6" style="padding:28px;text-align:center;color:var(--text-secondary);">키워드 행이 없습니다. 행 추가 또는 이미지 분석을 눌러 시작하세요.</td></tr>';
+                return;
+            }
+            body.innerHTML = rows.map((row, index) => {
+                const issues = Array.isArray(row.issues) ? row.issues : [];
+                const opportunity = row.opportunity !== null && row.opportunity !== '' && Number.isFinite(Number(row.opportunity))
+                    ? Number(row.opportunity).toLocaleString('ko-KR')
+                    : '—';
+                const issueId = 'keyword-row-issue-' + index;
+                const invalidAttributes = issues.length ? ' aria-invalid="true" aria-describedby="' + issueId + '"' : ' aria-invalid="false"';
+                return '<tr data-keyword-row-index="' + index + '" class="' + (issues.length ? 'needs-review' : '') + '">' +
+                    '<td><strong>' + (index + 1) + '</strong></td>' +
+                    '<td><input type="text" maxlength="120" data-keyword-field="keyword" value="' + cmsEscape(row.keyword) + '" aria-label="' + (index + 1) + '행 키워드"' + invalidAttributes + '></td>' +
+                    '<td><input type="text" inputmode="numeric" data-keyword-field="searchVolume" value="' + cmsEscape(row.searchVolume) + '" aria-label="' + (index + 1) + '행 검색량"' + invalidAttributes + '></td>' +
+                    '<td><input type="text" inputmode="numeric" data-keyword-field="documentCount" value="' + cmsEscape(row.documentCount) + '" aria-label="' + (index + 1) + '행 블로그 문서수"' + invalidAttributes + '></td>' +
+                    '<td><span class="keyword-opportunity-value" data-keyword-opportunity>' + opportunity + '</span><small class="keyword-row-issue" id="' + issueId + '" role="alert" data-keyword-row-issue' + (issues.length ? '' : ' hidden') + '>' + cmsEscape(issues.join(' ')) + '</small></td>' +
+                    '<td><div class="keyword-row-actions">' +
+                        '<button type="button" data-keyword-action="up" aria-label="' + (index + 1) + '행 위로"' + (index === 0 ? ' disabled' : '') + '>↑</button>' +
+                        '<button type="button" data-keyword-action="down" aria-label="' + (index + 1) + '행 아래로"' + (index === rows.length - 1 ? ' disabled' : '') + '>↓</button>' +
+                        '<button type="button" data-keyword-action="delete" aria-label="' + (index + 1) + '행 삭제">삭제</button>' +
+                    '</div></td></tr>';
+            }).join('');
+        }
+
         function renderKeywordBriefingPreview() {
             const target = document.getElementById('keyword-briefing-preview');
-            const textarea = document.getElementById('keyword-briefing-rows');
-            if (!target || !textarea) return;
-            const rows = keywordBriefingTools().parseKeywordTableText(textarea.value);
+            if (!target) return;
+            const prepared = keywordBriefingTools().collectPublishableKeywordRows(keywordBriefingEditorState.rows);
+            const rows = prepared.rows;
             if (!rows.length) {
                 target.innerHTML = '<div style="padding:18px;border:1px dashed var(--border);border-radius:12px;color:var(--text-secondary);text-align:center;">분석된 키워드가 없습니다.</div>';
                 return;
             }
             const sorted = rows.slice().sort((a, b) => b.opportunity - a.opportunity).slice(0, 10);
             const max = Math.max(1, ...sorted.map(row => row.opportunity));
-            target.innerHTML = '<div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px;"><strong>홈 차트 미리보기</strong><span style="font-size:.78rem;color:var(--text-secondary);">' + rows.length + '개 · 저장 전 초안</span></div><div style="display:grid;gap:7px;">' + sorted.map((row, index) => {
+            target.innerHTML = '<div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px;font-size:16px;"><strong>홈 차트 미리보기</strong><span style="font-size:16px;color:var(--text-secondary);">' + rows.length + '개 · 저장 전 초안</span></div><div style="display:grid;gap:7px;">' + sorted.map((row, index) => {
                 const width = Math.max(3, Math.round((row.opportunity / max) * 100));
-                return '<div style="display:grid;grid-template-columns:minmax(130px,1.5fr) minmax(120px,2fr) 72px;gap:10px;align-items:center;font-size:.8rem;"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + (index + 1) + '. ' + cmsEscape(row.keyword) + '</span><span style="height:9px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;"><i style="display:block;width:' + width + '%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#c9a84c,#44d7b6);"></i></span><strong style="text-align:right;color:#44d7b6;">' + row.opportunity.toLocaleString('ko-KR') + '</strong></div>';
+                return '<div class="keyword-chart-row"><span class="keyword-chart-label">' + (index + 1) + '. ' + cmsEscape(row.keyword) + '</span><span class="keyword-chart-bar"><i style="display:block;width:' + width + '%;height:100%;border-radius:inherit;background:linear-gradient(90deg,#c9a84c,#44d7b6);"></i></span><strong class="keyword-chart-value">' + row.opportunity.toLocaleString('ko-KR') + '</strong></div>';
             }).join('') + '</div>';
+        }
+
+        function addKeywordBriefingRow() {
+            const rows = keywordBriefingEditorState.rows || [];
+            if (rows.length >= 240) {
+                keywordBriefingStatus('키워드는 최대 240개까지 저장할 수 있습니다.', 'error');
+                return;
+            }
+            setKeywordBriefingRows(rows.concat({
+                id: 'manual-' + Date.now() + '-' + rows.length,
+                keyword: '',
+                searchVolume: '',
+                documentCount: ''
+            }));
+            markKeywordBriefingDirty();
+            requestAnimationFrame(() => document.querySelector('#keyword-briefing-table-body tr:last-child input[data-keyword-field="keyword"]')?.focus());
+        }
+
+        function removeKeywordBriefingRow(index) {
+            const rows = keywordBriefingEditorState.rows || [];
+            if (!Number.isInteger(index) || index < 0 || index >= rows.length) return;
+            setKeywordBriefingRows(rows.filter((_, rowIndex) => rowIndex !== index));
+            markKeywordBriefingDirty();
+        }
+
+        function moveKeywordBriefingRow(index, direction) {
+            const rows = (keywordBriefingEditorState.rows || []).slice();
+            const targetIndex = index + direction;
+            if (!Number.isInteger(index) || targetIndex < 0 || targetIndex >= rows.length) return;
+            const next = rows.map(row => ({ ...row }));
+            [next[index], next[targetIndex]] = [next[targetIndex], next[index]];
+            setKeywordBriefingRows(next);
+            markKeywordBriefingDirty();
+        }
+
+        function updateKeywordBriefingRow(index, field, value) {
+            const rows = keywordBriefingEditorState.rows || [];
+            if (!Number.isInteger(index) || index < 0 || index >= rows.length || !['keyword', 'searchVolume', 'documentCount'].includes(field)) return;
+            const next = rows.map((row, rowIndex) => rowIndex === index ? { ...row, [field]: value } : row);
+            const prepared = keywordBriefingDraftRows(next);
+            keywordBriefingEditorState = {
+                ...keywordBriefingEditorState,
+                rows: prepared,
+                invalidCount: prepared.filter(row => row.issues.length > 0).length
+            };
+            const row = prepared[index];
+            const node = document.querySelector('[data-keyword-row-index="' + index + '"]');
+            if (node) {
+                node.classList.toggle('needs-review', row.issues.length > 0);
+                const issueId = 'keyword-row-issue-' + index;
+                node.querySelectorAll('[data-keyword-field]').forEach(input => {
+                    input.setAttribute('aria-invalid', row.issues.length ? 'true' : 'false');
+                    if (row.issues.length) input.setAttribute('aria-describedby', issueId);
+                    else input.removeAttribute('aria-describedby');
+                });
+                const opportunity = node.querySelector('[data-keyword-opportunity]');
+                if (opportunity) opportunity.textContent = row.opportunity !== null && row.opportunity !== '' && Number.isFinite(Number(row.opportunity))
+                    ? Number(row.opportunity).toLocaleString('ko-KR')
+                    : '—';
+                const issue = node.querySelector('[data-keyword-row-issue]');
+                if (issue) {
+                    issue.textContent = row.issues.join(' ');
+                    issue.hidden = row.issues.length === 0;
+                }
+            }
+            markKeywordBriefingDirty();
+            renderKeywordBriefingTableCountOnly();
+        }
+
+        function renderKeywordBriefingTableCountOnly() {
+            const count = document.getElementById('keyword-briefing-row-count');
+            if (!count) return;
+            count.textContent = keywordBriefingEditorState.rows.length + '개 행' + (keywordBriefingEditorState.invalidCount ? ' · 검수 필요 ' + keywordBriefingEditorState.invalidCount + '개' : ' · 검수 완료');
+            count.style.color = keywordBriefingEditorState.invalidCount ? '#ff9eaa' : 'var(--accent-green)';
         }
 
         function setKeywordBriefingEditor(briefing, options = {}) {
@@ -4521,11 +5151,13 @@
             const tools = keywordBriefingTools();
             setValue('keyword-briefing-title', briefing.title || '부방장 황금키워드 브리핑');
             setValue('keyword-briefing-author', briefing.author || '부방장');
-            setValue('keyword-briefing-rows', tools.rowsToTsv(briefing.rows));
+            const rows = tools.prepareKeywordDraftRows(briefing.rows);
             keywordBriefingEditorState = {
                 revision: options.fromSeed ? 0 : Math.max(1, Number(briefing.revision) || 1),
                 publishedAt: briefing.publishedAt || '',
                 sourceImages: Array.isArray(briefing.sourceImages) ? briefing.sourceImages.slice(0, 12) : [],
+                rows,
+                invalidCount: rows.filter(row => row.issues.length > 0).length,
                 dirty: false,
                 persisted: !options.fromSeed,
                 saving: false,
@@ -4535,6 +5167,7 @@
             };
             setKeywordBriefingRevision(keywordBriefingEditorState.revision);
             keywordBriefingStatus(options.fromSeed ? '현재 정적 브리핑을 불러왔습니다. 저장하면 운영 콘텐츠로 고정됩니다.' : '저장된 브리핑을 불러왔습니다.', 'success');
+            renderKeywordBriefingTable();
             renderKeywordBriefingPreview();
             syncKeywordBriefingPublishButton();
         }
@@ -4603,15 +5236,21 @@
         }
 
         function collectKeywordBriefing() {
-            const rows = keywordBriefingTools().parseKeywordTableText(getValue('keyword-briefing-rows'));
-            if (!rows.length) return undefined;
+            const prepared = keywordBriefingTools().collectPublishableKeywordRows(keywordBriefingEditorState.rows);
+            keywordBriefingEditorState.invalidCount = prepared.invalidCount;
+            if (prepared.invalidCount > 0) {
+                keywordBriefingStatus('검수 필요 행을 모두 수정하거나 삭제한 뒤 저장하세요.', 'error');
+                syncKeywordBriefingPublishButton();
+                return undefined;
+            }
+            if (!prepared.rows.length) return undefined;
             return {
                 title: getValue('keyword-briefing-title') || '부방장 황금키워드 브리핑',
                 author: getValue('keyword-briefing-author') || '부방장',
                 formulaVersion: 'search-volume-divided-by-documents-plus-one-v1',
                 source: 'admin-image-ocr-reviewed',
                 sourceImages: keywordBriefingEditorState.sourceImages.slice(0, 12),
-                rows
+                rows: prepared.rows
             };
         }
 
@@ -4650,7 +5289,9 @@
             }
             const briefing = collectKeywordBriefing();
             if (!briefing) {
-                keywordBriefingStatus('저장할 키워드 표가 없습니다.', 'error');
+                keywordBriefingStatus(keywordBriefingEditorState.invalidCount > 0
+                    ? '검수 필요 행을 모두 수정하거나 삭제한 뒤 저장하세요.'
+                    : '저장할 키워드 표가 없습니다.', 'error');
                 return false;
             }
             const session = lewordApiAdminSession || readLewordAdminSession();
@@ -4792,9 +5433,9 @@
                     sourceImages.push(metadata);
                 }
                 const merged = keywordBriefingTools().mergeKeywordRowGroups(rowGroups);
-                if (!merged.length) throw new Error('표 행을 찾지 못했습니다. 이미지가 선명한지 확인하거나 표를 직접 붙여넣으세요.');
+                if (!merged.length) throw new Error('표 행을 찾지 못했습니다. 이미지가 선명한지 확인하거나 키워드 행을 직접 추가하세요.');
                 keywordBriefingEditorState.sourceImages = sourceImages;
-                setValue('keyword-briefing-rows', keywordBriefingTools().rowsToTsv(merged));
+                setKeywordBriefingRows(merged);
                 markKeywordBriefingDirty();
                 keywordBriefingStatus(merged.length + '개 키워드를 추출했습니다. 표를 검수한 뒤 저장하세요.', 'success');
             } catch (error) {
@@ -4806,13 +5447,17 @@
         }
 
         function validateKeywordBriefingRows() {
-            const rows = keywordBriefingTools().parseKeywordTableText(getValue('keyword-briefing-rows'));
+            const rows = keywordBriefingDraftRows();
             if (!rows.length) {
                 keywordBriefingStatus('검증할 표가 없습니다.', 'error');
                 return;
             }
-            setValue('keyword-briefing-rows', keywordBriefingTools().rowsToTsv(rows));
+            setKeywordBriefingRows(rows);
             markKeywordBriefingDirty();
+            if (keywordBriefingEditorState.invalidCount > 0) {
+                keywordBriefingStatus('검수 필요 행 ' + keywordBriefingEditorState.invalidCount + '개가 있습니다. 붉게 표시된 셀을 수정하세요.', 'error');
+                return;
+            }
             keywordBriefingStatus(rows.length + '개 행의 숫자와 기회지수를 다시 검증했습니다.', 'success');
         }
 
@@ -4820,11 +5465,36 @@
             const root = document.getElementById('home-keyword-briefing-editor');
             if (!root || root.dataset.ready === '1') return;
             root.dataset.ready = '1';
-            ['keyword-briefing-title', 'keyword-briefing-author', 'keyword-briefing-rows'].forEach(id => {
+            ['keyword-briefing-title', 'keyword-briefing-author'].forEach(id => {
                 document.getElementById(id)?.addEventListener('input', markKeywordBriefingDirty);
             });
             document.getElementById('keyword-briefing-analyze')?.addEventListener('click', analyzeKeywordBriefingImages);
             document.getElementById('keyword-briefing-validate')?.addEventListener('click', validateKeywordBriefingRows);
+            document.getElementById('keyword-briefing-add-row')?.addEventListener('click', addKeywordBriefingRow);
+            document.getElementById('keyword-briefing-sort')?.addEventListener('click', () => {
+                const rows = (keywordBriefingEditorState.rows || []).slice().sort((left, right) => {
+                    const leftValue = left.opportunity !== null && left.opportunity !== '' && Number.isFinite(Number(left.opportunity)) ? Number(left.opportunity) : -1;
+                    const rightValue = right.opportunity !== null && right.opportunity !== '' && Number.isFinite(Number(right.opportunity)) ? Number(right.opportunity) : -1;
+                    return rightValue - leftValue;
+                });
+                setKeywordBriefingRows(rows);
+                markKeywordBriefingDirty();
+            });
+            document.getElementById('keyword-briefing-table-body')?.addEventListener('input', event => {
+                const input = event.target?.closest?.('[data-keyword-field]');
+                const row = input?.closest?.('[data-keyword-row-index]');
+                if (!input || !row) return;
+                updateKeywordBriefingRow(Number(row.dataset.keywordRowIndex), input.dataset.keywordField, input.value);
+            });
+            document.getElementById('keyword-briefing-table-body')?.addEventListener('click', event => {
+                const button = event.target?.closest?.('[data-keyword-action]');
+                const row = button?.closest?.('[data-keyword-row-index]');
+                if (!button || !row) return;
+                const index = Number(row.dataset.keywordRowIndex);
+                if (button.dataset.keywordAction === 'delete') removeKeywordBriefingRow(index);
+                if (button.dataset.keywordAction === 'up') moveKeywordBriefingRow(index, -1);
+                if (button.dataset.keywordAction === 'down') moveKeywordBriefingRow(index, 1);
+            });
             document.getElementById('keyword-briefing-api-connect')?.addEventListener('click', connectKeywordBriefingApi);
             document.getElementById('keyword-briefing-reload')?.addEventListener('click', async () => {
                 if (keywordBriefingEditorState.saving) {
@@ -4837,6 +5507,7 @@
                 await loadKeywordBriefingFromApi({ force: true });
             });
             document.getElementById('keyword-briefing-publish')?.addEventListener('click', publishKeywordBriefing);
+            renderKeywordBriefingTable();
             syncKeywordBriefingPublishButton();
         }
 
@@ -4846,9 +5517,11 @@
             installCmsSkinControls();
             installCmsHomeRegionEditor();
             installCmsImagePickers();
+            installStructuredRowEditors();
             installEditorLiveBindings();
             installKeywordBriefingEditor();
-            const data = withEditorDefaults(content || {});
+            loadedSiteContentBase = normalizeEditorContent(content || {});
+            const data = withEditorDefaults(loadedSiteContentBase);
             const hero = data.hero || {};
             const pricingPage = data.pricing?.page || {};
             const plans = data.pricing?.plans || {};
@@ -4878,8 +5551,8 @@
             setValue('pricing-payment-help', pricingPage.paymentEmailHelp);
             setValue('pricing-payment-note', pricingPage.paymentNote);
 
-            EDITOR_PLAN_DEFS.forEach(({ id }) => {
-                const plan = plans[id] || {};
+            EDITOR_PLAN_DEFS.forEach(({ id, legacyId }) => {
+                const plan = plans[id] || (legacyId ? plans[legacyId] : undefined) || {};
                 setValue(`plan-${id}-name`, plan.name);
                 setValue(`plan-${id}-desc`, plan.desc);
                 setValue(`plan-${id}-badge`, plan.badgeText);
@@ -4890,7 +5563,10 @@
                 setValue(`plan-${id}-future-card`, plan.futureAmountCard);
                 setValue(`plan-${id}-monthly`, plan.monthly);
                 setValue(`plan-${id}-event`, plan.eventLabel);
-                setValue(`plan-${id}-features`, arrayToLines(plan.features));
+                setStructuredEditorRows(
+                    `planFeatures:${id}`,
+                    (Array.isArray(plan.features) ? plan.features : []).map(feature => [feature])
+                );
             });
 
             setValue('products-page-hero-kicker', productsPage.heroKicker);
@@ -4899,15 +5575,19 @@
             setValue('products-page-hero-desc', productsPage.heroDesc);
             setValue('products-page-secondary-cta', productsPage.secondaryCta);
             setValue('products-page-final-secondary-cta', productsPage.finalSecondaryCta);
-            setValue('products-page-guide-copy', copyBlockToText(productsPage.guideKicker, productsPage.guideTitle, productsPage.guideDesc));
-            setValue('products-page-lineup-copy', copyBlockToText(productsPage.lineupKicker, productsPage.lineupTitle, productsPage.lineupDesc));
-            setValue('products-page-fit-copy', copyBlockToText(productsPage.fitKicker, productsPage.fitTitle, productsPage.fitDesc));
-            setValue('products-page-suite-copy', copyBlockToText(productsPage.suiteKicker, productsPage.suiteTitle, productsPage.suiteDesc));
-            setValue('products-page-compare-copy', copyBlockToText(productsPage.compareKicker, productsPage.compareTitle, productsPage.compareDesc));
-            setValue('products-page-final-copy', copyBlockToText(productsPage.finalKicker, productsPage.finalTitle, `${productsPage.finalDesc || ''}\n${productsPage.finalNote || ''}\n${productsPage.finalPrimaryCta || ''}`));
-            setValue('products-page-guide-cards', rowsToText(productsPage.guideCards));
-            setValue('products-page-suite-flow', rowsToText(productsPage.suiteFlow));
-            setValue('products-page-comparison', rowsToText(productsPage.comparison));
+            ['guide', 'lineup', 'fit', 'suite', 'compare'].forEach(prefix => {
+                setValue(`products-page-${prefix}-kicker`, productsPage[`${prefix}Kicker`]);
+                setValue(`products-page-${prefix}-title`, productsPage[`${prefix}Title`]);
+                setValue(`products-page-${prefix}-desc`, productsPage[`${prefix}Desc`]);
+            });
+            setValue('products-page-final-kicker', productsPage.finalKicker);
+            setValue('products-page-final-title', productsPage.finalTitle);
+            setValue('products-page-final-desc', productsPage.finalDesc);
+            setValue('products-page-final-note', productsPage.finalNote);
+            setValue('products-page-final-primary-cta', productsPage.finalPrimaryCta);
+            setStructuredEditorRows('guideCards', productsPage.guideCards);
+            setStructuredEditorRows('suiteFlow', productsPage.suiteFlow);
+            setStructuredEditorRows('comparison', productsPage.comparison);
             setValue('products-page-preview-1-src', productsPage.images?.preview1?.src);
             setValue('products-page-preview-2-src', productsPage.images?.preview2?.src);
             setValue('products-page-workflow-1-src', productsPage.images?.workflow1?.src);
@@ -4925,9 +5605,15 @@
                 setValue(`product-${id}-media-type`, product.media?.type || 'image');
                 setValue(`product-${id}-media-src`, product.media?.src);
                 setValue(`product-${id}-media-alt`, product.media?.alt);
-                setValue(`product-${id}-metrics`, metricsToText(product.metrics));
-                setValue(`product-${id}-bullets`, arrayToLines(product.bullets));
-                setValue(`product-${id}-fit`, arrayToLines(product.fit));
+                setStructuredEditorRows(`productMetrics:${id}`, Array.isArray(product.metrics) ? product.metrics : []);
+                setStructuredEditorRows(
+                    `productBullets:${id}`,
+                    (Array.isArray(product.bullets) ? product.bullets : []).map(bullet => [bullet])
+                );
+                setStructuredEditorRows(
+                    `productFit:${id}`,
+                    (Array.isArray(product.fit) ? product.fit : []).map(item => [item])
+                );
             });
 
             const downloadPage = downloads.page || {};
@@ -4960,30 +5646,62 @@
             setValue('cms-music-playlist-id', theme.music?.playlistId);
             setValue('cms-music-start-sec', theme.music?.startSec);
             setValue('cms-music-audio-url', theme.music?.audioUrl);
-            setValue('edit-products-json', JSON.stringify(products, null, 2));
-            setValue('admin-site-content-json', JSON.stringify(data, null, 2));
-            productsJsonTouched = false;
             enhanceEditorClearButtons(document);
             installCmsImagePickers();
             renderCmsHomeRegionEditor(data, { force:true });
+            renderAdminContentSummary(data);
             refreshEditorPreview(data);
+            loadedSiteContentProjection = deepClone(collectEditorPatch());
+            siteContentEditorState = {
+                ...siteContentEditorState,
+                loaded: true,
+                dirty: false
+            };
+            renderAdminContentSummary(data);
+            syncSiteContentEditorActions();
         }
 
-        async function loadEditorContent() {
+        async function loadEditorContent(options = {}) {
+            if (siteContentEditorState.saving || siteContentEditorState.loading) return false;
+            if (siteContentEditorState.dirty) {
+                if (!options.confirmDiscard) {
+                    showToast('⚠️ 저장하지 않은 수정 내용을 보호하고 있습니다. 저장하거나 불러오기 버튼을 누르세요.');
+                    return false;
+                }
+                if (!confirm('저장하지 않은 수정 내용을 버리고 서버 최신본을 불러올까요?')) return false;
+                siteContentEditorState = { ...siteContentEditorState, dirty: false };
+            }
+            if (siteContentEditorState.loaded && !options.force) return true;
+            const generation = siteContentEditorState.loadGeneration + 1;
+            const requestEditGeneration = siteContentEditorState.editGeneration;
+            siteContentEditorState = {
+                ...siteContentEditorState,
+                loading: true,
+                loadGeneration: generation
+            };
+            syncSiteContentEditorActions();
             try {
                 const res = await fetch(`${GAS_URL}?action=site-content&ts=${Date.now()}`, { cache: 'no-store' });
                 const json = await res.json();
                 if (json.ok || json.success) {
+                    if (generation !== siteContentEditorState.loadGeneration || requestEditGeneration !== siteContentEditorState.editGeneration) return false;
                     setEditorValues(json.content || {});
                     localStorage.setItem('lp_site_edits', JSON.stringify(json.content || {}));
                     showToast('✅ 서버 콘텐츠를 불러왔습니다.');
-                    return;
+                    return true;
                 }
                 throw new Error(json.error || json.message || '서버 콘텐츠를 불러오지 못했습니다.');
             } catch (err) {
+                if (generation !== siteContentEditorState.loadGeneration || requestEditGeneration !== siteContentEditorState.editGeneration) return false;
                 const fallback = JSON.parse(localStorage.getItem('lp_site_edits') || '{}');
                 setEditorValues(fallback);
                 showToast('⚠️ 서버 불러오기 실패, 이 브라우저 저장값을 표시합니다.');
+                return false;
+            } finally {
+                if (generation === siteContentEditorState.loadGeneration) {
+                    siteContentEditorState = { ...siteContentEditorState, loading: false };
+                    syncSiteContentEditorActions();
+                }
             }
         }
 
@@ -4996,9 +5714,13 @@
 
         function compactObject(obj) {
             Object.keys(obj).forEach(key => {
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+                    delete obj[key];
+                    return;
+                }
                 const value = obj[key];
                 if (value && typeof value === 'object' && !Array.isArray(value)) compactObject(value);
-                if (value === undefined || value === '') delete obj[key];
+                if (value === undefined) delete obj[key];
             });
             return obj;
         }
@@ -5017,50 +5739,45 @@
                     futureAmountCard: numberOrUndefined(`plan-${id}-future-card`),
                     monthly: getValue(`plan-${id}-monthly`),
                     eventLabel: getValue(`plan-${id}-event`),
-                    features: linesToArray(getValue(`plan-${id}-features`))
+                    features: readStructuredEditorRows(`planFeatures:${id}`)
+                        .map(row => String(row[0] || '').trim())
+                        .filter(Boolean)
                 };
             });
             return plans;
         }
 
         function collectProductsPage() {
-            const guide = textToCopyBlock(getValue('products-page-guide-copy'));
-            const lineup = textToCopyBlock(getValue('products-page-lineup-copy'));
-            const fit = textToCopyBlock(getValue('products-page-fit-copy'));
-            const suite = textToCopyBlock(getValue('products-page-suite-copy'));
-            const compare = textToCopyBlock(getValue('products-page-compare-copy'));
-            const finalBlock = textToCopyBlock(getValue('products-page-final-copy'));
-            const finalLines = String(finalBlock.desc || '').split(/\r?\n/);
             return {
                 heroKicker: getValue('products-page-hero-kicker'),
                 heroTitle: getValue('products-page-hero-title'),
                 heroDesc: getValue('products-page-hero-desc'),
                 primaryCta: getValue('products-page-primary-cta'),
                 secondaryCta: getValue('products-page-secondary-cta'),
-                guideKicker: guide.kicker,
-                guideTitle: guide.title,
-                guideDesc: guide.desc,
-                lineupKicker: lineup.kicker,
-                lineupTitle: lineup.title,
-                lineupDesc: lineup.desc,
-                fitKicker: fit.kicker,
-                fitTitle: fit.title,
-                fitDesc: fit.desc,
-                suiteKicker: suite.kicker,
-                suiteTitle: suite.title,
-                suiteDesc: suite.desc,
-                compareKicker: compare.kicker,
-                compareTitle: compare.title,
-                compareDesc: compare.desc,
-                finalKicker: finalBlock.kicker,
-                finalTitle: finalBlock.title,
-                finalDesc: (finalLines[0] || '').trim(),
-                finalNote: (finalLines[1] || '').trim(),
-                finalPrimaryCta: (finalLines[2] || '').trim(),
+                guideKicker: getValue('products-page-guide-kicker'),
+                guideTitle: getValue('products-page-guide-title'),
+                guideDesc: getValue('products-page-guide-desc'),
+                lineupKicker: getValue('products-page-lineup-kicker'),
+                lineupTitle: getValue('products-page-lineup-title'),
+                lineupDesc: getValue('products-page-lineup-desc'),
+                fitKicker: getValue('products-page-fit-kicker'),
+                fitTitle: getValue('products-page-fit-title'),
+                fitDesc: getValue('products-page-fit-desc'),
+                suiteKicker: getValue('products-page-suite-kicker'),
+                suiteTitle: getValue('products-page-suite-title'),
+                suiteDesc: getValue('products-page-suite-desc'),
+                compareKicker: getValue('products-page-compare-kicker'),
+                compareTitle: getValue('products-page-compare-title'),
+                compareDesc: getValue('products-page-compare-desc'),
+                finalKicker: getValue('products-page-final-kicker'),
+                finalTitle: getValue('products-page-final-title'),
+                finalDesc: getValue('products-page-final-desc'),
+                finalNote: getValue('products-page-final-note'),
+                finalPrimaryCta: getValue('products-page-final-primary-cta'),
                 finalSecondaryCta: getValue('products-page-final-secondary-cta'),
-                guideCards: textToRows(getValue('products-page-guide-cards'), 4).map(row => [row[0], row[1], row[2], row[3]]),
-                suiteFlow: textToRows(getValue('products-page-suite-flow'), 3).map(row => [row[0], row[1], row.slice(2).join(' | ')]),
-                comparison: textToRows(getValue('products-page-comparison'), 4).map(row => [row[0], row[1], row[2], row[3]]),
+                guideCards: readStructuredEditorRows('guideCards'),
+                suiteFlow: readStructuredEditorRows('suiteFlow'),
+                comparison: readStructuredEditorRows('comparison'),
                 images: {
                     preview1: { src: getValue('products-page-preview-1-src'), alt: 'LEWORD 황금키워드 화면', title: 'LEWORD 황금키워드 화면' },
                     preview2: { src: getValue('products-page-preview-2-src'), alt: 'Orbit 연속 발행 대기열 화면', title: 'Orbit 연속 발행 대기열 화면' },
@@ -5086,16 +5803,15 @@
                         src: getValue(`product-${id}-media-src`),
                         alt: getValue(`product-${id}-media-alt`)
                     },
-                    metrics: textToMetrics(getValue(`product-${id}-metrics`)),
-                    bullets: linesToArray(getValue(`product-${id}-bullets`)),
-                    fit: linesToArray(getValue(`product-${id}-fit`))
+                    metrics: readStructuredEditorRows(`productMetrics:${id}`),
+                    bullets: readStructuredEditorRows(`productBullets:${id}`)
+                        .map(row => String(row[0] || '').trim())
+                        .filter(Boolean),
+                    fit: readStructuredEditorRows(`productFit:${id}`)
+                        .map(row => String(row[0] || '').trim())
+                        .filter(Boolean)
                 };
             });
-
-            const raw = getValue('edit-products-json');
-            if (productsJsonTouched && raw) {
-                return deepMerge(products, JSON.parse(raw));
-            }
             return products;
         }
 
@@ -5128,22 +5844,15 @@
             return downloads;
         }
 
-        function collectEditorContent() {
-            const siteContentPanel = document.getElementById('editor-sub-site-content');
-            if (siteContentPanel && siteContentPanel.classList.contains('active')) {
-                const draft = getAdminSiteContentDraft();
-                draft.updatedAt = new Date().toISOString();
-                refreshEditorPreview(draft);
-                return draft;
-            }
+        function collectEditorPatch() {
             syncCmsHomeRegionEditorToSource();
-            const data = compactObject({
+            const patch = {
                 hero: {
                     title: getValue('edit-hero-title'),
                     desc: getValue('edit-hero-desc'),
                     benefit: getValue('edit-hero-benefit'),
                     notice: getValue('edit-notice'),
-                    proofs: textToProofs(getValue('edit-hero-proofs'))
+                    proofs: getCmsProofEditorValues()
                 },
                 pricing: {
                     page: {
@@ -5182,36 +5891,90 @@
                         startSec: numberOrUndefined('cms-music-start-sec'),
                         audioUrl: getValue('cms-music-audio-url')
                     }
-                },
-                updatedAt: new Date().toISOString()
-            });
+                }
+            };
+            return compactObject(patch);
+        }
+
+        function collectEditorContent(baseContent = loadedSiteContentBase) {
+            const patch = collectEditorPatch();
+            const mergeTools = window.AdminStructuredEditorTools;
+            if (!mergeTools?.mergeContent) throw new Error('구조화 편집 도구를 불러오지 못했습니다.');
+            const data = mergeTools.mergeContent(baseContent, patch);
             refreshEditorPreview(data);
             return data;
         }
 
+        function renderAdminContentSummary(content) {
+            const target = document.getElementById('admin-site-content-summary');
+            if (!target) return;
+            const summaryTools = window.AdminStructuredEditorTools;
+            const summary = summaryTools?.summarizeContent
+                ? summaryTools.summarizeContent(content || {})
+                : { products: 0, plans: 0, downloads: 0, proofs: 0 };
+            const updatedAt = content?.updatedAt ? new Date(content.updatedAt) : null;
+            const updatedLabel = updatedAt && !Number.isNaN(updatedAt.getTime()) ? updatedAt.toLocaleString('ko-KR') : '저장 기록 없음';
+            target.innerHTML = '<span><strong>' + summary.products + '</strong>개 제품</span>' +
+                '<span><strong>' + summary.plans + '</strong>개 요금제</span>' +
+                '<span><strong>' + summary.downloads + '</strong>개 다운로드</span>' +
+                '<span><strong>' + summary.proofs + '</strong>개 성과 인증</span>' +
+                '<span>최근 저장 <strong>' + cmsEscape(updatedLabel) + '</strong></span>' +
+                (siteContentEditorState.dirty ? '<span style="color:#ffcf70;"><strong>미저장 변경 있음</strong></span>' : '');
+        }
+
         function refreshEditorPreview(data) {
-            const preview = editorEl('edit-site-json-preview');
             try {
                 const content = data || collectEditorContent();
-                if (preview) preview.value = JSON.stringify(content, null, 2);
+                renderAdminContentSummary(content);
                 renderCmsHomeRegionEditor(content);
                 renderCmsPreview(content);
-            } catch {
-                if (preview) preview.value = '저장 데이터 미리보기를 만들 수 없습니다.';
+            } catch (error) {
+                const target = document.getElementById('admin-site-content-summary');
+                if (target) target.textContent = '저장 데이터 미리보기를 만들 수 없습니다.';
             }
         }
 
         async function saveEditorContent() {
-            let data;
+            if (siteContentEditorState.saving || siteContentEditorState.loading) return false;
+            const mergeTools = window.AdminStructuredEditorTools;
+            let currentProjection;
+            let patch;
+            let removedEmptyRowCount = 0;
             try {
-                data = collectEditorContent();
+                if (!mergeTools?.mergeContent || !mergeTools?.createChangedPatch) throw new Error('구조화 편집 도구를 불러오지 못했습니다.');
+                removedEmptyRowCount = pruneEmptyStructuredEditorRows();
+                currentProjection = collectEditorPatch();
+                patch = mergeTools.createChangedPatch(loadedSiteContentProjection, currentProjection);
             } catch (err) {
-                showToast('❌ 제품 상세 JSON 형식이 올바르지 않습니다.');
+                showToast('❌ 편집 내용을 확인해주세요: ' + (err.message || '입력값 오류'));
                 return false;
             }
-
-            localStorage.setItem('lp_site_edits', JSON.stringify(data));
+            if (!Object.keys(patch).length) {
+                siteContentEditorState = { ...siteContentEditorState, dirty: false };
+                syncSiteContentEditorActions();
+                refreshEditorPreview();
+                showToast(removedEmptyRowCount > 0
+                    ? '빈 항목은 제거했습니다. 그 밖에 저장할 변경 사항은 없습니다.'
+                    : '저장할 변경 사항이 없습니다.');
+                return true;
+            }
+            const savedEditGeneration = siteContentEditorState.editGeneration;
+            siteContentEditorState = { ...siteContentEditorState, saving: true };
+            syncSiteContentEditorActions();
             try {
+                const latestResponse = await fetch(`${GAS_URL}?action=site-content&ts=${Date.now()}`, { cache: 'no-store' });
+                const latestPayload = await latestResponse.json();
+                if (!(latestPayload.ok || latestPayload.success)) {
+                    throw new Error(latestPayload.error || latestPayload.message || '서버 최신본을 확인하지 못했습니다.');
+                }
+                const latestBase = normalizeEditorContent(latestPayload.content || {});
+                if (!mergeTools.findConflictingPaths) throw new Error('동시 수정 보호 기능을 불러오지 못했습니다.');
+                const conflicts = mergeTools.findConflictingPaths(loadedSiteContentBase, latestBase, patch);
+                if (conflicts.length > 0) {
+                    throw new Error('다른 탭에서 같은 항목이 먼저 수정되었습니다. 현재 초안은 유지됩니다. 서버에서 불러온 뒤 다시 반영하세요. 충돌: ' + conflicts.slice(0, 3).join(', '));
+                }
+                patch = { ...patch, updatedAt: new Date().toISOString() };
+                const data = mergeTools.mergeContent(latestBase, patch);
                 const res = await fetch(GAS_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -5219,27 +5982,53 @@
                 });
                 const json = await res.json();
                 if (!(json.ok || json.success)) throw new Error(json.error || json.message || '저장 실패');
-                showToast('✅ 서버에 저장했습니다. 실제 사이트가 이 데이터를 읽습니다.');
+                localStorage.setItem('lp_site_edits', JSON.stringify(data));
+                loadedSiteContentBase = deepClone(data);
+                loadedSiteContentProjection = deepClone(currentProjection);
+                siteContentEditorState = {
+                    ...siteContentEditorState,
+                    loaded: true,
+                    dirty: siteContentEditorState.editGeneration !== savedEditGeneration
+                };
+                renderAdminContentSummary(data);
+                showToast(siteContentEditorState.dirty
+                    ? '✅ 저장 완료 · 저장 중 추가로 수정한 내용은 한 번 더 저장하세요.'
+                    : '✅ 서버에 저장했습니다. 실제 사이트가 이 데이터를 읽습니다.');
                 return true;
             } catch (err) {
-                showToast('⚠️ 브라우저에는 저장됨 · 서버 저장 실패: ' + err.message);
+                showToast('⚠️ 서버 저장을 중단했습니다: ' + err.message);
                 return false;
+            } finally {
+                siteContentEditorState = { ...siteContentEditorState, saving: false };
+                syncSiteContentEditorActions();
             }
         }
 
         function resetEditorContent() {
-            if (!confirm('모든 편집 내용을 초기화하시겠습니까?')) return;
-            localStorage.removeItem('lp_site_edits');
+            if (!confirm('편집 화면을 기본값으로 바꾸겠습니까? 서버에는 저장 버튼을 눌러야 반영됩니다.')) return;
+            const previousBase = deepClone(loadedSiteContentBase);
+            const previousProjection = deepClone(loadedSiteContentProjection);
             setEditorValues({});
-            showToast('↩️ 초기화되었습니다.');
+            loadedSiteContentBase = previousBase;
+            loadedSiteContentProjection = previousProjection;
+            markSiteContentDirty();
+            refreshEditorPreview();
+            showToast('↩️ 기본값 초안입니다. 반영하려면 서버에 저장하세요.');
         }
 
         installLewordSettingsPanel();
         installCmsWorkbench();
         installCmsSkinControls();
         installCmsImagePickers();
+        installStructuredRowEditors();
+        installEditorSubtabKeyboard();
         installEditorLiveBindings();
         loadEditorContent();
+        window.addEventListener('beforeunload', event => {
+            if (!siteContentEditorState.dirty) return;
+            event.preventDefault();
+            event.returnValue = '';
+        });
 
         // ===== TOAST =====
         function showToast(msg) {
