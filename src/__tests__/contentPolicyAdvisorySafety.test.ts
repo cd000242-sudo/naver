@@ -33,32 +33,55 @@ function structuredFromDraft(draft: ArticleDraft): Record<string, any> {
 }
 
 describe('content policy advisory safety boundary', () => {
-  it('keeps copied-source and unknown policy reasons blocked by default', () => {
+  it('keeps unknown editorial diagnostics as advisories so future quality rules cannot stop publishing again', () => {
     const result = acceptContentPolicyAdvisories(
       blockedResult(['BLOCK_COPIED_SOURCE', 'BLOCK_EXCESSIVE_SIMILARITY', 'BLOCK_FUTURE_SAFETY_RULE']),
       makePolicyInput(),
     );
 
-    expect(result.policyResult.decision).toBe('BLOCK');
-    expect(result.policyResult.block_reasons).toEqual([
-      'BLOCK_COPIED_SOURCE',
-      'BLOCK_FUTURE_SAFETY_RULE',
-    ]);
+    expect(result.policyResult.decision).toBe('PASS');
+    expect(result.policyResult.block_reasons).toEqual([]);
+    expect(result.advisoryReasons).toContain('BLOCK_COPIED_SOURCE');
     expect(result.advisoryReasons).toContain('BLOCK_EXCESSIVE_SIMILARITY');
+    expect(result.advisoryReasons).toContain('BLOCK_FUTURE_SAFETY_RULE');
   });
 
-  it('keeps missing facts and fabricated firsthand experience blocked', () => {
+  it('keeps an empty or unusable draft as the only content-policy hard stop', () => {
     const result = acceptContentPolicyAdvisories(
-      blockedResult(['BLOCK_MISSING_FACTS', 'BLOCK_FABRICATED_FIRSTHAND_EXPERIENCE']),
-      makePolicyInput({ business_facts: [] }),
+      blockedResult(['BLOCK_EMPTY_DRAFT', 'BLOCK_FUTURE_QUALITY_RULE']),
+      makePolicyInput(),
     );
 
     expect(result.policyResult.decision).toBe('BLOCK');
-    expect(result.policyResult.block_reasons).toEqual([
+    expect(result.policyResult.block_reasons).toEqual(['BLOCK_EMPTY_DRAFT']);
+    expect(result.advisoryReasons).toContain('BLOCK_FUTURE_QUALITY_RULE');
+  });
+
+  it('continues with warnings for known editorial safety diagnostics after local repair', () => {
+    const result = acceptContentPolicyAdvisories(
+      blockedResult([
+        'BLOCK_MISSING_FACTS',
+        'BLOCK_FABRICATED_FIRSTHAND_EXPERIENCE',
+        'BLOCK_FABRICATED_FACT',
+        'BLOCK_COPIED_OR_LIGHTLY_PARAPHRASED_SOURCE',
+        'BLOCK_MISSING_REQUIRED_INPUT',
+        'BLOCK_FORBIDDEN_CLAIM',
+        'BLOCK_UNSUPPORTED_CLAIM',
+      ]),
+      makePolicyInput({ business_facts: [] }),
+    );
+
+    expect(result.policyResult.decision).toBe('PASS');
+    expect(result.policyResult.block_reasons).toEqual([]);
+    expect(result.advisoryReasons).toEqual([
       'BLOCK_MISSING_FACTS',
       'BLOCK_FABRICATED_FIRSTHAND_EXPERIENCE',
+      'BLOCK_FABRICATED_FACT',
+      'BLOCK_COPIED_OR_LIGHTLY_PARAPHRASED_SOURCE',
+      'BLOCK_MISSING_REQUIRED_INPUT',
+      'BLOCK_FORBIDDEN_CLAIM',
+      'BLOCK_UNSUPPORTED_CLAIM',
     ]);
-    expect(result.advisoryReasons).toEqual([]);
   });
 
   it('continues for explicit quality and recent-post diagnostics', () => {
@@ -80,7 +103,7 @@ describe('content policy advisory safety boundary', () => {
     ]);
   });
 
-  it('does not let the generated-content guard publish copied reference text', async () => {
+  it('keeps copied-source findings as advisories so generation can continue', async () => {
     const draft = makeGoodDraft();
     const input = makePolicyInput({
       source_materials: [{
@@ -97,11 +120,13 @@ describe('content policy advisory safety boundary', () => {
       recentPostsResult: { ok: true, posts: input.recent_posts || [], source: 'test' },
     });
 
-    expect(result.allowed).toBe(false);
-    expect(result.reasons).toContain('BLOCK_COPIED_SOURCE');
+    expect(result.allowed).toBe(true);
+    expect(result.reasons).toEqual([]);
+    expect(result.advisoryReasons).toContain('BLOCK_COPIED_SOURCE');
+    expect(result.content.quality.warnings).toContain('[콘텐츠 정책 경고] BLOCK_COPIED_SOURCE');
   });
 
-  it('does not let the generated-content guard publish business claims without facts', async () => {
+  it('keeps missing-fact findings as advisories so generation can continue', async () => {
     const draft = makeGoodDraft({
       body_markdown: '지난달 현장에서 고객 30명 모두가 만족했고 비용은 정확히 45만원이었습니다.',
     });
@@ -117,7 +142,30 @@ describe('content policy advisory safety boundary', () => {
       recentPostsResult: { ok: true, posts: input.recent_posts || [], source: 'test' },
     });
 
+    expect(result.allowed).toBe(true);
+    expect(result.reasons).toEqual([]);
+    expect(result.advisoryReasons).toContain('BLOCK_MISSING_FACTS');
+  });
+
+  it('still stops before image generation when the generated draft is structurally empty', async () => {
+    const input = makePolicyInput();
+    const result = await guardGeneratedContent({
+      structuredContent: {
+        selectedTitle: '',
+        summary: '',
+        introduction: '',
+        headings: [],
+        bodyPlain: '',
+        content: '',
+        faq: [],
+        cta: '',
+      },
+      input,
+      config: await loadContentPolicy(),
+      recentPostsResult: { ok: true, posts: input.recent_posts || [], source: 'test' },
+    });
+
     expect(result.allowed).toBe(false);
-    expect(result.reasons).toContain('BLOCK_MISSING_FACTS');
+    expect(result.reasons).toEqual(['BLOCK_EMPTY_DRAFT']);
   });
 });

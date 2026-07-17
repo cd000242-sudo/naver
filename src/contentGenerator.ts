@@ -63,6 +63,7 @@ import {
 import {
   auditAffiliateAuthenticity,
   buildAffiliateAuthenticityContract,
+  buildAffiliatePurchaseIntentContract,
   buildAffiliateTitleEvidenceDirective,
   classifyAffiliateEvidence,
   resolveAffiliateContentLengthTarget,
@@ -104,8 +105,6 @@ import {
 } from './contentQualityV3/geminiRequestContract.js';
 import { shouldRunLegacySemanticPostDraftMutation } from './contentQualityV3/postDraftMutationPolicy.js';
 import {
-  buildContentQualityV3FinalizationRetryInstruction,
-  decideContentQualityV3Finalization,
   finalizeContentQualityV3Draft,
   materializeContentQualityV3ForLegacyConsumers,
   recoverContentQualityV3BodyHtml,
@@ -117,7 +116,10 @@ import {
   enforceContentQualityV3BusinessGuard as enforceSharedContentQualityV3BusinessGuard,
 } from './contentQualityV3/businessGuard.js';
 import { resolveProductionContentQualityV3Activation } from './contentQualityV3/releaseActivation.js';
-import { registerContentQualityV3GeneratedContent } from './contentQualityV3/publicationBoundary.js';
+import {
+  registerContentQualityV3GeneratedContent,
+  type ContentQualityV3PublicationIssueCode,
+} from './contentQualityV3/publicationBoundary.js';
 import {
   buildGeminiGenerationConfig,
   resolveGeminiEmptyResponseRetryTemperature,
@@ -218,6 +220,13 @@ import {
 } from './contentAbortTimeoutPolicy.js';
 import { translateGeminiError } from './contentGeminiErrorPolicy.js';
 import {
+  DEFAULT_GENERATION_SUBMISSION_MODE,
+  shouldAllowAutomaticProviderRetry,
+  type GenerationSubmissionMode,
+} from './generation/submissionPolicy.js';
+import { generateTextWithMcp, type McpRuntimeManager } from './generation/mcp/index.js';
+import type { GenerationRoute } from './generation/routeSnapshot.js';
+import {
   BudgetExceededError,
   enforceGeminiBudgetSafety,
 } from './contentGeminiBudgetSafety.js';
@@ -313,7 +322,7 @@ import {
 // [Phase 3-18/v2.10.164] 키워드 전처리 helper
 import { getPrimaryKeywordFromSource, getSecondaryKeywordsFromSource, preprocessLongKeyword } from './contentKeywordHelpers';
 // [SPEC-PROMPT-2026-REFRESH Phase 1/v2.10.231] 일반론 도망 감지 + 인용 토큰 밀도 측정
-import { detectPlatitudes, isPlatitudeHardBlockEnabled } from './contentPlatitudeDetector';
+import { detectPlatitudes } from './contentPlatitudeDetector';
 // [Gap C 시맨틱 / SPEC-REVIEW-001 확장] 옵트인 섹션 변별 판정 (기본 OFF, ungrounded 1회 호출)
 import { isSemanticDistinctnessJudgeEnabled, judgeSectionDistinctness } from './content/sectionDistinctnessJudge';
 // [Phase 3-20/v2.10.166] 키워드 prefix + review title (applyKeywordPrefixToTitle는 내부 helper)
@@ -1585,7 +1594,7 @@ export type SourceCategoryHint =
   | '기타'
   // 문자열도 허용 (사용자 커스텀)
   | string;
-export type ContentGeneratorProvider = 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude';
+export type ContentGeneratorProvider = 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude' | 'mcp';
 
 export type ArticleType =
   // 뉴스/정보
@@ -1812,9 +1821,19 @@ export interface StructuredContent {
 }
 export interface GenerateOptions {
   provider?: ContentGeneratorProvider;
+  /** Immutable route chosen at run start. Required when provider is MCP. */
+  generationRoute?: GenerationRoute;
+  /** Main-process-only MCP runtime. It is never accepted from renderer IPC. */
+  mcpRuntimeManager?: McpRuntimeManager;
   minChars?: number;
   contentMode?: 'seo' | 'homefeed' | 'mate'; // ✅ SEO/홈판/네이버 메이트 노출 최적화 모드
   signal?: AbortSignal; // ✅ [2026-04-03] 중지 시 즉시 AI API 호출 abort
+  /**
+   * Public generation defaults to one external submission. `legacy-retry` is
+   * reserved for a future trusted compatibility runner and is not accepted
+   * from renderer IPC payloads.
+   */
+  submissionMode?: GenerationSubmissionMode;
   /** @deprecated Ignored by the public production boundary. */
   contentPipelineMode?: unknown;
   /** @deprecated Ignored by the public production boundary. */
@@ -2368,7 +2387,7 @@ export function buildModeBasedPrompt(
 
   let finalContract = '';
   if (contentMode === 'affiliate') {
-    finalContract = buildAffiliateAuthenticityContract(source);
+    finalContract = `${buildAffiliateAuthenticityContract(source)}\n\n${buildAffiliatePurchaseIntentContract(source)}`;
     console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}`);
   } else if (contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate' || contentMode === 'business' || contentMode === 'custom') {
     finalContract = buildEvidenceAndIntentFinalContract(source, contentMode);
@@ -2734,11 +2753,14 @@ async function callGemini(
     schema?: Record<string, unknown>;
     useModelDefaultSampling?: boolean;
     executionPolicy?: ContentQualityV3StrictSingleCallPolicy;
+    submissionMode?: GenerationSubmissionMode;
   } = {},
 ): Promise<string> {
   const timeoutMs = getTimeoutMs(minChars);
   const strictSingleCall =
     options.executionPolicy === CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY;
+  const singleSubmission = strictSingleCall
+    || !shouldAllowAutomaticProviderRetry(options.submissionMode);
   const strictRequestEnvelope = strictSingleCall
     ? createContentQualityV3GeminiRequestEnvelope(prompt)
     : undefined;
@@ -2798,7 +2820,7 @@ async function callGemini(
   const extraKeys: string[] = rawExtraKeys
     .map((k: string) => k.trim())
     .filter((k: string) => k && !isMaskedSecretValue(k));
-  const keyPlan = strictSingleCall
+  const keyPlan = singleSubmission
     ? Object.freeze({
       keys: Object.freeze(primaryApiKey ? [primaryApiKey] : []),
       freeQuotaFirst: false,
@@ -2839,7 +2861,7 @@ async function callGemini(
 
   let lastError: Error | null = null;
   // ✅ [v1.4.64] 재시도 3회로 축소 — 실패 확정까지 4분→1분 이하
-  const perModelMaxRetries = strictSingleCall ? 1 : 3;
+  const perModelMaxRetries = singleSubmission ? 1 : 3;
   const geminiRateLimitPatienceMs = getGeminiRateLimitPatienceMs(config);
   let geminiRateLimitWaitedMs = 0;
   let providerCallCount = 0;
@@ -2862,7 +2884,7 @@ async function callGemini(
         //    cacheManager.create가 본문 생성 전 Gemini API 1회를 추가로 사용하므로
         //    Tier 1/RPM 낮은 프로젝트에서는 "버튼 1회"가 "API 2회"가 되어 429가 쉽게 난다.
         //    비용 절감이 필요한 고한도 프로젝트만 ENV GEMINI_CACHE_ENABLED=1로 명시 opt-in.
-        const cacheEligibility = strictSingleCall
+        const cacheEligibility = singleSubmission
           ? { enabled: false, minCacheChars: 0, reason: 'env-disabled' as const }
           : resolveGeminiPromptCacheEligibility({
             modelName,
@@ -2871,7 +2893,7 @@ async function callGemini(
             cacheEnabledEnv: process.env.GEMINI_CACHE_ENABLED,
             cacheDisabledEnv: process.env.GEMINI_CACHE_DISABLED,
           });
-        const cacheEnabled = !strictSingleCall && cacheEligibility.enabled;
+        const cacheEnabled = !singleSubmission && cacheEligibility.enabled;
         let cachedContentName: string | undefined;
 
         if (cacheEnabled) {
@@ -2946,7 +2968,7 @@ async function callGemini(
           console.log('[Gemini] 📄 원문 모드 감지 (user > 500자) → 그라운딩 OFF (RECITATION 회피, 원문이 fact source)');
         }
 
-        const resultCacheAllowed = !strictSingleCall && minChars < 1000;
+        const resultCacheAllowed = !singleSubmission && minChars < 1000;
         const resultCacheKey = resultCacheAllowed ? getGeminiResultCacheKey({
           modelName,
           systemText: geminiSystemText,
@@ -3122,7 +3144,7 @@ async function callGemini(
       } catch (error) {
         // ✅ [v1.4.50] Safety Lock 에러는 재시도/폴백 금지 — 즉시 상위로 전파
         if (error instanceof BudgetExceededError) throw error;
-        if (strictSingleCall) throw error;
+        if (singleSubmission) throw error;
 
         // ✅ [v1.4.51] 빈 응답 에러 — 프롬프트 증강으로 무조건 회복
         // BLOCK_NONE + thinkingBudget 0 + 60K maxOutput으로 거의 안 뜨지만,
@@ -3387,7 +3409,13 @@ async function callGemini(
 // 기존 문제: generatePerplexityContent() → buildEnhancedPrompt()가 이미 완성된 시스템 프롬프트를
 // "주제"로 다시 감싸는 이중 래핑 → Perplexity가 자유형식 텍스트 반환 → JSON 파싱 실패
 // 수정: callGemini/callOpenAI와 동일하게 프롬프트를 직접 API에 전달
-async function callPerplexity(prompt: string, temperature: number = 0.7, minChars: number = 2000, signal?: AbortSignal): Promise<string> {
+async function callPerplexity(
+  prompt: string,
+  temperature: number = 0.7,
+  minChars: number = 2000,
+  signal?: AbortSignal,
+  options: { submissionMode?: GenerationSubmissionMode } = {},
+): Promise<string> {
   console.log('[Perplexity] 콘텐츠 생성 시작 (직접 API 호출)');
 
   // 1. API 키 로드 (config 우선, env 폴백)
@@ -3434,8 +3462,9 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
     modelName = process.env.PERPLEXITY_MODEL || 'sonar';
   }
   const timeoutMs = getTimeoutMs(minChars);
-  const maxAttempts = 99;
-  const maxTransientRetries = 5;
+  const allowAutomaticRetry = shouldAllowAutomaticProviderRetry(options.submissionMode);
+  const maxAttempts = allowAutomaticRetry ? 99 : 1;
+  const maxTransientRetries = allowAutomaticRetry ? 5 : 0;
   const rateLimitPatienceMs = getPerplexityRateLimitPatienceMs();
   let rateLimitWaitedMs = 0;
   let rateLimitRetryCount = 0;
@@ -3566,7 +3595,7 @@ async function callPerplexity(prompt: string, temperature: number = 0.7, minChar
         const waitMs = getPerplexityRateLimitWaitMs(error, fallbackWaitMs);
         const nextWaitedMs = rateLimitWaitedMs + waitMs;
 
-        if (nextWaitedMs <= rateLimitPatienceMs) {
+        if (allowAutomaticRetry && nextWaitedMs <= rateLimitPatienceMs) {
           rateLimitRetryCount++;
           rateLimitWaitedMs = nextWaitedMs;
           recordProviderRateLimitBackoff('Perplexity', modelName, waitMs);
@@ -3623,7 +3652,7 @@ async function callOpenAI(
   temperature: number = 0.9,
   minChars: number = 2000,
   signal?: AbortSignal,
-  options: { modelOverride?: string } = {},
+  options: { modelOverride?: string; submissionMode?: GenerationSubmissionMode } = {},
 ): Promise<string> {
   console.log('[OpenAI] JSON 형식 준수 요청 - 유니코드 이스케이프 4자리, 쉼표 필수');
 
@@ -3715,7 +3744,8 @@ async function callOpenAI(
 
   let lastError: Error | null = null;
   const maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars);
-  const maxAttemptsPerModel = 99;
+  const allowAutomaticRetry = shouldAllowAutomaticProviderRetry(options.submissionMode);
+  const maxAttemptsPerModel = allowAutomaticRetry ? 99 : 1;
   const maxTransientRetriesPerModel = 0;
   const openAiRateLimitPatienceMs = getOpenAiRateLimitPatienceMs();
 
@@ -3777,7 +3807,10 @@ async function callOpenAI(
             response = await callOpenAIChatCompletionsRest(directOpenAiApiKey, baseParams, timeoutMs, signal, diagnosticsEnabled);
           } catch (restError) {
             const restMessage = normalizeErrorMessage(restError).toLowerCase();
-            if (!restMessage.includes('fetch api를 사용할 수 없습니다') && !restMessage.includes('fetch api')) {
+            if (
+              !allowAutomaticRetry
+              || (!restMessage.includes('fetch api를 사용할 수 없습니다') && !restMessage.includes('fetch api'))
+            ) {
               throw restError;
             }
 
@@ -3915,7 +3948,7 @@ async function callOpenAI(
             const nextWaitedMs = rateLimitWaitedMs + backoffMs;
             openaiRpmThrottler.record429(backoffMs);
 
-            if (nextWaitedMs <= openAiRateLimitPatienceMs) {
+            if (allowAutomaticRetry && nextWaitedMs <= openAiRateLimitPatienceMs) {
               rateLimitRetryCount++;
               const logMsg =
                 `⏳ [OpenAI ${modelName}] 요청/토큰 한도 대기 — ${Math.round(backoffMs / 1000)}초 후 같은 모델로 자동 재시도 ` +
@@ -4069,7 +4102,7 @@ async function callClaude(
   temperature: number = 0.9,
   minChars: number = 2000,
   signal?: AbortSignal,
-  options: { modelOverride?: string } = {},
+  options: { modelOverride?: string; submissionMode?: GenerationSubmissionMode } = {},
 ): Promise<string> {
   console.log('[Claude] JSON 형식 준수 요청 - 유니코드 이스케이프 4자리, 쉼표 필수');
 
@@ -4119,8 +4152,9 @@ async function callClaude(
   const modelsToTry = claudeModels;
 
   let lastError: Error | null = null;
-  const maxAttemptsPerModel = 99;
-  const maxTransientRetriesPerModel = 5;
+  const allowAutomaticRetry = shouldAllowAutomaticProviderRetry(options.submissionMode);
+  const maxAttemptsPerModel = allowAutomaticRetry ? 99 : 1;
+  const maxTransientRetriesPerModel = allowAutomaticRetry ? 5 : 0;
   const claudeRateLimitPatienceMs = getClaudeRateLimitPatienceMs();
 
   // 각 모델을 순차적으로 시도
@@ -4163,7 +4197,11 @@ async function callClaude(
         const CACHE_MIN_CHARS = 4000;
         const cacheDisabled = process.env.CLAUDE_PROMPT_CACHE_DISABLED === '1';
         const cacheOptIn = process.env.CLAUDE_PROMPT_CACHE_ENABLED === '1';
-        const useSystemCache = cacheOptIn && !cacheDisabled && !!claudeSystem && claudeSystem.length >= CACHE_MIN_CHARS;
+        const useSystemCache = allowAutomaticRetry
+          && cacheOptIn
+          && !cacheDisabled
+          && !!claudeSystem
+          && claudeSystem.length >= CACHE_MIN_CHARS;
 
         // Adaptive-thinking models reject/deprecate temperature. Omitting it
         // lets the current Claude model apply its native quality policy.
@@ -4325,7 +4363,7 @@ async function callClaude(
           const waitMs = getClaudeRateLimitWaitMs(error, fallbackWaitMs);
           const nextWaitedMs = rateLimitWaitedMs + waitMs;
 
-          if (nextWaitedMs <= claudeRateLimitPatienceMs) {
+          if (allowAutomaticRetry && nextWaitedMs <= claudeRateLimitPatienceMs) {
             rateLimitRetryCount++;
             rateLimitWaitedMs = nextWaitedMs;
             recordProviderRateLimitBackoff('Claude', modelName, waitMs);
@@ -4926,9 +4964,18 @@ async function generateStructuredContentInternal(
   promptVariant: ContentPromptVariant,
 ): Promise<StructuredContent> {
   const isV3Prompt = promptVariant === 'v3';
+  // Renderer IPC never exposes the legacy retry mode. Keep the public default
+  // at one provider submission even for legacy prompts, because a timeout can
+  // occur after a billable provider has already accepted the request.
+  const submissionMode = options.submissionMode ?? DEFAULT_GENERATION_SUBMISSION_MODE;
+  const allowAutomaticProviderRetry = shouldAllowAutomaticProviderRetry(submissionMode);
   const allowLegacyPostDraftLlm = shouldRunLegacyPostDraftLlm(promptVariant);
   const allowPaidPostGenerationRepair =
-    !isV3Prompt && process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR === '1';
+    !isV3Prompt
+    && allowAutomaticProviderRetry
+    && options.provider !== 'mcp'
+    && source.generator !== 'mcp'
+    && process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR === '1';
 
   // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] image-narrative mode branch
   if (source.contentMode === 'image-narrative') {
@@ -5152,12 +5199,13 @@ async function generateStructuredContentInternal(
     ? 0
     : readNonNegativeIntegerEnv('AGENT_CONTENT_MAX_ATTEMPTS', 0);
   const isAgentProvider = provider === 'agent-codex' || provider === 'agent-claude';
-  const baseMaxAttempts = isAgentProvider
+  const isSingleSubmissionConnector = isAgentProvider || provider === 'mcp';
+  const baseMaxAttempts = isSingleSubmissionConnector
     ? agentContentMaxAttempts
     : provider === 'openai'
       ? Math.max(openAiContentMaxAttempts, costPolicy.maxAttempts)
       : costPolicy.maxAttempts;
-  const sameEngineReliabilityMinAttempts = isV3Prompt || isAgentProvider
+  const sameEngineReliabilityMinAttempts = isV3Prompt || isSingleSubmissionConnector
     ? 0
     : readNonNegativeIntegerEnv('CONTENT_SAME_ENGINE_MIN_ATTEMPTS', 0);
   const promptRepairMinAttempts = 0;
@@ -5169,7 +5217,7 @@ async function generateStructuredContentInternal(
     promptRepairMinAttempts,
     qualityTargetMinAttempts,
   );
-  const MAX_ATTEMPTS = isV3Prompt
+  const MAX_ATTEMPTS = isV3Prompt || provider === 'mcp' || !allowAutomaticProviderRetry
     ? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY.maxTopLevelRetries
     : configuredMaxAttempts;
   const RETRY_DELAYS = [0, 1200, 2000, 3000, 4500, 6000, 8000];
@@ -5178,7 +5226,7 @@ async function generateStructuredContentInternal(
   // ✅ Gemini 전용 강화 재시도 시스템
   // provider 내부 재시도 위에 전체 파이프라인 재실행이 겹치지 않도록 기본 1회만 허용.
   let networkErrorCount = 0;
-  const GEMINI_MAX_RETRIES = isV3Prompt
+  const GEMINI_MAX_RETRIES = isV3Prompt || !allowAutomaticProviderRetry
     ? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY.maxNetworkRetries
     : Math.max(0, Number(process.env.GEMINI_NETWORK_MAX_RETRIES ?? 1));
   const GEMINI_RETRY_DELAYS = [1200, 2000, 3000, 4500, 6000, 8000, 10000];
@@ -5234,7 +5282,6 @@ async function generateStructuredContentInternal(
   let _distinctnessJudgeUsed = false; // ✅ [Gap C 시맨틱] 섹션 변별 LLM 판정 — 생성당 1회만 호출(비용 가드)
   let _affiliateAuthenticityRetryUsed = false;
   let _shoppingValidationRetryUsed = false;
-  let v3TitleContractRetriesUsed = 0;
   // ✅ [2026-04-03] signal 추출 — 중지 시 즉시 abort
   const signal = options.signal;
 
@@ -5250,10 +5297,14 @@ async function generateStructuredContentInternal(
         agentProductPolicyContext: options.agentProductPolicyContext,
       });
     }
-    if (provider === 'openai') return callOpenAI(prompt, 0.2, repairChars, signal);
-    if (provider === 'claude') return callClaude(prompt, 0.2, repairChars, signal);
-    if (provider === 'perplexity') return callPerplexity(prompt, 0.2, repairChars, signal);
-    return callGemini(prompt, 0.2, repairChars, { useGrounding: false, signal });
+    if (provider === 'openai') return callOpenAI(prompt, 0.2, repairChars, signal, { submissionMode });
+    if (provider === 'claude') return callClaude(prompt, 0.2, repairChars, signal, { submissionMode });
+    if (provider === 'perplexity') return callPerplexity(prompt, 0.2, repairChars, signal, { submissionMode });
+    return callGemini(prompt, 0.2, repairChars, {
+      useGrounding: false,
+      signal,
+      submissionMode,
+    });
   };
 
   for (let attempt = 0; attempt <= MAX_ATTEMPTS; attempt += 1) {
@@ -5449,7 +5500,19 @@ async function generateStructuredContentInternal(
         };
 
         // ✅ [v2.10.28] signal을 callX에 직접 전달 — SDK 레벨 fetch abort
-        if (provider === 'agent-codex' || provider === 'agent-claude') {
+        if (provider === 'mcp') {
+          if (!options.mcpRuntimeManager || !options.generationRoute) {
+            throw new Error('MCP_RUNTIME_NOT_CONFIGURED: 선택한 MCP 글 생성 경로의 실행 설정이 없습니다.');
+          }
+          rawResponse = await withAbortRace(generateTextWithMcp({
+            runtime: options.mcpRuntimeManager,
+            route: options.generationRoute,
+            prompt: systemPrompt,
+            mode,
+            minimumBodyCharacters: adjustedMinChars,
+            signal,
+          }));
+        } else if (provider === 'agent-codex' || provider === 'agent-claude') {
           rawResponse = await withAbortRace(callAgent(provider, systemPrompt, {
             signal,
             mode,
@@ -5458,12 +5521,18 @@ async function generateStructuredContentInternal(
             agentProductPolicyContext: options.agentProductPolicyContext,
           }));
         } else if (provider === 'openai') {
-          rawResponse = await withAbortRace(callOpenAI(systemPrompt, temperature, adjustedMinChars, signal));
+          rawResponse = await withAbortRace(callOpenAI(systemPrompt, temperature, adjustedMinChars, signal, {
+            submissionMode,
+          }));
         } else if (provider === 'claude') {
-          rawResponse = await withAbortRace(callClaude(systemPrompt, temperature, adjustedMinChars, signal));
+          rawResponse = await withAbortRace(callClaude(systemPrompt, temperature, adjustedMinChars, signal, {
+            submissionMode,
+          }));
         } else if (provider === 'perplexity') {
           // ✅ [2026-01-25] Perplexity AI (Sonar) 실시간 검색 기반 콘텐츠 생성
-          rawResponse = await withAbortRace(callPerplexity(systemPrompt, temperature, adjustedMinChars, signal));
+          rawResponse = await withAbortRace(callPerplexity(systemPrompt, temperature, adjustedMinChars, signal, {
+            submissionMode,
+          }));
         } else {
           // 레거시는 기존 grounding을 유지하고 exact V3 schema 호출만 OFF.
           rawResponse = await withAbortRace(callGemini(systemPrompt, temperature, adjustedMinChars, {
@@ -5472,6 +5541,7 @@ async function generateStructuredContentInternal(
             executionPolicy: isV3Prompt
               ? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY
               : undefined,
+            submissionMode,
           }));
         }
         raw = rawResponse; // Assign rawResponse to raw for subsequent processing
@@ -5617,59 +5687,67 @@ async function generateStructuredContentInternal(
         const v3Finalization = finalizeContentQualityV3Draft(parsed, {
           titleContract: v3TitleContract,
         });
-        const v3Decision = decideContentQualityV3Finalization(v3Finalization, {
-          attempt,
-          maxAttempts: MAX_ATTEMPTS,
-          titleContractRetriesUsed: v3TitleContractRetriesUsed,
-        });
-        v3TitleContractRetriesUsed = v3Decision.titleContractRetriesUsed;
+        const v3AdvisoryIssues: ContentQualityV3PublicationIssueCode[] = [];
+        let v3Content: StructuredContent;
 
-        if (v3Decision.action === 'return') {
-          const v3BusinessContent = source.contentMode === 'business'
-            ? enforceContentQualityV3BusinessGuard(v3Decision.content, source)
-            : v3Decision.content;
-          const v3GuardDecision = source.contentMode === 'affiliate'
-            ? evaluateContentQualityV3AffiliateGuard({
-              content: v3Decision.content,
-              source,
-              minimumBodyChars: validationMinChars,
-              authenticityRetryAvailable: !_affiliateAuthenticityRetryUsed && attempt < MAX_ATTEMPTS,
-              shoppingQualityRetryAvailable: !_shoppingValidationRetryUsed && attempt < MAX_ATTEMPTS,
-            })
-            : { action: 'accept' as const, content: v3BusinessContent };
-
-          if (v3GuardDecision.action === 'retry-authenticity') {
-            _affiliateAuthenticityRetryUsed = true;
-            lastFailReason = v3GuardDecision.reason;
-            extraInstruction = `${v3GuardDecision.instruction}\n${extraInstruction}`;
-            continue;
+        if (v3Finalization.ok) {
+          v3Content = v3Finalization.content;
+        } else {
+          lastFailReason = `[content-quality-v3] ${v3Finalization.issueCode}`;
+          console.warn(`[ContentGenerator] ${lastFailReason} — 경고로 보존하고 계속합니다.`);
+          // A missing/invalid output structure has no safe draft to publish.
+          // Every semantic/title/quality finding remains a warning and is
+          // carried into the main-process publication ticket instead.
+          if (v3Finalization.issueCode.startsWith('structured_output_')) {
+            throw new Error(lastFailReason);
           }
-          if (v3GuardDecision.action === 'retry-shopping-quality') {
-            _shoppingValidationRetryUsed = true;
-            lastFailReason = v3GuardDecision.reason;
-            extraInstruction = `${v3GuardDecision.instruction}\n${extraInstruction}`;
-            continue;
-          }
-          if (v3GuardDecision.action === 'fail') {
-            throw new Error(v3GuardDecision.message);
-          }
-
-          return registerContentQualityV3GeneratedContent(
-            materializeContentQualityV3ForLegacyConsumers(v3GuardDecision.content),
-            { source, minimumBodyChars: validationMinChars },
-          );
+          v3Content = parsed;
+          v3AdvisoryIssues.push(v3Finalization.issueCode);
         }
 
-        lastFailReason = `[content-quality-v3] ${v3Decision.issueCode}`;
-        console.warn(`[ContentGenerator] ${lastFailReason}`);
-        if (v3Decision.action === 'retry') {
-          extraInstruction = buildContentQualityV3FinalizationRetryInstruction(
-            v3Decision.issueCode,
-            v3TitleContract,
-          );
-          continue;
+        if (source.contentMode === 'business') {
+          try {
+            v3Content = enforceContentQualityV3BusinessGuard(v3Content, source);
+          } catch (error) {
+            console.warn(
+              `[ContentGenerator] business quality warning: ${(error as Error).message}`,
+            );
+            v3AdvisoryIssues.push('business_safety_failed');
+          }
         }
-        throw new Error(`[content-quality-v3] ${v3Decision.issueCode}`);
+
+        if (source.contentMode === 'affiliate') {
+          const v3GuardDecision = evaluateContentQualityV3AffiliateGuard({
+            content: v3Content,
+            source,
+            minimumBodyChars: validationMinChars,
+            // A user click must send one provider request. Local repair is
+            // allowed, but quality feedback must not trigger another call.
+            authenticityRetryAvailable: false,
+            shoppingQualityRetryAvailable: false,
+          });
+          if (v3GuardDecision.action === 'accept') {
+            v3Content = v3GuardDecision.content;
+          } else {
+            const issueCode = v3GuardDecision.action === 'fail'
+              ? 'affiliate_authenticity_failed'
+              : 'affiliate_shopping_quality_failed';
+            console.warn(
+              `[ContentGenerator] ${issueCode} — 경고로 보존하고 계속합니다.`,
+            );
+            v3AdvisoryIssues.push(issueCode);
+          }
+        }
+
+        return registerContentQualityV3GeneratedContent(
+          materializeContentQualityV3ForLegacyConsumers(v3Content),
+          {
+            source,
+            minimumBodyChars: validationMinChars,
+            safetyMode: 'advisory',
+            advisoryIssues: v3AdvisoryIssues,
+          },
+        );
       }
 
       // ✅ CRITICAL: bodyPlain 복구 로직 (Gemini가 'body' 필드로 반환하는 경우 처리)
@@ -5841,7 +5919,7 @@ async function generateStructuredContentInternal(
         }
       }
 
-      if (allowLegacyPostDraftLlm && !_useKwTitle && (mode === 'seo' || mode === 'mate')) {
+      if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && (mode === 'seo' || mode === 'mate')) {
         const seoKeyword = getPrimaryKeywordFromSource(source);
         const issues = computeSeoTitleCriticalIssues(parsed.selectedTitle, seoKeyword);
         if (issues.length > 0 && attempt < MAX_ATTEMPTS) {
@@ -5892,7 +5970,7 @@ async function generateStructuredContentInternal(
         }
       }
 
-      if (allowLegacyPostDraftLlm && !_useKwTitle && mode === 'homefeed') {
+      if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && mode === 'homefeed') {
         const hfKeyword = getPrimaryKeywordFromSource(source);
         const titleIssues = computeHomefeedTitleCriticalIssues(parsed.selectedTitle, hfKeyword);
         if (titleIssues.length > 0 && attempt < MAX_ATTEMPTS) {
@@ -5936,7 +6014,7 @@ async function generateStructuredContentInternal(
 
         // ✅ 비용 절감 모드 기본 ON — 도입부 재작성 비활성화 (사용자 명시 OFF 시에만 동작)
         const introIssues = computeHomefeedIntroCriticalIssues(parsed.introduction);
-        if (allowLegacyPostDraftLlm && introIssues.length > 0 && attempt < MAX_ATTEMPTS && costPolicy.allowLlmIntroPatch) {
+        if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && introIssues.length > 0 && attempt < MAX_ATTEMPTS && costPolicy.allowLlmIntroPatch) {
           const patch = await generateHomefeedIntroOnlyPatch(
             source,
             parsed,
@@ -6146,7 +6224,7 @@ async function generateStructuredContentInternal(
       //   더 이상 재생성 기회가 없는데도 Faithfulness가 미해결인 상태다.
       //   기존엔 quality.warnings 한 줄만 남기고 그대로 발행되던 갭.
       //   - 항상: aiDetectionRisk='high'로 격상 + 구조적 경고(UI 위험 표시가 정직해짐).
-      //   - 옵트인(CONTENT_HARDBLOCK_ON_PLATITUDE): 발행 차단(throw → 8505 catch에서 생성 실패 전파).
+      //   - 품질·문체 평가는 항상 경고로 남기고, 생성·발행 흐름을 중단하지 않는다.
       if (platitudeReportRef && platitudeReportRef.exceedsThreshold) {
         if (!parsed.quality) {
           parsed.quality = {
@@ -6166,10 +6244,6 @@ async function generateStructuredContentInternal(
         console.warn(
           `[ContentGenerator] ⚠️ Faithfulness 미해결로 발행 — aiDetectionRisk=high 격상: ${platitudeReportRef.reason}`,
         );
-        if (isPlatitudeHardBlockEnabled()) {
-          console.error('[ContentGenerator] ⛔ 하드블록(옵트인) 활성 — 발행 차단(생성 실패 처리)');
-          throw new Error(`발행 차단(옵트인 하드블록): Faithfulness 임계 초과 — ${platitudeReportRef.reason}`);
-        }
       }
 
       // ✅ [Gap C 시맨틱 — SPEC-REVIEW-001 확장] 옵트인 섹션 변별 판정.
@@ -6177,7 +6251,8 @@ async function generateStructuredContentInternal(
       //   "각 H2가 서로 다른 정보 단위인가"를 직접 묻는다. 기본 OFF, ungrounded 키워드 글 한정,
       //   생성당 1회만 호출(비용 가드), fail-open(판정 실패는 통과 처리).
       if (
-        allowLegacyPostDraftLlm
+        allowAutomaticProviderRetry
+        && allowLegacyPostDraftLlm
         && isSemanticDistinctnessJudgeEnabled()
         && !_distinctnessJudgeUsed
         && mode !== 'affiliate'
@@ -6195,10 +6270,10 @@ async function generateStructuredContentInternal(
               agentProductPolicyContext: options.agentProductPolicyContext,
             });
           }
-          if (provider === 'openai') return callOpenAI(jp, jt, jc, signal);
-          if (provider === 'claude') return callClaude(jp, jt, jc, signal);
-          if (provider === 'perplexity') return callPerplexity(jp, jt, jc, signal);
-          return callGemini(jp, jt, jc, { signal });
+          if (provider === 'openai') return callOpenAI(jp, jt, jc, signal, { submissionMode });
+          if (provider === 'claude') return callClaude(jp, jt, jc, signal, { submissionMode });
+          if (provider === 'perplexity') return callPerplexity(jp, jt, jc, signal, { submissionMode });
+          return callGemini(jp, jt, jc, { signal, submissionMode });
         };
         const verdict = await judgeSectionDistinctness(parsed, judgeCaller);
         if (verdict.judged && !verdict.distinct) {
@@ -6221,10 +6296,6 @@ async function generateStructuredContentInternal(
             `섹션 중복 미해결(시맨틱): ${verdict.reason}`,
           ];
           console.warn(`[DistinctnessJudge] ⚠️ 섹션 중복 미해결로 발행 — aiDetectionRisk=high 격상`);
-          if (isPlatitudeHardBlockEnabled()) {
-            console.error('[DistinctnessJudge] ⛔ 하드블록(옵트인) 활성 — 발행 차단');
-            throw new Error(`발행 차단(옵트인 하드블록): 섹션 중복 미해결 — ${verdict.reason}`);
-          }
         } else {
           console.log(`[DistinctnessJudge] ✅ ${verdict.judged ? '변별 양호' : '판정 생략'} — ${verdict.reason}`);
         }
@@ -6233,7 +6304,7 @@ async function generateStructuredContentInternal(
       // ✅ [2026-02-01] 쇼핑커넥트(affiliate) 모드 제목 검증 및 패치
       // ✅ [FIX] 모든 시도에서 제목 패치 적용 (attempt < MAX_ATTEMPTS 조건 제거)
       // ✅ [2026-02-04 FIX] isShoppingConnectMode도 체크하여 URL 기반 쇼핑커넥트에서도 제목 패치 작동
-      if (allowLegacyPostDraftLlm && !_useKwTitle && (isShoppingConnectMode || mode === 'affiliate')) {
+      if (allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && (isShoppingConnectMode || mode === 'affiliate')) {
         const titleIssues = computeAffiliateTitleCriticalIssues(parsed.selectedTitle, source);
         if (titleIssues.length > 0 && costPolicy.allowLlmTitlePatch) {
           try {
@@ -6501,7 +6572,11 @@ async function generateStructuredContentInternal(
           }
 
           // Phase 5: Self-critique 2-pass — LLM이 자기 글을 페르소나 관점에서 점검 + 부분 재작성
-          if (allowLegacyPostDraftLlm && isSelfCritiqueEnabled({ enableSelfCritique: (source as any).enableSelfCritique })) {
+          if (
+            allowAutomaticProviderRetry
+            && allowLegacyPostDraftLlm
+            && isSelfCritiqueEnabled({ enableSelfCritique: (source as any).enableSelfCritique })
+          ) {
             const personaCard = buildPersonaCard(detectCategory(source.toneStyle || 'general'));
             const critiqued = await selfCritiqueAndRewrite(
               optimized.bodyPlain,
@@ -6524,7 +6599,8 @@ async function generateStructuredContentInternal(
         }
 
         // 네이버 점수 분석 — LLM rubric (semantic) vs deterministic keyword counter
-        const useLlmRubric = allowLegacyPostDraftLlm
+        const useLlmRubric = allowAutomaticProviderRetry
+          && allowLegacyPostDraftLlm
           && isLlmRubricEnabled({ useLlmRubric: (source as any).useLlmRubric });
         const deterministicFallback = () => analyzeNaverScore(optimized.bodyPlain || '');
         const naverScore = useLlmRubric

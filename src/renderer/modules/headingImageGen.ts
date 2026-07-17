@@ -2105,7 +2105,8 @@ export function initHeadingImageGeneration(): void {
 
           const saveResult = await window.api.downloadAndSaveMultipleImages(
             allImagesToSave,
-            sanitizedFolderName
+            sanitizedFolderName,
+            { destination: 'configured-root' },
           );
 
           // 저장된 경로로 이미지 업데이트

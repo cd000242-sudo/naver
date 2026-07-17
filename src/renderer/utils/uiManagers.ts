@@ -15,6 +15,12 @@ const FRIENDLY_KEYWORDS: Array<[RegExp, string]> = [
     [/Invalid state\b/gi, '내부 상태 오류 (앱 재시작 권장)'],
     [/원인 불명|알 수 없는 오류|unknown error|Unknown error|\bunknown\b/gi, '잠시 후 다시 시도하거나 다른 옵션을 선택해주세요'],
 ];
+
+export interface ToastOptions {
+    /** Leave false only for UI that must be visible in its final state on first paint. */
+    animate?: boolean;
+}
+
 function toUserFriendlyMessage(input: string): string {
     let msg = String(input || '').trim();
     if (!msg) return '잠시 후 다시 시도해주세요.';
@@ -78,7 +84,14 @@ export class ToastManager {
         return ToastManager.instance;
     }
 
-    show(message: string, type: 'success' | 'error' | 'warning' | 'info' = 'info', duration: number = 3000): void {
+    show(
+        message: string,
+        type: 'success' | 'error' | 'warning' | 'info' = 'info',
+        duration: number = 3000,
+        options: ToastOptions = {}
+    ): void {
+        const shouldAnimate = options.animate ?? true;
+
         if (!this.container) {
             this.container = document.getElementById('toast-container');
 
@@ -120,8 +133,8 @@ export class ToastManager {
       gap: 12px;
       font-size: 14px;
       font-weight: 500;
-      opacity: 0;
-      transform: translateX(100%);
+      opacity: ${shouldAnimate ? '0' : '1'};
+      transform: ${shouldAnimate ? 'translateX(100%)' : 'translateX(0)'};
       transition: all 0.3s ease;
     `;
 
@@ -141,10 +154,12 @@ export class ToastManager {
         this.container.appendChild(toast);
 
         // ✅ 애니메이션 시작 (인라인 스타일)
-        setTimeout(() => {
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateX(0)';
-        }, 10);
+        if (shouldAnimate) {
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(0)';
+            }, 10);
+        }
 
         // ✅ 자동 제거 — [v2.10.136] requestIdleCallback으로 main thread 양보
         //   v2.10.133: jitter로 timing 분산 → 그래도 사용자 보고 110ms LongTask 잔존.
@@ -219,8 +234,8 @@ export class ToastManager {
         this.show(toUserFriendlyMessage(message), 'warning', duration);
     }
 
-    info(message: string, duration?: number): void {
-        this.show(message, 'info', duration);
+    info(message: string, duration?: number, options?: ToastOptions): void {
+        this.show(message, 'info', duration, options);
     }
 }
 

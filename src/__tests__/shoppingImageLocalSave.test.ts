@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { saveCollectedShoppingImagesToLocal } from '../renderer/utils/shoppingImageLocalSave';
 
@@ -32,5 +34,25 @@ describe('saveCollectedShoppingImagesToLocal', () => {
       localPath: 'C:/configured-images/product_1_main.jpg',
       savedToLocal: 'C:/configured-images/product_1_main.jpg',
     });
+  });
+
+  it('keeps the manual shopping-collection save path in the configured root too', () => {
+    const source = fs.readFileSync(
+      path.join(process.cwd(), 'src', 'renderer', 'modules', 'headingImageGen.ts'),
+      'utf8',
+    );
+    const shoppingCollectionStart = source.indexOf('const shoppingCollectBtn');
+    const saveCallStart = source.indexOf(
+      'const saveResult = await window.api.downloadAndSaveMultipleImages(',
+      shoppingCollectionStart,
+    );
+    const manualShoppingSaveCall = source.slice(
+      saveCallStart,
+      source.indexOf(');', saveCallStart) + 2,
+    );
+
+    expect(manualShoppingSaveCall).toMatch(
+      /downloadAndSaveMultipleImages\(\s*allImagesToSave,\s*sanitizedFolderName,\s*\{\s*destination:\s*'configured-root'\s*}\s*,?\s*\)/,
+    );
   });
 });

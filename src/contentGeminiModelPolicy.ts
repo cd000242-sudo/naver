@@ -1,7 +1,7 @@
 import {
   GEMINI_TEXT_MODELS,
-  normalizeGeminiTextModelId,
 } from './runtime/modelRegistry.js';
+import { normalizeGeminiPrepaidTextModelId } from './runtime/geminiTextModelNormalization.js';
 
 export interface GeminiModelChainConfig {
   primaryGeminiTextModel?: string;
@@ -22,7 +22,7 @@ export function buildGeminiModelChain(config?: GeminiModelChainConfig): GeminiMo
   if (!primaryModel.startsWith('gemini-')) {
     throw new Error(`TEXT_MODEL_PROVIDER_MISMATCH: expected=gemini, selected=${primaryModel}`);
   } else {
-    primaryModel = normalizeGeminiTextModelId(primaryModel);
+    primaryModel = normalizeGeminiPrepaidTextModelId(primaryModel);
   }
 
   const isPro = primaryModel.includes('-pro');

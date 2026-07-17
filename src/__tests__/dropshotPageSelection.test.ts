@@ -38,6 +38,21 @@ describe('Dropshot page selection', () => {
     expect(context.newPage).not.toHaveBeenCalled();
   });
 
+  it('waits for Chrome\'s delayed initial tab before creating a fallback tab', async () => {
+    const delayedBlankPage = makePage('about:blank');
+    const context = {
+      pages: vi.fn()
+        .mockReturnValueOnce([])
+        .mockReturnValueOnce([delayedBlankPage]),
+      waitForEvent: vi.fn(async () => delayedBlankPage),
+      newPage: vi.fn(),
+    };
+
+    await expect(selectDropshotPage(context)).resolves.toBe(delayedBlankPage);
+    expect(context.waitForEvent).toHaveBeenCalledWith('page', { timeout: 1_000 });
+    expect(context.newPage).not.toHaveBeenCalled();
+  });
+
   it('prefers the AI Studio tab over a newer Dropshot account or callback tab', async () => {
     const studioPage = makePage('https://aistudio.dropshot.io/ko/workspace/board');
     const accountPage = makePage('https://stock.dropshot.io/auth/callback');

@@ -332,42 +332,45 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
     declaredClaimRepair.rewriteCount,
   );
   policyResult = advisory.policyResult;
+  const policyAdvisoryReasons = [...new Set([
+    ...advisory.advisoryReasons,
+    ...policyResult.block_reasons,
+    ...(policyResult.manual_review?.reasons || []),
+  ])];
   const articleId = stringValue(payload.postId) || `policy-${policyResult.input_hash.slice(0, 20)}`;
 
   let guardReasons: string[] = [];
   let guardAdvisoryReasons: string[] = [];
-  if (policyResult.decision === 'PASS') {
-    try {
-      const state = await stateStore.load();
-      const scheduledAt = payload.publishMode === 'schedule'
-        ? resolveScheduledPublishAt(payload.scheduleDate, payload.scheduleTime)
-        : null;
-      if (payload.publishMode === 'schedule' && !scheduledAt) {
-        guardReasons = ['BLOCK_INVALID_SCHEDULE_DATE'];
+  try {
+    const state = await stateStore.load();
+    const scheduledAt = payload.publishMode === 'schedule'
+      ? resolveScheduledPublishAt(payload.scheduleDate, payload.scheduleTime)
+      : null;
+    if (payload.publishMode === 'schedule' && !scheduledAt) {
+      guardReasons = ['BLOCK_INVALID_SCHEDULE_DATE'];
+      policyResult = blockForStorageFailure(policyResult, ...guardReasons);
+    } else {
+      const guard = evaluatePublishGuard({
+      policyResult,
+      state,
+      accountId: effectiveInput.account_id || 'default-account',
+      now: scheduledAt?.date || now,
+      config,
+      env: options.env,
+      enforceCadence: payload.publishMode !== 'draft',
+      currentArticleId: articleId,
+      excludeCurrentArticle: excludeOwnScheduledReservation,
+      });
+      const guardDisposition = partitionPublishGuardReasons(guard.reasons);
+      guardReasons = [...guardDisposition.blockingReasons];
+      guardAdvisoryReasons = [...guardDisposition.advisoryReasons];
+      if (guardReasons.length > 0) {
         policyResult = blockForStorageFailure(policyResult, ...guardReasons);
-      } else {
-        const guard = evaluatePublishGuard({
-        policyResult,
-        state,
-        accountId: effectiveInput.account_id || 'default-account',
-        now: scheduledAt?.date || now,
-        config,
-        env: options.env,
-        enforceCadence: payload.publishMode !== 'draft',
-        currentArticleId: articleId,
-        excludeCurrentArticle: excludeOwnScheduledReservation,
-        });
-        const guardDisposition = partitionPublishGuardReasons(guard.reasons);
-        guardReasons = [...guardDisposition.blockingReasons];
-        guardAdvisoryReasons = [...guardDisposition.advisoryReasons];
-        if (guardReasons.length > 0) {
-          policyResult = blockForStorageFailure(policyResult, ...guardReasons);
-        }
       }
-    } catch {
-      guardReasons = ['BLOCK_PUBLICATION_STATE_UNAVAILABLE'];
-      policyResult = blockForStorageFailure(policyResult, guardReasons[0]);
     }
+  } catch {
+    guardReasons = ['BLOCK_PUBLICATION_STATE_UNAVAILABLE'];
+    policyResult = blockForStorageFailure(policyResult, guardReasons[0]);
   }
 
   try {
@@ -377,16 +380,17 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   }
 
   const preparedPayload = applyResultToPayload(payload, policyResult, effectiveInput);
-  const finalReasons = [...new Set([...policyResult.block_reasons, ...guardReasons])];
+  const finalReasons = [...new Set([...guardReasons])];
   const finalAdvisoryReasons = [...new Set([
-    ...advisory.advisoryReasons,
+    ...policyAdvisoryReasons,
     ...guardAdvisoryReasons,
   ])];
   return {
-    allowed: policyResult.decision === 'PASS' && policyResult.publication.allowed && guardReasons.length === 0,
+    allowed: guardReasons.length === 0,
     reasons: finalReasons,
     advisoryReasons: finalAdvisoryReasons,
-    manualReviewRequired: isOnlyRecentPostManualReviewReasons(finalReasons),
+    manualReviewRequired: policyResult.publication.manual_review_required
+      || isOnlyRecentPostManualReviewReasons(policyAdvisoryReasons),
     manualReviewReasons: recentPostManualReviewReasons(finalReasons),
     articleId,
     policyResult,

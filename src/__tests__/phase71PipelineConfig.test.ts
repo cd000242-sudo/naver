@@ -44,7 +44,7 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     expect(cfg.disclosure).toEqual({
       enabledSetting: null,
       text: '',
-      defaultText: '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.',
+      defaultText: '[광고] 이 글에는 제휴 링크가 포함될 수 있습니다.',
     });
     expect(cfg.safety).toEqual({
       adbIpChangeEnabled: false,

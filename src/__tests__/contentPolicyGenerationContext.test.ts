@@ -95,7 +95,7 @@ describe('generation policy context', () => {
     expect(result.reasons).not.toContain('BLOCK_MISSING_FACTS');
   });
 
-  it('still requires verified facts for business and affiliate content', async () => {
+  it('keeps missing business facts as a warning so generation can continue', async () => {
     const userDataPath = await tempDir();
     const recentPosts = makeRecentPosts(20);
     const result = await prepareGenerationPolicyContext({
@@ -112,8 +112,29 @@ describe('generation policy context', () => {
       },
     });
 
-    expect(result.allowed).toBe(false);
+    expect(result.allowed).toBe(true);
     expect(result.reasons).toContain('BLOCK_MISSING_FACTS');
+    expect(result.prompt).toContain('recent-0');
+  });
+
+  it('keeps missing reader context as a warning instead of blocking generation', async () => {
+    const userDataPath = await tempDir();
+    const recentPosts = makeRecentPosts(20);
+    const result = await prepareGenerationPolicyContext({
+      userDataPath,
+      config: await loadContentPolicy(),
+      context: {
+        input: makePolicyInput({
+          target_reader: '',
+          recent_posts: recentPosts,
+        }),
+        recentPostsSnapshot: recentPosts,
+      },
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.reasons).toContain('BLOCK_MISSING_TARGET_READER');
+    expect(result.prompt).toContain('recent-0');
   });
 
   it('allows draft generation but keeps publish review required when all history is unavailable', async () => {

@@ -5,10 +5,15 @@ import {
   GEMINI_TEXT_MODELS,
   normalizeGeminiTextModelId,
 } from './runtime/modelRegistry.js';
+import {
+  DEFAULT_GENERATION_SUBMISSION_MODE,
+  shouldAllowAutomaticProviderRetry,
+  type GenerationSubmissionMode,
+} from './generation/submissionPolicy.js';
 
 // ==================== 타입 정의 ====================
 
-interface GenerateOptions {
+export interface GenerateOptions {
   targetAudience?: string;
   tone?: 'friendly' | 'professional' | 'casual';
   wordCount?: number;
@@ -17,9 +22,11 @@ interface GenerateOptions {
   blogType?: 'review' | 'informative' | 'storytelling';
   contentMode?: 'seo' | 'homefeed' | 'mate'; // ✅ SEO/홈판/네이버 메이트 노출 최적화 모드
   categoryHint?: string; // ✅ 2축 분리: 카테고리 힌트 (연예, 시사, 건강, IT 등)
+  /** Public generation is at-most-once unless a trusted compatibility caller opts in. */
+  submissionMode?: GenerationSubmissionMode;
 }
 
-interface GenerateResult {
+export interface GenerateResult {
   content: string;
   usage: {
     promptTokens: number;
@@ -28,6 +35,8 @@ interface GenerateResult {
     estimatedCost: number;
   };
   modelUsed: string;
+  /** Editorial diagnostics never invalidate an already received provider draft. */
+  warnings?: readonly string[];
 }
 
 // ==================== 상수 ====================
@@ -157,21 +166,22 @@ export function getGeminiModel(): { model: GenerativeModel; modelName: string } 
 
 // ==================== 헬퍼 함수 ====================
 
-function validateContent(text: string): boolean {
+function getContentQualityWarnings(text: string): string[] {
   const trimmed = text.trim();
+  const warnings: string[] = [];
 
   if (trimmed.length < 1000 || trimmed.length > 10000) {
     console.warn(`⚠️ 글자 수 이상: ${trimmed.length}자`);
-    return false;
+    warnings.push(`글자 수 권장 범위(1,000~10,000자) 밖입니다: ${trimmed.length}자`);
   }
 
   const h2Count = (trimmed.match(/##/g) || []).length;
   if (h2Count < 3) {
     console.warn(`⚠️ 소제목 부족: ${h2Count}개`);
-    return false;
+    warnings.push(`소제목 권장 개수(3개)보다 적습니다: ${h2Count}개`);
   }
 
-  return true;
+  return warnings;
 }
 
 // ✅ Gemini 오류 메시지 한글화 함수 (외부 공유 가능)
@@ -278,8 +288,9 @@ export async function generateBlogContent(
     throw new Error('GEMINI_API_KEY가 설정되어 있지 않습니다.');
   }
 
-  const maxRetries = 2;
-  const baseDelay = 1000;
+  const submissionMode = options?.submissionMode ?? DEFAULT_GENERATION_SUBMISSION_MODE;
+  const allowAutomaticProviderRetry = shouldAllowAutomaticProviderRetry(submissionMode);
+  const maxRetries = allowAutomaticProviderRetry ? 2 : 1;
 
   let lastError: Error | null = null;
 
@@ -292,7 +303,7 @@ export async function generateBlogContent(
     for (let modelIdx = 0; modelIdx < modelsToTry.length; modelIdx++) {
       const modelName = modelsToTry[modelIdx];
       let perModelRetryCount = 0;
-      const PER_MODEL_MAX = 4; // ✅ [v1.4.44] 충분한 재시도
+      const PER_MODEL_MAX = allowAutomaticProviderRetry ? 4 : 1;
 
       while (perModelRetryCount < PER_MODEL_MAX) {
         try {
@@ -332,8 +343,9 @@ export async function generateBlogContent(
             throw new Error('빈 응답');
           }
 
-          if (!validateContent(text)) {
-            throw new Error('품질 기준 미달');
+          const qualityWarnings = getContentQualityWarnings(text);
+          if (qualityWarnings.length > 0) {
+            console.warn(`[Gemini] 품질 경고 후 계속: ${qualityWarnings.join(' / ')}`);
           }
 
           const usage = (apiResult.response as any).usageMetadata;
@@ -365,6 +377,9 @@ export async function generateBlogContent(
               estimatedCost: (totalTokens / 1_000_000) * 0.075,
             },
             modelUsed: modelName,
+            ...(qualityWarnings.length > 0
+              ? { warnings: Object.freeze([...qualityWarnings]) }
+              : {}),
           };
 
           if (options === undefined) {
@@ -399,7 +414,7 @@ export async function generateBlogContent(
           }
 
           // ✅ [v1.4.44] 429 RPM → 지수 백오프 재시도
-          if (isQuota) {
+          if (isQuota && allowAutomaticProviderRetry) {
             perModelRetryCount++;
             let waitMs = Math.min(5000 * Math.pow(1.5, perModelRetryCount - 1), 45000);
             const retryMatch = errorMessage.match(/retry in ([\d.]+)(s|ms)/i);
@@ -417,7 +432,7 @@ export async function generateBlogContent(
           }
 
           // ✅ [v1.4.49] 503/500 서버 에러 → 지수 백오프 + 최대 6회 재시도 (약 2분)
-          if (isServerError) {
+          if (isServerError && allowAutomaticProviderRetry) {
             perModelRetryCount++;
             const serverErrorMaxRetries = 6;
             if (perModelRetryCount < serverErrorMaxRetries) {
@@ -494,8 +509,9 @@ export async function* generateBlogContentStream(
         yield chunkText;
       }
 
-      if (!validateContent(fullText)) {
-        console.warn(`[Gemini Stream] Content quality check failed for ${modelName}`);
+      const streamQualityWarnings = getContentQualityWarnings(fullText);
+      if (streamQualityWarnings.length > 0) {
+        console.warn(`[Gemini Stream] 품질 경고 후 계속 (${modelName}): ${streamQualityWarnings.join(' / ')}`);
         // 품질 미달 시 다음 모델로 넘어가거나 종료 (스트리밍은 중간에 이미 데이터가 나갔으므로 예외 처리 필요)
         // 여기서는 일단 성공한 것으로 간주하되 경고만 남김
       }
@@ -535,7 +551,7 @@ export async function* generateBlogContentStream(
 
 // ==================== Exports ====================
 
-export { getClient, GenerateOptions, GenerateResult };
+export { getClient };
 
 // ==================== 이미지 검색어 최적화 (100점 개선) ====================
 

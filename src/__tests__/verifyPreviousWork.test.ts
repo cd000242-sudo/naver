@@ -170,7 +170,7 @@ describe('Gemini 모델 체인 (자동 폴백 제거, v1.4.42+)', () => {
     const { uniqueModels, isPro } = buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-2.5-pro' });
     expect(isPro).toBe(false);
     expect(uniqueModels).toHaveLength(1);
-    expect(uniqueModels[0]).toBe('gemini-3.5-flash');
+    expect(uniqueModels[0]).toBe('gemini-3.1-flash-lite');
   });
 
   it('비-Gemini 모델명 입력 시 무음 폴백 없이 공급자 불일치를 알린다', () => {

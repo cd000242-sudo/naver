@@ -50,6 +50,10 @@ import {
     hasContentQualityV3ProvenanceSignal,
 } from '../../contentQualityV3/publishHandoffStore.js';
 import { enforceContentQualityV3EditorCommit } from '../../contentQualityV3/editorCommitBoundary.js';
+import {
+    resolveContentQualityV3ProductionPublishSafetyMode,
+    stripContentQualityV3PublishMetadata,
+} from '../../contentQualityV3/productionPublishSafetyMode.js';
 
 // ✅ [Phase 4B] ExecutionDependencies는 types/automation.ts에서 정의 — 재export
 export type ExecutionDependencies = IExecutionDependencies;
@@ -725,14 +729,22 @@ export async function runFullPostCycle(
 
     try {
         const deps = getDependencies();
+        const contentQualityV3SafetyMode = resolveContentQualityV3ProductionPublishSafetyMode(process.env);
         const incomingV3Provenance = hasContentQualityV3ProvenanceSignal(effectivePayload);
-        effectivePayload = await enforceContentQualityV3PublishPayload(
-            contentQualityV3PublishHandoffStore,
-            effectivePayload,
-            { consume: false },
-        ) as PostCyclePayload;
-        acceptedV3Provenance = incomingV3Provenance
-            || hasContentQualityV3ProvenanceSignal(effectivePayload);
+        if (contentQualityV3SafetyMode === 'strict') {
+            effectivePayload = await enforceContentQualityV3PublishPayload(
+                contentQualityV3PublishHandoffStore,
+                effectivePayload,
+                { consume: false },
+            ) as PostCyclePayload;
+            acceptedV3Provenance = incomingV3Provenance
+                || hasContentQualityV3ProvenanceSignal(effectivePayload);
+        } else {
+            if (incomingV3Provenance) {
+                sendLog('⚠️ 콘텐츠 안전·품질 V3 검증 경고: 글·이미지는 유지하고 발행을 계속합니다.');
+            }
+            effectivePayload = stripContentQualityV3PublishMetadata(effectivePayload);
+        }
 
         // 1. 설정 동기화
         await syncConfiguration();
@@ -813,22 +825,25 @@ export async function runFullPostCycle(
             sendLog(`✅ 콘텐츠 정책 통과 (${preparedPolicy.policyResult.quality_report.total_score}점, 최근 글 ${preparedPolicy.policyResult.similarity_report.compared_post_count}건 비교)`);
         }
 
-        // Revalidate and canonicalize the policy-transformed payload without
-        // consuming it. Consumption is attached later at the browser's common
-        // final confirmation-click boundary, after login, editor application,
-        // pre-publish checks, modal setup, and button discovery.
-        effectivePayload = await enforceContentQualityV3PublishPayload(
-            contentQualityV3PublishHandoffStore,
-            effectivePayload,
-            { consume: false },
-        ) as PostCyclePayload;
+        // Strict V3 provenance verification is an opt-in internal mode. Normal
+        // customer publishing keeps quality diagnostics visible but never lets
+        // a stale/replayed V3 ticket block text, image, or publish completion.
+        if (contentQualityV3SafetyMode === 'strict') {
+            effectivePayload = await enforceContentQualityV3PublishPayload(
+                contentQualityV3PublishHandoffStore,
+                effectivePayload,
+                { consume: false },
+            ) as PostCyclePayload;
 
-        const currentV3Provenance = hasContentQualityV3ProvenanceSignal(effectivePayload);
-        if (acceptedV3Provenance && !currentV3Provenance) {
-            throw new ContentQualityV3PublishHandoffError('invalid_handoff_state');
+            const currentV3Provenance = hasContentQualityV3ProvenanceSignal(effectivePayload);
+            if (acceptedV3Provenance && !currentV3Provenance) {
+                throw new ContentQualityV3PublishHandoffError('invalid_handoff_state');
+            }
+            acceptedV3Provenance = acceptedV3Provenance || currentV3Provenance;
+        } else {
+            effectivePayload = stripContentQualityV3PublishMetadata(effectivePayload);
         }
-        acceptedV3Provenance = acceptedV3Provenance || currentV3Provenance;
-        const requiredMarker = acceptedV3Provenance;
+        const requiredMarker = contentQualityV3SafetyMode === 'strict' && acceptedV3Provenance;
         if (requiredMarker && effectivePayload.publishMode !== 'draft') {
             // V3 remains text-only until every raster/embed producer has a
             // source-bound attestation. Enforce this before browser creation or

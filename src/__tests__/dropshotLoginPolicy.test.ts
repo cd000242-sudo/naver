@@ -21,7 +21,7 @@ describe('Dropshot login success policy', () => {
   });
 
   it('does not close a valid cached generation session during a status check', () => {
-    const checkIndex = source.indexOf('async function checkDropshotLoginInternal');
+    const checkIndex = source.indexOf('async function checkCachedDropshotLogin');
     const loginIndex = source.indexOf('async function dropshotLoginInternal', checkIndex);
     const checkBlock = source.slice(checkIndex, loginIndex);
     const cachedSuccessIndex = checkBlock.indexOf('if (cachedLoggedIn)');
@@ -63,23 +63,23 @@ describe('Dropshot login success policy', () => {
   });
 
   it('recognizes a valid token before requiring workspace or unlimited controls', () => {
-    const checkIndex = source.indexOf('async function checkDropshotLoginInternal');
+    const checkIndex = source.indexOf('async function checkCachedDropshotLogin');
     const loginIndex = source.indexOf('async function dropshotLoginInternal', checkIndex);
     const checkBlock = source.slice(checkIndex, loginIndex);
     const authIndex = checkBlock.indexOf('if (cachedLoggedIn)');
-    const successIndex = checkBlock.indexOf('loggedIn: true', authIndex);
+    const successIndex = checkBlock.indexOf("phase: 'authenticated'", authIndex);
     const controlsIndex = checkBlock.indexOf('ensureDropshotControls', authIndex);
 
     expect(authIndex).toBeGreaterThan(-1);
     expect(successIndex).toBeGreaterThan(authIndex);
     expect(successIndex).toBeLessThan(controlsIndex);
-    expect(checkBlock).toContain("phase: 'authenticated'");
+    expect(checkBlock).toContain('loggedIn: true');
   });
 
   it('releases operation ownership through finally blocks', () => {
     expect(source).toContain('tryBeginDropshotLogin()');
     expect(source).toContain('tryBeginDropshotCheck()');
-    expect(source).toMatch(/_loginPromise\s*=\s*dropshotLoginInternal[\s\S]*finally[\s\S]*endDropshotLogin\(\)/);
-    expect(source).toMatch(/_checkPromise\s*=\s*checkDropshotLoginInternal[\s\S]*finally[\s\S]*endDropshotCheck\(\)/);
+    expect(source).toMatch(/_loginPromise\s*=\s*dropshotLoginInternal\(onLog\)\.finally\(\(\)\s*=>\s*\{[\s\S]*endDropshotLogin\(\)/);
+    expect(source).toMatch(/_checkPromise\s*=\s*checkCachedDropshotLogin\(onLog\)\.finally\(\(\)\s*=>\s*\{[\s\S]*endDropshotCheck\(\)/);
   });
 });

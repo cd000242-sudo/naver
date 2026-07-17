@@ -209,6 +209,45 @@ export function resolveAffiliateContentLengthTarget(
   return Math.min(requested, 1300);
 }
 
+/**
+ * Keeps sparse shopping pages useful without padding them with repetitive
+ * caveats. This is intentionally a prompt contract, not a publish gate: a
+ * model may miss it, but the generated draft must still remain publishable.
+ */
+export function buildAffiliatePurchaseIntentContract(input: AffiliateEvidenceInput): string {
+  const evidence = classifyAffiliateEvidence(input);
+  const title = normaliseText(input.title);
+  const price = normaliseText(input.productPrice);
+  const rawText = normaliseText(input.rawText)
+    .replace(title, ' ')
+    .replace(price, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const concreteFactCount = countUniqueConcreteEvidence(input.productSpec, rawText);
+  const isSparseDecisionBrief = evidence.mode === 'spec_only' && concreteFactCount < 3;
+  const contractMode = isSparseDecisionBrief
+    ? 'SPARSE_DECISION_BRIEF'
+    : 'EVIDENCE_TO_PURCHASE_DECISION';
+
+  const sparseRules = isSparseDecisionBrief
+    ? `
+- 근거가 3개 미만이면 최소 글자 수보다 정확성과 읽을 가치를 우선한다. 700~1300자의 짧은 구매 판단 글로 끝내며 같은 가격·상품명·주의 문장을 늘려 쓰지 않는다.
+- 소제목은 실제로 다른 판단을 주는 2~4개만 쓴다. 정보가 없는 크기·전원·구성·배송·AS 항목을 빈 체크리스트로 만들지 않는다.
+- 상품명에 들어간 기능 표현은 판매 페이지의 표기라고만 다룬다. 그 단어만으로 성능·설치 방식·공간 효과를 추론하지 않는다.`
+    : `
+- 확보한 서로 다른 근거를 우선순위대로 묶고, 소제목마다 새로운 구매 판단을 하나씩 준다.
+- 충분한 스펙·후기·사용자 메모가 있으면 구체 비교와 적합한 사용 조건을 설명하되 입력에 없는 수치나 체험은 만들지 않는다.`;
+
+  return `[쇼핑 구매전환 품질 계약 — ${contractMode}]
+이 계약은 장황한 면책 안내보다 근거 있는 구매 판단을 우선하며, 품질 평가는 경고로만 남기고 생성·이미지·발행을 중단시키지 않는다.
+
+- 전체 문장의 70% 이상은 확인된 근거 → 생활상 이점 → 잘 맞는 사람 순서로 연결한다. 단, 입력 근거가 없는 이점은 만들지 않는다.
+- 확인·상세페이지·단정 계열 표현은 글 전체에서 합계 2문장 이하로 제한한다. 가격·옵션 변동 안내 1문장과 마지막 CTA 1문장이면 충분하다.
+- 독자가 이미 본 상품명과 가격을 반복하지 말고, 그 정보가 선택에 어떤 의미인지 바로 설명한다.
+- 장점을 나열하는 대신 가장 잘 맞는 사람과 맞지 않는 사람을 구체적으로 좁혀 구매 결정을 돕는다.
+- 작성 과정, 검증 리포트, 정책, 자료 부족 변명은 본문에 쓰지 않는다.${sparseRules}`;
+}
+
 export function buildAffiliateTitleEvidenceDirective(input: AffiliateEvidenceInput): string {
   const evidence = classifyAffiliateEvidence(input);
 

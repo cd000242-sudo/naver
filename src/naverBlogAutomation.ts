@@ -2,7 +2,7 @@
 import puppeteer from 'puppeteer-extra';
 // ✅ [2026-05-25 v2.10.357] StealthPlugin import 제거 — browserSessionManager.ts에서 단일 등록
 // import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import { Browser, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
+import { Browser, Dialog, Frame, Page, ElementHandle, KeyInput } from 'puppeteer';
 import type { StructuredContent, ImagePlan } from './contentGenerator.js';
 import * as path from 'path';
 import * as os from 'os';
@@ -175,6 +175,19 @@ async function safeKeyboardType(
   }
 }
 
+/**
+ * Keep the generic dialog acceptance path out of the draft-conflict handler.
+ * A native "resume draft" prompt must never be accepted before the DOM
+ * resolver has selected a fresh-post path.
+ */
+async function acceptNonDraftBrowserDialog(dialog: Dialog): Promise<void> {
+  try {
+    await dialog.accept();
+  } catch {
+    // The page can close a dialog while the handler is waiting.
+  }
+}
+
 // ✅ [Smart Typing] 스마트 타이핑 함수 (핵심 키워드 자동 굵게+밑줄)
 async function smartTypeWithAutoHighlight(
   page: Page,
@@ -292,8 +305,12 @@ export interface AutomationOptions {
   accountProxyUrl?: string; // ✅ 계정별 프록시 URL (미설정 시 프록시 없이 직접 연결)
   // [R8-1] 카테고리 적용 실패 시 기본 카테고리로 폴백 발행 허용 (기본: 중단)
   allowCategoryFallback?: boolean;
-  // [R6] PrePublish 차단을 끄고 관찰만 수행 (비상 해제용, 기본: 차단)
+  // Pre-publish diagnostics are warnings by default.  Kept for backward
+  // compatibility; it also overrides an explicitly enabled strict mode.
   prePublishObserveOnly?: boolean;
+  // Only an explicit operator opt-in may turn editor diagnostics into a
+  // publishing veto.  Consumer automation defaults to warning-and-continue.
+  strictPrePublishVerification?: boolean;
 }
 
 export type PublishMode = 'draft' | 'publish' | 'schedule';
@@ -339,8 +356,9 @@ export interface RunOptions {
   previousPostUrl?: string; // ✅ 추가: 같은 카테고리 이전글 URL
   // [R8-1] 카테고리 적용 실패 시 기본 카테고리로 폴백 발행 허용 (기본: 중단)
   allowCategoryFallback?: boolean;
-  // [R6] PrePublish 차단을 끄고 관찰만 수행 (비상 해제용, 기본: 차단)
+  // Kept for backward compatibility; see AutomationOptions above.
   prePublishObserveOnly?: boolean;
+  strictPrePublishVerification?: boolean;
 }
 
 export interface AutomationImage {
@@ -437,6 +455,10 @@ export class NaverBlogAutomation {
   private mainFrame: Frame | null = null;
   private cancelRequested = false;
   private immediatePublishCommitAttempted = false;
+  /** A native or DOM draft-resume prompt was seen and must be resolved safely. */
+  private pendingDraftConflictDialog = false;
+  /** Do not write again until the editor has been proven to be a fresh post. */
+  private requiresFreshEditorContext = false;
   private _prosConsAlreadyInserted = false; // ✅ [2026-02-19] 장단점 표 중복 삽입 방지 플래그
 
   // ✅ Ghost Cursor 인스턴스 (사람 같은 마우스 이동)
@@ -2089,19 +2111,33 @@ export class NaverBlogAutomation {
     this.page.on('dialog', async (dialog) => {
       const type = dialog.type();
       const message = dialog.message();
+      const isDraftConflict = isEditorDraftConflictMessage(message);
+
+      // Accepting this native confirmation resumes the old post. Cancel it and
+      // require the dedicated fresh-post resolver before any text is typed.
+      if (isDraftConflict) {
+        this.pendingDraftConflictDialog = true;
+        this.requiresFreshEditorContext = true;
+        this.log(`🔔 [작성중인 글 감지] 기존 글을 자동으로 이어 쓰지 않습니다: ${message.substring(0, 80)}`);
+        try {
+          await dialog.dismiss();
+        } catch {
+          // The page can remove the confirmation while it is being handled.
+        }
+        return;
+      }
       // 네이버 에디터 내부 상태 충돌 alert 감지 (발행 후 에디터 재진입 시 발생)
       const isEditorStateAlert = message.includes('삭제되었거나') ||
         message.includes('다른 페이지로 변경') ||
         message.includes('게시물이 삭제') ||
-        message.includes('이미 발행') ||
-        isEditorDraftConflictMessage(message);
+        message.includes('이미 발행');
       if (isEditorStateAlert) {
         this.log(`🔔 [에디터 상태 충돌] 자동 수락: ${message.substring(0, 80)}`);
       } else {
         this.log(`🔔 다이얼로그 자동 수락: [${type}] ${message.substring(0, 50)}`);
       }
       try {
-        await dialog.accept();
+        await acceptNonDraftBrowserDialog(dialog);
       } catch (e) {
         // 이미 닫힌 다이얼로그 무시
       }
@@ -4324,6 +4360,71 @@ export class NaverBlogAutomation {
     this.log('✅ 메인 프레임으로 성공적으로 전환했습니다.');
   }
 
+  /**
+   * When a draft-resume dialog or an ambiguous previous publish was observed,
+   * prove that the editor is blank before writing. This deliberately fails
+   * closed rather than overwriting a user-visible draft.
+   */
+  private async assertFreshDraftContext(): Promise<void> {
+    if (!this.pendingDraftConflictDialog && !this.requiresFreshEditorContext) {
+      return;
+    }
+
+    const maxAttempts = 5;
+    let lastContext = 'editor context could not be inspected';
+
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      this.ensureNotCancelled();
+      const frame = await this.getAttachedFrame().catch(() => null);
+      if (!frame) {
+        lastContext = 'editor frame unavailable';
+      } else {
+        const [title, stats] = await Promise.all([
+          readEditorTitleText(frame),
+          collectPrePublishStats(frame).catch(() => null),
+        ]);
+        const hasReadableBody = Boolean(
+          stats
+          && !isEditorBodyUnreadable(stats)
+          && (stats.bodyChars > 0 || Boolean(stats.bodyText?.trim())),
+        );
+
+        if (!title.trim() && stats && !hasReadableBody) {
+          this.pendingDraftConflictDialog = false;
+          this.requiresFreshEditorContext = false;
+          this.log('✅ 새 글 편집 상태를 확인했습니다. 기존 작성중 글에는 입력하지 않습니다.');
+          return;
+        }
+
+        lastContext = `titleChars=${title.trim().length}, bodyChars=${stats?.bodyChars ?? 'unavailable'}`;
+      }
+
+      if (attempt < maxAttempts) {
+        await this.delay(450);
+      }
+    }
+
+    throw new Error(
+      'EDITOR_DRAFT_CONTEXT_NOT_FRESH: 기존 작성중 글 또는 확인할 수 없는 편집 상태가 남아 있어 새 내용을 덮어쓰지 않았습니다. ' +
+      `새 글을 선택하거나 기존 글을 정리한 뒤 다시 실행해 주세요. (${lastContext})`,
+    );
+  }
+
+  /**
+   * Keep the browser open for user inspection after an uncertain publish, but
+   * make every subsequent run re-enter and verify a fresh editor document.
+   */
+  private invalidateEditorStateAfterAmbiguousPublish(): void {
+    this.mainFrame = null;
+    this.pendingDraftConflictDialog = false;
+    this.requiresFreshEditorContext = true;
+    this.immediatePublishCommitAttempted = false;
+    this.publishedUrl = null;
+    (this as any).__editorMainBodyApplied = false;
+    (this as any).__editorContentApplied = false;
+    this.log('⚠️ 발행 결과가 불명확해 현재 창은 확인용으로 유지합니다. 다음 자동화는 새 글 상태를 확인한 뒤에만 입력합니다.');
+  }
+
   private async closeDraftPopup(timeoutMs: number = 3500): Promise<boolean> {
     const attachedFrame = (await this.getAttachedFrame());
     const page = this.ensurePage();
@@ -4390,6 +4491,10 @@ export class NaverBlogAutomation {
 
         detectedThisPass = detectedThisPass || outcome.detected;
         everDetected = everDetected || outcome.detected;
+        if (outcome.detected) {
+          this.pendingDraftConflictDialog = true;
+          this.requiresFreshEditorContext = true;
+        }
         if (outcome.clicked) {
           await this.delay(450);
           this.log(`✅ 작성중인 글 복구 팝업 닫기 완료 (${frame === mainFrame ? '최상위 페이지' : '에디터 프레임'})`);
@@ -4480,6 +4585,7 @@ export class NaverBlogAutomation {
     this.ensureNotCancelled();
     // 초안 복구 팝업은 에디터 진입 후 늦게 나타날 수 있으므로 타이핑 직전에 재확인한다.
     await this.closeDraftPopup(1600);
+    await this.assertFreshDraftContext();
     this.log('🔄 제목 입력 중...');
 
     // 제목이 문자열인지 확인 + 개행 제거 (개행 시 본문으로 밀림 방지)
@@ -4894,13 +5000,13 @@ export class NaverBlogAutomation {
             } catch { /* best-effort */ }
           }
           if (!skipPrePublishReport) {
-          // [SPEC-STABILITY-2026 R6] 정의적 수정: 본문이 기대치보다 한참 짧게 읽히면
+          // A short observed body can be a transient SmartEditor read. Always
+          // re-settle it before reporting, regardless of the warning/strict
+          // publication policy selected for this run.
           // 단발 판독을 진짜 누락으로 단정하지 않는다. 라이브 에디터는 리플로우/비동기
           // 카드 변환 도중 일시적으로 부분만 읽힐 수 있으므로, 안정 대기 + 프레임 재획득으로
           // 최대 3회 재측정해 '가장 완전한 스냅샷'(최대 bodyChars)을 확정한 뒤에만 판정한다.
-          // 재측정해도 여전히 짧으면 진짜 누락 → 그대로 차단(누락 발행 방지 유지).
-          if (this.options.prePublishObserveOnly !== true
-            && isPrePublishBodySuspiciouslyShort(stats, expectations)) {
+          if (isPrePublishBodySuspiciouslyShort(stats, expectations)) {
             const firstReadChars = stats.bodyChars;
             for (let attempt = 1; attempt <= 3; attempt++) {
               await this.delay(500);
@@ -4921,46 +5027,54 @@ export class NaverBlogAutomation {
           }
           let report = evaluatePrePublishReport(stats, expectations);
           this.log(formatPrePublishReport(report));
-          this.emitTailDebugSnapshot('pre-publish-before-blocking', expectations, stats);
-          // [SPEC-STABILITY-2026 R6] 단계적 차단: 결정적 검사 실패 시 발행
-          // 중단 (반쪽 발행 구조적 차단). 서버 의존 검사는 관찰 유지.
-          // 비상 해제: options.prePublishObserveOnly === true
-          if (this.options.prePublishObserveOnly !== true) {
-            let blockingFailures = getBlockingFailures(report);
-            const hashtagPresenceFailed = report.checks.some((check) => check.name === 'hashtag-presence' && !check.pass);
-            if (hashtagPresenceFailed) {
-              const repaired = await this.repairMissingHashtagsBeforePublish(frame, expectations, stats);
-              if (repaired) {
-                stats = await collectPrePublishStats(frame);
-                report = evaluatePrePublishReport(stats, expectations);
-                this.log('[PrePublish] 해시태그 복구 후 재검사');
-                this.log(formatPrePublishReport(report));
-                this.emitTailDebugSnapshot('pre-publish-after-repair', expectations, stats);
-                blockingFailures = getBlockingFailures(report);
-              }
+          this.emitTailDebugSnapshot('pre-publish-before-decision', expectations, stats);
+          let blockingFailures = getBlockingFailures(report);
+          const hashtagPresenceFailed = report.checks.some((check) => check.name === 'hashtag-presence' && !check.pass);
+          if (hashtagPresenceFailed) {
+            const repaired = await this.repairMissingHashtagsBeforePublish(frame, expectations, stats);
+            if (repaired) {
+              stats = await collectPrePublishStats(frame);
+              report = evaluatePrePublishReport(stats, expectations);
+              this.log('[PrePublish] 해시태그 복구 후 재검사');
+              this.log(formatPrePublishReport(report));
+              this.emitTailDebugSnapshot('pre-publish-after-repair', expectations, stats);
+              blockingFailures = getBlockingFailures(report);
             }
-            if (blockingFailures.length > 0) {
-              this.emitTailDebugSnapshot('pre-publish-blocked', expectations, stats, {
+          }
+          if (blockingFailures.length > 0) {
+            const detail = blockingFailures
+              .map((c) => `${c.name}(기대 ${c.expected}/실제 ${c.actual})`)
+              .join(', ');
+            const hashtagDebug = blockingFailures.some((check) => check.name === 'hashtag-presence')
+              ? `\n${formatHashtagPresenceDiagnostics(stats, expectations)}`
+              : '';
+            const strictPrePublishVerification = this.options.strictPrePublishVerification === true
+              && this.options.prePublishObserveOnly !== true;
+            this.emitTailDebugSnapshot(
+              strictPrePublishVerification ? 'pre-publish-blocked-strict' : 'pre-publish-warning',
+              expectations,
+              stats,
+              {
                 blockingFailures: blockingFailures.map((check) => ({
                   name: check.name,
                   expected: check.expected,
                   actual: check.actual,
                 })),
-              });
-              const detail = blockingFailures
-                .map((c) => `${c.name}(기대 ${c.expected}/실제 ${c.actual})`)
-                .join(', ');
-              const hashtagDebug = blockingFailures.some((check) => check.name === 'hashtag-presence')
-                ? `\n${formatHashtagPresenceDiagnostics(stats, expectations)}`
-                : '';
-              throw new Error(`PRE_PUBLISH_BLOCKED:발행 직전 검사 실패 — ${detail}. 누락된 글이 발행되지 않도록 중단합니다.${hashtagDebug}`);
+              },
+            );
+            if (strictPrePublishVerification) {
+              throw new Error(`PRE_PUBLISH_BLOCKED:발행 직전 검사 실패 — ${detail}. 엄격 검증이 켜져 있어 발행을 중단합니다.${hashtagDebug}`);
             }
+            this.log(`[PrePublish] 검사 경고 — ${detail}. 자동화 기본 정책에 따라 발행을 계속합니다.${hashtagDebug}`);
           }
           }
         }
       } catch (assertErr) {
-        // [R6] 의도된 차단은 그대로 위로 — 검사 인프라 오류만 fail-open
-        if ((assertErr as Error)?.message?.startsWith('PRE_PUBLISH_BLOCKED')) throw assertErr;
+        // Strict mode deliberately preserves the explicit veto. In normal
+        // consumer mode diagnostics and inspection errors are warning-only.
+        if (this.options.strictPrePublishVerification === true
+          && this.options.prePublishObserveOnly !== true
+          && (assertErr as Error)?.message?.startsWith('PRE_PUBLISH_BLOCKED')) throw assertErr;
         this.log(`[PrePublish] 검사 자체 실패 (발행 진행): ${(assertErr as Error).message}`);
       }
 
@@ -8244,6 +8358,7 @@ export class NaverBlogAutomation {
 
       // 1단계: 작성중인 글 팝업 먼저 닫기
       await this.closeDraftPopup();
+      await this.assertFreshDraftContext();
       await this.delay(this.DELAYS.MEDIUM); // 500ms → 300ms
 
       // 2단계: 도움말 패널 닫기
@@ -8309,6 +8424,9 @@ export class NaverBlogAutomation {
       }
       throw error;
     } finally {
+      if (postContentAppliedPublishFailure) {
+        this.invalidateEditorStateAfterAmbiguousPublish();
+      }
       // [R7] 발행 종료 — keep-alive ping 재개로 세션 유지(캡차 방지).
       try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
       // keepBrowserOpen이 false이거나 오류 발생 시에만 브라우저 종료
@@ -8686,13 +8804,14 @@ export class NaverBlogAutomation {
 
        this.log(PUBLISH_PIPELINE_LOG_MESSAGES.switchingEditorFrame);
        await this.switchToMainFrame();
-       this.log(PUBLISH_PIPELINE_LOG_MESSAGES.editorFrameReady);
+      this.log(PUBLISH_PIPELINE_LOG_MESSAGES.editorFrameReady);
 
       // 팝업이 완전히 렌더링될 때까지 대기 (최적화)
       await this.delay(1000); // 2000ms → 1000ms
 
       // 1단계: 작성중인 글 팝업 먼저 닫기
       await this.closeDraftPopup();
+      await this.assertFreshDraftContext();
       await this.delay(this.DELAYS.MEDIUM); // 500ms → 300ms
 
       // 2단계: 도움말 패널 닫기
@@ -8775,6 +8894,9 @@ export class NaverBlogAutomation {
     } finally {
       // [R7] 발행 종료 — keep-alive가 이 세션을 다시 ping해 살려두도록 해제.
       try { browserSessionManager.markPublishing(this.options.naverId, false); } catch { /* best-effort */ }
+      if (postContentAppliedPublishFailure) {
+        this.invalidateEditorStateAfterAmbiguousPublish();
+      }
       const postRunPolicy = resolvePostRunBrowserPolicy({
         keepBrowserOpen: resolvedOptions.keepBrowserOpen || postContentAppliedPublishFailure,
         hasBrowser: Boolean(this.browser),

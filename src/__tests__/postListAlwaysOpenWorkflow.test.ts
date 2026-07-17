@@ -6,7 +6,9 @@ import * as path from 'path';
 import {
   chunkGeneratedPostItems,
   escapeGeneratedPostAttribute,
+  focusLoadedPostEditor,
   GENERATED_POST_RENDER_CHUNK_SIZE,
+  makeLoadedPostEditorVisible,
   sanitizeGeneratedPostExternalUrl,
 } from '../renderer/modules/postListUI';
 
@@ -38,6 +40,41 @@ describe('generated post library workflow', () => {
     expect((document.getElementById('publish-mode-select') as HTMLSelectElement).value).toBe('semi-auto');
     expect(syncPublishMode).toHaveBeenCalledWith('semi-auto');
     expect(document.getElementById('unified-semi-auto-section')?.style.display).toBe('block');
+  });
+
+  it('keeps the loaded editor visible and settles scroll/focus without an opacity flash', () => {
+    const editor = document.getElementById('unified-semi-auto-section') as HTMLElement;
+    const titleInput = document.createElement('input');
+    titleInput.id = 'unified-generated-title';
+    document.body.appendChild(titleInput);
+    editor.style.opacity = '0';
+    editor.style.transition = 'opacity 0.5s ease';
+
+    const scrollIntoView = vi.fn();
+    Object.defineProperty(editor, 'scrollIntoView', {
+      configurable: true,
+      value: scrollIntoView,
+    });
+    const focus = vi.spyOn(titleInput, 'focus');
+    const requestAnimationFrame = vi.fn((callback: FrameRequestCallback) => {
+      callback(0);
+      return 1;
+    });
+    vi.stubGlobal('requestAnimationFrame', requestAnimationFrame);
+
+    try {
+      makeLoadedPostEditorVisible();
+      focusLoadedPostEditor();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+
+    expect(editor.style.display).toBe('block');
+    expect(editor.style.opacity).toBe('');
+    expect(editor.style.transition).toBe('');
+    expect(requestAnimationFrame).toHaveBeenCalledTimes(1);
+    expect(scrollIntoView).toHaveBeenCalledWith({ behavior: 'auto', block: 'start' });
+    expect(focus).toHaveBeenCalledWith({ preventScroll: true });
   });
 
   it('preserves a semi-auto transition requested before smart-publish initialization', async () => {

@@ -117,4 +117,22 @@ describe('affiliate pipeline grounding', () => {
     expect(pressure.score).toBeLessThan(concrete.score);
     expect(pressure.issues.some(issue => issue.includes('판매 압박'))).toBe(true);
   });
+
+  it('상품명과 가격만 수집된 쇼핑 글은 장황한 확인문 대신 짧은 구매 판단 글을 요구한다', () => {
+    const prompt = buildModeBasedPrompt({
+      sourceType: 'custom_text',
+      rawText: '상품명: 고요아 냉풍기 에어쿨러 이동식 에어컨\n가격: 239,000원',
+      title: '고요아 냉풍기 에어쿨러 이동식 에어컨',
+      contentMode: 'affiliate',
+      articleType: 'shopping_review',
+      isReviewType: true,
+      productPrice: '239,000원',
+    }, 'affiliate', undefined, 2500);
+
+    expect(prompt).toContain('[쇼핑 구매전환 품질 계약 — SPARSE_DECISION_BRIEF]');
+    expect(prompt).toContain('근거가 3개 미만이면 최소 글자 수보다');
+    expect(prompt).toContain('근거 → 생활상 이점 → 잘 맞는 사람');
+    expect(prompt).toContain('전체 문장의 70% 이상');
+    expect(prompt).toContain('확인·상세페이지·단정 계열 표현은 글 전체에서 합계 2문장 이하');
+  });
 });

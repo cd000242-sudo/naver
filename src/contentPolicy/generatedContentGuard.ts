@@ -73,11 +73,30 @@ function toDraft(content: Record<string, any>): ArticleDraft {
   };
 }
 
-function applyResult<T extends Record<string, any>>(content: T, result: ContentPolicyResult): T {
+function applyResult<T extends Record<string, any>>(
+  content: T,
+  result: ContentPolicyResult,
+  advisoryReasons: readonly string[],
+): T {
   const next: Record<string, any> = {
     ...content,
     contentPolicy: result,
   };
+  if (advisoryReasons.length > 0) {
+    const currentQuality = content.quality && typeof content.quality === 'object'
+      ? content.quality
+      : {};
+    const currentWarnings = Array.isArray(currentQuality.warnings)
+      ? currentQuality.warnings.map(String)
+      : [];
+    next.quality = {
+      ...currentQuality,
+      warnings: [...new Set([
+        ...currentWarnings,
+        ...advisoryReasons.map((reason) => `[콘텐츠 정책 경고] ${reason}`),
+      ])],
+    };
+  }
   if (result.rewrite_count > 0) {
     next.selectedTitle = result.article.title;
     next.summary = result.article.summary;
@@ -112,13 +131,23 @@ export async function guardGeneratedContent<T extends Record<string, any>>(
     declaredClaimRepair.rewriteCount,
   );
   const policyResult = advisory.policyResult;
+  const advisoryReasons = [...new Set([
+    ...advisory.advisoryReasons,
+    ...policyResult.block_reasons,
+    ...(policyResult.manual_review?.reasons || []),
+  ])];
+  const hardReasons = [...policyResult.block_reasons];
 
   return {
-    allowed: policyResult.decision === 'PASS' && policyResult.publication.allowed,
+    // Content quality diagnostics have already been converted to advisories by
+    // acceptContentPolicyAdvisories.  The remaining reasons are structural
+    // impossibilities only (currently an empty draft), so keep this boundary
+    // explicit instead of accidentally allowing image/publish work to proceed.
+    allowed: hardReasons.length === 0,
     manualReviewRequired: policyResult.publication.manual_review_required,
-    reasons: [...policyResult.block_reasons],
-    advisoryReasons: advisory.advisoryReasons,
-    content: applyResult(options.structuredContent, policyResult),
+    reasons: hardReasons,
+    advisoryReasons,
+    content: applyResult(options.structuredContent, policyResult, advisoryReasons),
     policyResult,
   };
 }

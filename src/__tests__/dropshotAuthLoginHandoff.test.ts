@@ -88,19 +88,14 @@ describe('Dropshot Auth.js login handoff', () => {
   });
 
   it('detects the new session on the next poll and immediately hides and adopts that context', async () => {
-    const probeContext: any = { pages: vi.fn(), newPage: vi.fn(), on: vi.fn() };
     const visibleContext: any = { pages: vi.fn(), newPage: vi.fn(), on: vi.fn() };
-    const probePage = createPage('probe-page', probeContext);
     const visiblePage = createPage('visible-page', visibleContext);
-    probeContext.pages.mockReturnValue([probePage]);
-    probeContext.newPage.mockResolvedValue(probePage);
     visibleContext.pages.mockReturnValue([visiblePage]);
     visibleContext.newPage.mockResolvedValue(visiblePage);
-    mocks.launchBrowser.mockResolvedValueOnce(probeContext).mockResolvedValueOnce(visibleContext);
+    mocks.launchBrowser.mockResolvedValueOnce(visibleContext);
     mocks.selectDropshotPage.mockImplementation(async (context: any) => context.pages()[0]);
 
     const fetchMock = vi.fn()
-      .mockResolvedValueOnce({ ok: true, status: 200, json: vi.fn().mockResolvedValue(null) })
       .mockResolvedValueOnce({
         ok: true,
         status: 200,
@@ -112,12 +107,12 @@ describe('Dropshot Auth.js login handoff', () => {
     await vi.advanceTimersByTimeAsync(3_000);
 
     await expect(resultPromise).resolves.toMatchObject({ loggedIn: true });
-    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(mocks.minimizeDropshotWindow).toHaveBeenCalledTimes(1);
     expect(mocks.minimizeDropshotWindow).toHaveBeenCalledWith(visiblePage, undefined);
     expect(mocks.setCached).toHaveBeenCalledWith(visibleContext, visiblePage);
-    expect(mocks.closeTrackedDropshotContext).toHaveBeenCalledWith(probeContext);
     expect(mocks.closeTrackedDropshotContext).not.toHaveBeenCalledWith(visibleContext);
-    expect(mocks.launchBrowser).toHaveBeenCalledTimes(2);
+    expect(mocks.launchBrowser).toHaveBeenCalledTimes(1);
+    expect(mocks.launchBrowser).toHaveBeenCalledWith('profile-dir', false);
   });
 });

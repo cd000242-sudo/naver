@@ -26,11 +26,11 @@ describe('Gemini prepaid/value text-model policy', () => {
     'gemini-2.5-pro-preview',
     'gemini-1.5-pro',
     'gemini-pro',
-  ])('migrates paid-only/legacy Pro selection %s to stable Flash', (model) => {
-    expect(normalizeGeminiTextModelId(model)).toBe(GEMINI_TEXT_MODELS.FLASH);
+  ])('migrates paid-only/legacy Pro selection %s to prepaid-safe Flash-Lite', (model) => {
+    expect(normalizeGeminiTextModelId(model)).toBe(GEMINI_TEXT_MODELS.FLASH_LITE);
     expect(buildGeminiModelChain({ primaryGeminiTextModel: model })).toMatchObject({
-      primaryModel: GEMINI_TEXT_MODELS.FLASH,
-      uniqueModels: [GEMINI_TEXT_MODELS.FLASH],
+      primaryModel: GEMINI_TEXT_MODELS.FLASH_LITE,
+      uniqueModels: [GEMINI_TEXT_MODELS.FLASH_LITE],
       isPro: false,
     });
   });

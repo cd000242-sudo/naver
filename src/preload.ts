@@ -6,6 +6,11 @@ import type { ContentPolicyDashboard } from './contentPolicy/operatorService.js'
 import type { PublicationState } from './contentPolicy/types.js';
 import type { RevenueDashboard, RevenueEntry, RevenueEntryInput, RevenueSettings } from './analytics/revenueOperations.js';
 import type { AgentCliStatus, AgentProvider } from './agentCli/types.js';
+import type {
+  McpConnectionProfileInput,
+  McpRouteSelection,
+  McpRuntimeConnectionMaterial,
+} from './generation/mcp/index.js';
 
 type AgentLoginProgress = Readonly<{
   provider: AgentProvider;
@@ -194,6 +199,32 @@ contextBridge.exposeInMainWorld('api', {
   // 계정 전환용 로그아웃 (다른 구독 계정으로 재로그인)
   agentLogout: (provider: AgentProvider): Promise<{ success: boolean; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:logout', provider),
+  mcpListConnections: (): Promise<{
+    success: boolean;
+    profiles?: McpConnectionProfileInput[];
+    configuredProfileIds?: string[];
+    code?: string;
+    message?: string;
+  }> => ipcRenderer.invoke('mcp:list-connections'),
+  mcpSaveConnection: (payload: {
+    profile: McpConnectionProfileInput;
+    material: McpRuntimeConnectionMaterial;
+  }): Promise<{ success: boolean; profile?: McpConnectionProfileInput; code?: string; message?: string }> =>
+    ipcRenderer.invoke('mcp:save-connection', payload),
+  mcpTestConnection: (route: McpRouteSelection): Promise<{
+    success: boolean;
+    profileId?: string;
+    toolId?: string;
+    paidToolInvoked?: false;
+    code?: string;
+    message?: string;
+  }> => ipcRenderer.invoke('mcp:test-connection', route),
+  mcpRemoveConnection: (profileId: string): Promise<{
+    success: boolean;
+    removed?: boolean;
+    code?: string;
+    message?: string;
+  }> => ipcRenderer.invoke('mcp:remove-connection', profileId),
   // 프록시 설정 여부 (다중계정 no-proxy 시 간격 자동 강화용)
   proxyIsConfigured: (): Promise<boolean> => ipcRenderer.invoke('proxy:isConfigured'),
   // ✅ [2026-03-11 FIX] generateImages 바인딩 추가 (누락으로 인한 연속발행 이미지 생성 실패 수정)

@@ -32,8 +32,7 @@ describe('shopping-connect policy and crawler hardening', () => {
     const multiAccountManager = readSource('src/renderer/modules/multiAccountManager.ts');
 
     for (const source of [ftcPresets, pipelineConfig]) {
-      expect(source).toContain('쇼핑커넥트/제휴마케팅 활동');
-      expect(source).toContain('수수료');
+      expect(source).toContain('[광고] 이 글에는 제휴 링크가 포함될 수 있습니다.');
     }
     expect(ftcResolver).toContain('DEFAULT_AFFILIATE_FTC_DISCLOSURE');
     expect(ftcResolver).toContain("from '../../automation/ftcDisclosurePresets.js'");

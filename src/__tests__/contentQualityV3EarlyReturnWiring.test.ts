@@ -14,7 +14,7 @@ describe('Content Quality V3 early-return wiring', () => {
     expect(v3Branch).toBeGreaterThan(-1);
     expect(earlyReturn).toBeGreaterThan(v3Branch);
     expect(generator.slice(v3Branch, earlyReturn)).toContain(
-      'enforceContentQualityV3BusinessGuard(v3Decision.content, source)',
+      'enforceContentQualityV3BusinessGuard(v3Content, source)',
     );
 
     for (const legacyStage of [
@@ -35,10 +35,11 @@ describe('Content Quality V3 early-return wiring', () => {
     }
   });
 
-  it('uses a bounded stable-code title retry and never rewrites the V3 title', () => {
-    expect(generator).toMatch(/decideContentQualityV3Finalization\([\s\S]{0,500}titleContractRetriesUsed/);
-    expect(generator).toMatch(/buildContentQualityV3FinalizationRetryInstruction\([\s\S]{0,250}continue;/);
-    expect(generator).toMatch(/\[content-quality-v3\] \$\{v3Decision\.issueCode\}/);
+  it('uses advisory finalization without a paid V3 retry and never rewrites the V3 title', () => {
+    expect(generator).toMatch(/if \(v3Finalization\.ok\) \{[\s\S]{0,180}v3Content = v3Finalization\.content/);
+    expect(generator).toMatch(/v3Finalization\.issueCode\.startsWith\('structured_output_'\)/);
+    expect(generator).not.toContain('decideContentQualityV3Finalization(');
+    expect(generator).not.toContain('buildContentQualityV3FinalizationRetryInstruction(');
 
     const v3Branch = generator.indexOf('const v3Finalization = finalizeContentQualityV3Draft(');
     const earlyReturn = generator.indexOf(
@@ -48,7 +49,7 @@ describe('Content Quality V3 early-return wiring', () => {
     expect(generator.slice(v3Branch, earlyReturn)).toContain('evaluateContentQualityV3AffiliateGuard(');
     expect(generator.slice(v3Branch, earlyReturn)).not.toContain('applyManualTitleOverride');
     expect(generator.slice(v3Branch, earlyReturn)).not.toContain('applyKeywordAsTitleLock');
-    expect(generator).toMatch(/return registerContentQualityV3GeneratedContent\(\s*materializeContentQualityV3ForLegacyConsumers\(v3GuardDecision\.content\),\s*\{ source, minimumBodyChars: validationMinChars \},\s*\);/);
+    expect(generator).toMatch(/return registerContentQualityV3GeneratedContent\(\s*materializeContentQualityV3ForLegacyConsumers\(v3Content\),\s*\{[\s\S]{0,320}safetyMode:\s*'advisory'[\s\S]{0,320}advisoryIssues:\s*v3AdvisoryIssues[\s\S]{0,80}\},\s*\);/);
   });
 
   it('routes exact V3 through the strict request envelope and leaves legacy sampling isolated', () => {

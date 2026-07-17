@@ -93,11 +93,19 @@ import {
   enforceContentQualityV3PublishPayload,
   type ContentQualityV3PublishHandoff,
 } from './contentQualityV3/publishHandoffStore.js';
+import {
+  resolveContentQualityV3ProductionPublishSafetyMode,
+} from './contentQualityV3/productionPublishSafetyMode.js';
 import { ContentQualityV3DurableProvenanceRegistry } from './contentQualityV3/durableProvenanceRegistry.js';
 import {
   assertResolvedContentGeneratorProviderAllowed,
   createAgentProductPolicyContext,
 } from './agentCli/productPolicy.js';
+import { DEFAULT_GENERATION_SUBMISSION_MODE } from './generation/submissionPolicy.js';
+import { resolveContentProviderForTextRoute } from './generation/routeExecution.js';
+import { getMcpRuntimeForConfig } from './main/services/mcpRuntimeHost.js';
+import { generateImagesWithMcp } from './generation/mcp/imageAdapter.js';
+import { executeSelectedImageGenerationRoute } from './main/services/selectedImageGenerationRoute.js';
 
 function createMainAgentProductPolicyContext() {
   return createAgentProductPolicyContext({
@@ -105,18 +113,37 @@ function createMainAgentProductPolicyContext() {
   });
 }
 
-function generateStructuredContentWithProductPolicy(
+async function generateStructuredContentWithProductPolicy(
   source: Parameters<typeof generateStructuredContent>[0],
   options?: Parameters<typeof generateStructuredContent>[1],
-): ReturnType<typeof generateStructuredContent> {
+): Promise<Awaited<ReturnType<typeof generateStructuredContent>>> {
   const productPolicyContext = createMainAgentProductPolicyContext();
+  const currentConfig = await loadConfig();
+  const selectedTextRoute = currentConfig.generationConnectionSettings?.text;
+  const selectedProvider = selectedTextRoute
+    ? resolveContentProviderForTextRoute(selectedTextRoute)
+    : (options?.provider ?? source.generator);
+  const routeExecutionOptions = selectedTextRoute
+    ? {
+      provider: selectedProvider,
+      generationRoute: selectedTextRoute,
+      ...(selectedProvider === 'mcp'
+        ? { mcpRuntimeManager: await getMcpRuntimeForConfig(currentConfig) }
+        : {}),
+    }
+    : {};
   assertResolvedContentGeneratorProviderAllowed(
-    options?.provider ?? source.generator,
+    selectedProvider,
     productPolicyContext,
   );
   return generateStructuredContent(source, {
     ...options,
+    ...routeExecutionOptions,
     agentProductPolicyContext: productPolicyContext,
+    // IPC callers never get to opt into automatic resubmission. A timeout can
+    // happen after the provider has accepted a billable request, so preserve it
+    // as a single unknown outcome for the user to retry explicitly.
+    submissionMode: DEFAULT_GENERATION_SUBMISSION_MODE,
   });
 }
 
@@ -280,6 +307,7 @@ import { loadContentPolicy } from './contentPolicy/policyLoader.js';
 import { PublicationStateStore } from './contentPolicy/publicationStateStore.js';
 import { evaluatePublicationAvailability } from './contentPolicy/publishGuard.js';
 import { registerAgentHandlers } from './main/ipc/agentHandlers.js';
+import { registerMcpHandlers } from './main/ipc/mcpHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 import { captureE2EPublishPayload } from './main/e2ePublishCapture.js';
 import {
@@ -3665,11 +3693,21 @@ ipcMain.handle(
         return { success: false, message: '사용자가 작업을 취소했습니다.' };
       }
 
-      const imageOptions = {
+      const imageOptions: GenerateImagesOptions = {
         ...options,
         imageFallbackPolicy: options.imageFallbackPolicy || 'engine-only',
       };
-      const images = await generateImages(imageOptions, apiKeys, onImageGenerated);
+      const osMod = await import('os');
+      const images = await executeSelectedImageGenerationRoute({
+        config,
+        options: imageOptions,
+        apiKeys,
+        fallbackOutputDirectory: path.join(osMod.homedir(), 'Downloads', 'naver-blog-images'),
+        onImageGenerated,
+        getMcpRuntime: getMcpRuntimeForConfig,
+        generateMcp: generateImagesWithMcp,
+        generateLegacy: generateImages,
+      });
       const generatedImageCount = Array.isArray(images) ? images.length : 0;
       const providerForEmptyCheck = String(options.provider || imageOptions.provider || '');
       const requiredGeneratedImageCount = Array.isArray(options.items) ? options.items.length : 0;
@@ -4347,6 +4385,11 @@ registerAgentHandlers({
   trustedRendererPath: path.join(publicPath, 'index.html'),
   allowClaudeSubscription: true,
 });
+registerMcpHandlers({
+  trustedRendererPath: path.join(publicPath, 'index.html'),
+  loadConfig,
+  saveConfig,
+});
 // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고) — 환경별 버그 즉시 진단
 registerDiagnosticsHandlers();
 // ✅ [SPEC-DEFAMATION-2026 P1] 발행 경계 위험 게이트 — 저장본/붙여넣기 재발행 사각지대 커버
@@ -4708,7 +4751,17 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
   const multiAccountHandoffRunId = randomUUID();
   const multiAccountRendererOwnerKey = createContentQualityV3RendererOwnerKey(_event);
   const preGeneratedForHandoff = options?.preGeneratedContent || options?.structuredContent;
-  if (preGeneratedForHandoff || options?.title || options?.content) {
+  const contentQualityV3SafetyMode =
+    resolveContentQualityV3ProductionPublishSafetyMode(process.env);
+  const hasPreGeneratedPublishContent = Boolean(
+    preGeneratedForHandoff || options?.title || options?.content,
+  );
+
+  if (contentQualityV3SafetyMode === 'advisory' && hasPreGeneratedPublishContent) {
+    sendLog('⚠️ 다중계정 V3 품질 검증 경고: 글과 이미지를 유지하고 발행을 계속합니다.');
+  }
+
+  if (contentQualityV3SafetyMode === 'strict' && hasPreGeneratedPublishContent) {
     const preGeneratedStructuredContent = preGeneratedForHandoff?.structuredContent
       || preGeneratedForHandoff;
     const preGeneratedHandoff = options?.[CONTENT_QUALITY_V3_PUBLISH_HANDOFF_FIELD]
@@ -5664,12 +5717,15 @@ ipcMain.handle(
           const validation = await validateFactCheckSource(keywordQuery);
 
           if (!validation.passed) {
-            // ✅ [v2.10.74 Phase 1] 자료 부족 / 키워드 무관 → 발행 거부
-            // throw하면 IPC 응답으로 에러 전달 → renderer에서 alert 표시
-            const errMsg = `[FACT_CHECK_BLOCKED] ${validation.reason}\n\n수집한 자료: ${validation.totalChars}자, 키워드 매칭률 ${Math.round(validation.keywordCoverage * 100)}%\n\n해결 방법:\n1. 더 구체적이고 명확한 키워드 사용 (5~10자 권장)\n2. 또는 URL을 직접 입력해서 발행\n3. 또는 환경설정에서 '네이버 fact-check RAG' 토글 OFF (환각 위험 ↑)`;
-            console.error(`[Main] ⛔ ${errMsg}`);
-            throw new Error(errMsg);
-          }
+            // Evidence completeness is a quality signal, not an operational
+            // impossibility. Keep the user-selected generation route alive and
+            // make the reason visible on the resulting draft instead of
+            // encouraging a duplicate paid submission.
+            const warning = `[자료 검증 경고] ${validation.reason} (수집 자료 ${validation.totalChars}자, 키워드 매칭률 ${Math.round(validation.keywordCoverage * 100)}%)`;
+            warnings.push(warning);
+            (source as any).factCheckAdvisory = warning;
+            console.warn(`[Main] ⚠️ ${warning}`);
+          } else {
 
           // 자료 검증 통과 → rawText 보강
           // [SPEC-PROMPT-2026-REFRESH Phase 1b / v2.10.234] RAG 자료를 XML wrap
@@ -5684,17 +5740,17 @@ ipcMain.handle(
           (source as any).hasFactCheckSource = true;
           (source as any).factCheckRawSource = validation.rawText; // Phase 3 검증용
           console.log(`[Main] ✅ 네이버 fact-check RAG 주입 + 검증 통과: 최종 rawText=${source.rawText.length}자, 매칭률=${Math.round(validation.keywordCoverage * 100)}%`);
+          }
         } else if (!factCheckEnabled) {
           console.log(`[Main] 네이버 fact-check RAG 비활성 (사용자 OFF)`);
         } else if (!hasNaverKeys) {
           console.log(`[Main] 네이버 fact-check RAG 미작동: API 키 없음`);
         }
       } catch (ragErr: any) {
-        // FACT_CHECK_BLOCKED 에러는 그대로 propagate (사용자에게 alert)
-        if (ragErr?.message?.includes('[FACT_CHECK_BLOCKED]')) {
-          throw ragErr;
-        }
-        console.warn(`[Main] ⚠️ 네이버 fact-check RAG 실패 (LLM 자체 지식 fallback):`, ragErr?.message || ragErr);
+        const warning = `[자료 검증 경고] 네이버 fact-check RAG 확인 실패: ${String(ragErr?.message || ragErr).slice(0, 300)}`;
+        warnings.push(warning);
+        (source as any).factCheckAdvisory = warning;
+        console.warn(`[Main] ⚠️ ${warning}`);
       }
 
       // ✅ contentMode 전달 (SEO / 홈판 모드)

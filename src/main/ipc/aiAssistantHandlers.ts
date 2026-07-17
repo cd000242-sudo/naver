@@ -11,8 +11,8 @@ import { getWelcomeMessage } from '../../agents/persona.js';
 import { loadConfig, applyConfigToEnv, saveConfig } from '../../configManager.js';
 import {
     GEMINI_TEXT_MODELS,
-    normalizeGeminiTextModelId,
 } from '../../runtime/modelRegistry.js';
+import { normalizeGeminiPrepaidTextModelId } from '../../runtime/geminiTextModelNormalization.js';
 
 /**
  * aiAssistant:* 4개 IPC 일괄 등록.
@@ -70,7 +70,7 @@ export function registerAiAssistantHandlers(): void {
             // 1. Upgrade saved text models through the registry SSOT.
             if (config.geminiModel) {
                 const oldModel = config.geminiModel;
-                config.geminiModel = normalizeGeminiTextModelId(oldModel);
+                config.geminiModel = normalizeGeminiPrepaidTextModelId(oldModel);
                 if (oldModel !== config.geminiModel) {
                     configChanged = true;
                     fixResults.push({ action: 'Gemini 모델 마이그레이션', success: true, message: `${oldModel} → ${config.geminiModel}로 자동 변환됨` });
@@ -78,9 +78,9 @@ export function registerAiAssistantHandlers(): void {
             }
 
             if (!config.geminiModel) {
-                config.geminiModel = GEMINI_TEXT_MODELS.FLASH;
+                config.geminiModel = GEMINI_TEXT_MODELS.FLASH_LITE;
                 configChanged = true;
-                fixResults.push({ action: 'Gemini 모델 설정', success: true, message: `기본 모델 설정됨 (${GEMINI_TEXT_MODELS.FLASH})` });
+                fixResults.push({ action: 'Gemini 모델 설정', success: true, message: `기본 모델 설정됨 (${GEMINI_TEXT_MODELS.FLASH_LITE})` });
             }
 
             // 설정 저장

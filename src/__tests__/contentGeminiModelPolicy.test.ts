@@ -21,19 +21,21 @@ describe('contentGeminiModelPolicy', () => {
       .toThrow('TEXT_MODEL_PROVIDER_MISMATCH');
   });
 
-  it('migrates Pro selections to the single prepaid Flash model', () => {
+  it('coerces Pro/preview selections to the single safe prepaid Flash-Lite model', () => {
     const result = buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-3.1-pro-preview' });
 
     expect(result.isPro).toBe(false);
-    expect(result.uniqueModels).toEqual(['gemini-3.5-flash']);
+    expect(result.uniqueModels).toEqual(['gemini-3.1-flash-lite']);
   });
 
-  it('upgrades saved 2.5 selections into the supported prepaid matrix', () => {
+  it('preserves stable prepaid Flash choices while migrating stale or Pro choices safely', () => {
     expect(buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-2.5-flash-lite' }).primaryModel)
       .toBe('gemini-3.1-flash-lite');
+    expect(buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-3.5-flash' }).primaryModel)
+      .toBe('gemini-3.5-flash');
     expect(buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-2.5-flash' }).primaryModel)
       .toBe('gemini-3.5-flash');
     expect(buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-2.5-pro' }).primaryModel)
-      .toBe('gemini-3.5-flash');
+      .toBe('gemini-3.1-flash-lite');
   });
 });

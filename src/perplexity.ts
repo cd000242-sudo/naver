@@ -10,10 +10,15 @@
 
 import OpenAI from 'openai';
 import { buildSystemPromptFromHint, type PromptMode } from './promptLoader.js';
+import {
+    DEFAULT_GENERATION_SUBMISSION_MODE,
+    shouldAllowAutomaticProviderRetry,
+    type GenerationSubmissionMode,
+} from './generation/submissionPolicy.js';
 
 // ==================== 타입 정의 ====================
 
-interface PerplexityGenerateOptions {
+export interface PerplexityGenerateOptions {
     targetAudience?: string;
     tone?: 'friendly' | 'professional' | 'casual';
     wordCount?: number;
@@ -22,9 +27,11 @@ interface PerplexityGenerateOptions {
     blogType?: 'review' | 'informative' | 'storytelling';
     contentMode?: 'seo' | 'homefeed' | 'mate';
     categoryHint?: string;
+    /** Public generation is at-most-once unless a trusted compatibility caller opts in. */
+    submissionMode?: GenerationSubmissionMode;
 }
 
-interface PerplexityGenerateResult {
+export interface PerplexityGenerateResult {
     content: string;
     usage: {
         promptTokens: number;
@@ -33,6 +40,8 @@ interface PerplexityGenerateResult {
         estimatedCost: number;
     };
     modelUsed: string;
+    /** Editorial diagnostics never invalidate an already received provider draft. */
+    warnings?: readonly string[];
 }
 
 // ==================== 상수 ====================
@@ -170,15 +179,16 @@ ${keywords.length > 0 ? `- 자연스럽게 녹여낼 키워드: ${keywords.join(
 /**
  * 콘텐츠 품질 검증
  */
-function validateContent(text: string): boolean {
+function getContentQualityWarnings(text: string): string[] {
     const trimmed = text.trim();
+    const warnings: string[] = [];
 
     if (trimmed.length < 500) {
         console.warn(`⚠️ [Perplexity] 글자 수 부족: ${trimmed.length}자`);
-        return false;
+        warnings.push(`글자 수 권장 최소값(500자)보다 짧습니다: ${trimmed.length}자`);
     }
 
-    return true;
+    return warnings;
 }
 
 // ==================== 메인 함수 ====================
@@ -216,7 +226,9 @@ export async function generatePerplexityContent(
     const { systemPrompt, userPrompt } = buildEnhancedPrompt(trimmedPrompt, options);
     const modelName = getConfiguredPerplexityModel();
 
-    const maxRetries = 2;
+    const submissionMode = options.submissionMode ?? DEFAULT_GENERATION_SUBMISSION_MODE;
+    const allowAutomaticProviderRetry = shouldAllowAutomaticProviderRetry(submissionMode);
+    const maxRetries = allowAutomaticProviderRetry ? 2 : 1;
     let lastError: Error | null = null;
 
     for (let retry = 0; retry < maxRetries; retry++) {
@@ -252,8 +264,9 @@ export async function generatePerplexityContent(
                 throw new Error('빈 응답');
             }
 
-            if (!validateContent(content)) {
-                throw new Error('품질 기준 미달');
+            const qualityWarnings = getContentQualityWarnings(content);
+            if (qualityWarnings.length > 0) {
+                console.warn(`[Perplexity] 품질 경고 후 계속: ${qualityWarnings.join(' / ')}`);
             }
 
             const usage = response.usage;
@@ -278,6 +291,9 @@ export async function generatePerplexityContent(
                     estimatedCost: ((usage?.total_tokens || 0) / 1_000_000) * (modelName === 'sonar-pro' ? 5 : 1),
                 },
                 modelUsed: modelName,
+                ...(qualityWarnings.length > 0
+                    ? { warnings: Object.freeze([...qualityWarnings]) }
+                    : {}),
             };
 
         } catch (error) {
@@ -292,7 +308,7 @@ export async function generatePerplexityContent(
             }
 
             // 재시도 가능한 오류
-            if (retry < maxRetries - 1) {
+            if (allowAutomaticProviderRetry && retry < maxRetries - 1) {
                 const delay = Math.min(1000 * Math.pow(2, retry), 5000);
                 console.log(`🔄 [Perplexity Retry] ${delay}ms 후 재시도...`);
                 await new Promise(resolve => setTimeout(resolve, delay));
@@ -303,6 +319,3 @@ export async function generatePerplexityContent(
     throw new Error(`Perplexity 생성 실패: ${lastError ? translatePerplexityError(lastError) : '원인 불명'}`);
 }
 
-// ==================== Exports ====================
-
-export { PerplexityGenerateOptions, PerplexityGenerateResult };

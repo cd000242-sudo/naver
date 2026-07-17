@@ -600,10 +600,14 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
       assemblyIndex,
     );
     const blockIndex = mainSource.indexOf('if (!validation.passed)', sourceValidationIndex);
-    const blockThrowIndex = mainSource.indexOf('throw new Error(errMsg);', blockIndex);
+    const advisoryBindingIndex = mainSource.indexOf(
+      '(source as any).factCheckAdvisory = warning;',
+      blockIndex,
+    );
+    const warningPushIndex = mainSource.indexOf('warnings.push(warning);', blockIndex);
     const evidenceBindingIndex = mainSource.indexOf(
       '(source as any).factCheckRawSource = validation.rawText;',
-      blockThrowIndex,
+      advisoryBindingIndex,
     );
     const generationIndex = mainSource.indexOf(
       'generateStructuredContentWithProductPolicy(source,',
@@ -626,7 +630,8 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
       assemblyIndex,
       sourceValidationIndex,
       blockIndex,
-      blockThrowIndex,
+      advisoryBindingIndex,
+      warningPushIndex,
       evidenceBindingIndex,
       generationIndex,
       outputValidationIndex,
@@ -634,8 +639,9 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
       warningBindingIndex,
     ].every(index => index >= 0)).toBe(true);
     expect(sourceValidationIndex).toBeGreaterThan(assemblyIndex);
-    expect(blockThrowIndex).toBeGreaterThan(blockIndex);
-    expect(evidenceBindingIndex).toBeGreaterThan(blockThrowIndex);
+    expect(warningPushIndex).toBeGreaterThan(blockIndex);
+    expect(advisoryBindingIndex).toBeGreaterThan(warningPushIndex);
+    expect(evidenceBindingIndex).toBeGreaterThan(advisoryBindingIndex);
     expect(generationIndex).toBeGreaterThan(evidenceBindingIndex);
     expect(reportBindingIndex).toBeGreaterThan(outputValidationIndex);
     expect(warningBindingIndex).toBeGreaterThan(reportBindingIndex);

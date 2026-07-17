@@ -5,6 +5,13 @@ import type {
   RevenueSettings,
 } from '../analytics/revenueOperations.js';
 import type { AgentCliStatus, AgentProvider } from '../agentCli/types.js';
+import type {
+  McpConnectionProfileInput,
+  McpRouteSelection,
+  McpRuntimeConnectionMaterial,
+} from '../generation/mcp/index.js';
+
+type RendererAppConfig = Record<string, any>;
 
 type RiskLevel = 'low' | 'medium' | 'high';
 type LegalRiskLevel = 'safe' | 'caution' | 'danger';
@@ -292,6 +299,31 @@ interface AutomationAPI {
   agentLoginSubmitCode: (provider: AgentProvider, sessionId: string, attempt: number, code: string) => Promise<AgentLoginActionResult>;
   agentLoginCancel: (provider: AgentProvider, sessionId: string) => Promise<AgentLoginActionResult>;
   agentLogout: (provider: AgentProvider) => Promise<{ success: boolean; code?: string; message?: string }>;
+  mcpListConnections: () => Promise<{
+    success: boolean;
+    profiles?: McpConnectionProfileInput[];
+    configuredProfileIds?: string[];
+    code?: string;
+    message?: string;
+  }>;
+  mcpSaveConnection: (payload: {
+    profile: McpConnectionProfileInput;
+    material: McpRuntimeConnectionMaterial;
+  }) => Promise<{ success: boolean; profile?: McpConnectionProfileInput; code?: string; message?: string }>;
+  mcpTestConnection: (route: McpRouteSelection) => Promise<{
+    success: boolean;
+    profileId?: string;
+    toolId?: string;
+    paidToolInvoked?: false;
+    code?: string;
+    message?: string;
+  }>;
+  mcpRemoveConnection: (profileId: string) => Promise<{
+    success: boolean;
+    removed?: boolean;
+    code?: string;
+    message?: string;
+  }>;
   generateStructuredContent: (request: StructuredGenerationRequest) => Promise<{ success: boolean; content?: StructuredContent; message?: string; imageCount?: number }>;
   // ✅ [2026-02-08] 테스트 이미지 생성 API - engine, textOverlay 파라미터 포함
   generateTestImage: (options: {
@@ -377,8 +409,8 @@ interface AutomationAPI {
   openPath: (path: string) => Promise<{ success: boolean; message?: string }>; // ✅ 폴더/파일 열기
   showOpenDialog?: (options: any) => Promise<{ canceled: boolean; filePaths: string[] }>; // ✅ 폴더/파일 선택 다이얼로그
   selectVideoFile?: () => Promise<{ filePath: string } | null>; // ✅ 영상 파일 선택 다이얼로그
-  getConfig: () => Promise<AppConfig>;
-  saveConfig: (config: AppConfig) => Promise<AppConfig>;
+  getConfig: () => Promise<RendererAppConfig>;
+  saveConfig: (config: RendererAppConfig) => Promise<RendererAppConfig>;
   verifyAdminPin?: (pin: string) => Promise<{ success: boolean; message?: string }>;
   getLibraryImages: (category?: string, titleKeywords?: string[]) => Promise<Array<{
     id: string;

@@ -419,7 +419,7 @@ describe('Content Quality V3 main-only publish commit hook', () => {
       .toHaveLength(2);
   });
 
-  it('enforces text-only V3 in main before browser and image work, then forwards skipImages', () => {
+  it('keeps text-only V3 verification as an explicit strict opt-in and defaults customer publishing to advisory mode', () => {
     const cycleStart = blogExecutorSource.indexOf('export async function runFullPostCycle(');
     const cycle = blogExecutorSource.slice(cycleStart);
     const guardIndex = cycle.indexOf('assertMainProcessEditorCommitTextOnly(effectivePayload);');
@@ -431,14 +431,19 @@ describe('Content Quality V3 main-only publish commit hook', () => {
     expect(browserIndex).toBeGreaterThan(guardIndex);
     expect(imageIndex).toBeGreaterThan(guardIndex);
     expect(blogExecutorSource).toContain('skipImages: payload.skipImages,');
+    expect(cycle).toContain('resolveContentQualityV3ProductionPublishSafetyMode(process.env)');
+    expect(cycle).toContain('stripContentQualityV3PublishMetadata(effectivePayload)');
+    expect(cycle).toContain('콘텐츠 안전·품질 V3 검증 경고: 글·이미지는 유지하고 발행을 계속합니다.');
     expect(cycle.match(/hasContentQualityV3ProvenanceSignal\(effectivePayload\)/g))
       .toHaveLength(3);
-    expect(cycle).toContain('const requiredMarker = acceptedV3Provenance;');
+    expect(cycle).toContain(
+      "const requiredMarker = contentQualityV3SafetyMode === 'strict' && acceptedV3Provenance;",
+    );
     expect(cycle).not.toMatch(
       /const requiredMarker = effectivePayload\._contentQualityV3Required/,
     );
     expect(cycle).toMatch(
-      /if \(requiredMarker && effectivePayload\.publishMode !== 'draft'\) \{[\s\S]*?assertMainProcessEditorCommitTextOnly\(effectivePayload\);/,
+      /if \(contentQualityV3SafetyMode === 'strict'\) \{[\s\S]*?if \(requiredMarker && effectivePayload\.publishMode !== 'draft'\) \{[\s\S]*?assertMainProcessEditorCommitTextOnly\(effectivePayload\);/,
     );
   });
 

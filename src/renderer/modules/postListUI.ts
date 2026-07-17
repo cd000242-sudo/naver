@@ -995,6 +995,30 @@ export function reconstructGeneratedPostStructuredContent(post: any): any {
   };
 }
 
+/** Keeps the saved-post handoff visible without inheriting a prior fade animation. */
+export function makeLoadedPostEditorVisible(): void {
+  const semiAutoSection = document.getElementById('unified-semi-auto-section');
+  if (!semiAutoSection) return;
+
+  semiAutoSection.style.display = 'block';
+  semiAutoSection.style.removeProperty('opacity');
+  semiAutoSection.style.removeProperty('transition');
+}
+
+/** Scrolls and focuses after the publish tab has synchronously switched panels. */
+export function focusLoadedPostEditor(): void {
+  const focusEditor = () => {
+    const editor = document.getElementById('unified-semi-auto-section');
+    editor?.scrollIntoView({ behavior: 'auto', block: 'start' });
+    const titleInput = (document.getElementById('unified-generated-title')
+      || document.getElementById('unified-title')) as HTMLInputElement | null;
+    titleInput?.focus({ preventScroll: true });
+  };
+
+  if (typeof requestAnimationFrame === 'function') requestAnimationFrame(focusEditor);
+  else setTimeout(focusEditor, 0);
+}
+
 export function activateSemiAutoPublishEditor(): void {
   (window as any).__pendingPublishMode = 'semi-auto';
   document.querySelector<HTMLButtonElement>('[data-tab="unified"]')?.click();
@@ -1011,8 +1035,7 @@ export function activateSemiAutoPublishEditor(): void {
     topSelect?.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
-  const semiAutoSection = document.getElementById('unified-semi-auto-section');
-  if (semiAutoSection) semiAutoSection.style.display = 'block';
+  makeLoadedPostEditorVisible();
 }
 
 let generatedPostLoadInFlight = false;
@@ -1087,17 +1110,7 @@ async function loadGeneratedPostToFieldsUnlocked(postId: string): Promise<void> 
   (window as any).currentStructuredContent = structuredContent;
 
   // ✅ 반자동 모드 섹션 표시 및 필드 채우기
-  const semiAutoSection = document.getElementById('unified-semi-auto-section');
-  if (semiAutoSection) {
-    semiAutoSection.style.display = 'block';
-
-    // 부드러운 애니메이션
-    semiAutoSection.style.opacity = '0';
-    setTimeout(() => {
-      semiAutoSection.style.opacity = '1';
-      semiAutoSection.style.transition = 'opacity 0.5s ease';
-    }, 100);
-  }
+  makeLoadedPostEditorVisible();
 
   // 모든 필드 값을 먼저 채운 뒤 이벤트를 발생시켜 중간 상태 저장을 방지합니다.
   populateGeneratedPostFields({
@@ -1106,15 +1119,7 @@ async function loadGeneratedPostToFieldsUnlocked(postId: string): Promise<void> 
     hashtags: restoredHashtags,
   }, post.id);
 
-  const focusEditor = () => {
-    const editor = document.getElementById('unified-semi-auto-section');
-    editor?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    const titleInput = (document.getElementById('unified-generated-title')
-      || document.getElementById('unified-title')) as HTMLInputElement | null;
-    titleInput?.focus({ preventScroll: true });
-  };
-  if (typeof requestAnimationFrame === 'function') requestAnimationFrame(focusEditor);
-  else setTimeout(focusEditor, 0);
+  focusLoadedPostEditor();
 
   // ✅ 이미지 불러오기 (저장된 이미지 경로 사용 및 검증)
   if (post.images && post.images.length > 0) {

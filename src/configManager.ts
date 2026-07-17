@@ -11,8 +11,14 @@ import {
   stripSecretSchemaArtifacts,
 } from './security/secretValueUtils.js';
 import {
-  normalizeGeminiTextModelId,
-} from './runtime/modelRegistry.js';
+  normalizeGeminiPrepaidTextModelId,
+} from './runtime/geminiTextModelNormalization.js';
+import {
+  normalizeGenerationConnectionSettings,
+  normalizeMcpConnectionProfiles,
+  type GenerationConnectionSettings,
+} from './generation/connectionConfig.js';
+import type { McpConnectionProfile } from './generation/mcp/index.js';
 
 export interface AppConfig {
   geminiApiKey?: string;
@@ -191,6 +197,15 @@ export interface AppConfig {
   // ✅ [2026-01-25] 전역 AI 제공자 설정
   defaultAiProvider?: 'gemini' | 'perplexity' | 'openai' | 'claude';
   perplexityModel?: 'sonar' | 'sonar-pro';
+
+  /**
+   * Versioned per-capability route selection for MCP / Agent / API.
+   * This is intentionally separate from legacy provider fields so old settings
+   * retain their behavior during migration.
+   */
+  generationConnectionSettings?: GenerationConnectionSettings;
+  /** Public, non-secret MCP tool metadata. Runtime material is stored in the OS-encrypted MCP vault. */
+  mcpConnectionProfiles?: readonly McpConnectionProfile[];
 
   // ✅ [2026-03-18] Gemini API 사용량 추적 (로컬 누적)
   geminiUsageTracker?: {
@@ -427,6 +442,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'userDisplayName', 'userEmail',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
+          'generationConnectionSettings', 'mcpConnectionProfiles',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
         ];
@@ -477,7 +493,7 @@ export async function loadConfig(): Promise<AppConfig> {
     let geminiModel = parsed.geminiModel;
     if (typeof geminiModel === 'string' && geminiModel.startsWith('gemini-')) {
       const oldModel = geminiModel;
-      geminiModel = normalizeGeminiTextModelId(geminiModel);
+      geminiModel = normalizeGeminiPrepaidTextModelId(geminiModel);
       if (oldModel !== geminiModel) {
         console.log(`[Config] geminiModel(${oldModel}) -> ${geminiModel} 자동 마이그레이션`);
       }
@@ -488,7 +504,7 @@ export async function loadConfig(): Promise<AppConfig> {
     if (primaryGeminiTextModel && typeof primaryGeminiTextModel === 'string' &&
         primaryGeminiTextModel.startsWith('gemini-')) {
       const oldModel = primaryGeminiTextModel;
-      primaryGeminiTextModel = normalizeGeminiTextModelId(primaryGeminiTextModel);
+      primaryGeminiTextModel = normalizeGeminiPrepaidTextModelId(primaryGeminiTextModel);
       if (oldModel !== primaryGeminiTextModel) {
         console.log(`[Config] primaryGeminiTextModel(${oldModel}) -> ${primaryGeminiTextModel} 자동 마이그레이션`);
       }
@@ -550,6 +566,31 @@ export async function loadConfig(): Promise<AppConfig> {
       if (normalizedSecrets.changed) {
         normalizedConfig = normalizedSecrets.config as unknown as AppConfig;
       }
+    }
+
+    // MCP / Agent / API routes are migrated separately from the legacy single
+    // provider selector. The migration never injects an image fallback route.
+    const normalizedGenerationRoutes = normalizeGenerationConnectionSettings(
+      normalizedConfig.generationConnectionSettings,
+      normalizedConfig,
+    );
+    normalizedConfig = {
+      ...normalizedConfig,
+      generationConnectionSettings: normalizedGenerationRoutes.settings,
+    };
+    if (normalizedGenerationRoutes.changed) {
+      console.log('[Config] generation connection settings migrated to manual-only routes');
+    }
+
+    const normalizedMcpProfiles = normalizeMcpConnectionProfiles(
+      normalizedConfig.mcpConnectionProfiles,
+    );
+    normalizedConfig = {
+      ...normalizedConfig,
+      mcpConnectionProfiles: normalizedMcpProfiles.profiles,
+    };
+    if (normalizedMcpProfiles.changed) {
+      console.warn('[Config] invalid MCP public profile metadata was rejected');
     }
 
     // 빈 문자열 제거 및 undefined 제거
@@ -839,7 +880,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         'savedNaverId', 'savedNaverPassword', 'savedLicenseUserId', 'savedLicensePassword',
         // ✅ [v2.10.53] 사용자 환경설정 — 부분 saveConfig로 인해 silent 손실 회귀 차단
         'customImageSavePath',
-        'primaryGeminiTextModel', 'defaultAiProvider', 'geminiPlanType',
+        'primaryGeminiTextModel', 'defaultAiProvider', 'geminiPlanType', 'generationConnectionSettings', 'mcpConnectionProfiles',
         'geminiApiKeys', 'geminiUseFreeQuotaBeforePaid',
         'perplexityModel', 'geminiModel', 'leonardoaiModel',
         // ✅ OpenAI 이미지 모델·품질·환율 — 부분 saveConfig로 인한 silent 손실 차단
@@ -951,7 +992,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'naverClientId', 'naverClientSecret',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
-          'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
+          'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid', 'generationConnectionSettings', 'mcpConnectionProfiles',
         ];
         let changed = false;
         for (const field of API_KEY_FIELDS) {
@@ -1026,7 +1067,7 @@ export function applyConfigToEnv(config: AppConfig): void {
   // 비-Gemini 값을 가질 수 있으므로, gemini- 접두사가 있는 값만 GEMINI_MODEL에 설정
   const rawModel = config.primaryGeminiTextModel || config.geminiModel;
   const geminiModel = (rawModel && rawModel.startsWith('gemini-'))
-    ? normalizeGeminiTextModelId(rawModel)
+    ? normalizeGeminiPrepaidTextModelId(rawModel)
     : undefined;
   if (geminiModel) {
     process.env.GEMINI_MODEL = geminiModel;

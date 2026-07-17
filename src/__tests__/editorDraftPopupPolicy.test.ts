@@ -45,4 +45,38 @@ describe('Naver editor draft-conflict recovery policy', () => {
     expect(inputTitle).toContain('await this.closeDraftPopup(');
     expect(source).toContain('page.mainFrame()');
   });
+
+  it('never auto-accepts a native draft-conflict dialog before the fresh-post resolver runs', () => {
+    const source = readFileSync(
+      resolve(process.cwd(), 'src', 'naverBlogAutomation.ts'),
+      'utf8',
+    );
+    const dialogHandler = source.slice(
+      source.indexOf('private ensureDialogHandler()'),
+      source.indexOf('private async saveCookies()'),
+    );
+
+    expect(dialogHandler).toContain('const isDraftConflict = isEditorDraftConflictMessage(message);');
+    expect(dialogHandler).toContain('this.pendingDraftConflictDialog = true;');
+    expect(dialogHandler).toContain('await dialog.dismiss();');
+    expect(dialogHandler).not.toMatch(/isDraftConflict[\s\S]{0,500}dialog\.accept\(\)/);
+  });
+
+  it('invalidates ambiguous editor state and checks a fresh draft before writing again', () => {
+    const source = readFileSync(
+      resolve(process.cwd(), 'src', 'naverBlogAutomation.ts'),
+      'utf8',
+    );
+    const runPostOnly = source.slice(
+      source.indexOf('async runPostOnly('),
+      source.indexOf('async run(runOptions'),
+    );
+    const run = source.slice(source.indexOf('async run(runOptions'));
+
+    expect(source).toContain('private async assertFreshDraftContext()');
+    expect(source).toContain('private invalidateEditorStateAfterAmbiguousPublish()');
+    expect(source).toContain('await this.assertFreshDraftContext();');
+    expect(runPostOnly).toContain('this.invalidateEditorStateAfterAmbiguousPublish();');
+    expect(run).toContain('this.invalidateEditorStateAfterAmbiguousPublish();');
+  });
 });

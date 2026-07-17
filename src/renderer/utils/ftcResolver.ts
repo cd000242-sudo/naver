@@ -75,14 +75,15 @@ export function resolveFtcSetting(options: FtcResolverOptions = {}): FtcResoluti
   // ?띿뒪??寃곗젙: UI ?낅젰 > localStorage > 湲곕낯 ?띿뒪???쇳븨而ㅻ꽖?몃쭔)
   let text = '';
   if (enabled) {
-    if (options.uiTextValue && options.uiTextValue.trim()) {
-      text = options.uiTextValue.trim();
+    const uiText = typeof options.uiTextValue === 'string' ? options.uiTextValue : '';
+    if (uiText.trim().length > 0) {
+      text = uiText;
     } else {
       try {
         if (typeof localStorage !== 'undefined') {
           const storedText = localStorage.getItem('ftcDisclosureText');
-          if (storedText && storedText.trim()) {
-            text = storedText.trim();
+          if (typeof storedText === 'string' && storedText.trim().length > 0) {
+            text = storedText;
           }
         }
       } catch { /* ignore */ }

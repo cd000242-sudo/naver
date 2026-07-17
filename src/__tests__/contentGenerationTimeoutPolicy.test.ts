@@ -49,6 +49,13 @@ describe('content generation timeout policy', () => {
     expect(mainSrc).toMatch(/maxRetries:\s*GENERATE_STRUCTURED_CONTENT_RETRIES/);
   });
 
+  it('forces all renderer-facing main-process generation through one external submission', () => {
+    expect(mainSrc).toMatch(/from\s+['"]\.\/generation\/submissionPolicy\.js['"]/);
+    expect(mainSrc).toMatch(
+      /generateStructuredContent\(source,\s*\{[\s\S]{0,320}\.\.\.options,[\s\S]{0,320}submissionMode:\s*DEFAULT_GENERATION_SUBMISSION_MODE/,
+    );
+  });
+
   it('bounds Gemini paid/cache side waits that can otherwise stall a completed generation', () => {
     expect(generatorSrc).toMatch(/GEMINI_CACHE_CREATE_TIMEOUT_MS\s*=\s*10_000/);
     expect(geminiUsageMetadataSrc).toMatch(/GEMINI_USAGE_METADATA_TIMEOUT_MS\s*=\s*5_000/);
@@ -84,8 +91,9 @@ describe('content generation timeout policy', () => {
     expect(generatorSrc).toMatch(/const\s+isQuotaOrRateLimit\s*=\s*failure\.kind\s*===\s*'RATE_LIMIT'/);
     expect(generatorSrc).not.toMatch(/failure\.kind\s*===\s*'RATE_LIMIT'\s*\|\|\s*isOpenAiRateLimitError/);
     expect(generatorSrc).toMatch(/response\?\.choices\?\.\[0\]\?\.message\?\.content/);
-    expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*5/);
-    expect(generatorSrc).toMatch(/maxTransientRetries\s*=\s*5/);
+    expect(generatorSrc).toMatch(/const\s+allowAutomaticRetry\s*=\s*shouldAllowAutomaticProviderRetry\(options\.submissionMode\)/);
+    expect(generatorSrc).toMatch(/maxTransientRetriesPerModel\s*=\s*allowAutomaticRetry\s*\?\s*5\s*:\s*0/);
+    expect(generatorSrc).toMatch(/maxTransientRetries\s*=\s*allowAutomaticRetry\s*\?\s*5\s*:\s*0/);
     expect(generatorSrc).not.toMatch(/maxRetriesPerModel\s*=\s*4/);
   });
 
@@ -147,11 +155,14 @@ describe('content generation timeout policy', () => {
     expect(failurePolicySrc).toMatch(/function\s+isTerminalContentGenerationError/);
     expect(failurePolicySrc).toMatch(/function\s+buildSameEngineRecoveryInstruction/);
     expect(generatorSrc).toMatch(/CONTENT_SAME_ENGINE_MIN_ATTEMPTS/);
-    expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\|\|\s*isAgentProvider\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*0\)/);
+    expect(generatorSrc).toMatch(/const\s+isSingleSubmissionConnector\s*=\s*isAgentProvider\s*\|\|\s*provider\s*===\s*'mcp'/);
+    expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\|\|\s*isSingleSubmissionConnector\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*0\)/);
     expect(generatorSrc).toMatch(/const\s+agentContentMaxAttempts\s*=\s*isV3Prompt[\s\S]{0,100}?AGENT_CONTENT_MAX_ATTEMPTS',\s*0/);
     expect(generatorSrc).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*0/);
     expect(generatorSrc).toMatch(/const\s+configuredMaxAttempts\s*=\s*Math\.max\(\s*baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts,?\s*\)/);
-    expect(generatorSrc).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
+    expect(generatorSrc).toMatch(/const\s+submissionMode\s*=\s*options\.submissionMode\s*\?\?\s*DEFAULT_GENERATION_SUBMISSION_MODE/);
+    expect(generatorSrc).toMatch(/const\s+allowAutomaticProviderRetry\s*=\s*shouldAllowAutomaticProviderRetry\(submissionMode\)/);
+    expect(generatorSrc).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\|\|\s*provider\s*===\s*'mcp'\s*\|\|\s*!allowAutomaticProviderRetry\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
     expect(failurePolicySrc).toMatch(/SAME_ENGINE_RECOVERY/);
     expect(failurePolicySrc).toMatch(/다른 AI 엔진으로 전환하지 않습니다/);
     expect(generatorSrc).toMatch(
@@ -194,7 +205,7 @@ describe('content generation timeout policy', () => {
   it('keeps Claude prompt caching opt-in to avoid hidden schema-fallback calls', () => {
     expect(generatorSrc).toMatch(/CLAUDE_PROMPT_CACHE_ENABLED/);
     expect(generatorSrc).toMatch(/const\s+cacheOptIn\s*=\s*process\.env\.CLAUDE_PROMPT_CACHE_ENABLED\s*===\s*'1'/);
-    expect(generatorSrc).toMatch(/const\s+useSystemCache\s*=\s*cacheOptIn\s*&&\s*!cacheDisabled/);
+    expect(generatorSrc).toMatch(/const\s+useSystemCache\s*=\s*allowAutomaticRetry\s*&&\s*cacheOptIn\s*&&\s*!cacheDisabled/);
   });
 
   it('uses official-header-aware patient waits for Claude and Perplexity rate limits', () => {

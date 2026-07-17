@@ -15,7 +15,7 @@ function unavailableReason(provider: 'codex' | 'claude', status?: AgentStatusLik
   const providerLabel = provider === 'codex' ? 'Codex' : 'Claude';
   if (status?.errorCode === 'provider_disabled') {
     return status.detail
-      || '배포 앱에서는 Claude 구독 로그인을 지원하지 않습니다. Claude API 키를 사용해주세요.';
+      || `${providerLabel} 구독 로그인을 현재 사용할 수 없습니다. 상태를 새로고침한 뒤 다시 시도해주세요.`;
   }
   if (!status?.installed) return `${provider} CLI가 설치되어 있지 않습니다.`;
   if (!status.loggedIn) return `${provider} 구독 로그인이 필요합니다.`;
@@ -53,7 +53,7 @@ export async function ensureAgentEngineReady(generator: string): Promise<boolean
     const reason = unavailableReason(provider, status);
     const providerLabel = provider === 'codex' ? 'Codex' : 'Claude';
     const action = status?.errorCode === 'provider_disabled'
-      ? '환경설정의 API 키에서 Claude API 키를 등록한 뒤 Claude 엔진을 선택해주세요.'
+      ? '다른 연결 방식(MCP, 에이전트 또는 API 키)을 직접 선택해주세요.'
       : status?.errorCode === 'subscription_inactive'
       ? `${providerLabel} 구독을 갱신한 뒤 환경설정에서 계정을 다시 로그인해주세요.`
       : !status?.installed

@@ -84,14 +84,15 @@ describe('Content Quality V3 production wiring', () => {
     expect(requestContract).toMatch(/maxTopLevelRetries:\s*0/);
     expect(requestContract).toMatch(/maxNetworkRetries:\s*0/);
     expect(requestContract).toMatch(/maxProviderCalls:\s*1/);
-    expect(generator).toMatch(/const MAX_ATTEMPTS = isV3Prompt\s*\? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries/);
-    expect(generator).toMatch(/const GEMINI_MAX_RETRIES = isV3Prompt\s*\? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxNetworkRetries/);
+    expect(generator).toMatch(/const MAX_ATTEMPTS = isV3Prompt\s*\|\| provider === 'mcp'\s*\|\| !allowAutomaticProviderRetry\s*\? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries/);
+    expect(generator).toMatch(/const GEMINI_MAX_RETRIES = isV3Prompt\s*\|\| !allowAutomaticProviderRetry\s*\? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxNetworkRetries/);
     expect(generator).toMatch(/const strictSingleCall =\s*options\.executionPolicy === CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY/);
-    expect(generator).toMatch(/const cacheEnabled = !strictSingleCall && cacheEligibility\.enabled/);
-    expect(generator).toMatch(/const resultCacheAllowed = !strictSingleCall && minChars < 1000/);
-    expect(generator).toMatch(/const perModelMaxRetries = strictSingleCall \? 1 : 3/);
+    expect(generator).toMatch(/const singleSubmission = strictSingleCall\s*\|\| !shouldAllowAutomaticProviderRetry\(options\.submissionMode\)/);
+    expect(generator).toMatch(/const cacheEnabled = !singleSubmission && cacheEligibility\.enabled/);
+    expect(generator).toMatch(/const resultCacheAllowed = !singleSubmission && minChars < 1000/);
+    expect(generator).toMatch(/const perModelMaxRetries = singleSubmission \? 1 : 3/);
     expect(generator).toMatch(/const MAX_PROMPT_AUGMENTATIONS = strictSingleCall \? 0 : 2/);
-    expect(generator).toMatch(/if \(strictSingleCall\) throw error;/);
+    expect(generator).toMatch(/if \(singleSubmission\) throw error;/);
   });
 
   it('does not wrap the compact v3 contract in the legacy agentic envelope', () => {
@@ -114,15 +115,15 @@ describe('Content Quality V3 production wiring', () => {
   it('keeps every post-draft non-schema model call behind the legacy-only policy', () => {
     expect(generator).toMatch(/const allowLegacyPostDraftLlm\s*=\s*shouldRunLegacyPostDraftLlm\(promptVariant\)/);
 
-    expect(generator).toMatch(/if \(allowLegacyPostDraftLlm && !_useKwTitle && \(mode === 'seo' \|\| mode === 'mate'\)\)/);
-    expect(generator).toMatch(/if \(allowLegacyPostDraftLlm && !_useKwTitle && mode === 'homefeed'\)/);
-    expect(generator).toMatch(/if \(allowLegacyPostDraftLlm && introIssues\.length > 0[\s\S]{0,160}generateHomefeedIntroOnlyPatch/);
-    expect(generator).toMatch(/if \(\s*allowLegacyPostDraftLlm\s*&& isSemanticDistinctnessJudgeEnabled\(\)[\s\S]{0,1200}judgeSectionDistinctness/);
-    expect(generator).toMatch(/if \(allowLegacyPostDraftLlm && !_useKwTitle && \(isShoppingConnectMode \|\| mode === 'affiliate'\)\)/);
+    expect(generator).toMatch(/if \(allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && \(mode === 'seo' \|\| mode === 'mate'\)\)/);
+    expect(generator).toMatch(/if \(allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && mode === 'homefeed'\)/);
+    expect(generator).toMatch(/if \(allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && introIssues\.length > 0[\s\S]{0,160}generateHomefeedIntroOnlyPatch/);
+    expect(generator).toMatch(/if \(\s*allowAutomaticProviderRetry\s*&& allowLegacyPostDraftLlm\s*&& isSemanticDistinctnessJudgeEnabled\(\)[\s\S]{0,1200}judgeSectionDistinctness/);
+    expect(generator).toMatch(/if \(allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && \(isShoppingConnectMode \|\| mode === 'affiliate'\)\)/);
 
     expect(generator).toMatch(/if \(allowLegacyPostDraftLlm\) \{\s*try \{[\s\S]{0,500}factCheckAndRewrite/);
-    expect(generator).toMatch(/if \(allowLegacyPostDraftLlm && isSelfCritiqueEnabled/);
-    expect(generator).toMatch(/const useLlmRubric = allowLegacyPostDraftLlm\s*&& isLlmRubricEnabled/);
+    expect(generator).toMatch(/if \(\s*allowAutomaticProviderRetry\s*&& allowLegacyPostDraftLlm\s*&& isSelfCritiqueEnabled/);
+    expect(generator).toMatch(/const useLlmRubric = allowAutomaticProviderRetry\s*&&\s*allowLegacyPostDraftLlm\s*&& isLlmRubricEnabled/);
     expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*_gateResult[\s\S]{0,900}selfCritiqueAndRewrite/);
 
     expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*_gateResult\s*&& \(_gateResult\.decision === 'regenerate' \|\| _quality90Assessment\?\.miss\)/);
@@ -176,19 +177,26 @@ describe('Content Quality V3 production wiring', () => {
 
   it('validates the exact v3 draft without legacy synthesis or heading rewrites', () => {
     expect(generator).toMatch(/if \(isV3Prompt\) \{\s*const v3TitleContract = resolveContentQualityV3TitleContract\(source\);[\s\S]{0,300}finalizeContentQualityV3Draft\(parsed/);
-    const v3ReturnRegion = generator.match(
-      /const v3Decision = decideContentQualityV3Finalization\(\s*v3Finalization,\s*\{[\s\S]*?\n\s*lastFailReason = `\[content-quality-v3\]/,
-    )?.[0];
-    expect(v3ReturnRegion).toBeDefined();
-    expect(v3ReturnRegion).toMatch(/if \(v3Decision\.action === 'return'\) \{/);
-    expect(v3ReturnRegion).toMatch(/source\.contentMode === 'business'[\s\S]*?enforceContentQualityV3BusinessGuard\(v3Decision\.content, source\)/);
-    expect(v3ReturnRegion).toMatch(/evaluateContentQualityV3AffiliateGuard\(\{[\s\S]*?content: v3Decision\.content,/);
-    expect(v3ReturnRegion).toMatch(/if \(v3GuardDecision\.action === 'retry-authenticity'\) \{[\s\S]*?continue;\s*\}/);
-    expect(v3ReturnRegion).toMatch(/if \(v3GuardDecision\.action === 'retry-shopping-quality'\) \{[\s\S]*?continue;\s*\}/);
-    expect(v3ReturnRegion).toMatch(/if \(v3GuardDecision\.action === 'fail'\) \{\s*throw new Error\(v3GuardDecision\.message\);\s*\}/);
-    expect(v3ReturnRegion).toMatch(/return registerContentQualityV3GeneratedContent\(\s*materializeContentQualityV3ForLegacyConsumers\(v3GuardDecision\.content\),\s*\{ source, minimumBodyChars: validationMinChars \},\s*\);/);
-    expect(generator).toMatch(/buildContentQualityV3FinalizationRetryInstruction\([\s\S]{0,220}continue;/);
-    expect(generator).toContain('[content-quality-v3] ${v3Decision.issueCode}');
+    const v3Start = generator.lastIndexOf(
+      'if (isV3Prompt) {',
+      generator.indexOf('const v3TitleContract = resolveContentQualityV3TitleContract(source);'),
+    );
+    const v3ReturnRegion = generator.slice(
+      v3Start,
+      generator.indexOf('// ??CRITICAL: bodyPlain', v3Start),
+    );
+    expect(v3ReturnRegion).toBeTruthy();
+    expect(v3ReturnRegion).toMatch(/const v3AdvisoryIssues: ContentQualityV3PublicationIssueCode\[\] = \[\];/);
+    expect(v3ReturnRegion).toMatch(/if \(v3Finalization\.ok\) \{/);
+    expect(v3ReturnRegion).toMatch(/source\.contentMode === 'business'[\s\S]*?enforceContentQualityV3BusinessGuard\(v3Content, source\)/);
+    expect(v3ReturnRegion).toMatch(/evaluateContentQualityV3AffiliateGuard\(\{[\s\S]*?content: v3Content,/);
+    expect(v3ReturnRegion).toMatch(/authenticityRetryAvailable:\s*false/);
+    expect(v3ReturnRegion).toMatch(/shoppingQualityRetryAvailable:\s*false/);
+    expect(v3ReturnRegion).not.toContain("v3GuardDecision.action === 'retry-authenticity'");
+    expect(v3ReturnRegion).not.toContain("v3GuardDecision.action === 'retry-shopping-quality'");
+    expect(v3ReturnRegion).toMatch(/return registerContentQualityV3GeneratedContent\(\s*materializeContentQualityV3ForLegacyConsumers\(v3Content\),\s*\{[\s\S]{0,320}safetyMode:\s*'advisory'[\s\S]{0,320}advisoryIssues:\s*v3AdvisoryIssues[\s\S]{0,80}\},\s*\);/);
+    expect(generator).not.toContain('buildContentQualityV3FinalizationRetryInstruction(');
+    expect(generator).toContain('[content-quality-v3] ${v3Finalization.issueCode}');
 
     expect(generator).toMatch(/if \(shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'recover-loose-structured-content-fields'\)\) \{[\s\S]{0,220}recoverLooseStructuredContentFields\(parsed\)/);
     expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'recover-missing-body-plain'\)[\s\S]{0,120}!parsed\.bodyPlain/);
@@ -207,6 +215,27 @@ describe('Content Quality V3 production wiring', () => {
     expect(generator.match(/\bvalidateStructuredContent\(parsed, source\)/g) ?? []).toHaveLength(1);
     expect(generator.match(/\bstripSelectedTitlePrefixFromHeadings\(parsed\)/g) ?? []).toHaveLength(1);
     expect(generator.match(/\bstripLeadingSubjectHookFromHeadings\(parsed, _personCentricHeadings\)/g) ?? []).toHaveLength(1);
+  });
+
+  it('records production V3 quality findings as advisory metadata instead of a publication stop', () => {
+    expect(generator).toMatch(/registerContentQualityV3GeneratedContent\([\s\S]{0,1000}safetyMode:\s*'advisory'/);
+  });
+
+  it('never sends a second V3 provider request merely to clear a quality finding', () => {
+    const v3Start = generator.lastIndexOf(
+      'if (isV3Prompt) {',
+      generator.indexOf('const v3TitleContract = resolveContentQualityV3TitleContract(source);'),
+    );
+    const v3Region = generator.slice(
+      v3Start,
+      generator.indexOf('// ??CRITICAL: bodyPlain', v3Start),
+    );
+
+    expect(v3Region).toMatch(/authenticityRetryAvailable:\s*false/);
+    expect(v3Region).toMatch(/shoppingQualityRetryAvailable:\s*false/);
+    expect(v3Region).not.toContain("v3GuardDecision.action === 'retry-authenticity'");
+    expect(v3Region).not.toContain("v3GuardDecision.action === 'retry-shopping-quality'");
+    expect(v3Region).not.toContain('buildContentQualityV3FinalizationRetryInstruction(');
   });
 
   it('retains audited mode validators because they only sanitize or append deterministic quality telemetry', () => {

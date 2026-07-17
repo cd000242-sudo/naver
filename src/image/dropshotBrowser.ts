@@ -69,6 +69,7 @@ export interface DropshotLaunchOptions {
 
 const DROPSHOT_AUTH_SESSION_PROBE_TIMEOUT_MS = 4_000;
 const DROPSHOT_AUTH_SESSION_NODE_TIMEOUT_MARGIN_MS = 250;
+const DROPSHOT_INITIAL_PAGE_WAIT_MS = 1_000;
 
 export type DropshotAuthSessionProbeResult =
   | 'authenticated'
@@ -308,7 +309,21 @@ function readPageUrl(page: unknown): string {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function selectDropshotPage(context: any): Promise<any> {
   const currentPages = typeof context?.pages === 'function' ? context.pages() : [];
-  const pages = Array.isArray(currentPages) ? currentPages : [];
+  let pages = Array.isArray(currentPages) ? currentPages : [];
+  // Chrome can create its initial tab immediately after
+  // launchPersistentContext() resolves. Waiting briefly avoids racing it with
+  // context.newPage(), which otherwise leaves a duplicate about:blank tab.
+  if (pages.length === 0 && typeof context?.waitForEvent === 'function') {
+    try {
+      const initialPage = await context.waitForEvent('page', { timeout: DROPSHOT_INITIAL_PAGE_WAIT_MS });
+      const refreshedPages = typeof context?.pages === 'function' ? context.pages() : [];
+      pages = Array.isArray(refreshedPages) && refreshedPages.length > 0
+        ? refreshedPages
+        : [initialPage];
+    } catch {
+      // A context without an initial tab needs the fallback below.
+    }
+  }
   const studioPage = [...pages]
     .reverse()
     .find((page) => isDropshotStudioOrigin(readPageUrl(page)));

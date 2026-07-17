@@ -253,6 +253,30 @@ describe('Content Quality V3 publication boundary', () => {
       .toThrow('[content-quality-v3-publication] factual_prompt_leakage');
   });
 
+  it('keeps factual safety findings as visible warnings for an advisory publication run', () => {
+    const sourceText = 'The verified displayed price is 29,900 won.';
+    const content = makeContent({
+      bodyPlain: sourceText,
+      content: sourceText,
+    });
+
+    expect(() => registerContentQualityV3GeneratedContent(content, {
+      source: { contentMode: 'affiliate', rawText: 'No verified price is available.' },
+      minimumBodyChars: 1500,
+      safetyMode: 'advisory',
+    })).not.toThrow();
+
+    const ticket = beginContentQualityV3Publication(content);
+    if (!ticket) throw new Error('expected an advisory publication ticket');
+
+    const result = enforceContentQualityV3PublicationBoundary(content, ticket) as StructuredContent;
+
+    expect(result.status).toBe('warning');
+    expect(result.quality.warnings).toContain(
+      '[content-quality-v3 advisory] factual_unsupported_important_number',
+    );
+  });
+
   it('leaves legacy content byte-for-byte and reference-exact without trusted provenance', () => {
     const legacy = makeContent() as StructuredContent & { contentQualityV3?: string };
     legacy.contentQualityV3 = 'v3';

@@ -31,19 +31,19 @@ describe('keyword-as-title verbatim', () => {
 
   it('skips the seo title patch block under verbatim mode', () => {
     expect(gen).toMatch(
-      /if\s*\(\s*allowLegacyPostDraftLlm\s*&&\s*!_useKwTitle\s*&&\s*\(mode\s*===\s*'seo'\s*\|\|\s*mode\s*===\s*'mate'\)\s*\)/,
+      /if\s*\(\s*allowPaidPostGenerationRepair\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*!_useKwTitle\s*&&\s*\(mode\s*===\s*'seo'\s*\|\|\s*mode\s*===\s*'mate'\)\s*\)/,
     );
   });
 
   it('skips the homefeed title patch block under verbatim mode', () => {
     expect(gen).toMatch(
-      /if\s*\(\s*allowLegacyPostDraftLlm\s*&&\s*!_useKwTitle\s*&&\s*mode\s*===\s*'homefeed'\s*\)/,
+      /if\s*\(\s*allowPaidPostGenerationRepair\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*!_useKwTitle\s*&&\s*mode\s*===\s*'homefeed'\s*\)/,
     );
   });
 
   it('skips the affiliate/shopping title patch block under verbatim mode', () => {
     expect(gen).toMatch(
-      /if\s*\(\s*allowLegacyPostDraftLlm\s*&&\s*!_useKwTitle\s*&&\s*\(isShoppingConnectMode\s*\|\|\s*mode\s*===\s*'affiliate'\)\s*\)/,
+      /if\s*\(\s*allowPaidPostGenerationRepair\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*!_useKwTitle\s*&&\s*\(isShoppingConnectMode\s*\|\|\s*mode\s*===\s*'affiliate'\)\s*\)/,
     );
   });
 

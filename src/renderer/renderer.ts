@@ -6,6 +6,7 @@ import { APP_VERSION } from '../runtime/version.generated.js';
 console.log(`%c🚀 Better Life Naver v${APP_VERSION} RENDERER STARTED`, 'background: gold; color: black; font-size: 18px; font-weight: bold; padding: 8px 16px; border-radius: 6px');
 
 import type { StructuredContent, ImagePlan, HeadingPlan } from '../contentGenerator.js';
+import { FTC_DISCLOSURE_PRESETS } from '../automation/ftcDisclosurePresets.js';
 // ✅ [v2.10.335] 나노바나나 3종 분리 — provider 저장값 1회성 마이그레이션
 import { migrateImageProviderStorage } from '../runtime/imageProviderMigration.js';
 // ✅ [2026-02-26 모듈화] 프롬프트 번역 모듈
@@ -79,6 +80,11 @@ import { isImageSkipEnabled, syncImageSkipUI } from './utils/imageSkipCheck.js';
 // ✅ [2026-01-25 모듈화] 스토리지 유틸리티
 import { safeLocalStorageSetItem } from './utils/storageUtils.js';
 import { resolveFtcModeTransition } from './utils/ftcModeTransition.js';
+
+const RENDERER_FTC_PRESETS: Readonly<Record<string, string>> = Object.freeze({
+  ...FTC_DISCLOSURE_PRESETS,
+  custom: '',
+});
 // ✅ [2026-01-25 모듈화] Gemini 모델 동기화
 import { initGeminiModelSync } from './utils/geminiModelSync.js';
 // ✅ [2026-01-25 모듈화] 에러 유틸리티
@@ -209,6 +215,7 @@ import {
 } from './utils/errorAndAutosave.js';
 // ✅ [2026-01-25] 환경설정 모달
 import { initSettingsModal as initSettingsModalFunc } from './utils/settingsModal.js';
+import { initGenerationConnectionUI } from './modules/generationConnectionUI.js';
 // ✅ [2026-02-24 모듈화] 연속 발행
 import { switchExternalLinksTab, startContinuousMode, stopContinuousMode, toggleContinuousModeModal, startContinuousPublishing, initContinuousPublishingV2, startContinuousModeEnhanced, executeContinuousPublish, testApiKeysAndFullAuto, runRealFullAutoTest, setupMutualExclusiveCheckboxes, updateContinuousProgressModal, setKeywordTitleOptionsFromItem, applyKeywordPrefixToTitleContinuous, continuousQueueV2, scheduleNextPosting } from './modules/continuousPublishing.js';
 // ✅ [2026-02-25 모듈화] 썸네일 생성기
@@ -752,6 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCategorySelectionListener(); // ✅ 카테고리 모달 이벤트 리스너
   initHeadingImageButton();
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
+  initGenerationConnectionUI();
 
   // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 + 모달 wiring
   initSerpBenchmarkUI();
@@ -6453,13 +6461,7 @@ URL: ${firstUrl}
     const ftcResetBtn = document.getElementById('ftc-reset-btn') as HTMLButtonElement;
 
     // 프리셋 사전
-    const FTC_PRESETS: Record<string, string> = {
-      affiliate: '이 포스팅은 제휴마케팅이 포함된 광고로 일정 커미션을 지급 받을 수 있습니다.',
-      experience: '이 포스팅은 업체로부터 제품을 무상으로 제공받아 솔직하게 작성한 후기입니다.',
-      sponsored: '이 포스팅은 소정의 원고료를 지급받아 작성된 광고입니다.',
-      collab: '이 포스팅은 해당 업체의 협찬을 받아 작성되었습니다.',
-      custom: '',
-    };
+    const FTC_PRESETS = RENDERER_FTC_PRESETS;
 
     if (ftcCheckbox && ftcTextarea && ftcPreset && ftcPanel) {
       // ✅ 기본값은 모드 기반: 쇼핑커넥트(affiliate)만 자동 ON, 그 외 모드는 기본 OFF.
@@ -6473,7 +6475,13 @@ URL: ${firstUrl}
       ftcPanel.style.display = ftcDefaultOn ? 'block' : 'none';
       localStorage.setItem('ftcDisclosureEnabled', String(ftcDefaultOn));
       ftcPreset.value = savedPreset;
-      ftcTextarea.value = savedText || FTC_PRESETS[savedPreset] || FTC_PRESETS.affiliate;
+      // Non-custom entries are publisher-owned presets. Re-resolve them from
+      // the SSOT so an obsolete saved default cannot resurrect after update.
+      const initialPresetText = savedPreset === 'custom'
+        ? savedText
+        : FTC_PRESETS[savedPreset] || FTC_PRESETS.affiliate;
+      ftcTextarea.value = initialPresetText;
+      localStorage.setItem('ftcDisclosureText', initialPresetText);
       // custom이 아니면 textarea readonly
       ftcTextarea.readOnly = savedPreset !== 'custom';
       ftcTextarea.style.opacity = savedPreset !== 'custom' ? '0.7' : '1';
@@ -6533,13 +6541,7 @@ URL: ${firstUrl}
 
   // ✅ [v1.4.2] 3곳 공정문구 체크박스 + 패널 + 프리셋 완전 동기화
   {
-    const FTC_PRESETS_SYNC: Record<string, string> = {
-      affiliate: '이 포스팅은 제휴마케팅이 포함된 광고로 일정 커미션을 지급 받을 수 있습니다.',
-      experience: '이 포스팅은 업체로부터 제품을 무상으로 제공받아 솔직하게 작성한 후기입니다.',
-      sponsored: '이 포스팅은 소정의 원고료를 지급받아 작성된 광고입니다.',
-      collab: '이 포스팅은 해당 업체의 협찬을 받아 작성되었습니다.',
-      custom: '',
-    };
+    const FTC_PRESETS_SYNC = RENDERER_FTC_PRESETS;
 
     const ftcConfigs = [
       { cb: 'unified-ftc-disclosure', panel: 'ftc-options-panel', preset: 'unified-ftc-preset', text: 'unified-ftc-text' },

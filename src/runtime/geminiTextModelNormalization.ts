@@ -8,24 +8,24 @@ export const GEMINI_TEXT_MODELS = {
 const GEMINI_TEXT_MODEL_MIGRATIONS: Readonly<Record<string, string>> = {
   'gemini-2.5-flash-lite': GEMINI_TEXT_MODELS.FLASH_LITE,
   'gemini-2.5-flash': GEMINI_TEXT_MODELS.FLASH,
-  'gemini-2.5-pro': GEMINI_TEXT_MODELS.FLASH,
-  'gemini-2.5-pro-preview': GEMINI_TEXT_MODELS.FLASH,
+  'gemini-2.5-pro': GEMINI_TEXT_MODELS.FLASH_LITE,
+  'gemini-2.5-pro-preview': GEMINI_TEXT_MODELS.FLASH_LITE,
   'gemini-3-flash-preview': GEMINI_TEXT_MODELS.FLASH,
   'gemini-3.1-flash-preview': GEMINI_TEXT_MODELS.FLASH,
-  'gemini-3-pro-preview': GEMINI_TEXT_MODELS.FLASH,
-  'gemini-3.1-pro-preview': GEMINI_TEXT_MODELS.FLASH,
+  'gemini-3-pro-preview': GEMINI_TEXT_MODELS.FLASH_LITE,
+  'gemini-3.1-pro-preview': GEMINI_TEXT_MODELS.FLASH_LITE,
   'gemini-1.5-flash': GEMINI_TEXT_MODELS.FLASH,
   'gemini-1.5-flash-8b': GEMINI_TEXT_MODELS.FLASH_LITE,
-  'gemini-1.5-pro': GEMINI_TEXT_MODELS.FLASH,
-  'gemini-pro': GEMINI_TEXT_MODELS.FLASH,
-  'gemini-pro-vision': GEMINI_TEXT_MODELS.FLASH,
+  'gemini-1.5-pro': GEMINI_TEXT_MODELS.FLASH_LITE,
+  'gemini-pro': GEMINI_TEXT_MODELS.FLASH_LITE,
+  'gemini-pro-vision': GEMINI_TEXT_MODELS.FLASH_LITE,
   'gemini-2.0-flash': GEMINI_TEXT_MODELS.FLASH,
   'gemini-2.0-flash-001': GEMINI_TEXT_MODELS.FLASH,
 };
 
 /**
  * Upgrade a saved Gemini text model to the supported prepaid/value matrix.
- * Pro selections are intentionally migrated to stable Flash: Pro Preview has
+ * Pro selections are intentionally migrated to Flash-Lite: Pro Preview has
  * no API free tier and is not offered by this consumer-facing product.
  */
 export function normalizeGeminiTextModelId(value: unknown): string {
@@ -36,4 +36,24 @@ export function normalizeGeminiTextModelId(value: unknown): string {
     return model;
   }
   return GEMINI_TEXT_MODEL_MIGRATIONS[model] || model;
+}
+
+/**
+ * Consumer text generation uses one safe Gemini prepaid/default model. Keep
+ * non-Gemini selections intact so callers can reject provider mismatches
+ * instead of silently changing providers.
+ */
+export function normalizeGeminiPrepaidTextModelId(value: unknown): string {
+  const rawModel = String(value || '').trim();
+  if (rawModel.toLowerCase().includes('-pro')) {
+    return GEMINI_TEXT_MODELS.FLASH_LITE;
+  }
+
+  const normalizedModel = normalizeGeminiTextModelId(value);
+  if (!normalizedModel.startsWith('gemini-')) return normalizedModel;
+  if (normalizedModel === GEMINI_TEXT_MODELS.FLASH_LITE
+      || normalizedModel === GEMINI_TEXT_MODELS.FLASH) {
+    return normalizedModel;
+  }
+  return GEMINI_TEXT_MODELS.FLASH_LITE;
 }

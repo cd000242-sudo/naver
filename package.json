@@ -1,6 +1,6 @@
 {
   "name": "better-life-naver",
-  "version": "2.11.124",
+  "version": "2.11.125",
   "description": "Better Life Naver - 네이버 블로그 자동화 앱으로 더 나은 삶을 만들어가세요. Electron, Node.js, TypeScript, and Puppeteer.",
   "author": "Better Life Team",
   "license": "AGPL-3.0-or-later",
@@ -74,6 +74,7 @@
     "@anthropic-ai/sdk": "^0.21.1",
     "@google/generative-ai": "^0.24.1",
     "@imgly/background-removal": "^1.7.0",
+    "@modelcontextprotocol/sdk": "1.29.0",
     "@rohitaryal/imagefx-api": "^3.0.3",
     "@types/xlsx": "^0.0.35",
     "app-builder-bin": "^5.0.0-alpha.12",

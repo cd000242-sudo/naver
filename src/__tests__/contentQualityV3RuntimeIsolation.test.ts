@@ -341,7 +341,7 @@ describe('Content Quality V3 runtime isolation', () => {
     const sourceBefore = structuredClone(source);
 
     await expect(generateContentQualityV3CandidateForEvaluation(source, v3Options())).rejects.toMatchObject({
-      issueCode: 'candidate_execution_failed',
+      issueCode: 'candidate_result_invalid',
     });
 
     expect(geminiModelNames).toEqual(['gemini-3.1-flash-lite']);

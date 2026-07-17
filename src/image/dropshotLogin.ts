@@ -90,7 +90,13 @@ function loginRequiredStatus(message: string, code = 'LOGIN_REQUIRED'): Dropshot
   };
 }
 
-async function checkDropshotLoginInternal(
+/**
+ * Passive status refreshes only inspect the browser context already owned by
+ * this process. They must never launch Chrome: doing so while OAuth is in
+ * progress can create a second initial about:blank tab and race the profile
+ * lock used by the interactive login window.
+ */
+async function checkCachedDropshotLogin(
   onLog?: (m: string) => void,
 ): Promise<DropshotLoginStatus> {
   const cachedPage = getCachedPage();
@@ -124,59 +130,7 @@ async function checkDropshotLoginInternal(
     await closeBrowserCache();
   }
 
-  const profileDir = getProfileDir();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let ctx: any = null;
-  try {
-    onLog?.('[리더스 나노바나나] 저장된 로그인 세션 확인 중...');
-    ctx = await launchBrowser(profileDir, true);
-
-    const page = await selectDropshotPage(ctx);
-    const boardOpened = await navigateToDropshotBoard(page, onLog);
-    if (!boardOpened) {
-      return {
-        loggedIn: false,
-        message: 'Dropshot 사이트 연결 시간이 초과되었습니다. 인터넷 연결을 확인한 뒤 다시 시도해주세요.',
-        phase: 'error',
-        ready: false,
-        code: 'SITE_UNREACHABLE',
-      };
-    }
-
-    if (!(await isLoggedIn(page))) {
-      return loginRequiredStatus('로그인이 필요합니다. [로그인] 버튼으로 진행하세요.');
-    }
-
-    const authenticated: DropshotLoginStatus = {
-      loggedIn: true,
-      message: '저장된 로그인을 자동으로 인식했습니다. 무제한·0비용 모드는 생성 전에 다시 확인합니다.',
-      phase: 'authenticated',
-      ready: false,
-    };
-    setCached(ctx, page);
-    ctx = null;
-
-    try {
-      if (await openDropshotImageWorkspace(page, onLog)) {
-        await ensureDropshotControls(page, onLog);
-        return authenticatedStatus(true, '저장된 로그인과 무제한·0비용 모드를 자동으로 인식했습니다.');
-      }
-    } catch {
-      onLog?.('[리더스 나노바나나] 로그인은 유효하며 이미지 작업 화면은 생성 전에 다시 준비합니다.');
-    }
-    return authenticated;
-  } catch (error) {
-    const detail = sanitizeDropshotErrorMessage(error);
-    return {
-      loggedIn: false,
-      message: detail ? `세션 확인 실패: ${detail}` : '세션 확인에 실패했습니다.',
-      phase: 'error',
-      ready: false,
-      code: 'SESSION_CHECK_FAILED',
-    };
-  } finally {
-    if (ctx) await closeLoginVerificationContext(ctx);
-  }
+  return loginRequiredStatus('저장된 로그인은 로그인 버튼을 눌러 확인하세요. 상태 확인은 브라우저를 새로 열지 않습니다.');
 }
 
 export function checkDropshotLogin(
@@ -185,7 +139,7 @@ export function checkDropshotLogin(
   if (_checkPromise) return _checkPromise;
   if (!tryBeginDropshotCheck()) return Promise.resolve(operationBusyStatus('check'));
 
-  _checkPromise = checkDropshotLoginInternal(onLog).finally(() => {
+  _checkPromise = checkCachedDropshotLogin(onLog).finally(() => {
     endDropshotCheck();
     _checkPromise = null;
   });
@@ -198,9 +152,9 @@ async function dropshotLoginInternal(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let ctx: any = null;
   try {
-    // A login click first performs a hidden, read-only probe. Existing sessions
-    // must never spawn another visible browser window.
-    const existing = await checkDropshotLoginInternal(onLog);
+    // Reuse only an already-owned context. A hidden profile probe here can race
+    // the visible OAuth window and create the repeating about:blank tab loop.
+    const existing = await checkCachedDropshotLogin(onLog);
     if (existing.loggedIn) {
       return {
         ...existing,
@@ -233,7 +187,7 @@ async function dropshotLoginInternal(
     let unlimitedReady = false;
     let windowHidden = false;
     for (let i = 0; i < 100; i += 1) {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      if (i > 0) await new Promise((resolve) => setTimeout(resolve, 3000));
       if (userClosed) break;
 
       try {

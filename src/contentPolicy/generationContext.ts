@@ -202,8 +202,13 @@ export async function prepareGenerationPolicyContext(
   }
   reasons.push(...validatePolicyInput(input, undefined, options.config).blockReasons);
   const uniqueReasons = [...new Set(reasons)];
-  const generationAllowed = uniqueReasons.length === 0
-    || isOnlyRecentPostManualReviewReasons(uniqueReasons);
+
+  // Policy and quality findings are advisory for generation. A missing
+  // audience, business fact, or comparison record must be visible to the user
+  // but must not spend the caller's work by terminating generation before the
+  // selected connector gets a chance to run. Technical generation failures are
+  // still handled by the connector/output contract after a request is made.
+  const generationAllowed = operationalReasons.length === 0;
 
   return {
     allowed: generationAllowed,

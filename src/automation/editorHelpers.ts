@@ -965,9 +965,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       // ✅ [v2.7.31] 사용자 의도 신호는 structured.ftcDisclosure 텍스트 존재 여부로 판정
       //   renderer.ts/fullAutoFlow.ts에서 사용자가 UI 토글 ON일 때만 ftcDisclosure를 채움.
       //   따라서 ftcDisclosure가 비어 있으면 = 사용자 OFF → 절대 삽입 금지 (affiliateLink 폴백 제거).
-      const userOptedInFtc = !!(structured.ftcDisclosure?.trim());
+      const userOptedInFtc = typeof structured.ftcDisclosure === 'string'
+        && structured.ftcDisclosure.trim().length > 0;
       if (!ftcAlreadyInserted && userOptedInFtc) {
-        const ftcText = structured.ftcDisclosure!.trim();
+        const ftcText = structured.ftcDisclosure!;
         self.log(`   ⚖️ 공정위 문구 최상단 삽입 중 (사용자 ON)...`);
         await page.keyboard.press('Home').catch(() => {});
         await self.delay(100);
@@ -1153,9 +1154,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       });
 
       // ✅ [v2.7.31] 서론 없을 때도 동일: structured.ftcDisclosure 존재 여부 = 사용자 ON 신호
-      const userOptedInFtcNoIntro = !!(structured.ftcDisclosure?.trim());
+      const userOptedInFtcNoIntro = typeof structured.ftcDisclosure === 'string'
+        && structured.ftcDisclosure.trim().length > 0;
       if (!ftcAlreadyInserted && userOptedInFtcNoIntro) {
-        const ftcTextNoIntro = structured.ftcDisclosure!.trim();
+        const ftcTextNoIntro = structured.ftcDisclosure!;
         self.log(`   ⚖️ 공정위 문구 최상단 삽입 중 (서론 없음, 사용자 ON)...`);
         await page.keyboard.press('Home').catch(() => {});
         await self.delay(100);

@@ -498,12 +498,13 @@ describe('pre-publish hashtag repair wiring', () => {
     expect(apply).not.toMatch(/최선 위치에 재입력/);
   });
 
-  it('emits TailDebug snapshots before hashtag blocking', () => {
+  it('emits TailDebug snapshots before the advisory-or-strict publish decision', () => {
     const code = read('naverBlogAutomation.ts');
     expect(code).toMatch(/emitTailDebugSnapshot/);
-    expect(code).toMatch(/pre-publish-before-blocking/);
+    expect(code).toMatch(/pre-publish-before-decision/);
     expect(code).toMatch(/hashtag-repair-before/);
-    expect(code).toMatch(/pre-publish-blocked/);
+    expect(code).toMatch(/pre-publish-warning/);
+    expect(code).toMatch(/pre-publish-blocked-strict/);
     expect(code).toMatch(/bodyTail/);
     expect(code).toMatch(/bodySource:\s*stats\.bodySource/);
     expect(code).toMatch(/bodyCandidateChars:\s*stats\.bodyCandidateChars/);
@@ -531,7 +532,7 @@ describe('renderer publish tail diagnostics', () => {
   });
 });
 
-describe('R6 staged blocking', () => {
+describe('pre-publish diagnostics', () => {
   it('blocks only on deterministic checks', async () => {
     const { BLOCKING_CHECKS, getBlockingFailures, evaluatePrePublishReport } = await import('../automation/prePublishAssertion.js');
     expect([...BLOCKING_CHECKS].sort()).toEqual([
@@ -550,10 +551,13 @@ describe('R6 staged blocking', () => {
     expect(names).toEqual(['body-min-chars', 'image-count']);
   });
 
-  it('wires blocking into publishBlogPost with rethrow + no-blind-retry', () => {
+  it('keeps deterministic checks observable by default and blocks only when strict verification is explicitly enabled', () => {
     const { readFileSync } = require('fs');
     const code = readFileSync(new URL('../naverBlogAutomation.ts', import.meta.url), 'utf8');
     expect(code).toMatch(/PRE_PUBLISH_BLOCKED/);
+    expect(code).toMatch(/strictPrePublishVerification\?: boolean/);
+    expect(code).toMatch(/this\.options\.strictPrePublishVerification === true/);
+    expect(code).toMatch(/발행을 계속합니다/);
     // 검사 자체 실패 catch가 차단 throw를 삼키면 안 된다
     expect(code).toMatch(/PRE_PUBLISH_BLOCKED'\)\)\s*throw assertErr|startsWith\('PRE_PUBLISH_BLOCKED'\)/);
     const terminalBlock = code.slice(code.indexOf('const terminalErrors'), code.indexOf('const frameRecoverableErrors'));

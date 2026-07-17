@@ -46,6 +46,13 @@ export type ContentQualityV3PublicationIssueCode =
   | 'factual_unsupported_important_number'
   | 'factual_high_risk_guarantee';
 
+/**
+ * Strict mode is retained for internal/evaluation callers. Production
+ * generation uses advisory mode: editorial and factual findings are shown to
+ * the user but do not discard a structurally publishable draft.
+ */
+export type ContentQualityV3PublicationSafetyMode = 'strict' | 'advisory';
+
 export class ContentQualityV3PublicationError extends Error {
   readonly issueCode: ContentQualityV3PublicationIssueCode;
 
@@ -66,6 +73,9 @@ export type ContentQualityV3GenerationSource = ContentQualityV3TitleContractSour
 export interface ContentQualityV3GenerationRegistration {
   readonly source: ContentQualityV3GenerationSource;
   readonly minimumBodyChars: number;
+  readonly safetyMode?: ContentQualityV3PublicationSafetyMode;
+  /** Deterministic local findings collected before the publication ticket. */
+  readonly advisoryIssues?: readonly ContentQualityV3PublicationIssueCode[];
 }
 
 export interface ContentQualityV3PublicationCandidateOptions {
@@ -123,6 +133,8 @@ interface TrustedPublicationState {
   readonly businessEvidence: ContentQualityV3BusinessEvidenceSnapshot;
   readonly factualEvidence: ContentQualityV3FactualEvidenceSnapshot;
   readonly minimumBodyChars: number;
+  readonly safetyMode: ContentQualityV3PublicationSafetyMode;
+  readonly registrationAdvisories: readonly ContentQualityV3PublicationIssueCode[];
 }
 
 const trustedGenerationState = new WeakMap<object, TrustedPublicationState>();
@@ -149,6 +161,21 @@ const ARTICLE_KEYS = Object.freeze([
   'postPublishActions',
   'cta',
 ] as const);
+
+const STATIC_PUBLICATION_ISSUE_CODES = new Set<ContentQualityV3PublicationIssueCode>([
+  'invalid_candidate',
+  'invalid_generation_context',
+  'invalid_runtime_attachments',
+  'untrusted_provenance',
+  'affiliate_authenticity_failed',
+  'affiliate_shopping_quality_failed',
+  'business_safety_failed',
+  'factual_safety_invalid',
+  'factual_prompt_leakage',
+  'factual_fake_first_person',
+  'factual_unsupported_important_number',
+  'factual_high_risk_guarantee',
+]);
 
 const ATTACHMENT_KEYS = Object.freeze([
   'contentPolicyContext',
@@ -191,6 +218,60 @@ function validateFactualSafety(
   } catch {
     return 'factual_safety_invalid';
   }
+}
+
+function canBecomeAdvisory(issueCode: ContentQualityV3PublicationIssueCode): boolean {
+  if (
+    issueCode === 'invalid_candidate'
+    || issueCode === 'invalid_generation_context'
+    || issueCode === 'invalid_runtime_attachments'
+    || issueCode === 'untrusted_provenance'
+    || issueCode === 'factual_safety_invalid'
+  ) return false;
+  return !issueCode.startsWith('structured_output_');
+}
+
+function isPublicationIssueCode(value: unknown): value is ContentQualityV3PublicationIssueCode {
+  return typeof value === 'string' && (
+    value.startsWith('structured_output_')
+    || value === 'manual_title_mismatch'
+    || value === 'keyword_title_mismatch'
+    || STATIC_PUBLICATION_ISSUE_CODES.has(value as ContentQualityV3PublicationIssueCode)
+  );
+}
+
+function snapshotAdvisoryIssues(value: unknown): readonly ContentQualityV3PublicationIssueCode[] {
+  if (value === undefined) return Object.freeze([]);
+  if (!Array.isArray(value) || value.length > 32) {
+    throw new ContentQualityV3PublicationError('invalid_generation_context');
+  }
+  const issues: ContentQualityV3PublicationIssueCode[] = [];
+  for (const issueCode of value) {
+    if (!isPublicationIssueCode(issueCode)) {
+      throw new ContentQualityV3PublicationError('invalid_generation_context');
+    }
+    if (!issues.includes(issueCode)) issues.push(issueCode);
+  }
+  return Object.freeze(issues);
+}
+
+function appendPublicationAdvisories(
+  content: StructuredContent,
+  issueCodes: readonly ContentQualityV3PublicationIssueCode[],
+): StructuredContent {
+  if (issueCodes.length === 0) return content;
+  const existingWarnings = Array.isArray(content.quality?.warnings)
+    ? content.quality.warnings.filter((warning): warning is string => typeof warning === 'string')
+    : [];
+  const advisoryWarnings = issueCodes.map(
+    issueCode => `[content-quality-v3 advisory] ${issueCode}`,
+  );
+  const warnings = [...new Set([...existingWarnings, ...advisoryWarnings])];
+  return Object.freeze({
+    ...content,
+    status: content.status === 'success' ? 'warning' : content.status,
+    quality: Object.freeze({ ...content.quality, warnings }),
+  });
 }
 
 const MAX_USER_SUPPLEMENTS = 32;
@@ -375,11 +456,15 @@ function snapshotTrustedState(
     }
     const contentMode = registration.source.contentMode;
     const minimumBodyChars = registration.minimumBodyChars;
+    const safetyMode = registration.safetyMode === undefined
+      ? 'strict'
+      : registration.safetyMode;
     if (
       typeof contentMode !== 'string'
       || !EVALUATED_V3_CONTENT_MODES.some(mode => mode === contentMode)
       || !Number.isFinite(minimumBodyChars)
       || minimumBodyChars <= 0
+      || (safetyMode !== 'strict' && safetyMode !== 'advisory')
     ) {
       throw new ContentQualityV3PublicationError('invalid_generation_context');
     }
@@ -395,6 +480,8 @@ function snapshotTrustedState(
       businessEvidence: snapshotContentQualityV3BusinessEvidence(registration.source),
       factualEvidence: snapshotContentQualityV3FactualEvidence(registration.source),
       minimumBodyChars: Math.max(1, Math.floor(minimumBodyChars)),
+      safetyMode,
+      registrationAdvisories: snapshotAdvisoryIssues(registration.advisoryIssues),
     });
   } catch (error) {
     if (error instanceof ContentQualityV3PublicationError) throw error;
@@ -414,8 +501,17 @@ export function registerContentQualityV3GeneratedContent<T extends object>(
     content as unknown as StructuredContent,
     state.factualEvidence,
   );
-  if (factualIssue) throw new ContentQualityV3PublicationError(factualIssue);
-  trustedGenerationState.set(content, state);
+  if (factualIssue && state.safetyMode === 'strict') {
+    throw new ContentQualityV3PublicationError(factualIssue);
+  }
+  trustedGenerationState.set(content, factualIssue
+    ? Object.freeze({
+      ...state,
+      registrationAdvisories: Object.freeze([
+        ...new Set([...state.registrationAdvisories, factualIssue]),
+      ]),
+    })
+    : state);
   return content;
 }
 
@@ -621,6 +717,30 @@ function finalizeCoreCandidate(
   return acceptCoreContent(revalidated.content, options);
 }
 
+function materializeAdvisoryCandidate(
+  candidate: unknown,
+  issueCode: ContentQualityV3PublicationIssueCode,
+): ContentQualityV3PublicationEnvelope | undefined {
+  if (!canBecomeAdvisory(issueCode)) return undefined;
+  const split = splitCandidate(candidate);
+  if (!split) return undefined;
+
+  const bodyPlain = typeof split.article.bodyPlain === 'string'
+    ? appendMissingConclusionTail(split.article.bodyPlain, split.article.conclusion)
+    : split.article.bodyPlain;
+  const structurallyPublishable = revalidateContentQualityV3FinalizedContent({
+    ...split.article,
+    bodyPlain,
+    content: bodyPlain,
+  });
+  if (!structurallyPublishable.ok) return undefined;
+
+  return Object.freeze({
+    content: appendPublicationAdvisories(structurallyPublishable.content, [issueCode]),
+    attachments: split.attachments,
+  });
+}
+
 export function finalizeContentQualityV3PublicationCandidate(
   candidate: unknown,
   options: ContentQualityV3PublicationCandidateOptions = {},
@@ -704,17 +824,37 @@ export function enforceContentQualityV3PublicationBoundary<T>(
     factualEvidence: state.factualEvidence,
     minimumBodyChars: state.minimumBodyChars,
   });
+  const advisoryIssues = [...state.registrationAdvisories];
+  let envelope: ContentQualityV3PublicationEnvelope;
   if (!result.ok) {
-    throw new ContentQualityV3PublicationError(result.issueCode);
+    const advisoryEnvelope = state.safetyMode === 'advisory'
+      ? materializeAdvisoryCandidate(candidate, result.issueCode)
+      : undefined;
+    if (!advisoryEnvelope) {
+      throw new ContentQualityV3PublicationError(result.issueCode);
+    }
+    advisoryIssues.push(result.issueCode);
+    envelope = advisoryEnvelope;
+  } else {
+    envelope = result.envelope;
   }
   const supplementIssue = validateVisibleInspection(
-    result.envelope.content,
+    envelope.content,
     state,
     options.userSupplements,
     options.inspectionTexts,
   );
   if (supplementIssue) {
-    throw new ContentQualityV3PublicationError(supplementIssue);
+    if (state.safetyMode !== 'advisory' || !canBecomeAdvisory(supplementIssue)) {
+      throw new ContentQualityV3PublicationError(supplementIssue);
+    }
+    advisoryIssues.push(supplementIssue);
   }
-  return materializeContentQualityV3PublicationEnvelope(result.envelope);
+  const advisedEnvelope = advisoryIssues.length > 0
+    ? Object.freeze({
+      ...envelope,
+      content: appendPublicationAdvisories(envelope.content, advisoryIssues),
+    })
+    : envelope;
+  return materializeContentQualityV3PublicationEnvelope(advisedEnvelope);
 }

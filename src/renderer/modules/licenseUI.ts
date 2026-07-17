@@ -138,7 +138,7 @@ export async function initLicenseBadge(): Promise<void> {
         try {
             if (sessionStorage.getItem('welcome_shown_v1') === '1') return;
             sessionStorage.setItem('welcome_shown_v1', '1');
-            toastManager.info(formatWelcomeToastMessage(userLabel), 4200);
+            toastManager.info(formatWelcomeToastMessage(userLabel), 4200, { animate: false });
         } catch (e) {
             console.warn('[licenseUI] catch ignored:', e);
         }

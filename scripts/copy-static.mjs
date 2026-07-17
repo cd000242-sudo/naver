@@ -380,6 +380,7 @@ try {
   const modulesFiles = [
     // ✅ [Phase 5B] renderer.ts에서 추출된 모듈 (의존성 순서: 유틸→DOM캐시→이미지→포스트→기능)
     'rendererUtils.js',            // 5B-1: 이벤트리스너, DOM캐시, 디바운스, 버튼, 로깅
+    'generationConnectionUI.js',   // MCP / agent / API explicit route selector
     'unifiedDOMCache.js',          // 5B-2: UnifiedDOMCache 객체
     'imageManagerCore.js',         // 5B-3: ImageManager + imageHistoryStack
     'imageSyncService.js',         // 5B-4: 이미지 동기화 서비스

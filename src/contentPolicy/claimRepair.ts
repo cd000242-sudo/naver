@@ -102,14 +102,26 @@ export function repairUnsupportedClaims(
   };
 }
 
-const ADVISORY_CONTENT_POLICY_REASONS = new Set([
-  'BLOCK_KEYWORD_BODY_MISMATCH',
-  'BLOCK_EXCESSIVE_SIMILARITY',
-  'BLOCK_RECENT_POSTS_UNAVAILABLE',
-  'BLOCK_RECENT_POSTS_CORRUPT',
-  'BLOCK_INSUFFICIENT_RECENT_POSTS',
-  'BLOCK_MISSING_RECENT_POSTS',
+/**
+ * A content-policy result reaches this adapter only after a draft exists.  The
+ * customer-facing product treats editorial/policy diagnostics as visible
+ * warnings, not an automatic publishing veto.  This deliberately uses a
+ * small explicit hard-stop allowlist instead of an advisory allowlist: newly
+ * introduced quality codes must not silently become a paid-generation or
+ * publishing regression.
+ *
+ * Operational controls (paused account, invalid schedule, cadence, storage
+ * state) are evaluated separately by publishGuard/policyService and never
+ * pass through this content-only adapter.
+ */
+const HARD_CONTENT_PUBLICATION_REASONS = new Set([
+  // There is nothing technically publishable.  This is not a quality choice.
+  'BLOCK_EMPTY_DRAFT',
 ]);
+
+function isHardContentPublicationReason(reason: string): boolean {
+  return HARD_CONTENT_PUBLICATION_REASONS.has(reason);
+}
 
 function sameDraft(left: ArticleDraft, right: ArticleDraft): boolean {
   return JSON.stringify(left) === JSON.stringify(right);
@@ -182,8 +194,8 @@ export function acceptContentPolicyAdvisories(
     result.quality_report.unsupported_claims,
   );
   const repairedUnsupportedClaim = !sameDraft(resultDraft, repairedDraft);
-  const hardReasons = result.block_reasons.filter((reason) => !ADVISORY_CONTENT_POLICY_REASONS.has(reason));
-  const contentAdvisories = result.block_reasons.filter((reason) => ADVISORY_CONTENT_POLICY_REASONS.has(reason));
+  const hardReasons = result.block_reasons.filter(isHardContentPublicationReason);
+  const contentAdvisories = result.block_reasons.filter((reason) => !isHardContentPublicationReason(reason));
   const advisoryReasons = [...new Set([
     ...initialAdvisoryReasons,
     ...contentAdvisories,

@@ -273,6 +273,41 @@ describe('Risk-3: PRESERVE_KEYS not lost on partial saveConfig', () => {
     expect(Object.prototype.hasOwnProperty.call(disk, 'aiTabFriendlyMode')).toBe(true);
     expect(disk.geoOptimization).toBe(true);
   });
+
+  it('T3-d: partial saves preserve the explicit MCP / Agent / API route selection', async () => {
+    writeDisk(SETTINGS_PATH, {
+      generationConnectionSettings: {
+        version: 1,
+        fallbackPolicy: 'manual-only',
+        text: {
+          routeId: 'mcp-codex-text',
+          mode: 'mcp',
+          connectorId: 'codex-mcp',
+          capability: 'text.generate',
+          toolOrModelId: 'generate_text',
+          billingKind: 'subscription',
+        },
+        image: {
+          routeId: 'agent-dropshot-image',
+          mode: 'agent',
+          connectorId: 'dropshot-browser',
+          capability: 'image.generate.text',
+          toolOrModelId: 'dropshot',
+          billingKind: 'subscription',
+        },
+      },
+    });
+
+    await loadConfig();
+    await saveConfig({ costSaverMode: true });
+
+    const disk = readDisk(SETTINGS_PATH);
+    expect(disk.generationConnectionSettings).toMatchObject({
+      fallbackPolicy: 'manual-only',
+      text: { mode: 'mcp', connectorId: 'codex-mcp' },
+      image: { mode: 'agent', connectorId: 'dropshot-browser' },
+    });
+  });
 });
 
 // ---------------------------------------------------------------------------

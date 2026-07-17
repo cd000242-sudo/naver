@@ -1,12 +1,16 @@
 export const FTC_DISCLOSURE_PRESETS = Object.freeze({
-  affiliate: '이 포스팅은 제휴마케팅이 포함된 광고로 일정 커미션을 지급 받을 수 있습니다.',
+  affiliate: '[광고] 이 글에는 제휴 링크가 포함될 수 있습니다.',
   experience: '이 포스팅은 업체로부터 제품을 무상으로 제공받아 솔직하게 작성한 후기입니다.',
-  sponsored: '이 포스팅은 소정의 원고료를 지급받아 작성된 광고입니다.',
-  collab: '이 포스팅은 해당 업체의 협찬을 받아 작성되었습니다.',
+  sponsored: '이 포스팅은 소정의 원고료를 지급받아 작성한 광고입니다.',
+  collab: '이 포스팅은 해당 업체의 협찬을 받아 작성하였습니다.',
 } as const);
 
+/**
+ * Publisher-owned affiliate fallback. This copy is inserted separately from
+ * model output and must remain byte-for-byte stable unless the user edits it.
+ */
 export const DEFAULT_AFFILIATE_FTC_DISCLOSURE =
-  '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.' as const;
+  '[광고] 이 글에는 제휴 링크가 포함될 수 있습니다.' as const;
 
 export type FtcDisclosurePresetId = keyof typeof FTC_DISCLOSURE_PRESETS;
 export type FtcDisclosureTemplateId = FtcDisclosurePresetId | 'affiliate-default';

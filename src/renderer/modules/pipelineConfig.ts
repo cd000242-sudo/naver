@@ -140,7 +140,7 @@ export function readRawPipelineSettings(): RawPipelineSettings {
 }
 
 const DEFAULT_FTC_DISCLOSURE_TEXT =
-  '이 포스팅은 쇼핑커넥트/제휴마케팅 활동의 일환으로, 링크를 통한 구매 시 작성자에게 일정 수수료가 지급될 수 있습니다.';
+  '[광고] 이 글에는 제휴 링크가 포함될 수 있습니다.';
 
 const SHOPPING_AI_ENGINE_NAMES = new Set([
   'nano-banana',
@@ -271,7 +271,8 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
     },
     disclosure: {
       enabledSetting: raw.ftcDisclosureEnabled === null ? null : raw.ftcDisclosureEnabled === 'true',
-      text: (raw.ftcDisclosureText || '').trim(),
+      // Publisher-owned disclosure text must survive the run snapshot exactly.
+      text: raw.ftcDisclosureText || '',
       defaultText: DEFAULT_FTC_DISCLOSURE_TEXT,
     },
     safety: {

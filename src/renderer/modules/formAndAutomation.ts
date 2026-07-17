@@ -229,11 +229,13 @@ export function collectFormData(skipImages: boolean = false): RendererAutomation
   const ftcCheckbox = document.getElementById('unified-ftc-disclosure') as HTMLInputElement;
   const ftcTextarea = document.getElementById('unified-ftc-text') as HTMLTextAreaElement;
   const ftcEnabled = ftcCheckbox?.checked || false;
-  const ftcText = ftcTextarea?.value?.trim() || '';
+  // Preserve user-owned disclosure wording exactly; use trim only for the
+  // emptiness check below, never for the transferred value.
+  const ftcText = ftcTextarea?.value || '';
 
   // 구조화된 콘텐츠
   if (currentStructuredContent) {
-    if (ftcEnabled && ftcText) {
+    if (ftcEnabled && ftcText.trim().length > 0) {
       currentStructuredContent.ftcDisclosure = ftcText;
     } else {
       delete currentStructuredContent.ftcDisclosure;
