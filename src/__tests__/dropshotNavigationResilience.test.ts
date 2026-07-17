@@ -1,15 +1,14 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   BOARD_URL,
   DROPSHOT_LOGIN_URL,
   DROPSHOT_HOME_URL,
-  hasDropshotAuthInStorageState,
   isLoggedIn,
-  isUsableDropshotJwt,
   navigateToDropshotBoard,
   navigateToDropshotLogin,
+  probeDropshotAuthSession,
   sanitizeDropshotErrorMessage,
 } from '../image/dropshotBrowser';
 
@@ -20,6 +19,15 @@ function jwtWithExpiry(exp: number): string {
 }
 
 describe('Dropshot board navigation resilience', () => {
+  beforeEach(() => {
+    vi.stubGlobal('window', { location: { origin: 'https://aistudio.dropshot.io' } });
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
   it('uses the early commit signal instead of waiting for all DOM content', async () => {
     const page = {
       goto: vi.fn().mockResolvedValue(undefined),
@@ -134,49 +142,214 @@ describe('Dropshot board navigation resilience', () => {
     expect(clean).not.toMatch(/[\r\n\t]/);
   });
 
-  it('accepts only unexpired Cognito JWTs', () => {
-    const nowMs = Date.UTC(2026, 6, 11, 0, 0, 0);
+  it('detects the current Auth.js session even when legacy Cognito JWTs expired', async () => {
+    const nowMs = Date.UTC(2026, 6, 17, 1, 0, 0);
     const nowSeconds = Math.floor(nowMs / 1000);
-
-    expect(isUsableDropshotJwt(jwtWithExpiry(nowSeconds + 120), nowMs)).toBe(true);
-    expect(isUsableDropshotJwt(jwtWithExpiry(nowSeconds - 1), nowMs)).toBe(false);
-    expect(isUsableDropshotJwt('opaque-token-that-is-longer-than-twenty-characters', nowMs)).toBe(false);
-    expect(isUsableDropshotJwt(`a.${'A'.repeat(20_000)}.b`, nowMs)).toBe(false);
-  });
-
-  it('detects persisted auth in local storage or cookies without opening the board route', () => {
-    const nowMs = Date.UTC(2026, 6, 11, 0, 0, 0);
-    const validJwt = jwtWithExpiry(Math.floor(nowMs / 1000) + 120);
-    const expiredJwt = jwtWithExpiry(Math.floor(nowMs / 1000) - 1);
+    const expiredJwt = jwtWithExpiry(nowSeconds - 60);
     const tokenName = 'CognitoIdentityServiceProvider.client.user.idToken';
+    const storageState = {
+      origins: [{ origin: DROPSHOT_HOME_URL, localStorage: [{ name: tokenName, value: expiredJwt }] }],
+      cookies: [
+        {
+          name: 'ds.session-token.0',
+          value: `chunk-zero-${'a'.repeat(200)}`,
+          domain: '.dropshot.io',
+          httpOnly: true,
+          secure: true,
+          expires: nowSeconds + 30 * 24 * 60 * 60,
+        },
+        {
+          name: 'ds.session-token.1',
+          value: `chunk-one-${'b'.repeat(200)}`,
+          domain: '.dropshot.io',
+          httpOnly: true,
+          secure: true,
+          expires: nowSeconds + 30 * 24 * 60 * 60,
+        },
+      ],
+    };
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({ user: { id: 'authenticated-user' } }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    const page = {
+      url: vi.fn().mockReturnValue(BOARD_URL),
+      context: vi.fn().mockReturnValue({ storageState: vi.fn().mockResolvedValue(storageState) }),
+      evaluate: vi.fn(async (callback: (arg?: unknown) => unknown, arg?: unknown) => await callback(arg)),
+    };
 
-    expect(hasDropshotAuthInStorageState({
-      cookies: [],
-      origins: [{ origin: DROPSHOT_HOME_URL, localStorage: [{ name: tokenName, value: validJwt }] }],
-    }, nowMs)).toBe(true);
-    expect(hasDropshotAuthInStorageState({
-      cookies: [{ name: tokenName, value: validJwt, domain: '.dropshot.io' }],
-      origins: [],
-    }, nowMs)).toBe(true);
-    expect(hasDropshotAuthInStorageState({
-      cookies: [{ name: tokenName, value: expiredJwt, domain: 'aistudio.dropshot.io' }],
-      origins: [],
-    }, nowMs)).toBe(false);
+    await expect(isLoggedIn(page)).resolves.toBe(true);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledWith('/api/auth/session', expect.objectContaining({
+      method: 'GET',
+      credentials: 'include',
+      cache: 'no-store',
+    }));
   });
 
-  it('ignores Cognito-shaped tokens from unrelated origins and cookie domains', () => {
-    const nowMs = Date.UTC(2026, 6, 11, 0, 0, 0);
-    const validJwt = jwtWithExpiry(Math.floor(nowMs / 1000) + 120);
-    const tokenName = 'CognitoIdentityServiceProvider.client.user.accessToken';
+  it('recognizes the Auth.js session before the login route finishes redirecting', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({ user: { id: 'authenticated-user' } }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    const page = {
+      url: vi.fn().mockReturnValue(DROPSHOT_LOGIN_URL),
+      context: vi.fn().mockReturnValue({ storageState: vi.fn().mockResolvedValue({ cookies: [], origins: [] }) }),
+      evaluate: vi.fn(async (callback: (arg?: unknown) => unknown, arg?: unknown) => await callback(arg)),
+    };
 
-    expect(hasDropshotAuthInStorageState({
-      cookies: [],
-      origins: [{ origin: 'https://example.com', localStorage: [{ name: tokenName, value: validJwt }] }],
-    }, nowMs)).toBe(false);
-    expect(hasDropshotAuthInStorageState({
-      cookies: [{ name: tokenName, value: validJwt, domain: 'dropshot.io.example.com' }],
-      origins: [],
-    }, nowMs)).toBe(false);
+    await expect(isLoggedIn(page)).resolves.toBe(true);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledWith('/api/auth/session', expect.objectContaining({
+      method: 'GET',
+      credentials: 'include',
+      cache: 'no-store',
+    }));
+  });
+
+  it('does not trust split session cookie metadata when the Auth.js endpoint is unauthenticated', async () => {
+    const nowMs = Date.UTC(2026, 6, 17, 1, 0, 0);
+    const nowSeconds = Math.floor(nowMs / 1000);
+    const chunk = `opaque-session-${'x'.repeat(200)}`;
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue(null),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    const page = {
+      url: vi.fn().mockReturnValue(BOARD_URL),
+      context: vi.fn().mockReturnValue({
+        storageState: vi.fn().mockResolvedValue({
+          cookies: [
+            {
+              name: 'ds.session-token.0',
+              value: chunk,
+              domain: '.dropshot.io',
+              httpOnly: true,
+              secure: true,
+              expires: nowSeconds + 3_600,
+            },
+            {
+              name: 'ds.session-token.1',
+              value: chunk,
+              domain: '.dropshot.io',
+              httpOnly: true,
+              secure: true,
+              expires: nowSeconds + 3_600,
+            },
+          ],
+          origins: [],
+        }),
+      }),
+      evaluate: vi.fn(async (callback: (arg?: unknown) => unknown, arg?: unknown) => await callback(arg)),
+    };
+
+    await expect(isLoggedIn(page)).resolves.toBe(false);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it.each([
+    ['HTTP 401', vi.fn().mockResolvedValue({ ok: false, status: 401 })],
+    ['network failure', vi.fn().mockRejectedValue(new Error('network unavailable'))],
+  ])('does not throw or authenticate when the Auth.js probe has %s', async (_label, fetchMock) => {
+    vi.stubGlobal('fetch', fetchMock);
+    const page = {
+      url: vi.fn().mockReturnValue(BOARD_URL),
+      context: vi.fn().mockReturnValue({ storageState: vi.fn().mockResolvedValue({ cookies: [], origins: [] }) }),
+      evaluate: vi.fn(async (callback: (arg?: unknown) => unknown, arg?: unknown) => await callback(arg)),
+    };
+
+    await expect(isLoggedIn(page)).resolves.toBe(false);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not trust a legacy Cognito JWT when the authoritative session API is unavailable', async () => {
+    const tokenName = 'CognitoIdentityServiceProvider.client.user.idToken';
+    const validJwt = jwtWithExpiry(Math.floor(Date.now() / 1000) + 120);
+    const fetchMock = vi.fn().mockResolvedValue({ ok: false, status: 503 });
+    vi.stubGlobal('fetch', fetchMock);
+    const page = {
+      url: vi.fn().mockReturnValue(BOARD_URL),
+      context: vi.fn().mockReturnValue({
+        storageState: vi.fn().mockResolvedValue({
+          cookies: [],
+          origins: [{ origin: DROPSHOT_HOME_URL, localStorage: [{ name: tokenName, value: validJwt }] }],
+        }),
+      }),
+      evaluate: vi.fn(async (callback: (arg?: unknown) => unknown, arg?: unknown) => await callback(arg)),
+    };
+
+    await expect(isLoggedIn(page)).resolves.toBe(false);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('honors an explicit unauthenticated session response over a stale legacy JWT', async () => {
+    const tokenName = 'CognitoIdentityServiceProvider.client.user.idToken';
+    const validJwt = jwtWithExpiry(Math.floor(Date.now() / 1000) + 120);
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue(null),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    const page = {
+      url: vi.fn().mockReturnValue(BOARD_URL),
+      context: vi.fn().mockReturnValue({
+        storageState: vi.fn().mockResolvedValue({
+          cookies: [],
+          origins: [{ origin: DROPSHOT_HOME_URL, localStorage: [{ name: tokenName, value: validJwt }] }],
+        }),
+      }),
+      evaluate: vi.fn(async (callback: (arg?: unknown) => unknown, arg?: unknown) => await callback(arg)),
+    };
+
+    await expect(isLoggedIn(page)).resolves.toBe(false);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('never probes or accepts a session from a non-Studio Dropshot subdomain', async () => {
+    const page = {
+      url: vi.fn().mockReturnValue('https://stock.dropshot.io/auth/callback'),
+      evaluate: vi.fn().mockResolvedValue('authenticated'),
+    };
+
+    await expect(isLoggedIn(page)).resolves.toBe(false);
+    expect(page.evaluate).not.toHaveBeenCalled();
+  });
+
+  it('rechecks the document origin inside evaluate when OAuth navigation races the probe', async () => {
+    vi.stubGlobal('window', { location: { origin: 'https://stock.dropshot.io' } });
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({ user: { id: 'wrong-product-session' } }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+    const page = {
+      url: vi.fn().mockReturnValue(BOARD_URL),
+      evaluate: vi.fn(async (callback: (arg?: unknown) => unknown, arg?: unknown) => await callback(arg)),
+    };
+
+    await expect(isLoggedIn(page)).resolves.toBe(false);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it('bounds a renderer-side session probe that never resolves', async () => {
+    vi.useFakeTimers();
+    const page = {
+      url: vi.fn().mockReturnValue(BOARD_URL),
+      evaluate: vi.fn(() => new Promise(() => undefined)),
+    };
+
+    const probe = probeDropshotAuthSession(page, 500);
+    await vi.advanceTimersByTimeAsync(1_000);
+
+    await expect(probe).resolves.toBe('unavailable');
   });
 
   it('does not report success while the visible browser is on an explicit Dropshot login page', async () => {

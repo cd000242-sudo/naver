@@ -47,16 +47,13 @@ describe('Dropshot unlimited mode safety', () => {
     expect(sessionCode).toMatch(/Keep ownership so a later shutdown\/abort pass/);
   });
 
-  it('does not treat workspace text as a valid login session without auth tokens', () => {
-    expect(browserCode).toMatch(/CognitoIdentityServiceProvider/);
-    // 로그인 신호 = idToken/accessToken(JWT, signOut 시 제거)만.
-    // refreshToken은 opaque 문자열 + 로그아웃 후 쿠키에 잔존 → "로그아웃인데 로그인됨"
-    // false positive를 유발하므로 로그인 신호에서 제외한다(2ed04e1e 회귀 잠금).
-    expect(browserCode).toMatch(/\(idToken\|accessToken\)\$/);
-    expect(browserCode).not.toMatch(/idToken\|accessToken\|refreshToken/);
-    expect(browserCode).toMatch(/document\.cookie/);
-    expect(browserCode).toMatch(/expiresAtSeconds \* 1000 > nowMs/);
-    expect(browserCode).not.toMatch(/val\.length\s*>\s*20/);
+  it('uses the server session verdict and never treats workspace text as login proof', () => {
+    expect(browserCode).toMatch(/fetch\('\/api\/auth\/session'/);
+    expect(browserCode).toMatch(/session\?\.user\?\.id/);
+    expect(browserCode).toMatch(/credentials:\s*'include'/);
+    expect(browserCode).not.toMatch(/CognitoIdentityServiceProvider/);
+    expect(browserCode).not.toMatch(/document\.cookie/);
+    expect(browserCode).not.toMatch(/storageState\(\)/);
     expect(browserCode).not.toMatch(/hasAccountChrome/);
     expect(browserCode).not.toMatch(/hasWorkspaceNav/);
   });

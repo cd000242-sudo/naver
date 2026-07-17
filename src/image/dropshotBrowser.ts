@@ -67,22 +67,13 @@ export interface DropshotLaunchOptions {
   allowForceVisible?: boolean;
 }
 
-const COGNITO_TOKEN_KEY = /CognitoIdentityServiceProvider\..+\.(idToken|accessToken)$/i;
-const MAX_DROPSHOT_JWT_LENGTH = 16_384;
-const MAX_DROPSHOT_JWT_PAYLOAD_LENGTH = 12_288;
-const MAX_DROPSHOT_STORAGE_ENTRIES = 256;
+const DROPSHOT_AUTH_SESSION_PROBE_TIMEOUT_MS = 4_000;
+const DROPSHOT_AUTH_SESSION_NODE_TIMEOUT_MARGIN_MS = 250;
 
-interface DropshotStorageState {
-  readonly cookies?: ReadonlyArray<{
-    readonly name?: string;
-    readonly value?: string;
-    readonly domain?: string;
-  }>;
-  readonly origins?: ReadonlyArray<{
-    readonly origin?: string;
-    readonly localStorage?: ReadonlyArray<{ readonly name?: string; readonly value?: string }>;
-  }>;
-}
+export type DropshotAuthSessionProbeResult =
+  | 'authenticated'
+  | 'unauthenticated'
+  | 'unavailable';
 
 function isDropshotHost(value: string): boolean {
   const host = String(value || '').trim().toLowerCase().replace(/^\.+/, '');
@@ -93,6 +84,15 @@ function isDropshotOrigin(value: string): boolean {
   try {
     const url = new URL(value);
     return url.protocol === 'https:' && isDropshotHost(url.hostname);
+  } catch {
+    return false;
+  }
+}
+
+function isDropshotStudioOrigin(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && url.hostname.toLowerCase() === 'aistudio.dropshot.io';
   } catch {
     return false;
   }
@@ -119,65 +119,43 @@ export function isDropshotProfileLockError(error: unknown): boolean {
   return /(?:ProcessSingleton|SingletonLock|user data directory[^\n]*(?:already\s+)?in use|profile(?: directory)?[^\n]*(?:in use|locked))/i.test(message);
 }
 
-export function isUsableDropshotJwt(value: unknown, nowMs = Date.now()): boolean {
-  if (typeof value !== 'string') return false;
-  if (value.length === 0 || value.length > MAX_DROPSHOT_JWT_LENGTH) return false;
-  const parts = value.split('.');
-  if (parts.length !== 3 || parts.some((part) => !part)) return false;
-  if (parts[1]!.length > MAX_DROPSHOT_JWT_PAYLOAD_LENGTH) return false;
-
-  try {
-    const payload = JSON.parse(Buffer.from(parts[1]!, 'base64url').toString('utf8')) as { exp?: unknown };
-    const expiresAtSeconds = Number(payload.exp);
-    return Number.isFinite(expiresAtSeconds) && expiresAtSeconds * 1000 > nowMs;
-  } catch {
-    return false;
-  }
-}
-
-export function hasDropshotAuthInStorageState(
-  state: DropshotStorageState | null | undefined,
-  nowMs = Date.now(),
-): boolean {
-  if (!state) return false;
-
-  let inspected = 0;
-  for (const origin of state.origins ?? []) {
-    if (!isDropshotOrigin(origin.origin ?? '')) continue;
-    for (const entry of origin.localStorage ?? []) {
-      if (inspected >= MAX_DROPSHOT_STORAGE_ENTRIES) return false;
-      inspected += 1;
-      if (COGNITO_TOKEN_KEY.test(entry.name ?? '') && isUsableDropshotJwt(entry.value, nowMs)) {
-        return true;
-      }
-    }
-  }
-
-  for (const cookie of state.cookies ?? []) {
-    if (inspected >= MAX_DROPSHOT_STORAGE_ENTRIES) return false;
-    inspected += 1;
-    if (!isDropshotHost(cookie.domain ?? '')) continue;
-    if (COGNITO_TOKEN_KEY.test(cookie.name ?? '') && isUsableDropshotJwt(cookie.value, nowMs)) {
-      return true;
-    }
-  }
-  return false;
+function isDropshotTargetClosedError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error ?? '');
+  return /(?:Target page, context or browser has been closed|Target closed|Page closed|Session closed)/i.test(message);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function isLoggedInFromStorageState(context: any): Promise<boolean> {
+async function isClosedAuxiliaryDropshotPage(primary: any, candidate: any, context: any): Promise<boolean> {
+  let primaryClosed = false;
+  let candidateClosed = false;
   try {
-    return hasDropshotAuthInStorageState(await context.storageState());
+    primaryClosed = typeof primary?.isClosed === 'function' && Boolean(await primary.isClosed());
   } catch {
-    return false;
+    primaryClosed = true;
   }
+  if (primaryClosed) return false;
+
+  try {
+    candidateClosed = typeof candidate?.isClosed === 'function' && Boolean(await candidate.isClosed());
+  } catch {
+    candidateClosed = true;
+  }
+
+  try {
+    const currentPages = typeof context?.pages === 'function' ? context.pages() : null;
+    if (Array.isArray(currentPages)) {
+      if (!currentPages.includes(primary)) return false;
+      if (!currentPages.includes(candidate)) return true;
+    }
+  } catch {
+    // The page-level closed signal below is still authoritative.
+  }
+  return candidateClosed;
 }
 
 /**
- * A persistent Chromium profile does not expose origin localStorage through
- * storageState until that origin has been opened in the current process.
- * Navigation callers therefore must confirm a rendered Dropshot document
- * before using this signal as a login verdict.
+ * Navigation callers must confirm a rendered Dropshot document before
+ * querying its same-origin server session verdict.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function waitForDropshotPageRender(page: any, timeoutMs = 12_000): Promise<boolean> {
@@ -331,7 +309,10 @@ function readPageUrl(page: unknown): string {
 export async function selectDropshotPage(context: any): Promise<any> {
   const currentPages = typeof context?.pages === 'function' ? context.pages() : [];
   const pages = Array.isArray(currentPages) ? currentPages : [];
-  const dropshotPage = [...pages]
+  const studioPage = [...pages]
+    .reverse()
+    .find((page) => isDropshotStudioOrigin(readPageUrl(page)));
+  const dropshotPage = studioPage || [...pages]
     .reverse()
     .find((page) => isDropshotOrigin(readPageUrl(page)));
   const nonBlankPage = [...pages]
@@ -347,9 +328,13 @@ export async function selectDropshotPage(context: any): Promise<any> {
 
   await Promise.all(redundantBlankPages.map(async (page) => {
     try {
+      // OAuth providers create popup pages as about:blank before their first
+      // navigation. Only a top-level launch tab (no opener) is redundant.
+      if (typeof page?.opener !== 'function') return;
+      if (await page.opener()) return;
       await page.close();
     } catch {
-      // A browser can close its launch-created blank tab concurrently.
+      // A browser or OAuth provider can close the blank page concurrently.
     }
   }));
   return selectedPage;
@@ -488,6 +473,17 @@ export async function minimizeDropshotWindow(
           });
         }
         minimizedWindowIds.add(windowId);
+      } catch (error) {
+        // OAuth popups normally close themselves as the provider redirects back
+        // to Dropshot. If the authenticated main window is already minimized,
+        // that normal popup teardown must not turn the whole hide operation into
+        // a failure and force the dedicated profile to close/reopen.
+        if (
+          candidate !== page
+          && isDropshotTargetClosedError(error)
+          && await isClosedAuxiliaryDropshotPage(page, candidate, context)
+        ) continue;
+        throw error;
       } finally {
         try {
           await cdpSession?.detach?.();
@@ -505,45 +501,76 @@ export async function minimizeDropshotWindow(
   }
 }
 
+/**
+ * Query Dropshot's current Auth.js session source of truth inside the page.
+ * Only a three-state verdict crosses the browser boundary; session/user/token
+ * contents never leave the Dropshot origin and are never written to logs.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function probeDropshotAuthSession(
+  page: any,
+  timeoutMs = DROPSHOT_AUTH_SESSION_PROBE_TIMEOUT_MS,
+): Promise<DropshotAuthSessionProbeResult> {
+  if (!isDropshotStudioOrigin(readPageUrl(page))) return 'unauthenticated';
+
+  const safeTimeoutMs = Number.isFinite(timeoutMs) && timeoutMs > 0
+    ? Math.max(500, Math.min(10_000, Math.floor(timeoutMs)))
+    : DROPSHOT_AUTH_SESSION_PROBE_TIMEOUT_MS;
+
+  let nodeTimeout: ReturnType<typeof setTimeout> | null = null;
+  try {
+    const browserProbe = page.evaluate(async ({ timeoutMs: browserTimeoutMs }: { timeoutMs: number }) => {
+      if (window.location.origin !== 'https://aistudio.dropshot.io') return 'unauthenticated';
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), browserTimeoutMs);
+      try {
+        const response = await fetch('/api/auth/session', {
+          method: 'GET',
+          credentials: 'include',
+          cache: 'no-store',
+          headers: { Accept: 'application/json' },
+          signal: controller.signal,
+        });
+        if (!response.ok) {
+          return response.status === 401 || response.status === 403
+            ? 'unauthenticated'
+            : 'unavailable';
+        }
+
+        const session = await response.json();
+        return typeof session?.user?.id === 'string' && session.user.id.trim().length > 0
+          ? 'authenticated'
+          : 'unauthenticated';
+      } catch {
+        return 'unavailable';
+      } finally {
+        clearTimeout(timer);
+      }
+    }, { timeoutMs: safeTimeoutMs });
+    const nodeTimeoutProbe = new Promise<DropshotAuthSessionProbeResult>((resolve) => {
+      nodeTimeout = setTimeout(
+        () => resolve('unavailable'),
+        safeTimeoutMs + DROPSHOT_AUTH_SESSION_NODE_TIMEOUT_MARGIN_MS,
+      );
+    });
+    const result = await Promise.race([browserProbe, nodeTimeoutProbe]);
+
+    return result === 'authenticated' || result === 'unauthenticated'
+      ? result
+      : 'unavailable';
+  } catch {
+    return 'unavailable';
+  } finally {
+    if (nodeTimeout) clearTimeout(nodeTimeout);
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function isLoggedIn(page: any): Promise<boolean> {
   try {
     const pageUrl = typeof page?.url === 'function' ? String(page.url()) : '';
-    if (!isDropshotOrigin(pageUrl) || isDropshotExplicitLoginUrl(pageUrl)) return false;
-
-    const context = typeof page?.context === 'function' ? page.context() : null;
-    if (context && (await isLoggedInFromStorageState(context))) return true;
-
-    const candidates: Array<{ name: string; value: string }> = await page.evaluate(() => {
-      const values: Array<{ name: string; value: string }> = [];
-      const TOKEN_KEY = /CognitoIdentityServiceProvider\..+\.(idToken|accessToken)$/i;
-      try {
-        for (let i = 0; i < localStorage.length; i++) {
-          const k = localStorage.key(i) || '';
-          const value = localStorage.getItem(k) || '';
-          if (TOKEN_KEY.test(k)) values.push({ name: k, value });
-        }
-      } catch {
-        // localStorage 접근 불가
-      }
-      try {
-        for (const raw of (document.cookie || '').split(';')) {
-          const eq = raw.indexOf('=');
-          const name = (eq >= 0 ? raw.slice(0, eq) : raw).trim();
-          const val = eq >= 0 ? raw.slice(eq + 1).trim() : '';
-          if (!TOKEN_KEY.test(name)) continue;
-          let decoded = val;
-          try { decoded = decodeURIComponent(val); } catch { /* keep raw */ }
-          values.push({ name, value: decoded });
-        }
-      } catch {
-        // cookie 접근 불가
-      }
-      return values;
-    });
-    return candidates.some(({ name, value }) =>
-      COGNITO_TOKEN_KEY.test(name) && isUsableDropshotJwt(value),
-    );
+    if (!isDropshotStudioOrigin(pageUrl)) return false;
+    return (await probeDropshotAuthSession(page)) === 'authenticated';
   } catch {
     return false;
   }

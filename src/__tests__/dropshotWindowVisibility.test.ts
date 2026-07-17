@@ -58,4 +58,66 @@ describe('Dropshot window hiding', () => {
     await expect(minimizeDropshotWindow(dropshotPage)).resolves.toBe(true);
     expect(minimizedWindowIds).toEqual([10, 20]);
   });
+
+  it('keeps a successful main-window hide when the OAuth popup closes concurrently', async () => {
+    const dropshotPage = { id: 'dropshot', isClosed: vi.fn(() => false) };
+    const oauthPopup = { id: 'oauth-popup', isClosed: vi.fn(() => true) };
+    const minimizedWindowIds: number[] = [];
+    const context = {
+      pages: vi.fn(() => [dropshotPage, oauthPopup]),
+      newCDPSession: vi.fn(async (target: any) => {
+        if (target === oauthPopup) {
+          throw new Error('Target page, context or browser has been closed');
+        }
+        return {
+          send: vi.fn(async (method: string, params?: any) => {
+            if (method === 'Browser.getWindowForTarget') return { windowId: 10 };
+            if (method === 'Browser.setWindowBounds' && params?.bounds?.windowState === 'minimized') {
+              minimizedWindowIds.push(params.windowId);
+            }
+            return {};
+          }),
+          detach: vi.fn(async () => undefined),
+        };
+      }),
+    };
+    (dropshotPage as any).context = vi.fn(() => context);
+
+    await expect(minimizeDropshotWindow(dropshotPage)).resolves.toBe(true);
+    expect(minimizedWindowIds).toEqual([10]);
+  });
+
+  it('fails the hide when a popup still exists after its CDP session errors', async () => {
+    const dropshotPage = { id: 'dropshot', isClosed: vi.fn(() => false) };
+    const oauthPopup = { id: 'oauth-popup', isClosed: vi.fn(() => false) };
+    const context = {
+      pages: vi.fn(() => [dropshotPage, oauthPopup]),
+      newCDPSession: vi.fn(async (target: any) => {
+        if (target === oauthPopup) throw new Error('Session closed');
+        return {
+          send: vi.fn(async (method: string) => (
+            method === 'Browser.getWindowForTarget' ? { windowId: 10 } : {}
+          )),
+          detach: vi.fn(async () => undefined),
+        };
+      }),
+    };
+    (dropshotPage as any).context = vi.fn(() => context);
+
+    await expect(minimizeDropshotWindow(dropshotPage)).resolves.toBe(false);
+  });
+
+  it('fails the hide when the primary page also closed with the browser context', async () => {
+    const dropshotPage = { id: 'dropshot', isClosed: vi.fn(() => true) };
+    const oauthPopup = { id: 'oauth-popup', isClosed: vi.fn(() => true) };
+    const context = {
+      pages: vi.fn(() => []),
+      newCDPSession: vi.fn(async () => {
+        throw new Error('Target page, context or browser has been closed');
+      }),
+    };
+    (dropshotPage as any).context = vi.fn(() => context);
+
+    await expect(minimizeDropshotWindow(dropshotPage)).resolves.toBe(false);
+  });
 });

@@ -15,7 +15,16 @@ if (!fs.existsSync(releaseDir)) {
 }
 
 const files = fs.readdirSync(releaseDir);
-const exeFile = files.find(f => f.endsWith('.exe') && (f.includes('Setup') || f.includes('setup')));
+const setupNames = [
+  `Better-Life-Naver-Setup-${version}.exe`,
+  `Better Life Naver Setup ${version}.exe`,
+];
+const exeFile = setupNames.find(name => files.includes(name)) || files.find(f =>
+  f.endsWith('.exe') &&
+  /setup/i.test(f) &&
+  f.includes(version) &&
+  !f.includes('__uninstaller')
+);
 // Portable 파일 찾기: Setup이 아닌 .exe 파일 (예: "Better Life Naver 1.0.1.exe")
 const portableFile = files.find(f =>
   f.endsWith('.exe') &&
