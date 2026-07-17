@@ -11,7 +11,11 @@ import * as path from 'node:path';
 import * as fs from 'node:fs';
 import * as os from 'node:os';
 import { fileURLToPath } from 'node:url';
-import { trackDropshotContext, untrackDropshotContext } from './dropshotSession.js';
+import {
+  hasTrackedDropshotContexts,
+  trackDropshotContext,
+  untrackDropshotContext,
+} from './dropshotSession.js';
 import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
 
 export const BOARD_URL =
@@ -108,6 +112,11 @@ export function isDropshotExplicitLoginUrl(value: string): boolean {
 export function sanitizeDropshotErrorMessage(error: unknown, maxLength = 180): string {
   const safeLength = Number.isFinite(maxLength) && maxLength > 0 ? Math.floor(maxLength) : 180;
   return sanitizeUserVisibleError(error).slice(0, safeLength);
+}
+
+export function isDropshotProfileLockError(error: unknown): boolean {
+  const message = error instanceof Error ? error.message : String(error ?? '');
+  return /(?:ProcessSingleton|SingletonLock|user data directory[^\n]*(?:already\s+)?in use|profile(?: directory)?[^\n]*(?:in use|locked))/i.test(message);
 }
 
 export function isUsableDropshotJwt(value: unknown, nowMs = Date.now()): boolean {
@@ -351,6 +360,11 @@ export async function launchBrowser(
   headless: boolean,
   options: DropshotLaunchOptions = {},
 ): Promise<unknown> {
+  if (hasTrackedDropshotContexts()) {
+    throw new Error(
+      'DROPSHOT_SESSION_ACTIVE: 이전 자동화 브라우저가 아직 종료되지 않아 새 창을 열지 않습니다.',
+    );
+  }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let chromium: any;
   try {
@@ -364,6 +378,7 @@ export async function launchBrowser(
     options.allowForceVisible === true &&
     String(process.env['VISIBLE_BROWSER'] || '').toLowerCase() === 'true';
   const effectiveHeadless = forceVisible ? false : headless;
+  let lastLaunchError: unknown = null;
 
   const baseOptions = {
     headless: effectiveHeadless,
@@ -415,11 +430,20 @@ export async function launchBrowser(
         // stealth init is best-effort
       }
       return ctx;
-    } catch {
+    } catch (error) {
+      lastLaunchError = error;
+      // A locked persistent profile cannot succeed with another browser
+      // channel. Retrying would only flash more transient blank windows.
+      if (isDropshotProfileLockError(error)) break;
       // try next channel
     }
   }
-  throw new Error('Chrome/Edge/Chromium 실행 실패');
+  const detail = sanitizeDropshotErrorMessage(lastLaunchError);
+  throw new Error(
+    isDropshotProfileLockError(lastLaunchError)
+      ? 'DROPSHOT_BROWSER_LAUNCH_FAILED: 이전 리더스 나노바나나 자동화 창이 아직 종료되지 않았습니다. 잠시 후 다시 시도해주세요.'
+      : `DROPSHOT_BROWSER_LAUNCH_FAILED: Chrome/Edge/Chromium 실행 실패${detail ? ` (${detail})` : ''}`,
+  );
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -427,27 +451,57 @@ export async function minimizeDropshotWindow(
   page: any,
   onLog?: (m: string) => void,
 ): Promise<boolean> {
-  let cdpSession: any = null;
   try {
     const context = typeof page?.context === 'function' ? page.context() : null;
     if (!context || typeof context.newCDPSession !== 'function') return false;
-    cdpSession = await context.newCDPSession(page);
-    const { windowId } = await cdpSession.send('Browser.getWindowForTarget');
-    await cdpSession.send('Browser.setWindowBounds', {
-      windowId,
-      bounds: { windowState: 'minimized' },
-    });
-    onLog?.('[리더스 나노바나나] 로그인 창을 최소화하고 동일한 무제한 세션을 유지합니다.');
+    let contextPages: any[] = [];
+    try {
+      const pages = typeof context.pages === 'function' ? context.pages() : [];
+      if (Array.isArray(pages)) contextPages = pages;
+    } catch {
+      // The authenticated page is still attempted below.
+    }
+
+    const candidates = [...new Set([page, ...contextPages].filter(Boolean))];
+    const minimizedWindowIds = new Set<number>();
+    for (const candidate of candidates) {
+      let cdpSession: any = null;
+      try {
+        cdpSession = await context.newCDPSession(candidate);
+        const { windowId } = await cdpSession.send('Browser.getWindowForTarget');
+        if (minimizedWindowIds.has(windowId)) continue;
+        try {
+          await cdpSession.send('Browser.setWindowBounds', {
+            windowId,
+            bounds: { windowState: 'minimized' },
+          });
+        } catch {
+          // Chromium rejects some direct maximized/fullscreen → minimized state
+          // transitions. Normalize once, then retry on the same window/context.
+          await cdpSession.send('Browser.setWindowBounds', {
+            windowId,
+            bounds: { windowState: 'normal' },
+          });
+          await cdpSession.send('Browser.setWindowBounds', {
+            windowId,
+            bounds: { windowState: 'minimized' },
+          });
+        }
+        minimizedWindowIds.add(windowId);
+      } finally {
+        try {
+          await cdpSession?.detach?.();
+        } catch {
+          // A popup can close while its CDP session is detaching.
+        }
+      }
+    }
+    if (minimizedWindowIds.size === 0) return false;
+    onLog?.('[리더스 나노바나나] 로그인 관련 창을 모두 최소화하고 동일한 무제한 세션을 유지합니다.');
     return true;
   } catch (error) {
     onLog?.(`[Dropshot] 로그인 창 최소화 실패: ${sanitizeDropshotErrorMessage(error)}`);
     return false;
-  } finally {
-    try {
-      await cdpSession?.detach?.();
-    } catch {
-      // The page can close while the CDP session is detaching.
-    }
   }
 }
 

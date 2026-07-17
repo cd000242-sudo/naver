@@ -26,6 +26,24 @@ import { extractReferenceImageUrl } from './referenceImagePolicy.js';
 
 const MAX_DEDUP_ATTEMPTS = 3;
 
+export function isDropshotTerminalSessionFailure(error: unknown): boolean {
+  const message = String(error ?? '').trim();
+  if (/^(?:DROPSHOT_(?:LOGIN|SESSION|CLEANUP|BROWSER)(?:_[A-Z_]+)?|LOGIN_REQUIRED)\b/.test(message)) {
+    return true;
+  }
+  return [
+    /로그인 (?:또는 로그인 확인이 진행 중|창이 닫혔지만|시간이 초과|세션을 숨김 브라우저에서)/,
+    /로그인이 (?:필요|진행 중)/,
+    /유효한 로그인 토큰/,
+    /Dropshot subscription login is required/i,
+    /(?:Authentication required|Not authenticated|Authorization failed|log[ -]?in required)/i,
+    /(?:(?:Target page, context or )?browser has been closed|Browser context has been closed|Page closed|Target closed|WebSocket)/i,
+    /Dropshot 사이트 연결 시간이 초과/,
+    /Dropshot browser context cleanup did not complete/i,
+    /Chrome\/Edge\/Chromium 실행 실패/,
+  ].some((pattern) => pattern.test(message));
+}
+
 export function assertCompleteDropshotBatch<T>(
   results: readonly T[],
   expectedCount: number,
@@ -110,6 +128,7 @@ export async function generateWithDropshot(
 
     // Dedup loop (max MAX_DEDUP_ATTEMPTS)
     let generatedImage: GeneratedImage | null = null;
+    let terminalSessionFailure = false;
 
     for (let dedupAttempt = 0; dedupAttempt < MAX_DEDUP_ATTEMPTS; dedupAttempt++) {
       const promptForAttempt =
@@ -128,6 +147,7 @@ export async function generateWithDropshot(
 
       if (!result.ok || !result.dataUrl) {
         lastFailure = result.error || 'Dropshot image generation failed';
+        terminalSessionFailure = isDropshotTerminalSessionFailure(lastFailure);
         console.warn(
           `[리더스 나노바나나] [${idx + 1}/${items.length}] 생성 실패: ${result.error}`,
         );
@@ -200,6 +220,11 @@ export async function generateWithDropshot(
     if (generatedImage) {
       results.push(generatedImage);
       onImageGenerated?.(generatedImage, idx, items.length);
+    } else if (terminalSessionFailure) {
+      // A retry of the next image would call ensurePage again and can reopen the
+      // same interactive login window once per remaining batch item.
+      console.warn('[리더스 나노바나나] 로그인/세션 오류로 남은 이미지 생성을 중단합니다.');
+      break;
     }
   }
 

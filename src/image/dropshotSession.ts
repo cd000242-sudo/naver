@@ -84,6 +84,10 @@ export function untrackDropshotContext(context: unknown): void {
   if (context) trackedContexts.delete(context);
 }
 
+export function hasTrackedDropshotContexts(): boolean {
+  return trackedContexts.size > 0;
+}
+
 export function getDropshotOperationState(): DropshotOperationState {
   return { pendingGenerations, loginActive, checkActive };
 }
@@ -144,25 +148,40 @@ export async function closeTrackedDropshotContext(
 /** Close and clear the cached browser context. Useful for tests and shutdown. */
 export async function closeBrowserCache(timeoutMs = 5_000): Promise<void> {
   const context = cachedContext;
-  cachedPage = null;
-  cachedContext = null;
   const closed = await closeTrackedDropshotContext(context, timeoutMs);
   if (!closed) {
     throw new DropshotCleanupIncompleteError();
+  }
+  // Do not discard ownership before close is confirmed. If Chrome keeps the
+  // profile lock past the deadline, retaining this cache prevents a new launch
+  // from racing the still-live dedicated context.
+  if (cachedContext === context) {
+    cachedPage = null;
+    cachedContext = null;
   }
 }
 
 /** Close every context, including visible login windows not stored in the cache. */
 export async function closeAllDropshotContexts(timeoutMs = 5_000): Promise<void> {
   const contexts = new Set(trackedContexts);
-  if (cachedContext) contexts.add(cachedContext);
+  const ownedCachedContext = cachedContext;
+  const ownedCachedPage = cachedPage;
+  if (ownedCachedContext) contexts.add(ownedCachedContext);
 
-  cachedPage = null;
-  cachedContext = null;
-
+  const contextList = [...contexts];
   const results = await Promise.all(
-    [...contexts].map((context) => closeTrackedDropshotContext(context, timeoutMs)),
+    contextList.map((context) => closeTrackedDropshotContext(context, timeoutMs)),
   );
+  const cachedIndex = ownedCachedContext ? contextList.indexOf(ownedCachedContext) : -1;
+  const cachedClosed = cachedIndex < 0 || results[cachedIndex] === true;
+  if (cachedContext === ownedCachedContext) {
+    if (cachedClosed) {
+      cachedPage = null;
+      cachedContext = null;
+    } else {
+      cachedPage = ownedCachedPage;
+    }
+  }
   if (results.some((closed) => !closed)) {
     throw new DropshotCleanupIncompleteError(
       'One or more Dropshot browser contexts could not be closed before the deadline',

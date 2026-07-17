@@ -92,7 +92,7 @@ describe('Dropshot interactive login lifecycle', () => {
     expect(mocks.launchBrowser).not.toHaveBeenCalledWith('profile-dir', false);
   });
 
-  it('closes the successful visible login context before reporting completion', async () => {
+  it('immediately minimizes and reuses the authenticated visible context without reopening it', async () => {
     vi.useFakeTimers();
     const probePage = { id: 'probe-page' };
     const visiblePage = { id: 'visible-page', url: vi.fn(() => 'https://aistudio.dropshot.io/ko') };
@@ -105,16 +105,57 @@ describe('Dropshot interactive login lifecycle', () => {
     };
     mocks.launchBrowser.mockResolvedValueOnce(probeContext).mockResolvedValueOnce(visibleContext);
     mocks.isLoggedIn.mockResolvedValueOnce(false).mockResolvedValueOnce(true);
+    let finishWorkspaceCheck!: (ready: boolean) => void;
+    mocks.openDropshotImageWorkspace.mockImplementationOnce(() => (
+      new Promise<boolean>((resolve) => { finishWorkspaceCheck = resolve; })
+    ));
 
     const resultPromise = dropshotLogin();
     await vi.advanceTimersByTimeAsync(3_000);
+
+    // Hiding the authenticated window must not wait for the optional workspace
+    // and unlimited-mode checks, which can take tens of seconds on a slow SPA.
+    expect(mocks.setCached).toHaveBeenCalledWith(visibleContext, visiblePage);
+    expect(mocks.minimizeDropshotWindow).toHaveBeenCalledTimes(1);
+    expect(mocks.minimizeDropshotWindow).toHaveBeenCalledWith(visiblePage, undefined);
+    expect(mocks.closeTrackedDropshotContext).not.toHaveBeenCalledWith(visibleContext);
+
+    finishWorkspaceCheck(true);
     await expect(resultPromise).resolves.toMatchObject({ loggedIn: true, ready: true });
 
     expect(mocks.launchBrowser).toHaveBeenNthCalledWith(1, 'profile-dir', true);
     expect(mocks.launchBrowser).toHaveBeenNthCalledWith(2, 'profile-dir', false);
     expect(mocks.closeTrackedDropshotContext).toHaveBeenCalledWith(probeContext);
+    expect(mocks.closeTrackedDropshotContext).not.toHaveBeenCalledWith(visibleContext);
+
+    const launchesAfterSuccess = mocks.launchBrowser.mock.calls.length;
+    const loginChecksAfterSuccess = mocks.isLoggedIn.mock.calls.length;
+    await vi.advanceTimersByTimeAsync(10 * 60_000);
+    expect(mocks.launchBrowser).toHaveBeenCalledTimes(launchesAfterSuccess);
+    expect(mocks.isLoggedIn).toHaveBeenCalledTimes(loginChecksAfterSuccess);
+  });
+
+  it('closes the authenticated window without reopening when OS minimization fails', async () => {
+    vi.useFakeTimers();
+    const probePage = { id: 'probe-page' };
+    const visiblePage = { id: 'visible-page', url: vi.fn(() => 'https://aistudio.dropshot.io/ko') };
+    const probeContext = { pages: vi.fn(() => [probePage]), newPage: vi.fn(async () => probePage) };
+    const visibleContext = {
+      pages: vi.fn(() => [visiblePage]),
+      newPage: vi.fn(async () => visiblePage),
+      on: vi.fn(),
+    };
+    mocks.launchBrowser.mockResolvedValueOnce(probeContext).mockResolvedValueOnce(visibleContext);
+    mocks.isLoggedIn.mockResolvedValueOnce(false).mockResolvedValueOnce(true);
+    mocks.minimizeDropshotWindow.mockResolvedValue(false);
+
+    const resultPromise = dropshotLogin();
+    await vi.advanceTimersByTimeAsync(3_000);
+    await expect(resultPromise).resolves.toMatchObject({ loggedIn: true, ready: false });
+
     expect(mocks.closeTrackedDropshotContext).toHaveBeenCalledWith(visibleContext);
     expect(mocks.setCached).not.toHaveBeenCalledWith(visibleContext, visiblePage);
-    expect(mocks.minimizeDropshotWindow).not.toHaveBeenCalled();
+    expect(mocks.openDropshotImageWorkspace).not.toHaveBeenCalledWith(visiblePage, undefined);
+    expect(mocks.launchBrowser).toHaveBeenCalledTimes(2);
   });
 });

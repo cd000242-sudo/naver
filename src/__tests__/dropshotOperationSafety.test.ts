@@ -12,6 +12,7 @@ import {
   getGenerationChain,
   getDropshotOperationState,
   getCachedContext,
+  hasTrackedDropshotContexts,
   invalidateBrowserCache,
   setCached,
   setGenerationChain,
@@ -128,6 +129,21 @@ describe('Dropshot operation coordination', () => {
     expect(getCachedContext()).toBeNull();
   });
 
+  it('retains cache ownership when close times out so the locked profile cannot relaunch', async () => {
+    const context = { close: vi.fn(() => new Promise<void>(() => undefined)) };
+    const page = { id: 'locked-page' };
+    setCached(context, page);
+
+    await expect(closeBrowserCache(5)).rejects.toThrow();
+
+    expect(getCachedContext()).toBe(context);
+    expect(getCachedPage()).toBe(page);
+
+    context.close.mockResolvedValueOnce(undefined);
+    await closeBrowserCache(50);
+    expect(getCachedContext()).toBeNull();
+  });
+
   it('does not close explicitly untracked contexts in the shutdown sweep', async () => {
     const context = { close: vi.fn().mockResolvedValue(undefined) };
     trackDropshotContext(context);
@@ -135,6 +151,22 @@ describe('Dropshot operation coordination', () => {
 
     await closeAllDropshotContexts();
     expect(context.close).not.toHaveBeenCalled();
+  });
+
+  it('preserves cached ownership when close-all times out and releases it after retry', async () => {
+    const context = { close: vi.fn(() => new Promise<void>(() => undefined)) };
+    const page = { id: 'abort-locked-page' };
+    setCached(context, page);
+
+    await expect(closeAllDropshotContexts(5)).rejects.toThrow();
+    expect(getCachedContext()).toBe(context);
+    expect(getCachedPage()).toBe(page);
+    expect(hasTrackedDropshotContexts()).toBe(true);
+
+    context.close.mockResolvedValueOnce(undefined);
+    await closeAllDropshotContexts(50);
+    expect(getCachedContext()).toBeNull();
+    expect(hasTrackedDropshotContexts()).toBe(false);
   });
 
   it('closes the Dropshot persistent context during every app shutdown path', () => {

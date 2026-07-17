@@ -61,7 +61,7 @@ describe('Dropshot unlimited mode safety', () => {
     expect(browserCode).not.toMatch(/hasWorkspaceNav/);
   });
 
-  it('rechecks zero-cost controls after handing interactive login to a hidden context', () => {
+  it('rechecks zero-cost controls after adopting the hidden interactive context', () => {
     const cachedAuth = coreCode.indexOf('if (!(await isLoggedIn(page)))');
     const cachedWorkspace = coreCode.indexOf('if (!(await openDropshotImageWorkspace(page, onLog)))', cachedAuth);
     const cachedReturn = coreCode.indexOf('return page;', cachedWorkspace);
@@ -80,16 +80,17 @@ describe('Dropshot unlimited mode safety', () => {
     expect(initialControls).toBeGreaterThan(initialWorkspace);
     expect(initialCache).toBeGreaterThan(initialControls);
 
-    const visibleControls = coreCode.lastIndexOf('await ensureDropshotControls(page, onLog)');
-    const visibleClose = coreCode.indexOf('await closeContext(context);', visibleControls);
-    const hiddenHandoff = coreCode.indexOf(
-      'await reopenDropshotHeadlessGenerationContext(profileDir, onLog)',
-      visibleClose,
-    );
-    expect(visibleControls).toBeGreaterThan(initialCache);
-    expect(visibleClose).toBeGreaterThan(visibleControls);
-    expect(hiddenHandoff).toBeGreaterThan(visibleClose);
-    expect(coreCode).not.toContain('await minimizeDropshotWindow(page, onLog)');
+    const visibleAuth = coreCode.indexOf('if (await isLoggedIn(page))', initialCache);
+    const visibleMinimize = coreCode.indexOf('await minimizeDropshotWindow(page, onLog)', visibleAuth);
+    const visibleCache = coreCode.indexOf('setCached(context, page)', visibleMinimize);
+    const visibleWorkspace = coreCode.indexOf('await openDropshotImageWorkspace(page, onLog)', visibleCache);
+    const visibleControls = coreCode.indexOf('await ensureDropshotControls(page, onLog)', visibleWorkspace);
+    expect(visibleAuth).toBeGreaterThan(initialCache);
+    expect(visibleMinimize).toBeGreaterThan(visibleAuth);
+    expect(visibleCache).toBeGreaterThan(visibleMinimize);
+    expect(visibleWorkspace).toBeGreaterThan(visibleCache);
+    expect(visibleControls).toBeGreaterThan(visibleWorkspace);
+    expect(coreCode).not.toContain('await reopenDropshotHeadlessGenerationContext(profileDir, onLog)');
 
     const helperStart = headlessCode.indexOf('async function openValidatedHeadlessContext');
     const hiddenLaunch = headlessCode.indexOf('launchBrowser(profileDir, true)', helperStart);

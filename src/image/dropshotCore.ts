@@ -1,6 +1,6 @@
 /**
  * Dropshot image engine page lifecycle and compatibility facade.
- * Persistent contexts are cached only after auth and workspace readiness pass.
+ * Persistent contexts are cached after authentication and hidden before reuse.
  */
 
 import {
@@ -8,11 +8,11 @@ import {
   getProfileDir,
   isLoggedIn,
   launchBrowser,
+  minimizeDropshotWindow,
   navigateToDropshotBoard,
   openDropshotImageWorkspace,
   selectDropshotPage,
 } from './dropshotBrowser.js';
-import { reopenDropshotHeadlessGenerationContext } from './dropshotHeadlessSession.js';
 import {
   clearCached,
   closeTrackedDropshotContext,
@@ -166,6 +166,20 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
         page = await selectDropshotPage(context);
 
         if (await isLoggedIn(page)) {
+          // Keep the authenticated profile owner alive and hidden. A close →
+          // immediate reopen races Chrome's SingletonLock/profile flush and can
+          // repeatedly flash about:blank windows for every image in the batch.
+          const windowHidden = await minimizeDropshotWindow(page, onLog);
+          if (!windowHidden) {
+            await closeContext(context);
+            context = null;
+            clearCached();
+            throw new Error(
+              'DROPSHOT_SESSION_HIDE_FAILED: 로그인은 확인했지만 자동화 창을 숨기지 못해 안전하게 종료했습니다.',
+            );
+          }
+          setCached(context, page);
+          context = null;
           loggedIn = true;
           try {
             const workspaceReady = await openDropshotImageWorkspace(page, onLog);
@@ -175,7 +189,13 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
           }
           break;
         }
-      } catch {
+      } catch (error) {
+        if (
+          error instanceof DropshotCleanupIncompleteError
+          || String((error as Error)?.message ?? error).startsWith('DROPSHOT_')
+        ) {
+          throw error;
+        }
         // OAuth page transitions can temporarily detach the active page.
       }
 
@@ -190,12 +210,8 @@ async function _ensurePageInternal(onLog?: (m: string) => void): Promise<any> {
         : '로그인 시간이 초과되었습니다.');
     }
 
-    await closeContext(context);
-    context = null;
-    clearCached();
-    const headlessPage = await reopenDropshotHeadlessGenerationContext(profileDir, onLog);
-    onLog?.('[리더스 나노바나나] 로그인 창 종료 및 백그라운드 준비 완료');
-    return headlessPage;
+    onLog?.('[리더스 나노바나나] 로그인 창 숨김 및 생성 세션 준비 완료');
+    return page;
   } catch (error) {
     if (context) await closeContext(context);
     clearCached();

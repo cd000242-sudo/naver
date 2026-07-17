@@ -27,6 +27,8 @@ const dsBindings = new Map<string, DropshotLoginIds>();
 let dsLastStatus: DropshotUiStatus | null = null;
 let dsRefreshPromise: Promise<DropshotUiStatus> | null = null;
 let dsLoginAnnounced = false;
+let dsAuthRevision = 0;
+let dsLoginInProgress = false;
 
 function dsSetStatus(statusId: string, text: string, kind: 'info' | 'ok' | 'error'): void {
   const el = document.getElementById(statusId);
@@ -38,7 +40,8 @@ function dsSetStatus(statusId: string, text: string, kind: 'info' | 'ok' | 'erro
 function dsApplyStatus(ids: DropshotLoginIds, status: DropshotUiStatus): void {
   const loginBtn = document.getElementById(ids.loginBtnId) as HTMLButtonElement | null;
   const checkBtn = document.getElementById(ids.checkBtnId) as HTMLButtonElement | null;
-  const checking = status.phase === 'checking';
+  const checking = status.phase === 'checking' || dsLoginInProgress;
+  const busy = status.phase === 'busy';
 
   if (loginBtn) {
     loginBtn.textContent = status.loggedIn ? '✅ 로그인됨' : '🔗 로그인';
@@ -48,8 +51,8 @@ function dsApplyStatus(ids: DropshotLoginIds, status: DropshotUiStatus): void {
 
   dsSetStatus(
     ids.statusId,
-    status.loggedIn ? `✅ ${status.message}` : checking ? `⏳ ${status.message}` : `⚠️ ${status.message}`,
-    status.loggedIn ? 'ok' : checking ? 'info' : 'error',
+    checking || busy ? `⏳ ${status.message}` : status.loggedIn ? `✅ ${status.message}` : `⚠️ ${status.message}`,
+    checking || busy ? 'info' : status.loggedIn ? 'ok' : 'error',
   );
 }
 
@@ -57,10 +60,21 @@ function dsPublishStatus(status: DropshotUiStatus): void {
   dsLastStatus = status;
   for (const ids of dsBindings.values()) dsApplyStatus(ids, status);
 
+  if (!status.loggedIn && status.phase !== 'checking') dsLoginAnnounced = false;
   if (status.loggedIn && !dsLoginAnnounced) {
     dsLoginAnnounced = true;
     (window as any).toastManager?.success?.('✅ 리더스 나노바나나 로그인 계정을 자동으로 인식했습니다.');
   }
+}
+
+function dsNormalizeCompletedStatus(
+  receivedStatus: DropshotUiStatus,
+  retainedAuthenticatedStatus: DropshotUiStatus | null,
+): DropshotUiStatus {
+  if (receivedStatus.phase !== 'checking') return receivedStatus;
+  return retainedAuthenticatedStatus
+    ? { ...retainedAuthenticatedStatus, message: receivedStatus.message }
+    : { ...receivedStatus, phase: 'busy' };
 }
 
 /** Hidden status probe only. It never invokes the interactive login IPC. */
@@ -68,17 +82,31 @@ export async function refreshDropshotLoginStatus(ids?: DropshotLoginIds): Promis
   if (ids) dsBindings.set(ids.statusId, ids);
   if (dsRefreshPromise) return dsRefreshPromise;
 
-  dsPublishStatus({ loggedIn: false, message: '저장된 로그인 확인 중…', phase: 'checking', ready: false });
+  const authRevisionAtStart = dsAuthRevision;
+  const retainedAuthenticatedStatus = dsLastStatus?.loggedIn ? dsLastStatus : null;
+  dsPublishStatus(retainedAuthenticatedStatus
+    ? {
+        ...retainedAuthenticatedStatus,
+        message: '저장된 로그인 상태를 다시 확인하는 중…',
+        phase: 'checking',
+      }
+    : { loggedIn: false, message: '저장된 로그인 확인 중…', phase: 'checking', ready: false });
   const api = (window as any).api;
   dsRefreshPromise = (async () => {
     try {
       const result = await api?.checkDropshotLogin?.();
-      const status: DropshotUiStatus = result ?? {
+      const receivedStatus: DropshotUiStatus = result ?? {
         loggedIn: false,
         message: '로그인 확인 API를 사용할 수 없습니다.',
         phase: 'error',
         ready: false,
       };
+      // A busy response means the profile is temporarily owned by generation
+      // or login; it is not evidence that an already authenticated session was
+      // logged out. Restore the stable state so the UI cannot remain disabled in
+      // a permanent "checking" state after the one-shot IPC has completed.
+      const status = dsNormalizeCompletedStatus(receivedStatus, retainedAuthenticatedStatus);
+      if (authRevisionAtStart !== dsAuthRevision) return dsLastStatus ?? status;
       dsPublishStatus(status);
       return status;
     } catch (error) {
@@ -88,6 +116,7 @@ export async function refreshDropshotLoginStatus(ids?: DropshotLoginIds): Promis
         phase: 'error',
         ready: false,
       };
+      if (authRevisionAtStart !== dsAuthRevision) return dsLastStatus ?? status;
       dsPublishStatus(status);
       return status;
     } finally {
@@ -108,14 +137,32 @@ export function bindDropshotLogin(ids: DropshotLoginIds): void {
     loginBtn.dataset.dsBound = '1';
     loginBtn.addEventListener('click', async () => {
       if (loginBtn.disabled) return;
+      const retainedAuthenticatedStatus = dsLastStatus?.loggedIn ? dsLastStatus : null;
+      dsAuthRevision += 1;
+      dsLoginInProgress = true;
       loginBtn.disabled = true;
-      dsSetStatus(ids.statusId, '🔗 로그인 진행 중… 필요 시 브라우저 창이 열립니다 (최대 5분).', 'info');
+      dsPublishStatus({
+        loggedIn: retainedAuthenticatedStatus?.loggedIn ?? false,
+        message: '로그인 진행 중… 필요 시 브라우저 창이 열립니다 (최대 5분).',
+        phase: 'checking',
+        ready: retainedAuthenticatedStatus?.ready ?? false,
+      });
       try {
-        const r = await api?.dropshotLogin?.();
-        dsPublishStatus(r ?? { loggedIn: false, message: '로그인 실패', phase: 'error', ready: false });
+        const receivedStatus: DropshotUiStatus = await api?.dropshotLogin?.() ?? {
+          loggedIn: false,
+          message: '로그인 실패',
+          phase: 'error',
+          ready: false,
+        };
+        dsAuthRevision += 1;
+        dsLoginInProgress = false;
+        dsPublishStatus(dsNormalizeCompletedStatus(receivedStatus, retainedAuthenticatedStatus));
       } catch (e) {
+        dsAuthRevision += 1;
+        dsLoginInProgress = false;
         dsPublishStatus({ loggedIn: false, message: `로그인 오류: ${(e as Error)?.message ?? e}`, phase: 'error', ready: false });
       } finally {
+        dsLoginInProgress = false;
         loginBtn.disabled = dsLastStatus?.loggedIn === true;
       }
     });
@@ -198,7 +245,10 @@ export function wireSelectDropshotRow(opts: {
     toggleDropshotRow(opts.rowId, selected);
     if (selected) void refreshDropshotLoginStatus(opts);
   };
-  sel.addEventListener('change', sync);
+  if (!sel.dataset.dsRowBound) {
+    sel.dataset.dsRowBound = '1';
+    sel.addEventListener('change', sync);
+  }
   sync();
 }
 

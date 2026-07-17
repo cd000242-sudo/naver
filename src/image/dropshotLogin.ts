@@ -9,6 +9,7 @@ import {
   getProfileDir,
   isLoggedIn,
   launchBrowser,
+  minimizeDropshotWindow,
   navigateToDropshotBoard,
   openDropshotImageWorkspace,
   sanitizeDropshotErrorMessage,
@@ -230,6 +231,7 @@ async function dropshotLoginInternal(
 
     let detected = false;
     let unlimitedReady = false;
+    let windowHidden = false;
     for (let i = 0; i < 100; i += 1) {
       await new Promise((resolve) => setTimeout(resolve, 3000));
       if (userClosed) break;
@@ -245,6 +247,23 @@ async function dropshotLoginInternal(
         const tokenReady = await isLoggedIn(page);
         if (tokenReady) {
           detected = true;
+          // Hide and adopt the exact context that received the OAuth tokens
+          // before any optional SPA/workspace checks. Closing and reopening the
+          // persistent profile here races Chrome's profile flush/lock and was the
+          // source of the repeating about:blank login windows.
+          windowHidden = await minimizeDropshotWindow(page, onLog);
+          if (!windowHidden) {
+            // Never report success while leaving a visible automation window.
+            // A fully awaited close still preserves the login on disk; importantly,
+            // this path does not immediately reopen the profile.
+            await closeLoginVerificationContext(ctx);
+            ctx = null;
+            clearCached();
+            onLog?.('[리더스 나노바나나] 로그인은 확인했지만 창 최소화에 실패해 로그인 창을 안전하게 닫았습니다.');
+            break;
+          }
+          setCached(ctx, page);
+          ctx = null;
           try {
             const workspaceReady = await openDropshotImageWorkspace(page, onLog);
             if (workspaceReady) {
@@ -256,7 +275,8 @@ async function dropshotLoginInternal(
           }
           break;
         }
-      } catch {
+      } catch (error) {
+        if (error instanceof DropshotCleanupIncompleteError) throw error;
         // OAuth redirects temporarily detach the page; keep polling.
       }
 
@@ -266,7 +286,9 @@ async function dropshotLoginInternal(
     }
 
     if (!detected) {
-      if (!userClosed) await closeLoginVerificationContext(ctx);
+      // pages().length === 0 does not prove that the persistent context process
+      // exited. Always close our owned context so it cannot keep the profile lock.
+      await closeLoginVerificationContext(ctx);
       ctx = null;
       clearCached();
       return {
@@ -280,16 +302,15 @@ async function dropshotLoginInternal(
       };
     }
 
-    // Persisted login data is flushed by a fully awaited close. Do not reopen
-    // the profile here: the next actual generation will create one hidden context.
-    await closeLoginVerificationContext(ctx);
-    ctx = null;
-    clearCached();
+    // The authenticated context was transferred to the shared cache and
+    // minimized at detection time. Generation reuses it without a relaunch.
     return authenticatedStatus(
       unlimitedReady,
-      unlimitedReady
-        ? '로그인 완료 - 무제한·0비용 상태를 확인했고 로그인 창을 닫았습니다.'
-        : '로그인 완료 - 계정을 인식했고 로그인 창을 닫았습니다. 무제한·0비용 모드는 생성 전에 다시 확인합니다.',
+      !windowHidden
+        ? '로그인 완료 - 창을 안전하게 닫았습니다. 이미지 생성 시 숨김 세션으로 연결합니다.'
+        : unlimitedReady
+        ? '로그인 완료 - 창을 숨기고 무제한·0비용 생성 세션을 준비했습니다.'
+        : '로그인 완료 - 계정을 인식해 창을 숨겼습니다. 무제한·0비용 모드는 생성 전에 다시 확인합니다.',
     );
   } catch (error) {
     if (ctx) await closeLoginVerificationContext(ctx);

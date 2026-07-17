@@ -45,21 +45,19 @@ describe('Dropshot login success policy', () => {
     expect(source).toContain('if (_checkPromise) return _checkPromise;');
   });
 
-  it('closes the authenticated visible context without immediately reopening the profile', () => {
-    const detectedIndex = source.indexOf('if (!detected)');
-    const successIndex = source.indexOf('return { loggedIn: true', detectedIndex);
-    const successBlock = source.slice(detectedIndex, successIndex);
-    const adoptedIndex = successBlock.indexOf('// Persisted login data is flushed');
-    const adoptedEnd = successBlock.indexOf('} catch (error)', adoptedIndex);
-    const adoptedBlock = successBlock.slice(adoptedIndex, adoptedEnd);
+  it('adopts and hides the authenticated visible context before optional workspace checks', () => {
+    const tokenIndex = source.indexOf('if (tokenReady)');
+    const minimizeIndex = source.indexOf('await minimizeDropshotWindow(page, onLog)', tokenIndex);
+    const cacheIndex = source.indexOf('setCached(ctx, page)', minimizeIndex);
+    const transferIndex = source.indexOf('ctx = null', cacheIndex);
+    const workspaceIndex = source.indexOf('await openDropshotImageWorkspace(page, onLog)', transferIndex);
 
-    expect(adoptedIndex).toBeGreaterThan(-1);
-    expect(adoptedEnd).toBeGreaterThan(adoptedIndex);
-    expect(adoptedBlock).toContain('await closeLoginVerificationContext(ctx)');
-    expect(adoptedBlock).toContain('ctx = null');
-    expect(adoptedBlock).not.toContain('setCached(ctx, page)');
-    expect(adoptedBlock).not.toContain('await minimizeDropshotWindow(page, onLog)');
-    expect(adoptedBlock).not.toContain('await reopenDropshotHeadlessGenerationContext');
+    expect(tokenIndex).toBeGreaterThan(-1);
+    expect(minimizeIndex).toBeGreaterThan(tokenIndex);
+    expect(cacheIndex).toBeGreaterThan(minimizeIndex);
+    expect(transferIndex).toBeGreaterThan(cacheIndex);
+    expect(workspaceIndex).toBeGreaterThan(transferIndex);
+    expect(source).not.toContain('await reopenDropshotHeadlessGenerationContext');
     expect(headlessSource).toContain('launchBrowser(profileDir, true)');
     expect(headlessSource).toContain('setCached(context, page)');
   });
