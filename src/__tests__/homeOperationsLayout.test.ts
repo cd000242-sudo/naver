@@ -119,10 +119,11 @@ describe('admin homepage operations access', () => {
     expect(admin).toContain('function openKeywordBriefingEditor()');
     expect(admin).toContain('부방장 황금키워드 수정');
     expect(admin).toContain('LEWORD API 서버 관리자 ID');
-    expect(admin).toContain('LEWORD_ADMIN_LOGIN_ID');
-    expect(admin).toContain('사이트 로그인 계정이 아니라 LEWORD API 서버 관리자 계정');
+    expect(admin).toContain('관리자 페이지 로그인 아이디/비밀번호로 서버 저장권한을 자동 연결합니다');
+    expect(admin).toContain('const serverSession = await requestLewordAdminSession(id, pw, { silent: true })');
+    expect(admin).toContain('사이트 로그인 완료 · 서버 저장 권한 자동 연결됨');
     expect(admin).toContain('autocomplete="new-password"');
-    expect(admin).not.toContain("apiIdInput.value = id");
-    expect(admin).not.toContain("homeOpsApiIdInput.value = id");
+    expect(admin).toContain("apiIdInput.value = id");
+    expect(admin).toContain("homeOpsApiIdInput.value = id");
   });
 });
