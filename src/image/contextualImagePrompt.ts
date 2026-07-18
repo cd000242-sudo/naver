@@ -250,7 +250,7 @@ export function shouldUseStructuredImageContext(input: StructuredImageContextDec
   return itemKeys.length > 0 && itemKeys.every((key) => sectionKeys.has(key));
 }
 
-function readHeadingTitle(value: SectionLike | string): string {
+function readContextualHeadingTitle(value: SectionLike | string): string {
   if (typeof value === 'string') return value.trim();
   return String(value.title || value.heading || value.text || '').trim();
 }
@@ -283,7 +283,7 @@ export function resolveSectionContentForImage(input: ResolveSectionContentInput)
   if (explicitContent) return explicitContent;
 
   const body = String(input.bodyPlain || '').replace(/\r\n/g, '\n');
-  const currentTitle = readHeadingTitle(input.heading);
+  const currentTitle = readContextualHeadingTitle(input.heading);
   const headingList = Array.isArray(input.headings) ? input.headings : [];
   const objectIdentityIndex = typeof input.heading === 'string'
     ? -1
@@ -294,7 +294,7 @@ export function resolveSectionContentForImage(input: ResolveSectionContentInput)
   const validHintedIndex = Number.isInteger(hintedIndex)
     && hintedIndex >= 0
     && hintedIndex < headingList.length
-    && normalizeHeadingKey(readHeadingTitle(headingList[hintedIndex])) === normalizeHeadingKey(currentTitle)
+    && normalizeHeadingKey(readContextualHeadingTitle(headingList[hintedIndex])) === normalizeHeadingKey(currentTitle)
     ? hintedIndex
     : -1;
   const currentHeadingIndex = objectIdentityIndex >= 0
@@ -302,13 +302,13 @@ export function resolveSectionContentForImage(input: ResolveSectionContentInput)
     : validHintedIndex >= 0
       ? validHintedIndex
       : headingList.findIndex(
-          (heading) => normalizeHeadingKey(readHeadingTitle(heading)) === normalizeHeadingKey(currentTitle),
+          (heading) => normalizeHeadingKey(readContextualHeadingTitle(heading)) === normalizeHeadingKey(currentTitle),
         );
 
   if (body && currentTitle) {
     let cursor = 0;
     const positions = headingList.map((heading) => {
-      const title = readHeadingTitle(heading);
+      const title = readContextualHeadingTitle(heading);
       const position = findHeadingPosition(body, title, cursor);
       if (position >= 0) cursor = position + title.length;
       return { title, position };

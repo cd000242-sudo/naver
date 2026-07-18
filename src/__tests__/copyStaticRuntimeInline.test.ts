@@ -34,6 +34,25 @@ describe('copy-static runtime inline contract', () => {
     }
   });
 
+  it('inlines contextual image prompt helpers and guards every renderer runtime symbol', () => {
+    expect(copyStaticSource).toContain("label: 'image/contextualImagePrompt.js'");
+    expect(copyStaticSource).toContain(
+      "filePath: path.join(projectRoot, 'dist', 'image', 'contextualImagePrompt.js')",
+    );
+
+    for (const symbol of [
+      'buildContextAwarePromptCacheKey',
+      'compactImageContextText',
+      'enrichImageItemsWithArticleContext',
+      'resolveSectionContentForImage',
+      'shouldUseStructuredImageContext',
+    ]) {
+      expect(copyStaticSource).toMatch(
+        new RegExp(`REQUIRED_RENDERER_RUNTIME_SYMBOLS[\\s\\S]*['"]${symbol}['"]`),
+      );
+    }
+  });
+
   it('inlines the FTC preset SSOT before the browser renderer consumes it', () => {
     expect(rendererSource).toContain("from '../automation/ftcDisclosurePresets.js'");
     expect(copyStaticSource).toContain("label: 'automation/ftcDisclosurePresets.js'");

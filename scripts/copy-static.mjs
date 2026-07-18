@@ -356,6 +356,10 @@ try {
       filePath: path.join(projectRoot, 'dist', 'automation', 'ftcDisclosurePresets.js'),
     },
     {
+      label: 'image/contextualImagePrompt.js',
+      filePath: path.join(projectRoot, 'dist', 'image', 'contextualImagePrompt.js'),
+    },
+    {
       label: 'image/referenceImagePolicy.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'referenceImagePolicy.js'),
     },
@@ -793,6 +797,11 @@ ${sanitized}`;
     'normalizeGeminiTextModelId',
     'collapseDuplicateLeadingYearTitle',
     'applyKeywordPrefixToTitle',
+    'buildContextAwarePromptCacheKey',
+    'compactImageContextText',
+    'enrichImageItemsWithArticleContext',
+    'resolveSectionContentForImage',
+    'shouldUseStructuredImageContext',
     'deduplicateReferenceImages',
     'extractShoppingReferenceSource',
     'isShoppingReferenceImageEngine',
