@@ -102,11 +102,6 @@ import {
   createAgentProductPolicyContext,
 } from './agentCli/productPolicy.js';
 import { DEFAULT_GENERATION_SUBMISSION_MODE } from './generation/submissionPolicy.js';
-import { resolveContentProviderForTextRoute } from './generation/routeExecution.js';
-import { resolveMcpTextOverride } from './generation/connectionConfig.js';
-import { getMcpRuntimeForConfig } from './main/services/mcpRuntimeHost.js';
-import { generateImagesWithMcp } from './generation/mcp/imageAdapter.js';
-import { executeSelectedImageGenerationRoute } from './main/services/selectedImageGenerationRoute.js';
 
 function createMainAgentProductPolicyContext() {
   return createAgentProductPolicyContext({
@@ -114,32 +109,17 @@ function createMainAgentProductPolicyContext() {
   });
 }
 
-async function generateStructuredContentWithProductPolicy(
+function generateStructuredContentWithProductPolicy(
   source: Parameters<typeof generateStructuredContent>[0],
   options?: Parameters<typeof generateStructuredContent>[1],
-): Promise<Awaited<ReturnType<typeof generateStructuredContent>>> {
+): ReturnType<typeof generateStructuredContent> {
   const productPolicyContext = createMainAgentProductPolicyContext();
-  const currentConfig = await loadConfig();
-  const selectedTextRoute = resolveMcpTextOverride(currentConfig.generationConnectionSettings);
-  const selectedProvider = selectedTextRoute
-    ? resolveContentProviderForTextRoute(selectedTextRoute)
-    : (options?.provider ?? source.generator);
-  const routeExecutionOptions = selectedTextRoute
-    ? {
-      provider: selectedProvider,
-      generationRoute: selectedTextRoute,
-      ...(selectedProvider === 'mcp'
-        ? { mcpRuntimeManager: await getMcpRuntimeForConfig(currentConfig) }
-        : {}),
-    }
-    : {};
   assertResolvedContentGeneratorProviderAllowed(
-    selectedProvider,
+    options?.provider ?? source.generator,
     productPolicyContext,
   );
   return generateStructuredContent(source, {
     ...options,
-    ...routeExecutionOptions,
     agentProductPolicyContext: productPolicyContext,
     // IPC callers never get to opt into automatic resubmission. A timeout can
     // happen after the provider has accepted a billable request, so preserve it
@@ -308,7 +288,6 @@ import { loadContentPolicy } from './contentPolicy/policyLoader.js';
 import { PublicationStateStore } from './contentPolicy/publicationStateStore.js';
 import { evaluatePublicationAvailability } from './contentPolicy/publishGuard.js';
 import { registerAgentHandlers } from './main/ipc/agentHandlers.js';
-import { registerMcpHandlers } from './main/ipc/mcpHandlers.js';
 import { WindowManager } from './main/core/WindowManager.js';
 import { captureE2EPublishPayload } from './main/e2ePublishCapture.js';
 import {
@@ -3698,17 +3677,7 @@ ipcMain.handle(
         ...options,
         imageFallbackPolicy: options.imageFallbackPolicy || 'engine-only',
       };
-      const osMod = await import('os');
-      const images = await executeSelectedImageGenerationRoute({
-        config,
-        options: imageOptions,
-        apiKeys,
-        fallbackOutputDirectory: path.join(osMod.homedir(), 'Downloads', 'naver-blog-images'),
-        onImageGenerated,
-        getMcpRuntime: getMcpRuntimeForConfig,
-        generateMcp: generateImagesWithMcp,
-        generateLegacy: generateImages,
-      });
+      const images = await generateImages(imageOptions, apiKeys, onImageGenerated);
       const generatedImageCount = Array.isArray(images) ? images.length : 0;
       const providerForEmptyCheck = String(options.provider || imageOptions.provider || '');
       const requiredGeneratedImageCount = Array.isArray(options.items) ? options.items.length : 0;
@@ -4385,11 +4354,6 @@ registerApiHandlers(_earlyCtx);
 registerAgentHandlers({
   trustedRendererPath: path.join(publicPath, 'index.html'),
   allowClaudeSubscription: true,
-});
-registerMcpHandlers({
-  trustedRendererPath: path.join(publicPath, 'index.html'),
-  loadConfig,
-  saveConfig,
 });
 // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고) — 환경별 버그 즉시 진단
 registerDiagnosticsHandlers();

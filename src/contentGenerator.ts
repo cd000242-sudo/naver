@@ -64,6 +64,7 @@ import {
   auditAffiliateAuthenticity,
   buildAffiliateAuthenticityContract,
   buildAffiliatePurchaseIntentContract,
+  buildAffiliateReviewIntentContract,
   buildAffiliateTitleEvidenceDirective,
   classifyAffiliateEvidence,
   resolveAffiliateContentLengthTarget,
@@ -224,8 +225,6 @@ import {
   shouldAllowAutomaticProviderRetry,
   type GenerationSubmissionMode,
 } from './generation/submissionPolicy.js';
-import { generateTextWithMcp, type McpRuntimeManager } from './generation/mcp/index.js';
-import type { GenerationRoute } from './generation/routeSnapshot.js';
 import {
   BudgetExceededError,
   enforceGeminiBudgetSafety,
@@ -1594,7 +1593,7 @@ export type SourceCategoryHint =
   | '기타'
   // 문자열도 허용 (사용자 커스텀)
   | string;
-export type ContentGeneratorProvider = 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude' | 'mcp';
+export type ContentGeneratorProvider = 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude';
 
 export type ArticleType =
   // 뉴스/정보
@@ -1691,7 +1690,7 @@ export interface ContentSource {
   // ✅ [2026-01-30] 쇼핑커넥트 풀스펙 크롤링 정보
   productSpec?: string;       // 제품 스펙 (크기, 무게, 소재 등)
   productPrice?: string;      // 제품 가격
-  productReviews?: string[];  // 리뷰 텍스트 배열 (최대 5개)
+  productReviews?: string[];  // 구매 판단용 실제 리뷰 텍스트 배열 (최대 8개)
   productReviewImages?: string[]; // 포토리뷰 이미지 URL
   previousTitles?: string[]; // ✅ [2026-02-09 v2] 이전 생성 제목 (연속발행 중복 방지)
   /** Fail-closed originality policy context injected before the model call. */
@@ -1821,10 +1820,6 @@ export interface StructuredContent {
 }
 export interface GenerateOptions {
   provider?: ContentGeneratorProvider;
-  /** Immutable route chosen at run start. Required when provider is MCP. */
-  generationRoute?: GenerationRoute;
-  /** Main-process-only MCP runtime. It is never accepted from renderer IPC. */
-  mcpRuntimeManager?: McpRuntimeManager;
   minChars?: number;
   contentMode?: 'seo' | 'homefeed' | 'mate'; // ✅ SEO/홈판/네이버 메이트 노출 최적화 모드
   signal?: AbortSignal; // ✅ [2026-04-03] 중지 시 즉시 AI API 호출 abort
@@ -2162,6 +2157,11 @@ export function buildModeBasedPrompt(
   // ✅ 2축 분리 + 완전자동 모드: [노출 목적 base] + [카테고리 보정] + [자동화 보조] + [글톤]
   // 이제 buildFullPrompt 내부에서 toneStyle을 처리합니다.
   const contentMode = (source.contentMode as PromptMode) || 'seo';
+  const requestedShoppingArticleType = source.articleType || 'shopping_review';
+  if (contentMode === 'affiliate' && requestedShoppingArticleType === 'shopping_review' && toneStyle === 'expert_review') {
+    toneStyle = 'friendly';
+    console.log('[PromptBuilder] 쇼핑 후기의 보고서형 expert_review 톤을 자연스러운 friendly 톤으로 완화');
+  }
 
   // ✅ [2026-03-16 v2] custom 모드: 사용자 프롬프트 최우선 + 품질 가드레일 동시 적용
   // [2026-05-27] 모든 모드(SEO/홈판/쇼핑/업체/custom)에서 개인 프롬프트 입력 시 동일 분기 — 사용자 프롬프트 100% 반영,
@@ -2211,7 +2211,7 @@ export function buildModeBasedPrompt(
     // the no-review state manufactured unsubstantiated generalisations and
     // comparative numbers. Option C: dedicated shopping_spec_analysis mode —
     // a neutral curator voice bound strictly to the supplied spec/price.
-    const requestedArticleType = source.articleType || 'shopping_review';
+    const requestedArticleType = requestedShoppingArticleType;
     let shoppingArticleType = requestedArticleType;
     if (affiliateEvidence.mode === 'spec_only' && reviewGuardOn && requestedArticleType === 'shopping_review') {
       shoppingArticleType = 'shopping_spec_analysis';
@@ -2366,7 +2366,7 @@ export function buildModeBasedPrompt(
   console.log(`[PromptBuilder] 글톤 및 프롬프트 생성 완료: ${toneStyle}, 메인키워드=${primaryKeyword}`);
 
   // ✅ 리뷰형일 때 구매 전 제품 분석 프롬프트 추가
-  if (isReviewType) {
+  if (isReviewType && contentMode !== 'affiliate') {
     systemPrompt = appendReviewAnalysisPrompt(systemPrompt, true);
     console.log(`[PromptBuilder] 리뷰형 구매 전 분석 프롬프트 추가됨`);
   }
@@ -2387,7 +2387,11 @@ export function buildModeBasedPrompt(
 
   let finalContract = '';
   if (contentMode === 'affiliate') {
-    finalContract = `${buildAffiliateAuthenticityContract(source)}\n\n${buildAffiliatePurchaseIntentContract(source)}`;
+    finalContract = [
+      buildAffiliateAuthenticityContract(source),
+      buildAffiliatePurchaseIntentContract(source),
+      buildAffiliateReviewIntentContract(source),
+    ].filter(Boolean).join('\n\n');
     console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}`);
   } else if (contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate' || contentMode === 'business' || contentMode === 'custom') {
     finalContract = buildEvidenceAndIntentFinalContract(source, contentMode);
@@ -4973,8 +4977,6 @@ async function generateStructuredContentInternal(
   const allowPaidPostGenerationRepair =
     !isV3Prompt
     && allowAutomaticProviderRetry
-    && options.provider !== 'mcp'
-    && source.generator !== 'mcp'
     && process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR === '1';
 
   // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] image-narrative mode branch
@@ -5199,7 +5201,7 @@ async function generateStructuredContentInternal(
     ? 0
     : readNonNegativeIntegerEnv('AGENT_CONTENT_MAX_ATTEMPTS', 0);
   const isAgentProvider = provider === 'agent-codex' || provider === 'agent-claude';
-  const isSingleSubmissionConnector = isAgentProvider || provider === 'mcp';
+  const isSingleSubmissionConnector = isAgentProvider;
   const baseMaxAttempts = isSingleSubmissionConnector
     ? agentContentMaxAttempts
     : provider === 'openai'
@@ -5217,7 +5219,7 @@ async function generateStructuredContentInternal(
     promptRepairMinAttempts,
     qualityTargetMinAttempts,
   );
-  const MAX_ATTEMPTS = isV3Prompt || provider === 'mcp' || !allowAutomaticProviderRetry
+  const MAX_ATTEMPTS = isV3Prompt || !allowAutomaticProviderRetry
     ? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY.maxTopLevelRetries
     : configuredMaxAttempts;
   const RETRY_DELAYS = [0, 1200, 2000, 3000, 4500, 6000, 8000];
@@ -5500,19 +5502,7 @@ async function generateStructuredContentInternal(
         };
 
         // ✅ [v2.10.28] signal을 callX에 직접 전달 — SDK 레벨 fetch abort
-        if (provider === 'mcp') {
-          if (!options.mcpRuntimeManager || !options.generationRoute) {
-            throw new Error('MCP_RUNTIME_NOT_CONFIGURED: 선택한 MCP 글 생성 경로의 실행 설정이 없습니다.');
-          }
-          rawResponse = await withAbortRace(generateTextWithMcp({
-            runtime: options.mcpRuntimeManager,
-            route: options.generationRoute,
-            prompt: systemPrompt,
-            mode,
-            minimumBodyCharacters: adjustedMinChars,
-            signal,
-          }));
-        } else if (provider === 'agent-codex' || provider === 'agent-claude') {
+        if (provider === 'agent-codex' || provider === 'agent-claude') {
           rawResponse = await withAbortRace(callAgent(provider, systemPrompt, {
             signal,
             mode,

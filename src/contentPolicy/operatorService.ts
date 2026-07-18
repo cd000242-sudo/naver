@@ -169,6 +169,7 @@ export async function resumeContentPolicyPublishing(
     auditStore.readRecent(1000),
   ]);
   return store.update((currentState) => {
+    const isIntegrityPause = currentState.pause_origin === 'integrity';
     const pausedAt = Date.parse(currentState.paused_at || '');
     const incidentArticleId = currentState.pause_incident?.article_id;
     const rootCauseEvidence = audits.some((audit) => {
@@ -178,7 +179,7 @@ export async function resumeContentPolicyPublishing(
         && (!incidentArticleId || audit.article_id === incidentArticleId)
         && (!Number.isFinite(pausedAt) || (Number.isFinite(analyzedAt) && analyzedAt >= pausedAt));
     });
-    if (policy.monitoring.require_root_cause_analysis && !rootCauseEvidence) {
+    if (!isIntegrityPause && policy.monitoring.require_root_cause_analysis && !rootCauseEvidence) {
       throw new Error('ROOT_CAUSE_EVIDENCE_REQUIRED');
     }
     return resumePublicationState(currentState, approval, policy);

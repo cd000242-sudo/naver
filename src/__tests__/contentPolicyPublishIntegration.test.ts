@@ -405,7 +405,7 @@ describe('content policy publish integration', () => {
     expect(tracked[0].logNo).toBe('123456');
   });
 
-  it('validates the exposure URL before mutating publication records', async () => {
+  it('records the core publication ledger even when the exposure URL is unavailable', async () => {
     const userDataPath = await tempDir();
     const prepared = await prepareContentPolicyForPublish(payloadWithContext(), {
       userDataPath,
@@ -421,12 +421,41 @@ describe('content policy publish integration', () => {
       policyResult: prepared.policyResult,
       publishedUrl: '',
       publishedAt: new Date('2026-02-01T12:01:00.000Z'),
-    })).rejects.toThrow(/POLICY_EXPOSURE_TARGET_INVALID/);
+    })).resolves.toEqual({
+      advisoryReasons: ['POLICY_EXPOSURE_TARGET_INVALID'],
+    });
 
     const recent = await new RecentPostsRepository(userDataPath).loadRecentPosts(500);
-    expect(recent.ok && recent.posts.some((post) => post.article_id === prepared.articleId)).toBe(false);
-    expect((await new PublicationStateStore(userDataPath).load()).history).toHaveLength(0);
+    expect(recent.ok && recent.posts.some((post) => post.article_id === prepared.articleId)).toBe(true);
+    const state = await new PublicationStateStore(userDataPath).load();
+    expect(state.history).toHaveLength(1);
+    expect(state.last_advisory_reason).toContain('POLICY_EXPOSURE_TARGET_INVALID');
     expect(loadPublishedPosts(userDataPath)).toHaveLength(0);
+  });
+
+  it('keeps a failed exposure-tracker write advisory after the core ledger is recorded', async () => {
+    const userDataPath = await tempDir();
+    const prepared = await prepareContentPolicyForPublish(payloadWithContext(), {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+    await fs.mkdir(path.join(userDataPath, 'published-posts.json'));
+
+    const result = await recordContentPolicyPublication({
+      userDataPath,
+      articleId: prepared.articleId,
+      accountId: 'account-a',
+      payload: prepared.payload,
+      policyResult: prepared.policyResult,
+      publishedUrl: 'https://blog.naver.com/account-a/223000099',
+      publishedAt: new Date('2026-02-01T12:01:00.000Z'),
+    });
+
+    expect(result.advisoryReasons).toContain('POLICY_EXPOSURE_QUEUE_WRITE_FAILED');
+    const state = await new PublicationStateStore(userDataPath).load();
+    expect(state.history).toHaveLength(1);
+    expect(state.last_advisory_reason).toContain('POLICY_EXPOSURE_QUEUE_WRITE_FAILED');
   });
 
   it('audits the final PublishGuard BLOCK instead of a stale pipeline PASS', async () => {
@@ -443,6 +472,38 @@ describe('content policy publish integration', () => {
     expect(result.reasons).toContain('BLOCK_PUBLISH_PAUSED');
     expect(audits[0].decision).toBe('BLOCK');
     expect(audits[0].block_reasons).toContain('BLOCK_PUBLISH_PAUSED');
+  });
+
+  it('recovers a legacy automatic pause and publishes with an advisory', async () => {
+    const userDataPath = await tempDir();
+    await new PublicationStateStore(userDataPath).save({
+      status: 'PAUSED',
+      pause_reason: 'EXPOSURE_MONITOR_FAILURE',
+      paused_at: '2026-02-01T11:00:00.000Z',
+      paused_templates: [],
+      paused_structures: [],
+      confirmed_missing_streak: 0,
+      history: [],
+    });
+
+    const result = await prepareContentPolicyForPublish(payloadWithContext(), {
+      userDataPath,
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+      now: new Date('2026-02-01T12:00:00.000Z'),
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.reasons).toEqual([]);
+    expect(result.advisoryReasons).toContain('ADVISORY_BACKGROUND_POLICY:EXPOSURE_MONITOR_FAILURE');
+  });
+
+  it('keeps core post-publish ledger failures as integrity pauses', async () => {
+    const source = await fs.readFile(path.resolve(process.cwd(), 'src/main/services/BlogExecutor.ts'), 'utf8');
+    const reasonIndex = source.indexOf('POLICY_POST_PUBLISH_RECORD_FAILED:');
+    const nextBlock = source.slice(reasonIndex, reasonIndex + 1200);
+
+    expect(reasonIndex).toBeGreaterThan(-1);
+    expect(nextBlock).toContain("pauseAll(reason, 'integrity')");
   });
 
   it('skips cadence for drafts but evaluates schedules at their target time', async () => {
@@ -639,7 +700,7 @@ describe('content policy publish integration', () => {
       payload: prepared.payload,
       policyResult: prepared.policyResult,
       publishedUrl: 'https://blog.naver.com/PostView.naver?blogId=account-a&logNo=223000001',
-    })).resolves.toBeUndefined();
+    })).resolves.toEqual({ advisoryReasons: [] });
 
     expect(loadPublishedPosts(userDataPath)[0]).toMatchObject({
       blogId: 'account-a',

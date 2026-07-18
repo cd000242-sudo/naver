@@ -43,11 +43,13 @@ export interface PublishGuardReasonDisposition {
 }
 
 const ADVISORY_PUBLISH_GUARD_REASONS = new Set([
+  'BLOCK_TEMPLATE_PAUSED',
+  'BLOCK_STRUCTURE_PAUSED',
   'BLOCK_CONSECUTIVE_PATTERN',
 ]);
 
 /**
- * Template/structure/angle repetition is a quality diversity diagnostic.
+ * Template/structure/angle repetition and exposure findings are diagnostics.
  * Operational limits, invalid schedules, and pause controls remain hard stops.
  */
 export function partitionPublishGuardReasons(

@@ -180,6 +180,55 @@ describe('generation policy context', () => {
     expect(result.prompt).toBe('');
   });
 
+  it('recovers a legacy automatic exposure pause as an advisory and keeps generation available', async () => {
+    const userDataPath = await tempDir();
+    const recentPosts = makeRecentPosts(20);
+    const stateStore = new PublicationStateStore(userDataPath);
+    await stateStore.save({
+      status: 'PAUSED',
+      pause_reason: 'EXPOSURE_MONITOR_FAILURE',
+      paused_at: '2026-07-18T09:00:00.000Z',
+      paused_templates: [],
+      paused_structures: [],
+      confirmed_missing_streak: 0,
+      history: [],
+    });
+
+    const result = await prepareGenerationPolicyContext({
+      userDataPath,
+      config: await loadContentPolicy(),
+      context: {
+        input: makePolicyInput({ recent_posts: recentPosts }),
+        recentPostsSnapshot: recentPosts,
+      },
+      env: { MIN_PUBLISH_INTERVAL_MINUTES: '0', DAILY_PUBLISH_CAP: '10' },
+    });
+
+    expect(result.allowed).toBe(true);
+    expect(result.reasons).toContain('ADVISORY_BACKGROUND_POLICY:EXPOSURE_MONITOR_FAILURE');
+    expect(result.prompt).toContain(recentPosts[0].title);
+  });
+
+  it('fails before spending model credits when the publication state is corrupt', async () => {
+    const userDataPath = await tempDir();
+    const recentPosts = makeRecentPosts(20);
+    const stateStore = new PublicationStateStore(userDataPath);
+    await fs.writeFile(stateStore.filePath, '{broken', 'utf8');
+
+    const result = await prepareGenerationPolicyContext({
+      userDataPath,
+      config: await loadContentPolicy(),
+      context: {
+        input: makePolicyInput({ recent_posts: recentPosts }),
+        recentPostsSnapshot: recentPosts,
+      },
+    });
+
+    expect(result.allowed).toBe(false);
+    expect(result.reasons).toContain('BLOCK_PUBLICATION_STATE_UNAVAILABLE');
+    expect(result.prompt).toBe('');
+  });
+
   it('places the multi-account operational gate before content and image generation', async () => {
     const source = await fs.readFile(path.resolve(process.cwd(), 'src/main.ts'), 'utf8');
     const handlerStart = source.indexOf("ipcMain.handle('multiAccount:publish'");

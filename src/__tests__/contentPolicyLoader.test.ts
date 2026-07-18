@@ -11,5 +11,7 @@ describe('content policy YAML loader', () => {
     expect(policy.similarity.compare_recent_posts_min).toBe(20);
     expect(policy.quality_gate.pass_score).toBe(85);
     expect(policy.monitoring.minimum_cross_checks).toBe(2);
+    expect(policy.monitoring.on_first_confirmed_missing).toBe('ADVISORY_SAME_TEMPLATE');
+    expect(policy.monitoring.on_two_consecutive_confirmed_missing).toBe('ADVISORY_ALL');
   });
 });

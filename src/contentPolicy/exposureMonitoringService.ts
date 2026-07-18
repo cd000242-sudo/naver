@@ -56,12 +56,12 @@ export async function processExposureMonitoring(
   const config = await loadContentPolicy(options.policyPath ? { policyPath: options.policyPath } : {});
   const recentResult = await repository.loadRecentPosts(500);
   if (!recentResult.ok) {
-    await stateStore.pauseAll(`EXPOSURE_${recentResult.code}`);
+    await stateStore.recordAdvisory(`EXPOSURE_${recentResult.code}`);
     throw new Error(recentResult.code);
   }
   const recentPost = recentResult.posts.find((post) => matchesTarget(post, options.target));
   if (!recentPost) {
-    await stateStore.pauseAll('EXPOSURE_ARTICLE_METADATA_UNAVAILABLE');
+    await stateStore.recordAdvisory('EXPOSURE_ARTICLE_METADATA_UNAVAILABLE');
     throw new Error('EXPOSURE_ARTICLE_METADATA_UNAVAILABLE');
   }
 
@@ -70,19 +70,19 @@ export async function processExposureMonitoring(
     .reverse()
     .find((entry) => entry.article_id === recentPost.article_id);
   if (!historyEntry) {
-    await stateStore.pauseAll('EXPOSURE_PUBLICATION_HISTORY_UNAVAILABLE');
+    await stateStore.recordAdvisory('EXPOSURE_PUBLICATION_HISTORY_UNAVAILABLE');
     throw new Error('EXPOSURE_PUBLICATION_HISTORY_UNAVAILABLE');
   }
   let audits: AuditRecord[];
   try {
     audits = await auditStore.readRecent(1000);
   } catch (error) {
-    await stateStore.pauseAll('EXPOSURE_AUDIT_LOG_CORRUPT');
+    await stateStore.recordAdvisory('EXPOSURE_AUDIT_LOG_CORRUPT');
     throw error;
   }
   const previousAudit = audits.find((record) => record.article_id === recentPost.article_id);
   if (!previousAudit) {
-    await stateStore.pauseAll('EXPOSURE_AUDIT_UNAVAILABLE');
+    await stateStore.recordAdvisory('EXPOSURE_AUDIT_UNAVAILABLE');
     throw new Error('EXPOSURE_AUDIT_UNAVAILABLE');
   }
 
@@ -138,7 +138,7 @@ export async function processExposureMonitoring(
         : undefined,
     });
   } catch (error) {
-    await stateStore.pauseAll('EXPOSURE_MONITOR_PERSISTENCE_FAILURE');
+    await stateStore.recordAdvisory('EXPOSURE_MONITOR_PERSISTENCE_FAILURE');
     throw error;
   }
 

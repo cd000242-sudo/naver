@@ -290,7 +290,7 @@ describe('buildContentQualityV3Prompt', () => {
         personalExperience: '직접 3일 사용했고 손잡이가 편했다.',
         productSpec: '무게 1kg',
         productPrice: '29,000원',
-        productReviews: ['배송이 빨라요', '포장이 단단해요'],
+        productReviews: ['배송이 예상보다 빨라 설치 일정을 맞추기 쉬웠어요.', '포장이 단단해서 모서리 파손 없이 도착했어요.'],
         productInfo: { name: '제품 A', brand: '브랜드', price: 29_000, category: '생활' },
         businessInfo: {
           name: '판매처',
@@ -318,7 +318,7 @@ describe('buildContentQualityV3Prompt', () => {
       productPrice: '29,000원',
       previousTitles: ['제목 1', '제목 2'],
     });
-    expect(sourceData.productReviews).toEqual(['배송이 빨라요', '포장이 단단해요']);
+    expect(sourceData.productReviews).toEqual(['배송이 예상보다 빨라 설치 일정을 맞추기 쉬웠어요.', '포장이 단단해서 모서리 파손 없이 도착했어요.']);
     expect(sourceData.businessInfo).toEqual({
       name: '판매처',
       phone: '02-000-0000',
@@ -468,7 +468,7 @@ describe('buildContentQualityV3Prompt', () => {
     const reviewSourceData = extractTaggedJson<Record<string, unknown>>(
       splitPromptByMarker(build({
         mode: 'affiliate',
-        source: { rawText: '스펙', productReviews: ['구매자 리뷰'] },
+        source: { rawText: '스펙', productReviews: ['저속에서는 조용하지만 최고 단계에서는 소리가 크게 들려요.'] },
       })).user,
       'source_data_json',
     );
@@ -512,7 +512,7 @@ describe('buildContentQualityV3Prompt', () => {
       source: {
         rawText: '자료',
         previousTitles: Array.from({ length: 20 }, (_, index) => `제목 ${index}`),
-        productReviews: Array.from({ length: 20 }, (_, index) => `리뷰 ${index}`),
+        productReviews: Array.from({ length: 20 }, (_, index) => `설치 후 소음과 청소 편의성을 기록한 구매자 리뷰 ${index}`),
       },
     })).user;
     const brief = extractTaggedJson<Record<string, any>>(user, 'user_brief_json');
@@ -523,8 +523,22 @@ describe('buildContentQualityV3Prompt', () => {
     expect(brief.subKeywords).toHaveLength(6);
     expect(new Set(brief.subKeywords).size).toBe(brief.subKeywords.length);
     expect(sourceData.previousTitles).toHaveLength(5);
-    expect(sourceData.productReviews).toHaveLength(5);
+    expect(sourceData.productReviews).toHaveLength(8);
     expect(sourceData.metrics).toBeUndefined();
+  });
+
+  it('keeps UI-only review chrome out of review-synthesis evidence mode', () => {
+    const user = splitPromptByMarker(build({
+      mode: 'affiliate',
+      source: {
+        rawText: '상품명과 가격만 수집됨',
+        productReviews: ['리뷰 전체 보기 구매 옵션 선택 신고하기'],
+      },
+    })).user;
+    const sourceData = extractTaggedJson<Record<string, any>>(user, 'source_data_json');
+
+    expect(sourceData.evidenceMode).toBe('spec_only');
+    expect(sourceData.productReviews).toEqual([]);
   });
 
   it('keeps only bounded scalar product specs from dynamic untrusted records', () => {

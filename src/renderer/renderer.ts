@@ -215,7 +215,6 @@ import {
 } from './utils/errorAndAutosave.js';
 // ✅ [2026-01-25] 환경설정 모달
 import { initSettingsModal as initSettingsModalFunc } from './utils/settingsModal.js';
-import { initGenerationConnectionUI } from './modules/generationConnectionUI.js';
 // ✅ [2026-02-24 모듈화] 연속 발행
 import { switchExternalLinksTab, startContinuousMode, stopContinuousMode, toggleContinuousModeModal, startContinuousPublishing, initContinuousPublishingV2, startContinuousModeEnhanced, executeContinuousPublish, testApiKeysAndFullAuto, runRealFullAutoTest, setupMutualExclusiveCheckboxes, updateContinuousProgressModal, setKeywordTitleOptionsFromItem, applyKeywordPrefixToTitleContinuous, continuousQueueV2, scheduleNextPosting } from './modules/continuousPublishing.js';
 // ✅ [2026-02-25 모듈화] 썸네일 생성기
@@ -759,7 +758,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initCategorySelectionListener(); // ✅ 카테고리 모달 이벤트 리스너
   initHeadingImageButton();
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
-  void initGenerationConnectionUI();
 
   // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 + 모달 wiring
   initSerpBenchmarkUI();
@@ -2959,10 +2957,6 @@ async function initializeApplication(): Promise<void> {
   } catch (e) {
     console.warn('[Init] 이미지 provider 마이그레이션 스킵:', e);
   }
-
-  // 중복 생성 라우트의 1회 정리가 끝난 뒤에만 자동화 파이프라인을 초기화한다.
-  // 이 대기로 쇼핑커넥트가 예전 scAIImageEngine 값을 먼저 읽는 시작 경합을 막는다.
-  await initGenerationConnectionUI();
 
   // ═══════════════════════════════════════════════════════════════════════
   // ✅ [v2.10.90 PerfDebug] 초기화 단계별 시간 측정.

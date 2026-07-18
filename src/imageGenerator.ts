@@ -38,6 +38,10 @@ import {
   buildAppManagedReferenceImageRoots,
   loadReferenceImageData,
 } from './image/referenceImageLoader.js';
+import {
+  prepareProviderContextualImagePrompt,
+  shouldApplyContextualPromptForProvider,
+} from './image/contextualImagePrompt.js';
 import { thumbnailService } from './thumbnailService.js';
 import { AutomationService } from './main/services/AutomationService.js'; // ✅ [2026-01-29 FIX] 중지 체크용
 import * as fs from 'fs/promises';
@@ -454,16 +458,39 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     .map((item, idx) => {
       const allowText = shouldAllowTextForImageItem(item, options);
       const basePrompt = String(item.englishPrompt || item.prompt || '').trim();
-      const prompt = options.isShoppingConnect
+      const legacyPrompt = options.isShoppingConnect
         ? buildShoppingReferencePrompt(basePrompt, item.heading, allowText)
         : String(item.prompt || '').trim();
+      const useContextualPrompt = shouldApplyContextualPromptForProvider(normalizedProvider);
+      const articleTitle = item.articleTitle || options.articleTitle || options.postTitle;
+      const globalSubject = item.globalSubject || options.globalSubject || options.articleTitle || options.postTitle;
+      const articleContext = item.articleContext || options.articleContext;
+      const prompt = prepareProviderContextualImagePrompt(normalizedProvider, {
+        articleTitle,
+        globalSubject,
+        articleContext,
+        sectionHeading: item.heading,
+        sectionContent: item.sectionContent,
+        existingPrompt: useContextualPrompt
+          ? (options.isShoppingConnect ? legacyPrompt : basePrompt)
+          : legacyPrompt,
+        allowText,
+        isThumbnail: item.isThumbnail === true,
+        isShoppingConnect: options.isShoppingConnect === true,
+        hasReferenceImage: options.isShoppingConnect === true && Boolean(representativeReferenceUrl),
+      });
 
       return {
         heading: item.heading,
         prompt,
+        articleTitle,
+        globalSubject,
+        articleContext,
+        sectionContent: item.sectionContent,
         isThumbnail: item.isThumbnail || false, // ✅ isThumbnail 플래그 전달
         allowText, // text is thumbnail-only in auto publish contexts
-        englishPrompt: options.isShoppingConnect ? prompt : item.englishPrompt,
+        englishPrompt: useContextualPrompt ? prompt : item.englishPrompt,
+        sourceEnglishPrompt: item.sourceEnglishPrompt || item.englishPrompt,
         category: item.category || options.category || '', // ✅ [2026-02-12] options.category 폴백 → DeepInfra 카테고리별 스타일 적용
         referenceImagePath: item.referenceImagePath || options.referenceImagePath, // ✅ 전역 참조 이미지 적용
         // ✅ [2026-01-28] 크롤링 이미지를 referenceImageUrl에 할당 (img2img 활성화)

@@ -233,6 +233,7 @@ export abstract class BaseProvider {
             maxImages: 30,
             includeDetails: false,
             includeReviews: false,
+            includeReviewTexts: false,
             validateWithAI: true,
             useCache: true,
             ...options,

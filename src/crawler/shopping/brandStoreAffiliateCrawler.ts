@@ -1,6 +1,7 @@
 import { parsePrice } from '../../services/priceNormalizer.js';
 import { BrandStoreProvider } from './providers/BrandStoreProvider.js';
 import type { CollectionOptions, CollectionResult, ProductImage } from './types.js';
+import { selectDecisionUsefulReviewTexts } from './utils/reviewTextSelection.js';
 
 export interface BrandStoreAffiliateProduct {
   name: string;
@@ -12,6 +13,9 @@ export interface BrandStoreAffiliateProduct {
   galleryImages: string[];
   detailImages: string[];
   description?: string;
+  reviewTexts?: string[];
+  reviewCount?: number;
+  rating?: string;
 }
 
 interface BrandStoreCollectionClient {
@@ -57,6 +61,9 @@ export function mapBrandStoreCollectionToAffiliateProduct(
   const galleryImages = [representative, ...officialImages.filter(image => image !== representative)]
     .map(image => image.url);
   const availability = String(collection.productInfo?.availability || '').toLowerCase();
+  const reviewTexts = selectDecisionUsefulReviewTexts(collection.productInfo?.reviewTexts);
+  const reviewCount = collection.productInfo?.reviewCount;
+  const rating = String(collection.productInfo?.rating || '').trim();
 
   return {
     name,
@@ -70,6 +77,9 @@ export function mapBrandStoreCollectionToAffiliateProduct(
     galleryImages,
     detailImages: [],
     description: String(collection.productInfo?.description || '').trim(),
+    ...(reviewTexts.length > 0 ? { reviewTexts } : {}),
+    ...(typeof reviewCount === 'number' ? { reviewCount } : {}),
+    ...(rating ? { rating } : {}),
   };
 }
 
@@ -82,6 +92,7 @@ export async function crawlBrandStoreAffiliateProduct(
     maxImages: 30,
     includeDetails: false,
     includeReviews: false,
+    includeReviewTexts: true,
     validateWithAI: false,
     useCache: false,
   });

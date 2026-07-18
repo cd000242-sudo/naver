@@ -30,7 +30,7 @@ interface JsonLdOfferInfo {
   canonicalUrl?: string;
 }
 
-const MAX_REVIEW_TEXTS = 5;
+const MAX_REVIEW_TEXTS = 8;
 const MIN_REVIEW_LEN = 20;
 const MAX_REVIEW_LEN = 500;
 

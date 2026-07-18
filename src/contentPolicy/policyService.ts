@@ -343,6 +343,9 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   let guardAdvisoryReasons: string[] = [];
   try {
     const state = await stateStore.load();
+    const stateAdvisoryReasons = state.last_advisory_reason
+      ? [`ADVISORY_BACKGROUND_POLICY:${state.last_advisory_reason}`]
+      : [];
     const scheduledAt = payload.publishMode === 'schedule'
       ? resolveScheduledPublishAt(payload.scheduleDate, payload.scheduleTime)
       : null;
@@ -363,7 +366,10 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
       });
       const guardDisposition = partitionPublishGuardReasons(guard.reasons);
       guardReasons = [...guardDisposition.blockingReasons];
-      guardAdvisoryReasons = [...guardDisposition.advisoryReasons];
+      guardAdvisoryReasons = [
+        ...stateAdvisoryReasons,
+        ...guardDisposition.advisoryReasons,
+      ];
       if (guardReasons.length > 0) {
         policyResult = blockForStorageFailure(policyResult, ...guardReasons);
       }
@@ -398,6 +404,23 @@ export async function prepareContentPolicyForPublish<T extends ContentPolicyPayl
   };
 }
 
+export interface ContentPolicyRecordResult {
+  advisoryReasons: string[];
+}
+
+async function persistPolicyRecordAdvisories(
+  stateStore: PublicationStateStore,
+  reasons: readonly string[],
+): Promise<void> {
+  if (reasons.length === 0) return;
+  const reason = [...new Set(reasons)].join(',');
+  try {
+    await stateStore.recordAdvisory(reason);
+  } catch (error) {
+    console.warn(`[ContentPolicy] Failed to persist post-publish advisory: ${(error as Error).message}`);
+  }
+}
+
 export async function recordContentPolicyPublication(input: {
   userDataPath: string;
   articleId: string;
@@ -406,35 +429,39 @@ export async function recordContentPolicyPublication(input: {
   policyResult: ContentPolicyResult;
   publishedUrl?: string;
   publishedAt?: Date;
-}): Promise<void> {
+}): Promise<ContentPolicyRecordResult> {
   const publishedAt = input.publishedAt || new Date();
   const draft = draftFromPayload(input.payload);
   const publishedUrl = stringValue(input.publishedUrl);
   const identity = extractNaverBlogPostIdentity(publishedUrl);
-  if (!identity) throw new Error('POLICY_EXPOSURE_TARGET_INVALID');
+  const advisoryReasons: string[] = [];
   const quality = input.policyResult.quality_report;
-  const tracked = ensureTrackedPublishedPost(input.userDataPath, {
-    publishedAt: publishedAt.toISOString(),
-    keyword: input.payload.contentPolicyContext?.input.primary_keyword || draft.title,
-    mode: stringValue(input.payload.contentMode) || 'seo',
-    blogId: identity.blogId,
-    logNo: identity.logNo,
-    url: publishedUrl,
-    title: draft.title,
-    evaluator: {
-      finalScore: quality.total_score,
-      modeScore: Math.round((quality.intent_score / 30) * 60 + (quality.reader_value_score / 20) * 40),
-      safetyScore: Math.round((quality.spam_safety_score / 5) * 100),
-      humanlikeScore: Math.round((quality.readability_score / 10) * 100),
-      decision: input.policyResult.decision.toLowerCase(),
-      details: {
-        originality: quality.originality_score,
-        firstParty: quality.first_party_score,
-        rewriteCount: input.policyResult.rewrite_count,
+  if (identity) {
+    const tracked = ensureTrackedPublishedPost(input.userDataPath, {
+      publishedAt: publishedAt.toISOString(),
+      keyword: input.payload.contentPolicyContext?.input.primary_keyword || draft.title,
+      mode: stringValue(input.payload.contentMode) || 'seo',
+      blogId: identity.blogId,
+      logNo: identity.logNo,
+      url: publishedUrl,
+      title: draft.title,
+      evaluator: {
+        finalScore: quality.total_score,
+        modeScore: Math.round((quality.intent_score / 30) * 60 + (quality.reader_value_score / 20) * 40),
+        safetyScore: Math.round((quality.spam_safety_score / 5) * 100),
+        humanlikeScore: Math.round((quality.readability_score / 10) * 100),
+        decision: input.policyResult.decision.toLowerCase(),
+        details: {
+          originality: quality.originality_score,
+          firstParty: quality.first_party_score,
+          rewriteCount: input.policyResult.rewrite_count,
+        },
       },
-    },
-  });
-  if (!tracked.ok) throw new Error('POLICY_EXPOSURE_QUEUE_WRITE_FAILED');
+    });
+    if (!tracked.ok) advisoryReasons.push('POLICY_EXPOSURE_QUEUE_WRITE_FAILED');
+  } else {
+    advisoryReasons.push('POLICY_EXPOSURE_TARGET_INVALID');
+  }
 
   const repository = new RecentPostsRepository(input.userDataPath);
   const stateStore = new PublicationStateStore(input.userDataPath);
@@ -454,7 +481,9 @@ export async function recordContentPolicyPublication(input: {
     template_id: input.policyResult.publication.template_id,
     url: input.publishedUrl,
   };
-  await repository.record(recentPost);
+  // The cadence/day-cap ledger is the enforcement record. Persist it first and
+  // keep this write fail-closed so a real Naver publish cannot become invisible
+  // to the next unattended run.
   await stateStore.recordPublication({
     article_id: input.articleId,
     account_id: input.accountId,
@@ -464,18 +493,29 @@ export async function recordContentPolicyPublication(input: {
     topic_angle: input.policyResult.uniqueness_plan.topic_angle,
     exposure_status: 'PENDING_INDEX',
   });
-  await auditStore.append({
-    ...auditRecord(
-      input.articleId,
-      input.payload.contentPolicyContext?.input || fallbackInput(input.payload, draft),
-      input.policyResult,
-      publishedAt.toISOString(),
-    ),
-    publish_time: publishedAt.toISOString(),
-    exposure_status: 'PENDING_INDEX',
-    exposure_checks: [],
-  });
+  // Recent-post content is the source for next-run similarity protection, so a
+  // failed write is an integrity failure rather than an observability warning.
+  await repository.record(recentPost);
+  try {
+    await auditStore.append({
+      ...auditRecord(
+        input.articleId,
+        input.payload.contentPolicyContext?.input || fallbackInput(input.payload, draft),
+        input.policyResult,
+        publishedAt.toISOString(),
+      ),
+      publish_time: publishedAt.toISOString(),
+      exposure_status: 'PENDING_INDEX',
+      exposure_checks: [],
+    });
+  } catch (error) {
+    advisoryReasons.push('POLICY_AUDIT_LOG_WRITE_FAILED');
+    console.warn(`[ContentPolicy] Audit record failed after core ledger write: ${(error as Error).message}`);
+  }
 
+  const uniqueAdvisories = [...new Set(advisoryReasons)];
+  await persistPolicyRecordAdvisories(stateStore, uniqueAdvisories);
+  return { advisoryReasons: uniqueAdvisories };
 }
 
 export async function recordContentPolicyReservation(input: {
@@ -485,7 +525,7 @@ export async function recordContentPolicyReservation(input: {
   payload: ContentPolicyPayload;
   policyResult: ContentPolicyResult;
   scheduledAt: Date;
-}): Promise<void> {
+}): Promise<ContentPolicyRecordResult> {
   if (!(input.scheduledAt instanceof Date) || !Number.isFinite(input.scheduledAt.getTime())) {
     throw new Error('POLICY_RESERVATION_DATE_INVALID');
   }
@@ -495,7 +535,7 @@ export async function recordContentPolicyReservation(input: {
   const auditStore = new ContentPolicyAuditStore(input.userDataPath);
   const scheduledAt = input.scheduledAt.toISOString();
 
-  await repository.record({
+  const recentPost: RecentPostRecord = {
     article_id: input.articleId,
     title: draft.title,
     intro: draft.introduction,
@@ -508,7 +548,11 @@ export async function recordContentPolicyReservation(input: {
     published_at: scheduledAt,
     exposure_status: 'PENDING_INDEX',
     template_id: input.policyResult.publication.template_id,
-  });
+  };
+  const advisoryReasons: string[] = [];
+
+  // As with immediate publishing, the enforcement ledger is the only critical
+  // local write. Similarity/audit stores remain observable but advisory.
   await stateStore.recordPublication({
     article_id: input.articleId,
     account_id: input.accountId,
@@ -518,15 +562,25 @@ export async function recordContentPolicyReservation(input: {
     topic_angle: input.policyResult.uniqueness_plan.topic_angle,
     exposure_status: 'PENDING_INDEX',
   });
-  await auditStore.append({
-    ...auditRecord(
-      input.articleId,
-      input.payload.contentPolicyContext?.input || fallbackInput(input.payload, draft),
-      input.policyResult,
-      new Date().toISOString(),
-    ),
-    publish_time: scheduledAt,
-    exposure_status: 'PENDING_INDEX',
-    exposure_checks: [],
-  });
+  await repository.record(recentPost);
+  try {
+    await auditStore.append({
+      ...auditRecord(
+        input.articleId,
+        input.payload.contentPolicyContext?.input || fallbackInput(input.payload, draft),
+        input.policyResult,
+        new Date().toISOString(),
+      ),
+      publish_time: scheduledAt,
+      exposure_status: 'PENDING_INDEX',
+      exposure_checks: [],
+    });
+  } catch (error) {
+    advisoryReasons.push('POLICY_AUDIT_LOG_WRITE_FAILED');
+    console.warn(`[ContentPolicy] Scheduled audit record failed after core ledger write: ${(error as Error).message}`);
+  }
+
+  const uniqueAdvisories = [...new Set(advisoryReasons)];
+  await persistPolicyRecordAdvisories(stateStore, uniqueAdvisories);
+  return { advisoryReasons: uniqueAdvisories };
 }

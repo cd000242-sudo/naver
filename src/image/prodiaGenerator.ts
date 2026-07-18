@@ -3,6 +3,8 @@ import { loadConfig } from '../configManager.js';
 import type { GeneratedImage, ImageRequestItem } from './types.js';
 import { sanitizeImagePrompt, writeImageFile } from './imageUtils.js';
 import { AutomationService } from '../main/services/AutomationService.js';
+import { buildSafeEnglishProviderImagePrompt, isContextualImagePrompt } from './contextualImagePrompt.js';
+import { hasUsableEnglishPrompt } from './promptSafety.js';
 
 const PRODIA_GENERATE_URL = 'https://api.prodia.com/v1/sd/generate';
 const PRODIA_JOB_URL = 'https://api.prodia.com/v1/job';
@@ -125,7 +127,10 @@ export async function generateWithProdia(
   for (let index = 0; index < items.length; index++) {
     if (AutomationService.isCancelRequested()) break;
     const item = items[index];
-    const promptBase = item.englishPrompt || sanitizeImagePrompt(item.prompt || item.heading || postTitle || 'blog image');
+    const rawPrompt = item.englishPrompt || sanitizeImagePrompt(item.prompt || item.heading || postTitle || 'blog image');
+    const promptBase = isContextualImagePrompt(rawPrompt) && hasUsableEnglishPrompt(item.sourceEnglishPrompt)
+      ? buildSafeEnglishProviderImagePrompt(item.sourceEnglishPrompt, Boolean(item.referenceImageUrl || item.referenceImagePath))
+      : rawPrompt;
     const prompt = `${promptBase}\n\nHigh quality blog illustration, natural composition, no text overlay unless explicitly requested.`;
     const ratio = (item as any).imageRatio || '1:1';
     const { width, height } = resolveSize(ratio);

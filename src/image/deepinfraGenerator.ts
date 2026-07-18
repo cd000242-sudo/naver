@@ -16,6 +16,7 @@ import sharp from 'sharp'; // ✅ [2026-01-30] 이미지 하단 텍스트 영역
 // [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — FLUX/Redux b64_json 1MB+
 import { decodeBase64Async } from '../main/utils/base64Async.js';
 import { GEMINI_TEXT_MODELS, OPENAI_TEXT_MODELS } from '../runtime/modelRegistry.js';
+import { buildSafeEnglishProviderImagePrompt, isContextualImagePrompt } from './contextualImagePrompt.js';
 
 // ✅ [2026-03-01] 인물 규칙 함수 — 카테고리별 인물 포함/제외 + 한국인 하드코딩
 // AI 추론 기반: 하드코딩 카테고리 스타일 제거, 인물 규칙만 제공
@@ -397,6 +398,10 @@ export async function generateWithDeepInfra(
 
             // ✅ 영문 프롬프트 우선 사용 (FLUX는 영어 프롬프트에 최적화)
             let basePrompt = item.englishPrompt || sanitizeImagePrompt(item.prompt || item.heading);
+            const hasContextualPrompt = isContextualImagePrompt(basePrompt);
+            const sourceEnglishPrompt = hasUsableEnglishPrompt(item.sourceEnglishPrompt)
+                ? String(item.sourceEnglishPrompt).trim()
+                : '';
 
             // ✅ [2026-02-18 FIX] 비사실적 스타일에서 renderer가 주입한 photography 키워드 제거
             // generateEnglishPromptForHeadingSync()가 항상 "professional photography, natural lighting" 등을 주입
@@ -417,10 +422,15 @@ export async function generateWithDeepInfra(
             // ✅ [2026-03-01] NO PEOPLE 카테고리에서 englishPrompt 인물 키워드 필터링
             // ✅ 캐릭터 스타일(stickman, roundy)은 캐릭터가 주체이므로 필터 면제
             const isCharacterStyleForFilter = imageStyle === 'stickman' || imageStyle === 'roundy';
-            if (isNoPerson && !isCharacterStyleForFilter && /person|people|celebrity|human|checking phone|studying|exercising/i.test(basePrompt)) {
+            if (isNoPerson && !isCharacterStyleForFilter && !isContextualImagePrompt(basePrompt) && /person|people|celebrity|human|checking phone|studying|exercising/i.test(basePrompt)) {
                 const originalBasePrompt = basePrompt;
                 basePrompt = `visual scene depicting: ${sanitizeImagePrompt(item.heading)}`;
                 console.log(`[DeepInfra] ⚠️ NO PEOPLE 카테고리에서 인물 프롬프트 감지 → 재생성: "${originalBasePrompt.substring(0, 40)}..." → "${basePrompt.substring(0, 40)}..."`);
+            }
+
+            // FLUX gets a concise English scene while preserving the central brief's facts.
+            if (hasContextualPrompt && sourceEnglishPrompt) {
+                basePrompt = buildSafeEnglishProviderImagePrompt(sourceEnglishPrompt, Boolean(item.referenceImageUrl || item.referenceImagePath));
             }
 
             // ✅ [2026-01-30 FIX] 한글 감지 시 → 카테고리별 다른 처리!
@@ -457,7 +467,7 @@ export async function generateWithDeepInfra(
                 basePrompt = `${hints.angle}, ${englishContext}, ${hints.color}`;
             } else if (shouldUseKoreanFallback) {
                 // ✅ [2026-02-26] Gemini API로 스타일별 완전한 이미지 프롬프트 생성
-                const koreanContext = sanitizeImagePrompt(item.heading || item.prompt || '');
+                const koreanContext = sanitizeImagePrompt(item.prompt || item.heading || '');
                 const englishContext = await translateKoreanToEnglishWithAI(koreanContext, item.category, imageStyle);
                 console.log(`[DeepInfra] ✅ 한글→영어 AI 변환 완료: "${koreanContext.substring(0, 20)}" → "${englishContext.substring(0, 40)}"`);
 

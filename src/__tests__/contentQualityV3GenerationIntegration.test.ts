@@ -84,7 +84,7 @@ describe('Content Quality V3 production wiring', () => {
     expect(requestContract).toMatch(/maxTopLevelRetries:\s*0/);
     expect(requestContract).toMatch(/maxNetworkRetries:\s*0/);
     expect(requestContract).toMatch(/maxProviderCalls:\s*1/);
-    expect(generator).toMatch(/const MAX_ATTEMPTS = isV3Prompt\s*\|\| provider === 'mcp'\s*\|\| !allowAutomaticProviderRetry\s*\? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries/);
+    expect(generator).toMatch(/const MAX_ATTEMPTS = isV3Prompt\s*\|\| !allowAutomaticProviderRetry\s*\? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries/);
     expect(generator).toMatch(/const GEMINI_MAX_RETRIES = isV3Prompt\s*\|\| !allowAutomaticProviderRetry\s*\? CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxNetworkRetries/);
     expect(generator).toMatch(/const strictSingleCall =\s*options\.executionPolicy === CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY/);
     expect(generator).toMatch(/const singleSubmission = strictSingleCall\s*\|\| !shouldAllowAutomaticProviderRetry\(options\.submissionMode\)/);

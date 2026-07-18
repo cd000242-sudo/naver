@@ -15,6 +15,8 @@ import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUti
 import { STYLE_PROMPT_MAP, isNoPersonCategory, getPresetStyleMapping, getStyleNegativePrompt, getImageDiversityHints } from './imageStyles.js';
 import { addThumbnailTextOverlay } from './textOverlay.js';
 import { AutomationService } from '../main/services/AutomationService.js';
+import { buildSafeEnglishProviderImagePrompt, isContextualImagePrompt } from './contextualImagePrompt.js';
+import { hasUsableEnglishPrompt } from './promptSafety.js';
 
 const LEONARDO_API_V1 = 'https://cloud.leonardo.ai/api/rest/v1';
 const LEONARDO_API_V2 = 'https://cloud.leonardo.ai/api/rest/v2';
@@ -295,6 +297,10 @@ export async function generateWithLeonardoAI(
 
             // 프롬프트 구성
             let prompt = item.englishPrompt || sanitizeImagePrompt(item.prompt || item.heading);
+            const hasContextualPrompt = isContextualImagePrompt(prompt);
+            if (hasContextualPrompt && hasUsableEnglishPrompt(item.sourceEnglishPrompt)) {
+                prompt = buildSafeEnglishProviderImagePrompt(item.sourceEnglishPrompt, Boolean(item.referenceImageUrl || item.referenceImagePath));
+            }
 
             // 한글 제거
             if (/[가-힣]/.test(prompt)) {
@@ -314,7 +320,12 @@ export async function generateWithLeonardoAI(
             const NO_TEXT_PREFIX = 'CRITICAL RULE: This image must contain ZERO text, ZERO letters, ZERO words, ZERO writing of any kind. Generate a COMPLETELY TEXT-FREE image.';
 
             if (isShoppingConnect) {
-                if (initImageId) {
+                if (hasContextualPrompt) {
+                    const referenceRule = initImageId
+                        ? 'Keep the exact identity, shape, colors, proportions, and visible details of the reference product.'
+                        : '';
+                    prompt = `${NO_TEXT_PREFIX} ${prompt} ${referenceRule}`.trim();
+                } else if (initImageId) {
                     prompt = `${NO_TEXT_PREFIX} Based on this product reference image, create a premium lifestyle photograph showing this exact product being used by a Korean person (20-40s). ${dh.angle}, ${dh.framing}, ${prompt}, luxury Korean lifestyle setting, ${dh.lighting}, ${dh.focus}, maintain the product's exact appearance.`;
                 } else {
                     prompt = `${NO_TEXT_PREFIX} ${dh.angle}, ${dh.framing}, Premium lifestyle photography with Korean person, ${dh.personAction}, using or enjoying the product, ${prompt}, luxury lifestyle setting, ${dh.lighting}, ${dh.focus}.`;

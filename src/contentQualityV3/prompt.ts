@@ -6,6 +6,7 @@ import {
   getPrimaryKeywordFromSource,
   getSecondaryKeywordsFromSource,
 } from '../contentKeywordHelpers.js';
+import { selectDecisionUsefulReviewTexts } from '../crawler/shopping/utils/reviewTextSelection.js';
 
 export const CONTENT_QUALITY_V3_MAX_EVIDENCE_CHARS = 80_000;
 export const CONTENT_QUALITY_V3_SYSTEM_MAX_CHARS = 12_000;
@@ -16,7 +17,7 @@ const MAX_TARGET_CHARS = 20_000;
 const MAX_KEYWORD_CHARS = 160;
 const MAX_SUB_KEYWORDS = 6;
 const MAX_PREVIOUS_TITLES = 5;
-const MAX_PRODUCT_REVIEWS = 5;
+const MAX_PRODUCT_REVIEWS = 8;
 const EVIDENCE_TRUNCATION_MARKER = '\n\n[중간 자료 생략: 입력 한도 초과]\n\n';
 
 export type ContentQualityV3Mode =
@@ -148,6 +149,9 @@ const MODE_CONTRACTS: Readonly<Record<ContentQualityV3Mode, string>> = Object.fr
 - 판매 문구가 아니라 구매 여부를 판단할 조건, 맞는 사람, 불편할 수 있는 상황을 균형 있게 설명한다.
 - source_data_json의 evidenceMode가 first_party이고 personalExperience가 실제로 뒷받침할 때만 작성자의 직접 사용 경험을 말한다.
 - review_synthesis는 구매자 의견으로 귀속하고, spec_only는 스펙 분석으로만 쓴다.
+- review_synthesis에서는 상품명과 누구나 아는 기능 설명보다 리뷰에 나타난 설치 난점, 반복 불편, 소음·관리·공간 변수, 사용 뒤 해결된 문제와 남은 한계를 우선한다.
+- 각 리뷰 근거는 구체 상황 → 구매 전에 중요한 이유 → 후기에서 확인된 해결·적응 또는 미해결 → 맞는 사람/맞지 않는 사람으로 연결한다. 2건 이상이 뒷받침할 때만 반복 의견이라고 말한다.
+- [한 줄 판정], [한 줄 결론] 같은 보고서 라벨을 쓰지 않고 자연스러운 후기 분석 문장으로 연결한다.
 - 입력에 없는 가격·할인·성능 수치·사용 기간·비교 우위·단점·구매 후기를 만들지 않는다.`,
   business: `[MODE_CONTRACT: GROUNDED_LOCAL_CONVERSION]
 - 업체명·지역·연락처·영업시간·경력·성과는 source_data_json에 제공된 값만 그대로 사용한다.
@@ -399,7 +403,7 @@ function safeJson(value: unknown): string {
 
 function buildEvidenceMode(source: ContentQualityV3Source): string {
   if (cleanString(source.personalExperience, 12_000)) return 'first_party';
-  if (cleanStringArray(source.productReviews, MAX_PRODUCT_REVIEWS, 2_000)) {
+  if (selectDecisionUsefulReviewTexts(source.productReviews, MAX_PRODUCT_REVIEWS).length > 0) {
     return 'review_synthesis';
   }
   return 'spec_only';
@@ -440,11 +444,7 @@ function buildDynamicPayload(options: ContentQualityV3PromptOptions): {
       personalExperience: cleanString(source.personalExperience, 12_000),
       productSpec: cleanString(source.productSpec, 20_000),
       productPrice: cleanString(source.productPrice, 300),
-      productReviews: cleanStringArray(
-        source.productReviews,
-        MAX_PRODUCT_REVIEWS,
-        2_000,
-      ),
+      productReviews: selectDecisionUsefulReviewTexts(source.productReviews, MAX_PRODUCT_REVIEWS),
       productInfo: sanitizeProductInfo(source.productInfo),
       businessInfo: sanitizeBusinessInfo(source.businessInfo),
       previousTitles: cleanStringArray(

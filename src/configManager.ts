@@ -13,12 +13,6 @@ import {
 import {
   normalizeGeminiPrepaidTextModelId,
 } from './runtime/geminiTextModelNormalization.js';
-import {
-  normalizeGenerationConnectionSettings,
-  normalizeMcpConnectionProfiles,
-  type GenerationConnectionSettings,
-} from './generation/connectionConfig.js';
-import type { McpConnectionProfile } from './generation/mcp/index.js';
 
 export interface AppConfig {
   geminiApiKey?: string;
@@ -197,15 +191,6 @@ export interface AppConfig {
   // ✅ [2026-01-25] 전역 AI 제공자 설정
   defaultAiProvider?: 'gemini' | 'perplexity' | 'openai' | 'claude';
   perplexityModel?: 'sonar' | 'sonar-pro';
-
-  /**
-   * Versioned per-capability route selection for MCP / Agent / API.
-   * This is intentionally separate from legacy provider fields so old settings
-   * retain their behavior during migration.
-   */
-  generationConnectionSettings?: GenerationConnectionSettings;
-  /** Public, non-secret MCP tool metadata. Runtime material is stored in the OS-encrypted MCP vault. */
-  mcpConnectionProfiles?: readonly McpConnectionProfile[];
 
   // ✅ [2026-03-18] Gemini API 사용량 추적 (로컬 누적)
   geminiUsageTracker?: {
@@ -442,7 +427,6 @@ export async function loadConfig(): Promise<AppConfig> {
           'userDisplayName', 'userEmail',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
-          'generationConnectionSettings', 'mcpConnectionProfiles',
           'customImageSavePath',
           'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
         ];
@@ -566,31 +550,6 @@ export async function loadConfig(): Promise<AppConfig> {
       if (normalizedSecrets.changed) {
         normalizedConfig = normalizedSecrets.config as unknown as AppConfig;
       }
-    }
-
-    // MCP / Agent / API routes are migrated separately from the legacy single
-    // provider selector. The migration never injects an image fallback route.
-    const normalizedGenerationRoutes = normalizeGenerationConnectionSettings(
-      normalizedConfig.generationConnectionSettings,
-      normalizedConfig,
-    );
-    normalizedConfig = {
-      ...normalizedConfig,
-      generationConnectionSettings: normalizedGenerationRoutes.settings,
-    };
-    if (normalizedGenerationRoutes.changed) {
-      console.log('[Config] generation connection settings migrated to manual-only routes');
-    }
-
-    const normalizedMcpProfiles = normalizeMcpConnectionProfiles(
-      normalizedConfig.mcpConnectionProfiles,
-    );
-    normalizedConfig = {
-      ...normalizedConfig,
-      mcpConnectionProfiles: normalizedMcpProfiles.profiles,
-    };
-    if (normalizedMcpProfiles.changed) {
-      console.warn('[Config] invalid MCP public profile metadata was rejected');
     }
 
     // 빈 문자열 제거 및 undefined 제거
@@ -880,7 +839,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         'savedNaverId', 'savedNaverPassword', 'savedLicenseUserId', 'savedLicensePassword',
         // ✅ [v2.10.53] 사용자 환경설정 — 부분 saveConfig로 인해 silent 손실 회귀 차단
         'customImageSavePath',
-        'primaryGeminiTextModel', 'defaultAiProvider', 'geminiPlanType', 'generationConnectionSettings', 'mcpConnectionProfiles',
+        'primaryGeminiTextModel', 'defaultAiProvider', 'geminiPlanType',
         'geminiApiKeys', 'geminiUseFreeQuotaBeforePaid',
         'perplexityModel', 'geminiModel', 'leonardoaiModel',
         // ✅ OpenAI 이미지 모델·품질·환율 — 부분 saveConfig로 인한 silent 손실 차단
@@ -992,7 +951,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'naverClientId', 'naverClientSecret',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
-          'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid', 'generationConnectionSettings', 'mcpConnectionProfiles',
+          'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
         ];
         let changed = false;
         for (const field of API_KEY_FIELDS) {

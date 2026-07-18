@@ -2,7 +2,7 @@
 // 소제목 이미지 생성 모듈 (Heading Image Generation)
 // modules/headingImageGen.ts
 // ============================================
-
+import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
  
 
 // --- Global declarations (exposed by renderer.ts via window) ---
@@ -235,6 +235,22 @@ export function initHeadingImageGeneration(): void {
           const existingImagePrompt = h.imagePrompt?.trim();
           const titleTrimmed = h.title?.trim();
           const isPromptDifferentFromTitle = existingImagePrompt && existingImagePrompt !== titleTrimmed;
+          const sectionContent = resolveSectionContentForImage({
+            heading: h,
+            headings: currentStructuredContent?.headings || headingsToGenerate,
+            bodyPlain: currentStructuredContent?.bodyPlain,
+            maxChars: 900,
+          });
+          const articleTitle = String(currentStructuredContent?.selectedTitle || currentStructuredContent?.title || '').trim();
+          const globalSubject = Array.isArray(currentStructuredContent?.keywords)
+            ? currentStructuredContent.keywords.join(', ')
+            : String(currentStructuredContent?.keywords || articleTitle).trim();
+          const articleContext = String(
+            currentStructuredContent?.introduction
+            || currentStructuredContent?.summary
+            || currentStructuredContent?.description
+            || ''
+          ).trim();
 
           let aiPrompt: string;
 
@@ -244,17 +260,21 @@ export function initHeadingImageGeneration(): void {
             console.log(`[HeadingImageGen] ✅ 영문 imagePrompt 재사용: "${h.title}" → "${aiPrompt.substring(0, 60)}..."`);
           } else if (isPromptDifferentFromTitle && /[가-힣]/.test(existingImagePrompt)) {
             // Case 2: 한국어 imagePrompt 존재 → imagePrompt를 context로 전달하여 번역+활용
-            const contextForTranslation = `${existingImagePrompt}. ${(h.content || '').substring(0, 200)}`;
-            aiPrompt = await generateEnglishPromptForHeading(h.title || '', undefined, undefined, contextForTranslation);
+            const contextForTranslation = `${existingImagePrompt}. ${sectionContent}`;
+            aiPrompt = await generateEnglishPromptForHeading(h.title || '', globalSubject, undefined, contextForTranslation);
             console.log(`[HeadingImageGen] 🔄 한국어 imagePrompt 번역: "${existingImagePrompt.substring(0, 30)}" → "${aiPrompt.substring(0, 60)}..."`);
           } else {
             // Case 3: imagePrompt 없음/소제목과 동일 → 본문 맥락으로 추론 (옵션 B)
-            aiPrompt = await generateEnglishPromptForHeading(h.title || '', undefined, undefined, h.content);
+            aiPrompt = await generateEnglishPromptForHeading(h.title || '', globalSubject, undefined, sectionContent);
           }
           return {
             heading: h.title,
             prompt: aiPrompt,
             englishPrompt: aiPrompt, // ✅ DeepInfra용
+            articleTitle,
+            globalSubject,
+            articleContext,
+            sectionContent,
             referenceImagePath: h.referenceImagePath, // ✅ 참조 이미지 경로 전달
             referenceImageUrl: h.referenceImageUrl,   // ✅ 참조 이미지 URL 전달
           };
@@ -3338,7 +3358,12 @@ export async function autoAnalyzeHeadings(structuredContent: any): Promise<void>
       const batchResults = await Promise.all(batch.map(async (section: any) => {
         const title = section.title;
         const override = getManualEnglishPromptOverrideForHeading(title);
-        const prompt = override || await generateEnglishPromptForHeading(title);
+        const prompt = override || await generateEnglishPromptForHeading(
+          title,
+          structuredContent.keywords,
+          undefined,
+          section.content,
+        );
         return {
           title,
           content: section.content,

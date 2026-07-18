@@ -6,6 +6,7 @@ import type {
   MonitoredPublication,
   PublicationState,
 } from './types';
+import { isAutomaticPublicationPauseReason } from './publicationStateStore.js';
 
 export interface ExposureMonitorResult {
   publication: MonitoredPublication;
@@ -134,12 +135,15 @@ function applyConfirmedMissing(
 
   if (nextStreak < 2) return nextState;
 
+  const advisoryAt = Number.isFinite(now.getTime()) ? now.toISOString() : new Date().toISOString();
+  const explicitlyPaused = state.status === 'PAUSED';
   return {
     ...nextState,
-    status: 'PAUSED',
-    pause_reason: state.pause_reason ?? 'TWO_CONSECUTIVE_CONFIRMED_MISSING',
-    paused_at: state.paused_at
-      ?? (Number.isFinite(now.getTime()) ? now.toISOString() : undefined),
+    status: explicitlyPaused ? 'PAUSED' : 'ACTIVE',
+    last_advisory_reason: 'TWO_CONSECUTIVE_CONFIRMED_MISSING',
+    last_advisory_at: advisoryAt,
+    pause_reason: explicitlyPaused ? state.pause_reason : undefined,
+    paused_at: explicitlyPaused ? state.paused_at : undefined,
   };
 }
 
@@ -179,7 +183,17 @@ export function applyExposureChecks(
 
   let nextState = cloneState(state);
   if (nextStatus === 'INDEXED') {
-    nextState = { ...nextState, confirmed_missing_streak: 0 };
+    const incidentArticleId = nextState.pause_incident?.article_id;
+    const incidentMatches = !incidentArticleId || incidentArticleId === publication.article_id;
+    const clearExposureAdvisory = incidentMatches
+      && isAutomaticPublicationPauseReason(nextState.last_advisory_reason);
+    nextState = {
+      ...nextState,
+      confirmed_missing_streak: 0,
+      last_advisory_reason: clearExposureAdvisory ? undefined : nextState.last_advisory_reason,
+      last_advisory_at: clearExposureAdvisory ? undefined : nextState.last_advisory_at,
+      pause_incident: clearExposureAdvisory ? undefined : nextState.pause_incident,
+    };
   } else if (nextStatus === 'MISSING_CONFIRMED') {
     nextState = applyConfirmedMissing(publication, nextState, now);
   }

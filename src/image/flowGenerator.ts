@@ -25,6 +25,7 @@ import { trackApiUsage } from '../apiUsageTracker.js';
 import { probeDuplicate, commitHashes, applyDiversityHint } from './imageHashUtils.js';
 import { injectUniqueSalt, injectHeadingVariation, simplifyFlowPrompt, softenSensitiveScene } from './flowPromptInjection.js';
 import { hasUsableEnglishPrompt } from './promptSafety.js';
+import { isContextualImagePrompt } from './contextualImagePrompt.js';
 import {
     FLOW_RESULT_WAIT_TIMEOUT_MS,
     extractCorrelatedFlowImageId as extractFlowImageId,
@@ -2004,8 +2005,16 @@ const FLOW_AHASH_THRESHOLD = 6;
 // deepinfra 경로엔 이미 있던 가드(hasUsableEnglishPrompt)를 Flow에도 적용 — 앱 정책상 Flow에도 영어 전송.
 // 번역기는 deepinfra에 있으므로 lazy dynamic import로 무거운 의존성 로드를 회피한다.
 async function resolveEnglishBasePrompt(item: ImageRequestItem): Promise<string> {
+    if (isContextualImagePrompt(item.prompt)) {
+        const sourceEnglishPrompt = hasUsableEnglishPrompt(item.sourceEnglishPrompt)
+            ? String(item.sourceEnglishPrompt).trim()
+            : '';
+        return sourceEnglishPrompt && !item.prompt.includes(sourceEnglishPrompt)
+            ? `${item.prompt}\nSOURCE ENGLISH SCENE HINT: ${sourceEnglishPrompt}`
+            : item.prompt;
+    }
     if (hasUsableEnglishPrompt(item.englishPrompt)) return item.englishPrompt as string;
-    const source = String((item as any).heading || (item as any).prompt || '').trim();
+    const source = String((item as any).prompt || (item as any).heading || '').trim();
     if (source && /[가-힣]/.test(source)) {
         try {
             const { translateKoreanToEnglishWithAI } = await import('./deepinfraGenerator.js');

@@ -51,7 +51,7 @@ function misses(at: string): ExposureCheck[] {
 }
 
 describe('exposure monitoring persistence', () => {
-  it('pauses the same template on the first confirmed miss and all publishing on the second', async () => {
+  it('records confirmed exposure misses as advisories without pausing generation or publishing', async () => {
     const userDataPath = await tempDir();
     const recent = makeRecentPosts(20).map((post, index) => ({
       ...post,
@@ -101,8 +101,9 @@ describe('exposure monitoring persistence', () => {
       now: new Date('2026-07-12T01:00:00.000Z'),
     });
 
-    expect(second.state.status).toBe('PAUSED');
+    expect(second.state.status).toBe('ACTIVE');
     expect(second.state.confirmed_missing_streak).toBe(2);
+    expect(second.state.last_advisory_reason).toBe('TWO_CONSECUTIVE_CONFIRMED_MISSING');
     expect(second.state.pause_incident).toMatchObject({
       article_id: 'article-1',
       blog_id: 'test',
@@ -147,7 +148,7 @@ describe('exposure monitoring persistence', () => {
     expect(monitored.publication.exposure_status).toBe('INDEXED');
   });
 
-  it('pauses publishing when the audit log is corrupt', async () => {
+  it('records an advisory without pausing when the audit log is corrupt', async () => {
     const userDataPath = await tempDir();
     const recent = makeRecentPosts(20).map((post, index) => ({
       ...post,
@@ -175,7 +176,8 @@ describe('exposure monitoring persistence', () => {
     })).rejects.toThrow(/AUDIT_LOG_CORRUPT_LINE/);
 
     const state = await stateStore.load();
-    expect(state.status).toBe('PAUSED');
-    expect(state.pause_reason).toBe('EXPOSURE_AUDIT_LOG_CORRUPT');
+    expect(state.status).toBe('ACTIVE');
+    expect(state.pause_reason).toBeUndefined();
+    expect(state.last_advisory_reason).toBe('EXPOSURE_AUDIT_LOG_CORRUPT');
   });
 });

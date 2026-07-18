@@ -59,6 +59,12 @@ describe('Tier 1 #1: exposurePoller 모듈 존재', () => {
     expect(src).toMatch(/try\s*\{/);
     expect(src).toMatch(/catch/);
   });
+
+  it('background exposure diagnostics never pause the whole application', () => {
+    const src = readSrc('src/analytics/exposurePoller.ts');
+    expect(src).not.toMatch(/\.pauseAll\s*\(/);
+    expect(src).toMatch(/\.recordAdvisory\s*\(/);
+  });
 });
 
 describe('Tier 1 main.ts wiring 보호', () => {

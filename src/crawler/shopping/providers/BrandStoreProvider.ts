@@ -20,9 +20,11 @@ import {
     collectAdditionalImageUrls,
     collectRepresentativeImageUrl,
     collectReviewImageUrls,
+    collectReviewTextCandidates,
     clickReviewTab,
     extractBrandProductInfo,
 } from './brandStore/brandStoreDom.js';
+import { selectDecisionUsefulReviewTexts } from '../utils/reviewTextSelection.js';
 
 // Puppeteer는 동적 import로 가져옴 (Electron 환경 호환)
 let puppeteer: typeof import('puppeteer');
@@ -287,9 +289,11 @@ export class BrandStoreProvider extends BaseProvider {
             const productImageCountBeforeReviews = allImages.filter(i => i.type !== 'review' && i.type !== 'detail').length;
             const shouldCollectReviews = options?.includeReviews === true
                 && (options.reviewFallbackWhenGalleryWeak !== true || productImageCountBeforeReviews <= 1);
+            const shouldCollectReviewTexts = options?.includeReviewTexts === true;
+            let visibleReviewTexts: string[] = [];
 
-            if (shouldCollectReviews) {
-                console.log('[BrandStore:Playwright] 📝 PHASE 2: 리뷰 이미지 수집...');
+            if (shouldCollectReviews || shouldCollectReviewTexts) {
+                console.log('[BrandStore:Playwright] 📝 PHASE 2: 리뷰 근거 수집...');
                 try {
                 // ✅ [v2.10.310] 리뷰 탭 회귀 패치 — "리뷰이벤트" 별도 페이지 링크 클릭 시 navigation
                 //   일어나 context 파괴되는 회귀 차단. MCP 실측: "리뷰이벤트" /review-event/list 페이지로 이동.
@@ -317,12 +321,19 @@ export class BrandStoreProvider extends BaseProvider {
                 });
                 await page.waitForTimeout(1500);
 
-                const reviewUrls: string[] = await page.evaluate(collectReviewImageUrls);
+                if (shouldCollectReviewTexts) {
+                    const reviewCandidates: string[] = await page.evaluate(collectReviewTextCandidates);
+                    visibleReviewTexts = selectDecisionUsefulReviewTexts(reviewCandidates);
+                }
+
+                const reviewUrls: string[] = shouldCollectReviews
+                    ? await page.evaluate(collectReviewImageUrls)
+                    : [];
 
                 for (const rawUrl of reviewUrls) {
                     addImg(rawUrl, 'review');
                 }
-                console.log(`[BrandStore:Playwright] ✅ PHASE 2 완료: 리뷰 이미지 ${reviewUrls.length}개`);
+                console.log(`[BrandStore:Playwright] ✅ PHASE 2 완료: 리뷰 이미지 ${reviewUrls.length}개 · 리뷰 문장 ${visibleReviewTexts.length}건`);
                 } catch (phase2Err) {
                     console.warn('[BrandStore:Playwright] ⚠️ PHASE 2 실패:', (phase2Err as Error).message);
                 }
@@ -354,6 +365,10 @@ export class BrandStoreProvider extends BaseProvider {
 
             // 제품 정보 추출
             const domProductInfo = await page.evaluate(extractBrandProductInfo) as ProductInfo;
+            const reviewTexts = selectDecisionUsefulReviewTexts([
+                ...jsonLdInfo.reviewTexts,
+                ...visibleReviewTexts,
+            ]);
             const productInfo: ProductInfo = {
                 ...domProductInfo,
                 name: jsonLdInfo.name || domProductInfo.name,
@@ -361,6 +376,9 @@ export class BrandStoreProvider extends BaseProvider {
                 description: jsonLdInfo.description || domProductInfo.description,
                 availability: jsonLdInfo.availability || domProductInfo.availability,
                 canonicalUrl: jsonLdInfo.canonicalUrl || domProductInfo.canonicalUrl,
+                ...(reviewTexts.length > 0 ? { reviewTexts } : {}),
+                ...(typeof jsonLdInfo.reviewCount === 'number' ? { reviewCount: jsonLdInfo.reviewCount } : {}),
+                ...(jsonLdInfo.rating ? { rating: String(jsonLdInfo.rating) } : {}),
             };
 
             await releasePage(page);

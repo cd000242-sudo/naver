@@ -25,6 +25,27 @@ afterEach(async () => {
 });
 
 describe('content policy operator service', () => {
+  it('resumes an integrity pause after operator review without exposure-only evidence', async () => {
+    const userDataPath = await tempDir();
+    await new PublicationStateStore(userDataPath).pauseAll(
+      'POLICY_POST_PUBLISH_RECORD_FAILED:disk repaired',
+      'integrity',
+    );
+
+    const resumed = await resumeContentPolicyPublishing(userDataPath, {
+      approvedBy: 'operator',
+      rootCauseReviewed: true,
+      manualTestVerified: false,
+    });
+
+    expect(resumed.status).toBe('ACTIVE');
+    expect(resumed.resume_approval).toMatchObject({
+      approved_by: 'operator',
+      root_cause_reviewed: true,
+      manual_test_verified: false,
+    });
+  });
+
   it('provides a dashboard and requires both resume confirmations', async () => {
     const userDataPath = await tempDir();
     const initial = await getContentPolicyDashboard(userDataPath);

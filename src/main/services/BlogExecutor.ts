@@ -868,14 +868,19 @@ export async function runFullPostCycle(
                 .find((post) => post.id === scheduledPost.id);
             await persistAppScheduledPostSafely(scheduledPost, {
                 save: saveScheduledPost,
-                reserve: () => recordContentPolicyReservation({
-                    userDataPath: app.getPath('userData'),
-                    articleId: schedulePolicy.articleId,
-                    accountId: accountId || account.naverId,
-                    payload: effectivePayload,
-                    policyResult: schedulePolicy.policyResult,
-                    scheduledAt: new Date(scheduledPost.scheduleDate.replace(' ', 'T')),
-                }),
+                reserve: async () => {
+                    const recordResult = await recordContentPolicyReservation({
+                        userDataPath: app.getPath('userData'),
+                        articleId: schedulePolicy.articleId,
+                        accountId: accountId || account.naverId,
+                        payload: effectivePayload,
+                        policyResult: schedulePolicy.policyResult,
+                        scheduledAt: new Date(scheduledPost.scheduleDate.replace(' ', 'T')),
+                    });
+                    if (recordResult.advisoryReasons.length > 0) {
+                        sendLog(`⚠️ 예약은 저장되었으며 내부 추적 경고가 있습니다: ${recordResult.advisoryReasons.join(', ')}`);
+                    }
+                },
                 rollback: previousScheduledPost
                     ? () => saveScheduledPost(previousScheduledPost)
                     : () => removeScheduledPost(scheduledPost.id),
@@ -941,13 +946,14 @@ export async function runFullPostCycle(
 
         if (result.success && preparedPolicy && effectivePayload.publishMode !== 'draft') {
             try {
+                let policyRecordResult;
                 if (effectivePayload.publishMode === 'schedule') {
                     const scheduledAt = resolveScheduledPublishAt(
                         effectivePayload.scheduleDate,
                         effectivePayload.scheduleTime,
                     );
                     if (!scheduledAt) throw new Error('POLICY_RESERVATION_DATE_INVALID');
-                    await recordContentPolicyReservation({
+                    policyRecordResult = await recordContentPolicyReservation({
                         userDataPath: app.getPath('userData'),
                         articleId: preparedPolicy.articleId,
                         accountId: accountId || account.naverId,
@@ -956,7 +962,7 @@ export async function runFullPostCycle(
                         scheduledAt: scheduledAt.date,
                     });
                 } else {
-                    await recordContentPolicyPublication({
+                    policyRecordResult = await recordContentPolicyPublication({
                         userDataPath: app.getPath('userData'),
                         articleId: preparedPolicy.articleId,
                         accountId: accountId || account.naverId,
@@ -965,12 +971,15 @@ export async function runFullPostCycle(
                         publishedUrl: result.url,
                     });
                 }
+                if (policyRecordResult.advisoryReasons.length > 0) {
+                    sendLog(`⚠️ 발행은 완료되었으며 내부 추적 경고가 있습니다: ${policyRecordResult.advisoryReasons.join(', ')}`);
+                }
             } catch (policyRecordError) {
                 const reason = `POLICY_POST_PUBLISH_RECORD_FAILED:${(policyRecordError as Error).message}`;
                 Logger.error('[BlogExecutor] 정책 발행 원장 기록 실패', policyRecordError as Error);
-                sendLog(`⚠️ ${reason} — 후속 자동발행을 일시 중지합니다.`);
+                sendLog(`⚠️ ${reason} — 중복 발행 방지를 위해 후속 자동발행을 일시 중지합니다.`);
                 try {
-                    await new PublicationStateStore(app.getPath('userData')).pauseAll(reason);
+                    await new PublicationStateStore(app.getPath('userData')).pauseAll(reason, 'integrity');
                 } catch (pauseError) {
                     Logger.error('[BlogExecutor] 정책 자동중지 저장 실패', pauseError as Error);
                 }

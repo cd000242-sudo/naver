@@ -990,7 +990,7 @@ describe('Content Quality V3 candidate runtime fingerprint', () => {
     expect(unresolvedEdges).toEqual([]);
     expect(missingRuntimeSources).toEqual([]);
     expect(CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS).toEqual(expectedRuntimeSources);
-  });
+  }, 30_000);
 
   it('fails closed on computed module loads while resolving static TypeScript module forms', async () => {
     const root = await createFixture({

@@ -21,6 +21,7 @@ import {
 } from './referenceImageLoader.js';
 // [SPEC-FREEZE-GUARD-001-P2 R4 / v2.10.263] Base64 디코딩 워커 분리 — gpt-image-2 b64_json 1.18MB+
 import { decodeBase64Async } from '../main/utils/base64Async.js';
+import { buildContextualImagePrompt } from './contextualImagePrompt.js';
 
 const OPENAI_IMAGES_API_URL = 'https://api.openai.com/v1/images/generations';
 // ✅ 모델은 사용자 선택(config.openaiImageModel). gpt-image-1.5 = 저비용 기본,
@@ -142,7 +143,21 @@ export async function generateWithOpenAIImage(
             console.log(`[OpenAI-Image] 🎨 이미지 스타일: ${imageStyle}`);
 
             // 프롬프트 구성
-            let prompt = item.englishPrompt || sanitizeImagePrompt(item.prompt || item.heading);
+            const legacyPrompt = item.englishPrompt || sanitizeImagePrompt(item.prompt || item.heading);
+            let prompt = buildContextualImagePrompt({
+                articleTitle: postTitle || item.articleTitle,
+                globalSubject: item.globalSubject || item.articleTitle || postTitle,
+                articleContext: item.articleContext,
+                sectionHeading: item.heading,
+                sectionContent: item.sectionContent,
+                existingPrompt: legacyPrompt,
+                allowText: item.allowText === true,
+                isThumbnail: item.isThumbnail === true,
+                isShoppingConnect,
+                // Promise identity preservation only when the reference was
+                // actually loaded into this OpenAI request.
+                hasReferenceImage: Boolean(cachedReferenceImage),
+            });
 
             // ✅ [v1.5.5] gpt-image-2는 한글 네이티브 지원 — 한글 제거 제거
             //   이전: gpt-image-1은 영어 프롬프트 최적이라 한글 제거 필요

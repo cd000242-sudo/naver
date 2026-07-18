@@ -86,6 +86,14 @@ function loadFailureReason(result: RecentPostsLoadResult): string {
     : 'BLOCK_RECENT_POSTS_UNAVAILABLE';
 }
 
+function isAdvisoryGenerationReason(reason: string): boolean {
+  return reason.startsWith('ADVISORY_');
+}
+
+function backgroundPolicyAdvisory(reason: string): string {
+  return `ADVISORY_BACKGROUND_POLICY:${reason}`;
+}
+
 export function buildRecentPostsGenerationPrompt(input: ContentPolicyInput): string {
   const posts = input.recent_posts || [];
   if (posts.length === 0) return '';
@@ -161,6 +169,9 @@ export async function prepareGenerationPolicyContext(
       env: options.env,
     });
     operationalReasons.push(...availability.reasons);
+    if (state.last_advisory_reason) {
+      operationalReasons.push(backgroundPolicyAdvisory(state.last_advisory_reason));
+    }
   } catch {
     operationalReasons.push('BLOCK_PUBLICATION_STATE_UNAVAILABLE');
   }
@@ -181,8 +192,9 @@ export async function prepareGenerationPolicyContext(
 
   if (!recentPostsResult.ok) {
     const reasons = [...new Set([...operationalReasons, loadFailureReason(recentPostsResult)])];
+    const decisionReasons = reasons.filter((reason) => !isAdvisoryGenerationReason(reason));
     return {
-      allowed: isOnlyRecentPostManualReviewReasons(reasons),
+      allowed: isOnlyRecentPostManualReviewReasons(decisionReasons),
       reasons,
       manualReviewRequired: true,
       input: cloneInput(baseInput),
@@ -208,7 +220,7 @@ export async function prepareGenerationPolicyContext(
   // but must not spend the caller's work by terminating generation before the
   // selected connector gets a chance to run. Technical generation failures are
   // still handled by the connector/output contract after a request is made.
-  const generationAllowed = operationalReasons.length === 0;
+  const generationAllowed = operationalReasons.every(isAdvisoryGenerationReason);
 
   return {
     allowed: generationAllowed,

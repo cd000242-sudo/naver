@@ -6,6 +6,25 @@ import type { PublicationHistoryEntry, PublicationState } from './types.js';
 
 const STATE_FILE_NAME = 'content-policy-publication-state.json';
 
+const LEGACY_AUTOMATIC_PAUSE_REASONS: ReadonlySet<string> = new Set([
+  'EXPOSURE_TARGET_METADATA_UNAVAILABLE',
+  'EXPOSURE_TARGET_METADATA_INCOMPLETE',
+  'EXPOSURE_MONITOR_FAILURE',
+  'EXPOSURE_RECENT_POSTS_UNAVAILABLE',
+  'EXPOSURE_RECENT_POSTS_CORRUPT',
+  'EXPOSURE_ARTICLE_METADATA_UNAVAILABLE',
+  'EXPOSURE_PUBLICATION_HISTORY_UNAVAILABLE',
+  'EXPOSURE_AUDIT_LOG_CORRUPT',
+  'EXPOSURE_AUDIT_UNAVAILABLE',
+  'EXPOSURE_MONITOR_PERSISTENCE_FAILURE',
+  'TWO_CONSECUTIVE_CONFIRMED_MISSING',
+]);
+
+export function isAutomaticPublicationPauseReason(reason: string | undefined): boolean {
+  const normalized = String(reason || '').trim().toUpperCase();
+  return LEGACY_AUTOMATIC_PAUSE_REASONS.has(normalized);
+}
+
 function initialState(): PublicationState {
   return {
     status: 'ACTIVE',
@@ -38,13 +57,27 @@ export class PublicationStateStore {
   private async loadUnlocked(): Promise<PublicationState> {
     try {
       const parsed = JSON.parse(await fs.readFile(this.filePath, 'utf8')) as Partial<PublicationState>;
-      return {
+      const loaded: PublicationState = {
         ...initialState(),
         ...parsed,
         paused_templates: Array.isArray(parsed.paused_templates) ? [...parsed.paused_templates] : [],
         paused_structures: Array.isArray(parsed.paused_structures) ? [...parsed.paused_structures] : [],
         history: Array.isArray(parsed.history) ? [...parsed.history] : [],
       };
+      if (loaded.status === 'PAUSED'
+        && !loaded.pause_origin
+        && isAutomaticPublicationPauseReason(loaded.pause_reason)) {
+        return {
+          ...loaded,
+          status: 'ACTIVE',
+          last_advisory_reason: loaded.pause_reason,
+          last_advisory_at: loaded.paused_at || new Date().toISOString(),
+          pause_reason: undefined,
+          paused_at: undefined,
+          pause_origin: undefined,
+        };
+      }
+      return loaded;
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') return initialState();
       throw new Error(`PUBLICATION_STATE_CORRUPT:${(error as Error).message}`);
@@ -75,15 +108,26 @@ export class PublicationStateStore {
     }
   }
 
-  async pauseAll(reason: string): Promise<PublicationState> {
+  async pauseAll(reason: string, origin: 'operator' | 'integrity' = 'operator'): Promise<PublicationState> {
     return this.update((state) => ({
       ...state,
       status: 'PAUSED',
       pause_reason: reason.trim() || 'operator pause',
       paused_at: new Date().toISOString(),
+      pause_origin: origin,
       pause_incident: undefined,
       resume_approval: undefined,
       manual_test_evidence: undefined,
+    }));
+  }
+
+  async recordAdvisory(reason: string, at = new Date()): Promise<PublicationState> {
+    const normalizedReason = reason.trim().slice(0, 500) || 'AUTOMATIC_POLICY_DIAGNOSTIC';
+    const advisoryAt = Number.isFinite(at.getTime()) ? at.toISOString() : new Date().toISOString();
+    return this.update((state) => ({
+      ...state,
+      last_advisory_reason: normalizedReason,
+      last_advisory_at: advisoryAt,
     }));
   }
 
@@ -93,17 +137,23 @@ export class PublicationStateStore {
     manualTestVerified: boolean;
   }): Promise<PublicationState> {
     if (!input.rootCauseReviewed) throw new Error('ROOT_CAUSE_REVIEW_REQUIRED');
-    if (!input.manualTestVerified) throw new Error('MANUAL_TEST_REQUIRED');
     if (!input.approvedBy.trim()) throw new Error('RESUME_APPROVER_REQUIRED');
     return this.update((state) => {
       if (state.status !== 'PAUSED') throw new Error('PUBLICATION_NOT_PAUSED');
-      if (!state.manual_test_evidence?.passed) throw new Error('MANUAL_TEST_EVIDENCE_REQUIRED');
+      const requiresExposureEvidence = state.pause_origin !== 'integrity';
+      if (requiresExposureEvidence && !input.manualTestVerified) {
+        throw new Error('MANUAL_TEST_REQUIRED');
+      }
+      if (requiresExposureEvidence && !state.manual_test_evidence?.passed) {
+        throw new Error('MANUAL_TEST_EVIDENCE_REQUIRED');
+      }
       const now = new Date().toISOString();
       return {
         ...state,
         status: 'ACTIVE',
         pause_reason: undefined,
         paused_at: undefined,
+        pause_origin: undefined,
         pause_incident: undefined,
         paused_templates: [],
         paused_structures: [],
@@ -112,8 +162,8 @@ export class PublicationStateStore {
           approved_by: input.approvedBy.trim(),
           approved_at: now,
           root_cause_reviewed: true,
-          manual_test_verified: true,
-          manual_test_article_id: state.manual_test_evidence.article_id,
+          manual_test_verified: input.manualTestVerified,
+          manual_test_article_id: state.manual_test_evidence?.article_id,
         },
         manual_test_evidence: undefined,
       };

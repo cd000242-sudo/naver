@@ -53,7 +53,7 @@ export async function ensureAgentEngineReady(generator: string): Promise<boolean
     const reason = unavailableReason(provider, status);
     const providerLabel = provider === 'codex' ? 'Codex' : 'Claude';
     const action = status?.errorCode === 'provider_disabled'
-      ? '다른 연결 방식(MCP, 에이전트 또는 API 키)을 직접 선택해주세요.'
+      ? '다른 연결 방식(에이전트 또는 API 키)을 직접 선택해주세요.'
       : status?.errorCode === 'subscription_inactive'
       ? `${providerLabel} 구독을 갱신한 뒤 환경설정에서 계정을 다시 로그인해주세요.`
       : !status?.installed

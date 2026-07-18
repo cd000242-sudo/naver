@@ -95,6 +95,28 @@ describe('affiliate pipeline grounding', () => {
     expect(prompt).not.toContain('SPEC_ONLY — 제품 정보 기반 구매 동행');
   });
 
+  it('실제 구매자 후기가 있으면 검색 의도·문제 해결 계약을 최종 프롬프트에 연결한다', () => {
+    const prompt = buildModeBasedPrompt({
+      sourceType: 'custom_text',
+      rawText: '상품명: 하츠 티오람미니 HMF-J300\n가격: 159,000원',
+      title: '하츠 티오람미니 HMF-J300',
+      contentMode: 'affiliate',
+      articleType: 'shopping_review',
+      isReviewType: true,
+      toneStyle: 'expert_review',
+      productReviews: [
+        '기존 환풍기 자리가 작아서 천장 타공을 넓히는 과정이 조금 힘들었어요.',
+        '씻기 10분 전에 켜두니 욕실 한기가 덜했고 사용 후 물기도 빨리 말랐습니다.',
+      ],
+    }, 'affiliate', undefined, 1800);
+
+    expect(prompt).toContain('REVIEW SEARCH INTENT');
+    expect(prompt).toContain('천장 타공을 넓히는 과정');
+    expect(prompt).toContain('10분 전에 켜두니');
+    expect(prompt).toContain('반복되는 불편');
+    expect(prompt).not.toContain('[구매 전 제품 분석 가이드]');
+  });
+
   it('실사용 근거 없는 쇼핑 제목의 체험 표현을 치명 이슈로 잡는다', () => {
     const source = {
       sourceType: 'custom_text' as const,

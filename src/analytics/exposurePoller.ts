@@ -67,12 +67,12 @@ export async function runExposurePollOnce(userDataPath: string): Promise<{
         }));
 
       if (batchInput.length === 0) {
-        await new PublicationStateStore(userDataPath).pauseAll('EXPOSURE_TARGET_METADATA_UNAVAILABLE');
+        await new PublicationStateStore(userDataPath).recordAdvisory('EXPOSURE_TARGET_METADATA_UNAVAILABLE');
         summary.push({ checkpoint: hoursAfter, candidates: due.length, recorded: 0 });
         continue;
       }
       if (batchInput.length !== due.length) {
-        await new PublicationStateStore(userDataPath).pauseAll('EXPOSURE_TARGET_METADATA_INCOMPLETE');
+        await new PublicationStateStore(userDataPath).recordAdvisory('EXPOSURE_TARGET_METADATA_INCOMPLETE');
       }
 
       const results = await checkBatchExposure(batchInput);
@@ -114,7 +114,7 @@ export async function runExposurePollOnce(userDataPath: string): Promise<{
           recorded++;
         } catch (error) {
           console.warn(`[ExposurePoller] post ${r.id} monitoring failed:`, (error as Error).message);
-          await new PublicationStateStore(userDataPath).pauseAll('EXPOSURE_MONITOR_FAILURE');
+          await new PublicationStateStore(userDataPath).recordAdvisory('EXPOSURE_MONITOR_FAILURE');
         }
       }
       summary.push({ checkpoint: hoursAfter, candidates: batchInput.length, recorded });

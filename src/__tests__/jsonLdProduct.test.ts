@@ -59,7 +59,7 @@ describe('parseProductJsonLd', () => {
       })),
     });
     const info = parseProductJsonLd([many]);
-    expect(info.reviewTexts.length).toBeLessThanOrEqual(5);
+    expect(info.reviewTexts.length).toBeLessThanOrEqual(8);
     expect(new Set(info.reviewTexts).size).toBe(info.reviewTexts.length);
   });
 
@@ -97,7 +97,7 @@ describe('쇼핑커넥트 풀스펙 배선 가드 (dead-wiring 방지)', () => {
     const path = await import('path');
     const src = fs.readFileSync(path.join(process.cwd(), 'src', 'crawler', 'productSpecCrawler.ts'), 'utf-8');
     expect(src).toContain('parseProductJsonLd');
-    expect(src).toContain('reviewTexts: jsonLdInfo.reviewTexts');
+    expect(src).toContain('reviewTexts: collectedReviewTexts');
   });
 
   it('assembleContentSource 쇼핑 분기가 productReviews/Spec/Price를 source에 배선한다', async () => {

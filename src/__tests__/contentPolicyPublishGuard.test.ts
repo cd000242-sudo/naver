@@ -65,6 +65,21 @@ describe('PublishGuard', () => {
     });
   });
 
+  it('keeps template and structure exposure diagnostics advisory', () => {
+    expect(partitionPublishGuardReasons([
+      'BLOCK_TEMPLATE_PAUSED',
+      'BLOCK_STRUCTURE_PAUSED',
+      'BLOCK_CONSECUTIVE_PATTERN',
+    ])).toEqual({
+      blockingReasons: [],
+      advisoryReasons: [
+        'BLOCK_TEMPLATE_PAUSED',
+        'BLOCK_STRUCTURE_PAUSED',
+        'BLOCK_CONSECUTIVE_PATTERN',
+      ],
+    });
+  });
+
   it('blocks a consecutive template, structure, or angle', async () => {
     const state = createInitialPublicationState();
     state.history = [{

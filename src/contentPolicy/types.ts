@@ -256,8 +256,8 @@ export interface ContentPolicyConfig {
     allowed_statuses: ExposureStatus[];
     minimum_cross_checks: number;
     single_third_party_result_is_not_final: boolean;
-    on_first_confirmed_missing: 'PAUSE_SAME_TEMPLATE';
-    on_two_consecutive_confirmed_missing: 'PAUSE_ALL';
+    on_first_confirmed_missing: 'ADVISORY_SAME_TEMPLATE';
+    on_two_consecutive_confirmed_missing: 'ADVISORY_ALL';
     auto_delete_on_missing: boolean;
     auto_republish_on_missing: boolean;
     require_root_cause_analysis: boolean;
@@ -302,6 +302,10 @@ export interface PublicationState {
   status: PublicationRunState;
   pause_reason?: string;
   paused_at?: string;
+  pause_origin?: 'operator' | 'integrity';
+  /** Latest non-blocking background policy/monitor diagnostic. */
+  last_advisory_reason?: string;
+  last_advisory_at?: string;
   pause_incident?: {
     article_id: string;
     blog_id?: string;

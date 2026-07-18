@@ -278,15 +278,18 @@ export function evaluateResumeApproval(
   config: ContentPolicyConfig,
 ): ResumeGateResult {
   const reasons: ResumeBlockReason[] = [];
+  const requiresExposureEvidence = state.pause_origin !== 'integrity';
   if (state.status !== 'PAUSED') reasons.push('PUBLICATION_NOT_PAUSED');
   if (!approval.approvedBy.trim()) reasons.push('RESUME_APPROVER_REQUIRED');
   if (config.monitoring.require_root_cause_analysis && !approval.rootCauseReviewed) {
     reasons.push('ROOT_CAUSE_REVIEW_REQUIRED');
   }
-  if (config.monitoring.require_manual_test_before_resume && !approval.manualTestVerified) {
+  if (requiresExposureEvidence
+    && config.monitoring.require_manual_test_before_resume
+    && !approval.manualTestVerified) {
     reasons.push('MANUAL_TEST_REQUIRED');
   }
-  if (config.monitoring.require_manual_test_before_resume) {
+  if (requiresExposureEvidence && config.monitoring.require_manual_test_before_resume) {
     const evidence = state.manual_test_evidence;
     const pausedAt = Date.parse(state.paused_at || '');
     const verifiedAt = Date.parse(evidence?.verified_at || '');
@@ -320,6 +323,7 @@ export function resumePublicationState(
     status: 'ACTIVE',
     pause_reason: undefined,
     paused_at: undefined,
+    pause_origin: undefined,
     pause_incident: undefined,
     paused_templates: [],
     paused_structures: [],

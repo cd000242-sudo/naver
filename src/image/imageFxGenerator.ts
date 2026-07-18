@@ -27,6 +27,7 @@ import { getRecoveryCoordinator } from './recovery/index.js';
 import type { RecoveryDecision } from './recovery/index.js';
 // ✅ [v2.10.298] 일별 카운터 — HTTP 429를 봇감지 vs 진짜 한도로 구분
 import { incrementDailySuccess, classifyQuotaError, getDailySuccess } from '../utils/imageEngineDailyCounter.js';
+import { isContextualImagePrompt } from './contextualImagePrompt.js';
 
 // ✅ 실시간 로그 → 렌더러 UI 전송
 function sendImageLog(message: string): void {
@@ -377,6 +378,7 @@ const ASPECT_RATIO_MAP: Record<string, string> = {
  */
 function sanitizeImagePrompt(prompt: string): string {
   let cleaned = prompt;
+  const maxChars = isContextualImagePrompt(prompt) ? 1_800 : 200;
 
   // ── 1. AI 자기 소개 / 역할 선언 제거 ──
   cleaned = cleaned
@@ -440,11 +442,12 @@ function sanitizeImagePrompt(prompt: string): string {
     .trim();
 
   // ── 7. 200자 초과 시 트렁케이션 (마지막 완전한 구절에서 자름) ──
-  if (cleaned.length > 200) {
-    const truncated = cleaned.substring(0, 200);
+  if (cleaned.length > maxChars) {
+    const truncated = cleaned.substring(0, maxChars);
     const lastComma = truncated.lastIndexOf(',');
     const lastSpace = truncated.lastIndexOf(' ');
-    const cutAt = lastComma > 150 ? lastComma : (lastSpace > 150 ? lastSpace : 200);
+    const safeBoundary = Math.max(0, maxChars - 50);
+    const cutAt = lastComma > safeBoundary ? lastComma : (lastSpace > safeBoundary ? lastSpace : maxChars);
     cleaned = truncated.substring(0, cutAt).trim();
   }
 

@@ -69,6 +69,7 @@ function buildCacheKey(url: string, opts: CollectionOptions): string {
     const policy = [
         `details=${opts.includeDetails === true ? 1 : 0}`,
         `reviews=${opts.includeReviews === true ? 1 : 0}`,
+        `reviewTexts=${opts.includeReviewTexts === true ? 1 : 0}`,
         `reviewFallback=${opts.reviewFallbackWhenGalleryWeak === true ? 1 : 0}`,
         `max=${opts.maxImages || 30}`,
     ].join(';');
@@ -100,6 +101,7 @@ export async function collectShoppingImages(
         maxImages: 30,
         includeDetails: false,
         includeReviews: false,
+        includeReviewTexts: false,
         validateWithAI: false,  // AI 검증은 나중에 추가
         useCache: true,
         ...options,

@@ -19,6 +19,7 @@
 
 import { ImageRequestItem } from './types.js';
 import { sanitizeImagePrompt } from './imageUtils.js';
+import { isContextualImagePrompt } from './contextualImagePrompt.js';
 
 export interface PromptOptions {
     isThumbnail: boolean;
@@ -64,6 +65,22 @@ export class PromptBuilder {
         // 4. 상황별 프롬프트 분기
 
         // [Case A-1] ✅ 쇼핑커넥트 썸네일 (제품 이미지 유지 + 텍스트 오버레이)
+        // A contextual brief is already a complete provider-neutral scene contract.
+        // Keep its article and section evidence instead of replacing it with a
+        // generic shopping lifestyle template.
+        if (isContextualImagePrompt(basePrompt)) {
+            const isRealistic = !imageStyle || imageStyle === 'realistic';
+            const renderingStyle = isRealistic
+                ? 'Photorealistic editorial quality with physically plausible lighting and materials.'
+                : `Render in ${imageStyle} style. ${stylePrompt || ''}`.trim();
+            return [
+                basePrompt,
+                referenceStrictness,
+                referenceLock,
+                `RENDERING STYLE: ${renderingStyle}`,
+            ].filter(Boolean).join('\n');
+        }
+
         if (isThumbnail && postTitle && allowText && isShoppingConnect && options.hasCollectedImages) {
             return this.buildShoppingConnectThumbnailPrompt(basePrompt, postTitle, categoryStyle, referenceLock, imageStyle, stylePrompt);
         }

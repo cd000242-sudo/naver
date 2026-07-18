@@ -82,6 +82,65 @@ describe('RecentPostsRepository', () => {
 });
 
 describe('content policy persistence', () => {
+  it('migrates a legacy automatic pause to an active advisory state', async () => {
+    const store = new PublicationStateStore(await makeTempDir());
+    await store.save({
+      status: 'PAUSED',
+      pause_reason: 'EXPOSURE_AUDIT_LOG_CORRUPT',
+      paused_at: '2026-07-18T09:00:00.000Z',
+      paused_templates: [],
+      paused_structures: [],
+      confirmed_missing_streak: 0,
+      history: [],
+    });
+
+    const state = await store.load();
+
+    expect(state.status).toBe('ACTIVE');
+    expect(state.pause_reason).toBeUndefined();
+    expect(state.last_advisory_reason).toBe('EXPOSURE_AUDIT_LOG_CORRUPT');
+    expect(state.last_advisory_at).toBe('2026-07-18T09:00:00.000Z');
+  });
+
+  it('keeps an explicit operator pause as a hard pause', async () => {
+    const store = new PublicationStateStore(await makeTempDir());
+    await store.pauseAll('operator pause');
+
+    const state = await store.load();
+
+    expect(state.status).toBe('PAUSED');
+    expect(state.pause_reason).toBe('operator pause');
+  });
+
+  it('does not migrate an explicit operator pause even when its text resembles an automatic code', async () => {
+    const store = new PublicationStateStore(await makeTempDir());
+    await store.pauseAll('EXPOSURE_OPERATOR_REQUEST');
+
+    const state = await store.load();
+
+    expect(state.status).toBe('PAUSED');
+    expect(state.pause_origin).toBe('operator');
+    expect(state.pause_reason).toBe('EXPOSURE_OPERATOR_REQUEST');
+  });
+
+  it('keeps a legacy post-publish ledger failure paused', async () => {
+    const store = new PublicationStateStore(await makeTempDir());
+    await store.save({
+      status: 'PAUSED',
+      pause_reason: 'POLICY_POST_PUBLISH_RECORD_FAILED:disk full',
+      paused_at: '2026-07-18T09:00:00.000Z',
+      paused_templates: [],
+      paused_structures: [],
+      confirmed_missing_streak: 0,
+      history: [],
+    });
+
+    const state = await store.load();
+
+    expect(state.status).toBe('PAUSED');
+    expect(state.pause_reason).toContain('POLICY_POST_PUBLISH_RECORD_FAILED');
+  });
+
   it('writes append-only audit records and reads the newest entries', async () => {
     const dir = await makeTempDir();
     const store = new ContentPolicyAuditStore(dir);

@@ -6,6 +6,7 @@ import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext
 import {
     deduplicateReferenceImages,
 } from '../../image/referenceImagePolicy.js';
+import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
 import {
     createShoppingRepresentativeThumbnail,
     doShoppingAiBodySlotsMatch,
@@ -1076,6 +1077,10 @@ async function executeFullAutoFlow(formData) {
                                         heading: fullAutoTitle || '블로그 썸네일',
                                         prompt: thumbnailPrompt,
                                         englishPrompt: thumbnailPrompt,
+                                        articleTitle: fullAutoTitle,
+                                        globalSubject: String(formData.keywords || fullAutoTitle || '').trim(),
+                                        articleContext: String(structuredContent.introduction || structuredContent.summary || '').trim(),
+                                        sectionContent: String(structuredContent.introduction || '').trim(),
                                         isThumbnail: true,
                                         allowText: thumbnailAllowText,
                                     }],
@@ -1106,14 +1111,33 @@ async function executeFullAutoFlow(formData) {
                         : ((formData.thumbnailOnly === true || formData.headingImageMode === 'thumbnail-only')
                             ? []
                             : headings.map((heading, originalIndex) => ({ heading, originalIndex })));
+                    const fullAutoKeywordSource = Array.isArray(formData.keywords)
+                        ? formData.keywords.join(', ')
+                        : String(formData.keywords || structuredContent.keywords || '');
+                    const fullAutoArticleContext = String(
+                        structuredContent.introduction
+                        || structuredContent.summary
+                        || structuredContent.description
+                        || ''
+                    ).trim();
                     const fullAutoBodyItems = fullAutoBodySlots.map((slot) => {
                         const h = slot.heading;
                         const title = String(h.title || h.text || h.heading || (typeof h === 'string' ? h : '')).trim();
                         const prompt = String(h.imagePrompt || h.prompt || title || 'Abstract Image').trim();
+                        const sectionContent = resolveSectionContentForImage({
+                            heading: h,
+                            headings,
+                            bodyPlain: structuredContent.bodyPlain,
+                            maxChars: 900,
+                        });
                         return {
                             heading: title || 'Image',
                             prompt,
                             englishPrompt: prompt,
+                            articleTitle: fullAutoTitle,
+                            globalSubject: fullAutoKeywordSource.trim() || fullAutoTitle,
+                            articleContext: fullAutoArticleContext,
+                            sectionContent,
                             isThumbnail: false,
                             allowText: false,
                             originalIndex: slot.originalIndex,
@@ -1128,6 +1152,10 @@ async function executeFullAutoFlow(formData) {
                     const imageResult = await generateImagesWithCostSafety({
                         provider: currentProvider,
                         title: fullAutoTitle,
+                        postTitle: fullAutoTitle,
+                        articleTitle: fullAutoTitle,
+                        globalSubject: fullAutoKeywordSource.trim() || fullAutoTitle,
+                        articleContext: fullAutoArticleContext,
                         items: fullAutoBodyItems,
                         category: formData.category || formData.categoryName || '',
                         referenceImagePath,
@@ -2570,11 +2598,11 @@ async function generateImagesForContent(structuredContent, formData) {
             throw new Error('loadLocalFolderWithFallback 함수가 아직 로드되지 않았습니다');
         const lfResult = await loadLocalFolderWithFallback({
             headings,
-            postTitle: currentStructuredContent?.selectedTitle || formData.postTitle || '',
+            postTitle: structuredContent?.selectedTitle || formData.postTitle || '',
             onLog: (msg) => appendLog(msg),
             aiFallbackFn: async (provider, missingHeadings, title, opts) => {
                 formData.imageSource = provider;
-                return await generateAIImagesForHeadings(missingHeadings, formData);
+                return await generateAIImagesForHeadings(missingHeadings, formData, structuredContent);
             },
         });
         if (lfResult.images.length > 0) {
@@ -2609,7 +2637,7 @@ async function generateImagesForContent(structuredContent, formData) {
         updateFullAutoPreview(structuredContent);
     }
     let generatedImages = [];
-    generatedImages = await generateAIImagesForHeadings(headings, formData);
+    generatedImages = await generateAIImagesForHeadings(headings, formData, structuredContent);
     if (!Array.isArray(generatedImages) || generatedImages.length === 0) {
         throw new Error('이미지 생성 결과가 비어있습니다.');
     }
@@ -2657,7 +2685,7 @@ async function generateLibraryImagesForHeadings(headings, formData) {
     }
     return images;
 }
-async function generateAIImagesForHeadings(headings, formData) {
+async function generateAIImagesForHeadings(headings, formData, structuredContentSnapshot) {
     formData = createPipelineFormDataSnapshot('full-auto', formData || {});
     if (!headings || !Array.isArray(headings)) {
         console.warn('[AI Images] headings is undefined or not an array, failing image generation');
@@ -2693,6 +2721,32 @@ async function generateAIImagesForHeadings(headings, formData) {
     const imageStyle = formData.imageStyle;
     const imageRatio = formData.imageRatio;
     const imageFallbackPolicy = formData.imageFallbackPolicy;
+    const imageContent = structuredContentSnapshot || {};
+    const imageArticleTitle = String(
+        imageContent.selectedTitle || imageContent.title || formData.postTitle || formData.title || ''
+    ).trim();
+    const imageGlobalSubject = (
+        Array.isArray(formData.keywords)
+            ? formData.keywords.join(', ')
+            : String(formData.keywords || imageContent.keywords || '')
+    ).trim() || imageArticleTitle;
+    const imageArticleContext = String(
+        imageContent.introduction
+        || imageContent.summary
+        || imageContent.description
+        || ''
+    ).trim();
+    const imageBodyPlain = String(imageContent.bodyPlain || '');
+    const imagePostId = String(formData.postId || imageContent.postId || '').trim() || undefined;
+    const imageContextHeadings = Array.isArray(imageContent.headings)
+        ? imageContent.headings
+        : headings;
+    const resolveImageSectionContent = (heading) => resolveSectionContentForImage({
+        heading,
+        headings: imageContextHeadings,
+        bodyPlain: imageBodyPlain,
+        maxChars: 900,
+    });
     console.log(`[AI Images] 이미지 생성 시작 - 소스: ${imageSource}, 스타일: ${imageStyle}, 비율: ${imageRatio}, 폴백정책: ${imageFallbackPolicy}, 소제목 개수: ${headings.length}`);
     const sourceNames = {
         'local-folder': '📂 내 폴더 (로컬)',
@@ -2741,7 +2795,7 @@ async function generateAIImagesForHeadings(headings, formData) {
         console.log(`[AI Images] ✅ 쇼핑커넥트 모드: 대표 상품 원본을 썸네일로 보존 (텍스트 합성 없음)`);
     }
     let collectedImages = isShoppingConnect
-        ? (formData.collectedImages || currentStructuredContent?.collectedImages || currentStructuredContent?.images || [])
+        ? (formData.collectedImages || imageContent.collectedImages || imageContent.images || [])
         : [];
     collectedImages = deduplicateReferenceImages(collectedImages);
     const shoppingReference = resolveShoppingCollectedImagePlacement(collectedImages);
@@ -2815,13 +2869,13 @@ async function generateAIImagesForHeadings(headings, formData) {
     if (isShoppingConnect && representativeImageUrl) {
         dedicatedShopThumbnail = createShoppingRepresentativeThumbnail(
             representativeImageUrl,
-            currentStructuredContent?.selectedTitle || formData.postTitle || formData.title || '쇼핑 대표 썸네일',
+            imageArticleTitle || '쇼핑 대표 썸네일',
         );
         appendLog(`🛒 쇼핑커넥트: 대표 상품 이미지를 원본 그대로 썸네일로 사용합니다.`);
     }
     else if (!isShoppingConnect) {
         try {
-            let shopTitle = currentStructuredContent?.selectedTitle || formData.postTitle || formData.title || '';
+            let shopTitle = imageArticleTitle;
             if (/^https?:\/\//i.test(shopTitle.trim())) {
                 console.warn(`[FullAuto] ⚠️ shopTitle이 URL이므로 빈 문자열로 대체: "${shopTitle.substring(0, 60)}"`);
                 shopTitle = '';
@@ -2889,11 +2943,21 @@ async function generateAIImagesForHeadings(headings, formData) {
             const heading = headingSlot.heading;
             const headingTitle = heading.title || heading || `이미지 ${i + 1}`;
             appendLog(`🎨 [${i + 1}/${shoppingHeadingSlotsForBatch.length}] "${String(headingTitle).substring(0, 20)}" 프롬프트 준비 중...`);
-            const englishPrompt = await generateEnglishPromptForHeading(heading, formData.keywords, imageStyle);
+            const sectionContent = resolveImageSectionContent(heading);
+            const englishPrompt = await generateEnglishPromptForHeading(
+                heading,
+                formData.keywords,
+                imageStyle,
+                sectionContent,
+            );
             shoppingBatchItems.push({
                 heading: heading.title || headingTitle,
                 prompt: englishPrompt,
                 englishPrompt,
+                articleTitle: imageArticleTitle,
+                globalSubject: imageGlobalSubject,
+                articleContext: imageArticleContext,
+                sectionContent,
                 isThumbnail: false,
                 allowText: false,
                 imageStyle,
@@ -2909,8 +2973,8 @@ async function generateAIImagesForHeadings(headings, formData) {
         const shoppingBatchResult = await generateImagesWithCostSafety({
             provider: imageSource,
             items: shoppingBatchItems,
-            postTitle: currentStructuredContent?.selectedTitle,
-            postId: currentPostId || undefined,
+            postTitle: imageArticleTitle,
+            postId: imagePostId,
             isFullAuto: formData.mode === 'full-auto',
             longRunImageGeneration: true,
             isContinuousMode: !!isContinuousMode,
@@ -2960,7 +3024,13 @@ async function generateAIImagesForHeadings(headings, formData) {
             const useAiImageChecked = isShoppingConnect
                 ? formData.scSubImageMode === 'ai'
                 : (formData.useAiImage ?? true);
-            const englishPrompt = await generateEnglishPromptForHeading(heading, formData.keywords, imageStyle);
+            const sectionContent = resolveImageSectionContent(heading);
+            const englishPrompt = await generateEnglishPromptForHeading(
+                heading,
+                formData.keywords,
+                imageStyle,
+                sectionContent,
+            );
             console.log(`[AI Images] ${i + 1}/${headings.length} - 스타일: ${imageStyle}, 프롬프트: ${englishPrompt}`);
             console.log(`[AI Images] ${i + 1}번 소제목 - heading: "${heading.title}", isThumbnail: ${isThumbnail}, allowText: ${shouldIncludeText}, useAiImage: ${useAiImageChecked} (쇼핑커넥트: ${isShoppingConnect})`);
             let ref = {};
@@ -3004,14 +3074,18 @@ async function generateAIImagesForHeadings(headings, formData) {
                         heading: heading.title,
                         prompt: englishPrompt,
                         englishPrompt: englishPrompt,
+                        articleTitle: imageArticleTitle,
+                        globalSubject: imageGlobalSubject,
+                        articleContext: imageArticleContext,
+                        sectionContent,
                         isThumbnail: false,
                         allowText: false,
                         imageStyle: imageStyle,
                         imageRatio: globalSettings.subheadingRatio || imageRatio,
                         ...ref,
-                    }],
-                postTitle: currentStructuredContent?.selectedTitle,
-                postId: currentPostId || undefined,
+                }],
+                postTitle: imageArticleTitle,
+                postId: imagePostId,
                 isFullAuto: formData.mode === 'full-auto',
                 longRunImageGeneration: true,
                 isContinuousMode: !!isContinuousMode,

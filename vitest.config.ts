@@ -6,7 +6,10 @@ export default defineConfig({
     include: ['src/__tests__/**/*.test.ts'],
     environment: 'node',
     globals: false,
-    testTimeout: 10000,
+    // The runtime-closure and attestation suites traverse the complete
+    // production source graph. They finish well below this limit in isolation
+    // but can exceed 10s under the full parallel release gate on Windows.
+    testTimeout: 30_000,
     coverage: {
       provider: 'v8',
       include: [

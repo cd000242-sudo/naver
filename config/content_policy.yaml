@@ -87,8 +87,8 @@ monitoring:
   allowed_statuses: [PENDING_INDEX, INDEXED, MISSING_SUSPECT, MISSING_CONFIRMED, CHECK_ERROR]
   minimum_cross_checks: 2
   single_third_party_result_is_not_final: true
-  on_first_confirmed_missing: PAUSE_SAME_TEMPLATE
-  on_two_consecutive_confirmed_missing: PAUSE_ALL
+  on_first_confirmed_missing: ADVISORY_SAME_TEMPLATE
+  on_two_consecutive_confirmed_missing: ADVISORY_ALL
   auto_delete_on_missing: false
   auto_republish_on_missing: false
   require_root_cause_analysis: true

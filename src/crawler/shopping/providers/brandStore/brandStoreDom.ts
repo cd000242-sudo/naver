@@ -135,6 +135,48 @@ export function collectReviewImageUrls(): string[] {
     return results;
 }
 
+/** Visible buyer-review text candidates. Final noise filtering happens in Node. */
+export function collectReviewTextCandidates(): string[] {
+    const selectors = [
+        '[data-shp-area*="review"] li',
+        '[data-testid*="review"] li',
+        '[class*="review"] li',
+        '[class*="Review"] li',
+        '[class*="review"] article',
+        '[class*="Review"] article',
+    ];
+    const results: string[] = [];
+    const seen = new Set<string>();
+
+    for (const selector of selectors) {
+        try {
+            document.querySelectorAll(selector).forEach(node => {
+                const element = node as HTMLElement;
+                const style = window.getComputedStyle(element);
+                const rect = element.getBoundingClientRect();
+                if (
+                    element.hidden
+                    || element.getAttribute('aria-hidden') === 'true'
+                    || style.display === 'none'
+                    || style.visibility === 'hidden'
+                    || Number(style.opacity || '1') === 0
+                    || rect.width <= 0
+                    || rect.height <= 0
+                ) return;
+                const text = (node.textContent || '').replace(/\s+/g, ' ').trim();
+                if (text.length < 12 || text.length > 1_200) return;
+                if (/판매자\s*답글|리뷰이벤트|리뷰포인트|리뷰적립/.test(text)) return;
+                const key = text.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '');
+                if (!key || seen.has(key)) return;
+                seen.add(key);
+                results.push(text);
+            });
+        } catch { /* continue with stable selector fallbacks */ }
+    }
+
+    return results.slice(0, 40);
+}
+
 /**
  * PHASE 2 리뷰 탭을 찾아 클릭.
  * ✅ [v2.10.310] "리뷰이벤트" 별도 페이지 링크 클릭 시 navigation으로 context
@@ -148,10 +190,11 @@ export function clickReviewTab(): { clicked: boolean; label?: string } {
         // 정확히 "리뷰" 또는 "리뷰 (N)" 또는 "리뷰 N건" 패턴만. "리뷰이벤트"/"리뷰포인트" 제외.
         const isReviewLabel = /^리뷰(\s*\(|\s*\d|$)/.test(text) && !/리뷰이벤트|리뷰포인트|리뷰적립/.test(text);
         if (!isReviewLabel) return false;
-        // navigation 일으키는 <a href="...review-event..."> 류 제외
+        // This helper is used mid-crawl. Never follow an anchor route because
+        // navigation would destroy the product/gallery state needed afterward.
         if (t.tagName === 'A') {
-            const href = t.getAttribute('href') || '';
-            if (href.includes('review-event') || href.includes('review-point') || /^https?:\/\//.test(href)) {
+            const href = (t.getAttribute('href') || '').trim();
+            if (href && href !== '#' && !href.startsWith('#')) {
                 return false;
             }
         }

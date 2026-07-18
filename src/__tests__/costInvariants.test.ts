@@ -219,13 +219,13 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
     });
 
     it('keeps structural retries bounded while agent drafts default to one paid call', () => {
-      expect(content).toMatch(/const\s+isSingleSubmissionConnector\s*=\s*isAgentProvider\s*\|\|\s*provider\s*===\s*'mcp'/);
+      expect(content).toMatch(/const\s+isSingleSubmissionConnector\s*=\s*isAgentProvider/);
       expect(content).toMatch(/const\s+baseMaxAttempts\s*=\s*isSingleSubmissionConnector[\s\S]{0,180}?Math\.max\(openAiContentMaxAttempts,\s*costPolicy\.maxAttempts\)/);
       expect(content).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\|\|\s*isSingleSubmissionConnector\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*0\)/);
       expect(content).toMatch(/const\s+promptRepairMinAttempts\s*=\s*0/);
       expect(content).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*0/);
       expect(content).toMatch(/const\s+configuredMaxAttempts\s*=\s*Math\.max\(\s*baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts,?\s*\)/);
-      expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\|\|\s*provider\s*===\s*'mcp'\s*\|\|\s*!allowAutomaticProviderRetry\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
+      expect(content).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\|\|\s*!allowAutomaticProviderRetry\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
       expect(failurePolicy).toMatch(/SAME_ENGINE_RECOVERY/);
     });
 

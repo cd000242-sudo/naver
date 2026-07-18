@@ -6,6 +6,12 @@
 // ============================================
 
 import { rememberPlan, recallPlan } from '../utils/geminiPlanMemo.js';
+import {
+  compactImageContextText,
+  enrichImageItemsWithArticleContext,
+  resolveSectionContentForImage,
+  shouldUseStructuredImageContext,
+} from '../../image/contextualImagePrompt.js';
 
 // 전역 스코프 의존성
 declare let generatedImages: any[];
@@ -61,6 +67,108 @@ const SLOW_IMAGE_PROVIDERS = new Set([
 ]);
 let imageGenerationQueue: Promise<void> = Promise.resolve();
 let lastImageGenerationFinishedAt = 0;
+
+function readCurrentStructuredContentSafely(): any {
+  try {
+    return currentStructuredContent || (window as any)?.currentStructuredContent || null;
+  } catch {
+    return null;
+  }
+}
+
+function readCurrentPostIdSafely(): string {
+  try {
+    return String(currentPostId || '').trim();
+  } catch {
+    return '';
+  }
+}
+
+function stringifyImageKeywords(value: unknown): string {
+  return Array.isArray(value)
+    ? value.map((entry) => String(entry || '').trim()).filter(Boolean).join(', ')
+    : String(value || '').trim();
+}
+
+/**
+ * Last renderer boundary before IPC. It protects full-auto, manual generation,
+ * and regeneration paths from silently dropping article/section context.
+ */
+function enrichImageGenerationOptionsWithArticleContext(rawOptions: any): any {
+  const options = { ...(rawOptions || {}) };
+  const structured = readCurrentStructuredContentSafely();
+  const requestedTitle = compactImageContextText(
+    options.articleTitle || options.postTitle || options.title || ''
+  , 240);
+  const structuredTitle = compactImageContextText(
+    structured?.selectedTitle || structured?.title || ''
+  , 240);
+  const rawItems = Array.isArray(options.items) ? options.items : [];
+  const structuredHeadings = Array.isArray(structured?.headings)
+    ? structured.headings
+    : [];
+  const canUseStructuredContext = shouldUseStructuredImageContext({
+    hasStructuredContent: !!structured,
+    requestedTitle,
+    structuredTitle,
+    allowActiveArticleContext: options.useCurrentArticleContext === true,
+    activeArticleBindingMatches: !!String(options.postId || '').trim()
+      && String(options.postId).trim() === String(
+        structured?.postId || readCurrentPostIdSafely()
+      ).trim(),
+    itemHeadings: rawItems.map((item: any) => String(item?.heading || '')),
+    structuredHeadings: structuredHeadings.map((heading: any) => String(
+      heading?.title || heading?.heading || heading?.text || heading || ''
+    )),
+  });
+  const articleTitle = requestedTitle || (canUseStructuredContext ? structuredTitle : '');
+  const globalSubject = compactImageContextText(stringifyImageKeywords(
+    options.globalSubject
+    || options.keywords
+    || (canUseStructuredContext ? structured?.keywords : '')
+  ), 280) || articleTitle;
+  const articleContext = compactImageContextText(
+    options.articleContext
+    || (canUseStructuredContext
+      ? structured?.introduction || structured?.summary || structured?.description || ''
+      : '')
+  , 600);
+  const contextHeadings = canUseStructuredContext ? structuredHeadings : [];
+  const sections = contextHeadings.map((heading: any, originalIndex: number) => ({
+    ...heading,
+    originalIndex,
+    content: resolveSectionContentForImage({
+      heading,
+      headings: contextHeadings,
+      bodyPlain: structured?.bodyPlain,
+      maxChars: 900,
+    }),
+  }));
+
+  const enrichedItems = enrichImageItemsWithArticleContext(
+    rawItems,
+    { articleTitle, globalSubject, articleContext, sections },
+  );
+  const ipcItems = enrichedItems.map((item: any) => {
+    if (!articleContext || item.articleContext !== articleContext) return item;
+    const { articleContext: _batchContext, ...itemWithoutDuplicateContext } = item;
+    return itemWithoutDuplicateContext;
+  });
+
+  return {
+    ...options,
+    postTitle: articleTitle,
+    title: compactImageContextText(options.title || articleTitle, 240) || undefined,
+    keywords: compactImageContextText(
+      stringifyImageKeywords(options.keywords || globalSubject),
+      280,
+    ) || undefined,
+    articleTitle,
+    globalSubject,
+    articleContext,
+    items: ipcItems,
+  };
+}
 
 function isExplicitUserImageGenerationRequest(options: any): boolean {
   try {
@@ -593,6 +701,7 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
   // [Phase 7.1-d] Auto-injection fallbacks below read through the single
   // pipeline accessor — legacy per-site fallback chains are preserved as-is.
   const rawPipeline = readRawPipelineSettings();
+  options = enrichImageGenerationOptionsWithArticleContext(options);
 
   // ✅ [2026-04-18 CRITICAL GUARD] 유료 이미지 API의 최종 방어선
   //    모든 유료/과금 가능 이미지 생성이 이 함수를 경유하므로 여기서 skipImages 차단하면

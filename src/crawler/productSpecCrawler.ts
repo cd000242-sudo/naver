@@ -13,6 +13,11 @@ import { searchShopping, stripHtmlTags, type ShoppingItem } from '../naverSearch
 // ✅ [2026-04-21] 네이버 스토어 가격 다중 폴백 (난독화 class 변경 대응)
 import { extractNaverStorePrice } from './naverStorePriceExtractor.js';
 import { mergeOfficialNaverProductGallery } from './shopping/utils/officialNaverProductGallery.js';
+import { selectDecisionUsefulReviewTexts } from './shopping/utils/reviewTextSelection.js';
+import {
+    clickReviewTab,
+    collectReviewTextCandidates,
+} from './shopping/providers/brandStore/brandStoreDom.js';
 
 /**
  * Apply 5-stage price fallback when the primary extraction yielded 0 or empty.
@@ -71,6 +76,27 @@ function prioritizeImages(galleryImages: string[], reviewImages: string[]): stri
 
     console.log(`[prioritizeImages] 📊 갤러리: ${galleryImages.length}장 → 리뷰: ${reviewImages.length}장 → 최종: ${result.length}장 (중복 ${galleryImages.length + reviewImages.length - result.length}장 제거)`);
     return result;
+}
+
+async function collectVisibleProductReviewTexts(page: any): Promise<string[]> {
+    try {
+        await page.evaluate(clickReviewTab);
+        await page.waitForTimeout(900);
+        await page.evaluate(async () => {
+            for (let index = 0; index < 6; index += 1) {
+                window.scrollBy(0, 700);
+                await new Promise(resolve => setTimeout(resolve, 90));
+            }
+        });
+        await page.waitForTimeout(700);
+
+        const candidates = await page.evaluate(collectReviewTextCandidates);
+
+        return selectDecisionUsefulReviewTexts(candidates);
+    } catch (error) {
+        console.log(`[AffiliateCrawler] ⚠️ 리뷰 텍스트 수집 실패: ${(error as Error).message}`);
+        return [];
+    }
 }
 
 export interface ProductSpec {
@@ -2653,6 +2679,14 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             });
           } catch { /* alt markup changed — click/JSON-LD results still apply */ }
 
+          // Collect review text only after every official gallery source is
+          // captured. Opening a review panel must never reduce product images.
+          const visibleReviewTexts = await collectVisibleProductReviewTexts(bcPage);
+          const collectedReviewTexts = selectDecisionUsefulReviewTexts([
+            ...jsonLdInfo.reviewTexts,
+            ...visibleReviewTexts,
+          ]);
+
           await releasePage(bcPage);
           bcPage = null;
 
@@ -2669,7 +2703,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
           ].filter(Boolean).join('\n').trim();
 
           if (productData.productName && productData.productName.length > 2) {
-            console.log(`[AffiliateCrawler] ✅ brandconnect 크롤링 성공! "${productData.productName}" (${priceNum.toLocaleString()}원, 이미지 ${allImages.length}장, 리뷰 ${jsonLdInfo.reviewTexts.length}건)`);
+            console.log(`[AffiliateCrawler] ✅ brandconnect 크롤링 성공! "${productData.productName}" (${priceNum.toLocaleString()}원, 이미지 ${allImages.length}장, 리뷰 ${collectedReviewTexts.length}건)`);
             return {
               name: productData.productName,
               price: priceNum,
@@ -2681,7 +2715,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
               detailImages: [],
               reviewImages,
               description: description || jsonLdInfo.description || `${productData.productName} 상품입니다.`,
-              reviewTexts: jsonLdInfo.reviewTexts,
+              reviewTexts: collectedReviewTexts,
               reviewCount: jsonLdInfo.reviewCount,
               rating: jsonLdInfo.rating,
             };
@@ -3112,6 +3146,11 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
                 const sortedImages = prioritizeImages(productInfo.images, reviewImages);
                 console.log(`[AffiliateCrawler] 🎯 이미지 정렬 완료: 갤러리 ${productInfo.images.length}장 + 리뷰 ${reviewImages.length}장`);
 
+                // The review panel is opened only after the product gallery has
+                // been fully captured, so review collection cannot hide thumbnails.
+                const visibleReviewTexts = await collectVisibleProductReviewTexts(page);
+                const collectedReviewTexts = selectDecisionUsefulReviewTexts(visibleReviewTexts);
+
                 // ✅ [2026-03-13] 페이지만 해제 (브라우저 컨텍스트는 재사용)
                 const cleanupResources = async () => {
                     try {
@@ -3139,6 +3178,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
                         galleryImages: sortedImages,
                         detailImages: [],
                         description: productInfo.productDetails || '',
+                        reviewTexts: collectedReviewTexts,
                     };
                 }
 

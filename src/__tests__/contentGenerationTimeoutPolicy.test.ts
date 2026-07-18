@@ -155,14 +155,14 @@ describe('content generation timeout policy', () => {
     expect(failurePolicySrc).toMatch(/function\s+isTerminalContentGenerationError/);
     expect(failurePolicySrc).toMatch(/function\s+buildSameEngineRecoveryInstruction/);
     expect(generatorSrc).toMatch(/CONTENT_SAME_ENGINE_MIN_ATTEMPTS/);
-    expect(generatorSrc).toMatch(/const\s+isSingleSubmissionConnector\s*=\s*isAgentProvider\s*\|\|\s*provider\s*===\s*'mcp'/);
+    expect(generatorSrc).toMatch(/const\s+isSingleSubmissionConnector\s*=\s*isAgentProvider/);
     expect(generatorSrc).toMatch(/const\s+sameEngineReliabilityMinAttempts\s*=\s*isV3Prompt\s*\|\|\s*isSingleSubmissionConnector\s*\?\s*0\s*:\s*readNonNegativeIntegerEnv\('CONTENT_SAME_ENGINE_MIN_ATTEMPTS',\s*0\)/);
     expect(generatorSrc).toMatch(/const\s+agentContentMaxAttempts\s*=\s*isV3Prompt[\s\S]{0,100}?AGENT_CONTENT_MAX_ATTEMPTS',\s*0/);
     expect(generatorSrc).toMatch(/const\s+qualityTargetMinAttempts\s*=\s*0/);
     expect(generatorSrc).toMatch(/const\s+configuredMaxAttempts\s*=\s*Math\.max\(\s*baseMaxAttempts,\s*sameEngineReliabilityMinAttempts,\s*promptRepairMinAttempts,\s*qualityTargetMinAttempts,?\s*\)/);
     expect(generatorSrc).toMatch(/const\s+submissionMode\s*=\s*options\.submissionMode\s*\?\?\s*DEFAULT_GENERATION_SUBMISSION_MODE/);
     expect(generatorSrc).toMatch(/const\s+allowAutomaticProviderRetry\s*=\s*shouldAllowAutomaticProviderRetry\(submissionMode\)/);
-    expect(generatorSrc).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\|\|\s*provider\s*===\s*'mcp'\s*\|\|\s*!allowAutomaticProviderRetry\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
+    expect(generatorSrc).toMatch(/const\s+MAX_ATTEMPTS\s*=\s*isV3Prompt\s*\|\|\s*!allowAutomaticProviderRetry\s*\?\s*CONTENT_QUALITY_V3_STRICT_SINGLE_CALL_POLICY\.maxTopLevelRetries\s*:\s*configuredMaxAttempts/);
     expect(failurePolicySrc).toMatch(/SAME_ENGINE_RECOVERY/);
     expect(failurePolicySrc).toMatch(/다른 AI 엔진으로 전환하지 않습니다/);
     expect(generatorSrc).toMatch(
