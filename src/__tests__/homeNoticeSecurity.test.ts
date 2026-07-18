@@ -263,7 +263,11 @@ describe('secure home notices', () => {
     expect(noticeBlock).toContain('if (homeNoticeEditorState.saving) {');
     expect(noticeBlock).toContain('loadGeneration !== homeNoticeLoadGeneration');
     expect(noticeBlock).toContain('#home-notice-editor-form input');
-    expect(loginBlock).not.toContain('requestLewordAdminSession(id, pw');
-    expect(admin).toContain('사이트 로그인은 화면 접근용입니다.');
+    expect(loginBlock).toContain('const serverSession = await requestLewordAdminSession(id, pw, { silent: true });');
+    expect(loginBlock).toContain("document.getElementById('login-pw').value = ''");
+    expect(loginBlock).toContain('apiIdInput.value = id');
+    expect(loginBlock).toContain('homeOpsApiIdInput.value = id');
+    expect(loginBlock).toContain('사이트 로그인 완료 · 서버 저장 권한 자동 연결됨');
+    expect(admin).toContain('관리자 페이지 로그인 아이디/비밀번호로 서버 저장권한을 자동 연결합니다.');
   });
 });
