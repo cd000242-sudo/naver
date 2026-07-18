@@ -4,14 +4,6 @@ import HomeOperationsBoard from '../components/HomeOperationsBoard';
 import ParticlesCanvas from '../components/ParticlesCanvas';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
-type HeroProof = {
-    src: string;
-    alt?: string;
-    title?: string;
-    desc?: string;
-    metric?: string;
-};
-
 type LiveGoldenPreview = {
     id?: string;
     rank?: number;
@@ -1070,131 +1062,12 @@ function cssBackgroundUrl(value?: string): string {
     return raw.replace(/["\\\r\n]/g, '');
 }
 
-const ADSENSE_HERO_PROOFS: HeroProof[] = [
-    {
-        src: '/images/pricing-proof/adsense-10000-month.jpg',
-        alt: '애드센스 이번 달 US$1만 예상 수입 인증',
-        title: '이번 달 US$1만',
-        desc: '애드센스 예상 수입이 크게 상승한 실제 성과 화면입니다.',
-        metric: '월 수익',
-    },
-    {
-        src: '/images/pricing-proof/adsense-daily-100.jpg',
-        alt: '애드센스 오늘 US$100 이상 수익 인증',
-        title: '오늘 US$100+',
-        desc: '하루 수익이 눈에 보이게 올라온 운영 성과입니다.',
-        metric: '일 수익',
-    },
-    {
-        src: '/images/pricing-proof/adsense-28days-931.jpg',
-        alt: '애드센스 최근 28일 US$931 성과 인증',
-        title: '최근 28일 US$931',
-        desc: '월간 운영 성과가 누적되는 흐름을 보여줍니다.',
-        metric: '28일 성과',
-    },
-    {
-        src: '/images/pricing-proof/adsense-today-95.jpg',
-        alt: '애드센스 오늘 US$95.57 수익 인증',
-        title: '오늘 US$95.57',
-        desc: '당일 수익까지 바로 확인되는 성과 화면입니다.',
-        metric: '당일 수익',
-    },
-    {
-        src: '/images/pricing-proof/adsense-small-start.jpg',
-        alt: '애드센스 초기 블로그 수익 상승 사례',
-        title: '작은 블로그도 수익 흐름 확인',
-        desc: '초기 운영 단계에서도 수익 변화를 확인한 사례입니다.',
-        metric: '시작 사례',
-    },
-];
-
-const DEFAULT_HERO_PROOFS: HeroProof[] = [
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_07-fast.jpg',
-        alt: '네이버 블로그 방문횟수 9,177 성과 화면',
-        title: '방문횟수 9,177 돌파',
-        desc: '2월 15일 기준 방문 지표가 크게 상승한 실제 성과 화면입니다.',
-        metric: '방문 9,177',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260310_002438127-fast.jpg',
-        alt: '조회수 19,896 공감 213 성과 화면',
-        title: '조회수 19,896 인증',
-        desc: '조회수와 공감수가 함께 쌓인 고성과 요약 화면입니다.',
-        metric: '조회 19,896',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260309_163736774-fast.jpg',
-        alt: '카카오톡 사용자 조회수 10,003 인증 대화',
-        title: '하루 만명 조회 인증',
-        desc: '실사용자가 공유한 조회수 10,003 성과 인증 대화입니다.',
-        metric: '조회 10,003',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_06-fast.jpg',
-        alt: '블로그 예상수익 12,978원 성과 화면',
-        title: '예상수익 상승',
-        desc: '네이버 리워드 예상수익 그래프와 일별 수익 내역입니다.',
-        metric: '₩12,978',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_04-fast.jpg',
-        alt: '오늘 조회수 1,514 성과 화면',
-        title: '오늘 조회수 1,514',
-        desc: '실시간 조회수와 공감, 댓글이 함께 잡힌 운영 성과입니다.',
-        metric: '조회 1,514',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_02-fast.jpg',
-        alt: '오늘 조회수 1,187 성과 화면',
-        title: '오늘 조회수 1,187',
-        desc: '하루 조회 흐름이 빠르게 올라간 블로그 통계 화면입니다.',
-        metric: '조회 1,187',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_05-fast.jpg',
-        alt: '조회수 1,122와 방문 분석 성과 화면',
-        title: '조회수 1,122 기록',
-        desc: '방문 분석 그래프에서 우상향 흐름을 확인할 수 있는 화면입니다.',
-        metric: '조회 1,122',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_03-fast.jpg',
-        alt: '오늘 조회수 836 성과 화면',
-        title: '오늘 조회수 836',
-        desc: '조회수와 오늘 지표가 함께 표시된 네이버 통계 인증입니다.',
-        metric: '조회 836',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252_01-fast.jpg',
-        alt: '조회수 그래프 5,928 성과 화면',
-        title: '조회 그래프 급상승',
-        desc: '1,062에서 5,928까지 상승한 추세가 보이는 그래프입니다.',
-        metric: '5,928',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260309_164704537-fast.jpg',
-        alt: '카카오톡 사용자 프로그램 사용 후기와 공감수 인증',
-        title: '사용자 반응 인증',
-        desc: '프로그램 사용 후 생긴 성과를 사용자가 직접 공유한 대화입니다.',
-        metric: '공감 213',
-    },
-    {
-        src: '/images/proof-user/fast/KakaoTalk_20260305_004700252-fast.jpg',
-        alt: '네이버 블로그 일간현황 조회수 상승 성과 화면',
-        title: '방문자 상승 흐름',
-        desc: '콘텐츠 발행 후 일간 지표가 누적되는 실제 성과 화면입니다.',
-        metric: '조회수 80',
-    },
-];
-
 /**
  * 메인 페이지 — payment-page/index.html (838줄) 마이그레이션.
  * 4개 섹션: Hero · TrustBar · Explore · Testimonials.
  * inline style 그대로 유지 (사용자 요구).
  */
 function IndexPage() {
-    const [activeProofIndex, setActiveProofIndex] = useState(0);
     const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
@@ -1279,34 +1152,6 @@ function IndexPage() {
         selectSourceLane(nextLaneId);
         window.requestAnimationFrame(() => document.getElementById(`home-live-source-tab-${nextLaneId}`)?.focus());
     };
-    const heroProofs = useMemo(() => {
-        const configuredProofs = (siteContent?.hero?.proofs || [])
-            .filter((proof) => Boolean(proof?.src))
-            .map((proof) => ({
-                src: String(proof.src || ''),
-                alt: proof.alt,
-                title: proof.title,
-                desc: proof.desc,
-                metric: proof.metric,
-            }));
-        const baseHeroProofs = configuredProofs.length > 0 ? configuredProofs : DEFAULT_HERO_PROOFS;
-        return [...ADSENSE_HERO_PROOFS, ...baseHeroProofs].filter((proof, index, allProofs) => (
-            allProofs.findIndex((item) => item.src === proof.src) === index
-        ));
-    }, [siteContent]);
-    const communityProofFallbacks = useMemo(() => {
-        const configuredProofs = (siteContent?.hero?.proofs || [])
-            .filter((proof) => Boolean(proof?.src))
-            .map((proof) => ({
-                src: String(proof.src || ''),
-                alt: proof.alt,
-                title: proof.title,
-                desc: proof.desc,
-                metric: proof.metric,
-            }));
-        return configuredProofs.length > 0 ? configuredProofs : DEFAULT_HERO_PROOFS;
-    }, [siteContent]);
-    const activeProof = heroProofs[activeProofIndex % heroProofs.length] || DEFAULT_HERO_PROOFS[0];
     const homeBgImage = siteContent?.theme?.productsBgImage || siteContent?.theme?.pricingBgImage || '';
 
     useEffect(() => {
@@ -1323,31 +1168,11 @@ function IndexPage() {
         };
     }, [homeBgImage]);
 
-    useEffect(() => {
-        if (heroProofs.length <= 1) return;
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        const timer = window.setInterval(() => {
-            setActiveProofIndex((index) => (index + 1) % heroProofs.length);
-        }, 4200);
-        return () => window.clearInterval(timer);
-    }, [heroProofs.length]);
-
-    useEffect(() => {
-        if (heroProofs.length <= 1) return;
-        const nextProof = heroProofs[(activeProofIndex + 1) % heroProofs.length];
-        if (!nextProof?.src) return;
-        return runAfterFirstPaint(() => {
-            const image = new Image();
-            image.decoding = 'async';
-            image.src = nextProof.src;
-        }, 1200);
-    }, [activeProofIndex, heroProofs]);
-
     return (
         <>
             {decorationsReady && <ParticlesCanvas />}
 
-            <HomeOperationsBoard proofFallbacks={communityProofFallbacks} realtimePanel={(
+            <HomeOperationsBoard realtimePanel={(
                     <div className="hero-realtime-board" aria-label="실시간 검색어">
                         <div className="hero-realtime-head">
                             <span>{liveStatusLabel}</span>
@@ -1431,41 +1256,8 @@ function IndexPage() {
                     </div>
             )} />
 
-            {/* ═══ HERO ═══ */}
+            {/* ═══ HOME QUICK ACTIONS ═══ */}
             <section className="home-hero" style={{ minHeight: 'auto', display: 'grid', gridTemplateColumns: 'minmax(280px, 820px)', columnGap: 24, rowGap: 14, padding: '8px 24px 56px', maxWidth: 1412, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
-                <div className="hero-eyebrow">
-                    <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--gold-primary)', boxShadow: '0 0 8px var(--gold-primary)' }} />
-                    <span>PREMIUM AUTOMATION</span>
-                </div>
-                <div className="hero-proof-stage" aria-label="실제 사용자 성과 이미지">
-                    <div className="proof-summary">
-                        <span>{activeProof.metric || '성과 인증'}</span>
-                        <strong>{activeProof.title || '실제 운영 성과'}</strong>
-                        <small>{activeProof.desc || '사용자가 직접 확인한 성과 이미지를 순서대로 보여줍니다.'}</small>
-                    </div>
-                    <div className="proof-image-shell">
-                        <img
-                            key={`${activeProof.src}-${activeProofIndex}`}
-                            src={activeProof.src}
-                            alt={activeProof.alt || activeProof.title || 'Leaders Pro 사용자 성과 이미지'}
-                            loading="eager"
-                            decoding="async"
-                            className="proof-image active"
-                        />
-                    </div>
-                    <div className="proof-dots" role="tablist" aria-label="성과 이미지 선택">
-                        {heroProofs.map((proof, index) => (
-                            <button
-                                key={`${proof.src}-dot-${index}`}
-                                type="button"
-                                className={index === activeProofIndex % heroProofs.length ? 'active' : ''}
-                                onClick={() => setActiveProofIndex(index)}
-                                aria-label={`${index + 1}번째 성과 이미지 보기`}
-                                aria-selected={index === activeProofIndex % heroProofs.length}
-                            />
-                        ))}
-                    </div>
-                </div>
                 <div className="hero-action-strip" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
                     {[
                         { to: '/leword', label: '\ud669\uae08\ud0a4\uc6cc\ub4dc \ubcf4\ub7ec\uac00\uae30', desc: '\uc2e4\uc2dc\uac04 \ud669\uae08\ud0a4\uc6cc\ub4dc\ub97c \ubc14\ub85c \ud655\uc778', tone: 'gold' },
@@ -1481,22 +1273,6 @@ function IndexPage() {
             </section>
 
             <style>{`
-                .hero-eyebrow {
-                    grid-column: 1 / -1;
-                    justify-self: center;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                    padding: 6px 16px;
-                    background: rgba(201, 168, 76, 0.1);
-                    border: 1px solid rgba(201, 168, 76, 0.3);
-                    border-radius: 50px;
-                    color: var(--gold-primary);
-                    font-size: 12px;
-                    font-weight: 800;
-                    letter-spacing: 2px;
-                }
-
                 .hero-realtime-board {
                     width: 100%;
                     min-height: 0;
@@ -2743,127 +2519,6 @@ function IndexPage() {
                     line-height: 1.55;
                 }
 
-                .hero-proof-stage {
-                    position: relative;
-                    width: 100%;
-                    min-height: 0;
-                    height: clamp(500px, calc(100vh - 280px), 540px);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    isolation: isolate;
-                    overflow: hidden;
-                    border-radius: 8px;
-                    opacity: 0.92;
-                    pointer-events: auto;
-                }
-
-                .hero-proof-stage::before {
-                    content: '';
-                    position: absolute;
-                    inset: 0;
-                    border-radius: 8px;
-                    border: 1px solid rgba(201,168,76,0.28);
-                    background:
-                        linear-gradient(135deg, rgba(12,18,28,0.78), rgba(5,8,12,0.52)),
-                        linear-gradient(90deg, rgba(244,201,93,0.10), rgba(68,215,182,0.08));
-                    box-shadow: 0 26px 90px rgba(0,0,0,0.30);
-                    pointer-events: none;
-                    z-index: -2;
-                }
-
-                .proof-summary {
-                    position: absolute;
-                    left: 16px;
-                    top: 16px;
-                    width: calc(100% - 32px);
-                    display: grid;
-                    gap: 6px;
-                    padding: 14px;
-                    border-radius: 8px;
-                    border: 1px solid rgba(255,255,255,0.14);
-                    background: rgba(8,13,18,0.78);
-                    backdrop-filter: blur(14px);
-                    z-index: 4;
-                    box-shadow: 0 18px 46px rgba(0,0,0,0.26);
-                }
-
-                .proof-summary span {
-                    color: #f4c95d;
-                    font-size: 12px;
-                    font-weight: 900;
-                }
-
-                .proof-summary strong {
-                    color: #fff;
-                    font-size: 18px;
-                    line-height: 1.35;
-                }
-
-                .proof-summary small {
-                    color: rgba(255,255,255,0.62);
-                    font-size: 12px;
-                    line-height: 1.45;
-                }
-
-                .proof-image-shell {
-                    width: 100%;
-                    height: 390px;
-                    position: relative;
-                    z-index: 1;
-                    overflow: hidden;
-                    border-radius: 8px;
-                    border: 1px solid rgba(255,255,255,0.16);
-                    background:
-                        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-                        #080d12;
-                    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 26px 90px rgba(0,0,0,0.34);
-                }
-
-                .proof-image {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain;
-                    object-position: center;
-                    padding: 18px;
-                    opacity: 0;
-                    transform: translateX(22px) scale(0.985);
-                    transition: opacity 0.52s ease, transform 0.52s ease;
-                }
-
-                .proof-image.active {
-                    opacity: 1;
-                    transform: translateX(0) scale(1);
-                }
-
-                .proof-dots {
-                    position: absolute;
-                    left: 50%;
-                    bottom: 22px;
-                    transform: translateX(-50%);
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    z-index: 5;
-                }
-
-                .proof-dots button {
-                    width: 9px;
-                    height: 9px;
-                    border: 0;
-                    border-radius: 999px;
-                    background: rgba(255,255,255,0.32);
-                    cursor: pointer;
-                    transition: width 0.2s ease, background 0.2s ease;
-                }
-
-                .proof-dots button.active {
-                    width: 28px;
-                    background: #f4c95d;
-                }
-
                 @media (max-width: 1080px) {
                     .home-live-grid {
                         grid-template-columns: 1fr;
@@ -2897,16 +2552,6 @@ function IndexPage() {
                         padding: 18px 18px 44px !important;
                     }
 
-                    .hero-proof-stage {
-                        display: flex;
-                        height: auto;
-                        min-height: 430px;
-                    }
-
-                    .proof-image-shell {
-                        width: 100%;
-                        height: 330px;
-                    }
                 }
 
                 @media (max-width: 640px) {
@@ -3113,44 +2758,6 @@ function IndexPage() {
                         width: max-content;
                     }
 
-                    .hero-proof-stage {
-                        min-height: 380px;
-                        margin-top: 0;
-                        padding: 10px;
-                    }
-
-                    .hero-proof-stage::before {
-                        inset: 0;
-                    }
-
-                    .proof-summary {
-                        display: grid;
-                        left: 10px;
-                        top: 10px;
-                        width: calc(100% - 20px);
-                        padding: 10px;
-                    }
-
-                    .proof-summary strong {
-                        font-size: 14px;
-                    }
-
-                    .proof-summary small {
-                        font-size: 11px;
-                    }
-
-                    .proof-image-shell {
-                        height: 250px;
-                        margin-top: 96px;
-                    }
-
-                    .proof-image {
-                        padding: 10px;
-                    }
-
-                    .proof-dots {
-                        bottom: 16px;
-                    }
                 }
 
                 @media (max-width: 420px) {

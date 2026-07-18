@@ -95,15 +95,22 @@ describe('homepage operations layout', () => {
     expect(globalCss).toMatch(/html,\s*body\s*\{[^}]*overflow-x:\s*(?:clip|hidden)/s);
   });
 
-  it('places the operations board before the marketing hero and moves realtime content into it', () => {
+  it('keeps the operations board and removes the duplicate bottom income-proof carousel', () => {
     const source = readFileSync(join(process.cwd(), 'spa', 'src', 'pages', 'IndexPage.tsx'), 'utf8');
-    const boardIndex = source.indexOf('<HomeOperationsBoard proofFallbacks={communityProofFallbacks} realtimePanel={(');
-    const heroIndex = source.indexOf('<section className="home-hero"');
+    const board = readFileSync(join(process.cwd(), 'spa', 'src', 'components', 'HomeOperationsBoard.tsx'), 'utf8');
+    const boardIndex = source.indexOf('<HomeOperationsBoard realtimePanel={(');
+    const actionsIndex = source.indexOf('<div className="hero-action-strip"');
 
     expect(boardIndex).toBeGreaterThan(-1);
-    expect(heroIndex).toBeGreaterThan(-1);
-    expect(boardIndex).toBeLessThan(heroIndex);
-    expect(source).toContain('const communityProofFallbacks = useMemo');
+    expect(actionsIndex).toBeGreaterThan(-1);
+    expect(boardIndex).toBeLessThan(actionsIndex);
+    expect(source).not.toContain('<div className="hero-proof-stage"');
+    expect(source).not.toContain('ADSENSE_HERO_PROOFS');
+    expect(source).not.toContain('DEFAULT_HERO_PROOFS');
+    expect(source).not.toContain('activeProofIndex');
+    expect(source).not.toContain('communityProofFallbacks');
+    expect(board).not.toContain('proofFallbacks');
+    expect(board).not.toContain('proofFallbackToIncomeProof');
     expect(source).toContain('<div className="hero-realtime-board" aria-label="실시간 검색어">');
     expect(source).toContain('const handleSourceTabKeyDown =');
     expect(source).toContain('onKeyDown={(event) => handleSourceTabKeyDown(event, lane.id)}');

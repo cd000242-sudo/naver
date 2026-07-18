@@ -16,17 +16,8 @@ const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits:
 
 type HomeOperationsTab = 'deputy' | 'realtime';
 
-type HomeProofFallback = {
-    src?: string;
-    alt?: string;
-    title?: string;
-    desc?: string;
-    metric?: string;
-};
-
 interface HomeOperationsBoardProps {
     realtimePanel?: ReactNode;
-    proofFallbacks?: HomeProofFallback[];
 }
 
 function formatDate(value: string): string {
@@ -171,23 +162,6 @@ function IncomeProofCard({ proof }: { proof: CommunityIncomeProof }) {
     );
 }
 
-function proofFallbackToIncomeProof(proof: HomeProofFallback, index: number): CommunityIncomeProof | null {
-    const src = String(proof.src || '').trim();
-    if (!src) return null;
-    const title = String(proof.title || proof.metric || '실제 인증 캡처').trim();
-    return {
-        id: `home-proof-fallback-${index + 1}-${src}`,
-        amount: title,
-        author: '실제 캡처 자료',
-        date: '',
-        desc: String(proof.desc || proof.alt || '운영자가 등록한 실제 인증 이미지입니다.').trim(),
-        tags: [],
-        media: src,
-        mediaType: 'image',
-        mediaName: String(proof.alt || title).trim(),
-    };
-}
-
 function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
     const maxOpportunity = Math.max(1, ...rows.map((row) => row.opportunity));
     return (
@@ -298,7 +272,7 @@ function KeywordMobileCards({ rows }: { rows: HomeKeywordRow[] }) {
     );
 }
 
-function HomeOperationsBoard({ realtimePanel, proofFallbacks = [] }: HomeOperationsBoardProps) {
+function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
     const [notices, setNotices] = useState<HomeNotice[]>([]);
     const [openNoticeId, setOpenNoticeId] = useState<string | null>(null);
     const [incomeResult, setIncomeResult] = useState<CommunityIncomeProofResult | null>(null);
@@ -333,13 +307,7 @@ function HomeOperationsBoard({ realtimePanel, proofFallbacks = [] }: HomeOperati
 
     const briefing = briefingResult?.briefing || null;
     const incomeProofs = (incomeResult?.items || []).filter((proof) => Boolean(proof.media));
-    const fallbackIncomeProofs = useMemo(() => (
-        proofFallbacks
-            .map(proofFallbackToIncomeProof)
-            .filter((proof): proof is CommunityIncomeProof => Boolean(proof))
-            .slice(0, 3)
-    ), [proofFallbacks]);
-    const displayIncomeProofs = incomeProofs.length > 0 ? incomeProofs : fallbackIncomeProofs;
+    const displayIncomeProofs = incomeProofs;
     const chartRows = useMemo(() => briefing ? selectKeywordChartRows(briefing, 10) : [], [briefing]);
     const uniqueCount = useMemo(() => briefing ? uniqueKeywordCount(briefing.rows) : 0, [briefing]);
     const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, currentTab: HomeOperationsTab) => {
