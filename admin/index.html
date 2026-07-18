@@ -1455,13 +1455,13 @@
                                 </div>
                             </div>
                             <div class="editor-field full" style="padding:14px;border:1px solid rgba(68,215,182,.22);border-radius:12px;background:rgba(68,215,182,.045);">
-                                <label>안전한 서버 저장 권한</label>
+                                <label>LEWORD API 서버 저장 권한</label>
                                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;align-items:center;">
-                                    <input id="keyword-briefing-api-id" type="text" placeholder="서버 관리자 ID" autocomplete="username">
-                                    <input id="keyword-briefing-api-password" type="password" placeholder="서버 관리자 비밀번호" autocomplete="current-password">
+                                    <input id="keyword-briefing-api-id" type="text" placeholder="LEWORD API 서버 관리자 ID" autocomplete="off">
+                                    <input id="keyword-briefing-api-password" type="password" placeholder="LEWORD API 서버 관리자 비밀번호" autocomplete="new-password">
                                     <button class="btn" type="button" id="keyword-briefing-api-connect">저장 권한 연결</button>
                                 </div>
-                                <p class="editor-help" id="keyword-briefing-api-status">브리핑 저장은 공개 GAS 토큰이 아닌 LEWORD 관리자 세션으로 보호됩니다. 비밀번호는 저장하지 않습니다.</p>
+                                <p class="editor-help" id="keyword-briefing-api-status">이 칸은 사이트 로그인 계정이 아니라 운영 API 서버의 LEWORD_ADMIN_LOGIN_ID 계정입니다. 비밀번호는 저장하지 않습니다.</p>
                             </div>
                             <div class="editor-field full">
                                 <label>검수용 표 — 키워드 / 검색량 / 블로그 문서수 / 기회지수</label>
@@ -1967,14 +1967,14 @@
                 <div style="margin-bottom:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-glass);border-radius:10px;">
                     <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
                         <div>
-                            <strong style="display:block;margin-bottom:4px;">서버 저장 권한</strong>
-                            <span id="home-ops-api-status" style="font-size:.85rem;color:var(--text-secondary);">공지 발행용 서버 저장 권한은 별도 계정으로 연결합니다. 사이트 로그인 비밀번호와 다를 수 있습니다.</span>
+                            <strong style="display:block;margin-bottom:4px;">LEWORD API 서버 저장 권한</strong>
+                            <span id="home-ops-api-status" style="font-size:.85rem;color:var(--text-secondary);">공지 발행용 저장 권한은 사이트 로그인 계정이 아니라 운영 API 서버의 LEWORD_ADMIN_LOGIN_ID 계정으로 연결합니다.</span>
                         </div>
                         <span id="home-notice-revision" style="padding:5px 9px;border:1px solid rgba(68,215,182,.35);border-radius:999px;color:#44d7b6;font-size:.78rem;font-weight:800;">notice revision 0</span>
                     </div>
                     <div class="home-ops-admin-grid">
-                        <input id="home-ops-api-id" type="text" placeholder="서버 관리자 ID" autocomplete="username" style="padding:10px;border-radius:8px;">
-                        <input id="home-ops-api-password" type="password" placeholder="서버 관리자 비밀번호" autocomplete="current-password" style="padding:10px;border-radius:8px;">
+                        <input id="home-ops-api-id" type="text" placeholder="LEWORD API 서버 관리자 ID" autocomplete="off" style="padding:10px;border-radius:8px;">
+                        <input id="home-ops-api-password" type="password" placeholder="LEWORD API 서버 관리자 비밀번호" autocomplete="new-password" style="padding:10px;border-radius:8px;">
                         <button class="btn" type="button" onclick="connectHomeOpsApi()">저장 권한 연결</button>
                     </div>
                 </div>
@@ -2386,13 +2386,9 @@
                 sessionStorage.setItem('admin_auth', '1');
                 sessionStorage.setItem('lp_admin_logged_in', '1');
                 localStorage.setItem('lp_analytics_exclude', '1');
-                const apiIdInput = document.getElementById('keyword-briefing-api-id');
-                if (apiIdInput) apiIdInput.value = id;
-                const homeOpsApiIdInput = document.getElementById('home-ops-api-id');
-                if (homeOpsApiIdInput) homeOpsApiIdInput.value = id;
                 document.getElementById('login-pw').value = '';
-                keywordBriefingApiAccessStatus('사이트 로그인 완료 · 발행하려면 별도 서버 저장 권한을 연결하세요.', true);
-                homeOpsApiStatus('사이트 로그인 완료 · 발행하려면 별도 서버 저장 권한을 연결하세요.', true);
+                keywordBriefingApiAccessStatus('사이트 로그인 완료 · 저장하려면 별도 LEWORD API 서버 관리자 계정을 연결하세요.', true);
+                homeOpsApiStatus('사이트 로그인 완료 · 저장하려면 별도 LEWORD API 서버 관리자 계정을 연결하세요.', true);
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('dashboard').classList.add('active');
                 switchTab('notices');
@@ -2529,7 +2525,7 @@
             homeOpsApiStatus('서버 저장 권한을 확인하는 중입니다.', false);
             const session = await requestLewordAdminSession(userId, password, { silent: true });
             if (passwordNode) passwordNode.value = '';
-            homeOpsApiStatus(session ? '서버 저장 권한이 연결되었습니다.' : '서버 저장 권한 연결에 실패했습니다.', !session);
+            homeOpsApiStatus(session ? '서버 저장 권한이 연결되었습니다.' : '서버 저장 권한 연결 실패: 사이트 로그인 계정이 아니라 LEWORD API 서버 관리자 계정을 입력해야 합니다.', !session);
             return session;
         }
         function renderAdminNoticeList() {
@@ -5277,7 +5273,7 @@
             setValue('keyword-briefing-api-password', '');
             keywordBriefingApiAccessStatus(session
                 ? '서버 저장 권한이 연결되었습니다. 이 브라우저 탭에서만 유지됩니다.'
-                : '서버 저장 권한 연결에 실패했습니다. 서버 관리자 계정을 확인하세요.', !session);
+                : '서버 저장 권한 연결 실패: 사이트 로그인 계정이 아니라 LEWORD API 서버 관리자 계정을 입력해야 합니다.', !session);
             return session;
         }
 

@@ -118,5 +118,11 @@ describe('admin homepage operations access', () => {
     expect(admin).toContain('id="home-ops-open-keyword-briefing"');
     expect(admin).toContain('function openKeywordBriefingEditor()');
     expect(admin).toContain('부방장 황금키워드 수정');
+    expect(admin).toContain('LEWORD API 서버 관리자 ID');
+    expect(admin).toContain('LEWORD_ADMIN_LOGIN_ID');
+    expect(admin).toContain('사이트 로그인 계정이 아니라 LEWORD API 서버 관리자 계정');
+    expect(admin).toContain('autocomplete="new-password"');
+    expect(admin).not.toContain("apiIdInput.value = id");
+    expect(admin).not.toContain("homeOpsApiIdInput.value = id");
   });
 });
