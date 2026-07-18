@@ -119,27 +119,47 @@ const UnifiedDOMCache = {
     //   원인: v2.7.15에 dall-e-3이 옵션으로 추가됐지만 VALID_AI_SOURCES 화이트리스트엔 누락 → fullAutoSource 거부 → 폴백 체인 → nano-banana-pro
     // ✅ [v2.10.335] 나노바나나 3종 분리 — nano-banana-2 통합 별칭 제거 (각각 별개 모델).
     //   3종(nano-banana / nano-banana-2 / nano-banana-pro)을 VALID_AI_SOURCES에 직접 등록.
-    const ALIAS_MAP: Record<string, string> = { 'dall-e-3': 'openai-image' };
+    const ALIAS_MAP: Record<string, string> = {
+      'dall-e-3': 'openai-image',
+      local: 'saved',
+    };
     // ✅ [v2.11.7] 'dropshot' 추가 — 리더스 나노바나나 무제한
-    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'falai', 'pollinations', 'local-folder'];
+    const VALID_AI_SOURCES = ['nano-banana', 'nano-banana-2', 'nano-banana-pro', 'deepinfra', 'openai-image', 'leonardoai', 'imagefx', 'flow', 'prodia', 'dropshot', 'falai', 'pollinations', 'local-folder', 'saved'];
 
     const normalizeSource = (raw: string | null): string | null => {
       if (!raw || raw === 'undefined' || raw === 'null') return null;
       return ALIAS_MAP[raw] || raw;
     };
 
-    // UI에서 방금 바꾼 선택값이 저장소의 예전 값보다 항상 우선이어야 한다.
-    // 특히 드롭샷 실패 후 다른 엔진으로 바꾸고 재시작할 때 stale localStorage가
-    // 다시 드롭샷을 반환하던 문제를 막는다.
-    const selectedSourceBtn = document.querySelector('.unified-img-source-btn.selected, .full-auto-img-source-btn.selected');
-    if (selectedSourceBtn) {
-      const btnSource = normalizeSource(selectedSourceBtn.getAttribute('data-source'));
-      if (btnSource && VALID_AI_SOURCES.includes(btnSource)) {
-        localStorage.setItem('fullAutoImageSource', btnSource);
-        localStorage.setItem('globalImageSource', btnSource);
-        console.log(`[UnifiedDOMCache] 🎨 DOM 버튼 선택 우선: ${btnSource}`);
-        return btnSource;
+    for (const selector of [
+      '.image-source-btn.selected',
+      '.unified-img-source-btn.selected',
+      '.full-auto-img-source-btn.selected',
+    ]) {
+      const currentSelectedSourceBtn = document.querySelector(selector);
+      if (!currentSelectedSourceBtn) continue;
+      const currentButtonSource = normalizeSource(currentSelectedSourceBtn.getAttribute('data-source'));
+      if (currentButtonSource && VALID_AI_SOURCES.includes(currentButtonSource)) {
+        // `saved` is a one-run image-management choice, not a paid AI engine.
+        if (currentButtonSource !== 'saved') {
+          localStorage.setItem('fullAutoImageSource', currentButtonSource);
+          localStorage.setItem('globalImageSource', currentButtonSource);
+        }
+        console.log(`[UnifiedDOMCache] current image button selected: ${currentButtonSource}`);
+        return currentButtonSource;
       }
+    }
+
+    // The shipped image-management UI uses #image-source-select. Read it
+    // before legacy controls and storage so a fresh choice cannot be replaced
+    // by an older fullAutoImageSource/scAIImageEngine snapshot.
+    const primaryImageSourceSelect = document.getElementById('image-source-select') as HTMLSelectElement | null;
+    const primarySelectSource = normalizeSource(primaryImageSourceSelect?.value || null);
+    if (primarySelectSource && VALID_AI_SOURCES.includes(primarySelectSource)) {
+      localStorage.setItem('fullAutoImageSource', primarySelectSource);
+      localStorage.setItem('globalImageSource', primarySelectSource);
+      console.log(`[UnifiedDOMCache] current image dropdown selected: ${primarySelectSource}`);
+      return primarySelectSource;
     }
 
     const domImageSourceSelect =

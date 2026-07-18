@@ -22,6 +22,18 @@ afterEach(() => {
 });
 
 describe('resolvePipelineConfig — 기본값 동등성', () => {
+  it.each([
+    'continuous-modal-shopping-subimage-source',
+    'ma-shopping-subimage-source',
+  ])('does not hardcode a hidden default checked engine for %s', (radioName) => {
+    const html = read('public', 'index.html');
+    const nanoInput = html.match(
+      new RegExp(`<input[^>]*name="${radioName}"[^>]*value="nano-banana-2"[^>]*>`),
+    )?.[0] || '';
+
+    expect(nanoInput).not.toMatch(/\schecked(?:\s|>)/);
+  });
+
   it('localStorage 부재 시 현행 직독 기본값과 동일하다', () => {
     const cfg = resolvePipelineConfig('full-auto');
     expect(cfg.flow).toBe('full-auto');
@@ -138,14 +150,120 @@ describe('resolvePipelineConfig — 기본값 동등성', () => {
     expect(resolvePipelineConfig('multi-account').shopping.aiImageEngine).toBe('openai-image');
   });
 
-  it('명시 쇼핑 엔진이 구버전 전역 엔진보다 우선한다', () => {
+  it('풀오토에서는 현재 이미지 엔진이 오래된 쇼핑 전용 엔진보다 우선한다', () => {
     (globalThis as any).localStorage = makeStorage({
       scSubImageMode: 'ai',
       scAIImageEngine: 'openai-image',
       fullAutoImageSource: 'dropshot',
     });
 
+    expect(resolvePipelineConfig('full-auto').shopping.aiImageEngine).toBe('dropshot');
+  });
+
+  it('풀오토의 현재 드롭다운 엔진이 오래된 쇼핑 엔진보다 우선한다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      scAIImageEngine: 'nano-banana-pro',
+      fullAutoImageSource: 'nano-banana-pro',
+      globalImageSource: 'nano-banana-pro',
+    });
+    (globalThis as any).document = {
+      querySelector: (selector: string) => selector === 'input[name="sc-subimage-mode-inline-radio"]:checked'
+        ? { value: 'ai' }
+        : null,
+      getElementById: (id: string) => id === 'image-source-select'
+        ? { value: 'openai-image' }
+        : null,
+    };
+
+    const config = resolvePipelineConfig('full-auto');
+    expect(config.image.imageSource).toBe('openai-image');
+    expect(config.shopping.aiImageEngine).toBe('openai-image');
+    expect(config.image.fallbackPolicy).toBe('engine-only');
+  });
+
+  it('풀오토의 현재 선택 버튼이 오래된 드롭다운 엔진보다 우선한다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      scAIImageEngine: 'nano-banana-pro',
+      fullAutoImageSource: 'nano-banana-pro',
+    });
+    (globalThis as any).document = {
+      querySelector: (selector: string) => {
+        if (selector === 'input[name="sc-subimage-mode-inline-radio"]:checked') {
+          return { value: 'ai' };
+        }
+        if (selector.includes('.image-source-btn.selected')) {
+          return {
+            dataset: { source: 'openai-image' },
+            getAttribute: () => 'openai-image',
+          };
+        }
+        return null;
+      },
+      getElementById: (id: string) => id === 'image-source-select'
+        ? { value: 'nano-banana-pro' }
+        : null,
+    };
+
+    const config = resolvePipelineConfig('full-auto');
+    expect(config.image.imageSource).toBe('openai-image');
+    expect(config.shopping.aiImageEngine).toBe('openai-image');
+  });
+
+  it('풀오토에서는 선택된 버튼 경로가 오래된 드롭다운 값보다 우선한다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      scAIImageEngine: 'nano-banana-pro',
+      fullAutoImageSource: 'nano-banana-pro',
+      globalImageSource: 'nano-banana-pro',
+    });
+    (globalThis as any).document = {
+      querySelector: (selector: string) => {
+        if (selector === 'input[name="sc-subimage-mode-inline-radio"]:checked') {
+          return { value: 'ai' };
+        }
+        if (selector.includes('.unified-img-source-btn.selected') || selector.includes('.full-auto-img-source-btn.selected')) {
+          return {
+            dataset: { source: 'saved' },
+            getAttribute: (name: string) => (name === 'data-source' ? 'saved' : null),
+          };
+        }
+        return null;
+      },
+      getElementById: (id: string) => id === 'image-source-select'
+        ? { value: 'openai-image' }
+        : null,
+    };
+
+    const config = resolvePipelineConfig('full-auto');
+    expect(config.image.imageSource).toBe('saved');
+    expect(config.shopping.aiImageEngine).toBe('saved');
+    expect(config.image.fallbackPolicy).toBe('engine-only');
+  });
+
+  it('풀오토 저장 엔진도 오래된 scAIImageEngine보다 우선한다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      scAIImageEngine: 'nano-banana-pro',
+      fullAutoImageSource: 'openai-image',
+      globalImageSource: 'openai-image',
+    });
+
     expect(resolvePipelineConfig('full-auto').shopping.aiImageEngine).toBe('openai-image');
+  });
+
+  it('풀오토에서 지원하지 않는 현재 엔진을 다른 쇼핑 엔진으로 조용히 폴백하지 않는다', () => {
+    (globalThis as any).localStorage = makeStorage({
+      scSubImageMode: 'ai',
+      scAIImageEngine: 'nano-banana-pro',
+      fullAutoImageSource: 'deepinfra',
+    });
+
+    const config = resolvePipelineConfig('full-auto');
+    expect(config.image.imageSource).toBe('deepinfra');
+    expect(config.shopping.aiImageEngine).toBe('deepinfra');
+    expect(config.image.fallbackPolicy).toBe('engine-only');
   });
 
   it.each([

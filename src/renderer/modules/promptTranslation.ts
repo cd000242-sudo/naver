@@ -10,11 +10,13 @@ import {
     compactImageContextText,
 } from '../../image/contextualImagePrompt.js';
 import {
-    CLAUDE_MODELS,
     GEMINI_TEXT_MODELS,
-    OPENAI_TEXT_MODELS,
     normalizeGeminiTextModelId,
-} from '../../runtime/modelRegistry.js';
+} from '../../runtime/geminiTextModelNormalization.js';
+import {
+    CLAUDE_MODELS,
+    OPENAI_TEXT_MODELS,
+} from '../../runtime/textModelConstants.js';
 
 // ✅ 번역 캐시 (최대 100개, 모든 모델 공유)
 export const _promptTranslationCache = new Map<string, string>();

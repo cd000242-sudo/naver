@@ -446,8 +446,10 @@ describe('shopping reference engine UI wiring', () => {
   const subImageMode = fs.readFileSync(path.join(root, 'src', 'renderer', 'utils', 'subImageMode.ts'), 'utf8');
 
   it('offers Leaders unlimited in continuous and multi-account shopping settings', () => {
-    expect(html).toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="nano-banana-2"\s+checked/);
-    expect(html).toMatch(/name="ma-shopping-subimage-source"\s+value="nano-banana-2"\s+checked/);
+    expect(html).toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="nano-banana-2"/);
+    expect(html).toMatch(/name="ma-shopping-subimage-source"\s+value="nano-banana-2"/);
+    expect(html).not.toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="nano-banana-2"[^>]*\schecked/);
+    expect(html).not.toMatch(/name="ma-shopping-subimage-source"\s+value="nano-banana-2"[^>]*\schecked/);
     expect(html).toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="dropshot"/);
     expect(html).toMatch(/name="ma-shopping-subimage-source"\s+value="dropshot"/);
   });

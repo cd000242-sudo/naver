@@ -356,6 +356,10 @@ try {
       filePath: path.join(projectRoot, 'dist', 'automation', 'ftcDisclosurePresets.js'),
     },
     {
+      label: 'runtime/textModelConstants.js',
+      filePath: path.join(projectRoot, 'dist', 'runtime', 'textModelConstants.js'),
+    },
+    {
       label: 'image/contextualImagePrompt.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'contextualImagePrompt.js'),
     },
@@ -823,7 +827,9 @@ ${sanitized}`;
   }
 
   const REQUIRED_RENDERER_RUNTIME_VALUES = [
+    'CLAUDE_MODELS',
     'FTC_DISCLOSURE_PRESETS',
+    'OPENAI_TEXT_MODELS',
   ];
   const missingRuntimeValues = REQUIRED_RENDERER_RUNTIME_VALUES.filter((symbol) => {
     const escaped = symbol.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

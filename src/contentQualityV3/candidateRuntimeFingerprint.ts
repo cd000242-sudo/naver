@@ -600,6 +600,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/runtime/geminiVisionQuotaGuard.ts',
   'src/runtime/imageProviderMigration.ts',
   'src/runtime/modelRegistry.ts',
+  'src/runtime/textModelConstants.ts',
   'src/runtime/userVisibleError.ts',
   'src/runtime/version.generated.ts',
   'src/runtime/zombieRecovery.ts',

@@ -87,9 +87,11 @@ describe('v1.4.77 — 비용 최적화 소스 불변식', () => {
   describe('OpenAI 모델 매핑 — UI 라벨 = 실제 호출 1:1', () => {
     const content = read('contentGenerator.ts');
     const registry = read('runtime/modelRegistry.ts');
+    const textModelConstants = read('runtime/textModelConstants.ts');
 
     it("'openai-gpt41' maps to GPT-5.6 Terra", () => {
-      expect(registry).toMatch(/TERRA:\s*'gpt-5\.6-terra'/);
+      expect(textModelConstants).toMatch(/TERRA:\s*'gpt-5\.6-terra'/);
+      expect(registry).toMatch(/OPENAI_TEXT_MODELS,\s*\n\}\s*from '\.\/textModelConstants\.js';/);
       expect(content).toMatch(/resolveTextModelProfileForVendor\(\s*uiSelectedModel/);
     });
 

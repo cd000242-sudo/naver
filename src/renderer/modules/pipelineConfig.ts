@@ -166,6 +166,37 @@ const SHOPPING_ENGINE_ALIASES: Readonly<Record<string, string>> = {
   'gpt-image-2': 'openai-image',
 };
 
+function normalizeCurrentImageSource(value: unknown): string {
+  const raw = String(value || '').trim();
+  return SHOPPING_ENGINE_ALIASES[raw] || raw;
+}
+
+function readFullAutoImageSourceFromUi(): string {
+  try {
+    if (typeof document === 'undefined') return '';
+    for (const selector of [
+      '.image-source-btn.selected',
+      '.unified-img-source-btn.selected',
+      '.full-auto-img-source-btn.selected',
+    ]) {
+      const selectedButton = document.querySelector(selector) as HTMLElement | null;
+      const buttonSource = normalizeCurrentImageSource(
+        selectedButton?.dataset?.source || selectedButton?.getAttribute?.('data-source'),
+      );
+      if (buttonSource) return buttonSource;
+    }
+
+    const primarySelect = document.getElementById?.('image-source-select') as HTMLSelectElement | null;
+    const primarySource = normalizeCurrentImageSource(primarySelect?.value);
+    if (primarySource) return primarySource;
+
+    const legacySelect = document.getElementById?.('unified-image-source') as HTMLSelectElement | null;
+    return normalizeCurrentImageSource(legacySelect?.value);
+  } catch {
+    return '';
+  }
+}
+
 function normalizeShoppingConnectAIEngineCandidate(value: unknown): string {
   const raw = String(value || '').trim();
   const normalized = SHOPPING_ENGINE_ALIASES[raw] || raw;
@@ -250,6 +281,18 @@ function normalizePositiveInt(value: string | null, fallback: number): number {
 export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   const raw = readRawPipelineSettings();
   const currentShoppingSelection = readShoppingSelectionFromUi(flow);
+  const currentFullAutoImageSource = flow === 'full-auto'
+    ? readFullAutoImageSourceFromUi()
+      || normalizeCurrentImageSource(raw.fullAutoImageSource)
+      || normalizeCurrentImageSource(raw.globalImageSource)
+    : '';
+  const resolvedImageSource = currentFullAutoImageSource
+    || raw.fullAutoImageSource
+    || raw.globalImageSource
+    || 'nano-banana-pro';
+  const fullAutoShoppingEngine = flow === 'full-auto'
+    ? currentFullAutoImageSource
+    : '';
   const config: PipelineConfig = {
     flow,
     resolvedAt: Date.now(),
@@ -257,7 +300,7 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       headingImageMode: pipelineReadString('headingImageMode', 'all'),
       thumbnailTextInclude: pipelineReadBool('thumbnailTextInclude'),
       textOnlyPublish: pipelineReadBool('textOnlyPublish'),
-      imageSource: raw.fullAutoImageSource || raw.globalImageSource || 'nano-banana-pro',
+      imageSource: resolvedImageSource,
       imageStyle: pipelineReadString('imageStyle', 'realistic'),
       imageRatio: pipelineReadString('imageRatio', '1:1'),
       thumbnailImageRatio: pipelineReadString('thumbnailImageRatio', '1:1'),
@@ -266,7 +309,9 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
     },
     shopping: {
       subImageMode: normalizeShoppingSubImageMode(raw, currentShoppingSelection?.subImageMode || null),
-      aiImageEngine: currentShoppingSelection?.aiImageEngine || resolveShoppingConnectAIEngineFromRaw(raw),
+      aiImageEngine: currentShoppingSelection?.aiImageEngine
+        || fullAutoShoppingEngine
+        || resolveShoppingConnectAIEngineFromRaw(raw),
       autoThumbnail: raw.scAutoThumbnailSetting === 'true',
     },
     disclosure: {

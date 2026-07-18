@@ -17,11 +17,19 @@ import {
   GEMINI_TEXT_MODELS,
   normalizeGeminiTextModelId,
 } from './geminiTextModelNormalization.js';
+import {
+  CLAUDE_MODELS,
+  OPENAI_TEXT_MODELS,
+} from './textModelConstants.js';
 
 export {
   GEMINI_TEXT_MODELS,
   normalizeGeminiTextModelId,
 } from './geminiTextModelNormalization.js';
+export {
+  CLAUDE_MODELS,
+  OPENAI_TEXT_MODELS,
+} from './textModelConstants.js';
 
 export const AGENT_TEXT_PROVIDERS = ['agent-codex', 'agent-claude'] as const;
 
@@ -36,21 +44,6 @@ export function isAgentTextProvider(value: unknown): value is AgentTextProvider 
 export function agentTextProviderToCli(value: AgentTextProvider): 'codex' | 'claude' {
   return value === 'agent-codex' ? 'codex' : 'claude';
 }
-
-/**
- * Anthropic Claude (2026-04 기준 검증)
- *   Source: docs.claude.com / console.anthropic.com models
- */
-export const CLAUDE_MODELS = {
-  /** Premium: most capable generally available Claude model. */
-  FABLE: 'claude-fable-5',
-  /** Legacy property retained so older call sites select the same premium tier. */
-  OPUS: 'claude-fable-5',
-  /** Balanced: latest speed/intelligence model. */
-  SONNET: 'claude-sonnet-5',
-  /** 가성비 — Haiku 4.5 (정식 ID, 날짜 suffix 포함) */
-  HAIKU: 'claude-haiku-4-5-20251001',
-} as const;
 
 /**
  * Google Gemini Text (2026-04 기준 검증)
@@ -98,21 +91,6 @@ export const OPENAI_IMAGE_MODELS = {
   GPT_IMAGE_1: 'gpt-image-1',
   /** DALL-E 3 (2026-05-12 sunset 예정 — 폴백 전용) */
   DALL_E_3: 'dall-e-3',
-} as const;
-
-/**
- * OpenAI Text (gpt-4o/gpt-4o-mini는 2026-03-31 sunset → gpt-4.1 계열로 교체됨)
- */
-export const OPENAI_TEXT_MODELS = {
-  /** Value: current cost-sensitive GPT-5.6 model. */
-  LUNA: 'gpt-5.6-luna',
-  /** Balanced: current GPT-5.6 model. */
-  TERRA: 'gpt-5.6-terra',
-  /** Premium: current flagship GPT-5.6 model. */
-  SOL: 'gpt-5.6-sol',
-  /** Legacy properties retained for secondary call sites. */
-  GPT_41: 'gpt-5.6-terra',
-  GPT_41_MINI: 'gpt-5.6-luna',
 } as const;
 
 export type TextModelTier = 'value' | 'balanced' | 'premium';

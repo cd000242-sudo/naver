@@ -53,6 +53,19 @@ describe('copy-static runtime inline contract', () => {
     }
   });
 
+  it('inlines renderer text-model constants before prompt translation consumes them', () => {
+    expect(copyStaticSource).toContain("label: 'runtime/textModelConstants.js'");
+    expect(copyStaticSource).toContain(
+      "filePath: path.join(projectRoot, 'dist', 'runtime', 'textModelConstants.js')",
+    );
+
+    for (const symbol of ['CLAUDE_MODELS', 'OPENAI_TEXT_MODELS']) {
+      expect(copyStaticSource).toMatch(
+        new RegExp(`REQUIRED_RENDERER_RUNTIME_VALUES[\\s\\S]*['"]${symbol}['"]`),
+      );
+    }
+  });
+
   it('inlines the FTC preset SSOT before the browser renderer consumes it', () => {
     expect(rendererSource).toContain("from '../automation/ftcDisclosurePresets.js'");
     expect(copyStaticSource).toContain("label: 'automation/ftcDisclosurePresets.js'");
