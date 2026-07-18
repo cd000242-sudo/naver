@@ -1233,7 +1233,7 @@
                 </div>
                 <button type="submit" class="login-btn">로그인</button>
                 <p class="login-error" id="login-error">아이디 또는 비밀번호가 올바르지 않습니다.</p>
-                <p style="margin:12px 0 0;color:var(--text-secondary);font-size:.72rem;line-height:1.55;">사이트 로그인은 화면 접근용입니다. 공지·키워드 발행은 별도 서버 관리자 계정으로 연결하며, 비밀번호는 저장하지 않습니다.</p>
+                <p style="margin:12px 0 0;color:var(--text-secondary);font-size:.72rem;line-height:1.55;">관리자 로그인 한 번으로 공지·키워드 저장 권한까지 자동 연결됩니다. 비밀번호는 저장하지 않습니다.</p>
             </form>
         </div>
     </div>
@@ -2542,7 +2542,7 @@
             homeOpsApiStatus('서버 저장 권한을 확인하는 중입니다.', false);
             const session = await requestLewordAdminSession(userId, password, { silent: true });
             if (passwordNode) passwordNode.value = '';
-            homeOpsApiStatus(session ? '서버 저장 권한이 연결되었습니다.' : '서버 저장 권한 연결 실패: 사이트 로그인 계정이 아니라 LEWORD API 서버 관리자 계정을 입력해야 합니다.', !session);
+            homeOpsApiStatus(session ? '서버 저장 권한이 연결되었습니다.' : '서버 저장 권한 연결 실패: 관리자 로그인 정보를 다시 확인하거나 잠시 후 재시도해 주세요.', !session);
             return session;
         }
         function renderAdminNoticeList() {
@@ -5290,7 +5290,7 @@
             setValue('keyword-briefing-api-password', '');
             keywordBriefingApiAccessStatus(session
                 ? '서버 저장 권한이 연결되었습니다. 이 브라우저 탭에서만 유지됩니다.'
-                : '서버 저장 권한 연결 실패: 사이트 로그인 계정이 아니라 LEWORD API 서버 관리자 계정을 입력해야 합니다.', !session);
+                : '서버 저장 권한 연결 실패: 관리자 로그인 정보를 다시 확인하거나 잠시 후 재시도해 주세요.', !session);
             return session;
         }
 

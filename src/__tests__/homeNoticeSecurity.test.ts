@@ -269,5 +269,8 @@ describe('secure home notices', () => {
     expect(loginBlock).toContain('homeOpsApiIdInput.value = id');
     expect(loginBlock).toContain('사이트 로그인 완료 · 서버 저장 권한 자동 연결됨');
     expect(admin).toContain('관리자 페이지 로그인 아이디/비밀번호로 서버 저장권한을 자동 연결합니다.');
+    expect(admin).toContain('관리자 로그인 한 번으로 공지·키워드 저장 권한까지 자동 연결됩니다.');
+    expect(admin).not.toContain('사이트 로그인은 화면 접근용입니다.');
+    expect(admin).not.toContain('사이트 로그인 계정이 아니라 LEWORD API 서버 관리자 계정');
   });
 });
