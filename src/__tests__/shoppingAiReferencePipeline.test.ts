@@ -12,7 +12,7 @@ describe('shopping AI reference pipeline', () => {
     expect(source).not.toContain('convertCollectedImagesToResults');
     expect(source).not.toContain("actualProvider: 'collected-image'");
     expect(source).toContain("'dropshot'");
-    expect(source).toContain('isShoppingReferenceImageEngine');
+    expect(source).toContain('assertShoppingReferenceGenerationSelectionSupported');
   });
 
   it('uses one selected representative image for every shopping AI item', () => {
@@ -34,11 +34,64 @@ describe('shopping AI reference pipeline', () => {
     expect(source).toContain('referenceImagePath: representativeImageUrl');
     expect(source).toContain('if (isShoppingConnect && representativeImageUrl)');
     expect(source).toContain('createShoppingRepresentativeThumbnail(');
-    expect(source).toContain('const collectedBodyImages = shoppingReference.subheadingImages;');
-    expect(source).toContain('collectedBodyImages[i % collectedBodyImages.length]');
-    expect(source).toContain('const imgUrl = await resolveUsableShoppingReferenceSource(');
+    expect(source).toContain('createShoppingCollectedPublishImages({');
+    expect(source).not.toContain('window.api.matchImagesToHeadings(imageUrls, headingTitles)');
     expect(source).toContain('else if (!isShoppingConnect)');
     expect(source).toContain('if (isShoppingConnect && useCollectedImagesDirectly && collectedImages.length > 0)');
+  });
+
+  it('validates the exact provider and model before any shopping AI request', () => {
+    const fullAuto = read('renderer/modules/fullAutoFlow.ts');
+    const generator = read('imageGenerator.ts');
+    const costBoundary = read('renderer/modules/costAndAutoGen.ts');
+    const continuous = read('renderer/modules/continuousPublishing.ts');
+    const multi = read('renderer/modules/multiAccountManager.ts');
+    const publishing = read('renderer/modules/publishingHandlers.ts');
+
+    expect(fullAuto).toContain('isShoppingReferenceGenerationSelectionSupported(');
+    expect(fullAuto).toContain('formData.imageModel');
+    expect(generator).toContain('assertShoppingReferenceGenerationSelectionSupported(');
+    expect(generator).toContain('options.imageModel');
+    expect(generator).toContain('orderedCollectedImages as string[],\n        options.imageModel,');
+    expect(costBoundary).toContain('assertShoppingReferenceGenerationSelectionSupported(provider, options.imageModel)');
+    expect(continuous).toContain('itemPipelineCfg.shopping.aiImageModel');
+    expect(multi).toContain('itemPipelineCfg.shopping.aiImageModel');
+    expect(publishing).toContain('imageModel: formData.scAIImageModel || formData.imageModel');
+    expect(fullAuto).toContain('formData.scAIImageModel || formData.imageModel');
+  });
+
+  it('never calls the image matcher for shopping collected mode', () => {
+    const publishing = read('renderer/modules/publishingHandlers.ts');
+    const multi = read('renderer/modules/multiAccountManager.ts');
+
+    expect(publishing).not.toContain("(formData.contentMode === 'affiliate' && scSubImageModePre === 'collected')");
+    expect(multi).toContain('createShoppingCollectedPublishImages({');
+    expect(multi).not.toContain("const shouldMatchCollected = scSubImageModePre === 'collected';");
+  });
+
+  it('keeps manual shopping actions on collected originals without provider calls', () => {
+    const renderer = read('renderer/renderer.ts');
+    const headingImageGen = read('renderer/modules/headingImageGen.ts');
+    const shoppingUtils = read('renderer/utils/shoppingConnectUtils.ts');
+
+    expect(renderer).toContain("const useCollectedShoppingOriginals = isShoppingConnectContent && getSubImageMode() === 'collected';");
+    expect(renderer).toContain('const isShoppingConnectContent = isShoppingConnectForCurrentPost();');
+    expect(renderer).toContain('createShoppingCollectedPublishImages({');
+    expect(renderer).toContain("imageModel: isShoppingConnectContent && provider === 'openai-image' ? 'gpt-image-2' : undefined");
+    expect(headingImageGen).toContain("const useCollectedOriginal = getSubImageMode() === 'collected';");
+    expect(headingImageGen).toContain('createShoppingCollectedPublishImages({');
+    expect(headingImageGen).toContain("imageModel: imageSource === 'openai-image' ? 'gpt-image-2' : undefined");
+    expect(shoppingUtils).toContain('Array.isArray(sc?.collectedImages)');
+    expect(shoppingUtils).toContain("sc?.contentMode === 'affiliate'");
+    expect(shoppingUtils).not.toContain('if ((window as any).crawledProductInfo) return true;');
+  });
+
+  it('stops collected multi-account publishing instead of falling through to any AI provider', () => {
+    const multi = read('renderer/modules/multiAccountManager.ts');
+
+    expect(multi).toContain('SHOPPING_COLLECTED_IMAGES_REQUIRED');
+    expect(multi).not.toContain('제품 이미지 수집 실패 - AI 이미지로 대체합니다');
+    expect(multi).not.toContain("- AI 이미지로 대체`, 'warning'");
   });
 
   it('does not let pre-collected references switch continuous shopping AI back to direct placement', () => {

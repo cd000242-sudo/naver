@@ -5,8 +5,6 @@
 // defined HERE and nowhere else; three flows must never interpret the same
 // key with different defaults again.
 
-import { isShoppingReferenceImageEngine } from '../../image/shoppingReferenceGeneration.js';
-
 export type PipelineFlow = 'full-auto' | 'continuous' | 'multi-account';
 export type ShoppingSubImageMode = 'ai' | 'collected';
 
@@ -15,6 +13,7 @@ export interface ImagePipelineConfig {
   thumbnailTextInclude: boolean;
   textOnlyPublish: boolean;
   imageSource: string;
+  imageModel: string;
   imageStyle: string;
   imageRatio: string;
   thumbnailImageRatio: string;
@@ -25,6 +24,7 @@ export interface ImagePipelineConfig {
 export interface ShoppingConnectPipelineConfig {
   subImageMode: ShoppingSubImageMode;
   aiImageEngine: string;
+  aiImageModel: string;
   autoThumbnail: boolean;
 }
 
@@ -54,6 +54,7 @@ export interface PipelineFormDataSnapshot extends Record<string, unknown> {
   includeThumbnailText: boolean;
   skipImages: boolean;
   imageSource: string;
+  imageModel: string;
   imageStyle: string;
   imageRatio: string;
   thumbnailImageRatio: string;
@@ -61,6 +62,7 @@ export interface PipelineFormDataSnapshot extends Record<string, unknown> {
   imageFallbackPolicy: string;
   scSubImageMode: ShoppingSubImageMode;
   scAIImageEngine: string;
+  scAIImageModel: string;
   scAutoThumbnailSetting: boolean;
 }
 
@@ -92,6 +94,7 @@ export interface RawPipelineSettings {
   subheadingImageRatio: string | null;
   fullAutoImageSource: string | null;
   globalImageSource: string | null;
+  openaiImageModel: string | null;
   imageFallbackPolicy: string | null;
   scSubImageMode: string | null;
   scSubImageSource: string | null;
@@ -127,6 +130,7 @@ export function readRawPipelineSettings(): RawPipelineSettings {
     subheadingImageRatio: pipelineReadRaw('subheadingImageRatio'),
     fullAutoImageSource: pipelineReadRaw('fullAutoImageSource'),
     globalImageSource: pipelineReadRaw('globalImageSource'),
+    openaiImageModel: pipelineReadRaw('openaiImageModel'),
     imageFallbackPolicy: pipelineReadRaw('imageFallbackPolicy'),
     scSubImageMode: pipelineReadRaw('scSubImageMode'),
     scSubImageSource: pipelineReadRaw('scSubImageSource'),
@@ -197,10 +201,29 @@ function readFullAutoImageSourceFromUi(): string {
   }
 }
 
+function readFullAutoImageModelFromUi(): string {
+  try {
+    if (typeof document === 'undefined') return '';
+    const selectedModel = document.querySelector(
+      'input[name="openai-image-model"]:checked',
+    ) as HTMLInputElement | null;
+    if (selectedModel?.value) return String(selectedModel.value).trim();
+
+    const submodalModel = document.getElementById?.('submodal-openai-image-model') as HTMLSelectElement | null;
+    return String(submodalModel?.value || '').trim();
+  } catch {
+    return '';
+  }
+}
+
 function normalizeShoppingConnectAIEngineCandidate(value: unknown): string {
   const raw = String(value || '').trim();
+  if (!raw || raw === 'ai' || raw === 'collected') return '';
   const normalized = SHOPPING_ENGINE_ALIASES[raw] || raw;
-  return isShoppingReferenceImageEngine(normalized) ? normalized : '';
+  // Preserve explicit unsupported engines so the final capability gate can
+  // report the user's exact selection. Replacing them with the default Nano
+  // engine would be a prohibited cross-engine fallback.
+  return normalized;
 }
 
 export function normalizeShoppingConnectAIEngine(value: unknown): string {
@@ -286,6 +309,9 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       || normalizeCurrentImageSource(raw.fullAutoImageSource)
       || normalizeCurrentImageSource(raw.globalImageSource)
     : '';
+  const currentFullAutoImageModel = flow === 'full-auto'
+    ? readFullAutoImageModelFromUi()
+    : '';
   const resolvedImageSource = currentFullAutoImageSource
     || raw.fullAutoImageSource
     || raw.globalImageSource
@@ -293,6 +319,21 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
   const fullAutoShoppingEngine = flow === 'full-auto'
     ? currentFullAutoImageSource
     : '';
+  const shoppingUiSelectsDucttape = currentShoppingSelection?.subImageMode === 'ai'
+    && (flow === 'full-auto'
+      ? fullAutoShoppingEngine === 'openai-image'
+      : currentShoppingSelection.aiImageEngine === 'openai-image');
+  const storedSelectionUsesDucttapeAlias = [
+    raw.fullAutoImageSource,
+    raw.globalImageSource,
+  ].some(value => String(value || '').trim() === 'gpt-image-2');
+  const storedShoppingSelectionUsesDucttapeAlias = [
+    raw.scAIImageEngine,
+    raw.scSubImageSource,
+  ].some(value => String(value || '').trim() === 'gpt-image-2');
+  const resolvedShoppingEngine = currentShoppingSelection?.aiImageEngine
+    || fullAutoShoppingEngine
+    || resolveShoppingConnectAIEngineFromRaw(raw);
   const config: PipelineConfig = {
     flow,
     resolvedAt: Date.now(),
@@ -301,6 +342,10 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
       thumbnailTextInclude: pipelineReadBool('thumbnailTextInclude'),
       textOnlyPublish: pipelineReadBool('textOnlyPublish'),
       imageSource: resolvedImageSource,
+      imageModel: currentFullAutoImageModel
+        || (storedSelectionUsesDucttapeAlias ? 'gpt-image-2' : '')
+        || raw.openaiImageModel
+        || '',
       imageStyle: pipelineReadString('imageStyle', 'realistic'),
       imageRatio: pipelineReadString('imageRatio', '1:1'),
       thumbnailImageRatio: pipelineReadString('thumbnailImageRatio', '1:1'),
@@ -309,9 +354,15 @@ export function resolvePipelineConfig(flow: PipelineFlow): PipelineConfig {
     },
     shopping: {
       subImageMode: normalizeShoppingSubImageMode(raw, currentShoppingSelection?.subImageMode || null),
-      aiImageEngine: currentShoppingSelection?.aiImageEngine
-        || fullAutoShoppingEngine
-        || resolveShoppingConnectAIEngineFromRaw(raw),
+      aiImageEngine: resolvedShoppingEngine,
+      aiImageModel: resolvedShoppingEngine === 'openai-image'
+        ? (currentFullAutoImageModel
+          || (shoppingUiSelectsDucttape || storedShoppingSelectionUsesDucttapeAlias || storedSelectionUsesDucttapeAlias
+            ? 'gpt-image-2'
+            : '')
+          || raw.openaiImageModel
+          || '')
+        : '',
       autoThumbnail: raw.scAutoThumbnailSetting === 'true',
     },
     disclosure: {
@@ -359,6 +410,7 @@ export function createPipelineFormDataSnapshot<T extends Record<string, any>>(
     : resolvePipelineConfig(flow);
   const headingImageMode = nonEmptyString(input?.headingImageMode, config.image.headingImageMode);
   const imageSource = nonEmptyString(input?.imageSource, config.image.imageSource);
+  const imageModel = nonEmptyString(input?.imageModel, config.image.imageModel);
   const explicitSubImageMode = input?.scSubImageMode;
   const scSubImageMode: ShoppingSubImageMode = explicitSubImageMode === 'ai' || explicitSubImageMode === 'collected'
     ? explicitSubImageMode
@@ -376,6 +428,7 @@ export function createPipelineFormDataSnapshot<T extends Record<string, any>>(
       || headingImageMode === 'none'
       || imageSource === 'skip',
     imageSource,
+    imageModel,
     imageStyle: nonEmptyString(input?.imageStyle, config.image.imageStyle),
     imageRatio: nonEmptyString(input?.imageRatio, config.image.imageRatio),
     thumbnailImageRatio: nonEmptyString(input?.thumbnailImageRatio, config.image.thumbnailImageRatio),
@@ -384,6 +437,7 @@ export function createPipelineFormDataSnapshot<T extends Record<string, any>>(
     scSubImageMode,
     scAIImageEngine: normalizeShoppingConnectAIEngineCandidate(input?.scAIImageEngine)
       || config.shopping.aiImageEngine,
+    scAIImageModel: nonEmptyString(input?.scAIImageModel, config.shopping.aiImageModel),
     scAutoThumbnailSetting: typeof input?.scAutoThumbnailSetting === 'boolean'
       ? input.scAutoThumbnailSetting
       : config.shopping.autoThumbnail,

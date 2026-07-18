@@ -12,6 +12,7 @@ import {
   resolveSectionContentForImage,
   shouldUseStructuredImageContext,
 } from '../../image/contextualImagePrompt.js';
+import { assertShoppingReferenceGenerationSelectionSupported } from '../../image/shoppingReferenceGeneration.js';
 
 // 전역 스코프 의존성
 declare let generatedImages: any[];
@@ -41,7 +42,7 @@ declare function getSafeHeadingTitle(heading: any): string;
 declare function getHeadingSelectedImageKey(...args: any[]): string;
 declare function getStableImageKey(heading: any): string;
 declare function toFileUrlMaybe(p: string): string;
-declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null };
+declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; openaiImageModel: string | null; imageFallbackPolicy: string | null };
 
 type ImageFallbackPolicy = 'engine-only' | 'ask' | 'guarantee';
 
@@ -770,6 +771,9 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
     }
   }
   provider = String(options?.provider || provider || '').trim();
+  if (!options.imageModel && provider === 'openai-image') {
+    options.imageModel = String(rawPipeline.openaiImageModel || '').trim();
+  }
   if (!options.imageStyle) {
     const savedStyle = rawPipeline.imageStyle;
     if (savedStyle) {
@@ -863,37 +867,14 @@ async function generateImagesWithCostSafetyInternal(options: any): Promise<any> 
       console.log(`[Renderer] 🛒 쇼핑커넥트: ${options.collectedImages.length}개 수집 이미지 전달됨`);
     }
 
-    // ✅ [v2.7.28] HARD RULE 재설계 — 화이트리스트 → 블랙리스트
-    //   기존 화이트리스트(nano-banana-pro/2만 허용)는 'naver'(검색) / 'collected'(수집)
-    //   / 'saved'(저장) / 'local-folder'(내폴더) / 'no-images' 같이 가짜를 만들지 않는
-    //   provider까지 차단해 사용자가 "수집한 이미지로" 발행 시도해도 막히는 회귀를 만듦.
-    //   블랙리스트 패턴: 명시적으로 제품을 가짜로 만들어내는 AI 엔진만 차단.
-    //   허용 (자동 통과): nano-banana-pro, nano-banana-2 (Gemini img2img),
-    //                    openai-image (gpt-image-2 img2img),
-    //                    naver, collected, saved, local-folder, no-images, gallery.
-    //   차단: ImageFX, DALL-E 3, Leonardo, DeepInfra, Stability, Fal.ai, Prodia, Pollinations, flow
-    //         (text-only 생성이라 제품 정체성을 유지할 수 없음)
-    const SC_BLOCKED_FAKE_AI = [
-      'imagefx', 'dall-e-3', 'leonardoai', 'deepinfra', 'deepinfra-flux',
-      'stability', 'falai', 'prodia', 'pollinations', 'flow',
-    ];
-    if (provider && SC_BLOCKED_FAKE_AI.includes(provider)) {
-      const poolSize = Array.isArray(options.collectedImages) ? options.collectedImages.length : 0;
-      console.warn(`[쇼핑커넥트] 🚫 "${provider}" 엔진 차단 — 제품 정체성 보존 안 되는 AI 엔진`);
-      if (poolSize === 0) {
-        const errMsg = '🛒 쇼핑커넥트: 수집된 제품 이미지가 없습니다. "쇼핑몰 이미지 수집" 버튼으로 제품 이미지를 먼저 크롤링하거나, 이미지 엔진을 "나노바나나" 또는 "덕트테이프"로 변경하세요.';
-        console.error(`[쇼핑커넥트] ❌ ${errMsg}`);
-        return { success: false, message: errMsg };
-      }
-      console.warn(`[쇼핑커넥트] 🛒 수집 이미지 ${poolSize}장으로 자동 대체 (AI 생성 스킵)`);
-    } else if (!hasCollectedImages && !hasStructuredImages
-        && (provider === 'nano-banana' || provider === 'nano-banana-2' || provider === 'nano-banana-pro' || provider === 'openai-image')) {
-      // 나노바나나 3종/덕테이프 + 수집 이미지 없음 = text2img/img2img 진입 허용
-      console.log(`[Renderer] 🛒 쇼핑커넥트: 수집 이미지 없음 → ${provider}로 진행`);
-    } else {
-      // 그 외 (naver/collected/saved/local-folder/no-images/gallery 등) — 가드 통과
-      console.log(`[Renderer] 🛒 쇼핑커넥트: provider="${provider}" — 비-AI 또는 안전 엔진, 통과`);
+    try {
+      assertShoppingReferenceGenerationSelectionSupported(provider, options.imageModel);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.error(`[쇼핑커넥트] ❌ ${message}`);
+      return { success: false, images: [], message };
     }
+    console.log(`[Renderer] 🛒 대표 이미지 참조 생성 조합 확인: ${provider}/${options.imageModel || 'provider-default'}`);
 
     // ✅ [2026-02-23 FIX] 제품 가격 정보를 options에 주입 → 스펙 표에 정확한 가격 반영
     const productInfo = (currentStructuredContent as any)?.productInfo || (window as any).crawledProductInfo;

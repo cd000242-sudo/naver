@@ -29,9 +29,9 @@ import {
 } from './image/referenceImagePolicy.js';
 import {
   applyShoppingRepresentativeReference,
+  assertShoppingReferenceGenerationSelectionSupported,
   buildShoppingReferencePrompt,
   createShoppingRepresentativeThumbnail,
-  isShoppingReferenceImageEngine,
   resolveShoppingRepresentativeReference,
 } from './image/shoppingReferenceGeneration.js';
 import {
@@ -384,6 +384,9 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
   console.log(`[이미지생성] 🎨 선택된 AI 이미지 생성 엔진: ${displayName}`);
 
   assertProviderFn(normalizedProvider as ImageProvider);
+  if (options.isShoppingConnect) {
+    assertShoppingReferenceGenerationSelectionSupported(normalizedProvider, options.imageModel);
+  }
 
   // ✅ [2026-01-28] 크롤링 이미지가 있으면 각 item에 분배 (img2img 활성화)
   const uniqueCollectedImages = deduplicateReferenceImages(options.collectedImages || []);
@@ -539,21 +542,6 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
     return [];
   }
 
-  // 쇼핑 AI 모드는 수집 원본을 결과로 대체하지 않는다. 수집 이미지는 오직
-  // 대표 레퍼런스로만 쓰고, 레퍼런스 생성이 불가능하면 명확히 실패한다.
-  // 쇼핑커넥트에서는 img2img 지원 엔진만 제품 이미지를 정확히 재현 가능:
-  //   - nano-banana-pro (Gemini img2img, 기본 gemini-3-1-flash = 나노바나나2)
-  //   - openai-image (gpt-image-2 = 덕트테이프, image 파라미터로 참조 이미지 주입)
-  // 그 외 엔진(Leonardo/DeepInfra/ImageFX 등)은 제품이 변형되므로 수집 이미지 그대로 사용
-  if (options.isShoppingConnect && !isShoppingReferenceImageEngine(normalizedProvider)) {
-    throw new Error(
-      `[${displayName}] 쇼핑 AI 이미지는 대표 상품 이미지를 레퍼런스로 생성해야 합니다. `
-      + '현재 엔진은 레퍼런스 생성을 지원하지 않아 원본 이미지를 대신 배치하지 않고 중단했습니다. '
-      + '나노바나나, OpenAI 이미지, 또는 리더스 나노바나나 무제한을 선택해주세요.',
-    );
-  }
-
-
   // ✅ [v1.5.5] OpenAI 덕트테이프 (gpt-image-2) 선택 시
   if (normalizedProvider === 'openai-image') {
     try {
@@ -567,7 +555,7 @@ export async function generateImages(options: GenerateImagesOptions, apiKeys?: {
         options.isShoppingConnect || false,
         onImageGenerated,
         orderedCollectedImages as string[],
-        undefined,
+        options.imageModel,
         apiKeys?.openaiApiKey
       );
       console.log(`[이미지생성] ✅ 덕트테이프(gpt-image-2)로 ${openaiImages.length}개 이미지 생성 완료!`);

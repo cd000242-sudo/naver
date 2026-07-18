@@ -8,9 +8,11 @@ import {
 } from '../../image/referenceImagePolicy.js';
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
 import {
+    assertShoppingReferenceGenerationSelectionSupported,
+    createShoppingCollectedPublishImages,
     createShoppingRepresentativeThumbnail,
     doShoppingAiBodySlotsMatch,
-    isShoppingReferenceImageEngine,
+    isShoppingReferenceGenerationSelectionSupported,
     resolveShoppingAiPublishImages,
     resolveShoppingCollectedImagePlacement,
     resolveShoppingRepresentativeReference,
@@ -2718,6 +2720,9 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
     const imageSource = isShoppingConnect && formData.scSubImageMode === 'ai'
         ? (formData.scAIImageEngine || formData.imageSource)
         : formData.imageSource;
+    const imageModel = isShoppingConnect && formData.scSubImageMode === 'ai'
+        ? (formData.scAIImageModel || formData.imageModel)
+        : formData.imageModel;
     const imageStyle = formData.imageStyle;
     const imageRatio = formData.imageRatio;
     const imageFallbackPolicy = formData.imageFallbackPolicy;
@@ -2782,11 +2787,16 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
     }
     const thumbnailTextCheckbox = document.getElementById('thumbnail-text-option');
     const thumbnailFromStorage = _rawPipeline.thumbnailTextInclude === 'true';
-    if (isShoppingConnect && formData.scSubImageMode === 'ai' && !isShoppingReferenceImageEngine(imageSource)) {
-        console.warn(`[AI Images] 쇼핑커넥트 + ${imageSource}: 대표 상품 이미지 기반 img2img 미지원`);
-        const message = `"${imageSource}"는 쇼핑 대표이미지 기반 AI 생성을 지원하지 않습니다. 나노바나나2, 덕트테이프, 리더스 나노바나나프로 무제한 중 하나를 선택해주세요.`;
-        appendLog(`⚠️ ${message}`);
-        throw new Error(message);
+    if (isShoppingConnect && formData.scSubImageMode === 'ai'
+        && !isShoppingReferenceGenerationSelectionSupported(imageSource, imageModel)) {
+        console.warn(`[AI Images] 쇼핑커넥트 + ${imageSource}/${imageModel || 'no-model'}: 대표 상품 이미지 기반 img2img 미지원`);
+        try {
+            assertShoppingReferenceGenerationSelectionSupported(imageSource, imageModel);
+        }
+        catch (error) {
+            appendLog(`⚠️ ${error.message}`);
+            throw error;
+        }
     }
     const includeThumbnailText = isShoppingConnect ? false : (formData.includeThumbnailText ??
         thumbnailFromStorage ??
@@ -2799,7 +2809,6 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         : [];
     collectedImages = deduplicateReferenceImages(collectedImages);
     const shoppingReference = resolveShoppingCollectedImagePlacement(collectedImages);
-    const collectedBodyImages = shoppingReference.subheadingImages;
     const representativeImageUrl = isShoppingConnect
         ? await resolveUsableShoppingReferenceSource(
             shoppingReference.representative,
@@ -2816,47 +2825,6 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
     else if (isShoppingConnect && collectedImages.length > 0) {
         console.log(`[AI Images] ✅ 글 생성 시 수집된 이미지 ${collectedImages.length}개 재사용 (재크롤링 안함)`);
     }
-    if (isShoppingConnect && useCollectedImagesDirectly && collectedImages.length > 0) {
-        appendLog(`🛒 쇼핑 커넥트 모드: ${collectedImages.length}개 수집 이미지를 참조로 사용합니다.`);
-        if (collectedImages.length >= headings.length) {
-            try {
-                appendLog(`🎯 AI 이미지 매칭 중... (소제목에 맞는 이미지 자동 배치)`);
-                const headingTitles = headings.map((h) => h.title || h);
-                const imageUrls = collectedImages.map((img) => typeof img === 'string' ? img : (img.url || img.filePath || ''));
-                const matchResult = await window.api.matchImagesToHeadings(imageUrls, headingTitles);
-                if (matchResult.success && matchResult.matches) {
-                    const reorderedImages = matchResult.matches.map((imgIndex, headingIndex) => {
-                        const originalImg = collectedImages[imgIndex] || collectedImages[headingIndex % collectedImages.length];
-                        return {
-                            ...(typeof originalImg === 'object' ? originalImg : { url: originalImg }),
-                            heading: headingTitles[headingIndex],
-                            headingIndex: headingIndex,
-                            matchedByAI: true
-                        };
-                    });
-                    const isReviewUrl = (img) => {
-                        const u = String(img?.url || img?.filePath || (typeof img === 'string' ? img : '') || '');
-                        return /image\.nmv|checkout\.phinf/i.test(u);
-                    };
-                    const galleryFirst = [
-                        ...reorderedImages.filter((img) => !isReviewUrl(img)),
-                        ...reorderedImages.filter((img) => isReviewUrl(img)),
-                    ];
-                    galleryFirst.forEach((img, i) => {
-                        img.headingIndex = i;
-                        img.heading = headingTitles[i] ?? img.heading;
-                    });
-                    collectedImages = galleryFirst;
-                    const galleryCount = galleryFirst.filter((img) => !isReviewUrl(img)).length;
-                    appendLog(`✅ AI 매칭 완료: 추가이미지 ${galleryCount}개 우선 배치 + 리뷰 이미지는 뒤로 정렬`);
-                    console.log(`[AI Images] ✅ AI 매칭 + gallery 우선 정렬 결과:`, matchResult.matches);
-                }
-            }
-            catch (matchError) {
-                console.warn(`[AI Images] ⚠️ AI 매칭 실패, 순차 배치 유지:`, matchError);
-            }
-        }
-    }
     collectedImages = deduplicateReferenceImages(collectedImages);
     if (isShoppingConnect && useCollectedImagesDirectly && collectedImages.length > 0) {
         appendLog(`🧹 수집 이미지 중복 제거 완료: 고유 이미지 ${collectedImages.length}개`);
@@ -2864,6 +2832,17 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
     if (isShoppingConnect && !representativeImageUrl) {
         const modeLabel = useCollectedImagesDirectly ? '수집 이미지 직접 사용' : '대표 이미지 기반 AI 생성';
         throw new Error(`쇼핑커넥트 ${modeLabel}에 필요한 대표 상품 이미지가 없습니다. 상품 이미지 수집 결과를 확인해주세요.`);
+    }
+    if (isShoppingConnect && useCollectedImagesDirectly) {
+        const collectedPublishImages = createShoppingCollectedPublishImages({
+            images: collectedImages,
+            headings,
+            headingImageMode: _headingImageMode,
+            postTitle: imageArticleTitle || '쇼핑 대표 썸네일',
+            preferredReference: shoppingReference.representative,
+        });
+        appendLog(`✅ 수집 이미지 ${collectedPublishImages.length}장을 원본 그대로 배치했습니다. AI 이미지 API는 호출하지 않았습니다.`);
+        return collectedPublishImages;
     }
     let dedicatedShopThumbnail = null;
     if (isShoppingConnect && representativeImageUrl) {
@@ -2972,6 +2951,7 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
         appendLog(`🎨 쇼핑 소제목 ${shoppingBatchItems.length}개를 한 배치로 생성해 중복을 검사합니다.`);
         const shoppingBatchResult = await generateImagesWithCostSafety({
             provider: imageSource,
+            imageModel,
             items: shoppingBatchItems,
             postTitle: imageArticleTitle,
             postId: imagePostId,
@@ -3045,31 +3025,9 @@ async function generateAIImagesForHeadings(headings, formData, structuredContent
             else {
                 ref = await resolveReferenceImageForHeadingAsync(String(heading.title || heading || '').trim());
             }
-            if (isShoppingConnect && collectedBodyImages.length > 0 && !useAiImageChecked) {
-                const collectedImg = collectedBodyImages[i % collectedBodyImages.length];
-                const imgUrl = await resolveUsableShoppingReferenceSource(
-                    collectedImg,
-                    window.api.checkFileExists,
-                );
-                if (imgUrl) {
-                    console.log(`[AI Images] 🛒 쇼핑커넥트: ${i + 1}번 → 수집 이미지 직접 사용: ${imgUrl.substring(0, 60)}...`);
-                    appendLog(`✅ [${i + 1}/${headings.length}] "${String(headingTitle).substring(0, 20)}" 수집 이미지 적용 완료!`);
-                    completedCount++;
-                    const currentProgress = progressStart + ((progressEnd - progressStart) * (completedCount / headings.length));
-                    showUnifiedProgress(Math.round(currentProgress), `이미지 적용 중... (${completedCount}/${headings.length})`, `\"${heading.title}\" 수집 이미지 적용 완료`);
-                    return [{
-                            heading: heading.title,
-                            headingIndex: i,
-                            url: imgUrl,
-                            filePath: imgUrl,
-                            isCollectedImage: true,
-                            isThumbnail: false,
-                            source: 'collected'
-                        }];
-                }
-            }
             const imageResult = await generateImagesWithCostSafety({
                 provider: imageSource,
+                imageModel,
                 items: [{
                         heading: heading.title,
                         prompt: englishPrompt,

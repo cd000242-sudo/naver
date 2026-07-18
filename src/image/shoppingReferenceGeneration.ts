@@ -6,7 +6,6 @@ import {
 } from './referenceImagePolicy.js';
 
 export const SHOPPING_REFERENCE_IMAGE_ENGINES = [
-  'nano-banana',
   'nano-banana-2',
   'nano-banana-pro',
   'openai-image',
@@ -17,6 +16,7 @@ export type ShoppingReferenceImageEngine = typeof SHOPPING_REFERENCE_IMAGE_ENGIN
 
 export const SHOPPING_SELECTABLE_REFERENCE_ENGINES = [
   'nano-banana-2',
+  'nano-banana-pro',
   'openai-image',
   'dropshot',
 ] as const;
@@ -279,6 +279,42 @@ export function isShoppingSelectableReferenceEngine(
   return SHOPPING_SELECTABLE_REFERENCE_ENGINE_SET.has(String(engine || '').trim());
 }
 
+export function isShoppingReferenceGenerationSelectionSupported(
+  provider: unknown,
+  model?: unknown,
+): boolean {
+  const rawProvider = String(provider || '').trim();
+  const normalizedProvider = rawProvider === 'gpt-image-2' ? 'openai-image' : rawProvider;
+  const normalizedModel = rawProvider === 'gpt-image-2'
+    ? 'gpt-image-2'
+    : String(model || '').trim();
+
+  if (!isShoppingReferenceImageEngine(normalizedProvider)) return false;
+  if (normalizedProvider === 'openai-image') return normalizedModel === 'gpt-image-2';
+  return true;
+}
+
+export function assertShoppingReferenceGenerationSelectionSupported(
+  provider: unknown,
+  model?: unknown,
+): void {
+  if (isShoppingReferenceGenerationSelectionSupported(provider, model)) return;
+
+  const normalizedProvider = String(provider || '').trim() || 'unknown';
+  const normalizedModel = String(model || '').trim();
+  if (normalizedProvider === 'openai-image' || normalizedProvider === 'gpt-image-2') {
+    throw new Error(
+      `SHOPPING_REFERENCE_MODEL_UNSUPPORTED: 쇼핑커넥트 대표이미지 기반 AI 생성은 덕테이프 gpt-image-2만 지원합니다. `
+      + `현재 OpenAI 이미지 모델: ${normalizedModel || '선택되지 않음'}. gpt-image-2를 선택해주세요.`,
+    );
+  }
+
+  throw new Error(
+    `SHOPPING_REFERENCE_PROVIDER_UNSUPPORTED: "${normalizedProvider}"는 쇼핑 대표이미지 기반 AI 생성을 지원하지 않습니다. `
+    + '나노바나나2, 나노바나나 프로, 덕테이프(gpt-image-2), 리더스 나노바나나프로 무제한 중 하나를 선택해주세요.',
+  );
+}
+
 export function canUseReferenceFreeImageFallback(isShoppingConnect: unknown): boolean {
   return isShoppingConnect !== true;
 }
@@ -446,6 +482,89 @@ export function createShoppingRepresentativeThumbnail(
     disableTextOverlay: true,
     allowText: false,
   };
+}
+
+export interface ShoppingCollectedPublishImagesOptions<T, H> {
+  images: readonly T[] | null | undefined;
+  headings: readonly H[] | null | undefined;
+  headingImageMode: unknown;
+  postTitle: unknown;
+  preferredReference?: T | null;
+}
+
+export interface ShoppingCollectedBodyImage extends Record<string, unknown> {
+  url: string;
+  filePath: string;
+  previewDataUrl: string;
+  provider: 'collected-image';
+  heading: string;
+  originalIndex: number;
+  isThumbnail: false;
+  isCollectedImage: true;
+  preserveOriginal: true;
+  disableTextOverlay: true;
+  allowText: false;
+}
+
+function readShoppingHeadingLabel(heading: unknown): string {
+  if (typeof heading === 'string') return heading.trim();
+  if (!heading || typeof heading !== 'object') return '';
+  const record = heading as Record<string, unknown>;
+  return String(record.title || record.heading || record.text || '').trim();
+}
+
+/**
+ * Collected mode is a zero-generation path. It preserves the representative
+ * as thumbnail slot zero and places only the remaining crawler originals in
+ * deterministic order. It never duplicates the representative to fill gaps.
+ */
+export function createShoppingCollectedPublishImages<T, H>(
+  options: ShoppingCollectedPublishImagesOptions<T, H>,
+): Array<ShoppingRepresentativeThumbnail | ShoppingCollectedBodyImage> {
+  const placement = resolveShoppingCollectedImagePlacement(
+    options.images,
+    options.preferredReference,
+  );
+  const thumbnail = createShoppingRepresentativeThumbnail(
+    placement.representative,
+    options.postTitle,
+    placement.referenceUrl,
+  );
+  const headingSlots = selectShoppingBodyHeadingSlotsForMode(
+    options.headings,
+    options.headingImageMode,
+  );
+  const bodyImages = placement.subheadingImages
+    .slice(0, headingSlots.length)
+    .map((candidate, index): ShoppingCollectedBodyImage => {
+      const sourceCandidates = getShoppingReferenceSourceCandidates(candidate);
+      // A saved local copy may have been moved or deleted between collection
+      // and a later publish. Prefer the retained crawler URL for body slots.
+      const source = sourceCandidates.find(item => !item.allowLocalFile)?.source
+        || sourceCandidates[0]?.source
+        || '';
+      const metadata = candidate && typeof candidate === 'object'
+        ? { ...(candidate as Record<string, unknown>) }
+        : {};
+      const headingSlot = headingSlots[index];
+      return {
+        ...metadata,
+        url: source,
+        filePath: source,
+        previewDataUrl: source,
+        provider: 'collected-image',
+        heading: readShoppingHeadingLabel(headingSlot?.heading) || `소제목 ${index + 1}`,
+        originalIndex: headingSlot?.originalIndex ?? index,
+        isThumbnail: false,
+        isCollectedImage: true,
+        preserveOriginal: true,
+        disableTextOverlay: true,
+        allowText: false,
+      };
+    })
+    .filter(image => Boolean(image.url));
+
+  return [thumbnail, ...bodyImages];
 }
 
 function extractShoppingPublishOutputIdentity(candidate: unknown): string {

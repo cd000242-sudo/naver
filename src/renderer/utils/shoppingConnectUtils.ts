@@ -182,11 +182,14 @@ export function resolveAffiliateLink(
  */
 export function isShoppingConnectForCurrentPost(): boolean {
     try {
-        if (isShoppingConnectModeActive()) return true;
         const sc = (window as any).currentStructuredContent;
-        if (sc?.productInfo || sc?.affiliateLink) return true;
-        if ((window as any).crawledProductInfo) return true;
-        return false;
+        const mainMode = (document.getElementById('unified-content-mode') as HTMLInputElement | null)?.value;
+        const continuousMode = (document.getElementById('continuous-content-mode-select') as HTMLSelectElement | null)?.value;
+        const explicitAffiliateMode = (window as any).currentContentMode === 'affiliate'
+            || sc?.contentMode === 'affiliate'
+            || mainMode === 'affiliate'
+            || continuousMode === 'affiliate';
+        return explicitAffiliateMode;
     } catch {
         return false;
     }
@@ -199,6 +202,9 @@ export function isShoppingConnectForCurrentPost(): boolean {
 export function getShoppingConnectImagePool(): any[] {
     try {
         const sc = (window as any).currentStructuredContent;
+        if (Array.isArray(sc?.collectedImages) && sc.collectedImages.length > 0) {
+            return sc.collectedImages;
+        }
         return Array.isArray(sc?.images) ? sc.images : [];
     } catch {
         return [];

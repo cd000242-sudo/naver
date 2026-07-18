@@ -57,7 +57,7 @@ declare function generateAutoCTA(title: string, keywords?: string): any;
 declare function resolveAffiliateLink(link1?: string, link2?: string): string | undefined;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
-declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; autoThumbnail: boolean }; disclosure: { enabledSetting: boolean | null; text: string; defaultText: string }; safety: { adbIpChangeEnabled: boolean; adbIpChangeEvery: number } };
+declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageSource: string; imageModel: string; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string; fallbackPolicy: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; aiImageModel: string; autoThumbnail: boolean }; disclosure: { enabledSetting: boolean | null; text: string; defaultText: string }; safety: { adbIpChangeEnabled: boolean; adbIpChangeEvery: number } };
 declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null; scSubImageMode: string | null; scSubImageSource: string | null; scAIImageEngine: string | null; scAutoThumbnailSetting: string | null; ftcDisclosureEnabled: string | null; ftcDisclosureText: string | null; adbIpChangeEnabled: string | null; adbIpChangeEvery: string | null };
 declare function parseLocalFolderImages(folderPath: string, headings: any[]): Promise<any[]>;
 declare function isFullAutoStopRequested(modal: any): boolean;
@@ -701,6 +701,7 @@ export async function handleFullAutoPublish(): Promise<void> {
       contentMode: resolvedContentModeForPublish,
       // ✅ [2026-03-23 FIX] 이미지 설정 명시적 전달 (localStorage 폴백 의존 제거)
       // [Phase 7.1-a] 진입점 1회 해석 스냅샷 사용
+      imageModel: pipelineCfg.image.imageModel,
       imageStyle: pipelineCfg.image.imageStyle,
       headingImageMode: pipelineCfg.image.headingImageMode,
       imageRatio: pipelineCfg.image.imageRatio,
@@ -708,6 +709,7 @@ export async function handleFullAutoPublish(): Promise<void> {
       subheadingImageRatio: pipelineCfg.image.subheadingImageRatio,
       scSubImageMode: selectedShoppingSubImageMode,
       scAIImageEngine: pipelineCfg.shopping.aiImageEngine,
+      scAIImageModel: pipelineCfg.shopping.aiImageModel,
     };
 
     const isShoppingAiImageMode = formData.contentMode === 'affiliate'
@@ -860,13 +862,15 @@ export async function handleFullAutoPublish(): Promise<void> {
             }));
           }
         } else {
-          modal.addLog('⚠️ 제품 이미지 수집 실패 - AI 이미지로 대체합니다');
-          appendLog('⚠️ 제품 이미지 수집 실패 - AI 이미지 생성으로 진행');
+          modal.addLog(isShoppingAiImageMode
+            ? '⚠️ 제품 이미지 수집 실패 - 대표 이미지가 없어 쇼핑 AI 생성을 중단합니다'
+            : '⚠️ 제품 이미지 수집 실패 - 수집 이미지 모드이므로 AI로 대체하지 않습니다');
+          appendLog('⚠️ 제품 이미지 수집 실패 - 다른 이미지 엔진으로 대체하지 않습니다');
         }
       } catch (collectError) {
         console.error('[FullAutoPublish] 제품 이미지 수집 오류:', collectError);
         modal.addLog(`⚠️ 이미지 수집 오류: ${(collectError as Error).message?.substring(0, 50)}`);
-        appendLog('⚠️ 제품 이미지 수집 중 오류 발생 - AI 이미지로 대체');
+        appendLog('⚠️ 제품 이미지 수집 중 오류 발생 - 다른 이미지 엔진으로 대체하지 않습니다');
       }
     }
 
@@ -958,6 +962,13 @@ export async function handleFullAutoPublish(): Promise<void> {
         }
       }
     }
+    if (!skipImages && formData.contentMode === 'affiliate' && formData.scSubImageMode === 'collected') {
+      const collectedPool = structuredContent?.collectedImages || structuredContent?.images || [];
+      if (collectedPool.length === 0) {
+        throw new Error('SHOPPING_COLLECTED_IMAGES_REQUIRED: 수집된 상품 이미지가 없어 발행을 중단합니다. 수집 이미지 모드에서는 AI 이미지로 대체하지 않습니다.');
+      }
+    }
+
     // ✅ 이미지 생성 및 소분류 매칭
     if (!skipImages) {
       modal.addLog('🎨 이미지 처리 시작...');
@@ -977,8 +988,7 @@ export async function handleFullAutoPublish(): Promise<void> {
         // → AI 이미지 생성을 선택한 경우 수집 이미지 매칭은 불필요하고 혼란만 줌
         // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화
         const scSubImageModePre = pipelineCfg.shopping.subImageMode;
-        const shouldMatchCollected = !formData.useAiImage ||
-          (formData.contentMode === 'affiliate' && scSubImageModePre === 'collected');
+        const shouldMatchCollected = formData.contentMode !== 'affiliate' && !formData.useAiImage;
 
         if (shouldMatchCollected && collectedImgs.length > 0 && (structuredContent.headings || []).length > 0) {
           modal.addLog('🤖 수집 이미지를 소제목에 매칭 중...');
@@ -1132,6 +1142,7 @@ export async function handleFullAutoPublish(): Promise<void> {
                 headingsForAI,
                 structuredContent.selectedTitle || title,
                 {
+                  imageModel: formData.scAIImageModel || formData.imageModel,
                   stopCheck: () => isFullAutoStopRequested(modal),
                   onProgress: (msg: any) => modal.addLog(msg),
                   allowThumbnailText: false, // 소제목에는 텍스트 합성 안 함
@@ -1302,7 +1313,7 @@ export async function handleFullAutoPublish(): Promise<void> {
           for (let idx = 0; idx < headingsArray.length; idx++) {
             const h = headingsArray[idx];
             // 1. 소제목에 미리 매핑된 이미지 경로가 있으면 사용
-            let path = h.referenceImagePath || '';
+            let path = formData.contentMode === 'affiliate' ? '' : (h.referenceImagePath || '');
 
             // 2. 매핑된 경로가 없으면 headingImages (collectedImgs[1+])에서 순차 할당
             // ✅ [2026-02-23 FIX] 중복 이미지 발견 시 headingImgIdx를 증가시켜 다음 이미지 시도

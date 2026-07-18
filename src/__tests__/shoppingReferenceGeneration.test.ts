@@ -6,11 +6,13 @@ import {
   assertShoppingAiReferenceAvailable,
   buildReferenceSafeFallbackParts,
   buildShoppingReferencePrompt,
+  createShoppingCollectedPublishImages,
   canUseReferenceFreeImageFallback,
   createShoppingAiBatchPlan,
   createShoppingRepresentativeThumbnail,
   doShoppingAiBodySlotsMatch,
   isShoppingReferenceImageEngine,
+  isShoppingReferenceGenerationSelectionSupported,
   isShoppingSelectableReferenceEngine,
   resolveShoppingAiPublishImages,
   resolveShoppingCollectedImagePlacement,
@@ -141,16 +143,116 @@ describe('shopping representative image-to-image policy', () => {
     expect(isShoppingReferenceImageEngine(engine)).toBe(true);
   });
 
-  it.each(['flow', 'prodia', 'imagefx', 'collected'])('does not present %s as reference generation', (engine) => {
+  it.each(['nano-banana', 'flow', 'prodia', 'imagefx', 'collected'])('does not present %s as reference generation', (engine) => {
     expect(isShoppingReferenceImageEngine(engine)).toBe(false);
   });
 
-  it.each(['nano-banana-2', 'openai-image', 'dropshot'])('allows %s in shopping mode selectors', (engine) => {
+  it.each(['nano-banana-2', 'nano-banana-pro', 'openai-image', 'dropshot'])('allows %s in shopping mode selectors', (engine) => {
     expect(isShoppingSelectableReferenceEngine(engine)).toBe(true);
   });
 
-  it.each(['nano-banana', 'nano-banana-pro', 'flow', 'prodia'])('keeps %s out of shopping mode selectors', (engine) => {
+  it.each(['nano-banana', 'flow', 'prodia'])('keeps %s out of shopping mode selectors', (engine) => {
     expect(isShoppingSelectableReferenceEngine(engine)).toBe(false);
+  });
+
+  it.each([
+    ['nano-banana-2', undefined],
+    ['nano-banana-pro', undefined],
+    ['openai-image', 'gpt-image-2'],
+    ['gpt-image-2', undefined],
+    ['dropshot', undefined],
+  ])('allows the exact shopping reference selection %s / %s', (provider, model) => {
+    expect(isShoppingReferenceGenerationSelectionSupported(provider, model)).toBe(true);
+  });
+
+  it.each([
+    ['nano-banana', undefined],
+    ['openai-image', undefined],
+    ['openai-image', 'gpt-image-1.5'],
+    ['flow', undefined],
+    ['prodia', undefined],
+    ['deepinfra', undefined],
+    ['leonardoai', 'phoenix-1.0'],
+  ])('rejects the unsupported shopping reference selection %s / %s', (provider, model) => {
+    expect(isShoppingReferenceGenerationSelectionSupported(provider, model)).toBe(false);
+  });
+
+  it('places collected originals without generating or duplicating the representative', () => {
+    const representative = {
+      url: 'https://shop.example.com/product-main.jpg',
+      isRepresentative: true,
+      source: 'product-main',
+    };
+    const galleryOne = { url: 'https://shop.example.com/gallery-1.jpg', source: 'product-gallery' };
+    const galleryTwo = { url: 'https://shop.example.com/gallery-2.jpg', source: 'product-gallery' };
+
+    const images = createShoppingCollectedPublishImages({
+      images: [galleryOne, representative, galleryTwo],
+      headings: [{ title: 'first' }, { title: 'second' }, { title: 'third' }],
+      headingImageMode: 'all',
+      postTitle: 'Product review',
+    });
+
+    expect(images).toHaveLength(3);
+    expect(images[0]).toMatchObject({
+      url: representative.url,
+      isThumbnail: true,
+      isShoppingRepresentativeThumbnail: true,
+      preserveOriginal: true,
+    });
+    expect(images.slice(1)).toMatchObject([
+      { url: galleryOne.url, heading: 'first', isThumbnail: false, preserveOriginal: true },
+      { url: galleryTwo.url, heading: 'second', isThumbnail: false, preserveOriginal: true },
+    ]);
+    expect(images.map(image => image.url)).not.toEqual([
+      representative.url,
+      representative.url,
+      representative.url,
+    ]);
+  });
+
+  it('returns only the original thumbnail when the crawler collected one image', () => {
+    const representative = {
+      filePath: 'C:\\images\\product-main.jpg',
+      isRepresentative: true,
+    };
+
+    const images = createShoppingCollectedPublishImages({
+      images: [representative],
+      headings: [{ title: 'first' }, { title: 'second' }],
+      headingImageMode: 'all',
+      postTitle: 'Product review',
+    });
+
+    expect(images).toHaveLength(1);
+    expect(images[0]).toMatchObject({
+      filePath: representative.filePath,
+      isThumbnail: true,
+      preserveOriginal: true,
+    });
+  });
+
+  it('keeps a remote original usable when a previously saved local body copy is stale', () => {
+    const images = createShoppingCollectedPublishImages({
+      images: [
+        { url: 'https://shop.example.com/main.jpg', isRepresentative: true },
+        {
+          filePath: 'C:\\missing\\gallery.jpg',
+          localPath: 'C:\\missing\\gallery.jpg',
+          originalUrl: 'https://shop.example.com/gallery.jpg',
+        },
+      ],
+      headings: [{ title: 'first' }],
+      headingImageMode: 'all',
+      postTitle: 'Product review',
+    });
+
+    expect(images[1]).toMatchObject({
+      url: 'https://shop.example.com/gallery.jpg',
+      filePath: 'https://shop.example.com/gallery.jpg',
+      previewDataUrl: 'https://shop.example.com/gallery.jpg',
+      preserveOriginal: true,
+    });
   });
 
   it('selects the official representative before review images', () => {
@@ -462,10 +564,10 @@ describe('shopping reference engine UI wiring', () => {
   });
 
   it('does not expose reference-free engines as selectable shopping AI engines', () => {
-    expect(html).toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="flow"\s+disabled/);
-    expect(html).toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="prodia"\s+disabled/);
-    expect(html).toMatch(/name="ma-shopping-subimage-source"\s+value="flow"\s+disabled/);
-    expect(html).toMatch(/name="ma-shopping-subimage-source"\s+value="prodia"\s+disabled/);
+    expect(html).not.toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="(?:flow|prodia)"/);
+    expect(html).not.toMatch(/name="ma-shopping-subimage-source"\s+value="(?:flow|prodia)"/);
+    expect(html).toMatch(/name="continuous-modal-shopping-subimage-source"\s+value="nano-banana-pro"/);
+    expect(html).toMatch(/name="ma-shopping-subimage-source"\s+value="nano-banana-pro"/);
     expect(continuous).not.toMatch(/normalizedValue === 'dropshot' \|\| normalizedValue === 'flow'/);
     expect(multi).not.toMatch(/value === 'dropshot' \|\| value === 'flow'/);
   });

@@ -3,6 +3,8 @@
 // modules/headingImageGen.ts
 // ============================================
 import { resolveSectionContentForImage } from '../../image/contextualImagePrompt.js';
+import { createShoppingCollectedPublishImages } from '../../image/shoppingReferenceGeneration.js';
+import { getSubImageMode } from '../utils/subImageMode.js';
  
 
 // --- Global declarations (exposed by renderer.ts via window) ---
@@ -4890,6 +4892,21 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
     //   쇼핑 커넥트 모드일 때는 엔진 허용 여부와 무관하게 이 블록으로 일원화.
     //   허용 엔진(nano-banana-pro, openai-image)은 collectedImages를 img2img 참조로 주입.
     if (isShoppingConnectForCurrentPost()) {
+      const useCollectedOriginal = getSubImageMode() === 'collected';
+      if (useCollectedOriginal) {
+        const collectedLayout = createShoppingCollectedPublishImages({
+          images: getShoppingConnectImagePool(),
+          headings: currentStructuredContent?.headings || [],
+          headingImageMode: 'all',
+          postTitle: currentStructuredContent?.selectedTitle || blogTitle,
+        });
+        const directImage = collectedLayout[headingIndex];
+        imageUrl = String(directImage?.previewDataUrl || directImage?.url || directImage?.filePath || '').trim();
+        if (!imageUrl) {
+          throw new Error('SHOPPING_COLLECTED_IMAGES_REQUIRED: 이 위치에 다시 배치할 수집 원본 이미지가 없습니다. 상품 이미지를 다시 수집해 주세요.');
+        }
+        appendLog(`🛒 수집 원본을 "${resolvedHeadingTitle}" 위치에 다시 배치했습니다. AI 호출 없음.`, 'images-log-output');
+      } else {
       const isBlocked = shouldBlockEngineForShoppingConnect(imageSource);
       if (isBlocked) {
         appendLog(`🛒 쇼핑커넥트: "${resolvedHeadingTitle}" → 수집 이미지 재사용 (${imageSource} 차단)`, 'images-log-output');
@@ -4900,6 +4917,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       const thumbnailTextInclude = readRawPipelineSettings().thumbnailTextInclude === 'true';
       const imageResult = await generateImagesWithCostSafety({
         provider: imageSource,
+        imageModel: imageSource === 'openai-image' ? 'gpt-image-2' : undefined,
         items: [{
           heading: resolvedHeadingTitle,
           prompt: finalPrompt,
@@ -4916,6 +4934,7 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
         imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
       } else {
         throw new Error(imageResult.message || '🛒 쇼핑커넥트: 수집된 제품 이미지가 없습니다. 먼저 "쇼핑몰 이미지 수집" 버튼으로 제품 이미지를 크롤링하세요.');
+      }
       }
     } else if (imageSource === 'pollinations' || imageSource === 'nano-banana-pro') {
       imageUrl = await generateNanoBananaProImage(finalPrompt);

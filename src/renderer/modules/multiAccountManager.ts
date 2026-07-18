@@ -5,6 +5,7 @@ import { applyPendingArticleTablesToGeneratedContent } from './articleTableCompo
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import {
     createShoppingAiBatchPlan,
+    createShoppingCollectedPublishImages,
     createShoppingRepresentativeThumbnail,
     resolveShoppingAiPublishImages,
     resolveShoppingRepresentativeReference,
@@ -637,6 +638,7 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
         onProgress?.(`🎨 [run #${runId}] 쇼핑 소제목 ${bodyItems.length}개를 한 배치로 생성합니다.`);
         const batchResult = await generateImagesWithCostSafety({
             provider,
+            imageModel: options.imageModel,
             items: shoppingBatchPlan.bodyItems,
             postTitle,
             regenerate: false,
@@ -709,6 +711,7 @@ async function generateImagesForAutomationInner(provider, headings, postTitle, o
                 onProgress?.(`🎨 [${itemIndex + 1}/${_displayCount}][run #${runId}] ${provider} 엔진으로 순차 생성 중... (${elapsedSec}초 경과)`);
                 const result = await generateImagesWithCostSafety({
                     provider: provider,
+                    imageModel: options.imageModel,
                     items: [item],
                     postTitle: postTitle,
                     regenerate: false,
@@ -3348,7 +3351,10 @@ async function initMultiAccountPublishModal() {
                         const imageSource = isShoppingAiMode
                             ? itemPipelineCfg.shopping.aiImageEngine
                             : (queueItem.imageSource || getFullAutoImageSource());
-                        let shoppingCollectedImages = [];
+                        let shoppingCollectedImages = resolveShoppingRepresentativeReference([
+                            ...(structuredContent.collectedImages || []),
+                            ...(structuredContent.images || []),
+                        ]).images;
                         const skipImages = queueItem.skipImages === true
                             || (window.isImageSkipEnabled?.() === true)
                             || imageSource === 'skip';
@@ -3405,39 +3411,29 @@ async function initMultiAccountPublishModal() {
                                     }
                                 }
                                 else {
-                                    addMALog('⚠️ 제품 이미지 수집 실패 - AI 이미지로 대체합니다', 'warning');
+                                    addMALog(scSubImageModePre === 'collected'
+                                        ? '⚠️ 제품 이미지 수집 실패 - 수집 이미지 모드이므로 AI로 대체하지 않습니다'
+                                        : '⚠️ 제품 이미지 수집 실패 - 대표 이미지가 없어 쇼핑 AI 생성을 중단합니다', 'warning');
                                 }
                             }
                             catch (collectError) {
                                 console.error('[FullAuto] 쇼핑커넥트 이미지 수집 오류:', collectError);
-                                addMALog(`⚠️ 이미지 수집 오류: ${collectError.message?.substring(0, 50)} - AI 이미지로 대체`, 'warning');
+                                addMALog(`⚠️ 이미지 수집 오류: ${collectError.message?.substring(0, 50)} - 다른 이미지 엔진으로 대체하지 않습니다`, 'warning');
                             }
                         }
-                        if (generatedImages.length > 0 && queueItem.contentMode === 'affiliate') {
-                            const shouldMatchCollected = scSubImageModePre === 'collected';
-                            if (shouldMatchCollected && (structuredContent.headings || []).length > 0) {
-                                try {
-                                    addMALog('🤖 수집 이미지를 소제목에 매칭 중...', 'info');
-                                    const matchResult = await window.api.matchImages({
-                                        headings: structuredContent.headings || [],
-                                        collectedImages: generatedImages,
-                                        scSubImageSource: scSubImageModePre
-                                    });
-                                    if (matchResult?.success && matchResult.assignments) {
-                                        matchResult.assignments.forEach((assignment) => {
-                                            const headIdx = assignment.headingIndex;
-                                            const targetHeading = (structuredContent.headings || [])[headIdx];
-                                            if (targetHeading) {
-                                                targetHeading.referenceImagePath = assignment.imageUrl || assignment.imagePath;
-                                            }
-                                        });
-                                        addMALog(`✅ ${matchResult.assignments.length}개 소제목에 이미지 배치 완료`, 'success');
-                                    }
-                                }
-                                catch (matchErr) {
-                                    console.error('[FullAuto] 이미지 매칭 실패:', matchErr);
-                                }
+                        if (!skipImages && queueItem.contentMode === 'affiliate' && scSubImageModePre === 'collected') {
+                            if (shoppingCollectedImages.length === 0) {
+                                throw new Error('SHOPPING_COLLECTED_IMAGES_REQUIRED: 수집된 상품 이미지가 없어 발행을 중단합니다. 수집 이미지 모드에서는 AI 이미지로 대체하지 않습니다.');
                             }
+                            generatedImages = createShoppingCollectedPublishImages({
+                                images: shoppingCollectedImages,
+                                headings: structuredContent.headings || [],
+                                headingImageMode: itemPipelineCfg.image.headingImageMode,
+                                postTitle: structuredContent.selectedTitle || '쇼핑 대표 썸네일',
+                            });
+                            addMALog(`✅ 수집 원본 ${generatedImages.length}장 배치 완료 (AI 이미지 호출 없음)`, 'success');
+                        }
+                        if (generatedImages.length > 0 && queueItem.contentMode === 'affiliate') {
                             if (queueItem.contentMode !== 'affiliate' && queueItem.includeThumbnailText && generatedImages.length > 0) {
                                 try {
                                     const thumbnailImg = generatedImages[0];
@@ -3494,6 +3490,9 @@ async function initMultiAccountPublishModal() {
                                 aiOptions: {
                                     flightScope: queueItem.accountId || queueItem.id,
                                     headingImageMode: itemPipelineCfg.image.headingImageMode,
+                                    imageModel: isShoppingAiMode
+                                        ? itemPipelineCfg.shopping.aiImageModel
+                                        : itemPipelineCfg.image.imageModel,
                                     fallbackProvider: resolveImageProviderFallback(),
                                     stopCheck: () => stopRequested || window.stopFullAutoPublish,
                                     allowThumbnailText: itemPipelineCfg.image.thumbnailTextInclude,
@@ -3510,6 +3509,9 @@ async function initMultiAccountPublishModal() {
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
                                 flightScope: queueItem.accountId || queueItem.id,
                                 headingImageMode: itemPipelineCfg.image.headingImageMode,
+                                imageModel: isShoppingAiMode
+                                    ? itemPipelineCfg.shopping.aiImageModel
+                                    : itemPipelineCfg.image.imageModel,
                                 fallbackProvider: resolveImageProviderFallback(),
                                 allowThumbnailText: isShoppingAiMode ? false : (itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText),
                                 thumbnailTextInclude: isShoppingAiMode ? false : (itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText),
@@ -3533,6 +3535,9 @@ async function initMultiAccountPublishModal() {
                             generatedImages = await generateImagesForAutomation(imageSource, headings, structuredContent.selectedTitle, {
                                 flightScope: queueItem.accountId || queueItem.id,
                                 headingImageMode: itemPipelineCfg.image.headingImageMode,
+                                imageModel: isShoppingAiMode
+                                    ? itemPipelineCfg.shopping.aiImageModel
+                                    : itemPipelineCfg.image.imageModel,
                                 fallbackProvider: resolveImageProviderFallback(),
                                 allowThumbnailText: isShoppingAiMode ? false : (itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText),
                                 thumbnailTextInclude: isShoppingAiMode ? false : (itemPipelineCfg.image.thumbnailTextInclude || queueItem.includeThumbnailText),

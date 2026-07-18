@@ -15,11 +15,12 @@ describe('automation login and image pipeline contracts', () => {
     expect(globalTypes).toContain('matchImages: (payload:');
   });
 
-  it('passes full image objects to collected-image matching in multi-account flow', () => {
+  it('places collected originals directly in multi-account flow without AI matching', () => {
     const source = read('src/renderer/modules/multiAccountManager.ts');
 
-    expect(source).toContain('collectedImages: generatedImages,');
-    expect(source).not.toContain('collectedImages: generatedImages.map((img) => img.url || img.filePath)');
+    expect(source).toContain('createShoppingCollectedPublishImages({');
+    expect(source).toContain('AI 이미지 호출 없음');
+    expect(source).not.toContain("const shouldMatchCollected = scSubImageModePre === 'collected';");
   });
 
   it('does not hammer Gemini prompt translation after a 429 response', () => {

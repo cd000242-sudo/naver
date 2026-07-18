@@ -72,9 +72,10 @@ import {
 // ✅ [2026-01-25 모듈화] 이미지 비용 유틸리티
 import { isCostRiskImageProvider, getCostRiskProviderLabel, getTodayKey } from './utils/imageCostUtils.js';
 // ✅ [2026-01-25 모듈화] 쇼핑커넥트 유틸리티
-import { isShoppingConnectModeActive, isAffiliateUrl, resolveAffiliateLink } from './utils/shoppingConnectUtils.js';
+import { isShoppingConnectModeActive, isShoppingConnectForCurrentPost, isAffiliateUrl, resolveAffiliateLink, getShoppingConnectImagePool } from './utils/shoppingConnectUtils.js';
 // ✅ [2026-05-18] scSubImageSource 키 충돌 분리: mode('ai'|'collected') vs engine(엔진명)
-import './utils/subImageMode.js';
+import { getSubImageMode } from './utils/subImageMode.js';
+import { createShoppingCollectedPublishImages } from '../image/shoppingReferenceGeneration.js';
 // ✅ [2026-04-18] 이미지 스킵 여부 단일 진실 공급원 — UI 3개 소스 통합
 import { isImageSkipEnabled, syncImageSkipUI } from './utils/imageSkipCheck.js';
 // ✅ [2026-01-25 모듈화] 스토리지 유틸리티
@@ -3159,32 +3160,39 @@ function initContentHeadingImageGeneration(): void {
         );
 
         const provider = contentImageProvider.value as string;
+        const isShoppingConnectContent = isShoppingConnectForCurrentPost();
+        const useCollectedShoppingOriginals = isShoppingConnectContent && getSubImageMode() === 'collected';
+        let result: any;
 
-        // ✅ [2026-03-07 FIX] generateImagesWithCostSafety 경유 → 이미지 설정 자동 주입 적용
-        const result = await generateImagesWithCostSafety({
-          provider,
-          items: selectedHeadings.map((h: any) => {
-            const title = String(h.title || h.text || (typeof h === 'string' ? h : '')).trim();
-            const prompt = String(h.imagePrompt || h.prompt || title || 'Abstract Image').trim();
-            return {
-              heading: title || '이미지',
-              prompt: prompt
-            };
-          }),
-          postTitle: currentStructuredContent?.selectedTitle,
-          forceImageGeneration: true,
-          postId: currentPostId || undefined, // ✅ 글 ID 전달
-          // ✅ 쇼핑커넥트 모드: 수집된 이미지 전달
-          isShoppingConnect: true, // ✅ 쇼핑커넥트 강제 활성화
-          collectedImages: (() => {
-            const collected = currentStructuredContent?.collectedImages || [];
-            console.log(`[Renderer] 🛒 쇼핑커넥트 이미지 전달: isShoppingConnect=${isShoppingConnectModeActive()}, collectedImages=${collected.length}개`);
-            if (collected.length > 0) {
-              console.log(`[Renderer]   첫번째 이미지: ${collected[0]?.substring?.(0, 80) || collected[0]}`);
-            }
-            return collected;
-          })(),
-        } as any);
+        if (useCollectedShoppingOriginals) {
+          const collectedLayout = createShoppingCollectedPublishImages({
+            images: getShoppingConnectImagePool(),
+            headings: selectedHeadings,
+            headingImageMode: 'all',
+            postTitle: currentStructuredContent?.selectedTitle || '',
+          });
+          const collectedBodyImages = collectedLayout.slice(1);
+          if (collectedBodyImages.length === 0) {
+            throw new Error('SHOPPING_COLLECTED_IMAGES_REQUIRED: 선택한 소제목에 배치할 수집 원본 이미지가 없습니다. 상품 이미지를 다시 수집해 주세요.');
+          }
+          result = { success: true, images: collectedBodyImages };
+          appendLog(`🛒 수집 원본 ${collectedBodyImages.length}장을 선택한 소제목에 배치했습니다. AI 호출 없음.`);
+        } else {
+          result = await generateImagesWithCostSafety({
+            provider,
+            items: selectedHeadings.map((h: any) => {
+              const title = String(h.title || h.text || (typeof h === 'string' ? h : '')).trim();
+              const prompt = String(h.imagePrompt || h.prompt || title || 'Abstract Image').trim();
+              return { heading: title || '이미지', prompt };
+            }),
+            postTitle: currentStructuredContent?.selectedTitle,
+            forceImageGeneration: true,
+            postId: currentPostId || undefined,
+            isShoppingConnect: isShoppingConnectContent,
+            imageModel: isShoppingConnectContent && provider === 'openai-image' ? 'gpt-image-2' : undefined,
+            collectedImages: isShoppingConnectContent ? getShoppingConnectImagePool() : [],
+          } as any);
+        }
 
         if (result.success && result.images && result.images.length > 0) {
           // 생성된 이미지 목록에 추가
@@ -8831,14 +8839,14 @@ function addShoppingConnectSubImageModeOption(): void {
           <input type="radio" name="sc-subimage-mode-inline-radio" value="collected" style="width: 16px; height: 16px; accent-color: #10b981;">
           <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">📷 수집된 제품 이미지 (추천)</span>
         </span>
-        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">상품 페이지의 추가이미지를 그대로 사용 — 비용 0원</span>
+        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">크롤링한 원본 이미지만 그대로 배치 — AI 호출·비용 0원</span>
       </label>
       <label style="display: flex; flex-direction: column; gap: 0.3rem; padding: 0.6rem; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 8px; cursor: pointer;">
         <span style="display: flex; align-items: center; gap: 0.5rem;">
           <input type="radio" name="sc-subimage-mode-inline-radio" value="ai" style="width: 16px; height: 16px; accent-color: #8b5cf6;">
           <span style="color: var(--text-strong); font-size: 0.75rem; font-weight: 600;">🎨 AI 이미지 생성</span>
         </span>
-        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">제품 사진을 참조해 AI가 새로 생성 — 장당 비용 발생</span>
+        <span style="font-size: 0.68rem; color: var(--text-muted); padding-left: 1.6rem;">대표 원본은 썸네일, 소제목은 대표 원본을 참조해 생성 — 지원 엔진 4종만</span>
       </label>
     </div>
     <label style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; padding: 0.55rem 0.6rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; cursor: pointer;">

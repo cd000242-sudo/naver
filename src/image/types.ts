@@ -38,6 +38,8 @@ export interface ImageRequestItem {
 
 export interface GenerateImagesOptions {
   provider: ImageProvider;
+  /** Exact model selected in the UI when a provider exposes multiple models. */
+  imageModel?: string;
   items: ImageRequestItem[];
   styleHint?: string;
   postTitle?: string;

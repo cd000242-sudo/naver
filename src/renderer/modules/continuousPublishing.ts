@@ -91,7 +91,7 @@ declare function generateContentFromUrl(url: string, title?: string, tone?: stri
 declare function generateContentFromKeywords(title: string, keywords?: string, tone?: string, suppressModal?: boolean, contentMode?: string, category?: string): Promise<void>;
 declare function generateImagesForAutomation(imageSource: string, headings: any[], title: string, options?: any): Promise<any[]>;
 declare function resolveImageProviderFallback(): string;
-declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; autoThumbnail: boolean } };
+declare function resolvePipelineConfig(flow: 'full-auto' | 'continuous' | 'multi-account'): { flow: string; resolvedAt: number; image: { headingImageMode: string; thumbnailTextInclude: boolean; textOnlyPublish: boolean; imageSource: string; imageModel: string; imageStyle: string; imageRatio: string; thumbnailImageRatio: string; subheadingImageRatio: string; fallbackPolicy: string }; shopping: { subImageMode: 'ai' | 'collected'; aiImageEngine: string; aiImageModel: string; autoThumbnail: boolean } };
 declare function readRawPipelineSettings(): { headingImageMode: string | null; thumbnailTextInclude: string | null; textOnlyPublish: string | null; imageStyle: string | null; imageRatio: string | null; thumbnailImageRatio: string | null; subheadingImageRatio: string | null; fullAutoImageSource: string | null; globalImageSource: string | null; imageFallbackPolicy: string | null; scSubImageMode: string | null; scSubImageSource: string | null; scAIImageEngine: string | null; scAutoThumbnailSetting: string | null };
 declare function executeUnifiedAutomation(formData: any): Promise<any>;
 declare function updateUnifiedPreview(content: any): void;
@@ -4707,6 +4707,9 @@ async function startContinuousPublishingV2(): Promise<void> {
                   finalStructuredContent.selectedTitle,
                   {
                     headingImageMode: itemPipelineCfg.image.headingImageMode,
+                    imageModel: isShoppingAiMode
+                      ? itemPipelineCfg.shopping.aiImageModel
+                      : itemPipelineCfg.image.imageModel,
                     fallbackProvider: resolveImageProviderFallback(),
                     stopCheck: () => !isContinuousMode,
                     onProgress: (msg: string) => {
