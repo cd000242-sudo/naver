@@ -34,6 +34,13 @@ export interface GenerationConnectionSettings {
   readonly vision?: GenerationRoute;
 }
 
+/** Only MCP is an optional execution override; agent/API use the legacy controls. */
+export function resolveMcpTextOverride(
+  settings: GenerationConnectionSettings | undefined,
+): GenerationRoute | undefined {
+  return settings?.text.mode === 'mcp' ? settings.text : undefined;
+}
+
 export interface LegacyGenerationSelection {
   readonly primaryGeminiTextModel?: unknown;
   readonly defaultAiProvider?: unknown;

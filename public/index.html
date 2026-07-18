@@ -5731,66 +5731,48 @@
                             <section id="generation-connection-panel" class="generation-connection-panel" aria-labelledby="generation-connection-title">
                                 <div class="generation-connection-heading">
                                     <div>
-                                        <span class="generation-eyebrow">GENERATION CONNECTION</span>
-                                        <h3 id="generation-connection-title">글·이미지 생성 연결 방식</h3>
-                                        <p>글과 이미지를 각각 선택할 수 있습니다. 선택한 경로가 실패해도 다른 엔진이나 유료 API로 자동 전환하지 않습니다.</p>
+                                        <span class="generation-eyebrow">OPTIONAL MCP CONNECTION</span>
+                                        <h3 id="generation-connection-title">MCP 연결 (선택 기능)</h3>
+                                        <p>평소에는 기존 글 엔진과 이미지 설정을 그대로 사용하고, MCP 서버를 연결할 때만 아래에서 도구를 선택합니다.</p>
                                     </div>
                                     <button type="button" id="mcp-connections-refresh-btn" class="generation-icon-btn">새로고침</button>
                                 </div>
 
-                                <div class="generation-mode-cards" aria-label="연결 방식 안내">
-                                    <button type="button" class="generation-mode-card" data-generation-mode-card="mcp">
-                                        <span class="generation-mode-icon">⌘</span>
-                                        <strong>MCP</strong>
-                                        <small>로컬·원격 MCP 서버의 지정 도구만 실행</small>
-                                        <em>무료를 뜻하지 않음</em>
-                                    </button>
-                                    <button type="button" class="generation-mode-card" data-generation-mode-card="agent">
-                                        <span class="generation-mode-icon">◆</span>
-                                        <strong>에이전트</strong>
-                                        <small>Codex·Claude Code·로그인형 이미지 엔진</small>
-                                        <em>구독·로그인 한도 사용</em>
-                                    </button>
-                                    <button type="button" class="generation-mode-card" data-generation-mode-card="api">
-                                        <span class="generation-mode-icon">⚿</span>
-                                        <strong>API 키</strong>
-                                        <small>Gemini·OpenAI·Claude 등 기존 API</small>
-                                        <em>공급자 과금·무료 한도 적용</em>
-                                    </button>
+                                <div class="generation-mcp-intro" role="note">
+                                    <strong>MCP를 쓰고 싶은 경우에만 설정하세요.</strong>
+                                    <span>MCP를 사용하지 않으면 기존 글 엔진 설정을 그대로 따릅니다.</span>
+                                    <span>이미지는 풀오토 이미지 설정·이미지 관리 탭을 그대로 따릅니다.</span>
+                                    <span>MCP 글 생성은 기존 API와 동일한 최종 프롬프트를 그대로 전달합니다.</span>
+                                    <span>웹사이트 로그인만으로 일반 MCP가 자동 연결되지는 않습니다. 사용할 MCP 서버와 tool을 한 번 등록해야 합니다.</span>
                                 </div>
 
                                 <div class="generation-route-summary" aria-live="polite">
-                                    <div><span>현재 글 경로</span><strong id="generation-current-text">불러오는 중…</strong></div>
-                                    <div><span>현재 이미지 경로</span><strong id="generation-current-image">불러오는 중…</strong></div>
+                                    <div><span>MCP 글 덮어쓰기</span><strong id="generation-current-text">불러오는 중…</strong></div>
+                                    <div><span>MCP 이미지 덮어쓰기</span><strong id="generation-current-image">불러오는 중…</strong></div>
                                     <div><span>자동 폴백</span><strong class="generation-no-fallback">사용 안 함</strong></div>
                                 </div>
 
                                 <div class="generation-route-grid">
                                     <div class="generation-route-card">
-                                        <div class="generation-route-card-title"><span>01</span><strong>글 생성</strong></div>
-                                        <label for="generation-text-mode">연결 방식</label>
-                                        <select id="generation-text-mode">
-                                            <option value="mcp">MCP</option>
-                                            <option value="agent">에이전트</option>
-                                            <option value="api">API 키</option>
-                                        </select>
-                                        <label for="generation-text-choice">실행할 서버·에이전트·API</label>
-                                        <select id="generation-text-choice"></select>
+                                        <div class="generation-route-card-title"><span>01</span><strong>MCP 글 생성</strong></div>
+                                        <p class="generation-route-help">선택하지 않으면 위쪽의 기존 AI 텍스트 엔진을 사용합니다.</p>
+                                        <label for="generation-text-choice">MCP 서버 · 글 tool</label>
+                                        <select id="generation-text-choice"><option value="">사용 안 함 — 기존 글 엔진 설정</option></select>
                                     </div>
                                     <div class="generation-route-card">
-                                        <div class="generation-route-card-title"><span>02</span><strong>이미지 생성</strong></div>
-                                        <label for="generation-image-mode">연결 방식</label>
-                                        <select id="generation-image-mode">
-                                            <option value="mcp">MCP</option>
-                                            <option value="agent">에이전트</option>
-                                            <option value="api">API 키</option>
-                                        </select>
-                                        <label for="generation-image-choice">실행할 서버·에이전트·API</label>
-                                        <select id="generation-image-choice"></select>
+                                        <div class="generation-route-card-title"><span>02</span><strong>MCP 이미지 생성 (선택)</strong></div>
+                                        <p class="generation-route-help">선택하지 않으면 풀오토 이미지 설정·이미지 관리 탭의 엔진을 사용합니다.</p>
+                                        <label for="generation-image-choice">MCP 서버 · 이미지 tool</label>
+                                        <select id="generation-image-choice"><option value="">사용 안 함 — 기존 이미지 설정</option></select>
                                     </div>
                                 </div>
 
-                                <button type="button" id="generation-routes-save-btn" class="generation-primary-btn">선택한 글·이미지 경로 저장</button>
+                                <button type="button" id="generation-routes-save-btn" class="generation-primary-btn">MCP 사용 설정 저장</button>
+
+                                <div class="generation-dropshot-note" role="note">
+                                    <strong>리더스 나노바나나프로 무제한 안내</strong>
+                                    <span>이 엔진은 Dropshot 로그인 경로 안에서 Nano Banana Pro 모델을 사용합니다. 화면에 Nano Banana Pro가 보여도 Gemini API 키를 호출하거나 API 비용을 쓰는 경로가 아닙니다.</span>
+                                </div>
 
                                 <details id="mcp-connection-editor" class="mcp-connection-editor">
                                     <summary>

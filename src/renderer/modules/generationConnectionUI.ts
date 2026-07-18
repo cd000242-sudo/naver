@@ -1,4 +1,5 @@
 import type { AppConfig } from '../../configManager.js';
+import { normalizeGenerationConnectionSettings } from '../../generation/connectionConfig.js';
 import type {
   GenerationConnectionSettings,
 } from '../../generation/connectionConfig.js';
@@ -72,6 +73,10 @@ function invalidRoute(): never {
   throw new Error('GENERATION_UI_ROUTE_INVALID');
 }
 
+function isMcpRoute(route: GenerationRoute | undefined): route is GenerationRoute {
+  return route?.mode === 'mcp';
+}
+
 export function createNonMcpUiRoute(
   stage: RouteStage,
   mode: NonMcpMode,
@@ -106,7 +111,7 @@ export function createMcpUiRoute(input: McpUiRouteInput): GenerationRoute {
 export function mergeUiRouteSettings(
   current: Partial<GenerationConnectionSettings> | undefined,
   text: GenerationRoute,
-  image: GenerationRoute,
+  image?: GenerationRoute,
 ): GenerationConnectionSettings {
   return Object.freeze({
     version: 1,
@@ -144,12 +149,6 @@ function setSelectOptions(select: HTMLSelectElement, choices: readonly { value: 
   if (preferred && choices.some((choice) => choice.value === preferred)) select.value = preferred;
 }
 
-function routeChoiceValue(route: GenerationRoute | undefined): string | undefined {
-  if (!route || route.mode === 'mcp') return undefined;
-  const choices = choicesFor(route.capability === 'text.generate' ? 'text' : 'image', route.mode);
-  return choices.find((choice) => choice.toolOrModelId === route.toolOrModelId)?.value;
-}
-
 function profileRouteValue(profileId: string, routeId: string): string {
   return `${profileId}\u001f${routeId}`;
 }
@@ -162,34 +161,28 @@ function splitProfileRouteValue(value: string): readonly [string, string] {
 
 function populateRouteChoice(
   stage: RouteStage,
-  mode: GenerationMode,
   profiles: readonly McpConnectionProfileInput[],
   preferredRoute?: GenerationRoute,
 ): void {
   const select = generationConnectionElement<HTMLSelectElement>(`generation-${stage}-choice`);
   if (!select) return;
-  if (mode !== 'mcp') {
-    const choices = choicesFor(stage, mode);
-    setSelectOptions(select, choices, routeChoiceValue(preferredRoute));
-    return;
-  }
   const mcpChoices = profiles.flatMap((profile) => profile.tools
     .filter((tool) => stage === 'text' ? tool.capability === 'text.generate' : tool.capability.startsWith('image.'))
     .map((tool) => ({
       value: profileRouteValue(profile.profileId, tool.routeId),
       label: `${profile.profileId} · ${tool.toolId}`,
     })));
-  const preferred = preferredRoute?.mode === 'mcp'
+  const preferred = isMcpRoute(preferredRoute)
     ? profiles.flatMap((profile) => profile.tools
       .filter((tool) => profile.connectorId === preferredRoute.connectorId && tool.routeId === preferredRoute.routeId)
       .map((tool) => profileRouteValue(profile.profileId, tool.routeId)))[0]
     : undefined;
-  setSelectOptions(select, mcpChoices, preferred);
+  const disabledLabel = stage === 'text'
+    ? '사용 안 함 — 기존 글 엔진 설정'
+    : '사용 안 함 — 기존 이미지 설정';
+  setSelectOptions(select, [{ value: '', label: disabledLabel }, ...mcpChoices], preferred);
   if (mcpChoices.length === 0) {
-    const option = document.createElement('option');
-    option.value = '';
-    option.textContent = '먼저 아래에서 MCP 연결과 도구를 등록하세요';
-    select.append(option);
+    select.options[0].textContent = `${disabledLabel} · MCP 도구 미등록`;
   }
 }
 
@@ -202,8 +195,14 @@ function describeRoute(route: GenerationRoute | undefined): string {
 function renderCurrentRouteSummary(config: AppConfig): void {
   const text = generationConnectionElement<HTMLElement>('generation-current-text');
   const image = generationConnectionElement<HTMLElement>('generation-current-image');
-  if (text) text.textContent = describeRoute(config.generationConnectionSettings?.text);
-  if (image) image.textContent = describeRoute(config.generationConnectionSettings?.image);
+  const textRoute = config.generationConnectionSettings?.text;
+  const imageRoute = config.generationConnectionSettings?.image;
+  if (text) text.textContent = isMcpRoute(textRoute)
+    ? describeRoute(textRoute)
+    : '사용 안 함 · 기존 글 엔진 설정';
+  if (image) image.textContent = isMcpRoute(imageRoute)
+    ? describeRoute(imageRoute)
+    : '사용 안 함 · 풀오토/이미지 관리 설정';
 }
 
 function profileForSelectedRoute(
@@ -221,37 +220,90 @@ function profileForSelectedRoute(
 function selectedRoute(
   stage: RouteStage,
   profiles: readonly McpConnectionProfileInput[],
-): GenerationRoute {
-  const mode = generationConnectionElement<HTMLSelectElement>(`generation-${stage}-mode`)?.value as GenerationMode;
+): GenerationRoute | undefined {
   const choice = generationConnectionElement<HTMLSelectElement>(`generation-${stage}-choice`)?.value || '';
-  if (mode === 'mcp') {
-    const selected = profileForSelectedRoute(stage, profiles);
-    return createMcpUiRoute({
-      routeId: selected.tool.routeId,
-      connectorId: selected.profile.connectorId,
-      toolId: selected.tool.toolId,
-      capability: selected.tool.capability,
-      billingKind: selected.tool.billingKind,
-    });
-  }
-  if (mode === 'agent' || mode === 'api') return createNonMcpUiRoute(stage, mode, choice);
-  return invalidRoute();
-}
-
-function legacyTextConfig(route: GenerationRoute): Partial<AppConfig> {
-  if (route.mode === 'agent') {
-    return { primaryGeminiTextModel: route.connectorId === 'agent-codex' ? 'agent-codex' : 'agent-claude' };
-  }
-  if (route.mode !== 'api') return {};
-  const provider = route.connectorId.replace(/-api$/, '');
-  return {
-    primaryGeminiTextModel: route.toolOrModelId,
-    defaultAiProvider: provider as AppConfig['defaultAiProvider'],
-  };
+  if (!choice) return undefined;
+  const selected = profileForSelectedRoute(stage, profiles);
+  return createMcpUiRoute({
+    routeId: selected.tool.routeId,
+    connectorId: selected.profile.connectorId,
+    toolId: selected.tool.toolId,
+    capability: selected.tool.capability,
+    billingKind: selected.tool.billingKind,
+  });
 }
 
 export function resolveLegacyImageStorageValue(route: GenerationRoute): string | undefined {
   return route.mode === 'mcp' ? undefined : route.toolOrModelId;
+}
+
+const SHOPPING_CONNECT_EXISTING_IMAGE_ENGINES = new Set([
+  'dropshot',
+  'nano-banana-2',
+  'openai-image',
+]);
+
+interface ExistingImageSettingsSnapshot {
+  readonly fullAutoImageSource?: string | null;
+  readonly globalImageSource?: string | null;
+}
+
+export function createLegacyImageSettingsMigration(
+  route: GenerationRoute | undefined,
+  current: ExistingImageSettingsSnapshot,
+): Readonly<Record<string, string>> | undefined {
+  const provider = route ? resolveLegacyImageStorageValue(route) : undefined;
+  if (!provider) return undefined;
+  const stillMatchesOriginalSelection = current.fullAutoImageSource === provider
+    && current.globalImageSource === provider;
+  if (!stillMatchesOriginalSelection) return undefined;
+  const base = {
+    fullAutoImageSource: provider,
+    globalImageSource: provider,
+  };
+  return Object.freeze(SHOPPING_CONNECT_EXISTING_IMAGE_ENGINES.has(provider)
+    ? { ...base, scAIImageEngine: provider }
+    : base);
+}
+
+export function planLegacyNonMcpImageMigration(
+  route: GenerationRoute | undefined,
+  current: ExistingImageSettingsSnapshot,
+): Readonly<{
+  removeImageOverride: boolean;
+  storagePatch?: Readonly<Record<string, string>>;
+}> {
+  const removeImageOverride = Boolean(route && !isMcpRoute(route));
+  return Object.freeze({
+    removeImageOverride,
+    storagePatch: removeImageOverride
+      ? createLegacyImageSettingsMigration(route, current)
+      : undefined,
+  });
+}
+
+async function migrateLegacyNonMcpOverrides(config: AppConfig): Promise<AppConfig> {
+  const textRoute = config.generationConnectionSettings?.text;
+  const imageRoute = config.generationConnectionSettings?.image;
+  const plan = planLegacyNonMcpImageMigration(imageRoute, {
+    fullAutoImageSource: localStorage.getItem('fullAutoImageSource'),
+    globalImageSource: localStorage.getItem('globalImageSource'),
+  });
+  if (!plan.removeImageOverride) return config;
+
+  if (plan.storagePatch) {
+    for (const [key, value] of Object.entries(plan.storagePatch)) localStorage.setItem(key, value);
+  }
+  const text = textRoute ?? normalizeGenerationConnectionSettings(undefined, config).settings.text;
+  const generationConnectionSettings = mergeUiRouteSettings(
+    config.generationConnectionSettings,
+    text,
+    undefined,
+  );
+  return window.api.saveConfig({
+    ...config,
+    generationConnectionSettings,
+  });
 }
 
 function renderMcpProfileList(profiles: readonly McpConnectionProfileInput[], configuredIds: readonly string[]): void {
@@ -356,6 +408,7 @@ function hydrateMcpForm(profile: McpConnectionProfileInput | undefined): void {
 }
 
 let generationConnectionUiInitialized = false;
+let generationConnectionInitialization: Promise<void> | undefined;
 let profiles: readonly McpConnectionProfileInput[] = Object.freeze([]);
 let currentConfig: AppConfig | undefined;
 
@@ -366,47 +419,34 @@ async function refreshConnections(): Promise<void> {
   renderMcpProfileList(profiles, result.configuredProfileIds || []);
   if (currentConfig) {
     for (const stage of ['text', 'image'] as const) {
-      const mode = generationConnectionElement<HTMLSelectElement>(`generation-${stage}-mode`)?.value as GenerationMode;
-      populateRouteChoice(stage, mode, profiles, currentConfig.generationConnectionSettings?.[stage]);
+      populateRouteChoice(stage, profiles, currentConfig.generationConnectionSettings?.[stage]);
     }
   }
 }
 
 async function refreshAll(): Promise<void> {
-  currentConfig = await window.api.getConfig();
+  currentConfig = await migrateLegacyNonMcpOverrides(await window.api.getConfig());
   renderCurrentRouteSummary(currentConfig);
   await refreshConnections();
-  for (const stage of ['text', 'image'] as const) {
-    const route = currentConfig.generationConnectionSettings?.[stage];
-    const modeSelect = generationConnectionElement<HTMLSelectElement>(`generation-${stage}-mode`);
-    if (modeSelect) modeSelect.value = route?.mode || (stage === 'text' ? 'api' : 'agent');
-    populateRouteChoice(stage, (modeSelect?.value || 'api') as GenerationMode, profiles, route);
-  }
-  generationConnectionSetStatus('현재 경로를 불러왔습니다. 실패 시 다른 방식으로 자동 전환하지 않습니다.');
+  generationConnectionSetStatus('MCP 선택 상태를 불러왔습니다. 미선택 항목은 기존 설정을 그대로 사용합니다.');
 }
 
 async function saveRoutes(): Promise<void> {
-  generationConnectionSetStatus('선택한 경로를 저장하는 중입니다…', 'working');
+  generationConnectionSetStatus('MCP 사용 설정을 저장하는 중입니다…', 'working');
   const config = await window.api.getConfig();
-  const text = selectedRoute('text', profiles);
+  const selectedTextMcp = selectedRoute('text', profiles);
   const image = selectedRoute('image', profiles);
+  const text = selectedTextMcp
+    ?? normalizeGenerationConnectionSettings(undefined, config).settings.text;
   const nextSettings = mergeUiRouteSettings(config.generationConnectionSettings, text, image);
   const nextConfig: AppConfig = {
     ...config,
-    ...legacyTextConfig(text),
     generationConnectionSettings: nextSettings,
   };
   currentConfig = await window.api.saveConfig(nextConfig);
-  try {
-    const legacyImageStorageValue = resolveLegacyImageStorageValue(image);
-    if (legacyImageStorageValue) {
-      localStorage.setItem('fullAutoImageSource', legacyImageStorageValue);
-      localStorage.setItem('globalImageSource', legacyImageStorageValue);
-    }
-  } catch { /* main-process route remains authoritative */ }
   renderCurrentRouteSummary(currentConfig);
-  generationConnectionSetStatus('저장 완료 · 글과 이미지는 표시된 경로만 사용합니다.', 'success');
-  generationConnectionToast('생성 경로를 저장했습니다. 자동 폴백은 사용하지 않습니다.');
+  generationConnectionSetStatus('저장 완료 · MCP 미선택 항목은 기존 설정을 그대로 사용합니다.', 'success');
+  generationConnectionToast('MCP 사용 설정을 저장했습니다. 자동 폴백은 사용하지 않습니다.');
   window.dispatchEvent(new CustomEvent('generation-connection-changed', { detail: nextSettings }));
 }
 
@@ -462,43 +502,26 @@ function wireAsync(id: string, operation: () => Promise<void>): void {
   });
 }
 
-export function initGenerationConnectionUI(): void {
-  if (generationConnectionUiInitialized || typeof document === 'undefined') return;
-  if (!generationConnectionElement('generation-connection-panel')) return;
+export function initGenerationConnectionUI(): Promise<void> {
+  if (generationConnectionInitialization) return generationConnectionInitialization;
+  if (typeof document === 'undefined' || !generationConnectionElement('generation-connection-panel')) {
+    return Promise.resolve();
+  }
+  if (generationConnectionUiInitialized) return Promise.resolve();
   generationConnectionUiInitialized = true;
 
-  for (const stage of ['text', 'image'] as const) {
-    generationConnectionElement<HTMLSelectElement>(`generation-${stage}-mode`)?.addEventListener('change', (event) => {
-      populateRouteChoice(stage, (event.currentTarget as HTMLSelectElement).value as GenerationMode, profiles);
-    });
-  }
   generationConnectionElement<HTMLSelectElement>('mcp-transport')?.addEventListener('change', updateTransportFields);
   generationConnectionElement<HTMLSelectElement>('mcp-profile-list')?.addEventListener('change', (event) => {
     hydrateMcpForm(profiles.find((profile) => profile.profileId === (event.currentTarget as HTMLSelectElement).value));
   });
-  document.querySelectorAll<HTMLElement>('[data-generation-mode-card]').forEach((card) => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('[data-generation-mode-card]').forEach((entry) => entry.classList.remove('is-active'));
-      card.classList.add('is-active');
-      const mode = card.dataset.generationModeCard as GenerationMode;
-      for (const stage of ['text', 'image'] as const) {
-        const modeSelect = generationConnectionElement<HTMLSelectElement>(`generation-${stage}-mode`);
-        if (modeSelect) modeSelect.value = mode;
-        populateRouteChoice(stage, mode, profiles, currentConfig?.generationConnectionSettings?.[stage]);
-      }
-      const editor = generationConnectionElement<HTMLDetailsElement>('mcp-connection-editor');
-      editor?.classList.toggle('is-emphasized', mode === 'mcp');
-      if (editor && mode === 'mcp') editor.open = true;
-    });
-  });
-
   wireAsync('generation-routes-save-btn', saveRoutes);
   wireAsync('mcp-connection-save-btn', saveMcpConnection);
   wireAsync('mcp-connection-test-btn', testMcpConnection);
   wireAsync('mcp-connection-remove-btn', removeMcpConnection);
   wireAsync('mcp-connections-refresh-btn', refreshAll);
   updateTransportFields();
-  refreshAll().catch((error) => {
+  generationConnectionInitialization = refreshAll().catch((error) => {
     generationConnectionSetStatus(error instanceof Error ? error.message : String(error), 'error');
   });
+  return generationConnectionInitialization;
 }

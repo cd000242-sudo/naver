@@ -6,18 +6,28 @@ const root = process.cwd();
 const html = readFileSync(resolve(root, 'public', 'index.html'), 'utf8');
 const renderer = readFileSync(resolve(root, 'src', 'renderer', 'renderer.ts'), 'utf8');
 const ui = readFileSync(resolve(root, 'src', 'renderer', 'modules', 'generationConnectionUI.ts'), 'utf8');
+const main = readFileSync(resolve(root, 'src', 'main.ts'), 'utf8');
 const buildScript = readFileSync(resolve(root, 'scripts', 'copy-static.mjs'), 'utf8');
 
 describe('generation connection UI integration', () => {
-  it('ships one explicit MCP/agent/API selector for both text and images', () => {
+  it('shows only optional MCP overrides and leaves existing agent/API/image settings authoritative', () => {
     expect(html).toContain('id="generation-connection-panel"');
-    expect(html).toContain('data-generation-mode-card="mcp"');
-    expect(html).toContain('data-generation-mode-card="agent"');
-    expect(html).toContain('data-generation-mode-card="api"');
-    expect(html).toContain('id="generation-text-mode"');
-    expect(html).toContain('id="generation-image-mode"');
-    expect(html).toContain('자동 폴백');
-    expect(html).toContain('사용 안 함');
+    expect(html).toContain('id="generation-text-choice"');
+    expect(html).toContain('id="generation-image-choice"');
+    expect(html).not.toContain('data-generation-mode-card=');
+    expect(html).not.toContain('id="generation-text-mode"');
+    expect(html).not.toContain('id="generation-image-mode"');
+    expect(html).toContain('MCP를 사용하지 않으면 기존 글 엔진 설정을 그대로 따릅니다.');
+    expect(html).toContain('풀오토 이미지 설정·이미지 관리 탭을 그대로 따릅니다.');
+    expect(html).toContain('기존 API와 동일한 최종 프롬프트를 그대로 전달합니다.');
+    const saveRoutesSource = ui.match(/async function saveRoutes[\s\S]*?async function saveMcpConnection/)?.[0] || '';
+    expect(saveRoutesSource).not.toContain('localStorage.setItem');
+    expect(ui).toContain('migrateLegacyNonMcpOverrides');
+  });
+
+  it('lets only MCP routes override the existing text and image selections', () => {
+    expect(main).toContain('resolveMcpTextOverride(currentConfig.generationConnectionSettings)');
+    expect(ui).toContain("route?.mode === 'mcp'");
   });
 
   it('requires explicit trust before storing an executable MCP connection', () => {
@@ -35,7 +45,8 @@ describe('generation connection UI integration', () => {
 
   it('initializes and inlines the module in the packaged renderer', () => {
     expect(renderer).toMatch(/import \{ initGenerationConnectionUI \}/);
-    expect(renderer).toMatch(/initSettingsModalFunc\(\);[\s\S]{0,200}initGenerationConnectionUI\(\);/);
+    expect(renderer).toMatch(/initSettingsModalFunc\(\);[\s\S]{0,200}void initGenerationConnectionUI\(\);/);
+    expect(renderer).toMatch(/async function initializeApplication[\s\S]{0,700}await initGenerationConnectionUI\(\);/);
     expect(buildScript).toContain("'generationConnectionUI.js'");
   });
 });

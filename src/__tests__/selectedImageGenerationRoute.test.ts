@@ -78,22 +78,26 @@ describe('selected image generation route', () => {
     expect(generateLegacy).not.toHaveBeenCalled();
   });
 
-  it('pins configured API/agent routes to their exact legacy engine with fallback disabled', async () => {
+  it('ignores stale non-MCP routes and preserves the provider selected in the existing image settings', async () => {
     const generateLegacy = vi.fn().mockResolvedValue([]);
     const apiRoute: GenerationRoute = Object.freeze({
-      routeId: 'image-openai',
+      routeId: 'image-stale-gemini',
       mode: 'api',
-      connectorId: 'openai',
-      capability: 'image.generate.text',
-      toolOrModelId: 'openai-image',
+      connectorId: 'gemini-image-api',
+      capability: 'image.generate.reference',
+      toolOrModelId: 'nano-banana-pro',
       billingKind: 'metered-api',
     });
+    const existingImageSettings = {
+      ...options(),
+      provider: 'dropshot' as const,
+    };
 
     await executeSelectedImageGenerationRoute({
       config: {
         generationConnectionSettings: { fallbackPolicy: 'manual-only', image: apiRoute },
       } as AppConfig,
-      options: options(),
+      options: existingImageSettings,
       apiKeys: {},
       fallbackOutputDirectory: 'C:/fallback',
       getMcpRuntime: vi.fn(),
@@ -103,7 +107,7 @@ describe('selected image generation route', () => {
 
     expect(generateLegacy).toHaveBeenCalledTimes(1);
     expect(generateLegacy.mock.calls[0][0]).toEqual(expect.objectContaining({
-      provider: 'openai-image',
+      provider: 'dropshot',
       imageFallbackPolicy: 'engine-only',
     }));
   });

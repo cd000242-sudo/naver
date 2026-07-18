@@ -103,6 +103,7 @@ import {
 } from './agentCli/productPolicy.js';
 import { DEFAULT_GENERATION_SUBMISSION_MODE } from './generation/submissionPolicy.js';
 import { resolveContentProviderForTextRoute } from './generation/routeExecution.js';
+import { resolveMcpTextOverride } from './generation/connectionConfig.js';
 import { getMcpRuntimeForConfig } from './main/services/mcpRuntimeHost.js';
 import { generateImagesWithMcp } from './generation/mcp/imageAdapter.js';
 import { executeSelectedImageGenerationRoute } from './main/services/selectedImageGenerationRoute.js';
@@ -119,7 +120,7 @@ async function generateStructuredContentWithProductPolicy(
 ): Promise<Awaited<ReturnType<typeof generateStructuredContent>>> {
   const productPolicyContext = createMainAgentProductPolicyContext();
   const currentConfig = await loadConfig();
-  const selectedTextRoute = currentConfig.generationConnectionSettings?.text;
+  const selectedTextRoute = resolveMcpTextOverride(currentConfig.generationConnectionSettings);
   const selectedProvider = selectedTextRoute
     ? resolveContentProviderForTextRoute(selectedTextRoute)
     : (options?.provider ?? source.generator);

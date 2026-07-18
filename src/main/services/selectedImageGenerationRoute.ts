@@ -3,9 +3,7 @@ import type { AppConfig } from '../../configManager.js';
 import type {
   GenerateImagesOptions,
   GeneratedImage,
-  ImageProvider,
 } from '../../image/types.js';
-import { ALLOWED_PROVIDER } from '../../image/types.js';
 import type { McpRuntimeManager } from '../../generation/mcp/runtime.js';
 import type { GenerateImagesWithMcpInput } from '../../generation/mcp/imageAdapter.js';
 
@@ -46,17 +44,11 @@ export function resolveConfiguredImageOutputDirectory(
   return path.resolve(configured || fallbackOutputDirectory);
 }
 
-function resolveConfiguredLegacyProvider(toolOrModelId: string): ImageProvider {
-  if (toolOrModelId === 'mcp' || !ALLOWED_PROVIDER.includes(toolOrModelId as ImageProvider)) {
-    throw new Error(`IMAGE_ROUTE_ENGINE_UNSUPPORTED: ${toolOrModelId}`);
-  }
-  return toolOrModelId as ImageProvider;
-}
-
 /**
- * Executes only the route selected by the user. An MCP failure is returned to
- * the caller as-is and never reaches the legacy generator. Configured agent/API
- * routes are pinned to engine-only behavior for the same reason.
+ * MCP is the only optional override handled here. An MCP failure is returned
+ * to the caller as-is and never reaches the existing image generator. When MCP
+ * is not selected, the provider already resolved by the full-auto/image tabs is
+ * preserved as the single source of truth and is still pinned to engine-only.
  */
 export async function executeSelectedImageGenerationRoute(
   input: ExecuteSelectedImageGenerationRouteInput,
@@ -76,13 +68,10 @@ export async function executeSelectedImageGenerationRoute(
     });
   }
 
-  const routedOptions: GenerateImagesOptions = selectedRoute
-    ? {
-      ...input.options,
-      provider: resolveConfiguredLegacyProvider(selectedRoute.toolOrModelId),
-      imageFallbackPolicy: 'engine-only',
-    }
-    : { ...input.options };
+  const routedOptions: GenerateImagesOptions = {
+    ...input.options,
+    imageFallbackPolicy: 'engine-only',
+  };
 
   return input.generateLegacy(routedOptions, input.apiKeys, input.onImageGenerated);
 }

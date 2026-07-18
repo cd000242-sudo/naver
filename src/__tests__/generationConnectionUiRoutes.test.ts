@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
+  createLegacyImageSettingsMigration,
+  planLegacyNonMcpImageMigration,
   createNonMcpUiRoute,
   createMcpUiRoute,
   mergeUiRouteSettings,
@@ -66,6 +68,66 @@ describe('generation connection UI route mapping', () => {
       image,
       vision,
     }));
+  });
+
+  it('allows MCP image override to be disabled so the existing image tabs stay authoritative', () => {
+    const text = createNonMcpUiRoute('text', 'agent', 'agent-codex');
+    const staleImage = createNonMcpUiRoute('image', 'api', 'nano-banana-pro');
+    expect(mergeUiRouteSettings({ image: staleImage }, text, undefined)).toEqual({
+      version: 1,
+      fallbackPolicy: 'manual-only',
+      text,
+      image: undefined,
+      vision: undefined,
+    });
+  });
+
+  it('migrates a previous Dropshot override only while the original image tab still matches', () => {
+    const dropshot = createNonMcpUiRoute('image', 'agent', 'dropshot');
+    expect(createLegacyImageSettingsMigration(dropshot, {
+      fullAutoImageSource: 'dropshot',
+      globalImageSource: 'dropshot',
+    })).toEqual({
+      fullAutoImageSource: 'dropshot',
+      globalImageSource: 'dropshot',
+      scAIImageEngine: 'dropshot',
+    });
+    expect(createLegacyImageSettingsMigration(dropshot, {
+      fullAutoImageSource: 'openai-image',
+      globalImageSource: 'openai-image',
+    })).toBeUndefined();
+  });
+
+  it('does not copy unsupported shopping engines or MCP tools into shopping settings', () => {
+    const paidPro = createNonMcpUiRoute('image', 'api', 'nano-banana-pro');
+    expect(createLegacyImageSettingsMigration(paidPro, {
+      fullAutoImageSource: 'nano-banana-pro',
+      globalImageSource: 'nano-banana-pro',
+    })).toEqual({
+      fullAutoImageSource: 'nano-banana-pro',
+      globalImageSource: 'nano-banana-pro',
+    });
+    expect(createLegacyImageSettingsMigration(createMcpUiRoute({
+      routeId: 'local-image',
+      connectorId: 'local-comfy',
+      toolId: 'generate_image',
+      capability: 'image.generate.text',
+      billingKind: 'local-compute',
+    }), {
+      fullAutoImageSource: 'dropshot',
+      globalImageSource: 'dropshot',
+    })).toBeUndefined();
+  });
+
+  it('removes a stale non-MCP route without overwriting newer divergent image settings', () => {
+    const staleDropshot = createNonMcpUiRoute('image', 'agent', 'dropshot');
+    expect(planLegacyNonMcpImageMigration(staleDropshot, {
+      fullAutoImageSource: 'openai-image',
+      globalImageSource: 'openai-image',
+    })).toEqual({
+      removeImageOverride: true,
+      storagePatch: undefined,
+    });
   });
 
   it('rejects invalid mode/provider combinations rather than defaulting', () => {

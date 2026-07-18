@@ -759,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCategorySelectionListener(); // ✅ 카테고리 모달 이벤트 리스너
   initHeadingImageButton();
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
-  initGenerationConnectionUI();
+  void initGenerationConnectionUI();
 
   // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 + 모달 wiring
   initSerpBenchmarkUI();
@@ -2959,6 +2959,10 @@ async function initializeApplication(): Promise<void> {
   } catch (e) {
     console.warn('[Init] 이미지 provider 마이그레이션 스킵:', e);
   }
+
+  // 중복 생성 라우트의 1회 정리가 끝난 뒤에만 자동화 파이프라인을 초기화한다.
+  // 이 대기로 쇼핑커넥트가 예전 scAIImageEngine 값을 먼저 읽는 시작 경합을 막는다.
+  await initGenerationConnectionUI();
 
   // ═══════════════════════════════════════════════════════════════════════
   // ✅ [v2.10.90 PerfDebug] 초기화 단계별 시간 측정.

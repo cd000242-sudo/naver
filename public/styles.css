@@ -136,8 +136,7 @@
 .generation-icon-btn,
 .generation-secondary-btn,
 .generation-danger-btn,
-.generation-primary-btn,
-.generation-mode-card {
+.generation-primary-btn {
     font: inherit;
 }
 
@@ -153,70 +152,33 @@
     font-weight: 800;
 }
 
-.generation-mode-cards {
+.generation-mcp-intro,
+.generation-dropshot-note {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: .75rem;
-}
-
-.generation-mode-card {
-    position: relative;
-    min-height: 126px;
-    padding: 1rem;
-    text-align: left;
-    color: #172033;
-    background: rgba(255, 255, 255, .92);
-    border: 1px solid #d8deea;
-    border-radius: 14px;
-    cursor: pointer;
-    box-shadow: 0 3px 10px rgba(15, 23, 42, .04);
-    transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
-}
-
-.generation-mode-card:hover,
-.generation-mode-card.is-active {
-    transform: translateY(-2px);
-    border-color: #2563eb;
-    box-shadow: 0 10px 24px rgba(37, 99, 235, .13);
-}
-
-.generation-mode-card strong,
-.generation-mode-card small,
-.generation-mode-card em {
-    display: block;
-}
-
-.generation-mode-card strong {
-    margin: .55rem 0 .3rem;
-    color: #111827;
-    font-size: 1rem;
-}
-
-.generation-mode-card small {
-    min-height: 34px;
-    color: #667085;
-    font-size: .75rem;
-    line-height: 1.45;
-}
-
-.generation-mode-card em {
-    margin-top: .45rem;
+    gap: .28rem;
+    padding: .9rem 1rem;
     color: #475467;
-    font-size: .68rem;
-    font-style: normal;
-    font-weight: 800;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    font-size: .75rem;
+    line-height: 1.55;
 }
 
-.generation-mode-icon {
-    display: inline-flex;
-    width: 30px;
-    height: 30px;
-    align-items: center;
-    justify-content: center;
-    color: #fff !important;
-    background: linear-gradient(135deg, #2563eb, #4f46e5);
-    border-radius: 9px;
-    font-weight: 900;
+.generation-mcp-intro strong,
+.generation-dropshot-note strong {
+    color: #1e3a8a;
+    font-size: .82rem;
+}
+
+.generation-dropshot-note {
+    margin-top: .8rem;
+    background: #f8fafc;
+    border-color: #d7dde8;
+}
+
+.generation-dropshot-note strong {
+    color: #334155;
 }
 
 .generation-route-summary {
@@ -296,6 +258,14 @@
 .generation-route-card-title strong {
     color: #101828;
     font-size: .92rem;
+}
+
+.generation-route-help {
+    min-height: 2.2rem;
+    margin: -.25rem 0 .55rem;
+    color: #667085 !important;
+    font-size: .72rem;
+    line-height: 1.5;
 }
 
 .generation-route-card label,
@@ -425,7 +395,6 @@
 .generation-connection-status[data-tone="error"] { color: #b42318; background: #fff1f0; }
 
 @media (max-width: 760px) {
-    .generation-mode-cards,
     .generation-route-grid,
     .mcp-form-grid { grid-template-columns: 1fr; }
     .generation-route-summary { grid-template-columns: 1fr; }

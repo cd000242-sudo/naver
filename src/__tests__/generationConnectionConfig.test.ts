@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   normalizeMcpConnectionProfiles,
   normalizeGenerationConnectionSettings,
+  resolveMcpTextOverride,
   type PersistedGenerationConnectionSettings,
 } from '../generation/connectionConfig';
 
@@ -103,6 +104,29 @@ describe('generation connection settings', () => {
       mode: 'agent',
       connectorId: 'dropshot-browser',
     });
+  });
+
+  it('exposes only an explicit MCP text route as an execution override', () => {
+    const mcpSettings = normalizeGenerationConnectionSettings({
+      version: 1,
+      fallbackPolicy: 'manual-only',
+      text: {
+        routeId: 'mcp-writer-text',
+        mode: 'mcp',
+        connectorId: 'mcp-writer',
+        capability: 'text.generate',
+        toolOrModelId: 'write_post',
+        billingKind: 'subscription',
+      },
+    }, {}).settings;
+    const apiSettings = normalizeGenerationConnectionSettings(undefined, {
+      primaryGeminiTextModel: 'gemini-3.1-flash-lite',
+      defaultAiProvider: 'gemini',
+    }).settings;
+
+    expect(resolveMcpTextOverride(mcpSettings)).toBe(mcpSettings.text);
+    expect(resolveMcpTextOverride(apiSettings)).toBeUndefined();
+    expect(resolveMcpTextOverride(undefined)).toBeUndefined();
   });
 
   it('rejects malformed persisted routes and never invents an image route', () => {
