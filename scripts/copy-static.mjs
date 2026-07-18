@@ -352,6 +352,10 @@ try {
   // implementations must be inlined before every renderer consumer.
   const rendererRuntimeDependencyFiles = [
     {
+      label: 'automation/ftcDisclosurePresets.js',
+      filePath: path.join(projectRoot, 'dist', 'automation', 'ftcDisclosurePresets.js'),
+    },
+    {
       label: 'image/referenceImagePolicy.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'referenceImagePolicy.js'),
     },
@@ -807,6 +811,19 @@ ${sanitized}`;
   if (missingRuntimeSymbols.length > 0) {
     throw new Error(
       `Renderer runtime helper missing after inlining: ${missingRuntimeSymbols.join(', ')}`,
+    );
+  }
+
+  const REQUIRED_RENDERER_RUNTIME_VALUES = [
+    'FTC_DISCLOSURE_PRESETS',
+  ];
+  const missingRuntimeValues = REQUIRED_RENDERER_RUNTIME_VALUES.filter((symbol) => {
+    const escaped = symbol.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return !new RegExp(`\\b(?:const|let|var)\\s+${escaped}\\s*=`).test(finalRenderer);
+  });
+  if (missingRuntimeValues.length > 0) {
+    throw new Error(
+      `Renderer runtime value missing after inlining: ${missingRuntimeValues.join(', ')}`,
     );
   }
 

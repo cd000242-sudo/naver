@@ -34,6 +34,17 @@ describe('copy-static runtime inline contract', () => {
     }
   });
 
+  it('inlines the FTC preset SSOT before the browser renderer consumes it', () => {
+    expect(rendererSource).toContain("from '../automation/ftcDisclosurePresets.js'");
+    expect(copyStaticSource).toContain("label: 'automation/ftcDisclosurePresets.js'");
+    expect(copyStaticSource).toContain(
+      "filePath: path.join(projectRoot, 'dist', 'automation', 'ftcDisclosurePresets.js')",
+    );
+    expect(copyStaticSource).toMatch(
+      /REQUIRED_RENDERER_RUNTIME_VALUES[\s\S]*['"]FTC_DISCLOSURE_PRESETS['"]/,
+    );
+  });
+
   it('sanitizes the compiled CommonJS dependency shape without unresolved aliases', () => {
     const compiledSource = [
       '"use strict";',
