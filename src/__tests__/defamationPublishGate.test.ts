@@ -40,8 +40,10 @@ describe('발행 경계 위험 게이트(C) 배선', () => {
     //   (과거 회귀: 존재하지 않는 run-button에 바인딩된 죽은 runAutomation 안에만 있어 무효였음)
     const defIdx = r.indexOf('async function executeUnifiedAutomation');
     expect(defIdx).toBeGreaterThan(-1);
-    const head = r.slice(defIdx, defIdx + 400);
-    expect(head).toContain('celebrityPublishGate(formData)');
+    const gateCallIdx = r.indexOf('celebrityPublishGate(formData)', defIdx);
+    const runLeaseIdx = r.indexOf("tryAcquirePipelineRun('unified')", defIdx);
+    expect(gateCallIdx).toBeGreaterThan(defIdx);
+    expect(gateCallIdx).toBeLessThan(runLeaseIdx);
     // 무인(연속발행)에서는 confirm 억제 — isContinuousMode 분기 존재
     expect(r).toContain('isContinuousMode');
   });

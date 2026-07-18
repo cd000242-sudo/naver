@@ -355,11 +355,12 @@ describe('Content Quality V3 main-only publish commit hook', () => {
 
     for (const source of [runPostOnly, run]) {
       const editorIndex = source.lastIndexOf('this.applyStructuredContent(resolvedOptions)');
-      const publishIndex = source.indexOf(
-        'await this.publishBlogPost(\n          resolvedOptions.publishMode,\n          resolvedOptions.scheduleDate,\n          resolvedOptions.scheduleMethod,\n          runOptions,\n        )',
-      );
+      const publishIndex = source.indexOf('await this.publishBlogPost(', editorIndex);
       expect(editorIndex).toBeGreaterThanOrEqual(0);
       expect(publishIndex).toBeGreaterThan(editorIndex);
+      expect(source.slice(publishIndex)).toMatch(
+        /await\s+this\.publishBlogPost\(\s*resolvedOptions\.publishMode,\s*resolvedOptions\.scheduleDate,\s*resolvedOptions\.scheduleMethod,\s*runOptions,\s*\)/,
+      );
       expect(source).toMatch(
         /bindMainProcessEditorCommitCandidate\(\s*runOptions,\s*resolvedOptions,/,
       );

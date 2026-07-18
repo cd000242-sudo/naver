@@ -52,7 +52,7 @@ describe('content generation timeout policy', () => {
   it('forces all renderer-facing main-process generation through one external submission', () => {
     expect(mainSrc).toMatch(/from\s+['"]\.\/generation\/submissionPolicy\.js['"]/);
     expect(mainSrc).toMatch(
-      /generateStructuredContent\(source,\s*\{[\s\S]{0,320}\.\.\.options,[\s\S]{0,320}submissionMode:\s*DEFAULT_GENERATION_SUBMISSION_MODE/,
+      /generateStructuredContent\(source,\s*\{[\s\S]{0,320}\.\.\.options,[\s\S]{0,800}submissionMode:\s*DEFAULT_GENERATION_SUBMISSION_MODE/,
     );
   });
 
