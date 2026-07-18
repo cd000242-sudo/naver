@@ -1,4 +1,13 @@
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { defineConfig } from 'vitest/config';
+
+const coverageReportsDirectory = join(
+  tmpdir(),
+  'better-life-naver-vitest',
+  'content-quality-v3',
+  `pid-${process.pid}`,
+);
 
 export default defineConfig({
   test: {
@@ -17,7 +26,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text'],
-      reportsDirectory: 'coverage/content-quality-v3',
+      reportsDirectory: coverageReportsDirectory,
       include: [
         'src/contentGeminiSamplingPolicy.ts',
         'src/contentPipeline/**/*.ts',
