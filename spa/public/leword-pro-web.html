@@ -5957,7 +5957,17 @@
     }
     async function validateRestoredSession() {
       if (!hasActiveProSession()) return true;
-      if (isOfflineProSession()) return true;
+      if (isOfflineProSession()) {
+        try {
+          await apiGet(endpoints.health, false, 5000);
+        } catch (err) {
+          log('Offline Pro session kept while the server is unreachable.');
+          return true;
+        }
+        if (await refreshProSessionFromRememberedCredentials('offline-session-recovery')) return true;
+        promptProRelogin('서버 연결이 복구되었습니다. 다시 로그인하면 전체 실측 황금키워드가 표시됩니다. 로그인 전에도 서버 실측 공개 키워드는 사용할 수 있습니다.');
+        return true;
+      }
       try {
         await apiGet(endpoints.apiStatus, true, 8000);
         return true;
@@ -8208,24 +8218,20 @@
           authenticatedPublicError = authPublicErr && authPublicErr.message ? authPublicErr.message : 'unknown';
           log('LIVE golden authenticated public fallback failed: ' + authenticatedPublicError);
         }
-        if (isOfflineProSession() || isServerUnavailableError(authenticatedPublicError)) {
-          renderClientGoldenFallback(new Error(authenticatedPublicError || 'offline pro fallback'));
-          return;
-        }
         if (isAuthErrorMessage(authenticatedPublicError)) {
           if (await refreshProSessionFromRememberedCredentials('live-golden-authenticated-public')) return loadGoldenBoard();
           markProSessionAuthPending(authenticatedPublicError);
-          renderClientGoldenFallback(new Error(authenticatedPublicError || 'auth pending pro fallback'));
-          return;
+        } else if (authenticatedPublicError) {
+          markProSessionAuthPending(authenticatedPublicError);
+        } else {
+          markProSessionAuthPending('Pro board snapshot needs recheck.');
         }
-        markProSessionAuthPending('Pro board snapshot needs recheck.');
-        renderClientGoldenFallback(new Error(authenticatedPublicError || 'pro snapshot fallback'));
-        return;
+        log('LIVE golden full Pro snapshot unavailable; continuing with the server-measured public preview.');
       }
       try {
         const payload = await apiGet(endpoints.publicLiveGolden, false);
         const freshPreview = filterDisplayGoldenItems(payload.publicPreview || []);
-        if (freshPreview.length < 5) {
+        if (freshPreview.length < 5 && !(proSnapshotFallback && hasActiveProSession())) {
           try {
             const signals = await apiGet(endpoints.publicSources, false);
             payload.clientBackfill = liveSignalBackfillItems(signals, freshPreview, 5 - freshPreview.length);
