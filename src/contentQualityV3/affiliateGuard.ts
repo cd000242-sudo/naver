@@ -12,6 +12,7 @@ import {
   validateShoppingConnectContent,
 } from '../contentShoppingConnectValidation.js';
 import { stripModelGeneratedShoppingDisclosures } from '../contentShoppingDisclosure.js';
+import { auditAffiliateReviewDepth } from '../content/affiliateReviewDepth.js';
 import { recoverContentQualityV3BodyHtml } from './finalizer.js';
 
 const AFFILIATE_AUTHENTICITY_TARGET_SCORE = 85;
@@ -169,6 +170,11 @@ export function evaluateContentQualityV3AffiliateGuard(
   const authenticityReason = `shopping authenticity ${authenticity.score}/100: ${authenticity.issues
     .map(issue => issue.code)
     .join(', ')}`;
+  const reviewDepth = auditAffiliateReviewDepth({
+    title: localRepair.content.selectedTitle,
+    body: localRepair.content.bodyPlain,
+    productReviews: options.source.productReviews,
+  });
 
   if (
     authenticity.score < AFFILIATE_AUTHENTICITY_TARGET_SCORE
@@ -201,7 +207,7 @@ export function evaluateContentQualityV3AffiliateGuard(
       .join('\n- ');
     return Object.freeze({
       action: 'retry-shopping-quality',
-      instruction: `[쇼핑커넥트 품질 재작성]\n- ${corrections}\n광고 문구가 아닌 실제 구매 판단 정보로 보완하고 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점 이상, 목표 ${SHOPPING_CONNECT_TARGET_SCORE}점에 가깝게 다시 작성하세요.`,
+      instruction: `[쇼핑커넥트 품질 재작성]\n- ${corrections}\n광고 문구가 아닌 실제 구매 판단 정보로 보완하고 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점 이상, 목표 ${SHOPPING_CONNECT_TARGET_SCORE}점에 가깝게 다시 작성하세요.${reviewDepth.retryDirective ? `\n\n${reviewDepth.retryDirective}` : ''}`,
       reason: `shopping quality ${validation.score}/100`,
     });
   }
@@ -220,6 +226,9 @@ export function evaluateContentQualityV3AffiliateGuard(
             )),
           ]
           : []),
+        ...(reviewDepth.issues.length > 0
+          ? [`[쇼핑커넥트 후기 품질 경고] ${reviewDepth.issues.map(issue => issue.code).join(', ')}`]
+          : []),
       ])),
       affiliateAuthenticity: {
         score: authenticity.score,
@@ -227,6 +236,7 @@ export function evaluateContentQualityV3AffiliateGuard(
         hardFail: authenticity.hardFail,
         advisoryAccepted: authenticity.score < AFFILIATE_AUTHENTICITY_TARGET_SCORE,
       },
+      affiliateReviewDepth: reviewDepth,
       shoppingValidation: {
         score: validation.score,
         ...shoppingDisposition,

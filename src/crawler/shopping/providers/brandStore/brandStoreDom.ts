@@ -138,6 +138,22 @@ export function collectReviewImageUrls(): string[] {
 /** Visible buyer-review text candidates. Final noise filtering happens in Node. */
 export function collectReviewTextCandidates(): string[] {
     const selectors = [
+        '[data-review-content]',
+        '[data-testid*="review-content"]',
+        '[data-testid*="reviewContent"]',
+        '[class*="review_content"]',
+        '[class*="reviewContent"]',
+        '[class*="ReviewContent"]',
+        '[data-review-id] p',
+        '[data-review-no] p',
+        '[data-testid*="review-item"] p',
+        '[data-testid*="reviewItem"] p',
+        '[data-shp-contents-type="review"] p',
+        '[data-review-id]',
+        '[data-review-no]',
+        '[data-testid*="review-item"]',
+        '[data-testid*="reviewItem"]',
+        '[data-shp-contents-type="review"]',
         '[data-shp-area*="review"] li',
         '[data-testid*="review"] li',
         '[class*="review"] li',
@@ -168,6 +184,13 @@ export function collectReviewTextCandidates(): string[] {
                 if (/판매자\s*답글|리뷰이벤트|리뷰포인트|리뷰적립/.test(text)) return;
                 const key = text.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '');
                 if (!key || seen.has(key)) return;
+                // Leaf review-content selectors are evaluated first. Do not add a
+                // larger card/section that only concatenates an already collected
+                // review with dates, buttons, or another review.
+                const containsCollectedReview = results.some(existing => (
+                    text.length > existing.length + 20 && text.includes(existing)
+                ));
+                if (containsCollectedReview) return;
                 seen.add(key);
                 results.push(text);
             });
@@ -186,16 +209,26 @@ export function collectReviewTextCandidates(): string[] {
 export function clickReviewTab(): { clicked: boolean; label?: string } {
     const candidates = Array.from(document.querySelectorAll('a, button, [role="tab"]'));
     const reviewTab = candidates.find(t => {
-        const text = t.textContent?.trim() || '';
-        // 정확히 "리뷰" 또는 "리뷰 (N)" 또는 "리뷰 N건" 패턴만. "리뷰이벤트"/"리뷰포인트" 제외.
-        const isReviewLabel = /^리뷰(\s*\(|\s*\d|$)/.test(text) && !/리뷰이벤트|리뷰포인트|리뷰적립/.test(text);
+        const text = (t.textContent || '').replace(/\s+/g, ' ').trim();
+        // 최신 스토어는 "상품리뷰 128"·"구매평"도 사용한다. 리뷰 이벤트는 계속 제외한다.
+        const isReviewLabel = /^(?:상품\s*)?(?:리뷰|구매평|구매후기)(?:\s*\(|\s*[\d,]|\s*\d*\s*건|$)/.test(text)
+            && !/리뷰이벤트|리뷰포인트|리뷰적립/.test(text);
         if (!isReviewLabel) return false;
-        // This helper is used mid-crawl. Never follow an anchor route because
-        // navigation would destroy the product/gallery state needed afterward.
+        // Keep rejecting real navigation, but allow the current Naver product
+        // route with a REVIEW hash. Modern tabs often render this as a full
+        // same-product href instead of a bare #REVIEW link.
         if (t.tagName === 'A') {
             const href = (t.getAttribute('href') || '').trim();
             if (href && href !== '#' && !href.startsWith('#')) {
-                return false;
+                try {
+                    const target = new URL(href, window.location.href);
+                    const sameProductRoute = target.origin === window.location.origin
+                        && target.pathname.replace(/\/$/, '') === window.location.pathname.replace(/\/$/, '')
+                        && /review|구매평/i.test(target.hash);
+                    if (!sameProductRoute) return false;
+                } catch {
+                    return false;
+                }
             }
         }
         return true;

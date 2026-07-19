@@ -154,6 +154,37 @@ describe('collectReviewTextCandidates', () => {
             '설치할 때 천장 타공을 넓히는 과정이 조금 힘들었어요.',
         ]);
     });
+
+    it('collects modern div/p review cards instead of requiring li or article markup', () => {
+        document.body.innerHTML = `
+            <section data-shp-area="review">
+                <div data-review-id="review-101">
+                    <p data-review-content>씻기 10분 전에 온풍을 켜두니 욕실 한기가 덜했고 물기도 빨리 말랐어요.</p>
+                </div>
+                <div data-testid="review-item-102">
+                    <div class="ReviewContent">최고 단계에서는 소리가 커서 늦은 밤에는 저단으로 사용하고 있어요.</div>
+                </div>
+            </section>`;
+
+        for (const element of Array.from(document.querySelectorAll('[data-review-content], .ReviewContent'))) {
+            (element as HTMLElement).getBoundingClientRect = () => ({
+                width: 320,
+                height: 72,
+                top: 0,
+                left: 0,
+                right: 320,
+                bottom: 72,
+                x: 0,
+                y: 0,
+                toJSON: () => ({}),
+            });
+        }
+
+        expect(collectReviewTextCandidates()).toEqual([
+            '씻기 10분 전에 온풍을 켜두니 욕실 한기가 덜했고 물기도 빨리 말랐어요.',
+            '최고 단계에서는 소리가 커서 늦은 밤에는 저단으로 사용하고 있어요.',
+        ]);
+    });
 });
 
 describe('clickReviewTab', () => {
@@ -189,6 +220,13 @@ describe('clickReviewTab', () => {
     it('rejects relative review routes that would navigate away from the product page', () => {
         document.body.innerHTML = '<a href="/reviews?tab=review">리뷰</a>';
         expect(clickReviewTab()).toEqual({ clicked: false });
+    });
+
+    it('clicks a same-product review hash route used by current Naver store tabs', () => {
+        window.history.replaceState({}, '', 'http://localhost:3000/hats/products/12345');
+        document.body.innerHTML = '<a href="/hats/products/12345#REVIEW">상품리뷰 128</a>';
+
+        expect(clickReviewTab()).toEqual({ clicked: true, label: '상품리뷰 128' });
     });
 
     it('returns clicked:false when no review tab exists', () => {

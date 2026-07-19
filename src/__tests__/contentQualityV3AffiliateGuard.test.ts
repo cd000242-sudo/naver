@@ -206,4 +206,47 @@ describe('Content Quality V3 affiliate guard', () => {
     expect((result.content.quality as any).shoppingValidation.score).toBe(75);
     expect(result.content.quality.warnings).toContain('[쇼핑커넥트 검증] 품질 75/100');
   });
+
+  it('keeps weak review usage publishable and records an advisory instead of blocking', () => {
+    const genericBody = `샤워 뒤 습기가 고민이라면 제습 표기를 볼 수 있어요. 온풍 표기는 추운 욕실에 필요한 기능인지 판단해야 합니다. 상품명에 자동배기와 바디드라이도 표기돼 있어 후보로 둘 수 있습니다. `;
+    const result = evaluateContentQualityV3AffiliateGuard({
+      content: makeContent({ bodyPlain: genericBody.repeat(15) }),
+      source: {
+        productSpec: '제습, 온풍, 자동배기, 바디드라이',
+        productReviews: [
+          '기존 환풍기 자리가 작아서 천장 타공을 넓히는 설치 과정이 조금 번거로웠어요.',
+          '샤워 뒤 10분 정도 돌리니 물기가 빨리 말랐지만 최고 단계 소음은 생각보다 크게 들렸어요.',
+        ],
+      },
+      minimumBodyChars: 500,
+      authenticityRetryAvailable: false,
+      shoppingQualityRetryAvailable: false,
+    });
+
+    expect(result.action).toBe('accept');
+    if (result.action !== 'accept') throw new Error('expected advisory acceptance');
+    const depth = (result.content.quality as any).affiliateReviewDepth;
+    expect(depth.advisoryAccepted).toBe(true);
+    expect(depth.issues.map((issue: any) => issue.code)).toContain('FEATURE_NAME_PARAPHRASE');
+    expect(result.content.quality.warnings.join('\n')).toContain('쇼핑커넥트 후기 품질 경고');
+  });
+
+  it('does not demand fabricated experience when review input is only UI noise', () => {
+    const result = evaluateContentQualityV3AffiliateGuard({
+      content: makeContent(),
+      source: {
+        productSpec: '제습, 온풍, 자동배기, 바디드라이',
+        productReviews: ['리뷰 전체 보기 구매 옵션 선택 신고하기'],
+      },
+      minimumBodyChars: 500,
+      authenticityRetryAvailable: false,
+      shoppingQualityRetryAvailable: false,
+    });
+
+    expect(result.action).toBe('accept');
+    if (result.action !== 'accept') throw new Error('expected honest spec-only acceptance');
+    const depth = (result.content.quality as any).affiliateReviewDepth;
+    expect(depth.evidenceMode).toBe('spec_only');
+    expect(depth.issues).toEqual([]);
+  });
 });

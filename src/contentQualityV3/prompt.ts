@@ -7,6 +7,7 @@ import {
   getSecondaryKeywordsFromSource,
 } from '../contentKeywordHelpers.js';
 import { selectDecisionUsefulReviewTexts } from '../crawler/shopping/utils/reviewTextSelection.js';
+import { buildReviewDecisionBlueprint } from '../content/reviewDecisionBlueprint.js';
 
 export const CONTENT_QUALITY_V3_MAX_EVIDENCE_CHARS = 80_000;
 export const CONTENT_QUALITY_V3_SYSTEM_MAX_CHARS = 12_000;
@@ -434,6 +435,7 @@ function buildDynamicPayload(options: ContentQualityV3PromptOptions): {
       MAX_KEYWORD_CHARS,
     );
 
+    const productReviews = selectDecisionUsefulReviewTexts(source.productReviews, MAX_PRODUCT_REVIEWS);
     const sourceData = Object.freeze({
       sourceType: cleanString(source.sourceType, 80),
       title: cleanString(source.title, 500),
@@ -444,7 +446,7 @@ function buildDynamicPayload(options: ContentQualityV3PromptOptions): {
       personalExperience: cleanString(source.personalExperience, 12_000),
       productSpec: cleanString(source.productSpec, 20_000),
       productPrice: cleanString(source.productPrice, 300),
-      productReviews: selectDecisionUsefulReviewTexts(source.productReviews, MAX_PRODUCT_REVIEWS),
+      productReviews,
       productInfo: sanitizeProductInfo(source.productInfo),
       businessInfo: sanitizeBusinessInfo(source.businessInfo),
       previousTitles: cleanStringArray(
@@ -477,6 +479,9 @@ function buildDynamicPayload(options: ContentQualityV3PromptOptions): {
     });
     const trustedRuntimeConstraints = Object.freeze({
       runtimeInstruction: cleanString(options.runtimeInstruction, 12_000),
+      reviewDecisionBlueprint: options.mode === 'affiliate'
+        ? buildReviewDecisionBlueprint(productReviews)
+        : undefined,
     });
 
     return Object.freeze({ sourceData, userBrief, trustedRuntimeConstraints });

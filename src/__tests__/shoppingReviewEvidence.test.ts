@@ -9,6 +9,19 @@ import {
   buildAffiliateReviewIntentContract,
   classifyAffiliateEvidence,
 } from '../content/affiliateAuthenticity.js';
+import { auditAffiliateReviewDepth } from '../content/affiliateReviewDepth.js';
+
+const BATHROOM_REVIEWS = [
+  '기존 환풍기 자리가 작아서 천장 타공을 넓히는 설치 과정이 조금 번거로웠어요.',
+  '샤워 뒤 10분 정도 돌리니 물기가 빨리 말랐지만 최고 단계 소음은 생각보다 크게 들렸어요.',
+];
+
+const FEATURE_PARAPHRASE_DRAFT = `
+샤워 뒤 습기가 오래 남는 쪽이 고민이라면 제습 표기에 무게를 둘 수 있어요.
+추운 계절 욕실의 차가운 공기가 부담이라면 온풍 표기가 필요합니다.
+환기 흐름을 챙기고 싶다면 자동배기를 확인하세요.
+바디드라이는 실제 생활에서 필요한 기능인지 생각해 보세요.
+`;
 
 describe('shopping review evidence selection', () => {
   it('keeps concrete pain points, workarounds, and outcomes while dropping UI noise and empty praise', () => {
@@ -29,6 +42,20 @@ describe('shopping review evidence selection', () => {
     ]));
     expect(selected).toHaveLength(3);
     expect(selected.join(' ')).not.toMatch(/신고하기|옵션 선택|^좋아요$/);
+  });
+
+  it('keeps short but concrete bathroom pain-point reviews that still affect buyer intent', () => {
+    const selected = selectDecisionUsefulReviewTexts([
+      '물때 안 끼라고 샀어요',
+      '소리 안 커서 밤에도 괜찮아요',
+      '리뷰 전체 보기',
+      '좋아요',
+    ]);
+
+    expect(selected).toEqual([
+      '물때 안 끼라고 샀어요',
+      '소리 안 커서 밤에도 괜찮아요',
+    ]);
   });
 
   it('does not manufacture or paraphrase reviewer claims during selection', () => {
@@ -65,6 +92,12 @@ describe('shopping review intent contract', () => {
     expect(contract).toContain('최고 단계에서는 소리');
     expect(contract).toContain('누구나 아는');
     expect(contract).toContain('한 줄 판정');
+    expect(contract).toContain('REVIEW DECISION BLUEPRINT');
+    expect(contract).toContain('설치·교체');
+    expect(contract).toContain('온도·습기·성능 체감');
+    expect(contract).toContain('소음·진동');
+    expect(contract).toContain('첫 두 소제목');
+    expect(contract).toContain('상품명·가격·기능명 재설명으로 대체하지 않는다');
   });
 
   it('returns no review synthesis instructions when no actual review text exists', () => {
@@ -75,7 +108,75 @@ describe('shopping review intent contract', () => {
   });
 });
 
+describe('shopping review depth advisory', () => {
+  it('detects feature-name paraphrase that ignores available buyer pain points', () => {
+    const report = auditAffiliateReviewDepth({
+      title: '하츠 티오람미니 HMF-J300 제습 온풍 자동배기 바디드라이',
+      body: FEATURE_PARAPHRASE_DRAFT,
+      productReviews: BATHROOM_REVIEWS,
+    });
+
+    expect(report.evidenceMode).toBe('review_synthesis');
+    expect(report.usedReviewEvidenceCount).toBe(0);
+    expect(report.issues.map(issue => issue.code)).toEqual(expect.arrayContaining([
+      'REVIEW_PAIN_POINT_UNUSED',
+      'REVIEW_USE_OUTCOME_UNUSED',
+      'FEATURE_NAME_PARAPHRASE',
+    ]));
+  });
+
+  it('accepts attributed review pain points connected to outcomes and buyer fit', () => {
+    const report = auditAffiliateReviewDepth({
+      title: '하츠 티오람미니 HMF-J300',
+      body: `구매자 후기 한 건에서는 기존 환풍기 자리보다 본체가 커 천장 타공을 넓히는 설치가 번거로웠다고 했어요.
+교체 설치라면 제품값보다 천장 규격을 먼저 재야 하는 이유입니다.
+다른 구매자 후기에는 샤워 뒤 10분 정도 작동했을 때 물기가 빨리 말랐다는 평가가 있었지만, 최고 단계 소음은 생각보다 컸다는 의견도 있었어요.
+습기 관리가 우선인 욕실에는 장점이지만 야간 소음에 민감하면 낮은 단계를 고려할 수 있습니다.`,
+      productReviews: BATHROOM_REVIEWS,
+    });
+
+    expect(report.usedReviewEvidenceCount).toBeGreaterThanOrEqual(2);
+    expect(report.issues.map(issue => issue.code)).not.toEqual(expect.arrayContaining([
+      'REVIEW_PAIN_POINT_UNUSED',
+      'REVIEW_USE_OUTCOME_UNUSED',
+      'FEATURE_NAME_PARAPHRASE',
+    ]));
+  });
+
+  it('does not demand buyer experiences when only review UI noise exists', () => {
+    const report = auditAffiliateReviewDepth({
+      title: '하츠 티오람미니 HMF-J300',
+      body: '판매 페이지에서 확인된 제품 정보와 설치 조건을 기준으로 판단합니다.',
+      productReviews: ['리뷰 전체 보기 구매 옵션 선택 신고하기'],
+    });
+
+    expect(report.evidenceMode).toBe('spec_only');
+    expect(report.issues).toEqual([]);
+  });
+});
+
 describe('review collection wiring', () => {
+  it('forces structured shopping evidence collection for review-mode general product URLs', () => {
+    const path = fileURLToPath(new URL('../sourceAssembler.ts', import.meta.url));
+    const source = readFileSync(path, 'utf8');
+
+    expect(source).toContain('includeShoppingEvidence');
+    expect(source).toContain('forceProductPage');
+    expect(source).toContain('buildShoppingEvidenceSnapshot');
+    expect(source).toMatch(/productReviews:\s*shoppingEvidence\.productReviews/);
+  });
+
+  it('does not let a generic DOM number overwrite a trusted JSON-LD product price', () => {
+    const path = fileURLToPath(new URL('../sourceAssembler.ts', import.meta.url));
+    const source = readFileSync(path, 'utf8');
+
+    expect(source).toContain('const structuredSnapshot = puppeteerExtractedData');
+    expect(source).toContain('price: structuredSnapshot.price || domExtractedData.price');
+    expect(source).toMatch(
+      /const priceSelectors = \[\s*\/\/ 구조화 가격[\s\S]{0,300}'meta\[property="og:price:amount"\]'[\s\S]{0,500}'\[class\*="price"\]'/,
+    );
+  });
+
   it('requests visible review text collection in the maintained brand-store affiliate path', () => {
     const path = fileURLToPath(new URL('../crawler/shopping/brandStoreAffiliateCrawler.ts', import.meta.url));
     const source = readFileSync(path, 'utf8');

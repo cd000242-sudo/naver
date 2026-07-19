@@ -69,6 +69,7 @@ import {
   classifyAffiliateEvidence,
   resolveAffiliateContentLengthTarget,
 } from './content/affiliateAuthenticity.js';
+import { auditAffiliateReviewDepth } from './content/affiliateReviewDepth.js';
 import {
   buildEvidenceAndIntentFinalContract,
   buildTitleEvidenceFinalContract,
@@ -6950,6 +6951,11 @@ async function generateStructuredContentInternal(
             body: finalStructuredContent.bodyPlain,
             evidenceMode,
           });
+          const reviewDepth = auditAffiliateReviewDepth({
+            title: finalStructuredContent.selectedTitle,
+            body: finalStructuredContent.bodyPlain,
+            productReviews: source.productReviews,
+          });
 
           if (allowPaidPostGenerationRepair && authenticity.score < 85 && !_affiliateAuthenticityRetryUsed && attempt < MAX_ATTEMPTS) {
             _affiliateAuthenticityRetryUsed = true;
@@ -6964,21 +6970,32 @@ async function generateStructuredContentInternal(
             console.warn(`[Shopping Authenticity] 쇼핑커넥트 진정성 경고 후 계속: ${authenticity.score}/100`);
           }
 
-          if (!finalStructuredContent.quality) {
-            finalStructuredContent.quality = {
-              aiDetectionRisk: 'low',
-              legalRisk: 'safe',
-              seoScore: 0,
-              originalityScore: 0,
-              readabilityScore: 0,
-              warnings: [],
-            };
-          }
-          (finalStructuredContent.quality as any).affiliateAuthenticity = {
-            score: authenticity.score,
-            evidenceMode,
-            hardFail: authenticity.hardFail,
-            advisoryAccepted: affiliateAuthenticityAdvisoryAccepted,
+          const existingQuality = finalStructuredContent.quality || {
+            aiDetectionRisk: 'low' as const,
+            legalRisk: 'safe' as const,
+            seoScore: 0,
+            originalityScore: 0,
+            readabilityScore: 0,
+            warnings: [],
+          };
+          finalStructuredContent = {
+            ...finalStructuredContent,
+            quality: {
+              ...existingQuality,
+              warnings: Array.from(new Set([
+                ...(existingQuality.warnings || []),
+                ...(reviewDepth.issues.length > 0
+                  ? [`[쇼핑커넥트 후기 품질 경고] ${reviewDepth.issues.map(issue => issue.code).join(', ')}`]
+                  : []),
+              ])),
+              affiliateAuthenticity: {
+                score: authenticity.score,
+                evidenceMode,
+                hardFail: authenticity.hardFail,
+                advisoryAccepted: affiliateAuthenticityAdvisoryAccepted,
+              },
+              affiliateReviewDepth: reviewDepth,
+            } as any,
           };
           console.log(`[Shopping Authenticity] 검수 완료: ${authenticity.score}/100 (${evidenceMode})`);
 
@@ -6990,7 +7007,7 @@ async function generateStructuredContentInternal(
             const corrections = validation.feedback
               .filter(message => message.startsWith('❌') || message.startsWith('⚠️'))
               .join('\n- ');
-            extraInstruction = `[쇼핑커넥트 품질 재작성]\n- ${corrections}\n광고 문구가 아닌 실제 구매 판단 정보로 보완하고 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점 이상, 목표 ${SHOPPING_CONNECT_TARGET_SCORE}점에 가깝게 다시 작성하세요.\n${extraInstruction}`;
+            extraInstruction = `[쇼핑커넥트 품질 재작성]\n- ${corrections}\n광고 문구가 아닌 실제 구매 판단 정보로 보완하고 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점 이상, 목표 ${SHOPPING_CONNECT_TARGET_SCORE}점에 가깝게 다시 작성하세요.${reviewDepth.retryDirective ? `\n\n${reviewDepth.retryDirective}` : ''}\n${extraInstruction}`;
             console.warn(`[Shopping Connect] 품질 ${validation.score}/100 — 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점 이상을 위해 전체 재작성`);
             continue;
           }

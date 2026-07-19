@@ -334,7 +334,7 @@ describe('buildContentQualityV3Prompt', () => {
     expect(constraints).toMatchObject({
       runtimeInstruction: '본문 누락 필드만 복구',
     });
-    expect(Object.keys(constraints)).toEqual(['runtimeInstruction']);
+    expect(Object.keys(constraints)).toEqual(['runtimeInstruction', 'reviewDecisionBlueprint']);
     expect(brief).not.toHaveProperty('personalExperience');
     expect(brief).not.toHaveProperty('runtimeInstruction');
     expect(constraints).not.toHaveProperty('promoAngleDirective');
@@ -482,6 +482,30 @@ describe('buildContentQualityV3Prompt', () => {
 
     expect(reviewSourceData.evidenceMode).toBe('review_synthesis');
     expect(specSourceData.evidenceMode).toBe('spec_only');
+  });
+
+  it('adds a trusted review decision blueprint for affiliate review synthesis', () => {
+    const user = splitPromptByMarker(build({
+      mode: 'affiliate',
+      source: {
+        rawText: '하츠 티오람미니 HMF-J300 제품 자료',
+        productReviews: [
+          '기존 환풍기 자리가 작아서 천장 타공을 넓히는 과정이 조금 힘들었어요.',
+          '씻기 10분 전에 온풍을 켜두니 욕실 한기가 덜했고 물기도 빨리 말랐어요.',
+          '최고 단계에서는 소리가 커서 늦은 밤에는 저단으로 사용하고 있어요.',
+        ],
+      },
+    })).user;
+    const constraints = extractTaggedJson<Record<string, unknown>>(
+      user,
+      'trusted_runtime_constraints_json',
+    );
+
+    expect(constraints.reviewDecisionBlueprint).toContain('REVIEW DECISION BLUEPRINT');
+    expect(constraints.reviewDecisionBlueprint).toContain('설치·교체');
+    expect(constraints.reviewDecisionBlueprint).toContain('온도·습기·성능 체감');
+    expect(constraints.reviewDecisionBlueprint).toContain('소음·진동');
+    expect(constraints.reviewDecisionBlueprint).toContain('첫 두 소제목');
   });
 
   it('bounds huge evidence while preserving both its beginning and tail', () => {

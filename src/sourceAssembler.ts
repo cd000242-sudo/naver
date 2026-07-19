@@ -7,6 +7,12 @@ import { getProxyUrl, reportProxyFailed, reportProxySuccess } from './crawler/ut
 import { getChromiumExecutablePath } from './browserUtils.js';
 import { extractLabeledPrice, formatPriceOrEmpty, hasValidPrice, parsePrice } from './services/priceNormalizer.js';
 import { validateProductInfo } from './schemas/productInfoSchema.js';
+import { buildShoppingEvidenceSnapshot, type ShoppingEvidenceSnapshot } from './content/shoppingEvidenceSource.js';
+import {
+  buildReviewSamplingPageUrls,
+  collectGenericReviewTextCandidates,
+} from './crawler/shopping/utils/genericReviewDom.js';
+import { selectDecisionUsefulReviewTexts } from './crawler/shopping/utils/reviewTextSelection.js';
 // 이미지 라이브러리 기능 제거됨 - 네이버 블로그 크롤링도 제거
 // import { extractImagesFromHtml, extractImagesFromRss, collectImages } from './imageLibrary.js';
 
@@ -155,6 +161,8 @@ interface CrawlOptions {
   imagesOnly?: boolean;
   naverClientId?: string;
   naverClientSecret?: string;
+  /** Treat an arbitrary URL as a product page when Shopping Connect requested it. */
+  forceProductPage?: boolean;
 }
 
 // ✅ 쇼핑몰 크롤링 결과 타입
@@ -2921,12 +2929,13 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
     // ✅ 쇼핑몰 감지 (국내외 주요 쇼핑몰 모두 포함)
     const isPartnerLink = /coupa\.ng|link\.coupang\.com|shoppingconnect|adcash|adcrops|adfit|adpopcorn/i.test(url);
     const isShoppingMall = /coupang\.com|gmarket\.co\.kr|11st\.co\.kr|auction\.co\.kr|shopping\.naver\.com|brand\.naver\.com|brandconnect\.naver\.com|smartstore\.naver\.com|aliexpress\.com|amazon\.com|amazon\.co\.kr|wemakeprice\.com|tmon\.co\.kr/i.test(url);
+    const forceProductPage = options.forceProductPage === true;
 
     let html = '';
     let finalUrl = url;
 
     // ✅ 쇼핑몰 URL이면 네이버 API를 먼저 시도 (빠르고 안정적)
-    if ((isPartnerLink || isShoppingMall) && options.naverClientId && options.naverClientSecret) {
+    if ((isPartnerLink || isShoppingMall) && !forceProductPage && options.naverClientId && options.naverClientSecret) {
       console.log(`[쇼핑몰 크롤링] 🔍 네이버 API 우선 시도...`);
 
       // URL에서 제품명 추출
@@ -2954,7 +2963,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
     }
 
     // ✅ 보안이 강한 사이트는 Puppeteer 사용 (네이버 API 실패 시 폴백)
-    if (isPartnerLink || isShoppingMall) {
+    if (isPartnerLink || isShoppingMall || forceProductPage) {
       console.log(`[쇼핑몰 크롤링] Puppeteer 사용`);
 
       // ✅ 스마트스토어: 모바일 URL로 변환 (CAPTCHA 우회)
@@ -3204,7 +3213,8 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
           }
 
           // ✅ 브라우저에서 직접 이미지 추출 (최적화된 방식 - 타임아웃 방지)
-          puppeteerExtractedData = await page.evaluate((isBrandStore: boolean) => {
+          const structuredSnapshot = puppeteerExtractedData;
+          const domExtractedData = await page.evaluate((isBrandStore: boolean) => {
             const images: string[] = [];
             const seenUrls = new Set<string>();
             let totalImgTags = 0;
@@ -3795,13 +3805,14 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
             // ✅ [2026-01-30] 가격 추출
             let price = '';
             const priceSelectors = [
+              // 구조화 가격을 UI 숫자/적립금보다 먼저 사용
+              'meta[property="og:price:amount"]', 'meta[property="product:price:amount"]',
               // ✅ [2026-01-30] brand.naver.com 전용 셀렉터 (사용자 제공)
               '.e1DMQNBPJ_', // 가격 숫자 (129,000)
               '.Xu9MEKUuIo span.e1DMQNBPJ_', // 할인가 컨테이너 내 가격
               '.VaZJPclpdJ .e1DMQNBPJ_', // 원래 가격
               '.product-price', '.price-value', '[class*="price"]',
-              '.sale-price', '.selling-price', '[class*="sellingPrice"]',
-              'meta[property="og:price:amount"]', 'meta[property="product:price:amount"]'
+              '.sale-price', '.selling-price', '[class*="sellingPrice"]'
             ];
             for (const selector of priceSelectors) {
               const priceEl = document.querySelector(selector);
@@ -3867,6 +3878,29 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
             };
           }, isNaverBrand);
 
+          // TLS/JSON-LD is the trusted identity/price source. DOM rendering is
+          // used to add images/reviews/specs, never to replace a structured
+          // 159,000원 price with an unrelated 300원 point/reward number.
+          puppeteerExtractedData = {
+            ...structuredSnapshot,
+            ...domExtractedData,
+            images: [...new Set([
+              ...(domExtractedData.images || []),
+              ...(structuredSnapshot.images || []),
+            ])],
+            title: structuredSnapshot.title || domExtractedData.title,
+            spec: domExtractedData.spec || structuredSnapshot.spec,
+            price: structuredSnapshot.price || domExtractedData.price,
+            reviewTexts: selectDecisionUsefulReviewTexts([
+              ...(structuredSnapshot.reviewTexts || []),
+              ...(domExtractedData.reviewTexts || []),
+            ], 12),
+            reviewImageUrls: [...new Set([
+              ...(domExtractedData.reviewImageUrls || []),
+              ...(structuredSnapshot.reviewImageUrls || []),
+            ])],
+          };
+
           // ✅ 디버그: 추출 결과 확인
           if (puppeteerExtractedData && puppeteerExtractedData.stats) {
             const stats = puppeteerExtractedData.stats;
@@ -3875,6 +3909,48 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
           }
         } else {
           console.log(`[쇼핑몰 크롤링] ⏭️ 이미지 추출 건너뛰기 (텍스트만 추출)`);
+        }
+
+        // Generic stores frequently render reviews as Cafe24 article links or
+        // modern data-review cards. Collect them independently from images so
+        // text-only and image-enabled flows use the same evidence.
+        try {
+          const genericReviewCandidates = await page.evaluate(collectGenericReviewTextCandidates);
+          puppeteerExtractedData.reviewTexts = selectDecisionUsefulReviewTexts([
+            ...(puppeteerExtractedData.reviewTexts || []),
+            ...genericReviewCandidates,
+          ], 12);
+
+          // Review-mode product pages get a bounded recency sample. Sampling
+          // three pages avoids a 296-page crawl while surfacing installation,
+          // noise and longer-term usage evidence that the latest five reviews
+          // may not contain.
+          if (forceProductPage && puppeteerExtractedData.reviewTexts.length < 8) {
+            const lastReviewPage = await page.evaluate(() => {
+              const lastHref = document.querySelector('.xans-product-reviewpaging a.last, .xans-product-reviewpaging a[href*="page_4="]:last-of-type')?.getAttribute('href') || '';
+              return Number(lastHref.match(/[?&]page_4=(\d+)/)?.[1] || 1);
+            });
+            const sampleUrls = buildReviewSamplingPageUrls(finalUrl, lastReviewPage);
+            for (const sampleUrl of sampleUrls) {
+              try {
+                await page.goto(sampleUrl, { waitUntil: 'domcontentloaded', timeout: 15_000 });
+                await new Promise(resolve => setTimeout(resolve, 800));
+                const sampledCandidates = await page.evaluate(collectGenericReviewTextCandidates);
+                puppeteerExtractedData.reviewTexts = selectDecisionUsefulReviewTexts([
+                  ...(puppeteerExtractedData.reviewTexts || []),
+                  ...sampledCandidates,
+                ], 12);
+                if (puppeteerExtractedData.reviewTexts.length >= 8) break;
+              } catch (sampleError) {
+                console.warn(`[리뷰 추출] ⚠️ 후기 표본 페이지 수집 실패: ${(sampleError as Error).message}`);
+              }
+            }
+          }
+          if (puppeteerExtractedData.reviewTexts.length > 0) {
+            console.log(`[리뷰 추출] ✅ 의사결정형 구매후기 ${puppeteerExtractedData.reviewTexts.length}개 선별`);
+          }
+        } catch (reviewError) {
+          console.warn(`[리뷰 추출] ⚠️ 일반 쇼핑몰 후기 DOM 수집 실패: ${(reviewError as Error).message}`);
         }
 
         // ✅ 제품 설명 추출 (항상 추출)
@@ -3954,6 +4030,16 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
             if (productDescription.length > 0) {
               console.log(`[쇼핑몰 크롤링] 📝 제품 설명 추출 완료: ${productDescription.length}자`);
             }
+          } else {
+            const metaDescription = $('meta[property="og:description"]').attr('content')?.trim()
+              || $('meta[name="description"]').attr('content')?.trim()
+              || '';
+            const jsonLdDescription = extractJsonLdFromHtml(html)?.description?.trim() || '';
+            productDescription = [jsonLdDescription, metaDescription]
+              .filter(Boolean)
+              .filter((value, index, values) => values.indexOf(value) === index)
+              .join('\n\n')
+              .substring(0, 3000);
           }
         }
 
@@ -3965,7 +4051,12 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
           return {
             images: [], // 이미지는 반환하지 않음
             title: puppeteerExtractedData.title,
-            description: productDescription || undefined
+            description: productDescription || undefined,
+            spec: puppeteerExtractedData.spec || undefined,
+            price: puppeteerExtractedData.price || undefined,
+            reviews: puppeteerExtractedData.reviewTexts || [],
+            reviewImages: puppeteerExtractedData.reviewImageUrls || [],
+            resolvedUrl: finalUrl,
           };
         }
 
@@ -5806,7 +5897,23 @@ function calculateTopicSimilarity(keywords1: string[], keywords2: string[]): num
   return union.size > 0 ? intersection.size / union.size : 0;
 }
 
-async function fetchSingleSource(url: string, options?: { naverClientId?: string; naverClientSecret?: string }): Promise<{ title?: string; content?: string; publishedAt?: string; images?: string[]; keywords?: string[]; success: boolean; error?: string }> {
+async function fetchSingleSource(
+  url: string,
+  options?: {
+    naverClientId?: string;
+    naverClientSecret?: string;
+    includeShoppingEvidence?: boolean;
+  },
+): Promise<{
+  title?: string;
+  content?: string;
+  publishedAt?: string;
+  images?: string[];
+  keywords?: string[];
+  shoppingEvidence?: ShoppingEvidenceSnapshot;
+  success: boolean;
+  error?: string;
+}> {
   try {
     let title: string | undefined;
     let content: string | undefined;
@@ -5977,6 +6084,48 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
 
       console.warn(`[fetchSingleSource] ❌ 스마트스토어/브랜드스토어 모든 방법 실패`);
       return { success: false, error: '스마트스토어 상품 정보 수집 실패 (OG 폴백 포함)' };
+    }
+
+    // 쇼핑커넥트 후기 모드에서는 도메인 허용목록에 없는 일반 쇼핑몰도
+    // 구조화 상품 증거(가격/스펙/실제 구매후기)를 먼저 수집한다.
+    const canProbeAsProductPage = options?.includeShoppingEvidence === true
+      && !/\.xml$|\/rss/i.test(resolvedUrl)
+      && !/blog\.naver\.com/i.test(resolvedUrl);
+    if (canProbeAsProductPage) {
+      try {
+        const shoppingResult = await fetchShoppingImages(resolvedUrl, {
+          imagesOnly: true,
+          forceProductPage: true,
+          naverClientId: options?.naverClientId,
+          naverClientSecret: options?.naverClientSecret,
+        });
+        const shoppingEvidence = buildShoppingEvidenceSnapshot({
+          url: resolvedUrl,
+          resolvedUrl: shoppingResult.resolvedUrl,
+          title: shoppingResult.title,
+          description: shoppingResult.description,
+          spec: shoppingResult.spec,
+          price: shoppingResult.price,
+          reviews: shoppingResult.reviews,
+          images: shoppingResult.images,
+        });
+
+        if (shoppingEvidence.usable) {
+          console.log(`[fetchSingleSource] ✅ 일반 쇼핑몰 구조화 증거 수집: 후기 ${shoppingEvidence.productReviews.length}개`);
+          return {
+            title: shoppingEvidence.title,
+            content: shoppingEvidence.rawText,
+            publishedAt: new Date().toISOString(),
+            images: shoppingEvidence.images,
+            keywords: extractKeywordsFromText(shoppingEvidence.rawText),
+            shoppingEvidence,
+            success: true,
+          };
+        }
+        console.log('[fetchSingleSource] ℹ️ 상품 증거가 부족해 일반 URL 수집 경로를 계속합니다.');
+      } catch (shoppingError) {
+        console.warn(`[fetchSingleSource] ⚠️ 일반 쇼핑몰 구조화 수집 실패, 일반 URL 경로 유지: ${(shoppingError as Error).message}`);
+      }
     }
 
     // RSS 피드인 경우 기존 방식 사용
@@ -6408,6 +6557,7 @@ ${reviewSection}
   let published = '';
   const extractedImages: string[] = [];
   const allUrls: string[] = [];
+  let shoppingEvidence: ShoppingEvidenceSnapshot | undefined;
 
   // ✅ 네이버 API 결과를 우선 적용 (빠르고 안정적!)
   if (naverApiContent.length > 500) {
@@ -6418,15 +6568,23 @@ ${reviewSection}
   if (urlPatterns.length > 0) {
     console.log(`[다중 소스 크롤링] ${urlPatterns.length}개의 URL을 크롤링합니다...`);
 
-    // ✅ 네이버 API 키 옵션 준비
-    const crawlOptions = hasNaverApi ? { naverClientId: naverClientId!, naverClientSecret: naverClientSecret! } : undefined;
+    // ✅ 쇼핑커넥트 후기 모드는 고정 도메인 목록 밖의 상품 페이지도
+    // 가격/스펙/실제 구매후기 구조를 보존해서 수집한다.
+    const includeShoppingEvidence = input.isReviewType === true
+      || input.articleType === 'shopping_review'
+      || input.articleType === 'shopping_expert_review'
+      || input.articleType === 'product_review';
+    const crawlOptions = {
+      ...(hasNaverApi ? { naverClientId: naverClientId!, naverClientSecret: naverClientSecret! } : {}),
+      includeShoppingEvidence,
+    };
 
     // 여러 소스를 병렬로 크롤링 (✅ 네이버 API 키 전달)
     const crawlResults = await Promise.allSettled(
       urlPatterns.map(url => fetchSingleSource(url, crawlOptions))
     );
 
-    const successfulSources: Array<{ title?: string; content?: string; publishedAt?: string; images?: string[]; keywords?: string[]; url: string; relevanceScore?: number }> = [];
+    const successfulSources: Array<{ title?: string; content?: string; publishedAt?: string; images?: string[]; keywords?: string[]; shoppingEvidence?: ShoppingEvidenceSnapshot; url: string; relevanceScore?: number }> = [];
 
     crawlResults.forEach((result, index) => {
       const url = urlPatterns[index];
@@ -6440,8 +6598,18 @@ ${reviewSection}
           publishedAt: source.publishedAt,
           images: source.images,
           keywords: source.keywords,
+          shoppingEvidence: source.shoppingEvidence,
           url,
         });
+
+        if (!shoppingEvidence && source.shoppingEvidence?.usable) {
+          shoppingEvidence = source.shoppingEvidence;
+          warnings.push(
+            source.shoppingEvidence.productReviews.length > 0
+              ? `✅ 실제 구매자 후기 ${source.shoppingEvidence.productReviews.length}건을 글 생성 근거로 연결했습니다.`
+              : 'ℹ️ 구매자 후기 본문을 수집하지 못해 확인된 상품 정보만 사용합니다. 없는 사용 경험은 만들지 않습니다.',
+          );
+        }
 
         // 이미지 수집
         if (source.images && source.images.length > 0) {
@@ -6825,7 +6993,7 @@ ${reviewSection}
   // ✅ 키워드/제목만 있을 때 네이버 검색 API로 콘텐츠 수집
   // ✅ [2026-03-08 FIX] 네이버 블로그 URL이 있으면 검색 API 폴백 차단
   // ✅ [2026-03-29 FIX] custom 모드(페러프레이징 등)에서는 수집 차단 (원문 오염 방지)
-  if ((!baseBody || baseBody.length < 200) && (keywords.length > 0 || baseTitle) && !hasExplicitNaverBlogUrlGlobal && !isNaverStoreUrl && !isCustomMode) {
+  if ((!baseBody || baseBody.length < 200) && (keywords.length > 0 || baseTitle) && !hasExplicitNaverBlogUrlGlobal && !isNaverStoreUrl && !isCustomMode && !shoppingEvidence) {
     const naverClientId = input.naverClientId || process.env.NAVER_CLIENT_ID;
     const naverClientSecret = input.naverClientSecret || process.env.NAVER_CLIENT_SECRET;
 
@@ -6858,7 +7026,7 @@ ${reviewSection}
   // 네이버 API가 없거나 모든 소스 수집이 실패해도 키워드 기반 글 생성 가능!
   // ✅ [2026-03-08 FIX] 네이버 블로그 URL이 있으면 웹 검색 리서치도 차단 (엉뚱한 콘텐츠 혼입 방지)
   // ✅ [2026-03-15 FIX] 스마트스토어 URL이면 웹 검색 리서치도 차단 (다른 제품 콘텐츠 주입 방지)
-  if ((!baseBody || baseBody.length < 500) && (keywords.length > 0 || baseTitle) && !hasExplicitNaverBlogUrlGlobal && !isNaverStoreUrl) {
+  if ((!baseBody || baseBody.length < 500) && (keywords.length > 0 || baseTitle) && !hasExplicitNaverBlogUrlGlobal && !isNaverStoreUrl && !shoppingEvidence) {
     const searchKeyword = baseTitle || keywords.slice(0, 5).join(' ');
     console.log(`\n🌐 [최종 폴백] 네이버 소스 부족 (${baseBody?.length || 0}자) → 웹 검색 리서치 시도`);
     console.log(`   검색 키워드: "${searchKeyword}"`);
@@ -6961,12 +7129,11 @@ ${reviewSection}
     return 'general';
   };
 
-  const assembledProductPrice = isNaverStoreUrl
-    ? extractLabeledPrice(baseBody) ?? undefined
-    : undefined;
+  const assembledProductPrice = shoppingEvidence?.productPrice
+    ?? (isNaverStoreUrl ? extractLabeledPrice(baseBody) ?? undefined : undefined);
 
   const source: ContentSource = {
-    sourceType: urlPatterns.length > 0 ? 'naver_news' : 'custom_text',
+    sourceType: shoppingEvidence ? 'custom_text' : (urlPatterns.length > 0 ? 'naver_news' : 'custom_text'),
     url: allUrls.length > 0 ? (allUrls.length === 1 ? allUrls[0] : allUrls.join(', ')) : undefined,
     title: baseTitle || (keywords.length ? `${keywords[0]} 관련 콘텐츠` : undefined),
     rawText: baseBody,
@@ -6979,6 +7146,7 @@ ${reviewSection}
       sourceCount: urlPatterns.length,
       successfulSourceCount: urlPatterns.length - warnings.filter(w => w.includes('크롤링 실패')).length,
       warnings,
+      shoppingEvidenceMode: shoppingEvidence?.evidenceMode,
     },
     generator: input.generator ?? 'gemini',
     articleType: input.articleType ?? inferArticleType(),
@@ -6988,7 +7156,13 @@ ${reviewSection}
     personalExperience: input.personalExperience,
     customPrompt: input.customPrompt, // ✅ 사용자 정의 프롬프트 전달
     images: extractedImages.length > 0 ? extractedImages : undefined, // ✅ 수집된 이미지 목록 전달
-    productPrice: assembledProductPrice,
+    ...(shoppingEvidence ? {
+      productPrice: shoppingEvidence.productPrice,
+      productSpec: shoppingEvidence.productSpec,
+      productReviews: shoppingEvidence.productReviews,
+    } : {
+      productPrice: assembledProductPrice,
+    }),
     previousTitles: input.previousTitles, // ✅ [2026-02-09 v2] 이전 생성 제목 전달 (연속발행 중복 방지)
   };
 
