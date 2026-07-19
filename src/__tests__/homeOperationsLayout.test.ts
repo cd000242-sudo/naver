@@ -98,7 +98,7 @@ describe('homepage operations layout', () => {
   it('keeps the operations board and removes the duplicate bottom income-proof carousel', () => {
     const source = readFileSync(join(process.cwd(), 'spa', 'src', 'pages', 'IndexPage.tsx'), 'utf8');
     const board = readFileSync(join(process.cwd(), 'spa', 'src', 'components', 'HomeOperationsBoard.tsx'), 'utf8');
-    const boardIndex = source.indexOf('<HomeOperationsBoard realtimePanel={(');
+    const boardIndex = source.indexOf('<HomeOperationsBoard managedProofs={siteContent?.hero?.proofs || []} realtimePanel={(');
     const actionsIndex = source.indexOf('<div className="hero-action-strip"');
 
     expect(boardIndex).toBeGreaterThan(-1);
@@ -111,6 +111,11 @@ describe('homepage operations layout', () => {
     expect(source).not.toContain('communityProofFallbacks');
     expect(board).not.toContain('proofFallbacks');
     expect(board).not.toContain('proofFallbackToIncomeProof');
+    expect(board).toContain('managedProofs?: HomeManagedProof[]');
+    expect(board).toContain('function managedProofToIncomeProof');
+    expect(board).toContain('const displayIncomeProofs = incomeProofs.length > 0 ? incomeProofs : managedIncomeProofs;');
+    expect(board).toContain('const usingManagedProofs = incomeProofs.length === 0 && managedIncomeProofs.length > 0;');
+    expect(board).toContain("usingManagedProofs ? '관리자가 등록한 실제 인증 자료입니다.'");
     expect(source).toContain('<div className="hero-realtime-board" aria-label="실시간 검색어">');
     expect(source).toContain('const handleSourceTabKeyDown =');
     expect(source).toContain('onKeyDown={(event) => handleSourceTabKeyDown(event, lane.id)}');
