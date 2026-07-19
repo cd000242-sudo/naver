@@ -16,8 +16,17 @@ const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits:
 
 type HomeOperationsTab = 'deputy' | 'realtime';
 
+type HomeManagedProof = {
+    src?: string;
+    alt?: string;
+    title?: string;
+    desc?: string;
+    metric?: string;
+};
+
 interface HomeOperationsBoardProps {
     realtimePanel?: ReactNode;
+    managedProofs?: HomeManagedProof[];
 }
 
 function formatDate(value: string): string {
@@ -162,6 +171,48 @@ function IncomeProofCard({ proof }: { proof: CommunityIncomeProof }) {
     );
 }
 
+function cleanManagedProofText(value: unknown, fallback: string, maxLength: number): string {
+    const cleaned = String(value || '')
+        .replace(/[\u0000-\u001f\u007f]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, maxLength);
+    return cleaned || fallback;
+}
+
+function normalizeManagedProofSrc(value: unknown): string {
+    const src = String(value || '').trim();
+    if (!src || src.length > 4096 || /[\u0000-\u001f\u007f\\]/.test(src)) return '';
+    if (src.startsWith('/images/') && !src.includes('..') && !src.startsWith('//')) return src;
+    try {
+        const parsed = new URL(src);
+        const hostname = parsed.hostname.toLocaleLowerCase();
+        const trustedHost = hostname === 'leaderspro.kr'
+            || hostname === 'www.leaderspro.kr'
+            || hostname === '141.164.59.17.sslip.io';
+        return parsed.protocol === 'https:' && !parsed.username && !parsed.password && trustedHost ? src : '';
+    } catch {
+        return '';
+    }
+}
+
+function managedProofToIncomeProof(proof: HomeManagedProof, index: number): CommunityIncomeProof | null {
+    const media = normalizeManagedProofSrc(proof.src);
+    if (!media) return null;
+    const amount = cleanManagedProofText(proof.title || proof.metric, '실제 인증 캡처', 100);
+    return {
+        id: `managed-income-${index + 1}-${media}`,
+        amount,
+        author: '운영 등록 인증',
+        date: '',
+        desc: cleanManagedProofText(proof.desc || proof.alt, '관리자가 등록한 실제 인증 이미지입니다.', 600),
+        tags: [],
+        media,
+        mediaType: 'image',
+        mediaName: cleanManagedProofText(proof.alt || proof.title, amount, 120),
+    };
+}
+
 function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
     const maxOpportunity = Math.max(1, ...rows.map((row) => row.opportunity));
     return (
@@ -272,7 +323,7 @@ function KeywordMobileCards({ rows }: { rows: HomeKeywordRow[] }) {
     );
 }
 
-function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
+function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperationsBoardProps) {
     const [notices, setNotices] = useState<HomeNotice[]>([]);
     const [openNoticeId, setOpenNoticeId] = useState<string | null>(null);
     const [incomeResult, setIncomeResult] = useState<CommunityIncomeProofResult | null>(null);
@@ -307,7 +358,14 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
 
     const briefing = briefingResult?.briefing || null;
     const incomeProofs = (incomeResult?.items || []).filter((proof) => Boolean(proof.media));
-    const displayIncomeProofs = incomeProofs;
+    const managedIncomeProofs = useMemo(() => (
+        managedProofs
+            .map(managedProofToIncomeProof)
+            .filter((proof): proof is CommunityIncomeProof => Boolean(proof))
+            .slice(0, 3)
+    ), [managedProofs]);
+    const displayIncomeProofs = incomeProofs.length > 0 ? incomeProofs : managedIncomeProofs;
+    const usingManagedProofs = incomeProofs.length === 0 && managedIncomeProofs.length > 0;
     const chartRows = useMemo(() => briefing ? selectKeywordChartRows(briefing, 10) : [], [briefing]);
     const uniqueCount = useMemo(() => briefing ? uniqueKeywordCount(briefing.rows) : 0, [briefing]);
     const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, currentTab: HomeOperationsTab) => {
@@ -854,7 +912,7 @@ function HomeOperationsBoard({ realtimePanel }: HomeOperationsBoardProps) {
                     <div className="home-ops-panel-head">
                         <div>
                             <strong>수익 인증</strong><br />
-                            <small>{incomeResult?.source === 'cache' ? '최근 확인한 승인 자료입니다.' : incomeResult?.source === 'unavailable' ? '서버 연결 상태를 확인 중입니다.' : '승인된 실제 자료만 보여드립니다.'}</small>
+                            <small>{usingManagedProofs ? '관리자가 등록한 실제 인증 자료입니다.' : incomeResult?.source === 'cache' ? '최근 확인한 승인 자료입니다.' : incomeResult?.source === 'unavailable' ? '서버 연결 상태를 확인 중입니다.' : '승인된 실제 자료만 보여드립니다.'}</small>
                         </div>
                         <Link to="/community">전체 보기·작성 →</Link>
                     </div>

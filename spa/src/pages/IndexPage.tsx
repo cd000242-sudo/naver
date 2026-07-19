@@ -1172,7 +1172,7 @@ function IndexPage() {
         <>
             {decorationsReady && <ParticlesCanvas />}
 
-            <HomeOperationsBoard realtimePanel={(
+            <HomeOperationsBoard managedProofs={siteContent?.hero?.proofs || []} realtimePanel={(
                     <div className="hero-realtime-board" aria-label="실시간 검색어">
                         <div className="hero-realtime-head">
                             <span>{liveStatusLabel}</span>
