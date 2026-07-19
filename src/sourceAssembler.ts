@@ -197,6 +197,7 @@ interface CrawlResult {
   reviews?: string[];      // 리뷰 텍스트 배열 (최대 5개)
   reviewImages?: string[]; // 포토리뷰 이미지 (우선 수집)
   isErrorPage?: boolean;   // 에러 페이지 감지 플래그
+  hasProductStructuredData?: boolean;
 }
 
 // ✅ [2026-01-31] JSON-LD 구조화 데이터 파싱 (가장 안정적인 데이터 추출 방식)
@@ -2107,6 +2108,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
     reviewImageUrls?: string[];
     stats?: any;
   } = { images: [] };
+  let hasProductStructuredData = false;
 
   try {
     // ========================================
@@ -2161,6 +2163,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
           const jsonLd = extractJsonLdFromHtml(tlsResult.html);
 
           if (jsonLd && jsonLd.name) {
+            hasProductStructuredData = true;
             console.log(`[Stage 1] 🎯 JSON-LD 데이터 확보 완료! (Puppeteer 생략)`);
 
             puppeteerExtractedData.title = jsonLd.name;
@@ -2492,6 +2495,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
         const jsonLdData = extractJsonLdFromHtml(pageHtml);
 
         if (jsonLdData && jsonLdData.name) {
+          hasProductStructuredData = true;
           console.log('[JSON-LD] ✅ 구조화 데이터에서 제품 정보 추출 성공!');
 
           puppeteerExtractedData.title = jsonLdData.name;
@@ -3848,7 +3852,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
               reviewEls.forEach((el, idx) => {
                 if (reviewTexts.length < 5) {
                   const text = el.textContent?.trim();
-                  if (text && text.length > 20 && text.length < 500) {
+                  if (text && text.length >= 8 && text.length < 500) {
                     reviewTexts.push(text);
                   }
                 }
@@ -4934,6 +4938,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
         canonicalUrl: url,
       },
       resolvedUrl: url,
+      hasProductStructuredData,
     };
 
     // ✅ 추출 결과 로그
@@ -6108,6 +6113,7 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
           price: shoppingResult.price,
           reviews: shoppingResult.reviews,
           images: shoppingResult.images,
+          hasProductStructuredData: shoppingResult.hasProductStructuredData,
         });
 
         if (shoppingEvidence.usable) {

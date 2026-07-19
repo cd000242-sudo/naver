@@ -10,6 +10,10 @@ import {
   classifyAffiliateEvidence,
 } from '../content/affiliateAuthenticity.js';
 import { auditAffiliateReviewDepth } from '../content/affiliateReviewDepth.js';
+import {
+  buildReviewDecisionBlueprint,
+  clusterReviewDecisionEvidence,
+} from '../content/reviewDecisionBlueprint.js';
 
 const BATHROOM_REVIEWS = [
   '기존 환풍기 자리가 작아서 천장 타공을 넓히는 설치 과정이 조금 번거로웠어요.',
@@ -55,6 +59,17 @@ describe('shopping review evidence selection', () => {
     expect(selected).toEqual([
       '물때 안 끼라고 샀어요',
       '소리 안 커서 밤에도 괜찮아요',
+    ]);
+  });
+
+  it('keeps natural short buyer sentences even when they do not hit a hard-coded anchor keyword', () => {
+    const selected = selectDecisionUsefulReviewTexts([
+      '마감이 깔끔해서 욕실이 덜 답답해 보여요',
+      '리뷰 전체 보기',
+    ]);
+
+    expect(selected).toEqual([
+      '마감이 깔끔해서 욕실이 덜 답답해 보여요',
     ]);
   });
 
@@ -105,6 +120,34 @@ describe('shopping review intent contract', () => {
       title: '하츠 티오람미니 HMF-J300',
       productSpec: '온풍·제습·환기',
     })).toBe('');
+  });
+
+  it('keeps a fallback blueprint and audit signal for natural reviews outside fixed categories', () => {
+    const review = '마감이 깔끔해서 욕실이 덜 답답해 보여요';
+    const blueprint = buildReviewDecisionBlueprint([review]);
+    const report = auditAffiliateReviewDepth({
+      title: '욕실 환풍기',
+      body: '구매자 후기에서는 마감이 깔끔해 욕실이 덜 답답해 보인다는 의견이 있었어요. 외관 답답함이 신경 쓰인 사람에게 구매 이유가 될 수 있습니다.',
+      productReviews: [review],
+    });
+
+    expect(blueprint).toContain('기타 구매 결정 장면');
+    expect(blueprint).toContain('REVIEW_1');
+    expect(report.usedReviewEvidenceCount).toBe(1);
+    expect(report.issues.map(issue => issue.code)).not.toContain('REVIEW_PAIN_POINT_UNUSED');
+  });
+
+  it('does not count one multi-theme REVIEW_N as multiple independent evidence sources or required headings', () => {
+    const review = '기존 환풍기보다 커서 천장 타공 설치가 필요했고, 샤워 뒤 10분 돌리면 물기는 빨리 마르지만 최고 단계 소음이 컸어요.';
+    const clusters = clusterReviewDecisionEvidence([review]);
+    const clustersBackedOnlyByReviewOne = clusters.filter(cluster => (
+      cluster.reviewRefs.length === 1 && cluster.reviewRefs[0] === 'REVIEW_1'
+    ));
+    const blueprint = buildReviewDecisionBlueprint([review]);
+
+    expect(new Set(clusters.flatMap(cluster => cluster.reviewRefs))).toEqual(new Set(['REVIEW_1']));
+    expect(clustersBackedOnlyByReviewOne).toHaveLength(1);
+    expect(blueprint).not.toContain('근거 묶음이 2개 이상이면 첫 두 소제목');
   });
 });
 
@@ -194,5 +237,12 @@ describe('review collection wiring', () => {
     expect(source).toContain('selectDecisionUsefulReviewTexts');
     expect(source).toContain('visibleReviewTexts');
     expect(source).toMatch(/reviewTexts:\s*collectedReviewTexts/);
+  });
+
+  it('does not discard short purchase motives in the legacy visible-DOM collector', () => {
+    const path = fileURLToPath(new URL('../sourceAssembler.ts', import.meta.url));
+    const source = readFileSync(path, 'utf8');
+
+    expect(source).toMatch(/text\s*&&\s*text\.length\s*>=\s*8\s*&&\s*text\.length\s*<\s*500/);
   });
 });

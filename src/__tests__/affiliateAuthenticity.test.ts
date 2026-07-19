@@ -14,13 +14,13 @@ describe('affiliate authenticity contract', () => {
       title: '고요아 냉풍기 에어쿨러 이동식 에어컨',
       rawText: '고요아 냉풍기 에어쿨러 이동식 에어컨 가격 239,000원',
       productPrice: '239,000원',
-    }, 2500)).toBe(1300);
+    }, 2500)).toBe(1000);
 
     expect(resolveAffiliateContentLengthTarget({
       rawText: '상세 제품 설명 '.repeat(130),
       productSpec: '크기, 무게, 소비전력, 구성품, 소재, 작동 방식과 관리법 '.repeat(18),
       productPrice: '239,000원',
-    }, 2500)).toBe(1300);
+    }, 2500)).toBe(1000);
 
     expect(resolveAffiliateContentLengthTarget({
       rawText: '상품 상세 정보',

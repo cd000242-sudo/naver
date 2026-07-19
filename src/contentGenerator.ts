@@ -4978,7 +4978,10 @@ async function generateStructuredContentInternal(
   const allowPaidPostGenerationRepair =
     !isV3Prompt
     && allowAutomaticProviderRetry
-    && process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR === '1';
+    && process.env.CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR === '1'
+    // 쇼핑커넥트는 품질 점수 때문에 두 번째 유료 생성을 호출하지 않는다.
+    // 첫 호출에서 전환 계약을 적용하고 부족한 결과는 경고 후 발행한다.
+    && source.contentMode !== 'affiliate';
 
   // ✅ [SPEC-IMAGE-NARRATIVE-2026 Phase 2] image-narrative mode branch
   if (source.contentMode === 'image-narrative') {

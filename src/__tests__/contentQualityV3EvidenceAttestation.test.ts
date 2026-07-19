@@ -160,7 +160,7 @@ describe('Content Quality V3 evidence attestation', () => {
     expect(Object.isFrozen(current)).toBe(true);
     expect(current).toEqual({
       promptBundleSha256:
-        '4ab649267958b0d65180064d448997fe1efa7a48023debaff63d383e34637eed',
+        '838784954c08f3fa5626586ed8e0ead2db6d2ad74fb33480a226a5349156e058',
       outputSchemaSha256:
         'd2a8e746c86950e548e63f5eff7cbe00a9fc1dbf8a057b12ed7a1d36c8b07cd4',
       corpusSha256:

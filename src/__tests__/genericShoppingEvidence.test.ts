@@ -38,6 +38,15 @@ describe('collectGenericReviewTextCandidates', () => {
     expect(result.join(' ')).toMatch(/물기가 빨리 말라|최고 단계/);
   });
 
+  it('keeps short purchase motives before the shared review selector scores them', () => {
+    document.body.innerHTML = `
+      <div data-review-content>물때 때문에 샀어요</div>
+      <div class="review-body">좋아요</div>
+    `;
+
+    expect(collectGenericReviewTextCandidates()).toContain('물때 때문에 샀어요');
+  });
+
   it('collects current Cafe24 rv cards and ignores authorization placeholders', () => {
     document.body.innerHTML = `
       <div class="rv__item review_296">
@@ -54,6 +63,32 @@ describe('collectGenericReviewTextCandidates', () => {
     expect(result).toEqual([
       expect.stringContaining('습기제거'),
       expect.stringContaining('온풍으로 쓰기'),
+    ]);
+  });
+
+  it('rejects seller notices, review events, and shipping/exchange guidance from generic review DOMs', () => {
+    document.body.innerHTML = `
+      <div class="review-body">판매자 공지: 포토 리뷰 이벤트 참여 시 적립금 5,000원을 지급합니다.</div>
+      <div data-review-content>리뷰 작성 이벤트 당첨자는 매월 공지하며 사은품은 별도 배송됩니다.</div>
+      <div class="review-content">배송은 결제 후 2~3일 걸리며 교환 및 반품은 고객센터로 문의해 주세요.</div>
+      <div class="review-item"><p class="review-text">샤워 뒤 10분 정도 돌리니 욕실 물기가 빨리 말랐지만 최고 단계 소음은 크게 들렸어요.</p></div>
+    `;
+
+    expect(collectGenericReviewTextCandidates()).toEqual([
+      '샤워 뒤 10분 정도 돌리니 욕실 물기가 빨리 말랐지만 최고 단계 소음은 크게 들렸어요.',
+    ]);
+  });
+
+  it('rejects point, gift, and winner variants of seller review promotions', () => {
+    document.body.innerHTML = `
+      <div class="review-body">리뷰 이벤트 참여 시 포인트를 지급합니다.</div>
+      <div data-review-content>포토 후기 작성하면 적립금을 지급합니다.</div>
+      <div class="review-content">당첨자에게 사은품을 별도 증정합니다.</div>
+      <div class="review-text">물때 때문에 샀는데 청소 횟수가 줄었어요.</div>
+    `;
+
+    expect(collectGenericReviewTextCandidates()).toEqual([
+      '물때 때문에 샀는데 청소 횟수가 줄었어요.',
     ]);
   });
 });
@@ -112,5 +147,32 @@ describe('buildShoppingEvidenceSnapshot', () => {
 
     expect(snapshot.usable).toBe(false);
     expect(snapshot.productReviews).toEqual([]);
+  });
+
+  it('does not mistake a long generic editorial URL with a price-shaped value for a product page', () => {
+    const snapshot = buildShoppingEvidenceSnapshot({
+      url: 'https://example.test/blog/bathroom-fan-buying-guide',
+      title: '욕실 환풍기 고르는 법과 설치 전 확인할 점',
+      description: '욕실 환풍기의 제습과 온풍 기능을 비교하고 천장 규격, 전원, 환기 방식의 차이를 설명하는 일반 정보 글입니다.',
+      price: '159,000원',
+      images: ['https://example.test/editorial/bathroom-guide.jpg'],
+    });
+
+    expect(snapshot.usable).toBe(false);
+    expect(snapshot.productReviews).toEqual([]);
+    expect(snapshot.evidenceMode).toBe('spec_only');
+  });
+
+  it.each([
+    'https://shop.test/shop/shopdetail.html?branduid=12345',
+    'https://shop.test/shop/view.php?index_no=12345',
+  ])('recognizes common commerce detail identity without requiring a review (%s)', url => {
+    const snapshot = buildShoppingEvidenceSnapshot({
+      url,
+      title: '욕실 환풍기 HMF-J300',
+      description: '천장 타공 규격과 정격 전원, 환기 방식을 포함한 판매 페이지 상품 설명입니다.',
+    });
+
+    expect(snapshot.usable).toBe(true);
   });
 });

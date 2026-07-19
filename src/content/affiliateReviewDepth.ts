@@ -42,6 +42,15 @@ const DECISION_ANCHORS: readonly string[] = Object.freeze([
   '배송', '포장', '도착', '전기', '요금', '소비전력', '유지비',
 ]);
 
+const SUPPLEMENTAL_REVIEW_OUTCOME_PATTERN = /깔끔|답답|만족/i;
+const SUPPLEMENTAL_DECISION_ANCHORS: readonly string[] = Object.freeze([
+  '물때', '마감', '깔끔', '답답', '디자인',
+]);
+const ALL_DECISION_ANCHORS: readonly string[] = Object.freeze([
+  ...DECISION_ANCHORS,
+  ...SUPPLEMENTAL_DECISION_ANCHORS,
+]);
+
 function normalizeText(value: unknown): string {
   return typeof value === 'string' ? value.replace(/\s+/g, ' ').trim() : '';
 }
@@ -52,7 +61,7 @@ function countUsedReviewEvidence(body: string, reviews: readonly string[]): numb
 
   return reviews.reduce((count, review) => {
     const compactReview = review.toLowerCase().replace(/\s+/g, ' ');
-    const anchors = DECISION_ANCHORS.filter(anchor => compactReview.includes(anchor.toLowerCase()));
+    const anchors = ALL_DECISION_ANCHORS.filter(anchor => compactReview.includes(anchor.toLowerCase()));
     const sharedAnchors = anchors.filter(anchor => compactBody.includes(anchor.toLowerCase()));
     const reviewNumbers = compactReview.match(/\d+\s*(?:분|시간|일|주|개월|단계|mm|cm|db)/gi) || [];
     const hasSharedNumber = reviewNumbers.some(value => compactBody.includes(value.toLowerCase()));
@@ -104,7 +113,10 @@ export function auditAffiliateReviewDepth(
       message: '구매자 후기 근거가 있지만 본문에서 구매자 의견이라는 출처가 드러나지 않습니다.',
     }));
   }
-  if (usedReviewEvidenceCount === 0 || !REVIEW_OUTCOME_PATTERN.test(body)) {
+  if (
+    usedReviewEvidenceCount === 0
+    || (!REVIEW_OUTCOME_PATTERN.test(body) && !SUPPLEMENTAL_REVIEW_OUTCOME_PATTERN.test(body))
+  ) {
     issues.push(Object.freeze({
       code: 'REVIEW_USE_OUTCOME_UNUSED',
       message: '후기에서 확인된 사용 결과·해결·적응 또는 남은 한계가 구매 판단으로 연결되지 않았습니다.',

@@ -10,6 +10,7 @@ export interface ShoppingEvidenceInput {
   reviews?: unknown;
   images?: string[];
   resolvedUrl?: string;
+  hasProductStructuredData?: boolean;
 }
 
 export interface ShoppingEvidenceSnapshot {
@@ -37,6 +38,23 @@ function uniqueImages(value: unknown): string[] {
     .filter(item => /^https?:\/\//i.test(item)))];
 }
 
+function hasProductDetailIdentity(value: string): boolean {
+  try {
+    const url = new URL(value);
+    if (/(?:^|\/)(?:blog|article|news|post|guide)(?:\/|$)/i.test(url.pathname)) return false;
+    if (/(?:^|\/)(?:product|products|goods|item|detail)(?:\/|$)/i.test(url.pathname)) return true;
+    if (/(?:shopdetail|goods[_-]?view|product[_-]?detail)(?:\.(?:html?|php))?/i.test(url.pathname)) return true;
+    const queryKeys = [...url.searchParams.keys()];
+    if (queryKeys.some(key => /^(?:product_?no|product_?id|goods_?no|goods_?id|goods_?idx|item_?id|item_?no|branduid)$/i.test(key))) {
+      return true;
+    }
+    const hasCommercePath = /(?:^|\/)(?:shop|mall|store|goods|product|item|catalog)(?:\/|$)/i.test(url.pathname);
+    return hasCommercePath && queryKeys.some(key => /^(?:index_?no|idx|pno)$/i.test(key));
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Converts a commerce crawl result into immutable, explicitly labelled
  * evidence. It never summarizes reviews or invents missing product facts.
@@ -54,10 +72,16 @@ export function buildShoppingEvidenceSnapshot(input: ShoppingEvidenceInput): Sho
     .join('\n') || undefined;
   const images = uniqueImages(input.images);
   const url = input.resolvedUrl || input.url;
+  const hasProductIdentity = input.hasProductStructuredData === true
+    || hasProductDetailIdentity(url);
   const hasConcreteProductEvidence = Boolean(
-    productPrice
-    || productReviews.length > 0
-    || (productSpec && productSpec.length >= 40),
+    input.hasProductStructuredData === true
+    || (hasProductIdentity && (
+      productPrice
+      || productReviews.length > 0
+      || (productSpec && productSpec.length >= 40)
+    ))
+    || (productPrice && productReviews.length > 0),
   );
   const usable = title.length >= 3 && hasConcreteProductEvidence;
   const rawParts = [
@@ -82,4 +106,3 @@ export function buildShoppingEvidenceSnapshot(input: ShoppingEvidenceInput): Sho
     evidenceMode: productReviews.length > 0 ? 'review_synthesis' : 'spec_only',
   };
 }
-

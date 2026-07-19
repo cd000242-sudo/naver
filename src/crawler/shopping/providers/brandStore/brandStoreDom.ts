@@ -180,7 +180,7 @@ export function collectReviewTextCandidates(): string[] {
                     || rect.height <= 0
                 ) return;
                 const text = (node.textContent || '').replace(/\s+/g, ' ').trim();
-                if (text.length < 12 || text.length > 1_200) return;
+                if (text.length < 8 || text.length > 1_200) return;
                 if (/판매자\s*답글|리뷰이벤트|리뷰포인트|리뷰적립/.test(text)) return;
                 const key = text.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '');
                 if (!key || seen.has(key)) return;

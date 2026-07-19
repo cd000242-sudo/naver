@@ -12,9 +12,11 @@ const UI_NOISE_PATTERNS: readonly RegExp[] = Object.freeze([
   /포토\s*리뷰\s*모아보기|리뷰\s*전체\s*보기|구매\s*옵션|판매자\s*답글/i,
   /^(?:리뷰|후기|별점|평점|좋아요|좋습니다|만족|만족해요|최고|추천|굿|good)[.!~\s]*$/i,
   /^(?:\d{4}[./-]\d{1,2}[./-]\d{1,2}|별\s*[1-5]개)$/i,
+  /판매자\s*공지|관리자\s*공지|(?:리뷰|후기).{0,16}이벤트|(?:포인트|적립금).{0,16}(?:지급|증정|드립)|(?:지급|증정).{0,16}(?:포인트|적립금)|사은품|당첨자/i,
+  /배송(?:은|\s)*(?:[^.]{0,40})교환\s*(?:및|\/|·)?\s*반품(?:은|\s)*(?:[^.]{0,40})(?:안내|문의)|배송\s*(?:및|\/|·)\s*(?:교환|반품)\s*안내/i,
 ]);
 
-const DECISION_SIGNAL_PATTERN = /설치|타공|구멍|천장|전원|배선|교체|조립|연결|크기|무게|공간|손잡이|편하|소리|소음|조용|진동|냄새|온도|따뜻|차갑|바람|건조|제습|물기|습기|청소|세척|필터|물통|관리|시간|\d+\s*(?:분|시간|일|주|개월)|불편|어렵|힘들|아쉽|단점|장점|문제|해결|효과|성능|속도|배송|포장|고장|AS|교환|반품|내구|전기|요금|사용 후|써보니/i;
+const DECISION_SIGNAL_PATTERN = /설치|타공|구멍|천장|전원|배선|교체|조립|연결|크기|무게|공간|손잡이|편하|소리|소음|조용|진동|냄새|온도|따뜻|차갑|바람|건조|제습|물기|물때|습기|청소|세척|필터|물통|관리|시간|\d+\s*(?:분|시간|일|주|개월)|불편|어렵|힘들|아쉽|단점|장점|문제|해결|효과|성능|속도|배송|포장|고장|AS|교환|반품|내구|전기|요금|사용 후|써보니/i;
 
 function decodeHtml(value: string): string {
   return value
@@ -30,11 +32,12 @@ function reviewIdentity(value: string): string {
 }
 
 function isDecisionUseful(value: string): boolean {
-  if (value.length < 12 || value.length > 600) return false;
+  // 짧아도 "물때 안 끼라고 샀어요"처럼 구매 이유가 구체적이면 보존한다.
+  if (value.length < 8 || value.length > 600) return false;
   if (!/[가-힣a-z]/i.test(value)) return false;
   if (UI_NOISE_PATTERNS.some(pattern => pattern.test(value))) return false;
   if (DECISION_SIGNAL_PATTERN.test(value)) return true;
-  return value.length >= 45 && /(?:했|됐|였|습니다|어요|네요|지만|때문|보다|후에|경우)/.test(value);
+  return value.length >= 18 && /(?:했|됐|였|합니다|습니다|해요|어요|네요|보여요|같아요|있어요|없어요|지만|때문|보다|후에|경우)/.test(value);
 }
 
 function usefulnessScore(value: string): number {

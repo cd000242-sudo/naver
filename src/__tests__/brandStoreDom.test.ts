@@ -155,7 +155,7 @@ describe('collectReviewTextCandidates', () => {
         ]);
     });
 
-    it('collects modern div/p review cards instead of requiring li or article markup', () => {
+  it('collects modern div/p review cards instead of requiring li or article markup', () => {
         document.body.innerHTML = `
             <section data-shp-area="review">
                 <div data-review-id="review-101">
@@ -184,6 +184,25 @@ describe('collectReviewTextCandidates', () => {
             '씻기 10분 전에 온풍을 켜두니 욕실 한기가 덜했고 물기도 빨리 말랐어요.',
             '최고 단계에서는 소리가 커서 늦은 밤에는 저단으로 사용하고 있어요.',
         ]);
+    });
+
+    it('keeps a visible short purchase-motive review', () => {
+        document.body.innerHTML = `
+            <div data-review-content id="short-review">물때 때문에 샀어요</div>`;
+        const review = document.getElementById('short-review') as HTMLElement;
+        review.getBoundingClientRect = () => ({
+            width: 240,
+            height: 40,
+            top: 0,
+            left: 0,
+            right: 240,
+            bottom: 40,
+            x: 0,
+            y: 0,
+            toJSON: () => ({}),
+        });
+
+        expect(collectReviewTextCandidates()).toContain('물때 때문에 샀어요');
     });
 });
 

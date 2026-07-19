@@ -152,7 +152,7 @@ describe('Content Quality V3 affiliate guard', () => {
     expect(JSON.stringify(result.content)).not.toContain('[광고]');
   });
 
-  it('requests a shopping-quality rewrite for a safe but structurally thin draft', () => {
+  it('keeps a safe but structurally thin draft publishable without a paid quality retry', () => {
     const result = evaluateContentQualityV3AffiliateGuard({
       content: makeContent({ bodyPlain: 'thin', headings: [], conclusion: '' }),
       source: { productSpec: 'weight 680g' },
@@ -161,7 +161,9 @@ describe('Content Quality V3 affiliate guard', () => {
       shoppingQualityRetryAvailable: true,
     });
 
-    expect(result.action).toBe('retry-shopping-quality');
+    expect(result.action).toBe('accept');
+    if (result.action !== 'accept') throw new Error('expected advisory acceptance');
+    expect(result.content.quality.warnings.join('\n')).toContain('[쇼핑커넥트 검증]');
   });
 
   it('accepts safe content without mutating it and records both guard reports', () => {

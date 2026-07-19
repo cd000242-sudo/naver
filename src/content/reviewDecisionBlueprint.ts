@@ -76,9 +76,12 @@ export function clusterReviewDecisionEvidence(
     .map(review => String(review || '').replace(/\s+/g, ' ').trim())
     .filter(Boolean);
 
-  return Object.freeze(REVIEW_DECISION_THEMES.flatMap(theme => {
-    const reviewRefs = normalizedReviews.flatMap((review, index) => (
-      theme.pattern.test(review) ? [`REVIEW_${index + 1}`] : []
+  const themeAssignments = normalizedReviews.map(review => (
+    REVIEW_DECISION_THEMES.findIndex(theme => theme.pattern.test(review))
+  ));
+  const themedClusters = REVIEW_DECISION_THEMES.flatMap((theme, themeIndex) => {
+    const reviewRefs = themeAssignments.flatMap((assignedThemeIndex, reviewIndex) => (
+      assignedThemeIndex === themeIndex ? [`REVIEW_${reviewIndex + 1}`] : []
     ));
     if (reviewRefs.length === 0) return [];
     return [Object.freeze({
@@ -87,7 +90,20 @@ export function clusterReviewDecisionEvidence(
       reviewRefs: Object.freeze(reviewRefs),
       readerQuestion: theme.readerQuestion,
     })];
-  }));
+  });
+  const unmatchedReviewRefs = themeAssignments.flatMap((themeIndex, reviewIndex) => (
+    themeIndex < 0 ? [`REVIEW_${reviewIndex + 1}`] : []
+  ));
+  const fallbackClusters: readonly ReviewDecisionCluster[] = unmatchedReviewRefs.length > 0
+    ? [Object.freeze({
+      id: 'other-decision-scene',
+      label: '기타 구매 결정 장면',
+      reviewRefs: Object.freeze(unmatchedReviewRefs),
+      readerQuestion: '이 후기에서 구매 전 기대했던 변화와 실제로 달라진 점은 무엇인가?',
+    })]
+    : [];
+
+  return Object.freeze([...themedClusters, ...fallbackClusters]);
 }
 
 /**
@@ -97,6 +113,11 @@ export function clusterReviewDecisionEvidence(
 export function buildReviewDecisionBlueprint(reviews: readonly string[]): string {
   const clusters = clusterReviewDecisionEvidence(reviews);
   if (clusters.length === 0) return '';
+
+  const uniqueReviewRefCount = new Set(clusters.flatMap(cluster => cluster.reviewRefs)).size;
+  const multipleEvidenceRule = uniqueReviewRefCount >= 2 && clusters.length >= 2
+    ? '- 서로 다른 REVIEW_N 근거가 2개 이상이면 첫 두 소제목은 서로 다른 BUYER_PAIN_POINT_MAP 항목을 사용한다. 상품명·가격·기능명 재설명으로 대체하지 않는다.'
+    : '- REVIEW_N 근거가 하나뿐이면 하나의 구매자 의견으로 한정하고, 여러 사람의 반복 의견이나 복수 독립 근거처럼 확장하지 않는다.';
 
   const map = clusters
     .map((cluster, index) => (
@@ -115,7 +136,7 @@ ${map}
 [필수 집필 순서]
 - 첫 120~180자는 BUYER_PAIN_POINT_MAP의 1순위 고민과 사용 뒤 달라진 결과로 시작한다. 기능 나열이나 제품 소개로 열지 않는다.
 - 도입 첫 문단은 1순위 고민이 있는 사람에게 후기에서 확인된 결과 또는 남은 한계를 바로 답한다. 제품명·가격·기능명 소개로 시작하지 않는다.
-- 근거 묶음이 2개 이상이면 첫 두 소제목은 서로 다른 BUYER_PAIN_POINT_MAP 항목을 사용한다. 상품명·가격·기능명 재설명으로 대체하지 않는다.
+${multipleEvidenceRule}
 - 각 후기형 소제목은 REVIEW_N의 구체 상황 → 실제 사용 결과·해결·적응 또는 남은 불편 → 구매 전에 중요한 이유 → 맞는 사람과 맞지 않는 사람 순으로 연결한다.
 - 후기 근거가 있는 글의 중심은 기능 목록이 아니라 구매자가 겪은 문제와 결과다. 기능 이름을 상식적으로 풀이한 문단은 삭제한다.
 - 같은 의견이라고 말하려면 서로 다른 REVIEW_N 두 개 이상이 같은 판단을 뒷받침해야 한다. 하나뿐이면 한 구매자의 의견으로 한정한다.

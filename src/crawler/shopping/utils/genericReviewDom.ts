@@ -33,6 +33,7 @@ export function collectGenericReviewTextCandidates(): string[] {
 
   const normalize = (value: string): string => value.replace(/\s+/g, ' ').trim();
   const identity = (value: string): string => value.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '');
+  const sellerNoticePattern = /판매자\s*공지|관리자\s*공지|(?:리뷰|후기).{0,16}이벤트|(?:포인트|적립금).{0,16}(?:지급|증정|드립)|(?:지급|증정).{0,16}(?:포인트|적립금)|사은품|당첨자|배송(?:은|\s)*(?:[^.]{0,40})교환\s*(?:및|\/|·)?\s*반품(?:은|\s)*(?:[^.]{0,40})(?:안내|문의)|배송\s*(?:및|\/|·)\s*(?:교환|반품)\s*안내/i;
 
   // Prefer leaves so a review-card parent and its text child do not duplicate.
   const ordered = elements.sort((left, right) => {
@@ -43,10 +44,11 @@ export function collectGenericReviewTextCandidates(): string[] {
 
   for (const element of ordered) {
     const text = normalize(element.textContent || '');
-    if (text.length < 12 || text.length > 600) continue;
+    if (text.length < 8 || text.length > 600) continue;
     if (!/[a-z가-힣]/i.test(text)) continue;
     if (/^(?:상품)?리뷰\s*\d*|^(?:상품)?후기\s*\d*|^전체\s*보기/i.test(text)) continue;
     if (/글읽기\s*권한|미성년자|성인인증|신고\s*차단/i.test(text)) continue;
+    if (sellerNoticePattern.test(text)) continue;
     const key = identity(text);
     if (!key || seen.has(key)) continue;
     if (candidates.some(existing => identity(existing).includes(key) || key.includes(identity(existing)))) continue;

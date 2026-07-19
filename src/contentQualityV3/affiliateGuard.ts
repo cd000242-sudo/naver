@@ -6,8 +6,6 @@ import {
   type AffiliateEvidenceInput,
 } from '../content/affiliateAuthenticity.js';
 import {
-  SHOPPING_CONNECT_PUBLISH_MIN_SCORE,
-  SHOPPING_CONNECT_TARGET_SCORE,
   resolveShoppingConnectQualityDisposition,
   validateShoppingConnectContent,
 } from '../contentShoppingConnectValidation.js';
@@ -200,17 +198,6 @@ export function evaluateContentQualityV3AffiliateGuard(
     minimumBodyChars: options.minimumBodyChars,
   });
   const shoppingDisposition = resolveShoppingConnectQualityDisposition(validation.score);
-
-  if (!shoppingDisposition.qualityFloorReached && options.shoppingQualityRetryAvailable) {
-    const corrections = validation.feedback
-      .filter(message => message.startsWith('❌') || message.startsWith('⚠️'))
-      .join('\n- ');
-    return Object.freeze({
-      action: 'retry-shopping-quality',
-      instruction: `[쇼핑커넥트 품질 재작성]\n- ${corrections}\n광고 문구가 아닌 실제 구매 판단 정보로 보완하고 발행 하한 ${SHOPPING_CONNECT_PUBLISH_MIN_SCORE}점 이상, 목표 ${SHOPPING_CONNECT_TARGET_SCORE}점에 가깝게 다시 작성하세요.${reviewDepth.retryDirective ? `\n\n${reviewDepth.retryDirective}` : ''}`,
-      reason: `shopping quality ${validation.score}/100`,
-    });
-  }
 
   const content = {
     ...localRepair.content,
