@@ -2244,6 +2244,7 @@
       wordpress: apiUrl('/v1/mobile/wordpress'),
       scheduleDashboard: apiUrl('/v1/mobile/schedule-dashboard'),
       liveGolden: apiUrl('/v1/live-golden/snapshot'),
+      keywordTrend: apiUrl('/v1/keywords/trend'),
       keywordAnalysis: apiUrl('/v1/keywords/analyze'),
       mindmap: apiUrl('/v1/mindmap/expand'),
       golden: apiUrl('/v1/golden/discover'),
@@ -5720,6 +5721,37 @@
       return '<i class="trend-bar ' + escapeAttr(className || '') + '" title="' + escapeAttr(label + ' ' + fmt(value)) + '" style="height:' + pct + '%">'
         + '<b>' + escapeHtml(label) + '</b><span>' + escapeHtml(fmt(value)) + '</span></i>';
     }
+    function datalabTrendStripPlaceholderHtml() {
+      return '<li><div class="trend-card"><div class="trend-meta"><span>최근 30일 상대 추이 · 네이버 데이터랩 실측 (최고점=100)</span></div>'
+        + '<div id="datalabTrendBody" style="margin-top:8px;color:var(--muted);font-size:13px;">데이터랩 30일 추이를 불러오는 중...</div></div></li>';
+    }
+    async function loadDatalabTrendStrip(keyword) {
+      const body = document.getElementById('datalabTrendBody');
+      if (!body) return;
+      try {
+        const payload = await apiGet(endpoints.keywordTrend + '?keyword=' + encodeURIComponent(keyword), false, 15000);
+        const series = payload && payload.trend && Array.isArray(payload.trend.series) ? payload.trend.series : [];
+        if (!series.length) {
+          body.textContent = '데이터랩에 이 키워드의 30일 추이 데이터가 없습니다. 검색량이 매우 적은 키워드일 수 있습니다.';
+          return;
+        }
+        const bars = series.map(function(point) {
+          const ratio = Math.max(0, Math.min(100, Number(point.ratio) || 0));
+          const height = Math.max(3, Math.round(ratio));
+          const label = String(point.period || '').slice(5) + ' · ' + ratio.toFixed(1);
+          return '<i title="' + escapeAttr(label) + '" style="flex:1;display:block;align-self:flex-end;height:' + height + '%;min-height:2px;background:linear-gradient(180deg,#34D399,#059669);border-radius:2px 2px 0 0;"></i>';
+        }).join('');
+        const first = String(series[0].period || '');
+        const last = String(series[series.length - 1].period || '');
+        body.innerHTML = '<div style="display:flex;gap:2px;align-items:flex-end;height:96px;">' + bars + '</div>'
+          + '<div style="display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:12px;margin-top:4px;">'
+          + '<span>' + escapeHtml(first) + '</span>'
+          + '<span>일별 상대값 — 절대 검색량 아님</span>'
+          + '<span>' + escapeHtml(last) + '</span></div>';
+      } catch (err) {
+        body.textContent = '데이터랩 추이 조회 실패: ' + (err && err.message ? err.message : String(err));
+      }
+    }
     function renderTrendGraphUnavailable(keyword, message, row) {
       const docs = metricValue(row, 'documentCount');
       renderLookupInsight(keyword + ' 검색량 그래프', message || '실측 검색량을 확인하지 못했습니다. 환경설정/API 키를 확인한 뒤 다시 조회하세요.', [
@@ -5728,10 +5760,12 @@
         { label: '모바일', value: '0' },
         { label: '문서수', value: fmt(docs) },
       ], [
-        '<li><div class="trend-empty">실측 검색량이 없어 그래프를 만들 수 없습니다. 네이버 검색광고 API 키와 네이버 API 키를 저장한 뒤 다시 실행하세요.</div></li>',
+        datalabTrendStripPlaceholderHtml(),
+        '<li><div class="trend-empty">실측 검색량이 없어 PC/모바일 그래프를 만들 수 없습니다. 네이버 검색광고 API 키와 네이버 API 키를 저장한 뒤 다시 실행하세요.</div></li>',
         '<li><strong>바로 실행</strong>' + keywordActionHtml(keyword) + '</li>',
       ]);
       setActiveView('lookup', { load: false });
+      loadDatalabTrendStrip(keyword);
     }
     function renderMeasuredTrendGraph(keyword, row, sourceLabel, notes) {
       const pc = metricValue(row, 'pcSearchVolume');
@@ -5750,16 +5784,18 @@
       ].join('');
       const rows = [
         '<li><div class="trend-card"><div class="trend-bars" aria-label="실측 검색량 그래프">' + bars + '</div><div class="trend-meta"><span>실측 출처 ' + escapeHtml(sourceLabel || '현재 결과') + '</span><span>전체 ' + fmt(total) + '</span><span>PC ' + fmt(pc) + '</span><span>모바일 ' + fmt(mobile) + '</span><span>문서 ' + fmt(docs) + '</span></div></div></li>',
+        datalabTrendStripPlaceholderHtml(),
         notes ? '<li><span>' + escapeHtml(notes) + '</span></li>' : '',
         '<li><strong>바로 실행</strong>' + keywordActionHtml(keyword) + '</li>',
       ].filter(Boolean);
-      renderLookupInsight(keyword + ' 검색량 그래프', '가짜 30일 추정값이 아니라 현재 확보한 PC/모바일 실측값만 그래프로 표시합니다.', [
+      renderLookupInsight(keyword + ' 검색량 그래프', 'PC/모바일 실측값과 네이버 데이터랩 30일 상대 추이(실측)만 표시합니다. 추정 환산값은 표시하지 않습니다.', [
         { label: '전체 검색량', value: fmt(total) },
         { label: 'PC', value: fmt(pc) },
         { label: '모바일', value: fmt(mobile) },
         { label: '문서수', value: fmt(docs) },
       ], rows);
       setActiveView('lookup', { load: false });
+      loadDatalabTrendStrip(keyword);
       log('검색량 그래프 표시: ' + keyword);
     }
     async function showTrendGraph(keyword) {
