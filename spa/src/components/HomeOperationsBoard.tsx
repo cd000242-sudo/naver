@@ -93,9 +93,50 @@ function KeywordSearchLink({
     );
 }
 
+async function copyKeywordText(text: string): Promise<void> {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        return;
+    }
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.setAttribute('readonly', '');
+    area.style.position = 'fixed';
+    area.style.left = '-9999px';
+    document.body.appendChild(area);
+    area.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(area);
+    if (!ok) throw new Error('clipboard unavailable');
+}
+
+function CopyKeywordButton({ text, label = '복사', ariaLabel }: { text: string; label?: string; ariaLabel?: string }) {
+    const [state, setState] = useState<'idle' | 'copied' | 'failed'>('idle');
+    const onCopy = async () => {
+        try {
+            await copyKeywordText(text);
+            setState('copied');
+        } catch {
+            setState('failed');
+        }
+        window.setTimeout(() => setState('idle'), 1200);
+    };
+    return (
+        <button
+            type="button"
+            className="home-ops-copy-btn"
+            onClick={onCopy}
+            aria-label={ariaLabel || `${text} 복사`}
+        >
+            {state === 'copied' ? '복사됨 ✓' : state === 'failed' ? '복사 실패' : label}
+        </button>
+    );
+}
+
 function KeywordSearchLinks({ row, compact = false }: { row: HomeKeywordRow; compact?: boolean }) {
     return (
         <div className={`home-ops-search-links${compact ? ' compact' : ''}`} aria-label={`${row.keyword} 검색 바로가기`}>
+            <CopyKeywordButton text={row.keyword} />
             {KEYWORD_SEARCH_PROVIDERS.map((provider) => (
                 <KeywordSearchLink key={provider.id} row={row} provider={provider.id}>
                     {provider.label}
@@ -233,6 +274,7 @@ function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
                                     {decimalFormatter.format(row.opportunity)}
                                 </KeywordSearchLink>
                             </small>
+                            <CopyKeywordButton text={row.keyword} />
                         </div>
                         <div className="home-ops-chart-track" aria-hidden="true">
                             <span style={{ width: `${width}%` }} />
@@ -248,6 +290,13 @@ function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
 function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
     return (
         <div className="home-ops-table-shell" tabIndex={0} aria-label={`부방장 키워드 전체 ${rows.length}행`} aria-describedby="home-ops-table-note">
+            <div className="home-ops-copy-all-bar">
+                <CopyKeywordButton
+                    text={rows.map((row) => row.keyword).join(String.fromCharCode(10))}
+                    label={`📋 전체 ${rows.length}개 복사`}
+                    ariaLabel={`부방장 키워드 ${rows.length}개 전체 복사`}
+                />
+            </div>
             <table className="home-ops-table">
                 <caption className="home-ops-sr-only">부방장 황금키워드 전체 {rows.length}행</caption>
                 <thead>
@@ -268,6 +317,7 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
                                 <KeywordSearchLink row={row} provider="naver" className="home-ops-keyword-link">
                                     {row.keyword}
                                 </KeywordSearchLink>
+                                <CopyKeywordButton text={row.keyword} />
                             </th>
                             <td>{numberFormatter.format(row.searchVolume)}</td>
                             <td>{numberFormatter.format(row.documentCount)}</td>
@@ -716,6 +766,26 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                     color: #9dffe8;
                     border-color: rgba(157,255,232,0.92);
                     outline: none;
+                }
+                .home-ops-copy-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    min-height: 26px;
+                    margin-left: 6px;
+                    border: 1px solid rgba(245,197,66,.34);
+                    border-radius: 999px;
+                    background: rgba(245,197,66,.08);
+                    color: #f5c542;
+                    padding: 3px 9px;
+                    font-size: 11px;
+                    font-weight: 900;
+                    cursor: pointer;
+                }
+                .home-ops-copy-btn:disabled { opacity: .7; }
+                .home-ops-copy-all-bar {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-bottom: 8px;
                 }
                 .home-ops-search-links {
                     display: flex;
