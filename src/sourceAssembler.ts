@@ -7244,6 +7244,42 @@ ${reviewSection}
     }
   }
 
+  // ✅ [v2.11.136] URL 원본이 "어중간하게 빈약"할 때 심화 보강 (사용자 요청: 빈약 시에만).
+  //   위 500자 블록은 극단적으로 짧을 때 스니펫만 붙이지만, 1,000~1,500자짜리
+  //   빈약한 뉴스/웹 원본은 안 걸려 결과도 빈약했다. URL 모드에서 baseBody가
+  //   임계 미만이면 원본 주제로 상위글 풀텍스트를 수집해 "참고 자료"로 덧붙여
+  //   밀도를 올린다. 원본은 여전히 1순위이고, 보충은 실제 크롤링이라 환각 없음.
+  //   네이버 블로그/스마트스토어 URL은 단일 원본 충실도 유지 위해 제외.
+  const URL_THIN_SUPPLEMENT_THRESHOLD = 1500;
+  const hasSupplementableUrl =
+    urlPatterns.length > 0
+    && !urlPatterns.some((u) => /blog\.naver\.com/i.test(u))
+    && !isNaverStoreUrl;
+  if (
+    hasSupplementableUrl
+    && !isCustomMode
+    && baseBody
+    && baseBody.length >= 500
+    && baseBody.length < URL_THIN_SUPPLEMENT_THRESHOLD
+  ) {
+    const naverClientId = input.naverClientId || process.env.NAVER_CLIENT_ID;
+    const naverClientSecret = input.naverClientSecret || process.env.NAVER_CLIENT_SECRET;
+    const supplementQuery = baseTitle || (keywords.length > 0 ? keywords.slice(0, 3).join(' ') : '');
+    if (naverClientId && naverClientSecret && supplementQuery) {
+      console.log(`[URL 심화보강] 원본 ${baseBody.length}자 < ${URL_THIN_SUPPLEMENT_THRESHOLD}자 → "${supplementQuery}" 상위글 풀텍스트 수집`);
+      try {
+        const deep = await collectTopArticleFullTexts(supplementQuery, naverClientId, naverClientSecret);
+        if (deep.text && deep.count > 0) {
+          baseBody = `${baseBody}\n\n--- 참고 자료 (관련 상위글 ${deep.count}건) ---\n\n${deep.text}`;
+          warnings.push(`✅ 원본이 빈약해 관련 상위글 ${deep.count}건(${deep.text.length}자)을 보조 자료로 보강했습니다. (원본이 주 근거, 보충은 배경/맥락용)`);
+          console.log(`[URL 심화보강] ✅ ${deep.count}건 / ${deep.text.length}자 보강`);
+        }
+      } catch (error) {
+        console.warn('[URL 심화보강] 실패 (무시하고 원본으로 진행):', (error as Error).message);
+      }
+    }
+  }
+
   // ✅ 키워드/제목만 있을 때 네이버 검색 API로 콘텐츠 수집
   // ✅ [2026-03-08 FIX] 네이버 블로그 URL이 있으면 검색 API 폴백 차단
   // ✅ [2026-03-29 FIX] custom 모드(페러프레이징 등)에서는 수집 차단 (원문 오염 방지)
