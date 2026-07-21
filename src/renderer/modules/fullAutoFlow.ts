@@ -1281,9 +1281,13 @@ async function executeFullAutoFlow(formData) {
             const hookingHeading = structuredContent.headings?.[1]?.title || structuredContent.headings?.[1]?.text || '후킹 영상';
             const hookingImagePath = hookingImage?.filePath || '';
             const normalizedHeading = normalizeHeadingKeyForVideoCache(String(hookingHeading).trim());
-            const existingVideo = typeof window.api?.getAppliedVideo === 'function'
-                ? await window.api.getAppliedVideo(normalizedHeading)
+            // [v2.11.136] 죽은 배선 복구: preload 노출명은 getHeadingVideo이고
+            // { success, video } 형태를 돌려준다. 기존 getAppliedVideo(.filePath)
+            // 호출은 항상 undefined라 영상 재사용이 죽어 매번 재생성됐다.
+            const existingVideoRes = typeof window.api?.getHeadingVideo === 'function'
+                ? await window.api.getHeadingVideo(normalizedHeading)
                 : null;
+            const existingVideo = existingVideoRes?.video ?? null;
             if (existingVideo?.filePath) {
                 appendLog(`ℹ️ 이미 영상이 배치되어 있습니다: "${hookingHeading}". 기존 영상을 사용합니다.`);
                 modal?.addLog('ℹ️ 기존 영상 재사용');

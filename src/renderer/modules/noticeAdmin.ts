@@ -185,11 +185,8 @@ async function verifyAdminPin(pin: string): Promise<{ success: boolean; message?
     return api.verifyAdminPin(input);
   }
 
-  const electronAPI = (window as any).electronAPI;
-  if (typeof electronAPI?.invoke === 'function') {
-    return electronAPI.invoke('admin:verifyPin', input);
-  }
-
+  // [v2.11.136] electronAPI에는 범용 invoke가 없어 이 폴백은 항상 죽은 코드였다.
+  // verifyAdminPin(위)가 유일한 실제 경로이므로 오해를 부르는 죽은 분기를 제거한다.
   return { success: false, message: '관리자 인증 API를 사용할 수 없습니다.' };
 }
 

@@ -1954,8 +1954,11 @@ function updateProgress(percent: number, status: string): void {
           console.log('[Renderer] Recovery 사용자 선택:', choice);
 
           // C1: 사용자 선택을 메인에 보고 (메트릭)
-          if (window.api?.send) {
-            window.api.send('recovery:user-choice', {
+          // [v2.11.136] send는 api가 아니라 electronAPI에 노출돼 있어 window.api.send는
+          // 항상 undefined였다 → 복구 선택 텔레메트리가 유실됐다(동작 자체는 정상).
+          const recoverySend = (window as any).electronAPI?.send ?? window.api?.send;
+          if (typeof recoverySend === 'function') {
+            recoverySend('recovery:user-choice', {
               code: payload.code,
               chosenId: choice.chosenId,
               choiceLabel: choice.choiceLabel,

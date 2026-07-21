@@ -105,7 +105,7 @@ function showModal(opts: {
         modal.querySelector('#__guard_secondary')?.addEventListener('click', () => close('secondary'));
         modal.querySelector('#__guard_extra')?.addEventListener('click', () => {
             if (opts.extraButton?.href) {
-                try { (window as any).api?.openExternal?.(opts.extraButton.href) || window.open(opts.extraButton.href, '_blank'); }
+                try { (window as any).api?.openExternalUrl?.(opts.extraButton.href) || window.open(opts.extraButton.href, '_blank'); }
                 catch { /* ignore */ }
             }
             close('extra');

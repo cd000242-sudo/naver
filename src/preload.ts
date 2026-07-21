@@ -237,6 +237,10 @@ contextBridge.exposeInMainWorld('api', {
   backupRestore: (backupPath: string): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('backup:restore', backupPath),
   openPath: (path: string): Promise<{ success: boolean; message?: string }> => ipcRenderer.invoke('shell:openPath', path),
+  // [v2.11.136] 죽은 배선 복구: media:importMp4 핸들러는 완성돼 있었으나 preload
+  // 미노출이라 렌더러가 "아직 준비 안 됨" 폴백만 탔다. AI 영상 mp4 자동 불러오기 활성화.
+  importMp4: (payload: { sourcePath: string; dirPath: string }): Promise<{ success: boolean; filePath?: string; message?: string }> =>
+    ipcRenderer.invoke('media:importMp4', payload),
 
   generateVeoVideo: (payload: {
     prompt: string;

@@ -213,10 +213,8 @@ export async function initImageManagementTab(): Promise<void> {
 
         getKeyBtn?.addEventListener('click', () => {
           const geminiApiUrl = 'https://aistudio.google.com/app/apikey';
-          if ((window as any).api?.openUrl) {
-            (window as any).api.openUrl(geminiApiUrl);
-          } else if ((window as any).api?.openExternal) {
-            (window as any).api.openExternal(geminiApiUrl);
+          if ((window as any).api?.openExternalUrl) {
+            (window as any).api.openExternalUrl(geminiApiUrl);
           } else {
             window.open(geminiApiUrl, '_blank');
           }
@@ -225,10 +223,8 @@ export async function initImageManagementTab(): Promise<void> {
 
         checkUsageBtn?.addEventListener('click', () => {
           const usageUrl = 'https://aistudio.google.com/app/usage?timeRange=last-28-days&tab=billing&project=gen-lang-client-0528067248';
-          if ((window as any).api?.openUrl) {
-            (window as any).api.openUrl(usageUrl);
-          } else if ((window as any).api?.openExternal) {
-            (window as any).api.openExternal(usageUrl);
+          if ((window as any).api?.openExternalUrl) {
+            (window as any).api.openExternalUrl(usageUrl);
           } else {
             window.open(usageUrl, '_blank');
           }
