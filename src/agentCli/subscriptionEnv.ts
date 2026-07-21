@@ -56,6 +56,13 @@ const CODEX_SUBSCRIPTION_ENV_KEYS = new Set([
   'CODEX_HOME',
 ]);
 
+// Allowlist-only: GEMINI_API_KEY / GOOGLE_API_KEY / GOOGLE_GENAI_API_KEY are deliberately
+// absent so the subprocess cannot silently fall back to API-key billing instead of the
+// user's OAuth-backed subscription (Antigravity/Gemini CLI login).
+const GEMINI_SUBSCRIPTION_ENV_KEYS = new Set([
+  ...SHARED_SUBSCRIPTION_ENV_KEYS,
+]);
+
 const NPM_INSTALL_ENV_KEYS = new Set([
   ...SHARED_SUBSCRIPTION_ENV_KEYS,
   // Preserve the user's chosen global install location without forwarding npm
@@ -96,6 +103,12 @@ export function buildCodexSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {
   return pickSubscriptionEnv(source, CODEX_SUBSCRIPTION_ENV_KEYS);
+}
+
+export function buildGeminiSubscriptionEnv(
+  source: NodeJS.ProcessEnv = process.env,
+): NodeJS.ProcessEnv {
+  return pickSubscriptionEnv(source, GEMINI_SUBSCRIPTION_ENV_KEYS);
 }
 
 export function buildNpmInstallEnv(

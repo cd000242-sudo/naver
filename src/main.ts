@@ -4432,6 +4432,11 @@ registerImageCollectShoppingHandlers();
 // [v2.10.255] image:collectFromUrl 분리
 import { registerImageCollectUrlHandlers } from './main/ipc/imageCollectUrlHandlers.js';
 registerImageCollectUrlHandlers();
+
+// [v2.11.135] 사진 모드 HEIC 변환/EXIF IPC — 렌더러가 launch 때부터 호출하던
+// electronAPI.convertHeic/extractExif의 실제 핸들러 (죽은 배선 복구).
+import { registerImageNarrativeSupportHandlers } from './main/ipc/imageNarrativeSupportHandlers.js';
+registerImageNarrativeSupportHandlers();
 // [v2.10.256] image:searchNaver 분리 (376줄 대형 IPC)
 import { registerImageSearchNaverHandlers } from './main/ipc/imageSearchNaverHandlers.js';
 registerImageSearchNaverHandlers();
@@ -5665,6 +5670,26 @@ ipcMain.handle(
       const { source, warnings } = await assembleContentSource(payload.assembly);
       const provider = payload.assembly.generator ?? source.generator ?? 'gemini';
 
+      // [v2.11.133] Empathy-mode reader-situation material (지식iN questions).
+      // Runs BEFORE the fact-check block below so citation mode captures the
+      // final material set. Non-fatal: failure keeps the assembled source as-is.
+      try {
+        const situationMode = (payload.assembly as any).contentMode as string | undefined;
+        const situationKeywords = Array.isArray(payload.assembly.keywords) ? payload.assembly.keywords : [];
+        if ((situationMode === 'homefeed' || situationMode === 'business' || situationMode === 'mate') && situationKeywords.length > 0) {
+          const { collectKinReaderContext } = await import('./sourceAssembler.js');
+          const kinBlock = await collectKinReaderContext(situationKeywords.join(' ').trim());
+          if (kinBlock) {
+            source.rawText = source.rawText && source.rawText.trim().length >= 50
+              ? `${source.rawText}\n\n${kinBlock}`
+              : kinBlock;
+            console.log(`[Main] 💬 지식iN 독자 상황 재료 주입 완료 (mode=${situationMode}, 최종 rawText=${source.rawText.length.toLocaleString()}자)`);
+          }
+        }
+      } catch (kinErr: any) {
+        console.warn(`[Main] ⚠️ 지식iN 상황 재료 주입 실패 (무시): ${String(kinErr?.message || kinErr).slice(0, 200)}`);
+      }
+
       // ✅ [v2.10.73~74] 네이버 검색 API 기반 fact-check RAG — LLM 환각 강제 차단
       //   v2.10.74 Phase 1: 자료 부족 / 키워드 무관 시 발행 거부 (사용자에게 alert)
       //   조건: useNaverFactCheck !== false (기본 ON) + rawText 짧음 + 키워드 있음 + 네이버 API 키 있음
@@ -5708,8 +5733,23 @@ ipcMain.handle(
           }
         } else if (!factCheckEnabled) {
           console.log(`[Main] 네이버 fact-check RAG 비활성 (사용자 OFF)`);
-        } else if (!hasNaverKeys) {
+        } else if (!hasNaverKeys && rawTextShort) {
           console.log(`[Main] 네이버 fact-check RAG 미작동: API 키 없음`);
+        } else if (!rawTextShort) {
+          // [v2.11.133] Citation mode for already-collected material.
+          // The cite-then-write prompt (Phase 2 HARD_CONSTRAINT) and the
+          // post-generation fact comparison (Phase 3, warning-only) were dead
+          // in normal flows because they only activated when rawText<200 chars.
+          // Mark the assembled material itself as the citable source — no extra
+          // fetch, no publish blocking. 'custom' mode is excluded by design
+          // (사용자 원문 보존 모드 — 외부 제약 주입 금지).
+          const assemblyContentMode = (payload.assembly as any).contentMode as string | undefined;
+          const rawLen = source.rawText?.trim().length || 0;
+          if (assemblyContentMode !== 'custom' && rawLen >= 300) {
+            (source as any).hasFactCheckSource = true;
+            (source as any).factCheckRawSource = source.rawText;
+            console.log(`[Main] ✅ 수집 자료 인용 모드 활성: rawText ${rawLen.toLocaleString()}자를 인용 대상으로 지정 (Phase 2 프롬프트 + Phase 3 경고형 대조)`);
+          }
         }
       } catch (ragErr: any) {
         const warning = `[자료 검증 경고] 네이버 fact-check RAG 확인 실패: ${String(ragErr?.message || ragErr).slice(0, 300)}`;
@@ -9579,7 +9619,7 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
     // 글로벌 글생성 엔진(primaryGeminiTextModel) → vision/text vendor 자동 라우팅.
     // 사용자 요청: 별도 vision provider 선택 UI를 없애고 메인 AI 엔진을 그대로 따라간다.
     // ✅ 에이전트 모드: 이미지 추론(vision)은 CLI로 불가하므로 vision vendor로, 글 작성(text)만
-    //    구독 CLI(agent-codex/agent-claude)로 분리 라우팅한다.
+    //    구독 CLI(agent-codex/agent-claude/agent-gemini)로 분리 라우팅한다.
     let routedProvider: string | undefined;
     let narrativeTextProvider: string | undefined;
     try {

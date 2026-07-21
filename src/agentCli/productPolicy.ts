@@ -31,13 +31,16 @@ export type AgentProviderPolicyDecision = Readonly<
 
 const CODEX_ENABLED = Object.freeze({ provider: 'codex', enabled: true } as const);
 const CLAUDE_ENABLED = Object.freeze({ provider: 'claude', enabled: true } as const);
+const GEMINI_ENABLED = Object.freeze({ provider: 'gemini', enabled: true } as const);
 const trustedProductPolicyContexts = new WeakSet<object>();
 
 export function resolveAgentProviderPolicy(
   provider: AgentProvider,
   _options: AgentProductPolicyOptions = {},
 ): AgentProviderPolicyDecision {
-  return provider === 'codex' ? CODEX_ENABLED : CLAUDE_ENABLED;
+  if (provider === 'codex') return CODEX_ENABLED;
+  if (provider === 'gemini') return GEMINI_ENABLED;
+  return CLAUDE_ENABLED;
 }
 
 export function assertAgentProviderAllowed(
@@ -59,6 +62,8 @@ export function assertContentGeneratorProviderAllowed(
     assertAgentProviderAllowed('claude', options);
   } else if (generator === 'agent-codex') {
     assertAgentProviderAllowed('codex', options);
+  } else if (generator === 'agent-gemini') {
+    assertAgentProviderAllowed('gemini', options);
   }
 }
 

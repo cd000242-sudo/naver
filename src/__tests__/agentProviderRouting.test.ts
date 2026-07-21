@@ -13,9 +13,10 @@ import {
 } from '../runtime/modelRegistry';
 
 describe('isAgentTextProvider', () => {
-  it('recognizes the two agent providers', () => {
+  it('recognizes the three agent providers', () => {
     expect(isAgentTextProvider('agent-codex')).toBe(true);
     expect(isAgentTextProvider('agent-claude')).toBe(true);
+    expect(isAgentTextProvider('agent-gemini')).toBe(true);
   });
 
   it('rejects API providers and junk', () => {
@@ -25,7 +26,7 @@ describe('isAgentTextProvider', () => {
   });
 
   it('AGENT_TEXT_PROVIDERS contains exactly the agent values', () => {
-    expect([...AGENT_TEXT_PROVIDERS]).toEqual(['agent-codex', 'agent-claude']);
+    expect([...AGENT_TEXT_PROVIDERS]).toEqual(['agent-codex', 'agent-claude', 'agent-gemini']);
   });
 });
 
@@ -33,5 +34,6 @@ describe('agentTextProviderToCli', () => {
   it('maps agent provider → agentCli provider', () => {
     expect(agentTextProviderToCli('agent-codex')).toBe('codex');
     expect(agentTextProviderToCli('agent-claude')).toBe('claude');
+    expect(agentTextProviderToCli('agent-gemini')).toBe('gemini');
   });
 });

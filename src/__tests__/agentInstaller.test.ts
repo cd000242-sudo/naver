@@ -69,9 +69,11 @@ describe('AGENT_NPM_PACKAGES', () => {
   it('maps providers to verified npm package names', () => {
     expect(AGENT_NPM_PACKAGES.codex).toBe('@openai/codex');
     expect(AGENT_NPM_PACKAGES.claude).toBe('@anthropic-ai/claude-code');
+    expect(AGENT_NPM_PACKAGES.gemini).toBe('@google/gemini-cli');
     expect(AGENT_NPM_PACKAGE_VERSIONS).toEqual({
       codex: '0.144.1',
       claude: '2.1.197',
+      gemini: '0.16.1',
     });
   });
 });
@@ -102,6 +104,20 @@ describe('installAgent', () => {
       '@anthropic-ai/claude-code@2.1.197',
       '--registry=https://registry.npmjs.org/',
       '--@anthropic-ai:registry=https://registry.npmjs.org/',
+      `--userconfig=${process.platform === 'win32' ? 'NUL' : '/dev/null'}`,
+      '--audit=false',
+      '--fund=false',
+    ]);
+  });
+
+  it('uses the gemini package for gemini', async () => {
+    await installAgent('gemini');
+    expect(spawnMock.mock.calls[0][0].args).toEqual([
+      'install',
+      '-g',
+      '@google/gemini-cli@0.16.1',
+      '--registry=https://registry.npmjs.org/',
+      '--@google:registry=https://registry.npmjs.org/',
       `--userconfig=${process.platform === 'win32' ? 'NUL' : '/dev/null'}`,
       '--audit=false',
       '--fund=false',
@@ -207,6 +223,13 @@ describe('loginAgent', () => {
     const c = spawnMock.mock.calls[0][0];
     expect(c.command).toBe('claude');
     expect(c.args).toEqual(['auth', 'login']);
+  });
+
+  it('gemini → bare `gemini` (no dedicated login subcommand)', async () => {
+    await loginAgent('gemini');
+    const c = spawnMock.mock.calls[0][0];
+    expect(c.command).toBe('gemini');
+    expect(c.args).toEqual([]);
   });
 
   it('keeps login stdin interactive and reports one validated browser URL without opening it', async () => {
@@ -366,6 +389,21 @@ describe('logoutAgent', () => {
     const c = spawnMock.mock.calls[0][0];
     expect(c.command).toBe('claude');
     expect(c.args).toEqual(['auth', 'logout']);
+  });
+
+  it('gemini → deletes the OAuth credential file (no dedicated CLI subcommand)', async () => {
+    detectAgentMock.mockResolvedValueOnce({
+      provider: 'gemini',
+      installed: true,
+      loggedIn: false,
+      available: false,
+      errorCode: 'not_logged_in',
+    });
+    const status = await logoutAgent('gemini');
+    expect(spawnMock).not.toHaveBeenCalled();
+    expect(clearAgentDetectionCacheMock).toHaveBeenCalledWith('gemini');
+    expect(detectAgentMock).toHaveBeenCalledWith('gemini', { forceRefresh: true });
+    expect(status).toMatchObject({ loggedIn: false });
   });
 
   it('throws AgentCliError when logout exits non-zero', async () => {

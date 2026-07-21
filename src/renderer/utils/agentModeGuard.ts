@@ -11,8 +11,8 @@ interface AgentStatusLike {
   detail?: string;
 }
 
-function unavailableReason(provider: 'codex' | 'claude', status?: AgentStatusLike): string {
-  const providerLabel = provider === 'codex' ? 'Codex' : 'Claude';
+function unavailableReason(provider: 'codex' | 'claude' | 'gemini', status?: AgentStatusLike): string {
+  const providerLabel = provider === 'codex' ? 'Codex' : provider === 'gemini' ? 'Gemini' : 'Claude';
   if (status?.errorCode === 'provider_disabled') {
     return status.detail
       || `${providerLabel} 구독 로그인을 현재 사용할 수 없습니다. 상태를 새로고침한 뒤 다시 시도해주세요.`;
@@ -34,10 +34,14 @@ function showBlockingMessage(message: string): void {
 
 /** Return true only when the selected subscription agent is currently usable. */
 export async function ensureAgentEngineReady(generator: string): Promise<boolean> {
-  if (generator !== 'agent-codex' && generator !== 'agent-claude') return true;
+  if (generator !== 'agent-codex' && generator !== 'agent-claude' && generator !== 'agent-gemini') return true;
 
   const api = window.api;
-  const provider: 'codex' | 'claude' = generator === 'agent-codex' ? 'codex' : 'claude';
+  const provider: 'codex' | 'claude' | 'gemini' = generator === 'agent-codex'
+    ? 'codex'
+    : generator === 'agent-gemini'
+      ? 'gemini'
+      : 'claude';
   if (typeof api?.agentStatus !== 'function') {
     showBlockingMessage(
       `에이전트 모드(${provider}) 상태 확인 기능을 불러오지 못했습니다.\n\n앱을 완전히 종료한 뒤 다시 실행해주세요.`,
@@ -51,7 +55,7 @@ export async function ensureAgentEngineReady(generator: string): Promise<boolean
     if (response?.success && status?.available === true) return true;
 
     const reason = unavailableReason(provider, status);
-    const providerLabel = provider === 'codex' ? 'Codex' : 'Claude';
+    const providerLabel = provider === 'codex' ? 'Codex' : provider === 'gemini' ? 'Gemini' : 'Claude';
     const action = status?.errorCode === 'provider_disabled'
       ? '다른 연결 방식(에이전트 또는 API 키)을 직접 선택해주세요.'
       : status?.errorCode === 'subscription_inactive'

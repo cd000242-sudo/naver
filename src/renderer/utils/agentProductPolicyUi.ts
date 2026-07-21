@@ -4,7 +4,8 @@ export type SelectableTextProvider =
   | 'claude'
   | 'perplexity'
   | 'agent-codex'
-  | 'agent-claude';
+  | 'agent-claude'
+  | 'agent-gemini';
 
 export interface SafeTextModelSelection {
   readonly model: string;
@@ -17,17 +18,18 @@ export interface PersistedTextModelMigration {
   readonly config: Readonly<Record<string, unknown>>;
 }
 
-type AgentStatusProvider = 'codex' | 'claude';
+type AgentStatusProvider = 'codex' | 'claude' | 'gemini';
 
 const SAFE_SEMVER = '(\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?)';
 const SAFE_CODEX_VERSION = new RegExp(`^Codex CLI ${SAFE_SEMVER}$`, 'i');
 const SAFE_CLAUDE_VERSION = new RegExp(`^Claude Code ${SAFE_SEMVER}$`, 'i');
+const SAFE_GEMINI_VERSION = new RegExp(`^Gemini CLI ${SAFE_SEMVER}$`, 'i');
 const SAFE_BARE_VERSION = new RegExp(`^v?${SAFE_SEMVER}$`, 'i');
 
 const DEFAULT_GEMINI_MODEL = 'gemini-3.1-flash-lite';
 
 function modelToProvider(model: string): SelectableTextProvider {
-  if (model === 'agent-codex' || model === 'agent-claude') return model;
+  if (model === 'agent-codex' || model === 'agent-claude' || model === 'agent-gemini') return model;
   if (model === 'perplexity-sonar') return 'perplexity';
   if (
     model === 'openai-gpt4o'
@@ -91,10 +93,14 @@ export function formatAgentVersionLabel(
   provider: AgentStatusProvider,
   version: unknown,
 ): string {
-  const fallback = provider === 'codex' ? 'Codex CLI' : 'Claude Code';
+  const fallback = provider === 'codex' ? 'Codex CLI' : provider === 'gemini' ? 'Gemini CLI' : 'Claude Code';
   if (typeof version !== 'string' || version.length > 80 || /[\r\n]/.test(version)) return fallback;
   const trimmed = version.trim();
-  const canonicalPattern = provider === 'codex' ? SAFE_CODEX_VERSION : SAFE_CLAUDE_VERSION;
+  const canonicalPattern = provider === 'codex'
+    ? SAFE_CODEX_VERSION
+    : provider === 'gemini'
+      ? SAFE_GEMINI_VERSION
+      : SAFE_CLAUDE_VERSION;
   const canonical = trimmed.match(canonicalPattern);
   if (canonical?.[1]) return `${fallback} ${canonical[1]}`;
   const bare = trimmed.match(SAFE_BARE_VERSION);

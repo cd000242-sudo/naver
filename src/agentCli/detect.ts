@@ -1,5 +1,8 @@
 // Install and authentication detection for subscription-backed agents.
 // Status checks are deliberately metadata-only: they must never spend a model turn.
+import { existsSync } from 'fs';
+import { homedir } from 'os';
+import { join } from 'path';
 import {
   classifyExit,
   isSubscriptionInactiveMessage,
@@ -10,6 +13,7 @@ import { spawnCollect } from './spawnHelper.js';
 import {
   buildClaudeSubscriptionEnv,
   buildCodexSubscriptionEnv,
+  buildGeminiSubscriptionEnv,
 } from './subscriptionEnv.js';
 import type {
   AgentCliStatus,
@@ -56,6 +60,7 @@ export function clearAgentDetectionCache(provider?: AgentProvider): void {
   statusCache.clear();
   advanceDetectionRevision('codex');
   advanceDetectionRevision('claude');
+  advanceDetectionRevision('gemini');
 }
 
 function cacheStatus(status: AgentCliStatus, revision: number): AgentCliStatus {
@@ -72,6 +77,13 @@ function getCachedStatus(provider: AgentProvider): AgentCliStatus | undefined {
   return { ...entry.status };
 }
 
+/** Build the allowlisted subprocess env for a given provider's CLI invocations. */
+function buildAgentSubscriptionEnv(provider: AgentProvider): NodeJS.ProcessEnv {
+  if (provider === 'codex') return buildCodexSubscriptionEnv();
+  if (provider === 'gemini') return buildGeminiSubscriptionEnv();
+  return buildClaudeSubscriptionEnv();
+}
+
 /** Probe `<cli> --version`; ENOENT (or any error) means not installed. */
 async function probeVersion(provider: AgentProvider): Promise<string | undefined> {
   try {
@@ -80,7 +92,7 @@ async function probeVersion(provider: AgentProvider): Promise<string | undefined
       args: ['--version'],
       provider,
       timeoutMs: DETECT_TIMEOUT_MS,
-      env: provider === 'codex' ? buildCodexSubscriptionEnv() : buildClaudeSubscriptionEnv(),
+      env: buildAgentSubscriptionEnv(provider),
     });
     if (res.code === 0) {
       return parseAgentVersionOutput(provider, res.stdout, res.stderr)
@@ -250,6 +262,26 @@ async function probeClaudeLogin(): Promise<LoginProbe> {
   }
 }
 
+/**
+ * Gemini CLI has no `login status` subcommand. Readiness is inferred from the OAuth
+ * credential file the CLI writes on first browser login (subscription path — "Antigravity"),
+ * with an API-key fallback for users who deliberately configure GEMINI_API_KEY instead.
+ */
+async function probeGeminiLogin(): Promise<LoginProbe> {
+  try {
+    const oauthCredsPath = join(homedir(), '.gemini', 'oauth_creds.json');
+    if (existsSync(oauthCredsPath)) {
+      return { loggedIn: true, detail: 'Gemini CLI OAuth 로그인 확인됨 (Antigravity 구독)' };
+    }
+    if (process.env.GEMINI_API_KEY?.trim()) {
+      return { loggedIn: true, detail: 'Gemini API key 모드' };
+    }
+    return { loggedIn: false, errorCode: 'not_logged_in' };
+  } catch {
+    return { loggedIn: false, errorCode: 'not_logged_in' };
+  }
+}
+
 /** Detect installation and authentication without issuing a model request. Never rejects. */
 export async function detectAgent(
   provider: AgentProvider,
@@ -272,7 +304,11 @@ export async function detectAgent(
     }, detectionRevision);
   }
 
-  const login = provider === 'codex' ? await probeCodexLogin() : await probeClaudeLogin();
+  const login = provider === 'codex'
+    ? await probeCodexLogin()
+    : provider === 'gemini'
+      ? await probeGeminiLogin()
+      : await probeClaudeLogin();
   if (!login.loggedIn) {
     return cacheStatus({
       provider,

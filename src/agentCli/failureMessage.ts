@@ -20,7 +20,7 @@ export function buildAgentFailureMessage(
   code: AgentErrorCode,
   detail?: unknown,
 ): string {
-  const providerLabel = provider === 'codex' ? 'Codex' : 'Claude Code';
+  const providerLabel = provider === 'codex' ? 'Codex' : provider === 'gemini' ? 'Gemini CLI' : 'Claude Code';
   const safeDetail = detail == null || String(detail).trim() === ''
     ? ''
     : ` 상세: ${sanitizeUserVisibleError(detail)}`;

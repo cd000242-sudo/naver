@@ -790,7 +790,7 @@ JSON:
         });
       } else {
         // 기본 'same': 본문과 동일 모델
-        if (provider === 'agent-codex' || provider === 'agent-claude') {
+        if (provider === 'agent-codex' || provider === 'agent-claude' || provider === 'agent-gemini') {
           raw = await callAgent(provider, titlePromptFull, { mode, agentProductPolicyContext });
         } else if (provider === 'perplexity') {
           raw = await callPerplexity(titlePromptFull, titleTemp, 650);
@@ -985,7 +985,7 @@ JSON:
   try {
     // ✅ [v2.10.56] silent 폴백 회귀 — 사용자 선택 provider 그대로 (자동 폴백 금지 원칙)
     let raw: string;
-    if (provider === 'agent-codex' || provider === 'agent-claude') {
+    if (provider === 'agent-codex' || provider === 'agent-claude' || provider === 'agent-gemini') {
       raw = await callAgent(provider, prompt, { mode: 'homefeed', agentProductPolicyContext });
     } else if (provider === 'perplexity') {
       raw = await callPerplexity(prompt, 0.9, 450);
@@ -1594,7 +1594,7 @@ export type SourceCategoryHint =
   | '기타'
   // 문자열도 허용 (사용자 커스텀)
   | string;
-export type ContentGeneratorProvider = 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude';
+export type ContentGeneratorProvider = 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude' | 'agent-gemini';
 
 export type ArticleType =
   // 뉴스/정보
@@ -4065,7 +4065,7 @@ interface CallAgentOptions {
 }
 
 async function callAgent(
-  provider: 'agent-codex' | 'agent-claude',
+  provider: 'agent-codex' | 'agent-claude' | 'agent-gemini',
   prompt: string,
   opts: CallAgentOptions = {},
 ): Promise<string> {
@@ -5204,7 +5204,7 @@ async function generateStructuredContentInternal(
   const agentContentMaxAttempts = isV3Prompt
     ? 0
     : readNonNegativeIntegerEnv('AGENT_CONTENT_MAX_ATTEMPTS', 0);
-  const isAgentProvider = provider === 'agent-codex' || provider === 'agent-claude';
+  const isAgentProvider = provider === 'agent-codex' || provider === 'agent-claude' || provider === 'agent-gemini';
   const isSingleSubmissionConnector = isAgentProvider;
   const baseMaxAttempts = isSingleSubmissionConnector
     ? agentContentMaxAttempts
@@ -5296,7 +5296,7 @@ async function generateStructuredContentInternal(
     expectedBodyChars = 1500,
   ): Promise<string> => {
     const repairChars = Math.min(4500, Math.max(1500, expectedBodyChars));
-    if (provider === 'agent-codex' || provider === 'agent-claude') {
+    if (provider === 'agent-codex' || provider === 'agent-claude' || provider === 'agent-gemini') {
       return callAgent(provider, prompt, {
         signal,
         raw: true,
@@ -5506,7 +5506,7 @@ async function generateStructuredContentInternal(
         };
 
         // ✅ [v2.10.28] signal을 callX에 직접 전달 — SDK 레벨 fetch abort
-        if (provider === 'agent-codex' || provider === 'agent-claude') {
+        if (provider === 'agent-codex' || provider === 'agent-claude' || provider === 'agent-gemini') {
           rawResponse = await withAbortRace(callAgent(provider, systemPrompt, {
             signal,
             mode,
@@ -6257,7 +6257,7 @@ async function generateStructuredContentInternal(
         const judgeCaller = async (jp: string): Promise<string> => {
           const jt = 0.2; // 결정적 JSON 유도
           const jc = 300; // <1000 → 60초 타임아웃 + 짧은 JSON 응답 길이거부 없음 (각 호출 내부 타임아웃+signal로 abort)
-          if (provider === 'agent-codex' || provider === 'agent-claude') {
+          if (provider === 'agent-codex' || provider === 'agent-claude' || provider === 'agent-gemini') {
             return callAgent(provider, jp, {
               signal,
               raw: true,

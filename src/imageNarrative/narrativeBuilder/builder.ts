@@ -34,9 +34,9 @@ const PROMPT_DIR_DIST = join(__dirname, '..', '..', 'prompts', 'imageNarrative')
 // ---------------------------------------------------------------------------
 
 // Text-generation provider for the narrative writer. Extends VisionProvider with the agent
-// CLIs (codex/claude subscription) — agent mode applies to the TEXT step only; image vision
-// inference still uses a vision-capable vendor upstream.
-export type NarrativeTextProvider = VisionProvider | 'agent-codex' | 'agent-claude';
+// CLIs (codex/claude/gemini subscription) — agent mode applies to the TEXT step only; image
+// vision inference still uses a vision-capable vendor upstream.
+export type NarrativeTextProvider = VisionProvider | 'agent-codex' | 'agent-claude' | 'agent-gemini';
 
 export interface BuilderOptions {
   /** AI provider to use for content generation. Defaults to 'gemini'. */
@@ -184,6 +184,7 @@ async function callProvider(
       return callClaudeProvider(fullPrompt, signal);
     case 'agent-codex':
     case 'agent-claude':
+    case 'agent-gemini':
       // 에이전트 모드 — 사용자 본인 구독 CLI로 글 작성 (공유 agentCli 서비스, 중복 구현 금지).
       // silent 폴백 금지: 실패는 AgentCliError 그대로 throw.
       return callAgentProvider(provider, fullPrompt, signal, agentProductPolicyContext);
@@ -194,7 +195,7 @@ async function callProvider(
 }
 
 async function callAgentProvider(
-  provider: 'agent-codex' | 'agent-claude',
+  provider: 'agent-codex' | 'agent-claude' | 'agent-gemini',
   prompt: string,
   signal?: AbortSignal,
   agentProductPolicyContext?: AgentProductPolicyContext,

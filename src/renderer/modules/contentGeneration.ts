@@ -115,6 +115,7 @@ function engineLabel(generator: string): string {
   const map: Record<string, string> = {
     'agent-codex': '에이전트 · 코덱스(Codex)',
     'agent-claude': '에이전트 · 클로드 코드(Claude Code)',
+    'agent-gemini': '에이전트 · 제미나이(Gemini)',
     gemini: 'Gemini',
     openai: 'OpenAI',
     claude: 'Claude',

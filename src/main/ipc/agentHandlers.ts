@@ -1,6 +1,6 @@
 // src/main/ipc/agentHandlers.ts
 // Agent CLI IPC handlers — the renderer cannot spawn processes, so it reaches the
-// codex/claude CLIs through these main-process channels.
+// codex/claude/gemini CLIs through these main-process channels.
 
 import { ipcMain, shell, type IpcMainInvokeEvent } from 'electron';
 import { fileURLToPath } from 'url';
@@ -36,6 +36,7 @@ interface RegisterAgentHandlerOptions {
 let activeAuthActions: Readonly<Record<AgentProvider, boolean>> = Object.freeze({
   codex: false,
   claude: false,
+  gemini: false,
 });
 
 interface ActiveLoginSession {

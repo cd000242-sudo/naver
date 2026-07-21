@@ -19,6 +19,7 @@ import {
 import {
   buildClaudeSubscriptionEnv,
   buildCodexSubscriptionEnv,
+  buildGeminiSubscriptionEnv,
   buildNpmInstallEnv,
 } from './subscriptionEnv.js';
 import { AgentCliError, type AgentCliStatus, type AgentProvider } from './types.js';
@@ -29,19 +30,27 @@ import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
 export const AGENT_NPM_PACKAGES: Readonly<Record<AgentProvider, string>> = Object.freeze({
   codex: '@openai/codex',
   claude: '@anthropic-ai/claude-code',
+  gemini: '@google/gemini-cli',
 });
 
 /** Release-reviewed versions; update deliberately after the agent regression suite passes. */
 export const AGENT_NPM_PACKAGE_VERSIONS: Readonly<Record<AgentProvider, string>> = Object.freeze({
   codex: '0.144.1',
   claude: '2.1.197',
+  gemini: '0.16.1',
 });
 
 const OFFICIAL_NPM_REGISTRY = 'https://registry.npmjs.org/';
 
+function packageScopeFor(provider: AgentProvider): string {
+  if (provider === 'codex') return 'openai';
+  if (provider === 'gemini') return 'google';
+  return 'anthropic-ai';
+}
+
 function buildNpmInstallArgs(provider: AgentProvider): string[] {
   const packageSpec = `${AGENT_NPM_PACKAGES[provider]}@${AGENT_NPM_PACKAGE_VERSIONS[provider]}`;
-  const packageScope = provider === 'codex' ? 'openai' : 'anthropic-ai';
+  const packageScope = packageScopeFor(provider);
   const emptyUserConfig = process.platform === 'win32' ? 'NUL' : '/dev/null';
   return [
     'install',
@@ -73,9 +82,9 @@ export interface AgentLoginSessionControls {
 }
 
 function buildAgentCommandEnv(provider: AgentProvider): NodeJS.ProcessEnv {
-  return provider === 'codex'
-    ? buildCodexSubscriptionEnv()
-    : buildClaudeSubscriptionEnv();
+  if (provider === 'codex') return buildCodexSubscriptionEnv();
+  if (provider === 'gemini') return buildGeminiSubscriptionEnv();
+  return buildClaudeSubscriptionEnv();
 }
 
 /**
@@ -116,11 +125,16 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
   return { version: status.version };
 }
 
-/** Login command per provider (subscription OAuth, opens the browser). */
+/**
+ * Login command per provider (subscription OAuth, opens the browser).
+ * gemini-cli has no dedicated `login` subcommand: a bare invocation prompts for an auth
+ * method and opens the Google OAuth browser flow on first run (same interactive-session
+ * shape as codex/claude login, which this service already drives via startSpawnSession).
+ */
 function loginCommand(provider: AgentProvider): { command: string; args: string[] } {
-  return provider === 'codex'
-    ? { command: 'codex', args: ['login'] }
-    : { command: 'claude', args: ['auth', 'login'] };
+  if (provider === 'codex') return { command: 'codex', args: ['login'] };
+  if (provider === 'gemini') return { command: 'gemini', args: [] };
+  return { command: 'claude', args: ['auth', 'login'] };
 }
 
 /**
@@ -196,11 +210,24 @@ export async function loginAgent(
   return Object.freeze({ ...status, loginAction: 'authenticated' as const });
 }
 
-/** Logout command per provider (clears stored subscription auth). */
-function logoutCommand(provider: AgentProvider): { command: string; args: string[] } {
-  return provider === 'codex'
-    ? { command: 'codex', args: ['logout'] }
-    : { command: 'claude', args: ['auth', 'logout'] };
+/** Logout command per provider (clears stored subscription auth). gemini has no CLI subcommand. */
+function logoutCommand(provider: AgentProvider): { command: string; args: string[] } | undefined {
+  if (provider === 'codex') return { command: 'codex', args: ['logout'] };
+  if (provider === 'gemini') return undefined;
+  return { command: 'claude', args: ['auth', 'logout'] };
+}
+
+/**
+ * gemini-cli has no `logout` subcommand; the OAuth credential file it writes is the same
+ * artifact probeGeminiLogin() reads, so removing it is the symmetric logout action.
+ */
+async function logoutGeminiCredentialFile(): Promise<void> {
+  const { unlink } = await import('fs/promises');
+  const { homedir } = await import('os');
+  const { join } = await import('path');
+  await unlink(join(homedir(), '.gemini', 'oauth_creds.json')).catch((err: NodeJS.ErrnoException) => {
+    if (err?.code !== 'ENOENT') throw err;
+  });
 }
 
 /**
@@ -209,22 +236,35 @@ function logoutCommand(provider: AgentProvider): { command: string; args: string
  */
 export async function logoutAgent(provider: AgentProvider): Promise<AgentCliStatus> {
   provider = requireAgentProvider(provider);
-  const { command, args } = logoutCommand(provider);
-  const res = await spawnCollect({
-    command,
-    args,
-    provider,
-    timeoutMs: 60_000,
-    env: buildAgentCommandEnv(provider),
-  });
-
-  if (res.code !== 0) {
-    throw new AgentCliError(
-      classifyExit(provider, res.stderr, res.stdout),
+  const command = logoutCommand(provider);
+  if (command) {
+    const res = await spawnCollect({
+      command: command.command,
+      args: command.args,
       provider,
-      `${provider} 로그아웃에 실패했습니다. 터미널에서 직접 실행이 필요할 수 있습니다 (codex logout / claude auth logout).`,
-      sanitizeUserVisibleError(res.stderr || res.stdout || ''),
-    );
+      timeoutMs: 60_000,
+      env: buildAgentCommandEnv(provider),
+    });
+
+    if (res.code !== 0) {
+      throw new AgentCliError(
+        classifyExit(provider, res.stderr, res.stdout),
+        provider,
+        `${provider} 로그아웃에 실패했습니다. 터미널에서 직접 실행이 필요할 수 있습니다 (codex logout / claude auth logout).`,
+        sanitizeUserVisibleError(res.stderr || res.stdout || ''),
+      );
+    }
+  } else {
+    try {
+      await logoutGeminiCredentialFile();
+    } catch (err) {
+      throw new AgentCliError(
+        'nonzero_exit',
+        provider,
+        `${provider} 로그아웃에 실패했습니다. 홈 폴더의 .gemini/oauth_creds.json 파일을 직접 삭제해주세요.`,
+        sanitizeUserVisibleError((err as Error)?.message || ''),
+      );
+    }
   }
   const { clearAgentDetectionCache, detectAgent } = await import('./detect.js');
   clearAgentDetectionCache(provider);

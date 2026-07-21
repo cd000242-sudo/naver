@@ -1,12 +1,12 @@
-// Agent CLI shared types — subscription-backed generation via local codex/claude CLIs.
+// Agent CLI shared types — subscription-backed generation via local codex/claude/gemini CLIs.
 //
-// Background: users run their own ChatGPT/Claude subscription through the codex/claude
-// command-line tools on their own PC, so the app spends no API tokens — it only spawns
-// the CLI and parses the structured output. No silent fallback: every failure surfaces
-// a typed error the UI can act on (install, login, rate-limit guidance).
+// Background: users run their own ChatGPT/Claude/Google subscription through the
+// codex/claude/gemini command-line tools on their own PC, so the app spends no API tokens —
+// it only spawns the CLI and parses the structured output. No silent fallback: every failure
+// surfaces a typed error the UI can act on (install, login, rate-limit guidance).
 
 /** Supported agent CLIs. */
-export type AgentProvider = 'codex' | 'claude';
+export type AgentProvider = 'codex' | 'claude' | 'gemini';
 
 /** Stable error codes so the renderer can branch (modal copy, install button, etc.). */
 export type AgentErrorCode =

@@ -1,14 +1,15 @@
 // Agent CLI service — public entry point.
 //
 // Shared by both content paths (contentGenerator + imageNarrative/narrativeBuilder) and by
-// the 'agent:generate' IPC handler. Routes a prompt to the user's local codex/claude CLI so
-// generation uses the applicable subscription usage pool without a separate API key.
+// the 'agent:generate' IPC handler. Routes a prompt to the user's local codex/claude/gemini CLI
+// so generation uses the applicable subscription usage pool without a separate API key.
 //
 // No silent fallback: a failure throws a typed AgentCliError. Callers decide how to surface it
 // (the renderer shows a blocking modal with install/login guidance — never a quiet downgrade).
 
 import { runCodex } from './codexRunner.js';
 import { runClaude } from './claudeRunner.js';
+import { runGemini } from './geminiRunner.js';
 import { clearAgentDetectionCache, detectAgent } from './detect.js';
 import { tryExtractJson } from './parse.js';
 import {
@@ -29,7 +30,7 @@ export * from './types.js';
 
 /** True when the value is a provider this service can route to. */
 export function isAgentProvider(value: unknown): value is AgentProvider {
-  return value === 'codex' || value === 'claude';
+  return value === 'codex' || value === 'claude' || value === 'gemini';
 }
 
 /**
@@ -48,7 +49,7 @@ export async function generateWithAgent(
 
   // Final execution boundary: a new call site cannot silently bypass packaged-app policy.
   assertResolvedContentGeneratorProviderAllowed(
-    provider === 'claude' ? 'agent-claude' : 'agent-codex',
+    provider === 'claude' ? 'agent-claude' : provider === 'gemini' ? 'agent-gemini' : 'agent-codex',
     productPolicyContext,
   );
 
@@ -77,7 +78,9 @@ export async function generateWithAgent(
   try {
     text = provider === 'codex'
       ? await runCodex(prompt, { schema, model, timeoutMs, signal })
-      : await runClaude(prompt, { schema, model, timeoutMs, signal });
+      : provider === 'gemini'
+        ? await runGemini(prompt, { schema, model, timeoutMs, signal })
+        : await runClaude(prompt, { schema, model, timeoutMs, signal });
   } catch (error) {
     if (error instanceof AgentCliError
         && ['not_logged_in', 'subscription_inactive', 'rate_limited'].includes(error.code)) {

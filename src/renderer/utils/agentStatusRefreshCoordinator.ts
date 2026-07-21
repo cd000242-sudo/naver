@@ -1,4 +1,4 @@
-export type AgentStatusProvider = 'codex' | 'claude';
+export type AgentStatusProvider = 'codex' | 'claude' | 'gemini';
 
 export interface AgentStatusLease {
   readonly provider: AgentStatusProvider;
@@ -33,6 +33,7 @@ export function createAgentStatusRefreshCoordinator(): AgentStatusRefreshCoordin
   let states: Readonly<Record<AgentStatusProvider, ProviderRefreshState>> = Object.freeze({
     codex: INITIAL_PROVIDER_STATE,
     claude: INITIAL_PROVIDER_STATE,
+    gemini: INITIAL_PROVIDER_STATE,
   });
 
   const replaceState = (provider: AgentStatusProvider, next: ProviderRefreshState): void => {

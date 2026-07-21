@@ -4723,6 +4723,21 @@
                     </label>
                 </div>
 
+                <!-- 6.5. 품질 보정 패스 (v2.11.133 신규, 기본 OFF - 저비용 2-pass 보정) -->
+                <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px;">
+                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
+                        <input type="checkbox" id="quality-repair-pass" style="margin-top: 0.3rem; cursor: pointer;">
+                        <div>
+                            <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.2rem;">🔁 품질 보정 패스 (2-pass) <span style="color: #f59e0b; font-size: 0.75rem;">[기본 OFF · 소액 비용 추가]</span></div>
+                            <small style="color: var(--text-muted); font-size: 0.75rem; display: block; line-height: 1.4;">
+                                품질 점수가 낮게 나온 글에 한해 <strong>제목/서론 패치 + 자기비평 보정을 1회</strong> 실행합니다.
+                                초안을 버리지 않고 <strong>일반론 문단을 수집 자료의 구체 정보로 다듬는</strong> 방식이라 발행은 항상 진행됩니다.<br>
+                                비용: 보정이 실행된 글에만 저비용 모델 호출 1~2회 추가 (글당 수 원 수준). 보정 실패 시 원문 그대로 발행.
+                            </small>
+                        </div>
+                    </label>
+                </div>
+
                 <!-- 7. Perplexity fact-check (v2.10.361 신규, 기본 OFF - 사용자 환경 비용 차감) -->
                 <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 8px;">
                     <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
@@ -6046,12 +6061,44 @@
                                             style="display: none; padding: 0.5rem 0.9rem; background: #4b5563; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">🔄 계정 전환</button>
                                     </div>
 
+                                    <!-- 🚀 에이전트 모드 (Gemini CLI · Antigravity 구독) -->
+                                    <label id="agent-gemini-card" class="gemini-model-card"
+                                        style="cursor: pointer; border: 2px solid #60a5fa; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #eff6ff, #dbeafe); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(96, 165, 250, 0.15);">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #dbeafe; border-radius: 50%;">
+                                            <input type="radio" name="primaryGeminiTextModel" value="agent-gemini"
+                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #2563eb;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-weight: 800; color: #1d4ed8; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                                                <span>🚀 Gemini 에이전트 (Antigravity·Gemini CLI 구독)</span>
+                                                <span
+                                                    style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700;">별도 API 키 불필요</span>
+                                            </div>
+                                            <div style="font-size: 0.9rem; color: #1e40af; line-height: 1.4;">
+                                                Gemini CLI 글생성 · Google 구독(Antigravity) 한도 사용</div>
+                                            <div id="agent-gemini-status"
+                                                style="font-size: 0.8rem; color: #6b7280; font-weight: 700; margin-top: 0.3rem;">⏳ 상태 확인 중...</div>
+                                        </div>
+                                    </label>
+                                    <!-- Gemini 설치/로그인 액션 (label 밖 — 라디오 토글 충돌 방지, 상태 따라 JS가 표시) -->
+                                    <div id="agent-gemini-actions" style="display: none; gap: 0.5rem; margin: -0.25rem 0 0.25rem 0;">
+                                        <button type="button" id="agent-gemini-install-btn"
+                                            style="display: none; padding: 0.5rem 0.9rem; background: #2563eb; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">⬇️ 자동 설치</button>
+                                        <button type="button" id="agent-gemini-login-btn"
+                                            style="display: none; padding: 0.5rem 0.9rem; background: #1d4ed8; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">🔑 로그인</button>
+                                        <button type="button" id="agent-gemini-switch-btn"
+                                            title="로그아웃 후 다른 계정으로 다시 로그인합니다"
+                                            style="display: none; padding: 0.5rem 0.9rem; background: #4b5563; color: #fff; border: none; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer;">🔄 계정 전환</button>
+                                    </div>
+
                                     <!-- 에이전트 모드 고지 (ToS·한도·사진모드 vision키) -->
                                     <div
                                         style="background: #fffbeb; border: 1px solid #fcd34d; border-radius: 10px; padding: 0.9rem 1.1rem; font-size: 0.82rem; color: #92400e; line-height: 1.65;">
                                         ⚠️ <strong>에이전트 모드 안내 (사용 전 확인)</strong><br>
-                                        · Codex와 <strong>Claude Code</strong> 모두 본인 구독 로그인으로 사용할 수 있습니다. 별도 API 키는 선택한 API 키 모드에서만 필요합니다.<br>
-                                        · Codex 사용량은 플랜별 <strong>agentic 사용량·크레딧 풀</strong>에서 차감되며, 작업 규모와 모델에 따라 달라집니다.<br>
+                                        · Codex, <strong>Claude Code</strong>, <strong>Gemini CLI(Antigravity)</strong> 모두 본인 구독 로그인으로 사용할 수 있습니다. 별도 API 키는 선택한 API 키 모드에서만 필요합니다.<br>
+                                        · 각 CLI 사용량은 플랜별 <strong>agentic 사용량·크레딧 풀</strong>에서 차감되며, 작업 규모와 모델에 따라 달라집니다.<br>
                                         · 각 공급자의 이용약관과 사용 한도를 준수해야 하며, 구독 자격증명을 다른 사용자 대신 라우팅하지 않습니다.<br>
                                         · 📸 <strong>사진으로 글생성</strong> 시 이미지 분석(vision)은 CLI로 불가 → 글쓰기만 구독으로 처리되며, 이미지 분석엔 <strong>Gemini API 키가 별도로 필요</strong>합니다.
                                     </div>

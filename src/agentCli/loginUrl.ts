@@ -17,6 +17,11 @@ const EXACT_LOGIN_ENDPOINTS: Readonly<Record<AgentProvider, Readonly<{
     origin: 'https://claude.com',
     pathname: '/cai/oauth/authorize',
   }),
+  // Google's standard OAuth2 authorization endpoint (also used by gcloud CLI login).
+  gemini: Object.freeze({
+    origin: 'https://accounts.google.com',
+    pathname: '/o/oauth2/v2/auth',
+  }),
 });
 
 /** Validate an OAuth URL before it can reach the operating-system browser. */

@@ -6,7 +6,7 @@ const MAX_TIMEOUT_MS = 15 * 60_000;
 const MODEL_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9._:/@-]{0,127}$/;
 
 export function requireAgentProvider(value: unknown): AgentProvider {
-  if (value === 'codex' || value === 'claude') return value;
+  if (value === 'codex' || value === 'claude' || value === 'gemini') return value;
   throw new AgentCliError('spawn_failed', 'codex', `Unsupported agent provider: ${String(value)}`);
 }
 

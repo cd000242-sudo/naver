@@ -14,9 +14,20 @@ const CLAUDE_VERSION_PATTERNS = [
   new RegExp(`^(?:claude|claude-code|claude code)\\s+(?:version\\s+)?v?${SEMVER}$`, 'i'),
   new RegExp(`^v?${SEMVER}\\s+\\(claude code\\)$`, 'i'),
 ] as const;
+const GEMINI_VERSION_PATTERNS = [
+  new RegExp(`^(?:@google\\/)?(?:gemini-cli|gemini)\\s+(?:version\\s+)?v?${SEMVER}$`, 'i'),
+] as const;
 
 export function agentVersionFallbackLabel(provider: AgentProvider): string {
-  return provider === 'codex' ? 'Codex CLI' : 'Claude Code';
+  if (provider === 'codex') return 'Codex CLI';
+  if (provider === 'gemini') return 'Gemini CLI';
+  return 'Claude Code';
+}
+
+function providerVersionPatterns(provider: AgentProvider): readonly RegExp[] {
+  if (provider === 'codex') return CODEX_VERSION_PATTERNS;
+  if (provider === 'gemini') return GEMINI_VERSION_PATTERNS;
+  return CLAUDE_VERSION_PATTERNS;
 }
 
 function canonicalVersion(provider: AgentProvider, version: string): string {
@@ -36,7 +47,7 @@ export function parseAgentVersionOutput(
     .slice(0, MAX_VERSION_LINES)
     .map((line) => line.trim())
     .filter((line) => line.length > 0 && line.length <= MAX_VERSION_LINE_CHARS);
-  const providerPatterns = provider === 'codex' ? CODEX_VERSION_PATTERNS : CLAUDE_VERSION_PATTERNS;
+  const providerPatterns = providerVersionPatterns(provider);
 
   for (const line of lines) {
     for (const pattern of providerPatterns) {

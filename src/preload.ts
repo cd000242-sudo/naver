@@ -35,7 +35,7 @@ type AutomationPayload = {
   structuredContent?: StructuredContent;
   generatedImages?: Array<{ heading: string; filePath: string; provider: string; alt?: string; caption?: string; blobId?: string }>;
   hashtags?: string[];
-  generator?: 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude';
+  generator?: 'gemini' | 'openai' | 'claude' | 'perplexity' | 'agent-codex' | 'agent-claude' | 'agent-gemini';
   keywords?: string[];
   draft?: string;
   rssUrl?: string;
@@ -1245,6 +1245,12 @@ contextBridge.exposeInMainWorld('api', {
 
 // ✅ electronAPI로도 동일한 API 노출 (renderer.ts 호환성)
 contextBridge.exposeInMainWorld('electronAPI', {
+  // [v2.11.135] 사진 모드 HEIC → JPEG 변환 + EXIF 추출 (imageNarrativeUpload.ts)
+  convertHeic: (payload: { base64: string }): Promise<{ success: boolean; base64?: string; message?: string }> =>
+    ipcRenderer.invoke('image-narrative:convert-heic', payload),
+  extractExif: (payload: { base64: string; mimeType?: string }): Promise<Record<string, unknown>> =>
+    ipcRenderer.invoke('image-narrative:extract-exif', payload),
+
   // 키워드 경쟁도 분석 API
   analyzeKeyword: (keyword: string): Promise<{ success: boolean; analysis?: any; message?: string }> =>
     ipcRenderer.invoke('keyword:analyze', keyword),

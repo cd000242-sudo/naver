@@ -26,7 +26,7 @@ const UnifiedDOMCache = {
 
   // 안전한 getter
   getGenerator(): string {
-    // ✅ [2026-06-30 FIX] 에이전트 모드(agent-codex/agent-claude)는 사용자가 명시 선택한
+    // ✅ [2026-06-30 FIX] 에이전트 모드(agent-codex/agent-claude/agent-gemini)는 사용자가 명시 선택한
     //    0과금 엔진(본인 구독 CLI)이다. 드롭다운(#unified-generator)에 남은 stale API 값이
     //    이 선택을 덮어써 반자동에서 API로 과금되던 버그 차단 — 에이전트 라디오를 최우선.
     //    (풀오토는 드롭다운이 gemini라 우연히 동작했고, 반자동은 stale 값에 가로채였음.)
@@ -34,6 +34,7 @@ const UnifiedDOMCache = {
       'input[name="primaryGeminiTextModel"]:checked',
     ) as HTMLInputElement | null;
     const selectedModelTop = selectedTextModelRadio?.value;
+    const AGENT_PROVIDERS = new Set(['agent-codex', 'agent-claude', 'agent-gemini']);
     const modelToProvider: Record<string, string> = {
       'gemini-3.1-flash-lite': 'gemini',
       'gemini-3.5-flash': 'gemini',
@@ -47,10 +48,12 @@ const UnifiedDOMCache = {
       'claude-opus': 'claude',
       'agent-codex': 'agent-codex',
       'agent-claude': 'agent-claude',
+      'agent-gemini': 'agent-gemini',
     };
     if (
       !selectedTextModelRadio?.disabled
-      && (selectedModelTop === 'agent-codex' || selectedModelTop === 'agent-claude')
+      && selectedModelTop
+      && AGENT_PROVIDERS.has(selectedModelTop)
     ) {
       if (this.unifiedGenerator) this.unifiedGenerator.value = selectedModelTop;
       return selectedModelTop;
@@ -62,8 +65,8 @@ const UnifiedDOMCache = {
     const selectedProvider = !selectedTextModelRadio?.disabled && selectedModelTop
       ? modelToProvider[selectedModelTop]
       : undefined;
-    const hiddenValue = rawHiddenValue === 'agent-claude'
-      ? selectedProvider && selectedProvider !== 'agent-claude'
+    const hiddenValue = (rawHiddenValue === 'agent-claude' || rawHiddenValue === 'agent-gemini')
+      ? selectedProvider && selectedProvider !== rawHiddenValue
         ? selectedProvider
         : 'gemini'
       : rawHiddenValue;

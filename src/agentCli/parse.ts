@@ -81,6 +81,35 @@ export function parseClaudeEnvelope(stdout: string): string {
   throw new AgentCliError('empty_output', 'claude', 'claude 응답에 result가 없습니다.', raw.slice(0, 500));
 }
 
+/**
+ * Parse the envelope printed by `gemini --output-format json`.
+ * Shape: { response, stats }. Returns the `response` text.
+ * Unlike claude's envelope, a JSON parse failure falls back to the raw stdout text instead of
+ * throwing — gemini's CLI has occasionally printed plain text ahead of the JSON envelope.
+ */
+export function parseGeminiEnvelope(stdout: string): string {
+  const raw = (stdout ?? '').trim();
+  if (!raw) {
+    throw new AgentCliError('empty_output', 'gemini', 'gemini가 빈 응답을 반환했습니다.');
+  }
+
+  let obj: unknown;
+  try {
+    obj = JSON.parse(raw);
+  } catch {
+    return raw;
+  }
+
+  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
+    const env = obj as Record<string, unknown>;
+    if (typeof env.response === 'string' && env.response.trim()) {
+      return env.response;
+    }
+  }
+
+  return raw;
+}
+
 /** True only for wording that means the account has no active Claude Code entitlement. */
 export function isSubscriptionInactiveMessage(text: string): boolean {
   const hay = String(text ?? '').toLowerCase();
@@ -119,7 +148,7 @@ export function classifyExit(
   }
 
   if (
-    /usage limit|rate limit|rate.limited|quota|too many requests|\b429\b|weekly limit|5-?hour|limit reached|out of (credits|tokens)|insufficient_quota/.test(
+    /usage limit|rate limit|rate.limited|quota|too many requests|\b429\b|weekly limit|5-?hour|limit reached|out of (credits|tokens)|insufficient_quota|resource_exhausted/.test(
       hay,
     )
   ) {
@@ -127,7 +156,7 @@ export function classifyExit(
   }
 
   if (
-    /not logged in|unauthorized|\b401\b|authentication|auth(entication)? (failed|required)|please (run|sign in)|login required|run `?codex login`?|run `?claude login`?|no credentials/.test(
+    /not logged in|unauthorized|\b401\b|authentication|auth(entication)? (failed|required)|please (run|sign in)|login required|run `?codex login`?|run `?claude login`?|no credentials|credential|unauthenticated|oauth/.test(
       hay,
     )
   ) {
