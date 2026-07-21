@@ -33,11 +33,17 @@ export const AGENT_NPM_PACKAGES: Readonly<Record<AgentProvider, string>> = Objec
   gemini: '@google/gemini-cli',
 });
 
-/** Release-reviewed versions; update deliberately after the agent regression suite passes. */
+/**
+ * Release-reviewed versions; update deliberately after the agent regression suite passes.
+ * [v2.11.138] gemini 0.16.1 was unpublished from npm → install always failed with
+ * ETARGET(404), surfaced misleadingly as "권한 오류". Bumped to 0.51.0 (current
+ * latest). gemini-cli publishes very frequently, so installAgent also falls back
+ * to @latest when the pinned version 404s (see installAgent).
+ */
 export const AGENT_NPM_PACKAGE_VERSIONS: Readonly<Record<AgentProvider, string>> = Object.freeze({
   codex: '0.144.1',
   claude: '2.1.197',
-  gemini: '0.16.1',
+  gemini: '0.51.0',
 });
 
 const OFFICIAL_NPM_REGISTRY = 'https://registry.npmjs.org/';
@@ -48,8 +54,9 @@ function packageScopeFor(provider: AgentProvider): string {
   return 'anthropic-ai';
 }
 
-function buildNpmInstallArgs(provider: AgentProvider): string[] {
-  const packageSpec = `${AGENT_NPM_PACKAGES[provider]}@${AGENT_NPM_PACKAGE_VERSIONS[provider]}`;
+function buildNpmInstallArgs(provider: AgentProvider, versionOverride?: string): string[] {
+  const version = versionOverride || AGENT_NPM_PACKAGE_VERSIONS[provider];
+  const packageSpec = `${AGENT_NPM_PACKAGES[provider]}@${version}`;
   const packageScope = packageScopeFor(provider);
   const emptyUserConfig = process.platform === 'win32' ? 'NUL' : '/dev/null';
   return [
@@ -95,7 +102,7 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
   provider = requireAgentProvider(provider);
   const pkg = AGENT_NPM_PACKAGES[provider];
   const packageSpec = `${pkg}@${AGENT_NPM_PACKAGE_VERSIONS[provider]}`;
-  const res = await spawnCollect({
+  let res = await spawnCollect({
     command: 'npm',
     args: buildNpmInstallArgs(provider),
     provider,
@@ -103,11 +110,38 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
     env: buildNpmInstallEnv(),
   });
 
+  // [v2.11.138] 핀한 버전이 npm에서 내려가면(ETARGET/404) @latest로 1회 폴백.
+  // gemini-cli처럼 릴리스가 잦은 CLI에서 stale 핀이 설치를 영구 차단하던 문제 방지.
+  const combinedOut = `${res.stderr || ''}\n${res.stdout || ''}`;
+  const isVersionNotFound = /ETARGET|No matching version|E404|notarget/i.test(combinedOut);
+  if (res.code !== 0 && isVersionNotFound) {
+    console.warn(`[AgentInstaller] ${packageSpec} 버전 없음(ETARGET) → @latest로 폴백 설치 시도`);
+    res = await spawnCollect({
+      command: 'npm',
+      args: buildNpmInstallArgs(provider, 'latest'),
+      provider,
+      timeoutMs: INSTALL_TIMEOUT_MS,
+      env: buildNpmInstallEnv(),
+    });
+  }
+
   if (res.code !== 0) {
+    const out = `${res.stderr || ''}\n${res.stdout || ''}`;
+    // 실제 실패 원인별로 안내를 분기 — 예전엔 무조건 "권한 오류"라 오도했다.
+    const isPermission = /EACCES|EPERM|permission denied|access is denied|관리자/i.test(out);
+    const isNetwork = /ENOTFOUND|ETIMEDOUT|ECONNREFUSED|network|getaddrinfo/i.test(out);
+    const isMissingNpm = /ENOENT|npm.*not found|is not recognized/i.test(out);
+    const hint = isPermission
+      ? '권한 오류로 보입니다 — 관리자 권한으로 앱을 다시 실행해보세요.'
+      : isNetwork
+        ? '네트워크 오류로 보입니다 — 인터넷 연결/프록시를 확인하세요.'
+        : isMissingNpm
+          ? 'npm(Node.js)을 찾지 못했습니다 — Node.js LTS 설치 후 다시 시도하세요.'
+          : '자세한 원인은 아래 상세 메시지를 확인하세요.';
     throw new AgentCliError(
       classifyExit(provider, res.stderr, res.stdout),
       provider,
-      `${provider} CLI 설치에 실패했습니다 (npm i -g ${packageSpec}). 권한 오류면 관리자 권한이 필요할 수 있습니다.`,
+      `${provider} CLI 설치에 실패했습니다 (npm i -g ${packageSpec}). ${hint}`,
       sanitizeUserVisibleError(res.stderr || res.stdout || ''),
     );
   }

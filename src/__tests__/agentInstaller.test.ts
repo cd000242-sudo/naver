@@ -73,7 +73,7 @@ describe('AGENT_NPM_PACKAGES', () => {
     expect(AGENT_NPM_PACKAGE_VERSIONS).toEqual({
       codex: '0.144.1',
       claude: '2.1.197',
-      gemini: '0.16.1',
+      gemini: '0.51.0',
     });
   });
 });
@@ -115,7 +115,7 @@ describe('installAgent', () => {
     expect(spawnMock.mock.calls[0][0].args).toEqual([
       'install',
       '-g',
-      '@google/gemini-cli@0.16.1',
+      '@google/gemini-cli@0.51.0',
       '--registry=https://registry.npmjs.org/',
       '--@google:registry=https://registry.npmjs.org/',
       `--userconfig=${process.platform === 'win32' ? 'NUL' : '/dev/null'}`,
@@ -127,6 +127,26 @@ describe('installAgent', () => {
   it('throws AgentCliError on npm failure', async () => {
     spawnMock.mockResolvedValueOnce({ code: 1, stdout: '', stderr: 'EACCES: permission denied' });
     await expect(installAgent('claude')).rejects.toMatchObject({ name: 'AgentCliError' });
+  });
+
+  // [v2.11.138] 핀 버전이 npm에서 내려가면(ETARGET) @latest로 폴백 후 성공.
+  it('falls back to @latest when the pinned version is unpublished (ETARGET)', async () => {
+    spawnMock
+      .mockResolvedValueOnce({ code: 1, stdout: '', stderr: 'npm error code ETARGET\nNo matching version found for @google/gemini-cli@0.51.0' })
+      .mockResolvedValueOnce({ code: 0, stdout: 'gemini 0.52.0', stderr: '' });
+    detectAgentMock.mockResolvedValueOnce({ provider: 'gemini', installed: true, version: '0.52.0', loggedIn: false, available: false });
+
+    await expect(installAgent('gemini')).resolves.toMatchObject({ version: '0.52.0' });
+    // 2번째 호출은 @latest 스펙이어야 한다.
+    expect(spawnMock.mock.calls[1][0].args).toContain('@google/gemini-cli@latest');
+  });
+
+  it('version-not-found 실패 메시지는 권한 오류로 오도하지 않는다', async () => {
+    // 폴백까지 실패(계속 ETARGET) → 최종 에러 메시지가 "권한"을 단정하지 않아야
+    spawnMock.mockResolvedValue({ code: 1, stdout: '', stderr: 'npm error code ETARGET No matching version' });
+    await expect(installAgent('gemini')).rejects.toMatchObject({ name: 'AgentCliError' });
+    const err = await installAgent('gemini').catch((e) => e);
+    expect(String(err.message)).not.toContain('관리자 권한이 필요');
   });
 
   it('rejects when npm succeeds but the installed CLI is still unavailable', async () => {
