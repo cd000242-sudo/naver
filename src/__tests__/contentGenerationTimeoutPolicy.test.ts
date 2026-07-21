@@ -221,7 +221,9 @@ describe('content generation timeout policy', () => {
 
   it('keeps hidden post-generation LLM patch calls explicit opt-in', () => {
     expect(costPolicySrc).toMatch(/CONTENT_ALLOW_EXTRA_LLM_PATCHES/);
-    expect(costPolicySrc).toMatch(/allowLocalizedRepair\s*=\s*patchOverride\s*===\s*'1'/);
+    // [v2.11.133] Opt-in now comes from either the env var (authoritative when
+    // set) or the app-setting toggle — never silently enabled.
+    expect(costPolicySrc).toMatch(/allowLocalizedRepair\s*=\s*patchOverride\s*!=\s*null\s*\n?\s*\?\s*patchOverride\s*===\s*'1'\s*\n?\s*:\s*config\?\.allowQualityRepairPass\s*===\s*true/);
     expect(costPolicySrc).not.toMatch(/modelProfile\.tier\s*!==\s*'value'/);
   });
 

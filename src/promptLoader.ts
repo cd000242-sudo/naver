@@ -1242,8 +1242,12 @@ export function buildFullPrompt(
     }
     if (productInfo.reviews && productInfo.reviews.length > 0) {
       productBlock += `⭐ 실제 구매자 리뷰:\n`;
+      // [v2.11.133] 200 -> 500 chars: truncating dropped exactly the
+      // late-sentence details (noise, install, defects) the post needs.
+      // [v2.11.134] 500 -> 600 — aligned with the crawler's per-review cap so
+      // curated evidence reaches the prompt uncut.
       productInfo.reviews.forEach((review, idx) => {
-        productBlock += `  ${idx + 1}. "${review.substring(0, 200)}${review.length > 200 ? '...' : ''}"\n`;
+        productBlock += `  ${idx + 1}. "${review.substring(0, 600)}${review.length > 600 ? '...' : ''}"\n`;
       });
     } else {
       // P0 review guard stub (SPEC-REVIEW-001): when no reviews were collected

@@ -135,6 +135,10 @@ export interface AppConfig {
   //   기본 OFF: 신뢰성 절대 우선 사용자용 옵션. Claude API 키 + claude provider 동시 충족 시 활성.
   //   동작: prompt에 강화 abstention 지시 추가 — "자료 없으면 모르겠다고 답하라" 명시.
   claudeAbstentionMode?: boolean;
+  // [v2.11.133] 품질 보정 패스 (2-pass) — 초안을 버리지 않고 제목/서론 패치 +
+  //   QualityGate self-critique 1회 보정. 기본 OFF (글당 저비용 LLM 호출 1~2회 추가).
+  //   발행 차단 없음: 보정 실패 시 원문 유지.
+  allowQualityRepairPass?: boolean;
   // ✅ [v2.7.61] AI 이미지 관련성 검증 (Gemini Vision)
   imageRelevanceCheck?: boolean; // true 시 수집 이미지마다 AI가 관련성 평가
   imageRelevanceThreshold?: number; // 0~100, 기본 60
@@ -857,6 +861,8 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         'aiTabFriendlyMode',
         // [v2.10.236] Claude Sonnet abstention 모드 토글 보존
         'claudeAbstentionMode',
+        // [v2.11.133] 품질 보정 패스 토글 보존
+        'allowQualityRepairPass',
       ];
       let preserved = 0;
       for (const k of PRESERVE_KEYS) {

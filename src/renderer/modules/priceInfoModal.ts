@@ -110,7 +110,7 @@ function bindAgentAction(
           && res.authState === 'already_authenticated'
         ) {
           announcedAgentLoginTargets.add(statusEl);
-          toastManager.success(`\u2705 ${provider === 'codex' ? 'Codex' : 'Claude Code'} \uB85C\uADF8\uC778\uC774 \uC774\uBBF8 \uC790\uB3D9 \uC778\uC2DD\uB418\uC5B4 \uC788\uC2B5\uB2C8\uB2E4.`);
+          toastManager.success(`\u2705 ${provider === 'codex' ? 'Codex' : provider === 'gemini' ? 'Gemini CLI' : 'Claude Code'} \uB85C\uADF8\uC778\uC774 \uC774\uBBF8 \uC790\uB3D9 \uC778\uC2DD\uB418\uC5B4 \uC788\uC2B5\uB2C8\uB2E4.`);
         } else {
           if (action === 'login') announcedAgentLoginTargets.add(statusEl);
           toastManager.success(action === 'install' ? '\u2705 CLI \uC124\uCE58 \uC644\uB8CC' : '\u2705 \uB85C\uADF8\uC778 \uC644\uB8CC');
@@ -201,6 +201,7 @@ export async function refreshAgentStatusBadges(
   const targets = [
     { provider: 'codex', elId: 'agent-codex-status', actionsId: 'agent-codex-actions', installId: 'agent-codex-install-btn', loginId: 'agent-codex-login-btn', switchId: 'agent-codex-switch-btn' },
     { provider: 'claude', elId: 'agent-claude-status', actionsId: 'agent-claude-actions', installId: 'agent-claude-install-btn', loginId: 'agent-claude-login-btn', switchId: 'agent-claude-switch-btn' },
+    { provider: 'gemini', elId: 'agent-gemini-status', actionsId: 'agent-gemini-actions', installId: 'agent-gemini-install-btn', loginId: 'agent-gemini-login-btn', switchId: 'agent-gemini-switch-btn' },
   ] as const;
   const selectedProviders = new Set(options.providers ?? targets.map((target) => target.provider));
   const selectedTargets = targets.filter((target) => selectedProviders.has(target.provider));
@@ -253,7 +254,7 @@ export async function refreshAgentStatusBadges(
       if (s.available !== true) {
         const subscriptionInactive = s.errorCode === 'subscription_inactive';
         const rateLimited = s.errorCode === 'rate_limited';
-        const providerLabel = t.provider === 'codex' ? 'Codex' : 'Claude';
+        const providerLabel = t.provider === 'codex' ? 'Codex' : t.provider === 'gemini' ? 'Gemini' : 'Claude';
         el.textContent = subscriptionInactive
           ? `\u274C ${providerLabel} \uAD6C\uB3C5 \uAE30\uAC04 \uB9CC\uB8CC \uB610\uB294 \uC0AC\uC6A9 \uBD88\uAC00 \u2014 \uACC4\uC815 \uC804\uD658 \uD6C4 \uB2E4\uC2DC \uC5F0\uACB0`
           : rateLimited
@@ -271,7 +272,7 @@ export async function refreshAgentStatusBadges(
       el.style.color = '#15803d';
       if (!announcedAgentLoginTargets.has(el)) {
         announcedAgentLoginTargets.add(el);
-        const providerLabel = t.provider === 'codex' ? 'Codex' : 'Claude Code';
+        const providerLabel = t.provider === 'codex' ? 'Codex' : t.provider === 'gemini' ? 'Gemini CLI' : 'Claude Code';
         toastManager.success(`\u2705 ${providerLabel} \uB85C\uADF8\uC778 \uC790\uB3D9 \uC778\uC2DD \uC644\uB8CC`);
       }
       // \u2705 [v2.11.49] \uB85C\uADF8\uC778 \uC0C1\uD0DC\uC77C \uB54C "\uACC4\uC815 \uC804\uD658" \uBC84\uD2BC \uB178\uCD9C (\uB85C\uADF8\uC544\uC6C3 \u2192 \uB2E4\uB978 \uACC4\uC815 \uC7AC\uB85C\uADF8\uC778)
@@ -974,6 +975,7 @@ export async function initPriceInfoModal(): Promise<void> {
           'claude-opus': '👑 Claude Fable 5 (프리미엄)',
           'agent-codex': '🤖 에이전트 (Codex · 별도 API 키 불필요)',
           'agent-claude': '🤖 에이전트 (Claude Code · 별도 API 키 불필요)',
+          'agent-gemini': '🚀 Gemini 에이전트 (Antigravity · 별도 API 키 불필요)',
         };
         navStatusEl.textContent = `현재: ${modelNames[activeTextModel] || activeTextModel}`;
       }
@@ -1125,6 +1127,14 @@ export async function initPriceInfoModal(): Promise<void> {
       if (factCheckEl) factCheckEl.checked = (config as any).useNaverFactCheck !== false;
     } catch (e) {
       console.warn('[priceInfoModal] 네이버 fact-check 토글 로드 실패:', e);
+    }
+
+    // [v2.11.133] 품질 보정 패스 토글 로드 — 기본 OFF (opt-in, 저비용 2-pass 보정)
+    try {
+      const repairEl = document.getElementById('quality-repair-pass') as HTMLInputElement | null;
+      if (repairEl) repairEl.checked = (config as any).allowQualityRepairPass === true;
+    } catch (e) {
+      console.warn('[priceInfoModal] 품질 보정 패스 토글 로드 실패:', e);
     }
 
     // 자동 관련글 링크 토글 로드 — 기본 OFF (opt-in). 이전글 엮기가 이미 관련
@@ -1395,6 +1405,8 @@ export async function initPriceInfoModal(): Promise<void> {
           })(),
           // ✅ [v2.10.361] Perplexity 팩트 검증 + 자동 재작성 토글 저장 (기본 OFF, 비용 차감)
           usePerplexityFactCheck: (document.getElementById('use-perplexity-factcheck') as HTMLInputElement | null)?.checked || false,
+          // [v2.11.133] 품질 보정 패스 토글 저장 (기본 OFF, 명시 ON 시에만 true)
+          allowQualityRepairPass: (document.getElementById('quality-repair-pass') as HTMLInputElement | null)?.checked || false,
           // ✅ [v2.10.229] 자동 관련글 링크 토글 저장 (기본 ON, undefined도 true 취급)
           autoInsertInternalLinks: (() => {
             const el = document.getElementById('auto-insert-internal-links') as HTMLInputElement | null;
@@ -1509,6 +1521,7 @@ export async function initPriceInfoModal(): Promise<void> {
                 'claude-opus': '👑 Claude Fable 5',
                 'agent-codex': '🤖 에이전트 (Codex 구독)',
                 'agent-claude': '🤖 에이전트 (Claude Code 구독)',
+                'agent-gemini': '🚀 Gemini 에이전트 (Antigravity 구독)',
               };
               statusEl.textContent = `현재: ${names[config.primaryGeminiTextModel] || config.primaryGeminiTextModel}`;
             }

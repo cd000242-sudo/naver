@@ -100,6 +100,33 @@ describe('Gemini cost optimizer policy', () => {
     expect(enabledPolicy.allowQualityGateSelfCritique).toBe(true);
   });
 
+  // [v2.11.133] App-setting opt-in: the env switches are unreachable in the
+  // packaged app, so allowQualityRepairPass (settings toggle) must enable the
+  // localized repair — with the env var staying authoritative when set.
+  it('enables localized repair via the app-setting opt-in', () => {
+    const policy = resolveContentGenerationCostPolicy(
+      { primaryGeminiTextModel: 'openai-gpt4o-mini', allowQualityRepairPass: true },
+      {},
+    );
+    expect(policy.allowLlmTitlePatch).toBe(true);
+    expect(policy.allowLlmIntroPatch).toBe(true);
+    expect(policy.allowQualityGateSelfCritique).toBe(true);
+    // The whole-post regeneration budget stays env-only (drafts are never discarded).
+    expect(policy.maxAttempts).toBe(0);
+  });
+
+  it('keeps repair off by default and lets the env var override the app setting', () => {
+    expect(resolveContentGenerationCostPolicy(
+      { primaryGeminiTextModel: 'openai-gpt4o-mini' },
+      {},
+    ).allowQualityGateSelfCritique).toBe(false);
+
+    expect(resolveContentGenerationCostPolicy(
+      { primaryGeminiTextModel: 'openai-gpt4o-mini', allowQualityRepairPass: true },
+      { CONTENT_ALLOW_EXTRA_LLM_PATCHES: '0' },
+    ).allowQualityGateSelfCritique).toBe(false);
+  });
+
   it('lets an environment override raise the attempt budget deliberately', () => {
     expect(resolveContentGenerationCostPolicy({}, { CONTENT_MAX_ATTEMPTS: '3' }).maxAttempts).toBe(3);
     expect(resolveContentGenerationCostPolicy(

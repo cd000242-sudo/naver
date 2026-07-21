@@ -729,14 +729,17 @@ async function searchNaverForContent(
   clientId: string,
   clientSecret: string,
   searchType: 'blog' | 'news' | 'webkr' | 'shop' | 'image' = 'blog',
-  displayCount: number = 30  // ✅ 더 많은 결과 수집
+  displayCount: number = 30,  // ✅ 더 많은 결과 수집
+  // [v2.11.133] 'sim' (relevance) approximates actual top-ranked posts for
+  // full-text sourcing; default stays 'date' for existing snippet callers.
+  sort: 'date' | 'sim' = 'date'
 ): Promise<NaverSearchResult[]> {
   const results: NaverSearchResult[] = [];
 
   try {
     const fetchImpl = await ensureFetch();
     const encodedQuery = encodeURIComponent(query);
-    const url = `https://openapi.naver.com/v1/search/${searchType}.json?query=${encodedQuery}&display=${displayCount}&sort=date`;
+    const url = `https://openapi.naver.com/v1/search/${searchType}.json?query=${encodedQuery}&display=${displayCount}&sort=${sort}`;
 
     console.log(`[네이버 검색 API] "${query}" 검색 중 (${searchType}, ${displayCount}개)...`);
 
@@ -1563,6 +1566,110 @@ async function collectNaverSearchContent(
     totalChars: combinedContent.length,
     sources,
   };
+}
+
+// [v2.11.133] Snippet-only sourcing was the root cause of thin posts: each
+// search-API item is an 80-160 char preview with no numbers/conditions/steps.
+// This fetches the FULL TEXT of top-ranked posts so the model has concrete
+// facts to cite. Failures are non-fatal — callers fall back to snippets alone.
+const FULLTEXT_TOTAL_BUDGET_CHARS = 8000;
+const FULLTEXT_PER_ARTICLE_CHARS = 2500;
+const FULLTEXT_MAX_SUCCESS = 5;
+
+export async function collectTopArticleFullTexts(
+  keyword: string,
+  clientId: string,
+  clientSecret: string,
+  logger: (message: string) => void = console.log,
+): Promise<{ text: string; count: number; urls: string[] }> {
+  try {
+    const settled = await Promise.allSettled([
+      searchNaverForContent(keyword, clientId, clientSecret, 'blog', 8, 'sim'),
+      searchNaverForContent(keyword, clientId, clientSecret, 'news', 4, 'sim'),
+    ]);
+    const blogLinks = settled[0].status === 'fulfilled' ? settled[0].value : [];
+    const newsLinks = settled[1].status === 'fulfilled' ? settled[1].value : [];
+    // Blogs first (closest to the target format), then news for hard facts.
+    const candidates = [...blogLinks, ...newsLinks]
+      .map((r) => ({ title: r.title, link: r.link }))
+      .filter((r) => typeof r.link === 'string' && /^https?:\/\//.test(r.link));
+
+    const parts: string[] = [];
+    const usedUrls: string[] = [];
+    let totalChars = 0;
+
+    for (const candidate of candidates) {
+      if (parts.length >= FULLTEXT_MAX_SUCCESS || totalChars >= FULLTEXT_TOTAL_BUDGET_CHARS) break;
+      try {
+        const article = await fetchArticleContent(candidate.link);
+        const content = (article.content || '').trim();
+        if (content.length < 300) continue;
+        const excerpt = content.substring(0, FULLTEXT_PER_ARTICLE_CHARS);
+        const title = article.title || candidate.title || '';
+        parts.push(`[상위글 ${parts.length + 1}${title ? ` — ${title}` : ''}]\n${excerpt}`);
+        usedUrls.push(candidate.link);
+        totalChars += excerpt.length;
+        await new Promise((resolve) => setTimeout(resolve, 300));
+      } catch {
+        // Per-URL failures are expected (deleted posts, blocks) — keep going.
+      }
+    }
+
+    if (parts.length === 0) return { text: '', count: 0, urls: [] };
+    logger(`[플랫폼 콘텐츠 수집] 📚 상위글 풀텍스트 ${parts.length}건 확보 (${totalChars.toLocaleString()}자)`);
+    return {
+      text: `=== 상위 노출 글 본문 발췌 (사실 자료 — 수치·조건·절차는 이 자료 범위에서 사용) ===\n${parts.join('\n\n')}`,
+      count: parts.length,
+      urls: usedUrls,
+    };
+  } catch (error) {
+    logger(`[플랫폼 콘텐츠 수집] ⚠️ 상위글 풀텍스트 수집 실패 (스니펫만 사용): ${(error as Error).message}`);
+    return { text: '', count: 0, urls: [] };
+  }
+}
+
+// [v2.11.133] Reader-situation material for empathy-driven modes (homefeed/
+// business/mate): real 지식iN questions show what readers actually face before
+// they search. Full question body preferred; snippet fallback when the page
+// crawl fails. Non-fatal — empty string keeps the previous behavior.
+export async function collectKinReaderContext(
+  keyword: string,
+  maxQuestions: number = 3,
+): Promise<string> {
+  try {
+    const query = (keyword || '').trim();
+    if (!query) return '';
+    const { searchKin, stripHtmlTags } = await import('./naverSearchApi.js');
+    const result = await searchKin({ query, display: 6, sort: 'sim' });
+    const items = (result?.items || []).filter((it) => typeof it?.link === 'string' && /^https?:\/\//.test(it.link));
+    if (items.length === 0) return '';
+
+    const parts: string[] = [];
+    for (const item of items) {
+      if (parts.length >= maxQuestions) break;
+      const title = stripHtmlTags(String(item.title || ''));
+      let body = '';
+      try {
+        const article = await fetchArticleContent(item.link);
+        body = (article.content || '').trim().substring(0, 800);
+      } catch {
+        // Page crawl failure -> snippet fallback below.
+      }
+      if (body.length < 100) body = stripHtmlTags(String(item.description || ''));
+      if (!title && !body) continue;
+      parts.push(`[질문 ${parts.length + 1}] ${title}\n${body}`);
+      await new Promise((resolve) => setTimeout(resolve, 300));
+    }
+
+    if (parts.length === 0) return '';
+    console.log(`[sourceAssembler] 💬 지식iN 독자 상황 재료 ${parts.length}건 확보 ("${query}")`);
+    return `=== 독자의 실제 상황 (지식iN 질문 — 공감·구성 재료) ===\n`
+      + `⚠️ 아래는 실제 독자들이 검색 전에 겪는 상황입니다. 서두 공감과 본문 구성(조건·예외·확인 순서)에 참고하되, 특정 질문자의 상황을 그대로 복사하거나 작성자 본인 경험처럼 쓰지 마세요.\n`
+      + parts.join('\n\n') + '\n';
+  } catch (error) {
+    console.warn(`[sourceAssembler] 지식iN 상황 재료 수집 실패 (무시): ${(error as Error).message}`);
+    return '';
+  }
 }
 
 // ✅ 네이버 검색 API로 풍부한 콘텐츠 수집 (빠르고 안정적!)
@@ -5992,6 +6099,17 @@ async function fetchSingleSource(
 
             console.log(`[fetchSingleSource] 🎯 정확한 상품 매칭: "${productName}" (${priceNum !== null ? priceNum.toLocaleString() + '원' : '가격 미수집'})`);
 
+            // [v2.11.135] This branch (naver.me/brandconnect entry — the URL
+            // shape users actually paste) dropped the crawled reviews entirely:
+            // rawText had no review section and no shoppingEvidence was
+            // returned, so the P0 review guard saw 0 reviews and demoted every
+            // 후기형 post to spec-analysis. Wire the same evidence snapshot the
+            // general-mall branch uses.
+            const crawledReviews = Array.isArray(productInfo.reviewTexts) ? productInfo.reviewTexts : [];
+            const reviewSection = crawledReviews.length > 0
+              ? `\n=== 실제 구매자 리뷰 (${productInfo.reviewCount ?? crawledReviews.length}건 중 발췌${productInfo.rating ? `, 평점 ${productInfo.rating}` : ''}) ===\n${crawledReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n`
+              : await buildCompetitorComparisonSection(productName);
+
             title = productName;
             content = `
 상품명: ${productName}
@@ -6000,10 +6118,22 @@ ${priceLine}브랜드: ${brand}
 
 === 제품 상세 정보 ===
 ${productDescription}
-`;
+${reviewSection}`;
             images = productInfo.mainImage ? [productInfo.mainImage, ...(productInfo.galleryImages || [])] : [];
 
-            console.log(`[fetchSingleSource] ✅ crawlFromAffiliateLink 성공: "${productName}" (설명 ${productDescription.length}자, 이미지 ${images.length}개)`);
+            const affiliateEvidence = buildShoppingEvidenceSnapshot({
+              url,
+              resolvedUrl,
+              title: productName,
+              description: productDescription,
+              spec: '',
+              price: productInfo.price != null ? String(productInfo.price) : '',
+              reviews: crawledReviews,
+              images,
+              hasProductStructuredData: true,
+            });
+
+            console.log(`[fetchSingleSource] ✅ crawlFromAffiliateLink 성공: "${productName}" (설명 ${productDescription.length}자, 리뷰 ${crawledReviews.length}건, 이미지 ${images.length}개)`);
 
             return {
               title,
@@ -6011,6 +6141,7 @@ ${productDescription}
               publishedAt: new Date().toISOString(),
               images,
               keywords: [productName, brand].filter(Boolean),
+              ...(affiliateEvidence.usable ? { shoppingEvidence: affiliateEvidence } : {}),
               success: true,
             };
           } else {
@@ -6271,6 +6402,119 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
   }
 }
 
+// [v2.11.135] Mobile unified-search shopping-block parser. shop.json dies on
+// 2026-07-31 (notice 32564, no replacement); the mobile search page is SSR
+// HTML, needs no API key, and was verified reachable live. Titles may carry
+// small glued fragments (view counts) — acceptable for context-only material.
+// Pure function, exported for tests.
+export function parseMobileShoppingMarketItems(html: string): Array<{ title: string; price: number; mall?: string }> {
+  // Inline emphasis tags (<mark> around the search term) must NOT split a
+  // title, so they are stripped first. Every OTHER tag boundary becomes ';'
+  // (already a list separator here) so text from unrelated elements can never
+  // glue into a bogus product name.
+  const text = (html || '')
+    .replace(/<\/?(?:mark|b|strong|em)[^>]*>/gi, '')
+    .replace(/<[^>]*>/g, ';')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;|&#39;/g, "'");
+  const items: Array<{ title: string; price: number; mall?: string }> = [];
+  const seen = new Set<string>();
+  const priceRegex = /(\d{1,3}(?:,\d{3})+)원/g;
+  let match: RegExpExecArray | null;
+  while ((match = priceRegex.exec(text)) !== null && items.length < 12) {
+    const price = Number(match[1].replace(/,/g, ''));
+    if (!Number.isFinite(price) || price < 1000) continue;
+    const before = text.slice(Math.max(0, match.index - 120), match.index);
+    const namePart = before.split(/[;|]/).filter((segment) => segment.trim()).pop() || '';
+    const title = namePart
+      .replace(/\s+/g, ' ')
+      .trim()
+      .replace(/\d{4,}$/, '') // 조회수 등 붙어버린 숫자 꼬리 제거
+      .trim()
+      .substring(0, 60);
+    if (title.length < 6 || /원$|무료배송|리뷰|찜하기|광고/.test(title)) continue;
+    // Script/URL fragments (e.g. "site%3A...&where=m_web") are not products.
+    if (/%[0-9A-Fa-f]{2}|https?:|www\.|[="{}\\]/.test(title)) continue;
+    if (!/[가-힣]{2}/.test(title.replace(/\s/g, ''))) continue;
+    const after = text.slice(match.index + match[0].length, match.index + match[0].length + 40);
+    const mallMatch = after.match(/·\s*([^;|]{1,24})/);
+    const key = `${title}:${price}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    items.push({ title, price, ...(mallMatch ? { mall: mallMatch[1].trim() } : {}) });
+  }
+  return items;
+}
+
+async function fetchMobileShoppingMarketItems(query: string): Promise<Array<{ title: string; price: number; mall?: string }>> {
+  try {
+    const fetchImpl = await ensureFetch();
+    const resp = await fetchImpl(
+      `https://m.search.naver.com/search.naver?where=m&query=${encodeURIComponent(query)}`,
+      {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
+          'Accept-Language': 'ko-KR,ko;q=0.9',
+        },
+        signal: AbortSignal.timeout?.(12000),
+      },
+    );
+    if (!resp.ok) return [];
+    return parseMobileShoppingMarketItems(await resp.text());
+  } catch {
+    return [];
+  }
+}
+
+// [v2.11.133] Review-less affiliate posts degrade into spec re-listing. Feed the
+// model market context (price band + similar listings) so it can write
+// comparison-criteria content instead. The block is labeled context-only:
+// swapping the subject product from search results was a past bug
+// (contentGenerator.ts "다른 제품 rawText 대체" regression) — never let these
+// items become the post subject. Failures are silently non-fatal.
+// [v2.11.135] Source chain: shop.json API first (works until 2026-07-31) →
+// mobile-search HTML parse afterwards, so this feature survives the sunset.
+export async function buildCompetitorComparisonSection(productName: string): Promise<string> {
+  try {
+    const query = (productName || '').replace(/\s+/g, ' ').trim().split(' ').slice(0, 4).join(' ');
+    if (!query) return '';
+
+    let entries: Array<{ title: string; price: number; mall?: string }> = [];
+    try {
+      const { searchShopping, stripHtmlTags } = await import('./naverSearchApi.js');
+      const result = await searchShopping({ query, display: 10, sort: 'sim' });
+      entries = (result?.items || [])
+        .filter((it) => it?.title && it?.lprice)
+        .map((it) => ({
+          title: stripHtmlTags(String(it.title)).substring(0, 60),
+          price: Number(it.lprice),
+          ...(it.mallName ? { mall: it.mallName } : {}),
+        }));
+    } catch {
+      // searchShopping never throws today, but keep this branch airtight.
+    }
+
+    if (entries.filter((e) => Number.isFinite(e.price) && e.price > 0).length < 3) {
+      entries = await fetchMobileShoppingMarketItems(query);
+    }
+    const usable = entries.filter((e) => e.title && Number.isFinite(e.price) && e.price > 0);
+    if (usable.length < 3) return '';
+
+    const prices = usable.map((e) => e.price);
+    const band = `유사 상품 가격대: ${Math.min(...prices).toLocaleString()}원 ~ ${Math.max(...prices).toLocaleString()}원\n`;
+    const lines = usable.slice(0, 8).map((e, i) =>
+      `${i + 1}. ${e.title} — ${e.price.toLocaleString()}원${e.mall ? ` (${e.mall})` : ''}`);
+    console.log(`[sourceAssembler] 🛒 리뷰 0건 → 유사 상품 비교 재료 ${lines.length}건 주입 ("${query}")`);
+    return `\n=== 유사 상품 시장 맥락 (비교 기준용 참고 자료) ===\n`
+      + `⚠️ 아래는 비교 기준을 세우기 위한 시장 맥락입니다. 글의 주제 상품을 바꾸거나 아래 상품을 주인공으로 쓰지 마세요. 아래 가격을 주제 상품의 가격으로 쓰지 마세요.\n`
+      + band + lines.join('\n') + '\n';
+  } catch (error) {
+    console.warn(`[sourceAssembler] 유사 상품 비교 재료 수집 실패 (무시): ${(error as Error).message}`);
+    return '';
+  }
+}
+
 export async function assembleContentSource(input: SourceAssemblyInput): Promise<AssembledSource> {
   const warnings: string[] = [];
 
@@ -6357,7 +6601,9 @@ export async function assembleContentSource(input: SourceAssemblyInput): Promise
           const crawledReviews = Array.isArray(productInfo.reviewTexts) ? productInfo.reviewTexts : [];
           const reviewSection = crawledReviews.length > 0
             ? `\n=== 실제 구매자 리뷰 (${productInfo.reviewCount ?? crawledReviews.length}건 중 발췌${productInfo.rating ? `, 평점 ${productInfo.rating}` : ''}) ===\n${crawledReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n`
-            : '';
+            // [v2.11.133] No reviews -> inject market context so the post can
+            // pivot to comparison criteria instead of re-listing specs.
+            : await buildCompetitorComparisonSection(productName);
 
           // 즉시 source 객체 반환 (크롤링 없이!)
           const source: ContentSource = {
@@ -6404,7 +6650,9 @@ ${reviewSection}
 
           return {
             source,
-            warnings: [`✅ 직접 API로 "${productName}" 정보 수집 완료! (설명 ${productDescription.length}자)`],
+            // [v2.11.134] Surface the review-evidence tier in the user-visible
+            // log so review-less(=spec-analysis) publishes are identifiable.
+            warnings: [`✅ 직접 API로 "${productName}" 정보 수집 완료! (설명 ${productDescription.length}자, 구매자 리뷰 ${crawledReviews.length}건${crawledReviews.length === 0 ? ' — 스펙 분석 모드로 진행' : ''})`],
           };
         } else {
           // ✅ [2026-03-15 FIX] 1회 재시도 - 간헐적 크롤링 실패 대응
@@ -6423,7 +6671,7 @@ ${reviewSection}
                 sourceType: 'custom_text',
                 url: rssUrlInput,
                 title: retryName,
-                rawText: `\n상품명: ${retryName}\n${retryPriceLine}브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc}\n${retryReviews.length > 0 ? `\n=== 실제 구매자 리뷰 (발췌) ===\n${retryReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n` : ''}`,
+                rawText: `\n상품명: ${retryName}\n${retryPriceLine}브랜드: ${storeName}\n판매처: 네이버 스마트스토어\n\n=== 제품 상세 정보 ===\n${retryDesc}\n${retryReviews.length > 0 ? `\n=== 실제 구매자 리뷰 (발췌) ===\n${retryReviews.map((r, i) => `${i + 1}. ${r}`).join('\n')}\n` : await buildCompetitorComparisonSection(retryName)}`,
                 productPrice: retryPriceNum !== null ? `${retryPriceNum.toLocaleString()}원` : undefined,
                 productSpec: retryDesc.length >= 80 ? retryDesc : undefined,
                 productReviews: retryReviews.length > 0 ? retryReviews : undefined,
@@ -6439,7 +6687,7 @@ ${reviewSection}
                 images: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
                 collectedImages: retryInfo.mainImage ? [retryInfo.mainImage, ...(retryInfo.galleryImages || [])] : [],
               };
-              return { source: retrySource, warnings: [`✅ 재시도로 "${retryName}" 정보 수집 완료!`] };
+              return { source: retrySource, warnings: [`✅ 재시도로 "${retryName}" 정보 수집 완료! (구매자 리뷰 ${retryReviews.length}건${retryReviews.length === 0 ? ' — 스펙 분석 모드로 진행' : ''})`] };
             } else {
               console.log(`   ⚠️ crawlFromAffiliateLink 재시도도 실패 - 폴백 진행`);
             }
@@ -7212,12 +7460,22 @@ export async function collectContentFromPlatforms(
         if (apiResult.content && apiResult.content.length > 500) {
           logger(`[플랫폼 콘텐츠 수집] ✅ 네이버 API 성공: ${apiResult.content.length}자 (${apiResult.sources.join(', ')})`);
 
+          // [v2.11.133] Snippets alone are 80-160 char previews with no usable
+          // facts. Merge full texts of top-ranked posts (density source) with
+          // the snippets (breadth map). Full texts go FIRST so any downstream
+          // truncation trims snippets, not facts. Fetch failure keeps the
+          // previous snippet-only behavior.
+          const fullTexts = await collectTopArticleFullTexts(keyword, clientId, clientSecret, logger);
+          const collectedText = fullTexts.text
+            ? `${fullTexts.text}\n\n=== 검색 결과 스니펫 (맥락 참고용) ===\n${apiResult.content}`
+            : apiResult.content;
+
           return {
-            collectedText: apiResult.content,
-            sourceCount: apiResult.sources.length,
-            urls: [], // API 결과는 URL 없음
+            collectedText,
+            sourceCount: apiResult.sources.length + fullTexts.count,
+            urls: fullTexts.urls,
             success: true,
-            message: `네이버 검색 API로 ${apiResult.totalChars}자 수집 완료 (${apiResult.sources.join(', ')})`,
+            message: `네이버 검색 API로 ${apiResult.totalChars}자${fullTexts.count > 0 ? ` + 상위글 본문 ${fullTexts.count}건` : ''} 수집 완료 (${apiResult.sources.join(', ')})`,
           };
         } else {
           logger(`[플랫폼 콘텐츠 수집] ⚠️ 네이버 API 결과 부족 (${apiResult.content?.length || 0}자), URL 크롤링으로 보충...`);

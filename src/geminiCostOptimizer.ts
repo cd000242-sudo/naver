@@ -21,6 +21,12 @@ export interface ContentGenerationCostPolicyInput {
   costSaverMode?: boolean;
   geminiUseFreeQuotaBeforePaid?: boolean;
   primaryGeminiTextModel?: string;
+  // [v2.11.133] App-setting opt-in for the localized 2-pass quality repair
+  // (title/intro patch + QualityGate self-critique). The env switches below
+  // were unreachable in the packaged app, leaving the repair infrastructure
+  // permanently dead for real users. Draft is never discarded: repair failure
+  // keeps the original and publishing always proceeds.
+  allowQualityRepairPass?: boolean;
 }
 
 export interface ContentGenerationCostPolicy {
@@ -88,8 +94,12 @@ export function resolveContentGenerationCostPolicy(
 
   // Post-generation LLM patches spend another paid request. Keep them strictly
   // opt-in so a usable first draft is never discarded by a score-only gate.
+  // [v2.11.133] The env var stays authoritative when set; otherwise the
+  // app-setting opt-in (allowQualityRepairPass) enables the repair pass.
   const patchOverride = env.CONTENT_ALLOW_EXTRA_LLM_PATCHES;
-  const allowLocalizedRepair = patchOverride === '1';
+  const allowLocalizedRepair = patchOverride != null
+    ? patchOverride === '1'
+    : config?.allowQualityRepairPass === true;
 
   return {
     costSaverOn,
