@@ -121,7 +121,8 @@ describe('Content Quality V3 production wiring', () => {
     expect(generator).toMatch(/if \(\s*allowAutomaticProviderRetry\s*&& allowLegacyPostDraftLlm\s*&& isSemanticDistinctnessJudgeEnabled\(\)[\s\S]{0,1200}judgeSectionDistinctness/);
     expect(generator).toMatch(/if \(allowPaidPostGenerationRepair && allowLegacyPostDraftLlm && !_useKwTitle && \(isShoppingConnectMode \|\| mode === 'affiliate'\)\)/);
 
-    expect(generator).toMatch(/if \(allowLegacyPostDraftLlm\) \{\s*try \{[\s\S]{0,500}factCheckAndRewrite/);
+    // [v2.11.134] 팩트체크는 factCheckRouter(runFactCheck)로 이관 — 게이트 계약은 동일.
+    expect(generator).toMatch(/if \(allowLegacyPostDraftLlm\) \{\s*try \{[\s\S]{0,700}runFactCheck/);
     expect(generator).toMatch(/if \(\s*allowAutomaticProviderRetry\s*&& allowLegacyPostDraftLlm\s*&& isSelfCritiqueEnabled/);
     expect(generator).toMatch(/const useLlmRubric = allowAutomaticProviderRetry\s*&&\s*allowLegacyPostDraftLlm\s*&& isLlmRubricEnabled/);
     expect(generator).toMatch(/if \(\s*allowPaidPostGenerationRepair\s*&&\s*allowLegacyPostDraftLlm\s*&&\s*_gateResult[\s\S]{0,900}selfCritiqueAndRewrite/);

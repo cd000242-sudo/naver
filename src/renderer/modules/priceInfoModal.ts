@@ -1430,7 +1430,9 @@ export async function initPriceInfoModal(): Promise<void> {
             return el ? el.checked : true;
           })(),
           // ✅ [v2.10.361] Perplexity 팩트 검증 + 자동 재작성 토글 저장 (기본 OFF, 비용 차감)
-          usePerplexityFactCheck: (document.getElementById('use-perplexity-factcheck') as HTMLInputElement | null)?.checked || false,
+          // [v2.11.134] 팩트체크 엔진 드롭다운 (usePerplexityFactCheck는 하위호환 미러)
+          factCheckEngine: (document.getElementById('fact-check-engine') as HTMLSelectElement | null)?.value || 'auto',
+          usePerplexityFactCheck: ((document.getElementById('fact-check-engine') as HTMLSelectElement | null)?.value || '') === 'perplexity',
           // [v2.11.133] 품질 보정 패스 토글 저장 (기본 OFF, 명시 ON 시에만 true)
           allowQualityRepairPass: (document.getElementById('quality-repair-pass') as HTMLInputElement | null)?.checked || false,
           // ✅ [v2.10.229] 자동 관련글 링크 토글 저장 (기본 ON, undefined도 true 취급)

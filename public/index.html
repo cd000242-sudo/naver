@@ -4738,19 +4738,23 @@
                     </label>
                 </div>
 
-                <!-- 7. Perplexity fact-check (v2.10.361 신규, 기본 OFF - 사용자 환경 비용 차감) -->
+                <!-- 7. 팩트체크 엔진 선택 (v2.11.134 — 비용 저렴한 순 정렬, 자동=저비용 폴백 체인) -->
                 <div class="field" style="margin-bottom: 0.5rem; padding: 0.8rem; background: rgba(99, 102, 241, 0.06); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 8px;">
-                    <label style="display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer;">
-                        <input type="checkbox" id="use-perplexity-factcheck" data-perplexity-factcheck-sync="1" style="margin-top: 0.3rem; cursor: pointer;">
-                        <div>
-                            <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.2rem;">🌐 Perplexity 팩트 검증 + 자동 재작성 <span style="color: #6366f1; font-size: 0.75rem;">[기본 OFF · 비용 추가]</span></div>
-                            <small style="color: var(--text-muted); font-size: 0.75rem; display: block; line-height: 1.4;">
-                                생성된 글을 Perplexity sonar에 보내 <strong>통계·연도·인물·법령·수치 등 환각 의심 문장</strong>을 자동 탐지하고 사실 기반으로 <strong>자동 재작성</strong>합니다.<br>
-                                <strong style="color: #6366f1;">⚠️ 비용 차감 주의:</strong> 글 1편당 약 <strong>₩50~150 추가</strong> (글 길이·모델 의존). Perplexity API 키 필수.<br>
-                                효과: 환각·거짓 사실 차단 → 네이버 저품질 판정 회피 + 신뢰도 ↑. 모든 모드(글 생성/풀오토/다중계정/반자동)에 적용.
-                            </small>
-                        </div>
-                    </label>
+                    <div style="font-weight: 700; color: var(--text-strong); margin-bottom: 0.4rem;">🔎 팩트체크 엔진 <span style="color: #6366f1; font-size: 0.75rem;">[비용 저렴한 순 · 기본 자동]</span></div>
+                    <select id="fact-check-engine" data-factcheck-engine-sync="1" style="width: 100%; padding: 0.45rem 0.6rem; border-radius: 6px; border: 1px solid rgba(99, 102, 241, 0.4); background: var(--bg-elev, #fff); color: var(--text-strong); cursor: pointer;">
+                        <option value="auto" selected>🤖 자동 — 크롤링 대조 → 부족하면 네이버 API → Perplexity (저비용 우선 폴백)</option>
+                        <option value="crawl">📄 크롤링 정보 바탕 — 수집 자료와 대조 (추가 비용 거의 없음)</option>
+                        <option value="naver">🟢 네이버 API — 네이버 검색 자료 수집 후 대조 (무료 쿼터)</option>
+                        <option value="gpt-claude">💬 GPT/Claude 지식 기반 — 검색 없이 모델 지식으로 검증 (~₩10~30/편)</option>
+                        <option value="perplexity">🌐 Perplexity 검색 검증 — 실시간 검색 대조 (~₩50~150/편)</option>
+                        <option value="gemini-grounding">💎 Gemini 그라운딩 — Google 검색 근거 (가장 정확·가장 비쌈, 자동 폴백 제외)</option>
+                        <option value="off">⏹️ 끔 — 팩트체크 교정 안 함</option>
+                    </select>
+                    <small style="color: var(--text-muted); font-size: 0.75rem; display: block; line-height: 1.5; margin-top: 0.4rem;">
+                        생성된 글의 <strong>통계·연도·인물·법령·수치 의심 문장</strong>을 탐지해 사실 기반으로 교정합니다. 실패해도 발행은 계속됩니다.<br>
+                        <strong>자동</strong>은 이미 수집한 자료(무료)부터 쓰고, 자료가 빈약할 때만 네이버 API → Perplexity(키 있을 때) 순으로 승격합니다.<br>
+                        <strong style="color: #6366f1;">⚠️ Gemini 그라운딩은 비용이 높아 자동 폴백에서 제외</strong> — 필요할 때만 직접 선택하세요.
+                    </small>
                 </div>
 
                 <!-- 9. Claude Sonnet abstention 모드 (v2.10.236 기본 OFF - 고비용) -->
@@ -13339,16 +13343,25 @@
     <!-- ✅ [v2.10.361] Perplexity 팩트검증 체크박스 동기화 — 모든 모달의 [data-perplexity-factcheck-sync] 통일 -->
     <script>
     (function syncPerplexityFactCheck() {
-      var LS_KEY = 'use-perplexity-factcheck';
-      function getAll() { return document.querySelectorAll('[data-perplexity-factcheck-sync="1"]'); }
+      // [v2.11.134] 체크박스 → 팩트체크 엔진 select 동기화로 교체.
+      // 구버전 LS('use-perplexity-factcheck'==='1')는 'perplexity'로 1회 마이그레이션.
+      var LS_KEY = 'fact-check-engine';
+      var LEGACY_KEY = 'use-perplexity-factcheck';
+      var VALID = ['off', 'auto', 'crawl', 'naver', 'gpt-claude', 'perplexity', 'gemini-grounding'];
+      function getAll() { return document.querySelectorAll('[data-factcheck-engine-sync="1"]'); }
       function load() {
-        try { return localStorage.getItem(LS_KEY) === '1'; } catch (e) { return false; }
+        try {
+          var v = localStorage.getItem(LS_KEY);
+          if (VALID.indexOf(v) >= 0) return v;
+          if (localStorage.getItem(LEGACY_KEY) === '1') return 'perplexity';
+          return 'auto';
+        } catch (e) { return 'auto'; }
       }
       function save(v) {
-        try { localStorage.setItem(LS_KEY, v ? '1' : '0'); } catch (e) { /* ignore */ }
+        try { localStorage.setItem(LS_KEY, v); } catch (e) { /* ignore */ }
       }
       function applyToAll(v) {
-        getAll().forEach(function (el) { if (el && el.checked !== v) { el.checked = v; } });
+        getAll().forEach(function (el) { if (el && el.value !== v) { el.value = v; } });
       }
       function bind() {
         var saved = load();
@@ -13357,9 +13370,9 @@
           if (el.__pfcBound) return;
           el.__pfcBound = true;
           el.addEventListener('change', function () {
-            save(el.checked);
-            applyToAll(el.checked);
-            console.warn('[PerplexityFactCheck UI] 동기화: ' + (el.checked ? 'ON' : 'OFF'));
+            save(el.value);
+            applyToAll(el.value);
+            console.warn('[FactCheck UI] 엔진 동기화: ' + el.value);
           });
         });
       }
