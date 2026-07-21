@@ -1638,18 +1638,28 @@ export function isPasteVisible(
   // append 지점(beforeText.length-2)에서 시작하고, 사라졌으면 0부터 찾는다.
   // 안전성: 커버리지 게이트(위)를 이미 통과한 케이스만 여기 도달하므로 본문 누락은 걸러진 뒤다.
   const beforePersistsInAfter = !!beforeText && afterText.includes(beforeText);
-  let cursor = beforePersistsInAfter ? Math.max(0, beforeText.length - 2) : 0;
-  for (const anchor of anchors) {
-    const foundAt = afterText.indexOf(anchor, cursor);
-    if (foundAt < 0) return false;
-    cursor = foundAt + anchor.length;
-  }
+  const searchStart = beforePersistsInAfter ? Math.max(0, beforeText.length - 2) : 0;
+
+  // [v2.11.140] 시작+끝 앵커로 섹션을 브라킷 검증. 이전엔 시작·중간·끝 앵커를 전부
+  // verbatim 일치해야 통과시켜, 에디터가 본문을 "모바일 단락 여러 개 + 하이라이트"로
+  // 렌더하며 중간 글자가 미세하게 달라지면(=콘텐츠는 정상) near-complete(cov 0.97)
+  // 붙여넣기를 EDITOR_PARTIAL_INSERT_UNRECOVERED로 오탐했다(실측: headAt=47, tailAt=192,
+  // cov=0.97, beforePersists=Y — 시작·끝 다 맞는데 실패). 중간 앵커는 보강용으로만 쓴다.
+  // 안전성(환불위기 회귀 차단): 아래 4중 게이트를 모두 유지 —
+  //   (1) 커버리지 gate(위, 0.82) → 본문 누락 차단
+  //   (2) reorder gate(위 branch, beforeText 유지+non-startsWith) → 앞/중간 삽입 차단
+  //   (3) 시작 앵커가 append 지점 이후 존재 → head 누락/오배치 차단
+  //   (4) 끝 앵커가 시작 뒤 + trailing<=8 → tail 누락/mid-insertion 차단
+  const firstAnchor = anchors[0];
+  if (!firstAnchor) return false;
+  const firstAnchorAt = afterText.indexOf(firstAnchor, searchStart);
+  if (firstAnchorAt < 0) return false;
 
   const lastAnchor = anchors[anchors.length - 1];
-  if (!lastAnchor) return false;
   const lastAnchorAt = afterText.lastIndexOf(lastAnchor);
+  if (lastAnchorAt < firstAnchorAt) return false;
   const trailingChars = afterText.length - (lastAnchorAt + lastAnchor.length);
-  return lastAnchorAt >= 0 && trailingChars <= 8;
+  return trailingChars <= 8;
 }
 
 function buildPasteFailureReason(

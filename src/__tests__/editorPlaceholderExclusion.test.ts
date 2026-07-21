@@ -77,4 +77,28 @@ describe('isPasteVisible — 라이브 리포트 시나리오 (기능 검증)', 
     const beforeB = { chars: ('앞부분 ' + oldContent).length, tables: 0, text: `앞부분 ${oldContent}` };
     expect(isPasteVisible(beforeB, mid, SECTION)).toBe(false);
   });
+
+  it('[v2.11.140] 중간 글자가 렌더로 미세히 달라도 시작·끝+커버리지면 통과 (실측 headAt=47/tailAt=192/cov0.97 재현)', () => {
+    // 에디터가 본문을 "모바일 단락 여러 개 + 하이라이트"로 렌더하며 중간 한 글자가 바뀌는
+    // 상황 재현. 시작(첫 앵커)·끝(마지막 앵커)은 동일, 길이 동일(커버리지 유지).
+    const before = 'ㄱ'.repeat(47); // 47자 캡션 잔존(beforePersists=Y) — 실측과 동일
+    const expected = SECTION; // ~170자 본문
+    const center = Math.floor(expected.length / 2); // 중간 앵커 구간, 첫/끝 21자 밖
+    const swapped = expected[center] === '가' ? '나' : '가';
+    const renderedSection = expected.slice(0, center) + swapped + expected.slice(center + 1);
+    const afterText = `${before}${renderedSection}`; // 캡션 뒤 정상 append
+    const beforeObj = { chars: before.length, tables: 0, text: before };
+    const afterObj = { chars: afterText.length, tables: 0, text: afterText };
+    expect(isPasteVisible(beforeObj, afterObj, expected)).toBe(true);
+  });
+
+  it('[v2.11.140 안전잠금] 진짜 끝부분(마지막 앵커) 누락이면 여전히 차단한다', () => {
+    const before = 'ㄱ'.repeat(47);
+    // 섹션 끝 40자가 실제로 안 들어온 truncation — 마지막 앵커 부재 → 차단
+    const truncated = SECTION.slice(0, SECTION.length - 40);
+    const afterText = `${before}${truncated}`;
+    const beforeObj = { chars: before.length, tables: 0, text: before };
+    const afterObj = { chars: afterText.length, tables: 0, text: afterText };
+    expect(isPasteVisible(beforeObj, afterObj, SECTION)).toBe(false);
+  });
 });
