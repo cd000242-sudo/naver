@@ -4383,8 +4383,10 @@ export class NaverBlogAutomation {
       return;
     }
 
-    const maxAttempts = 5;
+    // [v2.11.140] clear 후 재검증 여유를 위해 6회.
+    const maxAttempts = 6;
     let lastContext = 'editor context could not be inspected';
+    let clearedOnce = false;
 
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       this.ensureNotCancelled();
@@ -4410,6 +4412,17 @@ export class NaverBlogAutomation {
         }
 
         lastContext = `titleChars=${title.trim().length}, bodyChars=${stats?.bodyChars ?? 'unavailable'}`;
+
+        // ✅ [v2.11.140] 사용자 지시("실패한 초안이 있으면 성공시켜라"): 남은 초안을 한 번
+        //   자동으로 비우고 진행한다. 네이버가 임시저장 초안을 에디터에 자동 복원해 팝업만
+        //   닫아선 남던 문제(반복 EDITOR_DRAFT_CONTEXT_NOT_FRESH) 대응. 안전성: 비운 뒤에도
+        //   위 blank 검증을 통과해야만 return → 정리가 불완전하면 여전히 차단(혼합 발행 방지).
+        if (!clearedOnce) {
+          clearedOnce = true;
+          this.log(`🧹 남은 초안 감지(${lastContext}) → 자동 정리 후 재확인`);
+          await this.clearLeftoverEditorDraft().catch((e) => this.log(`   ⚠️ 초안 자동 정리 실패(무시): ${(e as Error).message}`));
+          continue; // 딜레이 없이 즉시 재검증
+        }
       }
 
       if (attempt < maxAttempts) {
@@ -4421,6 +4434,53 @@ export class NaverBlogAutomation {
       'EDITOR_DRAFT_CONTEXT_NOT_FRESH: 기존 작성중 글 또는 확인할 수 없는 편집 상태가 남아 있어 새 내용을 덮어쓰지 않았습니다. ' +
       `새 글을 선택하거나 기존 글을 정리한 뒤 다시 실행해 주세요. (${lastContext})`,
     );
+  }
+
+  /**
+   * [v2.11.140] freshness 검사에서 남은 초안(제목/본문)이 감지되면 에디터를 비워 새 발행을
+   * 진행할 수 있게 한다(사용자 지시: 실패한 초안이 있으면 성공시켜라). 네이버가 임시저장 초안을
+   * 에디터에 자동 복원해, 초안 팝업을 닫아도 내용이 남는 케이스 대응.
+   *   본문: 캐럿 고정 후 Ctrl+A → Delete / 제목: 클릭 후 Ctrl+A → Delete (inputTitle과 동일 패턴).
+   * best-effort — 실패해도 던지지 않는다. 정리 성공 여부는 호출부가 blank 재검증으로 확정하므로
+   * (부분 잔존 시 여전히 차단) 이 메서드가 완벽히 비우지 못해도 혼합 발행은 발생하지 않는다.
+   */
+  private async clearLeftoverEditorDraft(): Promise<void> {
+    const page = this.ensurePage();
+    const frame = await this.getAttachedFrame().catch(() => null);
+    if (!frame) return;
+
+    // 1) 본문 비우기 — 본문 마지막 편집 라인에 캐럿 고정 후 전체 선택 삭제
+    try {
+      await focusLastEditableLine(page, frame).catch(() => undefined);
+      await this.delay(120);
+      await page.keyboard.down('Control');
+      await page.keyboard.press('A');
+      await page.keyboard.up('Control');
+      await this.delay(100);
+      await page.keyboard.press('Delete');
+      await this.delay(200);
+    } catch (bodyErr) {
+      this.log(`   ⚠️ 본문 정리 스킵: ${(bodyErr as Error).message}`);
+    }
+
+    // 2) 제목 비우기 — 제목 클릭 후 전체 선택 삭제 (inputTitle의 덮어쓰기 패턴과 동일)
+    try {
+      const titleElement = await findEditorTitleInputElement(frame, page, 8000, (m) => this.log(m));
+      if (titleElement) {
+        await titleElement.click();
+        await this.delay(120);
+        await page.keyboard.down('Control');
+        await page.keyboard.press('A');
+        await page.keyboard.up('Control');
+        await this.delay(100);
+        await page.keyboard.press('Delete');
+        await this.delay(200);
+      }
+    } catch (titleErr) {
+      this.log(`   ⚠️ 제목 정리 스킵: ${(titleErr as Error).message}`);
+    }
+
+    this.log('🧹 남은 초안 정리 시도 완료 — blank 재검증으로 안전 판정');
   }
 
   /**
