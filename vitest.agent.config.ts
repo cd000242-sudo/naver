@@ -10,6 +10,7 @@ export default defineConfig({
     include: [
       'src/__tests__/agentCli.test.ts',
       'src/__tests__/agentGeneratePreflight.test.ts',
+      'src/__tests__/agentGenerateRetry.test.ts',
       'src/__tests__/agentProcessTreeTermination.test.ts',
       'src/__tests__/agentInstaller.test.ts',
       'src/__tests__/agentLoginVerification.test.ts',
