@@ -227,6 +227,36 @@ export async function checkImageFxGenerationReady(imageSource: string): Promise<
 }
 
 /**
+ * [v2.11.140] Flow 구독 사전 가드 — 로그인/구독 미확인 시에만 경고.
+ *   Flow는 labs.google의 제미나이 웹 구독(AI Pro) 무료 쿼터를 쓴다. 로그인이
+ *   확인되면(=구독 연동 완료) 경고 없이 조용히 진행하고, 미확인이면 구독 유도
+ *   모달로 차단한다. silent 폴백 없음 — 사용자가 구독하거나 다른 엔진을 직접 고른다.
+ */
+export async function checkFlowSubscription(imageSource: string): Promise<GuardResult> {
+    if (imageSource !== 'flow') return { block: false };
+
+    // 로그인(=구독 연동) 확인되면 경고 없이 진행 (구독자 반복 안내 방지)
+    try {
+        const status = await (window as any).api?.checkFlowLogin?.();
+        if (status?.loggedIn === true) return { block: false };
+    } catch {
+        // 확인 실패 시 안전하게 경고 노출 (fail-closed)
+    }
+
+    await showModal({
+        icon: '🍌',
+        title: 'Flow는 제미나이 웹 구독이 필요합니다',
+        bodyHtml: `
+            <p style="margin: 0 0 0.75rem;">flow를 무료로 사용하기 위해선 <strong>제미나이 웹 구독 플랜</strong>이 결제되어 있어야 합니다.</p>
+            <p style="margin: 0; color: #b8b8d4; font-size: 0.88rem;">이미 구독 중이라면 이미지 설정 모달의 <strong>🔗 Google 계정 연동</strong>으로 labs.google 로그인을 먼저 완료해주세요. 로그인이 확인되면 이 안내는 다시 뜨지 않습니다.</p>
+        `,
+        primary: { label: '다른 엔진 사용하기', danger: true },
+        extraButton: { label: '7,500원 웹구독하러가기', href: 'https://gemini.google.com/subscriptions' },
+    });
+    return { block: true, reason: 'Flow 제미나이 웹 구독 미확인' };
+}
+
+/**
  * 풀오토/연속/다계정 발행 직전 통합 가드.
  * 차단 시 toastManager로 알리고 false 반환 → 호출자가 발행 중단.
  */
@@ -244,6 +274,11 @@ export async function runOpenAIImageGuard(imageSource: string): Promise<boolean>
     const imageFx = await checkImageFxGenerationReady(imageSource);
     if (imageFx.block) {
         try { (window as any).toastManager?.error?.(`발행 중단: ${imageFx.reason}`); } catch { /* ignore */ }
+        return false;
+    }
+    const flow = await checkFlowSubscription(imageSource);
+    if (flow.block) {
+        try { (window as any).toastManager?.error?.(`발행 중단: ${flow.reason}`); } catch { /* ignore */ }
         return false;
     }
     return true;

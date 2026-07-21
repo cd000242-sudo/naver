@@ -33,6 +33,8 @@ declare const ImageManager: {
   unsetHeadings: Set<string>;
 };
 declare const appendLog: (msg: string, target?: string) => void;
+// [v2.11.140] 이미지관리탭 Flow 구독 사전 가드 (openaiImageGuard.ts — 인라인 번들 동일 스코프)
+declare function checkFlowSubscription(imageSource: string): Promise<{ block: boolean; reason?: string }>;
 declare let generatedImages: any[];
 declare let currentStructuredContent: any;
 declare let currentPostId: string | null;
@@ -920,6 +922,18 @@ export function initHeadingImageGeneration(): void {
             alert(`❌ ImageFX 로그인 상태를 확인할 수 없습니다.\n\n원인: ${loginErr.message}\n\n👉 이미지 설정 모달 → "🔗 Google 계정 연동" 버튼으로 재로그인하거나, 다른 엔진(나노바나나/DeepInfra)을 선택하세요.`);
             generateImagesBtnMain.disabled = false;
             generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>프롬프트대로 이미지 생성하기</span>';
+            return;
+          }
+        }
+
+        // ✅ [v2.11.140] Flow 구독 사전 경고 (로그인 미확인 시에만) — 로그인 창 띄우기 전에 안내
+        if (imageSource === 'flow') {
+          const flowGuard = await checkFlowSubscription(imageSource);
+          if (flowGuard.block) {
+            appendLog(`⛔ ${flowGuard.reason || 'Flow 제미나이 웹 구독 미확인'} — 생성 중단`, 'images-log-output');
+            generateImagesBtnMain.disabled = false;
+            generateImagesBtnMain.innerHTML = '<span style="font-size: 1.25rem;">🎨</span><span>프롬프트대로 이미지 생성하기</span>';
+            (window as any).__manualImageGenerationInProgress = false;
             return;
           }
         }
