@@ -53,7 +53,9 @@ describe('OpenAI 비전 파라미터 (신형 모델 호환)', () => {
   const adapter = read('imageNarrative/visionInference/openaiVisionAdapter.ts');
 
   it('max_tokens 대신 max_completion_tokens를 사용한다', () => {
-    expect(adapter).toMatch(/max_completion_tokens: 2_048/);
+    // [v2.11.136] gpt-5.6-terra(추론) 예산이 reasoning에 굶기지 않게 8192 + effort low.
+    expect(adapter).toMatch(/max_completion_tokens: 8_192/);
+    expect(adapter).toMatch(/reasoning_effort: 'low'/);
     expect(adapter).not.toMatch(/max_tokens: 2_048/);
   });
 

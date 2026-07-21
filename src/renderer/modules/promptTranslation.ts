@@ -197,8 +197,9 @@ async function generateEnglishPromptWithOpenAI(headingText: string, imageStyle?:
                     { role: 'system', content: `You are an image prompt generator. Output ONLY the raw English prompt. No greetings, no explanations, no markdown, no "Here is". Just the prompt text.` },
                     { role: 'user', content: getTranslationPrompt(headingText, imageStyle, contentContext) }
                 ],
-                max_completion_tokens: 800,
-                reasoning_effort: 'medium'
+                // [v2.11.136] 소출력(영문 프롬프트) 작업 — 추론이 예산을 굶기지 않게 low + 여유.
+                max_completion_tokens: 4096,
+                reasoning_effort: 'low'
             })
         });
 

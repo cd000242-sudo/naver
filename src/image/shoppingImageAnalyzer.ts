@@ -301,8 +301,9 @@ Respond with ONLY one word: "product" or "non-product". Nothing else.`,
                             },
                         ],
                     }],
-                    max_completion_tokens: 512,
-                    reasoning_effort: 'medium',
+                    // [v2.11.136] 비전 분석(소출력 JSON) — 추론이 예산을 굶기지 않게 low + 여유.
+                    max_completion_tokens: 4096,
+                    reasoning_effort: 'low',
                 }),
                 signal: AbortSignal.timeout(15000),
             }

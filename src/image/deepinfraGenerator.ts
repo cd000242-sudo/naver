@@ -151,8 +151,11 @@ Complete image prompt:`;
                         { role: 'system', content: `You are an expert AI image prompt engineer for ${imageStyle || 'realistic'} style. Output ONLY the English prompt, nothing else.` },
                         { role: 'user', content: promptText }
                     ],
-                    max_completion_tokens: 800,
-                    reasoning_effort: 'medium'
+                    // [v2.11.136] gpt-5.x 추론 모델이 예산을 reasoning으로 소진해
+                    // 출력 0이 되는 것 방지: 소출력(영문 프롬프트) 작업엔 추론 불필요
+                    // → effort low + 예산 여유. 비용도 절감.
+                    max_completion_tokens: 4096,
+                    reasoning_effort: 'low'
                 },
                 {
                     headers: {

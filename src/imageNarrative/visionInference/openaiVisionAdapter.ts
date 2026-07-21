@@ -165,7 +165,11 @@ export async function runOpenAIVision(
       // "'max_tokens' is not supported with this model"로 400을 반환했다
       // (라이브 사용자 실측). max_completion_tokens는 구형 모델도 지원한다.
       // 512 → 2,048: 한국어 구조화 JSON이 512 토큰을 넘겨 잘리던 문제 대응.
-      max_completion_tokens: 2_048,
+      // [v2.11.136] VISION_MODELS.OPENAI_41 = gpt-5.6-terra(추론)라 effort 미설정
+      // 시 기본 medium이 2048 예산을 reasoning으로 소진해 출력 0이 될 수 있다.
+      // 비전 추출(구조화 JSON)엔 추론 불필요 → effort low + 예산 여유(8192).
+      max_completion_tokens: 8_192,
+      reasoning_effort: 'low' as const,
     };
 
     let response;
