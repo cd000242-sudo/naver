@@ -138,36 +138,54 @@ export async function runOpenAIVision(
   try {
     const imageUrl = `data:${context.mimeType};base64,${context.imageBase64}`;
 
-    const response = await client.chat.completions.create(
-      {
-        model: VISION_MODELS.OPENAI_41,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          {
-            role: 'user',
-            content: [
-              {
-                type: 'image_url',
-                image_url: { url: imageUrl, detail: 'low' },
-              },
-              { type: 'text', text: userInstruction },
-            ],
-          },
-        ],
-        response_format: {
-          type: 'json_schema',
-          json_schema: {
-            name: 'image_inference_result',
-            strict: true,
-            schema: OPENAI_RESPONSE_SCHEMA,
-          },
+    const baseRequest = {
+      model: VISION_MODELS.OPENAI_41,
+      messages: [
+        { role: 'system' as const, content: systemPrompt },
+        {
+          role: 'user' as const,
+          content: [
+            {
+              type: 'image_url' as const,
+              image_url: { url: imageUrl, detail: 'low' as const },
+            },
+            { type: 'text' as const, text: userInstruction },
+          ],
         },
-        temperature: 0.2,
-        // 512 → 2,048: 한국어 구조화 JSON이 512 토큰을 넘겨 잘리던 문제 대응(Gemini와 동일 사유)
-        max_tokens: 2_048,
+      ],
+      response_format: {
+        type: 'json_schema' as const,
+        json_schema: {
+          name: 'image_inference_result',
+          strict: true,
+          schema: OPENAI_RESPONSE_SCHEMA,
+        },
       },
-      { signal: internal.signal },
-    );
+      // [v2.11.135] max_tokens → max_completion_tokens. 신형 모델이
+      // "'max_tokens' is not supported with this model"로 400을 반환했다
+      // (라이브 사용자 실측). max_completion_tokens는 구형 모델도 지원한다.
+      // 512 → 2,048: 한국어 구조화 JSON이 512 토큰을 넘겨 잘리던 문제 대응.
+      max_completion_tokens: 2_048,
+    };
+
+    let response;
+    try {
+      response = await client.chat.completions.create(
+        { ...baseRequest, temperature: 0.2 },
+        { signal: internal.signal },
+      );
+    } catch (paramError) {
+      // [v2.11.135] Reasoning-family models reject non-default temperature the
+      // same way they rejected max_tokens. Retry once without it instead of
+      // failing the whole photo-mode run.
+      const message = String((paramError as Error)?.message || '');
+      const isUnsupportedParam =
+        (paramError instanceof OpenAI.APIError && paramError.status === 400 && /temperature/i.test(message)) ||
+        (/unsupported/i.test(message) && /temperature/i.test(message));
+      if (!isUnsupportedParam) throw paramError;
+      console.warn('[OpenAIVision] temperature 미지원 모델 — 기본 temperature로 재시도');
+      response = await client.chat.completions.create(baseRequest, { signal: internal.signal });
+    }
 
     // Record successful call for throttler accounting
     openaiRpmThrottler.recordCall();
