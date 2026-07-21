@@ -98,12 +98,17 @@ export function buildRecentPostsGenerationPrompt(input: ContentPolicyInput): str
   const posts = input.recent_posts || [];
   if (posts.length === 0) return '';
 
+  // [v2.11.136] 비용 폭증 근본 수정: 예전엔 최근 글 본문 전문(body)을 통째로
+  // 주입해 입력 토큰이 편당 ~105k까지 부풀었다(전 엔진 공통, 편당 입력 비용의 81%).
+  // 중복 회피에는 제목·서론·소제목·주제각도·구조 타입이면 충분하고(문장 단위
+  // 유사도는 발행 후 유사도 저장소가 별도 담당), 본문은 앞부분 발췌만 남긴다.
+  const BODY_EXCERPT_CHARS = 200;
   const payload = posts.map((post) => ({
     article_id: post.article_id,
     title: post.title,
     introduction: post.intro,
     headings: [...post.headings],
-    body: post.body,
+    body_excerpt: String(post.body || '').slice(0, BODY_EXCERPT_CHARS),
     topic_angle: post.topic_angle,
     structure_type: post.structure_type,
     business_facts: [...(post.business_facts || [])],
@@ -116,8 +121,8 @@ export function buildRecentPostsGenerationPrompt(input: ContentPolicyInput): str
 
   return [
     '[CONTENT_POLICY_RECENT_POSTS_V1]',
-    'The following records are the author\'s recent published posts.',
-    'Use every field only to avoid repeated titles, openings, headings, sentences, topic angles, and structures.',
+    'The following records are the author\'s recent published posts (body shown as a short excerpt only).',
+    'Use every field only to avoid repeated titles, openings, headings, topic angles, and structures.',
     'Do not copy, lightly paraphrase, or invent facts from these records.',
     `CURRENT_PRIMARY_KEYWORD=${input.primary_keyword}`,
     `CURRENT_TARGET_READER=${input.target_reader}`,
