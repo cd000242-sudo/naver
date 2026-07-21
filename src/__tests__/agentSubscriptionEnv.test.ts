@@ -3,6 +3,7 @@ import {
   buildNpmInstallEnv,
   buildClaudeSubscriptionEnv,
   buildCodexSubscriptionEnv,
+  buildGeminiSubscriptionEnv,
 } from '../agentCli/subscriptionEnv';
 
 describe('subscription agent environment isolation', () => {
@@ -87,5 +88,28 @@ describe('subscription agent environment isolation', () => {
       HTTPS_PROXY: 'https://user:password@proxy.example',
       NO_PROXY: 'localhost,127.0.0.1',
     });
+  });
+
+  it('[v2.11.140] forces GCA subscription OAuth for Gemini while still stripping API keys', () => {
+    const env = buildGeminiSubscriptionEnv({
+      PATH: 'C:\\tools',
+      TEMP: 'C:\\temp',
+      USERPROFILE: 'C:\\Users\\tester',
+      GEMINI_API_KEY: 'must-not-leak',
+      GOOGLE_API_KEY: 'must-not-leak',
+      GOOGLE_GENAI_API_KEY: 'must-not-leak',
+      NAVER_PASSWORD: 'naver-secret',
+      UNRELATED_APP_SECRET: 'must-not-leak',
+    });
+
+    // GCA(Google Code Assist)는 Antigravity/Gemini CLI 구독 OAuth 경로 — 이게 없으면
+    // bare gemini가 "Please set an Auth method"만 출력하고 로그인 브라우저를 못 연다.
+    expect(env.GOOGLE_GENAI_USE_GCA).toBe('true');
+    // API 키는 여전히 제거 — silent API-key 과금 폴백 금지.
+    expect(env).not.toHaveProperty('GEMINI_API_KEY');
+    expect(env).not.toHaveProperty('GOOGLE_API_KEY');
+    expect(env).not.toHaveProperty('GOOGLE_GENAI_API_KEY');
+    expect(env).not.toHaveProperty('NAVER_PASSWORD');
+    expect(env).not.toHaveProperty('UNRELATED_APP_SECRET');
   });
 });

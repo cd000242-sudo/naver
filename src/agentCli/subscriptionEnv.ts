@@ -108,7 +108,16 @@ export function buildCodexSubscriptionEnv(
 export function buildGeminiSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {
-  return pickSubscriptionEnv(source, GEMINI_SUBSCRIPTION_ENV_KEYS);
+  // [v2.11.140] Gemini CLI has no dedicated `login` subcommand and, with no auth method
+  // selected, a bare invocation only prints "Please set an Auth method ... GEMINI_API_KEY,
+  // GOOGLE_GENAI_USE_VERTEXAI, GOOGLE_GENAI_USE_GCA" and never opens the browser. GCA
+  // (Google Code Assist) is the subscription OAuth path used by the Antigravity/Gemini CLI
+  // plan, so force it — both the login browser flow and generation then use the user's
+  // OAuth subscription. API-key vars stay stripped (allowlist) so no silent API billing.
+  return {
+    ...pickSubscriptionEnv(source, GEMINI_SUBSCRIPTION_ENV_KEYS),
+    GOOGLE_GENAI_USE_GCA: 'true',
+  };
 }
 
 export function buildNpmInstallEnv(

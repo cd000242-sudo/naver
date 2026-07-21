@@ -195,9 +195,21 @@ export async function loginAgent(
   const observeCodePrompt = createAgentLoginCodePromptObserver((attempt) => {
     try { hooks.onCodeRequired?.(attempt); } catch { /* renderer progress is best-effort */ }
   });
+  // [v2.11.140] Gemini(GCA)는 브라우저 열기 전 "Do you want to continue? [Y/n]"으로 확인을
+  // 받는데, 파이프 spawn(비-TTY)에는 사용자가 답할 터미널이 없다. 확인 프롬프트를 감지하면
+  // 자동으로 "Y"를 stdin에 써서 gemini가 OAuth 브라우저를 열도록 한다. (gemini 전용)
+  let geminiConfirmSent = false;
+  let sessionWriteLine: ((value: string) => Promise<unknown>) | undefined;
+  const observeGeminiBrowserConfirm = (chunk: string): void => {
+    if (provider !== 'gemini' || geminiConfirmSent) return;
+    if (!/do you want to continue|\[y\/n\]|authentication page in your browser/i.test(chunk)) return;
+    geminiConfirmSent = true;
+    try { void sessionWriteLine?.('Y'); } catch { /* stdin write is best-effort */ }
+  };
   const observeLoginOutput = (chunk: string): void => {
     observeLoginUrl(chunk);
     observeCodePrompt(chunk);
+    observeGeminiBrowserConfirm(chunk);
   };
   const session = startSpawnSession({
     command,
@@ -208,6 +220,7 @@ export async function loginAgent(
     onStdoutChunk: observeLoginOutput,
     onStderrChunk: observeLoginOutput,
   });
+  sessionWriteLine = session.writeLine;
   try {
     hooks.onSessionReady?.(Object.freeze({
       writeLine: session.writeLine,
