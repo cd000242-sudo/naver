@@ -336,6 +336,35 @@ async function launchWithStealthFallback(profileDir: string, offScreen: boolean)
     throw new Error(`FLOW_BROWSER_LAUNCH_FAILED:모든 브라우저 실행 실패. 마지막 에러: ${lastErr?.message || 'unknown'}`);
 }
 
+// ✅ [v2.11.140] Flow 크롬창 확실히 숨김 — off-screen 좌표(--window-position=-32000,-32000)가
+//   Windows/멀티모니터에서 무시돼 창이 화면에 남는 버그 대응. CDP Browser.setWindowBounds로
+//   minimize(dropshot minimizeDropshotWindow와 동일한 신뢰성 높은 방식). off-screen과 병행(이중 가드).
+//   로그인이 확인된 off-screen 페이지를 반환하기 직전마다 호출한다.
+async function minimizeFlowWindow(page: Page): Promise<boolean> {
+    try {
+        const context = typeof (page as any)?.context === 'function' ? (page as any).context() : null;
+        if (!context || typeof context.newCDPSession !== 'function') return false;
+        let cdpSession: any = null;
+        try {
+            cdpSession = await context.newCDPSession(page);
+            const { windowId } = await cdpSession.send('Browser.getWindowForTarget');
+            try {
+                await cdpSession.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'minimized' } });
+            } catch {
+                // Chromium은 일부 상태 전이를 거부 → normal로 정규화 후 재시도
+                await cdpSession.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } });
+                await cdpSession.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'minimized' } });
+            }
+        } finally {
+            try { await cdpSession?.detach?.(); } catch { /* popup이 detach 중 닫힐 수 있음 */ }
+        }
+        return true;
+    } catch (err) {
+        flowWarn(`[Flow] 창 최소화 실패(무시): ${(err as Error)?.message?.substring(0, 100)}`);
+        return false;
+    }
+}
+
 // [v1.6.1] 네트워크 응답 리스너 설치 — 페이지당 1회
 // Flow 서버가 이미지를 반환하는 즉시 큐에 추가, waitForNewImage가 DOM 폴링과 race
 function installNetworkImageListener(page: Page): void {
@@ -500,7 +529,10 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
             if (!closed) {
                 await cachedPage.title();
                 const cachedLoggedIn = await isLoggedInToFlow(cachedPage).catch(() => false);
-                if (cachedLoggedIn) return cachedPage;
+                if (cachedLoggedIn) {
+                    await minimizeFlowWindow(cachedPage); // 캐시 재사용 시에도 재숨김 (Windows off-screen 무시 대비)
+                    return cachedPage;
+                }
                 flowWarn('[Flow] cached page is alive but login session is missing - reopening visible login flow');
                 try { await cachedContext?.close().catch(() => {}); } catch { /* ignore */ }
                 cachedContext = null;
@@ -554,6 +586,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
                 });
             }
         } catch { /* ignore */ }
+        await minimizeFlowWindow(page); // 기존 세션 확인 후 off-screen 창 확실히 최소화
         return page;
     }
 
@@ -689,6 +722,7 @@ async function _ensureFlowBrowserPageInner(): Promise<Page> {
         throw new Error('FLOW_SESSION_LOST:Google 세션이 끊겼습니다. 다시 [Flow 로그인]을 진행해주세요.');
     }
 
+    await minimizeFlowWindow(finalPage); // off-screen 재실행 후 CDP로 확실히 최소화 (Windows 좌표 무시 대비)
     sendImageLog('✅ [Flow] 숨김 모드 전환 완료 — 이미지 생성 준비됨');
     cachedContext = finalCtx;
     cachedPage = finalPage;
