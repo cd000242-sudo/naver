@@ -86,8 +86,22 @@ export async function generateWithAgent(
         && ['not_logged_in', 'subscription_inactive', 'rate_limited'].includes(error.code)) {
       clearAgentDetectionCache(provider);
     }
+    // [v2.11.135] Remember the CLI-reported reset moment so the status card
+    // can show when the quota window reopens. Best-effort only.
+    if (error instanceof AgentCliError && error.code === 'rate_limited') {
+      try {
+        const { recordAgentRateLimit } = await import('./usageTracker.js');
+        recordAgentRateLimit(provider, `${error.detail ?? ''} ${error.message}`);
+      } catch { /* usage visibility must never mask the real error */ }
+    }
     throw error;
   }
+  // [v2.11.135] Quota is consumed once the CLI answered, even if JSON parsing
+  // below fails — record here, not after validation.
+  try {
+    const { recordAgentCall } = await import('./usageTracker.js');
+    recordAgentCall(provider);
+  } catch { /* best-effort */ }
   const durationMs = Date.now() - started;
 
   let json: unknown | undefined;

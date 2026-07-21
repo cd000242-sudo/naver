@@ -255,10 +255,21 @@ export async function refreshAgentStatusBadges(
         const subscriptionInactive = s.errorCode === 'subscription_inactive';
         const rateLimited = s.errorCode === 'rate_limited';
         const providerLabel = t.provider === 'codex' ? 'Codex' : t.provider === 'gemini' ? 'Gemini' : 'Claude';
+        let rateLimitSuffix = '';
+        if (rateLimited) {
+          try {
+            const usageRes = await (api as any).agentUsage?.(t.provider);
+            const resetAt = usageRes?.usage?.rateLimitResetAt;
+            if (resetAt && resetAt > Date.now()) {
+              const reset = new Date(resetAt);
+              rateLimitSuffix = ` (\uB9AC\uC14B ~${String(reset.getHours()).padStart(2, '0')}:${String(reset.getMinutes()).padStart(2, '0')})`;
+            }
+          } catch { /* best-effort */ }
+        }
         el.textContent = subscriptionInactive
           ? `\u274C ${providerLabel} \uAD6C\uB3C5 \uAE30\uAC04 \uB9CC\uB8CC \uB610\uB294 \uC0AC\uC6A9 \uBD88\uAC00 \u2014 \uACC4\uC815 \uC804\uD658 \uD6C4 \uB2E4\uC2DC \uC5F0\uACB0`
           : rateLimited
-            ? `\u23F3 ${providerLabel} \uAD6C\uB3C5 \uC0AC\uC6A9 \uD55C\uB3C4 \uC18C\uC9C4 \u2014 \uCD08\uAE30\uD654 \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4`
+            ? `\u23F3 ${providerLabel} \uAD6C\uB3C5 \uC0AC\uC6A9 \uD55C\uB3C4 \uC18C\uC9C4 \u2014 \uCD08\uAE30\uD654 \uD6C4 \uB2E4\uC2DC \uC2DC\uB3C4${rateLimitSuffix}`
             : `\u26A0\uFE0F ${providerLabel} \uC0AC\uC6A9 \uAD8C\uD55C \uD655\uC778 \uC2E4\uD328 \u2014 ${s.detail || '\uC0C1\uD0DC\uB97C \uB2E4\uC2DC \uD655\uC778\uD574\uC8FC\uC138\uC694'}`;
         el.style.color = subscriptionInactive ? '#b91c1c' : '#b45309';
         setShown(actions, true, 'flex');
@@ -270,6 +281,21 @@ export async function refreshAgentStatusBadges(
         ? `\u2705 \uB85C\uADF8\uC778 \uD655\uC778\uB428 \u2014 \uC2E4\uC81C \uC0AC\uC6A9 \uAC00\uB2A5 \uC5EC\uBD80\uB294 \uCCAB \uC0DD\uC131 \uC2DC \uD655\uC778 (${versionLabel})`
         : `\u2705 \uC900\uBE44\uB428 \u2014 ${s.detail || versionLabel}`;
       el.style.color = '#15803d';
+      // [v2.11.135] 5\uC2DC\uAC04 \uCC3D \uC0AC\uC6A9\uB7C9 \uD45C\uAE30 \u2014 CLI\uAC00 \uC794\uC5EC \uCFFC\uD130 \uC870\uD68C\uB97C \uC81C\uACF5\uD558\uC9C0
+      // \uC54A\uC544, \uC774 \uC571\uC5D0\uC11C \uAE30\uB85D\uD55C \uD638\uCD9C \uC218 + rate limit \uB9AC\uC14B \uC2DC\uAC01\uB9CC \uC815\uC9C1\uD558\uAC8C \uD45C\uC2DC.
+      try {
+        const usageRes = await (api as any).agentUsage?.(t.provider);
+        const usage = usageRes?.usage;
+        if (usage && agentStatusRefreshCoordinator.canApply(refreshLease)) {
+          const parts: string[] = [];
+          if (usage.callsInWindow > 0) parts.push(`\uCD5C\uADFC 5\uC2DC\uAC04 \uC774 \uC571\uC5D0\uC11C ${usage.callsInWindow}\uD68C \uC0DD\uC131`);
+          if (usage.rateLimitResetAt && usage.rateLimitResetAt > Date.now()) {
+            const reset = new Date(usage.rateLimitResetAt);
+            parts.push(`\u23F3 \uCFFC\uD130 \uB9AC\uC14B ~${String(reset.getHours()).padStart(2, '0')}:${String(reset.getMinutes()).padStart(2, '0')}`);
+          }
+          if (parts.length > 0) el.textContent += ` \u00B7 ${parts.join(' \u00B7 ')}`;
+        }
+      } catch { /* usage \uD45C\uAE30\uB294 \uC0C1\uD0DC \uD45C\uC2DC\uB97C \uAE68\uC9C0 \uC54A\uB294\uB2E4 */ }
       if (!announcedAgentLoginTargets.has(el)) {
         announcedAgentLoginTargets.add(el);
         const providerLabel = t.provider === 'codex' ? 'Codex' : t.provider === 'gemini' ? 'Gemini CLI' : 'Claude Code';

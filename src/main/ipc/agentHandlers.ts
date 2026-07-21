@@ -208,6 +208,18 @@ export function registerAgentHandlers(options: RegisterAgentHandlerOptions): voi
     }
   });
 
+  // [v2.11.135] 5시간 창 사용량 (앱 자체 기록 — CLI는 잔여 쿼터 조회를 제공하지 않음)
+  ipcMain.handle('agent:usage', async (event, provider: unknown) => {
+    try {
+      assertTrustedAgentSender(event, trustedRendererPath);
+      const validatedProvider = requireAgentProvider(provider);
+      const { getAgentUsageWindow } = await import('../../agentCli/usageTracker.js');
+      return { success: true, usage: getAgentUsageWindow(validatedProvider) };
+    } catch (err) {
+      return { success: false, message: rendererSafeErrorMessage(err as Error, '사용량 조회 실패') };
+    }
+  });
+
   // 자동 설치 (npm i -g) — 사용자 옵트인. 완료까지 대기 후 결과 반환.
   ipcMain.handle('agent:install', async (event, provider: unknown) => {
     try {

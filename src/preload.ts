@@ -174,6 +174,9 @@ contextBridge.exposeInMainWorld('api', {
   // ✅ 에이전트 모드(codex/claude 구독 연동) — 설치/로그인 상태 + 글생성 브리지
   agentStatus: (provider: AgentProvider, options?: { forceRefresh?: boolean }): Promise<{ success: boolean; status?: AgentCliStatus; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:status', provider, options),
+  // [v2.11.135] 5시간 창 사용량 가시화 (앱 자체 기록 + rate limit 리셋 시각)
+  agentUsage: (provider: AgentProvider): Promise<{ success: boolean; usage?: { callsInWindow: number; windowOpensAt?: number; rateLimitedAt?: number; rateLimitResetAt?: number } }> =>
+    ipcRenderer.invoke('agent:usage', provider),
   agentGenerate: (payload: { provider: AgentProvider; prompt: string; schema?: Record<string, unknown>; model?: string; timeoutMs?: number }): Promise<{ success: boolean; provider?: AgentProvider; text?: string; json?: unknown; durationMs?: number; code?: string; message?: string }> =>
     ipcRenderer.invoke('agent:generate', payload),
   agentInstall: (provider: AgentProvider): Promise<{ success: boolean; version?: string; code?: string; message?: string }> =>

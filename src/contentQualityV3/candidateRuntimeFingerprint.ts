@@ -33,6 +33,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/agentCli/spawnHelper.ts',
   'src/agentCli/subscriptionEnv.ts',
   'src/agentCli/types.ts',
+  'src/agentCli/usageTracker.ts',
   'src/agentCli/validation.ts',
   'src/agentCli/version.ts',
   'src/agents/trendAnalyzer.ts',
