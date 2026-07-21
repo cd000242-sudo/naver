@@ -117,6 +117,14 @@ const CATEGORY_MAP: Record<string, PromptCategory> = {
   '자동차': 'life',
 };
 
+// [v2.11.135] Categories whose homefeed posts are "story-shaped" in the wild
+// (연예·스포츠·시사·경제 이슈 — 스포츠 힌트는 entertainment로 매핑됨).
+// These get the issue-story skeleton; practical categories keep the base shape.
+const HOMEFEED_ISSUE_STORY_CATEGORIES: ReadonlySet<PromptCategory> = new Set([
+  'entertainment',
+  'society',
+]);
+
 // 프롬프트 캐시
 const promptCache = new Map<string, string>();
 
@@ -247,6 +255,21 @@ export function buildSystemPrompt(
       composed = `${composed}\n\n${quality90Overlay}`;
     } else {
       console.warn(`[PromptLoader] ${quality90OverlayPath} load failed - 90+ mode overlay skipped`);
+    }
+  }
+
+  // 2.85 [v2.11.135] Homefeed issue-story skeleton.
+  // Real homefeed-exposed Mate posts (20-sample analysis) follow a story
+  // shape — quote-hook titles, timeline body, 0~3 headings, ultra-short
+  // paragraphs — that the practical-info base skeleton actively suppressed.
+  // Issue-type categories get the story skeleton LAST so it can override the
+  // conflicting base/90+ rules; practical categories keep the base shape.
+  if (mode === 'homefeed' && HOMEFEED_ISSUE_STORY_CATEGORIES.has(category)) {
+    const issueStoryOverlay = loadPromptFile('homefeed/issue-story.prompt');
+    if (issueStoryOverlay) {
+      composed = `${composed}\n\n${issueStoryOverlay}`;
+    } else {
+      console.warn('[PromptLoader] homefeed/issue-story.prompt load failed - issue-story skeleton skipped');
     }
   }
 

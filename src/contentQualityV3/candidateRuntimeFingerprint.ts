@@ -394,6 +394,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/prompts/homefeed/fashion.prompt',
   'src/prompts/homefeed/food.prompt',
   'src/prompts/homefeed/health.prompt',
+  'src/prompts/homefeed/issue-story.prompt',
   'src/prompts/homefeed/it.prompt',
   'src/prompts/homefeed/life.prompt',
   'src/prompts/homefeed/living.prompt',
