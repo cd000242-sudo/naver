@@ -5407,7 +5407,7 @@ ipcMain.handle('multiAccount:publish', async (_event, accountIds: string[], opti
           // ✅ [2026-03-11 FIX] isScheduleMode=false일 때 명시적 undefined (스프레드된 잔존값 제거)
           scheduleDate: isScheduleMode ? accountScheduleDate : undefined,
           scheduleTime: isScheduleMode ? accountScheduleTime : undefined,
-          toneStyle: account.settings?.toneStyle || 'friendly',
+          toneStyle: options?.toneStyle ?? account.settings?.toneStyle ?? 'friendly', // ✅ [2026-07-22 FIX] publishMode/categoryName과 동일하게 렌더러 선택 우선 (톤만 비대칭이던 것 정렬)
           categoryName: options?.categoryName || account.settings?.category, // ✅ [2026-02-09 FIX] renderer 전달값 우선 (실제 블로그 폴더명), 없으면 계정 설정 fallback
           isFullAuto: true,
           title,        // ✅ 생성된 제목

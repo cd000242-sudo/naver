@@ -80,7 +80,29 @@ export class PublicationStateStore {
       return loaded;
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') return initialState();
-      throw new Error(`PUBLICATION_STATE_CORRUPT:${(error as Error).message}`);
+      // [v2.11.136] 자기치유 (quota식): 깨진 JSON(부분쓰기·전원차단·AV 격리)을
+      // 그냥 throw하면 매 발행이 영구 차단되고 미러 백업도 없어 사용자가 파일을
+      // 수동 삭제해야만 풀렸다. 손상 파일을 .corrupt-<ts>로 격리하고 initialState를
+      // 즉시 되써서 다음 발행부터 정상 진행되게 한다. 잃는 것은 최근 창의 cadence/
+      // 일일캡 이력(당일·최대 500건)뿐 — 영구 잠금보다 명백히 작은 트레이드오프.
+      // status는 ACTIVE로 두되 STATE_REBUILT_FROM_CORRUPT를 남겨 관측만 한다.
+      console.error(`[PublicationStateStore] 🚨 상태 파일 손상 감지 → 격리 + 재생성 (자정 없이 즉시 복구): ${(error as Error).message}`);
+      const rebuilt: PublicationState = {
+        ...initialState(),
+        last_advisory_reason: 'STATE_REBUILT_FROM_CORRUPT',
+        last_advisory_at: new Date().toISOString(),
+      };
+      try {
+        await fs.rename(this.filePath, `${this.filePath}.corrupt-${Date.now()}`);
+      } catch { /* 격리 실패해도 아래 되쓰기로 덮어씀 */ }
+      try {
+        await this.saveUnlocked(rebuilt);
+      } catch (writeError) {
+        // 되쓰기까지 실패하면(디스크풀 등) 메모리 값이라도 반환 — 오늘은 진행,
+        // 파일은 다음 정상 쓰기에서 복구.
+        console.error(`[PublicationStateStore] ⚠️ 재생성 쓰기 실패(무시하고 진행): ${(writeError as Error).message}`);
+      }
+      return rebuilt;
     }
   }
 

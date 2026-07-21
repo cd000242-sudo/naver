@@ -938,6 +938,19 @@ export async function initPriceInfoModal(): Promise<void> {
       geminiFreeQuotaFirst.checked = (config as any).geminiUseFreeQuotaBeforePaid !== false;
     }
 
+    // [v2.11.136] 팩트체크 엔진 드롭다운을 config(SSOT)에서 복원. 없으면 레거시
+    // usePerplexityFactCheck를 'perplexity'로 마이그레이션, 그 외 'auto'.
+    const factCheckEngineSelect = document.getElementById('fact-check-engine') as HTMLSelectElement | null;
+    if (factCheckEngineSelect) {
+      const cfgEngine = String((config as { factCheckEngine?: string }).factCheckEngine ?? '').trim();
+      const validEngines = ['off', 'auto', 'crawl', 'naver', 'gpt-claude', 'perplexity', 'gemini-grounding'];
+      const resolved = validEngines.includes(cfgEngine)
+        ? cfgEngine
+        : ((config as { usePerplexityFactCheck?: boolean }).usePerplexityFactCheck === true ? 'perplexity' : 'auto');
+      factCheckEngineSelect.value = resolved;
+      try { localStorage.setItem('fact-check-engine', resolved); } catch { /* best-effort */ }
+    }
+
     // ✅ [2026-02-23] OpenAI Image API 키는 OpenAI API 키와 통합됨 (별도 입력 필드 제거)
 
     // ✅ [2026-02-22] Leonardo AI API 키 로드

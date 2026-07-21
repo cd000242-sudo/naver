@@ -13373,6 +13373,16 @@
             save(el.value);
             applyToAll(el.value);
             console.warn('[FactCheck UI] 엔진 동기화: ' + el.value);
+            // [v2.11.136] config가 생성단(SSOT)이라 드롭다운 변경을 config에 즉시
+            // 반영한다. 설정 모달 저장을 거치지 않아도 선택이 실제 반영되게.
+            try {
+              if (window.api && typeof window.api.saveConfig === 'function') {
+                window.api.saveConfig({
+                  factCheckEngine: el.value,
+                  usePerplexityFactCheck: el.value === 'perplexity',
+                });
+              }
+            } catch (e) { /* best-effort */ }
           });
         });
       }

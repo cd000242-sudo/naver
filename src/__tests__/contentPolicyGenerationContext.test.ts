@@ -209,7 +209,11 @@ describe('generation policy context', () => {
     expect(result.prompt).toContain(recentPosts[0].title);
   });
 
-  it('fails before spending model credits when the publication state is corrupt', async () => {
+  // [v2.11.136] 계약 변경: 손상된 발행 원장은 예전엔 영구 차단(크레딧 낭비 방지
+  // 명분)이었으나, 파일을 격리+재생성하는 자기치유(quota식)를 도입해 근본 원인이
+  // 사라졌다 — 재생성된 원장에 발행이 정상 기록되므로 차단할 이유가 없다. 잃는 것은
+  // 손상 시점의 cadence/일일캡 이력뿐(영구 잠금보다 작은 트레이드오프, A-3 리포트).
+  it('self-heals a corrupt publication ledger and allows generation to proceed', async () => {
     const userDataPath = await tempDir();
     const recentPosts = makeRecentPosts(20);
     const stateStore = new PublicationStateStore(userDataPath);
@@ -224,9 +228,13 @@ describe('generation policy context', () => {
       },
     });
 
-    expect(result.allowed).toBe(false);
-    expect(result.reasons).toContain('BLOCK_PUBLICATION_STATE_UNAVAILABLE');
-    expect(result.prompt).toBe('');
+    expect(result.allowed).toBe(true);
+    expect(result.reasons).not.toContain('BLOCK_PUBLICATION_STATE_UNAVAILABLE');
+
+    // 원장은 유효 JSON으로 재생성되고 관측 마커가 남는다(영구 고착 없음).
+    const rebuilt = await stateStore.load();
+    expect(rebuilt.status).toBe('ACTIVE');
+    expect(rebuilt.last_advisory_reason).toBe('STATE_REBUILT_FROM_CORRUPT');
   });
 
   it('places the multi-account operational gate before content and image generation', async () => {

@@ -493,9 +493,16 @@ export async function recordContentPolicyPublication(input: {
     topic_angle: input.policyResult.uniqueness_plan.topic_angle,
     exposure_status: 'PENDING_INDEX',
   });
-  // Recent-post content is the source for next-run similarity protection, so a
-  // failed write is an integrity failure rather than an observability warning.
-  await repository.record(recentPost);
+  // [v2.11.136] 유사도 저장 실패는 중복발행과 무관하다(enforcement 원장은 위
+  // recordPublication이 이미 fail-closed로 담당). prepare 경로는 이미 fail-open
+  // 인데 이 record만 throw해 BlogExecutor의 integrity pauseAll을 유발하던 비대칭을
+  // 해소한다 — 실패는 advisory로 강등하고 발행 흐름은 유지한다.
+  try {
+    await repository.record(recentPost);
+  } catch (recentPostError) {
+    console.warn(`[PolicyService] ⚠️ 유사도 저장소 기록 실패 → advisory 강등(발행 계속): ${(recentPostError as Error).message}`);
+    await stateStore.recordAdvisory('POLICY_RECENT_POSTS_WRITE_FAILED').catch(() => undefined);
+  }
   try {
     await auditStore.append({
       ...auditRecord(
