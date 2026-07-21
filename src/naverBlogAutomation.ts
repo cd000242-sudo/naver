@@ -4449,8 +4449,11 @@ export class NaverBlogAutomation {
     const frame = await this.getAttachedFrame().catch(() => null);
     if (!frame) return;
 
-    // 1) 본문 비우기 — 본문 마지막 편집 라인에 캐럿 고정 후 전체 선택 삭제
+    // 1) 본문 비우기 — 본문 타이핑과 동일한 검증된 캐럿 준비(ensureTailTypingReady:
+    //    input_buffer 트랩 탈출 + 실클릭 캐럿 고정)를 먼저 수행해 Ctrl+A/Delete가 본문에
+    //    확실히 적용되게 한다. 그 후 전체 선택 삭제. 안 지워지면 호출부 blank 재검증이 차단.
     try {
+      await ensureTailTypingReady(page, frame, (m: string) => this.log(m)).catch(() => false);
       await focusLastEditableLine(page, frame).catch(() => undefined);
       await this.delay(120);
       await page.keyboard.down('Control');
