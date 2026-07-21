@@ -103,6 +103,40 @@ describe('isPasteVisible coverage guard', () => {
     const after = stats(0, { text: '' });
     expect(isPasteVisible(before, after, shortPlain)).toBe(false);
   });
+
+  // [v2.11.134] Live homefeed publish-blocker: the section fully landed
+  // (beforeChars=70 → afterChars=444, ~374 chars inserted) but the strict
+  // `afterText.startsWith(beforeText)` append-gate false-failed whenever the
+  // before-snapshot front differed from the after-snapshot — an editor
+  // document-root reselection (an image tips the score) or a vanished
+  // placeholder. The gate now only rejects a REORDER (old content survived
+  // but the section landed before it); tail-position still guards mid-insert.
+  describe('append-gate: document-root instability must not false-fail a landed section', () => {
+    const title = '비 오는 날 완벽 가이드, 젖지 않는 신발 고르는 기준 세 가지를 지금 정리해 드립니다';
+    const section = longPlain;
+
+    it('front placeholder present in before but gone in after → still visible', () => {
+      const beforeText = `제목 ${title}`; // placeholder residue in the before snapshot
+      const afterText = `${title}\n${section}`; // placeholder gone; section appended
+      const before = stats(beforeText.length, { text: beforeText });
+      const after = stats(afterText.length, { text: afterText });
+      expect(isPasteVisible(before, after, section)).toBe(true);
+    });
+
+    it('document-root reselection drops the title from after → still visible', () => {
+      const before = stats(title.length, { text: title });
+      const afterText = section; // after snapshot resolved to body-only root
+      const after = stats(title.length + section.length, { text: afterText });
+      expect(isPasteVisible(before, after, section)).toBe(true);
+    });
+
+    it('genuine reorder (section landed BEFORE surviving old content) → still blocked', () => {
+      const before = stats(title.length, { text: title });
+      const afterText = `${section}\n${title}`; // old content survives but after the section
+      const after = stats(afterText.length, { text: afterText });
+      expect(isPasteVisible(before, after, section)).toBe(false);
+    });
+  });
 });
 
 describe('paste rollback safety policy', () => {

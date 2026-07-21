@@ -1593,10 +1593,22 @@ export function isPasteVisible(
   if (expected === 0 || afterText.length === 0) return false;
   if (expectedTableDelta > 0 && after.tables - before.tables < expectedTableDelta) return false;
 
-  // A section paste is append-only. Character growth alone cannot distinguish
-  // a correct tail paste from the same block inserted at an old caret in the
-  // middle of the post, which was the source of shuffled semi-auto articles.
-  if (beforeText && !afterText.startsWith(beforeText)) return false;
+  // A section paste is append-only. The anti-shuffle guard must reject a block
+  // inserted at an old caret in the MIDDLE of the post, but the old strict
+  // `!afterText.startsWith(beforeText)` false-failed whenever the editor's
+  // document-root selection shifted between the before/after snapshots (an
+  // image tips the root score) or a placeholder vanished — the section had
+  // fully landed, yet publishing was blocked (live homefeed report:
+  // beforeChars=70, afterChars=444, ~374 chars actually inserted).
+  //
+  // Misplacement is now detected by two survivors instead: (1) if the old
+  // content survived intact but the section landed BEFORE it, that is a true
+  // reorder; (2) the tail-position gate below (trailingChars <= 8) rejects any
+  // section that is not the document tail — which covers mid-insertion, since
+  // the pushed-down old content leaves >8 trailing chars.
+  if (beforeText && afterText.includes(beforeText) && !afterText.startsWith(beforeText)) {
+    return false;
+  }
 
   const rawDelta = Math.max(0, after.chars - before.chars);
   const normalizedDelta = Math.max(0, afterText.length - beforeText.length);
