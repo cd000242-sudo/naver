@@ -188,6 +188,13 @@ export async function loginAgent(
       loginAction: 'already_authenticated' as const,
     });
   }
+  // [v2.11.140] Gemini: select oauth-personal (Login with Google) via settings.json before
+  // the login spawn. Without it the CLI errors "Please set an Auth method"; forcing GCA env
+  // instead selected the Code Assist tier that returns IneligibleTierError for individuals.
+  if (provider === 'gemini') {
+    const { ensureGeminiOAuthPersonalConfig } = await import('./geminiAuthConfig.js');
+    await ensureGeminiOAuthPersonalConfig();
+  }
   const { command, args } = loginCommand(provider);
   const observeLoginUrl = createAgentLoginUrlObserver(provider, (url) => {
     try { hooks.onLoginUrl?.(url); } catch { /* progress handoff is best-effort */ }

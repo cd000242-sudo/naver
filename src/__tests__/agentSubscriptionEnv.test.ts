@@ -90,7 +90,7 @@ describe('subscription agent environment isolation', () => {
     });
   });
 
-  it('[v2.11.140] forces GCA subscription OAuth for Gemini while still stripping API keys', () => {
+  it('[v2.11.140] Gemini는 GCA를 강제하지 않고 API 키도 제거한다 (auth는 settings.json oauth-personal)', () => {
     const env = buildGeminiSubscriptionEnv({
       PATH: 'C:\\tools',
       TEMP: 'C:\\temp',
@@ -102,14 +102,15 @@ describe('subscription agent environment isolation', () => {
       UNRELATED_APP_SECRET: 'must-not-leak',
     });
 
-    // GCA(Google Code Assist)는 Antigravity/Gemini CLI 구독 OAuth 경로 — 이게 없으면
-    // bare gemini가 "Please set an Auth method"만 출력하고 로그인 브라우저를 못 연다.
-    expect(env.GOOGLE_GENAI_USE_GCA).toBe('true');
+    // GCA(Google Code Assist)는 개인 계정에서 IneligibleTierError를 유발 → 강제하지 않는다.
+    // auth 방식은 ensureGeminiOAuthPersonalConfig()가 settings.json에 oauth-personal로 기록.
+    expect(env).not.toHaveProperty('GOOGLE_GENAI_USE_GCA');
     // API 키는 여전히 제거 — silent API-key 과금 폴백 금지.
     expect(env).not.toHaveProperty('GEMINI_API_KEY');
     expect(env).not.toHaveProperty('GOOGLE_API_KEY');
     expect(env).not.toHaveProperty('GOOGLE_GENAI_API_KEY');
     expect(env).not.toHaveProperty('NAVER_PASSWORD');
     expect(env).not.toHaveProperty('UNRELATED_APP_SECRET');
+    expect(env).toEqual({ PATH: 'C:\\tools', TEMP: 'C:\\temp', USERPROFILE: 'C:\\Users\\tester' });
   });
 });

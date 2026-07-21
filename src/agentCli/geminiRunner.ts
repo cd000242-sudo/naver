@@ -14,6 +14,7 @@ import { join } from 'path';
 import { spawnCollect } from './spawnHelper.js';
 import { classifyExit, parseGeminiEnvelope } from './parse.js';
 import { buildGeminiSubscriptionEnv } from './subscriptionEnv.js';
+import { ensureGeminiOAuthPersonalConfig } from './geminiAuthConfig.js';
 import { AgentCliError } from './types.js';
 import { buildAgentFailureMessage } from './failureMessage.js';
 
@@ -31,6 +32,9 @@ export interface GeminiRunOptions {
  */
 export async function runGemini(prompt: string, opts: GeminiRunOptions = {}): Promise<string> {
   const { model, timeoutMs, signal } = opts;
+  // [v2.11.140] Select oauth-personal (Login with Google) before generation so the CLI uses
+  // the user's OAuth subscription, not the ineligible Code Assist tier. Best-effort.
+  await ensureGeminiOAuthPersonalConfig();
   const dir = await mkdtemp(join(tmpdir(), 'agentcli-gemini-'));
 
   try {
