@@ -115,6 +115,28 @@ function bindAgentAction(
           if (action === 'login') announcedAgentLoginTargets.add(statusEl);
           toastManager.success(action === 'install' ? '\u2705 CLI \uC124\uCE58 \uC644\uB8CC' : '\u2705 \uB85C\uADF8\uC778 \uC644\uB8CC');
         }
+        // [v2.11.135] \uC6D0\uD074\uB9AD \uC790\uB3D9 \uC124\uC815 \u2014 \uC124\uCE58 \uC131\uACF5 \uC9C1\uD6C4 \uB85C\uADF8\uC778\uC774 \uC544\uC9C1\uC774\uBA74
+        // \uBC14\uB85C \uB85C\uADF8\uC778 \uD50C\uB85C\uC6B0\uB85C \uC774\uC5B4 \uC0AC\uC6A9\uC790\uAC00 \uBC84\uD2BC\uC744 \uB450 \uBC88 \uB204\uB974\uC9C0 \uC54A\uAC8C \uD55C\uB2E4.
+        if (action === 'install') {
+          const postInstall = await api.agentStatus?.(provider, { forceRefresh: true }).catch(() => null);
+          if (postInstall?.success && postInstall.status?.installed && !postInstall.status.loggedIn) {
+            statusEl.textContent = '\u2705 \uC124\uCE58 \uC644\uB8CC \u2014 \uACE7\uBC14\uB85C \uB85C\uADF8\uC778\uC744 \uC9C4\uD589\uD569\uB2C8\uB2E4...';
+            statusEl.style.color = '#6b7280';
+            const login = await runAgentLoginWithCodeFallback({
+              provider,
+              mountElement: btn.parentElement ?? statusEl,
+              statusElement: statusEl,
+              api,
+              startLogin: () => api.agentLogin(provider),
+            }).catch((err) => ({ success: false, message: (err as Error).message }));
+            if (login?.success && (login as { status?: { available?: boolean } }).status?.available !== false) {
+              announcedAgentLoginTargets.add(statusEl);
+              toastManager.success('\u2705 \uC790\uB3D9 \uC124\uC815 \uC644\uB8CC (\uC124\uCE58 + \uB85C\uADF8\uC778)');
+            } else if (!login?.success) {
+              toastManager.warning('\u26A0\uFE0F \uC124\uCE58\uB294 \uB410\uC9C0\uB9CC \uB85C\uADF8\uC778\uC740 \uBBF8\uC644\uB8CC \u2014 \uB85C\uADF8\uC778 \uBC84\uD2BC\uC744 \uB2E4\uC2DC \uB20C\uB7EC\uC8FC\uC138\uC694.');
+            }
+          }
+        }
       } else {
         toastManager.error(`\u274C ${action === 'install' ? '\uC124\uCE58' : '\uB85C\uADF8\uC778'} \uC2E4\uD328: ${res?.message || '\uC54C \uC218 \uC5C6\uB294 \uC624\uB958'}`);
       }
@@ -236,10 +258,11 @@ export async function refreshAgentStatusBadges(
       if (!s.loggedIn || !s.available) announcedAgentLoginTargets.delete(el);
       const versionLabel = formatAgentVersionLabel(t.provider, s.version);
       if (!s.installed) {
-        el.textContent = '\u2B07\uFE0F \uBBF8\uC124\uCE58 \u2014 \uC790\uB3D9 \uC124\uCE58\uAC00 \uD544\uC694\uD569\uB2C8\uB2E4';
+        el.textContent = '\u2B07\uFE0F \uBBF8\uC124\uCE58 \u2014 \uC544\uB798 \uBC84\uD2BC \uD55C \uBC88\uC73C\uB85C \uC124\uCE58+\uB85C\uADF8\uC778\uC774 \uC790\uB3D9 \uC9C4\uD589\uB429\uB2C8\uB2E4';
         el.style.color = '#b91c1c';
         setShown(actions, true, 'flex');
         setShown(installBtn, true);
+        if (installBtn) installBtn.textContent = '\u26A1 \uC790\uB3D9 \uC124\uC815 (\uC124\uCE58 + \uB85C\uADF8\uC778)';
         bindAgentAction(installBtn, t.provider, 'install', el);
         return;
       }
