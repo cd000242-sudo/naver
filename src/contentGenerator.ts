@@ -3748,7 +3748,10 @@ async function callOpenAI(
   const modelsToTry = openAIModels;
 
   let lastError: Error | null = null;
-  const maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars);
+  // [v2.11.136] gpt-5.x는 reasoning 토큰을 이 예산에서 함께 소비하므로 헤드룸을
+  // 더한 예산이 필요하다. modelsToTry 중 하나라도 reasoning 계열이면 헤드룸 적용.
+  const usesReasoningModel = modelsToTry.some((m) => String(m).startsWith('gpt-5'));
+  const maxCompletionTokens = getOpenAiMaxCompletionTokens(minChars, { reasoningModel: usesReasoningModel });
   const allowAutomaticRetry = shouldAllowAutomaticProviderRetry(options.submissionMode);
   const maxAttemptsPerModel = allowAutomaticRetry ? 99 : 1;
   const maxTransientRetriesPerModel = 0;

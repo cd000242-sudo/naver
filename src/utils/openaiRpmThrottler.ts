@@ -159,17 +159,34 @@ export const openaiRpmThrottler = new OpenAIRpmThrottler(getCeilingRpm(), 20, 3)
  * ✅ [2026-06-02] 사용자 요청 — 글 1편당 12~30회 호출 burst가 RPM 한도를 치는 것 차단.
  *   기본 20초(일반 OpenAI 텍스트), mini 12초. 환경 변수 OPENAI_MIN_INTERVAL_MS로 override 가능.
  */
-export function getOpenAiMaxCompletionTokens(minChars = 2000): number {
+/**
+ * OpenAI max_completion_tokens 예산.
+ *
+ * [v2.11.136] 추론(reasoning) 모델 대응: gpt-5.x 계열은 이 예산 안에서
+ * reasoning_tokens + 실제 출력 토큰을 함께 소비한다. 기존 값(출력 글자수 기준,
+ * 2400자→4080)은 비추론 모델용이라, 추론 모델에서는 reasoning이 예산을 전부
+ * 먹어 출력 0자(finish_reason=length, textLength=0)로 실패했다(라이브 실측).
+ * 추론 모델에는 넉넉한 reasoning 헤드룸을 더해 준다.
+ */
+export function getOpenAiMaxCompletionTokens(
+  minChars = 2000,
+  opts: { reasoningModel?: boolean } = {},
+): number {
   const safeMinChars = Number.isFinite(minChars) ? Math.max(0, Math.floor(minChars)) : 2000;
 
-  if (safeMinChars <= 800) {
-    return Math.min(1200, Math.max(700, Math.ceil(safeMinChars * 1.8)));
-  }
-  if (safeMinChars <= 1200) {
-    return 1800;
-  }
+  const outputBudget =
+    safeMinChars <= 800
+      ? Math.min(1200, Math.max(700, Math.ceil(safeMinChars * 1.8)))
+      : safeMinChars <= 1200
+        ? 1800
+        : Math.min(8192, Math.max(2048, Math.ceil(safeMinChars * 1.7)));
 
-  return Math.min(8192, Math.max(2048, Math.ceil(safeMinChars * 1.7)));
+  if (!opts.reasoningModel) return outputBudget;
+
+  // 출력 예산 위에 reasoning 헤드룸을 얹는다. medium effort 기준 수천 토큰을
+  // 쓰므로 12k 여유 + 상한 32k. 이래야 reasoning이 출력을 굶기지 않는다.
+  const REASONING_HEADROOM = 12000;
+  return Math.min(32000, outputBudget + REASONING_HEADROOM);
 }
 
 export function getOpenAiMinIntervalMs(modelName = '', maxCompletionTokens = 0): number {

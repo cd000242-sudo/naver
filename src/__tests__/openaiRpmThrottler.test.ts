@@ -78,6 +78,25 @@ describe('OpenAI low-tier token budget helpers', () => {
     expect(getOpenAiMaxCompletionTokens(6000)).toBe(8192);
   });
 
+  // [v2.11.136] 추론 모델은 reasoning_tokens가 이 예산을 함께 먹는다. 라이브
+  // 실측: gpt-5.6-terra가 4080 예산을 reasoning으로 전부 소진 → 출력 0자 실패.
+  it('adds reasoning headroom for reasoning models so output is not starved', () => {
+    const base = getOpenAiMaxCompletionTokens(2400);
+    const reasoning = getOpenAiMaxCompletionTokens(2400, { reasoningModel: true });
+    expect(base).toBe(4080); // 비추론 경로는 기존 그대로(회귀 없음)
+    expect(reasoning).toBeGreaterThan(base + 8000); // 출력 위에 넉넉한 추론 여유
+    expect(reasoning).toBeLessThanOrEqual(32000); // 상한
+  });
+
+  it('reasoning headroom sits above the output budget and stays bounded', () => {
+    // 출력 예산은 8192 상한 → 추론 총합 최대 8192+12000=20192 (32000 안전상한 이하)
+    const big = getOpenAiMaxCompletionTokens(20000, { reasoningModel: true });
+    expect(big).toBe(20192);
+    expect(big).toBeLessThanOrEqual(32000);
+    const small = getOpenAiMaxCompletionTokens(450, { reasoningModel: true });
+    expect(small).toBeGreaterThan(getOpenAiMaxCompletionTokens(450));
+  });
+
   it('uses a more conservative interval for large standard GPT-4.1 calls', () => {
     expect(getOpenAiMinIntervalMs('gpt-4.1', 4500)).toBeGreaterThanOrEqual(15_000);
     expect(getOpenAiMinIntervalMs('gpt-4.1-mini', 4500)).toBeLessThan(
