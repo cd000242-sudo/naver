@@ -1526,7 +1526,16 @@ async function readEditorStats(frame: Frame): Promise<{ chars: number; tables: n
 
     const root = getSmartEditorDocumentRoot();
     const scope = root || document.body;
-    const text = (scope.innerText || scope.textContent || '').trim();
+    // [v2.11.135] Placeholder text (caption "사진 설명을 입력하세요", empty-
+    // paragraph hints) appears and disappears with focus. Including it made
+    // the before/after texts diverge mid-paste, so `afterText.startsWith(
+    // beforeText)` false-negatived into EDITOR_PARTIAL_INSERT_UNRECOVERED on
+    // blogs whose editor shows captions (live report: beforeChars=48,
+    // afterChars=206, growth ≈ full 161-char section, needle absent).
+    // Measure on a clone with placeholders and hidden helper labels removed.
+    const clone = scope.cloneNode(true) as HTMLElement;
+    clone.querySelectorAll('.se-placeholder, .se-blind, .blind').forEach((el) => el.remove());
+    const text = (clone.textContent || '').replace(/\s+/g, ' ').trim();
     return {
       chars: text.length,
       tables: scope.querySelectorAll('table, .se-component.se-table, .se-component-table').length,

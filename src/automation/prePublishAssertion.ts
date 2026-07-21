@@ -531,7 +531,16 @@ export async function collectPrePublishStats(
       const seen = new Set<string>();
       return Array.from(scope.querySelectorAll(selectors))
         .filter(isDocumentTextElement)
-        .map((el) => ((el as HTMLElement).innerText || el.textContent || '').trim())
+        .filter((el) => !(el as HTMLElement).closest('.se-placeholder'))
+        .map((el) => {
+          // [v2.11.135] Placeholder hints ("본문에 #을 이용하여 태그를...")
+          // are real text nodes in some editor variants — counting them as
+          // body content made an EMPTY editor report bodyChars=36 and locked
+          // the fresh-draft gate forever on affected blogs. Strip them.
+          const clone = (el as HTMLElement).cloneNode(true) as HTMLElement;
+          clone.querySelectorAll('.se-placeholder').forEach((placeholder) => placeholder.remove());
+          return (clone.textContent || '').trim();
+        })
         .filter(Boolean)
         .filter((text) => !looksLikeEditorChromeOnly(text))
         .filter((text) => {

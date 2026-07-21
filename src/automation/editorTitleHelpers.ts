@@ -101,7 +101,18 @@ export async function readEditorTitleText(frame: Frame): Promise<string> {
     for (const selector of candidateSelectors) {
       const el = document.querySelector(selector) as HTMLInputElement | HTMLTextAreaElement | HTMLElement | null;
       if (!el) continue;
-      const value = 'value' in el ? String(el.value || '') : String(el.innerText || el.textContent || '');
+      // [v2.11.135] Some editor variants render the empty-title hint as a real
+      // text node (<span class="se-placeholder">제목</span>). Reading it as
+      // content made a blank editor report titleChars=2, which dead-locked the
+      // fresh-draft gate on affected blogs (live report). Strip placeholders.
+      let value = '';
+      if ('value' in el) {
+        value = String(el.value || '');
+      } else {
+        const clone = el.cloneNode(true) as HTMLElement;
+        clone.querySelectorAll('.se-placeholder').forEach((placeholder) => placeholder.remove());
+        value = String(clone.textContent || '');
+      }
       if (value.trim()) return value.trim();
     }
     return '';
