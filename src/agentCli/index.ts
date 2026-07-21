@@ -74,48 +74,67 @@ export async function generateWithAgent(
   }
 
   const started = Date.now();
-  let text: string;
-  try {
-    text = provider === 'codex'
-      ? await runCodex(prompt, { schema, model, timeoutMs, signal })
-      : provider === 'gemini'
-        ? await runGemini(prompt, { schema, model, timeoutMs, signal })
-        : await runClaude(prompt, { schema, model, timeoutMs, signal });
-  } catch (error) {
-    if (error instanceof AgentCliError
-        && ['not_logged_in', 'subscription_inactive', 'rate_limited'].includes(error.code)) {
-      clearAgentDetectionCache(provider);
-    }
-    // [v2.11.135] Remember the CLI-reported reset moment so the status card
-    // can show when the quota window reopens. Best-effort only.
-    if (error instanceof AgentCliError && error.code === 'rate_limited') {
-      try {
-        const { recordAgentRateLimit } = await import('./usageTracker.js');
-        recordAgentRateLimit(provider, `${error.detail ?? ''} ${error.message}`);
-      } catch { /* usage visibility must never mask the real error */ }
-    }
-    throw error;
-  }
-  // [v2.11.135] Quota is consumed once the CLI answered, even if JSON parsing
-  // below fails — record here, not after validation.
-  try {
-    const { recordAgentCall } = await import('./usageTracker.js');
-    recordAgentCall(provider);
-  } catch { /* best-effort */ }
-  const durationMs = Date.now() - started;
-
+  let text = '';
   let json: unknown | undefined;
-  if (schema) {
-    json = tryExtractJson(text);
-    if (json === undefined) {
-      throw new AgentCliError(
-        'bad_json',
-        provider,
-        buildAgentFailureMessage(provider, 'bad_json'),
-        text.slice(0, 500),
-      );
+
+  // [v2.11.135] bad_json / empty_output / timeout get ONE automatic retry.
+  // These are transient output-shape failures, the CLI runs on the user's
+  // subscription (a retry costs no API money), and a single flake previously
+  // killed the whole post (every agent error was terminal upstream).
+  // Auth/quota/spawn errors stay single-shot as before.
+  const RETRY_ONCE_CODES = ['bad_json', 'empty_output', 'timeout'];
+  for (let attempt = 1; ; attempt++) {
+    try {
+      text = provider === 'codex'
+        ? await runCodex(prompt, { schema, model, timeoutMs, signal })
+        : provider === 'gemini'
+          ? await runGemini(prompt, { schema, model, timeoutMs, signal })
+          : await runClaude(prompt, { schema, model, timeoutMs, signal });
+
+      // Quota is consumed once the CLI answered, even if JSON parsing below
+      // fails — record here, not after validation.
+      try {
+        const { recordAgentCall } = await import('./usageTracker.js');
+        recordAgentCall(provider);
+      } catch { /* best-effort */ }
+
+      if (schema) {
+        json = tryExtractJson(text);
+        if (json === undefined) {
+          throw new AgentCliError(
+            'bad_json',
+            provider,
+            buildAgentFailureMessage(provider, 'bad_json'),
+            text.slice(0, 500),
+          );
+        }
+      }
+      break;
+    } catch (error) {
+      if (error instanceof AgentCliError
+          && ['not_logged_in', 'subscription_inactive', 'rate_limited'].includes(error.code)) {
+        clearAgentDetectionCache(provider);
+      }
+      // [v2.11.135] Remember the CLI-reported reset moment so the status card
+      // can show when the quota window reopens. Best-effort only.
+      if (error instanceof AgentCliError && error.code === 'rate_limited') {
+        try {
+          const { recordAgentRateLimit } = await import('./usageTracker.js');
+          recordAgentRateLimit(provider, `${error.detail ?? ''} ${error.message}`);
+        } catch { /* usage visibility must never mask the real error */ }
+      }
+      const retryable = error instanceof AgentCliError
+        && RETRY_ONCE_CODES.includes(error.code)
+        && attempt === 1
+        && signal?.aborted !== true;
+      if (retryable) {
+        console.warn(`[AgentCli] ${provider} ${(error as AgentCliError).code} — 구독 CLI 1회 자동 재시도 (추가 과금 없음)`);
+        continue;
+      }
+      throw error;
     }
   }
+  const durationMs = Date.now() - started;
 
   return { provider, text, json, durationMs };
 }

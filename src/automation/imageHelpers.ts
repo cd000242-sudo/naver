@@ -1615,8 +1615,17 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     self.log(`      ⚠️ 이미지 후처리 실패: ${(sizeError as Error).message}`);
   }
 
-  if (failures.length > 0) {
+  // [v2.11.135] Partial failures no longer abort the whole publish. Each image
+  // already had 3 retries above; deterministic causes (missing file) fail
+  // identically on the outer retry anyway, and the PRE_PUBLISH image-count
+  // gate (기획 대비 70%, 사용자 큐레이션 신뢰) is the intended arbiter for
+  // partially-imaged posts. Only a TOTAL failure — no image made it in — is a
+  // publish accident worth aborting.
+  if (failures.length > 0 && failures.length >= images.length) {
     throw new Error(`IMAGE_INSERTION_FAILED:${failures.length}/${images.length}개 이미지 삽입 실패 — ${failures.slice(0, 3).join(' | ')}`);
+  }
+  if (failures.length > 0) {
+    self.log(`      ⚠️ 이미지 ${failures.length}/${images.length}개 삽입 실패 — 나머지로 발행을 계속합니다 (${failures.slice(0, 2).join(' | ')})`);
   }
 }
 

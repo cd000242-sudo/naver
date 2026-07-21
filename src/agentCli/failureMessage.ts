@@ -15,6 +15,10 @@ const GUIDANCE: Readonly<Record<AgentErrorCode, string>> = Object.freeze({
   bad_json: 'CLI 응답을 글 데이터 형식으로 해석하지 못했습니다.',
 });
 
+// [v2.11.135] These transient output-shape failures now get one automatic
+// retry inside generateWithAgent (subscription CLI — no extra API cost).
+const RETRIED_ONCE_CODES: ReadonlySet<AgentErrorCode> = new Set(['bad_json', 'empty_output', 'timeout']);
+
 export function buildAgentFailureMessage(
   provider: AgentProvider,
   code: AgentErrorCode,
@@ -24,5 +28,8 @@ export function buildAgentFailureMessage(
   const safeDetail = detail == null || String(detail).trim() === ''
     ? ''
     : ` 상세: ${sanitizeUserVisibleError(detail)}`;
-  return `${providerLabel} 생성 실패 (원인 코드: ${code}). ${GUIDANCE[code]}${safeDetail} 같은 요청은 자동 재시도하지 않았습니다.`;
+  const retryNote = RETRIED_ONCE_CODES.has(code)
+    ? ' 1회 자동 재시도 후에도 실패한 결과입니다.'
+    : ' 같은 요청은 자동 재시도하지 않았습니다.';
+  return `${providerLabel} 생성 실패 (원인 코드: ${code}). ${GUIDANCE[code]}${safeDetail}${retryNote}`;
 }

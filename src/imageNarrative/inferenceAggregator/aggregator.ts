@@ -210,28 +210,54 @@ export async function aggregateInferences(
     images.map((img) => extractExifFromBuffer(img.buffer)),
   );
 
-  // Step 2: Build base64 strings and run Vision API with concurrency limit
-  const inferTasks = images.map((img, i) => async (): Promise<EnrichedInferenceResponse> => {
+  // Step 2: Build base64 strings and run Vision API with concurrency limit.
+  // [v2.11.135] A single image failure used to abort the WHOLE post (no
+  // per-task catch): with 10+ photos even a small per-image failure rate
+  // killed a large share of runs. Failures are now skipped and the post
+  // continues as long as enough images survived; only a majority failure
+  // aborts (that is a provider/config outage, not a flaky image).
+  const inferTasks = images.map((img, i) => async (): Promise<EnrichedInferenceResponse | null> => {
     const imageBase64 = img.buffer.toString('base64');
-    const response = await inferImage(
-      {
-        imageId: img.imageId,
-        imageBase64,
-        mimeType: img.mimeType,
-        exif: exifResults[i],
-      },
-      {
-        provider,
-        mode,
-        context: options.context,
-        allowProviderFallback: options.allowProviderFallback,
-        onFallback: options.onFallback,
-      },
-    );
-    return { ...response, exif: exifResults[i] ?? {} };
+    try {
+      const response = await inferImage(
+        {
+          imageId: img.imageId,
+          imageBase64,
+          mimeType: img.mimeType,
+          exif: exifResults[i],
+        },
+        {
+          provider,
+          mode,
+          context: options.context,
+          allowProviderFallback: options.allowProviderFallback,
+          onFallback: options.onFallback,
+        },
+      );
+      return { ...response, exif: exifResults[i] ?? {} };
+    } catch (error) {
+      console.warn(
+        `[Aggregator] ⚠️ 사진 추론 실패 — 이 사진은 건너뛰고 계속: "${img.imageId}" (${(error as Error).message?.substring(0, 160)})`,
+      );
+      return null;
+    }
   });
 
-  const enriched = await runWithConcurrency(inferTasks, concurrency);
+  const settled = await runWithConcurrency(inferTasks, concurrency);
+  const enriched = settled.filter((r): r is EnrichedInferenceResponse => r !== null);
+  const failedCount = settled.length - enriched.length;
+  const requiredSuccesses = Math.max(2, Math.ceil(images.length * 0.5));
+  // Empty input keeps the legacy contract (returns an empty plan; the
+  // upstream input validator owns that error message).
+  if (images.length > 0 && enriched.length < requiredSuccesses) {
+    throw new Error(
+      `사진 추론이 ${settled.length}장 중 ${failedCount}장 실패해 글을 구성할 수 없습니다 `
+      + `(최소 ${requiredSuccesses}장 필요). 비전 엔진/키 상태를 확인해주세요.`,
+    );
+  }
+  if (failedCount > 0) {
+    console.warn(`[Aggregator] ℹ️ ${failedCount}장 실패를 제외하고 ${enriched.length}장으로 계속 진행합니다.`);
+  }
 
   // Step 3: Apply ordering
   const ordered = applyOrdering(enriched);
