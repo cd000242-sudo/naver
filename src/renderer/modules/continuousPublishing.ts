@@ -1483,6 +1483,43 @@ export function initContinuousPublishingV2(): void {
       'continuous-category-select'].forEach(id => {
         document.getElementById(id)?.addEventListener('change', () => syncContinuousSettings('main'));
       });
+
+    // [v2.11.133] Persist the engine choice the moment the user changes it.
+    // The selects only synced main<->modal DOM, so the choice never reached
+    // localStorage and queue items / other flows kept publishing with the
+    // previous engine (user report: picked GPT image, published via dropshot).
+    // Pending items still on the previous default migrate together; items with
+    // a per-item engine (edited individually) are left untouched.
+    ['continuous-image-source-select', 'continuous-modal-image-source'].forEach(id => {
+      document.getElementById(id)?.addEventListener('change', (e) => {
+        const value = ((e.target as HTMLSelectElement)?.value || '').trim();
+        if (['', 'skip', 'saved', 'null', 'undefined'].includes(value)) return;
+        // Item-edit mode: the modal select edits one queue item only — do not
+        // touch the global engine or other items.
+        if (id === 'continuous-modal-image-source') {
+          const editingIndexInput = document.getElementById('continuous-settings-editing-index') as HTMLInputElement | null;
+          if (parseInt(editingIndexInput?.value || '-1', 10) >= 0) return;
+        }
+        const prevDefault = getFullAutoImageSource();
+        try {
+          localStorage.setItem('fullAutoImageSource', value);
+          localStorage.setItem('globalImageSource', value);
+        } catch { /* localStorage unavailable — select value still wins at add time */ }
+        let migrated = 0;
+        continuousQueueV2.forEach((item, idx) => {
+          if (item.status === 'pending' && item.imageSource === prevDefault && prevDefault !== value) {
+            continuousQueueV2[idx] = { ...item, imageSource: value };
+            migrated++;
+          }
+        });
+        if (migrated > 0) {
+          renderQueueListV2();
+          console.log(`[Continuous] 🎨 이미지 엔진 변경 "${prevDefault}" → "${value}" — 대기 항목 ${migrated}개 동기화`);
+        } else {
+          console.log(`[Continuous] 🎨 이미지 엔진 선택 영속화: "${value}"`);
+        }
+      });
+    });
     document.querySelectorAll('input[name="continuous-publish-mode"]').forEach(el => {
       el.addEventListener('change', () => syncContinuousSettings('main'));
     });
@@ -2751,7 +2788,14 @@ function addItemToQueueV2Impl(): void {
   // ✅ [2026-03-07 FIX] 텍스트만 발행 설정 시 이미지 소스를 'skip'으로 설정
   // [Phase 7.1-e] 단일 해석처 경유 (아이템 생성 시점 스냅샷)
   const textOnlyPublish = resolvePipelineConfig('continuous').image.textOnlyPublish;
-  const imageSource = textOnlyPublish ? 'skip' : getFullAutoImageSource();
+  // [v2.11.133] Snapshot the visible engine select first. Reading only
+  // localStorage here let a stale globalImageSource (e.g. 'dropshot') silently
+  // override the engine the user just picked in the continuous UI.
+  const imageSourceSelectEl = document.getElementById('continuous-image-source-select') as HTMLSelectElement | null;
+  const imageSourceRadioEl = document.querySelector('input[name="continuous-image-source"]:checked') as HTMLInputElement | null;
+  const imageSource = textOnlyPublish
+    ? 'skip'
+    : (imageSourceSelectEl?.value || imageSourceRadioEl?.value || getFullAutoImageSource());
   // 🛡️ [2026-03-23] 끝판왕: 기본값 7(분 단위)로 변경
   const intervalValue = parseInt((document.getElementById('continuous-interval-value') as HTMLInputElement)?.value || '7');
   const intervalUnit = parseInt((document.getElementById('continuous-interval-unit') as HTMLSelectElement)?.value || '60');

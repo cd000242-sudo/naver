@@ -907,11 +907,8 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
         // extractBodyForHeading이 실패해서 cleanBody가 빈 문자열이 되는 것 방지
         self.log('   ⚠️ heading title을 bodyText에서 찾지 못함 → 균등 분할 폴백');
         const lines = bodyText.split('\n').filter((l: string) => l.trim().length > 0);
-        const linesPerHeading = Math.max(1, Math.ceil(lines.length / headings.length));
         for (let hi = 0; hi < headings.length; hi++) {
-          const startLine = hi * linesPerHeading;
-          const endLine = Math.min(startLine + linesPerHeading, lines.length);
-          const chunk = lines.slice(startLine, endLine).join('\n').trim();
+          const chunk = sliceBalancedUnits(lines, hi, headings.length).join('\n').trim();
           if (chunk.length > 0) {
             headings[hi].content = chunk;
             self.log(`   📝 균등분할 소제목[${hi + 1}] 본문: ${chunk.length}자`);
@@ -1695,10 +1692,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             // bodyText에서 heading 인덱스 기반 균등 분배로 안전하게 추출
             self.log(`   ⚠️ [편집 안전장치] heading.content가 비어있음 → bodyText에서 균등 분배 추출`);
             const allLines = bodyText.split('\n').filter((l: string) => l.trim().length > 0);
-            const lph = Math.max(1, Math.ceil(allLines.length / headings.length));
-            const sl = i * lph;
-            const el = Math.min(sl + lph, allLines.length);
-            cleanBody = allLines.slice(sl, el).join('\n').trim();
+            cleanBody = sliceBalancedUnits(allLines, i, headings.length).join('\n').trim();
             self.log(`   ✅ 균등 분배 추출: ${cleanBody.length}자`);
           } else {
             const directHeadingContent = String(heading.content || '').trim();
@@ -1719,16 +1713,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
 
             if (cleanBody.length < 30) {
               const sentences = bodyText.split(/(?<=[.!?])\s+/).filter((s: any) => s.trim());
-              const sentencesPerHeading = Math.max(5, Math.ceil(sentences.length / headings.length));
-              const startIdx = i * sentencesPerHeading;
-              const endIdx = Math.min(startIdx + sentencesPerHeading, sentences.length);
-              cleanBody = sentences.slice(startIdx, endIdx).join(' ').trim();
+              cleanBody = sliceBalancedUnits(sentences, i, headings.length).join(' ').trim();
             }
 
             // 제목 중복 등 기초 정리 + URL 링크 텍스트 제거
             const escapedTitleForRegex = heading.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
             cleanBody = cleanBody
-              .replace(new RegExp(`^\\s * ${escapedTitleForRegex} \\s *:?\\s * `, 'i'), '')
+              // [v2.11.134] Regex had stray spaces ("\s * ") and matched
+              // literal space+asterisk sequences instead of the heading title.
+              .replace(new RegExp(`^\\s*${escapedTitleForRegex}\\s*:?\\s*`, 'i'), '')
               .replace(/🔗[^\n]*\n?/g, '')
               .replace(/도움이\s*되(었|셧|셨)으면[^\n]*/gi, '')
               .replace(/https?:\/\/[^\s\n]+/g, '')
@@ -1794,10 +1787,7 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
               self.log(`   ✅ heading.content 복구: ${cleanBody.length}자`);
             } else {
               const allLines = bodyText.split('\n').filter((l: string) => l.trim().length > 0);
-              const lph = Math.max(1, Math.ceil(allLines.length / headings.length));
-              const sl = i * lph;
-              const el = Math.min(sl + lph, allLines.length);
-              cleanBody = allLines.slice(sl, el).join('\n').trim();
+              cleanBody = sliceBalancedUnits(allLines, i, headings.length).join('\n').trim();
               self.log(`   ✅ bodyText 균등 분할 복구: ${cleanBody.length}자`);
             }
           }
@@ -2835,6 +2825,211 @@ export async function setupMobileViewAndCenterAlign(self: any): Promise<void> {
 // ── extractBodyForHeading ──
 
 
+// [v2.11.134] Balanced contiguous partition for body-distribution fallbacks.
+// The old ceil-based math (start = i * ceil(N/H)) ran past the array whenever
+// N < H * ceil(N/H): later headings received an EMPTY slice and were published
+// as heading+image with no body ("누락"). This keeps chunks contiguous, covers
+// every unit exactly once, and spreads the remainder across the front.
+export function sliceBalancedUnits<T>(units: T[], headingIndex: number, totalHeadings: number): T[] {
+  const n = units.length;
+  const h = Math.max(1, totalHeadings);
+  const i = Math.max(0, Math.min(headingIndex, h - 1));
+  const base = Math.floor(n / h);
+  const extra = n % h;
+  const start = i * base + Math.min(i, extra);
+  const end = start + base + (i < extra ? 1 : 0);
+  return units.slice(start, end);
+}
+
+// [v2.11.134] Section-body closing cleanup, shared by every extraction path.
+// Previous inline copies deleted real mid-body content: generic discourse
+// markers ("마지막으로 ...") were treated as closers and their whole line
+// removed, "도움이 되었으면"-style matches dropped the entire line (= a whole
+// paragraph in the 1-line-per-paragraph mobile format), and a loose "결론:"
+// trigger deleted everything after it. Cleanup is now tail-scoped and
+// phrase-level so information survives while closer platitudes still go.
+const SECTION_CLOSING_DEDUP_PATTERNS: RegExp[] = [
+  /도움이\s*되었으면\s*좋겠습니다/gi,
+  /참고하시길\s*바랍니다/gi,
+  /함께\s*응원해요/gi,
+  /화이팅/gi,
+  /응원합니다/gi,
+  /다음에\s*또\s*만나요/gi,
+  /다음에\s*또\s*봬요/gi,
+  /글을\s*마무리하겠습니다/gi,
+  /글을\s*마칩니다/gi,
+  /마무리하겠습니다/gi,
+  /마무리합니다/gi,
+  /기대하며\s*글을/gi,
+  /기대하며\s*마무리/gi,
+  /기대하며\s*마칩니다/gi,
+  /승리를\s*기대하며/gi,
+  /활약을\s*기대하며/gi,
+];
+
+const SECTION_UNWANTED_PHRASES: RegExp[] = [
+  /비즈니스\s*성장에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
+  /비즈니스\s*성장에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
+  /마케팅\s*활동에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
+  /마케팅\s*활동에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
+  /이\s*정보가\s*도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
+  /도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
+  /도움이\s*되(었|셧|셨)으면\s*좋겠(습니다|어요|다)[^\n]*/gi,
+  /도움이\s*되(었|셧|셨)으면\s*(합니다|해요|한다)[^\n]*/gi,
+  /도움이\s*되(었|셧|셨)으면[^\n]*/gi,
+  /정보가\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
+  /정보가\s*도움이\s*되셧으면\s*좋겠습니다[^\n]*/gi,
+  /정보가\s*도움이\s*되셨으면\s*좋겠습니다[^\n]*/gi,
+  /참고하시길\s*바랍니다[^\n]*/gi,
+  /재태크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
+  /재태크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
+  /재태크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
+  /재태크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
+  /재테크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
+  /재테크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
+  /재테크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
+  /재테크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
+];
+
+// Shopping-style closers removed from the LAST 3 lines only — mid-body
+// sentences like "꼭 한번 확인해보세요" carry real guidance and must survive.
+const SECTION_TAIL_CLOSER_PATTERNS: RegExp[] = [
+  /오늘\s*소개해\s*드린[^\n]*/gi,
+  /어떠셨나요[^\n]*/gi,
+  /꼭\s*한번[^\n]*/gi,
+  /눈여겨보시고[^\n]*/gi,
+  /현명한\s*쇼핑[^\n]*/gi,
+];
+
+export function cleanExtractedSectionBody(content: string, headingTitle: string, allHeadings?: any[]): string {
+  let cleaned = (content || '').trim();
+  if (!cleaned) return '';
+
+  // (a) Strip other headings' "title: content" lines + (b) closing-section leak.
+  if (allHeadings && allHeadings.length > 0) {
+    for (const otherHeading of allHeadings) {
+      if (!otherHeading || otherHeading.title === headingTitle) continue;
+      const otherTitle = String(otherHeading.title || '');
+      const escapedOtherTitle = otherTitle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      if (!escapedOtherTitle) continue;
+      cleaned = cleaned
+        .replace(new RegExp(`^\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '')
+        .replace(new RegExp(`\\n\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '\n')
+        .replace(new RegExp(`${escapedOtherTitle}\\s*:.*?(\\n|$)`, 'gi'), '')
+        .trim();
+
+      if (/마무리|결론/.test(otherTitle)) {
+        // A leaked closing SECTION trails at the end when boundary matching
+        // failed. Trigger only on a tail-half line that contains the actual
+        // closing heading title — a plain mid-body "결론: ..." sentence no
+        // longer wipes the rest of the section.
+        const titlePart = otherTitle.split(':')[0].trim();
+        const closingTitleLine = /(마무리|결론|끝으로|마지막으로)\s*:/i;
+        const lines = cleaned.split('\n');
+        let leakStart = -1;
+        for (let li = Math.floor(lines.length / 2); li < lines.length; li++) {
+          if (titlePart && closingTitleLine.test(lines[li]) && lines[li].includes(titlePart)) {
+            leakStart = li;
+            break;
+          }
+        }
+        if (leakStart >= 0) {
+          cleaned = lines.slice(0, leakStart).join('\n').trim();
+        }
+      }
+    }
+  }
+
+  // (c) Trailing CTA text.
+  cleaned = cleaned
+    .replace(/\n+🔗\s*자세히\s*보기[^\n]*$/i, '')
+    .replace(/\n+🔗\s*더\s*알아보기[^\n]*$/i, '')
+    .replace(/\n+자세히\s*보기[^\n]*$/i, '')
+    .replace(/\n+더\s*알아보기[^\n]*$/i, '')
+    .trim();
+
+  // (c-2) Shopping closers — last 3 lines only.
+  {
+    const lines = cleaned.split('\n');
+    const tailStart = Math.max(0, lines.length - 3);
+    for (let li = tailStart; li < lines.length; li++) {
+      for (const pattern of SECTION_TAIL_CLOSER_PATTERNS) {
+        pattern.lastIndex = 0;
+        lines[li] = lines[li].replace(pattern, '');
+      }
+    }
+    cleaned = lines.filter((line, idx) => idx < tailStart || line.trim().length > 0).join('\n').trim();
+  }
+
+  // (d) Closer dedup — candidates restricted to the last-500-char window so a
+  // mid-body line containing a closer-like word is never deleted.
+  const last500Chars = cleaned.slice(-500);
+  let closingCount = 0;
+  for (const pattern of SECTION_CLOSING_DEDUP_PATTERNS) {
+    pattern.lastIndex = 0;
+    const matches = last500Chars.match(pattern);
+    if (matches) closingCount += matches.length;
+  }
+  if (closingCount > 1) {
+    const lines = cleaned.split('\n');
+    const keptLines: string[] = [];
+    let foundClosing = false;
+    let tailChars = 0;
+    for (let li = lines.length - 1; li >= 0; li--) {
+      const line = lines[li];
+      const inTail = tailChars < 500;
+      tailChars += line.length + 1;
+      const hasClosing = inTail && SECTION_CLOSING_DEDUP_PATTERNS.some(pattern => {
+        pattern.lastIndex = 0;
+        return pattern.test(line);
+      });
+      if (hasClosing && foundClosing) continue;
+      if (hasClosing) foundClosing = true;
+      keptLines.unshift(line);
+    }
+    cleaned = keptLines.join('\n').trim();
+  }
+
+  // (e) Banned platitudes — strip the PHRASE, keep the line when real
+  // information remains; drop the line only when nothing meaningful is left.
+  {
+    const lines = cleaned.split('\n');
+    const filtered: string[] = [];
+    for (const line of lines) {
+      let stripped = line;
+      for (const pattern of SECTION_UNWANTED_PHRASES) {
+        pattern.lastIndex = 0;
+        stripped = stripped.replace(pattern, '');
+      }
+      if (stripped === line) {
+        filtered.push(line);
+        continue;
+      }
+      const rest = stripped.replace(/[\s,.·…~!?-]+$/g, '').trim();
+      if (rest.length >= 8) filtered.push(rest);
+    }
+    cleaned = filtered.join('\n').trim();
+  }
+
+  // (f) Residual short closer on the last line.
+  {
+    const lines = cleaned.split('\n');
+    if (lines.length > 0) {
+      const lastLine = lines[lines.length - 1].trim();
+      const isResidualCloser = lastLine.length <= 5 && SECTION_CLOSING_DEDUP_PATTERNS.some(pattern => {
+        pattern.lastIndex = 0;
+        return pattern.test(lastLine);
+      });
+      if (isResidualCloser) {
+        lines.pop();
+        cleaned = lines.join('\n').trim();
+      }
+    }
+  }
+
+  return cleaned;
+}
+
 export function extractBodyForHeading(self: any, fullBody: string, headingTitle: string, headingIndex: number, totalHeadings: number, allHeadings?: any[]): string {
   if (!fullBody || !fullBody.trim()) {
     return '';
@@ -2935,199 +3130,8 @@ export function extractBodyForHeading(self: any, fullBody: string, headingTitle:
       .replace(new RegExp(`\\n\\s*${escapedHeadingTitle}\\s*:\\s*`, 'gi'), '\n')
       .trim();
 
-    // ✅ 글 마지막에 중복된 CTA 텍스트 제거 (🔗 자세히 보기, 🔗 더 알아보기 등)
-    cleanContent = cleanContent
-      .replace(/\n+🔗\s*자세히\s*보기[^\n]*$/i, '') // 마지막 줄의 "🔗 자세히 보기" 제거
-      .replace(/\n+🔗\s*더\s*알아보기[^\n]*$/i, '') // 마지막 줄의 "🔗 더 알아보기" 제거
-      .replace(/\n+자세히\s*보기[^\n]*$/i, '') // 마지막 줄의 "자세히 보기" 제거
-      .replace(/\n+더\s*알아보기[^\n]*$/i, '') // 마지막 줄의 "더 알아보기" 제거
-      .trim();
-
-    // ✅ 마무리 문구 패턴 제거 (부자연스러운 마무리 문구 정리)
-    const closingPatterns = [
-      /도움이\s*되었으면\s*좋겠습니다/gi,
-      /참고하시길\s*바랍니다/gi,
-      /함께\s*응원해요/gi,
-      /화이팅/gi,
-      /응원합니다/gi,
-      /다음에\s*또\s*만나요/gi,
-      /다음에\s*또\s*봬요/gi,
-      /글을\s*마무리하겠습니다/gi,
-      /글을\s*마칩니다/gi,
-      /마무리하겠습니다/gi,
-      /마무리합니다/gi,
-      /기대하며\s*글을/gi,
-      /기대하며\s*마무리/gi,
-      /기대하며\s*마칩니다/gi,
-      /승리를\s*기대하며/gi,
-      /활약을\s*기대하며/gi,
-      /정리하면/gi,
-      /마지막으로/gi,
-      /끝으로/gi,
-      /요약하면/gi,
-    ];
-
-    // 마지막 500자 내에서 마무리 문구가 중복되면 제거
-    const last500Chars = cleanContent.slice(-500);
-    let closingCount = 0;
-    for (const pattern of closingPatterns) {
-      const matches = last500Chars.match(pattern);
-      if (matches) {
-        closingCount += matches.length;
-      }
-    }
-
-    // 마무리 문구가 2개 이상이면 마지막 것만 남기고 제거
-    if (closingCount > 1) {
-      const lines = cleanContent.split('\n');
-      const cleanedLines: string[] = [];
-      let foundClosing = false;
-
-      // 뒤에서부터 검사하여 마지막 마무리 문구만 유지
-      for (let i = lines.length - 1; i >= 0; i--) {
-        const line = lines[i];
-        const hasClosing = closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(line); });
-
-        if (hasClosing) {
-          if (!foundClosing) {
-            // 첫 번째로 발견한 마무리 문구만 유지
-            cleanedLines.unshift(line);
-            foundClosing = true;
-          }
-          // 나머지 마무리 문구는 제거
-        } else {
-          cleanedLines.unshift(line);
-        }
-      }
-
-      cleanContent = cleanedLines.join('\n').trim();
-    }
-
-    // ✅ 불필요한 문구 전체 제거 (본문 중간에도 있는 경우 제거)
-    const unwantedPhrases = [
-      /비즈니스\s*성장에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
-      /비즈니스\s*성장에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /마케팅\s*활동에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /마케팅\s*활동에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
-      /이\s*정보가\s*도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
-      /도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
-      // ✅ "도움이 되었으면" 모든 변형 제거 (오타 포함)
-      /도움이\s*되(었|셧|셨)으면\s*좋겠(습니다|어요|다)[^\n]*/gi,
-      /도움이\s*되(었|셧|셨)으면\s*(합니다|해요|한다)[^\n]*/gi,
-      /도움이\s*되(었|셧|셨)으면[^\n]*/gi,
-      /도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /도움이\s*되었으면\s*합니다[^\n]*/gi,
-      /도움이\s*되셧으면\s*좋겠습니다[^\n]*/gi,
-      /도움이\s*되셨으면\s*좋겠습니다[^\n]*/gi,
-      /정보가\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /정보가\s*도움이\s*되셧으면\s*좋겠습니다[^\n]*/gi,
-      /정보가\s*도움이\s*되셨으면\s*좋겠습니다[^\n]*/gi,
-      /참고하시길\s*바랍니다[^\n]*/gi,
-      /재태크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
-      /재태크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
-      /재태크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /재태크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
-      /재테크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
-      /재테크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
-      /재테크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /재테크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
-    ];
-
-    // 본문 전체에서 불필요한 문구 제거 (줄 단위로)
-    const lines = cleanContent.split('\n');
-    const filteredLines: string[] = [];
-    for (const line of lines) {
-      let shouldRemove = false;
-      for (const pattern of unwantedPhrases) {
-        if (pattern.test(line)) {
-          shouldRemove = true;
-          break;
-        }
-      }
-      if (!shouldRemove) {
-        filteredLines.push(line);
-      }
-    }
-    cleanContent = filteredLines.join('\n').trim();
-
-    // ✅ 마지막 문단이 너무 짧거나 의미 없는 경우 제거 (5자 이하)
-    const contentLines = cleanContent.split('\n');
-    if (contentLines.length > 0) {
-      const lastLine = contentLines[contentLines.length - 1].trim();
-      if (lastLine.length <= 5 && closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(lastLine); })) {
-        contentLines.pop();
-        cleanContent = contentLines.join('\n').trim();
-      }
-    }
-
-    // ✅ 다른 소제목의 제목과 내용 제거 (중복 방지)
-    // 예: "3개월 사용 후 솔직 후기: ..." 같은 다른 소제목 내용이 포함된 경우 제거
-    if (allHeadings && allHeadings.length > 0) {
-      for (const otherHeading of allHeadings) {
-        if (otherHeading.title !== headingTitle) {
-          const escapedOtherTitle = otherHeading.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-          // 다른 소제목 제목으로 시작하는 줄 전체 제거 (소제목: 내용 형식)
-          cleanContent = cleanContent
-            .replace(new RegExp(`^\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '') // 줄 시작에서
-            .replace(new RegExp(`\\n\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '\n') // 줄 중간에서
-            .replace(new RegExp(`${escapedOtherTitle}\\s*:.*?(\\n|$)`, 'gi'), '') // 일반 패턴
-            .trim();
-
-          // ✅ 마무리 소제목의 본문 내용이 앞 소제목에 포함된 경우 제거
-          // "마무리: 내용..." 패턴이 본문 중간에 포함되어 있으면 제거
-          if (otherHeading.title.includes('마무리') || otherHeading.title.includes('결론')) {
-            // 마무리 소제목의 제목 패턴으로 시작하는 모든 줄 제거
-            const closingPattern = /마무리\s*:|결론\s*:|끝으로\s*:|마지막으로\s*:/gi;
-            const lines = cleanContent.split('\n');
-            const filteredLines: string[] = [];
-            let skipNextLines = false;
-            let foundClosingTitle = false;
-
-            for (let i = 0; i < lines.length; i++) {
-              const line = lines[i];
-
-              // 마무리 소제목 제목이 발견되면 그 줄부터 끝까지 모두 제거
-              if (closingPattern.test(line)) {
-                // 마무리 소제목 제목이 포함된 줄인지 확인
-                const titlePart = otherHeading.title.split(':')[0].trim();
-                if (line.includes(titlePart) || line.match(/마무리\s*:.*코스트코|결론\s*:/i)) {
-                  foundClosingTitle = true;
-                  skipNextLines = true;
-                  continue; // 마무리 소제목 라인 자체는 제거
-                }
-              }
-
-              // 마무리 소제목 제목이 발견된 이후 모든 줄 제거
-              if (foundClosingTitle || skipNextLines) {
-                // 마무리 소제목의 본문 내용인지 확인 (특정 키워드 포함 여부)
-                const hasClosingContent = /마무리|결론|끝으로|마지막으로|오늘\s*소개해\s*드린|어떠셨나요|꼭\s*한번|눈여겨보시고|현명한\s*쇼핑/i.test(line);
-                if (hasClosingContent) {
-                  continue; // 마무리 내용 줄 제거
-                }
-                // 마무리 소제목 이후 모든 줄 제거
-                if (foundClosingTitle) {
-                  continue;
-                }
-              }
-
-              filteredLines.push(line);
-            }
-
-            cleanContent = filteredLines.join('\n').trim();
-
-            // ✅ 추가 필터링: 마무리 소제목 본문의 일반적인 패턴 제거
-            cleanContent = cleanContent
-              .replace(new RegExp(`오늘\\s*소개해\\s*드린[^\\n]*`, 'gi'), '')
-              .replace(new RegExp(`어떠셨나요[^\\n]*`, 'gi'), '')
-              .replace(new RegExp(`꼭\\s*한번[^\\n]*`, 'gi'), '')
-              .replace(new RegExp(`눈여겨보시고[^\\n]*`, 'gi'), '')
-              .replace(new RegExp(`현명한\\s*쇼핑[^\\n]*`, 'gi'), '')
-              .trim();
-          }
-        }
-      }
-    }
+    // [v2.11.134] Shared tail-scoped closing cleanup — see cleanExtractedSectionBody.
+    cleanContent = cleanExtractedSectionBody(cleanContent, headingTitle, allHeadings);
 
     if (cleanContent.length > 0) {
       self.log(`   🔍 [본문추출] 정확한 패턴 매칭 성공: "${headingTitle}" (${cleanContent.length}자)`);
@@ -3208,191 +3212,8 @@ export function extractBodyForHeading(self: any, fullBody: string, headingTitle:
       .replace(new RegExp(`\\n\\s*${escapedHeadingTitle}\\s*:\\s*`, 'gi'), '\n')
       .trim();
 
-    // ✅ 다른 소제목의 제목과 내용 제거 (중복 방지)
-    // 예: "3개월 사용 후 솔직 후기: ..." 같은 다른 소제목 내용이 포함된 경우 제거
-    if (allHeadings && allHeadings.length > 0) {
-      for (const otherHeading of allHeadings) {
-        if (otherHeading.title !== headingTitle) {
-          const escapedOtherTitle = otherHeading.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-          // 다른 소제목 제목으로 시작하는 줄 전체 제거 (소제목: 내용 형식)
-          result = result
-            .replace(new RegExp(`^\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '') // 줄 시작에서
-            .replace(new RegExp(`\\n\\s*${escapedOtherTitle}\\s*:.*$`, 'gmi'), '\n') // 줄 중간에서
-            .replace(new RegExp(`${escapedOtherTitle}\\s*:.*?(\\n|$)`, 'gi'), '') // 일반 패턴
-            .trim();
-
-          // ✅ 마무리 소제목의 본문 내용이 앞 소제목에 포함된 경우 제거
-          if (otherHeading.title.includes('마무리') || otherHeading.title.includes('결론')) {
-            const closingPattern = /마무리\s*:|결론\s*:|끝으로\s*:|마지막으로\s*:/gi;
-            const resultLines = result.split('\n');
-            const filteredLines: string[] = [];
-            let skipNextLines = false;
-            let foundClosingTitle = false;
-
-            for (let i = 0; i < resultLines.length; i++) {
-              const line = resultLines[i];
-
-              // 마무리 소제목 제목이 발견되면 그 줄부터 끝까지 모두 제거
-              if (closingPattern.test(line)) {
-                const titlePart = otherHeading.title.split(':')[0].trim();
-                if (line.includes(titlePart) || line.match(/마무리\s*:.*코스트코|결론\s*:/i)) {
-                  foundClosingTitle = true;
-                  skipNextLines = true;
-                  continue;
-                }
-              }
-
-              // 마무리 소제목 제목이 발견된 이후 모든 줄 제거
-              if (foundClosingTitle || skipNextLines) {
-                const hasClosingContent = /마무리|결론|끝으로|마지막으로|오늘\s*소개해\s*드린|어떠셨나요|꼭\s*한번|눈여겨보시고|현명한\s*쇼핑/i.test(line);
-                if (hasClosingContent || foundClosingTitle) {
-                  continue;
-                }
-              }
-
-              filteredLines.push(line);
-            }
-
-            result = filteredLines.join('\n').trim();
-
-            // ✅ 추가 필터링: 마무리 소제목 본문의 일반적인 패턴 제거
-            result = result
-              .replace(new RegExp(`오늘\\s*소개해\\s*드린[^\\n]*`, 'gi'), '')
-              .replace(new RegExp(`어떠셨나요[^\\n]*`, 'gi'), '')
-              .replace(new RegExp(`꼭\\s*한번[^\\n]*`, 'gi'), '')
-              .replace(new RegExp(`눈여겨보시고[^\\n]*`, 'gi'), '')
-              .replace(new RegExp(`현명한\\s*쇼핑[^\\n]*`, 'gi'), '')
-              .trim();
-          }
-        }
-      }
-    }
-
-    // ✅ 글 마지막에 중복된 CTA 텍스트 제거 (🔗 자세히 보기, 🔗 더 알아보기 등)
-    result = result
-      .replace(/\n+🔗\s*자세히\s*보기[^\n]*$/i, '') // 마지막 줄의 "🔗 자세히 보기" 제거
-      .replace(/\n+🔗\s*더\s*알아보기[^\n]*$/i, '') // 마지막 줄의 "🔗 더 알아보기" 제거
-      .replace(/\n+자세히\s*보기[^\n]*$/i, '') // 마지막 줄의 "자세히 보기" 제거
-      .replace(/\n+더\s*알아보기[^\n]*$/i, '') // 마지막 줄의 "더 알아보기" 제거
-      .trim();
-
-    // ✅ 마무리 문구 패턴 제거 (부자연스러운 마무리 문구 정리)
-    const closingPatterns = [
-      /도움이\s*되었으면\s*좋겠습니다/gi,
-      /참고하시길\s*바랍니다/gi,
-      /함께\s*응원해요/gi,
-      /화이팅/gi,
-      /응원합니다/gi,
-      /다음에\s*또\s*만나요/gi,
-      /다음에\s*또\s*봬요/gi,
-      /글을\s*마무리하겠습니다/gi,
-      /글을\s*마칩니다/gi,
-      /마무리하겠습니다/gi,
-      /마무리합니다/gi,
-      /기대하며\s*글을/gi,
-      /기대하며\s*마무리/gi,
-      /기대하며\s*마칩니다/gi,
-      /승리를\s*기대하며/gi,
-      /활약을\s*기대하며/gi,
-      /정리하면/gi,
-      /마지막으로/gi,
-      /끝으로/gi,
-      /요약하면/gi,
-    ];
-
-    // 마지막 500자 내에서 마무리 문구가 중복되면 제거
-    const last500Chars = result.slice(-500);
-    let closingCount = 0;
-    for (const pattern of closingPatterns) {
-      const matches = last500Chars.match(pattern);
-      if (matches) {
-        closingCount += matches.length;
-      }
-    }
-
-    // 마무리 문구가 2개 이상이면 마지막 것만 남기고 제거
-    if (closingCount > 1) {
-      const resultLines = result.split('\n');
-      const cleanedLines: string[] = [];
-      let foundClosing = false;
-
-      // 뒤에서부터 검사하여 마지막 마무리 문구만 유지
-      for (let i = resultLines.length - 1; i >= 0; i--) {
-        const line = resultLines[i];
-        const hasClosing = closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(line); });
-
-        if (hasClosing) {
-          if (!foundClosing) {
-            // 첫 번째로 발견한 마무리 문구만 유지
-            cleanedLines.unshift(line);
-            foundClosing = true;
-          }
-          // 나머지 마무리 문구는 제거
-        } else {
-          cleanedLines.unshift(line);
-        }
-      }
-
-      result = cleanedLines.join('\n').trim();
-    }
-
-    // ✅ 불필요한 문구 전체 제거 (본문 중간에도 있는 경우 제거)
-    const unwantedPhrases = [
-      /비즈니스\s*성장에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
-      /비즈니스\s*성장에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /마케팅\s*활동에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /마케팅\s*활동에\s*도움이\s*되길\s*바랍니다[^\n]*/gi,
-      /이\s*정보가\s*도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
-      /도움이\s*되셨기를\s*바랍니다[^\n]*/gi,
-      // ✅ "도움이 되었으면" 모든 변형 제거 (오타 포함)
-      /도움이\s*되(었|셧|셨)으면\s*좋겠(습니다|어요|다)[^\n]*/gi,
-      /도움이\s*되(었|셧|셨)으면\s*(합니다|해요|한다)[^\n]*/gi,
-      /도움이\s*되(었|셧|셨)으면[^\n]*/gi,
-      /도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /도움이\s*되었으면\s*합니다[^\n]*/gi,
-      /도움이\s*되셧으면\s*좋겠습니다[^\n]*/gi,
-      /도움이\s*되셨으면\s*좋겠습니다[^\n]*/gi,
-      /정보가\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /정보가\s*도움이\s*되셧으면\s*좋겠습니다[^\n]*/gi,
-      /정보가\s*도움이\s*되셨으면\s*좋겠습니다[^\n]*/gi,
-      /참고하시길\s*바랍니다[^\n]*/gi,
-      /재태크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
-      /재태크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
-      /재태크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /재태크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
-      /재테크에\s*도움되셧으면\s*좋겠습니다[^\n]*/gi,
-      /재테크에\s*도움되셨으면\s*좋겠습니다[^\n]*/gi,
-      /재테크에\s*도움이\s*되었으면\s*좋겠습니다[^\n]*/gi,
-      /재테크에\s*도움이\s*되었으면\s*합니다[^\n]*/gi,
-    ];
-
-    // 본문 전체에서 불필요한 문구 제거 (줄 단위로)
-    const resultLines2 = result.split('\n');
-    const filteredLines2: string[] = [];
-    for (const line of resultLines2) {
-      let shouldRemove = false;
-      for (const pattern of unwantedPhrases) {
-        if (pattern.test(line)) {
-          shouldRemove = true;
-          break;
-        }
-      }
-      if (!shouldRemove) {
-        filteredLines2.push(line);
-      }
-    }
-    result = filteredLines2.join('\n').trim();
-
-    // ✅ 마지막 문단이 너무 짧거나 의미 없는 경우 제거 (5자 이하)
-    const resultLines = result.split('\n');
-    if (resultLines.length > 0) {
-      const lastLine = resultLines[resultLines.length - 1].trim();
-      if (lastLine.length <= 5 && closingPatterns.some(pattern => { pattern.lastIndex = 0; return pattern.test(lastLine); })) {
-        resultLines.pop();
-        result = resultLines.join('\n').trim();
-      }
-    }
+    // [v2.11.134] Shared tail-scoped closing cleanup — see cleanExtractedSectionBody.
+    result = cleanExtractedSectionBody(result, headingTitle, allHeadings);
 
     if (result.length > 0) {
       self.log(`   🔍 [본문추출] 줄 단위 검색 성공: "${headingTitle}" (${result.length}자)`);
@@ -3418,10 +3239,7 @@ export function extractBodyForHeading(self: any, fullBody: string, headingTitle:
   if (paragraphs.length === 0) {
     // 문단이 없으면 문장 단위로 분배
     const sentences = fullBody.split(/(?<=[.!?])\s+/).filter((s: any) => s.trim());
-    const sentencesPerHeading = Math.max(3, Math.ceil(sentences.length / totalHeadings));
-    const startIdx = headingIndex * sentencesPerHeading;
-    const endIdx = Math.min(startIdx + sentencesPerHeading, sentences.length);
-    const result = sentences.slice(startIdx, endIdx).join(' ').trim();
+    const result = sliceBalancedUnits(sentences, headingIndex, totalHeadings).join(' ').trim();
 
     if (result.length > 0) {
       self.log(`   🔧 [본문추출] 문장 단위 균등 분배: "${headingTitle}" (${result.length}자)`);
@@ -3430,10 +3248,7 @@ export function extractBodyForHeading(self: any, fullBody: string, headingTitle:
     return '';
   }
 
-  const paragraphsPerHeading = Math.max(1, Math.ceil(paragraphs.length / totalHeadings));
-  const startIndex = headingIndex * paragraphsPerHeading;
-  const endIndex = Math.min(startIndex + paragraphsPerHeading, paragraphs.length);
-  const assignedParagraphs = paragraphs.slice(startIndex, endIndex);
+  const assignedParagraphs = sliceBalancedUnits(paragraphs, headingIndex, totalHeadings);
 
   let result = assignedParagraphs.join('\n\n').trim();
 

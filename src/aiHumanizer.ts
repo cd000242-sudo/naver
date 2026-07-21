@@ -85,7 +85,10 @@ const SPELLING_CORRECTIONS: Record<string, string> = {
 const SYNONYM_MAP: Record<string, string[]> = {
   '매우': ['정말', '굉장히', '무척', '상당히', '엄청', '아주'],
   '정말': ['매우', '굉장히', '꽤', '상당히', '참'],
-  '많은': ['다양한', '수많은', '여러', '풍부한', '상당한'],
+  // [v2.11.134] '다양한' removed from alternatives — it is a platitude trigger
+  // (contentPlatitudeDetector) and a seo prompt blacklist word; the humanizer
+  // was re-injecting the very word its own detector flags.
+  '많은': ['수많은', '여러', '풍부한', '상당한'],
   '중요한': ['핵심적인', '필수적인', '결정적인', '주요한', '큰'],
   '좋은': ['훌륭한', '괜찮은', '멋진', '우수한', '뛰어난'],
   '나쁜': ['좋지 않은', '안 좋은', '불량한', '부정적인'],
@@ -147,7 +150,10 @@ const FORMAL_TO_CASUAL: Record<string, string[]> = {
   '줍니다': ['줘요', '주죠', '줄게요'],
   '됐습니다': ['됐어요', '됐죠', '됐네요'],
   '했습니다': ['했어요', '했죠', '했네요'],
-  '겠습니다': ['게요', '거예요', 'ㄹ게요'],
+  // [v2.11.134] Plain string replace cannot restructure the verb stem:
+  // '하겠습니다' + '거예요' produced '하거예요', and 'ㄹ게요' emitted broken
+  // jamo ('하ㄹ게요'). Suffix-safe casual endings only.
+  '겠습니다': ['겠어요', '겠죠', '겠네요'],
 };
 
 // ✅ 감탄사/추임새 (자연스러운 삽입용)
@@ -156,11 +162,22 @@ const INTERJECTIONS = [
   '여기서', '그런데', '반대로',
 ];
 
-// ✅ 개인적 표현 (AI가 잘 사용하지 않는 표현)
+// ✅ 개인적 표현 (AI가 잘 사용하지 않는 표현) — 탐지(analyzeAiDetectionRisk) 전용 전체 목록
 const PERSONAL_EXPRESSIONS = [
   '제 기준으로는', '개인적으로', '결론부터 말하면', '제 경험상', '정리하면',
   '직접 해보니까', '알고 보니', '나중에 알았는데', '처음엔 몰랐는데',
   '찾아보니까', '핵심만 보면', '한 가지 분명한 건', '제가 느끼기엔',
+];
+
+// [v2.11.134] Insertion subset — judgment/opinion phrases only. Experience
+// claims ('제 경험상', '직접 해보니까', '나중에 알았는데', '처음엔 몰랐는데')
+// fabricated first-hand testimony on posts with no such data, contradicting
+// the prompt-level guards (SPEC-REVIEW-001 / 근거 자료 부재 가드). Detection
+// keeps using the full list above so human-written experience still scores.
+const PERSONAL_EXPRESSIONS_SAFE_INSERT = [
+  '제 기준으로는', '개인적으로', '결론부터 말하면', '정리하면',
+  '찾아보니까', '핵심만 보면', '한 가지 분명한 건', '제가 느끼기엔',
+  '솔직히 말하면', '따져보면',
 ];
 
 // ✅ 문장 연결어 다양화
@@ -379,6 +396,10 @@ const FORMAL_ENDING_VARIATIONS: Record<string, string[]> = {
 };
 
 function diversifyConsecutiveEndings(text: string, isFormalTone: boolean = false): string {
+  return transformPreservingNewlines(text, (segment) => diversifyConsecutiveEndingsSegment(segment, isFormalTone));
+}
+
+function diversifyConsecutiveEndingsSegment(text: string, isFormalTone: boolean = false): string {
   const result = text;
   let changes = 0;
 
@@ -503,9 +524,26 @@ function removeRepetitivePatterns(text: string): string {
 }
 
 /**
+ * [v2.11.134] Sentence-level rewriters below used to split the WHOLE text and
+ * join(' '), flattening every \n / \n\n. Paragraph structure is both a strong
+ * human signal and the mobile 1-line-per-paragraph publishing format, so the
+ * transforms now run per line/paragraph segment and newline runs survive.
+ */
+function transformPreservingNewlines(text: string, transform: (segment: string) => string): string {
+  return text
+    .split(/(\n+)/)
+    .map((segment) => (segment.includes('\n') || !segment.trim() ? segment : transform(segment)))
+    .join('');
+}
+
+/**
  * 문장 끝 다양화 (formal → casual 혼합)
  */
 function diversifyEndings(text: string, ratio: number): string {
+  return transformPreservingNewlines(text, (segment) => diversifyEndingsSegment(segment, ratio));
+}
+
+function diversifyEndingsSegment(text: string, ratio: number): string {
   let result = text;
   let changeCount = 0;
 
@@ -571,12 +609,19 @@ function diversifyConnectors(text: string): string {
  * 개인적 표현 삽입
  */
 function insertPersonalExpressions(text: string, ratio: number): string {
+  return transformPreservingNewlines(text, (segment) => insertPersonalExpressionsSegment(segment, ratio));
+}
+
+function insertPersonalExpressionsSegment(text: string, ratio: number): string {
   const sentences = text.split(/(?<=[.!?])\s+/);
   const insertCount = Math.floor(sentences.length * ratio);
+  if (insertCount === 0) return text;
 
   // 삽입할 위치 랜덤 선택 (문장 시작 부분)
   const indicesToInsert = new Set<number>();
-  while (indicesToInsert.size < insertCount && indicesToInsert.size < sentences.length) {
+  let attempts = 0;
+  while (indicesToInsert.size < insertCount && attempts < sentences.length * 4) {
+    attempts++;
     const idx = Math.floor(Math.random() * sentences.length);
     // 이미 개인적 표현이 있거나 너무 짧은 문장은 제외
     if (!PERSONAL_EXPRESSIONS.some(exp => sentences[idx].includes(exp)) && sentences[idx].length > 20) {
@@ -587,7 +632,9 @@ function insertPersonalExpressions(text: string, ratio: number): string {
   const modifiedSentences = sentences.map((sentence, index) => {
     if (!indicesToInsert.has(index)) return sentence;
 
-    const expr = PERSONAL_EXPRESSIONS[Math.floor(Math.random() * PERSONAL_EXPRESSIONS.length)];
+    // [v2.11.134] Insert from the judgment-safe subset only — never fabricate
+    // first-hand experience the post does not have.
+    const expr = PERSONAL_EXPRESSIONS_SAFE_INSERT[Math.floor(Math.random() * PERSONAL_EXPRESSIONS_SAFE_INSERT.length)];
     // 문장 앞에 삽입
     return expr + ' ' + sentence.charAt(0).toLowerCase() + sentence.slice(1);
   });
@@ -600,8 +647,13 @@ function insertPersonalExpressions(text: string, ratio: number): string {
  * 감탄사 삽입
  */
 function insertInterjections(text: string, ratio: number): string {
+  return transformPreservingNewlines(text, (segment) => insertInterjectionsSegment(segment, ratio));
+}
+
+function insertInterjectionsSegment(text: string, ratio: number): string {
   const sentences = text.split(/(?<=[.!?])\s+/);
   const insertCount = Math.floor(sentences.length * ratio);
+  if (insertCount === 0) return text;
 
   const indicesToInsert = new Set<number>();
   while (indicesToInsert.size < insertCount && indicesToInsert.size < sentences.length) {
@@ -767,6 +819,10 @@ function softenDeclarativeSentences(text: string, isFormalTone: boolean = false)
  * 2번째/3번째 문장 앞에 자연스러운 연결어 삽입
  */
 function connectIsolatedSentences(text: string, isFormalTone: boolean = false): string {
+  return transformPreservingNewlines(text, (segment) => connectIsolatedSentencesSegment(segment, isFormalTone));
+}
+
+function connectIsolatedSentencesSegment(text: string, isFormalTone: boolean = false): string {
   // 연결어 목록 (톤별)
   const formalConnectors = ['이에 따라 ', '이를 바탕으로 보면 ', '이러한 맥락에서 ', '한편 ', '다만 ', '아울러 '];
   const casualConnectors = ['그래서 ', '근데 ', '알고 보니 ', '그러니까 ', '사실 ', '그런데 '];

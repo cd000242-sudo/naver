@@ -9,6 +9,8 @@
  * 이후 변경이 사람다움을 약화시키면 실패하도록 한다. (절대값이 아닌 상대/구조 보장)
  */
 import { describe, it, expect } from 'vitest';
+import * as fs from 'fs';
+import * as path from 'path';
 import { humanizeContent, analyzeAiDetectionRisk } from '../aiHumanizer';
 import { detectPlatitudes } from '../contentPlatitudeDetector';
 import { evaluateHumanlike } from '../content/evaluators/humanlikeEval';
@@ -148,6 +150,45 @@ describe('회귀방지 net: 사람다움/AI탐지 분별력', () => {
       // 'A'(1글자)·'2026'(순수숫자)는 본문 프롬프트가 주입하지 않으므로 #8 채점에서도 제외.
       expect(getSecondaryKeywordsFromSource(s)).toEqual(['경량', '접이식']);
     });
+  });
+});
+
+// [v2.11.134] 발행 품질 배치 — 문단 구조 보존 + 경험 위장 금지 + 자모 파손 차단.
+describe('humanizer 문단 보존 · 경험 위장 금지 (v2.11.134)', () => {
+  const MULTI_PARA = [
+    '첫 번째 문단에는 핵심 조건이 정리되어 있습니다. 신청 자격은 소득 기준으로 갈립니다. 기준 중위소득 확인이 먼저입니다.',
+    '두 번째 문단은 신청 방법을 다룹니다. 온라인 접수는 복지로에서 진행합니다. 서류는 사흘 안에 보완할 수 있습니다.',
+    '세 번째 문단은 일정 이야기입니다. 마감 직전에는 접속이 몰립니다. 하루 이틀 여유를 두는 편이 안전합니다.',
+  ].join('\n\n');
+
+  it('strong 휴머나이즈 후에도 문단 경계(\\n\\n)가 유지된다', () => {
+    const out = humanizeContent(MULTI_PARA, 'strong', true);
+    const breaks = (out.match(/\n\n/g) ?? []).length;
+    expect(breaks).toBeGreaterThanOrEqual(2);
+  });
+
+  it('경험 위장 어구를 주입하지 않는다 (랜덤 삽입 50회 안정성)', () => {
+    const FABRICATED = ['제 경험상', '직접 해보니까', '나중에 알았는데', '처음엔 몰랐는데'];
+    for (let i = 0; i < 50; i++) {
+      const out = humanizeContent(MULTI_PARA, 'strong', true);
+      for (const phrase of FABRICATED) {
+        expect(out, `주입 금지 어구 발견: ${phrase}`).not.toContain(phrase);
+      }
+    }
+  });
+
+  it('자모 파손 치환(ㄹ게요)과 블랙리스트 동의어(많은→다양한) 주입이 소스에서 제거됐다', () => {
+    const src = fs.readFileSync(path.resolve(__dirname, '..', 'aiHumanizer.ts'), 'utf-8');
+    // '겠습니다' 치환 후보에 어간 재구성이 필요한 어미(자모 파손 유발)가 없다.
+    const gessEntry = src.match(/'겠습니다': \[[^\]]*\]/);
+    expect(gessEntry).not.toBeNull();
+    expect(gessEntry![0]).not.toContain('ㄹ게요');
+    expect(gessEntry![0]).not.toContain('거예요');
+    const manyEntry = src.match(/'많은': \[[^\]]*\]/);
+    expect(manyEntry).not.toBeNull();
+    expect(manyEntry![0]).not.toContain('다양한');
+    // 탐지용 전체 목록은 유지하되, 삽입은 안전 목록만 사용한다.
+    expect(src).toMatch(/PERSONAL_EXPRESSIONS_SAFE_INSERT\[Math\.floor/);
   });
 });
 

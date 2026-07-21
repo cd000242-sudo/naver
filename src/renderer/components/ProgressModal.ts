@@ -733,8 +733,10 @@ export class ProgressModal {
         // 엔진 이름 추출 (메시지에서)
         const enginePatterns = [
             /(?:provider|엔진|engine)[:\s]*([a-zA-Z0-9-]+)/i,
-            /(nano-banana-pro|deepinfra|gemini|fal|flux|dall-e)/i,
-            /(NanoBananaPro|DeepInfra|Gemini|FAL|FLUX)/i,
+            // [v2.11.133] word boundaries — bare /fal/ matched the "fal" inside
+            // "failed" and error cards showed a bogus "엔진: fal".
+            /\b(nano-banana-pro|deepinfra|gemini|fal|flux|dall-e)\b/i,
+            /\b(NanoBananaPro|DeepInfra|Gemini|FAL|FLUX)\b/i,
         ];
         for (const pattern of enginePatterns) {
             const match = message.match(pattern);
