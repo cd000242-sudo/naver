@@ -73,6 +73,16 @@ function getLocalDateKey(): string {
   return `${yyyy}-${mm}-${dd}`;
 }
 
+// [v2.11.135] Local-calendar day arithmetic for lastSeenDate clamping.
+export function addDaysToDateKey(dateKey: string, days: number): string {
+  const [y, m, d] = dateKey.split('-').map(Number);
+  const date = new Date(y, (m || 1) - 1, (d || 1) + days);
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
 function getStorageFile(): string {
   try {
     return path.join(app.getPath('userData'), 'quota-state.json');
@@ -132,8 +142,16 @@ async function readState(): Promise<QuotaState> {
     // ✅ [2026-03-05] 시그니처 검증
     if (parsed._sig) {
       if (!verifySignature(parsed)) {
-        console.error('[QuotaManager] 🚨 위변조 감지! 시그니처 불일치 → 강제 차단');
-        return TAMPERED_STATE(today);
+        // [v2.11.135] The tampered verdict was never written back, so the same
+        // broken file produced 999-blocked reads EVERY day — a corrupted file
+        // (partial write, AV interference, legacy format) locked honest users
+        // out of the daily reset forever ("00시 지나도 초기화 안 됨" 문의).
+        // Persist a SIGNED tampered state dated today: still fully blocked
+        // today, but tomorrow's `date !== today` path resets normally.
+        console.error('[QuotaManager] 🚨 위변조/손상 감지! 시그니처 불일치 → 오늘 하루 차단 (자정 후 정상 리셋)');
+        const tampered = TAMPERED_STATE(today);
+        void writeState(tampered);
+        return tampered;
       }
     }
 
@@ -142,7 +160,7 @@ async function readState(): Promise<QuotaState> {
     if (today < lastSeen) {
       // 시스템 날짜가 과거로 변경됨 → 마지막으로 본 날짜의 사용량 유지
       console.warn(`[QuotaManager] 🚨 날짜 롤백 감지! today=${today}, lastSeen=${lastSeen} → 기존 사용량 유지`);
-      return {
+      const preserved: QuotaState = {
         date: today,
         publish: Number(parsed.publish) || 0,
         content: Number(parsed.content) || 0,
@@ -150,11 +168,27 @@ async function readState(): Promise<QuotaState> {
         imageApi: Number(parsed.imageApi) || 0,
         imageApiCost: Number(parsed.imageApiCost) || 0,
       };
+      // [v2.11.135] A far-future lastSeenDate is a clock-glitch remnant, not
+      // an abuse pattern (an abuser rolling the clock BACK is still caught by
+      // the 1-day window; rolling it far FORWARD only hurts themselves). It
+      // used to freeze the daily reset until the real calendar caught up —
+      // clamp to today+1 so usage stays blocked today but resets at the next
+      // real midnight.
+      const maxReasonableLastSeen = addDaysToDateKey(today, 1);
+      if (lastSeen > maxReasonableLastSeen) {
+        console.warn(`[QuotaManager] 🔧 lastSeenDate(${lastSeen})가 비정상 미래 → ${maxReasonableLastSeen}로 교정 (다음 자정 정상 리셋)`);
+        void writeStateWithLastSeen(preserved, maxReasonableLastSeen);
+      }
+      return preserved;
     }
 
     // 정상: 날짜가 오늘보다 이전이면 리셋
     if (parsed.date !== today) {
-      return EMPTY_STATE(today);
+      // [v2.11.135] Persist the reset so the on-disk file always reflects the
+      // current day (지원 로그 확인 및 재판정 반복 방지).
+      const reset = EMPTY_STATE(today);
+      void writeState(reset);
+      return reset;
     }
 
     return {
@@ -175,7 +209,9 @@ async function readState(): Promise<QuotaState> {
         if (backupParsed._sig && verifySignature(backupParsed)) {
           console.log('[QuotaManager] ⚠️ 메인 파일 손상 → 백업에서 복구 성공');
           if (backupParsed.date !== today && today >= (backupParsed.lastSeenDate || backupParsed.date)) {
-            return EMPTY_STATE(today);
+            const reset = EMPTY_STATE(today);
+            void writeState(reset); // [v2.11.135] 손상된 메인 파일을 즉시 교체
+            return reset;
           }
           return {
             date: backupParsed.date,
@@ -188,20 +224,29 @@ async function readState(): Promise<QuotaState> {
         }
       } catch { /* 백업도 실패 */ }
     }
-    console.error('[QuotaManager] 🚨 파일 손상 + 백업 실패 → 강제 차단');
-    return TAMPERED_STATE(today);
+    // [v2.11.135] 손상 파일을 서명된 오늘자 차단 상태로 교체 — 오늘은 차단
+    // 유지, 다음 자정에는 정상 리셋 (영구 잠금 방지).
+    console.error('[QuotaManager] 🚨 파일 손상 + 백업 실패 → 오늘 하루 차단 (자정 후 정상 리셋)');
+    const tampered = TAMPERED_STATE(today);
+    void writeState(tampered);
+    return tampered;
   }
 }
 
 async function writeState(state: QuotaState): Promise<void> {
+  const today = getLocalDateKey();
+  return writeStateWithLastSeen(state, today >= state.date ? today : state.date);
+}
+
+// [v2.11.135] Explicit lastSeenDate control for the clock-glitch clamp path.
+async function writeStateWithLastSeen(state: QuotaState, lastSeenDate: string): Promise<void> {
   const storageFile = getStorageFile();
   const backupFile = getBackupFile();
 
   // ✅ [2026-03-05] 시그니처 포함한 보안 상태 생성
-  const today = getLocalDateKey();
   const secureState: SecureQuotaState = {
     ...state,
-    lastSeenDate: today >= state.date ? today : state.date,
+    lastSeenDate,
     _sig: '',
   };
   secureState._sig = computeSignature(secureState);
