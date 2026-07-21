@@ -2801,9 +2801,22 @@ export class NaverBlogAutomation {
     const loginButtonSelectors = this.LOGIN_BUTTON_SELECTORS;
 
     let loginButton: ElementHandle<Element> | null = null;
+    // ✅ [v2.11.140] 즉시 탐색 우선 — ID/PW를 이미 입력한 시점이라 로그인 폼(버튼)은 확실히
+    //   렌더돼 있다. 기존엔 셀렉터 5개를 waitForSelector(timeout:5000)로 순회해, 페이지에 없는
+    //   1순위 '#log\.login' 등에서 셀렉터당 5초씩 낭비 → 버튼 클릭까지 최대 ~25초 지연 버그.
+    //   먼저 page.$()로 즉시(ms) 훑고, 전부 실패할 때만 짧게 대기한다. (안티봇 무관 — 요소 탐색 속도)
     for (const selector of loginButtonSelectors) {
-      loginButton = await page.waitForSelector(selector, { visible: true, timeout: 5000 }).catch(() => null);
-      if (loginButton) break;
+      const handle = await page.$(selector).catch(() => null);
+      if (!handle) continue;
+      const visible = await handle.evaluate((el: Element) => (el as HTMLElement).offsetParent !== null).catch(() => false);
+      if (visible) { loginButton = handle; break; }
+    }
+    if (!loginButton) {
+      // 드물게 폼이 아직 렌더 중 — 짧은 timeout으로만 대기 (5000→1500)
+      for (const selector of loginButtonSelectors) {
+        loginButton = await page.waitForSelector(selector, { visible: true, timeout: 1500 }).catch(() => null);
+        if (loginButton) break;
+      }
     }
 
     if (!loginButton) {

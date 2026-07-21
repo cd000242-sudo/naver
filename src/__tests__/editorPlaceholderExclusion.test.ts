@@ -49,8 +49,12 @@ describe('isPasteVisible — 라이브 리포트 시나리오 (기능 검증)', 
     expect(isPasteVisible(before, after, SECTION)).toBe(true);
   });
 
-  it('placeholder가 before에 섞이면 startsWith가 깨져 오탐된다 — 측정단 제거가 필요한 이유', () => {
-    // 캡션 placeholder("사진 설명을 입력하세요.")가 paste 후 사라지는 실측 상황 재현.
+  it('[v2.11.140] before 캡션 placeholder가 paste 후 사라져도 정상 append면 통과한다', () => {
+    // 실측 회귀(EDITOR_PARTIAL_INSERT_UNRECOVERED beforeChars=58, afterChars=219, cov 0.97):
+    // 캡션 placeholder("사진 설명을 입력하세요.")가 before에 섞였다가 붙여넣기 후 사라지면,
+    // 앵커 탐색을 beforeText.length 지점부터 시작해 앞쪽에 안착한 섹션 시작을 놓쳐 오탐했다.
+    // 수정: before가 after에 남지 않으면(=placeholder 소멸) 앵커를 0부터 탐색 → 정상 통과.
+    // 커버리지 게이트는 그대로라 본문 누락(cov<0.82)은 여전히 차단된다.
     const realBefore = '서론 문단입니다. 이미지가 위에 있습니다.';
     const before = {
       chars: realBefore.length + 13,
@@ -59,6 +63,18 @@ describe('isPasteVisible — 라이브 리포트 시나리오 (기능 검증)', 
     };
     const afterText = `${realBefore} ${SECTION}`;
     const after = { chars: afterText.length, tables: 0, text: afterText };
-    expect(isPasteVisible(before, after, SECTION)).toBe(false);
+    expect(isPasteVisible(before, after, SECTION)).toBe(true);
+  });
+
+  it('[v2.11.140 안전잠금] 섹션이 기존 내용 앞/중간에 끼어들면(reorder) 여전히 차단한다', () => {
+    const oldContent = '기존 본문이 상당히 길게 남아 있는 상황입니다. 이 내용은 붙여넣기 후에도 유지됩니다.';
+    // (1) 섹션이 기존 내용 "앞"에 삽입 — before가 그대로 남아있지만 startsWith 깨짐 → reorder 차단
+    const prepended = { chars: (SECTION + ' ' + oldContent).length, tables: 0, text: `${SECTION} ${oldContent}` };
+    const beforeA = { chars: oldContent.length, tables: 0, text: oldContent };
+    expect(isPasteVisible(beforeA, prepended, SECTION)).toBe(false);
+    // (2) 섹션이 "중간"에 삽입 — 뒤에 밀려난 기존 내용이 trailing으로 남아 차단
+    const mid = { chars: ('앞부분 ' + SECTION + ' ' + oldContent).length, tables: 0, text: `앞부분 ${SECTION} ${oldContent}` };
+    const beforeB = { chars: ('앞부분 ' + oldContent).length, tables: 0, text: `앞부분 ${oldContent}` };
+    expect(isPasteVisible(beforeB, mid, SECTION)).toBe(false);
   });
 });

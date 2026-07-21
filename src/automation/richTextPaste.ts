@@ -1631,7 +1631,14 @@ export function isPasteVisible(
     anchorCandidates.filter((anchor) => anchor.length >= Math.min(6, expected)),
   ));
 
-  let cursor = Math.max(0, beforeText.length - 2);
+  // [v2.11.140] 앵커 탐색 시작 위치 보정 — 붙여넣기 전 내용(caption/placeholder)이
+  // afterText에 남지 않고 사라진 경우, cursor=beforeText.length-2에서 탐색하면 실제로
+  // afterText 앞쪽(0 근처)에 안착한 본문 시작 앵커를 놓쳐 near-complete(97%) 붙여넣기가
+  // EDITOR_PARTIAL_INSERT_UNRECOVERED로 오탐됐다. before가 실제로 살아남았을 때만
+  // append 지점(beforeText.length-2)에서 시작하고, 사라졌으면 0부터 찾는다.
+  // 안전성: 커버리지 게이트(위)를 이미 통과한 케이스만 여기 도달하므로 본문 누락은 걸러진 뒤다.
+  const beforePersistsInAfter = !!beforeText && afterText.includes(beforeText);
+  let cursor = beforePersistsInAfter ? Math.max(0, beforeText.length - 2) : 0;
   for (const anchor of anchors) {
     const foundAt = afterText.indexOf(anchor, cursor);
     if (foundAt < 0) return false;
@@ -1647,12 +1654,27 @@ export function isPasteVisible(
 
 function buildPasteFailureReason(
   reason: string,
-  before: { chars: number; tables: number },
-  after: { chars: number; tables: number },
+  before: { chars: number; tables: number; text?: string },
+  after: { chars: number; tables: number; text?: string },
   trimmedPlain: string
 ): string {
-  const needle = trimmedPlain.replace(/\s+/g, ' ').slice(0, 24);
-  return `${reason} (beforeChars=${before.chars}, afterChars=${after.chars}, beforeTables=${before.tables}, afterTables=${after.tables}, needle="${needle}")`;
+  const exp = normalizeEditorSnapshotText(trimmedPlain);
+  const needle = exp.slice(0, 24);
+  // [v2.11.140] 재발 시 정확한 분기(placeholder 사라짐 / 시작·끝 앵커 누락 / trailing)를
+  // 드러내는 진단 신호. accept/reject 로직과 무관한 순수 진단 문자열.
+  const aft = normalizeEditorSnapshotText(after.text || '');
+  const bef = normalizeEditorSnapshotText(before.text || '');
+  const rawDelta = Math.max(0, after.chars - before.chars);
+  const coverage = exp.length
+    ? Math.max(rawDelta, Math.max(0, aft.length - bef.length)) / exp.length
+    : 0;
+  const head = exp.slice(0, Math.min(20, exp.length));
+  const tail = exp.slice(Math.max(0, exp.length - 20));
+  const beforePersists = !!bef && aft.includes(bef);
+  const headAt = head ? aft.indexOf(head) : -1;
+  const tailAt = tail ? aft.lastIndexOf(tail) : -1;
+  const diag = `cov=${coverage.toFixed(2)} beforePersists=${beforePersists ? 'Y' : 'N'} headAt=${headAt} tailAt=${tailAt} aftLen=${aft.length} expLen=${exp.length}`;
+  return `${reason} (beforeChars=${before.chars}, afterChars=${after.chars}, beforeTables=${before.tables}, afterTables=${after.tables}, needle="${needle}", ${diag})`;
 }
 
 function normalizeEditorSnapshotText(value: string): string {
