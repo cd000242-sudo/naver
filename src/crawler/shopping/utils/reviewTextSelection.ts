@@ -27,6 +27,44 @@ function decodeHtml(value: string): string {
     .trim();
 }
 
+// [v2.11.134] Naver's review DOM glues UI metadata onto the text: rating
+// labels ("평점5"), content-type badges ("동영상컨텐츠"), masked buyer ids
+// ("hoch*****") and dates ("26.05.06."). Live smoke showed these reaching the
+// LLM prompt verbatim. Strip badges from the EDGES only — attribute
+// evaluations ("소음작아요") stay because they carry decision signal, and
+// "재구매" is stripped only when another badge follows (a review can start
+// with "재구매 의사 있어요").
+const LEADING_METADATA_PATTERNS: readonly RegExp[] = Object.freeze([
+  /^동영상\s*컨텐츠/,
+  /^포토\s*컨텐츠/,
+  /^베스트\s*리뷰/i,
+  /^평점\s*[1-5]/,
+  /^재구매(?=\s*(?:평점\s*[1-5]|동영상|포토|[\w가-힣-]{2,10}\*{2,}|\d{2}\.))/,
+  /^한달\s*사용\s*(?:기|리뷰)(?=\s*(?:평점\s*[1-5]|동영상|포토|[\w가-힣-]{2,10}\*{2,}|\d{2}\.))/,
+  // [v2.11.135] \w — masked ids include underscores ("100_****", live smoke).
+  /^[\w가-힣-]{2,10}\*{2,}/,
+  /^\d{2,4}\.\s*\d{1,2}\.\s*\d{1,2}\.?/,
+]);
+
+function stripReviewEdgeMetadata(value: string): string {
+  let text = value.trim();
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const pattern of LEADING_METADATA_PATTERNS) {
+      const next = text.replace(pattern, '').trim();
+      if (next !== text) {
+        text = next;
+        changed = true;
+      }
+    }
+  }
+  // Same badge block can render AFTER the body (masked id + date).
+  return text
+    .replace(/(?:[\w가-힣-]{2,10}\*{2,}\s*)?\d{2,4}\.\s*\d{1,2}\.\s*\d{1,2}\.?\s*$/, '')
+    .trim();
+}
+
 function reviewIdentity(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '');
 }
@@ -54,14 +92,20 @@ function usefulnessScore(value: string): number {
  */
 export function selectDecisionUsefulReviewTexts(
   input: unknown,
-  maxReviews = 8,
+  // [v2.11.134] 8 → 12: the expanded candidate pool (더보기/pagination sweeps)
+  // regularly yields 20+ useful reviews; a larger evidence set feeds richer
+  // 후기형 posts. Prompt cost: ≤ +4 reviews × 600 chars.
+  maxReviews = 12,
 ): string[] {
   if (!Array.isArray(input)) return [];
 
   const seen = new Set<string>();
   const selected = input.flatMap((raw, sourceIndex) => {
     if (typeof raw !== 'string') return [];
-    const text = decodeHtml(raw);
+    const cleaned = stripReviewEdgeMetadata(decodeHtml(raw));
+    // [v2.11.134] Long detailed reviews (>600 chars) were DISCARDED by the
+    // length bound — exactly the richest evidence. Truncate instead.
+    const text = cleaned.length > 600 ? cleaned.substring(0, 600).trim() : cleaned;
     if (!isDecisionUseful(text)) return [];
     const identity = reviewIdentity(text);
     if (!identity || seen.has(identity)) return [];

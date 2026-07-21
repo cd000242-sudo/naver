@@ -192,7 +192,20 @@ async function callNaverSearchApi<T>(
 
 /**
  * 쇼핑 검색 - 상품 정보 조회
+ *
+ * [v2.11.135] shop.json은 2026-07-31 완전 종료됩니다 (개발자센터 공지 32564,
+ * 유예·대체 API 없음). 종료 후 모든 호출이 HTTP 에러가 되므로 이 함수는 절대
+ * throw하지 않고 빈 결과를 반환합니다 — 호출부(스니펫/비교재료/스펙표/전략
+ * 크롤러)는 전부 items 길이만 확인하므로 빈 결과로 자연 폴백됩니다.
  */
+const EMPTY_SHOPPING_RESPONSE: NaverSearchResponse<ShoppingItem> = Object.freeze({
+    lastBuildDate: '',
+    total: 0,
+    start: 1,
+    display: 0,
+    items: [] as ShoppingItem[],
+});
+
 export async function searchShopping(
     options: ShoppingSearchOptions,
     config?: NaverSearchConfig
@@ -204,7 +217,12 @@ export async function searchShopping(
         start: options.start,
         sort: options.sort === 'asc' || options.sort === 'dsc' ? 'sim' : options.sort,
     };
-    return callNaverSearchApi<ShoppingItem>('shop', baseOptions, config);
+    try {
+        return await callNaverSearchApi<ShoppingItem>('shop', baseOptions, config);
+    } catch (error) {
+        console.warn(`[NaverSearchAPI] 쇼핑 검색 실패 — 빈 결과로 진행 (2026-07-31 API 종료 예정): ${(error as Error).message}`);
+        return { ...EMPTY_SHOPPING_RESPONSE, items: [] };
+    }
 }
 
 /**

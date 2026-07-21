@@ -22,6 +22,12 @@ import {
     collectReviewImageUrls,
     collectReviewTextCandidates,
     clickReviewTab,
+    clickReviewListExpand,
+    collectProductDetailSpecText,
+    clickProductDetailTab,
+    openProductInfoNoticeLayer,
+    collectProductNoticeSpecText,
+    closeTopLayer,
     extractBrandProductInfo,
 } from './brandStore/brandStoreDom.js';
 import { selectDecisionUsefulReviewTexts } from '../utils/reviewTextSelection.js';
@@ -322,7 +328,25 @@ export class BrandStoreProvider extends BaseProvider {
                 await page.waitForTimeout(1500);
 
                 if (shouldCollectReviewTexts) {
-                    const reviewCandidates: string[] = await page.evaluate(collectReviewTextCandidates);
+                    let reviewCandidates: string[] = await page.evaluate(collectReviewTextCandidates);
+                    // [v2.11.134] One delayed retry — slow machines rendered the
+                    // review list after the single fixed read, publishing
+                    // "리뷰 0건" posts for products that have reviews.
+                    if (reviewCandidates.length === 0) {
+                        await page.waitForTimeout(1800);
+                        reviewCandidates = await page.evaluate(collectReviewTextCandidates);
+                    }
+                    // [v2.11.134] Expand the pool (더보기/다음, max 2 clicks) —
+                    // the first view only holds ~20 reviews. Accumulated sweeps
+                    // are deduped by review identity at selection time.
+                    for (let expand = 0; expand < 2; expand += 1) {
+                        const clicked = await page.evaluate(clickReviewListExpand);
+                        if (!clicked?.clicked) break;
+                        await page.waitForTimeout(900);
+                        const expanded: string[] = await page.evaluate(collectReviewTextCandidates);
+                        if (expanded.length === 0) break;
+                        reviewCandidates = reviewCandidates.concat(expanded);
+                    }
                     visibleReviewTexts = selectDecisionUsefulReviewTexts(reviewCandidates);
                 }
 
@@ -363,17 +387,45 @@ export class BrandStoreProvider extends BaseProvider {
 
             console.log(`[BrandStore:Playwright] 📋 우선순위 정렬: 메인 ${mainImages.length} → 갤러리 ${galleryImages.length} → 갤러리폴백 ${galleryFallbackImages.length} → 리뷰 ${reviewImages.length}`);
 
+            // [v2.11.135] Structured spec collection — 전문분석형 재료.
+            // 신형 스토어: 상세정보 탭 → 제공고시 아코디언 → 모달 레이어 (실측).
+            // 리뷰 수집(PHASE 2) 이후 시점이라 탭 전환이 리뷰 수집을 방해하지
+            // 않고, 모달은 수집 후 닫는다. 실패는 무해(기존 설명 체인 유지).
+            let detailSpecText = '';
+            try {
+                await page.evaluate(clickProductDetailTab);
+                await page.waitForTimeout(1200);
+                const noticeOpened = await page.evaluate(openProductInfoNoticeLayer);
+                if (noticeOpened?.clicked) {
+                    await page.waitForTimeout(2500);
+                    detailSpecText = await page.evaluate(collectProductNoticeSpecText);
+                    await page.evaluate(closeTopLayer);
+                }
+                if (!detailSpecText) {
+                    detailSpecText = await page.evaluate(collectProductDetailSpecText);
+                }
+                if (detailSpecText) {
+                    console.log(`[BrandStore:Playwright] 📋 상세 스펙 수집: ${detailSpecText.split('\n').length}행 (${detailSpecText.length}자)`);
+                }
+            } catch { /* spec collection is best-effort */ }
+
             // 제품 정보 추출
             const domProductInfo = await page.evaluate(extractBrandProductInfo) as ProductInfo;
             const reviewTexts = selectDecisionUsefulReviewTexts([
                 ...jsonLdInfo.reviewTexts,
                 ...visibleReviewTexts,
             ]);
+            console.log(`[BrandStore:Playwright] 📝 리뷰 최종: JSON-LD ${jsonLdInfo.reviewTexts.length}건 + DOM ${visibleReviewTexts.length}건 → 정선 ${reviewTexts.length}건`);
+            const baseDescription = jsonLdInfo.description || domProductInfo.description || '';
+            const mergedDescription = [
+                baseDescription,
+                detailSpecText ? `\n상품 상세 정보:\n${detailSpecText}` : '',
+            ].filter(Boolean).join('\n').trim().substring(0, 3000);
             const productInfo: ProductInfo = {
                 ...domProductInfo,
                 name: jsonLdInfo.name || domProductInfo.name,
                 price: jsonLdInfo.price || domProductInfo.price,
-                description: jsonLdInfo.description || domProductInfo.description,
+                description: mergedDescription || jsonLdInfo.description || domProductInfo.description,
                 availability: jsonLdInfo.availability || domProductInfo.availability,
                 canonicalUrl: jsonLdInfo.canonicalUrl || domProductInfo.canonicalUrl,
                 ...(reviewTexts.length > 0 ? { reviewTexts } : {}),

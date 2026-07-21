@@ -240,6 +240,167 @@ export function clickReviewTab(): { clicked: boolean; label?: string } {
     return { clicked: false };
 }
 
+/**
+ * [v2.11.134] Expand the review list (더보기 button or the 다음/pager control)
+ * WITHOUT navigation, so the candidate pool can grow beyond the ~20 reviews of
+ * the first view. Anchors with a real href are rejected — a navigation would
+ * destroy the page context (same failure class as the v2.10.310 리뷰이벤트
+ * regression). Runs inside page.evaluate.
+ */
+export function clickReviewListExpand(): { clicked: boolean; label?: string } {
+    const inReviewArea = (el: Element): boolean => !!el.closest(
+        '[class*="review"], [class*="Review"], [data-shp-area*="review"], [data-testid*="review"], [data-testid*="Review"]',
+    );
+    const isVisible = (el: Element): boolean => {
+        const rect = (el as HTMLElement).getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+    };
+    const noNavigation = (el: Element): boolean => {
+        if (el.tagName !== 'A') return true;
+        const href = (el.getAttribute('href') || '').trim();
+        return !href || href === '#' || href.startsWith('#');
+    };
+    const labelOf = (el: Element): string => (
+        (el.textContent || '').replace(/\s+/g, ' ').trim()
+        || (el.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim()
+    );
+    const candidates = Array.from(document.querySelectorAll('a, button'));
+    const isExpandLabel = (text: string): boolean => /^(?:리뷰\s*)?더\s*보기$/.test(text);
+    const isNextLabel = (text: string): boolean => /^(?:다음|다음\s*페이지|>|›)$/.test(text);
+
+    const expand = candidates.find(el => {
+        const text = labelOf(el);
+        return isExpandLabel(text) && inReviewArea(el) && isVisible(el) && noNavigation(el);
+    }) || candidates.find(el => {
+        const text = labelOf(el);
+        return isNextLabel(text) && inReviewArea(el) && isVisible(el) && noNavigation(el);
+    });
+    if (!expand) return { clicked: false };
+    (expand as HTMLElement).click();
+    return { clicked: true, label: labelOf(expand).substring(0, 20) };
+}
+
+/**
+ * [v2.11.135] Structured product-spec collection for 전문분석형 posts.
+ * Serializes 상품정보 제공고시-style tables (th/td) and dl(dt/dd) pairs into
+ * "키: 값" lines. Live gap: brandconnect pages yielded ~18-char descriptions
+ * (og meta only) while the page carries a full spec table (모델명·냉방능력·
+ * 소비전력 …). Seller/shipping/contact rows are excluded — they are noise for
+ * the post and can carry contact details. Runs inside page.evaluate.
+ */
+export function collectProductDetailSpecText(): string {
+    const parts: string[] = [];
+    const seen = new Set<string>();
+    const EXCLUDED_KEYS = /판매자|사업자|통신판매|연락처|전화번호|이메일|e-?mail|상호|대표자|주소|배송방법|배송비|결제|교환|반품|청약|A\/S\s*책임자/i;
+    const push = (rawKey: string, rawValue: string) => {
+        const key = (rawKey || '').replace(/\s+/g, ' ').trim();
+        const value = (rawValue || '').replace(/\s+/g, ' ').trim();
+        if (!key || !value || key.length > 40 || value.length > 200) return;
+        if (key === value) return;
+        if (EXCLUDED_KEYS.test(key)) return;
+        const line = `${key}: ${value}`;
+        if (seen.has(line)) return;
+        seen.add(line);
+        parts.push(line);
+    };
+
+    // 1) 표 형태 (상품정보 제공고시 · 스펙 테이블) — 한 행에 th/td 쌍이 2세트인
+    //    레이아웃까지 처리한다.
+    document.querySelectorAll('table').forEach((table) => {
+        const text = table.textContent || '';
+        if (text.length < 20 || text.length > 20_000) return;
+        table.querySelectorAll('tr').forEach((tr) => {
+            const ths = tr.querySelectorAll('th');
+            const tds = tr.querySelectorAll('td');
+            if (ths.length === 0 || tds.length === 0) return;
+            for (let i = 0; i < Math.min(ths.length, tds.length); i += 1) {
+                push(ths[i].textContent || '', tds[i].textContent || '');
+            }
+        });
+    });
+
+    // 2) dl(dt/dd) 형태 스펙 목록
+    document.querySelectorAll('dl').forEach((dl) => {
+        const dts = dl.querySelectorAll('dt');
+        const dds = dl.querySelectorAll('dd');
+        for (let i = 0; i < Math.min(dts.length, dds.length); i += 1) {
+            push(dts[i].textContent || '', dds[i].textContent || '');
+        }
+    });
+
+    return parts.slice(0, 60).join('\n');
+}
+
+/**
+ * [v2.11.135] 신형 스마트스토어(네이버플러스 스토어)의 스펙 수집 체인.
+ * 제공고시는 상세정보 탭 → "상품정보 제공고시" 아코디언 → 모달 레이어로
+ * 열리며, 내용은 LI > STRONG(키) + 값 구조다 (라이브 실측). 각 단계는
+ * page.evaluate로 호출되는 브라우저 전용 함수이고 navigation 가드를 지킨다.
+ */
+export function clickProductDetailTab(): { clicked: boolean } {
+    const el = Array.from(document.querySelectorAll('a, button, [role="tab"]')).find(t => {
+        const text = (t.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!/^상세\s*정보/.test(text) || /리뷰|문의|반품|교환/.test(text)) return false;
+        if (t.tagName === 'A') {
+            const href = (t.getAttribute('href') || '').trim();
+            if (href && href !== '#' && !href.startsWith('#')) return false;
+        }
+        const rect = (t as HTMLElement).getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+    });
+    if (!el) return { clicked: false };
+    (el as HTMLElement).click();
+    return { clicked: true };
+}
+
+export function openProductInfoNoticeLayer(): { clicked: boolean } {
+    const el = Array.from(document.querySelectorAll('a, button')).find(t =>
+        (t.textContent || '').replace(/\s+/g, ' ').trim() === '상품정보 제공고시');
+    if (!el) return { clicked: false };
+    (el as HTMLElement).scrollIntoView({ block: 'center' });
+    (el as HTMLElement).click();
+    return { clicked: true };
+}
+
+export function collectProductNoticeSpecText(): string {
+    const dialog = document.querySelector('[role="dialog"], [class*="layer"], [class*="modal"], [class*="Modal"]');
+    if (!dialog) return '';
+    const dialogText = (dialog as HTMLElement).innerText || '';
+    if (!/제공고시|모델명|인증|소비전력/.test(dialogText)) return '';
+
+    const parts: string[] = [];
+    const seen = new Set<string>();
+    const EXCLUDED_KEYS = /판매자|사업자|통신판매|연락처|전화번호|이메일|상호|대표자|주소|배송|결제|교환|반품|청약|A\/S|하자|소비자|분쟁|취소/i;
+    dialog.querySelectorAll('li, tr').forEach((item) => {
+        const keyEl = item.querySelector('strong, th, dt');
+        if (!keyEl) return;
+        const key = (keyEl.textContent || '').replace(/\s+/g, ' ').trim();
+        const full = (item.textContent || '').replace(/\s+/g, ' ').trim();
+        const value = full.startsWith(key) ? full.slice(key.length).trim() : full.replace(key, '').trim();
+        if (!key || !value || key.length > 40 || value.length > 200) return;
+        if (EXCLUDED_KEYS.test(key)) return;
+        // "상품상세참조" 류의 placeholder 값은 정보가 아니다.
+        if (/^(상품상세참조|상세설명에 표시|상세정보 확인|상세페이지 참조)$/.test(value)) return;
+        const line = `${key}: ${value}`;
+        if (seen.has(line)) return;
+        seen.add(line);
+        parts.push(line);
+    });
+    return parts.slice(0, 40).join('\n');
+}
+
+export function closeTopLayer(): { closed: boolean } {
+    const dialog = document.querySelector('[role="dialog"], [class*="layer"], [class*="modal"], [class*="Modal"]');
+    if (!dialog) return { closed: false };
+    const btn = Array.from(dialog.querySelectorAll('a, button')).find(b =>
+        /^(닫기|레이어 닫기|확인)$/.test((b.textContent || '').replace(/\s+/g, ' ').trim()));
+    if (btn) {
+        (btn as HTMLElement).click();
+        return { closed: true };
+    }
+    return { closed: false };
+}
+
 /** 제품 정보(상품명·가격)를 OG 태그와 가격 요소에서 추출. */
 export function extractBrandProductInfo(): { name: string; price: string } {
     const name =

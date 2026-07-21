@@ -16,7 +16,13 @@ import { mergeOfficialNaverProductGallery } from './shopping/utils/officialNaver
 import { selectDecisionUsefulReviewTexts } from './shopping/utils/reviewTextSelection.js';
 import {
     clickReviewTab,
+    clickReviewListExpand,
     collectReviewTextCandidates,
+    collectProductDetailSpecText,
+    clickProductDetailTab,
+    openProductInfoNoticeLayer,
+    collectProductNoticeSpecText,
+    closeTopLayer,
 } from './shopping/providers/brandStore/brandStoreDom.js';
 
 /**
@@ -80,19 +86,47 @@ function prioritizeImages(galleryImages: string[], reviewImages: string[]): stri
 
 async function collectVisibleProductReviewTexts(page: any): Promise<string[]> {
     try {
-        await page.evaluate(clickReviewTab);
-        await page.waitForTimeout(900);
-        await page.evaluate(async () => {
-            for (let index = 0; index < 6; index += 1) {
-                window.scrollBy(0, 700);
-                await new Promise(resolve => setTimeout(resolve, 90));
+        const tab = await page.evaluate(clickReviewTab);
+
+        // [v2.11.134] Fixed waits (0.9s + 0.7s) finished before lazy-loaded
+        // reviews rendered on slow machines, publishing "리뷰 0건" posts for
+        // products that DO have reviews. Poll the candidate count while
+        // scrolling until it appears and stays stable for two polls (~5.6s max).
+        let candidates: string[] = [];
+        let lastCount = -1;
+        let stablePolls = 0;
+        for (let poll = 0; poll < 14; poll += 1) {
+            await page.evaluate(() => window.scrollBy(0, 700));
+            await page.waitForTimeout(400);
+            candidates = await page.evaluate(collectReviewTextCandidates);
+            if (candidates.length > 0 && candidates.length === lastCount) {
+                stablePolls += 1;
+                if (stablePolls >= 2) break;
+            } else {
+                stablePolls = 0;
             }
-        });
-        await page.waitForTimeout(700);
+            lastCount = candidates.length;
+            // No review tab and nothing rendered after ~2s — the page has no
+            // reachable review list; stop early instead of burning the budget.
+            if (!tab?.clicked && poll >= 4 && candidates.length === 0) break;
+        }
 
-        const candidates = await page.evaluate(collectReviewTextCandidates);
+        // [v2.11.134] Expand the pool (더보기/다음, max 2 clicks). Paginated
+        // lists REPLACE the visible items, so accumulate every sweep — the
+        // curation step dedups by review identity.
+        const accumulated = [...candidates];
+        for (let expand = 0; expand < 2; expand += 1) {
+            const clicked = await page.evaluate(clickReviewListExpand);
+            if (!clicked?.clicked) break;
+            await page.waitForTimeout(900);
+            const expanded: string[] = await page.evaluate(collectReviewTextCandidates);
+            if (expanded.length === 0) break;
+            accumulated.push(...expanded);
+        }
 
-        return selectDecisionUsefulReviewTexts(candidates);
+        const selected = selectDecisionUsefulReviewTexts(accumulated);
+        console.log(`[AffiliateCrawler] 📝 리뷰 텍스트: DOM 후보 ${accumulated.length}건 → 정선 ${selected.length}건 (리뷰 탭 ${tab?.clicked ? '클릭 OK' : '미클릭'})`);
+        return selected;
     } catch (error) {
         console.log(`[AffiliateCrawler] ⚠️ 리뷰 텍스트 수집 실패: ${(error as Error).message}`);
         return [];
@@ -2679,6 +2713,40 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             });
           } catch { /* alt markup changed — click/JSON-LD results still apply */ }
 
+          // [v2.11.135] Structured spec collection BEFORE the review tab click.
+          // New-store layout: 상세정보 탭 → "상품정보 제공고시" 아코디언 → 모달
+          // 레이어 (라이브 실측). The layer is closed afterwards so the review
+          // tab click is never blocked by the overlay. Legacy table/dl layouts
+          // fall back to the generic collector.
+          let detailSpecText = '';
+          try {
+            await bcPage.evaluate(clickProductDetailTab);
+            await bcPage.waitForTimeout(1500);
+            await bcPage.evaluate(async () => {
+              for (let si = 0; si < 8; si += 1) {
+                window.scrollBy(0, 1200);
+                await new Promise(resolve => setTimeout(resolve, 150));
+              }
+            });
+            const noticeOpened = await bcPage.evaluate(openProductInfoNoticeLayer);
+            if (noticeOpened?.clicked) {
+              await bcPage.waitForTimeout(2500);
+              detailSpecText = await bcPage.evaluate(collectProductNoticeSpecText);
+              await bcPage.evaluate(closeTopLayer);
+              await bcPage.waitForTimeout(500);
+            }
+            if (!detailSpecText) {
+              detailSpecText = await bcPage.evaluate(collectProductDetailSpecText);
+            }
+            if (detailSpecText) {
+              console.log(`[AffiliateCrawler] 📋 상세 스펙 수집: ${detailSpecText.split('\n').length}행 (${detailSpecText.length}자)`);
+            } else {
+              console.log('[AffiliateCrawler] ℹ️ 상세 스펙 없음 (제공고시 미노출 레이아웃)');
+            }
+          } catch (specErr) {
+            console.log(`[AffiliateCrawler] ⚠️ 상세 스펙 수집 실패 (무시): ${(specErr as Error).message}`);
+          }
+
           // Collect review text only after every official gallery source is
           // captured. Opening a review panel must never reduce product images.
           const visibleReviewTexts = await collectVisibleProductReviewTexts(bcPage);
@@ -2686,6 +2754,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             ...jsonLdInfo.reviewTexts,
             ...visibleReviewTexts,
           ]);
+          console.log(`[AffiliateCrawler] 📝 리뷰 최종: JSON-LD ${jsonLdInfo.reviewTexts.length}건 + DOM ${visibleReviewTexts.length}건 → 정선 ${collectedReviewTexts.length}건`);
 
           await releasePage(bcPage);
           bcPage = null;
@@ -2697,10 +2766,14 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
           );
           console.log(`[AffiliateCrawler] 🧬 공식 갤러리 확정: ${allImages.length}장 (클릭 ${galleryImages.length} · alt ${altImages.length} · json-ld ${jsonLdInfo.images.length})`);
           const priceNum = parseInt((productData.price || '').replace(/[^0-9]/g, '')) || 0;
+          // [v2.11.135] Structured specs join the description so 전문분석형
+          // posts get real 모델명/성능/규격 material (was og-desc only, ~18 chars
+          // on live smoke). Capped to keep the prompt budget bounded.
           const description = [
             productData.ogDesc || '',
             productData.specs ? `\n주요 스펙:\n${productData.specs}` : '',
-          ].filter(Boolean).join('\n').trim();
+            detailSpecText ? `\n상품 상세 정보:\n${detailSpecText}` : '',
+          ].filter(Boolean).join('\n').trim().substring(0, 3000);
 
           if (productData.productName && productData.productName.length > 2) {
             console.log(`[AffiliateCrawler] ✅ brandconnect 크롤링 성공! "${productData.productName}" (${priceNum.toLocaleString()}원, 이미지 ${allImages.length}장, 리뷰 ${collectedReviewTexts.length}건)`);

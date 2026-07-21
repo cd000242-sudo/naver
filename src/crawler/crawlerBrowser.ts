@@ -461,14 +461,25 @@ export async function checkForError(page: Page): Promise<boolean> {
             // 빈 title + body < 50자 = SPA 미렌더링
             if (title.length === 0 && body.trim().length < 50) return true;
 
-            const combined = (title + ' ' + body).toLowerCase();
             const errorKeywords = [
                 '에러', '시스템오류', '서비스 접속이 불가', '캡차', 'captcha',
                 '차단', '비정상적인 접근', '잠시 후 다시',
                 '보안 확인', '정답을 입력', '실제 사용자임을 확인',  // ✅ 네이버 CAPTCHA
                 '에러페이지', '시스템 오류',
             ];
-            if (errorKeywords.some(k => combined.includes(k))) return true;
+            // [v2.11.134] Trust error keywords only on error-SHAPED pages.
+            // Real Naver error/captcha pages are tiny (title "[에러] 에러페이지 -
+            // 시스템오류", a few body lines). Scanning the FULL body of a loaded
+            // store page misfired on user content — live smoke: the review
+            // "과전류시 자동차단기능" matched '차단' and a healthy product page
+            // was treated as blocked, failing the whole crawl. Title is always
+            // checked; body keywords only when the page is short.
+            const titleLower = title.toLowerCase();
+            if (errorKeywords.some(k => titleLower.includes(k))) return true;
+            if (body.trim().length < 1500) {
+                const bodyLower = body.toLowerCase();
+                if (errorKeywords.some(k => bodyLower.includes(k))) return true;
+            }
 
             // ✅ HTML에 CAPTCHA 스크립트가 있는지 확인
             if (html.includes('wtm_captcha') || html.includes('ncpt.naver.com')) return true;
@@ -489,6 +500,15 @@ export async function checkForCaptcha(page: Page): Promise<boolean> {
         return await page.evaluate(() => {
             const body = document.body?.innerText || '';
             const html = document.documentElement?.innerHTML || '';
+
+            // HTML 내 캡차 스크립트/요소 — 확정 신호라 페이지 길이와 무관하게 검사
+            if (html.includes('wtm_captcha') || html.includes('ncpt.naver.com')) return true;
+
+            // [v2.11.134] Keyword scan only on captcha-SHAPED (short) pages —
+            // a captcha interstitial never coexists with a full product body,
+            // and user reviews can contain phrases like '숫자를 입력'. A false
+            // positive here stalls the crawl for 120s waiting for a human.
+            if (body.trim().length >= 1500) return false;
             const combined = body.toLowerCase();
 
             // 네이버 캡차 키워드 ("N번째 자리 숫자를 입력하세요" 패턴)
@@ -497,12 +517,7 @@ export async function checkForCaptcha(page: Page): Promise<boolean> {
                 '실제 사용자임을 확인', '번째 자리', '숫자를 입력',
                 '자동 입력 방지',
             ];
-            if (captchaKeywords.some(k => combined.includes(k))) return true;
-
-            // HTML 내 캡차 스크립트/요소
-            if (html.includes('wtm_captcha') || html.includes('ncpt.naver.com')) return true;
-
-            return false;
+            return captchaKeywords.some(k => combined.includes(k));
         });
     } catch {
         return false; // 감지 실패 시 캡차 아님으로 처리 (안전)
@@ -551,10 +566,16 @@ async function waitForCaptchaSolved(page: Page, maxWaitMs = 120000): Promise<boo
  */
 export async function navigateWithRetry(page: Page, url: string, maxRetries = 3): Promise<boolean> {
     // ═══ ① 첫 시도 ═══
+    // [v2.11.134] domcontentloaded first. Naver store SPAs keep sockets/polling
+    // alive and often NEVER reach networkidle — the idle-first order burned its
+    // 30s, then the 15s fallback timed out mid-navigation on real links (live
+    // smoke: a direct domcontentloaded goto on the same URL succeeded while
+    // this path retried 3x and failed). Idle settle is best-effort afterwards.
     try {
-        await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+        await page.waitForLoadState('networkidle', { timeout: 8000 }).catch(() => undefined);
     } catch {
-        try { await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 }); } catch {}
+        try { await page.goto(url, { waitUntil: 'load', timeout: 20000 }); } catch {}
     }
     await page.waitForTimeout(5000); // SPA 렌더링 대기
 
@@ -608,11 +629,12 @@ export async function navigateWithRetry(page: Page, url: string, maxRetries = 3)
         // 점점 길어지는 대기
         await page.waitForTimeout((r + 1) * 5000);
 
-        // 재시도
+        // 재시도 — [v2.11.134] 첫 시도와 동일하게 domcontentloaded 우선
         try {
-            await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+            await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+            await page.waitForLoadState('networkidle', { timeout: 8000 }).catch(() => undefined);
         } catch {
-            try { await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 15000 }); } catch {}
+            try { await page.goto(url, { waitUntil: 'load', timeout: 20000 }); } catch {}
         }
         await page.waitForTimeout(5000);
 
