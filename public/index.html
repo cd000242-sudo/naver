@@ -1633,33 +1633,10 @@
                     <h3 style="margin-bottom: 1.5rem; color: var(--text-strong); font-size: 1.1rem;">📋 생성된 콘텐츠 미리보기
                     </h3>
 
-                    <!-- 제목 미리보기 -->
-                    <div style="margin-bottom: 1rem;">
-                        <h4 style="margin-bottom: 0.5rem; color: var(--text-strong); font-size: 1rem;">📝 제목</h4>
-                        <div id="unified-preview-title"
-                            style="background: var(--bg-primary); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-light); font-weight: 600; color: var(--text-strong);">
-                            제목이 여기에 표시됩니다
-                        </div>
-                    </div>
+                    <!-- [v2.11.139] 제목/본문/해시태그 읽기전용 블록 제거 — 바로 아래 '반자동 편집' 입력폼과
+                         중복이라 소제목별 구조 미리보기(제목+본문+이미지) 하나만 깔끔하게 남긴다. (사용자 요청) -->
 
-                    <!-- 본문 미리보기 -->
-                    <div style="margin-bottom: 1rem;">
-                        <h4 style="margin-bottom: 0.5rem; color: var(--text-strong); font-size: 1rem;">📄 본문</h4>
-                        <div id="unified-preview-body"
-                            style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light); max-height: 300px; overflow-y: auto; line-height: 1.8; white-space: pre-wrap; word-break: break-word;">
-                            <p style="color: var(--text-muted);">본문이 여기에 표시됩니다</p>
-                        </div>
-                    </div>
-
-                    <!-- 해시태그 미리보기 -->
-                    <div style="margin-bottom: 1.5rem;">
-                        <h4 style="margin-bottom: 0.5rem; color: var(--text-strong); font-size: 1rem;">🏷️ 해시태그</h4>
-                        <div id="unified-preview-hashtags"
-                            style="background: var(--bg-primary); padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-light); color: var(--text-muted); font-size: 0.9rem;">
-                        </div>
-                    </div>
-
-                    <!-- 이미지 + 소제목 + 프롬프트 통합 미리보기 (박스 형태) -->
+                    <!-- 소제목별 구조 미리보기 (제목·본문·이미지) -->
                     <div>
                         <h4
                             style="margin-bottom: 1rem; color: var(--text-strong); font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">

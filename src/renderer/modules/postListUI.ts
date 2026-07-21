@@ -431,6 +431,12 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
   }
 
   const uniqueAccounts = Array.from(accountMap.keys());
+  // ✅ [v2.11.139] 최신 활동 시각(수정일 우선, 없으면 생성일) — 계정/카테고리 그룹을
+  //    최신순으로 정렬해 "가장 최근에 작업한 계정 · 그 안의 최신 글"이 맨 위에 오게 한다.
+  const latestActivityTime = (items: any[]): number => items.reduce((max, p) => {
+    const t = new Date(p?.updatedAt || p?.createdAt || 0).getTime() || 0;
+    return t > max ? t : max;
+  }, 0);
   const buildCategoryGroups = (acctPosts: any[]) => {
     const catGroups = new Map<string, any[]>();
     for (const p of acctPosts) {
@@ -445,7 +451,8 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
     entries.sort((a, b) => {
       if (a.key === 'uncategorized' && b.key !== 'uncategorized') return 1;
       if (b.key === 'uncategorized' && a.key !== 'uncategorized') return -1;
-      const diff = b.items.length - a.items.length;
+      // 최신 글이 있는 카테고리를 위로 (사용자 요청: 최신순)
+      const diff = latestActivityTime(b.items) - latestActivityTime(a.items);
       if (diff !== 0) return diff;
       return a.label.localeCompare(b.label, 'ko');
     });
@@ -505,11 +512,11 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
       label: acctKey === '__unassigned__' ? '📦 (계정 미지정)' : `📦 ${acctKey}`,
       posts: accountMap.get(acctKey) || [],
     }));
-    // 정렬: 미지정을 맨 뒤, 나머지는 글 수 내림차순
+    // 정렬: 미지정을 맨 뒤, 나머지는 최신 활동순(가장 최근에 작업한 계정이 위)
     accountEntries.sort((a, b) => {
       if (a.key === '__unassigned__') return 1;
       if (b.key === '__unassigned__') return -1;
-      return b.posts.length - a.posts.length;
+      return latestActivityTime(b.posts) - latestActivityTime(a.posts);
     });
 
     listContainer.innerHTML = accountEntries.map(acct => {

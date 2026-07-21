@@ -10,6 +10,7 @@ import { applyKeywordPrefixToTitle } from '../utils/titleUtils.js';
 import { normalizeHashtags } from '../utils/hashtagUtils.js';
 import { applyPendingArticleTablesToGeneratedContent } from './articleTableComposer.js';
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
+import { resolveTextModelProfile, isAgentTextProvider } from '../../runtime/modelRegistry.js';
 import type { FillSemiAutoFieldsOptions } from '../types/index.js';
 
 declare let currentStructuredContent: any;
@@ -122,6 +123,29 @@ function engineLabel(generator: string): string {
     perplexity: 'Perplexity',
   };
   return map[generator] || generator;
+}
+
+/**
+ * Human-readable label of the ACTUAL text model in use, for progress logs.
+ * Reads the selected model radio (SSOT selector) and resolves it through the
+ * same model registry the main process uses, so the log shows e.g.
+ * "GPT-5.6 Luna" / "Gemini 3.1 Flash-Lite" instead of only the provider.
+ * Falls back to the coarse provider label if resolution is unavailable.
+ */
+function selectedModelLabel(generator: string): string {
+  try {
+    const selected = (
+      document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement | null
+    )?.value?.trim();
+    if (selected && isAgentTextProvider(selected)) return engineLabel(generator);
+    if (selected) {
+      const profile = resolveTextModelProfile(selected);
+      return profile.displayName || engineLabel(generator);
+    }
+  } catch {
+    // Unsupported/blank selector → fall through to provider label.
+  }
+  return engineLabel(generator);
 }
 
 function appendContentGenerationRetryNotice(activeModal?: any): void {
@@ -504,6 +528,8 @@ export async function generateContentFromUrl(
   // ✅ UI에서 선택된 생성기 사용 (UnifiedDOMCache에서 가져옴)
   const generator = UnifiedDOMCache.getGenerator();
   console.log(`[Unified] 사용할 AI 엔진: ${generator}`);
+  // ✅ [v2.11.139] 진행 로그에 실제 사용 모델을 시작 시점부터 표기 (사용자 요청)
+  if (activeModal.addLog) activeModal.addLog(`🧠 사용 모델: ${selectedModelLabel(generator)}`);
   // ✅ 에이전트 모드 사전 가드 — 미설치/미로그인이면 차단형 모달 후 중단 (silent 폴백 없음)
   if (!(await ensureAgentEngineReady(generator))) { try { hideUnifiedProgress(); } catch { /* ignore */ } return; }
   const targetAge = 'all'; // 고정
@@ -604,9 +630,9 @@ export async function generateContentFromUrl(
     appendLog('📡 URL 크롤링 중...');
 
     // ✅ 진행률 업데이트 - AI 생성 중
-    showUnifiedProgress(30, '🤖 AI 글 생성 중...', `${engineLabel(generator)} 엔진으로 콘텐츠 생성 중`);
-    appendLog(`🤖 ${engineLabel(generator)} 엔진으로 AI 글 생성 중... (${minChars}자 목표)`);
-    if (activeModal.addLog) activeModal.addLog(`🤖 ${engineLabel(generator)} 엔진으로 콘텐츠 생성 중...`);
+    showUnifiedProgress(30, '🤖 AI 글 생성 중...', `${selectedModelLabel(generator)} 모델로 콘텐츠 생성 중`);
+    appendLog(`🤖 ${selectedModelLabel(generator)} 모델로 AI 글 생성 중... (${minChars}자 목표)`);
+    if (activeModal.addLog) activeModal.addLog(`🤖 ${selectedModelLabel(generator)} 모델로 콘텐츠 생성 중...`);
     appendContentGenerationRetryNotice(activeModal);
 
     const apiResponse = await apiClient.call(
@@ -935,6 +961,8 @@ export async function generateContentFromKeywords(
   appendLog('✏️ 키워드 기반 AI 글 생성 시작...');
 
   const generator = UnifiedDOMCache.getGenerator();
+  // ✅ [v2.11.139] 진행 로그에 실제 사용 모델을 시작 시점부터 표기 (사용자 요청)
+  if (activeModal.addLog) activeModal.addLog(`🧠 사용 모델: ${selectedModelLabel(generator)}`);
   // ✅ 에이전트 모드 사전 가드 — 미설치/미로그인이면 차단형 모달 후 중단 (silent 폴백 없음)
   if (!(await ensureAgentEngineReady(generator))) { try { hideUnifiedProgress(); } catch { /* ignore */ } return; }
   const targetAge = 'all'; // 고정
@@ -1185,8 +1213,8 @@ export async function generateContentFromKeywords(
 
     // ✅ 진행률 업데이트 - AI 생성 중
     const crawlStatus = crawledText ? ' (실시간 정보 기반)' : '';
-    showUnifiedProgress(35, '🤖 AI 글 생성 중...', `${engineLabel(generator)} 엔진으로 콘텐츠 생성 중${crawlStatus}`);
-    appendLog(`🤖 ${engineLabel(generator)} 엔진으로 AI 글 생성 중... (${minChars}자 목표)${crawlStatus}`);
+    showUnifiedProgress(35, '🤖 AI 글 생성 중...', `${selectedModelLabel(generator)} 모델로 콘텐츠 생성 중${crawlStatus}`);
+    appendLog(`🤖 ${selectedModelLabel(generator)} 모델로 AI 글 생성 중... (${minChars}자 목표)${crawlStatus}`);
     appendContentGenerationRetryNotice(activeModal);
 
     const apiResponse = await apiClient.call(
