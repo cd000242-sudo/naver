@@ -263,18 +263,21 @@ async function probeClaudeLogin(): Promise<LoginProbe> {
 }
 
 /**
- * Gemini CLI has no `login status` subcommand. Readiness is inferred from the OAuth
- * credential file the CLI writes on first browser login (subscription path — "Antigravity"),
- * with an API-key fallback for users who deliberately configure GEMINI_API_KEY instead.
+ * Gemini CLI has no `login status` subcommand. Agent mode is subscription-only:
+ * the runner (buildGeminiSubscriptionEnv) deliberately STRIPS GEMINI_API_KEY to
+ * force the OAuth subscription path. So readiness must be inferred ONLY from the
+ * OAuth credential file the CLI writes on first browser login.
+ *
+ * [v2.11.138] The old GEMINI_API_KEY fallback was a false positive: the app sets
+ * GEMINI_API_KEY for normal content generation, so this reported "로그인 확인됨"
+ * even when the user never did the OAuth login — but the runner strips that key,
+ * so the first agent generation would fail. Removed to match the runner.
  */
 async function probeGeminiLogin(): Promise<LoginProbe> {
   try {
     const oauthCredsPath = join(homedir(), '.gemini', 'oauth_creds.json');
     if (existsSync(oauthCredsPath)) {
       return { loggedIn: true, detail: 'Gemini CLI OAuth 로그인 확인됨 (Antigravity 구독)' };
-    }
-    if (process.env.GEMINI_API_KEY?.trim()) {
-      return { loggedIn: true, detail: 'Gemini API key 모드' };
     }
     return { loggedIn: false, errorCode: 'not_logged_in' };
   } catch {
