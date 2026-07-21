@@ -461,7 +461,13 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
 
   const pendingRenderGroups: Array<{ targetId: string; chunks: any[][] }> = [];
   let renderGroupSequence = 0;
-  const renderCategoryGroupHtml = (g: { key: string; label: string; items: any[] }) => {
+  // ✅ [v2.11.140] 카테고리 = 서브탭. 헤더 대신 탭 버튼으로 전환하고 패널 본문만 렌더한다.
+  //    진행형 청크 로직(pendingRenderGroups)은 그대로 유지 — 숨은 패널도 id로 채워진다.
+  const renderCategoryPanel = (
+    g: { key: string; label: string; items: any[] },
+    accountKey: string,
+    active: boolean,
+  ): string => {
     const chunks = chunkGeneratedPostItems(g.items);
     const firstChunk = chunks.shift() || [];
     const targetId = `posts-category-body-${renderGeneration}-${renderGroupSequence++}`;
@@ -472,71 +478,64 @@ async function _refreshGeneratedPostsListAsync(): Promise<void> {
     const progressiveStatus = chunks.length > 0
       ? `<div class="posts-progressive-status" role="status" aria-live="polite">나머지 글을 순서대로 불러오는 중...</div>`
       : '';
-    const bodyHtml = isGalleryView
-      ? `<div class="posts-category-body" id="${targetId}">
-           <div class="posts-category-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
-             ${renderItems(firstChunk)}
-             ${progressiveStatus}
-           </div>
-         </div>`
-      : `<div class="posts-category-body" id="${targetId}">
-           ${renderItems(firstChunk)}
-           ${progressiveStatus}
-         </div>`;
+    const inner = isGalleryView
+      ? `<div class="posts-category-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">${renderItems(firstChunk)}${progressiveStatus}</div>`
+      : `${renderItems(firstChunk)}${progressiveStatus}`;
     return `
-      <section class="posts-category-group" data-category-key="${escapeHtml(g.key)}" style="margin-bottom: 0.75rem;">
-        <div class="posts-category-header" style="display:flex; align-items:center; justify-content:space-between; gap: 0.75rem; padding: 0.6rem 0.9rem; border-radius: 8px; background: var(--bg-tertiary); border: 1px solid var(--border-light);">
-          <div style="display:flex; align-items:center; gap: 0.6rem; min-width: 0;">
-            <div style="font-weight: 900; color: var(--text-strong); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(g.label)}</div>
-          </div>
-          <div style="display:flex; align-items:center; gap: 0.5rem; flex-shrink: 0;">
-            <span style="background: rgba(59,130,246,0.15); color: var(--text-strong); padding: 0.2rem 0.55rem; border-radius: 999px; font-size: 0.75rem; font-weight: 900;">${g.items.length}개</span>
-          </div>
-        </div>
-        ${bodyHtml}
-      </section>`;
+      <div class="posts-category-panel" data-cat-panel="${escapeHtml(accountKey + '::' + g.key)}" style="display:${active ? 'block' : 'none'};">
+        <div class="posts-category-body" id="${targetId}">${inner}</div>
+      </div>`;
+  };
+
+  // 한 계정의 카테고리 서브탭 바 + 패널들. 최신 글이 있는 카테고리가 첫 탭(활성).
+  const renderCategorySection = (accountKey: string, acctPosts: any[]): string => {
+    const catGroups = buildCategoryGroups(acctPosts);
+    if (catGroups.length === 0) return '';
+    const tabs = catGroups.map((g, i) => `
+      <button type="button" class="posts-category-tab${i === 0 ? ' active' : ''}" data-cat-tab="${escapeHtml(accountKey + '::' + g.key)}"
+        style="padding: 0.4rem 0.85rem; border-radius: 999px; border: 1px solid var(--border-light); background: ${i === 0 ? 'var(--primary)' : 'var(--bg-tertiary)'}; color: ${i === 0 ? '#fff' : 'var(--text-strong)'}; font-size: 0.8rem; font-weight: 800; cursor: pointer; white-space: nowrap;">
+        ${escapeHtml(g.label)} <span style="opacity:0.85; margin-left:0.15rem;">${g.items.length}</span>
+      </button>`).join('');
+    const panels = catGroups.map((g, i) => renderCategoryPanel(g, accountKey, i === 0)).join('');
+    return `
+      <div class="posts-category-tabs" role="tablist" style="display:flex; flex-wrap:wrap; gap:0.4rem; margin: 0.4rem 0 0.75rem;">${tabs}</div>
+      <div class="posts-category-panels">${panels}</div>`;
   };
 
   listContainer.style.display = 'block';
   listContainer.style.gridTemplateColumns = '';
   listContainer.style.gap = '';
 
-  // 계정이 1개뿐이면(또는 모두 미지정) 기존처럼 카테고리만 표시
+  // ✅ [v2.11.140] 계정 = 상위 탭, 카테고리 = 하위 서브탭. 최신 활동 계정이 첫 탭(활성).
   if (uniqueAccounts.length <= 1) {
-    const catGroups = buildCategoryGroups(posts);
-    listContainer.innerHTML = catGroups.map(renderCategoryGroupHtml).join('');
+    // 계정 1개(또는 미지정): 계정 탭 생략, 카테고리 서브탭만
+    const only = uniqueAccounts[0] || '__unassigned__';
+    listContainer.innerHTML = renderCategorySection(only, posts);
   } else {
-    // 다중 계정: 계정별 > 카테고리별 2단계
     const accountEntries = uniqueAccounts.map(acctKey => ({
       key: acctKey,
       label: acctKey === '__unassigned__' ? '📦 (계정 미지정)' : `📦 ${acctKey}`,
       posts: accountMap.get(acctKey) || [],
     }));
-    // 정렬: 미지정을 맨 뒤, 나머지는 최신 활동순(가장 최근에 작업한 계정이 위)
+    // 정렬: 미지정을 맨 뒤, 나머지는 최신 활동순(가장 최근에 작업한 계정이 첫 탭)
     accountEntries.sort((a, b) => {
       if (a.key === '__unassigned__') return 1;
       if (b.key === '__unassigned__') return -1;
       return latestActivityTime(b.posts) - latestActivityTime(a.posts);
     });
 
-    listContainer.innerHTML = accountEntries.map(acct => {
-      const catGroups = buildCategoryGroups(acct.posts);
-      const catHtml = catGroups.map(renderCategoryGroupHtml).join('');
-      return `
-        <section class="posts-account-group" data-account-key="${escapeHtml(acct.key)}" style="margin-bottom: 1.25rem;">
-          <div class="posts-account-header" style="display:flex; align-items:center; justify-content:space-between; gap: 0.75rem; padding: 0.85rem 1rem; border-radius: 10px; background: linear-gradient(135deg, rgba(59,130,246,0.08), rgba(139,92,246,0.08)); border: 1.5px solid rgba(59,130,246,0.25); margin-bottom: 0.5rem;">
-            <div style="display:flex; align-items:center; gap: 0.6rem; min-width: 0;">
-              <div style="font-weight: 900; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 1.05rem;">${escapeHtml(acct.label)}</div>
-            </div>
-            <div style="display:flex; align-items:center; gap: 0.5rem; flex-shrink: 0;">
-              <span style="background: rgba(59,130,246,0.2); color: var(--primary); padding: 0.25rem 0.65rem; border-radius: 999px; font-size: 0.8rem; font-weight: 900;">${acct.posts.length}개</span>
-            </div>
-          </div>
-          <div class="posts-account-body" style="padding-left: 0.75rem;">
-            ${catHtml}
-          </div>
-        </section>`;
-    }).join('');
+    const acctTabs = accountEntries.map((acct, i) => `
+      <button type="button" class="posts-account-tab${i === 0 ? ' active' : ''}" data-account-tab="${escapeHtml(acct.key)}"
+        style="padding: 0.55rem 1rem; border-radius: 10px; border: 1.5px solid rgba(59,130,246,0.3); background: ${i === 0 ? 'linear-gradient(135deg, var(--primary), #7c3aed)' : 'var(--bg-secondary)'}; color: ${i === 0 ? '#fff' : 'var(--primary)'}; font-size: 0.9rem; font-weight: 900; cursor: pointer; white-space: nowrap;">
+        ${escapeHtml(acct.label)} <span style="opacity:0.85; margin-left:0.2rem;">${acct.posts.length}</span>
+      </button>`).join('');
+    const acctPanels = accountEntries.map((acct, i) => `
+      <div class="posts-account-panel" data-account-panel="${escapeHtml(acct.key)}" style="display:${i === 0 ? 'block' : 'none'};">
+        ${renderCategorySection(acct.key, acct.posts)}
+      </div>`).join('');
+    listContainer.innerHTML = `
+      <div class="posts-account-tabs" role="tablist" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.6rem;">${acctTabs}</div>
+      <div class="posts-account-panels">${acctPanels}</div>`;
   }
 
   attachPostItemEventListeners(listContainer);
@@ -577,6 +576,39 @@ export function attachPostItemEventListeners(listContainer: HTMLElement): void {
   listContainer.addEventListener('click', (event) => {
     const target = event.target as HTMLElement | null;
     if (!target) return;
+
+    // ✅ [v2.11.140] 계정 상위 탭 전환
+    const acctTab = target.closest<HTMLElement>('.posts-account-tab');
+    if (acctTab && listContainer.contains(acctTab)) {
+      const key = acctTab.getAttribute('data-account-tab');
+      listContainer.querySelectorAll<HTMLElement>('.posts-account-tab').forEach((b) => {
+        const on = b === acctTab;
+        b.classList.toggle('active', on);
+        b.style.background = on ? 'linear-gradient(135deg, var(--primary), #7c3aed)' : 'var(--bg-secondary)';
+        b.style.color = on ? '#fff' : 'var(--primary)';
+      });
+      listContainer.querySelectorAll<HTMLElement>('.posts-account-panel').forEach((p) => {
+        p.style.display = p.getAttribute('data-account-panel') === key ? 'block' : 'none';
+      });
+      return;
+    }
+    // ✅ [v2.11.140] 카테고리 하위 서브탭 전환 (해당 계정 패널 범위 내에서만)
+    const catTab = target.closest<HTMLElement>('.posts-category-tab');
+    if (catTab && listContainer.contains(catTab)) {
+      const key = catTab.getAttribute('data-cat-tab');
+      const scope: Element = catTab.closest('.posts-account-panel') || listContainer;
+      scope.querySelectorAll<HTMLElement>('.posts-category-tab').forEach((b) => {
+        const on = b === catTab;
+        b.classList.toggle('active', on);
+        b.style.background = on ? 'var(--primary)' : 'var(--bg-tertiary)';
+        b.style.color = on ? '#fff' : 'var(--text-strong)';
+      });
+      scope.querySelectorAll<HTMLElement>('.posts-category-panel').forEach((p) => {
+        p.style.display = p.getAttribute('data-cat-panel') === key ? 'block' : 'none';
+      });
+      return;
+    }
+
     const thumbnail = target.closest<HTMLElement>('.thumbnail-container[data-image-url]');
     if (thumbnail) {
       event.stopPropagation();
