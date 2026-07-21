@@ -107,6 +107,35 @@ export class ThumbnailGenerator {
     this.render();
   }
 
+  /**
+   * [v2.11.139] Fill the main text with the generated post title on tab entry,
+   * but only when the field is empty or still the placeholder — never clobber
+   * text the user already typed/edited. Self-contained title resolution (same
+   * sources as thumbnailPreview) to avoid a cross-module dependency.
+   */
+  public autoFillTitleIfEmpty(): void {
+    const input = document.getElementById('thumb-main-text') as HTMLTextAreaElement | null;
+    const current = String(input?.value ?? this.settings.mainText ?? '').trim();
+    if (current && current !== '제목을 입력하세요') return;
+    const title = this.resolveGeneratedTitle();
+    if (title) this.setMainText(title);
+  }
+
+  private resolveGeneratedTitle(): string {
+    try {
+      const gen = (document.getElementById('unified-generated-title') as HTMLInputElement | null)?.value?.trim();
+      if (gen) return gen;
+      const uni = (document.getElementById('unified-title') as HTMLInputElement | null)?.value?.trim();
+      if (uni) return uni;
+      const sc: any = (window as any).currentStructuredContent;
+      const sel = String(sc?.selectedTitle || '').trim();
+      if (sel) return sel;
+      const h0 = String(sc?.headings?.[0]?.title || '').trim();
+      if (h0) return h0;
+    } catch { /* ignore */ }
+    return '';
+  }
+
   public setBackgroundFromUrl(url: string): Promise<void> {
     return new Promise((resolve, reject) => {
       if (!url) {
@@ -118,6 +147,7 @@ export class ThumbnailGenerator {
       img.crossOrigin = 'anonymous';
       img.onload = () => {
         this.backgroundImage = img;
+        this.ensureBackgroundContrast();
         this.render();
         resolve();
       };
@@ -474,12 +504,52 @@ export class ThumbnailGenerator {
     }
   }
 
+  /**
+   * Width-based greedy word wrap. Character-level so it works for Korean
+   * (which often has no spaces); the caller must set ctx.font first.
+   * Returns at least one line so downstream rendering never breaks.
+   */
+  private wrapTextToWidth(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
+    if (!text) return [''];
+    if (maxWidth <= 0 || ctx.measureText(text).width <= maxWidth) return [text];
+    const out: string[] = [];
+    let cur = '';
+    for (const ch of text) {
+      const test = cur + ch;
+      if (cur && ctx.measureText(test).width > maxWidth) {
+        out.push(cur);
+        cur = ch;
+      } else {
+        cur = test;
+      }
+    }
+    if (cur) out.push(cur);
+    return out.length ? out : [text];
+  }
+
+  /**
+   * [v2.11.139] Auto-contrast guarantee: when a background photo is set and the
+   * overlay is off (or too faint), apply a uniform dark scrim so white text stays
+   * legible on bright photos regardless of text position. No-op if the user already
+   * has a strong overlay. Solid (not gradient) because text position varies.
+   */
+  private ensureBackgroundContrast(): void {
+    if (!this.backgroundImage) return;
+    if (this.settings.overlayEnabled && this.settings.overlayOpacity >= 25) return;
+    this.settings.overlayEnabled = true;
+    this.settings.overlayColor = '#000000';
+    this.settings.overlayOpacity = 35;
+    this.settings.overlayType = 'solid';
+    try { this.updateUI(); } catch { /* ignore */ }
+  }
+
   private loadBackgroundImage(file: File): void {
     const reader = new FileReader();
     reader.onload = (e) => {
       const img = new Image();
       img.onload = () => {
         this.backgroundImage = img;
+        this.ensureBackgroundContrast();
         this.render();
       };
       img.src = e.target?.result as string;
@@ -589,6 +659,7 @@ export class ThumbnailGenerator {
     img.crossOrigin = 'anonymous';
     img.onload = () => {
       this.backgroundImage = img;
+      this.ensureBackgroundContrast();
       this.render();
     };
     img.onerror = () => {
@@ -613,45 +684,47 @@ export class ThumbnailGenerator {
   }
 
   private applyPreset(preset: string): void {
-    switch (preset) {
-      case 'modern':
-        this.settings.bgColor = '#1a1a2e';
-        this.settings.textColor = '#ffffff';
-        this.settings.overlayEnabled = true;
-        this.settings.overlayColor = '#667eea';
-        this.settings.overlayOpacity = 30;
-        this.settings.overlayType = 'gradient-v';
-        break;
-      case 'minimal':
-        this.settings.bgColor = '#f5f5f5';
-        this.settings.textColor = '#333333';
-        this.settings.overlayEnabled = false;
-        this.settings.textShadow = false;
-        break;
-      case 'vibrant':
-        this.settings.bgColor = '#ff416c';
-        this.settings.textColor = '#ffffff';
-        this.settings.overlayEnabled = true;
-        this.settings.overlayColor = '#ff4b2b';
-        this.settings.overlayOpacity = 50;
-        this.settings.overlayType = 'gradient-h';
-        break;
-      case 'nature':
-        this.settings.bgColor = '#11998e';
-        this.settings.textColor = '#ffffff';
-        this.settings.overlayEnabled = true;
-        this.settings.overlayColor = '#38ef7d';
-        this.settings.overlayOpacity = 40;
-        this.settings.overlayType = 'gradient-v';
-        break;
-      case 'dark':
-        this.settings.bgColor = '#232526';
-        this.settings.textColor = '#ffffff';
-        this.settings.overlayEnabled = true;
-        this.settings.overlayColor = '#414345';
-        this.settings.overlayOpacity = 60;
-        this.settings.overlayType = 'gradient-v';
-        break;
+    // ✅ [v2.11.139] 프리셋을 "배경색 스위처"가 아닌 완성형 템플릿으로 승격.
+    //    폰트·크기·글자색·위치·그림자·외곽선까지 통째로 세팅해 5종이 실제로
+    //    달라 보이게 한다. 형광펜은 항상 끄고, 외곽선은 템플릿별로 명시한다.
+    const T: Record<string, Partial<typeof this.settings>> = {
+      // 모던: 고딕 A1 · 중앙 · 얇은 그림자 · 보라 그라데이션
+      modern: {
+        fontFamily: "'Gothic A1', sans-serif", fontSize: 50, textColor: '#ffffff',
+        textAlign: 'center', textPosition: 'center', textShadow: true, textOutline: false,
+        bgColor: '#1a1a2e', overlayEnabled: true, overlayColor: '#667eea', overlayOpacity: 35, overlayType: 'gradient-v',
+      },
+      // 미니멀: 명조 · 하단 · 무그림자 · 밝은 배경 · 오버레이 없음
+      minimal: {
+        fontFamily: "'Nanum Myeongjo', serif", fontSize: 46, textColor: '#222222',
+        textAlign: 'center', textPosition: 'bottom', textShadow: false, textOutline: false,
+        bgColor: '#f5f5f5', overlayEnabled: false, overlayOpacity: 0,
+      },
+      // 바이브런트: 검은고딕 큰 글씨 · 중앙 · 그림자+검정 외곽선 · 빨강 그라데이션
+      vibrant: {
+        fontFamily: "'Black Han Sans', sans-serif", fontSize: 60, textColor: '#ffffff',
+        textAlign: 'center', textPosition: 'center', textShadow: true, textOutline: true,
+        outlineColor: '#000000', outlineWidth: 3,
+        bgColor: '#ff416c', overlayEnabled: true, overlayColor: '#ff4b2b', overlayOpacity: 45, overlayType: 'gradient-h',
+      },
+      // 네이처: 주아(둥근) · 하단 · 그림자 · 청록+초록 그라데이션
+      nature: {
+        fontFamily: "'Jua', sans-serif", fontSize: 50, textColor: '#ffffff',
+        textAlign: 'center', textPosition: 'bottom', textShadow: true, textOutline: false,
+        bgColor: '#11998e', overlayEnabled: true, overlayColor: '#38ef7d', overlayOpacity: 40, overlayType: 'gradient-v',
+      },
+      // 다크 임팩트: 도현 · 상단 · 그림자+검정 외곽선 · 짙은 그라데이션
+      dark: {
+        fontFamily: "'Do Hyeon', sans-serif", fontSize: 58, textColor: '#ffffff',
+        textAlign: 'center', textPosition: 'top', textShadow: true, textOutline: true,
+        outlineColor: '#000000', outlineWidth: 3,
+        bgColor: '#232526', overlayEnabled: true, overlayColor: '#414345', overlayOpacity: 60, overlayType: 'gradient-v',
+      },
+    };
+    const tpl = T[preset];
+    if (tpl) {
+      this.settings = { ...this.settings, ...tpl, textHighlight: false };
+      this.updateTextPosition();
     }
     this.render();
     this.updateUI();
@@ -667,6 +740,24 @@ export class ThumbnailGenerator {
     (document.getElementById('thumb-overlay-opacity-value') as HTMLSpanElement).textContent = String(this.settings.overlayOpacity);
     (document.getElementById('thumb-overlay-type') as HTMLSelectElement).value = this.settings.overlayType;
     (document.getElementById('thumb-text-shadow') as HTMLInputElement).checked = this.settings.textShadow;
+
+    // ✅ [v2.11.139] 프리셋 템플릿이 바꾸는 폰트/크기/정렬/외곽선까지 컨트롤에 반영
+    const fontFamilyEl = document.getElementById('thumb-font-family') as HTMLSelectElement | null;
+    if (fontFamilyEl) fontFamilyEl.value = this.settings.fontFamily;
+    const fontSizeEl = document.getElementById('thumb-font-size') as HTMLInputElement | null;
+    if (fontSizeEl) fontSizeEl.value = String(this.settings.fontSize);
+    const fontSizeValueEl = document.getElementById('thumb-font-size-value') as HTMLSpanElement | null;
+    if (fontSizeValueEl) fontSizeValueEl.textContent = `${this.settings.fontSize}px`;
+    const textAlignEl = document.getElementById('thumb-text-align') as HTMLSelectElement | null;
+    if (textAlignEl) textAlignEl.value = this.settings.textAlign;
+    const textOutlineEl = document.getElementById('thumb-text-outline') as HTMLInputElement | null;
+    if (textOutlineEl) textOutlineEl.checked = this.settings.textOutline;
+    const outlineSettingsEl = document.getElementById('thumb-outline-settings') as HTMLDivElement | null;
+    if (outlineSettingsEl) outlineSettingsEl.style.display = this.settings.textOutline ? 'block' : 'none';
+    const outlineColorEl = document.getElementById('thumb-outline-color') as HTMLInputElement | null;
+    if (outlineColorEl) outlineColorEl.value = this.settings.outlineColor;
+    const outlineWidthEl = document.getElementById('thumb-outline-width') as HTMLInputElement | null;
+    if (outlineWidthEl) outlineWidthEl.value = String(this.settings.outlineWidth);
 
     // 배경 줌 활성화 상태 업데이트
     const bgZoomEnable = document.getElementById('thumb-bg-zoom-enable') as HTMLInputElement;
@@ -1031,8 +1122,11 @@ export class ThumbnailGenerator {
     if (this.settings.textAlign === 'left') textX = 40;
     else if (this.settings.textAlign === 'right') textX = canvas.width - 40;
 
-    // ✅ 줄바꿈 처리
-    const lines = this.settings.mainText.split('\n');
+    // ✅ 줄바꿈 처리 — 사용자 개행(\n) + 캔버스 폭 초과 시 자동 줄바꿈 (긴 제목 잘림 방지)
+    const maxTextWidth = canvas.width - 80; // 좌우 40px 여백
+    const lines = this.settings.mainText
+      .split('\n')
+      .flatMap((line) => this.wrapTextToWidth(ctx, line, maxTextWidth));
     const lineHeight = this.settings.fontSize * 1.3; // 줄 간격
     const totalHeight = lines.length * lineHeight;
     const startY = this.textPosition.y - (totalHeight / 2) + (lineHeight / 2);
@@ -2252,7 +2346,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!thumbnailGenerator) {
           setTimeout(() => {
             thumbnailGenerator = new ThumbnailGenerator();
+            // ✅ [v2.11.139] 탭 진입 시 생성된 글 제목을 자동으로 채움 (빈 값일 때만)
+            try { thumbnailGenerator.autoFillTitleIfEmpty(); } catch { /* ignore */ }
           }, 100);
+        } else {
+          try { thumbnailGenerator.autoFillTitleIfEmpty(); } catch { /* ignore */ }
         }
       } else if (subtab === 'converter') {
         if (converterPanel) converterPanel.style.display = 'block';
