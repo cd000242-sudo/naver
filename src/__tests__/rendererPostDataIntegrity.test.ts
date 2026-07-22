@@ -48,16 +48,17 @@ describe('renderer post data integrity', () => {
   });
 
   it('normalizes legacy hashtag text and mixed arrays to a fresh string array', () => {
-    expect(normalizeHashtags(' #one, two\n#three ')).toEqual(['#one', 'two', '#three']);
+    expect(normalizeHashtags(' #one, two\n#three ')).toEqual(['one', 'two', 'three']);
     expect(normalizeHashtags([' #one ', '', '#two #three', null, 42])).toEqual([
-      '#one',
-      '#two',
-      '#three',
+      'one',
+      'two',
+      'three',
     ]);
 
+    // [v2.11.140d] 정규형은 # 없는 태그 — UI가 표시 시에만 #을 붙인다(이중 접두 방지).
     const original = ['#one', '#two'];
     const normalized = normalizeHashtags(original);
-    expect(normalized).toEqual(original);
+    expect(normalized).toEqual(['one', 'two']);
     expect(normalized).not.toBe(original);
   });
 
@@ -80,8 +81,8 @@ describe('renderer post data integrity', () => {
 
     const [loaded] = loadGeneratedPosts();
 
-    expect(loaded.hashtags).toEqual(['#one', '#two']);
-    expect(loaded.structuredContent?.hashtags).toEqual(['#one', '#two']);
+    expect(loaded.hashtags).toEqual(['one', 'two']);
+    expect(loaded.structuredContent?.hashtags).toEqual(['one', 'two']);
     expect(loaded.structuredContent?._postId).toBe('post_canonical');
   });
 
@@ -97,8 +98,8 @@ describe('renderer post data integrity', () => {
     const storedPosts = JSON.parse(localStorage.getItem(GENERATED_POSTS_KEY) || '[]');
 
     expect(postId).toMatch(/^post_/);
-    expect(storedPosts[0].hashtags).toEqual(['#one', '#two']);
-    expect(storedPosts[0].structuredContent.hashtags).toEqual(['#one', '#two']);
+    expect(storedPosts[0].hashtags).toEqual(['one', 'two']);
+    expect(storedPosts[0].structuredContent.hashtags).toEqual(['one', 'two']);
     expect(storedPosts[0].structuredContent._postId).toBe(postId);
     expect(structuredContent.hashtags).toBe('#one, #two');
     expect(structuredContent).not.toHaveProperty('_postId');

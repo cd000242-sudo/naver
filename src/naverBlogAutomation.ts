@@ -4424,6 +4424,22 @@ export class NaverBlogAutomation {
           return;
         }
 
+        // [v2.11.140d] 근본 판정(크기 기반): 이 가드가 막아야 할 유일한 참사는 "수백~수천자
+        // 복원된 초안 위 혼합 발행"이다. 글감/플레이스홀더 힌트는 에디터 변형·계정마다 DOM
+        // 클래스가 달라 클래스 기반 제거가 반복적으로 뚫렸다(실측: titleChars=19/bodyChars=36
+        // 무한 차단, 서로 다른 두 계정에서 재현). 읽을 수 있는 본문이 150자 미만이면 실제
+        // 초안일 수 없는 힌트/잔여 소음이므로 새 글로 진행한다. 제목은 자동화가 어차피 교체
+        // 입력하므로 차단 근거가 아니다. 실복원 초안(수백자+)은 여전히 정리→재검증→차단된다.
+        const readableBodyChars = stats && !isEditorBodyUnreadable(stats)
+          ? (typeof stats.bodyChars === 'number' ? stats.bodyChars : 0)
+          : null;
+        if (readableBodyChars !== null && readableBodyChars < 150) {
+          this.pendingDraftConflictDialog = false;
+          this.requiresFreshEditorContext = false;
+          this.log(`✅ 본문 ${readableBodyChars}자(<150) — 글감/힌트 수준 잔여만 존재. 새 글로 진행합니다.`);
+          return;
+        }
+
         lastContext = `titleChars=${title.trim().length}, bodyChars=${stats?.bodyChars ?? 'unavailable'}`;
 
         // ✅ [v2.11.140] 사용자 지시("실패한 초안이 있으면 성공시켜라"): 남은 초안을 한 번

@@ -176,6 +176,24 @@ describe('isPasteVisible — 라이브 리포트 시나리오 (기능 검증)', 
     expect(detectedArmAt).toBeGreaterThan(-1);
   });
 
+  it('[v2.11.140d] 근본 판정: 본문 150자 미만은 글감/힌트 소음 — freshness 가드가 통과시킨다', () => {
+    // 실측 3회(두 계정): 글감 힌트(19/36자)는 에디터 변형마다 DOM 클래스가 달라
+    // 클래스 제거·카운트·팝업 신호가 전부 우회됐다. 크기 기반 판정이 근본 해결:
+    // 이 가드의 유일한 참사는 수백자+ 복원 초안 위 혼합 발행이고 힌트는 항상 수십자다.
+    const code = read('naverBlogAutomation.ts');
+    const fnAt = code.indexOf('private async assertFreshDraftContext');
+    expect(fnAt).toBeGreaterThan(-1);
+    const fnBody = code.slice(fnAt, fnAt + 6000);
+    expect(fnBody).toContain('readableBodyChars !== null && readableBodyChars < 150');
+    // 크기 판정은 clear 시도(clearLeftoverEditorDraft)보다 먼저 와야 한다 —
+    // 캐럿 접근이 죽은 에디터(rootEditable=false)에서도 통과 가능해야 하므로.
+    const sizeGateAt = fnBody.indexOf('readableBodyChars < 150');
+    const clearAt = fnBody.indexOf('clearLeftoverEditorDraft');
+    expect(sizeGateAt).toBeGreaterThan(-1);
+    expect(clearAt).toBeGreaterThan(-1);
+    expect(sizeGateAt).toBeLessThan(clearAt);
+  });
+
   it('[v2.11.140] 임시저장 카운트를 aria-label("임시저장된 글 보기, N개")로 우선 읽는다', () => {
     // 실측(스샷+모달 덤프): 헤더의 "저장"과 숫자가 별도 버튼이라 innerText "저장 N"
     // 매칭이 null로 빠져 draftCount===0 지름길이 무력화 → 작성중인 글 팝업(취소로 닫음)

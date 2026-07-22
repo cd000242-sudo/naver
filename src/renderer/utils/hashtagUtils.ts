@@ -9,7 +9,10 @@ export function normalizeHashtags(value: unknown): string[] {
 
     return item
       .split(HASHTAG_SEPARATOR)
-      .map((hashtag) => hashtag.trim())
+      // [v2.11.140d] Canonical form is WITHOUT '#'. The UI now displays tags with a
+      // '#' prefix, so strip it here to keep the display→parse round trip stable
+      // (otherwise republish would double-prefix to "##tag").
+      .map((hashtag) => hashtag.trim().replace(/^#+/u, ''))
       .filter(Boolean);
   });
 }

@@ -140,7 +140,8 @@ export function populateGeneratedPostFields(
     console.warn(`[loadGeneratedPost] ⚠️ unified-generated-content textarea가 DOM에 없음 (postId=${postId})`);
   }
   if (hashtagsInput) {
-    hashtagsInput.value = hashtags.join(' ');
+    // [v2.11.140d] Display with '#' prefix (user request); normalizeHashtags strips it on read.
+    hashtagsInput.value = hashtags.map((tag) => `#${tag}`).join(' ');
     hashtagsInput.readOnly = false;
   }
   if (imageTitleInput) {

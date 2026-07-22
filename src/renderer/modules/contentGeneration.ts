@@ -1605,7 +1605,8 @@ export function fillSemiAutoFields(
   // 해시태그 필드 채움 (수정 가능)
   const hashtagsInput = document.getElementById('unified-generated-hashtags') as HTMLInputElement;
   if (hashtagsInput) {
-    const hashtagsStr = structuredContent.hashtags.join(' ');
+    // [v2.11.140d] Display with '#' prefix (user request); normalizeHashtags strips it on read.
+    const hashtagsStr = structuredContent.hashtags.map((tag: string) => `#${tag}`).join(' ');
     console.log('[fillSemiAutoFields] Updating hashtags:', hashtagsStr);
     hashtagsInput.value = hashtagsStr;
     hashtagsInput.readOnly = false;
@@ -1940,7 +1941,8 @@ ${hashtags ? `원본 해시태그: ${hashtags}\n위 해시태그를 참고하여
       appendLog('⚠️ AI 응답에 본문이 없어 원본을 유지합니다.');
     }
     if (hashtagsInput && Array.isArray(structuredContent.hashtags) && structuredContent.hashtags.length > 0) {
-      hashtagsInput.value = structuredContent.hashtags.join(' ');
+      // [v2.11.140d] Display with '#' prefix (user request); normalizeHashtags strips it on read.
+      hashtagsInput.value = structuredContent.hashtags.map((tag: string) => `#${tag}`).join(' ');
     }
 
     // [Phase 1-1/v2.11.0] 통합 post-processing 파이프라인 호출 — 5회 재발 영구 차단.
