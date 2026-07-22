@@ -1803,6 +1803,41 @@ function updateUnifiedImagePreview(headings, generatedImages) {
     const bodyImages = Array.isArray(generatedImages)
         ? generatedImages.filter((img) => img?.isThumbnail !== true)
         : [];
+    // [v2.11.141] Preview header: post title + introduction (+thumbnail) were missing
+    // from the structural preview above the semi-auto editor (user request).
+    const previewTitle = String(structuredContent?.selectedTitle || structuredContent?.title || '').trim();
+    const introductionText = (() => {
+        const direct = String(structuredContent?.introduction || '').trim();
+        if (direct)
+            return direct;
+        if (!bodyPlain || !headings.length)
+            return '';
+        const firstTitle = typeof headings[0] === 'string' ? headings[0] : (headings[0]?.title || '');
+        const cut = firstTitle ? bodyPlain.indexOf(firstTitle) : -1;
+        return cut > 0 ? bodyPlain.substring(0, cut).trim() : '';
+    })();
+    const thumbnailImage = Array.isArray(generatedImages)
+        ? generatedImages.find((img) => img?.isThumbnail === true)
+        : null;
+    let headerHtml = '';
+    if (previewTitle || introductionText) {
+        const thumbRaw = thumbnailImage ? getFullAutoImagePath(thumbnailImage) : '';
+        const thumbUrl = thumbRaw ? toFileUrlMaybe(String(thumbRaw).trim()) : '';
+        const thumbBlock = thumbUrl
+            ? `<div style="width: 60px; height: 40px; border-radius: 6px; overflow: hidden; border: 2px solid var(--border-color); flex-shrink: 0;"><img src="${escapeHtml(thumbUrl)}" alt="썸네일" style="width: 100%; height: 100%; object-fit: cover;"></div>`
+            : '';
+        const safeIntro = escapeHtml(introductionText.substring(0, 600)) + (introductionText.length > 600 ? '...' : '');
+        headerHtml = `<div style="margin-bottom: 1rem; padding: 0.75rem; background: var(--bg-tertiary); border-radius: 8px; border: 1px solid var(--border-light);">
+      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: ${introductionText ? '0.75rem' : '0'};">
+        ${thumbBlock}
+        <div style="font-weight: 700; color: var(--text-strong); font-size: 1.05rem; line-height: 1.4; word-break: keep-all;">📌 ${escapeHtml(previewTitle) || '(제목 없음)'}</div>
+      </div>
+      ${introductionText ? `<div style="padding: 0.75rem; background: var(--bg-primary); border-radius: 6px; border-left: 3px solid var(--primary);">
+        <div style="font-weight: 600; color: var(--text-strong); margin-bottom: 0.5rem; font-size: 0.9rem;">✍️ 도입부</div>
+        <div style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; white-space: pre-line;">${safeIntro}</div>
+      </div>` : ''}
+    </div>`;
+    }
     const integratedHtml = headings.map((heading, index) => {
         const generatedImage = bodyImages[index];
         const imageStatus = generatedImage ? '✅ 생성됨' : '⏳ 준비중';
@@ -1881,7 +1916,7 @@ function updateUnifiedImagePreview(headings, generatedImages) {
       </div>
     </div>`;
     }).join('');
-    integratedPreview.innerHTML = integratedHtml || '<div style="color: var(--text-muted); font-style: italic;">소제목이 없습니다.</div>';
+    integratedPreview.innerHTML = headerHtml + (integratedHtml || '<div style="color: var(--text-muted); font-style: italic;">소제목이 없습니다.</div>');
     const headingTitles = headings
         .map((h) => (typeof h === 'string' ? h : (h?.title || h)))
         .map((t) => String(t || '').trim())

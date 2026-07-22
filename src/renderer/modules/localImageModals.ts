@@ -761,6 +761,14 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
       return;
     }
 
+    // [v2.11.141] 배치 대상에 썸네일 슬롯 포함 (사용자 요청: 순서대로/일반 배치에서
+    // 썸네일이 제외되던 문제). 첫 슬롯 = 서론 대표 썸네일('🖼️ 썸네일' — ImageManager
+    // 키·발행 서론 삽입 키와 동일), 이후 슬롯 = 소제목 1..N (표시 번호 그대로 유지).
+    const placementTargets: Array<{ title: string; isThumbnail?: boolean }> = [
+      { title: '🖼️ 썸네일', isThumbnail: true },
+      ...headings.map((h: any) => ({ title: typeof h === 'string' ? h : (h?.title || '') })),
+    ];
+
     // 모달 생성
     const modal = document.createElement('div');
     modal.setAttribute('data-modal-type', 'local-image-selection');
@@ -789,7 +797,7 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
             </button>
           </div>
           <div style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
-            💡 <strong>순서대로 배치 모드:</strong> 이미지를 클릭한 순서대로 소제목 1, 2, 3... 에 자동 배치됩니다! (재클릭 시 취소)
+            💡 <strong>순서대로 배치 모드:</strong> 이미지를 클릭한 순서대로 🖼️ 썸네일 → 소제목 1, 2, 3... 에 자동 배치됩니다! (재클릭 시 취소)
           </div>
           <div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--accent); line-height: 1.4;">
             🎨 <strong>하이브리드 모드:</strong> 일부만 선택하고 나머지는 AI/Pexels 이미지 자동 생성됩니다!
@@ -814,16 +822,18 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
           <h3 style="margin: 0 0 0.5rem 0; color: var(--text-strong); font-size: 1.1rem;">소제목 선택 (일반 모드용)</h3>
           <p style="margin: 0 0 1rem 0; font-size: 0.85rem; color: var(--text-muted);">💡 이미지를 선택한 후 소제목을 클릭하세요. 이미 배치된 이미지는 교체됩니다.</p>
           <div id="heading-selection-list" style="display: flex; flex-direction: column; gap: 0.5rem;">
-            ${headings.map((heading: any, index: number) => {
-      const headingTitle = heading.title || heading;
+            ${placementTargets.map((target, index: number) => {
+      const headingTitle = target.title;
       const hasImage = ImageManager.hasImage(headingTitle);
       const buttonStyle = hasImage
         ? 'padding: 0.75rem 1rem; background: linear-gradient(135deg, #10b981, #059669); color: white; border: 2px solid #10b981; border-radius: 8px; cursor: pointer; text-align: left; transition: all 0.2s; font-size: 0.9rem; font-weight: 600;'
         : 'padding: 0.75rem 1rem; background: var(--bg-tertiary); color: var(--text-strong); border: 1px solid var(--border-light); border-radius: 8px; text-align: left; cursor: pointer; transition: all 0.2s; font-weight: 500;';
       const iconPrefix = hasImage ? '✅ ' : '';
+      // 썸네일(index 0)은 라벨 고정, 소제목은 1..N 번호 유지 (index가 곧 소제목 번호)
+      const label = target.isThumbnail ? '🖼️ 썸네일 (서론 대표)' : `${index}. ${headingTitle}`;
       return `
               <button type="button" class="heading-select-btn" data-heading-index="${index}" style="${buttonStyle}">
-                ${iconPrefix}${index + 1}. ${headingTitle}
+                ${iconPrefix}${label}
               </button>
             `;
     }).join('')}
@@ -883,8 +893,8 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
       item.addEventListener('click', async () => {
         // ✅ 순서 모드인 경우
         if (clickOrderMode) {
-          if (nextHeadingIndex >= headings.length) {
-            alert(`모든 소제목(${headings.length}개)에 이미지가 배치되었습니다!`);
+          if (nextHeadingIndex >= placementTargets.length) {
+            alert(`모든 슬롯(썸네일 + 소제목 ${headings.length}개)에 이미지가 배치되었습니다!`);
             return;
           }
 
@@ -943,9 +953,9 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
           (item as HTMLElement).style.borderWidth = '3px';
           (item as HTMLElement).style.boxShadow = '0 0 0 3px rgba(16, 185, 129, 0.3)';
 
-          // 소제목에 배치
-          const heading = headings[nextHeadingIndex];
-          const headingTitle = typeof heading === 'string' ? heading : (heading.title || '');
+          // 슬롯에 배치 (index 0 = 썸네일, 1..N = 소제목)
+          const target = placementTargets[nextHeadingIndex];
+          const headingTitle = target.title;
 
           const newImage = {
             heading: headingTitle,
@@ -953,6 +963,7 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
             previewDataUrl: `file:///${imagePath}`,
             provider: 'local' as any,
             savedToLocal: true,
+            isThumbnail: target.isThumbnail === true,
             url: `file:///${imagePath}`
           };
 
@@ -966,13 +977,14 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
               console.warn('[localImageModals] catch ignored:', e);
             }
 
-            appendLog(`✅ [${nextHeadingIndex + 1}/${headings.length}] "${imageName}" → "${headingTitle}"`);
-            toastManager.success(`✅ ${nextHeadingIndex + 1}번 소제목에 배치 완료!`);
+            const slotLabel = target.isThumbnail ? '🖼️ 썸네일' : `${nextHeadingIndex}번 소제목`;
+            appendLog(`✅ [${nextHeadingIndex + 1}/${placementTargets.length}] "${imageName}" → "${headingTitle}"`);
+            toastManager.success(`✅ ${slotLabel}에 배치 완료!`);
 
             nextHeadingIndex++;
 
-            // 모든 소제목에 배치 완료
-            if (nextHeadingIndex >= headings.length) {
+            // 모든 슬롯에 배치 완료
+            if (nextHeadingIndex >= placementTargets.length) {
               const allImages = (() => {
                 try {
                   return ImageManager.getAllImages();
@@ -983,7 +995,7 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
               displayGeneratedImages(allImages);
               updatePromptItemsWithImages(allImages);
 
-              alert(`🎉 모든 소제목에 이미지 배치 완료!\n\n총 ${headings.length}개 이미지가 배치되었습니다.`);
+              alert(`🎉 썸네일 + 모든 소제목에 이미지 배치 완료!\n\n총 ${placementTargets.length}개 이미지가 배치되었습니다.`);
               modal.remove();
             }
           } catch (e) {
@@ -1032,8 +1044,9 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
         }
 
         const headingIndex = parseInt((btn as HTMLElement).dataset.headingIndex || '0');
-        const heading = headings[headingIndex];
-        const headingTitle = typeof heading === 'string' ? heading : (heading.title || '');
+        const target = placementTargets[headingIndex];
+        const headingTitle = target?.title || '';
+        const isThumbnailTarget = target?.isThumbnail === true;
 
         // ✅ 이미 배치된 소제목인지 확인 (ImageManager 사용)
         const isAlreadyPlaced = ImageManager.hasImage(headingTitle);
@@ -1062,6 +1075,7 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
                   previewDataUrl: `file:///${imagePath}`,
                   provider: 'local' as any,
                   savedToLocal: true,
+                  isThumbnail: isThumbnailTarget,
                   url: `file:///${imagePath}`
                 };
 
@@ -1104,6 +1118,7 @@ export async function showLocalImageSelectionModal(folderName?: string): Promise
           previewDataUrl: `file:///${selectedImagePath}`,
           provider: 'local' as any,
           savedToLocal: true,
+          isThumbnail: isThumbnailTarget,
           url: `file:///${selectedImagePath}`
         };
 
