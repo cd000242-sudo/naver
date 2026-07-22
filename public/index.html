@@ -1131,6 +1131,20 @@
                             💡 URL/키워드 → AI 글생성 → 이미지 → 발행까지 한 번에!
                         </p>
                     </div>
+                    <!-- ✅ [v2.11.143] 팩트체크 엔진 — 발행 화면 노출 (환경설정과 자동 동기화) -->
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-top: 0.85rem;">
+                        <span style="font-weight: 700; color: var(--text-strong); font-size: 0.85rem; white-space: nowrap;">🔎 팩트체크 엔진</span>
+                        <select data-factcheck-engine-sync="1"
+                            style="flex: 1; padding: 0.55rem 0.75rem; background: var(--bg-primary); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 8px; color: var(--text-strong); font-size: 0.82rem; cursor: pointer;">
+                            <option value="auto" selected>🤖 자동 — 크롤링 대조 → 네이버 API → Perplexity (저비용 우선)</option>
+                            <option value="crawl">📄 크롤링 정보 바탕 (추가 비용 거의 없음)</option>
+                            <option value="naver">🟢 네이버 API (무료 쿼터)</option>
+                            <option value="gpt-claude">💬 GPT/Claude 지식 기반 (~₩10~30/편)</option>
+                            <option value="perplexity">🌐 Perplexity 검색 검증 (~₩50~150/편)</option>
+                            <option value="gemini-grounding">💎 Gemini 그라운딩 (가장 정확·가장 비쌈)</option>
+                            <option value="off">⏹️ 끔 — 팩트체크 교정 안 함</option>
+                        </select>
+                    </div>
                 </div>
 
                 <!-- ✅ 공정위 문구 (발행 모드 바로 아래, 항상 보임) -->
@@ -7747,6 +7761,22 @@
                             style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center;">
                             💡 썸네일, 이미지 소스, 스타일, 비율 등을 한 곳에서 설정하세요
                         </p>
+                        <!-- ✅ [v2.11.143] 팩트체크 엔진 — 연속발행 설정 노출 (전역 동기화) -->
+                        <div style="margin-top: 0.85rem;">
+                            <label
+                                style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">🔎
+                                팩트체크 엔진</label>
+                            <select data-factcheck-engine-sync="1"
+                                style="width: 100%; padding: 0.6rem 0.75rem; background: var(--bg-primary); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 8px; color: var(--text-strong); font-size: 0.82rem; cursor: pointer;">
+                                <option value="auto" selected>🤖 자동 — 크롤링 대조 → 네이버 API → Perplexity (저비용 우선)</option>
+                                <option value="crawl">📄 크롤링 정보 바탕 (추가 비용 거의 없음)</option>
+                                <option value="naver">🟢 네이버 API (무료 쿼터)</option>
+                                <option value="gpt-claude">💬 GPT/Claude 지식 기반 (~₩10~30/편)</option>
+                                <option value="perplexity">🌐 Perplexity 검색 검증 (~₩50~150/편)</option>
+                                <option value="gemini-grounding">💎 Gemini 그라운딩 (가장 정확·가장 비쌈)</option>
+                                <option value="off">⏹️ 끔 — 팩트체크 교정 안 함</option>
+                            </select>
+                        </div>
                     </div>
 
                     <!-- ✅ 실제 블로그 카테고리 (분석 버튼) -->
@@ -9660,6 +9690,22 @@
                                     style="accent-color:#6366f1; width:16px; height:16px;">
                                 <span style="color:var(--text-strong);">🌐 Perplexity 팩트검증 <span style="color:#6366f1; font-size:0.7rem;">(₩50~150/편)</span></span>
                             </label>
+                        </div>
+                        <!-- ✅ [v2.11.143] 팩트체크 엔진 — 다중계정 설정 노출 (전역 동기화) -->
+                        <div style="margin-top: 0.6rem;">
+                            <label
+                                style="display:block; font-size:0.78rem; font-weight:600; color:var(--text-muted); margin-bottom:0.35rem;">🔎
+                                팩트체크 엔진</label>
+                            <select data-factcheck-engine-sync="1"
+                                style="width: 100%; padding: 0.5rem 0.6rem; background: var(--bg-primary); border: 1px solid rgba(99, 102, 241, 0.4); border-radius: 6px; color: var(--text-strong); font-size: 0.78rem; cursor: pointer;">
+                                <option value="auto" selected>🤖 자동 — 크롤링 대조 → 네이버 API → Perplexity (저비용 우선)</option>
+                                <option value="crawl">📄 크롤링 정보 바탕 (추가 비용 거의 없음)</option>
+                                <option value="naver">🟢 네이버 API (무료 쿼터)</option>
+                                <option value="gpt-claude">💬 GPT/Claude 지식 기반 (~₩10~30/편)</option>
+                                <option value="perplexity">🌐 Perplexity 검색 검증 (~₩50~150/편)</option>
+                                <option value="gemini-grounding">💎 Gemini 그라운딩 (가장 정확·가장 비쌈)</option>
+                                <option value="off">⏹️ 끔 — 팩트체크 교정 안 함</option>
+                            </select>
                         </div>
                     </div>
 
