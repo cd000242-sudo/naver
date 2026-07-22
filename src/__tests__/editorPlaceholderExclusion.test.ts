@@ -92,13 +92,25 @@ describe('isPasteVisible — 라이브 리포트 시나리오 (기능 검증)', 
     expect(isPasteVisible(beforeObj, afterObj, expected)).toBe(true);
   });
 
-  it('[v2.11.140 안전잠금] 진짜 끝부분(마지막 앵커) 누락이면 여전히 차단한다', () => {
+  it('[v2.11.140 안전잠금] 큰 누락(커버리지<0.82)이면 끝 앵커 부재로 여전히 차단한다', () => {
     const before = 'ㄱ'.repeat(47);
-    // 섹션 끝 40자가 실제로 안 들어온 truncation — 마지막 앵커 부재 → 차단
+    // 섹션 끝 40자가 실제로 안 들어온 truncation — 커버리지 게이트(0.82) 미달 → 차단
     const truncated = SECTION.slice(0, SECTION.length - 40);
     const afterText = `${before}${truncated}`;
     const beforeObj = { chars: before.length, tables: 0, text: before };
     const afterObj = { chars: afterText.length, tables: 0, text: afterText };
     expect(isPasteVisible(beforeObj, afterObj, SECTION)).toBe(false);
+  });
+
+  it('[v2.11.140] 끝 몇 글자만 누락되고(tailAt=-1) 커버리지 높으면(>=0.95) 통과 — 실측 headAt=1261/tailAt=-1/cov0.97 재현', () => {
+    // 앞 섹션들이 이미 들어간 상태(1261자) 뒤에 새 섹션이 append되는데, 끝 몇 글자만
+    // 미세하게 누락(끝 렌더 정규화/트렁케이션). 시작은 정확히 append, 커버리지 97%.
+    const before = 'ㄱ'.repeat(1261);
+    const expected = SECTION; // ~170자
+    const rendered = expected.slice(0, expected.length - 5); // 끝 5자 누락 → cov ~0.97, 끝 앵커 불일치
+    const afterText = `${before}${rendered}`;
+    const beforeObj = { chars: before.length, tables: 0, text: before };
+    const afterObj = { chars: afterText.length, tables: 0, text: afterText };
+    expect(isPasteVisible(beforeObj, afterObj, expected)).toBe(true);
   });
 });

@@ -1657,9 +1657,23 @@ export function isPasteVisible(
 
   const lastAnchor = anchors[anchors.length - 1];
   const lastAnchorAt = afterText.lastIndexOf(lastAnchor);
-  if (lastAnchorAt < firstAnchorAt) return false;
-  const trailingChars = afterText.length - (lastAnchorAt + lastAnchor.length);
-  return trailingChars <= 8;
+  if (lastAnchorAt >= firstAnchorAt) {
+    // 끝 앵커가 시작 뒤에서 발견 — 정상 브라킷. 뒤에 밀려난 잔여(mid-insertion)만 차단.
+    const trailingChars = afterText.length - (lastAnchorAt + lastAnchor.length);
+    return trailingChars <= 8;
+  }
+  if (lastAnchorAt >= 0) {
+    // 끝 앵커가 시작 앵커보다 "앞"에서 발견 = 순서 뒤바뀜(reorder) → 반드시 차단.
+    // (끝 내용이 문서에 존재하지만 잘못된 위치 → 혼합/오배치 발행 위험)
+    return false;
+  }
+  // [v2.11.140] 끝 앵커가 아예 없음(tailAt=-1): 섹션 마지막 몇 글자가 안 들어왔거나(끝 미세
+  // truncation) 끝부분 렌더 정규화 차이. 시작이 append 지점에 정확히 안착했고(위 firstAnchorAt)
+  // 커버리지가 near-complete(>=0.95)면 통과 — 라이브 발행에서 끝 몇 글자 차이는 무해하고
+  // 사용자가 보며 수정 가능하다. 본문 누락(cov < minimumCoverage 0.82)은 위에서 이미 차단됐고,
+  // reorder(끝 내용이 앞에 존재)는 바로 위 분기에서 차단된다.
+  //   실측 근거: headAt=1261(정상 append), tailAt=-1, cov=0.97 (260자 중 252자 안착 = 끝 8자 차이).
+  return coverage >= 0.95;
 }
 
 function buildPasteFailureReason(
