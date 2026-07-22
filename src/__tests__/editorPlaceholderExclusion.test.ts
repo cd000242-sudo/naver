@@ -130,4 +130,27 @@ describe('isPasteVisible — 라이브 리포트 시나리오 (기능 검증)', 
     const detectedArmAt = code.indexOf('outcome.detected');
     expect(detectedArmAt).toBeGreaterThan(-1);
   });
+
+  it('[v2.11.140] 임시저장 카운트를 aria-label("임시저장된 글 보기, N개")로 우선 읽는다', () => {
+    // 실측(스샷+모달 덤프): 헤더의 "저장"과 숫자가 별도 버튼이라 innerText "저장 N"
+    // 매칭이 null로 빠져 draftCount===0 지름길이 무력화 → 작성중인 글 팝업(취소로 닫음)
+    // + 저장 0 상태에서도 글감 힌트 오탐(19/36)으로 발행이 차단됐다.
+    const code = read('naverBlogAutomation.ts');
+    const readFnAt = code.indexOf('private async readTempSaveDraftCount');
+    expect(readFnAt).toBeGreaterThan(-1);
+    const fnBody = code.slice(readFnAt, readFnAt + 3000);
+    const ariaAt = fnBody.indexOf("querySelectorAll('[aria-label]')");
+    const innerTextAt = fnBody.indexOf("querySelectorAll('button, a, span, div, em, strong')");
+    expect(ariaAt).toBeGreaterThan(-1);
+    expect(innerTextAt).toBeGreaterThan(-1);
+    expect(ariaAt).toBeLessThan(innerTextAt); // aria 우선
+
+    // 소스와 동일한 정규식이 라이브 aria 문자열을 정확히 파싱하는지 잠금.
+    const ariaRegex = /(?:임시\s*)?저장(?:된)?\s*글\s*보기[^0-9]*(\d+)\s*개/;
+    expect(fnBody).toContain(String(ariaRegex).slice(1, -1));
+    expect('임시저장된 글 보기, 0개'.match(ariaRegex)?.[1]).toBe('0');
+    expect('임시저장된 글 보기, 3개'.match(ariaRegex)?.[1]).toBe('3');
+    expect('저장된 글 보기 12개'.match(ariaRegex)?.[1]).toBe('12');
+    expect('발행 설정 열기'.match(ariaRegex)).toBeNull();
+  });
 });

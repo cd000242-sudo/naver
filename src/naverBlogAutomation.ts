@@ -4460,6 +4460,19 @@ export class NaverBlogAutomation {
     for (const fr of frames) {
       try {
         const count = await fr.evaluate(() => {
+          // [v2.11.140] Most reliable first: the count button carries a stable
+          // aria-label ("임시저장된 글 보기, 0개" — confirmed in live modal dump).
+          // The visible header splits "저장" and the number into SEPARATE buttons,
+          // so the innerText "저장 N" match below can miss and return null, which
+          // silently disabled the draftCount===0 fast path (live incident:
+          // 작성중인 글 popup + 저장 0, yet the guard fell through to the
+          // hint-text false positive and blocked every publish).
+          const ariaEls = Array.from(document.querySelectorAll('[aria-label]'));
+          for (const el of ariaEls) {
+            const label = String(el.getAttribute('aria-label') || '');
+            const am = label.match(/(?:임시\s*)?저장(?:된)?\s*글\s*보기[^0-9]*(\d+)\s*개/);
+            if (am) return parseInt(am[1], 10);
+          }
           const els = Array.from(document.querySelectorAll('button, a, span, div, em, strong'));
           for (const el of els) {
             const raw = (el as HTMLElement).innerText;
