@@ -70,7 +70,7 @@ declare function getCostRiskProviderLabel(provider: string): string;
 declare function getReviewProductAnchor(): string;
 declare function decomposeKoreanCompound(text: string, dict?: any): any;
 declare function getStableImageKey(img: any): string;
-declare function showSavedImagesForReplace(headingIndex: number): void;
+declare function showSavedImagesForReplace(headingIndex: number | 'thumbnail'): void;
 declare function showImageModal(imgSrc: string): void;
 declare function ensurePromptCardRemoveButtons(): void;
 declare function ensurePromptCardRemoveHandler(): void;

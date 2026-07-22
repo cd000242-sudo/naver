@@ -25,6 +25,25 @@ describe('thumbnail placement slot + preview header (v2.11.141)', () => {
     expect(localImageModals).toContain('isThumbnail: isThumbnailTarget');
   });
 
+  it('[v2.11.141b] 썸네일 카드의 "저장된 이미지" 교체는 썸네일 슬롯으로 라우팅된다', () => {
+    // 실측 버그: 수동 썸네일의 headingIndex=0이 소제목 1로 해석돼 교체 이미지가
+    // 소제목 1의 그리드/미리보기에 들어가고 정작 썸네일은 안 바뀌었다.
+    const imageDisplayGrid = readFileSync(
+      resolve(__dirname, '../renderer/modules/imageDisplayGrid.ts'), 'utf8');
+    const renderer = readFileSync(
+      resolve(__dirname, '../renderer/renderer.ts'), 'utf8');
+    // 그리드: 썸네일 카드 감지 → 'thumbnail' 타깃 호출 (headingIndex 해석보다 먼저)
+    const guardAt = imageDisplayGrid.indexOf("showSavedImagesForReplace('thumbnail'");
+    const indexResolveAt = imageDisplayGrid.indexOf('Number(image?.headingIndex ?? -1)');
+    expect(guardAt).toBeGreaterThan(-1);
+    expect(indexResolveAt).toBeGreaterThan(-1);
+    expect(guardAt).toBeLessThan(indexResolveAt);
+    // 픽커: 썸네일 타깃은 '🖼️ 썸네일' 키 + isThumbnail로 직접 등록
+    expect(renderer).toContain("targetIndex: number | 'thumbnail'");
+    expect(renderer).toContain("const isThumbnailTarget = targetIndex === 'thumbnail'");
+    expect(renderer).toContain('isThumbnail: isThumbnailTarget');
+  });
+
   it('구조 미리보기 상단에 제목·도입부 헤더가 렌더된다', () => {
     const fnAt = fullAutoFlow.indexOf('function updateUnifiedImagePreview');
     expect(fnAt).toBeGreaterThan(-1);

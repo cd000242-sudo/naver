@@ -199,6 +199,15 @@ export function displayGeneratedImages(images: any[]): void {
         const index = parseInt((e.target as HTMLElement).getAttribute('data-image-index') || '0');
         const image = validImages[index];
 
+        // [v2.11.141] 썸네일 카드의 교체는 썸네일 슬롯으로 라우팅.
+        //   기존: 수동 썸네일의 headingIndex=0이 소제목 1로 해석돼 소제목 1의 그리드/
+        //   미리보기에 교체 이미지가 들어가고 정작 썸네일(큰 미리보기)은 안 바뀌었다.
+        const imageHeadingKey = String(image?.heading || '').trim();
+        if (image?.isThumbnail === true || imageHeadingKey === '🖼️ 썸네일' || imageHeadingKey === '썸네일') {
+          await showSavedImagesForReplace('thumbnail' as any);
+          return;
+        }
+
         let targetHeadingIndex = Number(image?.headingIndex ?? -1);
         if (!Number.isFinite(targetHeadingIndex) || targetHeadingIndex < 0) {
           const headingTitle = String(image?.heading || '').trim();

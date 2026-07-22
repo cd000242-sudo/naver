@@ -818,7 +818,7 @@ declare global {
   function updateReserveImagesThumbnails(): void;
   function showHeadingSelectionModalV2(image: any, currentIndex: number): Promise<void>;
   function regenerateWithNewAI(index: number, heading: string): Promise<void>;
-  function showSavedImagesForReplace(targetIndex: number): Promise<void>;
+  function showSavedImagesForReplace(targetIndex: number | 'thumbnail'): Promise<void>;
   function initDashboard(): void;
   function initTabSwitching(): void;
   function initUnifiedImageEventHandlers(): void;
@@ -9826,8 +9826,18 @@ async function regenerateWithNewAI(index: number, heading: string): Promise<void
 }
 
 // ✅ 저장된 이미지로 교체 모달
-async function showSavedImagesForReplace(targetIndex: number): Promise<void> {
+async function showSavedImagesForReplace(targetIndex: number | 'thumbnail'): Promise<void> {
   try {
+    // [v2.11.141] 썸네일 카드의 교체는 소제목 인덱스가 아니라 썸네일 슬롯으로 라우팅.
+    //   기존엔 썸네일 이미지의 headingIndex=0이 소제목 1로 해석돼 엉뚱한 곳에 교체됐다.
+    if (targetIndex === 'thumbnail') {
+      await showFolderSelectionModal({
+        onFolderSelected: async (folderName: string) => {
+          await showLocalImagePickerForReplace(folderName, 'thumbnail');
+        },
+      });
+      return;
+    }
     const normalizeTargetHeadingIndex = (idx: number): number => {
       const rawIdx = Number.isFinite(idx) ? idx : 0;
       const hs = (ImageManager as any)?.headings;
@@ -9874,7 +9884,7 @@ async function showSavedImagesForReplace(targetIndex: number): Promise<void> {
   }
 }
 
-async function showLocalImagePickerForReplace(folderName: string, targetIndex: number): Promise<void> {
+async function showLocalImagePickerForReplace(folderName: string, targetIndex: number | 'thumbnail'): Promise<void> {
   try {
     if (!window.api.getUserHomeDir || !window.api.readDir || !window.api.checkFileExists) {
       toastManager.error('파일 시스템 API를 사용할 수 없습니다.');
@@ -9961,7 +9971,11 @@ async function showLocalImagePickerForReplace(folderName: string, targetIndex: n
         const fileName = String((btn as HTMLElement).getAttribute('data-file-name') || '').trim();
         if (!filePath && !fileUrl) return;
 
-        const currentHeading = resolveHeadingTitleByIndex(targetIndex);
+        // [v2.11.141] 썸네일 타깃은 소제목 인덱스 해석 없이 썸네일 키로 직접 등록.
+        const isThumbnailTarget = targetIndex === 'thumbnail';
+        const currentHeading = isThumbnailTarget
+          ? '🖼️ 썸네일'
+          : resolveHeadingTitleByIndex(targetIndex);
         if (!currentHeading) {
           toastManager.error('소제목 제목을 찾을 수 없습니다. 먼저 소제목 분석/생성을 다시 실행해주세요.');
           return;
@@ -9973,6 +9987,7 @@ async function showLocalImagePickerForReplace(folderName: string, targetIndex: n
           previewDataUrl: fileUrl || filePath,
           provider: 'local',
           savedToLocal: true,
+          isThumbnail: isThumbnailTarget,
           prompt: fileName || currentHeading,
           timestamp: Date.now(),
         };
