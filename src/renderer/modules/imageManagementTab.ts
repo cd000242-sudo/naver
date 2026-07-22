@@ -359,6 +359,20 @@ export async function initImageManagementTab(): Promise<void> {
   const imageSourceInfoBadge = document.getElementById('image-source-info-badge');
 
   if (imageSourceSelect) {
+    // [v2.11.141] HTML 기본 selected(dropshot)가 앱 시작마다 저장된 엔진 선택을 덮던
+    // 버그(사용자 보고: "어떤 엔진으로 설정해도 리더스 나노바나나 무제한으로 생성").
+    // getImageSource()가 이 드롭다운을 localStorage보다 먼저 읽으므로, 시작 시 저장된
+    // 선택(globalImageSource/fullAutoImageSource)으로 복원해야 설정이 유지된다.
+    try {
+      const storedSource = localStorage.getItem('globalImageSource')
+        || localStorage.getItem('fullAutoImageSource');
+      if (storedSource && imageSourceSelect.querySelector(`option[value="${storedSource}"]`)) {
+        imageSourceSelect.value = storedSource;
+        console.log(`[ImageSource] 저장된 엔진으로 드롭다운 복원: ${storedSource}`);
+      }
+    } catch (e) {
+      console.warn('[ImageSource] 드롭다운 복원 실패 (무시):', e);
+    }
     imageSourceSelect.addEventListener('change', async () => {
       const selectedSource = imageSourceSelect.value;
       const selectedOption = imageSourceSelect.options[imageSourceSelect.selectedIndex];

@@ -336,6 +336,18 @@ export function setGlobalImageSource(source: GlobalImageSource): void {
   } else {
     console.log(`[HeadingImageSettings] 글로벌 이미지 소스 설정: ${normalized} (AI 엔진 아님 → fullAuto 미동기화)`);
   }
+  // [v2.11.141] 메인 풀오토 이미지 설정 모달의 선택을 #image-source-select에도 반영.
+  // getImageSource()가 이 드롭다운을 localStorage보다 먼저 읽으므로, 미동기화 시
+  // 모달에서 무슨 엔진을 골라도 드롭다운 값(기본 dropshot)이 이겨 선택이 무시됐다.
+  try {
+    const mirrorSelect = document.getElementById('image-source-select') as HTMLSelectElement | null;
+    if (mirrorSelect && mirrorSelect.querySelector(`option[value="${normalized}"]`)) {
+      mirrorSelect.value = normalized;
+      console.log(`[HeadingImageSettings] #image-source-select 미러 동기화: ${normalized}`);
+    }
+  } catch (e) {
+    console.warn('[HeadingImageSettings] 드롭다운 미러 동기화 실패 (무시):', e);
+  }
 }
 
 // ✅ [2026-02-02] 풀오토 전용 이미지 소스 설정 (이미지 관리 탭과 완전히 분리)
