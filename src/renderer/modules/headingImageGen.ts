@@ -2503,8 +2503,12 @@ export function initHeadingImageGeneration(): void {
           });
         }
 
-        // ✅ [100점 최종] 3단계: 병렬 이미지 검색 (Promise.all)
-        appendLog(`⚡ 병렬 이미지 검색 시작 (${targetCount}개 동시)...`, 'images-log-output');
+        // ✅ [v2.11.141] 사람처럼 수집 (사용자 요청): 소제목 N개를 같은 밀리초에 동시
+        // 발사하던 버스트를 무작위 시차로 분산한다. 사람이 검색창에 하나씩 입력하는
+        // 리듬(0.9~2.3초 간격)이라 네이버 API 입장에서 기계적 패턴이 사라진다.
+        const humanPause = (minMs: number, maxMs: number): Promise<void> =>
+          new Promise((resolveFn) => setTimeout(resolveFn, minMs + Math.random() * (maxMs - minMs)));
+        appendLog(`🧍 사람처럼 자연스러운 간격으로 이미지 수집 시작 (${targetCount}개 소제목)...`, 'images-log-output');
 
         // ✅ [v2.8.4] URL 모드 — sourceUrl이 입력되어 있으면 키워드 검색 폴백 전면 차단
         //   사용자 보고: "썸네일이미지는 이미지수집이 잘됫는데 나머지이미지는 링크에서
@@ -2559,13 +2563,18 @@ export function initHeadingImageGeneration(): void {
           }
 
           // 네이버 검색 (3단계 폴백) — URL 미입력 시에만 동작
+          // [v2.11.141] 사람 리듬: 소제목별 시차(순번 × ~1.1초 + 지터) + 폴백 재검색 간
+          // 짧은 지터. 동시 버스트/기계적 등간격 패턴 제거.
+          await humanPause(400 + i * 900, 1400 + i * 1300);
           let searchResult = await window.api.searchNaverImages(q.optimizedQuery);
 
           if (!searchResult.success || !searchResult.images || searchResult.images.length === 0) {
+            await humanPause(350, 900);
             searchResult = await window.api.searchNaverImages(q.broaderQuery);
           }
 
           if (!searchResult.success || !searchResult.images || searchResult.images.length === 0) {
+            await humanPause(350, 900);
             searchResult = await window.api.searchNaverImages(coreSubject);
           }
 
@@ -2576,12 +2585,14 @@ export function initHeadingImageGeneration(): void {
             const g1base = heading.includes('썸네일') ? searchKeyword : heading;
             const g1 = localGeneralizeImageQuery(g1base, 4);
             if (g1 && g1 !== q.optimizedQuery) {
+              await humanPause(350, 900);
               searchResult = await window.api.searchNaverImages(g1);
             }
           }
           if (!searchResult.success || !searchResult.images || searchResult.images.length === 0) {
             const g2 = localGeneralizeImageQuery(searchKeyword, 2);
             if (g2) {
+              await humanPause(350, 900);
               searchResult = await window.api.searchNaverImages(g2);
             }
           }

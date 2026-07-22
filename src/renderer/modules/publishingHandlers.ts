@@ -366,6 +366,34 @@ export async function handleFullAutoPublish(): Promise<void> {
     return;
   }
 
+  // ✅ [v2.11.141] 생성된 글 보호 잠금 (사용자 요청): 이미 글이 생성돼 있으면 풀오토
+  // 발행은 그 글을 버리고 새 글을 처음부터 다시 생성한다 — 글 생성 + 이미지 세팅까지
+  // 해둔 작업이 통째로 무의미해지는 사고 방지. 차단형 확인 + 명시 동의로만 진행.
+  {
+    const existingSc = (window as any).currentStructuredContent;
+    const hasGeneratedContent = !!existingSc && (
+      String(existingSc.bodyPlain || existingSc.content || '').trim().length >= 100
+      || (Array.isArray(existingSc.headings) && existingSc.headings.length > 0)
+    );
+    if (hasGeneratedContent) {
+      const existingTitle = String(existingSc.selectedTitle || existingSc.title || '(제목 없음)').trim();
+      const proceed = confirm(
+        `⚠️ 이미 생성된 글이 있습니다!\n\n` +
+        `📝 "${existingTitle.substring(0, 40)}"\n\n` +
+        `풀오토 발행은 이 글과 세팅한 이미지를 사용하지 않고\n` +
+        `새 글을 처음부터 다시 생성합니다.\n\n` +
+        `✅ 준비한 글을 발행하려면 → [취소] 후 "반자동 발행"을 사용하세요.\n` +
+        `🔄 준비한 글을 버리고 새로 생성하려면 → [확인]`,
+      );
+      if (!proceed) {
+        appendLog('⛔ 풀오토 발행 잠금 — 생성된 글이 있어 중단 (반자동 발행 사용 권장)');
+        toastManager.info('생성된 글이 보호되었습니다. "반자동 발행"으로 준비한 글을 발행하세요.');
+        return;
+      }
+      appendLog('⚠️ 사용자 확인 — 생성된 글을 버리고 풀오토 새 글 생성으로 진행합니다.');
+    }
+  }
+
   // ✅ [v2.8.3] 이미지 엔진 사전 차단 가드 — 폴백 금지, 사용자 명시 동의 필요
   //   - dall-e-3: 2026-05-12 이후 차단, 이전 1회성 D-Day 안내
   //   - openai-image (덕트테이프): Org Verification 첫 사용 시 가이드 모달
