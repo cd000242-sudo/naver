@@ -1,6 +1,9 @@
 export type EditorTailCta = {
   readonly text?: string;
   readonly link?: string;
+  // [v2.11.142] Per-CTA position ('bottom' | 'heading-N'). Absent → the global
+  // ctaPosition decides (legacy behaviour preserved).
+  readonly position?: string;
 };
 
 export type EditorTailPlanInput = {
@@ -39,6 +42,25 @@ export function isHeadingCtaPosition(value?: string): boolean {
   return /^heading-\d+$/.test(String(value || ''));
 }
 
+/** [v2.11.142] Effective position of one CTA: own position wins, else global, else bottom. */
+export function resolveCtaPosition(cta: EditorTailCta | undefined, globalPosition?: string): string {
+  const own = String(cta?.position || '').trim();
+  if (own) return own;
+  const global = String(globalPosition || '').trim();
+  return global || 'bottom';
+}
+
+/** [v2.11.142] CTAs that belong under heading N (1-based) — per-CTA position with global fallback. */
+export function selectSectionCtas(
+  ctas: readonly EditorTailCta[] | undefined,
+  globalPosition: string | undefined,
+  headingNumber: number,
+): EditorTailCta[] {
+  if (!Array.isArray(ctas) || ctas.length === 0) return [];
+  const target = `heading-${headingNumber}`;
+  return ctas.filter((cta) => resolveCtaPosition(cta, globalPosition) === target);
+}
+
 export function getHashtagGapEnterCount(previousPostTailInserted: boolean): number {
   void previousPostTailInserted;
   return 5;
@@ -72,7 +94,12 @@ export function planEditorTail(input: EditorTailPlanInput): EditorTailPlan {
     : initialCtas;
   const skippedDuplicateCtaCount = initialCtas.length - effectiveCtas.length;
   const isHeadingPosition = isHeadingCtaPosition(input.ctaPosition);
-  const bottomCtas = !input.skipCta && !isHeadingPosition ? [...effectiveCtas] : [];
+  // [v2.11.142] Per-CTA positions: bottom CTAs are the ones whose EFFECTIVE position
+  // (own > global > 'bottom') is not a heading slot. A mixed set now works — some CTAs
+  // land under headings (inserted in the section loop) and the rest at the bottom.
+  const bottomCtas = !input.skipCta
+    ? effectiveCtas.filter((cta) => !isHeadingCtaPosition(resolveCtaPosition(cta, input.ctaPosition)))
+    : [];
 
   return {
     effectiveCtas,

@@ -34,6 +34,7 @@ import {
 import {
   getExpectedLinkCardMin,
   planEditorTail,
+  selectSectionCtas,
 } from './editorTailPlan.js';
 import {
   buildExpectedOrderAnchors,
@@ -2176,42 +2177,39 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
           });
         }
 
-        // d) CTA 중간 삽입 (위치가 middle이고 중간 지점인 경우, skipCta가 false인 경우만)
-        // d) CTA 특정 소제목 아래 삽입 (위치가 heading-N인 경우)
-        const headingMatch = resolved.ctaPosition?.match(/^heading-(\d+)$/);
-        if (!resolved.skipCta && headingMatch && resolved.ctas.length > 0) {
-          const targetHeadingIndex = parseInt(headingMatch[1], 10) - 1; // 1-based → 0-based
-          if (i === targetHeadingIndex) {
-            self.log(`   → CTA ${i + 1}번 소제목 본문 아래 삽입 중...`);
-            // Heading CTAs type right after this section's rich paste — verify
-            // keyboard input registers before typing (same recovery ladder as
-            // the tail phase).
-            try {
-              const headingCtaFrame = (await self.getAttachedFrame());
-              if (headingCtaFrame) await ensureTailTypingReady(page, headingCtaFrame, (m: string) => self.log(m));
-            } catch {
-              // best-effort
-            }
-            for (let k = 0; k < 2; k++) {
-              await page.keyboard.press('Enter');
-              await self.delay(self.DELAYS.MEDIUM);
-            }
-            for (let ci = 0; ci < resolved.ctas.length; ci++) {
-              const c = resolved.ctas[ci];
-              self.log(`   → CTA 삽입 (${ci + 1}/${resolved.ctas.length}, 텍스트: "${c.text}", 링크: "${resolved.affiliateLink || c.link || '#'}")`);
-              await self.insertCtaLink(resolved.affiliateLink || c.link || '#', c.text, 'heading');
-              const appliedCtaText = normalizeAppliedCtaText(c.text);
-              if (appliedCtaText) {
-                recordMainProcessEditorCommitSemantic(resolved, {
-                  kind: 'user-supplement',
-                  supplementKind: 'cta',
-                  text: appliedCtaText,
-                });
-              }
-              await self.delay(self.DELAYS.MEDIUM);
-            }
-            self.log(`   ✅ ${i + 1}번 소제목 CTA 삽입 완료`);
+        // d) CTA 특정 소제목 아래 삽입 — [v2.11.142] CTA별 위치(position) 우선,
+        //    없으면 전역 ctaPosition 폴백. CTA마다 다른 소제목 아래 배치 가능.
+        const sectionCtas = !resolved.skipCta
+          ? selectSectionCtas(resolved.ctas, resolved.ctaPosition, i + 1)
+          : [];
+        if (sectionCtas.length > 0) {
+          self.log(`   → CTA ${i + 1}번 소제목 본문 아래 삽입 중... (${sectionCtas.length}개)`);
+          // Heading CTAs type right after this section's rich paste — verify
+          // keyboard input registers before typing (same recovery ladder as
+          // the tail phase).
+          try {
+            const headingCtaFrame = (await self.getAttachedFrame());
+            if (headingCtaFrame) await ensureTailTypingReady(page, headingCtaFrame, (m: string) => self.log(m));
+          } catch {
+            // best-effort
           }
+          await page.keyboard.press('Enter');
+          await self.delay(self.DELAYS.MEDIUM);
+          for (let ci = 0; ci < sectionCtas.length; ci++) {
+            const c = sectionCtas[ci];
+            self.log(`   → CTA 삽입 (${ci + 1}/${sectionCtas.length}, 텍스트: "${c.text}", 링크: "${resolved.affiliateLink || c.link || '#'}")`);
+            await self.insertCtaLink(resolved.affiliateLink || c.link || '#', c.text, 'heading');
+            const appliedCtaText = normalizeAppliedCtaText(c.text);
+            if (appliedCtaText) {
+              recordMainProcessEditorCommitSemantic(resolved, {
+                kind: 'user-supplement',
+                supplementKind: 'cta',
+                text: appliedCtaText,
+              });
+            }
+            await self.delay(self.DELAYS.MEDIUM);
+          }
+          self.log(`   ✅ ${i + 1}번 소제목 CTA 삽입 완료`);
         }
 
         // e) 다음 섹션 준비 (마지막 섹션이 아니면 구분선 추가)
@@ -2367,10 +2365,15 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
       self.log(`   ⏭️ 이전글과 동일 URL CTA ${tailPlan.skippedDuplicateCtaCount}개 스킵 — 이전글 블록 하나만 삽입 (중복 방지)`);
     }
 
+    // [v2.11.142] CTA별 위치: heading 위치 CTA는 섹션 루프에서 이미 삽입됨.
+    // 하단에는 bottomCtas(자기/전역 위치가 bottom인 것)만 삽입 — 혼합 세트 지원.
     const isHeadingPosition = tailPlan.isHeadingPosition;
-    if (!resolved.skipCta && effectiveCtas.length > 0 && !isHeadingPosition) {
-      // ✅ heading-N인 경우 이미 해당 소제목 아래에 삽입 완료 → 하단 CTA 건너뜀
-      const ctaPosition = resolved.ctaPosition || 'bottom'; // 풀오토는 항상 하단
+    if (tailPlan.bottomCtas.length !== effectiveCtas.length) {
+      self.log(`   ℹ️ CTA 분배 — 소제목 위치 ${effectiveCtas.length - tailPlan.bottomCtas.length}개(섹션 삽입 완료), 하단 ${tailPlan.bottomCtas.length}개`);
+    }
+    effectiveCtas = tailPlan.bottomCtas;
+    if (!resolved.skipCta && effectiveCtas.length > 0) {
+      const ctaPosition = 'bottom';
 
       // ✅ [2026-01-19 버그 수정] 쇼핑커넥트 모드에서는 CTA를 1개로 제한 (링크카드 중복 방지)
       if (resolved.affiliateLink && effectiveCtas.length > 1) {

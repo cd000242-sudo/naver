@@ -4,6 +4,8 @@ import {
   getHashtagGapEnterCount,
   normalizeComparableUrl,
   planEditorTail,
+  resolveCtaPosition,
+  selectSectionCtas,
 } from '../automation/editorTailPlan.js';
 
 describe('editor tail plan', () => {
@@ -62,5 +64,39 @@ describe('editor tail plan', () => {
     expect(normalizeComparableUrl(' https://blog.naver.com/a/1/?x=1#top ')).toBe('https://blog.naver.com/a/1');
     expect(getHashtagGapEnterCount(true)).toBe(5);
     expect(getHashtagGapEnterCount(false)).toBe(5);
+  });
+
+  // [v2.11.142] CTA별 위치 (사용자 요청: CTA마다 다른 위치 배치)
+  it('resolves per-CTA position with own > global > bottom priority', () => {
+    expect(resolveCtaPosition({ text: 'a', position: 'heading-2' }, 'bottom')).toBe('heading-2');
+    expect(resolveCtaPosition({ text: 'a' }, 'heading-3')).toBe('heading-3');
+    expect(resolveCtaPosition({ text: 'a' }, undefined)).toBe('bottom');
+  });
+
+  it('routes a mixed CTA set: heading CTAs to their sections, the rest to the bottom', () => {
+    const ctas = [
+      { text: '중간 CTA', link: 'https://a.example', position: 'heading-2' },
+      { text: '하단 CTA', link: 'https://b.example', position: 'bottom' },
+      { text: '전역 따름', link: 'https://c.example' }, // 전역 bottom → 하단
+    ];
+    expect(selectSectionCtas(ctas, 'bottom', 2).map((c) => c.text)).toEqual(['중간 CTA']);
+    expect(selectSectionCtas(ctas, 'bottom', 1)).toEqual([]);
+
+    const plan = planEditorTail({ ctas, ctaPosition: 'bottom' });
+    expect(plan.bottomCtas.map((c) => c.text)).toEqual(['하단 CTA', '전역 따름']);
+  });
+
+  it('legacy behaviour: global heading position without per-CTA positions', () => {
+    const ctas = [{ text: 'a', link: 'https://a.example' }, { text: 'b', link: 'https://b.example' }];
+    // 전역 heading-1 → 두 CTA 모두 1번 소제목, 하단 0개
+    expect(selectSectionCtas(ctas, 'heading-1', 1).map((c) => c.text)).toEqual(['a', 'b']);
+    const plan = planEditorTail({ ctas, ctaPosition: 'heading-1' });
+    expect(plan.bottomCtas).toEqual([]);
+    expect(plan.isHeadingPosition).toBe(true);
+  });
+
+  it('skipCta empties bottom CTAs regardless of positions', () => {
+    const plan = planEditorTail({ ctas: [{ text: 'a', position: 'bottom' }], skipCta: true });
+    expect(plan.bottomCtas).toEqual([]);
   });
 });

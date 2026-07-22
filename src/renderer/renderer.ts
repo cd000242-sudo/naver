@@ -854,9 +854,9 @@ function getProgressModal(): ProgressModal {
 
 
 
-function readUnifiedCtasFromUi(): Array<{ text: string; link?: string }> {
+function readUnifiedCtasFromUi(): Array<{ text: string; link?: string; position?: string }> {
   const container = document.getElementById('unified-cta-items-container');
-  const items: Array<{ text: string; link?: string }> = [];
+  const items: Array<{ text: string; link?: string; position?: string }> = [];
 
   // 1. 새 row UI에서 읽기
   if (container) {
@@ -864,9 +864,12 @@ function readUnifiedCtasFromUi(): Array<{ text: string; link?: string }> {
     for (const row of rows) {
       const textEl = row.querySelector('.unified-cta-text') as HTMLInputElement | null;
       const linkEl = row.querySelector('.unified-cta-link') as HTMLInputElement | null;
+      // [v2.11.142] CTA별 위치 — 빈 값이면 전역 CTA 위치 설정을 따른다.
+      const posEl = row.querySelector('.unified-cta-pos') as HTMLSelectElement | null;
       const text = String(textEl?.value || '').trim();
       const link = String(linkEl?.value || '').trim();
-      if (text) items.push({ text, link: link || undefined });
+      const position = String(posEl?.value || '').trim();
+      if (text) items.push({ text, link: link || undefined, position: position || undefined });
     }
   }
 
@@ -6135,16 +6138,25 @@ URL: ${firstUrl}
   const ctaItemsContainer = document.getElementById('unified-cta-items-container') as HTMLDivElement | null;
   const addCtaBtn = document.getElementById('unified-add-cta-btn') as HTMLButtonElement | null;
 
-  const appendCtaRow = (preset?: { text?: string; link?: string }) => {
+  const appendCtaRow = (preset?: { text?: string; link?: string; position?: string }) => {
     if (!ctaItemsContainer) return;
     const row = document.createElement('div');
     row.className = 'unified-cta-item';
     row.style.cssText = 'display:flex; gap:0.5rem; align-items:center;';
     const presetText = String(preset?.text || '').trim();
     const presetLink = String(preset?.link || '').trim();
+    const presetPosition = String(preset?.position || '').trim();
+    // [v2.11.142] CTA별 위치 선택 (사용자 요청: CTA마다 다른 위치에 배치).
+    //   빈 값 = 아래 전역 "CTA 위치" 설정을 따름 (하위 호환).
+    const positionOptions = [
+      { value: '', label: '위치: 전체 설정 따름' },
+      { value: 'bottom', label: '하단' },
+      ...Array.from({ length: 10 }, (_, n) => ({ value: `heading-${n + 1}`, label: `${n + 1}번 소제목 아래` })),
+    ].map((opt) => `<option value="${opt.value}"${opt.value === presetPosition ? ' selected' : ''}>${opt.label}</option>`).join('');
     row.innerHTML = `
       <input type="text" class="unified-cta-text" placeholder="CTA 텍스트" style="flex:1; padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.9rem; background: var(--bg-primary);" value="${escapeHtml(presetText)}">
       <input type="url" class="unified-cta-link" placeholder="링크 URL" style="flex:1; padding: 0.75rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.9rem; background: var(--bg-primary);" value="${escapeHtml(presetLink)}">
+      <select class="unified-cta-pos" title="이 CTA의 삽입 위치" style="width: 150px; padding: 0.7rem 0.5rem; border: 1px solid var(--border-light); border-radius: var(--radius-sm); font-size: 0.8rem; background: var(--bg-primary); cursor: pointer;">${positionOptions}</select>
       <button type="button" class="unified-cta-remove" style="padding:0.5rem 0.75rem; background: rgba(239,68,68,0.15); color:#ef4444; border: 1px solid rgba(239,68,68,0.35); border-radius: 8px; cursor:pointer;">✕</button>
     `;
     ctaItemsContainer.appendChild(row);

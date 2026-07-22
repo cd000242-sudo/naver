@@ -8188,15 +8188,13 @@ export class NaverBlogAutomation {
       const divider = '━━━━━━━━━━━━━━━━━━━';
 
       if (position === 'heading') {
-        this.log(`   → 소제목 아래 CTA 텍스트 삽입 중...`);
-        await safeKeyboardType(page, divider, { delay: 5 });
-        await page.keyboard.press('Enter');
-        await page.keyboard.press('Enter');
+        // [v2.11.142] 본문 중간(소제목 아래) CTA는 후킹+링크만 — ━━━ 디바이더 제거
+        // (사용자 지시: 하단 외 위치는 후킹이랑 CTA만 박고 그대로 타이핑 이어가기).
+        // 디바이더는 하단 CTA 전용 장식으로 유지.
+        this.log(`   → 소제목 아래 CTA 텍스트 삽입 중... (후킹+링크만)`);
         await safeKeyboardType(page, `🔗 ${cleanText}`, { delay: 10 });
         await page.keyboard.press('Enter');
-        await page.keyboard.press('Enter');
         await safeKeyboardType(page, `👉 ${finalUrl}`, { delay: 10 });
-        await page.keyboard.press('Enter');
         await page.keyboard.press('Enter');
       } else {
         this.log(`   → 하단 위치에 CTA 텍스트 삽입 중...`);
