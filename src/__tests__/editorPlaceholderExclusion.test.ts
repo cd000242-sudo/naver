@@ -114,6 +114,51 @@ describe('isPasteVisible — 라이브 리포트 시나리오 (기능 검증)', 
     expect(isPasteVisible(beforeObj, afterObj, expected)).toBe(true);
   });
 
+  it('[v2.11.140b] 이미지 삽입 직후 몇 글자 프리픽스가 생겨도(루트 흔들림) 정확한 append면 통과', () => {
+    // 실측(11:01 리포트): 이미지 2장 삽입 직후 섹션 붙여넣기 — cov=0.97, headAt=beforeLen
+    // 정확 append인데 startsWith all-or-nothing reorder 게이트가 차단. 프리픽스 32자까지 허용.
+    const before = 'ㄴ'.repeat(286);
+    const afterText = `잔여캡션여섯${before}${SECTION}`; // 6자 프리픽스 + 정확한 append
+    expect(isPasteVisible(
+      { chars: before.length, tables: 0, text: before },
+      { chars: afterText.length, tables: 0, text: afterText },
+      SECTION,
+    )).toBe(true);
+  });
+
+  it('[v2.11.140b] 진짜 reorder(옛 내용 앞에 섹션 통째 삽입)는 여전히 차단', () => {
+    const before = 'ㄴ'.repeat(286);
+    const afterText = `${SECTION}${before}`; // 섹션이 옛 내용 앞에 = 오배치
+    expect(isPasteVisible(
+      { chars: before.length, tables: 0, text: before },
+      { chars: afterText.length, tables: 0, text: afterText },
+      SECTION,
+    )).toBe(false);
+  });
+
+  it('[v2.11.140b] 끝 앵커 뒤 잔여 장식 몇 글자(<=32)는 near-complete면 통과 — 실측 trailing 오탐 재현', () => {
+    // 실측: cov=0.97, tail 정착, 끝 뒤 잔여 십수 자(스페이서/장식)로 trailing<=8 초과 차단.
+    const before = 'ㄴ'.repeat(286);
+    const afterText = `${before}${SECTION} · · · · · ·`; // 잔여 13자 장식
+    expect(isPasteVisible(
+      { chars: before.length, tables: 0, text: before },
+      { chars: afterText.length, tables: 0, text: afterText },
+      SECTION,
+    )).toBe(true);
+  });
+
+  it('[v2.11.140b] mid-insertion(섹션 뒤로 옛 본문이 수십 자 이상 밀림)은 여전히 차단', () => {
+    const beforeHead = 'ㄴ'.repeat(150);
+    const beforeTail = 'ㄷ'.repeat(136); // 섹션 뒤로 밀린 옛 본문 136자
+    const before = `${beforeHead}${beforeTail}`;
+    const afterText = `${beforeHead}${SECTION}${beforeTail}`; // 중간 삽입
+    expect(isPasteVisible(
+      { chars: before.length, tables: 0, text: before },
+      { chars: afterText.length, tables: 0, text: afterText },
+      SECTION,
+    )).toBe(false);
+  });
+
   it('[v2.11.140] 팝업 부재 = 새 글 확정 — closeDraftPopup이 freshness 가드를 해제한다 (임시저장 1개 + 글감 힌트 오탐 차단)', () => {
     // 실측 사고(7/22 11:00): 크래시된 런이 임시저장("저장 1")을 남겨 draftCount===0
     // 지름길이 무효화 → 글감 힌트(titleChars=19/bodyChars=36, 이 변형은 .se-placeholder

@@ -1606,7 +1606,12 @@ export function isPasteVisible(
   // reorder; (2) the tail-position gate below (trailingChars <= 8) rejects any
   // section that is not the document tail — which covers mid-insertion, since
   // the pushed-down old content leaves >8 trailing chars.
-  if (beforeText && afterText.includes(beforeText) && !afterText.startsWith(beforeText)) {
+  // [v2.11.140b] all-or-nothing startsWith는 이미지 삽입 직후 스냅샷 루트가 흔들리며
+  // 생기는 몇 글자 프리픽스(캡션/장식 텍스트)에도 발행을 차단했다(실측: 이미지 2장 삽입
+  // 직후 섹션 붙여넣기가 cov=0.97·정확한 append인데 실패). 실제 reorder는 옛 내용 앞에
+  // "섹션 분량"(수십~수백자)이 통째로 삽입되므로 프리픽스 32자까지는 아티팩트로 허용한다.
+  const beforeIdxInAfter = beforeText ? afterText.indexOf(beforeText) : -1;
+  if (beforeText && beforeIdxInAfter > 32) {
     return false;
   }
 
@@ -1637,8 +1642,11 @@ export function isPasteVisible(
   // EDITOR_PARTIAL_INSERT_UNRECOVERED로 오탐됐다. before가 실제로 살아남았을 때만
   // append 지점(beforeText.length-2)에서 시작하고, 사라졌으면 0부터 찾는다.
   // 안전성: 커버리지 게이트(위)를 이미 통과한 케이스만 여기 도달하므로 본문 누락은 걸러진 뒤다.
-  const beforePersistsInAfter = !!beforeText && afterText.includes(beforeText);
-  const searchStart = beforePersistsInAfter ? Math.max(0, beforeText.length - 2) : 0;
+  const beforePersistsInAfter = beforeIdxInAfter >= 0;
+  // [v2.11.140b] 프리픽스 허용에 맞춰 append 지점도 beforeText의 실제 위치 기준으로 계산.
+  const searchStart = beforePersistsInAfter
+    ? Math.max(0, beforeIdxInAfter + beforeText.length - 2)
+    : 0;
 
   // [v2.11.140] 시작+끝 앵커로 섹션을 브라킷 검증. 이전엔 시작·중간·끝 앵커를 전부
   // verbatim 일치해야 통과시켜, 에디터가 본문을 "모바일 단락 여러 개 + 하이라이트"로
@@ -1657,15 +1665,34 @@ export function isPasteVisible(
 
   const lastAnchor = anchors[anchors.length - 1];
   const lastAnchorAt = afterText.lastIndexOf(lastAnchor);
+  // [v2.11.140b] 실측(beforeChars=286/aftLen=543/cov=0.97): append 위치 정확, 진단용
+  // 20자 tail은 문서 끝에 정착했는데 trailing<=8 고정 한도가 스페이서/장식 잔여 몇
+  // 글자에 발행을 차단했다. near-complete(cov>=0.95)면 잔여 한도를 32자로 완화하고,
+  // 24자 앵커 창이 미세 정규화로 어긋나면 진단과 동일한 20자 tail 프로브로 재확인한다.
+  // 실제 mid-insertion/reorder는 잔여가 섹션·옛본문 분량(수십~수백자)이라 여전히
+  // 차단되며, PrePublish section-order 게이트가 문서 전체 순서의 최종 방어선이다.
+  // 잔여 판정: 8자 이하는 무조건 허용(기존). 9~32자는 near-complete(cov>=0.95)이면서
+  // "밀려난 옛 본문"이 아닐 때만 허용 — mid-insertion으로 뒤로 밀린 옛 꼬리는 beforeText에
+  // 그대로 존재하므로 구별 가능하고(→ 차단 유지), 스페이서/장식 아티팩트는 새 텍스트다.
+  const trailingAllowed = (endIdx: number): boolean => {
+    const trailingChars = afterText.length - endIdx;
+    if (trailingChars <= 8) return true;
+    if (trailingChars > 32 || coverage < 0.95) return false;
+    const trailingText = afterText.slice(endIdx).trim();
+    return !(trailingText && beforeText && beforeText.includes(trailingText));
+  };
+  const tailProbe = expectedText.slice(-Math.min(20, expected));
+  const tailProbeAt = tailProbe ? afterText.lastIndexOf(tailProbe) : -1;
+  const tailProbeOk = tailProbeAt >= firstAnchorAt
+    && trailingAllowed(tailProbeAt + tailProbe.length);
   if (lastAnchorAt >= firstAnchorAt) {
     // 끝 앵커가 시작 뒤에서 발견 — 정상 브라킷. 뒤에 밀려난 잔여(mid-insertion)만 차단.
-    const trailingChars = afterText.length - (lastAnchorAt + lastAnchor.length);
-    return trailingChars <= 8;
+    return trailingAllowed(lastAnchorAt + lastAnchor.length) || tailProbeOk;
   }
   if (lastAnchorAt >= 0) {
-    // 끝 앵커가 시작 앵커보다 "앞"에서 발견 = 순서 뒤바뀜(reorder) → 반드시 차단.
-    // (끝 내용이 문서에 존재하지만 잘못된 위치 → 혼합/오배치 발행 위험)
-    return false;
+    // 끝 앵커가 시작 앵커보다 "앞"에서 발견 = 순서 뒤바뀜(reorder) 의심. 단 20자
+    // tail이 시작 앵커 뒤에서 문서를 정상 마감하면 24자 창의 앞쪽 중복 매칭 오탐 → 통과.
+    return tailProbeOk;
   }
   // [v2.11.140] 끝 앵커가 아예 없음(tailAt=-1): 섹션 마지막 몇 글자가 안 들어왔거나(끝 미세
   // truncation) 끝부분 렌더 정규화 차이. 시작이 append 지점에 정확히 안착했고(위 firstAnchorAt)
@@ -1673,7 +1700,7 @@ export function isPasteVisible(
   // 사용자가 보며 수정 가능하다. 본문 누락(cov < minimumCoverage 0.82)은 위에서 이미 차단됐고,
   // reorder(끝 내용이 앞에 존재)는 바로 위 분기에서 차단된다.
   //   실측 근거: headAt=1261(정상 append), tailAt=-1, cov=0.97 (260자 중 252자 안착 = 끝 8자 차이).
-  return coverage >= 0.95;
+  return coverage >= 0.95 || tailProbeOk;
 }
 
 function buildPasteFailureReason(
