@@ -25,6 +25,18 @@ describe('paste never blocks publishing (v2.11.140b)', () => {
     expect(source).toMatch(/for \(let press = 0; press < 3; press \+= 1\)/);
   });
 
+  it('[v2.11.140c] 서식 보존 우선: native 리치 붙여넣기를 폴백 체인 전에 재시도한다', () => {
+    // 사용자 지시: 타이핑 폴백은 글 구조가 깨지므로 리치 붙여넣기 자체가 성공해야 한다.
+    // 클립보드에 리치 HTML이 남아 있으므로 롤백 검증 후 같은 Ctrl+V를 한 번 더 시도.
+    expect(source).toMatch(/for \(let pasteAttempt = 0; pasteAttempt < 2; pasteAttempt \+= 1\)/);
+    // 재시도 루프는 이벤트 디스패치 폴백보다 앞에 있어야 한다 (서식 보존 경로 우선).
+    const retryAt = source.indexOf('pasteAttempt < 2');
+    const eventFallbackAt = source.indexOf('await dispatchRichPasteEventAtCursor(frame, trimmedHtml, trimmedPlain)');
+    expect(retryAt).toBeGreaterThan(-1);
+    expect(eventFallbackAt).toBeGreaterThan(-1);
+    expect(retryAt).toBeLessThan(eventFallbackAt);
+  });
+
   it('과반 안착 + 시작 앵커 정위치면 salvage 인정 (중복 없이 진행)', () => {
     const expected = '가'.repeat(200);
     const before = { chars: 300, text: 'ㄴ'.repeat(300) };

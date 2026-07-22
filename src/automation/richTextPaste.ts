@@ -2836,16 +2836,28 @@ export async function pasteRichHtmlAtCursor(
         afterTables: before.tables,
       };
     }
-    await new Promise(resolve => setTimeout(resolve, 150));
-    await pressControlShortcut(page, 'V');
+    // [v2.11.140c] 구조 보존 재시도(사용자 지시: 타이핑 폴백은 서식이 깨지니 리치가
+    // 성공해야 한다): native Ctrl+V가 한 번 씹혀도(포커스 뺏김·팝업·렌더 지연) 클립보드엔
+    // 리치 HTML이 그대로 남아 있다. 롤백이 검증되면 폴백 체인으로 내려가기 전에 같은
+    // 리치 붙여넣기를 한 번 더 시도한다 — 일시 실패 대부분이 여기서 서식 그대로 복구된다.
+    let after = before;
+    let inserted = false;
+    let nativeRollback: ReturnType<typeof resolvePasteRollbackPolicy> | null = null;
+    for (let pasteAttempt = 0; pasteAttempt < 2; pasteAttempt += 1) {
+      if (pasteAttempt > 0) {
+        await page.bringToFront().catch(() => undefined);
+        const retryCaretReady = await ensureTailTypingReady(page, frame).catch(() => false);
+        if (!retryCaretReady) break;
+      }
+      await new Promise(resolve => setTimeout(resolve, 150));
+      await pressControlShortcut(page, 'V');
 
-    // [2026-06-22] Slow-client fix: a long article can take several seconds to
-    // finish rendering after Ctrl+V on slower machines. The old single fixed-wait
-    // snapshot caught the paste mid-insertion, so only the first fragment was seen.
-    // Poll until the body covers the expected content, or the char count stops
-    // growing (paste settled / genuinely incomplete), up to ~6s.
-    let after = await readEditorStats(frame);
-    {
+      // [2026-06-22] Slow-client fix: a long article can take several seconds to
+      // finish rendering after Ctrl+V on slower machines. The old single fixed-wait
+      // snapshot caught the paste mid-insertion, so only the first fragment was seen.
+      // Poll until the body covers the expected content, or the char count stops
+      // growing (paste settled / genuinely incomplete), up to ~6s.
+      after = await readEditorStats(frame);
       const pollStart = Date.now();
       let lastChars = -1;
       let stableReads = 0;
@@ -2861,8 +2873,15 @@ export async function pasteRichHtmlAtCursor(
         await new Promise(resolve => setTimeout(resolve, 400));
         after = await readEditorStats(frame);
       }
+      inserted = isPasteVisible(before, after, trimmedPlain, expectedTableCount);
+      if (inserted) break;
+
+      nativeRollback = resolvePasteRollbackPolicy(
+        await rollbackPartialPaste(page, frame, before, after),
+      );
+      // 롤백 검증 + 캐럿 준비가 확인된 경우에만 리치 재시도 (중복 삽입 방지).
+      if (!nativeRollback.safeToFallback || !nativeRollback.canContinuePasteFallback) break;
     }
-    const inserted = isPasteVisible(before, after, trimmedPlain, expectedTableCount);
 
     if (inserted) {
       return {
@@ -2875,10 +2894,7 @@ export async function pasteRichHtmlAtCursor(
       };
     }
 
-    const nativeRollback = resolvePasteRollbackPolicy(
-      await rollbackPartialPaste(page, frame, before, after),
-    );
-    if (!nativeRollback.safeToFallback) {
+    if (nativeRollback && !nativeRollback.safeToFallback) {
       // [v2.11.140b] 롤백 미검증은 더 이상 발행 중단 사유가 아니다(사용자 지시:
       // 어떤 상황이든 발행 완주). 과반이 정위치에 안착했으면 그대로 인정하고,
       // 아니면 키보드 입력 fallback이 섹션을 완성한다(최악: 일부 중복 — 차단 아님).
@@ -2905,7 +2921,7 @@ export async function pasteRichHtmlAtCursor(
         afterTables: after.tables,
       };
     }
-    if (!nativeRollback.canContinuePasteFallback) {
+    if (nativeRollback && !nativeRollback.canContinuePasteFallback) {
       return {
         ok: false,
         method: 'none',
