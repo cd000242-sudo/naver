@@ -4390,6 +4390,19 @@ export class NaverBlogAutomation {
 
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       this.ensureNotCancelled();
+
+      // ✅ [v2.11.140] 임시저장 초안 개수("저장 N")를 직접 확인 — 0이면 확정적으로 새 글 상태다.
+      //   실측(사용자 스샷): 저장 0인데 가드는 titleChars=19/bodyChars=36으로 차단 → 이는 초안이
+      //   아니라 네이버 "글감/플레이스홀더"("나를 돌아보는 회고… #모두의회고" 등)를 본문으로 오인한
+      //   오탐이었다. 초안 개수 0 = 덮어쓸 초안 없음 → 글감 텍스트와 무관하게 통과시킨다.
+      const draftCount = await this.readTempSaveDraftCount();
+      if (draftCount === 0) {
+        this.pendingDraftConflictDialog = false;
+        this.requiresFreshEditorContext = false;
+        this.log('✅ 임시저장 초안 0개(저장 0) 확인 — 글감/플레이스홀더만 있는 새 글 상태로 진행합니다.');
+        return;
+      }
+
       const frame = await this.getAttachedFrame().catch(() => null);
       if (!frame) {
         lastContext = 'editor frame unavailable';
@@ -4434,6 +4447,37 @@ export class NaverBlogAutomation {
       'EDITOR_DRAFT_CONTEXT_NOT_FRESH: 기존 작성중 글 또는 확인할 수 없는 편집 상태가 남아 있어 새 내용을 덮어쓰지 않았습니다. ' +
       `새 글을 선택하거나 기존 글을 정리한 뒤 다시 실행해 주세요. (${lastContext})`,
     );
+  }
+
+  /**
+   * [v2.11.140] 네이버 글쓰기 헤더의 "저장 N" 임시저장 초안 개수를 읽는다. 0이면 확정적으로
+   * 새 글 상태(덮어쓸 초안 없음)다. 글감/플레이스홀더 텍스트를 본문으로 오인해 freshness 가드가
+   * 오탐 차단하던 문제를 근본 해소하기 위한 신호. 읽지 못하면 null(기존 판정으로 폴백).
+   */
+  private async readTempSaveDraftCount(): Promise<number | null> {
+    const page = this.ensurePage();
+    const frames = Array.from(new Set<Frame>([page.mainFrame(), ...page.frames()]));
+    for (const fr of frames) {
+      try {
+        const count = await fr.evaluate(() => {
+          const els = Array.from(document.querySelectorAll('button, a, span, div, em, strong'));
+          for (const el of els) {
+            const raw = (el as HTMLElement).innerText;
+            if (typeof raw !== 'string') continue;
+            const t = raw.replace(/\s+/g, ' ').trim();
+            if (!t || t.length > 20) continue;
+            // "저장 0" / "저장0" / "임시저장 0" 형태의 카운트 배지
+            const m = t.match(/^(?:임시)?저장\s*(\d+)$/);
+            if (m) return parseInt(m[1], 10);
+          }
+          return null;
+        });
+        if (typeof count === 'number' && Number.isFinite(count)) return count;
+      } catch {
+        // try next frame
+      }
+    }
+    return null;
   }
 
   /**
