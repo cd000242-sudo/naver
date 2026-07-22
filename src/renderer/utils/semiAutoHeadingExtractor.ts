@@ -138,6 +138,30 @@ export function extractSemiAutoHeadingsFromBody(body: string): SemiAutoExtracted
   return extractSemiAutoDocumentFromBody(body).headings;
 }
 
+/**
+ * Orderly position-slice of the body by known heading titles. Returns null when
+ * any title is missing (or out of order), so callers can fall back safely.
+ */
+function sliceBodyByExistingHeadingTitles(
+  body: string,
+  titles: readonly string[],
+): { introduction: string; sections: Array<{ title: string; content: string }> } | null {
+  const positions: Array<{ title: string; at: number }> = [];
+  let searchFrom = 0;
+  for (const title of titles) {
+    const at = body.indexOf(title, searchFrom);
+    if (at < 0) return null;
+    positions.push({ title, at });
+    searchFrom = at + title.length;
+  }
+  const sections = positions.map((position, index) => {
+    const contentStart = position.at + position.title.length;
+    const contentEnd = index + 1 < positions.length ? positions[index + 1].at : body.length;
+    return { title: position.title, content: body.slice(contentStart, contentEnd).trim() };
+  });
+  return { introduction: body.slice(0, positions[0].at).trim(), sections };
+}
+
 export function resolveSemiAutoPublishStructure(
   body: string,
   existingHeadings: readonly any[] = [],
@@ -172,6 +196,31 @@ export function resolveSemiAutoPublishStructure(
       strategy: 'existing-sections',
       orderLocked: true,
     };
+  }
+
+  // [v2.11.140] Sentence-style AI heading titles ("...보도됐습니다") fail the heading
+  // candidate filter, so extraction returns 0 even though the titles are real section
+  // markers sitting in the body. Wiping to plain-body then published the whole post as
+  // one intro blob without subheadings or their images (live incident). When every
+  // known title appears in the body in order, position-slice the CURRENT body instead:
+  // structure survives and body edits stay authoritative.
+  if (completeExistingHeadings.length > 0) {
+    const sliced = sliceBodyByExistingHeadingTitles(
+      normalizedBody,
+      completeExistingHeadings.map((heading) => heading.title),
+    );
+    if (sliced && sliced.sections.every((section) => section.content.length > 0)) {
+      return {
+        introduction: sliced.introduction,
+        headings: sliced.sections.map((section, index) => ({
+          ...completeExistingHeadings[index],
+          title: section.title,
+          content: section.content,
+        })),
+        strategy: 'body-sections',
+        orderLocked: true,
+      };
+    }
   }
 
   // A pasted body with no reliable section markers is safer as one immutable

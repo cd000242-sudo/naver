@@ -225,4 +225,53 @@ describe('semi-auto manual heading extractor', () => {
     expect(titles.some((t) => t.includes('|') || t.includes('---'))).toBe(false);
     expect(titles).toEqual([]);
   });
+
+  it('[v2.11.140] 문장형 소제목 추출 실패 시 기존 소제목 위치로 재분할한다 (plain-body 전멸 방지)', () => {
+    // 실측 사고(7/22 10:00 발행): AI가 소제목 4개를 전부 문장형("...보도됐습니다")으로
+    // 생성 → 추출기가 문장으로 판단해 0개 추출 → plain-body 전략이 headings를 전부
+    // 지워서 소제목/이미지 없이 본문 한 덩어리로 발행됐다.
+    const body = [
+      '올다르크 구속 영장 기각을 검색하면 기각 이유와 함께 다른 대상의 구속 소식이 섞여 보여 헷갈릴 수 있어요.',
+      '',
+      '올다르크 잠실 개표소 출입을 막았다는 사건으로 보도됐습니다',
+      '',
+      '이번 결정은 올다르크로 불린 인물의 구속영장이 기각됐다는 내용입니다.',
+      '',
+      '법원은 증거인멸과 도주 우려가 없다고 판단했습니다',
+      '',
+      '기사 제목에서 공통으로 확인되는 기각 사유입니다.',
+    ].join('\n');
+    const existingHeadings = [
+      { title: '올다르크 잠실 개표소 출입을 막았다는 사건으로 보도됐습니다', content: '(생성 시 저장된 본문)' },
+      { title: '법원은 증거인멸과 도주 우려가 없다고 판단했습니다', content: '(생성 시 저장된 본문)' },
+    ];
+
+    // 전제 확인: 문장형 제목은 여전히 직접 추출되지 않는다 (후보 필터 유지).
+    expect(extractSemiAutoHeadingsFromBody(body)).toEqual([]);
+
+    const resolved = resolveSemiAutoPublishStructure(body, existingHeadings, {
+      bodyIsAuthoritative: true,
+    });
+
+    // 구조가 살아남아야 한다: plain-body로 지우지 말고 위치 기반 재분할.
+    expect(resolved.strategy).toBe('body-sections');
+    expect(resolved.headings.map((h) => h.title)).toEqual([
+      '올다르크 잠실 개표소 출입을 막았다는 사건으로 보도됐습니다',
+      '법원은 증거인멸과 도주 우려가 없다고 판단했습니다',
+    ]);
+    // 내용은 현재 본문에서 슬라이스 (본문 권위 유지 — 저장본 아님).
+    expect(resolved.headings[0]?.content).toContain('구속영장이 기각됐다는 내용');
+    expect(resolved.headings[1]?.content).toContain('기각 사유');
+    expect(resolved.introduction).toContain('헷갈릴 수 있어요');
+  });
+
+  it('[v2.11.140] 기존 소제목이 본문에 없으면(순서 불일치 포함) 기존 plain-body 폴백을 유지한다', () => {
+    const body = '사용자가 완전히 새로 쓴 본문입니다.\n\n소제목 표식이 전혀 없는 순수 문단들입니다.';
+    const resolved = resolveSemiAutoPublishStructure(body, [
+      { title: '본문에 존재하지 않는 옛 소제목', content: '옛 본문' },
+    ], { bodyIsAuthoritative: true });
+    expect(resolved.strategy).toBe('plain-body');
+    expect(resolved.headings).toEqual([]);
+    expect(resolved.introduction).toBe(body);
+  });
 });
