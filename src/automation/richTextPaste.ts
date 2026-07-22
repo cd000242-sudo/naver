@@ -1703,6 +1703,32 @@ export function isPasteVisible(
   return coverage >= 0.95 || tailProbeOk;
 }
 
+/**
+ * [v2.11.140b] Publishing must NEVER abort on paste verification. The pasted body is
+ * OUR OWN rich HTML, so when a partial paste can't be rolled back the only question
+ * is "did the majority land at the right spot?" — if yes, accept and continue
+ * (missing tail is live-curatable, PrePublish observes overall length); if no, the
+ * caller's keyboard-typing fallback re-inserts the section (worst case: a partial
+ * duplicate — still a completed publish, never a blocked one).
+ */
+export function assessPartialSalvage(
+  before: { chars: number; text: string },
+  after: { chars: number; text: string },
+  trimmedPlain: string,
+): { acceptable: boolean; coverage: number } {
+  const exp = normalizeEditorSnapshotText(trimmedPlain);
+  const aft = normalizeEditorSnapshotText(after.text || '');
+  const bef = normalizeEditorSnapshotText(before.text || '');
+  if (!exp.length || !aft.length) return { acceptable: false, coverage: 0 };
+  const rawDelta = Math.max(0, after.chars - before.chars);
+  const coverage = Math.max(rawDelta, Math.max(0, aft.length - bef.length)) / exp.length;
+  const head = exp.slice(0, Math.min(16, exp.length));
+  const befIdx = bef ? aft.indexOf(bef) : -1;
+  const headSearchFrom = befIdx >= 0 ? befIdx + bef.length - 2 : 0;
+  const headAnchored = head.length > 0 && aft.indexOf(head, Math.max(0, headSearchFrom)) >= 0;
+  return { acceptable: coverage >= 0.55 && headAnchored, coverage };
+}
+
 function buildPasteFailureReason(
   reason: string,
   before: { chars: number; tables: number; text?: string },
@@ -1761,14 +1787,19 @@ async function rollbackPartialPaste(
 
   await page.bringToFront().catch(() => undefined);
   await page.evaluate(() => window.focus()).catch(() => undefined);
-  await pressControlShortcut(page, 'Z').catch(() => undefined);
 
-  for (let attempt = 0; attempt < 12; attempt += 1) {
-    await new Promise(resolve => setTimeout(resolve, 250));
-    const restored = await readEditorStats(frame);
-    if (!matchesBefore(restored)) continue;
-    const tailReady = await ensureTailTypingReady(page, frame).catch(() => false);
-    return { restored: true, tailReady };
+  // [v2.11.140b] Single Ctrl+Z often left the partial paste in place (SmartEditor
+  // batches undo steps unpredictably) → "rollback could not be verified" killed the
+  // whole publish. Press up to 3 times, re-checking between presses.
+  for (let press = 0; press < 3; press += 1) {
+    await pressControlShortcut(page, 'Z').catch(() => undefined);
+    for (let attempt = 0; attempt < 4; attempt += 1) {
+      await new Promise(resolve => setTimeout(resolve, 250));
+      const restored = await readEditorStats(frame);
+      if (!matchesBefore(restored)) continue;
+      const tailReady = await ensureTailTypingReady(page, frame).catch(() => false);
+      return { restored: true, tailReady };
+    }
   }
 
   return { restored: false, tailReady: false };
@@ -2848,11 +2879,26 @@ export async function pasteRichHtmlAtCursor(
       await rollbackPartialPaste(page, frame, before, after),
     );
     if (!nativeRollback.safeToFallback) {
+      // [v2.11.140b] 롤백 미검증은 더 이상 발행 중단 사유가 아니다(사용자 지시:
+      // 어떤 상황이든 발행 완주). 과반이 정위치에 안착했으면 그대로 인정하고,
+      // 아니면 키보드 입력 fallback이 섹션을 완성한다(최악: 일부 중복 — 차단 아님).
+      const salvage = assessPartialSalvage(before, after, trimmedPlain);
+      if (salvage.acceptable) {
+        return {
+          ok: true,
+          method: 'clipboard-html',
+          reason: `partial-accepted: cov=${salvage.coverage.toFixed(2)} rollback-unverified — 꼬리 일부는 라이브 확인 대상`,
+          beforeChars: before.chars,
+          afterChars: after.chars,
+          beforeTables: before.tables,
+          afterTables: after.tables,
+        };
+      }
       return {
         ok: false,
         method: 'none',
-        reason: buildPasteFailureReason('native paste was partial or misplaced and rollback could not be verified', before, after, trimmedPlain),
-        safeToFallback: false,
+        reason: buildPasteFailureReason('native paste partial + rollback unverified → 키보드 입력 fallback으로 복구 진행', before, after, trimmedPlain),
+        safeToFallback: true,
         beforeChars: before.chars,
         afterChars: after.chars,
         beforeTables: before.tables,
@@ -2893,11 +2939,24 @@ export async function pasteRichHtmlAtCursor(
       await rollbackPartialPaste(page, frame, before, afterEvent),
     );
     if (!eventRollback.safeToFallback) {
+      // [v2.11.140b] native 분기와 동일 — 과반 안착이면 인정, 아니면 타이핑 fallback.
+      const salvage = assessPartialSalvage(before, afterEvent, trimmedPlain);
+      if (salvage.acceptable) {
+        return {
+          ok: true,
+          method: 'paste-event-html',
+          reason: `partial-accepted: cov=${salvage.coverage.toFixed(2)} rollback-unverified — 꼬리 일부는 라이브 확인 대상`,
+          beforeChars: before.chars,
+          afterChars: afterEvent.chars,
+          beforeTables: before.tables,
+          afterTables: afterEvent.tables,
+        };
+      }
       return {
         ok: false,
         method: 'none',
-        reason: buildPasteFailureReason('paste-event fallback was partial or misplaced and rollback could not be verified', before, afterEvent, trimmedPlain),
-        safeToFallback: false,
+        reason: buildPasteFailureReason('paste-event partial + rollback unverified → 키보드 입력 fallback으로 복구 진행', before, afterEvent, trimmedPlain),
+        safeToFallback: true,
         beforeChars: before.chars,
         afterChars: afterEvent.chars,
         beforeTables: before.tables,
@@ -2918,16 +2977,18 @@ export async function pasteRichHtmlAtCursor(
     }
 
     if (expectedTableCount > 0) {
+      // [v2.11.140b] 표 플래튼도 발행 중단 사유가 아니다 — 텍스트 fallback으로라도
+      // 내용을 완주시킨다(표 서식 손실 < 발행 차단, 사용자 라이브 큐레이션 대상).
       return {
         ok: false,
         method: 'none',
         reason: buildPasteFailureReason(
-          `SmartEditor flattened ${expectedTableCount} expected table(s); plain-text fallback is blocked`,
+          `SmartEditor flattened ${expectedTableCount} expected table(s) → 텍스트 fallback으로 완주 (표 서식은 라이브 확인 대상)`,
           before,
           afterEvent,
           trimmedPlain,
         ),
-        safeToFallback: false,
+        safeToFallback: true,
         beforeChars: before.chars,
         afterChars: before.chars,
         beforeTables: before.tables,
@@ -2950,14 +3011,13 @@ export async function pasteRichHtmlAtCursor(
           afterTables: afterPlain.tables,
         };
       }
-      const plainRollback = resolvePasteRollbackPolicy(
-        await rollbackPartialPaste(page, frame, before, afterPlain),
-      );
+      await rollbackPartialPaste(page, frame, before, afterPlain).catch(() => undefined);
+      // [v2.11.140b] plain 검증 실패도 항상 키보드 입력 fallback으로 이어져 완주한다.
       return {
         ok: false,
         method: 'none',
-        reason: buildPasteFailureReason('plain paste verification failed', before, afterPlain, trimmedPlain),
-        safeToFallback: plainRollback.safeToFallback,
+        reason: buildPasteFailureReason('plain paste verification failed → 키보드 입력 fallback으로 복구 진행', before, afterPlain, trimmedPlain),
+        safeToFallback: true,
         beforeChars: before.chars,
         afterChars: afterPlain.chars,
         beforeTables: before.tables,
@@ -2983,13 +3043,14 @@ export async function pasteRichHtmlAtCursor(
     };
   } catch (error) {
     const after = await readEditorStats(frame);
-    const rollback = await rollbackPartialPaste(page, frame, before, after)
+    await rollbackPartialPaste(page, frame, before, after)
       .catch((): PasteRollbackState => ({ restored: false, tailReady: false }));
+    // [v2.11.140b] 예외 경로도 발행을 중단하지 않는다 — 키보드 입력 fallback으로 완주.
     return {
       ok: false,
       method: 'none',
       reason: error instanceof Error ? error.message : String(error),
-      safeToFallback: resolvePasteRollbackPolicy(rollback).safeToFallback,
+      safeToFallback: true,
       beforeChars: before.chars,
       afterChars: after.chars,
       beforeTables: before.tables,

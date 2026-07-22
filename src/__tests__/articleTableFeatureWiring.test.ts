@@ -29,9 +29,13 @@ describe('article table feature wiring', () => {
     expect(multiAccount).toContain('applyPendingArticleTablesToGeneratedContent');
   });
 
-  it('blocks plain-text fallback when a real SmartEditor table was expected', () => {
+  // [v2.11.140b] 정책 반전(사용자 지시: 어떤 상황이든 발행 완주): 표 플래튼은 더 이상
+  // 발행 차단 사유가 아니다 — 텍스트 fallback으로 내용을 완주시키고 표 서식은 라이브
+  // 큐레이션 대상으로 넘긴다. 문서 전체 표 개수는 PrePublish table-count 게이트가 관찰.
+  it('table flatten does NOT block publishing — plain-text fallback completes the post', () => {
     expect(richPaste).toContain('expectedTableCount > 0');
-    expect(richPaste).toContain('plain-text fallback is blocked');
+    expect(richPaste).toContain('텍스트 fallback으로 완주');
+    expect(richPaste).not.toContain('plain-text fallback is blocked');
   });
 
   it('carries the expected table count into the final pre-publish hard gate', () => {
