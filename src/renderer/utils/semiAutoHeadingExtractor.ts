@@ -52,6 +52,10 @@ export function normalizeSemiAutoHeadingTitle(raw: string): string {
 export function isSemiAutoHeadingCandidate(lines: readonly string[], index: number): boolean {
   const raw = String(lines[index] || '').trim();
   if (!raw) return false;
+  // [v2.11.140] 마크다운 표 행/구분선(| a | b |, | --- | --- |)은 소제목이 아니다.
+  //   빈 줄로 분리된 표 행이 짧다는 이유로 소제목 후보가 되어 표가 소제목으로 쪼개지던 버그
+  //   차단(사용자 보고: "표로 바꿔줘야 하는데 소제목으로 인식"). 표는 본문/표 변환기가 처리한다.
+  if (/^\|.*\|$/.test(raw)) return false;
   if (/^(?:#\S+\s*){2,}$/u.test(raw)) return false;
   if (/^(?:A|Q)\d?\s*[:：]/i.test(raw)) return false;
   if (/^[-*•]\s+/.test(raw)) return false;

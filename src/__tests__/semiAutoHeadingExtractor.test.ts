@@ -201,4 +201,28 @@ describe('semi-auto manual heading extractor', () => {
       '결국 남는 질문',
     ]);
   });
+
+  it('[v2.11.140] 마크다운 표 행/구분선을 소제목으로 인식하지 않는다 (표 변환기로 흘려보냄)', () => {
+    // 실측 버그: AI가 만든 마크다운 표가 빈 줄로 분리돼 각 행이 소제목으로 쪼개졌다
+    // ("| --- | --- |", "| 결과 | ... |" 가 각각 소제목+이미지 섹션이 됨).
+    const body = [
+      '아래처럼 나누어 보면 확인된 내용과 아닌 내용을 구분하기 편합니다.',
+      '',
+      '| 구분 | 입력 확인되는 범위 |',
+      '',
+      '| --- | --- |',
+      '',
+      '| 결과 | 법원이 구속영장을 기각했다는 보도 |',
+      '',
+      '| 사유 | 증거인멸·도주 우려가 없다는 보도 |',
+      '',
+      '| 제목에 없는 내용 | 무죄 여부와 사건의 최종 결론 |',
+    ].join('\n');
+
+    const headings = extractSemiAutoHeadingsFromBody(body);
+    // 표 행/구분선은 소제목이 되면 안 된다 → 소제목 0개, 표는 본문에 온전히 남아 표 변환기가 처리.
+    const titles = headings.map((h) => h.title);
+    expect(titles.some((t) => t.includes('|') || t.includes('---'))).toBe(false);
+    expect(titles).toEqual([]);
+  });
 });
