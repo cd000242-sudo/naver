@@ -113,4 +113,21 @@ describe('isPasteVisible — 라이브 리포트 시나리오 (기능 검증)', 
     const afterObj = { chars: afterText.length, tables: 0, text: afterText };
     expect(isPasteVisible(beforeObj, afterObj, expected)).toBe(true);
   });
+
+  it('[v2.11.140] 팝업 부재 = 새 글 확정 — closeDraftPopup이 freshness 가드를 해제한다 (임시저장 1개 + 글감 힌트 오탐 차단)', () => {
+    // 실측 사고(7/22 11:00): 크래시된 런이 임시저장("저장 1")을 남겨 draftCount===0
+    // 지름길이 무효화 → 글감 힌트(titleChars=19/bodyChars=36, 이 변형은 .se-placeholder
+    // 미사용)를 잔여 콘텐츠로 오인 → EDITOR_DRAFT_CONTEXT_NOT_FRESH 영구 차단.
+    // 복원은 반드시 팝업을 거치므로 "팝업 없음"이 새 글 상태의 권위 신호다.
+    const code = read('naverBlogAutomation.ts');
+    const absentLogAt = code.indexOf('작성중인 글 팝업 없음 — 새 글 입력 가능');
+    expect(absentLogAt).toBeGreaterThan(-1);
+    // 팝업 부재 로그 직전 800자 안에서 두 플래그가 모두 해제되어야 한다.
+    const disarmWindow = code.slice(Math.max(0, absentLogAt - 800), absentLogAt);
+    expect(disarmWindow).toContain('this.pendingDraftConflictDialog = false');
+    expect(disarmWindow).toContain('this.requiresFreshEditorContext = false');
+    // 해제는 팝업-부재 경로에만 있어야 한다 — 감지 후 닫은(clicked) 경로는 가드 유지.
+    const detectedArmAt = code.indexOf('outcome.detected');
+    expect(detectedArmAt).toBeGreaterThan(-1);
+  });
 });

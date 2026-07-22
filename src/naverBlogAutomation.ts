@@ -4639,6 +4639,19 @@ export class NaverBlogAutomation {
       throw new Error('EDITOR_DRAFT_POPUP_BLOCKED: 이전 작성중인 글 팝업을 닫지 못했습니다. 새 글 입력을 안전하게 중단합니다.');
     }
 
+    // [v2.11.140] No draft popup on this write page = Naver itself confirms there is
+    // no 작성중인 글 to resume, so the freshness guard must disarm here. Live incident:
+    // a crashed tail phase left a server-side temp-save ("저장 1"), which bypassed the
+    // draftCount===0 shortcut; the blank check then miscounted the 글감 hint text
+    // (titleChars=19/bodyChars=36, rendered without .se-placeholder in this editor
+    // variant) as leftover content and blocked every publish. Restores succeed only
+    // via the popup, so popup-absent is the authoritative fresh signal. The disarm is
+    // scoped to the popup-ABSENT path — detected-and-closed popups keep the guard.
+    if (this.pendingDraftConflictDialog || this.requiresFreshEditorContext) {
+      this.pendingDraftConflictDialog = false;
+      this.requiresFreshEditorContext = false;
+      this.log('✅ 작성중인 글 팝업 없음 → 새 글 상태 확정 (freshness 가드 해제)');
+    }
     this.log('ℹ️ 작성중인 글 팝업 없음 — 새 글 입력 가능');
     return false;
   }
