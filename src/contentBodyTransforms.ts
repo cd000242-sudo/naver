@@ -267,12 +267,33 @@ export function limitRegexOccurrences(text: string, regex: RegExp, maxCount: num
 }
 
 /**
+ * [v2.11.140] Sentence-style heading titles ("...보도됐습니다") slip past the prompt
+ * and used to wipe the publish structure (renderer heading re-extraction rejects
+ * sentences). Publish-side now survives via position-slicing; this detector keeps
+ * the generation-side violation visible in logs so prompt drift gets caught early.
+ */
+export function isSentenceStyleHeadingTitle(title: string): boolean {
+  const cleaned = String(title || '').trim().replace(/[.!?。？！]\s*$/u, '');
+  return /(?:습니다|합니다|됩니다|입니다|했어요|해요|하죠|돼요|이에요|예요|이었어요|드립니다|했다|였다|이었다|됐다)$/u.test(cleaned);
+}
+
+/**
  * [v2.10.165] 소제목 길이 제한 (30자 이내로 완화 — 제품명 포함 가능).
  *
  * 자연스러운 끊김 위치(공백/쉼표) 찾기 + 끝 부분 조사 정리 + fallback (5자 미만 시 원본 앞부분).
  */
 export function truncateHeadingTitles(content: StructuredContent, maxLength: number = 30): StructuredContent {
   if (!content || !content.headings) return content;
+
+  const sentenceStyleTitles = content.headings
+    .map((h) => String(h?.title || '').trim())
+    .filter((t) => t.length > 0 && isSentenceStyleHeadingTitle(t));
+  if (sentenceStyleTitles.length > 0) {
+    console.warn(
+      `[ContentGenerator] ⚠️ 문장형 소제목 ${sentenceStyleTitles.length}개 감지 (프롬프트 계약 위반): ` +
+      sentenceStyleTitles.map((t) => `"${t.substring(0, 30)}"`).join(', '),
+    );
+  }
 
   const truncateTitle = (title: string): string => {
     const cleaned = String(title || '').trim();

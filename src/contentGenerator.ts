@@ -5656,8 +5656,15 @@ async function generateStructuredContentInternal(
         if (shouldRunLegacySemanticPostDraftMutation(promptVariant, 'recover-loose-structured-content-fields')) {
           const looseRecovery = recoverLooseStructuredContentFields(parsed);
           if (looseRecovery.bodyRecovered || looseRecovery.headingsRecovered) {
-            console.warn(
-              `[ContentGenerator] 느슨한 AI 응답 구조 복구: ` +
+            // [v2.11.140] The output schema has no bodyPlain field, so synthesizing the
+            // body from headings happens on EVERY generation — that is the normal path,
+            // not a malformed response. Only unexpected recoveries stay WARN so real
+            // anomalies remain visible instead of drowning in a per-run false alarm.
+            const isNormalBodySynthesis =
+              looseRecovery.bodySource === 'headings' && !looseRecovery.headingsRecovered;
+            const logFn = isNormalBodySynthesis ? console.log : console.warn;
+            logFn(
+              `[ContentGenerator] ${isNormalBodySynthesis ? '본문 합성(스키마 정상 경로)' : '느슨한 AI 응답 구조 복구'}: ` +
               `body=${looseRecovery.bodySource || 'none'}, headings=${looseRecovery.headingsSource || 'none'}`
             );
           }

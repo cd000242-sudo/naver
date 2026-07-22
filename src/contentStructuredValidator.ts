@@ -34,8 +34,13 @@ export function validateStructuredContent(content: StructuredContent, source?: C
 
   const looseRecovery = recoverLooseStructuredContentFields(content);
   if (looseRecovery.bodyRecovered || looseRecovery.headingsRecovered) {
-    console.warn(
-      `[validateStructuredContent] 느슨한 AI 응답 구조 복구: ` +
+    // [v2.11.140] body-from-headings synthesis is the normal per-generation path
+    // (output schema has no bodyPlain) — keep WARN only for unexpected recoveries.
+    const isNormalBodySynthesis =
+      looseRecovery.bodySource === 'headings' && !looseRecovery.headingsRecovered;
+    const logFn = isNormalBodySynthesis ? console.log : console.warn;
+    logFn(
+      `[validateStructuredContent] ${isNormalBodySynthesis ? '본문 합성(스키마 정상 경로)' : '느슨한 AI 응답 구조 복구'}: ` +
       `body=${looseRecovery.bodySource || 'none'}, headings=${looseRecovery.headingsSource || 'none'}`
     );
   }
