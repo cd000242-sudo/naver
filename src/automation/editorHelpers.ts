@@ -1696,7 +1696,12 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
             self.log(`   ✅ 균등 분배 추출: ${cleanBody.length}자`);
           } else {
             const directHeadingContent = String(heading.content || '').trim();
-            if (!bodyTextHasHeadingMarkers && directHeadingContent.length > 30) {
+            // [v2.11.140] _bodyReconstructedFromHeadings: renderer rebuilt bodyPlain from
+            // intro + heading titles + contents for save/load parity, so the titles in
+            // bodyPlain are synthetic markers — heading.content is still the accurate
+            // section source (extractBodyForHeading would also swallow the conclusion).
+            if ((!bodyTextHasHeadingMarkers || structured._bodyReconstructedFromHeadings === true)
+              && directHeadingContent.length > 30) {
               // ✅ [2026-06-17 FIX] bodyPlain에 소제목 마커가 없는 생성 결과는
               // heading.content가 가장 정확한 섹션 본문이다. 기존 균등 분배는
               // 첫 섹션 도입부를 먹거나 빈 본문을 만들 수 있었다.

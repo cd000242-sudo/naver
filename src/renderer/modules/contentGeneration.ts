@@ -1577,6 +1577,23 @@ export function fillSemiAutoFields(
     }
 
     const normalized = normalizeReadableBodyText(body);
+    // [v2.11.140] Write the reconstructed body (intro + headings + conclusion) back to
+    // structuredContent too. Previously only the textarea got it, so saveGeneratedPost
+    // persisted the stale bodyPlain (which never contains the introduction) and loading
+    // the post from the list showed the body without its intro paragraph.
+    // _bodyReconstructedFromHeadings keeps the automation on the accurate
+    // heading.content-direct path: bodyPlain now contains heading titles, which would
+    // otherwise flip bodyTextHasHeadingMarkers and re-enable the fragile
+    // extractBodyForHeading slicing (conclusion double-typing risk).
+    const reconstructedFromHeadings = !preferBodyPlain
+      && Array.isArray(structuredContent.headings)
+      && structuredContent.headings.length > 0;
+    structuredContent = {
+      ...structuredContent,
+      bodyPlain: normalized,
+      content: normalized,
+      ...(reconstructedFromHeadings ? { _bodyReconstructedFromHeadings: true } : {}),
+    };
     console.log('[fillSemiAutoFields] Updating content (length):', normalized.length);
     contentTextarea.value = normalized;
     contentTextarea.readOnly = false;
