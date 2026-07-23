@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
     fetchCommunityIncomeProofs,
@@ -14,7 +14,15 @@ import { selectKeywordChartRows, type HomeKeywordRow } from '../lib/homeKeywordB
 const numberFormatter = new Intl.NumberFormat('ko-KR');
 const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 });
 
-type HomeOperationsTab = 'deputy' | 'realtime';
+type HomeOperationsTab = 'notice' | 'deputy' | 'realtime' | 'income';
+
+const HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['notice', 'deputy', 'realtime', 'income'];
+const HOME_OPS_TAB_META: Record<HomeOperationsTab, { label: string; desc: string }> = {
+    notice: { label: '공지사항', desc: '최신 공지를 접고 펼쳐 확인' },
+    deputy: { label: '부방장 선정 황금키워드', desc: '매일 검토해 올린 고정 키워드 전체 보기' },
+    realtime: { label: '실시간 검색어', desc: '네이버·뉴스 등 현재 흐름을 참고용으로 확인' },
+    income: { label: '수익 인증', desc: '승인된 실제 인증 자료만 표시' },
+};
 
 type HomeManagedProof = {
     src?: string;
@@ -196,9 +204,11 @@ function IncomeProofCard({ proof }: { proof: CommunityIncomeProof }) {
         <article className="home-ops-income-card">
             <div className="home-ops-income-visual">
                 {proof.mediaType === 'video' ? (
-                    <video src={proof.media} controls playsInline preload="none" aria-label={mediaAlt} />
+                    <video src={proof.media} controls playsInline preload="metadata" aria-label={mediaAlt} />
                 ) : (
-                    <img src={proof.media} alt={mediaAlt} loading="lazy" decoding="async" referrerPolicy="no-referrer" />
+                    // eager: the income panel stays mounted (hidden) so a small set of
+                    // proof images preloads in the background and appears instantly on tab open.
+                    <img src={proof.media} alt={mediaAlt} loading="eager" decoding="async" referrerPolicy="no-referrer" />
                 )}
             </div>
             <div className="home-ops-income-copy">
@@ -382,6 +392,17 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
     const [noticeLoading, setNoticeLoading] = useState(true);
     const [incomeLoading, setIncomeLoading] = useState(true);
     const [briefingLoading, setBriefingLoading] = useState(true);
+    const sidenavRef = useRef<HTMLDivElement>(null);
+
+    // On mobile the side-nav collapses to a horizontal scroll row; keep the
+    // active tab centered in view. Scrolls only the nav container, never the page.
+    useEffect(() => {
+        const nav = sidenavRef.current;
+        const el = nav?.querySelector<HTMLElement>(`#home-ops-tab-${activeTab}`);
+        if (!nav || !el || nav.scrollWidth <= nav.clientWidth) return;
+        const target = el.offsetLeft - (nav.clientWidth - el.clientWidth) / 2;
+        nav.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+    }, [activeTab]);
 
     useEffect(() => {
         let active = true;
@@ -419,11 +440,12 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
     const chartRows = useMemo(() => briefing ? selectKeywordChartRows(briefing, 10) : [], [briefing]);
     const uniqueCount = useMemo(() => briefing ? uniqueKeywordCount(briefing.rows) : 0, [briefing]);
     const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, currentTab: HomeOperationsTab) => {
-        const tabs: HomeOperationsTab[] = ['deputy', 'realtime'];
+        const tabs = HOME_OPS_TAB_ORDER;
         const currentIndex = tabs.indexOf(currentTab);
         let nextTab: HomeOperationsTab | undefined;
-        if (event.key === 'ArrowRight') nextTab = tabs[(currentIndex + 1) % tabs.length];
-        if (event.key === 'ArrowLeft') nextTab = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
+        // Vertical side-nav: Up/Down move between tabs (Left/Right kept as aliases).
+        if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextTab = tabs[(currentIndex + 1) % tabs.length];
+        if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') nextTab = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
         if (event.key === 'Home') nextTab = tabs[0];
         if (event.key === 'End') nextTab = tabs[tabs.length - 1];
         if (!nextTab) return;
@@ -479,14 +501,6 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                     box-shadow: 0 26px 70px rgba(0,0,0,0.28);
                     overflow: hidden;
                 }
-                .home-ops-community-grid {
-                    display: grid;
-                    grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
-                    align-items: start;
-                    gap: 18px;
-                    margin-bottom: 18px;
-                }
-                .home-ops-community-grid > .home-ops-panel { min-width: 0; }
                 .home-ops-panel-head {
                     display: flex;
                     align-items: center;
@@ -570,7 +584,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                     line-height: 1.8;
                     white-space: pre-line;
                 }
-                .home-ops-income-list { display: grid; gap: 10px; padding: 12px; }
+                .home-ops-income-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 12px; padding: 12px; }
                 .home-ops-income-card {
                     display: grid;
                     grid-template-columns: 136px minmax(0, 1fr);
@@ -613,16 +627,25 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                     line-height: 1.65;
                     text-align: center;
                 }
-                .home-ops-tabs {
+                .home-ops-layout {
                     display: grid;
-                    grid-template-columns: repeat(2, minmax(0, 1fr));
-                    gap: 10px;
-                    margin-bottom: 12px;
+                    grid-template-columns: minmax(210px, 250px) minmax(0, 1fr);
+                    gap: 16px;
+                    align-items: start;
+                }
+                .home-ops-sidenav {
+                    position: sticky;
+                    top: 80px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
                     padding: 8px;
                     border: 1px solid rgba(255,255,255,0.13);
                     border-radius: 14px;
                     background: rgba(5,11,18,0.84);
                 }
+                .home-ops-sidenav .home-ops-tab { width: 100%; }
+                .home-ops-content { min-width: 0; }
                 .home-ops-tab {
                     min-height: 64px;
                     display: grid;
@@ -901,8 +924,15 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                     box-shadow: none;
                 }
                 @media (max-width: 960px) {
-                    .home-ops-community-grid { grid-template-columns: minmax(0, 1fr); }
                     .home-ops-realtime-panel .hero-realtime-board { min-height: 0; }
+                    .home-ops-layout { grid-template-columns: minmax(0, 1fr); }
+                    .home-ops-sidenav {
+                        position: static;
+                        flex-direction: row;
+                        overflow-x: auto;
+                        -webkit-overflow-scrolling: touch;
+                    }
+                    .home-ops-sidenav .home-ops-tab { flex: 0 0 auto; min-width: 200px; }
                 }
                 @media (max-width: 720px) {
                     .home-ops { padding: 82px 12px 0; margin-bottom: 34px; }
@@ -916,7 +946,6 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                     .home-ops-income-visual img,
                     .home-ops-income-visual video { min-height: 200px; max-height: 360px; }
                     .home-ops-income-visual img { min-height: 200px; max-height: 360px; }
-                    .home-ops-tabs { grid-template-columns: 1fr; }
                     .home-ops-tab { min-height: 60px; }
                     .home-ops-brief-head { align-items: flex-start; flex-direction: column; padding: 20px 16px; }
                     .home-ops-fixed-badge { width: 100%; box-sizing: border-box; text-align: left; }
@@ -949,145 +978,147 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
 
             <header className="home-ops-header">
                 <span className="home-ops-kicker">HOME OPERATIONS</span>
-                <h2 id="home-ops-title">공지사항과 실제 수익 인증을 한눈에 확인하세요</h2>
-                <p>공지는 제목을 눌러 편하게 접고 펼칠 수 있습니다. 최신 수익 인증을 함께 확인한 뒤, 매일 업데이트되는 부방장 황금키워드를 전체 폭으로 살펴보세요.</p>
+                <h2 id="home-ops-title">부방장 선정 황금키워드를 먼저, 나머지는 왼쪽에서 골라 보세요</h2>
+                <p>왼쪽 메뉴에서 공지사항·부방장 선정 황금키워드·실시간 검색어·수익 인증을 선택할 수 있습니다. 기본으로 매일 검토해 올린 부방장 선정 황금키워드가 먼저 열립니다.</p>
             </header>
 
-            <div className="home-ops-community-grid" data-home-ops-community>
-                <aside className="home-ops-panel home-ops-notice-panel" data-home-ops-notices aria-label="공지사항">
-                    <div className="home-ops-panel-head">
-                        <div>
-                            <strong>공지사항</strong><br />
-                            <small>제목을 누르면 내용을 접거나 펼칠 수 있습니다.</small>
-                        </div>
-                    </div>
-                    {notices.length > 0 ? (
-                        <div className="home-ops-notices">
-                            {notices.map((notice, index) => (
-                                <NoticeCard
-                                    key={notice.id || `notice-${index}`}
-                                    notice={notice}
-                                    index={index}
-                                    open={openNoticeId === notice.id}
-                                    onToggle={() => setOpenNoticeId((current) => current === notice.id ? null : notice.id)}
-                                />
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="home-ops-empty">{noticeLoading ? '최신 공지를 불러오는 중입니다.' : '현재 등록된 공지사항이 없습니다.'}</div>
-                    )}
-                </aside>
+            <div className="home-ops-layout">
+                <div ref={sidenavRef} className="home-ops-sidenav" role="tablist" aria-label="홈 보기 선택" aria-orientation="vertical">
+                    {HOME_OPS_TAB_ORDER.map((tab) => (
+                        <button
+                            key={tab}
+                            id={`home-ops-tab-${tab}`}
+                            type="button"
+                            role="tab"
+                            data-home-ops-tab={tab}
+                            className={`home-ops-tab${activeTab === tab ? ' active' : ''}`}
+                            aria-selected={activeTab === tab}
+                            aria-controls={`home-ops-panel-${tab}`}
+                            tabIndex={activeTab === tab ? 0 : -1}
+                            onClick={() => setActiveTab(tab)}
+                            onKeyDown={(event) => handleTabKeyDown(event, tab)}
+                        >
+                            <strong>{HOME_OPS_TAB_META[tab].label}</strong>
+                            <small>{HOME_OPS_TAB_META[tab].desc}</small>
+                        </button>
+                    ))}
+                </div>
 
-                <aside className="home-ops-panel home-ops-income-panel" data-home-ops-income aria-label="수익 인증">
-                    <div className="home-ops-panel-head">
-                        <div>
-                            <strong>수익 인증</strong><br />
-                            <small>{usingManagedProofs ? '관리자가 등록한 실제 인증 자료입니다.' : incomeResult?.source === 'cache' ? '최근 확인한 승인 자료입니다.' : incomeResult?.source === 'unavailable' ? '서버 연결 상태를 확인 중입니다.' : '승인된 실제 자료만 보여드립니다.'}</small>
-                        </div>
-                        <Link to="/community">전체 보기·작성 →</Link>
-                    </div>
-                    {displayIncomeProofs.length > 0 ? (
-                        <div className="home-ops-income-list">
-                            {displayIncomeProofs.map((proof) => <IncomeProofCard key={proof.id} proof={proof} />)}
-                        </div>
-                    ) : (
-                        <div className="home-ops-empty">
-                            {incomeLoading
-                                ? '수익 인증을 불러오는 중입니다.'
-                                : incomeResult?.source === 'unavailable'
-                                    ? '수익 인증을 일시적으로 불러오지 못했습니다. 잠시 후 다시 확인해주세요.'
-                                    : '현재 공개된 수익 인증이 없습니다.'}
-                        </div>
-                    )}
-                </aside>
-            </div>
-
-            <div className="home-ops-tabs" role="tablist" aria-label="홈 키워드 보기 선택">
-                <button
-                    id="home-ops-tab-deputy"
-                    type="button"
-                    role="tab"
-                    data-home-ops-tab="deputy"
-                    className={`home-ops-tab${activeTab === 'deputy' ? ' active' : ''}`}
-                    aria-selected={activeTab === 'deputy'}
-                    aria-controls="home-ops-panel-deputy"
-                    tabIndex={activeTab === 'deputy' ? 0 : -1}
-                    onClick={() => setActiveTab('deputy')}
-                    onKeyDown={(event) => handleTabKeyDown(event, 'deputy')}
-                >
-                    <strong>부방장 황금키워드</strong>
-                    <small>매일 검토해 올린 고정 키워드 전체 보기</small>
-                </button>
-                <button
-                    id="home-ops-tab-realtime"
-                    type="button"
-                    role="tab"
-                    data-home-ops-tab="realtime"
-                    className={`home-ops-tab${activeTab === 'realtime' ? ' active' : ''}`}
-                    aria-selected={activeTab === 'realtime'}
-                    aria-controls="home-ops-panel-realtime"
-                    tabIndex={activeTab === 'realtime' ? 0 : -1}
-                    onClick={() => setActiveTab('realtime')}
-                    onKeyDown={(event) => handleTabKeyDown(event, 'realtime')}
-                >
-                    <strong>실시간 검색어</strong>
-                    <small>네이버·뉴스 등 현재 흐름을 참고용으로 확인</small>
-                </button>
-            </div>
-
-            <div
-                id="home-ops-panel-deputy"
-                className="home-ops-panel"
-                role="tabpanel"
-                aria-labelledby="home-ops-tab-deputy"
-                hidden={activeTab !== 'deputy'}
-            >
-                {briefing ? (
-                    <>
-                        <div className="home-ops-brief-head">
+                <div className="home-ops-content">
+                    <div
+                        id="home-ops-panel-notice"
+                        className="home-ops-panel home-ops-notice-panel"
+                        role="tabpanel"
+                        aria-labelledby="home-ops-tab-notice"
+                        hidden={activeTab !== 'notice'}
+                    >
+                        <div className="home-ops-panel-head">
                             <div>
-                                <span className="home-ops-kicker">DEPUTY GOLDEN KEYWORDS</span>
-                                <h3>{briefing.title}</h3>
-                                <p>{briefing.author} 제공 · {formatDate(briefing.publishedAt)} · 원본 이미지 {briefing.sourceImages.length}장 추적 정보 기록</p>
-                            </div>
-                            <div className="home-ops-fixed-badge">
-                                <strong>{briefingResult?.source === 'saved' ? '관리자 저장본' : '초기 고정본'}</strong>
-                                <span>관리자가 수정·발행하기 전까지 유지</span>
+                                <strong>공지사항</strong><br />
+                                <small>제목을 누르면 내용을 접거나 펼칠 수 있습니다.</small>
                             </div>
                         </div>
-                        <div className="home-ops-metrics">
-                            <div className="home-ops-metric"><strong>{briefing.rows.length}</strong><span>원본 전체 행</span></div>
-                            <div className="home-ops-metric"><strong>{uniqueCount}</strong><span>차트용 고유 키워드</span></div>
-                            <div className="home-ops-metric"><strong>{numberFormatter.format(Math.max(...briefing.rows.map((row) => row.searchVolume)))}</strong><span>최대 검색량</span></div>
-                            <div className="home-ops-metric"><strong>{decimalFormatter.format(Math.max(...briefing.rows.map((row) => row.opportunity)))}</strong><span>최대 기회지수</span></div>
-                        </div>
-                        <div className="home-ops-chart-wrap">
-                            <div className="home-ops-subhead">
-                                <strong>기회지수 TOP 10</strong>
-                                <span>차트만 띄어쓰기·완전 중복을 정리합니다.</span>
+                        {notices.length > 0 ? (
+                            <div className="home-ops-notices">
+                                {notices.map((notice, index) => (
+                                    <NoticeCard
+                                        key={notice.id || `notice-${index}`}
+                                        notice={notice}
+                                        index={index}
+                                        open={openNoticeId === notice.id}
+                                        onToggle={() => setOpenNoticeId((current) => current === notice.id ? null : notice.id)}
+                                    />
+                                ))}
                             </div>
-                            <KeywordChart rows={chartRows} />
-                        </div>
-                        <div className="home-ops-table-title">
-                            <strong>이미지 원문 전체 {briefing.rows.length}행</strong>
-                            <span id="home-ops-table-note">중복 행도 원문 그대로 보존 · 기회지수 = 검색량 ÷ (문서수 + 1) · 실시간 값이 아닌 고정 스냅샷</span>
-                        </div>
-                        <KeywordTable rows={briefing.rows} />
-                        <KeywordMobileCards rows={briefing.rows} />
-                    </>
-                ) : (
-                    <div className="home-ops-empty">{briefingLoading ? '저장된 키워드 브리핑을 불러오는 중입니다.' : '표시할 키워드 브리핑이 없습니다.'}</div>
-                )}
-            </div>
+                        ) : (
+                            <div className="home-ops-empty">{noticeLoading ? '최신 공지를 불러오는 중입니다.' : '현재 등록된 공지사항이 없습니다.'}</div>
+                        )}
+                    </div>
 
-            <div
-                id="home-ops-panel-realtime"
-                className="home-ops-panel home-ops-realtime-panel"
-                role="tabpanel"
-                aria-labelledby="home-ops-tab-realtime"
-                hidden={activeTab !== 'realtime'}
-            >
-                {activeTab === 'realtime' ? realtimePanel : null}
+                    <div
+                        id="home-ops-panel-deputy"
+                        className="home-ops-panel"
+                        role="tabpanel"
+                        aria-labelledby="home-ops-tab-deputy"
+                        hidden={activeTab !== 'deputy'}
+                    >
+                        {briefing ? (
+                            <>
+                                <div className="home-ops-brief-head">
+                                    <div>
+                                        <span className="home-ops-kicker">DEPUTY GOLDEN KEYWORDS</span>
+                                        <h3>{briefing.title}</h3>
+                                        <p>{briefing.author} 제공 · {formatDate(briefing.publishedAt)} · 원본 이미지 {briefing.sourceImages.length}장 추적 정보 기록</p>
+                                    </div>
+                                    <div className="home-ops-fixed-badge">
+                                        <strong>{briefingResult?.source === 'saved' ? '관리자 저장본' : '초기 고정본'}</strong>
+                                        <span>관리자가 수정·발행하기 전까지 유지</span>
+                                    </div>
+                                </div>
+                                <div className="home-ops-metrics">
+                                    <div className="home-ops-metric"><strong>{briefing.rows.length}</strong><span>원본 전체 행</span></div>
+                                    <div className="home-ops-metric"><strong>{uniqueCount}</strong><span>차트용 고유 키워드</span></div>
+                                    <div className="home-ops-metric"><strong>{numberFormatter.format(Math.max(...briefing.rows.map((row) => row.searchVolume)))}</strong><span>최대 검색량</span></div>
+                                    <div className="home-ops-metric"><strong>{decimalFormatter.format(Math.max(...briefing.rows.map((row) => row.opportunity)))}</strong><span>최대 기회지수</span></div>
+                                </div>
+                                <div className="home-ops-chart-wrap">
+                                    <div className="home-ops-subhead">
+                                        <strong>기회지수 TOP 10</strong>
+                                        <span>차트만 띄어쓰기·완전 중복을 정리합니다.</span>
+                                    </div>
+                                    <KeywordChart rows={chartRows} />
+                                </div>
+                                <div className="home-ops-table-title">
+                                    <strong>이미지 원문 전체 {briefing.rows.length}행</strong>
+                                    <span id="home-ops-table-note">중복 행도 원문 그대로 보존 · 기회지수 = 검색량 ÷ (문서수 + 1) · 실시간 값이 아닌 고정 스냅샷</span>
+                                </div>
+                                <KeywordTable rows={briefing.rows} />
+                                <KeywordMobileCards rows={briefing.rows} />
+                            </>
+                        ) : (
+                            <div className="home-ops-empty">{briefingLoading ? '저장된 키워드 브리핑을 불러오는 중입니다.' : '표시할 키워드 브리핑이 없습니다.'}</div>
+                        )}
+                    </div>
+
+                    <div
+                        id="home-ops-panel-realtime"
+                        className="home-ops-panel home-ops-realtime-panel"
+                        role="tabpanel"
+                        aria-labelledby="home-ops-tab-realtime"
+                        hidden={activeTab !== 'realtime'}
+                    >
+                        {activeTab === 'realtime' ? realtimePanel : null}
+                    </div>
+
+                    <div
+                        id="home-ops-panel-income"
+                        className="home-ops-panel home-ops-income-panel"
+                        role="tabpanel"
+                        aria-labelledby="home-ops-tab-income"
+                        hidden={activeTab !== 'income'}
+                    >
+                        <div className="home-ops-panel-head">
+                            <div>
+                                <strong>수익 인증</strong><br />
+                                <small>{usingManagedProofs ? '관리자가 등록한 실제 인증 자료입니다.' : incomeResult?.source === 'cache' ? '최근 확인한 승인 자료입니다.' : incomeResult?.source === 'unavailable' ? '서버 연결 상태를 확인 중입니다.' : '승인된 실제 자료만 보여드립니다.'}</small>
+                            </div>
+                            <Link to="/community">전체 보기·작성 →</Link>
+                        </div>
+                        {displayIncomeProofs.length > 0 ? (
+                            <div className="home-ops-income-list">
+                                {displayIncomeProofs.map((proof) => <IncomeProofCard key={proof.id} proof={proof} />)}
+                            </div>
+                        ) : (
+                            <div className="home-ops-empty">
+                                {incomeLoading
+                                    ? '수익 인증을 불러오는 중입니다.'
+                                    : incomeResult?.source === 'unavailable'
+                                        ? '수익 인증을 일시적으로 불러오지 못했습니다. 잠시 후 다시 확인해주세요.'
+                                        : '현재 공개된 수익 인증이 없습니다.'}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </section>
     );

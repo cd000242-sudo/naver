@@ -1257,8 +1257,8 @@ function IndexPage() {
             )} />
 
             {/* ═══ HOME QUICK ACTIONS ═══ */}
-            <section className="home-hero" style={{ minHeight: 'auto', display: 'grid', gridTemplateColumns: 'minmax(280px, 820px)', columnGap: 24, rowGap: 14, padding: '8px 24px 56px', maxWidth: 1412, margin: '0 auto', position: 'relative', zIndex: 1, alignItems: 'stretch', justifyContent: 'center' }}>
-                <div className="hero-action-strip" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
+            <section className="home-cta-dock" aria-label={'\ud648 \ube60\ub978 \uc774\ub3d9'}>
+                <div className="hero-action-strip">
                     {[
                         { to: '/leword', label: '\ud669\uae08\ud0a4\uc6cc\ub4dc \ubcf4\ub7ec\uac00\uae30', desc: '\uc2e4\uc2dc\uac04 \ud669\uae08\ud0a4\uc6cc\ub4dc\ub97c \ubc14\ub85c \ud655\uc778', tone: 'gold' },
                         { to: '/chatbots', label: '\ubb34\ub8cc \ucc57\ubd07 \uc0ac\uc6a9\ud558\ub7ec\uac00\uae30', desc: '\uc9c8\ubb38\ud558\uace0 \uc544\uc774\ub514\uc5b4 \ubc14\ub85c \ubc1b\uae30', tone: 'cyan' },
@@ -2051,13 +2051,51 @@ function IndexPage() {
                     z-index: 3;
                 }
 
+                .home-cta-dock {
+                    position: sticky;
+                    bottom: 0;
+                    z-index: 30;
+                    margin-top: 8px;
+                    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+                    background: linear-gradient(180deg, rgba(6,11,19,0) 0%, rgba(6,11,19,0.88) 26%, rgba(6,11,19,0.97) 100%);
+                    backdrop-filter: blur(12px);
+                    border-top: 1px solid rgba(255,255,255,0.10);
+                }
                 .hero-action-strip {
-                    grid-column: 1 / -1;
                     width: 100%;
                     margin: 0 auto;
                     display: grid;
                     grid-template-columns: repeat(3, minmax(0, 1fr));
                     gap: 12px;
+                }
+                .home-cta-dock .hero-action-strip { max-width: 1100px; }
+                @media (max-width: 1150px) {
+                    /* keep the CTA row clear of the fixed FloatStack buttons at the right edge */
+                    .home-cta-dock { padding-right: 64px; }
+                }
+                .home-cta-dock .hero-action-button {
+                    min-height: 0;
+                    padding: 11px 16px;
+                    gap: 3px;
+                    animation: none;
+                    box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+                }
+                .home-cta-dock .hero-action-button::before { animation: none; }
+                @media (max-width: 640px) {
+                    /* right padding clears the fixed FloatStack chat FAB (bottom-right) */
+                    .home-cta-dock { padding: 9px 56px 9px 10px; padding-bottom: calc(9px + env(safe-area-inset-bottom, 0px)); }
+                    /* keep the 3-across row; a generic mobile .hero-action-strip rule would otherwise stack it */
+                    .home-cta-dock .hero-action-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+                    .home-cta-dock .hero-action-button {
+                        width: auto;
+                        min-height: 0;
+                        justify-self: stretch;
+                        padding: 10px 6px;
+                        text-align: center;
+                        justify-items: center;
+                    }
+                    .home-cta-dock .hero-action-button span { display: none; }
+                    .home-cta-dock .hero-action-button strong { font-size: 13px; line-height: 1.25; }
                 }
 
                 .hero-action-button {

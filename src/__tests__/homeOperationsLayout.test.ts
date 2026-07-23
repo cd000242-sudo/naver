@@ -3,31 +3,33 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 describe('homepage operations layout', () => {
-  it('shows notices and income proofs together before the keyword tabs', () => {
+  it('renders four home sub-tabs with 부방장 선정 황금키워드 as the default and preloads income', () => {
     const source = readFileSync(
       join(process.cwd(), 'spa', 'src', 'components', 'HomeOperationsBoard.tsx'),
       'utf8',
     );
-    const overviewIndex = source.indexOf('data-home-ops-community');
-    const noticesIndex = source.indexOf('data-home-ops-notices');
-    const incomeIndex = source.indexOf('data-home-ops-income');
-    const tabsIndex = source.indexOf('aria-label="홈 키워드 보기 선택"');
 
-    expect(source).toContain("type HomeOperationsTab = 'deputy' | 'realtime'");
-    expect(source).toContain("useState<HomeOperationsTab>('deputy')");
+    // 4-tab contract in the order 공지사항 → 부방장 선정 황금키워드 → 실시간 검색어 → 수익 인증.
+    expect(source).toContain("type HomeOperationsTab = 'notice' | 'deputy' | 'realtime' | 'income'");
+    expect(source).toContain("HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['notice', 'deputy', 'realtime', 'income']");
+    expect(source).toContain("useState<HomeOperationsTab>('deputy')"); // default = 부방장 선정 황금키워드
+    expect(source).toContain('부방장 선정 황금키워드');
     expect(source).toContain('fetchCommunityIncomeProofs(3, { view: \'home\' })');
-    expect(source).toContain('className="home-ops-community-grid"');
-    expect(source).toContain('data-home-ops-tab="deputy"');
-    expect(source).toContain('data-home-ops-tab="realtime"');
+
+    // Left vertical side-nav tablist + four tab panels.
+    expect(source).toContain('className="home-ops-sidenav"');
+    expect(source).toContain('aria-label="홈 보기 선택"');
+    expect(source).toContain('data-home-ops-tab={tab}');
+    expect(source).toContain('id="home-ops-panel-notice"');
+    expect(source).toContain('id="home-ops-panel-deputy"');
+    expect(source).toContain('id="home-ops-panel-realtime"');
+    expect(source).toContain('id="home-ops-panel-income"');
+
+    // Income preloads (eager, mounted-while-hidden); realtime stays lazy.
+    expect(source).toContain('loading="eager"');
+    expect(source).toContain('preload="metadata"');
     expect(source).toContain("activeTab === 'realtime' ? realtimePanel");
-    expect(overviewIndex).toBeGreaterThan(-1);
-    expect(noticesIndex).toBeGreaterThan(-1);
-    expect(incomeIndex).toBeGreaterThan(-1);
-    expect(tabsIndex).toBeGreaterThan(-1);
-    expect(overviewIndex).toBeLessThan(noticesIndex);
-    expect(noticesIndex).toBeLessThan(incomeIndex);
-    expect(incomeIndex).toBeLessThan(tabsIndex);
-    expect(noticesIndex).toBeLessThan(tabsIndex);
+    expect(source).not.toContain("activeTab === 'income' ?");
   });
 
   it('keeps Korean copy readable and protects wide keyword rows from broken wrapping', () => {
@@ -56,8 +58,8 @@ describe('homepage operations layout', () => {
     expect(source).toMatch(/@media \(max-width:\s*720px\)[\s\S]*?\.home-ops-table-shell\s*\{[^}]*display:\s*none/s);
     expect(source).toMatch(/@media \(max-width:\s*720px\)[\s\S]*?\.home-ops-keyword-cards\s*\{[^}]*display:\s*grid/s);
     expect(source).toMatch(/@media \(max-width:\s*720px\)[\s\S]*?\.home-ops-realtime-panel \.hero-source-body,[\s\S]*?grid-template-columns:\s*minmax\(0,\s*1fr\)\s*!important/s);
-    expect(source).toMatch(/\.home-ops-community-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1\.15fr\)\s+minmax\(360px,\s*0\.85fr\)/s);
-    expect(source).toMatch(/@media \(max-width:\s*960px\)[\s\S]*?\.home-ops-community-grid\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)/s);
+    expect(source).toMatch(/\.home-ops-layout\s*\{[^}]*grid-template-columns:\s*minmax\(210px,\s*250px\)\s+minmax\(0,\s*1fr\)/s);
+    expect(source).toMatch(/@media \(max-width:\s*960px\)[\s\S]*?\.home-ops-sidenav\s*\{[^}]*flex-direction:\s*row/s);
     expect(source).toMatch(/\.home-ops-notice-toggle\s*\{[^}]*min-height:\s*48px/s);
     expect(source).toContain('aria-expanded={open}');
     expect(source).toContain('aria-controls={contentId}');
