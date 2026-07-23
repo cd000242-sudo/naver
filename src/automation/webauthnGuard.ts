@@ -10,9 +10,14 @@
  *
  * Enabling the CDP WebAuthn domain virtualises authenticator discovery for the target, so
  * Chrome never consults the OS. Measured on nid.naver.com:
- *   without: navigator.credentials.get() -> "Windows 보안" dialog, hangs indefinitely
- *   with:    navigator.credentials.get() -> NotAllowedError in milliseconds, no dialog
+ *   without: navigator.credentials.get() -> "Windows 보안" dialog, waits for a human forever
+ *   with:    no dialog at all; the call finds no authenticator and rejects with
+ *            NotAllowedError once its own timeout elapses (8s call -> 8002ms)
  *            isConditionalMediationAvailable() true -> false
+ *
+ * The remaining wait is bounded by the caller's own timeout instead of a human, which is
+ * the whole difference. No virtual authenticator is registered on purpose: an authenticator
+ * that could answer would let a create() call register a bogus passkey on the real account.
  *
  * Conditional mediation matters most: it fires on ID-field focus with no click at all,
  * which is why the prompt reappeared on every login attempt.
