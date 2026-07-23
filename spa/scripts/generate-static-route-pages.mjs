@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildKeywordDetail, keywordSlug } from '../src/lib/keywordDetailContent.mjs';
+import { buildKeywordDetail, keywordSlug, isEvergreenKeyword } from '../src/lib/keywordDetailContent.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
@@ -223,6 +223,9 @@ function writeKeywordDetailPages(template) {
   for (const row of rows) {
     const keyword = String(row?.keyword || '').trim();
     if (!keyword) continue;
+    // 오래 유효한 키워드만 개별 페이지로 만든다. 실시간 이슈는 낡은 자동생성 페이지가 되므로
+    // 날짜 아카이브(writeBriefingArchivePage)에만 남긴다.
+    if (!isEvergreenKeyword(keyword)) continue;
     const slug = keywordSlug(keyword);
     if (!slug || seen.has(slug)) continue;
     seen.add(slug);
@@ -301,20 +304,97 @@ if (fs.existsSync(legacyAdminPath)) {
   console.warn(`Legacy admin panel was not found: ${legacyAdminPath}`);
 }
 
-const keywordPages = writeKeywordDetailPages(template);
-console.log(`Generated ${routes.length} static route pages for search crawlers.`);
-console.log(`Generated ${keywordPages.length} keyword detail pages.`);
+/** 그날 브리핑 전체를 담은 날짜 아카이브. 실시간 이슈는 여기에 '그날의 기록'으로 남아 낡지 않는다. */
+function writeBriefingArchivePage(template) {
+  const rows = loadBriefingRows();
+  if (!rows.length) return null;
+  const seed = (() => {
+    const p = path.resolve(__dirname, '..', 'public', 'data', 'home-keyword-briefing-seed.json');
+    try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return {}; }
+  })();
+  // 아카이브 날짜는 브리핑 발행일 기준(publishedAt). 없으면 만들지 않는다(Date.now 미사용).
+  const published = String(seed.publishedAt || '').slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(published)) {
+    console.warn('[static-routes] briefing archive skipped: no valid publishedAt');
+    return null;
+  }
+  const items = rows
+    .filter((row) => row && String(row.keyword || '').trim())
+    .map((row) => {
+      const keyword = escapeText(String(row.keyword).trim());
+      const volume = Number.isFinite(Number(row.searchVolume)) ? numberFormat.format(Number(row.searchVolume)) : '-';
+      const documents = Number.isFinite(Number(row.documentCount)) ? numberFormat.format(Number(row.documentCount)) : '-';
+      const opportunity = Number.isFinite(Number(row.opportunity)) ? Number(row.opportunity).toFixed(1) : '-';
+      return `<tr><th scope="row">${keyword}</th><td>${volume}</td><td>${documents}</td><td>${opportunity}</td></tr>`;
+    });
+  if (!items.length) return null;
 
-// 사이트맵에 키워드 상세를 반영한다. 등록하지 않으면 구글이 발견하지 못한다.
+  const body = [
+    '<article id="briefing-archive-prerender">',
+    `<h1>${published} 무료 선정 황금키워드</h1>`,
+    `<p>${published} 기준으로 검토해 올린 무료 선정 황금키워드 ${items.length}개입니다. 이 페이지는 그날의 기록이라 이후에도 값이 바뀌지 않습니다. 기회지수는 검색량 ÷ (문서수 + 1) 로, 문서수가 검색량에 비해 적을수록 아직 글이 적어 노려볼 만한 키워드입니다.</p>`,
+    '<table><caption>키워드별 검색량·문서수·기회지수</caption><thead><tr>',
+    '<th scope="col">키워드</th><th scope="col">검색량</th><th scope="col">문서수</th><th scope="col">기회지수</th>',
+    '</tr></thead><tbody>',
+    items.join(''),
+    '</tbody></table>',
+    '<p><a href="/briefing">오늘의 무료 선정 황금키워드 보기</a></p>',
+    '</article>',
+  ].join('');
+
+  const url = `${siteOrigin}/briefing/${published}`;
+  const title = `${published} 무료 선정 황금키워드 | Leaders Pro`;
+  const description = `${published} 기준 무료 선정 황금키워드 ${items.length}개 — 검색량·문서수·기회지수 기록입니다.`;
+  let html = template;
+  html = replaceRequired(html, /<title>[\s\S]*?<\/title>/, `<title>${escapeText(title)}</title>`, 'title');
+  html = replaceRequired(html, /<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeAttribute(description)}" />`, 'description');
+  html = replaceRequired(html, /<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${url}" />`, 'canonical');
+  html = replaceRequired(html, /<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escapeAttribute(title)}" />`, 'og:title');
+  html = replaceRequired(html, /<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeAttribute(description)}" />`, 'og:description');
+  html = replaceRequired(html, /<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${url}" />`, 'og:url');
+  html = replaceRequired(html, /<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeAttribute(title)}" />`, 'twitter:title');
+  html = replaceRequired(html, /<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeAttribute(description)}" />`, 'twitter:description');
+  html = replaceRequired(html, /<div id="root"><\/div>/, `<div id="root">${body}</div>`, 'archive prerender');
+
+  const dir = path.join(distDir, 'briefing', published);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
+  return { date: published, url };
+}
+
+const keywordPages = writeKeywordDetailPages(template);
+const archive = writeBriefingArchivePage(template);
+console.log(`Generated ${routes.length} static route pages for search crawlers.`);
+console.log(`Generated ${keywordPages.length} evergreen keyword detail pages.`);
+if (archive) console.log(`Generated briefing archive: ${archive.date}`);
+
+// 사이트맵에 롱테일(evergreen 상세) + 날짜 아카이브를 반영한다.
+// 실시간 이슈 개별 페이지는 만들지 않으므로 사이트맵에도 넣지 않는다.
+// 아카이브는 append-only: 과거 날짜 URL 은 지우지 않고 유지한다(그날의 기록이라 계속 유효).
 const sitemapPath = path.resolve(__dirname, '..', '..', 'payment-page', 'sitemap.xml');
-if (keywordPages.length && fs.existsSync(sitemapPath)) {
+if (fs.existsSync(sitemapPath)) {
   const original = fs.readFileSync(sitemapPath, 'utf8');
-  const withoutKeywords = original.replace(/\s*<url>\s*<loc>[^<]*\/keyword\/[^<]*<\/loc>[\s\S]*?<\/url>/g, '');
-  const today = new Date().toISOString().slice(0, 10);
-  const entries = keywordPages
-    .map((slug) => `  <url>\n    <loc>${siteOrigin}/keyword/${encodeURIComponent(slug)}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`)
-    .join('\n');
-  const next = withoutKeywords.replace('</urlset>', `${entries}\n</urlset>`);
-  fs.writeFileSync(sitemapPath, next, 'utf8');
-  console.log(`Sitemap updated with ${keywordPages.length} keyword URLs.`);
+  // 이전 실행이 남긴 실시간 이슈 개별 /keyword URL 은 정리한다(더 이상 만들지 않으므로).
+  let sitemap = original.replace(/\s*<url>\s*<loc>[^<]*\/keyword\/[^<]*<\/loc>[\s\S]*?<\/url>/g, '');
+
+  const archiveDate = archive ? archive.date : null;
+  const existingArchive = new Set(
+    [...original.matchAll(/<loc>[^<]*\/briefing\/(\d{4}-\d{2}-\d{2})<\/loc>/g)].map((m) => m[1]),
+  );
+
+  const entries = [];
+  for (const slug of keywordPages) {
+    entries.push(`  <url>\n    <loc>${siteOrigin}/keyword/${encodeURIComponent(slug)}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>`);
+  }
+  // 오늘 아카이브가 사이트맵에 아직 없으면 추가(있으면 중복 방지).
+  if (archiveDate && !existingArchive.has(archiveDate)) {
+    entries.push(`  <url>\n    <loc>${siteOrigin}/briefing/${archiveDate}</loc>\n    <lastmod>${archiveDate}</lastmod>\n    <changefreq>never</changefreq>\n    <priority>0.6</priority>\n  </url>`);
+  }
+  if (entries.length) {
+    sitemap = sitemap.replace('</urlset>', `${entries.join('\n')}\n</urlset>`);
+  }
+  if (sitemap !== original) {
+    fs.writeFileSync(sitemapPath, sitemap, 'utf8');
+    console.log(`Sitemap updated: ${keywordPages.length} evergreen keyword URLs${archiveDate && !existingArchive.has(archiveDate) ? `, +archive ${archiveDate}` : ''}.`);
+  }
 }

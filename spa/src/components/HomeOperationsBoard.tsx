@@ -480,7 +480,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                 /* 처음 온 사람이 이 사이트가 뭘 하는 곳인지 3초 안에 알 수 있게 하는 소개 문단.
                    홈 배경이 밝은 사진이라 반투명 판을 깔지 않으면 본문이 배경에 묻힌다. */
                 .home-ops-intro-wrap {
-                    max-width: 760px;
+                    /* 아래 보드와 폭을 맞춘다 — 좁게 두면 넓은 보드 위에 쪽지처럼 떠 보인다. */
                     margin-top: 12px;
                     padding: 16px 18px;
                     border-radius: 14px;
@@ -494,11 +494,33 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     line-height: 1.7;
                     color: rgba(255, 255, 255, .88);
                 }
-                .home-ops-intro + .home-ops-intro { margin-top: 10px; }
                 .home-ops-intro strong { color: #fff; font-weight: 800; }
+                .home-ops-intro-cards {
+                    display: grid;
+                    grid-template-columns: repeat(3, minmax(0, 1fr));
+                    gap: 12px;
+                    margin-top: 14px;
+                }
+                .home-ops-intro-card {
+                    display: block;
+                    padding: 14px 16px;
+                    border-radius: 12px;
+                    border: 1px solid rgba(255, 255, 255, .12);
+                    background: rgba(255, 255, 255, .04);
+                    text-decoration: none;
+                    transition: border-color .16s ease, background .16s ease, transform .16s ease;
+                }
+                .home-ops-intro-card:hover {
+                    border-color: rgba(105, 183, 255, .55);
+                    background: rgba(105, 183, 255, .08);
+                    transform: translateY(-1px);
+                }
+                .home-ops-intro-card strong { display: block; margin-bottom: 5px; font-size: 15px; color: #fff; }
+                .home-ops-intro-card span { font-size: 13px; line-height: 1.55; color: rgba(255, 255, 255, .74); }
                 @media (max-width: 720px) {
                     .home-ops-intro-wrap { padding: 13px 14px; }
                     .home-ops-intro { font-size: 14px; }
+                    .home-ops-intro-cards { grid-template-columns: 1fr; gap: 8px; }
                 }
                 .home-ops-kicker {
                     display: inline-flex;
@@ -1043,14 +1065,23 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     <h2 id="home-ops-title">블로그로 수익을 내는 데 필요한 것들을 한곳에 모았습니다</h2>
                     <div className="home-ops-intro-wrap">
                         <p className="home-ops-intro">
-                            리더스프로는 <strong>키워드 발굴부터 글쓰기·발행까지</strong> 이어지는 블로그 운영 도구를 만듭니다.
-                            어떤 키워드를 써야 할지 찾아주는 <strong>LEWORD</strong>, 키워드만 넣으면 글·이미지·발행까지 처리하는
-                            <strong> Better Life Naver</strong>, 외부 유입을 보조하는 <strong>Leaders Orbit</strong>이 있습니다.
+                            리더스프로는 <strong>키워드 발굴부터 글쓰기·발행까지</strong> 블로그 운영에 필요한 도구를 만듭니다.
+                            아래 <strong>무료 선정 황금키워드</strong>와 <strong>실시간 검색어</strong>는 회원가입 없이 그냥 보셔도 됩니다.
                         </p>
-                        <p className="home-ops-intro">
-                            아래는 <strong>무료로 열려 있는 자료</strong>입니다. 매일 검토해 올리는 무료 선정 황금키워드와
-                            실시간 검색어 흐름은 회원가입 없이 그냥 보셔도 됩니다. 둘러보시고 필요하시면 무료 체험부터 해보세요.
-                        </p>
+                        <div className="home-ops-intro-cards">
+                            <a className="home-ops-intro-card" href="/leword">
+                                <strong>LEWORD</strong>
+                                <span>검색은 많은데 글은 적은, 지금 써야 할 키워드를 찾아줍니다.</span>
+                            </a>
+                            <a className="home-ops-intro-card" href="/detail">
+                                <strong>Better Life Naver</strong>
+                                <span>키워드만 넣으면 글·이미지·발행까지 사람이 쓴 것처럼 처리합니다.</span>
+                            </a>
+                            <a className="home-ops-intro-card" href="/orbit">
+                                <strong>Leaders Orbit</strong>
+                                <span>블로그스팟·워드프레스·티스토리로 외부 유입을 보조합니다.</span>
+                            </a>
+                        </div>
                     </div>
                 </header>
             )}
@@ -1062,9 +1093,9 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                         새 페이지로 인식하지 않아 전면광고가 뜨지 않는다. 실제 페이지 로드가
                         일어나야 광고 자리가 생긴다(정적 /briefing 페이지를 빌드에서 생성해 둔다). */}
                     <a className="home-ops-tab home-ops-tab-featured" href={BRIEFING_PAGE_PATH}>
-                        <span className="home-ops-featured-flag">매일 갱신</span>
+                        <span className="home-ops-featured-flag">오늘 무료 공개</span>
                         <strong>무료 선정 황금키워드</strong>
-                        <small>매일 검토해 올린 고정 키워드 전체 보기 →</small>
+                        <small>검색은 많은데 아직 글이 적은 키워드만 골랐습니다. 지금 바로 확인 →</small>
                     </a>
                     {HOME_OPS_TAB_ORDER.map((tab) => (
                         <button

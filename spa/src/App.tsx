@@ -10,6 +10,7 @@ const LewordDetailPage = lazy(() => import('./pages/LewordDetailPage'));
 const LewordPage = lazy(() => import('./pages/LewordPage'));
 const BriefingPage = lazy(() => import('./pages/BriefingPage'));
 const KeywordDetailPage = lazy(() => import('./pages/KeywordDetailPage'));
+const BriefingArchivePage = lazy(() => import('./pages/BriefingArchivePage'));
 const OrbitPage = lazy(() => import('./pages/OrbitPage'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
 const DownloadPage = lazy(() => import('./pages/DownloadPage'));
@@ -73,8 +74,10 @@ function App() {
                     {/* 무료 선정 황금키워드 전용 페이지 — 홈 탭에서 분리해 별도 주소로 뺐다. */}
                     <Route path="/briefing" element={<BriefingPage />} />
                     <Route path="/briefing.html" element={<BriefingPage />} />
-                    {/* 키워드별 상세 페이지 — 롱테일 검색 유입구. 정적 생성기가 같은 주소로 페이지를 굽는다. */}
+                    {/* 오래 유효한(evergreen) 키워드만 개별 상세. 실시간 이슈는 아래 날짜 아카이브로. */}
                     <Route path="/keyword/:slug" element={<KeywordDetailPage />} />
+                    {/* 날짜 아카이브 — 그날 브리핑 전체의 고정 기록. 낡지 않고 날짜별로 쌓인다. */}
+                    <Route path="/briefing/:date" element={<BriefingArchivePage />} />
                     <Route path="/orbit" element={<OrbitPage />} />
                     <Route path="/orbit.html" element={<OrbitPage />} />
                     <Route path="/pricing" element={<PricingPage />} />

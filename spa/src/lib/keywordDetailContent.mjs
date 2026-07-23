@@ -59,6 +59,28 @@ function withParticle(word, withFinal, withoutFinal) {
   return `${word}${final ? withFinal : withoutFinal}`;
 }
 
+/**
+ * 오래 유효한(evergreen) 키워드만 개별 상세 페이지로 만든다.
+ *
+ * 이유: 실시간 이슈 키워드(연예·스포츠·오늘의 사건)는 내일이면 목록에서 사라진다.
+ * 그런 키워드로 개별 페이지를 만들면 구글이 색인한 뒤 낡은 자동생성 페이지가 되고,
+ * 그게 바로 AdSense 가 저품질로 보는 유형이다. 반대로 '세무사 시험일정',
+ * '제헌절 공휴일', '장마기간' 처럼 반복 검색되고 오래 유효한 것만 자산이 된다.
+ *
+ * 실시간 이슈는 대신 날짜 아카이브(/briefing/<날짜>)에 그날의 기록으로 남긴다.
+ */
+const EVERGREEN_RE = /(시험일정|시험\s*일정|공휴일|장마기간|장마\s*기간|신청방법|신청\s*방법|신청기간|사용처|가맹점|계산기|계산\s*방법|환급|지급일|자격조건|자격\s*조건|필요서류|준비물|방법|비교|순위|가격|비용|후기|추천|뜻|차이|기간|일정표|시간표|예약|예매|주차|입장료|운영시간)/;
+// 반대로 시의성이 강해 금방 낡는 신호. 이게 있으면 evergreen 에서 제외한다.
+const TRANSIENT_RE = /(사퇴|영입설|재혼|열애|결별|출산|논란|사망|별세|구속|체포|프로필|재검표|무대인사|10주년|\d{4}년\d{1,2}월\d{1,2}일|오늘|속보|생중계|중계|경기|리그|프리뷰)/;
+
+/** 이 키워드가 개별 상세 페이지로 만들 가치가 있는가(오래 유효한가). */
+export function isEvergreenKeyword(keyword) {
+  const text = String(keyword || '');
+  if (!text.trim()) return false;
+  if (TRANSIENT_RE.test(text)) return false;
+  return EVERGREEN_RE.test(text.replace(/\s+/g, ''));
+}
+
 export function keywordSlug(keyword) {
   return String(keyword || '')
     .trim()
