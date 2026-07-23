@@ -165,6 +165,36 @@ describe('installAgent', () => {
     expect(spawnMock.mock.calls[0][0].command).toBe('npm');
   });
 
+  // A blocked registry made the fallback throw the SAME text the fix removed, so users
+  // reported "그대로예요" and support could not tell a stale app from a blocked download.
+  it('names the blocked download instead of repeating the old PATH message', async () => {
+    resolveNpmInvocationMock.mockResolvedValue({
+      command: 'npm',
+      prefixArgs: [],
+      env: {},
+      source: 'system',
+      bootstrapError: 'fetch failed: ENOTFOUND registry.npmjs.org',
+    });
+    const { AgentCliError } = await import('../agentCli/types');
+    spawnMock.mockRejectedValue(
+      new AgentCliError('not_installed', 'codex', 'npm CLI를 허용된 PATH에서 찾을 수 없습니다. 설치 여부를 확인해주세요.'),
+    );
+
+    const err = await installAgent('codex').catch((e) => e);
+    expect(err.code).toBe('not_installed');
+    expect(err.message).not.toContain('허용된 PATH');
+    expect(err.message).toContain('registry.npmjs.org');
+    expect(err.detail).toContain('ENOTFOUND');
+  });
+
+  it('leaves an unrelated launch failure untouched on the bundled path', async () => {
+    const { AgentCliError } = await import('../agentCli/types');
+    spawnMock.mockRejectedValue(new AgentCliError('spawn_failed', 'codex', '프로세스 실행 실패: EACCES'));
+    const err = await installAgent('codex').catch((e) => e);
+    expect(err.code).toBe('spawn_failed');
+    expect(err.message).toContain('프로세스 실행 실패');
+  });
+
   it('never blames a missing Node.js when the app runtime ran the install', async () => {
     spawnMock.mockResolvedValue({ code: 1, stdout: '', stderr: "'npm' is not recognized" });
     const err = await installAgent('codex').catch((e) => e);

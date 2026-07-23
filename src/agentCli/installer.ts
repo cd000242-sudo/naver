@@ -85,6 +85,30 @@ function buildNpmInstallArgs(
   ];
 }
 
+/**
+ * [v2.11.145] Keep the bootstrap failure from hiding behind the old symptom.
+ *
+ * When the bundled runtime cannot be prepared we fall back to the user's own npm. On a PC
+ * without npm on PATH that fallback throws the SAME "npm CLI를 허용된 PATH에서 찾을 수
+ * 없습니다" text the fix was meant to eliminate — verified against the packaged build with
+ * a blocked registry. Users then report "그대로예요" and support cannot tell an app that
+ * never updated apart from one whose download is blocked. Name the real cause instead.
+ */
+function describeNpmLaunchFailure(
+  provider: AgentProvider,
+  npm: { source: 'bundled' | 'system'; bootstrapError?: string },
+  err: unknown,
+): unknown {
+  const failure = err as { code?: string };
+  if (npm.source !== 'system' || failure?.code !== 'not_installed') return err;
+  return new AgentCliError(
+    'not_installed',
+    provider,
+    '설치 도구를 내려받지 못해 설치를 시작하지 못했습니다. 백신·방화벽·회사 네트워크가 registry.npmjs.org 접속을 막고 있는지 확인한 뒤 다시 시도해주세요.',
+    sanitizeUserVisibleError(npm.bootstrapError || ''),
+  );
+}
+
 // npm install can take a minute or two; the OAuth browser flow can take several.
 const INSTALL_TIMEOUT_MS = 300_000;
 const LOGIN_TIMEOUT_MS = 300_000;
@@ -122,13 +146,24 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
   // nvm/fnm shell-only PATH, portable Node — failed before npm ever ran.
   const npm = await resolveNpmInvocation();
   const installArgs = { prefix: npm.prefix, cache: npm.cache };
-  let res = await spawnCollect({
-    command: npm.command,
-    args: [...npm.prefixArgs, ...buildNpmInstallArgs(provider, installArgs)],
-    provider,
-    timeoutMs: INSTALL_TIMEOUT_MS,
-    env: npm.env,
-  });
+  // Support needs this in the log to tell "did not update" apart from "bootstrap blocked".
+  console.log(`[AgentInstaller] npm 실행 경로=${npm.source}${npm.bootstrapError ? ` (부트스트랩 실패: ${npm.bootstrapError})` : ''}`);
+
+  const runNpm = async (args: string[]) => {
+    try {
+      return await spawnCollect({
+        command: npm.command,
+        args: [...npm.prefixArgs, ...args],
+        provider,
+        timeoutMs: INSTALL_TIMEOUT_MS,
+        env: npm.env,
+      });
+    } catch (err) {
+      throw describeNpmLaunchFailure(provider, npm, err);
+    }
+  };
+
+  let res = await runNpm(buildNpmInstallArgs(provider, installArgs));
 
   // [v2.11.138] 핀한 버전이 npm에서 내려가면(ETARGET/404) @latest로 1회 폴백.
   // gemini-cli처럼 릴리스가 잦은 CLI에서 stale 핀이 설치를 영구 차단하던 문제 방지.
@@ -136,13 +171,7 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
   const isVersionNotFound = /ETARGET|No matching version|E404|notarget/i.test(combinedOut);
   if (res.code !== 0 && isVersionNotFound) {
     console.warn(`[AgentInstaller] ${packageSpec} 버전 없음(ETARGET) → @latest로 폴백 설치 시도`);
-    res = await spawnCollect({
-      command: npm.command,
-      args: [...npm.prefixArgs, ...buildNpmInstallArgs(provider, { ...installArgs, versionOverride: 'latest' })],
-      provider,
-      timeoutMs: INSTALL_TIMEOUT_MS,
-      env: npm.env,
-    });
+    res = await runNpm(buildNpmInstallArgs(provider, { ...installArgs, versionOverride: 'latest' }));
   }
 
   if (res.code !== 0) {
