@@ -21,7 +21,8 @@ function BriefingPage() {
     return (
         <section className="briefing-page" aria-labelledby="briefing-page-title">
             <style>{`
-                .briefing-page { padding: 28px 16px 56px; max-width: 1180px; margin: 0 auto; }
+                /* 상단 패딩은 고정 네비바 높이(72px)를 비켜야 제목이 가려지지 않는다. */
+                .briefing-page { padding: 104px 16px 56px; max-width: 1180px; margin: 0 auto; }
                 .briefing-page-head { margin-bottom: 18px; }
                 .briefing-page-kicker {
                     display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .12em;

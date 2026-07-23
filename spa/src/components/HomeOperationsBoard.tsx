@@ -639,6 +639,9 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     gap: 16px;
                     align-items: start;
                 }
+                /* 전용 페이지에서는 사이드탭을 렌더하지 않는다. 이때 2열 그리드를 그대로 두면
+                   본문이 사이드탭 자리(250px)로 밀려 들어가 글자가 세로로 쪼개진다. */
+                .home-ops-layout.briefing-only { grid-template-columns: minmax(0, 1fr); }
                 .home-ops-sidenav {
                     position: sticky;
                     top: 80px;
@@ -990,7 +993,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                 </header>
             )}
 
-            <div className="home-ops-layout">
+            <div className={`home-ops-layout${briefingOnly ? ' briefing-only' : ''}`}>
                 {!briefingOnly && (
                 <div ref={sidenavRef} className="home-ops-sidenav" role="tablist" aria-label="홈 보기 선택" aria-orientation="vertical">
                     {/* react-router Link 가 아니라 일반 <a> 다. 클라이언트 라우팅은 AdSense 가
