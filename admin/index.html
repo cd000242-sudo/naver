@@ -1468,6 +1468,8 @@
                                 <div class="keyword-briefing-toolbar">
                                     <span id="keyword-briefing-row-count" role="status" aria-live="polite" style="color:var(--text-secondary);font-size:16px;">0개 행</span>
                                     <div class="keyword-briefing-toolbar-actions">
+                                        <input id="keyword-briefing-sheet" type="file" accept=".xlsx,.xls,.csv,.txt,.tsv" hidden>
+                                        <button class="btn btn-gold" type="button" id="keyword-briefing-import">📄 엑셀/CSV 불러오기</button>
                                         <button class="btn" type="button" id="keyword-briefing-add-row">＋ 키워드 행 추가</button>
                                         <button class="btn" type="button" id="keyword-briefing-sort">기회지수 높은순 정렬</button>
                                     </div>
@@ -1487,7 +1489,7 @@
                                         <tbody id="keyword-briefing-table-body"></tbody>
                                     </table>
                                 </div>
-                                <p class="editor-help" id="keyword-briefing-scroll-help" style="font-size:16px;"><strong>기회지수 자동 계산</strong> — 검색량 ÷ (블로그 문서수 + 1). 각 셀을 클릭해 바로 수정하고, 검수 필요 표시가 없어야 저장할 수 있습니다. 화면이 좁으면 표 영역을 좌우로 스크롤하세요.</p>
+                                <p class="editor-help" id="keyword-briefing-scroll-help" style="font-size:16px;"><strong>엑셀/CSV를 그대로 넣으면 자동 입력</strong> — <strong>📄 엑셀/CSV 불러오기</strong>를 누르거나 파일을 표 위로 끌어다 놓으면 <em>키워드·검색량·문서수</em> 열을 자동으로 찾아 채웁니다(열 순서·헤더 유무 무관). <strong>기회지수 자동 계산</strong> — 검색량 ÷ (블로그 문서수 + 1). 각 셀을 클릭해 바로 수정하고, 검수 필요 표시가 없어야 저장할 수 있습니다. 화면이 좁으면 표 영역을 좌우로 스크롤하세요.</p>
                             </div>
                         </div>
                         <div id="keyword-briefing-preview" style="margin-top:14px;"></div>
@@ -2106,6 +2108,7 @@
         const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
         const LEWORD_ADMIN_SESSION_KEY = 'leword_api_admin_session';
         let lewordApiAdminSession = null;
+        let lewordAdminSessionLastError = '';
 
         function setLewordDownloadStatus(message, isError = false) {
             const target = document.getElementById('leword-download-status');
@@ -2155,14 +2158,22 @@
                 });
                 const payload = await res.json().catch(() => ({}));
                 if (!res.ok || !payload.session || !payload.session.accessToken || payload.session.tier !== 'admin') {
-                    throw new Error(payload.message || payload.error || '\uad00\ub9ac\uc790 \uc11c\ubc84 \uc138\uc158 \ubc1c\uae09 \uc2e4\ud328');
+                    if (res.status === 401 || res.status === 403) {
+                        lewordAdminSessionLastError = '\uc544\uc774\ub514 \ub610\ub294 \ube44\ubc00\ubc88\ud638\uac00 \uc11c\ubc84 \uad00\ub9ac\uc790 \uacc4\uc815\uacfc \uc77c\uce58\ud558\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4. \uc11c\ubc84 \uad00\ub9ac\uc790 \ube44\ubc00\ubc88\ud638\ub97c \ud655\uc778\ud558\uc138\uc694(\uc0ac\uc774\ud2b8 \ub85c\uadf8\uc778 \ube44\ubc00\ubc88\ud638\uc640 \ub2e4\ub97c \uc218 \uc788\uc2b5\ub2c8\ub2e4).'
+                            + (payload.message ? ' [\uc11c\ubc84: ' + payload.message + ']' : '');
+                    } else {
+                        lewordAdminSessionLastError = payload.message || payload.error || ('\uc11c\ubc84 \uc751\ub2f5 \uc624\ub958(' + res.status + ')');
+                    }
+                    throw new Error(lewordAdminSessionLastError);
                 }
+                lewordAdminSessionLastError = '';
                 saveLewordAdminSession(payload.session);
                 if (!options.silent) showToast('\uc11c\ubc84 \uc5c5\ub85c\ub4dc \uad8c\ud55c\uc774 \uc5f0\uacb0\ub418\uc5c8\uc2b5\ub2c8\ub2e4.');
                 await loadLewordDownloadStatus();
                 return payload.session;
             } catch (err) {
                 saveLewordAdminSession(null);
+                if (!lewordAdminSessionLastError) lewordAdminSessionLastError = err.message || String(err);
                 if (!options.silent) showToast('\uc11c\ubc84 \uc5c5\ub85c\ub4dc \uad8c\ud55c \uc5f0\uacb0 \uc2e4\ud328: ' + (err.message || err));
                 return null;
             }
@@ -2542,7 +2553,7 @@
             homeOpsApiStatus('서버 저장 권한을 확인하는 중입니다.', false);
             const session = await requestLewordAdminSession(userId, password, { silent: true });
             if (passwordNode) passwordNode.value = '';
-            homeOpsApiStatus(session ? '서버 저장 권한이 연결되었습니다.' : '서버 저장 권한 연결 실패: 관리자 로그인 정보를 다시 확인하거나 잠시 후 재시도해 주세요.', !session);
+            homeOpsApiStatus(session ? '서버 저장 권한이 연결되었습니다.' : '서버 저장 권한 연결 실패: ' + (lewordAdminSessionLastError || '관리자 로그인 정보를 확인하세요.'), !session);
             return session;
         }
         function renderAdminNoticeList() {
@@ -5290,7 +5301,7 @@
             setValue('keyword-briefing-api-password', '');
             keywordBriefingApiAccessStatus(session
                 ? '서버 저장 권한이 연결되었습니다. 이 브라우저 탭에서만 유지됩니다.'
-                : '서버 저장 권한 연결 실패: 관리자 로그인 정보를 다시 확인하거나 잠시 후 재시도해 주세요.', !session);
+                : '서버 저장 권한 연결 실패: ' + (lewordAdminSessionLastError || '관리자 로그인 정보를 확인하세요.'), !session);
             return session;
         }
 
@@ -5378,6 +5389,84 @@
                     image.src = url;
                 })
             ]).then(([sha256, dimensions]) => ({ name: file.name, sha256, width: dimensions.width, height: dimensions.height }));
+        }
+
+        function loadSheetJsBrowser() {
+            if (window.XLSX) return Promise.resolve(window.XLSX);
+            if (window.__leadersproSheetJsPromise) return window.__leadersproSheetJsPromise;
+            const loadPromise = new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = '/admin/vendor/xlsx/xlsx.full.min.js';
+                script.async = true;
+                script.onload = () => {
+                    if (window.XLSX) resolve(window.XLSX);
+                    else {
+                        script.remove();
+                        reject(new Error('엑셀 라이브러리 초기화 실패'));
+                    }
+                };
+                script.onerror = () => {
+                    script.remove();
+                    reject(new Error('엑셀 라이브러리를 내려받지 못했습니다. 네트워크를 확인하세요.'));
+                };
+                document.head.appendChild(script);
+            });
+            window.__leadersproSheetJsPromise = loadPromise.catch(error => {
+                window.__leadersproSheetJsPromise = null;
+                throw error;
+            });
+            return window.__leadersproSheetJsPromise;
+        }
+
+        async function readSpreadsheetMatrix(file) {
+            const name = String(file.name || '').toLowerCase();
+            // Plain text/CSV/TSV parse without loading SheetJS.
+            if (/\.(csv|txt|tsv)$/.test(name)) {
+                const text = await file.text();
+                return keywordBriefingTools().parseDelimitedText(text);
+            }
+            const XLSX = await loadSheetJsBrowser();
+            const buffer = await file.arrayBuffer();
+            // sheetRows caps parsing work early — briefing sheets are small and
+            // this bounds a decompression-amplified file to a safe row count.
+            const workbook = XLSX.read(buffer, { type: 'array', sheetRows: 300 });
+            const sheetName = workbook.SheetNames[0];
+            if (!sheetName) return [];
+            const sheet = workbook.Sheets[sheetName];
+            return XLSX.utils.sheet_to_json(sheet, { header: 1, blankrows: false, defval: '', raw: true });
+        }
+
+        let keywordBriefingImporting = false;
+        async function importKeywordBriefingSpreadsheet(file) {
+            if (!file) return;
+            if (keywordBriefingImporting) {
+                keywordBriefingStatus('이전 파일을 아직 분석 중입니다. 잠시 후 다시 시도하세요.', 'info');
+                return;
+            }
+            if (file.size > 12 * 1024 * 1024) {
+                keywordBriefingStatus('파일은 12MB 이하여야 합니다.', 'error');
+                return;
+            }
+            keywordBriefingImporting = true;
+            const button = document.getElementById('keyword-briefing-import');
+            if (button) button.disabled = true;
+            keywordBriefingStatus(file.name + ' 분석 중…', 'info');
+            try {
+                const matrix = await readSpreadsheetMatrix(file);
+                const parsed = keywordBriefingTools().parseKeywordSheetMatrix(matrix);
+                if (!parsed.length) {
+                    keywordBriefingStatus('키워드/검색량/문서수 열을 찾지 못했습니다. 열 이름을 확인하거나 CSV로 저장해 다시 시도하세요.', 'error');
+                    return;
+                }
+                setKeywordBriefingRows(parsed);
+                markKeywordBriefingDirty();
+                keywordBriefingStatus(parsed.length + '개 키워드를 표에 채웠습니다(기존 행 대체). 검수 후 저장하세요.', 'success');
+            } catch (error) {
+                keywordBriefingStatus(error.message || '엑셀 분석에 실패했습니다.', 'error');
+            } finally {
+                keywordBriefingImporting = false;
+                if (button) button.disabled = false;
+            }
         }
 
         function loadTesseractBrowser() {
@@ -5483,6 +5572,37 @@
             });
             document.getElementById('keyword-briefing-analyze')?.addEventListener('click', analyzeKeywordBriefingImages);
             document.getElementById('keyword-briefing-validate')?.addEventListener('click', validateKeywordBriefingRows);
+            const sheetInput = document.getElementById('keyword-briefing-sheet');
+            document.getElementById('keyword-briefing-import')?.addEventListener('click', () => sheetInput?.click());
+            sheetInput?.addEventListener('change', async () => {
+                const file = sheetInput.files && sheetInput.files[0];
+                if (file) await importKeywordBriefingSpreadsheet(file);
+                sheetInput.value = '';
+            });
+            const sheetDropZone = document.querySelector('.keyword-briefing-table-shell');
+            if (sheetDropZone) {
+                let dragDepth = 0;
+                sheetDropZone.addEventListener('dragenter', event => {
+                    event.preventDefault();
+                    dragDepth += 1;
+                    sheetDropZone.style.outline = '2px dashed #c9a84c';
+                });
+                sheetDropZone.addEventListener('dragover', event => {
+                    event.preventDefault();
+                    if (event.dataTransfer) event.dataTransfer.dropEffect = 'copy';
+                });
+                sheetDropZone.addEventListener('dragleave', () => {
+                    dragDepth = Math.max(0, dragDepth - 1);
+                    if (dragDepth === 0) sheetDropZone.style.outline = '';
+                });
+                sheetDropZone.addEventListener('drop', async event => {
+                    event.preventDefault();
+                    dragDepth = 0;
+                    sheetDropZone.style.outline = '';
+                    const file = event.dataTransfer?.files && event.dataTransfer.files[0];
+                    if (file) await importKeywordBriefingSpreadsheet(file);
+                });
+            }
             document.getElementById('keyword-briefing-add-row')?.addEventListener('click', addKeywordBriefingRow);
             document.getElementById('keyword-briefing-sort')?.addEventListener('click', () => {
                 const rows = (keywordBriefingEditorState.rows || []).slice().sort((left, right) => {

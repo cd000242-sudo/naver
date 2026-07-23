@@ -288,3 +288,194 @@ describe('admin keyword briefing OCR helpers', () => {
     expect(fs.existsSync(path.join(root, 'admin', 'vendor', 'tesseract', 'lang', 'eng.traineddata.gz'))).toBe(true);
   });
 });
+
+const sheetTools = tools as unknown as {
+  parseKeywordSheetMatrix(matrix: unknown[][]): Array<{
+    keyword: string;
+    searchVolume: number;
+    documentCount: number;
+    opportunity: number;
+  }>;
+  parseDelimitedText(text: string): string[][];
+};
+
+describe('admin keyword briefing spreadsheet import', () => {
+  it('imports a standard header + index-column layout (#, 키워드, 검색량, 문서수, 기회지수)', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['#', '키워드', '검색량', '블로그 문서수', '기회지수'],
+      [1, '메가 라이츄 졸업스킬', 420, 123, 3.39],
+      [2, '리트 시험 일정', '15,660', '2,641', 5.93],
+    ]);
+    expect(rows).toEqual([
+      { keyword: '메가 라이츄 졸업스킬', searchVolume: 420, documentCount: 123, opportunity: 3.39 },
+      { keyword: '리트 시험 일정', searchVolume: 15660, documentCount: 2641, opportunity: 5.93 },
+    ]);
+  });
+
+  it('maps by header name even when columns are reordered', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['블로그 문서수', '키워드', '검색량'],
+      [9431, '피그미다람쥐', 31140],
+    ]);
+    expect(rows).toEqual([
+      { keyword: '피그미다람쥐', searchVolume: 31140, documentCount: 9431, opportunity: expect.any(Number) },
+    ]);
+  });
+
+  it('accepts numbers as native cells and as comma-formatted strings', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['키워드', '검색량', '문서수'],
+      ['슬립노모어', '24,790', 7518],
+    ]);
+    expect(rows[0]).toEqual({ keyword: '슬립노모어', searchVolume: 24790, documentCount: 7518, opportunity: 3.3 });
+  });
+
+  it('infers columns positionally when there is no header row', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['메가 라이츄 졸업스킬', 420, 123],
+      ['리트 시험 일정', 15660, 2641],
+    ]);
+    expect(rows).toEqual([
+      { keyword: '메가 라이츄 졸업스킬', searchVolume: 420, documentCount: 123, opportunity: 3.39 },
+      { keyword: '리트 시험 일정', searchVolume: 15660, documentCount: 2641, opportunity: 5.93 },
+    ]);
+  });
+
+  it('drops blank rows and rows whose numbers are missing or malformed', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['키워드', '검색량', '문서수'],
+      ['', '', ''],
+      ['정상 키워드', 1000, 10],
+      ['문서수 없음', 500, ''],
+      ['단위 오염', '2026년', 12],
+    ]);
+    expect(rows).toEqual([
+      { keyword: '정상 키워드', searchVolume: 1000, documentCount: 10, opportunity: 90.91 },
+    ]);
+  });
+
+  it('parses CSV text (quoted fields, embedded commas) into a matrix', () => {
+    const matrix = sheetTools.parseDelimitedText(
+      '키워드,검색량,문서수\n"가방, 신상",10410,12\n리트 시험,15660,2641',
+    );
+    expect(matrix).toEqual([
+      ['키워드', '검색량', '문서수'],
+      ['가방, 신상', '10410', '12'],
+      ['리트 시험', '15660', '2641'],
+    ]);
+    const rows = sheetTools.parseKeywordSheetMatrix(matrix);
+    expect(rows).toEqual([
+      { keyword: '가방, 신상', searchVolume: 10410, documentCount: 12, opportunity: 800.77 },
+      { keyword: '리트 시험', searchVolume: 15660, documentCount: 2641, opportunity: 5.93 },
+    ]);
+  });
+
+  it('returns nothing when no keyword-like column exists (never wipes the table with garbage)', () => {
+    expect(sheetTools.parseKeywordSheetMatrix([])).toEqual([]);
+  });
+
+  it('tolerates units, caps, and 만/천 multipliers on numeric cells', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['키워드', '검색량', '문서수'],
+      ['캠핑', '12,345회', '3,456건'],
+      ['백패킹', '10,000+', '3,400'],
+      ['차박', '1.2만', '900'],
+      ['글램핑', '3천', '120'],
+    ]);
+    expect(rows).toEqual([
+      { keyword: '캠핑', searchVolume: 12345, documentCount: 3456, opportunity: expect.any(Number) },
+      { keyword: '백패킹', searchVolume: 10000, documentCount: 3400, opportunity: expect.any(Number) },
+      { keyword: '차박', searchVolume: 12000, documentCount: 900, opportunity: expect.any(Number) },
+      { keyword: '글램핑', searchVolume: 3000, documentCount: 120, opportunity: expect.any(Number) },
+    ]);
+  });
+
+  it('rounds decimal numeric cells instead of silently dropping the row', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['키워드', '검색량', '문서수'],
+      ['캠핑', '12,345.6', '3,400'],
+    ]);
+    expect(rows[0]).toMatchObject({ keyword: '캠핑', searchVolume: 12346, documentCount: 3400 });
+  });
+
+  it('rejects a non-numeric core (e.g. a year) rather than reading its leading digits', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['키워드', '검색량', '문서수'],
+      ['정상', 1000, 10],
+      ['오염', '2026년', 12],
+    ]);
+    expect(rows).toEqual([
+      { keyword: '정상', searchVolume: 1000, documentCount: 10, opportunity: 90.91 },
+    ]);
+  });
+
+  it('skips a totals/footer row (합계·총계·평균) instead of importing it as a keyword', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['키워드', '검색량', '문서수'],
+      ['캠핑', 12000, 3400],
+      ['합계', 24000, 6800],
+      ['평균', 12000, 3400],
+    ]);
+    expect(rows).toEqual([
+      { keyword: '캠핑', searchVolume: 12000, documentCount: 3400, opportunity: expect.any(Number) },
+    ]);
+  });
+
+  it('sums split PC / 모바일 검색량 columns into one search volume', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['키워드', 'PC검색량', '모바일검색량', '문서수'],
+      ['캠핑', 5000, 7000, 3400],
+    ]);
+    expect(rows[0]).toMatchObject({ keyword: '캠핑', searchVolume: 12000, documentCount: 3400 });
+  });
+
+  it('prefers the more-unique text column as keyword over a repeating category column', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['여행', '제주도 맛집', 5000, 1200],
+      ['여행', '부산 여행', 3000, 900],
+      ['패션', '가을 코디', 4000, 1100],
+    ]);
+    expect(rows.map((row) => row.keyword)).toEqual(['제주도 맛집', '부산 여행', '가을 코디']);
+  });
+
+  it('imports a headerless sheet whose keyword column is numeric (years) via positional fallback', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['2020', 5000, 1200],
+      ['2021', 3000, 900],
+    ]);
+    expect(rows).toEqual([
+      { keyword: '2020', searchVolume: 5000, documentCount: 1200, opportunity: expect.any(Number) },
+      { keyword: '2021', searchVolume: 3000, documentCount: 900, opportunity: expect.any(Number) },
+    ]);
+  });
+
+  it('sniffs semicolon and pipe delimiters, and keeps a comma inside a tab-delimited keyword', () => {
+    expect(sheetTools.parseKeywordSheetMatrix(
+      sheetTools.parseDelimitedText('키워드;검색량;문서수\n캠핑;12000;3400'),
+    )).toEqual([
+      { keyword: '캠핑', searchVolume: 12000, documentCount: 3400, opportunity: expect.any(Number) },
+    ]);
+    expect(sheetTools.parseKeywordSheetMatrix(
+      sheetTools.parseDelimitedText('키워드\t검색량\t문서수\n가, 나, 다 정리\t5000\t1200'),
+    )).toEqual([
+      { keyword: '가, 나, 다 정리', searchVolume: 5000, documentCount: 1200, opportunity: expect.any(Number) },
+    ]);
+  });
+
+  it('strips a stray angle bracket from a keyword (defense-in-depth against stored XSS)', () => {
+    const rows = sheetTools.parseKeywordSheetMatrix([
+      ['키워드', '검색량', '문서수'],
+      ['buy<b now', 1000, 10],
+    ]);
+    expect(rows[0].keyword).toBe('buy b now');
+  });
+
+  it('self-hosts the SheetJS vendor bundle under /admin/vendor/xlsx', () => {
+    const root = path.resolve(__dirname, '..', '..');
+    const html = fs.readFileSync(path.join(root, 'admin', 'index.html'), 'utf8');
+    expect(html).toContain("script.src = '/admin/vendor/xlsx/xlsx.full.min.js'");
+    expect(html).not.toContain('cdn.sheetjs.com');
+    expect(html).not.toContain('unpkg.com/xlsx');
+    expect(fs.existsSync(path.join(root, 'admin', 'vendor', 'xlsx', 'xlsx.full.min.js'))).toBe(true);
+  });
+});
