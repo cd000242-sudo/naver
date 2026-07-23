@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import MusicPlayer from './MusicPlayer';
+import MusicPlayer, { isMusicSuppressed } from './MusicPlayer';
 import SummerEffect from './SummerEffect';
 import FloatStack from './FloatStack';
 import ScrollToTop from './ScrollToTop';
@@ -16,6 +16,8 @@ function Layout() {
     const location = useLocation();
     const pathname = location.pathname.replace(/\/$/, '') || '/';
     const isLewordConsole = pathname === '/leword' || pathname === '/leword.html';
+    // 관리자 미리보기 iframe 등 무음 컨텍스트에서는 음악 플레이어를 아예 렌더하지 않는다.
+    const musicOff = isLewordConsole || isMusicSuppressed();
 
     return (
         <>
@@ -30,7 +32,7 @@ function Layout() {
             </main>
             {!isLewordConsole && <Footer />}
             {!isLewordConsole && <SummerEffect />}
-            {!isLewordConsole && <MusicPlayer />}
+            {!musicOff && <MusicPlayer />}
             {!isLewordConsole && <FloatStack />}
         </>
     );

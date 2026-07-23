@@ -53,6 +53,18 @@ function getResumeTime(defaultStart: number): number {
     return defaultStart;
 }
 
+/** 관리자 미리보기 iframe(src="/?nomusic=1")처럼 음악을 재생하면 안 되는 임베드 컨텍스트. */
+export function isMusicSuppressed(): boolean {
+    try {
+        if (new URLSearchParams(window.location.search).has('nomusic')) return true;
+        // 어떤 형태로든 iframe 안에 임베드됐으면(미리보기) 자동재생하지 않는다.
+        if (window.self !== window.top) return true;
+    } catch {
+        return true; // cross-origin 접근 예외 = iframe 안 → 무음
+    }
+    return false;
+}
+
 function MusicPlayer() {
     const hostRef = useRef<HTMLDivElement | null>(null);
     const audioRef = useRef<HTMLAudioElement | null>(null);
