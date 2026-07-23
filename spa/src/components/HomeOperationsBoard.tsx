@@ -14,12 +14,16 @@ import { selectKeywordChartRows, type HomeKeywordRow } from '../lib/homeKeywordB
 const numberFormatter = new Intl.NumberFormat('ko-KR');
 const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 });
 
-type HomeOperationsTab = 'notice' | 'deputy' | 'realtime' | 'income';
+type HomeOperationsTab = 'notice' | 'realtime' | 'income';
 
-const HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['notice', 'deputy', 'realtime', 'income'];
+// 부방장 선정 황금키워드는 홈 안의 탭이 아니라 전용 페이지(BRIEFING_PAGE_PATH)로 뺐다.
+// 별도 주소여야 페이지 전환이 생기고, 그래야 구글 자체 전면광고(Vignette)가 뜰 자리가 생긴다.
+// 광고 시청을 열람 조건으로 걸지는 않는다 — AdSense 는 보상형 유도를 금지한다.
+const BRIEFING_PAGE_PATH = '/briefing';
+
+const HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['notice', 'realtime', 'income'];
 const HOME_OPS_TAB_META: Record<HomeOperationsTab, { label: string; desc: string }> = {
     notice: { label: '공지사항', desc: '최신 공지를 접고 펼쳐 확인' },
-    deputy: { label: '부방장 선정 황금키워드', desc: '매일 검토해 올린 고정 키워드 전체 보기' },
     realtime: { label: '실시간 검색어', desc: '네이버·뉴스 등 현재 흐름을 참고용으로 확인' },
     income: { label: '수익 인증', desc: '승인된 실제 인증 자료만 표시' },
 };
@@ -35,6 +39,8 @@ type HomeManagedProof = {
 interface HomeOperationsBoardProps {
     realtimePanel?: ReactNode;
     managedProofs?: HomeManagedProof[];
+    /** true 면 부방장 브리핑 본문만 렌더한다(전용 페이지용). 탭·헤더·다른 패널은 그리지 않는다. */
+    briefingOnly?: boolean;
 }
 
 function formatDate(value: string): string {
@@ -383,12 +389,12 @@ function KeywordMobileCards({ rows }: { rows: HomeKeywordRow[] }) {
     );
 }
 
-function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperationsBoardProps) {
+function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly = false }: HomeOperationsBoardProps) {
     const [notices, setNotices] = useState<HomeNotice[]>([]);
     const [openNoticeId, setOpenNoticeId] = useState<string | null>(null);
     const [incomeResult, setIncomeResult] = useState<CommunityIncomeProofResult | null>(null);
     const [briefingResult, setBriefingResult] = useState<HomeKeywordBriefingResult | null>(null);
-    const [activeTab, setActiveTab] = useState<HomeOperationsTab>('deputy');
+    const [activeTab, setActiveTab] = useState<HomeOperationsTab>('notice');
     const [noticeLoading, setNoticeLoading] = useState(true);
     const [incomeLoading, setIncomeLoading] = useState(true);
     const [briefingLoading, setBriefingLoading] = useState(true);
@@ -976,14 +982,24 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                 }
             `}</style>
 
-            <header className="home-ops-header">
-                <span className="home-ops-kicker">HOME OPERATIONS</span>
-                <h2 id="home-ops-title">부방장 선정 황금키워드를 먼저, 나머지는 왼쪽에서 골라 보세요</h2>
-                <p>왼쪽 메뉴에서 공지사항·부방장 선정 황금키워드·실시간 검색어·수익 인증을 선택할 수 있습니다. 기본으로 매일 검토해 올린 부방장 선정 황금키워드가 먼저 열립니다.</p>
-            </header>
+            {!briefingOnly && (
+                <header className="home-ops-header">
+                    <span className="home-ops-kicker">HOME OPERATIONS</span>
+                    <h2 id="home-ops-title">부방장 선정 황금키워드는 전용 페이지에서, 나머지는 왼쪽에서 골라 보세요</h2>
+                    <p>매일 검토해 올린 부방장 선정 황금키워드는 전체 목록을 편히 보시라고 전용 페이지로 옮겼습니다. 공지사항·실시간 검색어·수익 인증은 왼쪽 메뉴에서 바로 선택할 수 있습니다.</p>
+                </header>
+            )}
 
             <div className="home-ops-layout">
+                {!briefingOnly && (
                 <div ref={sidenavRef} className="home-ops-sidenav" role="tablist" aria-label="홈 보기 선택" aria-orientation="vertical">
+                    {/* react-router Link 가 아니라 일반 <a> 다. 클라이언트 라우팅은 AdSense 가
+                        새 페이지로 인식하지 않아 전면광고가 뜨지 않는다. 실제 페이지 로드가
+                        일어나야 광고 자리가 생긴다(정적 /briefing 페이지를 빌드에서 생성해 둔다). */}
+                    <a className="home-ops-tab home-ops-tab-link" href={BRIEFING_PAGE_PATH}>
+                        <strong>부방장 선정 황금키워드</strong>
+                        <small>매일 검토해 올린 고정 키워드 전체 보기 →</small>
+                    </a>
                     {HOME_OPS_TAB_ORDER.map((tab) => (
                         <button
                             key={tab}
@@ -1003,6 +1019,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                         </button>
                     ))}
                 </div>
+                )}
 
                 <div className="home-ops-content">
                     <div
@@ -1010,7 +1027,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                         className="home-ops-panel home-ops-notice-panel"
                         role="tabpanel"
                         aria-labelledby="home-ops-tab-notice"
-                        hidden={activeTab !== 'notice'}
+                        hidden={briefingOnly || activeTab !== 'notice'}
                     >
                         <div className="home-ops-panel-head">
                             <div>
@@ -1038,9 +1055,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                     <div
                         id="home-ops-panel-deputy"
                         className="home-ops-panel"
-                        role="tabpanel"
-                        aria-labelledby="home-ops-tab-deputy"
-                        hidden={activeTab !== 'deputy'}
+                        hidden={!briefingOnly}
                     >
                         {briefing ? (
                             <>
@@ -1085,7 +1100,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                         className="home-ops-panel home-ops-realtime-panel"
                         role="tabpanel"
                         aria-labelledby="home-ops-tab-realtime"
-                        hidden={activeTab !== 'realtime'}
+                        hidden={briefingOnly || activeTab !== 'realtime'}
                     >
                         {activeTab === 'realtime' ? realtimePanel : null}
                     </div>
@@ -1095,7 +1110,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [] }: HomeOperatio
                         className="home-ops-panel home-ops-income-panel"
                         role="tabpanel"
                         aria-labelledby="home-ops-tab-income"
-                        hidden={activeTab !== 'income'}
+                        hidden={briefingOnly || activeTab !== 'income'}
                     >
                         <div className="home-ops-panel-head">
                             <div>

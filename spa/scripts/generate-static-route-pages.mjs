@@ -31,6 +31,11 @@ const routes = [
     description: '서버 기반 실시간 키워드 분석과 황금 키워드 보드를 제공하는 LEWORD Pro Web입니다.',
   },
   {
+    path: 'briefing',
+    title: '부방장 선정 황금키워드 | Leaders Pro',
+    description: '매일 검토해 올린 부방장 선정 황금키워드 전체 목록입니다. 검색량, 문서수, 기회지수를 함께 확인하세요.',
+  },
+  {
     path: 'orbit',
     title: 'Leaders Orbit | 외부유입 자동화',
     description: '블로그스팟, 워드프레스, 티스토리로 외부유입 보조 글을 발행하는 자동화 도구입니다.',
