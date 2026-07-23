@@ -478,4 +478,15 @@ describe('admin keyword briefing spreadsheet import', () => {
     expect(html).not.toContain('unpkg.com/xlsx');
     expect(fs.existsSync(path.join(root, 'admin', 'vendor', 'xlsx', 'xlsx.full.min.js'))).toBe(true);
   });
+
+  it('collapses the manual save-permission inputs while a session is connected', () => {
+    const root = path.resolve(__dirname, '..', '..');
+    const html = fs.readFileSync(path.join(root, 'admin', 'index.html'), 'utf8');
+    // The connect inputs have stable ids and visibility is driven from the
+    // single session choke point so a connected login hides them.
+    expect(html).toContain('id="keyword-briefing-api-inputs"');
+    expect(html).toContain('id="home-ops-api-inputs"');
+    expect(html).toContain('function setApiConnectionUiConnected(connected)');
+    expect(html).toContain('setApiConnectionUiConnected(!!session)');
+  });
 });

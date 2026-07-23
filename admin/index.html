@@ -1456,7 +1456,7 @@
                             </div>
                             <div class="editor-field full" style="padding:14px;border:1px solid rgba(68,215,182,.22);border-radius:12px;background:rgba(68,215,182,.045);">
                                 <label>LEWORD API 서버 저장 권한 · 로그인 시 자동 연결</label>
-                                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;align-items:center;">
+                                <div id="keyword-briefing-api-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;align-items:center;">
                                     <input id="keyword-briefing-api-id" type="text" placeholder="LEWORD API 서버 관리자 ID" autocomplete="off">
                                     <input id="keyword-briefing-api-password" type="password" placeholder="LEWORD API 서버 관리자 비밀번호" autocomplete="new-password">
                                     <button class="btn" type="button" id="keyword-briefing-api-connect">저장 권한 연결</button>
@@ -1974,7 +1974,7 @@
                         </div>
                         <span id="home-notice-revision" style="padding:5px 9px;border:1px solid rgba(68,215,182,.35);border-radius:999px;color:#44d7b6;font-size:.78rem;font-weight:800;">notice revision 0</span>
                     </div>
-                    <div class="home-ops-admin-grid">
+                    <div class="home-ops-admin-grid" id="home-ops-api-inputs">
                         <input id="home-ops-api-id" type="text" placeholder="LEWORD API 서버 관리자 ID" autocomplete="off" style="padding:10px;border-radius:8px;">
                         <input id="home-ops-api-password" type="password" placeholder="LEWORD API 서버 관리자 비밀번호" autocomplete="new-password" style="padding:10px;border-radius:8px;">
                         <button class="btn" type="button" onclick="connectHomeOpsApi()">저장 권한 연결</button>
@@ -2133,8 +2133,19 @@
             return null;
         }
 
+        // Collapse the manual "저장 권한 연결" inputs once the session is
+        // connected — the panel login already connects it automatically, so the
+        // inputs only need to appear when a (re)connect is actually required.
+        function setApiConnectionUiConnected(connected) {
+            ['keyword-briefing-api-inputs', 'home-ops-api-inputs'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = connected ? 'none' : '';
+            });
+        }
+
         function saveLewordAdminSession(session) {
             lewordApiAdminSession = session || null;
+            setApiConnectionUiConnected(!!session);
             if (!session) {
                 sessionStorage.removeItem(LEWORD_ADMIN_SESSION_KEY);
                 return;
@@ -2438,6 +2449,7 @@
                 if (homeOpsApiIdInput) homeOpsApiIdInput.value = existingServerSession.userId || '';
                 keywordBriefingApiAccessStatus('서버 저장 권한 연결됨', false);
                 homeOpsApiStatus('서버 저장 권한 연결됨', false);
+                setApiConnectionUiConnected(true);
             }
             setTimeout(() => switchTab('notices'), 100);
         }
