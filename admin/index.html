@@ -1400,7 +1400,10 @@
                 </div>
 
                 <div id="editor-sub-home" class="editor-subpanel active" role="tabpanel" aria-labelledby="editor-tab-home" aria-hidden="false">
-                    <div class="editor-card">
+                    <!-- 저장원(edit-hero-*)은 그대로 두되 입력 UI 는 숨긴다.
+                         Hero 편집은 위쪽 '홈 화면 영역별 바로 수정'(cms-hero-*) 하나로 통일한다.
+                         입력칸이 두 벌이면 값이 엇갈려 미리보기가 뒤죽박죽 된다. -->
+                    <div class="editor-card" hidden aria-hidden="true" style="display:none;">
                         <h4>홈 첫 화면</h4>
                         <p class="editor-help">메인 페이지 Hero 영역과 공지 문구입니다. 줄바꿈은 그대로 사이트에 반영됩니다.</p>
                         <div class="editor-field-grid">
@@ -4433,9 +4436,12 @@
             previewPane.addEventListener('click', event => {
                 const button = event.target.closest('[data-preview-mode]');
                 if (button) {
-                    cmsPreviewMode = button.getAttribute('data-preview-mode') || 'home';
-                    updateCmsPreviewToolbar();
-                    refreshEditorPreview();
+                    // 미리보기 탭을 누르면 왼쪽 편집 서브탭도 같이 전환한다.
+                    // 둘이 따로 놀면 "왼쪽은 홈을 편집 중인데 오른쪽은 제품정보를 그려서
+                    // 수정이 반영 안 되는" 어긋남이 생긴다(원인: cmsPreviewMode 공유).
+                    const mode = button.getAttribute('data-preview-mode') || 'home';
+                    if (typeof switchEditorSubtab === 'function') switchEditorSubtab(mode);
+                    else { cmsPreviewMode = mode; updateCmsPreviewToolbar(); refreshEditorPreview(); }
                     return;
                 }
                 const area = event.target.closest('[data-cms-preview-area]');
@@ -4477,8 +4483,8 @@
                                     <input id="cms-hero-benefit" type="text" data-cms-home-field="hero-benefit">
                                 </div>
                                 <div class="editor-field">
-                                    <label>공지사항</label>
-                                    <input id="cms-hero-notice" type="text" data-cms-home-field="hero-notice">
+                                    <label>Hero 보조 문구 (현재 홈 미사용)</label>
+                                    <input id="cms-hero-notice" type="text" data-cms-home-field="hero-notice" placeholder="실제 홈 공지는 사이드바 '홈 운영'에서 관리하세요.">
                                 </div>
                             </div>
                         </section>
@@ -5990,7 +5996,9 @@
         }
 
         function collectEditorPatch() {
-            syncCmsHomeRegionEditorToSource();
+            // force:true — 영역 편집기(cms-hero-*) 값을 무조건 저장원(edit-hero-*)에 복사한다.
+            // force 없이 두면 영역 편집기에 포커스가 없을 때 동기화가 스킵돼 stale 값이 저장된다.
+            syncCmsHomeRegionEditorToSource({ force: true });
             const patch = {
                 hero: {
                     title: getValue('edit-hero-title'),
