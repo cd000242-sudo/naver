@@ -21,10 +21,10 @@ type HomeOperationsTab = 'notice' | 'realtime' | 'income';
 // 광고 시청을 열람 조건으로 걸지는 않는다 — AdSense 는 보상형 유도를 금지한다.
 const BRIEFING_PAGE_PATH = '/briefing';
 
-const HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['notice', 'realtime', 'income'];
-const HOME_OPS_TAB_META: Record<HomeOperationsTab, { label: string; desc: string }> = {
+const HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['realtime', 'notice', 'income'];
+const HOME_OPS_TAB_META: Record<HomeOperationsTab, { label: string; desc: string; accent?: string }> = {
+    realtime: { label: '실시간 검색어', desc: '네이버·뉴스 등 현재 흐름을 참고용으로 확인', accent: '#44d7b6' },
     notice: { label: '공지사항', desc: '최신 공지를 접고 펼쳐 확인' },
-    realtime: { label: '실시간 검색어', desc: '네이버·뉴스 등 현재 흐름을 참고용으로 확인' },
     income: { label: '수익 인증', desc: '승인된 실제 인증 자료만 표시' },
 };
 
@@ -394,7 +394,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
     const [openNoticeId, setOpenNoticeId] = useState<string | null>(null);
     const [incomeResult, setIncomeResult] = useState<CommunityIncomeProofResult | null>(null);
     const [briefingResult, setBriefingResult] = useState<HomeKeywordBriefingResult | null>(null);
-    const [activeTab, setActiveTab] = useState<HomeOperationsTab>('notice');
+    const [activeTab, setActiveTab] = useState<HomeOperationsTab>('realtime');
     const [noticeLoading, setNoticeLoading] = useState(true);
     const [incomeLoading, setIncomeLoading] = useState(true);
     const [briefingLoading, setBriefingLoading] = useState(true);
@@ -473,6 +473,29 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     overflow-wrap: break-word;
                 }
                 .home-ops-header { margin-bottom: 20px; }
+                /* 처음 온 사람이 이 사이트가 뭘 하는 곳인지 3초 안에 알 수 있게 하는 소개 문단.
+                   홈 배경이 밝은 사진이라 반투명 판을 깔지 않으면 본문이 배경에 묻힌다. */
+                .home-ops-intro-wrap {
+                    max-width: 760px;
+                    margin-top: 12px;
+                    padding: 16px 18px;
+                    border-radius: 14px;
+                    border: 1px solid rgba(255, 255, 255, .12);
+                    background: rgba(8, 12, 20, .58);
+                    backdrop-filter: blur(6px);
+                }
+                .home-ops-intro {
+                    margin: 0;
+                    font-size: 15px;
+                    line-height: 1.7;
+                    color: rgba(255, 255, 255, .88);
+                }
+                .home-ops-intro + .home-ops-intro { margin-top: 10px; }
+                .home-ops-intro strong { color: #fff; font-weight: 800; }
+                @media (max-width: 720px) {
+                    .home-ops-intro-wrap { padding: 13px 14px; }
+                    .home-ops-intro { font-size: 14px; }
+                }
                 .home-ops-kicker {
                     display: inline-flex;
                     align-items: center;
@@ -642,6 +665,31 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                 /* 전용 페이지에서는 사이드탭을 렌더하지 않는다. 이때 2열 그리드를 그대로 두면
                    본문이 사이드탭 자리(250px)로 밀려 들어가 글자가 세로로 쪼개진다. */
                 .home-ops-layout.briefing-only { grid-template-columns: minmax(0, 1fr); }
+                /* 부방장 선정 황금키워드는 이 사이트의 대표 콘텐츠라 다른 항목과 확실히 구분한다. */
+                .home-ops-tab-featured {
+                    position: relative;
+                    text-decoration: none;
+                    border-color: rgba(244, 201, 93, .55);
+                    background: linear-gradient(135deg, rgba(244, 201, 93, .16), rgba(244, 201, 93, .05));
+                    box-shadow: 0 6px 20px rgba(244, 201, 93, .12);
+                }
+                .home-ops-tab-featured:hover {
+                    border-color: rgba(244, 201, 93, .9);
+                    box-shadow: 0 10px 26px rgba(244, 201, 93, .22);
+                }
+                .home-ops-tab-featured strong { color: #f4c95d; }
+                .home-ops-featured-flag {
+                    display: inline-block;
+                    align-self: flex-start;
+                    margin-bottom: 6px;
+                    padding: 2px 8px;
+                    border-radius: 999px;
+                    font-size: 10px;
+                    font-weight: 900;
+                    letter-spacing: .04em;
+                    color: #1b1405;
+                    background: #f4c95d;
+                }
                 .home-ops-sidenav {
                     position: sticky;
                     top: 80px;
@@ -987,9 +1035,19 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
 
             {!briefingOnly && (
                 <header className="home-ops-header">
-                    <span className="home-ops-kicker">HOME OPERATIONS</span>
-                    <h2 id="home-ops-title">부방장 선정 황금키워드는 전용 페이지에서, 나머지는 왼쪽에서 골라 보세요</h2>
-                    <p>매일 검토해 올린 부방장 선정 황금키워드는 전체 목록을 편히 보시라고 전용 페이지로 옮겼습니다. 공지사항·실시간 검색어·수익 인증은 왼쪽 메뉴에서 바로 선택할 수 있습니다.</p>
+                    <span className="home-ops-kicker">WELCOME</span>
+                    <h2 id="home-ops-title">블로그로 수익을 내는 데 필요한 것들을 한곳에 모았습니다</h2>
+                    <div className="home-ops-intro-wrap">
+                        <p className="home-ops-intro">
+                            리더스프로는 <strong>키워드 발굴부터 글쓰기·발행까지</strong> 이어지는 블로그 운영 도구를 만듭니다.
+                            어떤 키워드를 써야 할지 찾아주는 <strong>LEWORD</strong>, 키워드만 넣으면 글·이미지·발행까지 처리하는
+                            <strong> Better Life Naver</strong>, 외부 유입을 보조하는 <strong>Leaders Orbit</strong>이 있습니다.
+                        </p>
+                        <p className="home-ops-intro">
+                            아래는 <strong>무료로 열려 있는 자료</strong>입니다. 매일 검토해 올리는 부방장 선정 황금키워드와
+                            실시간 검색어 흐름은 회원가입 없이 그냥 보셔도 됩니다. 둘러보시고 필요하시면 무료 체험부터 해보세요.
+                        </p>
+                    </div>
                 </header>
             )}
 
@@ -999,7 +1057,8 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     {/* react-router Link 가 아니라 일반 <a> 다. 클라이언트 라우팅은 AdSense 가
                         새 페이지로 인식하지 않아 전면광고가 뜨지 않는다. 실제 페이지 로드가
                         일어나야 광고 자리가 생긴다(정적 /briefing 페이지를 빌드에서 생성해 둔다). */}
-                    <a className="home-ops-tab home-ops-tab-link" href={BRIEFING_PAGE_PATH}>
+                    <a className="home-ops-tab home-ops-tab-featured" href={BRIEFING_PAGE_PATH}>
+                        <span className="home-ops-featured-flag">매일 갱신</span>
                         <strong>부방장 선정 황금키워드</strong>
                         <small>매일 검토해 올린 고정 키워드 전체 보기 →</small>
                     </a>
@@ -1017,7 +1076,9 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                             onClick={() => setActiveTab(tab)}
                             onKeyDown={(event) => handleTabKeyDown(event, tab)}
                         >
-                            <strong>{HOME_OPS_TAB_META[tab].label}</strong>
+                            <strong style={HOME_OPS_TAB_META[tab].accent ? { color: HOME_OPS_TAB_META[tab].accent } : undefined}>
+                                {HOME_OPS_TAB_META[tab].label}
+                            </strong>
                             <small>{HOME_OPS_TAB_META[tab].desc}</small>
                         </button>
                     ))}
