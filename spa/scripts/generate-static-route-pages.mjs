@@ -109,6 +109,66 @@ function replaceRequired(html, pattern, replacement, label) {
   return next;
 }
 
+const numberFormat = new Intl.NumberFormat('ko-KR');
+
+/**
+ * 검색 크롤러용 본문 프리렌더.
+ *
+ * SPA 는 내용을 브라우저에서 불러오기 때문에 크롤러에게는 빈 껍데기로 보인다
+ * (측정값: /briefing 본문 텍스트 112자). 그래서 빌드 시점에 실제 키워드 표를
+ * #root 안에 미리 그려 둔다. React 가 마운트하면 이 내용을 그대로 교체하므로
+ * 사용자에게는 항상 최신 데이터가 보이고, 크롤러에게만 본문이 남는다.
+ *
+ * 주의: 빌드 시점 시드 스냅샷이라 관리자가 새로 발행하면 정적 본문은 다음
+ * 빌드까지 이전 내용이다. 사용자 화면은 API 최신본이라 영향 없다.
+ */
+function briefingPrerender() {
+  const seedPath = path.resolve(__dirname, '..', 'public', 'data', 'home-keyword-briefing-seed.json');
+  if (!fs.existsSync(seedPath)) return '';
+  let seed;
+  try {
+    seed = JSON.parse(fs.readFileSync(seedPath, 'utf8'));
+  } catch (error) {
+    console.warn(`[static-routes] briefing seed parse failed: ${error.message}`);
+    return '';
+  }
+  const rows = Array.isArray(seed?.rows) ? seed.rows : [];
+  if (!rows.length) return '';
+
+  const items = rows
+    .filter((row) => row && typeof row.keyword === 'string' && row.keyword.trim())
+    .map((row) => {
+      const keyword = escapeText(row.keyword.trim());
+      const volume = Number.isFinite(Number(row.searchVolume)) ? numberFormat.format(Number(row.searchVolume)) : '-';
+      const documents = Number.isFinite(Number(row.documentCount)) ? numberFormat.format(Number(row.documentCount)) : '-';
+      const opportunity = Number.isFinite(Number(row.opportunity)) ? Number(row.opportunity).toFixed(1) : '-';
+      return `<tr><th scope="row">${keyword}</th><td>${volume}</td><td>${documents}</td><td>${opportunity}</td></tr>`;
+    });
+  if (!items.length) return '';
+
+  const title = escapeText(seed.title || '부방장 선정 황금키워드');
+  const author = escapeText(seed.author || '');
+  const published = escapeText(seed.publishedAt || '');
+  const byline = [author && `${author} 제공`, published].filter(Boolean).join(' · ');
+
+  return [
+    '<div id="briefing-prerender">',
+    `<h1>${title}</h1>`,
+    byline ? `<p>${byline}</p>` : '',
+    `<p>매일 검토해 올린 부방장 선정 황금키워드 ${items.length}개입니다. 실시간 값이 아니라 검토 시점의 고정 스냅샷이며, 기회지수는 검색량 ÷ (문서수 + 1) 로 계산합니다. 문서수가 검색량에 비해 적을수록 아직 글이 적어 노려볼 만한 키워드입니다.</p>`,
+    '<table><caption>키워드별 검색량·문서수·기회지수</caption><thead><tr>',
+    '<th scope="col">키워드</th><th scope="col">검색량</th><th scope="col">문서수</th><th scope="col">기회지수</th>',
+    '</tr></thead><tbody>',
+    items.join(''),
+    '</tbody></table>',
+    '</div>',
+  ].filter(Boolean).join('');
+}
+
+const PRERENDER_BY_PATH = {
+  briefing: briefingPrerender,
+};
+
 function routeHtml(template, route) {
   const url = `${siteOrigin}/${route.path}`;
   const title = escapeText(route.title);
@@ -124,6 +184,17 @@ function routeHtml(template, route) {
   html = replaceRequired(html, /<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${url}" />`, 'og:url');
   html = replaceRequired(html, /<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${attrTitle}" />`, 'twitter:title');
   html = replaceRequired(html, /<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${description}" />`, 'twitter:description');
+
+  const prerender = PRERENDER_BY_PATH[route.path];
+  if (prerender) {
+    const body = prerender();
+    if (body) {
+      // #root 안에 넣는다 — React 마운트 시 이 내용이 교체되므로 중복 표시가 없다.
+      html = replaceRequired(html, /<div id="root"><\/div>/, `<div id="root">${body}</div>`, `${route.path} prerender`);
+    } else {
+      console.warn(`[static-routes] ${route.path}: prerender produced no content`);
+    }
+  }
 
   return html;
 }
