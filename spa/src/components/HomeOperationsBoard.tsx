@@ -10,6 +10,7 @@ import {
     type HomeNotice,
 } from '../lib/siteOps';
 import { selectKeywordChartRows, type HomeKeywordRow } from '../lib/homeKeywordBriefing';
+import { keywordSlug } from '../lib/keywordDetailContent.mjs';
 
 const numberFormatter = new Intl.NumberFormat('ko-KR');
 const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 });
@@ -330,9 +331,12 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
                         <tr key={`${index}-${row.keyword}-${row.documentCount}`}>
                             <td>{index + 1}</td>
                             <th scope="row">
-                                <KeywordSearchLink row={row} provider="naver" className="home-ops-keyword-link">
+                                {/* 키워드는 상세 페이지로 보낸다 — 검색 바로가기는 오른쪽 '바로가기' 칸에 이미 있다.
+                                    react-router Link 가 아니라 <a> 인 이유는 실제 페이지 로드가 있어야
+                                    구글 전면광고(Vignette)가 뜰 자리가 생기기 때문이다. */}
+                                <a className="home-ops-keyword-link" href={`/keyword/${encodeURIComponent(keywordSlug(row.keyword))}`}>
                                     {row.keyword}
-                                </KeywordSearchLink>
+                                </a>
                                 <CopyKeywordButton text={row.keyword} />
                             </th>
                             <td>{numberFormatter.format(row.searchVolume)}</td>

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildKeywordDetail, keywordSlug } from '../src/lib/keywordDetailContent.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
@@ -138,11 +139,15 @@ function briefingPrerender() {
   const items = rows
     .filter((row) => row && typeof row.keyword === 'string' && row.keyword.trim())
     .map((row) => {
-      const keyword = escapeText(row.keyword.trim());
+      const raw = row.keyword.trim();
+      const keyword = escapeText(raw);
+      const slug = keywordSlug(raw);
       const volume = Number.isFinite(Number(row.searchVolume)) ? numberFormat.format(Number(row.searchVolume)) : '-';
       const documents = Number.isFinite(Number(row.documentCount)) ? numberFormat.format(Number(row.documentCount)) : '-';
       const opportunity = Number.isFinite(Number(row.opportunity)) ? Number(row.opportunity).toFixed(1) : '-';
-      return `<tr><th scope="row">${keyword}</th><td>${volume}</td><td>${documents}</td><td>${opportunity}</td></tr>`;
+      // 상세 페이지로 링크한다 — 내부 링크가 없으면 크롤러가 상세를 타고 들어가지 못한다.
+      const cell = slug ? `<a href="/keyword/${encodeURIComponent(slug)}">${keyword}</a>` : keyword;
+      return `<tr><th scope="row">${cell}</th><td>${volume}</td><td>${documents}</td><td>${opportunity}</td></tr>`;
     });
   if (!items.length) return '';
 
@@ -168,6 +173,81 @@ function briefingPrerender() {
 const PRERENDER_BY_PATH = {
   briefing: briefingPrerender,
 };
+
+function loadBriefingRows() {
+  const seedPath = path.resolve(__dirname, '..', 'public', 'data', 'home-keyword-briefing-seed.json');
+  if (!fs.existsSync(seedPath)) return [];
+  try {
+    const seed = JSON.parse(fs.readFileSync(seedPath, 'utf8'));
+    return Array.isArray(seed?.rows) ? seed.rows : [];
+  } catch (error) {
+    console.warn(`[static-routes] briefing seed parse failed: ${error.message}`);
+    return [];
+  }
+}
+
+/** 키워드 상세 페이지 본문. 얇으면 저품질로 취급되므로 실측 근거·해석·목차·연관을 모두 넣는다. */
+function keywordDetailPrerender(detail) {
+  const esc = escapeText;
+  const num = (value) => (Number.isFinite(value) ? numberFormat.format(value) : '-');
+  const related = detail.related.length
+    ? `<h2>같은 브리핑의 관련 키워드</h2><ul>${detail.related
+        .map((row) => `<li><a href="/keyword/${encodeURIComponent(keywordSlug(row.keyword))}">${esc(row.keyword)}</a></li>`)
+        .join('')}</ul>`
+    : '';
+  return [
+    '<article id="keyword-detail-prerender">',
+    `<h1>${esc(detail.keyword)}</h1>`,
+    `<p>${esc(detail.meaning)}</p>`,
+    '<h2>실측 지표</h2>',
+    '<ul>',
+    `<li>월 검색량 ${num(detail.volume)}회</li>`,
+    `<li>관련 문서수 ${num(detail.documents)}개</li>`,
+    `<li>기회지수 ${detail.opportunity === null ? '-' : detail.opportunity.toFixed(1)} (검색량 ÷ (문서수 + 1))</li>`,
+    '</ul>',
+    '<h2>지금 이 키워드의 경쟁 상황</h2>',
+    `<p>${esc(detail.competition)}</p>`,
+    '<p>검색량과 문서수는 검토 시점에 실제로 측정한 값입니다. 실시간 값이 아니라 고정 스냅샷이라, 글을 쓰기 전에 현재 상태를 한 번 더 확인하시는 편이 좋습니다.</p>',
+    '<h2>글에 넣어야 할 것</h2>',
+    `<ol>${detail.outline.map((item) => `<li>${esc(item)}</li>`).join('')}</ol>`,
+    related,
+    '<p><a href="/briefing">무료 선정 황금키워드 전체 보기</a></p>',
+    '</article>',
+  ].filter(Boolean).join('');
+}
+
+function writeKeywordDetailPages(template) {
+  const rows = loadBriefingRows();
+  const seen = new Set();
+  const written = [];
+  for (const row of rows) {
+    const keyword = String(row?.keyword || '').trim();
+    if (!keyword) continue;
+    const slug = keywordSlug(keyword);
+    if (!slug || seen.has(slug)) continue;
+    seen.add(slug);
+
+    const detail = buildKeywordDetail(row, rows);
+    const url = `${siteOrigin}/keyword/${encodeURIComponent(slug)}`;
+    const title = `${keyword} 키워드 분석 | Leaders Pro`;
+    let html = template;
+    html = replaceRequired(html, /<title>[\s\S]*?<\/title>/, `<title>${escapeText(title)}</title>`, 'title');
+    html = replaceRequired(html, /<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${escapeAttribute(detail.metaDescription)}" />`, 'description');
+    html = replaceRequired(html, /<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${url}" />`, 'canonical');
+    html = replaceRequired(html, /<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${escapeAttribute(title)}" />`, 'og:title');
+    html = replaceRequired(html, /<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${escapeAttribute(detail.metaDescription)}" />`, 'og:description');
+    html = replaceRequired(html, /<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${url}" />`, 'og:url');
+    html = replaceRequired(html, /<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${escapeAttribute(title)}" />`, 'twitter:title');
+    html = replaceRequired(html, /<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${escapeAttribute(detail.metaDescription)}" />`, 'twitter:description');
+    html = replaceRequired(html, /<div id="root"><\/div>/, `<div id="root">${keywordDetailPrerender(detail)}</div>`, 'keyword prerender');
+
+    const dir = path.join(distDir, 'keyword', slug);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
+    written.push(slug);
+  }
+  return written;
+}
 
 function routeHtml(template, route) {
   const url = `${siteOrigin}/${route.path}`;
@@ -221,4 +301,20 @@ if (fs.existsSync(legacyAdminPath)) {
   console.warn(`Legacy admin panel was not found: ${legacyAdminPath}`);
 }
 
+const keywordPages = writeKeywordDetailPages(template);
 console.log(`Generated ${routes.length} static route pages for search crawlers.`);
+console.log(`Generated ${keywordPages.length} keyword detail pages.`);
+
+// 사이트맵에 키워드 상세를 반영한다. 등록하지 않으면 구글이 발견하지 못한다.
+const sitemapPath = path.resolve(__dirname, '..', '..', 'payment-page', 'sitemap.xml');
+if (keywordPages.length && fs.existsSync(sitemapPath)) {
+  const original = fs.readFileSync(sitemapPath, 'utf8');
+  const withoutKeywords = original.replace(/\s*<url>\s*<loc>[^<]*\/keyword\/[^<]*<\/loc>[\s\S]*?<\/url>/g, '');
+  const today = new Date().toISOString().slice(0, 10);
+  const entries = keywordPages
+    .map((slug) => `  <url>\n    <loc>${siteOrigin}/keyword/${encodeURIComponent(slug)}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`)
+    .join('\n');
+  const next = withoutKeywords.replace('</urlset>', `${entries}\n</urlset>`);
+  fs.writeFileSync(sitemapPath, next, 'utf8');
+  console.log(`Sitemap updated with ${keywordPages.length} keyword URLs.`);
+}
