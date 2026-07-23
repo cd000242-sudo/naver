@@ -6,7 +6,7 @@ const NAV_LINKS = [
     { to: '/leword', label: 'LEWORD' },
     { to: '/chatbots', label: '무료 챗봇' },
     { to: '/products', label: '제품정보' },
-    { to: '/pricing', label: '구매' },
+    { to: '/pricing', label: '무료체험 및 구매' },
     { to: '/reviews', label: '후기' },
     { to: '/community', label: '커뮤니티' },
     { to: '/download', label: '다운로드' },
