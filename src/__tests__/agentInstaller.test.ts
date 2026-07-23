@@ -22,6 +22,24 @@ vi.mock('../agentCli/detect', () => ({
   clearAgentDetectionCache: (...args: unknown[]) => clearAgentDetectionCacheMock(...args),
   detectAgent: (...args: unknown[]) => detectAgentMock(...args),
 }));
+// The real resolver bootstraps npm over the network; unit tests assert the wiring only.
+const resolveNpmInvocationMock = vi.fn();
+vi.mock('../agentCli/npmInvocation', () => ({
+  resolveNpmInvocation: (...args: unknown[]) => resolveNpmInvocationMock(...args),
+}));
+
+const APP_NODE = 'C:\\Program Files\\LeaderNaver\\LeaderNaver.exe';
+const BUNDLED_NPM_CLI = 'C:\\userData\\agent-runtime\\npm\\bin\\npm-cli.js';
+const MANAGED_PREFIX = 'C:\\userData\\agent-runtime\\global';
+const MANAGED_CACHE = 'C:\\userData\\agent-runtime\\npm-cache';
+const BUNDLED_INVOCATION = {
+  command: APP_NODE,
+  prefixArgs: [BUNDLED_NPM_CLI],
+  env: { Path: MANAGED_PREFIX, ELECTRON_RUN_AS_NODE: '1' },
+  source: 'bundled' as const,
+  prefix: MANAGED_PREFIX,
+  cache: MANAGED_CACHE,
+};
 
 import {
   installAgent,
@@ -38,6 +56,8 @@ beforeEach(() => {
   sessionCancelMock.mockReset();
   detectAgentMock.mockReset();
   clearAgentDetectionCacheMock.mockReset();
+  resolveNpmInvocationMock.mockReset();
+  resolveNpmInvocationMock.mockResolvedValue(BUNDLED_INVOCATION);
   // Default: success with a version-like stdout (used by post-install detect()).
   spawnMock.mockResolvedValue({ code: 0, stdout: 'codex-cli 0.141.0', stderr: '' });
   startSessionMock.mockImplementation((options) => ({
@@ -78,50 +98,77 @@ describe('AGENT_NPM_PACKAGES', () => {
   });
 });
 
+const emptyUserConfig = process.platform === 'win32' ? 'NUL' : '/dev/null';
+
+/** npm arguments for a package, as the bundled runtime must pass them. */
+function expectedNpmArgs(spec: string, scope: string): string[] {
+  return [
+    'install',
+    '-g',
+    spec,
+    '--registry=https://registry.npmjs.org/',
+    `--@${scope}:registry=https://registry.npmjs.org/`,
+    `--userconfig=${emptyUserConfig}`,
+    '--audit=false',
+    '--fund=false',
+    `--prefix=${MANAGED_PREFIX}`,
+    `--cache=${MANAGED_CACHE}`,
+  ];
+}
+
 describe('installAgent', () => {
-  it('runs `npm install -g <pkg>` and verifies the binary afterwards', async () => {
+  it('runs npm on the app runtime, never a PATH-resolved npm', async () => {
     const r = await installAgent('codex');
     const first = spawnMock.mock.calls[0][0];
-    expect(first.command).toBe('npm');
+    // The whole point: a PC with no Node.js on PATH must still install.
+    expect(first.command).toBe(APP_NODE);
     expect(first.args).toEqual([
-      'install',
-      '-g',
-      '@openai/codex@0.144.1',
-      '--registry=https://registry.npmjs.org/',
-      '--@openai:registry=https://registry.npmjs.org/',
-      `--userconfig=${process.platform === 'win32' ? 'NUL' : '/dev/null'}`,
-      '--audit=false',
-      '--fund=false',
+      BUNDLED_NPM_CLI,
+      ...expectedNpmArgs('@openai/codex@0.144.1', 'openai'),
     ]);
+    expect(first.env).toBe(BUNDLED_INVOCATION.env);
     expect(r.version).toBeTruthy(); // detect() ran via the mocked spawn
+  });
+
+  it('installs into the app-owned prefix so no elevation is needed', async () => {
+    await installAgent('codex');
+    expect(spawnMock.mock.calls[0][0].args).toContain(`--prefix=${MANAGED_PREFIX}`);
   });
 
   it('uses the claude package for claude', async () => {
     await installAgent('claude');
     expect(spawnMock.mock.calls[0][0].args).toEqual([
-      'install',
-      '-g',
-      '@anthropic-ai/claude-code@2.1.197',
-      '--registry=https://registry.npmjs.org/',
-      '--@anthropic-ai:registry=https://registry.npmjs.org/',
-      `--userconfig=${process.platform === 'win32' ? 'NUL' : '/dev/null'}`,
-      '--audit=false',
-      '--fund=false',
+      BUNDLED_NPM_CLI,
+      ...expectedNpmArgs('@anthropic-ai/claude-code@2.1.197', 'anthropic-ai'),
     ]);
   });
 
   it('uses the gemini package for gemini', async () => {
     await installAgent('gemini');
     expect(spawnMock.mock.calls[0][0].args).toEqual([
-      'install',
-      '-g',
-      '@google/gemini-cli@0.51.0',
-      '--registry=https://registry.npmjs.org/',
-      '--@google:registry=https://registry.npmjs.org/',
-      `--userconfig=${process.platform === 'win32' ? 'NUL' : '/dev/null'}`,
-      '--audit=false',
-      '--fund=false',
+      BUNDLED_NPM_CLI,
+      ...expectedNpmArgs('@google/gemini-cli@0.51.0', 'google'),
     ]);
+  });
+
+  it('falls back to the system npm when the runtime bootstrap fails', async () => {
+    resolveNpmInvocationMock.mockResolvedValue({
+      command: 'npm',
+      prefixArgs: [],
+      env: {},
+      source: 'system',
+      prefix: MANAGED_PREFIX,
+      cache: MANAGED_CACHE,
+      bootstrapError: 'HTTP 503',
+    });
+    await installAgent('codex');
+    expect(spawnMock.mock.calls[0][0].command).toBe('npm');
+  });
+
+  it('never blames a missing Node.js when the app runtime ran the install', async () => {
+    spawnMock.mockResolvedValue({ code: 1, stdout: '', stderr: "'npm' is not recognized" });
+    const err = await installAgent('codex').catch((e) => e);
+    expect(String(err.message)).not.toContain('Node.js LTS');
   });
 
   it('throws AgentCliError on npm failure', async () => {
@@ -446,7 +493,8 @@ describe('agent CLI subprocess environment isolation', () => {
     const installCall = spawnMock.mock.calls[0][0];
     expect(installCall.env.NAVER_PASSWORD).toBeUndefined();
     expect(installCall.env.GEMINI_API_KEY).toBeUndefined();
-    expect(installCall.env.NPM_CONFIG_PREFIX).toBe('C:\\Users\\tester\\npm-global');
+    // The install env is built by resolveNpmInvocation (allowlist + app-owned prefix);
+    // its contents are asserted against the real implementation in agentNpmInvocation.test.ts.
 
     spawnMock.mockClear();
     detectAgentMock

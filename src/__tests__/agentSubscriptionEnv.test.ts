@@ -1,10 +1,32 @@
 import { describe, expect, it } from 'vitest';
+import { delimiter } from 'path';
 import {
   buildNpmInstallEnv,
   buildClaudeSubscriptionEnv,
   buildCodexSubscriptionEnv,
   buildGeminiSubscriptionEnv,
 } from '../agentCli/subscriptionEnv';
+
+/**
+ * [v2.11.144] Subscription envs prepend the app-owned CLI prefix to PATH so a CLI the app
+ * installed is found without the system PATH ever changing. The allowlist is still asserted
+ * exactly — PATH is just checked separately, since its value is now composed.
+ */
+function withoutPath(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
+  return Object.fromEntries(Object.entries(env).filter(([key]) => key.toUpperCase() !== 'PATH'));
+}
+
+function pathEntriesOf(env: NodeJS.ProcessEnv): string[] {
+  const key = Object.keys(env).find((k) => k.toUpperCase() === 'PATH') ?? 'PATH';
+  return String(env[key] ?? '').split(delimiter);
+}
+
+function expectManagedPathAhead(env: NodeJS.ProcessEnv, inherited: string): void {
+  const entries = pathEntriesOf(env);
+  expect(entries[0]).toContain('agent-runtime');
+  // The inherited PATH must survive: a CLI the user installed globally still resolves.
+  expect(entries).toContain(inherited);
+}
 
 describe('subscription agent environment isolation', () => {
   it('keeps a custom npm global prefix only for the installer environment', () => {
@@ -52,14 +74,14 @@ describe('subscription agent environment isolation', () => {
       UNRELATED_APP_SECRET: 'must-not-leak',
     });
 
-    expect(env).toEqual({
-      PATH: 'C:\\tools',
+    expect(withoutPath(env)).toEqual({
       TEMP: 'C:\\temp',
       USERPROFILE: 'C:\\Users\\tester',
       CLAUDE_CONFIG_DIR: 'C:\\profiles\\claude',
       HTTPS_PROXY: 'https://user:password@proxy.example',
       NO_PROXY: 'localhost,127.0.0.1',
     });
+    expectManagedPathAhead(env, 'C:\\tools');
   });
 
   it('allows only runtime and Codex profile paths while dropping every unrelated secret', () => {
@@ -80,14 +102,14 @@ describe('subscription agent environment isolation', () => {
       UNRELATED_APP_SECRET: 'must-not-leak',
     });
 
-    expect(env).toEqual({
-      PATH: 'C:\\tools',
+    expect(withoutPath(env)).toEqual({
       TEMP: 'C:\\temp',
       USERPROFILE: 'C:\\Users\\tester',
       CODEX_HOME: 'C:\\profiles\\codex',
       HTTPS_PROXY: 'https://user:password@proxy.example',
       NO_PROXY: 'localhost,127.0.0.1',
     });
+    expectManagedPathAhead(env, 'C:\\tools');
   });
 
   it('[v2.11.140] Gemini는 GCA를 강제하지 않고 API 키도 제거한다 (auth는 settings.json oauth-personal)', () => {
@@ -111,6 +133,7 @@ describe('subscription agent environment isolation', () => {
     expect(env).not.toHaveProperty('GOOGLE_GENAI_API_KEY');
     expect(env).not.toHaveProperty('NAVER_PASSWORD');
     expect(env).not.toHaveProperty('UNRELATED_APP_SECRET');
-    expect(env).toEqual({ PATH: 'C:\\tools', TEMP: 'C:\\temp', USERPROFILE: 'C:\\Users\\tester' });
+    expect(withoutPath(env)).toEqual({ TEMP: 'C:\\temp', USERPROFILE: 'C:\\Users\\tester' });
+    expectManagedPathAhead(env, 'C:\\tools');
   });
 });

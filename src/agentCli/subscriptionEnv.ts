@@ -2,6 +2,13 @@
 // values needed to locate the executable, user profile, cached login, and TLS roots.
 // Every application secret is denied by default, including future variables that this
 // module does not know about yet.
+//
+// [v2.11.144] CLIs installed by the app live in an app-owned prefix under userData that is
+// deliberately never written into the system PATH. withAgentRuntimePath() prepends it, which
+// is what lets detect/login/generate find them; the inherited PATH still follows, so a CLI the
+// user installed globally themselves keeps resolving exactly as before.
+import { withAgentRuntimePath } from './agentRuntime.js';
+
 const SHARED_SUBSCRIPTION_ENV_KEYS = new Set([
   'PATH',
   'PATHEXT',
@@ -81,6 +88,7 @@ function pickSubscriptionEnv(
   );
 }
 
+
 /**
  * Keep subscription calls independent from user/project helpers, tools, and MCP servers.
  * OAuth credentials still load normally; only customization sources are isolated.
@@ -96,13 +104,13 @@ export const CLAUDE_SUBSCRIPTION_ISOLATION_ARGS = [
 export function buildClaudeSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {
-  return pickSubscriptionEnv(source, CLAUDE_SUBSCRIPTION_ENV_KEYS);
+  return withAgentRuntimePath(pickSubscriptionEnv(source, CLAUDE_SUBSCRIPTION_ENV_KEYS));
 }
 
 export function buildCodexSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {
-  return pickSubscriptionEnv(source, CODEX_SUBSCRIPTION_ENV_KEYS);
+  return withAgentRuntimePath(pickSubscriptionEnv(source, CODEX_SUBSCRIPTION_ENV_KEYS));
 }
 
 export function buildGeminiSubscriptionEnv(
@@ -113,9 +121,13 @@ export function buildGeminiSubscriptionEnv(
   // that Code Assist path returned "IneligibleTierError: no longer supported for Gemini Code
   // Assist for individuals" for personal accounts. API-key vars stay stripped (allowlist)
   // so the subprocess uses the OAuth subscription only, never silent API-key billing.
-  return pickSubscriptionEnv(source, GEMINI_SUBSCRIPTION_ENV_KEYS);
+  return withAgentRuntimePath(pickSubscriptionEnv(source, GEMINI_SUBSCRIPTION_ENV_KEYS));
 }
 
+/**
+ * Install env stays on the inherited PATH: the managed prefix is passed to npm explicitly as
+ * --prefix, and the runtime shim directory is prepended by resolveNpmInvocation().
+ */
 export function buildNpmInstallEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {

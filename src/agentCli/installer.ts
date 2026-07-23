@@ -20,8 +20,8 @@ import {
   buildClaudeSubscriptionEnv,
   buildCodexSubscriptionEnv,
   buildGeminiSubscriptionEnv,
-  buildNpmInstallEnv,
 } from './subscriptionEnv.js';
+import { resolveNpmInvocation } from './npmInvocation.js';
 import { AgentCliError, type AgentCliStatus, type AgentProvider } from './types.js';
 import { requireAgentProvider } from './validation.js';
 import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
@@ -54,8 +54,18 @@ function packageScopeFor(provider: AgentProvider): string {
   return 'anthropic-ai';
 }
 
-function buildNpmInstallArgs(provider: AgentProvider, versionOverride?: string): string[] {
-  const version = versionOverride || AGENT_NPM_PACKAGE_VERSIONS[provider];
+interface NpmInstallArgOptions {
+  readonly versionOverride?: string;
+  /** App-owned global prefix; omitted only when userData is unavailable. */
+  readonly prefix?: string;
+  readonly cache?: string;
+}
+
+function buildNpmInstallArgs(
+  provider: AgentProvider,
+  options: NpmInstallArgOptions = {},
+): string[] {
+  const version = options.versionOverride || AGENT_NPM_PACKAGE_VERSIONS[provider];
   const packageSpec = `${AGENT_NPM_PACKAGES[provider]}@${version}`;
   const packageScope = packageScopeFor(provider);
   const emptyUserConfig = process.platform === 'win32' ? 'NUL' : '/dev/null';
@@ -68,6 +78,10 @@ function buildNpmInstallArgs(provider: AgentProvider, versionOverride?: string):
     `--userconfig=${emptyUserConfig}`,
     '--audit=false',
     '--fund=false',
+    // Install into a user-writable app folder: no elevation, and detection knows the path
+    // without depending on the system PATH ever being updated.
+    ...(options.prefix ? [`--prefix=${options.prefix}`] : []),
+    ...(options.cache ? [`--cache=${options.cache}`] : []),
   ];
 }
 
@@ -102,12 +116,18 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
   provider = requireAgentProvider(provider);
   const pkg = AGENT_NPM_PACKAGES[provider];
   const packageSpec = `${pkg}@${AGENT_NPM_PACKAGE_VERSIONS[provider]}`;
+
+  // [v2.11.144] The user's Node.js is no longer required: the app drives a bootstrapped npm
+  // on Electron's own Node runtime. Previously a PC without npm on PATH — stale logon env,
+  // nvm/fnm shell-only PATH, portable Node — failed before npm ever ran.
+  const npm = await resolveNpmInvocation();
+  const installArgs = { prefix: npm.prefix, cache: npm.cache };
   let res = await spawnCollect({
-    command: 'npm',
-    args: buildNpmInstallArgs(provider),
+    command: npm.command,
+    args: [...npm.prefixArgs, ...buildNpmInstallArgs(provider, installArgs)],
     provider,
     timeoutMs: INSTALL_TIMEOUT_MS,
-    env: buildNpmInstallEnv(),
+    env: npm.env,
   });
 
   // [v2.11.138] 핀한 버전이 npm에서 내려가면(ETARGET/404) @latest로 1회 폴백.
@@ -117,11 +137,11 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
   if (res.code !== 0 && isVersionNotFound) {
     console.warn(`[AgentInstaller] ${packageSpec} 버전 없음(ETARGET) → @latest로 폴백 설치 시도`);
     res = await spawnCollect({
-      command: 'npm',
-      args: buildNpmInstallArgs(provider, 'latest'),
+      command: npm.command,
+      args: [...npm.prefixArgs, ...buildNpmInstallArgs(provider, { ...installArgs, versionOverride: 'latest' })],
       provider,
       timeoutMs: INSTALL_TIMEOUT_MS,
-      env: buildNpmInstallEnv(),
+      env: npm.env,
     });
   }
 
@@ -131,12 +151,17 @@ export async function installAgent(provider: AgentProvider): Promise<{ version?:
     const isPermission = /EACCES|EPERM|permission denied|access is denied|관리자/i.test(out);
     const isNetwork = /ENOTFOUND|ETIMEDOUT|ECONNREFUSED|network|getaddrinfo/i.test(out);
     const isMissingNpm = /ENOENT|npm.*not found|is not recognized/i.test(out);
+    // A bundled-runtime install cannot fail for lack of Node.js, so only the fallback path
+    // may point at npm/Node — otherwise the advice would send users on a pointless install.
+    const npmHint = npm.source === 'system'
+      ? `설치 도구를 준비하지 못해 시스템 npm으로 시도했습니다 (${npm.bootstrapError ?? '원인 미상'}). 인터넷 연결을 확인한 뒤 다시 시도해주세요.`
+      : '자세한 원인은 아래 상세 메시지를 확인하세요.';
     const hint = isPermission
-      ? '권한 오류로 보입니다 — 관리자 권한으로 앱을 다시 실행해보세요.'
+      ? '권한 오류로 보입니다 — 백신/보안 프로그램이 설치 폴더 쓰기를 막고 있는지 확인해주세요.'
       : isNetwork
         ? '네트워크 오류로 보입니다 — 인터넷 연결/프록시를 확인하세요.'
         : isMissingNpm
-          ? 'npm(Node.js)을 찾지 못했습니다 — Node.js LTS 설치 후 다시 시도하세요.'
+          ? npmHint
           : '자세한 원인은 아래 상세 메시지를 확인하세요.';
     throw new AgentCliError(
       classifyExit(provider, res.stderr, res.stdout),
