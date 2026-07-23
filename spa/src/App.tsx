@@ -69,7 +69,7 @@ function App() {
                     <Route path="/leword-detail.html" element={<LewordDetailPage />} />
                     <Route path="/leword" element={<LewordPage />} />
                     <Route path="/leword.html" element={<LewordPage />} />
-                    {/* 부방장 선정 황금키워드 전용 페이지 — 홈 탭에서 분리해 별도 주소로 뺐다. */}
+                    {/* 무료 선정 황금키워드 전용 페이지 — 홈 탭에서 분리해 별도 주소로 뺐다. */}
                     <Route path="/briefing" element={<BriefingPage />} />
                     <Route path="/briefing.html" element={<BriefingPage />} />
                     <Route path="/orbit" element={<OrbitPage />} />

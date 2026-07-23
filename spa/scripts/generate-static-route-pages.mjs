@@ -32,8 +32,8 @@ const routes = [
   },
   {
     path: 'briefing',
-    title: '부방장 선정 황금키워드 | Leaders Pro',
-    description: '매일 검토해 올린 부방장 선정 황금키워드 전체 목록입니다. 검색량, 문서수, 기회지수를 함께 확인하세요.',
+    title: '무료 선정 황금키워드 | Leaders Pro',
+    description: '매일 검토해 올린 무료 선정 황금키워드 전체 목록입니다. 검색량, 문서수, 기회지수를 함께 확인하세요.',
   },
   {
     path: 'orbit',
@@ -146,7 +146,7 @@ function briefingPrerender() {
     });
   if (!items.length) return '';
 
-  const title = escapeText(seed.title || '부방장 선정 황금키워드');
+  const title = escapeText(seed.title || '무료 선정 황금키워드');
   const author = escapeText(seed.author || '');
   const published = escapeText(seed.publishedAt || '');
   const byline = [author && `${author} 제공`, published].filter(Boolean).join(' · ');
@@ -155,7 +155,7 @@ function briefingPrerender() {
     '<div id="briefing-prerender">',
     `<h1>${title}</h1>`,
     byline ? `<p>${byline}</p>` : '',
-    `<p>매일 검토해 올린 부방장 선정 황금키워드 ${items.length}개입니다. 실시간 값이 아니라 검토 시점의 고정 스냅샷이며, 기회지수는 검색량 ÷ (문서수 + 1) 로 계산합니다. 문서수가 검색량에 비해 적을수록 아직 글이 적어 노려볼 만한 키워드입니다.</p>`,
+    `<p>매일 검토해 올린 무료 선정 황금키워드 ${items.length}개입니다. 실시간 값이 아니라 검토 시점의 고정 스냅샷이며, 기회지수는 검색량 ÷ (문서수 + 1) 로 계산합니다. 문서수가 검색량에 비해 적을수록 아직 글이 적어 노려볼 만한 키워드입니다.</p>`,
     '<table><caption>키워드별 검색량·문서수·기회지수</caption><thead><tr>',
     '<th scope="col">키워드</th><th scope="col">검색량</th><th scope="col">문서수</th><th scope="col">기회지수</th>',
     '</tr></thead><tbody>',

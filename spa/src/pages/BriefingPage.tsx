@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import HomeOperationsBoard from '../components/HomeOperationsBoard';
 
 /**
- * 부방장 선정 황금키워드 전용 페이지.
+ * 무료 선정 황금키워드 전용 페이지.
  *
  * 홈 안의 탭이었던 것을 별도 주소로 뺐다. 목록이 길어 홈 탭 안에서는 답답했고,
  * 별도 주소여야 페이지 전환이 생겨 구글 자체 전면광고(Vignette)가 뜰 자리가 생긴다.
@@ -12,7 +12,7 @@ import HomeOperationsBoard from '../components/HomeOperationsBoard';
 function BriefingPage() {
     useEffect(() => {
         const prevTitle = document.title;
-        document.title = '부방장 선정 황금키워드 | 리더스프로';
+        document.title = '무료 선정 황금키워드 | 리더스프로';
         return () => {
             document.title = prevTitle;
         };
@@ -45,7 +45,7 @@ function BriefingPage() {
 
             <header className="briefing-page-head">
                 <span className="briefing-page-kicker">DEPUTY GOLDEN KEYWORDS</span>
-                <h1 id="briefing-page-title">부방장 선정 황금키워드</h1>
+                <h1 id="briefing-page-title">무료 선정 황금키워드</h1>
                 <p>매일 검토해 올린 고정 키워드 전체 목록입니다. 실시간 값이 아니라 검토 시점의 고정 스냅샷이며, 기회지수는 검색량 ÷ (문서수 + 1) 로 계산합니다.</p>
                 {/* 돌아갈 때도 실제 페이지 로드로 둔다 — 홈 복귀 시에도 광고 자리가 생긴다. */}
                 <a className="briefing-page-back" href="/">← 홈으로 돌아가기</a>

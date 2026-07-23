@@ -16,7 +16,7 @@ const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits:
 
 type HomeOperationsTab = 'notice' | 'realtime' | 'income';
 
-// 부방장 선정 황금키워드는 홈 안의 탭이 아니라 전용 페이지(BRIEFING_PAGE_PATH)로 뺐다.
+// 무료 선정 황금키워드는 홈 안의 탭이 아니라 전용 페이지(BRIEFING_PAGE_PATH)로 뺐다.
 // 별도 주소여야 페이지 전환이 생기고, 그래야 구글 자체 전면광고(Vignette)가 뜰 자리가 생긴다.
 // 광고 시청을 열람 조건으로 걸지는 않는다 — AdSense 는 보상형 유도를 금지한다.
 const BRIEFING_PAGE_PATH = '/briefing';
@@ -665,7 +665,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                 /* 전용 페이지에서는 사이드탭을 렌더하지 않는다. 이때 2열 그리드를 그대로 두면
                    본문이 사이드탭 자리(250px)로 밀려 들어가 글자가 세로로 쪼개진다. */
                 .home-ops-layout.briefing-only { grid-template-columns: minmax(0, 1fr); }
-                /* 부방장 선정 황금키워드는 이 사이트의 대표 콘텐츠라 다른 항목과 확실히 구분한다. */
+                /* 무료 선정 황금키워드는 이 사이트의 대표 콘텐츠라 다른 항목과 확실히 구분한다. */
                 .home-ops-tab-featured {
                     position: relative;
                     text-decoration: none;
@@ -1044,7 +1044,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                             <strong> Better Life Naver</strong>, 외부 유입을 보조하는 <strong>Leaders Orbit</strong>이 있습니다.
                         </p>
                         <p className="home-ops-intro">
-                            아래는 <strong>무료로 열려 있는 자료</strong>입니다. 매일 검토해 올리는 부방장 선정 황금키워드와
+                            아래는 <strong>무료로 열려 있는 자료</strong>입니다. 매일 검토해 올리는 무료 선정 황금키워드와
                             실시간 검색어 흐름은 회원가입 없이 그냥 보셔도 됩니다. 둘러보시고 필요하시면 무료 체험부터 해보세요.
                         </p>
                     </div>
@@ -1059,7 +1059,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                         일어나야 광고 자리가 생긴다(정적 /briefing 페이지를 빌드에서 생성해 둔다). */}
                     <a className="home-ops-tab home-ops-tab-featured" href={BRIEFING_PAGE_PATH}>
                         <span className="home-ops-featured-flag">매일 갱신</span>
-                        <strong>부방장 선정 황금키워드</strong>
+                        <strong>무료 선정 황금키워드</strong>
                         <small>매일 검토해 올린 고정 키워드 전체 보기 →</small>
                     </a>
                     {HOME_OPS_TAB_ORDER.map((tab) => (

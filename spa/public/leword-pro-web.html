@@ -305,7 +305,11 @@
     .gk-main,
     .gk-side { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
     .gk-why { grid-column: 1 / -1; min-width: 0; }
-    .gk-top { display: flex; align-items: center; gap: 7px; }
+    .gk-top { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+    /* 헤더 우측 여백을 쓰는 측정 출처 칩 — 등급/분류 배지 뒤로 밀어 붙인다. */
+    .gk-top .measurement-provenance { margin-left: auto; font-size: 11px; gap: 4px 6px; }
+    .gk-top .measurement-provenance span { padding: 3px 7px; }
+    .gk-top .measurement-provenance + .gk-rank { margin-left: 8px; }
     .gk-cat { font-size: 11px; font-weight: 700; color: var(--muted); background: var(--surface-2); border: 1px solid var(--line); padding: 3px 9px; border-radius: 7px; }
     .gk-rank { margin-left: auto; font-size: 12px; font-weight: 1000; color: var(--green); }
     .gk-kw { font-size: 18px; font-weight: 800; letter-spacing: -.3px; color: var(--text); overflow-wrap: anywhere; }
@@ -1552,6 +1556,9 @@
       .result-kpis { grid-template-columns: 1fr 1fr; }
       .golden-row { grid-template-columns: 1fr; }
       .golden-row .grade { justify-self: start; }
+      /* 좁은 화면에서는 헤더 우측 정렬 대신 아래로 흘려 배지와 겹치지 않게 한다. */
+      .gk-top .measurement-provenance { margin-left: 0; flex-basis: 100%; }
+      .gk-top .measurement-provenance + .gk-rank { margin-left: auto; }
       .golden-actions { grid-column: 1 / -1; justify-content: flex-start; }
       .sidebar { grid-template-columns: 1fr 1fr; }
       .hero h1 { font-size: 28px; }
@@ -3390,8 +3397,13 @@
       const parts = [];
       if (total !== null) parts.push('검색량 ' + fmt(total));
       if (pc !== null || mobile !== null) parts.push('PC ' + fmt(pc || 0) + '/모바일 ' + fmt(mobile || 0));
-      if (docs !== null) parts.push('문서수 ' + fmt(docs));
+      if (docs !== null) parts.push(documentCountMetricLabel(row) + ' ' + fmt(docs));
       return parts.length ? parts.join(' · ') + ' 실측을 기준으로 봅니다.' : '';
+    }
+    // 같은 카드의 '검색량 이유'가 이미 실측 지표를 진술하므로 '조합 의도/활용'에서는
+    // 지표를 반복하지 않는다 — 같은 숫자를 두 번 읽게 만들면 문구가 길어지기만 한다.
+    function agentActionMeasuredContext() {
+      return '';
     }
     function agentInferredBranches(row, subject, domain) {
       const keyword = normalizeText(row && row.keyword);
@@ -3508,13 +3520,14 @@
       if (domain === 'shopping') return '제품형 키워드는 가격과 후기만으로는 약합니다. 검색량은 구매 직전 불안, 대체 제품 비교, 실제 사용 장면, 단점 확인이 겹칠 때 생기므로 쇼핑커넥트에서 전환 가능한 제품까지 붙여야 합니다.';
       if (domain === 'local') return '지역·방문 키워드는 비용, 위치, 운영시간, 주차, 후기처럼 현장에서 실패하지 않기 위한 확인 검색입니다. 최신 일정과 실제 이동 동선을 함께 설명해야 합니다.';
       if (domain === 'policy') return '정책 키워드는 대상, 신청 기간, 지급일, 금액, 제외 조건처럼 놓치면 손해가 나는 확인 항목이 있을 때 반복 검색됩니다. 최신 기준과 예외 조건을 먼저 제시해야 합니다.';
-      return '검색량은 단어 자체보다 검색자가 지금 해결해야 할 의사결정에서 생깁니다. 이 후보는 소스 맥락, 최신 시점, 비교 기준, 다음 행동을 분리해 글감으로 검증해야 합니다.';
+      // '검색량 이유' 칸에는 이유만 쓴다. 작성 지침은 아래 '조합 의도/활용'이 맡는다.
+      return '검색자가 "' + keyword + '"를 그대로 입력하는 이유는 이 조합이 지금 확인하려는 것을 그대로 담고 있기 때문입니다. 검색량은 단어의 인기도가 아니라, 지금 결정을 못 내린 사람 수에서 나옵니다.';
     }
     function agentInferredAction(row, subject, domain) {
       const provided = agentTextValue(row, ['combinationIntent', 'usageIntent', 'publishingAngle', 'action', 'nextAction', 'writeRecommendation']);
       if (provided) return provided;
       const keyword = normalizeText(row && row.keyword);
-      const metric = agentMeasuredContext(row);
+      const metric = agentActionMeasuredContext();
       if (domain === 'unclear') return '원문 소스와 자동완성 응답을 다시 확인한 뒤 의미가 분명한 키워드만 남기세요. 지급일·금액·대상 같은 정책 행동어는 실제 제도명과 붙어야 발행 가치가 있습니다.';
       if (domain === 'housing' || isHousingKeywordText(subject + ' ' + keyword)) return housingCombinationIntent(subject, keyword) + ' ' + metric;
       if (domain === 'shopping') return '메인 황금보드에서는 제외하고 쇼핑커넥트에서 제품 후보, 구매 트리거, 실사용 단점, 대체 제품 비교까지 붙여 전환형 글감으로 판단하세요.';
@@ -3649,6 +3662,42 @@
       const n = Number(raw);
       return Number.isFinite(n) ? n : null;
     }
+    // 내부 파이프라인 슬러그 → 사용자 언어. 등록되지 않은 값은 노출하지 않는다(잡음 차단).
+    const INTENT_SOURCE_LABELS = {
+      'home-keyword-briefing-reviewed': '부방장 키워드 브리핑(검수 완료)',
+      'home-keyword-briefing-autocomplete': '브리핑 키워드 자동완성 확장',
+      'traffic-surge-autocomplete': '실시간 급등 자동완성 확장',
+      'mobile-live-golden-radar': '실시간 황금키워드 레이더',
+      'mobile-live-issue-document-radar': '실시간 이슈 문서수 레이더',
+      'mobile-live-issue-measured-radar': '실시간 이슈 실측 레이더'
+    };
+    // AI 판정 근거 enum → 사용자 언어. 전부 실측 사실 진술이라 추정치가 아니다.
+    const AI_JUDGE_REASON_LABELS = {
+      'measured-search-volume-and-document-count': '검색량·문서수 실측 확보',
+      'pc-mobile-split-measured': 'PC·모바일 분리 실측',
+      'partial-measurement-only': '일부 지표만 실측',
+      'clear-searcher-action-intent': '검색자 행동 의도 뚜렷',
+      'ultimate-high-value-need-intent': '고가치 니즈 의도',
+      'commerce-or-conversion-angle': '구매·전환 각도 있음',
+      'shopping-connect-buyer-or-booking-intent': '구매·예약 의도',
+      'traffic-capture-need-intent': '트래픽 확보형 의도',
+      'beginner-monetizable-hidden-need': '초보자도 수익화 가능한 숨은 니즈',
+      'evergreen-blog-angle': '오래 쓰이는 글감',
+      'youtube-shorts-video-search-intent': '영상 검색 수요 동반',
+      'document-count-exceeds-search-demand': '문서수가 검색 수요를 초과',
+      'weak-action-intent': '행동 의도 약함',
+      'keyword-length-risk': '키워드 길이 위험',
+      'future-date-risk': '미래 시점 위험',
+      'article-title-not-keyword': '키워드가 아니라 기사 제목형',
+      'cross-domain-intent-collision': '주제 충돌 조합',
+      'synthetic-no-effect-keyword-combo': '실제로 쓰이지 않는 합성 조합',
+      'hunter-charter-missing-hidden-monetizable-need': '수익화 니즈 미확인'
+    };
+    function aiJudgeReasonLabel(token) {
+      return Object.prototype.hasOwnProperty.call(AI_JUDGE_REASON_LABELS, token)
+        ? AI_JUDGE_REASON_LABELS[token]
+        : '';
+    }
     function measuredIntentEvidence(row) {
       const total = intentMetricNumber(row, 'totalSearchVolume');
       const pc = intentMetricNumber(row, 'pcSearchVolume');
@@ -3658,38 +3707,57 @@
       const parts = [];
       if (total !== null) parts.push('실측 검색량 ' + fmt(total));
       if (pc !== null || mobile !== null) parts.push('PC ' + fmt(pc || 0) + ' / 모바일 ' + fmt(mobile || 0));
-      if (docs !== null) parts.push('문서수 ' + fmt(docs));
-      if (ratio !== null) parts.push('황금비 ' + fmt(ratio));
+      // 지표 이름은 같은 카드의 지표 박스와 반드시 일치시킨다 — 같은 값을 '황금비'와 '비율'로
+      // 다르게 부르면 사용자는 서로 다른 수치로 읽는다.
+      if (docs !== null) parts.push(documentCountMetricLabel(row) + ' ' + fmt(docs));
+      if (ratio !== null) parts.push('비율 ' + fmt(ratio));
       if (!parts.length) return '';
-      return parts.join(' · ') + ' 기준으로 수요와 공급 간격을 먼저 봅니다.';
+      return '지표는 ' + parts.join(' · ') + ' 입니다.';
     }
     function aiJudgeIntentEvidence(row) {
       const judge = row && row.aiJudge;
       if (!judge || typeof judge !== 'object') return '';
       const verdict = judge.verdict === 'publish' ? '발행 추천' : judge.verdict === 'conditional' ? '조건부' : '제외';
       const score = Number.isFinite(Number(judge.score)) ? '점수 ' + Math.round(Number(judge.score)) : '';
-      const reasons = Array.isArray(judge.reasons) ? judge.reasons.map(normalizeText).filter(Boolean).slice(0, 2).join(' · ') : '';
+      // 판정 근거는 내부 enum 을 그대로 노출하지 않는다(예: measured-search-volume-and-document-count).
+      // 등록된 것만 한국어로 옮기고, 미등록 토큰은 아예 숨긴다 — 사용자에게 의미 없는 문자열은
+      // 근거가 아니라 잡음이다.
+      const reasons = Array.isArray(judge.reasons)
+        ? judge.reasons.map(normalizeText).map(aiJudgeReasonLabel).filter(Boolean).slice(0, 2).join(' · ')
+        : '';
       return [verdict, score, reasons].filter(Boolean).join(' · ');
     }
     function sourceIntentEvidence(row) {
-      const evidence = Array.isArray(row && row.evidence) ? row.evidence.map(normalizeText).filter(Boolean).slice(0, 2) : [];
       const source = normalizeText(row && row.source);
-      const category = normalizeText(row && row.category);
+      const category = normalizeText(row && row.category).toLowerCase();
       const pieces = [];
-      if (source && !/persistent-measured-golden-cache/i.test(source)) pieces.push('소스 ' + source);
-      if (category) pieces.push('분류 ' + category);
-      if (evidence.length) pieces.push(evidence.join(' · '));
+      // 내부 파이프라인 슬러그(home-keyword-briefing-reviewed 등)를 그대로 쓰지 않는다.
+      // 등록된 것만 한국어로 옮기고 미등록 값은 숨긴다.
+      const sourceLabel = Object.prototype.hasOwnProperty.call(INTENT_SOURCE_LABELS, source)
+        ? INTENT_SOURCE_LABELS[source]
+        : '';
+      if (sourceLabel) pieces.push('출처 ' + sourceLabel);
+      // 이미 있는 한국어 분류 맵을 재사용한다(live_issue -> 실시간이슈). 미등록 분류는 숨긴다.
+      const categoryLabel = Object.prototype.hasOwnProperty.call(GOLDEN_CATEGORY_LABELS, category)
+        ? GOLDEN_CATEGORY_LABELS[category]
+        : '';
+      if (categoryLabel) pieces.push('분류 ' + categoryLabel);
+      // evidence 원본 덤프는 제거한다. 첫 항목은 source 와 100% 중복이고, 나머지는
+      // home-keyword-briefing-snapshot:kb-... 같은 내부 해시라 사용자에게 의미가 없다.
+      // 측정 출처·측정 시각은 카드 헤더의 측정 출처 칩이 이미 한국어로 보여준다.
       return pieces.join(' · ');
     }
     function enrichKeywordIntentGuide(row, guide) {
       const metric = measuredIntentEvidence(row);
       const ai = aiJudgeIntentEvidence(row);
       const source = sourceIntentEvidence(row);
-      // 정보형 가이드(policy/issue/need)는 카테고리 보일러플레이트 대신 키워드 자체를 해석한
-      // 의미 설명으로 대체 — "이 키워드가 무엇을 확인하려는 검색인지"를 먼저 말한다.
-      const semantic = ['policy', 'issue', 'need'].indexOf(guide.kind) >= 0 ? keywordSemanticMeaning(row) : '';
-      const meaningPieces = [semantic || guide.meaning, metric, source ? '수집 근거: ' + source : ''].filter(Boolean);
-      const actionPieces = [guide.action];
+      // 키워드 자체를 해석한 의미 설명을 모든 종류에 적용한다 — "이 키워드가 무엇을 확인하려는
+      // 검색인지"를 먼저 말해야 '검색량 이유'가 일반론이 아닌 이 키워드의 이유가 된다.
+      // (해석되는 니즈 토큰이 없으면 기존 가이드 문구로 자연히 되돌아간다.)
+      const semantic = keywordSemanticMeaning(row);
+      // sourceIntentEvidence 가 이미 '출처 …' 로 시작하므로 '수집 근거:' 접두를 덧붙이지 않는다.
+      const meaningPieces = [semantic || guide.meaning, metric, source].filter(Boolean);
+      const actionPieces = [normalizeText(guide.action)].filter(Boolean);
       if (ai) actionPieces.push('판정 근거: ' + ai + '.');
       if (guide.kind === 'ad-risk') {
         actionPieces.push('광고형 원키워드는 상단 클릭을 빼앗기기 쉬우니 자동완성 가지 중 정보형·주의사항·비교형만 골라 다시 검증하세요.');
@@ -4761,7 +4829,7 @@
         error: error && error.message ? error.message : String(error || ''),
         failureReason: clientGoldenFailureReason(error),
         updatedAt: new Date().toISOString(),
-        boardTarget: 120,
+        boardTarget: 240,
         boardCount: 0,
         lockedCount: 0,
         publicPreviewCount: 0,
@@ -5861,7 +5929,7 @@
         : '외부 AI 꺼짐 · provider 시도 0개 · 호출 0회 · 규칙 보조';
       const topRows = rows.slice(0, 5).map(function(row) {
         return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong>'
-          + '<span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>'
+          + '<span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 비율 ' + fmt(row.goldenRatio) + '</span>'
           + keywordIntentGuideHtml(row)
           + publishDecisionInline(row)
           + keywordActionHtml(row.keyword || '')
@@ -5940,7 +6008,7 @@
         const rows = result.keywords;
         const summary = result.summary || {};
         const topRows = rows.slice(0, 12).map(function(row) {
-          return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 황금비 ' + fmt(row.goldenRatio) + '</span>' + keywordIntentGuideHtml(row) + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
+          return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 비율 ' + fmt(row.goldenRatio) + '</span>' + keywordIntentGuideHtml(row) + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
         });
         const publishReady = rows.filter(function(row) {
           const decision = publishDecisionFor(row);
@@ -8642,7 +8710,7 @@
       renderKeywordAnalysisInsight(result, rows);
     }
     function setGoldenSummary(boardCount, boardTarget, visibleCount, lockedCount, running, updatedAt, policy) {
-      const target = boardTarget || 120;
+      const target = boardTarget || 240;
       const count = boardCount || 0;
       const pct = Math.min(100, Math.round((count / Math.max(1, target)) * 100));
       qs('goldenBoardCount').textContent = count + '/' + target;
@@ -8797,7 +8865,7 @@
     }
     function renderGoldenRows(items, exact, target) {
       lastGoldenRowsArgs = { items: items, exact: exact, target: target };
-      const limit = exact ? Math.max(60, Math.min(120, Number(target) || 120)) : 5;
+      const limit = exact ? Math.max(60, Math.min(400, Number(target) || 240)) : 5;
       const freshRows = filterFreshGoldenItems(items || []);
       const sourceRows = exact ? (Array.isArray(items) ? items : []) : filterDisplayGoldenItems(items || []);
       renderGoldenCategoryTabs(sourceRows, exact);
@@ -8834,6 +8902,9 @@
           + '<div class="gk-top">'
           +   '<span class="grade ' + grade + '">' + (grade || '-') + '</span>'
           +   (cat ? '<span class="gk-cat">' + cat + '</span>' : '')
+          // 측정 출처는 헤더 우측 여백에 둔다 — 지표 박스 아래보다 시선 이동이 짧고
+          // 카드 세로 길이를 줄인다(값과 출처를 같은 시선 높이에서 대조).
+          +   (exact ? measurementProvenanceHtml(item) : '')
           +   '<span class="gk-rank">' + escapeHtml(item.rank || '-') + '</span>'
           + '</div>'
           + '<div class="gk-kw">' + escapeHtml(item.keyword || '-') + '</div>'
@@ -8847,7 +8918,6 @@
           +   '<div class="gk-m gk-hot"><div class="gk-ml">' + escapeHtml(documentCountMetricLabel(item)) + '</div><div class="gk-mv">' + documents + '</div></div>'
           +   '<div class="gk-m gk-hot"><div class="gk-ml">비율</div><div class="gk-mv">' + ratio + '</div></div>'
           + '</div>'
-          + (exact ? measurementProvenanceHtml(item) : '')
           + '<div class="golden-actions">' + keywordActionHtml(item.keyword || '') + '</div>'
           + '</div>'
           + '<div class="gk-why">' + keywordIntentGuideHtml(item) + '</div>'
@@ -8902,14 +8972,14 @@
       // 브라우저 휴리스틱으로 다시 필터/재정렬하면 boardCount와 실제 표시가 달라지므로
       // 서버 순서와 서버 등급을 그대로 사용한다.
       const raw = (snapshot && (snapshot.board || snapshot.items || snapshot.keywords || snapshot.publicPreview)) || [];
-      const target = Number(snapshot && snapshot.boardTarget) || 120;
+      const target = Number(snapshot && snapshot.boardTarget) || 240;
       return (Array.isArray(raw) ? raw : []).slice(0, target);
     }
     function renderProGoldenBoard(snapshot) {
       const items = proGoldenBoardItems(snapshot);
       setGoldenSummary(
         snapshot.boardCount || items.length,
-        snapshot.boardTarget || 120,
+        snapshot.boardTarget || 240,
         items.length,
         0,
         snapshot.running,
