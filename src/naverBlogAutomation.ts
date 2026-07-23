@@ -23,6 +23,7 @@ import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromF
 import { buildNaverAutomationProfile, hashAutomationAccountId } from './automation/accountProfilePolicy.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 import { performIdleMouseShake } from './automation/humanBehavior.js';
+import { disablePlatformWebAuthn } from './automation/webauthnGuard.js';
 // [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
 import { recordBotBackoff, getBotBackoff, isAccountBackedOff, computePostLoginHumanDelayMs } from './utils/botBackoff.js';
 import { withRetry, findWithFallback, clickWithRetry, navigateWithRetry, isRetryableError } from './errorRecovery.js';
@@ -2271,6 +2272,12 @@ export class NaverBlogAutomation {
 
     this.log('🔐 네이버 로그인을 시작합니다...');
     this.log('💡 캡차가 나오면 브라우저에서 직접 해결해주세요!');
+
+    // ✅ [v2.11.144] 로그인 페이지 진입 직전 패스키(WebAuthn) 차단.
+    //   네이버 로그인 페이지는 conditional mediation을 쓰므로 아이디 칸에 포커스만 가도
+    //   "Windows 보안" OS 모달이 뜨고, 그 모달은 페이지 밖이라 자동화가 영구 정지한다.
+    //   세션 매니저를 거치지 않고 만들어진 page(폴백 경로)도 여기서 함께 커버된다.
+    await disablePlatformWebAuthn(page);
 
     const loginUrl = this.options.loginUrl ?? 'https://nid.naver.com/nidlogin.login';
 

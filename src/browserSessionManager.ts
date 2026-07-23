@@ -403,7 +403,6 @@ class BrowserSessionManager {
                 `--window-size=${profile.screen.width},${profile.screen.height}`,
                 '--start-maximized',
                 '--window-position=0,0',
-                '--disable-features=IsolateOrigins,site-per-process,PasswordManager,ThirdPartyCookieBlocking,SameSiteByDefaultCookies',
                 // ✅ [2026-03-27 FIX] --disable-web-security 제거 — JS로 감지 가능한 봇 footprint
                 // ✅ [2026-03-27 FIX] --disable-site-isolation-trials 제거 — 일반 Chrome과 다른 보안 설정
                 // ✅ [2026-03-27 FIX] --disable-gpu 제거 — WebGL 스푸핑(GTX 1060 등)과 논리적 모순
@@ -427,7 +426,15 @@ class BrowserSessionManager {
                 //   WebRTC는 VoIP 아닌 이상 블로그 자동화에 불필요하므로 완전 비활성화가 안전
                 '--force-webrtc-ip-handling-policy=disable_non_proxied_udp',
                 '--webrtc-ip-handling-policy=disable_non_proxied_udp',
-                '--disable-features=WebRtcHideLocalIpsWithMdns',
+                // ✅ [v2.11.144 FIX] --disable-features는 하나로 합쳐야 한다.
+                //   Chrome은 같은 스위치가 중복되면 마지막 것만 채택하므로, 예전에 위쪽에 있던
+                //   '--disable-features=IsolateOrigins,site-per-process,PasswordManager,
+                //    ThirdPartyCookieBlocking,SameSiteByDefaultCookies'가 이 줄에 통째로 덮여
+                //   2026-02-08 "비밀번호 저장 팝업 비활성화" 조치가 계속 무효 상태였다.
+                //   PasswordManager만 복구한다. IsolateOrigins/site-per-process는 사이트 격리를
+                //   실제로 끄게 되어 2026-03-27 안티핑거프린팅 결정(일반 Chrome과 동일하게 유지)과
+                //   충돌하고, 쿠키 관련 2종도 세션 동작을 바꾸므로 별도 검토 후 반영한다.
+                '--disable-features=WebRtcHideLocalIpsWithMdns,PasswordManager',
         ];
 
         // ✅ [2026-03-22] 프록시 서버 인자 추가 (SmartProxy 인증 분리 처리)
@@ -481,6 +488,15 @@ class BrowserSessionManager {
         }
 
         const page = await browser.newPage();
+
+        // ✅ [v2.11.144] 패스키(WebAuthn) OS 프롬프트 차단 — "Windows 보안" 모달은 페이지 밖이라
+        //   Puppeteer가 닫을 수 없고 WebAuthn timeout으로도 안 닫힌다(실측). 로그인 진입 전에 건다.
+        try {
+            const { disablePlatformWebAuthn } = await import('./automation/webauthnGuard.js');
+            await disablePlatformWebAuthn(page);
+        } catch (e) {
+            console.warn('[BrowserSessionManager] 패스키 차단 적용 실패 (무시):', (e as Error).message);
+        }
 
         // ✅ [v1.4.54] 진단 버퍼 연결 — 실패 시 자동 덤프용 console/network 수집
         try {
