@@ -12,8 +12,18 @@ function LewordPage() {
         const prevTitle = document.title;
         document.title = 'LEWORD Pro Web';
 
+        // 다른 페이지에서 넘어온 경우 이미 붙은 자동광고(사이드레일/앵커)가 콘솔 UI를 덮는다 — 제거.
+        const removeAutoAds = () => {
+            document.querySelectorAll('ins.adsbygoogle, .adsbygoogle-noablate, [id^="google_ads_iframe"]').forEach((el) => {
+                el.parentElement?.removeChild(el);
+            });
+        };
+        removeAutoAds();
+        const adCleanupTimer = window.setInterval(removeAutoAds, 1500);
+
         return () => {
             document.title = prevTitle;
+            window.clearInterval(adCleanupTimer);
         };
     }, []);
 

@@ -929,6 +929,12 @@
       padding: 2px 7px; border-radius: 999px;
       background: rgba(16,185,129,.14); color: #0d9668; border: 1px solid rgba(16,185,129,.35);
     }
+    .kin-hidden-gem-badge {
+      font-style: normal; font-weight: 800; font-size: 10px;
+      padding: 2px 8px; border-radius: 999px;
+      background: linear-gradient(135deg, rgba(244,63,94,.12), rgba(251,191,36,.14));
+      color: #be123c; border: 1px solid rgba(244,63,94,.35);
+    }
     /* ===== v2.49.72 디자인 폴리시 레이어 — 입체감·호버·타이포 리듬 (캐스케이드 오버라이드) ===== */
     body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     .panel {
@@ -6145,7 +6151,7 @@
     // evidence 의 kin-* 파리티 필드에서 읽어 웹에도 표시한다. kin 데이터 없으면 빈 문자열.
     function kinQuestionMetaHtml(row) {
       const evidence = row && Array.isArray(row.evidence) ? row.evidence : [];
-      let viewCount = null; let answerCount = null; let daysAgo = null; let url = ''; let adopted = false;
+      let viewCount = null; let answerCount = null; let daysAgo = null; let url = ''; let adopted = false; let hiddenGem = false;
       evidence.forEach(function(item) {
         const textItem = String(item || '');
         let m = textItem.match(/^kin-view-count (d+)/); if (m) viewCount = Number(m[1]);
@@ -6153,9 +6159,11 @@
         m = textItem.match(/^kin-days-ago (d+)/); if (m) daysAgo = Number(m[1]);
         m = textItem.match(/^kin-url (S+)/); if (m) url = m[1];
         if (textItem === 'kin-adopted') adopted = true;
+        if (textItem === 'kin-hidden-gem') hiddenGem = true;
       });
       if (viewCount === null && answerCount === null && !url) return '';
       const parts = [];
+      if (hiddenGem) parts.push('<em class="kin-hidden-gem-badge">💎 숨은 꿀질문</em>');
       if (viewCount !== null) parts.push('조회 ' + fmt(viewCount));
       if (answerCount !== null) parts.push('답변 ' + fmt(answerCount));
       if (daysAgo !== null) parts.push(daysAgo + '일 전');
