@@ -1153,7 +1153,7 @@
         .cms-preview-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
         .cms-preview-tabs button { border:1px solid var(--border); border-radius:999px; background:rgba(255,255,255,.04); color:var(--text-secondary); padding:7px 11px; font-size:.75rem; cursor:pointer; font-weight:800; }
         .cms-preview-tabs button.active { background:linear-gradient(135deg,#f7d94a,#b9ff4a); color:#101318; border-color:transparent; }
-        .cms-live-preview { overflow:hidden; border:1px solid rgba(255,255,255,.10); border-radius:16px; background:rgba(0,0,0,.22); }
+        .cms-live-preview { overflow-y:auto; max-height:38vh; border:1px solid rgba(255,255,255,.10); border-radius:16px; background:rgba(0,0,0,.22); }
         .cms-preview-hero { min-height:230px; padding:28px; background-size:cover; background-position:center; position:relative; }
         .cms-preview-hero:before { content:""; position:absolute; inset:0; background:linear-gradient(90deg,rgba(5,9,14,.78),rgba(5,9,14,.18)); }
         .cms-preview-hero > * { position:relative; z-index:1; }
@@ -1169,7 +1169,8 @@
         .cms-preview-card p { margin:0; color:var(--text-secondary); font-size:.78rem; line-height:1.55; }
         .cms-preview-pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
         .cms-preview-pill { border:1px solid rgba(201,168,76,.35); color:#ffe27a; border-radius:999px; padding:5px 9px; font-size:.72rem; font-weight:800; }
-        .cms-preview-frame { margin-top:12px; width:100%; height:330px; border:1px solid rgba(255,255,255,.10); border-radius:14px; background:#05070b; }
+        .cms-preview-frame { margin-top:12px; width:100%; height:68vh; min-height:420px; border:1px solid rgba(255,255,255,.10); border-radius:14px; background:#05070b; }
+        .cms-preview-realhint { margin:12px 0 -4px; font-size:12px; color:rgba(255,255,255,.55); }
         .cms-media-tools { display:grid; grid-template-columns:92px 1fr; gap:10px; margin-top:8px; align-items:center; }
         .cms-thumb { width:92px; height:58px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,.05); display:grid; place-items:center; color:var(--text-secondary); overflow:hidden; font-size:.7rem; }
         .cms-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
@@ -4428,7 +4429,7 @@
             editPane.className = 'cms-editor-pane';
             const previewPane = document.createElement('aside');
             previewPane.className = 'cms-preview-pane';
-            previewPane.innerHTML = '<div class="cms-preview-head"><div><h3>사이트 미리보기</h3><p>왼쪽 수정값이 즉시 반영됩니다. 저장하면 이 미리보기 데이터가 실제 사이트 콘텐츠로 적용됩니다.</p></div><button class="btn" type="button" onclick="saveEditorContent()">미리보기대로 적용</button></div><div class="cms-preview-tabs" id="cms-preview-tabs"><button type="button" data-preview-mode="home">홈</button><button type="button" data-preview-mode="pricing">구매/요금제</button><button type="button" data-preview-mode="products">제품정보</button><button type="button" data-preview-mode="downloads">다운로드</button><button type="button" data-preview-mode="design">디자인/음악</button></div><div class="cms-live-preview" id="cms-live-preview"></div><iframe class="cms-preview-frame" src="/?nomusic=1" title="실제 사이트 미리보기"></iframe>';
+            previewPane.innerHTML = '<div class="cms-preview-head"><div><h3>사이트 미리보기</h3><p>왼쪽 수정값이 즉시 반영됩니다. 저장하면 이 미리보기 데이터가 실제 사이트 콘텐츠로 적용됩니다.</p></div><button class="btn" type="button" onclick="saveEditorContent()">미리보기대로 적용</button></div><div class="cms-preview-tabs" id="cms-preview-tabs"><button type="button" data-preview-mode="home">홈</button><button type="button" data-preview-mode="pricing">구매/요금제</button><button type="button" data-preview-mode="products">제품정보</button><button type="button" data-preview-mode="downloads">다운로드</button><button type="button" data-preview-mode="design">디자인/음악</button></div><div class="cms-live-preview" id="cms-live-preview"></div><p class="cms-preview-realhint">↓ 아래는 실제 사이트입니다. 위 편집 요약과 달리 저장(미리보기대로 적용) 후에 바뀝니다.</p><iframe class="cms-preview-frame" id="cms-preview-frame" src="/?nomusic=1" title="실제 사이트 미리보기"></iframe>';
             tabs.insertAdjacentElement('afterend', shell);
             shell.appendChild(editPane);
             shell.appendChild(previewPane);
@@ -6144,9 +6145,15 @@
                     dirty: siteContentEditorState.editGeneration !== savedEditGeneration
                 };
                 renderAdminContentSummary(data);
+                // 저장 성공 → 실제 사이트 iframe 을 새로고침해 변경을 즉시 반영한다
+                // (site content 는 API 에서 읽으므로 재빌드 없이 바로 보인다).
+                try {
+                    const frame = document.getElementById('cms-preview-frame');
+                    if (frame) frame.src = '/?nomusic=1&ts=' + Date.now();
+                } catch {}
                 showToast(siteContentEditorState.dirty
                     ? '✅ 저장 완료 · 저장 중 추가로 수정한 내용은 한 번 더 저장하세요.'
-                    : '✅ 서버에 저장했습니다. 실제 사이트가 이 데이터를 읽습니다.');
+                    : '✅ 서버에 저장했습니다. 아래 미리보기가 새로고침됩니다.');
                 return true;
             } catch (err) {
                 showToast('⚠️ 서버 저장을 중단했습니다: ' + err.message);
