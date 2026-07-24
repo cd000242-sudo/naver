@@ -917,6 +917,53 @@
     .result-list strong { font-size: 13px; overflow-wrap: anywhere; }
     .result-list span { color: var(--muted); overflow-wrap: anywhere; }
     .result-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    /* v2.49.72: 지식인 질문 메타(앱 파리티) */
+    .kin-question-meta {
+      display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      padding: 5px 10px; border-radius: 8px;
+      background: rgba(14,165,233,.07); border: 1px solid rgba(14,165,233,.22);
+      color: var(--text-2) !important; font-size: 11.5px; width: fit-content;
+    }
+    .kin-adopted-badge {
+      font-style: normal; font-weight: 800; font-size: 10px;
+      padding: 2px 7px; border-radius: 999px;
+      background: rgba(16,185,129,.14); color: #0d9668; border: 1px solid rgba(16,185,129,.35);
+    }
+    /* ===== v2.49.72 디자인 폴리시 레이어 — 입체감·호버·타이포 리듬 (캐스케이드 오버라이드) ===== */
+    body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    .panel {
+      box-shadow: 0 1px 2px rgba(19,36,26,.04), 0 8px 24px -18px rgba(19,36,26,.18);
+      border-radius: 14px;
+      transition: box-shadow .18s ease;
+    }
+    .panel:hover { box-shadow: 0 2px 4px rgba(19,36,26,.05), 0 14px 34px -18px rgba(19,36,26,.22); }
+    .tool-tab {
+      border-radius: 12px;
+      transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+    }
+    .tool-tab:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -14px rgba(19,36,26,.28); }
+    .tool-tab.active {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff; border-color: transparent;
+      box-shadow: 0 10px 26px -12px rgba(16,185,129,.55);
+    }
+    .tool-tab.active strong, .tool-tab.active span, .tool-tab.active em { color: #fff; }
+    button, .tiny-btn, .side-link, .intent-branch { transition: transform .12s ease, box-shadow .12s ease, background .12s ease; }
+    .tiny-btn:hover, .intent-branch:hover { transform: translateY(-1px); box-shadow: 0 6px 14px -8px rgba(19,36,26,.3); }
+    .side-link { border-radius: 10px; }
+    .side-link:hover { transform: translateX(2px); }
+    table tbody tr { transition: background .12s ease; }
+    table tbody tr:hover { background: rgba(16,185,129,.05); }
+    .grade.SSS {
+      background: linear-gradient(135deg, #f43f5e, #e11d48);
+      color: #fff; border: none; font-weight: 800;
+      box-shadow: 0 4px 12px -6px rgba(225,29,72,.55);
+    }
+    .result-list li { border-top-color: var(--line-soft); }
+    ::-webkit-scrollbar { width: 9px; height: 9px; }
+    ::-webkit-scrollbar-thumb { background: rgba(86,106,93,.32); border-radius: 999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(86,106,93,.5); }
+    ::-webkit-scrollbar-track { background: transparent; }
     .mindmap-view { display: grid; gap: 12px; margin-top: 12px; }
     .mindmap-root {
       border: 1px solid rgba(14,165,233,.42);
@@ -2283,17 +2330,19 @@
     const youtubeFeature = { id: 'youtube', group: 'youtube', title: '유튜브 황금키워드 및 쇼츠분석', status: 'ready', route: endpoints.youtubeGolden, desc: 'YouTube 급상승/쇼츠 영상 신호를 수집하고 네이버 수요와 교차검증합니다.', defaultTargetCount: 50, payload: (_q, options) => ({ maxResults: options.targetCount || 50, categoryId: options.categoryId && options.categoryId !== 'all' ? options.categoryId : undefined, crossReferenceNaver: options.crossReferenceNaver !== false, includeShortsSignals: options.includeShortsSignals !== false, includeAiInference: options.includeAiInference === true }) };
 
     const features = [
-      { id: 'pro-traffic', group: 'keyword', title: 'PRO 트래픽 폭발키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '서버가 24시간 prewarm한 PRO 트래픽 후보를 먼저 보여주고, 필요하면 실시간 job으로 보강합니다.', defaultTargetCount: 60, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 60, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false, autoDiscovery: true, contextKeywords: buildLookupContextKeywords(q || options.autoSeedKeyword || '', 180), includeAiInference: options.includeAiInference === true }) },
+      // v2.49.72: pro-traffic 을 배열 끝으로 — 코드 전반의 "|| features[0]" 폴백이
+      // 숨긴 기능을 되살리던 탈출구를 구조적으로 봉쇄(폴백 = naver-mate).
       { id: 'naver-mate', group: 'keyword', title: '네이버 메이트 황금키워드 헌터', status: 'ready', route: endpoints.naverMate, desc: '네이버 자동완성/연관어를 실측 검색량과 연결해 네이버 친화 롱테일 후보를 확장합니다.', requiresKeyword: false, defaultTargetCount: 50, payload: (q, options) => ({ seedKeyword: q || options.autoSeedKeyword || '오늘 실시간 이슈', targetCount: options.targetCount || 50, includeAutocomplete: true, includeRelated: true, includeVolumeMetrics: options.includeVolumeMetrics !== false, autoDiscovery: !q, contextKeywords: buildLookupContextKeywords(q || options.autoSeedKeyword || '', 120), includeAiInference: options.includeAiInference === true }) },
       { id: 'shopping', group: 'keyword', title: '쇼핑커넥트 황금제품키워드', status: 'ready', route: endpoints.shoppingConnect, desc: '지금 이슈가 있거나 구매 전환 가능성이 있는 상품 신호를 블로그 진입형 제품 키워드로 변환합니다.', requiresKeyword: false, defaultTargetCount: 30, payload: (q, options) => ({ keyword: q || '', targetCount: options.targetCount || 30, autoDiscoveryLimit: options.targetCount || 30, sort: options.sort || 'sim', requireSellableIntent: true, autoDiscovery: !q, contextKeywords: buildLookupContextKeywords(q || options.autoSeedKeyword || '', 120), includeAiInference: options.includeAiInference === true }) },
-      { id: 'kin', group: 'keyword', title: '지식인 황금키워드', status: 'ready', route: endpoints.kin, desc: '지식인 질문 신호에서 답변 수요가 높고 문서 경쟁이 낮은 정보형 키워드를 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true, contextKeywords: buildLookupContextKeywords(options.autoSeedKeyword || '', 120), includeAiInference: options.includeAiInference === true }) }
+      { id: 'kin', group: 'keyword', title: '지식인 황금키워드', status: 'ready', route: endpoints.kin, desc: '지식인 질문 신호에서 답변 수요가 높고 문서 경쟁이 낮은 정보형 키워드를 발굴합니다.', defaultTargetCount: 30, payload: (_q, options) => ({ tabType: ['rising', 'full'].includes(options.sort) ? options.sort : 'trending', targetCount: options.targetCount || 30, isPremiumRequest: true, contextKeywords: buildLookupContextKeywords(options.autoSeedKeyword || '', 120), includeAiInference: options.includeAiInference === true }) },
+      { id: 'pro-traffic', group: 'keyword', title: 'PRO 트래픽 폭발키워드 헌터', status: 'ready', route: endpoints.proTraffic, desc: '서버가 24시간 prewarm한 PRO 트래픽 후보를 먼저 보여주고, 필요하면 실시간 job으로 보강합니다.', defaultTargetCount: 60, payload: (q, options) => ({ categoryId: options.categoryId || 'all', seedKeyword: q || undefined, targetCount: options.targetCount || 60, includeSeasonal: options.includeSeasonal !== false, includeEvergreen: options.includeEvergreen !== false, includeFreshIssue: options.includeFreshIssue !== false, autoDiscovery: true, contextKeywords: buildLookupContextKeywords(q || options.autoSeedKeyword || '', 180), includeAiInference: options.includeAiInference === true }) }
     ];
 
     let session = null;
     let liveGoldenReviewSession = null;
     let liveGoldenReviewPacket = null;
     let pcCatalog = null;
-    let selectedToolId = 'pro-traffic';
+    let selectedToolId = 'naver-mate'; // v2.49.72 PRO 트래픽 메뉴 숨김 → 기본 선택을 네이버 메이트로
     let selectedToolGroupId = 'keyword';
     let lastKeywordResult = null;
     let activeViewId = 'golden';
@@ -2312,7 +2361,9 @@
     const analyticsSessionStorageKey = 'leword.analytics.session.v1';
     const analyticsExcludeStorageKey = 'leword.analytics.exclude.v1';
     let recentLoginCredentialValues = [];
-    const toolTabFeatureIds = ['pro-traffic', 'naver-mate', 'shopping', 'kin'];
+    // v2.49.72: PRO 트래픽은 황금키워드와 목적 중복 → 메뉴에서 숨김(기능 정의/라우트는 features 배열에 보존).
+    //   되돌리려면 아래 배열 맨 앞에 'pro-traffic' 을 다시 추가.
+    const toolTabFeatureIds = ['naver-mate', 'shopping', 'kin'];
     const viewIds = ['golden', 'lookup', 'features', 'youtube', 'settings', 'downloads', 'commerce'];
     let pendingViewAfterLogin = null;
     const catalogTabs = [
@@ -5414,10 +5465,29 @@
       }
       return naturalMindmapTailBranches(seed, keyword, 6);
     }
+    // v2.49.72: 실데이터 우선 칩 — 결과셋에 실제로 잡힌(자동완성·연관어 유래·실측) 자식 행을
+    // 1순위로 쓰고, 템플릿 조합은 부족할 때만 채움. "이유/방법/비교" 뻔한 조합 도배 해소.
+    let currentMindmapAllRows = [];
+    function realChildBranchesFromRows(rowKeyword, limit) {
+      const baseKey = compactKeywordText(rowKeyword);
+      if (!baseKey || baseKey.length < 2) return [];
+      const out = [];
+      for (let i = 0; i < currentMindmapAllRows.length; i++) {
+        const sibling = normalizeText(currentMindmapAllRows[i] && currentMindmapAllRows[i].keyword || '');
+        if (!sibling) continue;
+        const siblingKey = compactKeywordText(sibling);
+        if (!siblingKey || siblingKey === baseKey) continue;
+        if (siblingKey.indexOf(baseKey) < 0) continue; // 진짜 자식(원 키워드를 포함하는 롱테일)만
+        out.push(sibling);
+        if (out.length >= (limit || 4)) break;
+      }
+      return out;
+    }
     function mindmapExpansionBranches(seed, row) {
       const keyword = normalizeText(row && row.keyword || seed);
       const guide = keywordIntentGuide(row || { keyword: keyword });
       return uniqueIntentBranches([].concat(
+        realChildBranchesFromRows(keyword, 4),
         naverAutocompleteLikeBranches(keyword),
         guide && guide.branches ? guide.branches : [],
         naturalMindmapTailBranches(seed, keyword, 8),
@@ -5476,6 +5546,7 @@
         qs('keywordRows').innerHTML = '<tr><td colspan="12" class="muted">마인드맵 후보가 비어 있습니다. API 키 상태 또는 검색어를 확인하세요.</td></tr>';
         return;
       }
+      currentMindmapAllRows = rows; // v2.49.72: 리스트 칩도 결과셋 실측 자식 행을 1순위로
       qs('keywordRows').innerHTML = rows.map(function(row) {
         const displayGrade = hasMeasuredKeywordMetrics(row) ? displayGradeForRow(row) : '측정 필요';
         const branches = mindmapExpansionBranches(seed, row).slice(0, 5);
@@ -5530,10 +5601,18 @@
         return Number(b && b.totalSearchVolume || 0) - Number(a && a.totalSearchVolume || 0);
       }).slice(0, 40);
       const measured = rows.filter(hasMeasuredKeywordMetrics).length;
+      // v2.49.72: 칩의 실데이터 소스 — 이 결과셋 전체(실측 자동완성·연관어 확장 행)
+      currentMindmapAllRows = rows;
       const questionRows = rows.filter(function(row) {
         return mindmapIssueLongtailBranches(seedLabel, row).length > 0;
       }).slice(0, 20);
-      const expansionRows = rows.slice(0, 30);
+      // v2.49.72: 두 섹션에 같은 행이 중복 표시되던 결함 — 의문형 섹션에 이미 나온 행은
+      // 확장 섹션에서 제외해 각 행이 한 번만 보이게 한다.
+      const questionKeySet = {};
+      questionRows.forEach(function(row) { questionKeySet[compactKeywordText(row && row.keyword || '')] = true; });
+      const expansionRows = rows.filter(function(row) {
+        return !questionKeySet[compactKeywordText(row && row.keyword || '')];
+      }).slice(0, 30);
       target.hidden = false;
       target.innerHTML = '<h3>마인드맵 확장</h3>'
         + '<p>원 키워드에서 실제 글감으로 이어지는 후속 의문형, 이슈 롱테일, 자동완성 확장을 분리했습니다. 검색량/문서수/경쟁비는 실측된 값만 숫자로 표시합니다.</p>'
@@ -6062,13 +6141,37 @@
         { label: '시간', value: new Date().toLocaleTimeString('ko-KR') },
       ], []);
     }
+    // v2.49.72: 지식인 파리티 — 데스크톱 앱처럼 질문 상세(조회·답변·채택·경과일·원문 링크)를
+    // evidence 의 kin-* 파리티 필드에서 읽어 웹에도 표시한다. kin 데이터 없으면 빈 문자열.
+    function kinQuestionMetaHtml(row) {
+      const evidence = row && Array.isArray(row.evidence) ? row.evidence : [];
+      let viewCount = null; let answerCount = null; let daysAgo = null; let url = ''; let adopted = false;
+      evidence.forEach(function(item) {
+        const textItem = String(item || '');
+        let m = textItem.match(/^kin-view-count (d+)/); if (m) viewCount = Number(m[1]);
+        m = textItem.match(/^kin-answer-count (d+)/); if (m) answerCount = Number(m[1]);
+        m = textItem.match(/^kin-days-ago (d+)/); if (m) daysAgo = Number(m[1]);
+        m = textItem.match(/^kin-url (S+)/); if (m) url = m[1];
+        if (textItem === 'kin-adopted') adopted = true;
+      });
+      if (viewCount === null && answerCount === null && !url) return '';
+      const parts = [];
+      if (viewCount !== null) parts.push('조회 ' + fmt(viewCount));
+      if (answerCount !== null) parts.push('답변 ' + fmt(answerCount));
+      if (daysAgo !== null) parts.push(daysAgo + '일 전');
+      if (adopted) parts.push('<em class="kin-adopted-badge">채택완료</em>');
+      const linkBtn = url && /^https?://(kin.naver.com|m.kin.naver.com)//.test(url)
+        ? ' <a class="tiny-btn" href="' + escapeAttr(url) + '" target="_blank" rel="noopener">지식인 원문</a>'
+        : '';
+      return '<span class="kin-question-meta">🙋 ' + parts.join(' · ') + linkBtn + '</span>';
+    }
     function renderToolFeatureResult(feature, result) {
       if (!feature || !feature.id) return;
       if (result && Array.isArray(result.keywords)) {
         const rows = result.keywords;
         const summary = result.summary || {};
         const topRows = rows.slice(0, 12).map(function(row) {
-          return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 비율 ' + fmt(row.goldenRatio) + '</span>' + keywordIntentGuideHtml(row) + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
+          return '<li><strong>' + escapeHtml(row.keyword || '-') + '</strong><span>등급 ' + escapeHtml(row.grade || '-') + ' · 전체 ' + fmt(row.totalSearchVolume) + ' · PC ' + fmt(row.pcSearchVolume) + ' · 모바일 ' + fmt(row.mobileSearchVolume) + ' · 문서 ' + fmt(row.documentCount) + ' · 비율 ' + fmt(row.goldenRatio) + '</span>' + kinQuestionMetaHtml(row) + keywordIntentGuideHtml(row) + publishDecisionInline(row) + keywordActionHtml(row.keyword || '') + '</li>';
         });
         const publishReady = rows.filter(function(row) {
           const decision = publishDecisionFor(row);
@@ -9163,8 +9266,10 @@
       selectTool(selectedToolId);
     }
     function renderToolTabs() {
+      // v2.49.72: 화이트리스트 전용 — 어떤 상태 꼬임으로 selectedToolId 가 숨긴 기능이 돼도
+      // 탭은 절대 되살아나지 않는다.
       const visibleRows = currentGroupFeatures().filter(function(feature) {
-        return toolTabFeatureIds.indexOf(feature.id) >= 0 || feature.id === selectedToolId;
+        return toolTabFeatureIds.indexOf(feature.id) >= 0;
       });
       qs('toolTabs').innerHTML = visibleRows.map(function(feature) {
         const active = feature.id === selectedToolId ? ' active' : '';
@@ -9244,7 +9349,9 @@
       return latestSourceKeywordForCategory(categoryId) || categoryAutoSeed(categoryId);
     }
     function selectTool(id) {
-      const feature = features.find(function(row) { return row.id === id; }) || features[0];
+      // v2.49.72: 숨긴 기능(화이트리스트 밖)은 선택 자체를 첫 번째 보이는 탭으로 강제 우회.
+      const safeId = toolTabFeatureIds.indexOf(id) >= 0 ? id : toolTabFeatureIds[0];
+      const feature = features.find(function(row) { return row.id === safeId; }) || features[0];
       selectedToolId = feature.id;
       selectedToolGroupId = feature.group || selectedToolGroupId;
       qs('toolTargetCount').value = String(feature.defaultTargetCount || 30);
