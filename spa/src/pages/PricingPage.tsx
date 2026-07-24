@@ -199,6 +199,9 @@ function PricingPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
     const tossRef = useRef<any | null>(null);
     const [sdkReady, setSdkReady] = useState(false);
+    // 체험하기 클릭 시 비밀번호를 바로 보여주는 모달. 이메일 답장을 못 받아 비번을
+    // 모르는 이탈을 막는다 — 모든 다운로드 비번은 1645 로 동일하다.
+    const [trialPwOpen, setTrialPwOpen] = useState(false);
     const paymentSectionRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -241,8 +244,8 @@ function PricingPage() {
 
     const onSelect = (p: Plan) => {
         if (p.free) {
-            // 무료 체험은 Better Life Naver만 제공되며 다운로드 페이지로 이동한다.
-            window.location.href = '/download';
+            // 무료 체험: 비밀번호를 모달로 바로 안내한다(이메일 답장 대기로 인한 이탈 방지).
+            setTrialPwOpen(true);
             return;
         }
         setSelected(p);
@@ -321,6 +324,60 @@ function PricingPage() {
     );
 
     return (
+        <div style={{
+            position: 'relative',
+            zIndex: 1,
+        }}>
+        {trialPwOpen && (
+            <div
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="trial-pw-title"
+                onClick={() => setTrialPwOpen(false)}
+                style={{
+                    position: 'fixed', inset: 0, zIndex: 2000,
+                    background: 'rgba(3,6,12,0.72)', backdropFilter: 'blur(4px)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20,
+                }}
+            >
+                <div
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                        width: '100%', maxWidth: 420, borderRadius: 20, padding: '30px 26px 26px',
+                        background: 'linear-gradient(180deg, #141821, #0c0f16)',
+                        border: '1px solid rgba(255,255,255,0.12)', boxShadow: '0 30px 90px rgba(0,0,0,0.5)',
+                        textAlign: 'center', position: 'relative',
+                    }}
+                >
+                    <button
+                        type="button" aria-label="닫기" onClick={() => setTrialPwOpen(false)}
+                        style={{
+                            position: 'absolute', top: 14, right: 16, background: 'none', border: 'none',
+                            color: 'rgba(255,255,255,0.55)', fontSize: 22, cursor: 'pointer', lineHeight: 1,
+                        }}
+                    >×</button>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: '#44d7b6', letterSpacing: '0.06em', marginBottom: 6 }}>무료 체험 다운로드 비밀번호</div>
+                    <h3 id="trial-pw-title" style={{ margin: '0 0 18px', fontSize: 16, fontWeight: 700, color: 'rgba(255,255,255,0.82)' }}>아래 비밀번호를 입력하면 바로 받으실 수 있습니다</h3>
+                    <div style={{
+                        fontSize: 64, fontWeight: 900, letterSpacing: '0.12em', lineHeight: 1,
+                        color: '#FFD700', textShadow: '0 4px 24px rgba(255,215,0,0.35)', margin: '4px 0 10px',
+                    }}>1645</div>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: 'rgba(255,255,255,0.9)', marginBottom: 22 }}>모든 비밀번호 동일합니다.</div>
+                    <button
+                        type="button"
+                        onClick={() => { window.location.href = '/download'; }}
+                        style={{
+                            width: '100%', padding: '14px 18px', borderRadius: 12, border: 'none', cursor: 'pointer',
+                            background: 'linear-gradient(135deg, #FF6B00, #FF9500)', color: '#fff',
+                            fontSize: 16, fontWeight: 800,
+                        }}
+                    >🚀 다운로드 페이지로 이동</button>
+                    <p style={{ margin: '14px 0 0', fontSize: 12, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
+                        이메일 답장을 기다리지 않으셔도 됩니다. 위 비밀번호를 그대로 입력하세요.
+                    </p>
+                </div>
+            </div>
+        )}
         <div style={{
             position: 'relative',
             zIndex: 1,
@@ -897,6 +954,7 @@ function PricingPage() {
                     @keyframes spinPay{to{transform:rotate(360deg)}}
                 `}</style>
             </section>
+        </div>
         </div>
     );
 }
