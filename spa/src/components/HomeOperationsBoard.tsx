@@ -510,13 +510,28 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     text-decoration: none;
                     transition: border-color .16s ease, background .16s ease, transform .16s ease;
                 }
-                .home-ops-intro-card:hover {
-                    border-color: rgba(105, 183, 255, .55);
-                    background: rgba(105, 183, 255, .08);
-                    transform: translateY(-1px);
-                }
-                .home-ops-intro-card strong { display: block; margin-bottom: 5px; font-size: 15px; color: #fff; }
+                .home-ops-intro-card:hover { transform: translateY(-1px); }
+                .home-ops-intro-card strong { display: block; margin-bottom: 5px; font-size: 15px; }
                 .home-ops-intro-card span { font-size: 13px; line-height: 1.55; color: rgba(255, 255, 255, .74); }
+                /* 제품별 대표 색상 — LEWORD 파랑 / Better Life Naver 초록 / Leaders Orbit 주황. */
+                .home-ops-intro-card--blue {
+                    border-color: rgba(74, 158, 255, .5);
+                    background: linear-gradient(135deg, rgba(74, 158, 255, .16), rgba(74, 158, 255, .05));
+                }
+                .home-ops-intro-card--blue:hover { border-color: rgba(74, 158, 255, .95); box-shadow: 0 8px 22px rgba(74, 158, 255, .18); }
+                .home-ops-intro-card--blue strong { color: #6db2ff; }
+                .home-ops-intro-card--green {
+                    border-color: rgba(68, 215, 182, .5);
+                    background: linear-gradient(135deg, rgba(68, 215, 182, .16), rgba(68, 215, 182, .05));
+                }
+                .home-ops-intro-card--green:hover { border-color: rgba(68, 215, 182, .95); box-shadow: 0 8px 22px rgba(68, 215, 182, .18); }
+                .home-ops-intro-card--green strong { color: #56e6c8; }
+                .home-ops-intro-card--orange {
+                    border-color: rgba(255, 159, 67, .5);
+                    background: linear-gradient(135deg, rgba(255, 159, 67, .16), rgba(255, 159, 67, .05));
+                }
+                .home-ops-intro-card--orange:hover { border-color: rgba(255, 159, 67, .95); box-shadow: 0 8px 22px rgba(255, 159, 67, .2); }
+                .home-ops-intro-card--orange strong { color: #ffb066; }
                 @media (max-width: 720px) {
                     .home-ops-intro-wrap { padding: 13px 14px; }
                     .home-ops-intro { font-size: 14px; }
@@ -1069,17 +1084,17 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                             아래 <strong>무료 선정 황금키워드</strong>와 <strong>실시간 검색어</strong>는 회원가입 없이 그냥 보셔도 됩니다.
                         </p>
                         <div className="home-ops-intro-cards">
-                            <a className="home-ops-intro-card" href="/leword">
+                            <a className="home-ops-intro-card home-ops-intro-card--blue" href="/leword">
                                 <strong>LEWORD</strong>
-                                <span>검색은 많은데 글은 적은, 지금 써야 할 키워드를 찾아줍니다.</span>
+                                <span>황금키워드 찾기 프로그램</span>
                             </a>
-                            <a className="home-ops-intro-card" href="/detail">
+                            <a className="home-ops-intro-card home-ops-intro-card--green" href="/detail">
                                 <strong>Better Life Naver</strong>
-                                <span>키워드만 넣으면 글·이미지·발행까지 사람이 쓴 것처럼 처리합니다.</span>
+                                <span>네이버 자동화 프로그램</span>
                             </a>
-                            <a className="home-ops-intro-card" href="/orbit">
+                            <a className="home-ops-intro-card home-ops-intro-card--orange" href="/orbit">
                                 <strong>Leaders Orbit</strong>
-                                <span>블로그스팟·워드프레스·티스토리로 외부 유입을 보조합니다.</span>
+                                <span>워드프레스·티스토리·블로그스팟 자동화 및 외부유입 전용 프로그램</span>
                             </a>
                         </div>
                     </div>
