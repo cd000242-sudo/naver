@@ -414,7 +414,9 @@ export async function typeBodyWithRetry(self: any,
     const rich = buildMobileRichHtml(normalizedText, {
       fontSizePx: fontSize,
       highlight: true,
-      maxChunkChars: 38,
+      // [v2.11.144] 38 오버라이드 제거 → 기본 22자(2026-06-11 사용자 레퍼런스 실측).
+      // 38자는 모바일 폭(19px ~20자/줄)을 넘어 브라우저가 단어 중간에서 재줄바꿈
+      // ("…바뀌/지") — 사용자 실측 스샷으로 재확인된 가독성 회귀의 원인이었다.
       maxHighlights: 6,
       tableTheme: richThemes.tableTheme,
       highlightTheme: richThemes.highlightTheme,
@@ -2793,7 +2795,7 @@ export async function setupMobileViewAndCenterAlign(self: any): Promise<void> {
     return;
   }
 
-  // 1. 테블릿 화면 모드 클릭 (한 번 클릭으로 토글)
+  // 1. 테블릿/모바일 화면 모드 클릭 (한 번 클릭으로 토글)
   try {
     const tabletBtn = await findElement(frame, SELECTORS.editor.viewModeTablet, 'viewModeTablet');
     if (tabletBtn) {
@@ -2801,7 +2803,46 @@ export async function setupMobileViewAndCenterAlign(self: any): Promise<void> {
       self.log('📱 테블릿 화면 모드로 전환');
       await self.delay(300);
     } else {
-      self.log('ℹ️ 테블릿 모드 버튼 미발견 (이미 적용됐거나 UI 변경) → skip');
+      // [v2.11.144] 셀렉터 전멸 시 스캔 폴백 — 네이버가 기기전환 버튼 클래스를 바꿔
+      // 등록 셀렉터가 전부 실패, PC 화면에서 작성되던 문제(사용자 실측 스샷).
+      // class/title/aria에서 device·태블릿·모바일 계열을 찾아 클릭하고, 후보 목록을
+      // 로그로 남겨 다음 UI 변경 때 셀렉터 레지스트리를 즉시 갱신할 수 있게 한다.
+      const scanResult = await frame.evaluate(() => {
+        const buttons = Array.from(document.querySelectorAll('button, [role="button"]'));
+        const candidates: Array<{ cls: string; title: string; aria: string }> = [];
+        let clicked = '';
+        for (const el of buttons) {
+          if (!(el instanceof HTMLElement)) continue;
+          const cls = String(el.className || '');
+          const title = String(el.getAttribute('title') || '');
+          const aria = String(el.getAttribute('aria-label') || '');
+          const haystack = `${cls} ${title} ${aria}`;
+          if (/device|태블릿|테블릿|모바일|mobile|tablet|화면\s*크기|미리보기/i.test(haystack)) {
+            candidates.push({ cls: cls.substring(0, 80), title, aria });
+            // PC(데스크탑) 버튼은 제외, 모바일 우선 → 태블릿 순으로 클릭
+            if (!clicked && /모바일|mobile/i.test(haystack) && !/desktop|데스크/i.test(haystack)) {
+              el.click();
+              clicked = `mobile: ${cls.substring(0, 60) || title || aria}`;
+            }
+          }
+        }
+        if (!clicked) {
+          const tablet = buttons.find((el) => el instanceof HTMLElement
+            && /태블릿|테블릿|tablet/i.test(`${el.className} ${el.getAttribute('title') || ''} ${el.getAttribute('aria-label') || ''}`));
+          if (tablet instanceof HTMLElement) {
+            tablet.click();
+            clicked = 'tablet-fallback';
+          }
+        }
+        return { clicked, candidates: candidates.slice(0, 8) };
+      }).catch(() => ({ clicked: '', candidates: [] as any[] }));
+
+      if (scanResult.clicked) {
+        self.log(`📱 [스캔 폴백] 기기전환 버튼 클릭: ${scanResult.clicked}`);
+        await self.delay(300);
+      } else {
+        self.log(`ℹ️ 테블릿/모바일 모드 버튼 미발견 → skip (스캔 후보 ${scanResult.candidates.length}개: ${JSON.stringify(scanResult.candidates)})`);
+      }
     }
   } catch (e) {
     self.log(`⚠️ 테블릿 모드 전환 실패 (무시): ${(e as Error).message}`);

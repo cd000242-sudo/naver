@@ -182,8 +182,18 @@ export const EDITOR_SELECTORS: SelectorMap<EditorSelectorKey> = {
       'button[data-log="flbbtn.vdesktop"][class*="tablet"]',
       'button.__mode-button.se-util-button-device-tablet',
       'button[title*="테블릿"]',
+      // [v2.11.144] 네이버 UI 변경으로 기존 tablet 클래스 전멸 (라이브: PC 화면 작성됨).
+      // 모바일 변형 + title/aria 계열 추가. 셀렉터 전멸 시 editorHelpers의 스캔 폴백이
+      // 후보를 로그로 남긴다.
+      'button.se-util-button-device-mobile',
+      'button[class*="device-mobile"]',
+      'button[class*="device-tablet"]',
+      'button[title*="태블릿"]',
+      'button[title*="모바일"]',
+      'button[aria-label*="태블릿"]',
+      'button[aria-label*="모바일"]',
     ],
-    '테블릿 화면 보기 모드 버튼',
+    '테블릿/모바일 화면 보기 모드 버튼',
   ),
   alignDropdownButton: entry(
     'button[data-name="align-drop-down-with-justify"]',

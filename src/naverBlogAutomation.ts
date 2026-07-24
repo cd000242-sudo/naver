@@ -4858,7 +4858,7 @@ export class NaverBlogAutomation {
     const rich = buildMobileRichHtml(richSource, {
       fontSizePx: 19,
       highlight: true,
-      maxChunkChars: 38,
+      // [v2.11.144] 38 오버라이드 제거 → 기본 22자 (모바일 폭 재줄바꿈 방지, 실측 교정).
       maxHighlights: 8,
       tableTheme: richThemes.tableTheme,
       highlightTheme: richThemes.highlightTheme,
