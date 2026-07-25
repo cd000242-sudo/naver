@@ -3,25 +3,24 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 describe('homepage operations layout', () => {
-  it('renders four home sub-tabs with 부방장 선정 황금키워드 as the default and preloads income', () => {
+  it('renders three home sub-tabs with 실시간 as the default and preloads income', () => {
     const source = readFileSync(
       join(process.cwd(), 'spa', 'src', 'components', 'HomeOperationsBoard.tsx'),
       'utf8',
     );
 
-    // 4-tab contract in the order 공지사항 → 부방장 선정 황금키워드 → 실시간 검색어 → 수익 인증.
-    expect(source).toContain("type HomeOperationsTab = 'notice' | 'deputy' | 'realtime' | 'income'");
-    expect(source).toContain("HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['notice', 'deputy', 'realtime', 'income']");
-    expect(source).toContain("useState<HomeOperationsTab>('deputy')"); // default = 부방장 선정 황금키워드
-    expect(source).toContain('부방장 선정 황금키워드');
+    // [2026-07] deputy 탭 제거 후 3탭 계약: 실시간 검색어 → 공지사항 → 수익 인증.
+    //   (기존 4탭 단언은 사이트 개편 커밋이 컴포넌트만 바꾸고 테스트를 미갱신해 드리프트)
+    expect(source).toContain("type HomeOperationsTab = 'notice' | 'realtime' | 'income'");
+    expect(source).toContain("HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['realtime', 'notice', 'income']");
+    expect(source).toContain("useState<HomeOperationsTab>('realtime')"); // default = 실시간
     expect(source).toContain('fetchCommunityIncomeProofs(3, { view: \'home\' })');
 
-    // Left vertical side-nav tablist + four tab panels.
+    // Left vertical side-nav tablist + three tab panels.
     expect(source).toContain('className="home-ops-sidenav"');
     expect(source).toContain('aria-label="홈 보기 선택"');
     expect(source).toContain('data-home-ops-tab={tab}');
     expect(source).toContain('id="home-ops-panel-notice"');
-    expect(source).toContain('id="home-ops-panel-deputy"');
     expect(source).toContain('id="home-ops-panel-realtime"');
     expect(source).toContain('id="home-ops-panel-income"');
 
