@@ -176,24 +176,21 @@ export const EDITOR_SELECTORS: SelectorMap<EditorSelectorKey> = {
   ),
 
   // --- 뷰 모드 / 정렬 (v2.10.x 모바일 친화 자동화) ---
+  // [2026-07-25 Playwright 실측] 단일 사이클 토글: PC→모바일→태블릿→PC.
+  // class/텍스트 = "현재 상태", data-log = "클릭 시 목적지".
+  //   PC 상태:     class device-desktop, data-log flbbtn.vmobile,  라벨 "PC 화면"
+  //   모바일 상태: class device-mobile,  data-log flbbtn.vtablet,  라벨 "모바일 화면"
+  //   태블릿 상태: class device-tablet,  data-log flbbtn.vdesktop, 라벨 "테블릿 화면"
+  // 따라서 클릭 대상은 "PC 상태 버튼"만 등록한다 — 이미 모바일이면 매칭 자체가 안 돼
+  // 클릭이 스킵되고(멱등), 모바일 상태 버튼을 클릭 대상으로 넣으면 태블릿으로 이탈한다.
+  // 태블릿 상태(2클릭 필요)와 미지의 UI는 editorHelpers의 스캔 폴백이 처리.
   viewModeTablet: entry(
-    'button.se-util-button-device-tablet',
+    'button[data-log="flbbtn.vmobile"]',
     [
-      'button[data-log="flbbtn.vdesktop"][class*="tablet"]',
-      'button.__mode-button.se-util-button-device-tablet',
-      'button[title*="테블릿"]',
-      // [v2.11.144] 네이버 UI 변경으로 기존 tablet 클래스 전멸 (라이브: PC 화면 작성됨).
-      // 모바일 변형 + title/aria 계열 추가. 셀렉터 전멸 시 editorHelpers의 스캔 폴백이
-      // 후보를 로그로 남긴다.
-      'button.se-util-button-device-mobile',
-      'button[class*="device-mobile"]',
-      'button[class*="device-tablet"]',
-      'button[title*="태블릿"]',
-      'button[title*="모바일"]',
-      'button[aria-label*="태블릿"]',
-      'button[aria-label*="모바일"]',
+      'button.__mode-button.se-util-button-device-desktop',
+      'button.se-util-button-device-desktop',
     ],
-    '테블릿/모바일 화면 보기 모드 버튼',
+    '기기 화면 토글 (PC 상태에서만 매칭 — 클릭 시 모바일 화면)',
   ),
   alignDropdownButton: entry(
     'button[data-name="align-drop-down-with-justify"]',

@@ -2,7 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { buildMobileRichHtml } from '../automation/richTextPaste';
-import { pickDeviceToggleTarget, type DeviceToggleButtonMeta } from '../automation/editorHelpers';
+import {
+  isMobileViewActive,
+  pickDeviceToggleTarget,
+  type DeviceToggleButtonMeta,
+} from '../automation/editorHelpers';
 
 /**
  * [v2.11.144] 모바일 가독성 회귀 잠금 (사용자 실측 스샷 2건).
@@ -32,53 +36,78 @@ describe('mobile line width + view mode (v2.11.144)', () => {
     expect(automation).not.toContain('maxChunkChars: 38');
   });
 
-  it('기기전환 셀렉터에 모바일 변형이 있고, 전멸 시 스캔 폴백이 존재한다', () => {
+  it('기기전환 셀렉터는 "PC 상태 버튼"만 매칭하고, 스캔 폴백 구조가 존재한다', () => {
     const selectors = readFileSync(resolve(__dirname, '../automation/selectors/editorSelectors.ts'), 'utf8');
     const editorHelpers = readFileSync(resolve(__dirname, '../automation/editorHelpers.ts'), 'utf8');
-    expect(selectors).toContain('se-util-button-device-mobile');
-    expect(selectors).toContain('button[title*="모바일"]');
-    // 스캔 폴백: 수집→판정(순수함수)→클릭 구조 + frame/page 양쪽 스캔
-    expect(editorHelpers).toContain('[스캔 폴백] 기기전환 버튼 클릭');
+    // [2026-07-25 실측] 클릭 대상 = PC 상태 토글(data-log=flbbtn.vmobile → 모바일行).
+    expect(selectors).toContain('button[data-log="flbbtn.vmobile"]');
+    expect(selectors).toContain('se-util-button-device-desktop');
+    // 함정 셀렉터 금지: 모바일 "상태" 버튼을 클릭하면 태블릿으로 이탈한다.
+    expect(selectors).not.toContain('button.se-util-button-device-mobile');
+    expect(selectors).not.toContain('button[title*="모바일"]');
+    // 스캔 폴백: 수집→판정(순수함수)→클릭 + frame/page 양쪽 + 수렴 루프
+    expect(editorHelpers).toContain('[스캔 폴백] 기기전환 클릭');
     expect(editorHelpers).toContain('pickDeviceToggleTarget(metas)');
     expect(editorHelpers).toContain('[frame, page].filter(Boolean)');
+    expect(editorHelpers).toContain('isMobileViewActive(metas)');
   });
 
-  // [v2.11.144b] 클릭 판정 순수 함수 — 함정 케이스까지 잠금
-  const meta = (index: number, cls: string, title = '', aria = '', visible = true): DeviceToggleButtonMeta =>
-    ({ index, cls, title, aria, visible });
+  // ── 판정 순수 함수: 2026-07-25 Playwright 실측 DOM 그대로 잠금 ──
+  const meta = (
+    index: number, cls: string,
+    opts: Partial<Omit<DeviceToggleButtonMeta, 'index' | 'cls'>> = {},
+  ): DeviceToggleButtonMeta => ({
+    index, cls, title: '', aria: '', dataLog: '', text: '', visible: true, ...opts,
+  });
+  const LIVE_PC = meta(0, 'se-util-button __mode-button se-util-button-device-desktop',
+    { dataLog: 'flbbtn.vmobile', text: 'PC 화면' });
+  const LIVE_MOBILE = meta(0, 'se-util-button __mode-button se-util-button-device-mobile',
+    { dataLog: 'flbbtn.vtablet', text: '모바일 화면' });
+  const LIVE_TABLET = meta(0, 'se-util-button __mode-button se-util-button-device-tablet',
+    { dataLog: 'flbbtn.vdesktop', text: '테블릿 화면' });
 
-  it('구 UI(device-tablet 클래스)와 신 UI(모바일 라벨) 모두 올바른 버튼을 고른다', () => {
-    // 구 UI: device 클래스 명시
+  it('실측 사이클: PC 상태=1클릭, 태블릿 상태=사이클 진행, 모바일 상태=클릭 금지', () => {
+    // PC 화면 상태 → 클릭 (한 번이면 모바일 도달)
+    expect(pickDeviceToggleTarget([LIVE_PC])).toEqual({ index: 0, reason: 'datalog-vmobile' });
+    // 태블릿 상태 → 클릭 (→PC, 다음 반복에서 →모바일로 수렴)
+    expect(pickDeviceToggleTarget([LIVE_TABLET])).toEqual({ index: 0, reason: 'state-tablet-cycle' });
+    // 이미 모바일 상태 → 절대 클릭 금지 (누르면 태블릿으로 이탈)
+    expect(pickDeviceToggleTarget([LIVE_MOBILE])).toBeNull();
+    expect(isMobileViewActive([LIVE_MOBILE])).toBe(true);
+    expect(isMobileViewActive([LIVE_PC])).toBe(false);
+    // data-log 없는 변형에도 상태 클래스로 판정
     expect(pickDeviceToggleTarget([
-      meta(0, 'se-util-button-device-desktop', 'PC 화면'),
-      meta(1, 'se-util-button-device-tablet', '테블릿 화면'),
-    ])).toEqual({ index: 1, reason: 'class-device-tablet' });
-    // 신 UI 가정: 클래스는 바뀌었지만 라벨에 모바일
-    expect(pickDeviceToggleTarget([
-      meta(0, 'se-toolbar-x1', '', '데스크탑 화면으로 보기'),
-      meta(1, 'se-toolbar-x2', '', '모바일 화면으로 보기'),
-    ])).toEqual({ index: 1, reason: 'label-mobile' });
-    // 모바일 > 태블릿 우선
-    expect(pickDeviceToggleTarget([
-      meta(0, 'se-device-tablet-btn'),
-      meta(1, 'se-device-mobile-btn'),
-    ])?.index).toBe(1);
+      meta(3, 'se-util-button __mode-button se-util-button-device-desktop', { text: 'PC 화면' }),
+    ])).toEqual({ index: 3, reason: 'state-pc' });
   });
 
-  it('함정 버튼(발행 미리보기/데스크탑/숨김)은 절대 클릭하지 않는다', () => {
+  it('함정 버튼(발행 미리보기/데스크탑 라벨/숨김/라벨 오독)은 절대 클릭하지 않는다', () => {
     // 발행 미리보기 버튼에 "모바일 미리보기" 라벨 — 모달 오픈 사고 방지
     expect(pickDeviceToggleTarget([
-      meta(0, 'publish-preview-btn', '모바일 미리보기'),
+      meta(0, 'publish-preview-btn', { title: '모바일 미리보기' }),
     ])).toBeNull();
-    // 데스크탑 전환 버튼만 있는 경우
+    // 데스크탑 전환 라벨만 있는 경우 (device 클래스 없음)
     expect(pickDeviceToggleTarget([
-      meta(0, 'se-toolbar-y', '', '데스크탑 화면으로 보기'),
+      meta(0, 'se-toolbar-y', { aria: '데스크탑 화면으로 보기' }),
     ])).toBeNull();
-    // 숨겨진 모바일 버튼
+    // 숨겨진 PC 상태 버튼 — 보이는 것만 클릭
     expect(pickDeviceToggleTarget([
-      meta(0, 'se-util-button-device-mobile', '', '', false),
+      meta(0, 'se-util-button __mode-button se-util-button-device-desktop',
+        { dataLog: 'flbbtn.vmobile', visible: false }),
     ])).toBeNull();
+    // 사이클 토글이 존재하면 라벨 휴리스틱 봉인 — "모바일 화면" 텍스트는 현재 상태 표시
+    expect(pickDeviceToggleTarget([LIVE_MOBILE, meta(1, 'se-x', { aria: '모바일로 보기' })])).toBeNull();
     // 아무 후보 없음
     expect(pickDeviceToggleTarget([])).toBeNull();
+  });
+
+  it('미지의 UI(사이클 토글 부재)에서만 라벨 휴리스틱이 열린다', () => {
+    expect(pickDeviceToggleTarget([
+      meta(0, 'se-toolbar-x1', { aria: '데스크탑 화면으로 보기' }),
+      meta(1, 'se-toolbar-x2', { aria: '모바일 화면으로 보기' }),
+    ])).toEqual({ index: 1, reason: 'label-mobile' });
+    expect(pickDeviceToggleTarget([
+      meta(0, 'se-toolbar-x3', { title: '태블릿 화면' }),
+    ])).toEqual({ index: 0, reason: 'label-tablet' });
   });
 });

@@ -2786,23 +2786,40 @@ export async function setFontSize(self: any, size: number, force: boolean = fals
 }
 
 // ── 기기전환 버튼 판정 (순수 함수 — 스캔 폴백의 클릭 대상 선정) ──
-// [v2.11.144b] evaluate 안 인라인 판정을 순수 함수로 분리해 단위 테스트 가능하게.
-// 안전 규칙: (1) 보이는 버튼만, (2) 미리보기/발행/데스크탑 계열은 절대 클릭 금지
-// (모달 오픈 사고 방지), (3) device 클래스 우선 → title/aria 순, 모바일 > 태블릿.
+// [2026-07-25 Playwright 실측으로 재작성] 네이버 에디터의 기기전환은 단일 버튼
+// 사이클 토글(PC→모바일→태블릿→PC)이다. class/텍스트가 "현재 상태", data-log가
+// "클릭 시 목적지"를 나타낸다:
+//   PC:     cls device-desktop, data-log flbbtn.vmobile,  text "PC 화면"
+//   모바일: cls device-mobile,  data-log flbbtn.vtablet,  text "모바일 화면"
+//   태블릿: cls device-tablet,  data-log flbbtn.vdesktop, text "테블릿 화면"
+// 안전 규칙: (1) 이미 모바일이면 절대 클릭 금지(누르면 태블릿으로 이탈),
+// (2) 미리보기/발행 계열 클릭 금지(모달 오픈 사고), (3) pick은 "모바일을 향한
+// 다음 한 클릭"만 반환 — 태블릿 상태는 호출측 루프가 재수집·재판정으로 수렴시킨다.
 export interface DeviceToggleButtonMeta {
   index: number;
   cls: string;
   title: string;
   aria: string;
+  dataLog: string;
+  text: string;
   visible: boolean;
+}
+
+export function isMobileViewActive(buttons: readonly DeviceToggleButtonMeta[]): boolean {
+  return buttons.some(
+    (b) => b.visible && /__mode-button/.test(b.cls) && /device-mobile/.test(b.cls),
+  );
 }
 
 export function pickDeviceToggleTarget(
   buttons: readonly DeviceToggleButtonMeta[],
 ): { index: number; reason: string } | null {
-  const hay = (b: DeviceToggleButtonMeta): string => `${b.cls} ${b.title} ${b.aria}`;
+  if (isMobileViewActive(buttons)) return null; // 이미 모바일 — 클릭하면 태블릿으로 이탈
+  const hay = (b: DeviceToggleButtonMeta): string =>
+    `${b.cls} ${b.title} ${b.aria} ${b.dataLog} ${b.text}`;
   const visible = buttons.filter((b) => b.visible);
-  // 클릭 금지: 미리보기·발행·데스크탑(PC) 계열 — device 클래스가 명시된 경우만 예외.
+  // 클릭 금지: 미리보기·발행·데스크탑 계열 — device 클래스가 명시된 경우만 예외
+  // (PC 상태 토글 버튼은 cls에 desktop이 있지만 device도 있어 클릭 허용된다).
   const isForbidden = (b: DeviceToggleButtonMeta): boolean =>
     (/미리보기|preview|발행|publish|데스크|desktop/i.test(hay(b)) && !/device/i.test(b.cls));
 
@@ -2814,13 +2831,20 @@ export function pickDeviceToggleTarget(
     return found ? { index: found.index, reason } : null;
   };
 
+  const cycleToggleSeen = buttons.some((b) => /__mode-button/.test(b.cls));
   return (
-    // 1) 클래스에 device 명시 + 모바일/태블릿 (가장 신뢰)
-    pick((b) => /device/i.test(b.cls) && /mobile|모바일/i.test(hay(b)), 'class-device-mobile')
-    || pick((b) => /device/i.test(b.cls) && /tablet|태블릿|테블릿/i.test(hay(b)), 'class-device-tablet')
-    // 2) title/aria 라벨 기반 (데스크탑/미리보기 제외는 isForbidden이 담당)
-    || pick((b) => /모바일/.test(`${b.title} ${b.aria}`), 'label-mobile')
-    || pick((b) => /태블릿|테블릿/.test(`${b.title} ${b.aria}`), 'label-tablet')
+    // 1) 실측 UI — PC 상태 토글: 클릭 한 번으로 모바일 도달
+    pick((b) => b.dataLog === 'flbbtn.vmobile', 'datalog-vmobile')
+    || pick((b) => /__mode-button/.test(b.cls) && /device-desktop/.test(b.cls), 'state-pc')
+    // 2) 실측 UI — 태블릿 상태: 클릭하면 PC, 호출측 루프의 다음 반복이 모바일로 마감
+    || pick((b) => /__mode-button/.test(b.cls) && /device-tablet/.test(b.cls), 'state-tablet-cycle')
+    || pick((b) => b.dataLog === 'flbbtn.vdesktop' && /device/i.test(b.cls), 'datalog-vdesktop-cycle')
+    // 3) 미지의 UI — 라벨 휴리스틱. 사이클 토글(__mode-button)이 하나라도 보이면
+    //    라벨("모바일 화면")은 현재 상태 표시일 뿐이므로 이 경로를 봉인한다.
+    || (cycleToggleSeen
+      ? null
+      : (pick((b) => /모바일/.test(`${b.title} ${b.aria}`), 'label-mobile')
+        || pick((b) => /태블릿|테블릿/.test(`${b.title} ${b.aria}`), 'label-tablet')))
   );
 }
 
@@ -2834,35 +2858,40 @@ export async function setupMobileViewAndCenterAlign(self: any): Promise<void> {
     return;
   }
 
-  // 1. 테블릿/모바일 화면 모드 클릭 (한 번 클릭으로 토글)
+  // 1. 모바일 화면 모드 전환 (2026-07-25 실측: PC→모바일→태블릿→PC 사이클 토글)
   try {
-    const tabletBtn = await findElement(frame, SELECTORS.editor.viewModeTablet, 'viewModeTablet');
-    if (tabletBtn) {
-      await tabletBtn.click();
-      self.log('📱 테블릿 화면 모드로 전환');
+    // 빠른 경로: 레지스트리는 "PC 상태 버튼"만 매칭 — 클릭 한 번이면 모바일.
+    // 이미 모바일/태블릿이면 매칭 자체가 안 돼 스캔 폴백으로 넘어간다.
+    const pcStateBtn = await findElement(frame, SELECTORS.editor.viewModeTablet, 'viewModeTablet');
+    if (pcStateBtn) {
+      await pcStateBtn.click();
+      self.log('📱 모바일 화면 모드로 전환 (PC → 모바일)');
       await self.delay(300);
     } else {
-      // [v2.11.144b] 셀렉터 전멸 시 스캔 폴백 — 네이버가 기기전환 버튼 클래스를 바꿔
-      // 등록 셀렉터가 전부 실패, PC 화면에서 작성되던 문제(사용자 실측 스샷).
+      // 스캔 폴백 — 이미 모바일(클릭 금지), 태블릿(2클릭 필요), 미지의 UI를 처리.
       // 구조: 수집(evaluate, 판정 없음) → 판정(pickDeviceToggleTarget 순수 함수,
-      // 단위 테스트로 잠금) → 클릭(evaluate, 인덱스 지정). 미리보기/발행/데스크탑
-      // 버튼 오클릭(모달 오픈 사고)은 판정 함수가 차단하고, 후보 목록은 로그로
-      // 남겨 다음 UI 변경 때 셀렉터 레지스트리를 즉시 갱신할 수 있게 한다.
+      // 실측 DOM 케이스로 단위 테스트 잠금) → 클릭(evaluate, 인덱스 지정).
+      // 매 반복 재수집·재판정하므로 태블릿→PC→모바일 사이클이 자연 수렴한다.
       const collectButtons = async (ctx: any): Promise<DeviceToggleButtonMeta[]> =>
         await ctx.evaluate(() => {
           const els = Array.from(document.querySelectorAll('button, [role="button"]'));
-          const metas: Array<{ index: number; cls: string; title: string; aria: string; visible: boolean }> = [];
+          const metas: Array<{
+            index: number; cls: string; title: string; aria: string;
+            dataLog: string; text: string; visible: boolean;
+          }> = [];
           els.forEach((el, index) => {
             if (!(el instanceof HTMLElement)) return;
             const cls = String(el.className || '');
             const title = String(el.getAttribute('title') || '');
             const aria = String(el.getAttribute('aria-label') || '');
-            if (!/device|태블릿|테블릿|모바일|mobile|tablet|화면/i.test(`${cls} ${title} ${aria}`)) return;
+            const dataLog = String(el.getAttribute('data-log') || '');
+            const text = String(el.textContent || '').trim().substring(0, 40);
+            if (!/device|태블릿|테블릿|모바일|mobile|tablet|화면|flbbtn\.v/i.test(`${cls} ${title} ${aria} ${dataLog}`)) return;
             const rect = el.getBoundingClientRect();
             const style = window.getComputedStyle(el);
             const visible = rect.width > 0 && rect.height > 0
               && style.display !== 'none' && style.visibility !== 'hidden';
-            metas.push({ index, cls: cls.substring(0, 100), title, aria, visible });
+            metas.push({ index, cls: cls.substring(0, 100), title, aria, dataLog, text, visible });
           });
           return metas;
         }).catch(() => [] as DeviceToggleButtonMeta[]);
@@ -2881,28 +2910,38 @@ export async function setupMobileViewAndCenterAlign(self: any): Promise<void> {
       let scanHandled = false;
       const page = self.ensurePage ? self.ensurePage() : null;
       for (const ctx of [frame, page].filter(Boolean)) {
-        const metas = await collectButtons(ctx);
-        const target = pickDeviceToggleTarget(metas);
-        if (target) {
+        let metas = await collectButtons(ctx);
+        if (metas.length === 0) continue;
+        if (isMobileViewActive(metas)) {
+          self.log('📱 이미 모바일 화면 모드 → 클릭 스킵');
+          scanHandled = true;
+          break;
+        }
+        // 사이클 수렴 루프: 최대 2클릭 (태블릿 → PC → 모바일)
+        for (let attempt = 0; attempt < 2; attempt++) {
+          const target = pickDeviceToggleTarget(metas);
+          if (!target) break;
           const ok = await clickButtonAt(ctx, target.index);
-          if (ok) {
-            const meta = metas.find((m) => m.index === target.index);
-            self.log(`📱 [스캔 폴백] 기기전환 버튼 클릭 (${target.reason}): ${meta?.cls || meta?.title || meta?.aria || ''}`);
-            await self.delay(300);
-            scanHandled = true;
+          if (!ok) break;
+          const meta = metas.find((m) => m.index === target.index);
+          self.log(`📱 [스캔 폴백] 기기전환 클릭 ${attempt + 1} (${target.reason}): ${meta?.cls || meta?.text || ''}`);
+          await self.delay(400);
+          scanHandled = true;
+          metas = await collectButtons(ctx);
+          if (isMobileViewActive(metas)) {
+            self.log('📱 모바일 화면 모드 도달 확인');
             break;
           }
         }
-        if (metas.length > 0 && !scanHandled) {
-          self.log(`ℹ️ [스캔] 기기전환 후보 ${metas.length}개 발견했으나 안전 클릭 대상 없음: ${JSON.stringify(metas.slice(0, 6))}`);
-        }
+        if (scanHandled) break;
+        self.log(`ℹ️ [스캔] 기기전환 후보 ${metas.length}개 발견했으나 안전 클릭 대상 없음: ${JSON.stringify(metas.slice(0, 6))}`);
       }
       if (!scanHandled) {
-        self.log('ℹ️ 테블릿/모바일 모드 버튼 미발견 → skip (후보 로그 참조 — 셀렉터 레지스트리 갱신 필요)');
+        self.log('ℹ️ 기기전환 버튼 미발견 → skip (후보 로그 참조 — 셀렉터 레지스트리 갱신 필요)');
       }
     }
   } catch (e) {
-    self.log(`⚠️ 테블릿 모드 전환 실패 (무시): ${(e as Error).message}`);
+    self.log(`⚠️ 모바일 화면 전환 실패 (무시): ${(e as Error).message}`);
   }
 
   // 2. 정렬 드롭다운 → 가운데 정렬
