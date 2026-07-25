@@ -35,7 +35,7 @@ describe('Content Quality V3 early-return wiring', () => {
     }
   });
 
-  it('uses advisory finalization without a paid V3 retry and never rewrites the V3 title', () => {
+  it('uses advisory finalization without a paid V3 retry and locks the contract title', () => {
     expect(generator).toMatch(/if \(v3Finalization\.ok\) \{[\s\S]{0,180}v3Content = v3Finalization\.content/);
     expect(generator).toMatch(/v3Finalization\.issueCode\.startsWith\('structured_output_'\)/);
     expect(generator).not.toContain('decideContentQualityV3Finalization(');
@@ -47,8 +47,12 @@ describe('Content Quality V3 early-return wiring', () => {
       v3Branch,
     );
     expect(generator.slice(v3Branch, earlyReturn)).toContain('evaluateContentQualityV3AffiliateGuard(');
-    expect(generator.slice(v3Branch, earlyReturn)).not.toContain('applyManualTitleOverride');
-    expect(generator.slice(v3Branch, earlyReturn)).not.toContain('applyKeywordAsTitleLock');
+    // [2026-07-25] 계약 제목은 return 직전에 반드시 강제된다 — advisory mismatch가
+    // 제공자의 패러프레이즈 제목을 그대로 흘려보내던 회귀의 잠금. 재시도(과금) 없이
+    // 결정적 lock만 수행하며, kind 분기는 legacy finalize와 동일 계약이다.
+    expect(generator.slice(v3Branch, earlyReturn)).toMatch(
+      /if \(v3TitleContract\) \{\s*v3Content = Object\.freeze\(\s*v3TitleContract\.kind === 'manual'\s*\?\s*applyManualTitleOverride\(v3Content, v3TitleContract\.expectedTitle\) as StructuredContent\s*:\s*applyKeywordAsTitleLock\(v3Content, v3TitleContract\.expectedTitle\),\s*\);\s*\}/,
+    );
     expect(generator).toMatch(/return registerContentQualityV3GeneratedContent\(\s*materializeContentQualityV3ForLegacyConsumers\(v3Content\),\s*\{[\s\S]{0,320}safetyMode:\s*'advisory'[\s\S]{0,320}advisoryIssues:\s*v3AdvisoryIssues[\s\S]{0,80}\},\s*\);/);
   });
 

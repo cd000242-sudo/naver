@@ -557,9 +557,10 @@ export async function generateContentFromUrl(
   const keywordList = keywords ? keywords.split(',').map(k => k.trim()).filter(k => k.length > 0) : [];
   await augmentKeywordListWithBlueOcean(keywordList);
 
-  // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 (선택). 40자 이내.
-  const hookInputEl = document.getElementById('unified-hook-sentence') as HTMLInputElement | null;
-  const hookHint = (hookInputEl?.value || '').trim().slice(0, 40) || undefined;
+  // ✅ [2026-07-25] 사용자 후킹 도입부 (선택, 최대 3줄·줄당 40자). 개행 보존 —
+  // 줄 분리/자르기의 최종 정규화는 main측 contentHookIntroPolicy가 담당.
+  const hookInputEl = document.getElementById('unified-hook-sentence') as HTMLTextAreaElement | null;
+  const hookHint = (hookInputEl?.value || '').replace(/\r\n/g, '\n').trim().slice(0, 200) || undefined;
 
   // ✅ 리뷰형/정보형 선택 확인
   const selectedContentType = (window as any).selectedContentType || 'info';
@@ -1201,6 +1202,10 @@ export async function generateContentFromKeywords(
       // ✅ [2026-02-24] 키워드를 제목으로 그대로 사용 옵션 전달 (메인 프로세스에서 제목 조작 건너뛰기)
       useKeywordAsTitle: (window as any)._keywordTitleOptions?.useKeywordAsTitle || false,
       keywordForTitle: (window as any)._keywordTitleOptions?.keyword || undefined,
+      // ✅ [2026-07-25] 후킹 도입부(최대 3줄) — 기존엔 URL 플로우만 읽어 키워드
+      // 생성에서는 입력이 조용히 무시되던 갭. 개행 보존해 전달.
+      hookHint: ((document.getElementById('unified-hook-sentence') as HTMLTextAreaElement)?.value || '')
+        .replace(/\r\n/g, '\n').trim().slice(0, 200) || undefined,
       businessInfo,
       contentPolicyContext,
       manualTitleOverride,

@@ -282,7 +282,11 @@ describe('Content Quality V3 runtime isolation', () => {
     expect(result.bodyPlain).toContain('공식 발표에 따르면 <title>');
     expect(result.bodyHtml).toContain('공식 발표에 따르면 &lt;title&gt;');
     expect(result.bodyHtml).toContain('A &amp; B');
-    expect(result.titleAlternatives).toEqual(['모델 대안 제목']);
+    // [2026-07-25] 계약 제목 lock이 후보 목록까지 계약값으로 강제한다 (legacy
+    // finalize의 manual override와 동일 계약 — 제공자 대안 제목은 보존하지 않음).
+    // lock 내부 플래그는 발행 엔벨로프 투영에서 떨어지므로 제목 값만 단언한다.
+    expect(result.selectedTitle).toBe('사용자 제목');
+    expect(result.titleAlternatives).toEqual(['사용자 제목']);
     expect(result.quality.warnings).toEqual(['소제목 4개']);
     expect(materializedV3Inputs).toHaveLength(1);
     const pureFinalizedContent = materializedV3Inputs[0] as StructuredContent;
@@ -332,7 +336,11 @@ describe('Content Quality V3 runtime isolation', () => {
     expect(pureFinalizedContent.headings[0].title).toBe(finalizedHeadingTitle);
   });
 
-  it('fails closed after one V3 call when the title contract is invalid', async () => {
+  it('locks the contract title after one V3 call when the provider disobeys (no retry, no leak)', async () => {
+    // [2026-07-25] 구 계약(fail-closed reject)은 프로덕션에서 패러프레이즈 제목
+    // 유출/발행 실패로 나타나던 설계였다. 새 계약: 결정적 lock이 계약 제목을
+    // 강제하고, 재시도(추가 과금)는 여전히 금지 — 두 번째 응답이 소비되지 않음을
+    // geminiRequests 길이로 증명한다.
     geminiResponses.push(
       JSON.stringify(makeDraft('모델 제목 1')),
       JSON.stringify(makeDraft('모델 제목 2')),
@@ -340,10 +348,13 @@ describe('Content Quality V3 runtime isolation', () => {
     const source = Object.freeze(makeSource());
     const sourceBefore = structuredClone(source);
 
-    await expect(generateContentQualityV3CandidateForEvaluation(source, v3Options())).rejects.toMatchObject({
-      issueCode: 'candidate_result_invalid',
-    });
+    const result = await generateContentQualityV3CandidateForEvaluation(source, v3Options());
 
+    expect(result.selectedTitle).toBe('사용자 제목');
+    expect(result.titleAlternatives).toEqual(['사용자 제목']);
+    expect(result.titleCandidates).toEqual([
+      { text: '사용자 제목', score: 100, reasoning: '사용자 지정 제목' },
+    ]);
     expect(geminiModelNames).toEqual(['gemini-3.1-flash-lite']);
     expect(geminiRequests).toHaveLength(1);
     expect(JSON.stringify(geminiRequests)).not.toContain('CONTENT_QUALITY_V3_RETRY');

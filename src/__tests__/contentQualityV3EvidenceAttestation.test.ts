@@ -160,13 +160,13 @@ describe('Content Quality V3 evidence attestation', () => {
     expect(Object.isFrozen(current)).toBe(true);
     expect(current).toEqual({
       promptBundleSha256:
-        '838784954c08f3fa5626586ed8e0ead2db6d2ad74fb33480a226a5349156e058',
+        '404d3b726d6084d6bdb95fe93724ca6987205f670a06b6ccc4bd083054a2902c',
       outputSchemaSha256:
         'd2a8e746c86950e548e63f5eff7cbe00a9fc1dbf8a057b12ed7a1d36c8b07cd4',
       corpusSha256:
         'cf1721af51303263182a38f7618f5431f4534858c5a9655c33fa90c61abf33f0',
       legacyBaselineSha256:
-        '12961c79735badff02e0907d5bcab3ad3d59db4e81392cd69c065fe59b2405a7',
+        '1563c37c12b45f15d7ec56b75a037ed520ee4d013acd94283940750b1fa2da20',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

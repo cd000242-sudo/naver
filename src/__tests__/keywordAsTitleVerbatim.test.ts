@@ -62,4 +62,14 @@ describe('keyword-as-title verbatim', () => {
         : 3000,
     );
   });
+
+  it('locks the contract title in the V3 return path (advisory mismatch cannot leak a paraphrase)', () => {
+    // [2026-07-25] V3 branch: finalizeContentQualityV3Draft may downgrade
+    // keyword_title_mismatch to an advisory and keep the parsed (paraphrased)
+    // title. The contract title must be force-applied right before the return
+    // so every flow gets the verbatim title without renderer-side patches.
+    expect(gen).toMatch(
+      /if \(v3TitleContract\) \{\s*v3Content = Object\.freeze\(\s*v3TitleContract\.kind === 'manual'\s*\?\s*applyManualTitleOverride\(v3Content, v3TitleContract\.expectedTitle\) as StructuredContent\s*:\s*applyKeywordAsTitleLock\(v3Content, v3TitleContract\.expectedTitle\),\s*\);\s*\}\s*return registerContentQualityV3GeneratedContent\(/,
+    );
+  });
 });

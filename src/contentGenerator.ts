@@ -5743,6 +5743,20 @@ async function generateStructuredContentInternal(
           }
         }
 
+        // [2026-07-25] 계약 제목(그대로 사용/수동 지정)은 제공자 순종 여부와
+        // 무관하게 최종 강제한다. advisory mismatch 때 parsed의 패러프레이즈
+        // 제목이 그대로 리턴되어, renderer측 패치가 없는 플로우에서 "입력한
+        // 키워드 그대로 제목"이 무시되던 근본 지점. lock 후에는 발행 경계의
+        // 제목 계약 재검증도 실측값 일치로 통과한다. kind 분기는 legacy
+        // finalize(manual→applyManualTitleOverride, keyword→lock)와 동일 계약.
+        if (v3TitleContract) {
+          v3Content = Object.freeze(
+            v3TitleContract.kind === 'manual'
+              ? applyManualTitleOverride(v3Content, v3TitleContract.expectedTitle) as StructuredContent
+              : applyKeywordAsTitleLock(v3Content, v3TitleContract.expectedTitle),
+          );
+        }
+
         return registerContentQualityV3GeneratedContent(
           materializeContentQualityV3ForLegacyConsumers(v3Content),
           {

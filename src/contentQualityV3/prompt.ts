@@ -8,6 +8,7 @@ import {
 } from '../contentKeywordHelpers.js';
 import { selectDecisionUsefulReviewTexts } from '../crawler/shopping/utils/reviewTextSelection.js';
 import { buildReviewDecisionBlueprint } from '../content/reviewDecisionBlueprint.js';
+import { normalizeHookIntroLines } from '../contentHookIntroPolicy.js';
 
 export const CONTENT_QUALITY_V3_MAX_EVIDENCE_CHARS = 80_000;
 export const CONTENT_QUALITY_V3_SYSTEM_MAX_CHARS = 12_000;
@@ -234,6 +235,7 @@ const COMMON_SYSTEM_PROMPT = `[ROLE]
 설명, 마크다운 코드펜스, 머리말 없이 유효한 JSON 객체 하나만 출력한다. JSON 문자열 안의 줄바꿈은 적법하게 이스케이프한다.
 bodyPlain에 최종 글 전체를 한 번만 넣고 HTML 태그를 넣지 않는다. bodyHtml은 정확히 빈 문자열("")로 두며, 앱의 결정적 후처리기가 bodyPlain을 유효한 HTML로 변환한다. headings의 content는 중복 출력을 피하려고 빈 문자열로 두고 summary만 한 문장으로 쓴다.
 user_brief_json에 requiredTitle이 있으면 selectedTitle은 글자 하나까지 정확히 일치시킨다. 축약·수식·맞춤법 교정·키워드 추가를 하지 않는다.
+user_brief_json에 hookIntroLines가 있으면 introduction은 그 줄들을 같은 순서로 반영해 시작한다. 자연스러운 연결을 위한 다듬기는 허용하되 줄의 의미·숫자·순서를 바꾸지 않고, 줄이 1개면 도입부 첫 문장에 자연스럽게 녹인다.
 status는 success 또는 warning만 허용한다. 자료 부족이 글의 일부에만 영향을 주면 warning과 quality.warnings에 짧게 기록한다.
 
 {
@@ -465,6 +467,12 @@ function buildDynamicPayload(options: ContentQualityV3PromptOptions): {
     const titleContract = resolveContentQualityV3TitleContract(
       source as unknown as ContentQualityV3TitleContractSource,
     );
+    // [2026-07-25] 사용자 후킹 도입부(최대 3줄) — legacy 프롬프트에만 있고 V3에
+    // 빠져 있던 신호. 줄이 있으면 user_brief로 전달해 OUTPUT_CONTRACT 규칙이
+    // introduction 구성에 반영하게 한다.
+    const hookIntroLines = normalizeHookIntroLines(
+      (source as { hookHint?: unknown }).hookHint,
+    );
     const userBrief = Object.freeze({
       mode: options.mode,
       targetChars: normalizeTargetChars(options.minChars),
@@ -477,6 +485,7 @@ function buildDynamicPayload(options: ContentQualityV3PromptOptions): {
       customPrompt: cleanString(source.customPrompt, 12_000),
       contentPolicy: cleanString(source.contentPolicyPrompt, 8_000),
       requiredTitle: titleContract?.expectedTitle,
+      hookIntroLines: hookIntroLines.length > 0 ? hookIntroLines : undefined,
       promoTarget: businessUserBrief?.promoTarget,
       promoAngle: businessUserBrief?.promoAngle,
       promoAngleDirective: businessUserBrief?.promoAngleDirective,

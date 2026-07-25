@@ -19,6 +19,7 @@ import * as path from 'path';
 import { app } from 'electron';
 import { hasValidPrice, formatPrice } from './services/priceNormalizer.js';
 import { buildHomefeedExposureSkeleton } from './content/homefeedExposurePattern.js';
+import { normalizeHookIntroLines } from './contentHookIntroPolicy.js';
 
 // 프롬프트 디렉토리 경로 (개발/프로덕션 환경 모두 지원)
 function getPromptsDir(): string {
@@ -1333,14 +1334,26 @@ ${priceInstruction}- 스펙은 장점으로 단정하지 말고 어떤 사용자
     finalPrompt += `\n\n${trimmedWinners}\n`;
   }
 
-  const trimmedHook = (hookHint ?? '').trim().slice(0, 40);
-  if (trimmedHook) {
+  // [2026-07-25] 후킹 도입부 최대 3줄. 1줄이면 기존 "녹임" 계약을 유지하고,
+  // 2~3줄이면 사용자가 도입부를 직접 지정한 것으로 보고 줄 순서를 보존시킨다.
+  const hookLines = normalizeHookIntroLines(hookHint);
+  if (hookLines.length === 1) {
     finalPrompt += `\n\n[사용자 후킹 1문장 — 반드시 자연스럽게 녹일 것]
-사용자가 이 글의 후킹으로 제공한 1차 경험 문장: "${trimmedHook}"
+사용자가 이 글의 후킹으로 제공한 1차 경험 문장: "${hookLines[0]}"
 → 도입부 첫 줄 또는 소제목1 첫 문장에 녹여라.
 → 그대로 복사 금지. 맥락에 맞게 재구성하되, 핵심 의도(감정·숫자·변화)는 유지.
 → 이 문장은 사용자의 1차 경험 데이터이므로 QUMA/DIA+가 신뢰하는 신호다.
 → 구체 수치·기간·제품명이 포함되어 있다면 본문 다른 곳에도 그대로 사용 가능.
+`;
+  } else if (hookLines.length >= 2) {
+    const numbered = hookLines.map((line, i) => `${i + 1}) ${line}`).join('\n');
+    finalPrompt += `\n\n[사용자 후킹 도입부 — 도입부를 이 줄들로 구성할 것]
+사용자가 도입부(후킹)를 ${hookLines.length}줄로 직접 지정했다:
+${numbered}
+→ introduction은 이 줄들을 같은 순서로 사용해 구성하라. 첫 줄이 도입부 첫 문장이다.
+→ 자연스러운 연결을 위한 다듬기는 허용하되, 각 줄의 의미·숫자·순서는 바꾸지 마라.
+→ 지정된 줄 앞에 임의 문장을 추가하지 마라.
+→ 이 줄들은 사용자의 1차 경험 데이터이므로 QUMA/DIA+가 신뢰하는 신호다.
 `;
   }
 
