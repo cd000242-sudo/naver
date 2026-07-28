@@ -72,7 +72,7 @@ describe('affiliate 10-step conversion structure (EEAT)', () => {
 
   it('finalContract 배선: 후기형/전문가형 공통으로 10단 골격이 부착된다', () => {
     const gen = read('contentGenerator.ts');
-    expect(gen).toMatch(/buildAffiliateConversionStructureContract\(source as any\),\s*isExpertAnalysis \? '' : buildAffiliateReviewIntentContract\(source\)/);
+    expect(gen).toMatch(/buildAffiliateConversionStructureContract\(source as any\),[\s\S]{0,300}isExpertAnalysis \? '' : buildAffiliateReviewIntentContract\(source\)/);
   });
 
   it('이미지 링크: 개별 image.link가 발행 루프에서 실제로 읽힌다 (죽은 기능 배선)', () => {

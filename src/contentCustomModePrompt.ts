@@ -1,4 +1,4 @@
-import { TONE_PERSONAS } from './promptLoader.js';
+import { TONE_PERSONAS, loadPromptFile } from './promptLoader.js';
 
 export interface CustomModeOverridePromptOptions {
   customPrompt: string;
@@ -8,6 +8,9 @@ export interface CustomModeOverridePromptOptions {
 export function buildCustomModeOverridePrompt(options: CustomModeOverridePromptOptions): string {
   const customTone = options.toneStyle || 'friendly';
   const tone = TONE_PERSONAS[customTone];
+  // [2026-07-30] 커스텀 오버라이드가 base 프롬프트 전체를 대체하면서 어미 팔레트/
+  // 안티패턴 계약이 통째로 빠지던 공백(페러프레이징 = 항상 custom 모드) 봉인.
+  const humanOverlay = loadPromptFile('shared/human-writing-anti-pattern.prompt');
 
   return `당신은 네이버 블로그 일방문자 10,000명 이상의 전문 블로거입니다.
 아래 [사용자 요청 프롬프트]의 지시사항이 이 글의 **최우선 방향**입니다.
@@ -79,7 +82,9 @@ ${options.customPrompt.trim()}
 - 표가 어색한 감성/홈판형 글은 짧은 체크리스트 또는 단계 리스트로 대체
 - 출처 없는 "공식 가이드", "최신 가이드에서는" 표현 금지
 - 확인 기준은 "2026년 6월 기준", "제조사 안내 확인 기준"처럼 범위를 좁혀 표현
-
+${humanOverlay ? `
+${humanOverlay}
+` : ''}
 ═══════════════════════════════════════════════════════════
 📋 [필수] JSON 출력 형식 — 반드시 이 스키마로 응답하세요
 ═══════════════════════════════════════════════════════════

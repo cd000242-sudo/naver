@@ -345,6 +345,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/imageNarrative/inferenceAggregator/ordering.ts',
   'src/imageNarrative/inferenceAggregator/sectionBuilder.ts',
   'src/imageNarrative/narrativeBuilder/builder.ts',
+  'src/imageNarrative/narrativeBuilder/humanizePass.ts',
   'src/imageNarrative/visionInference/claudeVisionAdapter.ts',
   'src/imageNarrative/visionInference/geminiVisionAdapter.ts',
   'src/imageNarrative/visionInference/inferencePrompts.ts',

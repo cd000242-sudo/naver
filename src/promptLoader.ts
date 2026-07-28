@@ -132,7 +132,7 @@ const promptCache = new Map<string, string>();
 /**
  * 프롬프트 파일 로드
  */
-function loadPromptFile(filePath: string): string {
+export function loadPromptFile(filePath: string): string {
   // 캐시 확인
   if (promptCache.has(filePath)) {
     return promptCache.get(filePath)!;
@@ -277,7 +277,7 @@ export function buildSystemPrompt(
   // 2.9 Human writing anti-pattern overlay.
   // Prevents "AI pretending to be human" regressions: repeated crutches, fake first-person,
   // and identical paragraph templates across SEO/Homefeed/Mate/Affiliate/Business modes.
-  if (mode === 'seo' || mode === 'homefeed' || mode === 'mate' || mode === 'affiliate' || mode === 'business') {
+  if (mode === 'seo' || mode === 'homefeed' || mode === 'mate' || mode === 'affiliate' || mode === 'business' || mode === 'custom') {
     const humanWritingOverlay = loadPromptFile('shared/human-writing-anti-pattern.prompt');
     if (humanWritingOverlay) {
       composed = `${composed}\n\n${humanWritingOverlay}`;

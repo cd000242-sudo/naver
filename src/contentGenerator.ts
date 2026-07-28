@@ -73,6 +73,7 @@ import { auditAffiliateReviewDepth } from './content/affiliateReviewDepth.js';
 import { buildAffiliateConversionStructureContract } from './content/affiliateConversionStructure.js';
 import {
   buildEvidenceAndIntentFinalContract,
+  buildEvidenceMetaLeakRule,
   buildTitleEvidenceFinalContract,
   hasExplicitFirstPartyEvidence,
 } from './content/evidenceIntegrity.js';
@@ -2399,6 +2400,9 @@ export function buildModeBasedPrompt(
       buildAffiliatePurchaseIntentContract(source),
       // [2026-07-30] 구매 전환 10단 골격(EEAT) — 후기형/전문가형 공통.
       buildAffiliateConversionStructureContract(source as any),
+      // [2026-07-30] 근거 메타 노출 금지 — 일반 모드 FINAL CONTRACT에만 있고
+      // 쇼핑 분기에 빠져 있던 공백(특히 리뷰 0건 SPEC_ONLY·전문가형) 봉인.
+      `[근거 메타 노출 금지]\n${buildEvidenceMetaLeakRule()}`,
       isExpertAnalysis ? '' : buildAffiliateReviewIntentContract(source),
     ].filter(Boolean).join('\n\n');
     console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}${isExpertAnalysis ? ' (expert — 후기 구조 계약 제외)' : ''}`);
@@ -5029,11 +5033,15 @@ async function generateStructuredContentInternal(
       context: imgOpts.context,
     });
 
-    return buildNarrativeContent(plan, {
+    const narrativeContent = await buildNarrativeContent(plan, {
       provider: narrativeTextProvider as any,
       context: imgOpts.context,
       agentProductPolicyContext: options.agentProductPolicyContext,
     });
+    // [2026-07-30] 사진 모드 조기 리턴이 휴머나이저를 통째로 우회하던 공백 봉인.
+    // (humanizeContent 단일 호출부 불변식 유지를 위해 전용 패스 모듈 사용)
+    const { applyNarrativeHumanizePass } = await import('./imageNarrative/narrativeBuilder/humanizePass.js');
+    return applyNarrativeHumanizePass(narrativeContent, source.toneStyle);
   }
 
   if (!source?.rawText || !source.rawText.trim()) {

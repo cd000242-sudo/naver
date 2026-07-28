@@ -22,6 +22,7 @@ import type {
 } from '../types.js';
 import type { StructuredContent } from '../../contentGenerator.js';
 import type { AgentProductPolicyContext } from '../../agentCli/productPolicy.js';
+import { buildVoiceProfileBlock, sampleVoiceProfile } from '../../contentVoiceProfile.js';
 
 // Resolved at runtime relative to this file: ../../prompts/imageNarrative/
 const PROMPT_DIR = join(__dirname, '..', '..', '..', 'src', 'prompts', 'imageNarrative');
@@ -158,6 +159,10 @@ function buildUserPrompt(plan: NarrativePlan, options: BuilderOptions): string {
     `- 각 사진을 1~2줄로 끝내지 말 것. 그 순간의 감정·기대·오감(색·질감·향·온도·소리)과 ` +
     `전후 맥락(위 입력 정보 활용)을 충분히 풀어 ${targetChars}자 분량을 자연스럽게 채울 것\n` +
     `- 단, 사진에 없는 사실(가격·메뉴명·영업시간·상호 등)은 절대 지어내지 말 것 (군더더기 반복도 금지)\n` +
+    `- [어미 팔레트] 같은 종결어미(~해요/~합니다)를 3문장 이상 연속하지 말 것. ` +
+    `~잖아요, ~거든요, ~긴 해요, ~죠, ~네요를 자연스러운 자리에 고루 섞을 것\n\n` +
+    // [2026-07-30] 사진 모드에도 글 단위 보이스 프로필 주입 (품질 레이어 공백 봉인)
+    `${buildVoiceProfileBlock(sampleVoiceProfile())}\n\n` +
     `- 반드시 JSON 형식으로만 응답 (마크다운 코드 블록 없이)`
   );
 }
