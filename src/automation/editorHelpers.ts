@@ -22,6 +22,7 @@ import { NAVER_TIMEOUTS } from './timeouts.js';
 // ✅ [Phase 4A] 공유 유틸리티 import (중복 제거)
 import { extractCoreKeywords, safeKeyboardType, humanKeyboardType } from './typingUtils.js';
 import { buildMobileRichHtml, pasteRichHtmlAtCursor, pickRichArticleThemes, ensureTailTypingReady, focusLastEditableLine } from './richTextPaste.js';
+import { planTypingFallback, splitFallbackParagraphs, sliceParagraphFromNormalizedOffset } from './typingFallbackPlan.js';
 import { stripCtaArtifactsFromBody } from './bodyArtifactCleanup.js';
 import {
   stripBodyHashtagBlocks,
@@ -456,16 +457,53 @@ export async function typeBodyWithRetry(self: any,
     // 숨은 입력 프록시로 들어가 한 글자도 안 들어간다(+0자 = 본문 누락).
     await focusLastEditableLine(page, frame).catch(() => undefined);
 
-    // ✅ [2026-03-16 OVERHAUL] AI가 결정한 문단 구분을 그대로 존중
-    // 기존: 3문장마다 기계적으로 끊기 → 부자연스러운 줄바꿈 발생
-    // 개선: AI가 보낸 \n\n(문단 구분)과 \n(줄바꿈)을 그대로 따름
-    //       타이핑 속도 20ms 유지 (대량발행 성능), Enter 딜레이만 랜덤화
+    // [2026-07-29] 타이핑 폴백 근본 픽스 (라이브 물증: 같은 문단 2회 + 비청킹 사본 + "보관둘째" 접합).
+    // 1) 소스: AI 원본이 아니라 22자 청킹된 rich.plainText를 타이핑 — 리치 경로와 동일한
+    //    문단 구조 유지 (기존엔 폴백 지점부터 청킹이 사라져 모바일에서 단어 중간 꺾임).
+    // 2) 중복 가드: 롤백 미확증으로 에디터에 남은 내용을 대조해, 이미 들어간 문단은
+    //    건너뛰고 잘린 지점부터만 이어친다. 전량 존재하면 재타이핑 자체를 생략.
+    const expectedFallbackSource = rich.plainText && rich.plainText.trim().length > 0
+      ? rich.plainText
+      : materializeEditorBodyFallbackText(normalizedText);
+    const editorTailForPlan: string = await frame.evaluate((beforeLen: number) => {
+      const root = document.querySelector('.se-main-container') || document.body;
+      const full = ((root as HTMLElement).innerText || root.textContent || '').replace(/​/g, '');
+      return full.slice(Math.max(0, beforeLen - 80));
+    }, editorCharsBeforeBody).catch(() => '');
+    const fallbackPlan = planTypingFallback(expectedFallbackSource, editorTailForPlan);
 
-    // 2단계: \n\n 기준으로 문단(paragraph) 분리
-    const fallbackText = materializeEditorBodyFallbackText(normalizedText);
-    const paragraphs = fallbackText ? fallbackText.split(/\n{2,}/) : [];
+    if (fallbackPlan.mode === 'skip') {
+      self.log(`   ✅ [폴백 중복가드] 본문 전체가 이미 에디터에 존재 (${fallbackPlan.matchedChars}자 대조) → 재타이핑 생략`);
+      await page.keyboard.press('Enter');
+      await self.delay(self.DELAYS.MEDIUM);
+      await page.keyboard.press('Enter');
+      await self.delay(self.DELAYS.MEDIUM);
+      return expectedFallbackSource;
+    }
 
-    self.log(`   🔍 [AI 문단] 원본 ${text.length}자 → ${paragraphs.length}개 문단 감지`);
+    const allFallbackParagraphs = splitFallbackParagraphs(expectedFallbackSource);
+    let paragraphs = allFallbackParagraphs;
+    if (fallbackPlan.mode === 'resume') {
+      const firstMissing = allFallbackParagraphs[fallbackPlan.startParagraphIndex] ?? '';
+      if (fallbackPlan.firstParagraphCharOffset > 0) {
+        // 문단 중간 절단 — 캐럿이 절단 지점 뒤에 있으므로 남은 부분만 이어친다.
+        const remainder = sliceParagraphFromNormalizedOffset(firstMissing, fallbackPlan.firstParagraphCharOffset);
+        paragraphs = [remainder, ...allFallbackParagraphs.slice(fallbackPlan.startParagraphIndex + 1)]
+          .filter((p) => p.length > 0);
+        self.log(`   ⛑️ [폴백 중복가드] ${fallbackPlan.startParagraphIndex}개 문단 존재 + 절단 지점(${fallbackPlan.firstParagraphCharOffset}자)부터 이어치기`);
+      } else {
+        // 문단 경계에서 끊김 — 새 문단으로 분리해 접합("보관둘째") 방지.
+        paragraphs = allFallbackParagraphs.slice(fallbackPlan.startParagraphIndex);
+        self.log(`   ⛑️ [폴백 중복가드] ${fallbackPlan.startParagraphIndex}개 문단 존재 → 다음 문단부터 이어치기`);
+        await page.keyboard.press('Enter');
+        await self.delay(220);
+        await page.keyboard.press('Enter');
+        await self.delay(220);
+        await self.setFontSize(fontSize, true);
+      }
+    }
+
+    self.log(`   🔍 [AI 문단] 원본 ${text.length}자 → ${paragraphs.length}개 문단 타이핑 (계획: ${fallbackPlan.mode})`);
 
     let totalTypedChars = 0;
     let isFirstParagraph = true;
@@ -646,7 +684,9 @@ export async function typeBodyWithRetry(self: any,
 
     // Enter 후 DOM 안정화 대기
     await self.delay(self.DELAYS.SHORT);
-    return fallbackText;
+    // 커밋 원장에는 canonical(청킹된 전체 본문)을 기록 — resume/full 어느 경로든
+    // 이 시점의 에디터 가시 본문과 일치한다.
+    return expectedFallbackSource;
   }, 1, '본문 입력');
 }
 
@@ -947,8 +987,10 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
     // ✅ 쇼핑커넥트 모드 감지 (for 루프 밖에서 미리 체크)
     const isShoppingConnectModeGlobal = resolved.contentMode === 'affiliate' || !!resolved.affiliateLink;
     self.__affiliateProductImageLinkAttached = false;
+    // [2026-07-29] 원샷 가드 제거 — 쇼핑커넥트는 모든 이미지(썸네일/표/배너)에
+    // 제휴 링크를 건다 (v2.11.96 "대표 1장만" 정책을 사용자 지시로 원복).
     const attachAffiliateProductLinkOnce = async (): Promise<void> => {
-      if (!resolved.affiliateLink || self.__affiliateProductImageLinkAttached === true) return;
+      if (!resolved.affiliateLink) return;
       await self.attachLinkToLastImage(resolved.affiliateLink);
       self.__affiliateProductImageLinkAttached = true;
     };

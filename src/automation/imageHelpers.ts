@@ -1577,11 +1577,11 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
       }, image.provider).catch(() => undefined);
     }
 
-    // 문서너비 맞추기 + 대표 상품 이미지 1장에만 제휴 링크 삽입.
-    // 동일 링크를 모든 이미지에 반복하면 정보글보다 광고글처럼 보이고 정책 위험도 커진다.
+    // 문서너비 맞추기 + 모든 상품 이미지에 제휴 링크 삽입.
+    // [2026-07-29] v2.11.96의 "대표 1장만" 정책을 사용자 지시로 원복 — 쇼핑커넥트는
+    // 사진마다 링크가 걸려야 한다. (당시 사유였던 광고성 리스크는 사용자가 감수 결정)
     try {
-      const shouldAttachAffiliateLink = Boolean(linkUrl) && self.__affiliateProductImageLinkAttached !== true;
-      if (shouldAttachAffiliateLink) {
+      if (linkUrl) {
         await self.setImageSizeAndAttachLink(linkUrl);
         self.__affiliateProductImageLinkAttached = true;
       } else {

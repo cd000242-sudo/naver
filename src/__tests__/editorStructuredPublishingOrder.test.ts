@@ -47,7 +47,9 @@ describe('structured editor publishing order', () => {
   it('re-anchors the caret (click) right before the keyboard typing fallback', () => {
     const fallbackLog = editorHelpersSource.indexOf('최후 안전 키보드 입력 fallback');
     const focusBeforeTyping = editorHelpersSource.indexOf('await focusLastEditableLine(page, frame)');
-    const typingLoop = editorHelpersSource.indexOf('const paragraphs = fallbackText');
+    // [2026-07-29] 폴백 소스가 rich.plainText(청킹본)로 바뀌며 마커 갱신 —
+    // 캐럿 재고정은 중복가드 계획 수립보다도 앞서야 한다.
+    const typingLoop = editorHelpersSource.indexOf('const fallbackPlan = planTypingFallback(');
     expect(fallbackLog).toBeGreaterThan(-1);
     expect(focusBeforeTyping).toBeGreaterThan(fallbackLog);
     expect(focusBeforeTyping).toBeLessThan(typingLoop);

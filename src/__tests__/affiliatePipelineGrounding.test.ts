@@ -35,19 +35,23 @@ describe('affiliate pipeline grounding', () => {
     expect(main).toContain('source.personalExperience = personalExperience');
   });
 
-  it('같은 제휴 링크를 모든 상품 이미지에 반복 삽입하지 않는다', () => {
+  // [2026-07-29] v2.11.96의 "대표 1장만 링크" 정책을 사용자 지시로 원복.
+  // 쇼핑커넥트는 사진마다 + 배너에도 제휴 링크가 걸려야 한다.
+  it('쇼핑커넥트는 모든 상품 이미지에 제휴 링크를 삽입한다', () => {
     const html = read('../public/index.html');
     const imageHelpers = read('automation/imageHelpers.ts');
 
-    expect(html).not.toContain('모든 이미지에 이 링크가 자동으로 삽입됩니다.');
-    expect(imageHelpers).toContain('__affiliateProductImageLinkAttached');
-    expect(imageHelpers).toContain('대표 상품 이미지 1장에만');
+    expect(html).toContain('모든 이미지와 글 하단에 제휴 링크가 배치됩니다.');
+    expect(imageHelpers).toContain('모든 상품 이미지에 제휴 링크 삽입');
+    expect(imageHelpers).not.toContain('대표 상품 이미지 1장에만');
+    // 원샷 게이트 재도입 금지 (본문 이미지 링크 0개 회귀 방지)
+    expect(imageHelpers).not.toMatch(/self\.__affiliateProductImageLinkAttached !== true/);
   });
 
-  it('하단 CTA 배너 이미지와 링크 카드에 같은 URL을 이중 연결하지 않는다', () => {
+  it('하단 CTA 배너 이미지에도 제휴 링크를 연결한다', () => {
     const ctaHelpers = read('automation/ctaHelpers.ts');
-    expect(ctaHelpers).not.toContain('await self.attachLinkToLastImage(url);');
-    expect(ctaHelpers).toContain('배너는 시각 안내만 담당');
+    expect(ctaHelpers).toContain('await self.attachLinkToLastImage(url);');
+    expect(ctaHelpers).not.toContain('배너는 시각 안내만 담당');
   });
 
   it('JSON 출력 직전 규칙도 쇼핑 글을 일반 SEO 체험형으로 되돌리지 않는다', () => {
@@ -113,7 +117,9 @@ describe('affiliate pipeline grounding', () => {
     expect(prompt).toContain('REVIEW SEARCH INTENT');
     expect(prompt).toContain('천장 타공을 넓히는 과정');
     expect(prompt).toContain('10분 전에 켜두니');
-    expect(prompt).toContain('반복되는 불편');
+    // [2026-07-29] "반복되는 불편" 표본 문구는 후기 개수 메타 노출을 유발해 제거 —
+    // 새 계약의 후기 평가 금지 조항으로 대체 단언.
+    expect(prompt).toContain('[후기 평가 금지 — 가장 중요]');
     expect(prompt).not.toContain('[구매 전 제품 분석 가이드]');
   });
 
