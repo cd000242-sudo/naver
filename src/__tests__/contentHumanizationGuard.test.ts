@@ -188,7 +188,9 @@ describe('humanizer 문단 보존 · 경험 위장 금지 (v2.11.134)', () => {
     expect(manyEntry).not.toBeNull();
     expect(manyEntry![0]).not.toContain('다양한');
     // 탐지용 전체 목록은 유지하되, 삽입은 안전 목록만 사용한다.
-    expect(src).toMatch(/PERSONAL_EXPRESSIONS_SAFE_INSERT\[Math\.floor/);
+    // [2026-07-30] 글 단위 서브셋 경유로 바뀜 — 삽입은 여전히 safe-insert 풀에서만.
+    expect(src).toMatch(/samplePhraseSubset\(PERSONAL_EXPRESSIONS_SAFE_INSERT, 4\)/);
+    expect(src).not.toMatch(/PERSONAL_EXPRESSIONS\[Math\.floor/);
   });
 });
 

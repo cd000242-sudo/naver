@@ -6,10 +6,13 @@ import {
 import { resolveHumanizeIntensity } from '../contentHumanizationPolicy';
 
 describe('post-generation integrity', () => {
-  it('uses meaning-preserving humanization for SEO and homefeed', () => {
-    expect(resolveHumanizeIntensity('seo')).toBe('light');
-    expect(resolveHumanizeIntensity('homefeed')).toBe('light');
-    expect(resolveHumanizeIntensity('mate')).toBe('light');
+  it('applies strong humanization to every mode (2026-07-30 사용자 지시)', () => {
+    // "사람보다 더 사람처럼" — light 강등이 어미 다양화까지 꺼서 ~합니다 단조
+    // 어미가 AI 티의 주범이 됐다(라이브 실측). 전 모드 strong.
+    expect(resolveHumanizeIntensity('seo')).toBe('strong');
+    expect(resolveHumanizeIntensity('homefeed')).toBe('strong');
+    expect(resolveHumanizeIntensity('mate')).toBe('strong');
+    expect(resolveHumanizeIntensity('affiliate')).toBe('strong');
   });
 
   it('does not truncate a generated homefeed introduction', () => {

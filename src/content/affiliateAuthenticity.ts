@@ -138,7 +138,9 @@ const CTA_PATTERNS: readonly RegExp[] = [
 ];
 
 const BALANCE_PATTERN = /아쉬|단점|주의|다만|반대로|맞지\s*않|다른\s*선택|피하는\s*편|확인할\s*부분|판단이\s*갈/i;
-const CONVERSATIONAL_CRUTCH_PATTERN = /진짜|완전|솔직히|거든요|잖아요|더라고요|대박|찐으로/g;
+// [2026-07-30] 거든요/잖아요/더라고요 제거 — 어미 팔레트가 의무화한 구어 종결을
+// 감점하지 않는다. 남는 것은 과장 추임새(진짜/완전/대박류)뿐이며 임계도 상향.
+const CONVERSATIONAL_CRUTCH_PATTERN = /진짜|완전|솔직히|대박|찐으로/g;
 
 function normaliseText(value: unknown): string {
   return typeof value === 'string' ? value.replace(/\s+/g, ' ').trim() : '';
@@ -562,7 +564,7 @@ export function auditAffiliateAuthenticity(input: AffiliateAuthenticityAuditInpu
   }
 
   const crutchCount = (fullText.match(CONVERSATIONAL_CRUTCH_PATTERN) || []).length;
-  if (crutchCount > 8) {
+  if (crutchCount > 12) {
     add({
       code: 'CONVERSATIONAL_OVERACTING',
       message: '구어체 장식이 반복돼 사람이 쓴 글보다 사람을 흉내 낸 문장처럼 보입니다.',

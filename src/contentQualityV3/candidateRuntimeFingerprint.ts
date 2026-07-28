@@ -288,6 +288,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/contentTonePolicy.ts',
   'src/contentUrlModeDirective.ts',
   'src/contentViralOptimizer.ts',
+  'src/contentVoiceProfile.ts',
   'src/crawler/advancedAutomator.ts',
   'src/crawler/crawlerBrowser.ts',
   'src/crawler/naverStorePriceExtractor.ts',

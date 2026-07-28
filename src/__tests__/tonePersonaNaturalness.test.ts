@@ -62,7 +62,8 @@ describe('tone persona naturalness', () => {
 
       expect(prompt).toContain('HUMAN WRITING ANTI-PATTERN CONTRACT');
       expect(prompt).toContain('사람 말투는 감탄사를 늘리는 것이 아니다');
-      expect(prompt).toContain('거든요/잖아요/더라고요는 양념');
+      // [2026-07-30] "양념" 억제문 → 어미 팔레트 의무 규칙으로 교체
+      expect(prompt).toContain('[어미 팔레트 — 필수]');
       expect(prompt).toContain('문장 끝만 바꾸지 말고 생각을 전진시켜라');
     }
   });

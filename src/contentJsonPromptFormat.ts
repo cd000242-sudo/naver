@@ -4,6 +4,7 @@ import {
   type PromptMode,
 } from './promptLoader.js';
 import { preprocessLongKeyword } from './contentKeywordHelpers';
+import { buildVoiceProfileBlock, sampleVoiceProfile } from './contentVoiceProfile.js';
 
 type ContentJsonPromptSource = {
   previousTitles?: string[];
@@ -253,7 +254,8 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [원본 텍스트]
-${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}${contentMode === 'business' ? buildBusinessAngleDirective() : ''}${buildPreviousTitlesBlock(source, contentMode)}${contentMode === 'business' ? buildBusinessInfoBlock(source) : ''}${buildCustomPromptBlock(source)}
+${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}${contentMode === 'business' ? buildBusinessAngleDirective() : ''}${buildVoiceProfileBlock(sampleVoiceProfile())}
+${buildPreviousTitlesBlock(source, contentMode)}${contentMode === 'business' ? buildBusinessInfoBlock(source) : ''}${buildCustomPromptBlock(source)}
 ══════════════════════════════════════════
 🎯 [필수 키워드 정보 — 제목/소제목 작성에 반드시 반영]
 ══════════════════════════════════════════

@@ -135,12 +135,15 @@ const AI_PATTERN_REMOVALS_CASUAL_ONLY: { pattern: RegExp; replacement: string }[
 
 // ✅ 문장 끝 다양화 매핑 — 구어체 톤에서만 적용 (professional/formal 톤에서는 스킵!)
 const FORMAL_TO_CASUAL: Record<string, string[]> = {
-  '입니다': ['이에요', '예요', '이랍니다', '이죠', '인 편이에요'],
+  // [2026-07-30] 거든요 계열 추가 — 이유·새 정보 어감이라 대부분 문장에서 안전.
+  // 잖아요(공유지식 전제)·더라구요(관찰 함의)는 기계 치환이 의미를 깨므로
+  // 프롬프트 어미 팔레트(생성 단계)가 담당한다.
+  '입니다': ['이에요', '예요', '이랍니다', '이죠', '인 편이에요', '이거든요'],
   '습니다': ['어요', '아요', '죠', '네요', '습니다'],
-  '됩니다': ['돼요', '되죠', '되는 거예요', '되네요'],
-  '있습니다': ['있어요', '있죠', '있네요', '있는 편이에요'],
-  '없습니다': ['없어요', '없죠', '없네요', '없는 편이에요'],
-  '합니다': ['해요', '하죠', '한답니다', '하네요'],
+  '됩니다': ['돼요', '되죠', '되는 거예요', '되네요', '되거든요'],
+  '있습니다': ['있어요', '있죠', '있네요', '있는 편이에요', '있거든요'],
+  '없습니다': ['없어요', '없죠', '없네요', '없는 편이에요', '없거든요'],
+  '합니다': ['해요', '하죠', '한답니다', '하네요', '하거든요'],
   '였습니다': ['였어요', '이었죠', '였네요', '였던 셈이에요'],
   '하겠습니다': ['할게요', '할 거예요', '하려고요', '할래요'],
   '바랍니다': ['바라요', '바랄게요', '바래요'],
@@ -179,6 +182,17 @@ const PERSONAL_EXPRESSIONS_SAFE_INSERT = [
   '찾아보니까', '핵심만 보면', '한 가지 분명한 건', '제가 느끼기엔',
   '솔직히 말하면', '따져보면',
 ];
+
+// [2026-07-30] 글 단위 서브셋 샘플링 — 같은 삽입 어휘가 모든 글에 반복되면
+// 그 자체가 지문이다. 글마다 후보 풀의 일부만 사용한다.
+export function samplePhraseSubset<T>(pool: readonly T[], count: number, rng: () => number = Math.random): T[] {
+  const copy = [...pool];
+  const out: T[] = [];
+  while (out.length < count && copy.length > 0) {
+    out.push(copy.splice(Math.floor(rng() * copy.length), 1)[0]);
+  }
+  return out;
+}
 
 // ✅ 문장 연결어 다양화
 const CONNECTORS: Record<string, string[]> = {
@@ -299,9 +313,14 @@ export function humanizeContent(content: string, intensity: 'light' | 'medium' |
   // 3.7 [끝판왕] 연속 독립 문장 연결 (연결어 없이 3문장 이상 나열 방지)
   result = connectIsolatedSentences(result, isFormalTone);
 
+  // [2026-07-30] 글 단위 변환 지터 — 고정 확률·고정 사전을 모든 글에 똑같이
+  // 조합하면 그 조합 자체가 글 간 통계 지문이 된다(사용자 통찰). 매 글 비율을
+  // ±30% 흔들고, 삽입 후보도 글마다 서브셋만 쓴다.
+  const jitter = (base: number): number => base * (0.7 + Math.random() * 0.6);
+
   // 4. 문장 끝 다양화 — 격식체 톤에서는 완전 스킵! (STYLE OVERRIDE 보호)
   if (intensity !== 'light' && !isFormalTone) {
-    result = diversifyEndings(result, intensity === 'strong' ? 0.28 : 0.18);
+    result = diversifyEndings(result, jitter(intensity === 'strong' ? 0.28 : 0.18));
   }
 
   // 5. 연속 어미 다양화 (톤 인지: 격식체 전용 로테이션)
@@ -312,17 +331,17 @@ export function humanizeContent(content: string, intensity: 'light' | 'medium' |
 
   // 7. 동의어 치환 (모든 톤 공통)
   if (intensity !== 'light') {
-    result = replaceSynonyms(result, intensity === 'strong' ? 0.3 : 0.15);
+    result = replaceSynonyms(result, jitter(intensity === 'strong' ? 0.3 : 0.15));
   }
 
   // 8. 개인적 표현 삽입 — 격식체에서는 스킵 ("제 생각엔" 등은 격식에 부적합)
   if (intensity !== 'light' && !isFormalTone) {
-    result = insertPersonalExpressions(result, intensity === 'strong' ? 0.08 : 0.04);
+    result = insertPersonalExpressions(result, jitter(intensity === 'strong' ? 0.08 : 0.04));
   }
 
   // 9. 감탄사 삽입 — 격식체에서는 스킵 ("와", "대박" 등은 격식에 부적합)
   if (intensity === 'strong' && !isFormalTone) {
-    result = insertInterjections(result, 0.03);
+    result = insertInterjections(result, jitter(0.03));
   }
 
   // 10. 문장 길이 불규칙화 (모든 톤 공통 — 리듬감은 중요)
@@ -634,7 +653,9 @@ function insertPersonalExpressionsSegment(text: string, ratio: number): string {
 
     // [v2.11.134] Insert from the judgment-safe subset only — never fabricate
     // first-hand experience the post does not have.
-    const expr = PERSONAL_EXPRESSIONS_SAFE_INSERT[Math.floor(Math.random() * PERSONAL_EXPRESSIONS_SAFE_INSERT.length)];
+    // [2026-07-30] 글 단위 서브셋(4종)만 사용 — 전 풀 반복 사용은 교차 글 지문
+    const runPersonalPool = samplePhraseSubset(PERSONAL_EXPRESSIONS_SAFE_INSERT, 4);
+    const expr = runPersonalPool[Math.floor(Math.random() * runPersonalPool.length)];
     // 문장 앞에 삽입
     return expr + ' ' + sentence.charAt(0).toLowerCase() + sentence.slice(1);
   });
@@ -663,7 +684,8 @@ function insertInterjectionsSegment(text: string, ratio: number): string {
   const modifiedSentences = sentences.map((sentence, index) => {
     if (!indicesToInsert.has(index)) return sentence;
 
-    const interjection = INTERJECTIONS[Math.floor(Math.random() * INTERJECTIONS.length)];
+    const runInterjectionPool = samplePhraseSubset(INTERJECTIONS, 4);
+    const interjection = runInterjectionPool[Math.floor(Math.random() * runInterjectionPool.length)];
     return interjection + ', ' + sentence.charAt(0).toLowerCase() + sentence.slice(1);
   });
 
