@@ -70,6 +70,7 @@ import {
   resolveAffiliateContentLengthTarget,
 } from './content/affiliateAuthenticity.js';
 import { auditAffiliateReviewDepth } from './content/affiliateReviewDepth.js';
+import { buildAffiliateConversionStructureContract } from './content/affiliateConversionStructure.js';
 import {
   buildEvidenceAndIntentFinalContract,
   buildTitleEvidenceFinalContract,
@@ -2396,6 +2397,8 @@ export function buildModeBasedPrompt(
     finalContract = [
       buildAffiliateAuthenticityContract(source),
       buildAffiliatePurchaseIntentContract(source),
+      // [2026-07-30] 구매 전환 10단 골격(EEAT) — 후기형/전문가형 공통.
+      buildAffiliateConversionStructureContract(source as any),
       isExpertAnalysis ? '' : buildAffiliateReviewIntentContract(source),
     ].filter(Boolean).join('\n\n');
     console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}${isExpertAnalysis ? ' (expert — 후기 구조 계약 제외)' : ''}`);

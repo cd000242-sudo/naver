@@ -89,6 +89,10 @@ const UNSUPPORTED_URGENCY_PATTERNS: readonly RegExp[] = [
   /정가\s*복귀/i,
   /지금\s*안\s*사면/i,
   /지금이\s*마지막/i,
+  // [2026-07-30] 10단 골격 도입과 함께 근거 없는 한정 문형 보강
+  /이번\s*주까지만/i,
+  /재고\s*\d+\s*개/i,
+  /마감\s*임박/i,
 ];
 
 const PRESSURE_SALES_PATTERNS: readonly RegExp[] = [
@@ -99,6 +103,11 @@ const PRESSURE_SALES_PATTERNS: readonly RegExp[] = [
   /망설일\s*시간이\s*없/i,
   /서두르세요/i,
   /장바구니에\s*바로/i,
+  // [2026-07-30] 결과 보장형 심의 문형 — "N주 만에 N배", "~하면 무조건/반드시 ~됩니다"
+  /\d+\s*(?:일|주|개월|달)\s*만에\s*.{0,14}?\d+\s*배/i,
+  /(?:하면|쓰면|사면|적용하면)\s*(?:무조건|반드시)\s*.{0,16}?(?:됩니다|좋아집니다|해결됩니다|늘어납니다)/i,
+  /(?:매출|효과|결과|문의)(?:은|는|이|가)?\s*자연스럽게\s*(?:따라옵니다|늘어납니다|좋아집니다)/i,
+  /100\s*%\s*(?:보장|만족|효과)/i,
 ];
 
 const AI_AGENCY_PATTERNS: readonly RegExp[] = [
@@ -323,6 +332,18 @@ ${evidence}
 ${decisionBlueprint}`;
 }
 
+// [2026-07-30] 고조회 상세페이지 제목 공식 5종 (사용자 제공안에서 근거 게이트를
+// 통과하는 것만 채택). 긴급·한정형/결과 보장형은 날조·심의 위험이라 제외했다 —
+// 그 계열의 설득은 본문 10단 골격의 근거 기반 긴급성이 담당한다.
+const AFFILIATE_TITLE_FORMULA_BLOCK = `[제목 공식 — 아래 중 글감에 가장 맞는 1개를 고른다]
+1. 문제 해결형: 독자의 고통을 직접 건드린다 — "○○ 때문에 매번 번거로웠다면, 확인할 건 이것"
+2. 공감 질문형: 독자의 고민을 질문으로 연다 — "○○, 왜 매번 △△가 될까?"
+3. 숫자·리스트형: 입력 자료에 실제로 있는 수치·항목 수만 쓴다 — "○○ 고르기 전 확인할 4가지"
+4. 비밀 공개형: 본문이 실제로 답하는 정보 격차만 예고한다 — "○○ 고를 때 다들 놓치는 부분"
+5. 비교·대조형: 같은 제품의 옵션·조건 비교만 — "○○ 기본형 vs 풀옵션, 갈리는 딱 1가지"
+- 어떤 공식을 쓰든 제목이 던진 질문·숫자·차이에는 본문 도입부가 직접 답해야 한다.
+- 재고·마감·보장("N주 만에", "무조건")류 표현은 제목에 쓰지 않는다.`;
+
 export function buildAffiliateTitleEvidenceDirective(input: AffiliateEvidenceInput): string {
   const evidence = classifyAffiliateEvidence(input);
 
@@ -330,21 +351,24 @@ export function buildAffiliateTitleEvidenceDirective(input: AffiliateEvidenceInp
     return `[쇼핑 제목 근거 모드: FIRST_PARTY]
 - 사용자가 입력한 실제 경험에서 확인되는 상황·기간·장단점만 제목에 사용할 수 있다.
 - "솔직 후기" 같은 빈 수식어보다 제품명과 실제로 판단이 갈린 구체 항목을 앞세운다.
-- 입력에 없는 사용 기간, 가족 반응, 비교 제품, 효과는 만들지 않는다.`;
+- 입력에 없는 사용 기간, 가족 반응, 비교 제품, 효과는 만들지 않는다.
+${AFFILIATE_TITLE_FORMULA_BLOCK}`;
   }
 
   if (evidence.mode === 'review_synthesis') {
     return `[쇼핑 제목 근거 모드: REVIEW_SYNTHESIS — 작성자 실사용 근거 없음]
 - "써보니/직접 써본/한 달 사용/내돈내산/제가 산" 등 작성자 체험 후킹을 금지한다.
 - "구매자 후기에서 확인된", "후기에서 의견이 갈린", "구매 전 볼 부분"처럼 출처와 판단 기준이 드러나는 제목을 쓴다.
-- 리뷰 문장을 작성자 경험처럼 바꾸지 않는다.`;
+- 리뷰 문장을 작성자 경험처럼 바꾸지 않는다.
+${AFFILIATE_TITLE_FORMULA_BLOCK}`;
   }
 
   return `[쇼핑 제목 근거 모드: SPEC_ONLY — 작성자 실사용 근거 없음]
 - "써보니/직접 써본/실사용/한 달 사용/내돈내산"을 금지한다.
 - 제품명 + 확인된 핵심 스펙 + 누구에게 맞는지 또는 구매 전 확인할 조건으로 제목을 만든다.
 - 리뷰 데이터가 없으므로 제목의 후기/리뷰/사용기/체험기 표기 자체를 금지한다.
-- 인기, 만족도, 판매량을 암시하지 않는다.`;
+- 인기, 만족도, 판매량을 암시하지 않는다.
+${AFFILIATE_TITLE_FORMULA_BLOCK}`;
 }
 
 export function buildAffiliateAuthenticityContract(input: AffiliateEvidenceInput): string {

@@ -115,6 +115,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/configManager.ts',
   'src/content/adsPostEngine.ts',
   'src/content/affiliateAuthenticity.ts',
+  'src/content/affiliateConversionStructure.ts',
   'src/content/affiliateReviewDepth.ts',
   'src/content/categoryClassifier.ts',
   'src/content/celebrityAssertionSanitizer.ts',

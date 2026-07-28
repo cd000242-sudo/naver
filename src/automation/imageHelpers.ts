@@ -1580,9 +1580,13 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     // 문서너비 맞추기 + 모든 상품 이미지에 제휴 링크 삽입.
     // [2026-07-29] v2.11.96의 "대표 1장만" 정책을 사용자 지시로 원복 — 쇼핑커넥트는
     // 사진마다 링크가 걸려야 한다. (당시 사유였던 광고성 리스크는 사용자가 감수 결정)
+    // [2026-07-30] 이미지 관리탭 "링크 일괄 적용"이 심어둔 개별 링크(image.link)도
+    // 실제로 읽는다 — 저장만 되고 발행에 반영되지 않던 죽은 기능 배선.
     try {
-      if (linkUrl) {
-        await self.setImageSizeAndAttachLink(linkUrl);
+      const perImageLink = typeof (image as any).link === 'string' ? (image as any).link.trim() : '';
+      const effectiveLinkUrl = perImageLink || linkUrl;
+      if (effectiveLinkUrl) {
+        await self.setImageSizeAndAttachLink(effectiveLinkUrl);
         self.__affiliateProductImageLinkAttached = true;
       } else {
         await setImageSizeToDocumentWidth(self);
