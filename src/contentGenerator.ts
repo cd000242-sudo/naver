@@ -2388,12 +2388,17 @@ export function buildModeBasedPrompt(
 
   let finalContract = '';
   if (contentMode === 'affiliate') {
+    // [2026-07-29] 전문가 분석형(shopping_expert_review)은 후기 구조 계약을 붙이지
+    // 않는다 — 후기 계약이 최후미에 오면 전문가형도 "후기 정리글"로 수렴해 유형
+    // 분기가 무력화되던 문제(사용자 실측). 후기는 근거로만 쓰고, 글의 골격은
+    // 스펙→생활 의미→구매 이유(expert 프롬프트)가 가진다.
+    const isExpertAnalysis = String((source as any).articleType || '') === 'shopping_expert_review';
     finalContract = [
       buildAffiliateAuthenticityContract(source),
       buildAffiliatePurchaseIntentContract(source),
-      buildAffiliateReviewIntentContract(source),
+      isExpertAnalysis ? '' : buildAffiliateReviewIntentContract(source),
     ].filter(Boolean).join('\n\n');
-    console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}`);
+    console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}${isExpertAnalysis ? ' (expert — 후기 구조 계약 제외)' : ''}`);
   } else if (contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate' || contentMode === 'business' || contentMode === 'custom') {
     finalContract = buildEvidenceAndIntentFinalContract(source, contentMode);
     console.log(`[PromptBuilder] 근거·의도 최종 계약 적용: ${contentMode}, firstParty=${hasExplicitFirstPartyEvidence(source)}`);

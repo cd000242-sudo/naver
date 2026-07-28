@@ -115,9 +115,11 @@ export function buildReviewDecisionBlueprint(reviews: readonly string[]): string
   if (clusters.length === 0) return '';
 
   const uniqueReviewRefCount = new Set(clusters.flatMap(cluster => cluster.reviewRefs)).size;
+  // [2026-07-29] 개수 규칙은 내부 판단 전용 — 본문에 표본 크기("후기 2건에서는")를
+  // 노출시키던 문구를 제거하고, 확장 금지 취지만 유지한다.
   const multipleEvidenceRule = uniqueReviewRefCount >= 2 && clusters.length >= 2
     ? '- 서로 다른 REVIEW_N 근거가 2개 이상이면 첫 두 소제목은 서로 다른 BUYER_PAIN_POINT_MAP 항목을 사용한다. 상품명·가격·기능명 재설명으로 대체하지 않는다.'
-    : '- REVIEW_N 근거가 하나뿐이면 하나의 구매자 의견으로 한정하고, 여러 사람의 반복 의견이나 복수 독립 근거처럼 확장하지 않는다.';
+    : '- REVIEW_N 근거가 하나뿐이면 여러 사람의 반복 의견처럼 확장하지 않는다. 단, 이 한정은 내부 판단 기준이다 — 본문에 후기 개수나 표본 이야기를 쓰지 않는다.';
 
   const map = clusters
     .map((cluster, index) => (
@@ -126,8 +128,10 @@ export function buildReviewDecisionBlueprint(reviews: readonly string[]): string
     ))
     .join('\n');
 
-  return `[REVIEW DECISION BLUEPRINT — 후기형 글의 최우선 구조]
-아래 지도는 구매자 리뷰 원문을 주제별로 묶은 앱 생성 구조다. 새로운 사실이 아니며, 반드시 연결된 REVIEW_N 원문 범위 안에서만 쓴다.
+  return `[REVIEW DECISION BLUEPRINT — 구매 결정을 만드는 글의 우선 구조]
+아래 지도는 구매자 리뷰 원문을 주제별로 묶은 앱 생성 구조다. 글의 주인공은 후기
+자체가 아니라 이 고민을 가진 독자다. 새로운 사실이 아니며, 반드시 연결된 REVIEW_N
+원문 범위 안에서만 쓴다.
 
 <BUYER_PAIN_POINT_MAP>
 ${map}
@@ -135,10 +139,10 @@ ${map}
 
 [필수 집필 순서]
 - 첫 120~180자는 BUYER_PAIN_POINT_MAP의 1순위 고민과 사용 뒤 달라진 결과로 시작한다. 기능 나열이나 제품 소개로 열지 않는다.
-- 도입 첫 문단은 1순위 고민이 있는 사람에게 후기에서 확인된 결과 또는 남은 한계를 바로 답한다. 제품명·가격·기능명 소개로 시작하지 않는다.
+- 도입 첫 문단은 1순위 고민이 있는 사람에게 후기에서 확인된 결과를 바로 답한다. 제품명·가격·기능명 소개로 시작하지 않는다.
 ${multipleEvidenceRule}
-- 각 후기형 소제목은 REVIEW_N의 구체 상황 → 실제 사용 결과·해결·적응 또는 남은 불편 → 구매 전에 중요한 이유 → 맞는 사람과 맞지 않는 사람 순으로 연결한다.
+- 각 소제목은 독자의 구체 상황 → 후기에서 확인된 사용 결과 → 그래서 어떤 사람에게 왜 맞는지 순으로 연결한다. 실제 부정 후기가 있을 때만 아쉬운 점을 다루고, 그때도 "이런 조건이면 감수할 만한지"까지 이어서 판단을 돕는다.
 - 후기 근거가 있는 글의 중심은 기능 목록이 아니라 구매자가 겪은 문제와 결과다. 기능 이름을 상식적으로 풀이한 문단은 삭제한다.
-- 같은 의견이라고 말하려면 서로 다른 REVIEW_N 두 개 이상이 같은 판단을 뒷받침해야 한다. 하나뿐이면 한 구매자의 의견으로 한정한다.
+- 글의 도착점은 "이 제품이 어떤 사람의 어떤 문제를 어떻게 줄여주는가"다. 후기의 범위·개수·부족을 서술하는 문장은 어디에도 쓰지 않는다.
 - 구매욕구는 과장이나 재촉이 아니라, 독자가 겪는 골치 아픈 문제가 어떤 조건에서 실제로 줄었는지 보여 주는 방식으로 만든다.`;
 }

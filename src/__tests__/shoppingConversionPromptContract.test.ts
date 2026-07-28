@@ -23,7 +23,7 @@ describe('shopping conversion prompt contract', () => {
       productSpec: '타공 272x272mm, 온풍·제습·환기',
     });
 
-    expect(contract).toMatch(/불편[\s\S]{0,500}(?:사용\s*후|사용\s*뒤|확인된)\s*결과[\s\S]{0,500}구매\s*이유/);
+    expect(contract).toMatch(/구체 상황[\s\S]{0,120}확인된 사용 결과[\s\S]{0,120}어떤 사람에게 왜 맞는지/);
     expect(contract).toContain('후기 원문');
     expect(contract).toContain('작성자의 직접 경험으로 바꾸지 않는다');
     expect(contract).toContain('허위 체험');
@@ -103,7 +103,7 @@ describe('shopping conversion prompt contract', () => {
     });
     const system = splitPromptByMarker(prompt).system;
 
-    expect(system).toMatch(/불편[\s\S]{0,500}(?:사용\s*후|사용\s*뒤|확인된)\s*결과[\s\S]{0,500}구매\s*이유/);
+    expect(system).toMatch(/구체 상황[\s\S]{0,120}확인된 사용 결과[\s\S]{0,120}어떤 사람에게 왜 맞는지/);
     expect(system).toContain('근거 없는 유형은 언급조차 하지 않는다');
     expect(system).toContain('고정된 가격·설치·관리 체크리스트를 만들지 않는다');
     expect(system).toContain('제품을 사지 않았을 때');
