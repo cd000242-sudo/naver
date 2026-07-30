@@ -2382,6 +2382,12 @@ export async function handleSemiAutoPublish(): Promise<any> {
       scheduleTime = rawVal.split('T')[1]?.substring(0, 5);
     }
   }
+  // [2026-07-30] 예약 시간 미입력 사전 차단 — 없으면 발행 파이프라인 끝까지 간 뒤
+  // 정책 게이트에서 BLOCK_INVALID_SCHEDULE_DATE로 죽는다. 여기서 바로 알려준다.
+  if (publishMode === 'schedule' && !scheduleDate) {
+    alert('⏰ 예약발행을 선택했지만 예약 시간이 비어 있습니다.\n\n"예약 시간 설정"에서 날짜와 시간을 먼저 입력해주세요.');
+    return;
+  }
   const scheduleType = publishMode === 'schedule' ? ((document.getElementById('unified-schedule-type') as HTMLSelectElement)?.value as 'app-schedule' | 'naver-server' || 'naver-server') : undefined;
 
   // ✅ 디버깅: 이미지 관리 이미지 확인

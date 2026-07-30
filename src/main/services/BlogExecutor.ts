@@ -793,7 +793,14 @@ export async function runFullPostCycle(
         });
         effectivePayload = preparedPolicy.payload;
         if (!preparedPolicy.allowed) {
-            if (preparedPolicy.manualReviewRequired) {
+            // [2026-07-30] 실제 검수 사유가 있을 때만 검수 안내를 낸다.
+            //   manualReviewRequired는 저장된 최근 글이 20건 미만이면 상시 true다
+            //   (BLOCK_INSUFFICIENT_RECENT_POSTS가 advisory로 남기 때문). 반면
+            //   allowed=false를 만드는 guardReasons에는 최근 글 사유가 절대 포함되지
+            //   않으므로, 이 플래그로 분기하면 예약 날짜 오류 같은 진짜 차단이 전부
+            //   "비교 자료 부족"으로 오보고되고 사용자는 원인을 알 수 없다.
+            //   (라이브 실측: 예약발행이 이 메시지로 막힘)
+            if (preparedPolicy.manualReviewReasons.length > 0) {
                 const message = '최근 발행 글 비교 자료가 충분하지 않아 직접 검수가 필요합니다. 원고와 이미지는 그대로 유지됩니다.';
                 sendLog('🛡️ 최근 글 비교 자료가 부족해 사용자 검수를 기다립니다.');
                 AutomationService.stopRunning();
