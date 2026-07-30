@@ -48,10 +48,23 @@ export function registerMiscHandlers(): void {
         try {
             const { collectContentFromPlatforms } = await import('../../sourceAssembler.js');
             const config = await loadConfig();
+            // [2026-07-30] 검색 API 자격증명을 먼저 쓴다. 기존에는 데이터랩 키만
+            // 넘겨서, 사용자가 검색 API Secret을 정상 입력해도 빠른 경로(0.5초)가
+            // 스킵되고 모바일 파싱(20초)+Gemini Grounding으로 빠져 렌더러의 30초
+            // 타임아웃을 넘겼다. 해석 순서는 configManager와 동일하게 맞춘다.
+            const crawlClientId = config.naverClientId || config.naverDatalabClientId;
+            const crawlClientSecret = config.naverClientSecret || config.naverDatalabClientSecret;
+            if (!crawlClientId || !crawlClientSecret) {
+                console.warn(
+                    '[miscHandlers] ⚠️ 네이버 검색 API 자격증명 불완전 '
+                    + `(clientId=${crawlClientId ? '있음' : '없음'}, clientSecret=${crawlClientSecret ? '있음' : '없음'}) `
+                    + '→ 빠른 수집 경로를 쓸 수 없어 느린 폴백으로 진행합니다. 설정에서 네이버 검색 API Client Secret을 입력하세요.',
+                );
+            }
             const result = await collectContentFromPlatforms(keyword, {
                 maxPerSource: options?.maxPerSource || 5,
-                clientId: config.naverDatalabClientId,
-                clientSecret: config.naverDatalabClientSecret,
+                clientId: crawlClientId,
+                clientSecret: crawlClientSecret,
                 logger: (msg: string) => console.log(msg),
                 targetDate: options?.targetDate,
             });
