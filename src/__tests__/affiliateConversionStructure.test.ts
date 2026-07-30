@@ -40,16 +40,18 @@ describe('affiliate 10-step conversion structure (EEAT)', () => {
     expect(withMemo).toContain('1인칭 장면으로 쓴다');
   });
 
-  it('제목 공식 5종이 3개 근거 모드 전부에 주입된다', () => {
+  // [2026-07-31] 제목 공식 5종 → 구매 상황 기준으로 교체 (사용자 지시).
+  // 형태를 고르게 하면 글감을 형태에 끼워 맞추고, 그 자리는 비교 사이트와
+  // AI 요약이 이미 점령했다. 상세 단언은 situationTitleContract.test.ts.
+  it('구매 상황 기준 제목 지시가 3개 근거 모드 전부에 주입된다', () => {
     for (const input of [
       { personalExperience: '실제로 두 달 써 본 경험 메모입니다' },
       { productReviews: ['설치가 생각보다 오래 걸렸지만 소음은 확실히 줄었어요. 조용해져서 만족합니다.'] },
       {},
     ]) {
       const directive = buildAffiliateTitleEvidenceDirective(input as any);
-      expect(directive).toContain('[제목 공식');
-      expect(directive).toContain('문제 해결형');
-      expect(directive).toContain('비교·대조형');
+      expect(directive).toContain('[제목 — 구매 상황 기준]');
+      expect(directive).toContain('제품명만 있는 제목은 다시 쓴다');
       expect(directive).toContain('본문 도입부가 직접 답해야 한다');
     }
   });

@@ -332,58 +332,27 @@ export function scoreNeoHookTitle(
  * [v2.6.0] 신박 제목 생성 가이드 — 프롬프트 주입용
  * base.prompt Section 5 "첫 줄 5대 공식"을 보강하는 제목 전용 레이어
  */
-export function buildNeoHookPromptBlock(categoryHint?: string, primaryKeyword?: string): string {
+export function buildNeoHookPromptBlock(categoryHint?: string, _primaryKeyword?: string): string {
   const cat = resolveCTRCategory(categoryHint);
-  const recommendedPatterns = CATEGORY_PATTERN_MIX[cat];
-  const kw = primaryKeyword || '{주제}';
 
-  // 카테고리별 추천 패턴 3개 샘플 예시 생성
-  const sampleExamples: string[] = [];
-  for (const patternName of recommendedPatterns.slice(0, 3)) {
-    const templates = NEO_HOOK_TEMPLATES[patternName];
-    const sample = templates[Math.floor(Math.random() * templates.length)];
-    const rendered = sample
-      .replace(/\{kw\}/g, kw)
-      .replace(/\{N\}/g, '3')
-      .replace(/\{M\}/g, '2')
-      .replace(/\{reason\}/g, '다른 이유가 있더라구요')
-      .replace(/\{confession\}/g, '진짜 반신반의였거든요')
-      .replace(/\{result\}/g, '생각보다 훨씬 달라졌어요')
-      .replace(/\{feeling\}/g, '불편해요')
-      .replace(/\{place\}/g, '마트')
-      .replace(/\{time\}/g, '저녁 퇴근길에')
-      .replace(/\{ending\}/g, '예상 밖 결과');
-    sampleExamples.push(`  [${patternName}] "${rendered}"`);
-  }
-
+  // [2026-07-31] 패턴 9종 선택 규칙 폐기 (사용자 지시: "예전 공식은 다 필요없다").
+  // 패턴 이름을 고르게 하면 그 형태에 글감을 억지로 끼워 맞추게 되고, 결과적으로
+  // 같은 골격의 제목이 반복된다. 제목의 실제 기준은 [TITLE — 상황·경험 기준]
+  // 계약(situationTitleContract)이 담당하고, 여기서는 그 계약과 충돌하지 않는
+  // 홈판 고유 제약(블랙리스트·반복 방지·길이)만 남긴다.
   return `
 ════════════════════════════════════════════════════════════
-[NEO-HOOK TITLE ENGINE] — 신박 후킹 제목 생성 의무 규칙
+[홈판 제목 제약] — 상황·경험 기준 계약의 보조 규칙
 ════════════════════════════════════════════════════════════
 
-★ base.prompt Section 5 "첫 줄 5대 공식"보다 **한 단계 위 독창성** 요구.
-★ 하루 30개 발행 기준 "AI 티 안 나고 중복 패턴 없는" 제목 생산.
+★ 패턴 이름을 먼저 고르고 글감을 끼워 맞추지 마라. 무엇을 다루는 상황인지를
+  먼저 정하고, 그 상황이 드러나게 제목을 쓴다. 아래는 홈판(${cat}) 고유 제약이다.
 
-■ 이 카테고리(${cat}) 추천 패턴 3종 예시:
-${sampleExamples.join('\n')}
-
-■ 아래 패턴 중 글감에 맞는 것을 **가능한 경우 1개 선택** (억지로 끼우지 말 것):
-  1. paradox (역설): "오히려/의외로/비싸서 아니라/싸서 오히려"
-  2. number_shock (숫자 충격): "N일 만에/N분 투자로/N% 달라진" — 입력 자료의 실측 수치만
-  3. mini_scene (미세 장면): "퇴근길 버스에서/마트에서 우연히" — 독자가 겪을 상황으로
-  4. insider_tip (숨은 정보): "업계 사람만 아는/직원도 안 알려주는" — 본문이 실제로 답할 때만
-  5. conflict (갈등·대립): "논란의 그 제품/의견이 갈리는" — 자료에 근거가 있을 때만
-  6. sensory (감각): "열었을 때 이 냄새" — 관찰 가능한 대상일 때만
-  7. disclosure (고백) / reverse_expect (기대 역전): "솔직히 저도/좋다길래 샀더니"
-     → ⛔ **작성자 경험 메모가 입력에 있을 때만 사용.** 없으면 이 두 패턴을 쓰지 않는다.
-       (없는 체험을 만들면 근거 계약 위반이며 신뢰가 깨진다)
-
-■ 가산 요소 (있으면 좋지만 의무는 아니다 — 없다고 억지로 만들지 말 것):
-  - 역설 어미 ("오히려", "의외로", "비싸서 못 산 게 아니라")
-  - 구체 장면 (지하철, 퇴근길, 마트, 편의점, 약국, 학교앞)
-  - 갈등·반대 ("반대", "말렸", "논란", "호불호") — 자료 근거 필요
-  - 감각 (한입, 냄새, 터치, 향, 소리, 감촉)
+■ 구체성 재료 (상황을 쓸 때 실제로 있으면 살려라 — 없으면 만들지 말 것):
+  - 장면 (지하철, 퇴근길, 마트, 편의점, 약국, 학교앞)
+  - 감각 (한입, 냄새, 터치, 향, 소리, 감촉) — 관찰 가능한 대상일 때만
   - 구체 시공 (새벽, 한밤, 주말, N시, N분)
+  - 갈리는 지점 ("반대", "말렸", "호불호") — 자료 근거가 있을 때만
   ⛔ "이거 저만 그래요?", "다들 어떠세요?" 같은 빈 질문은 쓰지 않는다.
      (답을 숨기는 진행 문구 — 독자는 답을 보러 왔다)
 
@@ -399,10 +368,10 @@ ${sampleExamples.join('\n')}
   "저도 X 했는데 이렇게 됐어요" 패턴도 5번에 1번 이하로만.
 
 ■ 최종 자가검토:
-  □ 신박 패턴 9개 중 1개 이상 매칭?
-  □ 신박 가산 요소 최소 1개 포함?
+  □ 제목에 구체적 상황(조건·시점·장면·갈리는 지점)이 최소 1개 드러나는가?
+  □ 상황 없이 주제만 나열한 제목("○○ 총정리/방법/알아보기")은 아닌가?
   □ B급 블랙리스트 단어 0개?
-  □ 직전 제목들과 다른 패턴?
+  □ 직전 제목들과 다른 상황을 다루는가?
   □ 28~42자 유지 + 숫자 또는 구체 고유명사 1개?
   □ 이 훅이 약속한 정보(질문·숫자·정체·방법)를 근거 자료로 도입부에서 직접 답할 수 있는가?
     (답을 못 주는 훅은 클릭 후 즉시 이탈 = 노출 하락. 답 가능한 훅으로 교체)

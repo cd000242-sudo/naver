@@ -52,7 +52,7 @@ import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, reset
 import { analyzeContentBySemantic, isLlmRubricEnabled } from './contentSemanticScoring.js';
 import { buildPersonaCard } from './authgrDefense.js';
 import { selfCritiqueAndRewrite, isSelfCritiqueEnabled } from './contentSelfCritique.js';
-import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, type PromptMode } from './promptLoader.js';
+import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, resolveCategory, HOMEFEED_ISSUE_STORY_CATEGORIES, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
@@ -73,6 +73,7 @@ import { auditAffiliateReviewDepth } from './content/affiliateReviewDepth.js';
 import { buildAffiliateConversionStructureContract } from './content/affiliateConversionStructure.js';
 import { describeGroundingDecision, isGroundingExplicitlyEnabled } from './content/groundingCostPolicy.js';
 import { buildSituationDepthContract } from './content/situationDepthContract.js';
+import { buildSituationTitleContract } from './content/situationTitleContract.js';
 import {
   buildEvidenceAndIntentFinalContract,
   buildEvidenceMetaLeakRule,
@@ -2418,8 +2419,22 @@ export function buildModeBasedPrompt(
   // 근거 상태(직접 경험 메모 / 자료 있음 / 부족)에 따라 요구 디테일이 갈린다.
   const situationDepth = buildSituationDepthContract(source as any);
 
+  // [2026-07-31] 제목도 같은 기준으로 통일 — 공식 나열형을 버리고 상황·경험을 요구한다.
+  // 모드별 제약(SEO 키워드 앞 배치 / 홈판 자유 문장 / 쇼핑 구매 갈림길)은 계약 안에서 갈린다.
+  // 단, 홈판 이슈픽(연예·스포츠·경제 뉴스)은 제3자 사건이라 "내 상황·내 경험"이 성립하지
+  // 않는다. 그쪽은 issue-story.prompt의 인용 훅 골격(실측 승자 패턴)이 제목을 가지므로
+  // 계약을 얹지 않는다 — 두 계약이 붙으면 서로 무력화된다.
+  const usesIssueStoryTitle = contentMode === 'homefeed'
+    && HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory((source as any)?.categoryHint));
+  const situationTitle = usesIssueStoryTitle
+    ? ''
+    : buildSituationTitleContract(
+      contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'affiliate' ? contentMode : 'other',
+      source as any,
+    );
+
   // This contract must be last so category and JSON-output rules cannot override evidence safety.
-  return `${systemPrompt}\n\n${jsonOutputFormat}\n\n${situationDepth}${finalContract ? `\n\n${finalContract}` : ''}`.trim();
+  return `${systemPrompt}\n\n${jsonOutputFormat}\n\n${situationDepth}${situationTitle ? `\n\n${situationTitle}` : ''}${finalContract ? `\n\n${finalContract}` : ''}`.trim();
 }
 
 // ✅ [2026-02-11] 데드코드 제거 완료
