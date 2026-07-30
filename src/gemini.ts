@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai';
 import { buildSystemPromptFromHint, type PromptMode } from './promptLoader.js';
 import { loadConfig, saveConfig } from './configManager.js';
+import { isGroundingExplicitlyEnabled, describeGroundingDecision } from './content/groundingCostPolicy.js';
 import {
   GEMINI_TEXT_MODELS,
   normalizeGeminiTextModelId,
@@ -10,6 +11,23 @@ import {
   shouldAllowAutomaticProviderRetry,
   type GenerationSubmissionMode,
 } from './generation/submissionPolicy.js';
+
+/**
+ * [2026-07-30] 이 파일의 grounding 부착은 주석상 "상시 활성화"였다 — 게이트가
+ * 없어 호출마다 Google Search 과금(글당 약 ₩50)이 발생했다. 옵트인으로 전환.
+ * 설정을 못 읽으면 과금하지 않는다(fail-closed).
+ */
+async function isGeminiGroundingAllowed(): Promise<boolean> {
+  try {
+    const cfg = await loadConfig();
+    const allowed = isGroundingExplicitlyEnabled(cfg as any);
+    if (!allowed) console.log(`[Gemini] ${describeGroundingDecision(false)}`);
+    return allowed;
+  } catch {
+    console.warn('[Gemini] ⚠️ 그라운딩 설정 확인 실패 → 비용 보호로 OFF');
+    return false;
+  }
+}
 
 // ==================== 타입 정의 ====================
 
@@ -319,7 +337,7 @@ export async function generateBlogContent(
               topK: 50,
             },
             // @ts-ignore - Google Search Grounding 상시 활성화
-            tools: [{ googleSearch: {} }],
+            ...(await isGeminiGroundingAllowed() ? { tools: [{ googleSearch: {} }] } : {}),
           });
 
           console.log(`[Gemini Request] Model: ${modelName} [systemInstruction: ON, Search Grounding: ON], Topic: ${splitPrompt.user.substring(0, 50)}...`);
@@ -496,7 +514,7 @@ export async function* generateBlogContentStream(
           topK: 50,
         },
         // @ts-ignore - Google Search Grounding 상시 활성화
-        tools: [{ googleSearch: {} }],
+        ...(await isGeminiGroundingAllowed() ? { tools: [{ googleSearch: {} }] } : {}),
       });
 
       const result = await model.generateContentStream(splitPrompt.user);

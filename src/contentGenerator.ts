@@ -71,6 +71,7 @@ import {
 } from './content/affiliateAuthenticity.js';
 import { auditAffiliateReviewDepth } from './content/affiliateReviewDepth.js';
 import { buildAffiliateConversionStructureContract } from './content/affiliateConversionStructure.js';
+import { describeGroundingDecision, isGroundingExplicitlyEnabled } from './content/groundingCostPolicy.js';
 import {
   buildEvidenceAndIntentFinalContract,
   buildEvidenceMetaLeakRule,
@@ -2976,7 +2977,13 @@ async function callGemini(
         //   원문 모드에서 그라운딩이 켜져 있으면, 프롬프트의 크롤링 원문 + 검색으로 가져온
         //   같은 기사를 Gemini가 이중으로 받아 거의 그대로 재현 → RECITATION → 빈 응답(0건).
         //   원문 자체가 fact source이므로 그라운딩을 꺼도 환상(hallucination)이 생기지 않는다.
-        const configGrounding = (config as any)?.enableSearchGrounding !== false;
+        // [2026-07-30] 기본 ON(opt-out) → 옵트인으로 전환. 이 한 줄이 글당 약 ₩50를
+        // 무조건 과금시키던 지점이다(주석의 "+$0.035/글"). 사용자가 팩트체크 엔진에서
+        // 그라운딩을 직접 고르거나 enableSearchGrounding=true로 명시할 때만 켠다.
+        const configGrounding = isGroundingExplicitlyEnabled(config as any);
+        if (!configGrounding) {
+          console.log(`[Gemini] ${describeGroundingDecision(false)}`);
+        }
         const isRawTextMode = (geminiUserTextOriginal || '').length > 500;
         const useGrounding = strictRequestEnvelope
           ? strictRequestEnvelope.useGrounding
@@ -4487,8 +4494,16 @@ export async function findRelevantOfficialSite(
       const config = await loadConfig();
       applyConfigToEnv(config);
       apiKey = config?.geminiApiKey?.trim() || process.env.GEMINI_API_KEY;
+      // [2026-07-30] 이 조회도 googleSearch 도구를 붙여 과금된다. 비용 보호 기본 OFF —
+      // 못 찾으면 링크를 넣지 않을 뿐이고, URL을 지어내는 것보다 안전하다.
+      if (!isGroundingExplicitlyEnabled(config as any)) {
+        console.log(`[공식사이트 검색] ${describeGroundingDecision(false)} — 조회 생략`);
+        return emptyResult;
+      }
     } catch (e) {
-      apiKey = process.env.GEMINI_API_KEY;
+      // 설정을 못 읽으면 과금하지 않는다 (fail-closed).
+      console.warn('[공식사이트 검색] ⚠️ 설정 확인 실패 → 비용 보호로 생략');
+      return emptyResult;
     }
 
     if (!apiKey) {
@@ -4846,6 +4861,21 @@ export async function researchWithGeminiGrounding(keyword: string): Promise<{
 
     if (!apiKey) {
       console.warn('[Gemini Grounding] ⚠️ Gemini API 키 없음');
+      return { content: '', title: '', sources: [], success: false };
+    }
+
+    // [2026-07-30] 함수 레벨 비용 게이트 — 호출자가 여러 곳(수집 폴백, 웹 리서치)이라
+    // 각 호출부만 막으면 새 경로가 생길 때 다시 새어나간다. 여기서 최종 차단한다.
+    try {
+      const { loadConfig: loadCfgForGrounding } = await import('./configManager.js');
+      const groundingCfg = await loadCfgForGrounding();
+      if (!isGroundingExplicitlyEnabled(groundingCfg as any)) {
+        console.log(`[Gemini Grounding] ${describeGroundingDecision(false)} — 리서치 생략`);
+        return { content: '', title: '', sources: [], success: false };
+      }
+    } catch {
+      // 설정을 못 읽으면 과금 쪽으로 기울지 않는다 (fail-closed).
+      console.warn('[Gemini Grounding] ⚠️ 설정 확인 실패 → 비용 보호로 생략');
       return { content: '', title: '', sources: [], success: false };
     }
 
