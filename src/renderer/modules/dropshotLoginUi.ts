@@ -227,6 +227,45 @@ export function toggleDropshotRow(rowId: string, show: boolean): void {
 }
 
 /**
+ * [2026-07-31] index.html의 정적 로그인 UI 4세트를 모두 배선한다.
+ *
+ * 사용자 신고: "로그인 확인을 눌러도 아무 반응이 없다."
+ * 원인 — bindDropshotLogin의 유일한 호출부가 소제목 이미지 설정 모달에서
+ * 동적 생성하는 hsettings-* 만 배선하고 있었다. 반면 이미지 관리 탭과
+ * 이미지 스튜디오의 로그인 버튼(mgmt-*, imgstudio-*)은 index.html에
+ * 정적으로 존재하는데 리스너가 한 번도 붙지 않아 클릭이 무반응이었다.
+ * (bindFlowLogin은 호출부가 아예 0건이었다.)
+ *
+ * bind 함수들은 dataset 플래그로 중복 방지되므로 여러 번 호출해도 안전하다.
+ * 요소가 없으면 조용히 건너뛴다.
+ */
+export function bindAllStaticDropshotLoginUis(): void {
+  const dropshotSets = [
+    { loginBtnId: 'mgmt-ds-login-btn', checkBtnId: 'mgmt-ds-check-btn', statusId: 'mgmt-ds-status' },
+    { loginBtnId: 'imgstudio-ds-login-btn', checkBtnId: 'imgstudio-ds-check-btn', statusId: 'imgstudio-ds-status' },
+  ];
+  const flowSets = [
+    { loginBtnId: 'mgmt-flow-login-btn', checkBtnId: 'mgmt-flow-check-btn', statusId: 'mgmt-flow-status' },
+    { loginBtnId: 'imgstudio-flow-login-btn', checkBtnId: 'imgstudio-flow-check-btn', statusId: 'imgstudio-flow-status' },
+  ];
+
+  let bound = 0;
+  for (const ids of dropshotSets) {
+    if (document.getElementById(ids.checkBtnId)) {
+      bindDropshotLogin(ids);
+      bound++;
+    }
+  }
+  for (const ids of flowSets) {
+    if (document.getElementById(ids.checkBtnId)) {
+      bindFlowLogin(ids);
+      bound++;
+    }
+  }
+  console.log(`[DropshotLoginUi] 정적 로그인 UI 배선: ${bound}세트`);
+}
+
+/**
  * Wires a <select>-based engine picker: binds the buttons and toggles the row
  * whenever the selected value is 'dropshot'.
  */

@@ -641,11 +641,22 @@ function paragraphSpacerHtml(fontSizePx: number, centerAlign: boolean): string {
   ].join(';')}"><br></p>`;
 }
 
-function shouldInsertParagraphSpacer(html: string): boolean {
-  return /^<p\b/.test(html)
-    && !html.includes('data-rich-heading="true"')
-    && !html.includes('data-rich-toc="true"')
-    && !html.includes('data-rich-spacer="true"');
+/**
+ * [2026-07-31] 리치 붙여넣기의 문단 리듬을 타이핑과 맞춘다.
+ *
+ * 사용자 실측: "리치 복붙보다 타이핑이 문단 정리를 훨씬 잘한다."
+ * 원인은 간격 비율이었다.
+ *   - 리치: 문장 내 22자 줄은 <br>(줄간 ~37px)로 붙고, 문장 사이에는
+ *           본문 margin 30px + 빈 스페이서 문단(~27px + margin 18px)이 겹쳐
+ *           ~112px → 줄 대비 3배. "뭉쳤다가 확 벌어지는" 느낌의 정체.
+ *   - 타이핑: 모든 줄이 Enter로 들어가 균일하고, 문장 사이만 Enter 2회(약 2배).
+ * 스페이서를 빼면 문장 간격이 줄간(37px) + margin(30px) = ~67px, 비율 1.8배로
+ * 타이핑과 사실상 같아진다. 표·하이라이트·인용구는 그대로 유지된다.
+ *
+ * 소제목/목차 블록은 자체 margin(34px 등)을 갖고 있어 영향이 없다.
+ */
+function shouldInsertParagraphSpacer(_html: string): boolean {
+  return false;
 }
 
 function joinHtmlPartsWithParagraphSpacers(parts: string[], spacerHtml: string): string {

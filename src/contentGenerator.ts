@@ -72,6 +72,7 @@ import {
 import { auditAffiliateReviewDepth } from './content/affiliateReviewDepth.js';
 import { buildAffiliateConversionStructureContract } from './content/affiliateConversionStructure.js';
 import { describeGroundingDecision, isGroundingExplicitlyEnabled } from './content/groundingCostPolicy.js';
+import { buildSituationDepthContract } from './content/situationDepthContract.js';
 import {
   buildEvidenceAndIntentFinalContract,
   buildEvidenceMetaLeakRule,
@@ -2412,8 +2413,13 @@ export function buildModeBasedPrompt(
     console.log(`[PromptBuilder] 근거·의도 최종 계약 적용: ${contentMode}, firstParty=${hasExplicitFirstPartyEvidence(source)}`);
   }
 
+  // [2026-07-31] 상황별 깊이 계약 — 전 모드 공통. AI 요약이 대체할 수 있는
+  // 단순 정보 나열을 막고, 검색자의 구체 상황을 해결하는 글로 유도한다.
+  // 근거 상태(직접 경험 메모 / 자료 있음 / 부족)에 따라 요구 디테일이 갈린다.
+  const situationDepth = buildSituationDepthContract(source as any);
+
   // This contract must be last so category and JSON-output rules cannot override evidence safety.
-  return `${systemPrompt}\n\n${jsonOutputFormat}${finalContract ? `\n\n${finalContract}` : ''}`.trim();
+  return `${systemPrompt}\n\n${jsonOutputFormat}\n\n${situationDepth}${finalContract ? `\n\n${finalContract}` : ''}`.trim();
 }
 
 // ✅ [2026-02-11] 데드코드 제거 완료

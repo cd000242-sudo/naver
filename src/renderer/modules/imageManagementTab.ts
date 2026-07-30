@@ -7,6 +7,7 @@
 
 import { toastManager } from '../utils/uiManagers.js';
 import { readRawPipelineSettings } from './pipelineConfig.js';
+import { bindAllStaticDropshotLoginUis } from './dropshotLoginUi.js';
 // ✅ [v2.10.288] subImageMode import 제거 — esbuild 회귀 차단. window 통해 호출.
 type SubImageMode = 'ai' | 'collected';
 function setSubImageMode(mode: SubImageMode): void {
@@ -107,6 +108,8 @@ function ensureImageFxSwitchButton(imageSourceSelect: HTMLSelectElement, show: b
 }
 
 export async function initImageManagementTab(): Promise<void> {
+  // [2026-07-31] 드롭샷/Flow 로그인 버튼 배선 — 이 호출이 없어 클릭이 무반응이었다.
+  try { bindAllStaticDropshotLoginUis(); } catch (e) { console.warn('[ImageManagementTab] 로그인 UI 배선 실패:', e); }
   // 2026-06-14: Flow/Prodia are selectable again for existing users.
   // ImageFX remains hidden; only stale ImageFX selections migrate to dropshot.
   try {

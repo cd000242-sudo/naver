@@ -251,8 +251,11 @@ describe('buildMobileRichHtml', () => {
 
     expect(result.plainText).toContain('소음이 상당하다.\n\n특히,');
     expect(result.plainText).toContain('사용하기 어렵다.\n\n이 부분은');
-    expect(result.html).toContain('data-rich-spacer="true"');
-    expect(result.html).toContain('<br></p>');
+    // [2026-07-31] 빈 스페이서 문단 제거 — 문장 간격이 줄간의 3배가 되어
+    // "뭉쳤다가 확 벌어지는" 리듬을 만들었다(타이핑은 2배). 문단 분리는
+    // 본문 p의 margin-bottom 30px이 담당한다.
+    expect(result.html).not.toContain('data-rich-spacer="true"');
+    expect(result.html).toMatch(/margin:0 auto 30px/);
   });
 
   it('splits long Korean sentences near a semantic midpoint for mobile reading', () => {
