@@ -1,6 +1,8 @@
 import {
   buildBusinessAngleDirective,
   buildStructureVariationDirective,
+  resolveCategory,
+  HOMEFEED_ISSUE_STORY_CATEGORIES,
   type PromptMode,
 } from './promptLoader.js';
 import { preprocessLongKeyword } from './contentKeywordHelpers';
@@ -9,6 +11,8 @@ import { buildVoiceProfileBlock, sampleVoiceProfile } from './contentVoiceProfil
 type ContentJsonPromptSource = {
   previousTitles?: string[];
   customPrompt?: string;
+  /** issue-story 골격과 STRUCTURE OVERRIDE의 배타 판정에 사용 */
+  categoryHint?: string;
   businessInfo?: {
     name?: string;
     phone?: string;
@@ -63,8 +67,9 @@ function buildModeStructureRule(mode: PromptMode): string {
 
   return isHomefeed ? `
 ⚠️⚠️⚠️ [홈판 모드 필수 구조 규칙] ⚠️⚠️⚠️
-- introduction: 2~4개의 짧은 문장. 독자가 겪을 법한 상황과 얻을 정보를 먼저 보여주되 매번 같은 3줄 공식으로 쓰지 않는다.
-- headings: STRUCTURE OVERRIDE에서 지정한 소제목 개수를 따를 것 (3~8개)
+- introduction: 2~4개의 짧은 문장. 제목이 던진 질문에 먼저 답하고, 독자가 겪을 법한 상황과 이 글에서 얻을 것을 보여준다. 표현은 매번 달라도 되지만 "답부터 준다"는 순서는 지킨다.
+- headings: 위 구조 힌트를 따르되, 힌트가 없으면 내용에 맞게 정한다. (개수를 맞추려고 얕은 소제목을 추가하지 않는다)
+- 각 소제목 첫 1~2문장은 그 소제목이 던진 질문의 답이어야 한다. 그 문장만 떼어내도 답이 되게 쓰고, 배경·서론을 먼저 깔지 않는다.
 - 각 소제목은 앞 소제목과 다른 질문·판단을 맡고, 인물명·키워드로 기계적으로 시작하지 않는다.
 - (선택) 맥락상 자연스러울 때만 독자 반응을 본문에 1~2문장 녹임. ⛔ "📌 당시 대중 반응 요약" 같은 가짜 댓글 블록 합성 금지(거짓 신호 = AI 티 + 신뢰 저하)
 - conclusion: 핵심 판단과 다음 확인 행동 또는 여운을 1~3문장으로 마무리. 댓글·저장·공유를 동시에 요구하지 않는다.
@@ -223,6 +228,14 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
   const isMate = mode === 'mate';
   const modeStructureRule = buildModeStructureRule(mode);
   const evidenceBlockRule = buildEvidenceBlockRule();
+  // [2026-07-30] issue-story 골격(연예/시사)은 자체적으로 "소제목 0~3개 + 이 골격이
+  // 우선"을 선언한다. 여기에 STRUCTURE OVERRIDE(개수 지정)까지 겹치면 한 글에
+  // 상충하는 개수 계약이 둘 들어가 골격이 무작위로 뒤집힌다 → 배타 처리.
+  const usesIssueStorySkeleton = isHomefeed
+    && HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory(source?.categoryHint));
+  const structureDirective = isHomefeed && !usesIssueStorySkeleton
+    ? buildStructureVariationDirective(minChars)
+    : '';
 
   return `
 ────────────────────
@@ -258,7 +271,7 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [원본 텍스트]
-${contentMode === 'homefeed' ? buildStructureVariationDirective() : ''}${contentMode === 'business' ? buildBusinessAngleDirective() : ''}${buildVoiceProfileBlock(sampleVoiceProfile())}
+${structureDirective}${contentMode === 'business' ? buildBusinessAngleDirective() : ''}${buildVoiceProfileBlock(sampleVoiceProfile())}
 ${buildPreviousTitlesBlock(source, contentMode)}${contentMode === 'business' ? buildBusinessInfoBlock(source) : ''}${buildCustomPromptBlock(source)}
 ══════════════════════════════════════════
 🎯 [필수 키워드 정보 — 제목/소제목 작성에 반드시 반영]

@@ -121,7 +121,7 @@ const CATEGORY_MAP: Record<string, PromptCategory> = {
 // [v2.11.135] Categories whose homefeed posts are "story-shaped" in the wild
 // (연예·스포츠·시사·경제 이슈 — 스포츠 힌트는 entertainment로 매핑됨).
 // These get the issue-story skeleton; practical categories keep the base shape.
-const HOMEFEED_ISSUE_STORY_CATEGORIES: ReadonlySet<PromptCategory> = new Set([
+export const HOMEFEED_ISSUE_STORY_CATEGORIES: ReadonlySet<PromptCategory> = new Set([
   'entertainment',
   'society',
 ]);
@@ -1138,32 +1138,44 @@ export function buildBusinessAngleDirective(): string {
  * 구조 변동 + 글 길이 변동 지침 생성
  * homefeed 모드에서만 주입됨
  */
-export function buildStructureVariationDirective(): string {
+/**
+ * [2026-07-30] 홈판 "엉성함"의 1순위 원인 정리.
+ *
+ * 이 블록은 유저 파트 최후미(recency 최강)에 들어가면서 다른 4개 계약과
+ * 정면 충돌했다: homefeed/base.prompt(3~7개 권장), issue-story.prompt(0~3개,
+ * 자기 우선권 선언), contentJsonPromptFormat(3~8개), JSON 예시(항상 3개).
+ * 게다가 "각 소제목 N문장" 상한(총 20~28문장 ≈ 800~1,100자)이 목표 2,500자와
+ * 수학적으로 모순이라 모델이 어느 쪽을 택해도 얕아지거나 늘어졌다.
+ * 재시도가 기본 0회라 이 모순이 그대로 최종 출력이 된다.
+ *
+ * 수정: 개수는 범위(±1)로 완화, 문장 수는 상한→하한으로 반전, 목표 글자수
+ * 미달을 지시하던 분량 지터 제거, 존재하지 않는 규칙("5~6개") 참조와 0점
+ * 위협 삭제.
+ */
+export function buildStructureVariationDirective(minChars?: number): string {
   const archetype = getRandomStructureArchetype();
-  const lengthVar = getContentLengthVariation();
+  const targetChars = typeof minChars === 'number' && minChars > 0 ? minChars : 2500;
 
-  console.log(`[StructureEngine] 🎲 구조 아키타입: ${archetype.name} (소제목 ${archetype.headingCount}개) / 분량: ${lengthVar.sentenceJitter}`);
+  console.log(`[StructureEngine] 🎲 구조 아키타입: ${archetype.name} (소제목 ${archetype.headingCount}개 안팎) / 목표 ${targetChars}자`);
 
   return `
 ════════════════════════════════════════
-🎲 [STRUCTURE OVERRIDE — 이번 글의 구조 지정] 🎲
+🎲 [STRUCTURE OVERRIDE — 이번 글의 구조 힌트] 🎲
 ════════════════════════════════════════
 
-⚠️ 이 지침은 base.prompt의 "소제목 5~6개" 규칙보다 최우선 적용.
-이번 글은 아래 구조를 따라라. 매번 다른 구조가 지정되므로 무조건 따를 것.
+이번 글은 아래 구조를 기준으로 삼아라. 매 글 다른 골격을 쓰기 위한 힌트이며,
+내용에 따라 ±1개 범위에서 조정해도 된다.
 
 ■ 구조 아키타입: [${archetype.name}]
-■ 소제목 개수: 정확히 ${archetype.headingCount}개
-■ 각 소제목 본문: ${archetype.sentencesPerHeading}문장
+■ 소제목 개수: ${archetype.headingCount}개 안팎 (±1)
+■ 각 소제목 본문: 최소 ${archetype.sentencesPerHeading}문장 — 목표 분량을 채우려면 더 써도 좋다
 ■ 구조 설명: ${archetype.structureDescription}
 
 ■ 문장 흐름 배치 (이번 글 전용, 최종 글에는 구조 라벨을 쓰지 말 것):
 ${archetype.fifoVariation}
 
-■ 분량 지정: ${lengthVar.sentenceJitter}
-  ${lengthVar.paragraphNote}
+■ 목표 분량: 본문 ${targetChars}자 안팎 (문장 수 힌트보다 이 분량이 우선)
 
-⛔ 위 소제목 개수와 문장 흐름을 무시하고 기본 5~6개로 회귀하면 0점.
 ⛔ 구조 설계용 알파벳 약어, 괄호 마커, 화살표 순서표는 내부 메모일 뿐 제목/소제목/본문에 절대 출력하지 말 것.
 ════════════════════════════════════════
 `;
@@ -1210,7 +1222,9 @@ export function buildFullPrompt(
 
   // ✅ [v1.4.35] 글톤 prompt를 system 시작(prefix)에도 추가 — primacy effect로 강제력 증대
   const tonePrefix = tonePrompt
-    ? `${identityBlock}${neoHookBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [NEO-HOOK TITLE] + [MODE VOICE] + [STYLE OVERRIDE]는 모든 규칙보다 최우선입니다. 100% 준수.\n═══════════════════════════════════════════\n\n`
+    ? `${identityBlock}${neoHookBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [MODE VOICE] + [STYLE OVERRIDE]는 문체·정체성의 기준입니다.
+⚠️ 단, 근거 계약(EVIDENCE AND INTENT FINAL CONTRACT)과 사실 정확성이 이보다 상위입니다.
+⚠️ [NEO-HOOK TITLE]은 제목 아이디어 힌트이며, 근거로 답할 수 없는 훅은 쓰지 않습니다.\n═══════════════════════════════════════════\n\n`
     : `${identityBlock}${neoHookBlock}${modeVoiceGuide}`;
   let finalPrompt = `${tonePrefix}${basePrompt}`;
 
