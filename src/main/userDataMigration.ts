@@ -115,10 +115,44 @@ const PRESERVE_FIELDS = [
     'openaiImageModel', 'openaiImageQuality', 'usdToKrwRate',
 ];
 
+/**
+ * [2026-07-30] 설정 파일은 같은 값을 camelCase(naverClientSecret)와
+ * kebab-case(naver-client-secret) 두 형태로 저장한다(configManager가 저장 시
+ * 양쪽을 쓰고, 읽을 때도 양쪽을 폴백으로 본다). 그런데 이 파일의
+ * PRESERVE_FIELDS는 camelCase만 나열해서, 마스터에 kebab 형태로만 존재하는
+ * 값은 계정별 파일로 동기화되지 않았다.
+ *
+ * 실측 사례: 마스터 settings.json에 naver-client-secret(16자)만 있고
+ * camelCase가 없어 계정 파일로 넘어가지 못함 → 네이버 검색 API 인증 불가 →
+ * 실시간 수집이 느린 폴백으로 빠져 30초 타임아웃. 사용자는 키를 정상
+ * 입력했는데 앱이 자기가 저장한 값을 못 보는 상태였다.
+ *
+ * 그래서 필드 조회는 항상 두 표기를 함께 본다.
+ */
+function toKebabKey(key: string): string {
+    return key.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+/** 값이 있으면 그 값을, 없으면 undefined. camelCase → kebab-case 순으로 본다. */
+function readPreservedField(cfg: any, key: string): unknown {
+    if (!cfg || typeof cfg !== 'object') return undefined;
+    const direct = cfg[key];
+    if (direct !== undefined && direct !== null && direct !== '') return direct;
+    const kebab = cfg[toKebabKey(key)];
+    if (kebab !== undefined && kebab !== null && kebab !== '') return kebab;
+    return undefined;
+}
+
+function isMeaningfulPreservedValue(v: unknown): boolean {
+    return (typeof v === 'string' && v.trim().length > 0)
+        || (Array.isArray(v) && v.length > 0)
+        || typeof v === 'boolean';
+}
+
 function hasPreservedValue(cfg: any): boolean {
     if (!cfg || typeof cfg !== 'object') return false;
     for (const k of PRESERVE_FIELDS) {
-        const v = cfg[k];
+        const v = readPreservedField(cfg, k);
         if (typeof v === 'string' && v.trim().length > 0) return true;
         if (Array.isArray(v) && v.length > 0) return true;
     }
@@ -138,15 +172,9 @@ function mergeSettingsPreserveDst(srcPath: string, dstPath: string): boolean {
         }
         let changed = false;
         for (const k of PRESERVE_FIELDS) {
-            const srcV = src[k];
-            const dstV = dst[k];
-            const srcHas = (typeof srcV === 'string' && srcV.trim().length > 0)
-                || (Array.isArray(srcV) && srcV.length > 0)
-                || (typeof srcV === 'boolean' && srcV !== undefined);
-            const dstHas = (typeof dstV === 'string' && dstV.trim().length > 0)
-                || (Array.isArray(dstV) && dstV.length > 0)
-                || (typeof dstV === 'boolean' && dstV !== undefined);
-            if (srcHas && !dstHas) {
+            const srcV = readPreservedField(src, k);
+            const dstV = readPreservedField(dst, k);
+            if (isMeaningfulPreservedValue(srcV) && !isMeaningfulPreservedValue(dstV)) {
                 dst[k] = srcV;
                 changed = true;
             }
@@ -512,15 +540,9 @@ export function syncMasterIntoAccountSettings(userDataDir: string): { merged: nu
                 const acct = JSON.parse(fs.readFileSync(acctPath, 'utf8'));
                 let mergedHere = 0;
                 for (const k of PRESERVE_FIELDS) {
-                    const mv = master[k];
-                    const av = acct[k];
-                    const mHas = (typeof mv === 'string' && mv.trim().length > 0)
-                        || (Array.isArray(mv) && mv.length > 0)
-                        || (typeof mv === 'boolean');
-                    const aHas = (typeof av === 'string' && av.trim().length > 0)
-                        || (Array.isArray(av) && av.length > 0)
-                        || (typeof av === 'boolean' && av !== undefined);
-                    if (mHas && !aHas) {
+                    const mv = readPreservedField(master, k);
+                    const av = readPreservedField(acct, k);
+                    if (isMeaningfulPreservedValue(mv) && !isMeaningfulPreservedValue(av)) {
                         acct[k] = mv;
                         mergedHere++;
                     }

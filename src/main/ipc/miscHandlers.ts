@@ -61,12 +61,16 @@ export function registerMiscHandlers(): void {
                     + '→ 빠른 수집 경로를 쓸 수 없어 느린 폴백으로 진행합니다. 설정에서 네이버 검색 API Client Secret을 입력하세요.',
                 );
             }
+            // [2026-07-30] 그라운딩은 사용자가 팩트체크 엔진에서 직접 고른 경우에만.
+            // UI 문구("자동 폴백에서 제외")와 실제 동작을 일치시킨다.
+            const allowGroundingFallback = String((config as any)?.factCheckEngine || '').trim() === 'gemini-grounding';
             const result = await collectContentFromPlatforms(keyword, {
                 maxPerSource: options?.maxPerSource || 5,
                 clientId: crawlClientId,
                 clientSecret: crawlClientSecret,
                 logger: (msg: string) => console.log(msg),
                 targetDate: options?.targetDate,
+                allowGroundingFallback,
             });
             return result;
         } catch (error) {

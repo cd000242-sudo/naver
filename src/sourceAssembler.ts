@@ -7471,6 +7471,13 @@ export async function collectContentFromPlatforms(
     clientSecret?: string;
     logger?: (message: string) => void;
     targetDate?: string; // ✅ 발행 날짜 기준 크롤링 (YYYY-MM-DD 또는 YYYY-MM-DDTHH:mm 형식)
+    /**
+     * [2026-07-30] Gemini 그라운딩(유료 Google 검색)을 폴백으로 쓸지 여부.
+     * 기본 false — UI가 "그라운딩은 비용이 높아 자동 폴백에서 제외, 필요할 때만
+     * 직접 선택"이라고 약속하는데 이 수집 경로만 그 약속을 지키지 않아 사용자가
+     * 고른 저비용 설정과 무관하게 과금됐다. 명시적 옵트인일 때만 호출한다.
+     */
+    allowGroundingFallback?: boolean;
   } = {}
 ): Promise<{
   collectedText: string;
@@ -7480,6 +7487,7 @@ export async function collectContentFromPlatforms(
   message?: string;
 }> {
   const { maxPerSource = 10, clientId, clientSecret, logger = console.log } = options;
+  const allowGroundingFallback = options.allowGroundingFallback === true;
 
   try {
     logger(`[플랫폼 콘텐츠 수집] 키워드 "${keyword}"로 여러 플랫폼에서 콘텐츠 수집 시작...`);
@@ -7589,7 +7597,10 @@ export async function collectContentFromPlatforms(
       }
 
       // ✅ [1.7순위] Gemini Grounding Search (Gemini API 키만 필요)
-      try {
+      // [2026-07-30] 명시적 옵트인 전용 — 기본 폴백에서 제외 (비용 보호).
+      if (!allowGroundingFallback) {
+        logger('[플랫폼 콘텐츠 수집] ⏭️ Gemini 그라운딩 폴백 생략 (비용 보호 — 팩트체크 엔진에서 직접 선택 시에만 사용)');
+      } else try {
         logger(`[플랫폼 콘텐츠 수집] 🔍 Gemini Grounding 리서치 시도...`);
         const { researchWithGeminiGrounding } = await import('./contentGenerator.js');
         const groundingResult = await researchWithGeminiGrounding(keyword);
