@@ -730,8 +730,15 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
     const loaded = await loadConfig();
     cachedConfig = { ...loaded, ...restUpdate };
   } else {
+    // [2026-08-04] 빈 기반 재작성 차단.
+    // saveConfig()가 __userId를 동기 처리하며 cachedConfig=null로 만들고 필드를
+    // 제거해 넘기므로, 여기 else 분기는 cachedConfig=null 상태로 들어올 수 있다.
+    // 그때 {...null, ...restUpdate}는 부분 업데이트를 "전체 파일 재작성"으로
+    // 바꿔버려, PRESERVE_KEYS 화이트리스트 밖 설정이 통째로 사라졌다.
+    // null이면 디스크 현재 파일을 머지 기반으로 사용한다.
+    const mergeBase = cachedConfig ?? await loadConfig();
     cachedConfig = {
-      ...cachedConfig,
+      ...mergeBase,
       ...restUpdate,
     };
   }

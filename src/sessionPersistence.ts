@@ -124,9 +124,38 @@ export async function saveCookies(
   accountId: string
 ): Promise<void> {
   try {
-    const rawCookies = await page.cookies();
+    // [2026-08-04] 네이버 도메인을 명시해 획득한다.
+    // 인자 없는 page.cookies()는 현재 페이지 URL 기준이라, keep-alive처럼
+    // about:blank 상태의 페이지에서 호출되면 0개를 반환한다.
+    // (naverBlogAutomation.ts:2204의 세션 확인이 쓰는 것과 같은 기준)
+    const rawCookies = await page.cookies(
+      'https://nid.naver.com',
+      'https://www.naver.com',
+      'https://blog.naver.com',
+    );
     const cookieParams = cookiesToParams(rawCookies);
     const validCookies = filterValidCookies(cookieParams);
+
+    const sessionDir = getAccountSessionDir(accountId);
+    await fs.mkdir(sessionDir, { recursive: true });
+    const filePath = getCookieFilePath(accountId);
+
+    // [2026-08-04] 빈 쿠키로 기존 백업을 덮어쓰지 않는다.
+    // 덮어쓰면 다음 부팅에서 복원할 세션이 사라져 재로그인을 강요한다 —
+    // "세션이 있는데 다시 로그인" 증상의 원인 중 하나.
+    if (validCookies.length === 0) {
+      let hadBackup = false;
+      try {
+        const existing = JSON.parse(await fs.readFile(filePath, 'utf-8')) as SessionCookieData;
+        hadBackup = Array.isArray(existing?.cookies) && existing.cookies.length > 0;
+      } catch { /* 백업 없음 또는 파손 — 아래에서 새로 쓴다 */ }
+      if (hadBackup) {
+        console.warn(
+          `[SessionPersistence] 유효 쿠키 0개 — 기존 백업을 보존합니다 (덮어쓰기 건너뜀): ${accountId.substring(0, 3)}***`,
+        );
+        return;
+      }
+    }
 
     const cookieData: SessionCookieData = {
       cookies: validCookies,
@@ -134,10 +163,6 @@ export async function saveCookies(
       accountId,
     };
 
-    const sessionDir = getAccountSessionDir(accountId);
-    await fs.mkdir(sessionDir, { recursive: true });
-
-    const filePath = getCookieFilePath(accountId);
     await fs.writeFile(filePath, JSON.stringify(cookieData, null, 2), 'utf-8');
 
     console.log(
