@@ -20,6 +20,7 @@ import { app } from 'electron';
 import { hasValidPrice, formatPrice } from './services/priceNormalizer.js';
 import { buildHomefeedExposureSkeleton } from './content/homefeedExposurePattern.js';
 import { normalizeHookIntroLines } from './contentHookIntroPolicy.js';
+import { buildNeoHookPromptBlock } from './content/neoHookTitles.js';
 
 // 프롬프트 디렉토리 경로 (개발/프로덕션 환경 모두 지원)
 function getPromptsDir(): string {
@@ -1211,20 +1212,22 @@ export function buildFullPrompt(
   const ctrCombatBlock = '';
   const homefeedPrecisionBlock = '';
   let neoHookBlock = '';
-  if (mode === 'homefeed') {
-    try {
-      const { buildNeoHookPromptBlock } = require('./content/neoHookTitles.js');
-      neoHookBlock = buildNeoHookPromptBlock(categoryHint, primaryKeyword);
-    } catch {
-      /* ignore */
-    }
+  // [2026-08-04] 이슈픽(연예·시사) 카테고리는 neoHook 제약을 주입하지 않는다.
+  // issue-story.prompt의 인용 훅 골격(실측 승자 패턴)과 neoHook의 블랙리스트
+  // ("폭로·공개" 금지)·자가검토("하나라도 아니오면 재생성")가 정면 충돌해 서로
+  // 무력화되던 갭 — situationTitleContract의 배타 처리와 동일 기준.
+  // 정적 import 사용 — 기존 lazy require는 로드 실패 시 catch {}로 조용히 죽어
+  // 블록 누락을 관측할 수 없었다 (vitest 환경에서 실제로 무음 실패).
+  const neoHookExcluded = HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory(categoryHint));
+  if (mode === 'homefeed' && !neoHookExcluded) {
+    neoHookBlock = buildNeoHookPromptBlock(categoryHint, primaryKeyword);
   }
 
   // ✅ [v1.4.35] 글톤 prompt를 system 시작(prefix)에도 추가 — primacy effect로 강제력 증대
   const tonePrefix = tonePrompt
     ? `${identityBlock}${neoHookBlock}${modeVoiceGuide}${tonePrompt}\n\n═══════════════════════════════════════════\n⚠️ 위 [BLOGGER IDENTITY] + [MODE VOICE] + [STYLE OVERRIDE]는 문체·정체성의 기준입니다.
 ⚠️ 단, 근거 계약(EVIDENCE AND INTENT FINAL CONTRACT)과 사실 정확성이 이보다 상위입니다.
-⚠️ [NEO-HOOK TITLE]은 제목 아이디어 힌트이며, 근거로 답할 수 없는 훅은 쓰지 않습니다.\n═══════════════════════════════════════════\n\n`
+${neoHookBlock ? '⚠️ [홈판 제목 제약]은 제목 보조 규칙이며, 근거로 답할 수 없는 훅은 쓰지 않습니다.\n' : ''}═══════════════════════════════════════════\n\n`
     : `${identityBlock}${neoHookBlock}${modeVoiceGuide}`;
   let finalPrompt = `${tonePrefix}${basePrompt}`;
 

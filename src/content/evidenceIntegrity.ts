@@ -148,6 +148,7 @@ export function auditEvidenceIntegrity(input: {
 export function buildEvidenceAndIntentFinalContract(
   source: EvidenceIntegritySource,
   mode: EvidenceAwareMode,
+  options?: { usesIssueStorySkeleton?: boolean },
 ): string {
   const firstParty = hasExplicitFirstPartyEvidence(source);
   const grounded = String(source.rawText || '').trim().length >= 50;
@@ -159,9 +160,16 @@ export function buildEvidenceAndIntentFinalContract(
     : `- 근거 자료가 부족하다. 확정 사실처럼 채우지 말고 판단 기준·확인 순서·공식 확인처 중심으로 쓴다.
 - 이때 제목은 근거 없이 답할 수 없는 약속(정체 공개·숫자 충격·내부자 정보·확인 방법)을 걸지 않는다. 답을 못 줄 제목이면 그 제목을 버린다.`;
   const metaLeakRule = buildEvidenceMetaLeakRule();
+  // [2026-08-04] 이슈픽 골격(issue-story)은 도입 C형(요약 → 놀라움 → "왜 그런지
+  // 알아볼게요" 1회 예고)을 명시 허용한다. 이 계약이 최후미에서 "확인 절차 안내로
+  // 답을 대체하지 않는다"로 그 해제를 도로 잠그던 충돌(승자 패턴 무력화)을 푼다.
+  // 예고 허용은 도입 1회뿐이고, 정체·핵심 사건은 여전히 3~5문장 안에 등장해야 한다.
+  const homefeedPayoffRule = options?.usesIssueStorySkeleton
+    ? `- 제목이 숨긴 정체와 핵심 사건은 도입부 첫 3~5문장 안에서 직접 공개한다. 이슈 골격의 "왜 그런지 알아볼게요" 류 예고 문구는 도입에서 1회만 허용하며, 본문은 미루지 않고 순서대로 답을 준다.`
+    : `- 제목이 던진 질문·숫자·정체·방법은 도입부 첫 3~5문장 안에서 직접 답한다. 확인 절차 안내로 답을 대체하지 않는다.`;
   const modeRule = mode === 'homefeed'
     ? `- 첫 화면은 과장된 감정어가 아니라 독자가 겪을 법한 구체 상황과 이 글에서 얻을 한 가지로 멈추게 한다.
-- 제목이 던진 질문·숫자·정체·방법은 도입부 첫 3~5문장 안에서 직접 답한다. 확인 절차 안내로 답을 대체하지 않는다.
+${homefeedPayoffRule}
 - 저장·댓글·공유를 모두 요구하지 않는다. 내용상 가장 자연스러운 행동 이유가 있을 때 하나만 남긴다.
 - 작은 장면은 입력 자료에서 관찰 가능한 장면이거나 독자 상황이어야 하며, 작성자의 가짜 회상 장면이면 안 된다.`
     : mode === 'seo' || mode === 'mate'

@@ -2409,9 +2409,16 @@ export function buildModeBasedPrompt(
       isExpertAnalysis ? '' : buildAffiliateReviewIntentContract(source),
     ].filter(Boolean).join('\n\n');
     console.log(`[PromptBuilder] 쇼핑 진정성 계약 적용: ${classifyAffiliateEvidence(source).mode}${isExpertAnalysis ? ' (expert — 후기 구조 계약 제외)' : ''}`);
-  } else if (contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate' || contentMode === 'business' || contentMode === 'custom') {
-    finalContract = buildEvidenceAndIntentFinalContract(source, contentMode);
-    console.log(`[PromptBuilder] 근거·의도 최종 계약 적용: ${contentMode}, firstParty=${hasExplicitFirstPartyEvidence(source)}`);
+  }
+
+  // [2026-08-04] 이슈픽 판정을 계약 조립보다 앞으로 — FINAL CONTRACT(A1)와
+  // 제목 계약(situationTitle) 양쪽이 같은 판정을 공유한다.
+  const usesIssueStoryTitle = contentMode === 'homefeed'
+    && HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory((source as any)?.categoryHint));
+
+  if (contentMode === 'seo' || contentMode === 'homefeed' || contentMode === 'mate' || contentMode === 'business' || contentMode === 'custom') {
+    finalContract = buildEvidenceAndIntentFinalContract(source, contentMode, { usesIssueStorySkeleton: usesIssueStoryTitle });
+    console.log(`[PromptBuilder] 근거·의도 최종 계약 적용: ${contentMode}, firstParty=${hasExplicitFirstPartyEvidence(source)}${usesIssueStoryTitle ? ', issueStory=true' : ''}`);
   }
 
   // [2026-07-31] 상황별 깊이 계약 — 전 모드 공통. AI 요약이 대체할 수 있는
@@ -2424,8 +2431,6 @@ export function buildModeBasedPrompt(
   // 단, 홈판 이슈픽(연예·스포츠·경제 뉴스)은 제3자 사건이라 "내 상황·내 경험"이 성립하지
   // 않는다. 그쪽은 issue-story.prompt의 인용 훅 골격(실측 승자 패턴)이 제목을 가지므로
   // 계약을 얹지 않는다 — 두 계약이 붙으면 서로 무력화된다.
-  const usesIssueStoryTitle = contentMode === 'homefeed'
-    && HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory((source as any)?.categoryHint));
   const situationTitle = usesIssueStoryTitle
     ? ''
     : buildSituationTitleContract(
