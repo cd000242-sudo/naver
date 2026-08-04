@@ -21,18 +21,36 @@ function printBanner() {
 /**
  * ⚠️ 환경 변수 검증 및 경고 메시지 UI
  */
-function checkCredentials(id?: string, pw?: string): boolean {
-  if (!id || !pw || id === 'tjdgus24280') {
+/**
+ * [2026-08-05] 자격증명은 환경변수 전용.
+ *
+ * 이전에는 개발자 본인의 네이버 계정 ID·비밀번호가 이 파일에 리터럴로 박혀
+ * 있었고(2026-01-26 커밋 이후), 이 저장소는 공개(public)다. 게다가
+ * package.json build.files의 `dist/**` 규칙으로 `dist/index.js`가 asar에도
+ * 들어간다. 값이 없으면 경고만 하고 하드코딩 폴백으로 실행되던 구조라
+ * 아무도 문제를 눈치채지 못했다.
+ *
+ * 이제 환경변수가 없으면 경고가 아니라 실패한다 — 남의 계정으로 조용히
+ * 실행되는 경로를 만들지 않는다.
+ */
+function readCredentialsOrExit(): { naverId: string; naverPassword: string } {
+  const naverId = String(process.env.NAVER_ID ?? '').trim();
+  const naverPassword = String(process.env.NAVER_PASSWORD ?? '').trim();
+
+  if (!naverId || !naverPassword) {
     console.log(
       boxen(
-        chalk.yellow('⚠️  주의: 환경변수가 설정되지 않았거나 기본값을 사용 중입니다.\n') +
-        chalk.dim('보안을 위해 .env 파일에 NAVER_ID와 NAVER_PASSWORD를 설정해주세요.'),
-        { padding: 1, margin: 1, borderStyle: 'round', borderColor: 'yellow' }
+        chalk.red('❌ 네이버 자격증명이 설정되지 않았습니다.\n\n') +
+        chalk.dim('.env 파일에 아래 두 값을 설정한 뒤 다시 실행해주세요.\n') +
+        chalk.dim('  NAVER_ID=your-id\n') +
+        chalk.dim('  NAVER_PASSWORD=your-password'),
+        { padding: 1, margin: 1, borderStyle: 'round', borderColor: 'red' }
       )
     );
-    return false;
+    process.exit(1);
   }
-  return true;
+
+  return { naverId, naverPassword };
 }
 
 /**
@@ -49,15 +67,11 @@ async function main(): Promise<void> {
   }).start();
 
   try {
-    // 2. 환경 변수 로드
-    const naverId = process.env.NAVER_ID ?? 'tjdgus24280';
-    const naverPassword = process.env.NAVER_PASSWORD ?? '@Qkrtjdgus123';
+    // 2. 자격 증명 로드 (없으면 즉시 종료 — 하드코딩 폴백 없음)
+    const { naverId, naverPassword } = readCredentialsOrExit();
 
     await new Promise(resolve => setTimeout(resolve, 600)); // 부드러운 UX를 위한 짧은 대기
     spinner.succeed(chalk.green('시스템 초기화 완료'));
-
-    // 3. 자격 증명 상태 확인
-    checkCredentials(process.env.NAVER_ID, process.env.NAVER_PASSWORD);
 
     // 4. 자동화 인스턴스 생성
     spinner.start('브라우저 엔진을 예열 중입니다...');
