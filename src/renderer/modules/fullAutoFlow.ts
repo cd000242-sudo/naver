@@ -328,6 +328,10 @@ function buildFullAutoContentReuseKey(formData) {
         keywordTitlePrefix: formData?.keywordTitlePrefix === true,
         ctaType: normalizeReuseString(formData?.ctaType),
         category: normalizeReuseString(formData?.category || formData?.categoryName),
+        // [2026-08-05] 제휴 링크를 키에 포함 — publishingHandlers의
+        //   buildPublishContentReuseKey와 반드시 동일한 구성이어야 한다.
+        //   두 캐시를 OR로 읽으므로 한쪽만 바꾸면 다른 쪽이 옛 결과를 돌려준다.
+        affiliateLink: normalizeReuseString(formData?.affiliateLink),
     });
 }
 function getFullAutoContentRetryCache(formData) {

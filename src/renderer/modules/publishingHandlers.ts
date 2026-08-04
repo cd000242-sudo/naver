@@ -269,6 +269,14 @@ function buildPublishContentReuseKey(formData: any): string {
     keywordTitlePrefix: formData?.keywordTitlePrefix === true,
     ctaType: normalizePublishReuseString(formData?.ctaType),
     category: normalizePublishReuseString(formData?.category || formData?.categoryName),
+    // [2026-08-05] 제휴 링크를 키에 포함한다.
+    //   빠져 있어서 쇼핑 링크만 A→B로 바꾸면 나머지 필드가 전부 같아 캐시가
+    //   적중했고, **옛 상품의 본문·수집 이미지가 그대로 재사용**됐다.
+    //   캐시는 발행 성공 시에만 해제되고 TTL이 6시간이라, 실패 후 새 링크로
+    //   재시도하는 상황에서 반드시 살아 있다.
+    //   fullAutoFlow.buildFullAutoContentReuseKey와 구성이 동일해야 한다 —
+    //   두 캐시를 OR로 읽으므로 한쪽만 바꾸면 다른 쪽이 옛 결과를 돌려준다.
+    affiliateLink: normalizePublishReuseString(formData?.affiliateLink),
   });
 }
 
@@ -391,6 +399,11 @@ export async function handleFullAutoPublish(): Promise<void> {
         return;
       }
       appendLog('⚠️ 사용자 확인 — 생성된 글을 버리고 풀오토 새 글 생성으로 진행합니다.');
+      // [2026-08-05] 동의했으면 재사용 캐시도 함께 버린다.
+      //   이전에는 캐시를 비우지 않아 아래에서 곧바로 옛 결과가 적중했고,
+      //   "버리고 새로 생성"이라는 사용자의 명시 동의가 조용히 무시됐다.
+      (window as any).clearFullAutoContentRetryCache?.();
+      clearPublishContentRetryCache();
     }
   }
 
@@ -454,6 +467,9 @@ export async function handleFullAutoPublish(): Promise<void> {
       categoryName: UnifiedDOMCache.getRealCategoryName?.(),
       keywordAsTitle: faKeywordAsTitle,
       keywordTitlePrefix: faKeywordTitlePrefix,
+      // [2026-08-05] 캐시 조회 시드에도 링크를 넣는다 — 키 빌더만 고치고
+      //   시드에서 빠지면 항상 빈 링크로 조회돼 여전히 옛 결과가 적중한다.
+      affiliateLink: earlyAffiliateLink,
     };
 
     let structuredContent: any =
