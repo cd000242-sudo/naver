@@ -9209,6 +9209,21 @@ app.whenReady().then(async () => {
               if (automation === schedulerAutomation) automation = null;
               directLease.release();
             }
+
+            // [2026-08-04] 한 틱에 1건만 발행한다.
+            // 이전에는 due한 예약이 여러 건이면 이 for 루프가 쉬지 않고 연속
+            // 발행해 90분에 3~5건이 몰리는 "몰아치기"가 됐고, 라이브 색인 조사에서
+            // 그것이 노출 누락의 원인으로 확인됐다. 잔여 건은 다음 틱(1분 뒤)으로
+            // 순연된다 — 예약 자체가 사라지지 않고 lease 구조도 그대로다.
+            const remainingDue = scheduledPosts.filter((p) => {
+              if (p.id === post.id || p.status !== 'scheduled') return false;
+              const d = parseScheduledDate(p.scheduleDate);
+              return !!d && d <= now;
+            }).length;
+            if (remainingDue > 0) {
+              sendLog(`⏭️ 예약 ${remainingDue}건이 함께 도래했습니다. 몰아치기 발행을 피하려고 다음 점검(1분 뒤)에 이어서 발행합니다.`);
+            }
+            break;
           }
         }
       } catch (error) {

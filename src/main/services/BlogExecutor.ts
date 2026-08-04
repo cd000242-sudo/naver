@@ -148,6 +148,23 @@ export async function syncConfiguration(): Promise<void> {
 /**
  * 2단계: 계정 정보 해결
  */
+/**
+ * [2026-08-04] 발행 빈도 카운터의 단일 키.
+ *
+ * 시간당 한도는 체크(executePublishing 진입부)와 증가(cleanup)가 서로 다른 키를
+ * 쓰고 있었다 — 체크는 payload.accountId||payload.naverId, 증가는 resolveAccount가
+ * 돌려준 account.accountId(payload 자격증명 경로에선 undefined). 그래서 카운터가
+ * 오르지 않거나 다른 이름으로 올라 한도 가드가 실질적으로 동작하지 않았다.
+ * 두 지점 모두 이 함수를 거친다.
+ */
+export function resolveRateLimitKey(
+    source: { accountId?: string; naverId?: string } | null | undefined,
+): string {
+    const id = String(source?.accountId ?? '').trim();
+    if (id) return id;
+    return String(source?.naverId ?? '').trim();
+}
+
 export async function resolveAccount(
     payload: PostCyclePayload,
     context: PostCycleContext
@@ -486,7 +503,7 @@ export async function executePublishing(
     // ✅ [2026-05-26 v2.10.379 SPEC-NAVER-PROTECTION-2026 P2 §2.2 wiring]
     //   계정별 시간당 한도 체크 — 기본 경고만, env STRICT_HOURLY_PER_ACCOUNT=1 시 hard-block.
     //   v2.10.378 perAccount 카운터 활용. 발행 전 진입점에서 체크 (실제 한도 적용).
-    const _accountId = (payload as any).accountId || (payload as any).naverId;
+    const _accountId = resolveRateLimitKey(payload as any);
     if (_accountId) {
         try {
             const { canPublishHourlyForAccount, getTodayCountForAccount } = await import('../../postLimitManagerPerAccount.js');
@@ -656,10 +673,13 @@ export async function cleanup(
 
         // ✅ [2026-05-26 v2.10.378 SPEC-NAVER-PROTECTION-2026 P2 Fix 2.1]
         //   계정별 빈도 카운터 증가 (다계정 격리). 기존 글로벌 카운터는 backward compat으로 유지.
-        if (accountId) {
+        // [2026-08-04] 체크와 같은 키로 증가시킨다 — accountId가 없는 payload 자격증명
+        //   경로에서는 naverId로 떨어져야 시간당 가드가 실제로 동작한다.
+        const rateLimitKey = resolveRateLimitKey({ accountId, naverId: (payload as any).naverId });
+        if (rateLimitKey) {
             try {
                 const { incrementForAccount } = await import('../../postLimitManagerPerAccount.js');
-                await incrementForAccount(accountId);
+                await incrementForAccount(rateLimitKey);
             } catch (perAccountErr) {
                 console.warn('[BlogExecutor] perAccount post limit 증가 실패 (무시):', (perAccountErr as Error).message);
             }
