@@ -68,10 +68,19 @@ describe('situation depth contract', () => {
   });
 });
 
-describe('rich paste paragraph rhythm (타이핑과 동일)', () => {
-  it('빈 스페이서 문단을 넣지 않는다 — 문장 간격이 줄간의 3배가 되던 원인', () => {
+describe('rich paste paragraph rhythm (Enter 2회 스페이서)', () => {
+  /**
+   * [2026-08-04] v2.11.152의 스페이서 제거는 라이브에서 문단이 한 덩어리로
+   * 붙는 회귀를 일으켰다 (인라인 margin은 네이버 에디터가 보장하지 않음).
+   * 빈 문단 스페이서(<p><br></p>)만이 타이핑의 Enter 2회와 동일한
+   * 신뢰 가능한 문단 구분이다. return false 재도입을 잠근다.
+   */
+  it('일반 본문 문단 뒤에 빈 스페이서 문단을 넣는다 — 붙여넣기 한덩어리 회귀 방지', () => {
     const rich = read('automation/richTextPaste.ts');
-    expect(rich).toMatch(/function shouldInsertParagraphSpacer\(_html: string\): boolean \{\s*return false;/);
-    expect(rich).toContain('리치 붙여넣기의 문단 리듬을 타이핑과 맞춘다');
+    expect(rich).not.toMatch(/function shouldInsertParagraphSpacer\([^)]*\): boolean \{\s*return false;/);
+    expect(rich).toMatch(/function shouldInsertParagraphSpacer\(html: string\): boolean \{\s*return \/\^<p\\b\/\.test\(html\)/);
+    // 소제목·목차·스페이서 뒤에는 넣지 않는다 (중복 여백 방지)
+    expect(rich).toContain(`!html.includes('data-rich-heading="true"')`);
+    expect(rich).toContain(`!html.includes('data-rich-spacer="true"')`);
   });
 });

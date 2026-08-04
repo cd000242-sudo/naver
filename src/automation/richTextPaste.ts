@@ -642,21 +642,22 @@ function paragraphSpacerHtml(fontSizePx: number, centerAlign: boolean): string {
 }
 
 /**
- * [2026-07-31] 리치 붙여넣기의 문단 리듬을 타이핑과 맞춘다.
+ * [2026-08-04] 문단 스페이서(빈 문단 = Enter 2회) 복원 — v2.11.152 제거 롤백.
  *
- * 사용자 실측: "리치 복붙보다 타이핑이 문단 정리를 훨씬 잘한다."
- * 원인은 간격 비율이었다.
- *   - 리치: 문장 내 22자 줄은 <br>(줄간 ~37px)로 붙고, 문장 사이에는
- *           본문 margin 30px + 빈 스페이서 문단(~27px + margin 18px)이 겹쳐
- *           ~112px → 줄 대비 3배. "뭉쳤다가 확 벌어지는" 느낌의 정체.
- *   - 타이핑: 모든 줄이 Enter로 들어가 균일하고, 문장 사이만 Enter 2회(약 2배).
- * 스페이서를 빼면 문장 간격이 줄간(37px) + margin(30px) = ~67px, 비율 1.8배로
- * 타이핑과 사실상 같아진다. 표·하이라이트·인용구는 그대로 유지된다.
+ * v2.11.152에서 인라인 margin(30px)이 문단 간격을 담당한다는 픽셀 계산으로
+ * 스페이서를 제거했으나, 라이브 실측(사용자 신고)에서 문단이 한 덩어리로
+ * 붙어 나왔다. 네이버 에디터가 붙여넣기 정리 과정에서 인라인 margin에
+ * 의존한 간격을 보장하지 않으므로, 에디터가 항상 보존하는 실제 빈 문단
+ * (<p><br></p> = 타이핑의 Enter 2회와 동일)만이 신뢰할 수 있는 문단 구분이다.
  *
- * 소제목/목차 블록은 자체 margin(34px 등)을 갖고 있어 영향이 없다.
+ * 스페이서는 일반 본문 문단 뒤에만 넣는다 — 소제목/목차는 자체 여백이 있고,
+ * 스페이서 뒤에 또 스페이서가 붙는 중복을 막는다.
  */
-function shouldInsertParagraphSpacer(_html: string): boolean {
-  return false;
+function shouldInsertParagraphSpacer(html: string): boolean {
+  return /^<p\b/.test(html)
+    && !html.includes('data-rich-heading="true"')
+    && !html.includes('data-rich-toc="true"')
+    && !html.includes('data-rich-spacer="true"');
 }
 
 function joinHtmlPartsWithParagraphSpacers(parts: string[], spacerHtml: string): string {

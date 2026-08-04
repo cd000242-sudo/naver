@@ -264,6 +264,8 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국어 묘사. 추상/막연 금지, 소제목별 고유(중복·동일 패턴 금지).
+⛔ 이미지 묘사는 JSON의 imagePrompt 필드에만 쓴다. 본문(content/introduction/conclusion)에
+   "[이미지 설명]", "[사진: ...]" 같은 이미지 지시문을 쓰면 독자에게 그대로 노출된다 — 절대 금지.
 ※ 소제목 성격에 맞는 이미지 "타입"을 골라라:
  - 경험·장소·사물·사람 중심 → 사실적 장면 묘사. 예: "보습 크림 바르는 손, 촉촉한 겨울 피부, 따뜻한 실내"
  - 정보·수치·비교·절차·제도 중심(정책/세금/금융 등) → 풍경 사진 대신 인포그래픽/도식 스타일.
