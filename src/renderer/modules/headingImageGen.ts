@@ -1605,16 +1605,14 @@ export function initHeadingImageGeneration(): void {
               } else {
                 throw new Error(imageResult.message || 'Flow 이미지 생성 실패. Google 로그인 + AI Pro 쿼터 확인 필요.');
               }
-            } else if (imageSource === 'naver-search' || imageSource === 'naver') {
-              // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
-              imageUrl = await searchNaverImage(promptForImage);
-            } else {
-              // ✅ [2026-03-17 FIX] 기본값: 알 수 없는 이미지 소스는 nano-banana-pro(Gemini) 사용
-              console.warn(`[ImageGen] 알 수 없는 이미지 소스 "${imageSource}", 나노 바나나 프로(Gemini)로 대체`);
-              appendLog(`  ⚠️ 알 수 없는 엔진 "${imageSource}" → 나노 바나나 프로(Gemini)로 대체`, 'images-log-output');
+            } else if (imageSource === 'dropshot' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
+              // [2026-08-04] 누락 분기 3종 추가. dropshot(무료 구독·UI 기본 선택값),
+              // nano-banana-2(₩97), nano-banana(₩54)가 분기 없이 최종 else로 떨어져
+              // 최고가 nano-banana-pro(₩185)로 대체 과금되던 경로를 끊는다.
+              console.log(`[ImageGen] 선택 엔진으로 생성: ${imageSource}`);
               const ref = resolveReferenceImageForHeading(String(heading.title || '').trim());
               const imageResult = await generateImagesWithCostSafety({
-                provider: 'nano-banana-pro',
+                provider: imageSource,
                 items: [{
                   heading: headingForImage,
                   prompt: promptForImage,
@@ -1629,8 +1627,18 @@ export function initHeadingImageGeneration(): void {
               if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
                 imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
               } else {
-                throw new Error(imageResult.message || '기본 AI 이미지 생성 실패');
+                throw new Error(imageResult.message || `${imageSource} 이미지 생성 실패`);
               }
+            } else if (imageSource === 'naver-search' || imageSource === 'naver') {
+              // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
+              imageUrl = await searchNaverImage(promptForImage);
+            } else {
+              // [2026-08-04] 알 수 없는 엔진을 유료 엔진으로 조용히 대체하지 않는다.
+              // 사용자가 고르지 않은 모델에 과금하는 것은 자동 폴백 금지 정책 위반이며,
+              // 여기서 대체가 일어나면 신규 엔진 추가 시 배선 누락이 은폐된다.
+              console.error(`[ImageGen] 알 수 없는 이미지 소스 "${imageSource}" — 대체 생성하지 않고 중단`);
+              appendLog(`  ⛔ 알 수 없는 엔진 "${imageSource}" — 자동 대체 없이 중단합니다. 이미지 엔진을 다시 선택해주세요.`, 'images-log-output');
+              throw new Error(`알 수 없는 이미지 엔진 "${imageSource}" — 자동 대체를 하지 않습니다. 설정에서 엔진을 다시 선택해주세요.`);
             }
 
             // 진행률 업데이트 (완료된 개수 기준)
@@ -5070,14 +5078,12 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       } else {
         throw new Error(imageResult.message || 'DeepInfra 이미지 생성 실패');
       }
-    } else if (imageSource === 'naver-search' || imageSource === 'naver') {
-      // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
-      imageUrl = await searchNaverImage(finalPrompt);
-    } else {
-      // ✅ [2026-03-17 FIX] 기본값: 알 수 없는 이미지 소스는 nano-banana-pro(Gemini) 사용
-      console.warn(`[ImageGen] 알 수 없는 이미지 소스 "${imageSource}", 나노 바나나 프로(Gemini)로 대체`);
+    } else if (imageSource === 'dropshot' || imageSource === 'nano-banana-2' || imageSource === 'nano-banana') {
+      // [2026-08-04] 일괄 생성과 동일한 누락 분기 3종 — 개별 재생성에서도
+      // 선택 엔진이 최고가 nano-banana-pro로 대체되던 경로를 끊는다.
+      console.log(`[ImageGen] 선택 엔진으로 개별 재생성: ${imageSource}`);
       const imageResult = await generateImagesWithCostSafety({
-        provider: 'nano-banana-pro',
+        provider: imageSource,
         items: [{ heading: resolvedHeadingTitle, prompt: finalPrompt, isThumbnail: headingIndex === 0, allowText: allowTextForRegen }],
         postTitle: blogTitle,
         isFullAuto: true,
@@ -5085,8 +5091,15 @@ async function regenerateSingleImageForHeading(headingIndex: number, headingTitl
       if (imageResult.success && imageResult.images && imageResult.images.length > 0) {
         imageUrl = imageResult.images[0].previewDataUrl || imageResult.images[0].filePath;
       } else {
-        throw new Error(imageResult.message || '기본 AI 이미지 생성 실패');
+        throw new Error(imageResult.message || `${imageSource} 이미지 생성 실패`);
       }
+    } else if (imageSource === 'naver-search' || imageSource === 'naver') {
+      // ✅ 네이버 이미지 검색: 사용자가 명시적으로 선택한 경우에만 사용
+      imageUrl = await searchNaverImage(finalPrompt);
+    } else {
+      // [2026-08-04] 유료 엔진으로의 조용한 대체 금지 (일괄 생성 경로와 동일 계약).
+      console.error(`[ImageGen] 알 수 없는 이미지 소스 "${imageSource}" — 대체 생성하지 않고 중단`);
+      throw new Error(`알 수 없는 이미지 엔진 "${imageSource}" — 자동 대체를 하지 않습니다. 설정에서 엔진을 다시 선택해주세요.`);
     }
 
     // ✅ 안전한 HTML 이스케이프

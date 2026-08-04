@@ -14,13 +14,17 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // ═══════════════════════════════════════════════════
-// SmartProxy 설정 — 환경변수 우선, 기본값 폴백
+// SmartProxy 설정 — 자격증명은 환경변수 전용
 // ═══════════════════════════════════════════════════
+// [2026-08-04] 하드코딩 자격증명 제거. 이 저장소는 공개(public)이고 패키징된
+// asar에서도 추출 가능해, 리터럴 폴백은 구독 계정을 그대로 노출하는 것과 같았다.
+// 자격증명이 없으면 SmartProxy 경로는 "미설정"으로 남는다 — 다른 프록시로
+// 몰래 대체하지 않는다(자동 폴백 금지). 사용자 수동 프록시는 영향 없다.
 const SMARTPROXY_CONFIG = {
   host: process.env.SMARTPROXY_HOST || 'gate.decodo.com',
   port: parseInt(process.env.SMARTPROXY_PORT || '10001', 10),
-  username: process.env.SMARTPROXY_USER || 'user-sproqjsqtg-country-kr',
-  password: process.env.SMARTPROXY_PASS || 'tT3=bhH71lailX8bWj',
+  username: process.env.SMARTPROXY_USER || '',
+  password: process.env.SMARTPROXY_PASS || '',
 };
 
 // ═══════════════════════════════════════════════════
@@ -151,10 +155,17 @@ export async function getProxyUrl(): Promise<string | null> {
     return `${scheme}://${auth}${manual.host}:${manual.port}`;
   }
 
-  if (!isConfigured()) return null;
+  if (!isConfigured()) {
+    console.warn(
+      '[ProxyManager] 프록시가 켜져 있지만 SmartProxy 자격증명이 없습니다 '
+      + '(SMARTPROXY_USER / SMARTPROXY_PASS 미설정). 직접 연결로 진행합니다 — '
+      + '수동 프록시를 쓰려면 설정에서 host/port를 입력하세요.',
+    );
+    return null;
+  }
 
   const { username, password, host, port } = SMARTPROXY_CONFIG;
-  return `http://${username}:${password}@${host}:${port}`;
+  return `http://${encodeURIComponent(username)}:${encodeURIComponent(password)}@${host}:${port}`;
 }
 
 /**
