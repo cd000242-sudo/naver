@@ -55,7 +55,7 @@ describe('R4-2: 예약 cron 틱당 1건 (몰아치기 방지)', () => {
 
   it('한 건 처리 후 루프를 벗어난다', () => {
     expect(main).toContain('// [2026-08-04] 한 틱에 1건만 발행한다.');
-    expect(main).toMatch(/directLease\.release\(\);\s*\}\s*[\s\S]{0,900}?\n            break;/);
+    expect(main).toMatch(/directLease\.release\(\);\s*\}\s*[\s\S]{0,900}?\n\s{12}break;/);
   });
 
   it('잔여 due 건수를 사용자에게 알린다 (조용한 순연 금지)', () => {
