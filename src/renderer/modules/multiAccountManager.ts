@@ -809,11 +809,19 @@ async function initMultiAccountPublishModal() {
     let selectedAccountIds = [];
     let isPublishing = false;
     let stopRequested = false;
-    multiAccountBtn.addEventListener('click', async () => {
+    multiAccountBtn.addEventListener('click', async (event) => {
         console.log('[MultiAccountPublish] 모달 열기 버튼 클릭');
-        const unlocked = await window.checkFeatureLockAndShow?.('multi-account-manage');
-        if (unlocked === false)
-            return;
+        // [2026-08-05] 부팅 시 배선용 프로그램 클릭은 잠금을 건너뛴다.
+        //   renderer.ts의 초기화가 숨겨진 이 버튼을 click()해서 패널 내부를
+        //   배선하는데, 그 클릭에 Pro 모달이 뜨면 무료 사용자는 앱을 켜자마자
+        //   모달을 보고 배선까지 중단된다. 사용자가 직접 누르는 경로에서는
+        //   잠금이 그대로 작동한다.
+        const isWiringTrigger = (event.currentTarget as HTMLElement | null)?.dataset?.wiringTrigger === '1';
+        if (!isWiringTrigger) {
+            const unlocked = await window.checkFeatureLockAndShow?.('multi-account-manage');
+            if (unlocked === false)
+                return;
+        }
         // ✅ [v2.11.49] 모달이 발행 서브탭으로 인라인됐으면 모달 대신 서브탭 전환.
         if ((multiAccountModal as HTMLElement).dataset.inlined === 'true' && typeof (window as any).__showPublishMode === 'function') {
             document.querySelector('[data-tab="unified"]')?.dispatchEvent(new MouseEvent('click', { bubbles: true }));

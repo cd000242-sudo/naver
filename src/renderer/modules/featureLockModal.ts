@@ -131,7 +131,7 @@ function ensureLockModalDom(): HTMLElement {
 
       <!-- 소프트 안내 -->
       <div style="padding: 14px 32px; background: rgba(0,0,0,0.25); border-top: 1px solid rgba(255,255,255,0.05); font-size: 11px; color: #64748b; text-align: center; line-height: 1.5;">
-        💡 무료 체험판은 단일 발행 · 글 1편 작성까지 사용 가능해요
+        💡 무료 체험판은 단일 발행과 반자동 다중계정 발행을 매일 3회까지 사용할 수 있어요
       </div>
     </div>
   `;

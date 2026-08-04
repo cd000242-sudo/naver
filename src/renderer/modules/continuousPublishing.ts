@@ -1177,19 +1177,34 @@ function getContinuousUrls(): string[] {
 // 연속 발행 시작
 export function startContinuousPublishing(): void {
   console.log('[Continuous] startContinuousPublishing 시작');
-  // ✅ [2026-05-25] Pro 기능 잠금 — 무료 체험판은 연속 발행 차단 (window 글로벌 호출 — minify 충돌 회피)
-  (async () => {
-    try {
-      const unlocked = await (window as any).checkFeatureLockAndShow?.('continuous');
-      if (unlocked === false) return;
-    } catch (e) {
-      console.warn('[Continuous] feature lock check failed:', e);
-      // 체크 실패 시 안전하게 차단보다 진행 (라이선스 모듈 에러로 합법 사용자가 막히는 것 방지)
-    }
-    startContinuousPublishingV2().catch((error) => {
-      appendLog(`❌ 연속 발행 시작 실패: ${(error as Error).message}`);
-    });
-  })();
+  // [2026-08-05] 기능 잠금은 startContinuousPublishingV2 본문으로 옮겼다.
+  //   이 래퍼에만 게이트가 있었는데 UI 버튼(index.html "연속 발행 시작")은
+  //   window.startContinuousPublishingV2()를 직접 호출한다 — 즉 잠금이 한 번도
+  //   작동한 적이 없다. 게이트를 실제 진입점으로 내려 실효화했다.
+  startContinuousPublishingV2().catch((error) => {
+    appendLog(`❌ 연속 발행 시작 실패: ${(error as Error).message}`);
+  });
+}
+
+/**
+ * [2026-08-05] 연속 발행 Pro 잠금.
+ *
+ * 무료 체험은 단일 발행과 반자동 다중계정 발행을 하루 3회까지 쓸 수 있고,
+ * 연속 발행과 풀오토 다중계정은 유료 기능이다.
+ *
+ * 체크 실패 시 진행시키는 것은 의도다 — 라이선스 IPC가 일시적으로 실패했을 때
+ * 정당한 유료 사용자가 막히는 쪽이 무료 사용자 1회를 놓치는 것보다 나쁘다.
+ * (featureLockModal이 실패를 'free'로 간주해 차단하는 반대 패턴이 이미 있고,
+ *  그 패턴은 확산시키지 않는다.)
+ */
+async function isContinuousPublishingUnlocked(): Promise<boolean> {
+  try {
+    const unlocked = await (window as any).checkFeatureLockAndShow?.('continuous');
+    return unlocked !== false;
+  } catch (e) {
+    console.warn('[Continuous] feature lock check failed:', e);
+    return true;
+  }
 }
 
 // ✅ 연속 발행 키워드 수집 (개별 필드 방식)
@@ -4292,6 +4307,11 @@ async function waitWithInterrupt(seconds: number): Promise<boolean> {
 
 // ✅ 연속 발행 V2 시작
 async function startContinuousPublishingV2(): Promise<void> {
+  // [2026-08-05] Pro 기능 잠금 — 실제 진입점에서 검사한다.
+  //   UI 버튼과 window 전역이 이 함수를 직접 호출하므로, 래퍼에 걸려 있던
+  //   기존 게이트는 한 번도 실행되지 않았다.
+  if (!(await isContinuousPublishingUnlocked())) return;
+
   if (_continuousDrainPromise) {
     toastManager.warning('중지한 작업의 종료를 확인 중입니다. 완료될 때까지 재시작을 차단합니다.');
     return;

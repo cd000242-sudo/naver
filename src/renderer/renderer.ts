@@ -2951,7 +2951,16 @@ function initPublishModeSubtabs(): void {
     // 5. 인라인 패널 내부 기능 배선(상세설정·큐추가 등) 1회 트리거 — opener가 "열 때" 배선하므로.
     //    __showPublishMode 설정 후 실행 → 트리거가 잠시 continuous/ma로 갔다가 single로 복귀.
     try { (window as any).toggleContinuousModeModal?.(); } catch { /* ignore */ }
-    document.getElementById('multi-account-btn')?.click();
+    // [2026-08-05] 배선 트리거임을 표시한 뒤 클릭한다.
+    //   이 click은 UI 배선용이지 사용자의 기능 사용이 아니다. 표시가 없으면
+    //   ma 버튼 핸들러의 Pro 잠금이 발동해 무료 사용자가 **앱 실행 직후**
+    //   PRO 모달을 보고, 그 시점에 ma 패널 내부 배선도 중단된다.
+    const maBtn = document.getElementById('multi-account-btn');
+    if (maBtn) {
+      maBtn.dataset.wiringTrigger = '1';
+      maBtn.click();
+      delete maBtn.dataset.wiringTrigger;
+    }
     // ✅ [2026-06-30] 초기 발행 모드를 항상 "단일 발행"으로 확정.
     //   multi-account-btn 클릭 핸들러가 async(await checkFeatureLockAndShow 뒤 __showPublishMode('ma'))라
     //   setTimeout(0)의 showMode('single')이 그 await보다 먼저 실행돼 결국 'ma'로 끝나던 레이스 버그.
