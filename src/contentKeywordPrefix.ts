@@ -16,7 +16,18 @@ export interface KeywordPrefixOptions {
    * true면 제목이 키워드로 시작하지 않을 때 조기탈출 없이 재배치 로직을 태운다.
    */
   ensureFront3?: boolean;
+  /**
+   * [2026-08-05] 결과 제목 길이 상한. 기본 70자.
+   *
+   * 쇼핑 모드는 상품명이 앞에 붙어 클릭 이유가 뒤로 밀리므로 더 짧은 상한이
+   * 필요하다. 다만 이 함수는 SEO·연속발행 제목도 공유하므로 상한을 전역으로
+   * 낮추면 그쪽 제목까지 잘린다 — 호출자가 필요할 때만 좁힌다.
+   */
+  maxLength?: number;
 }
+
+/** 옵션 미지정 시의 제목 길이 상한 (기존 동작 유지). */
+const DEFAULT_TITLE_MAX_LENGTH = 70;
 
 /** 스캐너(mainKeywordPositionScanner)와 동일 기준: 정규화 후 제목 앞 3자 == 키워드 앞 3자. */
 function titleStartsWithKeywordFront3(title: string, keyword: string): boolean {
@@ -28,6 +39,7 @@ function titleStartsWithKeywordFront3(title: string, keyword: string): boolean {
 
 export function applyKeywordPrefixToTitle(title: string, keyword: string, options?: KeywordPrefixOptions): string {
   const cleanKeyword = (keyword || '').trim();
+  const maxTitleLength = options?.maxLength ?? DEFAULT_TITLE_MAX_LENGTH;
   if (!cleanKeyword) return collapseDuplicateLeadingYearTitle((title || '').trim());
 
   const cleanTitle = collapseDuplicateLeadingYearTitle((title || '').trim());
@@ -163,9 +175,9 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
     const restNorm = normalizeForCompare(rest);
     if (kwNorm && restNorm.startsWith(kwNorm)) {
       const merged = `${cleanKeyword} ${rest}`.replace(new RegExp(`^${escapeRegex(cleanKeyword)}(?:\\s+${escapeRegex(cleanKeyword)})+`), cleanKeyword).trim();
-      return clampTitleLength(merged, 70);
+      return clampTitleLength(merged, maxTitleLength);
     }
-    return clampTitleLength(`${cleanKeyword}${rest ? ` ${rest}` : ''}`.trim(), 70);
+    return clampTitleLength(`${cleanKeyword}${rest ? ` ${rest}` : ''}`.trim(), maxTitleLength);
   }
 
   const removed = cleanTitle.split(cleanKeyword).join(' ').replace(/\s+/g, ' ').trim();
@@ -195,7 +207,7 @@ export function applyKeywordPrefixToTitle(title: string, keyword: string, option
   }
 
   const merged = rest ? `${cleanKeyword} ${rest}` : cleanKeyword;
-  return clampTitleLength(merged, 70);
+  return clampTitleLength(merged, maxTitleLength);
 }
 
 export function applyKeywordPrefixToStructuredContent(content: StructuredContent, keyword: string, options?: KeywordPrefixOptions): void {

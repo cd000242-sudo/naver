@@ -11,6 +11,7 @@
 
 import type { ArticleType, ContentSource } from './contentGenerator';
 import { normalizeTitleWhitespace, removeEmojis } from './contentTextHelpers';
+import { preprocessLongKeyword } from './contentKeywordHelpers';
 
 /**
  * 리뷰형 글 타입인지 판정.
@@ -33,17 +34,41 @@ export function isReviewArticleType(articleType?: ArticleType): boolean {
  *   - normalizeReviewProductName (제품 명사 + 용량 정규화)
  * 더 짧은 쪽 선택 (제목 잡음 최소화).
  */
+/**
+ * [2026-08-05] 상품 등록명이 제목을 통째로 먹는 문제를 여기서 끊는다.
+ *
+ * 라이브 실측: 상품명 "KRUPS 크룹스 초슬림 전자동 커피머신 커피크러쉬 라이어니스
+ * SA403BK0 가정용 에스프레소 머신 홈카페"(60자)가 제목 앞에 붙고 70자 클램프가
+ * 뒤를 잘라, 판단 문구 "원룸이면 물통 위치에서 갈립니다"(17자)가 "원룸이면 물통"
+ * 6자만 남았다. 결과적으로 제목이 상품 등록명 나열이 된다.
+ *
+ * 네이버 상품 등록명은 검색 노출을 위해 브랜드·모델명·용도를 전부 이어 붙인
+ * 형식이라 그대로 쓰면 사람이 읽는 제목이 되지 못한다. 4어절로 줄여 "무엇에
+ * 대한 글인지"만 남기고, 나머지 자리를 클릭할 이유에 내준다.
+ *
+ * 축약본은 원문의 접두사이므로 contentGenerator의 "제품명이 이미 제목에 있으면
+ * 건너뛴다" 판정(포함 검사)이 그대로 성립한다 — 원문 60자가 다시 붙는 회귀 없음.
+ */
+const REVIEW_PRODUCT_NAME_MAX_CHARS = 25;
+
+function shortenProductNameForTitle(name: string): string {
+  const trimmed = name.trim();
+  if (trimmed.length <= REVIEW_PRODUCT_NAME_MAX_CHARS) return trimmed;
+  return preprocessLongKeyword(trimmed).coreKeyword || trimmed;
+}
+
 export function getReviewProductName(source?: ContentSource): string {
   const fromInfo = String((source as any)?.productInfo?.name || '').trim();
   if (fromInfo) {
     const extracted = extractLikelyProductNameFromTitle(fromInfo);
     const normalized = normalizeReviewProductName(fromInfo);
-    return extracted && extracted.length <= normalized.length ? extracted : normalized;
+    const picked = extracted && extracted.length <= normalized.length ? extracted : normalized;
+    return shortenProductNameForTitle(picked);
   }
   const fromTitle = String(source?.title || '').trim();
-  if (fromTitle) return extractLikelyProductNameFromTitle(fromTitle);
+  if (fromTitle) return shortenProductNameForTitle(extractLikelyProductNameFromTitle(fromTitle));
   const fromMeta = String((source as any)?.metadata?.keywords?.[0] || '').trim();
-  return fromMeta;
+  return shortenProductNameForTitle(fromMeta);
 }
 
 /**

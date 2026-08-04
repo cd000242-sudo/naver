@@ -1369,7 +1369,11 @@ export function finalizeStructuredContent(
   ) {
     const productName = getReviewProductName(source);
     if (productName) {
-      applyKeywordPrefixToStructuredContent(finalContent, productName);
+      // [2026-08-05] 쇼핑 제목만 45자로 좁힌다.
+      // 상품명이 앞을 차지하는 구조라 기본 70자에서는 뒤에 붙는 클릭 이유가
+      // 잘려나갔다(라이브 실측: 판단 문구 17자 중 6자만 생존).
+      // SEO·연속발행 제목은 같은 함수를 공유하므로 전역 상한은 건드리지 않는다.
+      applyKeywordPrefixToStructuredContent(finalContent, productName, { maxLength: 45 });
     }
   }
   const primaryKeyword = (source.metadata as any)?.keywords?.[0]
