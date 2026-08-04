@@ -62,15 +62,74 @@ fetch(productUrl, { credentials: 'omit' })
 `ERROR_PAGE_INDICATORS`(types.ts:100-113)가 잡는 기존 에러 페이지 계통이며,
 성인인증과는 **다른 상태**다. 두 상태를 같은 분기로 묶으면 안 된다.
 
+## 상태 A-2 — 로그인 후 성인인증 절차 (2차 실측에서 발견)
+
+사용자 지적: *"성인인증을 해서 2차인증하니까 풀리는 것 같은데, 2차인증이 안 되어
+있는 사람들은 인증을 제대로 해야 할 것"* → 세션을 잃은 뒤 재접근해 캡처.
+
+```
+URL   : https://nid.naver.com/user2/help/realNameCheck?m=viewAdultUserAuth&token_help=...
+title : 회원정보 : 실명확인
+body  : 322자
+본문  : "1년에 한 번, 나이 확인이 필요합니다."
+        "이 정보내용은 청소년유해매체물로서 정보통신망 이용촉진 및 정보보호 등에 관한
+         법률 및 청소년 보호법에 따라 19세 미만의 청소년이 이용할 수 없습니다."
+        "19세 이상입니다. 생일이 2007.12.31. 이전"
+        "휴대폰으로 문자 인증하기 / 아이핀으로 인증"
+동반탭 : https://nid.naver.com/user2/rncheck/authMobile?m=viewBeginIpin&isIpin=Y
+```
+
+**초판 정책이 이 화면을 완전히 놓쳤다.** 세 신호가 전부 빗나갔다:
+
+| 초판 신호 | 이 화면 | 결과 |
+|---|---|---|
+| `realname=Y` | 없음 (URL이 다름) | ✗ |
+| `nidlogin.login` | 아님 (`user2/help/realNameCheck`) | ✗ |
+| 본문 "연령확인" | 없음 ("**나이** 확인") | ✗ |
+
+→ `detectAccessGate` = `'none'` → 인증 화면을 **상품 페이지로 오인**하는 상태.
+
+역설적으로, 1차 실측에서 "실제 화면에 없다"며 제외했던 `청소년 유해`·`19세`·
+`실명확인` 패턴이 **이 화면에는 있었다**. 1차 실측이 1단계(로그인 인터스티셜)만
+본 탓이다.
+
+## 설계 전환 — 변종 열거를 포기한다
+
+게이트는 최소 3단계이고 각 단계 화면이 다르다. 네이버가 단계를 추가하면 열거
+방식은 또 뚫린다. 그래서 판정 축을 바꿨다:
+
+1. **위치 기반 1차 판정** — `nid.naver.com` 도메인에 있으면 단계와 무관하게
+   "아직 상품 페이지가 아니다". 세부 종류(성인/로그인)는 안내 문구 선택에만 쓴다.
+2. **완료는 긍정 판정** — `isProductPageReady()`: 인증 도메인이 아니고, 게이트
+   신호가 없고, 본문이 1,500자 이상일 때만 진행한다.
+   "게이트가 안 보인다"로 끝내면 미지의 중간 화면에서 성급히 진행한다.
+
 ## 판정 규칙 결론
 
 ```
-realname=Y                              → 'adult-verification'  (확정)
-nid.naver.com/nidlogin.login + 연령확인  → 'adult-verification'
-nid.naver.com/nidlogin.login (그 외)     → 'login-required'
-429 / 에러페이지                          → 기존 에러 경로 (성인 아님)
-그 외                                     → 'none'
+nid.naver.com 도메인 (단계 무관)         → 게이트 확정
+  ├ URL 마커: realname=Y | viewAdultUserAuth
+  │           | realNameCheck | /rncheck/ | viewBeginIpin  → 'adult-verification'
+  ├ 문구: 연령확인 | 나이확인 | 청소년유해
+  │       | 실명확인 | 19세미만 | 성인인증                    → 'adult-verification'
+  └ 그 외                                                   → 'login-required'
+
+인증 도메인 밖 + 위 URL 마커/문구                            → 'adult-verification'
+429 / 에러페이지                                             → 기존 에러 경로 (성인 아님)
+그 외                                                        → 'none'
+
+완료 판정 isProductPageReady():
+  인증 도메인 아님 AND 게이트 없음 AND 본문 ≥ 1,500자
 ```
 
 본문 키워드 판정은 `bodyText.trim().length < 1500`일 때만 신뢰한다
-(상품 상세에 "연령확인" 문구가 포함될 수 있으므로).
+(상품 상세에 "19세 미만 구매 불가" 같은 안내문이 들어갈 수 있으므로).
+
+## 4단계 전 구간 판정 실측 (dist 빌드 후 실행)
+
+| 단계 | detectAccessGate | isProductPageReady |
+|---|---|---|
+| 1 비로그인 | `adult-verification` | false |
+| 2 성인인증 절차 | `adult-verification` | false |
+| 3 본인인증 팝업 | `adult-verification` | false |
+| 완료 상품페이지 | `none` | **true** |

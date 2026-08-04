@@ -4,6 +4,7 @@ import {
   GATE_BODY_TRUST_MAX_CHARS,
   describeAccessGate,
   detectAccessGate,
+  isProductPageReady,
   requiresManualUnlock,
 } from '../crawler/adultVerificationPolicy';
 
@@ -35,9 +36,55 @@ const LIVE_PRODUCT_PAGE = {
     + '오디와인 13도 750ml 선물세트 [원산지:국산]\n'.repeat(200), // 실측 6,966자 수준
 };
 
+/**
+ * 2단계 — 로그인은 됐지만 성인인증 미완료. 초판 정책이 놓쳤던 화면.
+ * 사용자 지적("2차인증 안 된 사람은 인증을 제대로 해야 한다")으로 발견.
+ */
+const LIVE_ADULT_AUTH_STEP = {
+  url: 'https://nid.naver.com/user2/help/realNameCheck?m=viewAdultUserAuth&token_help=hbkkbiCYN3QMwhD2',
+  title: '회원정보 : 실명확인',
+  bodyText:
+    '본문 바로가기\n네이버\n닫기\n1년에 한 번, 나이 확인이 필요합니다.\n'
+    + '이 정보내용은 청소년유해매체물로서 정보통신망 이용촉진 및 정보보호 등에 관한 법률 및 '
+    + '청소년 보호법에 따라 19세 미만의 청소년이 이용할 수 없습니다.\n자세히\n'
+    + '19세 이상입니다. 생일이 2007.12.31. 이전\n수집항목 안내\n휴대전화이미지\n'
+    + '휴대폰으로\n문자 인증하기\n아이핀으로 인증 아이핀 발급\n'
+    + '19세 미만입니다. 생일이 2008.01.01. 이후',
+};
+
+/** 3단계 — 본인인증(휴대폰/아이핀) 팝업. */
+const LIVE_IPIN_POPUP = {
+  url: 'https://nid.naver.com/user2/rncheck/authMobile?m=viewBeginIpin&isIpin=Y&token_help=hbkkbiCYN3QMwhD2',
+  title: '네이버 : 본인인증',
+  bodyText: '본인인증을 진행해주세요',
+};
+
 describe('성인인증 게이트 감지 — 실측 픽스처', () => {
   it('실측 인증 화면을 adult-verification으로 판정한다', () => {
     expect(detectAccessGate(LIVE_ADULT_GATE)).toBe('adult-verification');
+  });
+
+  it('2단계 성인인증 절차 화면도 잡는다 (초판이 놓쳤던 회귀)', () => {
+    // 초판 정책의 세 신호가 전부 빗나가던 입력이다:
+    // realname=Y 없음 / nidlogin.login 아님 / 본문에 "연령확인" 없음
+    expect(LIVE_ADULT_AUTH_STEP.url).not.toMatch(/realname=Y/i);
+    expect(LIVE_ADULT_AUTH_STEP.url).not.toMatch(/nidlogin\.login/i);
+    expect(`${LIVE_ADULT_AUTH_STEP.title}${LIVE_ADULT_AUTH_STEP.bodyText}`).not.toMatch(/연령\s*확인/);
+
+    expect(detectAccessGate(LIVE_ADULT_AUTH_STEP)).toBe('adult-verification');
+  });
+
+  it('3단계 본인인증 팝업도 잡는다', () => {
+    expect(detectAccessGate(LIVE_IPIN_POPUP)).toBe('adult-verification');
+  });
+
+  it('인증 도메인이면 알 수 없는 새 단계여도 게이트로 본다 (변종 내성)', () => {
+    // 네이버가 단계를 추가해도 nid.naver.com에 있으면 상품 페이지가 아니다
+    expect(detectAccessGate({
+      url: 'https://nid.naver.com/user2/some/futureStep?x=1',
+      title: '알 수 없는 화면',
+      bodyText: '내용',
+    })).toBe('login-required');
   });
 
   it('실측 정상 상품 페이지는 게이트 없음으로 판정한다', () => {
@@ -106,6 +153,32 @@ describe('오탐 방벽 — 긴 본문의 키워드는 신뢰하지 않는다', 
   });
 });
 
+describe('완료 판정 — 긍정 신호로만 진행한다', () => {
+  it('실측 상품 페이지에서만 준비 완료로 본다', () => {
+    expect(isProductPageReady(LIVE_PRODUCT_PAGE)).toBe(true);
+  });
+
+  it('인증 3단계 어디서도 준비 완료가 아니다', () => {
+    expect(isProductPageReady(LIVE_ADULT_GATE)).toBe(false);
+    expect(isProductPageReady(LIVE_ADULT_AUTH_STEP)).toBe(false);
+    expect(isProductPageReady(LIVE_IPIN_POPUP)).toBe(false);
+  });
+
+  it('게이트가 안 보여도 본문이 얇으면 진행하지 않는다', () => {
+    // "게이트 없음"만으로 진행하면 미지의 중간 화면을 상품으로 오인한다
+    expect(isProductPageReady({
+      url: 'https://smartstore.naver.com/store/products/1',
+      title: '로딩 중',
+      bodyText: '잠시만 기다려주세요',
+    })).toBe(false);
+  });
+
+  it('URL이 없으면 준비 완료가 아니다', () => {
+    expect(isProductPageReady({})).toBe(false);
+    expect(isProductPageReady(null)).toBe(false);
+  });
+});
+
 describe('개입 필요 판정과 안내 문구', () => {
   it('두 게이트 모두 사용자 개입을 요구한다', () => {
     expect(requiresManualUnlock('adult-verification')).toBe(true);
@@ -114,8 +187,11 @@ describe('개입 필요 판정과 안내 문구', () => {
   });
 
   it('안내 문구가 무엇을 해야 하는지 알려준다', () => {
-    expect(describeAccessGate('adult-verification')).toContain('연령확인');
-    expect(describeAccessGate('adult-verification')).toContain('브라우저');
+    const adult = describeAccessGate('adult-verification');
+    expect(adult).toContain('성인인증');
+    expect(adult).toContain('브라우저');
+    // 실측 2단계 화면이 제시하는 실제 수단을 안내한다
+    expect(adult).toMatch(/휴대폰|아이핀/);
     expect(describeAccessGate('login-required')).toContain('로그인');
     expect(describeAccessGate('none')).toBe('');
   });
