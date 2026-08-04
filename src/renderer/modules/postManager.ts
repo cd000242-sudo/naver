@@ -680,8 +680,15 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
     const currentNaverId = getCurrentNaverId();
 
     // ✅ [2026-01-22] 쇼핑커넥트 모드 정보 가져오기
-    const affiliateLinkInput = document.getElementById('unified-affiliate-link') as HTMLInputElement | null;
-    const affiliateLinkValue = affiliateLinkInput?.value?.trim() || structuredContent.affiliateLink || '';
+    // [2026-08-05] 'unified-affiliate-link'는 어떤 HTML에도 없는 ID였다 —
+    //   getElementById가 항상 null을 반환해 사용자가 새로 입력한 링크가 통째로
+    //   무시되고 늘 이전 값(structuredContent → existingPost)으로 떨어졌다.
+    //   실패 후 새 링크로 재시도해도 이미지에 옛 링크가 박히던 원인.
+    //   collectPayload(formAndAutomation.ts)와 같은 입력을 읽는다.
+    const affiliateLinkInput = document.getElementById('shopping-connect-affiliate-link') as HTMLInputElement | null;
+    const batchLinkInput = document.getElementById('batch-link-input') as HTMLInputElement | null;
+    const typedAffiliateLink = affiliateLinkInput?.value?.trim() || batchLinkInput?.value?.trim() || '';
+    const affiliateLinkValue = typedAffiliateLink || structuredContent.affiliateLink || '';
     const contentModeValue = structuredContent.contentMode ||
       (document.querySelector('input[name="article-type"]:checked') as HTMLInputElement)?.value ||
       'seo';
@@ -754,7 +761,12 @@ export function saveGeneratedPost(structuredContent: any, isUpdate: boolean = fa
       ctas: ctas.length > 0 ? ctas : (existingPost as any)?.ctas || undefined,
       naverId: currentNaverId || existingPost?.naverId || undefined, // ✅ [2026-01-22] 계정 ID 저장
       // ✅ [2026-01-22] 쇼핑커넥트 구분용 필드 추가
-      affiliateLink: affiliateLinkValue || existingPost?.affiliateLink || undefined,
+      // [2026-08-05] 사용자가 링크를 새로 입력했으면 기존 글의 옛 링크로 되돌아가지
+      //   않는다. 입력이 비어 있을 때만 기존 값을 유지한다(링크를 건드리지 않는 수정).
+      affiliateLink: typedAffiliateLink
+        || affiliateLinkValue
+        || existingPost?.affiliateLink
+        || undefined,
       contentMode: contentModeValue || existingPost?.contentMode || undefined,
     };
 
