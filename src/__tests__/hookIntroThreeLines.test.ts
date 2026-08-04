@@ -32,8 +32,14 @@ describe('hook intro up to three lines', () => {
     expect(normalizeHookIntroLines('a\nb\nc\nd\ne')).toEqual(['a', 'b', 'c']);
     expect(normalizeHookIntroLines('  \n\t \n')).toEqual([]);
     expect(normalizeHookIntroLines(undefined)).toEqual([]);
+    // [2026-08-04] 줄당 40자 스타일 제한 폐지 (사용자: "도입부를 미리 정할 수
+    // 있는 게 메리트") — 사용자가 쓴 문장은 그대로 보존한다. 남은 건 폭주 입력
+    // 방어용 하드캡뿐이다.
     const long = 'A'.repeat(80);
-    expect(normalizeHookIntroLines(long)).toEqual(['A'.repeat(HOOK_INTRO_MAX_LINE_CHARS)]);
+    expect(normalizeHookIntroLines(long)).toEqual([long]);
+    expect(HOOK_INTRO_MAX_LINE_CHARS).toBeGreaterThanOrEqual(500);
+    const runaway = 'B'.repeat(HOOK_INTRO_MAX_LINE_CHARS + 100);
+    expect(normalizeHookIntroLines(runaway)).toEqual(['B'.repeat(HOOK_INTRO_MAX_LINE_CHARS)]);
     expect(HOOK_INTRO_MAX_LINES).toBe(3);
   });
 
@@ -103,7 +109,8 @@ describe('hook intro up to three lines', () => {
 
   it('UI field is a 3-row textarea with the widened cap', () => {
     const html = read('../public/index.html');
-    expect(html).toContain('<textarea id="unified-hook-sentence" rows="3" maxlength="140"');
+    // [2026-08-04] 줄당 40자 제한 폐지 — maxlength는 폭주 방어용 1500만 남김.
+    expect(html).toContain('<textarea id="unified-hook-sentence" rows="3" maxlength="1500"');
     expect(html).not.toContain('<input type="text" id="unified-hook-sentence"');
   });
 });

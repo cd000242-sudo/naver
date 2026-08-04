@@ -141,13 +141,14 @@ describe('hookHint — user-provided 1-sentence hook injection (W2)', () => {
     expect(prompt).not.toContain('[사용자 후킹 1문장');
   });
 
-  it('trims whitespace and caps the hook at 40 chars', () => {
+  it('trims whitespace and keeps the user hook verbatim (40-char style cap removed)', () => {
+    // [2026-08-04] 줄당 40자 잘라내기 폐지 — 사용자가 정한 도입부 문장은
+    // 그대로 보존한다. 폭주 방어 하드캡(500자)만 남는다.
     const longHook = '   ' + 'A'.repeat(80) + '   ';
     const prompt = buildFullPrompt('homefeed', 'it', false, 'friendly', undefined, longHook);
     expect(prompt).toContain('[사용자 후킹 1문장');
-    // After trim + slice(0, 40), only 40 'A's should appear.
-    expect(prompt).toContain('A'.repeat(40));
-    expect(prompt).not.toContain('A'.repeat(41));
+    expect(prompt).toContain('A'.repeat(80));
+    expect(prompt).not.toContain('A'.repeat(81));
   });
 
   it('omits when hookHint is whitespace only', () => {

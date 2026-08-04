@@ -557,7 +557,7 @@ export async function generateContentFromUrl(
   const keywordList = keywords ? keywords.split(',').map(k => k.trim()).filter(k => k.length > 0) : [];
   await augmentKeywordListWithBlueOcean(keywordList);
 
-  // ✅ [2026-07-25] 사용자 후킹 도입부 (선택, 최대 3줄·줄당 40자). 개행 보존 —
+  // ✅ [2026-07-25] 사용자 후킹 도입부 (선택, 최대 3줄·글자수 제한 없음). 개행 보존 —
   // 줄 분리/자르기의 최종 정규화는 main측 contentHookIntroPolicy가 담당.
   const hookInputEl = document.getElementById('unified-hook-sentence') as HTMLTextAreaElement | null;
   const hookHint = (hookInputEl?.value || '').replace(/\r\n/g, '\n').trim().slice(0, 200) || undefined;
