@@ -125,7 +125,8 @@ export class BlogAccountManager {
       totalPosts: 0,
       createdAt: new Date().toISOString(),
       settings: {
-        dailyLimit: 5,
+        // [2026-08-04] 계정별 일일 한도 해제 — 사용자 지시(원하는 만큼 발행).
+        dailyLimit: Number.MAX_SAFE_INTEGER,
         autoRotate: true,
         ...settings,
       },
@@ -238,15 +239,15 @@ export class BlogAccountManager {
       return this.getActiveAccount();
     }
 
-    // 일일 한도 체크
-    const availableAccounts = rotateAccounts.filter(a => {
-      const stats = this.getAccountStats(a.id);
-      return stats.todayPosts < a.settings.dailyLimit;
-    });
-
-    if (availableAccounts.length === 0) {
-      console.log('[BlogAccountManager] 모든 계정이 일일 한도에 도달했습니다.');
-      return null;
+    // [2026-08-04] 일일 한도로 계정을 배제하지 않는다 (사용자 지시: "발행 한도는
+    // 의미가 없어. 원하는 만큼 사용할 수 있게 풀어줘").
+    // 이전에는 모든 계정이 한도에 도달하면 null을 반환해 발행 자체가 중단됐고,
+    // 기존 설정 파일에 저장된 옛 기본값(5건)이 그대로 남아 계속 막았다.
+    // 카운터와 통계는 그대로 유지된다 — 세는 것과 막는 것을 분리한다.
+    const availableAccounts = rotateAccounts;
+    const overLimit = rotateAccounts.filter(a => this.getAccountStats(a.id).todayPosts >= a.settings.dailyLimit);
+    if (overLimit.length > 0) {
+      console.log(`[BlogAccountManager] 일일 한도 초과 계정 ${overLimit.length}개 — 한도 해제 정책에 따라 계속 발행합니다.`);
     }
 
     // 순환 인덱스로 다음 계정 선택

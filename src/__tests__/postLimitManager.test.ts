@@ -41,9 +41,17 @@ describe('postLimitManager', () => {
     vi.resetModules();
   });
 
-  it('기본 일일 한도는 3이다', async () => {
+  // [2026-08-04] 사용자 지시로 발행 한도 해제 — 기본값은 무제한.
+  // 카운팅은 그대로 유지된다(통계·시간당 가드·대시보드가 읽는다).
+  // 무료 체험 3회 한도는 freeTrialPolicy의 별개 계통이라 영향받지 않는다.
+  it('기본 일일 한도는 무제한이다 (한도 해제 정책)', async () => {
     const { getDailyLimit } = await import('../postLimitManager');
-    expect(getDailyLimit()).toBe(3);
+    expect(getDailyLimit()).toBe(Number.MAX_SAFE_INTEGER);
+  });
+
+  it('무료 체험 한도는 별개 계통이라 3회를 유지한다', async () => {
+    const { FREE_TRIAL_DAILY_PUBLISH_LIMIT } = await import('../freeTrialPolicy');
+    expect(FREE_TRIAL_DAILY_PUBLISH_LIMIT).toBe(3);
   });
 
   it('setDailyLimit으로 한도를 변경할 수 있다', async () => {

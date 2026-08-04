@@ -17,17 +17,27 @@
 export interface GroundingCostPolicySource {
   /** 팩트체크 엔진 선택값. 'gemini-grounding'이면 사용자가 직접 고른 것. */
   factCheckEngine?: unknown;
-  /** 레거시 토글. 명시적 true만 허용 (undefined는 OFF로 본다). */
+  /**
+   * 레거시 토글 — 더 이상 그라운딩을 켜지 못한다.
+   * 타입만 남겨 과거 설정 파일을 읽을 때 타입 오류가 나지 않게 한다.
+   */
   enableSearchGrounding?: unknown;
 }
 
+/**
+ * [2026-08-04] 레거시 토글(enableSearchGrounding) 분기 제거.
+ *
+ * 그 필드는 UI에 토글이 없어 사용자가 끌 수 없는데, 과거 설정 파일에 true가
+ * 남아 있으면 글마다 그라운딩이 자동으로 붙어 과금됐다. 사용자 지시대로
+ * "자동으로 켜지는 구간"을 없애기 위해, 팩트체크 엔진을 그라운딩으로 직접
+ * 고른 경우만 인정한다. 본문 생성 경로는 이 게이트와 무관하게 항상 OFF다
+ * (contentGenerator의 callGemini 참조).
+ */
 export function isGroundingExplicitlyEnabled(
   source?: GroundingCostPolicySource | null,
 ): boolean {
   if (!source) return false;
-  if (String(source.factCheckEngine ?? '').trim() === 'gemini-grounding') return true;
-  // 과거 기본값이 opt-out(`!== false`)이라 키가 없으면 켜졌다. 이제 명시적 true만.
-  return source.enableSearchGrounding === true;
+  return String(source.factCheckEngine ?? '').trim() === 'gemini-grounding';
 }
 
 /** 로그용 사유 — 왜 껐는지 사용자가 알 수 있게. */

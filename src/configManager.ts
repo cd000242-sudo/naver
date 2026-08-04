@@ -675,7 +675,7 @@ export async function loadConfig(): Promise<AppConfig> {
           userDisplayName: '',
           userEmail: '',
           // 기본 설정
-          dailyPostLimit: 3,
+          dailyPostLimit: Number.MAX_SAFE_INTEGER, // [2026-08-04] 발행 한도 해제 — 사용자 지시
           hideDailyLimitWarning: false,
           enableFreeTrialButton: true,
         };
@@ -1218,7 +1218,7 @@ export async function resetConfigForDistribution(): Promise<void> {
       savedLicensePassword: '',
 
       // 기본 설정 유지
-      dailyPostLimit: 3,
+      dailyPostLimit: Number.MAX_SAFE_INTEGER, // [2026-08-04] 발행 한도 해제 — 사용자 지시
       hideDailyLimitWarning: false,
       enableFreeTrialButton: true,
 

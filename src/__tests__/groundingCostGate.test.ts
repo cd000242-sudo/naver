@@ -29,14 +29,24 @@ describe('grounding cost gate (옵트인 전용)', () => {
     expect(isGroundingExplicitlyEnabled({ enableSearchGrounding: undefined })).toBe(false);
   });
 
-  it('사용자가 명시적으로 켠 경우에만 ON', () => {
+  it('팩트체크 엔진을 그라운딩으로 직접 고른 경우에만 ON', () => {
     expect(isGroundingExplicitlyEnabled({ factCheckEngine: 'gemini-grounding' })).toBe(true);
-    expect(isGroundingExplicitlyEnabled({ enableSearchGrounding: true })).toBe(true);
     // 다른 팩트체크 엔진은 그라운딩을 켜지 않는다 (저비용 선택 존중)
     for (const engine of ['auto', 'crawl', 'naver', 'gpt-claude', 'perplexity', 'off']) {
       expect(isGroundingExplicitlyEnabled({ factCheckEngine: engine }), engine).toBe(false);
     }
+  });
+
+  // [2026-08-04] 사용자 지시: "자동으로 하는 구간은 전부 다 끊어줘".
+  // enableSearchGrounding은 UI 토글이 없어 사용자가 끌 수 없는데, 설정 파일에
+  // true가 남아 있으면 글마다 자동 과금됐다 — 더 이상 그라운딩을 켜지 못한다.
+  it('레거시 토글(enableSearchGrounding)은 더 이상 그라운딩을 켜지 못한다', () => {
+    expect(isGroundingExplicitlyEnabled({ enableSearchGrounding: true })).toBe(false);
     expect(isGroundingExplicitlyEnabled({ enableSearchGrounding: false })).toBe(false);
+    // 레거시 토글이 켜져 있어도 팩트체크 엔진이 아니면 OFF
+    expect(isGroundingExplicitlyEnabled({ enableSearchGrounding: true, factCheckEngine: 'auto' })).toBe(false);
+    const policy = read('content/groundingCostPolicy.ts');
+    expect(policy).not.toMatch(/return source\.enableSearchGrounding === true/);
   });
 
   it('결정 로그에 비용을 명시한다', () => {
@@ -44,10 +54,14 @@ describe('grounding cost gate (옵트인 전용)', () => {
     expect(describeGroundingDecision(false)).toContain('비용 보호');
   });
 
-  it('본문 생성 경로가 opt-out(!== false)에서 옵트인으로 전환됐다', () => {
+  // [2026-08-04] 옵트인 게이트에서 "본문 생성은 아예 사용 안 함"으로 강화.
+  // 본문 1편은 재시도·자기비평·패치로 여러 번 호출되므로, 게이트를 한 번
+  // 통과시키면 글당 ₩50이 아니라 그 배수로 과금된다.
+  it('본문 생성 경로는 그라운딩을 아예 사용하지 않는다', () => {
     const gen = read('contentGenerator.ts');
-    expect(gen).toContain('const configGrounding = isGroundingExplicitlyEnabled(config as any)');
-    // 기본 ON 표현 재도입 금지
+    expect(gen).toContain('const useGrounding = false;');
+    // 설정값으로 본문 생성 그라운딩을 되살리는 형태 재도입 금지
+    expect(gen).not.toContain('const configGrounding = isGroundingExplicitlyEnabled(config as any)');
     expect(gen).not.toMatch(/enableSearchGrounding\s*!==\s*false/);
   });
 

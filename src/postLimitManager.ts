@@ -26,7 +26,18 @@ const DEFAULT_MIN_INTERVAL_MS = 2 * 60 * 60 * 1000; // 2 hours
 const MAX_HOURLY_COUNT = 2;
 const ONE_HOUR_MS = 60 * 60 * 1000;
 
-let dailyLimit = Number(process.env.DAILY_POST_LIMIT ?? 3);
+/**
+ * [2026-08-04] 발행 한도 해제 (사용자 지시: "발행 한도는 의미가 없어.
+ * 원하는 만큼 사용할 수 있게 풀어줘").
+ *
+ * 카운터 자체는 계속 센다 — 통계·시간당 가드·대시보드가 이 값을 읽고,
+ * 무료 체험 3회 한도(freeTrialPolicy)는 별개 계통이라 영향받지 않는다.
+ * 바뀌는 것은 "몇 건에서 막을지"의 기본값뿐이며, 사용자가 설정에서
+ * 값을 지정하면 그 값이 그대로 쓰인다.
+ */
+const UNLIMITED_DAILY_POSTS = Number.MAX_SAFE_INTEGER;
+
+let dailyLimit = Number(process.env.DAILY_POST_LIMIT ?? UNLIMITED_DAILY_POSTS);
 let minIntervalMs = DEFAULT_MIN_INTERVAL_MS;
 
 // 지연 초기화: app.getPath는 app이 ready된 후에만 사용 가능
@@ -57,7 +68,7 @@ function migrateState(parsed: Record<string, unknown>): PostLimitState {
 
 function createDefaultState(): PostLimitState {
   return {
-    date: new Date().toISOString().slice(0, 10),
+    date: getLocalDateKey(),
     count: 0,
     lastPublishTime: null,
     hourlyCount: 0,
@@ -89,7 +100,7 @@ async function writeState(state: PostLimitState): Promise<void> {
 
 export async function getTodayCount(): Promise<number> {
   const state = await readState();
-  const today = new Date().toISOString().slice(0, 10);
+  const today = getLocalDateKey();
   if (state.date !== today) {
     return 0;
   }
@@ -109,7 +120,7 @@ export function setDailyLimit(limit: number): void {
 
 export async function incrementTodayCount(): Promise<number> {
   const now = Date.now();
-  const today = new Date().toISOString().slice(0, 10);
+  const today = getLocalDateKey();
   const state = await readState();
 
   const isNewDay = state.date !== today;
@@ -132,7 +143,7 @@ export async function incrementTodayCount(): Promise<number> {
 }
 
 export async function resetCount(): Promise<void> {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = getLocalDateKey();
   await writeState({
     date: today,
     count: 0,
@@ -179,7 +190,7 @@ export async function canPublishHourly(): Promise<boolean> {
 
 export async function validatePublishAllowed(): Promise<PublishValidationResult> {
   const now = Date.now();
-  const today = new Date().toISOString().slice(0, 10);
+  const today = getLocalDateKey();
   const state = await readState();
 
   // 1) 일일 한도 체크
@@ -222,3 +233,20 @@ export async function validatePublishAllowed(): Promise<PublishValidationResult>
 
   return { allowed: true };
 }
+
+/**
+ * [2026-08-04] 로컬(한국) 달력 기준 날짜 키.
+ *
+ * 이전에는 new Date().toISOString().slice(0, 10)로 UTC 날짜를 썼다. KST는
+ * UTC+9라서 한국 시간 자정이 아니라 **오전 9시에 일일 카운터가 리셋**됐다
+ * (00:00~08:59는 어제 카운터를 계속 사용). quotaManager.getLocalDateKey와
+ * 같은 기준으로 맞춘다.
+ */
+function getLocalDateKey(): string {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const dd = String(now.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+

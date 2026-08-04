@@ -16,14 +16,16 @@ const read = (rel: string): string => fs.readFileSync(path.join(ROOT, rel), 'utf
 describe('Gemini 원문 모드 그라운딩 OFF', () => {
   const code = read('contentGenerator.ts');
 
-  it('원문 모드를 user 프롬프트 길이(> 500자)로 판별한다', () => {
-    expect(code).toMatch(/isRawTextMode\s*=\s*\(geminiUserTextOriginal[\s\S]{0,40}?\.length\s*>\s*500/);
+  // [2026-08-04] 원문 모드 조건부 OFF → 본문 생성 전 구간 OFF로 강화.
+  // 그라운딩이 아예 붙지 않으므로 RECITATION 빈 응답의 원인(원문 이중 수신)이
+  // 구조적으로 성립하지 않는다. 조건부 게이트보다 강한 보장이다.
+  it('본문 생성은 그라운딩을 항상 OFF로 둔다 (원문 이중 수신 자체가 불가능)', () => {
+    expect(code).toContain('const useGrounding = false;');
   });
 
-  it('V3 strict 값은 그대로 사용하고 레거시만 원문 모드로 게이트한다', () => {
-    expect(code).toMatch(
-      /const useGrounding\s*=\s*strictRequestEnvelope\s*\?\s*strictRequestEnvelope\.useGrounding\s*:\s*\(options\.useGrounding\s*!==\s*false\)\s*&&\s*configGrounding\s*&&\s*!isRawTextMode\s*;/,
-    );
+  it('설정·모드에 따라 본문 생성 그라운딩이 되살아나는 형태가 없다', () => {
+    expect(code).not.toMatch(/const useGrounding\s*=\s*strictRequestEnvelope/);
+    expect(code).not.toMatch(/&&\s*configGrounding\s*&&\s*!isRawTextMode/);
   });
 
   it('Perplexity 경로도 원문 모드 검색 비활성화 정책을 유지한다 (정합성)', () => {

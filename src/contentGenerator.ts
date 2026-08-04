@@ -3003,20 +3003,19 @@ async function callGemini(
         //   원문 모드에서 그라운딩이 켜져 있으면, 프롬프트의 크롤링 원문 + 검색으로 가져온
         //   같은 기사를 Gemini가 이중으로 받아 거의 그대로 재현 → RECITATION → 빈 응답(0건).
         //   원문 자체가 fact source이므로 그라운딩을 꺼도 환상(hallucination)이 생기지 않는다.
-        // [2026-07-30] 기본 ON(opt-out) → 옵트인으로 전환. 이 한 줄이 글당 약 ₩50를
-        // 무조건 과금시키던 지점이다(주석의 "+$0.035/글"). 사용자가 팩트체크 엔진에서
-        // 그라운딩을 직접 고르거나 enableSearchGrounding=true로 명시할 때만 켠다.
-        const configGrounding = isGroundingExplicitlyEnabled(config as any);
-        if (!configGrounding) {
-          console.log(`[Gemini] ${describeGroundingDecision(false)}`);
-        }
-        const isRawTextMode = (geminiUserTextOriginal || '').length > 500;
-        const useGrounding = strictRequestEnvelope
-          ? strictRequestEnvelope.useGrounding
-          : (options.useGrounding !== false) && configGrounding && !isRawTextMode;
-        if (isRawTextMode) {
-          console.log('[Gemini] 📄 원문 모드 감지 (user > 500자) → 그라운딩 OFF (RECITATION 회피, 원문이 fact source)');
-        }
+        // [2026-08-04] 본문 생성 경로의 그라운딩을 완전히 제거한다 (사용자 지시:
+        // "자동으로 하는 구간은 전부 다 끊어줘. 글 5개만 써도 10000원 가까이 나온다").
+        //
+        // 이전에는 옵트인 게이트(isGroundingExplicitlyEnabled)를 통과하면 켜졌는데,
+        // 그 게이트의 두 조건이 모두 "한 번 설정하면 이후 모든 글에 자동 적용"이었다:
+        //   - enableSearchGrounding: UI 토글조차 없는 레거시 필드. 설정 파일에 true가
+        //     남아 있으면 사용자가 끌 방법 없이 글마다 과금됐다.
+        //   - factCheckEngine === 'gemini-grounding': 팩트체크용 선택인데 본문 생성까지
+        //     끌고 들어와, 팩트체크 1회 의도가 생성 호출 수만큼 과금으로 번졌다.
+        // 본문 1편은 재시도·자기비평·패치로 여러 번 호출되므로 글당 ₩50이 아니라 그
+        // 배수로 나간다. 그라운딩이 필요하면 팩트체크 기능에서 그때 실행한다.
+        const useGrounding = false;
+        console.log(`[Gemini] ${describeGroundingDecision(false)}`);
 
         const resultCacheAllowed = !singleSubmission && minChars < 1000;
         const resultCacheKey = resultCacheAllowed ? getGeminiResultCacheKey({

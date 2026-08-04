@@ -17,6 +17,23 @@ import fs from 'fs/promises';
 import path from 'path';
 import { app } from 'electron';
 
+/**
+ * [2026-08-04] 로컬(한국) 달력 기준 날짜 키.
+ *
+ * 이전에는 new Date().toISOString().slice(0, 10)로 UTC 날짜를 썼다. KST는
+ * UTC+9라서 한국 시간 자정이 아니라 **오전 9시에 일일 카운터가 리셋**됐다
+ * (00:00~08:59는 어제 카운터를 계속 사용). quotaManager.getLocalDateKey와
+ * 같은 기준으로 맞춘다.
+ */
+function getLocalDateKey(): string {
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const dd = String(now.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+
 export interface PerAccountPostState {
   readonly date: string;
   readonly count: number;
@@ -36,7 +53,7 @@ function getStorageFile(): string {
 
 function createDefaultEntry(): PerAccountPostState {
   return {
-    date: new Date().toISOString().slice(0, 10),
+    date: getLocalDateKey(),
     count: 0,
     lastPublishTime: null,
     hourlyCount: 0,
@@ -76,7 +93,7 @@ export async function getTodayCountForAccount(accountId: string): Promise<number
   const store = await readStore();
   const entry = store[id];
   if (!entry) return 0;
-  const today = new Date().toISOString().slice(0, 10);
+  const today = getLocalDateKey();
   return entry.date === today ? entry.count : 0;
 }
 
@@ -86,7 +103,7 @@ export async function getTodayCountForAccount(accountId: string): Promise<number
 export async function incrementForAccount(accountId: string): Promise<number> {
   const id = normalizeAccountId(accountId);
   const now = Date.now();
-  const today = new Date().toISOString().slice(0, 10);
+  const today = getLocalDateKey();
   const store = await readStore();
   const prev = store[id] || createDefaultEntry();
 
