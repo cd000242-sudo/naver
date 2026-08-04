@@ -540,6 +540,22 @@ export function activatePaywall(payload?: PaywallResponse | any): void {
     modalBackdrop.style.display = 'flex';
 }
 
+/**
+ * [2026-08-05] 무료 한도 소진 여부 조회 — 발행 루프의 조기 종료 판정용.
+ *
+ * 한도를 넘긴 뒤에도 루프가 계속 돌면서 매 항목이 PAYWALL로 실패했고,
+ * 연속 실패 5회를 채워야 멈췄다. 사용자는 "5번 실패"로 원인을 오해한다.
+ * 이 값은 main이 code:'PAYWALL'을 반환할 때만 true가 되므로, 유료 사용자와
+ * 한도 이내 무료 사용자의 발행에는 영향이 없다.
+ */
+export function isPaywallActive(): boolean {
+    return paywallActive;
+}
+
+// minify 시 모듈 스코프 이름이 바뀌어도 루프에서 참조할 수 있게 전역 노출
+// (featureLockModal이 쓰는 것과 같은 패턴)
+(window as any).isPaywallActive = isPaywallActive;
+
 // ══════ API 래핑 (페이월 응답 자동 감지) ══════
 function wrapApiForPaywall(): void {
     if (paywallOriginalApi) return;

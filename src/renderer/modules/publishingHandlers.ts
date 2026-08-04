@@ -1804,6 +1804,11 @@ export async function handleMultiAccountPublish(): Promise<void> {
   };
 
   for (let i = 0; i < selectedAccountIds.length; i++) {
+    // [2026-08-05] 무료 한도 소진 시 즉시 중단 (남은 계정을 헛돌지 않는다)
+    if ((window as any).isPaywallActive?.() === true) {
+      appendLog('⛔ 오늘 무료 발행 횟수를 모두 사용해 남은 계정을 중단합니다. Pro로 전환하면 제한 없이 이어서 발행할 수 있어요.');
+      return;
+    }
     if ((window as any).stopFullAutoPublish === true) {
       appendLog('⏹️ 사용자가 다중계정 발행을 중지했습니다.');
       return;

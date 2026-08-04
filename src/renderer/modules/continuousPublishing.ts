@@ -4462,6 +4462,14 @@ async function startContinuousPublishingV2(): Promise<void> {
 
   for (let i = 0; i < continuousQueueV2.length; i++) {
     const item = continuousQueueV2[i];
+    // [2026-08-05] 무료 한도 소진 시 즉시 중단.
+    //   이전에는 남은 항목마다 PAYWALL로 실패하며 연속 실패 5회를 채워야 멈춰서,
+    //   사용자가 "5번 실패했다"로 원인을 오해했다.
+    if ((window as any).isPaywallActive?.() === true) {
+      appendLog('⛔ 오늘 무료 발행 횟수를 모두 사용해 남은 항목을 중단합니다. Pro로 전환하면 제한 없이 이어서 발행할 수 있어요.');
+      stopContinuousMode('manual');
+      break;
+    }
     if (!isContinuousMode) break;
     if (item.status !== 'pending') continue;
 
