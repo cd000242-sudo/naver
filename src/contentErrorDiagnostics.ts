@@ -130,7 +130,16 @@ export function classifyOpenAiFailure(error: unknown): OpenAiFailureClassificati
     type.includes('insufficient_quota') ||
     message.includes('billing hard limit') ||
     message.includes('payment required') ||
-    message.includes('credit balance');
+    message.includes('credit balance') ||
+    // [2026-08-05] Gemini 선불 크레딧 소진 문구. 라이브 로그 실측:
+    // "[429 Too Many Requests] Your prepayment credits are depleted."
+    // 이 문구가 패턴에 없어서 429가 RATE_LIMIT(잠시 후 재시도)으로 오진됐다 —
+    // 크레딧 소진은 충전 전까지 복구되지 않으므로 재시도가 무의미하다.
+    // ⚠️ "quota" 단독/"exceeded your current quota"는 넣지 않는다 — v2.10.356에서
+    //   OpenAI 429의 일시적 rate limit을 billing으로 오판하던 버그의 원인이었다.
+    //   여기 넣는 문구는 "복구 불가"가 확실한 것만이다.
+    message.includes('credits are depleted') ||
+    message.includes('prepayment credits');
 
   // When OpenAI returned HTTP metadata it is authoritative. Provider/proxy text
   // must not turn a 5xx into a local network, model, or 429 diagnosis.

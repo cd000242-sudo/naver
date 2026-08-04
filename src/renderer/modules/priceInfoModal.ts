@@ -1127,7 +1127,14 @@ export async function initPriceInfoModal(): Promise<void> {
         console.log('[Settings] 네이버 광고 Customer ID 로드됨:', config.naverAdCustomerId);
       }
     }
-    if (dailyPostLimit) dailyPostLimit.value = String(config.dailyPostLimit || 3);
+    // [2026-08-05] 무제한(MAX_SAFE_INTEGER)이 입력창에 그대로 찍히던 문제.
+    // 발행은 무제한으로 두되, 설정 화면에는 권장치를 보여준다.
+    // 사용자가 직접 넣은 현실적인 값(1~99)만 그대로 유지한다.
+    if (dailyPostLimit) {
+      const savedLimit = Number(config.dailyPostLimit);
+      const isRealisticUserSetting = Number.isFinite(savedLimit) && savedLimit > 0 && savedLimit < 100;
+      dailyPostLimit.value = String(isRealisticUserSetting ? savedLimit : 3);
+    }
     if (freeQuotaPublish) freeQuotaPublish.value = String((config as any).freeQuotaPublish ?? 2);
     if (freeQuotaContent) freeQuotaContent.value = String((config as any).freeQuotaContent ?? 5);
     if (freeQuotaMedia) freeQuotaMedia.value = String((config as any).freeQuotaMedia ?? 30);

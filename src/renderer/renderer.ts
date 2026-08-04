@@ -911,6 +911,27 @@ const riskAiValue = (document.querySelector('[data-risk-ai]') as HTMLElement) ??
 const riskLegalValue = (document.querySelector('[data-risk-legal]') as HTMLElement) ?? null;
 const riskSeoValue = (document.querySelector('[data-risk-seo]') as HTMLElement) ?? null;
 const riskDailyValue = (document.querySelector('[data-risk-daily]') as HTMLElement) ?? null;
+
+/**
+ * [2026-08-05] "일일 권장" 표시값.
+ *
+ * v2.11.159에서 발행 한도를 해제하며 dailyPostLimit 기본값을 무제한
+ * (Number.MAX_SAFE_INTEGER)으로 바꿨는데, 이 카드가 그 값을 그대로 렌더링해
+ * 화면에 "9007199254740991회"가 찍혔다.
+ *
+ * 이 카드는 한도가 아니라 **권장치 안내**다. 실제 발행은 무제한으로 두고
+ * 표시만 권장 횟수로 고정한다. 사용자가 설정에서 현실적인 한도를 직접 지정한
+ * 경우에만 그 값을 보여준다.
+ */
+const RECOMMENDED_DAILY_POSTS = 3;
+
+function resolveDailyRecommendationText(): string {
+  const configured = Number((window as any).appConfig?.dailyPostLimit);
+  const isRealisticUserSetting = Number.isFinite(configured)
+    && configured > 0
+    && configured < 100;
+  return `${isRealisticUserSetting ? configured : RECOMMENDED_DAILY_POSTS}회`;
+}
 const riskWarning = (document.querySelector('[data-risk-warning]') as HTMLElement) ?? null;
 
 // 우측 상단 고정 버튼들
@@ -1659,11 +1680,7 @@ function updateRiskIndicators(content: StructuredContent | null): void {
   } catch { /* 알림 실패는 무시 */ }
 
   if (riskDailyValue) {
-    // Read from cached config (set at init time). Falls back to the HTML default "3회"
-    // if config is not yet loaded, so no async IPC call is needed here.
-    const _cfg = (window as any).appConfig;
-    const _limit: number = _cfg?.dailyPostLimit ?? 3;
-    riskDailyValue.textContent = `${_limit}회`;
+    riskDailyValue.textContent = resolveDailyRecommendationText();
   }
 
   if (riskSummaryElement) {
@@ -1685,9 +1702,7 @@ function resetRiskIndicators(): void {
     riskSeoValue.textContent = '-/100';
   }
   if (riskDailyValue) {
-    const _cfg = (window as any).appConfig;
-    const _limit: number = _cfg?.dailyPostLimit ?? 3;
-    riskDailyValue.textContent = `${_limit}회`;
+    riskDailyValue.textContent = resolveDailyRecommendationText();
   }
 }
 (window as any).resetRiskIndicators = resetRiskIndicators;

@@ -55,6 +55,21 @@ describe('contentErrorDiagnostics', () => {
       .toBe('BILLING_OR_CREDIT');
     expect(classifyOpenAiFailure({ status: 429, code: 'rate_limit_exceeded', message: 'too many requests' }).kind)
       .toBe('RATE_LIMIT');
+
+    // [2026-08-05] Gemini 선불 크레딧 소진 — 라이브 로그 실측 문구.
+    // 충전 전까지 복구되지 않으므로 재시도 대상(RATE_LIMIT)이 아니다.
+    expect(classifyOpenAiFailure({
+      status: 429,
+      message: '[429 Too Many Requests] Your prepayment credits are depleted. Please go to AI Studio',
+    }).kind).toBe('BILLING_OR_CREDIT');
+
+    // ⚠️ 반대 방향 잠금: "quota" 표현만으로 billing으로 넘기지 않는다.
+    // v2.10.356에서 OpenAI 429의 일시적 rate limit을 billing으로 오판하던 버그.
+    expect(classifyOpenAiFailure({
+      status: 429,
+      code: 'rate_limit_exceeded',
+      message: 'You exceeded your current quota, please check your plan',
+    }).kind).toBe('RATE_LIMIT');
     expect(classifyOpenAiFailure({ name: 'AbortError', message: 'OpenAI API 호출 시간 초과 (120초)' })).toMatchObject({
       kind: 'REQUEST_TIMEOUT',
       requestMayHaveReachedProvider: true,
