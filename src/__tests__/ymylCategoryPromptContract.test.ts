@@ -108,3 +108,79 @@ describe('YMYL 프롬프트 — 환각을 강제하지 않는다', () => {
     expect(prompt).not.toMatch(/구체적 에피소드 필수/);
   });
 });
+
+/**
+ * [2026-08-05 배치 1] 홈판 health·pet 신규격 계약.
+ *
+ * 26파일 스키마 1차분. 적대 검증에서 확정된 원칙:
+ * - 안전 규율의 SEO판 축자 공유는 결함이 아니다 — 로더가 모드당 1파일만 로드하므로
+ *   두 파일은 한 조립에 공존하지 않는다. 어휘만 갈면 그게 곧 "도메인 어휘 교체본"이다.
+ * - 병원·의료인 이름 평판 금지는 홈판에서도 필수다(경험담에 병원 이름이 실리는 게 흔하다).
+ * - 잘린 것들(변환 의무·괄호 장면 예시·압력 꼬리·GAMMA-7 재진술)은 재도입 금지 —
+ *   상세 사유는 docs/ultraplan 배치 1 산출물 참조.
+ */
+const hfHealth = read('homefeed/health.prompt');
+const hfPet = read('homefeed/pet.prompt');
+const hfBase = read('homefeed/base.prompt');
+
+describe('homefeed YMYL — 우선순위 선언', () => {
+  it.each([['health', hfHealth], ['pet', hfPet]])('%s가 base 우선 + 조건부 발동을 선언한다', (_n, p) => {
+    expect(p).toMatch(/★[\s\S]*?base\.prompt \[SECTION -2\][\s\S]*?우선한다/);
+  });
+
+  it.each([['health', hfHealth], ['pet', hfPet]])('%s의 참조가 homefeed/base에 실재한다', (_n, p) => {
+    const refs = [...p.matchAll(/\[SECTION\s+-?[\d.]+\]|\[GAMMA-\d+\]/g)].map((m) => m[0]);
+    expect(refs.length).toBeGreaterThan(0);
+    for (const ref of new Set(refs)) {
+      expect(hfBase, `${ref} 가 homefeed/base에 없습니다`).toContain(ref);
+    }
+  });
+});
+
+describe('homefeed health — 의료 안전 계약', () => {
+  it('핵심 규율이 실물로 있다', () => {
+    expect(hfHealth).toMatch(/의료인이 아니다/);
+    expect(hfHealth).toMatch(/병원·의원·한의원·의료인 이름/);
+    expect(hfHealth).toMatch(/위험 신호 목록을 만들지 않/);
+    expect(hfHealth).toMatch(/가족·지인/);
+    expect(hfHealth).toMatch(/건강기능식품/);
+    expect(hfHealth).toMatch(/유병률|효과율|부작용 빈도/);
+    expect(hfHealth).toMatch(/상당수/);
+  });
+
+  it('홈판 고유 — 공포 후킹을 막는다', () => {
+    expect(hfHealth).toMatch(/공포로 열지 않는다/);
+  });
+});
+
+describe('homefeed pet — 수의 안전 계약', () => {
+  it('핵심 규율이 실물로 있다', () => {
+    expect(hfPet).toMatch(/수의사가 아니다/);
+    expect(hfPet).toMatch(/품종 이름에서/);
+    expect(hfPet).toMatch(/종에 따라 답이 갈리는 서술을 하지 않는다/);
+    expect(hfPet).toMatch(/다시 계산하지 않는다/);
+    expect(hfPet).toMatch(/목록을 만들지 말고/);
+  });
+
+  it('홈판 고유 — 의인화 단정·죄책감 후킹을 막는다', () => {
+    expect(hfPet).toMatch(/속마음을 단정하지 않는다/);
+    expect(hfPet).toMatch(/죄책감/);
+  });
+});
+
+describe('homefeed YMYL — 날조 유발 문구 부재', () => {
+  it.each([['health', hfHealth], ['pet', hfPet]])('%s에 무조건 포함 지시가 없다', (_n, p) => {
+    const lines = p.split('\n').filter((l) => l.trim().startsWith('-') || l.trim().startsWith('⛔'));
+    for (const line of lines) {
+      expect(line).not.toMatch(/반드시 (포함|넣|쓴다|작성)|필수로 (포함|넣)/);
+    }
+  });
+
+  it.each([['health', hfHealth], ['pet', hfPet]])('%s가 GAMMA-7 재진술로 시작하는 불릿이 없다', (_n, p) => {
+    // "첫 화면에는 …" 패턴은 13파일 공통 base 재진술이었다.
+    const lines = p.split('\n').filter((l) => l.trim().startsWith('-'));
+    for (const line of lines) {
+      expect(line).not.toMatch(/^- 첫 화면에는/);
+    }
+  });
+});
