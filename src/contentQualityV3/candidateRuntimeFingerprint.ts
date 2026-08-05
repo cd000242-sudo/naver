@@ -25,9 +25,12 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/agentCli/agenticEnvelope.ts',
   'src/agentCli/claudeRunner.ts',
   'src/agentCli/codexRunner.ts',
+  'src/agentCli/commandName.ts',
   'src/agentCli/detect.ts',
   'src/agentCli/failureMessage.ts',
-  'src/agentCli/geminiAuthConfig.ts',
+  // geminiAuthConfig.ts is intentionally absent: it is now reached only through
+  // the dynamic import at installer.ts:249, and the closure walker does not
+  // follow dynamic imports. Re-add it if a static import is restored.
   'src/agentCli/geminiRunner.ts',
   'src/agentCli/index.ts',
   'src/agentCli/parse.ts',
