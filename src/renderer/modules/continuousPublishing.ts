@@ -1981,7 +1981,10 @@ export function initContinuousPublishingV2(): void {
 
           continuousQueueV2[editingIndex] = {
             ...item,
-            category: categorySelect?.value || 'entertainment',
+            // Empty means "no category chosen" -> resolveCategory('') = general
+            // (no category prompt). Defaulting to a real category mislabels
+            // every item the user never opened the picker for.
+            category: categorySelect?.value || '',
             contentMode: (contentModeSelect?.value || 'seo') as any,
             toneStyle: toneStyleSelect?.value || 'professional',
             imageSource: imageSourceSelect?.value || getFullAutoImageSource(),
@@ -2827,7 +2830,7 @@ function addItemToQueueV2Impl(): void {
   // [FIX] 카테고리는 상세설정 모달의 hidden input에서 가져오기 (continuous-category-select는 존재하지 않음)
   const category = (document.getElementById('continuous-modal-category-select') as HTMLInputElement)?.value ||
     (document.getElementById('continuous-category-select') as HTMLInputElement)?.value ||
-    'entertainment';
+    '';
   // ✅ [FIX] select 요소에서 콘텐츠 모드 가져오기 (라디오 버튼이 아닌 select 사용)
   const contentModeSelect = document.getElementById('continuous-content-mode-select') as HTMLSelectElement;
   const contentMode = (contentModeSelect?.value || 'seo') as 'seo' | 'homefeed' | 'affiliate' | 'custom' | 'business' | 'mate';
