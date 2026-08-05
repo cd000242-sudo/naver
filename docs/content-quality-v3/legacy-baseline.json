@@ -1,4 +1,5 @@
 {
+  "schemaVersion": 1,
   "algorithm": "sha256",
   "files": [
     {
@@ -38,8 +39,8 @@
     },
     {
       "path": "src/contentJsonPromptFormat.ts",
-      "sha256": "5a622e5b12384bcae484d249f05b268ca77236576fbcd378ee347334e56ec269",
-      "bytes": 29430
+      "sha256": "d152c2d68ecbc4153cd01973d86307f043a9428a50501132f60bf1abc89c465c",
+      "bytes": 30679
     },
     {
       "path": "src/promptLoader.ts",
@@ -138,8 +139,8 @@
     },
     {
       "path": "src/prompts/homefeed/fashion.prompt",
-      "sha256": "8327a90a1b3673e6b0b3bf413d42cee2dd53d968a5f00295a28e445a9e7e369f",
-      "bytes": 722
+      "sha256": "810ef30ffe8108f9916059cb366ae0d0d8822bbd090eae12f158c5fca1f98552",
+      "bytes": 4608
     },
     {
       "path": "src/prompts/homefeed/food.prompt",
@@ -153,13 +154,13 @@
     },
     {
       "path": "src/prompts/homefeed/it.prompt",
-      "sha256": "95ab9f0b08de86cc5e0ffc60cc14a67c2d001fcf8f0b4d105f0aa8c12da93666",
-      "bytes": 629
+      "sha256": "467c163ec82e413a62ee9b3ae3f2bbe15b20e4158e2aa396e30705a2046cf83f",
+      "bytes": 4640
     },
     {
       "path": "src/prompts/homefeed/life.prompt",
-      "sha256": "acf8c9d4cd12bc37b7feaff709800124e1db85d5b6b1f483998407f52dd7abb5",
-      "bytes": 702
+      "sha256": "fab977a20eabba5be249f5e3f3476fda08e72a31e45a8ade0022645c24e2c70a",
+      "bytes": 5191
     },
     {
       "path": "src/prompts/homefeed/living.prompt",
@@ -543,9 +544,8 @@
     }
   ],
   "metadata": {
+    "repositoryHead": "d9e55eb40d34b267c9d59c8f57ad573796f2e5d2",
     "nodeVersion": "v20.20.2",
-    "platform": "win32",
-    "repositoryHead": "154fc3fa2c0eb090c3e4206f9344f694b3c6e904"
-  },
-  "schemaVersion": 1
+    "platform": "win32"
+  }
 }
