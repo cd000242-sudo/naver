@@ -19,6 +19,7 @@ export default defineConfig({
       'src/__tests__/agentLoginCodeFallback.test.ts',
       'src/__tests__/agentHandlersAuthState.test.ts',
       'src/__tests__/agentDetection.test.ts',
+      'src/__tests__/agyLoginProbe.test.ts',
       'src/__tests__/agentSubscriptionEnv.test.ts',
       'src/__tests__/agentStatusRefreshCoordinator.test.ts',
       'src/__tests__/agentStatusRefreshRace.test.ts',
