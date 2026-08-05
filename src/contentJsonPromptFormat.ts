@@ -62,7 +62,7 @@ function buildHeadingsExample(): string {
 function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton: boolean): string {
   const common = `
     "coreSubject": "입력 자료의 핵심을 1문장으로 (자료에 있는 것만)",
-    "whyNow": "이 키워드·주제가 지금 검색·소비되는 이유 추론 — 자료의 시점·사건·반복 언급 단서가 있을 때만 그 단서를 근거로 적고, 없으면 '단서 없음'",
+    "whyNow": "이 키워드가 지금 검색·소비되는 이유를 입력 단서에서 추론 — 단서는 이미 주어져 있다: 뉴스·상위 노출 글의 발행 시점과 사건, 여러 자료에서 반복되는 지점, 지식iN 질문이 보여주는 독자 상황, 월간검색량·문서량 지표. 이 중 실제로 찾은 단서를 근거로 명시한다. 자료 밖 트렌드 이유를 지어내지 않으며, 훑고도 시점 단서가 없으면 '자료 내 시점 단서 없음'이라 적고 자료가 가장 두텁게 다루는 지점을 대신 근거로 쓴다",
     "readerSituation": "독자가 어떤 상황·막힌 지점에서 이 글을 만나는지 추론 (독자에 대한 추론 — 작성자 체험 주장 아님)",`;
   const title = `
     "titleRationale": "titleCandidates 3개가 각각 어떤 각도·어떤 근거를 쓰는지, 도입이 그 약속을 어떻게 갚는지 1~2문장"`;
@@ -106,7 +106,7 @@ function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkelet
 - evidenceMode 판정과 다른 화자·근거를 본문에서 쓰지 않는다. objections 가 비어 있으면 반박 문단을 지어내지 않는다.` : '';
   return `📌 [모든 모드 — 제목보다 추론이 먼저다]
 - preWritingAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
-- whyNow 는 자료 단서가 없으면 '단서 없음'이라 적는다 — 트렌드 이유를 지어내지 않는다.${issueExtra}${modeExtra}
+- whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.${issueExtra}${modeExtra}
 - 각 headings[].imagePrompt 는 imageDirection 을 따르되 그 소제목 본문의 구체 장면에서 도출한다 — 일반 소품 사진 묘사로 도망가지 않는다.
 - preWritingAnalysis 는 설계 메모다 — 그 문장들을 introduction·headings·conclusion 본문에 옮기지 않는다.
 

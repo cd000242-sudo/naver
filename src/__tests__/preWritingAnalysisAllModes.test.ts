@@ -47,10 +47,17 @@ describe('추론 선행 — 전 모드에서 분석이 제목보다 앞이다', 
     expect(a, 'LLM 은 필드 순서대로 생성한다').toBeLessThan(t);
   });
 
-  it.each(MODES)('%s 에 whyNow 환각 가드가 있다', (mode) => {
+  it.each(MODES)('%s 의 whyNow 가 단서를 능동 채굴하게 한다', (mode) => {
+    // 크롤링·검색 API·지표가 이미 단서를 모아 오므로 "단서 없음" 조기 포기를
+    // 허용하지 않는다. 단서 소스를 열거하고 실제로 훑게 강제하되,
+    // 자료 밖 트렌드 이유 날조 금지는 유지한다.
     const f = format(mode);
     expect(f).toContain('"whyNow"');
-    expect(f).toMatch(/단서 없음/);
+    expect(f).toMatch(/뉴스[\s\S]{0,40}상위 노출 글|상위글 반복 지점/);
+    expect(f).toMatch(/지식iN/);
+    expect(f).toMatch(/검색량/);
+    expect(f).toMatch(/지어내지 않/);
+    expect(f).toMatch(/훑고도 시점 단서가 없으면|훑지 않고 건너뛰지 않는다/);
   });
 
   it.each(MODES)('%s 에서 분석을 본문에 옮기지 말라고 명시한다', (mode) => {
