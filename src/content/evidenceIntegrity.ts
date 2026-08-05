@@ -68,6 +68,22 @@ export function hasExplicitFirstPartyEvidence(source?: EvidenceIntegritySource |
     if (meaningful(metadata[key])) return true;
   }
 
+  // [2026-08-05] 후킹 도입부에 적힌 실제 경험도 1차 경험으로 인정한다.
+  //   hookHint 는 프롬프트에 들어가 본문에 반영되는데 인정 경로에는 없어서,
+  //   사용자가 후킹란에 진짜 경험을 적을수록 본문 1인칭이 "근거 없음"으로
+  //   하드 실패하는 자기모순이 있었다(앱이 시키는 대로 쓰면 감점되는 구조).
+  //   단, 무조건 인정하면 수사적 훅("이 시간에 검색하셨다면…")만으로 1인칭이
+  //   글 전체에서 열려 체험 날조 license 가 된다. 그래서 **내용 기준**으로 —
+  //   출력을 감점할 때 쓰는 것과 같은 패턴(FIRST_PERSON_EXPERIENCE_PATTERNS)이
+  //   훅 안에서 매치될 때만 근거로 센다. 같은 잣대라야 대칭이 맞는다.
+  const hookHint = meaningful((source as { hookHint?: unknown }).hookHint);
+  if (hookHint && FIRST_PERSON_EXPERIENCE_PATTERNS.some((pattern) => {
+    pattern.lastIndex = 0;
+    return pattern.test(hookHint);
+  })) {
+    return true;
+  }
+
   return /===\s*(?:작성자|사용자)\s*직접\s*(?:사용|경험)\s*메모\s*===/i.test(String(source.rawText || ''));
 }
 
