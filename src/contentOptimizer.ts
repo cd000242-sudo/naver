@@ -325,10 +325,15 @@ export function optimizeContentForNaver(
   // 4. 전문성 표현 강화
   result = enhanceExpertise(result, silent);
 
-  // 5. E-E-A-T 강화 — Phase 3: skipDictInjection 시 스킵 (LLM rubric 모드 등)
-  if (!skipDictInjection) {
-    result = enhanceEEAT(result, toneStyle, silent);
-  } else if (!silent) {
+  // 5. [2026-08-05] E-E-A-T 사전 주입을 파이프라인에서 분리했다.
+  //   문단 경계가 복원되기 전에는 본문이 한 덩어리라 이 단계가 사실상 잠들어 있었다.
+  //   문단을 살리자마자 authority 사전이 매 글에 없는 출처를 귀속시키기 시작했다
+  //   (실측 40회 중 40회: '공식 발표에 따르면', '신뢰할 수 있는 데이터에 따르면',
+  //   '검증된 리포트를 보면', '공신력 있는 출처에 의하면').
+  //   이는 base H6(출처 언급 절대 금지)와 F1(자료 외 사실 금지)을 동시에 위반한다.
+  //   expertise·trust 도 자료 없는 분석을 주장하므로('관련 데이터를 분석해보면',
+  //   '팩트에 기반하여') 같은 결함 종류다. 함수와 사전은 남긴다.
+  if (skipDictInjection && !silent) {
     console.log('[ContentOptimizer] ⏭️ E-E-A-T 사전 주입 스킵');
   }
 
@@ -433,33 +438,50 @@ function removeLowQualityPatterns(text: string, silent: boolean = false): string
 }
 
 /**
- * 연속 중복 문장 제거
+ * 연속 중복 문장 제거.
+ *
+ * [2026-08-05] 문단 단위로 처리하도록 바꿨다. 이전에는 본문 전체를
+ * `/(?<=[.!?])\s+/` 로 쪼갰는데 그 `\s+` 가 문단 사이 `\n\n` 까지 삼켰고,
+ * 마지막에 `join(' ')` 로 공백 하나를 넣어 붙이면서 모든 문단 경계가 사라졌다
+ * (실측: 문단 8개 → 1개, 개행 0개). 중복 판정도 글 전체에 걸려서 문단마다
+ * 반복되는 정상 문장이 통째로 삭제됐다.
+ * 프롬프트는 "한 단락 2~3문장(모바일 1화면)"을 요구한다 — 정반대였다.
  */
 function removeConsecutiveDuplicates(text: string): string {
-  const sentences = text.split(/(?<=[.!?])\s+/);
-  const uniqueSentences: string[] = [];
-  const seenSentences = new Set<string>();
+  // 문단 구분자를 보존하기 위해 캡처 그룹으로 split 한다.
+  const segments = text.split(/(\n{2,})/);
+  let removedTotal = 0;
 
-  for (const sentence of sentences) {
-    // 문장의 핵심 부분 추출 (공백, 이모지 제거)
-    const normalized = sentence
-      .replace(/[\u{1F300}-\u{1F9FF}]/gu, '')
-      .replace(/\s+/g, '')
-      .toLowerCase()
-      .slice(0, 50); // 앞 50자만 비교
+  const processed = segments.map((segment) => {
+    if (/^\n{2,}$/.test(segment)) return segment; // 구분자는 그대로 둔다
 
-    if (!seenSentences.has(normalized) || normalized.length < 10) {
-      uniqueSentences.push(sentence);
-      seenSentences.add(normalized);
+    const sentences = segment.split(/(?<=[.!?])[ \t]+/);
+    const uniqueSentences: string[] = [];
+    // 중복 판정은 문단 안에서만 한다 — 문단이 다르면 주제가 다르다.
+    const seenSentences = new Set<string>();
+
+    for (const sentence of sentences) {
+      const normalized = sentence
+        .replace(/[\u{1F300}-\u{1F9FF}]/gu, '')
+        .replace(/\s+/g, '')
+        .toLowerCase()
+        .slice(0, 50); // 앞 50자만 비교
+
+      if (!seenSentences.has(normalized) || normalized.length < 10) {
+        uniqueSentences.push(sentence);
+        seenSentences.add(normalized);
+      }
     }
+
+    removedTotal += sentences.length - uniqueSentences.length;
+    return uniqueSentences.join(' ');
+  });
+
+  if (removedTotal > 0) {
+    console.log(`[ContentOptimizer] 중복 문장 ${removedTotal}개 제거`);
   }
 
-  const removed = sentences.length - uniqueSentences.length;
-  if (removed > 0) {
-    console.log(`[ContentOptimizer] 중복 문장 ${removed}개 제거`);
-  }
-
-  return uniqueSentences.join(' ');
+  return processed.join('');
 }
 
 /**
@@ -686,7 +708,9 @@ function finalCleanup(text: string): string {
   result = result.replace(/\n{3,}/g, '\n\n');
 
   // 문장 시작 공백 정리
-  result = result.replace(/\n\s+/g, '\n');
+  // [2026-08-05] `\s` 는 개행을 포함하므로 `\n\n` 이 `\n` 으로 줄어 문단 경계가
+  //   사라졌다. 들여쓰기(공백·탭)만 제거하도록 한정한다.
+  result = result.replace(/\n[ \t]+/g, '\n');
 
   // 마침표 후 공백 확인
   result = result.replace(/\.([가-힣A-Za-z])/g, '. $1');
