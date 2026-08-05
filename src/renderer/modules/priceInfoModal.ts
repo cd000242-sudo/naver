@@ -392,16 +392,9 @@ export async function initPriceInfoModal(): Promise<void> {
   const reopenPriceInfoBtn = document.getElementById('reopen-price-info-btn');
   if (reopenPriceInfoBtn) reopenPriceInfoBtn.addEventListener('click', openPriceModal);
 
-  // AI 텍스트 엔진 설정 진입 시 비용표·추천을 "먼저" 1회 자동 표시 (사용자 요청 — Gemini 쪽에 묻으면 안 봄).
-  const navTextEngineBtn = document.getElementById('nav-text-engine-btn');
-  if (navTextEngineBtn && priceInfoModal) {
-    navTextEngineBtn.addEventListener('click', () => {
-      if ((window as any).__priceModalAutoShown) return; // 세션 1회만 — 매번 띄워 귀찮게 하지 않음
-      (window as any).__priceModalAutoShown = true;
-      // 섹션 전환 직후 자연스럽게: 약간의 지연 후 모달 표시
-      setTimeout(openPriceModal, 350);
-    });
-  }
+  // [2026-08-06] 텍스트 엔진 설정 진입 시 비용표 자동 표시 제거 (사용자 요청 —
+  // 엔진을 고르려는 흐름을 모달이 끊는다). 보고 싶을 때는 우측 상단
+  // "💰 비용표·추천" 재오픈 버튼으로 연다.
 
   // ✅ [2026-03-19] 통합 API 비용 대시보드 초기화
   initApiCostDashboard();
@@ -1015,10 +1008,18 @@ export async function initPriceInfoModal(): Promise<void> {
         ? normalizeGeminiTextModelId(rawActiveTextModel)
         : rawActiveTextModel;
       const modelRadios = document.getElementsByName('primaryGeminiTextModel') as NodeListOf<HTMLInputElement>;
+      let radioMatched = false;
       modelRadios.forEach(radio => {
         radio.checked = (radio.value === activeTextModel);
+        if (radio.checked) radioMatched = true;
       });
       console.log('[Settings] Gemini 텍스트 주력 모델 로드됨:', activeTextModel, '(원본:', config.primaryGeminiTextModel || 'undefined', ')');
+      // [2026-08-06] 저장된 모델이 현재 라디오 목록에 없으면(업데이트로 id 개편)
+      // 기본값을 강제 체크하지 않고 안내만 한다 — 저장 경로가 기존값을 유지하므로
+      // 사용자가 다시 고르기 전까지 선택이 바뀌지 않는다.
+      if (!radioMatched && config.primaryGeminiTextModel) {
+        console.warn(`[Settings] ⚠️ 저장된 텍스트 엔진(${activeTextModel})이 현재 목록에 없습니다 — 목록에서 다시 선택해 주세요.`);
+      }
 
       // ✅ [2026-02-22 FIX] 로드 시 nav-text-engine-status UI 업데이트
       // ✅ [v2.7.78] deprecate 모델 ID 자동 마이그레이션 + 기본값 보장
@@ -1039,10 +1040,26 @@ export async function initPriceInfoModal(): Promise<void> {
           'agent-claude': '🤖 에이전트 (Claude Code · 별도 API 키 불필요)',
           'agent-gemini': '🚀 Gemini 에이전트 (Antigravity · 별도 API 키 불필요)',
         };
-        navStatusEl.textContent = `현재: ${modelNames[activeTextModel] || activeTextModel}`;
+        navStatusEl.textContent = radioMatched
+          ? `현재: ${modelNames[activeTextModel] || activeTextModel}`
+          : `현재: ${activeTextModel} — 목록에서 다시 선택해 주세요`;
       }
       // ✅ 에이전트 모드 설치/로그인 상태 뱃지 갱신 (비동기 — 로드 차단 안 함)
       void refreshAgentStatusBadges();
+
+      // [2026-08-06] 최초 실행(엔진 미선택)이면 환경설정의 텍스트 엔진 섹션을 먼저
+      // 띄워 선택을 유도한다 — 엔진을 고르지 않고 발행부터 시작하는 사용자 대응.
+      if (!config.primaryGeminiTextModel) {
+        setTimeout(() => {
+          try {
+            const openBtn = document.querySelector('[data-open-settings]') as HTMLElement | null;
+            openBtn?.click();
+            setTimeout(() => {
+              (document.getElementById('nav-text-engine-btn') as HTMLElement | null)?.click();
+            }, 250);
+          } catch { /* UI 미준비 — 다음 진입 시 다시 시도됨 */ }
+        }, 800);
+      }
     }
 
     // ✅ [2026-06-05] Gemini 플랜 로드 (텍스트+이미지 공통)
@@ -1423,9 +1440,16 @@ export async function initPriceInfoModal(): Promise<void> {
         const naverAdSecretKeyValue = readSecretInputValue('naver-ad-secret-key', currentConfig?.naverAdSecretKey);
         const leonardoaiApiKeyValue = readSecretInputValue('leonardoai-api-key', currentConfig?.leonardoaiApiKey);
         const deepinfraApiKeyValue = readSecretInputValue('deepinfra-api-key', currentConfig?.deepinfraApiKey);
+        // [2026-08-06] 업데이트로 라디오 목록이 바뀌어 저장된 모델이 어느 라디오와도
+        // 매칭되지 않으면 :checked 가 null 이다. 이때 기본값으로 대체하면 사용자
+        // 선택이 조용히 바뀐다("업데이트하면 엔진이 바뀐다" 실사용 불만) —
+        // 기존 설정값을 유지한다.
         const selectedTextModel = (
           document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement | null
-        )?.value;
+        )?.value
+          ?? (typeof currentConfig?.primaryGeminiTextModel === 'string'
+            ? currentConfig.primaryGeminiTextModel
+            : undefined);
         const safeTextSelection = resolveTextModelSelection(
           selectedTextModel,
           claudeApiKeyValue,
