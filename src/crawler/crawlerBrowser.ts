@@ -25,6 +25,12 @@ import {
   listAdsPowerProfiles
 } from '../main/utils/adsPowerManager.js';
 import { getProxyUrl, reportProxyFailed, reportProxySuccess } from './utils/proxyManager.js';
+import {
+    detectAccessGate,
+    describeAccessGate,
+    isProductPageReady,
+    requiresManualUnlock,
+} from './adultVerificationPolicy.js';
 
 // ═══════════════════════════════════════════════════
 // 타입 정의
@@ -561,6 +567,58 @@ async function waitForCaptchaSolved(page: Page, maxWaitMs = 120000): Promise<boo
 }
 
 /**
+ * ✅ [2026-08-06] 성인인증/로그인 게이트 대기 — 캡차와 동일 패턴.
+ *
+ * 라이브 실측(주류 상품): 감지기(adultVerificationPolicy)가 미배선이라 5개 크롤
+ * 전략이 인증 화면을 "결과 없음"으로 오인하고 페이지를 닫아, 사용자가 로그인할
+ * 틈 없이 창이 껐다 켜졌다를 반복했다. 게이트 감지 시 페이지를 유지한 채 사용자
+ * 완료를 대기하고, 종료 판정은 "상품 페이지 도달"(긍정)로만 한다.
+ *
+ * @returns true = 게이트 없음 또는 사용자 인증 완료, false = 대기 타임아웃
+ */
+export async function waitForAccessGateUnlocked(page: Page, maxWaitMs = 180000): Promise<boolean> {
+    const readGateInput = async (): Promise<{ url: string; title: string; bodyText: string }> => {
+        try {
+            const inner = await page.evaluate(() => ({
+                title: document.title || '',
+                bodyText: (document.body?.innerText || '').slice(0, 4000),
+            }));
+            return { url: page.url(), ...inner };
+        } catch {
+            return { url: page.url(), title: '', bodyText: '' };
+        }
+    };
+
+    const first = await readGateInput();
+    const kind = detectAccessGate(first);
+    if (!requiresManualUnlock(kind)) return true;
+
+    console.log(`[CrawlerBrowser] ${describeAccessGate(kind)}`);
+    try { await page.bringToFront(); } catch {}
+
+    const start = Date.now();
+    while (Date.now() - start < maxWaitMs) {
+        await page.waitForTimeout(3000);
+
+        const now = await readGateInput();
+        if (isProductPageReady(now)) {
+            const elapsed = Math.round((Date.now() - start) / 1000);
+            console.log(`[CrawlerBrowser] ✅ 성인인증/로그인 완료 — 상품 페이지 도달 (${elapsed}초 소요)`);
+            await page.waitForTimeout(2000); // 리다이렉트 후 렌더 안정화
+            return true;
+        }
+
+        const remaining = Math.round((maxWaitMs - (Date.now() - start)) / 1000);
+        if (remaining > 0 && remaining % 15 < 3) {
+            console.log(`[CrawlerBrowser] ⏳ 인증 완료 대기 중... (남은: ${remaining}초)`);
+        }
+    }
+
+    console.log('[CrawlerBrowser] ⏰ 인증 대기 타임아웃 — 페이지를 이동하지 않고 실패 반환 (로그인 세션 보호)');
+    return false;
+}
+
+/**
  * ✅ [2026-03-19] 자동 리트라이 + 캡차 대기
  * 캡차 감지 시 사용자가 풀 수 있도록 최대 120초 대기 후 리트라이
  */
@@ -595,6 +653,27 @@ export async function navigateWithRetry(page: Page, url: string, maxRetries = 3)
             console.log('[CrawlerBrowser] ⚠️ 캡차 해결됐지만 에러 페이지 → 리트라이');
         }
     } else {
+        // [2026-08-06] 성인인증/로그인 게이트 — 에러 판정보다 먼저. 인증 화면은
+        // 에러가 아니고, 여기서 페이지를 닫거나 다른 URL 로 이동하면 사용자의
+        // 로그인 기회가 사라진다(라이브: 창 껐다 켜졌다 반복).
+        const gateKind = detectAccessGate({
+            url: page.url(),
+            ...(await page.evaluate(() => ({
+                title: document.title || '',
+                bodyText: (document.body?.innerText || '').slice(0, 4000),
+            })).catch(() => ({ title: '', bodyText: '' }))),
+        });
+        if (requiresManualUnlock(gateKind)) {
+            const unlocked = await waitForAccessGateUnlocked(page);
+            if (unlocked) {
+                if (_currentProxyUrl) reportProxySuccess(_currentProxyUrl);
+                return true;
+            }
+            // 게이트 타임아웃 — 워밍업 리트라이(다른 URL 방문)는 인증 세션을
+            // 해치므로 타지 않고 즉시 실패 반환.
+            return false;
+        }
+
         // 캡차가 아닌 경우 일반 에러 체크
         const isError = await checkForError(page);
         if (!isError) return true; // 정상!
@@ -651,6 +730,24 @@ export async function navigateWithRetry(page: Page, url: string, maxRetries = 3)
                 }
             }
             continue; // 캡차 타임아웃이면 다음 리트라이
+        }
+
+        // [2026-08-06] 리트라이에서도 성인인증/로그인 게이트 확인 — 첫 시도와 동일.
+        const retryGate = detectAccessGate({
+            url: page.url(),
+            ...(await page.evaluate(() => ({
+                title: document.title || '',
+                bodyText: (document.body?.innerText || '').slice(0, 4000),
+            })).catch(() => ({ title: '', bodyText: '' }))),
+        });
+        if (requiresManualUnlock(retryGate)) {
+            const unlocked = await waitForAccessGateUnlocked(page);
+            if (unlocked) {
+                console.log(`[CrawlerBrowser] ✅ 리트라이 ${r + 1} 인증 완료 → 성공!`);
+                if (_currentProxyUrl) reportProxySuccess(_currentProxyUrl);
+                return true;
+            }
+            return false; // 게이트 타임아웃 — 세션 보호를 위해 추가 이동 없이 종료
         }
 
         const isError = await checkForError(page);
