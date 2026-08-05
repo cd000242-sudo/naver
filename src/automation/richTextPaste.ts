@@ -1053,7 +1053,10 @@ function buildReadableParagraphs(paragraph: string, maxChars: number): string[] 
  */
 const QUOTED_SEGMENT_PATTERNS: readonly RegExp[] = [
   /"[^"]{2,}"/,
-  /'[^']{2,}'/,
+  // Opening quote must follow a space, bracket, or line start — otherwise
+  // "don't" / "Levi's" register as quotes. The closing side stays unconstrained
+  // so Korean particles ("'맞다'고 했다") still count.
+  /(?:^|[\s([{"“「『])'[^'\n]{2,}'/,
   /“[^”]{2,}”/, // “ ”
   /‘[^’]{2,}’/, // ‘ ’
   /「[^」]{2,}」/, // 「 」
@@ -1068,7 +1071,9 @@ const QUOTED_SEGMENT_PATTERNS: readonly RegExp[] = [
  * 잡아야 실제 경험 문장이 걸린다.
  */
 const EXPERIENCE_PATTERNS: readonly RegExp[] = [
-  /(?:써|사용해|해|가|먹어|입어|발라|타|읽어|들어|만져)\s?(?:보니|봤|본\s?결과)/,
+  // A bare "가" is indistinguishable from the subject particle ("누가 보니").
+  // "직접 가보니" is already covered by the 직접-prefixed pattern below.
+  /(?:써|사용해|해|먹어|입어|발라|타|읽어|들어|만져)\s?(?:보니|봤|본\s?결과)/,
   /(?:갔|왔|했|썼)더니/,
   /직접\s?(?:써|해|가|먹어|사용)/,
   /느꼈|느껴졌|체감/,
@@ -1093,6 +1098,18 @@ function scoreImportantSentence(value: string): number {
   if (/[!?]/.test(plain)) score += 1;
   if (/\d|%/.test(plain)) score += 1;
   return score;
+}
+
+/**
+ * Tie-break rank for equally scored sentences: quote (2) beats experience (1)
+ * beats everything else (0). A keyword sentence scores 3+1 and ties with an
+ * experience sentence, so without this the earlier sentence always won.
+ */
+function highlightPriority(value: string): number {
+  const plain = stripInlineMarkdown(value).replace(/\s+/g, ' ').trim();
+  if (matchesAny(QUOTED_SEGMENT_PATTERNS, plain)) return 2;
+  if (matchesAny(EXPERIENCE_PATTERNS, plain)) return 1;
+  return 0;
 }
 
 function extractHighlightTerms(text: string): string[] {
@@ -1271,7 +1288,7 @@ type RenderNode =
   | { type: 'list'; html: string; plain: string; count: number }
   | { type: 'heading'; id: string; title: string; level: number; index: number }
   | { type: 'qa-question'; text: string; plain: string; sectionIndex: number }
-  | { type: 'paragraph'; text: string; plain: string; score: number; sectionIndex: number };
+  | { type: 'paragraph'; text: string; plain: string; score: number; priority: number; sectionIndex: number };
 
 interface HeadingEntry {
   id: string;
@@ -1301,13 +1318,16 @@ function buildTocHtml(headings: HeadingEntry[], theme: SoftHeadingTheme): { html
 }
 
 function selectImportantParagraphs(nodes: RenderNode[], maxHighlights: number): Set<number> {
-  const bestBySection = new Map<number, { index: number; score: number }>();
+  const bestBySection = new Map<number, { index: number; score: number; priority: number }>();
 
   nodes.forEach((node, index) => {
     if (node.type !== 'paragraph' || node.score < SECTION_HIGHLIGHT_MIN_SCORE) return;
     const current = bestBySection.get(node.sectionIndex);
-    if (!current || node.score > current.score) {
-      bestBySection.set(node.sectionIndex, { index, score: node.score });
+    const wins = !current
+      || node.score > current.score
+      || (node.score === current.score && node.priority > current.priority);
+    if (wins) {
+      bestBySection.set(node.sectionIndex, { index, score: node.score, priority: node.priority });
     }
   });
 
@@ -1468,6 +1488,7 @@ export function buildMobileRichHtml(text: string, options: MobileRichHtmlOptions
           text: chunk,
           plain: stripInlineMarkdown(chunk),
           score: scoreImportantSentence(chunk),
+          priority: highlightPriority(chunk),
           sectionIndex: currentSectionIndex,
         });
       }

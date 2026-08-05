@@ -85,3 +85,64 @@ describe('하이라이트 — 남발 방지', () => {
     expect(/background-color:(?!#ffffff)/.test(result.html)).toBe(false);
   });
 });
+
+
+/**
+ * [2026-08-05 후속] 위 규칙은 "문장이 하나뿐인" 입력에서만 검증돼 있었다.
+ *
+ * 실제 글은 한 소제목 안에 여러 문장이 있고 섹션당 하나만 칠해진다.
+ * 키워드 1개(+3) + 길이(+1) = 4 는 인용(+4)·경험(+3, +길이 1 = 4)과 **동점**이라,
+ * 동점이면 먼저 나온 문장(대개 키워드 문장)이 이기고 있었다. 그래서 8/5 1차 패치는
+ * 문장이 경쟁하지 않는 입력에서만 효과가 있었다.
+ *
+ * 아래 문장들은 단독 실행으로 점수를 실측해 고른 것이다 — 각 쌍이 실제로 동점이라야
+ * tie-break을 검증한다. 문장을 바꿀 때는 반드시 다시 실측할 것.
+ */
+function highlightedInSection(first: string, second: string): string[] {
+  const result = buildMobileRichHtml(['## 소제목', first, second].join('\n\n'), {
+    highlight: true,
+    maxChunkChars: 200,
+    ...themes,
+  });
+  return [...result.html.matchAll(/background-color:(?!#ffffff)[^"]*"[^>]*>([^<]{5,})/g)]
+    .map((m) => m[1].replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim())
+    .filter((s) => s !== '소제목');
+}
+
+const KEYWORD_SENTENCE = '중요한 것은 물통 위치와 소음 수준을 함께 보는 일입니다.';
+const EXPERIENCE_SENTENCE = '직접 써보니 물통을 매번 옆으로 빼야 하는 구조였습니다.';
+const QUOTE_SENTENCE = '"물때가 줄었어요" 라는 반응이 있었습니다.';
+
+describe('하이라이트 — 같은 점수면 인용·경험이 이긴다', () => {
+  it('키워드 문장이 먼저 와도 경험 문장을 칠한다', () => {
+    expect(highlightedInSection(KEYWORD_SENTENCE, EXPERIENCE_SENTENCE)).toEqual([EXPERIENCE_SENTENCE]);
+  });
+
+  it('키워드 문장이 먼저 와도 인용 문장을 칠한다', () => {
+    expect(highlightedInSection(KEYWORD_SENTENCE, QUOTE_SENTENCE)).toEqual([QUOTE_SENTENCE]);
+  });
+
+  it('경험보다 인용을 우선한다', () => {
+    expect(highlightedInSection(EXPERIENCE_SENTENCE, QUOTE_SENTENCE)).toEqual([QUOTE_SENTENCE]);
+  });
+});
+
+describe('하이라이트 — 인용·경험 오탐', () => {
+  it('영문 축약형·소유격 아포스트로피는 인용이 아니다', () => {
+    // 이 문장은 인용으로 인정될 때만 점수가 임계값을 넘는다 (키워드 0개).
+    expect(isHighlighted("직원분은 it's the shop's rule 이라고만 짧게 덧붙였다는 이야기입니다.")).toBe(false);
+  });
+
+  it('닫는 따옴표 뒤 조사는 그대로 인용으로 인정한다', () => {
+    expect(isHighlighted("판매자는 '재고가 없다'고 안내했고 그대로 마감됐습니다.")).toBe(true);
+    expect(isHighlighted("'이건 아니다'라고 판단해서 결국 반품 절차를 밟았습니다.")).toBe(true);
+  });
+
+  it('주격조사 "가"는 경험 서술이 아니다', () => {
+    expect(isHighlighted('누가 보니 이상하다는 말이 나왔다는 이야기도 있었습니다.')).toBe(false);
+  });
+
+  it('"직접 가보니"는 경험으로 계속 인정한다 (회귀 방지)', () => {
+    expect(isHighlighted('직접 가보니 주차장이 좁아서 한참을 돌아야 했습니다.')).toBe(true);
+  });
+});
