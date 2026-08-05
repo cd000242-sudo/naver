@@ -559,7 +559,9 @@ async function generateTitleOnlyPatch(
       'it_review': 'it', 'it': 'it', 'fashion': 'fashion', 'food': 'food',
       'travel': 'travel', 'lifestyle': 'life', 'life': 'life', 'living': 'living',
       'parenting': 'parenting', 'pet': 'pet', 'society': 'society', 'tips': 'tips',
-      'shopping_review': 'living', 'finance': 'society'
+      // [2026-08-06] 본문 라우팅('쇼핑'→life)과 정합 — 상품 리뷰 제목이 리빙(인테리어)
+      // 규격을 받던 어긋남 종결 (배치 4a 이관 판단).
+      'shopping_review': 'life', 'finance': 'society'
     };
 
     // 1. 카테고리별 프롬프트 시도 (mode/category.prompt)
