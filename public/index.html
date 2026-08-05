@@ -1282,7 +1282,20 @@
                                 <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">1줄=자연스럽게 녹임 · 2~3줄=도입부를 그 순서로 구성</span>
                             </label>
                             <textarea id="unified-hook-sentence" rows="3" maxlength="1500"
-                                placeholder="예: 3주 써보니 아이 코막힘이 사라졌어요&#10;줄바꿈으로 최대 3줄 (홈판 도입부 3줄 지정)"
+                                placeholder="예: 가습기 물때 때문에 검색하셨다면 세척 주기부터 갈립니다&#10;줄바꿈으로 최대 3줄 (홈판 도입부 3줄 지정)"
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 8px; background: var(--bg-primary); color: var(--text-strong); font-size: 0.95rem; margin-bottom: 1rem; resize: vertical; font-family: inherit;"></textarea>
+
+                            <!-- [2026-08-05] 내 경험 메모 (선택) — 비워두면 기존과 동일하게 동작한다.
+                                 채우면 프롬프트의 "사용자 메모가 있을 때만 1인칭" 조건이 비로소 참이 되고,
+                                 근거 판정기(evidenceIntegrity)가 1차 경험으로 인정한다. -->
+                            <label for="unified-personal-experience"
+                                style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.88rem; color: var(--text-strong);">
+                                <span style="font-size: 1rem;">📝</span>
+                                <strong>내 경험 메모 (선택)</strong>
+                                <span style="font-size: 0.75rem; color: var(--text-muted); margin-left: auto;">적으면 그 범위 안에서만 1인칭으로 씁니다 · 비워두면 안 씁니다</span>
+                            </label>
+                            <textarea id="unified-personal-experience" rows="3" maxlength="4000"
+                                placeholder="직접 겪은 것만 적어주세요. 언제·무엇을·어떤 조건에서 했고 결과가 어땠는지 구체적일수록 좋습니다.&#10;예: 3월에 신청했는데 소득 기준 서류를 빠뜨려서 반려됐고, 재신청은 다음 달에야 가능했습니다."
                                 style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-medium); border-radius: 8px; background: var(--bg-primary); color: var(--text-strong); font-size: 0.95rem; margin-bottom: 1rem; resize: vertical; font-family: inherit;"></textarea>
 
                             <!-- 실시간 정보 수집 옵션 -->

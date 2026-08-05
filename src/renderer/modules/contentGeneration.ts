@@ -561,7 +561,7 @@ export async function generateContentFromUrl(
   // ✅ [2026-07-25] 사용자 후킹 도입부 (선택, 최대 3줄·글자수 제한 없음). 개행 보존 —
   // 줄 분리/자르기의 최종 정규화는 main측 contentHookIntroPolicy가 담당.
   const hookInputEl = document.getElementById('unified-hook-sentence') as HTMLTextAreaElement | null;
-  const hookHint = (hookInputEl?.value || '').replace(/\r\n/g, '\n').trim().slice(0, 200) || undefined;
+  const hookHint = (hookInputEl?.value || '').replace(/\r\n/g, '\n').trim().slice(0, 1500) || undefined;
 
   // ✅ 리뷰형/정보형 선택 확인
   const selectedContentType = (window as any).selectedContentType || 'info';
@@ -573,9 +573,19 @@ export async function generateContentFromUrl(
   const categoryHint = resolveArticleTypeHint(articleType);
   const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
   const businessInfo = collectBusinessInfo(contentMode);
-  const personalExperience = contentMode === 'affiliate'
-    ? ((document.getElementById('shopping-connect-personal-experience') as HTMLTextAreaElement | null)?.value || '').trim().slice(0, 4000) || undefined
-    : undefined;
+  // [2026-08-05] SEO·홈판에도 경험 메모를 연다(선택형).
+  //   13개 카테고리 프롬프트가 "사용자 메모가 있을 때만 1인칭"을 계약하는데,
+  //   메모를 받을 경로가 쇼핑커넥트뿐이라 SEO·홈판에서는 영구히 거짓인 조건이었다.
+  //   뒷단은 이미 열려 있다 — main.ts 는 모드 조건 없이 받아 rawText 에
+  //   "=== 작성자 직접 사용 메모 ===" 마커로 덧붙이고, evidenceIntegrity 도 그 마커를
+  //   1차 경험으로 인정한다. 막고 있던 것은 이 게이트뿐이었다.
+  //   비워두면 undefined 라 main.ts 의 `if (personalExperience)` 에 진입하지 않는다
+  //   = 기존 동작과 동일. 완전 옵트인이다.
+  const personalExperience = (
+    (document.getElementById('shopping-connect-personal-experience') as HTMLTextAreaElement | null)?.value
+    || (document.getElementById('unified-personal-experience') as HTMLTextAreaElement | null)?.value
+    || ''
+  ).trim().slice(0, 4000) || undefined;
   const contentPolicyContext = buildRendererContentPolicyContext({
     title: manualTitleOverride || keywordList[0] || url,
     content: '',
@@ -1125,9 +1135,19 @@ export async function generateContentFromKeywords(
   const categoryHint = resolveArticleTypeHint(articleType);
   const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
   const businessInfo = collectBusinessInfo(contentMode);
-  const personalExperience = contentMode === 'affiliate'
-    ? ((document.getElementById('shopping-connect-personal-experience') as HTMLTextAreaElement | null)?.value || '').trim().slice(0, 4000) || undefined
-    : undefined;
+  // [2026-08-05] SEO·홈판에도 경험 메모를 연다(선택형).
+  //   13개 카테고리 프롬프트가 "사용자 메모가 있을 때만 1인칭"을 계약하는데,
+  //   메모를 받을 경로가 쇼핑커넥트뿐이라 SEO·홈판에서는 영구히 거짓인 조건이었다.
+  //   뒷단은 이미 열려 있다 — main.ts 는 모드 조건 없이 받아 rawText 에
+  //   "=== 작성자 직접 사용 메모 ===" 마커로 덧붙이고, evidenceIntegrity 도 그 마커를
+  //   1차 경험으로 인정한다. 막고 있던 것은 이 게이트뿐이었다.
+  //   비워두면 undefined 라 main.ts 의 `if (personalExperience)` 에 진입하지 않는다
+  //   = 기존 동작과 동일. 완전 옵트인이다.
+  const personalExperience = (
+    (document.getElementById('shopping-connect-personal-experience') as HTMLTextAreaElement | null)?.value
+    || (document.getElementById('unified-personal-experience') as HTMLTextAreaElement | null)?.value
+    || ''
+  ).trim().slice(0, 4000) || undefined;
   const contentPolicyContext = buildRendererContentPolicyContext({
     title: manualTitleOverride || title || keywordList[0] || keywords,
     content: crawledText || '',
@@ -1180,7 +1200,7 @@ export async function generateContentFromKeywords(
       // ✅ [2026-07-25] 후킹 도입부(최대 3줄) — 기존엔 URL 플로우만 읽어 키워드
       // 생성에서는 입력이 조용히 무시되던 갭. 개행 보존해 전달.
       hookHint: ((document.getElementById('unified-hook-sentence') as HTMLTextAreaElement)?.value || '')
-        .replace(/\r\n/g, '\n').trim().slice(0, 200) || undefined,
+        .replace(/\r\n/g, '\n').trim().slice(0, 1500) || undefined,
       businessInfo,
       contentPolicyContext,
       manualTitleOverride,
