@@ -595,6 +595,12 @@ export async function waitForAccessGateUnlocked(page: Page, maxWaitMs = 180000):
 
     console.log(`[CrawlerBrowser] ${describeAccessGate(kind)}`);
     try { await page.bringToFront(); } catch {}
+
+    // [2026-08-06 실측] 네이버 로그인 쿠키는 "로그인 상태 유지"를 켜지 않으면 세션
+    // 쿠키라 브라우저 종료와 함께 사라진다 — 인증을 마쳐도 다음 수집에서 다시 로그인
+    // 화면이 떴다. 자동으로 켜 주려 했으나 현행 로그인 페이지에는 체크박스 자체가
+    // 없었다(DOM 실측: input[type=checkbox] 0개, #keep 부재 — 네이버가 UI 개편).
+    // 자동 조작은 포기하고 안내 문구로만 유도한다(describeAccessGate).
     // [2026-08-06] 크롤러 창은 생성 직후 최소화된다 — bringToFront(탭 전환)만으로는
     // 사용자가 로그인 화면을 볼 수 없다. CDP 로 창 상태를 복원해 화면에 띄운다.
     try {
@@ -609,21 +615,44 @@ export async function waitForAccessGateUnlocked(page: Page, maxWaitMs = 180000):
         }
     } catch { /* CDP 미지원(테스트 mock 등) — 탭 전환만으로 진행 */ }
 
-    const start = Date.now();
-    while (Date.now() - start < maxWaitMs) {
-        await page.waitForTimeout(3000);
+    // [2026-08-06 라이브] 인증은 로그인 → 실명확인 → 본인인증(아이핀/휴대폰) 여러 단계다.
+    // 고정 타이머는 진행 중인 사용자를 중간에 끊는다(실측: 아이핀 인증이 180초를 넘김).
+    // 화면이 바뀌면 = 사용자가 진행 중이므로 대기 시간을 리셋한다. 아무 변화 없이
+    // maxWaitMs 가 지나야(= 사용자가 자리를 떠났다고 판단) 종료한다.
+    let deadline = Date.now() + maxWaitMs;
+    let lastUrl = first.url;
+    while (Date.now() < deadline) {
+        // 사용자가 인증 도중 창을 닫으면 페이지 컨텍스트가 사라진다. 그때는 대기를
+        // 끝내고 실패로 반환한다(예외 전파 금지 — 호출부가 폴백을 탄다).
+        try {
+            await page.waitForTimeout(3000);
+        } catch {
+            console.log('[CrawlerBrowser] ⚠️ 인증 대기 중 페이지/창이 닫힘 — 대기 종료');
+            return false;
+        }
 
         const now = await readGateInput();
         if (isProductPageReady(now)) {
-            const elapsed = Math.round((Date.now() - start) / 1000);
-            console.log(`[CrawlerBrowser] ✅ 성인인증/로그인 완료 — 상품 페이지 도달 (${elapsed}초 소요)`);
-            await page.waitForTimeout(2000); // 리다이렉트 후 렌더 안정화
+            console.log('[CrawlerBrowser] ✅ 성인인증/로그인 완료 — 상품 페이지 도달');
+            // [2026-08-06 실측] 인증 리다이렉트 직후에는 SPA 가격·스펙 영역이 아직
+            // 비어 있다(스모크: 상품명 셀렉터 타임아웃 + 가격 0원). 네트워크가 잦아들
+            // 때까지 기다린 뒤 호출부로 돌려준다 — 여기서 안정화해야 모든 호출 경로가
+            // 같은 이득을 본다.
+            await page.waitForLoadState('networkidle', { timeout: 8000 }).catch(() => undefined);
+            await page.waitForTimeout(3000).catch(() => undefined);
             return true;
         }
 
-        const remaining = Math.round((maxWaitMs - (Date.now() - start)) / 1000);
+        if (now.url !== lastUrl) {
+            lastUrl = now.url;
+            deadline = Date.now() + maxWaitMs; // 단계 진행 감지 → 대기 연장
+            console.log(`[CrawlerBrowser] 🔄 인증 단계 진행 중: ${String(now.title || now.url).slice(0, 50)}`);
+            continue;
+        }
+
+        const remaining = Math.round((deadline - Date.now()) / 1000);
         if (remaining > 0 && remaining % 15 < 3) {
-            console.log(`[CrawlerBrowser] ⏳ 인증 완료 대기 중... (남은: ${remaining}초)`);
+            console.log(`[CrawlerBrowser] ⏳ 인증 완료 대기 중... (남은: ${remaining}초 · 현재: ${String(now.title || '').slice(0, 30)})`);
         }
     }
 

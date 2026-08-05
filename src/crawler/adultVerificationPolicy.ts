@@ -141,10 +141,12 @@ export function requiresManualUnlock(kind: AccessGateKind): boolean {
 export function describeAccessGate(kind: AccessGateKind): string {
   if (kind === 'adult-verification') {
     return '🔞 성인인증이 필요한 상품입니다 — 열린 브라우저에서 네이버 로그인 후 '
-      + '휴대폰/아이핀으로 연령 확인을 완료해주세요. 완료되면 자동으로 이어서 진행합니다.';
+      + '휴대폰/아이핀으로 연령 확인을 완료해주세요(로그인 화면에 "로그인 상태 유지"가 '
+      + '있으면 켜 두면 다음부터 자동 진행). 완료되면 자동으로 이어서 진행합니다.';
   }
   if (kind === 'login-required') {
-    return '🔒 네이버 로그인이 필요한 페이지입니다 — 열린 브라우저에서 로그인해주세요. '
+    return '🔒 네이버 로그인이 필요한 페이지입니다 — 열린 브라우저에서 로그인해주세요'
+      + '("로그인 상태 유지"가 있으면 켜 두면 다음부터 자동 진행). '
       + '완료되면 자동으로 이어서 진행합니다.';
   }
   return '';

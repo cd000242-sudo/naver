@@ -21,6 +21,7 @@ function makeMockPage(states: MockPageState[]): {
     url: () => string;
     evaluate: () => Promise<{ title: string; bodyText: string }>;
     waitForTimeout: (ms: number) => Promise<void>;
+    waitForLoadState: (state: string, opts?: object) => Promise<void>;
     bringToFront: () => Promise<void>;
   };
   broughtToFront: () => boolean;
@@ -35,6 +36,8 @@ function makeMockPage(states: MockPageState[]): {
       waitForTimeout: async () => {
         step += 1;
       },
+      // 상품 페이지 도달 후 렌더 안정화 대기 (실제 Page 인터페이스와 동일 시그니처)
+      waitForLoadState: async () => undefined,
       bringToFront: async () => {
         front = true;
       },
@@ -91,6 +94,25 @@ describe('adult verification gate wiring', () => {
     // 볼 수 없어 CDP 로 windowState 를 복원해야 한다.
     expect(source).toMatch(/Browser\.setWindowBounds/);
     expect(source).toMatch(/windowState:\s*'normal'/);
+  });
+
+  // [2026-08-06 관찰 실측] brandconnect 페이지는 크롤러 환경에서 12초간 리다이렉트
+  // 자체를 안 한다(성인인증까지 못 감). 실제 인증이 뜨는 경로는 naver.me 직접 진입
+  // (즉시 nid 로그인, gate=adult-verification 판정 확인). 따라서:
+  // (a) brandconnect 정지 시 원본 naver.me 로 재이동 + 게이트 대기
+  // (b) naver.me Playwright 경로(:2936 루프)에도 게이트 배선
+  // (c) 호출부(sourceAssembler)는 단축 URL 이면 resolve 본이 아니라 원본을 전달
+  it('brandconnect 정지 시 naver.me 원본으로 재이동해 게이트를 기다린다 (소스 계약)', () => {
+    const source = readFileSync(new URL('../crawler/productSpecCrawler.ts', import.meta.url), 'utf8');
+    expect(source).toMatch(/brandconnect 정지[\s\S]{0,200}naver\.me/);
+    // naver.me Playwright 경로(스토어 감지 루프)에도 게이트 대기가 있다
+    const gateCalls = (source.match(/waitForAccessGateUnlocked\(/g) || []).length;
+    expect(gateCalls).toBeGreaterThanOrEqual(3);
+  });
+
+  it('호출부는 단축 URL 원본을 전달한다 (소스 계약)', () => {
+    const assembler = readFileSync(new URL('../sourceAssembler.ts', import.meta.url), 'utf8');
+    expect(assembler).toMatch(/crawlFromAffiliateLink\(isShortUrl \? url : resolvedUrl\)/);
   });
 
   it('navigateWithRetry 가 게이트 대기를 배선한다 (소스 계약)', () => {

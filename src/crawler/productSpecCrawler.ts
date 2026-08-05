@@ -2581,6 +2581,31 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
           }
         }
 
+        // [2026-08-06 관찰 실측] brandconnect 정지 케이스 — 크롤러 환경에서 brandconnect 가
+        // 12초간 리다이렉트 자체를 안 한다(성인인증 상품 실측). naver.me 원본을 직접 열면
+        // 즉시 nid 인증으로 이어지므로(관찰: gate=adult-verification 판정), 원본으로
+        // 재이동해 게이트 대기 → 인증 완료 시 같은 페이지가 스토어에 도달한다.
+        if (!arrivedAtStore && rawUrl.includes('naver.me')) {
+          console.log('[AffiliateCrawler] 🔁 brandconnect 정지 감지 → naver.me 원본으로 재이동 (성인인증 대비)');
+          try {
+            await bcPage.goto(rawUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+          } catch { /* 리다이렉트 체인 중단 허용 — 아래 대기가 판정 */ }
+          const { waitForAccessGateUnlocked } = await import('./crawlerBrowser.js');
+          const unlocked = await waitForAccessGateUnlocked(bcPage);
+          if (unlocked) {
+            const landedUrl = bcPage.url();
+            if (landedUrl.includes('smartstore.naver.com') || landedUrl.includes('brand.naver.com')) {
+              resolvedUrl = landedUrl;
+              const landedMatch = landedUrl.match(/(?:smartstore|brand)\.naver\.com\/([^\/\?]+)/);
+              if (landedMatch) {
+                storeName = landedMatch[1];
+                arrivedAtStore = true;
+                console.log(`[AffiliateCrawler] ✅ 원본 재이동 → 스토어 도달! 스토어: ${storeName}`);
+              }
+            }
+          }
+        }
+
         if (arrivedAtStore && storeName) {
           // ✅ 실제 스토어 페이지에 도달 → 상품 정보 직접 크롤링
           console.log(`[AffiliateCrawler] 📦 스토어 페이지에서 상품 정보 크롤링...`);
@@ -2940,6 +2965,7 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
             const maxWait = 8000;
             const interval = 400;
             let elapsed = 0;
+            let resolveGateWaited = false;
 
             while (elapsed < maxWait) {
                 await urlResolvePage.waitForTimeout(interval);
@@ -2954,6 +2980,19 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
                         console.log(`[AffiliateCrawler] ✅ 스토어명 확보: ${storeName}`);
                     }
                     break;
+                }
+
+                // [2026-08-06 관찰 실측] naver.me 직접 진입은 성인인증 상품에서 즉시
+                // nid 로그인으로 이동한다 — 게이트면 창을 유지한 채 완료를 기다린다.
+                if (!resolveGateWaited && /nid\.naver\.com/.test(currentUrl)) {
+                    resolveGateWaited = true;
+                    const { waitForAccessGateUnlocked } = await import('./crawlerBrowser.js');
+                    const unlocked = await waitForAccessGateUnlocked(urlResolvePage);
+                    if (unlocked) {
+                        elapsed = 0;
+                        continue;
+                    }
+                    break; // 인증 타임아웃 — 아래 OG 추출/실패 경로로
                 }
             }
 

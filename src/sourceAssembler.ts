@@ -6087,8 +6087,11 @@ async function fetchSingleSource(
       if ((storeName && productId) || isShortUrl || isBrandConnect) {
         try {
           const { crawlFromAffiliateLink } = await import('./crawler/productSpecCrawler.js');
-          // ✅ [2026-03-22 FIX] resolvedUrl 전달 → 내부에서 중복 리다이렉트 방지
-          const productInfo = await crawlFromAffiliateLink(resolvedUrl);
+          // [2026-08-06] 단축 URL 은 원본을 전달한다 — resolve 본(brandconnect)을 넘기면
+          // 크롤러 환경에서 리다이렉트가 정지해(성인인증 상품 관찰 실측) naver.me 직접
+          // 진입 경로(인증 게이트 대기 배선)에 도달하지 못한다. 중복 리다이렉트 비용은
+          // HTTP HEAD 1회 수준.
+          const productInfo = await crawlFromAffiliateLink(isShortUrl ? url : resolvedUrl);
 
           if (productInfo && productInfo.name && productInfo.name !== '상품명을 불러올 수 없습니다') {
             const productName = productInfo.name;
