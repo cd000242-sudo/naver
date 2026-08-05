@@ -1598,6 +1598,24 @@ let continuousInterval: NodeJS.Timeout | null = null;
 let continuousQueue: string[] = []; // 연속 발행할 URL/콘텐츠 큐
 let __continuousV2Initialized = false; // V2 초기화 플래그
 
+// ✅ [2026-08-06] 품질 점수 카드 아래 모드별 세부 점수 줄 — 표시 전용 동적 요소.
+function updateQualityBreakdownLine(anchor: HTMLElement, text: string): void {
+  const parent = anchor.parentElement;
+  if (!parent) return;
+  let line = parent.querySelector('.quality-breakdown') as HTMLElement | null;
+  if (!text) {
+    if (line) line.remove();
+    return;
+  }
+  if (!line) {
+    line = document.createElement('span');
+    line.className = 'quality-breakdown';
+    line.style.cssText = 'display:block;font-size:0.72rem;opacity:0.8;margin-top:2px;';
+    parent.appendChild(line);
+  }
+  line.textContent = text;
+}
+
 // 위험 지표 업데이트
 function updateRiskIndicators(content: StructuredContent | null): void {
   // ✅ [v2.10.277] early return 제거 — quality 없어도 4개 지표 placeholder 표시
@@ -1641,13 +1659,43 @@ function updateRiskIndicators(content: StructuredContent | null): void {
       const _decisionLabel = _gate.decision === 'pass' ? '✓통과'
         : _gate.decision === 'patch' ? '⚙수정'
         : '↻재생성';
-      const _modeScore = typeof _gate.modeScore === 'number' ? ` · 모드 ${_gate.modeScore}` : '';
-      const _seoScore = typeof _quality?.seoScore === 'number' ? ` · SEO ${_quality.seoScore}` : '';
-      riskSeoValue.textContent = `${_gate.finalScore}/100 (${_decisionLabel})${_modeScore}${_seoScore}`;
+      // ✅ [2026-08-06] 모드별 품질 점수 가시화 — 사용자 요청 "점수를 보고 이 글이
+      //   좋은지 확인". 종합 점수 + 모드 이름, 아래 줄에 모드/안전/사람다움 세부와
+      //   90점 목표 상태를 함께 표시한다. 점수는 표시 전용 — 게이트 판정(경고-only)은
+      //   기존 그대로다.
+      const _modeNameMap: Record<string, string> = {
+        seo: 'SEO', homefeed: '홈판', mate: '메이트', affiliate: '쇼핑', business: '업체', custom: '커스텀',
+      };
+      const _modeName = _modeNameMap[String((content as any)?.contentMode || '')] || '';
+      riskSeoValue.textContent = `${_gate.finalScore}/100 (${_decisionLabel})${_modeName ? ` · ${_modeName}` : ''}`;
+      const _target90 = _gate.quality90Target
+        ? (_gate.quality90TargetReached ? '🎯 90 달성'
+          : _gate.quality90NearTargetAccepted ? '🎯 90 근접'
+            : _gate.quality90Miss ? '⚠️ 90 미달' : '')
+        : '';
+      const _breakdown = [
+        typeof _gate.modeScore === 'number' ? `${_modeName || '모드'} ${_gate.modeScore}` : '',
+        typeof _gate.safetyScore === 'number' ? `안전 ${_gate.safetyScore}` : '',
+        typeof _gate.humanlikeScore === 'number' ? `사람다움 ${_gate.humanlikeScore}` : '',
+        typeof _quality?.seoScore === 'number' ? `SEO ${_quality.seoScore}` : '',
+        _target90,
+      ].filter(Boolean).join(' · ');
+      updateQualityBreakdownLine(riskSeoValue, _breakdown);
+      riskSeoValue.title = [
+        `종합 ${_gate.finalScore}/100 (${_decisionLabel})`,
+        typeof _gate.modeScore === 'number' ? `${_modeName || '모드'} 점수 ${_gate.modeScore}/100 — 이 모드의 노출 문법 충족도` : '',
+        typeof _gate.safetyScore === 'number' ? `안전 ${_gate.safetyScore}/100 — 근거·실존인물·과장 리스크` : '',
+        typeof _gate.humanlikeScore === 'number' ? `사람다움 ${_gate.humanlikeScore}/100 — AI 티 어휘·구조 신호` : '',
+        _gate.quality90Target ? '자동 발행 목표: 90점' : '',
+      ].filter(Boolean).join('\n');
     } else if (_quality && typeof _quality.seoScore === 'number') {
       riskSeoValue.textContent = `${_quality.seoScore}/100`;
+      updateQualityBreakdownLine(riskSeoValue, '');
+      riskSeoValue.title = '';
     } else {
       riskSeoValue.textContent = '-/100';
+      updateQualityBreakdownLine(riskSeoValue, '');
+      riskSeoValue.title = '';
     }
   }
 
@@ -1700,6 +1748,8 @@ function resetRiskIndicators(): void {
   }
   if (riskSeoValue) {
     riskSeoValue.textContent = '-/100';
+    updateQualityBreakdownLine(riskSeoValue, '');
+    riskSeoValue.title = '';
   }
   if (riskDailyValue) {
     riskDailyValue.textContent = resolveDailyRecommendationText();
