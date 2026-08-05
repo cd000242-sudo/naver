@@ -103,6 +103,9 @@ export class ProgressModal {
     private currentPercent: number = 0;
     private isWorkInProgress: boolean = false;
 
+    // ⌨️ [2026-08-05] 타이핑 보러가기 버튼 — 타이핑 스텝에서만 노출
+    private typingViewBtn: HTMLButtonElement | null = null;
+
     // ✅ [2026-03-22] 에러 자동 닫기 타이머 (클래스 멤버 → 누수 방지)
     private autoCloseTimerId: ReturnType<typeof setTimeout> | null = null;
 
@@ -147,6 +150,9 @@ export class ProgressModal {
 
         // ✅ [2026-03-09] 플로팅 복원 버튼 생성
         this.createRestoreFab();
+
+        // ⌨️ [2026-08-05] 타이핑 보러가기 버튼 생성 (취소 버튼 옆, 기본 숨김)
+        this.createTypingViewButton();
 
         const requestStop = async () => {
             this.isCancelled = true;
@@ -336,6 +342,9 @@ export class ProgressModal {
     hide() {
         if (this.modal) this.modal.style.display = 'none';
 
+        // ⌨️ [2026-08-05] 모달이 닫히면 타이핑 보러가기 버튼 상태도 초기화
+        if (this.typingViewBtn) this.typingViewBtn.style.display = 'none';
+
         // ✅ [2026-03-09] 작업 진행 중이면 FAB 표시 (완료/취소 시에는 표시 안 함)
         if (this.isWorkInProgress && !this.isCancelled && this.currentPercent < 100) {
             this.showRestoreFab();
@@ -346,6 +355,8 @@ export class ProgressModal {
         if (this.progressBar) this.progressBar.style.width = '0%';
         if (this.progressPercent) this.progressPercent.textContent = '0%';
         if (this.progressStepText) this.progressStepText.textContent = '단계 분석 중...';
+        // ⌨️ [2026-08-05] 새 작업 시작 시 타이핑 보러가기 버튼 초기화
+        if (this.typingViewBtn) this.typingViewBtn.style.display = 'none';
         if (this.progressLog) {
             this.progressLog.innerHTML = `<div style="color: #3b82f6;">[SYSTEM] 작업 엔진 초기화 중...</div>`;
         }
@@ -385,6 +396,13 @@ export class ProgressModal {
         // ✅ [2026-03-09] FAB 진행률 실시간 업데이트
         this.updateRestoreFabPercent(percent, stepText);
 
+        // ⌨️ [2026-08-05] 단일 발행 플로우는 setStep(4)를 쓰지 않고 88~99% 구간에
+        //   머무르므로, 발행 구간 퍼센트로도 타이핑 보러가기 버튼을 노출한다.
+        if (this.typingViewBtn) {
+            if (percent >= 100) this.typingViewBtn.style.display = 'none';
+            else if (percent >= 88) this.typingViewBtn.style.display = 'inline-block';
+        }
+
         if (percent > 0 && percent < 100) {
             const elapsed = (Date.now() - this.startTime) / 1000;
             const totalEstimated = elapsed / (percent / 100);
@@ -400,7 +418,37 @@ export class ProgressModal {
         }
     }
 
+    // ⌨️ [2026-08-05] 타이핑 보러가기 — 세션유지 모드는 이미 열린 창에서 타이핑해
+    //   사용자가 "95%에서 멈췄다"고 오해하는 사례가 있었다. 타이핑 스텝에서만 노출.
+    private createTypingViewButton() {
+        if (this.typingViewBtn) return;
+        const cancelBtn = document.getElementById('progress-cancel-btn');
+        if (!cancelBtn || !cancelBtn.parentElement) return;
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = 'progress-view-typing-btn';
+        btn.textContent = '⌨️ 타이핑 보러가기';
+        btn.style.cssText = 'display: none; padding: 0.75rem 2rem; margin-right: 0.75rem; background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.2s;';
+        btn.addEventListener('click', () => {
+            void (window as any).api?.showTypingWindow?.().then((result: { success?: boolean; message?: string } | undefined) => {
+                if (result && result.success === false) {
+                    this.addLog(`⚠️ ${result.message || '타이핑 창을 찾지 못했습니다.'}`);
+                }
+            }).catch(() => undefined);
+        });
+        cancelBtn.parentElement.insertBefore(btn, cancelBtn);
+        this.typingViewBtn = btn;
+    }
+
+    private updateTypingViewButton(stepNumber: number, status: 'active' | 'completed' | 'error') {
+        if (!this.typingViewBtn) return;
+        const typingStepActive = stepNumber === 4 && status === 'active';
+        this.typingViewBtn.style.display = typingStepActive ? 'inline-block' : 'none';
+    }
+
     setStep(stepNumber: number, status: 'active' | 'completed' | 'error' = 'active', statusText?: string) {
+        this.updateTypingViewButton(stepNumber, status);
         const stepEl = document.querySelector(`.progress-step[data-step="${stepNumber}"]`);
         if (!stepEl) return;
 

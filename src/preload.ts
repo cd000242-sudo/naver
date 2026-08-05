@@ -126,6 +126,9 @@ contextBridge.exposeInMainWorld('api', {
   abortImageGeneration: (): Promise<{ success: boolean; message?: string }> =>
     ipcRenderer.invoke('automation:abortImageGeneration'),
   closeBrowser: (naverId?: string) => ipcRenderer.invoke('automation:closeBrowser', naverId), // ✅ 추가
+  // ⌨️ [2026-08-05] 타이핑 보러가기 — 자동화 브라우저 창을 앞으로
+  showTypingWindow: (naverId?: string): Promise<{ success: boolean; message?: string }> =>
+    ipcRenderer.invoke('automation:showTypingWindow', naverId),
   // ✅ [2026-06-23] 원클릭 진단 리포트 (오류 자동 보고)
   generateDiagnosticReport: (context?: { lastError?: string; stage?: string }): Promise<{ ok: boolean; savedPath: string; report: string }> =>
     ipcRenderer.invoke('diagnostics:generateReport', context),

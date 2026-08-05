@@ -3119,6 +3119,27 @@ ipcMain.handle('automation:closeBrowser', async (_event, naverId?: string) => {
   }
 });
 
+// ⌨️ [2026-08-05] "타이핑 보러가기" — 타이핑 중인 자동화 브라우저 창을 앞으로.
+//   세션유지 모드는 이미 열린 창에서 작업해 사용자가 "95%에서 멈췄다"고 오해하는 사례 대응.
+ipcMain.handle('automation:showTypingWindow', async (_event, naverId?: string) => {
+  try {
+    const normalizedId = String(naverId || '').trim().toLowerCase();
+    const candidates = new Set<NaverBlogAutomation>();
+    const mapped = normalizedId ? automationMap.get(normalizedId) : undefined;
+    if (mapped) candidates.add(mapped);
+    if (automation) candidates.add(automation);
+    for (const instance of automationMap.values()) candidates.add(instance);
+
+    for (const instance of candidates) {
+      if (await instance.showBrowserWindow()) return { success: true };
+    }
+    return { success: false, message: '타이핑 중인 브라우저 창을 찾지 못했습니다.' };
+  } catch (error) {
+    console.error('[Main] 타이핑 창 표시 실패:', error);
+    return { success: false, message: (error as Error).message };
+  }
+});
+
 
 // ✅ [2026-02-12] 소제목별 이미지 자동 검색 - 네이버 → 구글 폴백
 // ✅ [v2.7.61] AI 관련성 검증 옵션 추가 (config.imageRelevanceCheck)

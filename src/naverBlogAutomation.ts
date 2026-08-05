@@ -8780,6 +8780,29 @@ export class NaverBlogAutomation {
     }
   }
 
+  // ⌨️ [2026-08-05] "타이핑 보러가기" — 자동화 브라우저 창을 화면 앞으로 가져온다.
+  //   page.bringToFront()는 같은 창 안의 탭만 전환하고 OS 윈도우 z-order는 못 올린다.
+  //   CDP Browser.setWindowBounds로 minimized→normal 전환을 강제해 창 자체를 올린다.
+  async showBrowserWindow(): Promise<boolean> {
+    const page = this.page;
+    if (!page || page.isClosed()) return false;
+    try {
+      await page.bringToFront().catch(() => undefined);
+      const client = await page.createCDPSession();
+      try {
+        const { windowId } = await client.send('Browser.getWindowForTarget') as { windowId: number };
+        await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'minimized' } });
+        await client.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } });
+      } finally {
+        await client.detach().catch(() => undefined);
+      }
+      return true;
+    } catch (e) {
+      console.debug('[Window] showBrowserWindow 실패:', (e as Error).message);
+      return false;
+    }
+  }
+
   async closeBrowser(): Promise<void> {
     if (this.browser) {
       this.log('⏳ 브라우저 종료 중...');
