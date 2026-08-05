@@ -52,7 +52,7 @@ import { optimizeContentForNaver, optimizeHtmlForNaver, analyzeNaverScore, reset
 import { analyzeContentBySemantic, isLlmRubricEnabled } from './contentSemanticScoring.js';
 import { buildPersonaCard } from './authgrDefense.js';
 import { selfCritiqueAndRewrite, isSelfCritiqueEnabled } from './contentSelfCritique.js';
-import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, resolveCategory, HOMEFEED_ISSUE_STORY_CATEGORIES, type PromptMode } from './promptLoader.js';
+import { buildSystemPromptFromHint, buildFullPrompt, loadShoppingPrompt, getGeoOverlayPrompt, resolveCategory, HOMEFEED_ISSUE_STORY_CATEGORIES, loadPromptFile, type PromptMode } from './promptLoader.js';
 import { isReviewAvailable, isReviewGuardEnabled, buildReviewGuardBlock } from './content/reviewGuard.js';
 import { isGeneralContentGuardEnabled, hasGroundingSource, buildGeneralContentGuardBlock } from './content/generalContentGuard.js';
 import { isCelebrityFactGuardEnabled, isCelebrityContext, buildCelebrityFactGuardBlock, detectCelebrityAssertionRisk } from './content/celebrityAssertionSanitizer.js';
@@ -2326,6 +2326,31 @@ export function buildModeBasedPrompt(
   //              0.2는 거의 deterministic이라 학습 데이터의 평균 어조로 회귀.
   //              0.5는 키워드 정확도를 유지하면서 어휘/표현 다양성 확보.
   let systemPrompt = systemPromptResult;
+
+  // ✅ [2026-08-06] 업체 모드 업종 오버레이 — 업종 파일 4개는 카테고리 매핑 불일치로
+  //   한 번도 로드된 적 없는 데드 배선이었다. 업체 정보 필드·키워드에서 업종을 감지해
+  //   해당 보정 프롬프트를 얹는다(감지 실패 시 base 만 — 오적용이 미적용보다 나쁘다).
+  if (contentMode === 'business') {
+    try {
+      const { detectBusinessIndustry } = require('./content/businessIndustryDetector.js');
+      const bizInfo = (source as any).businessInfo || {};
+      const industry = detectBusinessIndustry(
+        [bizInfo.name, bizInfo.extra, source.title, getPrimaryKeywordFromSource(source)]
+          .filter(Boolean).join(' '),
+      );
+      if (industry) {
+        const industryOverlay = loadPromptFile(`business/${industry}.prompt`);
+        if (industryOverlay) {
+          systemPrompt = `${systemPrompt}\n\n${industryOverlay}`;
+          console.log(`[PromptBuilder] 🏢 업종 보정 프롬프트 적용: business/${industry}.prompt`);
+        }
+      } else {
+        console.log('[PromptBuilder] 🏢 업종 감지 없음 — business base 만 적용');
+      }
+    } catch (industryErr) {
+      console.warn('[PromptBuilder] 업종 감지 실패 (base 만 적용):', (industryErr as Error).message);
+    }
+  }
 
   // [SPEC-PROMPT-2026-REFRESH Phase 3-B / v2.10.236] Claude Sonnet abstention 강화 prompt
   //   조건: source.claudeAbstentionStrong === true (config.claudeAbstentionMode === true + provider claude).

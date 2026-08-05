@@ -47,11 +47,14 @@ describe('business base prompt contract', () => {
     expect(prompt).toContain('"지금 바로", "오늘만", "서두르세요" 같은 재촉·유인 표현은 쓰지 않는다');
   });
 
-  it('제목 공식 폐기 (situationTitleContract 방향 정합)', () => {
-    // 조립부(contentJsonPromptFormat)의 지역명 맨앞 배치 충돌은 별도 판단 대상.
+  it('제목 — 노출 우선(지역명 앞쪽) + 공식 조립 폐기', () => {
+    // [2026-08-06 사용자 결정] 업체 모드는 노출이 최우선("노출이 되어야 연락이 오고
+    // 매출로 이어진다") — 조립부의 지역명 맨앞 배치를 base 가 따르는 방향으로 정합.
+    expect(prompt).toMatch(/노출이 문의의 시작/);
+    expect(prompt).toMatch(/지역명과 업종을 제목 앞쪽/);
     expect(prompt).not.toContain('제목 패턴');
-    expect(prompt).not.toContain('제목 맨 앞');
-    expect(prompt).toContain('공식에 맞춰 조립하지 않는다');
+    expect(prompt).toContain('공식에 맞춰');
+    expect(prompt).toContain('조립하지 않는다');
   });
 
   it('잠금 계약 축자 보존 (contentModePromptContracts·verifyPreviousWork)', () => {
