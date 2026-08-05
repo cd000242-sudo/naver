@@ -63,6 +63,18 @@ describe('추론 선행 — 전 모드에서 분석이 제목보다 앞이다', 
   it.each(MODES)('%s 에서 분석을 본문에 옮기지 말라고 명시한다', (mode) => {
     expect(format(mode)).toMatch(/preWritingAnalysis[\s\S]{0,120}?본문에 옮기지 않는다/);
   });
+
+  // [2026-08-06 라이브 실측] 키워드 "이런 엿같은 사랑 하영 누구"에서 "이런 엿같은
+  // 사랑"(드라마 제목)이 일반 수식어로 취급됐다. 고유명사 판별은 전 모드 공통 축이다.
+  it.each(MODES)('%s 의 공통 축에 고유명사 판별(entityCheck)이 있다', (mode) => {
+    const f = format(mode);
+    expect(f).toContain('"entityCheck"');
+    expect(f).toMatch(/작품명[·,]?\s*인물명/);
+  });
+
+  it('홈판 titleRationale 은 피드에서 멈춤을 만드는 근거를 요구한다', () => {
+    expect(format('homefeed')).toMatch(/피드 노출면|스크롤 중 어느 지점에서 멈춤/);
+  });
 });
 
 describe('추론 선행 — 모드별 축', () => {

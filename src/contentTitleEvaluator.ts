@@ -9,6 +9,7 @@
  */
 
 import type { PromptMode } from './promptLoader.js';
+import { resolveCategory, HOMEFEED_ISSUE_STORY_CATEGORIES } from './promptLoader.js';
 import { getRecentPeriods } from './titleSelector.js';
 import { CATEGORY_BONUSES } from './contentTitleQuality';
 
@@ -19,6 +20,15 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
   const kw = String(keyword || '').trim().toLowerCase();
 
   if (!t) return { score: 0, issues: ['빈 제목'] };
+
+  // [2026-08-05] 이슈픽(homefeed + 연예/시사) 조합 판정.
+  //   issue-story 골격(실측 승자, 60021a64)의 제목 3공식이 이 채점기에서 죽고 있었다 —
+  //   1공식 인용 훅형은 따옴표 감점에 자동 탈락, 2·3공식 어휘(진짜 이유·알고보니·반전)는
+  //   자극어 감점. contentGenerator 가 후보 중 최고점으로 교체하므로 항상 밋밋한
+  //   정보형이 이겼다. 이슈픽에서는 해당 감점을 해제한다. 인용 실재 여부는 이 채점기가
+  //   검증할 수 없고 H7(인용 날조 금지)·골격의 인용 규칙·evidence 층이 담당한다.
+  const usesIssueStorySkeleton = mode === 'homefeed'
+    && HOMEFEED_ISSUE_STORY_CATEGORIES.has(resolveCategory(categoryHint));
 
   // 0점 패턴 (즉시 탈락)
   const normalizedTitle = t.toLowerCase().replace(/[\s\-–—:|·•.,!?]/g, '');
@@ -105,7 +115,8 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     // ✅ [v1.4.48 Stage A.4] 홈피드 AI티 패턴 대폭 확장 (5개 → 14개)
     //   추가: 반전, 소름, 난리, 대박, 공개, 충격적, 경악적, 진실, 폭로
     //   원인: 기존 5개만으로는 AI 생성 제목의 90%를 못 잡음
-    { condition: mode === 'homefeed' && /(충격|경악|눈물바다|진짜 이유|알고보니|반전|소름|난리|대박 공개|충격적|경악적|폭로|진실 공개|이게 가능|실화)/.test(t), points: 40, reason: '홈판: 뻔한 AI티 표현' },
+    //   [2026-08-05] '진짜 이유·알고보니·반전'은 이슈픽 정체숨김·추측형(골격 2·3공식) 어휘라 이슈픽에서만 허용.
+    { condition: mode === 'homefeed' && (/(충격|경악|눈물바다|소름|난리|대박 공개|충격적|경악적|폭로|진실 공개|이게 가능|실화)/.test(t) || (!usesIssueStorySkeleton && /(진짜 이유|알고보니|반전)/.test(t))), points: 40, reason: '홈판: 뻔한 AI티 표현' },
     // 대괄호 브랜드 표기
     { condition: /^\[.+\]/.test(t), points: 30, reason: '대괄호 브랜드 표기' },
     // 플레이스홀더 누출
@@ -136,7 +147,8 @@ export function evaluateTitleQuality(title: string, keyword: string, mode: Promp
     // ✅ [2026-02-10 FIX] 콜론+따옴표 패턴 — AI가 구조를 리터럴로 해석한 부자연스러운 제목
     { condition: /[:：]\s*["'\u201C\u201D\u2018\u2019\u300C\u300D]/.test(t), points: 50, reason: '콜론+따옴표 패턴' },
     // ✅ [2026-02-10 FIX] 제목에 따옴표 포함 — 블로그 제목에 부적절
-    { condition: /["\u201C\u201D\u300C\u300D\u300E\u300F]/.test(t), points: 20, reason: '제목에 따옴표 포함' },
+    // [2026-08-05] 이슈픽 인용 훅형(골격 1공식)은 따옴표가 공식 그 자체다 — 이슈픽에서만 감점 해제.
+    { condition: !usesIssueStorySkeleton && /["\u201C\u201D\u300C\u300D\u300E\u300F]/.test(t), points: 20, reason: '제목에 따옴표 포함' },
   ];
 
   // ✅ [v1.4.48 Stage A.2] 정적 import 사용 — require 제거

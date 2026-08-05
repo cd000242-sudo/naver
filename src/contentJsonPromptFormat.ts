@@ -62,6 +62,7 @@ function buildHeadingsExample(): string {
 function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton: boolean): string {
   const common = `
     "coreSubject": "입력 자료의 핵심을 1문장으로 (자료에 있는 것만)",
+    "entityCheck": "키워드 속 고유명사 판별 — 작품명·인물명·브랜드를 크롤링 자료와 대조해 식별한다. 수식어처럼 보이는 구절이 실제 드라마·예능·영화 제목일 수 있다(예: 키워드 앞부분 전체가 작품명). 작품명은 쪼개거나 일반 수식어로 취급하지 않으며, 자료에 근거 없는 실체 단정은 하지 않는다",
     "whyNow": "이 키워드가 지금 검색·소비되는 이유를 입력 단서에서 추론 — 단서는 이미 주어져 있다: 뉴스·상위 노출 글의 발행 시점과 사건, 여러 자료에서 반복되는 지점, 지식iN 질문이 보여주는 독자 상황, 월간검색량·문서량 지표. 이 중 실제로 찾은 단서를 근거로 명시한다. 자료 밖 트렌드 이유를 지어내지 않으며, 훑고도 시점 단서가 없으면 '자료 내 시점 단서 없음'이라 적고 자료가 가장 두텁게 다루는 지점을 대신 근거로 쓴다",
     "readerSituation": "독자가 어떤 상황·막힌 지점에서 이 글을 만나는지 추론 (독자에 대한 추론 — 작성자 체험 주장 아님)",`;
   const title = `
@@ -100,7 +101,8 @@ function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkelet
   const issueExtra = usesIssueStorySkeleton ? `
 - titleCandidates 3개는 preWritingAnalysis.curiosityGaps 에서 나와야 하며, 서로 다른 제목 공식을 쓴다.
 - unconfirmed 에 넣은 사안은 제목·도입의 궁금증 소재로 쓰지 않는다(홈판 실존 인물 안전 규율과 동일).` : `
-- titleCandidates 3개는 preWritingAnalysis 의 추론(독자 상황·핵심 질문)에서 나와야 하며, 서로 다른 각도를 쓴다.`;
+- titleCandidates 3개는 preWritingAnalysis 의 추론(독자 상황·핵심 질문)에서 나와야 하며, 서로 다른 각도를 쓴다.${mode === 'homefeed' ? `
+- 홈판은 검색 결과가 아니라 피드 노출면이다 — 각 후보가 스크롤 중 어느 지점에서 멈춤을 만드는지 titleRationale 에 적는다.` : ''}`;
   const modeExtra = (mode === 'seo' || mode === 'mate') ? `
 - headings 소제목은 mustAnswer 의 질문들에 대응한다. 질문에 대응하지 않는 소제목을 만들지 않는다.` : mode === 'affiliate' ? `
 - evidenceMode 판정과 다른 화자·근거를 본문에서 쓰지 않는다. objections 가 비어 있으면 반박 문단을 지어내지 않는다.` : '';
@@ -164,7 +166,13 @@ function buildModeStructureRule(mode: PromptMode): string {
 - 충격, 경악, 소름, 비밀 공개 같은 자극어는 사용하지 마세요.
 - 메인 키워드가 제목에 분명히 보이게 하고, 독자가 처한 상황(조건·시점·갈림길)을 함께 담으세요.
   키워드를 첫 3글자로 끌어오려고 어순을 비틀지 마세요(R0-1).
-  예: "여권 재발급, 주말에 급하게 해야 할 때 순서"
+- 검색어는 조사와 서술어가 잘린 검색어투입니다("○○ 누구", "○○ 방법", "○○ 후기").
+  검색어를 제목에 원문 그대로 붙여 넣지 마세요 — 핵심 명사는 유지하되,
+  누구·방법·후기·뜻 같은 꼬리는 자연스러운 문장으로 소화하세요.
+  정체·이유·뜻을 묻는 검색어는 물음표 질문형 제목으로 소화해도 좋습니다 —
+  단 도입 첫 문장이 그 질문에 바로 답해야 합니다.
+  예: 검색어 "여권 재발급 방법" → 제목 "여권 재발급, 주말에 급하게 해야 할 때 순서"
+  예: 검색어 "△△ 하영 누구" → 제목 "△△ 하영은 누구? 낯익다 했더니 이 배우"
 - "○○ 총정리 / ○○ 방법 / ○○ 완벽 가이드"처럼 상황이 없는 제목은 쓰지 마세요.
   그런 제목은 AI 요약이 이미 답한 자리라 클릭으로 이어지지 않습니다.
 `;
