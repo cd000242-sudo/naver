@@ -57,9 +57,14 @@ describe('라우팅 — 이슈형만 스토리 골격, 실용형은 기존 유�
 
   it('스토리 골격은 base·90+ 계약보다 뒤에 놓여 오버라이드 우선권을 가진다', () => {
     const composed = buildSystemPrompt('homefeed', 'entertainment');
-    const skeletonAt = composed.indexOf('[ISSUE-STORY]');
+    // [2026-08-05] 배치 2b부터 카테고리 파일이 ★ 선언에서 [ISSUE-STORY]를 참조한다
+    // (골격 후행·자기 양보 원용 선언). 첫 매치는 그 참조라서 골격 블록 자체는
+    // lastIndexOf 로 찾는다 — 조립본에 참조 1회 + 골격 1회가 실린다.
+    const skeletonAt = composed.lastIndexOf('[ISSUE-STORY]');
     expect(skeletonAt).toBeGreaterThan(composed.indexOf('[HOMEFEED BASE PROMPT'));
     expect(skeletonAt).toBeGreaterThan(composed.indexOf('HOMEFEED 90+ QUALITY CONTRACT'));
+    // 참조와 골격이 실제로 둘 다 실려 있는지도 확인한다.
+    expect(composed.indexOf('[ISSUE-STORY]')).toBeLessThan(skeletonAt);
   });
 
   it('스포츠/경제 힌트가 이슈형 카테고리로 해석된다', () => {
