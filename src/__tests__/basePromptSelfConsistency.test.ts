@@ -113,3 +113,31 @@ describe('base.prompt — 절대 룰을 스스로 위배하지 않는다', () =>
     expect(base).not.toMatch(/순서로 정리해드릴게요/);
   });
 });
+
+/**
+ * [2026-08-05] geo-overlay 가 base F1 을 위배하던 문제.
+ *
+ * `geo-overlay.prompt:7` 은 "충돌 시 base.prompt가 우선"을 스스로 선언해 놓고,
+ * 시점 시그널 블록에서 `✅ "현재(2026년 5월) 기준"` 처럼 자료에 없는 날짜를
+ * 모범 예시로 제시했다. base F1 은 `⛔ "○월 ○일 기준" 작성일 못박기 금지
+ * (실시간 기준). 날짜·연도는 자료에 있을 때만.` 이다.
+ * ef6ad3e8 에서 base R0-13 을 같은 이유로 지웠는데 여기에 같은 위반이 남아 있었다.
+ */
+describe('geo-overlay — base F1을 위배하지 않는다', () => {
+  const geo = readFileSync(new URL('../prompts/seo/geo-overlay.prompt', import.meta.url), 'utf8');
+
+  it('하드코딩된 작성 시점을 모범 예시로 제시하지 않는다', () => {
+    expect(geo).not.toMatch(/✅[^\n]*"현재\(\d{4}년/);
+    expect(geo).not.toMatch(/✅[^\n]*"이번 달/);
+    expect(geo).not.toMatch(/✅[^\n]*"지금 시점/);
+  });
+
+  it('시점 표현을 자료 근거 조건부로 지시한다', () => {
+    expect(geo).toMatch(/자료에 (?:날짜가 없으면|있을 때만|적혀 있으면)/);
+  });
+
+  it('base F1을 명시적으로 인용한다', () => {
+    // 오버레이가 상위 규칙을 알고 있다는 것을 파일 안에서 확인할 수 있어야 한다.
+    expect(geo).toMatch(/\bF1\b/);
+  });
+});

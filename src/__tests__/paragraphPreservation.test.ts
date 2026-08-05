@@ -82,3 +82,29 @@ describe('후처리 — 없는 출처를 귀속시키지 않는다', () => {
     expect([...hits], '자료에 없는 출처를 만들면 H6·F1을 동시에 위반한다').toEqual([]);
   });
 });
+
+/**
+ * [2026-08-05] 문단 복구(4c789ac5)가 optimizeForAdpost 를 깨웠다.
+ * 문단이 한 덩어리이던 동안 `split(/\n{2,}/)` 결과가 1개라 실행되지 않던 단계다.
+ * 실측: 복구 직후 60회 중 60회 '전문가들의 의견에 따르면' 주입.
+ * 사전이 H1(거짓 경험)·H6(출처 언급)·R0-8(AI 정리체)을 동시에 위반한다.
+ */
+describe('후처리 — 애드포스트 전환어를 주입하지 않는다', () => {
+  const ADPOST_TRANSITIONS = [
+    '전문가들의 의견에 따르면', '실제로 확인해본 결과', '결론적으로 추천드리는 것은',
+    '최근 트렌드를 반영하면', '비용 대비 효율을 따지면',
+  ] as const;
+
+  it('문단이 많은 글에서도 주입되지 않는다', () => {
+    const long = Array.from({ length: 12 }, (_, i) =>
+      `${i + 1}번 문단입니다. 이 항목의 조건과 절차를 자료 범위에서만 설명합니다. 확인할 지점이 있습니다.`,
+    ).join('\n\n');
+
+    const hits = new Set<string>();
+    for (let i = 0; i < 60; i++) {
+      const out = String(optimizeContentForNaver(long, 'professional', true));
+      ADPOST_TRANSITIONS.filter((p) => out.includes(p)).forEach((p) => hits.add(p));
+    }
+    expect([...hits], 'H1·H6·R0-8을 동시에 위반하는 문구다').toEqual([]);
+  });
+});

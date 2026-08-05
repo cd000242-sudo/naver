@@ -356,8 +356,14 @@ export function optimizeContentForNaver(
   // 7. 문단 구조 최적화 (체류시간 + 스크롤 깊이)
   result = optimizeParagraphStructure(result);
 
-  // 8. 애드포스트 최적화 (CTR 향상)
-  result = optimizeForAdpost(result);
+  // 8. [2026-08-05] 애드포스트 전환어 주입을 파이프라인에서 분리했다.
+  //   문단이 한 덩어리이던 동안 `split(/\n{2,}/)` 결과가 1개라 이 단계는 실행되지
+  //   않았다. 문단 경계를 복구(4c789ac5)하자마자 60회 중 60회 주입이 시작됐다.
+  //   사전(ADPOST_OPTIMIZED_TRANSITIONS)이 세 종류의 계약을 동시에 위반한다 —
+  //     '실제로 확인해본 결과'      → H1 거짓 경험
+  //     '전문가들의 의견에 따르면'  → H6 출처 언급 금지 + F1 자료 외 사실
+  //     '결론적으로 추천드리는 것은' → R0-8 AI 정리체 금지
+  //   자료를 인자로 받지 않아 근거 유무를 판별할 수 없는 것도 앞의 주입기들과 같다.
 
   // 9. ✅ [Phase 1-2] AuthGR 방어 (전문성 신호 + 출처 다양화 + 경험 표현)
   // Phase 3: skipDictInjection 시 어휘 주입 단계 스킵 (LLM 자연 출력 보존)
