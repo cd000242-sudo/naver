@@ -48,6 +48,71 @@ function buildHeadingsExample(): string {
   ]`;
 }
 
+/**
+ * [2026-08-05] 추론 선행(pre-writing analysis) — 전 모드.
+ *
+ * LLM 은 JSON 을 필드 순서대로 생성한다. 스키마 맨 앞에 분석 필드를 두면
+ * "자료 추론 → 제목 → 본문 → 이미지" 순서가 같은 호출 안에서 강제된다
+ * (추가 API 호출 없음). 모드마다 추론 축이 다르다.
+ *
+ * 환각 가드: whyNow 는 자료의 시점·사건 단서가 있을 때만 그 단서로 추론하고
+ * 없으면 "단서 없음"이라 적는다 — 트렌드 이유를 지어내는 통로를 막는다.
+ * 파서는 preWritingAnalysis 를 소비하지 않으므로 본문에 누출될 수 없다.
+ */
+function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton: boolean): string {
+  const common = `
+    "coreSubject": "입력 자료의 핵심을 1문장으로 (자료에 있는 것만)",
+    "whyNow": "이 키워드·주제가 지금 검색·소비되는 이유 추론 — 자료의 시점·사건·반복 언급 단서가 있을 때만 그 단서를 근거로 적고, 없으면 '단서 없음'",
+    "readerSituation": "독자가 어떤 상황·막힌 지점에서 이 글을 만나는지 추론 (독자에 대한 추론 — 작성자 체험 주장 아님)",`;
+  const title = `
+    "titleRationale": "titleCandidates 3개가 각각 어떤 각도·어떤 근거를 쓰는지, 도입이 그 약속을 어떻게 갚는지 1~2문장"`;
+  const image = `,
+    "imageDirection": "글 전체 이미지 톤·소재 1문장 — 각 headings[].imagePrompt 는 그 소제목 본문의 구체 장면에서 도출한다"`;
+
+  let modeAxes = '';
+  if (mode === 'seo' || mode === 'mate') {
+    modeAxes = `
+    "searchIntent": "정보형|비교형|거래형 중 판정 + 독자의 실제 질문 1문장",
+    "mustAnswer": ["본문이 반드시 답해야 할 질문들 — headings 소제목이 이 질문들에 대응해야 한다"],${mode === 'mate' ? `
+    "citationAtoms": ["정의/기준/절차/비교/주의 중 자료에서 뽑을 수 있는 인용 원자 후보"],` : ''}`;
+  } else if (mode === 'homefeed') {
+    modeAxes = usesIssueStorySkeleton ? `
+    "confirmed": ["공식 발표·판결 등 확정 사실만"],
+    "unconfirmed": ["보도·추측 등 미확정 — 여기 넣은 것은 제목·궁금증 소재로 쓰지 않는다"],
+    "curiosityGaps": ["독자가 멈출 궁금증 갭 후보 2~3개 — 공적 활동(출연·하차·이적·복귀·편성·계약·수상)과 확정 사실 소재만"],` : `
+    "stopReason": "스크롤 중인 독자가 멈출 한 지점 — 자료에 실재하는 장면·조건·반복 지적만, 없으면 자료가 가장 구체적으로 다루는 것",`;
+  } else if (mode === 'affiliate') {
+    modeAxes = `
+    "purchaseDecision": "구매가 갈리는 구체 조건 1~2개 (자료·후기에서 관찰되는 것만)",
+    "objections": ["자료·후기에서 관찰되는 우려·반박 — 없으면 빈 배열, 지어내지 않는다"],
+    "evidenceMode": "FIRST_PARTY|REVIEW_SYNTHESIS|SPEC_ONLY 중 이 글의 근거 모드 판정",`;
+  } else if (mode === 'business') {
+    modeAxes = `
+    "inquiryTrigger": "문의로 이어지는 고객 상황 — 입력된 업체 정보·자료 범위에서만",`;
+  }
+
+  return `
+  "preWritingAnalysis": {${common}${modeAxes}${title}${image}
+  },`;
+}
+
+function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkeleton: boolean): string {
+  const issueExtra = usesIssueStorySkeleton ? `
+- titleCandidates 3개는 preWritingAnalysis.curiosityGaps 에서 나와야 하며, 서로 다른 제목 공식을 쓴다.
+- unconfirmed 에 넣은 사안은 제목·도입의 궁금증 소재로 쓰지 않는다(홈판 실존 인물 안전 규율과 동일).` : `
+- titleCandidates 3개는 preWritingAnalysis 의 추론(독자 상황·핵심 질문)에서 나와야 하며, 서로 다른 각도를 쓴다.`;
+  const modeExtra = (mode === 'seo' || mode === 'mate') ? `
+- headings 소제목은 mustAnswer 의 질문들에 대응한다. 질문에 대응하지 않는 소제목을 만들지 않는다.` : mode === 'affiliate' ? `
+- evidenceMode 판정과 다른 화자·근거를 본문에서 쓰지 않는다. objections 가 비어 있으면 반박 문단을 지어내지 않는다.` : '';
+  return `📌 [모든 모드 — 제목보다 추론이 먼저다]
+- preWritingAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
+- whyNow 는 자료 단서가 없으면 '단서 없음'이라 적는다 — 트렌드 이유를 지어내지 않는다.${issueExtra}${modeExtra}
+- 각 headings[].imagePrompt 는 imageDirection 을 따르되 그 소제목 본문의 구체 장면에서 도출한다 — 일반 소품 사진 묘사로 도망가지 않는다.
+- preWritingAnalysis 는 설계 메모다 — 그 문장들을 introduction·headings·conclusion 본문에 옮기지 않는다.
+
+`;
+}
+
 function buildModeStructureRule(mode: PromptMode): string {
   const isHomefeed = mode === 'homefeed';
   const isMate = mode === 'mate';
@@ -244,14 +309,7 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
 ────────────────────
 [출력 형식 — 반드시 이 순서와 JSON 형식으로]${modeStructureRule}${evidenceBlockRule}
 
-{${usesIssueStorySkeleton ? `
-  "issueAnalysis": {
-    "coreEvent": "입력 자료의 핵심 사건 1문장 (자료에 있는 것만)",
-    "confirmed": ["공식 발표·판결 등 확정 사실만"],
-    "unconfirmed": ["보도·추측 등 미확정 — 여기 넣은 것은 제목·궁금증 소재로 쓰지 않는다"],
-    "curiosityGaps": ["독자가 멈출 궁금증 갭 후보 2~3개 — 공적 활동(출연·하차·이적·복귀·편성·계약·수상)과 확정 사실 소재만"],
-    "titleRationale": "titleCandidates 3개가 각각 어떤 공식·어떤 갭을 쓰는지, 도입이 그 갭을 어떻게 갚는지 1~2문장"
-  },` : ''}
+{${buildPreWritingAnalysisSchema(mode, usesIssueStorySkeleton)}
   "selectedTitle": "제목 1",
   "titleCandidates": [
     {"text": "제목 1", "score": 95},
@@ -265,13 +323,7 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
   "category": "카테고리"
 }
 
-${usesIssueStorySkeleton ? `📌 [이슈픽 — 제목보다 추론이 먼저다]
-- issueAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
-- titleCandidates 3개는 issueAnalysis.curiosityGaps 에서 나와야 하며, 서로 다른 제목 공식을 쓴다.
-- unconfirmed 에 넣은 사안은 제목·도입의 궁금증 소재로 쓰지 않는다(홈판 실존 인물 안전 규율과 동일).
-- issueAnalysis 는 설계 메모다 — 그 문장들을 introduction·headings·conclusion 본문에 옮기지 않는다.
-
-` : ''}📌 [소제목 스타일 — 모든 모드 공통] headings[].title은 명사형·구 단위로 끝낸다(예: "…가 갈린 이유", "…확인 포인트"). "…습니다/…해요/…했어요/…했다"처럼 완결 문장으로 끝나는 소제목 금지, 30자 이내.
+${buildPreWritingAnalysisDirective(mode, usesIssueStorySkeleton)}📌 [소제목 스타일 — 모든 모드 공통] headings[].title은 명사형·구 단위로 끝낸다(예: "…가 갈린 이유", "…확인 포인트"). "…습니다/…해요/…했어요/…했다"처럼 완결 문장으로 끝나는 소제목 금지, 30자 이내.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🎨 [이미지 프롬프트 작성 규칙 - 매우 중요!]

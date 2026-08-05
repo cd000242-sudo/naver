@@ -35,12 +35,12 @@ function format(mode: 'homefeed' | 'seo', source: never): string {
 describe('이슈픽 — 제목보다 추론이 먼저다', () => {
   const f = format('homefeed', issueSource);
 
-  it('issueAnalysis 필드가 스키마에 있다', () => {
-    expect(f).toContain('"issueAnalysis"');
+  it('preWritingAnalysis 필드가 스키마에 있다', () => {
+    expect(f).toContain('"preWritingAnalysis"');
   });
 
-  it('issueAnalysis 가 selectedTitle 보다 앞이다 (생성 순서 강제)', () => {
-    const analysisAt = f.indexOf('"issueAnalysis"');
+  it('preWritingAnalysis 가 selectedTitle 보다 앞이다 (생성 순서 강제)', () => {
+    const analysisAt = f.indexOf('"preWritingAnalysis"');
     const titleAt = f.indexOf('"selectedTitle"');
     expect(analysisAt).toBeGreaterThan(-1);
     expect(titleAt).toBeGreaterThan(-1);
@@ -63,17 +63,23 @@ describe('이슈픽 — 제목보다 추론이 먼저다', () => {
   });
 
   it('분석 내용을 본문에 옮겨 적지 말라고 명시한다', () => {
-    expect(f).toMatch(/issueAnalysis[\s\S]{0,80}?본문[^\n]{0,30}(옮기지|쓰지) 않는다/);
+    expect(f).toMatch(/preWritingAnalysis[\s\S]{0,120}?본문에 옮기지 않는다/);
   });
 });
 
 describe('이슈픽 외 — 스키마가 바뀌지 않는다 (회귀)', () => {
-  it('일반 홈판(pet)에는 issueAnalysis 가 없다', () => {
-    expect(format('homefeed', plainSource)).not.toContain('"issueAnalysis"');
+  // [2026-08-05 후속] 추론 선행이 전 모드로 일반화됐다(preWritingAnalysis).
+  // 이슈픽 전용이던 것은 확정/미확정/궁금증 갭 축이다 — 그 축의 배타만 잠근다.
+  it('일반 홈판(pet)에는 이슈픽 전용 축이 없다', () => {
+    const f = format('homefeed', plainSource);
+    expect(f).toContain('"preWritingAnalysis"');
+    expect(f).not.toContain('"curiosityGaps"');
   });
 
-  it('SEO 에는 issueAnalysis 가 없다', () => {
-    expect(format('seo', issueSource)).not.toContain('"issueAnalysis"');
+  it('SEO 에는 이슈픽 전용 축이 없다', () => {
+    const f = format('seo', issueSource);
+    expect(f).toContain('"preWritingAnalysis"');
+    expect(f).not.toContain('"curiosityGaps"');
   });
 
   it('이슈픽에서도 selectedTitle·titleCandidates 는 그대로 있다', () => {
