@@ -75,6 +75,18 @@ describe('추론 선행 — 전 모드에서 분석이 제목보다 앞이다', 
   it('홈판 titleRationale 은 피드에서 멈춤을 만드는 근거를 요구한다', () => {
     expect(format('homefeed')).toMatch(/피드 노출면|스크롤 중 어느 지점에서 멈춤/);
   });
+
+  // [2026-08-06 전환 리서치] 업체 축이 inquiryTrigger 1줄뿐이고 headings 소비 지시가
+  // 비어 있어 추론이 본문에 연결되지 않았다 — seo(mustAnswer→소제목 대응)·affiliate
+  // (objections) 대비 공백. 문의 장벽 축 + 소제목 대응 지시를 추가한다.
+  it('업체: 문의 장벽 축 + 소제목이 장벽 해소에 대응한다', () => {
+    const f = format('business');
+    expect(f).toContain('"inquiryBarriers"');
+    expect(f).toMatch(/가격 불안[·,]?\s*업체 불신[·,]?\s*절차 모름/);
+    expect(f).toMatch(/없으면 빈 배열/);
+    expect(f).toMatch(/inquiryBarriers[\s\S]{0,200}(소제목|headings)/);
+    expect(f).toMatch(/근거 없는 장벽을 만들지 않는다|장벽을 지어내지 않는다/);
+  });
 });
 
 describe('추론 선행 — 모드별 축', () => {

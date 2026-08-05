@@ -89,7 +89,8 @@ function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton:
     "evidenceMode": "FIRST_PARTY|REVIEW_SYNTHESIS|SPEC_ONLY 중 이 글의 근거 모드 판정",`;
   } else if (mode === 'business') {
     modeAxes = `
-    "inquiryTrigger": "문의로 이어지는 고객 상황 — 입력된 업체 정보·자료 범위에서만",`;
+    "inquiryTrigger": "문의로 이어지는 고객 상황 — 입력된 업체 정보·자료 범위에서만",
+    "inquiryBarriers": ["독자가 문의를 망설이는 장벽 — 가격 불안·업체 불신·절차 모름 중 자료·업체 정보에서 관찰되는 것만, 없으면 빈 배열. 근거 없는 장벽을 만들지 않는다"],`;
   }
 
   return `
@@ -105,7 +106,8 @@ function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkelet
 - 홈판은 검색 결과가 아니라 피드 노출면이다 — 각 후보가 스크롤 중 어느 지점에서 멈춤을 만드는지 titleRationale 에 적는다.` : ''}`;
   const modeExtra = (mode === 'seo' || mode === 'mate') ? `
 - headings 소제목은 mustAnswer 의 질문들에 대응한다. 질문에 대응하지 않는 소제목을 만들지 않는다.` : mode === 'affiliate' ? `
-- evidenceMode 판정과 다른 화자·근거를 본문에서 쓰지 않는다. objections 가 비어 있으면 반박 문단을 지어내지 않는다.` : '';
+- evidenceMode 판정과 다른 화자·근거를 본문에서 쓰지 않는다. objections 가 비어 있으면 반박 문단을 지어내지 않는다.` : mode === 'business' ? `
+- headings 는 inquiryTrigger 의 상황과 inquiryBarriers 의 장벽 해소에 대응한다 — 비용이 정해지는 조건·진행 절차·문의 전 확인 항목 같은 소제목을 장벽에 맞춰 배치한다. inquiryBarriers 가 비어 있으면 장벽 해소 문단을 지어내지 않는다.` : '';
   return `📌 [모든 모드 — 제목보다 추론이 먼저다]
 - preWritingAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
 - whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.${issueExtra}${modeExtra}
