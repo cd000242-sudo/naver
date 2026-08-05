@@ -1038,6 +1038,46 @@ function buildReadableParagraphs(paragraph: string, maxChars: number): string[] 
   return chunks;
 }
 
+/**
+ * [2026-08-05] 인용문(따옴표) — 하이라이트 1순위.
+ *
+ * 사용자 관찰: "하이라이트는 핵심 내용도 중요하지만 '경험'이나 따옴표에도
+ * 들어가던데, 따옴표가 핵심 내용인 것 같더라."
+ *
+ * 따옴표로 감싼 문장은 남의 말·후기 인용이거나 글쓴이가 강조하려고 떼어낸
+ * 문구다. 둘 다 독자가 멈추는 지점이라 형광펜 대상으로 가장 적합한데,
+ * 기존 점수 규칙에는 따옴표 항목이 아예 없었다.
+ *
+ * 짝이 맞는 경우만 인정한다 — 축약형 아포스트로피(don't)나 한쪽만 남은
+ * 따옴표를 인용으로 오인하지 않기 위해서다.
+ */
+const QUOTED_SEGMENT_PATTERNS: readonly RegExp[] = [
+  /"[^"]{2,}"/,
+  /'[^']{2,}'/,
+  /“[^”]{2,}”/, // “ ”
+  /‘[^’]{2,}’/, // ‘ ’
+  /「[^」]{2,}」/, // 「 」
+  /『[^』]{2,}』/, // 『 』
+];
+
+/**
+ * [2026-08-05] 경험 서술 — 하이라이트 2순위.
+ *
+ * IMPORTANT_KEYWORDS에 '경험'·'후기'라는 **명사**는 있지만, 실제 경험 문장은
+ * 그 단어를 쓰지 않는다("직접 써보니 소음이 확실히 줄었어요"). 서술 어미로
+ * 잡아야 실제 경험 문장이 걸린다.
+ */
+const EXPERIENCE_PATTERNS: readonly RegExp[] = [
+  /(?:써|사용해|해|가|먹어|입어|발라|타|읽어|들어|만져)\s?(?:보니|봤|본\s?결과)/,
+  /(?:갔|왔|했|썼)더니/,
+  /직접\s?(?:써|해|가|먹어|사용)/,
+  /느꼈|느껴졌|체감/,
+];
+
+function matchesAny(patterns: readonly RegExp[], text: string): boolean {
+  return patterns.some((pattern) => pattern.test(text));
+}
+
 function scoreImportantSentence(value: string): number {
   const plain = stripInlineMarkdown(value).replace(/\s+/g, ' ').trim();
   const lower = plain.toLowerCase();
@@ -1045,6 +1085,10 @@ function scoreImportantSentence(value: string): number {
   for (const keyword of IMPORTANT_KEYWORDS) {
     if (lower.includes(keyword.toLowerCase())) score += 3;
   }
+  // 인용문은 키워드보다 높게 본다 — 독자가 실제로 멈추는 지점.
+  if (matchesAny(QUOTED_SEGMENT_PATTERNS, plain)) score += 4;
+  // 경험 서술은 키워드와 같은 무게.
+  if (matchesAny(EXPERIENCE_PATTERNS, plain)) score += 3;
   if (plain.length >= 24 && plain.length <= 110) score += 1;
   if (/[!?]/.test(plain)) score += 1;
   if (/\d|%/.test(plain)) score += 1;
