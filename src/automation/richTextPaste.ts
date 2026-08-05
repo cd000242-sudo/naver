@@ -668,6 +668,12 @@ function joinHtmlPartsWithParagraphSpacers(parts: string[], spacerHtml: string):
       joined.push(spacerHtml);
     }
   });
+  // [2026-08-06] 섹션은 항상 리셋 스페이서(#ffffff 배경)로 끝낸다. 하이라이트 문장이
+  // 마지막 블록이면 붙여넣기 캐럿이 형광펜 스타일을 물려받아 이후 타이핑(폴백·이전글
+  // 훅·해시태그)이 통째로 칠해졌다(라이브 224369415231).
+  if (joined.length > 0) {
+    joined.push(spacerHtml);
+  }
   return joined.join('\n\n');
 }
 
@@ -1659,10 +1665,14 @@ export function isPasteVisible(
   trimmedPlain: string,
   expectedTableDelta = 0,
 ): boolean {
+  // [2026-08-06] \uBE44\uAD50\uB294 \uACF5\uBC31 \uC644\uC804 \uC81C\uAC70 \uACF5\uAC04\uC5D0\uC11C \uD55C\uB2E4. \uC2A4\uB0C5\uC0F7\uC740 textContent \uAE30\uBC18\uC774\uB77C
+  //   <p>/<br> \uACBD\uACC4\uC5D0 \uACF5\uBC31\uC774 \uC544\uC608 \uC5C6\uB294\uB370("\uC601\uD654\uB97C\uC624\uAC00\uBA70") \uAE30\uB300 \uD14D\uC2A4\uD2B8\uB294 \n\u2192' ' \uC815\uADDC\uD654\uB77C
+  //   \uC575\uCEE4 indexOf \uAC00 \uC804\uBD80 \uC2E4\uD328, landed paste(cov=0.95)\uB97C \uC2E4\uD328\uB85C \uC624\uD0D0 \u2192 \uD0A4\uBCF4\uB4DC \uC7AC\uD0C0\uC774\uD551
+  //   \u2192 \uBCF8\uBB38 2\uBC8C \uBC1C\uD589(\uB77C\uC774\uBE0C 224369415231). \uB0B4\uC6A9 \uAE00\uC790\uB294 \uADF8\uB300\uB85C \uBE44\uAD50\uB418\uBBC0\uB85C \uCEE4\uBC84\uB9AC\uC9C0\u00B7
+  //   \uC575\uCEE4\u00B7reorder \uAC8C\uC774\uD2B8\uC758 \uD310\uBCC4\uB825\uC740 \uC720\uC9C0\uB41C\uB2E4.
   const normalize = (value: string): string => String(value || '')
     .replace(/[\u200B-\u200D\uFEFF]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+    .replace(/\s+/g, '');
   const expectedText = normalize(trimmedPlain);
   const beforeText = normalize(before.text);
   const afterText = normalize(after.text);
@@ -1694,7 +1704,12 @@ export function isPasteVisible(
 
   const rawDelta = Math.max(0, after.chars - before.chars);
   const normalizedDelta = Math.max(0, afterText.length - beforeText.length);
-  const coverage = Math.max(rawDelta, normalizedDelta) / expected;
+  // [2026-08-06] 공백 제거 공간에서는 rawDelta(공백 포함 chars 단위)가 커버리지를
+  // 15~20% 부풀린다(70% 안착이 0.90으로 측정 → 누락 차단 게이트 무력화). 텍스트
+  // 스냅샷이 신뢰 가능하면 stripped 단위(normalizedDelta)만 쓰고, before 텍스트
+  // 추출이 실패한 경우(chars 는 있는데 text 가 빈)에만 rawDelta 로 폴백한다.
+  const textSnapshotsTrusted = beforeText.length > 0 || before.chars === 0;
+  const coverage = (textSnapshotsTrusted ? normalizedDelta : rawDelta) / expected;
   const minimumCoverage = expected <= 60 ? 0.6 : (after.tables > before.tables ? 0.72 : 0.82);
   if (coverage < minimumCoverage) return false;
 
@@ -1798,7 +1813,10 @@ export function assessPartialSalvage(
   const bef = normalizeEditorSnapshotText(before.text || '');
   if (!exp.length || !aft.length) return { acceptable: false, coverage: 0 };
   const rawDelta = Math.max(0, after.chars - before.chars);
-  const coverage = Math.max(rawDelta, Math.max(0, aft.length - bef.length)) / exp.length;
+  // [2026-08-06] isPasteVisible 과 동일 — stripped 공간에서 rawDelta 는 커버리지를
+  // 부풀리므로 텍스트 스냅샷이 있으면 stripped 단위를 쓴다.
+  const strippedDelta = Math.max(0, aft.length - bef.length);
+  const coverage = (bef.length > 0 || before.chars === 0 ? strippedDelta : rawDelta) / exp.length;
   const head = exp.slice(0, Math.min(16, exp.length));
   const befIdx = bef ? aft.indexOf(bef) : -1;
   const headSearchFrom = befIdx >= 0 ? befIdx + bef.length - 2 : 0;
@@ -1832,10 +1850,11 @@ function buildPasteFailureReason(
 }
 
 function normalizeEditorSnapshotText(value: string): string {
+  // [2026-08-06] isPasteVisible \uACFC \uB3D9\uC77C \uC0AC\uC720 \u2014 textContent \uC2A4\uB0C5\uC0F7\uC740 \uC904\uBC14\uAFC8 \uC704\uCE58\uC5D0
+  // \uACF5\uBC31\uC774 \uC5C6\uC5B4, \uACF5\uBC31\uC744 \uB0A8\uAE30\uB294 \uC815\uADDC\uD654\uB85C\uB294 salvage head \uC575\uCEE4\u00B7\uB864\uBC31 \uB300\uC870\uAC00 \uC624\uD0D0\uD55C\uB2E4.
   return String(value || '')
     .replace(/[\u200B-\u200D\uFEFF]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+    .replace(/\s+/g, '');
 }
 
 async function pressControlShortcut(page: Page, key: KeyInput): Promise<void> {

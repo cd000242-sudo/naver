@@ -13,18 +13,23 @@ export interface TypingFallbackPlan {
   /** Index of the first paragraph (\n{2,} block) still missing from the editor. */
   startParagraphIndex: number;
   /**
-   * Normalized-space chars of the first missing paragraph that already sit at
-   * the editor tail (mid-paragraph cut). 0 = paragraph boundary.
+   * Whitespace-stripped chars of the first missing paragraph that already sit
+   * at the editor tail (mid-paragraph cut). 0 = paragraph boundary.
    */
   firstParagraphCharOffset: number;
-  /** Normalized chars confirmed present (fully matched paragraphs only). */
+  /** Whitespace-stripped chars confirmed present (fully matched paragraphs only). */
   matchedChars: number;
 }
 
-const MIN_TAIL_OVERLAP_CHARS = 15;
+// [2026-08-06] 공백 제외 글자수 기준. 15(공백 포함)였을 때와 같은 실질 분량이 되도록
+// 12로 조정 — 한국어 문장에서 공백은 약 15~20%를 차지한다.
+const MIN_TAIL_OVERLAP_CHARS = 12;
 
 function normalizeForMatch(value: string): string {
-  return String(value ?? '').replace(/\s+/g, ' ').trim();
+  // [2026-08-06] 에디터 꼬리는 textContent 계열 추출이라 줄바꿈 위치에 공백이 없다
+  // ("영화를오가며"). 공백을 남기는 정규화로는 붙여넣기분을 못 찾아 'full'을 돌려줘
+  // 같은 섹션을 통째로 재타이핑했다(라이브 224369415231). 공백 완전 제거로 대조한다.
+  return String(value ?? '').replace(/\s+/g, '');
 }
 
 export function splitFallbackParagraphs(plainText: string): string[] {
@@ -84,8 +89,10 @@ export function planTypingFallback(
 }
 
 /**
- * Map a normalized-space offset back into the raw paragraph (which still
+ * Map a whitespace-stripped offset back into the raw paragraph (which still
  * contains \n chunk breaks) and return the untyped remainder.
+ * [2026-08-06] Offset unit follows planTypingFallback's whitespace-stripped
+ * comparison space: only non-whitespace chars consume the offset.
  */
 export function sliceParagraphFromNormalizedOffset(
   rawParagraph: string,
@@ -96,18 +103,8 @@ export function sliceParagraphFromNormalizedOffset(
 
   let consumed = 0;
   let i = 0;
-  let lastWasSpace = true; // leading whitespace does not count (trim semantics)
   while (i < raw.length && consumed < normalizedOffset) {
-    const ch = raw[i];
-    if (/\s/.test(ch)) {
-      if (!lastWasSpace) {
-        consumed += 1;
-        lastWasSpace = true;
-      }
-    } else {
-      consumed += 1;
-      lastWasSpace = false;
-    }
+    if (!/\s/.test(raw[i])) consumed += 1;
     i += 1;
   }
   return raw.slice(i).replace(/^\s+/, '');

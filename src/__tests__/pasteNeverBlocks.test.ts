@@ -54,6 +54,15 @@ describe('paste never blocks publishing (v2.11.140b)', () => {
     expect(assessPartialSalvage(before, after, expected).acceptable).toBe(false);
   });
 
+  it('[2026-08-06] 공백 전멸 스냅샷(textContent)에서도 과반 안착이면 salvage 인정', () => {
+    const expected = '전혜지은 하나의 드라마와 영화에만\n머물지 않았습니다.'.repeat(8);
+    const gluedExpected = expected.replace(/\s+/g, '');
+    const beforeText = 'ㄴ'.repeat(300);
+    const after = { chars: 300 + gluedExpected.length, text: beforeText + gluedExpected };
+    const salvage = assessPartialSalvage({ chars: 300, text: beforeText }, after, expected);
+    expect(salvage.acceptable).toBe(true);
+  });
+
   it('시작 앵커가 append 지점에 없으면(오배치) salvage 거부', () => {
     const expected = '가'.repeat(100) + '나'.repeat(100);
     const before = { chars: 300, text: 'ㄴ'.repeat(300) };

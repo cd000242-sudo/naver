@@ -48,6 +48,25 @@ describe('buildMobileRichHtml', () => {
     expect(result.html).not.toContain('background-color:#fff7d6');
   });
 
+  // [2026-08-06 라이브 224369415231] 하이라이트 문장이 섹션의 마지막 블록이면 붙여넣기
+  // 캐럿이 형광펜 스타일을 물려받아 이후 타이핑(폴백·이전글 훅·해시태그)이 통째로
+  // 칠해졌다. 섹션 HTML 은 항상 리셋 스페이서(#ffffff 배경)로 끝나야 한다.
+  it('ends every section with a reset spacer so a trailing highlight cannot leak into typed text', () => {
+    const theme = SOFT_HIGHLIGHT_THEMES[2];
+    const result = buildMobileRichHtml(
+      [
+        'This opener is useful but not the main point.',
+        'The most important conclusion is that proof, comparison, and experience build trust.',
+      ].join('\n'),
+      { maxChunkChars: 200, highlight: true, maxHighlights: 2, highlightTheme: theme }
+    );
+
+    expect(result.highlightCount).toBeGreaterThan(0);
+    const tail = result.html.slice(-280);
+    expect(tail).toContain('data-rich-spacer="true"');
+    expect(tail).toContain('background-color:#ffffff');
+  });
+
   it('does not add a table of contents by default and keeps centered heading markers', () => {
     const result = buildMobileRichHtml(
       [

@@ -104,6 +104,32 @@ describe('isPasteVisible coverage guard', () => {
     expect(isPasteVisible(before, after, shortPlain)).toBe(false);
   });
 
+  // [2026-08-06 라이브 224369415231] 붙여넣기 완착(cov=0.95)인데 스냅샷이 textContent
+  // 기반이라 줄바꿈 위치의 공백이 전멸("영화를오가며") → head/tail 앵커 전부 -1 →
+  // 실패 오탐 → 키보드 재타이핑으로 본문 2벌 발행. 비교는 공백 무시 공간에서 해야 한다.
+  describe('textContent glue: 줄바꿈 공백이 전멸한 스냅샷', () => {
+    const rhythm = [
+      '전혜지은 하나의 드라마와 영화에만\n머물지 않았습니다.',
+      '뷰티 브랜드를 비롯한 광고 모델로\n활동 폭을 넓혔고,\n연극 무대에도 섰습니다.',
+      '영화 제목을 한꺼번에 보는 것보다 매체를\n나눠 보면 활동 흐름이 더 뚜렷해집니다.',
+    ].map((line) => line.repeat(4)).join('\n\n');
+    const glued = rhythm.replace(/\s+/g, '');
+
+    it('공백이 전멸한 스냅샷에서도 landed paste는 visible', () => {
+      const beforeGlued = '이전섹션본문입니다소제목포함'.repeat(4);
+      const before = stats(beforeGlued.length, { text: beforeGlued });
+      const after = stats(beforeGlued.length + glued.length, { text: beforeGlued + glued });
+      expect(isPasteVisible(before, after, rhythm)).toBe(true);
+    });
+
+    it('공백 전멸 스냅샷이라도 부분 안착(20%)은 여전히 거부', () => {
+      const before = stats(0, { text: '' });
+      const partial = glued.slice(0, Math.floor(glued.length * 0.2));
+      const after = stats(partial.length, { text: partial });
+      expect(isPasteVisible(before, after, rhythm)).toBe(false);
+    });
+  });
+
   // [v2.11.134] Live homefeed publish-blocker: the section fully landed
   // (beforeChars=70 → afterChars=444, ~374 chars inserted) but the strict
   // `afterText.startsWith(beforeText)` append-gate false-failed whenever the

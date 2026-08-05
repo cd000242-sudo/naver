@@ -65,9 +65,20 @@ describe('typing fallback duplicate guard', () => {
     expect(plan.startParagraphIndex).toBe(2);
   });
 
-  it('sliceParagraphFromNormalizedOffset: 원문 개행을 보존한 잔여 반환', () => {
+  // [2026-08-06 라이브 224369415231] 롤백 실패로 남은 붙여넣기분은 textContent 스냅샷이라
+  // 공백이 전멸한 형태("영화를오가며")로 대조된다. 공백 무시 대조가 아니면 중복가드가
+  // 'full'을 돌려줘 같은 섹션을 통째로 재타이핑한다 — 본문 2벌의 마지막 방어선.
+  it('공백 전멸 에디터 꼬리에서도 전량 존재를 인식한다 → skip', () => {
+    const editorTail = `소제목 ${expected}`.replace(/\s+/g, '');
+    const plan = planTypingFallback(expected, editorTail);
+    expect(plan.mode).toBe('skip');
+  });
+
+  it('sliceParagraphFromNormalizedOffset: 원문 개행을 보존한 잔여 반환 (오프셋 단위 = 공백 제외 글자수)', () => {
     expect(sliceParagraphFromNormalizedOffset('가나다 라마\n바사아', 0)).toBe('가나다 라마\n바사아');
-    expect(sliceParagraphFromNormalizedOffset('가나다 라마\n바사아', 7)).toBe('바사아');
+    // [2026-08-06] 오프셋 단위가 planTypingFallback의 공백 무시 대조와 함께 바뀌었다:
+    // '가나다라마' = 공백 제외 5글자 → 잔여 '바사아'
+    expect(sliceParagraphFromNormalizedOffset('가나다 라마\n바사아', 5)).toBe('바사아');
   });
 
   it('폴백 소스는 22자 청킹된 rich.plainText — AI 원본 직타이핑 금지 (소스 계약)', () => {
