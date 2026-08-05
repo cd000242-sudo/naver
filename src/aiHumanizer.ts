@@ -95,7 +95,8 @@ const SYNONYM_MAP: Record<string, string[]> = {
   '빠른': ['신속한', '재빠른', '급속한', '민첩한'],
   '느린': ['더딘', '천천한', '완만한'],
   '새로운': ['신선한', '참신한', '획기적인', '혁신적인'],
-  '다양한': ['여러 가지', '폭넓은', '각양각색의', '다채로운'],
+  // '다양한' 은 base F3 금칙어이고 첫 후보 '여러 가지' 역시 F3 금칙어다 — 치환 자체를 뺀다.
+  '다양한': ['폭넓은', '각양각색의', '다채로운'],
   '효과적인': ['유효한', '효율적인', '탁월한'],
   '실제로': ['사실', '실상', '현실적으로', '실은'],
   '대부분': ['거의', '대다수', '많은 경우', '주로'],
@@ -119,7 +120,8 @@ const AI_PATTERN_REMOVALS_COMMON: { pattern: RegExp; replacement: string }[] = [
   { pattern: /결론적으로,?\s*/g, replacement: '결국 ' },
   { pattern: /중요한 점은,?\s*/g, replacement: '' },
   { pattern: /기본적으로,?\s*/g, replacement: '' },
-  { pattern: /일반적으로,?\s*/g, replacement: '보통 ' },
+  // [2026-08-05] '일반적으로' → '보통' 은 base F3 금칙어 → F3 금칙어라 순수 손해다. 삭제만 한다.
+  { pattern: /일반적으로,?\s*/g, replacement: '' },
 ];
 
 // ✅ 구어체 전용 AI 패턴 제거 — professional/formal 톤에서는 스킵
@@ -178,7 +180,7 @@ const PERSONAL_EXPRESSIONS = [
 // the prompt-level guards (SPEC-REVIEW-001 / 근거 자료 부재 가드). Detection
 // keeps using the full list above so human-written experience still scores.
 const PERSONAL_EXPRESSIONS_SAFE_INSERT = [
-  '제 기준으로는', '개인적으로', '결론부터 말하면', '정리하면',
+  '제 기준으로는', '개인적으로', '결론부터 말하면',
   '찾아보니까', '핵심만 보면', '한 가지 분명한 건', '제가 느끼기엔',
   '솔직히 말하면', '따져보면',
 ];
@@ -347,8 +349,15 @@ export function humanizeContent(content: string, intensity: 'light' | 'medium' |
   // 10. 문장 길이 불규칙화 (모든 톤 공통 — 리듬감은 중요)
   result = irregularizeSentenceLength(result);
 
-  // 11. 숫자/날짜 자연화 (모든 톤 공통)
-  result = naturalizeNumbers(result);
+  // 11. [2026-08-05] 숫자 자연화를 파이프라인에서 분리했다.
+  //   naturalizeNumbers 는 자료에 있는 백분율을 말로 바꿨다("100%" → "거의 전부").
+  //   단순 문자열 replace 라 부분 일치까지 걸려 원문이 파괴됐다 —
+  //   "금리 4.50%" → "금리 4.절반 정도", "지원율 150%" → "지원율 1절반 정도",
+  //   "수수료 10%p" → "수수료 일부p".
+  //   자료의 수치를 임의로 바꾸는 것은 F1(자료 외 사실 금지)과 같은 축의 위반이고,
+  //   금리·환급률·합격률처럼 판단이 걸린 수치에서는 독자를 오도한다.
+  //   함수는 남긴다. 되살리려면 최소한 단어 경계를 지키고, 수치가 판단 근거인
+  //   카테고리(society·health)에서는 발동하지 않아야 한다.
 
   // Restore shielded table rows (own line, transforms never touched them).
   if (shieldedTables.length > 0) {
@@ -753,19 +762,19 @@ function deduplicateSourceCitations(text: string): string {
     {
       pattern: /참고\s*자료를\s*보면/g,
       // 반복 인용은 헤징으로 바꾸지 말고 그냥 제거(사실 바로 진술) 위주 — 빈 문자열 다수
-      alternatives: ['', '', '알고 보니', '정리하면']
+      alternatives: ['', '', '', '']
     },
     {
       pattern: /자료에\s*따르면/g,
-      alternatives: ['', '', '실은', '알고 보니']
+      alternatives: ['', '', '', '']
     },
     {
       pattern: /여러\s*(?:참고\s*)?자료(?:들)?(?:을|는|에서)/g,
-      alternatives: ['확인 결과', '알아본 바로는', '']
+      alternatives: ['', '', '']
     },
     {
       pattern: /연구\s*결과에\s*따르면/g,
-      alternatives: ['확인된 바로는', '알려진 것처럼', '']
+      alternatives: ['', '', '']
     },
   ];
 
@@ -814,8 +823,13 @@ function softenDeclarativeSentences(text: string, isFormalTone: boolean = false)
     result = result.replace(pattern, (match) => {
       changes++;
       if (isFormalTone) {
-        // 격식체: 연결어를 붙여서 완화
-        return match.replace(/\.\s*$/, ', 이에 대해 구체적으로 살펴보겠습니다.');
+        // [2026-08-05] 격식체 완화어를 제거했다. 붙이던 문구
+        //   ', 이에 대해 구체적으로 살펴보겠습니다.' 가 base R0-8(AI 정리체 금지)과
+        //   B1 블랙리스트("~에 대해 살펴보겠습니다")에 정면으로 걸린다.
+        //   프롬프트가 0점 처리하는 표현을 후처리가 만들어 넣고 있었다.
+        //   완화가 필요하면 원문을 그대로 두는 편이 낫다.
+        changes--;
+        return match;
       } else {
         // 구어체: 더 자연스럽게 변환
         return match
@@ -847,7 +861,8 @@ function connectIsolatedSentences(text: string, isFormalTone: boolean = false): 
 function connectIsolatedSentencesSegment(text: string, isFormalTone: boolean = false): string {
   // 연결어 목록 (톤별)
   const formalConnectors = ['이에 따라 ', '이를 바탕으로 보면 ', '이러한 맥락에서 ', '한편 ', '다만 ', '아울러 '];
-  const casualConnectors = ['그래서 ', '근데 ', '알고 보니 ', '그러니까 ', '사실 ', '그런데 '];
+  // [2026-08-05] '알고 보니 ' 는 근거 없는 1인칭 발견 주장이라 뺐다.
+  const casualConnectors = ['그래서 ', '근데 ', '그러니까 ', '사실 ', '그런데 '];
 
   const connectors = isFormalTone ? formalConnectors : casualConnectors;
 
