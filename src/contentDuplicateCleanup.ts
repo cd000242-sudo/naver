@@ -105,6 +105,10 @@ export function removeDuplicateHeadings(bodyPlain: string, headings: HeadingLike
 
   for (const paragraph of paragraphs) {
     const normalized = paragraph.trim().toLowerCase().replace(/\s+/g, ' ');
+    // [2026-08-05] 비교용은 불릿 마커·문장부호까지 제거한다(문장 dedupe와 동일 규칙).
+    //   실측: 같은 내용이 불릿판("- …")과 평문판("….")으로 2벌 발행 — 토큰 끝 문장부호
+    //   차이("반복됩니다" vs "반복됩니다.")로 유사도가 0.85 밑으로 떨어져 못 잡았다.
+    const comparable = normalized.replace(/[^\w\s가-힣]/g, '').replace(/\s+/g, ' ').trim();
     const isClosingParagraph = closingPatterns.some((pattern) => {
       pattern.lastIndex = 0;
       return pattern.test(paragraph);
@@ -120,7 +124,7 @@ export function removeDuplicateHeadings(bodyPlain: string, headings: HeadingLike
 
     let isDuplicate = false;
     for (const seen of seenParagraphs) {
-      const similarity = calculateSimilarity(normalized, seen);
+      const similarity = calculateSimilarity(comparable, seen);
       if (similarity > 0.85) {
         isDuplicate = true;
         console.warn(`[중복 내용 감지]유사도 ${(similarity * 100).toFixed(1)}% - 중복 문단 제거`);
@@ -139,52 +143,78 @@ export function removeDuplicateHeadings(bodyPlain: string, headings: HeadingLike
     }
 
     if (!isDuplicate && normalized.length > 20) {
-      seenParagraphs.add(normalized);
+      seenParagraphs.add(comparable);
       uniqueParagraphs.push(paragraph);
     }
   }
 
   cleaned = uniqueParagraphs.join('\n\n');
 
-  const last1000Chars = cleaned.slice(-1000);
-  const sentences = last1000Chars.split(/[.!?。！？]\s*/).filter((sentence) => sentence.trim().length > 5);
-  const uniqueSentences: string[] = [];
+  // [2026-08-05] 꼬리 중복 제거를 문단 단위로 재작성.
+  //   기존 slice(-1000) 재구성은 (a) 경계를 구분자 없이 이어붙여 "…있습니다.서로를"
+  //   이음새를 만들고 (b) 꼬리 1000자 안의 문단 경계·불릿 줄바꿈을 전부 파괴했다(라이브 실측).
+  //   경계를 문단 시작점으로 당기고, 중복이 실제로 제거된 문단만 다시 조립한다.
+  const TAIL_WINDOW = 1000;
+  let tailStart = 0;
+  if (cleaned.length > TAIL_WINDOW) {
+    const boundary = cleaned.lastIndexOf('\n\n', cleaned.length - TAIL_WINDOW);
+    tailStart = boundary === -1 ? 0 : boundary + 2;
+  }
+  const tailParagraphs = cleaned.slice(tailStart).split(/\n\n+/);
   const seenSentences = new Set<string>();
+  const rebuiltParagraphs: string[] = [];
+  let totalSentenceCount = 0;
+  let removedSentenceCount = 0;
 
-  for (const sentence of sentences) {
-    const normalized = sentence.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[^\w\s가-힣]/g, '');
-    const hasClosingPattern = closingPatterns.some((pattern) => {
-      pattern.lastIndex = 0;
-      return pattern.test(sentence);
-    });
+  for (const paragraph of tailParagraphs) {
+    const sentences = paragraph.split(/[.!?。！？]\s*/).filter((sentence) => sentence.trim().length > 5);
+    totalSentenceCount += sentences.length;
+    const uniqueSentences: string[] = [];
 
-    if (hasClosingPattern) {
-      const patternKey = closingPatterns.find((pattern) => pattern.test(sentence))?.source || '';
-      if (seenSentences.has(`closing_${patternKey} `)) continue;
-      seenSentences.add(`closing_${patternKey} `);
-    }
+    for (const sentence of sentences) {
+      const normalized = sentence.trim().toLowerCase().replace(/\s+/g, ' ').replace(/[^\w\s가-힣]/g, '');
+      const hasClosingPattern = closingPatterns.some((pattern) => {
+        pattern.lastIndex = 0;
+        return pattern.test(sentence);
+      });
 
-    let isDuplicate = false;
-    for (const seen of seenSentences) {
-      if (seen.startsWith('closing_')) continue;
-      const similarity = calculateSimilarity(normalized, seen);
-      if (similarity > 0.6) {
-        isDuplicate = true;
-        break;
+      if (hasClosingPattern) {
+        const patternKey = closingPatterns.find((pattern) => pattern.test(sentence))?.source || '';
+        if (seenSentences.has(`closing_${patternKey} `)) continue;
+        seenSentences.add(`closing_${patternKey} `);
+      }
+
+      let isDuplicate = false;
+      for (const seen of seenSentences) {
+        if (seen.startsWith('closing_')) continue;
+        const similarity = calculateSimilarity(normalized, seen);
+        if (similarity > 0.6) {
+          isDuplicate = true;
+          break;
+        }
+      }
+
+      if (!isDuplicate && normalized.length > 5) {
+        seenSentences.add(normalized);
+        uniqueSentences.push(sentence);
       }
     }
 
-    if (!isDuplicate && normalized.length > 5) {
-      seenSentences.add(normalized);
-      uniqueSentences.push(sentence);
+    if (uniqueSentences.length === sentences.length) {
+      // 중복이 없는 문단은 원문 그대로 보존한다(불릿·물음표 등 서식 유지).
+      rebuiltParagraphs.push(paragraph);
+      continue;
+    }
+
+    removedSentenceCount += sentences.length - uniqueSentences.length;
+    if (uniqueSentences.length > 0) {
+      rebuiltParagraphs.push(`${uniqueSentences.map((sentence) => sentence.trim()).join('. ')}.`);
     }
   }
 
-  if (uniqueSentences.length < sentences.length) {
-    const beforeLast1000 = cleaned.slice(0, -1000);
-    const reconstructedLast = uniqueSentences.join('. ') + (uniqueSentences.length > 0 ? '.' : '');
-    cleaned = beforeLast1000 + reconstructedLast;
-    console.warn(`[마무리 반복 제거] ${sentences.length}개 문장 중 ${uniqueSentences.length}개만 유지`);
+  if (removedSentenceCount > 0) {
+    cleaned = cleaned.slice(0, tailStart) + rebuiltParagraphs.join('\n\n');
+    console.warn(`[마무리 반복 제거] ${totalSentenceCount}개 문장 중 ${totalSentenceCount - removedSentenceCount}개만 유지`);
   }
 
   cleaned = cleaned.replace(/(.{20,}?)(\s*\1){2,}/g, '$1');
