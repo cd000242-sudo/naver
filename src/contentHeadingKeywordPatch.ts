@@ -40,6 +40,8 @@ const PERSON_ISSUE_TERMS = [
   '이슈',
   '사이버',
   '불링',
+  // [2026-08-05] 인물 정체 질의("○○ 누구")도 이름 조각 접두가 부자연스럽다 — 접두 스킵.
+  '누구',
 ];
 
 function escapeRegex(value: string): string {
@@ -96,11 +98,21 @@ function hasPersonIssueTerm(tokens: string[]): boolean {
   return PERSON_ISSUE_TERMS.some((term) => joined.includes(term));
 }
 
+// [2026-08-05] 지시관형사(이런/그런/어떤 …)도 핵심어가 될 수 없다.
+//   실측 버그: 키워드 "이런 엿같은 사랑 하영 누구"에서 "이런"이 핵심어로 뽑혀
+//   소제목 2개에 "이런 " 접두가 붙어 발행됨. 닫힌 목록이라 오탐 없음.
+const DETERMINER_TOKENS = new Set([
+  '이런', '그런', '저런', '요런', '어떤', '무슨', '어느', '웬만한',
+]);
+
 // [2026-07-04] 동사 관형형(-는: 오는/하는/되는/없는 …)은 키워드 '핵심어'가 될 수 없다.
 //   실측 버그: 키워드 "비 오는 날 수건 쉰내"에서 첫 토큰 "비"(1글자)가 스킵되고 "오는"이
 //   핵심어로 뽑혀 소제목 2개에 "오는 " 접두가 붙어 발행됨. 명사 토큰을 우선 선택한다.
+// [2026-08-05] ~같은/~스러운/~로운 형용사 관형형 추가("엿같은" 실측).
+//   ~은 전체를 거르면 은으로 끝나는 사람 이름(지은·하은)을 오판하므로 접미사 한정.
 function isVerbalModifierToken(token: string): boolean {
-  return /[가-힣]는$/.test(token);
+  if (DETERMINER_TOKENS.has(token)) return true;
+  return /[가-힣]는$/.test(token) || /(같은|스러운|로운)$/.test(token);
 }
 
 export function resolveHeadingKeywordCore(primaryKeyword: string): HeadingKeywordCoreResult {

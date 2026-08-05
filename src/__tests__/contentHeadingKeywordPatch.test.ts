@@ -28,6 +28,27 @@ describe('resolveHeadingKeywordCore', () => {
     expect(resolveHeadingKeywordCore('다이어트 식단').core).toBe('다이어트');
     expect(resolveHeadingKeywordCore('오는 가는').core).toBe('오는'); // 폴백(기존 동작)
   });
+
+  // [2026-08-05 실측 버그] 키워드 "이런 엿같은 사랑 하영 누구" → 지시관형사 "이런"이
+  //   핵심어로 뽑혀 소제목 2개에 "이런 " 접두가 붙어 발행됨. "엿같은"(~은 관형형)도 동일.
+  it('지시관형사(이런/그런/어떤)와 ~같은 관형형은 핵심어로 뽑지 않는다 (이런 접두 회귀 잠금)', () => {
+    const core = resolveHeadingKeywordCore('이런 엿같은 사랑 하영 누구');
+    expect(core.core).not.toBe('이런');
+    expect(core.core).not.toBe('엿같은');
+    expect(resolveHeadingKeywordCore('그런 사이 결말').core).toBe('사이');
+    expect(resolveHeadingKeywordCore('어떤 청소기 추천').core).toBe('청소기');
+  });
+
+  it('인물 정체 질의(누구)는 소제목 접두 자체를 건너뛴다', () => {
+    const result = resolveHeadingKeywordCore('하영 누구');
+    expect(result.shouldPatch).toBe(false);
+    expect(result.reason).toContain('person-issue');
+  });
+
+  it('은으로 끝나는 사람 이름(지은·하은)은 관형형으로 오판하지 않는다', () => {
+    expect(resolveHeadingKeywordCore('지은 근황').core).toBe('지은');
+    expect(resolveHeadingKeywordCore('하은 인스타').core).toBe('하은');
+  });
 });
 
 describe('applyHeadingKeywordPatch — 관형형 접두 회귀', () => {
