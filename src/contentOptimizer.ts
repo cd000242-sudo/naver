@@ -333,9 +333,18 @@ export function optimizeContentForNaver(
   }
 
   // 6. 인간적 표현 강화 — Phase 3: skipDictInjection 시 스킵
-  if (!skipDictInjection) {
-    result = addHumanExpressions(result, toneStyle, silent);
-  } else if (!silent) {
+  // [2026-08-05] 인간 표현 사전 주입을 파이프라인에서 분리했다.
+  //   addHumanExpressions 는 문장의 약 10%를 무작위로 골라 사전 문구를 앞에 붙이는 것이
+  //   전부이고, 자료(source)를 인자로 받지 않는다. 그런데 사전이 자료에 없는 체험과
+  //   사회적 증거를 주장한다 — '막상 해보니까', '실제 생활에서는', '주변 지인들도
+  //   비슷하게', mom_cafe 톤의 '생각보다 애기가 좋아해서 깜놀!' 등.
+  //   도입 근거였던 "AI 탐지 대응"(문체를 흐트러뜨리면 사람 글로 판정된다)은
+  //   네이버 공식 문서와 어긋난다 — "특정 기술의 활용 여부만으로는 판단하지 않습니다"
+  //   (서치어드바이저 스팸 정책), "AI 도구를 사용했다고 해서 무조건 패널티를 받지는
+  //   않습니다"(검색 공식블로그 2026-05-26 FAQ).
+  //   함수와 사전은 남긴다. 재연결하려면 체험·사회적 증거 항목을 걷어내고 자료 근거를
+  //   인자로 받아야 한다.
+  if (skipDictInjection && !silent) {
     console.log('[ContentOptimizer] ⏭️ 인간 표현 사전 주입 스킵');
   }
 
@@ -560,7 +569,12 @@ function enhanceEEAT(text: string, toneStyle: string = 'professional', silent: b
   //   풀 랜덤 선택 + 문서 내 중복 스킵(아래)으로 패턴화는 억제되므로 중간값 18%·floor 2로 복원.
   //   (30% 전체 복원은 소규모 풀 대량발행 시 cross-doc 반복 우려 → 18% 균형)
   const targetCount = Math.max(2, Math.floor(paragraphs.length * 0.18));
-  const categories = ['experience', 'expertise', 'authority', 'trust'] as const;
+  // [2026-08-05] 'experience' 를 제외했다. 그 사전('실제로 사용해보니', '직접 경험한
+  //   바로는', '오랫동안 지켜본 결과' …)은 전부 자료에 없는 1인칭 체험을 주장하는데,
+  //   이 함수는 자료를 인자로 받지 않아 근거 유무를 판별할 수 없다. categories[
+  //   enhanced % length ] 구조상 첫 삽입은 항상 'experience' 였으므로, 문단 2개 이상인
+  //   모든 글에 체험 주장이 최소 1개 확정 삽입되고 있었다.
+  const categories = ['expertise', 'authority', 'trust'] as const;
 
   const indices = new Set<number>();
   while (indices.size < targetCount && indices.size < paragraphs.length) {

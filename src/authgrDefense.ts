@@ -396,19 +396,27 @@ export function applyAuthGRDefense(
   // 1. 사전 측정
   const preFingerprint = measureAiFingerprint(content);
 
-  // 2. 전문성 신호 주입
-  const expertiseResult = injectExpertiseSignals(content, category, 3);
+  // 2. [2026-08-05] 전문성 신호 주입도 파이프라인에서 분리했다.
+  //   CATEGORY_EXPERTISE_SIGNALS 는 "전문성"이라는 이름과 달리 대부분 1인칭 체험
+  //   주장이다 — health: '전문의 상담 후 알게 된 사실은', '건강검진 결과를 비교해보니',
+  //   '약 복용 후 체감한 변화는' / travel: '직접 다녀온 후기입니다' /
+  //   food: '실제 방문해서 먹어본 솔직한 맛은' / lifestyle: '실제로 써본 지 한 달째인데'.
+  //   이 함수 역시 자료를 인자로 받지 않아 근거 유무를 판별할 수 없다.
+  const expertiseResult = { content, injectedCount: 0 };
 
-  // 3. 출처 인용 다양화
+  // 3. 출처 인용 다양화 — 기존 "~에 따르면"을 변형할 뿐 없는 출처를 만들지 않으므로 유지한다.
   const citationResult = diversifyCitations(expertiseResult.content);
 
-  // 4. 경험 표현 삽입
-  const experienceResult = insertExperienceExpressions(citationResult.content, 2);
-
-  // 4-2. ✅ [2026-05-31 S2] 기간별 확장 경험 주입 — 그동안 데드코드였던 injectExtendedExperience 연결.
-  //   "3개월 정도 써보니…" 류 페르소나 경험으로 사람다운 깊이를 더한다.
-  //   과주입(패턴화) 방지를 위해 maxInjections=1로 보수적으로 적용.
-  const extExpResult = injectExtendedExperience(experienceResult.content, category, 1);
+  // 4. [2026-08-05] 경험 표현 주입을 이 파이프라인에서 분리했다.
+  //   insertExperienceExpressions / injectExtendedExperience 는 자료(source)를 인자로
+  //   받지 않으므로 근거 유무와 무관하게 "제 경우에는", "사용한 지 3개월째인데"(기간은 난수)
+  //   같은 1인칭 체험 주장을 본문에 붙였다. 프롬프트 층은 경험 날조를 금지하는데
+  //   후처리가 정반대로 동작했고, 이 문구들은 evidenceIntegrity의 1인칭 검출 패턴에
+  //   걸리지 않아 품질 게이트도 통과했다.
+  //   두 함수는 단위 테스트가 있어 export 는 유지한다. 재연결하려면 자료 근거를
+  //   인자로 받아 hasExplicitFirstPartyEvidence 가 참일 때만 호출해야 한다.
+  const experienceResult = { content: citationResult.content, insertedCount: 0 };
+  const extExpResult = { content: experienceResult.content, injectedCount: 0 };
 
   // 5. 최종 측정
   const postFingerprint = measureAiFingerprint(extExpResult.content);
