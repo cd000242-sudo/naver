@@ -53,8 +53,9 @@ function buildExperienceGate(source?: SituationTitleSource | null): string {
 /** 모드별 제약(SEO 키워드 앞 배치 등)과 상황 제목을 양립시킨다. */
 function buildModeRule(mode: SituationTitleMode): string {
   if (mode === 'seo') {
-    return `- [SEO 모드] 메인 키워드는 제목 맨 앞에 그대로 둔다(기존 배치 규칙 유지).
-  상황 조각은 키워드 바로 뒤에 붙인다. 키워드를 뒤로 밀어내면서까지 상황을 앞세우지 마라.
+    return `- [SEO 모드] 메인 키워드가 제목에 분명히 보여야 한다. 위치는 base R0-1을 따른다
+  — 첫 3글자나 고정 위치로 옮기지 않는다. 자연스럽게 앞에 오는 것은 무방하다.
+  상황 조각은 키워드 가까이 붙인다. 키워드를 뒤로 밀어내면서까지 상황을 앞세우지 마라.
   예: "여권 재발급, 주말에 급하게 해야 할 때 순서"
       "전세 계약, 집주인이 바뀐 상태로 들어갈 때 확인할 것"`;
   }

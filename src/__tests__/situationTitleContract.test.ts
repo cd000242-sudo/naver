@@ -27,9 +27,32 @@ describe('situation title contract', () => {
     }
   });
 
-  it('SEO는 키워드 앞 배치를 유지한다 (SPEC-KEYWORD-ENDGAME과 충돌 금지)', () => {
+  /**
+   * [2026-08-05 결정 변경] 생성 단계의 앞 3자 강제를 폐기했다.
+   *
+   * 이전 계약은 SPEC-KEYWORD-ENDGAME(v2.11.87~90)의 "제목 앞 3자 배치"였는데,
+   * 같은 프롬프트 안의 base R0-1(`첫 3글자나 고정 위치로 옮기지 않는다`),
+   * contentJsonPromptFormat(`첫 3글자로 강제 이동하지 않는다`),
+   * evidenceIntegrity(최후미·자기 상위 선언)와 정면으로 충돌했다.
+   *
+   * 폐기 근거 3가지:
+   *  1. 앱 자신이 이미 강등해 뒀다 — 항상 주입되는 official-exposure-rubric 첫 줄:
+   *     "This block has higher priority than older keyword-density, title-formula …"
+   *  2. 삭제해도 동작이 안 바뀐다 — evidenceIntegrity 가 최후미에서 이미 무효화 중이라
+   *     실질 동작은 이미 "자연스러운 위치"였다.
+   *  3. 죽은 채 두면 오히려 해롭다 — base.prompt 가 SEO 시스템 프롬프트의 약 75%이고
+   *     저비용 모델은 recency 뿐 아니라 반복 빈도에도 반응한다. 진 문장이 base 에
+   *     남아 있으면 반복 횟수로는 진 쪽이 이긴다.
+   *
+   * 키워드를 반드시 맨 앞에 두고 싶을 때는 사용자 옵션이 담당한다 —
+   * "키워드 제목 앞 배치" 체크박스가 켜지면 contentGeneration.ts:1251 이
+   * 생성된 제목 앞에 키워드를 붙인다(발행 단계, 생성 단계 아님).
+   */
+  it('SEO는 키워드 위치를 R0-1에 맡긴다 (생성 단계 앞 3자 강제 폐기)', () => {
     const c = buildSituationTitleContract('seo', {});
-    expect(c).toContain('메인 키워드는 제목 맨 앞에 그대로 둔다');
+    expect(c).not.toContain('메인 키워드는 제목 맨 앞에 그대로 둔다');
+    expect(c).toMatch(/R0-1|첫 3글자나 고정 위치로 옮기지 않는다/);
+    // 상황을 앞세우려고 키워드를 밀어내는 것은 여전히 막는다.
     expect(c).toContain('키워드를 뒤로 밀어내면서까지 상황을 앞세우지 마라');
   });
 
@@ -121,8 +144,11 @@ describe('legacy title formulas removed', () => {
     const seo = readFileSync(new URL('../prompts/seo/base.prompt', import.meta.url), 'utf8');
     expect(seo).not.toContain('[SEO 제목 황금 공식');
     expect(seo).not.toContain('[100점 공식');
-    expect(seo).toContain('[SEO 제목 28~40자 — 상황 기준]');
-    // 키워드 앞 3자 배치 계약은 유지
-    expect(seo).toContain('[메인 키워드(앞 3자 이내)]');
+    expect(seo).toContain('[SEO 제목 — 상황 기준]');
+    // [2026-08-05] 앞 3자 배치는 R0-1 과 충돌해 폐기했다(위 결정 주석 참조).
+    expect(seo).not.toContain('[메인 키워드(앞 3자 이내)]');
+    expect(seo).toContain('[메인 키워드] + [독자가 처한 상황] + [그 상황의 답]');
+    // 제목 글자수도 R0-9(22~42자) 하나로 통일했다. 28~40 은 base 자기모순이었다.
+    expect(seo).not.toContain('28~40자');
   });
 });
