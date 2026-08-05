@@ -637,6 +637,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/services/priceNormalizer.ts',
   'src/session/sessionEventLogger.ts',
   'src/sessionPersistence.ts',
+  'src/shared/categoryTaxonomy.ts',
   'src/sourceAssembler.ts',
   'src/thumbnailService.ts',
   'src/titleSelector.ts',

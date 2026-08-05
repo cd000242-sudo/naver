@@ -12,6 +12,7 @@ import { applyPendingArticleTablesToGeneratedContent } from './articleTableCompo
 import { buildRendererContentPolicyContext } from '../utils/contentPolicyContext.js';
 import { resolveTextModelProfile, isAgentTextProvider } from '../../runtime/modelRegistry.js';
 import type { FillSemiAutoFieldsOptions } from '../types/index.js';
+import { resolveArticleTypeHint } from '../../shared/categoryTaxonomy.js';
 
 declare let currentStructuredContent: any;
 declare let generatedImages: any[];
@@ -566,23 +567,10 @@ export async function generateContentFromUrl(
   const selectedContentType = (window as any).selectedContentType || 'info';
   const isReviewType = selectedContentType === 'review';
 
-  // ✅ articleType을 categoryHint로 매핑 (2축 분리 구조 연동)
-  const categoryHintMap: Record<string, string> = {
-    'entertainment': '연예',
-    'sports': '스포츠',
-    'health': '건강',
-    'it_review': 'IT',
-    'finance': '경제',
-    'shopping_review': '쇼핑',
-    'shopping_expert_review': '쇼핑',
-    'travel': '여행',
-    'food': '음식',
-    'parenting': '육아',
-    'lifestyle': '라이프',
-    'tips': '생활',
-    'general': 'general'
-  };
-  const categoryHint = categoryHintMap[articleType] || '';
+  // articleType -> Korean category hint (single source of truth).
+  // A slug missing from the map yields '', which leaves source.categoryHint as
+  // sourceAssembler's keywords[0] fallback (main.ts:5776 guards with `if`).
+  const categoryHint = resolveArticleTypeHint(articleType);
   const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
   const businessInfo = collectBusinessInfo(contentMode);
   const personalExperience = contentMode === 'affiliate'
@@ -1131,23 +1119,10 @@ export async function generateContentFromKeywords(
 - 확실하지 않은 과거 수치/사실은 단정하지 말고 일반적인 설명으로 처리하세요.
 `;
 
-  // ✅ articleType을 categoryHint로 매핑 (2축 분리 구조 연동)
-  const categoryHintMap: Record<string, string> = {
-    'entertainment': '연예',
-    'sports': '스포츠',
-    'health': '건강',
-    'it_review': 'IT',
-    'finance': '경제',
-    'shopping_review': '쇼핑',
-    'shopping_expert_review': '쇼핑',
-    'travel': '여행',
-    'food': '음식',
-    'parenting': '육아',
-    'lifestyle': '라이프',
-    'tips': '생활',
-    'general': ''
-  };
-  const categoryHint = categoryHintMap[articleType] || '';
+  // articleType -> Korean category hint (single source of truth).
+  // A slug missing from the map yields '', which leaves source.categoryHint as
+  // sourceAssembler's keywords[0] fallback (main.ts:5776 guards with `if`).
+  const categoryHint = resolveArticleTypeHint(articleType);
   const manualTitleOverride = readManualTitleOverrideForContent(contentMode);
   const businessInfo = collectBusinessInfo(contentMode);
   const personalExperience = contentMode === 'affiliate'

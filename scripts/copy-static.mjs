@@ -375,6 +375,10 @@ try {
       label: 'image/publishImageSequence.js',
       filePath: path.join(projectRoot, 'dist', 'image', 'publishImageSequence.js'),
     },
+    {
+      label: 'shared/categoryTaxonomy.js',
+      filePath: path.join(projectRoot, 'dist', 'shared', 'categoryTaxonomy.js'),
+    },
   ];
 
   let rendererRuntimeDependencySource = '';
