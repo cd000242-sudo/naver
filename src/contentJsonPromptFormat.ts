@@ -244,7 +244,14 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
 ────────────────────
 [출력 형식 — 반드시 이 순서와 JSON 형식으로]${modeStructureRule}${evidenceBlockRule}
 
-{
+{${usesIssueStorySkeleton ? `
+  "issueAnalysis": {
+    "coreEvent": "입력 자료의 핵심 사건 1문장 (자료에 있는 것만)",
+    "confirmed": ["공식 발표·판결 등 확정 사실만"],
+    "unconfirmed": ["보도·추측 등 미확정 — 여기 넣은 것은 제목·궁금증 소재로 쓰지 않는다"],
+    "curiosityGaps": ["독자가 멈출 궁금증 갭 후보 2~3개 — 공적 활동(출연·하차·이적·복귀·편성·계약·수상)과 확정 사실 소재만"],
+    "titleRationale": "titleCandidates 3개가 각각 어떤 공식·어떤 갭을 쓰는지, 도입이 그 갭을 어떻게 갚는지 1~2문장"
+  },` : ''}
   "selectedTitle": "제목 1",
   "titleCandidates": [
     {"text": "제목 1", "score": 95},
@@ -258,7 +265,13 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
   "category": "카테고리"
 }
 
-📌 [소제목 스타일 — 모든 모드 공통] headings[].title은 명사형·구 단위로 끝낸다(예: "…가 갈린 이유", "…확인 포인트"). "…습니다/…해요/…했어요/…했다"처럼 완결 문장으로 끝나는 소제목 금지, 30자 이내.
+${usesIssueStorySkeleton ? `📌 [이슈픽 — 제목보다 추론이 먼저다]
+- issueAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
+- titleCandidates 3개는 issueAnalysis.curiosityGaps 에서 나와야 하며, 서로 다른 제목 공식을 쓴다.
+- unconfirmed 에 넣은 사안은 제목·도입의 궁금증 소재로 쓰지 않는다(홈판 실존 인물 안전 규율과 동일).
+- issueAnalysis 는 설계 메모다 — 그 문장들을 introduction·headings·conclusion 본문에 옮기지 않는다.
+
+` : ''}📌 [소제목 스타일 — 모든 모드 공통] headings[].title은 명사형·구 단위로 끝낸다(예: "…가 갈린 이유", "…확인 포인트"). "…습니다/…해요/…했어요/…했다"처럼 완결 문장으로 끝나는 소제목 금지, 30자 이내.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🎨 [이미지 프롬프트 작성 규칙 - 매우 중요!]
