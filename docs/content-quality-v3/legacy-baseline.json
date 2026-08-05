@@ -39,13 +39,13 @@
     },
     {
       "path": "src/contentJsonPromptFormat.ts",
-      "sha256": "d152c2d68ecbc4153cd01973d86307f043a9428a50501132f60bf1abc89c465c",
-      "bytes": 30679
+      "sha256": "d1aef63383601c60693d2c88803a4fea410bd2e89095330f89d090122ec2be19",
+      "bytes": 31246
     },
     {
       "path": "src/promptLoader.ts",
-      "sha256": "748bc7f069a0497945590fbffd482d0f77579cef797622e82079a89d89bdc2d7",
-      "bytes": 89347
+      "sha256": "769f54cb45ab8aa0dfd2315d943b17b32a6f191e3e27c83fab5af0a44d1eb250",
+      "bytes": 89439
     },
     {
       "path": "src/prompts/affiliate/chain/editor.prompt",
@@ -104,8 +104,8 @@
     },
     {
       "path": "src/prompts/business/base.prompt",
-      "sha256": "cbbff06e1ab4f7007db644c16a5789171b18f9544216dc1e4a8ff00f3d2e571b",
-      "bytes": 10159
+      "sha256": "1b5ae3dc29e2605a00cdac713869961c089153fb1dc224f347d13bce513ac057",
+      "bytes": 11002
     },
     {
       "path": "src/prompts/business/construction.prompt",
@@ -164,13 +164,13 @@
     },
     {
       "path": "src/prompts/homefeed/living.prompt",
-      "sha256": "23c9578213e007515d54a2bc254bb80640a56323a3209ebcebd36dff9668f15a",
-      "bytes": 669
+      "sha256": "553739e90940406429584dd8a7285d52764bf0857ce8dc67e4fa76f9909d8aaa",
+      "bytes": 5063
     },
     {
       "path": "src/prompts/homefeed/parenting.prompt",
-      "sha256": "8582f377db1b43634b88825dc4dc11d903792fa2516486ff52152a2c81a9b883",
-      "bytes": 654
+      "sha256": "e7682ec66f62434985f4352963e506aa886e04db2f4cf96aaea653b548a504c9",
+      "bytes": 4988
     },
     {
       "path": "src/prompts/homefeed/pet.prompt",
@@ -189,8 +189,8 @@
     },
     {
       "path": "src/prompts/homefeed/tips.prompt",
-      "sha256": "2755e71db624b35d441e0c4465e60a2d4b60c7cd58f7e4f031ffd6c233bd0d4d",
-      "bytes": 639
+      "sha256": "a49a5d2fc076b8d1037e4bb710cda3d5d34616e231c05414cb8356295a165aeb",
+      "bytes": 4697
     },
     {
       "path": "src/prompts/homefeed/travel.prompt",
@@ -279,13 +279,13 @@
     },
     {
       "path": "src/prompts/seo/living.prompt",
-      "sha256": "b03020765ade0d7e36329c2a263c0cc82f70567779fc5cc8d2bd2ad06f3df5c7",
-      "bytes": 695
+      "sha256": "65d30e62daba9ea18b3498a276cdd6162dd16d3e05cfad558f1a522ca33a9f85",
+      "bytes": 4217
     },
     {
       "path": "src/prompts/seo/parenting.prompt",
-      "sha256": "812c345a01aad983878848f8903157e8d09317d6e74369e55a3515c0bab4fbf1",
-      "bytes": 681
+      "sha256": "f3242f1ca74e9ee8eee00eca4f40430f10f830e615c072bb12fd8e1d32aa52e6",
+      "bytes": 4760
     },
     {
       "path": "src/prompts/seo/pet.prompt",
@@ -304,8 +304,8 @@
     },
     {
       "path": "src/prompts/seo/tips.prompt",
-      "sha256": "5f47cdd08680884e10c2533a8eae214a67205b8b5976c0b754b10d2e2d2b63e6",
-      "bytes": 651
+      "sha256": "903b1ef5dfc7e568ffc0d6725aacb59ab8f99a9815fa99b787ba8238aaf18b23",
+      "bytes": 4832
     },
     {
       "path": "src/prompts/seo/travel.prompt",
@@ -384,8 +384,8 @@
     },
     {
       "path": "src/prompts/title/business/base.prompt",
-      "sha256": "24b81deb5d550963a88f92a074c8cd8f9d9b2b46b9cf990b67c76a540b22459c",
-      "bytes": 6138
+      "sha256": "9ff003295091260bccc784886eb200c7b99a689e2e4d68290377fdedc5f9a5a3",
+      "bytes": 6384
     },
     {
       "path": "src/prompts/title/homefeed.prompt",
@@ -544,7 +544,7 @@
     }
   ],
   "metadata": {
-    "repositoryHead": "f67a8138cbbfbacbc535108f4df19ba03d107429",
+    "repositoryHead": "c24eecd8db94db54e571577b0bf7724ab739bf98",
     "nodeVersion": "v20.20.2",
     "platform": "win32"
   }
