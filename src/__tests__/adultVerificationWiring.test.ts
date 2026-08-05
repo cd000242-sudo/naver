@@ -73,6 +73,26 @@ describe('adult verification gate wiring', () => {
     await expect(waitForAccessGateUnlocked(page as never, 1)).resolves.toBe(false);
   });
 
+  // [2026-08-06 라이브 재발 v2.11.174] 본문 크롤은 navigateWithRetry 가 아니라
+  // AffiliateCrawler 의 brandconnect 자체 goto 경로를 탄다 — 배선 누락으로 1.4초 만에
+  // "모든 방법 실패" → 페이지 닫힘 → 52자로 생성 진행. 로그인 창이 "바로 꺼진" 원인.
+  it('brandconnect 리다이렉트 경로도 게이트 대기를 배선한다 (소스 계약)', () => {
+    const source = readFileSync(new URL('../crawler/productSpecCrawler.ts', import.meta.url), 'utf8');
+    // 리다이렉트 대기 루프 안에서 인증 도메인 감지 → 대기 → 대기시간 리셋
+    expect(source).toMatch(/waitForAccessGateUnlocked/);
+    expect(source).toMatch(/nid\\?\.naver\\?\.com/);
+    // brandconnect goto 는 JS 리다이렉트 체인이라 중단 에러를 삼키고 루프가 판정한다
+    expect(source).toMatch(/brandconnect goto 중단|리다이렉트 대기로 진행/);
+  });
+
+  it('게이트 대기가 최소화된 크롤러 창을 복원한다 (소스 계약)', () => {
+    const source = readFileSync(new URL('../crawler/crawlerBrowser.ts', import.meta.url), 'utf8');
+    // 크롤러 창은 생성 직후 최소화된다 — bringToFront 만으로는 사용자가 로그인 화면을
+    // 볼 수 없어 CDP 로 windowState 를 복원해야 한다.
+    expect(source).toMatch(/Browser\.setWindowBounds/);
+    expect(source).toMatch(/windowState:\s*'normal'/);
+  });
+
   it('navigateWithRetry 가 게이트 대기를 배선한다 (소스 계약)', () => {
     const source = readFileSync(new URL('../crawler/crawlerBrowser.ts', import.meta.url), 'utf8');
     expect(source).toMatch(/from '\.\/adultVerificationPolicy/);

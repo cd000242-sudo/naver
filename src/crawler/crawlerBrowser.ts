@@ -595,6 +595,19 @@ export async function waitForAccessGateUnlocked(page: Page, maxWaitMs = 180000):
 
     console.log(`[CrawlerBrowser] ${describeAccessGate(kind)}`);
     try { await page.bringToFront(); } catch {}
+    // [2026-08-06] 크롤러 창은 생성 직후 최소화된다 — bringToFront(탭 전환)만으로는
+    // 사용자가 로그인 화면을 볼 수 없다. CDP 로 창 상태를 복원해 화면에 띄운다.
+    try {
+        const cdp = await (page.context() as { newCDPSession: (p: Page) => Promise<{ send: (m: string, p?: object) => Promise<{ windowId?: number }>; detach: () => Promise<void> }> }).newCDPSession(page);
+        try {
+            const { windowId } = await cdp.send('Browser.getWindowForTarget');
+            if (typeof windowId === 'number') {
+                await cdp.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } });
+            }
+        } finally {
+            await cdp.detach().catch(() => undefined);
+        }
+    } catch { /* CDP 미지원(테스트 mock 등) — 탭 전환만으로 진행 */ }
 
     const start = Date.now();
     while (Date.now() - start < maxWaitMs) {

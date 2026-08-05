@@ -2533,13 +2533,21 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
         await warmup(bcPage);
 
         console.log(`[AffiliateCrawler] 🌐 brandconnect 페이지 로딩...`);
-        await bcPage.goto(resolvedUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+        try {
+          await bcPage.goto(resolvedUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+        } catch (navErr) {
+          // [2026-08-06] brandconnect 는 JS 리다이렉트 체인이라 goto 가 중단 에러를
+          // 던질 수 있다(라이브: 1.4초 만에 전체 실패로 빠지던 원인). 페이지는 살아
+          // 있으므로 아래 리다이렉트 대기 루프가 실제 도달을 판정한다.
+          console.log(`[AffiliateCrawler] ⚠️ brandconnect goto 중단(${(navErr as Error).message.slice(0, 60)}) → 리다이렉트 대기로 진행`);
+        }
 
         // JS 리다이렉트 대기 (최대 12초, smartstore/brand.naver.com 도달할 때까지)
         const maxWait = 12000;
         const interval = 500;
         let elapsed = 0;
         let arrivedAtStore = false;
+        let gateWaited = false;
 
         while (elapsed < maxWait) {
           await bcPage.waitForTimeout(interval);
@@ -2555,6 +2563,21 @@ export async function crawlFromAffiliateLink(rawUrl: string): Promise<AffiliateP
               arrivedAtStore = true;
             }
             break;
+          }
+
+          // [2026-08-06] 성인인증/로그인 게이트 — 주류 상품은 리다이렉트가 nid.naver.com
+          // 인증으로 빠진다. 여기서 페이지를 닫으면 사용자가 로그인할 틈이 없다
+          // (라이브 재발: "로그인하려 해도 바로 꺼짐"). 게이트면 창을 띄운 채 완료를
+          // 기다리고, 완료 후 대기 시간을 리셋해 스토어 도달을 재판정한다.
+          if (!gateWaited && /nid\.naver\.com/.test(currentUrl)) {
+            gateWaited = true;
+            const { waitForAccessGateUnlocked } = await import('./crawlerBrowser.js');
+            const unlocked = await waitForAccessGateUnlocked(bcPage);
+            if (unlocked) {
+              elapsed = 0;
+              continue;
+            }
+            break; // 인증 타임아웃 — 아래 OG 폴백/실패 경로로
           }
         }
 
