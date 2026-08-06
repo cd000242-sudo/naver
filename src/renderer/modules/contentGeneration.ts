@@ -938,6 +938,33 @@ export async function generateContentFromKeywords(
   // ✅ [v2.10.26] 글생성 취소 플래그 초기화 (이전 취소 상태 잔존 방지)
   (window as any)._contentGenerationCancelled = false;
 
+  // [2026-08-06] 키워드 제목 옵션 배선 — 일반 키워드 발행.
+  //   후처리(아래 _keywordTitleOptions 소비)는 있었는데 이 경로에서 체크박스를 읽어
+  //   옵션을 세팅하는 코드가 없어, 체크해도 아무 데도 전달되지 않았다(사용자 실측).
+  //   연속발행·풀오토·다중계정은 각자 전용 체크박스를 이미 읽고 세팅하므로,
+  //   그 경로(suppressModal=true)에서는 덮어쓰지 않는다.
+  if (!suppressModal) {
+    const keywordAsTitleEl = document.getElementById('keyword-as-title') as HTMLInputElement | null;
+    const keywordTitlePrefixEl = document.getElementById('keyword-title-prefix') as HTMLInputElement | null;
+    const useKeywordAsTitle = keywordAsTitleEl?.checked === true;
+    const useKeywordTitlePrefix = keywordTitlePrefixEl?.checked === true;
+    const keywordForTitle = String(keywords || '').split(',')[0].trim();
+
+    if ((useKeywordAsTitle || useKeywordTitlePrefix) && keywordForTitle) {
+      (window as any)._keywordTitleOptions = {
+        keyword: keywordForTitle,
+        useKeywordAsTitle,
+        // 두 옵션은 동시 선택 불가 — "그대로 사용"이 우선한다(UI 안내와 동일).
+        useKeywordTitlePrefix: useKeywordAsTitle ? false : useKeywordTitlePrefix,
+      };
+      appendLog(useKeywordAsTitle
+        ? `📌 키워드 그대로 제목 사용: "${keywordForTitle}"`
+        : `🔝 키워드 앞배치: "${keywordForTitle}"`);
+    } else {
+      (window as any)._keywordTitleOptions = null;
+    }
+  }
+
   // ✅ 활성 모달 결정 (suppressModal이면 메인 진행 모달 사용, 아니면 개별 모달)
   const activeModal: any = suppressModal ? getProgressModal() : aiProgressModal;
 

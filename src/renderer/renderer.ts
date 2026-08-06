@@ -1128,6 +1128,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ✅ [2026-02-13] 연속발행/풀오토 키워드 제목 옵션 상호 배타 등록
     setupMutualExclusiveCheckboxes('continuous-keyword-as-title', 'continuous-keyword-title-prefix');
     setupMutualExclusiveCheckboxes('fullauto-keyword-as-title', 'fullauto-keyword-title-prefix');
+    // [2026-08-06] 일반 키워드 발행도 동일 — UI 안내("두 옵션은 동시 선택 불가")와 맞춘다.
+    setupMutualExclusiveCheckboxes('keyword-as-title', 'keyword-title-prefix');
     console.log('[DOMContentLoaded] 키워드 제목 옵션 상호배타 등록 완료');
   }, 50); // 두 번째 리스너보다 먼저 실행 (50ms vs 100ms)
 });

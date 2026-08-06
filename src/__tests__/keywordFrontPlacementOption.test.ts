@@ -30,7 +30,10 @@ describe('키워드 앞 배치 — 사용자 옵션 경로가 살아 있다', ()
     const src = read('renderer/modules/contentGeneration.ts');
     expect(src).toMatch(/keywordTitleOpts\.useKeywordTitlePrefix/);
     // 이미 키워드로 시작하면 중복으로 붙이지 않아야 한다.
-    const idx = src.indexOf('useKeywordTitlePrefix');
+    // [2026-08-06] 기준점을 후처리 분기(keywordTitleOpts.useKeywordTitlePrefix)로 고정한다.
+    //   단순 'useKeywordTitlePrefix' 첫 매치는 옵션 세팅부(배선)에도 걸려, 그 사이 코드가
+    //   늘면 근접 범위를 벗어나 오탐한다.
+    const idx = src.indexOf('keywordTitleOpts.useKeywordTitlePrefix');
     expect(src.slice(idx, idx + 900)).toMatch(/startsWith\(keyword\)/);
   });
 
