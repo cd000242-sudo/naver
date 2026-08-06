@@ -599,6 +599,20 @@ async function generateTitleOnlyPatch(
         console.log(`[TitleGen] ✅ 레거시 제목 프롬프트 로드: ${legacyFile}`);
       }
     }
+
+    // [2026-08-06] 제목 최종 계약 — 최후미 오버레이(본문 finalContract 와 같은 패턴).
+    //   실측: 제목 전용 프롬프트 30개가 "총정리·핵심만·빠르게 확인"을 클릭 트리거로
+    //   권하고 키워드 앞 N글자 배치를 강제해, 본문 계층의 상황 제목 계약과 정면
+    //   충돌했다(사용자 실측: "케이뱅크 황금캡슐 확인 가이드"). 최후미에서 단일화한다.
+    if (titlePrompt) {
+      const contractPath = path.join(app.getAppPath(), 'dist', 'prompts', 'title', 'shared', 'title-final-contract.prompt');
+      if (fsSync.existsSync(contractPath)) {
+        titlePrompt = `${titlePrompt}\n\n${fsSync.readFileSync(contractPath, 'utf-8')}`;
+        console.log('[TitleGen] 🔒 제목 최종 계약 오버레이 적용');
+      } else {
+        console.warn('[TitleGen] ⚠️ 제목 최종 계약 파일 없음 — 카테고리 프롬프트만 적용');
+      }
+    }
   } catch (e) {
     console.log('[TitleGen] ⚠️ 제목 전용 프롬프트 로드 실패, 기본 규칙 사용');
   }
