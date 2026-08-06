@@ -490,6 +490,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/prompts/title/seo/sports.prompt',
   'src/prompts/title/seo/tips.prompt',
   'src/prompts/title/seo/travel.prompt',
+  'src/prompts/title/shared/title-final-contract.prompt',
   'src/providerRateLimitWaitPolicy.ts',
   'src/quotaManager.ts',
   'src/rag/embedder.ts',
