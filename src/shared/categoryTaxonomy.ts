@@ -55,6 +55,26 @@ export const ARTICLE_TYPE_TO_HINT: Readonly<Record<string, string>> = {
   // life.prompt 1행이 "생활·쇼핑·자동차·문화"를 스코프로 명시한다
   car: '자동차',
 
+  // ── [2026-08-06] 보류 해제: 카테고리 프롬프트 스코프와 대조해 매핑 ──
+  // entertainment.prompt — "작품·인물·방송·공연의 이름, 발언, 일정, 공개 시점"
+  performance: '연예',
+  music: '연예',
+  cartoon: '연예',
+  broadcast: '연예',
+  // life.prompt — 생활·문화 스코프. 감상·취향 글이 여기 온다
+  literature: '라이프',
+  art_design: '라이프',
+  good_writing: '라이프',
+  photo: '라이프',
+  hobby: '라이프',
+  self_dev: '라이프',
+  // living.prompt — 공간·식물 관리 축(원예는 실내외 공간 조건이 판단을 가른다)
+  gardening: '리빙',
+  // tips.prompt — 실행 조건·순서가 판단 재료인 학습법
+  language: '생활',
+  // society.prompt — 정책·금리·세금 축이 부동산 판단 재료와 일치
+  realestate: '경제',
+
   // ── 레거시 키: UI가 내보내지 않지만 다른 호출자가 쓸 수 있어 유지 ──
   entertainment: '연예',
   it_review: 'IT',
@@ -72,21 +92,11 @@ export const ARTICLE_TYPE_TO_HINT: Readonly<Record<string, string>> = {
  * 구분하기 위해서다. 테스트가 이 둘의 합이 UI 옵션 전체와 일치하는지 검사한다.
  */
 export const PENDING_ARTICLE_TYPES: readonly string[] = [
-  'literature', // 문학·책 — 서평이 연예 골격과 맞는지 미검토
-  'art_design', // 미술·디자인
-  'performance', // 공연·전시
-  'music', // 음악
-  'cartoon', // 만화·애니
-  'broadcast', // 방송 — 편성정보형에 이슈 서사가 붙는 문제 미해결
-  'good_writing', // 좋은글·이미지
-  'gardening', // 원예·재배
-  'game', // 게임 — it.prompt의 발열·배터리 축이 부적합
-  'photo', // 사진
-  'hobby', // 취미
-  'language', // 어학·외국어
-  'education_scholarship', // 교육·학문 — parenting은 전부 아이·양육이라 부적합
-  'realestate', // 부동산
-  'self_dev', // 자기계발
+  // [2026-08-06] 13종은 카테고리 프롬프트 스코프와 대조해 매핑을 마쳤다.
+  // 남은 2종은 기존 카테고리 어디에 넣어도 규율이 어긋나 보류를 유지한다 —
+  // 잘못된 카테고리 보정은 보정 없음보다 나쁘다(업종 감지와 같은 원칙).
+  'game', // 게임 — it.prompt 는 구매 전 확인(호환·연결 요건)이 축이라 게임 공략·평가에 부적합
+  'education_scholarship', // 교육·학문 — parenting 은 전부 아이·양육 축이라 성인 학습·연구에 부적합
 ];
 
 /**

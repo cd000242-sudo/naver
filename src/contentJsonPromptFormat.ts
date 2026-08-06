@@ -210,6 +210,24 @@ ${source.previousTitles.slice(-5).map((title, index) => `${index + 1}. ${title}`
 `;
 }
 
+/**
+ * [2026-08-06] 업체 강조 각도 단일화 — 감사 이관 (c).
+ *
+ * 랜덤 8각도(buildBusinessAngleDirective)와 사용자 로테이션 각도(promoAngle)가
+ * 같은 프롬프트에 동시에 들어가, 서로 다른 프레임을 지시할 수 있었다
+ * (예: 랜덤 "가격 투명성" + 사용자 "A/S 안내"). 사용자가 고른 각도가 있으면
+ * 그것만 쓰고, 없을 때만 랜덤 각도로 매 글의 프레임을 돌린다.
+ */
+function buildBusinessAngleBlock(
+  contentMode: PromptMode,
+  source: ContentJsonPromptSource,
+): string {
+  if (contentMode !== 'business') return '';
+  const userAngle = source.businessInfo?.promoAngle;
+  if (userAngle && String(userAngle).trim()) return ''; // 사용자 각도는 businessInfo 블록이 주입
+  return buildBusinessAngleDirective();
+}
+
 function buildBusinessInfoBlock(source: ContentJsonPromptSource): string {
   const info = source.businessInfo;
   if (!info) return '';
@@ -351,7 +369,7 @@ imagePrompt 규칙: 각 소제목 본문 문맥과 일치하는 구체적 한국
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 [원본 텍스트]
-${structureDirective}${contentMode === 'business' ? buildBusinessAngleDirective() : ''}${buildVoiceProfileBlock(sampleVoiceProfile())}
+${structureDirective}${buildBusinessAngleBlock(contentMode, source)}${buildVoiceProfileBlock(sampleVoiceProfile())}
 ${buildPreviousTitlesBlock(source, contentMode)}${contentMode === 'business' ? buildBusinessInfoBlock(source) : ''}${buildCustomPromptBlock(source)}
 ══════════════════════════════════════════
 🎯 [필수 키워드 정보 — 제목/소제목 작성에 반드시 반영]

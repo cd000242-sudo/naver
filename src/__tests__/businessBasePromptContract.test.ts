@@ -71,6 +71,18 @@ describe('business base prompt contract', () => {
   });
 });
 
+describe('business 강조 각도 — 이중 주입 제거', () => {
+  // [2026-08-06 감사 이관 (c)] 랜덤 8각도(buildBusinessAngleDirective)와 사용자
+  // 로테이션 각도(promoAngle)가 같은 프롬프트에 동시에 들어가 서로 다른 프레임을
+  // 지시했다. 사용자가 고른 각도가 있으면 그것만 쓴다.
+  const format = readFileSync(new URL('../contentJsonPromptFormat.ts', import.meta.url), 'utf8');
+
+  it('사용자 각도(promoAngle)가 있으면 랜덤 각도를 주입하지 않는다', () => {
+    expect(format).not.toMatch(/contentMode === 'business' \? buildBusinessAngleDirective\(\) : ''/);
+    expect(format).toMatch(/promoAngle[\s\S]{0,200}buildBusinessAngleDirective/);
+  });
+});
+
 describe('business title prompt — 수치 날조 압력 제거', () => {
   // [2026-08-06 적대검증 적출] 제목 프롬프트가 "구체 숫자 1개 이상 필수 · 숫자 0개면
   // -50"을 강제해, 입력이 빈약한 업체에서 환각 수치 제목("시공 1,200건")을 구조적으로
