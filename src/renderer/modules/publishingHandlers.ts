@@ -1032,7 +1032,10 @@ export async function handleFullAutoPublish(): Promise<void> {
         // → AI 이미지 생성을 선택한 경우 수집 이미지 매칭은 불필요하고 혼란만 줌
         // ✅ [2026-05-18] getSubImageMode가 엔진명을 'ai'로 정규화
         const scSubImageModePre = pipelineCfg.shopping.subImageMode;
-        const shouldMatchCollected = formData.contentMode !== 'affiliate' && !formData.useAiImage;
+        // [2026-08-06] 쇼핑 모드도 매칭한다 — 사용자 지시 "소제목과 맞는 이미지를 배치".
+        //   기존에는 affiliate 를 제외해 순차 할당만 했다(1번 소제목=1번 이미지).
+        //   AI 이미지 생성 모드는 수집 이미지를 쓰지 않으므로 계속 스킵.
+        const shouldMatchCollected = !formData.useAiImage;
 
         if (shouldMatchCollected && collectedImgs.length > 0 && (structuredContent.headings || []).length > 0) {
           modal.addLog('🤖 수집 이미지를 소제목에 매칭 중...');
@@ -1356,8 +1359,10 @@ export async function handleFullAutoPublish(): Promise<void> {
 
           for (let idx = 0; idx < headingsArray.length; idx++) {
             const h = headingsArray[idx];
-            // 1. 소제목에 미리 매핑된 이미지 경로가 있으면 사용
-            let path = formData.contentMode === 'affiliate' ? '' : (h.referenceImagePath || '');
+            // 1. 매칭 결과(referenceImagePath)가 있으면 우선 사용 — 전 모드 공통.
+            //    [2026-08-06] 쇼핑도 매칭을 켰으므로 그 결과를 버리지 않는다. 매칭이
+            //    없으면 아래 순차 할당이 기존대로 채운다.
+            let path = h.referenceImagePath || '';
 
             // 2. 매핑된 경로가 없으면 headingImages (collectedImgs[1+])에서 순차 할당
             // ✅ [2026-02-23 FIX] 중복 이미지 발견 시 headingImgIdx를 증가시켜 다음 이미지 시도

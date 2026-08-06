@@ -12,6 +12,12 @@ import { consume as consumeQuota } from '../../quotaManager.js';
 import { filterDuplicateAndLowQualityImages } from '../utils/imageFilters.js';
 import { upscaleUrl } from '../../crawler/shopping/utils/imageUrlUtils.js';
 
+/**
+ * [2026-08-06] 목표 장수 — 소제목 3~5개 + 대표 1장 + 여유분.
+ * 이 수를 갤러리로 채우면 상세·리뷰는 쓰지 않는다(티어 선택기 판정 기준).
+ */
+const TARGET_IMAGE_COUNT = 8;
+
 export function registerImageCollectShoppingHandlers(): void {
     ipcMain.handle('image:collectFromShopping', async (_event, url: string) => {
         // ✅ [리팩토링] 통합 검증
@@ -74,15 +80,18 @@ export function registerImageCollectShoppingHandlers(): void {
                 //              리뷰 이미지 수집 PHASE 2) 존재하나, 본 handler가 fetchShoppingImages
                 //              경로로 빠뜨려서 Provider 우회.
                 //   조치: SmartStore/Coupang와 동일하게 collectShoppingImages(Provider) 사용.
-                console.log('[Main] 🏪 브랜드스토어 감지 → BrandStoreProvider 사용 (추가이미지 클릭 + 리뷰 수집)');
+                console.log('[Main] 🏪 브랜드스토어 감지 → BrandStoreProvider 사용 (추가이미지 → 상세 → 리뷰)');
                 const { collectShoppingImages } = await import('../../crawler/shopping/index.js');
-                // ✅ [v2.10.309] 사용자 요구: 추가이미지 + 리뷰이미지만 필요, 상세페이지 제외
+                // [2026-08-06] 사용자 지시: 추가이미지 먼저 → 부족하면 상세(제품 없는 이미지
+                //   제외) → 그래도 부족하면 리뷰. 전 소스를 수집해 오고 티어 선택기가
+                //   목표치까지만 단계적으로 고른다(BaseProvider.selectImagesByTier).
                 const result = await collectShoppingImages(url, {
                     timeout: 30000,
                     maxImages: 100,
-                    includeDetails: false,   // ✅ 상세페이지 이미지 제외 (사용자 요청)
-                    includeReviews: true,    // 공식 추가이미지가 1장 이하일 때만 리뷰 이미지로 보완
+                    includeDetails: true,
+                    includeReviews: true,
                     reviewFallbackWhenGalleryWeak: true,
+                    targetImageCount: TARGET_IMAGE_COUNT,
                     useCache: true,
                 });
 
@@ -123,11 +132,22 @@ export function registerImageCollectShoppingHandlers(): void {
                             const fallbackResult = await crawlBrandStoreProduct(productId, brandName, url);
 
                             if (fallbackResult) {
-                                // ✅ [v2.10.309] 사용자 요구: 상세페이지(detailImages) 제외 — 추가/리뷰 이미지만
+                                // [2026-08-06] 갤러리 우선 + 부족분은 상세로 보완(제품 없는 안내물 제외).
+                                //   폴백 경로도 본 경로와 같은 티어 정책을 따른다.
+                                const { isNonProductDetailImage } = await import('../../crawler/shopping/imageTierSelection.js');
                                 const fallbackAllImages: string[] = [];
                                 if (fallbackResult.mainImage) fallbackAllImages.push(fallbackResult.mainImage);
                                 if (fallbackResult.galleryImages?.length) fallbackAllImages.push(...fallbackResult.galleryImages);
-                                // detailImages는 의도적으로 제외 (사용자 요청 "상세페이지는 필요없음")
+                                const galleryShortfall = MIN_BRAND_IMAGES - (images.length + fallbackAllImages.length);
+                                if (galleryShortfall > 0 && fallbackResult.detailImages?.length) {
+                                    const productDetails = fallbackResult.detailImages
+                                        .filter((u: string) => !isNonProductDetailImage({ url: u, type: 'detail' } as never))
+                                        .slice(0, galleryShortfall);
+                                    if (productDetails.length > 0) {
+                                        fallbackAllImages.push(...productDetails);
+                                        console.log(`[Main] 📄 갤러리 부족(${galleryShortfall}장) → 상세 이미지 ${productDetails.length}장 보완`);
+                                    }
+                                }
 
                                 // 폴백에서 얻은 이미지 병합 (중복 제거)
                                 const existingNorm = new Set(images.map(u => u.split('?')[0]));
@@ -171,13 +191,14 @@ export function registerImageCollectShoppingHandlers(): void {
                 console.log(`[Main] 🏪 ${isSmartStore || isBrandConnect ? '스마트스토어' : '쿠팡'} 감지 → 새 크롤러 사용`);
                 const { collectShoppingImages } = await import('../../crawler/shopping/index.js');
 
-                // ✅ [v2.10.309] 사용자 요구: 추가이미지 + 리뷰이미지만, 상세페이지 제외
+                // [2026-08-06] 브랜드스토어와 동일 정책 — 추가 → 상세 → 리뷰 단계적 폴백.
                 const result = await collectShoppingImages(url, {
                     timeout: 30000,
                     maxImages: 100,
-                    includeDetails: false,   // ✅ 상세페이지 이미지 제외 (사용자 요청)
+                    includeDetails: true,
                     includeReviews: true,
                     reviewFallbackWhenGalleryWeak: true,
+                    targetImageCount: TARGET_IMAGE_COUNT,
                     useCache: true,
                 });
 

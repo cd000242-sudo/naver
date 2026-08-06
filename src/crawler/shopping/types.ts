@@ -79,6 +79,11 @@ export interface CollectionOptions {
     includeReviews?: boolean;  // 리뷰 이미지 포함 (기본 false)
     includeReviewTexts?: boolean; // 구매 판단용 실제 리뷰 텍스트 포함 (기본 false)
     reviewFallbackWhenGalleryWeak?: boolean; // 제품 갤러리가 대표 1장 수준일 때만 리뷰 이미지 보완
+    /**
+     * [2026-08-06] 목표 장수 — 단계적 폴백(갤러리 → 상세 → 리뷰)의 판정 기준.
+     * 상위 티어로 이 수를 채우면 하위 티어는 쓰지 않는다. 미지정 시 DEFAULT_IMAGE_TARGET.
+     */
+    targetImageCount?: number;
     validateWithAI?: boolean;  // AI 품질 검증 (기본 true)
     useCache?: boolean;        // 캐시 사용 (기본 true)
 }

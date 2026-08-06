@@ -19,6 +19,7 @@ import {
     MIN_IMAGE_SIZE,
 } from '../types.js';
 import { resolveUrl, ResolvedUrl } from '../utils/UrlResolver.js';
+import { dedupeProductImages, selectImagesByTier } from '../imageTierSelection.js';
 
 export abstract class BaseProvider {
     abstract readonly name: string;
@@ -76,7 +77,13 @@ export abstract class BaseProvider {
                         if (opts.includeDetails !== true && img.type === 'detail') return false;
                         return true;
                     });
-                    const filteredImages = this.filterImages(policyImages);
+                    // [2026-08-06] 단계적 선택 — 갤러리 → 상세(제품 있는 것만) → 리뷰 순으로
+                    //   목표치까지만 채운다. 전략 체인이 첫 성공에서 종료해도 티어 순서와
+                    //   중복 제거가 보장된다(사용자 지시: "절대 중복 이미지는 수집 금지").
+                    const tiered = selectImagesByTier(dedupeProductImages(policyImages), {
+                        target: opts.targetImageCount,
+                    });
+                    const filteredImages = this.filterImages(tiered);
 
                     console.log(`[${this.name}] ✅ 전략 "${strategy.name}" 성공: ${result.images.length}개 → ${filteredImages.length}개 (필터 후)`);
 

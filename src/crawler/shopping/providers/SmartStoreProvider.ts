@@ -640,11 +640,77 @@ export class SmartStoreProvider extends BaseProvider {
             }
 
             // ───────────────────────────────────────────────
+            // [2026-08-06] PHASE 1.5: 상세페이지 이미지 — 갤러리가 목표에 못 미칠 때만.
+            //   사용자 지시: "추가이미지 먼저 → 부족하면 상세페이지(제품 없는 이미지 제외)
+            //   → 그래도 부족하면 리뷰". 기존 Playwright 전략에는 상세 수집 단계가 아예
+            //   없어서(PHASE 0 갤러리 → 1 OG → 2 리뷰) 갤러리 몇 장에서 끝났다(실측 3장).
+            // ───────────────────────────────────────────────
+            const galleryCountBeforeDetail = allImages.filter(i => i.type !== 'review' && i.type !== 'detail').length;
+            const detailTarget = options?.targetImageCount ?? 8;
+            if (options?.includeDetails === true && galleryCountBeforeDetail < detailTarget) {
+                console.log(`[SmartStore:Playwright] 📄 PHASE 1.5: 갤러리 ${galleryCountBeforeDetail}장 < 목표 ${detailTarget}장 → 상세페이지 이미지 수집...`);
+                try {
+                    // 상세 영역은 lazy-load 다 — 끝까지 스크롤해 실제 src 를 채운다.
+                    await page.evaluate(async () => {
+                        const step = 900;
+                        let scrolled = 0;
+                        const maxScroll = Math.min(document.body.scrollHeight, 20000);
+                        while (scrolled < maxScroll) {
+                            window.scrollBy(0, step);
+                            scrolled += step;
+                            await new Promise(r => setTimeout(r, 120));
+                        }
+                        window.scrollTo(0, 0);
+                    });
+                    await page.waitForTimeout(1200);
+
+                    const detailUrls: string[] = await page.evaluate(() => {
+                        // 상세 콘텐츠 영역 우선 — 없으면 문서 전체에서 큰 이미지만.
+                        const scopes = [
+                            '.se-main-container',           // 스마트에디터 상세
+                            '#INTRODUCE', '.detail_area',
+                            '[class*="productDetail"]', '[class*="ProductDetail"]',
+                        ];
+                        const root = scopes.map((s) => document.querySelector(s)).find(Boolean) || document.body;
+                        const out: string[] = [];
+                        root.querySelectorAll('img').forEach((el) => {
+                            const image = el as HTMLImageElement;
+                            const src = image.currentSrc || image.src || image.dataset?.src || '';
+                            if (!src || !/^https?:\/\//.test(src)) return;
+                            // 아이콘·썸네일 크기는 제품 사진이 아니다.
+                            const w = image.naturalWidth || image.width || 0;
+                            const h = image.naturalHeight || image.height || 0;
+                            if (w && w < 300) return;
+                            if (h && h < 300) return;
+                            out.push(src);
+                        });
+                        return out;
+                    });
+
+                    const { isNonProductDetailImage } = await import('../imageTierSelection.js');
+                    let added = 0;
+                    for (const detailUrl of detailUrls) {
+                        if (galleryCountBeforeDetail + added >= detailTarget) break;
+                        if (isNonProductDetailImage({ url: detailUrl, type: 'detail' } as never)) continue;
+                        const before = allImages.length;
+                        addImg(detailUrl, 'detail');
+                        if (allImages.length > before) added += 1;
+                    }
+                    console.log(`[SmartStore:Playwright] ✅ PHASE 1.5 완료: 상세 이미지 ${added}장 추가 (후보 ${detailUrls.length}장)`);
+                } catch (detailErr) {
+                    console.warn('[SmartStore:Playwright] ⚠️ PHASE 1.5 실패:', (detailErr as Error).message);
+                }
+            }
+
+            // ───────────────────────────────────────────────
             // ✅ [2026-03-14] PHASE 2: 리뷰 이미지 수집
             // ───────────────────────────────────────────────
-            const productImageCountBeforeReviews = allImages.filter(i => i.type !== 'review' && i.type !== 'detail').length;
+            // [2026-08-06] 리뷰는 마지막 단계 — 갤러리 + 상세로도 목표에 못 미칠 때만.
+            //   기존 기준(갤러리만 세고 <= 1)은 상세 단계가 없던 시절의 것이라, 상세로
+            //   채워졌는데도 리뷰를 또 긁거나 반대로 2장에서 멈추는 문제가 있었다.
+            const productImageCountBeforeReviews = allImages.filter(i => i.type !== 'review').length;
             const shouldCollectReviews = options?.includeReviews === true
-                && (options.reviewFallbackWhenGalleryWeak !== true || productImageCountBeforeReviews <= 1);
+                && (options.reviewFallbackWhenGalleryWeak !== true || productImageCountBeforeReviews < detailTarget);
 
             if (shouldCollectReviews) {
                 console.log('[SmartStore:Playwright] 📝 PHASE 2: 리뷰 이미지 수집...');
