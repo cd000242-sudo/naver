@@ -12,6 +12,8 @@ declare let generatedImages: any[];
 declare function generateImagesWithCostSafety(options: any): Promise<any>;
 declare function syncGlobalImagesFromImageManager(): void;
 declare function resolveFirstHeadingTitleForThumbnail(): string;
+// [2026-08-06] 적용 후 이미지관리탭 소제목 카드(영어 프롬프트 + 미리보기) 재렌더용.
+declare function displayImageHeadingsWithPrompts(headings: any[]): void;
 declare function initShoppingBannerTab(): void;
 // ============================================
 // ✅ [2026-01-20] 프리셋 썸네일 적용 헬퍼 함수
@@ -52,6 +54,34 @@ export function applyPresetThumbnailIfExists(mode: string): {
 // 🎨 썸네일 생성기 (Thumbnail Generator)
 // ============================================
 
+/**
+ * [2026-08-06] 이전 썸네일 제거 — 사용자 실측 "이전에 넣었던 썸네일도 그대로 있다".
+ *
+ * 원인: syncGlobalImagesFromImageManager 의 병합이 "ImageManager 에 없는 기존 항목"을
+ * 보충하는데, 교체된 구 썸네일이 그 조건에 걸려 되살아난다. 생성기 산출물
+ * (provider: 'thumbnail-generator')은 항상 최신 1장만 남기면 되므로, 새 썸네일을
+ * 넣기 전에 전역 배열과 ImageManager 양쪽에서 먼저 걷어낸다.
+ */
+export function removePreviousThumbnailImages(): void {
+  const isGeneratedThumbnail = (img: any): boolean =>
+    !!img && typeof img === 'object' && img.provider === 'thumbnail-generator';
+
+  for (const key of ['imageManagementGeneratedImages', 'generatedImages']) {
+    try {
+      const list = (window as any)[key];
+      if (Array.isArray(list) && list.length > 0) {
+        (window as any)[key] = list.filter((img: any) => !isGeneratedThumbnail(img));
+      }
+    } catch { /* 전역 미초기화 — 무시 */ }
+  }
+
+  try {
+    const managed = ImageManager.getAllImages?.() || [];
+    if (Array.isArray(managed) && managed.some(isGeneratedThumbnail)) {
+      ImageManager.setAll(managed.filter((img: any) => !isGeneratedThumbnail(img)));
+    }
+  } catch { /* ImageManager 미준비 — 무시 */ }
+}
 
 export class ThumbnailGenerator {
   private canvas: HTMLCanvasElement | null = null;
@@ -424,10 +454,6 @@ export class ThumbnailGenerator {
     });
 
     // 배경 줌(확대/축소) 활성화 설정
-    const bgZoomEnable = document.getElementById('thumb-bg-zoom-enable') as HTMLInputElement;
-    bgZoomEnable?.addEventListener('change', (e: Event) => {
-      this.settings.bgZoomEnabled = (e.target as HTMLInputElement).checked;
-    });
 
     // 스티커 버튼들
     document.querySelectorAll('.thumb-sticker-btn').forEach(btn => {
@@ -460,7 +486,6 @@ export class ThumbnailGenerator {
     this.canvas?.addEventListener('mousemove', (e) => this.onMouseMove(e));
     this.canvas?.addEventListener('mouseup', () => this.onMouseUp());
     this.canvas?.addEventListener('mouseleave', () => this.onMouseUp());
-    this.canvas?.addEventListener('wheel', (e) => this.onWheel(e), { passive: false });
   }
 
   private updateCanvasSize(): void {
@@ -760,8 +785,6 @@ export class ThumbnailGenerator {
     if (outlineWidthEl) outlineWidthEl.value = String(this.settings.outlineWidth);
 
     // 배경 줌 활성화 상태 업데이트
-    const bgZoomEnable = document.getElementById('thumb-bg-zoom-enable') as HTMLInputElement;
-    if (bgZoomEnable) bgZoomEnable.checked = this.settings.bgZoomEnabled;
   }
 
   private reset(): void {
@@ -855,6 +878,10 @@ export class ThumbnailGenerator {
 
     // ✅ image-tab인 경우 기존 로직 (1번 소제목에 즉시 적용)
     if (applyTarget === 'image-tab') {
+      // [2026-08-06] 이전 썸네일 제거 — 새 썸네일을 적용해도 구 썸네일이 미리보기에
+      //   그대로 남는다는 실측(sync 병합이 "ImageManager 에 없는 기존 항목"으로 보고
+      //   되살린다). 생성기 산출물은 항상 최신 1장만 유지한다.
+      removePreviousThumbnailImages();
       // 소제목 목록 가져오기 (ImageManager 우선)
       const headings = ImageManager.headings.length > 0
         ? ImageManager.headings
@@ -891,6 +918,24 @@ export class ThumbnailGenerator {
 
       // ✅ [2026-02-12 P1 FIX #8] 직접 할당 → syncGlobalImagesFromImageManager
       try { syncGlobalImagesFromImageManager(); } catch { /* ignore */ }
+
+      // [2026-08-06] 이미지관리탭 소제목 카드(영어 프롬프트 + 미리보기) 재렌더.
+      //   sync 는 아래 "생성된 이미지 미리보기"(displayGeneratedImages)만 갱신해서,
+      //   적용했는데 소제목 카드에는 안 보인다는 실측이 있었다. 렌더 실패가 적용
+      //   흐름을 끊지 않도록 감싼다.
+      try {
+        const cardHeadings = ImageManager.headings?.length
+          ? ImageManager.headings
+          : ((window as any).imageManagementHeadings || []);
+        // 번들 스코프에 따라 전역 함수가 안 보일 수 있어 window 경유를 우선한다.
+        const renderCards = (window as any).displayImageHeadingsWithPrompts
+          || (typeof displayImageHeadingsWithPrompts === 'function' ? displayImageHeadingsWithPrompts : null);
+        if (renderCards && Array.isArray(cardHeadings) && cardHeadings.length > 0) {
+          renderCards(cardHeadings);
+        }
+      } catch (renderErr) {
+        console.warn('[ThumbnailGen] 소제목 카드 재렌더 실패(적용은 완료):', renderErr);
+      }
 
       // 대표사진(썸네일) 경로 설정
       (window as any).thumbnailPath = base64;
@@ -1002,28 +1047,6 @@ export class ThumbnailGenerator {
     this.dragIndex = -1;
   }
 
-  private onWheel(e: WheelEvent): void {
-    if (!this.backgroundImage || !this.canvas || !this.settings.bgZoomEnabled) return;
-    e.preventDefault();
-
-    const zoomSpeed = 0.001;
-    const delta = -e.deltaY;
-    const prevScale = this.bgScale;
-    this.bgScale = Math.max(0.1, Math.min(10, this.bgScale + delta * zoomSpeed));
-
-    // 마우스 위치 기준으로 줌인/아웃 (점진적 위치 보정)
-    const rect = this.canvas.getBoundingClientRect();
-    const scaleX = this.canvas.width / rect.width;
-    const scaleY = this.canvas.height / rect.height;
-    const mouseX = (e.clientX - rect.left) * scaleX;
-    const mouseY = (e.clientY - rect.top) * scaleY;
-
-    // 줌 중심점 보정 로직 (선택 사항)
-    // this.bgPos.x -= (mouseX - this.bgPos.x) * (this.bgScale / prevScale - 1);
-    // this.bgPos.y -= (mouseY - this.bgPos.y) * (this.bgScale / prevScale - 1);
-
-    this.render();
-  }
 
   render(): void {
     if (!this.ctx || !this.canvas) return;

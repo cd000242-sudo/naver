@@ -177,10 +177,16 @@ function syncGlobalImagesFromImageManager(): void {
       });
 
       // existingList에서 ImageManager에 없는 항목만 보충
+      // [2026-08-06] 단, 썸네일 생성기 산출물은 보충하지 않는다 — 교체된 이전 썸네일이
+      //   "ImageManager 에 없는 기존 항목"으로 취급돼 되살아나던 실측 대응.
+      //   생성기 썸네일은 ImageManager 가 가진 최신 1장만 유효하다.
+      const isGeneratedThumbnail = (img: any): boolean =>
+        !!img && typeof img === 'object' && img.provider === 'thumbnail-generator';
       existingList.forEach((img: any) => {
         const k = getKey(img);
         if (!k) return;
         if (seen.has(k)) return;
+        if (isGeneratedThumbnail(img)) return;
         merged.push(img);
         seen.add(k);
       });

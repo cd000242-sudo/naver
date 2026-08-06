@@ -245,6 +245,8 @@ import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImages
 // ✅ [v2.7.82] ImageManager + syncFn을 window에 등록 — runAutoImageSearch 의존성
 (window as any).ImageManager = ImageManager;
 (window as any).syncGlobalImagesFromImageManager = syncGlobalImagesFromImageManager;
+// [2026-08-06] 썸네일 적용 후 소제목 카드(영어 프롬프트 + 미리보기) 재렌더에 필요.
+(window as any).displayImageHeadingsWithPrompts = displayImageHeadingsWithPrompts;
 import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
 
 const MODAL_BACKDROP_CONTENT_SELECTOR = [
