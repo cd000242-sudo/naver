@@ -302,6 +302,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/crawler/naverStorePriceExtractor.ts',
   'src/crawler/productSpecCrawler.ts',
   'src/crawler/shopping/brandStoreAffiliateCrawler.ts',
+  'src/crawler/shopping/imageTierSelection.ts',
   'src/crawler/shopping/providers/BaseProvider.ts',
   'src/crawler/shopping/providers/BrandStoreProvider.ts',
   'src/crawler/shopping/providers/brandStore/brandStoreDom.ts',
