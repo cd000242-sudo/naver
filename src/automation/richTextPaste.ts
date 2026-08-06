@@ -907,6 +907,41 @@ function restoreDomainDots(value: string): string {
   return value.replace(new RegExp(DOMAIN_DOT_PLACEHOLDER, 'g'), '.');
 }
 
+/**
+ * [2026-08-06] 숫자 원자 — 중간에서 절대 자르지 않는 토큰.
+ *
+ * 실측(라이브): "황금 1,000원~50,000원"이 "1,000원~50," / "000원"으로 잘려 발행됐다.
+ * 천단위 콤마가 절단 후보(`,\s*`)로 잡히기 때문이다. 금액·범위·날짜·비율은 한 덩어리로
+ * 읽혀야 의미가 산다.
+ *
+ * 커버: 1,000 / 50,000원 / 1,000원~50,000원 / 3.5% / 2026년 7월 14일 / 14일까지
+ */
+const NUMERIC_ATOM_RE = new RegExp(
+  [
+    // 금액·수량 범위: 1,000원~50,000원 / 100원 ~ 1,000원
+    '\\d[\\d,.]*\\s*(?:원|%|명|개|건|일|월|년|시간|분|초|kg|g|ml|L|cm|mm|m)?\\s*[~∼-]\\s*\\d[\\d,.]*\\s*(?:원|%|명|개|건|일|월|년|시간|분|초|kg|g|ml|L|cm|mm|m)?',
+    // 날짜: 2026년 7월 14일
+    '\\d{4}\\s*년\\s*\\d{1,2}\\s*월\\s*\\d{1,2}\\s*일',
+    '\\d{1,2}\\s*월\\s*\\d{1,2}\\s*일',
+    // 단일 수치(천단위 콤마·소수점 포함) + 단위
+    '\\d[\\d,]*(?:\\.\\d+)?\\s*(?:원|%|명|개|건|일|월|년|시간|분|초|kg|g|ml|L|cm|mm|m)?',
+  ].join('|'),
+  'g',
+);
+
+function getNumericAtomRanges(value: string): Array<{ start: number; end: number }> {
+  const ranges: Array<{ start: number; end: number }> = [];
+  let match: RegExpExecArray | null;
+  NUMERIC_ATOM_RE.lastIndex = 0;
+  while ((match = NUMERIC_ATOM_RE.exec(value)) !== null) {
+    const token = match[0];
+    // 한 글자 숫자(단위 없음)는 보호할 필요가 없다 — 과보호는 줄 길이만 늘린다.
+    if (token.trim().length <= 1) continue;
+    ranges.push({ start: match.index, end: match.index + token.length });
+  }
+  return ranges;
+}
+
 function getDomainTokenRanges(value: string): Array<{ start: number; end: number }> {
   const ranges: Array<{ start: number; end: number }> = [];
   let match: RegExpExecArray | null;
@@ -918,10 +953,15 @@ function getDomainTokenRanges(value: string): Array<{ start: number; end: number
 }
 
 function moveCutOutsideDomainToken(value: string, cut: number, minCut: number, maxCut: number): number {
-  for (const range of getDomainTokenRanges(value)) {
+  // [2026-08-06] 숫자 원자를 도메인 토큰과 같은 등급으로 보호한다.
+  //   앞으로 물리는 것(range.start)이 minCut 미만이면 뒤로 넘겨(range.end) 원자를 지킨다 —
+  //   줄이 다소 길어져도 "1,000원~50," 처럼 잘리는 것보다 읽힌다.
+  const ranges = [...getNumericAtomRanges(value), ...getDomainTokenRanges(value)];
+  for (const range of ranges) {
     if (cut <= range.start || cut >= range.end) continue;
-    if (range.end <= maxCut) return range.end;
     if (range.start >= minCut) return range.start;
+    if (range.end <= maxCut) return range.end;
+    return range.end; // 창을 넘더라도 원자는 유지 (다음 루프에서 정상 분할)
   }
   return cut;
 }
@@ -940,14 +980,23 @@ function splitSentencesForMobile(value: string): string[] {
   // [2026-07-03] 번호목록 마커("1." / "2)")가 마침표 때문에 한 문장으로 오인돼 홀로 분리되면,
   //   모바일 변환에서 "1." 다음에 빈 줄이 생기고 내용이 아래로 떨어진다. 마커만 남은 조각은
   //   다음 조각에 붙여 "1. 글문단"을 한 줄로 유지한다(목록 blocks로 안 묶인 blank-분리 항목 대비).
+  // [2026-08-06] Q/A 마커도 같은 문제를 겪는다 — "Q." "Q1." "A2:" 가 마침표 때문에
+  //   한 문장으로 오인돼 홀로 남으면 화면에 "Q." 만 뜨고 질문이 아래로 떨어지거나
+  //   사라진다(사용자 실측 FAQ 스크린샷). 마커만 남은 조각은 다음 조각에 붙인다.
+  const isOrphanMarker = (value: string): boolean =>
+    /^\d{1,2}[.)]$/.test(value) || /^[QA]\s*\d{0,2}\s*[.:)]$/i.test(value);
   const merged: string[] = [];
   for (const sentence of raw) {
     const prev = merged[merged.length - 1];
-    if (prev && /^\d{1,2}[.)]$/.test(prev)) {
+    if (prev && isOrphanMarker(prev)) {
       merged[merged.length - 1] = `${prev} ${sentence}`.trim();
     } else {
       merged.push(sentence);
     }
+  }
+  // 마지막 조각이 마커만 남았으면(뒤에 붙일 내용이 없음) 버린다 — "Q." 단독 줄 방지.
+  while (merged.length > 0 && isOrphanMarker(merged[merged.length - 1])) {
+    merged.pop();
   }
   return merged;
 }
