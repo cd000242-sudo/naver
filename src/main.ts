@@ -256,7 +256,7 @@ import { getBlogRecentPosts } from './rssSearcher.js';
 import { browserSessionManager } from './browserSessionManager.js';
 
 // ✅ [2026-02-04] 자동 업데이트 모듈
-import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdating, waitForUpdateCheck } from './updater.js';
+import { initAutoUpdater, initAutoUpdaterEarly, setUpdaterLoginWindow, isUpdating, waitForUpdateCheck, waitForUpdateDeferral } from './updater.js';
 // v2.7.1: 앱 종료 시 Flow/ImageFX persistent context 쿠키 flush — 매번 로그인 강제 방지
 import { resetFlowState } from './image/flowGenerator.js';
 import { cleanupImageFxBrowser } from './image/imageFxGenerator.js';
@@ -1386,11 +1386,22 @@ function showSplash(): void {
         .bar { width: 64%; height: 3px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden; }
         .bar > div { width: 35%; height: 100%; background: linear-gradient(90deg, #3b82f6, #8b5cf6); border-radius: 2px; animation: slide 1.4s ease-in-out infinite; }
         @keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(280%); } }
+        /* [2026-08-08] Escape hatch. The splash is frameless, so without this the user has no way
+           to dismiss it when boot stalls (e.g. an update was deferred). It is the only window at
+           this point, so closing it lets window-all-closed shut the process down cleanly. */
+        #splash-close { position: absolute; top: 8px; right: 10px; width: 24px; height: 24px; padding: 0; border: 0; border-radius: 6px; background: rgba(255,255,255,0.08); color: #a1a1aa; font-size: 15px; line-height: 24px; cursor: pointer; -webkit-app-region: no-drag; }
+        #splash-close:hover { background: rgba(255,255,255,0.18); color: #fff; }
       </style></head><body>
+        <button id="splash-close" title="닫기 (앱 종료)" aria-label="닫기">&times;</button>
         <div class="logo">🚀</div>
         <div class="title">Better Life Naver</div>
         <div class="sub">시작하는 중...</div>
         <div class="bar"><div></div></div>
+        <script>
+          document.getElementById('splash-close').addEventListener('click', function () {
+            window.close();
+          });
+        </script>
       </body></html>`;
     splashWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(splashHtml)}`);
     splashWindow.on('closed', () => { splashWindow = null; });
@@ -8640,10 +8651,14 @@ app.whenReady().then(async () => {
       }
       const hasUpdate = await waitForUpdateCheck().catch(() => false);
       if (hasUpdate) {
-        debugLog('[Main] 업데이트 발견 → 다운로드 진행 중, 인증창 생성 안 함');
-        // 업데이트 다운로드 → 자동 재시작 (updater.ts에서 처리)
-        // 앱이 재시작되면 새 버전으로 인증창이 표시됨
-        return;
+        debugLog('[Main] 업데이트 발견 → 다운로드 진행 중, 인증창 생성 보류');
+        // [2026-08-08] 이전에는 여기서 `return` 으로 부팅 시퀀스를 끝냈다. 사용자가 재시작
+        //   다이얼로그에서 "나중에"를 고르거나 다운로드가 실패하면 인증창을 만드는 코드는
+        //   이미 지나간 뒤라, splash 만 남아 백그라운드에서 계속 돌았다(사용자 실측).
+        //   이제 보류/실패 신호를 기다렸다가 부팅을 그대로 이어간다. "지금 재시작"을 고르면
+        //   프로세스가 종료되므로 이 await 는 매달린 채 끝난다 — 의도된 동작이다.
+        await waitForUpdateDeferral();
+        debugLog('[Main] 업데이트 보류/실패 → 부팅 계속 (인증창 표시)');
       }
       debugLog('[Main] 업데이트 없음 → 인증창 표시 진행');
     }

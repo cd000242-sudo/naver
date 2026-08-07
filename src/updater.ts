@@ -131,6 +131,32 @@ let updateCheckResolve: ((hasUpdate: boolean) => void) | null = null;
  * main.ts에서 await하여 업데이트 여부 확인 후 인증창 표시 결정
  * @returns true = 업데이트 있음 (다운로드 시작됨), false = 업데이트 없음 또는 에러
  */
+/**
+ * [2026-08-08] Boot-resume signal.
+ *
+ * User report: cancelling an update left the splash spinning in the background forever.
+ * Root cause: main.ts ended its boot sequence with `return` as soon as an update was found,
+ * so the code that creates the login/main window had already been skipped by the time the
+ * user pressed "나중에". Nothing was left to close the splash.
+ *
+ * The updater now signals every path that stops an in-flight update (deferral, dialog error,
+ * download error) so the boot sequence can continue instead of hanging. Choosing "지금 재시작"
+ * does NOT signal — the process exits on its own.
+ */
+let updateDeferredResolvers: Array<() => void> = [];
+
+export function waitForUpdateDeferral(): Promise<void> {
+    return new Promise<void>((resolve) => { updateDeferredResolvers.push(resolve); });
+}
+
+function notifyUpdateDeferred(reason: string): void {
+    if (updateDeferredResolvers.length === 0) return;
+    sendLogToRenderer(`[Updater] 업데이트 보류 — 부팅 재개 (${reason})`);
+    const pending = updateDeferredResolvers;
+    updateDeferredResolvers = [];
+    for (const resolve of pending) resolve();
+}
+
 export function waitForUpdateCheck(timeoutMs: number = 3000): Promise<boolean> {
     if (isUpdateInProgress) {
         return Promise.resolve(true);
@@ -538,6 +564,7 @@ export function initAutoUpdaterEarly(): void {
                     sendLogToRenderer('[Updater] 사용자 "나중에" 선택 — 작업 계속, 다음 실행 시 업데이트 적용');
                     closeProgressWindow();
                     isUpdateInProgress = false; // 작업이 계속 진행될 수 있도록 해제
+                    notifyUpdateDeferred('사용자 "나중에" 선택');
                     return;
                 }
                 sendLogToRenderer('[Updater] 사용자가 업데이트 확인, 재시작 실행');
@@ -555,6 +582,7 @@ export function initAutoUpdaterEarly(): void {
                 sendLogToRenderer(`[Updater] 다이얼로그 에러 — 재시작 보류(작업 보호): ${err}`);
                 closeProgressWindow();
                 isUpdateInProgress = false;
+                notifyUpdateDeferred('다이얼로그 에러');
             });
         } else {
             sendLogToRenderer('[Updater] targetWindow 없음, 진행률 창에서 완료 표시');
@@ -602,6 +630,7 @@ export function initAutoUpdaterEarly(): void {
                     if (result.response !== 0) {
                         sendLogToRenderer('[Updater] 사용자 "나중에" 선택 — 작업 계속, 다음 실행 시 적용');
                         isUpdateInProgress = false;
+                        notifyUpdateDeferred('사용자 "나중에" 선택');
                         return;
                     }
                     if (loginWindow && !loginWindow.isDestroyed()) {
@@ -609,7 +638,7 @@ export function initAutoUpdaterEarly(): void {
                     }
                     // v2.10.96: cleanup 후 quitAndInstall
                     await quitAndInstallWithCleanup(updater);
-                }).catch(() => { isUpdateInProgress = false; });
+                }).catch(() => { isUpdateInProgress = false; notifyUpdateDeferred('다이얼로그 실패'); });
             }
         }
 
@@ -622,6 +651,7 @@ export function initAutoUpdaterEarly(): void {
     updater.on('error', (error: any) => {
         if (isTransientGitHubUpdateError(error)) {
             isUpdateInProgress = false;
+            notifyUpdateDeferred('GitHub 일시 오류 — 재시도 예약');
             if (updateCheckResolve) {
                 updateCheckResolve(false);
                 updateCheckResolve = null;
@@ -644,6 +674,7 @@ export function initAutoUpdaterEarly(): void {
             : error.message;
 
         isUpdateInProgress = false;
+        notifyUpdateDeferred(`업데이트 오류: ${error?.message ?? 'unknown'}`);
 
         // ✅ [2026-03-11] Promise resolve: 에러 발생 → 업데이트 없음으로 처리
         if (updateCheckResolve) {
