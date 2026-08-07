@@ -14,13 +14,15 @@ const CLAUDE_VERSION_PATTERNS = [
   new RegExp(`^(?:claude|claude-code|claude code)\\s+(?:version\\s+)?v?${SEMVER}$`, 'i'),
   new RegExp(`^v?${SEMVER}\\s+\\(claude code\\)$`, 'i'),
 ] as const;
+// [v2.11.145] The gemini provider runs agy (Antigravity CLI) now. agy 1.1.5 prints a bare
+// "1.1.5", which BARE_VERSION already covers; the named forms are kept for future output changes.
 const GEMINI_VERSION_PATTERNS = [
-  new RegExp(`^(?:@google\\/)?(?:gemini-cli|gemini)\\s+(?:version\\s+)?v?${SEMVER}$`, 'i'),
+  new RegExp(`^(?:antigravity(?:-cli)?|agy)\\s+(?:version\\s+)?v?${SEMVER}$`, 'i'),
 ] as const;
 
 export function agentVersionFallbackLabel(provider: AgentProvider): string {
   if (provider === 'codex') return 'Codex CLI';
-  if (provider === 'gemini') return 'Gemini CLI';
+  if (provider === 'gemini') return 'Antigravity CLI';
   return 'Claude Code';
 }
 

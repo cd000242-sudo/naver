@@ -81,34 +81,9 @@ export function parseClaudeEnvelope(stdout: string): string {
   throw new AgentCliError('empty_output', 'claude', 'claude 응답에 result가 없습니다.', raw.slice(0, 500));
 }
 
-/**
- * Parse the envelope printed by `gemini --output-format json`.
- * Shape: { response, stats }. Returns the `response` text.
- * Unlike claude's envelope, a JSON parse failure falls back to the raw stdout text instead of
- * throwing — gemini's CLI has occasionally printed plain text ahead of the JSON envelope.
- */
-export function parseGeminiEnvelope(stdout: string): string {
-  const raw = (stdout ?? '').trim();
-  if (!raw) {
-    throw new AgentCliError('empty_output', 'gemini', 'gemini가 빈 응답을 반환했습니다.');
-  }
-
-  let obj: unknown;
-  try {
-    obj = JSON.parse(raw);
-  } catch {
-    return raw;
-  }
-
-  if (obj && typeof obj === 'object' && !Array.isArray(obj)) {
-    const env = obj as Record<string, unknown>;
-    if (typeof env.response === 'string' && env.response.trim()) {
-      return env.response;
-    }
-  }
-
-  return raw;
-}
+// [v2.11.145] parseGeminiEnvelope removed with the migration to agy (Antigravity CLI).
+// gemini printed a { response, stats } envelope; agy has no envelope flag and writes the answer
+// straight to stdout, so geminiRunner returns the trimmed stdout with no wrapper to unpack.
 
 /** True only for wording that means the account has no active Claude Code entitlement. */
 export function isSubscriptionInactiveMessage(text: string): boolean {

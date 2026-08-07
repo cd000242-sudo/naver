@@ -29,10 +29,13 @@ describe('원클릭 자동 설정', () => {
 });
 
 describe('감지·설치·세션 배선 (기존 유지 확인)', () => {
-  it('gemini 감지는 --version + oauth_creds.json 프로브를 쓴다', () => {
+  // [v2.11.145] gemini provider는 agy(Antigravity CLI)로 이관. agy는 자격증명을 OS 키링에
+  // 두므로 stat할 oauth_creds.json이 없고, 로그인 판정은 `agy models` 프로브로 바뀌었다.
+  it('gemini 감지는 --version + models 프로브를 쓴다', () => {
     const detect = read('agentCli/detect.ts');
-    expect(detect).toContain("join(homedir(), '.gemini', 'oauth_creds.json')");
     expect(detect).toMatch(/args: \['--version'\]/);
+    expect(detect).toMatch(/args: \['models'\]/);
+    expect(detect).not.toContain('oauth_creds.json');
   });
 
   it('gemini 자동 설치는 공식 npm 패키지를 쓴다', () => {

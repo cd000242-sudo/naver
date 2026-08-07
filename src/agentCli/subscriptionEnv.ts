@@ -7,7 +7,7 @@
 // deliberately never written into the system PATH. withAgentRuntimePath() prepends it, which
 // is what lets detect/login/generate find them; the inherited PATH still follows, so a CLI the
 // user installed globally themselves keeps resolving exactly as before.
-import { withAgentRuntimePath } from './agentRuntime.js';
+import { getAgyInstallDirs, withAgentRuntimePath, withPathEntries } from './agentRuntime.js';
 
 const SHARED_SUBSCRIPTION_ENV_KEYS = new Set([
   'PATH',
@@ -116,12 +116,19 @@ export function buildCodexSubscriptionEnv(
 export function buildGeminiSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {
-  // [v2.11.140] Auth method is selected via ~/.gemini/settings.json (oauth-personal) —
-  // see ensureGeminiOAuthPersonalConfig(). We intentionally do NOT set GOOGLE_GENAI_USE_GCA:
-  // that Code Assist path returned "IneligibleTierError: no longer supported for Gemini Code
-  // Assist for individuals" for personal accounts. API-key vars stay stripped (allowlist)
-  // so the subprocess uses the OAuth subscription only, never silent API-key billing.
-  return withAgentRuntimePath(pickSubscriptionEnv(source, GEMINI_SUBSCRIPTION_ENV_KEYS));
+  // [v2.11.145] The provider now runs agy (Antigravity CLI); auth lives in the OS keyring, so
+  // there is no auth-method env var or settings file to prepare. API-key vars stay stripped by
+  // the allowlist so the subprocess uses the subscription only, never silent API-key billing.
+  //
+  // agy's install dir is added explicitly: its installer only writes the User PATH *registry*
+  // value, which a running app never sees (see getAgyInstallDirs). Scoped to gemini so the
+  // codex/claude environments are byte-identical to before.
+  // agy's dir is inserted BEFORE withAgentRuntimePath runs, so the app-managed prefix stays at
+  // the very front of PATH exactly as it is for codex/claude; agy sits behind it, ahead of the
+  // inherited PATH.
+  return withAgentRuntimePath(
+    withPathEntries(pickSubscriptionEnv(source, GEMINI_SUBSCRIPTION_ENV_KEYS), getAgyInstallDirs()),
+  );
 }
 
 /**

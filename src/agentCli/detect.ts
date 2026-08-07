@@ -1,8 +1,5 @@
 // Install and authentication detection for subscription-backed agents.
 // Status checks are deliberately metadata-only: they must never spend a model turn.
-import { existsSync } from 'fs';
-import { homedir } from 'os';
-import { join } from 'path';
 import {
   classifyExit,
   isSubscriptionInactiveMessage,
@@ -10,6 +7,7 @@ import {
 } from './parse.js';
 import { sanitizeUserVisibleError } from '../runtime/userVisibleError.js';
 import { spawnCollect } from './spawnHelper.js';
+import { agentCommandName } from './commandName.js';
 import {
   buildClaudeSubscriptionEnv,
   buildCodexSubscriptionEnv,
@@ -26,6 +24,10 @@ import {
 } from './version.js';
 
 const DETECT_TIMEOUT_MS = 8_000;
+// agy's login probe boots a local backend and refreshes the keyring token before answering.
+// Measured at 3.2-3.6s on the dev machine against 78ms for `agy --version`, so the shared 8s
+// budget leaves almost no headroom on a slower user PC. Only this probe gets the wider window.
+const AGY_LOGIN_PROBE_TIMEOUT_MS = 30_000;
 const STATUS_CACHE_TTL_MS = 30_000;
 
 interface LoginProbe {
@@ -88,7 +90,7 @@ function buildAgentSubscriptionEnv(provider: AgentProvider): NodeJS.ProcessEnv {
 async function probeVersion(provider: AgentProvider): Promise<string | undefined> {
   try {
     const res = await spawnCollect({
-      command: provider,
+      command: agentCommandName(provider),
       args: ['--version'],
       provider,
       timeoutMs: DETECT_TIMEOUT_MS,
@@ -263,23 +265,39 @@ async function probeClaudeLogin(): Promise<LoginProbe> {
 }
 
 /**
- * Gemini CLI has no `login status` subcommand. Agent mode is subscription-only:
- * the runner (buildGeminiSubscriptionEnv) deliberately STRIPS GEMINI_API_KEY to
- * force the OAuth subscription path. So readiness must be inferred ONLY from the
- * OAuth credential file the CLI writes on first browser login.
+ * agy has no `login status` subcommand (verified against agy 1.1.5 --help) and keeps credentials
+ * in the OS keyring, so there is no credential file to stat the way the retired gemini CLI's was.
  *
- * [v2.11.138] The old GEMINI_API_KEY fallback was a false positive: the app sets
- * GEMINI_API_KEY for normal content generation, so this reported "로그인 확인됨"
- * even when the user never did the OAuth login — but the runner strips that key,
- * so the first agent generation would fail. Removed to match the runner.
+ * [v2.11.145] `agy models` is the cheapest command that still goes through the full auth chain:
+ * it spends no generation quota but cannot answer for an account that fails to authenticate.
+ *
+ * This is deliberately a heuristic — an unauthenticated `agy models` could in principle still
+ * print a static list. That residual case is caught downstream rather than here: the generation
+ * run's own auth error is classified and surfaced, so a false "logged in" degrades into a clear
+ * failure message instead of a silent wrong result.
  */
-async function probeGeminiLogin(): Promise<LoginProbe> {
+async function probeAgyLogin(): Promise<LoginProbe> {
   try {
-    const oauthCredsPath = join(homedir(), '.gemini', 'oauth_creds.json');
-    if (existsSync(oauthCredsPath)) {
-      return { loggedIn: true, detail: 'Gemini CLI OAuth 로그인 확인됨 (Antigravity 구독)' };
+    const res = await spawnCollect({
+      command: agentCommandName('gemini'),
+      args: ['models'],
+      provider: 'gemini',
+      timeoutMs: AGY_LOGIN_PROBE_TIMEOUT_MS,
+      env: buildGeminiSubscriptionEnv(),
+    });
+    const models = (res.stdout ?? '')
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+    if (res.code === 0 && models.length > 0) {
+      return { loggedIn: true, detail: 'Antigravity CLI 로그인 확인됨 (구독 계정)' };
     }
-    return { loggedIn: false, errorCode: 'not_logged_in' };
+    const out = `${res.stdout}\n${res.stderr}`.trim();
+    return {
+      loggedIn: false,
+      detail: out ? sanitizeUserVisibleError(out) : undefined,
+      errorCode: 'not_logged_in',
+    };
   } catch {
     return { loggedIn: false, errorCode: 'not_logged_in' };
   }
@@ -310,7 +328,7 @@ export async function detectAgent(
   const login = provider === 'codex'
     ? await probeCodexLogin()
     : provider === 'gemini'
-      ? await probeGeminiLogin()
+      ? await probeAgyLogin()
       : await probeClaudeLogin();
   if (!login.loggedIn) {
     return cacheStatus({

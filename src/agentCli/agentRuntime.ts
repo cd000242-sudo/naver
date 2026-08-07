@@ -68,6 +68,25 @@ export function ensureNodeShim(): string {
   return shimDir;
 }
 
+/**
+ * Antigravity CLI (agy) install directory.
+ *
+ * [v2.11.145] The official Windows installer drops %LOCALAPPDATA%\agy\bin\agy.exe and registers
+ * that directory in the *User PATH registry value*, which never reaches already-running
+ * processes — its own output says "not present in your active Environment PATH ... restart your
+ * active terminal session". Measured live right after install: detection still reported "not
+ * installed". Naming the known directory here lets the app find agy the moment it is installed,
+ * with no logout or app restart.
+ *
+ * Windows only: the POSIX installer's target has not been verified, and R5 forbids encoding
+ * unmeasured paths. On other platforms the inherited PATH remains the only source.
+ */
+export function getAgyInstallDirs(): readonly string[] {
+  if (process.platform !== 'win32') return [];
+  const localAppData = process.env.LOCALAPPDATA;
+  return localAppData ? [join(localAppData, 'agy', 'bin')] : [];
+}
+
 function pathKeyOf(env: NodeJS.ProcessEnv): string {
   return Object.keys(env).find((key) => key.toUpperCase() === 'PATH') ?? 'PATH';
 }
