@@ -68,7 +68,7 @@ const PRODUCTS: Product[] = [
         desc: <>블로그스팟, 워드프레스, 티스토리 발행, 내부링크, 외부유입 문안, 공개 글 확인까지 이어지는 보조 채널 자동화입니다. 올인원 이용권 안에서 함께 씁니다.</>,
         href: '/orbit',
         cta: 'Orbit 자세히 보기',
-        media: { type: 'image', src: '/images/orbit/orbit-hero-live.gif', alt: 'Leaders Orbit 대표 발행 결과 GIF 시연' },
+        media: { type: 'video', src: '/images/orbit/orbit-hero-live.mp4', alt: 'Leaders Orbit 대표 발행 결과 시연 영상' },
         metrics: [['3플랫폼', 'Blogger·WordPress·Tistory'], ['5모드', '목적별 콘텐츠'], ['유입글', '채널별 문안 생성']],
         bullets: [
             'Blogger API, WordPress REST API, Tistory 브라우저 기반 발행 흐름',
