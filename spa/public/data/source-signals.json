@@ -26,10 +26,29 @@
         },
         {
           "id": "naver-2",
-          "keyword": "안보현 아이가 아빠처럼?",
-          "title": "안보현 아이가 아빠처럼?",
+          "keyword": "6시간 부동산 회의",
+          "title": "6시간 부동산 회의",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 99,
+          "source": "naver",
+          "expansions": [
+            "6시간 후에 죽는다",
+            "하루 6시간 수면",
+            "6시간 수면",
+            "진에어 6시간",
+            "다낭 렌트카 6시간",
+            "에어컨 6시간 외출",
+            "식후 6시간 혈당",
+            "수면시간 6시간"
+          ],
+          "expansionSeed": "6시간"
+        },
+        {
+          "id": "naver-3",
+          "keyword": "재벌형사2 안보현 아빠 닮으면",
+          "title": "재벌형사2 안보현 아빠 닮으면",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 98,
           "source": "naver",
           "expansions": [
             "안보현 지수",
@@ -44,11 +63,11 @@
           "expansionSeed": "안보현"
         },
         {
-          "id": "naver-3",
+          "id": "naver-4",
           "keyword": "블랙핑크",
           "title": "블랙핑크",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 97,
           "source": "naver",
           "expansions": [
             "블랙핑크 나무위키",
@@ -63,11 +82,11 @@
           "expansionSeed": "블랙핑크"
         },
         {
-          "id": "naver-4",
+          "id": "naver-5",
           "keyword": "해남 태양광발전 착공",
           "title": "해남 태양광발전 착공",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 96,
           "source": "naver",
           "expansions": [
             "해남 날씨",
@@ -82,49 +101,11 @@
           "expansionSeed": "해남"
         },
         {
-          "id": "naver-5",
-          "keyword": "부동산 회의 6시간",
-          "title": "부동산 회의 6시간",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "naver",
-          "expansions": [
-            "부동산무료법률상담",
-            "부동산상가",
-            "부동산홈",
-            "부동산실거래가조회",
-            "지방선거부동산",
-            "금리인상부동산",
-            "6시간 후에 죽는다",
-            "하루 6시간 수면"
-          ],
-          "expansionSeed": "부동산"
-        },
-        {
           "id": "naver-6",
-          "keyword": "축구 심판 성접대 의혹!",
-          "title": "축구 심판 성접대 의혹!",
+          "keyword": "17KG 감량 김민하의 변신",
+          "title": "17KG 감량 김민하의 변신",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 95,
-          "source": "naver",
-          "expansions": [
-            "축구심판위원장",
-            "문진희 심판",
-            "서동환 심판",
-            "소년심판",
-            "심판 영어로",
-            "박병진 심판",
-            "소녀심판",
-            "조세심판원"
-          ],
-          "expansionSeed": "심판"
-        },
-        {
-          "id": "naver-7",
-          "keyword": "17KG 감량 김민하의 반전 과거",
-          "title": "17KG 감량 김민하의 반전 과거",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
           "source": "naver",
           "expansions": [
             "김민하 다이어트",
@@ -139,35 +120,54 @@
           "expansionSeed": "김민하"
         },
         {
+          "id": "naver-7",
+          "keyword": "이시영",
+          "title": "이시영",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "naver",
+          "expansions": [
+            "이시영 둘째",
+            "이시영 나무위키",
+            "이시영 재산",
+            "배우 이시영",
+            "이시영 복싱",
+            "이시영 근육",
+            "이시영 수영복",
+            "이시영 캠핑장"
+          ],
+          "expansionSeed": "이시영"
+        },
+        {
           "id": "naver-8",
+          "keyword": "수원, 김해 꺾고 선두 질주",
+          "title": "수원, 김해 꺾고 선두 질주",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver",
+          "expansions": [
+            "김해 날씨",
+            "김해 워터파크",
+            "김해공항",
+            "김해 가볼만한곳",
+            "김해 맛집",
+            "김해 롯데아울렛",
+            "김해공항 주차장",
+            "김해 cgv"
+          ],
+          "expansionSeed": "김해"
+        },
+        {
+          "id": "naver-9",
           "keyword": "임영웅 사랑은늘도망가",
           "title": "임영웅 사랑은늘도망가",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
+          "priority": 92,
           "source": "naver",
           "expansions": [
             "임영웅 사랑은 늘 도망가"
           ],
           "expansionSeed": "임영웅 사랑은늘도망가"
-        },
-        {
-          "id": "naver-9",
-          "keyword": "장윤기 사건 의상자 고교생 인정",
-          "title": "장윤기 사건 의상자 고교생 인정",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "naver",
-          "expansions": [
-            "장윤기 아버지",
-            "장윤기 이채원",
-            "장윤기 형량",
-            "장윤기 여고생",
-            "장윤기 나무위키",
-            "광주 장윤기",
-            "장윤기 3차공판",
-            "장윤기 직업"
-          ],
-          "expansionSeed": "장윤기"
         },
         {
           "id": "naver-10",
@@ -386,22 +386,22 @@
       "items": [
         {
           "id": "nate-1",
-          "keyword": "태풍",
-          "title": "태풍",
+          "keyword": "7월 고용 감소",
+          "title": "7월 고용 감소",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "태풍 돌핀",
-            "태풍경로",
-            "태풍 13호",
-            "태풍 바비",
-            "태풍 11호",
-            "태풍 바비 경로",
-            "태풍 돌핀 경로",
-            "태풍 매미"
+            "고용24",
+            "고용노동부",
+            "고용24 홈페이지",
+            "고용센터",
+            "고용보험",
+            "고용보험센터",
+            "워크넷 고용24",
+            "고용보험 조회"
           ],
-          "expansionSeed": "태풍"
+          "expansionSeed": "고용"
         },
         {
           "id": "nate-2",
@@ -424,60 +424,60 @@
         },
         {
           "id": "nate-3",
-          "keyword": "사우디 튀르키예 파키스탄",
-          "title": "사우디 튀르키예 파키스탄",
+          "keyword": "수원 선두 4연패",
+          "title": "수원 선두 4연패",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 98,
           "source": "nate",
           "expansions": [
-            "사우디아라비아",
-            "사우디 시간",
-            "사우디 후티",
-            "사우디 전쟁",
-            "사우디 수도",
-            "사우디 날씨",
-            "사우디리그",
-            "사우디아항공"
+            "수원 날씨",
+            "수원 스타필드",
+            "수원 가볼만한곳",
+            "수원 맛집",
+            "수원삼성",
+            "수원 행궁동",
+            "수원 타임빌라스",
+            "수원 놀거리"
           ],
-          "expansionSeed": "사우디"
+          "expansionSeed": "수원"
         },
         {
           "id": "nate-4",
-          "keyword": "K리그2 선두 4연패",
-          "title": "K리그2 선두 4연패",
+          "keyword": "ISA 재검토 지시",
+          "title": "ISA 재검토 지시",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "nate",
           "expansions": [
-            "2026 K리그2",
-            "4연패 뜻",
-            "4연패 탈출",
-            "4연패 4연승",
-            "4연패 영어로",
-            "4연패 4연승 뜻",
-            "k리그2",
-            "k리그2 순위"
+            "ISA 계좌",
+            "ISA 계좌 개설",
+            "ISA 계좌 단점",
+            "isa",
+            "isa 개편",
+            "isa 서민형",
+            "isa 중개형",
+            "슈퍼 isa"
           ],
-          "expansionSeed": "K리그2"
+          "expansionSeed": "ISA"
         },
         {
           "id": "nate-5",
-          "keyword": "폭염 비상대책본부",
-          "title": "폭염 비상대책본부",
+          "keyword": "재벌 형사2 안보현",
+          "title": "재벌 형사2 안보현",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "nate",
           "expansions": [
-            "폭염중대경보",
-            "폭염 언제까지",
-            "폭염주의보",
-            "폭염경보",
-            "폭염 기준",
-            "폭염특보",
-            "폭염 단계",
-            "폭염 사망"
+            "재벌형사2",
+            "안보현 지수",
+            "안보현 나무위키",
+            "안보현 이주빈",
+            "안보현 드라마",
+            "동궁 안보현",
+            "지수 안보현",
+            "이주빈 안보현"
           ],
-          "expansionSeed": "폭염"
+          "expansionSeed": "안보현"
         }
       ]
     },
@@ -755,5 +755,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-08-07T19:38:33.093Z"
+  "updatedAt": "2026-08-07T20:21:50.909Z"
 }
