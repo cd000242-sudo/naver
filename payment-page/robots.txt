@@ -4,6 +4,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /admin.html
 Disallow: /.gas-license-backend/
 
 User-agent: Yeti

@@ -362,7 +362,7 @@ async function main() {
   );
   await mirrorFromServer(
     'downloads.json',
-    '/v1/public/downloads',
+    '/v1/downloads', // DownloadPage 가 부르는 경로와 동일해야 폴백이 붙는다
     (payload) => payload?.downloads || payload?.items || [],
   );
 

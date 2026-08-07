@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { buildKeywordDetail, keywordSlug } from '../lib/keywordDetailContent.mjs';
+import { buildKeywordDetail, keywordSlug, isEvergreenKeyword } from '../lib/keywordDetailContent.mjs';
 
 type SeedRow = { keyword: string; searchVolume: number; documentCount: number; opportunity: number };
 type Detail = ReturnType<typeof buildKeywordDetail>;
@@ -17,6 +17,7 @@ function searchUrl(keyword: string, provider: 'naver' | 'daum' | 'google'): stri
 function KeywordDetailPage() {
     const { slug = '' } = useParams();
     const [rows, setRows] = useState<SeedRow[]>([]);
+    const [publishedAt, setPublishedAt] = useState('');
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -26,6 +27,7 @@ function KeywordDetailPage() {
             .then((data) => {
                 if (!alive) return;
                 setRows(Array.isArray(data?.rows) ? data.rows : []);
+                setPublishedAt(String(data?.publishedAt || ''));
                 setLoading(false);
             })
             .catch(() => { if (alive) setLoading(false); });
@@ -34,8 +36,14 @@ function KeywordDetailPage() {
 
     const detail = useMemo<Detail | null>(() => {
         const target = rows.find((row) => keywordSlug(row.keyword) === slug);
-        return target ? buildKeywordDetail(target, rows) : null;
-    }, [rows, slug]);
+        return target ? buildKeywordDetail(target, rows, publishedAt) : null;
+    }, [rows, slug, publishedAt]);
+
+    // 상세 페이지가 실제로 존재하는 키워드만 링크한다. 링크 대상과 생성 대상이 갈리면 소프트 404.
+    const relatedLinkable = useMemo<SeedRow[]>(
+        () => (detail?.related || []).filter((row: SeedRow) => isEvergreenKeyword(row.keyword)),
+        [detail],
+    );
 
     useEffect(() => {
         if (!detail) return;
@@ -56,6 +64,7 @@ function KeywordDetailPage() {
                 .kw-detail h1 { font-size: 27px; line-height: 1.34; margin: 0 0 10px; }
                 .kw-detail h2 { font-size: 17px; margin: 26px 0 10px; color: #63efd0; }
                 .kw-detail p { margin: 0 0 10px; font-size: 15px; line-height: 1.75; color: rgba(255,255,255,.86); }
+                .kw-measured-at { font-size: 13px; color: rgba(255,255,255,.6); margin: 0 0 4px; }
                 .kw-metrics { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 16px 0 6px; }
                 .kw-metric { padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); }
                 .kw-metric strong { display: block; font-size: 20px; font-weight: 900; }
@@ -91,6 +100,10 @@ function KeywordDetailPage() {
                     <h1 id="kw-detail-title">{detail.keyword}</h1>
                     <p>{detail.meaning}</p>
 
+                    {detail.measuredAt && (
+                        <p className="kw-measured-at">실측 기준일: {detail.measuredAt}</p>
+                    )}
+
                     <div className="kw-metrics">
                         <div className="kw-metric">
                             <strong>{detail.volume === null ? '-' : numberFormatter.format(detail.volume)}</strong>
@@ -108,7 +121,7 @@ function KeywordDetailPage() {
 
                     <h2>지금 이 키워드의 경쟁 상황</h2>
                     <p>{detail.competition}</p>
-                    <p>검색량과 문서수는 검토 시점에 실제로 측정한 값입니다. 실시간 값이 아니라 고정 스냅샷이라, 글을 쓰기 전에 현재 상태를 한 번 더 확인하시는 편이 좋습니다.</p>
+                    <p>검색량과 문서수는 {detail.measuredAt || '검토 시점'}에 실제로 측정한 값입니다. 실시간 값이 아니라 고정 스냅샷이라, 글을 쓰기 전에 현재 상태를 한 번 더 확인하시는 편이 좋습니다.</p>
 
                     <h2>글에 넣어야 할 것</h2>
                     <ol>
@@ -122,11 +135,11 @@ function KeywordDetailPage() {
                         <a href={searchUrl(detail.keyword, 'google')} target="_blank" rel="noopener noreferrer">구글에서 검색</a>
                     </div>
 
-                    {detail.related.length > 0 && (
+                    {relatedLinkable.length > 0 && (
                         <>
                             <h2>같은 브리핑의 관련 키워드</h2>
                             <div className="kw-related">
-                                {detail.related.map((row: SeedRow) => (
+                                {relatedLinkable.map((row: SeedRow) => (
                                     <a key={row.keyword} href={`/keyword/${keywordSlug(row.keyword)}`}>{row.keyword}</a>
                                 ))}
                             </div>

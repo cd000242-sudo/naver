@@ -4962,8 +4962,13 @@
       setGoldenSummary(0, payload.boardTarget, 0, 0, false, payload.updatedAt, '미측정 · 서버 연결 후 다시 실행');
       renderGoldenQuality([], false, 0, 0);
       renderGoldenRows([], hasActiveProSession(), 0);
-      qs('goldenState').textContent = '연결 오류';
-      qs('goldenNotice').textContent = '실측 황금키워드 스냅샷을 불러오지 못했습니다. 임시 조합 키워드는 황금키워드로 표시하지 않습니다. 원인 코드: ' + reason + ' · 보드 새로고침 또는 Pro 재로그인을 시도하세요.';
+      // 서버가 내려간 상황에서 '재로그인' 을 권하면 사용자가 자기 계정 문제로 오인한다.
+      // 원인이 서버 다운이면 그렇게 말하고, 그 외에만 재시도 안내를 한다.
+      const serverDown = isServerUnavailableError(payload.error || reason);
+      qs('goldenState').textContent = serverDown ? '서버 점검 중' : '연결 오류';
+      qs('goldenNotice').textContent = serverDown
+        ? '황금키워드 서버가 응답하지 않습니다. 계정 문제가 아니라 서버 점검/장애이며, 복구되면 자동으로 다시 채워집니다. 임시 조합 키워드는 황금키워드로 표시하지 않습니다. 원인 코드: ' + reason
+        : '실측 황금키워드 스냅샷을 불러오지 못했습니다. 임시 조합 키워드는 황금키워드로 표시하지 않습니다. 원인 코드: ' + reason + ' · 보드 새로고침 또는 Pro 재로그인을 시도하세요.';
       log('LIVE 황금키워드 스냅샷 unavailable [' + reason + ']: ' + (payload.error || 'server unavailable'));
     }
     function isServerUnavailableError(message) {
@@ -4971,7 +4976,7 @@
       if (/로그인 API 서버에 연결할 수 없습니다|API 서버에 연결할 수 없습니다|연결할 수 없습니다|서버 전원|도메인 연결|배포 연결|오프라인 Pro 세션|로컬\/사용자 API 폴백/i.test(text)) return true;
       if (isAuthErrorMessage(text)) return false;
       if (/api\s*key|API 키|필수 API|Unauthorized|Forbidden/i.test(text)) return false;
-      return /Failed to fetch|NetworkError|Load failed|HTTP 404|HTTP 50d|timeout|ECONN|ENOTFOUND|fetch|연결할 수 없습니다|서버 전원|도메인 연결|배포 연결|오프라인 Pro 세션|로컬\/사용자 API 폴백/i.test(text);
+      return /Failed to fetch|NetworkError|Load failed|HTTP 404|HTTP 50\d|timeout|ECONN|ENOTFOUND|fetch|연결할 수 없습니다|서버 전원|도메인 연결|배포 연결|오프라인 Pro 세션|로컬\/사용자 API 폴백/i.test(text);
     }
     function isLoginApiConnectivityError(message) {
       const text = String(message || '');

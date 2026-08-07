@@ -24,7 +24,9 @@ const NEED_TOKENS = [
   ['지급일', '언제 지급되는지'],
   ['주의사항', '미리 알아둬야 조심할 점'],
   ['체크리스트', '빠뜨리면 안 되는 확인 항목'],
+  ['공휴일', '그날이 쉬는 날인지'],
   ['일정', '일정이 언제인지'],
+  ['기간', '언제부터 언제까지인지'],
   ['방법', '어떻게 하는지'],
   ['후기', '먼저 해본 사람의 경험'],
   ['비교', '무엇이 더 나은지'],
@@ -154,11 +156,20 @@ function outlineItems(keyword) {
   ];
 }
 
+/**
+ * 연도/숫자만으로는 주제가 겹친다고 볼 수 없다.
+ * '2026 청년월세'와 '2026 벚꽃축제'가 서로 관련 키워드로 뜨던 원인.
+ */
+function isWeakTopicToken(token) {
+  return /^(19|20)\d{2}년?$/.test(token) || /^\d+$/.test(token);
+}
+
 /** 같은 브리핑 안에서 주제어를 공유하는 키워드 = 매칭 사실이라 추정이 아니다. */
 function relatedKeywords(keyword, allRows, limit = 6) {
   const subject = subjectOf(keyword);
-  const head = subject.split(/\s+/)[0];
-  if (!head || head.length < 2) return [];
+  // 연도 접두어를 건너뛰고 실제 주제어를 고른다.
+  const head = subject.split(/\s+/).find((token) => token.length >= 2 && !isWeakTopicToken(token));
+  if (!head) return [];
   const self = String(keyword).trim();
   const seen = new Set([self]);
   const out = [];
@@ -173,11 +184,20 @@ function relatedKeywords(keyword, allRows, limit = 6) {
   return out;
 }
 
+/** 실측 시점을 'YYYY년 M월 D일 기준' 으로. 언제 잰 값인지 없으면 낡은 수치가 현재값처럼 읽힌다. */
+export function measuredAtLabel(publishedAt) {
+  const raw = String(publishedAt || '').trim();
+  const parsed = raw ? new Date(raw) : null;
+  if (!parsed || Number.isNaN(parsed.getTime())) return '';
+  const kst = new Date(parsed.getTime() + 9 * 60 * 60 * 1000);
+  return `${kst.getUTCFullYear()}년 ${kst.getUTCMonth() + 1}월 ${kst.getUTCDate()}일 기준`;
+}
+
 /**
  * 상세 페이지에 필요한 내용을 한 번에 만든다.
- * @returns {{keyword,slug,subject,volume,documents,opportunity,meaning,competition,outline,related,metaDescription}}
+ * @returns {{keyword,slug,subject,volume,documents,opportunity,meaning,competition,outline,related,metaDescription,measuredAt}}
  */
-export function buildKeywordDetail(row, allRows) {
+export function buildKeywordDetail(row, allRows, publishedAt) {
   const keyword = String(row?.keyword || '').trim();
   const volume = Number(row?.searchVolume);
   const documents = Number(row?.documentCount);
@@ -193,6 +213,7 @@ export function buildKeywordDetail(row, allRows) {
     competition: competitionSentence(volume, documents),
     outline: outlineItems(keyword),
     related: relatedKeywords(keyword, allRows),
+    measuredAt: measuredAtLabel(publishedAt),
     metaDescription: `${keyword} — 월 검색량 ${Number.isFinite(volume) ? numberFormat.format(volume) : '-'}회, 관련 문서 ${Number.isFinite(documents) ? numberFormat.format(documents) : '-'}개. 이 키워드로 글을 쓸 때 무엇을 다뤄야 하는지 정리했습니다.`,
   };
 }

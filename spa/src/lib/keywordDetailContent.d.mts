@@ -19,8 +19,13 @@ export interface KeywordDetail {
     outline: string[];
     related: KeywordSeedRow[];
     metaDescription: string;
+    /** '2026년 7월 16일 기준' — 이 수치를 언제 실측했는지. 없으면 빈 문자열. */
+    measuredAt: string;
 }
 
 export declare function keywordSlug(keyword: string): string;
-export declare function buildKeywordDetail(row: KeywordSeedRow, allRows: KeywordSeedRow[]): KeywordDetail;
+/** 상세 페이지가 빌드되는 키워드인지. 링크 생성도 이 게이트를 따라야 404 가 안 생긴다. */
+export declare function isEvergreenKeyword(keyword: string): boolean;
+export declare function measuredAtLabel(publishedAt?: string | null): string;
+export declare function buildKeywordDetail(row: KeywordSeedRow, allRows: KeywordSeedRow[], publishedAt?: string | null): KeywordDetail;
 export declare const numberFormat: Intl.NumberFormat;

@@ -17,6 +17,12 @@ function Layout() {
     const location = useLocation();
     const pathname = location.pathname.replace(/\/$/, '') || '/';
     const isLewordConsole = pathname === '/leword' || pathname === '/leword.html';
+    // 여름 이펙트가 계절 조건 없이 항상 떠서 겨울에도 태양 입자가 날렸다(잠복 결함).
+    // KST 기준 6~9월에만 렌더한다.
+    const isSummerSeason = () => {
+        const kstMonth = new Date(Date.now() + 9 * 60 * 60 * 1000).getUTCMonth() + 1;
+        return kstMonth >= 6 && kstMonth <= 9;
+    };
     // 공지 모달은 홈에서만 띄운다(다른 페이지 작업을 가리지 않게).
     const isHome = pathname === '/';
     // 관리자 미리보기 iframe 등 무음 컨텍스트에서는 음악 플레이어를 아예 렌더하지 않는다.
@@ -34,7 +40,7 @@ function Layout() {
                 <Outlet />
             </main>
             {!isLewordConsole && <Footer />}
-            {!isLewordConsole && <SummerEffect />}
+            {!isLewordConsole && isSummerSeason() && <SummerEffect />}
             {!musicOff && <MusicPlayer />}
             {!isLewordConsole && <FloatStack />}
             {isHome && <NoticeModal />}

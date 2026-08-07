@@ -10,7 +10,7 @@ import {
     type HomeNotice,
 } from '../lib/siteOps';
 import { selectKeywordChartRows, type HomeKeywordRow } from '../lib/homeKeywordBriefing';
-import { keywordSlug } from '../lib/keywordDetailContent.mjs';
+import { keywordSlug, isEvergreenKeyword } from '../lib/keywordDetailContent.mjs';
 import NewBadge from './NewBadge';
 import { useNoticeAlerts } from '../lib/useNoticeAlerts';
 
@@ -333,12 +333,17 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
                         <tr key={`${index}-${row.keyword}-${row.documentCount}`}>
                             <td>{index + 1}</td>
                             <th scope="row">
-                                {/* 키워드는 상세 페이지로 보낸다 — 검색 바로가기는 오른쪽 '바로가기' 칸에 이미 있다.
+                                {/* 상세 페이지는 evergreen 키워드만 빌드된다(generate-static-route-pages.mjs).
+                                    전 행을 링크하면 나머지가 크롤러에게 404 로 잡히므로 같은 게이트로 묶는다.
                                     react-router Link 가 아니라 <a> 인 이유는 실제 페이지 로드가 있어야
                                     구글 전면광고(Vignette)가 뜰 자리가 생기기 때문이다. */}
-                                <a className="home-ops-keyword-link" href={`/keyword/${encodeURIComponent(keywordSlug(row.keyword))}`}>
-                                    {row.keyword}
-                                </a>
+                                {isEvergreenKeyword(row.keyword) ? (
+                                    <a className="home-ops-keyword-link" href={`/keyword/${encodeURIComponent(keywordSlug(row.keyword))}`}>
+                                        {row.keyword}
+                                    </a>
+                                ) : (
+                                    <span className="home-ops-keyword-link">{row.keyword}</span>
+                                )}
                                 <CopyKeywordButton text={row.keyword} />
                             </th>
                             <td>{numberFormatter.format(row.searchVolume)}</td>
