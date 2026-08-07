@@ -14,10 +14,16 @@ function Footer() {
                     <Link to="/privacy" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>개인정보처리방침</Link>
                     <Link to="/chatbots" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>무료 챗봇</Link>
                     <Link to="/lookup" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>주문 조회</Link>
-                    <a href="mailto:cd000242@gmail.com" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>고객 문의</a>
+                    <a href="mailto:tjdgus24280@naver.com" style={{ color: '#a0a0b0', fontSize: 14, textDecoration: 'none' }}>고객 문의</a>
                 </div>
                 <div style={{ color: '#a0a0b0', fontSize: 12, lineHeight: 1.7, marginBottom: 20 }}>
                     <p>상호: Leaders Pro | 대표: 박성현 | 사업자등록번호: 515-97-01802</p>
+                    {/*
+                      통신판매업 신고번호는 국내 유료 판매 사이트 필수 표기 항목이다.
+                      실제 신고번호를 확인한 뒤(정부24 > "통신판매업 신고" 또는 사업자 정보에서 조회)
+                      아래 줄의 주석을 풀고 번호를 채워 넣을 것. 가짜 번호는 절대 넣지 말 것.
+                      <p>통신판매업 신고번호: 제0000-지역-00000호</p>
+                    */}
                     <p>주소: 경남 김해시 장유로334번길9 107동 3105호</p>
                     <p>이메일: tjdgus24280@naver.com | 전화: 010-7545-1645</p>
                 </div>

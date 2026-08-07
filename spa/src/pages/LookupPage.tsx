@@ -302,7 +302,7 @@ function LookupPage() {
                 조회가 되지 않으시면{' '}
                 <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700' }}>카카오톡 1:1 문의</a>
                 {' '}또는{' '}
-                <a href="mailto:cd000242@gmail.com" style={{ color: '#FFD700' }}>cd000242@gmail.com</a>
+                <a href="mailto:tjdgus24280@naver.com" style={{ color: '#FFD700' }}>tjdgus24280@naver.com</a>
                 으로 연락해주세요.
             </div>
         </div>

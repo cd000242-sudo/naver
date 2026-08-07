@@ -754,10 +754,16 @@ function PricingPage() {
                             grid-template-columns: 1fr;
                         }
                     }
+
+                    /* 키보드 포커스 링 — 포커스 가능한 요금제 카드가 시각적으로 드러나야 접근성 완성 */
+                    .pricing-plan-card:focus-visible {
+                        outline: 2px solid #FFD700;
+                        outline-offset: 3px;
+                    }
                 `}</style>
 
                 {/* Pricing grid */}
-                <div className="pricing-plan-grid">
+                <div className="pricing-plan-grid" role="group" aria-label="요금제 선택">
                     {activePlans.map((p) => {
                         const isSelected = selected?.id === p.id;
                         const isFeatured = p.badge?.type === 'best';
@@ -769,7 +775,15 @@ function PricingPage() {
                         return (
                             <div
                                 key={p.id}
+                                className="pricing-plan-card"
+                                role="button"
+                                tabIndex={0}
+                                aria-pressed={isSelected}
+                                aria-label={`${p.name} 요금제 선택`}
                                 onClick={() => onSelect(p)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(p); }
+                                }}
                                 style={{
                                     background: isSelected ? 'linear-gradient(180deg, rgba(255,215,0,0.10), rgba(18,18,26,0.85))' : isFeatured ? 'linear-gradient(180deg, rgba(255,215,0,0.04), rgba(18,18,26,0.7))' : 'rgba(18,18,26,0.6)',
                                     border: isSelected ? '2px solid #FFD700' : isFeatured ? '1px solid rgba(255,215,0,0.5)' : '1px solid rgba(255,255,255,0.08)',

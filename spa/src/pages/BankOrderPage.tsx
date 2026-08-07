@@ -363,13 +363,13 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                         <div style={{ color: '#e95e2c', fontSize: 17, fontWeight: 800, marginBottom: 8 }}>주문이 거절되었습니다</div>
                         <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13, lineHeight: 1.6 }}>
                             입금 확인이 되지 않았거나 다른 사유로 거절 처리되었습니다.<br />
-                            문의: <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#c9a84c' }}>cd000242@gmail.com</a>
+                            문의: <a href="mailto:tjdgus24280@naver.com" style={{ color: '#c9a84c' }}>tjdgus24280@naver.com</a>
                         </div>
                     </div>
                 )}
 
                 <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, marginTop: 20 }}>
-                    문의: <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#c9a84c' }}>cd000242@gmail.com</a>
+                    문의: <a href="mailto:tjdgus24280@naver.com" style={{ color: '#c9a84c' }}>tjdgus24280@naver.com</a>
                     {' | '}
                     <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#FEE500' }}>카카오톡 1:1 문의</a>
                 </p>

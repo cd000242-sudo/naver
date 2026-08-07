@@ -48,7 +48,7 @@ function PrivacyPage() {
 
             <h2 style={h2}>3. 이용자의 권리</h2>
             <ul style={ul}>
-                <li>개인정보 열람, 정정, 삭제 요청: cd000242@gmail.com</li>
+                <li>개인정보 열람, 정정, 삭제 요청: tjdgus24280@naver.com</li>
                 <li>요청 접수 후 10일 이내 처리됩니다.</li>
             </ul>
 
@@ -60,7 +60,7 @@ function PrivacyPage() {
             </ul>
 
             <h2 style={h2}>5. 개인정보 보호책임자</h2>
-            <p>이메일: cd000242@gmail.com</p>
+            <p>이메일: tjdgus24280@naver.com</p>
 
             <h2 style={h2}>6. 방침 변경</h2>
             <p>본 방침은 변경 시 본 페이지를 통해 공지됩니다.</p>

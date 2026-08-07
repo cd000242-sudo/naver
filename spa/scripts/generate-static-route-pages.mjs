@@ -172,9 +172,35 @@ function briefingPrerender() {
   ].filter(Boolean).join('');
 }
 
+/**
+ * 판매/제품 페이지 크롤러용 본문.
+ *
+ * SPA 라우트는 브라우저에서 React 가 그리므로 크롤러에는 #root 가 빈 채로 보였다
+ * (products·pricing·detail 등 본문 색인 근거 0). prerender-content.json 에
+ * 각 페이지의 실제 내용을 정직하게 요약한 시맨틱 HTML 을 담아 두고, 빌드 시
+ * #root 안에 심는다. React 마운트 시 교체되므로 사용자 화면에는 영향이 없다.
+ * 내용은 각 페이지 소스를 근거로 생성했으며 없는 수치/후기/가격은 넣지 않았다.
+ */
+function loadSalePrerender() {
+  const p = path.resolve(__dirname, 'prerender-content.json');
+  if (!fs.existsSync(p)) return {};
+  try {
+    const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+    return data && typeof data === 'object' ? data : {};
+  } catch (error) {
+    console.warn(`[static-routes] prerender-content.json parse failed: ${error.message}`);
+    return {};
+  }
+}
+
 const PRERENDER_BY_PATH = {
   briefing: briefingPrerender,
 };
+for (const [route, html] of Object.entries(loadSalePrerender())) {
+  if (typeof html === 'string' && html.trim()) {
+    PRERENDER_BY_PATH[route] = () => html;
+  }
+}
 
 let briefingPublishedAt = '';
 
