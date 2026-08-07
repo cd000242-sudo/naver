@@ -139,6 +139,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/hallucinationCheck.ts',
   'src/content/homefeedExposurePattern.ts',
   'src/content/internalLinkManager.ts',
+  'src/content/kinExperienceMaterial.ts',
   'src/content/neoHookTitles.ts',
   'src/content/officialExposureRubric.ts',
   'src/content/personaBuilder.ts',

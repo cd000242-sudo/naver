@@ -330,6 +330,7 @@ function collectProductionPromptResources(workspaceRoot: string): readonly strin
 
 const SUPPLEMENTAL_RUNTIME_CLOSURE_ROOTS = Object.freeze([
   'src/content/internalLinkManager.ts',
+  'src/content/kinExperienceMaterial.ts',
   'src/contentPolicy/claimRepair.ts',
   'src/contentPolicy/draftGenerator.ts',
   'src/contentPolicy/fileOperationQueue.ts',

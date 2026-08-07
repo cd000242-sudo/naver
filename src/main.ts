@@ -5694,17 +5694,41 @@ ipcMain.handle(
       // [v2.11.133] Empathy-mode reader-situation material (지식iN questions).
       // Runs BEFORE the fact-check block below so citation mode captures the
       // final material set. Non-fatal: failure keeps the assembled source as-is.
+      // [v2.11.182] Experience categories additionally get KiN *answers* as
+      // advice-voice material ("겪은 사람 말투") — SEO mode included. Gated by
+      // isExperienceCategory so news/spec categories stay untouched.
       try {
         const situationMode = (payload.assembly as any).contentMode as string | undefined;
         const situationKeywords = Array.isArray(payload.assembly.keywords) ? payload.assembly.keywords : [];
-        if ((situationMode === 'homefeed' || situationMode === 'business' || situationMode === 'mate') && situationKeywords.length > 0) {
+        const situationEligible = situationMode === 'homefeed' || situationMode === 'business' || situationMode === 'mate';
+        const kinQuery = situationKeywords.join(' ').trim();
+        if (situationEligible && situationKeywords.length > 0) {
           const { collectKinReaderContext } = await import('./sourceAssembler.js');
-          const kinBlock = await collectKinReaderContext(situationKeywords.join(' ').trim());
+          const kinBlock = await collectKinReaderContext(kinQuery);
           if (kinBlock) {
             source.rawText = source.rawText && source.rawText.trim().length >= 50
               ? `${source.rawText}\n\n${kinBlock}`
               : kinBlock;
             console.log(`[Main] 💬 지식iN 독자 상황 재료 주입 완료 (mode=${situationMode}, 최종 rawText=${source.rawText.length.toLocaleString()}자)`);
+          }
+        }
+
+        const kinCategoryHint = String((payload.assembly as any).categoryHint || '').trim();
+        const { isExperienceCategory, collectKinExperienceAnswers } = await import('./content/kinExperienceMaterial.js');
+        const answerEligible = (situationEligible || situationMode === 'seo')
+          && situationKeywords.length > 0
+          && isExperienceCategory(kinCategoryHint);
+        if (answerEligible) {
+          const answerMaterial = await collectKinExperienceAnswers(kinQuery);
+          if (answerMaterial.block) {
+            source.rawText = source.rawText && source.rawText.trim().length >= 50
+              ? `${source.rawText}\n\n${answerMaterial.block}`
+              : answerMaterial.block;
+            console.log(`[Main] 💬 지식iN 겪은 사람 말투 재료 주입: 답변 ${answerMaterial.answerCount}건 (mode=${situationMode}, category=${kinCategoryHint}, 최종 rawText=${source.rawText.length.toLocaleString()}자)`);
+          } else if (answerMaterial.reason === 'no-api-key') {
+            console.warn('[Main] ℹ️ 겪은 사람 말투 재료 없음 — 네이버 검색 API 키 미설정. 설정에서 Client ID/Secret 입력 시 지식iN 답변을 재료로 씁니다.');
+          } else {
+            console.log(`[Main] ℹ️ 겪은 사람 말투 재료 없음 (지식iN 답변 0건, reason=${answerMaterial.reason}, mode=${situationMode}, category=${kinCategoryHint})`);
           }
         }
       } catch (kinErr: any) {
