@@ -45,12 +45,12 @@ type ApiDownloadsPayload = {
 const PRODUCTS = {
     naver: {
         name: 'Better Life Naver',
-        version: '네이버 블로그 자동화 · v2.11.67',
+        version: '네이버 블로그 자동화 · v2.11.182',
         image: '/images/feature-auto-publish.png',
         accent: '#FFD700',
         borderColor: 'rgba(255,215,0,0.25)',
         downloads: [
-            { key: 'windows', label: 'Windows', detail: '2.11.67 · exe', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-Setup-2.11.67.exe' },
+            { key: 'windows', label: 'Windows', detail: '2.11.182 · exe', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.182/Better-Life-Naver-Setup-2.11.182.exe' },
             { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.11.67 · arm64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-arm64.dmg' },
             { key: 'mac-intel', label: 'Mac Intel', detail: '2.11.67 · x64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-x64.dmg' },
         ],
