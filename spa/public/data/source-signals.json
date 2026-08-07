@@ -7,27 +7,20 @@
       "items": [
         {
           "id": "naver-1",
-          "keyword": "안동·의성 특별재난지역 선포",
-          "title": "안동·의성 특별재난지역 선포",
+          "keyword": "안동·의성 특별재난선포",
+          "title": "안동·의성 특별재난선포",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "naver",
           "expansions": [
-            "특별재난지역 선포",
-            "특별재난지역 선포 기준",
-            "특별재난지역 선포권자",
-            "특별재난지역 어디",
-            "특별재난지역 뜻",
-            "특별재난지역 지원금",
-            "특별재난지역 기부",
-            "특별재난지역 나주"
+            "특별재난선포지역"
           ],
-          "expansionSeed": "특별재난지역"
+          "expansionSeed": "특별재난선포"
         },
         {
           "id": "naver-2",
-          "keyword": "삼성 미야모리 영입!",
-          "title": "삼성 미야모리 영입!",
+          "keyword": "삼성 미야모리 영입",
+          "title": "삼성 미야모리 영입",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "naver",
@@ -45,29 +38,10 @@
         },
         {
           "id": "naver-3",
-          "keyword": "SK하이닉스 용인 청주 54조 투자",
-          "title": "SK하이닉스 용인 청주 54조 투자",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "naver",
-          "expansions": [
-            "SK하이닉스 주가",
-            "sk하이닉스",
-            "sk하이닉스 adr",
-            "sk하이닉스 채용",
-            "sk하이닉스 실적발표",
-            "sk하이닉스 주식",
-            "sk하이닉스 목표주가",
-            "sk하이닉스 성과급"
-          ],
-          "expansionSeed": "SK하이닉스"
-        },
-        {
-          "id": "naver-4",
           "keyword": "네이버 AI 팩토리",
           "title": "네이버 AI 팩토리",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 98,
           "source": "naver",
           "expansions": [
             "네이버 ai 팩토리"
@@ -75,68 +49,49 @@
           "expansionSeed": "네이버 AI 팩토리"
         },
         {
+          "id": "naver-4",
+          "keyword": "태풍 돌핀 경로",
+          "title": "태풍 돌핀 경로",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "naver",
+          "expansions": [
+            "13호 태풍 돌핀 경로",
+            "태풍 돌핀 경로 예측",
+            "태풍 돌핀 경로 실시간",
+            "태풍 돌핀 경로 예상",
+            "13호 태풍 돌핀 경로 예측",
+            "태풍 돌핀 경로 일본",
+            "태풍 돌핀 경로 한국",
+            "13호 태풍 돌핀 경로 예상"
+          ],
+          "expansionSeed": "태풍 돌핀 경로"
+        },
+        {
           "id": "naver-5",
-          "keyword": "하나은행 주담대 중단",
-          "title": "하나은행 주담대 중단",
+          "keyword": "경찰 상피제 시행",
+          "title": "경찰 상피제 시행",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "naver",
           "expansions": [
-            "주담대 계산기",
-            "주담대 금리",
-            "생애최초 주담대",
-            "주담대 한도",
-            "주담대 규제",
-            "주담대 대출",
-            "주담대 3억",
-            "주담대 갈아타기"
+            "경찰 계급",
+            "경찰공무원 시험",
+            "경찰 계급도",
+            "경찰 순환인사",
+            "경찰청",
+            "경찰 월급",
+            "경찰대",
+            "경찰대학교"
           ],
-          "expansionSeed": "주담대"
+          "expansionSeed": "경찰"
         },
         {
           "id": "naver-6",
-          "keyword": "상피제 가족 사건 수사 불가",
-          "title": "상피제 가족 사건 수사 불가",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "naver",
-          "expansions": [
-            "상피제 뜻",
-            "상피제도",
-            "상피제도의뜻",
-            "상피제의뜻",
-            "상피제 조선",
-            "경찰 상피제",
-            "상피제 시행",
-            "상피제 한자"
-          ],
-          "expansionSeed": "상피제"
-        },
-        {
-          "id": "naver-7",
-          "keyword": "투표율",
-          "title": "투표율",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "naver",
-          "expansions": [
-            "투표율 조작",
-            "선관위 투표율 조작",
-            "대선 투표율",
-            "대선 투표율 조작",
-            "민주당 투표율",
-            "전라도 투표율",
-            "선관위 투표율",
-            "전당대회 투표율"
-          ],
-          "expansionSeed": "투표율"
-        },
-        {
-          "id": "naver-8",
           "keyword": "SNL 김규원 미담",
           "title": "SNL 김규원 미담",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
+          "priority": 95,
           "source": "naver",
           "expansions": [
             "개그맨 김규원",
@@ -151,11 +106,11 @@
           "expansionSeed": "김규원"
         },
         {
-          "id": "naver-9",
-          "keyword": "김무열 윤승아 부부 데이트",
-          "title": "김무열 윤승아 부부 데이트",
+          "id": "naver-7",
+          "keyword": "김무열 윤승아 부부의 청담동 데이트",
+          "title": "김무열 윤승아 부부의 청담동 데이트",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
+          "priority": 94,
           "source": "naver",
           "expansions": [
             "김무열 윤승아",
@@ -170,23 +125,61 @@
           "expansionSeed": "김무열"
         },
         {
+          "id": "naver-8",
+          "keyword": "규제",
+          "title": "규제",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver",
+          "expansions": [
+            "규제 뜻",
+            "레버리지 규제",
+            "제비탐정 장성규",
+            "대출규제",
+            "규제지역",
+            "규젠",
+            "자살 보도 규제",
+            "부동산 대출규제"
+          ],
+          "expansionSeed": "규제"
+        },
+        {
+          "id": "naver-9",
+          "keyword": "LG 엑사원 세계 1위",
+          "title": "LG 엑사원 세계 1위",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "naver",
+          "expansions": [
+            "1위안",
+            "1위안 환율",
+            "1위안 한국돈",
+            "리센느 1위",
+            "뮤직뱅크 1위",
+            "엠카 1위",
+            "음악중심 1위",
+            "인기가요 1위"
+          ],
+          "expansionSeed": "LG"
+        },
+        {
           "id": "naver-10",
-          "keyword": "고척스카이돔",
-          "title": "고척스카이돔",
+          "keyword": "블랙핑크 10주년 팬 만남",
+          "title": "블랙핑크 10주년 팬 만남",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "naver",
           "expansions": [
-            "고척스카이돔 좌석",
-            "고척스카이돔 예매",
-            "고척스카이돔 먹거리",
-            "고척스카이돔 주차",
-            "고척스카이돔 에어컨",
-            "고척스카이돔 맛집",
-            "고척스카이돔 좌석수",
-            "고척스카이돔 주차장"
+            "블랙핑크 나무위키",
+            "블랙핑크 지수",
+            "블랙핑크 리사",
+            "블랙핑크 제니",
+            "블랙핑크 로제",
+            "블랙핑크 노래",
+            "블랙핑크 갤러리",
+            "국중박 블랙핑크 굿즈"
           ],
-          "expansionSeed": "고척스카이돔"
+          "expansionSeed": "블랙핑크"
         }
       ]
     },
@@ -196,8 +189,8 @@
       "items": [
         {
           "id": "daum-1",
-          "keyword": "황희 버스 하우스",
-          "title": "황희 버스 하우스",
+          "keyword": "황희 버스 하우스 제안",
+          "title": "황희 버스 하우스 제안",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "daum",
@@ -215,29 +208,10 @@
         },
         {
           "id": "daum-2",
-          "keyword": "하영 4대째 의사 집안",
-          "title": "하영 4대째 의사 집안",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "daum",
-          "expansions": [
-            "하영 배우",
-            "하영 나무위키",
-            "하영민",
-            "하영 참교육",
-            "하영 김정화",
-            "배우 하영",
-            "하영각",
-            "집안 냄새 제거"
-          ],
-          "expansionSeed": "하영"
-        },
-        {
-          "id": "daum-3",
           "keyword": "배용준 백발 얼굴",
           "title": "배용준 백발 얼굴",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 99,
           "source": "daum",
           "expansions": [
             "배용준 박수진",
@@ -252,68 +226,39 @@
           "expansionSeed": "배용준"
         },
         {
+          "id": "daum-3",
+          "keyword": "상피제란",
+          "title": "상피제란",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "daum",
+          "expansions": []
+        },
+        {
           "id": "daum-4",
-          "keyword": "이시영 캐나다 한달살기",
-          "title": "이시영 캐나다 한달살기",
+          "keyword": "하영 4대째 의사 집안",
+          "title": "하영 4대째 의사 집안",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "daum",
           "expansions": [
-            "이시영 둘째",
-            "이시영 나무위키",
-            "이시영 재산",
-            "배우 이시영",
-            "이시영 복싱",
-            "이시영 근육",
-            "이시영 수영복",
-            "이시영 캠핑장"
+            "하영 배우",
+            "하영 나무위키",
+            "하영민",
+            "하영 참교육",
+            "하영 김정화",
+            "배우 하영",
+            "하영각",
+            "집안 냄새 제거"
           ],
-          "expansionSeed": "이시영"
+          "expansionSeed": "하영"
         },
         {
           "id": "daum-5",
-          "keyword": "삼성 미야모리 영입",
-          "title": "삼성 미야모리 영입",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "daum",
-          "expansions": [
-            "삼성전자",
-            "삼성전자 주가",
-            "삼성 라이온즈",
-            "삼성 서비스센터",
-            "삼성닷컴",
-            "삼성sdi",
-            "삼성 페스티벌",
-            "삼성 폴드8"
-          ],
-          "expansionSeed": "삼성"
-        },
-        {
-          "id": "daum-6",
-          "keyword": "경찰 가족사건 상피제",
-          "title": "경찰 가족사건 상피제",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "daum",
-          "expansions": [
-            "경찰 상피제",
-            "경찰 계급",
-            "경찰공무원 시험",
-            "경찰 계급도",
-            "경찰 순환인사",
-            "경찰청",
-            "경찰 월급",
-            "경찰대"
-          ],
-          "expansionSeed": "경찰"
-        },
-        {
-          "id": "daum-7",
           "keyword": "이런 엿 같은 사랑",
           "title": "이런 엿 같은 사랑",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 96,
           "source": "daum",
           "expansions": [
             "이런 엿같은 사랑",
@@ -326,6 +271,44 @@
             "이런 엿같은 사랑 공개시간"
           ],
           "expansionSeed": "이런 엿 같은 사랑"
+        },
+        {
+          "id": "daum-6",
+          "keyword": "송도 테라스 붕괴",
+          "title": "송도 테라스 붕괴",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "daum",
+          "expansions": [
+            "테라스478",
+            "테라스수성",
+            "여수 라테라스",
+            "테라스스시뷔페",
+            "테라스 가림막",
+            "테라스탈페스타",
+            "개울테라스",
+            "라테라스"
+          ],
+          "expansionSeed": "테라스"
+        },
+        {
+          "id": "daum-7",
+          "keyword": "파과 영화",
+          "title": "파과 영화",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "daum",
+          "expansions": [
+            "파과 영화 뜻",
+            "파과 영화 넷플릭스",
+            "파과 영화 줄거리",
+            "파과 영화 나무위키",
+            "파과 영화제",
+            "파과 영화 책",
+            "파과 영화 볼수있는곳",
+            "파과 영화 출연진"
+          ],
+          "expansionSeed": "파과 영화"
         },
         {
           "id": "daum-8",
@@ -348,29 +331,10 @@
         },
         {
           "id": "daum-9",
-          "keyword": "블랙핑크 10주년 팬미팅",
-          "title": "블랙핑크 10주년 팬미팅",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "daum",
-          "expansions": [
-            "블랙핑크 나무위키",
-            "블랙핑크 지수",
-            "블랙핑크 리사",
-            "블랙핑크 제니",
-            "블랙핑크 로제",
-            "블랙핑크 노래",
-            "블랙핑크 갤러리",
-            "국중박 블랙핑크 굿즈"
-          ],
-          "expansionSeed": "블랙핑크"
-        },
-        {
-          "id": "daum-10",
           "keyword": "재벌x형사",
           "title": "재벌x형사",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 91,
+          "priority": 92,
           "source": "daum",
           "expansions": [
             "재벌x형사1",
@@ -383,6 +347,25 @@
             "재벌x형사1 ott"
           ],
           "expansionSeed": "재벌x형사"
+        },
+        {
+          "id": "daum-10",
+          "keyword": "붉은 진주",
+          "title": "붉은 진주",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 91,
+          "source": "daum",
+          "expansions": [
+            "붉은 진주 나무위키",
+            "붉은 진주 몇부작",
+            "붉은 진주 등장인물",
+            "붉은 진주 후속",
+            "붉은 진주 98회",
+            "붉은 진주 97회",
+            "붉은 진주 예고편",
+            "붉은 진주 시청률"
+          ],
+          "expansionSeed": "붉은 진주"
         }
       ]
     },
@@ -392,98 +375,98 @@
       "items": [
         {
           "id": "nate-1",
-          "keyword": "하나은행 주담대 중단",
-          "title": "하나은행 주담대 중단",
+          "keyword": "안동 특별재난지역 선포",
+          "title": "안동 특별재난지역 선포",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "nate",
           "expansions": [
-            "주담대 계산기",
-            "주담대 금리",
-            "생애최초 주담대",
-            "주담대 한도",
-            "주담대 규제",
-            "주담대 대출",
-            "주담대 3억",
-            "주담대 갈아타기"
+            "안동 날씨",
+            "안동 가볼만한곳",
+            "안동 맛집",
+            "안동 하회마을",
+            "안동 숙소",
+            "안동 월영교",
+            "안동 수페스타",
+            "안동 cgv"
           ],
-          "expansionSeed": "주담대"
+          "expansionSeed": "안동"
         },
         {
           "id": "nate-2",
-          "keyword": "KDB생명 한화 흥국",
-          "title": "KDB생명 한화 흥국",
+          "keyword": "삼성 미야모리 영입",
+          "title": "삼성 미야모리 영입",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "nate",
           "expansions": [
-            "한화이글스",
-            "한화오션",
-            "한화솔루션",
-            "한화 야구",
-            "한화시스템",
-            "한화생명",
-            "한화 경기",
-            "한화손해보험"
+            "삼성전자",
+            "삼성전자 주가",
+            "삼성 라이온즈",
+            "삼성 서비스센터",
+            "삼성닷컴",
+            "삼성sdi",
+            "삼성 페스티벌",
+            "삼성 폴드8"
           ],
-          "expansionSeed": "한화"
+          "expansionSeed": "삼성"
         },
         {
           "id": "nate-3",
-          "keyword": "태풍 경로",
-          "title": "태풍 경로",
+          "keyword": "리센느 논란 김선태",
+          "title": "리센느 논란 김선태",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 98,
           "source": "nate",
           "expansions": [
-            "태풍 경로 예측",
-            "돌핀 태풍 경로",
-            "13호 태풍 경로 예상",
-            "한국 태풍 경로",
-            "13호 태풍 경로 실시간",
-            "돌핀 태풍 경로 예측",
-            "바비 태풍 경로",
-            "13호 태풍 경로"
+            "김선태 리센느",
+            "리센느 김선태",
+            "김선태 kbs",
+            "김선태 나무위키",
+            "김선태 나락",
+            "충주맨 김선태",
+            "김선태 유튜브",
+            "kbs 김선태"
           ],
-          "expansionSeed": "태풍 경로"
+          "expansionSeed": "김선태"
         },
         {
           "id": "nate-4",
-          "keyword": "정준원 태도 논란",
-          "title": "정준원 태도 논란",
+          "keyword": "황희 폐버스 청년",
+          "title": "황희 폐버스 청년",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "nate",
           "expansions": [
-            "정준원 태도",
-            "정준원 나무위키",
-            "정준원 배우",
-            "정준원 포르쉐",
-            "공효진 정준원",
-            "정준원 집안",
-            "정준원 공효진",
-            "정준원 고윤정"
+            "황희찬",
+            "황희두",
+            "황희정",
+            "배우 황희",
+            "황희정승",
+            "황희찬 나무위키",
+            "황희성",
+            "황희태"
           ],
-          "expansionSeed": "정준원"
+          "expansionSeed": "황희"
         },
         {
           "id": "nate-5",
-          "keyword": "교도관 받고 햄버거",
-          "title": "교도관 받고 햄버거",
+          "keyword": "태풍",
+          "title": "태풍",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
           "priority": 96,
           "source": "nate",
           "expansions": [
-            "교도관 시험",
-            "교도관 계급",
-            "교도관 되는법",
-            "교도관 연봉",
-            "교도관 월급",
-            "교도관 제복",
-            "교도관 영어로",
-            "교도관 정복"
+            "태풍 돌핀",
+            "태풍경로",
+            "태풍 13호",
+            "태풍 바비",
+            "태풍 11호",
+            "태풍 바비 경로",
+            "태풍 돌핀 경로",
+            "태풍 매미"
           ],
-          "expansionSeed": "교도관"
+          "expansionSeed": "태풍"
         }
       ]
     },
@@ -493,60 +476,10 @@
       "items": [
         {
           "id": "zum-1",
-          "keyword": "네이버 AI 팩토리",
-          "title": "네이버 AI 팩토리",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 100,
-          "source": "zum",
-          "expansions": [
-            "네이버 ai 팩토리"
-          ],
-          "expansionSeed": "네이버 AI 팩토리"
-        },
-        {
-          "id": "zum-2",
-          "keyword": "SNL 김규원 미담",
-          "title": "SNL 김규원 미담",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "zum",
-          "expansions": [
-            "개그맨 김규원",
-            "김규원 나무위키",
-            "김규원 갈비탕",
-            "김규원 아파트",
-            "snl 김규원",
-            "김규원 규카츠",
-            "전참시 김규원",
-            "아파트 김규원"
-          ],
-          "expansionSeed": "김규원"
-        },
-        {
-          "id": "zum-3",
-          "keyword": "SK하이닉스 AI 메모리",
-          "title": "SK하이닉스 AI 메모리",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "zum",
-          "expansions": [
-            "SK하이닉스 주가",
-            "메모리카드",
-            "메모리 반도체",
-            "창신메모리",
-            "메모리 영화",
-            "메모리 가격",
-            "메모리폼",
-            "창신메모리 주가"
-          ],
-          "expansionSeed": "SK하이닉스"
-        },
-        {
-          "id": "zum-4",
           "keyword": "권익위 부정수급 환수",
           "title": "권익위 부정수급 환수",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 100,
           "source": "zum",
           "expansions": [
             "국민권익위원회",
@@ -561,49 +494,11 @@
           "expansionSeed": "권익위"
         },
         {
-          "id": "zum-5",
-          "keyword": "농협생명 폭염 온열질환",
-          "title": "농협생명 폭염 온열질환",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "zum",
-          "expansions": [
-            "농협생명 고객센터",
-            "농협생명수련원",
-            "농협생명보험",
-            "nh농협생명",
-            "농협생명 채용",
-            "nh농협생명보험",
-            "농협생명연수원",
-            "농협생명 설악수련원"
-          ],
-          "expansionSeed": "농협생명"
-        },
-        {
-          "id": "zum-6",
-          "keyword": "GC녹십자 mRNA 기술",
-          "title": "GC녹십자 mRNA 기술",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "zum",
-          "expansions": [
-            "mRNA 백신",
-            "mRNA RNA 차이",
-            "mRNA 구조",
-            "기술보증기금",
-            "우리기술",
-            "나무기술",
-            "기술 배우기",
-            "기술단기"
-          ],
-          "expansionSeed": "mRNA"
-        },
-        {
-          "id": "zum-7",
+          "id": "zum-2",
           "keyword": "블랙핑크 10주년 완전체",
           "title": "블랙핑크 10주년 완전체",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 99,
           "source": "zum",
           "expansions": [
             "블랙핑크 나무위키",
@@ -618,11 +513,23 @@
           "expansionSeed": "블랙핑크"
         },
         {
-          "id": "zum-8",
+          "id": "zum-3",
+          "keyword": "네이버 AI 팩토리",
+          "title": "네이버 AI 팩토리",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "zum",
+          "expansions": [
+            "네이버 ai 팩토리"
+          ],
+          "expansionSeed": "네이버 AI 팩토리"
+        },
+        {
+          "id": "zum-4",
           "keyword": "LG 엑사원 세계 1위",
           "title": "LG 엑사원 세계 1위",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 93,
+          "priority": 97,
           "source": "zum",
           "expansions": [
             "1위안",
@@ -637,38 +544,118 @@
           "expansionSeed": "LG"
         },
         {
+          "id": "zum-5",
+          "keyword": "GC녹십자 mRNA 기술",
+          "title": "GC녹십자 mRNA 기술",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "zum",
+          "expansions": [
+            "mRNA 백신",
+            "mRNA RNA 차이",
+            "mRNA 구조",
+            "기술보증기금",
+            "우리기술",
+            "나무기술",
+            "기술 배우기",
+            "기술단기"
+          ],
+          "expansionSeed": "mRNA"
+        },
+        {
+          "id": "zum-6",
+          "keyword": "KDB생명 매각 본입찰",
+          "title": "KDB생명 매각 본입찰",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "zum",
+          "expansions": [
+            "kdb생명 매각",
+            "kdb 생명보험 매각",
+            "kdb생명",
+            "kdb 생명보험",
+            "kdb생명타워",
+            "kdb생명 고객센터",
+            "kdb생명빌딩",
+            "kdb 생명타워 주차장"
+          ],
+          "expansionSeed": "KDB생명"
+        },
+        {
+          "id": "zum-7",
+          "keyword": "SNL 김규원 미담",
+          "title": "SNL 김규원 미담",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "zum",
+          "expansions": [
+            "개그맨 김규원",
+            "김규원 나무위키",
+            "김규원 갈비탕",
+            "김규원 아파트",
+            "snl 김규원",
+            "김규원 규카츠",
+            "전참시 김규원",
+            "아파트 김규원"
+          ],
+          "expansionSeed": "김규원"
+        },
+        {
+          "id": "zum-8",
+          "keyword": "농협생명 폭염 온열질환",
+          "title": "농협생명 폭염 온열질환",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "zum",
+          "expansions": [
+            "농협생명 고객센터",
+            "농협생명수련원",
+            "농협생명보험",
+            "nh농협생명",
+            "농협생명 채용",
+            "nh농협생명보험",
+            "농협생명연수원",
+            "농협생명 설악수련원"
+          ],
+          "expansionSeed": "농협생명"
+        },
+        {
           "id": "zum-9",
-          "keyword": "원달러 환율 하락",
-          "title": "원달러 환율 하락",
+          "keyword": "SK하이닉스 AI 메모리",
+          "title": "SK하이닉스 AI 메모리",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
           "priority": 92,
           "source": "zum",
           "expansions": [
-            "원달러 환율 하락 이유",
-            "원달러 환율 하락 원인",
-            "원달러 환율 하락 수혜주",
-            "원달러 환율 하락 전망"
+            "SK하이닉스 주가",
+            "메모리카드",
+            "메모리 반도체",
+            "창신메모리",
+            "메모리 영화",
+            "메모리 가격",
+            "메모리폼",
+            "창신메모리 주가"
           ],
-          "expansionSeed": "원달러 환율 하락"
+          "expansionSeed": "SK하이닉스"
         },
         {
           "id": "zum-10",
-          "keyword": "안동 의성 특별재난지역",
-          "title": "안동 의성 특별재난지역",
+          "keyword": "해남 태양광발전 착공",
+          "title": "해남 태양광발전 착공",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "zum",
           "expansions": [
-            "안동 날씨",
-            "안동 가볼만한곳",
-            "안동 맛집",
-            "안동 하회마을",
-            "안동 숙소",
-            "안동 월영교",
-            "안동 수페스타",
-            "안동 cgv"
+            "해남 날씨",
+            "해남 가볼만한곳",
+            "해남 땅끝마을",
+            "해남 맛집",
+            "해남 숙소",
+            "해남 파인비치cc",
+            "해남시네마",
+            "해남 대흥사"
           ],
-          "expansionSeed": "안동"
+          "expansionSeed": "해남"
         }
       ]
     },
@@ -774,5 +761,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-08-07T10:33:25.745Z"
+  "updatedAt": "2026-08-07T11:30:58.881Z"
 }
