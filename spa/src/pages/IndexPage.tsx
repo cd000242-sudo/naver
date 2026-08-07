@@ -246,10 +246,21 @@ async function fetchSourceSignalSnapshot(): Promise<{ updatedAt?: string; lanes?
 
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
-    let sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
+    // fetchHomeJson 은 서버가 죽으면 null 이 아니라 throw 한다. 여기서 안 잡으면
+    // 아래 정적 스냅샷 폴백에 도달하기 전에 함수 전체가 죽는다 — 스냅샷 폴백이
+    // 정확히 필요한 상황(서버 다운)에서 실행되지 않는 버그가 실제로 있었다.
+    let sourcePayload: { updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> } | null = null;
+    try {
+        sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
+    } catch {
+        sourcePayload = null;
+    }
     if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) {
         sourcePayload = (await fetchSourceSignalSnapshot()) || sourcePayload;
     }
+    // 서버도 스냅샷도 죽었으면 정직하게 FAST FALLBACK 으로 표시한다.
+    // (fillMissingSourceLaneItems 가 하드코딩 항목으로 채운 것을 'LIVE' 로 위장하지 않기)
+    if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) return fallback;
     const lanes = fillMissingSourceLaneItems(normalizeSourceLanes(sourcePayload));
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
     if (!hasLiveData) return fallback;
