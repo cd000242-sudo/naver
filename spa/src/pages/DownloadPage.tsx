@@ -147,7 +147,9 @@ function DownloadPage() {
     }, []);
 
     useEffect(() => {
-        fetch(`${LEWORD_API_BASE}/v1/downloads?ts=${Date.now()}`, { cache: 'no-store' })
+        // 서버가 죽어 있으면 응답이 영원히 안 오므로 타임아웃을 건다(다른 호출들과 동일 정책).
+        // 실패해도 하드코딩 PRODUCTS 가 즉시 렌더되므로 화면은 안 깨진다.
+        fetch(`${LEWORD_API_BASE}/v1/downloads?ts=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(3000) })
             .then((res) => res.json())
             .then((payload) => {
                 if (payload?.ok && payload.products) setApiDownloads(payload as ApiDownloadsPayload);

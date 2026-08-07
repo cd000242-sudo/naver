@@ -1,8 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+import NewBadge from './NewBadge';
+import { useUnseenNoticeCount } from '../lib/useNoticeAlerts';
+
 /**
- * 우하단 영구 stack — 1:1 문의 / 단톡방 / 유튜브 채널
- * 음악 player와 별도 (음악은 bottom: 100px 영역에 있음)
+ * 우하단 영구 stack — 새소식 / 1:1 문의 / 단톡방 / 유튜브 채널
+ * 음악 player와 별도 (음악은 bottom: 200px)
+ * 새소식은 안 읽은 공지가 있을 때만 나타나며 홈 공지 영역으로 보낸다.
  */
 function FloatStack() {
+    const navigate = useNavigate();
+    const unseenNoticeCount = useUnseenNoticeCount();
     const baseStyle: React.CSSProperties = {
         position: 'fixed',
         right: 24,
@@ -38,6 +45,8 @@ function FloatStack() {
                     .lp-float-chat { bottom: calc(14px + env(safe-area-inset-bottom)) !important; }
                     .lp-float-room { bottom: calc(66px + env(safe-area-inset-bottom)) !important; }
                     .lp-float-youtube { bottom: calc(118px + env(safe-area-inset-bottom)) !important; }
+                    .lp-float-notice { bottom: calc(238px + env(safe-area-inset-bottom)) !important; }
+                    .lp-float-notice .lp-float-badge { display: inline-flex !important; }
                 }
 
                 @media (max-width: 420px) {
@@ -96,6 +105,25 @@ function FloatStack() {
                 <div style={{ width: 26, height: 26, background: '#fff', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, color: '#ff0000', fontWeight: 900 }}>▶</div>
                 <span style={{ color: '#fff', fontWeight: 800, fontSize: 13, whiteSpace: 'nowrap' }}>유튜브 채널</span>
             </a>
+
+            {unseenNoticeCount > 0 && (
+                <button
+                    type="button"
+                    className="lp-float-link lp-float-notice"
+                    title={`읽지 않은 공지 ${unseenNoticeCount}건`}
+                    onClick={() => navigate('/')}
+                    style={{
+                        ...baseStyle, bottom: 260, cursor: 'pointer',
+                        background: 'rgba(124,58,237,0.95)',
+                        border: '1px solid rgba(196,181,253,0.55)',
+                        boxShadow: '0 6px 24px rgba(124,58,237,0.4)',
+                    }}
+                >
+                    <div style={{ width: 26, height: 26, background: '#fff', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>📢</div>
+                    <span style={{ color: '#fff', fontWeight: 800, fontSize: 13, whiteSpace: 'nowrap' }}>새소식</span>
+                    <span className="lp-float-badge"><NewBadge count={unseenNoticeCount} size="md" /></span>
+                </button>
+            )}
         </>
     );
 }

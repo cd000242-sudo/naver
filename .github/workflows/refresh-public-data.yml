@@ -1,0 +1,73 @@
+name: Refresh Public Data Snapshots
+
+# 방문자 화면이 API 서버 없이도 살아있게 하는 스냅샷 갱신.
+# 서버(관리자 기능용)가 죽어도 홈의 실시간·공지·브리핑·다운로드가 정적본으로 서빙된다.
+# spa/** 가 바뀌면 deploy-pages.yml 이 이어서 배포한다.
+
+on:
+  schedule:
+    # 15분 간격. GitHub 스케줄러는 지연될 수 있으므로 정확한 주기를 보장하지 않는다.
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-public-data
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    name: Collect and commit snapshots
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Refresh snapshots
+        env:
+          LEWORD_API_BASE: ${{ vars.LEWORD_API_BASE || 'https://141.164.59.17.sslip.io' }}
+          # 정책 레인(복지서비스 공공데이터). 없으면 그 레인만 건너뛴다.
+          WELFARE_API_KEY: ${{ secrets.WELFARE_API_KEY }}
+        run: node scripts/refresh-public-data.mjs
+
+      - name: Verify snapshots are not empty
+        # 스크립트가 0건일 때 기존 파일을 지키도록 돼 있지만, 그 가드가 깨져
+        # 빈 파일이 커밋되는 일이 없도록 커밋 직전에 한 번 더 막는다.
+        run: |
+          for f in spa/public/data/source-signals.json spa/public/data/home-notices.json; do
+            if [ -f "$f" ]; then
+              node -e "
+                const d = require('./$f');
+                const n = (d.lanes || []).reduce((s, l) => s + (l.items || []).length, 0) + (d.items || []).length;
+                if (n === 0) { console.error('$f 가 0건입니다 — 커밋 중단'); process.exit(1); }
+                console.log('$f: ' + n + '건');
+              "
+            fi
+          done
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- spa/public/data; then
+            echo "변경 없음 — 커밋 생략"
+            exit 0
+          fi
+          git add spa/public/data
+          git commit -m "chore(data): 공개 스냅샷 갱신 $(date -u '+%Y-%m-%d %H:%M UTC')"
+          # 크론이 겹치거나 사람 커밋과 충돌해도 실패하지 않게 rebase 후 재시도한다.
+          for attempt in 1 2 3; do
+            if git push; then
+              echo "push 성공 (시도 $attempt)"
+              exit 0
+            fi
+            git pull --rebase --autostash origin main || true
+          done
+          echo "push 3회 실패 — 다음 사이클에 재시도된다"
+          exit 1

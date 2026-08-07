@@ -241,6 +241,9 @@ const HOME_INCOME_RESPONSE_MAX_BYTES = 512 * 1024;
 const COMMUNITY_INCOME_RESPONSE_MAX_BYTES = 32 * 1024 * 1024;
 const COMMUNITY_INCOME_DATA_MEDIA_MAX_CHARS = 32 * 1024 * 1024;
 const HOME_KEYWORD_SEED_URL = '/data/home-keyword-briefing-seed.json';
+// 서버(관리자 기능용)가 죽어도 방문자 화면이 살아있도록, GitHub Actions 가 15분마다
+// 떠 두는 정적 스냅샷. 서버 응답이 없을 때 여기서 읽는다.
+const HOME_NOTICES_SNAPSHOT_URL = '/data/home-notices.json';
 
 function cleanPublicText(value: unknown, maxLength: number): string {
     return String(value ?? '')
@@ -362,13 +365,40 @@ async function fetchLegacyHomeNotices(limit: number): Promise<HomeNotice[] | nul
     }
 }
 
+/** 정적 스냅샷(/data/home-notices.json). 서버가 죽었을 때의 1차 폴백. */
+async function fetchHomeNoticesSnapshot(limit: number): Promise<HomeNotice[]> {
+    try {
+        const response = await fetch(HOME_NOTICES_SNAPSHOT_URL, { cache: 'no-cache' });
+        if (!response.ok) return [];
+        const payload = await response.json() as { items?: unknown[] };
+        return Array.isArray(payload?.items) ? normalizeHomeNoticeList(payload.items, limit) : [];
+    } catch {
+        return [];
+    }
+}
+
 export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
     const saved = await fetchSavedHomeNotices(limit);
     if (saved.state === 'saved') {
         writeHomeNoticeCache(saved.notices, 'secure');
         return saved.notices;
     }
-    if (saved.state === 'unavailable') return readHomeNoticeCache(limit, 'secure');
+    if (saved.state === 'unavailable') {
+        // 서버 장애 시: 브라우저 캐시 → 정적 스냅샷 → GAS 순.
+        // 캐시는 재방문자에게만 있고, 스냅샷은 서버 미러라 서버가 죽어 있으면 아예
+        // 생성되지 않는다(404). 그래서 서버와 독립적으로 살아있는 GAS 까지 내려가야
+        // 첫 방문자에게 공지가 보인다 — 이게 빠져서 공지 0건 + 배지 0 이었다.
+        const cached = readHomeNoticeCache(limit, 'secure');
+        if (cached.length > 0) return cached;
+        const snapshot = await fetchHomeNoticesSnapshot(limit);
+        if (snapshot.length > 0) return snapshot;
+        const legacyOnOutage = await fetchLegacyHomeNotices(limit);
+        if (legacyOnOutage !== null && legacyOnOutage.length > 0) {
+            writeHomeNoticeCache(legacyOnOutage, 'legacy');
+            return legacyOnOutage;
+        }
+        return [];
+    }
     const legacy = await fetchLegacyHomeNotices(limit);
     if (legacy !== null) {
         writeHomeNoticeCache(legacy, 'legacy');

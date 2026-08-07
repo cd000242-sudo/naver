@@ -14,10 +14,10 @@ interface ProductOption { id: string; name: string; price: number; futurePrice?:
 
 const ALL_PRODUCTS: Record<string, ProductOption[]> = {
     naver: [
-        { id: 'all-in-one-monthly', name: '올인원 1개월', price: 50000, futurePrice: 100000, period: '/ 월 · 8월 1일부터 100,000원', normalPeriod: '/ 월 · 정상가 적용 중' },
-        { id: 'all-in-one-quarterly', name: '올인원 3개월', price: 120000, futurePrice: 240000, period: '월 40,000원 · 8월 1일부터 240,000원', normalPeriod: '월 80,000원 · 정상가 적용 중' },
-        { id: 'all-in-one-yearly', name: '올인원 1년', price: 400000, futurePrice: 800000, period: '월 33,333원 · 8월 1일부터 800,000원', normalPeriod: '월 66,667원 · 정상가 적용 중' },
-        { id: 'all-in-one-lifetime', name: '올인원 영구제', price: 1650000, futurePrice: 3300000, period: '영구 이용 · 8월 1일부터 3,300,000원', normalPeriod: '영구 이용 · 정상가 적용 중' },
+        { id: 'all-in-one-monthly', name: '올인원 1개월', price: 50000, futurePrice: 100000, period: '/ 월 · 10월 1일부터 100,000원', normalPeriod: '/ 월 · 정상가 적용 중' },
+        { id: 'all-in-one-quarterly', name: '올인원 3개월', price: 120000, futurePrice: 240000, period: '월 40,000원 · 10월 1일부터 240,000원', normalPeriod: '월 80,000원 · 정상가 적용 중' },
+        { id: 'all-in-one-yearly', name: '올인원 1년', price: 400000, futurePrice: 800000, period: '월 33,333원 · 10월 1일부터 800,000원', normalPeriod: '월 66,667원 · 정상가 적용 중' },
+        { id: 'all-in-one-lifetime', name: '올인원 영구제', price: 1650000, futurePrice: 3300000, period: '영구 이용 · 10월 1일부터 3,300,000원', normalPeriod: '영구 이용 · 정상가 적용 중' },
     ],
 };
 
@@ -363,13 +363,13 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                         <div style={{ color: '#e95e2c', fontSize: 17, fontWeight: 800, marginBottom: 8 }}>주문이 거절되었습니다</div>
                         <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 13, lineHeight: 1.6 }}>
                             입금 확인이 되지 않았거나 다른 사유로 거절 처리되었습니다.<br />
-                            문의: <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#c9a84c' }}>cd000242@gmail.com</a>
+                            문의: <a href="mailto:tjdgus24280@naver.com" style={{ color: '#c9a84c' }}>tjdgus24280@naver.com</a>
                         </div>
                     </div>
                 )}
 
                 <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, marginTop: 20 }}>
-                    문의: <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#c9a84c' }}>cd000242@gmail.com</a>
+                    문의: <a href="mailto:tjdgus24280@naver.com" style={{ color: '#c9a84c' }}>tjdgus24280@naver.com</a>
                     {' | '}
                     <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#FEE500' }}>카카오톡 1:1 문의</a>
                 </p>

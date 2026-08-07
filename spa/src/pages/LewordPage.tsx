@@ -27,6 +27,12 @@ function LewordPage() {
         };
     }, []);
 
+    useEffect(() => {
+        if (loaded) return undefined;
+        const timer = window.setTimeout(() => setFailed(true), 8000);
+        return () => window.clearTimeout(timer);
+    }, [loaded, iframeKey]);
+
     const iframeSrc = `${LEWORD_PRO_WEB_URL}?embed=leaderspro&v=${iframeKey}`;
 
     const retry = () => {
@@ -91,7 +97,7 @@ function LewordPage() {
                                 LEWORD Pro Web
                             </strong>
                             <span style={{ color: '#a4b1c4', fontSize: 12 }}>
-                                {failed ? '연결 확인 필요' : '실시간 서버 연결 중'}
+                                {failed ? '콘솔을 불러오지 못했습니다' : '콘솔 불러오는 중'}
                             </span>
                         </div>
                         <button

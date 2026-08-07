@@ -24,6 +24,8 @@ type SourceSignal = {
     source?: string;
     categoryId?: string;
     createdAt?: string;
+    /** 네이버 자동완성 실측 확장 — 크론 스냅샷이 채워준다. 합성 확장 대체용 */
+    expansions?: string[];
 };
 
 type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'policy' | 'issue';
@@ -229,9 +231,39 @@ function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { i
     });
 }
 
+/**
+ * 정적 스냅샷(/data/source-signals.json).
+ * GitHub Actions 가 15분마다 원천에서 직접 긁어 커밋해 둔다. API 서버가 죽어도
+ * 홈이 하드코딩 폴백으로 떨어지지 않게 하는 것이 목적이다.
+ */
+async function fetchSourceSignalSnapshot(): Promise<{ updatedAt?: string; lanes?: Array<Partial<SourceLane> & { id?: string }> } | null> {
+    try {
+        const response = await fetch('/data/source-signals.json', { cache: 'no-cache' });
+        if (!response.ok) return null;
+        return await response.json();
+    } catch {
+        return null;
+    }
+}
+
+
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
-    const sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
+    // fetchHomeJson 은 서버가 죽으면 null 이 아니라 throw 한다. 여기서 안 잡으면
+    // 아래 정적 스냅샷 폴백에 도달하기 전에 함수 전체가 죽는다 — 스냅샷 폴백이
+    // 정확히 필요한 상황(서버 다운)에서 실행되지 않는 버그가 실제로 있었다.
+    let sourcePayload: { updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> } | null = null;
+    try {
+        sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
+    } catch {
+        sourcePayload = null;
+    }
+    if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) {
+        sourcePayload = (await fetchSourceSignalSnapshot()) || sourcePayload;
+    }
+    // 서버도 스냅샷도 죽었으면 정직하게 FAST FALLBACK 으로 표시한다.
+    // (fillMissingSourceLaneItems 가 하드코딩 항목으로 채운 것을 'LIVE' 로 위장하지 않기)
+    if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) return fallback;
     const lanes = fillMissingSourceLaneItems(normalizeSourceLanes(sourcePayload));
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
     if (!hasLiveData) return fallback;
@@ -239,6 +271,8 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
 
     return {
         status: 'ready',
+        // golden 은 현재 화면 어디에도 렌더되지 않는다(무료 선정 황금키워드는 전용
+        // 페이지 BriefingPage 로 분리됨). 타입 호환을 위해서만 유지한다.
         golden: fallback.golden,
         lanes,
         updatedAt: sourcePayload?.updatedAt,
@@ -678,10 +712,10 @@ function peerConnectionLabel(profile: TopicProfile, peer: TopicProfile): string 
 }
 
 function hasSharedTopic(profile: TopicProfile, peer: TopicProfile): boolean {
-    const shared = profile.entities.some((token) => peer.entities.includes(token));
-    if (shared) return true;
-    if (profile.category === 'general' || peer.category === 'general') return false;
-    return profile.category === peer.category;
+    // 실제 공유 토큰이 있을 때만 "연결"로 인정한다. 카테고리만 같다고 묶으면
+    // 무관한 뉴스끼리("방은희 고독사" → "고종 진료") 연결 이슈로 합성되는
+    // 이상한 결과가 났다. 연결이 없으면 없다고 두는 게 맞다.
+    return profile.entities.some((token) => peer.entities.includes(token));
 }
 
 function buildClusterIdeas(profile: TopicProfile, lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
@@ -913,6 +947,19 @@ function buildSemanticMindmapIdeas(profile: TopicProfile, item: SourceSignal, pe
 }
 
 function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
+    // 1순위: 실측 확장(네이버 자동완성). 사람들이 실제로 이어서 치는 검색어라
+    // 토큰 합성 확장과 달리 "이상한 조합"이 원리적으로 안 나온다.
+    const expansionIdeas = uniqueList(item.expansions || [])
+        .filter((expansion) => expansion !== profile.keyword)
+        .slice(0, 4)
+        .map((expansion, index) => ({
+            label: expansion,
+            tag: index === 0 ? '실측 확장' : '실측 검색어',
+            reason: '네이버 자동완성에서 실제로 이어지는 검색어입니다.',
+            title: `${profile.keyword} 글에서 "${expansion}" 소제목 또는 후속 글로 확장`,
+            bias: 9 - index,
+        }));
+
     const focusedCorpus = `${profile.keyword} ${profile.core} ${profile.entities.join(' ')} ${item.description || ''}`;
     const related = peerItems
         .filter((peer) => peer.id !== item.id)
@@ -951,7 +998,8 @@ function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item:
             bias: 1,
         }));
 
-    return uniqueSemanticIdeas(profile, [...related, ...entityIdeas, ...fallback], 5);
+    // 실측 확장이 있으면 합성 아이디어(related/entity/fallback)는 뒷순위로 밀린다.
+    return uniqueSemanticIdeas(profile, [...expansionIdeas, ...related, ...entityIdeas, ...fallback], 5);
 }
 
 function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyGroup[] {
@@ -1237,7 +1285,9 @@ function IndexPage() {
                                                         <strong>{keyword}</strong>
                                                         <p>{description}</p>
                                                     </div>
-                                                    <small>{item.priority || 'LIVE'}</small>
+                                                    {/* 이 값은 실측 지표가 아니라 순위 파생값(100-index)이다.
+                                                        숫자만 크게 띄우면 점수처럼 오해되므로 순위로 표기한다. */}
+                                                    <small>{index + 1}위</small>
                                                 </button>
                                                 <a className="hero-source-row-search" href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer">검색</a>
                                             </article>

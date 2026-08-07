@@ -49,8 +49,7 @@ jobs:
           mkdir -p _site
           # 1) Legacy 정적 페이지 복사 (admin + Toss success/fail + 이미지 자산 등)
           cp -r payment-page/* _site/
-          rm -rf _site/admin
-          cp -r admin _site/admin
+          # 관리자 패널(admin)은 더 이상 공개 배포하지 않는다 — 마지막 단계에서 _site 에서 제거.
           # 2) SPA dist를 root로 덮어쓰기
           cp -r spa/dist/* _site/
           # 3) GitHub Pages Pretty URL 매칭 차단:
@@ -70,11 +69,12 @@ jobs:
               cp "_site/${page}/index.html" "_site/${page}.html"
             fi
           done
-          # 4) Deep link fallback — 존재하지 않는 경로(/foo)도 SPA index 로
-          if [ -f "_site/admin/index.html" ]; then
-            cp "_site/admin/index.html" "_site/admin.html"
-          fi
           cp _site/index.html _site/404.html
+          # 4) 보안: 관리자 패널을 공개 배포에서 완전히 제외한다.
+          #    노출된 옛 토큰 + 관리자 API 표면이 leaderspro.kr/admin.html 로 공개되던 것을 차단.
+          #    운영자는 로컬 관리자 패널(바탕화면)을 사용한다. 상위 admin/ 과 payment-page/admin/
+          #    양쪽 복사분을 모두 제거한다.
+          rm -rf _site/admin _site/admin.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

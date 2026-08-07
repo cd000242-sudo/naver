@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import NewBadge from './NewBadge';
+import { useUnseenNoticeCount } from '../lib/useNoticeAlerts';
+
+// 공지는 홈에서 확인하므로 새 소식 배지도 홈에 붙인다.
+const NOTICE_BADGE_PATH = '/';
 
 const NAV_LINKS = [
     { to: '/', label: '홈' },
@@ -17,6 +22,7 @@ function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const location = useLocation();
+    const unseenNoticeCount = useUnseenNoticeCount();
 
     const normalizedPath = (() => {
         if (location.pathname === '/index.html') return '/';
@@ -77,6 +83,7 @@ function Navbar() {
                             })}
                             >
                                 {link.label}
+                                {link.to === NOTICE_BADGE_PATH && <NewBadge count={unseenNoticeCount} />}
                             </NavLink>
                         );
                     })}

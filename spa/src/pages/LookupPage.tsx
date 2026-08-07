@@ -297,9 +297,13 @@ function LookupPage() {
             </div>
 
             <div style={{ marginTop: 20, textAlign: 'center', fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>
+                {/* 링크가 카카오 오픈채팅인데 앵커 텍스트가 이메일이라 어디로 가는지 어긋났다.
+                    조회 실패한 구매자의 마지막 안내 지점이라 둘 다 명확히 준다. */}
                 조회가 되지 않으시면{' '}
-                <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700' }}>cd000242@gmail.com</a>
-                으로 문의해주세요.
+                <a href="https://open.kakao.com/o/sPcaslwh" target="_blank" rel="noopener noreferrer" style={{ color: '#FFD700' }}>카카오톡 1:1 문의</a>
+                {' '}또는{' '}
+                <a href="mailto:tjdgus24280@naver.com" style={{ color: '#FFD700' }}>tjdgus24280@naver.com</a>
+                으로 연락해주세요.
             </div>
         </div>
     );

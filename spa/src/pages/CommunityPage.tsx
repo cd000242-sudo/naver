@@ -85,7 +85,20 @@ function normalizeMedia(raw: any): CommunityMedia {
     };
 }
 
+/**
+ * 운영 시드(초기 셋업용 예시 글)를 사용자 글로 오인 노출하지 않는다.
+ * 수익인증 쪽에는 이미 같은 차단이 있는데(siteOps.ts) 팁에는 없어서
+ * 'Leaders Pro 팀' 명의 시드 2건이 사용자 활용 팁처럼 보였다.
+ * 빈 상태 문구가 "실제 사용자가 남긴 활용 팁만 공개됩니다"라 모순이기도 했다.
+ */
+function isSeedTip(raw: any): boolean {
+    if (/^T-seed-\d+$/i.test(String(raw?.id || ''))) return true;
+    const author = String(raw?.author || raw?.name || raw?.nickname || '');
+    return /^(leaders\s*pro\s*팀|리더스프로\s*팀|운영자|관리자)$/i.test(author.trim());
+}
+
 function normalizeTip(raw: any): Tip | null {
+    if (isSeedTip(raw)) return null;
     const title = firstText(raw?.title);
     const detail = firstText(raw?.detail, raw?.desc, raw?.text);
     const media = normalizeMedia(raw);

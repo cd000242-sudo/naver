@@ -51,7 +51,7 @@ const PLANS: Record<string, Plan[]> = {
             amountCard: 55000,
             futureAmount: 100000,
             futureAmountCard: 110000,
-            eventLabel: '8월 1일부터 정상가 100,000원',
+            eventLabel: '10월 1일부터 정상가 100,000원',
             period: '/ 월 (공급가)',
             features: ['Better Life Naver 이용', 'LEWORD 키워드 분석 이용', 'Leadernam Orbit 이용', '이메일 고객 지원'],
         },
@@ -61,7 +61,7 @@ const PLANS: Record<string, Plan[]> = {
             desc: '블로그 자동화 흐름을 안정적으로 운영',
             amount: 120000,
             futureAmount: 240000,
-            eventLabel: '8월 1일부터 정상가 240,000원',
+            eventLabel: '10월 1일부터 정상가 240,000원',
             period: '/ 3개월',
             monthly: '월 40,000원',
             features: ['Better Life Naver 이용', 'LEWORD 전체 기능 이용', 'Leadernam Orbit 이용', '우선 고객 지원'],
@@ -72,7 +72,7 @@ const PLANS: Record<string, Plan[]> = {
             desc: '가장 합리적인 전체 제품 기간권',
             amount: 400000,
             futureAmount: 800000,
-            eventLabel: '8월 1일부터 정상가 800,000원',
+            eventLabel: '10월 1일부터 정상가 800,000원',
             period: '/ 년',
             monthly: '월 33,333원',
             badge: { text: '👑 BEST VALUE', type: 'best' },
@@ -84,7 +84,7 @@ const PLANS: Record<string, Plan[]> = {
             desc: '한 번 구매로 장기 운영하는 영구 이용권',
             amount: 1650000,
             futureAmount: 3300000,
-            eventLabel: '8월 1일부터 정상가 3,300,000원',
+            eventLabel: '10월 1일부터 정상가 3,300,000원',
             period: '영구 이용',
             badge: { text: '🌟 LIFETIME', type: 'lifetime' },
             features: ['3개 앱 모두 영구 이용', '영구제 전용 라이선스', '장기 운영자 우선 지원', '주요 업데이트 포함'],
@@ -296,14 +296,14 @@ function PricingPage() {
     const pricingPage = siteContent?.pricing?.page || {};
     const pricingBgImage = siteContent?.theme?.pricingBgImage;
     const pricingTitle = normalPricingActive
-        ? (pricingPage.titleNormal || '8월 1일부터 가격이 단계적으로 조정 중입니다')
-        : (pricingPage.title || '지금 이벤트가로 이용하고, 8월 1일부터 가격이 점진적으로 상승합니다');
+        ? (pricingPage.titleNormal || '10월 1일부터 가격이 단계적으로 조정 중입니다')
+        : (pricingPage.title || '지금 이벤트가로 이용하고, 10월 1일부터 가격이 점진적으로 상승합니다');
     const pricingEventTitle = normalPricingActive
         ? (pricingPage.eventTitleNormal || '가격이 단계적으로 조정 중입니다.')
         : (pricingPage.eventTitle || '현재 가격은 7월 31일까지 이벤트가입니다.');
     const pricingEventDesc = normalPricingActive
-        ? (pricingPage.eventDescNormal || '2026년 8월 1일부터 가격이 점진적으로 상승하고 있습니다.')
-        : (pricingPage.eventDesc || '2026년 8월 1일부터 가격이 점진적으로 상승합니다.');
+        ? (pricingPage.eventDescNormal || '2026년 10월 1일부터 가격이 점진적으로 상승하고 있습니다.')
+        : (pricingPage.eventDesc || '2026년 10월 1일부터 가격이 점진적으로 상승합니다.');
     const pricingIntro = (
         <div style={{ textAlign: 'center', margin: '42px 0 36px' }}>
             <span style={{ display: 'inline-block', padding: '6px 16px', background: 'rgba(255,215,0,0.1)', border: '1px solid rgba(255,215,0,0.25)', borderRadius: 50, color: '#FFD700', fontSize: 12, fontWeight: 700, letterSpacing: 2, marginBottom: 16 }}>{pricingPage.eyebrow || 'PRICING'}</span>
@@ -317,7 +317,7 @@ function PricingPage() {
                 </div>
                 <div>{pricingEventDesc}</div>
                 <div style={{ marginTop: 4, color: '#fff7b0', fontSize: 15 }}>
-                    {pricingPage.eventLine || '8월 1일부터 단계별 인상 예정 · 1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원'}
+                    {pricingPage.eventLine || '10월 1일부터 단계별 인상 예정 · 1개월 100,000원 · 3개월 240,000원 · 1년 800,000원 · 영구제 3,300,000원'}
                 </div>
             </div>
         </div>
@@ -754,10 +754,16 @@ function PricingPage() {
                             grid-template-columns: 1fr;
                         }
                     }
+
+                    /* 키보드 포커스 링 — 포커스 가능한 요금제 카드가 시각적으로 드러나야 접근성 완성 */
+                    .pricing-plan-card:focus-visible {
+                        outline: 2px solid #FFD700;
+                        outline-offset: 3px;
+                    }
                 `}</style>
 
                 {/* Pricing grid */}
-                <div className="pricing-plan-grid">
+                <div className="pricing-plan-grid" role="group" aria-label="요금제 선택">
                     {activePlans.map((p) => {
                         const isSelected = selected?.id === p.id;
                         const isFeatured = p.badge?.type === 'best';
@@ -769,7 +775,15 @@ function PricingPage() {
                         return (
                             <div
                                 key={p.id}
+                                className="pricing-plan-card"
+                                role="button"
+                                tabIndex={0}
+                                aria-pressed={isSelected}
+                                aria-label={`${p.name} 요금제 선택`}
                                 onClick={() => onSelect(p)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(p); }
+                                }}
                                 style={{
                                     background: isSelected ? 'linear-gradient(180deg, rgba(255,215,0,0.10), rgba(18,18,26,0.85))' : isFeatured ? 'linear-gradient(180deg, rgba(255,215,0,0.04), rgba(18,18,26,0.7))' : 'rgba(18,18,26,0.6)',
                                     border: isSelected ? '2px solid #FFD700' : isFeatured ? '1px solid rgba(255,215,0,0.5)' : '1px solid rgba(255,255,255,0.08)',

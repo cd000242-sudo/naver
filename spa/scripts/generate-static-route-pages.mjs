@@ -146,7 +146,9 @@ function briefingPrerender() {
       const documents = Number.isFinite(Number(row.documentCount)) ? numberFormat.format(Number(row.documentCount)) : '-';
       const opportunity = Number.isFinite(Number(row.opportunity)) ? Number(row.opportunity).toFixed(1) : '-';
       // 상세 페이지로 링크한다 — 내부 링크가 없으면 크롤러가 상세를 타고 들어가지 못한다.
-      const cell = slug ? `<a href="/keyword/${encodeURIComponent(slug)}">${keyword}</a>` : keyword;
+      // 단, 상세가 실제로 생성되는 evergreen 키워드에만 건다. 실시간 이슈 키워드까지 링크하면
+      // 존재하지 않는 /keyword/* 로 보내 소프트 404 가 대량 발생한다.
+      const cell = slug && isEvergreenKeyword(raw) ? `<a href="/keyword/${encodeURIComponent(slug)}">${keyword}</a>` : keyword;
       return `<tr><th scope="row">${cell}</th><td>${volume}</td><td>${documents}</td><td>${opportunity}</td></tr>`;
     });
   if (!items.length) return '';
@@ -170,15 +172,44 @@ function briefingPrerender() {
   ].filter(Boolean).join('');
 }
 
+/**
+ * 판매/제품 페이지 크롤러용 본문.
+ *
+ * SPA 라우트는 브라우저에서 React 가 그리므로 크롤러에는 #root 가 빈 채로 보였다
+ * (products·pricing·detail 등 본문 색인 근거 0). prerender-content.json 에
+ * 각 페이지의 실제 내용을 정직하게 요약한 시맨틱 HTML 을 담아 두고, 빌드 시
+ * #root 안에 심는다. React 마운트 시 교체되므로 사용자 화면에는 영향이 없다.
+ * 내용은 각 페이지 소스를 근거로 생성했으며 없는 수치/후기/가격은 넣지 않았다.
+ */
+function loadSalePrerender() {
+  const p = path.resolve(__dirname, 'prerender-content.json');
+  if (!fs.existsSync(p)) return {};
+  try {
+    const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+    return data && typeof data === 'object' ? data : {};
+  } catch (error) {
+    console.warn(`[static-routes] prerender-content.json parse failed: ${error.message}`);
+    return {};
+  }
+}
+
 const PRERENDER_BY_PATH = {
   briefing: briefingPrerender,
 };
+for (const [route, html] of Object.entries(loadSalePrerender())) {
+  if (typeof html === 'string' && html.trim()) {
+    PRERENDER_BY_PATH[route] = () => html;
+  }
+}
+
+let briefingPublishedAt = '';
 
 function loadBriefingRows() {
   const seedPath = path.resolve(__dirname, '..', 'public', 'data', 'home-keyword-briefing-seed.json');
   if (!fs.existsSync(seedPath)) return [];
   try {
     const seed = JSON.parse(fs.readFileSync(seedPath, 'utf8'));
+    briefingPublishedAt = String(seed?.publishedAt || '');
     return Array.isArray(seed?.rows) ? seed.rows : [];
   } catch (error) {
     console.warn(`[static-routes] briefing seed parse failed: ${error.message}`);
@@ -190,8 +221,10 @@ function loadBriefingRows() {
 function keywordDetailPrerender(detail) {
   const esc = escapeText;
   const num = (value) => (Number.isFinite(value) ? numberFormat.format(value) : '-');
-  const related = detail.related.length
-    ? `<h2>같은 브리핑의 관련 키워드</h2><ul>${detail.related
+  // 관련 키워드도 상세가 생성되는 것만 링크한다(나머지는 텍스트로 남겨 소프트 404 를 막는다).
+  const relatedLinkable = detail.related.filter((row) => isEvergreenKeyword(row.keyword));
+  const related = relatedLinkable.length
+    ? `<h2>같은 브리핑의 관련 키워드</h2><ul>${relatedLinkable
         .map((row) => `<li><a href="/keyword/${encodeURIComponent(keywordSlug(row.keyword))}">${esc(row.keyword)}</a></li>`)
         .join('')}</ul>`
     : '';
@@ -199,7 +232,7 @@ function keywordDetailPrerender(detail) {
     '<article id="keyword-detail-prerender">',
     `<h1>${esc(detail.keyword)}</h1>`,
     `<p>${esc(detail.meaning)}</p>`,
-    '<h2>실측 지표</h2>',
+    detail.measuredAt ? `<h2>실측 지표 (${esc(detail.measuredAt)})</h2>` : '<h2>실측 지표</h2>',
     '<ul>',
     `<li>월 검색량 ${num(detail.volume)}회</li>`,
     `<li>관련 문서수 ${num(detail.documents)}개</li>`,
@@ -207,7 +240,7 @@ function keywordDetailPrerender(detail) {
     '</ul>',
     '<h2>지금 이 키워드의 경쟁 상황</h2>',
     `<p>${esc(detail.competition)}</p>`,
-    '<p>검색량과 문서수는 검토 시점에 실제로 측정한 값입니다. 실시간 값이 아니라 고정 스냅샷이라, 글을 쓰기 전에 현재 상태를 한 번 더 확인하시는 편이 좋습니다.</p>',
+    `<p>검색량과 문서수는 ${detail.measuredAt ? esc(detail.measuredAt) + ' ' : '검토 시점에 '}실제로 측정한 값입니다. 실시간 값이 아니라 고정 스냅샷이라, 글을 쓰기 전에 현재 상태를 한 번 더 확인하시는 편이 좋습니다.</p>`,
     '<h2>글에 넣어야 할 것</h2>',
     `<ol>${detail.outline.map((item) => `<li>${esc(item)}</li>`).join('')}</ol>`,
     related,
@@ -230,7 +263,7 @@ function writeKeywordDetailPages(template) {
     if (!slug || seen.has(slug)) continue;
     seen.add(slug);
 
-    const detail = buildKeywordDetail(row, rows);
+    const detail = buildKeywordDetail(row, rows, briefingPublishedAt);
     const url = `${siteOrigin}/keyword/${encodeURIComponent(slug)}`;
     const title = `${keyword} 키워드 분석 | Leaders Pro`;
     let html = template;
