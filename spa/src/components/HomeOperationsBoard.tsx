@@ -11,6 +11,8 @@ import {
 } from '../lib/siteOps';
 import { selectKeywordChartRows, type HomeKeywordRow } from '../lib/homeKeywordBriefing';
 import { keywordSlug } from '../lib/keywordDetailContent.mjs';
+import NewBadge from './NewBadge';
+import { useNoticeAlerts } from '../lib/useNoticeAlerts';
 
 const numberFormatter = new Intl.NumberFormat('ko-KR');
 const decimalFormatter = new Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 });
@@ -399,6 +401,9 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
     const [incomeResult, setIncomeResult] = useState<CommunityIncomeProofResult | null>(null);
     const [briefingResult, setBriefingResult] = useState<HomeKeywordBriefingResult | null>(null);
     const [activeTab, setActiveTab] = useState<HomeOperationsTab>('realtime');
+    // 공지 배지는 모달·네비바와 같은 스토어를 본다(카운트가 어긋나지 않게).
+    const { unseen: unseenNotices, markAllSeen: markNoticeAlertsSeen } = useNoticeAlerts();
+    const unseenNoticeCount = unseenNotices.length;
     const [noticeLoading, setNoticeLoading] = useState(true);
     const [incomeLoading, setIncomeLoading] = useState(true);
     const [briefingLoading, setBriefingLoading] = useState(true);
@@ -413,6 +418,11 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
         const target = el.offsetLeft - (nav.clientWidth - el.clientWidth) / 2;
         nav.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
     }, [activeTab]);
+
+    // 공지 탭을 실제로 열면 읽은 것으로 보고 배지를 내린다(네비바·플로팅도 같이 내려감).
+    useEffect(() => {
+        if (activeTab === 'notice' && unseenNoticeCount > 0) markNoticeAlertsSeen();
+    }, [activeTab, unseenNoticeCount, markNoticeAlertsSeen]);
 
     useEffect(() => {
         let active = true;
@@ -1128,6 +1138,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                         >
                             <strong style={HOME_OPS_TAB_META[tab].accent ? { color: HOME_OPS_TAB_META[tab].accent } : undefined}>
                                 {HOME_OPS_TAB_META[tab].label}
+                                {tab === 'notice' && <NewBadge count={unseenNoticeCount} />}
                             </strong>
                             <small>{HOME_OPS_TAB_META[tab].desc}</small>
                         </button>

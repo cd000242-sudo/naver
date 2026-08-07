@@ -6,6 +6,7 @@ import MusicPlayer, { isMusicSuppressed } from './MusicPlayer';
 import SummerEffect from './SummerEffect';
 import FloatStack from './FloatStack';
 import ScrollToTop from './ScrollToTop';
+import NoticeModal from './NoticeModal';
 
 /**
  * 모든 페이지 공통 레이아웃.
@@ -16,6 +17,8 @@ function Layout() {
     const location = useLocation();
     const pathname = location.pathname.replace(/\/$/, '') || '/';
     const isLewordConsole = pathname === '/leword' || pathname === '/leword.html';
+    // 공지 모달은 홈에서만 띄운다(다른 페이지 작업을 가리지 않게).
+    const isHome = pathname === '/';
     // 관리자 미리보기 iframe 등 무음 컨텍스트에서는 음악 플레이어를 아예 렌더하지 않는다.
     const musicOff = isLewordConsole || isMusicSuppressed();
 
@@ -34,6 +37,7 @@ function Layout() {
             {!isLewordConsole && <SummerEffect />}
             {!musicOff && <MusicPlayer />}
             {!isLewordConsole && <FloatStack />}
+            {isHome && <NoticeModal />}
         </>
     );
 }
