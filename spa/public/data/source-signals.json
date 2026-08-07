@@ -26,29 +26,48 @@
         },
         {
           "id": "naver-2",
-          "keyword": "경찰 가족 사건 상피제 시행",
-          "title": "경찰 가족 사건 상피제 시행",
+          "keyword": "9월 가족 사건 수사 중단 으로 변형할 수 있습니다.",
+          "title": "9월 가족 사건 수사 중단 으로 변형할 수 있습니다.",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "naver",
           "expansions": [
-            "경찰 계급",
-            "경찰공무원 시험",
-            "경찰 계급도",
-            "경찰 순환인사",
-            "경찰청",
-            "경찰 월급",
-            "경찰대",
-            "경찰대학교"
+            "9월 달력",
+            "9월 모의고사",
+            "9월 날씨",
+            "9월 영어로",
+            "작년 9월 날씨",
+            "9월 별자리",
+            "9월 탄생석",
+            "9월 축제"
           ],
-          "expansionSeed": "경찰"
+          "expansionSeed": "9월"
         },
         {
           "id": "naver-3",
+          "keyword": "블랙핑크 10주년 행사",
+          "title": "블랙핑크 10주년 행사",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "naver",
+          "expansions": [
+            "블랙핑크 나무위키",
+            "블랙핑크 지수",
+            "블랙핑크 리사",
+            "블랙핑크 제니",
+            "블랙핑크 로제",
+            "블랙핑크 노래",
+            "블랙핑크 갤러리",
+            "국중박 블랙핑크 굿즈"
+          ],
+          "expansionSeed": "블랙핑크"
+        },
+        {
+          "id": "naver-4",
           "keyword": "해남 태양광발전 착공",
           "title": "해남 태양광발전 착공",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 97,
           "source": "naver",
           "expansions": [
             "해남 날씨",
@@ -63,49 +82,11 @@
           "expansionSeed": "해남"
         },
         {
-          "id": "naver-4",
-          "keyword": "붉은 진주",
-          "title": "붉은 진주",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "naver",
-          "expansions": [
-            "붉은 진주 나무위키",
-            "붉은 진주 몇부작",
-            "붉은 진주 등장인물",
-            "붉은 진주 후속",
-            "붉은 진주 98회",
-            "붉은 진주 97회",
-            "붉은 진주 예고편",
-            "붉은 진주 시청률"
-          ],
-          "expansionSeed": "붉은 진주"
-        },
-        {
           "id": "naver-5",
-          "keyword": "블랙핑크 10주년 행사 전원 참석",
-          "title": "블랙핑크 10주년 행사 전원 참석",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "naver",
-          "expansions": [
-            "전원주",
-            "전원주 별세",
-            "전원일기",
-            "전원주큰며느리",
-            "전원주 며느리",
-            "전원숯불갈비",
-            "전원 뜻",
-            "전원책"
-          ],
-          "expansionSeed": "전원"
-        },
-        {
-          "id": "naver-6",
           "keyword": "미국 7월 고용",
           "title": "미국 7월 고용",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
+          "priority": 96,
           "source": "naver",
           "expansions": [
             "미국 7월 고용지표",
@@ -114,201 +95,50 @@
           "expansionSeed": "미국 7월 고용"
         },
         {
-          "id": "naver-7",
-          "keyword": "농협생명 폭염 온열질환",
-          "title": "농협생명 폭염 온열질환",
+          "id": "naver-6",
+          "keyword": "재벌X형사",
+          "title": "재벌X형사",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 95,
           "source": "naver",
-          "expansions": [
-            "농협생명 고객센터",
-            "농협생명수련원",
-            "농협생명보험",
-            "nh농협생명",
-            "농협생명 채용",
-            "nh농협생명보험",
-            "농협생명연수원",
-            "농협생명 설악수련원"
-          ],
-          "expansionSeed": "농협생명"
-        },
-        {
-          "id": "naver-8",
-          "keyword": "안동·의성 특별재난지역 선포",
-          "title": "안동·의성 특별재난지역 선포",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "naver",
-          "expansions": [
-            "특별재난지역 선포",
-            "특별재난지역 선포 기준",
-            "특별재난지역 선포권자",
-            "특별재난지역 어디",
-            "특별재난지역 뜻",
-            "특별재난지역 지원금",
-            "특별재난지역 기부",
-            "특별재난지역 나주"
-          ],
-          "expansionSeed": "특별재난지역"
-        },
-        {
-          "id": "naver-9",
-          "keyword": "배틀그라운드",
-          "title": "배틀그라운드",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "naver",
-          "expansions": [
-            "배틀그라운드 공식카페",
-            "배틀그라운드 전적검색",
-            "배틀그라운드 회사",
-            "배틀그라운드 나무위키",
-            "배틀그라운드 개발자",
-            "배틀그라운드 사양",
-            "카카오배틀그라운드",
-            "배틀그라운드 전적"
-          ],
-          "expansionSeed": "배틀그라운드"
-        },
-        {
-          "id": "naver-10",
-          "keyword": "사과",
-          "title": "사과",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 91,
-          "source": "naver",
-          "expansions": [
-            "사과영양성분",
-            "꿀사과",
-            "청송사과",
-            "사과유명한곳",
-            "사과낙과",
-            "사과영화",
-            "영화사과"
-          ],
-          "expansionSeed": "사과"
-        }
-      ]
-    },
-    {
-      "id": "daum",
-      "label": "다음",
-      "items": [
-        {
-          "id": "daum-1",
-          "keyword": "신랑수업2 김상혁 소개팅",
-          "title": "신랑수업2 김상혁 소개팅",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 100,
-          "source": "daum",
-          "expansions": [
-            "김상혁 송다예",
-            "클릭비 김상혁",
-            "김상혁 와이프",
-            "김상혁 나무위키",
-            "김상혁 식당",
-            "김상혁 가방",
-            "김상혁 리즈",
-            "신랑수업 김상혁"
-          ],
-          "expansionSeed": "김상혁"
-        },
-        {
-          "id": "daum-2",
-          "keyword": "재벌x형사",
-          "title": "재벌x형사",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "daum",
           "expansions": [
             "재벌x형사1",
             "재벌x형사 시즌1",
             "재벌X형사 2",
             "재벌x형사 ott",
+            "재벌x형사",
             "재벌x형사 박지현",
             "재벌x형사 재방송",
-            "재벌x형사 웹툰",
-            "재벌x형사1 ott"
+            "재벌x형사 웹툰"
           ],
-          "expansionSeed": "재벌x형사"
+          "expansionSeed": "재벌X형사"
         },
         {
-          "id": "daum-3",
-          "keyword": "미 7월 고용 감소",
-          "title": "미 7월 고용 감소",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "daum",
+          "id": "naver-7",
+          "keyword": "뉴데일리",
+          "title": "뉴데일리",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "naver",
           "expansions": [
-            "고용24",
-            "고용노동부",
-            "고용24 홈페이지",
-            "고용센터",
-            "고용보험",
-            "고용보험센터",
-            "워크넷 고용24",
-            "고용보험 조회"
+            "뉴데일리 여론조사",
+            "뉴데일리TV",
+            "뉴데일리 경제",
+            "뉴데일리 신문",
+            "뉴데일리 기사",
+            "뉴데일리 채용",
+            "뉴데일리 뉴스",
+            "뉴데일리 정치성향"
           ],
-          "expansionSeed": "고용"
+          "expansionSeed": "뉴데일리"
         },
         {
-          "id": "daum-4",
-          "keyword": "하영 4대째 의사 집안",
-          "title": "하영 4대째 의사 집안",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "daum",
-          "expansions": [
-            "하영 배우",
-            "하영 나무위키",
-            "하영민",
-            "하영 참교육",
-            "하영 김정화",
-            "배우 하영",
-            "하영각",
-            "집안 냄새 제거"
-          ],
-          "expansionSeed": "하영"
-        },
-        {
-          "id": "daum-5",
-          "keyword": "황희 버스하우스",
-          "title": "황희 버스하우스",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "daum",
-          "expansions": [
-            "황희찬",
-            "황희두",
-            "황희정",
-            "배우 황희",
-            "황희정승",
-            "황희찬 나무위키",
-            "황희성",
-            "황희태"
-          ],
-          "expansionSeed": "황희"
-        },
-        {
-          "id": "daum-6",
-          "keyword": "보복대행",
-          "title": "보복대행",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "daum",
-          "expansions": [
-            "사적보복대행",
-            "보복대행 뜻"
-          ],
-          "expansionSeed": "보복대행"
-        },
-        {
-          "id": "daum-7",
+          "id": "naver-8",
           "keyword": "김민하 17kg 감량",
           "title": "김민하 17kg 감량",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "daum",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver",
           "expansions": [
             "김민하 다이어트",
             "김민하 배우",
@@ -322,11 +152,55 @@
           "expansionSeed": "김민하"
         },
         {
-          "id": "daum-8",
+          "id": "naver-9",
+          "keyword": "유부녀 킬러 드라마",
+          "title": "유부녀 킬러 드라마",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "naver",
+          "expansions": [
+            "유부녀킬러",
+            "유부녀킬러 웹툰",
+            "유부녀킬러 ott",
+            "유부녀킬러재방송",
+            "유부녀킬러 시청률",
+            "유부녀킬러 작가",
+            "유부녀킬러 성당",
+            "유부녀 뜻"
+          ],
+          "expansionSeed": "유부녀"
+        },
+        {
+          "id": "naver-10",
+          "keyword": "재벌형사2",
+          "title": "재벌형사2",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 91,
+          "source": "naver",
+          "expansions": [
+            "재벌X형사 2",
+            "재벌형사2 ott",
+            "재벌형사2 박지현",
+            "재벌형사2 등장인물",
+            "재벌형사2 나무위키",
+            "재벌형사2 몇부작",
+            "재벌형사2 재방송",
+            "재벌형사2 유승호"
+          ],
+          "expansionSeed": "재벌형사2"
+        }
+      ]
+    },
+    {
+      "id": "daum",
+      "label": "다음",
+      "items": [
+        {
+          "id": "daum-1",
           "keyword": "이런 엿 같은 사랑",
           "title": "이런 엿 같은 사랑",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 93,
+          "priority": 100,
           "source": "daum",
           "expansions": [
             "이런 엿같은 사랑",
@@ -341,42 +215,174 @@
           "expansionSeed": "이런 엿 같은 사랑"
         },
         {
+          "id": "daum-2",
+          "keyword": "이 대통령 재검토 지시",
+          "title": "이 대통령 재검토 지시",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "daum",
+          "expansions": [
+            "역대 대통령 순서",
+            "대통령 지지율",
+            "대통령 임기",
+            "대통령배 고교야구",
+            "대통령 연임",
+            "대통령선거",
+            "대통령 순서",
+            "대통령 월급"
+          ],
+          "expansionSeed": "대통령"
+        },
+        {
+          "id": "daum-3",
+          "keyword": "황희 폐버스 청년주택",
+          "title": "황희 폐버스 청년주택",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "daum",
+          "expansions": [
+            "황희찬",
+            "황희두",
+            "황희정",
+            "배우 황희",
+            "황희정승",
+            "황희찬 나무위키",
+            "황희성",
+            "황희태"
+          ],
+          "expansionSeed": "황희"
+        },
+        {
+          "id": "daum-4",
+          "keyword": "옥탑방의 문제아들",
+          "title": "옥탑방의 문제아들",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "daum",
+          "expansions": [
+            "옥탑방의 문제아들 재방송",
+            "옥탑방의 문제아들 결방",
+            "옥탑방의 문제아들 위키백과",
+            "옥탑방의 문제아들2 시청률",
+            "옥탑방의 문제아들 2049 시청률",
+            "옥탑방의문제아들 302회",
+            "옥탑방의문제아들 310회"
+          ],
+          "expansionSeed": "옥탑방의 문제아들"
+        },
+        {
+          "id": "daum-5",
+          "keyword": "류혜영 고경표 16년 우정",
+          "title": "류혜영 고경표 16년 우정",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "daum",
+          "expansions": [
+            "류혜영 고경표",
+            "고경표 류혜영",
+            "류혜영 류아벨",
+            "류혜영 나무위키",
+            "류혜영 언니",
+            "류혜영 슬로우러닝",
+            "나혼산 류혜영",
+            "류혜영 응팔"
+          ],
+          "expansionSeed": "류혜영"
+        },
+        {
+          "id": "daum-6",
+          "keyword": "최성원 백혈병 완치",
+          "title": "최성원 백혈병 완치",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "daum",
+          "expansions": [
+            "최성원 백혈병",
+            "백혈병 완치율",
+            "최성원 배우",
+            "당구 최성원",
+            "최성원내과",
+            "최성원당구",
+            "당구선수 최성원",
+            "배우 최성원"
+          ],
+          "expansionSeed": "최성원"
+        },
+        {
+          "id": "daum-7",
+          "keyword": "이시영 캐나다 한달살이",
+          "title": "이시영 캐나다 한달살이",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "daum",
+          "expansions": [
+            "이시영 둘째",
+            "이시영 나무위키",
+            "이시영 재산",
+            "배우 이시영",
+            "이시영 복싱",
+            "이시영 근육",
+            "이시영 수영복",
+            "이시영 캠핑장"
+          ],
+          "expansionSeed": "이시영"
+        },
+        {
+          "id": "daum-8",
+          "keyword": "김상혁 소개팅 운명",
+          "title": "김상혁 소개팅 운명",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "daum",
+          "expansions": [
+            "김상혁 송다예",
+            "클릭비 김상혁",
+            "김상혁 와이프",
+            "김상혁 나무위키",
+            "김상혁 식당",
+            "김상혁 가방",
+            "김상혁 리즈",
+            "신랑수업 김상혁"
+          ],
+          "expansionSeed": "김상혁"
+        },
+        {
           "id": "daum-9",
-          "keyword": "정해인 아가미",
-          "title": "정해인 아가미",
+          "keyword": "엠스테",
+          "title": "엠스테",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 92,
           "source": "daum",
           "expansions": [
-            "정해인 나무위키",
-            "정해인 드라마",
-            "정해인 단풍손",
-            "정해인 하영",
-            "정해인 정약용",
-            "정해인 정소민",
-            "정해인 한지민",
-            "한지민 정해인"
+            "엠스테이호텔제주",
+            "엠스테이풀빌라",
+            "엠스테 하츠투하츠",
+            "엠스테 아일릿",
+            "엠스테이",
+            "엠스테이지",
+            "엠스테이트",
+            "제주 엠스테이호텔"
           ],
-          "expansionSeed": "정해인"
+          "expansionSeed": "엠스테"
         },
         {
           "id": "daum-10",
-          "keyword": "우주떡집",
-          "title": "우주떡집",
+          "keyword": "재벌x형사",
+          "title": "재벌x형사",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "daum",
           "expansions": [
-            "우주떡집 위치",
-            "우주떡집 예약방법",
-            "우주떡집 재방송",
-            "지구오락실 우주떡집",
-            "우주떡집 ott",
-            "우주떡집 촬영지",
-            "우주떡집 몇부작",
-            "우주떡집 나무위키"
+            "재벌x형사1",
+            "재벌x형사 시즌1",
+            "재벌X형사 2",
+            "재벌x형사 ott",
+            "재벌x형사 박지현",
+            "재벌x형사 재방송",
+            "재벌x형사 웹툰",
+            "재벌x형사1 ott"
           ],
-          "expansionSeed": "우주떡집"
+          "expansionSeed": "재벌x형사"
         }
       ]
     },
@@ -386,86 +392,10 @@
       "items": [
         {
           "id": "nate-1",
-          "keyword": "경찰 가족 사건",
-          "title": "경찰 가족 사건",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 100,
-          "source": "nate",
-          "expansions": [
-            "경찰 계급",
-            "경찰공무원 시험",
-            "경찰 계급도",
-            "경찰 순환인사",
-            "경찰청",
-            "경찰 월급",
-            "경찰대",
-            "경찰대학교"
-          ],
-          "expansionSeed": "경찰"
-        },
-        {
-          "id": "nate-2",
-          "keyword": "李대통령 부동산 공급",
-          "title": "李대통령 부동산 공급",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "nate",
-          "expansions": [
-            "부동산 공급대책",
-            "부동산 공급",
-            "공급면적",
-            "공급 뜻",
-            "공급자",
-            "주택공급",
-            "공급구",
-            "공급가액"
-          ],
-          "expansionSeed": "대통령"
-        },
-        {
-          "id": "nate-3",
-          "keyword": "유부녀 킬러 드라마",
-          "title": "유부녀 킬러 드라마",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "nate",
-          "expansions": [
-            "유부녀킬러",
-            "유부녀킬러 웹툰",
-            "유부녀킬러 ott",
-            "유부녀킬러재방송",
-            "유부녀킬러 시청률",
-            "유부녀킬러 작가",
-            "유부녀킬러 성당",
-            "유부녀 뜻"
-          ],
-          "expansionSeed": "유부녀"
-        },
-        {
-          "id": "nate-4",
-          "keyword": "전원 참석 행사",
-          "title": "전원 참석 행사",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "nate",
-          "expansions": [
-            "전원주",
-            "전원주 별세",
-            "전원일기",
-            "전원주큰며느리",
-            "전원주 며느리",
-            "전원숯불갈비",
-            "전원 뜻",
-            "전원책"
-          ],
-          "expansionSeed": "전원"
-        },
-        {
-          "id": "nate-5",
           "keyword": "황희 청년 국힘",
           "title": "황희 청년 국힘",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 100,
           "source": "nate",
           "expansions": [
             "황희찬",
@@ -478,6 +408,82 @@
             "황희태"
           ],
           "expansionSeed": "황희"
+        },
+        {
+          "id": "nate-2",
+          "keyword": "학폭 지수 필리핀서",
+          "title": "학폭 지수 필리핀서",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "nate",
+          "expansions": [
+            "학폭 처분 단계",
+            "학폭 여배우",
+            "학폭 생기부",
+            "부산학폭변호사",
+            "학폭 7호",
+            "학폭가해자",
+            "민사고 학폭",
+            "코스피지수"
+          ],
+          "expansionSeed": "학폭"
+        },
+        {
+          "id": "nate-3",
+          "keyword": "하영",
+          "title": "하영",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "nate",
+          "expansions": [
+            "하영 배우",
+            "하영 나무위키",
+            "하영민",
+            "하영 참교육",
+            "하영 김정화",
+            "배우 하영",
+            "하여울",
+            "하영각"
+          ],
+          "expansionSeed": "하영"
+        },
+        {
+          "id": "nate-4",
+          "keyword": "17KG 감량 김민하",
+          "title": "17KG 감량 김민하",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "nate",
+          "expansions": [
+            "김민하 다이어트",
+            "김민하 배우",
+            "김민하 노래",
+            "김민하 마운자로",
+            "김민하 청룡",
+            "김민하 주근깨",
+            "김민하 거북목",
+            "김민하 나무위키"
+          ],
+          "expansionSeed": "김민하"
+        },
+        {
+          "id": "nate-5",
+          "keyword": "李대통령 부동산 공급",
+          "title": "李대통령 부동산 공급",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "nate",
+          "expansions": [
+            "부동산 공급대책",
+            "부동산 공급",
+            "공급면적",
+            "공급 뜻",
+            "공급자",
+            "주택공급",
+            "공급구",
+            "공급가액"
+          ],
+          "expansionSeed": "대통령"
         }
       ]
     },
@@ -506,23 +512,10 @@
         },
         {
           "id": "zum-2",
-          "keyword": "미국 7월 고용",
-          "title": "미국 7월 고용",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "zum",
-          "expansions": [
-            "미국 7월 고용지표",
-            "미국 7월 고용보고서"
-          ],
-          "expansionSeed": "미국 7월 고용"
-        },
-        {
-          "id": "zum-3",
           "keyword": "디에이치방배 잔금대출",
           "title": "디에이치방배 잔금대출",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 99,
           "source": "zum",
           "expansions": [
             "디에이치방배 잔금대출 은행",
@@ -531,68 +524,11 @@
           "expansionSeed": "디에이치방배 잔금대출"
         },
         {
-          "id": "zum-4",
-          "keyword": "농협생명 폭염 온열질환",
-          "title": "농협생명 폭염 온열질환",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "zum",
-          "expansions": [
-            "농협생명 고객센터",
-            "농협생명수련원",
-            "농협생명보험",
-            "nh농협생명",
-            "농협생명 채용",
-            "nh농협생명보험",
-            "농협생명연수원",
-            "농협생명 설악수련원"
-          ],
-          "expansionSeed": "농협생명"
-        },
-        {
-          "id": "zum-5",
-          "keyword": "김민하 17kg 감량",
-          "title": "김민하 17kg 감량",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "zum",
-          "expansions": [
-            "김민하 다이어트",
-            "김민하 배우",
-            "김민하 노래",
-            "김민하 마운자로",
-            "김민하 청룡",
-            "김민하 주근깨",
-            "김민하 거북목",
-            "김민하 나무위키"
-          ],
-          "expansionSeed": "김민하"
-        },
-        {
-          "id": "zum-6",
-          "keyword": "박시훈 U-20 육상 은메달",
-          "title": "박시훈 U-20 육상 은메달",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "zum",
-          "expansions": [
-            "박시훈 투포환",
-            "은메달 가격",
-            "은메달 영어로",
-            "은메달 목걸이",
-            "은메달 시세",
-            "은메달 군면제",
-            "은메달의 무게",
-            "은메달 재료"
-          ],
-          "expansionSeed": "박시훈"
-        },
-        {
-          "id": "zum-7",
+          "id": "zum-3",
           "keyword": "SK하이닉스 54조 투자",
           "title": "SK하이닉스 54조 투자",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 94,
+          "priority": 98,
           "source": "zum",
           "expansions": [
             "SK하이닉스 주가",
@@ -607,30 +543,30 @@
           "expansionSeed": "SK하이닉스"
         },
         {
-          "id": "zum-8",
-          "keyword": "박민지 KLPGA 제주삼다수",
-          "title": "박민지 KLPGA 제주삼다수",
+          "id": "zum-4",
+          "keyword": "이 대통령 세제개편안",
+          "title": "이 대통령 세제개편안",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 93,
+          "priority": 97,
           "source": "zum",
           "expansions": [
-            "박민지 골프",
-            "박민지 프로",
-            "박민지 배구",
-            "박민지 배우",
-            "박민지의 세계여행",
-            "박민지 기상캐스터",
-            "박민지 씨름",
-            "제주삼다수마스터스"
+            "역대 대통령 순서",
+            "대통령 지지율",
+            "대통령 임기",
+            "대통령배 고교야구",
+            "대통령 연임",
+            "대통령선거",
+            "대통령 순서",
+            "대통령 월급"
           ],
-          "expansionSeed": "박민지"
+          "expansionSeed": "대통령"
         },
         {
-          "id": "zum-9",
+          "id": "zum-5",
           "keyword": "KDB생명 매각 본입찰",
           "title": "KDB생명 매각 본입찰",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 92,
+          "priority": 96,
           "source": "zum",
           "expansions": [
             "kdb생명 매각",
@@ -645,11 +581,43 @@
           "expansionSeed": "KDB생명"
         },
         {
-          "id": "zum-10",
+          "id": "zum-6",
+          "keyword": "미국 7월 고용",
+          "title": "미국 7월 고용",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "zum",
+          "expansions": [
+            "미국 7월 고용지표",
+            "미국 7월 고용보고서"
+          ],
+          "expansionSeed": "미국 7월 고용"
+        },
+        {
+          "id": "zum-7",
+          "keyword": "김민하 17kg 감량",
+          "title": "김민하 17kg 감량",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "zum",
+          "expansions": [
+            "김민하 다이어트",
+            "김민하 배우",
+            "김민하 노래",
+            "김민하 마운자로",
+            "김민하 청룡",
+            "김민하 주근깨",
+            "김민하 거북목",
+            "김민하 나무위키"
+          ],
+          "expansionSeed": "김민하"
+        },
+        {
+          "id": "zum-8",
           "keyword": "SK하이닉스 AI 메모리",
           "title": "SK하이닉스 AI 메모리",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 91,
+          "priority": 93,
           "source": "zum",
           "expansions": [
             "SK하이닉스 주가",
@@ -662,6 +630,39 @@
             "창신메모리 주가"
           ],
           "expansionSeed": "SK하이닉스"
+        },
+        {
+          "id": "zum-9",
+          "keyword": "농협생명 폭염 온열질환",
+          "title": "농협생명 폭염 온열질환",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "zum",
+          "expansions": [
+            "농협생명 고객센터",
+            "농협생명수련원",
+            "농협생명보험",
+            "nh농협생명",
+            "농협생명 채용",
+            "nh농협생명보험",
+            "농협생명연수원",
+            "농협생명 설악수련원"
+          ],
+          "expansionSeed": "농협생명"
+        },
+        {
+          "id": "zum-10",
+          "keyword": "민주당 당대표 토론",
+          "title": "민주당 당대표 토론",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 91,
+          "source": "zum",
+          "expansions": [
+            "민주당 당대표 토론회",
+            "민주당 당대표 토론회 일정",
+            "민주당 당대표 토론회 시간"
+          ],
+          "expansionSeed": "민주당 당대표 토론"
         }
       ]
     },
@@ -728,42 +729,44 @@
         },
         {
           "id": "issue-4",
-          "keyword": "김민하",
-          "title": "김민하",
-          "description": "'17kg 감량' 김민하, 살 쏙 빠져 난리인데 \"이게 그럴 일인가 싶었다\"",
+          "keyword": "차가원",
+          "title": "차가원",
+          "description": "\"이승기·태민 다 죽일 수 있어\"…'사기 혐의' 차가원, 소름 녹취록 ...",
           "priority": 97,
           "source": "issue",
           "expansions": [
-            "김민하 다이어트",
-            "김민하 배우",
-            "김민하 노래",
-            "김민하 마운자로",
-            "김민하 청룡",
-            "김민하 주근깨",
-            "김민하 거북목",
-            "김민하 나무위키"
+            "차가원 회장",
+            "차가원 mc몽",
+            "차가원 이승기",
+            "차가원대표",
+            "차가원 나무위키",
+            "차가원 백현",
+            "MC몽 차가원",
+            "이승기 차가원"
           ],
-          "expansionSeed": "김민하"
+          "expansionSeed": "차가원"
         },
         {
           "id": "issue-5",
-          "keyword": "장재인",
-          "title": "장재인",
-          "description": "장재인, 김포 아파트+방이동 빌라 소유…\"연애는 필요하지 않아\"('안녕...",
+          "keyword": "오디션",
+          "title": "오디션",
+          "description": "\"걸그룹 오디션 합격\"…'17kg 감량' 김민하, 大반전 과거 [전현무...",
           "priority": 96,
           "source": "issue",
           "expansions": [
-            "장재인 나무위키",
-            "가수 장재인",
-            "슈스케 장재인",
-            "장재인 환청",
-            "장재인 슈스케",
-            "장재인 노래"
+            "오디션 프로그램",
+            "인생은 오디션",
+            "배우 오디션",
+            "otr 오디션",
+            "sm 오디션",
+            "킹키부츠 오디션",
+            "쏘스뮤직 오디션",
+            "하이브 오디션"
           ],
-          "expansionSeed": "장재인"
+          "expansionSeed": "오디션"
         }
       ]
     }
   ],
-  "updatedAt": "2026-08-07T13:50:25.045Z"
+  "updatedAt": "2026-08-07T14:49:08.871Z"
 }
