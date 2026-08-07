@@ -229,9 +229,27 @@ function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { i
     });
 }
 
+/**
+ * 정적 스냅샷(/data/source-signals.json).
+ * GitHub Actions 가 15분마다 원천에서 직접 긁어 커밋해 둔다. API 서버가 죽어도
+ * 홈이 하드코딩 폴백으로 떨어지지 않게 하는 것이 목적이다.
+ */
+async function fetchSourceSignalSnapshot(): Promise<{ updatedAt?: string; lanes?: Array<Partial<SourceLane> & { id?: string }> } | null> {
+    try {
+        const response = await fetch('/data/source-signals.json', { cache: 'no-cache' });
+        if (!response.ok) return null;
+        return await response.json();
+    } catch {
+        return null;
+    }
+}
+
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
-    const sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
+    let sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
+    if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) {
+        sourcePayload = (await fetchSourceSignalSnapshot()) || sourcePayload;
+    }
     const lanes = fillMissingSourceLaneItems(normalizeSourceLanes(sourcePayload));
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
     if (!hasLiveData) return fallback;

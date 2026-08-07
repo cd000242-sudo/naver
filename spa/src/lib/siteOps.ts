@@ -241,6 +241,9 @@ const HOME_INCOME_RESPONSE_MAX_BYTES = 512 * 1024;
 const COMMUNITY_INCOME_RESPONSE_MAX_BYTES = 32 * 1024 * 1024;
 const COMMUNITY_INCOME_DATA_MEDIA_MAX_CHARS = 32 * 1024 * 1024;
 const HOME_KEYWORD_SEED_URL = '/data/home-keyword-briefing-seed.json';
+// 서버(관리자 기능용)가 죽어도 방문자 화면이 살아있도록, GitHub Actions 가 15분마다
+// 떠 두는 정적 스냅샷. 서버 응답이 없을 때 여기서 읽는다.
+const HOME_NOTICES_SNAPSHOT_URL = '/data/home-notices.json';
 
 function cleanPublicText(value: unknown, maxLength: number): string {
     return String(value ?? '')
@@ -362,13 +365,31 @@ async function fetchLegacyHomeNotices(limit: number): Promise<HomeNotice[] | nul
     }
 }
 
+/** 정적 스냅샷(/data/home-notices.json). 서버가 죽었을 때의 1차 폴백. */
+async function fetchHomeNoticesSnapshot(limit: number): Promise<HomeNotice[]> {
+    try {
+        const response = await fetch(HOME_NOTICES_SNAPSHOT_URL, { cache: 'no-cache' });
+        if (!response.ok) return [];
+        const payload = await response.json() as { items?: unknown[] };
+        return Array.isArray(payload?.items) ? normalizeHomeNoticeList(payload.items, limit) : [];
+    } catch {
+        return [];
+    }
+}
+
 export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
     const saved = await fetchSavedHomeNotices(limit);
     if (saved.state === 'saved') {
         writeHomeNoticeCache(saved.notices, 'secure');
         return saved.notices;
     }
-    if (saved.state === 'unavailable') return readHomeNoticeCache(limit, 'secure');
+    if (saved.state === 'unavailable') {
+        // 서버 장애 시: 브라우저 캐시 → 정적 스냅샷 순. 캐시는 재방문자에게만 있으므로
+        // 첫 방문자에게도 공지가 보이려면 스냅샷이 필요하다.
+        const cached = readHomeNoticeCache(limit, 'secure');
+        if (cached.length > 0) return cached;
+        return fetchHomeNoticesSnapshot(limit);
+    }
     const legacy = await fetchLegacyHomeNotices(limit);
     if (legacy !== null) {
         writeHomeNoticeCache(legacy, 'legacy');
