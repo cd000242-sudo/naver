@@ -246,6 +246,7 @@ async function fetchSourceSignalSnapshot(): Promise<{ updatedAt?: string; lanes?
     }
 }
 
+
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
     // fetchHomeJson 은 서버가 죽으면 null 이 아니라 throw 한다. 여기서 안 잡으면
@@ -270,6 +271,8 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
 
     return {
         status: 'ready',
+        // golden 은 현재 화면 어디에도 렌더되지 않는다(무료 선정 황금키워드는 전용
+        // 페이지 BriefingPage 로 분리됨). 타입 호환을 위해서만 유지한다.
         golden: fallback.golden,
         lanes,
         updatedAt: sourcePayload?.updatedAt,
@@ -1282,7 +1285,9 @@ function IndexPage() {
                                                         <strong>{keyword}</strong>
                                                         <p>{description}</p>
                                                     </div>
-                                                    <small>{item.priority || 'LIVE'}</small>
+                                                    {/* 이 값은 실측 지표가 아니라 순위 파생값(100-index)이다.
+                                                        숫자만 크게 띄우면 점수처럼 오해되므로 순위로 표기한다. */}
+                                                    <small>{index + 1}위</small>
                                                 </button>
                                                 <a className="hero-source-row-search" href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer">검색</a>
                                             </article>

@@ -384,11 +384,20 @@ export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
         return saved.notices;
     }
     if (saved.state === 'unavailable') {
-        // 서버 장애 시: 브라우저 캐시 → 정적 스냅샷 순. 캐시는 재방문자에게만 있으므로
-        // 첫 방문자에게도 공지가 보이려면 스냅샷이 필요하다.
+        // 서버 장애 시: 브라우저 캐시 → 정적 스냅샷 → GAS 순.
+        // 캐시는 재방문자에게만 있고, 스냅샷은 서버 미러라 서버가 죽어 있으면 아예
+        // 생성되지 않는다(404). 그래서 서버와 독립적으로 살아있는 GAS 까지 내려가야
+        // 첫 방문자에게 공지가 보인다 — 이게 빠져서 공지 0건 + 배지 0 이었다.
         const cached = readHomeNoticeCache(limit, 'secure');
         if (cached.length > 0) return cached;
-        return fetchHomeNoticesSnapshot(limit);
+        const snapshot = await fetchHomeNoticesSnapshot(limit);
+        if (snapshot.length > 0) return snapshot;
+        const legacyOnOutage = await fetchLegacyHomeNotices(limit);
+        if (legacyOnOutage !== null && legacyOnOutage.length > 0) {
+            writeHomeNoticeCache(legacyOnOutage, 'legacy');
+            return legacyOnOutage;
+        }
+        return [];
     }
     const legacy = await fetchLegacyHomeNotices(limit);
     if (legacy !== null) {

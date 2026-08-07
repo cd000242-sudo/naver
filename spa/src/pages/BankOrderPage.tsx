@@ -14,10 +14,10 @@ interface ProductOption { id: string; name: string; price: number; futurePrice?:
 
 const ALL_PRODUCTS: Record<string, ProductOption[]> = {
     naver: [
-        { id: 'all-in-one-monthly', name: '올인원 1개월', price: 50000, futurePrice: 100000, period: '/ 월 · 8월 1일부터 100,000원', normalPeriod: '/ 월 · 정상가 적용 중' },
-        { id: 'all-in-one-quarterly', name: '올인원 3개월', price: 120000, futurePrice: 240000, period: '월 40,000원 · 8월 1일부터 240,000원', normalPeriod: '월 80,000원 · 정상가 적용 중' },
-        { id: 'all-in-one-yearly', name: '올인원 1년', price: 400000, futurePrice: 800000, period: '월 33,333원 · 8월 1일부터 800,000원', normalPeriod: '월 66,667원 · 정상가 적용 중' },
-        { id: 'all-in-one-lifetime', name: '올인원 영구제', price: 1650000, futurePrice: 3300000, period: '영구 이용 · 8월 1일부터 3,300,000원', normalPeriod: '영구 이용 · 정상가 적용 중' },
+        { id: 'all-in-one-monthly', name: '올인원 1개월', price: 50000, futurePrice: 100000, period: '/ 월 · 10월 1일부터 100,000원', normalPeriod: '/ 월 · 정상가 적용 중' },
+        { id: 'all-in-one-quarterly', name: '올인원 3개월', price: 120000, futurePrice: 240000, period: '월 40,000원 · 10월 1일부터 240,000원', normalPeriod: '월 80,000원 · 정상가 적용 중' },
+        { id: 'all-in-one-yearly', name: '올인원 1년', price: 400000, futurePrice: 800000, period: '월 33,333원 · 10월 1일부터 800,000원', normalPeriod: '월 66,667원 · 정상가 적용 중' },
+        { id: 'all-in-one-lifetime', name: '올인원 영구제', price: 1650000, futurePrice: 3300000, period: '영구 이용 · 10월 1일부터 3,300,000원', normalPeriod: '영구 이용 · 정상가 적용 중' },
     ],
 };
 
