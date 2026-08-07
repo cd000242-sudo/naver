@@ -24,6 +24,8 @@ type SourceSignal = {
     source?: string;
     categoryId?: string;
     createdAt?: string;
+    /** 네이버 자동완성 실측 확장 — 크론 스냅샷이 채워준다. 합성 확장 대체용 */
+    expansions?: string[];
 };
 
 type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'policy' | 'issue';
@@ -707,10 +709,10 @@ function peerConnectionLabel(profile: TopicProfile, peer: TopicProfile): string 
 }
 
 function hasSharedTopic(profile: TopicProfile, peer: TopicProfile): boolean {
-    const shared = profile.entities.some((token) => peer.entities.includes(token));
-    if (shared) return true;
-    if (profile.category === 'general' || peer.category === 'general') return false;
-    return profile.category === peer.category;
+    // 실제 공유 토큰이 있을 때만 "연결"로 인정한다. 카테고리만 같다고 묶으면
+    // 무관한 뉴스끼리("방은희 고독사" → "고종 진료") 연결 이슈로 합성되는
+    // 이상한 결과가 났다. 연결이 없으면 없다고 두는 게 맞다.
+    return profile.entities.some((token) => peer.entities.includes(token));
 }
 
 function buildClusterIdeas(profile: TopicProfile, lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
@@ -942,6 +944,19 @@ function buildSemanticMindmapIdeas(profile: TopicProfile, item: SourceSignal, pe
 }
 
 function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
+    // 1순위: 실측 확장(네이버 자동완성). 사람들이 실제로 이어서 치는 검색어라
+    // 토큰 합성 확장과 달리 "이상한 조합"이 원리적으로 안 나온다.
+    const expansionIdeas = uniqueList(item.expansions || [])
+        .filter((expansion) => expansion !== profile.keyword)
+        .slice(0, 4)
+        .map((expansion, index) => ({
+            label: expansion,
+            tag: index === 0 ? '실측 확장' : '실측 검색어',
+            reason: '네이버 자동완성에서 실제로 이어지는 검색어입니다.',
+            title: `${profile.keyword} 글에서 "${expansion}" 소제목 또는 후속 글로 확장`,
+            bias: 9 - index,
+        }));
+
     const focusedCorpus = `${profile.keyword} ${profile.core} ${profile.entities.join(' ')} ${item.description || ''}`;
     const related = peerItems
         .filter((peer) => peer.id !== item.id)
@@ -980,7 +995,8 @@ function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item:
             bias: 1,
         }));
 
-    return uniqueSemanticIdeas(profile, [...related, ...entityIdeas, ...fallback], 5);
+    // 실측 확장이 있으면 합성 아이디어(related/entity/fallback)는 뒷순위로 밀린다.
+    return uniqueSemanticIdeas(profile, [...expansionIdeas, ...related, ...entityIdeas, ...fallback], 5);
 }
 
 function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyGroup[] {

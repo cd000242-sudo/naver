@@ -161,15 +161,92 @@ function toSignalItems(laneId, rows) {
     // 순위를 점수로 환산한다(1위=100). 실측 지표가 아니라 표시용 정렬값이다.
     priority: Math.max(1, 100 - index),
     source: laneId,
+    // 네이버 자동완성 실측 확장(사람들이 실제로 이어서 치는 검색어)
+    expansions: row.expansions || [],
+    // 확장을 뽑은 시드(헤드라인 전체가 아니라 개체명일 수 있음 — 표시 정직성용)
+    expansionSeed: row.expansionSeed,
   }));
 }
 
+/**
+ * 키워드별 네이버 자동완성 확장 — 마인드맵의 "문맥 확장" 재료.
+ * 토큰을 템플릿으로 합성한 가짜 확장이 아니라, 사람들이 실제로 이어서 치는
+ * 검색어만 싣는다(조합 제조 금지 원칙). 실패하면 빈 배열 — 화면은 폴백으로 버틴다.
+ */
+async function fetchNaverExpansions(keyword) {
+  const url = 'https://ac.search.naver.com/nx/ac?q=' + encodeURIComponent(keyword)
+    + '&st=100&r_format=json&r_enc=UTF-8&r_unicode=0&t_koreng=1&frm=nv&q_enc=UTF-8';
+  const res = await get(url, { headers: { Referer: 'https://search.naver.com/' }, timeoutMs: 8000 });
+  if (!res.ok) return [];
+  try {
+    const items = (JSON.parse(res.text).items || []).flat();
+    return [...new Set(items
+      .map((row) => String(Array.isArray(row) ? row[0] : row).trim())
+      .filter((kw) => kw && kw !== keyword))].slice(0, 8);
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * 헤드라인에서 검색되는 개체명 후보를 뽑는다.
+ * "규제합리화위 부위원장에 김태유" 전체로는 자동완성이 0건이지만
+ * "김태유"로는 실제 검색어가 붙는다. 조사 어미를 떼고 2~6자 토큰을 후보로.
+ */
+function entitySeedCandidates(keyword) {
+  const tokens = String(keyword).split(/\s+/)
+    .map((token) => token.replace(/(에서|으로|에게|부터|까지|라며|한다|했다|[은는이가을를에의도])$/, ''))
+    .filter((token) => /^[가-힣A-Za-z0-9]{2,6}$/.test(token))
+    // 서술어(…다 종결)는 시드로 쓰면 "드러나다 뜻" 같은 사전형 확장만 나온다
+    .filter((token) => !/[가-힣]다$/.test(token))
+    // 헤드라인 상투어·가족 일반명사 제외("모친"을 시드로 쓰면 "모친 뜻"이 나온다)
+    .filter((token) => !/^(오늘|내일|전국|긴급|속보|단독|공식|발표|확정|논란|사망|고독사|출연|기록|개장|모친|부친|남편|아내|동생|형|누나|어머니|아버지|증조부|조부|장모|시모|가족)$/.test(token));
+  // 인명·고유명사는 헤드라인의 맨 앞 또는 맨 뒤에 주로 온다 — [첫 토큰, 마지막 토큰] 순서로 시도
+  const ordered = [tokens[0], tokens[tokens.length - 1], ...tokens];
+  return [...new Set(ordered.filter(Boolean))].slice(0, 2);
+}
+
+async function attachExpansions(rows) {
+  const out = [];
+  for (const row of rows) {
+    let expansions = await fetchNaverExpansions(row.keyword);
+    let expansionSeed = row.keyword;
+    if (expansions.length === 0) {
+      // 헤드라인 전체가 0건이면 개체명 후보 2개를 모두 시도해 합친다.
+      // 한 시드만 쓰면 "극한 폭염"에서 "극한"이 잡혀 극한직업이 나오는 식의
+      // 미스가 생긴다 — 합쳐놓고 원문 토큰을 포함한 확장을 앞세운다.
+      const seeds = entitySeedCandidates(row.keyword);
+      const merged = [];
+      for (const seed of seeds) {
+        await new Promise((resolve) => setTimeout(resolve, 150));
+        const got = await fetchNaverExpansions(seed);
+        if (got.length > 0 && merged.length === 0) expansionSeed = seed;
+        merged.push(...got);
+      }
+      const headlineTokens = String(row.keyword).split(/\s+/).filter((t) => t.length >= 2);
+      const relevance = (kw) => headlineTokens.reduce((n, t) => n + (kw.includes(t) ? 1 : 0), 0);
+      expansions = [...new Set(merged)]
+        .sort((a, b) => relevance(b) - relevance(a))
+        .slice(0, 8);
+    }
+    out.push({ ...row, expansions, expansionSeed: expansions.length > 0 ? expansionSeed : undefined });
+    await new Promise((resolve) => setTimeout(resolve, 150));
+  }
+  return out;
+}
+
 async function refreshSourceSignals() {
-  const [naver, daum, zum] = await Promise.all([
+  const [naverRaw, daumRaw, zumRaw] = await Promise.all([
     collectSignalBz().catch(() => []),
     collectDaumTrend().catch(() => []),
     collectZum().catch(() => []),
   ]);
+  // 자동완성은 순차 호출(레인당 10개 × 3레인 = 최대 30콜, 150ms 간격)
+  const naver = await attachExpansions(naverRaw);
+  const daum = await attachExpansions(daumRaw);
+  const zum = await attachExpansions(zumRaw);
+  const expansionCount = [...naver, ...daum, ...zum].reduce((sum, row) => sum + (row.expansions?.length || 0), 0);
+  report.push(`  INFO     자동완성 확장 ${expansionCount}건 수집`);
   const lanes = [
     { id: 'naver', label: '네이버', items: toSignalItems('naver', naver) },
     { id: 'daum', label: '다음', items: toSignalItems('daum', daum) },
