@@ -30,7 +30,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 /** 상태 요약 — 워크플로 로그에서 한눈에 보이게 한다. */
 const report = [];
 
-async function get(url, { headers = {}, timeoutMs = TIMEOUT_MS } = {}) {
+async function get(url, { headers = {}, timeoutMs = TIMEOUT_MS, encoding = 'utf-8' } = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -38,7 +38,9 @@ async function get(url, { headers = {}, timeoutMs = TIMEOUT_MS } = {}) {
       headers: { 'User-Agent': UA, ...headers },
       signal: controller.signal,
     });
-    const text = await res.text();
+    // 네이트 뉴스 등 EUC-KR 사이트는 text() 로 읽으면 한글이 깨진다.
+    const buffer = await res.arrayBuffer();
+    const text = new TextDecoder(encoding).decode(buffer);
     return { ok: res.ok, status: res.status, text };
   } catch (error) {
     return { ok: false, status: 0, text: '', error: String(error?.message || error) };
@@ -133,6 +135,67 @@ async function collectDaumTrend() {
   return unique.slice(0, 10).map((keyword, index) => ({ rank: index + 1, keyword }));
 }
 
+async function collectNate() {
+  const res = await get('https://www.nate.com/');
+  if (!res.ok) return [];
+  // <ol id="olLiveIssueKeyword"> 안의 <span class="txt_rank">키워드</span>
+  const section = (res.text.match(/olLiveIssueKeyword[\s\S]{0,8000}/) || [res.text])[0];
+  const matches = [...section.matchAll(/class="txt_rank">([^<]{2,40})</g)].map((m) => m[1].trim());
+  const unique = [...new Set(matches)].filter(Boolean);
+  return unique.slice(0, 10).map((keyword, index) => ({ rank: index + 1, keyword }));
+}
+
+async function collectNateEntIssues() {
+  // 네이트 연예 랭킹은 EUC-KR — 디코딩 지정 필수
+  const res = await get('https://news.nate.com/rank/interest?sc=ent&p=day', { encoding: 'euc-kr' });
+  if (!res.ok) return [];
+  // 실제 마크업은 <h2 class="tit">제목</h2> (strong 아님 — 초기 정규식이 틀려 0건이었다)
+  const titles = [...res.text.matchAll(/<h2 class="tit">([^<]{5,80})<\/h2>/g)]
+    .map((m) => m[1]
+      .replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")
+      .replace(/\[[^\]]{1,14}\]/g, '')
+      .replace(/…$/, '')
+      .replace(/\s+/g, ' ')
+      .trim())
+    .filter((title) => title.length >= 6);
+  // 기사 제목을 잘라 키워드로 쓰면 "비판에도", "20년팬 등판" 같은 조각이 나온다
+  // (정책 레인에서 이미 겪은 실패). 제목은 맥락으로만 두고, 검색어는 제목에서 뽑은
+  // 개체명(인물·작품·기관)으로 삼는다. 확장은 그 개체명 기준으로 붙는다.
+  const rows = [];
+  const seen = new Set();
+  for (const title of titles) {
+    const entity = entitySeedCandidates(title)[0];
+    if (!entity || seen.has(entity)) continue;
+    seen.add(entity);
+    rows.push({ rank: rows.length + 1, keyword: entity, context: title });
+    if (rows.length >= 10) break;
+  }
+  return rows;
+}
+
+async function collectPolicy() {
+  // 복지서비스 공공데이터 — 문장 조각이 아니라 제도명 자체가 온다.
+  const key = String(process.env.WELFARE_API_KEY || '').trim();
+  if (!key) {
+    report.push('  WARN     정책 레인 — WELFARE_API_KEY 미설정, 건너뜀');
+    return [];
+  }
+  const url = 'https://apis.data.go.kr/B554287/NationalWelfareInformationsV001/NationalWelfarelistV001'
+    + `?serviceKey=${key}&callTp=L&pageNo=1&numOfRows=30&srchKeyCode=003&orderBy=popular`;
+  const res = await get(url, { headers: { Accept: 'application/json' } });
+  if (!res.ok) return [];
+  try {
+    const list = JSON.parse(res.text).servList || [];
+    return list
+      .map((row) => String(row.servNm || '').replace(/\s+/g, ' ').trim())
+      .filter(Boolean)
+      .slice(0, 10)
+      .map((keyword, index) => ({ rank: index + 1, keyword }));
+  } catch {
+    return [];
+  }
+}
+
 async function collectZum() {
   const res = await get('https://www.zum.com/');
   if (!res.ok) return [];
@@ -145,7 +208,10 @@ async function collectZum() {
 const LANE_DESC = {
   naver: '네이버 실시간 흐름에서 수집한 검색 신호입니다.',
   daum: '다음 실시간 트렌드에서 수집한 검색 신호입니다.',
+  nate: '네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.',
   zum: 'ZUM 이슈검색어에서 수집한 검색 신호입니다.',
+  policy: '복지서비스 공공데이터에서 조회수 상위로 뽑은 제도명입니다.',
+  issue: '네이트 연예 랭킹에서 수집한 방송·연예 흐름입니다.',
 };
 
 /**
@@ -157,7 +223,8 @@ function toSignalItems(laneId, rows) {
     id: `${laneId}-${index + 1}`,
     keyword: row.keyword,
     title: row.keyword,
-    description: LANE_DESC[laneId] || '실시간 수집 신호입니다.',
+    // 이슈 레인은 원 기사 제목을 맥락으로 보여준다(키워드는 개체명).
+    description: row.context || LANE_DESC[laneId] || '실시간 수집 신호입니다.',
     // 순위를 점수로 환산한다(1위=100). 실측 지표가 아니라 표시용 정렬값이다.
     priority: Math.max(1, 100 - index),
     source: laneId,
@@ -195,14 +262,22 @@ async function fetchNaverExpansions(keyword) {
  */
 function entitySeedCandidates(keyword) {
   const tokens = String(keyword).split(/\s+/)
+    // 따옴표·괄호가 붙으면 인명 매칭이 실패한다(예: 황정민" → 미검출)
+    .map((token) => token.replace(/^[^가-힣A-Za-z0-9]+|[^가-힣A-Za-z0-9]+$/g, ''))
     .map((token) => token.replace(/(에서|으로|에게|부터|까지|라며|한다|했다|[은는이가을를에의도])$/, ''))
     .filter((token) => /^[가-힣A-Za-z0-9]{2,6}$/.test(token))
-    // 서술어(…다 종결)는 시드로 쓰면 "드러나다 뜻" 같은 사전형 확장만 나온다
-    .filter((token) => !/[가-힣]다$/.test(token))
-    // 헤드라인 상투어·가족 일반명사 제외("모친"을 시드로 쓰면 "모친 뜻"이 나온다)
-    .filter((token) => !/^(오늘|내일|전국|긴급|속보|단독|공식|발표|확정|논란|사망|고독사|출연|기록|개장|모친|부친|남편|아내|동생|형|누나|어머니|아버지|증조부|조부|장모|시모|가족)$/.test(token));
-  // 인명·고유명사는 헤드라인의 맨 앞 또는 맨 뒤에 주로 온다 — [첫 토큰, 마지막 토큰] 순서로 시도
-  const ordered = [tokens[0], tokens[tokens.length - 1], ...tokens];
+    // 서술어·연결어미는 시드로 쓰면 사전형 확장만 나온다("드러나다 뜻", "사주 공망")
+    .filter((token) => !/[가-힣](다|고|며|자|서|면|만|짐|함)$/.test(token))
+    // 헤드라인 상투어·일반명사 제외("모친"→"모친 뜻", "시청률"→무관 확장)
+    .filter((token) => !/^(오늘|내일|전국|긴급|속보|단독|공식|발표|확정|논란|사망|고독사|출연|기록|개장|시청률|반응|이번|바로|여전히|모친|부친|남편|아내|동생|형|누나|어머니|아버지|증조부|조부|장모|시모|가족)$/.test(token));
+
+  // 한국 인명 패턴(성 1자 + 이름 1~2자)을 최우선. 이슈 레인은 인물이 핵심 검색어다.
+  const NAME_RE = /^[김이박최정강조윤장임한오서신권황안송류전홍고문양손배백허남심노하곽성차주우구민유][가-힣]{1,2}$/;
+  // 성씨로 시작하지만 인명이 아닌 흔한 일반어(최종·구성·임신…)는 걸러낸다.
+  const NOT_A_NAME = /^(최종|최고|최근|최대|최소|이번|이상|이후|이전|이유|정부|정도|정식|조사|강화|강남|임신|오전|오후|서울|한국|전국|전체|고속|신규|안전|송출|유지|민간|주요|구성|구매|박스|양측|손실|백만|허가|남녀|심각|하락|하루|성공|성장|차량|주가|주식|우려|김치|문제|양국|배송|노동|권리|황금|안내|송금|전망|홍보|고객)$/;
+  const names = tokens.filter((token) => NAME_RE.test(token) && !NOT_A_NAME.test(token));
+  // 그 외에는 헤드라인 맨 앞/맨 뒤(고유명사가 주로 오는 자리) 순서로
+  const ordered = [...names, tokens[0], tokens[tokens.length - 1], ...tokens];
   return [...new Set(ordered.filter(Boolean))].slice(0, 2);
 }
 
@@ -235,28 +310,38 @@ async function attachExpansions(rows) {
   return out;
 }
 
-async function refreshSourceSignals() {
-  const [naverRaw, daumRaw, zumRaw] = await Promise.all([
-    collectSignalBz().catch(() => []),
-    collectDaumTrend().catch(() => []),
-    collectZum().catch(() => []),
-  ]);
-  // 자동완성은 순차 호출(레인당 10개 × 3레인 = 최대 30콜, 150ms 간격)
-  const naver = await attachExpansions(naverRaw);
-  const daum = await attachExpansions(daumRaw);
-  const zum = await attachExpansions(zumRaw);
-  const expansionCount = [...naver, ...daum, ...zum].reduce((sum, row) => sum + (row.expansions?.length || 0), 0);
-  report.push(`  INFO     자동완성 확장 ${expansionCount}건 수집`);
-  const lanes = [
-    { id: 'naver', label: '네이버', items: toSignalItems('naver', naver) },
-    { id: 'daum', label: '다음', items: toSignalItems('daum', daum) },
-    { id: 'zum', label: '줌', items: toSignalItems('zum', zum) },
-  ].filter((lane) => lane.items.length > 0);
+/** UI 탭 순서와 동일하게 6개 레인을 모두 채운다. 하나라도 비면 그 탭만 폴백으로 떨어진다. */
+const LANE_COLLECTORS = [
+  { id: 'naver', label: '네이버', collect: collectSignalBz },
+  { id: 'daum', label: '다음', collect: collectDaumTrend },
+  { id: 'nate', label: '네이트', collect: collectNate },
+  { id: 'zum', label: '줌', collect: collectZum },
+  { id: 'policy', label: '정책', collect: collectPolicy },
+  { id: 'issue', label: '이슈', collect: collectNateEntIssues },
+];
 
-  const total = lanes.reduce((sum, lane) => sum + lane.items.length, 0);
-  for (const lane of [['naver', naver], ['daum', daum], ['zum', zum]]) {
-    if (lane[1].length === 0) report.push(`  WARN     실시간 ${lane[0]} 0건 — 수집기 점검 필요`);
+async function refreshSourceSignals() {
+  const collected = await Promise.all(
+    LANE_COLLECTORS.map((lane) => lane.collect().catch(() => [])),
+  );
+
+  const lanes = [];
+  let expansionCount = 0;
+  for (let index = 0; index < LANE_COLLECTORS.length; index += 1) {
+    const config = LANE_COLLECTORS[index];
+    const raw = collected[index];
+    if (raw.length === 0) {
+      report.push(`  WARN     실시간 ${config.id} 0건 — 수집기 점검 필요`);
+      continue;
+    }
+    // 자동완성은 순차 호출(레인당 최대 10개, 150ms 간격)
+    const rows = await attachExpansions(raw);
+    expansionCount += rows.reduce((sum, row) => sum + (row.expansions?.length || 0), 0);
+    lanes.push({ id: config.id, label: config.label, items: toSignalItems(config.id, rows) });
   }
+
+  report.push(`  INFO     자동완성 확장 ${expansionCount}건 수집 (${lanes.length}/${LANE_COLLECTORS.length} 레인)`);
+  const total = lanes.reduce((sum, lane) => sum + lane.items.length, 0);
   writeSnapshot('source-signals.json', { source: 'direct-crawl', lanes }, total);
 }
 

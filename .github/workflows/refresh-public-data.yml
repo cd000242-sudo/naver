@@ -32,6 +32,8 @@ jobs:
       - name: Refresh snapshots
         env:
           LEWORD_API_BASE: ${{ vars.LEWORD_API_BASE || 'https://141.164.59.17.sslip.io' }}
+          # 정책 레인(복지서비스 공공데이터). 없으면 그 레인만 건너뛴다.
+          WELFARE_API_KEY: ${{ secrets.WELFARE_API_KEY }}
         run: node scripts/refresh-public-data.mjs
 
       - name: Verify snapshots are not empty
