@@ -142,6 +142,28 @@ async function collectZum() {
   return unique.slice(0, 10).map((keyword, index) => ({ rank: index + 1, keyword }));
 }
 
+const LANE_DESC = {
+  naver: '네이버 실시간 흐름에서 수집한 검색 신호입니다.',
+  daum: '다음 실시간 트렌드에서 수집한 검색 신호입니다.',
+  zum: 'ZUM 이슈검색어에서 수집한 검색 신호입니다.',
+};
+
+/**
+ * SPA 카드가 기대하는 필드로 맞춘다.
+ * keyword 만 넣으면 설명·점수 칸이 빈 채로 렌더돼 카드가 깨져 보인다.
+ */
+function toSignalItems(laneId, rows) {
+  return rows.map((row, index) => ({
+    id: `${laneId}-${index + 1}`,
+    keyword: row.keyword,
+    title: row.keyword,
+    description: LANE_DESC[laneId] || '실시간 수집 신호입니다.',
+    // 순위를 점수로 환산한다(1위=100). 실측 지표가 아니라 표시용 정렬값이다.
+    priority: Math.max(1, 100 - index),
+    source: laneId,
+  }));
+}
+
 async function refreshSourceSignals() {
   const [naver, daum, zum] = await Promise.all([
     collectSignalBz().catch(() => []),
@@ -149,9 +171,9 @@ async function refreshSourceSignals() {
     collectZum().catch(() => []),
   ]);
   const lanes = [
-    { id: 'naver', label: '네이버', items: naver },
-    { id: 'daum', label: '다음', items: daum },
-    { id: 'zum', label: '줌', items: zum },
+    { id: 'naver', label: '네이버', items: toSignalItems('naver', naver) },
+    { id: 'daum', label: '다음', items: toSignalItems('daum', daum) },
+    { id: 'zum', label: '줌', items: toSignalItems('zum', zum) },
   ].filter((lane) => lane.items.length > 0);
 
   const total = lanes.reduce((sum, lane) => sum + lane.items.length, 0);

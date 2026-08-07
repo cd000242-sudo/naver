@@ -6,44 +6,84 @@
       "label": "네이버",
       "items": [
         {
-          "rank": 1,
-          "keyword": "윤리위 서범수 진종오 징계"
+          "id": "naver-1",
+          "keyword": "전국 극한 폭염",
+          "title": "전국 극한 폭염",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 100,
+          "source": "naver"
         },
         {
-          "rank": 2,
-          "keyword": "규제합리화위 부위원장에 김태유"
+          "id": "naver-2",
+          "keyword": "규제합리화위 부위원장에 김태유",
+          "title": "규제합리화위 부위원장에 김태유",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "naver"
         },
         {
-          "rank": 3,
-          "keyword": "LG 엑사원 세계 1위"
+          "id": "naver-3",
+          "keyword": "제우스 오만의 신 드러나다",
+          "title": "제우스 오만의 신 드러나다",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "naver"
         },
         {
-          "rank": 4,
-          "keyword": "응팔 최성원, 백혈병 두 번 완치"
+          "id": "naver-4",
+          "keyword": "응팔 최성원, 백혈병 두 번 완치",
+          "title": "응팔 최성원, 백혈병 두 번 완치",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "naver"
         },
         {
-          "rank": 5,
-          "keyword": "KIA 광복절 유니폼 출시"
+          "id": "naver-5",
+          "keyword": "사미자",
+          "title": "사미자",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "naver"
         },
         {
-          "rank": 6,
-          "keyword": "송성문"
+          "id": "naver-6",
+          "keyword": "KT 무더위 쉼터",
+          "title": "KT 무더위 쉼터",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "naver"
         },
         {
-          "rank": 7,
-          "keyword": "KT 무더위 쉼터"
+          "id": "naver-7",
+          "keyword": "롯데웰푸드 2분기 영업익 급증",
+          "title": "롯데웰푸드 2분기 영업익 급증",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "naver"
         },
         {
-          "rank": 8,
-          "keyword": "시바이누코인"
+          "id": "naver-8",
+          "keyword": "송성문",
+          "title": "송성문",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "naver"
         },
         {
-          "rank": 9,
-          "keyword": "고창 해상풍력 금융지원"
+          "id": "naver-9",
+          "keyword": "고창 해상풍력 금융지원",
+          "title": "고창 해상풍력 금융지원",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "naver"
         },
         {
-          "rank": 10,
-          "keyword": "SK하이닉스 AI 메모리"
+          "id": "naver-10",
+          "keyword": "시바이누코인",
+          "title": "시바이누코인",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 91,
+          "source": "naver"
         }
       ]
     },
@@ -52,44 +92,84 @@
       "label": "다음",
       "items": [
         {
-          "rank": 1,
-          "keyword": "방은희 어머니 고독사"
+          "id": "daum-1",
+          "keyword": "방은희 모친 고독사",
+          "title": "방은희 모친 고독사",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 100,
+          "source": "daum"
         },
         {
-          "rank": 2,
-          "keyword": "노원 40.2도 기록"
+          "id": "daum-2",
+          "keyword": "하영 4대째 의사 집안",
+          "title": "하영 4대째 의사 집안",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "daum"
         },
         {
-          "rank": 3,
-          "keyword": "차인표 동생 구강암 사망"
+          "id": "daum-3",
+          "keyword": "서울 40도 돌파",
+          "title": "서울 40도 돌파",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "daum"
         },
         {
-          "rank": 4,
-          "keyword": "하영 증조부 고종 진료"
+          "id": "daum-4",
+          "keyword": "차인표 동생 구강암 사망",
+          "title": "차인표 동생 구강암 사망",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "daum"
         },
         {
-          "rank": 5,
-          "keyword": "HLB테라퓨틱스 CB 출자전환"
+          "id": "daum-5",
+          "keyword": "이혼숙려캠프",
+          "title": "이혼숙려캠프",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "daum"
         },
         {
-          "rank": 6,
-          "keyword": "오디세이 영화"
+          "id": "daum-6",
+          "keyword": "입추",
+          "title": "입추",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "daum"
         },
         {
-          "rank": 7,
-          "keyword": "입추"
+          "id": "daum-7",
+          "keyword": "홈플러스",
+          "title": "홈플러스",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "daum"
         },
         {
-          "rank": 8,
-          "keyword": "아이유 장기하 노래 선곡"
+          "id": "daum-8",
+          "keyword": "프리마켓 주문 금지",
+          "title": "프리마켓 주문 금지",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "daum"
         },
         {
-          "rank": 9,
-          "keyword": "타일러 외압설 해명"
+          "id": "daum-9",
+          "keyword": "박해준 강유석 부자",
+          "title": "박해준 강유석 부자",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "daum"
         },
         {
-          "rank": 10,
-          "keyword": "롯데웰푸드 영업익 증가"
+          "id": "daum-10",
+          "keyword": "윤민우 윤리위원장",
+          "title": "윤민우 윤리위원장",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 91,
+          "source": "daum"
         }
       ]
     },
@@ -98,47 +178,87 @@
       "label": "줌",
       "items": [
         {
-          "rank": 1,
-          "keyword": "LG 엑사원 세계 1위"
+          "id": "zum-1",
+          "keyword": "전국 극한 폭염",
+          "title": "전국 극한 폭염",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 100,
+          "source": "zum"
         },
         {
-          "rank": 2,
-          "keyword": "KT 무더위 쉼터"
+          "id": "zum-2",
+          "keyword": "농협생명 폭염 온열질환",
+          "title": "농협생명 폭염 온열질환",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "zum"
         },
         {
-          "rank": 3,
-          "keyword": "고창 해상풍력 금융지원"
+          "id": "zum-3",
+          "keyword": "KT 무더위 쉼터",
+          "title": "KT 무더위 쉼터",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "zum"
         },
         {
-          "rank": 4,
-          "keyword": "SK하이닉스 AI 메모리"
+          "id": "zum-4",
+          "keyword": "뉴욕증시 하락",
+          "title": "뉴욕증시 하락",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "zum"
         },
         {
-          "rank": 5,
-          "keyword": "네이버 2분기 실적"
+          "id": "zum-5",
+          "keyword": "고창 해상풍력 금융지원",
+          "title": "고창 해상풍력 금융지원",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "zum"
         },
         {
-          "rank": 6,
-          "keyword": "하이트진로 이슬라이브"
+          "id": "zum-6",
+          "keyword": "SK하이닉스 AI 메모리",
+          "title": "SK하이닉스 AI 메모리",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "zum"
         },
         {
-          "rank": 7,
-          "keyword": "농협생명 폭염 온열질환"
+          "id": "zum-7",
+          "keyword": "대우건설 모잠비크 LNG",
+          "title": "대우건설 모잠비크 LNG",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "zum"
         },
         {
-          "rank": 8,
-          "keyword": "블랙핑크 10주년 완전체"
+          "id": "zum-8",
+          "keyword": "트럼프 원정출산 금지",
+          "title": "트럼프 원정출산 금지",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "zum"
         },
         {
-          "rank": 9,
-          "keyword": "YG 사옥 난동"
+          "id": "zum-9",
+          "keyword": "민주당 당대표 토론",
+          "title": "민주당 당대표 토론",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "zum"
         },
         {
-          "rank": 10,
-          "keyword": "대우건설 모잠비크 LNG"
+          "id": "zum-10",
+          "keyword": "블랙핑크 10주년 완전체",
+          "title": "블랙핑크 10주년 완전체",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 91,
+          "source": "zum"
         }
       ]
     }
   ],
-  "updatedAt": "2026-08-07T07:06:17.589Z"
+  "updatedAt": "2026-08-07T07:37:57.920Z"
 }
