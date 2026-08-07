@@ -74,6 +74,7 @@ import { buildAffiliateConversionStructureContract } from './content/affiliateCo
 import { describeGroundingDecision, isGroundingExplicitlyEnabled } from './content/groundingCostPolicy.js';
 import { buildSituationDepthContract } from './content/situationDepthContract.js';
 import { buildSituationTitleContract } from './content/situationTitleContract.js';
+import { selectBestTitleCandidate } from './content/titleCandidateSelection.js';
 import {
   buildEvidenceAndIntentFinalContract,
   buildEvidenceMetaLeakRule,
@@ -5768,6 +5769,37 @@ async function generateStructuredContentInternal(
               ...c,
               text: typeof c?.text === 'string' ? c.text.replace(/[\r\n]+/g, ' ').trim() : c?.text,
             }));
+          }
+
+          // [2026-08-08] Re-rank the titles this call already paid for.
+          //   The evaluator-driven swap used to live only in generateTitleOnlyPatch, which is
+          //   gated behind CONTENT_ALLOW_PAID_POST_GENERATION_REPAIR (never set in production —
+          //   a second billable generation is against policy). So the title evaluator never
+          //   touched a shipped title, and a weak selectedTitle went out as-is. Agent CLIs in
+          //   particular echo the input keyword when they cut the task short, which the user
+          //   sees as "자동 생성을 골랐는데 키워드가 그대로 나온다".
+          //   Candidates are already in the response, so this costs nothing.
+          if (!source.useKeywordAsTitle && !source.manualTitleOverride) {
+            const titleKeyword = getPrimaryKeywordFromSource(source) || '';
+            const pick = selectBestTitleCandidate({
+              selectedTitle: parsed.selectedTitle,
+              candidates: parsed.titleCandidates,
+              keyword: titleKeyword,
+              scoreTitle: (t) => evaluateTitleQuality(
+                t,
+                titleKeyword,
+                mode,
+                source.categoryHint as string | undefined,
+                source.articleType,
+              ).score,
+            });
+            if (pick.changed) {
+              console.log(
+                `[TitleSelect] 제목 교체(${pick.reason}, ${pick.fromScore}점 → ${pick.toScore}점): `
+                + `"${String(parsed.selectedTitle || '').slice(0, 40)}" → "${pick.title.slice(0, 40)}"`,
+              );
+              parsed.selectedTitle = pick.title;
+            }
           }
         }
 
