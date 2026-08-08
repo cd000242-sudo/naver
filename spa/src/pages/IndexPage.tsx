@@ -995,6 +995,60 @@ function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: So
     ];
 }
 
+/**
+ * 분석 중 화면 — 키워드를 바꾸면 결과를 조각조각 들이밀지 않고
+ * 한 번에 보여준다. 마인드맵은 카드가 여러 장이라 그냥 갈아치우면
+ * 뭐가 바뀐 건지 눈이 못 따라간다. 진행 단계를 보여주고 한 번에 드러낸다.
+ */
+const ANALYZE_STEPS = ['기사 수집', '사실 정리', '제목·주제 도출'] as const;
+
+function SourceInsightLoading({ keyword, accent, step }: { keyword: string; accent: string; step: number }) {
+    return (
+        <aside className="source-insight-panel source-insight-loading" style={{ borderColor: accent + '66' }}>
+            <span className="source-insight-gear" style={{ borderTopColor: accent }} aria-hidden="true" />
+            <strong>{keyword}</strong>
+            <p>분석 중입니다</p>
+            <ol className="source-insight-steps">
+                {ANALYZE_STEPS.map((label, index) => (
+                    <li key={label} className={index <= step ? 'done' : undefined}>
+                        <span style={index <= step ? { color: accent } : undefined}>
+                            {index < step ? '완료' : index === step ? '진행' : '대기'}
+                        </span>
+                        {label}
+                    </li>
+                ))}
+            </ol>
+        </aside>
+    );
+}
+
+/**
+ * 키워드가 바뀔 때만 짧게 분석 화면을 끼운다.
+ * 데이터는 이미 로컬에 있어서 실제로 기다릴 필요는 없지만, 여러 카드가
+ * 동시에 갈아치워지면 사용자가 뭘 봐야 하는지 놓친다.
+ */
+function SourceSignalInsight(props: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[] }) {
+    const keyword = props.item ? cleanLiveText(props.item.keyword || props.item.title, props.lane.label) : '';
+    const [shownKeyword, setShownKeyword] = useState(keyword);
+    const [step, setStep] = useState(ANALYZE_STEPS.length - 1);
+
+    useEffect(() => {
+        if (!keyword || keyword === shownKeyword) return;
+        setStep(0);
+        const timers = [
+            window.setTimeout(() => setStep(1), 220),
+            window.setTimeout(() => setStep(2), 440),
+            window.setTimeout(() => setShownKeyword(keyword), 660),
+        ];
+        return () => timers.forEach((t) => window.clearTimeout(t));
+    }, [keyword, shownKeyword]);
+
+    if (keyword && keyword !== shownKeyword) {
+        return <SourceInsightLoading keyword={keyword} accent={props.lane.accent} step={step} />;
+    }
+    return <SourceSignalInsightPanel {...props} />;
+}
+
 function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[] }) {
     if (!item) {
         return (
@@ -1375,7 +1429,7 @@ function IndexPage() {
                                         </span>
                                     )}
                                 </div>
-                                <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} items={activeSourceItems} />
+                                <SourceSignalInsight lane={activeSourceLane} item={activeSourceInsightItem} items={activeSourceItems} />
                             </div>
                         </div>
                     </div>
@@ -1840,6 +1894,60 @@ function IndexPage() {
                     border-radius: 999px;
                     padding: 3px 10px;
                     text-decoration: none;
+                }
+
+                /* 분석 중 — 톱니 회전 + 진행 단계 */
+                .source-insight-loading {
+                    display: grid;
+                    place-content: center;
+                    justify-items: center;
+                    gap: 8px;
+                    text-align: center;
+                    min-height: 220px;
+                    padding: 24px;
+                }
+                .source-insight-gear {
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 50%;
+                    border: 3px solid rgba(255,255,255,0.14);
+                    border-top-color: #44d7b6;
+                    animation: sourceGearSpin 0.8s linear infinite;
+                }
+                @keyframes sourceGearSpin { to { transform: rotate(360deg); } }
+                @media (prefers-reduced-motion: reduce) {
+                    .source-insight-gear { animation: none; }
+                }
+                .source-insight-loading strong {
+                    font-size: 15px;
+                    font-weight: 800;
+                    color: #f7fbff;
+                }
+                .source-insight-loading p {
+                    margin: 0;
+                    font-size: 12px;
+                    color: rgba(255,255,255,0.55);
+                }
+                .source-insight-steps {
+                    list-style: none;
+                    margin: 6px 0 0;
+                    padding: 0;
+                    display: grid;
+                    gap: 5px;
+                    font-size: 12px;
+                }
+                .source-insight-steps li {
+                    display: flex;
+                    gap: 8px;
+                    align-items: center;
+                    color: rgba(255,255,255,0.38);
+                }
+                .source-insight-steps li.done { color: rgba(255,255,255,0.86); }
+                .source-insight-steps li span {
+                    font-size: 10px;
+                    font-weight: 800;
+                    min-width: 26px;
+                    text-align: right;
                 }
 
                 /* 이렇게 쓰세요 — 주제·제목 가이드 */
