@@ -7,20 +7,20 @@
       "items": [
         {
           "id": "naver-1",
-          "keyword": "태풍 돌핀 폭우 영향",
-          "title": "태풍 돌핀 폭우 영향",
+          "keyword": "태풍 돌핀 폭우.",
+          "title": "태풍 돌핀 폭우.",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "naver",
           "expansions": [
-            "태풍 돌핀 영향",
-            "태풍 돌핀 영향권",
             "태풍 돌핀",
             "태풍 돌핀 경로",
-            "태풍 영향권",
-            "태풍영향",
             "태풍경로",
-            "태풍 13호"
+            "태풍 13호",
+            "태풍 바비",
+            "태풍 11호",
+            "태풍 바비 경로",
+            "태풍 매미"
           ],
           "expansionSeed": "태풍"
         },
@@ -57,29 +57,48 @@
         },
         {
           "id": "naver-4",
-          "keyword": "실외기 화재 대피",
-          "title": "실외기 화재 대피",
+          "keyword": "김정은과 국립교향악단 기념사진",
+          "title": "김정은과 국립교향악단 기념사진",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "naver",
           "expansions": [
-            "실외기 화재",
-            "실외기 커버",
-            "실외기 없는 에어컨",
-            "실외기 덮개",
-            "실외기 소음",
-            "실외기 청소",
-            "에어컨 실외기",
-            "실외기 에어로드"
+            "김정은과 친한꿈",
+            "기념사진 스튜디오",
+            "기념사진 제작",
+            "기념사진 포즈",
+            "기념사진 소품",
+            "기념사진 영어",
+            "기념사진 찍는곳",
+            "기념 사진 액자"
           ],
-          "expansionSeed": "실외기"
+          "expansionSeed": "김정은과"
         },
         {
           "id": "naver-5",
+          "keyword": "메시 아버지 별세, 68세",
+          "title": "메시 아버지 별세, 68세",
+          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "naver",
+          "expansions": [
+            "리오넬 메시",
+            "메시 나무위키",
+            "스파이더맨 메시",
+            "메시 유니폼",
+            "메시 야말",
+            "메시아",
+            "68세 몇년생",
+            "68세 띠"
+          ],
+          "expansionSeed": "메시"
+        },
+        {
+          "id": "naver-6",
           "keyword": "결혼의 완성",
           "title": "결혼의 완성",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 95,
           "source": "naver",
           "expansions": [
             "결혼의 완성 몇부작",
@@ -94,42 +113,23 @@
           "expansionSeed": "결혼의 완성"
         },
         {
-          "id": "naver-6",
-          "keyword": "임영웅",
-          "title": "임영웅",
-          "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "naver",
-          "expansions": [
-            "임영웅 콘서트",
-            "임영웅 산골총각",
-            "임영웅 노래",
-            "임영웅 강아지",
-            "임영웅 나무위키",
-            "임영웅 갤러리",
-            "임영웅 팬카페",
-            "임영웅노래모음"
-          ],
-          "expansionSeed": "임영웅"
-        },
-        {
           "id": "naver-7",
-          "keyword": "대전광역시",
-          "title": "대전광역시",
+          "keyword": "나솔",
+          "title": "나솔",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 94,
           "source": "naver",
           "expansions": [
-            "대전광역시 교육청",
-            "대전광역시청",
-            "대전광역시 인구",
-            "대전광역시 지도",
-            "대전광역시장",
-            "대전광역시 어린이회관",
-            "대전광역시 날씨",
-            "대전광역시체육회"
+            "나솔사계",
+            "나솔 32기",
+            "나솔갤",
+            "나솔 32기 상철",
+            "나솔 28기",
+            "나솔 31기",
+            "나솔 32기 현커",
+            "나솔사계 현커"
           ],
-          "expansionSeed": "대전광역시"
+          "expansionSeed": "나솔"
         },
         {
           "id": "naver-8",
@@ -146,41 +146,41 @@
         },
         {
           "id": "naver-9",
-          "keyword": "홍소영 청장 인터뷰",
-          "title": "홍소영 청장 인터뷰",
+          "keyword": "하영과 연애 중인 정해인",
+          "title": "하영과 연애 중인 정해인",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 92,
           "source": "naver",
           "expansions": [
-            "인터뷰박스",
-            "루위의 인터뷰",
-            "인터뷰카페",
-            "스테이인터뷰",
-            "인터뷰잇",
-            "커피인터뷰",
-            "인터뷰이",
-            "인터뷰룸"
+            "정해인 나무위키",
+            "정해인 드라마",
+            "정해인 단풍손",
+            "정해인 하영",
+            "정해인 정약용",
+            "정해인 정소민",
+            "정해인 동생",
+            "정해인 아버지"
           ],
-          "expansionSeed": "인터뷰"
+          "expansionSeed": "하영과"
         },
         {
           "id": "naver-10",
-          "keyword": "주가",
-          "title": "주가",
+          "keyword": "에너지",
+          "title": "에너지",
           "description": "네이버 실시간 흐름에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "naver",
           "expansions": [
-            "삼성전자 주가",
-            "하이닉스 주가",
-            "주가지수",
-            "현대차 주가",
-            "SK하이닉스 주가",
-            "네이버 주가",
-            "카카오 주가",
-            "엔비디아 주가"
+            "에너지바우처",
+            "한전 에너지 캐시백",
+            "2026 에너지바우처",
+            "에너지 1등급 환급",
+            "에너지젤",
+            "에너지캐시백",
+            "lg에너지솔루션",
+            "블룸에너지"
           ],
-          "expansionSeed": "주가"
+          "expansionSeed": "에너지"
         }
       ]
     },
@@ -209,29 +209,64 @@
         },
         {
           "id": "daum-2",
-          "keyword": "김정렬 친형 구타 사망",
-          "title": "김정렬 친형 구타 사망",
+          "keyword": "isa 계좌란",
+          "title": "isa 계좌란",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 99,
           "source": "daum",
           "expansions": [
+            "ISA 계좌란",
+            "중개형 ISA 계좌란",
+            "신탁형 ISA 계좌란",
+            "ISA 계좌란 무엇인가",
+            "ISA 계좌란돈넣는방법"
+          ],
+          "expansionSeed": "isa 계좌란"
+        },
+        {
+          "id": "daum-3",
+          "keyword": "김정은 격려 방문",
+          "title": "김정은 격려 방문",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "daum",
+          "expansions": [
+            "김정은",
+            "방문 손잡이",
+            "방문교체",
+            "방문택배 신청",
+            "방문 잠겼을때",
+            "방문 스토퍼",
+            "방문 틈새막이",
+            "방문 시트지"
+          ],
+          "expansionSeed": "김정"
+        },
+        {
+          "id": "daum-4",
+          "keyword": "김정렬 이혼 고백",
+          "title": "김정렬 이혼 고백",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "daum",
+          "expansions": [
             "김정렬키본",
             "개그맨 김정렬",
-            "구타유발자들",
-            "구타 뜻",
-            "구타유발자",
-            "400번의 구타",
-            "집단구타",
-            "구타유발죄"
+            "이혼사유",
+            "이혼하기",
+            "합의이혼",
+            "이혼영어로",
+            "이혜영이혼",
+            "배우이소연이혼"
           ],
           "expansionSeed": "김정렬"
         },
         {
-          "id": "daum-3",
+          "id": "daum-5",
           "keyword": "1236회 로또 당첨 번호",
           "title": "1236회 로또 당첨 번호",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 96,
           "source": "daum",
           "expansions": [
             "1236회 로또당첨번호",
@@ -239,44 +274,6 @@
             "1236회로또당첨번호보기"
           ],
           "expansionSeed": "1236회 로또 당첨 번호"
-        },
-        {
-          "id": "daum-4",
-          "keyword": "이진호 뇌출혈 퇴원",
-          "title": "이진호 뇌출혈 퇴원",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "daum",
-          "expansions": [
-            "이진호 뇌출혈",
-            "개그맨 이진호",
-            "이진호 기자",
-            "이진호 보디빌더",
-            "이진호내과",
-            "퇴원 뜻",
-            "퇴원수속",
-            "퇴원선물"
-          ],
-          "expansionSeed": "이진호"
-        },
-        {
-          "id": "daum-5",
-          "keyword": "황기순 필리핀 도피",
-          "title": "황기순 필리핀 도피",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "daum",
-          "expansions": [
-            "황기순 칼국수",
-            "황기순살족발",
-            "개그맨 황기순",
-            "황기순대국",
-            "황기순식당",
-            "황기순족발 먹는법",
-            "황기순칼국수 주차",
-            "황기순살냉장족발"
-          ],
-          "expansionSeed": "황기순"
         },
         {
           "id": "daum-6",
@@ -299,45 +296,10 @@
         },
         {
           "id": "daum-7",
-          "keyword": "엿같은 사랑",
-          "title": "엿같은 사랑",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "daum",
-          "expansions": [
-            "이런 엿같은 사랑",
-            "이런 엿같은 사랑 촬영지",
-            "이런 엿같은 사랑 결말",
-            "이 엿같은 사랑",
-            "이런 엿같은 사랑 원작",
-            "이런 엿같은 사랑 김강록",
-            "이런 엿같은 사랑 출연진",
-            "이런 엿같은 사랑 ost"
-          ],
-          "expansionSeed": "엿같은 사랑"
-        },
-        {
-          "id": "daum-8",
-          "keyword": "isa 계좌란",
-          "title": "isa 계좌란",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "daum",
-          "expansions": [
-            "ISA 계좌란",
-            "중개형 ISA 계좌란",
-            "신탁형 ISA 계좌란",
-            "ISA 계좌란 무엇인가",
-            "ISA 계좌란돈넣는방법"
-          ],
-          "expansionSeed": "isa 계좌란"
-        },
-        {
-          "id": "daum-9",
           "keyword": "15호태풍경로 예상경로",
           "title": "15호태풍경로 예상경로",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 92,
+          "priority": 94,
           "source": "daum",
           "expansions": [
             "태풍 예상경로",
@@ -352,11 +314,11 @@
           "expansionSeed": "예상경로"
         },
         {
-          "id": "daum-10",
+          "id": "daum-8",
           "keyword": "오디세이",
           "title": "오디세이",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 91,
+          "priority": 93,
           "source": "daum",
           "expansions": [
             "오디세이 영화",
@@ -369,6 +331,44 @@
             "오디세이 책"
           ],
           "expansionSeed": "오디세이"
+        },
+        {
+          "id": "daum-9",
+          "keyword": "심현섭 정영림",
+          "title": "심현섭 정영림",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 92,
+          "source": "daum",
+          "expansions": [
+            "심현섭 정영림",
+            "심현섭 아기",
+            "심현섭 심혜진",
+            "심현섭아버지",
+            "심현섭 와이프",
+            "심혜진 심현섭",
+            "개그맨심현섭",
+            "심현섭고모"
+          ],
+          "expansionSeed": "심현섭"
+        },
+        {
+          "id": "daum-10",
+          "keyword": "민주당 전당대회",
+          "title": "민주당 전당대회",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 91,
+          "source": "daum",
+          "expansions": [
+            "민주당 전당대회 일정",
+            "민주당 전당대회 결과",
+            "더불어민주당 전당대회 일정",
+            "민주당 전당대회 날짜",
+            "민주당 전당대회 투표",
+            "민주당 전당대회 지지율",
+            "민주당 전당대회 후보",
+            "민주당 전당대회 일정표"
+          ],
+          "expansionSeed": "민주당 전당대회"
         }
       ]
     },
@@ -378,86 +378,10 @@
       "items": [
         {
           "id": "nate-1",
-          "keyword": "태풍",
-          "title": "태풍",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 100,
-          "source": "nate",
-          "expansions": [
-            "태풍 돌핀",
-            "태풍경로",
-            "태풍 13호",
-            "태풍 바비",
-            "태풍 11호",
-            "태풍 돌핀 경로",
-            "태풍 바비 경로",
-            "태풍 매미"
-          ],
-          "expansionSeed": "태풍"
-        },
-        {
-          "id": "nate-2",
-          "keyword": "리센느 원이 연예인병",
-          "title": "리센느 원이 연예인병",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 99,
-          "source": "nate",
-          "expansions": [
-            "리센느 원이",
-            "리센느 나무위키",
-            "리센느 제나",
-            "리센느 미나미",
-            "리센느 메이",
-            "리센느 리브",
-            "리센느 러브어택",
-            "리센느 대표"
-          ],
-          "expansionSeed": "리센느"
-        },
-        {
-          "id": "nate-3",
-          "keyword": "김정은 국립교향악단 기념사진",
-          "title": "김정은 국립교향악단 기념사진",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "nate",
-          "expansions": [
-            "김정은",
-            "기념사진 스튜디오",
-            "기념사진 제작",
-            "기념사진 포즈",
-            "기념사진 소품",
-            "기념사진 영어",
-            "기념사진 찍는곳",
-            "김정민"
-          ],
-          "expansionSeed": "김정"
-        },
-        {
-          "id": "nate-4",
-          "keyword": "별세 향년 68세",
-          "title": "별세 향년 68세",
-          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "nate",
-          "expansions": [
-            "별세 뜻",
-            "배우 김혜숙 별세",
-            "최불암별세",
-            "박동빈별세",
-            "신구 별세",
-            "이순재 별세",
-            "박미선별세",
-            "전원주 별세"
-          ],
-          "expansionSeed": "별세"
-        },
-        {
-          "id": "nate-5",
           "keyword": "결혼의 완성",
           "title": "결혼의 완성",
           "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 100,
           "source": "nate",
           "expansions": [
             "결혼의 완성 몇부작",
@@ -470,6 +394,81 @@
             "결혼의 완성 편성표"
           ],
           "expansionSeed": "결혼의 완성"
+        },
+        {
+          "id": "nate-2",
+          "keyword": "재벌 형사 시즌2",
+          "title": "재벌 형사 시즌2",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "nate",
+          "expansions": [
+            "재벌 형사 시즌2 ott",
+            "재벌 형사 시즌2 재방송",
+            "재벌 형사 시즌2 박지현",
+            "재벌 형사 시즌2 등장인물",
+            "재벌 형사 시즌2 나무위키",
+            "재벌 형사 시즌2 시청률",
+            "재벌 형사 시즌2 재방송 시간",
+            "재벌 형사 시즌2 방영일"
+          ],
+          "expansionSeed": "재벌 형사 시즌2"
+        },
+        {
+          "id": "nate-3",
+          "keyword": "이호재 데뷔골 무승부",
+          "title": "이호재 데뷔골 무승부",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "nate",
+          "expansions": [
+            "이호재 축구선수",
+            "이호재 이적",
+            "이호재 군대",
+            "이호재 아빠",
+            "배우이호재",
+            "이호재 나무위키",
+            "포항 이호재",
+            "이호재 이적료"
+          ],
+          "expansionSeed": "이호재"
+        },
+        {
+          "id": "nate-4",
+          "keyword": "호르무즈 근접 배상해야",
+          "title": "호르무즈 근접 배상해야",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 97,
+          "source": "nate",
+          "expansions": [
+            "호르무즈 해협",
+            "호르무즈 해협 지도",
+            "호르무즈 해협 봉쇄",
+            "호르무즈 개방",
+            "이란 호르무즈",
+            "호르무즈 합의",
+            "호르무즈 협상",
+            "호르무즈 해협 개방"
+          ],
+          "expansionSeed": "호르무즈"
+        },
+        {
+          "id": "nate-5",
+          "keyword": "인터뷰하는 홍소영 병무청장",
+          "title": "인터뷰하는 홍소영 병무청장",
+          "description": "네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "nate",
+          "expansions": [
+            "인터뷰하는법",
+            "인터뷰하는 꿈",
+            "인터뷰하는 방법",
+            "인터뷰하는꿈해몽",
+            "인터뷰 하는사람",
+            "인터뷰할때",
+            "인터뷰 한국말"
+          ],
+          "expansionSeed": "인터뷰하"
         }
       ]
     },
@@ -479,10 +478,29 @@
       "items": [
         {
           "id": "zum-1",
+          "keyword": "네이버 카카오 AI",
+          "title": "네이버 카카오 AI",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 100,
+          "source": "zum",
+          "expansions": [
+            "네이버부동산",
+            "네이버지도",
+            "네이버 시계",
+            "네이버웹툰",
+            "네이버 길찾기",
+            "네이버 주가",
+            "네이버 맞춤법",
+            "네이버 날씨"
+          ],
+          "expansionSeed": "네이버"
+        },
+        {
+          "id": "zum-2",
           "keyword": "부천 광주 K리그",
           "title": "부천 광주 K리그",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 100,
+          "priority": 99,
           "source": "zum",
           "expansions": [
             "부천 광주 k리그"
@@ -490,11 +508,11 @@
           "expansionSeed": "부천 광주 K리그"
         },
         {
-          "id": "zum-2",
+          "id": "zum-3",
           "keyword": "K리그1 울산",
           "title": "K리그1 울산",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 98,
           "source": "zum",
           "expansions": [
             "2026 K리그1",
@@ -509,11 +527,11 @@
           "expansionSeed": "K리그1"
         },
         {
-          "id": "zum-3",
+          "id": "zum-4",
           "keyword": "이란 호르무즈 재개방",
           "title": "이란 호르무즈 재개방",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 97,
           "source": "zum",
           "expansions": [
             "미국 이란 전쟁",
@@ -528,11 +546,11 @@
           "expansionSeed": "이란"
         },
         {
-          "id": "zum-4",
+          "id": "zum-5",
           "keyword": "이 대통령 결혼 정책",
           "title": "이 대통령 결혼 정책",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 96,
           "source": "zum",
           "expansions": [
             "김용범 정책실장",
@@ -545,19 +563,6 @@
             "햇볕정책"
           ],
           "expansionSeed": "정책"
-        },
-        {
-          "id": "zum-5",
-          "keyword": "온열질환자 사망",
-          "title": "온열질환자 사망",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "zum",
-          "expansions": [
-            "온열질환자 사망자수",
-            "온열질환자 사망자"
-          ],
-          "expansionSeed": "온열질환자 사망"
         },
         {
           "id": "zum-6",
@@ -595,10 +600,23 @@
         },
         {
           "id": "zum-8",
+          "keyword": "온열질환자 사망",
+          "title": "온열질환자 사망",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "zum",
+          "expansions": [
+            "온열질환자 사망자수",
+            "온열질환자 사망자"
+          ],
+          "expansionSeed": "온열질환자 사망"
+        },
+        {
+          "id": "zum-9",
           "keyword": "이강인 AT마드리드",
           "title": "이강인 AT마드리드",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 93,
+          "priority": 92,
           "source": "zum",
           "expansions": [
             "이강인 at마드리드 유니폼",
@@ -607,11 +625,11 @@
           "expansionSeed": "이강인 AT마드리드"
         },
         {
-          "id": "zum-9",
+          "id": "zum-10",
           "keyword": "SK하이닉스 공장 매각",
           "title": "SK하이닉스 공장 매각",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 92,
+          "priority": 91,
           "source": "zum",
           "expansions": [
             "SK하이닉스 주가",
@@ -624,25 +642,6 @@
             "sk실트론 매각"
           ],
           "expansionSeed": "SK하이닉스"
-        },
-        {
-          "id": "zum-10",
-          "keyword": "폭염 아파트 정전",
-          "title": "폭염 아파트 정전",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 91,
-          "source": "zum",
-          "expansions": [
-            "아파트 정전",
-            "정전 신고",
-            "정전 복구",
-            "정전 뜻",
-            "당진 정전",
-            "수원 정전",
-            "원주 정전",
-            "대구 정전"
-          ],
-          "expansionSeed": "정전"
         }
       ]
     },
@@ -665,10 +664,42 @@
         },
         {
           "id": "issue-2",
+          "keyword": "황신영",
+          "title": "황신영",
+          "description": "황신영, 배에 구멍 5개 뚫고 장 수술 \"세쌍둥이 제왕절개보다 더 아파\"",
+          "priority": 99,
+          "source": "issue",
+          "expansions": [
+            "개그우먼 황신영",
+            "황신영 나무위키"
+          ],
+          "expansionSeed": "황신영"
+        },
+        {
+          "id": "issue-3",
+          "keyword": "이진호",
+          "title": "이진호",
+          "description": "'뇌출혈' 이진호, 도박·음주운전 재판 앞두고 극비리에 퇴원",
+          "priority": 98,
+          "source": "issue",
+          "expansions": [
+            "개그맨 이진호",
+            "이진호 뇌출혈",
+            "이진호 기자",
+            "이진호 보디빌더",
+            "이진화",
+            "이진환 오마카세",
+            "포포 이진화",
+            "이진호내과"
+          ],
+          "expansionSeed": "이진호"
+        },
+        {
+          "id": "issue-4",
           "keyword": "조심",
           "title": "조심",
           "description": "\"연예인 병 조심\" 리센느, 99평 숙소 이사→광고 100개 섭외 줄섰다('...",
-          "priority": 99,
+          "priority": 97,
           "source": "issue",
           "expansions": [
             "조심하다",
@@ -681,38 +712,6 @@
             "조심해"
           ],
           "expansionSeed": "조심"
-        },
-        {
-          "id": "issue-3",
-          "keyword": "최예나",
-          "title": "최예나",
-          "description": "최예나, 워터밤 새 여신 되나···선정성 No 노출 No 오로지 콘셉트...",
-          "priority": 98,
-          "source": "issue",
-          "expansions": [
-            "최예나 나무위키",
-            "최예나 캐치캐치",
-            "최예나 오빠",
-            "최예나 아이즈원",
-            "최예나 투병",
-            "최예나 병",
-            "최예나 콘서트",
-            "최예나 네모네모"
-          ],
-          "expansionSeed": "최예나"
-        },
-        {
-          "id": "issue-4",
-          "keyword": "황신영",
-          "title": "황신영",
-          "description": "황신영, 배에 구멍 5개 뚫고 장 수술 \"세쌍둥이 제왕절개보다 더 아파\"",
-          "priority": 97,
-          "source": "issue",
-          "expansions": [
-            "개그우먼 황신영",
-            "황신영 나무위키"
-          ],
-          "expansionSeed": "황신영"
         },
         {
           "id": "issue-5",
@@ -736,5 +735,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-08-08T22:56:32.692Z"
+  "updatedAt": "2026-08-08T23:25:28.602Z"
 }
