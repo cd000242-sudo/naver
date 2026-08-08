@@ -971,12 +971,14 @@ function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: So
     const contextIdeas = buildContextMindmapIdeas(profile, lane, item, peerItems);
     const clusterIdeas = buildClusterIdeas(profile, lane, item, peerItems).sort((a, b) => b.score - a.score);
 
-    // 실측 근거가 없어 비는 그룹은 아예 렌더하지 않는다(빈 섹션 노출 방지).
+    // 자리는 항상 3개로 고정한다. 비는 그룹을 여기서 걸러내면 인덱스가 밀려서
+    // 라벨과 내용이 어긋나거나(0번이 클러스터가 됨) 아예 undefined 가 된다.
+    // "빈 섹션 노출 방지"는 렌더 쪽에서 그룹별로 판단한다.
     return [
         { label: '다음 검색 의문', desc: '선택한 실시간 키워드에서 검색자가 바로 이어서 칠 만한 확장 키워드입니다.', items: semanticIdeas },
         { label: '문맥 확장 가지', desc: '같은 흐름에서 실제로 이어서 검색되는 키워드입니다.', items: contextIdeas },
         { label: '연결 이슈 클러스터', desc: '지금 함께 급등 중인 주변 검색 흐름입니다.', items: clusterIdeas },
-    ].filter((group) => group.items.length > 0);
+    ];
 }
 
 function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[] }) {
@@ -992,10 +994,20 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     const keyword = cleanLiveText(item.keyword || item.title, lane.label);
     const description = cleanLiveText(item.description || item.title, lane.description);
     const searchUrl = buildSourceSearchUrl(lane.id, keyword);
-    const strategyGroups = buildSourceStrategy(lane, item, items);
-    const primaryIdeas = (strategyGroups[0]?.items || []).slice(0, 4);
-    const questionIdeas = (strategyGroups[1]?.items || []).slice(0, 3);
-    const clusterIdeas = (strategyGroups[2]?.items || []).slice(0, 3);
+    const [semanticGroup, contextGroup, clusterGroup] = buildSourceStrategy(lane, item, items);
+    const primaryIdeas = semanticGroup.items.slice(0, 4);
+    const questionIdeas = contextGroup.items.slice(0, 3);
+    const clusterIdeas = clusterGroup.items.slice(0, 3);
+
+    // 실측 근거가 한 갈래도 없으면 빈 격자 대신 대기 상태를 보여준다.
+    if (primaryIdeas.length === 0 && questionIdeas.length === 0 && clusterIdeas.length === 0) {
+        return (
+            <aside className="source-insight-panel source-insight-panel-empty">
+                <strong>{keyword}</strong>
+                <p>아직 이 키워드에서 실측으로 이어지는 확장 검색어가 확인되지 않았습니다. 원본이 더 쌓이면 마인드맵을 표시합니다.</p>
+            </aside>
+        );
+    }
 
     return (
         <aside className="source-insight-panel source-insight-panel-rich" style={{ borderColor: lane.accent + '66' }}>
@@ -1008,10 +1020,11 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
             </div>
             <p className="source-insight-desc">{description}</p>
             <div className="source-strategy-grid" aria-label={`${keyword} 키워드 전략`}>
+                {primaryIdeas.length > 0 && (
                 <section className="source-strategy-card source-strategy-card-main">
                     <div className="source-strategy-card-head">
-                        <strong>{strategyGroups[0].label}</strong>
-                        <small>{strategyGroups[0].desc}</small>
+                        <strong>{semanticGroup.label}</strong>
+                        <small>{semanticGroup.desc}</small>
                     </div>
                     <div className="source-idea-list">
                         {primaryIdeas.map((idea) => (
@@ -1024,10 +1037,12 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                         ))}
                     </div>
                 </section>
+                )}
+                {questionIdeas.length > 0 && (
                 <section className="source-strategy-card">
                     <div className="source-strategy-card-head">
-                        <strong>{strategyGroups[1].label}</strong>
-                        <small>{strategyGroups[1].desc}</small>
+                        <strong>{contextGroup.label}</strong>
+                        <small>{contextGroup.desc}</small>
                     </div>
                     <div className="source-question-list">
                         {questionIdeas.map((idea) => (
@@ -1039,16 +1054,16 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                         ))}
                     </div>
                 </section>
+                )}
+                {clusterIdeas.length > 0 && (
                 <section className="source-strategy-card">
                     <div className="source-strategy-card-head">
-                        <strong>{strategyGroups[2].label}</strong>
-                        <small>{strategyGroups[2].desc}</small>
+                        <strong>{clusterGroup.label}</strong>
+                        <small>{clusterGroup.desc}</small>
                     </div>
                     <div className="source-cluster-core" style={{ borderColor: lane.accent, color: lane.accent }}>{keyword}</div>
                     <div className="source-cluster-list">
-                        {clusterIdeas.length === 0 ? (
-                            <p>주변 실시간 키워드가 쌓이면 내부 링크용 클러스터를 자동으로 묶습니다.</p>
-                        ) : clusterIdeas.map((idea) => (
+                        {clusterIdeas.map((idea) => (
                             <a key={idea.label} href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
                                 <span>{idea.tag}</span>
                                 <strong>{idea.label}</strong>
@@ -1056,6 +1071,7 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                         ))}
                     </div>
                 </section>
+                )}
             </div>
         </aside>
     );
