@@ -3,7 +3,17 @@
 // Invocation: claude -p --output-format json   (prompt on stdin, UTF-8)
 //   -p / --print            : non-interactive single response
 //   --output-format json    : print a JSON envelope ({ result, is_error, ... }) to stdout
-//   --dangerously-skip-permissions : never block on a permission prompt (headless safety)
+//   --permission-mode default : answer the prompt directly.
+//
+// NOT 'plan'. Measured 2026-08-08 with the real article prompt: in plan mode the CLI replies
+// with a plan ("실제 최종 JSON 산출물은 계획 승인 후 별도 턴에서 작성") and never emits the
+// JSON, so every claude generation failed while codex (which runs `exec`) worked. It exits 0
+// with is_error:false, so it surfaced as "글생성이 안 된다" rather than an error.
+//   plan        -> 143 chars, JSON parse FAILED
+//   default     -> 2,885 chars, 5 headings, JSON OK
+// Permission prompts cannot appear here anyway: -p is headless and --disallowedTools '*'
+// blocks every tool. 'default' is passed explicitly so a change to the CLI's own default
+// cannot silently put us back in a non-answering mode.
 //
 // We run in a throwaway temp cwd so CLAUDE.md auto-discovery does not inject project context.
 // We do NOT use --bare: it forces ANTHROPIC_API_KEY auth and ignores the subscription OAuth,
@@ -41,7 +51,7 @@ export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Pr
     const args = [
       '-p',
       '--output-format', 'json',
-      '--permission-mode', 'plan',
+      '--permission-mode', 'default',
       ...CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
     ];
     if (model) args.push('--model', model);
