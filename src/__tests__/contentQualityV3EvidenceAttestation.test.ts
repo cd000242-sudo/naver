@@ -166,7 +166,7 @@ describe('Content Quality V3 evidence attestation', () => {
       corpusSha256:
         'cf1721af51303263182a38f7618f5431f4534858c5a9655c33fa90c61abf33f0',
       legacyBaselineSha256:
-        'e168cb67b044439275789bf3d7b7ed98e397c5de21a66fb054815335d970d85a',
+        'abcc0fffc48a768492f0843b1668cbd345aa2e3db43cff4059c6c7de5f10faac',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
