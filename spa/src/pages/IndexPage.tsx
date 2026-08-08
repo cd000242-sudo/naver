@@ -1654,6 +1654,24 @@ function IndexPage() {
                     height: 100%;
                 }
 
+                /*
+                 * 애드센스 자동광고가 이 2열 그리드 안에 광고를 꽂으면 세 번째
+                 * 그리드 아이템이 되어 열이 밀린다 — 광고가 1열, 목록이 2열,
+                 * 마인드맵은 화면 밖으로 빠진다. 실제로 그렇게 깨진 화면이 나왔다.
+                 * 보드는 조작하는 영역이라 광고를 넣을 자리가 아니므로 여기서만 뺀다.
+                 * (근본 차단은 애드센스 콘솔의 게재위치 제외로 해야 한다)
+                 */
+                .hero-source-body > ins.adsbygoogle,
+                .hero-source-body > .google-auto-placed,
+                .home-source-body > ins.adsbygoogle,
+                .home-source-body > .google-auto-placed,
+                .hero-source-list > ins.adsbygoogle,
+                .hero-source-list > .google-auto-placed,
+                .source-insight-panel > ins.adsbygoogle,
+                .source-insight-panel > .google-auto-placed {
+                    display: none !important;
+                }
+
                 .hero-source-row,
                 .home-source-row {
                     color: inherit;
