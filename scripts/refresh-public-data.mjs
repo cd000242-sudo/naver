@@ -341,8 +341,49 @@ async function refreshSourceSignals() {
   }
 
   report.push(`  INFO     자동완성 확장 ${expansionCount}건 수집 (${lanes.length}/${LANE_COLLECTORS.length} 레인)`);
+  const carried = carryOverInsights(lanes);
+  if (carried > 0) report.push(`  INFO     이슈 브리프 ${carried}건 승계`);
   const total = lanes.reduce((sum, lane) => sum + lane.items.length, 0);
   writeSnapshot('source-signals.json', { source: 'direct-crawl', lanes }, total);
+}
+
+/**
+ * 이전 스냅샷의 이슈 브리프(item.insight)를 키워드 기준으로 물려준다.
+ *
+ * 이 크론은 15분마다 파일을 통째로 새로 쓴다. 브리프는 별도 배치가
+ * Bright Data 로 채우는데(호출 비용이 든다), 승계하지 않으면 15분마다
+ * 날아가서 사실상 화면에 안 보인다. 키워드가 그대로면 사건도 그대로이므로
+ * 그대로 물려주고, 사라진 키워드의 브리프는 자연히 버려진다.
+ *
+ * @returns {number} 승계한 건수
+ */
+function carryOverInsights(lanes) {
+  const path = join(OUT_DIR, 'source-signals.json');
+  if (!existsSync(path)) return 0;
+  let previous;
+  try {
+    previous = JSON.parse(readFileSync(path, 'utf8'));
+  } catch {
+    return 0;
+  }
+  const byKeyword = new Map();
+  for (const lane of previous.lanes || []) {
+    for (const item of lane.items || []) {
+      const key = String(item.keyword || item.title || '').trim();
+      if (key && item.insight) byKeyword.set(key, item.insight);
+    }
+  }
+  if (byKeyword.size === 0) return 0;
+
+  let carried = 0;
+  for (const lane of lanes) {
+    for (const item of lane.items || []) {
+      const key = String(item.keyword || item.title || '').trim();
+      const insight = key ? byKeyword.get(key) : undefined;
+      if (insight) { item.insight = insight; carried += 1; }
+    }
+  }
+  return carried;
 }
 
 // ---------------------------------------------------------------- 실행

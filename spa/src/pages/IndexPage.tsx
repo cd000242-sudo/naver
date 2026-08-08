@@ -26,6 +26,18 @@ type SourceSignal = {
     createdAt?: string;
     /** 네이버 자동완성 실측 확장 — 크론 스냅샷이 채워준다. 합성 확장 대체용 */
     expansions?: string[];
+    /**
+     * 이슈 브리프 — 배치가 뉴스 기사에서 뽑아 심는다(brightdata-issue-brief-batch).
+     * facts 의 문장은 전부 기사 원문 그대로다. 여기서 새로 쓰거나 합치지 않는다.
+     */
+    insight?: {
+        facts?: Array<{ text: string; sourceIndex: number }>;
+        links?: Array<{ url: string; press: string }>;
+        images?: string[];
+        press?: string[];
+        headlines?: string[];
+        collectedAt?: string;
+    };
 };
 
 type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'policy' | 'issue';
@@ -999,8 +1011,14 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     const questionIdeas = contextGroup.items.slice(0, 3);
     const clusterIdeas = clusterGroup.items.slice(0, 3);
 
+    const brief = item.insight;
+    const briefFacts = (brief?.facts || []).slice(0, 4);
+    const briefLinks = (brief?.links || []).slice(0, 3);
+    const briefImage = (brief?.images || [])[0];
+
     // 실측 근거가 한 갈래도 없으면 빈 격자 대신 대기 상태를 보여준다.
-    if (primaryIdeas.length === 0 && questionIdeas.length === 0 && clusterIdeas.length === 0) {
+    // 단, 기사 브리프가 있으면 그것만으로도 보여줄 값이 있다.
+    if (briefFacts.length === 0 && primaryIdeas.length === 0 && questionIdeas.length === 0 && clusterIdeas.length === 0) {
         return (
             <aside className="source-insight-panel source-insight-panel-empty">
                 <strong>{keyword}</strong>
@@ -1019,6 +1037,48 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                 <a href={searchUrl} target="_blank" rel="noreferrer">검색결과</a>
             </div>
             <p className="source-insight-desc">{description}</p>
+
+            {/*
+              무슨 일이 있었나 — 기사에서 뽑은 실제 정황.
+              접미사 규칙으로 만든 문구가 아니라 기사 원문 문장 그대로이고,
+              바로 아래에 출처 기사를 붙여 확인할 수 있게 한다.
+            */}
+            {briefFacts.length > 0 && (
+                <section className="source-brief" aria-label={`${keyword} 무슨 일이 있었나`}>
+                    <div className="source-brief-head">
+                        <strong>무슨 일이 있었나</strong>
+                        <small>기사에서 확인된 내용입니다</small>
+                    </div>
+                    <div className="source-brief-body">
+                        {briefImage && (
+                            <img
+                                className="source-brief-photo"
+                                src={briefImage}
+                                alt={`${keyword} 관련 보도 사진`}
+                                loading="lazy"
+                                referrerPolicy="no-referrer"
+                                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                            />
+                        )}
+                        <ul className="source-brief-facts">
+                            {briefFacts.map((fact) => (
+                                <li key={fact.text.slice(0, 40)}>{fact.text}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    {briefLinks.length > 0 && (
+                        <div className="source-brief-links">
+                            <span>공식 확인</span>
+                            {briefLinks.map((link) => (
+                                <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+                                    {link.press || '기사 원문'}
+                                </a>
+                            ))}
+                        </div>
+                    )}
+                </section>
+            )}
+
             <div className="source-strategy-grid" aria-label={`${keyword} 키워드 전략`}>
                 {primaryIdeas.length > 0 && (
                 <section className="source-strategy-card source-strategy-card-main">
@@ -1661,6 +1721,97 @@ function IndexPage() {
                  * 보드는 조작하는 영역이라 광고를 넣을 자리가 아니므로 여기서만 뺀다.
                  * (근본 차단은 애드센스 콘솔의 게재위치 제외로 해야 한다)
                  */
+                /* 이슈 브리프 — 기사에서 확인된 실제 정황 */
+                .source-brief {
+                    border: 1px solid rgba(255,255,255,0.10);
+                    border-radius: 12px;
+                    background: rgba(255,255,255,0.035);
+                    padding: 12px 14px;
+                    margin-bottom: 12px;
+                }
+                .source-brief-head {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 8px;
+                    margin-bottom: 10px;
+                    flex-wrap: wrap;
+                }
+                .source-brief-head strong {
+                    font-size: 13px;
+                    font-weight: 800;
+                    color: #f7fbff;
+                }
+                .source-brief-head small {
+                    font-size: 11px;
+                    color: rgba(255,255,255,0.52);
+                }
+                .source-brief-body {
+                    display: flex;
+                    gap: 12px;
+                    align-items: flex-start;
+                }
+                .source-brief-photo {
+                    width: 104px;
+                    height: 78px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    flex: none;
+                    background: rgba(255,255,255,0.06);
+                }
+                .source-brief-facts {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    display: grid;
+                    gap: 7px;
+                    min-width: 0;
+                }
+                .source-brief-facts li {
+                    font-size: 12.5px;
+                    line-height: 1.62;
+                    color: rgba(255,255,255,0.86);
+                    padding-left: 11px;
+                    position: relative;
+                }
+                .source-brief-facts li::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 8px;
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background: rgba(68,215,182,0.85);
+                }
+                .source-brief-links {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    flex-wrap: wrap;
+                    margin-top: 11px;
+                    padding-top: 10px;
+                    border-top: 1px solid rgba(255,255,255,0.08);
+                }
+                .source-brief-links span {
+                    font-size: 11px;
+                    font-weight: 800;
+                    color: rgba(255,255,255,0.5);
+                }
+                .source-brief-links a {
+                    font-size: 11.5px;
+                    font-weight: 700;
+                    color: #63efd0;
+                    border: 1px solid rgba(68,215,182,0.34);
+                    border-radius: 999px;
+                    padding: 3px 10px;
+                    text-decoration: none;
+                }
+
+                @media (max-width: 768px) {
+                    .source-brief-body { flex-direction: column; }
+                    .source-brief-photo { width: 100%; height: 150px; }
+                }
+
                 .hero-source-body > ins.adsbygoogle,
                 .hero-source-body > .google-auto-placed,
                 .home-source-body > ins.adsbygoogle,
