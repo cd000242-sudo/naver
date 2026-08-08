@@ -733,50 +733,10 @@ function buildClusterIdeas(profile: TopicProfile, lane: SourceLane, item: Source
         profile,
         4 - index,
     ));
-    const fallbackIdeas = profile.category === 'issue' ? [
-        makeStrategyIdea(
-            `${profile.core} 타임라인 → 공식입장 → 반응 변화`,
-            '이슈 허브',
-            '이슈형 글은 시간순 정리, 공식 확인, 반응 변화가 분리돼야 오래 읽힙니다.',
-            '타임라인 글에서 공식입장 글과 반응 분석 글로 연결',
-            profile,
-            5,
-        ),
-        makeStrategyIdea(
-            `${profile.core} 팩트체크 → 쟁점 비교 → 후속 일정`,
-            '후속 검색',
-            '추측성 글을 피하고 다음에 검색할 질문을 미리 받아 내부 순환을 만듭니다.',
-            '확인된 사실과 다음 발표 가능성을 묶는 구조',
-            profile,
-            4,
-        ),
-        makeStrategyIdea(
-            `${profile.keyword} 관련 인물·장면·반응 키워드 묶음`,
-            '확장 묶음',
-            '하나의 이슈를 인물, 장면, 반응으로 쪼개면 저경쟁 롱테일을 더 많이 확보할 수 있습니다.',
-            '관련 인물, 원인 장면, 댓글 반응을 각각 후속 글로 분리',
-            profile,
-            3,
-        ),
-    ] : [
-        makeStrategyIdea(
-            `${profile.core} 기본 이해 → ${profile.proofNeed} → 다음 행동`,
-            '허브 구조',
-            '한 글에 답을 몰아넣지 않고 입문, 근거, 행동 글로 쪼개 주제 권위를 쌓습니다.',
-            `${profile.bridgeAngle} 3단 내부 링크 구조`,
-            profile,
-            3,
-        ),
-        makeStrategyIdea(
-            `${profile.keyword} 이후 사람들이 다시 검색할 질문 묶음`,
-            '후속 검색',
-            '검색자가 다음에 칠 질문을 미리 받아 체류와 재방문을 만듭니다.',
-            `${profile.searchIntent} 다음 단계 설계`,
-            profile,
-            2,
-        ),
-    ];
-    return [...peerIdeas, ...fallbackIdeas].slice(0, 5);
+    // 합성 템플릿(fallbackIdeas)은 노출하지 않는다.
+    // profile.core 가 뉴스 제목 조각이면 "…타임라인 → 공식입장 → 반응 변화" 처럼
+    // 아무도 검색하지 않는 문자열이 키워드처럼 보인다. 실제 동시 급등 피어만 남긴다.
+    return peerIdeas.slice(0, 5);
 }
 
 function semanticBase(profile: TopicProfile): string {
@@ -946,11 +906,36 @@ function buildSemanticMindmapIdeas(profile: TopicProfile, item: SourceSignal, pe
     return uniqueSemanticIdeas(profile, candidates, 6);
 }
 
+/**
+ * 확장 검색어가 원 키워드와 실제로 같은 주제인지 판정한다.
+ *
+ * 네이버 자동완성은 앞 토큰만으로도 제안을 물어와서, "6시간 부동산 회의" 의 "6시간" 같은
+ * 시간·수량 표현에 걸리면 "6시간 수면", "진에어 6시간" 처럼 주제가 전혀 다른 결과가 섞인다.
+ * 그래서 시간·수량 토큰은 주제 앵커로 인정하지 않고, 내용 토큰이 겹칠 때만 통과시킨다.
+ */
+const TIME_QUANTITY_TOKEN = /^\d+\s*(시간|분|초|일|주|개월|달|월|년|명|개|원|위|차|번|회|%)?$/;
+
+function topicAnchors(keyword: string): string[] {
+    return String(keyword || '')
+        .split(/\s+/)
+        .map((token) => token.replace(/[^가-힣a-zA-Z0-9]/g, ''))
+        .filter((token) => token.length >= 2 && !TIME_QUANTITY_TOKEN.test(token));
+}
+
+function sharesTopicAnchor(keyword: string, expansion: string): boolean {
+    const anchors = topicAnchors(keyword);
+    // 내용 토큰이 하나도 없으면(순수 시간/수량 키워드) 판정 근거가 없으니 막지 않는다.
+    if (!anchors.length) return true;
+    const text = String(expansion || '');
+    return anchors.some((anchor) => text.includes(anchor));
+}
+
 function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
     // 1순위: 실측 확장(네이버 자동완성). 사람들이 실제로 이어서 치는 검색어라
     // 토큰 합성 확장과 달리 "이상한 조합"이 원리적으로 안 나온다.
     const expansionIdeas = uniqueList(item.expansions || [])
         .filter((expansion) => expansion !== profile.keyword)
+        .filter((expansion) => sharesTopicAnchor(profile.keyword, expansion))
         .slice(0, 4)
         .map((expansion, index) => ({
             label: expansion,
@@ -960,7 +945,6 @@ function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item:
             bias: 9 - index,
         }));
 
-    const focusedCorpus = `${profile.keyword} ${profile.core} ${profile.entities.join(' ')} ${item.description || ''}`;
     const related = peerItems
         .filter((peer) => peer.id !== item.id)
         .map((peer) => inferTopicProfile(lane, peer))
@@ -975,31 +959,10 @@ function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item:
             bias: 5 - index,
         }));
 
-    const namedEntities = uniqueList((focusedCorpus.match(/[가-힣]{2,5}/g) || [])
-        .filter((token) => !['검색어', '검색량', '문서수', '실시간', '후보', '뉴스', '정리', '확인', '대한민국'].includes(token))
-        .slice(0, 6));
-    const entityIdeas = namedEntities
-        .filter((entity) => !profile.keyword.includes(entity) || entity.length >= 3)
-        .slice(0, 3)
-        .map((entity, index) => ({
-            label: `${entity} 관련 쟁점`,
-            tag: '인물·기관',
-            reason: '본문에서 별도 소제목으로 분리할 수 있는 연결 대상입니다.',
-            title: `${entity}가 이 흐름에서 왜 검색되는지 분리`,
-            bias: 3 - index,
-        }));
-
-    const fallback = buildClusterIdeas(profile, lane, item, peerItems)
-        .map((idea) => ({
-            label: idea.label.replace(/.*?→\s*/, ''),
-            tag: idea.tag,
-            reason: idea.reason,
-            title: idea.title,
-            bias: 1,
-        }));
-
-    // 실측 확장이 있으면 합성 아이디어(related/entity/fallback)는 뒷순위로 밀린다.
-    return uniqueSemanticIdeas(profile, [...expansionIdeas, ...related, ...entityIdeas, ...fallback], 5);
+    // 실측(자동완성 확장)과 실제 동시 급등 피어만 노출한다.
+    // entityIdeas("○○ 관련 쟁점")·fallback 은 토큰을 조합해 만든 문자열이라
+    // 실제 검색 수요의 근거가 없다 — 개수를 채우려고 가짜를 섞지 않는다.
+    return uniqueSemanticIdeas(profile, [...expansionIdeas, ...related], 5);
 }
 
 function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyGroup[] {
@@ -1008,11 +971,12 @@ function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: So
     const contextIdeas = buildContextMindmapIdeas(profile, lane, item, peerItems);
     const clusterIdeas = buildClusterIdeas(profile, lane, item, peerItems).sort((a, b) => b.score - a.score);
 
+    // 실측 근거가 없어 비는 그룹은 아예 렌더하지 않는다(빈 섹션 노출 방지).
     return [
         { label: '다음 검색 의문', desc: '선택한 실시간 키워드에서 검색자가 바로 이어서 칠 만한 확장 키워드입니다.', items: semanticIdeas },
-        { label: '문맥 확장 가지', desc: '같은 흐름의 인물·기관·후속 쟁점을 묶어 자동화 글감으로 바로 넘길 수 있게 정리합니다.', items: contextIdeas },
-        { label: '연결 이슈 클러스터', desc: '주변 실시간 흐름을 후속 글감으로 연결해 큰 키워드까지 권위를 쌓습니다.', items: clusterIdeas },
-    ];
+        { label: '문맥 확장 가지', desc: '같은 흐름에서 실제로 이어서 검색되는 키워드입니다.', items: contextIdeas },
+        { label: '연결 이슈 클러스터', desc: '지금 함께 급등 중인 주변 검색 흐름입니다.', items: clusterIdeas },
+    ].filter((group) => group.items.length > 0);
 }
 
 function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[] }) {
