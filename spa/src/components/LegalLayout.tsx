@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { ReactNode } from 'react';
+import { gradient, whiteA } from '../styles/tokens';
 
 interface Props {
     title: string;
@@ -21,10 +22,10 @@ function LegalLayout({ title, effective, children }: Props) {
             <div style={{ textAlign: 'center', marginBottom: 60 }}>
                 <h1 style={{
                     fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 900, marginBottom: 12,
-                    background: 'linear-gradient(135deg, #FFD700, #FFA500)',
+                    background: gradient.goldBright,
                     WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                 }}>{title}</h1>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 14 }}>{effective}</p>
+                <p style={{ color: whiteA(0.5), fontSize: 14 }}>{effective}</p>
             </div>
 
             <div style={{

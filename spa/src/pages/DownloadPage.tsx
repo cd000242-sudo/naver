@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import ZoomableImage from '../components/ZoomableImage';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
+import { gradient, onGold, radius } from '../styles/tokens';
 
 /**
  * 다운로드 — payment-page/download.html 마이그.
@@ -257,7 +258,7 @@ function LeadCapture() {
                 <button
                     onClick={submit}
                     disabled={submitting}
-                    style={{ padding: '10px 20px', background: 'linear-gradient(135deg, #c9a84c, #d4a012)', color: '#1a1a2e', border: 'none', borderRadius: 8, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}
+                    style={{ padding: '10px 20px', background: gradient.goldBrass, color: onGold.navy, border: 'none', borderRadius: radius.sm, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}
                 >{btnLabel}</button>
             </div>
             {msg && <div style={{ marginTop: 10, fontSize: 13, color: msg.color }}>{msg.text}</div>}

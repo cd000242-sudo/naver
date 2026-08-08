@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
+import { color, gradient, onGold, whiteA } from '../styles/tokens';
 
 /**
  * 계좌이체 결제 — payment-page/bank-order.html 마이그.
@@ -181,7 +182,7 @@ function BankOrderPage() {
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '140px 20px 80px', position: 'relative', zIndex: 1 }}>
             <div style={{ background: 'rgba(18,18,26,0.7)', backdropFilter: 'blur(20px)', border: '1px solid rgba(201,168,76,0.18)', borderRadius: 24, padding: 'clamp(24px, 4vw, 40px)' }}>
                 <div style={{ textAlign: 'center', marginBottom: 32 }}>
-                    <h1 style={{ fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: 900, marginBottom: 8, background: 'linear-gradient(135deg, #FFD700, #FFA500)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>💰 계좌이체 결제</h1>
+                    <h1 style={{ fontSize: 'clamp(24px, 4vw, 32px)', fontWeight: 900, marginBottom: 8, background: gradient.goldBright, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>💰 계좌이체 결제</h1>
                     <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>올인원 기간권 선택 → 정보 입력 → 입금 → 올인원 라이선스 발급</p>
                 </div>
 
@@ -194,8 +195,8 @@ function BankOrderPage() {
                                 onClick={() => onSelectTab(k)}
                                 style={{
                                     padding: '10px 20px', borderRadius: 10,
-                                    background: tab === k ? 'linear-gradient(135deg, #FFD700, #FFA500)' : 'rgba(255,255,255,0.05)',
-                                    color: tab === k ? '#000' : '#fff',
+                                    background: tab === k ? gradient.goldBright : whiteA(0.05),
+                                    color: tab === k ? onGold.black : color.textPrimary,
                                     border: '1px solid rgba(201,168,76,0.3)',
                                     fontWeight: tab === k ? 800 : 500,
                                     cursor: 'pointer', fontSize: 14,
@@ -268,8 +269,8 @@ function BankOrderPage() {
                     disabled={!selected || submitting}
                     style={{
                         width: '100%', padding: '18px', marginTop: 24,
-                        background: selected && !submitting ? 'linear-gradient(135deg, #FFD700, #FFA500)' : 'rgba(255,255,255,0.08)',
-                        color: selected && !submitting ? '#000' : 'rgba(255,255,255,0.4)',
+                        background: selected && !submitting ? gradient.goldBright : whiteA(0.08),
+                        color: selected && !submitting ? onGold.black : whiteA(0.4),
                         border: 'none', borderRadius: 14,
                         fontSize: 16, fontWeight: 800,
                         cursor: selected && !submitting ? 'pointer' : 'not-allowed',
@@ -291,7 +292,7 @@ function Step({ n, label, children }: { n: number; label: string; children: Reac
     return (
         <div style={{ marginBottom: 28 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-                <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>{n}</div>
+                <div style={{ width: 28, height: 28, borderRadius: '50%', background: gradient.goldBright, color: onGold.black, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>{n}</div>
                 <div style={{ fontSize: 16, fontWeight: 700 }}>{label}</div>
             </div>
             {children}
@@ -348,7 +349,7 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                         <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>올인원 라이선스 코드</div>
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                             <input readOnly value={code} style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 10, padding: '14px 16px', color: '#c9a84c', fontFamily: 'monospace', fontSize: 16, fontWeight: 800, letterSpacing: 0.5 }} />
-                            <button onClick={() => copyLicense(code)} style={{ background: 'linear-gradient(135deg, #c9a84c, #e8d48b)', color: '#0a0a0f', border: 'none', borderRadius: 10, padding: '14px 18px', fontWeight: 800, cursor: 'pointer', fontSize: 14, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
+                            <button onClick={() => copyLicense(code)} style={{ background: `linear-gradient(135deg, ${color.goldBrass}, #e8d48b)`, color: onGold.ink, border: 'none', borderRadius: 10, padding: '14px 18px', fontWeight: 800, cursor: 'pointer', fontSize: 14, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
                         </div>
                         <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 14, lineHeight: 1.6 }}>
                             이 코드는 입력하신 이메일로도 발송되었습니다.<br />
