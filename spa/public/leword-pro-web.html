@@ -4971,6 +4971,45 @@
         : '실측 황금키워드 스냅샷을 불러오지 못했습니다. 임시 조합 키워드는 황금키워드로 표시하지 않습니다. 원인 코드: ' + reason + ' · 보드 새로고침 또는 Pro 재로그인을 시도하세요.';
       log('LIVE 황금키워드 스냅샷 unavailable [' + reason + ']: ' + (payload.error || 'server unavailable'));
     }
+
+    // 정적 스냅샷 폴백 — 서버(24h 워커)를 폐지하고 주기 배치로 전환하기 위한 다리.
+    // 배치가 /data/live-golden-board.json 을 발행해 두면, API 서버가 없거나 죽어도 보드가 비지 않는다.
+    // 실시간인 척하지 않는다: 언제 만든 스냅샷인지 화면에 명시한다.
+    const STATIC_GOLDEN_SNAPSHOT_URL = '/data/live-golden-board.json';
+    function formatSnapshotAge(updatedAt) {
+      const t = Date.parse(String(updatedAt || ''));
+      if (!Number.isFinite(t)) return '';
+      const kst = new Date(t + 9 * 60 * 60 * 1000);
+      const pad = function (n) { return String(n).padStart(2, '0'); };
+      return kst.getUTCFullYear() + '-' + pad(kst.getUTCMonth() + 1) + '-' + pad(kst.getUTCDate())
+        + ' ' + pad(kst.getUTCHours()) + ':' + pad(kst.getUTCMinutes()) + ' KST';
+    }
+    async function tryRenderStaticGoldenSnapshot() {
+      try {
+        const res = await fetch(STATIC_GOLDEN_SNAPSHOT_URL + '?ts=' + Date.now(), {
+          cache: 'no-store',
+          signal: AbortSignal.timeout(5000),
+        });
+        if (!res.ok) return false;
+        const payload = await res.json();
+        const snapshot = normalizeProGoldenSnapshot(payload);
+        if (!snapshot) return false;
+        const items = proGoldenBoardItems(snapshot);
+        if (!items.length) return false;
+        renderProGoldenBoard(snapshot);
+        const stamp = formatSnapshotAge(snapshot.updatedAt || payload.updatedAt);
+        qs('goldenState').textContent = '배치 스냅샷';
+        qs('goldenNotice').textContent = '실시간 서버 대신 최근 배치 스냅샷을 표시합니다'
+          + (stamp ? ' (' + stamp + ' 기준)' : '')
+          + '. 실측값이며 임시 조합 키워드는 포함하지 않습니다.';
+        log('LIVE 황금키워드 정적 스냅샷 사용: ' + items.length + '개' + (stamp ? ' / ' + stamp : ''));
+        return true;
+      } catch (err) {
+        // 스냅샷이 아직 없거나(404) 네트워크 실패 — 기존 폴백으로 넘긴다.
+        log('정적 스냅샷 폴백 불가: ' + ((err && err.message) || 'unknown'));
+        return false;
+      }
+    }
     function isServerUnavailableError(message) {
       const text = String(message || '');
       if (/로그인 API 서버에 연결할 수 없습니다|API 서버에 연결할 수 없습니다|연결할 수 없습니다|서버 전원|도메인 연결|배포 연결|오프라인 Pro 세션|로컬\/사용자 API 폴백/i.test(text)) return true;
@@ -9207,16 +9246,19 @@
           log('LIVE golden authenticated public fallback failed: ' + authenticatedPublicError);
         }
         if (isOfflineProSession() || isServerUnavailableError(authenticatedPublicError)) {
+          if (await tryRenderStaticGoldenSnapshot()) return;
           renderClientGoldenFallback(new Error(authenticatedPublicError || 'offline pro fallback'));
           return;
         }
         if (isAuthErrorMessage(authenticatedPublicError)) {
           if (await refreshProSessionFromRememberedCredentials('live-golden-authenticated-public')) return loadGoldenBoard();
           markProSessionAuthPending(authenticatedPublicError);
+          if (await tryRenderStaticGoldenSnapshot()) return;
           renderClientGoldenFallback(new Error(authenticatedPublicError || 'auth pending pro fallback'));
           return;
         }
         markProSessionAuthPending('Pro board snapshot needs recheck.');
+        if (await tryRenderStaticGoldenSnapshot()) return;
         renderClientGoldenFallback(new Error(authenticatedPublicError || 'pro snapshot fallback'));
         return;
       }
@@ -9234,6 +9276,7 @@
         renderPublicGoldenBoard(payload, { proFallback: proSnapshotFallback && hasActiveProSession() });
         log('LIVE golden public board refreshed: ' + (payload.boardCount || 0) + ' items');
       } catch (err) {
+        if (await tryRenderStaticGoldenSnapshot()) return;
         renderClientGoldenFallback(err);
       }
     }
