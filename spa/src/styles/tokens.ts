@@ -8,13 +8,15 @@
  * 프로젝트 규칙상 CSS 클래스를 쓰지 않으므로, CSS 파일이 아니라 인라인 스타일에
  * 그대로 꽂아 쓰는 평범한 TS 상수로 둔다.
  *
- * ── 알려진 분기 (의도적으로 아직 통일하지 않음) ────────────────────────────
- * 골드 그라디언트가 두 갈래로 갈려 있다. 통일은 화면이 바뀌는 결정이라
- * 별도 단계에서 사장님 확인을 받고 진행한다. 그때까지는 두 갈래를 각각
- * 이름으로 붙잡아 둬서, 최소한 "어디가 어느 갈래인지"는 추적 가능하게 한다.
- *   - goldBright: #FFD700 → #FFA500 (10곳: 결제·요금제·주문조회 등 돈 받는 화면)
- *   - goldBrass : #c9a84c → #d4a012 (5곳: 404·다운로드·뮤직플레이어 등)
- * global.css 의 --gold-primary/--gold-light 는 goldBrass 쪽이다.
+ * ── 골드 램프 ──────────────────────────────────────────────────────────────
+ * 예전엔 두 갈래(#FFD700→#FFA500 / #c9a84c→#d4a012)와 3-stop 변형이 섞여 있었다.
+ * gradient.goldBright 하나로 모았다. 사용처가 더 많았고, 결제·요금제처럼 돈이
+ * 오가는 화면이 이미 이 갈래여서 바꿀 때 위험이 가장 작았다.
+ * 골드 위 글자색도 4종(#000/#0a0a0f/#1a1a2e/#1a0a2e)에서 onGold.black 하나로 모았다.
+ *
+ * 남겨 둔 예외: ChatbotsPage 의 카테고리 액센트(gold/blue/green/purple/rose)는
+ * 5색이 한 세트로 도는 색 코딩이라 CTA 골드와 역할이 다르다. 여기 골드만 밝게
+ * 올리면 나머지 4색과 채도가 어긋나므로 그대로 둔다.
  */
 
 /** 흰색 반투명 — 유리 표면·경계선에 쓰는 이 사이트의 주력 패턴. */
@@ -28,10 +30,10 @@ export const mintA = (alpha: number) => `rgba(68, 215, 182, ${alpha})`;
 
 export const color = {
     // ── 골드 (브랜드) ────────────────────────────────────────────────
-    goldBright: '#FFD700',      // 52회. 최다 사용 골드
-    goldBrightEnd: '#FFA500',   // 14회. goldBright 그라디언트의 끝점
-    goldBrass: '#c9a84c',       // 13회. global.css --gold-primary
-    goldBrassEnd: '#d4a012',    // 7회.  global.css --gold-light
+    goldBright: '#FFD700',      // 주 브랜드 골드. CTA·제목 그라디언트의 시작점
+    goldBrightEnd: '#FFA500',   // goldBright 그라디언트의 끝점
+    goldBrass: '#c9a84c',       // global.css --gold-primary (.section-tag 배지가 사용)
+    goldBrassEnd: '#d4a012',    // global.css --gold-light
     goldSoft: '#f4c95d',        // 30회. 보드·차트에서 쓰는 밝은 황동
     goldDeep: '#b8860b',        // global.css --gold-dark
 
@@ -56,20 +58,13 @@ export const color = {
 } as const;
 
 export const gradient = {
-    /** 결제·요금제 계열 주 CTA. #FFD700 → #FFA500 (10곳) */
+    /** 주 CTA·강조 제목의 골드. 사이트 전체가 이 하나를 쓴다. */
     goldBright: `linear-gradient(135deg, ${color.goldBright}, ${color.goldBrightEnd})`,
-    /** 404·다운로드 계열 CTA. #c9a84c → #d4a012 (5곳) */
-    goldBrass: `linear-gradient(135deg, ${color.goldBrass}, ${color.goldBrassEnd})`,
 } as const;
 
-/**
- * 골드 배경 위 글자색. 지금 4종(#000 / #0a0a0f / #1a1a2e / #1a0a2e)이 섞여 있다.
- * 통일 대상이지만 화면이 바뀌므로 현 상태를 그대로 이름만 붙여 둔다.
- */
+/** 골드 배경 위 글자색. */
 export const onGold = {
-    black: '#000',      // 결제·요금제·주문조회
-    ink: '#0a0a0f',     // 라이선스 복사 버튼
-    navy: '#1a1a2e',    // 다운로드·404
+    black: '#000',
 } as const;
 
 /**

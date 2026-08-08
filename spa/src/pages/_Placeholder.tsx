@@ -15,7 +15,7 @@ function Placeholder({ title, emoji, desc, fromFile }: Props) {
         <div style={{ minHeight: '100vh', padding: '120px 24px 60px', background: color.bgDark, color: color.textPrimary }}>
             <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
                 <div style={{ fontSize: 80, marginBottom: 16 }}>{emoji}</div>
-                <h1 style={{ fontSize: 48, fontWeight: 900, marginBottom: 12, background: gradient.goldBrass, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                <h1 style={{ fontSize: 48, fontWeight: 900, marginBottom: 12, background: gradient.goldBright, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                     {title}
                 </h1>
                 {desc && <p style={{ fontSize: 18, color: color.textMuted, marginBottom: 24 }}>{desc}</p>}

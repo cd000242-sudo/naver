@@ -258,7 +258,7 @@ function LeadCapture() {
                 <button
                     onClick={submit}
                     disabled={submitting}
-                    style={{ padding: '10px 20px', background: gradient.goldBrass, color: onGold.navy, border: 'none', borderRadius: radius.sm, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}
+                    style={{ padding: '10px 20px', background: gradient.goldBright, color: onGold.black, border: 'none', borderRadius: radius.sm, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}
                 >{btnLabel}</button>
             </div>
             {msg && <div style={{ marginTop: 10, fontSize: 13, color: msg.color }}>{msg.text}</div>}

@@ -349,7 +349,7 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                         <div style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginBottom: 6 }}>올인원 라이선스 코드</div>
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                             <input readOnly value={code} style={{ flex: 1, background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(201,168,76,0.3)', borderRadius: 10, padding: '14px 16px', color: '#c9a84c', fontFamily: 'monospace', fontSize: 16, fontWeight: 800, letterSpacing: 0.5 }} />
-                            <button onClick={() => copyLicense(code)} style={{ background: `linear-gradient(135deg, ${color.goldBrass}, #e8d48b)`, color: onGold.ink, border: 'none', borderRadius: 10, padding: '14px 18px', fontWeight: 800, cursor: 'pointer', fontSize: 14, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
+                            <button onClick={() => copyLicense(code)} style={{ background: gradient.goldBright, color: onGold.black, border: 'none', borderRadius: 10, padding: '14px 18px', fontWeight: 800, cursor: 'pointer', fontSize: 14, whiteSpace: 'nowrap' }}>{licCopyLabel}</button>
                         </div>
                         <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginTop: 14, lineHeight: 1.6 }}>
                             이 코드는 입력하신 이메일로도 발송되었습니다.<br />

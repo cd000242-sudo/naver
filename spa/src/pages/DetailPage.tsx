@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
-import { color as token } from '../styles/tokens';
+import { color as token, gradient } from '../styles/tokens';
 
 /**
  * Better Life Naver 상세 — payment-page/detail.html (2143줄) 마이그.
@@ -17,7 +17,7 @@ const C = {
     bgSection: token.bgSection,
     textPrimary: token.textPrimary,
     textSecondary: token.textMuted,
-    gradGold: 'linear-gradient(135deg, #FFD700, #FFA500, #FF6B00)',
+    gradGold: gradient.goldBright,
     gradFire: 'linear-gradient(135deg, #f12711, #f5af19)',
 };
 
