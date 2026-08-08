@@ -24,6 +24,43 @@ function textResponse(payload: unknown, ok = true) {
   } as unknown as Response;
 }
 
+/**
+ * Cache key used by siteOps (siteOps.ts: HOME_NOTICE_CACHE_KEY). Mirrored here so the outage
+ * tests can seed a legacy cache. Must stay in sync — a wrong key makes the seeded cache
+ * invisible and the promotion test passes without exercising anything.
+ */
+const HOME_NOTICE_CACHE_KEY = 'leaderspro.homeNotices.cache.v2';
+
+type NoticeRoute = 'secure' | 'snapshot' | 'legacy';
+
+/**
+ * Route a fetch mock by URL instead of by call order.
+ *
+ * The outage path is a 3-step fallback (cache -> snapshot -> GAS), so a sequential
+ * mockResolvedValueOnce chain silently passes when a step is skipped: the queue simply runs
+ * out and later fetches resolve to undefined. That is exactly how the previous version of the
+ * outage test kept "passing" after 58cf6224 added the GAS step. Routing by URL makes both the
+ * order and the target explicit.
+ */
+function routedFetch(handlers: Record<NoticeRoute, () => Response>) {
+  const calls: NoticeRoute[] = [];
+  const classify = (url: string): NoticeRoute => {
+    if (url.startsWith(GAS_URL)) return 'legacy';
+    if (url.startsWith(LEWORD_API_BASE)) return 'secure';
+    return 'snapshot';
+  };
+  const fetchMock = vi.fn(async (input: unknown) => {
+    const route = classify(String(input));
+    calls.push(route);
+    return handlers[route]();
+  });
+  return {
+    fetchMock,
+    order: () => calls.slice(),
+    count: (route: NoticeRoute) => calls.filter((entry) => entry === route).length,
+  };
+}
+
 describe('secure home notices', () => {
   beforeEach(() => {
     localStorage.clear();
@@ -84,19 +121,78 @@ describe('secure home notices', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 
-  it('never resurrects legacy notices during a secure API outage', async () => {
-    const fetchMock = vi.fn()
-      .mockResolvedValueOnce(jsonResponse({ ok: true, notices: null }))
-      .mockResolvedValueOnce(jsonResponse({
+  it('never promotes a cached legacy notice to the secure slot during an outage', async () => {
+    // 원래 이 파일이 지키던 보안 계약. 관리자가 secure 쪽에서 내리거나 고친 공지가
+    // 레거시 캐시를 통해 되살아나면 안 된다 — 캐시는 source 가 일치할 때만 읽힌다.
+    const routes = routedFetch({
+      secure: () => { throw new Error('secure API unavailable'); },
+      snapshot: () => jsonResponse({ items: [] }),
+      legacy: () => jsonResponse({ success: true, notices: [] }),
+    });
+    vi.stubGlobal('fetch', routes.fetchMock);
+
+    // 레거시로 채워진 캐시를 심어둔다.
+    localStorage.setItem(HOME_NOTICE_CACHE_KEY, JSON.stringify({
+      source: 'legacy',
+      notices: [{ id: 'legacy-1', badge: 'tip', date: '2026.07.01', title: '기존 공지', summary: '이전 데이터', body: '이전 본문' }],
+    }));
+
+    // 캐시에 '기존 공지'가 들어 있는데도 비어서 나와야 한다. 승격됐다면 스냅샷·GAS 를
+    // 부르지 않고 바로 '기존 공지'를 반환했을 것이다.
+    const notices = await fetchHomeNotices(3);
+    expect(notices).toEqual([]);
+    expect(routes.count('snapshot')).toBe(1);
+    expect(routes.count('legacy')).toBe(1);
+    // 시드가 실제로 읽히는 키인지 확인 — 키가 어긋나면 이 테스트는 아무것도 검증하지 않는다.
+    expect(localStorage.getItem(HOME_NOTICE_CACHE_KEY)).toContain('기존 공지');
+  });
+
+  it('falls back cache -> snapshot -> GAS during a secure API outage', async () => {
+    // [2026-08-07 58cf6224] 서버 다운 시 스냅샷도 404(서버 미러)이고 캐시는 재방문자에게만
+    // 있어서, 첫 방문자는 공지 0건 + N배지 0 이었다. 서버와 독립적으로 살아있는 GAS 를
+    // 폴백 마지막 단계로 넣었다. 이 테스트가 그 순서를 계약으로 고정한다.
+    const routes = routedFetch({
+      secure: () => { throw new Error('secure API unavailable'); },
+      snapshot: () => jsonResponse({ items: [] }),
+      legacy: () => jsonResponse({
         success: true,
         notices: [{ id: 'legacy-1', badge: 'tip', date: '2026.07.01', title: '기존 공지', preview: '이전 데이터', body: '이전 본문' }],
-      }))
-      .mockRejectedValueOnce(new Error('secure API unavailable'));
-    vi.stubGlobal('fetch', fetchMock);
+      }),
+    });
+    vi.stubGlobal('fetch', routes.fetchMock);
 
-    await expect(fetchHomeNotices(3)).resolves.toHaveLength(1);
+    await expect(fetchHomeNotices(3)).resolves.toEqual([
+      expect.objectContaining({ title: '기존 공지' }),
+    ]);
+    expect(routes.order()).toEqual(['secure', 'snapshot', 'legacy']);
+  });
+
+  it('stops at the snapshot when it has notices (does not reach GAS)', async () => {
+    const routes = routedFetch({
+      secure: () => { throw new Error('secure API unavailable'); },
+      snapshot: () => jsonResponse({
+        items: [{ id: 'snap-1', badge: 'tip', date: '2026.08.01', title: '스냅샷 공지', preview: '미러', body: '본문' }],
+      }),
+      legacy: () => jsonResponse({ success: true, notices: [] }),
+    });
+    vi.stubGlobal('fetch', routes.fetchMock);
+
+    await expect(fetchHomeNotices(3)).resolves.toEqual([
+      expect.objectContaining({ title: '스냅샷 공지' }),
+    ]);
+    expect(routes.count('legacy')).toBe(0);
+  });
+
+  it('renders nothing rather than throwing when every source is down', async () => {
+    const routes = routedFetch({
+      secure: () => { throw new Error('down'); },
+      snapshot: () => { throw new Error('down'); },
+      legacy: () => { throw new Error('down'); },
+    });
+    vi.stubGlobal('fetch', routes.fetchMock);
+
     await expect(fetchHomeNotices(3)).resolves.toEqual([]);
-    expect(fetchMock).toHaveBeenCalledTimes(3);
+    expect(routes.order()).toEqual(['secure', 'snapshot', 'legacy']);
   });
 
   it('loads only approved home income proofs and removes private or unsafe fields', async () => {
