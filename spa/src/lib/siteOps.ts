@@ -179,7 +179,10 @@ export type DownloadProductContent = {
 let siteContentPromise: Promise<SiteContent | null> | null = null;
 const SITE_CONTENT_CACHE_KEY = 'leaderspro.siteContent.cache.v2';
 const SITE_CONTENT_CACHE_TTL_MS = 60 * 1000;
-const SITE_CONTENT_FETCH_TIMEOUT_MS = 2500;
+// Apps Script can take several seconds to wake from a cold start.  A short
+// timeout made the admin editor report a false load failure even though the
+// content API was healthy.
+const SITE_CONTENT_FETCH_TIMEOUT_MS = 10000;
 
 function readCachedSiteContent(maxAgeMs = SITE_CONTENT_CACHE_TTL_MS): SiteContent | null {
     try {
