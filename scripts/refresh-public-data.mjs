@@ -44,6 +44,9 @@ const NEWS_FETCH_CONCURRENCY = Math.min(3, Math.max(1, Number(process.env.NEWS_F
 // signal when an article has not been matched yet. This is not Bright Data.
 const NEWS_MAX_QUERIES_PER_RUN = Math.min(60, Math.max(1, Number(process.env.NEWS_MAX_QUERIES_PER_RUN || 60) || 60));
 const INSIGHT_REFRESH_MINUTES = Math.min(240, Math.max(15, Number(process.env.INSIGHT_REFRESH_MINUTES || 60) || 60));
+const PLAYWRIGHT_ARTICLE_EXTRACTION = String(process.env.PLAYWRIGHT_ARTICLE_EXTRACTION || '1').trim() !== '0';
+const PLAYWRIGHT_ARTICLE_MAX_VISITS = Math.min(60, Math.max(1, Number(process.env.PLAYWRIGHT_ARTICLE_MAX_VISITS || 60) || 60));
+const PLAYWRIGHT_PAGE_TIMEOUT_MS = Math.min(20_000, Math.max(5_000, Number(process.env.PLAYWRIGHT_PAGE_TIMEOUT_MS || 12_000) || 12_000));
 const LLM_BRIEF_MAX_ITEMS = Math.min(20, Math.max(1, Number(process.env.LLM_BRIEF_MAX_ITEMS || 10) || 10));
 const KEYWORD_BRIEF_LLM_API_URL = String(process.env.KEYWORD_BRIEF_LLM_API_URL || '').trim();
 const KEYWORD_BRIEF_LLM_API_KEY = String(process.env.KEYWORD_BRIEF_LLM_API_KEY || '').trim();
@@ -497,6 +500,91 @@ async function fetchNaverNews(keyword) {
   return parseNaverNewsResults(res.text).slice(0, NEWS_PER_KEYWORD);
 }
 
+async function launchArticleBrowser() {
+  if (!PLAYWRIGHT_ARTICLE_EXTRACTION) return null;
+  try {
+    const { chromium } = await import('playwright');
+    const browser = await chromium.launch({ headless: true, timeout: PLAYWRIGHT_PAGE_TIMEOUT_MS });
+    const context = await browser.newContext({
+      locale: 'ko-KR',
+      viewport: { width: 1280, height: 900 },
+    });
+    return { browser, context };
+  } catch (error) {
+    report.push(`  WARN     Playwright article extraction unavailable: ${String(error?.message || error)}`);
+    return null;
+  }
+}
+
+function cleanArticleExcerpt(value, fallback) {
+  const text = decodeHtml(value)
+    .replace(/(?:무단\s*전재|재배포\s*금지)[\s\S]*$/u, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return (text || cleanNewsValue(fallback, 420)).slice(0, 420).trim();
+}
+
+async function extractFirstArticleWithPlaywright(context, keyword, fallbackArticle) {
+  let page = null;
+  try {
+    page = await Promise.race([
+      context.newPage(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('article page creation timeout')), PLAYWRIGHT_PAGE_TIMEOUT_MS)),
+    ]);
+    page.setDefaultTimeout(5_000);
+    page.setDefaultNavigationTimeout(PLAYWRIGHT_PAGE_TIMEOUT_MS);
+    const searchUrl = 'https://search.naver.com/search.naver?where=news&query=' + encodeURIComponent(keyword);
+    await page.goto(searchUrl, { waitUntil: 'commit', timeout: PLAYWRIGHT_PAGE_TIMEOUT_MS });
+    const firstResultUrl = await page.locator('a.news_tit').first().getAttribute('href').catch(() => null);
+    const articleUrl = safeHttpUrl(firstResultUrl) || safeHttpUrl(fallbackArticle?.url);
+    if (!articleUrl) return { article: fallbackArticle, extracted: false };
+
+    await page.goto(articleUrl, { waitUntil: 'commit', timeout: PLAYWRIGHT_PAGE_TIMEOUT_MS });
+    await page.waitForTimeout(450);
+    const extracted = await page.evaluate(() => {
+      const meta = (name) => document.querySelector(`meta[property="${name}"], meta[name="${name}"]`)?.getAttribute('content') || '';
+      const selectors = [
+        '#dic_area', '#articleBodyContents', '#articeBody', '#newsct_article',
+        '.article_body', '.article-body', '.news-view-body', '.article-view', 'article', 'main',
+      ];
+      const candidates = selectors
+        .map((selector) => document.querySelector(selector))
+        .filter(Boolean)
+        .map((node) => {
+          const clone = node.cloneNode(true);
+          clone.querySelectorAll('script, style, noscript, iframe, nav, header, footer, button, .ad, .advertisement').forEach((child) => child.remove());
+          return clone.innerText || clone.textContent || '';
+        })
+        .map((text) => text.replace(/\s+/g, ' ').trim())
+        .filter((text) => text.length >= 80)
+        .sort((a, b) => b.length - a.length);
+      const rawImage = meta('og:image') || document.querySelector('article img[src], main img[src], img[src]')?.getAttribute('src') || '';
+      let image = rawImage;
+      try { image = rawImage ? new URL(rawImage, location.href).toString() : ''; } catch { image = ''; }
+      return {
+        title: meta('og:title') || document.title || '',
+        description: meta('description') || '',
+        text: candidates[0] || '',
+        image,
+      };
+    });
+    return {
+      article: {
+        ...fallbackArticle,
+        title: cleanNewsValue(extracted.title || fallbackArticle?.title, 180) || fallbackArticle?.title,
+        excerpt: cleanArticleExcerpt(extracted.text || extracted.description, fallbackArticle?.excerpt),
+        image: safeHttpUrl(extracted.image) || fallbackArticle?.image || '',
+        url: articleUrl,
+      },
+      extracted: Boolean(extracted.text || extracted.description || extracted.image),
+    };
+  } catch {
+    return { article: fallbackArticle, extracted: false };
+  } finally {
+    await page?.close().catch(() => {});
+  }
+}
+
 async function mapWithConcurrency(values, limit, worker) {
   const results = new Array(values.length);
   let cursor = 0;
@@ -528,7 +616,9 @@ function sourceGroundedTitles(keyword, laneId, headlines) {
 
 function needsInsightRefresh(item, now = Date.now()) {
   const collectedAt = Date.parse(String(item.insight?.collectedAt || ''));
-  return !Number.isFinite(collectedAt) || now - collectedAt >= INSIGHT_REFRESH_MINUTES * 60_000;
+  return item.insight?.extraction !== 'playwright'
+    || !Number.isFinite(collectedAt)
+    || now - collectedAt >= INSIGHT_REFRESH_MINUTES * 60_000;
 }
 
 function selectInsightTargets(lanes) {
@@ -554,37 +644,60 @@ function selectInsightTargets(lanes) {
 async function enrichSourceInsights(lanes) {
   const targets = selectInsightTargets(lanes);
   const collectedAt = new Date().toISOString();
-  const results = await mapWithConcurrency(targets, NEWS_FETCH_CONCURRENCY, async ({ lane, item }) => {
-    const newsArticles = await fetchNaverNews(item.keyword);
-    const officialUrl = safeHttpUrl(item.officialUrl);
-    const officialArticle = officialUrl
-      ? [{ title: item.title || item.keyword, excerpt: item.description || item.keyword, url: officialUrl, press: item.sourceLabel || '대한민국 정책브리핑', image: '' }]
-      : [];
-    const articles = [...officialArticle, ...newsArticles.filter((article) => article.url !== officialUrl)];
-    if (articles.length === 0) return null;
-    const headlines = articles.map((article) => article.title);
-    return {
-      lane,
-      item,
-      insight: {
-        titles: sourceGroundedTitles(item.keyword, lane.id, headlines),
-        facts: articles.map((article, sourceIndex) => ({ text: article.excerpt, sourceIndex })),
-        links: articles.map((article) => ({ url: article.url, press: article.press })),
-        images: [...new Set(articles.map((article) => article.image).filter(Boolean))].slice(0, 1),
-        press: [...new Set(articles.map((article) => article.press))],
-        headlines,
-        collectedAt,
-      },
-    };
-  });
+  const articleBrowser = targets.length > 0 ? await launchArticleBrowser() : null;
+  let browserVisits = 0;
+  let browserExtracted = 0;
+  try {
+    const results = await mapWithConcurrency(targets, NEWS_FETCH_CONCURRENCY, async ({ lane, item }) => {
+      const newsArticles = await fetchNaverNews(item.keyword);
+      const officialUrl = safeHttpUrl(item.officialUrl);
+      const officialArticle = officialUrl
+        ? [{ title: item.title || item.keyword, excerpt: item.description || item.keyword, url: officialUrl, press: item.sourceLabel || '대한민국 정책브리핑', image: '' }]
+        : [];
+      const firstNews = newsArticles[0];
+      let primaryArticle = firstNews;
+      let playwrightExtracted = false;
+      if (articleBrowser && browserVisits < PLAYWRIGHT_ARTICLE_MAX_VISITS) {
+        browserVisits += 1;
+        const result = await extractFirstArticleWithPlaywright(articleBrowser.context, item.keyword, firstNews || officialArticle[0]);
+        if (result.article) {
+          primaryArticle = result.article;
+          playwrightExtracted = result.extracted;
+          if (playwrightExtracted) browserExtracted += 1;
+        }
+      }
+      const articles = [...officialArticle, ...(primaryArticle ? [primaryArticle] : []), ...newsArticles.slice(firstNews ? 1 : 0)]
+        .filter((article, index, all) => article?.url && all.findIndex((candidate) => candidate?.url === article.url) === index);
+      if (articles.length === 0) return null;
+      const headlines = articles.map((article) => article.title);
+      return {
+        lane,
+        item,
+        insight: {
+          titles: sourceGroundedTitles(item.keyword, lane.id, headlines),
+          facts: articles.map((article, sourceIndex) => ({ text: article.excerpt, sourceIndex })),
+          links: articles.map((article) => ({ url: article.url, press: article.press })),
+          images: [...new Set(articles.map((article) => article.image).filter(Boolean))].slice(0, 1),
+          press: [...new Set(articles.map((article) => article.press))],
+          headlines,
+          extraction: playwrightExtracted ? 'playwright' : 'search-card',
+          collectedAt,
+        },
+      };
+    });
 
-  let count = 0;
-  for (const result of results) {
-    if (!result?.insight) continue;
-    result.item.insight = result.insight;
-    count += 1;
+    let count = 0;
+    for (const result of results) {
+      if (!result?.insight) continue;
+      result.item.insight = result.insight;
+      count += 1;
+    }
+    if (browserExtracted > 0) report.push(`  INFO     Playwright article body/image extraction ${browserExtracted} items`);
+    return count;
+  } finally {
+    await articleBrowser?.context?.close().catch(() => {});
+    await articleBrowser?.browser?.close().catch(() => {});
   }
-  return count;
 }
 
 function parseJsonObject(value) {

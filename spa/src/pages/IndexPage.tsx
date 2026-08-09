@@ -39,6 +39,7 @@ type SourceSignal = {
         images?: string[];
         press?: string[];
         headlines?: string[];
+        extraction?: 'playwright' | 'search-card';
         collectedAt?: string;
     };
 };

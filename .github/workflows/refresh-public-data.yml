@@ -22,13 +22,23 @@ jobs:
   refresh:
     name: Collect and commit snapshots
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright article collector
+        run: |
+          npm ci --omit=dev --ignore-scripts
+          npx playwright install --with-deps chromium
 
       - name: Refresh snapshots
         env:
@@ -44,6 +54,8 @@ jobs:
           NEWS_FETCH_CONCURRENCY: ${{ vars.NEWS_FETCH_CONCURRENCY || '1' }}
           NEWS_MAX_QUERIES_PER_RUN: ${{ vars.NEWS_MAX_QUERIES_PER_RUN || '60' }}
           INSIGHT_REFRESH_MINUTES: ${{ vars.INSIGHT_REFRESH_MINUTES || '60' }}
+          PLAYWRIGHT_ARTICLE_EXTRACTION: '1'
+          PLAYWRIGHT_ARTICLE_MAX_VISITS: ${{ vars.PLAYWRIGHT_ARTICLE_MAX_VISITS || '60' }}
           LLM_BRIEF_MAX_ITEMS: ${{ vars.LLM_BRIEF_MAX_ITEMS || '10' }}
           # A self-hosted/open-source OpenAI-compatible endpoint takes precedence.
           # Gemini is used only when its secret is configured. Both are optional;
