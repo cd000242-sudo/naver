@@ -2162,8 +2162,24 @@
             target.style.color = isError ? '#fecaca' : '#cbd5e1';
         }
 
+        // Vultr 폐지 후 base 만 자리표시자로 바꿔 두었는데, 호출 자체는 그대로 나가서
+        // 관리자 화면이 열릴 때마다 404 가 쌓였다. 사장님 눈에는 "어드민이 안 열린다" 로
+        // 보인다. 주소만 막을 게 아니라 호출을 끊고 이유를 화면에 말해 줘야 한다.
+        const LEWORD_API_RETIRED = LEWORD_API_BASE.indexOf('serverless-pending') !== -1;
+        const LEWORD_API_RETIRED_MESSAGE = '이 기능은 24시간 서버(Vultr) 폐지와 함께 잠시 꺼져 있습니다. 서버리스 전환 후 다시 켭니다.';
+
         function lewordApiUrl(path) {
             return LEWORD_API_BASE + path;
+        }
+
+        /**
+         * 은퇴한 API 는 네트워크를 타지 않고 즉시 실패시킨다.
+         * 호출부는 이미 try/catch 로 에러 메시지를 화면에 뿌리므로,
+         * 404 대신 사람이 읽는 사유가 뜬다.
+         */
+        function lewordApiFetch(path, init) {
+            if (LEWORD_API_RETIRED) return Promise.reject(new Error(LEWORD_API_RETIRED_MESSAGE));
+            return lewordApiFetch((path), init);
         }
 
         function readLewordAdminSession() {
@@ -2206,7 +2222,7 @@
         async function requestLewordAdminSession(userId, password, options = {}) {
             if (!userId || !password) return null;
             try {
-                const res = await fetch(lewordApiUrl('/v1/web/session'), {
+                const res = await lewordApiFetch(('/v1/web/session'), {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ userId, password, adminLogin: true }),
@@ -2302,7 +2318,7 @@
             const target = document.getElementById('leword-download-status');
             if (!target) return;
             try {
-                const res = await fetch(lewordApiUrl('/v1/downloads'), { cache: 'no-store' });
+                const res = await lewordApiFetch(('/v1/downloads'), { cache: 'no-store' });
                 const payload = await res.json();
                 if (!res.ok) throw new Error(payload.message || payload.error || 'Download status lookup failed');
                 const products = payload.products || {};
@@ -2735,7 +2751,7 @@
             const container = document.getElementById('notices-table-body');
             container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>';
             try {
-                const response = await fetch(lewordApiUrl('/v1/public/home-notices?ts=' + Date.now()), { cache: 'no-store' });
+                const response = await lewordApiFetch(('/v1/public/home-notices?ts=' + Date.now()), { cache: 'no-store' });
                 const payload = await response.json().catch(() => ({}));
                 if (!response.ok || payload.ok !== true) throw new Error(payload.message || '서버 공지 조회 실패');
                 if (loadGeneration !== homeNoticeLoadGeneration || homeNoticeEditorState.saving) return;
@@ -2794,7 +2810,7 @@
             homeNoticeEditorState.saving = true;
             setNoticeMutationDisabled(true);
             try {
-                const response = await fetch(lewordApiUrl('/v1/admin/home-notices'), {
+                const response = await lewordApiFetch(('/v1/admin/home-notices'), {
                     method: 'PUT',
                     headers: { Authorization: 'Bearer ' + session.accessToken, 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -5358,7 +5374,7 @@
             keywordBriefingEditorState.loadingRemote = true;
             keywordBriefingStatus('서버 최신 브리핑을 확인하는 중입니다.', 'info');
             try {
-                const response = await fetch(lewordApiUrl('/v1/public/home-keyword-briefing?ts=' + Date.now()), { cache: 'no-store' });
+                const response = await lewordApiFetch(('/v1/public/home-keyword-briefing?ts=' + Date.now()), { cache: 'no-store' });
                 const payload = await response.json().catch(() => ({}));
                 if (!response.ok || payload.ok !== true) throw new Error(payload.message || '서버 브리핑 조회 실패');
                 if (generation !== keywordBriefingLoadGeneration || keywordBriefingEditorState.dirty) return;
@@ -5462,7 +5478,7 @@
             syncKeywordBriefingPublishButton();
             keywordBriefingStatus('검수본을 안전한 서버 저장소에 반영하는 중입니다.', 'info');
             try {
-                const response = await fetch(lewordApiUrl('/v1/admin/home-keyword-briefing'), {
+                const response = await lewordApiFetch(('/v1/admin/home-keyword-briefing'), {
                     method: 'PUT',
                     headers: {
                         Authorization: 'Bearer ' + session.accessToken,
