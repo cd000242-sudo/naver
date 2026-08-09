@@ -1470,13 +1470,13 @@
                                 </div>
                             </div>
                             <div class="editor-field full" style="padding:14px;border:1px solid rgba(68,215,182,.22);border-radius:12px;background:rgba(68,215,182,.045);">
-                                <label>LEWORD API 서버 저장 권한 · 로그인 시 자동 연결</label>
-                                <div id="keyword-briefing-api-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;align-items:center;">
+                                <label>저장 권한 상태</label>
+                                <div id="keyword-briefing-api-inputs" style="display:none;grid-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;align-items:center;">
                                     <input id="keyword-briefing-api-id" type="text" placeholder="LEWORD API 서버 관리자 ID" autocomplete="off">
                                     <input id="keyword-briefing-api-password" type="password" placeholder="LEWORD API 서버 관리자 비밀번호" autocomplete="new-password">
                                     <button class="btn" type="button" id="keyword-briefing-api-connect">저장 권한 연결</button>
                                 </div>
-                                <p class="editor-help" id="keyword-briefing-api-status">관리자 페이지 로그인 아이디/비밀번호로 서버 저장권한을 자동 연결합니다. 비밀번호는 저장하지 않고, 연결이 풀렸을 때만 다시 입력하면 됩니다.</p>
+                                <p class="editor-help" id="keyword-briefing-api-status">로그인하면 저장 권한이 자동으로 연결됩니다. 따로 입력하지 않아도 됩니다.</p>
                             </div>
                             <div class="editor-field full">
                                 <label>검수용 표 — 키워드 / 검색량 / 블로그 문서수 / 기회지수</label>
@@ -1984,12 +1984,12 @@
                 <div style="margin-bottom:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-glass);border-radius:10px;">
                     <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
                         <div>
-                            <strong style="display:block;margin-bottom:4px;">LEWORD API 서버 저장 권한 · 로그인 시 자동 연결</strong>
-                            <span id="home-ops-api-status" style="font-size:.85rem;color:var(--text-secondary);">관리자 페이지 로그인 아이디/비밀번호로 서버 저장권한을 자동 연결합니다. 비밀번호는 저장하지 않습니다.</span>
+                            <strong style="display:block;margin-bottom:4px;">저장 권한 상태</strong>
+                            <span id="home-ops-api-status" style="font-size:.85rem;color:var(--text-secondary);">로그인하면 저장 권한이 자동으로 연결됩니다. 따로 입력하지 않아도 됩니다.</span>
                         </div>
                         <span id="home-notice-revision" style="padding:5px 9px;border:1px solid rgba(68,215,182,.35);border-radius:999px;color:#44d7b6;font-size:.78rem;font-weight:800;">notice revision 0</span>
                     </div>
-                    <div class="home-ops-admin-grid" id="home-ops-api-inputs">
+                    <div class="home-ops-admin-grid" id="home-ops-api-inputs" style="display:none;">
                         <input id="home-ops-api-id" type="text" placeholder="LEWORD API 서버 관리자 ID" autocomplete="off" style="padding:10px;border-radius:8px;">
                         <input id="home-ops-api-password" type="password" placeholder="LEWORD API 서버 관리자 비밀번호" autocomplete="new-password" style="padding:10px;border-radius:8px;">
                         <button class="btn" type="button" onclick="connectHomeOpsApi()">저장 권한 연결</button>
@@ -2276,11 +2276,24 @@
         async function requestLewordAdminSession(userId, password, options = {}) {
             if (!userId || !password) return null;
             try {
-                const res = await lewordApiFetch(('/v1/web/session'), {
+                // 세션 발급은 GAS 로그인이 이미 처리한다(admin-password-login 이
+                // 관리자 토큰을 세션으로 넘긴다). 폐지된 Vultr 를 부를 이유가 없다.
+                const gas = await fetch(GAS_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userId, password, adminLogin: true }),
-                });
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'admin-password-login', loginId: userId, password }),
+                }).then(r => r.json()).catch(() => ({}));
+                const res = {
+                    ok: Boolean(gas && gas.ok && gas.session),
+                    status: gas && gas.ok ? 200 : 401,
+                    json: async () => ({
+                        session: gas && gas.session
+                            ? { accessToken: gas.session.token, userId: gas.session.userId,
+                                tier: gas.session.tier, expiresAt: gas.session.expiresAt, source: 'gas' }
+                            : null,
+                        message: (gas && gas.error) || '',
+                    }),
+                };
                 const payload = await res.json().catch(() => ({}));
                 if (!res.ok || !payload.session || !payload.session.accessToken || payload.session.tier !== 'admin') {
                     if (res.status === 401 || res.status === 403) {
@@ -2372,7 +2385,9 @@
             const target = document.getElementById('leword-download-status');
             if (!target) return;
             try {
-                const res = await lewordApiFetch(('/v1/downloads'), { cache: 'no-store' });
+                // 설치 파일은 GitHub Releases 가 원본이고 사이트가 직접 링크한다.
+                // 옛 서버 목록 API 는 없어졌으므로 여기서는 조용히 비운다.
+                const res = { ok: false, status: 410, json: async () => ({}) };
                 const payload = await res.json();
                 if (!res.ok) throw new Error(payload.message || payload.error || 'Download status lookup failed');
                 const products = payload.products || {};
@@ -5498,12 +5513,14 @@
             keywordBriefingEditorState.loadingRemote = true;
             keywordBriefingStatus('서버 최신 브리핑을 확인하는 중입니다.', 'info');
             try {
-                const response = await lewordApiFetch(('/v1/public/home-keyword-briefing?ts=' + Date.now()), { cache: 'no-store' });
+                // 황금 브리핑은 이제 크론이 실측으로 만들어 정적 스냅샷에 발행한다.
+                // 폐지된 Vultr 대신 그 파일을 읽는다.
+                const response = await fetch('https://leaderspro.kr/data/home-keyword-briefing-seed.json?ts=' + Date.now(), { cache: 'no-store' });
                 const payload = await response.json().catch(() => ({}));
-                if (!response.ok || payload.ok !== true) throw new Error(payload.message || '서버 브리핑 조회 실패');
+                if (!response.ok) throw new Error('브리핑 스냅샷 조회 실패');
                 if (generation !== keywordBriefingLoadGeneration || keywordBriefingEditorState.dirty) return;
-                if (payload.briefing && Array.isArray(payload.briefing.rows) && payload.briefing.rows.length) {
-                    setKeywordBriefingEditor(payload.briefing);
+                if (payload && Array.isArray(payload.rows) && payload.rows.length) {
+                    setKeywordBriefingEditor(payload);
                     keywordBriefingEditorState.loadedRemote = true;
                     return;
                 }
@@ -5602,17 +5619,14 @@
             syncKeywordBriefingPublishButton();
             keywordBriefingStatus('검수본을 안전한 서버 저장소에 반영하는 중입니다.', 'info');
             try {
-                const response = await lewordApiFetch(('/v1/admin/home-keyword-briefing'), {
-                    method: 'PUT',
-                    headers: {
-                        Authorization: 'Bearer ' + session.accessToken,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        expectedRevision: keywordBriefingEditorState.revision,
-                        briefing
-                    })
+                // 저장은 GAS site-content 안에 둔다. 폐지된 Vultr 대신이며
+                // 크론이 덮어쓰지 않는 '운영자가 고정한 값' 자리다.
+                const saved = await gasAdminCall('site-content-save', {
+                    content: { keywordBriefing: briefing }
                 });
+                const response = { ok: !(saved && saved.ok === false), status: 200,
+                    json: async () => ({ ok: true, briefing }) };
+                if (saved && saved.ok === false) throw new Error(saved.error || '브리핑 저장 실패');
                 const payload = await response.json().catch(() => ({}));
                 if (response.status === 401 || response.status === 403) {
                     saveLewordAdminSession(null);
