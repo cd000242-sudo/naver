@@ -23,7 +23,6 @@ const TermsPage = lazy(() => import('./pages/TermsPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const BankOrderPage = lazy(() => import('./pages/BankOrderPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
-const AdminPage = lazy(() => import('./pages/AdminPage'));
 
 function PageFallback() {
     return (
@@ -31,6 +30,13 @@ function PageFallback() {
             불러오는 중...
         </div>
     );
+}
+
+function LegacyAdminRedirect() {
+    useEffect(() => {
+        window.location.replace('/admin/');
+    }, []);
+    return <PageFallback />;
 }
 
 function App() {
@@ -43,8 +49,8 @@ function App() {
     return (
         <Suspense fallback={<PageFallback />}>
             <Routes>
-                <Route path="/admin/*" element={<AdminPage />} />
-                <Route path="/admin.html" element={<AdminPage />} />
+                <Route path="/admin/*" element={<LegacyAdminRedirect />} />
+                <Route path="/admin.html" element={<LegacyAdminRedirect />} />
                 <Route element={<Layout />}>
                     <Route path="/" element={<IndexPage />} />
                     <Route path="/index.html" element={<IndexPage />} />

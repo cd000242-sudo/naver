@@ -75,6 +75,9 @@ jobs:
           #    운영자는 로컬 관리자 패널(바탕화면)을 사용한다. 상위 admin/ 과 payment-page/admin/
           #    양쪽 복사분을 모두 제거한다.
           rm -rf _site/admin _site/admin.html
+          # Publish the familiar UI only after the outdated copied panels are
+          # removed.  This source has no browser token and no Vultr endpoint.
+          cp -r admin _site/admin
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

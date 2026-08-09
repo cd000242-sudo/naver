@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleusercontent.com https://141.164.59.17.sslip.io; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleusercontent.com; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <title>Leaders Pro — Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -2099,18 +2099,57 @@
     <script src="/admin/structured-editor-tools.js"></script>
     <script>
         // ===== CONFIG =====
-        // Auth: SHA-256 hashed credentials (never store plaintext)
-        const ADMIN_ID_HASH = '340ecd3d8edb927ef26c6d0703fabd15612b7d8a5be2241719b619975836d5e7'; // hashed
-        const ADMIN_PW_HASH = '39cc994b55f33b94f5b8f2d99507b40e155792b1d1e9cb0595a22c30b0e9e7c5'; // hashed
+        // Credentials and the administrator token are deliberately never put
+        // in this public file.  The GAS backend issues a short-lived opaque
+        // session after the normal administrator ID/password login.
+        const ADMIN_ID_HASH = '';
+        const ADMIN_PW_HASH = '';
         const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-        const ADMIN_TOKEN = 'qkrtjdgus2021645';
+        const ADMIN_TOKEN = '';
+        const ADMIN_SESSION_KEY = 'leaderspro.admin.session.v1';
+
+        function readAdminSession() {
+            try {
+                const session = JSON.parse(sessionStorage.getItem(ADMIN_SESSION_KEY) || 'null');
+                return session && session.token && Number(session.expiresAt) > Date.now() ? session : null;
+            } catch (err) {
+                return null;
+            }
+        }
+
+        function writeAdminSession(session) {
+            if (!session || !session.token) return;
+            sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({
+                token: session.token,
+                expiresAt: Date.now() + Math.max(60, Number(session.expiresIn || 0)) * 1000,
+            }));
+        }
+
+        // Keep every existing GAS button in this legacy UI, but inject the
+        // short-lived server session instead of the old browser-side token.
+        const legacyPanelFetch = window.fetch.bind(window);
+        window.fetch = function secureLegacyPanelFetch(input, init) {
+            const url = typeof input === 'string' ? input : (input && input.url) || '';
+            if (!url.startsWith(GAS_URL) || !init || typeof init.body !== 'string') return legacyPanelFetch(input, init);
+            try {
+                const payload = JSON.parse(init.body);
+                const session = readAdminSession();
+                if (session && session.token) payload.adminSessionToken = session.token;
+                return legacyPanelFetch(input, { ...init, body: JSON.stringify(payload) });
+            } catch (err) {
+                return legacyPanelFetch(input, init);
+            }
+        };
 
         let allCodes = [];
         let codesPage = 1;
         let ordersPage = 1;
         let currentAnalyticsPeriod = 'today';
         const PAGE_SIZE = 20;
-        const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
+        // Vultr is retired.  Keep the old UI controls visible, but never send
+        // requests to the retired host while the Bright Data job wiring is
+        // moved to the serverless workflow.
+        const LEWORD_API_BASE = '/__leword-serverless-pending__';
         const LEWORD_ADMIN_SESSION_KEY = 'leword_api_admin_session';
         let lewordApiAdminSession = null;
         let lewordAdminSessionLastError = '';
@@ -2443,7 +2482,7 @@
         }
 
         // Auto-login check
-        if (sessionStorage.getItem('admin_auth') === '1') {
+        if (false && sessionStorage.getItem('admin_auth') === '1') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('dashboard').classList.add('active');
             const existingServerSession = readLewordAdminSession();
@@ -2458,6 +2497,79 @@
             }
             setTimeout(() => switchTab('notices'), 100);
         }
+
+        function openLegacyDashboard() {
+            sessionStorage.setItem('admin_auth', '1');
+            sessionStorage.setItem('lp_admin_logged_in', '1');
+            localStorage.setItem('lp_analytics_exclude', '1');
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard').classList.add('active');
+            switchTab('notices');
+        }
+
+        // This replaces the old client-side SHA-256 comparison.  Only GAS
+        // validates the password and only the returned opaque session is kept
+        // for the current browser tab.
+        async function handleLogin(e) {
+            e.preventDefault();
+            const id = document.getElementById('login-id').value.trim();
+            const passwordField = document.getElementById('login-pw');
+            const password = passwordField.value;
+            const error = document.getElementById('login-error');
+            try {
+                const response = await legacyPanelFetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'admin-password-login', loginId: id, password }),
+                });
+                const payload = await response.json();
+                if (!response.ok || !(payload.ok || payload.success) || !payload.session || !payload.session.token) {
+                    throw new Error(payload.error || payload.message || '아이디 또는 비밀번호가 올바르지 않습니다.');
+                }
+                writeAdminSession(payload.session);
+                openLegacyDashboard();
+            } catch (err) {
+                error.textContent = err && err.message ? err.message : '로그인에 실패했습니다.';
+                error.classList.add('visible');
+                setTimeout(() => error.classList.remove('visible'), 3500);
+            } finally {
+                passwordField.value = '';
+            }
+        }
+
+        function handleLogout() {
+            const session = readAdminSession();
+            sessionStorage.removeItem('admin_auth');
+            sessionStorage.removeItem('lp_admin_logged_in');
+            sessionStorage.removeItem(ADMIN_SESSION_KEY);
+            saveLewordAdminSession(null);
+            if (session && session.token) {
+                legacyPanelFetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'admin-logout', adminSessionToken: session.token }),
+                }).catch(() => {});
+            }
+            location.reload();
+        }
+
+        async function restoreLegacyAdminSession() {
+            const session = readAdminSession();
+            if (!session) return;
+            try {
+                const response = await legacyPanelFetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'admin-session-status', adminSessionToken: session.token }),
+                });
+                const payload = await response.json();
+                if (payload && payload.valid === true) openLegacyDashboard();
+                else sessionStorage.removeItem(ADMIN_SESSION_KEY);
+            } catch (err) {
+                sessionStorage.removeItem(ADMIN_SESSION_KEY);
+            }
+        }
+        void restoreLegacyAdminSession();
 
         // ===== TAB SWITCHING =====
         function switchTab(tabId) {
@@ -6469,6 +6581,77 @@
                 }
             } catch (err) {
                 showToast('❌ 네트워크 오류: ' + err.message);
+            }
+        }
+
+        // ===== SERVERLESS HOME NOTICE BRIDGE =====
+        // The original notice editor UI is retained.  Its former Vultr
+        // snapshot endpoints are replaced with the existing GAS actions.
+        async function loadNotices() {
+            if (homeNoticeEditorState.saving) return;
+            const container = document.getElementById('notices-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록을 불러오는 중…</div>';
+            try {
+                const response = await fetch(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' });
+                const payload = await response.json();
+                const items = Array.isArray(payload.notices) ? payload.notices : [];
+                homeNoticeEditorState = {
+                    revision: 0,
+                    notices: items.map(normalizeAdminNotice).filter(item => item.title),
+                    saving: false,
+                    source: 'gas'
+                };
+                renderAdminNoticeList();
+                homeOpsApiStatus('GAS 공지 저장소에 연결되었습니다.', false);
+            } catch (err) {
+                container.innerHTML = `<div style="padding:24px;text-align:center;color:#ff3b5c;">공지 목록을 불러오지 못했습니다: ${escapeHtml_(err.message || err)}</div>`;
+            }
+        }
+
+        async function submitNotice() {
+            const id = document.getElementById('notice-edit-id').value;
+            const bodyText = plainNoticeText(document.getElementById('notice-body').value, 8000);
+            const notice = {
+                id: id || undefined,
+                badge: document.getElementById('notice-badge').value,
+                date: document.getElementById('notice-date').value.trim(),
+                title: plainNoticeText(document.getElementById('notice-title').value, 200),
+                preview: plainNoticeText(document.getElementById('notice-preview').value, 300) || bodyText.replace(/\s+/g, ' ').slice(0, 300),
+                body: bodyText
+            };
+            if (!notice.title || !notice.body) { showToast('제목과 본문은 필수입니다.'); return; }
+            try {
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: id ? 'update-notice' : 'submit-notice', ...notice })
+                });
+                const payload = await response.json();
+                if (!(payload.ok || payload.success)) throw new Error(payload.error || payload.message || '공지 저장에 실패했습니다.');
+                showToast(id ? '홈 공지를 수정했습니다.' : '홈 공지를 발행했습니다.');
+                resetNoticeForm();
+                await loadNotices();
+            } catch (err) {
+                showToast('공지 저장 실패: ' + (err.message || err));
+            }
+        }
+
+        async function deleteNotice(encodedId) {
+            const id = decodeURIComponent(encodedId);
+            if (!id || !confirm('이 공지를 삭제할까요?')) return;
+            try {
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'delete-notice', id })
+                });
+                const payload = await response.json();
+                if (!(payload.ok || payload.success)) throw new Error(payload.error || payload.message || '공지 삭제에 실패했습니다.');
+                showToast('홈 공지를 삭제했습니다.');
+                resetNoticeForm();
+                await loadNotices();
+            } catch (err) {
+                showToast('공지 삭제 실패: ' + (err.message || err));
             }
         }
 
