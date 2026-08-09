@@ -310,11 +310,59 @@ async function collectOfficialPolicyBriefings() {
   return rows;
 }
 
+async function collectOfficialPolicyBriefingsWithPlaywright() {
+  const articleBrowser = await launchArticleBrowser();
+  if (!articleBrowser) return [];
+  let page = null;
+  try {
+    page = await articleBrowser.context.newPage();
+    page.setDefaultTimeout(5_000);
+    page.setDefaultNavigationTimeout(PLAYWRIGHT_PAGE_TIMEOUT_MS);
+    await page.goto('https://www.korea.kr/briefing/pressReleaseList.do', {
+      waitUntil: 'commit',
+      timeout: PLAYWRIGHT_PAGE_TIMEOUT_MS,
+    });
+    await page.waitForTimeout(600);
+    const rows = await page.locator('a[href*="pressReleaseView"]').evaluateAll((links) => links
+      .map((link) => ({ href: link.href, title: (link.textContent || '').replace(/\s+/g, ' ').trim() }))
+      .filter((row) => row.href && row.title.length >= 6 && row.title.length <= 120)
+      .slice(0, 20));
+    const seen = new Set();
+    return rows
+      .filter((row) => {
+        const key = row.title.replace(/\s+/g, ' ');
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .slice(0, 10)
+      .map((row, index) => ({
+        rank: index + 1,
+        keyword: row.title,
+        context: `대한민국 정책브리핑 공식 발표 · ${row.title}`,
+        officialUrl: row.href,
+        sourceLabel: '대한민국 정책브리핑',
+      }));
+  } catch (error) {
+    report.push(`  WARN     정책 Playwright 수집 실패: ${String(error?.message || error)}`);
+    return [];
+  } finally {
+    await page?.close().catch(() => {});
+    await articleBrowser.context.close().catch(() => {});
+    await articleBrowser.browser.close().catch(() => {});
+  }
+}
+
 async function collectPolicy() {
   // 복지서비스 공공데이터 — 문장 조각이 아니라 제도명 자체가 온다.
   const key = String(process.env.WELFARE_API_KEY || '').trim();
   const officialRows = await collectOfficialPolicyBriefings();
   if (officialRows.length > 0) return officialRows;
+  const browserRows = await collectOfficialPolicyBriefingsWithPlaywright();
+  if (browserRows.length > 0) {
+    report.push(`  INFO     정책 Playwright 원본 수집 ${browserRows.length}건`);
+    return browserRows;
+  }
   if (!key) {
     report.push('  WARN     정책 레인 — WELFARE_API_KEY 미설정, 건너뜀');
     return [];
