@@ -378,33 +378,53 @@ async function collectWelfareServices() {
     return [];
   }
   const url = 'https://apis.data.go.kr/B554287/NationalWelfareInformationsV001/NationalWelfarelistV001'
-    + `?serviceKey=${encodeServiceKey(key)}&callTp=L&pageNo=1&numOfRows=30&srchKeyCode=003&orderBy=popular`;
+    // 이 API 는 Accept 헤더를 무시하고 기본 XML 을 돌려준다. _type=json 이 있어야
+    // JSON 이 온다(로그에 <?xml ...><wantedList> 가 찍혀서 확인됐다).
+    + `?serviceKey=${encodeServiceKey(key)}&callTp=L&pageNo=1&numOfRows=30&srchKeyCode=003&orderBy=popular&_type=json`;
   const res = await get(url, { headers: { Accept: 'application/json' } });
   if (!res.ok) {
     report.push(`  WARN     정책 복지 API HTTP ${res.status}`);
     return [];
   }
-  let parsed;
-  try {
-    parsed = JSON.parse(res.text);
-  } catch {
-    // 실패를 조용히 삼키면 "왜 0건인지" 를 영영 모른다. 실제로 그래서 오래 방치됐다.
-    report.push(`  WARN     정책 복지 API 응답 파싱 실패: ${res.text.slice(0, 80)}`);
-    return [];
+
+  const body = String(res.text || '').trim();
+  let rows = [];
+  if (body.startsWith('{')) {
+    let parsed;
+    try {
+      parsed = JSON.parse(body);
+    } catch {
+      // 실패를 조용히 삼키면 "왜 0건인지" 를 영영 모른다. 실제로 그래서 오래 방치됐다.
+      report.push(`  WARN     정책 복지 API 응답 파싱 실패: ${body.slice(0, 80)}`);
+      return [];
+    }
+    const apiError = parsed?.OpenAPI_ServiceResponse?.cmmMsgHeader;
+    if (apiError) {
+      report.push(`  WARN     정책 복지 API 오류: ${apiError.returnAuthMsg || apiError.errMsg}`);
+      return [];
+    }
+    const list = parsed.servList || parsed?.wantedList?.servList || [];
+    rows = list.map((row) => String(row.servNm || '').trim());
+  } else {
+    // _type=json 을 무시하고 XML 로 오는 경우가 있다. 파서를 새로 들이는 대신
+    // 필요한 제도명 태그만 꺼낸다 — 여기서 필요한 건 servNm 하나뿐이다.
+    const xmlError = body.match(/<returnAuthMsg>([^<]+)<\/returnAuthMsg>/)
+      || body.match(/<errMsg>([^<]+)<\/errMsg>/);
+    if (xmlError) {
+      report.push(`  WARN     정책 복지 API 오류: ${xmlError[1]}`);
+      return [];
+    }
+    rows = [...body.matchAll(/<servNm>([\s\S]*?)<\/servNm>/g)]
+      .map((m) => decodeHtml(m[1]).replace(/<!\[CDATA\[|\]\]>/g, '').trim());
   }
-  const apiError = parsed?.OpenAPI_ServiceResponse?.cmmMsgHeader;
-  if (apiError) {
-    report.push(`  WARN     정책 복지 API 오류: ${apiError.returnAuthMsg || apiError.errMsg}`);
-    return [];
-  }
-  const list = parsed.servList || parsed?.wantedList?.servList || [];
-  const rows = list
-    .map((row) => String(row.servNm || '').replace(/\s+/g, ' ').trim())
+
+  const out = rows
+    .map((name) => name.replace(/\s+/g, ' ').trim())
     .filter(Boolean)
     .slice(0, 10)
     .map((keyword, index) => ({ rank: index + 1, keyword }));
-  if (rows.length === 0) report.push('  WARN     정책 복지 API 응답에 servList 없음');
-  return rows;
+  if (out.length === 0) report.push('  WARN     정책 복지 API 응답에 제도명 없음');
+  return out;
 }
 
 async function collectPolicy() {
