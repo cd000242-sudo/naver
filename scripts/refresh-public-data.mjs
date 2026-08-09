@@ -202,6 +202,87 @@ async function collectNateEntIssues() {
   return rows;
 }
 
+function cleanIssueHeadline(raw) {
+  return decodeHtml(raw)
+    .replace(/\s+[가-힣]{2,5}\s+기자\s*(?:[·・|]\s*)?\d+\s*(?:분|시간)\s*전\s*$/u, '')
+    .replace(/\s*[·・|]\s*\d+\s*(?:분|시간)\s*전\s*$/u, '')
+    .replace(/\[[^\]]{1,32}\]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function extractIssueKeyword(title) {
+  const clean = cleanIssueHeadline(title);
+  if (!clean) return '';
+
+  // Keep an exact, useful headline when an unambiguous topic cannot be
+  // determined. A complete headline is much safer than a fabricated one-word
+  // "keyword" such as "배우", "결혼", or "10년".
+  const withoutLeadQuote = clean
+    .replace(/^[“"'‘][^”"'’]{2,42}[”"'’]\s*/u, '')
+    .replace(/^(?:배우|가수|방송인|개그맨|아이돌)\s+/u, '')
+    .trim();
+  const subject = withoutLeadQuote.split(/[,…]/u)[0].replace(/\s+/g, ' ').trim();
+  const event = clean.match(/결혼|웨딩|열애|동거|프로포즈|임신|출산|컴백|시구|하차|출연|공개|이별/u)?.[0] || '';
+
+  if (subject.includes('♥') && subject.length >= 3 && subject.length <= 32) {
+    return `${subject.replace(/♥/g, ' ').replace(/\s+/g, ' ')} ${event || '커플'}`.trim();
+  }
+  if (event && subject.length >= 2 && subject.length <= 24) {
+    return `${subject} ${event}`.trim();
+  }
+  return clean.slice(0, 72);
+}
+
+function parseLatestIssueArticles(html, { baseUrl, sourceLabel, hrefPattern }) {
+  const rows = [];
+  const seen = new Set();
+  for (const match of html.matchAll(/<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)) {
+    const href = match[1];
+    if (!hrefPattern.test(href)) continue;
+    const title = cleanIssueHeadline(match[2]);
+    const keyword = extractIssueKeyword(title);
+    const url = safeHttpUrl(href.startsWith('http') ? href : new URL(href, baseUrl).toString());
+    const key = title.replace(/[^0-9A-Za-z가-힣]+/g, '').toLowerCase();
+    if (title.length < 8 || !keyword || !url || seen.has(key)) continue;
+    seen.add(key);
+    rows.push({ keyword, title, context: `${sourceLabel} 최신 기사 · ${title}`, officialUrl: url, sourceLabel });
+  }
+  return rows;
+}
+
+async function collectLatestIssueHeadlines() {
+  const [starnews, sportschosun] = await Promise.all([
+    get('https://www.starnewskorea.com/latest-news/all'),
+    get('https://sports.chosun.com/entertainment/'),
+  ]);
+
+  const newest = starnews.ok
+    ? parseLatestIssueArticles(starnews.text, {
+      baseUrl: 'https://www.starnewskorea.com',
+      sourceLabel: '스타뉴스',
+      hrefPattern: /^\/(star|entertainment|broadcast-drama|broadcast-show|broadcast-|music)\//,
+    })
+    : [];
+  const fallback = sportschosun.ok
+    ? parseLatestIssueArticles(sportschosun.text, {
+      baseUrl: 'https://sports.chosun.com',
+      sourceLabel: '스포츠조선',
+      hrefPattern: /\/entertainment\//,
+    })
+    : [];
+  const seen = new Set();
+  return [...newest, ...fallback]
+    .filter((row) => {
+      const key = row.title.replace(/[^0-9A-Za-z가-힣]+/g, '').toLowerCase();
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 10)
+    .map((row, index) => ({ ...row, rank: index + 1 }));
+}
+
 async function collectOfficialPolicyBriefings() {
   const res = await get('https://www.korea.kr/briefing/pressReleaseList.do');
   if (!res.ok) return [];
@@ -263,8 +344,33 @@ const LANE_DESC = {
   nate: '네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.',
   zum: 'ZUM 이슈검색어에서 수집한 검색 신호입니다.',
   policy: '복지서비스 공공데이터에서 조회수 상위로 뽑은 제도명입니다.',
-  issue: '네이트 연예 랭킹에서 수집한 방송·연예 흐름입니다.',
+  issue: '최신 연예 기사 흐름에서 수집한 이슈입니다.',
 };
+
+const BROAD_SIGNAL_TERMS = new Set([
+  '채무', '배우', '결혼', '연예', '뉴스', '이슈', '사건', '사고', '주식', '코인', '날씨', '부동산', '대출', '보험',
+]);
+const WEAK_EXPANSION_SUFFIX = /(?:뜻|의미|나무위키|영어로|인스타|프로필|직업|고향|나이|사진)$/u;
+
+function selectCoreSignalKeyword(row) {
+  const raw = String(row?.keyword || '').replace(/\s+/g, ' ').trim();
+  if (!raw) return '';
+  const compact = raw.replace(/\s+/g, '');
+  // Preserve genuine multi-word portal terms. Only replace a clearly broad,
+  // one-word signal with a measured autocomplete continuation.
+  if (!BROAD_SIGNAL_TERMS.has(compact) && compact.length > 2) return raw;
+
+  const specific = (row?.expansions || [])
+    .map((value) => String(value || '').replace(/\s+/g, ' ').trim())
+    .find((candidate) => {
+      const candidateCompact = candidate.replace(/\s+/g, '');
+      return candidateCompact.startsWith(compact)
+        && candidateCompact.length >= compact.length + 2
+        && candidateCompact.length <= 28
+        && !WEAK_EXPANSION_SUFFIX.test(candidate);
+    });
+  return specific || raw;
+}
 
 /**
  * SPA 카드가 기대하는 필드로 맞춘다.
@@ -273,14 +379,16 @@ const LANE_DESC = {
 function toSignalItems(laneId, rows) {
   return rows.map((row, index) => ({
     id: `${laneId}-${index + 1}`,
-    keyword: row.keyword,
-    title: row.keyword,
-    // 이슈 레인은 원 기사 제목을 맥락으로 보여준다(키워드는 개체명).
+    keyword: selectCoreSignalKeyword(row),
+    title: row.title || row.keyword,
+    rawKeyword: row.keyword,
+    // 이슈 레인은 원 기사 제목을 맥락으로 보여준다.
     description: row.context || LANE_DESC[laneId] || '실시간 수집 신호입니다.',
     // 순위를 점수로 환산한다(1위=100). 실측 지표가 아니라 표시용 정렬값이다.
     priority: Math.max(1, 100 - index),
     source: laneId,
     officialUrl: row.officialUrl,
+    sourceLabel: row.sourceLabel,
     // 네이버 자동완성 실측 확장(사람들이 실제로 이어서 치는 검색어)
     expansions: row.expansions || [],
     // 확장을 뽑은 시드(헤드라인 전체가 아니라 개체명일 수 있음 — 표시 정직성용)
@@ -291,6 +399,8 @@ function toSignalItems(laneId, rows) {
 function decodeHtml(value) {
   return String(value || '')
     .replace(/<[^>]+>/g, ' ')
+    .replace(/&#x([0-9a-f]+);/gi, (_match, hex) => String.fromCodePoint(Number.parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_match, decimal) => String.fromCodePoint(Number.parseInt(decimal, 10)))
     .replace(/&quot;/gi, '"')
     .replace(/&#39;|&apos;/gi, "'")
     .replace(/&amp;/gi, '&')
@@ -400,7 +510,7 @@ async function enrichSourceInsights(lanes) {
     const newsArticles = await fetchNaverNews(item.keyword);
     const officialUrl = safeHttpUrl(item.officialUrl);
     const officialArticle = officialUrl
-      ? [{ title: item.keyword, excerpt: item.description || item.keyword, url: officialUrl, press: '대한민국 정책브리핑', image: '' }]
+      ? [{ title: item.title || item.keyword, excerpt: item.description || item.keyword, url: officialUrl, press: item.sourceLabel || '대한민국 정책브리핑', image: '' }]
       : [];
     const articles = [...officialArticle, ...newsArticles.filter((article) => article.url !== officialUrl)];
     if (articles.length === 0) return null;
@@ -621,7 +731,7 @@ const LANE_COLLECTORS = [
   { id: 'nate', label: '네이트', collect: collectNate },
   { id: 'zum', label: '줌', collect: collectZum },
   { id: 'policy', label: '정책', collect: collectPolicy },
-  { id: 'issue', label: '이슈', collect: collectNateEntIssues },
+  { id: 'issue', label: '이슈', collect: collectLatestIssueHeadlines },
 ];
 
 async function refreshSourceSignals() {

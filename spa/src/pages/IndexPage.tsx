@@ -108,7 +108,7 @@ const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
     { id: 'nate', label: '네이트', accent: '#ff6b6b', description: '이슈와 방송 검색 흐름' },
     { id: 'zum', label: '줌', accent: '#f4c95d', description: '포털 이슈 보조 신호' },
     { id: 'policy', label: '정책', accent: '#44d7b6', description: '지원금과 공공 알림' },
-    { id: 'issue', label: '이슈', accent: '#c084fc', description: '방송/연예/스포츠 흐름' },
+    { id: 'issue', label: '이슈', accent: '#c084fc', description: '시간순 최신 연예 기사 흐름' },
 ];
 
 const HOME_LIVE_FALLBACK_GOLDEN: LiveGoldenPreview[] = [
