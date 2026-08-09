@@ -39,10 +39,10 @@ jobs:
           BRIGHTDATA_WEB_UNLOCKER_ZONE: ${{ vars.BRIGHTDATA_WEB_UNLOCKER_ZONE || vars.BRIGHTDATA_ZONE || secrets.BRIGHTDATA_WEB_UNLOCKER_ZONE || secrets.BRIGHTDATA_ZONE }}
           BRIGHTDATA_FALLBACK_MAX_REQUESTS: ${{ vars.BRIGHTDATA_FALLBACK_MAX_REQUESTS || '0' }}
           NEWS_PER_KEYWORD: ${{ vars.NEWS_PER_KEYWORD || '2' }}
-          # Naver is queried politely and in a small round-robin batch. Existing
-          # briefs are retained for unchanged keywords and refreshed hourly.
+          # Every public term must carry a verifiable article. Direct requests
+          # run sequentially; Bright Data remains disabled for normal refreshes.
           NEWS_FETCH_CONCURRENCY: ${{ vars.NEWS_FETCH_CONCURRENCY || '1' }}
-          NEWS_MAX_QUERIES_PER_RUN: ${{ vars.NEWS_MAX_QUERIES_PER_RUN || '10' }}
+          NEWS_MAX_QUERIES_PER_RUN: ${{ vars.NEWS_MAX_QUERIES_PER_RUN || '60' }}
           INSIGHT_REFRESH_MINUTES: ${{ vars.INSIGHT_REFRESH_MINUTES || '60' }}
           LLM_BRIEF_MAX_ITEMS: ${{ vars.LLM_BRIEF_MAX_ITEMS || '10' }}
           # A self-hosted/open-source OpenAI-compatible endpoint takes precedence.

@@ -117,15 +117,6 @@ const HOME_LIVE_FALLBACK_GOLDEN: LiveGoldenPreview[] = [
     { id: 'fallback-golden-3', rank: 3, keyword: '오늘 방송 출연진', grade: 'S', publicSearchVolumeLabel: '실시간 반응', publicDocumentCountLabel: '경쟁도 확인 중', publicReason: '방송 직후 빠르게 검색량이 붙는 이슈형 키워드입니다.' },
 ];
 
-const HOME_SOURCE_FALLBACK_KEYWORDS: Record<SourceLaneId, string[]> = {
-    naver: ['소상공인 지원금 신청', '장마 대비 준비물', '여름 전기요금 절약', '청년 월세 지원 조건', '오늘 방송 출연진', '냉방병 증상', '근로장려금 지급일', '서울 무료 전시', '주말 갈만한곳', '아이폰 배터리 교체'],
-    daum: ['경제 뉴스 정리', '폭염주의보 지역', '대출 금리 비교', '교통 통제 구간', '야구 경기 일정', '공모주 청약 일정', '환율 전망', '아파트 실거래가', '태풍 경로', '건강검진 대상자'],
-    nate: ['드라마 출연진', '예능 방송 시간', '배우 근황', '공식입장 정리', '스포츠 인터뷰', '연예 뉴스 반응', '축구 대표팀 명단', '영화 결말 해석', '콘서트 예매 일정', '프로필 나이'],
-    zum: ['근처 맛집 추천', '제주 숙소 가격', '항공권 특가', '가전 할인', '병원 예약 방법', '여행 준비물', '주차장 위치', '공연 티켓 예매', '보험료 비교', '이사 비용'],
-    policy: ['근로장려금 지급일', '청년 월세 지원 조건', '소상공인 정책자금 신청', '에너지바우처 신청 대상', '문화누리카드 사용처', '기초연금 수급자격', '주거급여 신청 조건', '국민내일배움카드 신청', '출산지원금 지역별 조회', '보조금24 숨은 지원금'],
-    issue: ['드라마 결말 해석', '출연진 공식입장', '대표팀 경기 결과', '방송 장면 논란', '연예인 근황 반응', '사건 타임라인 정리', '콘서트 예매 일정', '영화 쿠키영상 여부', '스포츠 하이라이트', '후속 방송 일정'],
-};
-
 function cleanLiveText(value: unknown, fallback: string): string {
     const text = String(value || '').trim();
     if (!text) return fallback;
@@ -134,27 +125,11 @@ function cleanLiveText(value: unknown, fallback: string): string {
     return looksBroken ? fallback : text;
 }
 
-function buildFallbackSourceItems(lane: SourceLaneConfig): SourceSignal[] {
-    return HOME_SOURCE_FALLBACK_KEYWORDS[lane.id].map((keyword, index) => ({
-        id: `fallback-${lane.id}-${index + 1}`,
-        keyword,
-        title: keyword,
-        description: lane.id === 'policy'
-            ? '정책 수집 연결 대기 중에도 검색 의도가 분명한 신청·대상형 후보입니다.'
-            : lane.id === 'issue'
-                ? '이슈 수집 연결 대기 중에도 글 구조가 분명한 타임라인·반응형 후보입니다.'
-                : `${lane.label} 연결 대기 중 표시되는 저경쟁 후보입니다.`,
-        priority: 100 - index,
-        source: lane.id,
-    }));
-}
-
-function fillMissingSourceLaneItems(lanes: SourceLane[]): SourceLane[] {
-    return lanes.map((lane) => (
-        lane.items.length > 0
-            ? lane
-            : { ...lane, items: buildFallbackSourceItems(lane) }
-    ));
+function hasVerifiedSourceArticle(item: SourceSignal): boolean {
+    const facts = item.insight?.facts || [];
+    const links = item.insight?.links || [];
+    return facts.some((fact) => Boolean(String(fact?.text || '').trim()))
+        && links.some((link) => /^https?:\/\//i.test(String(link?.url || '')));
 }
 
 function readCachedSourceLanes(): { lanes: SourceLane[]; updatedAt?: string } | null {
@@ -164,7 +139,7 @@ function readCachedSourceLanes(): { lanes: SourceLane[]; updatedAt?: string } | 
         const cached = JSON.parse(raw) as { lanes?: Array<Partial<SourceLane> & { id?: string }>; updatedAt?: string };
         const lanes = normalizeSourceLanes(cached);
         if (!lanes.some((lane) => lane.items.length > 0)) return null;
-        return { lanes: fillMissingSourceLaneItems(lanes), updatedAt: cached.updatedAt };
+        return { lanes, updatedAt: cached.updatedAt };
     } catch {
         return null;
     }
@@ -202,10 +177,7 @@ function runAfterFirstPaint(task: () => void, timeout = 900): () => void {
 
 function buildFallbackHomeLiveState(status: HomeLiveStatus = 'loading'): HomeLiveState {
     const cached = readCachedSourceLanes();
-    const lanes = cached?.lanes || SOURCE_LANE_CONFIGS.map((lane) => ({
-        ...lane,
-        items: buildFallbackSourceItems(lane),
-    }));
+    const lanes = cached?.lanes || SOURCE_LANE_CONFIGS.map((lane) => ({ ...lane, items: [] }));
     return {
         status,
         golden: HOME_LIVE_FALLBACK_GOLDEN,
@@ -226,7 +198,10 @@ function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { i
         const items = Array.isArray(incoming?.items) ? incoming.items : [];
         return {
             ...config,
-            items: items.slice(0, 10),
+            // Do not make a keyword look live merely because it was present in
+            // an old snapshot or local cache.  A public card requires its
+            // source article and factual excerpt to be present together.
+            items: items.filter(hasVerifiedSourceArticle).slice(0, 10),
         };
     });
 }
@@ -253,10 +228,10 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
     // 아래 정적 스냅샷 폴백에 도달하기 전에 함수 전체가 죽는다 — 스냅샷 폴백이
     // 정확히 필요한 상황(서버 다운)에서 실행되지 않는 버그가 실제로 있었다.
     const sourcePayload = await fetchSourceSignalSnapshot();
-    // 서버도 스냅샷도 죽었으면 정직하게 FAST FALLBACK 으로 표시한다.
-    // (fillMissingSourceLaneItems 가 하드코딩 항목으로 채운 것을 'LIVE' 로 위장하지 않기)
+    // 서버도 스냅샷도 죽었으면 빈 상태를 표시한다. 하드코딩 키워드를
+    // LIVE로 위장하지 않고, 기사로 검증된 다음 스냅샷만 보여준다.
     if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) return fallback;
-    const lanes = fillMissingSourceLaneItems(normalizeSourceLanes(sourcePayload));
+    const lanes = normalizeSourceLanes(sourcePayload);
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
     if (!hasLiveData) return fallback;
     writeCachedSourceLanes(sourcePayload);

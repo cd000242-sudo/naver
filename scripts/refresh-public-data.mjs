@@ -39,10 +39,10 @@ const DIRECT_HEADERS = {
 };
 const NEWS_PER_KEYWORD = Math.min(3, Math.max(1, Number(process.env.NEWS_PER_KEYWORD || 2) || 2));
 const NEWS_FETCH_CONCURRENCY = Math.min(3, Math.max(1, Number(process.env.NEWS_FETCH_CONCURRENCY || 1) || 1));
-// Collect three article-backed rows per lane on every refresh. This prevents a
-// top-three item from opening an empty detail panel while staying below the
-// existing direct-collection ceiling.
-const NEWS_MAX_QUERIES_PER_RUN = Math.min(20, Math.max(1, Number(process.env.NEWS_MAX_QUERIES_PER_RUN || 18) || 18));
+// A real-time term is only useful when a visitor can immediately verify why it
+// is trending.  Validate every collected row (up to ten per lane) before it
+// can reach the public board.  This is direct crawling, not Bright Data.
+const NEWS_MAX_QUERIES_PER_RUN = Math.min(60, Math.max(1, Number(process.env.NEWS_MAX_QUERIES_PER_RUN || 60) || 60));
 const INSIGHT_REFRESH_MINUTES = Math.min(240, Math.max(15, Number(process.env.INSIGHT_REFRESH_MINUTES || 60) || 60));
 const LLM_BRIEF_MAX_ITEMS = Math.min(20, Math.max(1, Number(process.env.LLM_BRIEF_MAX_ITEMS || 10) || 10));
 const KEYWORD_BRIEF_LLM_API_URL = String(process.env.KEYWORD_BRIEF_LLM_API_URL || '').trim();
@@ -586,6 +586,22 @@ async function enrichSourceInsights(lanes) {
   return count;
 }
 
+function hasVerifiedArticleBrief(item) {
+  const facts = item?.insight?.facts;
+  const links = item?.insight?.links;
+  return Array.isArray(facts) && facts.some((fact) => String(fact?.text || '').trim())
+    && Array.isArray(links) && links.some((link) => safeHttpUrl(link?.url));
+}
+
+function keepOnlyVerifiedSignals(lanes) {
+  return lanes.map((lane) => {
+    const items = lane.items.filter(hasVerifiedArticleBrief);
+    const excluded = lane.items.length - items.length;
+    if (excluded > 0) report.push(`  INFO     ${lane.id} 원문 기사 미확인 ${excluded}건은 공개 목록에서 제외`);
+    return { ...lane, items };
+  });
+}
+
 function parseJsonObject(value) {
   const text = String(value || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
   try {
@@ -802,8 +818,8 @@ async function refreshSourceSignals() {
   }
 
   report.push(`  INFO     자동완성 확장 ${expansionCount}건 수집 (${lanes.length}/${LANE_COLLECTORS.length} 레인)`);
-  // Preserve recent article briefs for unchanged keywords before selecting the
-  // small, round-robin direct-news refresh budget for this run.
+  // Preserve recent verified briefs for unchanged keywords before refreshing
+  // every newly collected public term through direct news search.
   const carriedBefore = carryOverInsights(lanes);
   if (carriedBefore > 0) report.push(`  INFO     carried article/image briefs ${carriedBefore} items`);
   const articleBriefs = await enrichSourceInsights(lanes);
@@ -812,17 +828,17 @@ async function refreshSourceSignals() {
   const carriedAfter = carryOverInsights(lanes);
   const carried = carriedAfter;
   if (carried > 0) report.push(`  INFO     이슈 브리프 ${carried}건 승계`);
-  const total = lanes.reduce((sum, lane) => sum + lane.items.length, 0);
-  writeSnapshot('source-signals.json', { source: 'direct-crawl', lanes }, total);
+  const verifiedLanes = keepOnlyVerifiedSignals(lanes);
+  const total = verifiedLanes.reduce((sum, lane) => sum + lane.items.length, 0);
+  writeSnapshot('source-signals.json', { source: 'direct-crawl', lanes: verifiedLanes }, total);
 }
 
 /**
  * 이전 스냅샷의 이슈 브리프(item.insight)를 키워드 기준으로 물려준다.
  *
- * 이 크론은 15분마다 파일을 통째로 새로 쓴다. 브리프는 별도 배치가
- * Bright Data 로 채우는데(호출 비용이 든다), 승계하지 않으면 15분마다
- * 날아가서 사실상 화면에 안 보인다. 키워드가 그대로면 사건도 그대로이므로
- * 그대로 물려주고, 사라진 키워드의 브리프는 자연히 버려진다.
+ * 이 크론은 15분마다 파일을 통째로 새로 쓴다. 키워드가 그대로면 최근에
+ * 직접 확인한 기사 근거도 그대로 유효하므로, 다음 시간별 재검증 전까지
+ * 승계한다. 사라진 키워드의 브리프는 자연히 버려진다.
  *
  * @returns {number} 승계한 건수
  */
