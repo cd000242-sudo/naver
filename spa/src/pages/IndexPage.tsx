@@ -1040,10 +1040,6 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     const keyword = cleanLiveText(item.keyword || item.title, lane.label);
     const description = cleanLiveText(item.description || item.title, lane.description);
     const searchUrl = buildSourceSearchUrl(lane.id, keyword);
-    const [semanticGroup, contextGroup, clusterGroup] = buildSourceStrategy(lane, item, items);
-    const primaryIdeas = semanticGroup.items.slice(0, 4);
-    const questionIdeas = contextGroup.items.slice(0, 3);
-    const clusterIdeas = clusterGroup.items.slice(0, 3);
 
     const brief = item.insight;
     const briefFacts = (brief?.facts || []).slice(0, 4);
@@ -1051,9 +1047,8 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     const briefImage = (brief?.images || [])[0];
     const briefTitles = brief?.titles || {};
 
-    // 실측 근거가 한 갈래도 없으면 빈 격자 대신 대기 상태를 보여준다.
-    // 단, 기사 브리프가 있으면 그것만으로도 보여줄 값이 있다.
-    if (briefFacts.length === 0 && primaryIdeas.length === 0 && questionIdeas.length === 0 && clusterIdeas.length === 0) {
+    // 기사에서 확인된 사실이 없으면 보여줄 게 없다. 대기 상태로 둔다.
+    if (briefFacts.length === 0) {
         return (
             <aside className="source-insight-panel source-insight-panel-empty">
                 <strong>{keyword}</strong>
@@ -1146,60 +1141,6 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                 </section>
             )}
 
-            <div className="source-strategy-grid" aria-label={`${keyword} 키워드 전략`}>
-                {primaryIdeas.length > 0 && (
-                <section className="source-strategy-card source-strategy-card-main">
-                    <div className="source-strategy-card-head">
-                        <strong>{semanticGroup.label}</strong>
-                        <small>{semanticGroup.desc}</small>
-                    </div>
-                    <div className="source-idea-list">
-                        {primaryIdeas.map((idea) => (
-                            <a key={idea.label} className="source-idea-card" href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
-                                <span>{idea.tag}</span>
-                                <strong>{idea.label}</strong>
-                                <small>{idea.reason}</small>
-                                <p>{idea.title}</p>
-                            </a>
-                        ))}
-                    </div>
-                </section>
-                )}
-                {questionIdeas.length > 0 && (
-                <section className="source-strategy-card">
-                    <div className="source-strategy-card-head">
-                        <strong>{contextGroup.label}</strong>
-                        <small>{contextGroup.desc}</small>
-                    </div>
-                    <div className="source-question-list">
-                        {questionIdeas.map((idea) => (
-                            <a key={idea.label} href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
-                                <span>{idea.tag}</span>
-                                <strong>{idea.label}</strong>
-                                <small>{idea.reason}</small>
-                            </a>
-                        ))}
-                    </div>
-                </section>
-                )}
-                {clusterIdeas.length > 0 && (
-                <section className="source-strategy-card">
-                    <div className="source-strategy-card-head">
-                        <strong>{clusterGroup.label}</strong>
-                        <small>{clusterGroup.desc}</small>
-                    </div>
-                    <div className="source-cluster-core" style={{ borderColor: lane.accent, color: lane.accent }}>{keyword}</div>
-                    <div className="source-cluster-list">
-                        {clusterIdeas.map((idea) => (
-                            <a key={idea.label} href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
-                                <span>{idea.tag}</span>
-                                <strong>{idea.label}</strong>
-                            </a>
-                        ))}
-                    </div>
-                </section>
-                )}
-            </div>
         </aside>
     );
 }
