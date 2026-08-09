@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useRef, useState, type ChangeEvent, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { isValidEmail, isValidPhone, maskContactText, maskEmail, maskPhone } from '../lib/privacy';
-import { fetchCommunityIncomeProofs, type CommunityIncomeProof } from '../lib/siteOps';
+import {
+    fetchCommunityIncomeProofs,
+    fetchSiteContent,
+    managedHomeProofsToIncomeProofs,
+    type CommunityIncomeProof,
+} from '../lib/siteOps';
 
 /**
  * 커뮤니티
@@ -195,6 +200,7 @@ async function fetchCommunityAction(action: string, signal: AbortSignal): Promis
 function CommunityPage() {
     const [tab, setTab] = useState<TabKey>('income');
     const [income, setIncome] = useState<CommunityIncomeProof[]>([]);
+    const [managedIncome, setManagedIncome] = useState<CommunityIncomeProof[]>([]);
     const [tips, setTips] = useState<Tip[]>([]);
     const [loading, setLoading] = useState(true);
     const [incomeUnavailable, setIncomeUnavailable] = useState(false);
@@ -204,6 +210,20 @@ function CommunityPage() {
         const prev = document.title;
         document.title = '커뮤니티 — Leaders Pro';
         return () => { document.title = prev; };
+    }, []);
+
+    // 공개 승인 글에 미디어가 아직 없더라도, 관리자가 이미 등록한 실제 성과
+    // 캡처는 빈 화면 대신 동일한 그리드에 보여준다. 사이트 콘텐츠 로드는
+    // 별도로 진행해 커뮤니티의 기본 목록 응답을 기다리게 하지 않는다.
+    useEffect(() => {
+        let active = true;
+        fetchSiteContent()
+            .then((content) => {
+                if (!active) return;
+                setManagedIncome(managedHomeProofsToIncomeProofs(content?.hero?.proofs, 24));
+            })
+            .catch(() => undefined);
+        return () => { active = false; };
     }, []);
 
     const refreshCommunity = useCallback(async (silent = false) => {
@@ -266,6 +286,9 @@ function CommunityPage() {
                 }
                 .community-write-button:hover,
                 .community-card:hover { transform: translateY(-2px); }
+                @media (max-width: 960px) {
+                    .community-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+                }
                 @media (max-width: 720px) {
                     .community-grid { grid-template-columns: 1fr !important; }
                     .community-modal-grid { grid-template-columns: 1fr !important; }
@@ -276,7 +299,7 @@ function CommunityPage() {
                     <div>
                         <span style={{ display: 'inline-flex', minHeight: 30, alignItems: 'center', padding: '6px 14px', background: 'rgba(68,215,182,0.10)', border: '1px solid rgba(68,215,182,0.28)', borderRadius: 8, color: '#44d7b6', fontSize: 12, fontWeight: 900, letterSpacing: 0, marginBottom: 16 }}>COMMUNITY</span>
                         <h1 style={{ fontSize: 'clamp(30px, 4vw, 46px)', fontWeight: 900, marginBottom: 12 }}>Leaders Pro 커뮤니티</h1>
-                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>실제 수익 인증과 운영자가 직접 남긴 활용 팁을 확인하세요. 공지사항은 홈에서 바로 확인할 수 있습니다.</p>
+                        <p style={{ color: 'rgba(255,255,255,0.66)', fontSize: 16, lineHeight: 1.7, margin: 0 }}>승인된 수익 인증과 실제 운영 성과, 운영자가 직접 남긴 활용 팁을 확인하세요. 공지사항은 홈에서 바로 확인할 수 있습니다.</p>
                     </div>
                     <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                         {tab === 'income' && <WriteButton label="수익인증 작성" onClick={() => setWriter('income')} />}
@@ -328,7 +351,7 @@ function CommunityPage() {
                         수익 인증 최신 목록을 일시적으로 불러오지 못했습니다. 기존에 확인한 자료가 있으면 그대로 유지하며, 잠시 후 새로고침해주세요.
                     </div>
                 )}
-                {tab === 'income' && <IncomePanel items={income} onWrite={() => setWriter('income')} />}
+                {tab === 'income' && <IncomePanel items={income.length > 0 ? income : managedIncome} onWrite={() => setWriter('income')} />}
                 {tab === 'tips' && <TipsPanel items={tips} onWrite={() => setWriter('tips')} />}
             </section>
 
@@ -390,7 +413,7 @@ function EmptyState({ title, desc, action, onWrite }: { title: string; desc: str
 
 function IncomePanel({ items, onWrite }: { items: CommunityIncomeProof[]; onWrite: () => void }) {
     if (items.length === 0) {
-        return <EmptyState title="아직 공개된 수익인증이 없습니다" desc="더미 수익인증은 표시하지 않습니다. 실제 이미지/영상과 글이 승인되면 이곳에 노출됩니다." action="수익인증 작성" onWrite={onWrite} />;
+        return <EmptyState title="아직 공개된 수익인증이 없습니다" desc="초기 예시 자료는 표시하지 않습니다. 실제 이미지·영상과 글이 승인되면 이곳에 노출됩니다." action="수익인증 작성" onWrite={onWrite} />;
     }
 
     return (
@@ -407,7 +430,7 @@ function IncomePanel({ items, onWrite }: { items: CommunityIncomeProof[]; onWrit
                     <div style={{ padding: 20 }}>
                         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 12 }}>
                             <div>
-                                <b style={{ display: 'block', color: '#f4c95d', fontSize: 16, marginBottom: 6 }}>수익인증</b>
+                                <b style={{ display: 'block', color: '#f4c95d', fontSize: 16, marginBottom: 6 }}>{item.source === 'site-proof' ? '실제 운영 성과' : '수익인증'}</b>
                                 <h3 style={{ margin: 0, fontSize: 23, lineHeight: 1.2 }}>{item.amount}</h3>
                             </div>
                             {item.date && <span style={{ color: 'rgba(255,255,255,0.68)', fontSize: 16, whiteSpace: 'nowrap' }}>{item.date}</span>}

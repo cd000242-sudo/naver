@@ -152,6 +152,8 @@ export type CommunityIncomeProof = {
     media?: string;
     mediaType?: 'image' | 'video';
     mediaName?: string;
+    /** 실제 사용자가 제출·승인한 인증인지, 사이트에 등록된 운영 성과인지 구분한다. */
+    source?: 'submission' | 'site-proof';
 };
 
 export type CommunityIncomeProofResult = {
@@ -243,8 +245,12 @@ export async function fetchSiteContent(): Promise<SiteContent | null> {
     return siteContentPromise;
 }
 
-const HOME_NOTICE_TIMEOUT_MS = 3200;
+// GAS 콜드 스타트는 평소보다 오래 걸릴 수 있다. 3.2초에서 끊으면 실제 최신
+// 공지를 못 받아 오래된 브라우저 캐시만 보게 된다. 홈의 두 소비자(알림/보드)가
+// 같은 요청을 공유하도록 아래 promise도 둔다.
+const HOME_NOTICE_TIMEOUT_MS = 10000;
 const HOME_NOTICE_CACHE_KEY = 'leaderspro.homeNotices.cache.v2';
+const HOME_NOTICE_ARCHIVE_URL = '/data/home-notices-archive.json';
 const COMMUNITY_INCOME_CACHE_KEY = 'leaderspro.communityIncome.cache.v1';
 const COMMUNITY_INCOME_WIDE_CACHE_KEY = 'leaderspro.communityIncome.community.cache.v1';
 const COMMUNITY_INCOME_CACHE_TTL_MS = 15 * 60 * 1000;
@@ -310,6 +316,8 @@ function normalizeHomeNoticeList(values: unknown[], limit: number): HomeNotice[]
 
 type HomeNoticeCacheSource = 'legacy';
 
+let homeNoticeRequest: Promise<HomeNotice[] | null> | null = null;
+
 function readHomeNoticeCache(limit: number, requiredSource: HomeNoticeCacheSource): HomeNotice[] {
     try {
         const cached = JSON.parse(localStorage.getItem(HOME_NOTICE_CACHE_KEY) || 'null') as {
@@ -340,27 +348,77 @@ export function invalidateHomeNoticeCache(): void {
 }
 
 async function fetchLegacyHomeNotices(limit: number): Promise<HomeNotice[] | null> {
+    if (homeNoticeRequest) {
+        const shared = await homeNoticeRequest;
+        return shared === null ? null : shared.slice(0, limit);
+    }
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), HOME_NOTICE_TIMEOUT_MS);
+    homeNoticeRequest = (async () => {
     try {
         const response = await fetch(`${GAS_URL}?action=get-notices`, { cache: 'no-store', signal: controller.signal });
         if (!response.ok) return null;
         const payload = await response.json() as { success?: boolean; ok?: boolean; notices?: unknown[] };
         if (!payload || (!payload.success && !payload.ok) || !Array.isArray(payload.notices)) return null;
-        return normalizeHomeNoticeList(payload.notices, limit);
+        // Share the complete public list. Each caller applies its own limit
+        // after awaiting, so a simultaneous alert(5) and board(50) request
+        // cannot accidentally truncate the board to five notices.
+        return normalizeHomeNoticeList(payload.notices, 100);
     } catch {
         return null;
     } finally {
         window.clearTimeout(timeout);
     }
+    })();
+    try {
+        const notices = await homeNoticeRequest;
+        return notices === null ? null : notices.slice(0, limit);
+    } finally {
+        homeNoticeRequest = null;
+    }
+}
+
+/**
+ * Vultr 종료 이전에 사이트에 공개돼 있던 검증된 공지 아카이브다.
+ * GAS가 부분 이관된 상태(현재 1건)여도 기존 공지가 사라져 보이지 않게 하며,
+ * 새 GAS 공지는 항상 우선한다. 이 파일은 크론 수집기가 덮어쓰지 않는다.
+ */
+async function fetchHomeNoticeArchive(limit: number): Promise<HomeNotice[]> {
+    try {
+        const response = await fetch(HOME_NOTICE_ARCHIVE_URL, { cache: 'force-cache' });
+        if (!response.ok) return [];
+        const payload = await response.json() as { items?: unknown[] };
+        return Array.isArray(payload.items) ? normalizeHomeNoticeList(payload.items, limit) : [];
+    } catch {
+        return [];
+    }
+}
+
+function mergeHomeNotices(primary: HomeNotice[], archive: HomeNotice[], limit: number): HomeNotice[] {
+    const seen = new Set<string>();
+    const merged: HomeNotice[] = [];
+    for (const notice of [...primary, ...archive]) {
+        const key = `${notice.id}\u001f${notice.date}\u001f${notice.title}`.toLocaleLowerCase('ko-KR');
+        if (seen.has(key)) continue;
+        seen.add(key);
+        merged.push(notice);
+    }
+    return normalizeHomeNoticeList(merged, limit);
 }
 
 export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
     const legacy = await fetchLegacyHomeNotices(limit);
     if (legacy !== null && legacy.length > 0) {
-        writeHomeNoticeCache(legacy, 'legacy');
-        return legacy;
+        // The first recovered GAS data set contains only one old seed notice.
+        // Merge the versioned, public archive so this partial migration does
+        // not hide the other published notices. Newly saved GAS rows win.
+        const archive = legacy.length < limit ? await fetchHomeNoticeArchive(limit) : [];
+        const merged = mergeHomeNotices(legacy, archive, limit);
+        writeHomeNoticeCache(merged, 'legacy');
+        return merged;
     }
+    const archive = await fetchHomeNoticeArchive(limit);
+    if (archive.length > 0) return archive;
     return readHomeNoticeCache(limit, 'legacy');
 }
 
@@ -557,6 +615,7 @@ function normalizeCommunityIncomeProof(
         date,
         desc: desc || '수익인증 자료를 등록했습니다.',
         tags,
+        source: 'submission',
         ...media,
     };
 }
@@ -576,6 +635,54 @@ function normalizeCommunityIncomeProofs(
         if (items.length >= limit) break;
     }
     return items;
+}
+
+type ManagedProofInput = {
+    src?: string;
+    alt?: string;
+    title?: string;
+    desc?: string;
+    metric?: string;
+};
+
+function normalizeManagedProofMedia(value: unknown): string {
+    const media = String(value || '').trim();
+    // The site-content editor may contain arbitrary text, so only serve local
+    // images from the versioned public asset directory as a proof fallback.
+    if (!media.startsWith('/images/') || media.startsWith('//') || media.includes('..') || media.includes('\\') || media.length > 4096) return '';
+    return media;
+}
+
+/**
+ * 홈 관리자가 등록한 실제 성과 캡처를 수익/성과 카드로 표시한다.
+ * GAS의 사용자가 올린 승인 자료가 있으면 그것이 먼저 보이고, 이 함수는
+ * 마이그레이션 중 이미지 없는 초기 시드 때문에 화면이 비는 일을 막는다.
+ */
+export function managedHomeProofsToIncomeProofs(
+    proofs: readonly ManagedProofInput[] | undefined,
+    limit = 12,
+): CommunityIncomeProof[] {
+    const safeLimit = Math.max(1, Math.min(24, Math.floor(limit) || 12));
+    const result: CommunityIncomeProof[] = [];
+    for (const proof of proofs || []) {
+        const media = normalizeManagedProofMedia(proof?.src);
+        if (!media) continue;
+        const amount = cleanPublicText(proof.title || proof.metric, 100) || '운영 성과 인증';
+        result.push({
+            id: `managed-income-${hashIncomeProofId(media)}`,
+            amount,
+            author: '운영 성과 인증',
+            date: '',
+            desc: cleanPublicMultilineText(proof.desc || proof.alt, 600) || '관리자가 등록한 실제 운영 성과 화면입니다.',
+            tags: ['운영 성과'],
+            media,
+            mediaType: 'image',
+            mediaName: cleanPublicText(proof.alt || proof.title, 120) || amount,
+            source: 'site-proof',
+        });
+        if (result.length >= safeLimit) break;
+    }
+    return result;
 }
 
 function normalizeCommunityIncomeLimit(limit: number, view: CommunityIncomeView): number {
