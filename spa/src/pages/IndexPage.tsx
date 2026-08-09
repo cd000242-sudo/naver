@@ -27,6 +27,13 @@ type SourceSignal = {
     createdAt?: string;
     /** 네이버 자동완성 실측 확장 — 크론 스냅샷이 채워준다. 합성 확장 대체용 */
     expansions?: string[];
+    /** 원본 기사 게시 경과("3분 전"). 이슈 선점 판단의 근거라 원본 값을 그대로 쓴다. */
+    ago?: string;
+    agoMinutes?: number;
+    /** 절대 게시 시각 표기. 툴팁으로 보여준다. */
+    publishedLabel?: string;
+    /** 목록에서 받아 온 기사 대표 사진. */
+    image?: string;
     /**
      * 이슈 브리프 — 배치가 뉴스 기사에서 뽑아 심는다(brightdata-issue-brief-batch).
      * facts 의 문장은 전부 기사 원문 그대로다. 여기서 새로 쓰거나 합치지 않는다.
@@ -1306,9 +1313,12 @@ function IndexPage() {
                                                         <strong>{keyword}</strong>
                                                         <p>{description}</p>
                                                     </div>
-                                                    {/* 이 값은 실측 지표가 아니라 순위 파생값(100-index)이다.
-                                                        숫자만 크게 띄우면 점수처럼 오해되므로 순위로 표기한다. */}
-                                                    <small>{index + 1}위</small>
+                                                    {/* 왼쪽 번호가 이미 순위다. 오른쪽에 "N위"를 또 쓰면 같은
+                                                        정보가 두 번 나가고, 정작 필요한 게시 시각 자리가 없다.
+                                                        이슈는 몇 분 전 기사인지가 선점 가능 여부를 가른다. */}
+                                                    {item.ago
+                                                        ? <small title={item.publishedLabel || ''}>{item.ago}</small>
+                                                        : <small />}
                                                 </button>
                                                 <a className="hero-source-row-search" href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer">검색</a>
                                             </article>

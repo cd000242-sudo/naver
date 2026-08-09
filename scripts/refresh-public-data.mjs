@@ -240,19 +240,72 @@ function extractIssueKeyword(title) {
   return clean.slice(0, 72);
 }
 
+/**
+ * "2분 전", "3시간 전" 같은 상대 표기를 분으로 바꾼다.
+ * 이슈는 선점 여부가 시간에 달려 있어서 몇 분 전 기사인지가 판단 근거다.
+ */
+function parseAgoMinutes(text) {
+  const value = String(text || '').trim();
+  const m = value.match(/(\d+)\s*(분|시간|일)\s*전/);
+  if (!m) return null;
+  const n = Number(m[1]);
+  if (m[2] === '분') return n;
+  if (m[2] === '시간') return n * 60;
+  return n * 60 * 24;
+}
+
+/**
+ * 기사 목록을 카드 단위로 읽는다.
+ *
+ * 예전에는 <a> 태그만 훑어서 제목·링크만 건졌다. 그래서 이슈 레인에는
+ * 대표 사진도 게시 시각도 없었다(실측: 이슈만 이미지 2/10, 시각 0/10).
+ * 사진은 목록에 이미 실려 오고, 시각도 <time> 에 절대·상대 둘 다 있다.
+ * 다시 검색해서 채우려 하지 말고 여기서 같이 챙긴다.
+ */
 function parseLatestIssueArticles(html, { baseUrl, sourceLabel, hrefPattern }) {
   const rows = [];
   const seen = new Set();
-  for (const match of html.matchAll(/<a[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)) {
-    const href = match[1];
-    if (!hrefPattern.test(href)) continue;
-    const title = cleanIssueHeadline(match[2]);
+
+  // 카드 경계(<li> 또는 <article>) 로 잘라야 제목·시각·이미지가 서로 섞이지 않는다.
+  const cards = String(html).split(/<li[\s>]|<article[\s>]/).slice(1);
+  for (const card of cards) {
+    const hrefMatch = card.match(/href="([^"]+)"/);
+    if (!hrefMatch || !hrefPattern.test(hrefMatch[1])) continue;
+
+    const headingMatch = card.match(/<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/);
+    const rawTitle = headingMatch ? headingMatch[1] : card;
+    const title = cleanIssueHeadline(rawTitle);
     const keyword = extractIssueKeyword(title);
-    const url = safeHttpUrl(href.startsWith('http') ? href : new URL(href, baseUrl).toString());
+    const url = safeHttpUrl(hrefMatch[1].startsWith('http')
+      ? hrefMatch[1]
+      : new URL(hrefMatch[1], baseUrl).toString());
     const key = title.replace(/[^0-9A-Za-z가-힣]+/g, '').toLowerCase();
     if (title.length < 8 || !keyword || !url || seen.has(key)) continue;
     seen.add(key);
-    rows.push({ keyword, title, context: `${sourceLabel} 최신 기사 · ${title}`, officialUrl: url, sourceLabel });
+
+    const timeMatch = card.match(/<time[^>]*dateTime="([^"]*)"[^>]*>([\s\S]*?)<\/time>/i)
+      || card.match(/<time[^>]*>([\s\S]*?)<\/time>/i);
+    const agoText = timeMatch ? decodeHtml(timeMatch[timeMatch.length - 1]).replace(/<[^>]+>/g, '').trim() : '';
+    const absolute = timeMatch && timeMatch.length > 2 ? decodeHtml(timeMatch[1]).trim() : '';
+
+    // srcSet 은 여러 후보를 담고 있으니 첫 주소만 쓴다.
+    const imageMatch = card.match(/(?:srcSet|srcset|src)="([^"\s]+\.(?:jpg|jpeg|png|webp|avif)[^"\s]*)/i)
+      || card.match(/(?:srcSet|srcset)="([^"\s]+)/i);
+    const image = imageMatch ? safeHttpUrl(imageMatch[1].startsWith('http')
+      ? imageMatch[1]
+      : new URL(imageMatch[1], baseUrl).toString()) : '';
+
+    rows.push({
+      keyword,
+      title,
+      context: `${sourceLabel} 최신 기사 · ${title}`,
+      officialUrl: url,
+      sourceLabel,
+      ...(agoText ? { ago: agoText } : {}),
+      ...(parseAgoMinutes(agoText) !== null ? { agoMinutes: parseAgoMinutes(agoText) } : {}),
+      ...(absolute ? { publishedLabel: absolute } : {}),
+      ...(image ? { image } : {}),
+    });
   }
   return rows;
 }
@@ -523,6 +576,13 @@ function toSignalItems(laneId, rows) {
     expansions: row.expansions || [],
     // 확장을 뽑은 시드(헤드라인 전체가 아니라 개체명일 수 있음 — 표시 정직성용)
     expansionSeed: row.expansionSeed,
+    // 게시 시각 — 이슈는 선점 여부가 시간에 달려 있다. 몇 분 전 기사인지가
+    // "지금 써도 되는 키워드인가" 판단의 근거라 원본에서 온 값을 그대로 싣는다.
+    ...(row.ago ? { ago: row.ago } : {}),
+    ...(Number.isFinite(row.agoMinutes) ? { agoMinutes: row.agoMinutes } : {}),
+    ...(row.publishedLabel ? { publishedLabel: row.publishedLabel } : {}),
+    // 목록에 이미 실려 온 대표 사진. 재검색으로 채우려다 이슈 레인만 비었었다.
+    ...(row.image ? { image: row.image } : {}),
   }));
 }
 
@@ -788,7 +848,13 @@ async function enrichSourceInsights(lanes) {
           titles: sourceGroundedTitles(item.keyword, lane.id, headlines),
           facts: articles.map((article, sourceIndex) => ({ text: article.excerpt, sourceIndex })),
           links: articles.map((article) => ({ url: article.url, press: article.press })),
-          images: [...new Set(articles.map((article) => article.image).filter(Boolean))].slice(0, 1),
+          // 뉴스 재검색으로 사진을 못 구하면 목록에서 이미 받아 둔 기사 사진을 쓴다.
+          // 이슈 레인은 키워드가 기사 제목 통째라 재검색이 거의 안 걸려
+          // 이미지가 10건 중 2건뿐이었다. 원본이 이미 준 걸 버릴 이유가 없다.
+          images: [...new Set([
+            ...articles.map((article) => article.image),
+            item.image,
+          ].filter(Boolean))].slice(0, 1),
           press: [...new Set(articles.map((article) => article.press))],
           headlines,
           extraction: playwrightExtracted ? 'playwright' : 'search-card',
@@ -1082,6 +1148,12 @@ function carryOverInsights(lanes) {
       const key = String(item.keyword || item.title || '').trim();
       const insight = key ? byKeyword.get(key) : undefined;
       if (insight && !item.insight) { item.insight = insight; carried += 1; }
+      // 승계한 브리프는 사진이 없을 수 있다(이슈 레인은 뉴스 재검색이 거의 안 걸린다).
+      // 목록에서 이미 받아 둔 기사 사진이 있으면 그걸로 채운다 — 승계본이라고
+      // 사진 없는 상태로 굳어버리면 그 키워드는 영영 사진이 안 붙는다.
+      if (item.insight && item.image && !(item.insight.images || []).length) {
+        item.insight = { ...item.insight, images: [item.image] };
+      }
     }
   }
   return carried;
