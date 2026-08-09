@@ -39,9 +39,9 @@ const DIRECT_HEADERS = {
 };
 const NEWS_PER_KEYWORD = Math.min(3, Math.max(1, Number(process.env.NEWS_PER_KEYWORD || 2) || 2));
 const NEWS_FETCH_CONCURRENCY = Math.min(3, Math.max(1, Number(process.env.NEWS_FETCH_CONCURRENCY || 1) || 1));
-// A real-time term is only useful when a visitor can immediately verify why it
-// is trending.  Validate every collected row (up to ten per lane) before it
-// can reach the public board.  This is direct crawling, not Bright Data.
+// The portal's directly collected rank is the evidence that a term is live.
+// News lookup enriches the card with context but must never hide a real source
+// signal when an article has not been matched yet. This is not Bright Data.
 const NEWS_MAX_QUERIES_PER_RUN = Math.min(60, Math.max(1, Number(process.env.NEWS_MAX_QUERIES_PER_RUN || 60) || 60));
 const INSIGHT_REFRESH_MINUTES = Math.min(240, Math.max(15, Number(process.env.INSIGHT_REFRESH_MINUTES || 60) || 60));
 const LLM_BRIEF_MAX_ITEMS = Math.min(20, Math.max(1, Number(process.env.LLM_BRIEF_MAX_ITEMS || 10) || 10));
@@ -394,6 +394,7 @@ function selectCoreSignalKeyword(row) {
 function toSignalItems(laneId, rows) {
   return rows.filter((row) => isDisplayableSignal(laneId, row)).map((row, index) => ({
     id: `${laneId}-${index + 1}`,
+    rank: Number(row.rank) || index + 1,
     keyword: selectCoreSignalKeyword(row),
     title: row.title || row.keyword,
     rawKeyword: row.keyword,
@@ -584,22 +585,6 @@ async function enrichSourceInsights(lanes) {
     count += 1;
   }
   return count;
-}
-
-function hasVerifiedArticleBrief(item) {
-  const facts = item?.insight?.facts;
-  const links = item?.insight?.links;
-  return Array.isArray(facts) && facts.some((fact) => String(fact?.text || '').trim())
-    && Array.isArray(links) && links.some((link) => safeHttpUrl(link?.url));
-}
-
-function keepOnlyVerifiedSignals(lanes) {
-  return lanes.map((lane) => {
-    const items = lane.items.filter(hasVerifiedArticleBrief);
-    const excluded = lane.items.length - items.length;
-    if (excluded > 0) report.push(`  INFO     ${lane.id} 원문 기사 미확인 ${excluded}건은 공개 목록에서 제외`);
-    return { ...lane, items };
-  });
 }
 
 function parseJsonObject(value) {
@@ -818,8 +803,8 @@ async function refreshSourceSignals() {
   }
 
   report.push(`  INFO     자동완성 확장 ${expansionCount}건 수집 (${lanes.length}/${LANE_COLLECTORS.length} 레인)`);
-  // Preserve recent verified briefs for unchanged keywords before refreshing
-  // every newly collected public term through direct news search.
+  // Preserve recent article briefs for unchanged keywords before refreshing
+  // the supporting news context for newly collected public terms.
   const carriedBefore = carryOverInsights(lanes);
   if (carriedBefore > 0) report.push(`  INFO     carried article/image briefs ${carriedBefore} items`);
   const articleBriefs = await enrichSourceInsights(lanes);
@@ -828,9 +813,8 @@ async function refreshSourceSignals() {
   const carriedAfter = carryOverInsights(lanes);
   const carried = carriedAfter;
   if (carried > 0) report.push(`  INFO     이슈 브리프 ${carried}건 승계`);
-  const verifiedLanes = keepOnlyVerifiedSignals(lanes);
-  const total = verifiedLanes.reduce((sum, lane) => sum + lane.items.length, 0);
-  writeSnapshot('source-signals.json', { source: 'direct-crawl', lanes: verifiedLanes }, total);
+  const total = lanes.reduce((sum, lane) => sum + lane.items.length, 0);
+  writeSnapshot('source-signals.json', { source: 'direct-crawl', lanes }, total);
 }
 
 /**

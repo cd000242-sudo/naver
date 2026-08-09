@@ -20,6 +20,7 @@ type SourceSignal = {
     keyword?: string;
     title?: string;
     description?: string;
+    rank?: number;
     priority?: number;
     source?: string;
     categoryId?: string;
@@ -125,13 +126,6 @@ function cleanLiveText(value: unknown, fallback: string): string {
     return looksBroken ? fallback : text;
 }
 
-function hasVerifiedSourceArticle(item: SourceSignal): boolean {
-    const facts = item.insight?.facts || [];
-    const links = item.insight?.links || [];
-    return facts.some((fact) => Boolean(String(fact?.text || '').trim()))
-        && links.some((link) => /^https?:\/\//i.test(String(link?.url || '')));
-}
-
 function readCachedSourceLanes(): { lanes: SourceLane[]; updatedAt?: string } | null {
     try {
         const raw = window.localStorage.getItem(HOME_LIVE_CACHE_KEY);
@@ -198,10 +192,9 @@ function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { i
         const items = Array.isArray(incoming?.items) ? incoming.items : [];
         return {
             ...config,
-            // Do not make a keyword look live merely because it was present in
-            // an old snapshot or local cache.  A public card requires its
-            // source article and factual excerpt to be present together.
-            items: items.filter(hasVerifiedSourceArticle).slice(0, 10),
+            // Each item is a directly crawled portal rank. Supporting articles
+            // are optional context, not a condition for the live signal.
+            items: items.slice(0, 10),
         };
     });
 }
@@ -1015,6 +1008,7 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     const keyword = cleanLiveText(item.keyword || item.title, lane.label);
     const description = cleanLiveText(item.description || item.title, lane.description);
     const searchUrl = buildSourceSearchUrl(lane.id, keyword);
+    const rank = Math.max(1, Number(item.rank) || (101 - Number(item.priority || 100)));
 
     const brief = item.insight;
     const briefFacts = (brief?.facts || []).slice(0, 4);
@@ -1022,15 +1016,15 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     const briefImage = (brief?.images || [])[0];
     const briefTitles = brief?.titles || {};
 
-    // 기사 확인 전에는 빈 마인드맵을 만들지 않는다. 검색 링크와 명확한
-    // 수집 상태만 보여주고, 사실이 확보되면 기사 브리프로 바꾼다.
+    // 기사 자동 매칭이 없더라도 직접 수집한 포털 순위는 실시간 신호의
+    // 근거다. 빈 마인드맵을 만들지 않고, 수집 원본과 순위를 정직하게 보여준다.
     if (briefFacts.length === 0) {
         return (
             <aside className="source-insight-panel source-insight-panel-empty" style={{ borderColor: lane.accent + '66' }}>
-                <span style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>기사 근거 미확인</span>
+                <span style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>직접 수집 확인 · {lane.label} {rank}위</span>
                 <strong>{keyword}</strong>
-                <p>원문 기사와 이미지가 아직 확인되지 않았습니다. 임의 연관어·마인드맵 대신 원본 뉴스 검색을 제공합니다.</p>
-                <a href={searchUrl} target="_blank" rel="noreferrer" style={{ justifySelf: 'start', color: lane.accent, fontSize: 12, fontWeight: 900 }}>원문 뉴스 검색</a>
+                <p>{lane.label} 원본 실시간 목록에서 직접 수집한 검색 신호입니다. 관련 보도는 자동 매칭될 때만 기사 브리프로 함께 표시합니다.</p>
+                <a href={searchUrl} target="_blank" rel="noreferrer" style={{ justifySelf: 'start', color: lane.accent, fontSize: 12, fontWeight: 900 }}>원본에서 검색</a>
             </aside>
         );
     }
