@@ -31,6 +31,8 @@ type SourceSignal = {
      * facts 의 문장은 전부 기사 원문 그대로다. 여기서 새로 쓰거나 합치지 않는다.
      */
     insight?: {
+        /** 배치가 계산해 담아준다. 여기서 다시 만들지 않는다. */
+        titles?: { seo?: string; home?: string; topic?: string; topicGroup?: string };
         facts?: Array<{ text: string; sourceIndex: number }>;
         links?: Array<{ url: string; press: string }>;
         images?: string[];
@@ -1015,6 +1017,7 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     const briefFacts = (brief?.facts || []).slice(0, 4);
     const briefLinks = (brief?.links || []).slice(0, 3);
     const briefImage = (brief?.images || [])[0];
+    const briefTitles = brief?.titles || {};
 
     // 실측 근거가 한 갈래도 없으면 빈 격자 대신 대기 상태를 보여준다.
     // 단, 기사 브리프가 있으면 그것만으로도 보여줄 값이 있다.
@@ -1076,6 +1079,38 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
                             ))}
                         </div>
                     )}
+                </section>
+            )}
+
+            {/*
+              이렇게 쓰세요 — 주제와 제목까지 정해 준다.
+              초보자는 주제를 잘못 고르면 홈판 노출 경로가 막히는 것 자체를 모른다.
+              주제는 확신이 있을 때만 표시한다(틀린 주제는 노출을 막는다).
+            */}
+            {(briefTitles.seo || briefTitles.home) && (
+                <section className="source-howto" aria-label={`${keyword} 글쓰기 가이드`}>
+                    <div className="source-howto-head">
+                        <strong>이렇게 쓰세요</strong>
+                        {briefTitles.topic && (
+                            <span className="source-howto-topic">
+                                주제 · {briefTitles.topic}
+                            </span>
+                        )}
+                    </div>
+                    <dl className="source-howto-list">
+                        {briefTitles.seo && (
+                            <div>
+                                <dt>검색 유입용 제목</dt>
+                                <dd>{briefTitles.seo}</dd>
+                            </div>
+                        )}
+                        {briefTitles.home && (
+                            <div>
+                                <dt>홈판 노출용 제목</dt>
+                                <dd>{briefTitles.home}</dd>
+                            </div>
+                        )}
+                    </dl>
                 </section>
             )}
 
@@ -1805,6 +1840,56 @@ function IndexPage() {
                     border-radius: 999px;
                     padding: 3px 10px;
                     text-decoration: none;
+                }
+
+                /* 이렇게 쓰세요 — 주제·제목 가이드 */
+                .source-howto {
+                    border: 1px solid rgba(244,201,93,0.30);
+                    border-radius: 12px;
+                    background: rgba(244,201,93,0.07);
+                    padding: 12px 14px;
+                    margin-bottom: 12px;
+                }
+                .source-howto-head {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    flex-wrap: wrap;
+                    margin-bottom: 9px;
+                }
+                .source-howto-head strong {
+                    font-size: 13px;
+                    font-weight: 800;
+                    color: #f4c95d;
+                }
+                .source-howto-topic {
+                    font-size: 11px;
+                    font-weight: 800;
+                    color: #0a0a0f;
+                    background: #f4c95d;
+                    border-radius: 999px;
+                    padding: 2px 9px;
+                }
+                .source-howto-list {
+                    margin: 0;
+                    display: grid;
+                    gap: 8px;
+                }
+                .source-howto-list > div {
+                    display: grid;
+                    gap: 3px;
+                }
+                .source-howto-list dt {
+                    font-size: 11px;
+                    font-weight: 700;
+                    color: rgba(255,255,255,0.52);
+                }
+                .source-howto-list dd {
+                    margin: 0;
+                    font-size: 13px;
+                    font-weight: 700;
+                    line-height: 1.5;
+                    color: #f7fbff;
                 }
 
                 @media (max-width: 768px) {
