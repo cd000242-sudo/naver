@@ -39,7 +39,10 @@ const DIRECT_HEADERS = {
 };
 const NEWS_PER_KEYWORD = Math.min(3, Math.max(1, Number(process.env.NEWS_PER_KEYWORD || 2) || 2));
 const NEWS_FETCH_CONCURRENCY = Math.min(3, Math.max(1, Number(process.env.NEWS_FETCH_CONCURRENCY || 1) || 1));
-const NEWS_MAX_QUERIES_PER_RUN = Math.min(20, Math.max(1, Number(process.env.NEWS_MAX_QUERIES_PER_RUN || 10) || 10));
+// Collect three article-backed rows per lane on every refresh. This prevents a
+// top-three item from opening an empty detail panel while staying below the
+// existing direct-collection ceiling.
+const NEWS_MAX_QUERIES_PER_RUN = Math.min(20, Math.max(1, Number(process.env.NEWS_MAX_QUERIES_PER_RUN || 18) || 18));
 const INSIGHT_REFRESH_MINUTES = Math.min(240, Math.max(15, Number(process.env.INSIGHT_REFRESH_MINUTES || 60) || 60));
 const LLM_BRIEF_MAX_ITEMS = Math.min(20, Math.max(1, Number(process.env.LLM_BRIEF_MAX_ITEMS || 10) || 10));
 const KEYWORD_BRIEF_LLM_API_URL = String(process.env.KEYWORD_BRIEF_LLM_API_URL || '').trim();
@@ -350,7 +353,19 @@ const LANE_DESC = {
 const BROAD_SIGNAL_TERMS = new Set([
   '채무', '배우', '결혼', '연예', '뉴스', '이슈', '사건', '사고', '주식', '코인', '날씨', '부동산', '대출', '보험',
 ]);
+const EXCLUDED_BROAD_SIGNAL_TERMS = new Set([
+  ...BROAD_SIGNAL_TERMS,
+  '의과대학', '의대',
+]);
 const WEAK_EXPANSION_SUFFIX = /(?:뜻|의미|나무위키|영어로|인스타|프로필|직업|고향|나이|사진)$/u;
+
+function isDisplayableSignal(laneId, row) {
+  if (laneId === 'issue') return true;
+  const compact = String(row?.keyword || '').replace(/\s+/g, '');
+  // A generic category without a verified article has no reliable subject to
+  // put on a mind map. Do not replace it with a random autocomplete result.
+  return Boolean(compact) && !EXCLUDED_BROAD_SIGNAL_TERMS.has(compact);
+}
 
 function selectCoreSignalKeyword(row) {
   const raw = String(row?.keyword || '').replace(/\s+/g, ' ').trim();
@@ -377,7 +392,7 @@ function selectCoreSignalKeyword(row) {
  * keyword 만 넣으면 설명·점수 칸이 빈 채로 렌더돼 카드가 깨져 보인다.
  */
 function toSignalItems(laneId, rows) {
-  return rows.map((row, index) => ({
+  return rows.filter((row) => isDisplayableSignal(laneId, row)).map((row, index) => ({
     id: `${laneId}-${index + 1}`,
     keyword: selectCoreSignalKeyword(row),
     title: row.title || row.keyword,

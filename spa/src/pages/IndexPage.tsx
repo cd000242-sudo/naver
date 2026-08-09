@@ -1031,8 +1031,8 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     if (!item) {
         return (
             <aside className="source-insight-panel source-insight-panel-empty">
-                <strong>키워드 전략 대기</strong>
-                <p>{lane.label} 원본이 들어오면 다음 검색 의문과 연결 이슈 마인드맵을 표시합니다.</p>
+                <strong>선택할 실시간 항목이 없습니다</strong>
+                <p>{lane.label} 원본이 갱신되면 기사 근거와 출처를 표시합니다.</p>
             </aside>
         );
     }
@@ -1047,12 +1047,15 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     const briefImage = (brief?.images || [])[0];
     const briefTitles = brief?.titles || {};
 
-    // 기사에서 확인된 사실이 없으면 보여줄 게 없다. 대기 상태로 둔다.
+    // 기사 확인 전에는 빈 마인드맵을 만들지 않는다. 검색 링크와 명확한
+    // 수집 상태만 보여주고, 사실이 확보되면 기사 브리프로 바꾼다.
     if (briefFacts.length === 0) {
         return (
-            <aside className="source-insight-panel source-insight-panel-empty">
+            <aside className="source-insight-panel source-insight-panel-empty" style={{ borderColor: lane.accent + '66' }}>
+                <span style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>기사 근거 수집 중</span>
                 <strong>{keyword}</strong>
-                <p>아직 이 키워드에서 실측으로 이어지는 확장 검색어가 확인되지 않았습니다. 원본이 더 쌓이면 마인드맵을 표시합니다.</p>
+                <p>원문 기사와 이미지가 아직 확인되지 않았습니다. 임의 연관어·마인드맵 대신 원본 뉴스 검색을 제공합니다.</p>
+                <a href={searchUrl} target="_blank" rel="noreferrer" style={{ justifySelf: 'start', color: lane.accent, fontSize: 12, fontWeight: 900 }}>원문 뉴스 검색</a>
             </aside>
         );
     }
@@ -1061,7 +1064,7 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
         <aside className="source-insight-panel source-insight-panel-rich" style={{ borderColor: lane.accent + '66' }}>
             <div className="source-insight-head">
                 <div>
-                    <span style={{ color: lane.accent }}>선택 키워드 마인드맵</span>
+                    <span style={{ color: lane.accent }}>선택 키워드 기사 브리프</span>
                     <strong>{keyword}</strong>
                 </div>
                 <a href={searchUrl} target="_blank" rel="noreferrer">검색결과</a>
