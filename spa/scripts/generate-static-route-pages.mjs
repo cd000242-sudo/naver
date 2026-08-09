@@ -6,8 +6,6 @@ import { buildKeywordDetail, keywordSlug, isEvergreenKeyword } from '../src/lib/
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
 const templatePath = path.join(distDir, 'index.html');
-const legacyAdminDir = path.resolve(__dirname, '..', '..', 'admin');
-const legacyAdminPath = path.join(legacyAdminDir, 'index.html');
 const siteOrigin = 'https://leaderspro.kr';
 
 const routes = [
@@ -325,16 +323,6 @@ for (const route of routes) {
   const routeDir = path.join(distDir, route.path);
   fs.mkdirSync(routeDir, { recursive: true });
   fs.writeFileSync(path.join(routeDir, 'index.html'), routeHtml(template, route), 'utf8');
-}
-
-if (fs.existsSync(legacyAdminPath)) {
-  const adminDir = path.join(distDir, 'admin');
-  fs.cpSync(legacyAdminDir, adminDir, { recursive: true, force: true });
-  const adminHtml = fs.readFileSync(legacyAdminPath, 'utf8');
-  fs.writeFileSync(path.join(distDir, 'admin.html'), adminHtml, 'utf8');
-  console.log('Copied the complete legacy admin panel to dist/admin and generated dist/admin.html.');
-} else {
-  console.warn(`Legacy admin panel was not found: ${legacyAdminPath}`);
 }
 
 /** 그날 브리핑 전체를 담은 날짜 아카이브. 실시간 이슈는 여기에 '그날의 기록'으로 남아 낡지 않는다. */

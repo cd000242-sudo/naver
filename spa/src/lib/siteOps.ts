@@ -202,6 +202,16 @@ function writeCachedSiteContent(content: SiteContent) {
     }
 }
 
+/** 관리자 저장 직후 이전 콘텐츠를 다시 편집기에 쓰지 않도록 캐시를 비운다. */
+export function invalidateSiteContentCache(): void {
+    siteContentPromise = null;
+    try {
+        localStorage.removeItem(SITE_CONTENT_CACHE_KEY);
+    } catch {
+        // Cache invalidation must not block an admin save.
+    }
+}
+
 export async function fetchSiteContent(): Promise<SiteContent | null> {
     const freshCache = readCachedSiteContent();
     if (freshCache) return freshCache;
@@ -315,6 +325,14 @@ function writeHomeNoticeCache(notices: HomeNotice[], source: HomeNoticeCacheSour
         localStorage.setItem(HOME_NOTICE_CACHE_KEY, JSON.stringify({ source, notices }));
     } catch {
         // Public rendering must not depend on cache writes.
+    }
+}
+
+export function invalidateHomeNoticeCache(): void {
+    try {
+        localStorage.removeItem(HOME_NOTICE_CACHE_KEY);
+    } catch {
+        // Cache invalidation must not block an admin save.
     }
 }
 
