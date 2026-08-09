@@ -2105,7 +2105,51 @@
         const ADMIN_ID_HASH = '';
         const ADMIN_PW_HASH = '';
         const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-        const ADMIN_TOKEN = '';
+        /**
+         * GAS 관리자 토큰.
+         *
+         * 공개 파일이라 값을 박아두면 누구나 가져다 쓸 수 있어서 비워 뒀는데,
+         * 대체 입력 경로를 안 만들어서 저장이 전부 Unauthorized 로 막혀 있었다.
+         * 공지가 사라진 것도, 다운로드 URL 이 빈 채로 굳은 것도 이 한 줄 때문이다.
+         *
+         * 파일에 남기지 않고 세션 동안만 메모리·sessionStorage 에 둔다.
+         * 브라우저를 닫으면 사라지므로 남의 PC 에 흔적이 남지 않는다.
+         */
+        let ADMIN_TOKEN = sessionStorage.getItem('lp_admin_gas_token') || '';
+
+        function ensureAdminToken(force) {
+            if (ADMIN_TOKEN && !force) return ADMIN_TOKEN;
+            const entered = (window.prompt(
+                'GAS 관리자 토큰을 입력하세요.\n(스크립트 속성 ADMIN_TOKEN 값 · 이 브라우저 세션에만 보관됩니다)'
+            ) || '').trim();
+            if (!entered) return '';
+            ADMIN_TOKEN = entered;
+            sessionStorage.setItem('lp_admin_gas_token', entered);
+            return ADMIN_TOKEN;
+        }
+
+        /** GAS 관리자 액션 공통 호출. 토큰이 없으면 물어보고, 틀리면 다시 물어본다. */
+        async function gasAdminCall(action, payload) {
+            if (!ensureAdminToken()) throw new Error('관리자 토큰이 필요합니다.');
+            const send = async () => {
+                const res = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action, adminToken: ADMIN_TOKEN, ...(payload || {}) }),
+                });
+                return res.json().catch(() => ({}));
+            };
+            let out = await send();
+            if (out && out.error === 'Unauthorized') {
+                // 토큰이 틀렸다. 저장된 값을 지우고 한 번만 다시 받는다.
+                sessionStorage.removeItem('lp_admin_gas_token');
+                ADMIN_TOKEN = '';
+                if (!ensureAdminToken(true)) throw new Error('관리자 토큰이 필요합니다.');
+                out = await send();
+            }
+            if (out && out.error === 'Unauthorized') throw new Error('관리자 토큰이 올바르지 않습니다.');
+            return out;
+        }
         const ADMIN_SESSION_KEY = 'leaderspro.admin.session.v1';
 
         function readAdminSession() {
@@ -2751,14 +2795,16 @@
             const container = document.getElementById('notices-table-body');
             container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>';
             try {
-                const response = await lewordApiFetch(('/v1/public/home-notices?ts=' + Date.now()), { cache: 'no-store' });
+                // 공지는 GAS 가 원본이다. 폐지된 Vultr 를 먼저 부르면 매번 실패한 뒤
+                // 폴백으로 넘어가느라 목록이 늦게 뜬다.
+                const response = await fetch(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' });
                 const payload = await response.json().catch(() => ({}));
-                if (!response.ok || payload.ok !== true) throw new Error(payload.message || '서버 공지 조회 실패');
+                if (!response.ok) throw new Error('서버 공지 조회 실패');
                 if (loadGeneration !== homeNoticeLoadGeneration || homeNoticeEditorState.saving) return;
-                if (payload.notices && Array.isArray(payload.notices.notices)) {
+                if (Array.isArray(payload.notices)) {
                     homeNoticeEditorState = {
-                        revision: Math.max(0, Number(payload.notices.revision) || 0),
-                        notices: payload.notices.notices.map(normalizeAdminNotice).filter(n => n.title),
+                        revision: Math.max(0, Number(homeNoticeEditorState.revision) || 0),
+                        notices: payload.notices.map(normalizeAdminNotice).filter(n => n.title),
                         saving: false,
                         source: 'saved'
                     };
@@ -2799,47 +2845,76 @@
             document.getElementById('notice-body').value = n.body;
             document.getElementById('tab-notices').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+        /**
+         * 공지 저장 — GAS 로 보낸다.
+         *
+         * 원래는 폐지된 Vultr(/v1/admin/home-notices)로 PUT 했다. 그래서 사장님이
+         * 올린 공지가 아무 데도 저장되지 않고 사라졌다. GAS 에는 공지 CRUD 가
+         * 이미 다 있다(submit-notice / update-notice / delete-notice).
+         *
+         * GAS 는 통째 교체가 아니라 건별 CRUD 라, 지금 목록과 서버 목록을 비교해
+         * 새 것은 추가, 바뀐 것은 수정, 없어진 것은 삭제한다.
+         */
         async function saveHomeNoticeSnapshot(notices) {
             if (homeNoticeEditorState.saving) throw new Error('공지 저장이 진행 중입니다. 잠시 후 다시 시도하세요.');
-            const session = lewordApiAdminSession || readLewordAdminSession();
-            if (!session?.accessToken || session.tier !== 'admin') {
-                homeOpsApiStatus('먼저 서버 저장 권한을 연결하세요.', true);
-                throw new Error('서버 관리자 저장 권한이 필요합니다.');
-            }
             homeNoticeLoadGeneration += 1;
             homeNoticeEditorState.saving = true;
             setNoticeMutationDisabled(true);
             try {
-                const response = await lewordApiFetch(('/v1/admin/home-notices'), {
-                    method: 'PUT',
-                    headers: { Authorization: 'Bearer ' + session.accessToken, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        expectedRevision: homeNoticeEditorState.revision,
-                        notices: { notices }
-                    })
-                });
-                const payload = await response.json().catch(() => ({}));
-                if (response.status === 401 || response.status === 403) {
-                    saveLewordAdminSession(null);
-                    homeOpsApiStatus('서버 세션이 만료됐습니다. 저장 권한을 다시 연결하세요.', true);
-                    throw new Error('서버 관리자 인증이 만료되었습니다.');
+                const before = await fetch(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' })
+                    .then(r => r.json()).catch(() => ({}));
+                const serverNotices = Array.isArray(before?.notices) ? before.notices : [];
+                const serverById = new Map(serverNotices.map(n => [String(n.id), n]));
+
+                const next = (notices || []).map(normalizeAdminNotice).filter(n => n.title);
+                const keptIds = new Set();
+
+                for (const notice of next) {
+                    const id = String(notice.id || '');
+                    const payload = {
+                        badge: notice.badge || 'update',
+                        date: notice.date || '',
+                        title: notice.title || '',
+                        preview: notice.preview || '',
+                        body: notice.body || '',
+                    };
+                    if (id && serverById.has(id)) {
+                        keptIds.add(id);
+                        const res = await gasAdminCall('update-notice', { id, ...payload });
+                        if (res && res.success === false) throw new Error(res.message || '공지 수정 실패');
+                    } else {
+                        const res = await gasAdminCall('submit-notice', payload);
+                        if (res && res.success === false) throw new Error(res.message || '공지 등록 실패');
+                        if (res && res.id) keptIds.add(String(res.id));
+                    }
                 }
-                if (response.status === 409) throw new Error('다른 공지가 먼저 저장됐습니다. 새로고침 후 다시 수정하세요.');
-                if (!response.ok || payload.ok !== true || !payload.notices) throw new Error(payload.message || '공지 저장 실패');
+
+                // 화면에서 지운 공지는 서버에서도 지운다.
+                for (const notice of serverNotices) {
+                    const id = String(notice.id);
+                    if (keptIds.has(id)) continue;
+                    const res = await gasAdminCall('delete-notice', { id });
+                    if (res && res.success === false) throw new Error(res.message || '공지 삭제 실패');
+                }
+
+                const after = await fetch(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' })
+                    .then(r => r.json()).catch(() => ({}));
+                const saved = Array.isArray(after?.notices) ? after.notices : [];
                 homeNoticeEditorState = {
-                    revision: Math.max(1, Number(payload.notices.revision) || 1),
-                    notices: (payload.notices.notices || []).map(normalizeAdminNotice).filter(n => n.title),
+                    revision: (homeNoticeEditorState.revision || 0) + 1,
+                    notices: saved.map(normalizeAdminNotice).filter(n => n.title),
                     saving: false,
                     source: 'saved'
                 };
                 renderAdminNoticeList();
-                homeOpsApiStatus('서버 저장 권한 연결됨 · 홈 공지 저장 완료', false);
-                return payload.notices;
+                homeOpsApiStatus(`홈 공지 저장 완료 · ${saved.length}건`, false);
+                return { notices: homeNoticeEditorState.notices, revision: homeNoticeEditorState.revision };
             } finally {
                 homeNoticeEditorState.saving = false;
                 setNoticeMutationDisabled(false);
             }
         }
+
         async function submitNotice() {
             const id = document.getElementById('notice-edit-id').value;
             const bodyText = plainNoticeText(document.getElementById('notice-body').value, 8000);
