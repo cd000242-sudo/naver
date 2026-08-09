@@ -434,14 +434,46 @@ function safeHttpUrl(value) {
   return /^https?:\/\//i.test(url) ? url : '';
 }
 
+function readJsonObject(text, start) {
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let index = start; index < text.length; index += 1) {
+    const char = text[index];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (char === '\\') escaped = true;
+      else if (char === '"') inString = false;
+      continue;
+    }
+    if (char === '"') { inString = true; continue; }
+    if (char === '{') depth += 1;
+    if (char === '}') {
+      depth -= 1;
+      if (depth === 0) return text.slice(start, index + 1);
+    }
+  }
+  return '';
+}
+
 function parseNaverNewsResults(html) {
   const rows = [];
   const seen = new Set();
-  const blocks = html.matchAll(/"props":(\{[\s\S]*?\}),"templateId":"newsItem"/g);
+  const templates = html.matchAll(/"templateId"\s*:\s*"newsItem"/g);
 
-  for (const block of blocks) {
+  for (const template of templates) {
+    // A page-level layout also has a props object around every card.  Starting
+    // from that outer object skips all nested news cards, so find the props
+    // object paired with each newsItem template instead.
+    const propsMarker = html.lastIndexOf('{"props":', template.index);
+    if (propsMarker < 0) continue;
+    const objectStart = html.indexOf('{', propsMarker + '{"props":'.length);
+    if (objectStart < 0) continue;
+    const rawProps = readJsonObject(html, objectStart);
+    if (!rawProps || objectStart + rawProps.length > template.index) continue;
+
     try {
-      const props = JSON.parse(block[1]);
+      const props = JSON.parse(rawProps);
       const title = cleanNewsValue(props.title, 180);
       const url = safeHttpUrl(props.contentHref || props.titleHref);
       if (!title || !url || seen.has(url)) continue;

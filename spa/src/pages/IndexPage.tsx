@@ -1052,7 +1052,7 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     if (briefFacts.length === 0) {
         return (
             <aside className="source-insight-panel source-insight-panel-empty" style={{ borderColor: lane.accent + '66' }}>
-                <span style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>기사 근거 수집 중</span>
+                <span style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>기사 근거 미확인</span>
                 <strong>{keyword}</strong>
                 <p>원문 기사와 이미지가 아직 확인되지 않았습니다. 임의 연관어·마인드맵 대신 원본 뉴스 검색을 제공합니다.</p>
                 <a href={searchUrl} target="_blank" rel="noreferrer" style={{ justifySelf: 'start', color: lane.accent, fontSize: 12, fontWeight: 900 }}>원문 뉴스 검색</a>
