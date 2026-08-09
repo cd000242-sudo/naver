@@ -2,7 +2,6 @@ import { normalizeKeywordBriefing, type HomeKeywordBriefing } from './homeKeywor
 import { maskContactText } from './privacy';
 
 export const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-export const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
 
 export type SiteContent = {
     hero?: {
@@ -241,10 +240,6 @@ const HOME_INCOME_RESPONSE_MAX_BYTES = 512 * 1024;
 const COMMUNITY_INCOME_RESPONSE_MAX_BYTES = 32 * 1024 * 1024;
 const COMMUNITY_INCOME_DATA_MEDIA_MAX_CHARS = 32 * 1024 * 1024;
 const HOME_KEYWORD_SEED_URL = '/data/home-keyword-briefing-seed.json';
-// 서버(관리자 기능용)가 죽어도 방문자 화면이 살아있도록, GitHub Actions 가 15분마다
-// 떠 두는 정적 스냅샷. 서버 응답이 없을 때 여기서 읽는다.
-const HOME_NOTICES_SNAPSHOT_URL = '/data/home-notices.json';
-
 function cleanPublicText(value: unknown, maxLength: number): string {
     return String(value ?? '')
         .replace(/<[^>]*>/g, ' ')
@@ -300,7 +295,7 @@ function normalizeHomeNoticeList(values: unknown[], limit: number): HomeNotice[]
         .map(({ notice }) => notice);
 }
 
-type HomeNoticeCacheSource = 'secure' | 'legacy';
+type HomeNoticeCacheSource = 'legacy';
 
 function readHomeNoticeCache(limit: number, requiredSource: HomeNoticeCacheSource): HomeNotice[] {
     try {
@@ -323,32 +318,6 @@ function writeHomeNoticeCache(notices: HomeNotice[], source: HomeNoticeCacheSour
     }
 }
 
-type SavedHomeNoticesResult =
-    | { state: 'saved'; notices: HomeNotice[] }
-    | { state: 'uninitialized' }
-    | { state: 'unavailable' };
-
-async function fetchSavedHomeNotices(limit: number): Promise<SavedHomeNoticesResult> {
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), HOME_NOTICE_TIMEOUT_MS);
-    try {
-        const response = await fetch(`${LEWORD_API_BASE}/v1/public/home-notices`, {
-            cache: 'no-store',
-            signal: controller.signal,
-        });
-        if (!response.ok) return { state: 'unavailable' };
-        const payload = await response.json() as { ok?: boolean; notices?: { notices?: unknown[] } | null };
-        if (payload?.ok !== true) return { state: 'unavailable' };
-        if (payload.notices === null) return { state: 'uninitialized' };
-        if (!Array.isArray(payload.notices?.notices)) return { state: 'unavailable' };
-        return { state: 'saved', notices: normalizeHomeNoticeList(payload.notices.notices, limit) };
-    } catch {
-        return { state: 'unavailable' };
-    } finally {
-        window.clearTimeout(timeout);
-    }
-}
-
 async function fetchLegacyHomeNotices(limit: number): Promise<HomeNotice[] | null> {
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), HOME_NOTICE_TIMEOUT_MS);
@@ -365,42 +334,9 @@ async function fetchLegacyHomeNotices(limit: number): Promise<HomeNotice[] | nul
     }
 }
 
-/** 정적 스냅샷(/data/home-notices.json). 서버가 죽었을 때의 1차 폴백. */
-async function fetchHomeNoticesSnapshot(limit: number): Promise<HomeNotice[]> {
-    try {
-        const response = await fetch(HOME_NOTICES_SNAPSHOT_URL, { cache: 'no-cache' });
-        if (!response.ok) return [];
-        const payload = await response.json() as { items?: unknown[] };
-        return Array.isArray(payload?.items) ? normalizeHomeNoticeList(payload.items, limit) : [];
-    } catch {
-        return [];
-    }
-}
-
 export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
-    const saved = await fetchSavedHomeNotices(limit);
-    if (saved.state === 'saved') {
-        writeHomeNoticeCache(saved.notices, 'secure');
-        return saved.notices;
-    }
-    if (saved.state === 'unavailable') {
-        // 서버 장애 시: 브라우저 캐시 → 정적 스냅샷 → GAS 순.
-        // 캐시는 재방문자에게만 있고, 스냅샷은 서버 미러라 서버가 죽어 있으면 아예
-        // 생성되지 않는다(404). 그래서 서버와 독립적으로 살아있는 GAS 까지 내려가야
-        // 첫 방문자에게 공지가 보인다 — 이게 빠져서 공지 0건 + 배지 0 이었다.
-        const cached = readHomeNoticeCache(limit, 'secure');
-        if (cached.length > 0) return cached;
-        const snapshot = await fetchHomeNoticesSnapshot(limit);
-        if (snapshot.length > 0) return snapshot;
-        const legacyOnOutage = await fetchLegacyHomeNotices(limit);
-        if (legacyOnOutage !== null && legacyOnOutage.length > 0) {
-            writeHomeNoticeCache(legacyOnOutage, 'legacy');
-            return legacyOnOutage;
-        }
-        return [];
-    }
     const legacy = await fetchLegacyHomeNotices(limit);
-    if (legacy !== null) {
+    if (legacy !== null && legacy.length > 0) {
         writeHomeNoticeCache(legacy, 'legacy');
         return legacy;
     }
@@ -534,7 +470,6 @@ function normalizeIncomeMedia(
             const hostname = parsed.hostname.toLocaleLowerCase();
             const trustedHost = hostname === 'leaderspro.kr'
                 || hostname === 'www.leaderspro.kr'
-                || hostname === '141.164.59.17.sslip.io'
                 || hostname === 'script.googleusercontent.com'
                 || hostname.endsWith('.googleusercontent.com');
             safeUrl = parsed.protocol === 'https:' && !parsed.username && !parsed.password && trustedHost;
@@ -770,31 +705,9 @@ async function fetchKeywordBriefingSeed(): Promise<HomeKeywordBriefing | null> {
     }
 }
 
-async function fetchSavedKeywordBriefing(): Promise<HomeKeywordBriefing | null> {
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), SITE_CONTENT_FETCH_TIMEOUT_MS);
-    try {
-        const response = await fetch(`${LEWORD_API_BASE}/v1/public/home-keyword-briefing`, {
-            cache: 'no-store',
-            signal: controller.signal,
-        });
-        if (!response.ok) return null;
-        const payload = await response.json() as { ok?: boolean; briefing?: unknown };
-        return payload?.ok ? normalizeKeywordBriefing(payload.briefing) : null;
-    } catch {
-        return null;
-    } finally {
-        window.clearTimeout(timeout);
-    }
-}
-
 export async function fetchHomeKeywordBriefing(): Promise<HomeKeywordBriefingResult | null> {
-    const [saved, seed] = await Promise.all([
-        fetchSavedKeywordBriefing(),
-        fetchKeywordBriefingSeed(),
-    ]);
-    if (saved) return { briefing: saved, source: 'saved' };
-    return seed ? { briefing: seed, source: 'seed' } : null;
+    const snapshot = await fetchKeywordBriefingSeed();
+    return snapshot ? { briefing: snapshot, source: 'seed' } : null;
 }
 
 function runWhenIdle(task: () => void) {

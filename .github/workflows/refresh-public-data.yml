@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: refresh-public-data
@@ -31,7 +32,8 @@ jobs:
 
       - name: Refresh snapshots
         env:
-          LEWORD_API_BASE: ${{ vars.LEWORD_API_BASE || 'https://141.164.59.17.sslip.io' }}
+          BRIGHTDATA_API_KEY: ${{ secrets.BRIGHTDATA_API_KEY }}
+          BRIGHTDATA_WEB_UNLOCKER_ZONE: ${{ vars.BRIGHTDATA_WEB_UNLOCKER_ZONE }}
           # 정책 레인(복지서비스 공공데이터). 없으면 그 레인만 건너뛴다.
           WELFARE_API_KEY: ${{ secrets.WELFARE_API_KEY }}
         run: node scripts/refresh-public-data.mjs
@@ -52,11 +54,13 @@ jobs:
           done
 
       - name: Commit if changed
+        id: commit
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --quiet -- spa/public/data; then
             echo "변경 없음 — 커밋 생략"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git add spa/public/data
@@ -65,9 +69,16 @@ jobs:
           for attempt in 1 2 3; do
             if git push; then
               echo "push 성공 (시도 $attempt)"
+              echo "changed=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             git pull --rebase --autostash origin main || true
           done
           echo "push 3회 실패 — 다음 사이클에 재시도된다"
           exit 1
+
+      - name: Deploy updated snapshots
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

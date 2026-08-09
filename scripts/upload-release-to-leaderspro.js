@@ -20,7 +20,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const RELEASE_DIR = path.join(ROOT, 'release_final');
-const API_BASE = process.env.LEADERSPRO_API_BASE || 'https://141.164.59.17.sslip.io';
+const API_BASE = String(process.env.LEADERSPRO_API_BASE || '').trim().replace(/\/$/, '');
 const PRODUCT = 'naver';
 const KIND = 'windows';
 const CHUNK_BYTES = 1024 * 1024;
@@ -108,6 +108,9 @@ async function sendChunk(url, body, token) {
 }
 
 async function main() {
+  if (!API_BASE) {
+    throw new Error('서버 업로드는 폐기되었습니다. 설치 파일은 GitHub Releases에 게시하고 다운로드 페이지의 릴리스 링크를 갱신하세요.');
+  }
   const dryRun = process.argv.includes('--dry-run');
   const version = readVersion();
   const installer = findInstaller(version);

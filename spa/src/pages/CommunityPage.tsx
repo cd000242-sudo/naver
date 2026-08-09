@@ -69,7 +69,6 @@ function normalizeMedia(raw: any): CommunityMedia {
             const hostname = parsed.hostname.toLocaleLowerCase();
             const trustedHost = hostname === 'leaderspro.kr'
                 || hostname === 'www.leaderspro.kr'
-                || hostname === '141.164.59.17.sslip.io'
                 || hostname === 'script.googleusercontent.com'
                 || hostname.endsWith('.googleusercontent.com');
             if (parsed.protocol === 'https:' && !parsed.username && !parsed.password && trustedHost) safeMedia = media;

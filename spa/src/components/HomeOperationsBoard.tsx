@@ -248,8 +248,7 @@ function normalizeManagedProofSrc(value: unknown): string {
         const parsed = new URL(src);
         const hostname = parsed.hostname.toLocaleLowerCase();
         const trustedHost = hostname === 'leaderspro.kr'
-            || hostname === 'www.leaderspro.kr'
-            || hostname === '141.164.59.17.sslip.io';
+            || hostname === 'www.leaderspro.kr';
         return parsed.protocol === 'https:' && !parsed.username && !parsed.password && trustedHost ? src : '';
     } catch {
         return '';
@@ -480,7 +479,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
     };
 
     return (
-        <section className="home-ops" aria-labelledby="home-ops-title">
+        <section id="realtime-search" className="home-ops" aria-labelledby="home-ops-title">
             <style>{`
                 .home-ops {
                     position: relative;

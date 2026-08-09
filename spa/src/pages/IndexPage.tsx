@@ -100,8 +100,6 @@ type HomeLiveState = {
     fallbackUsed: boolean;
 };
 
-const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
-const HOME_LIVE_TIMEOUT_MS = 2500;
 const HOME_LIVE_CACHE_KEY = 'leaderspro.home.sourceSignals.v1';
 
 const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
@@ -221,18 +219,6 @@ function buildFallbackHomeLiveState(status: HomeLiveStatus = 'loading'): HomeLiv
     };
 }
 
-async function fetchHomeJson<T>(apiPath: string): Promise<T> {
-    const controller = new AbortController();
-    const timer = window.setTimeout(() => controller.abort(), HOME_LIVE_TIMEOUT_MS);
-    try {
-        const response = await fetch(LEWORD_API_BASE + apiPath, { cache: 'no-store', signal: controller.signal });
-        if (!response.ok) throw new Error('LEWORD API ' + response.status);
-        return await response.json() as T;
-    } finally {
-        window.clearTimeout(timer);
-    }
-}
-
 function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { id?: string }>; fallbackUsed?: boolean } | null): SourceLane[] {
     const lanes = Array.isArray(payload?.lanes) ? payload.lanes : [];
     return SOURCE_LANE_CONFIGS.map((config) => {
@@ -266,15 +252,7 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
     // fetchHomeJson 은 서버가 죽으면 null 이 아니라 throw 한다. 여기서 안 잡으면
     // 아래 정적 스냅샷 폴백에 도달하기 전에 함수 전체가 죽는다 — 스냅샷 폴백이
     // 정확히 필요한 상황(서버 다운)에서 실행되지 않는 버그가 실제로 있었다.
-    let sourcePayload: { updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> } | null = null;
-    try {
-        sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
-    } catch {
-        sourcePayload = null;
-    }
-    if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) {
-        sourcePayload = (await fetchSourceSignalSnapshot()) || sourcePayload;
-    }
+    const sourcePayload = await fetchSourceSignalSnapshot();
     // 서버도 스냅샷도 죽었으면 정직하게 FAST FALLBACK 으로 표시한다.
     // (fillMissingSourceLaneItems 가 하드코딩 항목으로 채운 것을 'LIVE' 로 위장하지 않기)
     if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) return fallback;
@@ -294,7 +272,7 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
         boardTarget: 120,
         lockedCount: 0,
         running: false,
-        fallbackUsed: Boolean(sourcePayload?.fallbackUsed || !sourcePayload),
+        fallbackUsed: false,
     };
 }
 

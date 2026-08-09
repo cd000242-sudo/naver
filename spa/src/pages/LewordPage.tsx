@@ -1,153 +1,30 @@
-import { useEffect, useState } from 'react';
-
-// Keep the Pro shell in Pages so UI fixes can ship before the API container restarts.
-const LEWORD_PRO_WEB_URL = '/leword-pro-web.html';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function LewordPage() {
-    const [iframeKey, setIframeKey] = useState(() => Date.now());
-    const [loaded, setLoaded] = useState(false);
-    const [failed, setFailed] = useState(false);
-
     useEffect(() => {
-        const prevTitle = document.title;
-        document.title = 'LEWORD Pro Web';
-
-        // 다른 페이지에서 넘어온 경우 이미 붙은 자동광고(사이드레일/앵커)가 콘솔 UI를 덮는다 — 제거.
-        const removeAutoAds = () => {
-            document.querySelectorAll('ins.adsbygoogle, .adsbygoogle-noablate, [id^="google_ads_iframe"]').forEach((el) => {
-                el.parentElement?.removeChild(el);
-            });
-        };
-        removeAutoAds();
-        const adCleanupTimer = window.setInterval(removeAutoAds, 1500);
-
-        return () => {
-            document.title = prevTitle;
-            window.clearInterval(adCleanupTimer);
-        };
+        const previousTitle = document.title;
+        document.title = 'LEWORD | Leaders Pro';
+        return () => { document.title = previousTitle; };
     }, []);
 
-    useEffect(() => {
-        if (loaded) return undefined;
-        const timer = window.setTimeout(() => setFailed(true), 8000);
-        return () => window.clearTimeout(timer);
-    }, [loaded, iframeKey]);
-
-    const iframeSrc = `${LEWORD_PRO_WEB_URL}?embed=leaderspro&v=${iframeKey}`;
-
-    const retry = () => {
-        setLoaded(false);
-        setFailed(false);
-        setIframeKey(Date.now());
-    };
-
     return (
-        <section
-            aria-label="LEWORD Pro Web"
-            style={{
-                minHeight: 'calc(100vh - 72px)',
-                background: '#07090d',
-                padding: '10px 14px 14px',
-            }}
-        >
-            <div
-                style={{
-                    position: 'relative',
-                    minHeight: 'calc(100vh - 102px)',
-                    border: '1px solid rgba(91,183,255,.28)',
-                    borderRadius: 8,
-                    overflow: 'hidden',
-                    background: '#07090d',
-                    boxShadow: '0 20px 54px rgba(0,0,0,.34)',
-                }}
-            >
-                {(!loaded || failed) && (
-                    <div
-                        style={{
-                            position: 'absolute',
-                            top: 12,
-                            left: 12,
-                            right: 12,
-                            zIndex: 3,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            gap: 10,
-                            pointerEvents: 'none',
-                        }}
-                    >
-                        <div
-                            role="status"
-                            aria-live="polite"
-                            style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 8,
-                                border: '1px solid rgba(245,197,66,.28)',
-                                borderRadius: 8,
-                                background: 'rgba(7,9,13,.72)',
-                                color: '#f8fbff',
-                                padding: '8px 10px',
-                                boxShadow: '0 10px 28px rgba(0,0,0,.22)',
-                                backdropFilter: 'blur(10px)',
-                                pointerEvents: 'auto',
-                            }}
-                        >
-                            <strong style={{ color: '#f5c542', fontSize: 13, fontWeight: 900 }}>
-                                LEWORD Pro Web
-                            </strong>
-                            <span style={{ color: '#a4b1c4', fontSize: 12 }}>
-                                {failed ? '콘솔을 불러오지 못했습니다' : '콘솔 불러오는 중'}
-                            </span>
-                        </div>
-                        <button
-                            type="button"
-                            onClick={retry}
-                            style={{
-                                minHeight: 36,
-                                border: '1px solid rgba(91,183,255,.42)',
-                                borderRadius: 8,
-                                background: 'rgba(7,9,13,.72)',
-                                color: '#dceaff',
-                                padding: '7px 11px',
-                                fontSize: 12,
-                                fontWeight: 900,
-                                boxShadow: '0 10px 28px rgba(0,0,0,.22)',
-                                backdropFilter: 'blur(10px)',
-                                pointerEvents: 'auto',
-                            }}
-                        >
-                            새로고침
-                        </button>
-                    </div>
-                )}
-                <iframe
-                    key={iframeKey}
-                    title="LEWORD Pro Web"
-                    src={iframeSrc}
-                    onLoad={() => {
-                        setLoaded(true);
-                        setFailed(false);
-                    }}
-                    onError={() => {
-                        setLoaded(false);
-                        setFailed(true);
-                    }}
-                    style={{
-                        width: '100%',
-                        height: 'calc(100vh - 102px)',
-                        minHeight: 720,
-                        border: 0,
-                        display: 'block',
-                        background: '#07090d',
-                        opacity: 1,
-                        transition: 'opacity .18s ease',
-                    }}
-                    allow="clipboard-read; clipboard-write"
-                    referrerPolicy="no-referrer-when-downgrade"
-                />
-            </div>
-        </section>
+        <main style={{ minHeight: 'calc(100vh - 72px)', background: 'radial-gradient(circle at 14% 18%, rgba(124,58,237,.25), transparent 34%), #07090d', padding: '132px 20px 86px' }}>
+            <section style={{ maxWidth: 860, margin: '0 auto', padding: 'clamp(28px, 7vw, 68px)', border: '1px solid rgba(167,139,250,.36)', borderRadius: 28, background: 'rgba(12,14,24,.84)', boxShadow: '0 28px 80px rgba(0,0,0,.38)', textAlign: 'center' }}>
+                <span style={{ display: 'inline-block', padding: '7px 14px', borderRadius: 999, border: '1px solid rgba(167,139,250,.46)', color: '#c4b5fd', fontSize: 12, fontWeight: 900, letterSpacing: 1.4 }}>LEWORD KEYWORD MASTER</span>
+                <h1 style={{ margin: '20px 0 14px', color: '#fff', fontSize: 'clamp(32px, 6vw, 58px)', lineHeight: 1.14 }}>키워드 분석은 LEWORD 앱에서</h1>
+                <p style={{ maxWidth: 620, margin: '0 auto', color: 'rgba(235,242,250,.78)', fontSize: 'clamp(16px, 2vw, 19px)', lineHeight: 1.7 }}>
+                    프로그램을 다운로드해 키워드 분석을 시작하고, 공개 실시간 검색어는 사이트에서 바로 확인하세요.
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12, marginTop: 30 }}>
+                    <Link to="/download" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minHeight: 52, padding: '0 22px', borderRadius: 12, background: 'linear-gradient(135deg, #a78bfa, #6d5ce8)', color: '#07090d', fontWeight: 900, textDecoration: 'none' }}>LEWORD 다운로드</Link>
+                    <a href="/#realtime-search" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minHeight: 52, padding: '0 22px', borderRadius: 12, border: '1px solid rgba(255,255,255,.22)', color: '#f8fbff', fontWeight: 850, textDecoration: 'none' }}>실시간 검색어 보기</a>
+                </div>
+                <p style={{ margin: '22px 0 0', color: 'rgba(235,242,250,.54)', fontSize: 13, lineHeight: 1.6 }}>
+                    공개 검색어는 수집·검증 후 갱신되는 스냅샷이며, 로그인이나 별도 웹 콘솔이 필요하지 않습니다.
+                </p>
+            </section>
+        </main>
     );
 }
 

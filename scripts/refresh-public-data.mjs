@@ -3,13 +3,10 @@
  * 방문자 화면용 정적 스냅샷 생성기.
  *
  * 목적: leaderspro.kr 방문자 화면이 API 서버 없이도 살아있게 한다.
- * 서버(141.164.59.17)는 관리자 기능 때문에 계속 필요하지만, 서버가 죽었다고
- * 홈이 하드코딩 폴백으로 떨어지면 안 된다. 그래서 주기적으로 스냅샷을 떠서
+ * 별도 API 서버가 없어도 주기적으로 스냅샷을 떠서
  * Pages 정적 자산으로 커밋하고, SPA 는 정적본을 먼저 읽는다.
  *
- * 두 종류를 만든다.
- *  - 서버 미러: 공지/브리핑/다운로드 (관리자가 서버에 올린 것을 스냅샷)
- *  - 직접 수집: 실시간 검색어 (서버를 거치지 않고 원천에서 바로)
+ * 직접 수집한 실시간 검색어를 Pages 정적 자산으로 커밋한다.
  *
  * 안전 규칙(가장 중요): **좋은 데이터를 빈 데이터로 절대 덮지 않는다.**
  * 수집 실패·0건이면 기존 파일을 그대로 둔다. 서버가 죽은 날 스냅샷이 빈 값으로
@@ -22,20 +19,29 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_DIR = join(ROOT, 'spa', 'public', 'data');
-const SERVER = process.env.LEWORD_API_BASE || 'https://141.164.59.17.sslip.io';
 const TIMEOUT_MS = 15_000;
-
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
+const BRIGHTDATA_API_KEY = String(process.env.BRIGHTDATA_API_KEY || '').trim();
+const BRIGHTDATA_WEB_UNLOCKER_ZONE = String(process.env.BRIGHTDATA_WEB_UNLOCKER_ZONE || '').trim();
+const USE_BRIGHTDATA = Boolean(BRIGHTDATA_API_KEY && BRIGHTDATA_WEB_UNLOCKER_ZONE);
 
 /** 상태 요약 — 워크플로 로그에서 한눈에 보이게 한다. */
 const report = [];
 
-async function get(url, { headers = {}, timeoutMs = TIMEOUT_MS, encoding = 'utf-8' } = {}) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
-    const res = await fetch(url, {
-      headers: { 'User-Agent': UA, ...headers },
+async function get(url, { timeoutMs = TIMEOUT_MS, encoding = 'utf-8' } = {}) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+    const res = await fetch('https://api.brightdata.com/request', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${BRIGHTDATA_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        zone: BRIGHTDATA_WEB_UNLOCKER_ZONE,
+        url,
+        format: 'raw',
+      }),
       signal: controller.signal,
     });
     // 네이트 뉴스 등 EUC-KR 사이트는 text() 로 읽으면 한글이 깨진다.
@@ -81,30 +87,6 @@ function writeSnapshot(fileName, payload, count) {
   writeFileSync(path, `${next}\n`, 'utf8');
   report.push(`  WRITTEN  ${fileName} — ${count}건`);
   return 'written';
-}
-
-// ---------------------------------------------------------------- 서버 미러
-
-async function mirrorFromServer(fileName, path, pick) {
-  const res = await get(`${SERVER}${path}`, { headers: { Accept: 'application/json' } });
-  if (!res.ok) {
-    report.push(`  SKIP     ${fileName} — 서버 응답 ${res.status || res.error}`);
-    return;
-  }
-  // 200 인데 HTML 이면 API 가 아니라 에러 페이지다(과거 여러 번 물린 패턴).
-  if (res.text.trimStart().startsWith('<')) {
-    report.push(`  SKIP     ${fileName} — 200이지만 HTML 응답`);
-    return;
-  }
-  let payload;
-  try {
-    payload = JSON.parse(res.text);
-  } catch {
-    report.push(`  SKIP     ${fileName} — JSON 파싱 실패`);
-    return;
-  }
-  const items = pick(payload);
-  writeSnapshot(fileName, { source: 'server-mirror', items }, Array.isArray(items) ? items.length : 0);
 }
 
 // ---------------------------------------------------------------- 직접 수집
@@ -391,40 +373,17 @@ function carryOverInsights(lanes) {
 async function main() {
   console.log('='.repeat(66));
   console.log(`정적 스냅샷 갱신  ${new Date().toISOString()}`);
-  console.log(`서버 ${SERVER}`);
+  console.log(USE_BRIGHTDATA ? 'Bright Data → GitHub Pages 정적 데이터' : 'Bright Data 자격 증명 없음 — 기존 정적 데이터 유지');
   console.log('='.repeat(66));
 
-  await refreshSourceSignals();
-
-  await mirrorFromServer(
-    'home-notices.json',
-    '/v1/public/home-notices',
-    (payload) => payload?.notices?.notices || payload?.notices || [],
-  );
-  await mirrorFromServer(
-    'downloads.json',
-    '/v1/downloads', // DownloadPage 가 부르는 경로와 동일해야 폴백이 붙는다
-    (payload) => payload?.downloads || payload?.items || [],
-  );
-
-  // 브리핑은 이미 SPA 가 /data/home-keyword-briefing-seed.json 을 폴백으로 읽는다.
-  // 파일명을 바꾸면 기존 폴백이 끊기므로 같은 이름을 갱신한다.
-  const briefing = await get(`${SERVER}/v1/public/home-keyword-briefing`, { headers: { Accept: 'application/json' } });
-  if (briefing.ok && !briefing.text.trimStart().startsWith('<')) {
-    try {
-      const payload = JSON.parse(briefing.text);
-      const rows = payload?.briefing?.rows || payload?.rows || [];
-      if (Array.isArray(rows) && rows.length > 0) {
-        writeSnapshot('home-keyword-briefing-seed.json', payload.briefing || payload, rows.length);
-      } else {
-        report.push('  KEPT     home-keyword-briefing-seed.json — rows 0건');
-      }
-    } catch {
-      report.push('  SKIP     home-keyword-briefing-seed.json — JSON 파싱 실패');
-    }
-  } else {
-    report.push(`  SKIP     home-keyword-briefing-seed.json — 서버 응답 ${briefing.status || briefing.error}`);
+  if (!USE_BRIGHTDATA) {
+    report.push('  KEPT     source-signals.json — BRIGHTDATA_API_KEY 및 BRIGHTDATA_WEB_UNLOCKER_ZONE이 필요합니다');
+    console.log(report.join('\n'));
+    if (process.env.CI) process.exitCode = 1;
+    return;
   }
+
+  await refreshSourceSignals();
 
   console.log(report.join('\n'));
   console.log('-'.repeat(66));
