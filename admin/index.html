@@ -2518,7 +2518,12 @@
                 if (homeOpsApiIdInput) homeOpsApiIdInput.value = id;
                 keywordBriefingApiAccessStatus('사이트 로그인 확인 · 서버 저장 권한 자동 연결 중입니다.', false);
                 homeOpsApiStatus('사이트 로그인 확인 · 서버 저장 권한 자동 연결 중입니다.', false);
-                const serverSession = await requestLewordAdminSession(id, pw, { silent: true });
+                // 이 호출은 폐지된 Vultr 세션 API 로 향한다. 실패가 정상이다.
+                // 예외가 위로 튀면 여기서 흐름이 끊겨 로그인 화면이 그대로 남는다
+                // (해시 검증은 이미 통과했는데 화면만 안 넘어가던 원인).
+                // 저장 권한은 GAS adminToken 이 따로 처리하므로 실패해도 로그인은 완료한다.
+                const serverSession = await requestLewordAdminSession(id, pw, { silent: true })
+                    .catch(() => null);
                 document.getElementById('login-pw').value = '';
                 const connectedMessage = '사이트 로그인 완료 · 서버 저장 권한 자동 연결됨';
                 const failedMessage = '사이트 로그인 완료 · 서버 저장 권한 자동 연결 실패. 새로고침 후 다시 로그인하거나 아래에서 다시 연결하세요.';
