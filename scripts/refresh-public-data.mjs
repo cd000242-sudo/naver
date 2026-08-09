@@ -896,6 +896,8 @@ const LANE_COLLECTORS = [
 ];
 
 async function refreshSourceSignals() {
+  const previousSnapshot = readExisting('source-signals.json');
+  const previousLanes = new Map((previousSnapshot?.lanes || []).map((lane) => [lane.id, lane]));
   const collected = await Promise.all(
     LANE_COLLECTORS.map((lane) => lane.collect().catch(() => [])),
   );
@@ -906,6 +908,12 @@ async function refreshSourceSignals() {
     const config = LANE_COLLECTORS[index];
     const raw = collected[index];
     if (raw.length === 0) {
+      const previousLane = previousLanes.get(config.id);
+      if (previousLane?.items?.length) {
+        lanes.push({ id: config.id, label: config.label, items: previousLane.items });
+        report.push(`  KEPT     실시간 ${config.id} 0건 — 직전 직접 수집본 ${previousLane.items.length}건 유지`);
+        continue;
+      }
       report.push(`  WARN     실시간 ${config.id} 0건 — 수집기 점검 필요`);
       continue;
     }
