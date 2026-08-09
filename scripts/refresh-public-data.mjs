@@ -353,34 +353,77 @@ async function collectOfficialPolicyBriefingsWithPlaywright() {
   }
 }
 
-async function collectPolicy() {
-  // 복지서비스 공공데이터 — 문장 조각이 아니라 제도명 자체가 온다.
+/**
+ * data.go.kr 서비스키를 URL 에 안전하게 싣는다.
+ *
+ * 포털이 Encoding 키와 Decoding 키를 둘 다 준다. 디코딩 키를 그대로 넣으면
+ * 안에 있는 '+' 가 쿼리스트링에서 공백으로 해석돼 인증이 깨진다. 반대로 이미
+ * 인코딩된 키를 또 인코딩하면 '%' 가 '%25' 가 되어 역시 깨진다.
+ * 그래서 이미 인코딩된 형태인지 보고 한 번만 인코딩한다.
+ */
+function encodeServiceKey(key) {
+  return /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
+}
+
+/**
+ * 복지서비스 공공데이터 — 문장 조각이 아니라 제도명 자체가 온다.
+ * 레인 설명("복지서비스 공공데이터에서 조회수 상위로 뽑은 제도명")이 가리키는
+ * 원래 1순위 소스다. korea.kr 스크래핑보다 먼저 시도한다 — korea.kr 은
+ * GitHub Actions IP 에서 막혀 크론에서만 조용히 0건이 됐다(실측: 로컬 20건 / CI 타임아웃).
+ */
+async function collectWelfareServices() {
   const key = String(process.env.WELFARE_API_KEY || '').trim();
+  if (!key) {
+    report.push('  WARN     정책 복지 API — WELFARE_API_KEY 미설정');
+    return [];
+  }
+  const url = 'https://apis.data.go.kr/B554287/NationalWelfareInformationsV001/NationalWelfarelistV001'
+    + `?serviceKey=${encodeServiceKey(key)}&callTp=L&pageNo=1&numOfRows=30&srchKeyCode=003&orderBy=popular`;
+  const res = await get(url, { headers: { Accept: 'application/json' } });
+  if (!res.ok) {
+    report.push(`  WARN     정책 복지 API HTTP ${res.status}`);
+    return [];
+  }
+  let parsed;
+  try {
+    parsed = JSON.parse(res.text);
+  } catch {
+    // 실패를 조용히 삼키면 "왜 0건인지" 를 영영 모른다. 실제로 그래서 오래 방치됐다.
+    report.push(`  WARN     정책 복지 API 응답 파싱 실패: ${res.text.slice(0, 80)}`);
+    return [];
+  }
+  const apiError = parsed?.OpenAPI_ServiceResponse?.cmmMsgHeader;
+  if (apiError) {
+    report.push(`  WARN     정책 복지 API 오류: ${apiError.returnAuthMsg || apiError.errMsg}`);
+    return [];
+  }
+  const list = parsed.servList || parsed?.wantedList?.servList || [];
+  const rows = list
+    .map((row) => String(row.servNm || '').replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+    .slice(0, 10)
+    .map((keyword, index) => ({ rank: index + 1, keyword }));
+  if (rows.length === 0) report.push('  WARN     정책 복지 API 응답에 servList 없음');
+  return rows;
+}
+
+async function collectPolicy() {
+  const welfareRows = await collectWelfareServices();
+  if (welfareRows.length > 0) {
+    report.push(`  INFO     정책 복지 API ${welfareRows.length}건`);
+    return welfareRows;
+  }
   const officialRows = await collectOfficialPolicyBriefings();
-  if (officialRows.length > 0) return officialRows;
+  if (officialRows.length > 0) {
+    report.push(`  INFO     정책 korea.kr 직접 수집 ${officialRows.length}건`);
+    return officialRows;
+  }
   const browserRows = await collectOfficialPolicyBriefingsWithPlaywright();
   if (browserRows.length > 0) {
     report.push(`  INFO     정책 Playwright 원본 수집 ${browserRows.length}건`);
     return browserRows;
   }
-  if (!key) {
-    report.push('  WARN     정책 레인 — WELFARE_API_KEY 미설정, 건너뜀');
-    return [];
-  }
-  const url = 'https://apis.data.go.kr/B554287/NationalWelfareInformationsV001/NationalWelfarelistV001'
-    + `?serviceKey=${key}&callTp=L&pageNo=1&numOfRows=30&srchKeyCode=003&orderBy=popular`;
-  const res = await get(url, { headers: { Accept: 'application/json' } });
-  if (!res.ok) return [];
-  try {
-    const list = JSON.parse(res.text).servList || [];
-    return list
-      .map((row) => String(row.servNm || '').replace(/\s+/g, ' ').trim())
-      .filter(Boolean)
-      .slice(0, 10)
-      .map((keyword, index) => ({ rank: index + 1, keyword }));
-  } catch {
-    return [];
-  }
+  return [];
 }
 
 async function collectZum() {

@@ -84,6 +84,12 @@ jobs:
             fi
           done
 
+      - name: Verify lane and brief coverage
+        # 레인이 조용히 0건이 되거나 브리프가 빠지는 걸 사람 눈으로 발견하기까지
+        # 며칠이 걸렸다(정책 레인). 여기서 매 사이클 세고 로그에 남긴다.
+        # 커밋은 막지 않는다 — 일부 레인이 죽어도 나머지는 계속 갱신돼야 한다.
+        run: node scripts/verify-source-signals.mjs --warn-only
+
       - name: Commit if changed
         id: commit
         run: |
