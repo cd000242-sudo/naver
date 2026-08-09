@@ -1231,9 +1231,19 @@
                 </div>
                 <div class="form-group">
                     <label>비밀번호</label>
-                    <input type="password" id="login-pw" placeholder="비밀번호 입력" autocomplete="current-password" required>
+                    <div style="position:relative;">
+                        <input type="password" id="login-pw" placeholder="비밀번호 입력" autocomplete="current-password" required style="padding-right:52px;">
+                        <button type="button" id="login-pw-toggle"
+                            aria-label="비밀번호 보기"
+                            style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-secondary);font-size:.72rem;font-weight:700;cursor:pointer;padding:6px 8px;">보기</button>
+                    </div>
                 </div>
-                <button type="submit" class="login-btn">로그인</button>
+                <button type="submit" class="login-btn" id="login-submit">로그인</button>
+                <p id="login-progress" style="display:none;margin:10px 0 0;color:var(--text-secondary);font-size:.74rem;">
+                    <span id="login-progress-spin" style="display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.18);border-top-color:#d4af37;border-radius:50%;vertical-align:-1px;margin-right:7px;animation:loginSpin .8s linear infinite;"></span>
+                    <span id="login-progress-text">서버에 확인 중…</span>
+                </p>
+                <style>@keyframes loginSpin{to{transform:rotate(360deg)}}</style>
                 <p class="login-error" id="login-error">아이디 또는 비밀번호가 올바르지 않습니다.</p>
                 <p style="margin:12px 0 0;color:var(--text-secondary);font-size:.72rem;line-height:1.55;">관리자 로그인 한 번으로 공지·키워드 저장 권한까지 자동 연결됩니다. 비밀번호는 저장하지 않습니다.</p>
             </form>
@@ -2575,12 +2585,43 @@
         // This replaces the old client-side SHA-256 comparison.  Only GAS
         // validates the password and only the returned opaque session is kept
         // for the current browser tab.
+        // 비밀번호 보기 — 오타로 로그인 실패를 반복하지 않게.
+        (function bindPasswordToggle() {
+            const toggle = document.getElementById('login-pw-toggle');
+            const field = document.getElementById('login-pw');
+            if (!toggle || !field) return;
+            toggle.addEventListener('click', () => {
+                const shown = field.type === 'text';
+                field.type = shown ? 'password' : 'text';
+                toggle.textContent = shown ? '보기' : '숨기기';
+                toggle.setAttribute('aria-label', shown ? '비밀번호 보기' : '비밀번호 숨기기');
+                field.focus();
+            });
+        })();
+
+        /** 로그인 진행 상태. 눌렀는데 아무 반응이 없으면 고장으로 보인다. */
+        function setLoginProgress(message) {
+            const box = document.getElementById('login-progress');
+            const text = document.getElementById('login-progress-text');
+            const button = document.getElementById('login-submit');
+            if (!box) return;
+            if (message) {
+                if (text) text.textContent = message;
+                box.style.display = 'block';
+                if (button) { button.disabled = true; button.textContent = '확인 중…'; }
+            } else {
+                box.style.display = 'none';
+                if (button) { button.disabled = false; button.textContent = '로그인'; }
+            }
+        }
+
         async function handleLogin(e) {
             e.preventDefault();
             const id = document.getElementById('login-id').value.trim();
             const passwordField = document.getElementById('login-pw');
             const password = passwordField.value;
             const error = document.getElementById('login-error');
+            setLoginProgress('서버에 자격 확인 중…');
             try {
                 const response = await legacyPanelFetch(GAS_URL, {
                     method: 'POST',
@@ -2591,9 +2632,12 @@
                 if (!response.ok || !(payload.ok || payload.success) || !payload.session || !payload.session.token) {
                     throw new Error(payload.error || payload.message || '아이디 또는 비밀번호가 올바르지 않습니다.');
                 }
+                setLoginProgress('저장 권한 연결 중…');
                 writeAdminSession(payload.session);
+                setLoginProgress('');
                 openLegacyDashboard();
             } catch (err) {
+                setLoginProgress('');
                 error.textContent = err && err.message ? err.message : '로그인에 실패했습니다.';
                 error.classList.add('visible');
                 setTimeout(() => error.classList.remove('visible'), 3500);
