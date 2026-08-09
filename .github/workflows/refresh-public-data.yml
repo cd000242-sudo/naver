@@ -37,7 +37,7 @@ jobs:
 
       - name: Install Playwright article collector
         run: |
-          npm ci --omit=dev --ignore-scripts
+          npm ci --ignore-scripts
           npx playwright install --with-deps chromium
 
       - name: Refresh snapshots
