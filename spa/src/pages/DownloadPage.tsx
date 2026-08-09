@@ -229,20 +229,43 @@ function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; sit
     const [error, setError] = useState(false);
     const [shake, setShake] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [urlMissing, setUrlMissing] = useState(false);
     const [downloadKey, setDownloadKey] = useState(() => getPreferredDownload(product.downloads).key);
     const selectedDownload = product.downloads.find((item) => item.key === downloadKey) || product.downloads[0];
 
-    const tryDownload = async () => {
-        if (pw.trim() !== DOWNLOAD_PW) {
+    /**
+     * 비밀번호가 맞을 때만 링크를 넘긴다.
+     *
+     * window.open 으로 열던 것을 실제 <a href> 로 바꿨다. 이유가 둘이다:
+     *  1. window.open 은 브라우저 팝업 차단에 막히면 아무 일도 안 일어난다.
+     *     사용자 눈에는 "버튼을 눌렀는데 반응이 없다" 로 보인다. 실제로
+     *     새벽 구매자가 다운로드를 못 받는 일이 있었다.
+     *  2. 링크면 우클릭 복사·새 탭 열기가 되고, 실패해도 주소가 눈에 보인다.
+     */
+    const unlocked = pw.trim() === DOWNLOAD_PW;
+    const href = String(selectedDownload?.url || '').trim();
+
+    const onDownloadClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        if (!unlocked) {
+            event.preventDefault();
             setError(true);
             setShake(true);
             window.setTimeout(() => { setError(false); setShake(false); }, 2000);
             return;
         }
+        if (!href) {
+            // 주소가 비어 있으면 빈 탭만 열려 "아무 일도 안 일어난 것" 처럼 보인다.
+            // 관리자 설정(GAS)이 비었을 때 실제로 이렇게 됐다. 조용히 실패시키지 않는다.
+            event.preventDefault();
+            setUrlMissing(true);
+            return;
+        }
         setError(false);
+        setUrlMissing(false);
         setLoading(true);
-        window.open(selectedDownload.url, '_blank', 'noopener');
-        setPw('');
+        // 비밀번호를 여기서 지우면 안 된다. unlocked 가 false 로 바뀌면서
+        // 같은 렌더에서 href 가 사라져 브라우저가 이동을 취소한다.
+        // (버튼을 눌러도 아무 일이 없던 원인 중 하나였다.)
         window.setTimeout(() => setLoading(false), 700);
     };
 
@@ -312,7 +335,13 @@ function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; sit
                         type="password"
                         value={pw}
                         onChange={(e) => setPw(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === 'Enter') tryDownload(); }}
+                        onKeyDown={(e) => {
+                            // 엔터로도 받을 수 있게 한다. 링크를 직접 눌러 브라우저가
+                            // 다운로드를 시작하게 해야 팝업 차단에 안 걸린다.
+                            if (e.key !== 'Enter') return;
+                            const anchor = e.currentTarget.parentElement?.querySelector('a');
+                            if (anchor) (anchor as HTMLAnchorElement).click();
+                        }}
                         placeholder="비밀번호 입력"
                         style={{
                             flex: 1, padding: '12px 14px',
@@ -322,10 +351,12 @@ function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; sit
                             animation: shake ? 'shakeDl 0.4s' : 'none',
                         }}
                     />
-                    <button
-                        onClick={tryDownload}
-                        disabled={loading}
-                        style={{ padding: '12px 18px', background: `linear-gradient(135deg, ${product.accent}, ${product.accent}cc)`, color: '#000', border: 'none', borderRadius: 10, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    <a
+                        href={unlocked && href ? href : undefined}
+                        onClick={onDownloadClick}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ padding: '12px 18px', background: `linear-gradient(135deg, ${product.accent}, ${product.accent}cc)`, color: '#000', border: 'none', borderRadius: 10, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}
                         title={selectedDownload.label + ' 다운로드'}
                     >
                         {loading ? (
@@ -333,9 +364,10 @@ function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; sit
                         ) : (
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                         )}
-                    </button>
+                    </a>
                 </div>
                 {error && <p style={{ marginTop: 8, color: '#ff3b5c', fontSize: 12, fontWeight: 600 }}>비밀번호가 올바르지 않습니다.</p>}
+                {urlMissing && <p style={{ marginTop: 8, color: '#ff3b5c', fontSize: 12, fontWeight: 600 }}>이 버전의 다운로드 주소가 설정되지 않았습니다. 다른 항목을 선택하거나 1:1 문의로 알려주세요.</p>}
             </div>
             <style>{`@keyframes shakeDl{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}`}</style>
         </div>
