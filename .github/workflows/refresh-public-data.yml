@@ -51,7 +51,7 @@ jobs:
           NEWS_PER_KEYWORD: ${{ vars.NEWS_PER_KEYWORD || '2' }}
           # A portal rank gathered directly is the live signal. News matching
           # enriches its context; Bright Data remains disabled for refreshes.
-          NEWS_FETCH_CONCURRENCY: ${{ vars.NEWS_FETCH_CONCURRENCY || '1' }}
+          NEWS_FETCH_CONCURRENCY: ${{ vars.NEWS_FETCH_CONCURRENCY || '3' }}
           NEWS_MAX_QUERIES_PER_RUN: ${{ vars.NEWS_MAX_QUERIES_PER_RUN || '60' }}
           INSIGHT_REFRESH_MINUTES: ${{ vars.INSIGHT_REFRESH_MINUTES || '60' }}
           PLAYWRIGHT_ARTICLE_EXTRACTION: '1'

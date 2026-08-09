@@ -38,7 +38,7 @@ const DIRECT_HEADERS = {
   'Accept-Language': 'ko-KR,ko;q=0.9,en;q=0.6',
 };
 const NEWS_PER_KEYWORD = Math.min(3, Math.max(1, Number(process.env.NEWS_PER_KEYWORD || 2) || 2));
-const NEWS_FETCH_CONCURRENCY = Math.min(3, Math.max(1, Number(process.env.NEWS_FETCH_CONCURRENCY || 1) || 1));
+const NEWS_FETCH_CONCURRENCY = Math.min(3, Math.max(1, Number(process.env.NEWS_FETCH_CONCURRENCY || 3) || 3));
 // The portal's directly collected rank is the evidence that a term is live.
 // News lookup enriches the card with context but must never hide a real source
 // signal when an article has not been matched yet. This is not Bright Data.
