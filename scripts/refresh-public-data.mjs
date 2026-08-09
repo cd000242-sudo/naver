@@ -1161,6 +1161,39 @@ function carryOverInsights(lanes) {
 
 // ---------------------------------------------------------------- 실행
 
+
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+
+/**
+ * 공지 스냅샷 발행.
+ *
+ * 공지는 원래 Vultr API(/v1/public/home-notices)가 서빙했다. 서버를 폐지하면서
+ * 그 경로가 끊겼고 home-notices.json 은 아무도 만들지 않아 404 가 됐다.
+ * GAS 에는 읽기 액션(get-notices)이 살아 있으므로, 여기서 받아 정적본으로 발행한다.
+ * 이러면 GAS 가 잠깐 죽어도 사이트의 공지는 마지막 스냅샷으로 계속 뜬다.
+ */
+async function refreshHomeNotices() {
+  const res = await get(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, {
+    headers: { Accept: 'application/json' },
+  });
+  if (!res.ok) {
+    report.push(`  WARN     공지 GAS HTTP ${res.status} — 기존 파일 유지`);
+    return;
+  }
+  let payload;
+  try {
+    payload = JSON.parse(res.text);
+  } catch {
+    report.push(`  WARN     공지 GAS 응답 파싱 실패: ${res.text.slice(0, 80)}`);
+    return;
+  }
+  const notices = Array.isArray(payload?.notices) ? payload.notices
+    : Array.isArray(payload?.items) ? payload.items
+      : [];
+  // 0건이면 쓰지 않는다. 좋은 공지를 빈 값으로 덮지 않기 위한 가드다.
+  writeSnapshot('home-notices.json', { source: 'gas', items: notices }, notices.length);
+}
+
 async function main() {
   console.log('='.repeat(66));
   console.log(`정적 스냅샷 갱신  ${new Date().toISOString()}`);
@@ -1170,6 +1203,7 @@ async function main() {
   console.log('='.repeat(66));
 
   await refreshSourceSignals();
+  await refreshHomeNotices();
 
   console.log(report.join('\n'));
   console.log('-'.repeat(66));
