@@ -56,6 +56,13 @@ export async function requestAdminOtp(email: string): Promise<void> {
     if (!responseOk(payload)) throw new Error(payload.error || payload.message || '로그인 코드를 보낼 수 없습니다.');
 }
 
+export async function loginWithAdminPassword(loginId: string, password: string): Promise<void> {
+    const payload = await post<AdminResponse>({ action: 'admin-password-login', loginId: loginId.trim(), password });
+    const token = payload.session?.token || '';
+    if (!responseOk(payload) || !token) throw new Error(payload.error || payload.message || '아이디 또는 비밀번호가 올바르지 않습니다.');
+    writeSession(token, Number(payload.session?.expiresIn || 0));
+}
+
 export async function verifyAdminOtp(email: string, code: string): Promise<void> {
     const payload = await post<AdminResponse>({ action: 'admin-otp-verify', email: email.trim(), code: code.trim() });
     const token = payload.session?.token || '';
@@ -109,4 +116,8 @@ export async function saveNotice(notice: Partial<HomeNotice>): Promise<void> {
 
 export async function removeNotice(id: string): Promise<void> {
     await adminPost('delete-notice', { id });
+}
+
+export async function setAdminPasswordCredentials(loginId: string, password: string): Promise<void> {
+    await adminPost('admin-password-set', { loginId: loginId.trim(), password });
 }

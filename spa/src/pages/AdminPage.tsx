@@ -2,11 +2,13 @@ import { FormEvent, useEffect, useMemo, useState } from 'react';
 import {
     adminPost,
     clearAdminSession,
+    loginWithAdminPassword,
     logoutAdmin,
     removeNotice,
     requestAdminOtp,
     saveNotice,
     saveSiteContent,
+    setAdminPasswordCredentials,
     verifyAdminOtp,
     verifyAdminSession,
 } from '../lib/adminApi';
@@ -85,11 +87,28 @@ function formatAmount(value: number): string {
 }
 
 function Login({ onAuthenticated }: { onAuthenticated: () => void }) {
+    const [loginId, setLoginId] = useState('');
+    const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [code, setCode] = useState('');
     const [requested, setRequested] = useState(false);
+    const [emailRecovery, setEmailRecovery] = useState(false);
     const [busy, setBusy] = useState(false);
     const [message, setMessage] = useState('');
+
+    const loginWithPassword = async (event: FormEvent) => {
+        event.preventDefault();
+        setBusy(true);
+        setMessage('');
+        try {
+            await loginWithAdminPassword(loginId, password);
+            onAuthenticated();
+        } catch (error) {
+            setMessage(error instanceof Error ? error.message : '로그인에 실패했습니다.');
+        } finally {
+            setBusy(false);
+        }
+    };
 
     const requestCode = async (event: FormEvent) => {
         event.preventDefault();
@@ -125,24 +144,63 @@ function Login({ onAuthenticated }: { onAuthenticated: () => void }) {
             <span style={{ color: '#f5d76e', fontWeight: 900, letterSpacing: 1.1, fontSize: 12 }}>LEADERS PRO ADMIN</span>
             <h1 style={{ margin: '12px 0 8px', fontSize: 30 }}>관리자 로그인</h1>
             <p style={{ margin: '0 0 22px', color: 'rgba(255,255,255,.68)', lineHeight: 1.65 }}>
-                관리자 이메일로 전달되는 일회용 코드로 로그인합니다. 로그인 정보와 세션은 이 브라우저 탭에만 보관됩니다.
+                아이디와 비밀번호로 로그인합니다. 비밀번호는 브라우저에 저장하지 않으며, 서버는 만료되는 세션만 발급합니다.
             </p>
-            <form onSubmit={requested ? verifyCode : requestCode} style={{ display: 'grid', gap: 12 }}>
-                <label style={{ display: 'grid', gap: 7, fontWeight: 800 }}>
-                    관리자 이메일
-                    <input type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} style={inputStyle} />
-                </label>
-                {requested && <label style={{ display: 'grid', gap: 7, fontWeight: 800 }}>
-                    로그인 코드
-                    <input inputMode="numeric" autoComplete="one-time-code" maxLength={6} required value={code} onChange={(event) => setCode(event.target.value.replace(/\D/g, ''))} style={inputStyle} />
-                </label>}
-                <button type="submit" disabled={busy} style={{ ...primaryStyle, opacity: busy ? .6 : 1 }}>
-                    {busy ? '처리 중…' : requested ? '로그인' : '로그인 코드 받기'}
-                </button>
-            </form>
+            {!emailRecovery ? <form onSubmit={loginWithPassword} style={{ display: 'grid', gap: 12 }}>
+                <label style={{ display: 'grid', gap: 7, fontWeight: 800 }}>관리자 아이디<input autoComplete="username" required value={loginId} onChange={(event) => setLoginId(event.target.value)} style={inputStyle} /></label>
+                <label style={{ display: 'grid', gap: 7, fontWeight: 800 }}>비밀번호<input type="password" autoComplete="current-password" required value={password} onChange={(event) => setPassword(event.target.value)} style={inputStyle} /></label>
+                <button type="submit" disabled={busy} style={{ ...primaryStyle, opacity: busy ? .6 : 1 }}>{busy ? '처리 중…' : '로그인'}</button>
+            </form> : <form onSubmit={requested ? verifyCode : requestCode} style={{ display: 'grid', gap: 12 }}>
+                <label style={{ display: 'grid', gap: 7, fontWeight: 800 }}>관리자 이메일<input type="email" autoComplete="email" required value={email} onChange={(event) => setEmail(event.target.value)} style={inputStyle} /></label>
+                {requested && <label style={{ display: 'grid', gap: 7, fontWeight: 800 }}>로그인 코드<input inputMode="numeric" autoComplete="one-time-code" maxLength={6} required value={code} onChange={(event) => setCode(event.target.value.replace(/\D/g, ''))} style={inputStyle} /></label>}
+                <button type="submit" disabled={busy} style={{ ...primaryStyle, opacity: busy ? .6 : 1 }}>{busy ? '처리 중…' : requested ? '이메일 코드 로그인' : '로그인 코드 받기'}</button>
+            </form>}
+            <button type="button" style={{ ...secondaryStyle, width: '100%', marginTop: 12 }} onClick={() => { setEmailRecovery(!emailRecovery); setRequested(false); setMessage(''); }}>
+                {emailRecovery ? '아이디·비밀번호 로그인으로 돌아가기' : '최초 비밀번호 설정·복구는 이메일 코드 사용'}
+            </button>
             {message && <p role="status" style={{ margin: '16px 0 0', color: '#f5d76e', lineHeight: 1.55 }}>{message}</p>}
         </section>
     </main>;
+}
+
+function PasswordSetup() {
+    const [loginId, setLoginId] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [busy, setBusy] = useState(false);
+    const [message, setMessage] = useState('');
+
+    const saveCredentials = async (event: FormEvent) => {
+        event.preventDefault();
+        if (password !== confirmPassword) {
+            setMessage('새 비밀번호가 서로 다릅니다.');
+            return;
+        }
+        setBusy(true);
+        setMessage('');
+        try {
+            await setAdminPasswordCredentials(loginId, password);
+            setPassword('');
+            setConfirmPassword('');
+            setMessage('아이디·비밀번호를 저장했습니다. 다음부터 이메일 코드 없이 로그인할 수 있습니다.');
+        } catch (error) {
+            setMessage(error instanceof Error ? error.message : '비밀번호를 저장하지 못했습니다.');
+        } finally {
+            setBusy(false);
+        }
+    };
+
+    return <details style={{ ...cardStyle, marginBottom: 18 }}>
+        <summary style={{ cursor: 'pointer', fontWeight: 900 }}>아이디·비밀번호 최초 설정 또는 변경</summary>
+        <p style={{ color: 'rgba(255,255,255,.66)', lineHeight: 1.6 }}>이메일 코드로 로그인한 뒤에만 새 비밀번호를 설정할 수 있습니다. 기존에 공개됐던 비밀번호는 사용하지 마세요.</p>
+        <form onSubmit={saveCredentials} style={{ display: 'grid', gap: 10, maxWidth: 520 }}>
+            <input required minLength={4} maxLength={64} placeholder="새 관리자 아이디" value={loginId} onChange={(event) => setLoginId(event.target.value)} style={inputStyle} />
+            <input required type="password" minLength={12} maxLength={128} autoComplete="new-password" placeholder="새 비밀번호 (12자 이상)" value={password} onChange={(event) => setPassword(event.target.value)} style={inputStyle} />
+            <input required type="password" minLength={12} maxLength={128} autoComplete="new-password" placeholder="새 비밀번호 확인" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} style={inputStyle} />
+            <button type="submit" disabled={busy} style={{ ...primaryStyle, width: 'fit-content' }}>{busy ? '저장 중…' : '아이디·비밀번호 저장'}</button>
+        </form>
+        {message && <p role="status" style={{ color: '#f5d76e', marginBottom: 0 }}>{message}</p>}
+    </details>;
 }
 
 function Orders({ orders, busy, onRefresh, onProcess }: {
@@ -311,6 +369,7 @@ function AdminPage() {
                 <div><span style={{ color: '#f5d76e', fontWeight: 900, fontSize: 12, letterSpacing: 1.1 }}>SECURE ADMIN</span><h1 style={{ margin: '5px 0 0', fontSize: 30 }}>Leaders Pro 운영 관리</h1></div>
                 <button type="button" style={secondaryStyle} onClick={() => void run(async () => { await logoutAdmin(); setAuthenticated(false); })}>로그아웃</button>
             </header>
+            <PasswordSetup />
             <nav style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 18 }}>
                 <button type="button" style={view === 'content' ? primaryStyle : secondaryStyle} onClick={() => setView('content')}>사이트 콘텐츠</button>
                 <button type="button" style={view === 'notices' ? primaryStyle : secondaryStyle} onClick={() => setView('notices')}>공지사항</button>
