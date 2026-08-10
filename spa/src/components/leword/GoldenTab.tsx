@@ -3,7 +3,7 @@ import { goldenIndex } from '../../lib/goldenIndex';
 import PreemptionPlan from './PreemptionPlan';
 import { EVIDENCE_ICON, naverSearchUrl, SURFACE_TAG, TIER_BADGE, TIER_RANK } from './preemptionMeta';
 import { formatCount } from '../../lib/keywordApi';
-import { hasAnyUserKey } from '../../lib/userKeys';
+import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -73,15 +73,13 @@ type Board = {
 };
 
 const BOARD_URL = '/data/preemption-board.json';
-/** 키·라이선스 없이 온전히 보이는 건수. 나머지는 흐림 처리된다. */
-const FREE_PREVIEW_ROWS = 5;
-
 function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [board, setBoard] = useState<Board | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
     const [topic, setTopic] = useState('전체');
     const [query, setQuery] = useState('');
-    const unlocked = useMemo(() => hasAnyUserKey(), []);
+    // 라이선스 코드 또는 자기 API 키. 둘 중 하나면 전부 열린다.
+    const [unlocked, setUnlocked] = useState(() => isUnlocked());
     /** 실행 계획을 펼친 카드. 한 번에 하나만 연다 — 다 펼치면 목록이 안 읽힌다. */
     const [openPlan, setOpenPlan] = useState('');
     /** 방금 복사한 키워드. 눌렀는지 안 눌렀는지 모르면 두 번 누르게 된다. */
@@ -202,17 +200,13 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         ))}
                     </div>
 
-                    {!unlocked && rows.length > FREE_PREVIEW_ROWS && (
-                        <div className="lw-note lw-note-plain">
-                            무료로는 상위 {FREE_PREVIEW_ROWS}건까지 보입니다.
-                            <strong style={{ display: 'inline', marginLeft: 4 }}>내 API 키를 등록하면 전체가 열립니다</strong>
-                            — 자기 쿼터를 쓰므로 조회 제한도 없습니다.
-                        </div>
+                    {!unlocked && rows.length > FREE_BOARD_ROWS && (
+                        <LicenseGate onUnlock={() => setUnlocked(true)} />
                     )}
 
                     <div className="lw-grid">
                         {rows.map((row, index) => {
-                            const locked = !unlocked && index >= FREE_PREVIEW_ROWS;
+                            const locked = !unlocked && index >= FREE_BOARD_ROWS;
                             return (
                                 <article key={`${row.topic}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
                                     <div className="lw-card-tags">

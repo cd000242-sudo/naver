@@ -351,6 +351,30 @@ function LewordStyles() {
                 color: var(--gold-ink); font-size: 10.5px; font-weight: 900; letter-spacing: .02em;
             }
             /* 제휴 3열. 좁아지면 한 열씩 내려간다 — 카드가 눌리면 상품명이 안 읽힌다. */
+            /* 라이선스 잠금 안내. 광고처럼 보이지 않게 톤을 낮춘다 — 이미 쓰는 사람에게도 뜬다. */
+            .lw-gate {
+                display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+                margin: 0 0 14px; padding: 16px 20px; border-radius: 13px;
+                border: 1px solid rgba(124,92,255,.3);
+                background: linear-gradient(135deg, rgba(124,92,255,.13), rgba(124,92,255,.05));
+            }
+            .lw-gate-body strong { display: block; margin-bottom: 5px; color: #fff; font-size: 14px; font-weight: 900; }
+            .lw-gate-body p { margin: 0; color: rgba(235,242,250,.72); font-size: 12.5px; line-height: 1.55; word-break: keep-all; }
+            .lw-gate-body b { color: #cfc4ff; }
+            .lw-gate-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+            .lw-gate-form { display: flex; gap: 6px; }
+            .lw-gate-form input {
+                width: 190px; padding: 9px 11px; border-radius: 9px;
+                border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.94);
+                color: #10131d; font-size: 13px;
+            }
+            .lw-gate-login, .lw-gate-form button, .lw-gate-buy {
+                padding: 9px 14px; border-radius: 9px; white-space: nowrap; cursor: pointer;
+                font-size: 12.5px; font-weight: 800; text-decoration: none;
+                border: 1px solid rgba(124,92,255,.45); background: rgba(124,92,255,.24); color: #cfc4ff;
+            }
+            .lw-gate-buy { border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: rgba(235,242,250,.8); }
+            .lw-gate-login:hover, .lw-gate-form button:hover { background: rgba(124,92,255,.34); }
             .lw-lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
             @media (max-width: 1180px) { .lw-lanes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
             @media (max-width: 780px) { .lw-lanes { grid-template-columns: minmax(0, 1fr); } }

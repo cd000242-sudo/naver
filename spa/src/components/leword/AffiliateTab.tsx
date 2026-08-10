@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { fetchCoupangProducts, formatCount, type CoupangProducts } from '../../lib/keywordApi';
 import { goldenIndex } from '../../lib/goldenIndex';
 import { TabIntro } from './LewordShared';
+import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { AFFILIATE_LANES, affiliateRows, brandToken, rowsForLane, type AffiliateRow } from './affiliateLanes';
 
 /**
@@ -21,6 +22,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [rows, setRows] = useState<AffiliateRow[] | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
     const [copied, setCopied] = useState('');
+    const [unlocked, setUnlocked] = useState(() => isUnlocked());
     /*
      * 쿠팡 상품은 키워드마다 따로 부른다. 한 번에 다 부르면 파트너스 쿼터가 확 탄다 —
      * 사용자가 펼친 카드만 조회한다.
@@ -83,6 +85,10 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 </div>
             )}
 
+            {status === 'ready' && !unlocked && (
+                <LicenseGate onUnlock={() => setUnlocked(true)} />
+            )}
+
             {status === 'ready' && (
                 <div className="lw-lanes">
                     {AFFILIATE_LANES.map((lane) => (
@@ -95,7 +101,9 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             </header>
 
                             <ol className="lw-lane-list">
-                                {rowsForLane(lane.id, cards).map((row, index) => {
+                                {rowsForLane(lane.id, cards)
+                                    .slice(0, unlocked ? undefined : FREE_BOARD_ROWS)
+                                    .map((row, index) => {
                                     const index2 = goldenIndex(row.searchVolume, row.documentCount);
                                     const product = lane.id === 'brandconnect'
                                         ? `브랜드 «${brandToken(row)}»`
