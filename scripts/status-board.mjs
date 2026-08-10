@@ -67,13 +67,36 @@ function renderLane(probe, checks) {
 }
 
 async function main() {
-  const probes = selectProbes();
+  let probes = selectProbes();
   const mode = hasFlag('local') ? 'local' : 'live';
   const startedAt = Date.now();
 
   const laneResults = [];
-  // 레인끼리는 병렬로 돌린다. 전부 순차로 하면 40초씩 걸려서 안 켜게 된다.
-  const settled = await Promise.allSettled(probes.map((probe) => probe.run({ mode })));
+  /*
+   * 레인끼리는 병렬로 돌린다. 전부 순차로 하면 40초씩 걸려서 안 켜게 된다.
+   *
+   * 다만 GAS 를 때리는 레인(purchase·admin·content·keyword)을 한꺼번에 던지면
+   * Apps Script 가 동시 실행을 직렬화하면서 뒤엣것이 타임아웃난다. 실제로
+   * 하네스가 자기 부하로 자기를 실패시켰다 — 단독 실행하면 전부 통과한다.
+   * 그래서 GAS 레인만 순차로 돌리고, 나머지는 같이 돌린다.
+   */
+  const GAS_LANES = new Set(['purchase', 'admin', 'content', 'keyword']);
+  const gasProbes = probes.filter((probe) => GAS_LANES.has(probe.id));
+  const otherProbes = probes.filter((probe) => !GAS_LANES.has(probe.id));
+
+  const otherPromise = Promise.allSettled(otherProbes.map((probe) => probe.run({ mode })));
+  const gasSettled = [];
+  for (const probe of gasProbes) {
+    try {
+      gasSettled.push({ status: 'fulfilled', value: await probe.run({ mode }) });
+    } catch (reason) {
+      gasSettled.push({ status: 'rejected', reason });
+    }
+  }
+  const otherSettled = await otherPromise;
+  const ordered = [...gasProbes, ...otherProbes];
+  const settled = [...gasSettled, ...otherSettled];
+  probes = ordered;
   settled.forEach((entry, index) => {
     laneResults.push({
       probe: probes[index],

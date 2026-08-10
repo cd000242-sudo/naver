@@ -306,6 +306,19 @@ function LewordStyles() {
                 color: #c9bcff; font-size: 11.5px; font-weight: 800;
             }
             .lw-card-pre { position: relative; }
+            .lw-intent-tag, .lw-trend-tag, .lw-warn-tag {
+                padding: 3px 9px; border-radius: 999px;
+                font-size: 11.5px; font-weight: 800; border: 1px solid;
+            }
+            .lw-intent-tag { background: rgba(0,224,198,.10); border-color: rgba(0,224,198,.30); color: #7fded1; }
+            .lw-trend-tag  { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.16); color: #9aa1b2; }
+            /* 경고는 눈에 띄되 카드를 지배하지 않게. 버리라는 뜻이 아니라 알려주는 것이다. */
+            .lw-warn-tag   { background: rgba(245,197,24,.10); border-color: rgba(245,197,24,.32); color: #f5c518; }
+            .lw-timing {
+                margin: 0; padding: 8px 11px;
+                border-radius: 9px; background: rgba(0,224,198,.08);
+                color: #7fded1; font-size: 12.5px; font-weight: 700;
+            }
             .lw-card-tags { display: flex; flex-wrap: wrap; gap: 5px; }
             .lw-tier-tag {
                 padding: 3px 9px; border-radius: 999px;

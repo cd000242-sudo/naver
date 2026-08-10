@@ -27,6 +27,16 @@ type PreemptionRow = {
     tierLabel?: string;
     /** 상위 몇 번째 자리가 비어 있는가. */
     openSlot?: number | null;
+    /** 검색 의도(구매 검토·거래·정보). 구매 검토형이 블로그에 제일 값어치가 크다. */
+    intentLabel?: string;
+    /** AI 브리핑 잠식 위험 — 실측 또는 어절 추론. */
+    briefingRisk?: 'high' | 'medium' | 'low' | null;
+    /** 의료·금융 규제 주의 라벨. */
+    regulatoryLabel?: string;
+    /** 수요 모양(시즌성·에버그린·상승세…). */
+    trendLabel?: string;
+    /** 시즌성일 때 "언제 써야 하는가". */
+    timing?: string;
     searchVolume: number | null;
     documentCount: number | null;
     evidence: Evidence[];
@@ -186,6 +196,20 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 {TIER_BADGE[row.tier].text}
                                             </span>
                                         )}
+                                        {/* 구매 검토형이 블로그에 제일 값어치가 크다(리서치 §3). */}
+                                        {row.intentLabel && row.intentLabel !== '분류 안 됨' && (
+                                            <span className="lw-intent-tag">{row.intentLabel}</span>
+                                        )}
+                                        {row.trendLabel && row.trendLabel !== '판정불가' && (
+                                            <span className="lw-trend-tag">{row.trendLabel}</span>
+                                        )}
+                                        {/* 자리가 비어 있어도 AI 가 답을 대신하면 클릭이 안 온다. */}
+                                        {row.briefingRisk === 'high' && (
+                                            <span className="lw-warn-tag">AI 답변 잠식</span>
+                                        )}
+                                        {row.regulatoryLabel && (
+                                            <span className="lw-warn-tag">{row.regulatoryLabel}</span>
+                                        )}
                                     </div>
                                     <h3>{row.keyword}</h3>
 
@@ -197,6 +221,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             </li>
                                         ))}
                                     </ul>
+
+                                    {row.timing && <p className="lw-timing">{row.timing}</p>}
 
                                     <div className="lw-card-metrics">
                                         <div><span>검색량</span><strong>{formatCount(row.searchVolume)}</strong></div>

@@ -94,7 +94,12 @@ async function checkDeadServerRefs() {
       ['grep', '-l', '-e', '141.164.59.17', '-e', 'api.leword.app', '--', 'spa/src', 'admin', 'scripts'],
       { timeout: 20000, windowsHide: true },
     );
-    const files = stdout.split('\n').map((line) => line.trim()).filter(Boolean);
+    // 이 파일 자신은 검사 패턴을 문자열로 들고 있어서 항상 잡힌다.
+    // 자기를 세면 영원히 '주의'가 떠 있고, 늘 떠 있는 경고는 곧 무시된다.
+    const files = stdout.split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .filter((file) => !file.endsWith('scripts/status/probe-deploy.mjs'));
     return files.length === 0
       ? ok('deploy.dead-server', '죽은 서버 참조', '없음')
       : warn('deploy.dead-server', '죽은 서버 참조', `${files.length}개 파일에 남아 있다: ${files.slice(0, 4).join(', ')}`);
@@ -103,6 +108,37 @@ async function checkDeadServerRefs() {
     if (error?.code === 1) return ok('deploy.dead-server', '죽은 서버 참조', '없음');
     return skip('deploy.dead-server', '죽은 서버 참조', `git grep 실패: ${String(error?.message || error).split('\n')[0]}`);
   }
+}
+
+/**
+ * 공유 카드 이미지가 실제로 살아 있는지.
+ *
+ * 라우트별 og:image 를 붙여 놨는데 파일이 없으면 카톡·페북에 **깨진 카드**가
+ * 나간다. 화면에서는 안 보이고 공유해 봐야 안다 — 조용히 죽는 부류다.
+ */
+async function checkCardImages() {
+  const paths = ['/', '/pricing', '/chatbots', '/orbit', '/download', '/products', '/leword'];
+  const pages = await Promise.all(paths.map((p) => request(`${SITE}${p}`, { timeoutMs: 15000 })));
+
+  const urls = new Set();
+  pages.forEach((page) => {
+    if (!page.okStatus) return;
+    const hit = /<meta property="og:image" content="([^"]+)"/.exec(page.text);
+    if (hit) urls.add(hit[1]);
+  });
+  if (urls.size === 0) return skip('deploy.card-image', '공유 카드 이미지', 'og:image 를 읽지 못했다');
+
+  const checks = await Promise.all([...urls].map((url) => probeLink(url, 15000)));
+  const dead = [...urls].filter((_, index) => !checks[index].alive);
+  const label = `${urls.size}종 사용 중`;
+
+  if (dead.length > 0) {
+    return fail('deploy.card-image', '공유 카드 이미지', `${dead.length}개가 죽었다: ${dead.map((u) => u.split('/').pop()).join(', ')}`, '공유하면 깨진 카드가 나간다');
+  }
+  // 전 페이지가 한 장을 공유하면 카드가 무엇에 대한 링크인지 못 알려준다.
+  return urls.size === 1
+    ? warn('deploy.card-image', '공유 카드 이미지', `전 페이지가 한 장을 공유한다 (${[...urls][0].split('/').pop()})`)
+    : ok('deploy.card-image', '공유 카드 이미지', `${label} · 전부 응답`);
 }
 
 export const deployProbe = {
@@ -114,6 +150,7 @@ export const deployProbe = {
       checkLiveSnapshotAge(),
       checkWorkflows(),
       checkDeadServerRefs(),
+      checkCardImages(),
     ]);
     return settled.flatMap((entry, index) => {
       if (entry.status !== 'fulfilled') {
