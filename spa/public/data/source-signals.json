@@ -278,7 +278,7 @@
               "seo": "경기도 재정위기 TF 최신 이슈와 핵심 내용 정리",
               "home": "경기도 재정위기 TF, 경기도, 재정위기 극복 TF 본격 가동…4대 핵심과제 추진 관련 확인할 점",
               "topic": "경기도 재정위기 TF",
-              "topicGroup": "네이버 실시간 검색어"
+              "topicGroup": "줌 실시간 검색어"
             },
             "facts": [
               {
@@ -402,7 +402,7 @@
               "seo": "광주 군공항 이전 최신 이슈와 핵심 내용 정리",
               "home": "광주 군공항 이전, 李대통령 \"광주 군공항 임시 이전\"…삼성·SK 호남 팹 착공 '속도' 붙나 관련 확인할 점",
               "topic": "광주 군공항 이전",
-              "topicGroup": "네이버 실시간 검색어"
+              "topicGroup": "줌 실시간 검색어"
             },
             "facts": [
               {
@@ -1178,7 +1178,7 @@
               "이지아도 사과했는데…배우 하영, 증조부 친일 논란 역풍"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-08-10T13:43:28.425Z"
+            "collectedAt": "2026-08-10T13:52:44.751Z"
           }
         },
         {
@@ -1493,7 +1493,7 @@
               "태풍 돌핀 , 중국 동부 상륙…50만 명 대피"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-08-10T13:43:28.425Z"
+            "collectedAt": "2026-08-10T13:52:44.751Z"
           }
         },
         {
@@ -1566,11 +1566,73 @@
         {
           "id": "zum-1",
           "rank": 1,
+          "keyword": "영화 암살자들",
+          "title": "영화 암살자들",
+          "rawKeyword": "영화 암살자들",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 100,
+          "source": "zum",
+          "expansions": [
+            "영화 암살자들 개봉일",
+            "영화 암살자들 실화",
+            "영화 암살자들 무대인사",
+            "영화 암살자들 나무위키",
+            "영화 암살자들 정보",
+            "영화 암살자들 시사회",
+            "영화 암살자들 배급사",
+            "영화 암살자들 등장인물"
+          ],
+          "expansionSeed": "영화 암살자들",
+          "insight": {
+            "titles": {
+              "seo": "영화 암살자들 최신 이슈와 핵심 내용 정리",
+              "home": "영화 암살자들, 영화 암살자(들) 출연하는 이민호-박해일-유해진 관련 확인할 점",
+              "topic": "영화 암살자들",
+              "topicGroup": "줌 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "배우 이민호(왼쪽부터), 박해일, 유해진이 10일 오전 서울 용산구 CGV용산아이파크몰에서 열린 영화 '암살자(들)' 제작보고회에서 인사하고 있다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "허진호 감독이 10일 오전 서울 용산구 CGV 용산아이파크몰에서 열린 영화 ' 암살자 (들)' 제작보고회에 참석해 인사말을 하고 있다. ' 암살자 (들)'은 1974년 8월 15일, 대한민국을 충격에 빠뜨린 영부인 저격 사건의 의혹과 배후를 추적하는 이야기를 그린 작품이다. 2026.8.10/뉴스1",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISI20260810_0021393442",
+                "press": "뉴시스"
+              },
+              {
+                "url": "https://www.news1.kr/photos/8048496",
+                "press": "뉴스1"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2026/08/10/NISI20260810_0021393442_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "뉴스1"
+            ],
+            "headlines": [
+              "영화 암살자(들) 출연하는 이민호-박해일-유해진",
+              "' 암살자 (들)' 허진호 감독"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-10T13:52:44.751Z"
+          }
+        },
+        {
+          "id": "zum-2",
+          "rank": 2,
           "keyword": "경기도 재정위기 TF",
           "title": "경기도 재정위기 TF",
           "rawKeyword": "경기도 재정위기 TF",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 100,
+          "priority": 99,
           "source": "zum",
           "expansions": [
             "경기도",
@@ -1626,13 +1688,13 @@
           }
         },
         {
-          "id": "zum-2",
-          "rank": 2,
+          "id": "zum-3",
+          "rank": 3,
           "keyword": "경기도교육청 교권보호전담관",
           "title": "경기도교육청 교권보호전담관",
           "rawKeyword": "경기도교육청 교권보호전담관",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 98,
           "source": "zum",
           "expansions": [
             "경기도교육청 교권보호전담관 모집"
@@ -1681,13 +1743,13 @@
           }
         },
         {
-          "id": "zum-3",
-          "rank": 3,
+          "id": "zum-4",
+          "rank": 4,
           "keyword": "광주 군공항 이전",
           "title": "광주 군공항 이전",
           "rawKeyword": "광주 군공항 이전",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 97,
           "source": "zum",
           "expansions": [
             "광주 군공항 이전 확정",
@@ -1743,13 +1805,13 @@
           }
         },
         {
-          "id": "zum-4",
-          "rank": 4,
+          "id": "zum-5",
+          "rank": 5,
           "keyword": "HD현대중공업 발전설비",
           "title": "HD현대중공업 발전설비",
           "rawKeyword": "HD현대중공업 발전설비",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 96,
           "source": "zum",
           "expansions": [
             "발전설비 용량",
@@ -1803,13 +1865,137 @@
           }
         },
         {
-          "id": "zum-5",
-          "rank": 5,
+          "id": "zum-6",
+          "rank": 6,
+          "keyword": "FC서울 김민준 영입",
+          "title": "FC서울 김민준 영입",
+          "rawKeyword": "FC서울 김민준 영입",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "zum",
+          "expansions": [
+            "ssg 김민준",
+            "김민준 배우",
+            "김민준 ssg",
+            "ssg 김민준 투수",
+            "김민준헤어",
+            "김민준 축구",
+            "배우 김민준",
+            "김민주 노윤서"
+          ],
+          "expansionSeed": "김민준",
+          "insight": {
+            "titles": {
+              "seo": "FC서울 김민준 영입 최신 이슈와 핵심 내용 정리",
+              "home": "FC서울 김민준 영입, FC서울, K4리그서 뛰던 수비형 미드필더 김민준 영입 관련 확인할 점",
+              "topic": "FC서울 김민준 영입",
+              "topicGroup": "줌 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 안홍석 기자 = 프로축구 K리그1 FC서울은 수비형 미드필더 김민준(23)을 영입했다고 10일 밝혔다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "수원 FC 를 꺾고 염원하던 승격을 이뤄냈다. 승격 후 첫 상대가 지난 시즌 더블 우승을 차지한 전북이라는 점에서 부담과 기대가 교차한다. 부천 역시 대대적인 전력 보강에 나섰다. K리그1 경험을 두루 갖춘 베테랑 윤빛가람과 김종우를 영입 해 중원을 강화했고, 멀티 공격자원 김민준 , 지난 시즌 K리그2...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20260810076100007?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://news.tf.co.kr/read/soccer/2297061.htm",
+                "press": "더팩트"
+              }
+            ],
+            "images": [
+              "https://img7.yna.co.kr/etc/inner/KR/2026/08/10/AKR20260810076100007_01_i_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "더팩트"
+            ],
+            "headlines": [
+              "FC서울, K4리그서 뛰던 수비형 미드필더 김민준 영입",
+              "[그래도 K리그] '승격' 인천의 윤정환, FC서울 김기동과 '벤치 대결' 승..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-10T13:52:44.751Z"
+          }
+        },
+        {
+          "id": "zum-7",
+          "rank": 7,
+          "keyword": "싸이월드 10월 부활",
+          "title": "싸이월드 10월 부활",
+          "rawKeyword": "싸이월드 10월 부활",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 94,
+          "source": "zum",
+          "expansions": [
+            "싸이월드 미니홈피",
+            "싸이월드 복구",
+            "싸이월드 bgm",
+            "싸이월드 말투",
+            "싸이월드 노래",
+            "싸이월드 로그인",
+            "싸이월드 짤",
+            "싸이월드 감성"
+          ],
+          "expansionSeed": "싸이월드",
+          "insight": {
+            "titles": {
+              "seo": "싸이월드 10월 부활 최신 이슈와 핵심 내용 정리",
+              "home": "싸이월드 10월 부활, 싸이월드 10월 다시 열린다…스테이블코인·NFT로 승부수 관련 확인할 점",
+              "topic": "싸이월드 10월 부활",
+              "topicGroup": "줌 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 오지은 기자 = 2000∼2010년대 국내 대표 소셜미디어(SNS)로 인기를 끈 싸이월드가 오는 10월 베타서비스를 시작으로 ...",
+                "sourceIndex": 0
+              },
+              {
+                "text": "박형근 시그마체인 CCO(이사)는 \"오는 10월 베타 서비스를 시작으로 데이터 복원 및 서비스 안정화를 거쳐 2027년 상반기 정식 서비스를 출시할 계획... 8페타바이트(PB)에 달하는 추억의 사진과 다이어리 데이터를 밤샘 작업으로 복원했던 개발자로서 (시그마체인의) 싸이월드 3.0 부활 선언은 투자 사기\"라고...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20260810109200017?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.news1.kr/it-science/internet-platform/6254497",
+                "press": "뉴스1"
+              }
+            ],
+            "images": [
+              "https://img4.yna.co.kr/etc/inner/KR/2026/08/10/AKR20260810109200017_03_i_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "뉴스1"
+            ],
+            "headlines": [
+              "싸이월드 10월 다시 열린다…스테이블코인·NFT로 승부수",
+              "싸이월드 잔혹사 어디까지…\"3.0 부활 vs불법 계약 무효\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-10T13:52:44.751Z"
+          }
+        },
+        {
+          "id": "zum-8",
+          "rank": 8,
           "keyword": "선관위 국조 재검표",
           "title": "선관위 국조 재검표",
           "rawKeyword": "선관위 국조 재검표",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 96,
+          "priority": 93,
           "source": "zum",
           "expansions": [
             "선관위 조작",
@@ -1865,247 +2051,13 @@
           }
         },
         {
-          "id": "zum-6",
-          "rank": 6,
-          "keyword": "유럽 폭염 경제 피해",
-          "title": "유럽 폭염 경제 피해",
-          "rawKeyword": "유럽 폭염 경제 피해",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "zum",
-          "expansions": [
-            "유럽 폭염",
-            "유럽 날씨",
-            "유럽 지도",
-            "유럽 여행",
-            "유럽 나라",
-            "유럽증시",
-            "유럽 패키지",
-            "유럽 산불"
-          ],
-          "expansionSeed": "유럽",
-          "insight": {
-            "titles": {
-              "seo": "유럽 폭염 경제 피해 최신 이슈와 핵심 내용 정리",
-              "home": "유럽 폭염 경제 피해, 유럽 덮친 폭염에 성장률 1% 날아갈 수도…경제손실 295조원 관련 확인할 점",
-              "topic": "유럽 폭염 경제 피해",
-              "topicGroup": "줌 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "초여름부터 유럽 전역을 덮친 폭염으로 올해 유럽연합(EU) 국내총생산(GDP)이 1% 줄어들 수 있다는 전망이 나왔다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "폭염 과 극심한 가뭄으로 올해 유럽 연합(EU)의 국내총생산(GDP)이 최대 1%까지 감소할 수 있다는 경고가 나왔다. 초여름부터 이어진 더위가 경제 전반의... 복합적으로 피해 를 키우는 양상이다. 앞서 독일 알리안츠 역시 지난 6월 단 2주간의 폭염 으로만 유럽 GDP가 0.3% 감소했다고 분석한 바 있다. 여기에...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://view.asiae.co.kr/article/2026081021292236390",
-                "press": "아시아경제"
-              },
-              {
-                "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=05497286645546008",
-                "press": "이데일리"
-              }
-            ],
-            "images": [
-              "https://cphoto.asiae.co.kr/listimglink/1/2026062913565026816_1782709010.png"
-            ],
-            "press": [
-              "아시아경제",
-              "이데일리"
-            ],
-            "headlines": [
-              "유럽 덮친 폭염에 성장률 1% 날아갈 수도…경제손실 295조원",
-              "유럽 폭염 에 올해 GDP 1% 증발 우려… \"295조 원 경제 적 손실\""
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-10T13:43:28.425Z"
-          }
-        },
-        {
-          "id": "zum-7",
-          "rank": 7,
-          "keyword": "정부 피지컬 AI",
-          "title": "정부 피지컬 AI",
-          "rawKeyword": "정부 피지컬 AI",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "zum",
-          "expansions": [
-            "정부 피지컬 ai"
-          ],
-          "expansionSeed": "정부 피지컬 AI",
-          "insight": {
-            "titles": {
-              "seo": "정부 피지컬 AI 최신 이슈와 핵심 내용 정리",
-              "home": "정부 피지컬 AI, 정부, 피지컬 AI 구매 대폭 확대…로봇 생태계 키운다 관련 확인할 점",
-              "topic": "정부 피지컬 AI",
-              "topicGroup": "줌 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 김윤구 기자 = 정부가 피지컬 인공지능(AI) 산업의 초기 시장을 키우기 위해 휴머노이드와 4족보행 로봇의 공공 구매를 대폭 ...",
-                "sourceIndex": 0
-              },
-              {
-                "text": "일본 정부 보조금 지원도 경제산업성과 협의 중이다. 투자액은 소니 반도체 부문의 약 4년치 설비투자에 맞먹고 TSMC 구마모토 제1공장 투자액(약 1조3500억엔)에 육박한다. 새 공장에서는 애플 아이폰용 고성능 카메라 센서를 생산하고 장기적으로 피지컬AI 시장까지 겨냥할 전망이다. 로봇과 자동차...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20260810145500003?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "http://www.fnnews.com/news/202608101413033275",
-                "press": "파이낸셜뉴스"
-              }
-            ],
-            "images": [
-              "https://img7.yna.co.kr/photo/yna/YH/2026/08/10/PYH2026081016870001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "파이낸셜뉴스"
-            ],
-            "headlines": [
-              "정부, 피지컬 AI 구매 대폭 확대…로봇 생태계 키운다",
-              "소니·TSMC, 日구마모토에 1조엔 베팅…' AI 의 눈' 함께 만든다"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-10T13:43:28.425Z"
-          }
-        },
-        {
-          "id": "zum-8",
-          "rank": 8,
-          "keyword": "코스피 코스닥 급등",
-          "title": "코스피 코스닥 급등",
-          "rawKeyword": "코스피 코스닥 급등",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "zum",
-          "expansions": [
-            "코스피 코스닥 급등 이유"
-          ],
-          "expansionSeed": "코스피 코스닥 급등",
-          "insight": {
-            "titles": {
-              "seo": "코스피 코스닥 급등 최신 이슈와 핵심 내용 정리",
-              "home": "코스피 코스닥 급등, 코스닥 4~5% 급등에 매수 사이드카…이달만 3차례 관련 확인할 점",
-              "topic": "코스피 코스닥 급등",
-              "topicGroup": "줌 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 김유아 기자 = 코스닥지수가 10일 급등하며 프로그램매수호가 일시효력정지(사이드카)가 발동했다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "지난달 29일 장중 기록한 올해 최저점 630에 비해선 8거래일 만에 약 35% 급등 했습니다. 지난달 31일 코스피 의 단일종목 레버리지 규제 이후 해당 상품의 하루 거래 대금이 10조 원 안팎 급감했는데, 이 투자금 가운데 상당 부분이 코스닥 에 유입됐단 분석이 나옵니다. 실제 규제 직전 4조 원대였던 코스닥 ...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20260810045700008?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008698786&plink=ORI&cooper=NAVER",
-                "press": "SBS"
-              }
-            ],
-            "images": [
-              "https://img8.yna.co.kr/photo/yna/YH/2026/08/10/PYH2026081001880001300_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "SBS"
-            ],
-            "headlines": [
-              "코스닥 4~5% 급등에 매수 사이드카…이달만 3차례",
-              "8월 절반이 '매수 사이드카'…' 코스닥 급등 ' 원인은"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-10T13:43:28.425Z"
-          }
-        },
-        {
           "id": "zum-9",
           "rank": 9,
-          "keyword": "경찰 성매매 단속",
-          "title": "경찰 성매매 단속",
-          "rawKeyword": "경찰 성매매 단속",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "zum",
-          "expansions": [
-            "성매매 피해 지원금",
-            "성매매 피해자",
-            "경찰 계급",
-            "경찰공무원 시험",
-            "경찰 계급도",
-            "경찰 순환인사",
-            "경찰청",
-            "경찰 월급"
-          ],
-          "expansionSeed": "성매매",
-          "insight": {
-            "titles": {
-              "seo": "경찰 성매매 단속 최신 이슈와 핵심 내용 정리",
-              "home": "경찰 성매매 단속, 강남 최대 유흥업소도 적발…성매매 특별단속 1666명 검거 관련 확인할 점",
-              "topic": "경찰 성매매 단속",
-              "topicGroup": "줌 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "경찰 이 두 달간 성매매 특별 단속 을 벌여 강남 최대 규모 유흥업소를 비롯한 기업형 성매매 조직을 대거 적발했다. 검거된 인원만 1600명을 넘었고 범죄수익 195억원에 대해서는 몰수·추징 보전 조치가 이뤄졌다. 경찰 청은 지난 6~7월 온·오프라인 성매매 특별 단속 을 실시한 결과 761건을 적발해 1666명을...",
-                "sourceIndex": 0
-              },
-              {
-                "text": "최근 전북 경찰 청을 중심으로 전주 신시가지, 혁신도시 등 관내 시내 전역에서 스웨디시 마사지 업소 및 변종 유흥업소를 둘러싼 불법 성매매 단속 이 대대적으로 확대되면서, 업주뿐만 아니라 일반 이용자들까지 형사처벌 대상에 포함되는 사례가 크게 늘고 있다. 성매매 알선 등 행위의 처벌에 관한 법률...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.seoul.co.kr/news/society/2026/08/10/20260810500093?wlog_tag3=naver",
-                "press": "서울신문"
-              },
-              {
-                "url": "http://www.lawleader.co.kr/news/articleView.html?idxno=19674",
-                "press": "로리더"
-              }
-            ],
-            "images": [
-              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F081%2F2026%2F08%2F10%2F3668957.jpg&type=fface200_200&expire=2&refresh=true"
-            ],
-            "press": [
-              "서울신문",
-              "로리더"
-            ],
-            "headlines": [
-              "강남 최대 유흥업소도 적발…성매매 특별단속 1666명 검거",
-              "스웨디시마사지·장부 단속 강화, 성매매 혐의 피의자로 경찰 연락 받았..."
-            ],
-            "extraction": "search-card",
-            "collectedAt": "2026-08-10T13:43:28.425Z"
-          }
-        },
-        {
-          "id": "zum-10",
-          "rank": 10,
           "keyword": "충청 영남 투자",
           "title": "충청 영남 투자",
           "rawKeyword": "충청 영남 투자",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 91,
+          "priority": 92,
           "source": "zum",
           "expansions": [
             "충청남도",
@@ -2155,6 +2107,61 @@
             "headlines": [
               "[속보] 청와대 “충청권 246조원·영남권 107조원 투자 프로젝트 금년 착수” - 매일경제",
               "[속보] 靑 \" 충청 권 246조원· 영남 권 107조원 투자 프로젝트 금년 착수\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-10T13:43:28.425Z"
+          }
+        },
+        {
+          "id": "zum-10",
+          "rank": 10,
+          "keyword": "정부 피지컬 AI",
+          "title": "정부 피지컬 AI",
+          "rawKeyword": "정부 피지컬 AI",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 91,
+          "source": "zum",
+          "expansions": [
+            "정부 피지컬 ai"
+          ],
+          "expansionSeed": "정부 피지컬 AI",
+          "insight": {
+            "titles": {
+              "seo": "정부 피지컬 AI 최신 이슈와 핵심 내용 정리",
+              "home": "정부 피지컬 AI, 정부, 피지컬 AI 구매 대폭 확대…로봇 생태계 키운다 관련 확인할 점",
+              "topic": "정부 피지컬 AI",
+              "topicGroup": "줌 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 김윤구 기자 = 정부가 피지컬 인공지능(AI) 산업의 초기 시장을 키우기 위해 휴머노이드와 4족보행 로봇의 공공 구매를 대폭 ...",
+                "sourceIndex": 0
+              },
+              {
+                "text": "일본 정부 보조금 지원도 경제산업성과 협의 중이다. 투자액은 소니 반도체 부문의 약 4년치 설비투자에 맞먹고 TSMC 구마모토 제1공장 투자액(약 1조3500억엔)에 육박한다. 새 공장에서는 애플 아이폰용 고성능 카메라 센서를 생산하고 장기적으로 피지컬AI 시장까지 겨냥할 전망이다. 로봇과 자동차...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20260810145500003?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "http://www.fnnews.com/news/202608101413033275",
+                "press": "파이낸셜뉴스"
+              }
+            ],
+            "images": [
+              "https://img7.yna.co.kr/photo/yna/YH/2026/08/10/PYH2026081016870001300_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "파이낸셜뉴스"
+            ],
+            "headlines": [
+              "정부, 피지컬 AI 구매 대폭 확대…로봇 생태계 키운다",
+              "소니·TSMC, 日구마모토에 1조엔 베팅…' AI 의 눈' 함께 만든다"
             ],
             "extraction": "playwright",
             "collectedAt": "2026-08-10T13:43:28.425Z"
@@ -2743,11 +2750,79 @@
         {
           "id": "issue-1",
           "rank": 1,
+          "keyword": "오초희 프로포즈",
+          "title": "'40세' 오초희, ♥변호사에 먼저 프로포즈..만난 지 7개월만 결혼",
+          "rawKeyword": "오초희 프로포즈",
+          "description": "스타뉴스 최신 기사 · '40세' 오초희, ♥변호사에 먼저 프로포즈..만난 지 7개월만 결혼",
+          "priority": 100,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/08/10/2026081020550376071",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "오초희 장동민",
+            "프로포즈반지",
+            "프로포즈프러포즈",
+            "프로포즈레스토랑",
+            "요트프로포즈",
+            "프로포즈시기",
+            "멋진프로포즈",
+            "부산프로포즈"
+          ],
+          "expansionSeed": "오초희",
+          "ago": "7분 전",
+          "agoMinutes": 7,
+          "publishedLabel": "2026.08.10 ・ 22:44",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081020550376071_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "오초희 프로포즈 최신 이슈와 핵심 내용 정리",
+              "home": "오초희 프로포즈, '40세' 오초희, ♥변호사에 먼저 프로포즈..만난 지 7개월만 결혼 관련 확인할 점",
+              "topic": "오초희 프로포즈",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · '40세' 오초희, ♥변호사에 먼저 프로포즈..만난 지 7개월만 결혼",
+                "sourceIndex": 0
+              },
+              {
+                "text": "그때 전화가 걸려오고, 한나경( 오초희 )의 전화를 받는다. \"어, 나경아. 나 몸이 좀 안 좋아서 사우나에 좀 왔어\"라고 거짓말하는 윤미란. 그런 윤미란은... 윤미란은 장세훈에 대해 \"그 사람의 한결같은 사랑에 프로포즈 도 받아들였고\"라고 말한다. 그 모습을 보던 최명화(성현아)는 \"장대표가 프로포즈 도 했어?\"라고...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/broadcast-show/2026/08/10/2026081020550376071",
+                "press": "스타뉴스"
+              },
+              {
+                "url": "http://www.topstarnews.net/news/articleView.html?idxno=850470",
+                "press": "톱스타뉴스"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F5353%2F2020%2F12%2F11%2F729723.jpg&type=ofullfill208_208_dominantcolor&expire=2&refresh=true"
+            ],
+            "press": [
+              "스타뉴스",
+              "톱스타뉴스"
+            ],
+            "headlines": [
+              "'40세' 오초희, ♥변호사에 먼저 프로포즈..만난 지 7개월만 결혼",
+              "[종합] '불새 2020' 성현아, 박영린 사연 듣고 '깜짝' \"숨겨진 인연\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-10T13:52:44.751Z"
+          }
+        },
+        {
+          "id": "issue-2",
+          "rank": 2,
           "keyword": "유혜주 출산",
           "title": "유혜주, 둘째 子 출산 현장 공개..눈물 터진 남편 \"첫째랑 똑같이 생겨\"",
           "rawKeyword": "유혜주 출산",
           "description": "스타뉴스 최신 기사 · 유혜주, 둘째 子 출산 현장 공개..눈물 터진 남편 \"첫째랑 똑같이 생겨\"",
-          "priority": 100,
+          "priority": 99,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081019550031509",
           "sourceLabel": "스타뉴스",
@@ -2762,8 +2837,8 @@
             "유혜주 남동생"
           ],
           "expansionSeed": "유혜주",
-          "ago": "19분 전",
-          "agoMinutes": 19,
+          "ago": "28분 전",
+          "agoMinutes": 28,
           "publishedLabel": "2026.08.10 ・ 22:23",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081019550031509_1.jpg",
           "insight": {
@@ -2809,13 +2884,13 @@
           }
         },
         {
-          "id": "issue-2",
-          "rank": 2,
+          "id": "issue-3",
+          "rank": 3,
           "keyword": "정해인, 하영 증조부 논란 속 '이엿사' 홍보 열중..\"제발 부탁\"",
           "title": "정해인, 하영 증조부 논란 속 '이엿사' 홍보 열중..\"제발 부탁\"",
           "rawKeyword": "정해인, 하영 증조부 논란 속 '이엿사' 홍보 열중..\"제발 부탁\"",
           "description": "스타뉴스 최신 기사 · 정해인, 하영 증조부 논란 속 '이엿사' 홍보 열중..\"제발 부탁\"",
-          "priority": 99,
+          "priority": 98,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081021594482038",
           "sourceLabel": "스타뉴스",
@@ -2830,8 +2905,8 @@
             "하영 집안"
           ],
           "expansionSeed": "정해인",
-          "ago": "20분 전",
-          "agoMinutes": 20,
+          "ago": "29분 전",
+          "agoMinutes": 29,
           "publishedLabel": "2026.08.10 ・ 22:22",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081021594482038_1.jpg",
           "insight": {
@@ -2867,13 +2942,13 @@
           }
         },
         {
-          "id": "issue-3",
-          "rank": 3,
+          "id": "issue-4",
+          "rank": 4,
           "keyword": "\"연예인이 호구?\" 황정민 폭로 A씨, 한정수 '신분 오픈' 요구에 발끈",
           "title": "\"연예인이 호구?\" 황정민 폭로 A씨, 한정수 '신분 오픈' 요구에 발끈",
           "rawKeyword": "\"연예인이 호구?\" 황정민 폭로 A씨, 한정수 '신분 오픈' 요구에 발끈",
           "description": "스타뉴스 최신 기사 · \"연예인이 호구?\" 황정민 폭로 A씨, 한정수 '신분 오픈' 요구에 발끈",
-          "priority": 98,
+          "priority": 97,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081021210390640",
           "sourceLabel": "스타뉴스",
@@ -2888,8 +2963,8 @@
             "황정민 술톤"
           ],
           "expansionSeed": "황정민",
-          "ago": "48분 전",
-          "agoMinutes": 48,
+          "ago": "58분 전",
+          "agoMinutes": 58,
           "publishedLabel": "2026.08.10 ・ 21:53",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081021210390640_1.jpg",
           "insight": {
@@ -2925,13 +3000,13 @@
           }
         },
         {
-          "id": "issue-4",
-          "rank": 4,
+          "id": "issue-5",
+          "rank": 5,
           "keyword": "소유, 하이닉스 주식 수익 보태 마련한 새집..\"사우나→헬스장까지\"",
           "title": "소유, 하이닉스 주식 수익 보태 마련한 새집..\"사우나→헬스장까지\"",
           "rawKeyword": "소유, 하이닉스 주식 수익 보태 마련한 새집..\"사우나→헬스장까지\"",
           "description": "스타뉴스 최신 기사 · 소유, 하이닉스 주식 수익 보태 마련한 새집..\"사우나→헬스장까지\"",
-          "priority": 97,
+          "priority": 96,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081020441076844",
           "sourceLabel": "스타뉴스",
@@ -2983,13 +3058,13 @@
           }
         },
         {
-          "id": "issue-5",
-          "rank": 5,
+          "id": "issue-6",
+          "rank": 6,
           "keyword": "고준희, 2억 시계 차고 송혜교 소환 \"혜교 언니는 할인되나?\"",
           "title": "고준희, 2억 시계 차고 송혜교 소환 \"혜교 언니는 할인되나?\"",
           "rawKeyword": "고준희, 2억 시계 차고 송혜교 소환 \"혜교 언니는 할인되나?\"",
           "description": "스타뉴스 최신 기사 · 고준희, 2억 시계 차고 송혜교 소환 \"혜교 언니는 할인되나?\"",
-          "priority": 96,
+          "priority": 95,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081018464085290",
           "sourceLabel": "스타뉴스",
@@ -3004,8 +3079,8 @@
             "송혜교 리즈"
           ],
           "expansionSeed": "고준희",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026.08.10 ・ 20:50",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081018464085290_1.jpg",
           "insight": {
@@ -3041,13 +3116,13 @@
           }
         },
         {
-          "id": "issue-6",
-          "rank": 6,
+          "id": "issue-7",
+          "rank": 7,
           "keyword": "수지, 벌써 가을 준비? 8월에 꺼내든 트렌치 패션 \"아직 덥긴 해\"",
           "title": "수지, 벌써 가을 준비? 8월에 꺼내든 트렌치 패션 \"아직 덥긴 해\"",
           "rawKeyword": "수지, 벌써 가을 준비? 8월에 꺼내든 트렌치 패션 \"아직 덥긴 해\"",
           "description": "스타뉴스 최신 기사 · 수지, 벌써 가을 준비? 8월에 꺼내든 트렌치 패션 \"아직 덥긴 해\"",
-          "priority": 95,
+          "priority": 94,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081018234477563",
           "sourceLabel": "스타뉴스",
@@ -3062,8 +3137,8 @@
             "수지 맛집"
           ],
           "expansionSeed": "수지",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
+          "ago": "2시간 전",
+          "agoMinutes": 120,
           "publishedLabel": "2026.08.10 ・ 20:47",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081018234477563_1.jpg",
           "insight": {
@@ -3099,13 +3174,13 @@
           }
         },
         {
-          "id": "issue-7",
-          "rank": 7,
+          "id": "issue-8",
+          "rank": 8,
           "keyword": "'홍경민♥' 김유나, 알고 보니 지하철 환승음 주인공..\"교과서에도 실려\"",
           "title": "'홍경민♥' 김유나, 알고 보니 지하철 환승음 주인공..\"교과서에도 실려\"",
           "rawKeyword": "'홍경민♥' 김유나, 알고 보니 지하철 환승음 주인공..\"교과서에도 실려\"",
           "description": "스타뉴스 최신 기사 · '홍경민♥' 김유나, 알고 보니 지하철 환승음 주인공..\"교과서에도 실려\"",
-          "priority": 94,
+          "priority": 93,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081020213244704",
           "sourceLabel": "스타뉴스",
@@ -3157,13 +3232,13 @@
           }
         },
         {
-          "id": "issue-8",
-          "rank": 8,
+          "id": "issue-9",
+          "rank": 9,
           "keyword": "앤 해서웨이 임신",
           "title": "'셋째 임신' 앤 해서웨이, 크롭톱+로우라이즈..파격 D라인 공개",
           "rawKeyword": "앤 해서웨이 임신",
           "description": "스타뉴스 최신 기사 · '셋째 임신' 앤 해서웨이, 크롭톱+로우라이즈..파격 D라인 공개",
-          "priority": 93,
+          "priority": 92,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081019492275364",
           "sourceLabel": "스타뉴스",
@@ -3225,13 +3300,13 @@
           }
         },
         {
-          "id": "issue-9",
-          "rank": 9,
+          "id": "issue-10",
+          "rank": 10,
           "keyword": "서혜원 임신",
           "title": "서혜원, 깜짝 임신 발표..'선업튀'→'SNL' 식구들 축하 \"말도 안돼\"",
           "rawKeyword": "서혜원 임신",
           "description": "스타뉴스 최신 기사 · 서혜원, 깜짝 임신 발표..'선업튀'→'SNL' 식구들 축하 \"말도 안돼\"",
-          "priority": 92,
+          "priority": 91,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081018555566325",
           "sourceLabel": "스타뉴스",
@@ -3301,67 +3376,9 @@
             "extraction": "playwright",
             "collectedAt": "2026-08-10T13:43:28.425Z"
           }
-        },
-        {
-          "id": "issue-10",
-          "rank": 10,
-          "keyword": "\"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝'",
-          "title": "\"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝'",
-          "rawKeyword": "\"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝'",
-          "description": "스타뉴스 최신 기사 · \"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝'",
-          "priority": 91,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/08/10/2026081018103020757",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "하정우 차정원",
-            "하정우 와인",
-            "하정우 수석",
-            "하정우 영화",
-            "하정우 아빠",
-            "하정우 나무위키",
-            "하정우 동생",
-            "하정우 전시"
-          ],
-          "expansionSeed": "하정우",
-          "ago": "3시간 전",
-          "agoMinutes": 180,
-          "publishedLabel": "2026.08.10 ・ 18:58",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081018103020757_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "\"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝' 최신 이슈와 핵심 내용 정리",
-              "home": "\"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝', \"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝' 관련 확인할 점",
-              "topic": "\"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝'",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · \"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝'",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/08/10/2026081018103020757",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081018103020757_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "\"AI인 줄\" 하정우, 삭발+선글라스 파격 비주얼에 팬들도 '깜짝'"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-10T13:43:28.425Z"
-          }
         }
       ]
     }
   ],
-  "updatedAt": "2026-08-10T13:45:49.533Z"
+  "updatedAt": "2026-08-10T13:53:02.199Z"
 }
