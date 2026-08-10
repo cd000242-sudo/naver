@@ -41,3 +41,20 @@ export const SURFACE_TAG: Record<string, string> = {
     kin: '지식iN 판',
     shopping: '상품·제휴 판',
 };
+
+/**
+ * 어느 판에 쓸 글인가 — 화면 위쪽 선택기.
+ *
+ * 사장님이 그린 쓰임새: "오늘 네이버 블로그 홈판에는 뭘 적을까, 워드프레스·
+ * 티스토리엔 뭘 적을까." 그 고민을 없애는 것이 이 선택기다.
+ *
+ * 가르는 근거는 **검색결과 배치 순서 실측**이다(serp-layout-advice).
+ * 인기글이 위면 네이버 판, 웹사이트가 위면 SEO 판이다.
+ */
+export const WRITE_LANES: ReadonlyArray<{ id: string; label: string; hint: string }> = [
+    { id: 'all', label: '전체', hint: '' },
+    { id: 'naver-blog', label: '네이버 홈판', hint: '인기글이 검색결과 위에 뜹니다 — 네이버 블로그로 붙는 자리' },
+    { id: 'wordpress', label: 'SEO (워드프레스·티스토리)', hint: '웹사이트가 블로그보다 위에 뜹니다 — 자체 사이트가 유리한 자리' },
+    { id: 'kin', label: '지식iN', hint: '지식iN 이 위에 뜹니다 — 답변으로 유입을 끌어오는 편이 빠른 자리' },
+    { id: 'shopping', label: '상품·제휴', hint: '쇼핑이 맨 위를 먹습니다 — 글보다 상품이 붙는 자리' },
+];

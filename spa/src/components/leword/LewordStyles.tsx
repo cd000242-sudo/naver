@@ -352,6 +352,13 @@ function LewordStyles() {
             }
             /* 제휴 3열. 좁아지면 한 열씩 내려간다 — 카드가 눌리면 상품명이 안 읽힌다. */
             /* 라이선스 잠금 안내. 광고처럼 보이지 않게 톤을 낮춘다 — 이미 쓰는 사람에게도 뜬다. */
+            .lw-write-lanes { margin-bottom: 8px; }
+            .lw-write-lanes button { font-weight: 800; }
+            .lw-write-hint {
+                margin: 0 0 12px; padding: 9px 13px; border-radius: 9px;
+                background: rgba(124,92,255,.1); border: 1px solid rgba(124,92,255,.2);
+                color: rgba(207,196,255,.9); font-size: 12.5px; word-break: keep-all;
+            }
             .lw-gate {
                 display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
                 margin: 0 0 14px; padding: 16px 20px; border-radius: 13px;
@@ -375,6 +382,30 @@ function LewordStyles() {
             }
             .lw-gate-buy { border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: rgba(235,242,250,.8); }
             .lw-gate-login:hover, .lw-gate-form button:hover { background: rgba(124,92,255,.34); }
+            .lw-lane-list-wide { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; padding: 0; }
+            /* 상품 보드 — 그림이 커야 무슨 물건인지 한눈에 들어온다. */
+            .lw-product-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+            .lw-product {
+                display: grid; grid-template-columns: 26px 72px minmax(0, 1fr); gap: 12px; align-items: start;
+                padding: 13px; border: 1px solid rgba(255,255,255,.08); border-radius: 12px;
+                background: rgba(255,255,255,.03);
+            }
+            .lw-product-rank { color: #b8a6ff; font-size: 13px; font-weight: 900; padding-top: 3px; }
+            .lw-product img { width: 72px; height: 72px; object-fit: cover; border-radius: 9px; background: rgba(255,255,255,.05); }
+            .lw-product-body { min-width: 0; }
+            .lw-product-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 7px; }
+            .lw-discount, .lw-rocket, .lw-goldbox {
+                padding: 2px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 900;
+                border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: rgba(235,242,250,.78);
+            }
+            .lw-discount { border-color: rgba(255,107,107,.45); background: rgba(255,107,107,.14); color: #ff8f8f; }
+            .lw-rocket { border-color: rgba(90,169,255,.45); background: rgba(90,169,255,.13); color: #8ec5ff; }
+            .lw-product-name { display: block; margin-bottom: 8px; color: #fff; font-size: 13.5px; font-weight: 800; line-height: 1.45; text-decoration: none; word-break: keep-all; }
+            .lw-product-name:hover { color: #cfc4ff; }
+            .lw-product-metrics { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 9px; }
+            .lw-product-metrics span { color: rgba(235,242,250,.5); font-size: 11px; }
+            .lw-product-metrics strong { color: #fff; font-size: 12px; font-weight: 800; margin-left: 3px; }
+            @media (max-width: 620px) { .lw-product { grid-template-columns: 22px minmax(0, 1fr); } .lw-product img { display: none; } }
             .lw-lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
             @media (max-width: 1180px) { .lw-lanes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
             @media (max-width: 780px) { .lw-lanes { grid-template-columns: minmax(0, 1fr); } }

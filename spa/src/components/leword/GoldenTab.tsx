@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { goldenIndex } from '../../lib/goldenIndex';
 import PreemptionPlan from './PreemptionPlan';
 import { EVIDENCE_ICON, naverSearchUrl, SURFACE_TAG, TIER_BADGE, TIER_RANK } from './preemptionMeta';
+import { TopicFilter, WriteLaneFilter } from './BoardFilters';
+import BoardCardHead from './BoardCardHead';
 import { formatCount } from '../../lib/keywordApi';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
@@ -77,6 +79,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [board, setBoard] = useState<Board | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
     const [topic, setTopic] = useState('전체');
+    /** 어느 판에 쓸 글인가. 배치 순서 실측으로 가른다. */
+    const [writeLane, setWriteLane] = useState('all');
     const [query, setQuery] = useState('');
     // 라이선스 코드 또는 자기 API 키. 둘 중 하나면 전부 열린다.
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
@@ -110,6 +114,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         const all = board?.rows || [];
         const needle = query.trim().toLowerCase();
         const filtered = all.filter((row) => {
+            if (writeLane !== 'all' && row.layoutBestFor !== writeLane) return false;
             if (topic !== '전체' && row.topic !== topic) return false;
             return !needle || row.keyword.toLowerCase().includes(needle);
         });
@@ -134,7 +139,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             if (slot(a) !== slot(b)) return slot(a) - slot(b);
             return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
         });
-    }, [board, topic, query]);
+    }, [board, topic, query, writeLane]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
@@ -186,19 +191,16 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         </span>
                     </div>
 
-                    <div className="lw-segment lw-segment-wrap lw-topic-chips" role="group" aria-label="블로그 주제">
-                        <button type="button" className={topic === '전체' ? 'on' : ''} onClick={() => setTopic('전체')}>
-                            전체 <em>{board.rows.length}</em>
-                        </button>
-                        {topics.map(([label, count]) => (
-                            <button
-                                key={label}
-                                type="button"
-                                className={topic === label ? 'on' : ''}
-                                onClick={() => setTopic(label)}
-                            >{label} <em>{count}</em></button>
-                        ))}
-                    </div>
+                    <WriteLaneFilter
+                        value={writeLane}
+                        onChange={setWriteLane}
+                        counts={{
+                            total: board.rows.length,
+                            laneCount: (laneId) => board.rows.filter((row) => row.layoutBestFor === laneId).length,
+                        }}
+                    />
+
+                    <TopicFilter value={topic} onChange={setTopic} topics={topics} total={board.rows.length} />
 
                     {!unlocked && rows.length > FREE_BOARD_ROWS && (
                         <LicenseGate onUnlock={() => setUnlocked(true)} />
@@ -209,62 +211,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             const locked = !unlocked && index >= FREE_BOARD_ROWS;
                             return (
                                 <article key={`${row.topic}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
-                                    <div className="lw-card-tags">
-                                        <span className="lw-topic-tag">{row.topic}</span>
-                                        {row.earlyMover && <span className="lw-early-tag">지금이 선점 적기</span>}
-                                        {row.layoutBestFor && (
-                                            <span className={`lw-surface-tag surface-${row.layoutBestFor}`}>
-                                                {SURFACE_TAG[row.layoutBestFor]}
-                                            </span>
-                                        )}
-                                        {row.tier && TIER_BADGE[row.tier] && (
-                                            <span className={`lw-tier-tag ${TIER_BADGE[row.tier].cls}`}>
-                                                {TIER_BADGE[row.tier].text}
-                                            </span>
-                                        )}
-                                        {/* 구매 검토형이 블로그에 제일 값어치가 크다(리서치 §3). */}
-                                        {row.intentLabel && row.intentLabel !== '분류 안 됨' && (
-                                            <span className="lw-intent-tag">{row.intentLabel}</span>
-                                        )}
-                                        {row.trendLabel && row.trendLabel !== '판정불가' && (
-                                            <span className="lw-trend-tag">{row.trendLabel}</span>
-                                        )}
-                                        {/* 자리가 비어 있어도 AI 가 답을 대신하면 클릭이 안 온다. */}
-                                        {row.briefingRisk === 'high' && (
-                                            <span className="lw-warn-tag">AI 답변 잠식</span>
-                                        )}
-                                        {row.regulatoryLabel && (
-                                            <span className="lw-warn-tag">{row.regulatoryLabel}</span>
-                                        )}
-                                    </div>
-                                    {(() => {
-                                        /* 황금지수는 등급 SSoT 를 옮긴 것이다. 못 쟀으면 아무 색도 주지 않는다. */
-                                        const index = goldenIndex(row.searchVolume, row.documentCount);
-                                        return index
-                                            ? (
-                                                <h3 className={`lw-card-gold lw-gold-${index.tier}`}>
-                                                    <span className="lw-gold-mini">{index.label} {index.ratio!.toFixed(1)}</span>
-                                                    {row.keyword}
-                                                </h3>
-                                            )
-                                            : <h3>{row.keyword}</h3>;
-                                    })()}
-
-                                    <ul className="lw-evidence">
-                                        {(row.earlyMoverReasons || []).map((text) => (
-                                            <li key={text} className="lw-evidence-early">
-                                                <span aria-hidden="true">↗</span>{text}
-                                            </li>
-                                        ))}
-                                        {row.evidence.map((item) => (
-                                            <li key={item.code}>
-                                                <span aria-hidden="true">{EVIDENCE_ICON[item.code] || '·'}</span>
-                                                {item.text}
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    {row.timing && <p className="lw-timing">{row.timing}</p>}
+                                    <BoardCardHead row={row} />
 
                                     <div className="lw-card-metrics">
                                         <div><span>검색량</span><strong>{formatCount(row.searchVolume)}</strong></div>

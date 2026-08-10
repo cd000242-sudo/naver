@@ -212,3 +212,28 @@ export function formatCount(value: number | null | undefined): string {
 export async function fetchCoupangProducts(keyword: string) {
     return call<CoupangProducts>('keyword-coupang', { keyword });
 }
+
+/** 제휴 상품 보드 한 줄. 전부 실측이고 확률은 없다. */
+export type AffiliateProduct = {
+    name: string;
+    keyword: string;
+    price: number | null;
+    wasPrice: number | null;
+    discountPercent: number | null;
+    image: string;
+    url: string;
+    rocket: boolean;
+    goldboxRank: number;
+    searchVolume: number | null;
+    documentCount: number | null;
+};
+
+/**
+ * 상품에서 출발하는 제휴 보드.
+ *
+ * 쿠팡이 지금 미는 상품을 받아, 상품마다 그 검색어의 수요·문서수를 잰다.
+ * 우리 키워드 풀에서 고르면 키워드 보드를 다시 자른 것밖에 안 된다.
+ */
+export async function fetchAffiliateBoard() {
+    return call<{ products: AffiliateProduct[]; needsKeys: boolean }>('keyword-coupang-board', {});
+}
