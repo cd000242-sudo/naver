@@ -82,3 +82,40 @@ export function cleanLiveText(value: unknown, fallback: string): string {
     const looksBroken = /[�]|占|揶|醫|怨|筌|嚥|媛|덈떎|섏|ㅼ/.test(text) || questionMarks >= Math.max(3, Math.ceil(text.length / 5));
     return looksBroken ? fallback : text;
 }
+
+/**
+ * 잘린 꼬리를 걷어내고 **마지막 완결 문장까지만** 남긴다.
+ *
+ * 왜 필요한가 (사장님 지적, 2026-08-10):
+ *   검색 API 가 주는 요약은 정해진 길이에서 그냥 끊어 "…" 를 붙인다. 그대로
+ *   띄우면 "…압도적인 구위를 뽐냈다...." 처럼 끝나서 대충 만든 화면으로 보인다.
+ *
+ * 왜 "끝까지"가 아니라 "완결 문장까지"인가:
+ *   원문 문단 전체는 우리에게 없다 — 출처가 잘라서 준 것이다. 없는 뒷부분을
+ *   지어내는 대신, **온전한 문장만 남기고 잘린 조각은 버린다.** 짧아지더라도
+ *   끊긴 자국은 안 보인다.
+ *
+ * 온전한 문장이 하나도 없으면 **빈 문자열**을 준다. 부르는 쪽이 제목으로 갈아끼우게
+ * 하려는 것이다 — 중간에서 끊긴 조각을 띄우느니 완결된 제목이 낫다.
+ */
+export function trimToCompleteSentence(value: string): string {
+    const text = String(value || '').trim();
+    if (!text) return '';
+
+    // 꼬리의 말줄임표부터 걷어낸다. 마침표 네 개(".....")로 오는 경우도 있다.
+    const withoutTail = text.replace(/(?:\.{2,}|…)+\s*$/, '').trim();
+    if (!withoutTail) return '';
+
+    // 종결 부호나 한국어 종결어미로 끝나면 그대로 온전한 문장이다.
+    if (/(?:[.!?]|[다요음함됨죠네까])["”'’)\]]*$/.test(withoutTail)) return withoutTail;
+
+    // 아니면 마지막 문장 경계까지 되돌린다.
+    const lastBoundary = Math.max(
+        withoutTail.lastIndexOf('. '),
+        withoutTail.lastIndexOf('! '),
+        withoutTail.lastIndexOf('? '),
+        withoutTail.lastIndexOf('다 '),
+    );
+    if (lastBoundary <= 0) return '';
+    return withoutTail.slice(0, lastBoundary + 1).trim();
+}

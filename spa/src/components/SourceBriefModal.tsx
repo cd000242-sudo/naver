@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import {
     buildSourceSearchUrl,
-    cleanLiveText,
+    cleanLiveText, trimToCompleteSentence,
     type SourceLane,
     type SourceSignal,
 } from '../lib/sourceSignalTypes';
@@ -28,7 +28,12 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
     const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
     const keyword = cleanLiveText(item.keyword || item.title, lane.label);
-    const description = cleanLiveText(item.description || item.title, lane.description);
+    /*
+     * 출처가 잘라서 준 요약을 그대로 띄우면 '...' 로 끝나 대충 만든 화면이 된다.
+     * 온전한 문장이 안 나오면 제목으로 간다 — 제목은 항상 완결돼 있다.
+     */
+    const description = trimToCompleteSentence(cleanLiveText(item.description, ''))
+        || cleanLiveText(item.title, lane.description);
     const searchUrl = buildSourceSearchUrl(lane.id, keyword);
     const rank = Math.max(1, Number(item.rank) || (101 - Number(item.priority || 100)));
 

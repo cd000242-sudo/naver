@@ -1,89 +1,10 @@
 {
- "publishedAt": "2026-08-10T10:20:21.967Z",
+ "publishedAt": "2026-08-10T10:38:27.020Z",
  "generator": "preemption-board-batch",
  "topicsTotal": 32,
- "topicsWithRows": 11,
+ "topicsWithRows": 9,
  "verified": 44,
  "rows": [
-  {
-   "serpSections": [
-    "AI브리핑",
-    "웹사이트",
-    "인기글",
-    "지식스니펫",
-    "카페",
-    "이미지"
-   ],
-   "layoutBestFor": "wordpress",
-   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
-   "layoutRanked": [
-    {
-     "surface": "wordpress",
-     "label": "워드프레스·자체 사이트",
-     "position": 2
-    },
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 3
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "lexical",
-   "keyword": "야설록뜻",
-   "topic": "문학·책",
-   "tier": "page1-weak",
-   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
-   "openSlot": 1,
-   "searchVolume": 210,
-   "documentCount": 189,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 210 · 문서수 189"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 1번째 자리가 비어 있음"
-    },
-    {
-     "code": "empty-field",
-     "text": "상위 10개 중 정면으로 다룬 글 0건"
-    },
-    {
-     "code": "fresh",
-     "text": "1시간 이내 처음 관측"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "정보",
-   "briefingRisk": "high",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "timing": "",
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 0,
-    "medianDaysAgo": 14,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 4
-   }
-  },
   {
    "serpSections": [
     "AI브리핑",
@@ -974,85 +895,6 @@
     "medianDaysAgo": 5,
     "hasAiBriefing": true,
     "aiBriefingSourceCount": 3
-   }
-  },
-  {
-   "serpSections": [
-    "웹사이트",
-    "이미지",
-    "지식스니펫",
-    "인기글",
-    "카페",
-    "뉴스"
-   ],
-   "layoutBestFor": "wordpress",
-   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
-   "layoutRanked": [
-    {
-     "surface": "wordpress",
-     "label": "워드프레스·자체 사이트",
-     "position": 1
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 3
-    },
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 4
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "정형외과 임형태",
-   "topic": "건강·의학",
-   "tier": "contested",
-   "tierLabel": "경합 — 정면 대응 1건",
-   "openSlot": 1,
-   "searchVolume": 940,
-   "documentCount": 21,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 940 · 문서수 21"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 1번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
-    },
-    {
-     "code": "fresh",
-     "text": "1시간 이내 처음 관측"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
-    }
-   ],
-   "intentLabel": "정보",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "timing": "",
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 1,
-    "medianDaysAgo": null,
-    "hasAiBriefing": false,
-    "aiBriefingSourceCount": 0
    }
   },
   {
