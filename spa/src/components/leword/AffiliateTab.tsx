@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { formatCount } from '../../lib/keywordApi';
+import { fetchCoupangProducts, formatCount, type CoupangProducts } from '../../lib/keywordApi';
 import { goldenIndex } from '../../lib/goldenIndex';
 import { TabIntro } from './LewordShared';
 import { AFFILIATE_LANES, affiliateRows, brandToken, rowsForLane, type AffiliateRow } from './affiliateLanes';
@@ -21,6 +21,23 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [rows, setRows] = useState<AffiliateRow[] | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
     const [copied, setCopied] = useState('');
+    /*
+     * 쿠팡 상품은 키워드마다 따로 부른다. 한 번에 다 부르면 파트너스 쿼터가 확 탄다 —
+     * 사용자가 펼친 카드만 조회한다.
+     */
+    const [coupang, setCoupang] = useState<Record<string, CoupangProducts | 'loading'>>({});
+
+    const loadCoupang = async (keyword: string) => {
+        if (coupang[keyword]) return;
+        setCoupang((previous) => ({ ...previous, [keyword]: 'loading' }));
+        const response = await fetchCoupangProducts(keyword);
+        setCoupang((previous) => ({
+            ...previous,
+            [keyword]: response.ok && response.data
+                ? response.data
+                : { keyword, products: [], needsKeys: true },
+        }));
+    };
 
     useEffect(() => {
         let alive = true;
@@ -113,11 +130,11 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                         {copied === row.keyword ? '복사됨' : '복사'}
                                                     </button>
                                                     <button type="button" onClick={() => onAnalyze(row.keyword)}>분석</button>
-                                                    {lane.search
+                                                    {lane.id === 'coupang'
                                                         ? (
-                                                            <a href={lane.search(row.keyword)} target="_blank" rel="noreferrer">
-                                                                상품 조회
-                                                            </a>
+                                                            <button type="button" onClick={() => loadCoupang(row.keyword)}>
+                                                                {coupang[row.keyword] === 'loading' ? '조회 중…' : '쿠팡 상품'}
+                                                            </button>
                                                         )
                                                         : (
                                                             <a href={lane.consoleUrl} target="_blank" rel="noreferrer">
@@ -125,6 +142,32 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                             </a>
                                                         )}
                                                 </div>
+
+                                                {lane.id === 'coupang' && (() => {
+                                                    const found = coupang[row.keyword];
+                                                    if (!found || found === 'loading') return null;
+                                                    if (found.needsKeys) {
+                                                        return (
+                                                            <p className="lw-lane-hint">
+                                                                내 API 키에 쿠팡 파트너스 키를 넣으면 실제 상품이 나옵니다.
+                                                            </p>
+                                                        );
+                                                    }
+                                                    if (found.products.length === 0) {
+                                                        return <p className="lw-lane-hint">쿠팡에 이 검색어로 잡히는 상품이 없습니다.</p>;
+                                                    }
+                                                    return (
+                                                        <ul className="lw-coupang">
+                                                            {found.products.slice(0, 4).map((item) => (
+                                                                <li key={item.url}>
+                                                                    {item.image && <img src={item.image} alt="" loading="lazy" />}
+                                                                    <a href={item.url} target="_blank" rel="noreferrer">{item.name}</a>
+                                                                    <strong>{item.price === null ? '—' : `${item.price.toLocaleString('ko-KR')}원`}</strong>
+                                                                </li>
+                                                            ))}
+                                                        </ul>
+                                                    );
+                                                })()}
                                             </div>
                                         </li>
                                     );

@@ -83,6 +83,16 @@ export type RankResult = {
     found: { rank: number; title: string; link: string; blogger: string; postdate: string } | null;
 };
 
+/** 쿠팡 파트너스 상품. 키가 없으면 needsKeys 로 온다. */
+export type CoupangProducts = {
+    keyword: string;
+    products: Array<{
+        name: string; price: number | null; image: string; url: string;
+        rocket: boolean; freeShipping: boolean;
+    }>;
+    needsKeys: boolean;
+};
+
 export type ShoppingSignal = {
     keyword: string;
     productCount: number;
@@ -191,4 +201,14 @@ export const fetchTrendingVideos = (categoryId = '') =>
 export function formatCount(value: number | null | undefined): string {
     if (value === null || value === undefined || !Number.isFinite(value)) return '—';
     return value.toLocaleString('ko-KR');
+}
+
+/**
+ * 쿠팡 상품을 가져온다.
+ *
+ * 키는 요청 본문에 실려 간다(브라우저 저장소 → POST). 서버는 조회가 끝나면 버린다.
+ * 키가 없으면 오류가 아니라 `needsKeys: true` 로 온다 — 다른 레인까지 막지 않는다.
+ */
+export async function fetchCoupangProducts(keyword: string) {
+    return call<CoupangProducts>('keyword-coupang', { keyword });
 }

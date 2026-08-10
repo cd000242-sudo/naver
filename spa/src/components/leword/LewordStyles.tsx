@@ -381,6 +381,13 @@ function LewordStyles() {
             .lw-lane-metrics { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 9px; }
             .lw-lane-metrics span { color: rgba(235,242,250,.5); font-size: 11px; }
             .lw-lane-metrics strong { color: #fff; font-size: 12.5px; font-weight: 800; margin-left: 3px; }
+            .lw-lane-hint { margin: 9px 0 0; color: rgba(250,204,21,.8); font-size: 11.5px; line-height: 1.45; word-break: keep-all; }
+            .lw-coupang { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+            .lw-coupang li { display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; gap: 8px; align-items: center; }
+            .lw-coupang img { width: 38px; height: 38px; object-fit: cover; border-radius: 7px; background: rgba(255,255,255,.05); }
+            .lw-coupang a { color: rgba(235,242,250,.82); font-size: 11.5px; line-height: 1.35; text-decoration: none; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+            .lw-coupang a:hover { color: #cfc4ff; }
+            .lw-coupang strong { color: #ffb765; font-size: 12px; font-weight: 900; white-space: nowrap; }
             .lw-lane-empty { margin: 0; padding: 18px 16px 22px; color: rgba(235,242,250,.42); font-size: 12px; text-align: center; }
             .lw-lane-actions { display: flex; gap: 6px; }
             .lw-lane-actions button, .lw-lane-actions a {
