@@ -211,7 +211,7 @@ function LewordStyles() {
             .lw-metric small { display: block; margin-top: 3px; color: #646b7d; font-size: 11.5px; }
 
             /* ── 카드 그리드 ── */
-            .lw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); gap: 12px; }
+            .lw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(306px, 1fr)); gap: 12px; }
             .lw-grid-video { grid-template-columns: repeat(auto-fill, minmax(292px, 1fr)); }
 
             .lw-card {
@@ -236,6 +236,8 @@ function LewordStyles() {
             .lw-card-metrics .hot strong { color: #00e0c6; }
 
             .lw-card-actions { display: flex; gap: 7px; }
+            /* 좁은 칸에서 '검색결과 확 인' 처럼 두 줄로 깨지던 것을 막는다. */
+            .lw-card-actions button, .lw-card-actions a { white-space: nowrap; }
             .lw-card-actions button, .lw-card-actions a {
                 flex: 1;
                 padding: 9px 10px;
@@ -314,6 +316,167 @@ function LewordStyles() {
             .lw-trend-tag  { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.16); color: #9aa1b2; }
             /* 경고는 눈에 띄되 카드를 지배하지 않게. 버리라는 뜻이 아니라 알려주는 것이다. */
             .lw-warn-tag   { background: rgba(245,197,24,.10); border-color: rgba(245,197,24,.32); color: #f5c518; }
+            /*
+             * 황금지수 판. 사장님 지정 색: 약함 노랑 · 적당 초록 · 황금 적색 · 초황금 금색.
+             * 색만 바꾸고 구조는 같게 둔다 — 단계가 달라도 눈이 같은 자리를 읽는다.
+             */
+            .lw-gold {
+                display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 18px;
+                align-items: center; margin: 0 0 16px; padding: 16px 20px;
+                border-radius: 14px; border: 1px solid var(--gold-line);
+                background: linear-gradient(135deg, var(--gold-bg-a), var(--gold-bg-b));
+            }
+            /* 열을 명시한다. grid-row 만 주면 자동배치가 숫자를 1열로 끌어와 좌우가 뒤집힌다. */
+            .lw-gold-head { grid-column: 1; grid-row: 1; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+            .lw-gold-label {
+                padding: 4px 11px; border-radius: 999px;
+                border: 1px solid var(--gold-line); background: var(--gold-chip);
+                color: var(--gold-ink); font-size: 12px; font-weight: 900; letter-spacing: .02em;
+            }
+            /* 키워드도 단계 색으로. 지수만 색을 주면 무엇이 초황금인지 눈에 안 걸린다. */
+            .lw-gold-keyword { color: var(--gold-ink); font-size: 18px; font-weight: 900; word-break: keep-all; }
+            .lw-gold-figure { grid-column: 2; grid-row: 1 / span 2; text-align: right; }
+            .lw-gold-figure em {
+                display: block; font-style: normal; font-size: 34px; font-weight: 900;
+                line-height: 1; color: var(--gold-ink);
+            }
+            .lw-gold-figure span { display: block; margin-top: 5px; color: rgba(235,242,250,.5); font-size: 11px; font-weight: 700; }
+            .lw-gold-reason { grid-column: 1; grid-row: 2; margin: 0; color: rgba(235,242,250,.72); font-size: 12.5px; word-break: keep-all; }
+
+            /* 카드 제목에 붙는 축소판. 목록에서 초황금이 눈에 바로 걸려야 한다. */
+            .lw-card-gold { display: flex; flex-direction: column; gap: 5px; color: var(--gold-ink) !important; }
+            .lw-gold-mini {
+                align-self: flex-start; padding: 2px 8px; border-radius: 999px;
+                border: 1px solid var(--gold-line); background: var(--gold-chip);
+                color: var(--gold-ink); font-size: 10.5px; font-weight: 900; letter-spacing: .02em;
+            }
+            .lw-gold-ultra  { --gold-ink: #ffd700; --gold-line: rgba(255,215,0,.5);  --gold-chip: rgba(255,215,0,.16);  --gold-bg-a: rgba(255,215,0,.13);  --gold-bg-b: rgba(255,165,0,.06); }
+            .lw-gold-golden { --gold-ink: #ff6b6b; --gold-line: rgba(255,107,107,.45); --gold-chip: rgba(255,107,107,.15); --gold-bg-a: rgba(255,107,107,.11); --gold-bg-b: rgba(255,64,64,.05); }
+            .lw-gold-fair   { --gold-ink: #4ade80; --gold-line: rgba(74,222,128,.4);  --gold-chip: rgba(74,222,128,.14);  --gold-bg-a: rgba(74,222,128,.1);   --gold-bg-b: rgba(16,185,129,.05); }
+            .lw-gold-weak   { --gold-ink: #facc15; --gold-line: rgba(250,204,21,.34); --gold-chip: rgba(250,204,21,.12); --gold-bg-a: rgba(250,204,21,.08);  --gold-bg-b: rgba(202,138,4,.04); }
+
+            @media (max-width: 560px) {
+                .lw-gold { grid-template-columns: minmax(0, 1fr); }
+                .lw-gold-head, .lw-gold-reason, .lw-gold-figure { grid-column: 1; grid-row: auto; }
+                .lw-gold-figure { text-align: left; }
+            }
+            .lw-surface-tag {
+                padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 800;
+                border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05);
+                color: rgba(235,242,250,.78);
+            }
+            .lw-surface-tag.surface-naver-blog { border-color: rgba(3,199,90,.45); color: #6ee7a0; background: rgba(3,199,90,.12); }
+            .lw-surface-tag.surface-wordpress { border-color: rgba(90,169,255,.45); color: #8ec5ff; background: rgba(90,169,255,.12); }
+            .lw-surface-tag.surface-kin { border-color: rgba(124,92,255,.5); color: #b8a6ff; background: rgba(124,92,255,.14); }
+            .lw-surface-tag.surface-shopping { border-color: rgba(255,138,0,.45); color: #ffb765; background: rgba(255,138,0,.12); }
+            .lw-plan-surface p { margin: 0 0 9px; color: rgba(235,242,250,.86); font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
+            .lw-surface-rank { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+            .lw-surface-rank li { display: flex; gap: 9px; align-items: baseline; color: rgba(235,242,250,.8); font-size: 13px; }
+            .lw-surface-rank span {
+                flex: 0 0 auto; min-width: 74px; padding: 2px 8px; border-radius: 7px;
+                background: rgba(255,255,255,.06); color: rgba(235,242,250,.58);
+                font-size: 11px; font-weight: 800;
+            }
+            .lw-surface-note { margin-top: 9px !important; color: #ffb765 !important; font-size: 12.5px !important; }
+            .lw-early-tag {
+                padding: 3px 9px; border-radius: 999px;
+                background: linear-gradient(135deg, rgba(255,138,0,.24), rgba(255,64,129,.22));
+                border: 1px solid rgba(255,138,0,.45);
+                color: #ffb765; font-size: 11px; font-weight: 900;
+            }
+            .lw-evidence-early { color: #ffb765 !important; }
+            .lw-plan-early {
+                margin: 0 22px; padding: 13px 15px; border-radius: 12px;
+                border: 1px solid rgba(255,138,0,.35);
+                background: linear-gradient(135deg, rgba(255,138,0,.12), rgba(255,64,129,.08));
+            }
+            .lw-plan-early strong { display: block; margin-bottom: 7px; color: #ffb765; font-size: 13px; font-weight: 900; }
+            .lw-plan-early ul { margin: 0; padding-left: 17px; display: flex; flex-direction: column; gap: 6px; }
+            .lw-plan-early li { color: rgba(255,183,101,.9); font-size: 13px; line-height: 1.55; word-break: keep-all; }
+            .lw-plan-backdrop {
+                position: fixed; inset: 0; z-index: 90;
+                display: flex; align-items: center; justify-content: center;
+                padding: 24px;
+                background: rgba(6,8,15,.72); backdrop-filter: blur(4px);
+            }
+            .lw-plan-modal {
+                width: min(680px, 100%); max-height: min(84vh, 860px);
+                display: flex; flex-direction: column;
+                border: 1px solid rgba(124,92,255,.32); border-radius: 18px;
+                background: #10131d; box-shadow: 0 28px 70px rgba(0,0,0,.6);
+                overflow: hidden;
+            }
+            .lw-plan-head {
+                display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+                padding: 20px 22px 14px;
+                border-bottom: 1px solid rgba(255,255,255,.07);
+            }
+            .lw-plan-head h3 {
+                margin: 9px 0 0; color: #fff; font-size: 20px; font-weight: 900;
+                word-break: keep-all; line-height: 1.35;
+            }
+            .lw-plan-tier {
+                display: inline-block; margin-left: 6px; padding: 3px 9px; border-radius: 999px;
+                background: rgba(0,224,198,.14); color: #7fded1; font-size: 11px; font-weight: 800;
+            }
+            .lw-plan-close {
+                flex: 0 0 auto; width: 32px; height: 32px; border-radius: 9px;
+                border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04);
+                color: rgba(235,242,250,.7); cursor: pointer; font-size: 13px;
+            }
+            .lw-plan-close:hover { background: rgba(255,255,255,.09); color: #fff; }
+            .lw-plan-metrics {
+                display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;
+                padding: 14px 22px;
+            }
+            .lw-plan-metrics div { display: flex; flex-direction: column; gap: 3px; }
+            .lw-plan-metrics span { color: rgba(235,242,250,.5); font-size: 11px; font-weight: 700; }
+            .lw-plan-metrics strong { color: #fff; font-size: 17px; font-weight: 900; }
+            .lw-plan-metrics .hot strong { color: #00e0c6; }
+            .lw-plan-when {
+                margin: 0 22px 4px; padding: 10px 13px; border-radius: 10px;
+                background: rgba(0,224,198,.12); color: #7fded1;
+                font-size: 13px; font-weight: 800; word-break: keep-all;
+            }
+            .lw-plan-body {
+                flex: 1 1 auto; overflow-y: auto;
+                display: flex; flex-direction: column; gap: 18px;
+                padding: 16px 22px 20px;
+            }
+            .lw-plan-body section strong {
+                display: block; margin-bottom: 8px;
+                color: #fff; font-size: 13px; font-weight: 900;
+            }
+            .lw-plan-body ul, .lw-plan-rivals {
+                margin: 0; padding-left: 17px;
+                display: flex; flex-direction: column; gap: 7px;
+            }
+            .lw-plan-body li {
+                color: rgba(235,242,250,.84); font-size: 13.5px; line-height: 1.62;
+                word-break: keep-all;
+            }
+            .lw-plan-rivals li { color: rgba(235,242,250,.6); font-size: 13px; }
+            .lw-plan-caution strong { color: #f5c518; }
+            .lw-plan-caution li { color: rgba(245,197,24,.86); }
+            .lw-plan-foot {
+                display: flex; gap: 9px; padding: 14px 22px 18px;
+                border-top: 1px solid rgba(255,255,255,.07);
+            }
+            .lw-plan-foot button, .lw-plan-foot a {
+                flex: 1 1 0; padding: 11px 12px; border-radius: 10px; text-align: center;
+                font-size: 13px; font-weight: 800; cursor: pointer; text-decoration: none;
+                border: 1px solid rgba(124,92,255,.4); background: rgba(124,92,255,.2); color: #cfc4ff;
+            }
+            .lw-plan-foot a {
+                border-color: rgba(255,255,255,.11); background: rgba(255,255,255,.04);
+                color: rgba(235,242,250,.74);
+            }
+            .lw-plan-foot button:hover { background: rgba(124,92,255,.3); }
+            .lw-copy {
+                min-width: 52px;
+                background: rgba(255,255,255,.05) !important;
+                border-color: rgba(255,255,255,.12) !important;
+            }
             .lw-timing {
                 margin: 0; padding: 8px 11px;
                 border-radius: 9px; background: rgba(0,224,198,.08);

@@ -17,17 +17,20 @@ export type UserKeyField =
     | 'searchAdCustomer'
     | 'openApiId'
     | 'openApiSecret'
-    | 'youtubeKey';
+    | 'youtubeKey'
+    | 'coupangAccessKey'
+    | 'coupangSecretKey'
+    | 'coupangSubId';
 
 export type UserKeys = Partial<Record<UserKeyField, string>>;
 
 export type KeyGroup = {
-    id: 'searchad' | 'openapi' | 'youtube';
+    id: 'searchad' | 'openapi' | 'youtube' | 'coupang';
     label: string;
     desc: string;
     /** 어디서 발급받는지. 사용자가 바로 갈 수 있어야 한다. */
     issueUrl: string;
-    fields: Array<{ key: UserKeyField; label: string; secret: boolean; placeholder: string }>;
+    fields: Array<{ key: UserKeyField; label: string; secret: boolean; placeholder: string; minLength: number }>;
 };
 
 export const KEY_GROUPS: readonly KeyGroup[] = [
@@ -37,9 +40,9 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
         desc: '월간 검색량·경쟁도를 조회합니다.',
         issueUrl: 'https://manage.searchad.naver.com/customers',
         fields: [
-            { key: 'searchAdLicense', label: '액세스 라이선스', secret: false, placeholder: '0100000000...' },
-            { key: 'searchAdSecret', label: '비밀키', secret: true, placeholder: 'AQAAAAA...' },
-            { key: 'searchAdCustomer', label: '고객 ID', secret: false, placeholder: '1234567' },
+            { key: 'searchAdLicense', label: '액세스 라이선스', secret: true, placeholder: '0100000000...' , minLength: 60 },
+            { key: 'searchAdSecret', label: '비밀키', secret: true, placeholder: 'AQAAAAA...' , minLength: 40 },
+            { key: 'searchAdCustomer', label: '고객 ID', secret: true, placeholder: '1234567' , minLength: 5 },
         ],
     },
     {
@@ -48,8 +51,8 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
         desc: '블로그 문서수·쇼핑 상품수·노출 순위를 조회합니다.',
         issueUrl: 'https://developers.naver.com/apps/#/register',
         fields: [
-            { key: 'openApiId', label: '클라이언트 ID', secret: false, placeholder: 'abcdEFGH...' },
-            { key: 'openApiSecret', label: '클라이언트 시크릿', secret: true, placeholder: '••••••••' },
+            { key: 'openApiId', label: '클라이언트 ID', secret: true, placeholder: 'abcdEFGH...' , minLength: 12 },
+            { key: 'openApiSecret', label: '클라이언트 시크릿', secret: true, placeholder: '••••••••' , minLength: 8 },
         ],
     },
     {
@@ -58,7 +61,19 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
         desc: '급상승 영상을 조회합니다. 무료이며 하루 10,000유닛입니다.',
         issueUrl: 'https://console.cloud.google.com/apis/credentials',
         fields: [
-            { key: 'youtubeKey', label: 'API 키', secret: true, placeholder: 'AIzaSy...' },
+            { key: 'youtubeKey', label: 'API 키', secret: true, placeholder: 'AIzaSy...' , minLength: 30 },
+        ],
+    },
+    {
+        id: 'coupang',
+        label: '쿠팡 파트너스',
+        desc: '제휴 링크 생성과 상품 검색에 씁니다. 파트너스 승인 후 발급됩니다.',
+        issueUrl: 'https://partners.coupang.com/#affiliate/ws/apikey',
+        fields: [
+            { key: 'coupangAccessKey', label: 'ACCESS KEY', secret: true, placeholder: '00000000-0000-0000-...', minLength: 20 },
+            { key: 'coupangSecretKey', label: 'SECRET KEY', secret: true, placeholder: '영문·숫자 30자 이상', minLength: 30 },
+            // sub_id 는 비밀이 아니라 실적을 가르는 꼬리표다. 짧아도 정상이라 길이를 안 본다.
+            { key: 'coupangSubId', label: 'sub_id (선택)', secret: false, placeholder: 'leword', minLength: 0 },
         ],
     },
 ];
@@ -103,4 +118,32 @@ export function isGroupReady(group: KeyGroup, keys: UserKeys): boolean {
 /** 하나라도 자기 키를 넣었는지. 화면 문구를 바꾸는 데 쓴다. */
 export function hasAnyUserKey(keys: UserKeys = loadUserKeys()): boolean {
     return KEY_GROUPS.some((group) => isGroupReady(group, keys));
+}
+
+/**
+ * 넣은 값이 그 자리에 들어갈 물건으로 보이는가.
+ *
+ * 왜 필요한가: 브라우저 비밀번호 관리자가 `type="password"` 를 보고 **사이트
+ * 로그인 아이디·비번을 여기에 자동으로 채웠다**(실제로 사장님 화면에서 일어났다).
+ * 그대로 저장하면 사이트 비번이 "검색광고 비밀키"로 서버에 전송된다.
+ * 네이버 키는 전부 길다 — 길이만 봐도 걸러진다.
+ *
+ * 형식을 완벽히 검증하지는 않는다. 자동완성 사고를 잡는 것이 목적이다.
+ */
+export function checkKeyShape(keys: UserKeys): { field: UserKeyField; label: string; reason: string }[] {
+    const problems: { field: UserKeyField; label: string; reason: string }[] = [];
+    for (const group of KEY_GROUPS) {
+        for (const field of group.fields) {
+            const value = (keys[field.key] || '').trim();
+            if (!value) continue;
+            if (value.length < field.minLength) {
+                problems.push({
+                    field: field.key,
+                    label: `${group.label} · ${field.label}`,
+                    reason: `${value.length}자 — 네이버가 주는 값은 ${field.minLength}자 이상입니다. 브라우저가 자동으로 채운 로그인 정보가 아닌지 확인해 주세요`,
+                });
+            }
+        }
+    }
+    return problems;
 }

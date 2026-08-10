@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { goldenIndex } from '../../lib/goldenIndex';
 import {
     analyzeKeyword,
     formatCount,
@@ -116,6 +117,29 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                             <h2>{result.keyword}</h2>
                             <span>실측값</span>
                         </div>
+
+                        {(() => {
+                            /*
+                             * 황금지수 — 등급 SSoT 를 그대로 옮긴 것이지 새로 만든 점수가 아니다.
+                             * 못 쟀으면 아무것도 안 띄운다. '약함'으로 적으면 못 잰 것과
+                             * 나쁜 것이 화면에서 같아진다.
+                             */
+                            const index = goldenIndex(measured.searchVolume, measured.documentCount);
+                            if (!index) return null;
+                            return (
+                                <div className={`lw-gold lw-gold-${index.tier}`}>
+                                    <div className="lw-gold-head">
+                                        <span className="lw-gold-label">{index.label}</span>
+                                        <strong className="lw-gold-keyword">{result.keyword}</strong>
+                                    </div>
+                                    <div className="lw-gold-figure">
+                                        <em>{index.ratio!.toFixed(1)}</em>
+                                        <span>황금지수 · 검색량 ÷ 문서수</span>
+                                    </div>
+                                    <p className="lw-gold-reason">{index.reason}</p>
+                                </div>
+                            );
+                        })()}
                         <div className="lw-metrics">
                             <MetricCell label="월 검색량" value={formatCount(measured.searchVolume)} note="PC + 모바일" />
                             <MetricCell label="PC" value={formatCount(measured.searchVolumePc)} />

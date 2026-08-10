@@ -1,4 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
+import { goldenIndex } from '../../lib/goldenIndex';
+import PreemptionPlan from './PreemptionPlan';
+import { EVIDENCE_ICON, naverSearchUrl, SURFACE_TAG, TIER_BADGE, TIER_RANK } from './preemptionMeta';
 import { formatCount } from '../../lib/keywordApi';
 import { hasAnyUserKey } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
@@ -37,10 +40,27 @@ type PreemptionRow = {
     trendLabel?: string;
     /** 시즌성일 때 "언제 써야 하는가". */
     timing?: string;
+    serpSections?: string[];
+    /** 뜨는 중 · 밭 비어 있음 · 실시간 전 · 새로 생긴 말 — 네 조건을 다 만족. */
+    /** 배치 순서로 본 "어디에 쓸 판인가". */
+    layoutBestFor?: 'naver-blog' | 'wordpress' | 'kin' | 'shopping' | null;
+    layoutHeadline?: string;
+    layoutRanked?: { surface: string; label: string; position: number }[];
+    layoutAdsOnTop?: boolean;
+    earlyMover?: boolean;
+    earlyMoverReasons?: string[];
     searchVolume: number | null;
     documentCount: number | null;
     evidence: Evidence[];
-    serp?: { sampledTitles: number; exactTitleHits: number; partialTitleHits: number; medianDaysAgo: number | null };
+    serp?: {
+        hasAiBriefing?: boolean;
+        sampledTitles: number;
+        exactTitleHits: number;
+        partialTitleHits: number;
+        medianDaysAgo: number | null;
+        /** 지금 그 자리를 차지한 글 제목 3개. */
+        topTitles?: string[];
+    };
     firstSeenAt?: string | null;
 };
 
@@ -56,34 +76,16 @@ const BOARD_URL = '/data/preemption-board.json';
 /** 키·라이선스 없이 온전히 보이는 건수. 나머지는 흐림 처리된다. */
 const FREE_PREVIEW_ROWS = 5;
 
-/** 층 배지 — 확실한 것부터 색이 강하다. 없는 확신을 색으로 만들지 않는다. */
-const TIER_BADGE: Record<string, { text: string; cls: string }> = {
-    top3: { text: '상위 3위권 빈자리', cls: 'tier-a' },
-    page1: { text: '1페이지 빈자리', cls: 'tier-b' },
-    'page1-weak': { text: '1페이지 빈자리', cls: 'tier-c' },
-    contested: { text: '경합', cls: 'tier-d' },
-};
-
-const EVIDENCE_ICON: Record<string, string> = {
-    'open-slot': '⌖',
-    contested: '△',
-    'empty-field': '◎',
-    'stale-top': '◷',
-    fresh: '✦',
-    'not-realtime': '◇',
-    demand: '▲',
-};
-
-function naverSearchUrl(keyword: string) {
-    return `https://search.naver.com/search.naver?ssc=tab.blog.all&query=${encodeURIComponent(keyword)}`;
-}
-
 function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [board, setBoard] = useState<Board | null>(null);
     const [status, setStatus] = useState<'loading' | 'ready' | 'empty' | 'error'>('loading');
     const [topic, setTopic] = useState('전체');
     const [query, setQuery] = useState('');
     const unlocked = useMemo(() => hasAnyUserKey(), []);
+    /** 실행 계획을 펼친 카드. 한 번에 하나만 연다 — 다 펼치면 목록이 안 읽힌다. */
+    const [openPlan, setOpenPlan] = useState('');
+    /** 방금 복사한 키워드. 눌렀는지 안 눌렀는지 모르면 두 번 누르게 된다. */
+    const [copied, setCopied] = useState('');
 
     useEffect(() => {
         let alive = true;
@@ -109,11 +111,35 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const rows = useMemo(() => {
         const all = board?.rows || [];
         const needle = query.trim().toLowerCase();
-        return all.filter((row) => {
+        const filtered = all.filter((row) => {
             if (topic !== '전체' && row.topic !== topic) return false;
             return !needle || row.keyword.toLowerCase().includes(needle);
         });
+        /*
+         * 보드는 주제 순으로 저장된다. 그대로 내면 '전체' 첫 화면이 알파벳 순 첫 주제로
+         * 채워져, 제일 확실한 자리가 한참 아래에 묻힌다. 확실한 층부터 올린다.
+         * 같은 층이면 빈자리가 앞쪽인 것, 그 다음 검색량이 많은 것 순이다.
+         */
+        return [...filtered].sort((a, b) => {
+            // 선점 적기가 맨 위다. "자리가 비었다"보다 "뜨는 중인데 아직 비었다"가 값나간다.
+            if (Boolean(a.earlyMover) !== Boolean(b.earlyMover)) return a.earlyMover ? -1 : 1;
+            /*
+             * 그 다음이 AI 브리핑 유무 — 층보다 먼저다(게이트와 같은 순서).
+             * 브리핑에서 답을 얻으면 자리가 좋아도 클릭이 안 온다.
+             * 못 잰 것(undefined)은 "있다"로 치지 않는다.
+             */
+            const brief = (row: PreemptionRow) => (row.serp?.hasAiBriefing === true ? 1 : 0);
+            if (brief(a) !== brief(b)) return brief(a) - brief(b);
+            const rank = (row: PreemptionRow) => TIER_RANK[row.tier || 'contested'] ?? 9;
+            if (rank(a) !== rank(b)) return rank(a) - rank(b);
+            const slot = (row: PreemptionRow) => row.openSlot ?? 99;
+            if (slot(a) !== slot(b)) return slot(a) - slot(b);
+            return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
+        });
     }, [board, topic, query]);
+
+    /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
+    const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
 
     const publishedLabel = board?.publishedAt
         ? new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
@@ -191,6 +217,12 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 <article key={`${row.topic}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
                                     <div className="lw-card-tags">
                                         <span className="lw-topic-tag">{row.topic}</span>
+                                        {row.earlyMover && <span className="lw-early-tag">지금이 선점 적기</span>}
+                                        {row.layoutBestFor && (
+                                            <span className={`lw-surface-tag surface-${row.layoutBestFor}`}>
+                                                {SURFACE_TAG[row.layoutBestFor]}
+                                            </span>
+                                        )}
                                         {row.tier && TIER_BADGE[row.tier] && (
                                             <span className={`lw-tier-tag ${TIER_BADGE[row.tier].cls}`}>
                                                 {TIER_BADGE[row.tier].text}
@@ -211,9 +243,25 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             <span className="lw-warn-tag">{row.regulatoryLabel}</span>
                                         )}
                                     </div>
-                                    <h3>{row.keyword}</h3>
+                                    {(() => {
+                                        /* 황금지수는 등급 SSoT 를 옮긴 것이다. 못 쟀으면 아무 색도 주지 않는다. */
+                                        const index = goldenIndex(row.searchVolume, row.documentCount);
+                                        return index
+                                            ? (
+                                                <h3 className={`lw-card-gold lw-gold-${index.tier}`}>
+                                                    <span className="lw-gold-mini">{index.label} {index.ratio!.toFixed(1)}</span>
+                                                    {row.keyword}
+                                                </h3>
+                                            )
+                                            : <h3>{row.keyword}</h3>;
+                                    })()}
 
                                     <ul className="lw-evidence">
+                                        {(row.earlyMoverReasons || []).map((text) => (
+                                            <li key={text} className="lw-evidence-early">
+                                                <span aria-hidden="true">↗</span>{text}
+                                            </li>
+                                        ))}
                                         {row.evidence.map((item) => (
                                             <li key={item.code}>
                                                 <span aria-hidden="true">{EVIDENCE_ICON[item.code] || '·'}</span>
@@ -234,8 +282,22 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                     </div>
 
                                     <div className="lw-card-actions">
-                                        <button type="button" onClick={() => onAnalyze(row.keyword)}>이 키워드 분석</button>
+                                        <button
+                                            type="button"
+                                            aria-expanded={openPlan === row.keyword}
+                                            onClick={() => setOpenPlan(openPlan === row.keyword ? '' : row.keyword)}
+                                        >어떻게 쓸까</button>
                                         <a href={naverSearchUrl(row.keyword)} target="_blank" rel="noreferrer">검색결과 확인</a>
+                                        <button
+                                            type="button"
+                                            className="lw-copy"
+                                            title="키워드 복사"
+                                            onClick={() => {
+                                                navigator.clipboard?.writeText(row.keyword);
+                                                setCopied(row.keyword);
+                                                window.setTimeout(() => setCopied(''), 1400);
+                                            }}
+                                        >{copied === row.keyword ? '복사됨' : '복사'}</button>
                                     </div>
 
                                     {locked && (
@@ -249,6 +311,15 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     </div>
 
                     {rows.length === 0 && <div className="lw-note">이 주제에는 통과한 키워드가 없습니다.</div>}
+
+                    {planRow && (
+                        <PreemptionPlan
+                            row={planRow}
+                            onClose={() => setOpenPlan('')}
+                            onAnalyze={onAnalyze}
+                            searchUrl={naverSearchUrl(planRow.keyword)}
+                        />
+                    )}
                 </>
             )}
         </>

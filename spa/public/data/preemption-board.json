@@ -1,0 +1,1140 @@
+{
+ "publishedAt": "2026-08-10T10:20:21.967Z",
+ "generator": "preemption-board-batch",
+ "topicsTotal": 32,
+ "topicsWithRows": 11,
+ "verified": 44,
+ "rows": [
+  {
+   "serpSections": [
+    "AI브리핑",
+    "웹사이트",
+    "인기글",
+    "지식스니펫",
+    "카페",
+    "이미지"
+   ],
+   "layoutBestFor": "wordpress",
+   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
+   "layoutRanked": [
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 2
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "lexical",
+   "keyword": "야설록뜻",
+   "topic": "문학·책",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 1,
+   "searchVolume": 210,
+   "documentCount": 189,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 210 · 문서수 189"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "high",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 4
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "웹사이트",
+    "카페",
+    "인기글",
+    "지식iN",
+    "AI추천",
+    "지식스니펫"
+   ],
+   "layoutBestFor": "wordpress",
+   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
+   "layoutRanked": [
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 2
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 5
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "멜론티켓 동접",
+   "topic": "공연·전시",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": 1,
+   "searchVolume": 1920,
+   "documentCount": 254,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 1,920 · 문서수 254"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 5개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 21,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 5
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "카페",
+    "웹사이트",
+    "인기글",
+    "AI추천",
+    "지식스니펫",
+    "지식iN",
+    "동영상",
+    "이미지",
+    "뉴스"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 2
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 6
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "에브리띵 에브리웨어",
+   "topic": "일상·생각",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": 1,
+   "searchVolume": 12980,
+   "documentCount": 10669,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 12,980 · 문서수 10,669"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 7개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 21,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 7
+   }
+  },
+  {
+   "serpSections": [
+    "파워링크",
+    "쇼핑",
+    "지식스니펫",
+    "인플루언서",
+    "인기글",
+    "웹사이트"
+   ],
+   "layoutBestFor": "shopping",
+   "layoutHeadline": "쇼핑이 맨 위를 먹는다 — 글보다 상품·제휴가 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "shopping",
+     "label": "상품·제휴",
+     "position": 2
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 3
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 4
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 6
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "강아지이발기 에이블미",
+   "topic": "반려동물",
+   "tier": "top3",
+   "tierLabel": "상위 3위권에 빈자리",
+   "openSlot": 1,
+   "searchVolume": 810,
+   "documentCount": 66,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 810 · 문서수 66"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+    }
+   ],
+   "intentLabel": "구매 검토",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": false,
+    "aiBriefingSourceCount": 0
+   }
+  },
+  {
+   "serpSections": [
+    "파워링크",
+    "쇼핑",
+    "지식스니펫",
+    "카페",
+    "인기글",
+    "웹사이트"
+   ],
+   "layoutBestFor": "shopping",
+   "layoutHeadline": "쇼핑이 맨 위를 먹는다 — 글보다 상품·제휴가 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "shopping",
+     "label": "상품·제휴",
+     "position": 2
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 3
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 4
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 6
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "강아지치석제거 케어덴",
+   "topic": "반려동물",
+   "tier": "top3",
+   "tierLabel": "상위 3위권에 빈자리",
+   "openSlot": 1,
+   "searchVolume": 1190,
+   "documentCount": 205,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 1,190 · 문서수 205"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+    }
+   ],
+   "intentLabel": "구매 검토",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": false,
+    "aiBriefingSourceCount": 0
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "웹사이트",
+    "카페",
+    "인기글",
+    "지식스니펫",
+    "지식iN",
+    "이미지",
+    "쇼핑"
+   ],
+   "layoutBestFor": "wordpress",
+   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
+   "layoutRanked": [
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 2
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 5
+    },
+    {
+     "surface": "shopping",
+     "label": "상품·제휴",
+     "position": 8
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "명심보감 깜지",
+   "topic": "좋은글·이미지",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 1,
+   "searchVolume": 470,
+   "documentCount": 133,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 470 · 문서수 133"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 7개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "구매 검토",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 28,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 7
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "파워링크",
+    "웹사이트",
+    "지식스니펫"
+   ],
+   "layoutBestFor": "wordpress",
+   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
+   "layoutRanked": [
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "명조 채널",
+   "topic": "좋은글·이미지",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 1,
+   "searchVolume": 7320,
+   "documentCount": 3128,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 7,320 · 문서수 3,128"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 2개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "에버그린",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 2
+   }
+  },
+  {
+   "serpSections": [
+    "파워링크",
+    "쇼핑",
+    "지식스니펫",
+    "웹사이트",
+    "인플루언서",
+    "인기글",
+    "카페"
+   ],
+   "layoutBestFor": "shopping",
+   "layoutHeadline": "쇼핑이 맨 위를 먹는다 — 글보다 상품·제휴가 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "shopping",
+     "label": "상품·제휴",
+     "position": 2
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 3
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 4
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 5
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "lexical",
+   "keyword": "도미나스 nmn 앰플 후기",
+   "topic": "패션·미용",
+   "tier": "page1",
+   "tierLabel": "1페이지에 빈자리",
+   "openSlot": null,
+   "searchVolume": 150,
+   "documentCount": 126,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 150 · 문서수 126"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+    }
+   ],
+   "intentLabel": "구매 검토",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": false,
+    "aiBriefingSourceCount": 0
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "파워링크",
+    "인기글",
+    "웹사이트",
+    "지식스니펫",
+    "인플루언서",
+    "카페"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 4
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 5
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "코모치야리이까 해동",
+   "topic": "요리·레시피",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": 1,
+   "searchVolume": 100,
+   "documentCount": 57,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 100 · 문서수 57"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있음"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 0
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "파워링크",
+    "인기글",
+    "웹사이트",
+    "AI추천",
+    "지식스니펫",
+    "인플루언서",
+    "이미지"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 4
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 6
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "코모치야리이까 먹는법",
+   "topic": "요리·레시피",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": 2,
+   "searchVolume": 190,
+   "documentCount": 98,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 190 · 문서수 98"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 2번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 6개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 6
+   }
+  },
+  {
+   "serpSections": [
+    "웹사이트",
+    "인플루언서",
+    "인기글",
+    "지식스니펫",
+    "카페",
+    "동영상",
+    "뉴스"
+   ],
+   "layoutBestFor": "wordpress",
+   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
+   "layoutRanked": [
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 1
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 2
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "디아블로4 인벤 모바일",
+   "topic": "게임",
+   "tier": "top3",
+   "tierLabel": "상위 3위권에 빈자리",
+   "openSlot": 1,
+   "searchVolume": 1080,
+   "documentCount": 1012,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 1,080 · 문서수 1,012"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "시즌성",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": false,
+    "aiBriefingSourceCount": 0
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "인플루언서",
+    "인기글",
+    "웹사이트",
+    "지식스니펫",
+    "카페",
+    "지식iN",
+    "이미지"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 2
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 4
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 5
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "백업 옵트아웃",
+   "topic": "IT·컴퓨터",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": 1,
+   "searchVolume": 4550,
+   "documentCount": 886,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 4,550 · 문서수 886"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 3개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 5,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 3
+   }
+  },
+  {
+   "serpSections": [
+    "웹사이트",
+    "이미지",
+    "지식스니펫",
+    "인기글",
+    "카페",
+    "뉴스"
+   ],
+   "layoutBestFor": "wordpress",
+   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
+   "layoutRanked": [
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 1
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 3
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "정형외과 임형태",
+   "topic": "건강·의학",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": 1,
+   "searchVolume": 940,
+   "documentCount": 21,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 940 · 문서수 21"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": null,
+    "hasAiBriefing": false,
+    "aiBriefingSourceCount": 0
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "인플루언서",
+    "인기글",
+    "카페",
+    "이미지",
+    "지식스니펫",
+    "웹사이트",
+    "지식iN"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 2
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 6
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 7
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "왕십리 아이맥스 명당",
+   "topic": "영화",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": 3,
+   "searchVolume": 3360,
+   "documentCount": 1324,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 3,360 · 문서수 1,324"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 3번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 이내 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 7개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 3,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 7
+   }
+  }
+ ]
+}
