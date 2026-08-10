@@ -112,6 +112,11 @@ export type SiteContent = {
         orbit?: DownloadProductContent;
         tistory?: DownloadProductContent;
     };
+    /**
+     * 운영자가 관리자에서 저장한 홈 키워드 브리핑 검수본.
+     * 크론이 만드는 정적 스냅샷보다 우선한다 — 사람이 고른 것이 이긴다.
+     */
+    keywordBriefing?: unknown;
     theme?: {
         pricingBgImage?: string;
         productsBgImage?: string;
@@ -833,7 +838,20 @@ async function fetchKeywordBriefingSeed(): Promise<HomeKeywordBriefing | null> {
     }
 }
 
+/**
+ * 홈 키워드 브리핑.
+ *
+ * 순서가 중요하다: **운영자가 저장한 검수본이 먼저**고, 없을 때만 크론 스냅샷이다.
+ *
+ * 예전에는 정적 스냅샷만 읽었다. 그래서 관리자에서 "검수본을 홈에 저장"을 눌러도
+ * 홈이 절대 바뀌지 않았다 — 저장은 GAS 로 가는데 읽기는 파일만 봤기 때문이다.
+ * (타입에 source:'saved' 가 남아 있던 게 그 흔적이다.)
+ */
 export async function fetchHomeKeywordBriefing(): Promise<HomeKeywordBriefingResult | null> {
+    const content = await fetchSiteContent();
+    const saved = normalizeKeywordBriefing(content?.keywordBriefing);
+    if (saved && saved.rows.length > 0) return { briefing: saved, source: 'saved' };
+
     const snapshot = await fetchKeywordBriefingSeed();
     return snapshot ? { briefing: snapshot, source: 'seed' } : null;
 }

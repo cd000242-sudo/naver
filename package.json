@@ -71,7 +71,10 @@
     "probe:serp": "node scripts/probe-serp.mjs",
     "release:upload": "node scripts/upload-release-to-leaderspro.js",
     "release:clean": "node scripts/clean-old-releases.js",
-    "release:publish": "npm run release:upload && npm run release:clean"
+    "release:publish": "npm run release:upload && npm run release:clean",
+    "status": "node scripts/status-board.mjs",
+    "status:purchase": "node scripts/status-board.mjs --lane=purchase",
+    "status:json": "node scripts/status-board.mjs --json"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.21.1",

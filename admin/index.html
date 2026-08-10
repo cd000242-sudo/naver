@@ -1512,6 +1512,21 @@
                             <span style="font-size:16px;color:var(--text-secondary);">저장 전까지 현재 홈 브리핑은 바뀌지 않습니다.</span>
                             <button class="btn btn-gold" type="button" id="keyword-briefing-publish">검수본을 홈에 저장</button>
                         </div>
+                        <!--
+                          저장 진행·결과는 버튼 바로 아래에 붙인다.
+                          예전에는 표 위쪽(keyword-briefing-status)에만 작은 글씨로 떠서,
+                          버튼을 누른 사람 눈에는 아무 일도 안 일어난 것처럼 보였다.
+                        -->
+                        <div id="keyword-briefing-save-feedback" role="status" aria-live="assertive" style="display:none;margin-top:12px;padding:14px 16px;border-radius:12px;font-size:16px;font-weight:700;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <span id="keyword-briefing-save-spinner" style="display:none;width:18px;height:18px;border:3px solid rgba(255,255,255,.25);border-top-color:#44d7b6;border-radius:50%;animation:kbSpin .8s linear infinite;"></span>
+                                <span id="keyword-briefing-save-text"></span>
+                            </div>
+                            <div id="keyword-briefing-save-bar" style="display:none;margin-top:10px;height:6px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;">
+                                <div id="keyword-briefing-save-bar-fill" style="height:100%;width:0%;background:linear-gradient(90deg,#44d7b6,#2ed36f);transition:width .3s ease;"></div>
+                            </div>
+                        </div>
+                        <style>@keyframes kbSpin{to{transform:rotate(360deg)}}</style>
                     </div>
                 </div>
 
@@ -5276,6 +5291,40 @@
             return window.KeywordBriefingTools;
         }
 
+        /**
+         * 저장 진행·결과 표시. 버튼 바로 아래에 크게 띄운다.
+         *
+         * state: 'progress' | 'success' | 'error' | 'hide'
+         * 성공 메시지는 자동으로 사라지지 않는다 — 사장님이 저장됐는지
+         * 확인하려고 다시 눌러 보는 일이 없어야 한다.
+         */
+        function keywordBriefingSaveFeedback(state, message, percent) {
+            const box = document.getElementById('keyword-briefing-save-feedback');
+            const spinner = document.getElementById('keyword-briefing-save-spinner');
+            const text = document.getElementById('keyword-briefing-save-text');
+            const bar = document.getElementById('keyword-briefing-save-bar');
+            const fill = document.getElementById('keyword-briefing-save-bar-fill');
+            if (!box || !text) return;
+            if (state === 'hide') { box.style.display = 'none'; return; }
+
+            box.style.display = 'block';
+            text.textContent = message;
+            const palette = {
+                progress: ['rgba(68,215,182,.10)', '1px solid rgba(68,215,182,.35)', '#44d7b6'],
+                success: ['rgba(46,211,111,.14)', '1px solid rgba(46,211,111,.45)', '#2ed36f'],
+                error: ['rgba(245,87,108,.12)', '1px solid rgba(245,87,108,.45)', '#f5576c'],
+            }[state] || palette_default();
+            box.style.background = palette[0];
+            box.style.border = palette[1];
+            box.style.color = palette[2];
+            if (spinner) spinner.style.display = state === 'progress' ? 'inline-block' : 'none';
+            if (bar && fill) {
+                bar.style.display = state === 'progress' || state === 'success' ? 'block' : 'none';
+                fill.style.width = (state === 'success' ? 100 : Math.max(0, Math.min(100, Number(percent) || 0))) + '%';
+            }
+        }
+        function palette_default() { return ['rgba(255,255,255,.06)', '1px solid rgba(255,255,255,.14)', 'var(--text-secondary)']; }
+
         function keywordBriefingStatus(message, tone) {
             const node = document.getElementById('keyword-briefing-status');
             if (!node) return;
@@ -5602,15 +5651,28 @@
             }
             const briefing = collectKeywordBriefing();
             if (!briefing) {
-                keywordBriefingStatus(keywordBriefingEditorState.invalidCount > 0
+                const reason = keywordBriefingEditorState.invalidCount > 0
                     ? '검수 필요 행을 모두 수정하거나 삭제한 뒤 저장하세요.'
-                    : '저장할 키워드 표가 없습니다.', 'error');
+                    : '저장할 키워드 표가 없습니다.';
+                keywordBriefingStatus(reason, 'error');
+                keywordBriefingSaveFeedback('error', '저장하지 못했습니다 — ' + reason);
                 return false;
             }
-            const session = lewordApiAdminSession || readLewordAdminSession();
-            if (!session?.accessToken) {
-                keywordBriefingApiAccessStatus('먼저 서버 저장 권한을 연결하세요.', true);
-                keywordBriefingStatus('공개 토큰으로는 저장하지 않습니다. 서버 관리자 세션이 필요합니다.', 'error');
+            /*
+             * 저장 권한은 **GAS 관리자 세션**이 가진다.
+             *
+             * 예전에는 여기서 폐지된 Vultr 세션(lewordApiAdminSession)을 검사했다.
+             * 그 서버가 사라진 뒤로는 아무도 그 세션을 못 얻으니 저장이 항상
+             * 여기서 멈췄고, 화면에는 작은 글씨 한 줄만 떠서 "눌러도 아무 일이
+             * 없다"로 보였다. 실제 인증은 window.fetch 래퍼가 adminSessionToken 을
+             * 실어 주는 GAS 세션이 한다 — 그래서 그것만 확인한다.
+             */
+            const session = readAdminSession();
+            if (!session?.token) {
+                keywordBriefingApiAccessStatus('관리자 로그인이 필요합니다.', true);
+                keywordBriefingStatus('로그인 세션이 없습니다. 다시 로그인한 뒤 저장하세요.', 'error');
+                keywordBriefingSaveFeedback('error', '저장 실패 — 관리자 로그인이 필요합니다. 다시 로그인한 뒤 저장하세요.');
+                try { showToast('저장 실패 — 관리자 로그인이 필요합니다.'); } catch (toastError) { /* noop */ }
                 return false;
             }
             const button = document.getElementById('keyword-briefing-publish');
@@ -5618,12 +5680,15 @@
             keywordBriefingEditorState.saving = true;
             syncKeywordBriefingPublishButton();
             keywordBriefingStatus('검수본을 안전한 서버 저장소에 반영하는 중입니다.', 'info');
+            if (button) button.textContent = '저장 중…';
+            keywordBriefingSaveFeedback('progress', `저장 중… ${(briefing.rows || []).length}개 키워드를 홈 브리핑에 반영합니다.`, 25);
             try {
                 // 저장은 GAS site-content 안에 둔다. 폐지된 Vultr 대신이며
                 // 크론이 덮어쓰지 않는 '운영자가 고정한 값' 자리다.
                 const saved = await gasAdminCall('site-content-save', {
                     content: { keywordBriefing: briefing }
                 });
+                keywordBriefingSaveFeedback('progress', '서버 응답 확인 중…', 70);
                 const response = { ok: !(saved && saved.ok === false), status: 200,
                     json: async () => ({ ok: true, briefing }) };
                 if (saved && saved.ok === false) throw new Error(saved.error || '브리핑 저장 실패');
@@ -5645,17 +5710,26 @@
                     keywordBriefingEditorState.persisted = true;
                     setKeywordBriefingRevision(keywordBriefingEditorState.revision);
                     keywordBriefingStatus('저장은 완료됐고, 저장 중 작성한 새 초안은 그대로 유지했습니다.', 'success');
+                    keywordBriefingSaveFeedback('success', '✅ 저장 완료 — 저장 중 작성한 새 초안은 그대로 두었습니다.', 100);
                     return true;
                 }
                 setKeywordBriefingEditor(payload.briefing);
                 markKeywordBriefingSaved(payload.briefing);
                 keywordBriefingApiAccessStatus('서버 저장 권한 연결됨', false);
+                const savedCount = (payload.briefing.rows || []).length;
+                keywordBriefingStatus(`저장 완료 — ${savedCount}개 키워드가 홈 브리핑에 반영됐습니다.`, 'success');
+                keywordBriefingSaveFeedback('success', `✅ 저장 완료 — ${savedCount}개 키워드가 홈에 반영됐습니다. (홈 새로고침 시 바로 보입니다)`, 100);
+                try { showToast(`✅ 저장 완료 — 홈에 ${savedCount}개 반영`); } catch (toastError) { /* 토스트 실패가 저장을 실패로 만들면 안 된다 */ }
                 return true;
             } catch (error) {
                 keywordBriefingStatus(error.message || '브리핑 저장에 실패했습니다.', 'error');
+                // 작은 글씨만 바뀌면 사용자는 "아무 일도 안 일어났다"고 본다.
+                keywordBriefingSaveFeedback('error', '저장 실패 — ' + (error.message || '알 수 없는 오류'));
+                try { showToast('저장 실패 — ' + (error.message || '알 수 없는 오류')); } catch (toastError) { /* noop */ }
                 return false;
             } finally {
                 keywordBriefingEditorState.saving = false;
+                if (button) button.textContent = '검수본을 홈에 저장';
                 syncKeywordBriefingPublishButton();
             }
         }

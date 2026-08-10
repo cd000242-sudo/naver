@@ -2,7 +2,18 @@ import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import HomeOperationsBoard from '../components/HomeOperationsBoard';
 import ParticlesCanvas from '../components/ParticlesCanvas';
+import SourceBriefModal from '../components/SourceBriefModal';
+import SourceBriefModalStyles from '../components/SourceBriefModalStyles';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
+import {
+    SOURCE_SEARCH_PATHS,
+    buildSourceSearchUrl,
+    cleanLiveText,
+    type SourceLane,
+    type SourceLaneConfig,
+    type SourceLaneId,
+    type SourceSignal,
+} from '../lib/sourceSignalTypes';
 
 type LiveGoldenPreview = {
     id?: string;
@@ -15,54 +26,8 @@ type LiveGoldenPreview = {
     updatedAt?: string;
 };
 
-type SourceSignal = {
-    id?: string;
-    keyword?: string;
-    title?: string;
-    description?: string;
-    rank?: number;
-    priority?: number;
-    source?: string;
-    categoryId?: string;
-    createdAt?: string;
-    /** 네이버 자동완성 실측 확장 — 크론 스냅샷이 채워준다. 합성 확장 대체용 */
-    expansions?: string[];
-    /** 원본 기사 게시 경과("3분 전"). 이슈 선점 판단의 근거라 원본 값을 그대로 쓴다. */
-    ago?: string;
-    agoMinutes?: number;
-    /** 절대 게시 시각 표기. 툴팁으로 보여준다. */
-    publishedLabel?: string;
-    /** 목록에서 받아 온 기사 대표 사진. */
-    image?: string;
-    /**
-     * 이슈 브리프 — 배치가 뉴스 기사에서 뽑아 심는다(brightdata-issue-brief-batch).
-     * facts 의 문장은 전부 기사 원문 그대로다. 여기서 새로 쓰거나 합치지 않는다.
-     */
-    insight?: {
-        /** 배치가 계산해 담아준다. 여기서 다시 만들지 않는다. */
-        titles?: { seo?: string; home?: string; topic?: string; topicGroup?: string };
-        facts?: Array<{ text: string; sourceIndex: number }>;
-        links?: Array<{ url: string; press: string }>;
-        images?: string[];
-        press?: string[];
-        headlines?: string[];
-        extraction?: 'playwright' | 'search-card';
-        collectedAt?: string;
-    };
-};
-
-type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'policy' | 'issue';
-
-type SourceLaneConfig = {
-    id: SourceLaneId;
-    label: string;
-    accent: string;
-    description: string;
-};
-
-type SourceLane = SourceLaneConfig & {
-    items: SourceSignal[];
-};
+// 실시간 신호 타입과 검색 주소는 lib/sourceSignalTypes.ts 한 곳에 있다.
+// 브리프 모달과 /leword 화면이 같은 정의를 쓰기 위해서다.
 
 type KeywordStrategyIdea = {
     label: string;
@@ -126,13 +91,6 @@ const HOME_LIVE_FALLBACK_GOLDEN: LiveGoldenPreview[] = [
     { id: 'fallback-golden-3', rank: 3, keyword: '오늘 방송 출연진', grade: 'S', publicSearchVolumeLabel: '실시간 반응', publicDocumentCountLabel: '경쟁도 확인 중', publicReason: '방송 직후 빠르게 검색량이 붙는 이슈형 키워드입니다.' },
 ];
 
-function cleanLiveText(value: unknown, fallback: string): string {
-    const text = String(value || '').trim();
-    if (!text) return fallback;
-    const questionMarks = (text.match(/\?/g) || []).length;
-    const looksBroken = /[�]|占|揶|醫|怨|筌|嚥|媛|덈떎|섏|ㅼ/.test(text) || questionMarks >= Math.max(3, Math.ceil(text.length / 5));
-    return looksBroken ? fallback : text;
-}
 
 function readCachedSourceLanes(): { lanes: SourceLane[]; updatedAt?: string } | null {
     try {
@@ -254,19 +212,6 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
 
 
 
-const SOURCE_SEARCH_PATHS: Record<SourceLaneId, (keyword: string) => string> = {
-    naver: (keyword) => `https://search.naver.com/search.naver?query=${encodeURIComponent(keyword)}`,
-    daum: (keyword) => `https://search.daum.net/search?w=tot&q=${encodeURIComponent(keyword)}`,
-    nate: (keyword) => `https://search.nate.com/search/all.html?q=${encodeURIComponent(keyword)}`,
-    zum: (keyword) => `https://search.zum.com/search.zum?query=${encodeURIComponent(keyword)}`,
-    policy: (keyword) => `https://www.korea.kr/search?srchKeyword=${encodeURIComponent(keyword)}`,
-    issue: (keyword) => `https://search.naver.com/search.naver?where=news&query=${encodeURIComponent(keyword)}`,
-};
-
-function buildSourceSearchUrl(laneId: SourceLaneId, keyword: string): string {
-    const trimmed = keyword.trim();
-    return SOURCE_SEARCH_PATHS[laneId](trimmed || 'LEWORD');
-}
 
 function uniqueList(values: string[]): string[] {
     return Array.from(new Set(values.map((value) => value.trim()).filter(Boolean)));
@@ -1147,6 +1092,8 @@ function IndexPage() {
     const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
+    /** 카드를 누르면 중앙 모달로 크게 펼친다. 우측 패널은 그대로 요약을 유지한다. */
+    const [briefModalKeyword, setBriefModalKeyword] = useState('');
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
     const [decorationsReady, setDecorationsReady] = useState(false);
 
@@ -1211,9 +1158,14 @@ function IndexPage() {
         || { ...SOURCE_LANE_CONFIGS[0], items: [] };
     const activeSourceItems = activeSourceLane.items.slice(0, 10);
     const activeSourceInsightItem = activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === activeSourceKeyword) || activeSourceItems[0] || null;
+    const briefModalItem = briefModalKeyword
+        ? activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === briefModalKeyword) || null
+        : null;
     const selectSourceLane = (laneId: SourceLaneId) => {
         setActiveSourceLaneId(laneId);
         setActiveSourceKeyword('');
+        // 레인을 바꾸면 열려 있던 모달의 키워드는 더 이상 이 목록에 없다.
+        setBriefModalKeyword('');
     };
     const handleSourceTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, laneId: SourceLaneId) => {
         const laneIds = liveState.lanes.map((lane) => lane.id);
@@ -1247,6 +1199,15 @@ function IndexPage() {
     return (
         <>
             {decorationsReady && <ParticlesCanvas />}
+
+            <SourceBriefModalStyles />
+            {briefModalItem && (
+                <SourceBriefModal
+                    lane={activeSourceLane}
+                    item={briefModalItem}
+                    onClose={() => setBriefModalKeyword('')}
+                />
+            )}
 
             <HomeOperationsBoard managedProofs={siteContent?.hero?.proofs || []} realtimePanel={(
                     <div className="hero-realtime-board" aria-label="실시간 검색어">
@@ -1307,7 +1268,16 @@ function IndexPage() {
                                         const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
                                         return (
                                             <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`}>
-                                                <button type="button" className="hero-source-row-main" onClick={() => setActiveSourceKeyword(keyword)}>
+                                                <button
+                                                    type="button"
+                                                    className="hero-source-row-main"
+                                                    aria-haspopup="dialog"
+                                                    title={`${keyword} 기사 브리프 크게 보기`}
+                                                    onClick={() => {
+                                                        setActiveSourceKeyword(keyword);
+                                                        setBriefModalKeyword(keyword);
+                                                    }}
+                                                >
                                                     <span>{index + 1}</span>
                                                     <div>
                                                         <strong>{keyword}</strong>

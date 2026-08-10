@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import ZoomableImage from '../components/ZoomableImage';
+import downloadCatalog from '../data/download-catalog.json';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 import { gradient, onGold, radius } from '../styles/tokens';
 
@@ -29,45 +30,12 @@ type ProductConfig = {
     downloads: DownloadChoice[];
 };
 
-const PRODUCTS = {
-    naver: {
-        name: 'Better Life Naver',
-        version: '네이버 블로그 자동화 · v2.11.182',
-        image: '/images/feature-auto-publish.png',
-        accent: '#FFD700',
-        borderColor: 'rgba(255,215,0,0.25)',
-        downloads: [
-            { key: 'windows', label: 'Windows', detail: '2.11.182 · exe', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.182/Better-Life-Naver-Setup-2.11.182.exe' },
-            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.11.67 · arm64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-arm64.dmg' },
-            { key: 'mac-intel', label: 'Mac Intel', detail: '2.11.67 · x64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-x64.dmg' },
-        ],
-    },
-    leword: {
-        name: 'LEWORD',
-        version: 'AI 키워드 인텔리전스 · Windows v2.49.86',
-        image: '/images/leword/hero-banner-fast.jpg',
-        accent: '#A78BFA',
-        borderColor: 'rgba(124,58,237,0.25)',
-        downloads: [
-            { key: 'windows', label: 'Windows', detail: '2.49.86 · exe', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86.exe' },
-            { key: 'android', label: 'Android APK', detail: '2.49.86 · apk', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-mobile-0.1.0.apk' },
-            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.49.86 · arm64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86-arm64.dmg' },
-            { key: 'mac-intel', label: 'Mac Intel', detail: '2.49.86 · x64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86-x64.dmg' },
-        ],
-    },
-    orbit: {
-        name: 'LEADERNAM Orbit',
-        version: '블로그스팟·워드프레스 자동화 · v3.8.231',
-        image: '/images/orbit/leadernam-orbit-download-fast.jpg',
-        accent: '#44d7b6',
-        borderColor: 'rgba(68,215,182,0.28)',
-        downloads: [
-            { key: 'windows', label: 'Windows', detail: '3.8.231 · exe', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231.exe' },
-            { key: 'mac-arm', label: 'Mac M1-M4', detail: '3.8.231 · arm64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231-arm64.dmg' },
-            { key: 'mac-intel', label: 'Mac Intel', detail: '3.8.231 · x64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231-x64.dmg' },
-        ],
-    },
-} satisfies Record<string, ProductConfig>;
+/**
+ * 기본 카탈로그는 JSON 한 곳에만 둔다.
+ * scripts/status/probe-purchase.mjs 가 같은 파일을 읽어 링크 생존을 검사한다.
+ * 여기에 값을 다시 적으면 화면과 검사가 조용히 갈라진다.
+ */
+const PRODUCTS = downloadCatalog as unknown as Record<'naver' | 'leword' | 'orbit', ProductConfig>;
 
 type ProductKey = keyof typeof PRODUCTS;
 
