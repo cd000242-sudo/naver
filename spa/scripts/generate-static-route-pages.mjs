@@ -317,6 +317,17 @@ const OG_IMAGE_BY_ROUTE = {
 function replaceCardImage(html, routePath) {
   const file = OG_IMAGE_BY_ROUTE[routePath];
   if (!file) return html;
+  /*
+   * 파일이 실제로 있어야 갈아 끼운다.
+   *
+   * 매핑만 걸어 두고 이미지를 안 넣었더니 공유 카드 6개가 404 로 나갔다
+   * (하네스가 잡았다: "공유하면 깨진 카드가 나간다"). 없는 그림을 가리키느니
+   * 기본 카드를 쓰는 편이 낫다 — 기본은 최소한 살아 있다.
+   */
+  if (!fs.existsSync(path.join(distDir, file))) {
+    console.warn(`  · og 이미지 없음 — 기본 카드 유지: ${file} (${routePath})`);
+    return html;
+  }
   const imageUrl = `${siteOrigin}/${file}`;
   let next = replaceRequired(html, /<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${imageUrl}" />`, `og:image (${routePath})`);
   next = replaceRequired(next, /<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${imageUrl}" />`, `twitter:image (${routePath})`);
