@@ -96,7 +96,7 @@ function LewordPage() {
             <section className="lw-main">
                 {activeTab === 'golden' && <GoldenTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
-                {activeTab === 'affiliate' && <AffiliateTab initialKeyword={handoffKeyword} onAnalyze={sendToAnalyze} />}
+                {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'keys' && <KeysTab />}

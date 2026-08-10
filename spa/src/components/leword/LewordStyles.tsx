@@ -350,6 +350,45 @@ function LewordStyles() {
                 border: 1px solid var(--gold-line); background: var(--gold-chip);
                 color: var(--gold-ink); font-size: 10.5px; font-weight: 900; letter-spacing: .02em;
             }
+            /* 제휴 3열. 좁아지면 한 열씩 내려간다 — 카드가 눌리면 상품명이 안 읽힌다. */
+            .lw-lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
+            @media (max-width: 1180px) { .lw-lanes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+            @media (max-width: 780px) { .lw-lanes { grid-template-columns: minmax(0, 1fr); } }
+            .lw-lane {
+                border: 1px solid rgba(255,255,255,.08); border-radius: 14px;
+                background: rgba(255,255,255,.02); overflow: hidden;
+            }
+            .lw-lane-head { padding: 16px 16px 14px; border-bottom: 1px solid rgba(255,255,255,.07); }
+            .lw-lane-head h2 { margin: 0 0 6px; color: #fff; font-size: 15px; font-weight: 900; }
+            .lw-lane-head p { margin: 0 0 5px; color: rgba(235,242,250,.62); font-size: 12px; line-height: 1.5; word-break: keep-all; }
+            .lw-lane-status { color: rgba(250,204,21,.82) !important; font-size: 11.5px !important; }
+            .lw-lane-head a { color: #b8a6ff; font-size: 12px; font-weight: 800; text-decoration: none; }
+            .lw-lane-list { margin: 0; padding: 10px; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+            .lw-lane-card {
+                display: flex; gap: 10px; padding: 12px;
+                border: 1px solid rgba(255,255,255,.07); border-radius: 11px;
+                background: rgba(255,255,255,.03);
+            }
+            .lw-lane-rank {
+                flex: 0 0 auto; width: 22px; height: 22px; border-radius: 7px;
+                display: flex; align-items: center; justify-content: center;
+                background: rgba(124,92,255,.18); color: #b8a6ff; font-size: 11px; font-weight: 900;
+            }
+            .lw-lane-body { min-width: 0; flex: 1 1 auto; }
+            .lw-lane-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 7px; }
+            .lw-lane-body h3 { margin: 0 0 5px; color: #fff; font-size: 14px; font-weight: 900; word-break: keep-all; }
+            .lw-lane-product { margin: 0 0 8px; color: rgba(235,242,250,.6); font-size: 11.5px; line-height: 1.45; word-break: keep-all; }
+            .lw-lane-metrics { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 9px; }
+            .lw-lane-metrics span { color: rgba(235,242,250,.5); font-size: 11px; }
+            .lw-lane-metrics strong { color: #fff; font-size: 12.5px; font-weight: 800; margin-left: 3px; }
+            .lw-lane-empty { margin: 0; padding: 18px 16px 22px; color: rgba(235,242,250,.42); font-size: 12px; text-align: center; }
+            .lw-lane-actions { display: flex; gap: 6px; }
+            .lw-lane-actions button, .lw-lane-actions a {
+                flex: 1 1 0; padding: 7px 6px; border-radius: 8px; text-align: center;
+                font-size: 11.5px; font-weight: 800; cursor: pointer; text-decoration: none; white-space: nowrap;
+                border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.05); color: rgba(235,242,250,.8);
+            }
+            .lw-lane-actions button:hover, .lw-lane-actions a:hover { background: rgba(124,92,255,.2); color: #cfc4ff; }
             .lw-gold-ultra  { --gold-ink: #ffd700; --gold-line: rgba(255,215,0,.5);  --gold-chip: rgba(255,215,0,.16);  --gold-bg-a: rgba(255,215,0,.13);  --gold-bg-b: rgba(255,165,0,.06); }
             .lw-gold-golden { --gold-ink: #ff6b6b; --gold-line: rgba(255,107,107,.45); --gold-chip: rgba(255,107,107,.15); --gold-bg-a: rgba(255,107,107,.11); --gold-bg-b: rgba(255,64,64,.05); }
             .lw-gold-fair   { --gold-ink: #4ade80; --gold-line: rgba(74,222,128,.4);  --gold-chip: rgba(74,222,128,.14);  --gold-bg-a: rgba(74,222,128,.1);   --gold-bg-b: rgba(16,185,129,.05); }
