@@ -73,18 +73,30 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
             {!unlocked && <LicenseGate onUnlock={() => setUnlocked(true)} />}
 
-            {lane === 'coupang' && <CoupangBoard onAnalyze={onAnalyze} />}
-
+            {/*
+              * 사장님 지적 두 번을 모두 지켜야 한다:
+              *   "황금키워드 분류해온 것밖에 안 되잖아"  → 상품이 실측된 자리만 싣는다
+              *   "그냥 인기상품만 나열해놓은 것 같은데"  → 골드박스를 주인공으로 두지 않는다
+              * 그래서 주 레인은 '자리가 실측된 상품 검색어'(선점 보드 실측)이고,
+              * 골드박스는 아래 '오늘의 특가' 참고로 강등한다.
+              */}
             {lane !== 'coupang' && (
-                <>
-                    <div className="lw-note lw-note-limit">
-                        <strong>{active.status}</strong>
-                        <p>
-                            대신 검색결과에 상품 카드가 실제로 뜬 자리를 싣습니다 — 파는 물건이 있다는 실측입니다.
-                            <a href={active.consoleUrl} target="_blank" rel="noreferrer" style={{ marginLeft: 6 }}>콘솔 열기 →</a>
-                        </p>
-                    </div>
+                <div className="lw-note lw-note-limit">
+                    <strong>{active.status}</strong>
+                    <p>
+                        대신 검색결과에 상품 카드가 실제로 뜬 자리를 싣습니다 — 파는 물건이 있다는 실측입니다.
+                        <a href={active.consoleUrl} target="_blank" rel="noreferrer" style={{ marginLeft: 6 }}>콘솔 열기 →</a>
+                    </p>
+                </div>
+            )}
+            {lane === 'coupang' && (
+                <p className="lw-write-hint">
+                    <strong>지금 자리가 있는 상품 검색어</strong> — 검색결과에 상품 카드와 상품명이
+                    실제로 읽힌 자리입니다. 여기서 골라 글을 쓰는 것이 선점입니다.
+                </p>
+            )}
 
+            <>
                     <ol className="lw-lane-list lw-lane-list-wide">
                         {laneRows.map((row, index) => {
                             const goldIndex = goldenIndex(row.searchVolume, row.documentCount);
@@ -113,6 +125,9 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 {copied === row.keyword ? '복사됨' : '복사'}
                                             </button>
                                             <button type="button" onClick={() => onAnalyze(row.keyword)}>분석</button>
+                                            {active.search && (
+                                                <a href={active.search(row.keyword)} target="_blank" rel="noreferrer">쿠팡에서 찾기</a>
+                                            )}
                                             <a href={active.consoleUrl} target="_blank" rel="noreferrer">캠페인 확인</a>
                                         </div>
                                     </div>
@@ -124,6 +139,15 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     {laneRows.length === 0 && (
                         <p className="lw-lane-empty">이번 회차에 이 판에 맞는 자리가 없습니다.</p>
                     )}
+            </>
+
+            {lane === 'coupang' && (
+                <>
+                    <p className="lw-write-hint">
+                        <strong>오늘의 골드박스 특가</strong> — 쿠팡이 지금 미는 상품입니다.
+                        대부분 이미 알려진 상품이라 선점은 어렵고, 할인 시점을 노리는 판매 글감입니다.
+                    </p>
+                    <CoupangBoard onAnalyze={onAnalyze} />
                 </>
             )}
         </>
