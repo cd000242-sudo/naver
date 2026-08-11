@@ -37,6 +37,13 @@ export function WriteLaneFilter({
     );
 }
 
+/*
+ * 카테고리는 **서브탭**이다 — 사장님 지시(2026-08-11): "서브탭으로 카테고리별로
+ * 보여주고". 칩(둥근 버튼)이었던 것을 밑줄 강조 탭으로 바꾼다.
+ *
+ * tablist 로 두는 이유는 모양 때문만이 아니다. 화면 낭독기가 "탭 3/29" 처럼
+ * 읽어 주고 좌우 화살표로 넘어간다 — 칩은 그냥 버튼 29개로 읽힌다.
+ */
 export function TopicFilter({
     value, onChange, topics, total,
 }: {
@@ -46,14 +53,20 @@ export function TopicFilter({
     total: number;
 }) {
     return (
-        <div className="lw-segment lw-segment-wrap lw-topic-chips" role="group" aria-label="블로그 주제">
-            <button type="button" className={value === '전체' ? 'on' : ''} onClick={() => onChange('전체')}>
-                전체 <em>{total}</em>
-            </button>
+        <div className="lw-topic-tabs" role="tablist" aria-label="블로그 주제">
+            <button
+                type="button"
+                role="tab"
+                aria-selected={value === '전체'}
+                className={value === '전체' ? 'on' : ''}
+                onClick={() => onChange('전체')}
+            >전체 <em>{total}</em></button>
             {topics.map(([label, count]) => (
                 <button
                     key={label}
                     type="button"
+                    role="tab"
+                    aria-selected={value === label}
                     className={value === label ? 'on' : ''}
                     onClick={() => onChange(label)}
                 >{label} <em>{count}</em></button>

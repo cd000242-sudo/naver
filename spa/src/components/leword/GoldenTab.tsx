@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { goldenIndex } from '../../lib/goldenIndex';
 import PreemptionPlan from './PreemptionPlan';
-import { EVIDENCE_ICON, naverSearchUrl, SURFACE_TAG, TIER_BADGE, TIER_RANK } from './preemptionMeta';
+import { naverSearchUrl } from './preemptionMeta';
 
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
@@ -129,29 +128,20 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             return !needle || row.keyword.toLowerCase().includes(needle);
         });
         /*
-         * 보드는 주제 순으로 저장된다. 그대로 내면 '전체' 첫 화면이 알파벳 순 첫 주제로
-         * 채워져, 제일 확실한 자리가 한참 아래에 묻힌다. 확실한 층부터 올린다.
-         * 같은 층이면 빈자리가 앞쪽인 것, 그 다음 검색량이 많은 것 순이다.
+         * 줄 세우기 — 사장님 지시(2026-08-11): **광고가 1순위**다.
+         *
+         *   "상위에 광고가 많이 떠 있다면 그 키워드는 돈이 되는 키워드다 — 광고주가
+         *    많으니까. 광고가 많고 검색량은 높으면서 문서수는 낮은 그런 키워드들을
+         *    상위에 먼저 배치해서 순위별로 나열해 달라."
+         *
+         * 자리 등급(상위 3위권 빈자리 / 경합)은 **배지로만** 남고 순서에는 안 쓴다.
+         * 전에는 등급이 먼저였는데, 그러면 광고가 많이 붙은 자리가 아래로 밀린다.
+         * 대신 경합 키워드가 위로 올라올 수 있다 — 배지에 그렇게 적혀 있다.
+         *
+         * 광고를 못 쟀으면(undefined) 그 축은 건너뛴다. 0으로 눌러 담으면 안 본 것이
+         * '광고 없음'이 되어 멀쩡한 키워드가 뒤로 밀린다.
          */
         return [...filtered].sort((a, b) => {
-            // 선점 적기가 맨 위다. "자리가 비었다"보다 "뜨는 중인데 아직 비었다"가 값나간다.
-            if (Boolean(a.earlyMover) !== Boolean(b.earlyMover)) return a.earlyMover ? -1 : 1;
-            /*
-             * 그 다음이 AI 브리핑 유무 — 층보다 먼저다(게이트와 같은 순서).
-             * 브리핑에서 답을 얻으면 자리가 좋아도 클릭이 안 온다.
-             * 못 잰 것(undefined)은 "있다"로 치지 않는다.
-             */
-            const brief = (row: PreemptionRow) => (row.serp?.hasAiBriefing === true ? 1 : 0);
-            if (brief(a) !== brief(b)) return brief(a) - brief(b);
-            const rank = (row: PreemptionRow) => TIER_RANK[row.tier || 'contested'] ?? 9;
-            if (rank(a) !== rank(b)) return rank(a) - rank(b);
-            /*
-             * 사장님 기준(2026-08-11): 광고 많은 순 → 검색량 많은 순 → 문서수 적은 순.
-             * "상위에 광고가 많이 떠 있다면 그 키워드는 돈이 되는 키워드다 — 광고주가 많으니까."
-             * 게이트(preemption-gate.ts)와 같은 순서를 쓴다. 두 곳이 갈라지면 같은 보드가
-             * 서버와 화면에서 다른 순서로 보인다.
-             * 광고를 못 쟀으면 그 축은 건너뛴다 — 안 본 것을 '광고 없음'으로 벌주지 않는다.
-             */
             const ads = (row: PreemptionRow) => (typeof row.serp?.adCount === 'number' ? row.serp.adCount : null);
             if (ads(a) !== null && ads(b) !== null && ads(a) !== ads(b)) return (ads(b) as number) - (ads(a) as number);
             if ((a.searchVolume ?? 0) !== (b.searchVolume ?? 0)) return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);

@@ -262,6 +262,38 @@ function LewordStyles() {
              * 겹쳐 구분이 안 된다는 지적을 받았다.
              */
             .lw-card-metrics .money strong { color: #4ea8ff; }
+
+            /*
+             * 주제 서브탭. 칩(둥근 버튼)에서 밑줄 탭으로 바꿨다 — 사장님 지시.
+             * 주제가 29종까지 나오므로 한 줄로 두고 가로 스크롤한다.
+             */
+            .lw-topic-tabs {
+                display: flex; gap: 2px; margin: 14px 0 12px;
+                overflow-x: auto; scrollbar-width: thin;
+                border-bottom: 1px solid rgba(255,255,255,.09);
+            }
+            .lw-topic-tabs button {
+                flex: none; padding: 9px 13px;
+                border: 0; border-bottom: 2px solid transparent; background: none;
+                color: #7c8598; font-size: 12.5px; font-weight: 700; white-space: nowrap;
+                cursor: pointer;
+            }
+            .lw-topic-tabs button em { font-style: normal; opacity: .6; margin-left: 4px; }
+            .lw-topic-tabs button:hover { color: #b9c2d4; }
+            .lw-topic-tabs button.on { color: #fff; border-bottom-color: #7c5cff; }
+
+            /*
+             * 등급 색. 사장님 지적 — 예전 '약함' 노랑이 '초황금' 금색과 겹쳐 구분이
+             * 안 됐다. 네 단계를 서로 먼 색으로 벌린다: 금색 · 청록 · 회청 · 회색.
+             */
+            .lw-index {
+                flex: none; padding: 3px 8px; border-radius: 8px;
+                font-size: 12px; font-weight: 900; white-space: nowrap;
+            }
+            .lw-index-ultra { background: rgba(255,196,0,.16); color: #ffc400; }
+            .lw-index-golden { background: rgba(0,224,198,.14); color: #00e0c6; }
+            .lw-index-fair { background: rgba(122,150,190,.14); color: #8ea6c8; }
+            .lw-index-weak { background: rgba(255,255,255,.05); color: #6f7787; }
             .lw-card-actions small {
                 display: block; margin-top: 2px;
                 font-size: 10px; font-weight: 700; opacity: .62;
