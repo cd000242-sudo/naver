@@ -3096,7 +3096,14 @@
                 const serverNotices = before.notices;
                 const serverById = new Map(serverNotices.map(n => [String(n.id), n]));
 
-                const next = (notices || []).map(normalizeAdminNotice).filter(n => n.title);
+                /*
+                 * 아카이브 행은 발행 대상에서 뺀다. 실사고(2026-08-12): 새 공지 하나를
+                 * 발행했더니 편집 상태에 섞여 있던 아카이브 3건까지 **몰래 서버로
+                 * 복사**됐다(서버 id 3건의 생성 시각이 30초 안에 몰려 있음 — 한 번의
+                 * 발행이 만든 것). 서버로 옮기는 길은 [서버로 가져오기] 버튼 하나여야
+                 * 한다 — 발행 부작용으로 옮겨지면 아무도 그 사실을 모른다.
+                 */
+                const next = (notices || []).filter(n => !n.archiveOnly).map(normalizeAdminNotice).filter(n => n.title);
                 const keptIds = new Set();
 
                 let step = 0;
