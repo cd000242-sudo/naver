@@ -177,7 +177,19 @@ async function call<T>(action: string, params: Record<string, string>): Promise<
             signal: controller.signal,
         });
         if (!response.ok) return { ok: false, data: null, error: 'network', message: `HTTP ${response.status}` };
-        const payload = await response.json();
+        /*
+         * 구글은 동시 실행 한도에 걸리면 200 + HTML 을 준다. 그대로 .json() 하면
+         * "Unexpected token '<'" 가 방문자 화면까지 올라온다(어드민에서 실사고).
+         * JSON 이 아니면 지어내지 않고 "붐빔" 으로 알린다 — 몇 초 뒤 재시도가 답이다.
+         */
+        const raw = await response.text();
+        // 원래 response.json() 이 돌려주던 것과 같은 any 다 — 아래 소비부가 필드를 넓게 읽는다.
+        let payload: Awaited<ReturnType<Response['json']>>;
+        try {
+            payload = JSON.parse(raw);
+        } catch {
+            return { ok: false, data: null, error: 'server-busy', message: '서버가 잠시 붐빕니다. 몇 초 뒤 다시 시도해 주세요.' };
+        }
         if (!payload?.ok) {
             return {
                 ok: false,

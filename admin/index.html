@@ -2258,20 +2258,52 @@
             sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({ token: session.token, expiresAt }));
         }
 
-        // Keep every existing GAS button in this legacy UI, but inject the
-        // short-lived server session instead of the old browser-side token.
+        /*
+         * GAS 로 가는 **모든** 요청이 지나가는 관문. 두 가지를 한 곳에서 보장한다 —
+         * 호출 지점 26곳을 제각각 고치면 반드시 빠뜨린다(2026-08-12 전수 조사에서
+         * 후기·수익·리드·체험·주문·계좌이체·통계·사이트편집 전부가 취약했다).
+         *
+         * ① 로그인 세션이 있으면 POST 본문에 adminToken 을 채운다(이미 있으면 안
+         *    건드린다). 예전 래퍼는 GAS 가 읽지도 않는 adminSessionToken 을 넣고
+         *    있었다 — 비공개 액션이 토큰 없이 나가 Unauthorized 로 죽는 부류의
+         *    사고를 여기서 원천 차단한다.
+         * ② 응답이 JSON 인지 확인하고, 구글의 일시 HTML(동시 실행 한도·점검)이면
+         *    재시도한다. 구글의 HTML 오류 페이지는 "실행이 거부됐다" 는 뜻이라
+         *    재시도해도 같은 작업이 두 번 실행되지 않는다. 끝내 HTML 이면
+         *    .json() 이 파서 외계어 대신 사람 말(GAS_HTML_ERROR)로 던진다.
+         */
         const legacyPanelFetch = window.fetch.bind(window);
         window.fetch = function secureLegacyPanelFetch(input, init) {
             const url = typeof input === 'string' ? input : (input && input.url) || '';
-            if (!url.startsWith(GAS_URL) || !init || typeof init.body !== 'string') return legacyPanelFetch(input, init);
-            try {
-                const payload = JSON.parse(init.body);
-                const session = readAdminSession();
-                if (session && session.token) payload.adminSessionToken = session.token;
-                return legacyPanelFetch(input, { ...init, body: JSON.stringify(payload) });
-            } catch (err) {
-                return legacyPanelFetch(input, init);
+            if (!url.startsWith(GAS_URL)) return legacyPanelFetch(input, init);
+            let patched = init;
+            if (init && typeof init.body === 'string') {
+                try {
+                    const payload = JSON.parse(init.body);
+                    const session = readAdminSession();
+                    if (session && session.token && !payload.adminToken) payload.adminToken = session.token;
+                    patched = { ...init, body: JSON.stringify(payload) };
+                } catch (err) { patched = init; }
             }
+            return (async () => {
+                let res = null; let raw = ''; let isJson = false;
+                for (let i = 0; i < 3; i += 1) {
+                    if (i) await new Promise(r => setTimeout(r, 700 * i));
+                    res = await legacyPanelFetch(input, patched);
+                    raw = await res.text();
+                    try { JSON.parse(raw); isJson = true; break; } catch (err) { /* HTML — 재시도 */ }
+                }
+                const finalRaw = raw; const finalJson = isJson; const finalRes = res;
+                return {
+                    ok: finalRes.ok, status: finalRes.status, headers: finalRes.headers,
+                    url: finalRes.url, redirected: finalRes.redirected,
+                    text: async () => finalRaw,
+                    json: async () => {
+                        if (!finalJson) throw new Error(GAS_HTML_ERROR);
+                        return JSON.parse(finalRaw);
+                    },
+                };
+            })();
         };
 
         let allCodes = [];
