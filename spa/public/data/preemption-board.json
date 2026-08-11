@@ -1,15 +1,15 @@
 {
- "publishedAt": "2026-08-11T18:39:38.635Z",
+ "publishedAt": "2026-08-11T22:01:13.770Z",
  "generator": "preemption-board-batch",
  "topicsTotal": 32,
- "topicsWithRows": 15,
- "verified": 107,
+ "topicsWithRows": 18,
+ "verified": 72,
  "rows": [
   {
    "serpSections": [
     "웹사이트",
-    "인기글",
     "인플루언서",
+    "인기글",
     "뉴스",
     "지식스니펫",
     "카페",
@@ -60,6 +60,10 @@
      "text": "상위 10개 중 정면으로 다룬 글 0건"
     },
     {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
+    },
+    {
      "code": "not-realtime",
      "text": "실시간 검색어에는 아직 없음"
     },
@@ -73,7 +77,7 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T13:43:36.467Z",
+   "measuredAt": "2026-08-11T21:15:27.360Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 80,
    "monthsSincePeak": 1,
@@ -135,11 +139,11 @@
    "tierLabel": "상위 3위권에 빈자리",
    "openSlot": 1,
    "searchVolume": 160,
-   "documentCount": 444,
+   "documentCount": 445,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 160 · 문서수 444"
+     "text": "월 검색량 160 · 문서수 445"
     },
     {
      "code": "open-slot",
@@ -148,6 +152,10 @@
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -163,7 +171,7 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T13:43:35.703Z",
+   "measuredAt": "2026-08-11T21:15:26.541Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 84,
    "monthsSincePeak": 1,
@@ -172,8 +180,8 @@
     "citedTitles": [],
     "questions": [],
     "productNames": [],
-    "priceMedian": null,
-    "priceSamples": 0
+    "priceMedian": 10000,
+    "priceSamples": 4
    },
    "serp": {
     "sampledTitles": 10,
@@ -222,16 +230,20 @@
    "tier": "contested",
    "tierLabel": "경합 — 정면 대응 1건",
    "openSlot": null,
-   "searchVolume": 210,
-   "documentCount": 1953,
+   "searchVolume": 200,
+   "documentCount": 1957,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 210 · 문서수 1,953"
+     "text": "월 검색량 200 · 문서수 1,957"
     },
     {
      "code": "contested",
      "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -247,14 +259,16 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T13:43:38.124Z",
+   "measuredAt": "2026-08-11T21:15:28.173Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 8,
    "monthsSincePeak": 1,
    "recencySummary": "2026-08 기준 최고치의 8% (정점은 1개월 전)",
    "meaning": {
     "citedTitles": [],
-    "questions": [],
+    "questions": [
+     "영화 '호프' 무대인사 빠졌던 정호연, 알고 보니 월드컵 결승전에?"
+    ],
     "productNames": [],
     "priceMedian": null,
     "priceSamples": 0
@@ -265,6 +279,104 @@
     "medianDaysAgo": 14,
     "hasAiBriefing": false,
     "aiBriefingSourceCount": 0,
+    "adCount": 0
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "인기글",
+    "웹사이트",
+    "지식스니펫",
+    "카페",
+    "이미지"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 2
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 4
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "정원사들 영화 촬영지",
+   "topic": "영화",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 2,
+   "searchVolume": 480,
+   "documentCount": 1591,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 480 · 문서수 1,591"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 2번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 7개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:15:32.677Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 21,
+   "monthsSincePeak": 1,
+   "recencySummary": "2026-08 기준 최고치의 21% (정점은 1개월 전)",
+   "meaning": {
+    "citedTitles": [
+     "예산군, 영화 ‘정원사들’ 촬영 관련 회의 개최 - 도정뉴스",
+     "정원사들 - 나무위키",
+     "송강호·구교환·송승헌 예산 온다…영화 ‘정원사들’ 촬영"
+    ],
+    "questions": [
+     "외국인이 본 한류의 매력, 세계는 왜 한국 문화에 빠져드는가"
+    ],
+    "productNames": [],
+    "priceMedian": null,
+    "priceSamples": 0
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 7,
     "adCount": 0
    }
   },
@@ -329,6 +441,10 @@
      "text": "상위 10개 중 정면으로 다룬 글 0건"
     },
     {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
+    },
+    {
      "code": "not-realtime",
      "text": "실시간 검색어에는 아직 없음"
     },
@@ -342,7 +458,7 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T13:44:50.973Z",
+   "measuredAt": "2026-08-11T21:15:51.330Z",
    "demandAsOf": "2026-07",
    "latestVsPeakPct": 11,
    "monthsSincePeak": 10,
@@ -407,20 +523,24 @@
    "tier": "contested",
    "tierLabel": "경합 — 정면 대응 1건",
    "openSlot": null,
-   "searchVolume": 330,
-   "documentCount": 2184,
+   "searchVolume": 320,
+   "documentCount": 2182,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 330 · 문서수 2,184"
+     "text": "월 검색량 320 · 문서수 2,182"
     },
     {
      "code": "ads",
-     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
+     "text": "상단 광고 5건 — 광고주가 돈을 넣는 검색어다"
     },
     {
      "code": "contested",
      "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -436,7 +556,7 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T13:44:57.259Z",
+   "measuredAt": "2026-08-11T21:15:56.223Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 10,
    "monthsSincePeak": 8,
@@ -460,7 +580,170 @@
     "medianDaysAgo": 14,
     "hasAiBriefing": true,
     "aiBriefingSourceCount": 6,
-    "adCount": 3
+    "adCount": 5
+   }
+  },
+  {
+   "serpSections": [
+    "파워링크",
+    "AI브리핑",
+    "카페",
+    "AI추천",
+    "인기글",
+    "웹사이트",
+    "인플루언서",
+    "지식스니펫",
+    "지식iN",
+    "이미지"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 6
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 8
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "lexical",
+   "keyword": "통기타 줄 교체 비용",
+   "topic": "음악",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": 2,
+   "searchVolume": 170,
+   "documentCount": 1629,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 170 · 문서수 1,629"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 7건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 2번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 5개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:17:23.877Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 23,
+   "monthsSincePeak": 15,
+   "recencySummary": "2026-08 기준 최고치의 23% (정점은 15개월 전)",
+   "meaning": {
+    "citedTitles": [
+     "통기타 헤드머신, 기타줄 교체 및 전체적 점검 요청 악기 수리",
+     "용인시 악기점에서 기타줄 교체 받아보세요~ (처인구 마평동에 위치하고 있어요)",
+     "통기타줄 교체하기 어려워서 힘드신분~ 잠실 통기타줄 일렉기타줄 교체 가능한 곳!!"
+    ],
+    "questions": [
+     "기타 줄교체 어디서해야할까요?",
+     "기타줄 교체 비용 얼마나하나요??",
+     "통기타 줄 가는데 7만원 드는게 맞나요..? | 영주제2동",
+     "기타줄 교체해주는 곳 어디있을까요?"
+    ],
+    "productNames": [],
+    "priceMedian": 20000,
+    "priceSamples": 32
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 5,
+    "adCount": 7
+   }
+  },
+  {
+   "serpSections": [],
+   "layoutBestFor": null,
+   "layoutHeadline": "",
+   "layoutRanked": [],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": false,
+   "intentSource": "none",
+   "keyword": "돌답례품 포유",
+   "topic": "육아·결혼",
+   "tier": "top3",
+   "tierLabel": "상위 3위권에 빈자리",
+   "openSlot": 1,
+   "searchVolume": 130,
+   "documentCount": 232,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 130 · 문서수 232"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    }
+   ],
+   "intentLabel": "분류 안 됨",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:18:02.202Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 100,
+   "monthsSincePeak": 0,
+   "recencySummary": "2026-08 기준 지금이 최고치입니다",
+   "meaning": null,
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 28,
+    "aiBriefingSourceCount": null,
+    "adCount": null
    }
   },
   {
@@ -502,12 +785,12 @@
    "tier": "page1-weak",
    "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
    "openSlot": 1,
-   "searchVolume": 620,
-   "documentCount": 1066,
+   "searchVolume": 640,
+   "documentCount": 1058,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 620 · 문서수 1,066"
+     "text": "월 검색량 640 · 문서수 1,058"
     },
     {
      "code": "open-slot",
@@ -516,6 +799,10 @@
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -531,7 +818,7 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T13:51:36.136Z",
+   "measuredAt": "2026-08-11T21:21:24.513Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 15,
    "monthsSincePeak": 20,
@@ -558,35 +845,30 @@
   },
   {
    "serpSections": [
-    "쇼핑",
-    "지식스니펫",
-    "인기글",
+    "AI브리핑",
+    "AI추천",
     "웹사이트",
-    "파워링크",
-    "카페"
+    "지식스니펫",
+    "카페",
+    "인기글"
    ],
-   "layoutBestFor": "shopping",
-   "layoutHeadline": "쇼핑이 맨 위를 먹는다 — 글보다 상품·제휴가 붙는 자리다",
+   "layoutBestFor": "wordpress",
+   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
    "layoutRanked": [
     {
-     "surface": "shopping",
-     "label": "상품·제휴",
-     "position": 1
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 3
     },
     {
      "surface": "kin",
      "label": "지식iN 답변",
-     "position": 2
+     "position": 4
     },
     {
      "surface": "naver-blog",
      "label": "네이버 블로그·카페",
-     "position": 3
-    },
-    {
-     "surface": "wordpress",
-     "label": "워드프레스·자체 사이트",
-     "position": 4
+     "position": 5
     }
    ],
    "layoutAdsOnTop": false,
@@ -594,29 +876,29 @@
    "earlyMoverReasons": [],
    "sectionsMeasured": true,
    "intentSource": "serp",
-   "keyword": "모듈리움 옷정리함",
-   "topic": "일상·생각",
-   "tier": "contested",
-   "tierLabel": "경합 — 정면 대응 1건",
-   "openSlot": 2,
-   "searchVolume": 140,
-   "documentCount": 63,
+   "keyword": "만찬가 애니 ost",
+   "topic": "만화·애니",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 1,
+   "searchVolume": 100,
+   "documentCount": 367,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 140 · 문서수 63"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
+     "text": "월 검색량 100 · 문서수 367"
     },
     {
      "code": "open-slot",
-     "text": "상위 2번째 자리가 비어 있음"
+     "text": "상위 1번째 자리가 비어 있음"
     },
     {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -624,75 +906,46 @@
     },
     {
      "code": "ai-briefing",
-     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+     "text": "AI 브리핑이 떠 있음"
     }
    ],
-   "intentLabel": "구매 검토",
+   "intentLabel": "정보",
    "briefingRisk": "low",
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T13:53:51.347Z",
+   "measuredAt": "2026-08-11T21:21:11.495Z",
    "demandAsOf": "2026-08",
-   "latestVsPeakPct": 5,
-   "monthsSincePeak": 5,
-   "recencySummary": "2026-08 기준 최고치의 5% (정점은 5개월 전)",
+   "latestVsPeakPct": 100,
+   "monthsSincePeak": 0,
+   "recencySummary": "2026-08 기준 지금이 최고치입니다",
    "meaning": {
     "citedTitles": [],
     "questions": [
-     "어디서든 편리한 모듈리움 옷정리함의 다양한 활용법"
+     "만찬가 애니에서 나온 노래야...?"
     ],
-    "productNames": [
-     "'메이앤홈 모듈리움 옷장 정리함 옷 수납함 옷정리 트레이 대형' 최저가 검색, 최저가 38,100원 - 할...."
-    ],
-    "priceMedian": 14237,
-    "priceSamples": 35
+    "productNames": [],
+    "priceMedian": null,
+    "priceSamples": 0
    },
    "serp": {
     "sampledTitles": 10,
-    "exactTitleHits": 1,
-    "medianDaysAgo": 4,
-    "hasAiBriefing": false,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
     "aiBriefingSourceCount": 0,
-    "adCount": 1
+    "adCount": 0
    }
   },
   {
-   "serpSections": [
-    "AI브리핑",
-    "파워링크",
-    "AI추천",
-    "카페",
-    "인기글",
-    "인플루언서",
-    "지식스니펫",
-    "웹사이트",
-    "지식iN",
-    "이미지"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 4
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 7
-    },
-    {
-     "surface": "wordpress",
-     "label": "워드프레스·자체 사이트",
-     "position": 8
-    }
-   ],
+   "serpSections": [],
+   "layoutBestFor": null,
+   "layoutHeadline": "",
+   "layoutRanked": [],
    "layoutAdsOnTop": false,
    "earlyMover": false,
    "earlyMoverReasons": [],
-   "sectionsMeasured": true,
+   "sectionsMeasured": false,
    "intentSource": "lexical",
    "keyword": "스포츠타올 건식 습식 차이",
    "topic": "주제 선택 안 함",
@@ -707,20 +960,16 @@
      "text": "월 검색량 140 · 문서수 438"
     },
     {
-     "code": "ads",
-     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
      "code": "contested",
      "text": "상위 10개 중 정면으로 다룬 글 1건"
     },
     {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 5개 글을 인용 중"
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
     }
    ],
    "intentLabel": "구매 검토",
@@ -728,34 +977,18 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T13:55:55.312Z",
+   "measuredAt": "2026-08-11T21:24:34.415Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 6,
    "monthsSincePeak": 6,
    "recencySummary": "2026-08 기준 최고치의 6% (정점은 6개월 전)",
-   "meaning": {
-    "citedTitles": [
-     "수영 습식수건 vs 건식수건 차이, 일반 수건이 더 편할까? (장단점 + 관리법까지)",
-     "[습식스포츠타올] 카르닉 극세사스포츠타올 운동용 타올 추천",
-     "수영장 습식타올 카르닉스포츠 습식스포츠타올 추천 후기"
-    ],
-    "questions": [
-     "건식과 습식타올 차이점과 관리하기편한게 어떤걸까요?",
-     "건식 스포츠타올의 장점이 뭘까요?",
-     "습식 스포츠타올이란 무엇일까? | 수영장에서 많이 사용하는 이유와 장단점 총정리",
-     "스포츠 타올, 건식, 습식의 차이와 용도가 뭔가요?"
-    ],
-    "productNames": [],
-    "priceMedian": null,
-    "priceSamples": 0
-   },
+   "meaning": null,
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 1,
     "medianDaysAgo": 14,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 5,
-    "adCount": 3
+    "aiBriefingSourceCount": null,
+    "adCount": null
    }
   },
   {
@@ -838,7 +1071,7 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T13:58:55.337Z",
+   "measuredAt": "2026-08-11T21:29:27.366Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 73,
    "monthsSincePeak": 1,
@@ -849,12 +1082,118 @@
      "강아지 치석, 꼭 스케일링을 해야할까요? 가정에서의 관리방법 총정리"
     ],
     "productNames": [],
-    "priceMedian": 3000,
-    "priceSamples": 2
+    "priceMedian": 31106,
+    "priceSamples": 12
    },
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": false,
+    "aiBriefingSourceCount": 0,
+    "adCount": 3
+   }
+  },
+  {
+   "serpSections": [
+    "파워링크",
+    "쇼핑",
+    "지식스니펫",
+    "웹사이트",
+    "인기글",
+    "카페",
+    "동영상",
+    "인플루언서"
+   ],
+   "layoutBestFor": "shopping",
+   "layoutHeadline": "쇼핑이 맨 위를 먹는다 — 글보다 상품·제휴가 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "shopping",
+     "label": "상품·제휴",
+     "position": 2
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 3
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 4
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 5
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "애견바리깡 흡입",
+   "topic": "반려동물",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": 1,
+   "searchVolume": 110,
+   "documentCount": 1048,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 110 · 문서수 1,048"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+    }
+   ],
+   "intentLabel": "구매 검토",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:28:54.445Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 84,
+   "monthsSincePeak": 1,
+   "recencySummary": "2026-08 기준 최고치의 84% (정점은 1개월 전)",
+   "meaning": {
+    "citedTitles": [],
+    "questions": [
+     "로봇청소기 고양이털도 잘 처리하나요",
+     "흡입 바리깡 써보신 분 계세요?"
+    ],
+    "productNames": [],
+    "priceMedian": 29900,
+    "priceSamples": 9
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
     "medianDaysAgo": 14,
     "hasAiBriefing": false,
     "aiBriefingSourceCount": 0,
@@ -901,15 +1240,15 @@
    "intentSource": "serp",
    "keyword": "강아지이발기 에이블미",
    "topic": "반려동물",
-   "tier": "top3",
-   "tierLabel": "상위 3위권에 빈자리",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
    "openSlot": 1,
-   "searchVolume": 820,
+   "searchVolume": 810,
    "documentCount": 66,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 820 · 문서수 66"
+     "text": "월 검색량 810 · 문서수 66"
     },
     {
      "code": "ads",
@@ -920,8 +1259,8 @@
      "text": "상위 1번째 자리가 비어 있음"
     },
     {
-     "code": "empty-field",
-     "text": "상위 10개 중 정면으로 다룬 글 0건"
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
     },
     {
      "code": "fresh",
@@ -941,7 +1280,7 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T13:58:54.214Z",
+   "measuredAt": "2026-08-11T21:29:23.551Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 19,
    "monthsSincePeak": 4,
@@ -953,119 +1292,15 @@
      "에이블미 전문가용 애견 반려동물 이발기, 블랙, 1개 - 이발기",
      "아이리버 반려동물 이발기 흡입식 바리깡 발바닥 애견 고양이 강아지 IPT-HC261, 화이트, 1개 - 최저...."
     ],
-    "priceMedian": 21500,
-    "priceSamples": 22
+    "priceMedian": 35900,
+    "priceSamples": 26
    },
    "serp": {
     "sampledTitles": 10,
-    "exactTitleHits": 0,
+    "exactTitleHits": 1,
     "medianDaysAgo": 14,
     "hasAiBriefing": false,
     "aiBriefingSourceCount": 0,
-    "adCount": 1
-   }
-  },
-  {
-   "serpSections": [
-    "AI브리핑",
-    "파워링크",
-    "AI추천",
-    "인플루언서",
-    "인기글",
-    "카페",
-    "웹사이트",
-    "지식스니펫",
-    "지식iN"
-   ],
-   "layoutBestFor": "naver-blog",
-   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
-   "layoutRanked": [
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 4
-    },
-    {
-     "surface": "wordpress",
-     "label": "워드프레스·자체 사이트",
-     "position": 7
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 8
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "강아지계단 폐기하는법",
-   "topic": "반려동물",
-   "tier": "page1-weak",
-   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
-   "openSlot": 2,
-   "searchVolume": 100,
-   "documentCount": 912,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 100 · 문서수 912"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 2번째 자리가 비어 있음"
-    },
-    {
-     "code": "empty-field",
-     "text": "상위 10개 중 정면으로 다룬 글 0건"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 3개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "정보",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "판정불가",
-   "timing": "",
-   "measuredAt": "2026-08-11T13:58:37.674Z",
-   "demandAsOf": "2026-08",
-   "latestVsPeakPct": 18,
-   "monthsSincePeak": 3,
-   "recencySummary": "2026-08 기준 최고치의 18% (정점은 3개월 전)",
-   "meaning": {
-    "citedTitles": [
-     "강아지 계단 애견용품 버리는방법 대형생활폐기물 배출 신청",
-     "강아지 계단 속 스펀지 자르기",
-     "강아지 매트 버리는법 바닥매트 잘라서 버리기"
-    ],
-    "questions": [
-     "강아지 계단은 폐기물 뭘로 분류하나요?",
-     "강아지 계단은 분리수거 어떻게 하나요?",
-     "혹시 이런 강아지계단 어떻게버리나요?",
-     "강아지 배변봉투 길거리 공용 휴지통에 버리면 불법일까?"
-    ],
-    "productNames": [],
-    "priceMedian": 4000,
-    "priceSamples": 16
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 0,
-    "medianDaysAgo": 4,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 3,
     "adCount": 1
    }
   },
@@ -1110,16 +1345,16 @@
    "tier": "page1-weak",
    "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
    "openSlot": 2,
-   "searchVolume": 110,
+   "searchVolume": 100,
    "documentCount": 40,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 110 · 문서수 40"
+     "text": "월 검색량 100 · 문서수 40"
     },
     {
      "code": "ads",
-     "text": "상단 광고 2건 — 광고주가 돈을 넣는 검색어다"
+     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
     },
     {
      "code": "open-slot",
@@ -1128,6 +1363,10 @@
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -1143,7 +1382,7 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T14:02:40.960Z",
+   "measuredAt": "2026-08-11T21:28:54.202Z",
    "demandAsOf": "2026-07",
    "latestVsPeakPct": 95,
    "monthsSincePeak": 3,
@@ -1165,7 +1404,65 @@
     "medianDaysAgo": 14,
     "hasAiBriefing": true,
     "aiBriefingSourceCount": 5,
-    "adCount": 2
+    "adCount": 1
+   }
+  },
+  {
+   "serpSections": [],
+   "layoutBestFor": null,
+   "layoutHeadline": "",
+   "layoutRanked": [],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": false,
+   "intentSource": "none",
+   "keyword": "후라이펜 거치대",
+   "topic": "요리·레시피",
+   "tier": "top3",
+   "tierLabel": "상위 3위권에 빈자리",
+   "openSlot": 2,
+   "searchVolume": 280,
+   "documentCount": 445,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 280 · 문서수 445"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 2번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    }
+   ],
+   "intentLabel": "분류 안 됨",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:32:34.551Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 56,
+   "monthsSincePeak": 3,
+   "recencySummary": "2026-08 기준 최고치의 56% (정점은 3개월 전)",
+   "meaning": null,
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 6,
+    "aiBriefingSourceCount": null,
+    "adCount": null
    }
   },
   {
@@ -1212,11 +1509,11 @@
    "tierLabel": "1페이지에 빈자리",
    "openSlot": null,
    "searchVolume": 750,
-   "documentCount": 48,
+   "documentCount": 49,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 750 · 문서수 48"
+     "text": "월 검색량 750 · 문서수 49"
     },
     {
      "code": "ads",
@@ -1225,6 +1522,10 @@
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -1240,7 +1541,7 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T14:07:47.158Z",
+   "measuredAt": "2026-08-11T21:32:41.652Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 52,
    "monthsSincePeak": 1,
@@ -1250,12 +1551,12 @@
     "questions": [],
     "productNames": [],
     "priceMedian": 3500,
-    "priceSamples": 7
+    "priceSamples": 5
    },
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 0,
-    "medianDaysAgo": 14,
+    "medianDaysAgo": 21,
     "hasAiBriefing": false,
     "aiBriefingSourceCount": 0,
     "adCount": 3
@@ -1307,11 +1608,11 @@
    "tierLabel": "상위 3위권에 빈자리",
    "openSlot": 1,
    "searchVolume": 220,
-   "documentCount": 1180,
+   "documentCount": 1181,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 220 · 문서수 1,180"
+     "text": "월 검색량 220 · 문서수 1,181"
     },
     {
      "code": "ads",
@@ -1324,6 +1625,10 @@
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -1339,7 +1644,7 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T14:11:33.425Z",
+   "measuredAt": "2026-08-11T21:34:20.066Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 73,
    "monthsSincePeak": 14,
@@ -1359,7 +1664,7 @@
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 0,
-    "medianDaysAgo": 4,
+    "medianDaysAgo": 2,
     "hasAiBriefing": false,
     "aiBriefingSourceCount": 0,
     "adCount": 2
@@ -1407,16 +1712,20 @@
    "tier": "page1-weak",
    "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
    "openSlot": null,
-   "searchVolume": 230,
-   "documentCount": 182,
+   "searchVolume": 220,
+   "documentCount": 180,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 230 · 문서수 182"
+     "text": "월 검색량 220 · 문서수 180"
     },
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -1432,7 +1741,7 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T14:12:35.996Z",
+   "measuredAt": "2026-08-11T21:33:21.110Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 26,
    "monthsSincePeak": 1,
@@ -1453,7 +1762,7 @@
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 0,
-    "medianDaysAgo": 21,
+    "medianDaysAgo": 14,
     "hasAiBriefing": true,
     "aiBriefingSourceCount": 6,
     "adCount": 0
@@ -1466,9 +1775,9 @@
     "카페",
     "AI추천",
     "웹사이트",
-    "인플루언서",
     "인기글",
-    "지식스니펫"
+    "지식스니펫",
+    "인플루언서"
    ],
    "layoutBestFor": "kin",
    "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
@@ -1515,6 +1824,10 @@
      "text": "상위 10개 중 정면으로 다룬 글 0건"
     },
     {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
+    },
+    {
      "code": "not-realtime",
      "text": "실시간 검색어에는 아직 없음"
     },
@@ -1528,7 +1841,7 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T14:12:35.268Z",
+   "measuredAt": "2026-08-11T21:33:20.637Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 16,
    "monthsSincePeak": 7,
@@ -1547,7 +1860,7 @@
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 0,
-    "medianDaysAgo": 4,
+    "medianDaysAgo": 5,
     "hasAiBriefing": true,
     "aiBriefingSourceCount": 4,
     "adCount": 0
@@ -1594,12 +1907,12 @@
    "tier": "page1-weak",
    "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
    "openSlot": 2,
-   "searchVolume": 200,
-   "documentCount": 264,
+   "searchVolume": 180,
+   "documentCount": 263,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 200 · 문서수 264"
+     "text": "월 검색량 180 · 문서수 263"
     },
     {
      "code": "open-slot",
@@ -1608,6 +1921,10 @@
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -1623,7 +1940,7 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T14:12:34.552Z",
+   "measuredAt": "2026-08-11T21:33:19.887Z",
    "demandAsOf": "2026-07",
    "latestVsPeakPct": 100,
    "monthsSincePeak": 0,
@@ -1656,6 +1973,7 @@
     "AI추천",
     "지식스니펫",
     "카페",
+    "인플루언서",
     "인기글",
     "쇼핑",
     "웹사이트"
@@ -1676,12 +1994,12 @@
     {
      "surface": "shopping",
      "label": "상품·제휴",
-     "position": 6
+     "position": 7
     },
     {
      "surface": "wordpress",
      "label": "워드프레스·자체 사이트",
-     "position": 7
+     "position": 8
     }
    ],
    "layoutAdsOnTop": true,
@@ -1694,16 +2012,16 @@
    "tier": "top3",
    "tierLabel": "상위 3위권에 빈자리",
    "openSlot": 1,
-   "searchVolume": 880,
-   "documentCount": 8790,
+   "searchVolume": 890,
+   "documentCount": 8786,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 880 · 문서수 8,790"
+     "text": "월 검색량 890 · 문서수 8,786"
     },
     {
      "code": "ads",
-     "text": "상단 광고 7건 — 광고주가 돈을 넣는 검색어다"
+     "text": "상단 광고 10건 — 광고주가 돈을 넣는 검색어다"
     },
     {
      "code": "open-slot",
@@ -1712,6 +2030,10 @@
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -1727,7 +2049,7 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T14:14:17.388Z",
+   "measuredAt": "2026-08-11T21:37:37.581Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 17,
    "monthsSincePeak": 4,
@@ -1736,13 +2058,12 @@
     "citedTitles": [],
     "questions": [
      "운동화 수선집있나요?",
-     "운동화 뒤꿈치 수선집어디있나요?",
      "운동화수선맡겨보셨나요?",
      "운동화 밑창이 떼어져서 덜렁거리는데 수선집 어디?"
     ],
     "productNames": [],
     "priceMedian": 3000,
-    "priceSamples": 4
+    "priceSamples": 5
    },
    "serp": {
     "sampledTitles": 10,
@@ -1750,7 +2071,7 @@
     "medianDaysAgo": 14,
     "hasAiBriefing": false,
     "aiBriefingSourceCount": 0,
-    "adCount": 7
+    "adCount": 10
    }
   },
   {
@@ -1790,19 +2111,23 @@
    "intentSource": "serp",
    "keyword": "헬스장 환불 소보원",
    "topic": "스포츠",
-   "tier": "contested",
-   "tierLabel": "경합 — 정면 대응 1건",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
    "openSlot": null,
-   "searchVolume": 100,
+   "searchVolume": 120,
    "documentCount": 537,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 100 · 문서수 537"
+     "text": "월 검색량 120 · 문서수 537"
     },
     {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -1818,7 +2143,7 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T14:14:03.431Z",
+   "measuredAt": "2026-08-11T21:37:23.535Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 5,
    "monthsSincePeak": 10,
@@ -1841,7 +2166,7 @@
    },
    "serp": {
     "sampledTitles": 10,
-    "exactTitleHits": 1,
+    "exactTitleHits": 0,
     "medianDaysAgo": 14,
     "hasAiBriefing": true,
     "aiBriefingSourceCount": 6,
@@ -1850,12 +2175,114 @@
   },
   {
    "serpSections": [
+    "AI브리핑",
+    "인플루언서",
+    "웹사이트",
+    "카페",
+    "인기글",
+    "파워링크",
+    "지식스니펫",
+    "이미지"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 2
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 7
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "핸드폰 사진 인쇄 다이소",
+   "topic": "사진",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 1,
+   "searchVolume": 360,
+   "documentCount": 3093,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 360 · 문서수 3,093"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 5개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "거래",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:40:23.745Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 15,
+   "monthsSincePeak": 3,
+   "recencySummary": "2026-08 기준 최고치의 15% (정점은 3개월 전)",
+   "meaning": {
+    "citedTitles": [
+     "휴대폰 속 사진 인화하는 방법, 다이소 인화기 vs 코닥 미니 3",
+     "다이소 핸드폰 스마트폰 사진 인화기 후기 (매장 찾기, 사용 방법)",
+     "다이소 사진인화 / 포토프린트 / 무인사진출력 / 증명사진 출력"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 2000,
+    "priceSamples": 8
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 5,
+    "adCount": 1
+   }
+  },
+  {
+   "serpSections": [
     "파워링크",
     "AI브리핑",
-    "AI추천",
     "웹사이트",
     "지식iN",
     "인기글",
+    "AI추천",
     "지식스니펫",
     "카페",
     "이미지",
@@ -1867,17 +2294,17 @@
     {
      "surface": "wordpress",
      "label": "워드프레스·자체 사이트",
-     "position": 4
+     "position": 3
     },
     {
      "surface": "kin",
      "label": "지식iN 답변",
-     "position": 5
+     "position": 4
     },
     {
      "surface": "naver-blog",
      "label": "네이버 블로그·카페",
-     "position": 6
+     "position": 5
     },
     {
      "surface": "shopping",
@@ -1895,12 +2322,12 @@
    "tier": "contested",
    "tierLabel": "경합 — 정면 대응 1건",
    "openSlot": null,
-   "searchVolume": 2440,
-   "documentCount": 3801,
+   "searchVolume": 2520,
+   "documentCount": 3803,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 2,440 · 문서수 3,801"
+     "text": "월 검색량 2,520 · 문서수 3,803"
     },
     {
      "code": "ads",
@@ -1909,6 +2336,10 @@
     {
      "code": "contested",
      "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -1924,7 +2355,7 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T14:16:01.148Z",
+   "measuredAt": "2026-08-11T21:40:35.396Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 38,
    "monthsSincePeak": 8,
@@ -1940,7 +2371,7 @@
      "증명사진 규격 변환기 - 여권, 비자, 주민등록증 사진 크기 변경"
     ],
     "priceMedian": 4500,
-    "priceSamples": 3
+    "priceSamples": 2
    },
    "serp": {
     "sampledTitles": 10,
@@ -1953,71 +2384,57 @@
   },
   {
    "serpSections": [
-    "파워링크",
     "AI브리핑",
-    "쇼핑",
-    "AI추천",
     "카페",
+    "웹사이트",
     "인기글",
-    "이미지",
     "지식스니펫",
     "인플루언서",
-    "동영상",
-    "웹사이트",
-    "지식iN"
+    "뉴스"
    ],
-   "layoutBestFor": "shopping",
-   "layoutHeadline": "쇼핑이 맨 위를 먹는다 — 글보다 상품·제휴가 붙는 자리다",
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
    "layoutRanked": [
-    {
-     "surface": "shopping",
-     "label": "상품·제휴",
-     "position": 3
-    },
     {
      "surface": "naver-blog",
      "label": "네이버 블로그·카페",
-     "position": 5
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 8
+     "position": 2
     },
     {
      "surface": "wordpress",
      "label": "워드프레스·자체 사이트",
-     "position": 11
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 5
     }
    ],
-   "layoutAdsOnTop": true,
+   "layoutAdsOnTop": false,
    "earlyMover": false,
    "earlyMoverReasons": [],
    "sectionsMeasured": true,
    "intentSource": "serp",
-   "keyword": "원터치 그늘막 접는법",
-   "topic": "주제 선택 안 함",
+   "keyword": "볼트업 회원카드",
+   "topic": "자동차",
    "tier": "page1-weak",
    "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
-   "openSlot": 2,
-   "searchVolume": 450,
-   "documentCount": 3295,
+   "openSlot": null,
+   "searchVolume": 540,
+   "documentCount": 188,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 450 · 문서수 3,295"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 7건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 2번째 자리가 비어 있음"
+     "text": "월 검색량 540 · 문서수 188"
     },
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -2028,45 +2445,104 @@
      "text": "AI 브리핑이 떠 있고 6개 글을 인용 중"
     }
    ],
-   "intentLabel": "구매 검토",
+   "intentLabel": "정보",
    "briefingRisk": "low",
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T14:19:24.510Z",
+   "measuredAt": "2026-08-11T21:41:32.223Z",
    "demandAsOf": "2026-08",
-   "latestVsPeakPct": 18,
-   "monthsSincePeak": 3,
-   "recencySummary": "2026-08 기준 최고치의 18% (정점은 3개월 전)",
+   "latestVsPeakPct": 13,
+   "monthsSincePeak": 4,
+   "recencySummary": "2026-08 기준 최고치의 13% (정점은 4개월 전)",
    "meaning": {
     "citedTitles": [
-     "원터치 텐트 추천 기준과 접는법 인원수 매트 타프 버리는법까지",
-     "원터치텐트 고르는 법! 종류별 장단점과 선택 기준",
-     "그늘막 사용법 접는법까지 초보도 쉽게 따라하는 정리"
+     "볼트업 회원카드 발급?",
+     "볼트업 KB EV 카드>카드상품/안내>카드",
+     "볼트업 KB EV카드 신용카드 출시! 전기차 충전카드 할인! 피킹률 7% 혜자카드!"
     ],
-    "questions": [],
+    "questions": [
+     "볼트업 회원카드 발급?"
+    ],
     "productNames": [],
-    "priceMedian": 3000,
-    "priceSamples": 3
+    "priceMedian": 50000,
+    "priceSamples": 2
    },
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 0,
-    "medianDaysAgo": 6,
+    "medianDaysAgo": 4,
     "hasAiBriefing": true,
     "aiBriefingSourceCount": 6,
-    "adCount": 7
+    "adCount": 0
+   }
+  },
+  {
+   "serpSections": [],
+   "layoutBestFor": null,
+   "layoutHeadline": "",
+   "layoutRanked": [],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": false,
+   "intentSource": "none",
+   "keyword": "원터치 그늘막 접는법",
+   "topic": "주제 선택 안 함",
+   "tier": "top3",
+   "tierLabel": "상위 3위권에 빈자리",
+   "openSlot": 2,
+   "searchVolume": 450,
+   "documentCount": 3300,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 450 · 문서수 3,300"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 2번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    }
+   ],
+   "intentLabel": "분류 안 됨",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:42:01.486Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 18,
+   "monthsSincePeak": 3,
+   "recencySummary": "2026-08 기준 최고치의 18% (정점은 3개월 전)",
+   "meaning": null,
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 7,
+    "aiBriefingSourceCount": null,
+    "adCount": null
    }
   },
   {
    "serpSections": [
-    "AI브리핑",
+    "파워링크",
     "웹사이트",
-    "인기글",
     "카페",
+    "인기글",
     "지식스니펫",
-    "인플루언서",
-    "지식iN"
+    "인플루언서"
    ],
    "layoutBestFor": "wordpress",
    "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
@@ -2087,26 +2563,34 @@
      "position": 5
     }
    ],
-   "layoutAdsOnTop": false,
+   "layoutAdsOnTop": true,
    "earlyMover": false,
    "earlyMoverReasons": [],
    "sectionsMeasured": true,
    "intentSource": "serp",
-   "keyword": "광명동굴 지역화폐 사용처",
-   "topic": "국내여행",
-   "tier": "page1-weak",
-   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "keyword": "중고차장기렌트견적 제트카",
+   "topic": "주제 선택 안 함",
+   "tier": "page1",
+   "tierLabel": "1페이지에 빈자리",
    "openSlot": null,
-   "searchVolume": 450,
-   "documentCount": 282,
+   "searchVolume": 390,
+   "documentCount": 455,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 450 · 문서수 282"
+     "text": "월 검색량 390 · 문서수 455"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
     },
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -2114,49 +2598,244 @@
     },
     {
      "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 6개 글을 인용 중"
+     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
     }
    ],
-   "intentLabel": "정보",
+   "intentLabel": "거래",
    "briefingRisk": "low",
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T14:20:54.598Z",
+   "measuredAt": "2026-08-11T21:40:53.279Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 100,
    "monthsSincePeak": 0,
    "recencySummary": "2026-08 기준 지금이 최고치입니다",
    "meaning": {
-    "citedTitles": [
-     "지류형 광명사랑화폐!",
-     "경기도 광명동굴 관람후 광명 전통시장에서 광명 사랑 화폐 사용!",
-     "광명동굴 근처맛집 서원안동국시 광명지역화폐 3천원 사용가능매장"
-    ],
+    "citedTitles": [],
     "questions": [],
     "productNames": [],
+    "priceMedian": null,
+    "priceSamples": 0
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 28,
+    "hasAiBriefing": false,
+    "aiBriefingSourceCount": 0,
+    "adCount": 3
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "웹사이트",
+    "카페",
+    "인기글",
+    "AI추천",
+    "지식스니펫",
+    "지식iN",
+    "이미지"
+   ],
+   "layoutBestFor": "wordpress",
+   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
+   "layoutRanked": [
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 2
+    },
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 6
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "광명 지역화폐 사용처",
+   "topic": "국내여행",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": null,
+   "searchVolume": 1650,
+   "documentCount": 6891,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 1,650 · 문서수 6,891"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 5개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:40:56.491Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 23,
+   "monthsSincePeak": 16,
+   "recencySummary": "2026-08 기준 최고치의 23% (정점은 16개월 전)",
+   "meaning": {
+    "citedTitles": [
+     "광명사랑화폐 소개 > 광명시청 > 분야별정보 > 지역/경제 > 광명사랑화폐 > 광명사랑화폐 소개",
+     "경기지역화폐",
+     "광명사랑화폐 가맹점 조회 및 사용처 확인"
+    ],
+    "questions": [
+     "광명 지역화폐 신청 어디서해요?"
+    ],
+    "productNames": [],
     "priceMedian": 3000,
-    "priceSamples": 26
+    "priceSamples": 4
    },
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 0,
     "medianDaysAgo": 14,
     "hasAiBriefing": true,
-    "aiBriefingSourceCount": 6,
+    "aiBriefingSourceCount": 5,
     "adCount": 0
    }
   },
   {
    "serpSections": [
+    "파워링크",
     "AI브리핑",
+    "AI추천",
     "인기글",
-    "인플루언서",
     "웹사이트",
     "지식스니펫",
     "카페",
+    "지식iN"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 4
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 5
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 6
+    }
+   ],
+   "layoutAdsOnTop": true,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "pdf 리더 업데이트",
+   "topic": "IT·컴퓨터",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 1,
+   "searchVolume": 1400,
+   "documentCount": 7272,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 1,400 · 문서수 7,272"
+    },
+    {
+     "code": "ads",
+     "text": "상단 광고 4건 — 광고주가 돈을 넣는 검색어다"
+    },
+    {
+     "code": "open-slot",
+     "text": "상위 1번째 자리가 비어 있음"
+    },
+    {
+     "code": "empty-field",
+     "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "정보",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "상승세",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:48:21.738Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 38,
+   "monthsSincePeak": 1,
+   "recencySummary": "2026-08 기준 최고치의 38% (정점은 1개월 전)",
+   "meaning": {
+    "citedTitles": [
+     "어도비 아크로벳 리더 멈춤 오류를 해결하는 7가지 방법",
+     "어도비 pdf 뷰어 무료 설치 방법",
+     "pdf 파일리더 다운로드"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": null,
+    "priceSamples": 0
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 0,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 4,
+    "adCount": 4
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "카페",
+    "파워링크",
+    "웹사이트",
+    "인기글",
+    "지식스니펫",
+    "동영상",
     "지식iN",
-    "이미지"
+    "인플루언서"
    ],
    "layoutBestFor": "naver-blog",
    "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
@@ -2174,7 +2853,7 @@
     {
      "surface": "kin",
      "label": "지식iN 답변",
-     "position": 5
+     "position": 6
     }
    ],
    "layoutAdsOnTop": false,
@@ -2182,124 +2861,25 @@
    "earlyMoverReasons": [],
    "sectionsMeasured": true,
    "intentSource": "serp",
-   "keyword": "백업 옵트아웃",
-   "topic": "IT·컴퓨터",
-   "tier": "contested",
-   "tierLabel": "경합 — 정면 대응 1건",
-   "openSlot": 1,
-   "searchVolume": 4730,
-   "documentCount": 885,
+   "keyword": "옆잠베개 위험성",
+   "topic": "건강·의학",
+   "tier": "page1-weak",
+   "tierLabel": "1페이지에 빈자리 (실시간 노출 중)",
+   "openSlot": 2,
+   "searchVolume": 120,
+   "documentCount": 1188,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 4,730 · 문서수 885"
-    },
-    {
-     "code": "open-slot",
-     "text": "상위 1번째 자리가 비어 있음"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
-    },
-    {
-     "code": "fresh",
-     "text": "1일 전 처음 관측"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있고 3개 글을 인용 중"
-    }
-   ],
-   "intentLabel": "정보",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "상승세",
-   "timing": "",
-   "measuredAt": "2026-08-11T14:25:17.239Z",
-   "demandAsOf": "2026-08",
-   "latestVsPeakPct": 10,
-   "monthsSincePeak": 10,
-   "recencySummary": "2026-08 기준 최고치의 10% (정점은 10개월 전)",
-   "meaning": {
-    "citedTitles": [
-     "백업 옵트아웃 뜻 윈도우 설정 안 하면 생기는 변화",
-     "윈도우 포럼 - 강좌 / 팁 / 테크 - 옵트인(Opt-in)과 옵트아웃(Opt-out)의 정의",
-     "백업옵트아웃, 계속 어느거 눌러야 되나요?"
-    ],
-    "questions": [
-     "백업옵트아웃, 계속 어느거 눌러야 되나요? | 궁금할 땐, 아하!",
-     "더쿠 - 백업 옵트아웃이 뭐야...?"
-    ],
-    "productNames": [],
-    "priceMedian": null,
-    "priceSamples": 0
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 1,
-    "medianDaysAgo": 6,
-    "hasAiBriefing": true,
-    "aiBriefingSourceCount": 3,
-    "adCount": 0
-   }
-  },
-  {
-   "serpSections": [
-    "웹사이트",
-    "인기글",
-    "AI추천",
-    "파워링크",
-    "지식스니펫",
-    "카페"
-   ],
-   "layoutBestFor": "wordpress",
-   "layoutHeadline": "웹사이트가 블로그보다 위에 뜬다 — 워드프레스·자체 사이트가 유리하다",
-   "layoutRanked": [
-    {
-     "surface": "wordpress",
-     "label": "워드프레스·자체 사이트",
-     "position": 1
-    },
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 2
-    },
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 5
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "jyp 채용 스펙",
-   "topic": "교육·학문",
-   "tier": "top3",
-   "tierLabel": "상위 3위권에 빈자리",
-   "openSlot": 1,
-   "searchVolume": 430,
-   "documentCount": 543,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 430 · 문서수 543"
+     "text": "월 검색량 120 · 문서수 1,188"
     },
     {
      "code": "ads",
-     "text": "상단 광고 2건 — 광고주가 돈을 넣는 검색어다"
+     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
     },
     {
      "code": "open-slot",
-     "text": "상위 1번째 자리가 비어 있음"
+     "text": "상위 2번째 자리가 비어 있음"
     },
     {
      "code": "empty-field",
@@ -2311,23 +2891,30 @@
     },
     {
      "code": "ai-briefing",
-     "text": "AI 브리핑 없음 — 클릭이 글로 온다"
+     "text": "AI 브리핑이 떠 있고 4개 글을 인용 중"
     }
    ],
-   "intentLabel": "거래",
+   "intentLabel": "정보",
    "briefingRisk": "low",
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T14:36:43.592Z",
+   "measuredAt": "2026-08-11T21:49:57.350Z",
    "demandAsOf": "2026-08",
-   "latestVsPeakPct": 33,
-   "monthsSincePeak": 1,
-   "recencySummary": "2026-08 기준 최고치의 33% (정점은 1개월 전)",
+   "latestVsPeakPct": 100,
+   "monthsSincePeak": 0,
+   "recencySummary": "2026-08 기준 지금이 최고치입니다",
    "meaning": {
-    "citedTitles": [],
+    "citedTitles": [
+     "[베이비뉴스] [임신영 칼럼] 우리 아이 베개 사용법",
+     "(신생아22일) 옆잠베개 사용",
+     "옆잠배게 위험성 때문에 안눕법으로 등대고 재우기 첫 도전 하고있어요"
+    ],
     "questions": [
-     "대형 기획사 취업에 필요한 학벌과 스펙은?"
+     "옆잠베개 졸업 언제? 신생아 옆잠베개 사용 중단 시기와 안전수면 가이드",
+     "옆잠베개 어떻게 적응시키나요 ㅠㅠ",
+     "옆잠베개 저만 안되나요..? (등센서)",
+     "신생아 옆잠베개 사용, 위험할까요?"
     ],
     "productNames": [],
     "priceMedian": null,
@@ -2336,10 +2923,10 @@
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 0,
-    "medianDaysAgo": 14,
-    "hasAiBriefing": false,
-    "aiBriefingSourceCount": 0,
-    "adCount": 2
+    "medianDaysAgo": 6,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 4,
+    "adCount": 3
    }
   },
   {
@@ -2380,16 +2967,16 @@
    "tier": "top3",
    "tierLabel": "상위 3위권에 빈자리",
    "openSlot": 1,
-   "searchVolume": 360,
-   "documentCount": 941,
+   "searchVolume": 370,
+   "documentCount": 940,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 360 · 문서수 941"
+     "text": "월 검색량 370 · 문서수 940"
     },
     {
      "code": "ads",
-     "text": "상단 광고 1건 — 광고주가 돈을 넣는 검색어다"
+     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
     },
     {
      "code": "open-slot",
@@ -2398,6 +2985,10 @@
     {
      "code": "empty-field",
      "text": "상위 10개 중 정면으로 다룬 글 0건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -2413,7 +3004,7 @@
    "regulatoryLabel": "",
    "trendLabel": "상승세",
    "timing": "",
-   "measuredAt": "2026-08-11T14:36:41.107Z",
+   "measuredAt": "2026-08-11T21:51:25.466Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 69,
    "monthsSincePeak": 1,
@@ -2430,96 +3021,6 @@
     "exactTitleHits": 0,
     "medianDaysAgo": 14,
     "hasAiBriefing": false,
-    "aiBriefingSourceCount": 0,
-    "adCount": 1
-   }
-  },
-  {
-   "serpSections": [
-    "AI브리핑",
-    "AI추천",
-    "파워링크",
-    "지식스니펫",
-    "웹사이트",
-    "인플루언서",
-    "인기글",
-    "카페"
-   ],
-   "layoutBestFor": "kin",
-   "layoutHeadline": "지식iN 이 블로그보다 위에 뜬다 — 답변을 달아 내 채널로 끌어오는 편이 빠르다",
-   "layoutRanked": [
-    {
-     "surface": "kin",
-     "label": "지식iN 답변",
-     "position": 4
-    },
-    {
-     "surface": "wordpress",
-     "label": "워드프레스·자체 사이트",
-     "position": 5
-    },
-    {
-     "surface": "naver-blog",
-     "label": "네이버 블로그·카페",
-     "position": 6
-    }
-   ],
-   "layoutAdsOnTop": false,
-   "earlyMover": false,
-   "earlyMoverReasons": [],
-   "sectionsMeasured": true,
-   "intentSource": "serp",
-   "keyword": "이스타항공 채용공고",
-   "topic": "주제 선택 안 함",
-   "tier": "contested",
-   "tierLabel": "경합 — 정면 대응 1건",
-   "openSlot": null,
-   "searchVolume": 580,
-   "documentCount": 2946,
-   "evidence": [
-    {
-     "code": "demand",
-     "text": "월 검색량 580 · 문서수 2,946"
-    },
-    {
-     "code": "ads",
-     "text": "상단 광고 3건 — 광고주가 돈을 넣는 검색어다"
-    },
-    {
-     "code": "contested",
-     "text": "상위 10개 중 정면으로 다룬 글 1건"
-    },
-    {
-     "code": "not-realtime",
-     "text": "실시간 검색어에는 아직 없음"
-    },
-    {
-     "code": "ai-briefing",
-     "text": "AI 브리핑이 떠 있음"
-    }
-   ],
-   "intentLabel": "거래",
-   "briefingRisk": "low",
-   "regulatoryLabel": "",
-   "trendLabel": "상승세",
-   "timing": "",
-   "measuredAt": "2026-08-11T14:36:46.535Z",
-   "demandAsOf": "2026-08",
-   "latestVsPeakPct": 25,
-   "monthsSincePeak": 5,
-   "recencySummary": "2026-08 기준 최고치의 25% (정점은 5개월 전)",
-   "meaning": {
-    "citedTitles": [],
-    "questions": [],
-    "productNames": [],
-    "priceMedian": 99000,
-    "priceSamples": 6
-   },
-   "serp": {
-    "sampledTitles": 10,
-    "exactTitleHits": 1,
-    "medianDaysAgo": 7,
-    "hasAiBriefing": true,
     "aiBriefingSourceCount": 0,
     "adCount": 3
    }
@@ -2564,12 +3065,12 @@
    "tier": "contested",
    "tierLabel": "경합 — 정면 대응 1건",
    "openSlot": null,
-   "searchVolume": 100,
-   "documentCount": 449,
+   "searchVolume": 120,
+   "documentCount": 450,
    "evidence": [
     {
      "code": "demand",
-     "text": "월 검색량 100 · 문서수 449"
+     "text": "월 검색량 120 · 문서수 450"
     },
     {
      "code": "ads",
@@ -2578,6 +3079,10 @@
     {
      "code": "contested",
      "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "7시간 전 처음 관측"
     },
     {
      "code": "not-realtime",
@@ -2593,7 +3098,7 @@
    "regulatoryLabel": "",
    "trendLabel": "판정불가",
    "timing": "",
-   "measuredAt": "2026-08-11T14:36:31.979Z",
+   "measuredAt": "2026-08-11T21:50:55.347Z",
    "demandAsOf": "2026-08",
    "latestVsPeakPct": 45,
    "monthsSincePeak": 1,
@@ -2612,80 +3117,135 @@
    "serp": {
     "sampledTitles": 10,
     "exactTitleHits": 1,
-    "medianDaysAgo": 6,
+    "medianDaysAgo": 7,
     "hasAiBriefing": true,
     "aiBriefingSourceCount": 5,
     "adCount": 3
+   }
+  },
+  {
+   "serpSections": [
+    "AI브리핑",
+    "AI추천",
+    "인플루언서",
+    "인기글",
+    "지식스니펫",
+    "웹사이트",
+    "카페",
+    "이미지",
+    "쇼핑"
+   ],
+   "layoutBestFor": "naver-blog",
+   "layoutHeadline": "블로그 글이 맨 위에 뜨는 화면 — 네이버 블로그로 붙는 자리다",
+   "layoutRanked": [
+    {
+     "surface": "naver-blog",
+     "label": "네이버 블로그·카페",
+     "position": 3
+    },
+    {
+     "surface": "kin",
+     "label": "지식iN 답변",
+     "position": 5
+    },
+    {
+     "surface": "wordpress",
+     "label": "워드프레스·자체 사이트",
+     "position": 6
+    },
+    {
+     "surface": "shopping",
+     "label": "상품·제휴",
+     "position": 9
+    }
+   ],
+   "layoutAdsOnTop": false,
+   "earlyMover": false,
+   "earlyMoverReasons": [],
+   "sectionsMeasured": true,
+   "intentSource": "serp",
+   "keyword": "구구단표 A4 출력",
+   "topic": "주제 선택 안 함",
+   "tier": "contested",
+   "tierLabel": "경합 — 정면 대응 1건",
+   "openSlot": null,
+   "searchVolume": 140,
+   "documentCount": 153,
+   "evidence": [
+    {
+     "code": "demand",
+     "text": "월 검색량 140 · 문서수 153"
+    },
+    {
+     "code": "contested",
+     "text": "상위 10개 중 정면으로 다룬 글 1건"
+    },
+    {
+     "code": "fresh",
+     "text": "1시간 전 처음 관측"
+    },
+    {
+     "code": "not-realtime",
+     "text": "실시간 검색어에는 아직 없음"
+    },
+    {
+     "code": "ai-briefing",
+     "text": "AI 브리핑이 떠 있고 7개 글을 인용 중"
+    }
+   ],
+   "intentLabel": "구매 검토",
+   "briefingRisk": "low",
+   "regulatoryLabel": "",
+   "trendLabel": "판정불가",
+   "timing": "",
+   "measuredAt": "2026-08-11T21:51:04.463Z",
+   "demandAsOf": "2026-08",
+   "latestVsPeakPct": 1,
+   "monthsSincePeak": 7,
+   "recencySummary": "2026-08 기준 최고치의 1% (정점은 7개월 전)",
+   "meaning": {
+    "citedTitles": [
+     "구구단 표 무료 나눔(A4 사이즈)",
+     "구구단표 무료 제공! 집에서 출력해 공부해 보세요",
+     "[무료 도안] 귀여운 동물 구구단표 무료 공유 (A4 출력용)"
+    ],
+    "questions": [],
+    "productNames": [],
+    "priceMedian": 3000,
+    "priceSamples": 9
+   },
+   "serp": {
+    "sampledTitles": 10,
+    "exactTitleHits": 1,
+    "medianDaysAgo": 14,
+    "hasAiBriefing": true,
+    "aiBriefingSourceCount": 7,
+    "adCount": 0
    }
   }
  ],
  "reference": [
   {
-   "keyword": "한글맞춤법 제5항",
+   "keyword": "필기체 변환 사이트",
    "topic": "주제 선택 안 함",
-   "searchVolume": 110,
-   "documentCount": 3,
-   "adCount": null,
-   "facingPosts": 5,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 5개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-07 기준 최고치의 1% (정점은 3개월 전)",
-   "demandAsOf": "2026-07",
-   "measuredAt": "2026-08-11T13:41:58.282Z"
-  },
-  {
-   "keyword": "크레마 이북리더기 미피",
-   "topic": "문학·책",
-   "searchVolume": 230,
-   "documentCount": 526,
-   "adCount": null,
-   "facingPosts": 5,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 5개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 5% (정점은 1개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:42:02.449Z"
-  },
-  {
-   "keyword": "만년필 세종",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 430,
-   "documentCount": 3884,
-   "adCount": null,
-   "facingPosts": 10,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 1% (정점은 9개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:42:06.461Z"
-  },
-  {
-   "keyword": "시나공 cbt",
-   "topic": "어학·외국어",
-   "searchVolume": 7610,
-   "documentCount": 9582,
-   "adCount": null,
+   "searchVolume": 1210,
+   "documentCount": 1878,
+   "adCount": 2,
    "facingPosts": 4,
    "sampledTitles": 10,
    "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
    "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 39% (정점은 1개월 전)",
+   "recencySummary": "2026-08 기준 최고치의 20% (정점은 7개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:42:15.041Z"
+   "measuredAt": "2026-08-11T21:21:42.292Z"
   },
   {
    "keyword": "듄 재개봉 일정",
    "topic": "영화",
    "searchVolume": 110,
    "documentCount": 436,
-   "adCount": null,
+   "adCount": 0,
    "facingPosts": 2,
    "sampledTitles": 10,
    "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
@@ -2693,29 +3253,14 @@
    "trendLabel": "판정불가",
    "recencySummary": "2026-08 기준 최고치의 59% (정점은 1개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:43:32.399Z"
-  },
-  {
-   "keyword": "하츄핑 무대인사 일정",
-   "topic": "영화",
-   "searchVolume": 310,
-   "documentCount": 702,
-   "adCount": null,
-   "facingPosts": 10,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 49% (정점은 3개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:43:41.469Z"
+   "measuredAt": "2026-08-11T21:15:23.642Z"
   },
   {
    "keyword": "티니핑 무대인사 일정",
    "topic": "영화",
-   "searchVolume": 470,
-   "documentCount": 767,
-   "adCount": null,
+   "searchVolume": 480,
+   "documentCount": 768,
+   "adCount": 0,
    "facingPosts": 2,
    "sampledTitles": 10,
    "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
@@ -2723,44 +3268,14 @@
    "trendLabel": "판정불가",
    "recencySummary": "2026-08 기준 지금이 최고치입니다",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:43:43.115Z"
-  },
-  {
-   "keyword": "가계부 엑셀 양식 무료",
-   "topic": "미술·디자인",
-   "searchVolume": 1240,
-   "documentCount": 4342,
-   "adCount": null,
-   "facingPosts": 4,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "거래",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 7% (정점은 7개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:45:00.284Z"
-  },
-  {
-   "keyword": "갤럭시탭 배경화면 고화질",
-   "topic": "미술·디자인",
-   "searchVolume": 190,
-   "documentCount": 1873,
-   "adCount": null,
-   "facingPosts": 7,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 2% (정점은 17개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:44:53.623Z"
+   "measuredAt": "2026-08-11T21:15:32.174Z"
   },
   {
    "keyword": "제이스토리 먼슬리 플래너",
    "topic": "주제 선택 안 함",
    "searchVolume": 230,
    "documentCount": 103,
-   "adCount": null,
+   "adCount": 1,
    "facingPosts": 3,
    "sampledTitles": 10,
    "note": "상위 10개 중 3개가 이미 정면으로 다뤘습니다",
@@ -2768,44 +3283,14 @@
    "trendLabel": "판정불가",
    "recencySummary": "2026-08 기준 지금이 최고치입니다",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:44:54.764Z"
-  },
-  {
-   "keyword": "굿노트 스터디플래너 pdf",
-   "topic": "미술·디자인",
-   "searchVolume": 610,
-   "documentCount": 4109,
-   "adCount": null,
-   "facingPosts": 5,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 5개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "시즌성",
-   "recencySummary": "2026-08 기준 최고치의 9% (정점은 5개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:44:58.899Z"
-  },
-  {
-   "keyword": "gs아트센터 오페라글라스",
-   "topic": "공연·전시",
-   "searchVolume": 120,
-   "documentCount": 914,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 2% (정점은 6개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:45:49.439Z"
+   "measuredAt": "2026-08-11T21:15:55.103Z"
   },
   {
    "keyword": "모범택시3 재방송 편성표",
    "topic": "드라마",
    "searchVolume": 200,
    "documentCount": 442,
-   "adCount": null,
+   "adCount": 0,
    "facingPosts": 6,
    "sampledTitles": 10,
    "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
@@ -2813,89 +3298,29 @@
    "trendLabel": "판정불가",
    "recencySummary": "2026-08 기준 최고치의 2% (정점은 6개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:48:47.275Z"
+   "measuredAt": "2026-08-11T21:16:18.695Z"
   },
   {
-   "keyword": "네이밍 제로 그래비티 커버 업 쿠션",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 160,
-   "documentCount": 315,
+   "keyword": "킬잇 재방송 편성표",
+   "topic": "드라마",
+   "searchVolume": 330,
+   "documentCount": 125,
    "adCount": null,
-   "facingPosts": 10,
+   "facingPosts": 3,
    "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 5% (정점은 10개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:49:59.080Z"
-  },
-  {
-   "keyword": "타올 슬로건 제작 소량",
-   "topic": "스타·연예인",
-   "searchVolume": 160,
-   "documentCount": 1443,
-   "adCount": null,
-   "facingPosts": 4,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "들쭉날쭉",
-   "recencySummary": "2026-08 기준 최고치의 32% (정점은 1개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:49:59.828Z"
-  },
-  {
-   "keyword": "네이밍 플러피 파우더 블러쉬",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 240,
-   "documentCount": 1975,
-   "adCount": null,
-   "facingPosts": 9,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 32% (정점은 8개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:50:03.536Z"
-  },
-  {
-   "keyword": "테무 포토프린터",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 370,
-   "documentCount": 319,
-   "adCount": null,
-   "facingPosts": 4,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 19% (정점은 19개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:50:06.927Z"
-  },
-  {
-   "keyword": "네이밍 타로",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 540,
-   "documentCount": 3091,
-   "adCount": null,
-   "facingPosts": 4,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
+   "note": "상위 10개 중 3개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
    "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 29% (정점은 8개월 전)",
+   "recencySummary": "2026-08 기준 최고치의 64% (정점은 1개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:50:09.595Z"
+   "measuredAt": "2026-08-11T21:16:21.493Z"
   },
   {
    "keyword": "네이밍 코지",
    "topic": "주제 선택 안 함",
-   "searchVolume": 560,
+   "searchVolume": 590,
    "documentCount": 1828,
-   "adCount": null,
+   "adCount": 1,
    "facingPosts": 5,
    "sampledTitles": 10,
    "note": "상위 10개 중 5개가 이미 정면으로 다뤘습니다",
@@ -2903,104 +3328,44 @@
    "trendLabel": "판정불가",
    "recencySummary": "2026-08 기준 최고치의 72% (정점은 3개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:50:10.810Z"
+   "measuredAt": "2026-08-11T21:18:17.483Z"
   },
   {
-   "keyword": "코스프레 가발 세팅",
-   "topic": "만화·애니",
-   "searchVolume": 110,
-   "documentCount": 824,
-   "adCount": null,
-   "facingPosts": 3,
+   "keyword": "다이소 포토프린터",
+   "topic": "사진",
+   "searchVolume": 920,
+   "documentCount": 2760,
+   "adCount": 1,
+   "facingPosts": 2,
    "sampledTitles": 10,
-   "note": "상위 10개 중 3개가 이미 정면으로 다뤘습니다",
+   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
    "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 9% (정점은 10개월 전)",
+   "recencySummary": "2026-08 기준 최고치의 22% (정점은 3개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:51:27.556Z"
+   "measuredAt": "2026-08-11T21:18:21.007Z"
   },
   {
-   "keyword": "40대 중단발 히피펌",
-   "topic": "패션·미용",
-   "searchVolume": 800,
-   "documentCount": 1641,
+   "keyword": "모듈리움 옷정리함",
+   "topic": "일상·생각",
+   "searchVolume": 140,
+   "documentCount": 63,
    "adCount": null,
-   "facingPosts": 6,
+   "facingPosts": 2,
    "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 21% (정점은 1개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:51:37.337Z"
-  },
-  {
-   "keyword": "2026 중단발 헤어스타일",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 1010,
-   "documentCount": 9473,
-   "adCount": null,
-   "facingPosts": 4,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
+   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
    "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 18% (정점은 5개월 전)",
+   "recencySummary": "2026-08 기준 최고치의 5% (정점은 5개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:51:38.537Z"
-  },
-  {
-   "keyword": "숏단발 빈티지펌",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 1500,
-   "documentCount": 7384,
-   "adCount": null,
-   "facingPosts": 9,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 17% (정점은 15개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:51:40.657Z"
-  },
-  {
-   "keyword": "단발 빈티지펌",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 8520,
-   "documentCount": 49924,
-   "adCount": null,
-   "facingPosts": 9,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 17% (정점은 15개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:51:41.853Z"
-  },
-  {
-   "keyword": "라미샤프 매장",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 150,
-   "documentCount": 1045,
-   "adCount": null,
-   "facingPosts": 3,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 3개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "시즌성",
-   "recencySummary": "2026-08 기준 최고치의 6% (정점은 19개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:53:52.545Z"
+   "measuredAt": "2026-08-11T21:23:59.761Z"
   },
   {
    "keyword": "알라미 프로",
    "topic": "주제 선택 안 함",
    "searchVolume": 200,
    "documentCount": 408,
-   "adCount": null,
+   "adCount": 0,
    "facingPosts": 2,
    "sampledTitles": 10,
    "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
@@ -3008,72 +3373,12 @@
    "trendLabel": "상승세",
    "recencySummary": "2026-08 기준 최고치의 13% (정점은 6개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:53:54.543Z"
-  },
-  {
-   "keyword": "diary of a pug",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 260,
-   "documentCount": 426,
-   "adCount": null,
-   "facingPosts": 7,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "시즌성",
-   "recencySummary": "2026-08 기준 최고치의 14% (정점은 5개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:53:55.709Z"
-  },
-  {
-   "keyword": "뽀모도로 타이머 어플",
-   "topic": "일상·생각",
-   "searchVolume": 300,
-   "documentCount": 1519,
-   "adCount": null,
-   "facingPosts": 3,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 3개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 14% (정점은 14개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:53:58.141Z"
-  },
-  {
-   "keyword": "펜텔트라디오",
-   "topic": "일상·생각",
-   "searchVolume": 730,
-   "documentCount": 467,
-   "adCount": null,
-   "facingPosts": 9,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "들쭉날쭉",
-   "recencySummary": "2026-08 기준 최고치의 33% (정점은 5개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:54:06.278Z"
-  },
-  {
-   "keyword": "동탄 산후조리원 비교",
-   "topic": "육아·결혼",
-   "searchVolume": 370,
-   "documentCount": 3121,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "구매 검토",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 17% (정점은 12개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:56:04.483Z"
+   "measuredAt": "2026-08-11T21:24:02.712Z"
   },
   {
    "keyword": "엘리움 산후조리원 가격",
    "topic": "육아·결혼",
-   "searchVolume": 240,
+   "searchVolume": 250,
    "documentCount": 789,
    "adCount": null,
    "facingPosts": 5,
@@ -3083,164 +3388,44 @@
    "trendLabel": "상승세",
    "recencySummary": "2026-08 기준 최고치의 7% (정점은 3개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:56:01.519Z"
+   "measuredAt": "2026-08-11T21:24:42.482Z"
   },
   {
-   "keyword": "디어원 산후조리원 가격",
+   "keyword": "수족구 어린이집 공지",
    "topic": "육아·결혼",
-   "searchVolume": 640,
-   "documentCount": 658,
+   "searchVolume": 200,
+   "documentCount": 1873,
    "adCount": null,
-   "facingPosts": 2,
+   "facingPosts": 3,
    "sampledTitles": 10,
-   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "거래",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 10% (정점은 14개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:56:06.630Z"
-  },
-  {
-   "keyword": "소규모돌잔치답례품 식빵",
-   "topic": "육아·결혼",
-   "searchVolume": 120,
-   "documentCount": 175,
-   "adCount": null,
-   "facingPosts": 2,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
+   "note": "상위 10개 중 3개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
    "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 지금이 최고치입니다",
+   "recencySummary": "2026-08 기준 최고치의 19% (정점은 1개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:55:53.728Z"
+   "measuredAt": "2026-08-11T21:24:39.957Z"
   },
   {
-   "keyword": "페이스타올 블랑루스",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 160,
-   "documentCount": 100,
-   "adCount": null,
-   "facingPosts": 9,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 9% (정점은 3개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:55:56.549Z"
-  },
-  {
-   "keyword": "애니어그램 테스트 무료",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 660,
-   "documentCount": 1749,
-   "adCount": null,
-   "facingPosts": 8,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 8개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "거래",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 6% (정점은 1개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:58:50.590Z"
-  },
-  {
-   "keyword": "강아지치약 페피릴리프",
-   "topic": "반려동물",
-   "searchVolume": 170,
-   "documentCount": 50,
-   "adCount": null,
-   "facingPosts": 8,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 8개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 지금이 최고치입니다",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:58:40.905Z"
-  },
-  {
-   "keyword": "동물병원 로블",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 390,
-   "documentCount": 923,
-   "adCount": null,
-   "facingPosts": 8,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 8개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 32% (정점은 1개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T13:58:47.199Z"
-  },
-  {
-   "keyword": "프리픽 ai",
-   "topic": "좋은글·이미지",
-   "searchVolume": 830,
-   "documentCount": 2878,
-   "adCount": null,
-   "facingPosts": 5,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 5개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 8% (정점은 5개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:01:00.967Z"
-  },
-  {
-   "keyword": "아크릴물감 지우는법",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 3300,
-   "documentCount": 2751,
-   "adCount": null,
-   "facingPosts": 4,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "들쭉날쭉",
-   "recencySummary": "2026-08 기준 최고치의 15% (정점은 8개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:01:07.282Z"
-  },
-  {
-   "keyword": "인상주의를 넘어",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 63420,
-   "documentCount": 38883,
-   "adCount": null,
-   "facingPosts": 10,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 26% (정점은 1개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:01:10.825Z"
-  },
-  {
-   "keyword": "다이소 헤어에센스",
+   "keyword": "밀본 트리트먼트",
    "topic": "패션·미용",
-   "searchVolume": 5240,
-   "documentCount": 16260,
-   "adCount": null,
-   "facingPosts": 7,
+   "searchVolume": 5490,
+   "documentCount": 22267,
+   "adCount": 8,
+   "facingPosts": 6,
    "sampledTitles": 10,
-   "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
+   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 19% (정점은 15개월 전)",
+   "trendLabel": "에버그린",
+   "recencySummary": "2026-08 기준 최고치의 43% (정점은 4개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:02:59.304Z"
+   "measuredAt": "2026-08-11T21:29:37.455Z"
   },
   {
    "keyword": "벽지 곰팡이 제거 다이소",
    "topic": "인테리어·DIY",
    "searchVolume": 1410,
-   "documentCount": 4758,
-   "adCount": null,
+   "documentCount": 4757,
+   "adCount": 7,
    "facingPosts": 7,
    "sampledTitles": 10,
    "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
@@ -3248,119 +3433,29 @@
    "trendLabel": "시즌성",
    "recencySummary": "2026-08 기준 최고치의 23% (정점은 8개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:05:55.116Z"
+   "measuredAt": "2026-08-11T21:35:12.436Z"
   },
   {
-   "keyword": "마키나락스 주가",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 81830,
-   "documentCount": 7839,
-   "adCount": null,
-   "facingPosts": 9,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 31% (정점은 1개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:06:00.060Z"
-  },
-  {
-   "keyword": "노각무침 황금레시피",
+   "keyword": "세라믹 후라이팬 단점",
    "topic": "요리·레시피",
-   "searchVolume": 21480,
-   "documentCount": 1293,
-   "adCount": null,
-   "facingPosts": 10,
+   "searchVolume": 360,
+   "documentCount": 3544,
+   "adCount": 0,
+   "facingPosts": 2,
    "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
+   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "구매 검토",
    "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 37% (정점은 1개월 전)",
+   "recencySummary": "2026-08 기준 최고치의 29% (정점은 12개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:07:55.090Z"
-  },
-  {
-   "keyword": "고용량멀티탭 다이소",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 150,
-   "documentCount": 1093,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 29% (정점은 11개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:10:04.983Z"
-  },
-  {
-   "keyword": "플랜터스 식물등",
-   "topic": "원예·재배",
-   "searchVolume": 500,
-   "documentCount": 735,
-   "adCount": null,
-   "facingPosts": 8,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 8개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "시즌성",
-   "recencySummary": "2026-08 기준 최고치의 11% (정점은 15개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:11:36.803Z"
-  },
-  {
-   "keyword": "로블록스 계정복구",
-   "topic": "게임",
-   "searchVolume": 790,
-   "documentCount": 430,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 17% (정점은 7개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:12:38.025Z"
-  },
-  {
-   "keyword": "포켓몬고 계정복구",
-   "topic": "게임",
-   "searchVolume": 1630,
-   "documentCount": 338,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 15% (정점은 18개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:12:39.198Z"
-  },
-  {
-   "keyword": "구두 굽 교체 셀프",
-   "topic": "스포츠",
-   "searchVolume": 130,
-   "documentCount": 428,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-07 기준 지금이 최고치입니다",
-   "demandAsOf": "2026-07",
-   "measuredAt": "2026-08-11T14:14:05.501Z"
+   "measuredAt": "2026-08-11T21:32:36.917Z"
   },
   {
    "keyword": "근처 구두수선집",
    "topic": "주제 선택 안 함",
-   "searchVolume": 530,
+   "searchVolume": 540,
    "documentCount": 2138,
-   "adCount": null,
+   "adCount": 7,
    "facingPosts": 2,
    "sampledTitles": 10,
    "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
@@ -3368,28 +3463,13 @@
    "trendLabel": "상승세",
    "recencySummary": "2026-08 기준 최고치의 17% (정점은 4개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:14:13.621Z"
-  },
-  {
-   "keyword": "찍스 인화",
-   "topic": "사진",
-   "searchVolume": 1780,
-   "documentCount": 8475,
-   "adCount": null,
-   "facingPosts": 9,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 25% (정점은 7개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:15:59.951Z"
+   "measuredAt": "2026-08-11T21:37:33.941Z"
   },
   {
    "keyword": "다이소 사진인화기",
    "topic": "사진",
-   "searchVolume": 8220,
-   "documentCount": 7559,
+   "searchVolume": 8420,
+   "documentCount": 7558,
    "adCount": null,
    "facingPosts": 4,
    "sampledTitles": 10,
@@ -3398,389 +3478,74 @@
    "trendLabel": "시즌성",
    "recencySummary": "2026-08 기준 최고치의 26% (정점은 3개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:16:02.355Z"
+   "measuredAt": "2026-08-11T21:40:37.231Z"
   },
   {
-   "keyword": "고속도로 미납요금 조회",
+   "keyword": "문콕 수리비 합의금",
    "topic": "자동차",
-   "searchVolume": 6300,
-   "documentCount": 8733,
-   "adCount": null,
-   "facingPosts": 2,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "거래",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 50% (정점은 10개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:17:52.518Z"
-  },
-  {
-   "keyword": "덴트올로지",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 960,
-   "documentCount": 129,
-   "adCount": null,
-   "facingPosts": 8,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 8개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 56% (정점은 1개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:17:47.943Z"
-  },
-  {
-   "keyword": "레이 ev 출고기간",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 1510,
-   "documentCount": 6051,
-   "adCount": null,
-   "facingPosts": 4,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 24% (정점은 7개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:17:49.604Z"
-  },
-  {
-   "keyword": "그래핀 관련주",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 3960,
-   "documentCount": 25910,
-   "adCount": null,
-   "facingPosts": 10,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 13% (정점은 3개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:17:51.253Z"
-  },
-  {
-   "keyword": "pg 뉴건담 led",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 180,
-   "documentCount": 1167,
-   "adCount": null,
-   "facingPosts": 4,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 3% (정점은 6개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:19:18.830Z"
-  },
-  {
-   "keyword": "pg 뉴건담 언리쉬드",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 450,
-   "documentCount": 1274,
-   "adCount": null,
-   "facingPosts": 9,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 11% (정점은 6개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:19:25.271Z"
-  },
-  {
-   "keyword": "티셔츠프린팅 제거",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 1220,
-   "documentCount": 5613,
+   "searchVolume": 560,
+   "documentCount": 1022,
    "adCount": null,
    "facingPosts": 2,
    "sampledTitles": 10,
    "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
-   "trendLabel": "시즌성",
-   "recencySummary": "2026-08 기준 최고치의 24% (정점은 3개월 전)",
+   "trendLabel": "상승세",
+   "recencySummary": "2026-08 기준 최고치의 16% (정점은 12개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:19:33.051Z"
+   "measuredAt": "2026-08-11T21:41:32.719Z"
   },
   {
-   "keyword": "igt캠핑테이블",
-   "topic": "취미",
-   "searchVolume": 4020,
-   "documentCount": 31645,
-   "adCount": null,
-   "facingPosts": 9,
+   "keyword": "메가하우스 공식스토어",
+   "topic": "주제 선택 안 함",
+   "searchVolume": 4040,
+   "documentCount": 4547,
+   "adCount": 2,
+   "facingPosts": 2,
    "sampledTitles": 10,
-   "note": "상위 10개 중 9개가 이미 정면으로 다뤘습니다",
+   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
    "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 23% (정점은 2개월 전)",
+   "recencySummary": "2026-08 기준 최고치의 57% (정점은 7개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:19:34.664Z"
+   "measuredAt": "2026-08-11T21:42:12.463Z"
   },
   {
-   "keyword": "원터치 그늘막 텐트",
-   "topic": "취미",
-   "searchVolume": 4110,
-   "documentCount": 38674,
-   "adCount": null,
-   "facingPosts": 7,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 27% (정점은 3개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:19:35.446Z"
-  },
-  {
-   "keyword": "고성 해수욕장 개장일",
-   "topic": "국내여행",
-   "searchVolume": 200,
-   "documentCount": 1243,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-07 기준 최고치의 49% (정점은 1개월 전)",
-   "demandAsOf": "2026-07",
-   "measuredAt": "2026-08-11T14:20:44.067Z"
-  },
-  {
-   "keyword": "낙산 해수욕장 개장일",
-   "topic": "국내여행",
-   "searchVolume": 210,
-   "documentCount": 813,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 3% (정점은 2개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:20:45.946Z"
-  },
-  {
-   "keyword": "대천해수욕장 개장일",
-   "topic": "국내여행",
-   "searchVolume": 410,
-   "documentCount": 1886,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 3% (정점은 2개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:20:52.226Z"
-  },
-  {
-   "keyword": "제주도 해수욕장 개장일",
-   "topic": "국내여행",
-   "searchVolume": 650,
-   "documentCount": 3234,
-   "adCount": null,
-   "facingPosts": 7,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 2% (정점은 2개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:20:55.961Z"
-  },
-  {
-   "keyword": "해운대 해수욕장 개장일",
-   "topic": "국내여행",
-   "searchVolume": 720,
-   "documentCount": 2670,
-   "adCount": null,
-   "facingPosts": 5,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 5개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 5% (정점은 2개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:20:57.276Z"
-  },
-  {
-   "keyword": "로밍 이심 차이",
-   "topic": "세계여행",
-   "searchVolume": 2850,
-   "documentCount": 19404,
-   "adCount": null,
-   "facingPosts": 7,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "구매 검토",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 14% (정점은 6개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:22:45.132Z"
-  },
-  {
-   "keyword": "기내반입 액체 용량",
-   "topic": "세계여행",
-   "searchVolume": 4610,
-   "documentCount": 17353,
-   "adCount": null,
-   "facingPosts": 3,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 3개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "에버그린",
-   "recencySummary": "2026-08 기준 최고치의 30% (정점은 7개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:22:46.457Z"
-  },
-  {
-   "keyword": "기내 반입 액체 용량",
-   "topic": "세계여행",
-   "searchVolume": 4610,
-   "documentCount": 17353,
-   "adCount": null,
-   "facingPosts": 3,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 3개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "에버그린",
-   "recencySummary": "2026-08 기준 최고치의 30% (정점은 7개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:22:47.212Z"
-  },
-  {
-   "keyword": "챗지피티 vs 제미나이",
+   "keyword": "미드저니 구독료",
    "topic": "IT·컴퓨터",
-   "searchVolume": 390,
-   "documentCount": 2451,
-   "adCount": null,
-   "facingPosts": 10,
+   "searchVolume": 540,
+   "documentCount": 3583,
+   "adCount": 0,
+   "facingPosts": 2,
    "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
+   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
    "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 11% (정점은 5개월 전)",
+   "recencySummary": "2026-08 기준 최고치의 9% (정점은 4개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:25:10.457Z"
+   "measuredAt": "2026-08-11T21:48:18.665Z"
   },
   {
-   "keyword": "어도비 주가",
+   "keyword": "씨큐인 구인구직",
    "topic": "주제 선택 안 함",
-   "searchVolume": 5590,
-   "documentCount": 22304,
-   "adCount": null,
-   "facingPosts": 7,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "시즌성",
-   "recencySummary": "2026-08 기준 최고치의 8% (정점은 11개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:25:18.505Z"
-  },
-  {
-   "keyword": "챗지피티 프롬프트",
-   "topic": "IT·컴퓨터",
-   "searchVolume": 10140,
-   "documentCount": 29835,
-   "adCount": null,
-   "facingPosts": 10,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 10개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 8% (정점은 3개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:25:23.355Z"
-  },
-  {
-   "keyword": "outlier 부업 후기",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 1360,
-   "documentCount": 307,
-   "adCount": null,
-   "facingPosts": 7,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 7개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "구매 검토",
-   "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 최고치의 75% (정점은 1개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:27:38.342Z"
-  },
-  {
-   "keyword": "씨큐인 경비",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 1630,
-   "documentCount": 4560,
-   "adCount": null,
+   "searchVolume": 900,
+   "documentCount": 2871,
+   "adCount": 4,
    "facingPosts": 4,
    "sampledTitles": 10,
    "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 70% (정점은 8개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:27:40.142Z"
-  },
-  {
-   "keyword": "슬로벨라 혈압약 가격",
-   "topic": "건강·의학",
-   "searchVolume": 530,
-   "documentCount": 33,
-   "adCount": null,
-   "facingPosts": 2,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "거래",
    "trendLabel": "판정불가",
-   "recencySummary": "2026-08 기준 지금이 최고치입니다",
+   "recencySummary": "2026-08 기준 최고치의 46% (정점은 3개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:29:50.696Z"
-  },
-  {
-   "keyword": "양압기부작용",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 2450,
-   "documentCount": 12444,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "정보",
-   "trendLabel": "에버그린",
-   "recencySummary": "2026-08 기준 최고치의 23% (정점은 2개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:29:59.567Z"
-  },
-  {
-   "keyword": "퇴직연금 DC형 수령방법",
-   "topic": "주제 선택 안 함",
-   "searchVolume": 4570,
-   "documentCount": 23166,
-   "adCount": null,
-   "facingPosts": 6,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 6개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "거래",
-   "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 13% (정점은 7개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:32:59.672Z"
+   "measuredAt": "2026-08-11T21:50:28.029Z"
   },
   {
    "keyword": "시급계산기 세후",
    "topic": "비즈니스·경제",
-   "searchVolume": 920,
-   "documentCount": 3253,
-   "adCount": null,
+   "searchVolume": 930,
+   "documentCount": 3255,
+   "adCount": 0,
    "facingPosts": 2,
    "sampledTitles": 10,
    "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
@@ -3788,37 +3553,67 @@
    "trendLabel": "상승세",
    "recencySummary": "2026-08 기준 최고치의 8% (정점은 7개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:32:54.866Z"
+   "measuredAt": "2026-08-11T21:52:05.554Z"
   },
   {
-   "keyword": "한자급수시험일정",
-   "topic": "어학·외국어",
-   "searchVolume": 4230,
-   "documentCount": 11917,
-   "adCount": null,
-   "facingPosts": 5,
-   "sampledTitles": 10,
-   "note": "상위 10개 중 5개가 이미 정면으로 다뤘습니다",
-   "intentLabel": "분류 안 됨",
-   "trendLabel": "시즌성",
-   "recencySummary": "2026-08 기준 최고치의 17% (정점은 19개월 전)",
-   "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:34:58.911Z"
-  },
-  {
-   "keyword": "티웨이 채용공고",
+   "keyword": "ERP뜻",
    "topic": "주제 선택 안 함",
-   "searchVolume": 580,
-   "documentCount": 4546,
+   "searchVolume": 17660,
+   "documentCount": 19293,
+   "adCount": 0,
+   "facingPosts": 2,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "정보",
+   "trendLabel": "에버그린",
+   "recencySummary": "2026-08 기준 최고치의 20% (정점은 17개월 전)",
+   "demandAsOf": "2026-08",
+   "measuredAt": "2026-08-11T21:52:14.703Z"
+  },
+  {
+   "keyword": "검정고시 기출문제 답지",
+   "topic": "교육·학문",
+   "searchVolume": 110,
+   "documentCount": 996,
+   "adCount": 3,
+   "facingPosts": 4,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 4개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "분류 안 됨",
+   "trendLabel": "판정불가",
+   "recencySummary": "2026-04 기준 지금이 최고치입니다",
+   "demandAsOf": "2026-04",
+   "measuredAt": "2026-08-11T21:50:50.846Z"
+  },
+  {
+   "keyword": "다이어리 오브 윔피키드",
+   "topic": "주제 선택 안 함",
+   "searchVolume": 140,
+   "documentCount": 641,
    "adCount": null,
    "facingPosts": 3,
    "sampledTitles": 10,
    "note": "상위 10개 중 3개가 이미 정면으로 다뤘습니다",
    "intentLabel": "분류 안 됨",
    "trendLabel": "상승세",
-   "recencySummary": "2026-08 기준 최고치의 13% (정점은 1개월 전)",
+   "recencySummary": "2026-07 기준 최고치의 77% (정점은 6개월 전)",
+   "demandAsOf": "2026-07",
+   "measuredAt": "2026-08-11T21:51:05.814Z"
+  },
+  {
+   "keyword": "초졸 검정고시 답안지",
+   "topic": "교육·학문",
+   "searchVolume": 220,
+   "documentCount": 798,
+   "adCount": 3,
+   "facingPosts": 2,
+   "sampledTitles": 10,
+   "note": "상위 10개 중 2개가 이미 정면으로 다뤘습니다",
+   "intentLabel": "분류 안 됨",
+   "trendLabel": "판정불가",
+   "recencySummary": "2026-08 기준 최고치의 18% (정점은 1개월 전)",
    "demandAsOf": "2026-08",
-   "measuredAt": "2026-08-11T14:36:45.683Z"
+   "measuredAt": "2026-08-11T21:51:13.306Z"
   }
  ]
 }
