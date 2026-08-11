@@ -12,7 +12,7 @@
  *   - 근거가 없으면 그 줄을 아예 안 쓴다. 빈칸을 추측으로 메우지 않는다.
  */
 /** 보드가 싣는 층·위험 값. 판정 로직은 leword-app 쪽 preemption-gate 가 갖는다. */
-type PreemptionTier = 'top3' | 'page1' | 'page1-weak' | 'contested';
+type PreemptionTier = 'top3' | 'page1' | 'golden-ratio' | 'page1-weak' | 'contested';
 type BriefingRisk = 'high' | 'medium' | 'low';
 
 export interface ActionPlanInput {
@@ -75,8 +75,11 @@ export function buildActionPlan(input: ActionPlanInput): ActionPlan {
     why.push(`상위 ${input.openSlot}번째 자리에 이 검색어를 정면으로 다룬 글이 없다`);
   } else if (input.tier === 'page1' || input.tier === 'page1-weak') {
     why.push('1페이지 안에 이 검색어를 정면으로 다룬 글이 없다');
+  } else if (input.tier === 'golden-ratio') {
+    // 자리 층이 아니라 수요 층으로 통과한 행이다. 그 사실을 그대로 말한다.
+    why.push('경쟁 글이 있지만 한 달 검색량이 10년치 문서수보다 많다 — 수요가 공급을 넘는 밭이라 후발도 노출 기회가 있다');
   } else if (input.tier === 'contested') {
-    why.push('정면으로 다룬 글이 1건뿐이다 — 경합이지만 자리가 아주 없지는 않다');
+    why.push('정면으로 다룬 글이 있다 — 경합이지만 자리가 아주 없지는 않다');
   }
 
   if (input.searchVolume !== null && input.documentCount !== null) {

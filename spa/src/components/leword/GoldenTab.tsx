@@ -37,7 +37,7 @@ type PreemptionRow = {
     keyword: string;
     topic: string;
     /** 어느 층에서 올라왔는가. 확실한 층일수록 앞이다. */
-    tier?: 'top3' | 'page1' | 'page1-weak' | 'contested';
+    tier?: 'top3' | 'page1' | 'golden-ratio' | 'page1-weak' | 'contested';
     tierLabel?: string;
     /** 상위 몇 번째 자리가 비어 있는가. */
     openSlot?: number | null;
