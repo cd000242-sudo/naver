@@ -33,8 +33,10 @@ describe('contentGeminiModelPolicy', () => {
       .toBe('gemini-3.1-flash-lite');
     expect(buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-3.5-flash' }).primaryModel)
       .toBe('gemini-3.5-flash');
+    // [2026-08-11] 레거시 2.5-flash 는 최신 Stable(3.6)로 올린다.
+    //   명시적으로 3.5 를 고른 위 케이스는 그대로 유지된다 — 사용자 선택을 덮지 않는다.
     expect(buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-2.5-flash' }).primaryModel)
-      .toBe('gemini-3.5-flash');
+      .toBe('gemini-3.6-flash');
     expect(buildGeminiModelChain({ primaryGeminiTextModel: 'gemini-2.5-pro' }).primaryModel)
       .toBe('gemini-3.1-flash-lite');
   });

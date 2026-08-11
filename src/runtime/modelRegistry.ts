@@ -236,7 +236,8 @@ export function resolveTextModelProfileForVendor(
 export const VISION_MODELS = {
   GEMINI_FLASH_LITE: GEMINI_TEXT_MODELS.FLASH_LITE,
   GEMINI_FLASH: GEMINI_TEXT_MODELS.FLASH,
-  GEMINI_PRO: GEMINI_TEXT_MODELS.PRO,
+  // [2026-08-11] 3.1 Pro Preview 제거 → Stable 인 3.5 Flash 가 그 자리를 맡는다
+  GEMINI_PRO: GEMINI_TEXT_MODELS.FLASH_SUSTAINED,
   CLAUDE_SONNET: CLAUDE_MODELS.SONNET,
   OPENAI_41: OPENAI_TEXT_MODELS.TERRA,
   OPENAI_41_MINI: OPENAI_TEXT_MODELS.LUNA,
@@ -249,6 +250,7 @@ export const VISION_MODELS = {
  */
 export type TextGeneratorKey =
   | 'gemini-3.1-flash-lite'
+  | 'gemini-3.6-flash'
   | 'gemini-3.5-flash'
   | 'gemini-3.1-pro-preview'
   | 'gemini-2.5-flash-lite'

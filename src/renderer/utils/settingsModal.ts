@@ -356,7 +356,9 @@ async function loadCurrentSettings(): Promise<void> {
         if (navStatusEl) {
             const modelLabels: Record<string, string> = {
                 'gemini-3.1-flash-lite': '💰 Gemini 3.1 Flash-Lite (무료 · 선불 추천) ★ 기본',
-                'gemini-3.5-flash': '⚖️ Gemini 3.5 Flash (선불 고품질)',
+                // [2026-08-11] 3.6 Flash 는 3.5 보다 새로우면서 출력이 싸다 ($7.50 vs $9.00)
+                'gemini-3.6-flash': '⚖️ Gemini 3.6 Flash (선불 고품질 · 최신)',
+                'gemini-3.5-flash': '🧠 Gemini 3.5 Flash (선불 · 긴 글 지속 추론)',
                 'perplexity-sonar': '🔮 Perplexity Sonar (~₩15/글)',
                 'openai-gpt4o-mini': '🧠 GPT-5.6 Luna (가성비)',
                 'openai-gpt41': '⚖️ GPT-5.6 Terra (균형)',

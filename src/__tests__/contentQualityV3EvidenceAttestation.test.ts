@@ -166,8 +166,8 @@ describe('Content Quality V3 evidence attestation', () => {
       corpusSha256:
         'cf1721af51303263182a38f7618f5431f4534858c5a9655c33fa90c61abf33f0',
       legacyBaselineSha256:
-        // [2026-08-11] 시점 라벨 규칙을 contentJsonPromptFormat 에 추가하면서 재계산
-        '2dcf1cdff038ac4b064e9721e201dad887a991c4069f264a9bde94ae580c2b70',
+        // [2026-08-11] 시점 라벨 규칙 + Gemini 3.6 도입(modelRegistry)으로 재계산
+        '8a69c09b933349c4b0067f3361dcdffe2a78f5ea317745eb8fefcc5842db3631',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

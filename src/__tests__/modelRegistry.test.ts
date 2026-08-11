@@ -30,9 +30,12 @@ function readSrcFile(rel: string): string {
 
 describe('modelRegistry SSOT 회귀 가드', () => {
   it('uses the current official value, balanced, and premium API models', () => {
+    // [2026-08-11] 공식 문서 확인: 3.6 Flash 는 Stable 이고 3.5 보다 출력이 싸다($7.50 vs $9.00).
+    //   3.1 Pro 는 Preview 라 선불 티어에서 막혀 제품에서 뺐다 — PRO 키 자체가 사라졌다.
     expect(GEMINI_TEXT_MODELS.FLASH_LITE).toBe('gemini-3.1-flash-lite');
-    expect(GEMINI_TEXT_MODELS.FLASH).toBe('gemini-3.5-flash');
-    expect(GEMINI_TEXT_MODELS.PRO).toBe('gemini-3.1-pro-preview');
+    expect(GEMINI_TEXT_MODELS.FLASH).toBe('gemini-3.6-flash');
+    expect(GEMINI_TEXT_MODELS.FLASH_SUSTAINED).toBe('gemini-3.5-flash');
+    expect((GEMINI_TEXT_MODELS as Record<string, string>).PRO).toBeUndefined();
 
     expect(OPENAI_TEXT_MODELS.LUNA).toBe('gpt-5.6-luna');
     expect(OPENAI_TEXT_MODELS.TERRA).toBe('gpt-5.6-terra');
@@ -76,7 +79,10 @@ describe('modelRegistry SSOT 회귀 가드', () => {
 
   it('migrates legacy Gemini selections to the supported prepaid matrix', () => {
     expect(normalizeGeminiTextModelId('gemini-2.5-flash-lite')).toBe('gemini-3.1-flash-lite');
-    expect(normalizeGeminiTextModelId('gemini-2.5-flash')).toBe('gemini-3.5-flash');
+    expect(normalizeGeminiTextModelId('gemini-2.5-flash')).toBe('gemini-3.6-flash');
+    // 3.5 를 명시적으로 고른 사용자는 그대로 둔다 — Stable 이라 문제없다
+    expect(normalizeGeminiTextModelId('gemini-3.5-flash')).toBe('gemini-3.5-flash');
+    expect(normalizeGeminiTextModelId('gemini-3.6-flash')).toBe('gemini-3.6-flash');
     expect(normalizeGeminiTextModelId('gemini-2.5-pro')).toBe('gemini-3.1-flash-lite');
     expect(normalizeGeminiTextModelId('gemini-3.1-pro-preview')).toBe('gemini-3.1-flash-lite');
     expect(normalizeGeminiTextModelId('gemini-future-explicit-model')).toBe('gemini-future-explicit-model');

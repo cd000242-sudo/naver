@@ -1028,7 +1028,9 @@ export async function initPriceInfoModal(): Promise<void> {
         // [v1.4.32] 가격 표시 추가 — 사용자가 어떤 비용을 쓰는지 한눈에
         const modelNames: Record<string, string> = {
           'gemini-3.1-flash-lite': '💰 Gemini 3.1 Flash-Lite (무료 · 선불 추천) ★ 기본',
-          'gemini-3.5-flash': '⚖️ Gemini 3.5 Flash (선불 고품질)',
+          // [2026-08-11] 3.6 Flash 는 3.5 보다 새로우면서 출력이 싸다 ($7.50 vs $9.00)
+          'gemini-3.6-flash': '⚖️ Gemini 3.6 Flash (선불 고품질 · 최신)',
+          'gemini-3.5-flash': '🧠 Gemini 3.5 Flash (선불 · 긴 글 지속 추론)',
           'perplexity-sonar': '🔮 Perplexity Sonar (~₩32/글)',
           'openai-gpt4o-mini': '🧠 GPT-5.6 Luna (가성비)',
           'openai-gpt41': '⚖️ GPT-5.6 Terra (균형)',
@@ -1606,6 +1608,7 @@ export async function initPriceInfoModal(): Promise<void> {
             const statusEl = document.getElementById('nav-text-engine-status');
             if (statusEl && config.primaryGeminiTextModel) {
               const names: Record<string, string> = {
+                'gemini-3.6-flash': 'Gemini 3.6 Flash',
                 'gemini-3.5-flash': 'Gemini 3.5 Flash',
                 'gemini-3.1-flash-lite': 'Gemini 3.1 Flash-Lite',
                 'perplexity-sonar': '🔮 Perplexity AI',

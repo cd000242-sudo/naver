@@ -33,8 +33,21 @@ export const GEMINI_TEXT_FREE_TIER_LIMITS: Record<GeminiTextModelId, GeminiFreeT
     tpm: null,
     rpd: null,
     freeTierAvailable: false,
+    label: 'Gemini 3.6 Flash',
+    recommendation: '선불 유료 고품질 모델(최신). 무료 사용은 Flash-Lite를 선택하세요.',
+  }),
+  /**
+   * [2026-08-11] 3.5 Flash — 3.6 도입 후에도 남긴다.
+   *   공식 문서상 "지속 추론(sustained frontier performance)" 강점이 있어 긴 글에 유리하고,
+   *   Stable 이라 티어 제한이 없다. 출력 단가는 3.6($7.50)보다 비싼 $9.00 이다.
+   */
+  [GEMINI_TEXT_MODELS.FLASH_SUSTAINED]: Object.freeze({
+    rpm: null,
+    tpm: null,
+    rpd: null,
+    freeTierAvailable: false,
     label: 'Gemini 3.5 Flash',
-    recommendation: '선불 유료 고품질 모델. 무료 사용은 Flash-Lite를 선택하세요.',
+    recommendation: '선불 유료. 긴 글·복잡한 주제에서 지속 추론이 필요할 때 쓰세요.',
   }),
 });
 
