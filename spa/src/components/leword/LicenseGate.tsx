@@ -19,8 +19,21 @@ export function isUnlocked(): boolean {
     return Boolean(getStoredLicense().trim()) || hasAnyUserKey();
 }
 
-export const FREE_BOARD_ROWS = 5;
-export const FREE_LOOKUPS = 10;
+/**
+ * 베타 기간에는 **전부 연다.**
+ *
+ * 사장님(2026-08-12): "베타로 오픈해 놓은 거라서 로그인 기능 등등 나중에 넣어야
+ * 될 거 아니에요. 당장 지금 바로 보이도록 해 주세요."
+ *
+ * 맞다. 로그인도 결제도 아직 없는데 5행만 보여 주면, 보드가 27행을 내도 사람이
+ * 보는 것은 5행뿐이다 — 만들어 놓고 안 보여 주는 상태다.
+ *
+ * **로그인·결제가 붙으면 이 값을 5로 되돌린다.** 아래 상수 하나만 고치면 된다.
+ */
+const BETA_OPEN = true;
+
+export const FREE_BOARD_ROWS = BETA_OPEN ? Number.MAX_SAFE_INTEGER : 5;
+export const FREE_LOOKUPS = BETA_OPEN ? 1000 : 10;
 
 function LicenseGate({ onUnlock }: { onUnlock: () => void }) {
     const [code, setCode] = useState(getStoredLicense());
