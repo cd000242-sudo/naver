@@ -21,7 +21,9 @@ describe('lever 1: full-text merge on top of snippets (keyword flows)', () => {
   });
 
   it('merges full texts FIRST so downstream truncation trims snippets, not facts', () => {
-    expect(code).toMatch(/collectTopArticleFullTexts\(keyword, clientId, clientSecret, logger\)/);
+    // 인자 목록을 통째로 박제하지 않는다 — 이 테스트가 지키려는 것은 "본문을 먼저 붙인다"이지
+    // 호출 시그니처가 아니다. (2026-08-11: 시간 예산 인자가 붙으면서 이 단언이 깨졌다)
+    expect(code).toMatch(/collectTopArticleFullTexts\(\s*keyword, clientId, clientSecret, logger/);
     expect(code).toMatch(/\$\{fullTexts\.text\}\\n\\n=== 검색 결과 스니펫 \(맥락 참고용\) ===\\n\$\{apiResult\.content\}/);
   });
 

@@ -1576,12 +1576,36 @@ const FULLTEXT_TOTAL_BUDGET_CHARS = 8000;
 const FULLTEXT_PER_ARTICLE_CHARS = 2500;
 const FULLTEXT_MAX_SUCCESS = 5;
 
+/**
+ * [2026-08-11] 한 편이 오래 걸려도 **확보한 만큼은 건진다.**
+ *
+ * 렌더러가 collectContentFromPlatforms 전체를 30초로 감싸고 있는데(contentGeneration.ts:1051)
+ * 부분 결과를 돌려주는 경로가 없다. 그래서 본문 한 편이 Playwright 폴백으로 넘어가
+ * 20초를 먹으면 **스니펫까지 포함해 수집 결과 전부가 폐기**되고
+ * "가능한 정보로 계속합니다" 로 근거 0 상태 글이 나간다.
+ * 느린 PC 일수록 자주 터진다 — dev 에서만 되는 전형적인 형태다.
+ *
+ * 한 편당 상한과 전체 마감을 둔다. 마감이 닿으면 그때까지 모은 것을 그대로 반환한다.
+ */
+const FULLTEXT_PER_ARTICLE_TIMEOUT_MS = 9000;
+/** 마감까지 이만큼도 안 남았으면 새 요청을 시작하지 않는다 */
+const FULLTEXT_STOP_MARGIN_MS = 2000;
+/**
+ * 본문 수집에 쓸 시간 예산.
+ * 렌더러 상한이 30초인데(contentGeneration.ts:1051) 그 안에는 검색 API 호출과
+ * IPC 왕복도 들어간다. 20초로 잡아 **렌더러가 끊기 전에 반드시 반환**되게 한다.
+ */
+const FULLTEXT_COLLECT_BUDGET_MS = 20000;
+
 export async function collectTopArticleFullTexts(
   keyword: string,
   clientId: string,
   clientSecret: string,
   logger: (message: string) => void = console.log,
+  /** 이 시각까지만 수집한다 (epoch ms). 없으면 지금까지처럼 끝까지 돈다. */
+  deadlineAt?: number,
 ): Promise<{ text: string; count: number; urls: string[] }> {
+  const remainingMs = (): number => (deadlineAt ? deadlineAt - Date.now() : Number.POSITIVE_INFINITY);
   try {
     const settled = await Promise.allSettled([
       searchNaverForContent(keyword, clientId, clientSecret, 'blog', 8, 'sim'),
@@ -1598,10 +1622,26 @@ export async function collectTopArticleFullTexts(
     const usedUrls: string[] = [];
     let totalChars = 0;
 
+    let stoppedByDeadline = false;
     for (const candidate of candidates) {
       if (parts.length >= FULLTEXT_MAX_SUCCESS || totalChars >= FULLTEXT_TOTAL_BUDGET_CHARS) break;
+      // 남은 시간이 없으면 새로 시작하지 않는다 — 확보한 만큼 돌려주는 게 전부 잃는 것보다 낫다
+      if (remainingMs() <= FULLTEXT_STOP_MARGIN_MS) { stoppedByDeadline = true; break; }
       try {
-        const article = await fetchArticleContent(candidate.link);
+        /**
+         * 한 편이 통째로 늦어지는 것을 막는다. Playwright 폴백은 goto 만 18초라
+         * 한 편이 남은 예산을 다 먹을 수 있다. 시간이 지나면 그 편만 포기한다
+         * (진행 중인 크롤러는 자기 finally 에서 브라우저를 닫는다).
+         */
+        const perArticleMs = Math.max(
+          3000,
+          Math.min(FULLTEXT_PER_ARTICLE_TIMEOUT_MS, remainingMs() - FULLTEXT_STOP_MARGIN_MS),
+        );
+        const article = await Promise.race([
+          fetchArticleContent(candidate.link),
+          new Promise<{ title?: string; content?: string }>((resolve) =>
+            setTimeout(() => resolve({}), perArticleMs)),
+        ]);
         const content = (article.content || '').trim();
         if (content.length < 300) continue;
         const excerpt = content.substring(0, FULLTEXT_PER_ARTICLE_CHARS);
@@ -1615,6 +1655,9 @@ export async function collectTopArticleFullTexts(
       }
     }
 
+    if (stoppedByDeadline) {
+      logger(`[플랫폼 콘텐츠 수집] ⏱️ 시간 예산 소진 — 확보한 ${parts.length}건으로 진행합니다 (전부 버리지 않습니다)`);
+    }
     if (parts.length === 0) return { text: '', count: 0, urls: [] };
     logger(`[플랫폼 콘텐츠 수집] 📚 상위글 풀텍스트 ${parts.length}건 확보 (${totalChars.toLocaleString()}자)`);
     return {
@@ -7512,7 +7555,15 @@ export async function collectContentFromPlatforms(
           // the snippets (breadth map). Full texts go FIRST so any downstream
           // truncation trims snippets, not facts. Fetch failure keeps the
           // previous snippet-only behavior.
-          const fullTexts = await collectTopArticleFullTexts(keyword, clientId, clientSecret, logger);
+          //
+          // [2026-08-11] 시간 예산을 넘긴다. 렌더러가 이 호출 전체를 30초로 감싸는데
+          //   (contentGeneration.ts:1051) 부분 결과 경로가 없어, 본문 한 편이 늦어지면
+          //   **스니펫까지 포함해 수집 결과 전부가 폐기**되고 근거 0 상태로 글이 나갔다.
+          //   렌더러 상한보다 넉넉히 앞서 끝내 확보한 만큼은 반드시 돌려준다.
+          const fullTextDeadline = Date.now() + FULLTEXT_COLLECT_BUDGET_MS;
+          const fullTexts = await collectTopArticleFullTexts(
+            keyword, clientId, clientSecret, logger, fullTextDeadline,
+          );
           const collectedText = fullTexts.text
             ? `${fullTexts.text}\n\n=== 검색 결과 스니펫 (맥락 참고용) ===\n${apiResult.content}`
             : apiResult.content;
