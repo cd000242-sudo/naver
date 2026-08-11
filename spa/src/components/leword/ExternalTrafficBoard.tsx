@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { preemptionIndex, TIER_ORDER } from '../../lib/preemptionIndex';
 
 /**
  * 2군 — **네이버 자리는 늦었지만 외부 유입으로는 쓸 수 있는 밭.**
@@ -44,16 +45,25 @@ function ExternalTrafficBoard({
     const [open, setOpen] = useState(false);
 
     /*
-     * 줄 세우기는 1군과 같은 기준이다 — 광고 많은 순 → 검색량 많은 순 → 문서수 적은 순.
-     * 여기서 다른 기준을 쓰면 같은 보드가 칸마다 다른 논리로 보인다.
-     * 광고를 못 쟀으면(옛 회차) 그 축은 건너뛴다.
+     * 줄 세우기는 1군과 같다 — 검색량이 높고 문서수가 낮은 순(검색량 ÷ 문서수).
+     * 그다음이 광고. 칸마다 다른 논리로 세우면 같은 보드가 둘로 보인다.
+     * 둘 중 하나라도 못 쟀으면 줄 세울 근거가 없으므로 맨 뒤다.
      */
-    const sorted = useMemo(() => [...rows].sort((a, b) => {
-        const ads = (row: ReferenceRow) => (typeof row.adCount === 'number' ? row.adCount : null);
-        if (ads(a) !== null && ads(b) !== null && ads(a) !== ads(b)) return (ads(b) as number) - (ads(a) as number);
-        if ((a.searchVolume ?? 0) !== (b.searchVolume ?? 0)) return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
-        return (a.documentCount ?? Number.MAX_SAFE_INTEGER) - (b.documentCount ?? Number.MAX_SAFE_INTEGER);
-    }), [rows]);
+    const sorted = useMemo(() => {
+        // 1군과 같은 기준이다 — 황금 등급으로 묶고 그 안에서 광고 많은 순.
+        // 칸마다 다른 논리로 세우면 같은 보드가 둘로 보인다.
+        const of = (row: ReferenceRow) => preemptionIndex({
+            searchVolume: row.searchVolume, documentCount: row.documentCount,
+        });
+        return [...rows].sort((a, b) => {
+            const rank = (row: ReferenceRow) => TIER_ORDER[of(row).tier];
+            if (rank(a) !== rank(b)) return rank(a) - rank(b);
+            const ads = (row: ReferenceRow) => (typeof row.adCount === 'number' ? row.adCount : null);
+            if (ads(a) !== null && ads(b) !== null && ads(a) !== ads(b)) return (ads(b) as number) - (ads(a) as number);
+            if ((of(a).worth ?? -1) !== (of(b).worth ?? -1)) return (of(b).worth ?? -1) - (of(a).worth ?? -1);
+            return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
+        });
+    }, [rows]);
 
     if (sorted.length === 0) return null;
 

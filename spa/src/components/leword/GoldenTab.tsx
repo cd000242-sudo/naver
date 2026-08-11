@@ -8,6 +8,7 @@ import { formatCount } from '../../lib/keywordApi';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
 import ExternalTrafficBoard, { type ReferenceRow } from './ExternalTrafficBoard';
+import { preemptionIndex, TIER_ORDER } from '../../lib/preemptionIndex';
 
 /**
  * 네이버 데이터랩 검색어 트렌드. 우리가 그리는 그림이 아니라 네이버가 그린 것을 연다.
@@ -131,26 +132,33 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             return !needle || row.keyword.toLowerCase().includes(needle);
         });
         /*
-         * 줄 세우기 — 사장님 지시(2026-08-11): **광고가 1순위**다.
+         * 줄 세우기 — **황금키워드끼리 모아 놓고, 그 안에서 광고 많은 순.**
          *
-         *   "상위에 광고가 많이 떠 있다면 그 키워드는 돈이 되는 키워드다 — 광고주가
-         *    많으니까. 광고가 많고 검색량은 높으면서 문서수는 낮은 그런 키워드들을
-         *    상위에 먼저 배치해서 순위별로 나열해 달라."
+         * 사장님 기준(여러 번 확인):
+         *   "검색량이 높고 문서수가 낮아야 황금키워드다."
+         *   "황금키워드면서 광고가 많은 게 제일 베스트다."
          *
-         * 자리 등급(상위 3위권 빈자리 / 경합)은 **배지로만** 남고 순서에는 안 쓴다.
-         * 전에는 등급이 먼저였는데, 그러면 광고가 많이 붙은 자리가 아래로 밀린다.
-         * 대신 경합 키워드가 위로 올라올 수 있다 — 배지에 그렇게 적혀 있다.
+         * 그래서 두 단계다. ① 황금 등급(검색량 ÷ 문서수)으로 묶고 ② 같은 등급 안에서
+         * 광고 많은 순. 광고를 1순위로 두면 밭이 꽉 찬 키워드가 맨 위로 온다 —
+         * 실측: '증명사진 규격 변환' 은 광고 7건인데 검색 2,440에 문서 3,801이었다.
+         * 반대로 광고를 안 쓰면 "돈 되는 자리" 라는 신호가 통째로 죽는다.
          *
-         * 광고를 못 쟀으면(undefined) 그 축은 건너뛴다. 0으로 눌러 담으면 안 본 것이
-         * '광고 없음'이 되어 멀쩡한 키워드가 뒤로 밀린다.
+         * 등급 판정은 preemptionIndex 가 단일 출처다 — 화면이 따로 계산하면
+         * 배지와 순서가 어긋난다.
          */
         return [...filtered].sort((a, b) => {
+            const rank = (row: PreemptionRow) => TIER_ORDER[preemptionIndex({
+                searchVolume: row.searchVolume, documentCount: row.documentCount,
+            }).tier];
+            if (rank(a) !== rank(b)) return rank(a) - rank(b);
+            // 못 쟀으면 광고 축은 건너뛴다 — 안 본 것을 '광고 없음'으로 벌주지 않는다.
             const ads = (row: PreemptionRow) => (typeof row.serp?.adCount === 'number' ? row.serp.adCount : null);
             if (ads(a) !== null && ads(b) !== null && ads(a) !== ads(b)) return (ads(b) as number) - (ads(a) as number);
-            if ((a.searchVolume ?? 0) !== (b.searchVolume ?? 0)) return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
-            const docs = (row: PreemptionRow) => row.documentCount ?? Number.MAX_SAFE_INTEGER;
-            if (docs(a) !== docs(b)) return docs(a) - docs(b);
-            return (a.openSlot ?? 99) - (b.openSlot ?? 99);
+            const worth = (row: PreemptionRow) => preemptionIndex({
+                searchVolume: row.searchVolume, documentCount: row.documentCount,
+            }).worth ?? -1;
+            if (worth(a) !== worth(b)) return worth(b) - worth(a);
+            return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
         });
     }, [board, topic, query, writeLane]);
 
@@ -241,9 +249,16 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             <span>광고수</span>
                                             <strong>{typeof row.serp?.adCount === 'number' ? `${row.serp.adCount}개` : '—'}</strong>
                                         </div>
+                                        {/*
+                                          * null 은 '없음'이 아니다 — findOpenSlot 은 "훑은 자리가
+                                          * 전부 찼다" 를 null 로 돌려주고, 그 아래는 보지 않았다.
+                                          * '없음'이라고 적으면 안 잰 것을 단정하는 것이 된다.
+                                          */}
                                         <div className="hot">
                                             <span>빈자리</span>
-                                            <strong>{row.openSlot ? '있음' : '없음'}</strong>
+                                            <strong title={row.openSlot ? `상위 ${row.openSlot}번째 자리가 비어 있습니다` : '상위 10개는 모두 차 있습니다 — 그 아래는 재지 않았습니다'}>
+                                                {row.openSlot ? `${row.openSlot}위` : '10위 내 없음'}
+                                            </strong>
                                         </div>
                                     </div>
 

@@ -44,9 +44,7 @@ export type CardHeadRow = {
 function BoardCardHead({ row, rank }: { row: CardHeadRow; rank?: number }) {
     const index = preemptionIndex({
         searchVolume: row.searchVolume,
-        adCount: row.serp?.adCount,
-        facingPosts: row.serp?.exactTitleHits,
-        sampledTitles: row.serp?.sampledTitles,
+        documentCount: row.documentCount,
     });
     return (
         /*
@@ -84,7 +82,7 @@ function BoardCardHead({ row, rank }: { row: CardHeadRow; rank?: number }) {
               */}
             <h3 className="lw-card-keyword">
                 {rank !== undefined && <span className="lw-rank">{rank}</span>}
-                <span className={`lw-index lw-index-${index.tier}`} title={index.reasons.join(' · ')}>
+                <span className={`lw-index lw-index-${index.tier}`} title={index.reason}>
                     {index.label}
                 </span>
                 {row.keyword}
