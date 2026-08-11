@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchAffiliateBoard, type AffiliateProduct } from '../../lib/keywordApi';
+import { createCoupangDeeplink, fetchAffiliateBoard, type AffiliateProduct } from '../../lib/keywordApi';
 import { goldenIndex } from '../../lib/goldenIndex';
 
 /**
@@ -20,6 +20,22 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [rows, setRows] = useState<AffiliateProduct[] | null>(null);
     const [state, setState] = useState<'idle' | 'loading' | 'ready' | 'needs-keys' | 'error'>('idle');
     const [message, setMessage] = useState('');
+    // 제휴링크 버튼의 행별 상태. 링크는 방문자 본인 키로 만들어지는 본인 수익 링크다.
+    const [linkState, setLinkState] = useState<{ key: string; label: string } | null>(null);
+
+    const makeLink = async (row: AffiliateProduct) => {
+        setLinkState({ key: row.url, label: '만드는 중…' });
+        const res = await createCoupangDeeplink(row.url);
+        const shorten = res.data?.shortenUrl;
+        if (!res.ok || !shorten) {
+            setLinkState({ key: row.url, label: res.message || '실패 — 다시 시도' });
+            window.setTimeout(() => setLinkState(null), 3200);
+            return;
+        }
+        try { await navigator.clipboard?.writeText(shorten); } catch { /* 복사가 막혀도 링크는 유효하다 */ }
+        setLinkState({ key: row.url, label: `복사됨! ${shorten.replace('https://', '')}` });
+        window.setTimeout(() => setLinkState(null), 4200);
+    };
 
     const load = async () => {
         setState('loading');
@@ -117,6 +133,9 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 <span>가격 <strong>{row.price === null ? '—' : `${row.price.toLocaleString('ko-KR')}원`}</strong></span>
                             </div>
                             <div className="lw-lane-actions">
+                                <button type="button" onClick={() => void makeLink(row)}>
+                                    {linkState?.key === row.url ? linkState.label : '내 제휴링크 복사'}
+                                </button>
                                 <button type="button" onClick={() => onAnalyze(row.keyword)}>이 검색어 분석</button>
                                 {/* 정면 수치를 못 믿겠으면 직접 세어 보라 — 실측을 파는 보드는 검증 동선까지 줘야 한다. */}
                                 <a

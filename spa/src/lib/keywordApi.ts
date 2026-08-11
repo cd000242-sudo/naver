@@ -20,7 +20,8 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const endpointFor = (action: string) => (action === 'keyword-coupang-board' ? WORKER_ENDPOINT : ENDPOINT);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink']);
+const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
 const TIMEOUT_MS = 25000;
@@ -255,6 +256,10 @@ export type AffiliateProduct = {
  * 쿠팡이 지금 미는 상품을 받아, 상품마다 그 검색어의 수요·문서수를 잰다.
  * 우리 키워드 풀에서 고르면 키워드 보드를 다시 자른 것밖에 안 된다.
  */
+/** 상품 주소 → 방문자 본인의 파트너스 단축링크. 키는 call() 이 함께 싣는다. */
+export const createCoupangDeeplink = (url: string) =>
+    call<{ shortenUrl: string; landingUrl: string }>('keyword-coupang-deeplink', { url });
+
 export async function fetchAffiliateBoard() {
     return call<{ products: AffiliateProduct[]; needsKeys: boolean }>('keyword-coupang-board', {});
 }
