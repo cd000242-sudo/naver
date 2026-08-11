@@ -1125,6 +1125,28 @@ export function finalizeStructuredContent(
     console.warn('[Hallucination] 검사 모듈 로드 실패 (측정 스킵):', (hallErr as Error)?.message);
   }
 
+  // ✅ [2026-08-12] 날조 검사 — 글에만 있고 자료에는 없는 금액·날짜·비율·인원·기관명.
+  //   환각 검사는 감정 뒤집힘만, 충실도 검사는 누락만 본다. 없던 수치를 지어내는 것은
+  //   둘 다 통과해 왔다. 동작: 측정·경고만 — 발행을 막지도, 재작성을 걸지도 않는다.
+  //   오탐률을 실측한 뒤에 후속 단계를 정한다.
+  try {
+    const { checkFabrication } = require('./content/fabricationCheck');
+    const _fabSource = String((source as any).factCheckRawSource || source.rawText || '');
+    const _fab = checkFabrication(_fabSource, _resultBodyForGates);
+    if (_fab.checked && _fab.findings.length > 0) {
+      console.warn(`[Fabrication] ⚠️ 자료에 없는 주장 ${_fab.findings.length}건 / 검증 대상 ${_fab.totalClaims}건:`);
+      for (const w of _fab.warnings) console.warn(`  - ${w}`);
+      finalContent.quality = finalContent.quality ?? ({ warnings: [], score: 0 } as any);
+      if (Array.isArray((finalContent.quality as any).warnings)) {
+        for (const w of _fab.warnings) {
+          (finalContent.quality as any).warnings.push(`🚨 지어냄 의심: ${w}`);
+        }
+      }
+    }
+  } catch (fabErr) {
+    console.warn('[Fabrication] 검사 모듈 로드 실패 (측정 스킵):', (fabErr as Error)?.message);
+  }
+
   // ✅ [SPEC-DEFAMATION-2026 P0] 실존인물 미확인 단정 탐지 → legalRisk='danger' + 발행전 경고.
   //   완화(hedge) 안 함 — 판례상 면책 효과 없음(legal-research.md). 위험 문장을 표면화해
   //   사용자가 발행 전 삭제/확인하도록 유도(라이브 발행 신뢰 원칙: 하드차단은 P1 발행게이트).

@@ -133,6 +133,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/content/evaluators/seoEval.ts',
   'src/content/evidenceIntegrity.ts',
   'src/content/exposureWinnersBlock.ts',
+  'src/content/fabricationCheck.ts',
   'src/content/forbiddenPhrases.ts',
   'src/content/generalContentGuard.ts',
   'src/content/groundingCostPolicy.ts',
