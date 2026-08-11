@@ -2182,18 +2182,39 @@
             return ADMIN_TOKEN;
         }
 
+        /*
+         * GAS 응답을 **텍스트로 받아** JSON 인지 확인한다. 구글은 동시 실행 한도·
+         * 할당량에 걸리면 200 + HTML 오류 페이지를 준다. 그걸 .json().catch(()=>({}))
+         * 로 삼키면 빈 객체가 되고, "success === false 일 때만 실패" 검사를 그대로
+         * 통과해 **가짜 성공**이 된다 — 2026-08-12 실사고: '홈에 발행' 이 성공
+         * 토스트를 띄웠는데 서버에는 아무것도 저장되지 않았고, 목록 조회도 같은
+         * 이유로 빈 화면이 됐다. 못 읽은 것은 null 로 돌려주고 호출자가 실패로 다룬다.
+         */
+        async function fetchGasJson(url, init, tries) {
+            const attempts = Math.max(1, tries || 2);
+            for (let i = 0; i < attempts; i += 1) {
+                if (i > 0) await new Promise(r => setTimeout(r, 800 * i));
+                try {
+                    const res = await fetch(url, init);
+                    const raw = await res.text();
+                    try { return JSON.parse(raw); } catch (parseErr) { /* HTML — 재시도 */ }
+                } catch (netErr) { /* 네트워크 — 재시도 */ }
+            }
+            return null;
+        }
+        const GAS_HTML_ERROR = '구글 스크립트가 JSON 대신 오류 페이지를 돌려줬습니다(동시 실행 한도·할당량). 잠시 후 다시 시도해 주세요.';
+
         /** GAS 관리자 액션 공통 호출. 토큰이 없으면 물어보고, 틀리면 다시 물어본다. */
         async function gasAdminCall(action, payload) {
             if (!ensureAdminToken()) throw new Error('관리자 토큰이 필요합니다.');
-            const send = async () => {
-                const res = await fetch(GAS_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action, adminToken: ADMIN_TOKEN, ...(payload || {}) }),
-                });
-                return res.json().catch(() => ({}));
-            };
+            const send = () => fetchGasJson(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action, adminToken: ADMIN_TOKEN, ...(payload || {}) }),
+            }, 2);
             let out = await send();
+            // null = 구글이 JSON 을 안 줬다. 성공인 척하면 "발행했다는데 안 뜨는" 화면이 된다.
+            if (out === null) throw new Error(GAS_HTML_ERROR);
             if (out && out.error === 'Unauthorized') {
                 // 토큰이 틀렸다. 저장된 값을 지우고 한 번만 다시 받는다.
                 sessionStorage.removeItem('lp_admin_gas_token');
@@ -2947,9 +2968,9 @@
             try {
                 // 공지는 GAS 가 원본이다. 폐지된 Vultr 를 먼저 부르면 매번 실패한 뒤
                 // 폴백으로 넘어가느라 목록이 늦게 뜬다.
-                const response = await fetch(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' });
-                const payload = await response.json().catch(() => ({}));
-                if (!response.ok) throw new Error('서버 공지 조회 실패');
+                const payload = await fetchGasJson(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' }, 2);
+                // null 을 빈 목록으로 위장하면 "등록된 공지가 없습니다" 가 거짓말이 된다.
+                if (payload === null) throw new Error(GAS_HTML_ERROR);
                 if (loadGeneration !== homeNoticeLoadGeneration || homeNoticeEditorState.saving) return;
                 if (Array.isArray(payload.notices)) {
                     /*
@@ -3041,9 +3062,14 @@
             homeNoticeEditorState.saving = true;
             setNoticeMutationDisabled(true);
             try {
-                const before = await fetch(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' })
-                    .then(r => r.json()).catch(() => ({}));
-                const serverNotices = Array.isArray(before?.notices) ? before.notices : [];
+                /*
+                 * 저장 전 서버 목록을 못 읽었으면 **여기서 멈춘다.** HTML 오류 응답을
+                 * 빈 목록으로 오인하면, 아래 삭제 동기화가 "서버에 있는데 화면에 없는
+                 * 공지" 를 전부 지우려 든다 — 조용히 남의 공지를 날리는 코드가 된다.
+                 */
+                const before = await fetchGasJson(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' }, 2);
+                if (before === null || !Array.isArray(before.notices)) throw new Error(GAS_HTML_ERROR);
+                const serverNotices = before.notices;
                 const serverById = new Map(serverNotices.map(n => [String(n.id), n]));
 
                 const next = (notices || []).map(normalizeAdminNotice).filter(n => n.title);
@@ -3077,9 +3103,18 @@
                     if (res && res.success === false) throw new Error(res.message || '공지 삭제 실패');
                 }
 
-                const after = await fetch(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' })
-                    .then(r => r.json()).catch(() => ({}));
-                const saved = Array.isArray(after?.notices) ? after.notices : [];
+                const after = await fetchGasJson(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' }, 2);
+                if (after === null || !Array.isArray(after.notices)) throw new Error(GAS_HTML_ERROR);
+                const saved = after.notices;
+                /*
+                 * 보냈다고 성공이 아니다 — **서버 목록에서 다시 보여야** 성공이다.
+                 * 예전에는 이 검증이 없어서, 저장 요청이 HTML 로 삼켜져도 성공 토스트가
+                 * 떴다("발행했다는데 안 뜨는" 화면). 제출한 게 있는데 목록이 그대로면
+                 * 실패라고 말한다.
+                 */
+                if (next.length > 0 && saved.length < next.length) {
+                    throw new Error(`저장 요청은 보냈지만 서버 목록에서 ${next.length}건 중 ${saved.length}건만 확인됩니다 — 다시 시도해 주세요.`);
+                }
                 homeNoticeEditorState = {
                     revision: (homeNoticeEditorState.revision || 0) + 1,
                     notices: saved.map(normalizeAdminNotice).filter(n => n.title),
