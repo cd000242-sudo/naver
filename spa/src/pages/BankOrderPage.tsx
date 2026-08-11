@@ -34,13 +34,27 @@ const fmt = (n: number) => n.toLocaleString();
 const productPrice = (p: ProductOption, nowMs: number = Date.now()) => getScheduledAmount(p.price, p.futurePrice, nowMs);
 const productPeriod = (p: ProductOption, nowMs: number = Date.now()) => isNormalPricingActive(nowMs) && p.normalPeriod ? p.normalPeriod : p.period;
 
+/*
+ * 결제 흐름은 구글의 일시 HTML 응답(한도·점검)에 제일 민감하다 — 주문 접수 화면에서
+ * "Unexpected token '<'" 가 뜨면 사용자는 결제가 됐는지조차 모른다.
+ * JSON 이 아니면 사람 말로 던진다. 호출부의 catch 가 그대로 화면에 알린다.
+ */
+async function parseGasJson(res: Response) {
+    const raw = await res.text();
+    try {
+        return JSON.parse(raw);
+    } catch {
+        throw new Error('서버가 잠시 붐빕니다. 몇 초 뒤 다시 시도해 주세요.');
+    }
+}
+
 async function fetchOrderStatus(orderId: string) {
     const res = await fetch(GAS_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify({ action: 'check-order', orderId }),
     });
-    return res.json();
+    return parseGasJson(res);
 }
 
 function BankOrderPage() {
@@ -156,7 +170,7 @@ function BankOrderPage() {
                 headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify({ action: 'bank-order', name: n, email: e, product: productLabel, amount: orderAmount }),
             });
-            const data = await res.json();
+            const data = await parseGasJson(res);
             if (data.ok) {
                 setSearchParams({ orderId: data.orderId }, { replace: true });
                 setResult({ orderId: data.orderId, amount: orderAmount, product: productLabel, status: 'pending' });

@@ -42,12 +42,32 @@ function getSnapshot(): NoticeAlertState {
     return state;
 }
 
-/** 공지를 한 번만 받아온다. 이미 받았거나 요청 중이면 그대로 둔다. */
+/*
+ * 세션당 한 번만 받으면 **열려 있던 탭은 새 공지를 영영 모른다** (2026-08-12 실사고:
+ * 어드민에서 공지를 발행했는데 이미 열려 있던 사이트 탭에 알림이 안 떴다 —
+ * 탭을 새로 여는 사람한테만 뜨는 알림이었다). 받은 지 5분이 지난 채로 탭에
+ * 돌아오면 다시 받아온다. 읽음 서명은 localStorage 라 다시 받아도 유지된다.
+ */
+const RELOAD_AFTER_MS = 5 * 60 * 1000;
+let loadedAtMs = 0;
+
+if (typeof document !== 'undefined') {
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState !== 'visible') return;
+        if (!state.loaded || inflight) return;
+        if (Date.now() - loadedAtMs < RELOAD_AFTER_MS) return;
+        state = { ...state, loaded: false };
+        void loadNoticeAlerts();
+    });
+}
+
+/** 공지를 받아온다. 이미 받았거나 요청 중이면 그대로 둔다(위 visibilitychange 가 갱신). */
 export function loadNoticeAlerts(limit = 5): Promise<void> {
     if (state.loaded || inflight) return inflight || Promise.resolve();
     inflight = fetchHomeNotices(limit)
         .then((notices) => {
             const list = Array.isArray(notices) ? notices : [];
+            loadedAtMs = Date.now();
             setState({ notices: list, unseen: unseenNotices(list), loaded: true });
         })
         .catch(() => {
