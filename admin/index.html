@@ -2223,10 +2223,18 @@
 
         function writeAdminSession(session) {
             if (!session || !session.token) return;
-            sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({
-                token: session.token,
-                expiresAt: Date.now() + Math.max(60, Number(session.expiresIn || 0)) * 1000,
-            }));
+            /*
+             * GAS 는 expiresAt(ISO, 12시간 뒤)을 준다. expiresIn(초)은 **없다**.
+             * 예전에는 없는 expiresIn 만 읽어 0 이 됐고, Math.max(60, 0) 때문에
+             * 세션이 60초짜리가 됐다 — 로그인 1분 뒤부터 세션이 죽은 것으로 보였다.
+             * (SPA 쪽 adminApi.ts 와 같은 결함. 2026-08-12 같은 날 함께 고쳤다.)
+             */
+            const fromIso = session.expiresAt ? Date.parse(session.expiresAt) : NaN;
+            const fromSeconds = Number(session.expiresIn) > 0 ? Date.now() + Number(session.expiresIn) * 1000 : NaN;
+            const expiresAt = Number.isFinite(fromIso) ? fromIso
+                : Number.isFinite(fromSeconds) ? fromSeconds
+                    : Date.now() + 12 * 60 * 60 * 1000;
+            sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({ token: session.token, expiresAt }));
         }
 
         // Keep every existing GAS button in this legacy UI, but inject the
@@ -2688,13 +2696,34 @@
             const error = document.getElementById('login-error');
             setLoginProgress('서버에 자격 확인 중…');
             try {
-                const response = await legacyPanelFetch(GAS_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: 'admin-password-login', loginId: id, password }),
-                });
-                const payload = await response.json();
-                if (!response.ok || !(payload.ok || payload.success) || !payload.session || !payload.session.token) {
+                /*
+                 * 구글은 이따금 JSON 대신 HTML 을 돌려준다 — 순간 할당량 초과·점검
+                 * 페이지다(실사고 2026-08-12: 서버를 직접 재현하면 JSON 이 정상으로
+                 * 오는데 브라우저 한 번이 HTML 을 받아 "Unexpected token '<'" 로
+                 * 죽었다). 일시 현상이므로 한 번 쉬었다 다시 보내고, 그래도 HTML 이면
+                 * JSON 파서의 외계어 대신 무슨 일인지 사람 말로 알린다.
+                 */
+                const attempt = async () => {
+                    const response = await legacyPanelFetch(GAS_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({ action: 'admin-password-login', loginId: id, password }),
+                    });
+                    const raw = await response.text();
+                    try { return { ok: response.ok, payload: JSON.parse(raw) }; }
+                    catch (parseErr) { return { ok: false, payload: null }; }
+                };
+                let result = await attempt();
+                if (!result.payload) {
+                    setLoginProgress('구글 응답 대기 중… 다시 시도합니다');
+                    await new Promise(r => setTimeout(r, 900));
+                    result = await attempt();
+                }
+                if (!result.payload) {
+                    throw new Error('구글 스크립트가 일시적으로 HTML 페이지를 돌려줬습니다(할당량·점검). 잠시 후 다시 로그인해 주세요.');
+                }
+                const payload = result.payload;
+                if (!result.ok || !(payload.ok || payload.success) || !payload.session || !payload.session.token) {
                     throw new Error(payload.error || payload.message || '아이디 또는 비밀번호가 올바르지 않습니다.');
                 }
                 setLoginProgress('저장 권한 연결 중…');
