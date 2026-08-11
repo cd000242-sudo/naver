@@ -224,14 +224,24 @@ function LewordStyles() {
             .lw-board-list { display: flex; flex-direction: column; gap: 10px; }
             .lw-board-list .lw-card-pre {
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) 232px 176px;
+                /*
+                 * 왼쪽이 넓어야 근거 문장이 한 줄에 들어간다. 실측 화면에서 근거가
+                 * 좁은 칸에 들어가 '문서수 3,801' 이 두 줄로 접혔다.
+                 */
+                grid-template-columns: minmax(0, 1fr) 190px 188px;
                 align-items: start;
-                gap: 18px;
+                gap: 20px;
+                padding: 16px 18px;
             }
+            /* 배지·제목·근거는 한 칸에 세로로 쌓인다(BoardCardHead 가 한 덩어리로 낸다). */
+            .lw-card-head { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
             .lw-board-list .lw-card-metrics {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                margin-top: 0; row-gap: 10px;
+                margin-top: 0; row-gap: 12px; column-gap: 10px;
             }
+            /* 세로 목록에서는 숫자가 카드 높이를 끌지 않게 조금 줄인다. */
+            .lw-board-list .lw-card-metrics strong { font-size: 16px; }
+            .lw-board-list .lw-evidence li { font-size: 12.5px; }
             .lw-board-list .lw-card-actions { flex-direction: column; gap: 6px; }
             .lw-board-list .lw-card-actions button,
             .lw-board-list .lw-card-actions a { flex: none; width: 100%; }

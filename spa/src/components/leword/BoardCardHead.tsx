@@ -49,7 +49,13 @@ function BoardCardHead({ row, rank }: { row: CardHeadRow; rank?: number }) {
         sampledTitles: row.serp?.sampledTitles,
     });
     return (
-        <>
+        /*
+         * **한 덩어리로 감싼다.** 예전에는 프래그먼트(<>)로 배지·제목·근거를 각각
+         * 내보냈다. 카드가 세로 flex 였을 때는 문제가 없었는데, 3열 그리드로 바꾸자
+         * 그 셋이 **각각 다른 열**로 흩어졌다(실측: 배지 1열·제목 2열·근거 3열,
+         * 지표와 액션은 둘째 줄로 밀렸다). 그리드는 자식 하나를 한 칸에 넣는다.
+         */
+        <div className="lw-card-head">
             <div className="lw-card-tags">
                 {row.layoutBestFor && SURFACE_TAG[row.layoutBestFor] && (
                     <span className={`lw-surface-tag surface-${row.layoutBestFor}`}>
@@ -94,7 +100,7 @@ function BoardCardHead({ row, rank }: { row: CardHeadRow; rank?: number }) {
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     );
 }
 
