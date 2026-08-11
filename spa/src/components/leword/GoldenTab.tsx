@@ -267,12 +267,18 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             LEWORD 키워드 분석
                                         </button>
                                         {/*
-                                          * 마인드맵 확장은 데스크톱 앱 기능이다. 웹에 없는 것을 있는 척
-                                          * 버튼으로 두면 눌러 보고 아무 일도 안 일어난다 — 그건 거짓말이다.
-                                          * 앱으로 보낸다는 사실을 글자로 적는다.
+                                          * 마인드맵 확장은 LEWORD 앱 기능이다(사장님 확인, 2026-08-11).
+                                          *
+                                          * 앱을 웹에서 직접 열 수는 없다 — 커스텀 프로토콜(leword://)을
+                                          * 등록하지 않기 때문이다. 그래서 '앱에서 열기'라고 적으면 안 된다.
+                                          * 눌러도 앱이 안 열리는데 열린다고 말하는 셈이다.
+                                          * 어디에 있는 기능인지만 적고 소개 화면으로 보낸다.
+                                          *
+                                          * 웹에도 붙이려면 엔진을 새로 만들 필요는 없다 — 모바일 API 에
+                                          * /v1/mindmap/expand 가 이미 있다(src/mobile/contracts.ts).
                                           */}
                                         <a href="/leword" target="_blank" rel="noreferrer">
-                                            마인드맵 확장키워드<small>앱에서 열기</small>
+                                            마인드맵 확장키워드<small>LEWORD 앱 기능</small>
                                         </a>
                                         {/* 데이터랩은 실제 검색량 추이를 그린다. 우리가 그리는 그림이 아니다. */}
                                         <a href={dataLabUrl(row.keyword)} target="_blank" rel="noreferrer">
