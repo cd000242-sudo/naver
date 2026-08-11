@@ -56,7 +56,13 @@ function driftedFiles(closure) {
       cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
     }).split('\n').filter(Boolean);
     const all = [...new Set([...changed, ...uncommitted])];
-    return { subject, hits: all.filter(f => closure.has(f)) };
+    // 해시 대상 중에는 git 이 추적하지 않는 생성 파일도 있다(src/runtime/version.generated.ts).
+    // diff 로는 절대 안 잡히므로 따로 알려준다 — 안 그러면 "바뀐 대상 없음"이라 오도한다.
+    const tracked = new Set(execFileSync('git', ['ls-files'], {
+      cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'],
+    }).split('\n').filter(Boolean));
+    const generated = [...closure].filter(f => !tracked.has(f));
+    return { subject, hits: all.filter(f => closure.has(f)), generated };
   } catch {
     return null; // git 이 없거나 저장소가 아니어도 점검 자체는 계속한다
   }
@@ -80,10 +86,14 @@ async function main() {
   if (drift) {
     console.log(`\n   핀 갱신 커밋: ${drift.subject}`);
     if (drift.hits.length === 0) {
-      console.log('   그 이후 바뀐 해시 대상 없음 — 줄끝/인코딩 차이를 의심하세요.');
+      console.log('   그 이후 바뀐 해시 대상 없음 (git 추적 기준).');
     } else {
       console.log(`   그 이후 바뀐 해시 대상 ${drift.hits.length}개:`);
       drift.hits.forEach(f => console.log(`     ● ${f}`));
+    }
+    if (drift.generated?.length) {
+      console.log(`   git 추적 밖 생성 파일 ${drift.generated.length}개 — 빌드마다 바뀐다:`);
+      drift.generated.forEach(f => console.log(`     ○ ${f}`));
     }
   }
 

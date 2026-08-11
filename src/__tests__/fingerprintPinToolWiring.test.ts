@@ -50,4 +50,16 @@ describe('지문 핀 도구', () => {
   it('점검 실패를 종료 코드로 알린다 — 조용히 통과하지 않는다', () => {
     expect(tool).toContain('process.exitCode = 1');
   });
+
+  /**
+   * [2026-08-12] v2.11.187 릴리스 중 발견.
+   * 해시 대상에는 src/runtime/version.generated.ts 처럼 git 이 추적하지 않는 생성 파일이 있다.
+   * diff 로는 절대 안 잡히므로, 버전업만 한 경우 도구가 "바뀐 대상 없음"이라 답해
+   * 원인을 줄끝 문제로 오도할 뻔했다.
+   */
+  it('git 추적 밖 생성 파일도 따로 알려준다', () => {
+    expect(tool).toContain("['ls-files']");
+    expect(tool).toContain('추적 밖 생성 파일');
+    expect(tool).not.toContain('줄끝/인코딩 차이를 의심');
+  });
 });
