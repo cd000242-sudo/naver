@@ -25,7 +25,8 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
     const makeLink = async (row: AffiliateProduct) => {
         setLinkState({ key: row.url, label: '만드는 중…' });
-        const res = await createCoupangDeeplink(row.url);
+        // 원본 주소로 변환한다 — API 의 productUrl 은 이미 추적 링크라 재변환이 "url convert failed" 로 죽는다.
+        const res = await createCoupangDeeplink(row.rawUrl || row.url);
         const shorten = res.data?.shortenUrl;
         if (!res.ok || !shorten) {
             setLinkState({ key: row.url, label: res.message || '실패 — 다시 시도' });
@@ -132,18 +133,22 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 )}
                                 <span>가격 <strong>{row.price === null ? '—' : `${row.price.toLocaleString('ko-KR')}원`}</strong></span>
                             </div>
-                            <div className="lw-lane-actions">
-                                <button type="button" onClick={() => void makeLink(row)}>
-                                    {linkState?.key === row.url ? linkState.label : '내 제휴링크 복사'}
-                                </button>
-                                <button type="button" onClick={() => onAnalyze(row.keyword)}>이 검색어 분석</button>
+                            <div className="lw-lane-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'flex-end' }}>
+                                <button type="button" onClick={() => onAnalyze(row.keyword)}>LEWORD 키워드분석</button>
+                                <a
+                                    href={`https://www.coupang.com/np/search?q=${encodeURIComponent(row.keyword)}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >쿠팡 검색해보기</a>
                                 {/* 정면 수치를 못 믿겠으면 직접 세어 보라 — 실측을 파는 보드는 검증 동선까지 줘야 한다. */}
                                 <a
                                     href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(row.keyword)}`}
                                     target="_blank"
                                     rel="noreferrer"
-                                >실제 검색 확인</a>
-                                <a href={row.url} target="_blank" rel="noreferrer">상품 보기</a>
+                                >네이버 검색분석</a>
+                                <button type="button" onClick={() => void makeLink(row)}>
+                                    {linkState?.key === row.url ? linkState.label : '내 제휴링크 복사(API키 있어야됨)'}
+                                </button>
                             </div>
                         </div>
                     </li>
