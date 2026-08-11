@@ -6948,76 +6948,22 @@
             }
         }
 
-        // ===== SERVERLESS HOME NOTICE BRIDGE =====
-        // The original notice editor UI is retained.  Its former Vultr
-        // snapshot endpoints are replaced with the existing GAS actions.
-        async function loadNotices() {
-            if (homeNoticeEditorState.saving) return;
-            const container = document.getElementById('notices-table-body');
-            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록을 불러오는 중…</div>';
-            try {
-                const response = await fetch(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' });
-                const payload = await response.json();
-                const items = Array.isArray(payload.notices) ? payload.notices : [];
-                homeNoticeEditorState = {
-                    revision: 0,
-                    notices: items.map(normalizeAdminNotice).filter(item => item.title),
-                    saving: false,
-                    source: 'gas'
-                };
-                renderAdminNoticeList();
-                homeOpsApiStatus('GAS 공지 저장소에 연결되었습니다.', false);
-            } catch (err) {
-                container.innerHTML = `<div style="padding:24px;text-align:center;color:#ff3b5c;">공지 목록을 불러오지 못했습니다: ${escapeHtml_(err.message || err)}</div>`;
-            }
-        }
-
-        async function submitNotice() {
-            const id = document.getElementById('notice-edit-id').value;
-            const bodyText = plainNoticeText(document.getElementById('notice-body').value, 8000);
-            const notice = {
-                id: id || undefined,
-                badge: document.getElementById('notice-badge').value,
-                date: document.getElementById('notice-date').value.trim(),
-                title: plainNoticeText(document.getElementById('notice-title').value, 200),
-                preview: plainNoticeText(document.getElementById('notice-preview').value, 300) || bodyText.replace(/\s+/g, ' ').slice(0, 300),
-                body: bodyText
-            };
-            if (!notice.title || !notice.body) { showToast('제목과 본문은 필수입니다.'); return; }
-            try {
-                const response = await fetch(GAS_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: id ? 'update-notice' : 'submit-notice', ...notice })
-                });
-                const payload = await response.json();
-                if (!(payload.ok || payload.success)) throw new Error(payload.error || payload.message || '공지 저장에 실패했습니다.');
-                showToast(id ? '홈 공지를 수정했습니다.' : '홈 공지를 발행했습니다.');
-                resetNoticeForm();
-                await loadNotices();
-            } catch (err) {
-                showToast('공지 저장 실패: ' + (err.message || err));
-            }
-        }
-
-        async function deleteNotice(encodedId) {
-            const id = decodeURIComponent(encodedId);
-            if (!id || !confirm('이 공지를 삭제할까요?')) return;
-            try {
-                const response = await fetch(GAS_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: 'delete-notice', id })
-                });
-                const payload = await response.json();
-                if (!(payload.ok || payload.success)) throw new Error(payload.error || payload.message || '공지 삭제에 실패했습니다.');
-                showToast('홈 공지를 삭제했습니다.');
-                resetNoticeForm();
-                await loadNotices();
-            } catch (err) {
-                showToast('공지 삭제 실패: ' + (err.message || err));
-            }
-        }
+        /*
+         * ── 여기 있던 "SERVERLESS HOME NOTICE BRIDGE" 블록을 지웠다 (2026-08-12) ──
+         *
+         * loadNotices · submitNotice · deleteNotice 를 **다시 정의**하던 구식 사본이다.
+         * 자바스크립트는 같은 이름의 함수 선언 중 마지막 것을 쓰므로, 파일 위쪽의
+         * 제대로 된 구현(아카이브 병합 · fetchGasJson · 저장 후 검증 · adminToken)을
+         * 이 블록이 통째로 덮고 있었다.
+         *
+         * 이 사본의 submitNotice 는 adminToken 없이 POST 해서 **무조건 Unauthorized**
+         * 였고, loadNotices 는 아카이브를 모른 채 "등록된 공지가 없습니다" 를 냈다.
+         * 위쪽을 아무리 고쳐도 화면이 안 바뀌던 이유가 이것이다 — 하루 종일.
+         *
+         * 이 파일은 handleLogin · handleLogout 도 두 번 정의돼 있다(뒤엣것이 정상).
+         * **같은 이름의 함수를 아래에 다시 선언하지 말 것.** 여기에 새 코드를 붙이면
+         * 위쪽 구현이 소리 없이 죽는다.
+         */
 
     </script>
 </body>
