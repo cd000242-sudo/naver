@@ -55,13 +55,24 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         );
     }
 
-    return (
-        <ol className="lw-product-list">
-            {(rows || []).map((row, index) => {
+    /*
+     * 사장님 지적: "검색량이 적고 문서량이 많네 — 이런 제품들은 선점하기 힘들지 않니."
+     * 맞다. 골드박스는 '쿠팡이 미는 상품'이지 '블로그 자리가 빈 상품'이 아니라서,
+     * 써볼 만한 것은 매일 몇 개뿐이다. 그래서 한 줄로 섞지 않고 두 덩이로 가른다.
+     * 기준은 황금지수(등급 SSoT의 사본) 그대로다 — 여기서 새 임계값을 만들지 않는다.
+     */
+    const all = rows || [];
+    const prime = all.filter((row) => {
+        const gi = goldenIndex(row.searchVolume, row.documentCount);
+        return gi !== null && gi.tier !== 'weak';
+    });
+    const rest = all.filter((row) => !prime.includes(row));
+
+    const renderRow = (row: AffiliateProduct, rank: number) => {
                 const index2 = goldenIndex(row.searchVolume, row.documentCount);
                 return (
                     <li key={row.url} className="lw-product">
-                        <span className="lw-product-rank">{index + 1}</span>
+                        <span className="lw-product-rank">{rank}</span>
                         {row.image && <img src={row.image} alt="" loading="lazy" />}
                         <div className="lw-product-body">
                             <div className="lw-product-tags">
@@ -88,8 +99,30 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         </div>
                     </li>
                 );
-            })}
-        </ol>
+    };
+
+    return (
+        <>
+            {prime.length > 0 && (
+                <>
+                    <p className="lw-write-hint"><strong>지금 써볼 만한 것</strong> — 찾는 사람 대비 쓴 글이 적습니다.</p>
+                    <ol className="lw-product-list">
+                        {prime.map((row, index) => renderRow(row, index + 1))}
+                    </ol>
+                </>
+            )}
+            {rest.length > 0 && (
+                <>
+                    <p className="lw-write-hint">
+                        <strong>판매 참고</strong> — 찾는 사람이 아직 적거나 이미 쓴 글이 많습니다.
+                        선점보다는 상품 소개 글감으로 보세요.
+                    </p>
+                    <ol className="lw-product-list">
+                        {rest.map((row, index) => renderRow(row, prime.length + index + 1))}
+                    </ol>
+                </>
+            )}
+        </>
     );
 }
 

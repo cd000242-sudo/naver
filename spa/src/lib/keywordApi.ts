@@ -10,6 +10,17 @@ import { GAS_URL } from './siteOps';
 import { loadUserKeys } from './userKeys';
 
 const ENDPOINT = GAS_URL;
+
+/**
+ * 쿠팡 보드는 Cloudflare Worker 가 맡는다.
+ *
+ * GAS 는 왕복만 1~3초가 바닥이다(콜드스타트+리다이렉트). 실측: 같은 요청이
+ * GAS 2,996ms · Worker 172~190ms. 라이선스·쿼터 장부가 필요 없는 액션이라
+ * (쿠팡 키는 방문자 것만 받는다) 상태 없이 옮길 수 있는 것부터 옮겼다.
+ * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
+ */
+const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
+const endpointFor = (action: string) => (action === 'keyword-coupang-board' ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
 const TIMEOUT_MS = 25000;
@@ -151,7 +162,7 @@ async function call<T>(action: string, params: Record<string, string>): Promise<
         // POST 로 보낸다. 개인 API 키가 실리기 때문에 쿼리스트링에 두면
         // URL 로그·브라우저 기록·리퍼러에 키가 남는다.
         // Content-Type 을 text/plain 으로 두어야 preflight 없이 GAS 로 간다.
-        const response = await fetch(ENDPOINT, {
+        const response = await fetch(endpointFor(action), {
             method: 'POST',
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({
