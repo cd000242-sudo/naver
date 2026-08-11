@@ -4,6 +4,9 @@ import type { ContentSource, ContentGeneratorProvider, ArticleType } from './con
 import type { ContentPolicyPayloadContext } from './contentPolicy/policyService.js';
 import { smartCrawler } from './crawler/smartCrawler.js';
 import { getProxyUrl, reportProxyFailed, reportProxySuccess } from './crawler/utils/proxyManager.js';
+import {
+  parseNaverPostDate, withFreshnessLabel, isStaleSource, mergeRecentFirst,
+} from './content/sourceFreshness.js';
 import { getChromiumExecutablePath } from './browserUtils.js';
 import { extractLabeledPrice, formatPriceOrEmpty, hasValidPrice, parsePrice } from './services/priceNormalizer.js';
 import { validateProductInfo } from './schemas/productInfoSchema.js';
@@ -127,6 +130,12 @@ interface NaverSearchResult {
   title: string;
   description: string;
   link: string;
+  /**
+   * [2026-08-11] 블로그 검색이 주는 작성일(YYYYMMDD).
+   * 이걸 버려서 모델이 자료 시점을 알 수 없었고, 작년 조건이 올해 글에 섞였다.
+   * 자세한 경위는 content/sourceFreshness.ts 주석 참고.
+   */
+  postdate?: string;
 }
 
 // ✅ 네이버 쇼핑 검색 결과 타입
@@ -781,6 +790,8 @@ async function searchNaverForContent(
             title,
             description,
             link: item.link || item.originallink || '',
+            // [2026-08-11] 시점 라벨용 — 예전엔 버렸다
+            postdate: typeof item.postdate === 'string' ? item.postdate : undefined,
           });
         }
       }
@@ -1607,20 +1618,33 @@ export async function collectTopArticleFullTexts(
 ): Promise<{ text: string; count: number; urls: string[] }> {
   const remainingMs = (): number => (deadlineAt ? deadlineAt - Date.now() : Number.POSITIVE_INFINITY);
   try {
+    /**
+     * [2026-08-11] 최신순을 함께 긁는다.
+     *   'sim' 단독이면 글이 가장 많이 쓰인 **첫 시행 연도** 글이 상위를 독점한다.
+     *   실측(Orbit, 같은 구조): "부산 청년 게임개발자 정착지원" sim 상위 5건이
+     *   전부 1년 이상 지난 글(2022·2024)이었고, 그 2024년 조건이 2026년 글에 섞여 나갔다.
+     *   date 를 섞으면 현재 공고 글이 재료에 반드시 들어온다.
+     */
     const settled = await Promise.allSettled([
       searchNaverForContent(keyword, clientId, clientSecret, 'blog', 8, 'sim'),
       searchNaverForContent(keyword, clientId, clientSecret, 'news', 4, 'sim'),
+      searchNaverForContent(keyword, clientId, clientSecret, 'blog', 8, 'date'),
     ]);
     const blogLinks = settled[0].status === 'fulfilled' ? settled[0].value : [];
     const newsLinks = settled[1].status === 'fulfilled' ? settled[1].value : [];
+    const recentBlogs = settled[2].status === 'fulfilled' ? settled[2].value : [];
+
     // Blogs first (closest to the target format), then news for hard facts.
-    const candidates = [...blogLinks, ...newsLinks]
-      .map((r) => ({ title: r.title, link: r.link }))
+    // 최신 블로그를 앞에 둔다 — 프롬프트가 잘릴 때 살아남아야 할 쪽이다.
+    const mergedBlogs = mergeRecentFirst(recentBlogs, blogLinks, 8, (r) => String(r.link || ''));
+    const candidates = [...mergedBlogs, ...newsLinks]
+      .map((r) => ({ title: r.title, link: r.link, postdate: r.postdate }))
       .filter((r) => typeof r.link === 'string' && /^https?:\/\//.test(r.link));
 
     const parts: string[] = [];
     const usedUrls: string[] = [];
     let totalChars = 0;
+    let staleParts = 0;   // [2026-08-11] 시점 경고를 붙인 자료 수
 
     let stoppedByDeadline = false;
     for (const candidate of candidates) {
@@ -1646,7 +1670,15 @@ export async function collectTopArticleFullTexts(
         if (content.length < 300) continue;
         const excerpt = content.substring(0, FULLTEXT_PER_ARTICLE_CHARS);
         const title = article.title || candidate.title || '';
-        parts.push(`[상위글 ${parts.length + 1}${title ? ` — ${title}` : ''}]\n${excerpt}`);
+        /**
+         * [2026-08-11] 자료 시점을 본문 앞에 박는다.
+         *   날짜가 없으면 모델은 그게 작년 자료인지 알 수 없고, 근거 대조도
+         *   "장부에 있는 값"이라 통과시켜 작년 조건이 그대로 실린다.
+         *   오래된 자료에는 "그대로 옮기지 말라"는 경고까지 붙는다.
+         */
+        const dated = withFreshnessLabel(excerpt, parseNaverPostDate(candidate.postdate));
+        if (isStaleSource(parseNaverPostDate(candidate.postdate))) staleParts += 1;
+        parts.push(`[상위글 ${parts.length + 1}${title ? ` — ${title}` : ''}]\n${dated}`);
         usedUrls.push(candidate.link);
         totalChars += excerpt.length;
         await new Promise((resolve) => setTimeout(resolve, 300));
@@ -1659,6 +1691,9 @@ export async function collectTopArticleFullTexts(
       logger(`[플랫폼 콘텐츠 수집] ⏱️ 시간 예산 소진 — 확보한 ${parts.length}건으로 진행합니다 (전부 버리지 않습니다)`);
     }
     if (parts.length === 0) return { text: '', count: 0, urls: [] };
+    if (staleParts > 0) {
+      logger(`[플랫폼 콘텐츠 수집] 🕐 1년 넘은 자료 ${staleParts}건 — 시점 경고를 붙였습니다 (작년 조건이 그대로 실리지 않도록)`);
+    }
     logger(`[플랫폼 콘텐츠 수집] 📚 상위글 풀텍스트 ${parts.length}건 확보 (${totalChars.toLocaleString()}자)`);
     return {
       text: `=== 상위 노출 글 본문 발췌 (사실 자료 — 수치·조건·절차는 이 자료 범위에서 사용) ===\n${parts.join('\n\n')}`,
