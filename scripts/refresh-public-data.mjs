@@ -3,13 +3,10 @@
  * 방문자 화면용 정적 스냅샷 생성기.
  *
  * 목적: leaderspro.kr 방문자 화면이 API 서버 없이도 살아있게 한다.
- * 서버(141.164.59.17)는 관리자 기능 때문에 계속 필요하지만, 서버가 죽었다고
- * 홈이 하드코딩 폴백으로 떨어지면 안 된다. 그래서 주기적으로 스냅샷을 떠서
+ * 별도 API 서버가 없어도 주기적으로 스냅샷을 떠서
  * Pages 정적 자산으로 커밋하고, SPA 는 정적본을 먼저 읽는다.
  *
- * 두 종류를 만든다.
- *  - 서버 미러: 공지/브리핑/다운로드 (관리자가 서버에 올린 것을 스냅샷)
- *  - 직접 수집: 실시간 검색어 (서버를 거치지 않고 원천에서 바로)
+ * 직접 수집한 실시간 검색어를 Pages 정적 자산으로 커밋한다.
  *
  * 안전 규칙(가장 중요): **좋은 데이터를 빈 데이터로 절대 덮지 않는다.**
  * 수집 실패·0건이면 기존 파일을 그대로 둔다. 서버가 죽은 날 스냅샷이 빈 값으로
@@ -22,31 +19,93 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_DIR = join(ROOT, 'spa', 'public', 'data');
-const SERVER = process.env.LEWORD_API_BASE || 'https://141.164.59.17.sslip.io';
 const TIMEOUT_MS = 15_000;
+const BRIGHTDATA_API_KEY = String(process.env.BRIGHTDATA_API_KEY || '').trim();
+const BRIGHTDATA_WEB_UNLOCKER_ZONE = String(process.env.BRIGHTDATA_WEB_UNLOCKER_ZONE || '').trim();
+const BRIGHTDATA_FALLBACK_MAX_REQUESTS = Math.max(0, Number(process.env.BRIGHTDATA_FALLBACK_MAX_REQUESTS || 0) || 0);
+const USE_BRIGHTDATA = Boolean(
+  BRIGHTDATA_API_KEY
+  && BRIGHTDATA_WEB_UNLOCKER_ZONE
+  && BRIGHTDATA_FALLBACK_MAX_REQUESTS > 0,
+);
+let brightDataFallbackRemaining = BRIGHTDATA_FALLBACK_MAX_REQUESTS;
 
-const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
+// Bright Data is a recovery-only path. Direct collection is the default so the
+// 5,000-request monthly allowance is not spent on routine 15-minute refreshes.
+const DIRECT_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (compatible; LeadersProSignalCollector/1.0; +https://leaderspro.kr)',
+  Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,application/json;q=0.8,*/*;q=0.5',
+  'Accept-Language': 'ko-KR,ko;q=0.9,en;q=0.6',
+};
+const NEWS_PER_KEYWORD = Math.min(3, Math.max(1, Number(process.env.NEWS_PER_KEYWORD || 2) || 2));
+const NEWS_FETCH_CONCURRENCY = Math.min(3, Math.max(1, Number(process.env.NEWS_FETCH_CONCURRENCY || 3) || 3));
+// The portal's directly collected rank is the evidence that a term is live.
+// News lookup enriches the card with context but must never hide a real source
+// signal when an article has not been matched yet. This is not Bright Data.
+const NEWS_MAX_QUERIES_PER_RUN = Math.min(60, Math.max(1, Number(process.env.NEWS_MAX_QUERIES_PER_RUN || 60) || 60));
+const INSIGHT_REFRESH_MINUTES = Math.min(240, Math.max(15, Number(process.env.INSIGHT_REFRESH_MINUTES || 60) || 60));
+const PLAYWRIGHT_ARTICLE_EXTRACTION = String(process.env.PLAYWRIGHT_ARTICLE_EXTRACTION || '1').trim() !== '0';
+const PLAYWRIGHT_ARTICLE_MAX_VISITS = Math.min(60, Math.max(1, Number(process.env.PLAYWRIGHT_ARTICLE_MAX_VISITS || 60) || 60));
+const PLAYWRIGHT_PAGE_TIMEOUT_MS = Math.min(20_000, Math.max(5_000, Number(process.env.PLAYWRIGHT_PAGE_TIMEOUT_MS || 12_000) || 12_000));
+const LLM_BRIEF_MAX_ITEMS = Math.min(20, Math.max(1, Number(process.env.LLM_BRIEF_MAX_ITEMS || 10) || 10));
+const KEYWORD_BRIEF_LLM_API_URL = String(process.env.KEYWORD_BRIEF_LLM_API_URL || '').trim();
+const KEYWORD_BRIEF_LLM_API_KEY = String(process.env.KEYWORD_BRIEF_LLM_API_KEY || '').trim();
+const KEYWORD_BRIEF_LLM_MODEL = String(process.env.KEYWORD_BRIEF_LLM_MODEL || '').trim();
+const GEMINI_API_KEY = String(process.env.GEMINI_API_KEY || '').trim();
+const GEMINI_MODEL = String(process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
 
 /** 상태 요약 — 워크플로 로그에서 한눈에 보이게 한다. */
 const report = [];
 
-async function get(url, { headers = {}, timeoutMs = TIMEOUT_MS, encoding = 'utf-8' } = {}) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try {
+async function directGet(url, { timeoutMs = TIMEOUT_MS, encoding = 'utf-8', headers = {} } = {}) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
     const res = await fetch(url, {
-      headers: { 'User-Agent': UA, ...headers },
+      headers: { ...DIRECT_HEADERS, ...headers },
       signal: controller.signal,
+      redirect: 'follow',
     });
     // 네이트 뉴스 등 EUC-KR 사이트는 text() 로 읽으면 한글이 깨진다.
     const buffer = await res.arrayBuffer();
     const text = new TextDecoder(encoding).decode(buffer);
-    return { ok: res.ok, status: res.status, text };
+    return { ok: res.ok, status: res.status, text, via: 'direct' };
   } catch (error) {
-    return { ok: false, status: 0, text: '', error: String(error?.message || error) };
+    return { ok: false, status: 0, text: '', error: String(error?.message || error), via: 'direct' };
   } finally {
     clearTimeout(timer);
   }
+}
+
+async function brightDataGet(url, { timeoutMs = TIMEOUT_MS, encoding = 'utf-8' } = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch('https://api.brightdata.com/request', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${BRIGHTDATA_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ zone: BRIGHTDATA_WEB_UNLOCKER_ZONE, url, format: 'raw' }),
+      signal: controller.signal,
+    });
+    const buffer = await res.arrayBuffer();
+    return { ok: res.ok, status: res.status, text: new TextDecoder(encoding).decode(buffer), via: 'brightdata' };
+  } catch (error) {
+    return { ok: false, status: 0, text: '', error: String(error?.message || error), via: 'brightdata' };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function get(url, options = {}) {
+  const direct = await directGet(url, options);
+  if (direct.ok || !USE_BRIGHTDATA || brightDataFallbackRemaining <= 0) return direct;
+
+  brightDataFallbackRemaining -= 1;
+  report.push(`  FALLBACK Bright Data (${BRIGHTDATA_FALLBACK_MAX_REQUESTS - brightDataFallbackRemaining}/${BRIGHTDATA_FALLBACK_MAX_REQUESTS}) ${new URL(url).hostname}`);
+  return brightDataGet(url, options);
 }
 
 function readExisting(fileName) {
@@ -81,30 +140,6 @@ function writeSnapshot(fileName, payload, count) {
   writeFileSync(path, `${next}\n`, 'utf8');
   report.push(`  WRITTEN  ${fileName} — ${count}건`);
   return 'written';
-}
-
-// ---------------------------------------------------------------- 서버 미러
-
-async function mirrorFromServer(fileName, path, pick) {
-  const res = await get(`${SERVER}${path}`, { headers: { Accept: 'application/json' } });
-  if (!res.ok) {
-    report.push(`  SKIP     ${fileName} — 서버 응답 ${res.status || res.error}`);
-    return;
-  }
-  // 200 인데 HTML 이면 API 가 아니라 에러 페이지다(과거 여러 번 물린 패턴).
-  if (res.text.trimStart().startsWith('<')) {
-    report.push(`  SKIP     ${fileName} — 200이지만 HTML 응답`);
-    return;
-  }
-  let payload;
-  try {
-    payload = JSON.parse(res.text);
-  } catch {
-    report.push(`  SKIP     ${fileName} — JSON 파싱 실패`);
-    return;
-  }
-  const items = pick(payload);
-  writeSnapshot(fileName, { source: 'server-mirror', items }, Array.isArray(items) ? items.length : 0);
 }
 
 // ---------------------------------------------------------------- 직접 수집
@@ -173,27 +208,295 @@ async function collectNateEntIssues() {
   return rows;
 }
 
-async function collectPolicy() {
-  // 복지서비스 공공데이터 — 문장 조각이 아니라 제도명 자체가 온다.
+function cleanIssueHeadline(raw) {
+  return decodeHtml(raw)
+    .replace(/\s+[가-힣]{2,5}\s+기자\s*(?:[·・|]\s*)?\d+\s*(?:분|시간)\s*전\s*$/u, '')
+    .replace(/\s*[·・|]\s*\d+\s*(?:분|시간)\s*전\s*$/u, '')
+    .replace(/\[[^\]]{1,32}\]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function extractIssueKeyword(title) {
+  const clean = cleanIssueHeadline(title);
+  if (!clean) return '';
+
+  // Keep an exact, useful headline when an unambiguous topic cannot be
+  // determined. A complete headline is much safer than a fabricated one-word
+  // "keyword" such as "배우", "결혼", or "10년".
+  const withoutLeadQuote = clean
+    .replace(/^[“"'‘][^”"'’]{2,42}[”"'’]\s*/u, '')
+    .replace(/^(?:배우|가수|방송인|개그맨|아이돌)\s+/u, '')
+    .trim();
+  const subject = withoutLeadQuote.split(/[,…]/u)[0].replace(/\s+/g, ' ').trim();
+  const event = clean.match(/결혼|웨딩|열애|동거|프로포즈|임신|출산|컴백|시구|하차|출연|공개|이별/u)?.[0] || '';
+
+  if (subject.includes('♥') && subject.length >= 3 && subject.length <= 32) {
+    return `${subject.replace(/♥/g, ' ').replace(/\s+/g, ' ')} ${event || '커플'}`.trim();
+  }
+  if (event && subject.length >= 2 && subject.length <= 24) {
+    return `${subject} ${event}`.trim();
+  }
+  return clean.slice(0, 72);
+}
+
+/**
+ * "2분 전", "3시간 전" 같은 상대 표기를 분으로 바꾼다.
+ * 이슈는 선점 여부가 시간에 달려 있어서 몇 분 전 기사인지가 판단 근거다.
+ */
+function parseAgoMinutes(text) {
+  const value = String(text || '').trim();
+  const m = value.match(/(\d+)\s*(분|시간|일)\s*전/);
+  if (!m) return null;
+  const n = Number(m[1]);
+  if (m[2] === '분') return n;
+  if (m[2] === '시간') return n * 60;
+  return n * 60 * 24;
+}
+
+/**
+ * 기사 목록을 카드 단위로 읽는다.
+ *
+ * 예전에는 <a> 태그만 훑어서 제목·링크만 건졌다. 그래서 이슈 레인에는
+ * 대표 사진도 게시 시각도 없었다(실측: 이슈만 이미지 2/10, 시각 0/10).
+ * 사진은 목록에 이미 실려 오고, 시각도 <time> 에 절대·상대 둘 다 있다.
+ * 다시 검색해서 채우려 하지 말고 여기서 같이 챙긴다.
+ */
+function parseLatestIssueArticles(html, { baseUrl, sourceLabel, hrefPattern }) {
+  const rows = [];
+  const seen = new Set();
+
+  // 카드 경계(<li> 또는 <article>) 로 잘라야 제목·시각·이미지가 서로 섞이지 않는다.
+  const cards = String(html).split(/<li[\s>]|<article[\s>]/).slice(1);
+  for (const card of cards) {
+    const hrefMatch = card.match(/href="([^"]+)"/);
+    if (!hrefMatch || !hrefPattern.test(hrefMatch[1])) continue;
+
+    const headingMatch = card.match(/<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/);
+    const rawTitle = headingMatch ? headingMatch[1] : card;
+    const title = cleanIssueHeadline(rawTitle);
+    const keyword = extractIssueKeyword(title);
+    const url = safeHttpUrl(hrefMatch[1].startsWith('http')
+      ? hrefMatch[1]
+      : new URL(hrefMatch[1], baseUrl).toString());
+    const key = title.replace(/[^0-9A-Za-z가-힣]+/g, '').toLowerCase();
+    if (title.length < 8 || !keyword || !url || seen.has(key)) continue;
+    seen.add(key);
+
+    const timeMatch = card.match(/<time[^>]*dateTime="([^"]*)"[^>]*>([\s\S]*?)<\/time>/i)
+      || card.match(/<time[^>]*>([\s\S]*?)<\/time>/i);
+    const agoText = timeMatch ? decodeHtml(timeMatch[timeMatch.length - 1]).replace(/<[^>]+>/g, '').trim() : '';
+    const absolute = timeMatch && timeMatch.length > 2 ? decodeHtml(timeMatch[1]).trim() : '';
+
+    // srcSet 은 여러 후보를 담고 있으니 첫 주소만 쓴다.
+    const imageMatch = card.match(/(?:srcSet|srcset|src)="([^"\s]+\.(?:jpg|jpeg|png|webp|avif)[^"\s]*)/i)
+      || card.match(/(?:srcSet|srcset)="([^"\s]+)/i);
+    const image = imageMatch ? safeHttpUrl(imageMatch[1].startsWith('http')
+      ? imageMatch[1]
+      : new URL(imageMatch[1], baseUrl).toString()) : '';
+
+    rows.push({
+      keyword,
+      title,
+      context: `${sourceLabel} 최신 기사 · ${title}`,
+      officialUrl: url,
+      sourceLabel,
+      ...(agoText ? { ago: agoText } : {}),
+      ...(parseAgoMinutes(agoText) !== null ? { agoMinutes: parseAgoMinutes(agoText) } : {}),
+      ...(absolute ? { publishedLabel: absolute } : {}),
+      ...(image ? { image } : {}),
+    });
+  }
+  return rows;
+}
+
+async function collectLatestIssueHeadlines() {
+  const [starnews, sportschosun] = await Promise.all([
+    get('https://www.starnewskorea.com/latest-news/all'),
+    get('https://sports.chosun.com/entertainment/'),
+  ]);
+
+  const newest = starnews.ok
+    ? parseLatestIssueArticles(starnews.text, {
+      baseUrl: 'https://www.starnewskorea.com',
+      sourceLabel: '스타뉴스',
+      hrefPattern: /^\/(star|entertainment|broadcast-drama|broadcast-show|broadcast-|music)\//,
+    })
+    : [];
+  const fallback = sportschosun.ok
+    ? parseLatestIssueArticles(sportschosun.text, {
+      baseUrl: 'https://sports.chosun.com',
+      sourceLabel: '스포츠조선',
+      hrefPattern: /\/entertainment\//,
+    })
+    : [];
+  const seen = new Set();
+  return [...newest, ...fallback]
+    .filter((row) => {
+      const key = row.title.replace(/[^0-9A-Za-z가-힣]+/g, '').toLowerCase();
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, 10)
+    .map((row, index) => ({ ...row, rank: index + 1 }));
+}
+
+async function collectOfficialPolicyBriefings() {
+  const res = await get('https://www.korea.kr/briefing/pressReleaseList.do');
+  if (!res.ok) return [];
+  const rows = [];
+  const seen = new Set();
+  const pattern = /<a href="([^"]*pressReleaseView[^\"]*)">[\s\S]{0,900}?<strong>([\s\S]*?)<\/strong>[\s\S]{0,1300}?<span class="lead">([\s\S]*?)<\/span>[\s\S]{0,700}?<span class="source">[\s\S]{0,300}?<span>([^<]+)<\/span>/g;
+  for (const match of res.text.matchAll(pattern)) {
+    const keyword = decodeHtml(match[2]).slice(0, 80);
+    if (!keyword || seen.has(keyword)) continue;
+    seen.add(keyword);
+    rows.push({
+      rank: rows.length + 1,
+      keyword,
+      context: `${decodeHtml(match[4]).slice(0, 50) || '대한민국 정책브리핑'} 공식 발표 · ${decodeHtml(match[3]).slice(0, 160)}`,
+      officialUrl: `https://www.korea.kr${match[1].replace(/&amp;/g, '&')}`,
+    });
+    if (rows.length >= 10) break;
+  }
+  return rows;
+}
+
+async function collectOfficialPolicyBriefingsWithPlaywright() {
+  const articleBrowser = await launchArticleBrowser();
+  if (!articleBrowser) return [];
+  let page = null;
+  try {
+    page = await articleBrowser.context.newPage();
+    page.setDefaultTimeout(5_000);
+    page.setDefaultNavigationTimeout(PLAYWRIGHT_PAGE_TIMEOUT_MS);
+    await page.goto('https://www.korea.kr/briefing/pressReleaseList.do', {
+      waitUntil: 'commit',
+      timeout: PLAYWRIGHT_PAGE_TIMEOUT_MS,
+    });
+    await page.waitForTimeout(600);
+    const rows = await page.locator('a[href*="pressReleaseView"]').evaluateAll((links) => links
+      .map((link) => ({ href: link.href, title: (link.textContent || '').replace(/\s+/g, ' ').trim() }))
+      .filter((row) => row.href && row.title.length >= 6 && row.title.length <= 120)
+      .slice(0, 20));
+    const seen = new Set();
+    return rows
+      .filter((row) => {
+        const key = row.title.replace(/\s+/g, ' ');
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .slice(0, 10)
+      .map((row, index) => ({
+        rank: index + 1,
+        keyword: row.title,
+        context: `대한민국 정책브리핑 공식 발표 · ${row.title}`,
+        officialUrl: row.href,
+        sourceLabel: '대한민국 정책브리핑',
+      }));
+  } catch (error) {
+    report.push(`  WARN     정책 Playwright 수집 실패: ${String(error?.message || error)}`);
+    return [];
+  } finally {
+    await page?.close().catch(() => {});
+    await articleBrowser.context.close().catch(() => {});
+    await articleBrowser.browser.close().catch(() => {});
+  }
+}
+
+/**
+ * data.go.kr 서비스키를 URL 에 안전하게 싣는다.
+ *
+ * 포털이 Encoding 키와 Decoding 키를 둘 다 준다. 디코딩 키를 그대로 넣으면
+ * 안에 있는 '+' 가 쿼리스트링에서 공백으로 해석돼 인증이 깨진다. 반대로 이미
+ * 인코딩된 키를 또 인코딩하면 '%' 가 '%25' 가 되어 역시 깨진다.
+ * 그래서 이미 인코딩된 형태인지 보고 한 번만 인코딩한다.
+ */
+function encodeServiceKey(key) {
+  return /%[0-9A-Fa-f]{2}/.test(key) ? key : encodeURIComponent(key);
+}
+
+/**
+ * 복지서비스 공공데이터 — 문장 조각이 아니라 제도명 자체가 온다.
+ * 레인 설명("복지서비스 공공데이터에서 조회수 상위로 뽑은 제도명")이 가리키는
+ * 원래 1순위 소스다. korea.kr 스크래핑보다 먼저 시도한다 — korea.kr 은
+ * GitHub Actions IP 에서 막혀 크론에서만 조용히 0건이 됐다(실측: 로컬 20건 / CI 타임아웃).
+ */
+async function collectWelfareServices() {
   const key = String(process.env.WELFARE_API_KEY || '').trim();
   if (!key) {
-    report.push('  WARN     정책 레인 — WELFARE_API_KEY 미설정, 건너뜀');
+    report.push('  WARN     정책 복지 API — WELFARE_API_KEY 미설정');
     return [];
   }
   const url = 'https://apis.data.go.kr/B554287/NationalWelfareInformationsV001/NationalWelfarelistV001'
-    + `?serviceKey=${key}&callTp=L&pageNo=1&numOfRows=30&srchKeyCode=003&orderBy=popular`;
+    // 이 API 는 Accept 헤더를 무시하고 기본 XML 을 돌려준다. _type=json 이 있어야
+    // JSON 이 온다(로그에 <?xml ...><wantedList> 가 찍혀서 확인됐다).
+    + `?serviceKey=${encodeServiceKey(key)}&callTp=L&pageNo=1&numOfRows=30&srchKeyCode=003&orderBy=popular&_type=json`;
   const res = await get(url, { headers: { Accept: 'application/json' } });
-  if (!res.ok) return [];
-  try {
-    const list = JSON.parse(res.text).servList || [];
-    return list
-      .map((row) => String(row.servNm || '').replace(/\s+/g, ' ').trim())
-      .filter(Boolean)
-      .slice(0, 10)
-      .map((keyword, index) => ({ rank: index + 1, keyword }));
-  } catch {
+  if (!res.ok) {
+    report.push(`  WARN     정책 복지 API HTTP ${res.status}`);
     return [];
   }
+
+  const body = String(res.text || '').trim();
+  let rows = [];
+  if (body.startsWith('{')) {
+    let parsed;
+    try {
+      parsed = JSON.parse(body);
+    } catch {
+      // 실패를 조용히 삼키면 "왜 0건인지" 를 영영 모른다. 실제로 그래서 오래 방치됐다.
+      report.push(`  WARN     정책 복지 API 응답 파싱 실패: ${body.slice(0, 80)}`);
+      return [];
+    }
+    const apiError = parsed?.OpenAPI_ServiceResponse?.cmmMsgHeader;
+    if (apiError) {
+      report.push(`  WARN     정책 복지 API 오류: ${apiError.returnAuthMsg || apiError.errMsg}`);
+      return [];
+    }
+    const list = parsed.servList || parsed?.wantedList?.servList || [];
+    rows = list.map((row) => String(row.servNm || '').trim());
+  } else {
+    // _type=json 을 무시하고 XML 로 오는 경우가 있다. 파서를 새로 들이는 대신
+    // 필요한 제도명 태그만 꺼낸다 — 여기서 필요한 건 servNm 하나뿐이다.
+    const xmlError = body.match(/<returnAuthMsg>([^<]+)<\/returnAuthMsg>/)
+      || body.match(/<errMsg>([^<]+)<\/errMsg>/);
+    if (xmlError) {
+      report.push(`  WARN     정책 복지 API 오류: ${xmlError[1]}`);
+      return [];
+    }
+    rows = [...body.matchAll(/<servNm>([\s\S]*?)<\/servNm>/g)]
+      .map((m) => decodeHtml(m[1]).replace(/<!\[CDATA\[|\]\]>/g, '').trim());
+  }
+
+  const out = rows
+    .map((name) => name.replace(/\s+/g, ' ').trim())
+    .filter(Boolean)
+    .slice(0, 10)
+    .map((keyword, index) => ({ rank: index + 1, keyword }));
+  if (out.length === 0) report.push('  WARN     정책 복지 API 응답에 제도명 없음');
+  return out;
+}
+
+async function collectPolicy() {
+  const welfareRows = await collectWelfareServices();
+  if (welfareRows.length > 0) {
+    report.push(`  INFO     정책 복지 API ${welfareRows.length}건`);
+    return welfareRows;
+  }
+  const officialRows = await collectOfficialPolicyBriefings();
+  if (officialRows.length > 0) {
+    report.push(`  INFO     정책 korea.kr 직접 수집 ${officialRows.length}건`);
+    return officialRows;
+  }
+  const browserRows = await collectOfficialPolicyBriefingsWithPlaywright();
+  if (browserRows.length > 0) {
+    report.push(`  INFO     정책 Playwright 원본 수집 ${browserRows.length}건`);
+    return browserRows;
+  }
+  return [];
 }
 
 async function collectZum() {
@@ -211,28 +514,477 @@ const LANE_DESC = {
   nate: '네이트 실시간 이슈 키워드에서 수집한 검색 신호입니다.',
   zum: 'ZUM 이슈검색어에서 수집한 검색 신호입니다.',
   policy: '복지서비스 공공데이터에서 조회수 상위로 뽑은 제도명입니다.',
-  issue: '네이트 연예 랭킹에서 수집한 방송·연예 흐름입니다.',
+  issue: '최신 연예 기사 흐름에서 수집한 이슈입니다.',
 };
+
+const BROAD_SIGNAL_TERMS = new Set([
+  '채무', '배우', '결혼', '연예', '뉴스', '이슈', '사건', '사고', '주식', '코인', '날씨', '부동산', '대출', '보험',
+]);
+const EXCLUDED_BROAD_SIGNAL_TERMS = new Set([
+  ...BROAD_SIGNAL_TERMS,
+  '의과대학', '의대',
+]);
+const WEAK_EXPANSION_SUFFIX = /(?:뜻|의미|나무위키|영어로|인스타|프로필|직업|고향|나이|사진)$/u;
+
+function isDisplayableSignal(laneId, row) {
+  if (laneId === 'issue') return true;
+  const compact = String(row?.keyword || '').replace(/\s+/g, '');
+  // A generic category without a verified article has no reliable subject to
+  // put on a mind map. Do not replace it with a random autocomplete result.
+  return Boolean(compact) && !EXCLUDED_BROAD_SIGNAL_TERMS.has(compact);
+}
+
+function selectCoreSignalKeyword(row) {
+  const raw = String(row?.keyword || '').replace(/\s+/g, ' ').trim();
+  if (!raw) return '';
+  const compact = raw.replace(/\s+/g, '');
+  // Preserve genuine multi-word portal terms. Only replace a clearly broad,
+  // one-word signal with a measured autocomplete continuation.
+  if (!BROAD_SIGNAL_TERMS.has(compact) && compact.length > 2) return raw;
+
+  const specific = (row?.expansions || [])
+    .map((value) => String(value || '').replace(/\s+/g, ' ').trim())
+    .find((candidate) => {
+      const candidateCompact = candidate.replace(/\s+/g, '');
+      return candidateCompact.startsWith(compact)
+        && candidateCompact.length >= compact.length + 2
+        && candidateCompact.length <= 28
+        && !WEAK_EXPANSION_SUFFIX.test(candidate);
+    });
+  return specific || raw;
+}
 
 /**
  * SPA 카드가 기대하는 필드로 맞춘다.
  * keyword 만 넣으면 설명·점수 칸이 빈 채로 렌더돼 카드가 깨져 보인다.
  */
 function toSignalItems(laneId, rows) {
-  return rows.map((row, index) => ({
+  return rows.filter((row) => isDisplayableSignal(laneId, row)).map((row, index) => ({
     id: `${laneId}-${index + 1}`,
-    keyword: row.keyword,
-    title: row.keyword,
-    // 이슈 레인은 원 기사 제목을 맥락으로 보여준다(키워드는 개체명).
+    rank: Number(row.rank) || index + 1,
+    keyword: selectCoreSignalKeyword(row),
+    title: row.title || row.keyword,
+    rawKeyword: row.keyword,
+    // 이슈 레인은 원 기사 제목을 맥락으로 보여준다.
     description: row.context || LANE_DESC[laneId] || '실시간 수집 신호입니다.',
     // 순위를 점수로 환산한다(1위=100). 실측 지표가 아니라 표시용 정렬값이다.
     priority: Math.max(1, 100 - index),
     source: laneId,
+    officialUrl: row.officialUrl,
+    sourceLabel: row.sourceLabel,
     // 네이버 자동완성 실측 확장(사람들이 실제로 이어서 치는 검색어)
     expansions: row.expansions || [],
     // 확장을 뽑은 시드(헤드라인 전체가 아니라 개체명일 수 있음 — 표시 정직성용)
     expansionSeed: row.expansionSeed,
+    // 게시 시각 — 이슈는 선점 여부가 시간에 달려 있다. 몇 분 전 기사인지가
+    // "지금 써도 되는 키워드인가" 판단의 근거라 원본에서 온 값을 그대로 싣는다.
+    ...(row.ago ? { ago: row.ago } : {}),
+    ...(Number.isFinite(row.agoMinutes) ? { agoMinutes: row.agoMinutes } : {}),
+    ...(row.publishedLabel ? { publishedLabel: row.publishedLabel } : {}),
+    // 목록에 이미 실려 온 대표 사진. 재검색으로 채우려다 이슈 레인만 비었었다.
+    ...(row.image ? { image: row.image } : {}),
   }));
+}
+
+function decodeHtml(value) {
+  return String(value || '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&#x([0-9a-f]+);/gi, (_match, hex) => String.fromCodePoint(Number.parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_match, decimal) => String.fromCodePoint(Number.parseInt(decimal, 10)))
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;|&apos;/gi, "'")
+    .replace(/&amp;/gi, '&')
+    .replace(/&lt;/gi, '<')
+    .replace(/&gt;/gi, '>')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function cleanNewsValue(value, limit = 220) {
+  return decodeHtml(value).replace(/\s*\|\s*[^|]{1,40}$/u, '').slice(0, limit).trim();
+}
+
+function safeHttpUrl(value) {
+  const url = String(value || '').trim();
+  return /^https?:\/\//i.test(url) ? url : '';
+}
+
+function readJsonObject(text, start) {
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+  for (let index = start; index < text.length; index += 1) {
+    const char = text[index];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (char === '\\') escaped = true;
+      else if (char === '"') inString = false;
+      continue;
+    }
+    if (char === '"') { inString = true; continue; }
+    if (char === '{') depth += 1;
+    if (char === '}') {
+      depth -= 1;
+      if (depth === 0) return text.slice(start, index + 1);
+    }
+  }
+  return '';
+}
+
+function parseNaverNewsResults(html) {
+  const rows = [];
+  const seen = new Set();
+  const templates = html.matchAll(/"templateId"\s*:\s*"newsItem"/g);
+
+  for (const template of templates) {
+    // A page-level layout also has a props object around every card.  Starting
+    // from that outer object skips all nested news cards, so find the props
+    // object paired with each newsItem template instead.
+    const propsMarker = html.lastIndexOf('{"props":', template.index);
+    if (propsMarker < 0) continue;
+    const objectStart = html.indexOf('{', propsMarker + '{"props":'.length);
+    if (objectStart < 0) continue;
+    const rawProps = readJsonObject(html, objectStart);
+    if (!rawProps || objectStart + rawProps.length > template.index) continue;
+
+    try {
+      const props = JSON.parse(rawProps);
+      const title = cleanNewsValue(props.title, 180);
+      const url = safeHttpUrl(props.contentHref || props.titleHref);
+      if (!title || !url || seen.has(url)) continue;
+      seen.add(url);
+      const excerpt = cleanNewsValue(props.content, 260) || title;
+      const press = cleanNewsValue(props.sourceProfile?.title, 60) || new URL(url).hostname;
+      const image = safeHttpUrl(props.imageSrc);
+      rows.push({ title, excerpt, url, press, image });
+    } catch {
+      // The Naver search page can include experimental cards with a non-JSON props block.
+    }
+  }
+  return rows;
+}
+
+async function fetchNaverNews(keyword) {
+  const url = 'https://search.naver.com/search.naver?where=news&query=' + encodeURIComponent(keyword);
+  const res = await get(url, { timeoutMs: 12_000, headers: { Referer: 'https://search.naver.com/' } });
+  if (!res.ok) return [];
+  return parseNaverNewsResults(res.text).slice(0, NEWS_PER_KEYWORD);
+}
+
+async function launchArticleBrowser() {
+  if (!PLAYWRIGHT_ARTICLE_EXTRACTION) return null;
+  try {
+    const { chromium } = await import('playwright');
+    const browser = await chromium.launch({ headless: true, timeout: PLAYWRIGHT_PAGE_TIMEOUT_MS });
+    const context = await browser.newContext({
+      locale: 'ko-KR',
+      viewport: { width: 1280, height: 900 },
+    });
+    return { browser, context };
+  } catch (error) {
+    report.push(`  WARN     Playwright article extraction unavailable: ${String(error?.message || error)}`);
+    return null;
+  }
+}
+
+function cleanArticleExcerpt(value, fallback) {
+  const text = decodeHtml(value)
+    .replace(/(?:무단\s*전재|재배포\s*금지)[\s\S]*$/u, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  return (text || cleanNewsValue(fallback, 420)).slice(0, 420).trim();
+}
+
+async function extractFirstArticleWithPlaywright(context, keyword, fallbackArticle) {
+  let page = null;
+  try {
+    page = await Promise.race([
+      context.newPage(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('article page creation timeout')), PLAYWRIGHT_PAGE_TIMEOUT_MS)),
+    ]);
+    page.setDefaultTimeout(5_000);
+    page.setDefaultNavigationTimeout(PLAYWRIGHT_PAGE_TIMEOUT_MS);
+    const searchUrl = 'https://search.naver.com/search.naver?where=news&query=' + encodeURIComponent(keyword);
+    await page.goto(searchUrl, { waitUntil: 'commit', timeout: PLAYWRIGHT_PAGE_TIMEOUT_MS });
+    const firstResultUrl = await page.locator('a.news_tit').first().getAttribute('href').catch(() => null);
+    const articleUrl = safeHttpUrl(firstResultUrl) || safeHttpUrl(fallbackArticle?.url);
+    if (!articleUrl) return { article: fallbackArticle, extracted: false };
+
+    await page.goto(articleUrl, { waitUntil: 'commit', timeout: PLAYWRIGHT_PAGE_TIMEOUT_MS });
+    await page.waitForTimeout(450);
+    const extracted = await page.evaluate(() => {
+      const meta = (name) => document.querySelector(`meta[property="${name}"], meta[name="${name}"]`)?.getAttribute('content') || '';
+      const selectors = [
+        '#dic_area', '#articleBodyContents', '#articeBody', '#newsct_article',
+        '.article_body', '.article-body', '.news-view-body', '.article-view', 'article', 'main',
+      ];
+      const candidates = selectors
+        .map((selector) => document.querySelector(selector))
+        .filter(Boolean)
+        .map((node) => {
+          const clone = node.cloneNode(true);
+          clone.querySelectorAll('script, style, noscript, iframe, nav, header, footer, button, .ad, .advertisement').forEach((child) => child.remove());
+          return clone.innerText || clone.textContent || '';
+        })
+        .map((text) => text.replace(/\s+/g, ' ').trim())
+        .filter((text) => text.length >= 80)
+        .sort((a, b) => b.length - a.length);
+      const rawImage = meta('og:image') || document.querySelector('article img[src], main img[src], img[src]')?.getAttribute('src') || '';
+      let image = rawImage;
+      try { image = rawImage ? new URL(rawImage, location.href).toString() : ''; } catch { image = ''; }
+      return {
+        title: meta('og:title') || document.title || '',
+        description: meta('description') || '',
+        text: candidates[0] || '',
+        image,
+      };
+    });
+    return {
+      article: {
+        ...fallbackArticle,
+        title: cleanNewsValue(extracted.title || fallbackArticle?.title, 180) || fallbackArticle?.title,
+        excerpt: cleanArticleExcerpt(extracted.text || extracted.description, fallbackArticle?.excerpt),
+        image: safeHttpUrl(extracted.image) || fallbackArticle?.image || '',
+        url: articleUrl,
+      },
+      extracted: Boolean(extracted.text || extracted.description || extracted.image),
+    };
+  } catch {
+    return { article: fallbackArticle, extracted: false };
+  } finally {
+    await page?.close().catch(() => {});
+  }
+}
+
+async function mapWithConcurrency(values, limit, worker) {
+  const results = new Array(values.length);
+  let cursor = 0;
+  const run = async () => {
+    while (cursor < values.length) {
+      const index = cursor;
+      cursor += 1;
+      try {
+        results[index] = await worker(values[index], index);
+      } catch {
+        results[index] = null;
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(limit, values.length) }, run));
+  return results;
+}
+
+function sourceGroundedTitles(keyword, laneId, headlines) {
+  const lead = cleanNewsValue(headlines[0], 72) || keyword;
+  const laneLabel = LANE_COLLECTORS.find((lane) => lane.id === laneId)?.label || laneId;
+  return {
+    seo: `${keyword} 최신 이슈와 핵심 내용 정리`,
+    home: `${keyword}, ${lead} 관련 확인할 점`,
+    topic: keyword,
+    topicGroup: `${laneLabel} 실시간 검색어`,
+  };
+}
+
+function needsInsightRefresh(item, now = Date.now()) {
+  const collectedAt = Date.parse(String(item.insight?.collectedAt || ''));
+  return item.insight?.extraction !== 'playwright'
+    || !Number.isFinite(collectedAt)
+    || now - collectedAt >= INSIGHT_REFRESH_MINUTES * 60_000;
+}
+
+function selectInsightTargets(lanes) {
+  const queues = lanes.map((lane) => ({
+    lane,
+    items: lane.items.filter((item) => needsInsightRefresh(item)),
+  }));
+  const targets = [];
+  for (let rank = 0; targets.length < NEWS_MAX_QUERIES_PER_RUN; rank += 1) {
+    let added = false;
+    for (const queue of queues) {
+      const item = queue.items[rank];
+      if (!item) continue;
+      targets.push({ lane: queue.lane, item });
+      added = true;
+      if (targets.length >= NEWS_MAX_QUERIES_PER_RUN) break;
+    }
+    if (!added) break;
+  }
+  return targets;
+}
+
+async function enrichSourceInsights(lanes) {
+  const targets = selectInsightTargets(lanes);
+  const collectedAt = new Date().toISOString();
+  const articleBrowser = targets.length > 0 ? await launchArticleBrowser() : null;
+  let browserVisits = 0;
+  let browserExtracted = 0;
+  try {
+    const results = await mapWithConcurrency(targets, NEWS_FETCH_CONCURRENCY, async ({ lane, item }) => {
+      const newsArticles = await fetchNaverNews(item.keyword);
+      const officialUrl = safeHttpUrl(item.officialUrl);
+      const officialArticle = officialUrl
+        ? [{ title: item.title || item.keyword, excerpt: item.description || item.keyword, url: officialUrl, press: item.sourceLabel || '대한민국 정책브리핑', image: '' }]
+        : [];
+      const firstNews = newsArticles[0];
+      let primaryArticle = firstNews;
+      let playwrightExtracted = false;
+      if (articleBrowser && browserVisits < PLAYWRIGHT_ARTICLE_MAX_VISITS) {
+        browserVisits += 1;
+        const result = await extractFirstArticleWithPlaywright(articleBrowser.context, item.keyword, firstNews || officialArticle[0]);
+        if (result.article) {
+          primaryArticle = result.article;
+          playwrightExtracted = result.extracted;
+          if (playwrightExtracted) browserExtracted += 1;
+        }
+      }
+      const articles = [...officialArticle, ...(primaryArticle ? [primaryArticle] : []), ...newsArticles.slice(firstNews ? 1 : 0)]
+        .filter((article, index, all) => article?.url && all.findIndex((candidate) => candidate?.url === article.url) === index);
+      if (articles.length === 0) return null;
+      const headlines = articles.map((article) => article.title);
+      return {
+        lane,
+        item,
+        insight: {
+          titles: sourceGroundedTitles(item.keyword, lane.id, headlines),
+          facts: articles.map((article, sourceIndex) => ({ text: article.excerpt, sourceIndex })),
+          links: articles.map((article) => ({ url: article.url, press: article.press })),
+          // 뉴스 재검색으로 사진을 못 구하면 목록에서 이미 받아 둔 기사 사진을 쓴다.
+          // 이슈 레인은 키워드가 기사 제목 통째라 재검색이 거의 안 걸려
+          // 이미지가 10건 중 2건뿐이었다. 원본이 이미 준 걸 버릴 이유가 없다.
+          images: [...new Set([
+            ...articles.map((article) => article.image),
+            item.image,
+          ].filter(Boolean))].slice(0, 1),
+          press: [...new Set(articles.map((article) => article.press))],
+          headlines,
+          extraction: playwrightExtracted ? 'playwright' : 'search-card',
+          collectedAt,
+        },
+      };
+    });
+
+    let count = 0;
+    for (const result of results) {
+      if (!result?.insight) continue;
+      result.item.insight = result.insight;
+      count += 1;
+    }
+    if (browserExtracted > 0) report.push(`  INFO     Playwright article body/image extraction ${browserExtracted} items`);
+    return count;
+  } finally {
+    await articleBrowser?.context?.close().catch(() => {});
+    await articleBrowser?.browser?.close().catch(() => {});
+  }
+}
+
+function parseJsonObject(value) {
+  const text = String(value || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
+  try {
+    const parsed = JSON.parse(text);
+    return parsed && typeof parsed === 'object' ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
+function briefPrompt(rows) {
+  return [
+    'You are an editor for a Korean real-time search dashboard.',
+    'Use only the provided news headlines. Do not invent facts, dates, people, or claims.',
+    'For every input row, return concise Korean titles for a search-focused article and a homepage article.',
+    'Return strict JSON only: {"items":[{"id":"...","seo":"...","home":"...","topic":"...","topicGroup":"..."}]}.',
+    'Each title must be 18-58 Korean characters and must keep the original keyword intent.',
+    JSON.stringify(rows),
+  ].join('\n');
+}
+
+async function callConfiguredLlm(prompt) {
+  if (KEYWORD_BRIEF_LLM_API_URL && KEYWORD_BRIEF_LLM_MODEL) {
+    const res = await fetch(KEYWORD_BRIEF_LLM_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(KEYWORD_BRIEF_LLM_API_KEY ? { Authorization: `Bearer ${KEYWORD_BRIEF_LLM_API_KEY}` } : {}),
+      },
+      body: JSON.stringify({
+        model: KEYWORD_BRIEF_LLM_MODEL,
+        temperature: 0.2,
+        messages: [
+          { role: 'system', content: 'Return only valid JSON. Never add facts that are not in the supplied headlines.' },
+          { role: 'user', content: prompt },
+        ],
+      }),
+    });
+    if (!res.ok) throw new Error(`configured LLM HTTP ${res.status}`);
+    const payload = await res.json();
+    return { provider: KEYWORD_BRIEF_LLM_MODEL, data: parseJsonObject(payload?.choices?.[0]?.message?.content) };
+  }
+
+  if (GEMINI_API_KEY) {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(GEMINI_MODEL)}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        generationConfig: { temperature: 0.2, responseMimeType: 'application/json' },
+        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      }),
+    });
+    if (!res.ok) throw new Error(`Gemini HTTP ${res.status}`);
+    const payload = await res.json();
+    const text = payload?.candidates?.[0]?.content?.parts?.map((part) => part.text || '').join('') || '';
+    return { provider: GEMINI_MODEL, data: parseJsonObject(text) };
+  }
+
+  return null;
+}
+
+function validLlmTitle(value) {
+  const text = cleanNewsValue(value, 90);
+  return text.length >= 6 && text.length <= 90 ? text : '';
+}
+
+async function enrichInsightTitlesWithLlm(lanes) {
+  const freshAfter = Date.now() - 5 * 60_000;
+  const rows = lanes.flatMap((lane) => lane.items
+    .filter((item) => item.insight?.headlines?.length && Date.parse(String(item.insight.collectedAt || '')) >= freshAfter)
+    .map((item) => ({
+      id: item.id,
+      lane: lane.id,
+      keyword: item.keyword,
+      headlines: item.insight.headlines.slice(0, NEWS_PER_KEYWORD),
+    })))
+    .slice(0, LLM_BRIEF_MAX_ITEMS);
+  if (rows.length === 0) return 0;
+
+  try {
+    const response = await callConfiguredLlm(briefPrompt(rows));
+    if (!response?.data || !Array.isArray(response.data.items)) return 0;
+    const byId = new Map(response.data.items.map((item) => [String(item?.id || ''), item]));
+    let count = 0;
+    for (const lane of lanes) {
+      for (const item of lane.items) {
+        const generated = byId.get(item.id);
+        if (!generated || !item.insight) continue;
+        const seo = validLlmTitle(generated.seo);
+        const home = validLlmTitle(generated.home);
+        if (!seo && !home) continue;
+        item.insight.titles = {
+          ...item.insight.titles,
+          ...(seo ? { seo } : {}),
+          ...(home ? { home } : {}),
+          ...(validLlmTitle(generated.topic) ? { topic: validLlmTitle(generated.topic) } : {}),
+          ...(validLlmTitle(generated.topicGroup) ? { topicGroup: validLlmTitle(generated.topicGroup) } : {}),
+        };
+        count += 1;
+      }
+    }
+    if (count > 0) report.push(`  INFO     source-grounded LLM titles ${count} items (${response.provider})`);
+    return count;
+  } catch (error) {
+    report.push(`  WARN     LLM title enrichment skipped: ${String(error?.message || error)}`);
+    return 0;
+  }
 }
 
 /**
@@ -317,10 +1069,12 @@ const LANE_COLLECTORS = [
   { id: 'nate', label: '네이트', collect: collectNate },
   { id: 'zum', label: '줌', collect: collectZum },
   { id: 'policy', label: '정책', collect: collectPolicy },
-  { id: 'issue', label: '이슈', collect: collectNateEntIssues },
+  { id: 'issue', label: '이슈', collect: collectLatestIssueHeadlines },
 ];
 
 async function refreshSourceSignals() {
+  const previousSnapshot = readExisting('source-signals.json');
+  const previousLanes = new Map((previousSnapshot?.lanes || []).map((lane) => [lane.id, lane]));
   const collected = await Promise.all(
     LANE_COLLECTORS.map((lane) => lane.collect().catch(() => [])),
   );
@@ -331,6 +1085,12 @@ async function refreshSourceSignals() {
     const config = LANE_COLLECTORS[index];
     const raw = collected[index];
     if (raw.length === 0) {
+      const previousLane = previousLanes.get(config.id);
+      if (previousLane?.items?.length) {
+        lanes.push({ id: config.id, label: config.label, items: previousLane.items });
+        report.push(`  KEPT     실시간 ${config.id} 0건 — 직전 직접 수집본 ${previousLane.items.length}건 유지`);
+        continue;
+      }
       report.push(`  WARN     실시간 ${config.id} 0건 — 수집기 점검 필요`);
       continue;
     }
@@ -341,49 +1101,109 @@ async function refreshSourceSignals() {
   }
 
   report.push(`  INFO     자동완성 확장 ${expansionCount}건 수집 (${lanes.length}/${LANE_COLLECTORS.length} 레인)`);
+  // Preserve recent article briefs for unchanged keywords before refreshing
+  // the supporting news context for newly collected public terms.
+  const carriedBefore = carryOverInsights(lanes);
+  if (carriedBefore > 0) report.push(`  INFO     carried article/image briefs ${carriedBefore} items`);
+  const articleBriefs = await enrichSourceInsights(lanes);
+  if (articleBriefs > 0) report.push(`  INFO     direct article/image briefs ${articleBriefs} items`);
+  await enrichInsightTitlesWithLlm(lanes);
+  const carriedAfter = carryOverInsights(lanes);
+  const carried = carriedAfter;
+  if (carried > 0) report.push(`  INFO     이슈 브리프 ${carried}건 승계`);
   const total = lanes.reduce((sum, lane) => sum + lane.items.length, 0);
   writeSnapshot('source-signals.json', { source: 'direct-crawl', lanes }, total);
 }
 
+/**
+ * 이전 스냅샷의 이슈 브리프(item.insight)를 키워드 기준으로 물려준다.
+ *
+ * 이 크론은 15분마다 파일을 통째로 새로 쓴다. 키워드가 그대로면 최근에
+ * 직접 확인한 기사 근거도 그대로 유효하므로, 다음 시간별 재검증 전까지
+ * 승계한다. 사라진 키워드의 브리프는 자연히 버려진다.
+ *
+ * @returns {number} 승계한 건수
+ */
+function carryOverInsights(lanes) {
+  const path = join(OUT_DIR, 'source-signals.json');
+  if (!existsSync(path)) return 0;
+  let previous;
+  try {
+    previous = JSON.parse(readFileSync(path, 'utf8'));
+  } catch {
+    return 0;
+  }
+  const byKeyword = new Map();
+  for (const lane of previous.lanes || []) {
+    for (const item of lane.items || []) {
+      const key = String(item.keyword || item.title || '').trim();
+      if (key && item.insight) byKeyword.set(key, item.insight);
+    }
+  }
+  if (byKeyword.size === 0) return 0;
+
+  let carried = 0;
+  for (const lane of lanes) {
+    for (const item of lane.items || []) {
+      const key = String(item.keyword || item.title || '').trim();
+      const insight = key ? byKeyword.get(key) : undefined;
+      if (insight && !item.insight) { item.insight = insight; carried += 1; }
+      // 승계한 브리프는 사진이 없을 수 있다(이슈 레인은 뉴스 재검색이 거의 안 걸린다).
+      // 목록에서 이미 받아 둔 기사 사진이 있으면 그걸로 채운다 — 승계본이라고
+      // 사진 없는 상태로 굳어버리면 그 키워드는 영영 사진이 안 붙는다.
+      if (item.insight && item.image && !(item.insight.images || []).length) {
+        item.insight = { ...item.insight, images: [item.image] };
+      }
+    }
+  }
+  return carried;
+}
+
 // ---------------------------------------------------------------- 실행
+
+
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
+
+/**
+ * 공지 스냅샷 발행.
+ *
+ * 공지는 원래 Vultr API(/v1/public/home-notices)가 서빙했다. 서버를 폐지하면서
+ * 그 경로가 끊겼고 home-notices.json 은 아무도 만들지 않아 404 가 됐다.
+ * GAS 에는 읽기 액션(get-notices)이 살아 있으므로, 여기서 받아 정적본으로 발행한다.
+ * 이러면 GAS 가 잠깐 죽어도 사이트의 공지는 마지막 스냅샷으로 계속 뜬다.
+ */
+async function refreshHomeNotices() {
+  const res = await get(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, {
+    headers: { Accept: 'application/json' },
+  });
+  if (!res.ok) {
+    report.push(`  WARN     공지 GAS HTTP ${res.status} — 기존 파일 유지`);
+    return;
+  }
+  let payload;
+  try {
+    payload = JSON.parse(res.text);
+  } catch {
+    report.push(`  WARN     공지 GAS 응답 파싱 실패: ${res.text.slice(0, 80)}`);
+    return;
+  }
+  const notices = Array.isArray(payload?.notices) ? payload.notices
+    : Array.isArray(payload?.items) ? payload.items
+      : [];
+  // 0건이면 쓰지 않는다. 좋은 공지를 빈 값으로 덮지 않기 위한 가드다.
+  writeSnapshot('home-notices.json', { source: 'gas', items: notices }, notices.length);
+}
 
 async function main() {
   console.log('='.repeat(66));
   console.log(`정적 스냅샷 갱신  ${new Date().toISOString()}`);
-  console.log(`서버 ${SERVER}`);
+  console.log(USE_BRIGHTDATA
+    ? `direct collection with Bright Data recovery budget (${BRIGHTDATA_FALLBACK_MAX_REQUESTS})`
+    : 'direct collection only (Bright Data recovery disabled)');
   console.log('='.repeat(66));
 
   await refreshSourceSignals();
-
-  await mirrorFromServer(
-    'home-notices.json',
-    '/v1/public/home-notices',
-    (payload) => payload?.notices?.notices || payload?.notices || [],
-  );
-  await mirrorFromServer(
-    'downloads.json',
-    '/v1/downloads', // DownloadPage 가 부르는 경로와 동일해야 폴백이 붙는다
-    (payload) => payload?.downloads || payload?.items || [],
-  );
-
-  // 브리핑은 이미 SPA 가 /data/home-keyword-briefing-seed.json 을 폴백으로 읽는다.
-  // 파일명을 바꾸면 기존 폴백이 끊기므로 같은 이름을 갱신한다.
-  const briefing = await get(`${SERVER}/v1/public/home-keyword-briefing`, { headers: { Accept: 'application/json' } });
-  if (briefing.ok && !briefing.text.trimStart().startsWith('<')) {
-    try {
-      const payload = JSON.parse(briefing.text);
-      const rows = payload?.briefing?.rows || payload?.rows || [];
-      if (Array.isArray(rows) && rows.length > 0) {
-        writeSnapshot('home-keyword-briefing-seed.json', payload.briefing || payload, rows.length);
-      } else {
-        report.push('  KEPT     home-keyword-briefing-seed.json — rows 0건');
-      }
-    } catch {
-      report.push('  SKIP     home-keyword-briefing-seed.json — JSON 파싱 실패');
-    }
-  } else {
-    report.push(`  SKIP     home-keyword-briefing-seed.json — 서버 응답 ${briefing.status || briefing.error}`);
-  }
+  await refreshHomeNotices();
 
   console.log(report.join('\n'));
   console.log('-'.repeat(66));

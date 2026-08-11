@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import ProofShowcase from '../components/ProofShowcase';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
+import { gradient, onGold, whiteA } from '../styles/tokens';
 
 /**
  * 요금제 — 올인원 기간제 이용권.
@@ -795,7 +796,7 @@ function PricingPage() {
                                 {p.badge && (
                                     <div style={{
                                         position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                                        background: p.badge.type === 'best' ? 'linear-gradient(135deg, #FFD700, #FFA500)' : p.badge.type === 'lifetime' ? 'linear-gradient(135deg, #A78BFA, #7C3AED)' : 'linear-gradient(135deg, #44d7b6, #2bb89c)',
+                                        background: p.badge.type === 'best' ? gradient.goldBright : p.badge.type === 'lifetime' ? 'linear-gradient(135deg, #A78BFA, #7C3AED)' : 'linear-gradient(135deg, #44d7b6, #2bb89c)',
                                         color: p.badge.type === 'trial' ? '#0a0a0f' : '#000',
                                         padding: '4px 14px', borderRadius: 50,
                                         fontSize: 11, fontWeight: 800, letterSpacing: 0.5, whiteSpace: 'nowrap',
@@ -811,7 +812,7 @@ function PricingPage() {
                                             정상가 {p.futureAmount.toLocaleString()}원
                                         </div>
                                     )}
-                                    <span style={{ fontSize: 28, fontWeight: 900, background: 'linear-gradient(135deg, #FFD700, #FFA500)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                                    <span style={{ fontSize: 28, fontWeight: 900, background: gradient.goldBright, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                                         {p.free ? '0' : activeAmount.toLocaleString()}
                                     </span>
                                     <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', marginLeft: 4 }}>{p.free ? '원' : '원'}</span>
@@ -846,7 +847,7 @@ function PricingPage() {
                                 </ul>
                                 <div style={{
                                     marginTop: 18, padding: '10px 16px', borderRadius: 10,
-                                    background: isTrial ? 'linear-gradient(135deg, rgba(68,215,182,0.2), rgba(68,215,182,0.05))' : isSelected ? 'linear-gradient(135deg, #FFD700, #FFA500)' : 'rgba(255,255,255,0.05)',
+                                    background: isTrial ? 'linear-gradient(135deg, rgba(68,215,182,0.2), rgba(68,215,182,0.05))' : isSelected ? gradient.goldBright : whiteA(0.05),
                                     color: isTrial ? '#44d7b6' : isSelected ? '#000' : 'rgba(255,255,255,0.85)',
                                     fontSize: 13, fontWeight: 700, border: isTrial ? '1px solid rgba(68,215,182,0.4)' : 'none',
                                 }}>
@@ -899,8 +900,8 @@ function PricingPage() {
                         disabled={!selected || paying || !sdkReady}
                         style={{
                             width: '100%', padding: 18, borderRadius: 14, border: 'none',
-                            background: selected && sdkReady && !paying ? 'linear-gradient(135deg, #FFD700, #FFA500)' : 'rgba(255,255,255,0.08)',
-                            color: selected && sdkReady && !paying ? '#000' : 'rgba(255,255,255,0.4)',
+                            background: selected && sdkReady && !paying ? gradient.goldBright : whiteA(0.08),
+                            color: selected && sdkReady && !paying ? onGold.black : whiteA(0.4),
                             fontSize: 16, fontWeight: 800,
                             cursor: selected && sdkReady && !paying ? 'pointer' : 'not-allowed',
                             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,

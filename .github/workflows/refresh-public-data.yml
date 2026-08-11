@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: refresh-public-data
@@ -21,7 +22,7 @@ jobs:
   refresh:
     name: Collect and commit snapshots
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 
@@ -29,45 +30,91 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Refresh snapshots
-        env:
-          LEWORD_API_BASE: ${{ vars.LEWORD_API_BASE || 'https://141.164.59.17.sslip.io' }}
-          # 정책 레인(복지서비스 공공데이터). 없으면 그 레인만 건너뛴다.
-          WELFARE_API_KEY: ${{ secrets.WELFARE_API_KEY }}
-        run: node scripts/refresh-public-data.mjs
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
-      - name: Verify snapshots are not empty
-        # 스크립트가 0건일 때 기존 파일을 지키도록 돼 있지만, 그 가드가 깨져
-        # 빈 파일이 커밋되는 일이 없도록 커밋 직전에 한 번 더 막는다.
+      - name: Install Playwright article collector
         run: |
-          for f in spa/public/data/source-signals.json spa/public/data/home-notices.json; do
-            if [ -f "$f" ]; then
-              node -e "
-                const d = require('./$f');
-                const n = (d.lanes || []).reduce((s, l) => s + (l.items || []).length, 0) + (d.items || []).length;
-                if (n === 0) { console.error('$f 가 0건입니다 — 커밋 중단'); process.exit(1); }
-                console.log('$f: ' + n + '건');
-              "
-            fi
-          done
+          npm ci --ignore-scripts
+          npx playwright install --with-deps chromium
 
-      - name: Commit if changed
+      - name: Refresh, verify and publish (multi-pass)
+        id: commit
+        # GitHub 스케줄러는 */15 로 걸어 둬도 실제로는 20~40분씩 밀린다(실측).
+        # 그동안 화면의 "실시간"이 40분 전 데이터가 된다.
+        # 그래서 한 번 실행될 때 여러 번 갱신·발행한다. 스케줄이 밀려도
+        # 공백이 패스 간격(약 4분)까지만 벌어진다.
+        env:
+          BRIGHTDATA_API_KEY: ${{ secrets.BRIGHTDATA_API_KEY || secrets.BRIGHT_DATA_API_KEY }}
+          BRIGHTDATA_WEB_UNLOCKER_ZONE: ${{ vars.BRIGHTDATA_WEB_UNLOCKER_ZONE || vars.BRIGHTDATA_ZONE || secrets.BRIGHTDATA_WEB_UNLOCKER_ZONE || secrets.BRIGHTDATA_ZONE }}
+          BRIGHTDATA_FALLBACK_MAX_REQUESTS: ${{ vars.BRIGHTDATA_FALLBACK_MAX_REQUESTS || '0' }}
+          KEYWORD_BRIEF_LLM_API_URL: ${{ vars.KEYWORD_BRIEF_LLM_API_URL }}
+          KEYWORD_BRIEF_LLM_API_KEY: ${{ secrets.KEYWORD_BRIEF_LLM_API_KEY }}
+          KEYWORD_BRIEF_LLM_MODEL: ${{ vars.KEYWORD_BRIEF_LLM_MODEL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          WELFARE_API_KEY: ${{ secrets.WELFARE_API_KEY }}
+          NAVER_SEARCHAD_ACCESS_LICENSE: ${{ secrets.NAVER_SEARCHAD_ACCESS_LICENSE }}
+          NAVER_SEARCHAD_SECRET_KEY: ${{ secrets.NAVER_SEARCHAD_SECRET_KEY }}
+          NAVER_SEARCHAD_CUSTOMER_ID: ${{ secrets.NAVER_SEARCHAD_CUSTOMER_ID }}
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- spa/public/data; then
-            echo "변경 없음 — 커밋 생략"
-            exit 0
-          fi
-          git add spa/public/data
-          git commit -m "chore(data): 공개 스냅샷 갱신 $(date -u '+%Y-%m-%d %H:%M UTC')"
-          # 크론이 겹치거나 사람 커밋과 충돌해도 실패하지 않게 rebase 후 재시도한다.
-          for attempt in 1 2 3; do
-            if git push; then
-              echo "push 성공 (시도 $attempt)"
-              exit 0
+          PASSES="${REFRESH_PASSES:-3}"
+          GAP_SECONDS="${REFRESH_GAP_SECONDS:-240}"
+          published=false
+
+          for pass in $(seq 1 "$PASSES"); do
+            echo "::group::패스 $pass/$PASSES"
+            node scripts/refresh-public-data.mjs || echo "수집 실패 — 이번 패스 건너뜀"
+            # 황금보드는 실시간 레인 결과를 후보로 쓰므로 그 뒤에 돈다.
+            # 자격증명이 없으면 스스로 건너뛴다(기존 파일 유지).
+            node scripts/refresh-golden-briefing.mjs || echo "황금보드 갱신 실패 — 기존 파일 유지"
+
+            # 0건이면 커밋하지 않는다. 좋은 데이터를 빈 데이터로 덮지 않기 위한 마지막 가드.
+            for f in spa/public/data/source-signals.json spa/public/data/home-notices.json; do
+              if [ -f "$f" ]; then
+                node -e "
+                  const d = require('./$f');
+                  const n = (d.lanes || []).reduce((s, l) => s + (l.items || []).length, 0) + (d.items || []).length;
+                  if (n === 0) { console.error('$f 가 0건입니다'); process.exit(1); }
+                  console.log('$f: ' + n + '건');
+                " || exit 1
+              fi
+            done
+
+            node scripts/verify-source-signals.mjs --warn-only || true
+
+            if git diff --quiet -- spa/public/data; then
+              echo "변경 없음 — 커밋 생략"
+            else
+              git add spa/public/data
+              git commit -m "chore(data): 공개 스냅샷 갱신 $(date -u '+%Y-%m-%d %H:%M UTC')"
+              pushed=false
+              for attempt in 1 2 3; do
+                if git push; then pushed=true; break; fi
+                git pull --rebase --autostash origin main || true
+              done
+              if [ "$pushed" = true ]; then
+                published=true
+                echo "발행 완료"
+              else
+                echo "push 3회 실패 — 다음 패스에 재시도"
+              fi
             fi
-            git pull --rebase --autostash origin main || true
+            echo "::endgroup::"
+
+            if [ "$pass" -lt "$PASSES" ]; then sleep "$GAP_SECONDS"; fi
           done
-          echo "push 3회 실패 — 다음 사이클에 재시도된다"
-          exit 1
+
+          echo "changed=$published" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy updated snapshots
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main

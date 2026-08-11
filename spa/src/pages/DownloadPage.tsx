@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import ZoomableImage from '../components/ZoomableImage';
+import downloadCatalog from '../data/download-catalog.json';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
+import { gradient, onGold, radius } from '../styles/tokens';
 
 /**
  * 다운로드 — payment-page/download.html 마이그.
@@ -11,7 +13,6 @@ import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
 const DOWNLOAD_PW = '1645';
-const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
 
 type DownloadChoice = {
     key: 'windows' | 'android' | 'mac-arm' | 'mac-intel';
@@ -29,80 +30,19 @@ type ProductConfig = {
     downloads: DownloadChoice[];
 };
 
-type ApiDownloadMeta = {
-    available?: boolean;
-    filename?: string;
-    size?: number;
-    updatedAt?: string | null;
-    url?: string;
-    source?: string;
-};
-
-type ApiDownloadsPayload = {
-    products?: Record<string, Record<string, ApiDownloadMeta>>;
-};
-
-const PRODUCTS = {
-    naver: {
-        name: 'Better Life Naver',
-        version: '네이버 블로그 자동화 · v2.11.182',
-        image: '/images/feature-auto-publish.png',
-        accent: '#FFD700',
-        borderColor: 'rgba(255,215,0,0.25)',
-        downloads: [
-            { key: 'windows', label: 'Windows', detail: '2.11.182 · exe', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.182/Better-Life-Naver-Setup-2.11.182.exe' },
-            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.11.67 · arm64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-arm64.dmg' },
-            { key: 'mac-intel', label: 'Mac Intel', detail: '2.11.67 · x64 dmg', url: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-x64.dmg' },
-        ],
-    },
-    leword: {
-        name: 'LEWORD',
-        version: 'AI 키워드 인텔리전스 · Windows v2.49.86',
-        image: '/images/leword/hero-banner-fast.jpg',
-        accent: '#A78BFA',
-        borderColor: 'rgba(124,58,237,0.25)',
-        downloads: [
-            { key: 'windows', label: 'Windows', detail: '2.49.86 · exe', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86.exe' },
-            { key: 'android', label: 'Android APK', detail: '2.49.86 · apk', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-mobile-0.1.0.apk' },
-            { key: 'mac-arm', label: 'Mac M1-M4', detail: '2.49.86 · arm64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86-arm64.dmg' },
-            { key: 'mac-intel', label: 'Mac Intel', detail: '2.49.86 · x64 dmg', url: 'https://github.com/cd000242-sudo/leword-app/releases/download/v2.49.86/LEWORD-2.49.86-x64.dmg' },
-        ],
-    },
-    orbit: {
-        name: 'LEADERNAM Orbit',
-        version: '블로그스팟·워드프레스 자동화 · v3.8.231',
-        image: '/images/orbit/leadernam-orbit-download-fast.jpg',
-        accent: '#44d7b6',
-        borderColor: 'rgba(68,215,182,0.28)',
-        downloads: [
-            { key: 'windows', label: 'Windows', detail: '3.8.231 · exe', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231.exe' },
-            { key: 'mac-arm', label: 'Mac M1-M4', detail: '3.8.231 · arm64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231-arm64.dmg' },
-            { key: 'mac-intel', label: 'Mac Intel', detail: '3.8.231 · x64 dmg', url: 'https://github.com/cd000242-sudo/blogger-gpt-cli/releases/download/v3.8.231/LEADERNAM-Orbit-3.8.231-x64.dmg' },
-        ],
-    },
-} satisfies Record<string, ProductConfig>;
+/**
+ * 기본 카탈로그는 JSON 한 곳에만 둔다.
+ * scripts/status/probe-purchase.mjs 가 같은 파일을 읽어 링크 생존을 검사한다.
+ * 여기에 값을 다시 적으면 화면과 검사가 조용히 갈라진다.
+ */
+const PRODUCTS = downloadCatalog as unknown as Record<'naver' | 'leword' | 'orbit', ProductConfig>;
 
 type ProductKey = keyof typeof PRODUCTS;
 
-function absoluteApiDownloadUrl(url?: string): string {
-    if (!url) return '';
-    if (/^https?:\/\//i.test(url)) return url;
-    return `${LEWORD_API_BASE}${url.startsWith('/') ? url : `/${url}`}`;
-}
-
-function formatApiFileSize(bytes?: number): string {
-    const value = Number(bytes || 0);
-    if (!value) return '';
-    if (value >= 1024 * 1024) return `${(value / 1024 / 1024).toFixed(1)} MB`;
-    if (value >= 1024) return `${(value / 1024).toFixed(1)} KB`;
-    return `${value} B`;
-}
-
-function applyDownloadOverrides(productKey: ProductKey, siteContent: SiteContent | null, apiDownloads: ApiDownloadsPayload | null): ProductConfig {
+function applyDownloadOverrides(productKey: ProductKey, siteContent: SiteContent | null): ProductConfig {
     const product = PRODUCTS[productKey];
     const patch = siteContent?.downloads?.[productKey];
-    const apiProduct = apiDownloads?.products?.[productKey] || {};
-    if (!patch && !Object.keys(apiProduct).length) return product;
+    if (!patch) return product;
     const downloadPatches = patch?.downloads || {};
     return {
         ...product,
@@ -112,14 +52,11 @@ function applyDownloadOverrides(productKey: ProductKey, siteContent: SiteContent
         accent: patch?.accent || product.accent,
         borderColor: patch?.accent ? `${patch.accent}45` : product.borderColor,
         downloads: product.downloads.map((item) => {
-            const configured = { ...item, ...(downloadPatches[item.key] || {}) };
-            const uploaded = apiProduct[item.key];
-            if (uploaded?.source !== 'uploaded' || !uploaded.available || !uploaded.url) return configured;
-            const size = formatApiFileSize(uploaded.size);
+            const configured = downloadPatches[item.key] || {};
             return {
+                ...item,
                 ...configured,
-                url: absoluteApiDownloadUrl(uploaded.url),
-                detail: `${uploaded.filename || configured.detail}${size ? ` · ${size}` : ''}`,
+                url: configured.url?.trim() || item.url,
             };
         }),
     };
@@ -134,7 +71,6 @@ function getPreferredDownload(downloads: DownloadChoice[]): DownloadChoice {
 
 function DownloadPage() {
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
-    const [apiDownloads, setApiDownloads] = useState<ApiDownloadsPayload | null>(null);
 
     useEffect(() => {
         const prev = document.title;
@@ -144,17 +80,6 @@ function DownloadPage() {
 
     useEffect(() => {
         fetchSiteContent().then(setSiteContent);
-    }, []);
-
-    useEffect(() => {
-        // 서버가 죽어 있으면 응답이 영원히 안 오므로 타임아웃을 건다(다른 호출들과 동일 정책).
-        // 실패해도 하드코딩 PRODUCTS 가 즉시 렌더되므로 화면은 안 깨진다.
-        fetch(`${LEWORD_API_BASE}/v1/downloads?ts=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(3000) })
-            .then((res) => res.json())
-            .then((payload) => {
-                if (payload?.ok && payload.products) setApiDownloads(payload as ApiDownloadsPayload);
-            })
-            .catch(() => setApiDownloads(null));
     }, []);
 
     const page = siteContent?.downloads?.page || {};
@@ -199,9 +124,9 @@ function DownloadPage() {
                 <LeadCapture />
 
                 <div className="download-product-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24, margin: '32px auto 0' }}>
-                    <DownloadCard productKey="naver" siteContent={siteContent} apiDownloads={apiDownloads} />
-                    <DownloadCard productKey="leword" siteContent={siteContent} apiDownloads={apiDownloads} />
-                    <DownloadCard productKey="orbit" siteContent={siteContent} apiDownloads={apiDownloads} />
+                    <DownloadCard productKey="naver" siteContent={siteContent} />
+                    <DownloadCard productKey="leword" siteContent={siteContent} />
+                    <DownloadCard productKey="orbit" siteContent={siteContent} />
                 </div>
             </section>
         </div>
@@ -257,7 +182,7 @@ function LeadCapture() {
                 <button
                     onClick={submit}
                     disabled={submitting}
-                    style={{ padding: '10px 20px', background: 'linear-gradient(135deg, #c9a84c, #d4a012)', color: '#1a1a2e', border: 'none', borderRadius: 8, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}
+                    style={{ padding: '10px 20px', background: gradient.goldBright, color: onGold.black, border: 'none', borderRadius: radius.sm, fontWeight: 700, cursor: submitting ? 'not-allowed' : 'pointer', fontSize: 14 }}
                 >{btnLabel}</button>
             </div>
             {msg && <div style={{ marginTop: 10, fontSize: 13, color: msg.color }}>{msg.text}</div>}
@@ -266,26 +191,49 @@ function LeadCapture() {
 }
 
 // ─── Download card ───
-function DownloadCard({ productKey, siteContent, apiDownloads }: { productKey: ProductKey; siteContent: SiteContent | null; apiDownloads: ApiDownloadsPayload | null }) {
-    const product = applyDownloadOverrides(productKey, siteContent, apiDownloads);
+function DownloadCard({ productKey, siteContent }: { productKey: ProductKey; siteContent: SiteContent | null }) {
+    const product = applyDownloadOverrides(productKey, siteContent);
     const [pw, setPw] = useState('');
     const [error, setError] = useState(false);
     const [shake, setShake] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [urlMissing, setUrlMissing] = useState(false);
     const [downloadKey, setDownloadKey] = useState(() => getPreferredDownload(product.downloads).key);
     const selectedDownload = product.downloads.find((item) => item.key === downloadKey) || product.downloads[0];
 
-    const tryDownload = async () => {
-        if (pw.trim() !== DOWNLOAD_PW) {
+    /**
+     * 비밀번호가 맞을 때만 링크를 넘긴다.
+     *
+     * window.open 으로 열던 것을 실제 <a href> 로 바꿨다. 이유가 둘이다:
+     *  1. window.open 은 브라우저 팝업 차단에 막히면 아무 일도 안 일어난다.
+     *     사용자 눈에는 "버튼을 눌렀는데 반응이 없다" 로 보인다. 실제로
+     *     새벽 구매자가 다운로드를 못 받는 일이 있었다.
+     *  2. 링크면 우클릭 복사·새 탭 열기가 되고, 실패해도 주소가 눈에 보인다.
+     */
+    const unlocked = pw.trim() === DOWNLOAD_PW;
+    const href = String(selectedDownload?.url || '').trim();
+
+    const onDownloadClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        if (!unlocked) {
+            event.preventDefault();
             setError(true);
             setShake(true);
             window.setTimeout(() => { setError(false); setShake(false); }, 2000);
             return;
         }
+        if (!href) {
+            // 주소가 비어 있으면 빈 탭만 열려 "아무 일도 안 일어난 것" 처럼 보인다.
+            // 관리자 설정(GAS)이 비었을 때 실제로 이렇게 됐다. 조용히 실패시키지 않는다.
+            event.preventDefault();
+            setUrlMissing(true);
+            return;
+        }
         setError(false);
+        setUrlMissing(false);
         setLoading(true);
-        window.open(selectedDownload.url, '_blank', 'noopener');
-        setPw('');
+        // 비밀번호를 여기서 지우면 안 된다. unlocked 가 false 로 바뀌면서
+        // 같은 렌더에서 href 가 사라져 브라우저가 이동을 취소한다.
+        // (버튼을 눌러도 아무 일이 없던 원인 중 하나였다.)
         window.setTimeout(() => setLoading(false), 700);
     };
 
@@ -355,7 +303,13 @@ function DownloadCard({ productKey, siteContent, apiDownloads }: { productKey: P
                         type="password"
                         value={pw}
                         onChange={(e) => setPw(e.target.value)}
-                        onKeyDown={(e) => { if (e.key === 'Enter') tryDownload(); }}
+                        onKeyDown={(e) => {
+                            // 엔터로도 받을 수 있게 한다. 링크를 직접 눌러 브라우저가
+                            // 다운로드를 시작하게 해야 팝업 차단에 안 걸린다.
+                            if (e.key !== 'Enter') return;
+                            const anchor = e.currentTarget.parentElement?.querySelector('a');
+                            if (anchor) (anchor as HTMLAnchorElement).click();
+                        }}
                         placeholder="비밀번호 입력"
                         style={{
                             flex: 1, padding: '12px 14px',
@@ -365,10 +319,12 @@ function DownloadCard({ productKey, siteContent, apiDownloads }: { productKey: P
                             animation: shake ? 'shakeDl 0.4s' : 'none',
                         }}
                     />
-                    <button
-                        onClick={tryDownload}
-                        disabled={loading}
-                        style={{ padding: '12px 18px', background: `linear-gradient(135deg, ${product.accent}, ${product.accent}cc)`, color: '#000', border: 'none', borderRadius: 10, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    <a
+                        href={unlocked && href ? href : undefined}
+                        onClick={onDownloadClick}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ padding: '12px 18px', background: `linear-gradient(135deg, ${product.accent}, ${product.accent}cc)`, color: '#000', border: 'none', borderRadius: 10, cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}
                         title={selectedDownload.label + ' 다운로드'}
                     >
                         {loading ? (
@@ -376,9 +332,10 @@ function DownloadCard({ productKey, siteContent, apiDownloads }: { productKey: P
                         ) : (
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                         )}
-                    </button>
+                    </a>
                 </div>
                 {error && <p style={{ marginTop: 8, color: '#ff3b5c', fontSize: 12, fontWeight: 600 }}>비밀번호가 올바르지 않습니다.</p>}
+                {urlMissing && <p style={{ marginTop: 8, color: '#ff3b5c', fontSize: 12, fontWeight: 600 }}>이 버전의 다운로드 주소가 설정되지 않았습니다. 다른 항목을 선택하거나 1:1 문의로 알려주세요.</p>}
             </div>
             <style>{`@keyframes shakeDl{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}`}</style>
         </div>

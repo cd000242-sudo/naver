@@ -2,7 +2,18 @@ import { useEffect, useMemo, useState, type KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 import HomeOperationsBoard from '../components/HomeOperationsBoard';
 import ParticlesCanvas from '../components/ParticlesCanvas';
+import SourceBriefModal from '../components/SourceBriefModal';
+import SourceBriefModalStyles from '../components/SourceBriefModalStyles';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
+import {
+    SOURCE_SEARCH_PATHS,
+    buildSourceSearchUrl,
+    cleanLiveText,
+    type SourceLane,
+    type SourceLaneConfig,
+    type SourceLaneId,
+    type SourceSignal,
+} from '../lib/sourceSignalTypes';
 
 type LiveGoldenPreview = {
     id?: string;
@@ -15,31 +26,8 @@ type LiveGoldenPreview = {
     updatedAt?: string;
 };
 
-type SourceSignal = {
-    id?: string;
-    keyword?: string;
-    title?: string;
-    description?: string;
-    priority?: number;
-    source?: string;
-    categoryId?: string;
-    createdAt?: string;
-    /** 네이버 자동완성 실측 확장 — 크론 스냅샷이 채워준다. 합성 확장 대체용 */
-    expansions?: string[];
-};
-
-type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'policy' | 'issue';
-
-type SourceLaneConfig = {
-    id: SourceLaneId;
-    label: string;
-    accent: string;
-    description: string;
-};
-
-type SourceLane = SourceLaneConfig & {
-    items: SourceSignal[];
-};
+// 실시간 신호 타입과 검색 주소는 lib/sourceSignalTypes.ts 한 곳에 있다.
+// 브리프 모달과 /leword 화면이 같은 정의를 쓰기 위해서다.
 
 type KeywordStrategyIdea = {
     label: string;
@@ -86,8 +74,6 @@ type HomeLiveState = {
     fallbackUsed: boolean;
 };
 
-const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
-const HOME_LIVE_TIMEOUT_MS = 2500;
 const HOME_LIVE_CACHE_KEY = 'leaderspro.home.sourceSignals.v1';
 
 const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
@@ -96,7 +82,7 @@ const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
     { id: 'nate', label: '네이트', accent: '#ff6b6b', description: '이슈와 방송 검색 흐름' },
     { id: 'zum', label: '줌', accent: '#f4c95d', description: '포털 이슈 보조 신호' },
     { id: 'policy', label: '정책', accent: '#44d7b6', description: '지원금과 공공 알림' },
-    { id: 'issue', label: '이슈', accent: '#c084fc', description: '방송/연예/스포츠 흐름' },
+    { id: 'issue', label: '이슈', accent: '#c084fc', description: '시간순 최신 연예 기사 흐름' },
 ];
 
 const HOME_LIVE_FALLBACK_GOLDEN: LiveGoldenPreview[] = [
@@ -105,45 +91,6 @@ const HOME_LIVE_FALLBACK_GOLDEN: LiveGoldenPreview[] = [
     { id: 'fallback-golden-3', rank: 3, keyword: '오늘 방송 출연진', grade: 'S', publicSearchVolumeLabel: '실시간 반응', publicDocumentCountLabel: '경쟁도 확인 중', publicReason: '방송 직후 빠르게 검색량이 붙는 이슈형 키워드입니다.' },
 ];
 
-const HOME_SOURCE_FALLBACK_KEYWORDS: Record<SourceLaneId, string[]> = {
-    naver: ['소상공인 지원금 신청', '장마 대비 준비물', '여름 전기요금 절약', '청년 월세 지원 조건', '오늘 방송 출연진', '냉방병 증상', '근로장려금 지급일', '서울 무료 전시', '주말 갈만한곳', '아이폰 배터리 교체'],
-    daum: ['경제 뉴스 정리', '폭염주의보 지역', '대출 금리 비교', '교통 통제 구간', '야구 경기 일정', '공모주 청약 일정', '환율 전망', '아파트 실거래가', '태풍 경로', '건강검진 대상자'],
-    nate: ['드라마 출연진', '예능 방송 시간', '배우 근황', '공식입장 정리', '스포츠 인터뷰', '연예 뉴스 반응', '축구 대표팀 명단', '영화 결말 해석', '콘서트 예매 일정', '프로필 나이'],
-    zum: ['근처 맛집 추천', '제주 숙소 가격', '항공권 특가', '가전 할인', '병원 예약 방법', '여행 준비물', '주차장 위치', '공연 티켓 예매', '보험료 비교', '이사 비용'],
-    policy: ['근로장려금 지급일', '청년 월세 지원 조건', '소상공인 정책자금 신청', '에너지바우처 신청 대상', '문화누리카드 사용처', '기초연금 수급자격', '주거급여 신청 조건', '국민내일배움카드 신청', '출산지원금 지역별 조회', '보조금24 숨은 지원금'],
-    issue: ['드라마 결말 해석', '출연진 공식입장', '대표팀 경기 결과', '방송 장면 논란', '연예인 근황 반응', '사건 타임라인 정리', '콘서트 예매 일정', '영화 쿠키영상 여부', '스포츠 하이라이트', '후속 방송 일정'],
-};
-
-function cleanLiveText(value: unknown, fallback: string): string {
-    const text = String(value || '').trim();
-    if (!text) return fallback;
-    const questionMarks = (text.match(/\?/g) || []).length;
-    const looksBroken = /[�]|占|揶|醫|怨|筌|嚥|媛|덈떎|섏|ㅼ/.test(text) || questionMarks >= Math.max(3, Math.ceil(text.length / 5));
-    return looksBroken ? fallback : text;
-}
-
-function buildFallbackSourceItems(lane: SourceLaneConfig): SourceSignal[] {
-    return HOME_SOURCE_FALLBACK_KEYWORDS[lane.id].map((keyword, index) => ({
-        id: `fallback-${lane.id}-${index + 1}`,
-        keyword,
-        title: keyword,
-        description: lane.id === 'policy'
-            ? '정책 수집 연결 대기 중에도 검색 의도가 분명한 신청·대상형 후보입니다.'
-            : lane.id === 'issue'
-                ? '이슈 수집 연결 대기 중에도 글 구조가 분명한 타임라인·반응형 후보입니다.'
-                : `${lane.label} 연결 대기 중 표시되는 저경쟁 후보입니다.`,
-        priority: 100 - index,
-        source: lane.id,
-    }));
-}
-
-function fillMissingSourceLaneItems(lanes: SourceLane[]): SourceLane[] {
-    return lanes.map((lane) => (
-        lane.items.length > 0
-            ? lane
-            : { ...lane, items: buildFallbackSourceItems(lane) }
-    ));
-}
 
 function readCachedSourceLanes(): { lanes: SourceLane[]; updatedAt?: string } | null {
     try {
@@ -152,7 +99,7 @@ function readCachedSourceLanes(): { lanes: SourceLane[]; updatedAt?: string } | 
         const cached = JSON.parse(raw) as { lanes?: Array<Partial<SourceLane> & { id?: string }>; updatedAt?: string };
         const lanes = normalizeSourceLanes(cached);
         if (!lanes.some((lane) => lane.items.length > 0)) return null;
-        return { lanes: fillMissingSourceLaneItems(lanes), updatedAt: cached.updatedAt };
+        return { lanes, updatedAt: cached.updatedAt };
     } catch {
         return null;
     }
@@ -190,10 +137,7 @@ function runAfterFirstPaint(task: () => void, timeout = 900): () => void {
 
 function buildFallbackHomeLiveState(status: HomeLiveStatus = 'loading'): HomeLiveState {
     const cached = readCachedSourceLanes();
-    const lanes = cached?.lanes || SOURCE_LANE_CONFIGS.map((lane) => ({
-        ...lane,
-        items: buildFallbackSourceItems(lane),
-    }));
+    const lanes = cached?.lanes || SOURCE_LANE_CONFIGS.map((lane) => ({ ...lane, items: [] }));
     return {
         status,
         golden: HOME_LIVE_FALLBACK_GOLDEN,
@@ -207,18 +151,6 @@ function buildFallbackHomeLiveState(status: HomeLiveStatus = 'loading'): HomeLiv
     };
 }
 
-async function fetchHomeJson<T>(apiPath: string): Promise<T> {
-    const controller = new AbortController();
-    const timer = window.setTimeout(() => controller.abort(), HOME_LIVE_TIMEOUT_MS);
-    try {
-        const response = await fetch(LEWORD_API_BASE + apiPath, { cache: 'no-store', signal: controller.signal });
-        if (!response.ok) throw new Error('LEWORD API ' + response.status);
-        return await response.json() as T;
-    } finally {
-        window.clearTimeout(timer);
-    }
-}
-
 function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { id?: string }>; fallbackUsed?: boolean } | null): SourceLane[] {
     const lanes = Array.isArray(payload?.lanes) ? payload.lanes : [];
     return SOURCE_LANE_CONFIGS.map((config) => {
@@ -226,6 +158,8 @@ function normalizeSourceLanes(payload: { lanes?: Array<Partial<SourceLane> & { i
         const items = Array.isArray(incoming?.items) ? incoming.items : [];
         return {
             ...config,
+            // Each item is a directly crawled portal rank. Supporting articles
+            // are optional context, not a condition for the live signal.
             items: items.slice(0, 10),
         };
     });
@@ -252,19 +186,11 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
     // fetchHomeJson 은 서버가 죽으면 null 이 아니라 throw 한다. 여기서 안 잡으면
     // 아래 정적 스냅샷 폴백에 도달하기 전에 함수 전체가 죽는다 — 스냅샷 폴백이
     // 정확히 필요한 상황(서버 다운)에서 실행되지 않는 버그가 실제로 있었다.
-    let sourcePayload: { updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> } | null = null;
-    try {
-        sourcePayload = await fetchHomeJson<{ updatedAt?: string; fallbackUsed?: boolean; lanes?: Array<Partial<SourceLane> & { id?: string }> }>('/v1/public/source-signals?limit=60');
-    } catch {
-        sourcePayload = null;
-    }
-    if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) {
-        sourcePayload = (await fetchSourceSignalSnapshot()) || sourcePayload;
-    }
-    // 서버도 스냅샷도 죽었으면 정직하게 FAST FALLBACK 으로 표시한다.
-    // (fillMissingSourceLaneItems 가 하드코딩 항목으로 채운 것을 'LIVE' 로 위장하지 않기)
+    const sourcePayload = await fetchSourceSignalSnapshot();
+    // 서버도 스냅샷도 죽었으면 빈 상태를 표시한다. 하드코딩 키워드를
+    // LIVE로 위장하지 않고, 기사로 검증된 다음 스냅샷만 보여준다.
     if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) return fallback;
-    const lanes = fillMissingSourceLaneItems(normalizeSourceLanes(sourcePayload));
+    const lanes = normalizeSourceLanes(sourcePayload);
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
     if (!hasLiveData) return fallback;
     writeCachedSourceLanes(sourcePayload);
@@ -280,25 +206,12 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
         boardTarget: 120,
         lockedCount: 0,
         running: false,
-        fallbackUsed: Boolean(sourcePayload?.fallbackUsed || !sourcePayload),
+        fallbackUsed: false,
     };
 }
 
 
 
-const SOURCE_SEARCH_PATHS: Record<SourceLaneId, (keyword: string) => string> = {
-    naver: (keyword) => `https://search.naver.com/search.naver?query=${encodeURIComponent(keyword)}`,
-    daum: (keyword) => `https://search.daum.net/search?w=tot&q=${encodeURIComponent(keyword)}`,
-    nate: (keyword) => `https://search.nate.com/search/all.html?q=${encodeURIComponent(keyword)}`,
-    zum: (keyword) => `https://search.zum.com/search.zum?query=${encodeURIComponent(keyword)}`,
-    policy: (keyword) => `https://www.korea.kr/search?srchKeyword=${encodeURIComponent(keyword)}`,
-    issue: (keyword) => `https://search.naver.com/search.naver?where=news&query=${encodeURIComponent(keyword)}`,
-};
-
-function buildSourceSearchUrl(laneId: SourceLaneId, keyword: string): string {
-    const trimmed = keyword.trim();
-    return SOURCE_SEARCH_PATHS[laneId](trimmed || 'LEWORD');
-}
 
 function uniqueList(values: string[]): string[] {
     return Array.from(new Set(values.map((value) => value.trim()).filter(Boolean)));
@@ -733,50 +646,10 @@ function buildClusterIdeas(profile: TopicProfile, lane: SourceLane, item: Source
         profile,
         4 - index,
     ));
-    const fallbackIdeas = profile.category === 'issue' ? [
-        makeStrategyIdea(
-            `${profile.core} 타임라인 → 공식입장 → 반응 변화`,
-            '이슈 허브',
-            '이슈형 글은 시간순 정리, 공식 확인, 반응 변화가 분리돼야 오래 읽힙니다.',
-            '타임라인 글에서 공식입장 글과 반응 분석 글로 연결',
-            profile,
-            5,
-        ),
-        makeStrategyIdea(
-            `${profile.core} 팩트체크 → 쟁점 비교 → 후속 일정`,
-            '후속 검색',
-            '추측성 글을 피하고 다음에 검색할 질문을 미리 받아 내부 순환을 만듭니다.',
-            '확인된 사실과 다음 발표 가능성을 묶는 구조',
-            profile,
-            4,
-        ),
-        makeStrategyIdea(
-            `${profile.keyword} 관련 인물·장면·반응 키워드 묶음`,
-            '확장 묶음',
-            '하나의 이슈를 인물, 장면, 반응으로 쪼개면 저경쟁 롱테일을 더 많이 확보할 수 있습니다.',
-            '관련 인물, 원인 장면, 댓글 반응을 각각 후속 글로 분리',
-            profile,
-            3,
-        ),
-    ] : [
-        makeStrategyIdea(
-            `${profile.core} 기본 이해 → ${profile.proofNeed} → 다음 행동`,
-            '허브 구조',
-            '한 글에 답을 몰아넣지 않고 입문, 근거, 행동 글로 쪼개 주제 권위를 쌓습니다.',
-            `${profile.bridgeAngle} 3단 내부 링크 구조`,
-            profile,
-            3,
-        ),
-        makeStrategyIdea(
-            `${profile.keyword} 이후 사람들이 다시 검색할 질문 묶음`,
-            '후속 검색',
-            '검색자가 다음에 칠 질문을 미리 받아 체류와 재방문을 만듭니다.',
-            `${profile.searchIntent} 다음 단계 설계`,
-            profile,
-            2,
-        ),
-    ];
-    return [...peerIdeas, ...fallbackIdeas].slice(0, 5);
+    // 합성 템플릿(fallbackIdeas)은 노출하지 않는다.
+    // profile.core 가 뉴스 제목 조각이면 "…타임라인 → 공식입장 → 반응 변화" 처럼
+    // 아무도 검색하지 않는 문자열이 키워드처럼 보인다. 실제 동시 급등 피어만 남긴다.
+    return peerIdeas.slice(0, 5);
 }
 
 function semanticBase(profile: TopicProfile): string {
@@ -946,11 +819,36 @@ function buildSemanticMindmapIdeas(profile: TopicProfile, item: SourceSignal, pe
     return uniqueSemanticIdeas(profile, candidates, 6);
 }
 
+/**
+ * 확장 검색어가 원 키워드와 실제로 같은 주제인지 판정한다.
+ *
+ * 네이버 자동완성은 앞 토큰만으로도 제안을 물어와서, "6시간 부동산 회의" 의 "6시간" 같은
+ * 시간·수량 표현에 걸리면 "6시간 수면", "진에어 6시간" 처럼 주제가 전혀 다른 결과가 섞인다.
+ * 그래서 시간·수량 토큰은 주제 앵커로 인정하지 않고, 내용 토큰이 겹칠 때만 통과시킨다.
+ */
+const TIME_QUANTITY_TOKEN = /^\d+\s*(시간|분|초|일|주|개월|달|월|년|명|개|원|위|차|번|회|%)?$/;
+
+function topicAnchors(keyword: string): string[] {
+    return String(keyword || '')
+        .split(/\s+/)
+        .map((token) => token.replace(/[^가-힣a-zA-Z0-9]/g, ''))
+        .filter((token) => token.length >= 2 && !TIME_QUANTITY_TOKEN.test(token));
+}
+
+function sharesTopicAnchor(keyword: string, expansion: string): boolean {
+    const anchors = topicAnchors(keyword);
+    // 내용 토큰이 하나도 없으면(순수 시간/수량 키워드) 판정 근거가 없으니 막지 않는다.
+    if (!anchors.length) return true;
+    const text = String(expansion || '');
+    return anchors.some((anchor) => text.includes(anchor));
+}
+
 function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyIdea[] {
     // 1순위: 실측 확장(네이버 자동완성). 사람들이 실제로 이어서 치는 검색어라
     // 토큰 합성 확장과 달리 "이상한 조합"이 원리적으로 안 나온다.
     const expansionIdeas = uniqueList(item.expansions || [])
         .filter((expansion) => expansion !== profile.keyword)
+        .filter((expansion) => sharesTopicAnchor(profile.keyword, expansion))
         .slice(0, 4)
         .map((expansion, index) => ({
             label: expansion,
@@ -960,7 +858,6 @@ function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item:
             bias: 9 - index,
         }));
 
-    const focusedCorpus = `${profile.keyword} ${profile.core} ${profile.entities.join(' ')} ${item.description || ''}`;
     const related = peerItems
         .filter((peer) => peer.id !== item.id)
         .map((peer) => inferTopicProfile(lane, peer))
@@ -975,31 +872,10 @@ function buildContextMindmapIdeas(profile: TopicProfile, lane: SourceLane, item:
             bias: 5 - index,
         }));
 
-    const namedEntities = uniqueList((focusedCorpus.match(/[가-힣]{2,5}/g) || [])
-        .filter((token) => !['검색어', '검색량', '문서수', '실시간', '후보', '뉴스', '정리', '확인', '대한민국'].includes(token))
-        .slice(0, 6));
-    const entityIdeas = namedEntities
-        .filter((entity) => !profile.keyword.includes(entity) || entity.length >= 3)
-        .slice(0, 3)
-        .map((entity, index) => ({
-            label: `${entity} 관련 쟁점`,
-            tag: '인물·기관',
-            reason: '본문에서 별도 소제목으로 분리할 수 있는 연결 대상입니다.',
-            title: `${entity}가 이 흐름에서 왜 검색되는지 분리`,
-            bias: 3 - index,
-        }));
-
-    const fallback = buildClusterIdeas(profile, lane, item, peerItems)
-        .map((idea) => ({
-            label: idea.label.replace(/.*?→\s*/, ''),
-            tag: idea.tag,
-            reason: idea.reason,
-            title: idea.title,
-            bias: 1,
-        }));
-
-    // 실측 확장이 있으면 합성 아이디어(related/entity/fallback)는 뒷순위로 밀린다.
-    return uniqueSemanticIdeas(profile, [...expansionIdeas, ...related, ...entityIdeas, ...fallback], 5);
+    // 실측(자동완성 확장)과 실제 동시 급등 피어만 노출한다.
+    // entityIdeas("○○ 관련 쟁점")·fallback 은 토큰을 조합해 만든 문자열이라
+    // 실제 검색 수요의 근거가 없다 — 개수를 채우려고 가짜를 섞지 않는다.
+    return uniqueSemanticIdeas(profile, [...expansionIdeas, ...related], 5);
 }
 
 function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: SourceSignal[]): KeywordStrategyGroup[] {
@@ -1008,19 +884,76 @@ function buildSourceStrategy(lane: SourceLane, item: SourceSignal, peerItems: So
     const contextIdeas = buildContextMindmapIdeas(profile, lane, item, peerItems);
     const clusterIdeas = buildClusterIdeas(profile, lane, item, peerItems).sort((a, b) => b.score - a.score);
 
+    // 자리는 항상 3개로 고정한다. 비는 그룹을 여기서 걸러내면 인덱스가 밀려서
+    // 라벨과 내용이 어긋나거나(0번이 클러스터가 됨) 아예 undefined 가 된다.
+    // "빈 섹션 노출 방지"는 렌더 쪽에서 그룹별로 판단한다.
     return [
         { label: '다음 검색 의문', desc: '선택한 실시간 키워드에서 검색자가 바로 이어서 칠 만한 확장 키워드입니다.', items: semanticIdeas },
-        { label: '문맥 확장 가지', desc: '같은 흐름의 인물·기관·후속 쟁점을 묶어 자동화 글감으로 바로 넘길 수 있게 정리합니다.', items: contextIdeas },
-        { label: '연결 이슈 클러스터', desc: '주변 실시간 흐름을 후속 글감으로 연결해 큰 키워드까지 권위를 쌓습니다.', items: clusterIdeas },
+        { label: '문맥 확장 가지', desc: '같은 흐름에서 실제로 이어서 검색되는 키워드입니다.', items: contextIdeas },
+        { label: '연결 이슈 클러스터', desc: '지금 함께 급등 중인 주변 검색 흐름입니다.', items: clusterIdeas },
     ];
+}
+
+/**
+ * 분석 중 화면 — 키워드를 바꾸면 결과를 조각조각 들이밀지 않고
+ * 한 번에 보여준다. 마인드맵은 카드가 여러 장이라 그냥 갈아치우면
+ * 뭐가 바뀐 건지 눈이 못 따라간다. 진행 단계를 보여주고 한 번에 드러낸다.
+ */
+const ANALYZE_STEPS = ['기사 수집', '사실 정리', '제목·주제 도출'] as const;
+
+function SourceInsightLoading({ keyword, accent, step }: { keyword: string; accent: string; step: number }) {
+    return (
+        <aside className="source-insight-panel source-insight-loading" style={{ borderColor: accent + '66' }}>
+            <span className="source-insight-gear" style={{ borderTopColor: accent }} aria-hidden="true" />
+            <strong>{keyword}</strong>
+            <p>분석 중입니다</p>
+            <ol className="source-insight-steps">
+                {ANALYZE_STEPS.map((label, index) => (
+                    <li key={label} className={index <= step ? 'done' : undefined}>
+                        <span style={index <= step ? { color: accent } : undefined}>
+                            {index < step ? '완료' : index === step ? '진행' : '대기'}
+                        </span>
+                        {label}
+                    </li>
+                ))}
+            </ol>
+        </aside>
+    );
+}
+
+/**
+ * 키워드가 바뀔 때만 짧게 분석 화면을 끼운다.
+ * 데이터는 이미 로컬에 있어서 실제로 기다릴 필요는 없지만, 여러 카드가
+ * 동시에 갈아치워지면 사용자가 뭘 봐야 하는지 놓친다.
+ */
+function SourceSignalInsight(props: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[] }) {
+    const keyword = props.item ? cleanLiveText(props.item.keyword || props.item.title, props.lane.label) : '';
+    const [shownKeyword, setShownKeyword] = useState(keyword);
+    const [step, setStep] = useState(ANALYZE_STEPS.length - 1);
+
+    useEffect(() => {
+        if (!keyword || keyword === shownKeyword) return;
+        setStep(0);
+        const timers = [
+            window.setTimeout(() => setStep(1), 220),
+            window.setTimeout(() => setStep(2), 440),
+            window.setTimeout(() => setShownKeyword(keyword), 660),
+        ];
+        return () => timers.forEach((t) => window.clearTimeout(t));
+    }, [keyword, shownKeyword]);
+
+    if (keyword && keyword !== shownKeyword) {
+        return <SourceInsightLoading keyword={keyword} accent={props.lane.accent} step={step} />;
+    }
+    return <SourceSignalInsightPanel {...props} />;
 }
 
 function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; item: SourceSignal | null; items: SourceSignal[] }) {
     if (!item) {
         return (
             <aside className="source-insight-panel source-insight-panel-empty">
-                <strong>키워드 전략 대기</strong>
-                <p>{lane.label} 원본이 들어오면 다음 검색 의문과 연결 이슈 마인드맵을 표시합니다.</p>
+                <strong>선택할 실시간 항목이 없습니다</strong>
+                <p>{lane.label} 원본이 갱신되면 기사 근거와 출처를 표시합니다.</p>
             </aside>
         );
     }
@@ -1028,71 +961,111 @@ function SourceSignalInsightPanel({ lane, item, items }: { lane: SourceLane; ite
     const keyword = cleanLiveText(item.keyword || item.title, lane.label);
     const description = cleanLiveText(item.description || item.title, lane.description);
     const searchUrl = buildSourceSearchUrl(lane.id, keyword);
-    const strategyGroups = buildSourceStrategy(lane, item, items);
-    const primaryIdeas = (strategyGroups[0]?.items || []).slice(0, 4);
-    const questionIdeas = (strategyGroups[1]?.items || []).slice(0, 3);
-    const clusterIdeas = (strategyGroups[2]?.items || []).slice(0, 3);
+    const rank = Math.max(1, Number(item.rank) || (101 - Number(item.priority || 100)));
+
+    const brief = item.insight;
+    const briefFacts = (brief?.facts || []).slice(0, 4);
+    const briefLinks = (brief?.links || []).slice(0, 3);
+    const briefImage = (brief?.images || [])[0];
+    const briefTitles = brief?.titles || {};
+
+    // 기사 자동 매칭이 없더라도 직접 수집한 포털 순위는 실시간 신호의
+    // 근거다. 빈 마인드맵을 만들지 않고, 수집 원본과 순위를 정직하게 보여준다.
+    if (briefFacts.length === 0) {
+        return (
+            <aside className="source-insight-panel source-insight-panel-empty" style={{ borderColor: lane.accent + '66' }}>
+                <span style={{ color: lane.accent, fontSize: 12, fontWeight: 900 }}>직접 수집 확인 · {lane.label} {rank}위</span>
+                <strong>{keyword}</strong>
+                <p>{lane.label} 원본 실시간 목록에서 직접 수집한 검색 신호입니다. 관련 보도는 자동 매칭될 때만 기사 브리프로 함께 표시합니다.</p>
+                <a href={searchUrl} target="_blank" rel="noreferrer" style={{ justifySelf: 'start', color: lane.accent, fontSize: 12, fontWeight: 900 }}>원본에서 검색</a>
+            </aside>
+        );
+    }
 
     return (
         <aside className="source-insight-panel source-insight-panel-rich" style={{ borderColor: lane.accent + '66' }}>
             <div className="source-insight-head">
                 <div>
-                    <span style={{ color: lane.accent }}>선택 키워드 마인드맵</span>
+                    <span style={{ color: lane.accent }}>선택 키워드 기사 브리프</span>
                     <strong>{keyword}</strong>
                 </div>
                 <a href={searchUrl} target="_blank" rel="noreferrer">검색결과</a>
             </div>
             <p className="source-insight-desc">{description}</p>
-            <div className="source-strategy-grid" aria-label={`${keyword} 키워드 전략`}>
-                <section className="source-strategy-card source-strategy-card-main">
-                    <div className="source-strategy-card-head">
-                        <strong>{strategyGroups[0].label}</strong>
-                        <small>{strategyGroups[0].desc}</small>
+
+            {/*
+              무슨 일이 있었나 — 기사에서 뽑은 실제 정황.
+              접미사 규칙으로 만든 문구가 아니라 기사 원문 문장 그대로이고,
+              바로 아래에 출처 기사를 붙여 확인할 수 있게 한다.
+            */}
+            {briefFacts.length > 0 && (
+                <section className="source-brief" aria-label={`${keyword} 무슨 일이 있었나`}>
+                    <div className="source-brief-head">
+                        <strong>무슨 일이 있었나</strong>
+                        <small>기사에서 확인된 내용입니다</small>
                     </div>
-                    <div className="source-idea-list">
-                        {primaryIdeas.map((idea) => (
-                            <a key={idea.label} className="source-idea-card" href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
-                                <span>{idea.tag}</span>
-                                <strong>{idea.label}</strong>
-                                <small>{idea.reason}</small>
-                                <p>{idea.title}</p>
-                            </a>
-                        ))}
+                    <div className="source-brief-body">
+                        {briefImage && (
+                            <img
+                                className="source-brief-photo"
+                                src={briefImage}
+                                alt={`${keyword} 관련 보도 사진`}
+                                loading="lazy"
+                                referrerPolicy="no-referrer"
+                                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                            />
+                        )}
+                        <ul className="source-brief-facts">
+                            {briefFacts.map((fact) => (
+                                <li key={fact.text.slice(0, 40)}>{fact.text}</li>
+                            ))}
+                        </ul>
                     </div>
+                    {briefLinks.length > 0 && (
+                        <div className="source-brief-links">
+                            <span>공식 확인</span>
+                            {briefLinks.map((link) => (
+                                <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+                                    {link.press || '기사 원문'}
+                                </a>
+                            ))}
+                        </div>
+                    )}
                 </section>
-                <section className="source-strategy-card">
-                    <div className="source-strategy-card-head">
-                        <strong>{strategyGroups[1].label}</strong>
-                        <small>{strategyGroups[1].desc}</small>
+            )}
+
+            {/*
+              이렇게 쓰세요 — 주제와 제목까지 정해 준다.
+              초보자는 주제를 잘못 고르면 홈판 노출 경로가 막히는 것 자체를 모른다.
+              주제는 확신이 있을 때만 표시한다(틀린 주제는 노출을 막는다).
+            */}
+            {(briefTitles.seo || briefTitles.home) && (
+                <section className="source-howto" aria-label={`${keyword} 글쓰기 가이드`}>
+                    <div className="source-howto-head">
+                        <strong>이렇게 쓰세요</strong>
+                        {briefTitles.topic && (
+                            <span className="source-howto-topic">
+                                주제 · {briefTitles.topic}
+                            </span>
+                        )}
                     </div>
-                    <div className="source-question-list">
-                        {questionIdeas.map((idea) => (
-                            <a key={idea.label} href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
-                                <span>{idea.tag}</span>
-                                <strong>{idea.label}</strong>
-                                <small>{idea.reason}</small>
-                            </a>
-                        ))}
-                    </div>
+                    <dl className="source-howto-list">
+                        {briefTitles.seo && (
+                            <div>
+                                <dt>검색 유입용 제목</dt>
+                                <dd>{briefTitles.seo}</dd>
+                            </div>
+                        )}
+                        {briefTitles.home && (
+                            <div>
+                                <dt>홈판 노출용 제목</dt>
+                                <dd>{briefTitles.home}</dd>
+                            </div>
+                        )}
+                    </dl>
                 </section>
-                <section className="source-strategy-card">
-                    <div className="source-strategy-card-head">
-                        <strong>{strategyGroups[2].label}</strong>
-                        <small>{strategyGroups[2].desc}</small>
-                    </div>
-                    <div className="source-cluster-core" style={{ borderColor: lane.accent, color: lane.accent }}>{keyword}</div>
-                    <div className="source-cluster-list">
-                        {clusterIdeas.length === 0 ? (
-                            <p>주변 실시간 키워드가 쌓이면 내부 링크용 클러스터를 자동으로 묶습니다.</p>
-                        ) : clusterIdeas.map((idea) => (
-                            <a key={idea.label} href={buildSourceSearchUrl(lane.id, idea.label)} target="_blank" rel="noreferrer">
-                                <span>{idea.tag}</span>
-                                <strong>{idea.label}</strong>
-                            </a>
-                        ))}
-                    </div>
-                </section>
-            </div>
+            )}
+
         </aside>
     );
 }
@@ -1119,6 +1092,8 @@ function IndexPage() {
     const [liveState, setLiveState] = useState<HomeLiveState>(() => buildFallbackHomeLiveState('loading'));
     const [activeSourceLaneId, setActiveSourceLaneId] = useState<SourceLaneId>('naver');
     const [activeSourceKeyword, setActiveSourceKeyword] = useState('');
+    /** 카드를 누르면 중앙 모달로 크게 펼친다. 우측 패널은 그대로 요약을 유지한다. */
+    const [briefModalKeyword, setBriefModalKeyword] = useState('');
     const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
     const [decorationsReady, setDecorationsReady] = useState(false);
 
@@ -1183,9 +1158,14 @@ function IndexPage() {
         || { ...SOURCE_LANE_CONFIGS[0], items: [] };
     const activeSourceItems = activeSourceLane.items.slice(0, 10);
     const activeSourceInsightItem = activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === activeSourceKeyword) || activeSourceItems[0] || null;
+    const briefModalItem = briefModalKeyword
+        ? activeSourceItems.find((item) => cleanLiveText(item.keyword || item.title, activeSourceLane.label) === briefModalKeyword) || null
+        : null;
     const selectSourceLane = (laneId: SourceLaneId) => {
         setActiveSourceLaneId(laneId);
         setActiveSourceKeyword('');
+        // 레인을 바꾸면 열려 있던 모달의 키워드는 더 이상 이 목록에 없다.
+        setBriefModalKeyword('');
     };
     const handleSourceTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, laneId: SourceLaneId) => {
         const laneIds = liveState.lanes.map((lane) => lane.id);
@@ -1219,6 +1199,15 @@ function IndexPage() {
     return (
         <>
             {decorationsReady && <ParticlesCanvas />}
+
+            <SourceBriefModalStyles />
+            {briefModalItem && (
+                <SourceBriefModal
+                    lane={activeSourceLane}
+                    item={briefModalItem}
+                    onClose={() => setBriefModalKeyword('')}
+                />
+            )}
 
             <HomeOperationsBoard managedProofs={siteContent?.hero?.proofs || []} realtimePanel={(
                     <div className="hero-realtime-board" aria-label="실시간 검색어">
@@ -1279,15 +1268,27 @@ function IndexPage() {
                                         const description = cleanLiveText(item.description || item.title, activeSourceLane.description);
                                         return (
                                             <article key={item.id || `${activeSourceLane.id}-hero-${keyword}-${index}`} className={`hero-source-row${activeSourceInsightItem === item ? ' active' : ''}`}>
-                                                <button type="button" className="hero-source-row-main" onClick={() => setActiveSourceKeyword(keyword)}>
+                                                <button
+                                                    type="button"
+                                                    className="hero-source-row-main"
+                                                    aria-haspopup="dialog"
+                                                    title={`${keyword} 기사 브리프 크게 보기`}
+                                                    onClick={() => {
+                                                        setActiveSourceKeyword(keyword);
+                                                        setBriefModalKeyword(keyword);
+                                                    }}
+                                                >
                                                     <span>{index + 1}</span>
                                                     <div>
                                                         <strong>{keyword}</strong>
                                                         <p>{description}</p>
                                                     </div>
-                                                    {/* 이 값은 실측 지표가 아니라 순위 파생값(100-index)이다.
-                                                        숫자만 크게 띄우면 점수처럼 오해되므로 순위로 표기한다. */}
-                                                    <small>{index + 1}위</small>
+                                                    {/* 왼쪽 번호가 이미 순위다. 오른쪽에 "N위"를 또 쓰면 같은
+                                                        정보가 두 번 나가고, 정작 필요한 게시 시각 자리가 없다.
+                                                        이슈는 몇 분 전 기사인지가 선점 가능 여부를 가른다. */}
+                                                    {item.ago
+                                                        ? <small title={item.publishedLabel || ''}>{item.ago}</small>
+                                                        : <small />}
                                                 </button>
                                                 <a className="hero-source-row-search" href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer">검색</a>
                                             </article>
@@ -1300,7 +1301,7 @@ function IndexPage() {
                                         </span>
                                     )}
                                 </div>
-                                <SourceSignalInsightPanel lane={activeSourceLane} item={activeSourceInsightItem} items={activeSourceItems} />
+                                <SourceSignalInsight lane={activeSourceLane} item={activeSourceInsightItem} items={activeSourceItems} />
                             </div>
                         </div>
                     </div>
@@ -1672,6 +1673,219 @@ function IndexPage() {
                     align-items: start;
                     min-height: 0;
                     height: 100%;
+                }
+
+                /*
+                 * 애드센스 자동광고가 이 2열 그리드 안에 광고를 꽂으면 세 번째
+                 * 그리드 아이템이 되어 열이 밀린다 — 광고가 1열, 목록이 2열,
+                 * 마인드맵은 화면 밖으로 빠진다. 실제로 그렇게 깨진 화면이 나왔다.
+                 * 보드는 조작하는 영역이라 광고를 넣을 자리가 아니므로 여기서만 뺀다.
+                 * (근본 차단은 애드센스 콘솔의 게재위치 제외로 해야 한다)
+                 */
+                /* 이슈 브리프 — 기사에서 확인된 실제 정황 */
+                .source-brief {
+                    border: 1px solid rgba(255,255,255,0.10);
+                    border-radius: 12px;
+                    background: rgba(255,255,255,0.035);
+                    padding: 12px 14px;
+                    margin-bottom: 12px;
+                }
+                .source-brief-head {
+                    display: flex;
+                    align-items: baseline;
+                    gap: 8px;
+                    margin-bottom: 10px;
+                    flex-wrap: wrap;
+                }
+                .source-brief-head strong {
+                    font-size: 13px;
+                    font-weight: 800;
+                    color: #f7fbff;
+                }
+                .source-brief-head small {
+                    font-size: 11px;
+                    color: rgba(255,255,255,0.52);
+                }
+                .source-brief-body {
+                    display: flex;
+                    gap: 12px;
+                    align-items: flex-start;
+                }
+                .source-brief-photo {
+                    width: 104px;
+                    height: 78px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    flex: none;
+                    background: rgba(255,255,255,0.06);
+                }
+                .source-brief-facts {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    display: grid;
+                    gap: 7px;
+                    min-width: 0;
+                }
+                .source-brief-facts li {
+                    font-size: 12.5px;
+                    line-height: 1.62;
+                    color: rgba(255,255,255,0.86);
+                    padding-left: 11px;
+                    position: relative;
+                }
+                .source-brief-facts li::before {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 8px;
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background: rgba(68,215,182,0.85);
+                }
+                .source-brief-links {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    flex-wrap: wrap;
+                    margin-top: 11px;
+                    padding-top: 10px;
+                    border-top: 1px solid rgba(255,255,255,0.08);
+                }
+                .source-brief-links span {
+                    font-size: 11px;
+                    font-weight: 800;
+                    color: rgba(255,255,255,0.5);
+                }
+                .source-brief-links a {
+                    font-size: 11.5px;
+                    font-weight: 700;
+                    color: #63efd0;
+                    border: 1px solid rgba(68,215,182,0.34);
+                    border-radius: 999px;
+                    padding: 3px 10px;
+                    text-decoration: none;
+                }
+
+                /* 분석 중 — 톱니 회전 + 진행 단계 */
+                .source-insight-loading {
+                    display: grid;
+                    place-content: center;
+                    justify-items: center;
+                    gap: 8px;
+                    text-align: center;
+                    min-height: 220px;
+                    padding: 24px;
+                }
+                .source-insight-gear {
+                    width: 34px;
+                    height: 34px;
+                    border-radius: 50%;
+                    border: 3px solid rgba(255,255,255,0.14);
+                    border-top-color: #44d7b6;
+                    animation: sourceGearSpin 0.8s linear infinite;
+                }
+                @keyframes sourceGearSpin { to { transform: rotate(360deg); } }
+                @media (prefers-reduced-motion: reduce) {
+                    .source-insight-gear { animation: none; }
+                }
+                .source-insight-loading strong {
+                    font-size: 15px;
+                    font-weight: 800;
+                    color: #f7fbff;
+                }
+                .source-insight-loading p {
+                    margin: 0;
+                    font-size: 12px;
+                    color: rgba(255,255,255,0.55);
+                }
+                .source-insight-steps {
+                    list-style: none;
+                    margin: 6px 0 0;
+                    padding: 0;
+                    display: grid;
+                    gap: 5px;
+                    font-size: 12px;
+                }
+                .source-insight-steps li {
+                    display: flex;
+                    gap: 8px;
+                    align-items: center;
+                    color: rgba(255,255,255,0.38);
+                }
+                .source-insight-steps li.done { color: rgba(255,255,255,0.86); }
+                .source-insight-steps li span {
+                    font-size: 10px;
+                    font-weight: 800;
+                    min-width: 26px;
+                    text-align: right;
+                }
+
+                /* 이렇게 쓰세요 — 주제·제목 가이드 */
+                .source-howto {
+                    border: 1px solid rgba(244,201,93,0.30);
+                    border-radius: 12px;
+                    background: rgba(244,201,93,0.07);
+                    padding: 12px 14px;
+                    margin-bottom: 12px;
+                }
+                .source-howto-head {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    flex-wrap: wrap;
+                    margin-bottom: 9px;
+                }
+                .source-howto-head strong {
+                    font-size: 13px;
+                    font-weight: 800;
+                    color: #f4c95d;
+                }
+                .source-howto-topic {
+                    font-size: 11px;
+                    font-weight: 800;
+                    color: #0a0a0f;
+                    background: #f4c95d;
+                    border-radius: 999px;
+                    padding: 2px 9px;
+                }
+                .source-howto-list {
+                    margin: 0;
+                    display: grid;
+                    gap: 8px;
+                }
+                .source-howto-list > div {
+                    display: grid;
+                    gap: 3px;
+                }
+                .source-howto-list dt {
+                    font-size: 11px;
+                    font-weight: 700;
+                    color: rgba(255,255,255,0.52);
+                }
+                .source-howto-list dd {
+                    margin: 0;
+                    font-size: 13px;
+                    font-weight: 700;
+                    line-height: 1.5;
+                    color: #f7fbff;
+                }
+
+                @media (max-width: 768px) {
+                    .source-brief-body { flex-direction: column; }
+                    .source-brief-photo { width: 100%; height: 150px; }
+                }
+
+                .hero-source-body > ins.adsbygoogle,
+                .hero-source-body > .google-auto-placed,
+                .home-source-body > ins.adsbygoogle,
+                .home-source-body > .google-auto-placed,
+                .hero-source-list > ins.adsbygoogle,
+                .hero-source-list > .google-auto-placed,
+                .source-insight-panel > ins.adsbygoogle,
+                .source-insight-panel > .google-auto-placed {
+                    display: none !important;
                 }
 
                 .hero-source-row,

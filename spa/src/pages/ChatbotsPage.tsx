@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
+import { color } from '../styles/tokens';
 
 type Chatbot = {
     category: string;
@@ -103,10 +104,10 @@ const FLOWS = [
 ];
 
 const accentMap: Record<Chatbot['accent'], string> = {
-    gold: 'linear-gradient(135deg, #f4c95d, #d4a012)',
-    blue: 'linear-gradient(135deg, #38bdf8, #2563eb)',
-    green: 'linear-gradient(135deg, #44d7b6, #16a34a)',
-    purple: 'linear-gradient(135deg, #a78bfa, #7c3aed)',
+    gold: `linear-gradient(135deg, ${color.goldSoft}, ${color.goldBrassEnd})`,
+    blue: `linear-gradient(135deg, ${color.sky}, #2563eb)`,
+    green: `linear-gradient(135deg, ${color.mint}, #16a34a)`,
+    purple: `linear-gradient(135deg, ${color.purple}, ${color.purpleDeep})`,
     rose: 'linear-gradient(135deg, #fb7185, #e11d48)',
 };
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { color, gradient, onGold, radius } from '../styles/tokens';
 
 /**
  * 주문 조회 — payment-page/lookup.html 마이그.
@@ -51,7 +52,7 @@ async function copyText(text: string) {
         await navigator.clipboard.writeText(text);
         const tooltip = document.createElement('div');
         tooltip.textContent = '✅ 복사됨!';
-        tooltip.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#FFD700,#FFA500);color:#0a0a0f;padding:8px 20px;border-radius:100px;font-size:13px;font-weight:600;z-index:9999;';
+        tooltip.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:' + gradient.goldBright + ';color:' + color.bgDark + ';padding:8px 20px;border-radius:100px;font-size:13px;font-weight:600;z-index:9999;';
         document.body.appendChild(tooltip);
         window.setTimeout(() => tooltip.remove(), 1500);
     } catch {
@@ -167,7 +168,7 @@ function LookupPage() {
     const inactiveTabStyle: React.CSSProperties = { flex: 1, padding: 10, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 8, color: 'rgba(255,255,255,0.6)', fontWeight: 500, fontSize: 13, cursor: 'pointer', transition: 'all 0.2s' };
 
     const inputStyle: React.CSSProperties = { width: '100%', padding: '14px 16px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.10)', borderRadius: 10, color: '#fff', fontSize: 14, marginBottom: 12, outline: 'none' };
-    const btnStyle: React.CSSProperties = { width: '100%', padding: 14, background: 'linear-gradient(135deg, #FFD700, #FFA500)', color: '#000', border: 'none', borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: 'pointer' };
+    const btnStyle: React.CSSProperties = { width: '100%', padding: 14, background: gradient.goldBright, color: onGold.black, border: 'none', borderRadius: radius.md, fontSize: 15, fontWeight: 700, cursor: 'pointer' };
 
     return (
         <div style={{ maxWidth: 520, margin: '0 auto', padding: '140px 20px 80px', position: 'relative', zIndex: 1 }}>

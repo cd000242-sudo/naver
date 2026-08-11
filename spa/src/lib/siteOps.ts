@@ -2,7 +2,6 @@ import { normalizeKeywordBriefing, type HomeKeywordBriefing } from './homeKeywor
 import { maskContactText } from './privacy';
 
 export const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-export const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
 
 export type SiteContent = {
     hero?: {
@@ -113,6 +112,11 @@ export type SiteContent = {
         orbit?: DownloadProductContent;
         tistory?: DownloadProductContent;
     };
+    /**
+     * 운영자가 관리자에서 저장한 홈 키워드 브리핑 검수본.
+     * 크론이 만드는 정적 스냅샷보다 우선한다 — 사람이 고른 것이 이긴다.
+     */
+    keywordBriefing?: unknown;
     theme?: {
         pricingBgImage?: string;
         productsBgImage?: string;
@@ -153,6 +157,8 @@ export type CommunityIncomeProof = {
     media?: string;
     mediaType?: 'image' | 'video';
     mediaName?: string;
+    /** 실제 사용자가 제출·승인한 인증인지, 사이트에 등록된 운영 성과인지 구분한다. */
+    source?: 'submission' | 'site-proof';
 };
 
 export type CommunityIncomeProofResult = {
@@ -180,7 +186,10 @@ export type DownloadProductContent = {
 let siteContentPromise: Promise<SiteContent | null> | null = null;
 const SITE_CONTENT_CACHE_KEY = 'leaderspro.siteContent.cache.v2';
 const SITE_CONTENT_CACHE_TTL_MS = 60 * 1000;
-const SITE_CONTENT_FETCH_TIMEOUT_MS = 2500;
+// Apps Script can take several seconds to wake from a cold start.  A short
+// timeout made the admin editor report a false load failure even though the
+// content API was healthy.
+const SITE_CONTENT_FETCH_TIMEOUT_MS = 10000;
 
 function readCachedSiteContent(maxAgeMs = SITE_CONTENT_CACHE_TTL_MS): SiteContent | null {
     try {
@@ -200,6 +209,16 @@ function writeCachedSiteContent(content: SiteContent) {
         localStorage.setItem(SITE_CONTENT_CACHE_KEY, JSON.stringify({ savedAt: Date.now(), content }));
     } catch {
         // Public page rendering must never depend on cache writes.
+    }
+}
+
+/** 관리자 저장 직후 이전 콘텐츠를 다시 편집기에 쓰지 않도록 캐시를 비운다. */
+export function invalidateSiteContentCache(): void {
+    siteContentPromise = null;
+    try {
+        localStorage.removeItem(SITE_CONTENT_CACHE_KEY);
+    } catch {
+        // Cache invalidation must not block an admin save.
     }
 }
 
@@ -231,8 +250,12 @@ export async function fetchSiteContent(): Promise<SiteContent | null> {
     return siteContentPromise;
 }
 
-const HOME_NOTICE_TIMEOUT_MS = 3200;
+// GAS 콜드 스타트는 평소보다 오래 걸릴 수 있다. 3.2초에서 끊으면 실제 최신
+// 공지를 못 받아 오래된 브라우저 캐시만 보게 된다. 홈의 두 소비자(알림/보드)가
+// 같은 요청을 공유하도록 아래 promise도 둔다.
+const HOME_NOTICE_TIMEOUT_MS = 10000;
 const HOME_NOTICE_CACHE_KEY = 'leaderspro.homeNotices.cache.v2';
+const HOME_NOTICE_ARCHIVE_URL = '/data/home-notices-archive.json';
 const COMMUNITY_INCOME_CACHE_KEY = 'leaderspro.communityIncome.cache.v1';
 const COMMUNITY_INCOME_WIDE_CACHE_KEY = 'leaderspro.communityIncome.community.cache.v1';
 const COMMUNITY_INCOME_CACHE_TTL_MS = 15 * 60 * 1000;
@@ -241,10 +264,6 @@ const HOME_INCOME_RESPONSE_MAX_BYTES = 512 * 1024;
 const COMMUNITY_INCOME_RESPONSE_MAX_BYTES = 32 * 1024 * 1024;
 const COMMUNITY_INCOME_DATA_MEDIA_MAX_CHARS = 32 * 1024 * 1024;
 const HOME_KEYWORD_SEED_URL = '/data/home-keyword-briefing-seed.json';
-// 서버(관리자 기능용)가 죽어도 방문자 화면이 살아있도록, GitHub Actions 가 15분마다
-// 떠 두는 정적 스냅샷. 서버 응답이 없을 때 여기서 읽는다.
-const HOME_NOTICES_SNAPSHOT_URL = '/data/home-notices.json';
-
 function cleanPublicText(value: unknown, maxLength: number): string {
     return String(value ?? '')
         .replace(/<[^>]*>/g, ' ')
@@ -300,7 +319,9 @@ function normalizeHomeNoticeList(values: unknown[], limit: number): HomeNotice[]
         .map(({ notice }) => notice);
 }
 
-type HomeNoticeCacheSource = 'secure' | 'legacy';
+type HomeNoticeCacheSource = 'legacy';
+
+let homeNoticeRequest: Promise<HomeNotice[] | null> | null = null;
 
 function readHomeNoticeCache(limit: number, requiredSource: HomeNoticeCacheSource): HomeNotice[] {
     try {
@@ -323,87 +344,86 @@ function writeHomeNoticeCache(notices: HomeNotice[], source: HomeNoticeCacheSour
     }
 }
 
-type SavedHomeNoticesResult =
-    | { state: 'saved'; notices: HomeNotice[] }
-    | { state: 'uninitialized' }
-    | { state: 'unavailable' };
-
-async function fetchSavedHomeNotices(limit: number): Promise<SavedHomeNoticesResult> {
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), HOME_NOTICE_TIMEOUT_MS);
+export function invalidateHomeNoticeCache(): void {
     try {
-        const response = await fetch(`${LEWORD_API_BASE}/v1/public/home-notices`, {
-            cache: 'no-store',
-            signal: controller.signal,
-        });
-        if (!response.ok) return { state: 'unavailable' };
-        const payload = await response.json() as { ok?: boolean; notices?: { notices?: unknown[] } | null };
-        if (payload?.ok !== true) return { state: 'unavailable' };
-        if (payload.notices === null) return { state: 'uninitialized' };
-        if (!Array.isArray(payload.notices?.notices)) return { state: 'unavailable' };
-        return { state: 'saved', notices: normalizeHomeNoticeList(payload.notices.notices, limit) };
+        localStorage.removeItem(HOME_NOTICE_CACHE_KEY);
     } catch {
-        return { state: 'unavailable' };
-    } finally {
-        window.clearTimeout(timeout);
+        // Cache invalidation must not block an admin save.
     }
 }
 
 async function fetchLegacyHomeNotices(limit: number): Promise<HomeNotice[] | null> {
+    if (homeNoticeRequest) {
+        const shared = await homeNoticeRequest;
+        return shared === null ? null : shared.slice(0, limit);
+    }
     const controller = new AbortController();
     const timeout = window.setTimeout(() => controller.abort(), HOME_NOTICE_TIMEOUT_MS);
+    homeNoticeRequest = (async () => {
     try {
         const response = await fetch(`${GAS_URL}?action=get-notices`, { cache: 'no-store', signal: controller.signal });
         if (!response.ok) return null;
         const payload = await response.json() as { success?: boolean; ok?: boolean; notices?: unknown[] };
         if (!payload || (!payload.success && !payload.ok) || !Array.isArray(payload.notices)) return null;
-        return normalizeHomeNoticeList(payload.notices, limit);
+        // Share the complete public list. Each caller applies its own limit
+        // after awaiting, so a simultaneous alert(5) and board(50) request
+        // cannot accidentally truncate the board to five notices.
+        return normalizeHomeNoticeList(payload.notices, 100);
     } catch {
         return null;
     } finally {
         window.clearTimeout(timeout);
     }
+    })();
+    try {
+        const notices = await homeNoticeRequest;
+        return notices === null ? null : notices.slice(0, limit);
+    } finally {
+        homeNoticeRequest = null;
+    }
 }
 
-/** 정적 스냅샷(/data/home-notices.json). 서버가 죽었을 때의 1차 폴백. */
-async function fetchHomeNoticesSnapshot(limit: number): Promise<HomeNotice[]> {
+/**
+ * Vultr 종료 이전에 사이트에 공개돼 있던 검증된 공지 아카이브다.
+ * GAS가 부분 이관된 상태(현재 1건)여도 기존 공지가 사라져 보이지 않게 하며,
+ * 새 GAS 공지는 항상 우선한다. 이 파일은 크론 수집기가 덮어쓰지 않는다.
+ */
+async function fetchHomeNoticeArchive(limit: number): Promise<HomeNotice[]> {
     try {
-        const response = await fetch(HOME_NOTICES_SNAPSHOT_URL, { cache: 'no-cache' });
+        const response = await fetch(HOME_NOTICE_ARCHIVE_URL, { cache: 'force-cache' });
         if (!response.ok) return [];
         const payload = await response.json() as { items?: unknown[] };
-        return Array.isArray(payload?.items) ? normalizeHomeNoticeList(payload.items, limit) : [];
+        return Array.isArray(payload.items) ? normalizeHomeNoticeList(payload.items, limit) : [];
     } catch {
         return [];
     }
 }
 
+function mergeHomeNotices(primary: HomeNotice[], archive: HomeNotice[], limit: number): HomeNotice[] {
+    const seen = new Set<string>();
+    const merged: HomeNotice[] = [];
+    for (const notice of [...primary, ...archive]) {
+        const key = `${notice.id}\u001f${notice.date}\u001f${notice.title}`.toLocaleLowerCase('ko-KR');
+        if (seen.has(key)) continue;
+        seen.add(key);
+        merged.push(notice);
+    }
+    return normalizeHomeNoticeList(merged, limit);
+}
+
 export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
-    const saved = await fetchSavedHomeNotices(limit);
-    if (saved.state === 'saved') {
-        writeHomeNoticeCache(saved.notices, 'secure');
-        return saved.notices;
-    }
-    if (saved.state === 'unavailable') {
-        // 서버 장애 시: 브라우저 캐시 → 정적 스냅샷 → GAS 순.
-        // 캐시는 재방문자에게만 있고, 스냅샷은 서버 미러라 서버가 죽어 있으면 아예
-        // 생성되지 않는다(404). 그래서 서버와 독립적으로 살아있는 GAS 까지 내려가야
-        // 첫 방문자에게 공지가 보인다 — 이게 빠져서 공지 0건 + 배지 0 이었다.
-        const cached = readHomeNoticeCache(limit, 'secure');
-        if (cached.length > 0) return cached;
-        const snapshot = await fetchHomeNoticesSnapshot(limit);
-        if (snapshot.length > 0) return snapshot;
-        const legacyOnOutage = await fetchLegacyHomeNotices(limit);
-        if (legacyOnOutage !== null && legacyOnOutage.length > 0) {
-            writeHomeNoticeCache(legacyOnOutage, 'legacy');
-            return legacyOnOutage;
-        }
-        return [];
-    }
     const legacy = await fetchLegacyHomeNotices(limit);
-    if (legacy !== null) {
-        writeHomeNoticeCache(legacy, 'legacy');
-        return legacy;
+    if (legacy !== null && legacy.length > 0) {
+        // The first recovered GAS data set contains only one old seed notice.
+        // Merge the versioned, public archive so this partial migration does
+        // not hide the other published notices. Newly saved GAS rows win.
+        const archive = legacy.length < limit ? await fetchHomeNoticeArchive(limit) : [];
+        const merged = mergeHomeNotices(legacy, archive, limit);
+        writeHomeNoticeCache(merged, 'legacy');
+        return merged;
     }
+    const archive = await fetchHomeNoticeArchive(limit);
+    if (archive.length > 0) return archive;
     return readHomeNoticeCache(limit, 'legacy');
 }
 
@@ -534,7 +554,6 @@ function normalizeIncomeMedia(
             const hostname = parsed.hostname.toLocaleLowerCase();
             const trustedHost = hostname === 'leaderspro.kr'
                 || hostname === 'www.leaderspro.kr'
-                || hostname === '141.164.59.17.sslip.io'
                 || hostname === 'script.googleusercontent.com'
                 || hostname.endsWith('.googleusercontent.com');
             safeUrl = parsed.protocol === 'https:' && !parsed.username && !parsed.password && trustedHost;
@@ -601,6 +620,7 @@ function normalizeCommunityIncomeProof(
         date,
         desc: desc || '수익인증 자료를 등록했습니다.',
         tags,
+        source: 'submission',
         ...media,
     };
 }
@@ -620,6 +640,54 @@ function normalizeCommunityIncomeProofs(
         if (items.length >= limit) break;
     }
     return items;
+}
+
+type ManagedProofInput = {
+    src?: string;
+    alt?: string;
+    title?: string;
+    desc?: string;
+    metric?: string;
+};
+
+function normalizeManagedProofMedia(value: unknown): string {
+    const media = String(value || '').trim();
+    // The site-content editor may contain arbitrary text, so only serve local
+    // images from the versioned public asset directory as a proof fallback.
+    if (!media.startsWith('/images/') || media.startsWith('//') || media.includes('..') || media.includes('\\') || media.length > 4096) return '';
+    return media;
+}
+
+/**
+ * 홈 관리자가 등록한 실제 성과 캡처를 수익/성과 카드로 표시한다.
+ * GAS의 사용자가 올린 승인 자료가 있으면 그것이 먼저 보이고, 이 함수는
+ * 마이그레이션 중 이미지 없는 초기 시드 때문에 화면이 비는 일을 막는다.
+ */
+export function managedHomeProofsToIncomeProofs(
+    proofs: readonly ManagedProofInput[] | undefined,
+    limit = 12,
+): CommunityIncomeProof[] {
+    const safeLimit = Math.max(1, Math.min(24, Math.floor(limit) || 12));
+    const result: CommunityIncomeProof[] = [];
+    for (const proof of proofs || []) {
+        const media = normalizeManagedProofMedia(proof?.src);
+        if (!media) continue;
+        const amount = cleanPublicText(proof.title || proof.metric, 100) || '운영 성과 인증';
+        result.push({
+            id: `managed-income-${hashIncomeProofId(media)}`,
+            amount,
+            author: '운영 성과 인증',
+            date: '',
+            desc: cleanPublicMultilineText(proof.desc || proof.alt, 600) || '관리자가 등록한 실제 운영 성과 화면입니다.',
+            tags: ['운영 성과'],
+            media,
+            mediaType: 'image',
+            mediaName: cleanPublicText(proof.alt || proof.title, 120) || amount,
+            source: 'site-proof',
+        });
+        if (result.length >= safeLimit) break;
+    }
+    return result;
 }
 
 function normalizeCommunityIncomeLimit(limit: number, view: CommunityIncomeView): number {
@@ -770,31 +838,22 @@ async function fetchKeywordBriefingSeed(): Promise<HomeKeywordBriefing | null> {
     }
 }
 
-async function fetchSavedKeywordBriefing(): Promise<HomeKeywordBriefing | null> {
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), SITE_CONTENT_FETCH_TIMEOUT_MS);
-    try {
-        const response = await fetch(`${LEWORD_API_BASE}/v1/public/home-keyword-briefing`, {
-            cache: 'no-store',
-            signal: controller.signal,
-        });
-        if (!response.ok) return null;
-        const payload = await response.json() as { ok?: boolean; briefing?: unknown };
-        return payload?.ok ? normalizeKeywordBriefing(payload.briefing) : null;
-    } catch {
-        return null;
-    } finally {
-        window.clearTimeout(timeout);
-    }
-}
-
+/**
+ * 홈 키워드 브리핑.
+ *
+ * 순서가 중요하다: **운영자가 저장한 검수본이 먼저**고, 없을 때만 크론 스냅샷이다.
+ *
+ * 예전에는 정적 스냅샷만 읽었다. 그래서 관리자에서 "검수본을 홈에 저장"을 눌러도
+ * 홈이 절대 바뀌지 않았다 — 저장은 GAS 로 가는데 읽기는 파일만 봤기 때문이다.
+ * (타입에 source:'saved' 가 남아 있던 게 그 흔적이다.)
+ */
 export async function fetchHomeKeywordBriefing(): Promise<HomeKeywordBriefingResult | null> {
-    const [saved, seed] = await Promise.all([
-        fetchSavedKeywordBriefing(),
-        fetchKeywordBriefingSeed(),
-    ]);
-    if (saved) return { briefing: saved, source: 'saved' };
-    return seed ? { briefing: seed, source: 'seed' } : null;
+    const content = await fetchSiteContent();
+    const saved = normalizeKeywordBriefing(content?.keywordBriefing);
+    if (saved && saved.rows.length > 0) return { briefing: saved, source: 'saved' };
+
+    const snapshot = await fetchKeywordBriefingSeed();
+    return snapshot ? { briefing: snapshot, source: 'seed' } : null;
 }
 
 function runWhenIdle(task: () => void) {

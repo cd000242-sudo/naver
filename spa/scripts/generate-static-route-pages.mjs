@@ -6,8 +6,6 @@ import { buildKeywordDetail, keywordSlug, isEvergreenKeyword } from '../src/lib/
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const distDir = path.resolve(__dirname, '..', 'dist');
 const templatePath = path.join(distDir, 'index.html');
-const legacyAdminDir = path.resolve(__dirname, '..', '..', 'admin');
-const legacyAdminPath = path.join(legacyAdminDir, 'index.html');
 const siteOrigin = 'https://leaderspro.kr';
 
 const routes = [
@@ -285,6 +283,57 @@ function writeKeywordDetailPages(template) {
   return written;
 }
 
+/**
+ * 라우트별 공유 카드 이미지.
+ *
+ * 예전에는 전 페이지가 og-image.jpg 한 장을 공유했다. 요금제를 공유해도
+ * 다운로드를 공유해도 같은 그림이 떠서, 카드가 무엇에 대한 링크인지
+ * 알려주지 못했다. og:title·description 은 페이지별로 바꾸면서 이미지만
+ * 안 바꾼 탓이다.
+ *
+ * 없는 라우트는 기본값(og-image.jpg)으로 떨어진다 — 조용히 깨지지 않는다.
+ */
+const OG_IMAGE_BY_ROUTE = {
+  products: 'og/products.jpg',
+  detail: 'og/products.jpg',        // 제품 상세는 제품군 카드를 함께 쓴다
+  'leword-detail': 'og/leword-detail.jpg',
+  leword: 'og/leword.jpg',
+  // 매일 올리는 '무료 선정 황금키워드' 페이지. 같은 얘기라 leword 카드를 같이 쓴다.
+  briefing: 'og/leword.jpg',
+  orbit: 'og/orbit.jpg',
+  pricing: 'og/pricing.jpg',
+  download: 'og/download.jpg',
+  chatbots: 'og/chatbots.jpg',
+};
+
+/**
+ * og:image 와 twitter:image 를 함께 갈아 끼운다.
+ * 둘 중 하나만 바꾸면 플랫폼마다 다른 그림이 떠서 더 헷갈린다.
+ *
+ * 전용 이미지가 없는 라우트는 건드리지 않는다. 기본값을 다시 써 넣으면
+ * replaceRequired 가 "바뀐 게 없다"를 치환 실패로 보고 빌드를 세운다
+ * (briefing 라우트에서 실제로 걸렸다).
+ */
+function replaceCardImage(html, routePath) {
+  const file = OG_IMAGE_BY_ROUTE[routePath];
+  if (!file) return html;
+  /*
+   * 파일이 실제로 있어야 갈아 끼운다.
+   *
+   * 매핑만 걸어 두고 이미지를 안 넣었더니 공유 카드 6개가 404 로 나갔다
+   * (하네스가 잡았다: "공유하면 깨진 카드가 나간다"). 없는 그림을 가리키느니
+   * 기본 카드를 쓰는 편이 낫다 — 기본은 최소한 살아 있다.
+   */
+  if (!fs.existsSync(path.join(distDir, file))) {
+    console.warn(`  · og 이미지 없음 — 기본 카드 유지: ${file} (${routePath})`);
+    return html;
+  }
+  const imageUrl = `${siteOrigin}/${file}`;
+  let next = replaceRequired(html, /<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${imageUrl}" />`, `og:image (${routePath})`);
+  next = replaceRequired(next, /<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${imageUrl}" />`, `twitter:image (${routePath})`);
+  return next;
+}
+
 function routeHtml(template, route) {
   const url = `${siteOrigin}/${route.path}`;
   const title = escapeText(route.title);
@@ -300,6 +349,7 @@ function routeHtml(template, route) {
   html = replaceRequired(html, /<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${url}" />`, 'og:url');
   html = replaceRequired(html, /<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${attrTitle}" />`, 'twitter:title');
   html = replaceRequired(html, /<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${description}" />`, 'twitter:description');
+  html = replaceCardImage(html, route.path);
 
   const prerender = PRERENDER_BY_PATH[route.path];
   if (prerender) {
@@ -325,16 +375,6 @@ for (const route of routes) {
   const routeDir = path.join(distDir, route.path);
   fs.mkdirSync(routeDir, { recursive: true });
   fs.writeFileSync(path.join(routeDir, 'index.html'), routeHtml(template, route), 'utf8');
-}
-
-if (fs.existsSync(legacyAdminPath)) {
-  const adminDir = path.join(distDir, 'admin');
-  fs.cpSync(legacyAdminDir, adminDir, { recursive: true, force: true });
-  const adminHtml = fs.readFileSync(legacyAdminPath, 'utf8');
-  fs.writeFileSync(path.join(distDir, 'admin.html'), adminHtml, 'utf8');
-  console.log('Copied the complete legacy admin panel to dist/admin and generated dist/admin.html.');
-} else {
-  console.warn(`Legacy admin panel was not found: ${legacyAdminPath}`);
 }
 
 /** 그날 브리핑 전체를 담은 날짜 아카이브. 실시간 이슈는 여기에 '그날의 기록'으로 남아 낡지 않는다. */

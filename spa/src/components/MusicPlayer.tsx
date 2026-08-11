@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { fetchSiteContent } from '../lib/siteOps';
+import { gradient, onGold } from '../styles/tokens';
 
 declare global {
     interface Window {
@@ -342,8 +343,8 @@ function MusicPlayer() {
                             width: '100%',
                             padding: 10,
                             borderRadius: 10,
-                            background: 'linear-gradient(135deg, #c9a84c, #d4a012)',
-                            color: '#1a0a2e',
+                            background: gradient.goldBright,
+                            color: onGold.black,
                             fontWeight: 800,
                             fontSize: 14,
                             border: 'none',

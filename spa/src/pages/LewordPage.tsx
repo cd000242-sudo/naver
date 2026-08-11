@@ -1,153 +1,107 @@
 import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import AffiliateTab from '../components/leword/AffiliateTab';
+import AnalyzeTab from '../components/leword/AnalyzeTab';
+import GoldenTab from '../components/leword/GoldenTab';
+import KeysTab from '../components/leword/KeysTab';
+import LewordStyles from '../components/leword/LewordStyles';
+import RankTab from '../components/leword/RankTab';
+import YoutubeTab from '../components/leword/YoutubeTab';
 
-// Keep the Pro shell in Pages so UI fixes can ship before the API container restarts.
-const LEWORD_PRO_WEB_URL = '/leword-pro-web.html';
+/**
+ * /leword — 좌측 사이드탭으로 기능을 하나씩 쓰는 화면.
+ *
+ * 이전에는 "앱 받으세요" 배너 한 장뿐이라 광고만 보였다. 방문자가 여기서
+ * 실제로 뭔가를 해 볼 수 있어야 앱을 받을 이유가 생긴다.
+ *
+ * 탭 상태는 URL 쿼리(`?tab=`)에 둔다. 새로고침이나 공유했을 때 같은 화면이
+ * 열려야 하고, 뒤로가기가 탭 전환으로 동작해야 하기 때문이다.
+ */
+
+const TABS = [
+    { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
+    { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
+    { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
+    { id: 'youtube', label: '유튜브 실시간·급상승', short: '유튜브', icon: '▶' },
+    { id: 'rank', label: '노출 추적', short: '노출 추적', icon: '↗' },
+    { id: 'keys', label: '내 API 키', short: 'API 키', icon: '⚿' },
+] as const;
+
+type TabId = (typeof TABS)[number]['id'];
+
+function isTabId(value: string): value is TabId {
+    return TABS.some((tab) => tab.id === value);
+}
 
 function LewordPage() {
-    const [iframeKey, setIframeKey] = useState(() => Date.now());
-    const [loaded, setLoaded] = useState(false);
-    const [failed, setFailed] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const tabParam = searchParams.get('tab') || '';
+    const activeTab: TabId = isTabId(tabParam) ? tabParam : 'golden';
+    /** 탭 사이로 키워드를 넘긴다 — 황금보드에서 고른 걸 분석 탭이 이어받는다. */
+    const [handoffKeyword, setHandoffKeyword] = useState(searchParams.get('keyword') || '');
 
     useEffect(() => {
-        const prevTitle = document.title;
-        document.title = 'LEWORD Pro Web';
-
-        // 다른 페이지에서 넘어온 경우 이미 붙은 자동광고(사이드레일/앵커)가 콘솔 UI를 덮는다 — 제거.
-        const removeAutoAds = () => {
-            document.querySelectorAll('ins.adsbygoogle, .adsbygoogle-noablate, [id^="google_ads_iframe"]').forEach((el) => {
-                el.parentElement?.removeChild(el);
-            });
-        };
-        removeAutoAds();
-        const adCleanupTimer = window.setInterval(removeAutoAds, 1500);
-
-        return () => {
-            document.title = prevTitle;
-            window.clearInterval(adCleanupTimer);
-        };
+        const previous = document.title;
+        document.title = 'LEWORD 키워드 도구 | Leaders Pro';
+        return () => { document.title = previous; };
     }, []);
 
-    useEffect(() => {
-        if (loaded) return undefined;
-        const timer = window.setTimeout(() => setFailed(true), 8000);
-        return () => window.clearTimeout(timer);
-    }, [loaded, iframeKey]);
-
-    const iframeSrc = `${LEWORD_PRO_WEB_URL}?embed=leaderspro&v=${iframeKey}`;
-
-    const retry = () => {
-        setLoaded(false);
-        setFailed(false);
-        setIframeKey(Date.now());
+    const selectTab = (tab: TabId, keyword?: string) => {
+        const next = new URLSearchParams(searchParams);
+        next.set('tab', tab);
+        if (keyword) next.set('keyword', keyword);
+        else next.delete('keyword');
+        setSearchParams(next, { replace: false });
+        if (keyword !== undefined) setHandoffKeyword(keyword || '');
     };
 
+    const sendToAnalyze = (keyword: string) => selectTab('analyze', keyword);
+
     return (
-        <section
-            aria-label="LEWORD Pro Web"
-            style={{
-                minHeight: 'calc(100vh - 72px)',
-                background: '#07090d',
-                padding: '10px 14px 14px',
-            }}
-        >
-            <div
-                style={{
-                    position: 'relative',
-                    minHeight: 'calc(100vh - 102px)',
-                    border: '1px solid rgba(91,183,255,.28)',
-                    borderRadius: 8,
-                    overflow: 'hidden',
-                    background: '#07090d',
-                    boxShadow: '0 20px 54px rgba(0,0,0,.34)',
-                }}
-            >
-                {(!loaded || failed) && (
-                    <div
-                        style={{
-                            position: 'absolute',
-                            top: 12,
-                            left: 12,
-                            right: 12,
-                            zIndex: 3,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            gap: 10,
-                            pointerEvents: 'none',
-                        }}
-                    >
-                        <div
-                            role="status"
-                            aria-live="polite"
-                            style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 8,
-                                border: '1px solid rgba(245,197,66,.28)',
-                                borderRadius: 8,
-                                background: 'rgba(7,9,13,.72)',
-                                color: '#f8fbff',
-                                padding: '8px 10px',
-                                boxShadow: '0 10px 28px rgba(0,0,0,.22)',
-                                backdropFilter: 'blur(10px)',
-                                pointerEvents: 'auto',
-                            }}
-                        >
-                            <strong style={{ color: '#f5c542', fontSize: 13, fontWeight: 900 }}>
-                                LEWORD Pro Web
-                            </strong>
-                            <span style={{ color: '#a4b1c4', fontSize: 12 }}>
-                                {failed ? '콘솔을 불러오지 못했습니다' : '콘솔 불러오는 중'}
-                            </span>
-                        </div>
+        // <main> 이 아니라 <div> 다. 이유가 둘이다:
+        //  ① Layout 이 이미 <main> 을 렌더한다 — 중첩되면 잘못된 마크업이다.
+        //  ② global.css 의 `main { background: transparent !important }` 가
+        //     이 화면의 어두운 바탕을 지워서, 관리자 배경 사진이 카드 뒤로 비쳤다.
+        <div className="lw-app">
+            <LewordStyles />
+
+            <aside className="lw-side" aria-label="LEWORD 기능">
+                <div className="lw-brand">
+                    <span className="lw-logo" aria-hidden="true">L</span>
+                    <b>LEWORD</b>
+                </div>
+
+                <nav className="lw-nav">
+                    {TABS.map((tab) => (
                         <button
+                            key={tab.id}
                             type="button"
-                            onClick={retry}
-                            style={{
-                                minHeight: 36,
-                                border: '1px solid rgba(91,183,255,.42)',
-                                borderRadius: 8,
-                                background: 'rgba(7,9,13,.72)',
-                                color: '#dceaff',
-                                padding: '7px 11px',
-                                fontSize: 12,
-                                fontWeight: 900,
-                                boxShadow: '0 10px 28px rgba(0,0,0,.22)',
-                                backdropFilter: 'blur(10px)',
-                                pointerEvents: 'auto',
-                            }}
+                            className={`lw-navi${activeTab === tab.id ? ' on' : ''}`}
+                            aria-current={activeTab === tab.id ? 'page' : undefined}
+                            onClick={() => selectTab(tab.id)}
                         >
-                            새로고침
+                            <span aria-hidden="true">{tab.icon}</span>
+                            <em>{tab.label}</em>
                         </button>
-                    </div>
-                )}
-                <iframe
-                    key={iframeKey}
-                    title="LEWORD Pro Web"
-                    src={iframeSrc}
-                    onLoad={() => {
-                        setLoaded(true);
-                        setFailed(false);
-                    }}
-                    onError={() => {
-                        setLoaded(false);
-                        setFailed(true);
-                    }}
-                    style={{
-                        width: '100%',
-                        height: 'calc(100vh - 102px)',
-                        minHeight: 720,
-                        border: 0,
-                        display: 'block',
-                        background: '#07090d',
-                        opacity: 1,
-                        transition: 'opacity .18s ease',
-                    }}
-                    allow="clipboard-read; clipboard-write"
-                    referrerPolicy="no-referrer-when-downgrade"
-                />
-            </div>
-        </section>
+                    ))}
+                </nav>
+
+                <div className="lw-side-foot">
+                    <p>더 많은 발굴 결과와 자동 추적은 프로그램에서 씁니다.</p>
+                    <Link to="/download">LEWORD 다운로드</Link>
+                    <Link to="/pricing" className="lw-ghost">요금제 보기</Link>
+                </div>
+            </aside>
+
+            <section className="lw-main">
+                {activeTab === 'golden' && <GoldenTab onAnalyze={sendToAnalyze} />}
+                {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
+                {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
+                {activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
+                {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} />}
+                {activeTab === 'keys' && <KeysTab />}
+            </section>
+        </div>
     );
 }
 

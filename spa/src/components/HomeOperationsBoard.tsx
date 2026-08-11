@@ -4,6 +4,7 @@ import {
     fetchCommunityIncomeProofs,
     fetchHomeKeywordBriefing,
     fetchHomeNotices,
+    managedHomeProofsToIncomeProofs,
     type CommunityIncomeProof,
     type CommunityIncomeProofResult,
     type HomeKeywordBriefingResult,
@@ -28,7 +29,7 @@ const HOME_OPS_TAB_ORDER: HomeOperationsTab[] = ['realtime', 'notice', 'income']
 const HOME_OPS_TAB_META: Record<HomeOperationsTab, { label: string; desc: string; accent?: string }> = {
     realtime: { label: '실시간 검색어', desc: '네이버·뉴스 등 현재 흐름을 참고용으로 확인', accent: '#44d7b6' },
     notice: { label: '공지사항', desc: '최신 공지를 접고 펼쳐 확인' },
-    income: { label: '수익 인증', desc: '승인된 실제 인증 자료만 표시' },
+    income: { label: '수익 인증', desc: '승인된 수익·실제 운영 성과 자료만 표시' },
 };
 
 type HomeManagedProof = {
@@ -206,71 +207,28 @@ function NoticeCard({ notice, index, open, onToggle }: {
     );
 }
 
-function IncomeProofCard({ proof }: { proof: CommunityIncomeProof }) {
+function IncomeProofCard({ proof, eager = false }: { proof: CommunityIncomeProof; eager?: boolean }) {
     if (!proof.media) return null;
-    const mediaAlt = proof.mediaName || `${proof.author} 수익 인증`;
+    const isManagedProof = proof.source === 'site-proof';
+    const mediaAlt = proof.mediaName || `${proof.author} ${isManagedProof ? '운영 성과' : '수익'} 인증`;
     return (
-        <article className="home-ops-income-card">
+        <article className={`home-ops-income-card${isManagedProof ? ' managed-proof' : ''}`}>
             <div className="home-ops-income-visual">
                 {proof.mediaType === 'video' ? (
                     <video src={proof.media} controls playsInline preload="metadata" aria-label={mediaAlt} />
                 ) : (
-                    // eager: the income panel stays mounted (hidden) so a small set of
-                    // proof images preloads in the background and appears instantly on tab open.
-                    <img src={proof.media} alt={mediaAlt} loading="eager" decoding="async" referrerPolicy="no-referrer" />
+                    <img src={proof.media} alt={mediaAlt} loading={eager ? 'eager' : 'lazy'} decoding="async" referrerPolicy="no-referrer" />
                 )}
             </div>
             <div className="home-ops-income-copy">
-                <span>실제 수익 인증</span>
+                <span>{isManagedProof ? '실제 운영 성과' : '승인된 수익 인증'}</span>
                 <h3>{proof.amount}</h3>
                 <p>{proof.desc}</p>
-                <small>{proof.author}{proof.date ? ` · ${proof.date}` : ''}</small>
+                <small>{isManagedProof ? '관리자 등록 자료' : `${proof.author}${proof.date ? ` · ${proof.date}` : ''}`}</small>
                 <Link to="/community">커뮤니티에서 크게 보기 →</Link>
             </div>
         </article>
     );
-}
-
-function cleanManagedProofText(value: unknown, fallback: string, maxLength: number): string {
-    const cleaned = String(value || '')
-        .replace(/[\u0000-\u001f\u007f]/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim()
-        .slice(0, maxLength);
-    return cleaned || fallback;
-}
-
-function normalizeManagedProofSrc(value: unknown): string {
-    const src = String(value || '').trim();
-    if (!src || src.length > 4096 || /[\u0000-\u001f\u007f\\]/.test(src)) return '';
-    if (src.startsWith('/images/') && !src.includes('..') && !src.startsWith('//')) return src;
-    try {
-        const parsed = new URL(src);
-        const hostname = parsed.hostname.toLocaleLowerCase();
-        const trustedHost = hostname === 'leaderspro.kr'
-            || hostname === 'www.leaderspro.kr'
-            || hostname === '141.164.59.17.sslip.io';
-        return parsed.protocol === 'https:' && !parsed.username && !parsed.password && trustedHost ? src : '';
-    } catch {
-        return '';
-    }
-}
-
-function managedProofToIncomeProof(proof: HomeManagedProof, index: number): CommunityIncomeProof | null {
-    const media = normalizeManagedProofSrc(proof.src);
-    if (!media) return null;
-    const amount = cleanManagedProofText(proof.title || proof.metric, '실제 인증 캡처', 100);
-    return {
-        id: `managed-income-${index + 1}-${media}`,
-        amount,
-        author: '운영 등록 인증',
-        date: '',
-        desc: cleanManagedProofText(proof.desc || proof.alt, '관리자가 등록한 실제 인증 이미지입니다.', 600),
-        tags: [],
-        media,
-        mediaType: 'image',
-        mediaName: cleanManagedProofText(proof.alt || proof.title, amount, 120),
-    };
 }
 
 function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
@@ -454,12 +412,10 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
 
     const briefing = briefingResult?.briefing || null;
     const incomeProofs = (incomeResult?.items || []).filter((proof) => Boolean(proof.media));
-    const managedIncomeProofs = useMemo(() => (
-        managedProofs
-            .map(managedProofToIncomeProof)
-            .filter((proof): proof is CommunityIncomeProof => Boolean(proof))
-            .slice(0, 3)
-    ), [managedProofs]);
+    const managedIncomeProofs = useMemo(
+        () => managedHomeProofsToIncomeProofs(managedProofs, 12),
+        [managedProofs],
+    );
     const displayIncomeProofs = incomeProofs.length > 0 ? incomeProofs : managedIncomeProofs;
     const usingManagedProofs = incomeProofs.length === 0 && managedIncomeProofs.length > 0;
     const chartRows = useMemo(() => briefing ? selectKeywordChartRows(briefing, 10) : [], [briefing]);
@@ -480,7 +436,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
     };
 
     return (
-        <section className="home-ops" aria-labelledby="home-ops-title">
+        <section id="realtime-search" className="home-ops" aria-labelledby="home-ops-title">
             <style>{`
                 .home-ops {
                     position: relative;
@@ -669,42 +625,56 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     line-height: 1.8;
                     white-space: pre-line;
                 }
-                .home-ops-income-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 12px; padding: 12px; }
-                .home-ops-income-card {
+                .home-ops-income-list {
                     display: grid;
-                    grid-template-columns: 136px minmax(0, 1fr);
+                    grid-template-columns: repeat(auto-fill, minmax(min(236px, 100%), 1fr));
+                    gap: 16px;
+                    padding: 16px;
+                }
+                .home-ops-income-card {
+                    display: flex;
+                    flex-direction: column;
                     min-width: 0;
                     overflow: hidden;
-                    border: 1px solid rgba(255,255,255,0.10);
-                    border-radius: 10px;
-                    background: rgba(255,255,255,0.04);
+                    border: 1px solid rgba(255,255,255,0.13);
+                    border-radius: 14px;
+                    background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.028));
+                    box-shadow: 0 12px 30px rgba(0,0,0,0.17);
+                    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+                }
+                .home-ops-income-card:hover {
+                    transform: translateY(-3px);
+                    border-color: rgba(68,215,182,0.55);
+                    box-shadow: 0 18px 36px rgba(0,0,0,0.27);
                 }
                 .home-ops-income-visual {
-                    min-height: 136px;
+                    aspect-ratio: 4 / 3;
+                    min-height: 190px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     overflow: hidden;
-                    background: linear-gradient(145deg, rgba(68,215,182,0.24), rgba(244,201,93,0.16));
+                    background: linear-gradient(145deg, rgba(68,215,182,0.17), rgba(244,201,93,0.13));
+                    border-bottom: 1px solid rgba(255,255,255,0.09);
                 }
                 .home-ops-income-visual img,
-                .home-ops-income-visual video { width: 100%; height: 100%; min-height: 136px; object-fit: contain; display: block; }
+                .home-ops-income-visual video { width: 100%; height: 100%; min-height: 190px; object-fit: contain; display: block; }
                 .home-ops-income-visual > strong { padding: 10px; color: #f4c95d; font-size: 20px; line-height: 1.35; text-align: center; }
-                .home-ops-income-copy { min-width: 0; padding: 15px 16px; }
-                .home-ops-income-copy > span { color: #63efd0; font-size: 16px; font-weight: 900; }
-                .home-ops-income-copy h3 { margin: 5px 0 7px; color: #fff; font-size: 21px; line-height: 1.35; }
+                .home-ops-income-copy { display: flex; flex: 1; flex-direction: column; min-width: 0; padding: 16px; }
+                .home-ops-income-copy > span { color: #63efd0; font-size: 13px; font-weight: 900; letter-spacing: .02em; }
+                .home-ops-income-copy h3 { margin: 6px 0 8px; color: #fff; font-size: 19px; line-height: 1.35; }
                 .home-ops-income-copy p {
                     display: -webkit-box;
                     margin: 0 0 9px;
                     overflow: hidden;
                     color: rgba(235,242,250,0.74);
-                    font-size: 16px;
-                    line-height: 1.6;
+                    font-size: 14px;
+                    line-height: 1.62;
                     -webkit-box-orient: vertical;
-                    -webkit-line-clamp: 3;
+                    -webkit-line-clamp: 2;
                 }
-                .home-ops-income-copy small { display: block; color: rgba(235,242,250,0.72); font-size: 16px; line-height: 1.5; }
-                .home-ops-income-copy a { display: inline-block; margin-top: 10px; color: #f4c95d; font-size: 16px; font-weight: 850; text-decoration: none; }
+                .home-ops-income-copy small { display: block; color: rgba(235,242,250,0.67); font-size: 13px; line-height: 1.5; }
+                .home-ops-income-copy a { display: inline-block; margin-top: auto; padding-top: 12px; color: #f4c95d; font-size: 14px; font-weight: 850; text-decoration: none; }
                 .home-ops-empty {
                     padding: 34px 22px;
                     color: rgba(235,242,250,0.68);
@@ -1054,11 +1024,10 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     .home-ops-panel-head { align-items: flex-start; padding: 18px 16px; }
                     .home-ops-notice-toggle { padding: 16px; }
                     .home-ops-notice-detail { padding: 0 16px 18px; }
-                    .home-ops-income-card { grid-template-columns: minmax(0, 1fr); }
+                    .home-ops-income-list { grid-template-columns: 1fr; padding: 12px; }
                     .home-ops-income-visual,
                     .home-ops-income-visual img,
-                    .home-ops-income-visual video { min-height: 200px; max-height: 360px; }
-                    .home-ops-income-visual img { min-height: 200px; max-height: 360px; }
+                    .home-ops-income-visual video { min-height: 210px; max-height: 420px; }
                     .home-ops-tab { min-height: 60px; }
                     .home-ops-brief-head { align-items: flex-start; flex-direction: column; padding: 20px 16px; }
                     .home-ops-fixed-badge { width: 100%; box-sizing: border-box; text-align: left; }
@@ -1251,7 +1220,9 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                         </div>
                         {displayIncomeProofs.length > 0 ? (
                             <div className="home-ops-income-list">
-                                {displayIncomeProofs.map((proof) => <IncomeProofCard key={proof.id} proof={proof} />)}
+                                {displayIncomeProofs.map((proof, index) => (
+                                    <IncomeProofCard key={proof.id} proof={proof} eager={index < 3} />
+                                ))}
                             </div>
                         ) : (
                             <div className="home-ops-empty">

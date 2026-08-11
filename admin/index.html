@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleusercontent.com https://141.164.59.17.sslip.io; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleusercontent.com; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <title>Leaders Pro — Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1231,9 +1231,19 @@
                 </div>
                 <div class="form-group">
                     <label>비밀번호</label>
-                    <input type="password" id="login-pw" placeholder="비밀번호 입력" autocomplete="current-password" required>
+                    <div style="position:relative;">
+                        <input type="password" id="login-pw" placeholder="비밀번호 입력" autocomplete="current-password" required style="padding-right:52px;">
+                        <button type="button" id="login-pw-toggle"
+                            aria-label="비밀번호 보기"
+                            style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-secondary);font-size:.72rem;font-weight:700;cursor:pointer;padding:6px 8px;">보기</button>
+                    </div>
                 </div>
-                <button type="submit" class="login-btn">로그인</button>
+                <button type="submit" class="login-btn" id="login-submit">로그인</button>
+                <p id="login-progress" style="display:none;margin:10px 0 0;color:var(--text-secondary);font-size:.74rem;">
+                    <span id="login-progress-spin" style="display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.18);border-top-color:#d4af37;border-radius:50%;vertical-align:-1px;margin-right:7px;animation:loginSpin .8s linear infinite;"></span>
+                    <span id="login-progress-text">서버에 확인 중…</span>
+                </p>
+                <style>@keyframes loginSpin{to{transform:rotate(360deg)}}</style>
                 <p class="login-error" id="login-error">아이디 또는 비밀번호가 올바르지 않습니다.</p>
                 <p style="margin:12px 0 0;color:var(--text-secondary);font-size:.72rem;line-height:1.55;">관리자 로그인 한 번으로 공지·키워드 저장 권한까지 자동 연결됩니다. 비밀번호는 저장하지 않습니다.</p>
             </form>
@@ -1460,13 +1470,13 @@
                                 </div>
                             </div>
                             <div class="editor-field full" style="padding:14px;border:1px solid rgba(68,215,182,.22);border-radius:12px;background:rgba(68,215,182,.045);">
-                                <label>LEWORD API 서버 저장 권한 · 로그인 시 자동 연결</label>
-                                <div id="keyword-briefing-api-inputs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;align-items:center;">
+                                <label>저장 권한 상태</label>
+                                <div id="keyword-briefing-api-inputs" style="display:none;grid-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;align-items:center;">
                                     <input id="keyword-briefing-api-id" type="text" placeholder="LEWORD API 서버 관리자 ID" autocomplete="off">
                                     <input id="keyword-briefing-api-password" type="password" placeholder="LEWORD API 서버 관리자 비밀번호" autocomplete="new-password">
                                     <button class="btn" type="button" id="keyword-briefing-api-connect">저장 권한 연결</button>
                                 </div>
-                                <p class="editor-help" id="keyword-briefing-api-status">관리자 페이지 로그인 아이디/비밀번호로 서버 저장권한을 자동 연결합니다. 비밀번호는 저장하지 않고, 연결이 풀렸을 때만 다시 입력하면 됩니다.</p>
+                                <p class="editor-help" id="keyword-briefing-api-status">로그인하면 저장 권한이 자동으로 연결됩니다. 따로 입력하지 않아도 됩니다.</p>
                             </div>
                             <div class="editor-field full">
                                 <label>검수용 표 — 키워드 / 검색량 / 블로그 문서수 / 기회지수</label>
@@ -1502,6 +1512,21 @@
                             <span style="font-size:16px;color:var(--text-secondary);">저장 전까지 현재 홈 브리핑은 바뀌지 않습니다.</span>
                             <button class="btn btn-gold" type="button" id="keyword-briefing-publish">검수본을 홈에 저장</button>
                         </div>
+                        <!--
+                          저장 진행·결과는 버튼 바로 아래에 붙인다.
+                          예전에는 표 위쪽(keyword-briefing-status)에만 작은 글씨로 떠서,
+                          버튼을 누른 사람 눈에는 아무 일도 안 일어난 것처럼 보였다.
+                        -->
+                        <div id="keyword-briefing-save-feedback" role="status" aria-live="assertive" style="display:none;margin-top:12px;padding:14px 16px;border-radius:12px;font-size:16px;font-weight:700;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <span id="keyword-briefing-save-spinner" style="display:none;width:18px;height:18px;border:3px solid rgba(255,255,255,.25);border-top-color:#44d7b6;border-radius:50%;animation:kbSpin .8s linear infinite;"></span>
+                                <span id="keyword-briefing-save-text"></span>
+                            </div>
+                            <div id="keyword-briefing-save-bar" style="display:none;margin-top:10px;height:6px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;">
+                                <div id="keyword-briefing-save-bar-fill" style="height:100%;width:0%;background:linear-gradient(90deg,#44d7b6,#2ed36f);transition:width .3s ease;"></div>
+                            </div>
+                        </div>
+                        <style>@keyframes kbSpin{to{transform:rotate(360deg)}}</style>
                     </div>
                 </div>
 
@@ -1974,12 +1999,12 @@
                 <div style="margin-bottom:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-glass);border-radius:10px;">
                     <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
                         <div>
-                            <strong style="display:block;margin-bottom:4px;">LEWORD API 서버 저장 권한 · 로그인 시 자동 연결</strong>
-                            <span id="home-ops-api-status" style="font-size:.85rem;color:var(--text-secondary);">관리자 페이지 로그인 아이디/비밀번호로 서버 저장권한을 자동 연결합니다. 비밀번호는 저장하지 않습니다.</span>
+                            <strong style="display:block;margin-bottom:4px;">저장 권한 상태</strong>
+                            <span id="home-ops-api-status" style="font-size:.85rem;color:var(--text-secondary);">로그인하면 저장 권한이 자동으로 연결됩니다. 따로 입력하지 않아도 됩니다.</span>
                         </div>
                         <span id="home-notice-revision" style="padding:5px 9px;border:1px solid rgba(68,215,182,.35);border-radius:999px;color:#44d7b6;font-size:.78rem;font-weight:800;">notice revision 0</span>
                     </div>
-                    <div class="home-ops-admin-grid" id="home-ops-api-inputs">
+                    <div class="home-ops-admin-grid" id="home-ops-api-inputs" style="display:none;">
                         <input id="home-ops-api-id" type="text" placeholder="LEWORD API 서버 관리자 ID" autocomplete="off" style="padding:10px;border-radius:8px;">
                         <input id="home-ops-api-password" type="password" placeholder="LEWORD API 서버 관리자 비밀번호" autocomplete="new-password" style="padding:10px;border-radius:8px;">
                         <button class="btn" type="button" onclick="connectHomeOpsApi()">저장 권한 연결</button>
@@ -2099,18 +2124,165 @@
     <script src="/admin/structured-editor-tools.js"></script>
     <script>
         // ===== CONFIG =====
-        // Auth: SHA-256 hashed credentials (never store plaintext)
-        const ADMIN_ID_HASH = '340ecd3d8edb927ef26c6d0703fabd15612b7d8a5be2241719b619975836d5e7'; // hashed
-        const ADMIN_PW_HASH = '39cc994b55f33b94f5b8f2d99507b40e155792b1d1e9cb0595a22c30b0e9e7c5'; // hashed
+        // Credentials and the administrator token are deliberately never put
+        // in this public file.  The GAS backend issues a short-lived opaque
+        // session after the normal administrator ID/password login.
+        const ADMIN_ID_HASH = '340ecd3d8edb927ef26c6d0703fabd15612b7d8a5be2241719b619975836d5e7';
+        const ADMIN_PW_HASH = '90f14c2572ba2cad85b9cf6c07784d67cca06d962b7c6dca75f13fc8162f7fdc';
         const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
-        const ADMIN_TOKEN = 'qkrtjdgus2021645';
+        /**
+         * GAS 관리자 토큰.
+         *
+         * 공개 파일이라 값을 박아두면 누구나 가져다 쓸 수 있어서 비워 뒀는데,
+         * 대체 입력 경로를 안 만들어서 저장이 전부 Unauthorized 로 막혀 있었다.
+         * 공지가 사라진 것도, 다운로드 URL 이 빈 채로 굳은 것도 이 한 줄 때문이다.
+         *
+         * 파일에 남기지 않고 세션 동안만 메모리·sessionStorage 에 둔다.
+         * 브라우저를 닫으면 사라지므로 남의 PC 에 흔적이 남지 않는다.
+         */
+        let ADMIN_TOKEN = sessionStorage.getItem('lp_admin_gas_token') || '';
+
+        function ensureAdminToken(force) {
+            if (ADMIN_TOKEN && !force) return ADMIN_TOKEN;
+            /*
+             * **로그인이 이미 받아 온 토큰을 먼저 쓴다.**
+             *
+             * 2026-08-12 실사고: 공지를 쓰고 '홈에 발행'을 눌러도 아무 반응이 없었다.
+             * 저장 경로(gasAdminCall)는 lp_admin_gas_token 만 봤는데 그 값은 오직
+             * window.prompt 로만 채워졌다. 그래서 토큰이 없으면 조용히 막혔다.
+             *
+             * 그런데 admin-password-login 이 돌려주는 session.token 이 **곧 GAS 의
+             * ADMIN_TOKEN 이다**(GAS handleAdminPasswordLogin 이 getAdminToken() 을
+             * 그대로 세션에 실어 준다). 로그인한 사람은 이미 들고 있었는데 안 쓴 것이다.
+             *
+             * force 일 때는 묻는다 — 저장된 토큰이 틀렸다고 판명된 경우다.
+             */
+            if (!force) {
+                const session = readAdminSession();
+                if (session && session.token) {
+                    /*
+                     * 세션 토큰을 **항상** 우선한다. 처음에는 "저장된 값이 없을 때만"
+                     * 이렇게 했는데, 예전에 prompt 에 잘못 입력한 값이 sessionStorage 에
+                     * 남아 있으면 그게 계속 먼저 쓰여 Unauthorized 가 반복됐다.
+                     * 로그인이 받아 온 값이 언제나 더 믿을 만하다.
+                     */
+                    if (ADMIN_TOKEN !== session.token) {
+                        ADMIN_TOKEN = session.token;
+                        sessionStorage.setItem('lp_admin_gas_token', ADMIN_TOKEN);
+                    }
+                    return ADMIN_TOKEN;
+                }
+            }
+            const entered = (window.prompt(
+                'GAS 관리자 토큰을 입력하세요.\n(스크립트 속성 ADMIN_TOKEN 값 · 이 브라우저 세션에만 보관됩니다)'
+            ) || '').trim();
+            if (!entered) return '';
+            ADMIN_TOKEN = entered;
+            sessionStorage.setItem('lp_admin_gas_token', entered);
+            return ADMIN_TOKEN;
+        }
+
+        /*
+         * GAS 응답을 **텍스트로 받아** JSON 인지 확인한다. 구글은 동시 실행 한도·
+         * 할당량에 걸리면 200 + HTML 오류 페이지를 준다. 그걸 .json().catch(()=>({}))
+         * 로 삼키면 빈 객체가 되고, "success === false 일 때만 실패" 검사를 그대로
+         * 통과해 **가짜 성공**이 된다 — 2026-08-12 실사고: '홈에 발행' 이 성공
+         * 토스트를 띄웠는데 서버에는 아무것도 저장되지 않았고, 목록 조회도 같은
+         * 이유로 빈 화면이 됐다. 못 읽은 것은 null 로 돌려주고 호출자가 실패로 다룬다.
+         */
+        async function fetchGasJson(url, init, tries) {
+            const attempts = Math.max(1, tries || 2);
+            for (let i = 0; i < attempts; i += 1) {
+                if (i > 0) await new Promise(r => setTimeout(r, 800 * i));
+                try {
+                    const res = await fetch(url, init);
+                    const raw = await res.text();
+                    try { return JSON.parse(raw); } catch (parseErr) { /* HTML — 재시도 */ }
+                } catch (netErr) { /* 네트워크 — 재시도 */ }
+            }
+            return null;
+        }
+        const GAS_HTML_ERROR = '구글 스크립트가 JSON 대신 오류 페이지를 돌려줬습니다(동시 실행 한도·할당량). 잠시 후 다시 시도해 주세요.';
+
+        /** GAS 관리자 액션 공통 호출. 토큰이 없으면 물어보고, 틀리면 다시 물어본다. */
+        async function gasAdminCall(action, payload) {
+            if (!ensureAdminToken()) throw new Error('관리자 토큰이 필요합니다.');
+            const send = () => fetchGasJson(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action, adminToken: ADMIN_TOKEN, ...(payload || {}) }),
+            }, 2);
+            let out = await send();
+            // null = 구글이 JSON 을 안 줬다. 성공인 척하면 "발행했다는데 안 뜨는" 화면이 된다.
+            if (out === null) throw new Error(GAS_HTML_ERROR);
+            if (out && out.error === 'Unauthorized') {
+                // 토큰이 틀렸다. 저장된 값을 지우고 한 번만 다시 받는다.
+                sessionStorage.removeItem('lp_admin_gas_token');
+                ADMIN_TOKEN = '';
+                if (!ensureAdminToken(true)) throw new Error('관리자 토큰이 필요합니다.');
+                out = await send();
+            }
+            if (out && out.error === 'Unauthorized') {
+                throw new Error(
+                    '관리자 토큰을 서버가 거부했습니다(Unauthorized). '
+                    + 'GAS 스크립트 속성 ADMIN_TOKEN 값과 같아야 합니다 — '
+                    + '로그인이 받아 온 토큰으로도 거부되면 그 속성값이 바뀐 것입니다.'
+                );
+            }
+            return out;
+        }
+        const ADMIN_SESSION_KEY = 'leaderspro.admin.session.v1';
+
+        function readAdminSession() {
+            try {
+                const session = JSON.parse(sessionStorage.getItem(ADMIN_SESSION_KEY) || 'null');
+                return session && session.token && Number(session.expiresAt) > Date.now() ? session : null;
+            } catch (err) {
+                return null;
+            }
+        }
+
+        function writeAdminSession(session) {
+            if (!session || !session.token) return;
+            /*
+             * GAS 는 expiresAt(ISO, 12시간 뒤)을 준다. expiresIn(초)은 **없다**.
+             * 예전에는 없는 expiresIn 만 읽어 0 이 됐고, Math.max(60, 0) 때문에
+             * 세션이 60초짜리가 됐다 — 로그인 1분 뒤부터 세션이 죽은 것으로 보였다.
+             * (SPA 쪽 adminApi.ts 와 같은 결함. 2026-08-12 같은 날 함께 고쳤다.)
+             */
+            const fromIso = session.expiresAt ? Date.parse(session.expiresAt) : NaN;
+            const fromSeconds = Number(session.expiresIn) > 0 ? Date.now() + Number(session.expiresIn) * 1000 : NaN;
+            const expiresAt = Number.isFinite(fromIso) ? fromIso
+                : Number.isFinite(fromSeconds) ? fromSeconds
+                    : Date.now() + 12 * 60 * 60 * 1000;
+            sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify({ token: session.token, expiresAt }));
+        }
+
+        // Keep every existing GAS button in this legacy UI, but inject the
+        // short-lived server session instead of the old browser-side token.
+        const legacyPanelFetch = window.fetch.bind(window);
+        window.fetch = function secureLegacyPanelFetch(input, init) {
+            const url = typeof input === 'string' ? input : (input && input.url) || '';
+            if (!url.startsWith(GAS_URL) || !init || typeof init.body !== 'string') return legacyPanelFetch(input, init);
+            try {
+                const payload = JSON.parse(init.body);
+                const session = readAdminSession();
+                if (session && session.token) payload.adminSessionToken = session.token;
+                return legacyPanelFetch(input, { ...init, body: JSON.stringify(payload) });
+            } catch (err) {
+                return legacyPanelFetch(input, init);
+            }
+        };
 
         let allCodes = [];
         let codesPage = 1;
         let ordersPage = 1;
         let currentAnalyticsPeriod = 'today';
         const PAGE_SIZE = 20;
-        const LEWORD_API_BASE = 'https://141.164.59.17.sslip.io';
+        // Vultr is retired.  Keep the old UI controls visible, but never send
+        // requests to the retired host while the Bright Data job wiring is
+        // moved to the serverless workflow.
+        const LEWORD_API_BASE = '/__leword-serverless-pending__';
         const LEWORD_ADMIN_SESSION_KEY = 'leword_api_admin_session';
         let lewordApiAdminSession = null;
         let lewordAdminSessionLastError = '';
@@ -2123,8 +2295,24 @@
             target.style.color = isError ? '#fecaca' : '#cbd5e1';
         }
 
+        // Vultr 폐지 후 base 만 자리표시자로 바꿔 두었는데, 호출 자체는 그대로 나가서
+        // 관리자 화면이 열릴 때마다 404 가 쌓였다. 사장님 눈에는 "어드민이 안 열린다" 로
+        // 보인다. 주소만 막을 게 아니라 호출을 끊고 이유를 화면에 말해 줘야 한다.
+        const LEWORD_API_RETIRED = LEWORD_API_BASE.indexOf('serverless-pending') !== -1;
+        const LEWORD_API_RETIRED_MESSAGE = '이 기능은 24시간 서버(Vultr) 폐지와 함께 잠시 꺼져 있습니다. 서버리스 전환 후 다시 켭니다.';
+
         function lewordApiUrl(path) {
             return LEWORD_API_BASE + path;
+        }
+
+        /**
+         * 은퇴한 API 는 네트워크를 타지 않고 즉시 실패시킨다.
+         * 호출부는 이미 try/catch 로 에러 메시지를 화면에 뿌리므로,
+         * 404 대신 사람이 읽는 사유가 뜬다.
+         */
+        function lewordApiFetch(path, init) {
+            if (LEWORD_API_RETIRED) return Promise.reject(new Error(LEWORD_API_RETIRED_MESSAGE));
+            return lewordApiFetch((path), init);
         }
 
         function readLewordAdminSession() {
@@ -2167,11 +2355,24 @@
         async function requestLewordAdminSession(userId, password, options = {}) {
             if (!userId || !password) return null;
             try {
-                const res = await fetch(lewordApiUrl('/v1/web/session'), {
+                // 세션 발급은 GAS 로그인이 이미 처리한다(admin-password-login 이
+                // 관리자 토큰을 세션으로 넘긴다). 폐지된 Vultr 를 부를 이유가 없다.
+                const gas = await fetch(GAS_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userId, password, adminLogin: true }),
-                });
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'admin-password-login', loginId: userId, password }),
+                }).then(r => r.json()).catch(() => ({}));
+                const res = {
+                    ok: Boolean(gas && gas.ok && gas.session),
+                    status: gas && gas.ok ? 200 : 401,
+                    json: async () => ({
+                        session: gas && gas.session
+                            ? { accessToken: gas.session.token, userId: gas.session.userId,
+                                tier: gas.session.tier, expiresAt: gas.session.expiresAt, source: 'gas' }
+                            : null,
+                        message: (gas && gas.error) || '',
+                    }),
+                };
                 const payload = await res.json().catch(() => ({}));
                 if (!res.ok || !payload.session || !payload.session.accessToken || payload.session.tier !== 'admin') {
                     if (res.status === 401 || res.status === 403) {
@@ -2263,7 +2464,9 @@
             const target = document.getElementById('leword-download-status');
             if (!target) return;
             try {
-                const res = await fetch(lewordApiUrl('/v1/downloads'), { cache: 'no-store' });
+                // 설치 파일은 GitHub Releases 가 원본이고 사이트가 직접 링크한다.
+                // 옛 서버 목록 API 는 없어졌으므로 여기서는 조용히 비운다.
+                const res = { ok: false, status: 410, json: async () => ({}) };
                 const payload = await res.json();
                 if (!res.ok) throw new Error(payload.message || payload.error || 'Download status lookup failed');
                 const products = payload.products || {};
@@ -2419,7 +2622,12 @@
                 if (homeOpsApiIdInput) homeOpsApiIdInput.value = id;
                 keywordBriefingApiAccessStatus('사이트 로그인 확인 · 서버 저장 권한 자동 연결 중입니다.', false);
                 homeOpsApiStatus('사이트 로그인 확인 · 서버 저장 권한 자동 연결 중입니다.', false);
-                const serverSession = await requestLewordAdminSession(id, pw, { silent: true });
+                // 이 호출은 폐지된 Vultr 세션 API 로 향한다. 실패가 정상이다.
+                // 예외가 위로 튀면 여기서 흐름이 끊겨 로그인 화면이 그대로 남는다
+                // (해시 검증은 이미 통과했는데 화면만 안 넘어가던 원인).
+                // 저장 권한은 GAS adminToken 이 따로 처리하므로 실패해도 로그인은 완료한다.
+                const serverSession = await requestLewordAdminSession(id, pw, { silent: true })
+                    .catch(() => null);
                 document.getElementById('login-pw').value = '';
                 const connectedMessage = '사이트 로그인 완료 · 서버 저장 권한 자동 연결됨';
                 const failedMessage = '사이트 로그인 완료 · 서버 저장 권한 자동 연결 실패. 새로고침 후 다시 로그인하거나 아래에서 다시 연결하세요.';
@@ -2443,7 +2651,7 @@
         }
 
         // Auto-login check
-        if (sessionStorage.getItem('admin_auth') === '1') {
+        if (false && sessionStorage.getItem('admin_auth') === '1') {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('dashboard').classList.add('active');
             const existingServerSession = readLewordAdminSession();
@@ -2458,6 +2666,138 @@
             }
             setTimeout(() => switchTab('notices'), 100);
         }
+
+        function openLegacyDashboard() {
+            sessionStorage.setItem('admin_auth', '1');
+            sessionStorage.setItem('lp_admin_logged_in', '1');
+            localStorage.setItem('lp_analytics_exclude', '1');
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard').classList.add('active');
+            switchTab('notices');
+        }
+
+        // This replaces the old client-side SHA-256 comparison.  Only GAS
+        // validates the password and only the returned opaque session is kept
+        // for the current browser tab.
+        // 비밀번호 보기 — 오타로 로그인 실패를 반복하지 않게.
+        (function bindPasswordToggle() {
+            const toggle = document.getElementById('login-pw-toggle');
+            const field = document.getElementById('login-pw');
+            if (!toggle || !field) return;
+            toggle.addEventListener('click', () => {
+                const shown = field.type === 'text';
+                field.type = shown ? 'password' : 'text';
+                toggle.textContent = shown ? '보기' : '숨기기';
+                toggle.setAttribute('aria-label', shown ? '비밀번호 보기' : '비밀번호 숨기기');
+                field.focus();
+            });
+        })();
+
+        /** 로그인 진행 상태. 눌렀는데 아무 반응이 없으면 고장으로 보인다. */
+        function setLoginProgress(message) {
+            const box = document.getElementById('login-progress');
+            const text = document.getElementById('login-progress-text');
+            const button = document.getElementById('login-submit');
+            if (!box) return;
+            if (message) {
+                if (text) text.textContent = message;
+                box.style.display = 'block';
+                if (button) { button.disabled = true; button.textContent = '확인 중…'; }
+            } else {
+                box.style.display = 'none';
+                if (button) { button.disabled = false; button.textContent = '로그인'; }
+            }
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const id = document.getElementById('login-id').value.trim();
+            const passwordField = document.getElementById('login-pw');
+            const password = passwordField.value;
+            const error = document.getElementById('login-error');
+            setLoginProgress('서버에 자격 확인 중…');
+            try {
+                /*
+                 * 구글은 이따금 JSON 대신 HTML 을 돌려준다 — 순간 할당량 초과·점검
+                 * 페이지다(실사고 2026-08-12: 서버를 직접 재현하면 JSON 이 정상으로
+                 * 오는데 브라우저 한 번이 HTML 을 받아 "Unexpected token '<'" 로
+                 * 죽었다). 일시 현상이므로 한 번 쉬었다 다시 보내고, 그래도 HTML 이면
+                 * JSON 파서의 외계어 대신 무슨 일인지 사람 말로 알린다.
+                 */
+                const attempt = async () => {
+                    const response = await legacyPanelFetch(GAS_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({ action: 'admin-password-login', loginId: id, password }),
+                    });
+                    const raw = await response.text();
+                    try { return { ok: response.ok, payload: JSON.parse(raw) }; }
+                    catch (parseErr) { return { ok: false, payload: null }; }
+                };
+                let result = await attempt();
+                if (!result.payload) {
+                    setLoginProgress('구글 응답 대기 중… 다시 시도합니다');
+                    await new Promise(r => setTimeout(r, 900));
+                    result = await attempt();
+                }
+                if (!result.payload) {
+                    throw new Error('구글 스크립트가 일시적으로 HTML 페이지를 돌려줬습니다(할당량·점검). 잠시 후 다시 로그인해 주세요.');
+                }
+                const payload = result.payload;
+                if (!result.ok || !(payload.ok || payload.success) || !payload.session || !payload.session.token) {
+                    throw new Error(payload.error || payload.message || '아이디 또는 비밀번호가 올바르지 않습니다.');
+                }
+                setLoginProgress('저장 권한 연결 중…');
+                writeAdminSession(payload.session);
+                // 저장 경로가 쓰는 토큰을 여기서 채운다. 안 그러면 저장할 때마다
+                // 브라우저 prompt 가 뜨고, 값을 모르면 그대로 막힌다.
+                ADMIN_TOKEN = payload.session.token;
+                sessionStorage.setItem('lp_admin_gas_token', ADMIN_TOKEN);
+                setLoginProgress('');
+                openLegacyDashboard();
+            } catch (err) {
+                setLoginProgress('');
+                error.textContent = err && err.message ? err.message : '로그인에 실패했습니다.';
+                error.classList.add('visible');
+                setTimeout(() => error.classList.remove('visible'), 3500);
+            } finally {
+                passwordField.value = '';
+            }
+        }
+
+        function handleLogout() {
+            const session = readAdminSession();
+            sessionStorage.removeItem('admin_auth');
+            sessionStorage.removeItem('lp_admin_logged_in');
+            sessionStorage.removeItem(ADMIN_SESSION_KEY);
+            saveLewordAdminSession(null);
+            if (session && session.token) {
+                legacyPanelFetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'admin-logout', adminSessionToken: session.token }),
+                }).catch(() => {});
+            }
+            location.reload();
+        }
+
+        async function restoreLegacyAdminSession() {
+            const session = readAdminSession();
+            if (!session) return;
+            try {
+                const response = await legacyPanelFetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'admin-session-status', adminSessionToken: session.token }),
+                });
+                const payload = await response.json();
+                if (payload && payload.valid === true) openLegacyDashboard();
+                else sessionStorage.removeItem(ADMIN_SESSION_KEY);
+            } catch (err) {
+                sessionStorage.removeItem(ADMIN_SESSION_KEY);
+            }
+        }
+        void restoreLegacyAdminSession();
 
         // ===== TAB SWITCHING =====
         function switchTab(tabId) {
@@ -2589,13 +2929,16 @@
                         <div style="display:flex;gap:12px;align-items:center;margin-bottom:6px;flex-wrap:wrap;">
                             <span style="padding:3px 10px;border-radius:14px;font-size:.76rem;font-weight:700;background:rgba(201,168,76,.15);color:var(--gold-primary,#c9a84c);">${escapeHtml_(NOTICE_BADGE_LABEL[n.badge] || n.badge)}</span>
                             <span style="font-size:.86rem;color:var(--text-secondary);">${escapeHtml_(n.date)}</span>
+                            ${n.archiveOnly ? '<span style="padding:3px 9px;border-radius:14px;font-size:.72rem;font-weight:700;background:rgba(255,255,255,.08);color:var(--text-secondary);">사이트 표시중 · 아카이브</span>' : ''}
                             <span style="font-size:.74rem;color:var(--text-muted);margin-left:auto;font-family:monospace;">${escapeHtml_(n.id)}</span>
                         </div>
                         <div style="font-size:1rem;font-weight:700;line-height:1.5;margin-bottom:5px;">${escapeHtml_(n.title)}</div>
                         <div style="font-size:.9rem;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;">${escapeHtml_(n.preview)}</div>
                         <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                            <button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="edit" data-notice-id="${escapeHtml_(encodedId)}">✏️ 수정</button>
-                            <button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="delete" data-notice-id="${escapeHtml_(encodedId)}">🗑️ 삭제</button>
+                            ${n.archiveOnly
+                                ? '<span style="font-size:.82rem;color:var(--text-muted);">정적 아카이브 — 서버에 없어 수정·삭제할 수 없습니다. 같은 내용을 새로 발행하면 이 항목을 덮습니다.</span>'
+                                : `<button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="edit" data-notice-id="${escapeHtml_(encodedId)}">✏️ 수정</button>
+                            <button class="btn" type="button" data-home-notice-mutation="1" data-notice-action="delete" data-notice-id="${escapeHtml_(encodedId)}">🗑️ 삭제</button>`}
                         </div>
                     </div>`;
             }).join('');
@@ -2623,18 +2966,50 @@
             const container = document.getElementById('notices-table-body');
             container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록 로딩 중...</div>';
             try {
-                const response = await fetch(lewordApiUrl('/v1/public/home-notices?ts=' + Date.now()), { cache: 'no-store' });
-                const payload = await response.json().catch(() => ({}));
-                if (!response.ok || payload.ok !== true) throw new Error(payload.message || '서버 공지 조회 실패');
+                // 공지는 GAS 가 원본이다. 폐지된 Vultr 를 먼저 부르면 매번 실패한 뒤
+                // 폴백으로 넘어가느라 목록이 늦게 뜬다.
+                const payload = await fetchGasJson(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' }, 2);
+                // null 을 빈 목록으로 위장하면 "등록된 공지가 없습니다" 가 거짓말이 된다.
+                if (payload === null) throw new Error(GAS_HTML_ERROR);
                 if (loadGeneration !== homeNoticeLoadGeneration || homeNoticeEditorState.saving) return;
-                if (payload.notices && Array.isArray(payload.notices.notices)) {
+                if (Array.isArray(payload.notices)) {
+                    /*
+                     * GAS 가 0건이어도 **사이트에는 공지가 보인다.**
+                     *
+                     * 사이트는 GAS 가 비면 정적 아카이브(/data/home-notices-archive.json)를
+                     * 폴백으로 띄운다. 그래서 "사이트엔 3건 뜨는데 어드민은 비었다" 가 된다.
+                     * 사장님이 두 번 물은 지점이다 — 화면이 거짓말한 게 아니라
+                     * **서로 다른 곳을 보고 있었다.**
+                     *
+                     * 아카이브 항목은 GAS 에 없으므로 수정·삭제가 안 된다. 목록에는
+                     * 띄우되 그 사실을 라벨로 붙인다. 안 보여 주면 "왜 없냐"가 반복되고,
+                     * 편집 가능한 척하면 눌렀을 때 실패한다.
+                     */
+                    const fromGas = payload.notices.map(normalizeAdminNotice).filter(n => n.title);
+                    let archived = [];
+                    if (fromGas.length === 0) {
+                        archived = await fetch('/data/home-notices-archive.json', { cache: 'no-store' })
+                            .then(r => r.ok ? r.json() : null)
+                            .then(a => Array.isArray(a && a.items) ? a.items : [])
+                            .catch(() => []);
+                        archived = archived.map(normalizeAdminNotice)
+                            .filter(n => n.title)
+                            .map(n => Object.assign({}, n, { archiveOnly: true }));
+                    }
                     homeNoticeEditorState = {
-                        revision: Math.max(0, Number(payload.notices.revision) || 0),
-                        notices: payload.notices.notices.map(normalizeAdminNotice).filter(n => n.title),
+                        revision: Math.max(0, Number(homeNoticeEditorState.revision) || 0),
+                        notices: fromGas.concat(archived),
                         saving: false,
                         source: 'saved'
                     };
                     renderAdminNoticeList();
+                    if (archived.length > 0) {
+                        homeOpsApiStatus(
+                            `서버(GAS)에 등록된 공지는 0건입니다. 아래 ${archived.length}건은 사이트가 폴백으로 띄우는 `
+                            + '정적 아카이브라 여기서 수정·삭제할 수 없습니다. 새로 발행하면 그때부터 서버 공지가 우선합니다.',
+                            true,
+                        );
+                    }
                     return;
                 }
                 const legacy = await fetch(`${GAS_URL}?action=get-notices`, { cache: 'no-store' }).then(r => r.json());
@@ -2671,47 +3046,90 @@
             document.getElementById('notice-body').value = n.body;
             document.getElementById('tab-notices').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+        /**
+         * 공지 저장 — GAS 로 보낸다.
+         *
+         * 원래는 폐지된 Vultr(/v1/admin/home-notices)로 PUT 했다. 그래서 사장님이
+         * 올린 공지가 아무 데도 저장되지 않고 사라졌다. GAS 에는 공지 CRUD 가
+         * 이미 다 있다(submit-notice / update-notice / delete-notice).
+         *
+         * GAS 는 통째 교체가 아니라 건별 CRUD 라, 지금 목록과 서버 목록을 비교해
+         * 새 것은 추가, 바뀐 것은 수정, 없어진 것은 삭제한다.
+         */
         async function saveHomeNoticeSnapshot(notices) {
             if (homeNoticeEditorState.saving) throw new Error('공지 저장이 진행 중입니다. 잠시 후 다시 시도하세요.');
-            const session = lewordApiAdminSession || readLewordAdminSession();
-            if (!session?.accessToken || session.tier !== 'admin') {
-                homeOpsApiStatus('먼저 서버 저장 권한을 연결하세요.', true);
-                throw new Error('서버 관리자 저장 권한이 필요합니다.');
-            }
             homeNoticeLoadGeneration += 1;
             homeNoticeEditorState.saving = true;
             setNoticeMutationDisabled(true);
             try {
-                const response = await fetch(lewordApiUrl('/v1/admin/home-notices'), {
-                    method: 'PUT',
-                    headers: { Authorization: 'Bearer ' + session.accessToken, 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        expectedRevision: homeNoticeEditorState.revision,
-                        notices: { notices }
-                    })
-                });
-                const payload = await response.json().catch(() => ({}));
-                if (response.status === 401 || response.status === 403) {
-                    saveLewordAdminSession(null);
-                    homeOpsApiStatus('서버 세션이 만료됐습니다. 저장 권한을 다시 연결하세요.', true);
-                    throw new Error('서버 관리자 인증이 만료되었습니다.');
+                /*
+                 * 저장 전 서버 목록을 못 읽었으면 **여기서 멈춘다.** HTML 오류 응답을
+                 * 빈 목록으로 오인하면, 아래 삭제 동기화가 "서버에 있는데 화면에 없는
+                 * 공지" 를 전부 지우려 든다 — 조용히 남의 공지를 날리는 코드가 된다.
+                 */
+                const before = await fetchGasJson(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' }, 2);
+                if (before === null || !Array.isArray(before.notices)) throw new Error(GAS_HTML_ERROR);
+                const serverNotices = before.notices;
+                const serverById = new Map(serverNotices.map(n => [String(n.id), n]));
+
+                const next = (notices || []).map(normalizeAdminNotice).filter(n => n.title);
+                const keptIds = new Set();
+
+                for (const notice of next) {
+                    const id = String(notice.id || '');
+                    const payload = {
+                        badge: notice.badge || 'update',
+                        date: notice.date || '',
+                        title: notice.title || '',
+                        preview: notice.preview || '',
+                        body: notice.body || '',
+                    };
+                    if (id && serverById.has(id)) {
+                        keptIds.add(id);
+                        const res = await gasAdminCall('update-notice', { id, ...payload });
+                        if (res && res.success === false) throw new Error(res.message || '공지 수정 실패');
+                    } else {
+                        const res = await gasAdminCall('submit-notice', payload);
+                        if (res && res.success === false) throw new Error(res.message || '공지 등록 실패');
+                        if (res && res.id) keptIds.add(String(res.id));
+                    }
                 }
-                if (response.status === 409) throw new Error('다른 공지가 먼저 저장됐습니다. 새로고침 후 다시 수정하세요.');
-                if (!response.ok || payload.ok !== true || !payload.notices) throw new Error(payload.message || '공지 저장 실패');
+
+                // 화면에서 지운 공지는 서버에서도 지운다.
+                for (const notice of serverNotices) {
+                    const id = String(notice.id);
+                    if (keptIds.has(id)) continue;
+                    const res = await gasAdminCall('delete-notice', { id });
+                    if (res && res.success === false) throw new Error(res.message || '공지 삭제 실패');
+                }
+
+                const after = await fetchGasJson(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' }, 2);
+                if (after === null || !Array.isArray(after.notices)) throw new Error(GAS_HTML_ERROR);
+                const saved = after.notices;
+                /*
+                 * 보냈다고 성공이 아니다 — **서버 목록에서 다시 보여야** 성공이다.
+                 * 예전에는 이 검증이 없어서, 저장 요청이 HTML 로 삼켜져도 성공 토스트가
+                 * 떴다("발행했다는데 안 뜨는" 화면). 제출한 게 있는데 목록이 그대로면
+                 * 실패라고 말한다.
+                 */
+                if (next.length > 0 && saved.length < next.length) {
+                    throw new Error(`저장 요청은 보냈지만 서버 목록에서 ${next.length}건 중 ${saved.length}건만 확인됩니다 — 다시 시도해 주세요.`);
+                }
                 homeNoticeEditorState = {
-                    revision: Math.max(1, Number(payload.notices.revision) || 1),
-                    notices: (payload.notices.notices || []).map(normalizeAdminNotice).filter(n => n.title),
+                    revision: (homeNoticeEditorState.revision || 0) + 1,
+                    notices: saved.map(normalizeAdminNotice).filter(n => n.title),
                     saving: false,
                     source: 'saved'
                 };
                 renderAdminNoticeList();
-                homeOpsApiStatus('서버 저장 권한 연결됨 · 홈 공지 저장 완료', false);
-                return payload.notices;
+                homeOpsApiStatus(`홈 공지 저장 완료 · ${saved.length}건`, false);
+                return { notices: homeNoticeEditorState.notices, revision: homeNoticeEditorState.revision };
             } finally {
                 homeNoticeEditorState.saving = false;
                 setNoticeMutationDisabled(false);
             }
         }
+
         async function submitNotice() {
             const id = document.getElementById('notice-edit-id').value;
             const bodyText = plainNoticeText(document.getElementById('notice-body').value, 8000);
@@ -5009,6 +5427,40 @@
             return window.KeywordBriefingTools;
         }
 
+        /**
+         * 저장 진행·결과 표시. 버튼 바로 아래에 크게 띄운다.
+         *
+         * state: 'progress' | 'success' | 'error' | 'hide'
+         * 성공 메시지는 자동으로 사라지지 않는다 — 사장님이 저장됐는지
+         * 확인하려고 다시 눌러 보는 일이 없어야 한다.
+         */
+        function keywordBriefingSaveFeedback(state, message, percent) {
+            const box = document.getElementById('keyword-briefing-save-feedback');
+            const spinner = document.getElementById('keyword-briefing-save-spinner');
+            const text = document.getElementById('keyword-briefing-save-text');
+            const bar = document.getElementById('keyword-briefing-save-bar');
+            const fill = document.getElementById('keyword-briefing-save-bar-fill');
+            if (!box || !text) return;
+            if (state === 'hide') { box.style.display = 'none'; return; }
+
+            box.style.display = 'block';
+            text.textContent = message;
+            const palette = {
+                progress: ['rgba(68,215,182,.10)', '1px solid rgba(68,215,182,.35)', '#44d7b6'],
+                success: ['rgba(46,211,111,.14)', '1px solid rgba(46,211,111,.45)', '#2ed36f'],
+                error: ['rgba(245,87,108,.12)', '1px solid rgba(245,87,108,.45)', '#f5576c'],
+            }[state] || palette_default();
+            box.style.background = palette[0];
+            box.style.border = palette[1];
+            box.style.color = palette[2];
+            if (spinner) spinner.style.display = state === 'progress' ? 'inline-block' : 'none';
+            if (bar && fill) {
+                bar.style.display = state === 'progress' || state === 'success' ? 'block' : 'none';
+                fill.style.width = (state === 'success' ? 100 : Math.max(0, Math.min(100, Number(percent) || 0))) + '%';
+            }
+        }
+        function palette_default() { return ['rgba(255,255,255,.06)', '1px solid rgba(255,255,255,.14)', 'var(--text-secondary)']; }
+
         function keywordBriefingStatus(message, tone) {
             const node = document.getElementById('keyword-briefing-status');
             if (!node) return;
@@ -5246,12 +5698,14 @@
             keywordBriefingEditorState.loadingRemote = true;
             keywordBriefingStatus('서버 최신 브리핑을 확인하는 중입니다.', 'info');
             try {
-                const response = await fetch(lewordApiUrl('/v1/public/home-keyword-briefing?ts=' + Date.now()), { cache: 'no-store' });
+                // 황금 브리핑은 이제 크론이 실측으로 만들어 정적 스냅샷에 발행한다.
+                // 폐지된 Vultr 대신 그 파일을 읽는다.
+                const response = await fetch('https://leaderspro.kr/data/home-keyword-briefing-seed.json?ts=' + Date.now(), { cache: 'no-store' });
                 const payload = await response.json().catch(() => ({}));
-                if (!response.ok || payload.ok !== true) throw new Error(payload.message || '서버 브리핑 조회 실패');
+                if (!response.ok) throw new Error('브리핑 스냅샷 조회 실패');
                 if (generation !== keywordBriefingLoadGeneration || keywordBriefingEditorState.dirty) return;
-                if (payload.briefing && Array.isArray(payload.briefing.rows) && payload.briefing.rows.length) {
-                    setKeywordBriefingEditor(payload.briefing);
+                if (payload && Array.isArray(payload.rows) && payload.rows.length) {
+                    setKeywordBriefingEditor(payload);
                     keywordBriefingEditorState.loadedRemote = true;
                     return;
                 }
@@ -5333,15 +5787,28 @@
             }
             const briefing = collectKeywordBriefing();
             if (!briefing) {
-                keywordBriefingStatus(keywordBriefingEditorState.invalidCount > 0
+                const reason = keywordBriefingEditorState.invalidCount > 0
                     ? '검수 필요 행을 모두 수정하거나 삭제한 뒤 저장하세요.'
-                    : '저장할 키워드 표가 없습니다.', 'error');
+                    : '저장할 키워드 표가 없습니다.';
+                keywordBriefingStatus(reason, 'error');
+                keywordBriefingSaveFeedback('error', '저장하지 못했습니다 — ' + reason);
                 return false;
             }
-            const session = lewordApiAdminSession || readLewordAdminSession();
-            if (!session?.accessToken) {
-                keywordBriefingApiAccessStatus('먼저 서버 저장 권한을 연결하세요.', true);
-                keywordBriefingStatus('공개 토큰으로는 저장하지 않습니다. 서버 관리자 세션이 필요합니다.', 'error');
+            /*
+             * 저장 권한은 **GAS 관리자 세션**이 가진다.
+             *
+             * 예전에는 여기서 폐지된 Vultr 세션(lewordApiAdminSession)을 검사했다.
+             * 그 서버가 사라진 뒤로는 아무도 그 세션을 못 얻으니 저장이 항상
+             * 여기서 멈췄고, 화면에는 작은 글씨 한 줄만 떠서 "눌러도 아무 일이
+             * 없다"로 보였다. 실제 인증은 window.fetch 래퍼가 adminSessionToken 을
+             * 실어 주는 GAS 세션이 한다 — 그래서 그것만 확인한다.
+             */
+            const session = readAdminSession();
+            if (!session?.token) {
+                keywordBriefingApiAccessStatus('관리자 로그인이 필요합니다.', true);
+                keywordBriefingStatus('로그인 세션이 없습니다. 다시 로그인한 뒤 저장하세요.', 'error');
+                keywordBriefingSaveFeedback('error', '저장 실패 — 관리자 로그인이 필요합니다. 다시 로그인한 뒤 저장하세요.');
+                try { showToast('저장 실패 — 관리자 로그인이 필요합니다.'); } catch (toastError) { /* noop */ }
                 return false;
             }
             const button = document.getElementById('keyword-briefing-publish');
@@ -5349,18 +5816,18 @@
             keywordBriefingEditorState.saving = true;
             syncKeywordBriefingPublishButton();
             keywordBriefingStatus('검수본을 안전한 서버 저장소에 반영하는 중입니다.', 'info');
+            if (button) button.textContent = '저장 중…';
+            keywordBriefingSaveFeedback('progress', `저장 중… ${(briefing.rows || []).length}개 키워드를 홈 브리핑에 반영합니다.`, 25);
             try {
-                const response = await fetch(lewordApiUrl('/v1/admin/home-keyword-briefing'), {
-                    method: 'PUT',
-                    headers: {
-                        Authorization: 'Bearer ' + session.accessToken,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        expectedRevision: keywordBriefingEditorState.revision,
-                        briefing
-                    })
+                // 저장은 GAS site-content 안에 둔다. 폐지된 Vultr 대신이며
+                // 크론이 덮어쓰지 않는 '운영자가 고정한 값' 자리다.
+                const saved = await gasAdminCall('site-content-save', {
+                    content: { keywordBriefing: briefing }
                 });
+                keywordBriefingSaveFeedback('progress', '서버 응답 확인 중…', 70);
+                const response = { ok: !(saved && saved.ok === false), status: 200,
+                    json: async () => ({ ok: true, briefing }) };
+                if (saved && saved.ok === false) throw new Error(saved.error || '브리핑 저장 실패');
                 const payload = await response.json().catch(() => ({}));
                 if (response.status === 401 || response.status === 403) {
                     saveLewordAdminSession(null);
@@ -5379,17 +5846,26 @@
                     keywordBriefingEditorState.persisted = true;
                     setKeywordBriefingRevision(keywordBriefingEditorState.revision);
                     keywordBriefingStatus('저장은 완료됐고, 저장 중 작성한 새 초안은 그대로 유지했습니다.', 'success');
+                    keywordBriefingSaveFeedback('success', '✅ 저장 완료 — 저장 중 작성한 새 초안은 그대로 두었습니다.', 100);
                     return true;
                 }
                 setKeywordBriefingEditor(payload.briefing);
                 markKeywordBriefingSaved(payload.briefing);
                 keywordBriefingApiAccessStatus('서버 저장 권한 연결됨', false);
+                const savedCount = (payload.briefing.rows || []).length;
+                keywordBriefingStatus(`저장 완료 — ${savedCount}개 키워드가 홈 브리핑에 반영됐습니다.`, 'success');
+                keywordBriefingSaveFeedback('success', `✅ 저장 완료 — ${savedCount}개 키워드가 홈에 반영됐습니다. (홈 새로고침 시 바로 보입니다)`, 100);
+                try { showToast(`✅ 저장 완료 — 홈에 ${savedCount}개 반영`); } catch (toastError) { /* 토스트 실패가 저장을 실패로 만들면 안 된다 */ }
                 return true;
             } catch (error) {
                 keywordBriefingStatus(error.message || '브리핑 저장에 실패했습니다.', 'error');
+                // 작은 글씨만 바뀌면 사용자는 "아무 일도 안 일어났다"고 본다.
+                keywordBriefingSaveFeedback('error', '저장 실패 — ' + (error.message || '알 수 없는 오류'));
+                try { showToast('저장 실패 — ' + (error.message || '알 수 없는 오류')); } catch (toastError) { /* noop */ }
                 return false;
             } finally {
                 keywordBriefingEditorState.saving = false;
+                if (button) button.textContent = '검수본을 홈에 저장';
                 syncKeywordBriefingPublishButton();
             }
         }
@@ -6469,6 +6945,77 @@
                 }
             } catch (err) {
                 showToast('❌ 네트워크 오류: ' + err.message);
+            }
+        }
+
+        // ===== SERVERLESS HOME NOTICE BRIDGE =====
+        // The original notice editor UI is retained.  Its former Vultr
+        // snapshot endpoints are replaced with the existing GAS actions.
+        async function loadNotices() {
+            if (homeNoticeEditorState.saving) return;
+            const container = document.getElementById('notices-table-body');
+            container.innerHTML = '<div class="loading-spinner"><div class="spinner-ring"></div> 공지 목록을 불러오는 중…</div>';
+            try {
+                const response = await fetch(`${GAS_URL}?action=get-notices&ts=${Date.now()}`, { cache: 'no-store' });
+                const payload = await response.json();
+                const items = Array.isArray(payload.notices) ? payload.notices : [];
+                homeNoticeEditorState = {
+                    revision: 0,
+                    notices: items.map(normalizeAdminNotice).filter(item => item.title),
+                    saving: false,
+                    source: 'gas'
+                };
+                renderAdminNoticeList();
+                homeOpsApiStatus('GAS 공지 저장소에 연결되었습니다.', false);
+            } catch (err) {
+                container.innerHTML = `<div style="padding:24px;text-align:center;color:#ff3b5c;">공지 목록을 불러오지 못했습니다: ${escapeHtml_(err.message || err)}</div>`;
+            }
+        }
+
+        async function submitNotice() {
+            const id = document.getElementById('notice-edit-id').value;
+            const bodyText = plainNoticeText(document.getElementById('notice-body').value, 8000);
+            const notice = {
+                id: id || undefined,
+                badge: document.getElementById('notice-badge').value,
+                date: document.getElementById('notice-date').value.trim(),
+                title: plainNoticeText(document.getElementById('notice-title').value, 200),
+                preview: plainNoticeText(document.getElementById('notice-preview').value, 300) || bodyText.replace(/\s+/g, ' ').slice(0, 300),
+                body: bodyText
+            };
+            if (!notice.title || !notice.body) { showToast('제목과 본문은 필수입니다.'); return; }
+            try {
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: id ? 'update-notice' : 'submit-notice', ...notice })
+                });
+                const payload = await response.json();
+                if (!(payload.ok || payload.success)) throw new Error(payload.error || payload.message || '공지 저장에 실패했습니다.');
+                showToast(id ? '홈 공지를 수정했습니다.' : '홈 공지를 발행했습니다.');
+                resetNoticeForm();
+                await loadNotices();
+            } catch (err) {
+                showToast('공지 저장 실패: ' + (err.message || err));
+            }
+        }
+
+        async function deleteNotice(encodedId) {
+            const id = decodeURIComponent(encodedId);
+            if (!id || !confirm('이 공지를 삭제할까요?')) return;
+            try {
+                const response = await fetch(GAS_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'delete-notice', id })
+                });
+                const payload = await response.json();
+                if (!(payload.ok || payload.success)) throw new Error(payload.error || payload.message || '공지 삭제에 실패했습니다.');
+                showToast('홈 공지를 삭제했습니다.');
+                resetNoticeForm();
+                await loadNotices();
+            } catch (err) {
+                showToast('공지 삭제 실패: ' + (err.message || err));
             }
         }
 

@@ -4,13 +4,8 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-        // GitHub Pages SPA redirect — handles trailing slash issues
-        const path = window.location.pathname;
-        if (path.endsWith('/admin') || path.endsWith('/admin/')) {
-            window.location.replace('/admin/');
-        } else {
-            window.location.replace('/');
-        }
+        // GitHub Pages SPA fallback. React Router handles /admin without reloading.
+        window.location.replace('/');
     </script>
     <link rel="stylesheet" href="summer-theme.css">
 </head>
