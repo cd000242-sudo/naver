@@ -13,7 +13,7 @@ describe('buildHomefeedExposureSkeleton', () => {
   it('keeps the opening useful without forcing a fixed viral structure', () => {
     expect(block).toContain('구체 상황과 핵심 답');
     expect(block).toContain('주체를 생략했다면');
-    expect(block).toContain('1~3문장');
+    expect(block).toContain('35~50자');
     expect(block).toContain('서로 다른 정보 단위');
     expect(block).toContain('필요 없으면 넣지 않는다');
     expect(block).not.toContain('도입 4단 구성');
@@ -32,5 +32,22 @@ describe('buildHomefeedExposureSkeleton', () => {
 
   it('exposes the marker that buildFullPrompt gates on for homefeed', () => {
     expect(block).toContain('홈판 상위노출 본문 원칙');
+  });
+
+  /**
+   * 실측 반영 (2026-08-12, 홈판 노출 글 40편).
+   *   문단당 중앙 36자·평균 47자 — 옛 규칙 "1~3문장"은 실제의 두 배 길이를 허용했다.
+   *   문단 종결은 명사형 42% > 구두점 38% — 완결 서술문만 허용하면 보고서처럼 읽힌다.
+   * 리듬만 가져오고 소재·제목 전략(주체 은닉 48%, 사생활 소재 23%)은 가져오지 않는다.
+   */
+  it('짧은 문단 실측값을 담고 옛 상한으로 되돌아가지 않는다', () => {
+    expect(block).toContain('35~50자');
+    expect(block).toContain('1~2문장');
+    expect(block).not.toContain('1~3문장');
+  });
+
+  it('명사형 문단 종결을 허용하되 정보 회피 수단이 되지 않게 막는다', () => {
+    expect(block).toContain('명사형');
+    expect(block).toContain('나열이 되지 않게');
   });
 });
