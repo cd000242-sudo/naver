@@ -239,6 +239,8 @@ export type AffiliateProduct = {
     source?: string;
     /** 그 출처 안에서의 판매 순위. */
     bestRank?: number;
+    /** 규칙 기반 구매·사용 욕구 문구 — 글 첫 줄 재료. 서버가 만든다. */
+    angles?: { text: string; kind: string }[];
     searchVolume: number | null;
     documentCount: number | null;
 };

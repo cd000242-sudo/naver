@@ -90,6 +90,9 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 </span>
                             </div>
                             <a className="lw-product-name" href={row.url} target="_blank" rel="noreferrer">{row.name}</a>
+                            {(row.angles || []).slice(0, 2).map((angle) => (
+                                <p key={angle.text} className="lw-lane-product">{angle.kind} · {angle.text}</p>
+                            ))}
                             <div className="lw-product-metrics">
                                 <span>검색어 <strong>{row.keyword}</strong></span>
                                 <span>월 검색량 <strong>{row.searchVolume === null ? '—' : row.searchVolume.toLocaleString('ko-KR')}</strong></span>
