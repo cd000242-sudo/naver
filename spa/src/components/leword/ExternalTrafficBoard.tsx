@@ -1,5 +1,10 @@
 import { useMemo, useState } from 'react';
 import { preemptionIndex, TIER_ORDER } from '../../lib/preemptionIndex';
+import PreemptionPlan from './PreemptionPlan';
+
+/** 1군과 같은 곳으로 보낸다 — 우리가 그리는 그림이 아니라 네이버가 그린 것이다. */
+const dataLabUrl = (keyword: string) =>
+    `https://datalab.naver.com/keyword/trendSearch.naver?hashKey=${encodeURIComponent(keyword)}`;
 
 /**
  * 2군 — **네이버 자리는 늦었지만 외부 유입으로는 쓸 수 있는 밭.**
@@ -42,7 +47,15 @@ function ExternalTrafficBoard({
     onAnalyze?: (keyword: string) => void;
     searchUrl: (keyword: string) => string;
 }) {
-    const [open, setOpen] = useState(false);
+    /*
+     * **기본으로 펼쳐 둔다** — 사장님 지시(2026-08-12): "외부유입용 키워드 80건도
+     * 접지 말고 기본적으로 펼쳐 주시고".
+     * 접어 두면 1군 27행 아래에 80건이 통째로 숨는다. 그러라고 꺼낸 칸이 아니다.
+     */
+    const [open, setOpen] = useState(true);
+    /** '어떻게 쓸까' 를 펼친 행. 1군과 같이 한 번에 하나만 연다. */
+    const [openPlan, setOpenPlan] = useState('');
+    const [copied, setCopied] = useState('');
 
     /*
      * 줄 세우기는 1군과 같다 — 검색량이 높고 문서수가 낮은 순(검색량 ÷ 문서수).
@@ -64,6 +77,8 @@ function ExternalTrafficBoard({
             return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
         });
     }, [rows]);
+
+    const planRow = sorted.find((row) => row.keyword === openPlan) || null;
 
     if (sorted.length === 0) return null;
 
@@ -118,7 +133,13 @@ function ExternalTrafficBoard({
                                 </div>
                             </div>
 
+                            {/* 1군과 같은 버튼을 낸다 — 칸이 다르다고 쓸 수 있는 것이 줄어들 이유가 없다. */}
                             <div className="lw-card-actions">
+                                <button
+                                    type="button"
+                                    aria-expanded={openPlan === row.keyword}
+                                    onClick={() => setOpenPlan(openPlan === row.keyword ? '' : row.keyword)}
+                                >어떻게 쓸까</button>
                                 <a href={searchUrl(row.keyword)} target="_blank" rel="noreferrer">
                                     네이버 검색결과<small>누가 썼는지 확인</small>
                                 </a>
@@ -127,10 +148,44 @@ function ExternalTrafficBoard({
                                         LEWORD 키워드 분석
                                     </button>
                                 )}
+                                <a href="/leword" target="_blank" rel="noreferrer">
+                                    마인드맵 확장키워드<small>LEWORD 앱 기능</small>
+                                </a>
+                                <a href={dataLabUrl(row.keyword)} target="_blank" rel="noreferrer">
+                                    그래프보기<small>네이버 데이터랩</small>
+                                </a>
+                                <button
+                                    type="button"
+                                    className="lw-copy"
+                                    onClick={() => {
+                                        navigator.clipboard?.writeText(row.keyword);
+                                        setCopied(row.keyword);
+                                        window.setTimeout(() => setCopied(''), 1400);
+                                    }}
+                                >{copied === row.keyword ? '복사됨' : '복사'}</button>
                             </div>
                         </article>
                     ))}
                 </div>
+            )}
+
+            {/*
+              * '어떻게 쓸까' 창. 1군과 같은 컴포넌트를 쓴다 — 2군이라고 다른 글쓰기
+              * 안내를 낼 이유가 없다. 자리 등급(tier)이 없으므로 그 부분은 비워 둔다.
+              */}
+            {planRow && (
+                <PreemptionPlan
+                    row={{
+                        keyword: planRow.keyword,
+                        topic: planRow.topic,
+                        searchVolume: planRow.searchVolume,
+                        documentCount: planRow.documentCount ?? null,
+                        trendLabel: planRow.trendLabel,
+                    }}
+                    onClose={() => setOpenPlan('')}
+                    onAnalyze={onAnalyze || (() => {})}
+                    searchUrl={searchUrl(planRow.keyword)}
+                />
             )}
         </section>
     );
