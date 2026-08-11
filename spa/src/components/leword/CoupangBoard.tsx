@@ -83,7 +83,11 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 )}
                                 {row.discountPercent !== null && <span className="lw-discount">{row.discountPercent}% 할인</span>}
                                 {row.rocket && <span className="lw-rocket">로켓배송</span>}
-                                <span className="lw-goldbox">골드박스 {row.goldboxRank}위</span>
+                                <span className="lw-goldbox">
+                                    {row.source
+                                        ? `${row.source} ${row.bestRank ?? row.goldboxRank}위`
+                                        : `골드박스 ${row.goldboxRank}위`}
+                                </span>
                             </div>
                             <a className="lw-product-name" href={row.url} target="_blank" rel="noreferrer">{row.name}</a>
                             <div className="lw-product-metrics">

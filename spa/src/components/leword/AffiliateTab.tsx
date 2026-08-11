@@ -74,29 +74,32 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             {!unlocked && <LicenseGate onUnlock={() => setUnlocked(true)} />}
 
             {/*
-              * 사장님 지적 두 번을 모두 지켜야 한다:
-              *   "황금키워드 분류해온 것밖에 안 되잖아"  → 상품이 실측된 자리만 싣는다
-              *   "그냥 인기상품만 나열해놓은 것 같은데"  → 골드박스를 주인공으로 두지 않는다
-              * 그래서 주 레인은 '자리가 실측된 상품 검색어'(선점 보드 실측)이고,
-              * 골드박스는 아래 '오늘의 특가' 참고로 강등한다.
+              * 사장님 지시(2026-08-12): "실시간 신호를 잡아서 지금 인기상품을 보여주고,
+              * 여기서 분석해서 제휴수익을 낼 수 있게" — 선점 보드(주 2회 배치) 재활용 금지.
+              * 쿠팡 레인은 실시간 공급(베스트셀러·골드박스)을 그 자리에서 분석하는
+              * CoupangBoard 가 통째로 맡는다. 아래 키워드 목록은 나머지 두 레인용이다.
               */}
-            {lane !== 'coupang' && (
-                <div className="lw-note lw-note-limit">
-                    <strong>{active.status}</strong>
-                    <p>
-                        대신 검색결과에 상품 카드가 실제로 뜬 자리를 싣습니다 — 파는 물건이 있다는 실측입니다.
-                        <a href={active.consoleUrl} target="_blank" rel="noreferrer" style={{ marginLeft: 6 }}>콘솔 열기 →</a>
-                    </p>
-                </div>
-            )}
             {lane === 'coupang' && (
-                <p className="lw-write-hint">
-                    <strong>지금 자리가 있는 상품 검색어</strong> — 검색결과에 상품 카드와 상품명이
-                    실제로 읽힌 자리입니다. 여기서 골라 글을 쓰는 것이 선점입니다.
-                </p>
+                <>
+                    <p className="lw-write-hint">
+                        <strong>실시간 인기상품 분석</strong> — 쿠팡 베스트셀러(지금 팔리는 순위)와
+                        골드박스 특가를 받아, 상품마다 검색량·문서수를 그 자리에서 재고
+                        글로 쓸 가치 순으로 세웁니다.
+                    </p>
+                    <CoupangBoard onAnalyze={onAnalyze} />
+                </>
             )}
 
-            <>
+            {lane !== 'coupang' && (
+                <>
+                    <div className="lw-note lw-note-limit">
+                        <strong>{active.status}</strong>
+                        <p>
+                            대신 검색결과에 상품 카드가 실제로 뜬 자리를 싣습니다 — 파는 물건이 있다는 실측입니다.
+                            <a href={active.consoleUrl} target="_blank" rel="noreferrer" style={{ marginLeft: 6 }}>콘솔 열기 →</a>
+                        </p>
+                    </div>
+
                     <ol className="lw-lane-list lw-lane-list-wide">
                         {laneRows.map((row, index) => {
                             const goldIndex = goldenIndex(row.searchVolume, row.documentCount);
@@ -139,15 +142,6 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     {laneRows.length === 0 && (
                         <p className="lw-lane-empty">이번 회차에 이 판에 맞는 자리가 없습니다.</p>
                     )}
-            </>
-
-            {lane === 'coupang' && (
-                <>
-                    <p className="lw-write-hint">
-                        <strong>오늘의 골드박스 특가</strong> — 쿠팡이 지금 미는 상품입니다.
-                        대부분 이미 알려진 상품이라 선점은 어렵고, 할인 시점을 노리는 판매 글감입니다.
-                    </p>
-                    <CoupangBoard onAnalyze={onAnalyze} />
                 </>
             )}
         </>

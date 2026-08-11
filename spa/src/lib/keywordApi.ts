@@ -235,6 +235,10 @@ export type AffiliateProduct = {
     url: string;
     rocket: boolean;
     goldboxRank: number;
+    /** 실시간 공급 출처 — '가전디지털' 같은 베스트셀러 카테고리 또는 '골드박스 특가'. */
+    source?: string;
+    /** 그 출처 안에서의 판매 순위. */
+    bestRank?: number;
     searchVolume: number | null;
     documentCount: number | null;
 };
