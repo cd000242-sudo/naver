@@ -214,6 +214,59 @@ function LewordStyles() {
             .lw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(306px, 1fr)); gap: 12px; }
             .lw-grid-video { grid-template-columns: repeat(auto-fill, minmax(292px, 1fr)); }
 
+            /*
+             * 선점 보드는 격자가 아니라 **세로 목록**이다 — 사장님 지시(2026-08-11):
+             * "그리드 형식일 필요 없이 세로로 정렬시켜서 보여주면 된다."
+             * 순위대로 읽는 목록이라 좌우로 흩어 놓으면 순서가 눈에 안 들어온다.
+             *
+             * 한 줄 = [근거] [지표 4] [액션 6]. 좁은 화면에서는 아래로 접는다.
+             */
+            .lw-board-list { display: flex; flex-direction: column; gap: 10px; }
+            .lw-board-list .lw-card-pre {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 232px 176px;
+                align-items: start;
+                gap: 18px;
+            }
+            .lw-board-list .lw-card-metrics {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                margin-top: 0; row-gap: 10px;
+            }
+            .lw-board-list .lw-card-actions { flex-direction: column; gap: 6px; }
+            .lw-board-list .lw-card-actions button,
+            .lw-board-list .lw-card-actions a { flex: none; width: 100%; }
+            @media (max-width: 860px) {
+                .lw-board-list .lw-card-pre { grid-template-columns: minmax(0, 1fr); }
+                .lw-board-list .lw-card-actions { flex-direction: row; flex-wrap: wrap; }
+                .lw-board-list .lw-card-actions button,
+                .lw-board-list .lw-card-actions a { flex: 1 1 30%; width: auto; }
+            }
+
+            /*
+             * 키워드는 이 카드의 주인공이다 — 사장님: "글자 크기 좀 키워서 보여 달라."
+             * 앞의 순위는 목록에서의 자리이지 우리가 매긴 점수가 아니다.
+             */
+            .lw-board-list .lw-card-keyword {
+                display: flex; align-items: center; gap: 9px;
+                font-size: 21px; line-height: 1.3; -webkit-line-clamp: 3;
+            }
+            .lw-rank {
+                flex: none; min-width: 30px; padding: 3px 8px;
+                border-radius: 8px; border: 1px solid rgba(255,255,255,.14);
+                background: rgba(255,255,255,.05);
+                color: #9aa3b5; font-size: 13px; font-weight: 900; text-align: center;
+            }
+            /*
+             * 광고가 많이 붙은 자리는 광고주들이 돈을 넣는다는 뜻이다(사장님 기준).
+             * 초황금 금색과 겹치지 않게 청록 계열로 둔다 — 예전 '약함' 노랑이 금색과
+             * 겹쳐 구분이 안 된다는 지적을 받았다.
+             */
+            .lw-card-metrics .money strong { color: #4ea8ff; }
+            .lw-card-actions small {
+                display: block; margin-top: 2px;
+                font-size: 10px; font-weight: 700; opacity: .62;
+            }
+
             .lw-card {
                 display: flex; flex-direction: column; gap: 10px;
                 padding: 15px 16px;

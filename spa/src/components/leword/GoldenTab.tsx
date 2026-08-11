@@ -2,11 +2,19 @@ import { useEffect, useMemo, useState } from 'react';
 import { goldenIndex } from '../../lib/goldenIndex';
 import PreemptionPlan from './PreemptionPlan';
 import { EVIDENCE_ICON, naverSearchUrl, SURFACE_TAG, TIER_BADGE, TIER_RANK } from './preemptionMeta';
+
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
 import { formatCount } from '../../lib/keywordApi';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
+
+/**
+ * 네이버 데이터랩 검색어 트렌드. 우리가 그리는 그림이 아니라 네이버가 그린 것을 연다.
+ * 데이터랩은 검색어를 해시(#) 뒤에 싣는다 — 쿼리스트링으로 넣으면 빈 화면이 뜬다.
+ */
+const dataLabUrl = (keyword: string) =>
+    `https://datalab.naver.com/keyword/trendSearch.naver?hashKey=${encodeURIComponent(keyword)}`;
 
 /**
  * 선점 황금키워드.
@@ -59,6 +67,8 @@ type PreemptionRow = {
         sampledTitles: number;
         exactTitleHits: number;
         partialTitleHits: number;
+        /** 상단 파워링크 광고 건수(실측). 없으면 못 잰 회차다. */
+        adCount?: number | null;
         medianDaysAgo: number | null;
         /** 지금 그 자리를 차지한 글 제목 3개. */
         topTitles?: string[];
@@ -135,9 +145,19 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             if (brief(a) !== brief(b)) return brief(a) - brief(b);
             const rank = (row: PreemptionRow) => TIER_RANK[row.tier || 'contested'] ?? 9;
             if (rank(a) !== rank(b)) return rank(a) - rank(b);
-            const slot = (row: PreemptionRow) => row.openSlot ?? 99;
-            if (slot(a) !== slot(b)) return slot(a) - slot(b);
-            return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
+            /*
+             * 사장님 기준(2026-08-11): 광고 많은 순 → 검색량 많은 순 → 문서수 적은 순.
+             * "상위에 광고가 많이 떠 있다면 그 키워드는 돈이 되는 키워드다 — 광고주가 많으니까."
+             * 게이트(preemption-gate.ts)와 같은 순서를 쓴다. 두 곳이 갈라지면 같은 보드가
+             * 서버와 화면에서 다른 순서로 보인다.
+             * 광고를 못 쟀으면 그 축은 건너뛴다 — 안 본 것을 '광고 없음'으로 벌주지 않는다.
+             */
+            const ads = (row: PreemptionRow) => (typeof row.serp?.adCount === 'number' ? row.serp.adCount : null);
+            if (ads(a) !== null && ads(b) !== null && ads(a) !== ads(b)) return (ads(b) as number) - (ads(a) as number);
+            if ((a.searchVolume ?? 0) !== (b.searchVolume ?? 0)) return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
+            const docs = (row: PreemptionRow) => row.documentCount ?? Number.MAX_SAFE_INTEGER;
+            if (docs(a) !== docs(b)) return docs(a) - docs(b);
+            return (a.openSlot ?? 99) - (b.openSlot ?? 99);
         });
     }, [board, topic, query, writeLane]);
 
@@ -206,19 +226,31 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         <LicenseGate onUnlock={() => setUnlocked(true)} />
                     )}
 
-                    <div className="lw-grid">
+                    <div className="lw-board-list">
                         {rows.map((row, index) => {
                             const locked = !unlocked && index >= FREE_BOARD_ROWS;
                             return (
                                 <article key={`${row.topic}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
-                                    <BoardCardHead row={row} />
+                                    <BoardCardHead row={row} rank={index + 1} />
 
+                                    {/*
+                                      * 지표 열. 사장님 지정 4개 — 검색량 · 문서수 · 광고수 · 빈자리.
+                                      *
+                                      * 광고수가 여기 있는 이유: "상위에 광고가 많이 떠 있다면 그 키워드는
+                                      * 돈이 되는 키워드다 — 광고주가 많으니까." 우리가 만든 수익 추정이
+                                      * 아니라 광고주들이 이미 낸 판단이라 그대로 싣는다.
+                                      * 못 쟀으면 '—' 다. 0건이라고 쓰면 안 본 것이 '광고 없음'이 된다.
+                                      */}
                                     <div className="lw-card-metrics">
                                         <div><span>검색량</span><strong>{formatCount(row.searchVolume)}</strong></div>
                                         <div><span>문서수</span><strong>{formatCount(row.documentCount)}</strong></div>
+                                        <div className={typeof row.serp?.adCount === 'number' && row.serp.adCount >= 5 ? 'money' : ''}>
+                                            <span>광고수</span>
+                                            <strong>{typeof row.serp?.adCount === 'number' ? `${row.serp.adCount}개` : '—'}</strong>
+                                        </div>
                                         <div className="hot">
                                             <span>빈자리</span>
-                                            <strong>{row.openSlot ? `${row.openSlot}위` : '—'}</strong>
+                                            <strong>{row.openSlot ? '있음' : '없음'}</strong>
                                         </div>
                                     </div>
 
@@ -228,7 +260,24 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             aria-expanded={openPlan === row.keyword}
                                             onClick={() => setOpenPlan(openPlan === row.keyword ? '' : row.keyword)}
                                         >어떻게 쓸까</button>
-                                        <a href={naverSearchUrl(row.keyword)} target="_blank" rel="noreferrer">검색결과 확인</a>
+                                        <a href={naverSearchUrl(row.keyword)} target="_blank" rel="noreferrer">
+                                            네이버 검색결과<small>빈자리 확인</small>
+                                        </a>
+                                        <button type="button" onClick={() => onAnalyze?.(row.keyword)}>
+                                            LEWORD 키워드 분석
+                                        </button>
+                                        {/*
+                                          * 마인드맵 확장은 데스크톱 앱 기능이다. 웹에 없는 것을 있는 척
+                                          * 버튼으로 두면 눌러 보고 아무 일도 안 일어난다 — 그건 거짓말이다.
+                                          * 앱으로 보낸다는 사실을 글자로 적는다.
+                                          */}
+                                        <a href="/leword" target="_blank" rel="noreferrer">
+                                            마인드맵 확장키워드<small>앱에서 열기</small>
+                                        </a>
+                                        {/* 데이터랩은 실제 검색량 추이를 그린다. 우리가 그리는 그림이 아니다. */}
+                                        <a href={dataLabUrl(row.keyword)} target="_blank" rel="noreferrer">
+                                            그래프보기<small>네이버 데이터랩</small>
+                                        </a>
                                         <button
                                             type="button"
                                             className="lw-copy"
