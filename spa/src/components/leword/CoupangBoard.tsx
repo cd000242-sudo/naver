@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createCoupangDeeplink, fetchAffiliateBoard, type AffiliateProduct } from '../../lib/keywordApi';
+import { type LaneId } from './affiliateLanes';
 import { goldenIndex } from '../../lib/goldenIndex';
 
 /**
@@ -16,12 +17,19 @@ import { goldenIndex } from '../../lib/goldenIndex';
  * 조회는 방문자 자기 키로 돈다. 그래서 버튼을 눌러야 시작한다 —
  * 화면만 열었는데 남의 쿼터가 타면 안 된다.
  */
-function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
+function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: string) => void; lane?: LaneId }) {
     const [rows, setRows] = useState<AffiliateProduct[] | null>(null);
     const [state, setState] = useState<'idle' | 'loading' | 'ready' | 'needs-keys' | 'error'>('idle');
     const [message, setMessage] = useState('');
     // 제휴링크 버튼의 행별 상태. 링크는 방문자 본인 키로 만들어지는 본인 수익 링크다.
     const [linkState, setLinkState] = useState<{ key: string; label: string } | null>(null);
+    // 토스·브랜드커넥트 레인의 복사 버튼 — 콘솔 검색창에 붙여넣을 재료.
+    const [copiedKey, setCopiedKey] = useState('');
+    const copyText = (key: string, text: string) => {
+        navigator.clipboard?.writeText(text);
+        setCopiedKey(key);
+        window.setTimeout(() => setCopiedKey(''), 1500);
+    };
 
     const makeLink = async (row: AffiliateProduct) => {
         setLinkState({ key: row.url, label: '만드는 중…' });
@@ -131,12 +139,23 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         </div>
                         <div className="lw-product-actions">
                             <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(row.keyword)}>LEWORD 키워드분석</button>
-                            <a
-                                className="lw-act lw-act-orange"
-                                href={`https://www.coupang.com/np/search?q=${encodeURIComponent(row.keyword)}`}
-                                target="_blank"
-                                rel="noreferrer"
-                            >쿠팡 검색해보기</a>
+                            {lane === 'coupang' && (
+                                <a
+                                    className="lw-act lw-act-orange"
+                                    href={`https://www.coupang.com/np/search?q=${encodeURIComponent(row.keyword)}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >쿠팡 검색해보기</a>
+                            )}
+                            {lane !== 'coupang' && (
+                                <button
+                                    type="button"
+                                    className="lw-act lw-act-orange"
+                                    onClick={() => copyText(row.url, lane === 'toss' ? row.name : (row.keyword.split(/\s+/)[0] || row.keyword))}
+                                >
+                                    {copiedKey === row.url ? '복사됨!' : (lane === 'toss' ? '상품명 복사' : '브랜드명 복사')}
+                                </button>
+                            )}
                             {/* 정면 수치를 못 믿겠으면 직접 세어 보라 — 실측을 파는 보드는 검증 동선까지 줘야 한다. */}
                             <a
                                 className="lw-act lw-act-green"
@@ -144,11 +163,23 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 target="_blank"
                                 rel="noreferrer"
                             >네이버 검색분석</a>
-                            <button type="button" className="lw-act lw-act-gold" onClick={() => void makeLink(row)}>
-                                {linkState?.key === row.url
-                                    ? linkState.label
-                                    : (<>내 제휴링크 복사<span className="lw-act-sub">(API키 있어야됨)</span></>)}
-                            </button>
+                            {lane === 'coupang' && (
+                                <button type="button" className="lw-act lw-act-gold" onClick={() => void makeLink(row)}>
+                                    {linkState?.key === row.url
+                                        ? linkState.label
+                                        : (<>내 제휴링크 복사<span className="lw-act-sub">(API키 있어야됨)</span></>)}
+                                </button>
+                            )}
+                            {lane === 'toss' && (
+                                <a className="lw-act lw-act-gold" href="https://sharelink.toss.im/home" target="_blank" rel="noreferrer">
+                                    토스 콘솔 열기<span className="lw-act-sub">상품명 붙여넣어 검색</span>
+                                </a>
+                            )}
+                            {lane === 'brandconnect' && (
+                                <a className="lw-act lw-act-gold" href="https://brandconnect.naver.com/" target="_blank" rel="noreferrer">
+                                    브랜드커넥트 콘솔<span className="lw-act-sub">브랜드명으로 캠페인 확인</span>
+                                </a>
+                            )}
                         </div>
                     </li>
                 );
