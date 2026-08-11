@@ -98,12 +98,20 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 <span>월 검색량 <strong>{row.searchVolume === null ? '—' : row.searchVolume.toLocaleString('ko-KR')}</strong></span>
                                 <span>문서수 <strong>{row.documentCount === null ? '—' : row.documentCount.toLocaleString('ko-KR')}</strong></span>
                                 {row.serpTop && row.serpTop.sampled > 0 && (
-                                    <span>상위{row.serpTop.sampled} 정면 <strong>{row.serpTop.exact}개</strong></span>
+                                    <span title={`블로그 검색 상위 ${row.serpTop.sampled}개 제목 중 '${row.keyword}'를 그대로 다룬 글 ${row.serpTop.exact}개`}>
+                                        상위{row.serpTop.sampled} 정면 <strong>{row.serpTop.exact}개</strong>
+                                    </span>
                                 )}
                                 <span>가격 <strong>{row.price === null ? '—' : `${row.price.toLocaleString('ko-KR')}원`}</strong></span>
                             </div>
                             <div className="lw-lane-actions">
                                 <button type="button" onClick={() => onAnalyze(row.keyword)}>이 검색어 분석</button>
+                                {/* 정면 수치를 못 믿겠으면 직접 세어 보라 — 실측을 파는 보드는 검증 동선까지 줘야 한다. */}
+                                <a
+                                    href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(row.keyword)}`}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >실제 검색 확인</a>
                                 <a href={row.url} target="_blank" rel="noreferrer">상품 보기</a>
                             </div>
                         </div>
@@ -113,6 +121,11 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
     return (
         <>
+            <p className="lw-write-hint">
+                <strong>상위10 정면</strong> — 블로그 검색 첫 화면(상위 10개) 제목 중 이 검색어를
+                그대로 다룬 글 수입니다. <strong>0~1개면 그 자리가 비어 있다</strong>는 뜻이고,
+                8개 이상이면 같은 글의 11번째가 될 뿐입니다. 문서수가 커도 정면이 적으면 쓸 자리가 있습니다.
+            </p>
             {prime.length > 0 && (
                 <>
                     <p className="lw-write-hint"><strong>지금 써볼 만한 것</strong> — 찾는 사람 대비 쓴 글이 적습니다.</p>
