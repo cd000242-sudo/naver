@@ -17,10 +17,33 @@ import { AFFILIATE_LANES, type LaneId } from './affiliateLanes';
  */
 
 /** 로컬 세션 수집기가 발행한 스냅샷. 계약은 scripts/affiliate-campaigns.js 가 만든다. */
+type CampaignItem = {
+    name: string;
+    brand: string;
+    image: string;
+    url: string;
+    reward: string;
+    /** 상품명에서 뽑은 검색어 — 쿠팡 레인과 같은 규칙. */
+    keyword?: string;
+    searchVolume?: number | null;
+    documentCount?: number | null;
+    /** 블로그 검색 상위 10 정면 대응 실측. 쿠팡 레인과 같은 판정. */
+    serpTop?: { sampled: number; exact: number; partial: number } | null;
+};
+
 type CampaignSnapshot = {
     collectedAt: string;
-    sites: Record<string, { label: string; items: { name: string; brand: string; image: string; url: string; reward: string }[] }>;
+    sites: Record<string, { label: string; items: CampaignItem[] }>;
 };
+
+/** 정면 실측 → 카드 배지. 쿠팡 레인과 같은 기준이라야 같은 뜻으로 읽힌다. */
+function verdictBadge(item: CampaignItem) {
+    const top = item.serpTop;
+    if (!top || !top.sampled) return null;
+    if (top.exact <= 2) return { label: `자리 있음 · 정면 ${top.exact}개 — 고르세요`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' };
+    if (top.exact <= 5) return { label: `경합 · 정면 ${top.exact}개`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' };
+    return { label: `포화 · 정면 ${top.exact}개`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
+}
 
 function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [lane, setLane] = useState<LaneId>('coupang');
@@ -77,33 +100,55 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         {collectedLabel && <span style={{ opacity: .7 }}> · {collectedLabel} 수집</span>}
                     </p>
                     <ol className="lw-product-list">
-                        {campaigns.items.map((item, index) => (
-                            <li key={item.url || item.name} className="lw-product">
-                                <span className="lw-product-rank">{index + 1}</span>
-                                {item.image
-                                    ? <img src={item.image} alt="" loading="lazy" />
-                                    : <span />}
-                                <div className="lw-product-body">
-                                    <div className="lw-product-tags">
-                                        {item.brand && <span className="lw-goldbox">{item.brand}</span>}
-                                        {item.reward && <span className="lw-discount">{item.reward}</span>}
+                        {campaigns.items.map((item, index) => {
+                            const query = item.keyword || item.name;
+                            const badge = verdictBadge(item);
+                            return (
+                                <li key={item.url || item.name} className="lw-product">
+                                    <span className="lw-product-rank">{index + 1}</span>
+                                    {item.image
+                                        ? <img src={item.image} alt="" loading="lazy" />
+                                        : <span />}
+                                    <div className="lw-product-body">
+                                        <div className="lw-product-tags">
+                                            {badge && (
+                                                <span style={{
+                                                    color: badge.color, background: badge.bg,
+                                                    border: `1px solid ${badge.color}44`, borderRadius: 999,
+                                                    padding: '2px 10px', fontWeight: 700, fontSize: 12,
+                                                }}>{badge.label}</span>
+                                            )}
+                                            {item.reward && <span className="lw-discount">{item.reward}</span>}
+                                            {item.brand && <span className="lw-goldbox">{item.brand}</span>}
+                                        </div>
+                                        <a className="lw-product-name" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">{item.name}</a>
+                                        <div className="lw-product-metrics">
+                                            <span>검색어 <strong>{query}</strong></span>
+                                            <span>월 검색량 <strong>{item.searchVolume == null ? '—' : item.searchVolume.toLocaleString('ko-KR')}</strong></span>
+                                            <span>문서수 <strong>{item.documentCount == null ? '—' : item.documentCount.toLocaleString('ko-KR')}</strong></span>
+                                            {item.serpTop && item.serpTop.sampled > 0 && (
+                                                <span title={`블로그 검색 상위 ${item.serpTop.sampled}개 제목 중 '${query}'를 그대로 다룬 글 ${item.serpTop.exact}개`}>
+                                                    상위{item.serpTop.sampled} 정면 <strong>{item.serpTop.exact}개</strong>
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
-                                    <a className="lw-product-name" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">{item.name}</a>
-                                </div>
-                                <div className="lw-product-actions">
-                                    <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(item.brand || item.name)}>LEWORD 키워드분석</button>
-                                    <a
-                                        className="lw-act lw-act-green"
-                                        href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(item.brand || item.name)}`}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >네이버 검색분석</a>
-                                    <a className="lw-act lw-act-gold" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">
-                                        캠페인 열기
-                                    </a>
-                                </div>
-                            </li>
-                        ))}
+                                    <div className="lw-product-actions">
+                                        <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(query)}>LEWORD 키워드분석</button>
+                                        <a
+                                            className="lw-act lw-act-green"
+                                            href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(query)}`}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >네이버 검색분석</a>
+                                        <a className="lw-act lw-act-gold" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">
+                                            캠페인 열기
+                                            {item.reward && <span className="lw-act-sub">{item.reward}</span>}
+                                        </a>
+                                    </div>
+                                </li>
+                            );
+                        })}
                     </ol>
                 </>
             )}
