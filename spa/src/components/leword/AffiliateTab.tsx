@@ -3,6 +3,7 @@ import { TabIntro } from './LewordShared';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import CoupangBoard from './CoupangBoard';
 import { AFFILIATE_LANES, type LaneId } from './affiliateLanes';
+import { loadUserKeys } from '../../lib/userKeys';
 
 /**
  * 제휴 황금키워드 — 플랫폼별 서브탭.
@@ -25,6 +26,8 @@ type CampaignItem = {
     reward: string;
     /** 상품명에서 뽑은 검색어 — 쿠팡 레인과 같은 규칙. */
     keyword?: string;
+    /** 브랜드커넥트 상품 ID — 내 스페이스 ID와 합쳐야 링크발급 화면이 열린다. */
+    productId?: string;
     searchVolume?: number | null;
     documentCount?: number | null;
     /** 블로그 검색 상위 10 정면 대응 실측. 쿠팡 레인과 같은 판정. */
@@ -65,6 +68,25 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     }, []);
 
     const active = AFFILIATE_LANES.find((item) => item.id === lane)!;
+    /*
+     * 브랜드커넥트 상품 화면은 **내 스페이스 ID**가 주소에 있어야 열린다(실측:
+     * 없으면 "삭제되었거나 존재하지 않는 페이지"). 내 API 키 탭에 넣어 두면
+     * 사장님 계정의 그 상품 화면으로 바로 가서 로그인된 채 링크를 발급받는다.
+     * 없으면 콘솔 홈으로 보내고 상품명을 복사해 준다 — 검색해서 찾으면 된다.
+     */
+    const spaceId = String(loadUserKeys().brandconnectSpaceId || '').trim();
+
+    /** 링크를 발급받는 화면. 계정 연결이 돼 있으면 그 상품으로 바로, 아니면 콘솔 홈으로. */
+    const issueUrl = (item: CampaignItem) => {
+        if (lane === 'brandconnect') {
+            return spaceId && item.productId
+                ? `https://brandconnect.naver.com/${spaceId}/affiliate/products/${item.productId}`
+                : 'https://brandconnect.naver.com/';
+        }
+        // 토스는 쉐어링크 콘솔에서 발급한다 — 상품 주소가 있으면 그 상품으로 보낸다.
+        return item.url || 'https://sharelink.toss.im/home';
+    };
+
     const campaigns = lane === 'coupang' ? null : (snapshot?.sites?.[lane] ?? null);
     const collectedLabel = snapshot?.collectedAt
         ? new Date(snapshot.collectedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
@@ -141,9 +163,19 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             target="_blank"
                                             rel="noreferrer"
                                         >네이버 검색분석</a>
-                                        <a className="lw-act lw-act-gold" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">
-                                            캠페인 열기
-                                            {item.reward && <span className="lw-act-sub">{item.reward}</span>}
+                                        <a
+                                            className="lw-act lw-act-gold"
+                                            href={issueUrl(item)}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            onClick={() => { if (!spaceId && lane === 'brandconnect') navigator.clipboard?.writeText(item.name); }}
+                                        >
+                                            상품 확인 및 링크발급
+                                            <span className="lw-act-sub">
+                                                {lane === 'brandconnect' && !spaceId
+                                                    ? '상품명 복사됨 — 콘솔에서 검색'
+                                                    : (item.reward || '내 계정으로 열립니다')}
+                                            </span>
                                         </a>
                                     </div>
                                 </li>

@@ -20,12 +20,13 @@ export type UserKeyField =
     | 'youtubeKey'
     | 'coupangAccessKey'
     | 'coupangSecretKey'
-    | 'coupangSubId';
+    | 'coupangSubId'
+    | 'brandconnectSpaceId';
 
 export type UserKeys = Partial<Record<UserKeyField, string>>;
 
 export type KeyGroup = {
-    id: 'searchad' | 'openapi' | 'youtube' | 'coupang';
+    id: 'searchad' | 'openapi' | 'youtube' | 'coupang' | 'brandconnect';
     label: string;
     desc: string;
     /** 어디서 발급받는지. 사용자가 바로 갈 수 있어야 한다. */
@@ -74,6 +75,22 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
             { key: 'coupangSecretKey', label: 'SECRET KEY', secret: true, placeholder: '영문·숫자 30자 이상', minLength: 30 },
             // sub_id 는 비밀이 아니라 실적을 가르는 꼬리표다. 짧아도 정상이라 길이를 안 본다.
             { key: 'coupangSubId', label: 'sub_id (선택)', secret: false, placeholder: 'leword', minLength: 0 },
+        ],
+    },
+    {
+        /*
+         * 브랜드커넥트는 API 키가 없다. 상품 페이지 주소에 **내 크리에이터 스페이스 ID**가
+         * 들어가야만 열린다(없으면 "삭제되었거나 존재하지 않는 페이지" — 실측).
+         * 이 값을 넣어 두면 '상품 확인 및 링크발급' 버튼이 사장님 계정의 그 상품 화면으로
+         * 바로 열려서, 로그인된 상태 그대로 링크를 발급받을 수 있다.
+         * 비밀이 아니라 주소 조각이라 secret 이 아니다.
+         */
+        id: 'brandconnect',
+        label: '네이버 브랜드커넥트',
+        desc: '내 스페이스 ID를 넣으면 상품별 링크발급 화면으로 바로 갑니다. 브랜드커넥트에 로그인한 뒤 주소창의 숫자를 복사하세요 — brandconnect.naver.com/[이 숫자]/affiliate/products',
+        issueUrl: 'https://brandconnect.naver.com/',
+        fields: [
+            { key: 'brandconnectSpaceId', label: '내 스페이스 ID', secret: false, placeholder: '876491907827712', minLength: 8 },
         ],
     },
 ];
