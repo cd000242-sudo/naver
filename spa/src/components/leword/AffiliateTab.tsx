@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TabIntro } from './LewordShared';
 import LicenseGate, { isUnlocked } from './LicenseGate';
 import CoupangBoard from './CoupangBoard';
@@ -16,11 +16,36 @@ import { AFFILIATE_LANES, type LaneId } from './affiliateLanes';
  * 각 콘솔에서 찾아 캠페인을 걸도록 레인별 동선만 다르게 단다.
  */
 
+/** 로컬 세션 수집기가 발행한 스냅샷. 계약은 scripts/affiliate-campaigns.js 가 만든다. */
+type CampaignSnapshot = {
+    collectedAt: string;
+    sites: Record<string, { label: string; items: { name: string; brand: string; image: string; url: string; reward: string }[] }>;
+};
+
 function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [lane, setLane] = useState<LaneId>('coupang');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
+    const [snapshot, setSnapshot] = useState<CampaignSnapshot | null>(null);
+
+    /*
+     * 토스·브랜드커넥트는 공개 API 가 없어 캠페인 목록이 로그인 뒤에 있다.
+     * 로컬 세션 수집기가 주기적으로 떠서 스냅샷을 발행하고, 화면은 그 파일만 읽는다.
+     * 파일이 아직 없으면(수집 전) 조용히 없는 대로 둔다 — 가짜를 만들지 않는다.
+     */
+    useEffect(() => {
+        let alive = true;
+        fetch('/data/affiliate-campaigns.json', { cache: 'no-store' })
+            .then((response) => (response.ok ? response.json() : null))
+            .then((data) => { if (alive && data?.sites) setSnapshot(data as CampaignSnapshot); })
+            .catch(() => { /* 없으면 없는 대로 */ });
+        return () => { alive = false; };
+    }, []);
 
     const active = AFFILIATE_LANES.find((item) => item.id === lane)!;
+    const campaigns = lane === 'coupang' ? null : (snapshot?.sites?.[lane] ?? null);
+    const collectedLabel = snapshot?.collectedAt
+        ? new Date(snapshot.collectedAt).toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })
+        : '';
 
     return (
         <>
@@ -45,18 +70,58 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
             {!unlocked && <LicenseGate onUnlock={() => setUnlocked(true)} />}
 
-            {lane !== 'coupang' && (
+            {lane !== 'coupang' && campaigns && campaigns.items.length > 0 && (
+                <>
+                    <p className="lw-write-hint">
+                        <strong>{active.label} 캠페인</strong> — 콘솔에서 받아온 실제 목록입니다.
+                        {collectedLabel && <span style={{ opacity: .7 }}> · {collectedLabel} 수집</span>}
+                    </p>
+                    <ol className="lw-product-list">
+                        {campaigns.items.map((item, index) => (
+                            <li key={item.url || item.name} className="lw-product">
+                                <span className="lw-product-rank">{index + 1}</span>
+                                {item.image
+                                    ? <img src={item.image} alt="" loading="lazy" />
+                                    : <span />}
+                                <div className="lw-product-body">
+                                    <div className="lw-product-tags">
+                                        {item.brand && <span className="lw-goldbox">{item.brand}</span>}
+                                        {item.reward && <span className="lw-discount">{item.reward}</span>}
+                                    </div>
+                                    <a className="lw-product-name" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">{item.name}</a>
+                                </div>
+                                <div className="lw-product-actions">
+                                    <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(item.brand || item.name)}>LEWORD 키워드분석</button>
+                                    <a
+                                        className="lw-act lw-act-green"
+                                        href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(item.brand || item.name)}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >네이버 검색분석</a>
+                                    <a className="lw-act lw-act-gold" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">
+                                        캠페인 열기
+                                    </a>
+                                </div>
+                            </li>
+                        ))}
+                    </ol>
+                </>
+            )}
+
+            {lane !== 'coupang' && !(campaigns && campaigns.items.length > 0) && (
                 <div className="lw-note lw-note-limit">
                     <strong>{active.status}</strong>
                     <p>
-                        대신 실시간 인기 상품 풀을 같은 판정(정면 실측)으로 보여줍니다 —
+                        캠페인 목록을 아직 못 받아왔습니다. 그동안은 실시간 인기 상품 풀을 같은 판정으로 보여줍니다 —
                         콘솔에서 같은 상품·브랜드를 찾아 캠페인을 거세요.
                         <a href={active.consoleUrl} target="_blank" rel="noreferrer" style={{ marginLeft: 6 }}>콘솔 열기 →</a>
                     </p>
                 </div>
             )}
 
-            <CoupangBoard onAnalyze={onAnalyze} lane={lane} />
+            {(lane === 'coupang' || !(campaigns && campaigns.items.length > 0)) && (
+                <CoupangBoard onAnalyze={onAnalyze} lane={lane} />
+            )}
         </>
     );
 }
