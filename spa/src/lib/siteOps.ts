@@ -414,13 +414,17 @@ function mergeHomeNotices(primary: HomeNotice[], archive: HomeNotice[], limit: n
 export async function fetchHomeNotices(limit = 3): Promise<HomeNotice[]> {
     const legacy = await fetchLegacyHomeNotices(limit);
     if (legacy !== null && legacy.length > 0) {
-        // The first recovered GAS data set contains only one old seed notice.
-        // Merge the versioned, public archive so this partial migration does
-        // not hide the other published notices. Newly saved GAS rows win.
-        const archive = legacy.length < limit ? await fetchHomeNoticeArchive(limit) : [];
-        const merged = mergeHomeNotices(legacy, archive, limit);
-        writeHomeNoticeCache(merged, 'legacy');
-        return merged;
+        /*
+         * GAS 에 공지가 하나라도 있으면 **GAS 만** 쓴다.
+         *
+         * 예전에는 개수가 모자라면 아카이브를 섞었다(부분 이관기를 메우려던 장치).
+         * 그런데 어드민이 아카이브를 서버로 가져오면 새 id 가 붙어 병합 키가 어긋나
+         * 같은 공지가 **이중으로** 보이고, 서버에서 지운 공지는 아카이브에서
+         * **되살아난다**(2026-08-12 확인). 관리자가 서버에서 지웠으면 지워진 것이다 —
+         * 아카이브는 GAS 가 완전히 빈 비상시에만 쓴다.
+         */
+        writeHomeNoticeCache(legacy, 'legacy');
+        return legacy;
     }
     const archive = await fetchHomeNoticeArchive(limit);
     if (archive.length > 0) return archive;
