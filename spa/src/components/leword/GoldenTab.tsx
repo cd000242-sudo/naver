@@ -7,6 +7,7 @@ import BoardCardHead from './BoardCardHead';
 import { formatCount } from '../../lib/keywordApi';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
+import ExternalTrafficBoard, { type ReferenceRow } from './ExternalTrafficBoard';
 
 /**
  * 네이버 데이터랩 검색어 트렌드. 우리가 그리는 그림이 아니라 네이버가 그린 것을 연다.
@@ -81,6 +82,8 @@ type Board = {
     topicsWithRows?: number;
     verified?: number;
     rows: PreemptionRow[];
+    /** 2군 — 네이버 자리는 늦었지만 외부 유입으로 쓸 밭. */
+    reference?: ReferenceRow[];
 };
 
 const BOARD_URL = '/data/preemption-board.json';
@@ -105,7 +108,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             .then((data) => {
                 if (!alive) return;
                 const rows: PreemptionRow[] = Array.isArray(data?.rows) ? data.rows : [];
-                setBoard({ ...data, rows });
+                setBoard({ ...data, rows, reference: Array.isArray(data?.reference) ? data.reference : [] });
                 setStatus(rows.length > 0 ? 'ready' : 'empty');
             })
             .catch(() => { if (alive) setStatus('error'); });
@@ -297,6 +300,17 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     </div>
 
                     {rows.length === 0 && <div className="lw-note">이 주제에는 통과한 키워드가 없습니다.</div>}
+
+                    {/*
+                      * 2군은 발행 데이터에 계속 있었는데 읽는 화면이 없어 묻혀 있었다.
+                      * 매 회차 80건쯤이 그렇게 버려졌다 — 사장님 지적으로 드러났다.
+                      * 주제 필터는 여기에도 건다(위에서 고른 주제와 따로 놀면 안 된다).
+                      */}
+                    <ExternalTrafficBoard
+                        rows={(board.reference || []).filter((row) => topic === '전체' || row.topic === topic)}
+                        onAnalyze={onAnalyze}
+                        searchUrl={naverSearchUrl}
+                    />
 
                     {planRow && (
                         <PreemptionPlan

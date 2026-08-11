@@ -294,6 +294,30 @@ function LewordStyles() {
             .lw-index-golden { background: rgba(0,224,198,.14); color: #00e0c6; }
             .lw-index-fair { background: rgba(122,150,190,.14); color: #8ea6c8; }
             .lw-index-weak { background: rgba(255,255,255,.05); color: #6f7787; }
+
+            /*
+             * 2군(외부 유입용). 1군과 시각적으로 확실히 갈라 놔야 한다 —
+             * 섞여 보이면 "이것도 황금, 저것도 황금"이 되어 보드의 값어치가 사라진다.
+             * 그래서 접어 두고, 펼쳐도 테두리와 색으로 다른 칸임을 알린다.
+             */
+            .lw-external { margin-top: 26px; }
+            .lw-external-head {
+                display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+                width: 100%; padding: 14px 16px;
+                border: 1px dashed rgba(255,255,255,.16); border-radius: 13px;
+                background: rgba(255,255,255,.022);
+                text-align: left; cursor: pointer;
+            }
+            .lw-external-title { color: #fff; font-size: 15px; font-weight: 900; }
+            .lw-external-desc { color: #7c8598; font-size: 12.5px; font-weight: 700; }
+            .lw-external-toggle { margin-left: auto; color: #a78bfa; font-size: 12.5px; font-weight: 900; }
+            .lw-external-list { margin-top: 10px; }
+            .lw-external-list .lw-card-pre { border-style: dashed; background: rgba(255,255,255,.018); }
+            .lw-ext-tag {
+                padding: 4px 9px; border-radius: 999px;
+                border: 1px solid rgba(167,139,250,.35); background: rgba(167,139,250,.12);
+                color: #c4b5fd; font-size: 11.5px; font-weight: 800;
+            }
             .lw-card-actions small {
                 display: block; margin-top: 2px;
                 font-size: 10px; font-weight: 700; opacity: .62;
