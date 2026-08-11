@@ -2144,6 +2144,27 @@
 
         function ensureAdminToken(force) {
             if (ADMIN_TOKEN && !force) return ADMIN_TOKEN;
+            /*
+             * **로그인이 이미 받아 온 토큰을 먼저 쓴다.**
+             *
+             * 2026-08-12 실사고: 공지를 쓰고 '홈에 발행'을 눌러도 아무 반응이 없었다.
+             * 저장 경로(gasAdminCall)는 lp_admin_gas_token 만 봤는데 그 값은 오직
+             * window.prompt 로만 채워졌다. 그래서 토큰이 없으면 조용히 막혔다.
+             *
+             * 그런데 admin-password-login 이 돌려주는 session.token 이 **곧 GAS 의
+             * ADMIN_TOKEN 이다**(GAS handleAdminPasswordLogin 이 getAdminToken() 을
+             * 그대로 세션에 실어 준다). 로그인한 사람은 이미 들고 있었는데 안 쓴 것이다.
+             *
+             * force 일 때는 묻는다 — 저장된 토큰이 틀렸다고 판명된 경우다.
+             */
+            if (!force) {
+                const session = readAdminSession();
+                if (session && session.token) {
+                    ADMIN_TOKEN = session.token;
+                    sessionStorage.setItem('lp_admin_gas_token', ADMIN_TOKEN);
+                    return ADMIN_TOKEN;
+                }
+            }
             const entered = (window.prompt(
                 'GAS 관리자 토큰을 입력하세요.\n(스크립트 속성 ADMIN_TOKEN 값 · 이 브라우저 세션에만 보관됩니다)'
             ) || '').trim();
@@ -2664,6 +2685,10 @@
                 }
                 setLoginProgress('저장 권한 연결 중…');
                 writeAdminSession(payload.session);
+                // 저장 경로가 쓰는 토큰을 여기서 채운다. 안 그러면 저장할 때마다
+                // 브라우저 prompt 가 뜨고, 값을 모르면 그대로 막힌다.
+                ADMIN_TOKEN = payload.session.token;
+                sessionStorage.setItem('lp_admin_gas_token', ADMIN_TOKEN);
                 setLoginProgress('');
                 openLegacyDashboard();
             } catch (err) {
