@@ -69,7 +69,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 ))}
             </div>
 
-            <p className="lw-write-hint">{active.desc}</p>
+            {lane !== 'coupang' && <p className="lw-write-hint">{active.desc}</p>}
 
             {!unlocked && <LicenseGate onUnlock={() => setUnlocked(true)} />}
 
@@ -79,16 +79,7 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
               * 쿠팡 레인은 실시간 공급(베스트셀러·골드박스)을 그 자리에서 분석하는
               * CoupangBoard 가 통째로 맡는다. 아래 키워드 목록은 나머지 두 레인용이다.
               */}
-            {lane === 'coupang' && (
-                <>
-                    <p className="lw-write-hint">
-                        <strong>실시간 인기상품 분석</strong> — 쿠팡 베스트셀러(지금 팔리는 순위)와
-                        골드박스 특가를 받아, 상품마다 검색량·문서수를 그 자리에서 재고
-                        글로 쓸 가치 순으로 세웁니다.
-                    </p>
-                    <CoupangBoard onAnalyze={onAnalyze} />
-                </>
-            )}
+            {lane === 'coupang' && <CoupangBoard onAnalyze={onAnalyze} />}
 
             {lane !== 'coupang' && (
                 <>

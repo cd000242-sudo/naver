@@ -79,11 +79,6 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
      * 기준은 황금지수(등급 SSoT의 사본) 그대로다 — 여기서 새 임계값을 만들지 않는다.
      */
     const all = rows || [];
-    const prime = all.filter((row) => {
-        const gi = goldenIndex(row.searchVolume, row.documentCount);
-        return gi !== null && gi.tier !== 'weak';
-    });
-    const rest = all.filter((row) => !prime.includes(row));
 
     const renderRow = (row: AffiliateProduct, rank: number) => {
                 const index2 = goldenIndex(row.searchVolume, row.documentCount);
@@ -168,25 +163,10 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 내 글이 그 자리를 차지합니다. 3~5개(경합)는 더 잘 쓰면 노려볼 수 있는 자리라 남겨 뒀고,
                 6개 이상(포화)은 애초에 보드에서 뺐습니다. 문서수가 커도 정면이 적으면 쓸 자리가 있습니다.
             </p>
-            {prime.length > 0 && (
-                <>
-                    <p className="lw-write-hint"><strong>지금 써볼 만한 것</strong> — 찾는 사람 대비 쓴 글이 적습니다.</p>
-                    <ol className="lw-product-list">
-                        {prime.map((row, index) => renderRow(row, index + 1))}
-                    </ol>
-                </>
-            )}
-            {rest.length > 0 && (
-                <>
-                    <p className="lw-write-hint">
-                        <strong>판매 참고</strong> — 찾는 사람이 아직 적거나 이미 쓴 글이 많습니다.
-                        선점보다는 상품 소개 글감으로 보세요.
-                    </p>
-                    <ol className="lw-product-list">
-                        {rest.map((row, index) => renderRow(row, prime.length + index + 1))}
-                    </ol>
-                </>
-            )}
+            {/* 그룹 헤더는 뺐다(사장님: 정면 설명 빼고 다 없애). 판정은 카드 배지가 이미 말한다. */}
+            <ol className="lw-product-list">
+                {all.map((row, index) => renderRow(row, index + 1))}
+            </ol>
         </>
     );
 }
