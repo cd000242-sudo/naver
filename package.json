@@ -69,7 +69,7 @@
     "release:full": "node scripts/release-all.js",
     "packaged-smoke": "node scripts/packaged-app-smoke.mjs",
     "probe:serp": "node scripts/probe-serp.mjs",
-    "release:upload": "node scripts/upload-release-to-leaderspro.js",
+    "release:upload": "node scripts/sync-site-download.js",
     "release:clean": "node scripts/clean-old-releases.js",
     "release:publish": "npm run release:upload && npm run release:clean"
   },
