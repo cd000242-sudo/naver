@@ -133,23 +133,27 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 )}
                                 <span>가격 <strong>{row.price === null ? '—' : `${row.price.toLocaleString('ko-KR')}원`}</strong></span>
                             </div>
-                            <div className="lw-lane-actions" style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'flex-end' }}>
-                                <button type="button" onClick={() => onAnalyze(row.keyword)}>LEWORD 키워드분석</button>
-                                <a
-                                    href={`https://www.coupang.com/np/search?q=${encodeURIComponent(row.keyword)}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >쿠팡 검색해보기</a>
-                                {/* 정면 수치를 못 믿겠으면 직접 세어 보라 — 실측을 파는 보드는 검증 동선까지 줘야 한다. */}
-                                <a
-                                    href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(row.keyword)}`}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >네이버 검색분석</a>
-                                <button type="button" onClick={() => void makeLink(row)}>
-                                    {linkState?.key === row.url ? linkState.label : '내 제휴링크 복사(API키 있어야됨)'}
-                                </button>
-                            </div>
+                        </div>
+                        <div className="lw-product-actions">
+                            <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(row.keyword)}>LEWORD 키워드분석</button>
+                            <a
+                                className="lw-act lw-act-orange"
+                                href={`https://www.coupang.com/np/search?q=${encodeURIComponent(row.keyword)}`}
+                                target="_blank"
+                                rel="noreferrer"
+                            >쿠팡 검색해보기</a>
+                            {/* 정면 수치를 못 믿겠으면 직접 세어 보라 — 실측을 파는 보드는 검증 동선까지 줘야 한다. */}
+                            <a
+                                className="lw-act lw-act-green"
+                                href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(row.keyword)}`}
+                                target="_blank"
+                                rel="noreferrer"
+                            >네이버 검색분석</a>
+                            <button type="button" className="lw-act lw-act-gold" onClick={() => void makeLink(row)}>
+                                {linkState?.key === row.url
+                                    ? linkState.label
+                                    : (<>내 제휴링크 복사<span className="lw-act-sub">(API키 있어야됨)</span></>)}
+                            </button>
                         </div>
                     </li>
                 );

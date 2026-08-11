@@ -386,7 +386,7 @@ function LewordStyles() {
             /* 상품 보드 — 그림이 커야 무슨 물건인지 한눈에 들어온다. */
             .lw-product-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
             .lw-product {
-                display: grid; grid-template-columns: 26px 72px minmax(0, 1fr); gap: 12px; align-items: start;
+                display: grid; grid-template-columns: 26px 72px minmax(0, 1fr) 178px; gap: 12px; align-items: start;
                 padding: 13px; border: 1px solid rgba(255,255,255,.08); border-radius: 12px;
                 background: rgba(255,255,255,.03);
             }
@@ -405,7 +405,27 @@ function LewordStyles() {
             .lw-product-metrics { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 9px; }
             .lw-product-metrics span { color: rgba(235,242,250,.5); font-size: 11px; }
             .lw-product-metrics strong { color: #fff; font-size: 12px; font-weight: 800; margin-left: 3px; }
-            @media (max-width: 620px) { .lw-product { grid-template-columns: 22px minmax(0, 1fr); } .lw-product img { display: none; } }
+            /* 카드 우측 버튼 열 — 사장님 지시: 우측 세로 정렬, 테두리, 기능별 색. */
+            .lw-product-actions { display: flex; flex-direction: column; gap: 7px; justify-content: center; }
+            .lw-product-actions .lw-act {
+                display: block; width: 100%; text-align: center; padding: 8px 10px;
+                border-radius: 10px; font-size: 12px; font-weight: 800; line-height: 1.3;
+                text-decoration: none; cursor: pointer; border: 1px solid; background: transparent;
+                transition: filter .15s ease;
+            }
+            .lw-product-actions .lw-act:hover { filter: brightness(1.25); }
+            .lw-act-gold { color: #ffd700; border-color: rgba(255,215,0,.55); background: rgba(255,215,0,.10); }
+            .lw-act-blue { color: #7db4ff; border-color: rgba(90,169,255,.55); background: rgba(90,169,255,.10); }
+            .lw-act-orange { color: #ff9a4d; border-color: rgba(255,122,26,.55); background: rgba(255,122,26,.10); }
+            .lw-act-green { color: #57d364; border-color: rgba(45,180,0,.6); background: rgba(45,180,0,.12); }
+            .lw-act-sub { display: block; font-size: 10px; font-weight: 600; opacity: .75; margin-top: 2px; }
+            @media (max-width: 620px) {
+                .lw-product { grid-template-columns: 22px minmax(0, 1fr); }
+                .lw-product img { display: none; }
+                /* 좁은 화면에선 버튼을 2×2 로 접는다. */
+                .lw-product-actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+                .lw-product-actions .lw-act { flex: 1 1 45%; width: auto; }
+            }
             .lw-lanes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: start; }
             @media (max-width: 1180px) { .lw-lanes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
             @media (max-width: 780px) { .lw-lanes { grid-template-columns: minmax(0, 1fr); } }
