@@ -76,6 +76,21 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         {row.image && <img src={row.image} alt="" loading="lazy" />}
                         <div className="lw-product-body">
                             <div className="lw-product-tags">
+                                {row.serpTop && row.serpTop.sampled > 0 && (() => {
+                                    const exact = row.serpTop!.exact;
+                                    const verdict = exact <= 2
+                                        ? { label: `자리 있음 · 정면 ${exact}개 — 고르세요`, color: '#2ecc71', bg: 'rgba(46,204,113,.14)' }
+                                        : exact <= 5
+                                            ? { label: `경합 · 정면 ${exact}개`, color: '#f5a623', bg: 'rgba(245,166,35,.14)' }
+                                            : { label: `포화 · 정면 ${exact}개 — 피하세요`, color: '#ff6b6b', bg: 'rgba(255,107,107,.14)' };
+                                    return (
+                                        <span style={{
+                                            color: verdict.color, background: verdict.bg,
+                                            border: `1px solid ${verdict.color}44`, borderRadius: 999,
+                                            padding: '2px 10px', fontWeight: 700, fontSize: 12,
+                                        }}>{verdict.label}</span>
+                                    );
+                                })()}
                                 {index2 && (
                                     <span className={`lw-gold-mini lw-gold-${index2.tier}`}>
                                         {index2.label} {index2.ratio!.toFixed(1)}
@@ -90,9 +105,6 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 </span>
                             </div>
                             <a className="lw-product-name" href={row.url} target="_blank" rel="noreferrer">{row.name}</a>
-                            {(row.angles || []).slice(0, 2).map((angle) => (
-                                <p key={angle.text} className="lw-lane-product">{angle.kind} · {angle.text}</p>
-                            ))}
                             <div className="lw-product-metrics">
                                 <span>검색어 <strong>{row.keyword}</strong></span>
                                 <span>월 검색량 <strong>{row.searchVolume === null ? '—' : row.searchVolume.toLocaleString('ko-KR')}</strong></span>
@@ -122,9 +134,11 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     return (
         <>
             <p className="lw-write-hint">
-                <strong>상위10 정면</strong> — 블로그 검색 첫 화면(상위 10개) 제목 중 이 검색어를
-                그대로 다룬 글 수입니다. <strong>0~1개면 그 자리가 비어 있다</strong>는 뜻이고,
-                8개 이상이면 같은 글의 11번째가 될 뿐입니다. 문서수가 커도 정면이 적으면 쓸 자리가 있습니다.
+                <strong>상위10 정면이란?</strong> 이 검색어로 검색했을 때 첫 화면에 나오는 글 10개 중,
+                제목이 이 검색어를 그대로 다룬 글이 몇 개인지 실제로 센 숫자입니다.
+                {' '}<strong>정면 0~2개짜리를 고르면 됩니다</strong> — 첫 화면에 경쟁 글이 거의 없어
+                내 글이 그 자리를 차지합니다. 6개 이상은 이미 가득 찬 자리라 피하세요.
+                문서수가 커도 정면이 적으면 쓸 자리가 있습니다.
             </p>
             {prime.length > 0 && (
                 <>
