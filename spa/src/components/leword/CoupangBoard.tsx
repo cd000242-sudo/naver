@@ -97,6 +97,9 @@ function CoupangBoard({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 <span>검색어 <strong>{row.keyword}</strong></span>
                                 <span>월 검색량 <strong>{row.searchVolume === null ? '—' : row.searchVolume.toLocaleString('ko-KR')}</strong></span>
                                 <span>문서수 <strong>{row.documentCount === null ? '—' : row.documentCount.toLocaleString('ko-KR')}</strong></span>
+                                {row.serpTop && row.serpTop.sampled > 0 && (
+                                    <span>상위{row.serpTop.sampled} 정면 <strong>{row.serpTop.exact}개</strong></span>
+                                )}
                                 <span>가격 <strong>{row.price === null ? '—' : `${row.price.toLocaleString('ko-KR')}원`}</strong></span>
                             </div>
                             <div className="lw-lane-actions">

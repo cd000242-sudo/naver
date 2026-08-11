@@ -241,6 +241,10 @@ export type AffiliateProduct = {
     bestRank?: number;
     /** 규칙 기반 구매·사용 욕구 문구 — 글 첫 줄 재료. 서버가 만든다. */
     angles?: { text: string; kind: string }[];
+    /** 블로그 검색 상위 10개 제목의 정면/부분 대응 실측. 문서수(broad)가 과장하는 경쟁의 실제 크기. */
+    serpTop?: { sampled: number; exact: number; partial: number } | null;
+    /** 이 행을 잰 시각. */
+    measuredAt?: string;
     searchVolume: number | null;
     documentCount: number | null;
 };
