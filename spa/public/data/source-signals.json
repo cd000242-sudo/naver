@@ -30,7 +30,7 @@
               "seo": "롯데건설 2분기 실적 최신 이슈와 핵심 내용 정리",
               "home": "롯데건설 2분기 실적, [2Q실적] 롯데건설, 2분기 영업이익 1224억… 전년 대비 230%↑ 관련 확인할 점",
               "topic": "롯데건설 2분기 실적",
-              "topicGroup": "네이버 실시간 검색어"
+              "topicGroup": "줌 실시간 검색어"
             },
             "facts": [
               {
@@ -216,7 +216,7 @@
               "seo": "미국 CPI 증시 최신 이슈와 핵심 내용 정리",
               "home": "미국 CPI 증시, 뉴욕증시, 호르무즈 협상 난항에 하락 마감 관련 확인할 점",
               "topic": "미국 CPI 증시",
-              "topicGroup": "네이버 실시간 검색어"
+              "topicGroup": "줌 실시간 검색어"
             },
             "facts": [
               {
@@ -680,11 +680,135 @@
         {
           "id": "daum-2",
           "rank": 2,
+          "keyword": "권오을 인민공화국 발언",
+          "title": "권오을 인민공화국 발언",
+          "rawKeyword": "권오을 인민공화국 발언",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "daum",
+          "expansions": [
+            "권오을",
+            "발언 뜻",
+            "유시민 발언",
+            "돌려차기발언",
+            "소신발언",
+            "정읍발언",
+            "소신발언 뜻",
+            "발언권"
+          ],
+          "expansionSeed": "권오",
+          "insight": {
+            "titles": {
+              "seo": "권오을 인민공화국 발언 최신 이슈와 핵심 내용 정리",
+              "home": "권오을 인민공화국 발언, [단독]李 ‘조심하라’ 했지만… 보훈부 “권오을 장관 ‘北 인민공화국’ 발언 정정·사과 계획 없다” 관련 확인할 점",
+              "topic": "권오을 인민공화국 발언",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "국가보훈부가 권오을 장관의 북한 '인민공화국' 호칭 논란에 대해 정정이나 유감 표명을 하지 않겠다는 입장을 국회에 전달했습니다. 보훈부는 북한의 국제적 명칭을 근거로 장관의 발언을 옹호했으나, 대통령의 신중론 당부에도 불구하고 기존 입장을 고수해 논란이 지속될 전망입니다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "정동영 통일부 장관이 북한의 정식 국호인 '조선민주주의 인민공화국 ' 또는 '조선'이라는 호칭 사용을 공론화하겠다는 입장을 밝힌 데 이어, 권오을 국가보훈부 장관은 이미 북한을 ' 인민공화국 '이라고 표현한 자신의 발언 에 대해 정정이나 사과를 할 계획이 없다고 밝혔다. 단순한 호칭 논란으로 보기에는...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.chosun.com/politics/diplomacy-defense/2026/08/12/HWMGXE4YFRDHRAGBJQRJHKDMGM/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+                "press": "조선일보"
+              },
+              {
+                "url": "http://www.weeklytoday.com/news/articleView.html?idxno=790017",
+                "press": "위클리오늘"
+              }
+            ],
+            "images": [
+              "https://www.chosun.com/resizer/v2/TU7IAGH3INMMVF5NA6QZ5LHQKA.jpg?auth=7f7d99c858658b79f1c442521ec1f05baed2cf8d643587d50025112a1db1e8a1&width=1200&height=630&focal=2259,1086"
+            ],
+            "press": [
+              "조선일보",
+              "위클리오늘"
+            ],
+            "headlines": [
+              "[단독]李 ‘조심하라’ 했지만… 보훈부 “권오을 장관 ‘北 인민공화국’ 발언 정정·사과 계획 없다”",
+              "[위클리오늘] '조선'·' 인민공화국 ' 호칭 논란…헌법과 국민 정서 외면..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-12T08:56:51.880Z"
+          }
+        },
+        {
+          "id": "daum-3",
+          "rank": 3,
+          "keyword": "거래소 관리종목 지정",
+          "title": "거래소 관리종목 지정",
+          "rawKeyword": "거래소 관리종목 지정",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 98,
+          "source": "daum",
+          "expansions": [
+            "한국금거래소",
+            "금거래소",
+            "삼성금거래소",
+            "한국거래소",
+            "한국표준금거래소",
+            "시계거래소",
+            "국제금거래소",
+            "한국전력거래소"
+          ],
+          "expansionSeed": "거래소",
+          "insight": {
+            "titles": {
+              "seo": "거래소 관리종목 지정 최신 이슈와 핵심 내용 정리",
+              "home": "거래소 관리종목 지정, 동전주·시총미달 상장폐지 문 열렸다…36개 종목 첫 관리종목 관련 확인할 점",
+              "topic": "거래소 관리종목 지정",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "동전주·시총미달 상장폐지 문 열렸다…36개 종목 첫 관리종목 이성훈 기자 Seoul 작성 2026.08.12 17:05 수정 2026.08.12 17:30 조회 조회수 ▲ 한국거래소 한국 주식시장에서 부실기업을 솎아내기 위한 상장폐지 요건 강화 조처의 일환으로 '동전주' 및 '시가총액 기준 미달' 종목들이 무더기로 관리종목에 지정됐습니다. 한국거래소는 오늘(12일) 장 마감 기준으로 최근 30거래일간 주가가 1천 원 미만에 머물거나 상장유지를 위한 시가총액 기준에 미달한 36개 종목의 관리종목 지정을 공시했습니다. 이 가운데 주가 1천 원 미만 '동전주'를 이유로 관리종목으로 지정된 종목은 유가증권시장 3개, 코스닥 시장이 21개입니다. 동전주 기준에는 걸리지 않았지만 코스피 300억 원·코스닥 200억 원인 시가총액 기준에 지속적으로 못 미",
+                "sourceIndex": 0
+              },
+              {
+                "text": "한국 거래소 는 12일 종가 기준 최근 30거래일 간 주가가 1000원 미만에 머물거나 상장유지를 위한 시가총액 기준에 미달한 36개 종목 의 관리종목 지정 을 공시했다고 밝혔다. 앞서 금융당국은 국내 증시의 체질 개선 방안으로 동전주 상장폐지 요건을 신설한 바 있다. 지난달 1일부터 주가가 30거래일 연속...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008702402&plink=ORI&cooper=NAVER",
+                "press": "SBS"
+              },
+              {
+                "url": "https://www.mk.co.kr/article/12125472",
+                "press": "매일경제"
+              }
+            ],
+            "images": [
+              "https://img.sbs.co.kr/newimg/news/20260727/202206133_1280.jpg"
+            ],
+            "press": [
+              "SBS",
+              "매일경제"
+            ],
+            "headlines": [
+              "동전주·시총미달 상장폐지 문 열렸다…36개 종목 첫 관리종목",
+              "[속보] 거래소 , ‘동전주·시총미달’ 36개 무더기 관리종목 지정"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-12T08:56:51.880Z"
+          }
+        },
+        {
+          "id": "daum-4",
+          "rank": 4,
           "keyword": "송원근 노총각 탈출",
           "title": "송원근 노총각 탈출",
           "rawKeyword": "송원근 노총각 탈출",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 97,
           "source": "daum",
           "expansions": [
             "노총각 뜻",
@@ -740,13 +864,137 @@
           }
         },
         {
-          "id": "daum-3",
-          "rank": 3,
+          "id": "daum-5",
+          "rank": 5,
+          "keyword": "BTS 뷔 청력저하",
+          "title": "BTS 뷔 청력저하",
+          "rawKeyword": "BTS 뷔 청력저하",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 96,
+          "source": "daum",
+          "expansions": [
+            "BTS 뷔",
+            "청력저하 회복",
+            "청력저하 이명",
+            "청력저하 치매",
+            "청력저하산재",
+            "bts",
+            "Bts 콘서트",
+            "bts 나무위키"
+          ],
+          "expansionSeed": "BTS",
+          "insight": {
+            "titles": {
+              "seo": "BTS 뷔 청력저하 최신 이슈와 핵심 내용 정리",
+              "home": "BTS 뷔 청력저하, \"한쪽 귀 30% 밖에 안 들려\"…'청력 저하' 고백한 BTS 뷔 관련 확인할 점",
+              "topic": "BTS 뷔 청력저하",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "그룹 방탄소년단(BTS)의 뷔가 청력 저하로 치료를 받고 있다는 사실을 처음으로 밝혔다.뷔는 12일 진행한 위버스 라이브에서 \"'아미'(팬덤명) 분들께 한 번도 이야기를 드리지 않았지만, 2년 반 전부터 귀가 좋지 않...",
+                "sourceIndex": 0
+              },
+              {
+                "text": "그룹 방탄소년단( BTS ) 멤버 뷔가 청력 저하 사실을 고백했다. 뷔는 12일 팬 커뮤니티 플랫폼 위버스를 통해 정국과 함게 라이브 방송을 진행하는 과정에서... 내가 최면이 걸려서 정신력 문제로 생각하고 있다”고 말했다. 이에 정국은 “그러면 안 된다”고 만류했고 뷔 역시 “병원 열심히 다니고 있다”고 답했다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202608120679&t=NN",
+                "press": "한국경제TV"
+              },
+              {
+                "url": "https://www.mk.co.kr/article/12125446",
+                "press": "매일경제"
+              }
+            ],
+            "images": [
+              "https://img.wowtv.co.kr/nrcs/production/images/20260812/20260812_fb1cb2e3607b4937aa8642125141d3e1.png"
+            ],
+            "press": [
+              "한국경제TV",
+              "매일경제"
+            ],
+            "headlines": [
+              "\"한쪽 귀 30% 밖에 안 들려\"…'청력 저하' 고백한 BTS 뷔",
+              "“한쪽 귀 100이면 다른 한쪽은 30”…‘ 청력저하 ’ 고백한 BTS 뷔"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-12T08:56:51.880Z"
+          }
+        },
+        {
+          "id": "daum-6",
+          "rank": 6,
+          "keyword": "홍경민 자녀 학원 중단",
+          "title": "홍경민 자녀 학원 중단",
+          "rawKeyword": "홍경민 자녀 학원 중단",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 95,
+          "source": "daum",
+          "expansions": [
+            "홍경민 김유나",
+            "홍경민 나무위키",
+            "홍경민 와이프",
+            "홍경민 노래",
+            "홍경민 집",
+            "홍경민 흔들린우정",
+            "가수홍경민",
+            "홍경민 아파트"
+          ],
+          "expansionSeed": "홍경민",
+          "insight": {
+            "titles": {
+              "seo": "홍경민 자녀 학원 중단 최신 이슈와 핵심 내용 정리",
+              "home": "홍경민 자녀 학원 중단, 홍경민, '서울대 박사' 아내 공개…자녀 교육관 대립 관련 확인할 점",
+              "topic": "홍경민 자녀 학원 중단",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "가수 홍경민이 해금 연주자인 아내 김유나 씨와 함께 방송에 출연해 일상을 공개하고, 자녀 교육을 둘러싼 현실적인 이견을 전했다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "그러면서 김유나는 홍경민 이 아이들의 학원 도 중단 시킨 사실을 털어놨다. 김유나는 “애들이 믿는 구석이 있으니까. 엄마 말에 아빠가 꼼짝하지 않으니까”라며 두 딸이 아빠를 믿고 더 대담해진 것에 대한 속내를 털어놨다. 이어 “남편이 제 편을 들어주고 아이를 훈육할 때 엄마의 말 한마디에 무게를...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISX20260812_0003745291",
+                "press": "뉴시스"
+              },
+              {
+                "url": "https://www.tenasia.co.kr/article/2026081265454",
+                "press": "텐아시아"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2026/08/12/NISI20260812_0002210081_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "텐아시아"
+            ],
+            "headlines": [
+              "홍경민, '서울대 박사' 아내 공개…자녀 교육관 대립",
+              "홍경민 , 자녀 학원 중단 시켰다…'서울대 박사' ♥아내 반발에도, \"대학..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-12T08:56:51.880Z"
+          }
+        },
+        {
+          "id": "daum-7",
+          "rank": 7,
           "keyword": "하영 증조부",
           "title": "하영 증조부",
           "rawKeyword": "하영 증조부",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 94,
           "source": "daum",
           "expansions": [
             "배우 하영 증조부",
@@ -797,13 +1045,75 @@
           }
         },
         {
-          "id": "daum-4",
-          "rank": 4,
+          "id": "daum-8",
+          "rank": 8,
+          "keyword": "한국콜마",
+          "title": "한국콜마",
+          "rawKeyword": "한국콜마",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 93,
+          "source": "daum",
+          "expansions": [
+            "한국콜마 주가",
+            "한국콜마 채용",
+            "한국콜마 화장품",
+            "한국콜마 연봉",
+            "한국콜마 기업정보",
+            "한국콜마 선크림",
+            "한국콜마홀딩스",
+            "한국콜마 실적발표"
+          ],
+          "expansionSeed": "한국콜마",
+          "insight": {
+            "titles": {
+              "seo": "한국콜마 최신 이슈와 핵심 내용 정리",
+              "home": "한국콜마, 한국콜마, '역대 최대' 2분기 영업익 1103억…전년比 50%↑ 관련 확인할 점",
+              "topic": "한국콜마",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "매출 8613억·영업익 1103억 나란히 역대 최대 K-뷰티 수출 호조에 성장세 지속하며 수익성↑",
+                "sourceIndex": 0
+              },
+              {
+                "text": "국내 화장품 주문자 개발생산 ODM 대표 기업인 한국콜마 가 처음으로 분기 영업익 1천억원을 돌파했습니다. ODM 투톱 가운데 한 곳인 코스맥스도 분기 기준 역대 최대 실적을 기록했습니다. K뷰티 열풍은 화장품 유통 기업인 실리콘투의 실적 개선으로 이어지기까지 했습니다. 조재호 기자 연결합니다. 조 기자...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISX20260812_0003745588",
+                "press": "뉴시스"
+              },
+              {
+                "url": "https://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202608120476&t=NNv",
+                "press": "한국경제TV"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2026/04/28/NISI20260428_0002122912_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "한국경제TV"
+            ],
+            "headlines": [
+              "한국콜마, '역대 최대' 2분기 영업익 1103억…전년比 50%↑",
+              "K-뷰티 열풍에 날았다… 한국콜마 , 분기 영업익 첫 1천억"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-12T08:56:51.880Z"
+          }
+        },
+        {
+          "id": "daum-9",
+          "rank": 9,
           "keyword": "전진숙 국회의원",
           "title": "전진숙 국회의원",
           "rawKeyword": "전진숙 국회의원",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 92,
           "source": "daum",
           "expansions": [
             "전진숙 의원",
@@ -859,374 +1169,63 @@
           }
         },
         {
-          "id": "daum-5",
-          "rank": 5,
-          "keyword": "거래소 관리종목",
-          "title": "거래소 관리종목",
-          "rawKeyword": "거래소 관리종목",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "daum",
-          "expansions": [
-            "한국금거래소",
-            "금거래소",
-            "삼성금거래소",
-            "한국거래소",
-            "한국표준금거래소",
-            "시계거래소",
-            "국제금거래소",
-            "한국전력거래소"
-          ],
-          "expansionSeed": "거래소",
-          "insight": {
-            "titles": {
-              "seo": "거래소 관리종목 최신 이슈와 핵심 내용 정리",
-              "home": "거래소 관리종목, 동전주·시총미달 상장폐지 문 열렸다…36개 종목 첫 관리종목 관련 확인할 점",
-              "topic": "거래소 관리종목",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "(서울=연합뉴스) 황철환 기자 = 한국 주식시장에서 부실기업을 솎아내기 위한 상장폐지 요건 강화 조처의 일환으로 '동전주' 및 '시가총액 기준 ...",
-                "sourceIndex": 0
-              },
-              {
-                "text": "[속보] 거래소 , 동전주·시총 미달 30곳 ' 관리종목 ' 신규 지정",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20260812141651008?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.news1.kr/finance/general-stock/6257202",
-                "press": "뉴스1"
-              }
-            ],
-            "images": [
-              "https://img9.yna.co.kr/photo/cms/2026/06/25/83/PCM20260625000183990_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "뉴스1"
-            ],
-            "headlines": [
-              "동전주·시총미달 상장폐지 문 열렸다…36개 종목 첫 관리종목",
-              "[속보] 거래소 , 동전주·시총 미달 30곳 ' 관리종목 ' 신규 지정"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-12T08:47:12.011Z"
-          }
-        },
-        {
-          "id": "daum-6",
-          "rank": 6,
-          "keyword": "그대에게 드림 드라마",
-          "title": "그대에게 드림 드라마",
-          "rawKeyword": "그대에게 드림 드라마",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 95,
-          "source": "daum",
-          "expansions": [
-            "그대에게 드림 드라마 촬영지",
-            "그대에게 드림 드라마 재방송",
-            "그대에게 드림 드라마 내용",
-            "그대에게 드림 드라마 시청률",
-            "그대에게 드림 드라마 나무위키",
-            "그대에게 드림 드라마 ott",
-            "그대에게드림드라마치킨 브랜드"
-          ],
-          "expansionSeed": "그대에게 드림 드라마",
-          "insight": {
-            "titles": {
-              "seo": "그대에게 드림 드라마 최신 이슈와 핵심 내용 정리",
-              "home": "그대에게 드림 드라마, &lsquo;그대에게 드림&rsquo; 이열음, 3색 케미 관련 확인할 점",
-              "topic": "그대에게 드림 드라마",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "TV ‘그대에게 드림’ 이열음, 3색 케미 서정민 기자 2026-08-12 07:06:41 자세히 알아보기여행 가이드 및 여행기음악 및 오디오관광지 정보브랜드 관리TVMusic다단계 및 사업 기회Fashion 이열음이 ‘그대에게 드림’에서 이혜리, 황인엽, 백성철과 각기 다른 관계성을 그려내며 극의 중심을 잡고 있다. 워맨스부터 유쾌한 공조, 애틋한 로맨스까지 다채로운 호흡을 선보였다.ENA 월화드라마 ‘그대에게 드림’에서 이열음은 엄마의 영향력에서 벗어나 자신의 삶을 찾아가는 오하나 역을 맡아 후반부 전개의 한 축을 담당하고 있다. 상대 배우와 관계에 따라 달라지는 감정선을 세밀하게 표현하며 캐릭터의 변화를 그려내고 있다. 먼저 주이재(이혜리)와는 서로의 선택을 지지하는 워맨스를 완성했다. 오하나는 우수빈(황인엽)과 이재가 준비하는 영화 ‘",
-                "sourceIndex": 0
-              },
-              {
-                "text": "배우 이상엽이 ENA 월화 드라마 ' 그대에게 드림 '에서 사랑과 현실 사이에서 선택을 거듭하는 서인욱의 변화를 차분하게 그려내고 있다. 지난 10일과 11일 방송된 9~10회에서는 영화 제작사 대표 서인욱(이상엽 분)이 최사랑(이지민 분)과 관계를 정리하는 한편, 자신이 제작을 맡은 영화를 둘러싼 위기까지 마주하는...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.bntnews.co.kr/article/view/bnt202608120019",
-                "press": "bnt뉴스"
-              },
-              {
-                "url": "https://www.newsinside.kr/news/articleView.html?idxno=4912941",
-                "press": "뉴스인사이드"
-              }
-            ],
-            "images": [
-              "https://www.bntnews.co.kr/data/bnt/image/2026/08/12/bnt202608120022.jpg"
-            ],
-            "press": [
-              "bnt뉴스",
-              "뉴스인사이드"
-            ],
-            "headlines": [
-              "&lsquo;그대에게 드림&rsquo; 이열음, 3색 케미",
-              "' 그대에게 드림 ' 이상엽, 사랑과 책임 사이 후반부 중심 잡았다"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-12T08:47:12.011Z"
-          }
-        },
-        {
-          "id": "daum-7",
-          "rank": 7,
-          "keyword": "전미도 갈매기 무대 복귀",
-          "title": "전미도 갈매기 무대 복귀",
-          "rawKeyword": "전미도 갈매기 무대 복귀",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 94,
-          "source": "daum",
-          "expansions": [
-            "전미도",
-            "복귀 뜻",
-            "김수현 복귀",
-            "강백호 복귀",
-            "유아인 복귀",
-            "김광현 복귀",
-            "조세호 복귀",
-            "김하성 복귀"
-          ],
-          "expansionSeed": "전미",
-          "insight": {
-            "titles": {
-              "seo": "전미도 갈매기 무대 복귀 최신 이슈와 핵심 내용 정리",
-              "home": "전미도 갈매기 무대 복귀, ‘갈매기’로 연극 무대 복귀한 전미도, “더 풍성한 ‘니나’ 보여줄 것” 관련 확인할 점",
-              "topic": "전미도 갈매기 무대 복귀",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "러시아 시골 영지에 사는 꿈많은 소녀 ‘니나’. 배우의 꿈을 이루고자 모스크바로 떠난 니나는 2년 뒤 전혀 다른 퀭한 눈빛으로 돌아왔다. 처절히 절규하고 손짓까지 더하며 자신을 상처입은 ‘갈매기’로 빗댄 니나지만 무너지지는 않는다. “나는 배우예요” 전미도(44)가 니…",
-                "sourceIndex": 0
-              },
-              {
-                "text": "사랑과 예술을 좇던 이들의 욕망과 좌절이 무대 위 호수처럼 서서히 차오른다. 15년 만에 다시 무대 에 오른 ' 갈매기 '가 원숙해진 배우들의 연기로 다시... ◆ '15년 만 복귀 ' 전미도 \"읽어내지 못했던 감정도 느껴졌다\" 배우 전미도 는 15년 만에 ' 갈매기 '로 맨씨어터와 다시 한번 뭉쳤다. 그는 배우를 꿈꾸는 니나...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.joongang.co.kr/article/25452808",
-                "press": "중앙일보"
-              },
-              {
-                "url": "http://www.tvdaily.co.kr/read.php3?aid=17865200361797610002",
-                "press": "티브이데일리"
-              }
-            ],
-            "images": [
-              "https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202608/12/5841c2d3-59ca-4ba7-afb8-797914c23478.jpg"
-            ],
-            "press": [
-              "중앙일보",
-              "티브이데일리"
-            ],
-            "headlines": [
-              "‘갈매기’로 연극 무대 복귀한 전미도, “더 풍성한 ‘니나’ 보여줄 것”",
-              "‘ 갈매기 ’ 전미도 , 15년 만 다시 날아오르다 [종합]"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-12T08:47:12.011Z"
-          }
-        },
-        {
-          "id": "daum-8",
-          "rank": 8,
-          "keyword": "디워 영화",
-          "title": "디워",
-          "rawKeyword": "디워",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 93,
-          "source": "daum",
-          "expansions": [
-            "디워 영화",
-            "디워2",
-            "디월트",
-            "디워 넷플릭스",
-            "디워 관객수",
-            "디워 영화 ott",
-            "디워1",
-            "디월트 임팩드릴"
-          ],
-          "expansionSeed": "디워",
-          "insight": {
-            "titles": {
-              "seo": "디워 영화 최신 이슈와 핵심 내용 정리",
-              "home": "디워 영화, 심형래 ‘디 워’ 19년 만에 유럽서 역주행... “이게 왜 넷플릭스 2위?” 관련 확인할 점",
-              "topic": "디워 영화",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "심형래 감독의 2007년작 영화 디 워가 넷플릭스 공개 후 유럽 등에서 글로벌 차트 6위를 기록했습니다. 과거 혹평을 받았던 작품이나 최근 드래곤 판타지물 수요와 알고리즘 효과로 주목받고 있으며, 관객들은 완성도보다는 B급 오락물로서의 가치에 주목하고 있습니다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "심형래 감독의 판타지 블록버스터 영화 ' 디워 (Dragon Wars: D-War)'가 개봉 19년 만에 글로벌 OTT 플랫폼 넷플릭스를 통해 전 세계적인 역주행 흥행 열풍을... 넷플릭스 영화 부문 2위를 기록했다. 유럽 시장에서의 이 같은 폭발적인 강세에 힘입어 ' 디워 '는 같은 기간 넷플릭스 글로벌 영화 종합 차트에서도...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.chosun.com/culture-life/culture_general/2026/08/12/N4IJ5MZZ7JEHFJFTXD32GIJNCA/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
-                "press": "조선일보"
-              },
-              {
-                "url": "http://www.fnnews.com/news/202608111012254570",
-                "press": "파이낸셜뉴스"
-              }
-            ],
-            "images": [
-              "https://www.chosun.com/resizer/v2/M4DSQ7NMP5BUVMTVCNL5INQ5GY.jpg?auth=10a9f3270a7ea090d006561e2250fcc2328c244d857e2ee0bf0d4621c6f8c959&width=850&height=446&focal=505,28"
-            ],
-            "press": [
-              "조선일보",
-              "파이낸셜뉴스"
-            ],
-            "headlines": [
-              "심형래 ‘디 워’ 19년 만에 유럽서 역주행... “이게 왜 넷플릭스 2위?”",
-              "\"진짜 이무기가 날았다\"...심형래 ' 디워 ', 개봉 19년 만에 넷플릭스 세계..."
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-12T08:47:12.011Z"
-          }
-        },
-        {
-          "id": "daum-9",
-          "rank": 9,
-          "keyword": "경주기행",
-          "title": "경주기행",
-          "rawKeyword": "경주기행",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 92,
-          "source": "daum",
-          "expansions": [
-            "영화 경주기행",
-            "경주기행 나무위키",
-            "경주기행 영화",
-            "경주기행 시사회",
-            "경주기행 무대인사",
-            "경주기행 정보",
-            "경주기행 변요한",
-            "경주기행 gv"
-          ],
-          "expansionSeed": "경주기행",
-          "insight": {
-            "titles": {
-              "seo": "경주기행 최신 이슈와 핵심 내용 정리",
-              "home": "경주기행, &lsquo;경주기행&rsquo; 이정은, &lsquo;닮은꼴&rsquo; 이상순 만난다&hellip;홍보 레이스 시작 - 일간스 관련 확인할 점",
-              "topic": "경주기행",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "‘경주기행’ 주역들이 본격적인 홍보 레이스에 나선다. 12일 배급사 롯데엔터테인먼트에 따르면 이정은은 영화 ‘경주기행’ 홍보 차 이",
-                "sourceIndex": 0
-              },
-              {
-                "text": "배우 변요한이 ' 경주기행 '에서 파격적인 변신에 나선다. 오는 26일 개봉하는 영화 ' 경주기행 '은 수학여행에서 돌아오지 못한 막내딸 경주를 위해 8년의 기다림 끝에 '죽이는' 여행을 떠난 네 모녀의 가족 복수극이다. 변요한은 영화 '파반느' '그녀가 죽었다'와 '한산: 용의 출현', 드라마 '백설공주에게 죽음을...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://isplus.com/article/view/isp202608120032",
-                "press": "일간스포츠"
-              },
-              {
-                "url": "https://www.news1.kr/entertain/movie/6255448",
-                "press": "뉴스1"
-              }
-            ],
-            "images": [
-              "https://isplus.com/data/isp/image/2026/08/12/isp20260812000070.800x.0.jpg"
-            ],
-            "press": [
-              "일간스포츠",
-              "뉴스1"
-            ],
-            "headlines": [
-              "&lsquo;경주기행&rsquo; 이정은, &lsquo;닮은꼴&rsquo; 이상순 만난다&hellip;홍보 레이스 시작 - 일간스포츠",
-              "변요한, ' 경주기행 ' 노개런티 출연…더벅머리·치아 변색까지 파격 변신"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-12T08:47:12.011Z"
-          }
-        },
-        {
           "id": "daum-10",
           "rank": 10,
-          "keyword": "17호 태풍 낭카",
-          "title": "17호 태풍 낭카",
-          "rawKeyword": "17호 태풍 낭카",
+          "keyword": "호남 반도체 부지",
+          "title": "호남 반도체 부지",
+          "rawKeyword": "호남 반도체 부지",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "daum",
           "expansions": [
-            "17호 태풍 낭카",
-            "태풍 17호 낭카",
-            "17호 태풍",
-            "태풍 17호",
-            "17호태풍진로",
-            "2026년 태풍 17호",
-            "태풍 낭카",
-            "17호 피부"
+            "호남 반도체 부지 위치",
+            "호남 반도체 부지 확정",
+            "호남 반도체 부지 관련주",
+            "호남 반도체 부지 후보",
+            "호남 반도체 부지 선정",
+            "호남반도체 부지 공시지가"
           ],
-          "expansionSeed": "17호",
+          "expansionSeed": "호남 반도체 부지",
           "insight": {
             "titles": {
-              "seo": "17호 태풍 낭카 최신 이슈와 핵심 내용 정리",
-              "home": "17호 태풍 낭카, 괌 북쪽서 17호 태풍 '낭카' 발생...일본 동쪽 해상 향할 듯 관련 확인할 점",
-              "topic": "17호 태풍 낭카",
+              "seo": "호남 반도체 부지 최신 이슈와 핵심 내용 정리",
+              "home": "호남 반도체 부지, 산업장관 \"호남 반도체 부지, 정부가 기업에 먼저 제안\" 관련 확인할 점",
+              "topic": "호남 반도체 부지",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "오늘(12일) 오전 9시쯤, 괌 북북서쪽 970km 부근 해상에서 제17호 태풍",
+                "text": "김정관 산업통상부 장관이 호남권 반도체 클러스터 입지와 관련해 \"정부가 기업에 부지를 먼저 제안했다\"고 밝혔습니다. 김 장관은 국회 산업통상자원중소벤처기업위원회 전체 회의에서 '호...",
                 "sourceIndex": 0
               },
               {
-                "text": "기상청은 이 열대저압부가 24시간 안에 제 17호 태풍 낭카 로 발달할 것으로 예상했다. 낭카는 일본 남동쪽 먼바다에서 북동진하다 이동속도가 느려진 뒤 북쪽과 북서쪽으로 방향을 틀 것으로 예상된다. 기상청의 예보 마지막 시점까지 한반도나 제주도 쪽으로 접근하는 경로는 제시되지 않았다.",
+                "text": "정부는 호남 반도체 클러스터 부지 로 지정된 광주 군 공항의 기능을 2028년 중순까지 다른 군 공항으로 임시 배치해 반도체 클러스터 가동을 앞당긴다는 계획이다. 이를 위해 광주 군 공항 임시 배치와 무안 군 공항 착공을 동시에 시행하기로 했다. 삼성전자와 SK하이닉스는 호남 에 각각 반도체 팹 2기씩, 총...",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.ytn.co.kr/_ln/0108_202608121059546856",
-                "press": "YTN"
+                "url": "https://imnews.imbc.com/news/2026/econo/article/6844219_36932.html",
+                "press": "MBC"
               },
               {
-                "url": "https://www.busan.com/view/busan/view.php?code=2026081209284810855",
-                "press": "부산일보"
+                "url": "https://www.yna.co.kr/view/AKR20260811074100003?input=1195m",
+                "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://www.ytn.co.kr/img/comm/ytn_sns_default.jpg"
+              "https://image.imnews.imbc.com/news/2026/econo/article/__icsFiles/afieldfile/2026/08/12/jh_20260812_2.jpg"
             ],
             "press": [
-              "YTN",
-              "부산일보"
+              "MBC",
+              "연합뉴스"
             ],
             "headlines": [
-              "괌 북쪽서 17호 태풍 '낭카' 발생...일본 동쪽 해상 향할 듯",
-              "제15호 태풍 찬홈 영향 동해안에 비…제 17호 태풍 낭카 발생 예상, 이동..."
+              "산업장관 \"호남 반도체 부지, 정부가 기업에 먼저 제안\"",
+              "산업장관 \" 호남 반도체 팹 2029년 1차 완공 목표\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-12T08:47:12.011Z"
+            "collectedAt": "2026-08-12T08:56:51.880Z"
           }
         }
       ]
@@ -1554,73 +1553,135 @@
         {
           "id": "zum-1",
           "rank": 1,
-          "keyword": "미국 CPI 증시",
-          "title": "미국 CPI 증시",
-          "rawKeyword": "미국 CPI 증시",
+          "keyword": "동원그룹 상반기 실적",
+          "title": "동원그룹 상반기 실적",
+          "rawKeyword": "동원그룹 상반기 실적",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
           "priority": 100,
           "source": "zum",
           "expansions": [
-            "미국증시",
-            "미국 환율",
-            "미국 이란 전쟁",
-            "미국시간",
-            "미국 이란",
-            "미국구글",
-            "미국 금리",
-            "미국 시차"
+            "동원그룹 채용",
+            "동원그룹 회장",
+            "동원그룹 계열사",
+            "동원그룹 매출",
+            "동원그룹 주식",
+            "동원그룹 연봉",
+            "동원그룹 재계순위",
+            "동원그룹 비전"
           ],
-          "expansionSeed": "미국",
+          "expansionSeed": "동원그룹",
           "insight": {
             "titles": {
-              "seo": "미국 CPI 증시 최신 이슈와 핵심 내용 정리",
-              "home": "미국 CPI 증시, 뉴욕증시, 호르무즈 협상 난항에 하락 마감 관련 확인할 점",
-              "topic": "미국 CPI 증시",
+              "seo": "동원그룹 상반기 실적 최신 이슈와 핵심 내용 정리",
+              "home": "동원그룹 상반기 실적, 동원산업, 2분기 영업이익 1515억원…전년比 13.3% 증가 - 경제 관련 확인할 점",
+              "topic": "동원그룹 상반기 실적",
               "topicGroup": "줌 실시간 검색어"
             },
             "facts": [
               {
-                "text": "뉴욕증시, 호르무즈 협상 난항에 하락 마감 호르무즈 해협 통항에 대한 불확실성이 지속되고 인플레이션 우려가 커지면서 11일현지시각 뉴욕증시 3대 지수가 하락 마감했다. 이날 뉴욕증시에서 다우존스30 산업평균지수는 전장보다 184.13포인트-0.34%...",
+                "text": "2분기 매출 2조5720억원…전년比 9% 증가B2B 사업 판로 확대와 수출 증가로 실적 견인동원그룹의 사업 지주사인 동원산업이 올해 2분기 연결 기준 매출 2조5720억원, 영업이익 ..",
                 "sourceIndex": 0
               },
               {
-                "text": "7월 CPI 를 발표할 예정이다. 시장에서는 이번 지표가 연준의 9월 통화정책 방향을 결정할 주요 변수로 작용할 것으로 보고 있다. 앞서 공개된 미국 의 7월 비농업 부문 고용은 전월보다 2만3천명 감소했다. 고용시장 둔화가 확인되면서 연준이 추가 금리 인상에 신중해질 것이라는 기대가 커졌고 뉴욕 증시 도...",
+                "text": "성장하면서 실적 을 견인했다. 동원그룹 의 사업 지주사인 동원 산업은 올해 2분기 연결 기준 매출이 전년 동기 대비 9.0% 증가한 2조5720억원을 기록했다고 12일 공시했다. 같은 기간 영업이익은 1515억원으로 13.3% 늘었다. 상반기 매출은 5조1020억원으로 9.1% 증가했고 영업이익은 2976억원으로 15.1% 늘었다....",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://biz.chosun.com/international/international_general/2026/08/12/SBJGNRR5MJFHPIJY6DJQUELLJM/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-                "press": "조선비즈"
+                "url": "https://news.tf.co.kr/read/economy/2353553.htm",
+                "press": "더팩트"
               },
               {
-                "url": "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202608120527&t=NN",
-                "press": "한국경제TV"
+                "url": "https://www.sidae.com/article/2026081217265951904",
+                "press": "동행미디어 시대"
               }
             ],
             "images": [
-              "https://biz.chosun.com/resizer/v2/G3MEHASGLFLDPGMEGZH4RUJ7F4.jpg?auth=3d02aa26e20e5cafdb5bcac3d25a6416bc7ca23ad5a95157fbd173fc145b751f&width=1200&height=630&smart=true"
+              "https://img.tf.co.kr/article/home/2026/08/12/202630291786522559.jpg"
             ],
             "press": [
-              "조선비즈",
-              "한국경제TV"
+              "더팩트",
+              "동행미디어 시대"
             ],
             "headlines": [
-              "뉴욕증시, 호르무즈 협상 난항에 하락 마감",
-              "코스피 반등 불씨 살릴까…美 7월 CPI 에 쏠린 눈"
+              "동원산업, 2분기 영업이익 1515억원…전년比 13.3% 증가 - 경제",
+              "동원그룹 , 2분기 영업익 13.3%↑…B2B 계열사 선방"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-12T08:47:12.011Z"
+            "collectedAt": "2026-08-12T08:56:51.880Z"
           }
         },
         {
           "id": "zum-2",
           "rank": 2,
+          "keyword": "생성형 AI 기술 경쟁",
+          "title": "생성형 AI 기술 경쟁",
+          "rawKeyword": "생성형 AI 기술 경쟁",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 99,
+          "source": "zum",
+          "expansions": [
+            "생성형 AI 뜻",
+            "생성형 AI 종류",
+            "생성형 AI 순위",
+            "생성형 AI 종류 비교",
+            "생성형 ai",
+            "생성형 ai 추천",
+            "생성형 ai 교육",
+            "생성형 ai 활용"
+          ],
+          "expansionSeed": "생성형",
+          "insight": {
+            "titles": {
+              "seo": "생성형 AI 기술 경쟁 최신 이슈와 핵심 내용 정리",
+              "home": "생성형 AI 기술 경쟁, 빅테크 국내 AI시장 질주…챗GPT·제미나이, 이용 경험률 1·2위 관련 확인할 점",
+              "topic": "생성형 AI 기술 경쟁",
+              "topicGroup": "줌 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "(서울=연합뉴스) 권하영 기자 = 생성형 인공지능(AI)이 기존 포털 검색의 대안으로 부상하면서 오픈AI와 구글 등 글로벌 빅테크의 AI 서비스...",
+                "sourceIndex": 0
+              },
+              {
+                "text": "(DX)과 AI 전환(AX) 성과 및 향후 계획을 밝혔다. 현대차그룹은 소프트웨어 경쟁 력 강화를 위해 2019년부터 DX를 추진해왔다. 현대차그룹은 단순히 새로운... 일례로 지난해 부터 운영된 사내 생성형 AI 플랫폼 'H챗프로'가 있다. H챗프로는 임직원이 보안이 확보된 사내 환경에서 챗GPT, 제미나이, 클로드 등 다양한...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20260811150100017?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.hankyung.com/article/202608114516g",
+                "press": "한국경제"
+              }
+            ],
+            "images": [
+              "https://img9.yna.co.kr/etc/inner/KR/2026/08/11/AKR20260811150100017_01_i_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "한국경제"
+            ],
+            "headlines": [
+              "빅테크 국내 AI시장 질주…챗GPT·제미나이, 이용 경험률 1·2위",
+              "\"연간 52억 비용 아꼈다\"…현대차 공장에 도입된 ' AI 기술 ' 정체"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-12T08:56:51.880Z"
+          }
+        },
+        {
+          "id": "zum-3",
+          "rank": 3,
           "keyword": "애경산업 2분기 매출",
           "title": "애경산업 2분기 매출",
           "rawKeyword": "애경산업 2분기 매출",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 98,
           "source": "zum",
           "expansions": [
             "애경산업 매출",
@@ -1676,75 +1737,75 @@
           }
         },
         {
-          "id": "zum-3",
-          "rank": 3,
-          "keyword": "롯데건설 2분기 실적",
-          "title": "롯데건설 2분기 실적",
-          "rawKeyword": "롯데건설 2분기 실적",
+          "id": "zum-4",
+          "rank": 4,
+          "keyword": "미국 CPI 증시",
+          "title": "미국 CPI 증시",
+          "rawKeyword": "미국 CPI 증시",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 97,
           "source": "zum",
           "expansions": [
-            "2분기 실적발표",
-            "롯데건설 본사",
-            "롯데건설 채용",
-            "롯데건설 연봉",
-            "롯데건설 아파트",
-            "롯데건설주가",
-            "롯데건설 엘리스",
-            "롯데건설 주식"
+            "미국증시",
+            "미국 환율",
+            "미국 이란 전쟁",
+            "미국시간",
+            "미국 이란",
+            "미국구글",
+            "미국 금리",
+            "미국 시차"
           ],
-          "expansionSeed": "롯데건설",
+          "expansionSeed": "미국",
           "insight": {
             "titles": {
-              "seo": "롯데건설 2분기 실적 최신 이슈와 핵심 내용 정리",
-              "home": "롯데건설 2분기 실적, [2Q실적] 롯데건설, 2분기 영업이익 1224억… 전년 대비 230%↑ 관련 확인할 점",
-              "topic": "롯데건설 2분기 실적",
+              "seo": "미국 CPI 증시 최신 이슈와 핵심 내용 정리",
+              "home": "미국 CPI 증시, 뉴욕증시, 호르무즈 협상 난항에 하락 마감 관련 확인할 점",
+              "topic": "미국 CPI 증시",
               "topicGroup": "줌 실시간 검색어"
             },
             "facts": [
               {
-                "text": "롯데건설이 2분기 1224억원의 영업이익을 달성하며 경영 체질 강화를 공식화했다. 1분기 영업이익(504억 원)이 전년 동기 대비 1240% 증가하며 어닝서프라이즈를 기록한데 이어, 2분기에는 전분기 실적을 두배 이상 웃돌며 실적 개선 흐름을 확고히 했다. 12일 금융감독원 전자공시시",
+                "text": "뉴욕증시, 호르무즈 협상 난항에 하락 마감 호르무즈 해협 통항에 대한 불확실성이 지속되고 인플레이션 우려가 커지면서 11일현지시각 뉴욕증시 3대 지수가 하락 마감했다. 이날 뉴욕증시에서 다우존스30 산업평균지수는 전장보다 184.13포인트-0.34%...",
                 "sourceIndex": 0
               },
               {
-                "text": "PF 우발부채 2 .4조…지난해 말 대비 7천276억 감소 롯데건설 [출처: 연합뉴스 자료 사진] 롯데건설 이 원가 관리와 선별 수주 기조에 힘입어 2분기 에도 실적 을 개선하는 데 성공했다. 아울러 프로젝트파이낸싱(PF) 우발부채 규모를 꾸준하게 줄이는 등 리스크 관리에도 주력한다. 롯데건설 은 올해 2분기 ...",
+                "text": "7월 CPI 를 발표할 예정이다. 시장에서는 이번 지표가 연준의 9월 통화정책 방향을 결정할 주요 변수로 작용할 것으로 보고 있다. 앞서 공개된 미국 의 7월 비농업 부문 고용은 전월보다 2만3천명 감소했다. 고용시장 둔화가 확인되면서 연준이 추가 금리 인상에 신중해질 것이라는 기대가 커졌고 뉴욕 증시 도...",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.financialpost.co.kr/news/articleView.html?idxno=270188",
-                "press": "파이낸셜포스트"
+                "url": "https://biz.chosun.com/international/international_general/2026/08/12/SBJGNRR5MJFHPIJY6DJQUELLJM/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+                "press": "조선비즈"
               },
               {
-                "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4429792",
-                "press": "연합인포맥스"
+                "url": "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202608120527&t=NN",
+                "press": "한국경제TV"
               }
             ],
             "images": [
-              "https://cdn.financialpost.co.kr/news/thumbnail/202608/270188_348242_485_v150.jpg"
+              "https://biz.chosun.com/resizer/v2/G3MEHASGLFLDPGMEGZH4RUJ7F4.jpg?auth=3d02aa26e20e5cafdb5bcac3d25a6416bc7ca23ad5a95157fbd173fc145b751f&width=1200&height=630&smart=true"
             ],
             "press": [
-              "파이낸셜포스트",
-              "연합인포맥스"
+              "조선비즈",
+              "한국경제TV"
             ],
             "headlines": [
-              "[2Q실적] 롯데건설, 2분기 영업이익 1224억… 전년 대비 230%↑",
-              "롯데건설 , 2Q 영업익 1천224억·230%↑…\"원가 관리·선별 수주 효과\""
+              "뉴욕증시, 호르무즈 협상 난항에 하락 마감",
+              "코스피 반등 불씨 살릴까…美 7월 CPI 에 쏠린 눈"
             ],
             "extraction": "playwright",
             "collectedAt": "2026-08-12T08:47:12.011Z"
           }
         },
         {
-          "id": "zum-4",
-          "rank": 4,
+          "id": "zum-5",
+          "rank": 5,
           "keyword": "한화생명 상반기 순이익",
           "title": "한화생명 상반기 순이익",
           "rawKeyword": "한화생명 상반기 순이익",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 97,
+          "priority": 96,
           "source": "zum",
           "expansions": [
             "한화생명 고객센터",
@@ -1794,68 +1855,6 @@
             "headlines": [
               "한화생명 상반기 순이익 9천45억원…작년 동기 대비 96%↑",
               "한화생명 ·손보 순익 동반 증가…'미래이익' 신계약도 최대치"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-12T08:47:12.011Z"
-          }
-        },
-        {
-          "id": "zum-5",
-          "rank": 5,
-          "keyword": "컬리 2분기 실적",
-          "title": "컬리 2분기 실적",
-          "rawKeyword": "컬리 2분기 실적",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 96,
-          "source": "zum",
-          "expansions": [
-            "2분기 실적발표",
-            "마켓컬리",
-            "컬리n마트",
-            "마켓컬리 네이버",
-            "마켓컬리 알바",
-            "컬리 추천템",
-            "컬리 구독 해지",
-            "컬리넌캐슬"
-          ],
-          "expansionSeed": "컬리",
-          "insight": {
-            "titles": {
-              "seo": "컬리 2분기 실적 최신 이슈와 핵심 내용 정리",
-              "home": "컬리 2분기 실적, 컬리, 2분기 영업익 274억...역대 최대 실적 관련 확인할 점",
-              "topic": "컬리 2분기 실적",
-              "topicGroup": "줌 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "샛별배송을 앞세워 전자상거래(이커머스) 시장에서 경쟁하는 컬리가 올해 2분기에 역대 최대 분기 실적을 경신했다. 주력 사업의 안정화 속 컬리N마트",
-                "sourceIndex": 0
-              },
-              {
-                "text": "지난해 연간 흑자를 달성한 이후 식품과 뷰티 등 주력 사업의 안정적인 성장하는 가운데 이익 개선이 이뤄지면서 역대 최대 분기 실적 을 기록했다. 사업별로 식품 사업인 마켓 컬리 거래액은 25.7% 늘었고, 화장품 사업인 뷰티 컬리 는 13.5% 늘었다. 풀필먼트서비스(FBK)를 포함한 3P 거래액도 32.1% 늘어...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://economist.co.kr/article/view/ecn202608120070",
-                "press": "이코노미스트"
-              },
-              {
-                "url": "https://www.yna.co.kr/view/AKR20260812106500030?input=1195m",
-                "press": "연합뉴스"
-              }
-            ],
-            "images": [
-              "https://economist.co.kr/data/ecn/image/2025/12/19/ecn20251219000037.800x.0.jpg"
-            ],
-            "press": [
-              "이코노미스트",
-              "연합뉴스"
-            ],
-            "headlines": [
-              "컬리, 2분기 영업익 274억...역대 최대 실적",
-              "컬리 , 2분기 영업이익 274억원…6개 분기 연속 흑자"
             ],
             "extraction": "playwright",
             "collectedAt": "2026-08-12T08:47:12.011Z"
@@ -2463,8 +2462,8 @@
             "영화 오디세이"
           ],
           "expansionSeed": "영화",
-          "ago": "3분 전",
-          "agoMinutes": 3,
+          "ago": "13분 전",
+          "agoMinutes": 13,
           "publishedLabel": "2026.08.12 ・ 17:42",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081217193098324_1.jpg",
           "insight": {
@@ -2521,8 +2520,8 @@
             "에스파 지젤"
           ],
           "expansionSeed": "에스파",
-          "ago": "6분 전",
-          "agoMinutes": 6,
+          "ago": "15분 전",
+          "agoMinutes": 15,
           "publishedLabel": "2026.08.12 ・ 17:39",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081217385789332_1.jpg",
           "insight": {
@@ -2598,8 +2597,8 @@
             "하나금융지주"
           ],
           "expansionSeed": "한예슬",
-          "ago": "10분 전",
-          "agoMinutes": 10,
+          "ago": "20분 전",
+          "agoMinutes": 20,
           "publishedLabel": "2026.08.12 ・ 17:35",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081217141889958_1.jpg",
           "insight": {
@@ -2656,8 +2655,8 @@
             "장세척 원리"
           ],
           "expansionSeed": "장세척",
-          "ago": "17분 전",
-          "agoMinutes": 17,
+          "ago": "27분 전",
+          "agoMinutes": 27,
           "publishedLabel": "2026.08.12 ・ 17:28",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081215474750284_1.jpg",
           "insight": {
@@ -2714,8 +2713,8 @@
             "구성환 건물주"
           ],
           "expansionSeed": "구성환",
-          "ago": "24분 전",
-          "agoMinutes": 24,
+          "ago": "33분 전",
+          "agoMinutes": 33,
           "publishedLabel": "2026.08.12 ・ 17:21",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081217121622963_1.jpg",
           "insight": {
@@ -2772,8 +2771,8 @@
             "에이티즈 데뷔일"
           ],
           "expansionSeed": "데뷔",
-          "ago": "27분 전",
-          "agoMinutes": 27,
+          "ago": "37분 전",
+          "agoMinutes": 37,
           "publishedLabel": "2026.08.12 ・ 17:18",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081217121996760_1.jpg",
           "insight": {
@@ -2830,8 +2829,8 @@
             "장윤정기획사"
           ],
           "expansionSeed": "장윤정",
-          "ago": "27분 전",
-          "agoMinutes": 27,
+          "ago": "37분 전",
+          "agoMinutes": 37,
           "publishedLabel": "2026.08.12 ・ 17:18",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081216361292515_1.jpg",
           "insight": {
@@ -2888,8 +2887,8 @@
             "오디세이 헬레네"
           ],
           "expansionSeed": "오디세",
-          "ago": "38분 전",
-          "agoMinutes": 38,
+          "ago": "47분 전",
+          "agoMinutes": 47,
           "publishedLabel": "2026.08.12 ・ 17:08",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081217044275137_1.jpg",
           "insight": {
@@ -2946,8 +2945,8 @@
             "클로즈 영화"
           ],
           "expansionSeed": "유어",
-          "ago": "41분 전",
-          "agoMinutes": 41,
+          "ago": "51분 전",
+          "agoMinutes": 51,
           "publishedLabel": "2026.08.12 ・ 17:04",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081216540784241_1.jpg",
           "insight": {
@@ -3004,8 +3003,8 @@
             "루시아"
           ],
           "expansionSeed": "조원상",
-          "ago": "43분 전",
-          "agoMinutes": 43,
+          "ago": "52분 전",
+          "agoMinutes": 52,
           "publishedLabel": "2026.08.12 ・ 17:03",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081216493454032_1.jpg",
           "insight": {
@@ -3043,5 +3042,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-08-12T08:49:21.390Z"
+  "updatedAt": "2026-08-12T08:57:16.763Z"
 }
