@@ -16,7 +16,7 @@ import { formatCount } from '../../lib/keywordApi';
 export type PlanRow = {
     keyword: string;
     topic: string;
-    tier?: 'top3' | 'page1' | 'page1-weak' | 'contested';
+    tier?: 'top3' | 'page1' | 'golden-ratio' | 'page1-weak' | 'contested';
     tierLabel?: string;
     openSlot?: number | null;
     intentLabel?: string;

@@ -9,6 +9,11 @@
 export const TIER_BADGE: Record<string, { text: string; cls: string }> = {
     top3: { text: '상위 3위권 빈자리', cls: 'tier-a' },
     page1: { text: '1페이지 빈자리', cls: 'tier-b' },
+    /*
+     * 황금 비율 — 검색량 > 문서수. 사장님 최종 기준(2026-08-12): 이건 자리 판정과
+     * 무관하게 전부 통과한다. 경쟁 글이 있어도 수요가 공급을 넘는 밭이다.
+     */
+    'golden-ratio': { text: '황금 비율', cls: 'tier-a' },
     'page1-weak': { text: '1페이지 빈자리', cls: 'tier-c' },
     contested: { text: '경합', cls: 'tier-d' },
 };
