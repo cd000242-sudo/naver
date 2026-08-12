@@ -51,8 +51,13 @@ describe('modelRegistry SSOT 회귀 가드', () => {
     expect(resolveTextModelProfile('gemini-3.1-flash-lite')).toMatchObject({
       vendor: 'gemini', tier: 'value', model: 'gemini-3.1-flash-lite',
     });
+    // [2026-08-12] 제미나이 3티어. 이전에는 Lite 가 아니면 전부 balanced 였고
+    //   표시 이름이 '3.5 Flash' 로 고정이라 3.6 을 골라도 3.5 로 보였다.
+    expect(resolveTextModelProfile('gemini-3.6-flash')).toMatchObject({
+      vendor: 'gemini', tier: 'balanced', model: 'gemini-3.6-flash', displayName: 'Gemini 3.6 Flash',
+    });
     expect(resolveTextModelProfile('gemini-3.5-flash')).toMatchObject({
-      vendor: 'gemini', tier: 'balanced', model: 'gemini-3.5-flash',
+      vendor: 'gemini', tier: 'premium', model: 'gemini-3.5-flash', displayName: 'Gemini 3.5 Flash',
     });
     expect(resolveTextModelProfile('gemini-3.1-pro-preview')).toMatchObject({
       vendor: 'gemini', tier: 'value', model: 'gemini-3.1-flash-lite',

@@ -38,8 +38,11 @@ describe('Gemini prepaid/value text-model policy', () => {
   it('does not expose Gemini Pro in any shipped model selector', () => {
     const html = readFileSync(resolve(process.cwd(), 'public', 'index.html'), 'utf8');
     expect(html).not.toMatch(/value=["']gemini-3\.1-pro-preview["']/);
-    expect(html).toContain('Gemini 3.1 Flash-Lite (무료');
-    expect(html).toContain('Gemini 3.5 Flash (선불');
+    // [2026-08-12] 3티어로 라벨이 바뀌었다. 문구가 아니라 값으로 검증한다 —
+    //   문구를 박아두면 라벨만 다듬어도 회귀로 오인된다.
+    expect(html).toContain('value="gemini-3.1-flash-lite"');
+    expect(html).toContain('value="gemini-3.6-flash"');
+    expect(html).toContain('value="gemini-3.5-flash"');
   });
 
   it('reports the current prepaid Flash price and never labels it free', () => {
@@ -47,8 +50,9 @@ describe('Gemini prepaid/value text-model policy', () => {
       resolve(process.cwd(), 'src', 'main', 'ipc', 'apiHandlers.ts'),
       'utf8',
     );
-    expect(source).toContain("flash_input: '$0.75 / 1M tokens'");
-    expect(source).toContain("flash_output: '$4.50 / 1M tokens'");
+    // 균형 티어 = 3.6 Flash 공식 단가
+    expect(source).toContain("flash_input: '$1.50 / 1M tokens'");
+    expect(source).toContain("flash_output: '$7.50 / 1M tokens'");
     expect(source).toContain("flash_input: '무료 티어 없음'");
     expect(source).not.toContain("flash_input: '$0 (무료)'");
   });

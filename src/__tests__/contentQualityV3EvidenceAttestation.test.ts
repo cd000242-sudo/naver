@@ -166,8 +166,8 @@ describe('Content Quality V3 evidence attestation', () => {
       corpusSha256:
         'cf1721af51303263182a38f7618f5431f4534858c5a9655c33fa90c61abf33f0',
       legacyBaselineSha256:
-        // [2026-08-12] 홈판 실측 반영(base.prompt 문단 길이·명사형 종결·인용 도입)으로 재계산
-        'a8efce4faee9ec915daff0e7fad45c7398cff59313f184a67b2820cdb83f2e03',
+        // [2026-08-12] 제미나이 3티어 배선(modelRegistry 티어·표시이름 분리)으로 재계산
+        '39ffe430a343781f89de70208f537a2574244566544c337aee7948be2e4f802f',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

@@ -179,8 +179,10 @@ export function registerApiHandlers(_ctx: IpcContext): void {
                     note: '유료 한도는 프로젝트 사용량 등급에 따라 달라집니다. 결제 프로젝트와 별도 무료 프로젝트 키를 보조 키 풀에 넣으면 무료 한도를 먼저 사용할 수 있습니다.',
                 },
                 pricing: {
-                    flash_input: '$0.75 / 1M tokens',
-                    flash_output: '$4.50 / 1M tokens',
+                    // [2026-08-12] 균형 티어가 3.6 Flash 로 바뀌면서 단가도 갱신했다.
+                    //   3.5 Flash(프리미엄)는 출력 $9.00 로 더 비싸다.
+                    flash_input: '$1.50 / 1M tokens',
+                    flash_output: '$7.50 / 1M tokens',
                     flash_lite_input: '$0.25 / 1M tokens',
                     flash_lite_output: '$1.50 / 1M tokens',
                     pro_input: '앱에서 미지원 (Flash로 자동 전환)',

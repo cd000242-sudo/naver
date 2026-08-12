@@ -149,13 +149,20 @@ export function resolveTextModelProfile(value: unknown): TextModelProfile {
     return profile(selector, 'gemini', 'value', GEMINI_TEXT_MODELS.FLASH_LITE, 'Gemini 3.1 Flash-Lite');
   }
   if (selector.startsWith('gemini-')) {
+    // [2026-08-12] 제미나이도 다른 벤더처럼 3티어로 나눈다.
+    //   이전에는 Lite 가 아니면 전부 'balanced' 였고 표시 이름도 '3.5 Flash' 로 고정이라,
+    //   3.6 을 골라도 화면에 3.5 로 보였다 — 모델이 안 바뀐 것처럼 보인 원인이다.
     const model = normalizeGeminiTextModelId(selector);
-    const tier: TextModelTier = model === GEMINI_TEXT_MODELS.FLASH_LITE
-      ? 'value'
-      : 'balanced';
-    const displayName = tier === 'value'
-      ? 'Gemini 3.1 Flash-Lite'
-      : 'Gemini 3.5 Flash';
+    const tier: TextModelTier = model === GEMINI_TEXT_MODELS.FLASH_SUSTAINED
+      ? 'premium'
+      : model === GEMINI_TEXT_MODELS.FLASH
+        ? 'balanced'
+        : 'value';
+    const displayName = tier === 'premium'
+      ? 'Gemini 3.5 Flash'
+      : tier === 'balanced'
+        ? 'Gemini 3.6 Flash'
+        : 'Gemini 3.1 Flash-Lite';
     return profile(selector, 'gemini', tier, model, displayName);
   }
 

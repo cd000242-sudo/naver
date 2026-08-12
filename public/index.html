@@ -673,8 +673,9 @@
                             <select id="unified-gemini-model"
                                 style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: var(--radius-sm); font-size: 0.9rem;">
                                 <optgroup label="⭐ Stable (추천)">
-                                    <option value="gemini-3.1-flash-lite" selected>⚡ Gemini 3.1 Flash-Lite (무료 · 선불 추천)</option>
-                                    <option value="gemini-3.5-flash">💎 Gemini 3.5 Flash (선불 고품질)</option>
+                                    <option value="gemini-3.1-flash-lite" selected>💰 Gemini 3.1 Flash-Lite (가성비 · 무료 티어)</option>
+                                    <option value="gemini-3.6-flash">⚖️ Gemini 3.6 Flash (균형 · 최신)</option>
+                                    <option value="gemini-3.5-flash">🧠 Gemini 3.5 Flash (프리미엄 · 긴 글)</option>
                                 </optgroup>
                             </select>
                             <input type="hidden" id="unified-generator" value="gemini">
@@ -4680,7 +4681,7 @@
                     <select id="sub-work-provider" style="width: 100%; padding: 0.6rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); color: var(--text-strong); border-radius: 8px; font-size: 0.9rem;">
                         <option value="same">본문과 동일 모델 (기본 — silent 폴백 0)</option>
                         <option value="gpt-mini">GPT-5.6 Luna (가성비, 입력 $1/출력 $6)</option>
-                        <option value="gemini-flash">Gemini 3.5 Flash (선불, 입력 $0.75/출력 $4.50)</option>
+                        <option value="gemini-flash">Gemini 3.6 Flash (선불, 입력 $1.50/출력 $7.50)</option>
                         <option value="haiku">Claude Haiku 4.5 ($1/1M)</option>
                     </select>
                     <small style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-top: 0.3rem;">
@@ -5786,25 +5787,47 @@
                                         </div>
                                     </label>
 
-                                    <!-- ⚖️ Gemini 2.5 Flash (균형, 기본/추천) -->
+                                    <!-- ⚖️ Gemini 3.6 Flash (균형) -->
                                     <label class="gemini-model-card"
                                         style="cursor: pointer; border: 2px solid #14b8a6; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f0fdfa, #ccfbf1); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);">
                                         <div
                                             style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ccfbf1; border-radius: 50%;">
-                                            <input type="radio" name="primaryGeminiTextModel" value="gemini-3.5-flash"
+                                            <input type="radio" name="primaryGeminiTextModel" value="gemini-3.6-flash"
                                                 style="width: 18px; height: 18px; cursor: pointer; accent-color: #14b8a6;">
                                         </div>
                                         <div style="flex: 1;">
                                             <div
                                                 style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
-                                                <span>⚖️ Gemini 3.5 Flash</span>
+                                                <span>⚖️ Gemini 3.6 Flash</span>
                                                 <span
-                                                    style="background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(20, 184, 166, 0.3);">선불 고품질</span>
+                                                    style="background: linear-gradient(135deg, #14b8a6, #0d9488); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(20, 184, 166, 0.3);">최신 · 선불</span>
                                             </div>
                                             <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
-                                                선불 잔액 사용 · 품질·속도 균형 · 고품질 블로그 글</div>
+                                                가장 최신 모델 · 품질·속도 균형 · 3.5보다 출력이 17% 저렴</div>
                                             <div style="font-size: 0.8rem; color: #0d9488; font-weight: 700; margin-top: 0.3rem;">
-                                                📊 선불 유료: 입력 $0.75 · 출력 $4.50 / 1M 토큰</div>
+                                                📊 선불 유료: 입력 $1.50 · 출력 $7.50 / 1M 토큰</div>
+                                        </div>
+                                    </label>
+
+                                    <!-- 🧠 Gemini 3.5 Flash (프리미엄 — 긴 글 지속 추론) -->
+                                    <label class="gemini-model-card"
+                                        style="cursor: pointer; border: 2px solid #8b5cf6; border-radius: 12px; padding: 1.25rem; background: linear-gradient(135deg, #f5f3ff, #ede9fe); display: flex; align-items: center; gap: 1rem; transition: all 0.2s; box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);">
+                                        <div
+                                            style="display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #ede9fe; border-radius: 50%;">
+                                            <input type="radio" name="primaryGeminiTextModel" value="gemini-3.5-flash"
+                                                style="width: 18px; height: 18px; cursor: pointer; accent-color: #8b5cf6;">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-weight: 800; color: #1f2937; font-size: 1.05rem; margin-bottom: 0.35rem; display: flex; align-items: center; justify-content: space-between;">
+                                                <span>🧠 Gemini 3.5 Flash</span>
+                                                <span
+                                                    style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; font-size: 0.75rem; padding: 2px 10px; border-radius: 999px; font-weight: 700; box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);">긴 글 지속 추론</span>
+                                            </div>
+                                            <div style="font-size: 0.9rem; color: #4b5563; line-height: 1.4;">
+                                                긴 글에서 논리를 끝까지 끌고 가는 데 강점 · 출력 단가가 3.6보다 높음</div>
+                                            <div style="font-size: 0.8rem; color: #7c3aed; font-weight: 700; margin-top: 0.3rem;">
+                                                📊 선불 유료: 입력 $1.50 · 출력 $9.00 / 1M 토큰</div>
                                         </div>
                                     </label>
 
@@ -13122,8 +13145,9 @@
                         </label>
                         <select id="settings-gemini-model"
                             style="width: 100%; padding: 0.75rem; background: var(--bg-secondary); border: 1px solid var(--border-medium); border-radius: 8px; color: var(--text-strong); font-size: 0.9rem; cursor: pointer;">
-                            <option value="gemini-3.1-flash-lite">⚡ Gemini 3.1 Flash-Lite (무료 · 선불 추천)</option>
-                            <option value="gemini-3.5-flash">🛡️ Gemini 3.5 Flash (선불 고품질)</option>
+                            <option value="gemini-3.1-flash-lite">💰 Gemini 3.1 Flash-Lite (가성비 · 무료 티어)</option>
+                            <option value="gemini-3.6-flash">⚖️ Gemini 3.6 Flash (균형 · 최신)</option>
+                            <option value="gemini-3.5-flash">🧠 Gemini 3.5 Flash (프리미엄 · 긴 글)</option>
                         </select>
                         <p style="margin: 0.25rem 0 0; font-size: 0.75rem; color: #4ade80;">
                             ⭐ 신규 사용자는 Flash-Lite가 기본입니다. 선불 잔액이 있으면 Flash를 선택할 수 있습니다.
