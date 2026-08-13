@@ -260,6 +260,27 @@ export function buildSystemPrompt(
     }
   }
 
+  // 2.82 Mode-specific heading (소제목) spec — SEO and Homefeed only.
+  // Both base prompts carried the same mode-neutral rule ("각 소제목은 하위 질문 하나를 맡고
+  // 첫 1~2문장에 답한다"), so the two modes produced interchangeable headings even though
+  // their readers arrive in opposite ways: a search query (heading = answer index) vs a feed
+  // scroll (heading = situation signpost). Mate/business/affiliate already carry their own
+  // heading contracts in their base prompts, so injecting a shared one there would conflict.
+  // Placed before the issue-story skeleton so story-shaped categories keep the last word.
+  const headingSpecByMode: Partial<Record<PromptMode, string>> = {
+    seo: 'shared/headings-seo.prompt',
+    homefeed: 'shared/headings-homefeed.prompt',
+  };
+  const headingSpecPath = headingSpecByMode[mode];
+  if (headingSpecPath) {
+    const headingSpec = loadPromptFile(headingSpecPath);
+    if (headingSpec) {
+      composed = `${composed}\n\n${headingSpec}`;
+    } else {
+      console.warn(`[PromptLoader] ${headingSpecPath} load failed - mode heading spec skipped`);
+    }
+  }
+
   // 2.85 [v2.11.135] Homefeed issue-story skeleton.
   // Real homefeed-exposed Mate posts (20-sample analysis) follow a story
   // shape — quote-hook titles, timeline body, 0~3 headings, ultra-short

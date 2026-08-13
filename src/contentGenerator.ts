@@ -336,7 +336,7 @@ import {
   applyKeywordPrefixToStructuredContent,
   sanitizeReviewTitle,
 } from './contentKeywordPrefix';
-import { applyHeadingKeywordPatch } from './contentHeadingKeywordPatch';
+import { applyHeadingKeywordPatch, resolveHeadingKeywordPatchMax } from './contentHeadingKeywordPatch';
 import {
   applyKeywordAsTitleLock,
   resolveKeywordAsTitleValue,
@@ -6251,7 +6251,11 @@ async function generateStructuredContentInternal(
           //              이후 sanitizer가 따옴표만 제거해 결과적으로 단어 중복
           //              (b) LLM이 자체 prefix를 추가했고 HeadingPatch가 한번 더 추가 (이미 dedup pass 통과한 케이스)
           //   방어: ① kwCore의 선행/후행 punct 제거 ② 패치 후 "kwCore kwCore" 연속 중복 collapse
-          const headingPatch = applyHeadingKeywordPatch(parsed.headings as any, primaryKw, { maxPatches: 2 });
+          //   [2026-08-14] maxPatches를 모드별로 분기 — 홈판은 검색어 접두가 노출이 아니라
+          //   광고 신호다. 정리(조사 prefix 제거·중복 collapse)는 유지하고 강제 접두만 끈다.
+          const headingPatch = applyHeadingKeywordPatch(parsed.headings as any, primaryKw, {
+            maxPatches: resolveHeadingKeywordPatchMax(mode),
+          });
           parsed.headings = headingPatch.headings as any;
           if (!headingPatch.core) {
             console.log(`[HeadingPatch] ⏭️ kwCore가 빈 문자열 — 패치 스킵 (${headingPatch.reason})`);

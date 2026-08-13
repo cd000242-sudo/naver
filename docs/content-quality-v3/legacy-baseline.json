@@ -44,8 +44,8 @@
     },
     {
       "path": "src/promptLoader.ts",
-      "sha256": "769f54cb45ab8aa0dfd2315d943b17b32a6f191e3e27c83fab5af0a44d1eb250",
-      "bytes": 89439
+      "sha256": "a8a8171b054e331bf597d144c6d7912bd8fa523893a41db541151e1d8b002a80",
+      "bytes": 90579
     },
     {
       "path": "src/prompts/affiliate/chain/editor.prompt",
@@ -318,6 +318,16 @@
       "bytes": 4160
     },
     {
+      "path": "src/prompts/shared/headings-homefeed.prompt",
+      "sha256": "b080c7296fa6274e9ab94995888864023a437a764ef0ef029b4aa6790124fa47",
+      "bytes": 2943
+    },
+    {
+      "path": "src/prompts/shared/headings-seo.prompt",
+      "sha256": "f4942be90980185573d6f99f68482fa6870f3dcd3731404d84fccac7384d4791",
+      "bytes": 2946
+    },
+    {
       "path": "src/prompts/shared/homefeed-90-quality.prompt",
       "sha256": "5af34d758e5b2af64655379076b7209bd381b16026b6fd4889fce6499204688d",
       "bytes": 2795
@@ -544,7 +554,7 @@
     }
   ],
   "metadata": {
-    "repositoryHead": "9ee87d982df33ebc9b49538f5669c031f133bebf",
+    "repositoryHead": "c0bb6c45ca36775eeb9efb138e00e83182d00916",
     "nodeVersion": "v20.20.2",
     "platform": "win32"
   }

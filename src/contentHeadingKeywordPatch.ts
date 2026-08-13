@@ -13,6 +13,20 @@ export interface HeadingKeywordPatchOptions {
   maxPatches?: number;
 }
 
+/**
+ * How many headings may receive a forced main-keyword prefix, by content mode.
+ *
+ * Search modes (seo/mate) are matched against a query, so a heading carrying the
+ * keyword is a real ranking surface (smart block / longtail). Homefeed is not: it is
+ * scanned in a feed with no query behind it, and a mechanically prefixed keyword
+ * ("제습기 하루 얼마나 돌려야 할까") reads as an ad — which is exactly what
+ * prompts/homefeed/base.prompt and shared/headings-homefeed.prompt forbid. The cleanup
+ * passes (조사 prefix 제거, 선두 중복 collapse) still run at 0; only the forced prefix stops.
+ */
+export function resolveHeadingKeywordPatchMax(mode: string | undefined): number {
+  return mode === 'homefeed' ? 0 : 2;
+}
+
 export interface HeadingKeywordPatchResult<T extends HeadingKeywordPatchHeading> {
   headings: T[];
   core: string;

@@ -134,7 +134,9 @@ describe('Content Quality V3 production wiring', () => {
 
   it('keeps every semantic deterministic post-draft mutator behind the exact legacy policy', () => {
     expect(generator).toMatch(/if \(shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'optimize-headings-for-mode'\)\) \{\s*optimizeHeadingsForMode\(parsed, source\);\s*\}/);
-    expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'apply-heading-keyword-patch'\)[\s\S]{0,2000}applyHeadingKeywordPatch\(parsed\.headings as any, primaryKw, \{ maxPatches: 2 \}\)/);
+    // [2026-08-14] maxPatches는 모드별로 갈린다(홈판 0 / 검색 2). 이 계약이 잠그는 것은
+    // "게이트 뒤에서만 돈다"이지 상수값이 아니므로 호출 형태만 확인한다.
+    expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'apply-heading-keyword-patch'\)[\s\S]{0,2000}applyHeadingKeywordPatch\(parsed\.headings as any, primaryKw, \{\s*maxPatches: resolveHeadingKeywordPatchMax\(mode\),\s*\}\)/);
     expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'enforce-sub-keyword-coverage'\)[\s\S]{0,1200}enforceSubKeywordCoverage\(parsed, _subKws, \{ maxKeywords: 3 \}\)/);
     expect(generator).toMatch(/const optimized = shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'optimize-for-viral'\)\s*\? optimizeForViral\(parsed, source\)\s*:\s*parsed;/);
     expect(generator).toMatch(/if \(\s*shouldRunLegacySemanticPostDraftMutation\(promptVariant, 'filter-exaggerated-content'\)[\s\S]{0,180}filterExaggeratedContent\(optimized\.bodyPlain\)/);

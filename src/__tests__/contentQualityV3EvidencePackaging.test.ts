@@ -63,7 +63,7 @@ describe('Content Quality V3 evidence packaging', () => {
     }
   });
 
-  it('locks the raw baseline and all 108 manifest inputs to LF checkout bytes', () => {
+  it('locks the raw baseline and all 110 manifest inputs to LF checkout bytes', () => {
     const rules = readFileSync(resolve(PROJECT_ROOT, '.gitattributes'), 'utf8')
       .split(/\r?\n/u)
       .map(line => line.trim())
@@ -74,7 +74,7 @@ describe('Content Quality V3 evidence packaging', () => {
 
     expect(eolRules).toEqual([BASELINE_EOL_RULE, ...LEGACY_SOURCE_EOL_RULES]);
     expect(baselineBytes.includes(13)).toBe(false);
-    expect(baseline.files).toHaveLength(108);
+    expect(baseline.files).toHaveLength(110);
     expect(baseline.files.every(file => isCoveredByLegacySourceEolRule(file.path))).toBe(true);
 
     for (const file of baseline.files) {
