@@ -312,7 +312,7 @@
               "정부, 일본 야스쿠니 공물 ·참배에 \" 개탄 금할 수 없어\""
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-08-15T15:51:41.687Z"
+            "collectedAt": "2026-08-15T15:57:45.328Z"
           }
         },
         {
@@ -2450,11 +2450,69 @@
         {
           "id": "issue-1",
           "rank": 1,
+          "keyword": "손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\"",
+          "title": "손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\"",
+          "rawKeyword": "손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\"",
+          "description": "스타뉴스 최신 기사 · 손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\"",
+          "priority": 100,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/08/16/2026081600250621283",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "유튜브 프리미엄",
+            "유튜브 음원추출",
+            "유튜브 pip모드",
+            "유튜브 바로가기",
+            "유튜브 오류",
+            "유튜브 백그라운드",
+            "유튜브 뮤직",
+            "유튜브 다운로드"
+          ],
+          "expansionSeed": "손담비",
+          "ago": "1분 전",
+          "agoMinutes": 1,
+          "publishedLabel": "2026.08.16 ・ 00:56",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081600250621283_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\" 최신 이슈와 핵심 내용 정리",
+              "home": "손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\", 손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\" 관련 확인할 점",
+              "topic": "손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\"",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\"",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/08/16/2026081600250621283",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081600250621283_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "손담비, 악플러 경고 후 유튜브 돌연 휴식 \"내부 사정으로 쉬어가\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-15T15:57:45.328Z"
+          }
+        },
+        {
+          "id": "issue-2",
+          "rank": 2,
           "keyword": "30기 옥순 결혼",
           "title": "'결혼' 30기 옥순, 드레스 투어 중 구토 \"다 게워내고 누워\"",
           "rawKeyword": "30기 옥순 결혼",
           "description": "스타뉴스 최신 기사 · '결혼' 30기 옥순, 드레스 투어 중 구토 \"다 게워내고 누워\"",
-          "priority": 100,
+          "priority": 99,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/16/2026081523582612073",
           "sourceLabel": "스타뉴스",
@@ -2469,8 +2527,8 @@
             "나는솔로 30기"
           ],
           "expansionSeed": "30기",
-          "ago": "26분 전",
-          "agoMinutes": 26,
+          "ago": "31분 전",
+          "agoMinutes": 31,
           "publishedLabel": "2026.08.16 ・ 00:24",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081523582612073_1.jpg",
           "insight": {
@@ -2516,13 +2574,13 @@
           }
         },
         {
-          "id": "issue-2",
-          "rank": 2,
+          "id": "issue-3",
+          "rank": 3,
           "keyword": "EXID 혜린 공개",
           "title": "EXID 혜린, '위아래' 역주행 음원 수익 공개 \"9대1..진짜 못 벌어\"",
           "rawKeyword": "EXID 혜린 공개",
           "description": "스타뉴스 최신 기사 · EXID 혜린, '위아래' 역주행 음원 수익 공개 \"9대1..진짜 못 벌어\"",
-          "priority": 99,
+          "priority": 98,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081523281070637",
           "sourceLabel": "스타뉴스",
@@ -2593,13 +2651,13 @@
           }
         },
         {
-          "id": "issue-3",
-          "rank": 3,
+          "id": "issue-4",
+          "rank": 4,
           "keyword": "환희 하차",
           "title": "환희, 이장우 아내 '띠동갑' 친구들과 소개팅 하나..\"욕 먹고 하차해야 해\"",
           "rawKeyword": "환희 하차",
           "description": "스타뉴스 최신 기사 · 환희, 이장우 아내 '띠동갑' 친구들과 소개팅 하나..\"욕 먹고 하차해야 해\"",
-          "priority": 98,
+          "priority": 97,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/08/15/2026081522571595273",
           "sourceLabel": "스타뉴스",
@@ -2670,13 +2728,13 @@
           }
         },
         {
-          "id": "issue-4",
-          "rank": 4,
+          "id": "issue-5",
+          "rank": 5,
           "keyword": "김민희 공개",
           "title": "'불륜' 김민희, ♥홍상수 子 당당히 언급..공개 사랑 고백까지",
           "rawKeyword": "김민희 공개",
           "description": "스타뉴스 최신 기사 · '불륜' 김민희, ♥홍상수 子 당당히 언급..공개 사랑 고백까지",
-          "priority": 97,
+          "priority": 96,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081523095939156",
           "sourceLabel": "스타뉴스",
@@ -2747,13 +2805,13 @@
           }
         },
         {
-          "id": "issue-5",
-          "rank": 5,
+          "id": "issue-6",
+          "rank": 6,
           "keyword": "유세윤, '흠뻑쇼' 대적하는 풀 파티 하루 앞두고..비행기 직캠 요청",
           "title": "유세윤, '흠뻑쇼' 대적하는 풀 파티 하루 앞두고..비행기 직캠 요청",
           "rawKeyword": "유세윤, '흠뻑쇼' 대적하는 풀 파티 하루 앞두고..비행기 직캠 요청",
           "description": "스타뉴스 최신 기사 · 유세윤, '흠뻑쇼' 대적하는 풀 파티 하루 앞두고..비행기 직캠 요청",
-          "priority": 96,
+          "priority": 95,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081522310836372",
           "sourceLabel": "스타뉴스",
@@ -2804,13 +2862,13 @@
           }
         },
         {
-          "id": "issue-6",
-          "rank": 6,
+          "id": "issue-7",
+          "rank": 7,
           "keyword": "황제성, 서장훈 인성 폭로 \"아내와 인사했는데 손짓만\"",
           "title": "황제성, 서장훈 인성 폭로 \"아내와 인사했는데 손짓만\"",
           "rawKeyword": "황제성, 서장훈 인성 폭로 \"아내와 인사했는데 손짓만\"",
           "description": "스타뉴스 최신 기사 · 황제성, 서장훈 인성 폭로 \"아내와 인사했는데 손짓만\"",
-          "priority": 95,
+          "priority": 94,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/08/15/2026081521273311027",
           "sourceLabel": "스타뉴스",
@@ -2857,73 +2915,16 @@
               "황제성, 서장훈 인성 폭로 \"아내와 인사했는데 손짓만\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-15T14:57:44.621Z"
-          }
-        },
-        {
-          "id": "issue-7",
-          "rank": 7,
-          "keyword": "\"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷",
-          "title": "\"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷",
-          "rawKeyword": "\"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷",
-          "description": "스타뉴스 최신 기사 · \"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷",
-          "priority": 94,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081521272380391",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "김도훈 배우",
-            "김도훈 나무위키",
-            "김도훈 투어스",
-            "김도훈 감독",
-            "김도훈 평론가",
-            "차승원 김도훈",
-            "김도훈 오나라",
-            "배우 김도훈"
-          ],
-          "expansionSeed": "김도훈",
-          "ago": "2026.08.15 ・ 21:46",
-          "publishedLabel": "2026.08.15 ・ 21:46",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081521272380391_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "\"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷 최신 이슈와 핵심 내용 정리",
-              "home": "\"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷, \"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷 관련 확인할 점",
-              "topic": "\"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · \"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/08/15/2026081521272380391",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081521272380391_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "\"youngK, 늙K가 될 때까지\"..영케이, 김도훈 간식차 인증샷"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-15T15:16:36.514Z"
+            "collectedAt": "2026-08-15T15:57:45.328Z"
           }
         },
         {
           "id": "issue-8",
           "rank": 8,
-          "keyword": "59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
-          "title": "59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
-          "rawKeyword": "59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
-          "description": "스포츠조선 최신 기사 · 59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
+          "keyword": "1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
+          "title": "1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
+          "rawKeyword": "1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
+          "description": "스포츠조선 최신 기사 · 1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
           "priority": 93,
           "source": "issue",
           "officialUrl": "https://www.sportschosun.com/entertainment/2026-08-15/202608150100091580005792",
@@ -2941,14 +2942,14 @@
           "expansionSeed": "유민상",
           "insight": {
             "titles": {
-              "seo": "59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 --> 최신 이슈와 핵심 내용 정리",
-              "home": "59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->, 59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 --> 관련 확인할 점",
-              "topic": "59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
+              "seo": "1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 --> 최신 이슈와 핵심 내용 정리",
+              "home": "1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->, 1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 --> 관련 확인할 점",
+              "topic": "1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스포츠조선 최신 기사 · 59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
+                "text": "스포츠조선 최신 기사 · 1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->",
                 "sourceIndex": 0
               }
             ],
@@ -2963,10 +2964,10 @@
               "스포츠조선"
             ],
             "headlines": [
-              "59분전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->"
+              "1시간전 연예 유민상, 다이어트 주사 시작…\"뚱뚱한 할아버지 많이 없다\" 의사 경고에 충격 김준석 기자 -->"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-15T15:51:41.687Z"
+            "collectedAt": "2026-08-15T15:57:45.328Z"
           }
         },
         {
@@ -3076,5 +3077,5 @@
       ]
     }
   ],
-  "updatedAt": "2026-08-15T15:52:04.233Z"
+  "updatedAt": "2026-08-15T15:58:00.874Z"
 }
