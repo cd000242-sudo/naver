@@ -627,11 +627,73 @@
         {
           "id": "daum-1",
           "rank": 1,
+          "keyword": "가수 지선",
+          "title": "가수 지선",
+          "rawKeyword": "가수 지선",
+          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
+          "priority": 100,
+          "source": "daum",
+          "expansions": [
+            "가수김수희별세",
+            "가수주현미별세",
+            "가수오승근별세",
+            "가수 성리",
+            "가수박지현",
+            "바다 가수",
+            "가수윤시내",
+            "가수이루네"
+          ],
+          "expansionSeed": "가수",
+          "insight": {
+            "titles": {
+              "seo": "가수 지선 최신 이슈와 핵심 내용 정리",
+              "home": "가수 지선, 81년 전 그날의 울림, 광복절 안방 찾는 특집 다큐·예능 관련 확인할 점",
+              "topic": "가수 지선",
+              "topicGroup": "다음 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "무명 독립운동가부터 매국노 이완용까지 김구 발자취 찾는 '무도 3인방' 박명수·정준하·정형돈 8.15km 역사 러닝 뛰는 박서진, 재일교포 만난 소찬휘·신유",
+                "sourceIndex": 0
+              },
+              {
+                "text": "이날 라인업에는 idntt, AmbiO, DAILY:DIRECTION, TRENDZ(트렌드지), VAYONN, 몬트(M.O.N.T), 백아연, 아홉(AHOF), 이리온 (IRION), 장한음(JANG HANEUM), 지선 (loveholic), 크리스티나 X 유재필(YJP), 클릭비, 한이서가 이름을 올렸다. 유재필이 멋진 무대를 선보이고 있다.",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.newsis.com/view/NISX20260815_0003750449",
+                "press": "뉴시스"
+              },
+              {
+                "url": "http://www.osen.co.kr/article/G1112844236",
+                "press": "OSEN"
+              }
+            ],
+            "images": [
+              "https://img1.newsis.com/2026/08/15/NISI20260815_0002213418_web.jpg"
+            ],
+            "press": [
+              "뉴시스",
+              "OSEN"
+            ],
+            "headlines": [
+              "81년 전 그날의 울림, 광복절 안방 찾는 특집 다큐·예능",
+              "[사진]유재필, '오늘은 가수 로 무대에'"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-15T09:59:23.864Z"
+          }
+        },
+        {
+          "id": "daum-2",
+          "rank": 2,
           "keyword": "여한구 직권면직",
           "title": "여한구 직권면직",
           "rawKeyword": "여한구 직권면직",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 100,
+          "priority": 99,
           "source": "daum",
           "expansions": [
             "직권면직 사유",
@@ -687,13 +749,13 @@
           }
         },
         {
-          "id": "daum-2",
-          "rank": 2,
+          "id": "daum-3",
+          "rank": 3,
           "keyword": "로메로 AT마드리드 이적",
           "title": "로메로 AT마드리드 이적",
           "rawKeyword": "로메로 AT마드리드 이적",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 98,
           "source": "daum",
           "expansions": [
             "로메로 이적",
@@ -749,13 +811,13 @@
           }
         },
         {
-          "id": "daum-3",
-          "rank": 3,
+          "id": "daum-4",
+          "rank": 4,
           "keyword": "오승근 나이",
           "title": "오승근 나이",
           "rawKeyword": "오승근 나이",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 98,
+          "priority": 97,
           "source": "daum",
           "expansions": [
             "가수오승근별세",
@@ -808,68 +870,6 @@
             ],
             "extraction": "playwright",
             "collectedAt": "2026-08-15T09:46:39.496Z"
-          }
-        },
-        {
-          "id": "daum-4",
-          "rank": 4,
-          "keyword": "연금복권",
-          "title": "연금복권",
-          "rawKeyword": "연금복권",
-          "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
-          "priority": 97,
-          "source": "daum",
-          "expansions": [
-            "생방송 연금복권 720+",
-            "연금복권 720",
-            "연금복권 추첨시간",
-            "연금복권 실수령액",
-            "연금복권당첨번호",
-            "연금복권 사는법",
-            "연금복권 720 당첨번호",
-            "연금복권 당첨"
-          ],
-          "expansionSeed": "연금복권",
-          "insight": {
-            "titles": {
-              "seo": "연금복권 최신 이슈와 핵심 내용 정리",
-              "home": "연금복권, 연금복권720 당첨번호 328회 관련 확인할 점",
-              "topic": "연금복권",
-              "topicGroup": "다음 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "NOW 연금복권720 당첨번호 328회 정윤지 기자 2026-08-13 21:17:00 생방송 연금복권720+ 당첨확인, 동행복권 동행복권은 제328회차 연금복권720+ 추첨 결과 1등 당첨번호로 ‘3조644513’번이 뽑혔다고 13일 발표했다.연금복권720 당첨번호 조회 결과, 1등 당첨금은 매달 700만 원씩 20년간 연금 형식으로 지급되며 22%의 세금을 제한 실수령액은 월 546만 원 수준이다. 이번 회차 1등 당첨자는 판매점과 인터넷에서 각각 1매씩 총 2명이 나왔다. 2등 당첨번호는 1등 번호 기준 조만 다르고 6자리 숫자가 일치한 ‘각조 644513’번이다. 2등 당첨자는 10년간 매월 100만 원, 세후 약 78만 원을 받는다. 보너스 번호는 ‘각조 177237’번으로 추첨됐으며, 2등과 동일하게 10년간 월 100만 원을 수령",
-                "sourceIndex": 0
-              },
-              {
-                "text": "판매점 매출 증대를 위해 기업 경품용 연금복권 교환권은 5000원 이하 소액 및 청소년 제한 조건으로 시범 도입한다. 복권위는 '복권기금이 변화시킨 우리 동네 모습'을 주제로 복권기금 그림 공모전을 개최한다. 19세 이상 대한민국 국민 누구나 참여 가능하다. 접수 기간은 9월 11일까지다. 공모전 참여와...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.bntnews.co.kr/article/view/bnt202608130295",
-                "press": "bnt뉴스"
-              },
-              {
-                "url": "http://www.fnnews.com/news/202608110937071079",
-                "press": "파이낸셜뉴스"
-              }
-            ],
-            "images": [
-              "https://www.bntnews.co.kr/data/bnt/image/2026/08/13/bnt202608130715.jpg"
-            ],
-            "press": [
-              "bnt뉴스",
-              "파이낸셜뉴스"
-            ],
-            "headlines": [
-              "연금복권720 당첨번호 328회",
-              "로또 복권 미수령 당첨금 자동 지급한다"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-15T09:54:34.689Z"
           }
         },
         {
@@ -937,298 +937,306 @@
         {
           "id": "daum-6",
           "rank": 6,
-          "keyword": "여행본색",
-          "title": "여행본색",
-          "rawKeyword": "여행본색",
+          "keyword": "바비킴 사랑한다 할 수 있기에",
+          "title": "바비킴 사랑한다 할 수 있기에",
+          "rawKeyword": "바비킴 사랑한다 할 수 있기에",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 95,
           "source": "daum",
           "expansions": [
-            "최태성 서경석의 여행본색"
+            "바비킴 노래",
+            "바비킴 사랑그놈",
+            "바비킴 대한항공",
+            "바비킴 비행기",
+            "바비킴 근황",
+            "바비킴 한잔더",
+            "바비킴 고래의꿈",
+            "바비킴 나무위키"
           ],
-          "expansionSeed": "여행본색",
+          "expansionSeed": "바비킴",
           "insight": {
             "titles": {
-              "seo": "여행본색 최신 이슈와 핵심 내용 정리",
-              "home": "여행본색, ‘전설의 사내’ 조권, 깝권 본색!…성리 형제 무릎 관련 확인할 점",
-              "topic": "여행본색",
+              "seo": "바비킴 사랑한다 할 수 있기에 최신 이슈와 핵심 내용 정리",
+              "home": "바비킴 사랑한다 할 수 있기에, 오승근 \"집사람 생각 났다\" 故김자옥 떠올리며 '몰래 웁니다' 관련 확인할 점",
+              "topic": "바비킴 사랑한다 할 수 있기에",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "분당 최고 시청률은 4.85%를 기록했다. ‘전설의 사내’가 가족들의 숨은 끼부터 성리와 조권의 퍼포먼스 대결, 부모와 자녀가 함께한 무대까지 웃음과 감동이 오간 ‘가족 청백전’으로 시청자들을 사로잡았다. 12...",
+                "text": "가수 오승근이 아내 고(故) 김자옥을 떠올리며 그리움을 드러낸다. 오승근은 오는 14일 방송되는 TV조선 '금타는 금요일' 34회에 골든 스타로 출연한다.",
                 "sourceIndex": 0
               },
               {
-                "text": "EBS는 인문학 여행 프로그램 <최태성 서경석의 여행본색 > 광복절 특집 '응답하라 1919, 수원' 편을 오는 8월 15일 토요일 EBS1에서 방송한다고 밝혔다. 이번 방송에서는 정조가 사랑했던 도시 수원이 품고 있는 또 다른 역사인 '독립운동'을 집중적으로 조명한다. 화성행궁과 성곽길, 행리단길 등 관광 명소로...",
+                "text": "'리멤버' 정규앨범은 가수 케이윌의 '시리다' 부터 시작해 주영의 '들리나요', Bro의 '미워진다', 장재인의 '모르나요', 한별의 '겨울바람', 바비킴 의 ' 사랑한다 할 수 있기에 '까지 자타공인 최고의 보컬리스트들이 함께해 더욱 눈길을 끌었다. 뿐만 아니라 극 중 서진우(유승호 분)와 남규만(남궁민 분)의...",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://sports.khan.co.kr/article/202608130823003?pt=nv",
-                "press": "스포츠경향"
+                "url": "https://www.newsis.com/view/NISX20260813_0003747364",
+                "press": "뉴시스"
               },
               {
-                "url": "https://www.lecturernews.com/news/articleView.html?idxno=208459",
-                "press": "한국강사신문"
+                "url": "http://www.segye.com/content/html/2016/02/24/20160224002574.html?OutUrl=naver",
+                "press": "세계일보"
               }
             ],
             "images": [
-              "https://images.khan.co.kr/article/2026/08/13/news-p.v1.20260813.f6476cbc8b5e44f7b8f32a88c6594f86_P1.png"
+              "https://img1.newsis.com/2026/08/13/NISI20260813_0002211342_web.jpg"
             ],
             "press": [
-              "스포츠경향",
-              "한국강사신문"
+              "뉴시스",
+              "세계일보"
             ],
             "headlines": [
-              "‘전설의 사내’ 조권, 깝권 본색!…성리 형제 무릎",
-              "EBS '최태성 서경석의 여행본색 ', 광복절 맞아 수원 독립운동 역사 탐방"
+              "오승근 \"집사람 생각 났다\" 故김자옥 떠올리며 '몰래 웁니다'",
+              "'리멤버' OST, 25일 공개..케이윌부터 주영-장재인- 바비킴 까지"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-15T09:54:34.689Z"
+            "collectedAt": "2026-08-15T09:59:23.864Z"
           }
         },
         {
           "id": "daum-7",
           "rank": 7,
-          "keyword": "데니 태극기",
-          "title": "데니 태극기",
-          "rawKeyword": "데니 태극기",
+          "keyword": "최태원 재산분할 재상고",
+          "title": "최태원 재산분할 재상고",
+          "rawKeyword": "최태원 재산분할 재상고",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 94,
           "source": "daum",
           "expansions": [
-            "데니 태극기 크기",
-            "데니 태극기 박물관"
+            "최태원 노소영",
+            "최태원 김희영 자녀",
+            "최태원 동거인",
+            "최태원 위자료",
+            "최태원 자녀",
+            "최태원 와이프",
+            "최태원 나무위키",
+            "최태원 상고"
           ],
-          "expansionSeed": "데니 태극기",
+          "expansionSeed": "최태원",
           "insight": {
             "titles": {
-              "seo": "데니 태극기 최신 이슈와 핵심 내용 정리",
-              "home": "데니 태극기, 첫 번째 ‘국보 태극기’ 탄생할까[독립의 상징, 진관사 태극기③] 관련 확인할 점",
-              "topic": "데니 태극기",
+              "seo": "최태원 재산분할 재상고 최신 이슈와 핵심 내용 정리",
+              "home": "최태원 재산분할 재상고, 403 Forbidden 관련 확인할 점",
+              "topic": "최태원 재산분할 재상고",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "[헤럴드경제=김명상 기자] 한민족의 정체성을 담은 태극기가 보물을 넘어 국보로 승격될까. 국가유산청이 보물 태극기 3건을 대상으로 지정 조사에 착수한 가운데 그 결과",
+                "text": "▲ 최태원 SK그룹 회장과 노소영 아트센터 나비 관장 최태원 SK그룹 회장과 노소영 아트센터 나비 관장의 재산분할 소송이 다시 대법원 판단을 받게 됐습니다. 최 회장 측은 재산분할 소송 파기환송심 재판부인 서울고법 가사1부(이상주 부장판사)에 재상고 시한인 지난 14일 재상고 장을 냈습니다. 최...",
                 "sourceIndex": 0
               },
               {
-                "text": "태극기 엽서 세트에는 진관사 태극기, 한국광복군 서명문 태극기, 김구 서명문 태극기, 데니 태극기 등 4종을 담았다. 독립과 광복의 염원을 간직한 태극기를 일상에서 기억하자는 취지다. '서명문 태극기 렌티큘러 마그넷'은 1941년 '김구 서명문 태극기'와 1945년 '한국광복군 서명문 태극기'를 함께 담았다....",
+                "text": "법조계 \" 재상고 심서 결과 뒤집힐 가능성 크지 않아\" 9440억원 지연이자 피하기 위한 '시간 벌기' 시각도 최태원 SK그룹 회장과 노소영 아트센터 나비 관장의 재산분할 소송이 대법원의 최종 판단을 받게 됐다. 최 회장 측이 9440억원을 노 관장에게 지급하라는 파기환송심 판결에 불복해 재상고 를 하면서다....",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://biz.heraldcorp.com/article/10841013?ref=naver",
-                "press": "헤럴드경제"
+                "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008706447&plink=ORI&cooper=NAVER",
+                "press": "SBS"
               },
               {
-                "url": "https://www.newsis.com/view/NISX20260814_0003750015",
-                "press": "뉴시스"
+                "url": "https://www.sisajournal.com/news/articleView.html?idxno=383742",
+                "press": "시사저널"
               }
             ],
             "images": [
-              "https://wimg.heraldcorp.com/news/cms/2026/08/14/news-p.v1.20260813.bc6f8715d6e54f05b94cb6c375de9ace_T1.jpg"
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F055%2F2026%2F08%2F15%2F1380834.jpg&type=fface200_200&expire=2&refresh=true"
             ],
             "press": [
-              "헤럴드경제",
-              "뉴시스"
+              "SBS",
+              "시사저널"
             ],
             "headlines": [
-              "첫 번째 ‘국보 태극기’ 탄생할까[독립의 상징, 진관사 태극기③]",
-              "창에 내걸던 태극기 , 이젠 가방에 단다…'굿즈'로 기억하는 광복"
+              "403 Forbidden",
+              "SK '세기의 재산분할 ' 다시 대법원행… 최태원 회장 재상고"
             ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-15T09:54:34.689Z"
+            "extraction": "search-card",
+            "collectedAt": "2026-08-15T09:59:23.864Z"
           }
         },
         {
           "id": "daum-8",
           "rank": 8,
-          "keyword": "가시나무",
-          "title": "가시나무",
-          "rawKeyword": "가시나무",
+          "keyword": "광복절",
+          "title": "광복절",
+          "rawKeyword": "광복절",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 93,
           "source": "daum",
           "expansions": [
-            "가시나무새",
-            "가시나무 가사",
-            "호랑가시나무",
-            "조성모 가시나무",
-            "호랑가시나무언덕",
-            "가시나무왕",
-            "가시나무 노래",
-            "개가시나무"
+            "광복절 대체공휴일",
+            "광복절 특집 YMCA 야구단 1923",
+            "광복절 뜻",
+            "광복절 행사",
+            "광복절특사",
+            "광복절 태극기",
+            "광복절 년도",
+            "광복절 택배"
           ],
-          "expansionSeed": "가시나무",
+          "expansionSeed": "광복절",
           "insight": {
             "titles": {
-              "seo": "가시나무 최신 이슈와 핵심 내용 정리",
-              "home": "가시나무, 라포엠X한해, ‘파락호’ 김용환 기리는 무대 선봬…’가시나무’ 협연 관련 확인할 점",
-              "topic": "가시나무",
+              "seo": "광복절 최신 이슈와 핵심 내용 정리",
+              "home": "광복절, 제81주년 광복절 경축식...이 대통령 경축사 키워드는? 관련 확인할 점",
+              "topic": "광복절",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "라포엠과 한해가 이색적인 무대를 선보였다.15일 KBS2TV ‘불후의 명곡’ 광복절 특집에서 라포엠과 한해가 시인과 촌장의 ‘가시 나무’무대를 선보였다.라포엠은 노랫말이 노름으로 가산을 탕진한 척 독립운동가들에게 자금을 지원한 김용환의 심정과 맞닿은 면이 있어 해당 곡을 결정했다고 밝혔다. 한해는 주제에 맞는 가사로 랩을 창작했다고 밝혀 기대감을 끌어올렸다.이들이 선보인 무대는 서정적인 원곡의 선율에 라포엠의 다채로운 화음과 한해의 랩이 더해져 감정을 극대화했다.무대가 끝나고 서문탁은 “한해가 원래 라포엠 멤버라고 해도 손색없을 만",
+                "text": "■ 진행 : 정채운 앵커, 김다현 앵커■ 출연 : 이동학 전 더불어민주당 최고위원, 송영훈 전 국민의힘 대변인* 아래 텍스트는 실제 방송 내용과 차이가 있을 수 있으니 보다 ...",
                 "sourceIndex": 0
               },
               {
-                "text": "곰솔과 가시나무 , 이팝나무 등 초목이 우거진 이곳에서 가지치기로 인해 떨어진 나뭇가지가 한 곳에 쌓여있었다. 이는 강서구가 솔껍질깍지벌레로 피해를 입은 가지를 자르는 등의 긴급 방제 작업을 한 결과물이다. 구는 지난 4월 나무의사 진단을 통해 방재림에 심은 곰솔에 병해충이 발생했다는 것을...",
+                "text": "남북대화 단절 속 돌파구 모색…논의 당사국은 언급 안해 '포용적·안정적·책임있는 평화공존' 대북 청사진 제시 이재명 대통령이 15일 광복절 경축사에서... 이 대통령은 이날 서울 세종문화회관에서 열린 제81주년 광복절 경축식 경축사에서 '포용적·안정적·책임있는 평화공존'이라는 대북 정책 청사진을...",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.slist.kr/news/articleView.html?idxno=759027",
-                "press": "싱글리스트"
+                "url": "https://www.ytn.co.kr/_ln/0101_202608151057483114",
+                "press": "YTN"
               },
               {
-                "url": "http://www.fnnews.com/news/202608111515456783",
-                "press": "파이낸셜뉴스"
+                "url": "https://www.yna.co.kr/view/AKR20260815031200504?input=1195m",
+                "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://cdn.slist.kr/news/thumbnail/202608/759027_1163060_3249_v150.jpg"
+              "https://image.ytn.co.kr/general/jpg/2026/0815/202608151057483114_t.jpg"
             ],
             "press": [
-              "싱글리스트",
-              "파이낸셜뉴스"
+              "YTN",
+              "연합뉴스"
             ],
             "headlines": [
-              "라포엠X한해, ‘파락호’ 김용환 기리는 무대 선봬…’가시나무’ 협연",
-              "14억 들여 조성했는데…명지해안방재림서 병해충에 나무 고사"
+              "제81주년 광복절 경축식...이 대통령 경축사 키워드는?",
+              "李대통령, 종전 위한 다자논의 제안…'북핵 중단 방안'도 모색"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-15T09:54:34.689Z"
+            "collectedAt": "2026-08-15T09:59:23.864Z"
           }
         },
         {
           "id": "daum-9",
           "rank": 9,
-          "keyword": "노소영 재산분할 재상고",
-          "title": "노소영 재산분할 재상고",
-          "rawKeyword": "노소영 재산분할 재상고",
+          "keyword": "박영진 개그맨",
+          "title": "박영진 개그맨",
+          "rawKeyword": "박영진 개그맨",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 92,
           "source": "daum",
           "expansions": [
-            "최태원 노소영",
-            "노소영 위자료",
-            "최태원 노소영 자녀",
-            "노소영 자녀",
-            "노소영 리즈",
-            "노소영 나무위키",
-            "노소영 인스타",
-            "노소영프로필"
+            "박영진 개그맨",
+            "개그맨 박영진",
+            "박영진 나무위키",
+            "박영진의원",
+            "박영진 변호사",
+            "박준형 박영진",
+            "박영진 라디오",
+            "일타의사 박영진"
           ],
-          "expansionSeed": "노소영",
+          "expansionSeed": "박영진",
           "insight": {
             "titles": {
-              "seo": "노소영 재산분할 재상고 최신 이슈와 핵심 내용 정리",
-              "home": "노소영 재산분할 재상고, 최태원 ‘노소영에 9440억 재산분할’ 불복, 재상고…다시 대법으로 관련 확인할 점",
-              "topic": "노소영 재산분할 재상고",
+              "seo": "박영진 개그맨 최신 이슈와 핵심 내용 정리",
+              "home": "박영진 개그맨, 유재석 샤워 뒤 성지 된 박영진 집…\"개그맨들이 씻으러 가자고\" 관련 확인할 점",
+              "topic": "박영진 개그맨",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "최태원 SK그룹 회장과 노소영 아트센터 나비 관장의 9440억원 대 이혼 재산분할 소송이 대법원 판단을 다시 받게 됐습니다. 최 회장 측은 1...",
+                "text": "방송인 유재석이 씻고 간 개그맨 박영진의 집이 동료 개그맨들 사이에서 이른바 '샤워 성지'가 됐다는 후일담이 공개된다.",
                 "sourceIndex": 0
               },
               {
-                "text": "회장과 노소영 (65) 아트센터 나비 관장의 재산분할 소송이 대법원 판단을 다시 받게 됐다. 최 회장 측은 14일 재산분할 소송 파기환송심 재판부인 서울고법 가사1부(이상주 부장판사)에 재상고 장을 냈다. 최 회장의 대리인단은 입장문을 내고 \"최 회장은 여러 사정을 고려해 고심 끝에 상고장을 제출했다\"며...",
+                "text": "예능 ‘놀면 뭐하니?’ (제공= MBC) ‘웃음 집착남’ 박영진 이 개그맨 동기 허경환에게만 유독 너그러움을 배푼다. 오늘(15일) 방송되는 MBC 예능프로그램 ‘놀면 뭐하니?’는 ‘휘파람 라이더스’ 편으로 꾸며지는 가운데, 두 번째 기회를 받고 재출연한 박영진 (문래동 박복동)이 웃음에 쫓겨 점점 조커로...",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://news.jtbc.co.kr/article/NB12313501?influxDiv=NAVER",
-                "press": "JTBC"
+                "url": "https://www.newsis.com/view/NISX20260814_0003749479",
+                "press": "뉴시스"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20260814113100004?input=1195m",
-                "press": "연합뉴스"
+                "url": "https://www.bntnews.co.kr/article/view/bnt202608150103",
+                "press": "bnt뉴스"
               }
             ],
             "images": [
-              "https://photo.jtbc.co.kr/news/jam_photo/202608/15/04dcfe58-1249-4582-a204-484ba45cde43.jpg"
+              "https://img1.newsis.com/2026/08/14/NISI20260814_0002212865_web.jpg"
             ],
             "press": [
-              "JTBC",
-              "연합뉴스"
+              "뉴시스",
+              "bnt뉴스"
             ],
             "headlines": [
-              "최태원 ‘노소영에 9440억 재산분할’ 불복, 재상고…다시 대법으로",
-              "'세기의 재산분할 ' 다시 대법원으로…최태원 재상고 (종합)"
+              "유재석 샤워 뒤 성지 된 박영진 집…\"개그맨들이 씻으러 가자고\"",
+              "‘놀면뭐하니?’ 박영진 , 허경환은 ‘견제 대상’ 제외"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-15T09:54:34.689Z"
+            "collectedAt": "2026-08-15T09:59:23.864Z"
           }
         },
         {
           "id": "daum-10",
           "rank": 10,
-          "keyword": "민주당 안도걸 위원장 선출",
-          "title": "민주당 안도걸 위원장 선출",
-          "rawKeyword": "민주당 안도걸 위원장 선출",
+          "keyword": "약무호남 시무국가",
+          "title": "약무호남 시무국가",
+          "rawKeyword": "약무호남 시무국가",
           "description": "다음 실시간 트렌드에서 수집한 검색 신호입니다.",
           "priority": 91,
           "source": "daum",
           "expansions": [
-            "민주당 당대표",
-            "민주당 전당대회",
-            "민주당 당대표 선거",
-            "민주당 최고위원",
-            "더불어민주당",
-            "민주당 지지율",
-            "민주당 경선",
-            "민주당 권리당원"
+            "약무호남 시무국가 뜻",
+            "약무호남 시무국가 한자 뜻",
+            "약무호남 시무국가 한자"
           ],
-          "expansionSeed": "민주당",
+          "expansionSeed": "약무호남 시무국가",
           "insight": {
             "titles": {
-              "seo": "민주당 안도걸 위원장 선출 최신 이슈와 핵심 내용 정리",
-              "home": "민주당 안도걸 위원장 선출, 민주당 초대 전남광주통합시당위원장에 안도걸 의원 관련 확인할 점",
-              "topic": "민주당 안도걸 위원장 선출",
+              "seo": "약무호남 시무국가 최신 이슈와 핵심 내용 정리",
+              "home": "약무호남 시무국가, 김민석·정청래·송영길 일제히 \"약무호남, 시무국가\" 막판 호소 관련 확인할 점",
+              "topic": "약무호남 시무국가",
               "topicGroup": "다음 실시간 검색어"
             },
             "facts": [
               {
-                "text": "(나주=연합뉴스) 신현우 기자 = 더불어민주당 전남광주통합특별시당 초대 위원장에 안도걸 의원이 선출됐다. 민주당 전남광주통합특별시당은 15일 전...",
+                "text": "더불어민주당 당 대표 후보 3인은 15일 일제히 '약무호남, 시무국가'를 내세우며 막판 호남 당심에 호소했다.이날 처음으로 연단에 오른 정청래 당 대표 후보는 \"약무호남, 시무국가. 호남이 없었으면 국가도 없었고, 민주주의도 민주당도 없었다\"며 \"이제 광주는 민주..",
                 "sourceIndex": 0
               },
               {
-                "text": "더불어 민주당 초대 전남광주통합특별시당 위원장 에 안도걸 국회의원(전남광주 동남을)이 당선됐다. 민주당 전남광주통합특별시당은 15일 나주 종합스포츠파크 다목적체육관에서 정기당원대회를 열고 초대 시당 위원장 으로 안 의원을 선출 했다. 시당은 이날 당원과 지지자 등 1만여명이 참석했다고 밝혔다....",
+                "text": "자신과 이 대통령의 관계에 대해선 임진왜란 당시 이순신 장군의 ' 약무호남 시무국가 (호남이 없으면 나라도 없다)'를 차용해 \"약무영길 시무재명\"이라며 \"저는) 이재명 대통령과는 망치 테러와 칼 테러를 서로 맞은 사선을 넘은 동지\"라고 강조했다. 민주당은 이날 전북 순회경선을 진행한 뒤 호남권 순회경선...",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.yna.co.kr/view/PYH20260815053200013?input=1196m",
-                "press": "연합뉴스"
+                "url": "http://www.fnnews.com/news/202608151502457616",
+                "press": "파이낸셜뉴스"
               },
               {
-                "url": "https://www.nocutnews.co.kr/news/6563481?utm_source=naver&utm_medium=article&utm_campaign=20260815031742",
-                "press": "노컷뉴스"
+                "url": "https://news.tf.co.kr/read/ptoday/2354612.htm",
+                "press": "더팩트"
               }
             ],
             "images": [
-              "https://img9.yna.co.kr/photo/yna/YH/2026/08/15/PYH2026081505320001300_P4.jpg"
+              "https://image.fnnews.com/resource/media/image/2026/08/15/202608151452299651_l.jpg"
             ],
             "press": [
-              "연합뉴스",
-              "노컷뉴스"
+              "파이낸셜뉴스",
+              "더팩트"
             ],
             "headlines": [
-              "민주당 초대 전남광주통합시당위원장에 안도걸 의원",
-              "민주당 초대 전남광주통합특별시당 위원장 안도걸 당선"
+              "김민석·정청래·송영길 일제히 \"약무호남, 시무국가\" 막판 호소",
+              "與 최대 승부처 호남 경선…金 \"5·18 폄훼 의원 자격정지\" 鄭 \"4통 통합..."
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-15T09:54:34.689Z"
+            "collectedAt": "2026-08-15T09:59:23.864Z"
           }
         }
       ]
@@ -1355,7 +1363,7 @@
               "지지 호소하는 송영길 당대표 후보"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-08-15T09:54:34.689Z"
+            "collectedAt": "2026-08-15T09:59:23.864Z"
           }
         },
         {
@@ -2439,11 +2447,79 @@
         {
           "id": "issue-1",
           "rank": 1,
+          "keyword": "\"'공개 열애 2번' 전현무 공개",
+          "title": "\"'공개 열애 2번' 전현무, 내년 5월 결혼→케이윌 축가\"..비혼주의설 해명",
+          "rawKeyword": "\"'공개 열애 2번' 전현무 공개",
+          "description": "스타뉴스 최신 기사 · \"'공개 열애 2번' 전현무, 내년 5월 결혼→케이윌 축가\"..비혼주의설 해명",
+          "priority": 100,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081518500061536",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "전현무계획4",
+            "전현무계획",
+            "전현무 실내자전거",
+            "전현무 나무위키",
+            "전현무 목",
+            "전현무 홍주연",
+            "전현무계획4 인천",
+            "전현무계획3"
+          ],
+          "expansionSeed": "전현무",
+          "ago": "1분 전",
+          "agoMinutes": 1,
+          "publishedLabel": "2026.08.15 ・ 18:57",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081518500061536_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "\"'공개 열애 2번' 전현무 공개 최신 이슈와 핵심 내용 정리",
+              "home": "\"'공개 열애 2번' 전현무 공개, \"'공개 열애 2번' 전현무, 내년 5월 결혼→케이윌 축가\"..비혼주의설 해명 관련 확인할 점",
+              "topic": "\"'공개 열애 2번' 전현무 공개",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · \"'공개 열애 2번' 전현무, 내년 5월 결혼→케이윌 축가\"..비혼주의설 해명",
+                "sourceIndex": 0
+              },
+              {
+                "text": "방송인 전현무 가 자신의 수많은 열애 설을 두고 셀프 디스했다. 8월 14일 방송된 MBN, 채널S 예능 ' 전현무 계획4' 7회에서는 케이윌, 테이가 경기도 의정부로 맛집 여행을 떠난 전현무 , 곽튜브의 '먹친구'로 출연했다. 이날 전현무 는 케이윌과 테이를 의정부의 미식 별세계로 안내했다. 시장 지하에 작은 식당들이...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/08/15/2026081518500061536",
+                "press": "스타뉴스"
+              },
+              {
+                "url": "https://www.newsen.com/news_view.php?uid=202608142030586110",
+                "press": "뉴스엔"
+              }
+            ],
+            "images": [
+              "https://search.pstatic.net/common/?src=https%3A%2F%2Fimgnews.pstatic.net%2Fimage%2Forigin%2F609%2F2026%2F08%2F15%2F1157190.jpg&type=fface200_200&expire=2&refresh=true"
+            ],
+            "press": [
+              "스타뉴스",
+              "뉴스엔"
+            ],
+            "headlines": [
+              "\"'공개 열애 2번' 전현무, 내년 5월 결혼→케이윌 축가\"..비혼주의설 해명",
+              "전현무 , 공개 연애 2번 - 열애 설 N번 셀프 디스 “적은 내부에 있어”(전현..."
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-15T09:59:23.864Z"
+          }
+        },
+        {
+          "id": "issue-2",
+          "rank": 2,
           "keyword": "유재석, 정준하 지적에 정색 \"수치심·모욕감 느껴\"",
           "title": "유재석, 정준하 지적에 정색 \"수치심·모욕감 느껴\"",
           "rawKeyword": "유재석, 정준하 지적에 정색 \"수치심·모욕감 느껴\"",
           "description": "스타뉴스 최신 기사 · 유재석, 정준하 지적에 정색 \"수치심·모욕감 느껴\"",
-          "priority": 100,
+          "priority": 99,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/08/15/2026081518451290504",
           "sourceLabel": "스타뉴스",
@@ -2458,8 +2534,8 @@
             "정준하 기대해"
           ],
           "expansionSeed": "유재석",
-          "ago": "2분 전",
-          "agoMinutes": 2,
+          "ago": "6분 전",
+          "agoMinutes": 6,
           "publishedLabel": "2026.08.15 ・ 18:51",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081518451290504_1.jpg",
           "insight": {
@@ -2495,13 +2571,13 @@
           }
         },
         {
-          "id": "issue-2",
-          "rank": 2,
+          "id": "issue-3",
+          "rank": 3,
           "keyword": "박영진 집, 유재석 샤워 후 성지 등극 \"약수처럼 물 받아가\"",
           "title": "박영진 집, 유재석 샤워 후 성지 등극 \"약수처럼 물 받아가\"",
           "rawKeyword": "박영진 집, 유재석 샤워 후 성지 등극 \"약수처럼 물 받아가\"",
           "description": "스타뉴스 최신 기사 · 박영진 집, 유재석 샤워 후 성지 등극 \"약수처럼 물 받아가\"",
-          "priority": 99,
+          "priority": 98,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/08/15/2026081518235931059",
           "sourceLabel": "스타뉴스",
@@ -2516,8 +2592,8 @@
             "일타의사 박영진"
           ],
           "expansionSeed": "박영진",
-          "ago": "9분 전",
-          "agoMinutes": 9,
+          "ago": "13분 전",
+          "agoMinutes": 13,
           "publishedLabel": "2026.08.15 ・ 18:44",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081518235931059_1.jpg",
           "insight": {
@@ -2553,13 +2629,13 @@
           }
         },
         {
-          "id": "issue-3",
-          "rank": 3,
+          "id": "issue-4",
+          "rank": 4,
           "keyword": "션, '광복절' 8시간·81.5km 러닝 성공..\"독립유공자 후손 주거개선 위해\" 뭉클",
           "title": "션, '광복절' 8시간·81.5km 러닝 성공..\"독립유공자 후손 주거개선 위해\" 뭉클",
           "rawKeyword": "션, '광복절' 8시간·81.5km 러닝 성공..\"독립유공자 후손 주거개선 위해\" 뭉클",
           "description": "스타뉴스 최신 기사 · 션, '광복절' 8시간·81.5km 러닝 성공..\"독립유공자 후손 주거개선 위해\" 뭉클",
-          "priority": 98,
+          "priority": 97,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081518063132628",
           "sourceLabel": "스타뉴스",
@@ -2574,8 +2650,8 @@
             "광복절 특집 YMCA 야구단 1923"
           ],
           "expansionSeed": "광복절",
-          "ago": "32분 전",
-          "agoMinutes": 32,
+          "ago": "37분 전",
+          "agoMinutes": 37,
           "publishedLabel": "2026.08.15 ・ 18:21",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081518063132628_1.jpg",
           "insight": {
@@ -2611,13 +2687,13 @@
           }
         },
         {
-          "id": "issue-4",
-          "rank": 4,
+          "id": "issue-5",
+          "rank": 5,
           "keyword": "신지 공개",
           "title": "신지, '7세 연하' ♥문원과 달달한 일상 공개..행복한 신혼",
           "rawKeyword": "신지 공개",
           "description": "스타뉴스 최신 기사 · 신지, '7세 연하' ♥문원과 달달한 일상 공개..행복한 신혼",
-          "priority": 97,
+          "priority": 96,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081517592390493",
           "sourceLabel": "스타뉴스",
@@ -2632,8 +2708,8 @@
             "정보공개청구"
           ],
           "expansionSeed": "신지",
-          "ago": "34분 전",
-          "agoMinutes": 34,
+          "ago": "39분 전",
+          "agoMinutes": 39,
           "publishedLabel": "2026.08.15 ・ 18:19",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081517592390493_1.jpg",
           "insight": {
@@ -2689,13 +2765,13 @@
           }
         },
         {
-          "id": "issue-5",
-          "rank": 5,
+          "id": "issue-6",
+          "rank": 6,
           "keyword": "40대 후반 맞아? 송혜교, 세월 역주행하는 여신 비주얼",
           "title": "40대 후반 맞아? 송혜교, 세월 역주행하는 여신 비주얼",
           "rawKeyword": "40대 후반 맞아? 송혜교, 세월 역주행하는 여신 비주얼",
           "description": "스타뉴스 최신 기사 · 40대 후반 맞아? 송혜교, 세월 역주행하는 여신 비주얼",
-          "priority": 96,
+          "priority": 95,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081518134724345",
           "sourceLabel": "스타뉴스",
@@ -2710,8 +2786,8 @@
             "40대 남자 배우들"
           ],
           "expansionSeed": "송혜교",
-          "ago": "36분 전",
-          "agoMinutes": 36,
+          "ago": "40분 전",
+          "agoMinutes": 40,
           "publishedLabel": "2026.08.15 ・ 18:17",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081518134724345_1.jpg",
           "insight": {
@@ -2747,13 +2823,13 @@
           }
         },
         {
-          "id": "issue-6",
-          "rank": 6,
+          "id": "issue-7",
+          "rank": 7,
           "keyword": "조여정, 故 안판석 감독 빈소 찾아 애통..\"평안히 쉬세요\"",
           "title": "조여정, 故 안판석 감독 빈소 찾아 애통..\"평안히 쉬세요\"",
           "rawKeyword": "조여정, 故 안판석 감독 빈소 찾아 애통..\"평안히 쉬세요\"",
           "description": "스타뉴스 최신 기사 · 조여정, 故 안판석 감독 빈소 찾아 애통..\"평안히 쉬세요\"",
-          "priority": 95,
+          "priority": 94,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081517475275111",
           "sourceLabel": "스타뉴스",
@@ -2768,8 +2844,8 @@
             "안판석 손예진"
           ],
           "expansionSeed": "조여정",
-          "ago": "53분 전",
-          "agoMinutes": 53,
+          "ago": "58분 전",
+          "agoMinutes": 58,
           "publishedLabel": "2026.08.15 ・ 18:00",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081517475275111_1.jpg",
           "insight": {
@@ -2805,13 +2881,13 @@
           }
         },
         {
-          "id": "issue-7",
-          "rank": 7,
+          "id": "issue-8",
+          "rank": 8,
           "keyword": "박보검·션, 가슴에 태극기 달고 달렸다..의미 더한 '8.15 광복절 런'",
           "title": "박보검·션, 가슴에 태극기 달고 달렸다..의미 더한 '8.15 광복절 런'",
           "rawKeyword": "박보검·션, 가슴에 태극기 달고 달렸다..의미 더한 '8.15 광복절 런'",
           "description": "스타뉴스 최신 기사 · 박보검·션, 가슴에 태극기 달고 달렸다..의미 더한 '8.15 광복절 런'",
-          "priority": 94,
+          "priority": 93,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081517305113061",
           "sourceLabel": "스타뉴스",
@@ -2863,13 +2939,13 @@
           }
         },
         {
-          "id": "issue-8",
-          "rank": 8,
+          "id": "issue-9",
+          "rank": 9,
           "keyword": "심용환 \"하영 증조부 안상호=친일파 단정 신중해야\" 글 삭제→\"역사학자가 기록 왜 지우냐\" 비판",
           "title": "심용환 \"하영 증조부 안상호=친일파 단정 신중해야\" 글 삭제→\"역사학자가 기록 왜 지우냐\" 비판",
           "rawKeyword": "심용환 \"하영 증조부 안상호=친일파 단정 신중해야\" 글 삭제→\"역사학자가 기록 왜 지우냐\" 비판",
           "description": "스타뉴스 최신 기사 · 심용환 \"하영 증조부 안상호=친일파 단정 신중해야\" 글 삭제→\"역사학자가 기록 왜 지우냐\" 비판",
-          "priority": 93,
+          "priority": 92,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081516460958267",
           "sourceLabel": "스타뉴스",
@@ -2921,13 +2997,13 @@
           }
         },
         {
-          "id": "issue-9",
-          "rank": 9,
+          "id": "issue-10",
+          "rank": 10,
           "keyword": "백진경 출산",
           "title": "'명예영국인' 백진경, 원정 출산 의혹 후..\"'그래' 넘기는 수밖에\"",
           "rawKeyword": "백진경 출산",
           "description": "스타뉴스 최신 기사 · '명예영국인' 백진경, 원정 출산 의혹 후..\"'그래' 넘기는 수밖에\"",
-          "priority": 92,
+          "priority": 91,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/15/2026081517042757059",
           "sourceLabel": "스타뉴스",
@@ -2987,67 +3063,9 @@
             "extraction": "playwright",
             "collectedAt": "2026-08-15T09:46:39.496Z"
           }
-        },
-        {
-          "id": "issue-10",
-          "rank": 10,
-          "keyword": "김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네!",
-          "title": "김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네!",
-          "rawKeyword": "김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네!",
-          "description": "스타뉴스 최신 기사 · 김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네!",
-          "priority": 91,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/08/15/2026081515524950264",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "김숙 제주도집",
-            "김숙 나무위키",
-            "김숙 구본승",
-            "김수겸",
-            "김숙성",
-            "김수근",
-            "김숙 벌집",
-            "김수기"
-          ],
-          "expansionSeed": "김숙",
-          "ago": "2시간 전",
-          "agoMinutes": 120,
-          "publishedLabel": "2026.08.15 ・ 16:21",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081515524950264_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네! 최신 이슈와 핵심 내용 정리",
-              "home": "김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네!, 김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네! 관련 확인할 점",
-              "topic": "김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네!",
-              "topicGroup": "이슈 실시간 검색어"
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네!",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/broadcast-show/2026/08/15/2026081515524950264",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081515524950264_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "김숙, '의사 집안' 해명 \"언니 1명만, 나머진 환자\"..'꺼드럭' 하영과 다르네!"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-15T09:46:39.496Z"
-          }
         }
       ]
     }
   ],
-  "updatedAt": "2026-08-15T09:54:59.643Z"
+  "updatedAt": "2026-08-15T09:59:49.451Z"
 }
