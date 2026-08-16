@@ -27,7 +27,9 @@ import { classifyExit, parseClaudeEnvelope } from './parse.js';
 import {
   buildClaudeSubscriptionEnv,
   CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
+  CLAUDE_SUBSCRIPTION_IMAGE_READ_ARGS,
 } from './subscriptionEnv.js';
+import { stageImagesInDir } from './imageStaging.js';
 import { AgentCliError } from './types.js';
 import { buildAgentFailureMessage } from './failureMessage.js';
 
@@ -37,6 +39,13 @@ export interface ClaudeRunOptions {
   model?: string;
   timeoutMs?: number;
   signal?: AbortSignal;
+  /**
+   * [2026-08-16 photo mode] Image files to stage into the run cwd as
+   * photo-01.<ext> … (input order). When present, the wildcard tool ban is
+   * swapped for the Read-only allowlist so the model can actually view them.
+   * The prompt should reference the staged names (stagedImageName()).
+   */
+  imagePaths?: string[];
 }
 
 /**
@@ -44,15 +53,19 @@ export interface ClaudeRunOptions {
  * Throws AgentCliError on failure (install / login / rate-limit / timeout / bad output).
  */
 export async function runClaude(prompt: string, opts: ClaudeRunOptions = {}): Promise<string> {
-  const { model, timeoutMs, signal } = opts;
+  const { model, timeoutMs, signal, imagePaths } = opts;
   const dir = await mkdtemp(join(tmpdir(), 'agentcli-claude-'));
 
   try {
+    const withImages = !!imagePaths && imagePaths.length > 0;
+    if (withImages) {
+      await stageImagesInDir(dir, imagePaths);
+    }
     const args = [
       '-p',
       '--output-format', 'json',
       '--permission-mode', 'default',
-      ...CLAUDE_SUBSCRIPTION_ISOLATION_ARGS,
+      ...(withImages ? CLAUDE_SUBSCRIPTION_IMAGE_READ_ARGS : CLAUDE_SUBSCRIPTION_ISOLATION_ARGS),
     ];
     if (model) args.push('--model', model);
 

@@ -374,6 +374,18 @@ export function displayGeneratedImages(images: any[]): void {
   // 각 이미지별로 해당 프롬프트 아이템에도 표시 (기존 기능 유지)
   validImages.forEach((image: any, index: number) => {
     const promptItem = promptsContainer.querySelector(`.prompt-item[data-index="${index + 1}"]`) as HTMLDivElement;
+    // [2026-08-16] 위치 기반 스탬프의 소제목 검증 — 이 루프는 flat 배열 순번으로만
+    // 카드를 골라서, 이미지 수와 카드 수가 어긋나면(글 불러오기 등) 썸네일이 1번
+    // 소제목 카드에 찍히는 중복을 만들었다. 카드와 이미지 양쪽에 소제목 정보가
+    // 있는데 서로 다르면 스탬프하지 않는다 (정확한 배치는 updatePromptItemsWithImages 담당).
+    if (promptItem) {
+      const cardTitle = String(promptItem.getAttribute('data-heading-title') || '').trim();
+      const imgHeading = String(image?.heading || '').trim();
+      const isThumbImage = image?.isThumbnail === true || imgHeading.includes('썸네일');
+      const isThumbCard = cardTitle.includes('썸네일');
+      if (isThumbImage !== isThumbCard) return;
+      if (cardTitle && imgHeading && cardTitle !== imgHeading) return;
+    }
     if (promptItem) {
       const generatedImageDiv = promptItem.querySelector('.generated-image') as HTMLDivElement;
       if (generatedImageDiv) {

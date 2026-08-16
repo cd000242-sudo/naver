@@ -10364,7 +10364,10 @@ function updatePromptItemsWithImages(images: any[]): void {
   for (const promptItem of promptItems) {
     // ✅ [2026-03-14 FIX] headingTitle 추출: data-heading-title 속성 우선 (배지 텍스트 오염 방지)
     const indexStr = String(promptItem.getAttribute('data-index') || '').trim();
-    const index0 = indexStr ? Math.max(0, Number(indexStr) - 1) : 0;
+    // [2026-08-16] 주입형 썸네일 카드(data-index="0")를 0으로 클램프하면 소제목 1번
+    // 카드(index0=0)와 같은 인덱스가 되어 ImageManager.headings[0] 폴백이 같은 이미지를
+    // 두 카드에 찍었다(썸네일 중복 원인 B). 음수는 배열 폴백에서 undefined로 스킵된다.
+    const index0 = indexStr ? Number(indexStr) - 1 : 0;
     const headingTitle = (() => {
       // 1순위: data-heading-title 속성 (정확한 제목)
       const dataTitle = String(promptItem.getAttribute('data-heading-title') || '').trim();

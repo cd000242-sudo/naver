@@ -287,6 +287,7 @@ function _renderThumbnails(): void {
         return `
       <div class="image-narrative-thumbnail" data-idx="${idx}">
         <img src="${safePreviewUrl}" alt="${safeFileName}" loading="lazy" />
+        <span style="position:absolute;top:4px;left:4px;background:rgba(15,23,42,0.85);color:#fbbf24;font-size:0.72rem;font-weight:800;padding:1px 7px;border-radius:9px;pointer-events:none;">${idx + 1}</span>
         <button
           class="image-narrative-thumbnail__remove"
           aria-label="이미지 제거"

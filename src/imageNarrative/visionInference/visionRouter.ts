@@ -53,7 +53,10 @@ function resolveApiKey(provider: VisionProvider): string {
   const envMap: Record<VisionProvider, string> = {
     gemini: process.env['GEMINI_API_KEY'] ?? '',
     openai: process.env['OPENAI_API_KEY'] ?? '',
-    claude: process.env['ANTHROPIC_API_KEY'] ?? '',
+    // [2026-08-16] applyConfigToEnv stores the app's Claude key as CLAUDE_API_KEY —
+    // reading only ANTHROPIC_API_KEY made every claude-vendor photo inference fail
+    // with "API key not set" even when the key was configured (live report).
+    claude: process.env['ANTHROPIC_API_KEY'] ?? process.env['CLAUDE_API_KEY'] ?? '',
     deepinfra: process.env['DEEPINFRA_API_KEY'] ?? '',
   };
   const key = envMap[provider];

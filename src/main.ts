@@ -4472,6 +4472,9 @@ registerImageNarrativeSupportHandlers();
 // [v2.10.256] image:searchNaver 분리 (376줄 대형 IPC)
 import { registerImageSearchNaverHandlers } from './main/ipc/imageSearchNaverHandlers.js';
 registerImageSearchNaverHandlers();
+// [이슈 끝판왕 수집] issue:collectImages — 본문분석 쿼리팬아웃 + 다소스 하네스 (격리 모듈)
+import { registerIssueCollectHandlers } from './main/ipc/issueCollectHandlers.js';
+registerIssueCollectHandlers();
 // [v2.10.257] schedule:* 4개 분리
 import { registerScheduleApiHandlers } from './main/ipc/scheduleApiHandlers.js';
 registerScheduleApiHandlers({ sendLog });
@@ -9722,11 +9725,32 @@ ipcMain.handle('vision:infer-and-write', async (_event, payload: {
       mimeType: img.mimeType,
     }));
 
-    const inferredPlan = normalized.plan ?? await aggregateInferences(imageInputs, {
-      provider: effectiveProvider,
-      mode: normalized.mode,
-      context: normalized.context,
-    });
+    // [2026-08-16] 에이전트 모드 사진 추론 — vision도 구독 CLI로 (API 비전 키 불필요).
+    //   agent-claude/agent-codex: 이미지 파일을 CLI에 직접 전달해 일괄 추론 (실측 검증됨).
+    //   agent-gemini(agy): 헤드리스에서 파일 열람 도구가 권한 게이트에 막혀 미지원 —
+    //   자동 폴백 금지 원칙에 따라 명확한 안내로 차단한다.
+    const { isAgentCliVisionProvider, aggregateInferencesViaAgentCli } = await import('./imageNarrative/visionInference/agentCliVisionAdapter.js');
+    let inferredPlan;
+    if (normalized.plan) {
+      inferredPlan = normalized.plan;
+    } else if (isAgentCliVisionProvider(narrativeTextProvider)) {
+      inferredPlan = await aggregateInferencesViaAgentCli(imageInputs, {
+        provider: narrativeTextProvider,
+        mode: normalized.mode,
+        context: normalized.context,
+      });
+    } else if (narrativeTextProvider === 'agent-gemini') {
+      throw new Error(
+        '구글 구독(Antigravity) 엔진은 사진 인식을 지원하지 않습니다. '
+        + '엔진을 Claude/ChatGPT 구독으로 바꾸거나, Gemini API 키를 등록하면 사진 글생성이 가능합니다.',
+      );
+    } else {
+      inferredPlan = await aggregateInferences(imageInputs, {
+        provider: effectiveProvider,
+        mode: normalized.mode,
+        context: normalized.context,
+      });
+    }
     const plan = applyReviewEditsToPlan(inferredPlan, normalized.reviewEdits);
 
     const content = await buildNarrativeContent(plan, {

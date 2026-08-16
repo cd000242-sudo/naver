@@ -13,6 +13,7 @@ import { join } from 'path';
 import { spawnCollect } from './spawnHelper.js';
 import { classifyExit } from './parse.js';
 import { buildCodexSubscriptionEnv } from './subscriptionEnv.js';
+import { stageImagesInDir } from './imageStaging.js';
 import { AgentCliError } from './types.js';
 import { buildAgentFailureMessage } from './failureMessage.js';
 
@@ -21,6 +22,13 @@ export interface CodexRunOptions {
   model?: string;
   timeoutMs?: number;
   signal?: AbortSignal;
+  /**
+   * [2026-08-16 photo mode] Images staged into the run cwd as photo-01.<ext> …
+   * and passed natively via `codex exec -i <file>` (verified codex-cli 0.142.2:
+   * prompt must arrive on stdin — a positional prompt is swallowed by the
+   * variadic -i flag).
+   */
+  imagePaths?: string[];
 }
 
 /**
@@ -28,7 +36,7 @@ export interface CodexRunOptions {
  * Throws AgentCliError (not_installed / not_logged_in / rate_limited / timeout / ...) on failure.
  */
 export async function runCodex(prompt: string, opts: CodexRunOptions = {}): Promise<string> {
-  const { schema, model, timeoutMs, signal } = opts;
+  const { schema, model, timeoutMs, signal, imagePaths } = opts;
   const dir = await mkdtemp(join(tmpdir(), 'agentcli-codex-'));
   const outPath = join(dir, 'out.txt');
 
@@ -44,6 +52,13 @@ export async function runCodex(prompt: string, opts: CodexRunOptions = {}): Prom
       '-C', dir,
     ];
     if (model) args.push('-m', model);
+
+    if (imagePaths && imagePaths.length > 0) {
+      const staged = await stageImagesInDir(dir, imagePaths);
+      for (const name of staged) {
+        args.push('-i', join(dir, name));
+      }
+    }
 
     if (schema) {
       const schemaPath = join(dir, 'schema.json');

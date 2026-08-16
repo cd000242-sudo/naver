@@ -15,6 +15,7 @@ import { applyOrdering } from './ordering.js';
 import { guardInferenceResults } from './hallucinationGuard.js';
 import { buildNarrativeSections } from './sectionBuilder.js';
 import { inferImage } from '../visionInference/visionRouter.js';
+import { withPhotoOrdinal } from '../context.js';
 import type {
   EnrichedInferenceResponse,
   ImageExif,
@@ -229,7 +230,9 @@ export async function aggregateInferences(
         {
           provider,
           mode,
-          context: options.context,
+          // Upload-order ordinal so "N번 사진" references in the user notes
+          // resolve to the right photo (direct uploads carry no EXIF order).
+          context: withPhotoOrdinal(options.context, i + 1, images.length),
           allowProviderFallback: options.allowProviderFallback,
           onFallback: options.onFallback,
         },
@@ -259,8 +262,20 @@ export async function aggregateInferences(
     console.warn(`[Aggregator] ℹ️ ${failedCount}장 실패를 제외하고 ${enriched.length}장으로 계속 진행합니다.`);
   }
 
+  return buildPlanFromEnriched(enriched, mode);
+}
+
+/**
+ * Steps 3–6 of the pipeline (ordering → hallucination guard → mode vote →
+ * sections), shared with the agent-CLI vision adapter which produces its own
+ * EnrichedInferenceResponse[] via subscription CLIs instead of Vision APIs.
+ */
+export function buildPlanFromEnriched(
+  enriched: readonly EnrichedInferenceResponse[],
+  mode: InferenceMode,
+): NarrativePlan {
   // Step 3: Apply ordering
-  const ordered = applyOrdering(enriched);
+  const ordered = applyOrdering([...enriched]);
 
   // Step 4: Apply hallucination guards
   const guardResult = guardInferenceResults(ordered, mode);

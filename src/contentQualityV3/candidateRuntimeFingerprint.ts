@@ -32,6 +32,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   // the dynamic import at installer.ts:249, and the closure walker does not
   // follow dynamic imports. Re-add it if a static import is restored.
   'src/agentCli/geminiRunner.ts',
+  'src/agentCli/imageStaging.ts',
   'src/agentCli/index.ts',
   'src/agentCli/parse.ts',
   'src/agentCli/productPolicy.ts',
@@ -543,6 +544,8 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/imageNarrativeUpload.ts',
   'src/renderer/modules/imageSyncService.ts',
   'src/renderer/modules/intervalJitter.ts',
+  'src/renderer/modules/issueCollectConsent.ts',
+  'src/renderer/modules/issueCollectMode.ts',
   'src/renderer/modules/licenseUI.ts',
   'src/renderer/modules/localFolderImageLoader.ts',
   'src/renderer/modules/localImageModals.ts',

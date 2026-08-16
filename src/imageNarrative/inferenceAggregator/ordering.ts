@@ -126,10 +126,9 @@ function detectStrategy(
   const hasTimestamp = items.some((it) => Boolean(it.exif.takenAt));
   if (hasTimestamp) return 'time';
 
-  const hasLocation = items.some(
-    (it) => it.result.location_hint.trim().length > 0,
-  );
-  if (hasLocation) return 'location';
-
+  // [2026-08-16] No EXIF (직접 업로드/카톡 저장본) → keep the UPLOAD order.
+  // The upload UI numbers thumbnails by that order and the user's notes
+  // reference those numbers ("1~4번은 호텔") — a location-based reshuffle
+  // here silently broke that mapping and scrambled the story flow.
   return 'fallback';
 }

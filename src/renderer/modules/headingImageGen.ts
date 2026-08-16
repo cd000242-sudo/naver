@@ -35,6 +35,8 @@ declare const ImageManager: {
 declare const appendLog: (msg: string, target?: string) => void;
 // [v2.11.140] 이미지관리탭 Flow 구독 사전 가드 (openaiImageGuard.ts — 인라인 번들 동일 스코프)
 declare function checkFlowSubscription(imageSource: string): Promise<{ block: boolean; reason?: string }>;
+// [이슈 끝판왕 수집] issueCollectMode.ts — 인라인 번들 동일 스코프
+declare function runIssueEndgameCollect(searchKeyword: string, appendLogFn: (msg: string) => void): Promise<number>;
 declare let generatedImages: any[];
 declare let currentStructuredContent: any;
 declare let currentPostId: string | null;
@@ -2411,6 +2413,32 @@ export function initHeadingImageGeneration(): void {
         return;
       }
 
+      // [이슈 끝판왕 수집] 키워드 모드는 항상 신규 하네스 사용 (사용자 요청: 체크박스 없이 자동).
+      // URL이 입력된 경우만 기존 "URL 이미지 수집" 플로우 유지 — 사용자가 그 페이지의
+      // 이미지를 원한다는 명시적 의도이므로 검색 하네스로 덮지 않는다.
+      const issueSourceUrlEarly = (
+        (document.getElementById('unified-source-url') as HTMLInputElement)?.value?.trim()
+        || (document.getElementById('image-source-url') as HTMLInputElement)?.value?.trim()
+        || ''
+      );
+      const issueUrlModeEarly = /^https?:\/\//i.test(issueSourceUrlEarly);
+      if (!issueUrlModeEarly) {
+        try {
+          aiAutoCollectBtn.disabled = true;
+          aiAutoCollectBtn.innerHTML = '<span>🏆</span><span>이슈 끝판왕 수집 중...</span>';
+          const placed = await runIssueEndgameCollect(searchKeyword, (msg) => appendLog(msg, 'images-log-output'));
+          if (placed > 0) {
+            toastManager.info(`🏆 이슈 끝판왕 수집 완료: ${placed}개 배치!`);
+          }
+        } catch (issueErr: any) {
+          appendLog(`❌ 이슈 끝판왕 수집 오류: ${issueErr?.message || issueErr}`, 'images-log-output');
+        } finally {
+          aiAutoCollectBtn.disabled = false;
+          aiAutoCollectBtn.innerHTML = '<span>🤖</span><span>AI 자동 수집 및 저장하기</span>';
+        }
+        return;
+      }
+
       // ✅ 실시간 정보로 수집하기 체크박스 확인
       const realtimeCrawlCheckbox = document.getElementById('image-realtime-crawl') as HTMLInputElement;
       const useRealtimeCrawl = realtimeCrawlCheckbox?.checked ?? true;
@@ -3446,6 +3474,21 @@ export async function autoAnalyzeHeadings(structuredContent: any): Promise<void>
 
     // ✅ 생성된 이미지 그리드에도 표시
     displayGeneratedImages(imagesForUi);
+
+    // [2026-08-16] 사진 글생성처럼 "이미지 배치 → 카드 재구축" 순서인 플로우 복구:
+    // displayImageHeadingsWithPrompts가 카드를 빈 .images-grid로 새로 만들기 때문에,
+    // 여기서 updatePromptItemsWithImages를 다시 불러야 카드별 소형 그리드와
+    // 소제목 매칭 미리보기가 채워진다 (호출 누락 시 카드당 위치기반 1장만 표시되는 버그).
+    // displayGeneratedImages 뒤에 불러야 소제목별 올바른 렌더가 위치기반 렌더를 덮는다.
+    if (imagesForUi.length > 0) {
+      try {
+        (window as any).generatedImages = imagesForUi;
+        (window as any).imageManagementGeneratedImages = imagesForUi;
+        updatePromptItemsWithImages(imagesForUi);
+      } catch (e) {
+        console.warn('[headingImageGen] 프롬프트 카드 이미지 동기화 실패(무시):', e);
+      }
+    }
 
     appendLog(`✅ ${headings.length}개 소제목 분석 완료!`);
   } catch (error) {

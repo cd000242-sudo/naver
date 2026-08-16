@@ -23,6 +23,7 @@ import {
 } from './imageNarrativeReview.js';
 import { executeFullAutoFlow } from './fullAutoFlow.js';
 import { autoAnalyzeHeadings } from './headingImageGen.js';
+import { fillSemiAutoFields, enableSemiAutoPublishButton } from './contentGeneration.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -361,16 +362,43 @@ async function _handlePublish(reviewEdits?: unknown, generateOnly = false): Prom
         : '네이버 블로그 발행까지 완료했습니다.',
     });
     if (generateOnly) {
-      _populateSemiAutoEditor();
+      // [2026-08-16] 반자동 발행 배선 — 키워드 반자동 글생성과 동일 상태로 만든다.
+      // 이전: 손수 만든 필드 채움만 하고 발행 상태머신(hasGeneratedContent/발행모드)을
+      // 안 건드려서, 발행 버튼이 "먼저 글을 생성하세요"로 잠기거나 풀오토 경로로 새던 문제.
+      const sc = (window as any).currentStructuredContent;
+      try {
+        if (sc) fillSemiAutoFields(sc);
+        else _populateSemiAutoEditor();
+      } catch (e) {
+        console.warn('[ImageNarrativeMode] fillSemiAutoFields 실패 — 자체 채움 폴백:', e);
+        _populateSemiAutoEditor();
+      }
+
       // 일반 글생성과 동일하게 소제목 분석을 자동 실행 — 이미지 관리탭에 소제목 구조를
       // 채우고 배치된 사진을 본문 소제목별로 정리한다(사용자 보고: 자동 분석 누락).
       try {
-        const sc = (window as any).currentStructuredContent;
         if (sc?.headings?.length) await autoAnalyzeHeadings(sc);
       } catch (e) {
         console.warn('[ImageNarrativeMode] 소제목 자동 분석 실패(무시):', e);
       }
-      _showToast('글 생성 완료 — 반자동 편집 탭에서 확인 후 발행하세요.', 'info');
+
+      // 발행 상태머신 동기화: 생성 완료 플래그 + 반자동 모드 선택 + 발행 버튼 활성화.
+      try {
+        (window as any).markContentGenerated?.();
+        for (const selId of ['publish-mode-top-select', 'publish-mode-select']) {
+          const sel = document.getElementById(selId) as HTMLSelectElement | null;
+          if (sel) sel.value = 'semi-auto';
+        }
+        (window as any).syncPublishMode?.('semi-auto');
+        enableSemiAutoPublishButton();
+      } catch (e) {
+        console.warn('[ImageNarrativeMode] 발행 상태 동기화 실패(무시):', e);
+      }
+
+      const section = document.getElementById('unified-semi-auto-section');
+      if (section) section.style.display = 'block';
+      section?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      _showToast('글 생성 완료 — 확인 후 [반자동 발행 시작]을 누르면 바로 발행됩니다.', 'info');
     }
   } catch (err) {
     console.error('[ImageNarrativeMode] Flow failed:', err);

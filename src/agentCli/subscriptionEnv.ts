@@ -101,6 +101,22 @@ export const CLAUDE_SUBSCRIPTION_ISOLATION_ARGS = [
   '--no-session-persistence',
 ] as const;
 
+// [2026-08-16] Photo-mode variant: the model must READ staged image files, so the
+// wildcard tool ban is replaced with an explicit deny-list + a Read allowlist.
+// Measured on claude 2.1.233: `--disallowedTools '*' --allowedTools Read` does NOT
+// enable Read (wildcard wins) — the model then fakes a textual tool call and the
+// image is never seen. The explicit list below is the verified working form.
+// Read is the ONLY enabled tool: no shell, no writes, no network.
+export const CLAUDE_SUBSCRIPTION_IMAGE_READ_ARGS = [
+  '--safe-mode',
+  '--setting-sources', 'local',
+  '--disallowedTools',
+  'Bash,Edit,Write,NotebookEdit,WebFetch,WebSearch,Task,Agent,TodoWrite,Glob,Grep,KillShell,BashOutput,EnterWorktree,SlashCommand,Skill',
+  '--allowedTools', 'Read',
+  '--strict-mcp-config',
+  '--no-session-persistence',
+] as const;
+
 export function buildClaudeSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {
