@@ -432,6 +432,9 @@ try {
     'intervalJitter.js',  // ✅ [2026-05-23 A5] 발행 간격 jitter 유틸 (multiAccountManager보다 먼저 로드 필수)
     'featureLockModal.js',  // ✅ [2026-05-25 v2.10.353] Pro 기능 잠금 모달 (continuousPublishing/multiAccountManager보다 먼저 로드 필수 — window 글로벌 등록)
     'multiAccountManager.js',
+    // ✅ [이슈 끝판왕 수집] 저작권 동의 모달 + 수집 모드 (headingImageGen보다 먼저 로드 — declare 참조)
+    'issueCollectConsent.js',
+    'issueCollectMode.js',
     'headingImageGen.js',
     'imageDisplayGrid.js',
     'accountSettingsManager.js',  // ✅ [2026-03-24] 계정별 설정 관리 (licenseUI보다 먼저 로드 필수 - onAccountLogin/onAccountLogout 의존)

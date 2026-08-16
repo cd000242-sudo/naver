@@ -46,6 +46,39 @@ export function validateSearchImagesPayload(payload: unknown): ValidationResult<
 }
 
 /**
+ * issue:collectImages payload 검증 (이슈 끝판왕 수집)
+ */
+export function validateIssueCollectPayload(payload: unknown): ValidationResult<{
+  title: string;
+  headings: Array<{ title: string; body?: string }>;
+  mainKeyword?: string;
+}> {
+  if (!payload || typeof payload !== 'object') return { ok: false, error: 'payload는 object여야 합니다' };
+  const p = payload as Record<string, unknown>;
+  if (!isStr(p.title, 300)) return { ok: false, error: 'title은 300자 이하 string이어야 합니다' };
+  if (!Array.isArray(p.headings) || p.headings.length === 0 || p.headings.length > 30) {
+    return { ok: false, error: 'headings는 1~30개 배열이어야 합니다' };
+  }
+  const headings: Array<{ title: string; body?: string }> = [];
+  for (const h of p.headings) {
+    if (!h || typeof h !== 'object') return { ok: false, error: 'heading 항목은 object여야 합니다' };
+    const hh = h as Record<string, unknown>;
+    if (!isStr(hh.title, 300)) return { ok: false, error: 'heading.title은 300자 이하 string이어야 합니다' };
+    if (hh.body !== undefined && hh.body !== null && !isStr(hh.body, 20000)) {
+      return { ok: false, error: 'heading.body는 20000자 이하 string이어야 합니다' };
+    }
+    headings.push({ title: hh.title as string, body: (hh.body as string | undefined) ?? undefined });
+  }
+  if (p.mainKeyword !== undefined && p.mainKeyword !== null && !isStr(p.mainKeyword, 200)) {
+    return { ok: false, error: 'mainKeyword는 200자 이하 string이어야 합니다' };
+  }
+  return {
+    ok: true,
+    value: { title: p.title as string, headings, mainKeyword: (p.mainKeyword as string | undefined) ?? undefined },
+  };
+}
+
+/**
  * file:* payload 검증 (단일 경로 string)
  */
 export function validatePathPayload(filePath: unknown): ValidationResult<string> {
