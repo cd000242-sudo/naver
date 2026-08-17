@@ -80,14 +80,17 @@ ${body ? `- 해당 소제목 본문: ${body}\n` : ''}
   (옷의 로고 프린트, 배경 간판·현수막의 자연스러운 글자는 제외)
 - lowQuality: 심하게 흐리거나 깨졌거나 스크린샷 UI(브라우저·앱 화면)가 섞여 있는가
 
+- isPhoto: 카메라로 촬영된 실제 사진인가.
+  ⚠️ 차트·통계 그래프·앱/웹 화면 캡처·순위표·포스터·로고 이미지·글자만 있는 이미지·
+  일러스트는 false. (실측: 멜론 차트 캡처가 인물 사진 자리에 들어갔다)
 - soloSubject: 주체가 혼자 담겼거나 명백한 주인공인가. 여러 인물이 나란히 배치된
   콜라주·단체사진이면 false (탈락 사유는 아니고 순위만 뒤로 밀림)
 
-clean = relevant가 true이고, watermark·textOverlay·lowQuality 3가지가 모두 아니오일 때만 true.
+clean = relevant와 isPhoto가 모두 true이고, watermark·textOverlay·lowQuality 3가지가 모두 아니오일 때만 true.
 reason에는 false인 이유를 짧게 쓰세요 (예: "무관-고양이", "자막", "워터마크").
 
 응답은 JSON 배열만 출력 (이미지 순서대로, 설명 금지):
-[{"index":1,"relevant":true,"clean":true,"soloSubject":true,"reason":""},{"index":2,"relevant":false,"clean":false,"soloSubject":false,"reason":"무관-패션화보"}]`;
+[{"index":1,"relevant":true,"isPhoto":true,"clean":true,"soloSubject":true,"reason":""},{"index":2,"relevant":false,"isPhoto":false,"clean":false,"soloSubject":false,"reason":"차트 캡처"}]`;
 }
 
 /** Exported for unit tests — fail-closed verdict parsing. */
@@ -100,7 +103,7 @@ export function parseVerdicts(text: string, count: number): VisionVerdict[] {
   const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
   if (!jsonMatch) return fallback;
   try {
-    const parsed = JSON.parse(jsonMatch[0]) as Array<{ index?: number; clean?: boolean; relevant?: boolean; soloSubject?: boolean; reason?: string }>;
+    const parsed = JSON.parse(jsonMatch[0]) as Array<{ index?: number; clean?: boolean; relevant?: boolean; isPhoto?: boolean; soloSubject?: boolean; reason?: string }>;
     return Array.from({ length: count }, (_, i) => {
       const match = parsed.find((p) => p.index === i + 1);
       // Fail-closed: an image the model did not judge is NOT clean.
@@ -108,10 +111,14 @@ export function parseVerdicts(text: string, count: number): VisionVerdict[] {
       // 관련성은 별도 AND 조건 — 모델이 clean=true를 주면서 relevant를 빼먹거나
       // false로 주는 경우가 있어(라이브 실측: 무관 사진 통과) 코드에서 강제한다.
       const relevant = match.relevant === true;
+      // [2026-08-18] 실제 사진 요건 — 차트 캡처·그래픽이 인물 자리에 들어가던 실측 대응.
+      // 모델이 isPhoto를 빼먹으면 통과 불가(fail-closed).
+      const isPhoto = match.isPhoto === true;
       const cleanFlags = match.clean === true;
+      const reasonFallback = !relevant ? 'irrelevant' : (!isPhoto ? 'not-photo' : '');
       return {
-        clean: relevant && cleanFlags,
-        reason: String(match.reason || (relevant ? '' : 'irrelevant')),
+        clean: relevant && isPhoto && cleanFlags,
+        reason: String(match.reason || reasonFallback),
         soloSubject: match.soloSubject === true,
       };
     });

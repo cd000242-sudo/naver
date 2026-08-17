@@ -11,6 +11,25 @@ import type { HeadingQuerySet, IssueHeadingInput, IssueQueryPlan } from './types
 const LOG = '[IssueQueryFanout]';
 const BODY_EXCERPT_CHARS = 280;
 
+/**
+ * [2026-08-18] 이미지 관리탭이 만드는 메타 소제목 — 글의 내용이 아니라 "자리"를 뜻한다.
+ * 실측: "🖼️ 썸네일"이 검색어에 섞여 "블랙핑크 썸네일"로 나가면서 아이언맨 코스프레
+ * 기념사진(블로그 썸네일 이미지)이 대표 자리에 배치됐다.
+ */
+const META_HEADING_WORDS = ['썸네일', '마무리', '서론', '도입부', '대표이미지', '대표 이미지'];
+
+export function isMetaHeading(title: string): boolean {
+  const t = String(title || '');
+  return META_HEADING_WORDS.some((w) => t.includes(w));
+}
+
+/** 검색어에서 메타 단어를 제거한다 (AI가 소제목 문구를 그대로 넣은 경우 방어). */
+export function stripMetaWords(query: string): string {
+  let out = String(query || '');
+  for (const w of META_HEADING_WORDS) out = out.split(w).join(' ');
+  return out.replace(/[🖼️📝✍️🎬📌]/gu, '').replace(/\s+/g, ' ').trim();
+}
+
 const HOOK_STOPWORDS = new Set([
   '소식', '이유', '진짜', '정말', '놀란', '충격', '화제', '근황', '공개',
   '숨겨진', '그것', '이것', '모두', '드디어', '결국', '과연', '바로',
@@ -37,7 +56,10 @@ export function buildFallbackQueryPlan(
   const subject = generalizeIssueQuery(title, 2) || title.split(' ')[0] || '';
   const querySets: HeadingQuerySet[] = headings.map((h) => {
     // 주체를 앞에 두고 소제목 핵심어를 뒤에 붙인다 (주체 앵커 유지).
-    const base = generalizeIssueQuery(`${subject} ${h.title}`, 4) || subject;
+    // 메타 소제목(썸네일/마무리)은 주체만으로 검색 — 소제목 문구는 내용이 아니다.
+    const base = isMetaHeading(h.title)
+      ? subject
+      : (generalizeIssueQuery(`${subject} ${stripMetaWords(h.title)}`, 4) || subject);
     return {
       heading: h.title,
       koreanQuery: base,
@@ -89,6 +111,8 @@ ${sections}
 ⚠️ 소제목 문구를 그대로 검색어로 쓰지 마세요. 소제목은 후킹용 표현이라 시각적 주체가
 없습니다 (예: "44세부터 46세 겨울까지" → 이대로 검색하면 엉뚱한 사진이 나옴).
 반드시 mainSubject + (programName 또는 사건 핵심어)로 조합하세요.
+⚠️ "🖼️ 썸네일", "📝 마무리" 같은 소제목은 글의 내용이 아니라 이미지 자리 이름입니다.
+그 단어는 검색어에 절대 넣지 말고, 글 대표 사진(주체+사건)을 찾는 검색어를 만드세요.
 
 - koreanQuery: mainSubject + 사건/프로그램 핵심어 (예: "한다감 미운 우리 새끼 임신")
 - englishQuery: 로마자 인물명 + 영문 이슈어 (해외 소스용, 없으면 빈 문자열)
@@ -169,17 +193,21 @@ export async function buildIssueQueryPlan(
       // 후킹형 소제목에서 주체(인물명) 없는 쿼리가 나가 고양이·패션화보가 수집됐다.
       // 한글/직찍/행사 쿼리는 반드시 주체를 포함시킨다 (영문은 로마자 주체가 따로 있음).
       const anchor = (q: string): string => {
-        const query = q.trim();
+        const query = stripMetaWords(q);
         if (!query) return '';
         if (!subject) return query;
         return query.includes(subject) ? query : `${subject} ${query}`;
       };
+      // 메타 소제목(썸네일/마무리)은 글 대표 이미지 자리 — 소제목 문구 대신
+      // "주체 + 프로그램/사건"으로만 검색한다.
+      const meta = isMetaHeading(h.title);
+      const metaKorean = [subject, programName].filter(Boolean).join(' ').trim() || subject;
       return {
         heading: h.title,
-        koreanQuery: anchor(String(match?.koreanQuery || '').trim() || fb.koreanQuery),
+        koreanQuery: meta ? metaKorean : anchor(String(match?.koreanQuery || '').trim() || fb.koreanQuery),
         englishQuery: String(match?.englishQuery || '').trim(),
         fandomQuery: anchor(String(match?.fandomQuery || '').trim() || fb.fandomQuery),
-        eventQuery: anchor(String(match?.eventQuery || '').trim()),
+        eventQuery: meta ? (programName || '') : anchor(String(match?.eventQuery || '').trim()),
         broaderQuery: subject,
         // 기본 1장 — AI가 명시적으로 2~3을 권한 경우만 반영 (범위 밖은 1로 클램프)
         recommendedImages: Number.isInteger(countRaw) && countRaw >= 1 && countRaw <= 3 ? countRaw : 1,

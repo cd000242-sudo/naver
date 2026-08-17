@@ -21,6 +21,7 @@ import {
     type BatchImageDestination,
 } from './imageDownloadPathPolicy.js';
 import { summarizeBatchImageDownloads } from './imageDownloadResultPolicy.js';
+import { resolveExtensionFromBytes } from './imageExtensionPolicy.js';
 
 export function registerImageDownloadHandlers(): void {
     ipcMain.handle('image:downloadAndSave', async (_event, imageUrl: string, heading: string, postTitle?: string, postId?: string, category?: string) => {
@@ -76,6 +77,13 @@ export function registerImageDownloadHandlers(): void {
                     ext = path.extname(parsedUrl.pathname) || '.jpg';
                 }
             }
+
+            // [2026-08-18] 확장자는 URL이 아니라 "실제 파일 내용"으로 정한다.
+            //   실측: 수집 이미지가 .jsp / .php / .fwebp 같은 동적 경로 확장자로 저장돼,
+            //   네이버 에디터가 발행 중 "파일 전송 오류 — 알 수 없는 파일"로 거부하고
+            //   3회 재시도 후 발행이 중단됐다(사용자 실측 2026-08-18).
+            //   매직 바이트로 실제 포맷을 판별해 네이버가 받는 확장자로 강제한다.
+            ext = resolveExtensionFromBytes(buffer, ext);
 
             // ✅ [v2.10.21] image:downloadAndSave 저장 경로를 다른 IPC와 통일 — 사용자 보고
             //   '풀오토만 폴더 생성되고 URL 이미지 수집은 안 된다'
@@ -286,7 +294,12 @@ export function registerImageDownloadHandlers(): void {
                 }
 
                 try {
-                    const ext = getExtensionFromContentType(result.contentType, img.url);
+                    // [2026-08-18] 배치 저장도 동일 정책 — Content-Type/URL이 틀려도
+                    // 실제 바이트로 확장자를 확정한다 (네이버 "알 수 없는 파일" 차단).
+                    const ext = resolveExtensionFromBytes(
+                        result.buffer,
+                        getExtensionFromContentType(result.contentType, img.url),
+                    );
                     const safeHeading = img.heading.replace(/[<>:"/\\|?*,;#&=+%!'(){}\[\]~]/g, '_').replace(/_+/g, '_').replace(/\.+$/g, '').substring(0, 50);
                     const fileName = buildBatchImageFileName(
                         i,

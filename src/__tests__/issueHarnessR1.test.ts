@@ -10,6 +10,8 @@ import {
 import {
   generalizeIssueQuery,
   buildFallbackQueryPlan,
+  isMetaHeading,
+  stripMetaWords,
 } from '../crawler/issueHarness/queryFanout.js';
 import { validateIssueCollectPayload } from '../main/ipc/validators.js';
 
@@ -80,6 +82,28 @@ describe('issueHarness queryFanout fallback', () => {
     expect(plan.querySets[0].broaderQuery.length).toBeGreaterThan(0);
     // 기본 이미지 권장 수는 1장 (AI가 명시할 때만 2~3)
     expect(plan.querySets[0].recommendedImages).toBe(1);
+  });
+});
+
+describe('[2026-08-18] 메타 소제목(썸네일/마무리) 오염 차단', () => {
+  it('메타 소제목을 식별한다', () => {
+    expect(isMetaHeading('🖼️ 썸네일')).toBe(true);
+    expect(isMetaHeading('📝 마무리')).toBe(true);
+    expect(isMetaHeading('멤버 전원 참석 전 나온 스케줄')).toBe(false);
+  });
+
+  it('검색어에서 메타 단어와 배지 이모지를 제거한다', () => {
+    expect(stripMetaWords('블랙핑크 🖼️ 썸네일')).toBe('블랙핑크');
+    expect(stripMetaWords('마무리 정리')).toBe('정리');
+  });
+
+  it('폴백 플랜에서 메타 소제목은 주체만으로 검색한다 (아이언맨 사건 방지)', () => {
+    const plan = buildFallbackQueryPlan('블랙핑크 10주년 밋앤그릿 논란', [
+      { title: '🖼️ 썸네일' },
+      { title: '멤버 전원 참석 전 나온 스케줄 안내의 혼란' },
+    ]);
+    expect(plan.querySets[0].koreanQuery).not.toContain('썸네일');
+    expect(plan.querySets[0].koreanQuery).toBe(plan.mainSubject);
   });
 });
 

@@ -101,14 +101,26 @@ describe('candidate ordering + ranking', () => {
 });
 
 describe('parseVerdicts (fail-closed + 관련성)', () => {
-  it('정상 JSON 배열을 판정으로 매핑한다 (relevant+clean 모두 true여야 통과)', () => {
+  it('정상 JSON 배열을 판정으로 매핑한다 (relevant+isPhoto+clean 모두 true여야 통과)', () => {
     const verdicts = parseVerdicts(
-      '[{"index":1,"relevant":true,"clean":true,"reason":""},{"index":2,"relevant":true,"clean":false,"reason":"자막"}]',
+      '[{"index":1,"relevant":true,"isPhoto":true,"clean":true,"reason":""},{"index":2,"relevant":true,"isPhoto":true,"clean":false,"reason":"자막"}]',
       2,
     );
     expect(verdicts[0].clean).toBe(true);
     expect(verdicts[1].clean).toBe(false);
     expect(verdicts[1].reason).toBe('자막');
+  });
+
+  it('[2026-08-18] 사진이 아닌 이미지(차트 캡처·그래픽)는 탈락한다', () => {
+    // 실측: 멜론 차트 캡처가 인물 사진 자리에 배치됐다 — isPhoto 요건으로 차단.
+    const chart = parseVerdicts(
+      '[{"index":1,"relevant":true,"isPhoto":false,"clean":true,"reason":""}]',
+      1,
+    );
+    expect(chart[0].clean).toBe(false);
+    expect(chart[0].reason).toBe('not-photo');
+    // isPhoto 필드 누락도 불통과 (fail-closed)
+    expect(parseVerdicts('[{"index":1,"relevant":true,"clean":true}]', 1)[0].clean).toBe(false);
   });
 
   it('[2026-08-17] 깨끗하지만 무관한 이미지는 탈락한다 (고양이·화보 사건)', () => {
@@ -129,7 +141,7 @@ describe('parseVerdicts (fail-closed + 관련성)', () => {
 
   it('파싱 불가/누락 인덱스는 전부 불통과(fail-closed)', () => {
     expect(parseVerdicts('말도 안 되는 응답', 2).every((v) => !v.clean)).toBe(true);
-    const partial = parseVerdicts('[{"index":1,"relevant":true,"clean":true}]', 3);
+    const partial = parseVerdicts('[{"index":1,"relevant":true,"isPhoto":true,"clean":true}]', 3);
     expect(partial[0].clean).toBe(true);
     expect(partial[1].clean).toBe(false);
     expect(partial[2].clean).toBe(false);
@@ -159,8 +171,9 @@ describe('[2026-08-17] 주체 앵커 + 키/주체 없을 때 미배치 (source �
   it('쿼리 팬아웃이 한글/직찍/행사 쿼리에 주체를 앵커한다', () => {
     const src = readFileSync(new URL('../crawler/issueHarness/queryFanout.ts', import.meta.url), 'utf8');
     expect(src).toMatch(/const anchor = /);
-    expect(src).toMatch(/koreanQuery: anchor\(/);
+    // 메타 소제목은 주체+프로그램으로 대체되므로 삼항 분기 형태를 함께 허용한다.
+    expect(src).toMatch(/koreanQuery: meta \?[\s\S]{0,120}anchor\(/);
     expect(src).toMatch(/fandomQuery: anchor\(/);
-    expect(src).toMatch(/eventQuery: anchor\(/);
+    expect(src).toMatch(/eventQuery: meta \?[\s\S]{0,80}anchor\(/);
   });
 });

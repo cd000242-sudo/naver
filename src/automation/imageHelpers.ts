@@ -942,6 +942,28 @@ export async function insertBase64ImageAtCursor(
     }
   }
 
+  // [2026-08-18] 확장자 정상화 — 네이버 "파일 전송 오류(알 수 없는 파일)" 차단.
+  //   실측: 수집 이미지가 .jsp 등 동적 경로 확장자로 저장돼 있으면 에디터가 업로드를
+  //   거부하고, 발행이 3회 재시도 끝에 중단됐다. 내용은 정상 JPEG였다.
+  //   저장 단계(imageExtensionPolicy)에서 이미 막지만, 예전에 저장된 파일과 외부
+  //   경로도 있으므로 업로드 직전 한 번 더 확인해 필요 시 올바른 확장자로 복사한다.
+  try {
+    const currentExt = pathModule.extname(absolutePath).toLowerCase();
+    const NAVER_OK = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp'];
+    if (!NAVER_OK.includes(currentExt)) {
+      const head = await fs.readFile(absolutePath);
+      const { resolveExtensionFromBytes } = await import('../main/ipc/imageExtensionPolicy.js');
+      const safeExt = resolveExtensionFromBytes(head, '.jpg');
+      const fixedPath = pathModule.join(os.tmpdir(), `naver-blog-img-fixext-${Date.now()}${safeExt}`);
+      await fs.writeFile(fixedPath, head);
+      self.log(`   🔧 확장자 정상화: ${currentExt || '(없음)'} → ${safeExt} (네이버 업로드 거부 방지)`);
+      absolutePath = fixedPath;
+      isTemporaryFile = true;
+    }
+  } catch (extError) {
+    self.log(`   ⚠️ 확장자 정상화 실패(원본으로 계속): ${(extError as Error).message}`);
+  }
+
   // ✅ 네이버 블로그 이미지 용량 제한 가드 (공식 단일 이미지 20MB 초과 시 자동 압축)
   absolutePath = await ensureImageUnderSizeLimit(absolutePath, (msg: string) => self.log(msg));
 
