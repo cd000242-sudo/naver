@@ -780,14 +780,56 @@ async function mapWithConcurrency(values, limit, worker) {
   return results;
 }
 
+/**
+ * 에이전트가 미리 만들어 둔 제목 창고.
+ *
+ * 이 크론은 15분마다 데이터를 통째로 다시 만든다. 그래서 밖에서 제목을 고쳐
+ * 넣어 봐야 다음 회차에 지워진다 — 붙이려면 **만드는 자리**에서 붙여야 한다.
+ * 그런데 이 저장소에는 구독 자격이 없다(있는 곳은 leword-app 저장소다).
+ *
+ * 그래서 자격이 있는 쪽이 키워드별 제목을 만들어 이 파일에 얹어 두고, 여기서는
+ * 키워드로 찾아 쓴다. 없으면 기존 템플릿 그대로 — 창고가 비어도 화면은 산다.
+ */
+const BRIEF_TITLE_CACHE_PATH = join(OUT_DIR, 'brief-titles.json');
+let briefTitleCache = null;
+
+function loadBriefTitleCache() {
+  if (briefTitleCache) return briefTitleCache;
+  briefTitleCache = new Map();
+  try {
+    if (existsSync(BRIEF_TITLE_CACHE_PATH)) {
+      const raw = JSON.parse(readFileSync(BRIEF_TITLE_CACHE_PATH, 'utf8'));
+      for (const entry of raw?.titles || []) {
+        const key = String(entry?.keyword || '').trim();
+        if (key) briefTitleCache.set(key, entry);
+      }
+      report.push(`  INFO     brief-titles 창고 ${briefTitleCache.size}건 적재`);
+    }
+  } catch (error) {
+    report.push(`  WARN     brief-titles 적재 실패(템플릿으로 계속): ${String(error?.message || error).slice(0, 100)}`);
+  }
+  return briefTitleCache;
+}
+
 function sourceGroundedTitles(keyword, laneId, headlines) {
   const lead = cleanNewsValue(headlines[0], 72) || keyword;
   const laneLabel = LANE_COLLECTORS.find((lane) => lane.id === laneId)?.label || laneId;
-  return {
+  const fallback = {
     seo: `${keyword} 최신 이슈와 핵심 내용 정리`,
     home: `${keyword}, ${lead} 관련 확인할 점`,
     topic: keyword,
     topicGroup: `${laneLabel} 실시간 검색어`,
+  };
+
+  const cached = loadBriefTitleCache().get(String(keyword || '').trim());
+  if (!cached) return fallback;
+  // 창고에 있는 것만 갈아끼운다. 한 칸이 비었다고 나머지까지 버리지 않는다.
+  return {
+    ...fallback,
+    ...(cached.seo ? { seo: cached.seo } : {}),
+    ...(cached.home ? { home: cached.home } : {}),
+    ...(cached.topic ? { topic: cached.topic } : {}),
+    aiTitled: Boolean(cached.seo || cached.home),
   };
 }
 
