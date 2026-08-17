@@ -41,11 +41,20 @@ jobs:
           npx playwright install --with-deps chromium
 
       # 브리프 제목의 두뇌를 API 키가 아니라 **구독**으로 돌리기 위한 준비다.
-      # 토큰이 없으면 설치도 건너뛰고, 스크립트는 기존 경로(API 키 → 템플릿)로
-      # 그대로 내려가므로 크론이 깨지지 않는다.
+      # 토큰이 없으면 설치를 건너뛰고 기존 경로(API 키 → 템플릿)로 내려간다.
+      #
+      # 주의: secrets 는 step 의 `if:` 조건에서 못 쓴다 — 그렇게 썼다가 워크플로
+      # 파일 자체가 무효가 되어 잡이 0개인 채 크론이 통째로 죽었다(2026-08-18,
+      # 19시대 전 회차 실패 실측). env 로 받아 셸에서 분기한다.
       - name: Install Claude Code (구독 브리프)
-        if: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
-        run: npm install -g @anthropic-ai/claude-code
+        env:
+          HAS_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+        run: |
+          if [ "$HAS_TOKEN" = "true" ]; then
+            npm install -g @anthropic-ai/claude-code
+          else
+            echo '구독 토큰 없음 — 설치 건너뜀 (기존 경로로 동작)'
+          fi
 
       - name: Refresh, verify and publish (multi-pass)
         id: commit
