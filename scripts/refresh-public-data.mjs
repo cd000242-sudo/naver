@@ -186,6 +186,58 @@ async function collectNate() {
   return unique.slice(0, 10).map((keyword, index) => ({ rank: index + 1, keyword }));
 }
 
+/**
+ * 실시간 검색어 정제 — "엉성한 단어나 문장이 아닌 깔끔하고 정확한 검색어"
+ * (사장님 지시 2026-08-18).
+ *
+ * 실시간 레인 키워드는 뉴스 집계에서 오는 경우가 있어 쉼표·따옴표·말줄임이
+ * 섞인다("김민석, 신임 당대표 수락"). 사람이 검색창에 치는 형태로 다듬는다 —
+ * 문장 부호를 걷고, 접두 수식("배우/가수")과 대괄호 태그를 떼고, 공백을 정리.
+ * 새 낱말을 만들지 않는다. 있는 글자를 걷어낼 뿐이다.
+ */
+function cleanRealtimeQuery(raw) {
+  const text = decodeHtml(String(raw || ''))
+    .replace(/[“”"'‘’]/g, '')
+    .replace(/\[[^\]]{1,20}\]/g, '')
+    .replace(/[,·…]+/g, ' ')
+    .replace(/\.{2,}/g, ' ')
+    .replace(/\s+[-–—]\s+.*$/u, '')     // "제목 - 매체명" 꼬리
+    .replace(/^(?:배우|가수|방송인|개그맨|아이돌)\s+/u, '')
+    .replace(/[!?~♥]+$/u, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  // 정제 후 두 글자도 안 남으면 원문을 유지한다 — 지우는 게 능사가 아니다.
+  return text.length >= 2 ? text.slice(0, 40) : String(raw || '').trim().slice(0, 40);
+}
+
+/**
+ * 스포츠 레인(사장님 지시 2026-08-18: "스포츠도 추가해줘").
+ * 네이트 스포츠 많이 본 뉴스 — 연예 랭킹(collectNateEntIssues)과 같은 마크업.
+ * 검색어는 제목에서 뽑은 개체명(선수·팀·대회), 제목은 맥락으로 함께 싣는다.
+ */
+async function collectNateSports() {
+  const res = await get('https://news.nate.com/rank/interest?sc=spo&p=day', { encoding: 'euc-kr' });
+  if (!res.ok) return [];
+  const titles = [...res.text.matchAll(/<h2 class="tit">([^<]{5,80})<\/h2>/g)]
+    .map((m) => m[1]
+      .replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")
+      .replace(/\[[^\]]{1,14}\]/g, '')
+      .replace(/…$/, '')
+      .replace(/\s+/g, ' ')
+      .trim())
+    .filter((title) => title.length >= 6);
+  const rows = [];
+  const seen = new Set();
+  for (const title of titles) {
+    const entity = entitySeedCandidates(title)[0];
+    if (!entity || seen.has(entity)) continue;
+    seen.add(entity);
+    rows.push({ rank: rows.length + 1, keyword: entity, context: title });
+    if (rows.length >= 10) break;
+  }
+  return rows;
+}
+
 async function collectNateEntIssues() {
   // 네이트 연예 랭킹은 EUC-KR — 디코딩 지정 필수
   const res = await get('https://news.nate.com/rank/interest?sc=ent&p=day', { encoding: 'euc-kr' });
@@ -224,26 +276,13 @@ function cleanIssueHeadline(raw) {
 }
 
 function extractIssueKeyword(title) {
-  const clean = cleanIssueHeadline(title);
-  if (!clean) return '';
-
-  // Keep an exact, useful headline when an unambiguous topic cannot be
-  // determined. A complete headline is much safer than a fabricated one-word
-  // "keyword" such as "배우", "결혼", or "10년".
-  const withoutLeadQuote = clean
-    .replace(/^[“"'‘][^”"'’]{2,42}[”"'’]\s*/u, '')
-    .replace(/^(?:배우|가수|방송인|개그맨|아이돌)\s+/u, '')
-    .trim();
-  const subject = withoutLeadQuote.split(/[,…]/u)[0].replace(/\s+/g, ' ').trim();
-  const event = clean.match(/결혼|웨딩|열애|동거|프로포즈|임신|출산|컴백|시구|하차|출연|공개|이별/u)?.[0] || '';
-
-  if (subject.includes('♥') && subject.length >= 3 && subject.length <= 32) {
-    return `${subject.replace(/♥/g, ' ').replace(/\s+/g, ' ')} ${event || '커플'}`.trim();
-  }
-  if (event && subject.length >= 2 && subject.length <= 24) {
-    return `${subject} ${event}`.trim();
-  }
-  return clean.slice(0, 72);
+  /*
+   * 이슈 레인은 크롤링한 기사 제목을 그대로 쓴다(사장님 지시 2026-08-18:
+   * "이슈는 크롤링해 온 거 그대로 띄워도 돼, 그게 제목이 될 수 있거든").
+   * 예전에는 주어+사건을 재조합했는데("박주호 안나 커플"류), 조합은 우리가
+   * 만든 문장이지 실측이 아니다. 기자 노출/시각 꼬리와 태그만 걷어낸다.
+   */
+  return cleanIssueHeadline(title).slice(0, 72);
 }
 
 /**
@@ -1158,6 +1197,7 @@ const LANE_COLLECTORS = [
   { id: 'daum', label: '다음', collect: collectDaumTrend },
   { id: 'nate', label: '네이트', collect: collectNate },
   { id: 'zum', label: '줌', collect: collectZum },
+  { id: 'sports', label: '스포츠', collect: collectNateSports },
   { id: 'policy', label: '정책', collect: collectPolicy },
   { id: 'issue', label: '이슈', collect: collectLatestIssueHeadlines },
 ];
@@ -1173,7 +1213,19 @@ async function refreshSourceSignals() {
   let expansionCount = 0;
   for (let index = 0; index < LANE_COLLECTORS.length; index += 1) {
     const config = LANE_COLLECTORS[index];
-    const raw = collected[index];
+    /*
+     * 이슈 레인은 크롤링해 온 기사 제목 그대로가 곧 제목이다(사장님 확인).
+     * 나머지 레인은 검색어 형태로 다듬는다 — 쉼표·따옴표 낀 뉴스 조각이
+     * 검색어 자리에 앉으면 화면 전체가 엉성해 보인다.
+     */
+    const raw = config.id === 'issue'
+      ? collected[index]
+      : (() => {
+        const seen = new Set();
+        return collected[index]
+          .map((row) => ({ ...row, keyword: cleanRealtimeQuery(row.keyword) }))
+          .filter((row) => row.keyword && !seen.has(row.keyword) && seen.add(row.keyword));
+      })();
     if (raw.length === 0) {
       const previousLane = previousLanes.get(config.id);
       if (previousLane?.items?.length) {

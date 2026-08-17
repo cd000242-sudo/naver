@@ -5,7 +5,7 @@
  * 필드는 전부 **수집된 실측값**이다. 화면에서 새로 계산해 채워 넣지 않는다.
  */
 
-export type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'policy' | 'issue';
+export type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'sports' | 'policy' | 'issue';
 
 export type SourceInsight = {
     /** 배치가 계산해 담아준다. 여기서 다시 만들지 않는다. */
@@ -62,6 +62,8 @@ export const SOURCE_SEARCH_PATHS: Record<SourceLaneId, (keyword: string) => stri
     daum: (keyword) => `https://search.daum.net/search?w=tot&q=${encodeURIComponent(keyword)}`,
     nate: (keyword) => `https://search.nate.com/search/all.html?q=${encodeURIComponent(keyword)}`,
     zum: (keyword) => `https://search.zum.com/search.zum?query=${encodeURIComponent(keyword)}`,
+    // 스포츠는 뉴스 검색이 원본 확인에 가장 빠르다 — 선수·경기 이슈라서다.
+    sports: (keyword) => `https://search.naver.com/search.naver?where=news&query=${encodeURIComponent(keyword)}`,
     policy: (keyword) => `https://www.korea.kr/search?srchKeyword=${encodeURIComponent(keyword)}`,
     issue: (keyword) => `https://search.naver.com/search.naver?where=news&query=${encodeURIComponent(keyword)}`,
 };

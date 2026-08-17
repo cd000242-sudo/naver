@@ -81,6 +81,7 @@ const SOURCE_LANE_CONFIGS: SourceLaneConfig[] = [
     { id: 'daum', label: '다음', accent: '#4d93ff', description: '생활/뉴스 검색 신호' },
     { id: 'nate', label: '네이트', accent: '#ff6b6b', description: '이슈와 방송 검색 흐름' },
     { id: 'zum', label: '줌', accent: '#f4c95d', description: '포털 이슈 보조 신호' },
+    { id: 'sports', label: '스포츠', accent: '#5aa9ff', description: '스포츠 이슈와 선수 검색 흐름' },
     { id: 'policy', label: '정책', accent: '#44d7b6', description: '지원금과 공공 알림' },
     { id: 'issue', label: '이슈', accent: '#c084fc', description: '시간순 최신 연예 기사 흐름' },
 ];
