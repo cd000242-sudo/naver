@@ -63,6 +63,8 @@ function LewordStyles() {
             .lw-navi em { font-style: normal; }
             /* 데스크톱은 전체 라벨, 모바일은 짧은 라벨 — 미디어쿼리가 토글한다. */
             .lw-navi-short { display: none; }
+            /* 모바일 햄버거 — 데스크톱에서는 존재하지 않는다. */
+            .lw-mobile-toggle, .lw-mobile-menu { display: none; }
             .lw-navi:hover { background: rgba(255,255,255,.045); color: #ebedf2; }
             .lw-navi.on {
                 background: linear-gradient(135deg, rgba(124,92,255,.20), rgba(124,92,255,.06));
@@ -815,30 +817,63 @@ function LewordStyles() {
                     padding: 16px 14px;
                 }
                 /*
-                 * 가로 스크롤(스크롤바 숨김)은 "탭이 하나뿐"으로 보이게 했다 —
-                 * 첫 탭의 긴 라벨이 폭을 다 먹으면 나머지가 있는지 알 길이 없다.
-                 * 줄바꿈으로 여섯 탭을 전부 보이게 하고, 라벨은 short 로 줄인다.
+                 * 모바일 내비 = 햄버거(사장님 지시: 알약은 대충이다).
+                 * 세로 사이드탭은 숨기고, [현재 탭명 · ☰] 버튼 하나 + 펼침 메뉴만 쓴다.
                  */
-                .lw-nav { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+                .lw-nav { display: none; }
+                .lw-brand { padding: 0 2px 12px; }
                 /*
-                 * 모바일 탭 알약 — 사이트 스킨 언어(보라 글로우) 그대로.
-                 * width:100% 를 풀어야 알약형으로 줄바꿈된다 — 안 풀면 한 줄에
-                 * 하나씩 늘어선다(실측). 활성 탭은 데스크톱 .on 과 같은 보라
-                 * 그라디언트에 글로우를 살짝 얹어 "지금 어디"가 한눈에 잡힌다.
+                 * overflow 를 visible 로 되돌려야 한다 — 데스크톱 사이드바의
+                 * overflow-y:auto 가 남으면 절대배치 메뉴가 이 박스 안에서
+                 * 클리핑된다(실측: 좌표는 정상인데 픽셀이 안 그려지고, 첫 항목
+                 * 조각이 토글 위로 비어져 나왔다).
                  */
-                .lw-navi {
-                    flex: 0 0 auto; width: auto;
-                    padding: 8px 14px; font-size: 13px;
-                    border: 1px solid rgba(255,255,255,.10);
-                    border-radius: 999px;
-                    background: rgba(255,255,255,.03);
+                /*
+                 * top:auto 필수 — 기본 스타일의 sticky top:72px 가 relative 에서도
+                 * 살아나 사이드 전체를 72px 내려앉혀 본문 제목과 겹쳤다(실측:
+                 * 그리드 행은 맞는데 aside 만 +72 로 그려짐). 유령 텍스트의 진범.
+                 */
+                .lw-side { position: relative; top: auto; overflow: visible; }
+                .lw-mobile-toggle {
+                    display: flex; align-items: center; justify-content: space-between;
+                    width: 100%;
+                    padding: 13px 16px;
+                    border: 1px solid rgba(124,92,255,.30);
+                    border-radius: 13px;
+                    background: linear-gradient(135deg, rgba(124,92,255,.14), rgba(255,255,255,.02));
+                    color: #fff; font-size: 14.5px; font-weight: 800;
+                    cursor: pointer;
                 }
-                .lw-navi.on {
-                    border-color: rgba(124,92,255,.55);
-                    background: linear-gradient(135deg, rgba(124,92,255,.30), rgba(177,76,255,.12));
-                    box-shadow: 0 0 0 1px rgba(124,92,255,.18), 0 4px 18px rgba(124,92,255,.22);
+                .lw-mobile-current { display: flex; align-items: center; gap: 9px; }
+                .lw-mobile-current span { opacity: .9; }
+                .lw-burger { font-size: 17px; color: #b8a6ff; line-height: 1; }
+                .lw-mobile-menu {
+                    display: flex; flex-direction: column;
+                    position: absolute; left: 14px; right: 14px; top: calc(100% - 6px);
+                    z-index: 60;
+                    padding: 8px;
+                    border: 1px solid rgba(124,92,255,.28);
+                    border-radius: 15px;
+                    background: #0c0f16;
+                    box-shadow: 0 18px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(124,92,255,.10);
                 }
-                .lw-brand { padding-bottom: 12px; }
+                .lw-mobile-item {
+                    display: flex; align-items: center; gap: 12px;
+                    width: 100%;
+                    padding: 13px 14px;
+                    border: none; border-radius: 11px;
+                    background: transparent;
+                    color: #c6ccd9; font-size: 14.5px; font-weight: 700; text-align: left;
+                    cursor: pointer;
+                }
+                .lw-mobile-item span { width: 20px; text-align: center; opacity: .85; }
+                .lw-mobile-item em { font-style: normal; flex: 1; }
+                .lw-mobile-item b { color: #b14cff; font-size: 9px; }
+                .lw-mobile-item.on {
+                    color: #fff;
+                    background: linear-gradient(135deg, rgba(124,92,255,.26), rgba(177,76,255,.08));
+                }
+                .lw-mobile-item:active { background: rgba(255,255,255,.06); }
                 .lw-navi span { display: none; }
                 .lw-navi-full { display: none; }
                 .lw-navi-short { display: inline; }

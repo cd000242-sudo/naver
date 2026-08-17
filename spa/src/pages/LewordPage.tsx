@@ -39,6 +39,9 @@ function LewordPage() {
     const activeTab: TabId = isTabId(tabParam) ? tabParam : 'golden';
     /** 탭 사이로 키워드를 넘긴다 — 황금보드에서 고른 걸 분석 탭이 이어받는다. */
     const [handoffKeyword, setHandoffKeyword] = useState(searchParams.get('keyword') || '');
+    /** 모바일 햄버거 메뉴 열림 상태. 탭을 고르면 닫힌다. */
+    const [mobileNavOpen, setMobileNavOpen] = useState(false);
+    const activeMeta = TABS.find((tab) => tab.id === activeTab) ?? TABS[0];
 
     useEffect(() => {
         const previous = document.title;
@@ -70,6 +73,42 @@ function LewordPage() {
                     <span className="lw-logo" aria-hidden="true">L</span>
                     <b>LEWORD</b>
                 </div>
+
+                {/*
+                  * 모바일 햄버거(사장님 지시 2026-08-17: "알약은 대충이다 —
+                  * 햄버거처럼 깔끔하게"). 현재 탭명 + ☰ 버튼 하나만 두고,
+                  * 누르면 전체 탭이 카드 메뉴로 펼쳐진다. 데스크톱에서는 CSS 가
+                  * 이 버튼·메뉴를 숨기고 기존 세로 사이드탭을 그대로 쓴다.
+                  */}
+                <button
+                    type="button"
+                    className="lw-mobile-toggle"
+                    aria-expanded={mobileNavOpen}
+                    aria-controls="lw-mobile-menu"
+                    onClick={() => setMobileNavOpen((open) => !open)}
+                >
+                    <span className="lw-mobile-current">
+                        <span aria-hidden="true">{activeMeta.icon}</span> {activeMeta.short}
+                    </span>
+                    <span className="lw-burger" aria-hidden="true">{mobileNavOpen ? '✕' : '☰'}</span>
+                </button>
+                {mobileNavOpen && (
+                    <div className="lw-mobile-menu" id="lw-mobile-menu" role="menu">
+                        {TABS.map((tab) => (
+                            <button
+                                key={tab.id}
+                                type="button"
+                                role="menuitem"
+                                className={`lw-mobile-item${activeTab === tab.id ? ' on' : ''}`}
+                                onClick={() => { selectTab(tab.id); setMobileNavOpen(false); }}
+                            >
+                                <span aria-hidden="true">{tab.icon}</span>
+                                <em>{tab.label}</em>
+                                {activeTab === tab.id && <b aria-hidden="true">●</b>}
+                            </button>
+                        ))}
+                    </div>
+                )}
 
                 <nav className="lw-nav">
                     {TABS.map((tab) => (
