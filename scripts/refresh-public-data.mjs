@@ -211,28 +211,38 @@ function cleanRealtimeQuery(raw) {
 }
 
 /**
- * 스포츠 레인(사장님 지시 2026-08-18: "스포츠도 추가해줘").
- * 네이트 스포츠 많이 본 뉴스 — 연예 랭킹(collectNateEntIssues)과 같은 마크업.
+ * 스포츠 레인(사장님 지시 2026-08-18: "스포츠도 추가해줘" — 소스는 네이버).
+ *
+ * 네이버 스포츠 많이 본 뉴스(모바일 랭킹). 데스크톱은 302 로 튕기고 모바일이
+ * 하이드레이션 JSON 에 {"rank":n, ..., "title":"..."} 로 싣는다(실측).
  * 검색어는 제목에서 뽑은 개체명(선수·팀·대회), 제목은 맥락으로 함께 싣는다.
  */
-async function collectNateSports() {
-  const res = await get('https://news.nate.com/rank/interest?sc=spo&p=day', { encoding: 'euc-kr' });
+async function collectNaverSports() {
+  const res = await get('https://m.sports.naver.com/ranking', {
+    headers: { 'User-Agent': 'Mozilla/5.0 (Linux; Android 13) AppleWebKit/537.36' },
+  });
   if (!res.ok) return [];
-  const titles = [...res.text.matchAll(/<h2 class="tit">([^<]{5,80})<\/h2>/g)]
-    .map((m) => m[1]
-      .replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")
-      .replace(/\[[^\]]{1,14}\]/g, '')
-      .replace(/…$/, '')
-      .replace(/\s+/g, ' ')
-      .trim())
-    .filter((title) => title.length >= 6);
+  // 페이지에는 뉴스 랭킹과 숏폼/영상 랭킹이 섞여 있어 rank 가 중복된다(실측).
+  // 언론사(officeName)가 붙은 것만 뉴스다 — 숏폼 제목은 검색어 재료가 못 된다.
+  const entries = [...res.text.matchAll(/\{"rank":(\d+),[^{}]*?"officeName":"[^"]+","newsDateTime":"[^"]+","title":"((?:[^"\\]|\\.){8,160})"/g)]
+    .map((m) => ({
+      rank: Number(m[1]),
+      title: m[2]
+        .replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+        .replace(/\\"/g, '"')
+        .replace(/\[[^\]]{1,14}\]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim(),
+    }))
+    .filter((e) => e.title.length >= 6)
+    .sort((a, b) => a.rank - b.rank);
   const rows = [];
   const seen = new Set();
-  for (const title of titles) {
-    const entity = entitySeedCandidates(title)[0];
+  for (const entry of entries) {
+    const entity = entitySeedCandidates(entry.title)[0];
     if (!entity || seen.has(entity)) continue;
     seen.add(entity);
-    rows.push({ rank: rows.length + 1, keyword: entity, context: title });
+    rows.push({ rank: rows.length + 1, keyword: entity, context: entry.title });
     if (rows.length >= 10) break;
   }
   return rows;
@@ -1197,7 +1207,7 @@ const LANE_COLLECTORS = [
   { id: 'daum', label: '다음', collect: collectDaumTrend },
   { id: 'nate', label: '네이트', collect: collectNate },
   { id: 'zum', label: '줌', collect: collectZum },
-  { id: 'sports', label: '스포츠', collect: collectNateSports },
+  { id: 'sports', label: '스포츠', collect: collectNaverSports },
   { id: 'policy', label: '정책', collect: collectPolicy },
   { id: 'issue', label: '이슈', collect: collectLatestIssueHeadlines },
 ];
