@@ -15,6 +15,11 @@ export interface HeadingQuerySet {
   eventQuery: string;
   /** Wide fallback query when everything else returns nothing */
   broaderQuery: string;
+  /**
+   * AI-recommended image count for this heading (1~3). Default 1 — only
+   * raised when the body clearly covers multiple scenes/steps/comparisons.
+   */
+  recommendedImages?: number;
 }
 
 /** Result of the AI body analysis + query fanout. */

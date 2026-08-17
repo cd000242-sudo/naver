@@ -43,13 +43,25 @@ describe('thumbnail generator — 적용 후 UI 반영', () => {
   });
 
   it('반영 실패 시에도 예외로 흐름이 끊기지 않는다', () => {
-    expect(gen).toMatch(/displayImageHeadingsWithPrompts[\s\S]{0,400}catch/);
+    // [2026-08-17] 채움(updatePromptItemsWithImages) 블록이 추가되며 창을 넓힘 — 계약은
+    // "재렌더+채움 전체가 try/catch 안"이라는 것.
+    expect(gen).toMatch(/displayImageHeadingsWithPrompts[\s\S]{0,900}catch/);
   });
 
   it('렌더 함수가 window 에 노출된다 (번들 스코프 무관 호출)', () => {
     const renderer = readFileSync(new URL('../renderer/renderer.ts', import.meta.url), 'utf8');
     expect(renderer).toMatch(/window as any\)\.displayImageHeadingsWithPrompts = displayImageHeadingsWithPrompts/);
     expect(gen).toMatch(/window as any\)\.displayImageHeadingsWithPrompts/);
+  });
+
+  it('[2026-08-17] 카드 재구축 후 이미지 채움(updatePromptItemsWithImages)까지 호출한다', () => {
+    // 재구축(displayImageHeadingsWithPrompts)만 하면 카드가 빈 채로 남는다 — 채움 호출이 계약.
+    const renderIdx = gen.indexOf('renderCards(cardHeadings)');
+    expect(renderIdx).toBeGreaterThan(-1);
+    const fillIdx = gen.indexOf('updatePromptItemsWithImages', renderIdx);
+    expect(fillIdx).toBeGreaterThan(renderIdx);
+    const renderer = readFileSync(new URL('../renderer/renderer.ts', import.meta.url), 'utf8');
+    expect(renderer).toMatch(/window as any\)\.updatePromptItemsWithImages = updatePromptItemsWithImages/);
   });
 });
 

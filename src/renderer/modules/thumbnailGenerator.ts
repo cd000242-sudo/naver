@@ -14,6 +14,7 @@ declare function syncGlobalImagesFromImageManager(): void;
 declare function resolveFirstHeadingTitleForThumbnail(): string;
 // [2026-08-06] 적용 후 이미지관리탭 소제목 카드(영어 프롬프트 + 미리보기) 재렌더용.
 declare function displayImageHeadingsWithPrompts(headings: any[]): void;
+declare function updatePromptItemsWithImages(images: any[]): void;
 declare function initShoppingBannerTab(): void;
 // ============================================
 // ✅ [2026-01-20] 프리셋 썸네일 적용 헬퍼 함수
@@ -932,6 +933,19 @@ export class ThumbnailGenerator {
           || (typeof displayImageHeadingsWithPrompts === 'function' ? displayImageHeadingsWithPrompts : null);
         if (renderCards && Array.isArray(cardHeadings) && cardHeadings.length > 0) {
           renderCards(cardHeadings);
+        }
+        // [2026-08-17] 재구축된 카드는 빈 .images-grid/.generated-image로 시작한다 —
+        // updatePromptItemsWithImages를 불러야 썸네일이 카드 미리보기에 실제로 뜬다.
+        // (8/6 픽스가 재구축까지만 하고 채움 호출을 빼먹어 "적용해도 안 보임" 재발)
+        const allImages = (() => {
+          try { const a = ImageManager.getAllImages(); return Array.isArray(a) ? a : []; } catch { return []; }
+        })();
+        if (allImages.length > 0) {
+          (window as any).generatedImages = allImages;
+          (window as any).imageManagementGeneratedImages = allImages;
+          const fillCards = (window as any).updatePromptItemsWithImages
+            || (typeof updatePromptItemsWithImages === 'function' ? updatePromptItemsWithImages : null);
+          fillCards?.(allImages);
         }
       } catch (renderErr) {
         console.warn('[ThumbnailGen] 소제목 카드 재렌더 실패(적용은 완료):', renderErr);

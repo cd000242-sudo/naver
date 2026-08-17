@@ -78,6 +78,8 @@ describe('issueHarness queryFanout fallback', () => {
     expect(plan.querySets[0].fandomQuery).toContain('직찍');
     expect(plan.querySets[0].koreanQuery.length).toBeGreaterThan(0);
     expect(plan.querySets[0].broaderQuery.length).toBeGreaterThan(0);
+    // 기본 이미지 권장 수는 1장 (AI가 명시할 때만 2~3)
+    expect(plan.querySets[0].recommendedImages).toBe(1);
   });
 });
 

@@ -133,7 +133,9 @@ export async function collectIssueImages(
   payload: IssueCollectPayload,
   options: IssueHarnessOptions = {},
 ): Promise<IssueHarnessResult> {
-  const perHeadingTarget = options.perHeadingTarget ?? 1;
+  // [2026-08-17] 기본 1장, AI가 본문을 보고 2장 이상 필요하다고 판단한 소제목만
+  // 그 수만큼 배치 (recommendedImages 1~3). perHeadingTarget은 상한 캡.
+  const perHeadingTarget = options.perHeadingTarget ?? 3;
   const cap = options.maxCandidatesPerHeading ?? 60;
   const emit = (percent: number, message: string): void => {
     try { options.onProgress?.({ percent: Math.min(100, Math.round(percent)), message }); } catch { /* UI only */ }
@@ -196,7 +198,9 @@ export async function collectIssueImages(
       width: item.width,
       height: item.height,
     }));
-    const placed = cleanCandidates.slice(0, perHeadingTarget);
+    // AI 권장 수(기본 1)만큼 배치 — 상한은 perHeadingTarget.
+    const targetForHeading = Math.min(Math.max(qs.recommendedImages ?? 1, 1), perHeadingTarget);
+    const placed = cleanCandidates.slice(0, targetForHeading);
     placed.forEach((c) => globallyUsed.add(c.url));
 
     images[qs.heading] = placed.map((c) => c.url);

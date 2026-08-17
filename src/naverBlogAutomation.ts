@@ -23,6 +23,7 @@ import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromF
 import { buildNaverAutomationProfile, hashAutomationAccountId } from './automation/accountProfilePolicy.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 import { performIdleMouseShake } from './automation/humanBehavior.js';
+import { isAiGeneratedImage } from './automation/imageProvenance.js';
 import { disablePlatformWebAuthn } from './automation/webauthnGuard.js';
 // [v2.10.285] 봇 감지 backoff + 로그인 자연 대기 (계정별 자동 보호)
 import { recordBotBackoff, getBotBackoff, isAccountBackedOff, computePostLoginHumanDelayMs } from './utils/botBackoff.js';
@@ -5421,22 +5422,23 @@ export class NaverBlogAutomation {
               // Step 4: AI 활용 마크 일괄 활성화 (AI 생성 이미지만, 수집 이미지 제외)
               try {
                 this.log('🤖 [AI 마크] AI 생성 이미지 마크 일괄 활성화 중...');
-                const COLLECTED_PROVIDERS = ['naver', 'collected', 'collected-image', 'collected-image-with-text', 'shopping', 'blog', 'local', 'local-folder'];
                 let aiMarkCount = 0;
                 for (let i = 0; i < imageComponents.length; i++) {
                   const compImg = await imageComponents[i].$('img');
                   if (!compImg) continue;
 
-                  // Check provider attribute to skip collected images
-                  const imgProvider = await compImg.evaluate((el: HTMLImageElement) =>
-                    el.getAttribute('data-img-provider') || ''
-                  ).catch(() => '');
-                  // ✅ [실제이미지 fix] provider 없음(사용자 직접 삽입 실제 이미지) 또는 수집 이미지는 AI 마크 스킵.
-                  //   기존 opt-out 로직은 수집 provider만 스킵 → provider 태그가 없는 실제 이미지가 AI 마크에
-                  //   잘못 걸렸다(실제 이미지엔 image.provider가 없어 data-img-provider 미설정, imageHelpers L1570).
-                  //   AI 마크는 provider가 명확한 AI 생성 이미지에만 붙인다.
-                  if (!imgProvider || COLLECTED_PROVIDERS.includes(imgProvider)) {
-                    this.log(`   ⏭️ [AI 마크] ${imgProvider ? `수집 이미지(${imgProvider})` : '실제/직접삽입 이미지(provider 없음)'} → 마크 스킵`);
+                  // [2026-08-17] 판정 단일화 — 삽입 단계가 남긴 data-img-ai('1'/'0')가 1차 근거.
+                  //   '1' = AI 엔진 허용목록(imageProvenance)으로 판정된 AI 생성 이미지만.
+                  //   태그가 없으면(구버전 삽입/사용자 직접 삽입) provider 허용목록으로 2차 판정,
+                  //   그래도 불명이면 마크하지 않는다 — 실사진 오탐은 구조적으로 불가(opt-in).
+                  const attrs = await compImg.evaluate((el: HTMLImageElement) => ({
+                    ai: el.getAttribute('data-img-ai') || '',
+                    provider: el.getAttribute('data-img-provider') || '',
+                  })).catch(() => ({ ai: '', provider: '' }));
+                  const isAiTarget = attrs.ai === '1'
+                    || (attrs.ai === '' && isAiGeneratedImage({ provider: attrs.provider }));
+                  if (!isAiTarget) {
+                    this.log(`   ⏭️ [AI 마크] 비AI 이미지(ai=${attrs.ai || '없음'}, provider=${attrs.provider || '없음'}) → 마크 스킵`);
                     continue;
                   }
 
@@ -7503,8 +7505,11 @@ export class NaverBlogAutomation {
   /**
    * 네이버 이미지 버튼을 통해 이미지 업로드 (메인 방식)
    */
-  private async insertBase64ImageAtCursor(filePath: string): Promise<void> {
-    return await imageHelpers.insertBase64ImageAtCursor(this, filePath);
+  private async insertBase64ImageAtCursor(
+    filePath: string,
+    provenanceMeta?: { provider?: string; source?: string; isCollected?: boolean; aiGenerated?: boolean },
+  ): Promise<void> {
+    return await imageHelpers.insertBase64ImageAtCursor(this, filePath, provenanceMeta);
   }
 
   /**

@@ -37,6 +37,10 @@ export interface AutomationImage {
     alt?: string;
     caption?: string;
     savedToLocal?: string | boolean;
+    // [2026-08-17] AI 마크 provenance — 렌더러 엔트리에서 그대로 승계 (imageProvenance 판정 근거)
+    source?: string;
+    isCollected?: boolean;
+    aiGenerated?: boolean;
 }
 
 /**

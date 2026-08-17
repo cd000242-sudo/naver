@@ -227,6 +227,14 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.on('issue:collectProgress', handler);
     return () => { ipcRenderer.removeListener('issue:collectProgress', handler); };
   },
+  // [공식문서 캡처] 경제·지원금 글 공식 페이지 캡처 (옵트인)
+  captureOfficialDocs: (payload: { title: string; headings: Array<{ title: string; body?: string }>; mainKeyword?: string }): Promise<{ success: boolean; captures: Array<{ heading: string; filePath: string; previewDataUrl: string; sourceUrl: string; summary: string }>; visitedPages?: any[]; stats?: any; message?: string }> =>
+    ipcRenderer.invoke('doc:captureOfficial', payload),
+  onDocCaptureProgress: (callback: (info: { percent: number; message: string }) => void): (() => void) => {
+    const handler = (_event: any, info: { percent: number; message: string }) => callback(info);
+    ipcRenderer.on('doc:captureProgress', handler);
+    return () => { ipcRenderer.removeListener('doc:captureProgress', handler); };
+  },
   checkFileExists: (filePath: string): Promise<boolean> => ipcRenderer.invoke('file:checkExists', filePath),
   // v2.10.107: batch — cleanupStaleImageReferences가 N IPC를 1 IPC로 단축
   checkFileExistsBatch: (filePaths: string[]): Promise<boolean[]> => ipcRenderer.invoke('file:checkExistsBatch', filePaths),

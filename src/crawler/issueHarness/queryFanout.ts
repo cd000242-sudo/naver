@@ -44,6 +44,7 @@ export function buildFallbackQueryPlan(
       fandomQuery: subject ? `${subject} 직찍` : '',
       eventQuery: '',
       broaderQuery: subject,
+      recommendedImages: 1,
     };
   });
   return { mainSubject: subject, romanizedSubject: '', querySets, aiGenerated: false };
@@ -72,13 +73,15 @@ ${sections}
 4. fandomQuery: 팬 촬영 원본을 찾는 검색어 (예: "인물명 직찍", "인물명 출근길", "인물명 공항")
 5. eventQuery: 인물명 없이 행사/경기 현장 검색어 (예: "골든디스크 2026", 해당 없으면 빈 문자열)
 6. mainSubject: 핵심 인물/팀 한글명, romanizedSubject: 그 로마자 표기
+7. imageCount: 이 소제목에 필요한 이미지 수 (기본 1). 본문이 여러 장면·단계·비교·인물을
+   다뤄서 사진 1장으로 부족할 때만 2~3. 확신 없으면 1.
 
 # 응답 형식 (JSON만 출력, 설명 금지)
 {
   "mainSubject": "...",
   "romanizedSubject": "...",
   "sets": [
-    {"index": 1, "koreanQuery": "...", "englishQuery": "...", "fandomQuery": "...", "eventQuery": "..."}
+    {"index": 1, "koreanQuery": "...", "englishQuery": "...", "fandomQuery": "...", "eventQuery": "...", "imageCount": 1}
   ]
 }`;
 }
@@ -127,13 +130,14 @@ export async function buildIssueQueryPlan(
     const parsed = JSON.parse(jsonMatch[0]) as {
       mainSubject?: string;
       romanizedSubject?: string;
-      sets?: Array<{ index: number; koreanQuery?: string; englishQuery?: string; fandomQuery?: string; eventQuery?: string }>;
+      sets?: Array<{ index: number; koreanQuery?: string; englishQuery?: string; fandomQuery?: string; eventQuery?: string; imageCount?: number }>;
     };
 
     const subject = String(parsed.mainSubject || '').trim() || fallback.mainSubject;
     const querySets: HeadingQuerySet[] = headings.map((h, i) => {
       const match = (parsed.sets || []).find((s) => s.index === i + 1);
       const fb = fallback.querySets[i];
+      const countRaw = Number(match?.imageCount);
       return {
         heading: h.title,
         koreanQuery: String(match?.koreanQuery || '').trim() || fb.koreanQuery,
@@ -141,6 +145,8 @@ export async function buildIssueQueryPlan(
         fandomQuery: String(match?.fandomQuery || '').trim() || fb.fandomQuery,
         eventQuery: String(match?.eventQuery || '').trim(),
         broaderQuery: subject,
+        // 기본 1장 — AI가 명시적으로 2~3을 권한 경우만 반영 (범위 밖은 1로 클램프)
+        recommendedImages: Number.isInteger(countRaw) && countRaw >= 1 && countRaw <= 3 ? countRaw : 1,
       };
     });
 

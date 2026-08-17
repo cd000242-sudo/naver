@@ -1398,6 +1398,9 @@ export async function handleFullAutoPublish(): Promise<void> {
                 heading: h.title || h.heading || '',
                 filePath: path,
                 provider: 'manual',
+                // [2026-08-17] 쇼핑 수집 이미지 — AI 마크 판정이 실사진으로 확정하도록 명시
+                isCollected: true,
+                source: 'shopping-direct',
                 savedToLocal: path,
                 isThumbnail: false // 소제목 이미지는 썸네일이 아님
               });
@@ -1425,6 +1428,9 @@ export async function handleFullAutoPublish(): Promise<void> {
                 heading: h.title || h.heading || '',
                 filePath: path,
                 provider: 'manual',
+                // [2026-08-17] 갤러리 수집 이미지 — AI 마크 판정용 provenance 명시
+                isCollected: true,
+                source: 'shopping-direct',
                 savedToLocal: path,
                 isThumbnail: false
               });

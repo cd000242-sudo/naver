@@ -36,7 +36,11 @@ declare const appendLog: (msg: string, target?: string) => void;
 // [v2.11.140] 이미지관리탭 Flow 구독 사전 가드 (openaiImageGuard.ts — 인라인 번들 동일 스코프)
 declare function checkFlowSubscription(imageSource: string): Promise<{ block: boolean; reason?: string }>;
 // [이슈 끝판왕 수집] issueCollectMode.ts — 인라인 번들 동일 스코프
-declare function runIssueEndgameCollect(searchKeyword: string, appendLogFn: (msg: string) => void): Promise<number>;
+declare function runIssueEndgameCollect(searchKeyword: string, appendLogFn: (msg: string) => void, opts?: { onlyEmptyHeadings?: boolean }): Promise<number>;
+// [공식문서 캡처] docCaptureMode.ts — 인라인 번들 동일 스코프
+declare function injectDocCaptureModeUI(): void;
+declare function isDocCaptureModeEnabled(): boolean;
+declare function runDocCaptureCollect(searchKeyword: string, appendLogFn: (msg: string) => void): Promise<number>;
 declare let generatedImages: any[];
 declare let currentStructuredContent: any;
 declare let currentPostId: string | null;
@@ -2397,6 +2401,8 @@ export function initHeadingImageGeneration(): void {
   const aiAutoCollectBtn = document.getElementById('ai-auto-collect-save-btn') as HTMLButtonElement;
 
   if (aiAutoCollectBtn) {
+    // [공식문서 캡처] 체크박스 UI 주입 (실패해도 기존 플로우 무영향)
+    try { injectDocCaptureModeUI(); } catch (e: any) { console.warn('[DocCapture] UI 주입 실패:', e?.message); }
     aiAutoCollectBtn.addEventListener('click', async () => {
       // 제목 또는 키워드 가져오기
       const imageTitleInputLocal = document.getElementById('image-title') as HTMLInputElement;
@@ -2425,10 +2431,25 @@ export function initHeadingImageGeneration(): void {
       if (!issueUrlModeEarly) {
         try {
           aiAutoCollectBtn.disabled = true;
+          // [공식문서 캡처] 체크 ON → 공식 페이지 캡처를 먼저 배치하고,
+          // 캡처가 없는 소제목만 이슈 수집이 이어서 채운다.
+          let docPlaced = 0;
+          if (isDocCaptureModeEnabled()) {
+            aiAutoCollectBtn.innerHTML = '<span>🏛️</span><span>공식문서 캡처 중...</span>';
+            try {
+              docPlaced = await runDocCaptureCollect(searchKeyword, (msg) => appendLog(msg, 'images-log-output'));
+            } catch (docErr: any) {
+              appendLog(`⚠️ 공식문서 캡처 오류 (일반 수집으로 계속): ${docErr?.message || docErr}`, 'images-log-output');
+            }
+          }
           aiAutoCollectBtn.innerHTML = '<span>🏆</span><span>이슈 끝판왕 수집 중...</span>';
-          const placed = await runIssueEndgameCollect(searchKeyword, (msg) => appendLog(msg, 'images-log-output'));
-          if (placed > 0) {
-            toastManager.info(`🏆 이슈 끝판왕 수집 완료: ${placed}개 배치!`);
+          const placed = await runIssueEndgameCollect(
+            searchKeyword,
+            (msg) => appendLog(msg, 'images-log-output'),
+            { onlyEmptyHeadings: docPlaced > 0 },
+          );
+          if (placed + docPlaced > 0) {
+            toastManager.info(`🏆 수집 완료: 공식캡처 ${docPlaced}개 + 검색수집 ${placed}개 배치!`);
           }
         } catch (issueErr: any) {
           appendLog(`❌ 이슈 끝판왕 수집 오류: ${issueErr?.message || issueErr}`, 'images-log-output');

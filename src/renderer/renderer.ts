@@ -247,6 +247,9 @@ import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImages
 (window as any).syncGlobalImagesFromImageManager = syncGlobalImagesFromImageManager;
 // [2026-08-06] 썸네일 적용 후 소제목 카드(영어 프롬프트 + 미리보기) 재렌더에 필요.
 (window as any).displayImageHeadingsWithPrompts = displayImageHeadingsWithPrompts;
+// [2026-08-17] 카드 재구축 후 이미지를 다시 채우는 함수도 노출 — 재구축만 하고
+// 이 호출을 빼먹으면 카드가 빈 채로 남는다 (썸네일 적용하기 실측).
+(window as any).updatePromptItemsWithImages = updatePromptItemsWithImages;
 import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
 
 const MODAL_BACKDROP_CONTENT_SELECTOR = [

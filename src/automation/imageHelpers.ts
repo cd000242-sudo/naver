@@ -13,6 +13,7 @@ import {
   NAVER_SINGLE_IMAGE_MAX_MB,
   resolveNaverSupportedImageExtension,
 } from './naverImagePolicy.js';
+import { aiMarkAttrValue } from './imageProvenance.js';
 
 // ✅ [2026-05-26 v2.10.373 SPEC-NAVER-PROTECTION-2026 P5 행동 패턴]
 //   page.mouse.move(x, y) 텔레포트(steps:1)는 봇 시그니처. 사람은 곡선으로 천천히 이동(10~30 steps).
@@ -760,7 +761,13 @@ export async function insertImageViaUploadButton(self: any, filePath: string): P
 /**
  * 네이버 이미지 버튼을 통해 이미지 업로드 (메인 방식)
  */
-export async function insertBase64ImageAtCursor(self: any, filePath: string): Promise<void> {
+export async function insertBase64ImageAtCursor(
+  self: any,
+  filePath: string,
+  // [2026-08-17] AI 마크 provenance — 썸네일/배너/표 등 base64 경로도 data-img-ai를
+  // 남긴다. meta 미전달 = '0'(비AI) 태깅이라 실사진 오탐은 구조적으로 불가.
+  provenanceMeta?: { provider?: string; source?: string; isCollected?: boolean; aiGenerated?: boolean },
+): Promise<void> {
   const frame = (await self.getAttachedFrame());
   const page = self.ensurePage();
 
@@ -1028,6 +1035,15 @@ export async function insertBase64ImageAtCursor(self: any, filePath: string): Pr
 
     if (imgCount > imgBeforeCount) {
       self.log(`   ✅ 이미지 버튼 클릭 + FileChooser 성공 (이미지 ${imgBeforeCount}→${imgCount}개, +${imgCount - imgBeforeCount})`);
+
+      // ✅ [2026-08-17] data-img-ai 태깅 (AI 마크 판정 근거 — 미전달 시 '0')
+      await frame.evaluate((aiValue: string) => {
+        const editor = document.querySelector('.se-main-container');
+        if (!editor) return;
+        const imgs = editor.querySelectorAll('img');
+        const target = imgs[imgs.length - 1] as HTMLImageElement | undefined;
+        if (target) target.setAttribute('data-img-ai', aiValue);
+      }, aiMarkAttrValue(provenanceMeta)).catch(() => undefined);
 
       // ✅ MyBox 팝업 자동 닫기
       await self.delay(500); // 팝업이 뜰 시간 대기
@@ -1529,7 +1545,7 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
     let insertSuccess = false;
     for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
       try {
-        await self.insertBase64ImageAtCursor(imagePath);
+        await self.insertBase64ImageAtCursor(imagePath, image as any);
         await self.delay(1500); // 안정화 대기: 1초 → 1.5초
 
         // ✅ [신규] 삽입 성공 확인
@@ -1566,15 +1582,20 @@ export async function insertImagesAtCurrentCursor(self: any, images: any[], link
       continue;
     }
 
-    // ✅ data-img-provider 태깅 — AI 마크 단계가 수집/AI 이미지를 구분
-    if (image.provider) {
-      await frame.evaluate((provider: string) => {
+    // ✅ data-img-provider + data-img-ai 태깅 — AI 마크 단계의 단일 판정 근거.
+    //   [2026-08-17] provider 유무와 무관하게 항상 태깅한다. 판정은 imageProvenance
+    //   허용목록(opt-in)이라 수집/불명 이미지는 '0'으로 찍혀 절대 마크되지 않는다.
+    {
+      const aiFlag = aiMarkAttrValue(image as any);
+      await frame.evaluate((meta: { provider: string; aiValue: string }) => {
         const editor = document.querySelector('.se-main-container');
         if (!editor) return;
         const imgs = editor.querySelectorAll('img');
         const target = imgs[imgs.length - 1] as HTMLImageElement | undefined;
-        if (target) target.setAttribute('data-img-provider', provider);
-      }, image.provider).catch(() => undefined);
+        if (!target) return;
+        if (meta.provider) target.setAttribute('data-img-provider', meta.provider);
+        target.setAttribute('data-img-ai', meta.aiValue);
+      }, { provider: image.provider || '', aiValue: aiFlag }).catch(() => undefined);
     }
 
     // 문서너비 맞추기 + 모든 상품 이미지에 제휴 링크 삽입.
@@ -3495,12 +3516,12 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
         }
       } // if (!uploadSucceeded) 닫기
 
-      // ✅ alt 태그에 출처 정보 자동 추가 + data-img-provider 태깅
+      // ✅ alt 태그에 출처 정보 자동 추가 + data-img-provider/data-img-ai 태깅
       const altWithSource = generateAltWithSource(self, image);
       const imgProvider: string = image.provider || '';
-      if (altWithSource || imgProvider) {
+      {
         await frame
-          .evaluate((args: { altText: string; provider: string }) => {
+          .evaluate((args: { altText: string; provider: string; aiValue: string }) => {
             const editor = document.querySelector('.se-main-container');
             if (!editor) return;
             const imgs = editor.querySelectorAll('img');
@@ -3508,8 +3529,9 @@ export async function insertImages(self: any, images: any[], plans: any[]): Prom
             if (target) {
               if (args.altText) target.alt = args.altText;
               if (args.provider) target.setAttribute('data-img-provider', args.provider);
+              target.setAttribute('data-img-ai', args.aiValue);
             }
-          }, { altText: altWithSource, provider: imgProvider })
+          }, { altText: altWithSource, provider: imgProvider, aiValue: aiMarkAttrValue(image as any) })
           .catch(() => undefined);
       }
 

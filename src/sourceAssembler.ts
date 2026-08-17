@@ -5304,6 +5304,8 @@ const MIN_URL_SOURCE_CHARS = 500;
 const MIN_URL_SOURCE_PARAGRAPHS = 3;
 const MIN_GENERIC_URL_SOURCE_CHARS = 350;
 const MIN_GENERIC_URL_SOURCE_PARAGRAPHS = 2;
+// [2026-08-17] 짧은 사건 단신도 제목+실본문이면 살린다 — 이 바닥 미만만 진짜 실패.
+const SHALLOW_GENERIC_URL_FLOOR_CHARS = 150;
 
 function getSourceDepth(content?: string): { chars: number; paragraphs: number } {
   const normalized = String(content || '').replace(/\s+/g, ' ').trim();
@@ -6433,13 +6435,20 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
           timeout: 20000,
         });
 
-        if (crawlResult.content && hasUsableSourceDepth(crawlResult.content, { minChars: MIN_GENERIC_URL_SOURCE_CHARS, minParagraphs: MIN_GENERIC_URL_SOURCE_PARAGRAPHS })) {
+        // [2026-08-17] 성공한 크롤을 깊이 미달로 통째 폐기하지 않는다.
+        //   실측(강원일보 338자 단신): 350자 게이트에 12자 미달 → 제목까지 버려져
+        //   폴백이 전부 막히고 "URL 문자열 88자"만 AI에 투입 → 무관한 주제 환각.
+        //   짧아도 제목+실본문이 있으면 유지 — 아래 "본문<500자 → 제목 기반 검색 보강"
+        //   파이프가 정상 쿼리로 살을 붙인다.
+        const crawledChars = crawlResult.content?.length || 0;
+        if (crawlResult.content && crawledChars >= SHALLOW_GENERIC_URL_FLOOR_CHARS && crawlResult.title) {
           title = crawlResult.title;
           content = crawlResult.content;
           images = crawlResult.images;
-          console.log(`[fetchSingleSource] ✅ smartCrawler 성공: ${content.length}자 (모드: ${crawlResult.mode})`);
+          const deepEnough = hasUsableSourceDepth(content, { minChars: MIN_GENERIC_URL_SOURCE_CHARS, minParagraphs: MIN_GENERIC_URL_SOURCE_PARAGRAPHS });
+          console.log(`[fetchSingleSource] ${deepEnough ? '✅' : '⚠️ 얕지만 유지 —'} smartCrawler ${content.length}자 (모드: ${crawlResult.mode})${deepEnough ? '' : ' → 제목 기반 검색 보강 경로로 계속'}`);
         } else {
-          throw new Error(`smartCrawler 결과가 부족합니다 (${crawlResult.content?.length || 0}자)`);
+          throw new Error(`smartCrawler 결과가 부족합니다 (${crawledChars}자)`);
         }
       } catch (smartCrawlerError) {
         // smartCrawler 실패 시 기존 fetchArticleContent로 폴백
@@ -6460,7 +6469,14 @@ ${ogDesc || `${ogTitle} 상품입니다.`}
       const minParagraphs = isNaverBlogSource ? MIN_URL_SOURCE_PARAGRAPHS : MIN_GENERIC_URL_SOURCE_PARAGRAPHS;
       if (!hasUsableSourceDepth(content, { minChars, minParagraphs })) {
         const depth = getSourceDepth(content);
-        throw new Error(`URL 본문 수집이 너무 얕습니다 (${depth.chars}자, ${depth.paragraphs}문단). 다른 수집 경로가 필요합니다.`);
+        // [2026-08-17] 일반 URL: 제목이 있고 최소 바닥(150자)을 넘는 실본문이면 throw 대신
+        // 경고 후 계속 — 하류의 검색 보강이 제목("70대 몰던 승합차…")으로 재료를 채운다.
+        // 바닥 미만이거나 제목이 없으면 기존대로 실패 처리 (쓰레기 추출 차단 유지).
+        if (!isNaverBlogSource && title && depth.chars >= SHALLOW_GENERIC_URL_FLOOR_CHARS) {
+          console.warn(`[fetchSingleSource] ⚠️ 얕은 본문 유지 (${depth.chars}자, ${depth.paragraphs}문단) — 검색 보강 경로로 진행`);
+        } else {
+          throw new Error(`URL 본문 수집이 너무 얕습니다 (${depth.chars}자, ${depth.paragraphs}문단). 다른 수집 경로가 필요합니다.`);
+        }
       }
     }
 

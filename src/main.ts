@@ -4475,6 +4475,9 @@ registerImageSearchNaverHandlers();
 // [이슈 끝판왕 수집] issue:collectImages — 본문분석 쿼리팬아웃 + 다소스 하네스 (격리 모듈)
 import { registerIssueCollectHandlers } from './main/ipc/issueCollectHandlers.js';
 registerIssueCollectHandlers();
+// [공식문서 캡처] doc:captureOfficial — 경제·지원금 글 공식 페이지 캡처 (옵트인, 격리 모듈)
+import { registerDocCaptureHandlers } from './main/ipc/docCaptureHandlers.js';
+registerDocCaptureHandlers();
 // [v2.10.257] schedule:* 4개 분리
 import { registerScheduleApiHandlers } from './main/ipc/scheduleApiHandlers.js';
 registerScheduleApiHandlers({ sendLog });

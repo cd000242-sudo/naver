@@ -35,6 +35,7 @@ function issueCollectBuildHeadingInputs(headingTitles: string[]): Array<{ title:
 export async function runIssueEndgameCollect(
     searchKeyword: string,
     appendLogFn: (msg: string) => void,
+    opts?: { onlyEmptyHeadings?: boolean },
 ): Promise<number> {
     const consent = await ensureIssueCopyrightConsent();
     if (!consent) {
@@ -43,9 +44,25 @@ export async function runIssueEndgameCollect(
     }
 
     const currentHeadings = getCurrentImageHeadings();
-    const headingTitles: string[] = currentHeadings.map(
+    let headingTitles: string[] = currentHeadings.map(
         (h: any, i: number) => String(h?.title || '').trim() || `소제목 ${i + 1}`,
     );
+    // [2026-08-17] 공식문서 캡처 모드의 잔여 채움 — 캡처가 이미 배치된 소제목은
+    // 검색 수집을 건너뛴다 (시간·API 절약, 캡처 우선 원칙).
+    if (opts?.onlyEmptyHeadings) {
+        const ImageManagerRef = (window as any).ImageManager;
+        const before = headingTitles.length;
+        headingTitles = headingTitles.filter((h) => {
+            try { return !(ImageManagerRef?.getImages?.(h)?.length > 0); } catch { return true; }
+        });
+        if (headingTitles.length < before) {
+            appendLogFn(`ℹ️ 이미 이미지가 있는 소제목 ${before - headingTitles.length}개는 수집 생략`);
+        }
+        if (headingTitles.length === 0) {
+            appendLogFn('✅ 모든 소제목에 이미지가 이미 배치되어 추가 수집이 필요 없습니다.');
+            return 0;
+        }
+    }
     if (headingTitles.length === 0) {
         appendLogFn('⚠️ 소제목이 없습니다. 글 생성 또는 소제목 분석 후 다시 시도하세요.');
         return 0;
@@ -139,14 +156,14 @@ export async function runIssueEndgameCollect(
 
         // Save the surviving candidate pool to disk (manual replacement pool).
         const toSave = candidates.slice(0, ISSUE_DISK_SAVE_CAP_PER_HEADING);
-        let firstSaved: { filePath?: string; previewDataUrl?: string } = {};
+        const savedByUrl: Record<string, { filePath?: string; previewDataUrl?: string }> = {};
         for (let idx = 0; idx < toSave.length; idx++) {
             try {
                 const dl = await (window as any).api?.downloadAndSaveImage?.(toSave[idx].url, heading, postTitle, postId);
                 if (dl?.success && dl.filePath) {
                     savedToDisk++;
-                    if (toSave[idx].url === placedUrls[0]) {
-                        firstSaved = { filePath: dl.filePath, previewDataUrl: dl.previewDataUrl };
+                    if (placedUrls.includes(toSave[idx].url)) {
+                        savedByUrl[toSave[idx].url] = { filePath: dl.filePath, previewDataUrl: dl.previewDataUrl };
                     }
                 }
             } catch { /* per-image save failure is non-fatal */ }
@@ -163,20 +180,24 @@ export async function runIssueEndgameCollect(
             continue;
         }
 
-        const entry = {
-            url: placedUrls[0],
-            filePath: firstSaved.filePath,
-            previewDataUrl: firstSaved.previewDataUrl || placedUrls[0],
-            heading,
-            prompt: heading,
-            timestamp: Date.now(),
-            isCollected: true,
-            savedToLocal: firstSaved.filePath,
-            source: 'issue-endgame',
-        };
-        ImageManager?.addImage?.(heading, entry);
-        placedForUI.push({ ...entry });
-        placedCount++;
+        // [2026-08-17] 소제목당 다중 배치 — 클린 상위 N장을 전부 ImageManager에 넣는다.
+        placedUrls.forEach((placedUrl, idx) => {
+            const saved = savedByUrl[placedUrl] || {};
+            const entry = {
+                url: placedUrl,
+                filePath: saved.filePath,
+                previewDataUrl: saved.previewDataUrl || placedUrl,
+                heading,
+                prompt: heading,
+                timestamp: Date.now() + idx,
+                isCollected: true,
+                savedToLocal: saved.filePath,
+                source: 'issue-endgame',
+            };
+            ImageManager?.addImage?.(heading, entry);
+            if (idx === 0) placedForUI.push({ ...entry });
+            placedCount++;
+        });
     }
 
     if (placedForUI.length > 0) {

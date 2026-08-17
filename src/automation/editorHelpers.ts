@@ -1124,7 +1124,12 @@ export async function applyStructuredContent(self: any, resolved: ResolvedRunOpt
               const overlayPath = await generateThumbnailWithTextOverlay(imagePath, blogTitle);
               if (overlayPath) {
                 self.log(`   ✅ 텍스트 오버레이 썸네일 생성 완료`);
-                await self.insertBase64ImageAtCursor(overlayPath);
+                // [2026-08-17] AI 생성 썸네일 → provenance 전달로 AI 마크 대상에 포함
+                await self.insertBase64ImageAtCursor(overlayPath, {
+                  provider: firstIntroImage?.provider,
+                  source: firstIntroImage?.source,
+                  isCollected: firstIntroImage?.isCollected,
+                });
                 // ✅ [2026-02-26 FIX] 썸네일 삽입 후 에디터 렌더링 확인 (대기 시간 500ms→2000ms + 폴링 검증)
                 await self.delay(2000);
                 await self.verifyImageInserted(frame, '썸네일(오버레이)');

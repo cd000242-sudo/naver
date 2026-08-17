@@ -435,6 +435,8 @@ try {
     // ✅ [이슈 끝판왕 수집] 저작권 동의 모달 + 수집 모드 (headingImageGen보다 먼저 로드 — declare 참조)
     'issueCollectConsent.js',
     'issueCollectMode.js',
+    // ✅ [공식문서 캡처] 경제·지원금 글 공식 페이지 캡처 모드
+    'docCaptureMode.js',
     'headingImageGen.js',
     'imageDisplayGrid.js',
     'accountSettingsManager.js',  // ✅ [2026-03-24] 계정별 설정 관리 (licenseUI보다 먼저 로드 필수 - onAccountLogin/onAccountLogout 의존)
