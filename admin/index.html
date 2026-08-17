@@ -4964,6 +4964,22 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             return (localStorage.getItem('leaderspro_admin_gh_pat') || '').trim();
         }
 
+        /*
+         * 자동 감지 — 버튼을 눌러야만 도는 건 "자동 연동"이 아니다(사장님 지적:
+         * "감지 전에서 뭐가 됐냐"). 페이지가 뜨면 바로 브리지를 찔러 배지를
+         * 갱신하고, 60초마다 조용히 재확인한다.
+         */
+        window.addEventListener('DOMContentLoaded', () => {
+            try { checkAdminAiWorkerSettings(); } catch { /* 패널이 없으면 무시 */ }
+            window.setInterval(() => {
+                try {
+                    const badge = document.querySelector('[data-agent-card="claude-code"] [data-agent-badge]');
+                    // 성공 상태가 아니면 재시도 — 앱을 뒤늦게 켠 경우를 잡는다.
+                    if (badge && !badge.textContent.includes('✅')) checkAdminAiWorkerSettings();
+                } catch { /* 무시 */ }
+            }, 60000);
+        });
+
         function ghHeaders() {
             return {
                 'Authorization': 'Bearer ' + adminGhToken(),
