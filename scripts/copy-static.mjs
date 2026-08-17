@@ -241,6 +241,7 @@ try {
     'stabilityUtils.js',
     'headingVideoPreviewUtils.js',
     'veoVideoUtils.js',
+    'dialogFocusGuard.js',  // ✅ [2026-08-17] alert/confirm 포커스 가드 (조기 로드)
     'semiAutoImageSearch.js',
     'semiAutoHeadingExtractor.js',
     'articleTableUtils.js',

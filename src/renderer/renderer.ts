@@ -250,6 +250,10 @@ import { getGlobalImageSettings, hydrateImageManagerFromImages, syncGlobalImages
 // [2026-08-17] 카드 재구축 후 이미지를 다시 채우는 함수도 노출 — 재구축만 하고
 // 이 호출을 빼먹으면 카드가 빈 채로 남는다 (썸네일 적용하기 실측).
 (window as any).updatePromptItemsWithImages = updatePromptItemsWithImages;
+// [2026-08-17] 네이티브 팝업 포커스 가드 — alert/confirm 닫힘 후 입력 먹통 방지.
+// 다른 어떤 alert 호출보다 먼저 설치돼야 하므로 부트스트랩 최상단에서 실행.
+import { installDialogFocusGuard } from './utils/dialogFocusGuard.js';
+installDialogFocusGuard();
 import { autoSearchAndPopulateImages, runUiActionLockedCompat, ensureExternalApiCostConsent, reserveExternalApiImageQuota, generateImagesWithCostSafety, ensurePromptCardRemoveHandler } from './modules/costAndAutoGen.js';
 
 const MODAL_BACKDROP_CONTENT_SELECTOR = [

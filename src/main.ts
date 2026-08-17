@@ -4478,6 +4478,10 @@ registerIssueCollectHandlers();
 // [공식문서 캡처] doc:captureOfficial — 경제·지원금 글 공식 페이지 캡처 (옵트인, 격리 모듈)
 import { registerDocCaptureHandlers } from './main/ipc/docCaptureHandlers.js';
 registerDocCaptureHandlers();
+// [포커스 가드] 네이티브 팝업/다이얼로그 닫힘 후 입력 먹통(바탕화면 클릭해야 복구) 버그 대응
+import { registerWindowFocusHandlers, patchNativeDialogsForFocus } from './main/ipc/windowFocusHandlers.js';
+registerWindowFocusHandlers();
+patchNativeDialogsForFocus();
 // [v2.10.257] schedule:* 4개 분리
 import { registerScheduleApiHandlers } from './main/ipc/scheduleApiHandlers.js';
 registerScheduleApiHandlers({ sendLog });

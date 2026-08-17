@@ -590,6 +590,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/utils/categoryNormalizeUtils.ts',
   'src/renderer/utils/contentPolicyContext.ts',
   'src/renderer/utils/dateUtils.ts',
+  'src/renderer/utils/dialogFocusGuard.ts',
   'src/renderer/utils/errorAndAutosave.ts',
   'src/renderer/utils/errorHandlerUtils.ts',
   'src/renderer/utils/errorUtils.ts',
