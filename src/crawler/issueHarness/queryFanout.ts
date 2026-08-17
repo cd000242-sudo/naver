@@ -36,6 +36,7 @@ export function buildFallbackQueryPlan(
 ): IssueQueryPlan {
   const subject = generalizeIssueQuery(title, 2) || title.split(' ')[0] || '';
   const querySets: HeadingQuerySet[] = headings.map((h) => {
+    // 주체를 앞에 두고 소제목 핵심어를 뒤에 붙인다 (주체 앵커 유지).
     const base = generalizeIssueQuery(`${subject} ${h.title}`, 4) || subject;
     return {
       heading: h.title,
@@ -138,12 +139,21 @@ export async function buildIssueQueryPlan(
       const match = (parsed.sets || []).find((s) => s.index === i + 1);
       const fb = fallback.querySets[i];
       const countRaw = Number(match?.imageCount);
+      // [2026-08-17] 주체 앵커 강제 — 라이브 실측: "44세부터 46세 겨울까지" 같은
+      // 후킹형 소제목에서 주체(인물명) 없는 쿼리가 나가 고양이·패션화보가 수집됐다.
+      // 한글/직찍/행사 쿼리는 반드시 주체를 포함시킨다 (영문은 로마자 주체가 따로 있음).
+      const anchor = (q: string): string => {
+        const query = q.trim();
+        if (!query) return '';
+        if (!subject) return query;
+        return query.includes(subject) ? query : `${subject} ${query}`;
+      };
       return {
         heading: h.title,
-        koreanQuery: String(match?.koreanQuery || '').trim() || fb.koreanQuery,
+        koreanQuery: anchor(String(match?.koreanQuery || '').trim() || fb.koreanQuery),
         englishQuery: String(match?.englishQuery || '').trim(),
-        fandomQuery: String(match?.fandomQuery || '').trim() || fb.fandomQuery,
-        eventQuery: String(match?.eventQuery || '').trim(),
+        fandomQuery: anchor(String(match?.fandomQuery || '').trim() || fb.fandomQuery),
+        eventQuery: anchor(String(match?.eventQuery || '').trim()),
         broaderQuery: subject,
         // 기본 1장 — AI가 명시적으로 2~3을 권한 경우만 반영 (범위 밖은 1로 클램프)
         recommendedImages: Number.isInteger(countRaw) && countRaw >= 1 && countRaw <= 3 ? countRaw : 1,

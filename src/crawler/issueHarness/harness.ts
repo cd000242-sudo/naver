@@ -188,6 +188,8 @@ export async function collectIssueImages(
       geminiApiKey: options.geminiApiKey,
       visionBudget,
       phashRegistry,
+      // 관련성 판정 기준 — 주체가 비면 게이트가 전량 미배치(빈 슬롯)로 막는다.
+      subjectContext: { mainSubject: plan.mainSubject, heading: qs.heading },
     });
     cleanTotal += refined.clean.length;
     perceptualDuplicates += refined.duplicates;

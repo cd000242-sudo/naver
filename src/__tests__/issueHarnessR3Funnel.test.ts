@@ -2,6 +2,7 @@
 // R3 정제 깔때기 — dHash/해밍/지각중복/랭킹/Vision 판정 파싱 (순수 로직만, 네트워크 없음)
 
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'fs';
 import {
   computeDhashFromRaw,
   hammingDistance,
@@ -82,10 +83,10 @@ describe('candidate ordering + ranking', () => {
   });
 });
 
-describe('parseVerdicts (fail-closed)', () => {
-  it('정상 JSON 배열을 판정으로 매핑한다', () => {
+describe('parseVerdicts (fail-closed + 관련성)', () => {
+  it('정상 JSON 배열을 판정으로 매핑한다 (relevant+clean 모두 true여야 통과)', () => {
     const verdicts = parseVerdicts(
-      '[{"index":1,"clean":true,"reason":""},{"index":2,"clean":false,"reason":"자막"}]',
+      '[{"index":1,"relevant":true,"clean":true,"reason":""},{"index":2,"relevant":true,"clean":false,"reason":"자막"}]',
       2,
     );
     expect(verdicts[0].clean).toBe(true);
@@ -93,16 +94,56 @@ describe('parseVerdicts (fail-closed)', () => {
     expect(verdicts[1].reason).toBe('자막');
   });
 
+  it('[2026-08-17] 깨끗하지만 무관한 이미지는 탈락한다 (고양이·화보 사건)', () => {
+    // 라이브 실측: relevant=false인데 clean=true를 주는 응답이 무관 사진을 통과시켰다.
+    const verdicts = parseVerdicts(
+      '[{"index":1,"relevant":false,"clean":true,"reason":"무관-고양이"}]',
+      1,
+    );
+    expect(verdicts[0].clean).toBe(false);
+    expect(verdicts[0].reason).toContain('무관');
+  });
+
+  it('relevant 필드가 아예 없으면 불통과 (누락 = 판정 없음)', () => {
+    const verdicts = parseVerdicts('[{"index":1,"clean":true}]', 1);
+    expect(verdicts[0].clean).toBe(false);
+    expect(verdicts[0].reason).toBe('irrelevant');
+  });
+
   it('파싱 불가/누락 인덱스는 전부 불통과(fail-closed)', () => {
     expect(parseVerdicts('말도 안 되는 응답', 2).every((v) => !v.clean)).toBe(true);
-    const partial = parseVerdicts('[{"index":1,"clean":true}]', 3);
+    const partial = parseVerdicts('[{"index":1,"relevant":true,"clean":true}]', 3);
     expect(partial[0].clean).toBe(true);
     expect(partial[1].clean).toBe(false);
     expect(partial[2].clean).toBe(false);
   });
 
   it('clean이 true가 아닌 모든 값은 불통과로 처리한다', () => {
-    const verdicts = parseVerdicts('[{"index":1,"clean":"yes"}]', 1);
+    const verdicts = parseVerdicts('[{"index":1,"relevant":true,"clean":"yes"}]', 1);
     expect(verdicts[0].clean).toBe(false);
+  });
+});
+
+describe('[2026-08-17] 주체 앵커 + 키/주체 없을 때 미배치 (source 계약)', () => {
+  it('Vision 프롬프트가 주체·소제목 기준 관련성을 판정한다', () => {
+    const src = readFileSync(new URL('../crawler/issueHarness/visionGate.ts', import.meta.url), 'utf8');
+    expect(src).toMatch(/relevant:/);
+    expect(src).toMatch(/핵심 주체/);
+    // 주체 미상이면 전량 미배치
+    expect(src).toMatch(/mainSubject\?\.trim\(\)[\s\S]{0,200}return \[\]/);
+  });
+
+  it('Gemini 키가 없으면 통과시키지 않고 빈 슬롯을 유지한다', () => {
+    const src = readFileSync(new URL('../crawler/issueHarness/funnel.ts', import.meta.url), 'utf8');
+    // 이전: clean = validated (무검증 통과) → 현재: clean = []
+    expect(src).toMatch(/Gemini 키 없음[\s\S]{0,200}clean = \[\]/);
+  });
+
+  it('쿼리 팬아웃이 한글/직찍/행사 쿼리에 주체를 앵커한다', () => {
+    const src = readFileSync(new URL('../crawler/issueHarness/queryFanout.ts', import.meta.url), 'utf8');
+    expect(src).toMatch(/const anchor = /);
+    expect(src).toMatch(/koreanQuery: anchor\(/);
+    expect(src).toMatch(/fandomQuery: anchor\(/);
+    expect(src).toMatch(/eventQuery: anchor\(/);
   });
 });

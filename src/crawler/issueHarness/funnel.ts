@@ -9,7 +9,7 @@ import {
   hammingDistance,
   type FetchedCandidate,
 } from './candidateFetcher.js';
-import { runVisionGate, type VisionGateBudget } from './visionGate.js';
+import { runVisionGate, type VisionGateBudget, type VisionSubjectContext } from './visionGate.js';
 import type { IssueCandidateImage } from './types.js';
 
 const LOG = '[IssueFunnel]';
@@ -72,6 +72,8 @@ export interface FunnelOptions {
   phashRegistry: PhashRegistry;
   /** Stop once this many clean images survive (default 6). */
   cleanTarget?: number;
+  /** 관련성 판정 기준 (주체·소제목). 없으면 Vision 게이트가 전량 탈락시킨다. */
+  subjectContext: VisionSubjectContext;
 }
 
 export interface FunnelResult {
@@ -122,10 +124,18 @@ export async function refineHeadingCandidates(
   let visionUsed = false;
   if (options.geminiApiKey) {
     visionUsed = true;
-    clean = await runVisionGate(validated, options.geminiApiKey, options.visionBudget, cleanTarget);
+    clean = await runVisionGate(
+      validated,
+      options.geminiApiKey,
+      options.visionBudget,
+      options.subjectContext,
+      cleanTarget,
+    );
   } else {
-    console.log(`${LOG} ⚠️ Gemini 키 없음 — Vision 게이트 생략 (워터마크/텍스트 미검증)`);
-    clean = validated;
+    // [2026-08-17] 키 없으면 통과시키던 정책 폐기 — 관련성·워터마크 미검증 상태로
+    // 배치하면 라이브에서 고양이·화보가 연예 글에 꽂힌다(실측). 빈 슬롯이 낫다.
+    console.warn(`${LOG} ⛔ Gemini 키 없음 — 관련성/워터마크 검증 불가로 미배치 (빈 슬롯 유지)`);
+    clean = [];
   }
 
   return { clean: rankCleanCandidates(clean), fetched, duplicates, visionUsed };
