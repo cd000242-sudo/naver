@@ -61,6 +61,8 @@ function LewordStyles() {
             }
             .lw-navi span { width: 18px; text-align: center; opacity: .85; font-size: 13px; }
             .lw-navi em { font-style: normal; }
+            /* 데스크톱은 전체 라벨, 모바일은 짧은 라벨 — 미디어쿼리가 토글한다. */
+            .lw-navi-short { display: none; }
             .lw-navi:hover { background: rgba(255,255,255,.045); color: #ebedf2; }
             .lw-navi.on {
                 background: linear-gradient(135deg, rgba(124,92,255,.20), rgba(124,92,255,.06));
@@ -801,16 +803,45 @@ function LewordStyles() {
 
             /* ── 모바일 ── */
             @media (max-width: 900px) {
-                .lw-app { grid-template-columns: minmax(0, 1fr); }
+                /*
+                 * padding-top 72px 는 데스크톱의 고정 헤더 높이만큼 내리는 값이다.
+                 * 모바일에서는 헤더가 static(문서 흐름 안)이라 이 패딩이 유령 여백
+                 * 72px 로 남는다(실측 스크린샷: 헤더와 LEWORD 사이 빈 띠).
+                 */
+                .lw-app { grid-template-columns: minmax(0, 1fr); padding-top: 0; min-height: auto; }
                 .lw-side {
                     position: static; height: auto;
                     border-right: none; border-bottom: 1px solid rgba(255,255,255,.08);
                     padding: 16px 14px;
                 }
-                .lw-nav { flex-direction: row; overflow-x: auto; gap: 6px; scrollbar-width: none; }
-                .lw-nav::-webkit-scrollbar { display: none; }
-                .lw-navi { flex: 0 0 auto; padding: 9px 13px; font-size: 13px; }
+                /*
+                 * 가로 스크롤(스크롤바 숨김)은 "탭이 하나뿐"으로 보이게 했다 —
+                 * 첫 탭의 긴 라벨이 폭을 다 먹으면 나머지가 있는지 알 길이 없다.
+                 * 줄바꿈으로 여섯 탭을 전부 보이게 하고, 라벨은 short 로 줄인다.
+                 */
+                .lw-nav { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+                /*
+                 * 모바일 탭 알약 — 사이트 스킨 언어(보라 글로우) 그대로.
+                 * width:100% 를 풀어야 알약형으로 줄바꿈된다 — 안 풀면 한 줄에
+                 * 하나씩 늘어선다(실측). 활성 탭은 데스크톱 .on 과 같은 보라
+                 * 그라디언트에 글로우를 살짝 얹어 "지금 어디"가 한눈에 잡힌다.
+                 */
+                .lw-navi {
+                    flex: 0 0 auto; width: auto;
+                    padding: 8px 14px; font-size: 13px;
+                    border: 1px solid rgba(255,255,255,.10);
+                    border-radius: 999px;
+                    background: rgba(255,255,255,.03);
+                }
+                .lw-navi.on {
+                    border-color: rgba(124,92,255,.55);
+                    background: linear-gradient(135deg, rgba(124,92,255,.30), rgba(177,76,255,.12));
+                    box-shadow: 0 0 0 1px rgba(124,92,255,.18), 0 4px 18px rgba(124,92,255,.22);
+                }
+                .lw-brand { padding-bottom: 12px; }
                 .lw-navi span { display: none; }
+                .lw-navi-full { display: none; }
+                .lw-navi-short { display: inline; }
                 .lw-side-foot { display: none; }
                 .lw-card-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
             }

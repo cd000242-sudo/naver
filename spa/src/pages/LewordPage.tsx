@@ -81,7 +81,14 @@ function LewordPage() {
                             onClick={() => selectTab(tab.id)}
                         >
                             <span aria-hidden="true">{tab.icon}</span>
-                            <em>{tab.label}</em>
+                            {/*
+                              * 모바일 실측(2026-08-17, iPhone 뷰포트): 긴 라벨 하나가 가로줄
+                              * 폭을 다 먹고 나머지 탭은 화면 밖 + 스크롤바 숨김이라
+                              * "탭이 하나뿐"으로 보였다. short 는 정의만 되고 안 쓰이고
+                              * 있었다 — 모바일에서는 short 를 쓴다(CSS 가 토글).
+                              */}
+                            <em className="lw-navi-full">{tab.label}</em>
+                            <em className="lw-navi-short">{tab.short}</em>
                         </button>
                     ))}
                 </nav>
