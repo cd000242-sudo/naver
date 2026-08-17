@@ -61,6 +61,12 @@ export interface BridgeMindmap {
     reasons: Array<{ text: string; basis: string }>;
     expansions: Array<{ keyword: string; searchVolume: number | null; source: string }>;
     signals: string[];
+    /** 광고 수익 관점 결론 — 클릭할까·무슨 광고가 뜰까·머물까를 따진 질적 판단. */
+    monetize?: {
+        verdict: 'good' | 'bad' | 'mixed';
+        points: Array<{ text: string; basis: string }>;
+        angle: string;
+    } | null;
     agent: { available: boolean; provider: string; proposed: number; verified: number; error?: string };
 }
 

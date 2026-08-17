@@ -702,6 +702,49 @@ function LewordStyles() {
                 color: #bcdcff;
             }
 
+            /* 수익 관점 결론 — 판정색으로 한눈에. */
+            .lw-mindmap-money {
+                margin-top: 12px;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid rgba(255,255,255,.10);
+                background: rgba(255,255,255,.03);
+            }
+            .lw-mindmap-money-good { border-color: rgba(74,222,128,.35); }
+            .lw-mindmap-money-bad { border-color: rgba(248,113,113,.4); }
+            .lw-mindmap-money-mixed { border-color: rgba(250,204,21,.35); }
+            .lw-mindmap-money-head {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin-bottom: 8px;
+                color: rgba(235,242,250,.9);
+                font-size: 12.5px;
+                font-weight: 800;
+            }
+            .lw-mindmap-money-good .lw-mindmap-money-head strong { color: #4ade80; }
+            .lw-mindmap-money-bad .lw-mindmap-money-head strong { color: #f87171; }
+            .lw-mindmap-money-mixed .lw-mindmap-money-head strong { color: #facc15; }
+            .lw-mindmap-money ul { margin: 0 0 8px; padding-left: 18px; }
+            .lw-mindmap-money li {
+                margin-bottom: 5px;
+                color: rgba(235,242,250,.84);
+                font-size: 12.5px;
+                line-height: 1.6;
+                word-break: keep-all;
+            }
+            .lw-mindmap-money p {
+                margin: 0;
+                padding: 8px 11px;
+                border-radius: 8px;
+                background: rgba(74,222,128,.08);
+                border: 1px solid rgba(74,222,128,.25);
+                color: #bbf7d0;
+                font-size: 12.5px;
+                line-height: 1.6;
+            }
+
             .lw-forge-ai { border-left-color: rgba(90,169,255,.45); }
             .lw-forge-ai a { color: #8ec5ff; text-decoration: none; }
             .lw-forge-ai a:hover { text-decoration: underline; }

@@ -457,6 +457,23 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             {(mindmap[row.keyword]?.data?.expansions || []).length === 0 && (
                                                 <div className="lw-forge-subs">실존이 확인된 확장 검색어가 없습니다.</div>
                                             )}
+                                            {mindmap[row.keyword]?.data?.monetize && (() => {
+                                                const verdict = mindmap[row.keyword]!.data!.monetize!;
+                                                const label = verdict.verdict === 'good' ? '✅ 쓸 만하다'
+                                                    : verdict.verdict === 'bad' ? '⛔ 광고 수익 안 나온다' : '⚖ 각도에 달렸다';
+                                                return (
+                                                    <div className={`lw-mindmap-money lw-mindmap-money-${verdict.verdict}`}>
+                                                        <div className="lw-mindmap-money-head">
+                                                            💰 광고 수익 관점 — 클릭할까 · 무슨 광고가 뜰까 · 머물까
+                                                            <strong>{label}</strong>
+                                                        </div>
+                                                        <ul>
+                                                            {verdict.points.map((point) => <li key={point.text}>{point.text}</li>)}
+                                                        </ul>
+                                                        {verdict.angle && <p><strong>쓴다면:</strong> {verdict.angle}</p>}
+                                                    </div>
+                                                );
+                                            })()}
                                         </div>
                                     )}
 
