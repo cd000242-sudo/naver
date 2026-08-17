@@ -2152,6 +2152,26 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
     <script src="/admin/keyword-briefing-tools.js"></script>
     <script src="/admin/structured-editor-tools.js"></script>
     <script>
+        /*
+         * GitHub 토큰 부트스트랩 (2026-08-17) — 사장님 PC 의 에이전트가
+         * `start https://.../admin/#ghpat=<token>` 로 이 페이지를 열면 토큰이
+         * localStorage 로 들어가고 주소에서는 즉시 지워진다(replaceState —
+         * 히스토리에도 안 남는다). fragment 는 서버로 전송되지 않는다.
+         * 남이 이 방식으로 심을 수 있는 건 "자기 토큰"뿐이라 얻는 것이 없고,
+         * 이상한 토큰이 심기면 [연동상태 확인]이 조회 실패로 드러낸다.
+         */
+        (function bootstrapGhPatFromHash() {
+            try {
+                const match = (location.hash || '').match(/[#&]ghpat=([A-Za-z0-9_]+)/);
+                if (!match) return;
+                localStorage.setItem('leaderspro_admin_gh_pat', match[1]);
+                history.replaceState(null, '', location.pathname + location.search);
+                window.addEventListener('DOMContentLoaded', () => {
+                    if (typeof showToast === 'function') showToast('GitHub 토큰이 이 브라우저에 등록됐습니다.');
+                });
+            } catch { /* 저장 실패 시 수동 입력 칸이 그대로 있다 */ }
+        })();
+
         // ===== CONFIG =====
         // Credentials and the administrator token are deliberately never put
         // in this public file.  The GAS backend issues a short-lived opaque
