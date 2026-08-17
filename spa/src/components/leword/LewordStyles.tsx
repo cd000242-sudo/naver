@@ -609,6 +609,35 @@ function LewordStyles() {
             .lw-surface-tag.surface-wordpress { border-color: rgba(90,169,255,.45); color: #8ec5ff; background: rgba(90,169,255,.12); }
             .lw-surface-tag.surface-kin { border-color: rgba(124,92,255,.5); color: #b8a6ff; background: rgba(124,92,255,.14); }
             .lw-surface-tag.surface-shopping { border-color: rgba(255,138,0,.45); color: #ffb765; background: rgba(255,138,0,.12); }
+            /* 시기 그룹 배지 — "언제 쓸 것"(실측 산술). 지금 적기가 가장 뜨겁다. */
+            .lw-timing-tag {
+                padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 800;
+                border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05);
+                color: rgba(235,242,250,.78);
+            }
+            .lw-timing-tag.timing-now { border-color: rgba(52,211,153,.55); color: #6ee7b7; background: rgba(52,211,153,.14); }
+            .lw-timing-tag.timing-prep { border-color: rgba(96,165,250,.5); color: #93c5fd; background: rgba(96,165,250,.12); }
+            .lw-timing-tag.timing-rising { border-color: rgba(248,113,113,.5); color: #fca5a5; background: rgba(248,113,113,.12); }
+            .lw-timing-tag.timing-evergreen { border-color: rgba(148,163,184,.45); color: #cbd5e1; background: rgba(148,163,184,.1); }
+            /* 애드센스 적합 배지 — 의도·CPC 실측 판정. 미판정(null)은 배지 없음. */
+            .lw-adsense-tag {
+                padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 800;
+                border: 1px solid rgba(26,115,232,.55); color: #8ab4f8; background: rgba(26,115,232,.14);
+            }
+            /* 대장간 산출물 — 제목 2종 + 문제해결 서브 */
+            .lw-forge {
+                margin: 10px 0 2px; padding: 10px 13px; border-radius: 10px;
+                background: rgba(255,255,255,.04); border-left: 3px solid rgba(250,204,21,.4);
+                display: flex; flex-direction: column; gap: 5px;
+            }
+            .lw-forge-title { font-size: 13px; color: rgba(235,242,250,.9); line-height: 1.5; word-break: keep-all; }
+            .lw-forge-title span, .lw-forge-subs span {
+                display: inline-block; margin-right: 8px; padding: 1px 7px; border-radius: 6px;
+                background: rgba(255,255,255,.07); color: rgba(235,242,250,.55);
+                font-size: 10.5px; font-weight: 800; vertical-align: 1px;
+            }
+            .lw-forge-subs { font-size: 12.5px; color: rgba(235,242,250,.75); line-height: 1.7; }
+            .lw-forge-subs em { font-style: normal; margin-right: 10px; color: #fcd34d; }
             .lw-plan-surface p { margin: 0 0 9px; color: rgba(235,242,250,.86); font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
             .lw-surface-rank { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
             .lw-surface-rank li { display: flex; gap: 9px; align-items: baseline; color: rgba(235,242,250,.8); font-size: 13px; }

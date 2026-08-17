@@ -1,4 +1,4 @@
-import { EVIDENCE_ICON, SURFACE_TAG, TIER_BADGE } from './preemptionMeta';
+import { EVIDENCE_ICON, SURFACE_TAG, TIER_BADGE, TIMING_BADGE } from './preemptionMeta';
 import { preemptionIndex } from '../../lib/preemptionIndex';
 
 /**
@@ -19,6 +19,11 @@ export type CardHeadRow = {
     briefingRisk?: string | null;
     regulatoryLabel?: string;
     layoutBestFor?: string | null;
+    /** "언제 쓸 것" — 데이터랩 24개월 실측 산술. 빈 문자열 = 미측정. */
+    timingGroup?: string;
+    /** 애드센스 적합 — 의도·CPC 실측 판정. null 은 재료 부족(미판정)이지 부적합이 아니다. */
+    adsenseFit?: boolean | null;
+    adsenseReason?: string;
     earlyMover?: boolean;
     earlyMoverReasons?: string[];
     evidence: Evidence[];
@@ -63,8 +68,18 @@ function BoardCardHead({ row, rank }: { row: CardHeadRow; rank?: number }) {
                 {row.tier && TIER_BADGE[row.tier] && (
                     <span className={`lw-tier-tag ${TIER_BADGE[row.tier].cls}`}>{TIER_BADGE[row.tier].text}</span>
                 )}
-                {row.trendLabel && row.trendLabel !== '판정불가' && (
+                {/*
+                  * 시기 그룹(2026-08-17: "시기별로 알 수 있으면 좋잖아")이 있으면
+                  * 트렌드 배지를 **대체**한다 — 같은 실측의 더 행동적인 표현이라
+                  * 배지 수를 늘리지 않는다. 없으면 기존 트렌드 배지 그대로.
+                  */}
+                {row.timingGroup && TIMING_BADGE[row.timingGroup] ? (
+                    <span className={`lw-timing-tag ${TIMING_BADGE[row.timingGroup].cls}`}>{row.timingGroup}</span>
+                ) : (row.trendLabel && row.trendLabel !== '판정불가' && (
                     <span className="lw-trend-tag">{row.trendLabel}</span>
+                ))}
+                {row.adsenseFit === true && (
+                    <span className="lw-adsense-tag" title={row.adsenseReason || ''}>AdSense</span>
                 )}
             </div>
 

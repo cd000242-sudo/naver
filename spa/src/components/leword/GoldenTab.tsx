@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import PreemptionPlan from './PreemptionPlan';
-import { naverSearchUrl } from './preemptionMeta';
+import { naverSearchUrl, rowMatchesWriteLane } from './preemptionMeta';
 
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
@@ -51,6 +51,19 @@ type PreemptionRow = {
     trendLabel?: string;
     /** 시즌성일 때 "언제 써야 하는가". */
     timing?: string;
+    /** 시기 그룹(지금 적기/준비 시기/지금 뜨는 중/연중 상시). 빈 문자열 = 미측정. */
+    timingGroup?: string;
+    monthsToPeak?: number | null;
+    /** 애드센스 적합 실측 판정. null = 재료 부족(미판정). */
+    adsenseFit?: boolean | null;
+    adsenseReason?: string;
+    /** 회차 실측으로 만든 제목 2종(SEO/홈판). 옛 회차 데이터에는 없다. */
+    titles?: {
+        seo?: { text: string; frame?: string; basis?: string };
+        home?: { text: string; frame?: string; basis?: string };
+    } | null;
+    /** 문제해결 서브(형제 실측 선별). 빈 배열 = 파생 실측 없음. */
+    subKeywords?: { keyword: string; searchVolume: number | null; frame?: string }[];
     serpSections?: string[];
     /** 뜨는 중 · 밭 비어 있음 · 실시간 전 · 새로 생긴 말 — 네 조건을 다 만족. */
     /** 배치 순서로 본 "어디에 쓸 판인가". */
@@ -127,7 +140,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         const all = board?.rows || [];
         const needle = query.trim().toLowerCase();
         const filtered = all.filter((row) => {
-            if (writeLane !== 'all' && row.layoutBestFor !== writeLane) return false;
+            // 레인 판정은 rowMatchesWriteLane 단일 출처 — 애드센스만 실측 의도, 나머지는 배치 순서.
+            if (!rowMatchesWriteLane(row, writeLane)) return false;
             if (topic !== '전체' && row.topic !== topic) return false;
             return !needle || row.keyword.toLowerCase().includes(needle);
         });
@@ -217,7 +231,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         onChange={setWriteLane}
                         counts={{
                             total: board.rows.length,
-                            laneCount: (laneId) => board.rows.filter((row) => row.layoutBestFor === laneId).length,
+                            laneCount: (laneId) => board.rows.filter((row) => rowMatchesWriteLane(row, laneId)).length,
                         }}
                     />
 
@@ -261,6 +275,37 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             </strong>
                                         </div>
                                     </div>
+
+                                    {/*
+                                      * 대장간 산출물 — 제목 2종 + 문제해결 서브(2026-08-17 재편).
+                                      * 전부 회차 실측에서 조립된 값이고, 옛 회차 데이터에는 없으므로
+                                      * 있을 때만 그린다. 서브는 마인드맵 확장의 시작점이다.
+                                      */}
+                                    {(row.titles?.seo || row.titles?.home || (row.subKeywords?.length ?? 0) > 0) && (
+                                        <div className="lw-forge">
+                                            {row.titles?.seo && (
+                                                <div className="lw-forge-title" title={row.titles.seo.basis || ''}>
+                                                    <span>SEO 제목</span>{row.titles.seo.text}
+                                                </div>
+                                            )}
+                                            {row.titles?.home && (
+                                                <div className="lw-forge-title" title={row.titles.home.basis || ''}>
+                                                    <span>홈판 제목</span>{row.titles.home.text}
+                                                </div>
+                                            )}
+                                            {(row.subKeywords?.length ?? 0) > 0 && (
+                                                <div className="lw-forge-subs">
+                                                    <span>문제해결 서브</span>
+                                                    {(row.subKeywords || []).map((sub) => (
+                                                        <em key={sub.keyword}>
+                                                            {sub.keyword}
+                                                            {typeof sub.searchVolume === 'number' ? ` (${sub.searchVolume.toLocaleString()})` : ''}
+                                                        </em>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
 
                                     <div className="lw-card-actions">
                                         <button
