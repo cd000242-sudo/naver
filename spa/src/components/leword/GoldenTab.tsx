@@ -59,6 +59,8 @@ type PreemptionRow = {
     adsenseFit?: boolean | null;
     /** 보강이 붙인 수익 결론 — bad 는 애드센스 레인에서 빠진다(이유는 카드에 남는다). */
     monetize?: { verdict: 'good' | 'bad' | 'mixed'; points: Array<{ text: string }>; angle?: string } | null;
+    /** 실측 키워드 풀(연관 실측 + AI 검증분) — 전부 검색량이 확인된 실존 검색어다. */
+    keywordPool?: Array<{ keyword: string; searchVolume: number | null; source?: string }> | null;
     adsenseReason?: string;
     /** 회차 실측으로 만든 제목 2종(SEO/홈판). 옛 회차 데이터에는 없다. */
     titles?: {
@@ -393,6 +395,24 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                     ))}
                                                 </div>
                                             )}
+                                        </div>
+                                    )}
+
+                                    {/* 실측 키워드 풀 — 연관 실측 + AI 검증분, 전부 검색량 확인된 실존 검색어. */}
+                                    {(row.keywordPool?.length ?? 0) > 0 && (
+                                        <div className="lw-mindmap-branches" style={{ marginTop: 10 }}>
+                                            {(row.keywordPool || []).map((item) => (
+                                                <a
+                                                    key={item.keyword}
+                                                    href={naverSearchUrl(item.keyword)}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className={item.source === 'ai-verified' ? 'lw-mindmap-ai' : ''}
+                                                >
+                                                    {item.keyword}
+                                                    <span>{item.searchVolume ? item.searchVolume.toLocaleString() : '실측'}</span>
+                                                </a>
+                                            ))}
                                         </div>
                                     )}
 
