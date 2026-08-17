@@ -153,6 +153,20 @@ function SourceBriefModalStyles() {
                 background: rgba(255,255,255,0.045);
             }
 
+            /* 요약이 먼저 읽히도록 본문 문장보다 크고 밝게. */
+            .brief-modal-summary {
+                margin: 0 0 14px;
+                padding: 12px 14px;
+                border: 1px solid rgba(255,255,255,0.10);
+                border-radius: 12px;
+                background: rgba(255,255,255,0.045);
+                color: #fff;
+                font-size: 15px;
+                font-weight: 700;
+                line-height: 1.65;
+                word-break: keep-all;
+            }
+
             .brief-modal-facts ul {
                 display: flex;
                 flex-direction: column;

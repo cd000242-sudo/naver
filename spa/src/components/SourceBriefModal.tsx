@@ -42,6 +42,10 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
     const links = (brief?.links || []).slice(0, 6);
     const photo = (brief?.images || [])[0] || item.image;
     const titles = brief?.titles || {};
+    // 에이전트가 지은 두 문장 요약(있을 때만). 없으면 기존처럼 원문 문장만 보인다.
+    const summary = typeof (titles as { summary?: string }).summary === 'string'
+        ? (titles as { summary?: string }).summary
+        : '';
     const expansions = (item.expansions || []).slice(0, 12);
 
     // ESC 로 닫고, 열려 있는 동안 뒤 화면은 스크롤되지 않게 한다.
@@ -96,8 +100,14 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                         <section className="brief-modal-facts" aria-label={`${keyword} 무슨 일이 있었나`}>
                             <div className="brief-modal-section-head">
                                 <strong>무슨 일이 있었나</strong>
-                                <small>기사 원문에서 확인된 문장입니다</small>
+                                <small>{summary ? '핵심 요약 · 원문 문장은 아래' : '기사 원문에서 확인된 문장입니다'}</small>
                             </div>
+                            {/*
+                              기사 문장을 통째로 늘어놓으면 정작 무슨 일인지 읽어내는 데
+                              시간이 걸린다. 두 문장 요약을 앞에 세우고, 원문 문장은
+                              근거로 아래에 남긴다 — 요약만 있고 근거가 없으면 못 믿는다.
+                            */}
+                            {summary && <p className="brief-modal-summary">{summary}</p>}
                             {photo && (
                                 <img
                                     src={photo}

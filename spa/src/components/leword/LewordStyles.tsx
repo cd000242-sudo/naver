@@ -642,6 +642,66 @@ function LewordStyles() {
             }
             .lw-forge-subs { font-size: 12.5px; color: rgba(235,242,250,.75); line-height: 1.7; }
             .lw-forge-subs em { font-style: normal; margin-right: 10px; color: #fcd34d; }
+            /* 마인드맵 — 중심 키워드에서 실측 확장어가 갈라진다.
+               AI 가 찾아 실측으로 확인된 가지는 색으로 구분한다. */
+            .lw-mindmap {
+                margin-top: 10px;
+                padding: 14px 16px;
+                border: 1px solid rgba(255,255,255,.10);
+                border-radius: 12px;
+                background: rgba(255,255,255,.03);
+            }
+            .lw-mindmap-core {
+                display: inline-block;
+                padding: 7px 14px;
+                margin-bottom: 12px;
+                border-radius: 999px;
+                background: rgba(255,215,0,.14);
+                border: 1px solid rgba(255,215,0,.35);
+                color: #ffd700;
+                font-weight: 900;
+                font-size: 14px;
+            }
+            .lw-mindmap-why { margin: 0 0 12px; padding-left: 18px; }
+            .lw-mindmap-why li {
+                margin-bottom: 6px;
+                color: rgba(235,242,250,.86);
+                font-size: 13px;
+                line-height: 1.65;
+                word-break: keep-all;
+            }
+            .lw-mindmap-why em {
+                margin-left: 6px;
+                padding: 1px 6px;
+                border-radius: 4px;
+                background: rgba(90,169,255,.14);
+                color: #8ec5ff;
+                font-size: 11px;
+                font-style: normal;
+                font-weight: 700;
+            }
+            .lw-mindmap-branches { display: flex; flex-wrap: wrap; gap: 7px; }
+            .lw-mindmap-branches a {
+                display: inline-flex;
+                align-items: baseline;
+                gap: 6px;
+                padding: 6px 12px;
+                border-radius: 999px;
+                border: 1px solid rgba(255,255,255,.12);
+                background: rgba(255,255,255,.04);
+                color: rgba(235,242,250,.88);
+                font-size: 12.5px;
+                font-weight: 700;
+                text-decoration: none;
+            }
+            .lw-mindmap-branches a span { font-weight: 400; opacity: .62; font-size: 11px; }
+            .lw-mindmap-branches a:hover { background: rgba(255,255,255,.09); color: #fff; }
+            .lw-mindmap-branches a.lw-mindmap-ai {
+                border-color: rgba(90,169,255,.42);
+                background: rgba(90,169,255,.10);
+                color: #bcdcff;
+            }
+
             .lw-forge-ai { border-left-color: rgba(90,169,255,.45); }
             .lw-forge-ai a { color: #8ec5ff; text-decoration: none; }
             .lw-forge-ai a:hover { text-decoration: underline; }

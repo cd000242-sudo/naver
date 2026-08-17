@@ -56,6 +56,30 @@ export async function probeBridge(): Promise<BridgeStatus> {
  * 규칙 선별 → 부족하면 클로드코드 제안 → 실존 결재)를 그대로 쓴다.
  * 결과의 subs 는 이미 검증된 것만 온다(추론 60초까지 걸릴 수 있다).
  */
+export interface BridgeMindmap {
+    keyword: string;
+    reasons: Array<{ text: string; basis: string }>;
+    expansions: Array<{ keyword: string; searchVolume: number | null; source: string }>;
+    signals: string[];
+    agent: { available: boolean; provider: string; proposed: number; verified: number; error?: string };
+}
+
+/**
+ * 마인드맵 — 사이트가 사용자 PC 의 앱을 통해 본인 구독으로 돌린다.
+ *
+ * 예전에는 "마인드맵은 앱 기능"이라 웹에서 링크만 걸었는데, 브리지가 생긴
+ * 뒤로는 그 전제가 사라졌다. 앱이 꺼져 있으면 null 이고, 화면은 앱을 켜라고
+ * 안내한다 — 지어낸 확장어를 보여주지 않는다.
+ */
+export async function bridgeMindmap(keyword: string): Promise<BridgeMindmap | null> {
+    const body = await bridgeFetch('/v1/bridge/mindmap', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ keyword }),
+    }, 90_000) as { result?: BridgeMindmap } | null;
+    return body?.result || null;
+}
+
 export async function bridgeAiSubs(keyword: string): Promise<{
     subs: Array<{ keyword: string; searchVolume: number | null; source?: string }>;
     ai?: { used: boolean; provider: string; proposed: number; verified: number };

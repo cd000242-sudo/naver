@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import PreemptionPlan from './PreemptionPlan';
 import { naverSearchUrl, rowMatchesWriteLane } from './preemptionMeta';
-import { bridgeAiSubs } from '../../lib/bridge';
+import { bridgeAiSubs, bridgeMindmap, type BridgeMindmap } from '../../lib/bridge';
 
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
@@ -127,6 +127,36 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         ai?: { used: boolean; provider: string; proposed: number; verified: number };
         error?: string;
     }>>({});
+    /*
+     * 마인드맵 — 앱으로 보내는 링크였던 것을 실제 기능으로 바꾼다.
+     * 브리지가 사용자 PC 의 앱을 통해 본인 구독으로 돌린다. 앱이 꺼져 있으면
+     * 'offline' 로 안내할 뿐, 확장어를 지어내지 않는다.
+     */
+    const [mindmap, setMindmap] = useState<Record<string, {
+        status: 'loading' | 'done' | 'offline' | 'error';
+        data?: BridgeMindmap;
+        error?: string;
+    }>>({});
+
+    const openMindmap = async (keyword: string) => {
+        if (mindmap[keyword]?.status === 'done') {
+            setMindmap((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
+            return;
+        }
+        setMindmap((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
+        try {
+            const result = await bridgeMindmap(keyword);
+            if (!result) {
+                setMindmap((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
+                return;
+            }
+            setMindmap((prev) => ({ ...prev, [keyword]: { status: 'done', data: result } }));
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            setMindmap((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
+        }
+    };
+
     const askAiSubs = async (keyword: string) => {
         setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
         try {
@@ -347,19 +377,18 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             LEWORD 키워드 분석
                                         </button>
                                         {/*
-                                          * 마인드맵 확장은 LEWORD 앱 기능이다(사장님 확인, 2026-08-11).
-                                          *
-                                          * 앱을 웹에서 직접 열 수는 없다 — 커스텀 프로토콜(leword://)을
-                                          * 등록하지 않기 때문이다. 그래서 '앱에서 열기'라고 적으면 안 된다.
-                                          * 눌러도 앱이 안 열리는데 열린다고 말하는 셈이다.
-                                          * 어디에 있는 기능인지만 적고 소개 화면으로 보낸다.
-                                          *
-                                          * 웹에도 붙이려면 엔진을 새로 만들 필요는 없다 — 모바일 API 에
-                                          * /v1/mindmap/expand 가 이미 있다(src/mobile/contracts.ts).
+                                          * 예전에는 여기가 /leword 소개로 보내는 링크였다. "앱 기능이라
+                                          * 웹에서는 못 돈다"는 전제였는데, 브리지가 생긴 뒤로 그 전제가
+                                          * 사라졌다 — 사용자 PC 의 앱이 켜져 있으면 본인 구독으로 돈다.
                                           */}
-                                        <a href="/leword" target="_blank" rel="noreferrer">
-                                            마인드맵 확장키워드<small>LEWORD 앱 기능</small>
-                                        </a>
+                                        <button
+                                            type="button"
+                                            onClick={() => openMindmap(row.keyword)}
+                                            disabled={mindmap[row.keyword]?.status === 'loading'}
+                                        >
+                                            {mindmap[row.keyword]?.status === 'loading' ? '확장 중…' : '마인드맵 확장키워드'}
+                                            <small>내 클로드코드 구독</small>
+                                        </button>
                                         {/* 데이터랩은 실제 검색량 추이를 그린다. 우리가 그리는 그림이 아니다. */}
                                         <a href={dataLabUrl(row.keyword)} target="_blank" rel="noreferrer">
                                             그래프보기<small>네이버 데이터랩</small>
@@ -383,6 +412,53 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             }}
                                         >{copied === row.keyword ? '복사됨' : '복사'}</button>
                                     </div>
+
+                                    {/* 마인드맵 결과 — 중심 키워드에서 실측 확장어가 갈라져 나온다. */}
+                                    {mindmap[row.keyword]?.status === 'offline' && (
+                                        <div className="lw-forge lw-forge-ai">
+                                            <div className="lw-forge-subs">
+                                                LEWORD 앱이 꺼져 있습니다 — 앱을 켜면 마인드맵이 <strong>내 클로드코드 구독</strong>으로
+                                                확장됩니다. <a href="/download">⬇ 앱 받기</a>
+                                            </div>
+                                        </div>
+                                    )}
+                                    {mindmap[row.keyword]?.status === 'error' && (
+                                        <div className="lw-forge lw-forge-ai">
+                                            <div className="lw-forge-subs">확장 실패: {mindmap[row.keyword]?.error}</div>
+                                        </div>
+                                    )}
+                                    {mindmap[row.keyword]?.status === 'done' && (
+                                        <div className="lw-mindmap">
+                                            <div className="lw-mindmap-core">{row.keyword}</div>
+                                            {(mindmap[row.keyword]?.data?.reasons || []).length > 0 && (
+                                                <ul className="lw-mindmap-why">
+                                                    {(mindmap[row.keyword]?.data?.reasons || []).map((reason) => (
+                                                        <li key={reason.text}>
+                                                            {reason.text}
+                                                            <em>{reason.basis} 실측</em>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            )}
+                                            <div className="lw-mindmap-branches">
+                                                {(mindmap[row.keyword]?.data?.expansions || []).map((item) => (
+                                                    <a
+                                                        key={item.keyword}
+                                                        href={naverSearchUrl(item.keyword)}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className={item.source === 'ai-verified' ? 'lw-mindmap-ai' : ''}
+                                                    >
+                                                        {item.keyword}
+                                                        <span>{item.searchVolume ? item.searchVolume.toLocaleString() : '자동완성'}</span>
+                                                    </a>
+                                                ))}
+                                            </div>
+                                            {(mindmap[row.keyword]?.data?.expansions || []).length === 0 && (
+                                                <div className="lw-forge-subs">실존이 확인된 확장 검색어가 없습니다.</div>
+                                            )}
+                                        </div>
+                                    )}
 
                                     {aiSubs[row.keyword]?.status === 'offline' && (
                                         <div className="lw-forge lw-forge-ai">

@@ -829,6 +829,8 @@ function sourceGroundedTitles(keyword, laneId, headlines) {
     ...(cached.seo ? { seo: cached.seo } : {}),
     ...(cached.home ? { home: cached.home } : {}),
     ...(cached.topic ? { topic: cached.topic } : {}),
+    // 기사 원문을 통째로 늘어놓는 대신 두 문장 요약을 앞에 세운다.
+    ...(cached.summary ? { summary: cached.summary } : {}),
     aiTitled: Boolean(cached.seo || cached.home),
   };
 }
