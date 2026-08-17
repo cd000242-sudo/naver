@@ -73,6 +73,14 @@ function KeysTab() {
                             <a className="lw-key-issue" href={group.issueUrl} target="_blank" rel="noreferrer">발급받기 →</a>
                         </div>
                         <p className="lw-card-note" style={{ marginBottom: 12 }}>{group.desc}</p>
+                        {/* 구독 무료 경로가 첫 번째다 — 키 입력은 그다음 선택지. */}
+                        {group.id === 'ai' && (
+                            <p className="lw-card-note" style={{ marginBottom: 12 }}>
+                                <a href="/download" style={{ color: '#b8a6ff', fontWeight: 800, textDecoration: 'none' }}>
+                                    ⬇ LEWORD 앱 받기 — Claude Code·Codex 로그인 자동 감지, 구독으로 무료 추론 →
+                                </a>
+                            </p>
+                        )}
                         <div className="lw-key-fields">
                             {group.fields.map((field) => {
                                 /*

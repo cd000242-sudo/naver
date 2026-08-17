@@ -102,10 +102,17 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
          */
         id: 'ai',
         label: 'AI 추론 (Claude)',
-        desc: '보드 키워드의 서브키워드·후킹을 AI 로 더 뽑을 때 씁니다. 이 브라우저에서 Anthropic 으로 직접 호출하며 서버를 거치지 않습니다.',
+        /*
+         * 우선순위를 분명히 한다(사장님 지시): 구독으로 **무료** 사용은 LEWORD 앱이
+         * 담당한다 — 앱이 PC 의 Claude Code/Codex 로그인을 자동 감지해서 키 없이
+         * 돈다. 이 API 키 칸은 "앱 없이 웹에서만 쓰고 싶은 사람"의 선택지이며
+         * 사용량만큼 본인 과금이 붙는다. 웹은 구독 로그인 연동이 불가능하다 —
+         * Anthropic 이 서드파티 사이트에 그 흐름을 제공하지 않는다.
+         */
+        desc: '💡 Claude·ChatGPT 구독이 있다면 LEWORD 앱에서 무료로 쓰세요 — 앱이 PC 의 Claude Code/Codex 로그인을 자동 감지해 키 없이 작동합니다(추가 비용 0원). 아래 API 키는 앱 없이 웹에서만 쓸 때의 선택지이고, 사용량만큼 Anthropic 요금이 부과됩니다.',
         issueUrl: 'https://console.anthropic.com/settings/keys',
         fields: [
-            { key: 'anthropicKey', label: 'Anthropic API 키', secret: true, placeholder: 'sk-ant-api03-...', minLength: 40 },
+            { key: 'anthropicKey', label: 'Anthropic API 키 (선택 — 웹 전용, 종량 과금)', secret: true, placeholder: 'sk-ant-api03-...', minLength: 40 },
         ],
     },
 ];
