@@ -15,6 +15,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { trendAnalyzer } from './trendAnalyzer.js';
 import { loadConfig } from '../configManager.js';
 import { matchIntent, matchDirectAction, isAppScopeMessage, type Intent } from './intentMatcher.js';
+import { resolveAnswerEngine, answerWithAgentCli } from './answerEngine.js';
 
 export class MasterAgent {
   private classifier: QuestionClassifier;
@@ -733,20 +734,44 @@ export class MasterAgent {
         ? `[실시간 검색/수집 결과]\n- 기준일: ${todayIso}\n- 수집 소스 수: ${realtime?.sourceCount || 0}\n- URL(최대 8개):\n${evidenceUrls.map((u) => `- ${u}`).join('\n')}\n\n[수집된 본문 발췌]\n${evidenceText}`
         : '';
 
-      const modelsToTry = [
-        GEMINI_TEXT_MODELS.FLASH,
+      // [2026-08-18] 앱 공식 지식 주입 (RAG) — 감사에서 knowledgeBase가 한 번도 호출되지
+      // 않는 죽은 배선으로 확인됐다(route() 미호출). 살아있는 이 경로에 직접 연결한다.
+      // 이게 없으면 모델이 앱 UI·버튼 이름을 지어낸다.
+      const knowledgeHits = mode === 'app' ? knowledgeBase.search(message, 4) : [];
+      const knowledgePart = knowledgeHits.length > 0
+        ? `[앱 공식 지식 — 아래 내용만 사실로 취급]\n${knowledgeHits
+            .map((it, i) => {
+              const steps = it.steps?.length ? `\n  단계: ${it.steps.join(' → ')}` : '';
+              const tips = it.tips?.length ? `\n  팁: ${it.tips.join(' / ')}` : '';
+              return `[${i + 1}] ${it.title}\n  ${String(it.content || '').slice(0, 900)}${steps}${tips}`;
+            })
+            .join('\n\n')}`
+        : '';
+
+      const parts = [
+        { text: systemPrompt },
+        ...(knowledgePart ? [{ text: knowledgePart }] : []),
+        ...(evidencePart ? [{ text: evidencePart }] : []),
+        { text: `[최근 대화]\n${historyText}\n\n[현재 질문]\n${message}` },
       ];
 
-      const result = await this.generateWithModelFallback(
-        modelsToTry,
-        [
-          { text: systemPrompt },
-          ...(evidencePart ? [{ text: evidencePart }] : []),
-          { text: `[최근 대화]\n${historyText}\n\n[현재 질문]\n${message}` }
-        ]
-      );
+      // [2026-08-18] 사용자가 고른 엔진으로 답한다 — 구독(에이전트 모드)이면 추가 요금 0원.
+      const engine = await resolveAnswerEngine();
+      let response = '';
+      if (engine.kind === 'agent-claude' || engine.kind === 'agent-codex' || engine.kind === 'agent-gemini') {
+        const agentAnswer = await answerWithAgentCli(engine.kind, parts.map((p) => p.text).join('\n\n'));
+        if (agentAnswer) {
+          console.log(`[MasterAgent] 💬 답변 엔진: ${engine.label} (추가 요금 없음)`);
+          response = agentAnswer;
+        } else {
+          console.warn(`[MasterAgent] ${engine.label} 답변 실패 — Gemini 키가 있으면 그쪽으로 처리`);
+        }
+      }
 
-      const response = result.response.text();
+      if (!response) {
+        const result = await this.generateWithModelFallback([GEMINI_TEXT_MODELS.FLASH], parts);
+        response = result.response.text();
+      }
 
       // 액션 버튼 자동 감지
       const actions = this.detectActions(message, response);
@@ -783,7 +808,12 @@ export class MasterAgent {
       for (let attempt = 1; attempt <= 2; attempt++) {
         try {
           this.geminiModelName = modelName;
-          this.geminiModel = this.genAI!.getGenerativeModel({ model: modelName });
+          // [2026-08-18] 생성 파라미터 부재로 SDK 기본값(창의적 온도)이 쓰이던 문제 —
+          // 앱 안내는 사실성이 우선이라 온도를 낮추고 답변 길이를 제한한다.
+          this.geminiModel = this.genAI!.getGenerativeModel({
+            model: modelName,
+            generationConfig: { temperature: 0.35, maxOutputTokens: 2048 },
+          });
           return await this.geminiModel.generateContent(parts);
         } catch (e) {
           lastError = e;
@@ -826,10 +856,16 @@ export class MasterAgent {
 ### Tool Capabilities (Leaders Pro 기능 명세)
 당신은 실제 소프트웨어 'Leaders Pro' 안에 있습니다. 당신이 지원할 수 있는 기능:
 1. **황금 키워드 발굴:** 검색량은 많고 경쟁은 적은 키워드를 분석하고 추천합니다.
-2. **원고 자동 생성:** SEO에 최적화된 블로그 포스팅 초안을 작성합니다.
-3. **플랫폼 최적화:** 네이버, 워드프레스, Blogspot 등 각 플랫폼에 맞는 포맷을 제안합니다.
-4. **이미지 생성/검색:** AI 이미지 생성, Pexels 검색 등을 통해 블로그 비주얼을 지원합니다.
-5. **환경설정 및 트러블슈팅:** API 설정, 오류 해결 등을 안내합니다.
+2. **글 생성·발행:** 키워드/URL/사진으로 글을 만들고 네이버 블로그에 반자동·풀오토·연속·
+   다중계정으로 발행합니다 (SEO 모드 / 홈피드 모드).
+3. **이미지:** AI 이미지 생성(멀티 엔진), 썸네일 생성, 이슈 이미지 자동 수집(인물·연예·스포츠),
+   공식문서 캡처(경제·지원금 글), 소제목별 배치, 발행 시 AI 활용 마크 자동 체크.
+4. **엔진 선택:** Gemini/OpenAI/Claude API 키 방식과, Claude 구독·ChatGPT 구독·Google
+   Antigravity를 쓰는 에이전트 모드(추가 요금 없음)를 지원합니다.
+5. **쇼핑커넥트 / 환경설정·트러블슈팅:** 제휴 상품 글, API 키 설정, 로그인·발행 오류 해결.
+
+⚠️ 워드프레스·블로그스팟 등 네이버 외 플랫폼 자동 발행은 이 앱의 기능이 아니다.
+확실하지 않은 기능은 "있다"고 말하지 마라.
 
 사용자가 이 범위를 벗어난 기능(예: 사이트 해킹, 타 플랫폼 직접 조작 등)을 요청하면,
 "현재 제 기능으로는 직접 수행할 수 없지만, 해결할 수 있는 다른 방법을 알려드리겠습니다"라고 정중히 안내하십시오.
@@ -856,12 +892,21 @@ export class MasterAgent {
 1. **어뷰징 방지:** 네이버/구글의 스팸 정책을 준수하십시오. 키워드 반복이 심하거나, 무의미한 텍스트 나열은 추천하지 마십시오.
 2. **저품질 주의:** '무조건 수익 보장', '100% 성공' 등의 과장된 표현은 지양하고 신뢰할 수 있는 정보를 제공하십시오.
 
+### 근거 규칙 (최우선 — 지어내기 금지)
+- [앱 공식 지식]이 제공되면 그것이 이 앱에 대한 **유일한 사실**이다. 거기 없는 버튼·탭·설정
+  이름을 절대 만들어내지 마라.
+- 앱 기능을 묻는데 근거가 없으면, 아는 척하지 말고 이렇게 답한다:
+  "그 기능은 제가 가진 자료에 없습니다. 환경설정 또는 해당 탭에서 확인해 주세요."
+  (모른다고 말하는 것이 틀린 안내보다 낫다.)
+- 질문이 애매하면 되물어도 된다. 추측으로 단정하지 마라.
+- 수치·정책·가격은 근거가 있을 때만 말한다.
+
 ### Avoid (금지 사항)
-- "잘 모르겠습니다"라고 짧게 끝내지 마십시오. 모르는 내용이면 검색 팁이라도 주십시오.
 - 사용자의 질문을 단순히 반복하지 마십시오.
 - 마크다운(Markdown) 없이 밋밋한 텍스트로만 답변하지 마십시오.
-- 불필요한 맞장구/군더더기 금지.
+- 불필요한 맞장구/군더더기 금지. 인사말로 시작하지 마라.
 - 허위 정보/더미 데이터/근거 없는 단정 금지.
+- 답변은 핵심만. 기본 6줄 이내, 단계 안내는 3~5단계.
 
 ${roleScope}
 
@@ -1258,18 +1303,23 @@ AI 이미지 생성 엔진을 선택하세요
     const results = knowledgeBase.search(message, 3);
 
     if (results.length === 0) {
-      // 지식 베이스에 없으면 Gemini API로 답변
+      // 지식 베이스에 없으면 선택 엔진으로 답변
       return this.handleWithGemini(message);
     }
 
-    // 가장 관련성 높은 항목으로 응답 생성
-    const bestMatch = results[0];
-    let response = this.formatter.formatKnowledgeResponse(
-      bestMatch.title,
-      bestMatch.content,
-      bestMatch.steps,
-      bestMatch.tips
+    // [2026-08-18] 저장된 문서를 그대로 뱉던 방식을 RAG로 교체.
+    //   기존: 검색이 조금이라도 걸리면 bestMatch 원문을 통째로 출력 → 질문이 무엇이든
+    //   같은 매뉴얼이 나와 "묻는 말에 대답 안 하는" 품질 저하의 주범이었다.
+    //   변경: 상위 항목들을 근거로 넣고 사용자의 실제 질문에 답하게 한다. 근거 밖은
+    //   지어내지 말라고 못박고, AI 사용 불가 시에만 기존 원문 출력으로 폴백한다.
+    const ragAnswer = await this.answerFromKnowledge(message, results);
+    let response = ragAnswer ?? this.formatter.formatKnowledgeResponse(
+      results[0].title,
+      results[0].content,
+      results[0].steps,
+      results[0].tips
     );
+    const bestMatch = results[0];
 
     // 관련 주제 추가
     const related = knowledgeBase.getRelated(bestMatch.id, 2);
@@ -1387,6 +1437,73 @@ AI 이미지 생성 엔진을 선택하세요
   // Gemini API로 답변 (지식 베이스에 없는 질문)
   private async handleWithGemini(message: string): Promise<AgentResult> {
     return await this.processWithGemini(message, this.isAppScopeMessage(message) ? 'app' : 'general');
+  }
+
+  /**
+   * [2026-08-18] 지식 근거 기반 답변 (RAG).
+   * 사용자가 고른 엔진(구독 CLI 우선)으로 답한다 — 구독이면 추가 요금 0원.
+   * 실패하면 null을 돌려 호출자가 기존 문서 출력으로 폴백하게 한다.
+   */
+  private async answerFromKnowledge(message: string, items: any[]): Promise<string | null> {
+    const context = items
+      .map((it, i) => {
+        const steps = Array.isArray(it.steps) && it.steps.length > 0
+          ? `\n  단계: ${it.steps.join(' → ')}`
+          : '';
+        const tips = Array.isArray(it.tips) && it.tips.length > 0
+          ? `\n  팁: ${it.tips.join(' / ')}`
+          : '';
+        return `[근거 ${i + 1}] ${it.title}\n  ${String(it.content || '').slice(0, 900)}${steps}${tips}`;
+      })
+      .join('\n\n');
+
+    const history = this.context.getLastMessages(6);
+    const historyText = history
+      .map((m: any) => `${m.role === 'user' ? '사용자' : 'AI'}: ${String(m.content || '').slice(0, 300)}`)
+      .join('\n');
+
+    const prompt = `${this.buildSmartPrompt('app')}
+
+### 근거 자료 (이 앱의 공식 매뉴얼에서 검색된 내용)
+${context}
+
+### 답변 규칙 (이번 답변에만 적용, 매우 중요)
+1. 위 근거 자료를 최우선 사실로 삼아 **사용자의 질문에 직접** 답하세요. 근거를 그대로
+   복사해 붙이지 말고, 질문에 맞게 필요한 부분만 골라 재구성하세요.
+2. 근거에 없는 기능·버튼·설정 이름을 지어내지 마세요. 근거로 답할 수 없으면
+   "그 부분은 확인이 필요합니다"라고 말하고, 대신 확인할 위치(탭·설정 이름)를 안내하세요.
+3. 버튼·메뉴 위치는 근거에 적힌 이름 그대로 쓰세요.
+4. 답변은 6줄 이내로 짧게. 단계가 필요하면 번호 목록 3~5개로.
+5. 사용자가 이미 아는 내용을 반복하지 말고, 바로 다음에 할 행동으로 끝내세요.
+${historyText ? `\n### 최근 대화\n${historyText}\n` : ''}
+### 사용자 질문
+${message}`;
+
+    const engine = await resolveAnswerEngine();
+    if (engine.kind === 'agent-claude' || engine.kind === 'agent-codex' || engine.kind === 'agent-gemini') {
+      const answer = await answerWithAgentCli(engine.kind, prompt);
+      if (answer) {
+        console.log(`[MasterAgent] 📚 근거 기반 답변 (${engine.label} · 추가 요금 없음)`);
+        return answer;
+      }
+      console.warn(`[MasterAgent] ${engine.label} 답변 실패 — 문서 원문으로 폴백`);
+      return null;
+    }
+
+    if (engine.kind === 'gemini-api' && this.geminiModel && this.genAI) {
+      try {
+        const result = await this.generateWithModelFallback([GEMINI_TEXT_MODELS.FLASH], [{ text: prompt }]);
+        const text = String(result.response.text() || '').trim();
+        if (text) {
+          console.log('[MasterAgent] 📚 근거 기반 답변 (Gemini API)');
+          return text;
+        }
+      } catch (error) {
+        console.warn(`[MasterAgent] 근거 기반 답변 실패: ${(error as Error).message}`);
+      }
+    }
+
+    return null;
   }
 
   // 에러 처리

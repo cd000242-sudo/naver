@@ -25,11 +25,14 @@ export const IntentPatterns: Record<Exclude<Intent, 'GENERAL' | 'DIRECT_ACTION'>
         'keylogger', '키로거', 'ddos', 'sql injection', 'xss', 'csrf'
     ],
 
+    // [2026-08-18] 대폭 축소. 이전 목록('시스템'·'코드'·'구조'·'원리'·'규칙'·'어떻게 작동')은
+    // "글 생성이 어떻게 작동해?", "네이버 정책 규칙이 뭐야" 같은 **정상 사용법 질문**까지
+    // 삼켜 "🤐" 한 글자로 답하게 만들었다(감사 실측). 실제 프롬프트 탈취 시도 문구만 남긴다.
     PROMPT_LEAK: [
-        '프롬프트', 'prompt', '지침', '시스템', 'system', '명령어', 'instruction',
-        '규칙', 'rule', '내부', '비밀', '숨겨진', 'hidden', 'secret',
-        '어떻게 작동', '어떻게 동작', '코드', 'code', '소스', 'source',
-        '알고리즘', 'algorithm', '로직', 'logic', '원리', '구조'
+        '프롬프트 공개', '프롬프트 보여', '프롬프트 알려', '프롬프트가 뭐',
+        'system prompt', 'systemprompt', '시스템 프롬프트', '지침 공개', '지침 보여',
+        '내부 지침', '너의 지침', '너의 규칙', '소스코드 보여', '소스 코드 보여',
+        'reveal your prompt', 'show your prompt', 'ignore previous instructions'
     ],
 
     GREETING: ['안녕', '하이', 'hi', 'hello', '반가워', '처음'],
@@ -45,16 +48,19 @@ export const IntentPatterns: Record<Exclude<Intent, 'GENERAL' | 'DIRECT_ACTION'>
         '실검', '급등', '인기 검색', '핫한', '지금 핫', '요즘 핫'
     ],
 
+    // [2026-08-18] 축소. 이전 목록('오류'·'에러'·'안돼'·'해결'·'수정')은 트러블슈팅 질문
+    // 대부분을 삼켰는데, 진단 핸들러는 질문 내용을 읽지도 않고 고정 설정 점검표만 반환했다.
+    // 이제 "전체 점검"처럼 진단을 명시적으로 요청할 때만 반응하고, 나머지는 지식+AI가 답한다.
     DIAGNOSTIC: [
-        '문제점', '점검', '진단', '오류', '에러', '안됨', '안돼', '안 돼', '안 됨',
-        '고장', '작동 안', '동작 안', '체크', 'check', '검사', '확인해',
-        '왜 안', '왜안', '문제 있', '이상', '버그', 'bug', '수정', 'fix',
-        '해결', '고쳐', '뭐가 잘못', '뭐가 문제', '상태 확인', '시스템 점검',
-        '전체 점검', '자동 수정', '자동수정', '셀프 진단', '자가 진단'
+        '시스템 점검', '전체 점검', '시스템 진단', '자가 진단', '셀프 진단',
+        '자동 수정', '자동수정', '상태 확인해', '앱 점검', '진단해'
     ],
 
+    // [2026-08-18] 축소. '키워드'만 들어가도 고정 광고문이 나가던 문제 —
+    // 키워드 도구를 명시적으로 찾는 문구에만 반응한다.
     KEYWORD: [
-        '키워드', '검색어', '인기', '주제 추천', '글감', '소재', '뭐가 좋', '어떤 키워드'
+        '키워드 추천', '키워드 찾', '검색어 추천', '주제 추천', '글감 추천', '소재 추천',
+        '어떤 키워드', '키워드 뭐'
     ],
 
     RANDOM_TIP: ['꿀팁', '팁 알려', '팁 줘', '좋은 팁', '팁 하나']
@@ -90,7 +96,9 @@ const DirectActionPatterns: Array<{
         },
         {
             patterns: ['환경설정', '설정', 'api', '키 설정'],
-            contextPatterns: ['열어', '보여', '가', '어디', '변경'],
+            // [2026-08-18] 한 글자 '가' 제거 — "설정이 가능한가요" 같은 문장이 전부
+            // "환경설정을 열어드릴게요" 한 줄로 끝나던 오탐의 원인이었다.
+            contextPatterns: ['열어', '보여', '가줘', '이동', '어디', '변경'],
             action: { action: 'openSettings', response: '⚙️ 환경설정을 열어드릴게요!', label: '⚙️ 환경설정' }
         },
         {
@@ -149,6 +157,15 @@ export function matchIntent(message: string): Intent {
         return 'SECURITY_RISK';
     }
 
+    // 2-0. 명백한 주입/탈취 문구는 요청 의도 없이도 차단 (명령형이라 '보여줘'가 없다)
+    const hardInjection = [
+        'ignore previous instructions', 'ignore all previous', 'disregard previous',
+        '이전 지시 무시', '위 지시 무시', '시스템 프롬프트 출력',
+    ];
+    if (hardInjection.some(p => lower.includes(p))) {
+        return 'PROMPT_LEAK';
+    }
+
     // 2. 프롬프트 노출 시도 (패턴 + 요청 의도 모두 필요)
     const hasLeakPattern = IntentPatterns.PROMPT_LEAK.some(p => lower.includes(p));
     const hasRequestPattern = PromptLeakRequestPatterns.some(p => lower.includes(p));
@@ -205,6 +222,11 @@ export function matchIntent(message: string): Intent {
  */
 export function matchDirectAction(message: string): DirectAction | null {
     const lower = message.toLowerCase();
+
+    // [2026-08-18] 설명을 요구하는 질문은 바로가기로 처리하지 않는다.
+    // 실측: "글 생성이 어떻게 작동해?"가 "📝 글 생성 화면으로 이동할게요!" 한 줄로 끝났다.
+    const isExplanationQuestion = /어떻게|왜|무엇|뭐야|뭔가요|인가요|되나요|하나요|알려|차이|원리|방법이|맞나요|\?/.test(message);
+    if (isExplanationQuestion) return null;
 
     for (const pattern of DirectActionPatterns) {
         const hasMainPattern = pattern.patterns.some(p => lower.includes(p));

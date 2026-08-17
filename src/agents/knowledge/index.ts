@@ -7,6 +7,7 @@ import { appManualData } from './appManual.js';
 import { settingsGuideData } from './settingsGuide.js';
 import { troubleshootingData } from './troubleshooting.js';
 import { faqData } from './faq.js';
+import { latestFeaturesData } from './latestFeatures.js';
 
 export class KnowledgeBase {
   private items: KnowledgeItem[] = [];
@@ -22,7 +23,9 @@ export class KnowledgeBase {
       ...appManualData,
       ...settingsGuideData,
       ...troubleshootingData,
-      ...faqData
+      ...faqData,
+      // [2026-08-18] 최신 기능(v2.11.192~194) — 도우미가 신규 기능을 모르던 문제 대응
+      ...latestFeaturesData
     ];
     console.log(`📚 [KnowledgeBase] ${this.items.length}개의 지식 항목 로드됨`);
   }
@@ -121,14 +124,31 @@ export class KnowledgeBase {
     return [...this.items];
   }
   
+  /**
+   * [2026-08-18] 한국어 조사 제거 — "썸네일을", "발행이", "수집은"처럼 조사가 붙으면
+   * 키워드 인덱스와 안 맞아 검색이 0점으로 떨어지던 문제 대응.
+   */
+  private stripParticles(word: string): string {
+    const particles = ['으로', '에서', '에게', '까지', '부터', '이랑', '하고', '이나', '라도',
+      '은', '는', '이', '가', '을', '를', '의', '와', '과', '도', '에', '만', '요'];
+    for (const p of particles) {
+      if (word.length > p.length + 1 && word.endsWith(p)) return word.slice(0, -p.length);
+    }
+    return word;
+  }
+
   // 키워드 추출 (한국어 형태소 분석 간소화)
   private extractKeywords(text: string): string[] {
     // 특수문자 제거 및 공백으로 분리
     const words = text
       .replace(/[^\w\sㄱ-ㅎㅏ-ㅣ가-힣]/g, ' ')
       .split(/\s+/)
+      .flatMap(word => {
+        const stripped = this.stripParticles(word);
+        return stripped !== word ? [word, stripped] : [word];
+      })
       .filter(word => word.length >= 2);
-    
+
     // 불용어 제거
     const stopwords = [
       '어떻게', '하는', '뭐야', '뭔가', '있나요', '해줘', '해주세요',
