@@ -702,6 +702,47 @@ function LewordStyles() {
                 color: #bcdcff;
             }
 
+            /* 30일 트렌드 미니 차트 — 앱 그래프와 같은 실측을 막대로. */
+            .lw-trend {
+                margin-top: 10px;
+                padding: 12px 14px;
+                border: 1px solid rgba(255,255,255,.10);
+                border-radius: 12px;
+                background: rgba(255,255,255,.03);
+            }
+            .lw-trend-head {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin-bottom: 10px;
+                color: rgba(235,242,250,.88);
+                font-size: 12.5px;
+                font-weight: 800;
+            }
+            .lw-trend-head strong { color: #ffd700; }
+            .lw-trend-bars {
+                display: flex;
+                align-items: flex-end;
+                gap: 2px;
+                height: 96px;
+                padding: 6px 4px;
+                border-radius: 8px;
+                background: rgba(0,0,0,.28);
+            }
+            .lw-trend-bars span {
+                flex: 1;
+                min-width: 2px;
+                border-radius: 2px 2px 0 0;
+                background: linear-gradient(180deg, #ffd700, rgba(255,165,0,.55));
+            }
+            .lw-trend-note {
+                margin: 9px 0 0;
+                color: rgba(252,211,77,.9);
+                font-size: 12px;
+                line-height: 1.6;
+            }
+
             /* 수익 관점 결론 — 판정색으로 한눈에. */
             .lw-mindmap-money {
                 margin-top: 12px;

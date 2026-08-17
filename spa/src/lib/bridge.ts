@@ -86,6 +86,24 @@ export async function bridgeMindmap(keyword: string): Promise<BridgeMindmap | nu
     return body?.result || null;
 }
 
+export interface BridgeTrend {
+    success: boolean;
+    series?: number[];
+    dates?: string[];
+    analysis?: { type?: string; label?: string; monthAvg?: number; recent3Avg?: number; recommendation?: string };
+    error?: string;
+}
+
+/** 30일 트렌드 — 앱과 같은 데이터랩 실측을 웹에서도 그린다. 앱이 꺼져 있으면 null. */
+export async function bridgeTrend(keyword: string): Promise<BridgeTrend | null> {
+    const body = await bridgeFetch('/v1/bridge/trend', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ keyword }),
+    }, 30_000) as { result?: BridgeTrend } | null;
+    return body?.result || null;
+}
+
 export async function bridgeAiSubs(keyword: string): Promise<{
     subs: Array<{ keyword: string; searchVolume: number | null; source?: string }>;
     ai?: { used: boolean; provider: string; proposed: number; verified: number };

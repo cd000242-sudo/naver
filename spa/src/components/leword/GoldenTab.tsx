@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import PreemptionPlan from './PreemptionPlan';
 import { naverSearchUrl, rowMatchesWriteLane } from './preemptionMeta';
-import { bridgeAiSubs, bridgeMindmap, type BridgeMindmap } from '../../lib/bridge';
+import { bridgeAiSubs, bridgeMindmap, bridgeTrend, type BridgeMindmap, type BridgeTrend } from '../../lib/bridge';
 
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
@@ -57,6 +57,8 @@ type PreemptionRow = {
     monthsToPeak?: number | null;
     /** 애드센스 적합 실측 판정. null = 재료 부족(미판정). */
     adsenseFit?: boolean | null;
+    /** 보강이 붙인 수익 결론 — bad 는 애드센스 레인에서 빠진다(이유는 카드에 남는다). */
+    monetize?: { verdict: 'good' | 'bad' | 'mixed'; points: Array<{ text: string }>; angle?: string } | null;
     adsenseReason?: string;
     /** 회차 실측으로 만든 제목 2종(SEO/홈판). 옛 회차 데이터에는 없다. */
     titles?: {
@@ -154,6 +156,36 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             setMindmap((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
+        }
+    };
+
+    /*
+     * 그래프 — 앱의 30일 트렌드와 같은 실측을 웹에 그린다. 앱이 꺼져 있으면
+     * 데이터랩 새 창으로 폴백한다 — 링크는 항상 살아 있는 최후의 수단이다.
+     */
+    const [trend, setTrend] = useState<Record<string, {
+        status: 'loading' | 'done' | 'offline' | 'error';
+        data?: BridgeTrend;
+    }>>({});
+
+    const openTrend = async (keyword: string) => {
+        if (trend[keyword]?.status === 'done') {
+            setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
+            return;
+        }
+        setTrend((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
+        try {
+            const result = await bridgeTrend(keyword);
+            if (!result || !result.success || !(result.series || []).length) {
+                // 앱이 꺼져 있거나 실측 실패 — 데이터랩으로 폴백(새 창).
+                setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
+                window.open(dataLabUrl(keyword), '_blank', 'noreferrer');
+                return;
+            }
+            setTrend((prev) => ({ ...prev, [keyword]: { status: 'done', data: result } }));
+        } catch {
+            setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
+            window.open(dataLabUrl(keyword), '_blank', 'noreferrer');
         }
     };
 
@@ -352,7 +384,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             )}
                                             {(row.subKeywords?.length ?? 0) > 0 && (
                                                 <div className="lw-forge-subs">
-                                                    <span>문제해결 서브</span>
+                                                    <span>서브키워드</span>
                                                     {(row.subKeywords || []).map((sub) => (
                                                         <em key={sub.keyword}>
                                                             {sub.keyword}
@@ -361,6 +393,24 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                     ))}
                                                 </div>
                                             )}
+                                        </div>
+                                    )}
+
+                                    {/* 수익 결론 — 회차 보강이 붙인 판정. bad 는 애드센스 레인에서 빠진 이유가 이것이다. */}
+                                    {row.monetize && (
+                                        <div className={`lw-mindmap-money lw-mindmap-money-${row.monetize.verdict}`}>
+                                            <div className="lw-mindmap-money-head">
+                                                💰 광고 수익 관점
+                                                <strong>
+                                                    {row.monetize.verdict === 'good' ? '✅ 쓸 만하다'
+                                                        : row.monetize.verdict === 'bad' ? '⛔ 광고 수익 안 나온다 — 애드센스 탈락'
+                                                            : '⚖ 각도에 달렸다'}
+                                                </strong>
+                                            </div>
+                                            <ul>
+                                                {row.monetize.points.slice(0, 3).map((point) => <li key={point.text}>{point.text}</li>)}
+                                            </ul>
+                                            {row.monetize.angle && <p><strong>쓴다면:</strong> {row.monetize.angle}</p>}
                                         </div>
                                     )}
 
@@ -389,10 +439,15 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             {mindmap[row.keyword]?.status === 'loading' ? '확장 중…' : '마인드맵 확장키워드'}
                                             <small>내 클로드코드 구독</small>
                                         </button>
-                                        {/* 데이터랩은 실제 검색량 추이를 그린다. 우리가 그리는 그림이 아니다. */}
-                                        <a href={dataLabUrl(row.keyword)} target="_blank" rel="noreferrer">
-                                            그래프보기<small>네이버 데이터랩</small>
-                                        </a>
+                                        {/* 앱과 같은 30일 실측 그래프. 앱이 꺼져 있으면 데이터랩 새 창 폴백. */}
+                                        <button
+                                            type="button"
+                                            onClick={() => openTrend(row.keyword)}
+                                            disabled={trend[row.keyword]?.status === 'loading'}
+                                        >
+                                            {trend[row.keyword]?.status === 'loading' ? '불러오는 중…' : '그래프보기'}
+                                            <small>30일 실측</small>
+                                        </button>
                                         <button
                                             type="button"
                                             onClick={() => askAiSubs(row.keyword)}
@@ -412,6 +467,33 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             }}
                                         >{copied === row.keyword ? '복사됨' : '복사'}</button>
                                     </div>
+
+                                    {/* 30일 트렌드 — 데이터랩 상대값(최대일=100). 막대는 실측 그대로다. */}
+                                    {trend[row.keyword]?.status === 'done' && (() => {
+                                        const data = trend[row.keyword]!.data!;
+                                        const series = data.series || [];
+                                        const dates = data.dates || [];
+                                        return (
+                                            <div className="lw-trend">
+                                                <div className="lw-trend-head">
+                                                    📈 30일 트렌드 — 데이터랩 상대값(최대일 100)
+                                                    {data.analysis?.label && <strong>{data.analysis.label}</strong>}
+                                                </div>
+                                                <div className="lw-trend-bars" role="img" aria-label={`${row.keyword} 30일 검색 추이`}>
+                                                    {series.map((value, index) => (
+                                                        <span
+                                                            key={`${dates[index] || index}`}
+                                                            style={{ height: `${Math.max(3, value)}%` }}
+                                                            title={`${dates[index] || ''} · ${Math.round(value)}`}
+                                                        />
+                                                    ))}
+                                                </div>
+                                                {data.analysis?.recommendation && (
+                                                    <p className="lw-trend-note">{data.analysis.recommendation}</p>
+                                                )}
+                                            </div>
+                                        );
+                                    })()}
 
                                     {/* 마인드맵 결과 — 중심 키워드에서 실측 확장어가 갈라져 나온다. */}
                                     {mindmap[row.keyword]?.status === 'offline' && (

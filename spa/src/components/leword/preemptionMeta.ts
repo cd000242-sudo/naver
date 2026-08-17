@@ -75,11 +75,21 @@ export const WRITE_LANES: ReadonlyArray<{ id: string; label: string; hint: strin
  * 애드센스만 실측 의도 판정(adsenseFit)이고 나머지는 배치 순서(layoutBestFor)다.
  */
 export function rowMatchesWriteLane(
-    row: { layoutBestFor?: string | null; adsenseFit?: boolean | null },
+    row: {
+        layoutBestFor?: string | null;
+        adsenseFit?: boolean | null;
+        monetize?: { verdict?: string } | null;
+    },
     laneId: string,
 ): boolean {
     if (laneId === 'all') return true;
-    if (laneId === 'adsense') return row.adsenseFit === true;
+    /*
+     * 수익 판정 bad 는 애드센스 레인 탈락이다(사장님 판단 2026-08-18:
+     * "애드센스 수익 내기 힘든 키워드니 황금키워드 탈락"). 의도가 정보형이라도
+     * 검색자가 도구/즉답만 받고 나가면 광고 수익이 안 나온다 — 판정 이유는
+     * '전체' 레인의 행 카드에 그대로 남아 왜 빠졌는지 보인다.
+     */
+    if (laneId === 'adsense') return row.adsenseFit === true && row.monetize?.verdict !== 'bad';
     return row.layoutBestFor === laneId;
 }
 
