@@ -27,10 +27,12 @@
           "expansionSeed": "김정",
           "insight": {
             "titles": {
-              "seo": "트럼프 김정은 대화 응답 긍정적 최신 이슈와 핵심 내용 정리",
-              "home": "트럼프 김정은 대화 응답 긍정적, 트럼프 “김정은 대화 요청에 응답...매우 긍정적” 관련 확인할 점",
+              "seo": "트럼프, 김정은 응답에 '매우 긍정적'…이란 지원까지 요청",
+              "home": "트럼프, 김정은 응답 받았다…이 대통령엔 이란 지원 요청",
               "topic": "트럼프 김정은 대화 응답 긍정적",
-              "topicGroup": "네이버 실시간 검색어"
+              "topicGroup": "네이버 실시간 검색어",
+              "summary": "트럼프가 김정은이 대화 요청에 응답했다며 대화 단계를 '매우 긍정적'이라 평가했다. 이 대통령에겐 이란 전쟁 지원 요청 상황을 전했다.",
+              "aiTitled": true
             },
             "facts": [
               {
@@ -64,7 +66,7 @@
               "트럼프 \" 김정은 , 대화 요청에 응답 \"...시점·내용 함구"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-08-17T22:49:12.787Z"
+            "collectedAt": "2026-08-17T23:01:25.819Z"
           }
         },
         {
@@ -461,10 +463,12 @@
           "expansionSeed": "민생지원금",
           "insight": {
             "titles": {
-              "seo": "민생지원금 최신 이슈와 핵심 내용 정리",
-              "home": "민생지원금, ‘한 명에 35만 원’ 통영 민생 회복 지원금 31일부터 지급 관련 확인할 점",
+              "seo": "민생지원금 통영 1인 35만원 지급, 31일부터 신청 시작",
+              "home": "민생지원금 통영 35만원…사용기간은 올해까지, 신청은?",
               "topic": "민생지원금",
-              "topicGroup": "네이버 실시간 검색어"
+              "topicGroup": "네이버 실시간 검색어",
+              "summary": "통영시가 4월 15일 기준 시민·영주권자·결혼이민자 등 11만6천여명에게 1인당 35만원을 31일부터 지급한다. 신청은 10월 30일까지, 지원금은 올해 안에 써야 한다.",
+              "aiTitled": true
             },
             "facts": [
               {
@@ -472,7 +476,7 @@
                 "sourceIndex": 0
               },
               {
-                "text": "강기윤 창원시장이 내수 침체 등으로 시민 부담이 커지고 있다며 ‘ 민생지원금 ’ 지급 검토를 지시해 성사 여부에 관심이 쏠린다. 강기윤 시장은 지난 14일 주간 간부회의에서 내수 침체로 인한 시민 생활 부담이 커지고 있다는 점을 언급하며 “ 민생지원금 지급에 대해 타 지자체의 추진 사례도 살펴보되, 우리...",
+                "text": "이투데이=기정아 기자 | 2026 민생지원금 , 속초·의령·영동 등 지자체별 지급 본격화 1인당 10만~50만원…신청 기간과 지급 방식은 지역마다 달라 추석을 앞두고 일부 지방자치단체가 주민 생활 안정과 지역경제 활성화를 위한 민생지원금 지급에 나선다. 지원액은 1인당 10만~50만원으로, 지역마다 대상...",
                 "sourceIndex": 1
               }
             ],
@@ -482,8 +486,8 @@
                 "press": "KBS"
               },
               {
-                "url": "https://www.knnews.co.kr/news/articleView.php?idxno=1548744",
-                "press": "경남신문"
+                "url": "https://www.etoday.co.kr/news/view/2615230",
+                "press": "이투데이"
               }
             ],
             "images": [
@@ -491,14 +495,14 @@
             ],
             "press": [
               "KBS",
-              "경남신문"
+              "이투데이"
             ],
             "headlines": [
               "‘한 명에 35만 원’ 통영 민생 회복 지원금 31일부터 지급",
-              "창원도 민생지원금 지급 검토"
+              "추석 전 지급되는 지자체 민생지원금 일정"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-08-17T22:49:12.787Z"
+            "collectedAt": "2026-08-17T23:01:25.819Z"
           }
         },
         {
@@ -1577,11 +1581,69 @@
         {
           "id": "zum-1",
           "rank": 1,
+          "keyword": "미국 30년물 국채금리",
+          "title": "미국 30년물 국채금리",
+          "rawKeyword": "미국 30년물 국채금리",
+          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
+          "priority": 100,
+          "source": "zum",
+          "expansions": [
+            "미국 30년물 국채금리 뜻",
+            "미국 30년물 국채 금리 차트"
+          ],
+          "expansionSeed": "미국 30년물 국채금리",
+          "insight": {
+            "titles": {
+              "seo": "미국 30년물 국채금리 5.216%, 2007년 이후 최고 치솟았다",
+              "home": "미국 30년물 금리 5.216%, 25년 만에 최고 왜",
+              "topic": "미국 30년물 국채금리",
+              "topicGroup": "줌 실시간 검색어",
+              "summary": "미국 30년 만기 국채금리가 2007년 이후 최고로 치솟았다. 국가 부채 급증과 대규모 발행 여파로 경매 낙찰금리는 5.216%까지 올랐다.",
+              "aiTitled": true
+            },
+            "facts": [
+              {
+                "text": "(뉴욕=연합뉴스) 김연숙 특파원 = 미국 30년 만기 국채 금리가 급증하는 국가 부채와 대규모 발행 여파로 2007년 이후 최고치로 치솟았다.",
+                "sourceIndex": 0
+              },
+              {
+                "text": "특히, 미국 국채 30년물 금리 는 5.31%를 돌파했는데, 2007년 6월이후 19년만에 최고치를 기록했다. 유가와 국채금리 상승에 엔비디아, 애플, 마이크로소프트 등 메그니피센트7 주식은 일제히 하락했다. 하지만 미국 정부가 중국산 반도체 사용을 금지할 것이라는 전망과 지난주 샌디스크의 강력한 실적...",
+                "sourceIndex": 1
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.yna.co.kr/view/AKR20260818004000072?input=1195m",
+                "press": "연합뉴스"
+              },
+              {
+                "url": "https://www.mk.co.kr/article/12129759",
+                "press": "매일경제"
+              }
+            ],
+            "images": [
+              "https://img0.yna.co.kr/photo/reuters/2026/07/31/PRU20260731194701009_P4.jpg"
+            ],
+            "press": [
+              "연합뉴스",
+              "매일경제"
+            ],
+            "headlines": [
+              "美국채 매도세에 30년물 금리 5.31%…2007년 이후 최고치",
+              "뉴욕증시 3대지수 하락··· 30년물 국채금리 19년래 최고[월가월부]"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-17T22:32:35.838Z"
+          }
+        },
+        {
+          "id": "zum-2",
+          "rank": 2,
           "keyword": "뉴욕증시 하락 마감",
           "title": "뉴욕증시 하락 마감",
           "rawKeyword": "뉴욕증시 하락 마감",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 100,
+          "priority": 99,
           "source": "zum",
           "expansions": [
             "뉴욕증시 마감",
@@ -1637,13 +1699,13 @@
           }
         },
         {
-          "id": "zum-2",
-          "rank": 2,
+          "id": "zum-3",
+          "rank": 3,
           "keyword": "트럼프 이란 종전 MOU",
           "title": "트럼프 이란 종전 MOU",
           "rawKeyword": "트럼프 이란 종전 MOU",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 99,
+          "priority": 98,
           "source": "zum",
           "expansions": [
             "트럼프 이란",
@@ -1699,125 +1761,64 @@
           }
         },
         {
-          "id": "zum-3",
-          "rank": 3,
-          "keyword": "미국 30년물 국채금리",
-          "title": "미국 30년물 국채금리",
-          "rawKeyword": "미국 30년물 국채금리",
-          "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
-          "priority": 98,
-          "source": "zum",
-          "expansions": [
-            "미국 30년물 국채금리 뜻",
-            "미국 30년물 국채 금리 차트"
-          ],
-          "expansionSeed": "미국 30년물 국채금리",
-          "insight": {
-            "titles": {
-              "seo": "미국 30년물 국채금리 5.216%, 2007년 이후 최고 치솟았다",
-              "home": "미국 30년물 금리 5.216%, 25년 만에 최고 왜",
-              "topic": "미국 30년물 국채금리",
-              "topicGroup": "줌 실시간 검색어",
-              "summary": "미국 30년 만기 국채금리가 2007년 이후 최고로 치솟았다. 국가 부채 급증과 대규모 발행 여파로 경매 낙찰금리는 5.216%까지 올랐다.",
-              "aiTitled": true
-            },
-            "facts": [
-              {
-                "text": "(뉴욕=연합뉴스) 김연숙 특파원 = 미국 30년 만기 국채 금리가 급증하는 국가 부채와 대규모 발행 여파로 2007년 이후 최고치로 치솟았다.",
-                "sourceIndex": 0
-              },
-              {
-                "text": "특히, 미국 국채 30년물 금리 는 5.31%를 돌파했는데, 2007년 6월이후 19년만에 최고치를 기록했다. 유가와 국채금리 상승에 엔비디아, 애플, 마이크로소프트 등 메그니피센트7 주식은 일제히 하락했다. 하지만 미국 정부가 중국산 반도체 사용을 금지할 것이라는 전망과 지난주 샌디스크의 강력한 실적...",
-                "sourceIndex": 1
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.yna.co.kr/view/AKR20260818004000072?input=1195m",
-                "press": "연합뉴스"
-              },
-              {
-                "url": "https://www.mk.co.kr/article/12129759",
-                "press": "매일경제"
-              }
-            ],
-            "images": [
-              "https://img0.yna.co.kr/photo/reuters/2026/07/31/PRU20260731194701009_P4.jpg"
-            ],
-            "press": [
-              "연합뉴스",
-              "매일경제"
-            ],
-            "headlines": [
-              "美국채 매도세에 30년물 금리 5.31%…2007년 이후 최고치",
-              "뉴욕증시 3대지수 하락··· 30년물 국채금리 19년래 최고[월가월부]"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-17T22:32:35.838Z"
-          }
-        },
-        {
           "id": "zum-4",
           "rank": 4,
-          "keyword": "이재명 민주당 대표 만찬",
-          "title": "이재명 민주당 대표 만찬",
-          "rawKeyword": "이재명 민주당 대표 만찬",
+          "keyword": "무디스 韓 성장률",
+          "title": "무디스 韓 성장률",
+          "rawKeyword": "무디스 韓 성장률",
           "description": "ZUM 이슈검색어에서 수집한 검색 신호입니다.",
           "priority": 97,
           "source": "zum",
           "expansions": [
-            "민주당 당대표",
-            "민주당 당대표 선거",
-            "이재명 지지율",
-            "이재명 탄핵",
-            "이재명 임기",
-            "이재명 대통령",
-            "이재명 연임",
-            "이재명 탄핵 청원"
+            "경제성장률",
+            "한국 경제성장률",
+            "일본 경제성장률",
+            "중국 경제성장률",
+            "한국 gdp 성장률",
+            "대만 경제성장률",
+            "베트남 경제성장률",
+            "schd 배당성장률"
           ],
-          "expansionSeed": "이재명",
+          "expansionSeed": "성장률",
           "insight": {
             "titles": {
-              "seo": "이재명, 김민석·정청래·송영길 청와대 만찬 19일 개최",
-              "home": "이재명 대통령, 청와대 만찬에 김민석·정청래 부른다",
-              "topic": "이재명 민주당 대표 만찬",
-              "topicGroup": "줌 실시간 검색어",
-              "summary": "이재명 대통령이 19일 청와대에서 만찬을 연다. 민주당 대표로 선출된 김민석과 정청래·송영길 후보가 초청됐다.",
-              "aiTitled": true
+              "seo": "무디스 韓 성장률 최신 이슈와 핵심 내용 정리",
+              "home": "무디스 韓 성장률, 무디스 韓성장률 3.5%로 '깜짝' 상향…\"대체 메모리기업 제한적\" 관련 확인할 점",
+              "topic": "무디스 韓 성장률",
+              "topicGroup": "줌 실시간 검색어"
             },
             "facts": [
               {
-                "text": "이재명 대통령이 더불어민주당 전당대회에서 당 대표로 선출된 김민석 당 대표를 비롯해 정청래·송영길 후보를 초청해 19일 청와대에서 만찬을 한다고 청와대가 17일 밝혔다.",
+                "text": "(세종=연합뉴스) 이세원 기자 = 국제신용평가사 무디스는 반도체 호황이 적어도 내년 중반까지 이어질 것이라며 올해 한국 성장률 전망을 3.5%로...",
                 "sourceIndex": 0
               },
               {
-                "text": "원내 대표 를 비롯한 3선 중진 의원들이 연휴 마지막 날인 17일 서울 시내 모처에서 3시간에 걸쳐 만찬 회동을 가졌다. 당내 3선 14명 중 사전에 일정이... 의원들은 \"김 대표 당선은 예측 가능한 결과였으니 잘 대응하자\", \" 민주당 전당대회가 끝났으니 이재명 대통령과 단일대오로 나오면 여당 지지율이 오를 수 있는...",
+                "text": "전문보기: https://www.yna.co.kr/view/ AKR20260817067151001 ■ 무디스 , 韓성장률 3.5%로 '깜짝' 상향…대체 메모리기업 제한적\" 국제신용평가사 무디스는 반도체 호황이 적어도 내년 중반까지 이어질 것이라며 올해 한국 성장률 전망을 3.5%로 대폭 올린 것으로 18일 확인됐다. 무디스는 한국 신용등급...",
                 "sourceIndex": 1
               }
             ],
             "links": [
               {
-                "url": "https://www.newsis.com/view/NISX20260817_0003751669",
-                "press": "뉴시스"
+                "url": "https://www.yna.co.kr/view/AKR20260817048700002?input=1195m",
+                "press": "연합뉴스"
               },
               {
-                "url": "https://www.yna.co.kr/view/AKR20260817071800001?input=1195m",
+                "url": "https://www.yna.co.kr/view/AKR20260818014000011?input=1195m",
                 "press": "연합뉴스"
               }
             ],
             "images": [
-              "https://img1.newsis.com/2026/06/30/NISI20260630_0021343289_web.jpg"
+              "https://img2.yna.co.kr/photo/yna/YH/2026/07/24/PYH2026072405380006100_P4.jpg"
             ],
             "press": [
-              "뉴시스",
               "연합뉴스"
             ],
             "headlines": [
-              "이 대통령, 19일 김민석·정청래·송영길 청와대 초청 만찬",
-              "국힘 3선 만찬 회동…\"정점식 원내 대표 중심 위기 극복\""
+              "무디스 韓성장률 3.5%로 '깜짝' 상향…\"대체 메모리기업 제한적\"",
+              "[연합뉴스 이 시각 헤드라인] - 07:30"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-17T22:32:35.838Z"
+            "collectedAt": "2026-08-17T23:01:25.819Z"
           }
         },
         {
@@ -2397,7 +2398,7 @@
               "' 김승규 ♥' 김진경, 애 낳은 지 두 달 맞아?…육퇴 후 5.82km 달렸다"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-08-17T22:49:12.787Z"
+            "collectedAt": "2026-08-17T23:01:25.819Z"
           }
         },
         {
@@ -3057,7 +3058,7 @@
               "제주도, 시간제 보육 지원 …시간당 2000원, 월 60시간까지"
             ],
             "extraction": "search-card",
-            "collectedAt": "2026-08-17T22:49:12.787Z"
+            "collectedAt": "2026-08-17T23:01:25.819Z"
           }
         },
         {
@@ -3133,39 +3134,155 @@
         {
           "id": "issue-1",
           "rank": 1,
-          "keyword": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\"",
-          "title": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\"",
-          "rawKeyword": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\"",
-          "description": "스타뉴스 최신 기사 · 김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\"",
+          "keyword": "日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\"",
+          "title": "日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\"",
+          "rawKeyword": "日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\"",
+          "description": "스타뉴스 최신 기사 · 日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\"",
           "priority": 100,
           "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/08/18/2026081807233199294",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/08/18/2026081807461662773",
           "sourceLabel": "스타뉴스",
           "expansions": [
-            "생각하는 황소",
-            "생각 뜻",
-            "생각공장",
-            "바른생각",
-            "대패생각",
-            "국민생각함",
-            "깊은생각",
-            "좋은생각"
+            "유명산계곡",
+            "유명산",
+            "유명 복숭아",
+            "유명한",
+            "유명우",
+            "유명무실",
+            "유명한 시",
+            "유명각"
           ],
-          "expansionSeed": "김정화",
-          "ago": "2분 전",
-          "agoMinutes": 2,
-          "publishedLabel": "2026.08.18 ・ 07:46",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807233199294_1.jpg",
+          "expansionSeed": "유명",
+          "ago": "1분 전",
+          "agoMinutes": 1,
+          "publishedLabel": "2026.08.18 ・ 07:59",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807461662773_1.jpg",
           "insight": {
             "titles": {
-              "seo": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\" 최신 이슈와 핵심 내용 정리",
-              "home": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\", 김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\" 관련 확인할 점",
-              "topic": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\"",
+              "seo": "日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\" 최신 이슈와 핵심 내용 정리",
+              "home": "日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\", 日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\" 관련 확인할 점",
+              "topic": "日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\"",
               "topicGroup": "이슈 실시간 검색어"
             },
             "facts": [
               {
-                "text": "스타뉴스 최신 기사 · 김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\"",
+                "text": "스타뉴스 최신 기사 · 日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\"",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/star/2026/08/18/2026081807461662773",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807461662773_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "日 유명 개그맨 \"원폭 투하도 전쟁범죄\"..서경덕 \"전형적 꼼수 발언\""
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-17T23:01:25.819Z"
+          }
+        },
+        {
+          "id": "issue-2",
+          "rank": 2,
+          "keyword": "TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다",
+          "title": "TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다",
+          "rawKeyword": "TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다",
+          "description": "스타뉴스 최신 기사 · TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다",
+          "priority": 99,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/music/2026/08/18/2026081807525087025",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "TXT 연준",
+            "TXT 수빈",
+            "경계성 지능장애",
+            "경계선 지능장애",
+            "경계 뜻",
+            "경계선 인격장애",
+            "경계선",
+            "사주경계"
+          ],
+          "expansionSeed": "TXT",
+          "ago": "4분 전",
+          "agoMinutes": 4,
+          "publishedLabel": "2026.08.18 ・ 07:56",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807525087025_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다 최신 이슈와 핵심 내용 정리",
+              "home": "TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다, TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다 관련 확인할 점",
+              "topic": "TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다",
+                "sourceIndex": 0
+              }
+            ],
+            "links": [
+              {
+                "url": "https://www.starnewskorea.com/music/2026/08/18/2026081807525087025",
+                "press": "스타뉴스"
+              }
+            ],
+            "images": [
+              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807525087025_1.jpg"
+            ],
+            "press": [
+              "스타뉴스"
+            ],
+            "headlines": [
+              "TXT 연준, 美 음악시장 장악..솔로의 힘, K-팝 경계 넘어섰다"
+            ],
+            "extraction": "playwright",
+            "collectedAt": "2026-08-17T23:01:25.819Z"
+          }
+        },
+        {
+          "id": "issue-3",
+          "rank": 3,
+          "keyword": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\"",
+          "title": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\"",
+          "rawKeyword": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\"",
+          "description": "스타뉴스 최신 기사 · 김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\"",
+          "priority": 98,
+          "source": "issue",
+          "officialUrl": "https://www.starnewskorea.com/star/2026/08/18/2026081807233199294",
+          "sourceLabel": "스타뉴스",
+          "expansions": [
+            "배우 김정화",
+            "하영 김정화",
+            "김정화 하영",
+            "김정화 유은성",
+            "김정환",
+            "김정화 배우",
+            "김정화 카페",
+            "김정화 리즈"
+          ],
+          "expansionSeed": "김정화",
+          "ago": "14분 전",
+          "agoMinutes": 14,
+          "publishedLabel": "2026.08.18 ・ 07:46",
+          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807233199294_1.jpg",
+          "insight": {
+            "titles": {
+              "seo": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\" 최신 이슈와 핵심 내용 정리",
+              "home": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\", 김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\" 관련 확인할 점",
+              "topic": "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\"",
+              "topicGroup": "이슈 실시간 검색어"
+            },
+            "facts": [
+              {
+                "text": "스타뉴스 최신 기사 · 김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\"",
                 "sourceIndex": 0
               }
             ],
@@ -3182,20 +3299,20 @@
               "스타뉴스"
             ],
             "headlines": [
-              "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었다\""
+              "김정화, 母 잃은 슬픔 속 유은성과 인연 \"결혼 생각 없었는데..\""
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-17T22:49:12.787Z"
+            "collectedAt": "2026-08-17T23:01:25.819Z"
           }
         },
         {
-          "id": "issue-2",
-          "rank": 2,
+          "id": "issue-4",
+          "rank": 4,
           "keyword": "방탄소년단 지민, 광복절 기념 태극 스타일링..세계 무대서 빛낸 애국심",
           "title": "방탄소년단 지민, 광복절 기념 태극 스타일링..세계 무대서 빛낸 애국심",
           "rawKeyword": "방탄소년단 지민, 광복절 기념 태극 스타일링..세계 무대서 빛낸 애국심",
           "description": "스타뉴스 최신 기사 · 방탄소년단 지민, 광복절 기념 태극 스타일링..세계 무대서 빛낸 애국심",
-          "priority": 99,
+          "priority": 97,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/music/2026/08/18/2026081807403310958",
           "sourceLabel": "스타뉴스",
@@ -3210,8 +3327,8 @@
             "방탄소년단 제이홉"
           ],
           "expansionSeed": "방탄소년단",
-          "ago": "3분 전",
-          "agoMinutes": 3,
+          "ago": "15분 전",
+          "agoMinutes": 15,
           "publishedLabel": "2026.08.18 ・ 07:45",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807403310958_1.jpg",
           "insight": {
@@ -3247,13 +3364,13 @@
           }
         },
         {
-          "id": "issue-3",
-          "rank": 3,
+          "id": "issue-5",
+          "rank": 5,
           "keyword": "'최현석 딸' 최연수, 모유수유 중단 이유 \"가슴 모양 바뀌며 우울..후회는 없어\"",
           "title": "'최현석 딸' 최연수, 모유수유 중단 이유 \"가슴 모양 바뀌며 우울..후회는 없어\"",
           "rawKeyword": "'최현석 딸' 최연수, 모유수유 중단 이유 \"가슴 모양 바뀌며 우울..후회는 없어\"",
           "description": "스타뉴스 최신 기사 · '최현석 딸' 최연수, 모유수유 중단 이유 \"가슴 모양 바뀌며 우울..후회는 없어\"",
-          "priority": 98,
+          "priority": 96,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/18/2026081807190486881",
           "sourceLabel": "스타뉴스",
@@ -3268,8 +3385,8 @@
             "최현석 밀키트"
           ],
           "expansionSeed": "최현석",
-          "ago": "9분 전",
-          "agoMinutes": 9,
+          "ago": "21분 전",
+          "agoMinutes": 21,
           "publishedLabel": "2026.08.18 ・ 07:38",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807190486881_1.jpg",
           "insight": {
@@ -3305,13 +3422,13 @@
           }
         },
         {
-          "id": "issue-4",
-          "rank": 4,
+          "id": "issue-6",
+          "rank": 6,
           "keyword": "'김정화♥' 유은성, 뇌종양 투병 근황 \"치료 NO..5년 뒤 오라고\"",
           "title": "'김정화♥' 유은성, 뇌종양 투병 근황 \"치료 NO..5년 뒤 오라고\"",
           "rawKeyword": "'김정화♥' 유은성, 뇌종양 투병 근황 \"치료 NO..5년 뒤 오라고\"",
           "description": "스타뉴스 최신 기사 · '김정화♥' 유은성, 뇌종양 투병 근황 \"치료 NO..5년 뒤 오라고\"",
-          "priority": 97,
+          "priority": 95,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/star/2026/08/18/2026081807104529718",
           "sourceLabel": "스타뉴스",
@@ -3326,8 +3443,8 @@
             "김정화 리즈"
           ],
           "expansionSeed": "김정화",
-          "ago": "25분 전",
-          "agoMinutes": 25,
+          "ago": "37분 전",
+          "agoMinutes": 37,
           "publishedLabel": "2026.08.18 ・ 07:23",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807104529718_1.jpg",
           "insight": {
@@ -3363,13 +3480,13 @@
           }
         },
         {
-          "id": "issue-5",
-          "rank": 5,
+          "id": "issue-7",
+          "rank": 7,
           "keyword": "조째즈 \"29살 때 우리 집 사기 당해..父 눈물 보고 열심히 살기 시작\"",
           "title": "조째즈 \"29살 때 우리 집 사기 당해..父 눈물 보고 열심히 살기 시작\"",
           "rawKeyword": "조째즈 \"29살 때 우리 집 사기 당해..父 눈물 보고 열심히 살기 시작\"",
           "description": "스타뉴스 최신 기사 · 조째즈 \"29살 때 우리 집 사기 당해..父 눈물 보고 열심히 살기 시작\"",
-          "priority": 96,
+          "priority": 94,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/08/18/2026081807035041018",
           "sourceLabel": "스타뉴스",
@@ -3384,8 +3501,8 @@
             "조째즈고향"
           ],
           "expansionSeed": "조째즈",
-          "ago": "33분 전",
-          "agoMinutes": 33,
+          "ago": "45분 전",
+          "agoMinutes": 45,
           "publishedLabel": "2026.08.18 ・ 07:15",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081807035041018_1.jpg",
           "insight": {
@@ -3421,13 +3538,13 @@
           }
         },
         {
-          "id": "issue-6",
-          "rank": 6,
+          "id": "issue-8",
+          "rank": 8,
           "keyword": "어큐즈파이브(告五人)·엑스디너리 히어로즈·우즈·주헌·트리플에스, 'AAA 2026' 무대 빛낸다",
           "title": "어큐즈파이브(告五人)·엑스디너리 히어로즈·우즈·주헌·트리플에스, 'AAA 2026' 무대 빛낸다",
           "rawKeyword": "어큐즈파이브(告五人)·엑스디너리 히어로즈·우즈·주헌·트리플에스, 'AAA 2026' 무대 빛낸다",
           "description": "스타뉴스 최신 기사 · 어큐즈파이브(告五人)·엑스디너리 히어로즈·우즈·주헌·트리플에스, 'AAA 2026' 무대 빛낸다",
-          "priority": 95,
+          "priority": 93,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/music/2026/08/18/2026081405145151076",
           "sourceLabel": "스타뉴스",
@@ -3442,8 +3559,8 @@
             "누구나청춘무대"
           ],
           "expansionSeed": "AAA",
-          "ago": "48분 전",
-          "agoMinutes": 48,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026.08.18 ・ 07:00",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081405145151076_10.jpg",
           "insight": {
@@ -3479,13 +3596,13 @@
           }
         },
         {
-          "id": "issue-7",
-          "rank": 7,
+          "id": "issue-9",
+          "rank": 9,
           "keyword": "볼티모어 사로잡은 BTS 진, 글로벌 아미 '열광'..'JIN LIGHTS UP CHARM CITY'",
           "title": "볼티모어 사로잡은 BTS 진, 글로벌 아미 '열광'..'JIN LIGHTS UP CHARM CITY'",
           "rawKeyword": "볼티모어 사로잡은 BTS 진, 글로벌 아미 '열광'..'JIN LIGHTS UP CHARM CITY'",
           "description": "스타뉴스 최신 기사 · 볼티모어 사로잡은 BTS 진, 글로벌 아미 '열광'..'JIN LIGHTS UP CHARM CITY'",
-          "priority": 94,
+          "priority": 92,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/music/2026/08/18/2026081806532722078",
           "sourceLabel": "스타뉴스",
@@ -3500,8 +3617,8 @@
             "미네소타 볼티모어"
           ],
           "expansionSeed": "볼티모어",
-          "ago": "52분 전",
-          "agoMinutes": 52,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026.08.18 ・ 06:55",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081806532722078_1.jpg",
           "insight": {
@@ -3537,13 +3654,13 @@
           }
         },
         {
-          "id": "issue-8",
-          "rank": 8,
+          "id": "issue-10",
+          "rank": 10,
           "keyword": "\"강렬하게 귓가에 맴돌아\" 방탄소년단 뷔, '아리랑' 앨범 속 독보적 보컬 '주목'..보그 US",
           "title": "\"강렬하게 귓가에 맴돌아\" 방탄소년단 뷔, '아리랑' 앨범 속 독보적 보컬 '주목'..보그 US",
           "rawKeyword": "\"강렬하게 귓가에 맴돌아\" 방탄소년단 뷔, '아리랑' 앨범 속 독보적 보컬 '주목'..보그 US",
           "description": "스타뉴스 최신 기사 · \"강렬하게 귓가에 맴돌아\" 방탄소년단 뷔, '아리랑' 앨범 속 독보적 보컬 '주목'..보그 US",
-          "priority": 93,
+          "priority": 91,
           "source": "issue",
           "officialUrl": "https://www.starnewskorea.com/music/2026/08/18/2026081806492321677",
           "sourceLabel": "스타뉴스",
@@ -3558,8 +3675,8 @@
             "us 뜻"
           ],
           "expansionSeed": "강렬하게",
-          "ago": "55분 전",
-          "agoMinutes": 55,
+          "ago": "1시간 전",
+          "agoMinutes": 60,
           "publishedLabel": "2026.08.18 ・ 06:52",
           "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081806492321677_1.jpg",
           "insight": {
@@ -3567,7 +3684,9 @@
               "seo": "\"강렬하게 귓가에 맴돌아\" 방탄소년단 뷔, '아리랑' 앨범 속 독보적 보컬 '주목'..보그 US 최신 이슈와 핵심 내용 정리",
               "home": "\"강렬하게 귓가에 맴돌아\" 방탄소년단 뷔, '아리랑' 앨범 속 독보적 보컬 '주목'..보그 US, \"강렬하게 귓가에 맴돌아\" 방탄소년단 뷔, '아리랑' 앨범 속 독보적 보컬 '주목'..보그 US 관련 확인할 점",
               "topic": "\"강렬하게 귓가에 맴돌아\" 방탄소년단 뷔, '아리랑' 앨범 속 독보적 보컬 '주목'..보그 US",
-              "topicGroup": "이슈 실시간 검색어"
+              "topicGroup": "이슈 실시간 검색어",
+              "summary": "방탄소년단 뷔가 '아리랑' 앨범에서 선보인 보컬이 주목받았다. 미국 보그가 그의 독보적인 목소리를 강렬하게 귓가에 맴돈다고 평했다.",
+              "aiTitled": false
             },
             "facts": [
               {
@@ -3591,131 +3710,11 @@
               "\"강렬하게 귓가에 맴돌아\" 방탄소년단 뷔, '아리랑' 앨범 속 독보적 보컬 '주목'..보그 US"
             ],
             "extraction": "playwright",
-            "collectedAt": "2026-08-17T21:56:24.211Z"
-          }
-        },
-        {
-          "id": "issue-9",
-          "rank": 9,
-          "keyword": "김영희, 빚 고백 \"갚아야 할 돈 많아..44살인데 모이는 게 없어\" 눈물",
-          "title": "김영희, 빚 고백 \"갚아야 할 돈 많아..44살인데 모이는 게 없어\" 눈물",
-          "rawKeyword": "김영희, 빚 고백 \"갚아야 할 돈 많아..44살인데 모이는 게 없어\" 눈물",
-          "description": "스타뉴스 최신 기사 · 김영희, 빚 고백 \"갚아야 할 돈 많아..44살인데 모이는 게 없어\" 눈물",
-          "priority": 92,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/broadcast-show/2026/08/18/2026081723401178300",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "고백 -25년째의 비밀-",
-            "고백부부",
-            "고백의 역사",
-            "고백 가사",
-            "고백 노래",
-            "고백 뜨거운감자",
-            "전력고백",
-            "취중고백"
-          ],
-          "expansionSeed": "김영희",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
-          "publishedLabel": "2026.08.18 ・ 06:20",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081723401178300_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "김영희, 빚 고백 '44살인데 모이는 게 없어' 눈물 흘린 속사정",
-              "home": "김영희, 빚 고백 \"갚아야 할 돈 많아..44살인데 모이는 게 없어\" 눈물, 김영희, 빚 고백 \"갚아야 할 돈 많아..44살인데 모이는 게 없어\" 눈물 관련 확인할 점",
-              "topic": "김영희, 빚 고백 \"갚아야 할 돈 많아..44살인데 모이는 게 없어\" 눈물",
-              "topicGroup": "이슈 실시간 검색어",
-              "summary": "김영희가 갚아야 할 빚이 많다고 고백했다. 44살인데 모이는 돈이 없다며 눈물을 보였다.",
-              "aiTitled": true
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · 김영희, 빚 고백 \"갚아야 할 돈 많아..44살인데 모이는 게 없어\" 눈물",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/broadcast-show/2026/08/18/2026081723401178300",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081723401178300_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "김영희, 빚 고백 \"갚아야 할 돈 많아..44살인데 모이는 게 없어\" 눈물"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-17T22:41:28.173Z"
-          }
-        },
-        {
-          "id": "issue-10",
-          "rank": 10,
-          "keyword": "'멸공' 외친 황현민, 배정남 '좌파' 낙인 찍고 마르코 난투극 17년만에 끌올",
-          "title": "'멸공' 외친 황현민, 배정남 '좌파' 낙인 찍고 마르코 난투극 17년만에 끌올",
-          "rawKeyword": "'멸공' 외친 황현민, 배정남 '좌파' 낙인 찍고 마르코 난투극 17년만에 끌올",
-          "description": "스타뉴스 최신 기사 · '멸공' 외친 황현민, 배정남 '좌파' 낙인 찍고 마르코 난투극 17년만에 끌올",
-          "priority": 91,
-          "source": "issue",
-          "officialUrl": "https://www.starnewskorea.com/star/2026/08/18/2026081800523722277",
-          "sourceLabel": "스타뉴스",
-          "expansions": [
-            "마르코 배정남",
-            "황현민 배정남",
-            "배정남 나무위키",
-            "배정남 벨",
-            "배정남 강아지",
-            "배정남 리즈",
-            "배정남 뼈족발",
-            "배정남 프로필"
-          ],
-          "expansionSeed": "황현민",
-          "ago": "1시간 전",
-          "agoMinutes": 60,
-          "publishedLabel": "2026.08.18 ・ 06:05",
-          "image": "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081800523722277_1.jpg",
-          "insight": {
-            "titles": {
-              "seo": "'멸공' 외친 황현민, 배정남 '좌파' 낙인·마르코 난투극 17년만에 재조명",
-              "home": "'멸공' 외친 황현민, 배정남 '좌파' 낙인 찍고 마르코 난투극 17년만에 끌올, '멸공' 외친 황현민, 배정남 '좌파' 낙인 찍고 마르코 난투극 17년만에 끌올 관련 확인할 점",
-              "topic": "'멸공' 외친 황현민, 배정남 '좌파' 낙인 찍고 마르코 난투극 17년만에 끌올",
-              "topicGroup": "이슈 실시간 검색어",
-              "summary": "황현민이 '멸공'을 외치고 배정남에게 '좌파' 낙인을 찍은 일이 다시 회자됐다. 마르코와 벌인 난투극까지 17년 만에 끌어올려졌다.",
-              "aiTitled": true
-            },
-            "facts": [
-              {
-                "text": "스타뉴스 최신 기사 · '멸공' 외친 황현민, 배정남 '좌파' 낙인 찍고 마르코 난투극 17년만에 끌올",
-                "sourceIndex": 0
-              }
-            ],
-            "links": [
-              {
-                "url": "https://www.starnewskorea.com/star/2026/08/18/2026081800523722277",
-                "press": "스타뉴스"
-              }
-            ],
-            "images": [
-              "https://image.starnewskorea.com/cdn-cgi/image/f=avif,w=150,h=150,fit=cover,g=face/21/2026/08/2026081800523722277_1.jpg"
-            ],
-            "press": [
-              "스타뉴스"
-            ],
-            "headlines": [
-              "'멸공' 외친 황현민, 배정남 '좌파' 낙인 찍고 마르코 난투극 17년만에 끌올"
-            ],
-            "extraction": "playwright",
-            "collectedAt": "2026-08-17T22:32:35.838Z"
+            "collectedAt": "2026-08-17T23:01:25.819Z"
           }
         }
       ]
     }
   ],
-  "updatedAt": "2026-08-17T22:49:56.188Z"
+  "updatedAt": "2026-08-17T23:01:52.592Z"
 }
