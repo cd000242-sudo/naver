@@ -136,7 +136,8 @@ function LewordStyles() {
                 color: rgba(235,242,250,.72);
                 font-size: 13px; font-weight: 800; cursor: pointer;
             }
-            .lw-segment button.on { background: rgba(124,92,255,.2); border-color: rgba(124,92,255,.42); color: #fff; }
+            /* 활성 칩은 브랜드 골드다(#FFA500 — tokens.ts). 보라는 보조로 물린다. */
+            .lw-segment button.on { background: rgba(255,165,0,.16); border-color: rgba(255,165,0,.5); color: #ffd79a; }
             .lw-count { margin-left: auto; color: #646b7d; font-size: 13px; font-weight: 800; }
 
             /* ── 사용량 ── */
@@ -225,18 +226,34 @@ function LewordStyles() {
              *
              * 한 줄 = [근거] [지표 4] [액션 6]. 좁은 화면에서는 아래로 접는다.
              */
-            .lw-board-list { display: flex; flex-direction: column; gap: 10px; }
+            .lw-board-list { display: flex; flex-direction: column; gap: 12px; }
             .lw-board-list .lw-card-pre {
                 display: grid;
                 /*
-                 * 왼쪽이 넓어야 근거 문장이 한 줄에 들어간다. 실측 화면에서 근거가
-                 * 좁은 칸에 들어가 '문서수 3,801' 이 두 줄로 접혔다.
+                 * [2026-08-18 재편] 상단 = [근거 1fr | 지표 230px] 두 칸.
+                 * 제목 대장간·키워드 풀·수익 판정·액션은 하단 풀폭이다 — 예전엔
+                 * 188px 세 번째 열에 제목이 낑겨 갑갑했고, 액션 7개가 세로
+                 * 풀폭 바로 쌓여 카드 하나가 화면 절반을 먹었다(실측 스크린샷).
                  */
-                grid-template-columns: minmax(0, 1fr) 190px 188px;
+                grid-template-columns: minmax(0, 1fr) 230px;
                 align-items: start;
-                gap: 20px;
-                padding: 16px 18px;
+                gap: 14px 20px;
+                padding: 18px 20px;
+                border-radius: 16px;
+                transition: border-color .15s ease, background .15s ease;
             }
+            .lw-board-list .lw-card-pre:hover {
+                border-color: rgba(255,165,0,.28);
+                background: rgba(255,255,255,.045);
+            }
+            /* 하단 풀폭 블록들 — 대장간·풀 칩·수익 판정·트렌드·마인드맵·액션 */
+            .lw-board-list .lw-forge,
+            .lw-board-list .lw-forge-ai,
+            .lw-board-list .lw-mindmap,
+            .lw-board-list .lw-mindmap-branches,
+            .lw-board-list .lw-mindmap-money,
+            .lw-board-list .lw-trend,
+            .lw-board-list .lw-card-actions { grid-column: 1 / -1; }
             /* 배지·제목·근거는 한 칸에 세로로 쌓인다(BoardCardHead 가 한 덩어리로 낸다). */
             .lw-card-head { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
             .lw-board-list .lw-card-metrics {
@@ -246,14 +263,22 @@ function LewordStyles() {
             /* 세로 목록에서는 숫자가 카드 높이를 끌지 않게 조금 줄인다. */
             .lw-board-list .lw-card-metrics strong { font-size: 16px; }
             .lw-board-list .lw-evidence li { font-size: 12.5px; }
-            .lw-board-list .lw-card-actions { flex-direction: column; gap: 6px; }
+            /*
+             * 액션은 컴팩트 그리드다. 세로 풀폭 스택(예전)은 버튼 7개가 카드
+             * 절반을 먹었다. 첫 버튼(어떻게 쓸까)만 골드 프라이머리 — 눌러야
+             * 할 것이 하나로 보여야 손이 간다.
+             */
+            .lw-board-list .lw-card-actions {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 7px;
+                margin-top: 2px;
+            }
             .lw-board-list .lw-card-actions button,
-            .lw-board-list .lw-card-actions a { flex: none; width: 100%; }
+            .lw-board-list .lw-card-actions a { flex: none; width: 100%; padding: 8px 8px; }
             @media (max-width: 860px) {
-                .lw-board-list .lw-card-pre { grid-template-columns: minmax(0, 1fr); }
-                .lw-board-list .lw-card-actions { flex-direction: row; flex-wrap: wrap; }
-                .lw-board-list .lw-card-actions button,
-                .lw-board-list .lw-card-actions a { flex: 1 1 30%; width: auto; }
+                .lw-board-list .lw-card-pre { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+                .lw-board-list .lw-card-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             }
 
             /*
@@ -294,7 +319,7 @@ function LewordStyles() {
             }
             .lw-topic-tabs button em { font-style: normal; opacity: .6; margin-left: 4px; }
             .lw-topic-tabs button:hover { color: #b9c2d4; }
-            .lw-topic-tabs button.on { color: #fff; border-bottom-color: #7c5cff; }
+            .lw-topic-tabs button.on { color: #fff; border-bottom-color: #FFA500; }
 
             /*
              * 등급 색. 사장님 지적 — 예전 '약함' 노랑이 '초황금' 금색과 겹쳐 구분이
@@ -361,16 +386,36 @@ function LewordStyles() {
             .lw-card-actions { display: flex; gap: 7px; }
             /* 좁은 칸에서 '검색결과 확 인' 처럼 두 줄로 깨지던 것을 막는다. */
             .lw-card-actions button, .lw-card-actions a { white-space: nowrap; }
+            /*
+             * 액션 위계(2026-08-18, 브랜드 골드 #FFA500 — tokens.ts 단일출처):
+             *   프라이머리(첫 버튼) = 골드, 나머지 = 중립 고스트.
+             * 예전엔 버튼 전부가 보라 계열 같은 무게라 무엇을 눌러야 할지
+             * 화면이 말해 주지 않았다.
+             */
             .lw-card-actions button, .lw-card-actions a {
                 flex: 1;
                 padding: 9px 10px;
-                border: 1px solid rgba(124,92,255,.32); border-radius: 10px;
-                background: rgba(124,92,255,.14);
-                color: #c9bcff; font-size: 12.5px; font-weight: 800; text-align: center; text-decoration: none;
+                border: 1px solid rgba(255,255,255,.11); border-radius: 10px;
+                background: rgba(255,255,255,.04);
+                color: rgba(235,242,250,.78); font-size: 12.5px; font-weight: 800; text-align: center; text-decoration: none;
                 cursor: pointer;
+                transition: background .12s ease, border-color .12s ease, color .12s ease;
             }
-            .lw-card-actions a { border-color: rgba(255,255,255,.11); background: rgba(255,255,255,.04); color: rgba(235,242,250,.74); }
-            .lw-card-actions button:hover { background: rgba(124,92,255,.24); }
+            .lw-card-actions button:hover, .lw-card-actions a:hover {
+                background: rgba(255,255,255,.09);
+                border-color: rgba(255,165,0,.35);
+                color: #fff;
+            }
+            .lw-card-actions button:first-child {
+                border-color: rgba(255,165,0,.5);
+                background: linear-gradient(180deg, rgba(255,165,0,.2), rgba(255,165,0,.12));
+                color: #ffc46e;
+            }
+            .lw-card-actions button:first-child:hover {
+                background: linear-gradient(180deg, rgba(255,165,0,.3), rgba(255,165,0,.18));
+                color: #ffd79a;
+            }
+            .lw-card-actions button:disabled { opacity: .55; cursor: wait; }
 
             /* ── 유튜브 카드 ── */
             .lw-card-video { padding: 0; overflow: hidden; }
@@ -630,9 +675,10 @@ function LewordStyles() {
             }
             /* 대장간 산출물 — 제목 2종 + 문제해결 서브 */
             .lw-forge {
-                margin: 10px 0 2px; padding: 10px 13px; border-radius: 10px;
-                background: rgba(255,255,255,.04); border-left: 3px solid rgba(250,204,21,.4);
-                display: flex; flex-direction: column; gap: 5px;
+                margin: 2px 0; padding: 12px 15px; border-radius: 12px;
+                background: rgba(255,165,0,.05); border: 1px solid rgba(255,165,0,.16);
+                border-left: 3px solid rgba(255,165,0,.55);
+                display: flex; flex-direction: column; gap: 6px;
             }
             .lw-forge-title { font-size: 13px; color: rgba(235,242,250,.9); line-height: 1.5; word-break: keep-all; }
             .lw-forge-title span, .lw-forge-subs span {
@@ -641,7 +687,7 @@ function LewordStyles() {
                 font-size: 10.5px; font-weight: 800; vertical-align: 1px;
             }
             .lw-forge-subs { font-size: 12.5px; color: rgba(235,242,250,.75); line-height: 1.7; }
-            .lw-forge-subs em { font-style: normal; margin-right: 10px; color: #fcd34d; }
+            .lw-forge-subs em { font-style: normal; margin-right: 10px; color: #ffc46e; }
             /* 마인드맵 — 중심 키워드에서 실측 확장어가 갈라진다.
                AI 가 찾아 실측으로 확인된 가지는 색으로 구분한다. */
             .lw-mindmap {
