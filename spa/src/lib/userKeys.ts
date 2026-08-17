@@ -21,13 +21,12 @@ export type UserKeyField =
     | 'coupangAccessKey'
     | 'coupangSecretKey'
     | 'coupangSubId'
-    | 'brandconnectSpaceId'
-    | 'anthropicKey';
+    | 'brandconnectSpaceId';
 
 export type UserKeys = Partial<Record<UserKeyField, string>>;
 
 export type KeyGroup = {
-    id: 'searchad' | 'openapi' | 'youtube' | 'coupang' | 'brandconnect' | 'ai';
+    id: 'searchad' | 'openapi' | 'youtube' | 'coupang' | 'brandconnect';
     label: string;
     desc: string;
     /** 어디서 발급받는지. 사용자가 바로 갈 수 있어야 한다. */
@@ -94,28 +93,12 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
             { key: 'brandconnectSpaceId', label: '내 스페이스 ID', secret: false, placeholder: '876491907827712', minLength: 8 },
         ],
     },
-    {
-        /*
-         * AI 추론 연동(사장님 지시 2026-08-17). 키는 다른 그룹과 똑같이 이 브라우저에만
-         * 저장되고, AI 호출은 **브라우저에서 Anthropic 으로 직접** 나간다(우리 서버 없음,
-         * 경유지 없음). 비용은 사용자 본인 키·본인 과금이다.
-         */
-        id: 'ai',
-        label: 'AI 추론 (Claude)',
-        /*
-         * 우선순위를 분명히 한다(사장님 지시): 구독으로 **무료** 사용은 LEWORD 앱이
-         * 담당한다 — 앱이 PC 의 Claude Code/Codex 로그인을 자동 감지해서 키 없이
-         * 돈다. 이 API 키 칸은 "앱 없이 웹에서만 쓰고 싶은 사람"의 선택지이며
-         * 사용량만큼 본인 과금이 붙는다. 웹은 구독 로그인 연동이 불가능하다 —
-         * Anthropic 이 서드파티 사이트에 그 흐름을 제공하지 않는다.
-         */
-        desc: '💡 Claude·ChatGPT 구독이 있다면 LEWORD 앱에서 무료로 쓰세요 — 앱이 PC 의 Claude Code/Codex 로그인을 자동 감지해 키 없이 작동합니다(추가 비용 0원). 아래 API 키는 앱 없이 웹에서만 쓸 때의 선택지이고, 사용량만큼 Anthropic 요금이 부과됩니다.',
-        issueUrl: 'https://console.anthropic.com/settings/keys',
-        fields: [
-            { key: 'anthropicKey', label: 'Anthropic API 키 (선택 — 웹 전용, 종량 과금)', secret: true, placeholder: 'sk-ant-api03-...', minLength: 40 },
-        ],
-    },
 ];
+/*
+ * AI 추론에는 API 키 그룹이 없다(사장님 지시 2026-08-17: "API 키를 여기 두지
+ * 말고 클로드코드를 웹에서 쓰게 하라"). 웹의 AI 는 사용자 PC 의 LEWORD 앱
+ * 브리지(127.0.0.1)를 통해 그 사람의 클로드코드 구독으로 돈다 — lib/bridge.ts.
+ */
 
 export function loadUserKeys(): UserKeys {
     try {

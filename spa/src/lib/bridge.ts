@@ -1,0 +1,65 @@
+/**
+ * LEWORD 앱 브리지 클라이언트 — 웹이 **사용자 PC 의 클로드코드(구독)** 를 쓴다.
+ *
+ *   이 페이지 → http://127.0.0.1:47615 (LEWORD 앱) → 클로드코드 실행 → 응답
+ *
+ * 실행·비용 모두 사용자 본인 기기·본인 구독이다. 사이트는 화면일 뿐 서버도
+ * 키도 없다. 앱이 꺼져 있으면 연결 실패가 정상이고, 화면은 "앱을 켜세요"로
+ * 안내한다 — 지어내는 상태 표시는 없다.
+ */
+
+const BRIDGE_BASE = 'http://127.0.0.1:47615';
+
+export interface BridgeAgentStatus {
+    provider: 'claude' | 'codex' | 'gemini';
+    installed: boolean;
+    loggedIn: boolean;
+    available: boolean;
+    detail: string;
+}
+
+export interface BridgeStatus {
+    connected: boolean;
+    version?: string;
+    agents?: BridgeAgentStatus[];
+}
+
+async function bridgeFetch(path: string, options?: RequestInit, timeoutMs = 3500): Promise<unknown | null> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+    try {
+        const response = await fetch(BRIDGE_BASE + path, { ...options, signal: controller.signal });
+        if (!response.ok) return null;
+        const body = await response.json();
+        return body && body.ok ? body : null;
+    } catch {
+        return null;
+    } finally {
+        window.clearTimeout(timer);
+    }
+}
+
+/** 앱이 떠 있고 어떤 엔진이 준비됐는지. 실패 = 앱 꺼짐/미설치(정상 상태). */
+export async function probeBridge(): Promise<BridgeStatus> {
+    const body = await bridgeFetch('/v1/bridge/status') as { version?: string; agents?: BridgeAgentStatus[] } | null;
+    if (!body) return { connected: false };
+    return { connected: true, version: body.version, agents: body.agents || [] };
+}
+
+/**
+ * 서브키워드·제목 추론 — 앱의 레인 인사이트(추론 체인 전체: 자동완성 실측 →
+ * 규칙 선별 → 부족하면 클로드코드 제안 → 실존 결재)를 그대로 쓴다.
+ * 결과의 subs 는 이미 검증된 것만 온다(추론 60초까지 걸릴 수 있다).
+ */
+export async function bridgeAiSubs(keyword: string): Promise<{
+    subs: Array<{ keyword: string; searchVolume: number | null; source?: string }>;
+    ai?: { used: boolean; provider: string; proposed: number; verified: number };
+} | null> {
+    const body = await bridgeFetch('/v1/bridge/ai-subs', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ keyword }),
+    }, 90_000) as { result?: { subs?: [], ai?: never } } | null;
+    if (!body || !body.result) return null;
+    return body.result as never;
+}

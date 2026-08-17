@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import PreemptionPlan from './PreemptionPlan';
 import { naverSearchUrl, rowMatchesWriteLane } from './preemptionMeta';
-import { loadUserKeys } from '../../lib/userKeys';
-import { proposeAiSubKeywords, type AiSubSuggestion } from '../../lib/aiSubs';
+import { bridgeAiSubs } from '../../lib/bridge';
 
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
@@ -117,16 +116,26 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     /** 방금 복사한 키워드. 눌렀는지 안 눌렀는지 모르면 두 번 누르게 된다. */
     const [copied, setCopied] = useState('');
     /*
-     * AI 서브 보강(2026-08-17) — '내 API 키' 탭의 Anthropic 키가 있을 때만.
-     * 제안은 실존 미검증이므로 화면이 그 사실을 라벨로 밝히고 확인 링크를 붙인다.
+     * AI 서브 보강(2026-08-17 재설계) — API 키가 아니라 **클로드코드 연동**이다.
+     * 같은 PC 의 LEWORD 앱 브리지가 사용자의 클로드코드 구독으로 추론 체인
+     * (자동완성 실측→규칙 선별→AI 제안→실존 결재)을 통째로 돌려준다.
+     * 그래서 결과는 전부 검증된 실존 검색어다. 앱이 꺼져 있으면 안내만 한다.
      */
-    const aiKey = (loadUserKeys().anthropicKey || '').trim();
-    const [aiSubs, setAiSubs] = useState<Record<string, { status: 'loading' | 'done' | 'error'; items?: AiSubSuggestion[]; error?: string }>>({});
+    const [aiSubs, setAiSubs] = useState<Record<string, {
+        status: 'loading' | 'done' | 'offline' | 'error';
+        items?: Array<{ keyword: string; searchVolume: number | null; source?: string }>;
+        ai?: { used: boolean; provider: string; proposed: number; verified: number };
+        error?: string;
+    }>>({});
     const askAiSubs = async (keyword: string) => {
         setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
         try {
-            const items = await proposeAiSubKeywords(aiKey, keyword);
-            setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'done', items } }));
+            const result = await bridgeAiSubs(keyword);
+            if (!result) {
+                setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
+                return;
+            }
+            setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'done', items: result.subs || [], ai: result.ai } }));
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
@@ -355,16 +364,14 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         <a href={dataLabUrl(row.keyword)} target="_blank" rel="noreferrer">
                                             그래프보기<small>네이버 데이터랩</small>
                                         </a>
-                                        {aiKey && (
-                                            <button
-                                                type="button"
-                                                onClick={() => askAiSubs(row.keyword)}
-                                                disabled={aiSubs[row.keyword]?.status === 'loading'}
-                                            >
-                                                {aiSubs[row.keyword]?.status === 'loading' ? 'AI 생각 중…' : '🤖 AI 서브 보강'}
-                                                <small>내 키로 직접 호출</small>
-                                            </button>
-                                        )}
+                                        <button
+                                            type="button"
+                                            onClick={() => askAiSubs(row.keyword)}
+                                            disabled={aiSubs[row.keyword]?.status === 'loading'}
+                                        >
+                                            {aiSubs[row.keyword]?.status === 'loading' ? '클로드코드 추론 중…' : '🤖 AI 서브 보강'}
+                                            <small>내 클로드코드 구독</small>
+                                        </button>
                                         <button
                                             type="button"
                                             className="lw-copy"
@@ -377,28 +384,38 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         >{copied === row.keyword ? '복사됨' : '복사'}</button>
                                     </div>
 
+                                    {aiSubs[row.keyword]?.status === 'offline' && (
+                                        <div className="lw-forge lw-forge-ai">
+                                            <div className="lw-forge-subs">
+                                                LEWORD 앱이 꺼져 있습니다 — 앱을 켜면 이 버튼이 <strong>내 클로드코드 구독</strong>으로
+                                                무료 추론합니다. <a href="/download">⬇ 앱 받기</a>
+                                            </div>
+                                        </div>
+                                    )}
                                     {aiSubs[row.keyword]?.status === 'error' && (
                                         <div className="lw-forge lw-forge-ai">
-                                            <div className="lw-forge-subs">AI 호출 실패: {aiSubs[row.keyword]?.error}</div>
+                                            <div className="lw-forge-subs">추론 실패: {aiSubs[row.keyword]?.error}</div>
                                         </div>
                                     )}
                                     {aiSubs[row.keyword]?.status === 'done' && (
                                         <div className="lw-forge lw-forge-ai">
                                             <div className="lw-forge-subs">
-                                                {/*
-                                                  * 정직성: 브라우저에서는 검색광고/자동완성 결재를 못 돌린다(CORS).
-                                                  * 그래서 "검증 전"을 명시하고, 클릭 한 번으로 실검색 확인이 되는
-                                                  * 링크를 하나씩 붙인다 — 지어낸 검색어를 사실처럼 내보내지 않는다.
-                                                  */}
-                                                <span>🤖 AI 제안 · 검증 전</span>
-                                                {(aiSubs[row.keyword]?.items || []).length === 0 && '조건에 맞는 제안이 없습니다.'}
+                                                {/* 앱의 추론 체인이 실존 결재까지 마친 결과다 — 검증된 검색어만 온다. */}
+                                                <span>🤖 클로드코드 서브 (실측 검증됨)</span>
+                                                {(aiSubs[row.keyword]?.items || []).length === 0 && '검증을 통과한 파생이 없습니다 — 지어내지 않습니다.'}
                                                 {(aiSubs[row.keyword]?.items || []).map((sub) => (
                                                     <em key={sub.keyword}>
-                                                        <a href={naverSearchUrl(sub.keyword)} target="_blank" rel="noreferrer" title="네이버에서 실검색 확인">
-                                                            {sub.keyword}↗
+                                                        <a href={naverSearchUrl(sub.keyword)} target="_blank" rel="noreferrer" title="네이버에서 확인">
+                                                            {sub.keyword}
                                                         </a>
+                                                        {typeof sub.searchVolume === 'number' ? ` (${sub.searchVolume.toLocaleString()})` : ''}
                                                     </em>
                                                 ))}
+                                                {aiSubs[row.keyword]?.ai?.used && (
+                                                    <div style={{ fontSize: 11, opacity: .7, marginTop: 4 }}>
+                                                        {aiSubs[row.keyword]?.ai?.provider} 제안 {aiSubs[row.keyword]?.ai?.proposed}건 → 실측 검증 통과 {aiSubs[row.keyword]?.ai?.verified}건
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     )}

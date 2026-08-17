@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { probeBridge, type BridgeStatus } from '../../lib/bridge';
 import {
     KEY_GROUPS,
     checkKeyShape,
@@ -24,6 +25,15 @@ function KeysTab() {
     const [keys, setKeys] = useState<UserKeys>(() => loadUserKeys());
     const [saved, setSaved] = useState(false);
     const [revealed, setRevealed] = useState<Record<string, boolean>>({});
+    /*
+     * AI 추론은 API 키가 아니라 **클로드코드 연동**이다(사장님 지시 2026-08-17).
+     * 이 페이지가 사용자 PC 의 LEWORD 앱 브리지에 접속해 그 사람의 클로드코드
+     * 구독으로 돈다 — 키도, 추가 비용도 없다. null = 아직 확인 중.
+     */
+    const [bridge, setBridge] = useState<BridgeStatus | null>(null);
+    const refreshBridge = () => { setBridge(null); probeBridge().then(setBridge); };
+    useEffect(() => { probeBridge().then(setBridge); }, []);
+    const claudeAgent = bridge?.agents?.find((agent) => agent.provider === 'claude');
 
     const update = (field: string, value: string) => {
         setKeys((previous) => ({ ...previous, [field]: value }));
@@ -63,6 +73,27 @@ function KeysTab() {
                 시트·로그·설정 어디에도 저장하지 않습니다. 브라우저를 바꾸면 다시 입력해야 합니다.
             </div>
 
+            {/* AI 추론 — 클로드코드 연동 (키 없음·비용 없음, 사용자 PC 구독 실행) */}
+            <section className="lw-panel" aria-label="AI 추론 (클로드코드)">
+                <div className="lw-panel-head">
+                    <h2>AI 추론 (클로드코드)</h2>
+                    <span className={bridge?.connected && claudeAgent?.available ? 'lw-key-on' : ''}>
+                        {bridge === null ? '연결 확인 중…'
+                            : !bridge.connected ? 'LEWORD 앱 꺼짐 — 켜면 자동 연결'
+                                : claudeAgent?.available ? '● 연동됨 — 구독으로 무료 추론'
+                                    : claudeAgent?.installed ? '앱에서 클로드코드 로그인 필요'
+                                        : '앱에서 클로드코드 설치 필요'}
+                    </span>
+                    <a className="lw-key-issue" href="/download">앱 받기 →</a>
+                </div>
+                <p className="lw-card-note" style={{ marginBottom: 12 }}>
+                    API 키가 필요 없습니다. 이 페이지가 같은 PC 의 LEWORD 앱과 연결되어
+                    <strong> 내 클로드코드 구독</strong>으로 서브키워드·후킹을 추론합니다 — 실행도 비용도 전부 내 컴퓨터·내 구독입니다.
+                    앱을 켜두기만 하면 황금키워드 보드의 <strong>🤖 AI 서브 보강</strong> 버튼이 살아납니다.
+                </p>
+                <button type="button" className="lw-mini lw-mini-ghost" onClick={refreshBridge}>다시 확인</button>
+            </section>
+
             {KEY_GROUPS.map((group) => {
                 const ready = isGroupReady(group, keys);
                 return (
@@ -73,14 +104,6 @@ function KeysTab() {
                             <a className="lw-key-issue" href={group.issueUrl} target="_blank" rel="noreferrer">발급받기 →</a>
                         </div>
                         <p className="lw-card-note" style={{ marginBottom: 12 }}>{group.desc}</p>
-                        {/* 구독 무료 경로가 첫 번째다 — 키 입력은 그다음 선택지. */}
-                        {group.id === 'ai' && (
-                            <p className="lw-card-note" style={{ marginBottom: 12 }}>
-                                <a href="/download" style={{ color: '#b8a6ff', fontWeight: 800, textDecoration: 'none' }}>
-                                    ⬇ LEWORD 앱 받기 — Claude Code·Codex 로그인 자동 감지, 구독으로 무료 추론 →
-                                </a>
-                            </p>
-                        )}
                         <div className="lw-key-fields">
                             {group.fields.map((field) => {
                                 /*

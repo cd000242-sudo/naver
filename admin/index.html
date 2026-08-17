@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleusercontent.com https://api.github.com; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://*.googleusercontent.com https://api.github.com http://127.0.0.1:47615; worker-src 'self' blob:; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
     <meta name="robots" content="noindex, nofollow, noarchive" />
     <title>Leaders Pro — Admin Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -4940,6 +4940,25 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
          */
         const AI_WORKER_REPO = 'cd000242-sudo/leword-app';
         const AI_WORKER_FILE = 'agent-worker.yml';
+        /*
+         * 자동 연동(사장님 지시: "토큰도 알아서, 자동으로"): 어드민은 사장님 PC 에서
+         * 열리므로, 같은 PC 의 LEWORD 앱 브리지(127.0.0.1)가 gh 인증으로 GitHub 를
+         * 대신 부른다 — 토큰이 브라우저에 갈 일이 없고 어떤 브라우저든 즉시 된다.
+         * 브리지가 없을 때만(앱 미실행) localStorage 토큰 경로로 폴백.
+         */
+        const AI_WORKER_BRIDGE = 'http://127.0.0.1:47615';
+
+        async function bridgeFetch(path, options) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 4000);
+            try {
+                const res = await fetch(AI_WORKER_BRIDGE + path, { ...(options || {}), signal: controller.signal });
+                if (!res.ok) return null;
+                const body = await res.json();
+                return body && body.ok ? body : null;
+            } catch { return null; }
+            finally { clearTimeout(timer); }
+        }
 
         function adminGhToken() {
             return (localStorage.getItem('leaderspro_admin_gh_pat') || '').trim();
@@ -4995,9 +5014,20 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
          * 셋 다 실제 GitHub 조회다 — 로그인 여부만 보고 "연동됨"이라 말하지 않는다.
          */
         async function checkAdminAiWorkerSettings() {
+            // 1순위: 로컬 브리지(자동 연동 — 토큰 불필요)
+            setAgentBadge('감지 중…', 'idle');
+            const bridged = await bridgeFetch('/v1/bridge/admin/worker-status');
+            if (bridged && bridged.result) {
+                const run = bridged.result;
+                const good = run.conclusion === 'success';
+                setAgentBadge(good ? '✅ 자동 연동 (LEWORD 앱)' : '자동 연동 · 최근 ' + (run.conclusion || run.status), good ? 'ok' : 'warn');
+                setAgentDetail('LEWORD 앱 브리지 경유 — 토큰 입력 불필요' + (run.createdAt ? ` · 최근 실행 ${new Date(run.createdAt).toLocaleString('ko-KR')}` : ''));
+                setAiWorkerStatus('자동 연동 확인 완료' + (run.url ? ' — 최근 실행: ' + run.url : ' — 실행 이력 없음'));
+                return;
+            }
             if (!adminGhToken()) {
-                setAgentBadge('토큰 없음', 'warn');
-                setAiWorkerStatus('GitHub 토큰이 없습니다 — 터미널에서 gh auth token | clip 후 위 칸에 붙여넣고 저장하세요.');
+                setAgentBadge('앱 미실행 · 토큰 없음', 'warn');
+                setAiWorkerStatus('LEWORD 앱을 켜면 자동 연동됩니다. (앱 없이 쓰려면 gh auth token 을 위 칸에 저장)');
                 return;
             }
             setAgentBadge('감지 중…', 'idle');
@@ -5051,11 +5081,34 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
         }
 
         async function runAdminAiWorkerTest() {
-            if (!adminGhToken()) {
-                setAiWorkerStatus('GitHub 토큰이 없습니다 — 먼저 토큰을 저장하세요.');
+            renderWorkerProgress([], '실행 요청 중…', 3);
+            // 1순위: 로컬 브리지로 디스패치(자동 연동) — 이후 진행 폴링은 브리지 상태로.
+            const bridged = await bridgeFetch('/v1/bridge/admin/worker-test', { method: 'POST' });
+            if (bridged) {
+                renderWorkerProgress([], '실행 시작됨(자동 연동) — 결과 대기 중…', 10);
+                const startedAt = Date.now();
+                while (Date.now() - startedAt < 240000) {
+                    await new Promise((resolve) => setTimeout(resolve, 8000));
+                    const s = await bridgeFetch('/v1/bridge/admin/worker-status');
+                    const run = s && s.result;
+                    if (!run) continue;
+                    if (run.status === 'completed') {
+                        const good = run.conclusion === 'success';
+                        renderWorkerProgress([], good ? '완료' : '실패', 100);
+                        setAgentBadge(good ? '✅ 자동 연동 (LEWORD 앱)' : '실행 실패', good ? 'ok' : 'bad');
+                        setAiWorkerStatus((good ? '✅ 작업자 응답 성공' : '❌ 실패: ' + run.conclusion) + (run.url ? ' — 응답 본문: ' + run.url : ''));
+                        return;
+                    }
+                    renderWorkerProgress([], '실행 중 · ' + Math.round((Date.now() - startedAt) / 1000) + '초', 40);
+                }
+                setAiWorkerStatus('4분 안에 안 끝났습니다 — Actions 페이지에서 확인하세요.');
                 return;
             }
-            renderWorkerProgress([], '실행 요청 중…', 3);
+            if (!adminGhToken()) {
+                setAiWorkerStatus('LEWORD 앱을 켜면 자동으로 실행됩니다. (앱 없이 쓰려면 토큰을 저장하세요)');
+                renderWorkerProgress([], '브리지 없음', 100);
+                return;
+            }
             try {
                 const dispatchedAt = new Date();
                 const dispatch = await fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/workflows/${AI_WORKER_FILE}/dispatches`, {
