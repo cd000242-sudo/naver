@@ -237,8 +237,12 @@
         let serverDownloadsPromise = null;
 
         // GitHub repo 매핑 (latest release API 동적 호출용)
+        // [2026-08-18] naver 추가. 이전에는 leword만 latest API를 쓰고 naver는 하드코딩
+        // 기본값(v2.11.67)으로 내려가, 릴리즈를 올려도 사이트 방문자는 계속 구버전을
+        // 받아갔다(실측: 현재 릴리즈 2.11.195 vs 사이트 2.11.67).
         const GITHUB_REPOS = {
             leword: 'cd000242-sudo/leword-app',
+            naver: 'cd000242-sudo/naver',
         };
 
         function lewordApiUrl(path) {
@@ -286,7 +290,9 @@
 
         function getDownloadUrl(product) {
             const defaults = {
-                naver: 'https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-Setup-2.11.67.exe',
+                // [2026-08-18] API 실패 시 폴백 — 버전 박제를 피하려 latest 페이지로.
+                //   (기존 v2.11.67 하드코딩이 사이트 방문자에게 구버전을 내려주던 원인)
+                naver: 'https://github.com/cd000242-sudo/naver/releases/latest',
                 leword: 'https://github.com/cd000242-sudo/leword-app/releases/latest',  // fallback (API 실패 시 latest 페이지)
                 orbit: '', tistory: ''
             };
@@ -306,9 +312,14 @@
             return /mac/i.test(platformText) ? 'mac' : 'windows';
         }
 
-        function scoreReleaseAsset(asset, platform) {
+        // [2026-08-18] 제품별 파일명 키워드 — leword 고정이던 필터를 제품 인자로 확장.
+        //   (naver 릴리즈 자산명: Better-Life-Naver-Setup-x.y.z.exe)
+        const PRODUCT_ASSET_KEYWORDS = { leword: 'leword', naver: 'naver' };
+
+        function scoreReleaseAsset(asset, platform, product) {
             const name = String(asset && asset.name || '').toLowerCase();
-            if (!asset || !asset.browser_download_url || !name.includes('leword') || name.endsWith('.blockmap')) return 0;
+            const keyword = PRODUCT_ASSET_KEYWORDS[product] || 'leword';
+            if (!asset || !asset.browser_download_url || !name.includes(keyword) || name.endsWith('.blockmap')) return 0;
             if (platform === 'mac') {
                 if (/\.dmg$/i.test(name) && name.includes('universal')) return 110;
                 if (/\.dmg$/i.test(name)) return 100;
@@ -322,21 +333,21 @@
             return 0;
         }
 
-        function selectReleaseAsset(assets, platform) {
+        function selectReleaseAsset(assets, platform, product) {
             return (assets || []).reduce((best, asset) => {
-                const score = scoreReleaseAsset(asset, platform);
+                const score = scoreReleaseAsset(asset, platform, product);
                 return score > best.score ? { asset, score } : best;
             }, { asset: null, score: 0 }).asset;
         }
 
-        async function getLatestDownloadFromGitHub(repo) {
+        async function getLatestDownloadFromGitHub(repo, product) {
             const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`, {
                 headers: { 'Accept': 'application/vnd.github+json' },
             });
             if (!res.ok) throw new Error(`GitHub API ${res.status}`);
             const data = await res.json();
-            const asset = selectReleaseAsset(data.assets || [], getClientPlatform());
-            if (!asset) throw new Error('No compatible LEWORD asset found in latest release');
+            const asset = selectReleaseAsset(data.assets || [], getClientPlatform(), product);
+            if (!asset) throw new Error(`No compatible ${product || 'leword'} asset found in latest release`);
             return { url: asset.browser_download_url, version: data.tag_name, filename: asset.name };
         }
 
@@ -368,7 +379,7 @@
                 const origBtnHtml = btn ? btn.innerHTML : '';
                 if (btn) { btn.disabled = true; btn.innerHTML = '⏳'; }
                 try {
-                    const { url, version, filename } = await getLatestDownloadFromGitHub(repo);
+                    const { url, version, filename } = await getLatestDownloadFromGitHub(repo, product);
                     console.log(`[DOWNLOAD] ${name} ${version} → ${filename}`);
                     window.location.href = url;  // 직접 navigation → 브라우저 자동 다운로드
                     input.value = '';
@@ -393,7 +404,7 @@
         // 페이지 로드 시 Leword 최신 버전 라벨 표시
         async function showLatestVersionLabel() {
             try {
-                const { version } = await getLatestDownloadFromGitHub('cd000242-sudo/leword-app');
+                const { version } = await getLatestDownloadFromGitHub('cd000242-sudo/leword-app', 'leword');
                 const el = document.getElementById('leword-latest-ver');
                 if (el) el.textContent = version;
             } catch {}
