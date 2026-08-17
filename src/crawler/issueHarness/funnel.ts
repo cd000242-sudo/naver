@@ -56,14 +56,22 @@ export function orderCandidatesForFetch(pool: IssueCandidateImage[]): IssueCandi
   });
 }
 
-/** Final ranking of clean survivors: real resolution × source priority. */
+/**
+ * Final ranking of clean survivors: 단독 인물 > (해상도 × 소스 신뢰도).
+ * [2026-08-18] 인물 3명이 붙은 기사 콜라주가 단독 프로필보다 앞서던 문제 —
+ * soloSubject를 1순위 정렬 키로 둔다 (Vision 판정, 없으면 false 취급).
+ */
 export function rankCleanCandidates(items: FetchedCandidate[]): FetchedCandidate[] {
   const score = (item: FetchedCandidate): number => {
     const pixels = item.width * item.height;
     const resolutionScore = Math.min(pixels / (1280 * 720), 3);
     return resolutionScore * sourceWeight(item.candidate.sourceName);
   };
-  return [...items].sort((a, b) => score(b) - score(a));
+  return [...items].sort((a, b) => {
+    const soloDiff = Number(b.soloSubject === true) - Number(a.soloSubject === true);
+    if (soloDiff !== 0) return soloDiff;
+    return score(b) - score(a);
+  });
 }
 
 export interface FunnelOptions {
@@ -81,6 +89,8 @@ export interface FunnelResult {
   fetched: number;
   duplicates: number;
   visionUsed: boolean;
+  /** 이번 라운드에서 실제로 다운로드까지 시도한 URL — 다음 라운드에서 재시도 방지 */
+  attemptedUrls: string[];
 }
 
 /**
@@ -96,14 +106,17 @@ export async function refineHeadingCandidates(
   const ordered = orderCandidatesForFetch(pool);
 
   const validated: FetchedCandidate[] = [];
+  const attemptedUrls: string[] = [];
   let fetched = 0;
   let duplicates = 0;
 
   for (const candidate of ordered) {
     if (fetched >= MAX_FETCHES_PER_HEADING) break;
-    // Fetch roughly 3x the clean target — Vision typically rejects 50~70%
-    // of issue photos (news watermarks, captions), so headroom is needed.
-    if (validated.length >= cleanTarget * 3) break;
+    attemptedUrls.push(candidate.url);
+    // Vision은 이슈 사진의 70~90%를 탈락시킨다(언론사 워터마크·자막·무관). 그래서
+    // 목표의 몇 배를 미리 확보한다. [2026-08-17] 목표가 1일 때 3장만 받아 라운드가
+    // 헛돌던 문제 → 최소 12장 바닥을 보장한다.
+    if (validated.length >= Math.max(cleanTarget * 4, 12)) break;
     fetched++;
     const item = await fetchAndValidateCandidate(candidate);
     if (!item) continue;
@@ -138,5 +151,5 @@ export async function refineHeadingCandidates(
     clean = [];
   }
 
-  return { clean: rankCleanCandidates(clean), fetched, duplicates, visionUsed };
+  return { clean: rankCleanCandidates(clean), fetched, duplicates, visionUsed, attemptedUrls };
 }

@@ -8,7 +8,8 @@
 
 import { buildIssueQueryPlan } from './queryFanout.js';
 import { filterIssueCandidates } from './urlPolicy.js';
-import { createPhashRegistry, refineHeadingCandidates } from './funnel.js';
+import { createPhashRegistry, refineHeadingCandidates, type FunnelOptions } from './funnel.js';
+import type { FetchedCandidate } from './candidateFetcher.js';
 import { createVisionBudget } from './visionGate.js';
 import { naverApiSource, naverApiDateSource } from './sources/naverApiSource.js';
 import { googleSource } from './sources/googleSource.js';
@@ -95,34 +96,65 @@ async function runTier(
   return pool;
 }
 
-/** Collect raw candidates for one heading across the tiered cascade. */
-async function collectForHeading(qs: HeadingQuerySet, cap: number): Promise<IssueCandidateImage[]> {
+/**
+ * [2026-08-17] 티어 승격 기준을 "후보 수"에서 "게이트 통과 수"로 바꾼 이유:
+ * 실측(한다감 글)에서 네이버 한 소스가 후보 60장을 채워 티어2·3(구글·다음·커뮤니티)이
+ * 아예 실행되지 않았고, 그 60장은 대부분 언론사 워터마크 사진이라 게이트에서 전멸했다.
+ * 사용자는 커뮤니티에서 깨끗한 사진을 쉽게 찾는데 앱은 못 찾은 원인이 이것.
+ * 이제 라운드마다 [소스 수집 → 정제 깔때기]를 돌려 클린이 목표에 못 미치면 다음 티어로
+ * 승격한다. 이미 다운로드 시도한 URL은 재시도하지 않는다.
+ */
+async function collectCleanForHeading(
+  qs: HeadingQuerySet,
+  cap: number,
+  target: number,
+  funnelOptions: Omit<FunnelOptions, 'cleanTarget'>,
+): Promise<{ clean: FetchedCandidate[]; poolSize: number; duplicates: number; visionUsed: boolean }> {
   const seenQueries = new Set<string>();
+  const attempted = new Set<string>();
+  const pool: IssueCandidateImage[] = [];
+  const clean: FetchedCandidate[] = [];
+  let duplicates = 0;
+  let visionUsed = false;
 
-  const pool = await runTier(TIER1, qs, seenQueries);
-  let filtered = filterIssueCandidates(pool, cap);
-  console.log(`${LOG} "${qs.heading}" 티어1: 원시 ${pool.length} → 정제 ${filtered.length}`);
+  const tiers: Array<{ label: string; steps: SourceStep[] }> = [
+    { label: '티어1(네이버·뉴스·DDG·유튜브·레딧)', steps: TIER1 },
+    { label: '티어2(구글·다음)', steps: TIER2 },
+    { label: '티어3(얀덱스·DC)', steps: TIER3 },
+  ];
 
-  if (filtered.length < POOL_SKIP_TIER2) {
-    pool.push(...(await runTier(TIER2, qs, seenQueries)));
-    filtered = filterIssueCandidates(pool, cap);
-    console.log(`${LOG} "${qs.heading}" 티어2 완료: 정제 ${filtered.length}`);
+  for (const tier of tiers) {
+    pool.push(...(await runTier(tier.steps, qs, seenQueries)));
+    const fresh = filterIssueCandidates(pool, cap).filter((c) => !attempted.has(c.url));
+    console.log(`${LOG} "${qs.heading}" ${tier.label}: 신규 후보 ${fresh.length}장 → 깔때기 투입`);
+    if (fresh.length > 0) {
+      const refined = await refineHeadingCandidates(fresh, {
+        ...funnelOptions,
+        cleanTarget: Math.max(1, target - clean.length),
+      });
+      refined.attemptedUrls.forEach((u) => attempted.add(u));
+      duplicates += refined.duplicates;
+      visionUsed = visionUsed || refined.visionUsed;
+      clean.push(...refined.clean);
+      console.log(`${LOG} "${qs.heading}" ${tier.label} 결과: 클린 누적 ${clean.length}/${target}`);
+    }
+    if (clean.length >= target) break;
   }
 
-  if (filtered.length < POOL_SKIP_TIER3) {
-    pool.push(...(await runTier(TIER3, qs, seenQueries)));
-    filtered = filterIssueCandidates(pool, cap);
-    console.log(`${LOG} "${qs.heading}" 티어3 완료: 정제 ${filtered.length}`);
+  // 전 티어를 돌고도 비면 광역 폴백(주체만으로 검색) 한 번 더.
+  if (clean.length === 0 && qs.broaderQuery) {
+    const wide = filterIssueCandidates(await naverApiSource.search(qs.broaderQuery, 30), cap)
+      .filter((c) => !attempted.has(c.url));
+    if (wide.length > 0) {
+      const refined = await refineHeadingCandidates(wide, { ...funnelOptions, cleanTarget: target });
+      clean.push(...refined.clean);
+      duplicates += refined.duplicates;
+      visionUsed = visionUsed || refined.visionUsed;
+      console.log(`${LOG} "${qs.heading}" 광역 폴백 결과: 클린 ${refined.clean.length}`);
+    }
   }
 
-  // Wide fallback query when the entire cascade came back empty.
-  if (filtered.length === 0 && qs.broaderQuery) {
-    const wide = await naverApiSource.search(qs.broaderQuery, 30);
-    filtered = filterIssueCandidates(wide, cap);
-    console.log(`${LOG} "${qs.heading}" 광역 폴백: 정제 ${filtered.length}`);
-  }
-
-  return filtered;
+  return { clean, poolSize: pool.length, duplicates, visionUsed };
 }
 
 /**
@@ -141,12 +173,17 @@ export async function collectIssueImages(
     try { options.onProgress?.({ percent: Math.min(100, Math.round(percent)), message }); } catch { /* UI only */ }
   };
 
-  emit(3, '🧠 AI가 제목·소제목·본문을 분석해 검색어를 설계하는 중...');
-  const plan = await buildIssueQueryPlan(payload.title, payload.headings, options.geminiApiKey);
+  emit(3, '🧠 AI가 제목·서론·본문 전체를 읽고 사건 맥락을 파악하는 중...');
+  const plan = await buildIssueQueryPlan(
+    payload.title,
+    payload.headings,
+    options.geminiApiKey,
+    payload.intro,
+  );
   emit(
     8,
     plan.aiGenerated
-      ? `🧠 AI 분석 완료 — 주체 "${plan.mainSubject}", 소제목당 검색어 4종 생성`
+      ? `🧠 사건 파악: ${plan.mainSubject}${plan.programName ? ` · ${plan.programName}` : ''}${plan.contextSummary ? ` — ${plan.contextSummary.slice(0, 60)}` : ''}`
       : '🧠 휴리스틱 검색어 생성 완료 (Gemini 키 없음)',
   );
   console.log(
@@ -174,34 +211,47 @@ export async function collectIssueImages(
     // source collection, second half for the download/vision funnel.
     const base = 10 + (hi / totalHeadings) * 82;
     const slice = 82 / totalHeadings;
-    emit(base, `🔍 [${hi + 1}/${totalHeadings}] "${qs.heading}" — 다소스 추적 수집 중 (네이버·구글·해외·커뮤니티)...`);
-    const filtered = (await collectForHeading(qs, cap)).filter((c) => !globallyUsed.has(c.url));
-    emit(base + slice * 0.5, `📥 [${hi + 1}/${totalHeadings}] 후보 ${filtered.length}장 확보 → 다운로드·중복제거·워터마크 검사 중...`);
-    totalCandidates += filtered.length; // raw counts are logged per tier
-    afterFilter += filtered.length;
-    for (const c of filtered) {
-      perSource[c.sourceName] = (perSource[c.sourceName] || 0) + 1;
-    }
+    emit(base, `🔍 [${hi + 1}/${totalHeadings}] "${qs.heading}" — 티어별 추적 수집 + 검증 중 (네이버→구글·다음→해외·커뮤니티)...`);
 
-    // R3 funnel: download → resolution → perceptual dedupe → Vision gate → rank
-    const refined = await refineHeadingCandidates(filtered, {
+    // 티어 승격형 라운드: [수집 → 다운로드·중복제거·워터마크·관련성 검증]을 돌려
+    // 클린이 목표에 못 미치면 다음 티어 소스로 확장한다.
+    const targetForHeading = Math.min(Math.max(qs.recommendedImages ?? 1, 1), perHeadingTarget);
+    const refined = await collectCleanForHeading(qs, cap, targetForHeading, {
       geminiApiKey: options.geminiApiKey,
       visionBudget,
       phashRegistry,
-      // 관련성 판정 기준 — 주체가 비면 게이트가 전량 미배치(빈 슬롯)로 막는다.
-      subjectContext: { mainSubject: plan.mainSubject, heading: qs.heading },
+      // 관련성 판정 기준 — 사건 맥락까지 넘겨 "소제목 문구"가 아니라 "무슨 사건인지"로
+      // 판정한다. 주체가 비면 게이트가 전량 미배치(빈 슬롯)로 막는다.
+      subjectContext: {
+        mainSubject: plan.mainSubject,
+        heading: qs.heading,
+        contextSummary: plan.contextSummary,
+        programName: plan.programName,
+        headingBody: payload.headings[hi]?.body,
+      },
     });
+    emit(
+      base + slice * 0.6,
+      `📥 [${hi + 1}/${totalHeadings}] 후보 ${refined.poolSize}장 검토 → 검증 통과 ${refined.clean.length}장`,
+    );
+    totalCandidates += refined.poolSize;
+    afterFilter += refined.poolSize;
+    for (const item of refined.clean) {
+      const src = item.candidate.sourceName;
+      perSource[src] = (perSource[src] || 0) + 1;
+    }
     cleanTotal += refined.clean.length;
     perceptualDuplicates += refined.duplicates;
     visionUsedAny = visionUsedAny || refined.visionUsed;
 
-    const cleanCandidates = refined.clean.map((item) => ({
-      ...item.candidate,
-      width: item.width,
-      height: item.height,
-    }));
-    // AI 권장 수(기본 1)만큼 배치 — 상한은 perHeadingTarget.
-    const targetForHeading = Math.min(Math.max(qs.recommendedImages ?? 1, 1), perHeadingTarget);
+    const cleanCandidates = refined.clean
+      .filter((item) => !globallyUsed.has(item.candidate.url))
+      .map((item) => ({
+        ...item.candidate,
+        width: item.width,
+        height: item.height,
+      }));
+    // AI 권장 수(기본 1)만큼 배치 — 상한은 perHeadingTarget (위에서 계산된 targetForHeading).
     const placed = cleanCandidates.slice(0, targetForHeading);
     placed.forEach((c) => globallyUsed.add(c.url));
 
@@ -214,7 +264,7 @@ export async function collectIssueImages(
         : `⚠️ [${hi + 1}/${totalHeadings}] "${qs.heading}" — 깨끗한 이미지 없음, 빈 슬롯 유지`,
     );
     console.log(
-      `${LOG} 📸 "${qs.heading}": 정제 ${filtered.length} → 클린 ${cleanCandidates.length} → 배치 ${placed.length}`,
+      `${LOG} 📸 "${qs.heading}": 후보 ${refined.poolSize} → 클린 ${cleanCandidates.length} → 배치 ${placed.length}`,
     );
   }
 

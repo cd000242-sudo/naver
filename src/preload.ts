@@ -219,7 +219,7 @@ contextBridge.exposeInMainWorld('api', {
   searchImagesForHeadings: (payload: { headings: string[]; mainKeyword: string; sourceUrl?: string }): Promise<{ success: boolean; images: Record<string, string[]>; message?: string }> =>
     ipcRenderer.invoke('search-images-for-headings', payload),
   // [이슈 끝판왕 수집] 본문분석 쿼리팬아웃 + 다소스 하네스
-  collectIssueImages: (payload: { title: string; headings: Array<{ title: string; body?: string }>; mainKeyword?: string }): Promise<{ success: boolean; images: Record<string, string[]>; candidates: Record<string, any[]>; stats?: any; message?: string }> =>
+  collectIssueImages: (payload: { title: string; headings: Array<{ title: string; body?: string }>; mainKeyword?: string; intro?: string }): Promise<{ success: boolean; images: Record<string, string[]>; candidates: Record<string, any[]>; stats?: any; message?: string }> =>
     ipcRenderer.invoke('issue:collectImages', payload),
   // [이슈 끝판왕 수집] 실시간 진행 이벤트 구독 — cleanup 함수 반환
   onIssueCollectProgress: (callback: (info: { percent: number; message: string }) => void): (() => void) => {

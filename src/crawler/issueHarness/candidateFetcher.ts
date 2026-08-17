@@ -21,6 +21,8 @@ export interface FetchedCandidate {
   width: number;
   height: number;
   dhash: bigint;
+  /** Vision 게이트가 채우는 랭킹 신호 — 주체 단독 사진이면 true (콜라주보다 우선). */
+  soloSubject?: boolean;
 }
 
 async function fetchBuffer(url: string): Promise<Buffer | null> {

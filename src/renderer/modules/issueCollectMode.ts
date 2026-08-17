@@ -18,14 +18,56 @@ const ISSUE_COLLECT_LOG = '[IssueCollect]';
 const ISSUE_DISK_SAVE_CAP_PER_HEADING = 15;
 
 /** Match each heading title to its body paragraph from structuredContent. */
+/** 배지·이모지·공백을 제거해 카드 제목과 본문 소제목을 같은 기준으로 비교한다. */
+function issueCollectNormalizeTitle(s: string): string {
+    return String(s || '')
+        .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}️]/gu, '')
+        .replace(/[·:,.!?"'()[\]]/g, '')
+        .replace(/\s+/g, '')
+        .trim();
+}
+
+/**
+ * 소제목별 본문 매칭. [2026-08-17] 정확 일치만 쓰던 기존 방식은 카드 제목에 배지·이모지가
+ * 섞이면 실패해 본문이 통째로 빠졌고(AI가 후킹 소제목만 보고 검색어를 만들어 무관 이미지
+ * 수집), 그래서 정규화 비교 → 부분 포함 → 인덱스 순서 폴백까지 3단으로 확장한다.
+ */
 function issueCollectBuildHeadingInputs(headingTitles: string[]): Array<{ title: string; body?: string }> {
     const sc = (window as any).currentStructuredContent;
     const scHeadings: any[] = Array.isArray(sc?.headings) ? sc.headings : [];
+    const bodyOf = (h: any): string => String(h?.content || h?.body || h?.summary || '').trim();
+
+    // 썸네일 카드처럼 본문 소제목이 아닌 항목을 제외한 실제 소제목 순서 목록
+    const realHeadingTitles = headingTitles.filter((t) => !t.includes('썸네일') && !t.includes('마무리'));
+
     return headingTitles.map((title) => {
-        const match = scHeadings.find((h: any) => String(h?.title || '').trim() === title.trim());
-        const body = String(match?.content || match?.body || '').trim();
+        const norm = issueCollectNormalizeTitle(title);
+        let match = scHeadings.find((h: any) => issueCollectNormalizeTitle(h?.title) === norm);
+        if (!match && norm.length >= 6) {
+            match = scHeadings.find((h: any) => {
+                const hn = issueCollectNormalizeTitle(h?.title);
+                return hn.length >= 6 && (hn.includes(norm) || norm.includes(hn));
+            });
+        }
+        if (!match) {
+            // 인덱스 폴백 — 카드 순서와 본문 소제목 순서는 같은 구조에서 생성된다.
+            const idx = realHeadingTitles.indexOf(title);
+            if (idx >= 0 && scHeadings[idx]) match = scHeadings[idx];
+        }
+        const body = bodyOf(match);
         return { title, body: body || undefined };
     });
+}
+
+/** 사건 맥락이 가장 진한 서론(+마무리 일부)을 별도로 넘긴다. */
+function issueCollectReadIntro(): string | undefined {
+    const sc = (window as any).currentStructuredContent;
+    const intro = String(sc?.introduction || sc?.intro || '').trim();
+    if (intro) return intro.slice(0, 2000);
+    // 서론이 비면 반자동 편집 본문 앞부분으로 대체 (사용자가 수정한 최신 텍스트)
+    const bodyEl = document.getElementById('unified-generated-content') as HTMLTextAreaElement | null;
+    const text = String(bodyEl?.value || '').trim();
+    return text ? text.slice(0, 2000) : undefined;
 }
 
 /**
@@ -69,9 +111,13 @@ export async function runIssueEndgameCollect(
     }
 
     const headingInputs = issueCollectBuildHeadingInputs(headingTitles);
+    const introText = issueCollectReadIntro();
     const bodiesFound = headingInputs.filter((h) => h.body).length;
-    appendLogFn(`🏆 이슈 끝판왕 수집 시작: ${headingTitles.length}개 소제목 (본문 확보 ${bodiesFound}개)`);
-    appendLogFn('🧠 AI 본문 분석 → 쿼리 팬아웃 → 다소스 추적 수집 중... (1~3분 소요)');
+    appendLogFn(`🏆 이슈 끝판왕 수집 시작: ${headingTitles.length}개 소제목 (본문 확보 ${bodiesFound}개, 서론 ${introText ? '확보' : '없음'})`);
+    if (bodiesFound === 0 && !introText) {
+        appendLogFn('⚠️ 본문·서론을 못 읽었습니다 — 소제목 문구만으로는 정확한 이미지를 찾기 어렵습니다. 글 생성/불러오기 후 다시 시도하세요.');
+    }
+    appendLogFn('🧠 AI가 사건 맥락(인물·프로그램·상황)을 파악 → 맥락 기반 검색 → Vision 관련성 검증 중... (1~3분)');
 
     // [2026-08-16] 중앙 진행 모달 + 메인 프로세스 실시간 진행 이벤트 (사용자 요청:
     // "수집할 때 작업하는 화면이라도 띄우면 좋겠다"). 모달 실패는 수집에 영향 없음.
@@ -99,6 +145,7 @@ export async function runIssueEndgameCollect(
             title: searchKeyword,
             headings: headingInputs,
             mainKeyword: searchKeyword,
+            intro: introText,
         });
     } catch (ipcError: any) {
         // Thrown (not returned) failure — close the modal before rethrowing,

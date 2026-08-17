@@ -48,10 +48,17 @@ export function buildFallbackQueryPlan(
       recommendedImages: 1,
     };
   });
-  return { mainSubject: subject, romanizedSubject: '', querySets, aiGenerated: false };
+  return {
+    mainSubject: subject,
+    romanizedSubject: '',
+    contextSummary: '',
+    programName: '',
+    querySets,
+    aiGenerated: false,
+  };
 }
 
-function buildPrompt(title: string, headings: IssueHeadingInput[]): string {
+function buildPrompt(title: string, headings: IssueHeadingInput[], intro?: string): string {
   const sections = headings
     .map((h, i) => {
       const body = String(h.body || '').replace(/\s+/g, ' ').trim().slice(0, BODY_EXCERPT_CHARS);
@@ -59,28 +66,43 @@ function buildPrompt(title: string, headings: IssueHeadingInput[]): string {
     })
     .join('\n');
 
-  return `당신은 연예/스포츠/이슈 이미지 검색 전문가입니다. 글 제목·소제목·본문을 분석해 소제목별 이미지 검색어 4종을 생성하세요.
+  const introBlock = String(intro || '').replace(/\s+/g, ' ').trim().slice(0, 600);
+
+  return `당신은 연예/스포츠/이슈 이미지 검색 전문가입니다. 글 전체를 읽고 "무슨 사건인지" 먼저 파악한 뒤, 그 사건에 맞는 이미지 검색어를 만드세요.
 
 # 글 제목
 ${title}
-
+${introBlock ? `\n# 서론(사건 맥락)\n${introBlock}\n` : ''}
 # 소제목별 본문
 ${sections}
 
-# 규칙
-1. 핵심 인물/팀을 파악 (동명이인·동음이의어 구분: 본문 문맥 사용)
-2. koreanQuery: 인물명 + 본문이 실제로 묘사하는 장면의 핵심어 (2~4단어)
-3. englishQuery: 로마자 인물명 + 영문 이슈 키워드 (해외 검색용, 예: "Son Heung-min Tottenham")
-4. fandomQuery: 팬 촬영 원본을 찾는 검색어 (예: "인물명 직찍", "인물명 출근길", "인물명 공항")
-5. eventQuery: 인물명 없이 행사/경기 현장 검색어 (예: "골든디스크 2026", 해당 없으면 빈 문자열)
-6. mainSubject: 핵심 인물/팀 한글명, romanizedSubject: 그 로마자 표기
-7. imageCount: 이 소제목에 필요한 이미지 수 (기본 1). 본문이 여러 장면·단계·비교·인물을
-   다뤄서 사진 1장으로 부족할 때만 2~3. 확신 없으면 1.
+# 1단계: 사건 파악 (가장 중요)
+- mainSubject: 핵심 인물/팀 한글명 (동명이인은 본문 문맥으로 구분)
+- romanizedSubject: 그 로마자 표기
+- programName: 사건의 무대가 된 방송 프로그램·행사 고유명사. 본문에 있으면 반드시 정확히
+  (예: "미운 우리 새끼", "나 혼자 산다", "골든디스크"). 없으면 빈 문자열
+- contextSummary: 무슨 일인지 1~2문장으로. 반드시 본문에 나온 구체 사실만
+  (예: "배우 한다감이 시험관 시술로 임신에 성공했고, 미운 우리 새끼 방송에서 남편이
+  눈물을 보인 장면이 화제가 됐다")
+
+# 2단계: 소제목별 검색어 (사건 맥락 기준)
+⚠️ 소제목 문구를 그대로 검색어로 쓰지 마세요. 소제목은 후킹용 표현이라 시각적 주체가
+없습니다 (예: "44세부터 46세 겨울까지" → 이대로 검색하면 엉뚱한 사진이 나옴).
+반드시 mainSubject + (programName 또는 사건 핵심어)로 조합하세요.
+
+- koreanQuery: mainSubject + 사건/프로그램 핵심어 (예: "한다감 미운 우리 새끼 임신")
+- englishQuery: 로마자 인물명 + 영문 이슈어 (해외 소스용, 없으면 빈 문자열)
+- fandomQuery: 그 인물의 실제 모습을 찾는 검색어 (예: "한다감 직찍", "한다감 방송 캡처")
+- eventQuery: 프로그램/행사 현장 검색어 (예: "미운 우리 새끼 한다감", 없으면 빈 문자열)
+- imageCount: 이 소제목에 필요한 이미지 수 (기본 1). 본문이 여러 장면·단계·비교를
+  다뤄 1장으로 부족할 때만 2~3. 확신 없으면 1.
 
 # 응답 형식 (JSON만 출력, 설명 금지)
 {
   "mainSubject": "...",
   "romanizedSubject": "...",
+  "programName": "...",
+  "contextSummary": "...",
   "sets": [
     {"index": 1, "koreanQuery": "...", "englishQuery": "...", "fandomQuery": "...", "eventQuery": "...", "imageCount": 1}
   ]
@@ -95,6 +117,7 @@ export async function buildIssueQueryPlan(
   title: string,
   headings: IssueHeadingInput[],
   geminiApiKey?: string,
+  intro?: string,
 ): Promise<IssueQueryPlan> {
   const fallback = buildFallbackQueryPlan(title, headings);
   if (!geminiApiKey) {
@@ -115,7 +138,7 @@ export async function buildIssueQueryPlan(
       },
     });
 
-    const result = await model.generateContent(buildPrompt(title, headings));
+    const result = await model.generateContent(buildPrompt(title, headings, intro));
     const text = result.response.text().trim();
 
     const usage = (result.response as any).usageMetadata;
@@ -131,10 +154,13 @@ export async function buildIssueQueryPlan(
     const parsed = JSON.parse(jsonMatch[0]) as {
       mainSubject?: string;
       romanizedSubject?: string;
+      programName?: string;
+      contextSummary?: string;
       sets?: Array<{ index: number; koreanQuery?: string; englishQuery?: string; fandomQuery?: string; eventQuery?: string; imageCount?: number }>;
     };
 
     const subject = String(parsed.mainSubject || '').trim() || fallback.mainSubject;
+    const programName = String(parsed.programName || '').trim();
     const querySets: HeadingQuerySet[] = headings.map((h, i) => {
       const match = (parsed.sets || []).find((s) => s.index === i + 1);
       const fb = fallback.querySets[i];
@@ -160,10 +186,16 @@ export async function buildIssueQueryPlan(
       };
     });
 
-    console.log(`${LOG} ✅ AI 쿼리 팬아웃 완료: ${querySets.length}개 소제목 × 4변형 (주체: ${subject})`);
+    const contextSummary = String(parsed.contextSummary || '').trim();
+    console.log(
+      `${LOG} ✅ AI 쿼리 팬아웃 완료: ${querySets.length}개 소제목 (주체: ${subject}${programName ? `, 프로그램: ${programName}` : ''})`,
+    );
+    if (contextSummary) console.log(`${LOG} 📖 사건 맥락: ${contextSummary.slice(0, 120)}`);
     return {
       mainSubject: subject,
       romanizedSubject: String(parsed.romanizedSubject || '').trim(),
+      contextSummary,
+      programName,
       querySets,
       aiGenerated: true,
     };

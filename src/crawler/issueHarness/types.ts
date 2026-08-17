@@ -28,6 +28,15 @@ export interface IssueQueryPlan {
   mainSubject: string;
   /** Romanized subject for overseas searches ("손흥민" → "Son Heung-min") */
   romanizedSubject: string;
+  /**
+   * [2026-08-17] 글 전체가 다루는 사건 요약 (1~2문장, 고유명사 포함).
+   * 예: "배우 한다감이 시험관 시술로 임신에 성공했고, 미운 우리 새끼 방송에서
+   * 남편이 눈물을 보인 장면이 화제". 검색어 생성과 Vision 관련성 판정의 기준 —
+   * 소제목 문구만 보면 후킹 표현에 끌려 무관한 이미지가 들어온다(실측).
+   */
+  contextSummary: string;
+  /** 사건의 무대가 되는 프로그램·행사 고유명사 (예: "미운 우리 새끼"). 없으면 '' */
+  programName: string;
   querySets: HeadingQuerySet[];
   /** true when Gemini produced the plan, false when heuristics fallback was used */
   aiGenerated: boolean;
@@ -59,6 +68,8 @@ export interface IssueCollectPayload {
   title: string;
   headings: IssueHeadingInput[];
   mainKeyword?: string;
+  /** 서론/도입부 — 사건 맥락이 가장 진하게 담긴 부분이라 별도로 전달한다. */
+  intro?: string;
 }
 
 /** Real-time progress event emitted while the harness runs. */

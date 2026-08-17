@@ -16,6 +16,12 @@ const BATCH_SIZE = 8;
 export interface VisionVerdict {
   clean: boolean;
   reason?: string;
+  /**
+   * [2026-08-18] 주체가 단독(또는 주인공)으로 담긴 사진인가.
+   * 여러 인물이 섞인 기사 콜라주보다 단독 사진을 우선 배치하기 위한 랭킹 신호.
+   * 판정 실패/누락 시 false — 통과 여부에는 영향 없고 순위만 뒤로 밀린다.
+   */
+  soloSubject?: boolean;
 }
 
 export interface VisionGateBudget {
@@ -34,6 +40,15 @@ export interface VisionSubjectContext {
   mainSubject: string;
   /** 이 후보들이 들어갈 소제목 */
   heading: string;
+  /**
+   * [2026-08-17] 사건 맥락 — 소제목만으로는 "무슨 일인지" 모른다.
+   * 예: "한다감이 시험관 시술로 임신, 미운 우리 새끼에서 남편이 눈물"
+   */
+  contextSummary?: string;
+  /** 사건 무대 프로그램·행사명 (예: "미운 우리 새끼") */
+  programName?: string;
+  /** 이 소제목의 본문 발췌 — 어떤 장면을 원하는지 판정 기준 */
+  headingBody?: string;
 }
 
 /**
@@ -43,26 +58,36 @@ export interface VisionSubjectContext {
  * 같은 배치 호출에 relevant 판정을 얹어 비용 증가 없이 막는다 (fail-closed).
  */
 function buildVisionPrompt(ctx: VisionSubjectContext): string {
+  const body = String(ctx.headingBody || '').replace(/\s+/g, ' ').trim().slice(0, 300);
   return `당신은 블로그용 이미지 검수자입니다. 아래 이미지들을 순서대로 검사하세요.
 
-# 글의 주제
+# 이 글이 다루는 사건
 - 핵심 주체: ${ctx.mainSubject}
-- 이 이미지가 들어갈 소제목: ${ctx.heading}
-
+${ctx.programName ? `- 사건 무대(프로그램/행사): ${ctx.programName}\n` : ''}${ctx.contextSummary ? `- 사건 요약: ${ctx.contextSummary}\n` : ''}- 이 이미지가 들어갈 소제목: ${ctx.heading}
+${body ? `- 해당 소제목 본문: ${body}\n` : ''}
 각 이미지에 대해 판정:
-- relevant: 이 사진이 위 "핵심 주체"(인물이면 그 인물 본인) 또는 소제목 주제와 실제로 관련 있는가.
+- relevant: 이 사진이 위 사건의 주체 본인(인물이면 그 인물)이 담겼거나, 사건 무대(해당
+  프로그램/행사 현장)를 보여주는가.
   ⚠️ 주체가 인물인데 다른 사람·동물·상품·풍경·패션화보만 있으면 false.
   주체 인물이 사진에 없으면 false. 확신 없으면 false.
-- watermark: 반투명/각인 워터마크, 스톡사진 마크, 언론사 저작권 표기가 보이는가
-- textOverlay: 자막·캡션·제목 텍스트·말풍선 등 글자가 이미지 위에 얹혀 있는가 (옷의 로고 프린트, 배경 간판의 자연스러운 글자는 제외)
-- logo: 방송사/언론사/채널 로고 마크가 박혀 있는가
-- lowQuality: 심하게 흐리거나 깨졌거나 스크린샷 UI가 섞여 있는가
+  ✅ 소제목 문구와 글자 그대로 안 맞아도, 사건의 주체·무대가 맞으면 true
+     (소제목은 후킹 표현이라 글자 그대로 볼 필요 없음).
+- watermark: 사진 위에 얹힌 반투명/각인 워터마크가 보이는가.
+  ⚠️ 언론사명·사이트 주소 글자(예: "○○뉴스", "www.○○.co.kr")가 사진 위에 얹혀 있으면
+  크기가 작아도 반드시 true. 스톡사진 판매 마크도 true.
+  ✅ 글자 없는 아주 작은 방송사 채널 심볼(로고 마크)만 있으면 false로 둔다.
+- textOverlay: 자막·캡션·제목 텍스트·말풍선 등 글자가 이미지 위에 얹혀 있는가
+  (옷의 로고 프린트, 배경 간판·현수막의 자연스러운 글자는 제외)
+- lowQuality: 심하게 흐리거나 깨졌거나 스크린샷 UI(브라우저·앱 화면)가 섞여 있는가
 
-clean = relevant가 true이고, 나머지 4가지가 모두 아니오일 때만 true.
+- soloSubject: 주체가 혼자 담겼거나 명백한 주인공인가. 여러 인물이 나란히 배치된
+  콜라주·단체사진이면 false (탈락 사유는 아니고 순위만 뒤로 밀림)
+
+clean = relevant가 true이고, watermark·textOverlay·lowQuality 3가지가 모두 아니오일 때만 true.
 reason에는 false인 이유를 짧게 쓰세요 (예: "무관-고양이", "자막", "워터마크").
 
 응답은 JSON 배열만 출력 (이미지 순서대로, 설명 금지):
-[{"index":1,"relevant":true,"clean":true,"reason":""},{"index":2,"relevant":false,"clean":false,"reason":"무관-패션화보"}]`;
+[{"index":1,"relevant":true,"clean":true,"soloSubject":true,"reason":""},{"index":2,"relevant":false,"clean":false,"soloSubject":false,"reason":"무관-패션화보"}]`;
 }
 
 /** Exported for unit tests — fail-closed verdict parsing. */
@@ -75,7 +100,7 @@ export function parseVerdicts(text: string, count: number): VisionVerdict[] {
   const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
   if (!jsonMatch) return fallback;
   try {
-    const parsed = JSON.parse(jsonMatch[0]) as Array<{ index?: number; clean?: boolean; relevant?: boolean; reason?: string }>;
+    const parsed = JSON.parse(jsonMatch[0]) as Array<{ index?: number; clean?: boolean; relevant?: boolean; soloSubject?: boolean; reason?: string }>;
     return Array.from({ length: count }, (_, i) => {
       const match = parsed.find((p) => p.index === i + 1);
       // Fail-closed: an image the model did not judge is NOT clean.
@@ -87,6 +112,7 @@ export function parseVerdicts(text: string, count: number): VisionVerdict[] {
       return {
         clean: relevant && cleanFlags,
         reason: String(match.reason || (relevant ? '' : 'irrelevant')),
+        soloSubject: match.soloSubject === true,
       };
     });
   } catch {
@@ -164,7 +190,8 @@ export async function runVisionGate(
       const verdicts = await judgeBatch(batch, apiKey, ctx);
       batch.forEach((item, idx) => {
         if (verdicts[idx]?.clean) {
-          survivors.push(item);
+          // 단독 인물 여부를 후보에 실어 보낸다 — 랭킹에서 콜라주보다 앞세운다.
+          survivors.push({ ...item, soloSubject: verdicts[idx]?.soloSubject === true });
         } else {
           console.log(
             `${LOG} 🚫 탈락 (${verdicts[idx]?.reason || '?'}): ${item.candidate.url.slice(0, 70)}`,

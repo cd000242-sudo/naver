@@ -81,6 +81,23 @@ describe('candidate ordering + ranking', () => {
     ] as any);
     expect(ranked[0].candidate.url).toBe('big-news');
   });
+
+  it('[2026-08-18] 단독 인물 사진이 콜라주보다 먼저 배치된다', () => {
+    const mk = (url: string, solo: boolean, width: number, height: number) => ({
+      candidate: { url, sourceName: 'news-og', query: 'q' },
+      buffer: Buffer.alloc(0),
+      width,
+      height,
+      dhash: 0n,
+      soloSubject: solo,
+    });
+    // 콜라주가 해상도는 더 높아도 단독 사진이 앞서야 한다.
+    const ranked = rankCleanCandidates([
+      mk('collage-3인', false, 1920, 1080),
+      mk('solo-프로필', true, 640, 960),
+    ] as any);
+    expect(ranked[0].candidate.url).toBe('solo-프로필');
+  });
 });
 
 describe('parseVerdicts (fail-closed + 관련성)', () => {

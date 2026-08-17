@@ -52,6 +52,7 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
   title: string;
   headings: Array<{ title: string; body?: string }>;
   mainKeyword?: string;
+  intro?: string;
 }> {
   if (!payload || typeof payload !== 'object') return { ok: false, error: 'payload는 object여야 합니다' };
   const p = payload as Record<string, unknown>;
@@ -72,9 +73,18 @@ export function validateIssueCollectPayload(payload: unknown): ValidationResult<
   if (p.mainKeyword !== undefined && p.mainKeyword !== null && !isStr(p.mainKeyword, 200)) {
     return { ok: false, error: 'mainKeyword는 200자 이하 string이어야 합니다' };
   }
+  // [2026-08-17] intro — 사건 맥락 파악용 서론 (없어도 동작, 있으면 정확도 상승)
+  if (p.intro !== undefined && p.intro !== null && !isStr(p.intro, 20000)) {
+    return { ok: false, error: 'intro는 20000자 이하 string이어야 합니다' };
+  }
   return {
     ok: true,
-    value: { title: p.title as string, headings, mainKeyword: (p.mainKeyword as string | undefined) ?? undefined },
+    value: {
+      title: p.title as string,
+      headings,
+      mainKeyword: (p.mainKeyword as string | undefined) ?? undefined,
+      intro: (p.intro as string | undefined) ?? undefined,
+    },
   };
 }
 
