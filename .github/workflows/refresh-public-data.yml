@@ -40,6 +40,13 @@ jobs:
           npm ci --ignore-scripts
           npx playwright install --with-deps chromium
 
+      # 브리프 제목의 두뇌를 API 키가 아니라 **구독**으로 돌리기 위한 준비다.
+      # 토큰이 없으면 설치도 건너뛰고, 스크립트는 기존 경로(API 키 → 템플릿)로
+      # 그대로 내려가므로 크론이 깨지지 않는다.
+      - name: Install Claude Code (구독 브리프)
+        if: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN != '' }}
+        run: npm install -g @anthropic-ai/claude-code
+
       - name: Refresh, verify and publish (multi-pass)
         id: commit
         # GitHub 스케줄러는 */15 로 걸어 둬도 실제로는 20~40분씩 밀린다(실측).
@@ -50,6 +57,8 @@ jobs:
           BRIGHTDATA_API_KEY: ${{ secrets.BRIGHTDATA_API_KEY || secrets.BRIGHT_DATA_API_KEY }}
           BRIGHTDATA_WEB_UNLOCKER_ZONE: ${{ vars.BRIGHTDATA_WEB_UNLOCKER_ZONE || vars.BRIGHTDATA_ZONE || secrets.BRIGHTDATA_WEB_UNLOCKER_ZONE || secrets.BRIGHTDATA_ZONE }}
           BRIGHTDATA_FALLBACK_MAX_REQUESTS: ${{ vars.BRIGHTDATA_FALLBACK_MAX_REQUESTS || '0' }}
+          # 구독 자격(claude setup-token). 있으면 브리프 제목이 이 경로로 돈다.
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           KEYWORD_BRIEF_LLM_API_URL: ${{ vars.KEYWORD_BRIEF_LLM_API_URL }}
           KEYWORD_BRIEF_LLM_API_KEY: ${{ secrets.KEYWORD_BRIEF_LLM_API_KEY }}
           KEYWORD_BRIEF_LLM_MODEL: ${{ vars.KEYWORD_BRIEF_LLM_MODEL }}

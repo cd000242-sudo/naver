@@ -53,6 +53,12 @@ const KEYWORD_BRIEF_LLM_API_KEY = String(process.env.KEYWORD_BRIEF_LLM_API_KEY |
 const KEYWORD_BRIEF_LLM_MODEL = String(process.env.KEYWORD_BRIEF_LLM_MODEL || '').trim();
 const GEMINI_API_KEY = String(process.env.GEMINI_API_KEY || '').trim();
 const GEMINI_MODEL = String(process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+/*
+ * 클로드코드 **구독** 자격(claude setup-token 으로 발급). API 키가 아니라
+ * 사장님 구독으로 도는 경로라 건당 과금이 없다 — 사장님 지시대로 브리프 제목의
+ * 1순위 두뇌다. 없으면 아래 API 키 경로로, 그것도 없으면 템플릿으로 내려간다.
+ */
+const CLAUDE_CODE_OAUTH_TOKEN = String(process.env.CLAUDE_CODE_OAUTH_TOKEN || '').trim();
 
 /** 상태 요약 — 워크플로 로그에서 한눈에 보이게 한다. */
 const report = [];
@@ -898,7 +904,47 @@ function briefPrompt(rows) {
   ].join('\n');
 }
 
+/**
+ * 클로드코드 CLI 를 헤드리스로 한 번 왕복한다.
+ *
+ * -p(프롬프트 모드) + --output-format json 이면 봉투 안에 result 문자열이 온다.
+ * plan 모드는 계획만 답하고 산출물을 안 내므로 절대 쓰지 않는다(실측 함정).
+ * 도구는 전부 막는다 — 여기서 필요한 건 문장 생성뿐이고, 파일을 만지게 둘
+ * 이유가 없다.
+ */
+async function callClaudeCodeSubscription(prompt) {
+  const { execFile } = await import('node:child_process');
+  const stdout = await new Promise((resolve, reject) => {
+    const child = execFile(
+      'claude',
+      ['-p', '--output-format', 'json', '--permission-mode', 'default', '--disallowedTools', '*'],
+      { timeout: 120_000, maxBuffer: 8 * 1024 * 1024, env: process.env },
+      (error, out) => {
+        if (error) { reject(new Error(`claude CLI: ${String(error.message || error).slice(0, 160)}`)); return; }
+        resolve(String(out || ''));
+      },
+    );
+    child.stdin?.end(prompt);
+  });
+  const envelope = parseJsonObject(stdout);
+  const text = typeof envelope?.result === 'string' ? envelope.result : stdout;
+  return { provider: 'claude-code(구독)', data: parseJsonObject(text) };
+}
+
 async function callConfiguredLlm(prompt) {
+  /*
+   * 구독이 먼저다. API 키를 먼저 보면, 키가 꽂혀 있는 한 구독은 영원히 안 쓰인다
+   * — 사장님이 이미 내고 있는 구독을 두고 종량 과금이 돌게 된다.
+   */
+  if (CLAUDE_CODE_OAUTH_TOKEN) {
+    try {
+      return await callClaudeCodeSubscription(prompt);
+    } catch (error) {
+      // 구독 경로가 죽었다고 브리프 전체를 포기하지 않는다 — 아래로 내려간다.
+      report.push(`  WARN     claude-code 구독 경로 실패, 다음 경로로: ${String(error?.message || error).slice(0, 120)}`);
+    }
+  }
+
   if (KEYWORD_BRIEF_LLM_API_URL && KEYWORD_BRIEF_LLM_MODEL) {
     const res = await fetch(KEYWORD_BRIEF_LLM_API_URL, {
       method: 'POST',
