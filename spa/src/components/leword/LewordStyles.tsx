@@ -803,6 +803,19 @@ function LewordStyles() {
                 line-height: 1.6;
             }
 
+            /* 자동 연쇄 분석 — 본 분석 아래 조용히 쌓인다(taste: 층위 분리). */
+            .lw-mindmap-chain { margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,.12); }
+            .lw-mindmap-chain-head { margin-bottom: 8px; color: rgba(235,242,250,.85); font-size: 12.5px; font-weight: 800; }
+            .lw-mindmap-chain-item { margin-bottom: 10px; font-size: 12.5px; }
+            .lw-mindmap-chain-item strong { color: #ffd79a; font-size: 13px; }
+            .lw-chain-wait { margin-left: 8px; color: #7c8598; font-size: 12px; }
+            .lw-chain-verdict { margin-left: 8px; font-style: normal; font-size: 11px; font-weight: 800; padding: 2px 7px; border-radius: 999px; }
+            .lw-chain-good { background: rgba(74,222,128,.14); color: #4ade80; }
+            .lw-chain-bad { background: rgba(248,113,113,.16); color: #f87171; }
+            .lw-chain-mixed { background: rgba(250,204,21,.14); color: #facc15; }
+            .lw-mindmap-chain-item ul { margin: 6px 0 0 16px; padding: 0; color: rgba(235,242,250,.78); }
+            .lw-mindmap-chain-item li { margin-bottom: 4px; line-height: 1.6; word-break: keep-all; }
+
             /* 수익 관점 결론 — 판정색으로 한눈에. */
             .lw-mindmap-money {
                 margin-top: 12px;

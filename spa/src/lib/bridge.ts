@@ -77,11 +77,11 @@ export interface BridgeMindmap {
  * 뒤로는 그 전제가 사라졌다. 앱이 꺼져 있으면 null 이고, 화면은 앱을 켜라고
  * 안내한다 — 지어낸 확장어를 보여주지 않는다.
  */
-export async function bridgeMindmap(keyword: string): Promise<BridgeMindmap | null> {
+export async function bridgeMindmap(keyword: string, light = false): Promise<BridgeMindmap | null> {
     const body = await bridgeFetch('/v1/bridge/mindmap', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ keyword }),
+        body: JSON.stringify({ keyword, light }),
     }, 90_000) as { result?: BridgeMindmap } | null;
     return body?.result || null;
 }

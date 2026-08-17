@@ -140,6 +140,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         status: 'loading' | 'done' | 'offline' | 'error';
         data?: BridgeMindmap;
         error?: string;
+        /** 자동 연쇄 — 검색량 상위 연관을 경량 분석한 결과가 순서대로 쌓인다. */
+        related?: Array<{ keyword: string; status: 'loading' | 'done' | 'error'; data?: BridgeMindmap }>;
     }>>({});
 
     const openMindmap = async (keyword: string) => {
@@ -155,6 +157,43 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 return;
             }
             setMindmap((prev) => ({ ...prev, [keyword]: { status: 'done', data: result } }));
+
+            /*
+             * 자동 연쇄(사장님 지시 2026-08-18): "비슷하게 많이 찾는 키워드를
+             * 자동으로 분석해줄 순 없을까". 확장어 중 검색량 상위 2개를 경량
+             * (AI 1콜)으로 이어서 분석한다 — 순차라 부담이 겹치지 않고,
+             * 도착하는 대로 아래에 쌓인다.
+             */
+            const relatedTargets = (result.expansions || [])
+                .filter((e) => typeof e.searchVolume === 'number' && e.searchVolume > 0)
+                .sort((a, b) => (b.searchVolume ?? 0) - (a.searchVolume ?? 0))
+                .slice(0, 2)
+                .map((e) => e.keyword);
+            for (const target of relatedTargets) {
+                setMindmap((prev) => {
+                    const entry = prev[keyword];
+                    if (!entry || entry.status !== 'done') return prev;
+                    return {
+                        ...prev,
+                        [keyword]: { ...entry, related: [...(entry.related || []), { keyword: target, status: 'loading' as const }] },
+                    };
+                });
+                // eslint-disable-next-line no-await-in-loop -- 순차 실행이 의도다(구독 부담 분산)
+                const sub = await bridgeMindmap(target, true).catch(() => null);
+                setMindmap((prev) => {
+                    const entry = prev[keyword];
+                    if (!entry || entry.status !== 'done') return prev;
+                    return {
+                        ...prev,
+                        [keyword]: {
+                            ...entry,
+                            related: (entry.related || []).map((r) => (r.keyword === target
+                                ? (sub ? { keyword: target, status: 'done' as const, data: sub } : { keyword: target, status: 'error' as const })
+                                : r)),
+                        },
+                    };
+                });
+            }
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             setMindmap((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
@@ -559,6 +598,34 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             {(mindmap[row.keyword]?.data?.expansions || []).length === 0 && (
                                                 <div className="lw-forge-subs">실존이 확인된 확장 검색어가 없습니다.</div>
                                             )}
+                                            {/* 자동 연쇄 — 많이 찾는 연관을 스스로 이어서 분석한 결과. */}
+                                            {(mindmap[row.keyword]?.related?.length ?? 0) > 0 && (
+                                                <div className="lw-mindmap-chain">
+                                                    <div className="lw-mindmap-chain-head">🔗 많이 찾는 연관 자동 분석</div>
+                                                    {(mindmap[row.keyword]?.related || []).map((rel) => (
+                                                        <div key={rel.keyword} className="lw-mindmap-chain-item">
+                                                            <strong>{rel.keyword}</strong>
+                                                            {rel.status === 'loading' && <span className="lw-chain-wait">분석 중…</span>}
+                                                            {rel.status === 'error' && <span className="lw-chain-wait">실패 — 넘어감</span>}
+                                                            {rel.status === 'done' && rel.data && (
+                                                                <>
+                                                                    {rel.data.monetize && (
+                                                                        <em className={`lw-chain-verdict lw-chain-${rel.data.monetize.verdict}`}>
+                                                                            {rel.data.monetize.verdict === 'good' ? '✅ 쓸 만하다'
+                                                                                : rel.data.monetize.verdict === 'bad' ? '⛔ 수익 안 나옴' : '⚖ 각도에 달림'}
+                                                                        </em>
+                                                                    )}
+                                                                    <ul>
+                                                                        {rel.data.reasons.slice(0, 2).map((reason) => <li key={reason.text}>{reason.text}</li>)}
+                                                                        {rel.data.monetize?.angle && <li><b>쓴다면:</b> {rel.data.monetize.angle}</li>}
+                                                                    </ul>
+                                                                </>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+
                                             {mindmap[row.keyword]?.data?.monetize && (() => {
                                                 const verdict = mindmap[row.keyword]!.data!.monetize!;
                                                 const label = verdict.verdict === 'good' ? '✅ 쓸 만하다'
