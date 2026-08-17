@@ -87,6 +87,34 @@ export function getAgyInstallDirs(): readonly string[] {
   return localAppData ? [join(localAppData, 'agy', 'bin')] : [];
 }
 
+/**
+ * Claude Code CLI install directory.
+ *
+ * [2026-08-18] Same stale-PATH trap as agy, measured live: the official installer drops
+ * %USERPROFILE%\.local\bin\claude.exe and registers that directory in the *User PATH registry
+ * value*. Explorer (and therefore every app it launched before the install) keeps its old
+ * environment block, so the app reported "claude CLI가 설치되어 있지 않습니다" while the same
+ * command resolved fine in a freshly opened terminal. Naming the known directory removes the
+ * logout/restart requirement.
+ *
+ * POSIX uses the same ~/.local/bin convention, so it is included there too.
+ */
+export function getClaudeInstallDirs(): readonly string[] {
+  const home = process.env.USERPROFILE || process.env.HOME;
+  return home ? [join(home, '.local', 'bin')] : [];
+}
+
+/**
+ * Codex CLI install directory — npm's default global prefix.
+ * Measured on this machine: %APPDATA%\npm\codex.cmd. Same stale-PATH exposure as above when
+ * npm's prefix was added to the User PATH after the app (or Explorer) started.
+ */
+export function getCodexInstallDirs(): readonly string[] {
+  if (process.platform !== 'win32') return [];
+  const appData = process.env.APPDATA;
+  return appData ? [join(appData, 'npm')] : [];
+}
+
 function pathKeyOf(env: NodeJS.ProcessEnv): string {
   return Object.keys(env).find((key) => key.toUpperCase() === 'PATH') ?? 'PATH';
 }

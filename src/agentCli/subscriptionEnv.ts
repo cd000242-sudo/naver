@@ -7,7 +7,13 @@
 // deliberately never written into the system PATH. withAgentRuntimePath() prepends it, which
 // is what lets detect/login/generate find them; the inherited PATH still follows, so a CLI the
 // user installed globally themselves keeps resolving exactly as before.
-import { getAgyInstallDirs, withAgentRuntimePath, withPathEntries } from './agentRuntime.js';
+import {
+  getAgyInstallDirs,
+  getClaudeInstallDirs,
+  getCodexInstallDirs,
+  withAgentRuntimePath,
+  withPathEntries,
+} from './agentRuntime.js';
 
 const SHARED_SUBSCRIPTION_ENV_KEYS = new Set([
   'PATH',
@@ -120,13 +126,21 @@ export const CLAUDE_SUBSCRIPTION_IMAGE_READ_ARGS = [
 export function buildClaudeSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {
-  return withAgentRuntimePath(pickSubscriptionEnv(source, CLAUDE_SUBSCRIPTION_ENV_KEYS));
+  // [2026-08-18] claude 공식 설치 경로(~/.local/bin)를 명시 추가 — 설치 시 User PATH
+  // 레지스트리에만 기록돼, 이미 떠 있던 앱은 "설치되어 있지 않습니다"로 오판했다(실측).
+  // agy와 동일한 함정·동일한 조치. 앱 관리 prefix가 맨 앞을 유지하도록 안쪽에서 삽입.
+  return withAgentRuntimePath(
+    withPathEntries(pickSubscriptionEnv(source, CLAUDE_SUBSCRIPTION_ENV_KEYS), getClaudeInstallDirs()),
+  );
 }
 
 export function buildCodexSubscriptionEnv(
   source: NodeJS.ProcessEnv = process.env,
 ): NodeJS.ProcessEnv {
-  return withAgentRuntimePath(pickSubscriptionEnv(source, CODEX_SUBSCRIPTION_ENV_KEYS));
+  // codex는 npm 전역 prefix(%APPDATA%\npm)에 설치된다 — 동일한 stale PATH 노출.
+  return withAgentRuntimePath(
+    withPathEntries(pickSubscriptionEnv(source, CODEX_SUBSCRIPTION_ENV_KEYS), getCodexInstallDirs()),
+  );
 }
 
 export function buildGeminiSubscriptionEnv(

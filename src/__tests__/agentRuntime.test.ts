@@ -12,8 +12,11 @@ import { delimiter } from 'path';
 import {
   AGENT_NODE_SHIM_CMD,
   AGENT_RUNTIME_NODE_ENV_KEY,
+  getClaudeInstallDirs,
+  getCodexInstallDirs,
   withPathEntries,
 } from '../agentCli/agentRuntime';
+import { readFileSync } from 'fs';
 
 describe('agentRuntime node shim', () => {
   it('contains no non-ASCII byte, so the OEM code page cannot corrupt it', () => {
@@ -28,6 +31,34 @@ describe('agentRuntime node shim', () => {
 
   it('fails fast rather than running an empty command when the variable is unset', () => {
     expect(AGENT_NODE_SHIM_CMD).toContain(`IF NOT DEFINED ${AGENT_RUNTIME_NODE_ENV_KEY}`);
+  });
+});
+
+/**
+ * [2026-08-18 사용자 실측] 앱이 "claude CLI가 설치되어 있지 않습니다"를 띄웠다.
+ * 원인은 미설치가 아니라 stale PATH — 설치기가 User PATH 레지스트리에만 경로를 쓰고,
+ * 이미 실행 중이던 프로세스(및 그 부모 Explorer)는 옛 환경 블록을 유지하기 때문.
+ * agy에만 있던 "알려진 설치 경로 명시" 조치를 claude/codex로 확장한 것을 잠근다.
+ */
+describe('CLI 설치 경로 명시 (stale PATH 대응)', () => {
+  it('claude는 ~/.local/bin 을 후보로 낸다', () => {
+    const dirs = getClaudeInstallDirs();
+    expect(dirs.length).toBeGreaterThan(0);
+    expect(dirs.some((d) => /[\\/]\.local[\\/]bin$/.test(d))).toBe(true);
+  });
+
+  it('codex는 npm 전역 prefix(%APPDATA%\\npm)를 후보로 낸다', () => {
+    if (process.platform !== 'win32') return;
+    const dirs = getCodexInstallDirs();
+    expect(dirs.some((d) => /npm$/i.test(d))).toBe(true);
+  });
+
+  it('구독 env 빌더가 claude/codex 설치 경로를 PATH에 넣는다', () => {
+    const src = readFileSync(new URL('../agentCli/subscriptionEnv.ts', import.meta.url), 'utf8');
+    expect(src).toMatch(/buildClaudeSubscriptionEnv[\s\S]{0,400}getClaudeInstallDirs\(\)/);
+    expect(src).toMatch(/buildCodexSubscriptionEnv[\s\S]{0,400}getCodexInstallDirs\(\)/);
+    // agy 경로는 기존대로 유지
+    expect(src).toMatch(/getAgyInstallDirs\(\)/);
   });
 });
 
