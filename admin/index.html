@@ -1785,7 +1785,6 @@
                                 </div>
                                 <div data-agent-detail style="margin-top:6px;font-size:0.78rem;color:var(--text-secondary);">사장님 Claude 구독(OAuth 토큰)으로 GitHub Actions 에서 돕니다.</div>
                                 <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
-                                    <button class="btn" type="button" onclick="showAgentConnectGuide('claude-code')" style="font-size:0.78rem;padding:5px 10px;">🔑 연동 설정</button>
                                     <button class="btn btn-gold" type="button" onclick="runAdminAiWorkerTest()" style="font-size:0.78rem;padding:5px 10px;">⚡ 테스트 실행</button>
                                 </div>
                             </div>
@@ -1816,24 +1815,21 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                             <button class="btn" type="button" style="font-size:0.75rem;padding:4px 10px;" onclick="document.getElementById('admin-ai-connect-guide').style.display='none'">닫기</button>
                             <span style="color:var(--text-secondary);">완료 후 [연동상태 확인]을 누르면 배지가 갱신됩니다.</span>
                         </div>
+                        <!-- 토큰 필드 없음(사장님 지시): 연동은 같은 PC 의 LEWORD 앱이
+                             대행한다. [연동하기] 는 브라우저의 로컬 네트워크 접근 허용을
+                             겸한다 — 크롬이 한 번 물어보면 허용을 누르면 끝. -->
                         <div class="editor-field-grid">
-                            <div class="editor-field full">
-                                <label>GitHub 토큰 (작업자 실행용 — 이 브라우저에만 저장)</label>
-                                <!-- 작업자는 GitHub Actions 에서 사장님 구독(Claude Code OAuth)으로 돈다.
-                                     이 토큰은 워크플로를 트리거·조회하는 열쇠다. 터미널에서 gh auth token 으로 복사. -->
-                                <input id="admin-ai-worker-ghpat" type="password" placeholder="ghp_... 또는 gho_..." name="lw-nofill-ghpat" autocomplete="new-password" data-lpignore="true" data-1p-ignore="" data-form-type="other" spellcheck="false">
-                            </div>
                             <div class="editor-field full">
                                 <label>적용 범위</label>
                                 <input value="황금키워드 회차 보강, 실시간 클러스터, 서브·후킹 추론 (agent-worker.yml)" readonly>
                             </div>
                         </div>
                         <div class="editor-save-bar">
-                            <button class="btn" type="button" onclick="saveAdminAiWorkerSettings()">관리자 작업자 저장</button>
-                            <button class="btn" type="button" onclick="checkAdminAiWorkerSettings()">관리자 연동상태 확인</button>
-                            <button class="btn btn-gold" type="button" onclick="runAdminAiWorkerTest()">⚡ 작업자 테스트 실행</button>
+                            <button class="btn btn-gold" type="button" onclick="connectAdminAiWorker()">🔗 연동하기</button>
+                            <button class="btn" type="button" onclick="checkAdminAiWorkerSettings()">연동상태 확인</button>
+                            <button class="btn" type="button" onclick="runAdminAiWorkerTest()">⚡ 작업자 테스트 실행</button>
                         </div>
-                        <div id="admin-ai-worker-status" style="margin-top:12px;color:var(--text-secondary);font-size:0.86rem;">관리자 페이지 로그인 세션으로 관리합니다.</div>
+                        <div id="admin-ai-worker-status" style="margin-top:12px;color:var(--text-secondary);font-size:0.86rem;">이 PC 의 LEWORD 앱과 자동 연동됩니다 — 토큰·설정 불필요.</div>
                     </div>
                 </div>
 
@@ -4948,9 +4944,10 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
          */
         const AI_WORKER_BRIDGE = 'http://127.0.0.1:47615';
 
-        async function bridgeFetch(path, options) {
+        async function bridgeFetch(path, options, timeoutMs) {
             const controller = new AbortController();
-            const timer = setTimeout(() => controller.abort(), 4000);
+            // 상태 프로브가 CLI 3사를 실측하므로 기본 20초 — 4초는 실측상 모자랐다.
+            const timer = setTimeout(() => controller.abort(), timeoutMs || 20000);
             try {
                 const res = await fetch(AI_WORKER_BRIDGE + path, { ...(options || {}), signal: controller.signal });
                 if (!res.ok) return null;
@@ -4960,8 +4957,25 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             finally { clearTimeout(timer); }
         }
 
-        function adminGhToken() {
-            return (localStorage.getItem('leaderspro_admin_gh_pat') || '').trim();
+        /*
+         * [연동하기] — 사장님 지시: "토큰 필드 없이 버튼 두 개, 연동되면 스스로
+         * 확인하고 '연동이 완료되었습니다'." 이 버튼은 크롬의 로컬 네트워크 접근
+         * 허용 프롬프트를 겸한다(공개 https 페이지 → 127.0.0.1 은 최신 크롬이
+         * 카메라처럼 1회 허용을 요구한다). 허용되면 그 즉시 상태를 재확인해
+         * 완료 문구까지 자동으로 띄운다.
+         */
+        async function connectAdminAiWorker() {
+            setAgentBadge('연동 중…', 'idle');
+            setAiWorkerStatus('LEWORD 앱과 연결 중… (크롬이 "로컬 네트워크 접근" 허용을 물으면 허용을 누르세요)');
+            const bridged = await bridgeFetch('/v1/bridge/admin/worker-status', undefined, 25000);
+            if (bridged) {
+                setAgentBadge('✅ 자동 연동 (LEWORD 앱)', 'ok');
+                setAiWorkerStatus('✅ 연동이 완료되었습니다 — 이제 [⚡ 작업자 테스트 실행]과 수동 발굴을 바로 쓸 수 있습니다.');
+                if (typeof showToast === 'function') showToast('연동이 완료되었습니다.');
+                return;
+            }
+            setAgentBadge('앱 미실행', 'warn');
+            setAiWorkerStatus('LEWORD 앱이 꺼져 있습니다 — 앱을 켜고 다시 [🔗 연동하기]를 누르세요.');
         }
 
         /*
@@ -4980,13 +4994,6 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             }, 60000);
         });
 
-        function ghHeaders() {
-            return {
-                'Authorization': 'Bearer ' + adminGhToken(),
-                'Accept': 'application/vnd.github+json',
-                'X-GitHub-Api-Version': '2022-11-28',
-            };
-        }
 
         function setAiWorkerStatus(text) {
             const status = document.getElementById('admin-ai-worker-status');
@@ -5016,14 +5023,6 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             if (guide) guide.style.display = 'block';
         }
 
-        function saveAdminAiWorkerSettings() {
-            const pat = document.getElementById('admin-ai-worker-ghpat')?.value?.trim() || '';
-            if (pat) localStorage.setItem('leaderspro_admin_gh_pat', pat);
-            localStorage.setItem('leaderspro_admin_ai_worker', JSON.stringify({ provider: 'claude-code', savedAt: new Date().toISOString() }));
-            setAiWorkerStatus(adminGhToken() ? '저장 완료 · GitHub 토큰 있음 — [연동상태 확인]으로 실측하세요.' : '저장됨 — GitHub 토큰이 없어 실행은 불가합니다.');
-            if (typeof showToast === 'function') showToast('LEWORD 관리자 설정을 저장했습니다.');
-            checkAdminAiWorkerSettings();
-        }
 
         /**
          * 연동상태 실측 3종: ① 워크플로 존재 ② 구독 토큰 시크릿 존재 ③ 최근 실행 결과.
@@ -5041,41 +5040,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 setAiWorkerStatus('자동 연동 확인 완료' + (run.url ? ' — 최근 실행: ' + run.url : ' — 실행 이력 없음'));
                 return;
             }
-            if (!adminGhToken()) {
-                setAgentBadge('앱 미실행 · 토큰 없음', 'warn');
-                setAiWorkerStatus('LEWORD 앱을 켜면 자동 연동됩니다. (앱 없이 쓰려면 gh auth token 을 위 칸에 저장)');
-                return;
-            }
-            setAgentBadge('감지 중…', 'idle');
-            setAiWorkerStatus('워크플로·토큰 시크릿·최근 실행을 실측 조회 중…');
-            try {
-                const [wf, secret, runs] = await Promise.all([
-                    fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/workflows/${AI_WORKER_FILE}`, { headers: ghHeaders() }),
-                    fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/secrets/CLAUDE_CODE_OAUTH_TOKEN`, { headers: ghHeaders() }),
-                    fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/workflows/${AI_WORKER_FILE}/runs?per_page=1`, { headers: ghHeaders() }),
-                ]);
-                if (wf.status === 401 || wf.status === 403) throw new Error('토큰 권한 부족 (GitHub ' + wf.status + ')');
-                if (!wf.ok) { setAgentBadge('워크플로 없음', 'bad'); setAiWorkerStatus('agent-worker.yml 을 찾지 못했습니다.'); return; }
-                if (secret.status === 404) {
-                    setAgentBadge('구독 토큰 미등록', 'warn');
-                    setAiWorkerStatus('CLAUDE_CODE_OAUTH_TOKEN 시크릿이 없습니다 — [🔑 연동 설정]을 눌러 안내를 따르세요.');
-                    showAgentConnectGuide();
-                    return;
-                }
-                const run = runs.ok ? ((await runs.json()).workflow_runs || [])[0] : null;
-                if (!run) {
-                    setAgentBadge('연동됨 · 실행 이력 없음', 'ok');
-                    setAiWorkerStatus('토큰·워크플로 확인 — [⚡ 테스트 실행]으로 실왕복을 증명하세요.');
-                    return;
-                }
-                const good = run.conclusion === 'success';
-                setAgentBadge(good ? '✅ 연동됨' : '연동됨 · 최근 실행 ' + (run.conclusion || run.status), good ? 'ok' : 'warn');
-                setAgentDetail(`최근 실행 ${new Date(run.created_at).toLocaleString('ko-KR')} · ${run.status}${run.conclusion ? ' · ' + run.conclusion : ''}`);
-                setAiWorkerStatus('실측 완료 — 최근 실행: ' + run.html_url);
-            } catch (err) {
-                setAgentBadge('조회 실패', 'bad');
-                setAiWorkerStatus('조회 실패: ' + (err && err.message || err) + ' — 토큰 권한(repo/actions)을 확인하세요.');
-            }
+            setAgentBadge('앱 미실행', 'warn');
+            setAiWorkerStatus('LEWORD 앱이 꺼져 있습니다 — 앱을 켜고 [🔗 연동하기]를 누르세요.');
         }
 
         /** 실행 진행 UI — GitHub jobs API 를 폴링해 스텝 단위로 그린다. */
@@ -5120,604 +5086,8 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 setAiWorkerStatus('4분 안에 안 끝났습니다 — Actions 페이지에서 확인하세요.');
                 return;
             }
-            if (!adminGhToken()) {
-                setAiWorkerStatus('LEWORD 앱을 켜면 자동으로 실행됩니다. (앱 없이 쓰려면 토큰을 저장하세요)');
-                renderWorkerProgress([], '브리지 없음', 100);
-                return;
-            }
-            try {
-                const dispatchedAt = new Date();
-                const dispatch = await fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/workflows/${AI_WORKER_FILE}/dispatches`, {
-                    method: 'POST',
-                    headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ref: 'main', inputs: { mode: 'test', prompt: '어드민 패널에서 보낸 연동 테스트다. 한 문장으로 응답해라.' } }),
-                });
-                if (dispatch.status !== 204) throw new Error('디스패치 실패 GitHub ' + dispatch.status);
-
-                // 방금 만든 런을 찾는다 — 디스패치 응답에는 run id 가 없어서(GitHub 사양) 시각으로 잡는다.
-                let runId = null;
-                renderWorkerProgress([], '실행 대기열 등록 대기…', 8);
-                for (let i = 0; i < 12 && !runId; i += 1) {
-                    await new Promise((resolve) => setTimeout(resolve, 4000));
-                    const response = await fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/workflows/${AI_WORKER_FILE}/runs?event=workflow_dispatch&per_page=3`, { headers: ghHeaders() });
-                    if (!response.ok) continue;
-                    const found = (((await response.json()).workflow_runs) || []).find((r) => new Date(r.created_at) >= new Date(dispatchedAt.getTime() - 15000));
-                    if (found) runId = found.id;
-                }
-                if (!runId) throw new Error('실행이 대기열에 잡히지 않았습니다.');
-
-                const startedAt = Date.now();
-                while (Date.now() - startedAt < 240000) {
-                    await new Promise((resolve) => setTimeout(resolve, 6000));
-                    const response = await fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/runs/${runId}/jobs`, { headers: ghHeaders() });
-                    if (!response.ok) continue;
-                    const job = (((await response.json()).jobs) || [])[0];
-                    if (!job) continue;
-                    const steps = job.steps || [];
-                    const done = steps.filter((s) => s.status === 'completed').length;
-                    const percent = steps.length ? Math.round((done / steps.length) * 100) : 10;
-                    renderWorkerProgress(steps, job.status === 'completed' ? '완료' : '실행 중 · ' + Math.round((Date.now() - startedAt) / 1000) + '초', percent);
-                    if (job.status === 'completed') {
-                        const good = job.conclusion === 'success';
-                        setAgentBadge(good ? '✅ 연동됨' : '실행 실패', good ? 'ok' : 'bad');
-                        setAiWorkerStatus((good ? '✅ 작업자 응답 성공' : '❌ 실패: ' + job.conclusion) + ' — 응답 본문: ' + `https://github.com/${AI_WORKER_REPO}/actions/runs/${runId}`);
-                        if (typeof showToast === 'function') showToast(good ? 'AI 작업자 연동 테스트 성공' : 'AI 작업자 테스트 실패');
-                        return;
-                    }
-                }
-                setAiWorkerStatus('4분 안에 안 끝났습니다 — Actions 페이지에서 확인하세요.');
-            } catch (err) {
-                renderWorkerProgress([], '실패', 100);
-                setAgentBadge('실행 실패', 'bad');
-                setAiWorkerStatus('실행 실패: ' + (err && err.message || err) + ' — 토큰 권한(actions:write, workflow)을 확인하세요.');
-            }
-        }
-
-
-        // CMS_WORKBENCH_V1_START
-        let cmsPreviewMode = 'home';
-        let cmsEditorBindingsReady = false;
-        let cmsActiveHomeArea = 'hero';
-        let cmsRegionEditingUntil = 0;
-        function cmsEscape(value) { return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
-        function cmsSafeImage(value) { const raw = String(value || '').trim(); return /^(data:image\/|https?:\/\/|\/images\/|\.\/|\/)/i.test(raw) ? raw : ''; }
-        function cmsStyleUrl(value) { return cmsSafeImage(value).replace(/['")\\]/g, ''); }
-        function installCmsWorkbench() {
-            const editor = document.getElementById('tab-editor');
-            const tabs = editor ? editor.querySelector('.editor-subtabs') : null;
-            if (!editor || !tabs || document.getElementById('cms-editor-shell')) return;
-            const shell = document.createElement('div');
-            shell.id = 'cms-editor-shell';
-            shell.className = 'cms-editor-shell';
-            const editPane = document.createElement('div');
-            editPane.className = 'cms-editor-pane';
-            const previewPane = document.createElement('aside');
-            previewPane.className = 'cms-preview-pane';
-            previewPane.innerHTML = '<div class="cms-preview-head"><div><h3>사이트 미리보기</h3><p>왼쪽 수정값이 즉시 반영됩니다. 저장하면 이 미리보기 데이터가 실제 사이트 콘텐츠로 적용됩니다.</p></div><button class="btn" type="button" onclick="saveEditorContent()">미리보기대로 적용</button></div><div class="cms-preview-tabs" id="cms-preview-tabs"><button type="button" data-preview-mode="home">홈</button><button type="button" data-preview-mode="pricing">구매/요금제</button><button type="button" data-preview-mode="products">제품정보</button><button type="button" data-preview-mode="downloads">다운로드</button><button type="button" data-preview-mode="design">디자인/음악</button></div><div class="cms-live-preview" id="cms-live-preview"></div><p class="cms-preview-realhint">↓ 아래는 실제 사이트입니다. 위 편집 요약과 달리 저장(미리보기대로 적용) 후에 바뀝니다.</p><iframe class="cms-preview-frame" id="cms-preview-frame" src="/?nomusic=1" title="실제 사이트 미리보기"></iframe>';
-            tabs.insertAdjacentElement('afterend', shell);
-            shell.appendChild(editPane);
-            shell.appendChild(previewPane);
-            Array.from(editor.children).filter(el => el.classList && (el.classList.contains('editor-subpanel') || el.classList.contains('editor-save-bar'))).forEach(el => editPane.appendChild(el));
-            previewPane.addEventListener('click', event => {
-                const button = event.target.closest('[data-preview-mode]');
-                if (button) {
-                    // 미리보기 탭을 누르면 왼쪽 편집 서브탭도 같이 전환한다.
-                    // 둘이 따로 놀면 "왼쪽은 홈을 편집 중인데 오른쪽은 제품정보를 그려서
-                    // 수정이 반영 안 되는" 어긋남이 생긴다(원인: cmsPreviewMode 공유).
-                    const mode = button.getAttribute('data-preview-mode') || 'home';
-                    if (typeof switchEditorSubtab === 'function') switchEditorSubtab(mode);
-                    else { cmsPreviewMode = mode; updateCmsPreviewToolbar(); refreshEditorPreview(); }
-                    return;
-                }
-                const area = event.target.closest('[data-cms-preview-area]');
-                if (area) setCmsActiveHomeArea(area.getAttribute('data-cms-preview-area') || 'hero', { scroll:true });
-            });
-            updateCmsPreviewToolbar();
-        }
-        function installCmsHomeRegionEditor() {
-            const panel = document.getElementById('editor-sub-home');
-            if (!panel || document.getElementById('cms-home-region-editor')) return;
-            panel.insertAdjacentHTML('afterbegin', `
-                <div class="editor-card" id="cms-home-region-editor">
-                    <h4>홈 화면 영역별 바로 수정</h4>
-                    <p class="editor-help">우측 미리보기 순서대로 첫 화면과 성과 카드를 나눴습니다. 미리보기 영역을 클릭하면 해당 수정 카드로 이동합니다.</p>
-                    <div class="cms-region-editor">
-                        <section class="cms-region-block active" data-cms-editor-area="hero">
-                            <h5>첫 화면 배경/문구</h5>
-                            <p>바다 배경, 메인 제목, 설명, 신뢰 문구를 바로 수정합니다.</p>
-                            <div class="cms-region-grid">
-                                <div class="editor-field full">
-                                    <label>첫 화면 배경 이미지</label>
-                                    <input id="cms-hero-bg-image" type="text" data-cms-home-field="hero-bg" placeholder="/images/hero-beach-bg-fast.jpg">
-                                    <div class="cms-media-tools">
-                                        <div class="cms-thumb" data-cms-thumb-for="cms-hero-bg-image">배경</div>
-                                        <button type="button" data-cms-file-button="cms-hero-bg-image">배경 이미지 선택</button>
-                                        <input type="file" accept="image/*" hidden data-cms-file-input="cms-hero-bg-image">
-                                    </div>
-                                </div>
-                                <div class="editor-field full">
-                                    <label>메인 제목</label>
-                                    <textarea id="cms-hero-title" data-cms-home-field="hero-title"></textarea>
-                                </div>
-                                <div class="editor-field full">
-                                    <label>메인 설명</label>
-                                    <textarea id="cms-hero-desc" data-cms-home-field="hero-desc"></textarea>
-                                </div>
-                                <div class="editor-field">
-                                    <label>혜택/신뢰 문구</label>
-                                    <input id="cms-hero-benefit" type="text" data-cms-home-field="hero-benefit">
-                                </div>
-                                <div class="editor-field">
-                                    <label>Hero 보조 문구 (현재 홈 미사용)</label>
-                                    <input id="cms-hero-notice" type="text" data-cms-home-field="hero-notice" placeholder="실제 홈 공지는 사이드바 '홈 운영'에서 관리하세요.">
-                                </div>
-                            </div>
-                        </section>
-                        <section class="cms-region-block" data-cms-editor-area="proofs">
-                            <h5>성과 카드 영역</h5>
-                            <p>“조회수 19,896 인증” 같은 카드 제목, 설명, 지표, 이미지를 각각 바로 수정합니다.</p>
-                            <div class="cms-proof-editor-list" id="cms-proof-editor-list"></div>
-                            <div class="cms-proof-edit-actions">
-                                <button type="button" data-cms-add-proof="1">성과 카드 추가</button>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            `);
-            const root = document.getElementById('cms-home-region-editor');
-            root.addEventListener('input', event => {
-                const target = event.target;
-                if (!target.closest('[data-cms-home-field], [data-cms-proof-field]')) return;
-                syncCmsHomeRegionEditorToSource({ force:true });
-            });
-            root.addEventListener('click', event => {
-                const proofCard = event.target.closest('[data-cms-proof-card]');
-                if (proofCard) setCmsActiveHomeArea('proof-' + proofCard.getAttribute('data-cms-proof-index'));
-                const addButton = event.target.closest('[data-cms-add-proof]');
-                if (addButton) {
-                    const proofs = getCmsProofEditorValues();
-                    proofs.push({ id:'admin-proof-' + Date.now(), src:'', title:'새 성과 카드', desc:'성과 설명을 입력하세요.', metric:'성과 지표', alt:'성과 이미지' });
-                    renderCmsProofEditorList(proofs);
-                    setCmsActiveHomeArea('proof-' + (proofs.length - 1), { scroll:true });
-                    syncCmsHomeRegionEditorToSource({ force:true });
-                    markSiteContentDirty();
-                    refreshEditorPreview();
-                    return;
-                }
-                const removeButton = event.target.closest('[data-cms-remove-proof]');
-                if (removeButton) {
-                    const index = Number(removeButton.getAttribute('data-cms-remove-proof'));
-                    const proofs = getCmsProofEditorValues().filter((_, i) => i !== index);
-                    renderCmsProofEditorList(proofs);
-                    setCmsActiveHomeArea('proof-' + Math.max(0, index - 1), { scroll:true });
-                    syncCmsHomeRegionEditorToSource({ force:true });
-                    markSiteContentDirty();
-                    refreshEditorPreview();
-                    return;
-                }
-                const fileButton = event.target.closest('[data-cms-file-button]');
-                if (fileButton) {
-                    const id = fileButton.getAttribute('data-cms-file-button');
-                    const input = root.querySelector('[data-cms-file-input="' + id + '"]');
-                    if (input) input.click();
-                }
-            });
-            root.addEventListener('change', event => {
-                const fileInput = event.target.closest('[data-cms-file-input]');
-                if (!fileInput) return;
-                const targetKey = fileInput.getAttribute('data-cms-file-input');
-                const file = fileInput.files && fileInput.files[0];
-                if (!file) return;
-                readFileAsDataUrl(file).then(url => {
-                    const field = targetKey && targetKey.startsWith('proof:')
-                        ? root.querySelector('[data-cms-proof-src="' + targetKey.split(':')[1] + '"]')
-                        : document.getElementById(targetKey);
-                    if (field) {
-                        field.value = url;
-                        syncCmsHomeRegionEditorToSource({ force:true });
-                        refreshCmsRegionThumbs();
-                        markSiteContentDirty();
-                        refreshEditorPreview();
-                    }
-                    fileInput.value = '';
-                });
-            });
-        }
-        function renderCmsHomeRegionEditor(data, options = {}) {
-            const root = document.getElementById('cms-home-region-editor');
-            if (!root) return;
-            if (!options.force && (root.contains(document.activeElement) || Date.now() < cmsRegionEditingUntil)) {
-                refreshCmsRegionThumbs();
-                setCmsActiveHomeArea(cmsActiveHomeArea, { scroll:false });
-                return;
-            }
-            const content = withEditorDefaults(data || {});
-            const hero = content.hero || {};
-            const theme = content.theme || {};
-            const bg = theme.productsBgImage || theme.pricingBgImage || '/images/hero-beach-bg-fast.jpg';
-            setValue('cms-hero-bg-image', bg);
-            setValue('cms-hero-title', hero.title);
-            setValue('cms-hero-desc', hero.desc);
-            setValue('cms-hero-benefit', hero.benefit);
-            setValue('cms-hero-notice', hero.notice);
-            renderCmsProofEditorList(Array.isArray(hero.proofs) ? hero.proofs : []);
-            refreshCmsRegionThumbs();
-            setCmsActiveHomeArea(cmsActiveHomeArea, { scroll:false });
-        }
-        function renderCmsProofEditorList(proofs) {
-            const list = document.getElementById('cms-proof-editor-list');
-            if (!list) return;
-            list.innerHTML = (proofs || []).map((proof, index) => `
-                <article class="cms-proof-edit-card" data-cms-proof-card="1" data-cms-proof-index="${index}" data-cms-proof-id="${cmsEscape(proof.id || ('admin-proof-' + (index + 1)))}">
-                    <div class="cms-proof-edit-head"><span>#${index + 1} 성과 카드</span><button type="button" data-cms-remove-proof="${index}">삭제</button></div>
-                    <div class="editor-field full">
-                        <label>이미지</label>
-                        <input type="text" data-cms-proof-field="src" data-cms-proof-src="${index}" value="${cmsEscape(proof.src || '')}">
-                        <div class="cms-media-tools">
-                            <div class="cms-thumb" data-cms-proof-thumb="${index}">이미지</div>
-                            <button type="button" data-cms-file-button="proof:${index}">이미지 선택</button>
-                            <input type="file" accept="image/*" hidden data-cms-file-input="proof:${index}">
-                        </div>
-                    </div>
-                    <div class="cms-region-grid">
-                        <div class="editor-field">
-                            <label>카드 제목</label>
-                            <input type="text" data-cms-proof-field="title" value="${cmsEscape(proof.title || '')}">
-                        </div>
-                        <div class="editor-field">
-                            <label>지표</label>
-                            <input type="text" data-cms-proof-field="metric" value="${cmsEscape(proof.metric || '')}">
-                        </div>
-                        <div class="editor-field full">
-                            <label>카드 설명</label>
-                            <textarea data-cms-proof-field="desc">${cmsEscape(proof.desc || '')}</textarea>
-                        </div>
-                        <div class="editor-field full">
-                            <label>이미지 설명</label>
-                            <input type="text" data-cms-proof-field="alt" value="${cmsEscape(proof.alt || proof.title || '')}">
-                        </div>
-                    </div>
-                </article>
-            `).join('');
-        }
-        function getCmsProofEditorValues() {
-            return Array.from(document.querySelectorAll('#cms-proof-editor-list [data-cms-proof-card]')).map(card => compactObject({
-                id: (card.getAttribute('data-cms-proof-id') || '').trim(),
-                src: (card.querySelector('[data-cms-proof-field="src"]')?.value || '').trim(),
-                title: (card.querySelector('[data-cms-proof-field="title"]')?.value || '').trim(),
-                desc: (card.querySelector('[data-cms-proof-field="desc"]')?.value || '').trim(),
-                metric: (card.querySelector('[data-cms-proof-field="metric"]')?.value || '').trim(),
-                alt: (card.querySelector('[data-cms-proof-field="alt"]')?.value || '').trim()
-            })).filter(proof => proof.src || proof.title || proof.desc || proof.metric);
-        }
-        function syncCmsHomeRegionEditorToSource(options = {}) {
-            const root = document.getElementById('cms-home-region-editor');
-            if (!root) return;
-            if (!options.force && !root.contains(document.activeElement)) return;
-            if (options.force) cmsRegionEditingUntil = Date.now() + 1200;
-            const bg = getValue('cms-hero-bg-image');
-            setValue('edit-hero-title', getValue('cms-hero-title'));
-            setValue('edit-hero-desc', getValue('cms-hero-desc'));
-            setValue('edit-hero-benefit', getValue('cms-hero-benefit'));
-            setValue('edit-notice', getValue('cms-hero-notice'));
-            setValue('theme-products-bg-image', bg);
-            setValue('theme-pricing-bg-image', bg);
-            setValue('edit-hero-proofs', proofsToText(getCmsProofEditorValues()));
-            refreshCmsRegionThumbs();
-        }
-        function refreshCmsRegionThumbs() {
-            const bgField = document.getElementById('cms-hero-bg-image');
-            const bgThumb = document.querySelector('[data-cms-thumb-for="cms-hero-bg-image"]');
-            if (bgThumb) {
-                const src = cmsSafeImage(bgField?.value);
-                bgThumb.innerHTML = src ? '<img src="' + cmsEscape(src) + '" alt="배경 미리보기">' : '배경';
-            }
-            document.querySelectorAll('[data-cms-proof-card]').forEach(card => {
-                const index = card.getAttribute('data-cms-proof-index');
-                const field = card.querySelector('[data-cms-proof-field="src"]');
-                const thumb = card.querySelector('[data-cms-proof-thumb="' + index + '"]');
-                const src = cmsSafeImage(field?.value);
-                if (thumb) thumb.innerHTML = src ? '<img src="' + cmsEscape(src) + '" alt="성과 이미지">' : '이미지';
-            });
-        }
-        function setCmsActiveHomeArea(area, options = {}) {
-            cmsActiveHomeArea = area || 'hero';
-            const isProof = cmsActiveHomeArea.startsWith('proof-');
-            document.querySelectorAll('[data-cms-editor-area]').forEach(node => {
-                const key = node.getAttribute('data-cms-editor-area');
-                node.classList.toggle('active', key === cmsActiveHomeArea || (isProof && key === 'proofs'));
-            });
-            document.querySelectorAll('[data-cms-proof-card]').forEach(node => {
-                node.classList.toggle('active', cmsActiveHomeArea === 'proof-' + node.getAttribute('data-cms-proof-index'));
-            });
-            document.querySelectorAll('[data-cms-preview-area]').forEach(node => {
-                node.classList.toggle('active', node.getAttribute('data-cms-preview-area') === cmsActiveHomeArea);
-            });
-            if (options.scroll) {
-                const target = isProof
-                    ? document.querySelector('[data-cms-proof-index="' + cmsActiveHomeArea.replace('proof-', '') + '"]')
-                    : document.querySelector('[data-cms-editor-area="' + cmsActiveHomeArea + '"]');
-                if (target) target.scrollIntoView({ behavior:'smooth', block:'center' });
-            }
-        }
-        function updateCmsPreviewToolbar() {
-            document.querySelectorAll('#cms-preview-tabs [data-preview-mode]').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-preview-mode') === cmsPreviewMode));
-        }
-        function installEditorLiveBindings() {
-            const editor = document.getElementById('tab-editor');
-            if (!editor || cmsEditorBindingsReady) return;
-            cmsEditorBindingsReady = true;
-            const onChange = event => {
-                const target = event.target;
-                if (!target) return;
-                if (target.closest && target.closest('#home-keyword-briefing-editor')) return;
-                markSiteContentDirty();
-                refreshEditorPreview();
-                if (target.matches && target.matches('[data-cms-image-input="1"]')) updateCmsImageThumb(target);
-            };
-            editor.addEventListener('input', onChange);
-            editor.addEventListener('change', onChange);
-        }
-        function installLewordSettingsPanel() {
-            const panel = document.getElementById('editor-sub-admin-ai');
-            const main = document.querySelector('.main-content');
-            if (!panel || !main || document.getElementById('tab-leword-settings')) return;
-            panel.id = 'tab-leword-settings';
-            panel.classList.remove('editor-subpanel', 'active');
-            panel.classList.add('tab-panel');
-            panel.insertAdjacentHTML('afterbegin', '<div class="page-header"><h1>LEWORD 관리자 설정</h1><p>Codex와 Claude Code 서버 작업자, API 보조 추론 방식을 관리자 전용으로 설정합니다.</p></div>');
-            const trialPanel = document.getElementById('tab-trial');
-            main.insertBefore(panel, trialPanel || null);
-        }
-        function installCmsSkinControls() {
-            const panel = document.getElementById('editor-sub-design');
-            if (!panel || document.getElementById('cms-skin-controls')) return;
-            panel.insertAdjacentHTML('afterbegin', '<div class="editor-card" id="cms-skin-controls" style="margin-bottom:16px;"><h4>스킨/음악 미리보기 편집</h4><p class="editor-help">코드 형식 대신 스킨 버튼을 고르거나 .md 스킨 파일을 불러와 배경, 골드 컬러, 음악 설정을 적용합니다.</p><input id="cms-skin-name" type="hidden"><div class="cms-skin-grid"><button type="button" class="cms-skin-option" data-cms-skin="beach" style="background-image:url(/images/hero-beach-bg-fast.jpg)">오션 프리미엄</button><button type="button" class="cms-skin-option" data-cms-skin="midnight" style="background:linear-gradient(135deg,#06131f,#1f2638)">미드나잇 골드</button><button type="button" class="cms-skin-option" data-cms-skin="studio" style="background:linear-gradient(135deg,#14100b,#3b2b12)">스튜디오 럭스</button><button type="button" class="cms-skin-option" data-cms-skin="clean" style="background:linear-gradient(135deg,#eef3f6,#c9d6df);color:#111;box-shadow:none;">클린 라이트</button></div><div class="editor-field-grid"><div class="editor-field full"><label>.md 스킨 불러오기/편집</label><textarea id="cms-skin-md" spellcheck="false" placeholder="skin: ocean-premium&#10;pricingBgImage: /images/hero-beach-bg-fast.jpg&#10;gold: #FFD700&#10;musicTitle: 배경음악&#10;musicVideoId: f4jS6yW83MU"></textarea><div style="margin-top:8px;"><button class="cms-small-action" type="button" id="cms-skin-md-upload">.md 스킨 파일 선택</button><input id="cms-skin-md-file" type="file" accept=".md,text/markdown,text/plain" hidden></div></div><div class="editor-field"><label>음악 제목</label><input id="cms-music-title" type="text" placeholder="배경음악"></div><div class="editor-field"><label>YouTube 영상 ID</label><input id="cms-music-video-id" type="text" placeholder="f4jS6yW83MU"></div><div class="editor-field"><label>YouTube 플레이리스트 ID</label><input id="cms-music-playlist-id" type="text" placeholder="RDf4jS6yW83MU"></div><div class="editor-field"><label>시작 초</label><input id="cms-music-start-sec" type="number" min="0" step="1" placeholder="16"></div><div class="editor-field full"><label>직접 음악 파일/URL</label><input id="cms-music-audio-url" type="text" placeholder="오디오 URL 또는 파일 선택 데이터"><div class="cms-media-tools"><div class="cms-thumb" id="cms-audio-preview">AUDIO</div><button type="button" id="cms-audio-file-button">음악 파일 선택</button><input id="cms-audio-file-input" type="file" accept="audio/*" hidden></div></div></div></div>');
-            panel.querySelectorAll('[data-cms-skin]').forEach(button => button.addEventListener('click', () => applyCmsSkinPreset(button.getAttribute('data-cms-skin'))));
-            const mdButton = document.getElementById('cms-skin-md-upload');
-            const mdFile = document.getElementById('cms-skin-md-file');
-            if (mdButton && mdFile) {
-                mdButton.addEventListener('click', () => mdFile.click());
-                mdFile.addEventListener('change', () => {
-                    const file = mdFile.files && mdFile.files[0];
-                    if (!file) return;
-                    const reader = new FileReader();
-                    reader.onload = () => { setValue('cms-skin-md', String(reader.result || '')); applyCmsSkinMarkdown(String(reader.result || '')); };
-                    reader.readAsText(file, 'utf-8');
-                });
-            }
-            const audioButton = document.getElementById('cms-audio-file-button');
-            const audioInput = document.getElementById('cms-audio-file-input');
-            if (audioButton && audioInput) {
-                audioButton.addEventListener('click', () => audioInput.click());
-                audioInput.addEventListener('change', () => {
-                    const file = audioInput.files && audioInput.files[0];
-                    if (!file) return;
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                        setValue('cms-music-audio-url', String(reader.result || ''));
-                        const preview = document.getElementById('cms-audio-preview');
-                        if (preview) preview.innerHTML = '<audio controls src="' + cmsEscape(String(reader.result || '')) + '" style="width:100%;height:42px;"></audio>';
-                        markSiteContentDirty();
-                        refreshEditorPreview();
-                    };
-                    reader.readAsDataURL(file);
-                });
-            }
-        }
-        function applyCmsSkinPreset(name) {
-            const presets = { beach:{label:'오션 프리미엄',bg:'/images/hero-beach-bg-fast.jpg',gold:'#FFD700'}, midnight:{label:'미드나잇 골드',bg:'/images/hero-beach-bg-fast.jpg',gold:'#F2C94C'}, studio:{label:'스튜디오 럭스',bg:'/images/hero-beach-bg-fast.jpg',gold:'#E2B84F'}, clean:{label:'클린 라이트',bg:'/images/hero-beach-bg-fast.jpg',gold:'#2E7DFF'} };
-            const preset = presets[name] || presets.beach;
-            setValue('cms-skin-name', name || 'beach');
-            setValue('theme-pricing-bg-image', preset.bg);
-            setValue('theme-products-bg-image', preset.bg);
-            setValue('theme-download-bg-image', preset.bg);
-            setValue('theme-gold', preset.gold);
-            setValue('cms-skin-md', 'skin: ' + preset.label + '\npricingBgImage: ' + preset.bg + '\nproductsBgImage: ' + preset.bg + '\ndownloadBgImage: ' + preset.bg + '\ngold: ' + preset.gold);
-            document.querySelectorAll('[data-cms-skin]').forEach(button => button.classList.toggle('active', button.getAttribute('data-cms-skin') === name));
-            installCmsImagePickers();
-            markSiteContentDirty();
-            refreshEditorPreview();
-        }
-        function applyCmsSkinMarkdown(text) {
-            const lines = String(text || '').split(/\r?\n/);
-            const pairs = {};
-            lines.forEach(line => { const match = line.match(/^\s*([A-Za-z0-9_-]+)\s*:\s*(.+)\s*$/); if (match) pairs[match[1].toLowerCase()] = match[2].trim(); });
-            const firstImage = lines.map(line => line.trim()).find(line => /^(https?:\/\/|\/images\/|data:image\/)/i.test(line));
-            if (pairs.skin) setValue('cms-skin-name', pairs.skin);
-            if (pairs.pricingbgimage || firstImage) setValue('theme-pricing-bg-image', pairs.pricingbgimage || firstImage);
-            if (pairs.productsbgimage || firstImage) setValue('theme-products-bg-image', pairs.productsbgimage || firstImage);
-            if (pairs.downloadbgimage || firstImage) setValue('theme-download-bg-image', pairs.downloadbgimage || firstImage);
-            if (pairs.gold || pairs.accent || pairs.color) setValue('theme-gold', pairs.gold || pairs.accent || pairs.color);
-            if (pairs.musictitle) setValue('cms-music-title', pairs.musictitle);
-            if (pairs.musicvideoid) setValue('cms-music-video-id', pairs.musicvideoid);
-            if (pairs.musicplaylistid) setValue('cms-music-playlist-id', pairs.musicplaylistid);
-            if (pairs.musicstartsec) setValue('cms-music-start-sec', pairs.musicstartsec);
-            markSiteContentDirty();
-            refreshEditorPreview();
-        }
-        function installCmsImagePickers() {
-            document.querySelectorAll('#tab-editor input[type="text"], #tab-editor input[type="url"]').forEach(input => {
-                if (input.closest('#cms-home-region-editor')) return;
-                const id = input.id || '';
-                if (!/(bg-image$|-image$|-media-src$|-preview-\d+-src$|-workflow-\d+-src$)/.test(id)) return;
-                enhanceCmsImageInput(input);
-            });
-            document.querySelectorAll('[data-cms-image-input="1"]').forEach(input => updateCmsImageThumb(input));
-        }
-        function enhanceCmsImageInput(input) {
-            input.dataset.cmsImageInput = '1';
-            if (input.dataset.cmsImagePicker === '1') { updateCmsImageThumb(input); return; }
-            input.dataset.cmsImagePicker = '1';
-            const tools = document.createElement('div');
-            tools.className = 'cms-media-tools';
-            tools.innerHTML = '<div class="cms-thumb" data-cms-thumb="1">이미지 없음</div><button type="button">이미지 선택</button><input type="file" accept="image/*" hidden>';
-            input.insertAdjacentElement('afterend', tools);
-            const button = tools.querySelector('button');
-            const file = tools.querySelector('input');
-            button.addEventListener('click', () => file.click());
-            file.addEventListener('change', () => {
-                const selected = file.files && file.files[0];
-                if (!selected) return;
-                readFileAsDataUrl(selected).then(url => {
-                    input.value = url;
-                    input.dispatchEvent(new Event('input', { bubbles:true }));
-                    updateCmsImageThumb(input);
-                    refreshEditorPreview();
-                    file.value = '';
-                });
-            });
-            input.addEventListener('input', () => updateCmsImageThumb(input));
-            updateCmsImageThumb(input);
-        }
-        function readFileAsDataUrl(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(String(reader.result || ''));
-                reader.onerror = () => reject(reader.error || new Error('파일을 읽지 못했습니다.'));
-                reader.readAsDataURL(file);
-            });
-        }
-        function updateCmsImageThumb(input) {
-            const tools = input.nextElementSibling && input.nextElementSibling.classList.contains('cms-media-tools') ? input.nextElementSibling : null;
-            const thumb = tools ? tools.querySelector('[data-cms-thumb="1"]') : null;
-            if (!thumb) return;
-            const src = cmsSafeImage(input.value);
-            thumb.innerHTML = src ? '<img src="' + cmsEscape(src) + '" alt="미리보기">' : '이미지 없음';
-        }
-        function getAdminSiteContentDraft(fallback = {}) {
-            const source = fallback && Object.keys(fallback).length ? fallback : loadedSiteContentBase;
-            return deepClone(source || {});
-        }
-        function renderCmsPreview(rawContent) {
-            const target = document.getElementById('cms-live-preview');
-            if (!target) return;
-            let data = rawContent || {};
-            try { data = withEditorDefaults(data); } catch {}
-            const mode = cmsPreviewMode || 'home';
-            const theme = data.theme || {};
-            updateCmsPreviewToolbar();
-            if (mode === 'pricing') {
-                const page = data.pricing?.page || {};
-                const plans = Object.values(data.pricing?.plans || {}).slice(0, 4);
-                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">' + cmsEscape(page.eyebrow || 'PRICING') + '</span><h3 class="cms-preview-title">' + cmsEscape(page.title || '구매/요금제') + '</h3><p class="cms-preview-desc">' + cmsEscape(page.desc || '') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' + plans.map(plan => '<article class="cms-preview-card"><h4>' + cmsEscape(plan.name || '요금제') + '</h4><p>' + cmsEscape(plan.desc || '') + '</p><div class="cms-preview-pill-row"><span class="cms-preview-pill">' + cmsEscape(plan.period || '') + '</span><span class="cms-preview-pill">' + cmsEscape(plan.badgeText || '') + '</span></div></article>').join('') + '</div></div>';
-                return;
-            }
-            if (mode === 'products') {
-                const page = data.productsPage || {};
-                const products = Object.values(data.products || {}).slice(0, 4);
-                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">' + cmsEscape(page.heroKicker || 'PRODUCTS') + '</span><h3 class="cms-preview-title">' + cmsEscape(page.heroTitle || '제품정보') + '</h3><p class="cms-preview-desc">' + cmsEscape(page.heroDesc || '') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' + products.map(product => '<article class="cms-preview-card">' + (cmsSafeImage(product.media?.src) ? '<img src="' + cmsEscape(product.media.src) + '" alt="">' : '') + '<h4>' + cmsEscape(product.name || product.headline || '제품') + '</h4><p>' + cmsEscape(product.desc || product.subtitle || '') + '</p></article>').join('') + '</div></div>';
-                return;
-            }
-            if (mode === 'downloads') {
-                const page = data.downloads?.page || {};
-                const products = EDITOR_PRODUCT_DEFS.map(def => data.downloads?.[def.id] || { name:def.label }).slice(0, 3);
-                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">' + cmsEscape(page.eyebrow || 'DOWNLOAD') + '</span><h3 class="cms-preview-title">' + cmsEscape(page.title || '다운로드') + '</h3><p class="cms-preview-desc">' + cmsEscape(page.desc || '') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' + products.map(product => '<article class="cms-preview-card">' + (cmsSafeImage(product.image) ? '<img src="' + cmsEscape(product.image) + '" alt="">' : '') + '<h4>' + cmsEscape(product.name || '앱') + '</h4><p>' + cmsEscape(product.version || '') + '</p></article>').join('') + '</div></div>';
-                return;
-            }
-            if (mode === 'site-content') {
-                const draft = getAdminSiteContentDraft(data);
-                const hero = draft.hero || {};
-                const products = Object.values(draft.products || {}).slice(0, 4);
-                const pricingPlans = Object.values(draft.pricing?.plans || {}).slice(0, 3);
-                const downloads = EDITOR_PRODUCT_DEFS.map(def => draft.downloads?.[def.id] || null).filter(Boolean).slice(0, 3);
-                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">SITE CONTENT</span><h3 class="cms-preview-title">' + cmsEscape(hero.title || '사이트 콘텐츠 미리보기') + '</h3><p class="cms-preview-desc">' + cmsEscape(hero.desc || '영역 버튼을 눌러 수정하면 제품, 요금제, 다운로드 초안이 이 영역에 바로 표시됩니다.') + '</p><div class="cms-preview-grid" style="margin-top:16px;">' +
-                    products.map(product => '<article class="cms-preview-card">' + (cmsSafeImage(product.media?.src) ? '<img src="' + cmsEscape(product.media.src) + '" alt="">' : '') + '<h4>' + cmsEscape(product.name || product.headline || '제품') + '</h4><p>' + cmsEscape(product.desc || product.subtitle || product.href || '') + '</p></article>').join('') +
-                    pricingPlans.map(plan => '<article class="cms-preview-card"><h4>' + cmsEscape(plan.name || '요금제') + '</h4><p>' + cmsEscape(plan.desc || plan.period || '') + '</p></article>').join('') +
-                    downloads.map(item => '<article class="cms-preview-card">' + (cmsSafeImage(item.image) ? '<img src="' + cmsEscape(item.image) + '" alt="">' : '') + '<h4>' + cmsEscape(item.name || '다운로드') + '</h4><p>' + cmsEscape(item.version || '') + '</p></article>').join('') +
-                    '</div></div>';
-                return;
-            }
-            if (mode === 'design') {
-                const music = theme.music || {};
-                target.innerHTML = '<div class="cms-preview-section"><span class="cms-preview-kicker">DESIGN</span><h3 class="cms-preview-title">스킨과 음악 설정</h3><div class="cms-preview-grid" style="margin-top:16px;"><article class="cms-preview-card">' + (cmsSafeImage(theme.pricingBgImage) ? '<img src="' + cmsEscape(theme.pricingBgImage) + '" alt="">' : '') + '<h4>대표 배경</h4><p>' + cmsEscape(theme.pricingBgImage || '배경 이미지 없음') + '</p></article><article class="cms-preview-card"><h4>대표 컬러</h4><p><span style="display:inline-block;width:22px;height:22px;border-radius:999px;background:' + cmsEscape(theme.gold || '#FFD700') + ';vertical-align:middle;margin-right:8px;"></span>' + cmsEscape(theme.gold || '#FFD700') + '</p></article><article class="cms-preview-card"><h4>음악</h4><p>' + cmsEscape(music.title || '배경음악') + '<br>' + cmsEscape(music.videoId || music.audioUrl || '음악 소스 미설정') + '</p></article></div></div>';
-                return;
-            }
-            const hero = data.hero || {};
-            const proofs = Array.isArray(hero.proofs) ? hero.proofs.slice(0, 4) : [];
-            const bg = cmsStyleUrl(theme.productsBgImage || theme.pricingBgImage || '/images/hero-beach-bg-fast.jpg');
-            target.innerHTML = '<div class="cms-preview-hero cms-preview-area" data-cms-preview-area="hero" style="background-image:url(\'' + bg + '\')"><span class="cms-preview-kicker">PREMIUM AUTOMATION</span><h3 class="cms-preview-title">' + cmsEscape(hero.title || '').replace(/\n/g, '<br>') + '</h3><p class="cms-preview-desc">' + cmsEscape(hero.desc || '') + '</p>' + (hero.benefit ? '<div class="cms-preview-benefit">' + cmsEscape(hero.benefit) + '</div>' : '') + '</div><div class="cms-preview-section"><div class="cms-preview-grid">' + proofs.map((proof, index) => '<article class="cms-preview-card cms-preview-area" data-cms-preview-area="proof-' + index + '">' + (cmsSafeImage(proof.src) ? '<img src="' + cmsEscape(proof.src) + '" alt="">' : '') + '<h4>' + cmsEscape(proof.title || proof.alt || '성과 이미지') + '</h4><p>' + cmsEscape(proof.desc || proof.metric || '') + '</p></article>').join('') + '</div></div>';
-            setCmsActiveHomeArea(cmsActiveHomeArea, { scroll:false });
-        }
-        function normalizeTrialPhone(value) {
-            let digits = String(value || '').replace(/\D/g, '');
-            if (!digits) return '';
-            if (digits.startsWith('82')) digits = '0' + digits.slice(2);
-            if (digits.startsWith('10')) digits = '0' + digits;
-            if (!digits.startsWith('0') && digits.length >= 9) digits = '0' + digits;
-            if (digits.startsWith('010') && digits.length > 11) digits = digits.slice(0, 11);
-            return digits.startsWith('010') && digits.length >= 10 ? digits : '';
-        }
-        function updateTrialExports(users) {
-            const list = Array.isArray(users) ? users : allTrialUsers;
-            const phones = Array.from(new Set(list.map(u => normalizeTrialPhone(u.phone || u.mobile || u.phoneNumber)).filter(Boolean)));
-            const emails = Array.from(new Set(list.map(u => String(u.email || '').trim()).filter(v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))));
-            const phoneBox = document.getElementById('trial-phone-list');
-            const emailBox = document.getElementById('trial-email-list');
-            if (phoneBox) phoneBox.value = phones.join('\n');
-            if (emailBox) emailBox.value = emails.join('\n');
-            const phoneCount = document.getElementById('trial-phone-count');
-            const emailCount = document.getElementById('trial-email-count');
-            if (phoneCount) phoneCount.textContent = phones.length.toLocaleString('ko-KR') + '개';
-            if (emailCount) emailCount.textContent = emails.length.toLocaleString('ko-KR') + '개';
-        }
-        function copyTextFromElement(id, label) {
-            const el = document.getElementById(id);
-            const value = el ? el.value : '';
-            if (!value) { showToast(label + ' 복사할 데이터가 없습니다.'); return; }
-            const fallback = () => { el.focus(); el.select(); document.execCommand('copy'); };
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(value).then(() => showToast(label + ' 전체 복사 완료')).catch(() => { fallback(); showToast(label + ' 전체 복사 완료'); });
-            } else {
-                fallback();
-                showToast(label + ' 전체 복사 완료');
-            }
-        }
-        function copyTrialPhones() { copyTextFromElement('trial-phone-list', '체험자 번호'); }
-        function copyTrialEmails() { copyTextFromElement('trial-email-list', '체험자 이메일'); }
-        function focusTrialExport(type) {
-            setTimeout(() => {
-                const box = document.getElementById(type === 'emails' ? 'trial-export-emails-box' : 'trial-export-phones-box');
-                if (!box) return;
-                document.querySelectorAll('.trial-export-box').forEach(node => node.classList.remove('focused'));
-                box.classList.add('focused');
-                box.scrollIntoView({ behavior:'smooth', block:'center' });
-            }, 120);
-        }
-        // CMS_WORKBENCH_V1_END
-
-
-        function switchEditorSubtab(name, focusPanel = false) {
-            const activeName = ['home', 'pricing', 'products', 'downloads', 'design', 'site-content'].includes(name) ? name : 'home';
-            cmsPreviewMode = activeName;
-            document.querySelectorAll('.editor-subtab').forEach(btn => {
-                const isActive = btn.dataset.editorSubtab === activeName;
-                btn.classList.toggle('active', isActive);
-                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-                btn.tabIndex = isActive ? 0 : -1;
-            });
-            document.querySelectorAll('[data-content-editor-target]').forEach(button => {
-                if (button.dataset.contentEditorTarget === activeName) button.setAttribute('aria-current', 'page');
-                else button.removeAttribute('aria-current');
-            });
-            let activePanel = null;
-            document.querySelectorAll('.editor-subpanel').forEach(panel => {
-                const isActive = panel.id === `editor-sub-${activeName}`;
-                panel.classList.toggle('active', isActive);
-                panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-                if (isActive) activePanel = panel;
-            });
-            updateCmsPreviewToolbar();
-            refreshEditorPreview();
-            if (focusPanel && activePanel) {
-                requestAnimationFrame(() => {
-                    const heading = activePanel.querySelector('h4, h3, h2');
-                    if (!heading) return;
-                    heading.setAttribute('tabindex', '-1');
-                    heading.focus({ preventScroll: true });
-                    activePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                });
-            }
+            setAiWorkerStatus('LEWORD 앱이 꺼져 있습니다 — 앱을 켜고 [🔗 연동하기]부터 누르세요.');
+            renderWorkerProgress([], '앱 미실행', 100);
         }
 
         function installEditorSubtabKeyboard() {
