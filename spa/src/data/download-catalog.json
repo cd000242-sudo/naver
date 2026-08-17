@@ -2,12 +2,12 @@
   "_comment": "다운로드 기본 카탈로그. 관리자(GAS site-content)가 비워 두거나 잘못 넣었을 때 실제로 서빙되는 최종 안전망이다. scripts/status/probe-purchase.mjs 가 이 파일을 그대로 읽어 링크 생존을 검사하므로, 여기와 화면이 갈라지면 검사도 같이 헛돈다. 새 버전을 낼 때 여기만 고치면 화면과 하네스가 함께 따라온다.",
   "naver": {
     "name": "Better Life Naver",
-    "version": "네이버 블로그 자동화 · v2.11.182",
+    "version": "네이버 블로그 자동화 · v2.11.195",
     "image": "/images/feature-auto-publish.png",
     "accent": "#FFD700",
     "borderColor": "rgba(255,215,0,0.25)",
     "downloads": [
-      { "key": "windows", "label": "Windows", "detail": "2.11.182 · exe", "url": "https://github.com/cd000242-sudo/naver/releases/download/v2.11.182/Better-Life-Naver-Setup-2.11.182.exe" },
+      { "key": "windows", "label": "Windows", "detail": "2.11.195 · exe", "url": "https://github.com/cd000242-sudo/naver/releases/download/v2.11.195/Better-Life-Naver-Setup-2.11.195.exe" },
       { "key": "mac-arm", "label": "Mac M1-M4", "detail": "2.11.67 · arm64 dmg", "url": "https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-arm64.dmg" },
       { "key": "mac-intel", "label": "Mac Intel", "detail": "2.11.67 · x64 dmg", "url": "https://github.com/cd000242-sudo/naver/releases/download/v2.11.67/Better-Life-Naver-2.11.67-x64.dmg" }
     ]
