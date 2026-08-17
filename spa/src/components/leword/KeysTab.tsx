@@ -31,9 +31,29 @@ function KeysTab() {
      * 구독으로 돈다 — 키도, 추가 비용도 없다. null = 아직 확인 중.
      */
     const [bridge, setBridge] = useState<BridgeStatus | null>(null);
-    const refreshBridge = () => { setBridge(null); probeBridge().then(setBridge); };
+    const [connecting, setConnecting] = useState(false);
     useEffect(() => { probeBridge().then(setBridge); }, []);
     const claudeAgent = bridge?.agents?.find((agent) => agent.provider === 'claude');
+    const connected = Boolean(bridge?.connected && claudeAgent?.available);
+
+    /*
+     * [연동하기]는 단순 재조회가 아니다 — 크롬 신형은 https 페이지가 127.0.0.1
+     * (내 PC 의 LEWORD 앱)에 접속할 때 사용자 클릭에서 시작된 요청에만 권한
+     * 팝업을 띄운다. 그래서 버튼 한 번이 권한 허용 + 접속 확인을 겸한다.
+     * 앱이 브리지를 여는 데 시간이 걸릴 수 있어 몇 초에 걸쳐 재시도한다.
+     */
+    const connectBridge = async () => {
+        setConnecting(true);
+        setBridge(null);
+        let status: BridgeStatus | null = null;
+        for (let attempt = 0; attempt < 4; attempt += 1) {
+            status = await probeBridge();
+            if (status?.connected) break;
+            await new Promise((resolve) => { setTimeout(resolve, 2000); });
+        }
+        setBridge(status);
+        setConnecting(false);
+    };
 
     const update = (field: string, value: string) => {
         setKeys((previous) => ({ ...previous, [field]: value }));
@@ -77,21 +97,35 @@ function KeysTab() {
             <section className="lw-panel" aria-label="AI 추론 (클로드코드)">
                 <div className="lw-panel-head">
                     <h2>AI 추론 (클로드코드)</h2>
-                    <span className={bridge?.connected && claudeAgent?.available ? 'lw-key-on' : ''}>
-                        {bridge === null ? '연결 확인 중…'
-                            : !bridge.connected ? 'LEWORD 앱 꺼짐 — 켜면 자동 연결'
-                                : claudeAgent?.available ? '● 연동됨 — 구독으로 무료 추론'
-                                    : claudeAgent?.installed ? '앱에서 클로드코드 로그인 필요'
-                                        : '앱에서 클로드코드 설치 필요'}
+                    <span className={connected ? 'lw-key-on' : ''}>
+                        {connecting || bridge === null ? '연결 확인 중…'
+                            : connected ? '✅ 연동이 완료되었습니다 — 구독으로 무료 추론'
+                                : !bridge.connected ? '아직 연동 전'
+                                    : claudeAgent?.installed ? '클로드코드 로그인 필요'
+                                        : '클로드코드 설치 필요'}
                     </span>
-                    <a className="lw-key-issue" href="/download">앱 받기 →</a>
+                    {!connected && <a className="lw-key-issue" href="/download">앱 받기 →</a>}
                 </div>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
-                    API 키가 필요 없습니다. 이 페이지가 같은 PC 의 LEWORD 앱과 연결되어
-                    <strong> 내 클로드코드 구독</strong>으로 서브키워드·후킹을 추론합니다 — 실행도 비용도 전부 내 컴퓨터·내 구독입니다.
-                    앱을 켜두기만 하면 황금키워드 보드의 <strong>🤖 AI 서브 보강</strong> 버튼이 살아납니다.
+                    API 키도, 추가 비용도 필요 없습니다. 아래 버튼 한 번이면 이 페이지가
+                    <strong> 내 클로드코드 구독</strong>과 연결되어 서브키워드·후킹을 추론합니다.
+                    연동되면 황금키워드 보드의 <strong>🤖 AI 서브 보강</strong> 버튼이 살아납니다.
                 </p>
-                <button type="button" className="lw-mini lw-mini-ghost" onClick={refreshBridge}>다시 확인</button>
+                {connected ? (
+                    <button type="button" className="lw-mini lw-mini-ghost" onClick={connectBridge} disabled={connecting}>연동 상태 다시 확인</button>
+                ) : (
+                    <>
+                        <button type="button" className="lw-mini" onClick={connectBridge} disabled={connecting}>
+                            {connecting ? '연동 중…' : '🔗 연동하기'}
+                        </button>
+                        {bridge !== null && !bridge.connected && !connecting && (
+                            <p className="lw-card-note" style={{ marginTop: 10 }}>
+                                연결이 안 되면: LEWORD 앱이 이 PC 에서 실행 중인지 확인한 뒤 다시 [연동하기]를 누르세요.
+                                브라우저가 "기기 연결 허용" 팝업을 띄우면 <strong>허용</strong>을 눌러야 연결됩니다.
+                            </p>
+                        )}
+                    </>
+                )}
             </section>
 
             {KEY_GROUPS.map((group) => {

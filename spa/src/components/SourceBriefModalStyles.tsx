@@ -255,8 +255,12 @@ function SourceBriefModalStyles() {
 
             @media (max-width: 860px) {
                 .brief-modal { max-height: 92vh; }
-                .brief-modal-body { grid-template-columns: minmax(0, 1fr); overflow-y: auto; }
-                .brief-modal-facts, .brief-modal-side { overflow: visible; }
+                /* 모바일에서 grid 를 유지하면 엔진이 두 행을 반반 높이로 잡고,
+                   overflow: visible 인 내용이 상자 밖으로 그려져 아래 섹션 글자
+                   위에 겹쳐 보였다(실기기 재현). 일반 흐름으로 쌓으면 각 섹션이
+                   내용만큼 늘어나고 본문 전체가 스크롤되어 글이 전부 보인다. */
+                .brief-modal-body { display: block; overflow-y: auto; }
+                .brief-modal-facts, .brief-modal-side { overflow: visible; height: auto; }
                 .brief-modal-side { border-left: none; border-top: 1px solid rgba(255,255,255,0.08); }
                 .brief-modal-facts img { max-height: 220px; }
             }

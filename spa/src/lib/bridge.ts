@@ -39,9 +39,14 @@ async function bridgeFetch(path: string, options?: RequestInit, timeoutMs = 3500
     }
 }
 
-/** 앱이 떠 있고 어떤 엔진이 준비됐는지. 실패 = 앱 꺼짐/미설치(정상 상태). */
+/**
+ * 앱이 떠 있고 어떤 엔진이 준비됐는지. 실패 = 앱 꺼짐/미설치(정상 상태).
+ * 상태 응답은 앱이 클로드·코덱스·제미나이 CLI 세 개를 실제로 찔러본 결과라
+ * 첫 호출은 몇 초씩 걸린다 — 기본 3.5초로 끊으면 켜져 있는 앱도 "꺼짐"으로
+ * 오판한다(실측). 넉넉히 기다린다.
+ */
 export async function probeBridge(): Promise<BridgeStatus> {
-    const body = await bridgeFetch('/v1/bridge/status') as { version?: string; agents?: BridgeAgentStatus[] } | null;
+    const body = await bridgeFetch('/v1/bridge/status', undefined, 20_000) as { version?: string; agents?: BridgeAgentStatus[] } | null;
     if (!body) return { connected: false };
     return { connected: true, version: body.version, agents: body.agents || [] };
 }
