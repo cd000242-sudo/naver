@@ -13,9 +13,13 @@ function LewordStyles() {
                 grid-template-columns: 248px minmax(0, 1fr);
                 min-height: calc(100vh - 72px);
                 padding-top: 72px;
+                /*
+                 * 배경 블룸을 브랜드 골드로(taste: atmospheric bloom — 저채도
+                 * 라디얼이 분위기를 만든다. 보라 블룸은 골드 정체성과 싸웠다).
+                 */
                 background:
-                    radial-gradient(900px 500px at 82% -8%, rgba(124,92,255,.15), transparent 60%),
-                    radial-gradient(700px 500px at -8% 108%, rgba(0,224,198,.08), transparent 55%),
+                    radial-gradient(900px 500px at 82% -8%, rgba(255,165,0,.09), transparent 60%),
+                    radial-gradient(700px 500px at -8% 108%, rgba(0,224,198,.06), transparent 55%),
                     #07090d;
                 color: #ebedf2;
             }
@@ -136,8 +140,11 @@ function LewordStyles() {
                 color: rgba(235,242,250,.72);
                 font-size: 13px; font-weight: 800; cursor: pointer;
             }
-            /* 활성 칩은 브랜드 골드다(#FFA500 — tokens.ts). 보라는 보조로 물린다. */
-            .lw-segment button.on { background: rgba(255,165,0,.16); border-color: rgba(255,165,0,.5); color: #ffd79a; }
+            /*
+             * 활성 칩은 반전이다(taste: selection via inversion — 한 화면에
+             * 반전 하나가 어떤 액센트 테두리보다 강한 앵커가 된다).
+             */
+            .lw-segment button.on { background: #FFA500; border-color: #FFA500; color: #1a1206; }
             .lw-count { margin-left: auto; color: #646b7d; font-size: 13px; font-weight: 800; }
 
             /* ── 사용량 ── */
@@ -256,6 +263,12 @@ function LewordStyles() {
             .lw-board-list .lw-card-actions { grid-column: 1 / -1; }
             /* 배지·제목·근거는 한 칸에 세로로 쌓인다(BoardCardHead 가 한 덩어리로 낸다). */
             .lw-card-head { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+            /*
+             * 배지는 조용해야 한다(taste: 초점은 한 곳 — 이 카드의 주인공은
+             * 키워드다). 4색 배지가 제목과 경쟁하던 것을 크기·무게로 눌러
+             * 메타데이터 층위로 내린다. 변형별 색 의미는 그대로 산다.
+             */
+            .lw-card-tags span { font-size: 10.5px; padding: 3px 8px; font-weight: 800; }
             .lw-board-list .lw-card-metrics {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 margin-top: 0; row-gap: 12px; column-gap: 10px;
@@ -674,9 +687,10 @@ function LewordStyles() {
                 border: 1px solid rgba(26,115,232,.55); color: #8ab4f8; background: rgba(26,115,232,.14);
             }
             /* 대장간 산출물 — 제목 2종 + 문제해결 서브 */
+            /* 장식은 하나만(taste: over-decoration 금지) — 좌측 골드 바 + 옅은 바탕. */
             .lw-forge {
                 margin: 2px 0; padding: 12px 15px; border-radius: 12px;
-                background: rgba(255,165,0,.05); border: 1px solid rgba(255,165,0,.16);
+                background: rgba(255,165,0,.055);
                 border-left: 3px solid rgba(255,165,0,.55);
                 display: flex; flex-direction: column; gap: 6px;
             }
