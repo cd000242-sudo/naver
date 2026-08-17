@@ -9,7 +9,7 @@ export type SourceLaneId = 'naver' | 'daum' | 'nate' | 'zum' | 'sports' | 'polic
 
 export type SourceInsight = {
     /** 배치가 계산해 담아준다. 여기서 다시 만들지 않는다. */
-    titles?: { seo?: string; home?: string; topic?: string; topicGroup?: string };
+    titles?: { seo?: string; home?: string; topic?: string; topicGroup?: string; summary?: string };
     facts?: Array<{ text: string; sourceIndex: number }>;
     links?: Array<{ url: string; press: string }>;
     images?: string[];

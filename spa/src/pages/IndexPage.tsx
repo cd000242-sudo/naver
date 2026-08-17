@@ -181,6 +181,54 @@ async function fetchSourceSignalSnapshot(): Promise<{ updatedAt?: string; lanes?
     }
 }
 
+/**
+ * 에이전트 제목·요약 창고를 화면에서 직접 겹쳐 쓴다.
+ *
+ * 크론이 창고를 데이터에 굽는 방식만 쓰면 시간차가 두 겹이다 — 창고 생성
+ * 주기 + 다음 크론까지의 대기. 그 사이에 뜬 키워드는 계속 템플릿 제목으로
+ * 보였다("김민석 만찬" 실측, 2026-08-18). 화면이 창고를 직접 읽으면 창고가
+ * 배포되는 즉시 모든 키워드에 적용되고, 크론 주기와 무관해진다.
+ * 창고가 없거나 못 읽으면 데이터에 실린 값 그대로 — 화면은 절대 안 죽는다.
+ */
+async function overlayBriefTitles(
+    lanes: SourceLane[],
+): Promise<SourceLane[]> {
+    try {
+        const response = await fetch('/data/brief-titles.json', { cache: 'no-cache' });
+        if (!response.ok) return lanes;
+        const warehouse = await response.json() as {
+            titles?: Array<{ keyword?: string; seo?: string; home?: string; summary?: string }>;
+        };
+        const byKeyword = new Map(
+            (warehouse.titles || [])
+                .filter((entry) => typeof entry?.keyword === 'string' && entry.keyword.trim())
+                .map((entry) => [entry.keyword!.trim(), entry]),
+        );
+        if (byKeyword.size === 0) return lanes;
+        return lanes.map((lane) => ({
+            ...lane,
+            items: lane.items.map((item) => {
+                const cached = byKeyword.get(String(item.keyword || '').trim());
+                if (!cached || !item.insight) return item;
+                return {
+                    ...item,
+                    insight: {
+                        ...item.insight,
+                        titles: {
+                            ...item.insight.titles,
+                            ...(cached.seo ? { seo: cached.seo } : {}),
+                            ...(cached.home ? { home: cached.home } : {}),
+                            ...(cached.summary ? { summary: cached.summary } : {}),
+                        },
+                    },
+                };
+            }),
+        }));
+    } catch {
+        return lanes;
+    }
+}
+
 
 async function loadHomeLiveState(): Promise<HomeLiveState> {
     const fallback = buildFallbackHomeLiveState('error');
@@ -191,7 +239,7 @@ async function loadHomeLiveState(): Promise<HomeLiveState> {
     // 서버도 스냅샷도 죽었으면 빈 상태를 표시한다. 하드코딩 키워드를
     // LIVE로 위장하지 않고, 기사로 검증된 다음 스냅샷만 보여준다.
     if (!sourcePayload?.lanes?.some((lane) => (lane?.items || []).length > 0)) return fallback;
-    const lanes = normalizeSourceLanes(sourcePayload);
+    const lanes = await overlayBriefTitles(normalizeSourceLanes(sourcePayload));
     const hasLiveData = lanes.some((lane) => lane.items.length > 0);
     if (!hasLiveData) return fallback;
     writeCachedSourceLanes(sourcePayload);
