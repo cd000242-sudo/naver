@@ -1792,17 +1792,20 @@
                         </div>
                         <div class="editor-field-grid">
                             <div class="editor-field full">
-                                <label>관리자 메모</label>
-                                <input id="admin-ai-worker-note" type="text" placeholder="예: prod 서버 root 세션에서 Codex 로그인 확인">
+                                <label>GitHub 토큰 (작업자 실행용 — 이 브라우저에만 저장)</label>
+                                <!-- 작업자는 GitHub Actions 에서 사장님 구독(Claude Code OAuth)으로 돈다.
+                                     이 토큰은 워크플로를 트리거·조회하는 열쇠다. 터미널에서 gh auth token 으로 복사. -->
+                                <input id="admin-ai-worker-ghpat" type="password" placeholder="ghp_... 또는 gho_..." name="lw-nofill-ghpat" autocomplete="new-password" data-lpignore="true" data-1p-ignore="" data-form-type="other" spellcheck="false">
                             </div>
                             <div class="editor-field full">
                                 <label>적용 범위</label>
-                                <input value="키워드 발굴, 마인드맵 확장, 쇼핑커넥트 제품 판단, 네이버 메이트 확장" readonly>
+                                <input value="황금키워드 회차 보강, 실시간 클러스터, 서브·후킹 추론 (agent-worker.yml)" readonly>
                             </div>
                         </div>
                         <div class="editor-save-bar">
                             <button class="btn" type="button" onclick="saveAdminAiWorkerSettings()">관리자 작업자 저장</button>
-                            <button class="btn btn-gold" type="button" onclick="checkAdminAiWorkerSettings()">관리자 연동상태 확인</button>
+                            <button class="btn" type="button" onclick="checkAdminAiWorkerSettings()">관리자 연동상태 확인</button>
+                            <button class="btn btn-gold" type="button" onclick="runAdminAiWorkerTest()">⚡ 작업자 테스트 실행</button>
                         </div>
                         <div id="admin-ai-worker-status" style="margin-top:12px;color:var(--text-secondary);font-size:0.86rem;">관리자 페이지 로그인 세션으로 관리합니다.</div>
                     </div>
@@ -4882,21 +4885,93 @@
             initLewordDownloadUploads();
             loadLewordDownloadStatus().catch(() => {});
         }
+        /*
+         * AI 작업자 실배선(2026-08-17). 작업자의 실체는 GitHub Actions 의
+         * agent-worker.yml — 사장님 Claude 구독(OAuth 토큰 시크릿)으로 돈다.
+         * 예전 함수는 localStorage 에 적기만 하는 껍데기였다("설정 화면은 있는데
+         * 배선이 없다"). 이제 GitHub API 를 브라우저에서 직접 호출한다(CORS 지원).
+         * GitHub 토큰은 이 브라우저 localStorage 에만 둔다 — 관리자 1인용 화면이다.
+         */
+        const AI_WORKER_REPO = 'cd000242-sudo/leword-app';
+        const AI_WORKER_FILE = 'agent-worker.yml';
+
+        function adminGhToken() {
+            return (localStorage.getItem('leaderspro_admin_gh_pat') || '').trim();
+        }
+
+        function ghHeaders() {
+            return {
+                'Authorization': 'Bearer ' + adminGhToken(),
+                'Accept': 'application/vnd.github+json',
+                'X-GitHub-Api-Version': '2022-11-28',
+            };
+        }
+
+        function setAiWorkerStatus(text) {
+            const status = document.getElementById('admin-ai-worker-status');
+            if (status) status.textContent = text;
+        }
+
         function saveAdminAiWorkerSettings() {
             const provider = document.querySelector('input[name="admin-ai-worker-provider"]:checked')?.value || 'codex';
-            const note = document.getElementById('admin-ai-worker-note')?.value || '';
-            localStorage.setItem('leaderspro_admin_ai_worker', JSON.stringify({ provider, note, savedAt: new Date().toISOString() }));
-            const status = document.getElementById('admin-ai-worker-status');
-            if (status) status.textContent = '저장 완료: ' + provider + ' · 관리자 세션 기준';
+            const pat = document.getElementById('admin-ai-worker-ghpat')?.value?.trim() || '';
+            localStorage.setItem('leaderspro_admin_ai_worker', JSON.stringify({ provider, savedAt: new Date().toISOString() }));
+            if (pat) localStorage.setItem('leaderspro_admin_gh_pat', pat);
+            setAiWorkerStatus('저장 완료: ' + provider + (adminGhToken() ? ' · GitHub 토큰 있음' : ' · GitHub 토큰 없음(실행 불가)'));
             if (typeof showToast === 'function') showToast('LEWORD 관리자 설정을 저장했습니다.');
         }
 
-        function checkAdminAiWorkerSettings() {
-            const saved = JSON.parse(localStorage.getItem('leaderspro_admin_ai_worker') || '{}');
-            const status = document.getElementById('admin-ai-worker-status');
-            const auth = sessionStorage.getItem('admin_auth') === '1';
-            if (status) status.textContent = auth ? '관리자 로그인 확인 완료 · 작업자 ' + (saved.provider || 'codex') : '관리자 로그인이 필요합니다.';
-            if (typeof showToast === 'function') showToast(auth ? '관리자 연동상태 확인 완료' : '관리자 로그인이 필요합니다.');
+        async function checkAdminAiWorkerSettings() {
+            if (!adminGhToken()) {
+                setAiWorkerStatus('GitHub 토큰이 없습니다 — 터미널에서 gh auth token 을 복사해 위 칸에 넣고 저장하세요.');
+                return;
+            }
+            setAiWorkerStatus('작업자 최근 실행을 조회 중…');
+            try {
+                const response = await fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/workflows/${AI_WORKER_FILE}/runs?per_page=1`, { headers: ghHeaders() });
+                if (!response.ok) throw new Error('GitHub ' + response.status);
+                const data = await response.json();
+                const run = (data.workflow_runs || [])[0];
+                if (!run) { setAiWorkerStatus('작업자 워크플로는 연결됐지만 아직 실행 이력이 없습니다.'); return; }
+                setAiWorkerStatus(`최근 실행: ${run.status}${run.conclusion ? ' · ' + run.conclusion : ''} · ${new Date(run.created_at).toLocaleString('ko-KR')} — ${run.html_url}`);
+            } catch (err) {
+                setAiWorkerStatus('조회 실패: ' + (err && err.message || err) + ' — 토큰 권한(actions:read)을 확인하세요.');
+            }
+        }
+
+        async function runAdminAiWorkerTest() {
+            if (!adminGhToken()) {
+                setAiWorkerStatus('GitHub 토큰이 없습니다 — 먼저 토큰을 저장하세요.');
+                return;
+            }
+            setAiWorkerStatus('작업자 테스트를 실행 요청 중…');
+            try {
+                const dispatch = await fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/workflows/${AI_WORKER_FILE}/dispatches`, {
+                    method: 'POST',
+                    headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ref: 'main', inputs: { mode: 'test', prompt: '어드민 패널에서 보낸 연동 테스트다. 한 문장으로 응답해라.' } }),
+                });
+                if (dispatch.status !== 204) throw new Error('디스패치 실패 GitHub ' + dispatch.status);
+                setAiWorkerStatus('실행 시작됨 — 결과 대기 중(최대 3분)…');
+                // 새 런이 잡혀 완료될 때까지 폴링. 로그 본문은 Actions 페이지에서 본다.
+                const startedAt = Date.now();
+                while (Date.now() - startedAt < 180000) {
+                    await new Promise((resolve) => setTimeout(resolve, 8000));
+                    const response = await fetch(`https://api.github.com/repos/${AI_WORKER_REPO}/actions/workflows/${AI_WORKER_FILE}/runs?per_page=1`, { headers: ghHeaders() });
+                    if (!response.ok) continue;
+                    const run = ((await response.json()).workflow_runs || [])[0];
+                    if (!run) continue;
+                    if (run.status === 'completed') {
+                        setAiWorkerStatus((run.conclusion === 'success' ? '✅ 작업자 응답 성공' : '❌ 실패: ' + run.conclusion) + ' — 응답 본문: ' + run.html_url);
+                        if (typeof showToast === 'function') showToast(run.conclusion === 'success' ? 'AI 작업자 연동 테스트 성공' : 'AI 작업자 테스트 실패');
+                        return;
+                    }
+                    setAiWorkerStatus('실행 중… (' + run.status + ') ' + Math.round((Date.now() - startedAt) / 1000) + '초');
+                }
+                setAiWorkerStatus('3분 안에 안 끝났습니다 — Actions 페이지에서 확인하세요.');
+            } catch (err) {
+                setAiWorkerStatus('실행 실패: ' + (err && err.message || err) + ' — 토큰 권한(actions:write, workflow)을 확인하세요.');
+            }
         }
 
 

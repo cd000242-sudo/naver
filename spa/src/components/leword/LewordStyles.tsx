@@ -638,6 +638,9 @@ function LewordStyles() {
             }
             .lw-forge-subs { font-size: 12.5px; color: rgba(235,242,250,.75); line-height: 1.7; }
             .lw-forge-subs em { font-style: normal; margin-right: 10px; color: #fcd34d; }
+            .lw-forge-ai { border-left-color: rgba(90,169,255,.45); }
+            .lw-forge-ai a { color: #8ec5ff; text-decoration: none; }
+            .lw-forge-ai a:hover { text-decoration: underline; }
             .lw-plan-surface p { margin: 0 0 9px; color: rgba(235,242,250,.86); font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
             .lw-surface-rank { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
             .lw-surface-rank li { display: flex; gap: 9px; align-items: baseline; color: rgba(235,242,250,.8); font-size: 13px; }

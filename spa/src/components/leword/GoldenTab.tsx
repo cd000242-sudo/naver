@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import PreemptionPlan from './PreemptionPlan';
 import { naverSearchUrl, rowMatchesWriteLane } from './preemptionMeta';
+import { loadUserKeys } from '../../lib/userKeys';
+import { proposeAiSubKeywords, type AiSubSuggestion } from '../../lib/aiSubs';
 
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
@@ -114,6 +116,22 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [openPlan, setOpenPlan] = useState('');
     /** 방금 복사한 키워드. 눌렀는지 안 눌렀는지 모르면 두 번 누르게 된다. */
     const [copied, setCopied] = useState('');
+    /*
+     * AI 서브 보강(2026-08-17) — '내 API 키' 탭의 Anthropic 키가 있을 때만.
+     * 제안은 실존 미검증이므로 화면이 그 사실을 라벨로 밝히고 확인 링크를 붙인다.
+     */
+    const aiKey = (loadUserKeys().anthropicKey || '').trim();
+    const [aiSubs, setAiSubs] = useState<Record<string, { status: 'loading' | 'done' | 'error'; items?: AiSubSuggestion[]; error?: string }>>({});
+    const askAiSubs = async (keyword: string) => {
+        setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
+        try {
+            const items = await proposeAiSubKeywords(aiKey, keyword);
+            setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'done', items } }));
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
+        }
+    };
 
     useEffect(() => {
         let alive = true;
@@ -337,6 +355,16 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         <a href={dataLabUrl(row.keyword)} target="_blank" rel="noreferrer">
                                             그래프보기<small>네이버 데이터랩</small>
                                         </a>
+                                        {aiKey && (
+                                            <button
+                                                type="button"
+                                                onClick={() => askAiSubs(row.keyword)}
+                                                disabled={aiSubs[row.keyword]?.status === 'loading'}
+                                            >
+                                                {aiSubs[row.keyword]?.status === 'loading' ? 'AI 생각 중…' : '🤖 AI 서브 보강'}
+                                                <small>내 키로 직접 호출</small>
+                                            </button>
+                                        )}
                                         <button
                                             type="button"
                                             className="lw-copy"
@@ -348,6 +376,32 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             }}
                                         >{copied === row.keyword ? '복사됨' : '복사'}</button>
                                     </div>
+
+                                    {aiSubs[row.keyword]?.status === 'error' && (
+                                        <div className="lw-forge lw-forge-ai">
+                                            <div className="lw-forge-subs">AI 호출 실패: {aiSubs[row.keyword]?.error}</div>
+                                        </div>
+                                    )}
+                                    {aiSubs[row.keyword]?.status === 'done' && (
+                                        <div className="lw-forge lw-forge-ai">
+                                            <div className="lw-forge-subs">
+                                                {/*
+                                                  * 정직성: 브라우저에서는 검색광고/자동완성 결재를 못 돌린다(CORS).
+                                                  * 그래서 "검증 전"을 명시하고, 클릭 한 번으로 실검색 확인이 되는
+                                                  * 링크를 하나씩 붙인다 — 지어낸 검색어를 사실처럼 내보내지 않는다.
+                                                  */}
+                                                <span>🤖 AI 제안 · 검증 전</span>
+                                                {(aiSubs[row.keyword]?.items || []).length === 0 && '조건에 맞는 제안이 없습니다.'}
+                                                {(aiSubs[row.keyword]?.items || []).map((sub) => (
+                                                    <em key={sub.keyword}>
+                                                        <a href={naverSearchUrl(sub.keyword)} target="_blank" rel="noreferrer" title="네이버에서 실검색 확인">
+                                                            {sub.keyword}↗
+                                                        </a>
+                                                    </em>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
 
                                     {locked && (
                                         <div className="lw-lock" aria-hidden="true">

@@ -21,12 +21,13 @@ export type UserKeyField =
     | 'coupangAccessKey'
     | 'coupangSecretKey'
     | 'coupangSubId'
-    | 'brandconnectSpaceId';
+    | 'brandconnectSpaceId'
+    | 'anthropicKey';
 
 export type UserKeys = Partial<Record<UserKeyField, string>>;
 
 export type KeyGroup = {
-    id: 'searchad' | 'openapi' | 'youtube' | 'coupang' | 'brandconnect';
+    id: 'searchad' | 'openapi' | 'youtube' | 'coupang' | 'brandconnect' | 'ai';
     label: string;
     desc: string;
     /** 어디서 발급받는지. 사용자가 바로 갈 수 있어야 한다. */
@@ -93,6 +94,20 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
             { key: 'brandconnectSpaceId', label: '내 스페이스 ID', secret: false, placeholder: '876491907827712', minLength: 8 },
         ],
     },
+    {
+        /*
+         * AI 추론 연동(사장님 지시 2026-08-17). 키는 다른 그룹과 똑같이 이 브라우저에만
+         * 저장되고, AI 호출은 **브라우저에서 Anthropic 으로 직접** 나간다(우리 서버 없음,
+         * 경유지 없음). 비용은 사용자 본인 키·본인 과금이다.
+         */
+        id: 'ai',
+        label: 'AI 추론 (Claude)',
+        desc: '보드 키워드의 서브키워드·후킹을 AI 로 더 뽑을 때 씁니다. 이 브라우저에서 Anthropic 으로 직접 호출하며 서버를 거치지 않습니다.',
+        issueUrl: 'https://console.anthropic.com/settings/keys',
+        fields: [
+            { key: 'anthropicKey', label: 'Anthropic API 키', secret: true, placeholder: 'sk-ant-api03-...', minLength: 40 },
+        ],
+    },
 ];
 
 export function loadUserKeys(): UserKeys {
@@ -157,7 +172,7 @@ export function checkKeyShape(keys: UserKeys): { field: UserKeyField; label: str
                 problems.push({
                     field: field.key,
                     label: `${group.label} · ${field.label}`,
-                    reason: `${value.length}자 — 네이버가 주는 값은 ${field.minLength}자 이상입니다. 브라우저가 자동으로 채운 로그인 정보가 아닌지 확인해 주세요`,
+                    reason: `${value.length}자 — 이 자리에 발급되는 값은 ${field.minLength}자 이상입니다. 브라우저가 자동으로 채운 로그인 정보가 아닌지 확인해 주세요`,
                 });
             }
         }
