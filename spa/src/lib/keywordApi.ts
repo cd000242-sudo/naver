@@ -241,6 +241,9 @@ export async function fetchCoupangProducts(keyword: string) {
 export type AffiliateProduct = {
     name: string;
     keyword: string;
+    /** 니즈 검색어 — 사람들이 실제로 치는 검색어(검색광고 실측 최고 수요). */
+    needKeyword?: string | null;
+    needVolume?: number | null;
     price: number | null;
     wasPrice: number | null;
     discountPercent: number | null;

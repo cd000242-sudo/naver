@@ -129,6 +129,11 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                 {typeof row.price === 'number' && row.price > 0 && (
                                     <span className="lw-product-price"><strong>{row.price.toLocaleString('ko-KR')}원</strong></span>
                                 )}
+                                {row.needKeyword && row.needVolume ? (
+                                    <span className="lw-product-need" title="사람들이 실제로 치는 검색어와 월 검색량(실측). 이 검색어로 글을 써서 상품을 답으로 소개하는 것이 성과의 입구입니다.">
+                                        니즈 <strong>{row.needKeyword}</strong> 월 <strong>{row.needVolume.toLocaleString('ko-KR')}</strong>
+                                    </span>
+                                ) : null}
                                 <span>검색어 <strong>{row.keyword}</strong></span>
                                 <span>월 검색량 <strong>{row.searchVolume === null ? '—' : row.searchVolume.toLocaleString('ko-KR')}</strong></span>
                                 <span>문서수 <strong>{row.documentCount === null ? '—' : row.documentCount.toLocaleString('ko-KR')}</strong></span>
@@ -140,7 +145,8 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                             </div>
                         </div>
                         <div className="lw-product-actions">
-                            <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(row.keyword)}>LEWORD 키워드분석</button>
+                            {/* 분석·검색은 니즈 검색어 우선 — 상품명 검색어는 수요가 없다(실측 0~140). */}
+                            <button type="button" className="lw-act lw-act-blue" onClick={() => onAnalyze(row.needKeyword || row.keyword)}>LEWORD 키워드분석</button>
                             {lane === 'coupang' && (
                                 <a
                                     className="lw-act lw-act-orange"
@@ -161,7 +167,7 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                             {/* 정면 수치를 못 믿겠으면 직접 세어 보라 — 실측을 파는 보드는 검증 동선까지 줘야 한다. */}
                             <a
                                 className="lw-act lw-act-green"
-                                href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(row.keyword)}`}
+                                href={`https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(row.needKeyword || row.keyword)}`}
                                 target="_blank"
                                 rel="noreferrer"
                             >네이버 검색분석</a>
