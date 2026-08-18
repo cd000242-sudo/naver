@@ -64,8 +64,9 @@ export interface BridgeMindmap {
     /** 광고 수익 관점 결론 — 클릭할까·무슨 광고가 뜰까·머물까를 따진 질적 판단. */
     monetize?: {
         verdict: 'good' | 'bad' | 'mixed';
-        points: Array<{ text: string; basis: string }>;
-        angle: string;
+        // basis 는 브리지 라이브 결과에만 있다 — 회차에 구운 판정은 text 만 싣는다.
+        points: Array<{ text: string; basis?: string }>;
+        angle?: string;
     } | null;
     agent: { available: boolean; provider: string; proposed: number; verified: number; error?: string };
 }

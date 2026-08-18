@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import PreemptionPlan from './PreemptionPlan';
 import { naverSearchUrl, rowMatchesWriteLane } from './preemptionMeta';
-import { bridgeAiSubs, bridgeMindmap, bridgeTrend, type BridgeMindmap, type BridgeTrend } from '../../lib/bridge';
+import { bridgeMindmap, bridgeTrend, type BridgeMindmap, type BridgeTrend } from '../../lib/bridge';
 
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
@@ -59,8 +59,10 @@ type PreemptionRow = {
     adsenseFit?: boolean | null;
     /** 보강이 붙인 수익 결론 — bad 는 애드센스 레인에서 빠진다(이유는 카드에 남는다). */
     monetize?: { verdict: 'good' | 'bad' | 'mixed'; points: Array<{ text: string }>; angle?: string } | null;
-    /** 실측 키워드 풀(연관 실측 + AI 검증분) — 전부 검색량이 확인된 실존 검색어다. */
-    keywordPool?: Array<{ keyword: string; searchVolume: number | null; source?: string }> | null;
+    /** 실측 키워드 풀(연관 실측 + AI 검증분) — 검색량·문서수가 붙은 실존 검색어다. */
+    keywordPool?: Array<{ keyword: string; searchVolume: number | null; documentCount?: number | null; source?: string }> | null;
+    /** 30일 트렌드(데이터랩 상대값 실측) — 회차가 구워 준다. 폰에서도 그려진다. */
+    trend?: { series: number[]; label?: string; recommendation?: string } | null;
     adsenseReason?: string;
     /** 회차 실측으로 만든 제목 2종(SEO/홈판). 옛 회차 데이터에는 없다. */
     titles?: {
@@ -125,12 +127,10 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
      * (자동완성 실측→규칙 선별→AI 제안→실존 결재)을 통째로 돌려준다.
      * 그래서 결과는 전부 검증된 실존 검색어다. 앱이 꺼져 있으면 안내만 한다.
      */
-    const [aiSubs, setAiSubs] = useState<Record<string, {
-        status: 'loading' | 'done' | 'offline' | 'error';
-        items?: Array<{ keyword: string; searchVolume: number | null; source?: string }>;
-        ai?: { used: boolean; provider: string; proposed: number; verified: number };
-        error?: string;
-    }>>({});
+    /*
+     * [2026-08-18] 'AI 서브 보강' 온디맨드 기능 제거 — 서브키워드가 회차
+     * 보강에서 이미 구워져 오므로 같은 일을 두 번 시키는 군더더기였다.
+     */
     /*
      * 마인드맵 — 앱으로 보내는 링크였던 것을 실제 기능으로 바꾼다.
      * 브리지가 사용자 PC 의 앱을 통해 본인 구독으로 돌린다. 앱이 꺼져 있으면
@@ -144,16 +144,42 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         related?: Array<{ keyword: string; status: 'loading' | 'done' | 'error'; data?: BridgeMindmap }>;
     }>>({});
 
-    const openMindmap = async (keyword: string) => {
+    const openMindmap = async (row: PreemptionRow) => {
+        const keyword = row.keyword;
         if (mindmap[keyword]?.status === 'done') {
             setMindmap((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
             return;
         }
-        setMindmap((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
+
+        /*
+         * 회차가 구워 준 실측(키워드 풀 + 수익 판정)이 1순위다 — 폰에서도
+         * 즉시 펼쳐진다. 예전엔 브리지(사용자 PC 앱)만 봤는데, 폰에는 브리지가
+         * 없으니 "앱이 꺼져 있다"는 안내가 떴다(사장님: "연동 안 돼 있다고
+         * 헛소리"). 브리지는 있으면 라이브 분석으로 **더** 얹는 보너스다.
+         */
+        const baked: BridgeMindmap | null = (row.keywordPool?.length ?? 0) > 0 ? {
+            keyword,
+            reasons: [],
+            expansions: (row.keywordPool || []).map((p) => ({
+                keyword: p.keyword,
+                searchVolume: p.searchVolume ?? null,
+                source: p.source || 'searchad-related',
+            })),
+            signals: ['검색량', '문서수'],
+            monetize: row.monetize || null,
+            agent: { available: false, provider: '회차 실측', proposed: 0, verified: 0 },
+        } : null;
+
+        if (baked) {
+            setMindmap((prev) => ({ ...prev, [keyword]: { status: 'done', data: baked } }));
+        } else {
+            setMindmap((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
+        }
+
         try {
             const result = await bridgeMindmap(keyword);
             if (!result) {
-                setMindmap((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
+                if (!baked) setMindmap((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
                 return;
             }
             setMindmap((prev) => ({ ...prev, [keyword]: { status: 'done', data: result } }));
@@ -195,8 +221,11 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 });
             }
         } catch (error) {
-            const message = error instanceof Error ? error.message : String(error);
-            setMindmap((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
+            // 구운 데이터가 이미 떠 있으면 라이브 실패는 조용히 넘긴다.
+            if (!baked) {
+                const message = error instanceof Error ? error.message : String(error);
+                setMindmap((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
+            }
         }
     };
 
@@ -209,39 +238,38 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         data?: BridgeTrend;
     }>>({});
 
-    const openTrend = async (keyword: string) => {
-        if (trend[keyword]?.status === 'done') {
+    const openTrend = async (row: PreemptionRow) => {
+        const keyword = row.keyword;
+        if (trend[keyword]?.status === 'done' || trend[keyword]?.status === 'error') {
             setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
+            return;
+        }
+        /*
+         * 회차가 구워 준 실측이 1순위다 — 폰에서도 즉시 그려진다. 예전엔
+         * 브리지(사용자 PC 앱) 실패 시 데이터랩 새 창으로 튕겼는데, 폰에는
+         * 브리지가 없으니 버튼이 광고 낀 외부 페이지로 가는 꼴이 됐다(사장님
+         * 실측). 새 창 자동 열기는 하지 않는다.
+         */
+        if (row.trend && (row.trend.series || []).length > 0) {
+            setTrend((prev) => ({
+                ...prev,
+                [keyword]: {
+                    status: 'done',
+                    data: { success: true, series: row.trend!.series, analysis: { label: row.trend!.label, recommendation: row.trend!.recommendation } },
+                },
+            }));
             return;
         }
         setTrend((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
         try {
             const result = await bridgeTrend(keyword);
             if (!result || !result.success || !(result.series || []).length) {
-                // 앱이 꺼져 있거나 실측 실패 — 데이터랩으로 폴백(새 창).
-                setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
-                window.open(dataLabUrl(keyword), '_blank', 'noreferrer');
+                setTrend((prev) => ({ ...prev, [keyword]: { status: 'error' } }));
                 return;
             }
             setTrend((prev) => ({ ...prev, [keyword]: { status: 'done', data: result } }));
         } catch {
-            setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
-            window.open(dataLabUrl(keyword), '_blank', 'noreferrer');
-        }
-    };
-
-    const askAiSubs = async (keyword: string) => {
-        setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
-        try {
-            const result = await bridgeAiSubs(keyword);
-            if (!result) {
-                setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
-                return;
-            }
-            setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'done', items: result.subs || [], ai: result.ai } }));
-        } catch (error) {
-            const message = error instanceof Error ? error.message : String(error);
-            setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
+            setTrend((prev) => ({ ...prev, [keyword]: { status: 'error' } }));
         }
     };
 
@@ -447,9 +475,14 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                     target="_blank"
                                                     rel="noreferrer"
                                                     className={item.source === 'ai-verified' ? 'lw-mindmap-ai' : ''}
+                                                    title={`월 검색량 ${item.searchVolume?.toLocaleString() ?? '실측'} · 문서수 ${typeof item.documentCount === 'number' ? item.documentCount.toLocaleString() : '미측정'}`}
                                                 >
                                                     {item.keyword}
-                                                    <span>{item.searchVolume ? item.searchVolume.toLocaleString() : '실측'}</span>
+                                                    {/* 검색량/문서수 — 사장님 지정 표기(177,500 / 2,345). 문서수가 곧 경쟁이다. */}
+                                                    <span>
+                                                        {item.searchVolume ? item.searchVolume.toLocaleString() : '실측'}
+                                                        {typeof item.documentCount === 'number' ? ` / ${item.documentCount.toLocaleString()}` : ''}
+                                                    </span>
                                                 </a>
                                             ))}
                                         </div>
@@ -492,7 +525,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                           */}
                                         <button
                                             type="button"
-                                            onClick={() => openMindmap(row.keyword)}
+                                            onClick={() => openMindmap(row)}
                                             disabled={mindmap[row.keyword]?.status === 'loading'}
                                         >
                                             {mindmap[row.keyword]?.status === 'loading' ? '확장 중…' : '마인드맵 확장키워드'}
@@ -501,20 +534,17 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         {/* 앱과 같은 30일 실측 그래프. 앱이 꺼져 있으면 데이터랩 새 창 폴백. */}
                                         <button
                                             type="button"
-                                            onClick={() => openTrend(row.keyword)}
+                                            onClick={() => openTrend(row)}
                                             disabled={trend[row.keyword]?.status === 'loading'}
                                         >
                                             {trend[row.keyword]?.status === 'loading' ? '불러오는 중…' : '그래프보기'}
                                             <small>30일 실측</small>
                                         </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => askAiSubs(row.keyword)}
-                                            disabled={aiSubs[row.keyword]?.status === 'loading'}
-                                        >
-                                            {aiSubs[row.keyword]?.status === 'loading' ? '클로드코드 추론 중…' : '🤖 AI 서브 보강'}
-                                            <small>내 클로드코드 구독</small>
-                                        </button>
+                                        {/*
+                                          * 'AI 서브 보강' 버튼은 뺐다(사장님 지시 2026-08-18) —
+                                          * 서브키워드가 회차 보강에서 이미 구워져 오므로 온디맨드
+                                          * 버튼은 같은 일을 두 번 시키는 군더더기였다.
+                                          */}
                                         <button
                                             type="button"
                                             className="lw-copy"
@@ -526,6 +556,15 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             }}
                                         >{copied === row.keyword ? '복사됨' : '복사'}</button>
                                     </div>
+
+                                    {trend[row.keyword]?.status === 'error' && (
+                                        <div className="lw-forge lw-forge-ai">
+                                            <div className="lw-forge-subs">
+                                                이 행은 트렌드 실측이 아직 없습니다 — 다음 회차부터 카드 안에 그려집니다.
+                                                지금 보려면 <a href={dataLabUrl(row.keyword)} target="_blank" rel="noreferrer">네이버 데이터랩</a>에서 확인하세요.
+                                            </div>
+                                        </div>
+                                    )}
 
                                     {/* 30일 트렌드 — 데이터랩 상대값(최대일=100). 막대는 실측 그대로다. */}
                                     {trend[row.keyword]?.status === 'done' && (() => {
@@ -643,42 +682,6 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                     </div>
                                                 );
                                             })()}
-                                        </div>
-                                    )}
-
-                                    {aiSubs[row.keyword]?.status === 'offline' && (
-                                        <div className="lw-forge lw-forge-ai">
-                                            <div className="lw-forge-subs">
-                                                LEWORD 앱이 꺼져 있습니다 — 앱을 켜면 이 버튼이 <strong>내 클로드코드 구독</strong>으로
-                                                무료 추론합니다. <a href="/download">⬇ 앱 받기</a>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {aiSubs[row.keyword]?.status === 'error' && (
-                                        <div className="lw-forge lw-forge-ai">
-                                            <div className="lw-forge-subs">추론 실패: {aiSubs[row.keyword]?.error}</div>
-                                        </div>
-                                    )}
-                                    {aiSubs[row.keyword]?.status === 'done' && (
-                                        <div className="lw-forge lw-forge-ai">
-                                            <div className="lw-forge-subs">
-                                                {/* 앱의 추론 체인이 실존 결재까지 마친 결과다 — 검증된 검색어만 온다. */}
-                                                <span>🤖 클로드코드 서브 (실측 검증됨)</span>
-                                                {(aiSubs[row.keyword]?.items || []).length === 0 && '검증을 통과한 파생이 없습니다 — 지어내지 않습니다.'}
-                                                {(aiSubs[row.keyword]?.items || []).map((sub) => (
-                                                    <em key={sub.keyword}>
-                                                        <a href={naverSearchUrl(sub.keyword)} target="_blank" rel="noreferrer" title="네이버에서 확인">
-                                                            {sub.keyword}
-                                                        </a>
-                                                        {typeof sub.searchVolume === 'number' ? ` (${sub.searchVolume.toLocaleString()})` : ''}
-                                                    </em>
-                                                ))}
-                                                {aiSubs[row.keyword]?.ai?.used && (
-                                                    <div style={{ fontSize: 11, opacity: .7, marginTop: 4 }}>
-                                                        {aiSubs[row.keyword]?.ai?.provider} 제안 {aiSubs[row.keyword]?.ai?.proposed}건 → 실측 검증 통과 {aiSubs[row.keyword]?.ai?.verified}건
-                                                    </div>
-                                                )}
-                                            </div>
                                         </div>
                                     )}
 
