@@ -29,6 +29,9 @@ interface SettingsModalElements {
     deepinfraApiKeyInput: HTMLInputElement | null; // ✅ [2026-01-26] DeepInfra API 키 추가
     naverClientIdInput: HTMLInputElement | null;
     naverClientSecretInput: HTMLInputElement | null;
+    // ✅ [2026-08] NAVER API HUB 키 (네이버클라우드) — 기존 키와 병행 보관
+    naverHubClientIdInput: HTMLInputElement | null;
+    naverHubClientSecretInput: HTMLInputElement | null;
     // AI 설정
     defaultAiProviderSelect: HTMLSelectElement | null;
     geminiModelSelect: HTMLSelectElement | null;
@@ -45,6 +48,8 @@ const INLINE_SECRET_SCHEMA_RE = /\s*(?:schema|스키마)\s*[:=]\s*/gi;
 const SCHEMA_TEXT_PRESERVED_SECRET_INPUT_IDS = new Set([
     'naver-client-secret',
     'settings-naver-client-secret',
+    'naver-hub-client-secret',
+    'settings-naver-hub-client-secret',
 ]);
 
 function tryExtractJsonSecret(raw: string): string {
@@ -154,6 +159,8 @@ function getElements(): SettingsModalElements {
         deepinfraApiKeyInput: getInputByIds('settings-deepinfra-api-key', 'deepinfra-api-key'),
         naverClientIdInput: getInputByIds('settings-naver-client-id', 'naver-client-id'),
         naverClientSecretInput: getInputByIds('settings-naver-client-secret', 'naver-client-secret'),
+        naverHubClientIdInput: getInputByIds('settings-naver-hub-client-id', 'naver-hub-client-id'),
+        naverHubClientSecretInput: getInputByIds('settings-naver-hub-client-secret', 'naver-hub-client-secret'),
         // AI 설정
         defaultAiProviderSelect: getSelectByIds('settings-default-ai-provider'),
         geminiModelSelect: getSelectByIds('settings-gemini-model'),
@@ -310,6 +317,10 @@ async function loadCurrentSettings(): Promise<void> {
             els.naverClientIdInput.value = config.naverClientId;
         }
         setApiInputValue(els.naverClientSecretInput, config.naverClientSecret);
+        if (els.naverHubClientIdInput && config.naverHubClientId) {
+            els.naverHubClientIdInput.value = config.naverHubClientId;
+        }
+        setApiInputValue(els.naverHubClientSecretInput, config.naverHubClientSecret);
         // ✅ [2026-01-26] DeepInfra API 키 로드
         setApiInputValue(els.deepinfraApiKeyInput, config.deepinfraApiKey);
 
@@ -398,6 +409,8 @@ async function saveSettings(): Promise<void> {
         const deepinfraKey = readApiInput(els.deepinfraApiKeyInput, currentConfig.deepinfraApiKey);
         const naverClientId = els.naverClientIdInput?.value || '';
         const naverClientSecret = readApiInput(els.naverClientSecretInput, currentConfig.naverClientSecret);
+        const naverHubClientId = els.naverHubClientIdInput?.value || '';
+        const naverHubClientSecret = readApiInput(els.naverHubClientSecretInput, currentConfig.naverHubClientSecret);
         const selectedTextModel = (
             document.querySelector('input[name="primaryGeminiTextModel"]:checked') as HTMLInputElement | null
         )?.value || currentConfig.primaryGeminiTextModel;
@@ -419,6 +432,8 @@ async function saveSettings(): Promise<void> {
             deepinfraApiKey: deepinfraKey, // ✅ [2026-01-26] DeepInfra 저장
             naverClientId: naverClientId,
             naverClientSecret: naverClientSecret,
+            naverHubClientId: naverHubClientId,
+            naverHubClientSecret: naverHubClientSecret,
             primaryGeminiTextModel: safeTextSelection.model,
             defaultAiProvider: safeTextSelection.provider,
             geminiModel: els.geminiModelSelect?.value || 'gemini-3.1-flash-lite',
@@ -509,6 +524,7 @@ export function initSettingsModal(): void {
             els.leonardoaiApiKeyInput,
             els.deepinfraApiKeyInput,
             els.naverClientSecretInput,
+            els.naverHubClientSecretInput,
         ];
         apiKeyInputs.forEach(input => {
             if (input) {

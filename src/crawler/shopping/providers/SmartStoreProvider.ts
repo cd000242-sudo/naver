@@ -8,6 +8,7 @@
  */
 
 import { BaseProvider } from './BaseProvider.js';
+import { callNaverSearch, resolveAllNaverCredentials } from '../../../naver/index.js';
 import {
     CollectionResult,
     CollectionStrategy,
@@ -968,14 +969,14 @@ export class SmartStoreProvider extends BaseProvider {
             }
 
             const query = storeName ? `${storeName} ${productId}` : productId;
-            const apiUrl = `https://openapi.naver.com/v1/search/shop.json?query=${encodeURIComponent(query)}&display=20`;
-            const response = await fetch(apiUrl, {
-                headers: {
-                    'X-Naver-Client-Id': clientId,
-                    'X-Naver-Client-Secret': clientSecret,
-                    'Accept': 'application/json',
-                },
-            });
+            // [2026-08] 쇼핑 검색 API 는 2026-07-31 종료(대체 없음) — 게이트웨이가 네트워크 호출 없이
+            //           실패를 돌려주고, 이 전략은 실패로 처리돼 다음 전략으로 넘어간다.
+            const shopResult = await callNaverSearch<any>(
+                'shop',
+                { query, display: 20 },
+                { credentials: resolveAllNaverCredentials({ naverClientId: clientId, naverClientSecret: clientSecret }) },
+            );
+            const response = { ok: shopResult.ok, status: shopResult.status, json: async () => shopResult.data ?? {} };
 
             if (!response.ok) {
                 return {

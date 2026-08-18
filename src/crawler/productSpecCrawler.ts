@@ -10,6 +10,7 @@ import { getChromiumExecutablePath } from '../browserUtils.js';
 import type { TableRow } from '../image/tableImageGenerator.js';
 // ✅ [100점 개선] 공식 네이버 쇼핑 API import (429 에러 시 폴백용)
 import { searchShopping, stripHtmlTags, type ShoppingItem } from '../naverSearchApi.js';
+import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from '../naver/index.js';
 // ✅ [2026-04-21] 네이버 스토어 가격 다중 폴백 (난독화 class 변경 대응)
 import { extractNaverStorePrice } from './naverStorePriceExtractor.js';
 import { mergeOfficialNaverProductGallery } from './shopping/utils/officialNaverProductGallery.js';
@@ -1700,7 +1701,7 @@ export async function crawlBrandStoreProduct(
     const naverClientId = process.env.NAVER_CLIENT_ID;
     const naverClientSecret = process.env.NAVER_CLIENT_SECRET;
 
-    if (!naverClientId || !naverClientSecret) {
+    if (!naverSearchAvailable(naverClientId, naverClientSecret)) {
         console.log('[BrandStore] ⚠️ 네이버 API 키가 없습니다.');
         return null;
     }
@@ -1708,15 +1709,14 @@ export async function crawlBrandStoreProduct(
     try {
         console.log(`[BrandStore] 🔍 네이버 쇼핑 API 검색: "${brandName}"`);
 
-        const searchUrl = `https://openapi.naver.com/v1/search/shop.json?query=${encodeURIComponent(brandName)}&display=50&sort=sim`;
-
-        const response = await axios.get(searchUrl, {
-            headers: {
-                'X-Naver-Client-Id': naverClientId,
-                'X-Naver-Client-Secret': naverClientSecret
-            },
-            timeout: 15000
-        });
+        // [2026-08] 쇼핑 검색 API 는 2026-07-31 종료 — 게이트웨이가 호출 없이 실패를 돌려주고
+        //           아래 OG 태그 폴백으로 흐른다.
+        const shopResult = await callNaverSearch<any>(
+            'shop',
+            { query: brandName, display: 50, sort: 'sim' },
+            { credentials: resolveAllNaverCredentials(), timeoutMs: 15000 },
+        );
+        const response = { data: shopResult.data ?? {} };
 
         if (!response.data?.items?.length) {
             console.log('[BrandStore] ⚠️ 검색 결과 없음');
@@ -1812,14 +1812,12 @@ export async function crawlBrandStoreProduct(
         if (allImages.length < 5) {
             console.log(`[BrandStore] 📷 이미지 부족(${allImages.length}개) → 상품명으로 추가 검색...`);
             try {
-                const productSearchUrl = `https://openapi.naver.com/v1/search/shop.json?query=${encodeURIComponent(productTitle)}&display=20&sort=sim`;
-                const productResponse = await axios.get(productSearchUrl, {
-                    headers: {
-                        'X-Naver-Client-Id': naverClientId,
-                        'X-Naver-Client-Secret': naverClientSecret
-                    },
-                    timeout: 10000
-                });
+                const productShopResult = await callNaverSearch<any>(
+                    'shop',
+                    { query: productTitle, display: 20, sort: 'sim' },
+                    { credentials: resolveAllNaverCredentials(), timeoutMs: 10000 },
+                );
+                const productResponse = { data: productShopResult.data ?? {} };
 
                 if (productResponse.data?.items?.length) {
                     for (const item of productResponse.data.items) {
@@ -1843,14 +1841,12 @@ export async function crawlBrandStoreProduct(
         if (allImages.length < 5) {
             console.log(`[BrandStore] 📷 이미지 여전히 부족(${allImages.length}개) → 이미지 검색 API 시도...`);
             try {
-                const imageSearchUrl = `https://openapi.naver.com/v1/search/image?query=${encodeURIComponent(productTitle + ' 제품')}&display=10&sort=sim&filter=large`;
-                const imageResponse = await axios.get(imageSearchUrl, {
-                    headers: {
-                        'X-Naver-Client-Id': naverClientId,
-                        'X-Naver-Client-Secret': naverClientSecret
-                    },
-                    timeout: 10000
-                });
+                const imageResult = await callNaverSearch<any>(
+                    'image',
+                    { query: `${productTitle} 제품`, display: 10, sort: 'sim', filter: 'large' },
+                    { credentials: resolveAllNaverCredentials(), timeoutMs: 10000 },
+                );
+                const imageResponse = { data: imageResult.data ?? {} };
 
                 if (imageResponse.data?.items?.length) {
                     for (const item of imageResponse.data.items) {
@@ -2079,22 +2075,18 @@ async function fetchProductByIdDirectly(productId: string, originalUrl: string):
         const storeMatch = originalUrl.match(/(?:m\.)?smartstore\.naver\.com\/([^\/\?]+)/);
         const storeName = brandMatch?.[1] || storeMatch?.[1] || '';
 
-        if (naverClientId && naverClientSecret && productId) {
+        if (naverSearchAvailable(naverClientId, naverClientSecret) && productId) {
             try {
                 // 스토어명 + 상품번호로 검색 (더 정확한 결과)
                 const searchQuery = storeName || productId;
                 console.log(`[AffiliateCrawler] 🔍 네이버 쇼핑 API 검색: "${searchQuery}"`);
 
-                const axios = await import('axios');
-                const searchUrl = `https://openapi.naver.com/v1/search/shop.json?query=${encodeURIComponent(searchQuery)}&display=30&sort=sim`;
-
-                const apiResponse = await axios.default.get(searchUrl, {
-                    headers: {
-                        'X-Naver-Client-Id': naverClientId,
-                        'X-Naver-Client-Secret': naverClientSecret
-                    },
-                    timeout: 10000
-                });
+                const affiliateResult = await callNaverSearch<any>(
+                    'shop',
+                    { query: searchQuery, display: 30, sort: 'sim' },
+                    { credentials: resolveAllNaverCredentials(), timeoutMs: 10000 },
+                );
+                const apiResponse = { data: affiliateResult.data ?? {} };
 
                 if (apiResponse.data?.items?.length > 0) {
                     // productId가 포함된 링크를 가진 상품 찾기

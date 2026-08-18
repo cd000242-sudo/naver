@@ -1,3 +1,5 @@
+import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
+import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
 import Parser from 'rss-parser';
 import * as iconv from 'iconv-lite';
 import type { ContentSource, ContentGeneratorProvider, ArticleType } from './contentGenerator.js';
@@ -39,6 +41,33 @@ function createTimeoutSignal(timeoutMs: number): AbortSignal | undefined {
 
 // ✅ 한국 사이트 인코딩 자동 감지 및 변환 (EUC-KR, CP949 등 지원)
 // ✅ [FIX] URL 파라미터 추가 - 네이버 도메인은 강제 UTF-8
+/**
+ * [2026-08 API HUB] 네이버 검색 어댑터 — URL/헤더/키선택/자동 토스는 게이트웨이가 담당한다.
+ * 호출부는 기존 Response 형태를 그대로 쓴다(회귀 표면 최소화).
+ */
+async function naverSearchResponse(
+  type: NaverSearchType,
+  params: NaverSearchParams,
+  clientId?: string,
+  clientSecret?: string,
+): Promise<{ ok: boolean; status: number; statusText: string; json: () => Promise<any> }> {
+  const credentials = resolveAllNaverCredentials(
+    clientId && clientSecret ? { naverClientId: clientId, naverClientSecret: clientSecret } : undefined,
+  );
+  const result = await callNaverSearch<any>(type, params, {
+    credentials,
+    maxAttempts: Math.max(2, credentials.length),
+    rotateOnQuota: true,
+  });
+  return {
+    ok: result.ok,
+    status: result.status,
+    statusText: result.error || '',
+    json: async () => result.data ?? {},
+  };
+}
+
+
 async function decodeResponseWithCharset(response: Response, url?: string): Promise<string> {
   // 1. Content-Type 헤더에서 charset 확인
   const contentType = response.headers.get('content-type') || '';
@@ -638,7 +667,7 @@ async function fallbackToNaverShoppingApi(
     console.log(`[API 폴백] ⚠️ Secret API 실패 → 네이버 쇼핑 API로 폴백`);
   }
 
-  if (!clientId || !clientSecret) {
+  if (!naverSearchAvailable(clientId, clientSecret)) {
     console.log('[API 폴백] ⚠️ 네이버 API 키 없음 - 폴백 불가');
     return null;
   }
@@ -672,13 +701,8 @@ async function fallbackToNaverShoppingApi(
 
   try {
     // 네이버 쇼핑 API 호출
-    const apiUrl = `https://openapi.naver.com/v1/search/shop.json?query=${encodeURIComponent(searchQuery)}&display=10`;
-    const response = await fetch(apiUrl, {
-      headers: {
-        'X-Naver-Client-Id': clientId,
-        'X-Naver-Client-Secret': clientSecret
-      }
-    });
+    // 쇼핑 검색 API 는 2026-07-31 종료됐다 — 게이트웨이가 네트워크 호출 없이 410 을 돌려준다.
+    const response = await naverSearchResponse('shop', { query: searchQuery, display: 10 }, clientId, clientSecret);
 
     // ✅ [2026-01-31] Quota Error (429) 처리 - 프로그램 절대 죽지 않음
     if (!response.ok) {
@@ -693,7 +717,15 @@ async function fallbackToNaverShoppingApi(
           description: `API 할당량 초과로 자동 크롤링 실패. URL: ${url}`
         };
       }
-      throw new Error(`API 응답 오류: ${response.status}`);
+      console.warn(`[API 폴백] ⚠️ ${response.statusText || `API 응답 오류: ${response.status}`}`);
+      return {
+        images: [],
+        title: '[수동 확인 필요] 쇼핑 검색 API 종료',
+        price: undefined,
+        mallName: undefined,
+        brand: undefined,
+        description: `네이버 쇼핑 검색 API 가 종료되어 자동 수집이 불가합니다. URL: ${url}`
+      };
     }
 
     const data = await response.json() as any;
@@ -746,18 +778,14 @@ async function searchNaverForContent(
   const results: NaverSearchResult[] = [];
 
   try {
-    const fetchImpl = await ensureFetch();
-    const encodedQuery = encodeURIComponent(query);
-    const url = `https://openapi.naver.com/v1/search/${searchType}.json?query=${encodedQuery}&display=${displayCount}&sort=${sort}`;
-
     console.log(`[네이버 검색 API] "${query}" 검색 중 (${searchType}, ${displayCount}개)...`);
 
-    const response = await fetchImpl(url, {
-      headers: {
-        'X-Naver-Client-Id': clientId,
-        'X-Naver-Client-Secret': clientSecret,
-      },
-    });
+    const response = await naverSearchResponse(
+      searchType,
+      { query, display: displayCount, sort },
+      clientId,
+      clientSecret,
+    );
 
     if (!response.ok) {
       console.warn(`[네이버 검색 API] HTTP ${response.status}: ${response.statusText}`);
@@ -814,18 +842,10 @@ async function searchNaverShopping(
   const results: NaverShoppingResult[] = [];
 
   try {
-    const fetchImpl = await ensureFetch();
-    const encodedQuery = encodeURIComponent(query);
-    const url = `https://openapi.naver.com/v1/search/shop.json?query=${encodedQuery}&display=${displayCount}&sort=sim`;
-
     console.log(`[네이버 쇼핑 API] "${query}" 검색 중...`);
 
-    const response = await fetchImpl(url, {
-      headers: {
-        'X-Naver-Client-Id': clientId,
-        'X-Naver-Client-Secret': clientSecret,
-      },
-    });
+    // 2026-07-31 종료 — 게이트웨이가 호출 없이 410 을 돌려주고 아래에서 빈 결과로 흐른다.
+    const response = await naverSearchResponse('shop', { query, display: displayCount, sort: 'sim' }, clientId, clientSecret);
 
     if (!response.ok) {
       console.warn(`[네이버 쇼핑 API] HTTP ${response.status}`);
@@ -875,20 +895,16 @@ async function searchNaverImages(
   const results: NaverImageResult[] = [];
 
   try {
-    const fetchImpl = await ensureFetch();
-    const encodedQuery = encodeURIComponent(query);
-    // ✅ sort=date로 최신순 정렬 (발행날짜에 뜨는 이미지 우선)
     const sortParam = sortByDate ? 'date' : 'sim';
-    const url = `https://openapi.naver.com/v1/search/image?query=${encodedQuery}&display=${displayCount}&sort=${sortParam}&filter=${filter}`;
 
     console.log(`[네이버 이미지 API] "${query}" 검색 중 (필터: ${filter})...`);
 
-    const response = await fetchImpl(url, {
-      headers: {
-        'X-Naver-Client-Id': clientId,
-        'X-Naver-Client-Secret': clientSecret,
-      },
-    });
+    const response = await naverSearchResponse(
+      'image',
+      { query, display: displayCount, sort: sortParam, filter },
+      clientId,
+      clientSecret,
+    );
 
     if (!response.ok) {
       console.warn(`[네이버 이미지 API] HTTP ${response.status}`);
@@ -1770,8 +1786,8 @@ async function fetchContentWithNaverFallback(
   }
 
   // ✅ 네이버 API로 빠른 콘텐츠 수집
-  if (naverClientId && naverClientSecret) {
-    const result = await collectNaverSearchContent(keywords, naverClientId, naverClientSecret);
+  if (naverSearchAvailable(naverClientId, naverClientSecret)) {
+    const result = await collectNaverSearchContent(keywords, (naverClientId ?? ''), (naverClientSecret ?? ''));
 
     if (result.content.length > 500) {
       return {
@@ -3022,23 +3038,23 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
       // URL에서 제품명 추출 시도
       const productName = await extractProductNameFromUrl(url);
 
-      if (productName && options.naverClientId && options.naverClientSecret) {
+      if (productName && naverSearchAvailable(options.naverClientId, options.naverClientSecret)) {
         console.log(`[스마트스토어] 제품명 추출: "${productName}"`);
 
         try {
           // 네이버 쇼핑 API로 제품 정보 검색
           const shoppingResults = await searchNaverShopping(
             productName,
-            options.naverClientId,
-            options.naverClientSecret,
+            (options.naverClientId ?? ''),
+            (options.naverClientSecret ?? ''),
             10
           );
 
           // 네이버 이미지 API로 이미지 검색
           const imageResults = await searchNaverImages(
             productName,
-            options.naverClientId,
-            options.naverClientSecret,
+            (options.naverClientId ?? ''),
+            (options.naverClientSecret ?? ''),
             30
           );
 
@@ -3124,7 +3140,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
     let finalUrl = url;
 
     // ✅ 쇼핑몰 URL이면 네이버 API를 먼저 시도 (빠르고 안정적)
-    if ((isPartnerLink || isShoppingMall) && !forceProductPage && options.naverClientId && options.naverClientSecret) {
+    if ((isPartnerLink || isShoppingMall) && !forceProductPage && naverSearchAvailable(options.naverClientId, options.naverClientSecret)) {
       console.log(`[쇼핑몰 크롤링] 🔍 네이버 API 우선 시도...`);
 
       // URL에서 제품명 추출
@@ -5005,7 +5021,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
     }
 
     // ✅ 100% 성공 보장: 이미지가 부족하면 네이버 이미지 검색 API로 폴백
-    if (images.length < 10 && options.naverClientId && options.naverClientSecret) {
+    if (images.length < 10 && naverSearchAvailable(options.naverClientId, options.naverClientSecret)) {
       console.log(`[쇼핑몰 크롤링] ⚠️ 이미지 ${images.length}개로 부족! 네이버 이미지 검색 API로 추가 수집...`);
 
       // ✅ [2026-01-21 FIX] 폴백 검색어는 crawlFromAffiliateLink에서 정확한 제품명 추출
@@ -5045,7 +5061,7 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
       }
 
       try {
-        const apiImages = await searchNaverImages(searchKeyword, options.naverClientId, options.naverClientSecret, 50 - images.length);
+        const apiImages = await searchNaverImages(searchKeyword, (options.naverClientId ?? ''), (options.naverClientSecret ?? ''), 50 - images.length);
         if (apiImages.length > 0) {
           const newImages = apiImages.map(img => img.link).filter(link => link && !images.includes(link));
           images.push(...newImages);
@@ -5065,14 +5081,14 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
     const finalTitle = puppeteerExtractedData?.title || undefined;
 
     // ✅ [2026-01-30] Puppeteer 제목으로 네이버 쇼핑 API 추가 검색 (100% 크롤링 성공률 보장)
-    if (finalTitle && options.naverClientId && options.naverClientSecret) {
+    if (finalTitle && naverSearchAvailable(options.naverClientId, options.naverClientSecret)) {
       console.log(`[쇼핑몰 크롤링] 🔍 Puppeteer 제목으로 네이버 API 추가 검색: "${finalTitle}"`);
       try {
         // 네이버 쇼핑 API 검색
         const shoppingResults = await searchNaverShopping(
           finalTitle,
-          options.naverClientId,
-          options.naverClientSecret,
+          (options.naverClientId ?? ''),
+          (options.naverClientSecret ?? ''),
           10
         );
 
@@ -5087,8 +5103,8 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
         if (images.length < 20) {
           const imageResults = await searchNaverImages(
             finalTitle,
-            options.naverClientId,
-            options.naverClientSecret,
+            (options.naverClientId ?? ''),
+            (options.naverClientSecret ?? ''),
             20 - images.length
           );
 
@@ -5228,12 +5244,12 @@ export async function fetchShoppingImages(url: string, options: CrawlOptions = {
     console.error(`[쇼핑몰 크롤링] ❌ 실패: ${(error as Error).message}`);
 
     // ✅ 100% 성공 보장: 크롤링 실패해도 네이버 이미지 검색으로 폴백
-    if (options.naverClientId && options.naverClientSecret) {
+    if (naverSearchAvailable(options.naverClientId, options.naverClientSecret)) {
       console.log(`[쇼핑몰 크롤링] 🔄 크롤링 실패! 네이버 이미지 검색 API로 폴백...`);
       try {
         const productName = await extractProductNameFromUrl(url);
         const searchKeyword = productName || '제품';
-        const apiImages = await searchNaverImages(searchKeyword, options.naverClientId, options.naverClientSecret, 50);
+        const apiImages = await searchNaverImages(searchKeyword, (options.naverClientId ?? ''), (options.naverClientSecret ?? ''), 50);
         if (apiImages.length > 0) {
           const fallbackImages = apiImages.map(img => img.link).filter(Boolean);
           console.log(`[쇼핑몰 크롤링] ✅ 네이버 이미지 API 폴백 성공! ${fallbackImages.length}개 수집`);
@@ -5335,7 +5351,7 @@ export async function fetchArticleContent(url: string, options?: { naverClientId
 
   try {
     // ✅ 스마트스토어 URL이면 네이버 API로 먼저 시도
-    if (url.includes('smartstore.naver.com') && options?.naverClientId && options?.naverClientSecret) {
+    if (url.includes('smartstore.naver.com') && naverSearchAvailable(options?.naverClientId, options?.naverClientSecret)) {
       console.log(`[fetchArticleContent] 🛒 스마트스토어 감지 → 네이버 API로 제품 정보 검색`);
 
       const productName = await extractProductNameFromUrl(url);
@@ -5343,7 +5359,7 @@ export async function fetchArticleContent(url: string, options?: { naverClientId
         console.log(`[fetchArticleContent] 제품명 추출: "${productName}"`);
 
         try {
-          const shoppingResults = await searchNaverShopping(productName, options.naverClientId, options.naverClientSecret, 10);
+          const shoppingResults = await searchNaverShopping(productName, (options?.naverClientId ?? ''), (options?.naverClientSecret ?? ''), 10);
 
           if (shoppingResults.length > 0) {
             const product = shoppingResults[0];
@@ -6646,7 +6662,7 @@ export async function assembleContentSource(input: SourceAssemblyInput): Promise
   // ✅ 네이버 API 키 확인
   const naverClientId = input.naverClientId || process.env.NAVER_CLIENT_ID;
   const naverClientSecret = input.naverClientSecret || process.env.NAVER_CLIENT_SECRET;
-  const hasNaverApi = !!(naverClientId && naverClientSecret);
+  const hasNaverApi = naverSearchAvailable(naverClientId, naverClientSecret);
 
   // ✅ [2026-03-15 FIX] naver.me, brandconnect.naver.com 단축 URL도 스마트스토어로 간주
   // 단축 URL이면 isNaverStoreUrl=false가 되어 검색 API 폴백 차단이 전부 우회되는 치명적 버그 수정
@@ -7141,7 +7157,7 @@ ${reviewSection}
         const naverClientId = input.naverClientId || process.env.NAVER_CLIENT_ID;
         const naverClientSecret = input.naverClientSecret || process.env.NAVER_CLIENT_SECRET;
 
-        if (naverClientId && naverClientSecret && baseTitle) {
+        if (naverSearchAvailable(naverClientId, naverClientSecret) && baseTitle) {
           console.log('[폴백] 네이버 검색 API로 콘텐츠 보충 시도...');
           const fallbackResult = await fetchContentWithNaverFallback(
             urlPatterns[0] || '',
@@ -7175,7 +7191,7 @@ ${reviewSection}
       const naverClientId = input.naverClientId || process.env.NAVER_CLIENT_ID;
       const naverClientSecret = input.naverClientSecret || process.env.NAVER_CLIENT_SECRET;
 
-      if (naverClientId && naverClientSecret && baseTitle) {
+      if (naverSearchAvailable(naverClientId, naverClientSecret) && baseTitle) {
         console.log('[폴백] 본문 없음 - 네이버 검색 API로 콘텐츠 수집 시도...');
         const fallbackResult = await fetchContentWithNaverFallback(
           urlPatterns[0] || '',
@@ -7318,7 +7334,7 @@ ${reviewSection}
       // 검색어: 제목 > 키워드 > 기존 본문
       const searchQuery = baseTitle || (keywords.length > 0 ? keywords.slice(0, 3).join(' ') : baseBody.slice(0, 50));
 
-      if (naverClientId && naverClientSecret && searchQuery) {
+      if (naverSearchAvailable(naverClientId, naverClientSecret) && searchQuery) {
         console.log(`[보충] 네이버 검색 API로 콘텐츠 보충 시도... 검색어: "${searchQuery}"`);
         try {
           const supplementResult = await fetchContentWithNaverFallback(
@@ -7362,10 +7378,10 @@ ${reviewSection}
     const naverClientId = input.naverClientId || process.env.NAVER_CLIENT_ID;
     const naverClientSecret = input.naverClientSecret || process.env.NAVER_CLIENT_SECRET;
     const supplementQuery = baseTitle || (keywords.length > 0 ? keywords.slice(0, 3).join(' ') : '');
-    if (naverClientId && naverClientSecret && supplementQuery) {
+    if (naverSearchAvailable(naverClientId, naverClientSecret) && supplementQuery) {
       console.log(`[URL 심화보강] 원본 ${baseBody.length}자 < ${URL_THIN_SUPPLEMENT_THRESHOLD}자 → "${supplementQuery}" 상위글 풀텍스트 수집`);
       try {
-        const deep = await collectTopArticleFullTexts(supplementQuery, naverClientId, naverClientSecret);
+        const deep = await collectTopArticleFullTexts(supplementQuery, (naverClientId ?? ''), (naverClientSecret ?? ''));
         if (deep.text && deep.count > 0) {
           baseBody = `${baseBody}\n\n--- 참고 자료 (관련 상위글 ${deep.count}건) ---\n\n${deep.text}`;
           warnings.push(`✅ 원본이 빈약해 관련 상위글 ${deep.count}건(${deep.text.length}자)을 보조 자료로 보강했습니다. (원본이 주 근거, 보충은 배경/맥락용)`);
@@ -7386,7 +7402,7 @@ ${reviewSection}
 
     const searchQuery = baseTitle || keywords.slice(0, 3).join(' ');
 
-    if (naverClientId && naverClientSecret && searchQuery) {
+    if (naverSearchAvailable(naverClientId, naverClientSecret) && searchQuery) {
       console.log(`[키워드/제목] 네이버 검색 API로 콘텐츠 수집... 검색어: "${searchQuery}"`);
       try {
         const keywordResult = await fetchContentWithNaverFallback(
@@ -7592,11 +7608,11 @@ export async function collectContentFromPlatforms(
     // ✅ [1순위] 네이버 검색 API 직접 호출 (가장 빠르고 안정적!)
     // - URL 크롤링 없이 검색 결과의 제목+설명을 직접 사용
     // - 크롤링 실패 가능성 0%, 0.5초 이내 완료
-    if (clientId && clientSecret) {
+    if (naverSearchAvailable(clientId, clientSecret)) {
       logger(`[플랫폼 콘텐츠 수집] ⚡ 네이버 검색 API 우선 호출 (빠르고 안정적)...`);
 
       try {
-        const apiResult = await collectNaverSearchContent(keyword, clientId, clientSecret);
+        const apiResult = await collectNaverSearchContent(keyword, (clientId ?? ''), (clientSecret ?? ''));
 
         if (apiResult.content && apiResult.content.length > 500) {
           logger(`[플랫폼 콘텐츠 수집] ✅ 네이버 API 성공: ${apiResult.content.length}자 (${apiResult.sources.join(', ')})`);
@@ -7613,7 +7629,7 @@ export async function collectContentFromPlatforms(
           //   렌더러 상한보다 넉넉히 앞서 끝내 확보한 만큼은 반드시 돌려준다.
           const fullTextDeadline = Date.now() + FULLTEXT_COLLECT_BUDGET_MS;
           const fullTexts = await collectTopArticleFullTexts(
-            keyword, clientId, clientSecret, logger, fullTextDeadline,
+            keyword, (clientId ?? ''), (clientSecret ?? ''), logger, fullTextDeadline,
           );
           const collectedText = fullTexts.text
             ? `${fullTexts.text}\n\n=== 검색 결과 스니펫 (맥락 참고용) ===\n${apiResult.content}`
@@ -7636,7 +7652,7 @@ export async function collectContentFromPlatforms(
 
     // ✅ [1.5순위] 네이버 모바일 검색 HTML 직접 파싱 (API 키 불필요, Gemini 불필요)
     // API 키 없을 때 가장 안정적인 방법: 네이버 검색 결과 페이지를 직접 fetch하여 파싱
-    if (!clientId || !clientSecret) {
+    if (!naverSearchAvailable(clientId, clientSecret)) {
       try {
         logger(`[플랫폼 콘텐츠 수집] 🔍 네이버 API 키 없음 → 네이버 모바일 검색 직접 파싱...`);
         const fetchImpl = await ensureFetch();
@@ -7793,11 +7809,11 @@ export async function collectContentFromPlatforms(
 
     if (contentParts.length === 0) {
       // ✅ 크롤링 실패 시 네이버 검색 API로 폴백
-      if (clientId && clientSecret) {
+      if (naverSearchAvailable(clientId, clientSecret)) {
         logger(`[플랫폼 콘텐츠 수집] ⚠️ 크롤링 실패 → 네이버 검색 API로 폴백 시도...`);
 
         try {
-          const apiResult = await collectNaverSearchContent(keyword, clientId, clientSecret);
+          const apiResult = await collectNaverSearchContent(keyword, (clientId ?? ''), (clientSecret ?? ''));
 
           if (apiResult.content && apiResult.content.length > 200) {
             logger(`[플랫폼 콘텐츠 수집] ✅ 네이버 API 폴백 성공: ${apiResult.content.length}자 (${apiResult.sources.join(', ')})`);

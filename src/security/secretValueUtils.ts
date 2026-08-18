@@ -23,8 +23,10 @@ const INLINE_SCHEMA_RE = /\s*(?:schema|스키마)\s*[:=]\s*/gi;
 const SCHEMA_TEXT_PRESERVED_SECRET_FIELDS = new Set([
   'naverClientSecret',
   'naverDatalabClientSecret',
+  'naverHubClientSecret',
   'naver-client-secret',
   'naver-datalab-client-secret',
+  'naver-hub-client-secret',
 ]);
 
 interface StripSecretOptions {

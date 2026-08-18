@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from '../naver/index.js';
 import * as cheerio from 'cheerio';
 import crypto from 'crypto';
 import { getProxyUrl, isProxyEnabled } from '../crawler/utils/proxyManager.js';
@@ -161,7 +162,8 @@ export class KeywordAnalyzer {
 
   // ✅ 네이버 검색 API 설정
   setNaverSearchConfig(config: NaverSearchApiConfig): void {
-    if (config.clientId && config.clientSecret) {
+    // [2026-08] 기존 키가 유예 만료로 비워져도 API HUB 키가 있으면 검색은 살아 있다.
+    if (naverSearchAvailable(config.clientId, config.clientSecret)) {
       this.naverSearchConfig = config;
       console.log('[KeywordAnalyzer] 네이버 검색 API 설정 완료');
     }
@@ -450,20 +452,19 @@ export class KeywordAnalyzer {
     avgInfluencer: number;
   }> {
     // 1. 네이버 검색 API 사용 시도
-    if (this.naverSearchConfig) {
+    if (this.naverSearchConfig || naverSearchAvailable()) {
       try {
-        const response = await axios.get('https://openapi.naver.com/v1/search/blog.json', {
-          params: {
-            query: keyword,
-            display: 10,
-            sort: 'sim',
-          },
-          headers: {
-            'X-Naver-Client-Id': this.naverSearchConfig.clientId,
-            'X-Naver-Client-Secret': this.naverSearchConfig.clientSecret,
-          },
-          timeout: 10000,
+        const credentials = resolveAllNaverCredentials({
+          naverClientId: this.naverSearchConfig?.clientId,
+          naverClientSecret: this.naverSearchConfig?.clientSecret,
         });
+        const result = await callNaverSearch<any>(
+          'blog',
+          { query: keyword, display: 10, sort: 'sim' },
+          { credentials, maxAttempts: Math.max(2, credentials.length), rotateOnQuota: true, timeoutMs: 10000 },
+        );
+        if (!result.ok) throw new Error(result.error ?? `네이버 검색 API 오류 (${result.status})`);
+        const response = { data: result.data };
 
         const data = response.data;
         const totalCount = data.total || 0;

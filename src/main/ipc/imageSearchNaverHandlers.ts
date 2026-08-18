@@ -9,6 +9,8 @@ import { ipcMain } from 'electron';
 import { loadConfig, applyConfigToEnv } from '../../configManager.js';
 import { ensureLicenseValid, enforceFreeTier, isFreeTierUser } from '../utils/authUtils.js';
 import { consume as consumeQuota } from '../../quotaManager.js';
+import { buildNaverSearchUrl, naverAuthHeaders, resolveAllNaverCredentials } from '../../naver/index.js';
+import type { NaverCredential, NaverSearchParams } from '../../naver/index.js';
 
 export function registerImageSearchNaverHandlers(): void {
     ipcMain.handle('image:searchNaver', async (_event, keyword: string): Promise<{ success: boolean; images?: any[]; message?: string }> => {
@@ -52,38 +54,16 @@ export function registerImageSearchNaverHandlers(): void {
                 return cleaned;
             };
 
-            const collectEnvPairs = (baseIdKey: string, baseSecretKey: string, labelPrefix: string): Array<{ id: string; secret: string; label: string }> => {
-                const pairs: Array<{ id: string; secret: string; label: string }> = [];
-
-                const baseId = normalizeEnv((process.env as any)[baseIdKey]);
-                const baseSecret = normalizeEnv((process.env as any)[baseSecretKey]);
-                if (baseId && baseSecret) {
-                    pairs.push({ id: baseId, secret: baseSecret, label: `${labelPrefix}#1` });
-                }
-
-                // NAVER_CLIENT_ID_2 / NAVER_CLIENT_SECRET_2 ...
-                for (let i = 2; i <= 10; i++) {
-                    const id = normalizeEnv((process.env as any)[`${baseIdKey}_${i}`]);
-                    const secret = normalizeEnv((process.env as any)[`${baseSecretKey}_${i}`]);
-                    if (id && secret) {
-                        pairs.push({ id, secret, label: `${labelPrefix}#${i}` });
-                    }
-                }
-
-                return pairs;
-            };
-
-            const credentialCandidates: Array<{ id: string; secret: string; label: string }> = [
-                ...collectEnvPairs('NAVER_CLIENT_ID', 'NAVER_CLIENT_SECRET', 'NAVER_CLIENT_*'),
-                ...collectEnvPairs('NAVER_DATALAB_CLIENT_ID', 'NAVER_DATALAB_CLIENT_SECRET', 'NAVER_DATALAB_*'),
-            ];
+            // [2026-08 API HUB] 후보는 게이트웨이가 모은다 — HUB 키가 먼저, 기존 키가 그 다음.
+            // 여기 로테이션 루프가 그대로 두 종류를 순회하므로 한쪽이 막히면 다른 쪽으로 넘어간다.
+            const credentialCandidates: NaverCredential[] = [...resolveAllNaverCredentials()];
 
             if (credentialCandidates.length === 0) {
                 const config = await loadConfig();
                 const cfgId = normalizeEnv(String(config.naverClientId || config.naverDatalabClientId || ''));
                 const cfgSecret = normalizeEnv(String(config.naverClientSecret || config.naverDatalabClientSecret || ''));
                 if (cfgId && cfgSecret) {
-                    credentialCandidates.push({ id: cfgId, secret: cfgSecret, label: 'config#1' });
+                    credentialCandidates.push({ id: cfgId, secret: cfgSecret, mode: 'legacy', label: 'config#1' });
                 } else if (maskedKeyDetected) {
                     return {
                         success: false,
@@ -107,9 +87,12 @@ export function registerImageSearchNaverHandlers(): void {
 
             const httpErrors: Array<{ status: number; query: string; errorCode?: string; errorMessage?: string }> = [];
 
-            const NAVER_NEW_APP_GUIDE_URL = 'https://developers.naver.com/apps/#/myapps/oBaehge5xTtI73Z0x1Dx/overview';
+            const NAVER_NEW_APP_GUIDE_URL = 'https://www.ncloud.com/product/applicationService/naverApiHub';
             const buildNaverQuotaGuide = (): string =>
-                `\n\n네이버 이미지 API 일일 한도(쿼리) 초과로 보이면, 아래 링크에서 네이버 애플리케이션을 추가로 생성한 뒤 새 Client ID/Secret을 발급받아 환경설정에 등록하세요.\n` +
+                `
+
+네이버 이미지 API 일일 한도(쿼리) 초과로 보이면, API HUB(네이버클라우드) 콘솔에서 Application 을 추가 생성해 새 Client ID/Secret 을 발급받은 뒤 환경설정에 등록하세요.
+` +
                 `${NAVER_NEW_APP_GUIDE_URL}`;
             const maybeAppendNaverQuotaGuide = (detail: string): string => {
                 const d = String(detail || '');
@@ -135,7 +118,7 @@ export function registerImageSearchNaverHandlers(): void {
                 await new Promise<void>((resolve) => setTimeout(resolve, ms));
             };
 
-            const fetchWithRotation = async (searchUrl: string, queryLabel: string): Promise<any | null> => {
+            const fetchWithRotation = async (searchType: 'image', params: NaverSearchParams, queryLabel: string): Promise<any | null> => {
                 let attempts = 0;
                 let lastStatus = 0;
                 let lastErrorCode = '';
@@ -146,12 +129,14 @@ export function registerImageSearchNaverHandlers(): void {
                     const cred = credentialCandidates[credentialIndex];
                     const keyLabel = cred?.label || `key#${credentialIndex + 1}`;
 
-                    const response = await fetch(searchUrl, {
+                    // 모드(HUB/기존)에 맞는 경로와 헤더로 그때그때 조립한다.
+
+                    const requestUrl = cred
+                        ? buildNaverSearchUrl(searchType, params, cred)
+                        : buildNaverSearchUrl(searchType, params, { mode: 'legacy' });
+                    const response = await fetch(requestUrl, {
                         method: 'GET',
-                        headers: {
-                            'X-Naver-Client-Id': cred?.id || '',
-                            'X-Naver-Client-Secret': cred?.secret || '',
-                        },
+                        headers: cred ? naverAuthHeaders(cred) : {},
                     });
 
                     if (response.ok) {
@@ -239,9 +224,9 @@ export function registerImageSearchNaverHandlers(): void {
                 if (allImages.length >= TARGET_IMAGES) break;
 
                 try {
-                    const searchUrl = `https://openapi.naver.com/v1/search/image?query=${encodeURIComponent(query)}&display=100&sort=date`;
+                    const searchParams: NaverSearchParams = { query, display: 100, sort: 'date' };
 
-                    const data = await fetchWithRotation(searchUrl, query);
+                    const data = await fetchWithRotation('image', searchParams, query);
                     if (!data) {
                         continue;
                     }
@@ -326,9 +311,9 @@ export function registerImageSearchNaverHandlers(): void {
 
                     try {
                         // [2026-06-30] sort=date(최신순) → sim(정확도순, 네이버 기본). 소제목·키워드 관련성 우선.
-                        const searchUrl = `https://openapi.naver.com/v1/search/image?query=${encodeURIComponent(query)}&display=100&sort=sim`;
+                        const searchParams: NaverSearchParams = { query, display: 100, sort: 'sim' };
 
-                        const data = await fetchWithRotation(searchUrl, query);
+                        const data = await fetchWithRotation('image', searchParams, query);
                         if (!data) {
                             continue;
                         }

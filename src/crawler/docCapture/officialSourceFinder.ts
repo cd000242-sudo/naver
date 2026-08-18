@@ -6,7 +6,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { GEMINI_TEXT_MODELS } from '../../runtime/modelRegistry.js';
 import { trackGeminiUsage } from '../../gemini.js';
-import { fetchNaverOpenApi } from '../shared/naverApiCredentials.js';
+import { fetchNaverSearch } from '../shared/naverApiCredentials.js';
 import type { DocHeadingInput, DocSourcePlan, OfficialPage } from './types.js';
 
 const LOG = '[DocSourceFinder]';
@@ -148,8 +148,7 @@ export async function findOfficialPages(plan: DocSourcePlan, cap: number): Promi
   const raw: Array<{ url: string; title: string }> = [];
   for (const query of plan.officialQueries) {
     for (const endpoint of ['webkr', 'news'] as const) {
-      const url = `https://openapi.naver.com/v1/search/${endpoint}.json?query=${encodeURIComponent(query)}&display=15`;
-      const data = await fetchNaverOpenApi<{ items?: NaverSearchItem[] }>(url);
+      const data = await fetchNaverSearch<{ items?: NaverSearchItem[] }>(endpoint, { query, display: 15 });
       for (const item of data?.items || []) {
         if (item.link) raw.push({ url: item.link, title: stripTags(item.title || '') });
       }

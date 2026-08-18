@@ -1,4 +1,5 @@
 import { app } from 'electron';
+import { describeNaverKeyPosture } from './naver/index.js';
 import fs from 'fs/promises';
 import path from 'path';
 import {
@@ -41,9 +42,13 @@ export interface AppConfig {
   naverDatalabApiKey?: string;
   naverDatalabClientId?: string;
   naverDatalabClientSecret?: string;
-  // ✅ 네이버 검색 API (블로그/카페/뉴스 검색)
+  // ✅ 네이버 검색 API (블로그/카페/뉴스 검색) — 기존 개발자센터 키
   naverClientId?: string;
   naverClientSecret?: string;
+  // ✅ [2026-08] NAVER API HUB (네이버클라우드) 키 — 개편 후 신규 발급분.
+  //    기존 키와 함께 보관한다: 한쪽이 막히면 다른 쪽으로 자동 토스된다.
+  naverHubClientId?: string;
+  naverHubClientSecret?: string;
 
   // ✅ 네이버 광고 API (키워드 도구)
   naverAdApiKey?: string;
@@ -361,6 +366,8 @@ function getRuntimeSecretFallbacks(): Record<string, unknown> {
     unsplashApiKey: process.env.UNSPLASH_API_KEY,
     pixabayApiKey: process.env.PIXABAY_API_KEY,
     naverClientSecret: process.env.NAVER_CLIENT_SECRET || process.env.NAVER_CLIENT_SECRET_SEARCH,
+    naverHubClientId: process.env.NAVER_HUB_CLIENT_ID,
+    naverHubClientSecret: process.env.NAVER_HUB_CLIENT_SECRET,
     naverDatalabClientSecret: process.env.NAVER_DATALAB_CLIENT_SECRET,
     naverAdApiKey: process.env.NAVER_AD_API_KEY || process.env.NAVER_SEARCHAD_API_KEY,
     naverAdSecretKey: process.env.NAVER_AD_SECRET_KEY || process.env.NAVER_SEARCHAD_SECRET_KEY,
@@ -425,6 +432,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'prodiaApiKey', 'prodiaToken', 'prodiaModel',
           'naverDatalabClientId', 'naverDatalabClientSecret',
           'naverClientId', 'naverClientSecret',
+          'naverHubClientId', 'naverHubClientSecret',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'rememberCredentials', 'savedNaverId', 'savedNaverPassword',
           'rememberLicenseCredentials', 'savedLicenseUserId', 'savedLicensePassword',
@@ -519,6 +527,9 @@ export async function loadConfig(): Promise<AppConfig> {
       // ✅ [2026-01-25] 네이버 검색 API 키 추가
       naverClientId: parsed.naverClientId || parsed['naver-client-id'] || undefined,
       naverClientSecret: parsed.naverClientSecret || parsed['naver-client-secret'] || undefined,
+      // ✅ [2026-08] NAVER API HUB 키 (네이버클라우드 콘솔 발급)
+      naverHubClientId: parsed.naverHubClientId || parsed['naver-hub-client-id'] || undefined,
+      naverHubClientSecret: parsed.naverHubClientSecret || parsed['naver-hub-client-secret'] || undefined,
       // ✅ 네이버 광고 API (키워드 도구)
       naverAdApiKey: parsed.naverAdApiKey || undefined,
       naverAdSecretKey: parsed.naverAdSecretKey || undefined,
@@ -607,6 +618,9 @@ export async function loadConfig(): Promise<AppConfig> {
       // ✅ [2026-01-25] 네이버 검색 API 키 호환성
       'naver-client-id': normalizedConfig.naverClientId || normalizedConfig.naverDatalabClientId,
       'naver-client-secret': normalizedConfig.naverClientSecret || normalizedConfig.naverDatalabClientSecret,
+      // ✅ [2026-08] NAVER API HUB 키 호환성
+      'naver-hub-client-id': normalizedConfig.naverHubClientId,
+      'naver-hub-client-secret': normalizedConfig.naverHubClientSecret,
       // ✅ [2026-01-25] Perplexity API 키 호환성
       'perplexity-api-key': normalizedConfig.perplexityApiKey,
       // ✅ [2026-01-25] 네이버 광고 API 키 호환성 (검색광고 키워드 도구)
@@ -846,6 +860,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         'prodiaApiKey', 'prodiaToken', 'prodiaModel',
         'naverDatalabClientId', 'naverDatalabClientSecret',
         'naverClientId', 'naverClientSecret',
+        'naverHubClientId', 'naverHubClientSecret',
         'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
         'savedNaverId', 'savedNaverPassword', 'savedLicenseUserId', 'savedLicensePassword',
         // ✅ [v2.10.53] 사용자 환경설정 — 부분 saveConfig로 인해 silent 손실 회귀 차단
@@ -962,6 +977,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'prodiaApiKey', 'prodiaToken', 'prodiaModel',
           'naverDatalabClientId', 'naverDatalabClientSecret',
           'naverClientId', 'naverClientSecret',
+          'naverHubClientId', 'naverHubClientSecret',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',
@@ -1095,6 +1111,21 @@ export function applyConfigToEnv(config: AppConfig): void {
     process.env.NAVER_CLIENT_SECRET_SEARCH = csec; // 앨리어싱
     console.log('[Config] NAVER_CLIENT_SECRET 설정됨');
   }
+
+  // ✅ [2026-08] NAVER API HUB 키 (네이버클라우드). 기존 키를 덮어쓰지 않고 나란히 둔다 —
+  //    apiClient 가 둘을 모두 보고 실패 시 자동으로 토스한다.
+  if (config.naverHubClientId && config.naverHubClientId.trim()) {
+    process.env.NAVER_HUB_CLIENT_ID = config.naverHubClientId.trim();
+    console.log('[Config] NAVER_HUB_CLIENT_ID 설정됨');
+  }
+  if (config.naverHubClientSecret && config.naverHubClientSecret.trim()) {
+    process.env.NAVER_HUB_CLIENT_SECRET = config.naverHubClientSecret.trim();
+    console.log('[Config] NAVER_HUB_CLIENT_SECRET 설정됨');
+  }
+
+  // 유예 만료(2027-06-30) 전에 알아차리게 한다 — 기존 키만 있으면 그날 기능이 멈춘다.
+  const posture = describeNaverKeyPosture(config as unknown as Record<string, unknown>);
+  if (posture.warning) console.warn(`[Config] ${posture.warning}`);
 
   // ✅ 네이버 데이터랩 API
   if (config.naverDatalabClientId && config.naverDatalabClientId.trim()) {

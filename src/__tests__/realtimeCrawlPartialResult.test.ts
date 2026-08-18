@@ -63,7 +63,7 @@ describe('실시간 수집 부분 결과 보존', () => {
 
   it('호출부가 마감을 실제로 넘긴다 (인자를 안 넘기면 기능이 죽는다)', () => {
     expect(assembler).toContain('const fullTextDeadline = Date.now() + FULLTEXT_COLLECT_BUDGET_MS');
-    expect(assembler).toMatch(/collectTopArticleFullTexts\(\s*keyword, clientId, clientSecret, logger, fullTextDeadline,?\s*\)/);
+    expect(assembler).toMatch(/collectTopArticleFullTexts\(\s*keyword, \(?clientId(?: \?\? '')?\)?, \(?clientSecret(?: \?\? '')?\)?, logger, fullTextDeadline,?\s*\)/);
   });
 
   it('마감을 안 넘기면 예전처럼 끝까지 돈다 (다른 호출부 후퇴 없음)', () => {

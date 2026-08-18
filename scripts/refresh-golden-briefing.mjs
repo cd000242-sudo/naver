@@ -33,6 +33,29 @@ const SEARCHAD_SECRET = String(process.env.NAVER_SEARCHAD_SECRET_KEY || '').trim
 const SEARCHAD_CUSTOMER = String(process.env.NAVER_SEARCHAD_CUSTOMER_ID || '').trim();
 const SEARCH_CLIENT_ID = String(process.env.NAVER_CLIENT_ID || '').trim();
 const SEARCH_CLIENT_SECRET = String(process.env.NAVER_CLIENT_SECRET || '').trim();
+// [2026-08] NAVER API HUB (네이버클라우드). 있으면 이쪽을 먼저 쓰고, 인증이 막히면 기존 키로 넘어간다.
+const HUB_CLIENT_ID = String(process.env.NAVER_HUB_CLIENT_ID || '').trim();
+const HUB_CLIENT_SECRET = String(process.env.NAVER_HUB_CLIENT_SECRET || '').trim();
+
+/** HUB 우선, 기존 키가 그 다음. 있는 것만 담는다. */
+function naverCredentials() {
+  const creds = [];
+  if (HUB_CLIENT_ID && HUB_CLIENT_SECRET) {
+    creds.push({
+      mode: 'hub',
+      url: (type, qs) => `https://naverapihub.apigw.ntruss.com/search/v1/${type}?${qs}`,
+      headers: { 'X-NCP-APIGW-API-KEY-ID': HUB_CLIENT_ID, 'X-NCP-APIGW-API-KEY': HUB_CLIENT_SECRET },
+    });
+  }
+  if (SEARCH_CLIENT_ID && SEARCH_CLIENT_SECRET) {
+    creds.push({
+      mode: 'legacy',
+      url: (type, qs) => `https://openapi.naver.com/v1/search/${type}.json?${qs}`,
+      headers: { 'X-Naver-Client-Id': SEARCH_CLIENT_ID, 'X-Naver-Client-Secret': SEARCH_CLIENT_SECRET },
+    });
+  }
+  return creds;
+}
 
 /** 황금 판정 기준. 검색은 있는데 글이 적어야 초보자가 1페이지에 갈 수 있다. */
 const MIN_VOLUME = Number(process.env.GOLDEN_MIN_VOLUME || 300);
@@ -95,21 +118,25 @@ async function fetchVolumes(keywords) {
 
 /** 블로그 문서 총건수. */
 async function fetchDocumentCount(keyword) {
-  const url = `https://openapi.naver.com/v1/search/blog.json?query=${encodeURIComponent(keyword)}&display=1`;
-  try {
-    const res = await fetch(url, {
-      headers: {
-        'X-Naver-Client-Id': SEARCH_CLIENT_ID,
-        'X-Naver-Client-Secret': SEARCH_CLIENT_SECRET,
-      },
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    const total = Number(data.total);
-    return Number.isFinite(total) ? total : null;
-  } catch {
-    return null;
+  const qs = `query=${encodeURIComponent(keyword)}&display=1`;
+  const creds = naverCredentials();
+  for (let i = 0; i < creds.length; i++) {
+    const cred = creds[i];
+    try {
+      const res = await fetch(cred.url('blog', qs), { headers: cred.headers });
+      if (!res.ok) {
+        // 인증이 막힌 경우에만 다른 키로 토스한다. 한도(429)는 키를 바꿔도 같다.
+        if ([401, 403, 404].includes(res.status) && i < creds.length - 1) continue;
+        return null;
+      }
+      const data = await res.json();
+      const total = Number(data.total);
+      return Number.isFinite(total) ? total : null;
+    } catch {
+      return null; // 네트워크 오류는 키 문제가 아니다
+    }
   }
+  return null;
 }
 
 /** 실시간 레인에서 후보를 모은다. 키워드 본체 + 자동완성 확장. */

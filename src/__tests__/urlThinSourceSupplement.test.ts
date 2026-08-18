@@ -20,7 +20,7 @@ describe('URL 빈약 원본 심화 보강 배선', () => {
   it('임계(1500자) 미만 + 보충 가능 URL일 때 상위글 풀텍스트를 수집한다', () => {
     expect(src).toMatch(/URL_THIN_SUPPLEMENT_THRESHOLD = 1500/);
     expect(src).toContain('const hasSupplementableUrl');
-    expect(src).toMatch(/collectTopArticleFullTexts\(supplementQuery, naverClientId, naverClientSecret\)/);
+    expect(src).toMatch(/collectTopArticleFullTexts\(supplementQuery, \(?naverClientId(?: \?\? '')?\)?, \(?naverClientSecret(?: \?\? '')?\)?\)/);
     // 보강 실행 조건이 hasSupplementableUrl로 게이트됨
     expect(src).toMatch(/if \(\s*hasSupplementableUrl/);
   });

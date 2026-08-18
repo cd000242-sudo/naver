@@ -19,6 +19,7 @@
  */
 
 import axios from 'axios';
+import { callNaverSearch, resolveAllNaverCredentials } from '../naver/index.js';
 import { evaluate, type EvaluationInput, type EvaluationResult, type Mode } from '../content/qualityEvaluator';
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -80,14 +81,14 @@ async function searchNaverBlog(
   display: number = 10,
   sort: 'sim' | 'date' = 'sim',
 ): Promise<SerpItem[]> {
-  const response = await axios.get('https://openapi.naver.com/v1/search/blog.json', {
-    params: { query: keyword, display: Math.min(30, Math.max(1, display)), sort },
-    headers: {
-      'X-Naver-Client-Id': clientId,
-      'X-Naver-Client-Secret': clientSecret,
-    },
-    timeout: 10000,
-  });
+  const credentials = resolveAllNaverCredentials({ naverClientId: clientId, naverClientSecret: clientSecret });
+  const result = await callNaverSearch<any>(
+    'blog',
+    { query: keyword, display: Math.min(30, Math.max(1, display)), sort },
+    { credentials, maxAttempts: Math.max(2, credentials.length), rotateOnQuota: true, timeoutMs: 10000 },
+  );
+  if (!result.ok) throw new Error(result.error ?? `네이버 검색 API 오류 (${result.status})`);
+  const response = { data: result.data };
   const items = response.data?.items || [];
   return items.map((it: any) => ({
     title: stripHtmlTags(it.title || ''),

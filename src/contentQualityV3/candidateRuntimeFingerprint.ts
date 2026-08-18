@@ -7,6 +7,9 @@ import { CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 } from './candidateRuntimeF
 export { CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256 } from './candidateRuntimeFingerprintPin.js';
 
 export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[] = Object.freeze([
+  // follow dynamic imports. Re-add it if a static import is restored.
+  // geminiAuthConfig.ts is intentionally absent: it is now reached only through
+  // the dynamic import at installer.ts:249, and the closure walker does not
   'config/content_policy.yaml',
   'package-lock.json',
   'package.json',
@@ -28,9 +31,6 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/agentCli/commandName.ts',
   'src/agentCli/detect.ts',
   'src/agentCli/failureMessage.ts',
-  // geminiAuthConfig.ts is intentionally absent: it is now reached only through
-  // the dynamic import at installer.ts:249, and the closure walker does not
-  // follow dynamic imports. Re-add it if a static import is restored.
   'src/agentCli/geminiRunner.ts',
   'src/agentCli/imageStaging.ts',
   'src/agentCli/index.ts',
@@ -374,6 +374,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/main/blobStore/index.ts',
   'src/main/blobStore/singleton.ts',
   'src/main/ipc/blogHandlers.ts',
+  'src/main/ipc/imageExtensionPolicy.ts',
   'src/main/services/AutomationService.ts',
   'src/main/services/BlogExecutor.ts',
   'src/main/userDataMigration.ts',
@@ -385,6 +386,10 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/main/workers/base64Pool.ts',
   'src/main/workers/base64Worker.ts',
   'src/monitor/chainedGenMetrics.ts',
+  'src/naver/apiClient.ts',
+  'src/naver/apiCredentials.ts',
+  'src/naver/apiEndpoints.ts',
+  'src/naver/index.ts',
   'src/naverBlogAutomation.ts',
   'src/naverBlogCrawler.ts',
   'src/naverFactCheckRAG.ts',

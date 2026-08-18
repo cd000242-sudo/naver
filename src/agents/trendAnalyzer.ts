@@ -8,6 +8,7 @@
 
 import * as cheerio from 'cheerio';
 import * as crypto from 'crypto';
+import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from '../naver/index.js';
 
 export interface TrendKeyword {
   keyword: string;
@@ -313,7 +314,7 @@ class TrendAnalyzer {
     naverClientId?: string,
     naverClientSecret?: string
   ): Promise<TrendKeyword[]> {
-    if (!naverClientId || !naverClientSecret) {
+    if (!naverSearchAvailable(naverClientId, naverClientSecret)) {
       console.warn('[TrendAnalyzer] 네이버 API 키가 없어 문서량만 분석');
     }
 
@@ -323,8 +324,8 @@ class TrendAnalyzer {
       try {
         // 문서량 조회 (네이버 검색 API)
         let documentCount = 0;
-        if (naverClientId && naverClientSecret) {
-          documentCount = await this.getDocumentCount(keyword, naverClientId, naverClientSecret);
+        if (naverSearchAvailable(naverClientId, naverClientSecret)) {
+          documentCount = await this.getDocumentCount(keyword, (naverClientId ?? ''), (naverClientSecret ?? ''));
         }
 
         // 🎯 황금비율 계산: 문서량이 적을수록 블루오션
@@ -358,20 +359,19 @@ class TrendAnalyzer {
     clientSecret: string
   ): Promise<number> {
     try {
-      const response = await fetch(
-        `https://openapi.naver.com/v1/search/blog.json?query=${encodeURIComponent(keyword)}&display=1`,
-        {
-          headers: {
-            'X-Naver-Client-Id': clientId,
-            'X-Naver-Client-Secret': clientSecret
-          }
-        }
+      const credentials = resolveAllNaverCredentials({
+        naverClientId: clientId,
+        naverClientSecret: clientSecret,
+      });
+      const result = await callNaverSearch<{ total?: number }>(
+        'blog',
+        { query: keyword, display: 1 },
+        { credentials, maxAttempts: Math.max(2, credentials.length), rotateOnQuota: true },
       );
 
-      if (!response.ok) return 0;
+      if (!result.ok) return 0;
 
-      const data = await response.json();
-      return data.total || 0;
+      return result.data?.total || 0;
     } catch {
       return 0;
     }
@@ -529,7 +529,7 @@ class TrendAnalyzer {
     }
 
     // 3. 🎯 황금비율 분석 (검색량 + 문서량)
-    const hasSearchApi = naverClientId && naverClientSecret;
+    const hasSearchApi = naverSearchAvailable(naverClientId, naverClientSecret);
     const hasAdApi = naverAdApiKey && naverAdSecretKey && naverAdCustomerId;
 
     if (hasSearchApi || hasAdApi) {

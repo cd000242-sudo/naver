@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
+import { callNaverDatalab, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
 
 export interface DatalabSearchTrend {
   period: string; // 'date' | 'week' | 'month'
@@ -81,6 +82,8 @@ export class NaverDatalabClient {
     private clientId: string,
     private clientSecret: string,
   ) {
+    // [2026-08] 이 axios 인스턴스는 HUB 대체가 없는 보조 경로(/keywordstool, /search/{group})
+    // 전용으로 남긴다. 실제 검색 트렌드(/search)는 게이트웨이(callNaverDatalab)로 나간다.
     this.client = axios.create({
       baseURL: 'https://openapi.naver.com/v1/datalab',
       headers: {
@@ -119,12 +122,20 @@ export class NaverDatalabClient {
     };
 
     try {
-      const response = await this.client.post<DatalabTrendResponse>(
-        '/search',
-        requestBody,
-      );
+      const credentials = resolveAllNaverCredentials({
+        naverClientId: this.clientId,
+        naverClientSecret: this.clientSecret,
+      });
+      const result = await callNaverDatalab<DatalabTrendResponse>(requestBody, { credentials });
+      if (!result.ok || !result.data) {
+        const authHint = result.status === 401 || result.status === 403
+          ? `\n\n데이터랩은 별도 서비스 권한이 필요합니다. API HUB(네이버클라우드)는 Application 에 `
+            + `"Search Trend" 서비스가, 기존 개발자센터 키는 "데이터랩" 서비스가 선택돼 있어야 합니다.`
+          : '';
+        throw new Error(`네이버 데이터랩 API 오류 (${result.status}): ${result.error ?? '응답 없음'}${authHint}`);
+      }
 
-      return response.data;
+      return result.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const errorMessage = error.response?.data?.errorMessage || error.message;
@@ -323,9 +334,15 @@ export function createDatalabClient(): NaverDatalabClient | null {
   const clientId = process.env.NAVER_DATALAB_CLIENT_ID;
   const clientSecret = process.env.NAVER_DATALAB_CLIENT_SECRET;
 
+  // [2026-08] 기존 데이터랩 키가 없어도 API HUB 키만 있으면 검색 트렌드는 나간다.
+  //           기존 키가 유예 만료로 죽는 날 이 함수가 null 을 뱉으면 기능 전체가 멈춘다.
   if (!clientId || !clientSecret) {
+    if (naverSearchAvailable()) {
+      console.log('[NaverDatalab] 기존 데이터랩 키 없음 — API HUB 키로 진행합니다.');
+      return new NaverDatalabClient('', '');
+    }
     console.warn('[NaverDatalab] 클라이언트 ID 또는 Secret이 설정되지 않았습니다.');
-    console.warn('[NaverDatalab] 환경 설정에서 네이버 데이터랩 Client ID와 Secret을 입력해주세요.');
+    console.warn('[NaverDatalab] 환경 설정에서 네이버 데이터랩 또는 API HUB Client ID/Secret을 입력해주세요.');
     return null;
   }
 
@@ -341,7 +358,7 @@ export function createDatalabClient(): NaverDatalabClient | null {
   }
 
   // 빈 문자열 체크
-  if (trimmedClientId === '' || trimmedClientSecret === '') {
+  if ((trimmedClientId === '' || trimmedClientSecret === '') && !naverSearchAvailable()) {
     console.error('[NaverDatalab] ⚠️ API 키가 비어있습니다. 환경 설정에서 올바른 키를 입력해주세요.');
     return null;
   }

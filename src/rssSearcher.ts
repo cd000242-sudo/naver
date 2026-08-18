@@ -4,6 +4,46 @@
  * 네이버 검색 API를 사용하여 더 정확하고 빠른 검색을 제공합니다.
  */
 
+import { callNaverSearch, naverSearchAvailable, resolveAllNaverCredentials } from './naver/index.js';
+import type { NaverSearchParams, NaverSearchType } from './naver/index.js';
+
+/**
+ * [2026-08 API HUB] 네이버 검색은 전부 이 어댑터를 거친다.
+ * 게이트웨이가 HUB/기존 키 선택·자동 토스·쿼터 로테이션을 처리하고,
+ * 아래 호출부는 기존 Response 형태를 그대로 쓰도록 최소 변경으로 유지한다.
+ */
+interface NaverGatewayResponse {
+  ok: boolean;
+  status: number;
+  statusText: string;
+  json: () => Promise<any>;
+  text: () => Promise<string>;
+}
+
+async function naverSearchResponse(
+  type: NaverSearchType,
+  params: NaverSearchParams,
+  clientId?: string,
+  clientSecret?: string,
+): Promise<NaverGatewayResponse> {
+  const credentials = resolveAllNaverCredentials(
+    clientId && clientSecret ? { naverClientId: clientId, naverClientSecret: clientSecret } : undefined,
+  );
+  const result = await callNaverSearch<any>(type, params, {
+    credentials,
+    maxAttempts: Math.max(2, credentials.length),
+    rotateOnQuota: true,
+  });
+  return {
+    ok: result.ok,
+    status: result.status,
+    statusText: result.error || '',
+    json: async () => result.data ?? {},
+    text: async () => (result.ok ? '' : result.error || ''),
+  };
+}
+
+
 export interface RssSearchResult {
   title: string;
   url: string;
@@ -153,9 +193,9 @@ export async function searchNaverBlogRss(
 ): Promise<string[]> {
   try {
     // 네이버 검색 API 사용 (API 키가 있는 경우)
-    if (clientId && clientSecret) {
+    if (naverSearchAvailable(clientId, clientSecret)) {
       // ✅ 날짜 범위 설정 (발행 날짜 기준으로 최근 30일 이내 검색)
-      let dateParams = '';
+      let dateFilter: Record<string, string> = {};
       if (targetDate) {
         try {
           const target = new Date(targetDate);
@@ -165,27 +205,24 @@ export async function searchNaverBlogRss(
           dateTo.setDate(dateTo.getDate() + 1); // 발행 날짜 다음날까지
 
           const formatDate = (d: Date) => d.toISOString().split('T')[0].replace(/-/g, '');
-          dateParams = `&datefrom=${formatDate(dateFrom)}&dateto=${formatDate(dateTo)}`;
+          dateFilter = { datefrom: formatDate(dateFrom), dateto: formatDate(dateTo) };
           console.log(`[네이버 검색 API] 날짜 범위 검색: ${formatDate(dateFrom)} ~ ${formatDate(dateTo)}`);
         } catch (e) {
           console.warn('[네이버 검색 API] 날짜 파싱 실패, 날짜 필터 없이 검색:', e);
         }
       }
 
-      const searchUrl = `https://openapi.naver.com/v1/search/blog.json?query=${encodeURIComponent(keyword)}&display=${Math.min(maxResults, 100)}&sort=date${dateParams}`;
-
-      const fetch = await ensureFetch();
-      const response = await fetch(searchUrl, {
-        headers: {
-          'X-Naver-Client-Id': clientId,
-          'X-Naver-Client-Secret': clientSecret,
-        },
-      });
+      const response = await naverSearchResponse(
+        'blog',
+        { query: keyword, display: Math.min(maxResults, 100), sort: 'date', ...dateFilter },
+        clientId,
+        clientSecret,
+      );
 
       if (!response.ok) {
         const errorText = await response.text().catch(() => '');
         console.warn(`[네이버 검색 API] 블로그 검색 실패: ${response.status} ${response.statusText}`);
-        console.warn(`[네이버 검색 API] 요청 URL: ${searchUrl}`);
+        console.warn(`[네이버 검색 API] 검색어: "${keyword}" (blog)`);
         console.warn(`[네이버 검색 API] Client ID 길이: ${clientId?.length || 0}, Client Secret 길이: ${clientSecret?.length || 0}`);
 
         if (errorText) {
@@ -285,16 +322,13 @@ export async function getBlogRecentPosts(
 ): Promise<{ title: string; url: string; date: string }[]> {
   try {
     // 1. 네이버 검색 API 사용 시도 (검색어: blogId)
-    if (clientId && clientSecret) {
-      const searchUrl = `https://openapi.naver.com/v1/search/blog.json?query=${encodeURIComponent(blogId)}&display=${Math.min(maxResults, 100)}&sort=date`;
-
-      const fetch = await ensureFetch();
-      const response = await fetch(searchUrl, {
-        headers: {
-          'X-Naver-Client-Id': clientId,
-          'X-Naver-Client-Secret': clientSecret,
-        },
-      });
+    if (naverSearchAvailable(clientId, clientSecret)) {
+      const response = await naverSearchResponse(
+        'blog',
+        { query: blogId, display: Math.min(maxResults, 100), sort: 'date' },
+        clientId,
+        clientSecret,
+      );
 
       if (response.ok) {
         const data = await response.json() as { items?: Array<{ title: string; link: string; postdate: string }> };
@@ -370,17 +404,14 @@ export async function searchNaverCafeRss(
 ): Promise<string[]> {
   try {
     // 네이버 검색 API 사용 (API 키가 있는 경우)
-    if (clientId && clientSecret) {
+    if (naverSearchAvailable(clientId, clientSecret)) {
       // ✅ 최신순 정렬로 변경 (sim → date)
-      const searchUrl = `https://openapi.naver.com/v1/search/cafearticle.json?query=${encodeURIComponent(keyword)}&display=${Math.min(maxResults, 100)}&sort=date`;
-
-      const fetch = await ensureFetch();
-      const response = await fetch(searchUrl, {
-        headers: {
-          'X-Naver-Client-Id': clientId,
-          'X-Naver-Client-Secret': clientSecret,
-        },
-      });
+      const response = await naverSearchResponse(
+        'cafearticle',
+        { query: keyword, display: Math.min(maxResults, 100), sort: 'date' },
+        clientId,
+        clientSecret,
+      );
 
       if (!response.ok) {
         const errorText = await response.text().catch(() => '');
@@ -475,9 +506,9 @@ export async function searchNaverNewsRss(
 ): Promise<string[]> {
   try {
     // 네이버 검색 API 사용 (API 키가 있는 경우)
-    if (clientId && clientSecret) {
+    if (naverSearchAvailable(clientId, clientSecret)) {
       // ✅ 날짜 범위 설정 (발행 날짜 기준으로 최근 30일 이내 검색)
-      let dateParams = '';
+      let dateFilter: Record<string, string> = {};
       if (targetDate) {
         try {
           const target = new Date(targetDate);
@@ -487,27 +518,24 @@ export async function searchNaverNewsRss(
           dateTo.setDate(dateTo.getDate() + 1); // 발행 날짜 다음날까지
 
           const formatDate = (d: Date) => d.toISOString().split('T')[0].replace(/-/g, '');
-          dateParams = `&datefrom=${formatDate(dateFrom)}&dateto=${formatDate(dateTo)}`;
+          dateFilter = { datefrom: formatDate(dateFrom), dateto: formatDate(dateTo) };
           console.log(`[네이버 검색 API] 뉴스 날짜 범위 검색: ${formatDate(dateFrom)} ~ ${formatDate(dateTo)}`);
         } catch (e) {
           console.warn('[네이버 검색 API] 날짜 파싱 실패, 날짜 필터 없이 검색:', e);
         }
       }
 
-      const searchUrl = `https://openapi.naver.com/v1/search/news.json?query=${encodeURIComponent(keyword)}&display=${Math.min(maxResults, 100)}&sort=date${dateParams}`;
-
-      const fetch = await ensureFetch();
-      const response = await fetch(searchUrl, {
-        headers: {
-          'X-Naver-Client-Id': clientId,
-          'X-Naver-Client-Secret': clientSecret,
-        },
-      });
+      const response = await naverSearchResponse(
+        'news',
+        { query: keyword, display: Math.min(maxResults, 100), sort: 'date', ...dateFilter },
+        clientId,
+        clientSecret,
+      );
 
       if (!response.ok) {
         const errorText = await response.text().catch(() => '');
         console.warn(`[네이버 검색 API] 뉴스 검색 실패: ${response.status} ${response.statusText}`);
-        console.warn(`[네이버 검색 API] 요청 URL: ${searchUrl}`);
+        console.warn(`[네이버 검색 API] 검색어: "${keyword}" (news)`);
 
         if (errorText) {
           try {
@@ -802,16 +830,13 @@ export async function searchNaverKin(
   clientSecret?: string
 ): Promise<string[]> {
   try {
-    if (clientId && clientSecret) {
-      const searchUrl = `https://openapi.naver.com/v1/search/kin.json?query=${encodeURIComponent(keyword)}&display=${Math.min(maxResults, 100)}&sort=date`;
-
-      const fetch = await ensureFetch();
-      const response = await fetch(searchUrl, {
-        headers: {
-          'X-Naver-Client-Id': clientId,
-          'X-Naver-Client-Secret': clientSecret,
-        },
-      });
+    if (naverSearchAvailable(clientId, clientSecret)) {
+      const response = await naverSearchResponse(
+        'kin',
+        { query: keyword, display: Math.min(maxResults, 100), sort: 'date' },
+        clientId,
+        clientSecret,
+      );
 
       if (!response.ok) {
         if (response.status === 401) {

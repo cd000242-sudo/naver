@@ -8,6 +8,7 @@
 
 import { loadConfig } from './configManager.js';
 import { isMaskedSecretValue } from './security/secretValueUtils.js';
+import { callNaverSearch, resolveAllNaverCredentials } from './naver/index.js';
 import { GEMINI_TEXT_MODELS } from './runtime/modelRegistry.js';
 
 const UNSUPPORTED_SHOPPING_TITLE_EVIDENCE_PATTERN = /후기|리뷰|내돈내산|실사용|써보|사용기|체험기|솔직|최고|최저가|역대급|강력\s*추천|무조건|필수템|인생템|갓성비|가성비\s*갑|1위|품절\s*임박|오늘만/i;
@@ -135,55 +136,52 @@ async function callNaverSearchApi<T>(
     options: SearchOptions,
     config?: NaverSearchConfig
 ): Promise<NaverSearchResponse<T>> {
-    // 설정 로드
+    // [2026-08 API HUB] URL/헤더/키선택/자동토스는 전부 src/naver 게이트웨이가 담당한다.
+    // 여기서는 설정 로드와 에러 문구만 책임진다.
     let clientId = config?.clientId;
     let clientSecret = config?.clientSecret;
+    let payload: Record<string, unknown> | undefined;
 
     if (!clientId || !clientSecret) {
         const appConfig = await loadConfig();
+        payload = appConfig as unknown as Record<string, unknown>;
         clientId = appConfig.naverClientId || appConfig.naverDatalabClientId;
         clientSecret = appConfig.naverClientSecret || appConfig.naverDatalabClientSecret;
     }
 
-    if (!clientId || !clientSecret) {
-        throw new Error('네이버 검색 API 키가 설정되지 않았습니다. 설정에서 Client ID와 Client Secret을 입력해주세요.');
-    }
-
     // [ByteString crash guard] A masked value (e.g. `•`) in the header crashes fetch with a cryptic
-    // "Cannot convert argument to a ByteString". Fail with a clear, actionable message instead. This
-    // also covers the config-param path that bypasses loadConfig's masking normalization.
+    // "Cannot convert argument to a ByteString". Fail with a clear, actionable message instead.
     if (isMaskedSecretValue(clientId) || isMaskedSecretValue(clientSecret)) {
         throw new Error('네이버 검색 API 키가 마스킹된 표시값으로 저장되어 있습니다. 설정 → 네이버 Client ID / Secret 칸을 완전히 비운 뒤 실제 값을 다시 입력해주세요.');
     }
 
-    // URL 생성
-    const params = new URLSearchParams();
-    params.append('query', options.query);
-    params.append('display', String(options.display || 10));
-    params.append('start', String(options.start || 1));
-    if (options.sort) {
-        params.append('sort', options.sort);
+    const credentials = resolveAllNaverCredentials({
+        ...(payload || {}),
+        ...(clientId && clientSecret ? { naverClientId: clientId, naverClientSecret: clientSecret } : {}),
+    });
+    if (credentials.length === 0) {
+        throw new Error('네이버 검색 API 키가 설정되지 않았습니다. 설정에서 API HUB Client ID/Secret(네이버클라우드) 또는 기존 Client ID/Secret을 입력해주세요.');
     }
-
-    const url = `https://openapi.naver.com/v1/search/${endpoint}.json?${params.toString()}`;
 
     console.log(`[NaverSearchAPI] ${endpoint} 검색: "${options.query}"`);
 
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'X-Naver-Client-Id': clientId,
-            'X-Naver-Client-Secret': clientSecret,
+    const result = await callNaverSearch<NaverSearchResponse<T>>(
+        endpoint as Parameters<typeof callNaverSearch>[0],
+        {
+            query: options.query,
+            display: options.display || 10,
+            start: options.start || 1,
+            sort: options.sort,
         },
-    });
+        { credentials, maxAttempts: Math.max(2, credentials.length), rotateOnQuota: true },
+    );
 
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`네이버 검색 API 오류 (${response.status}): ${errorText}`);
+    if (!result.ok || !result.data) {
+        throw new Error(`네이버 검색 API 오류 (${result.status}): ${result.error ?? '응답 없음'}`);
     }
 
-    const data = await response.json() as NaverSearchResponse<T>;
-    console.log(`[NaverSearchAPI] ${endpoint} 검색 완료: ${data.items.length}개 결과`);
+    const data = result.data;
+    console.log(`[NaverSearchAPI] ${endpoint} 검색 완료: ${data.items.length}개 결과 (${result.label})`);
 
     return data;
 }

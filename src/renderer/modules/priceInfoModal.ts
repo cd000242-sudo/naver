@@ -1843,7 +1843,13 @@ export async function initPriceInfoModal(): Promise<void> {
             method: 'GET',
             signal: AbortSignal.timeout(10000)
           });
-          diagnosticResults.push(`✅ 네이버 API: 도달 가능 (상태: ${naverResponse.status})`);
+          diagnosticResults.push(`✅ 네이버 API(기존): 도달 가능 (상태: ${naverResponse.status})`);
+          // [2026-08] 개편 후 실제 창구인 API HUB 도달성도 함께 본다.
+          const hubResponse = await fetch('https://naverapihub.apigw.ntruss.com/search/v1/blog?query=test&display=1', {
+            method: 'GET',
+            signal: AbortSignal.timeout(10000)
+          });
+          diagnosticResults.push(`✅ 네이버 API HUB: 도달 가능 (상태: ${hubResponse.status} — 401이면 키 미입력/미이관)`);
         } catch (e) {
           const errMsg = (e as Error).message;
           if (errMsg.includes('timeout') || errMsg.includes('Timeout')) {

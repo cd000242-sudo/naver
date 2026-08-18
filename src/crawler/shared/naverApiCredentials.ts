@@ -1,61 +1,37 @@
 // src/crawler/shared/naverApiCredentials.ts
-// Naver Open API key-pair collection from env — single source of truth.
-// Third consumer (docCapture) triggered the extraction rule: previously
-// duplicated in naverApiSource.ts and newsOgImageSource.ts.
-// Env is populated by applyConfigToEnv; masked/corrupted values (non-ASCII)
-// are rejected so a broken key never reaches a fetch header (ByteString crash).
+// Thin adapter over the single Naver gateway (src/naver).
+// Kept as its own module because three crawler call sites already import it;
+// all credential/URL/header knowledge now lives in src/naver so the 2026-06-25
+// API HUB migration is a one-file change, not a codebase-wide sweep.
 
-const HEADER_SAFE = /^[\x21-\x7E]+$/;
+import { callNaverSearch, resolveAllNaverCredentials } from '../../naver/index.js';
+import type { NaverSearchParams, NaverSearchType } from '../../naver/index.js';
 
-export interface NaverKeyPair {
-  id: string;
-  secret: string;
-  label: string;
-}
+export type { NaverCredential } from '../../naver/index.js';
 
-function cleanEnv(v: string | undefined): string {
-  const s = String(v || '').trim().replace(/^['"]|['"]$/g, '').trim();
-  return s && HEADER_SAFE.test(s) ? s : '';
-}
-
-/** NAVER_CLIENT_* + NAVER_DATALAB_* pairs including _2.._10 rotations. */
-export function collectNaverKeyPairs(): NaverKeyPair[] {
-  const pairs: NaverKeyPair[] = [];
-  const bases: Array<[string, string, string]> = [
-    ['NAVER_CLIENT_ID', 'NAVER_CLIENT_SECRET', 'NAVER'],
-    ['NAVER_DATALAB_CLIENT_ID', 'NAVER_DATALAB_CLIENT_SECRET', 'DATALAB'],
-  ];
-  for (const [idKey, secretKey, label] of bases) {
-    const id = cleanEnv(process.env[idKey]);
-    const secret = cleanEnv(process.env[secretKey]);
-    if (id && secret) pairs.push({ id, secret, label: `${label}#1` });
-    for (let i = 2; i <= 10; i++) {
-      const id2 = cleanEnv(process.env[`${idKey}_${i}`]);
-      const secret2 = cleanEnv(process.env[`${secretKey}_${i}`]);
-      if (id2 && secret2) pairs.push({ id: id2, secret: secret2, label: `${label}#${i}` });
-    }
-  }
-  return pairs;
+/** True when at least one usable key (HUB or legacy) is configured. */
+export function hasNaverCredentials(): boolean {
+  return resolveAllNaverCredentials().length > 0;
 }
 
 /**
- * Call a Naver Open API JSON endpoint trying each key pair until one works.
- * Returns null when no pair succeeds (caller degrades gracefully).
+ * Call a Naver search endpoint through the gateway.
+ * HUB→legacy failover and same-mode quota rotation are handled inside;
+ * returns null when nothing worked (caller degrades gracefully).
  */
-export async function fetchNaverOpenApi<T>(url: string): Promise<T | null> {
-  for (const pair of collectNaverKeyPairs()) {
-    try {
-      const res = await fetch(url, {
-        headers: {
-          'X-Naver-Client-Id': pair.id,
-          'X-Naver-Client-Secret': pair.secret,
-        },
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status} (${pair.label})`);
-      return (await res.json()) as T;
-    } catch (error) {
-      console.warn(`[NaverApi] 실패 (${pair.label}): ${(error as Error).message}`);
-    }
+export async function fetchNaverSearch<T>(
+  type: NaverSearchType,
+  params: NaverSearchParams,
+): Promise<T | null> {
+  const creds = resolveAllNaverCredentials();
+  const result = await callNaverSearch<T>(type, params, {
+    credentials: creds,
+    maxAttempts: Math.max(2, creds.length),
+    rotateOnQuota: true,
+  });
+  if (!result.ok) {
+    console.warn(`[NaverApi] ${type} 실패 (${result.status}): ${result.error ?? '알 수 없는 오류'}`);
+    return null;
   }
-  return null;
+  return result.data;
 }

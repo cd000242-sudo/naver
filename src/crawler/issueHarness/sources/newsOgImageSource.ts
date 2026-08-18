@@ -2,43 +2,18 @@
 // News og:image adapter — two stages:
 //   1) Naver News Open API to find recent article URLs for the query
 //   2) fetch each article's HTML and extract its og:image meta tag
-// Same env-key rotation convention as naverApiSource.ts.
+// Stage 1 goes through the single Naver gateway (src/naver): HUB/legacy keys,
+// failover and quota rotation are handled there, not here.
 
+import { callNaverSearch, resolveAllNaverCredentials } from '../../../naver/index.js';
 import type { IssueCandidateImage, IssueSourceAdapter } from '../types.js';
 
 const LOG = '[IssueSource:news-og]';
-const HEADER_SAFE = /^[\x21-\x7E]+$/;
 const DESKTOP_UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 const MAX_ARTICLES = 8;
 const MAX_BODY_BYTES = 200 * 1024;
 const ARTICLE_TIMEOUT_MS = 8000;
-
-interface KeyPair { id: string; secret: string; label: string }
-
-function cleanEnv(v: string | undefined): string {
-  const s = String(v || '').trim().replace(/^['"]|['"]$/g, '').trim();
-  return s && HEADER_SAFE.test(s) ? s : '';
-}
-
-function collectKeyPairs(): KeyPair[] {
-  const pairs: KeyPair[] = [];
-  const bases: Array<[string, string, string]> = [
-    ['NAVER_CLIENT_ID', 'NAVER_CLIENT_SECRET', 'NAVER'],
-    ['NAVER_DATALAB_CLIENT_ID', 'NAVER_DATALAB_CLIENT_SECRET', 'DATALAB'],
-  ];
-  for (const [idKey, secretKey, label] of bases) {
-    const id = cleanEnv(process.env[idKey]);
-    const secret = cleanEnv(process.env[secretKey]);
-    if (id && secret) pairs.push({ id, secret, label: `${label}#1` });
-    for (let i = 2; i <= 10; i++) {
-      const id2 = cleanEnv(process.env[`${idKey}_${i}`]);
-      const secret2 = cleanEnv(process.env[`${secretKey}_${i}`]);
-      if (id2 && secret2) pairs.push({ id: id2, secret: secret2, label: `${label}#${i}` });
-    }
-  }
-  return pairs;
-}
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -86,16 +61,15 @@ function isLikelyLogo(url: string): boolean {
 
 interface NewsApiItem { originallink?: string; link?: string }
 
-async function searchNewsArticles(query: string, pair: KeyPair): Promise<string[]> {
-  const url = `https://openapi.naver.com/v1/search/news.json?query=${encodeURIComponent(query)}&display=10&sort=date`;
-  const res = await fetch(url, {
-    headers: {
-      'X-Naver-Client-Id': pair.id,
-      'X-Naver-Client-Secret': pair.secret,
-    },
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status} (${pair.label})`);
-  const data = (await res.json()) as { items?: NewsApiItem[] };
+async function searchNewsArticles(query: string): Promise<string[]> {
+  const credentials = resolveAllNaverCredentials();
+  const result = await callNaverSearch<{ items?: NewsApiItem[] }>(
+    'news',
+    { query, display: 10, sort: 'date' },
+    { credentials, maxAttempts: Math.max(2, credentials.length), rotateOnQuota: true },
+  );
+  if (!result.ok) throw new Error(result.error ?? `HTTP ${result.status}`);
+  const data = result.data ?? {};
   const seen = new Set<string>();
   const links: string[] = [];
   for (const item of data.items || []) {
@@ -171,20 +145,17 @@ export const newsOgImageSource: IssueSourceAdapter = {
     if (!query || !query.trim()) return [];
     const trimmed = query.trim();
     try {
-      const pairs = collectKeyPairs();
-      if (pairs.length === 0) {
+      const credentials = resolveAllNaverCredentials();
+      if (credentials.length === 0) {
         console.warn(`${LOG} API 키 없음 — 뉴스 og:image 소스 건너뜀`);
         return [];
       }
 
       let articleUrls: string[] = [];
-      for (const pair of pairs) {
-        try {
-          articleUrls = await searchNewsArticles(trimmed, pair);
-          break;
-        } catch (error) {
-          console.warn(`${LOG} 뉴스 검색 실패 (${pair.label}): ${(error as Error).message}`);
-        }
+      try {
+        articleUrls = await searchNewsArticles(trimmed);
+      } catch (error) {
+        console.warn(`${LOG} 뉴스 검색 실패: ${(error as Error).message}`);
       }
       if (articleUrls.length === 0) return [];
 

@@ -144,6 +144,7 @@ import {
 } from './contentManualTitlePolicy.js';
 import { withRetry, isRetryableError } from './errorRecovery.js';
 import { createDatalabClient, NaverDatalabClient } from './naverDatalab.js';
+import { naverSearchAvailable } from './naver/index.js';
 import type { ContentSource, StructuredContent, ContentGeneratorProvider, ArticleType } from './contentGenerator.js';
 import { assembleContentSource, type SourceAssemblyInput } from './sourceAssembler.js';
 import { applyConfigToEnv, loadConfig, saveConfig, validateApiKeyFormat, type AppConfig } from './configManager.js';
@@ -2123,6 +2124,8 @@ async function createWindow(): Promise<void> {
               "https://picsum.photos https://*.picsum.photos " +
               // 네이버 (검색, API, 데이터랩)
               "https://openapi.naver.com https://datalab.naver.com https://search.naver.com https://*.naver.com " +
+              // NAVER API HUB (네이버클라우드) — 2026-06-25 개편 이후 검색/트렌드 게이트웨이
+              "https://naverapihub.apigw.ntruss.com https://*.apigw.ntruss.com " +
               // Google Apps Script (라이선스 서버)
               "https://script.google.com https://script.googleusercontent.com " +
               "https://*.google.com https://www.google.com https://dns.google " +
@@ -5762,7 +5765,7 @@ ipcMain.handle(
       try {
         const _config = await loadConfig();
         const factCheckEnabled = (_config as any).useNaverFactCheck !== false; // 기본 ON
-        const hasNaverKeys = !!((_config as any).naverClientId && (_config as any).naverClientSecret);
+        const hasNaverKeys = naverSearchAvailable((_config as any).naverClientId, (_config as any).naverClientSecret);
         const hasKeywords = Array.isArray(payload.assembly.keywords) && payload.assembly.keywords.length > 0;
         const rawTextShort = !source.rawText || source.rawText.trim().length < 200; // 200자 이하면 자료 부족
 

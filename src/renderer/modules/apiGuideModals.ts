@@ -383,7 +383,7 @@ export function initApiGuideModal(): void {
     },
     naver: {
       title: '📖 네이버 검색 API 키 발급 가이드 (크롤링 강화)',
-      url: 'https://developers.naver.com/apps/#/register',
+      url: 'https://www.ncloud.com/product/applicationService/naverApiHub',
       content: `
         <div style="line-height: 1.8; color: var(--text-strong);">
           <h3 style="color: #03c75a; margin-bottom: 1rem;">🎯 네이버 검색 API란?</h3>
@@ -391,15 +391,15 @@ export function initApiGuideModal(): void {
           
           <h3 style="color: #03c75a; margin-bottom: 1rem;">📝 발급 방법</h3>
           <ol style="padding-left: 1.5rem; margin-bottom: 1rem;">
-            <li style="margin-bottom: 0.75rem;"><strong>1단계:</strong> 네이버 개발자 센터 접속</li>
-            <li style="margin-bottom: 0.75rem;"><strong>2단계:</strong> 애플리케이션 등록 클릭</li>
-            <li style="margin-bottom: 0.75rem;"><strong>3단계:</strong> 검색 API 선택 후 앱 생성</li>
-            <li style="margin-bottom: 0.75rem;"><strong>4단계:</strong> Client ID와 Secret 복사</li>
+            <li style="margin-bottom: 0.75rem;"><strong>1단계:</strong> 네이버클라우드 콘솔 접속 (AI·NAVER API → API HUB)</li>
+            <li style="margin-bottom: 0.75rem;"><strong>2단계:</strong> Application 등록</li>
+            <li style="margin-bottom: 0.75rem;"><strong>3단계:</strong> 사용할 검색 서비스를 <strong>반드시 선택</strong> (미선택 시 429)</li>
+            <li style="margin-bottom: 0.75rem;"><strong>4단계:</strong> Client ID와 Secret 복사 → 설정의 <strong>API HUB 칸</strong>에 입력</li>
           </ol>
           
           <div style="background: rgba(3, 199, 90, 0.1); border: 2px solid rgba(3, 199, 90, 0.3); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
             <h4 style="color: #03c75a; margin-bottom: 0.5rem;">💰 비용 안내</h4>
-            <p style="margin: 0;">네이버 검색 API는 <strong>하루 25,000회까지 무료</strong>입니다.</p>
+            <p style="margin: 0;">네이버 검색 API는 <strong>하루 25,000회까지 무료</strong>입니다.<br>2026-06-25 개편으로 신규 발급은 네이버클라우드(API HUB)에서 이뤄지며, <strong>쇼핑·책·전문자료 검색은 2026-07-31 종료</strong>되어 대체 API가 없습니다.</p>
           </div>
         </div>
       `

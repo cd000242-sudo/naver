@@ -46,6 +46,8 @@ const SENSITIVE_FIELDS: readonly string[] = [
   'deepinfraApiKey',
   'naverClientId',
   'naverClientSecret',
+  'naverHubClientId',
+  'naverHubClientSecret',
   'naverDatalabClientId',
   'naverDatalabClientSecret',
   'naverAdApiKey',
