@@ -93,15 +93,25 @@ async function fetchVolumes(keywords) {
   }
 }
 
-/** 블로그 문서 총건수. */
+/** 블로그 문서 총건수.
+ * NAVER API HUB 이관 대응: NAVER_APIHUB_KEY_ID/KEY 가 있으면 새 게이트웨이로,
+ * 없으면 기존 개발자센터 방식(유예 ~2027-06-30)으로 나간다. */
 async function fetchDocumentCount(keyword) {
-  const url = `https://openapi.naver.com/v1/search/blog.json?query=${encodeURIComponent(keyword)}&display=1`;
+  const hubKeyId = (process.env.NAVER_APIHUB_KEY_ID || '').trim();
+  const hubKey = (process.env.NAVER_APIHUB_KEY || '').trim();
+  const useHub = hubKeyId && hubKey;
+  const base = (process.env.NAVER_APIHUB_BASE || 'https://naverapihub.apigw.ntruss.com').trim();
+  const url = useHub
+    ? `${base}/search/v1/blog?query=${encodeURIComponent(keyword)}&display=1`
+    : `https://openapi.naver.com/v1/search/blog.json?query=${encodeURIComponent(keyword)}&display=1`;
   try {
     const res = await fetch(url, {
-      headers: {
-        'X-Naver-Client-Id': SEARCH_CLIENT_ID,
-        'X-Naver-Client-Secret': SEARCH_CLIENT_SECRET,
-      },
+      headers: useHub
+        ? { 'X-NCP-APIGW-API-KEY-ID': hubKeyId, 'X-NCP-APIGW-API-KEY': hubKey }
+        : {
+            'X-Naver-Client-Id': SEARCH_CLIENT_ID,
+            'X-Naver-Client-Secret': SEARCH_CLIENT_SECRET,
+          },
     });
     if (!res.ok) return null;
     const data = await res.json();
