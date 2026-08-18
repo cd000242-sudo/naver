@@ -594,6 +594,9 @@ function LewordStyles() {
             .lw-product-metrics { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 9px; }
             .lw-product-metrics span { color: rgba(235,242,250,.5); font-size: 11px; }
             .lw-product-metrics .lw-product-price strong { color: #ffd700; font-size: 14px; }
+            .lw-product-metrics .lw-product-need { padding: 2px 8px; border: 1px solid rgba(46,204,113,.35); border-radius: 999px; background: rgba(46,204,113,.1); }
+            .lw-product-metrics .lw-product-need strong { color: #2ecc71; }
+            .lw-product-metrics .lw-product-persale strong { color: #ffa500; font-size: 13px; }
             .lw-product-metrics strong { color: #fff; font-size: 12px; font-weight: 800; margin-left: 3px; }
             /* 카드 우측 버튼 열 — 사장님 지시: 우측 세로 정렬, 테두리, 기능별 색. */
             .lw-product-actions { display: flex; flex-direction: column; gap: 7px; justify-content: center; }
