@@ -275,16 +275,37 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
     useEffect(() => {
         let alive = true;
-        fetch(BOARD_URL, { cache: 'no-store' })
-            .then((response) => (response.ok ? response.json() : Promise.reject(new Error('no board'))))
-            .then((data) => {
-                if (!alive) return;
-                const rows: PreemptionRow[] = Array.isArray(data?.rows) ? data.rows : [];
-                setBoard({ ...data, rows, reference: Array.isArray(data?.reference) ? data.reference : [] });
-                setStatus(rows.length > 0 ? 'ready' : 'empty');
-            })
-            .catch(() => { if (alive) setStatus('error'); });
-        return () => { alive = false; };
+        let lastEnrichedAt = '';
+        const load = () => {
+            fetch(BOARD_URL, { cache: 'no-store' })
+                .then((response) => (response.ok ? response.json() : Promise.reject(new Error('no board'))))
+                .then((data) => {
+                    if (!alive) return;
+                    // 같은 판이면 화면을 안 건드린다 — 스크롤·펼친 카드가 튀지 않게.
+                    const stamp = String(data?.enrichedAt || data?.publishedAt || '');
+                    if (stamp && stamp === lastEnrichedAt) return;
+                    lastEnrichedAt = stamp;
+                    const rows: PreemptionRow[] = Array.isArray(data?.rows) ? data.rows : [];
+                    setBoard({ ...data, rows, reference: Array.isArray(data?.reference) ? data.reference : [] });
+                    setStatus(rows.length > 0 ? 'ready' : 'empty');
+                })
+                .catch(() => { if (alive && !lastEnrichedAt) setStatus('error'); });
+        };
+        load();
+        /*
+         * 데이터 자동 갱신(2026-08-18). 번들 감시(versionWatch)는 코드 배포만
+         * 잡는다 — 회차·재보강은 데이터만 바뀌므로 열려 있던 탭이 옛 보드를
+         * 계속 보여줬다("사이트 그대론데?" — 사장님 실측). 탭에 돌아온 순간과
+         * 10분 주기로 다시 불러온다.
+         */
+        const interval = window.setInterval(load, 10 * 60_000);
+        const onVisible = () => { if (document.visibilityState === 'visible') load(); };
+        document.addEventListener('visibilitychange', onVisible);
+        return () => {
+            alive = false;
+            window.clearInterval(interval);
+            document.removeEventListener('visibilitychange', onVisible);
+        };
     }, []);
 
     /** 실제로 행이 있는 주제만 칩으로 낸다. 빈 칩을 누르게 하면 안 된다. */
