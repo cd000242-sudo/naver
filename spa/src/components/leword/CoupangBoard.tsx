@@ -126,6 +126,9 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                             </div>
                             <a className="lw-product-name" href={row.url} target="_blank" rel="noreferrer">{row.name}</a>
                             <div className="lw-product-metrics">
+                                {typeof row.price === 'number' && row.price > 0 && (
+                                    <span className="lw-product-price"><strong>{row.price.toLocaleString('ko-KR')}원</strong></span>
+                                )}
                                 <span>검색어 <strong>{row.keyword}</strong></span>
                                 <span>월 검색량 <strong>{row.searchVolume === null ? '—' : row.searchVolume.toLocaleString('ko-KR')}</strong></span>
                                 <span>문서수 <strong>{row.documentCount === null ? '—' : row.documentCount.toLocaleString('ko-KR')}</strong></span>
@@ -134,7 +137,6 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                         상위{row.serpTop.sampled} 정면 <strong>{row.serpTop.exact}개</strong>
                                     </span>
                                 )}
-                                <span>가격 <strong>{row.price === null ? '—' : `${row.price.toLocaleString('ko-KR')}원`}</strong></span>
                             </div>
                         </div>
                         <div className="lw-product-actions">
