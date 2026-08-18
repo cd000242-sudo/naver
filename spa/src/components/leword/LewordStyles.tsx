@@ -174,6 +174,14 @@ function LewordStyles() {
             .lw-note-plain { font-size: 13px; }
             .lw-note-setup { border-color: rgba(124,92,255,.3); background: rgba(124,92,255,.08); }
             .lw-note-limit { border-color: rgba(245,197,24,.32); background: rgba(245,197,24,.07); }
+            .lw-more-btn {
+                display: block; width: 100%; margin: 14px 0 4px; padding: 12px 16px;
+                border: 1px dashed rgba(255,215,0,.4); border-radius: 12px;
+                background: rgba(255,215,0,.06); color: #ffd700;
+                font-size: 14px; font-weight: 700; cursor: pointer;
+                transition: background .2s ease, border-color .2s ease;
+            }
+            .lw-more-btn:hover { background: rgba(255,215,0,.12); border-color: rgba(255,215,0,.65); }
             .lw-note-error { border-color: rgba(255,107,129,.32); background: rgba(255,107,129,.07); }
             .lw-note button {
                 margin-top: 10px; padding: 9px 16px;

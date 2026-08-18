@@ -119,6 +119,11 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     /** 실행 계획을 펼친 카드. 한 번에 하나만 연다 — 다 펼치면 목록이 안 읽힌다. */
     const [openPlan, setOpenPlan] = useState('');
+    /*
+     * 점진 렌더 — 보드가 누적형(목표 2,000행)이 되면서 전량 렌더는 폰에서 못 버틴다.
+     * 처음 60행만 그리고 "더 보기"로 늘린다. 필터가 바뀌면 처음으로 돌아간다.
+     */
+    const [visibleCount, setVisibleCount] = useState(60);
     /** 방금 복사한 키워드. 눌렀는지 안 눌렀는지 모르면 두 번 누르게 된다. */
     const [copied, setCopied] = useState('');
     /*
@@ -358,6 +363,10 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
 
+    useEffect(() => {
+        setVisibleCount(60);
+    }, [topic, query, writeLane]);
+
     const publishedLabel = board?.publishedAt
         ? new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
             .format(new Date(board.publishedAt))
@@ -421,7 +430,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     )}
 
                     <div className="lw-board-list">
-                        {rows.map((row, index) => {
+                        {rows.slice(0, visibleCount).map((row, index) => {
                             const locked = !unlocked && index >= FREE_BOARD_ROWS;
                             return (
                                 <article key={`${row.topic}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
@@ -715,6 +724,16 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             );
                         })}
                     </div>
+
+                    {rows.length > visibleCount && (
+                        <button
+                            type="button"
+                            className="lw-more-btn"
+                            onClick={() => setVisibleCount((count) => count + 60)}
+                        >
+                            더 보기 — 남은 {(rows.length - visibleCount).toLocaleString('ko-KR')}개
+                        </button>
+                    )}
 
                     {rows.length === 0 && <div className="lw-note">이 주제에는 통과한 키워드가 없습니다.</div>}
 
