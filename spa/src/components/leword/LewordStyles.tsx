@@ -593,6 +593,7 @@ function LewordStyles() {
             .lw-product-name:hover { color: #cfc4ff; }
             .lw-product-metrics { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 9px; }
             .lw-product-metrics span { color: rgba(235,242,250,.5); font-size: 11px; }
+            .lw-product-metrics .lw-product-price strong { color: #ffd700; font-size: 14px; }
             .lw-product-metrics strong { color: #fff; font-size: 12px; font-weight: 800; margin-left: 3px; }
             /* 카드 우측 버튼 열 — 사장님 지시: 우측 세로 정렬, 테두리, 기능별 색. */
             .lw-product-actions { display: flex; flex-direction: column; gap: 7px; justify-content: center; }

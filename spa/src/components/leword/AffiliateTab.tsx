@@ -24,6 +24,8 @@ type CampaignItem = {
     image: string;
     url: string;
     reward: string;
+    /** 판매가(원). 수집기가 이미 싣고 있었는데 화면이 버리고 있었다 — 2026-08-19 표시. */
+    price?: number | null;
     /** 상품명에서 뽑은 검색어 — 쿠팡 레인과 같은 규칙. */
     keyword?: string;
     /** 브랜드커넥트 상품 ID — 내 스페이스 ID와 합쳐야 링크발급 화면이 열린다. */
@@ -145,6 +147,9 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         </div>
                                         <a className="lw-product-name" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">{item.name}</a>
                                         <div className="lw-product-metrics">
+                                            {typeof item.price === 'number' && item.price > 0 && (
+                                                <span className="lw-product-price"><strong>{item.price.toLocaleString('ko-KR')}원</strong></span>
+                                            )}
                                             <span>검색어 <strong>{query}</strong></span>
                                             <span>월 검색량 <strong>{item.searchVolume == null ? '—' : item.searchVolume.toLocaleString('ko-KR')}</strong></span>
                                             <span>문서수 <strong>{item.documentCount == null ? '—' : item.documentCount.toLocaleString('ko-KR')}</strong></span>
