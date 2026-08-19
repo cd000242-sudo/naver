@@ -215,8 +215,9 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                     <div className="lw-panel-head">
                         <h2>{PLATFORM_LABEL[audit.platform] || audit.platform} · 최근 발행 {audit.rows.length}건</h2>
                         <span>
-                            노출 = 제목 검색 상위 100 안에서 그 글을 찾은 것 · 누락 = 못 찾은 것(차단·저품질 의심)
-                            · 조회수는 공개 API 가 없어 싣지 않습니다
+                            순위 기준 = 그 글의 <strong>제목을 그대로 검색</strong>했을 때 상위 100 중 그 글의 자리.
+                            제 제목으로도 안 잡히면(누락) 어떤 키워드로도 노출될 수 없어, 차단(저품질)을 거르는 기준선입니다.
+                            특정 키워드 순위는 아래 "키워드로 직접 확인"을 쓰세요 · 조회수는 공개 API 가 없어 싣지 않습니다
                         </span>
                     </div>
                     <div className="lw-table-scroll">
@@ -227,7 +228,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     <th scope="col">제목</th>
                                     <th scope="col">발행일</th>
                                     <th scope="col">공감·댓글</th>
-                                    <th scope="col">순위</th>
+                                    <th scope="col" title="그 글의 제목을 그대로 검색했을 때 상위 100 중 자리">제목검색 순위</th>
                                     <th scope="col" aria-label="분석" />
                                 </tr>
                             </thead>
