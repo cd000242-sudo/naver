@@ -304,3 +304,35 @@ describe('키 구성 진단 — 벽에 부딪히기 전에 알려준다', () => 
     expect(posture.warning).toMatch(/네이버 API 키가 없습니다/);
   });
 });
+
+describe('memo 는 엔드포인트별이다 — HUB 가 일부 서비스만 열려 있어도 손해 보지 않는다', () => {
+  // 실측(2026-08-19): 같은 HUB 키로 blog 200 / webkr 401(Application 미선택).
+  it('webkr 이 기존 키로 토스돼도 blog 는 계속 HUB 로 간다', async () => {
+    const okBlog = fakeFetch([200]);
+    await callNaverSearch('blog', { query: 'a' }, { credentials: [HUB, LEGACY], fetchImpl: okBlog.impl });
+    expect(getPreferredNaverMode('blog')).toBe('hub');
+
+    // webkr 은 HUB 에서 401 → 기존 키로 토스되어 성공
+    const webkr = fakeFetch([401, 200]);
+    const w = await callNaverSearch('webkr', { query: 'a' }, { credentials: [HUB, LEGACY], fetchImpl: webkr.impl });
+    expect(w.mode).toBe('legacy');
+    expect(getPreferredNaverMode('webkr')).toBe('legacy');
+
+    // 핵심: blog 기억이 오염되지 않았다
+    expect(getPreferredNaverMode('blog')).toBe('hub');
+    const blog2 = fakeFetch([200]);
+    const b = await callNaverSearch('blog', { query: 'b' }, { credentials: [HUB, LEGACY], fetchImpl: blog2.impl });
+    expect(blog2.calls).toHaveLength(1);
+    expect(blog2.calls[0].url).toMatch(/naverapihub\.apigw\.ntruss\.com/);
+    expect(b.attempts).toBe(1);
+  });
+
+  it('데이터랩 기억은 검색 기억과 섞이지 않는다', async () => {
+    const search = fakeFetch([200]);
+    await callNaverSearch('blog', { query: 'a' }, { credentials: [HUB, LEGACY], fetchImpl: search.impl });
+    const dl = fakeFetch([401, 200]);
+    await callNaverDatalab({ startDate: '2026-07-01' }, { credentials: [HUB, LEGACY], fetchImpl: dl.impl });
+    expect(getPreferredNaverMode('datalab')).toBe('legacy');
+    expect(getPreferredNaverMode('blog')).toBe('hub');
+  });
+});

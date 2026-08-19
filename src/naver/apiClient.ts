@@ -46,15 +46,24 @@ export interface NaverApiResult<T> {
 
 const AUTH_BLOCKED = new Set([401, 403, 404]);
 
-let preferredMode: NaverApiMode | null = null;
+/**
+ * Memo is per endpoint, not global.
+ *
+ * 실측(2026-08-19): API HUB 는 Application 에서 선택한 서비스만 열린다. 같은 키인데도
+ * blog 는 200, webkr 는 401 이 나온다. memo 가 하나뿐이면 webkr 이 기존 키로 토스되는
+ * 순간 blog 까지 기존 키로 끌려가고, HUB 가 멀쩡한 엔드포인트마저 매번 헛걸음한다.
+ */
+const preferredModeByEndpoint = new Map<string, NaverApiMode>();
 
-/** Process-lifetime memo of the mode that last worked. */
-export function getPreferredNaverMode(): NaverApiMode | null {
-  return preferredMode;
+/** Process-lifetime memo of the mode that last worked for one endpoint. */
+export function getPreferredNaverMode(endpoint?: string): NaverApiMode | null {
+  if (endpoint) return preferredModeByEndpoint.get(endpoint) ?? null;
+  const modes = new Set(preferredModeByEndpoint.values());
+  return modes.size === 1 ? [...modes][0] : null;
 }
 
 export function resetNaverModeMemo(): void {
-  preferredMode = null;
+  preferredModeByEndpoint.clear();
 }
 
 const NO_KEY_MESSAGE =
@@ -62,9 +71,10 @@ const NO_KEY_MESSAGE =
   + '(네이버클라우드 콘솔 발급) 또는 기존 네이버 개발자센터 Client ID/Secret 을 입력하세요.';
 
 /** Memo first, then HUB before legacy. */
-function orderCredentials(creds: NaverCredential[]): NaverCredential[] {
-  if (!preferredMode) return creds;
-  return [...creds.filter((c) => c.mode === preferredMode), ...creds.filter((c) => c.mode !== preferredMode)];
+function orderCredentials(creds: NaverCredential[], endpoint: string): NaverCredential[] {
+  const preferred = preferredModeByEndpoint.get(endpoint);
+  if (!preferred) return creds;
+  return [...creds.filter((c) => c.mode === preferred), ...creds.filter((c) => c.mode !== preferred)];
 }
 
 /** Next candidate after `used`, preferring a different mode (that is what failover means). */
@@ -103,6 +113,7 @@ async function runRequest<T>(
 }
 
 async function callWithFailover<T>(
+  endpoint: string,
   buildUrl: (cred: NaverCredential) => string,
   init: any,
   options: NaverCallOptions,
@@ -113,7 +124,7 @@ async function callWithFailover<T>(
   const fetchImpl = options.fetchImpl ?? (globalThis.fetch as unknown as NaverFetch);
   const timeoutMs = options.timeoutMs ?? 15000;
   const maxAttempts = Math.max(1, options.maxAttempts ?? 2);
-  const ordered = orderCredentials(creds);
+  const ordered = orderCredentials(creds, endpoint);
 
   const used: NaverCredential[] = [];
   let last: { status: number; error?: string; cred: NaverCredential } | null = null;
@@ -125,7 +136,7 @@ async function callWithFailover<T>(
 
     const res = await runRequest<T>(cred, buildUrl(cred), init, fetchImpl, timeoutMs);
     if (res.status >= 200 && res.status < 300) {
-      preferredMode = cred.mode;
+      preferredModeByEndpoint.set(endpoint, cred.mode);
       return { ok: true, status: res.status, data: res.data, mode: cred.mode, label: cred.label, attempts: used.length };
     }
     last = { status: res.status, error: res.error, cred };
@@ -159,7 +170,7 @@ export async function callNaverSearch<T>(
   if (isRetiredNaverSearchType(type)) {
     return { ok: false, status: 410, data: null, error: describeRetiredSearchType(type), attempts: 0 };
   }
-  return callWithFailover<T>((cred) => buildNaverSearchUrl(type, params, cred), { method: 'GET' }, options);
+  return callWithFailover<T>(type, (cred) => buildNaverSearchUrl(type, params, cred), { method: 'GET' }, options);
 }
 
 /** Search Trend (datalab) API. */
@@ -168,6 +179,7 @@ export async function callNaverDatalab<T>(
   options: NaverCallOptions = {},
 ): Promise<NaverApiResult<T>> {
   return callWithFailover<T>(
+    'datalab',
     (cred) => buildNaverDatalabUrl(cred),
     { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) },
     options,
