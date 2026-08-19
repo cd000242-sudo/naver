@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -239,6 +239,14 @@ export const auditBlogPosts = (url: string) =>
 
 export const auditBlogCheck = (title: string, link: string) =>
     call<{ rank: number | null; sampled: number; sympathy: number | null }>('blog-audit-check', { title, link });
+
+/**
+ * 마인드맵 추론 — 클로드코드 토큰으로 앱 없이(사장님 지시 2026-08-20 "추론은
+ * 따로 연동해야 되냐"). 검색광고 실측 연관을 AI 가 선별+왜검색 한 문장.
+ * result 는 브리지 마인드맵과 같은 모양이라 화면 소비부가 갈라지지 않는다.
+ */
+export const fetchMindmapAI = (keyword: string) =>
+    call<{ result: unknown }>('mindmap-ai', { keyword });
 
 /** 지식인 질문 전문 — 답변 작업대는 질문이 안 잘리고 끝까지 보여야 한다. */
 export const fetchKinQuestion = (link: string) =>

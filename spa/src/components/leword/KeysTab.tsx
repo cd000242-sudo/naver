@@ -93,23 +93,29 @@ function KeysTab() {
                 시트·로그·설정 어디에도 저장하지 않습니다. 브라우저를 바꾸면 다시 입력해야 합니다.
             </div>
 
-            {/* AI 추론 — 클로드코드 연동 (키 없음·비용 없음, 사용자 PC 구독 실행) */}
+            {/*
+              * AI 추론 — 연동은 하나다(사장님 지적 2026-08-20 "추론은 따로
+              * 연동해야 되냐"): 위 '클로드코드 토큰'이 있으면 추론·답변 모두
+              * 앱 없이 그 토큰으로 돈다. 이 패널의 앱 브리지는 토큰이 없는
+              * 사용자용 대안일 뿐이다.
+              */}
             <section className="lw-panel" aria-label="AI 추론 (클로드코드)">
                 <div className="lw-panel-head">
                     <h2>AI 추론 (클로드코드)</h2>
-                    <span className={connected ? 'lw-key-on' : ''}>
-                        {connecting || bridge === null ? '연결 확인 중…'
-                            : connected ? '✅ 연동이 완료되었습니다 — 구독으로 무료 추론'
-                                : !bridge.connected ? '아직 연동 전'
-                                    : claudeAgent?.installed ? '클로드코드 로그인 필요'
-                                        : '클로드코드 설치 필요'}
+                    <span className={(Boolean(keys.claudeToken) || connected) ? 'lw-key-on' : ''}>
+                        {keys.claudeToken ? '✅ 토큰 연동됨 — 추론·답변 모두 앱 없이 (구독)'
+                            : connecting || bridge === null ? '연결 확인 중…'
+                                : connected ? '✅ 앱 연동됨 — 구독으로 무료 추론'
+                                    : !bridge.connected ? '아직 연동 전'
+                                        : claudeAgent?.installed ? '클로드코드 로그인 필요'
+                                            : '클로드코드 설치 필요'}
                     </span>
-                    {!connected && <a className="lw-key-issue" href="/download">앱 받기 →</a>}
+                    {!connected && !keys.claudeToken && <a className="lw-key-issue" href="/download">앱 받기 →</a>}
                 </div>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
-                    API 키도, 추가 비용도 필요 없습니다. 아래 버튼 한 번이면 이 페이지가
-                    <strong> 내 클로드코드 구독</strong>과 연결되어 서브키워드·후킹을 추론합니다.
-                    연동되면 황금키워드 보드의 <strong>🤖 AI 서브 보강</strong> 버튼이 살아납니다.
+                    맨 위 <strong>클로드코드 토큰</strong>을 넣었다면 이 연동은 이미 끝난 것입니다 —
+                    마인드맵 추론과 지식인 답변이 전부 그 토큰(구독, 추가 비용 0)으로 돕니다.
+                    토큰이 없을 때만 아래 버튼으로 <strong>LEWORD 앱</strong>을 연결해 같은 일을 시킵니다.
                 </p>
                 {connected ? (
                     <button type="button" className="lw-mini lw-mini-ghost" onClick={connectBridge} disabled={connecting}>연동 상태 다시 확인</button>
