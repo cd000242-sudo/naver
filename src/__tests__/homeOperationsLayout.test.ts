@@ -51,7 +51,9 @@ describe('homepage operations layout', () => {
     expect(source).toContain('https://www.google.com/search?q=');
     expect(source).toContain('className="home-ops-keyword-link"');
     expect(source).toContain('className="home-ops-opportunity-link"');
-    expect(source).toContain('className="home-ops-search-cell"><KeywordSearchLinks row={row} /></td>');
+    // [2026-08-20] 바이트 고정 → 구조 단언: 원격(웹 세션)이 검색 셀에 추이 버튼을 넣으며
+    // 한 줄 마크업이 여러 줄로 갈라졌다. 의도(검색 링크가 search-cell td 안에 있다)만 잠근다.
+    expect(source).toMatch(/className="home-ops-search-cell">[\s\S]*?<KeywordSearchLinks row=\{row\} \/>[\s\S]*?<\/td>/);
     expect(source).toContain('<KeywordSearchLinks row={row} compact />');
     expect(source).toContain('target="_blank"');
     expect(source).toContain('rel="noopener noreferrer"');
