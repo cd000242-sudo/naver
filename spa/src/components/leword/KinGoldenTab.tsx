@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { formatCount } from '../../lib/keywordApi';
+import { fetchKinQuestion, formatCount } from '../../lib/keywordApi';
+import { bridgeKinAnswer } from '../../lib/bridge';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -45,12 +46,87 @@ const LANES = [
 
 type LaneId = (typeof LANES)[number]['id'];
 
+/**
+ * 링크 장부 — 지식인은 링크 비율이 높으면 계정이 죽는다(사장님 실전 지식:
+ * 답변 10개 중 1개만). "복사"를 게시로 간주해 이 브라우저에 기록하고,
+ * 최근 9개 안에 링크 답변이 있으면 체크박스를 잠근다.
+ */
+const LEDGER_KEY = 'leaderspro.leword.kinAnswerLedger.v1';
+const BLOG_URL_KEY = 'leaderspro.leword.kinBlogUrl.v1';
+
+type LedgerEntry = { at: string; withLink: boolean };
+
+function loadLedger(): LedgerEntry[] {
+    try {
+        const parsed = JSON.parse(localStorage.getItem(LEDGER_KEY) || '[]');
+        return Array.isArray(parsed) ? parsed.slice(0, 50) : [];
+    } catch {
+        return [];
+    }
+}
+
 function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
     const [data, setData] = useState<KinGoldenData | null>(null);
     const [boardHidden, setBoardHidden] = useState<KinQ[]>([]);
     const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
     const [lane, setLane] = useState<LaneId>('realtime');
     const [copied, setCopied] = useState('');
+
+    /* ── 답변 작업대(사장님 확정 2026-08-20: 생성은 AI, 게시는 하나씩 직접) ── */
+    const [work, setWork] = useState<KinQ | null>(null);
+    const [workBody, setWorkBody] = useState<{ loading: boolean; text: string }>({ loading: false, text: '' });
+    const [draft, setDraft] = useState('');
+    const [generating, setGenerating] = useState(false);
+    const [genNote, setGenNote] = useState('');
+    const [withLink, setWithLink] = useState(false);
+    const [blogUrl, setBlogUrl] = useState(() => localStorage.getItem(BLOG_URL_KEY) || '');
+    const [ledger, setLedger] = useState<LedgerEntry[]>(() => loadLedger());
+    const [draftCopied, setDraftCopied] = useState(false);
+
+    const linksInLast9 = ledger.slice(0, 9).filter((entry) => entry.withLink).length;
+    const linkAllowed = linksInLast9 === 0;
+
+    const openWork = (q: KinQ) => {
+        setWork(q);
+        setDraft('');
+        setGenNote('');
+        setWithLink(false);
+        setDraftCopied(false);
+        setWorkBody({ loading: true, text: '' });
+        fetchKinQuestion(q.link).then((res) => {
+            // 전문을 못 받으면 요약이라도 — 없는 본문을 지어내지 않는다.
+            setWorkBody({ loading: false, text: (res.ok && res.data?.body) || q.summary || '' });
+        });
+    };
+
+    const generate = async () => {
+        if (!work || generating) return;
+        setGenerating(true);
+        setGenNote('');
+        const result = await bridgeKinAnswer({
+            title: work.title,
+            body: workBody.text,
+            withLink: withLink && linkAllowed,
+            blogUrl: blogUrl.trim(),
+        });
+        setGenerating(false);
+        if (!result) {
+            setGenNote('LEWORD 앱이 꺼져 있습니다 — 앱을 켜면 내 구독으로 생성됩니다.');
+            return;
+        }
+        setDraft(result.answer);
+    };
+
+    const copyDraft = () => {
+        if (!draft.trim()) return;
+        navigator.clipboard?.writeText(draft);
+        setDraftCopied(true);
+        window.setTimeout(() => setDraftCopied(false), 1600);
+        // 복사 = 게시로 간주해 장부에 적는다 — 10:1 규칙의 눈금이다.
+        const next = [{ at: new Date().toISOString(), withLink: withLink && linkAllowed }, ...ledger].slice(0, 50);
+        setLedger(next);
+        try { localStorage.setItem(LEDGER_KEY, JSON.stringify(next)); } catch { /* 계속 */ }
+    };
 
     useEffect(() => {
         let cancelled = false;
@@ -164,18 +240,107 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                                     )}
                                 </small>
                             </div>
-                            <button
-                                type="button"
-                                className="lw-kg-copy"
-                                onClick={() => {
-                                    navigator.clipboard?.writeText(q.title);
-                                    setCopied(q.link);
-                                    window.setTimeout(() => setCopied(''), 1400);
-                                }}
-                            >{copied === q.link ? '복사됨' : '질문 복사'}</button>
+                            <span className="lw-kg-row-actions">
+                                <button type="button" className="lw-kg-answer" onClick={() => openWork(q)}>답변 달기</button>
+                                <button
+                                    type="button"
+                                    className="lw-kg-copy"
+                                    onClick={() => {
+                                        navigator.clipboard?.writeText(q.title);
+                                        setCopied(q.link);
+                                        window.setTimeout(() => setCopied(''), 1400);
+                                    }}
+                                >{copied === q.link ? '복사됨' : '질문 복사'}</button>
+                            </span>
                         </li>
                     ))}
                 </ol>
+            )}
+
+            {/* 답변 작업대 — 질문 전문 + AI 초안 + 10:1 링크 장부. 게시는 사용자가 직접. */}
+            {work && (
+                <div className="lw-plan-backdrop" role="presentation" onClick={() => setWork(null)}>
+                    <div
+                        className="lw-plan-modal lw-kg-work"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={`${work.title} 답변 작업대`}
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <header className="lw-plan-head">
+                            <div>
+                                <h3>{work.title}</h3>
+                                <small className="lw-kg-work-meta">
+                                    {typeof work.views === 'number' ? `조회 ${formatCount(work.views)}` : ''}
+                                    {typeof work.answers === 'number' ? ` · 답변 ${work.answers}` : ''}
+                                    {work.askedAt ? ` · ${work.askedAt.slice(5)} 질문` : ''}
+                                </small>
+                            </div>
+                            <button type="button" className="lw-plan-close" onClick={() => setWork(null)} aria-label="닫기">✕</button>
+                        </header>
+
+                        <div className="lw-plan-body">
+                            <section>
+                                <strong>질문 전문</strong>
+                                {workBody.loading
+                                    ? <p className="lw-kg-work-body">질문 본문을 불러오는 중…</p>
+                                    : <p className="lw-kg-work-body">{workBody.text || '본문 없이 제목만 있는 질문입니다.'}</p>}
+                            </section>
+
+                            <section>
+                                <strong>답변 초안 — 깔끔·담백·정확, AI 티 0</strong>
+                                <textarea
+                                    className="lw-kg-draft"
+                                    value={draft}
+                                    onChange={(event) => setDraft(event.target.value)}
+                                    placeholder="'AI 답변 생성'을 누르면 내 구독으로 초안이 만들어집니다. 고쳐 쓰셔도 됩니다."
+                                    rows={8}
+                                />
+                                {genNote && <p className="lw-kg-work-note">{genNote} <a href="/download">⬇ 앱 받기</a></p>}
+                                <div className="lw-kg-work-actions">
+                                    <button type="button" className="lw-kg-generate" onClick={generate} disabled={generating}>
+                                        {generating ? '생성 중… (내 구독)' : draft ? '다시 생성' : 'AI 답변 생성'}
+                                    </button>
+                                    <button type="button" onClick={copyDraft} disabled={!draft.trim()}>
+                                        {draftCopied ? '복사됨 — 지식인에 붙여넣으세요' : '복사 → 지식인에 붙여넣기'}
+                                    </button>
+                                    <a href={work.link} target="_blank" rel="noreferrer" className="lw-kg-open">질문 열기</a>
+                                    <label className={`lw-kg-linkbox${linkAllowed ? '' : ' off'}`} title={linkAllowed ? '' : '최근 9개 안에 링크 답변이 있습니다 — 링크 없이 더 달아야 합니다'}>
+                                        <input
+                                            type="checkbox"
+                                            checked={withLink && linkAllowed}
+                                            disabled={!linkAllowed}
+                                            onChange={(event) => setWithLink(event.target.checked)}
+                                        />
+                                        내 글 링크 추가
+                                    </label>
+                                </div>
+                                {withLink && linkAllowed && (
+                                    <input
+                                        type="text"
+                                        className="lw-kg-bloginput"
+                                        value={blogUrl}
+                                        onChange={(event) => {
+                                            setBlogUrl(event.target.value);
+                                            try { localStorage.setItem(BLOG_URL_KEY, event.target.value); } catch { /* 계속 */ }
+                                        }}
+                                        placeholder="자동화로 발행한 글 주소 (답변 끝에 사람 말투로 붙습니다)"
+                                    />
+                                )}
+                            </section>
+
+                            <section className="lw-kg-ledger">
+                                <strong>계정 보호 장부</strong>
+                                <p>
+                                    최근 답변 {Math.min(ledger.length, 10)}개 중 링크 <b>{ledger.slice(0, 10).filter((e) => e.withLink).length}개</b>
+                                    {linkAllowed
+                                        ? ' — 이번 답변에 링크를 넣을 수 있습니다'
+                                        : ' — 링크 없이 더 달아야 다음 링크 차례입니다 (10개 중 1개 규칙)'}
+                                </p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
             )}
         </>
     );

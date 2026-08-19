@@ -248,7 +248,29 @@ function LewordStyles() {
             .lw-kg-kw { border: 0; background: none; padding: 0; font-size: 12px; color: #69b7ff; cursor: pointer; text-decoration: underline; }
             .lw-kg-copy { flex: none; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: none; color: rgba(235,242,250,.65); font-size: 11.5px; padding: 6px 10px; cursor: pointer; white-space: nowrap; }
             .lw-kg-copy:hover { border-color: rgba(255,215,0,.5); color: #fff; }
-            @media (max-width: 640px) { .lw-kg-list li { grid-template-columns: 24px minmax(0, 1fr); } .lw-kg-copy { display: none; } }
+            .lw-kg-row-actions { display: flex; gap: 6px; }
+            .lw-kg-answer { flex: none; border: 0; border-radius: 8px; background: #ffa500; color: #14100a; font-size: 11.5px; font-weight: 800; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+            .lw-kg-answer:hover { filter: brightness(1.06); }
+            @media (max-width: 640px) { .lw-kg-list li { grid-template-columns: 24px minmax(0, 1fr); } .lw-kg-row-actions { display: none; } }
+
+            /* ── 답변 작업대 ── */
+            .lw-kg-work-meta { display: block; margin-top: 3px; color: rgba(235,242,250,.55); font-size: 12px; }
+            .lw-kg-work-body { margin: 0; white-space: pre-wrap; color: rgba(235,242,250,.88); font-size: 13.5px; line-height: 1.7; word-break: keep-all; max-height: 220px; overflow-y: auto; padding: 11px 13px; border: 1px solid rgba(255,255,255,.09); border-radius: 10px; background: rgba(255,255,255,.03); }
+            .lw-kg-draft { width: 100%; resize: vertical; padding: 12px 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 10px; background: rgba(255,255,255,.03); color: #ebf2fa; font: inherit; font-size: 14px; line-height: 1.7; }
+            .lw-kg-draft:focus { outline: none; border-color: rgba(255,165,0,.5); }
+            .lw-kg-work-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+            .lw-kg-work-actions button, .lw-kg-open { padding: 9px 14px; border-radius: 9px; border: 1px solid rgba(255,255,255,.16); background: none; color: rgba(235,242,250,.8); font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; }
+            .lw-kg-work-actions button:hover, .lw-kg-open:hover { border-color: rgba(255,165,0,.45); color: #fff; }
+            .lw-kg-work-actions button:disabled { opacity: .5; cursor: default; }
+            .lw-kg-generate { background: #ffa500 !important; border-color: #ffa500 !important; color: #14100a !important; }
+            .lw-kg-linkbox { display: flex; align-items: center; gap: 7px; margin-left: auto; font-size: 13px; color: rgba(235,242,250,.8); cursor: pointer; }
+            .lw-kg-linkbox input { accent-color: #ffa500; width: 15px; height: 15px; }
+            .lw-kg-linkbox.off { opacity: .45; cursor: not-allowed; }
+            .lw-kg-bloginput { width: 100%; margin-top: 8px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; }
+            .lw-kg-work-note { margin: 8px 0 0; font-size: 12.5px; color: rgba(235,242,250,.6); }
+            .lw-kg-work-note a { color: #69b7ff; }
+            .lw-kg-ledger p { margin: 0; font-size: 13px; color: rgba(235,242,250,.75); }
+            .lw-kg-ledger b { color: #ffa500; }
 
             /* 키워드 옆 복사 — 액션 줄에서 홀로 밀려나던 버튼의 새 자리. */
             .lw-copy-mini { flex: none; margin-left: 2px; padding: 2px 8px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: none; color: rgba(235,242,250,.65); font-size: 11.5px; cursor: pointer; }

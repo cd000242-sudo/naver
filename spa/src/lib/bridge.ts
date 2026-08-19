@@ -105,6 +105,26 @@ export async function bridgeTrend(keyword: string): Promise<BridgeTrend | null> 
     return body?.result || null;
 }
 
+/**
+ * 지식인 답변 초안 — 답변 교리(AI 티 0 · 깔끔·담백·정확)가 앱 쪽 고정
+ * 템플릿에 박혀 있고, 본인 구독으로 생성된다. 게시는 사용자가 직접 한다.
+ * 앱이 꺼져 있으면 null — 화면은 "앱을 켜세요"로 안내한다.
+ */
+export async function bridgeKinAnswer(input: {
+    title: string;
+    body: string;
+    withLink: boolean;
+    blogUrl: string;
+}): Promise<{ answer: string; provider: string } | null> {
+    const payload = await bridgeFetch('/v1/bridge/kin-answer', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(input),
+    }, 120_000) as { result?: { answer?: string; provider?: string } } | null;
+    if (!payload?.result?.answer) return null;
+    return { answer: payload.result.answer, provider: payload.result.provider || 'unknown' };
+}
+
 export async function bridgeAiSubs(keyword: string): Promise<{
     subs: Array<{ keyword: string; searchVolume: number | null; source?: string }>;
     ai?: { used: boolean; provider: string; proposed: number; verified: number };
