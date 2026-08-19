@@ -68,7 +68,21 @@
     <meta name="twitter:title" content="다운로드 — Leaders Pro">
     <meta name="twitter:description" content="Leaders Pro 프로그램을 다운로드하세요. AI 네이버 블로그 자동화 솔루션.">
     <meta name="twitter:image" content="https://www.leaderspro.kr/og-image.jpg">
-</head>
+
+    <style id="navDdStyles">
+      /* v-nav-dd: 무료 챗봇 드롭다운 — 쳇지피티/제미나이/협업 카페 (2026-08-19) */
+      .nav-dd{position:relative;display:inline-block}
+      .nav-dd summary{cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:6px}
+      .nav-dd summary::-webkit-details-marker{display:none}
+      .nav-dd-caret{font-size:9px;opacity:.7;transition:transform .2s}
+      .nav-dd[open] .nav-dd-caret{transform:rotate(180deg)}
+      .nav-dd-menu{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);min-width:264px;background:rgba(13,16,24,.97);border:1px solid rgba(201,168,76,.28);border-radius:12px;padding:8px;backdrop-filter:blur(20px);box-shadow:0 14px 44px rgba(0,0,0,.5);z-index:300}
+      .nav-dd-menu a{display:block;padding:11px 14px;border-radius:8px;color:#e6e8ee;text-decoration:none;font-size:.88rem;font-weight:600;white-space:nowrap;transition:background .15s,color .15s}
+      .nav-dd-menu a:hover{background:rgba(201,168,76,.14);color:#e8d5a3}
+      .nav-dd-sep{height:1px;background:rgba(255,255,255,.08);margin:6px 10px}
+      @media (max-width:768px){.nav-dd{display:block;width:100%}.nav-dd-menu{position:static;transform:none;min-width:0;box-shadow:none;border:none;background:transparent;padding:2px 0 4px 14px}.nav-dd-menu a{white-space:normal}}
+    </style>
+  </head>
 
 <body>
     <canvas id="particles-canvas"></canvas>
@@ -85,7 +99,15 @@
             <div class="nav-links" id="nav-links">
                 <a href="index.html" class="nav-link" onclick="closeMobileMenu()">홈</a>
                 <a href="leword.html" class="nav-link" onclick="closeMobileMenu()">LEWORD</a>
-                <a href="index.html#chatbot" class="nav-link" onclick="closeMobileMenu()">무료 챗봇</a>
+                <details class="nav-dd">
+                    <summary class="nav-link">무료 챗봇 <span class="nav-dd-caret">▾</span></summary>
+                    <div class="nav-dd-menu">
+                        <a href="index.html#chatbot" onclick="closeMobileMenu()">🤖 쳇지피티 무료챗봇</a>
+                        <a href="https://www.boutique-info.com/?page=prompt" target="_blank" rel="noopener noreferrer" onclick="closeMobileMenu()">✨ 무료 제미나이 챗봇 사용하러가기</a>
+                        <div class="nav-dd-sep"></div>
+                        <a href="https://cafe.naver.com/boutiqueinfo" target="_blank" rel="noopener noreferrer" onclick="closeMobileMenu()">☕ 부방장 협업 카페 바로가기</a>
+                    </div>
+                </details>
                 <a href="products.html" class="nav-link" onclick="closeMobileMenu()">제품정보</a>
                 <a href="pricing.html" class="nav-link" onclick="closeMobileMenu()">구매</a>
                 <a href="reviews.html" class="nav-link" onclick="closeMobileMenu()">후기</a>
