@@ -168,7 +168,8 @@ describe('Content Quality V3 evidence attestation', () => {
       legacyBaselineSha256:
         // [2026-08-12] 제미나이 3티어 배선(modelRegistry 티어·표시이름 분리)으로 재계산
         // [2026-08-14] 모드별 소제목 스펙 2종이 베이스라인에 편입(108→110) + promptLoader 변경으로 재계산
-        '0895b9945ba5506752e93f21a2b951a814352ce51d36b78d7c6411c9e36b4aa3',
+        // [2026-08-19] 노출 글 구조 블록 주입(promptLoader structureGuideBlock)으로 재계산
+        'e1e00bfc5d14a691a802d0b745ddbcb909f5118bdbc694688b0c839e34bfbabd',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 

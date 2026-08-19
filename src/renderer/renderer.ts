@@ -216,6 +216,7 @@ import {
 } from './utils/errorAndAutosave.js';
 // ✅ [2026-01-25] 환경설정 모달
 import { initSettingsModal as initSettingsModalFunc } from './utils/settingsModal.js';
+import { initExposedStructureRef, getExposedStructureBlock } from './modules/exposedStructureRef.js';
 // ✅ [2026-02-24 모듈화] 연속 발행
 import { switchExternalLinksTab, startContinuousMode, stopContinuousMode, toggleContinuousModeModal, startContinuousPublishing, initContinuousPublishingV2, startContinuousModeEnhanced, executeContinuousPublish, testApiKeysAndFullAuto, runRealFullAutoTest, setupMutualExclusiveCheckboxes, updateContinuousProgressModal, setKeywordTitleOptionsFromItem, applyKeywordPrefixToTitleContinuous, continuousQueueV2, scheduleNextPosting } from './modules/continuousPublishing.js';
 // ✅ [2026-02-25 모듈화] 썸네일 생성기
@@ -768,6 +769,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCategorySelectionListener(); // ✅ 카테고리 모달 이벤트 리스너
   initHeadingImageButton();
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
+  initExposedStructureRef(); // [2026-08-19] 노출 글 구조 참고 입력칸
 
   // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 + 모달 wiring
   initSerpBenchmarkUI();
@@ -3006,6 +3008,7 @@ function initPublishModeSubtabs(): void {
       }
     };
     (window as any).__showPublishMode = showMode;
+    (window as any).getExposedStructureBlock = getExposedStructureBlock;
     document.querySelectorAll<HTMLButtonElement>('.pub-mode-tab').forEach((tab) => {
       tab.addEventListener('click', () => showMode((tab.dataset.pubmode as 'single' | 'continuous' | 'ma') || 'single'));
     });

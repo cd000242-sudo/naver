@@ -1213,6 +1213,7 @@ export function buildFullPrompt(
   recentWinnersBlock?: string,  // ✅ [2026-04-20 SPEC-HOMEFEED-100 W4] few-shot 피드백 루프
   bloggerIdentity?: BloggerIdentity,  // ✅ [v1.8.0 LDF] 언어 DNA 페르소나
   primaryKeyword?: string,  // ✅ [v1.8.1 LDF Phase 2] CTR 훅 라이브러리 매개
+  structureGuideBlock?: string,  // ✅ [2026-08-19] 노출된 글에서 뽑은 구조 수치 (문장 없음)
 ): string {
   // 1. 기본 2축 분리 프롬프트
   const basePrompt = buildSystemPromptFromHint(mode, categoryHint);
@@ -1370,6 +1371,13 @@ ${priceInstruction}- 스펙은 장점으로 단정하지 말고 어떤 사용자
   const trimmedWinners = (recentWinnersBlock ?? '').trim();
   if (trimmedWinners) {
     finalPrompt += `\n\n${trimmedWinners}\n`;
+  }
+
+  // [2026-08-19] 노출된 글의 구조 수치. 호출자가 이미 포맷팅한 블록을 넘긴다.
+  //   원문 문장·고유명사는 들어 있지 않다(exposedPostStructure 가 보장) — 베끼기 방지.
+  const trimmedStructure = (structureGuideBlock ?? '').trim();
+  if (trimmedStructure) {
+    finalPrompt += `\n\n${trimmedStructure}\n`;
   }
 
   // [2026-07-25] 후킹 도입부 최대 3줄. 1줄이면 기존 "녹임" 계약을 유지하고,

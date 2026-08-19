@@ -616,6 +616,8 @@ export async function generateContentFromUrl(
       businessInfo,
       contentPolicyContext,
       hookHint, // ✅ [2026-04-20 SPEC-HOMEFEED-100 W2] 사용자 후킹 1문장 (선택)
+      // [2026-08-19] 노출된 글에서 뽑은 구조 수치(선택). 원문 문장은 들어 있지 않다.
+      structureGuideBlock: ((window as any).getExposedStructureBlock?.() || '') || undefined,
       manualTitleOverride,
       personalExperience,
     }
@@ -1228,6 +1230,8 @@ export async function generateContentFromKeywords(
       // 생성에서는 입력이 조용히 무시되던 갭. 개행 보존해 전달.
       hookHint: ((document.getElementById('unified-hook-sentence') as HTMLTextAreaElement)?.value || '')
         .replace(/\r\n/g, '\n').trim().slice(0, 1500) || undefined,
+      // [2026-08-19] 노출된 글에서 뽑은 구조 수치(선택). 원문 문장은 들어 있지 않다.
+      structureGuideBlock: ((window as any).getExposedStructureBlock?.() || '') || undefined,
       businessInfo,
       contentPolicyContext,
       manualTitleOverride,

@@ -974,7 +974,7 @@ async function generateHomefeedIntroOnlyPatch(
   agentProductPolicyContext?: AgentProductPolicyContext,
 ): Promise<{ introduction?: string } | null> {
   const categoryHint = source.categoryHint as string | undefined;
-  const systemPrompt = buildFullPrompt('homefeed', categoryHint, false, undefined, undefined, (source as any).hookHint, buildRecentWinnersBlock(source));
+  const systemPrompt = buildFullPrompt('homefeed', categoryHint, false, undefined, undefined, (source as any).hookHint, buildRecentWinnersBlock(source), undefined, undefined, (source as any).structureGuideBlock);
   const selectedTitle = String(current?.selectedTitle || '').trim();
 
   const schema = `Output ONLY valid JSON. NO markdown.\n\n{\n  "introduction": "string"\n}`;
@@ -2252,7 +2252,7 @@ export function buildModeBasedPrompt(
     const affiliateEvidence = classifyAffiliateEvidence(source);
     const reviewGuardOn = isReviewGuardEnabled();
 
-    systemPromptResult = buildFullPrompt('affiliate', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt, (source as any).hookHint, buildRecentWinnersBlock(source));
+    systemPromptResult = buildFullPrompt('affiliate', source.categoryHint, source.isFullAuto, toneStyle, productInfoForPrompt, (source as any).hookHint, buildRecentWinnersBlock(source), undefined, undefined, (source as any).structureGuideBlock);
 
     // ✅ .prompt 파일에서 쇼핑 프롬프트 로드 (articleType 기반 분기)
     // SPEC-REVIEW-001 option C: "사용후기" mode is logically inconsistent with
@@ -2309,6 +2309,7 @@ export function buildModeBasedPrompt(
       buildRecentWinnersBlock(source),
       undefined, // bloggerIdentity: 호출자에서 주입 가능 (v1.8.0 LDF)
       (source as any).primaryKeyword || (source as any).keywords?.[0], // v1.8.1 LDF Phase 2: CTR 훅 매개
+      (source as any).structureGuideBlock, // [2026-08-19] 노출 글 구조 수치 (선택)
     );
   }
 

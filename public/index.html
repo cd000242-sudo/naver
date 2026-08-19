@@ -7052,6 +7052,24 @@
                         <!-- 설정 영역 (상세 설정) -->
                         <div id="continuous-advanced-settings-panel"
                             style="background: var(--bg-secondary); border-radius: 10px; padding: 1rem; margin-bottom: 1rem; display: none;">
+                            <!-- [2026-08-19] 노출된 글 구조 참고 — 원문을 베끼지 않고 형태만 가져온다 -->
+                            <div style="margin-bottom: 0.75rem; padding: 0.75rem; background: var(--bg-primary); border: 1px dashed rgba(139, 92, 246, 0.45); border-radius: 8px;">
+                                <label for="exposed-structure-url"
+                                    style="color: var(--text-muted); font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 0.4rem;">📐
+                                    노출된 글 구조 참고 <span style="font-weight: 400;">(선택)</span></label>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <input type="text" id="exposed-structure-url"
+                                        placeholder="https://blog.naver.com/아이디/글번호"
+                                        style="flex: 1; padding: 0.5rem 0.7rem; border-radius: 6px; border: 1px solid var(--border-medium); background: var(--bg-secondary); color: var(--text-strong); font-size: 0.82rem;">
+                                    <button type="button" id="exposed-structure-analyze-btn"
+                                        style="padding: 0.5rem 0.9rem; background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.8rem; white-space: nowrap;">구조 분석</button>
+                                </div>
+                                <div id="exposed-structure-result"
+                                    style="display: none; margin-top: 0.5rem; padding: 0.5rem 0.7rem; background: rgba(139, 92, 246, 0.08); border-radius: 6px; font-size: 0.75rem; color: var(--text-strong); line-height: 1.6; white-space: pre-wrap;"></div>
+                                <p style="margin: 0.4rem 0 0 0; font-size: 0.7rem; color: var(--text-muted); line-height: 1.45;">
+                                    잘 노출된 글의 <strong>분량·문단 리듬·소제목 수·이미지 배치</strong>만 가져옵니다.
+                                    문장과 소재는 가져오지 않습니다 — 원문을 따라 쓰면 유사문서로 걸립니다.</p>
+                            </div>
                             <!-- 발행 모드 -->
                             <div style="margin-bottom: 0.75rem;">
                                 <label

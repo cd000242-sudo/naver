@@ -839,6 +839,9 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('image:matchToHeadings', images, headings),
   matchImages: (payload: { headings: any[]; collectedImages: any[]; scSubImageSource?: 'ai' | 'collected' }): Promise<{ success: boolean; assignments?: any[]; message?: string }> =>
     ipcRenderer.invoke('automation:matchImages', payload),
+  // ✅ [2026-08-19] 노출된 글 URL → 구조 수치 블록 (원문 문장은 오지 않는다)
+  analyzeExposedStructure: (url: string): Promise<{ success: boolean; block: string; profile?: any; message?: string }> =>
+    ipcRenderer.invoke('structure:analyzeExposedUrl', url),
   // ✅ 네이버 이미지 검색 API
   searchNaverImages: (keyword: string): Promise<{ success: boolean; images?: any[]; message?: string }> =>
     ipcRenderer.invoke('image:searchNaver', keyword),

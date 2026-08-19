@@ -468,6 +468,7 @@ try {
       'articleTableComposer.js',
       'contentPolicyDashboard.js',
       'revenueOperationsDashboard.js',
+      'exposedStructureRef.js',
   ];
   let modulesSource = rendererRuntimeDependencySource;
   for (const modFile of modulesFiles) {

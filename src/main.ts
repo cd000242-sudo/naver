@@ -4458,6 +4458,10 @@ registerGeminiHandlers({ sendLog });
 // [v2.10.249] image:matchToHeadings 분리
 import { registerImageMatchHandlers } from './main/ipc/imageMatchHandlers.js';
 registerImageMatchHandlers();
+
+// [2026-08-19] 노출된 글 URL → 구조 수치만 추출 (원문 문장은 넘기지 않는다)
+import { registerExposedStructureHandlers } from './main/ipc/exposedStructureHandlers.js';
+registerExposedStructureHandlers();
 // [v2.10.250] image:downloadAndSave 분리
 import { registerImageDownloadHandlers } from './main/ipc/imageDownloadHandlers.js';
 registerImageDownloadHandlers();

@@ -535,6 +535,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/renderer/modules/docCaptureMode.ts',
   'src/renderer/modules/dropshotLoginUi.ts',
   'src/renderer/modules/enhancedFetch.ts',
+  'src/renderer/modules/exposedStructureRef.ts',
   'src/renderer/modules/featureLockModal.ts',
   'src/renderer/modules/formAndAutomation.ts',
   'src/renderer/modules/formUtilities.ts',
