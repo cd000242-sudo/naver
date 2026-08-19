@@ -459,6 +459,8 @@ function LewordStyles() {
             .lw-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
             .lw-table th, .lw-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,.07); }
             .lw-table thead th { color: #646b7d; font-size: 12px; font-weight: 800; white-space: nowrap; }
+            .lw-table .lw-intent-row th { color: #ffd700; font-size: 12px; font-weight: 800; background: rgba(255,215,0,.05); border-top: 1px solid rgba(255,215,0,.18); }
+            .lw-table .lw-intent-row small { color: rgba(235,242,250,.45); font-weight: 600; margin-left: 6px; }
             .lw-table tbody th { color: #fff; font-weight: 800; }
             .lw-table tbody th small { display: block; margin-top: 3px; color: #646b7d; font-size: 11.5px; font-weight: 600; }
             .lw-table td { color: rgba(235,242,250,.78); white-space: nowrap; }

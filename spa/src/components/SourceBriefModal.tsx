@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { groupByIntent } from '../lib/intentGroups';
 import {
     buildSourceSearchUrl,
     cleanLiveText, trimToCompleteSentence,
@@ -179,19 +180,24 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                         {expansions.length > 0 && (
                             <section aria-label={`${keyword} 함께 검색되는 말`}>
                                 <div className="brief-modal-section-head">
-                                    <strong>함께 검색되는 말</strong>
+                                    <strong>함께 검색되는 말 — 검색의도별</strong>
                                     <small>네이버 자동완성 실측</small>
                                 </div>
-                                <div className="brief-modal-chips">
-                                    {expansions.map((expansion) => (
-                                        <a
-                                            key={expansion}
-                                            href={buildSourceSearchUrl(lane.id, expansion)}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >{expansion}</a>
-                                    ))}
-                                </div>
+                                {groupByIntent(expansions, (expansion) => expansion, keyword).map((bucket) => (
+                                    <div key={bucket.id} className="brief-modal-intent-group">
+                                        <em className="brief-modal-intent-label">{bucket.label}</em>
+                                        <div className="brief-modal-chips">
+                                            {bucket.items.map((expansion) => (
+                                                <a
+                                                    key={expansion}
+                                                    href={buildSourceSearchUrl(lane.id, expansion)}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                >{expansion}</a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
                             </section>
                         )}
                     </aside>

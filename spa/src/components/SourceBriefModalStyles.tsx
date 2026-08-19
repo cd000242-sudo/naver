@@ -128,6 +128,8 @@ function SourceBriefModalStyles() {
             }
 
             .brief-modal-section-head strong { color: #fff; font-size: 15px; font-weight: 900; }
+            .brief-modal-intent-group { margin-bottom: 10px; }
+            .brief-modal-intent-label { display: block; font-style: normal; color: #ffd700; font-size: 12px; font-weight: 800; margin: 8px 0 6px; }
             .brief-modal-section-head small { color: rgba(235,242,250,0.5); font-size: 12px; }
 
             .brief-modal-topic {

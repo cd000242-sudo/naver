@@ -9,6 +9,7 @@ import {
     type KeywordUsage,
 } from '../../lib/keywordApi';
 import { ErrorNote, MetricCell, TabIntro, UsageBar } from './LewordShared';
+import { groupByIntent } from '../../lib/intentGroups';
 
 /**
  * 키워드 분석 — 검색량·문서수·상품수·연관 키워드.
@@ -162,8 +163,8 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                     {result.related.length > 0 && (
                         <section className="lw-panel" aria-label="연관 키워드">
                             <div className="lw-panel-head">
-                                <h2>연관 키워드</h2>
-                                <span>검색광고가 함께 돌려준 실측 목록 {result.related.length}개</span>
+                                <h2>연관 키워드 — 검색의도별</h2>
+                                <span>검색광고가 함께 돌려준 실측 목록 {result.related.length}개 · 의도는 키워드 속 단서 어휘로 분류</span>
                             </div>
                             <div className="lw-table-scroll">
                                 <table className="lw-table">
@@ -177,24 +178,31 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                                             <th scope="col" aria-label="조회" />
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        {result.related.map((row) => (
-                                            <tr key={row.keyword}>
-                                                <th scope="row">{row.keyword}</th>
-                                                <td>{formatCount(row.searchVolume)}</td>
-                                                <td>{formatCount(row.searchVolumePc)}</td>
-                                                <td>{formatCount(row.searchVolumeMobile)}</td>
-                                                <td>{row.competition || '—'}</td>
-                                                <td>
-                                                    <button
-                                                        type="button"
-                                                        className="lw-mini"
-                                                        onClick={() => { setKeyword(row.keyword); run(row.keyword); }}
-                                                    >분석</button>
-                                                </td>
+                                    {groupByIntent(result.related, (row) => row.keyword, keyword.trim()).map((bucket) => (
+                                        <tbody key={bucket.id}>
+                                            <tr className="lw-intent-row">
+                                                <th colSpan={6} scope="colgroup">
+                                                    {bucket.label} <small>{bucket.items.length}개</small>
+                                                </th>
                                             </tr>
-                                        ))}
-                                    </tbody>
+                                            {bucket.items.map((row) => (
+                                                <tr key={row.keyword}>
+                                                    <th scope="row">{row.keyword}</th>
+                                                    <td>{formatCount(row.searchVolume)}</td>
+                                                    <td>{formatCount(row.searchVolumePc)}</td>
+                                                    <td>{formatCount(row.searchVolumeMobile)}</td>
+                                                    <td>{row.competition || '—'}</td>
+                                                    <td>
+                                                        <button
+                                                            type="button"
+                                                            className="lw-mini"
+                                                            onClick={() => { setKeyword(row.keyword); run(row.keyword); }}
+                                                        >분석</button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    ))}
                                 </table>
                             </div>
                         </section>
