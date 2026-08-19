@@ -247,7 +247,10 @@ async function collectNaverSports() {
     const picked = await pickRealSearchTerm(entitySeedCandidates(entry.title), seen, entry.title);
     if (!picked) continue;
     seen.add(picked.base);
-    rows.push({ rank: rows.length + 1, keyword: picked.keyword, context: entry.title, articleUrl: entry.articleUrl });
+    // 기사 사건으로 니즈 문구를 조립한다("심권호 간암 투병 마지막 시술" 꼴).
+    // 조립할 사건 토큰이 없으면 자동완성 확장(picked.keyword)으로 물러선다.
+    const need = needPhraseFromTitle(picked.base, entry.title);
+    rows.push({ rank: rows.length + 1, keyword: need || picked.keyword, context: entry.title, articleUrl: entry.articleUrl });
     if (rows.length >= 10) break;
   }
   return rows;
@@ -327,7 +330,9 @@ async function collectNateEntIssues() {
     const picked = await pickRealSearchTerm(entitySeedCandidates(entry.title), seen, entry.title);
     if (!picked) continue;
     seen.add(picked.base);
-    rows.push({ rank: rows.length + 1, keyword: picked.keyword, context: entry.title, articleUrl: entry.articleUrl });
+    // 스포츠 레인과 같은 니즈 문구 조립 — 확장 폴백도 동일.
+    const need = needPhraseFromTitle(picked.base, entry.title);
+    rows.push({ rank: rows.length + 1, keyword: need || picked.keyword, context: entry.title, articleUrl: entry.articleUrl });
     if (rows.length >= 10) break;
   }
   return rows;
@@ -1218,6 +1223,45 @@ async function fetchNaverExpansions(keyword) {
 const NAME_RE = /^[김이박최정강조윤장임한오서신권황안송류전홍고문양손배백허남심노하곽성차주우구민유][가-힣]{2}$/;
 const NOT_A_NAME = /^(최종|최고|최근|최대|최소|이번|이상|이후|이전|이유|정부|정도|정식|조사|강화|강남|임신|오전|오후|서울|한국|전국|전체|고속|신규|안전|송출|유지|민간|주요|구성|구매|박스|양측|손실|백만|허가|남녀|심각|하락|하루|성공|성장|차량|주가|주식|우려|김치|문제|양국|배송|노동|권리|황금|안내|송금|전망|홍보|고객|박빙|정면|신인왕|우승자)$/;
 const isKoreanName = (token) => NAME_RE.test(token) && !NOT_A_NAME.test(token);
+
+/*
+ * 개체명 + 기사 사건 토큰으로 **니즈가 읽히는 검색어**를 조립한다.
+ *
+ * 사장님(2026-08-19): "'심권호 근황'이 아니라 왜 이게 검색되는지 보고 검색어를
+ * 추론해서 넣어줘야지 — '심권호 간암투병 마지막 시술' 이런 식으로."
+ * 자동완성 확장('근황')은 실존하지만 니즈를 안 담는다. 기사 제목이 이미 사건을
+ * 말하고 있으므로 그 어절로 문구를 만든다 — 검색어만 봐도 무슨 일인지 읽히게.
+ *
+ * 저널리즘 상투어(충격·공개·근황·속보…)와 직책어(국가대표·공격수…)는 뺀다 —
+ * 사건이 아니라 포장이다. 조사는 가볍게 뗀다("중동으로"→"중동", "이적하나"→"이적").
+ */
+const NEED_STOP = /^(충격|대충격|충격적|경악|단독|속보|화제|포착|눈물|심경|고백|논란|파문|이유|모습|소식|초유|사태|결국|전격|공식|확인|근황|공개|며칠|오늘|어제|내일|현재|영상|사진|인터뷰|반응|누리꾼|네티즌|팬들|국가대표|공격수|미드필더|수비수|골키퍼|투수|포수|내야수|외야수|간판타자|감독|코치|선수|해설|중계|대형|쇼크|대참사|이럴|수가|저였으면|얌전히|역대|역사적|최대|최악|최고|최초|끝내|결국엔|와|어머|헉|무려)$/;
+/*
+ * 서술어·인용 어미가 붙은 어절은 사건이 아니라 **말**이다 — "던졌는데", "있었죠",
+ * "됐다" 가 검색어에 섞이면 문구가 인용문 조각이 된다(2026-08-19 1차 실주행에서
+ * '고우석 대형 쇼크 50구나 던졌는데'·'박재현 저였으면 얌전히 2루에 있었죠' 실사고).
+ */
+const NEED_VERBISH = /(는데|었다|았다|였다|졌다|겠다|했다|된다|됐다|한다|하다|어요|네요|아요|습니다|입니다|했죠|었죠|았죠|이죠|겠죠|잖아|구나|라니|다니|가요|나요|까요|쓰나|되나|하려나|인가|일까|할까)$/;
+function needPhraseFromTitle(base, title) {
+  const tokens = String(title || '')
+    .split(/[^가-힣A-Za-z0-9]+/)
+    .map((token) => token.replace(/(에서|으로|에게|부터|까지|라며|하나|한다|했다|이다|였다)$/, ''))
+    // 한 글자 조사는 남으면 인용문 조각처럼 보인다("2루에"·"사과와"·"김도영의" 실사고).
+    // 두 글자 이하 어절은 조사가 아닐 확률이 높아 건드리지 않는다("제주도" 보호).
+    .map((token) => (token.length >= 3 ? token.replace(/[은는이가을를에의와과]$/, '') : token))
+    .filter((token) => token.length >= 2 && token.length <= 8)
+    .filter((token) => !token.includes(base) && !base.includes(token))
+    .filter((token) => !NEED_STOP.test(token) && !NEED_VERBISH.test(token) && !/^\d+$/.test(token));
+  const picked = [];
+  for (const token of tokens) {
+    if (picked.includes(token)) continue;
+    picked.push(token);
+    if (picked.length >= 4) break;
+    if ([base, ...picked].join(' ').length >= 20) break;
+  }
+  while ([base, ...picked].join(' ').length > 24 && picked.length > 1) picked.pop();
+  return picked.length > 0 ? [base, ...picked].join(' ') : '';
+}
 
 function entitySeedCandidates(keyword) {
   const tokens = String(keyword).split(/\s+/)

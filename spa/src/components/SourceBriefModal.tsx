@@ -38,6 +38,13 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
     const searchUrl = buildSourceSearchUrl(lane.id, keyword);
     const rank = Math.max(1, Number(item.rank) || (101 - Number(item.priority || 100)));
 
+    /*
+     * 크롤링해 온 바로 그 기사 주소. 사장님(2026-08-19): "원문 기사 보러가기 —
+     * 기사로 바로 갈 수 있게 해달라니까." 수집기가 oid/aid 로 조립해 실어 준
+     * 좌표(item.articleUrl)가 있는데 모달이 안 쓰고 있었다 — 출처 목록은
+     * 브리핑의 links 만 보고 있었다.
+     */
+    const articleUrl = String(item.articleUrl || '').trim();
     const brief = item.insight;
     const facts = brief?.facts || [];
     const links = (brief?.links || []).slice(0, 6);
@@ -161,14 +168,19 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                             </section>
                         )}
 
-                        {links.length > 0 && (
+                        {(articleUrl || links.length > 0) && (
                             <section aria-label={`${keyword} 출처`}>
                                 <div className="brief-modal-section-head">
                                     <strong>출처 기사</strong>
                                     <small>눌러서 원문 확인</small>
                                 </div>
                                 <ul className="brief-modal-links">
-                                    {links.map((link) => (
+                                    {articleUrl && (
+                                        <li key={articleUrl}>
+                                            <a href={articleUrl} target="_blank" rel="noreferrer">원문 기사 바로가기</a>
+                                        </li>
+                                    )}
+                                    {links.filter((link) => link.url !== articleUrl).map((link) => (
                                         <li key={link.url}>
                                             <a href={link.url} target="_blank" rel="noreferrer">{link.press || '기사 원문'}</a>
                                         </li>
@@ -204,7 +216,17 @@ function SourceBriefModal({ lane, item, onClose }: Props) {
                 </div>
 
                 <footer className="brief-modal-foot">
-                    <a href={searchUrl} target="_blank" rel="noreferrer" style={{ background: lane.accent }}>
+                    {articleUrl && (
+                        <a href={articleUrl} target="_blank" rel="noreferrer" style={{ background: lane.accent }}>
+                            원문 기사 보러가기
+                        </a>
+                    )}
+                    <a
+                        href={searchUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={articleUrl ? undefined : { background: lane.accent }}
+                    >
                         {lane.label} 원본에서 검색
                     </a>
                     <button type="button" onClick={onClose}>닫기</button>

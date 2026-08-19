@@ -25,8 +25,13 @@ function SourceBriefModalStyles() {
             @keyframes briefModalRise { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: none } }
 
             .brief-modal {
-                width: min(1080px, 100%);
-                max-height: min(88vh, 900px);
+                /*
+                 * 화면을 꽉 채운다 — 사장님(2026-08-19): "모달 한눈에 들어올 수 있게
+                 * 크게 꽉 차게". 1080px 상자는 요약·제목·출처가 스크롤 밑으로 숨었다.
+                 */
+                width: min(1720px, 97vw);
+                height: 94vh;
+                max-height: 94vh;
                 display: flex;
                 flex-direction: column;
                 border: 1px solid rgba(255,255,255,0.16);
@@ -100,6 +105,7 @@ function SourceBriefModalStyles() {
                 gap: 0;
                 overflow: hidden;
                 min-height: 0;
+                flex: 1; /* 모달이 세로로 커진 만큼 본문 두 칼럼이 그 높이를 다 쓴다 */
             }
 
             .brief-modal-facts {
