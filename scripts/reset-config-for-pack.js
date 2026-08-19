@@ -8,8 +8,6 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log('🔧 배포용 설정 초기화 시작...');
-
 // config 파일 경로들 (개발 환경의 config 및 사용자 데이터 경로)
 const distConfigPath = path.join(__dirname, '..', 'dist', 'settings.json');
 const userDataPath = process.env.APPDATA || (process.platform === 'darwin'
@@ -21,6 +19,70 @@ const packagedAppUserDataPath = path.join(userDataPath, 'Better Life Naver', 'se
 const packagedAppUserDataDir = path.join(userDataPath, 'Better Life Naver');
 
 const envPath = path.join(__dirname, '..', '.env');
+
+/**
+ * 패키징 전에 반드시 비워야 하는 설정 필드.
+ * src/security/encryptionMigrator.ts 의 SENSITIVE_FIELDS 와 1:1 로 유지한다.
+ */
+const SENSITIVE_CONFIG_FIELDS = [
+  'geminiApiKey',
+  'openaiApiKey',
+  'openaiImageApiKey',
+  'claudeApiKey',
+  'perplexityApiKey',
+  'leonardoaiApiKey',
+  'deepinfraApiKey',
+  'pexelsApiKey',
+  'unsplashApiKey',
+  'pixabayApiKey',
+  'naverClientId',
+  'naverClientSecret',
+  'naverHubClientId',
+  'naverHubClientSecret',
+  'naverDatalabClientId',
+  'naverDatalabClientSecret',
+  'naverAdApiKey',
+  'naverAdSecretKey',
+  'naverAdCustomerId',
+  'savedNaverId',
+  'savedNaverPassword',
+  'savedLicenseUserId',
+  'savedLicensePassword',
+  'userDisplayName',
+  'userEmail',
+];
+
+/** 같은 값이 케밥케이스로도 저장된다 (configManager 호환 레이어). */
+const KEBAB_SECRET_ALIASES = [
+  'gemini-api-key',
+  'openai-api-key',
+  'openai-image-api-key',
+  'claude-api-key',
+  'perplexity-api-key',
+  'leonardoai-api-key',
+  'deepinfra-api-key',
+  'pexels-api-key',
+  'unsplash-api-key',
+  'pixabay-api-key',
+  'naver-client-id',
+  'naver-client-secret',
+  'naver-hub-client-id',
+  'naver-hub-client-secret',
+  'naver-datalab-client-id',
+  'naver-datalab-client-secret',
+  'naver-ad-api-key',
+  'naver-ad-secret-key',
+  'naver-ad-customer-id',
+];
+
+module.exports = { SENSITIVE_CONFIG_FIELDS, KEBAB_SECRET_ALIASES };
+
+// 부작용 방지: 이 파일을 require 하면 목록만 내주고 아무것도 지우지 않는다.
+// (테스트가 목록을 읽는다 — 그때 본문이 돌면 빌드 머신의 설정과 renderer.ts 를 건드린다.)
+// CommonJS 모듈은 함수로 감싸여 실행되므로 최상위 return 이 유효하다.
+if (require.main !== module) return;
+
+console.log('🔧 배포용 설정 초기화 시작...');
 
 console.log('📂 초기화 대상 경로:');
 console.log('  - dist:', distConfigPath);
@@ -59,29 +121,19 @@ try {
           pexels: !!existingConfig.pexelsApiKey
         });
 
-        // API 키들 초기화 (민감 정보)
-        existingConfig.geminiApiKey = '';
-        existingConfig.openaiApiKey = '';
-        existingConfig.claudeApiKey = '';
-        existingConfig.pexelsApiKey = '';
-        existingConfig.unsplashApiKey = '';
-        existingConfig.pixabayApiKey = '';
-        existingConfig.naverDatalabClientId = '';
-        existingConfig.naverDatalabClientSecret = '';
+        // API 키·자격증명 초기화 (민감 정보)
+        //
+        // 목록을 손으로 관리하면 새 키가 생길 때마다 빠진다 — 실제로 11개가 빠져 있었고
+        // 그중엔 네이버 검색/HUB/광고 키가 포함돼 있었다. 이 목록은
+        // src/security/encryptionMigrator.ts 의 SENSITIVE_FIELDS 와 동일해야 하며,
+        // configSecretScrubParity 테스트가 그 일치를 강제한다.
+        SENSITIVE_CONFIG_FIELDS.forEach((field) => { existingConfig[field] = ''; });
+        // 카멜/케밥 두 형태로 저장되므로 케밥 별칭도 함께 지운다.
+        KEBAB_SECRET_ALIASES.forEach((field) => { existingConfig[field] = ''; });
 
-        // 네이버 계정 정보 초기화
+        // 자격증명 기억 플래그
         existingConfig.rememberCredentials = false;
-        existingConfig.savedNaverId = '';
-        existingConfig.savedNaverPassword = '';
-
-        // 라이선스 자격증명 정보 초기화
         existingConfig.rememberLicenseCredentials = false;
-        existingConfig.savedLicenseUserId = '';
-        existingConfig.savedLicensePassword = '';
-
-        // 사용자 프로필 정보 초기화
-        existingConfig.userDisplayName = '';
-        existingConfig.userEmail = '';
 
         // ✅ 패키지 마커 추가 (패키지 생성 시점 표시)
         const packageJson = require(path.join(__dirname, '..', 'package.json'));
