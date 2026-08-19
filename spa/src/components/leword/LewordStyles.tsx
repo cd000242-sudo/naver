@@ -213,7 +213,31 @@ function LewordStyles() {
             .lw-kin a { font-size: 12px; color: rgba(235,242,250,.8); text-decoration: none; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); }
             .lw-kin a:hover { border-color: rgba(105,183,255,.5); color: #fff; }
             /* 조회수 실측 — 어느 질문이 실제로 읽히는지가 글감 우선순위다. */
-            .lw-kin-views { margin-left: 6px; font-size: 11px; color: #69b7ff; font-weight: 700; }
+            .lw-kin-views { margin-left: 6px; font-size: 11px; color: #69b7ff; font-weight: 700; white-space: nowrap; }
+            /* 번호 목록(사장님 지시: "1. 2. 3. 이런식으로") — 칩 무더기보다 서열이 읽힌다. */
+            .lw-kin-list { margin: 0; padding: 0; list-style: none; counter-reset: kin; width: 100%; display: flex; flex-direction: column; gap: 5px; }
+            .lw-kin-list li { counter-increment: kin; display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+            .lw-kin-list li::before { content: counter(kin); flex: none; font-size: 11.5px; font-weight: 800; color: #2ecc71; min-width: 14px; }
+            .lw-kin-list a { border: 0; padding: 0; border-radius: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .lw-kin-list a:hover { text-decoration: underline; color: #fff; }
+
+            /* ── 지식인 황금질문 탭 — 조회 많고 답변 적은 최신 질문 실측 ── */
+            .lw-kin-golden { margin-top: 12px; }
+            .lw-kin-golden-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+            .lw-kin-golden-list li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid rgba(105,183,255,.2); border-radius: 10px; background: rgba(105,183,255,.05); }
+            .lw-kin-golden-rank { flex: none; min-width: 22px; text-align: center; font-size: 13px; font-weight: 800; color: #2ecc71; }
+            .lw-kin-golden-list a { font-size: 14px; font-weight: 700; color: #ebf2fa; text-decoration: none; display: block; }
+            .lw-kin-golden-list a:hover { color: #fff; text-decoration: underline; }
+            .lw-kin-golden-list small { display: block; margin-top: 3px; font-size: 11.5px; color: rgba(235,242,250,.6); }
+            .lw-kin-golden-kw { border: 0; background: none; padding: 0; font-size: 11.5px; color: #69b7ff; cursor: pointer; text-decoration: underline; }
+
+            /* 키워드 옆 복사 — 액션 줄에서 홀로 밀려나던 버튼의 새 자리. */
+            .lw-copy-mini { flex: none; margin-left: 2px; padding: 2px 8px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: none; color: rgba(235,242,250,.65); font-size: 11.5px; cursor: pointer; }
+            .lw-copy-mini:hover { border-color: rgba(255,215,0,.5); color: #fff; }
+
+            /* 차트 호버 십자선 값 — 가리킨 점의 기간·상대값. */
+            .lw-chart-hover { font-size: 12px; font-weight: 700; fill: #ebf2fa; }
+            .lw-spark-hover { color: #ebf2fa; font-weight: 700; }
             .lw-note-error { border-color: rgba(255,107,129,.32); background: rgba(255,107,129,.07); }
             .lw-note button {
                 margin-top: 10px; padding: 9px 16px;
@@ -997,7 +1021,33 @@ function LewordStyles() {
                 word-break: keep-all;
             }
             .lw-plan-rivals li { color: rgba(235,242,250,.6); font-size: 13px; }
+            .lw-plan-rivals a { color: rgba(235,242,250,.8); text-decoration: none; }
+            .lw-plan-rivals a:hover { color: #fff; text-decoration: underline; }
+            .lw-plan-rivals small { margin-left: 6px; font-size: 11.5px; color: #69b7ff; }
             .lw-plan-caution strong { color: #f5c518; }
+
+            /* ── 집필 브리핑 재구성(2026-08-19) — 카드와 안 겹치는 것만 남긴 창 ── */
+            .lw-plan-why { padding: 11px 13px; border-radius: 10px; background: rgba(124,92,255,.1); border: 1px solid rgba(124,92,255,.25); }
+            .lw-plan-why p { margin: 0; color: #ebf2fa; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
+            .lw-plan-why small { display: block; margin-top: 5px; font-size: 11px; color: rgba(235,242,250,.5); }
+            .lw-plan-title-row { display: flex; align-items: center; gap: 9px; padding: 7px 0; min-width: 0; }
+            .lw-plan-title-row span { flex: none; font-size: 11px; font-weight: 800; color: rgba(255,215,0,.85); border: 1px solid rgba(255,215,0,.35); border-radius: 6px; padding: 2px 7px; }
+            .lw-plan-title-row em { font-style: normal; color: #fff; font-size: 14px; font-weight: 700; min-width: 0; }
+            .lw-plan-title-row button { flex: none; margin-left: auto; padding: 4px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 7px; background: none; color: rgba(235,242,250,.75); font-size: 11.5px; cursor: pointer; }
+            .lw-plan-title-row button:hover { border-color: rgba(255,215,0,.5); color: #fff; }
+            .lw-plan-subs { display: flex; flex-wrap: wrap; gap: 6px; }
+            .lw-plan-subs em { font-style: normal; font-size: 12.5px; color: rgba(235,242,250,.85); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 3px 10px; }
+            .lw-plan-subs .lw-plan-pool { color: rgba(235,242,250,.6); border-style: dashed; }
+
+            /* 분석 탭 — 보드 회차 실측 결합 패널 */
+            .lw-analyze-why { margin-top: 12px; padding: 11px 13px; border-radius: 10px; background: rgba(124,92,255,.1); border: 1px solid rgba(124,92,255,.25); }
+            .lw-analyze-why strong { display: block; margin-bottom: 5px; font-size: 12px; font-weight: 900; color: #b9a6ff; }
+            .lw-analyze-why p { margin: 0; color: #ebf2fa; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
+            .lw-analyze-why small { display: block; margin-top: 5px; font-size: 11px; color: rgba(235,242,250,.5); }
+            .lw-analyze-pool { display: flex; flex-wrap: wrap; gap: 7px; }
+            .lw-analyze-pool button { display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; border: 1px solid rgba(255,255,255,.13); border-radius: 999px; background: none; color: #ebf2fa; font-size: 13px; cursor: pointer; }
+            .lw-analyze-pool button:hover { border-color: rgba(0,224,198,.5); color: #fff; }
+            .lw-analyze-pool button span { font-size: 11.5px; color: rgba(235,242,250,.55); }
             .lw-plan-caution li { color: rgba(245,197,24,.86); }
             .lw-plan-foot {
                 display: flex; gap: 9px; padding: 14px 22px 18px;

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * 수요 그래프 — 네이버 데이터랩 24개월 실측 시계열을 그대로 그린다.
@@ -61,6 +61,9 @@ function DemandChartModal({ keyword, series, caption, asOf, onClose }: {
     onClose: () => void;
 }) {
     const closeRef = useRef<HTMLButtonElement>(null);
+    const svgRef = useRef<SVGSVGElement>(null);
+    /** 마우스가 가리키는 점 — 수치가 보여야 그래프가 읽힌다(사장님 지시 2026-08-19). */
+    const [hover, setHover] = useState(-1);
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
@@ -112,7 +115,21 @@ function DemandChartModal({ keyword, series, caption, asOf, onClose }: {
                     <button ref={closeRef} type="button" onClick={onClose} aria-label="닫기">✕</button>
                 </header>
 
-                <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${keyword} 월별 검색 추이`}>
+                <svg
+                    ref={svgRef}
+                    viewBox={`0 0 ${W} ${H}`}
+                    role="img"
+                    aria-label={`${keyword} 월별 검색 추이`}
+                    onMouseMove={(event) => {
+                        const rect = svgRef.current?.getBoundingClientRect();
+                        if (!rect || rect.width === 0) return;
+                        // 화면 좌표 → viewBox 좌표 → 가장 가까운 점의 인덱스.
+                        const vx = ((event.clientX - rect.left) / rect.width) * W;
+                        const index = Math.round(((vx - PAD.left) / plotW) * (points.length - 1));
+                        setHover(Math.max(0, Math.min(points.length - 1, index)));
+                    }}
+                    onMouseLeave={() => setHover(-1)}
+                >
                     {gridLevels.map((level) => (
                         <g key={level}>
                             <line
@@ -140,6 +157,22 @@ function DemandChartModal({ keyword, series, caption, asOf, onClose }: {
 
                     {/* 마지막 달 — "지금이 어디쯤인가" */}
                     <circle cx={x(points.length - 1)} cy={y(last.ratio)} r="3.5" fill="#ffffff" />
+
+                    {/* 호버 십자선 + 실측값 — 가리킨 그 점의 기간·상대값을 그대로 읽어 준다. */}
+                    {hover >= 0 && (() => {
+                        const pt = points[hover];
+                        const hx = x(hover);
+                        const anchor = hover < points.length * 0.15 ? 'start' : hover > points.length * 0.85 ? 'end' : 'middle';
+                        return (
+                            <g>
+                                <line x1={hx} x2={hx} y1={PAD.top} y2={PAD.top + plotH} stroke="rgba(255,255,255,0.25)" strokeWidth="1" />
+                                <circle cx={hx} cy={y(pt.ratio)} r="4.5" fill="#0d1118" stroke="#00e0c6" strokeWidth="2" />
+                                <text x={hx} y={PAD.top - 5} textAnchor={anchor} className="lw-chart-hover">
+                                    {shortPeriod(pt.period)} · {Math.round(pt.ratio)}
+                                </text>
+                            </g>
+                        );
+                    })()}
 
                     <text x={PAD.left} y={H - 8} textAnchor="start" className="lw-chart-tick">
                         {shortPeriod(points[0].period)}

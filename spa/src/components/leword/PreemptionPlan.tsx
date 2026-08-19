@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { buildActionPlan } from '../../lib/keywordActionPlan';
 import { formatCount } from '../../lib/keywordApi';
 
@@ -34,6 +34,18 @@ export type PlanRow = {
     searchVolume: number | null;
     documentCount: number | null;
     serp?: { medianDaysAgo?: number | null; topTitles?: string[] };
+    /*
+     * 집필 브리핑 재료(2026-08-19 재구성) — 카드와 겹치던 지표·근거를 걷어내고
+     * "글을 실제로 쓰게 만드는 것"만 남기라는 사장님 지시. 전부 회차 실측이다.
+     */
+    whySearch?: { text: string; basis?: string } | null;
+    titles?: {
+        seo?: { text: string; frame?: string; basis?: string };
+        home?: { text: string; frame?: string; basis?: string };
+    } | null;
+    kinTop?: Array<{ title: string; link: string; views?: number | null; answers?: number | null }> | null;
+    subKeywords?: { keyword: string; searchVolume: number | null; frame?: string }[];
+    keywordPool?: Array<{ keyword: string; searchVolume: number | null; documentCount?: number | null }> | null;
 };
 
 type Props = {
@@ -46,6 +58,8 @@ type Props = {
 
 function PreemptionPlan({ row, onClose, onAnalyze, searchUrl }: Props) {
     const closeRef = useRef<HTMLButtonElement>(null);
+    /** 방금 복사한 제목 — 제목은 복사해서 바로 쓰라고 있는 것이다. */
+    const [copiedTitle, setCopiedTitle] = useState('');
 
     useEffect(() => {
         const onKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
@@ -97,42 +111,78 @@ function PreemptionPlan({ row, onClose, onAnalyze, searchUrl }: Props) {
                     <button ref={closeRef} type="button" className="lw-plan-close" onClick={onClose} aria-label="닫기">✕</button>
                 </header>
 
-                <div className="lw-plan-metrics">
-                    <div><span>검색량</span><strong>{formatCount(row.searchVolume)}</strong></div>
-                    <div><span>문서수</span><strong>{formatCount(row.documentCount)}</strong></div>
-                    <div className="hot"><span>빈자리</span><strong>{row.openSlot ? `${row.openSlot}위` : '—'}</strong></div>
-                </div>
-
-                {row.earlyMover && (row.earlyMoverReasons || []).length > 0 && (
-                    <section className="lw-plan-early">
-                        <strong>지금이 선점 적기다</strong>
-                        <ul>{(row.earlyMoverReasons || []).map((text) => <li key={text}>{text}</li>)}</ul>
-                    </section>
-                )}
-
+                {/*
+                  * 검색량·문서수·빈자리 지표와 '선점 적기'·'왜 이 키워드' 근거는
+                  * 뺐다(사장님 지시 2026-08-19: "중복되는 게 있으면 굳이 있을 필요성을
+                  * 못 느끼겠는데") — 전부 카드가 이미 말한 사실이다. 이 창은 카드가
+                  * 못 하는 것, 즉 **글을 실제로 쓰게 만드는 브리핑**만 한다.
+                  */}
                 {plan.when && <p className="lw-plan-when">{plan.when}</p>}
 
                 <div className="lw-plan-body">
-                    {row.layoutHeadline && (
-                        <section className="lw-plan-surface">
-                            <strong>어디에 쓸 판인가</strong>
-                            <p>{row.layoutHeadline}</p>
-                            {(row.layoutRanked || []).length > 0 && (
-                                <ol className="lw-surface-rank">
-                                    {(row.layoutRanked || []).map((item) => (
-                                        <li key={item.surface}>
-                                            <span>{item.position}번째 묶음</span>{item.label}
-                                        </li>
-                                    ))}
-                                </ol>
-                            )}
-                            {row.layoutAdsOnTop && <p className="lw-surface-note">광고가 맨 위를 차지한다 — 유기적 결과는 그만큼 아래로 밀린다</p>}
+                    {row.whySearch?.text && (
+                        <section className="lw-plan-why">
+                            <strong>글의 도입 각도 — 왜 지금 검색되나</strong>
+                            <p>{row.whySearch.text}</p>
+                            {row.whySearch.basis && <small>{row.whySearch.basis}</small>}
                         </section>
                     )}
-                    {plan.why.length > 0 && (
+
+                    {(row.titles?.seo || row.titles?.home) && (
+                        <section className="lw-plan-titles">
+                            <strong>제목 — 복사해서 그대로 쓰세요</strong>
+                            {[
+                                { label: 'SEO', title: row.titles?.seo },
+                                { label: '홈판', title: row.titles?.home },
+                            ].map(({ label, title }) => title?.text && (
+                                <div key={label} className="lw-plan-title-row">
+                                    <span>{label}</span>
+                                    <em>{title.text}</em>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            navigator.clipboard?.writeText(title.text);
+                                            setCopiedTitle(title.text);
+                                            window.setTimeout(() => setCopiedTitle(''), 1400);
+                                        }}
+                                    >{copiedTitle === title.text ? '복사됨' : '복사'}</button>
+                                </div>
+                            ))}
+                        </section>
+                    )}
+
+                    {(row.kinTop || []).length > 0 && (
                         <section>
-                            <strong>왜 이 키워드인가</strong>
-                            <ul>{plan.why.map((line) => <li key={line}>{line}</li>)}</ul>
+                            <strong>본문에서 답할 질문 — 지식인 실측</strong>
+                            <ol className="lw-plan-rivals">
+                                {row.kinTop!.slice(0, 5).map((q) => (
+                                    <li key={q.link}>
+                                        <a href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
+                                        {typeof q.views === 'number' && <small> 조회 {formatCount(q.views)}{typeof q.answers === 'number' ? ` · 답변 ${q.answers}` : ''}</small>}
+                                    </li>
+                                ))}
+                            </ol>
+                        </section>
+                    )}
+
+                    {((row.subKeywords || []).length > 0 || (row.keywordPool || []).length > 0) && (
+                        <section>
+                            <strong>소제목·다음 글감 — 실측 서브키워드</strong>
+                            <div className="lw-plan-subs">
+                                {(row.subKeywords || []).map((sub) => (
+                                    <em key={sub.keyword}>
+                                        {sub.keyword}{typeof sub.searchVolume === 'number' ? ` (${formatCount(sub.searchVolume)})` : ''}
+                                    </em>
+                                ))}
+                                {(row.keywordPool || [])
+                                    .filter((p) => !(row.subKeywords || []).some((s) => s.keyword === p.keyword))
+                                    .slice(0, 8)
+                                    .map((p) => (
+                                        <em key={p.keyword} className="lw-plan-pool">
+                                            {p.keyword}{typeof p.searchVolume === 'number' ? ` (${formatCount(p.searchVolume)})` : ''}
+                                        </em>
+                                    ))}
+                            </div>
                         </section>
                     )}
 
@@ -145,10 +195,18 @@ function PreemptionPlan({ row, onClose, onAnalyze, searchUrl }: Props) {
 
                     {rivals.length > 0 && (
                         <section>
-                            <strong>지금 그 자리에 있는 글</strong>
+                            <strong>넘어야 할 글 — 지금 그 자리에 있는 제목</strong>
                             <ol className="lw-plan-rivals">
                                 {rivals.map((title, index) => <li key={`${index}-${title}`}>{title}</li>)}
                             </ol>
+                        </section>
+                    )}
+
+                    {row.layoutHeadline && (
+                        <section className="lw-plan-surface">
+                            <strong>어디에 쓸 판인가</strong>
+                            <p>{row.layoutHeadline}</p>
+                            {row.layoutAdsOnTop && <p className="lw-surface-note">광고가 맨 위를 차지한다 — 유기적 결과는 그만큼 아래로 밀린다</p>}
                         </section>
                     )}
 

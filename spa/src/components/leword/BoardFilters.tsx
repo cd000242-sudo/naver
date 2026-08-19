@@ -21,7 +21,8 @@ export function WriteLaneFilter({
             <div className="lw-segment lw-segment-wrap lw-write-lanes" role="group" aria-label="어느 판에 쓸 글인가">
                 {WRITE_LANES.map((lane) => {
                     const count = lane.id === 'all' ? counts.total : counts.laneCount(lane.id);
-                    if (count === 0 && lane.id !== 'all') return null;
+                    // 황금질문 탭은 0건이어도 보인다 — 눌러야 "왜 비었는지"(실측 조건)를 읽는다.
+                    if (count === 0 && lane.id !== 'all' && lane.id !== 'kin-golden') return null;
                     return (
                         <button
                             key={lane.id}

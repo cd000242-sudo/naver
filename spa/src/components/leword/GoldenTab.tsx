@@ -72,8 +72,8 @@ type PreemptionRow = {
     whySearch?: { text: string; basis?: string } | null;
     /** 지식인 질문 수 실측 — 질문 많음 = 답을 못 찾는 중. */
     kinCount?: number | null;
-    /** 최신 질문 중 조회수 높은 순(제목·링크·조회수 실측) — 클릭하면 질문으로 바로 간다. */
-    kinTop?: Array<{ title: string; link: string; views?: number | null }> | null;
+    /** 최신 질문 중 조회수 높은 순(제목·링크·조회수·답변수 실측) — 클릭하면 질문으로 바로 간다. */
+    kinTop?: Array<{ title: string; link: string; views?: number | null; answers?: number | null }> | null;
     adsenseReason?: string;
     /** 회차 실측으로 만든 제목 2종(SEO/홈판). 옛 회차 데이터에는 없다. */
     titles?: {
@@ -389,6 +389,26 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         setVisibleCount(60);
     }, [topic, query, writeLane]);
 
+    /*
+     * 지식인 황금질문 — 전 행의 지식인 실측(최신 질문·조회수·답변수)에서
+     * "조회 300+ 인데 답변 2개 이하"만 모은다. 조회·답변 둘 다 실측된 질문만
+     * 후보다(못 잰 것을 황금이라 단정하지 않는다). docId 로 중복을 걷어낸다.
+     */
+    const goldenKin = useMemo(() => {
+        const seen = new Set<string>();
+        return (board?.rows || [])
+            .flatMap((row) => (row.kinTop || []).map((q) => ({ ...q, keyword: row.keyword, topic: row.topic })))
+            .filter((q) => typeof q.views === 'number' && typeof q.answers === 'number')
+            .filter((q) => (q.views as number) >= 300 && (q.answers as number) <= 2)
+            .filter((q) => {
+                const docId = (q.link.match(/docId=(\d+)/) || [])[1] || q.link;
+                if (seen.has(docId)) return false;
+                seen.add(docId);
+                return true;
+            })
+            .sort((a, b) => (b.views as number) - (a.views as number));
+    }, [board]);
+
     const publishedLabel = board?.publishedAt
         ? new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
             .format(new Date(board.publishedAt))
@@ -441,11 +461,43 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         onChange={setWriteLane}
                         counts={{
                             total: board.rows.length,
-                            laneCount: (laneId) => board.rows.filter((row) => rowMatchesWriteLane(row, laneId)).length,
+                            // 황금질문 탭은 행이 아니라 질문을 센다 — 질문 수가 곧 내용물이다.
+                            laneCount: (laneId) => (laneId === 'kin-golden'
+                                ? goldenKin.length
+                                : board.rows.filter((row) => rowMatchesWriteLane(row, laneId)).length),
                         }}
                     />
 
-                    <TopicFilter value={topic} onChange={setTopic} topics={topics} total={board.rows.length} />
+                    {/* 황금질문 탭 — 카드 목록 대신 질문 목록을 그린다. */}
+                    {writeLane === 'kin-golden' && (
+                        <section className="lw-kin-golden" aria-label="지식인 황금질문">
+                            {goldenKin.length === 0 ? (
+                                <div className="lw-note">
+                                    이번 회차 실측에서 조건(조회 300+ · 답변 2개 이하)을 만족한 질문이 없습니다.
+                                    조회수·답변수는 회차 보강이 질문 페이지에서 실측합니다 — 다음 보강 후 다시 확인해 주세요.
+                                </div>
+                            ) : (
+                                <ol className="lw-kin-golden-list">
+                                    {goldenKin.map((q, index) => (
+                                        <li key={q.link}>
+                                            <span className="lw-kin-golden-rank">{index + 1}</span>
+                                            <div>
+                                                <a href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
+                                                <small>
+                                                    조회 {formatCount(q.views as number)} · 답변 {q.answers}
+                                                    · 키워드 <button type="button" className="lw-kin-golden-kw" onClick={() => onAnalyze?.(q.keyword)}>{q.keyword}</button>
+                                                </small>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ol>
+                            )}
+                        </section>
+                    )}
+
+                    {writeLane !== 'kin-golden' && (
+                        <TopicFilter value={topic} onChange={setTopic} topics={topics} total={board.rows.length} />
+                    )}
 
                     {!unlocked && rows.length > FREE_BOARD_ROWS && (
                         <LicenseGate onUnlock={() => setUnlocked(true)} />
@@ -456,7 +508,16 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             const locked = !unlocked && index >= FREE_BOARD_ROWS;
                             return (
                                 <article key={`${row.topic}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
-                                    <BoardCardHead row={row} rank={index + 1} />
+                                    <BoardCardHead
+                                        row={row}
+                                        rank={index + 1}
+                                        copied={copied === row.keyword}
+                                        onCopy={() => {
+                                            navigator.clipboard?.writeText(row.keyword);
+                                            setCopied(row.keyword);
+                                            window.setTimeout(() => setCopied(''), 1400);
+                                        }}
+                                    />
 
                                     {/*
                                       * 30일 추이 자동 표시(사장님 2026-08-19: "그래프가 보여야 이 키워드로
@@ -524,12 +585,21 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                     {(row.kinTop || []).length > 0 && (
                                         <div className="lw-kin">
                                             <em>지식인 최신 질문 · 조회순</em>
-                                            {row.kinTop!.map((q) => (
-                                                <a key={q.link} href={q.link} target="_blank" rel="noreferrer">
-                                                    {q.title}
-                                                    {typeof q.views === 'number' && <span className="lw-kin-views">조회 {formatCount(q.views)}</span>}
-                                                </a>
-                                            ))}
+                                            {/* 번호 목록(사장님 지시 2026-08-19 "최대 5개까지 1. 2. 3. 이런식으로"). */}
+                                            <ol className="lw-kin-list">
+                                                {row.kinTop!.slice(0, 5).map((q) => (
+                                                    <li key={q.link}>
+                                                        <a href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
+                                                        {(typeof q.views === 'number' || typeof q.answers === 'number') && (
+                                                            <span className="lw-kin-views">
+                                                                {typeof q.views === 'number' ? `조회 ${formatCount(q.views)}` : ''}
+                                                                {typeof q.views === 'number' && typeof q.answers === 'number' ? ' · ' : ''}
+                                                                {typeof q.answers === 'number' ? `답변 ${q.answers}` : ''}
+                                                            </span>
+                                                        )}
+                                                    </li>
+                                                ))}
+                                            </ol>
                                         </div>
                                     )}
 
@@ -637,16 +707,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                           * 서브키워드가 회차 보강에서 이미 구워져 오므로 온디맨드
                                           * 버튼은 같은 일을 두 번 시키는 군더더기였다.
                                           */}
-                                        <button
-                                            type="button"
-                                            className="lw-copy"
-                                            title="키워드 복사"
-                                            onClick={() => {
-                                                navigator.clipboard?.writeText(row.keyword);
-                                                setCopied(row.keyword);
-                                                window.setTimeout(() => setCopied(''), 1400);
-                                            }}
-                                        >{copied === row.keyword ? '복사됨' : '복사'}</button>
+                                        {/* '복사'는 키워드 옆 아이콘으로 옮겼다(사장님 지시 2026-08-19
+                                            "복사만 아래에 빠져있으니까 보기싫은데") — 4버튼 한 줄. */}
                                     </div>
 
                                     {/* 하단 트렌드 뷰는 그래프 자동화(카드 상단 스파크)로 대체 — 버튼과 함께 제거. */}

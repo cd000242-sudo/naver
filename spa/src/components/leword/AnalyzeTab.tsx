@@ -18,9 +18,38 @@ import TrendSparkline from './TrendSparkline';
  * 표시하는 값은 전부 API 가 준 실측이다. 유일한 계산은 검색량 ÷ 문서수 하나이고,
  * 그건 나눗셈이라 추정이 아니다. 등급·점수·예상 유입 같은 건 만들지 않는다.
  */
+/**
+ * 선점 보드가 이미 실측해 둔 행 — 분석 탭이 재측정 없이 얹어 쓴다(사장님 지시
+ * 2026-08-19: "왜 뜨는지·확장 키워드·광고수·빈자리·지식인 전부 나와야").
+ * 광고수·빈자리는 Bright Data 검색결과 실측이라 온디맨드로는 못 재는 값이다 —
+ * 보드에 있는 키워드만 이 패널이 붙고, 없는 키워드는 API 실측만 나간다.
+ */
+type BoardJoinRow = {
+    keyword: string;
+    openSlot?: number | null;
+    whySearch?: { text: string; basis?: string } | null;
+    serp?: { adCount?: number | null };
+    kinTop?: Array<{ title: string; link: string; views?: number | null; answers?: number | null }> | null;
+    keywordPool?: Array<{ keyword: string; searchVolume: number | null; documentCount?: number | null }> | null;
+    subKeywords?: { keyword: string; searchVolume: number | null }[];
+};
+
 function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
     const [keyword, setKeyword] = useState(initialKeyword);
     const [result, setResult] = useState<KeywordAnalysis | null>(null);
+    const [boardRows, setBoardRows] = useState<BoardJoinRow[]>([]);
+
+    // 보드는 정적 JSON 하나라 탭이 열릴 때 한 번만 읽는다. 실패해도 분석은 그대로 돈다.
+    useEffect(() => {
+        let cancelled = false;
+        fetch('/data/preemption-board.json')
+            .then((res) => (res.ok ? res.json() : null))
+            .then((data) => {
+                if (!cancelled && data && Array.isArray(data.rows)) setBoardRows(data.rows);
+            })
+            .catch(() => { /* 보드 없음 = 결합 패널 없이 계속 */ });
+        return () => { cancelled = true; };
+    }, []);
     const [usage, setUsage] = useState<KeywordUsage | null>(null);
     const [error, setError] = useState<{ code?: string; message?: string; missing?: string[] }>({});
     const [loading, setLoading] = useState(false);
@@ -55,6 +84,12 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
     }, [initialKeyword]);
 
     const measured = result?.measured;
+    const compact = (t: string) => t.replace(/\s+/g, '');
+    const boardRow = result
+        ? boardRows.find((row) => compact(row.keyword) === compact(result.keyword)) || null
+        : null;
+    // 보드 지식인 실측(조회수 포함)이 있으면 그것이 우선이다 — API 는 조회수를 못 준다.
+    const kinList = (boardRow?.kinTop?.length ? boardRow.kinTop : result?.kinTop) || [];
 
     return (
         <>
@@ -156,7 +191,25 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                             <MetricCell label="쇼핑 상품수" value={formatCount(measured.productCount)} />
                             <MetricCell label="광고 경쟁도" value={measured.competition || '—'} note="검색광고 표기" />
                             <MetricCell label="광고 노출 depth" value={formatCount(measured.adDepth)} />
+                            {/* 광고수·빈자리 — 검색결과를 직접 열어 본 회차 실측(보드에 있는 키워드만). */}
+                            {boardRow && typeof boardRow.serp?.adCount === 'number' && (
+                                <MetricCell label="광고수" value={String(boardRow.serp.adCount)} note="검색결과 상단 실측" />
+                            )}
+                            {boardRow && (
+                                <MetricCell
+                                    label="빈자리"
+                                    value={boardRow.openSlot ? `${boardRow.openSlot}위` : '10위 내 없음'}
+                                    note="검색결과 배치 실측"
+                                />
+                            )}
                         </div>
+                        {boardRow?.whySearch?.text && (
+                            <div className="lw-analyze-why">
+                                <strong>왜 지금 검색되나</strong>
+                                <p>{boardRow.whySearch.text}</p>
+                                {boardRow.whySearch.basis && <small>{boardRow.whySearch.basis}</small>}
+                            </div>
+                        )}
                         {/* 30일 추이 자동 표시 — "그래프가 보여야 이 키워드로 글을 써도 될지 안다". */}
                         {result.trend && result.trend.series.length >= 2 && (
                             <div className="lw-analyze-spark">
@@ -168,16 +221,60 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                         </p>
                     </section>
 
-                    {(result.kinTop || []).length > 0 && (
-                        <section className="lw-panel" aria-label="지식인 상위 질문">
+                    {kinList.length > 0 && (
+                        <section className="lw-panel" aria-label="지식인 질문">
                             <div className="lw-panel-head">
                                 <h2>지식인에서 묻는 것</h2>
-                                <span>추천·채택 순 상위 {result.kinTop!.length}개 · 클릭하면 질문으로 갑니다</span>
+                                <span>
+                                    {boardRow?.kinTop?.length
+                                        ? `최신 질문 조회순 상위 ${Math.min(kinList.length, 5)}개 · 조회수는 질문 페이지 실측`
+                                        : `상위 ${kinList.length}개 · 클릭하면 질문으로 갑니다`}
+                                </span>
                             </div>
                             <div className="lw-kin">
-                                {result.kinTop!.map((q) => (
-                                    <a key={q.link} href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
-                                ))}
+                                <ol className="lw-kin-list">
+                                    {kinList.slice(0, 5).map((q) => (
+                                        <li key={q.link}>
+                                            <a href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
+                                            {typeof (q as { views?: number | null }).views === 'number' && (
+                                                <span className="lw-kin-views">
+                                                    조회 {formatCount((q as { views?: number | null }).views as number)}
+                                                    {typeof (q as { answers?: number | null }).answers === 'number' ? ` · 답변 ${(q as { answers?: number | null }).answers}` : ''}
+                                                </span>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ol>
+                            </div>
+                        </section>
+                    )}
+
+                    {/* 확장 키워드 — 보드 회차가 실측으로 굳혀 둔 풀(검색량·문서수 붙은 실존 검색어). */}
+                    {boardRow && ((boardRow.keywordPool || []).length > 0 || (boardRow.subKeywords || []).length > 0) && (
+                        <section className="lw-panel" aria-label="확장 키워드">
+                            <div className="lw-panel-head">
+                                <h2>확장 키워드 — 회차 실측 풀</h2>
+                                <span>전부 검색량 확인된 실존 검색어 · 누르면 이어서 분석합니다</span>
+                            </div>
+                            <div className="lw-analyze-pool">
+                                {[...(boardRow.subKeywords || []), ...(boardRow.keywordPool || [])]
+                                    .filter((p, idx, arr) => arr.findIndex((x) => x.keyword === p.keyword) === idx)
+                                    .slice(0, 14)
+                                    .map((p) => (
+                                        <button
+                                            key={p.keyword}
+                                            type="button"
+                                            onClick={() => { setKeyword(p.keyword); run(p.keyword); }}
+                                        >
+                                            {p.keyword}
+                                            <span>
+                                                {typeof p.searchVolume === 'number' ? formatCount(p.searchVolume) : '실측'}
+                                                {typeof (p as { documentCount?: number | null }).documentCount === 'number'
+                                                    ? ` / ${formatCount((p as { documentCount?: number | null }).documentCount as number)}`
+                                                    : ''}
+                                            </span>
+                                        </button>
+                                    ))}
                             </div>
                         </section>
                     )}
