@@ -182,8 +182,8 @@ function ChatbotsPage() {
                 <section id="chatbots-list" className="chatbots-section dark">
                     <div className="chatbots-wrap">
                         <div className="chatbots-section-head fade-in">
-                            <span className="chatbots-kicker">GPTS LINKS</span>
-                            <h2>원하는 챗봇을 바로 실행하세요</h2>
+                            <span className="chatbots-kicker">CHATGPT GPTS</span>
+                            <h2>쳇지피티 무료챗봇</h2>
                             <p>각 버튼을 누르면 ChatGPT의 해당 GPTs 페이지가 새 창으로 열립니다.</p>
                         </div>
                         <div className="chatbot-grid">
@@ -205,6 +205,30 @@ function ChatbotsPage() {
                                 </article>
                             ))}
                         </div>
+
+                        {/* 제미나이 무료챗봇 — 부티크 인포 글쓰기 프롬프트 탭 딥링크 (2026-08-19).
+                            ?page=prompt 는 해당 사이트의 URLSearchParams→showPage 라우팅을 실측 확인하고 걸었다. */}
+                        <a
+                            className="gemini-band fade-in"
+                            href="https://www.boutique-info.com/?page=prompt"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <div className="gemini-band-text">
+                                <span className="chatbots-kicker gemini-kicker">GEMINI CHATBOT</span>
+                                <h3>무료 제미나이 챗봇 사용하러가기</h3>
+                                <p>부티크 인포의 글쓰기 프롬프트 탭에서 제미나이 전용 챗봇을 바로 쓸 수 있습니다.</p>
+                            </div>
+                            <span className="gemini-band-cta">사용하러 가기 →</span>
+                        </a>
+                        <a
+                            className="cafe-line fade-in"
+                            href="https://cafe.naver.com/boutiqueinfo"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            ☕ 부방장 협업 카페 바로가기 <span>부티크 인포 네이버 카페</span>
+                        </a>
                     </div>
                 </section>
 
@@ -251,6 +275,60 @@ function ChatbotsPage() {
                     z-index: 1;
                     color: #f8fafc;
                     background: rgba(5, 8, 12, 0.58);
+                }
+
+                /* 제미나이 밴드 + 협업 카페 (2026-08-19) — 쳇지피티 그리드와 같은 카드 문법, 액센트만 퍼플 */
+                .gemini-band {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 20px;
+                    margin-top: 28px;
+                    padding: 26px 30px;
+                    background: linear-gradient(135deg, rgba(139, 92, 246, 0.14), rgba(109, 40, 217, 0.08));
+                    border: 1px solid rgba(167, 139, 250, 0.35);
+                    border-radius: 18px;
+                    text-decoration: none;
+                    color: inherit;
+                    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+                }
+                .gemini-band:hover {
+                    transform: translateY(-3px);
+                    border-color: rgba(167, 139, 250, 0.65);
+                    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+                }
+                .gemini-kicker { color: #a78bfa; }
+                .gemini-band-text h3 { margin: 6px 0 8px; font-size: 1.35rem; font-weight: 800; color: #f8fafc; }
+                .gemini-band-text p { margin: 0; color: #b6bcd0; font-size: 0.92rem; line-height: 1.6; }
+                .gemini-band-cta {
+                    flex-shrink: 0;
+                    padding: 13px 22px;
+                    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+                    color: #fff;
+                    border-radius: 12px;
+                    font-weight: 800;
+                    font-size: 0.95rem;
+                    white-space: nowrap;
+                }
+                .cafe-line {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    margin-top: 14px;
+                    padding: 15px 22px;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 14px;
+                    text-decoration: none;
+                    color: #e6e8ee;
+                    font-weight: 700;
+                    font-size: 0.95rem;
+                    transition: border-color 0.2s ease, background 0.2s ease;
+                }
+                .cafe-line:hover { border-color: rgba(201, 168, 76, 0.45); background: rgba(201, 168, 76, 0.08); }
+                .cafe-line span { color: #8b93a7; font-weight: 500; font-size: 0.85rem; }
+                @media (max-width: 720px) {
+                    .gemini-band { flex-direction: column; align-items: flex-start; }
                 }
 
                 .chatbots-wrap {
