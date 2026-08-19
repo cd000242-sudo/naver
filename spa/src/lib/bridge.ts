@@ -110,19 +110,43 @@ export async function bridgeTrend(keyword: string): Promise<BridgeTrend | null> 
  * 템플릿에 박혀 있고, 본인 구독으로 생성된다. 게시는 사용자가 직접 한다.
  * 앱이 꺼져 있으면 null — 화면은 "앱을 켜세요"로 안내한다.
  */
+export type BridgeKinAnswerResult =
+    | { status: 'ok'; answer: string; provider: string }
+    /** 연결 자체가 안 됨 — 앱이 꺼져 있거나 설치 전. */
+    | { status: 'offline' }
+    /** 앱은 떠 있는데 이 경로가 없음(404) — 구버전, 업데이트가 답이다. */
+    | { status: 'outdated' }
+    | { status: 'error'; message: string };
+
 export async function bridgeKinAnswer(input: {
     title: string;
     body: string;
     withLink: boolean;
     blogUrl: string;
-}): Promise<{ answer: string; provider: string } | null> {
-    const payload = await bridgeFetch('/v1/bridge/kin-answer', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(input),
-    }, 120_000) as { result?: { answer?: string; provider?: string } } | null;
-    if (!payload?.result?.answer) return null;
-    return { answer: payload.result.answer, provider: payload.result.provider || 'unknown' };
+}): Promise<BridgeKinAnswerResult> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 120_000);
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/kin-answer`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(input),
+            signal: controller.signal,
+        });
+        // 404 = 앱은 살아 있는데 이 기능이 실리기 전 버전이다 — "꺼짐"과 구분해야
+        // 사용자가 헛되이 앱을 껐다 켰다 하지 않는다(사장님 실사고 2026-08-20).
+        if (response.status === 404) return { status: 'outdated' };
+        const body = await response.json().catch(() => null) as
+            { ok?: boolean; error?: string; result?: { answer?: string; provider?: string } } | null;
+        if (response.ok && body?.ok && body.result?.answer) {
+            return { status: 'ok', answer: body.result.answer, provider: body.result.provider || 'unknown' };
+        }
+        return { status: 'error', message: body?.error || `앱 응답 ${response.status}` };
+    } catch {
+        return { status: 'offline' };
+    } finally {
+        window.clearTimeout(timer);
+    }
 }
 
 export async function bridgeAiSubs(keyword: string): Promise<{

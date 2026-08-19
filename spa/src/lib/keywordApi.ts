@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -243,6 +243,18 @@ export const auditBlogCheck = (title: string, link: string) =>
 /** 지식인 질문 전문 — 답변 작업대는 질문이 안 잘리고 끝까지 보여야 한다. */
 export const fetchKinQuestion = (link: string) =>
     call<{ body: string }>('kin-question', { link });
+
+/**
+ * 지식인 답변 초안 — '내 API 키' 탭의 Gemini/OpenAI 키로 앱 없이 생성한다
+ * (키는 call() 이 자동으로 싣는다). 키가 없으면 needs-keys 가 온다.
+ */
+export const fetchKinAnswer = (input: { title: string; body: string; withLink: boolean; blogUrl: string }) =>
+    call<{ answer: string; provider: string }>('kin-answer', {
+        title: input.title,
+        body: input.body,
+        withLink: input.withLink ? '1' : '',
+        blogUrl: input.blogUrl,
+    });
 
 export const fetchShoppingSignal = (keyword: string) =>
     call<ShoppingSignal>('keyword-shopping', { keyword });

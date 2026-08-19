@@ -21,6 +21,8 @@ export type UserKeyField =
     | 'coupangAccessKey'
     | 'coupangSecretKey'
     | 'coupangSubId'
+    | 'geminiKey'
+    | 'openaiKey'
     | 'brandconnectSpaceId'
     | 'apihubKeyId'
     | 'apihubKey';
@@ -28,7 +30,7 @@ export type UserKeyField =
 export type UserKeys = Partial<Record<UserKeyField, string>>;
 
 export type KeyGroup = {
-    id: 'searchad' | 'openapi' | 'apihub' | 'youtube' | 'coupang' | 'brandconnect';
+    id: 'searchad' | 'openapi' | 'apihub' | 'youtube' | 'coupang' | 'brandconnect' | 'ai';
     label: string;
     desc: string;
     /** 어디서 발급받는지. 사용자가 바로 갈 수 있어야 한다. */
@@ -71,6 +73,21 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
         fields: [
             { key: 'openApiId', label: '클라이언트 ID', secret: true, placeholder: 'abcdEFGH...' , minLength: 12 },
             { key: 'openApiSecret', label: '클라이언트 시크릿', secret: true, placeholder: '••••••••' , minLength: 8 },
+        ],
+    },
+    {
+        /*
+         * 지식인 답변 생성용(사장님 확정 2026-08-20 "내 API 키 연동으로") —
+         * 키가 있으면 앱 없이 서버(Worker)가 바로 생성한다. 둘 중 하나면 되고
+         * Gemini 가 무료 쿼터라 권장이다. 키는 이 브라우저에만 저장된다.
+         */
+        id: 'ai',
+        label: 'AI 답변 생성 (지식인 황금질문)',
+        desc: '지식인 답변 초안을 만듭니다. Gemini 키는 무료 쿼터로 충분합니다 — 둘 중 하나만 넣으면 됩니다.',
+        issueUrl: 'https://aistudio.google.com/apikey',
+        fields: [
+            { key: 'geminiKey', label: 'Gemini API 키 (무료, 권장)', secret: true, placeholder: 'AIzaSy...' , minLength: 30 },
+            { key: 'openaiKey', label: 'OpenAI API 키 (선택)', secret: true, placeholder: 'sk-...' , minLength: 20 },
         ],
     },
     {

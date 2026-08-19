@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { fetchKinQuestion, formatCount } from '../../lib/keywordApi';
+import { fetchKinAnswer, fetchKinQuestion, formatCount } from '../../lib/keywordApi';
 import { bridgeKinAnswer } from '../../lib/bridge';
 import { TabIntro } from './LewordShared';
 
@@ -103,18 +103,39 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         if (!work || generating) return;
         setGenerating(true);
         setGenNote('');
-        const result = await bridgeKinAnswer({
+        const input = {
             title: work.title,
             body: workBody.text,
             withLink: withLink && linkAllowed,
             blogUrl: blogUrl.trim(),
-        });
-        setGenerating(false);
-        if (!result) {
-            setGenNote('LEWORD 앱이 꺼져 있습니다 — 앱을 켜면 내 구독으로 생성됩니다.');
+        };
+        /*
+         * 1순위: '내 API 키' 연동(사장님 확정 2026-08-20) — 키가 있으면 앱 없이
+         * 서버가 바로 생성한다. 키가 없을 때만 LEWORD 앱(본인 구독)을 시도한다.
+         */
+        const viaKeys = await fetchKinAnswer(input);
+        if (viaKeys.ok && viaKeys.data?.answer) {
+            setGenerating(false);
+            setDraft(viaKeys.data.answer);
             return;
         }
-        setDraft(result.answer);
+        if (viaKeys.error && viaKeys.error !== 'needs-keys') {
+            setGenerating(false);
+            setGenNote(`생성 실패: ${viaKeys.message || viaKeys.error}`);
+            return;
+        }
+        const result = await bridgeKinAnswer(input);
+        setGenerating(false);
+        if (result.status === 'ok') {
+            setDraft(result.answer);
+            return;
+        }
+        if (result.status === 'error') {
+            setGenNote(`생성 실패: ${result.message}`);
+            return;
+        }
+        // 키도 없고 앱도 없다 — 가장 쉬운 길(무료 키)을 먼저 안내한다.
+        setGenNote('내 API 키 탭에 Gemini 키(무료)를 넣으면 바로 생성됩니다. LEWORD 앱을 켜도 됩니다(내 구독 사용).');
     };
 
     const copyDraft = () => {
@@ -296,7 +317,11 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                                     placeholder="'AI 답변 생성'을 누르면 내 구독으로 초안이 만들어집니다. 고쳐 쓰셔도 됩니다."
                                     rows={8}
                                 />
-                                {genNote && <p className="lw-kg-work-note">{genNote} <a href="/download">⬇ 앱 받기</a></p>}
+                                {genNote && (
+                                    <p className="lw-kg-work-note">
+                                        {genNote} <a href="/leword?tab=keys">내 API 키 탭 열기</a>
+                                    </p>
+                                )}
                                 <div className="lw-kg-work-actions">
                                     <button type="button" className="lw-kg-generate" onClick={generate} disabled={generating}>
                                         {generating ? '생성 중… (내 구독)' : draft ? '다시 생성' : 'AI 답변 생성'}
