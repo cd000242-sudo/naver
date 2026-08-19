@@ -235,15 +235,18 @@ function LewordStyles() {
             .lw-kin-list a:hover { text-decoration: underline; color: #fff; }
 
             /* ── 지식인 황금질문 탭(좌측 메뉴 독립 탭) — 실시간·급상승·숨은 3레인 ── */
-            .lw-kg-list { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
-            .lw-kg-list li { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 12px 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(255,255,255,.025); }
-            .lw-kg-rank { font-family: Consolas, monospace; font-size: 14px; font-weight: 700; color: #2ecc71; text-align: center; }
+            .lw-kg-list { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+            .lw-kg-list li { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 14px 16px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(255,255,255,.025); }
+            .lw-kg-rank { font-family: Consolas, monospace; font-size: 14px; font-weight: 700; color: #2ecc71; text-align: center; padding-top: 2px; }
             .lw-kg-body { min-width: 0; }
-            /* 제목·요약은 잘라내지 않는다 — "안 짤리게 줄바꿈해서 다 보이게"(사장님 지시). */
-            .lw-kg-body a { display: block; font-size: 15px; font-weight: 700; color: #ebf2fa; text-decoration: none; word-break: keep-all; line-height: 1.5; }
+            /*
+             * 전문은 다 보이되 **읽는 폭은 본문 규격(약 74자)** — 화면 전체 폭으로
+             * 퍼진 200자짜리 줄이 가독성을 죽였다(사장님 지적 2026-08-20).
+             */
+            .lw-kg-body a { display: block; max-width: 74ch; font-size: 15.5px; font-weight: 700; color: #ebf2fa; text-decoration: none; word-break: keep-all; line-height: 1.5; }
             .lw-kg-body a:hover { color: #fff; text-decoration: underline; }
-            .lw-kg-body p { margin: 4px 0 0; font-size: 12.5px; color: rgba(235,242,250,.55); word-break: keep-all; line-height: 1.6; }
-            .lw-kg-body small { display: block; margin-top: 3px; font-size: 12px; color: rgba(235,242,250,.6); }
+            .lw-kg-body p { margin: 6px 0 0; max-width: 74ch; font-size: 13px; color: rgba(235,242,250,.62); word-break: keep-all; line-height: 1.68; }
+            .lw-kg-body small { display: block; margin-top: 7px; font-size: 12px; color: rgba(235,242,250,.6); }
             .lw-kg-body small b { color: #69b7ff; font-weight: 700; }
             .lw-kg-up { font-style: normal; color: #2ecc71; font-weight: 700; }
             .lw-kg-kw { border: 0; background: none; padding: 0; font-size: 12px; color: #69b7ff; cursor: pointer; text-decoration: underline; }
