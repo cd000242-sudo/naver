@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { fetchKinAnswer, fetchKinQuestion, formatCount } from '../../lib/keywordApi';
 import { bridgeKinAnswer, probeBridge, type BridgeStatus } from '../../lib/bridge';
-import { loadUserKeys } from '../../lib/userKeys';
+import { loadUserKeys, saveUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -142,6 +142,16 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         }
         if (viaKeys.error && viaKeys.error !== 'needs-keys') {
             setGenerating(false);
+            /*
+             * 폐기된 수동 토큰(갱신 토큰 없음)이 남아 있으면 이 오류가 반복된다 —
+             * 죽은 토큰은 지워 주고 버튼 재연결로 안내한다(사장님 실사고 2026-08-20).
+             */
+            const stored = loadUserKeys();
+            if (/invalid bearer|revoked|expired/i.test(viaKeys.message || '') && stored.claudeToken && !stored.claudeRefresh) {
+                saveUserKeys({ ...stored, claudeToken: '' });
+                setGenNote('저장돼 있던 토큰이 폐기된 것이라 지웠습니다 — 내 API 키 탭의 [구독 연결] 버튼으로 다시 연결하면 자동 갱신되는 토큰이 저장됩니다.');
+                return;
+            }
             setGenNote(`생성 실패: ${viaKeys.message || viaKeys.error}`);
             return;
         }

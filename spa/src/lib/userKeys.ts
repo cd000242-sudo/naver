@@ -174,6 +174,13 @@ export function clearUserKeys(): void {
 
 /** 그룹 하나가 쓸 수 있는 상태인지(필수 항목이 전부 찼는지). */
 export function isGroupReady(group: KeyGroup, keys: UserKeys): boolean {
+    /*
+     * AI 그룹은 경로가 병렬이다 — 하나만 있어도 전부 돈다(사장님 확정 2026-08-20
+     * "하나만 맞아도 연동완료 뜨게"). 나머지 그룹은 키 세트가 한 몸이라 전부 필요.
+     */
+    if (group.id === 'ai') {
+        return group.fields.some((field) => String(keys[field.key] || '').trim().length > 0);
+    }
     return group.fields.every((field) => String(keys[field.key] || '').trim().length > 0);
 }
 
