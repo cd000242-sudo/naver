@@ -3,8 +3,10 @@ import {
     auditBlogCheck,
     auditBlogPosts,
     checkRank,
+    fetchPostAnalysis,
     type BlogAuditPost,
     type KeywordUsage,
+    type PostAnalysis,
     type RankResult,
 } from '../../lib/keywordApi';
 import { ErrorNote, TabIntro, UsageBar } from './LewordShared';
@@ -98,6 +100,33 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
     const [auditError, setAuditError] = useState('');
     /** 진행 중 감사를 새 감사가 밀어내면 이전 루프를 멈춘다. */
     const auditRunId = useRef(0);
+
+    /*
+     * 글 진단(사장님 확정 2026-08-20 "키워드 추출이 아니라 글을 분석해야") —
+     * 실측 순위 3종 + 글 전문을 구독 AI 가 읽고, 보이는 사실만으로 원인·수정안을
+     * 짚는다. 키워드 지표 분석은 각 순위 칸의 검색어 클릭으로 여전히 간다.
+     */
+    const [analyzeRow, setAnalyzeRow] = useState<AuditRow | null>(null);
+    const [analyzeState, setAnalyzeState] = useState<{ status: 'loading' | 'done' | 'error'; data?: PostAnalysis; message?: string }>({ status: 'loading' });
+
+    const openAnalysis = async (row: AuditRow) => {
+        setAnalyzeRow(row);
+        setAnalyzeState({ status: 'loading' });
+        const result = await fetchPostAnalysis({
+            title: row.title,
+            link: row.link,
+            kwQuery: row.kwQuery,
+            kwRank: row.kwRank ?? null,
+            extQuery: row.extQuery,
+            extRank: row.extRank ?? null,
+            titleRank: row.rank,
+        });
+        if (result.ok && result.data?.analysis) {
+            setAnalyzeState({ status: 'done', data: result.data.analysis });
+            return;
+        }
+        setAnalyzeState({ status: 'error', message: result.message || result.error || '진단 실패' });
+    };
 
     useEffect(() => {
         if (initialKeyword) setKeyword(initialKeyword);
@@ -276,21 +305,23 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                         </td>
                                         <td className={row.kwRank === null ? 'lw-rank-out' : 'lw-rank-in'}>
                                             {row.status !== 'done' ? '—' : row.kwRank != null ? `${row.kwRank}위` : row.kwQuery ? '없음' : '—'}
-                                            {row.kwQuery && <small className="lw-audit-q">{row.kwQuery}</small>}
+                                            {row.kwQuery && (onAnalyze
+                                                ? <button type="button" className="lw-audit-q lw-audit-q-btn" title="키워드 분석 탭으로" onClick={() => onAnalyze(row.kwQuery!)}>{row.kwQuery}</button>
+                                                : <small className="lw-audit-q">{row.kwQuery}</small>)}
                                         </td>
                                         <td className={row.extRank === null ? 'lw-rank-out' : 'lw-rank-in'}>
                                             {row.status !== 'done' ? '—' : row.extRank != null ? `${row.extRank}위` : row.extQuery ? '없음' : '—'}
-                                            {row.extQuery && row.extQuery !== row.kwQuery && <small className="lw-audit-q">{row.extQuery}</small>}
+                                            {row.extQuery && row.extQuery !== row.kwQuery && (onAnalyze
+                                                ? <button type="button" className="lw-audit-q lw-audit-q-btn" title="키워드 분석 탭으로" onClick={() => onAnalyze(row.extQuery!)}>{row.extQuery}</button>
+                                                : <small className="lw-audit-q">{row.extQuery}</small>)}
                                         </td>
                                         <td className={row.rank === null ? 'lw-rank-out' : 'lw-rank-in'}>
                                             {row.status !== 'done' ? '—' : row.rank !== null ? `${row.rank}위` : `${row.sampled}건 중 없음`}
                                         </td>
                                         <td className="lw-row-actions">
-                                            {onAnalyze && (
-                                                <button type="button" className="lw-mini" onClick={() => onAnalyze(row.kwQuery || row.title)}>
-                                                    글 분석하기
-                                                </button>
-                                            )}
+                                            <button type="button" className="lw-mini" onClick={() => openAnalysis(row)} disabled={row.status !== 'done'}>
+                                                글 분석하기
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
@@ -383,6 +414,64 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                         </table>
                     </div>
                 </section>
+            )}
+            {/* 글 진단 창 — 실측 3종 + 본문을 읽은 결과만 싣는다. */}
+            {analyzeRow && (
+                <div className="lw-plan-backdrop" role="presentation" onClick={() => setAnalyzeRow(null)}>
+                    <div
+                        className="lw-plan-modal"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-label={`${analyzeRow.title} 글 진단`}
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <header className="lw-plan-head">
+                            <div>
+                                <h3>{analyzeRow.title}</h3>
+                                <small className="lw-kg-work-meta">
+                                    {analyzeRow.kwQuery ? `키워드 ${analyzeRow.kwRank != null ? `${analyzeRow.kwRank}위` : '없음'}` : ''}
+                                    {analyzeRow.extQuery && analyzeRow.extQuery !== analyzeRow.kwQuery ? ` · 확장 ${analyzeRow.extRank != null ? `${analyzeRow.extRank}위` : '없음'}` : ''}
+                                    {` · 제목검색 ${analyzeRow.rank != null ? `${analyzeRow.rank}위` : '누락'}`}
+                                </small>
+                            </div>
+                            <button type="button" className="lw-plan-close" onClick={() => setAnalyzeRow(null)} aria-label="닫기">✕</button>
+                        </header>
+                        <div className="lw-plan-body">
+                            {analyzeState.status === 'loading' && (
+                                <p className="lw-kg-work-body">글 본문을 읽고 진단하는 중… (내 구독으로 실행)</p>
+                            )}
+                            {analyzeState.status === 'error' && (
+                                <p className="lw-kg-work-note">
+                                    {analyzeState.message} <a href="/leword?tab=keys">내 API 키 탭 열기</a>
+                                </p>
+                            )}
+                            {analyzeState.status === 'done' && analyzeState.data && (
+                                <>
+                                    <section>
+                                        <strong>판정</strong>
+                                        <p className="lw-kg-work-body" style={{ maxHeight: 'none' }}>
+                                            <b style={{ color: '#ffa500' }}>{analyzeState.data.verdict}</b>
+                                            {analyzeState.data.targetKeyword && <> · 이 글이 노려야 할 검색어: <b>{analyzeState.data.targetKeyword}</b></>}
+                                            {!analyzeState.data.contentRead && <><br /><small>본문을 가져오지 못해 제목·실측만으로 진단했습니다.</small></>}
+                                        </p>
+                                    </section>
+                                    {analyzeState.data.diagnosis.length > 0 && (
+                                        <section>
+                                            <strong>왜 이런가 — 글에서 보이는 것</strong>
+                                            <ul>{analyzeState.data.diagnosis.map((line) => <li key={line}>{line}</li>)}</ul>
+                                        </section>
+                                    )}
+                                    {analyzeState.data.fixes.length > 0 && (
+                                        <section>
+                                            <strong>이렇게 고치세요</strong>
+                                            <ul>{analyzeState.data.fixes.map((line) => <li key={line}>{line}</li>)}</ul>
+                                        </section>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
             )}
         </>
     );

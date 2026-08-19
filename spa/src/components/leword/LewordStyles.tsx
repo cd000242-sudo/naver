@@ -271,6 +271,12 @@ function LewordStyles() {
             .lw-kg-linkbox input { accent-color: #ffa500; width: 15px; height: 15px; }
             .lw-kg-linkbox.off { opacity: .45; cursor: not-allowed; }
             .lw-kg-bloginput { width: 100%; margin-top: 8px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; }
+            /* 클로드 구독 연결(버튼 한 번) */
+            .lw-claude-connect { display: flex; flex-direction: column; gap: 9px; margin-bottom: 12px; }
+            .lw-claude-code { display: flex; gap: 8px; }
+            .lw-claude-code input { flex: 1; min-width: 0; padding: 9px 12px; border: 1px solid rgba(255,255,255,.14); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 13px; }
+            .lw-claude-code input:focus { outline: none; border-color: rgba(255,165,0,.5); }
+
             .lw-kg-bridge { margin: 6px 0 10px; font-size: 12.5px; color: rgba(235,242,250,.6); }
             .lw-kg-bridge.ok { color: #2ecc71; }
             .lw-kg-work-note { margin: 8px 0 0; font-size: 12.5px; color: rgba(235,242,250,.6); }
@@ -290,6 +296,8 @@ function LewordStyles() {
             .lw-audit-why { display: block; margin-top: 4px; font-size: 11px; color: rgba(255,123,123,.75); }
             /* 실제 사용한 검색어 — 순위의 기준이 눈에 보여야 신뢰가 생긴다. */
             .lw-audit-q { display: block; margin-top: 3px; font-size: 11px; font-weight: 400; color: rgba(235,242,250,.45); white-space: nowrap; }
+            .lw-audit-q-btn { border: 0; background: none; padding: 0; cursor: pointer; text-align: left; text-decoration: underline dotted; }
+            .lw-audit-q-btn:hover { color: #69b7ff; }
             .lw-audit-table td { vertical-align: top; }
 
             /* 차트 호버 십자선 값 — 가리킨 점의 기간·상대값. */
