@@ -216,6 +216,7 @@ import {
 } from './utils/errorAndAutosave.js';
 // ✅ [2026-01-25] 환경설정 모달
 import { initSettingsModal as initSettingsModalFunc } from './utils/settingsModal.js';
+import { restoreTextModelRadio } from './utils/settingsModal.js';
 import { initExposedStructureRef, getExposedStructureBlock } from './modules/exposedStructureRef.js';
 // ✅ [2026-02-24 모듈화] 연속 발행
 import { switchExternalLinksTab, startContinuousMode, stopContinuousMode, toggleContinuousModeModal, startContinuousPublishing, initContinuousPublishingV2, startContinuousModeEnhanced, executeContinuousPublish, testApiKeysAndFullAuto, runRealFullAutoTest, setupMutualExclusiveCheckboxes, updateContinuousProgressModal, setKeywordTitleOptionsFromItem, applyKeywordPrefixToTitleContinuous, continuousQueueV2, scheduleNextPosting } from './modules/continuousPublishing.js';
@@ -769,6 +770,22 @@ document.addEventListener('DOMContentLoaded', () => {
   initCategorySelectionListener(); // ✅ 카테고리 모달 이벤트 리스너
   initHeadingImageButton();
   initSettingsModalFunc(); // ✅ [2026-01-25] 환경설정 모달 초기화
+
+  // [2026-08-19] 저장된 텍스트 모델 선택을 시작 시점에 되살린다.
+  //   설정 모달을 열 때만 복원하면, 모달을 안 열고 바로 생성할 때 화면이 "선택 없음"이라
+  //   getGenerator() 가 드롭다운 기본값(gemini)으로 떨어진다. 설정엔 agent-claude 가
+  //   남아 있어 gemini 경로가 그 값을 읽고 생성이 통째로 실패했다.
+  void (async () => {
+    try {
+      const config: any = await window.api.getConfig();
+      const saved = config?.primaryGeminiTextModel;
+      if (restoreTextModelRadio(saved)) {
+        console.log(`[Startup] 저장된 텍스트 모델 복원: ${saved}`);
+      }
+    } catch (error) {
+      console.warn("[Startup] 텍스트 모델 복원 실패:", error);
+    }
+  })();
   initExposedStructureRef(); // [2026-08-19] 노출 글 구조 참고 입력칸
 
   // ✅ [v2.10.185 Phase 3.5] SERP 실측 비교 버튼 + 모달 wiring

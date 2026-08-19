@@ -118,6 +118,26 @@ function isMaskedApiValue(value: string | undefined): boolean {
     return isMaskedSecretValue(value);
 }
 
+/**
+ * 저장된 텍스트 모델 값에 해당하는 라디오를 체크한다.
+ *
+ * 값이 없거나 그 모델 카드가 화면에 없으면 아무것도 건드리지 않는다 —
+ * 엉뚱한 모델을 임의로 선택해 두면 사용자가 고른 적 없는 엔진으로 과금될 수 있다.
+ */
+export function restoreTextModelRadio(savedModel?: string): boolean {
+    const value = String(savedModel || "").trim();
+    if (!value) return false;
+    const radios = Array.from(
+        document.querySelectorAll('input[name="primaryGeminiTextModel"]'),
+    ) as HTMLInputElement[];
+    const match = radios.find((radio) => radio.value === value);
+    if (!match) return false;
+    match.checked = true;
+    // 카드 스타일·의존 UI 가 change 를 듣고 있다.
+    match.dispatchEvent(new Event("change", { bubbles: true }));
+    return true;
+}
+
 function setApiInputValue(input: HTMLInputElement | null, value: string | undefined): void {
     if (!input) return;
     const cleanValue = stripSecretSchemaArtifacts(value, shouldPreserveSecretSchemaTextForInput(input));
@@ -323,6 +343,13 @@ async function loadCurrentSettings(): Promise<void> {
         setApiInputValue(els.naverHubClientSecretInput, config.naverHubClientSecret);
         // ✅ [2026-01-26] DeepInfra API 키 로드
         setApiInputValue(els.deepinfraApiKeyInput, config.deepinfraApiKey);
+
+        // [2026-08-19] 저장된 텍스트 모델 선택을 라디오에 되살린다.
+        //   HTML 라디오에는 checked 가 하나도 없고 복원 코드도 없었다. 그래서 앱을 껐다 켜면
+        //   화면은 "선택 없음"이 되고, getGenerator() 가 드롭다운 기본값(gemini)으로 떨어졌다.
+        //   설정 파일에는 agent-claude 가 남아 있어 gemini 경로가 그 값을 읽고
+        //   TEXT_MODEL_PROVIDER_MISMATCH 로 생성이 통째로 실패했다(사용자 실측 2026-08-19).
+        restoreTextModelRadio(config.primaryGeminiTextModel);
 
         // AI 설정 로드
         if (els.defaultAiProviderSelect && config.defaultAiProvider) {
