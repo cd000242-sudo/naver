@@ -50,6 +50,10 @@ export interface AppConfig {
   naverHubClientId?: string;
   naverHubClientSecret?: string;
 
+  // ✅ [2026-08] 연속 발행 최소 간격(분). 미설정 시 실무 권장선 60분.
+  //    짧을수록 봇 판정·캡차 위험이 올라간다 (SPEC-NAVER-PROTECTION-2026).
+  minPublishIntervalMinutes?: number;
+
   // ✅ 네이버 광고 API (키워드 도구)
   naverAdApiKey?: string;
   naverAdSecretKey?: string;
@@ -433,6 +437,7 @@ export async function loadConfig(): Promise<AppConfig> {
           'naverDatalabClientId', 'naverDatalabClientSecret',
           'naverClientId', 'naverClientSecret',
           'naverHubClientId', 'naverHubClientSecret',
+          'minPublishIntervalMinutes',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'rememberCredentials', 'savedNaverId', 'savedNaverPassword',
           'rememberLicenseCredentials', 'savedLicenseUserId', 'savedLicensePassword',
@@ -530,6 +535,7 @@ export async function loadConfig(): Promise<AppConfig> {
       // ✅ [2026-08] NAVER API HUB 키 (네이버클라우드 콘솔 발급)
       naverHubClientId: parsed.naverHubClientId || parsed['naver-hub-client-id'] || undefined,
       naverHubClientSecret: parsed.naverHubClientSecret || parsed['naver-hub-client-secret'] || undefined,
+      minPublishIntervalMinutes: parsed.minPublishIntervalMinutes ?? parsed['min-publish-interval-minutes'] ?? undefined,
       // ✅ 네이버 광고 API (키워드 도구)
       naverAdApiKey: parsed.naverAdApiKey || undefined,
       naverAdSecretKey: parsed.naverAdSecretKey || undefined,
@@ -621,6 +627,7 @@ export async function loadConfig(): Promise<AppConfig> {
       // ✅ [2026-08] NAVER API HUB 키 호환성
       'naver-hub-client-id': normalizedConfig.naverHubClientId,
       'naver-hub-client-secret': normalizedConfig.naverHubClientSecret,
+      'min-publish-interval-minutes': normalizedConfig.minPublishIntervalMinutes,
       // ✅ [2026-01-25] Perplexity API 키 호환성
       'perplexity-api-key': normalizedConfig.perplexityApiKey,
       // ✅ [2026-01-25] 네이버 광고 API 키 호환성 (검색광고 키워드 도구)
@@ -861,6 +868,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
         'naverDatalabClientId', 'naverDatalabClientSecret',
         'naverClientId', 'naverClientSecret',
         'naverHubClientId', 'naverHubClientSecret',
+        'minPublishIntervalMinutes',
         'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
         'savedNaverId', 'savedNaverPassword', 'savedLicenseUserId', 'savedLicensePassword',
         // ✅ [v2.10.53] 사용자 환경설정 — 부분 saveConfig로 인해 silent 손실 회귀 차단
@@ -978,6 +986,7 @@ async function _saveConfigImpl(update: AppConfig): Promise<AppConfig> {
           'naverDatalabClientId', 'naverDatalabClientSecret',
           'naverClientId', 'naverClientSecret',
           'naverHubClientId', 'naverHubClientSecret',
+          'minPublishIntervalMinutes',
           'naverAdApiKey', 'naverAdSecretKey', 'naverAdCustomerId',
           'geminiModel', 'primaryGeminiTextModel', 'defaultAiProvider',
           'perplexityModel', 'geminiPlanType', 'geminiUseFreeQuotaBeforePaid',

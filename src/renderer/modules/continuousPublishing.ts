@@ -11,6 +11,7 @@ import {
   resolveShoppingRepresentativeReference,
   resolveUsableShoppingReferenceSource,
 } from '../../image/shoppingReferenceGeneration.js';
+import { resolvePublishFloorSec, DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES } from '../../automation/publishIntervalPolicy.js';
 // ✅ [v2.10.288] subImageMode import 제거 — line 10-12에 명시된 패턴 적용.
 //   렌더러 빌드 스크립트가 require()를 정규식 삭제 → subImageMode_1 is not defined 회귀 차단.
 type SubImageMode = 'ai' | 'collected';
@@ -287,15 +288,43 @@ function getCurrentContinuousImageSourceForSafety(): string {
   }
 }
 
+/**
+ * 사용자가 설정한 최소 발행 간격(분). 설정을 못 읽어도 권장값(60분)으로 동작한다 —
+ * 로드 실패가 곧 "빠른 발행 허용"이 되면 안 된다.
+ */
+let _configuredMinIntervalMinutes: number = DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES;
+
+/** 연속 발행 시작 시점에 호출한다. 실패해도 발행을 막지 않는다. */
+export async function refreshPublishIntervalSetting(): Promise<void> {
+  try {
+    const config: any = await window.api.getConfig();
+    const value = config?.minPublishIntervalMinutes ?? config?.['min-publish-interval-minutes'];
+    if (value !== undefined && value !== null && value !== '') {
+      _configuredMinIntervalMinutes = Number(value);
+    }
+  } catch {
+    // 설정을 못 읽으면 권장값을 그대로 쓴다.
+  }
+}
+
+/** 지금 큐가 어떤 모드로 나가는지 — 임시저장·예약은 1시간 간격 대상이 아니다. */
+function getCurrentPublishModeForInterval(): string {
+  try {
+    return (document.getElementById('unified-publish-mode') as HTMLInputElement)?.value || 'publish';
+  } catch {
+    return 'publish';
+  }
+}
+
 function getImageAwareSafePublishFloorSec(): number {
   const imageSource = getCurrentContinuousImageSourceForSafety();
   if (UI_AUTOMATION_IMAGE_SOURCES.has(imageSource)) {
-    return UI_AUTOMATION_SAFE_PUBLISH_MIN_INTERVAL_SEC;
+    return resolvePublishFloorSec(UI_AUTOMATION_SAFE_PUBLISH_MIN_INTERVAL_SEC, _configuredMinIntervalMinutes, getCurrentPublishModeForInterval());
   }
   if (SLOW_IMAGE_SOURCES.has(imageSource)) {
-    return IMAGE_HEAVY_SAFE_PUBLISH_MIN_INTERVAL_SEC;
+    return resolvePublishFloorSec(IMAGE_HEAVY_SAFE_PUBLISH_MIN_INTERVAL_SEC, _configuredMinIntervalMinutes, getCurrentPublishModeForInterval());
   }
-  return SAFE_PUBLISH_MIN_INTERVAL_SEC;
+  return resolvePublishFloorSec(SAFE_PUBLISH_MIN_INTERVAL_SEC, _configuredMinIntervalMinutes, getCurrentPublishModeForInterval());
 }
 
 function normalizeSafePublishInterval(userInterval: number): number {
@@ -425,6 +454,7 @@ export function switchExternalLinksTab(tabName: string) {
 
 // 연속 발행 기능 함수들
 export function startContinuousMode(urls: string[]): void {
+  void refreshPublishIntervalSetting();   // 최소 발행 간격 설정 반영 (실패해도 권장값 60분)
   console.log('[Continuous] startContinuousMode 호출됨');
   console.log('[Continuous] 입력받은 URL들:', urls);
 
@@ -753,7 +783,9 @@ export function scheduleNextPosting(): void {
   const userInterval = (parseInt(intervalValEl?.value || '7') || 7) * (parseInt(intervalUnitEl?.value || '60') || 60);
   _continuousPublishCount++;
   const result = getSafePublishInterval(userInterval, _continuousPublishCount);
-  continuousCountdown = Math.max(getImageAwareSafePublishFloorSec(), Math.min(3600, result.interval));
+  // 상한이 하한과 같으면 jitter 가 아래로만 잘린다 — 하한이 커지면 상한도 같이 올린다.
+  const floorSec = getImageAwareSafePublishFloorSec();
+  continuousCountdown = Math.max(floorSec, Math.min(Math.max(3600, floorSec * 2), result.interval));
 
   // 🛡️ 캡차 방지 레이어 상세 로그 출력 (사용자에게 보임)
   appendLog(``);
@@ -1176,6 +1208,7 @@ function getContinuousUrls(): string[] {
 
 // 연속 발행 시작
 export function startContinuousPublishing(): void {
+  void refreshPublishIntervalSetting();   // 최소 발행 간격 설정 반영 (실패해도 권장값 60분)
   console.log('[Continuous] startContinuousPublishing 시작');
   // [2026-08-05] 기능 잠금은 startContinuousPublishingV2 본문으로 옮겼다.
   //   이 래퍼에만 게이트가 있었는데 UI 버튼(index.html "연속 발행 시작")은
@@ -5333,6 +5366,7 @@ function skipNextFiveItemsV2(): void {
 (window as any).stopContinuousMode = stopContinuousMode;
 
 export function startContinuousModeEnhanced(queue: typeof continuousPublishQueue): void {
+  void refreshPublishIntervalSetting();   // 최소 발행 간격 설정 반영 (실패해도 권장값 60분)
   continuousPublishQueue = [...queue];
   setContinuousModeState(true);
   // ✅ [2026-03-11 FIX] 새 연속발행 시작 시 이전 중지 플래그 초기화

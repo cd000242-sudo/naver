@@ -91,6 +91,7 @@ export const CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SOURCE_PATHS: readonly string[
   'src/automation/publishCommitHook.ts',
   'src/automation/publishFailureClassifier.ts',
   'src/automation/publishHelpers.ts',
+  'src/automation/publishIntervalPolicy.ts',
   'src/automation/publishModalSelectorPolicy.ts',
   'src/automation/publishOutcomeResolver.ts',
   'src/automation/publishPipelineLogPolicy.ts',
