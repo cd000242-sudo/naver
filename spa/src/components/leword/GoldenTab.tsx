@@ -7,7 +7,8 @@ import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
 import TrendSparkline from './TrendSparkline';
 import DemandChartModal, { pickChartSeries, type DemandPoint } from './DemandChartModal';
-import { formatCount } from '../../lib/keywordApi';
+import { fetchMindmapAI, formatCount } from '../../lib/keywordApi';
+import { loadUserKeys } from '../../lib/userKeys';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
 import ExternalTrafficBoard, { type ReferenceRow } from './ExternalTrafficBoard';
@@ -202,7 +203,14 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         }
 
         try {
-            const result = await bridgeMindmap(keyword);
+            /*
+             * 토큰이 있으면 앱 없이 서버 추론(사장님 확정 2026-08-20 — 연동은
+             * 하나여야 한다). 없을 때만 LEWORD 앱 브리지를 찾는다.
+             */
+            const viaToken = loadUserKeys().claudeToken
+                ? await fetchMindmapAI(keyword).then((res) => (res.ok ? (res.data?.result as BridgeMindmap | undefined) || null : null)).catch(() => null)
+                : null;
+            const result = viaToken || await bridgeMindmap(keyword);
             if (!result) {
                 if (!baked) setMindmap((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
                 return;
