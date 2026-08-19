@@ -51,8 +51,8 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
          * 브라우저에만 저장되고 요청에서만 쓰인다(서버 저장 없음).
          */
         id: 'ai',
-        label: 'AI 답변 생성 (지식인 황금질문)',
-        desc: '클로드코드 구독이 있으면 터미널에 claude setup-token 한 줄로 토큰을 만들어 넣으세요 — 앱 없이, 추가 비용 없이 생성됩니다. 구독이 없으면 Gemini 무료 키로도 됩니다.',
+        label: 'AI 연동 (지식인 답변·마인드맵 추론·글 진단)',
+        desc: '위 "구독 연결" 버튼 한 번이면 여기 토큰이 자동으로 채워집니다 — 앱 없이, 추가 비용 없이 전부 돕니다. 클로드 구독이 없으면 Gemini 무료 키를 직접 넣으세요.',
         issueUrl: 'https://aistudio.google.com/apikey',
         fields: [
             { key: 'claudeToken', label: '클로드코드 토큰 (구독, 권장)', secret: true, placeholder: 'sk-ant-oat...' , minLength: 40 },

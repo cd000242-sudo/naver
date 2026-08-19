@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { exchangeClaudeOauth } from '../../lib/keywordApi';
-import { probeBridge, type BridgeStatus } from '../../lib/bridge';
 import {
     KEY_GROUPS,
     checkKeyShape,
@@ -31,8 +30,6 @@ function KeysTab() {
      * 이 페이지가 사용자 PC 의 LEWORD 앱 브리지에 접속해 그 사람의 클로드코드
      * 구독으로 돈다 — 키도, 추가 비용도 없다. null = 아직 확인 중.
      */
-    const [bridge, setBridge] = useState<BridgeStatus | null>(null);
-    const [connecting, setConnecting] = useState(false);
 
     /*
      * 구독 연결(버튼 한 번) — 클로드코드와 같은 공개 OAuth(PKCE). 승인 화면이
@@ -89,28 +86,8 @@ function KeysTab() {
         setOauth(null);
         setOauthNote('✅ 연결됐습니다 — 추론·답변이 전부 구독으로, 앱 없이 돕니다. 만료는 자동 갱신됩니다.');
     };
-    useEffect(() => { probeBridge().then(setBridge); }, []);
-    const claudeAgent = bridge?.agents?.find((agent) => agent.provider === 'claude');
-    const connected = Boolean(bridge?.connected && claudeAgent?.available);
-
-    /*
-     * [연동하기]는 단순 재조회가 아니다 — 크롬 신형은 https 페이지가 127.0.0.1
-     * (내 PC 의 LEWORD 앱)에 접속할 때 사용자 클릭에서 시작된 요청에만 권한
-     * 팝업을 띄운다. 그래서 버튼 한 번이 권한 허용 + 접속 확인을 겸한다.
-     * 앱이 브리지를 여는 데 시간이 걸릴 수 있어 몇 초에 걸쳐 재시도한다.
-     */
-    const connectBridge = async () => {
-        setConnecting(true);
-        setBridge(null);
-        let status: BridgeStatus | null = null;
-        for (let attempt = 0; attempt < 4; attempt += 1) {
-            status = await probeBridge();
-            if (status?.connected) break;
-            await new Promise((resolve) => { setTimeout(resolve, 2000); });
-        }
-        setBridge(status);
-        setConnecting(false);
-    };
+    // 앱 브리지 UI 는 뺐다(사장님 2026-08-20 "연동하기 버튼은 이제 필요 없지
+    // 않아?") — 구독 연결이 정문이고, 브리지는 작업대들이 뒤에서 폴백으로만 쓴다.
 
     const update = (field: string, value: string) => {
         setKeys((previous) => ({ ...previous, [field]: value }));
@@ -151,28 +128,22 @@ function KeysTab() {
             </div>
 
             {/*
-              * AI 추론 — 연동은 하나다(사장님 지적 2026-08-20 "추론은 따로
-              * 연동해야 되냐"): 위 '클로드코드 토큰'이 있으면 추론·답변 모두
-              * 앱 없이 그 토큰으로 돈다. 이 패널의 앱 브리지는 토큰이 없는
-              * 사용자용 대안일 뿐이다.
+              * AI 연동 — 하나다(사장님 확정 2026-08-20). 구독 연결 버튼이 전부고,
+              * 옛 '연동하기'(앱 브리지) 버튼은 뺐다("이제 필요 없지 않아?") —
+              * 앱 브리지는 화면 뒤 폴백으로만 남는다.
               */}
-            <section className="lw-panel" aria-label="AI 추론 (클로드코드)">
+            <section className="lw-panel" aria-label="AI 연동 (클로드 구독)">
                 <div className="lw-panel-head">
-                    <h2>AI 추론 (클로드코드)</h2>
-                    <span className={(Boolean(keys.claudeToken) || connected) ? 'lw-key-on' : ''}>
-                        {keys.claudeToken ? '✅ 토큰 연동됨 — 추론·답변 모두 앱 없이 (구독)'
-                            : connecting || bridge === null ? '연결 확인 중…'
-                                : connected ? '✅ 앱 연동됨 — 구독으로 무료 추론'
-                                    : !bridge.connected ? '아직 연동 전'
-                                        : claudeAgent?.installed ? '클로드코드 로그인 필요'
-                                            : '클로드코드 설치 필요'}
+                    <h2>AI 연동 (클로드 구독)</h2>
+                    <span className={keys.claudeToken ? 'lw-key-on' : ''}>
+                        {keys.claudeToken
+                            ? '✅ 연동됨 — 지식인 답변·마인드맵 추론·글 진단 전부 구독으로'
+                            : '미연동'}
                     </span>
-                    {!connected && !keys.claudeToken && <a className="lw-key-issue" href="/download">앱 받기 →</a>}
                 </div>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
                     <strong>버튼 한 번</strong>이면 됩니다: 클로드 로그인 확인 → 승인 → 화면에 뜨는 코드
-                    한 줄 붙여넣기. 그러면 마인드맵 추론·지식인 답변이 전부 <strong>내 구독</strong>(추가
-                    비용 0)으로, 앱 없이 돕니다. 만료는 자동 갱신됩니다.
+                    한 줄 붙여넣기. 이후 만료는 자동 갱신되어 다시 할 일이 없습니다. 추가 비용 0.
                 </p>
 
                 {!keys.claudeToken && (
@@ -196,22 +167,19 @@ function KeysTab() {
                         )}
                     </div>
                 )}
-                {oauthNote && <p className="lw-card-note" style={{ marginBottom: 10 }}>{oauthNote}</p>}
-                {connected ? (
-                    <button type="button" className="lw-mini lw-mini-ghost" onClick={connectBridge} disabled={connecting}>연동 상태 다시 확인</button>
-                ) : (
-                    <>
-                        <button type="button" className="lw-mini" onClick={connectBridge} disabled={connecting}>
-                            {connecting ? '연동 중…' : '🔗 연동하기'}
-                        </button>
-                        {bridge !== null && !bridge.connected && !connecting && (
-                            <p className="lw-card-note" style={{ marginTop: 10 }}>
-                                연결이 안 되면: LEWORD 앱이 이 PC 에서 실행 중인지 확인한 뒤 다시 [연동하기]를 누르세요.
-                                브라우저가 "기기 연결 허용" 팝업을 띄우면 <strong>허용</strong>을 눌러야 연결됩니다.
-                            </p>
-                        )}
-                    </>
+                {keys.claudeToken && (
+                    <button
+                        type="button"
+                        className="lw-mini lw-mini-ghost"
+                        onClick={() => {
+                            const next = { ...keys, claudeToken: '', claudeRefresh: '', claudeExpiresAt: '' };
+                            setKeys(next);
+                            saveUserKeys(next);
+                            setOauthNote('연동을 해제했습니다 — 다시 연결하려면 버튼 한 번이면 됩니다.');
+                        }}
+                    >연동 해제</button>
                 )}
+                {oauthNote && <p className="lw-card-note" style={{ marginTop: 10, marginBottom: 0 }}>{oauthNote}</p>}
             </section>
 
             {KEY_GROUPS.map((group) => {
@@ -220,7 +188,12 @@ function KeysTab() {
                     <section key={group.id} className="lw-panel" aria-label={group.label}>
                         <div className="lw-panel-head">
                             <h2>{group.label}</h2>
-                            <span className={ready ? 'lw-key-on' : ''}>{ready ? '● 사용 중' : '미입력 — 사장님 키로 조회'}</span>
+                            <span className={ready ? 'lw-key-on' : ''}>
+                                {/* AI 그룹은 사장님 키 폴백이 없다 — '사장님 키로 조회'라고 적으면 거짓말이 된다. */}
+                                {ready ? '● 사용 중'
+                                    : group.id === 'ai' ? '미연동 — 위 구독 연결 버튼 한 번'
+                                        : '미입력 — 사장님 키로 조회'}
+                            </span>
                             <a className="lw-key-issue" href={group.issueUrl} target="_blank" rel="noreferrer">발급받기 →</a>
                         </div>
                         <p className="lw-card-note" style={{ marginBottom: 12 }}>{group.desc}</p>
