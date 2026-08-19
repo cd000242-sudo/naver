@@ -241,10 +241,10 @@ async function collectNaverSports() {
   for (const entry of entries) {
     // 실존결재 — 후보 중 자동완성이 실제로 아는 검색어만 채택한다.
     // 후보[0] 무조건 승격이 "신경외과"·"충격파치료" 같은 기사 어휘를 띄운 원인.
-    const entity = await pickRealSearchTerm(entitySeedCandidates(entry.title), seen);
-    if (!entity) continue;
-    seen.add(entity);
-    rows.push({ rank: rows.length + 1, keyword: entity, context: entry.title });
+    const picked = await pickRealSearchTerm(entitySeedCandidates(entry.title), seen, entry.title);
+    if (!picked) continue;
+    seen.add(picked.base);
+    rows.push({ rank: rows.length + 1, keyword: picked.keyword, context: entry.title });
     if (rows.length >= 10) break;
   }
   return rows;
@@ -253,13 +253,33 @@ async function collectNaverSports() {
 /**
  * 후보들 중 네이버 자동완성이 결과를 돌려주는 첫 후보 = 사람들이 실제로 치는
  * 검색어. 아무 후보도 실존하지 않으면 null — 지어내지 않는다.
+ *
+ * 반환은 { keyword, base }:
+ *   base    — 실존이 확인된 개체명(중복 판정용)
+ *   keyword — 화면에 띄울 검색어. "심권호"만 있으면 "심권호 뭐?"가 되므로
+ *             (사장님 지적 2026-08-19) 자동완성 확장 중 **기사 내용과 겹치는
+ *             것**("심권호 간암")을 고른다. 확장은 네이버가 준 실제 검색어라
+ *             조립이 아니고, 선택 기준은 기사 토큰 일치라는 매칭 사실이다.
+ *             겹치는 확장이 없으면 개체명 그대로 — 문장을 만들지 않는다.
  */
-async function pickRealSearchTerm(candidates, seen) {
+async function pickRealSearchTerm(candidates, seen, contextTitle) {
   for (const candidate of candidates || []) {
     if (!candidate || seen.has(candidate)) continue;
     await new Promise((resolve) => setTimeout(resolve, 150));
     const expansions = await fetchNaverExpansions(candidate);
-    if (expansions.length > 0) return candidate;
+    if (expansions.length === 0) continue;
+    const contextTokens = String(contextTitle || '')
+      .split(/[^가-힣A-Za-z0-9]+/)
+      .filter((token) => token.length >= 2 && !token.includes(candidate) && !candidate.includes(token));
+    let best = null;
+    let bestScore = 0;
+    for (const expansion of expansions) {
+      if (!expansion.includes(candidate) || expansion.length > 20) continue;
+      const rest = expansion.replace(candidate, ' ');
+      const score = contextTokens.reduce((n, token) => n + (rest.includes(token) ? 1 : 0), 0);
+      if (score > bestScore) { best = expansion; bestScore = score; }
+    }
+    return { keyword: best || candidate, base: candidate };
   }
   return null;
 }
@@ -283,11 +303,11 @@ async function collectNateEntIssues() {
   const rows = [];
   const seen = new Set();
   for (const title of titles) {
-    // 스포츠 레인과 같은 실존결재 — 자동완성이 아는 검색어만 승격.
-    const entity = await pickRealSearchTerm(entitySeedCandidates(title), seen);
-    if (!entity) continue;
-    seen.add(entity);
-    rows.push({ rank: rows.length + 1, keyword: entity, context: title });
+    // 스포츠 레인과 같은 실존결재 + 맥락 확장 — "심권호"가 아니라 "심권호 간암".
+    const picked = await pickRealSearchTerm(entitySeedCandidates(title), seen, title);
+    if (!picked) continue;
+    seen.add(picked.base);
+    rows.push({ rank: rows.length + 1, keyword: picked.keyword, context: title });
     if (rows.length >= 10) break;
   }
   return rows;
