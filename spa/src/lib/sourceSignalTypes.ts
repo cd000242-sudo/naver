@@ -38,6 +38,8 @@ export type SourceSignal = {
     publishedLabel?: string;
     /** 목록에서 받아 온 기사 대표 사진. */
     image?: string;
+    /** 크롤링한 원본 기사 주소 — 있으면 '검색' 대신 기사로 바로 간다(2026-08-19). */
+    articleUrl?: string;
     /**
      * 이슈 브리프 — 배치가 뉴스 기사에서 뽑아 심는다(brightdata-issue-brief-batch).
      * facts 의 문장은 전부 기사 원문 그대로다. 여기서 새로 쓰거나 합치지 않는다.

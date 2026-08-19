@@ -1339,7 +1339,8 @@ function IndexPage() {
                                                         ? <small title={item.publishedLabel || ''}>{item.ago}</small>
                                                         : <small />}
                                                 </button>
-                                                <a className="hero-source-row-search" href={buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer">검색</a>
+                                                {/* 크롤링한 기사가 있으면 검색이 아니라 기사로 바로 간다(사장님 2026-08-19). */}
+                                                <a className="hero-source-row-search" href={item.articleUrl || buildSourceSearchUrl(activeSourceLane.id, keyword)} target="_blank" rel="noreferrer">{item.articleUrl ? '기사' : '검색'}</a>
                                             </article>
                                         );
                                     })}

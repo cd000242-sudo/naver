@@ -68,6 +68,8 @@ export type KeywordMeasured = {
     competition: string;
     adDepth: number | null;
     documentCount: number | null;
+    /** 지식인 질문 수 실측 — 질문이 많으면 사람들이 답을 못 찾고 있다는 신호. */
+    kinCount?: number | null;
     productCount: number | null;
     ratio: number | null;
 };

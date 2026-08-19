@@ -187,6 +187,9 @@ function LewordStyles() {
             .lw-spark-foot { display: flex; gap: 8px; align-items: center; font-size: 10.5px; color: rgba(235,242,250,.45); }
             .lw-spark-foot em { font-style: normal; color: rgba(235,242,250,.7); font-weight: 700; }
             .lw-spark-foot .lw-spark-hot { color: #2ecc71; font-weight: 800; }
+            .lw-why { margin: 8px 0 0; padding: 8px 10px; border-left: 2px solid rgba(255,165,0,.5); background: rgba(255,165,0,.05); border-radius: 0 8px 8px 0; font-size: 12px; line-height: 1.5; color: rgba(235,242,250,.85); }
+            .lw-why em { font-style: normal; color: #ffa500; font-weight: 800; margin-right: 4px; }
+            .lw-why small { display: block; margin-top: 3px; font-size: 10px; color: rgba(235,242,250,.4); }
             .lw-note-error { border-color: rgba(255,107,129,.32); background: rgba(255,107,129,.07); }
             .lw-note button {
                 margin-top: 10px; padding: 9px 16px;

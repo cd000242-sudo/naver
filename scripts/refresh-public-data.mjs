@@ -224,10 +224,13 @@ async function collectNaverSports() {
   if (!res.ok) return [];
   // 페이지에는 뉴스 랭킹과 숏폼/영상 랭킹이 섞여 있어 rank 가 중복된다(실측).
   // 언론사(officeName)가 붙은 것만 뉴스다 — 숏폼 제목은 검색어 재료가 못 된다.
-  const entries = [...res.text.matchAll(/\{"rank":(\d+),[^{}]*?"officeName":"[^"]+","newsDateTime":"[^"]+","title":"((?:[^"\\]|\\.){8,160})"/g)]
+  // oid/aid 로 기사 주소를 조립한다(실측 200) — "검색 버튼이 크롤링한 기사로
+  // 바로 가게"(사장님 2026-08-19). URL 필드는 응답에 없고 이 두 값이 기사 좌표다.
+  const entries = [...res.text.matchAll(/\{"rank":(\d+),"section":"([a-z]+)"[^{}]*?"oid":"(\d+)","aid":"(\d+)"[^{}]*?"officeName":"[^"]+","newsDateTime":"[^"]+","title":"((?:[^"\\]|\\.){8,160})"/g)]
     .map((m) => ({
       rank: Number(m[1]),
-      title: m[2]
+      articleUrl: `https://m.sports.naver.com/${m[2]}/article/${m[3]}/${m[4]}`,
+      title: m[5]
         .replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
         .replace(/\\"/g, '"')
         .replace(/\[[^\]]{1,14}\]/g, '')
@@ -244,7 +247,7 @@ async function collectNaverSports() {
     const picked = await pickRealSearchTerm(entitySeedCandidates(entry.title), seen, entry.title);
     if (!picked) continue;
     seen.add(picked.base);
-    rows.push({ rank: rows.length + 1, keyword: picked.keyword, context: entry.title });
+    rows.push({ rank: rows.length + 1, keyword: picked.keyword, context: entry.title, articleUrl: entry.articleUrl });
     if (rows.length >= 10) break;
   }
   return rows;
@@ -288,26 +291,30 @@ async function collectNateEntIssues() {
   // 네이트 연예 랭킹은 EUC-KR — 디코딩 지정 필수
   const res = await get('https://news.nate.com/rank/interest?sc=ent&p=day', { encoding: 'euc-kr' });
   if (!res.ok) return [];
-  // 실제 마크업은 <h2 class="tit">제목</h2> (strong 아님 — 초기 정규식이 틀려 0건이었다)
-  const titles = [...res.text.matchAll(/<h2 class="tit">([^<]{5,80})<\/h2>/g)]
-    .map((m) => m[1]
-      .replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")
-      .replace(/\[[^\]]{1,14}\]/g, '')
-      .replace(/…$/, '')
-      .replace(/\s+/g, ' ')
-      .trim())
-    .filter((title) => title.length >= 6);
+  // 실제 마크업은 <h2 class="tit">제목</h2> (strong 아님 — 초기 정규식이 틀려 0건이었다).
+  // 기사 링크(//news.nate.com/view/…)를 같이 캡처한다 — "검색 버튼이 기사로 바로"(2026-08-19).
+  const titles = [...res.text.matchAll(/<a href="(\/\/news\.nate\.com\/view\/[^"]+)"[^>]*>[\s\S]{0,400}?<h2 class="tit">([^<]{5,80})<\/h2>/g)]
+    .map((m) => ({
+      articleUrl: `https:${m[1]}`,
+      title: m[2]
+        .replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")
+        .replace(/\[[^\]]{1,14}\]/g, '')
+        .replace(/…$/, '')
+        .replace(/\s+/g, ' ')
+        .trim(),
+    }))
+    .filter((entry) => entry.title.length >= 6);
   // 기사 제목을 잘라 키워드로 쓰면 "비판에도", "20년팬 등판" 같은 조각이 나온다
   // (정책 레인에서 이미 겪은 실패). 제목은 맥락으로만 두고, 검색어는 제목에서 뽑은
   // 개체명(인물·작품·기관)으로 삼는다. 확장은 그 개체명 기준으로 붙는다.
   const rows = [];
   const seen = new Set();
-  for (const title of titles) {
+  for (const entry of titles) {
     // 스포츠 레인과 같은 실존결재 + 맥락 확장 — "심권호"가 아니라 "심권호 간암".
-    const picked = await pickRealSearchTerm(entitySeedCandidates(title), seen, title);
+    const picked = await pickRealSearchTerm(entitySeedCandidates(entry.title), seen, entry.title);
     if (!picked) continue;
     seen.add(picked.base);
-    rows.push({ rank: rows.length + 1, keyword: picked.keyword, context: title });
+    rows.push({ rank: rows.length + 1, keyword: picked.keyword, context: entry.title, articleUrl: entry.articleUrl });
     if (rows.length >= 10) break;
   }
   return rows;
@@ -664,6 +671,8 @@ function toSignalItems(laneId, rows) {
     source: laneId,
     officialUrl: row.officialUrl,
     sourceLabel: row.sourceLabel,
+    // 크롤링한 원본 기사 주소 — 화면의 '검색' 버튼이 기사로 바로 간다(2026-08-19).
+    ...(row.articleUrl ? { articleUrl: row.articleUrl } : {}),
     // 네이버 자동완성 실측 확장(사람들이 실제로 이어서 치는 검색어)
     expansions: row.expansions || [],
     // 확장을 뽑은 시드(헤드라인 전체가 아니라 개체명일 수 있음 — 표시 정직성용)

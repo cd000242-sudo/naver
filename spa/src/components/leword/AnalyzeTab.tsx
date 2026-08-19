@@ -147,6 +147,7 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                             <MetricCell label="PC" value={formatCount(measured.searchVolumePc)} />
                             <MetricCell label="모바일" value={formatCount(measured.searchVolumeMobile)} />
                             <MetricCell label="블로그 문서수" value={formatCount(measured.documentCount)} />
+                            <MetricCell label="지식인 질문" value={formatCount(measured.kinCount ?? null)} note="질문 많음 = 답 찾는 중" />
                             <MetricCell
                                 label="검색량 ÷ 문서수"
                                 value={measured.ratio === null ? '—' : String(measured.ratio)}

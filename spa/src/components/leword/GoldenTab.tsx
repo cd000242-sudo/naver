@@ -64,6 +64,10 @@ type PreemptionRow = {
     keywordPool?: Array<{ keyword: string; searchVolume: number | null; documentCount?: number | null; source?: string }> | null;
     /** 30일 트렌드(데이터랩 상대값 실측) — 회차가 구워 준다. 폰에서도 그려진다. */
     trend?: { series: number[]; label?: string; recommendation?: string } | null;
+    /** "지금 왜 검색되는가" — 에이전트 추론 한 문장. 라벨로 실측과 구분한다. */
+    whySearch?: { text: string; basis?: string } | null;
+    /** 지식인 질문 수 실측 — 질문 많음 = 답을 못 찾는 중. */
+    kinCount?: number | null;
     adsenseReason?: string;
     /** 회차 실측으로 만든 제목 2종(SEO/홈판). 옛 회차 데이터에는 없다. */
     titles?: {
@@ -246,45 +250,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
      * 그래프 — 앱의 30일 트렌드와 같은 실측을 웹에 그린다. 앱이 꺼져 있으면
      * 데이터랩 새 창으로 폴백한다 — 링크는 항상 살아 있는 최후의 수단이다.
      */
-    const [trend, setTrend] = useState<Record<string, {
-        status: 'loading' | 'done' | 'offline' | 'error';
-        data?: BridgeTrend;
-    }>>({});
-
-    const openTrend = async (row: PreemptionRow) => {
-        const keyword = row.keyword;
-        if (trend[keyword]?.status === 'done' || trend[keyword]?.status === 'error') {
-            setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
-            return;
-        }
-        /*
-         * 회차가 구워 준 실측이 1순위다 — 폰에서도 즉시 그려진다. 예전엔
-         * 브리지(사용자 PC 앱) 실패 시 데이터랩 새 창으로 튕겼는데, 폰에는
-         * 브리지가 없으니 버튼이 광고 낀 외부 페이지로 가는 꼴이 됐다(사장님
-         * 실측). 새 창 자동 열기는 하지 않는다.
-         */
-        if (row.trend && (row.trend.series || []).length > 0) {
-            setTrend((prev) => ({
-                ...prev,
-                [keyword]: {
-                    status: 'done',
-                    data: { success: true, series: row.trend!.series, analysis: { label: row.trend!.label, recommendation: row.trend!.recommendation } },
-                },
-            }));
-            return;
-        }
-        setTrend((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
-        try {
-            const result = await bridgeTrend(keyword);
-            if (!result || !result.success || !(result.series || []).length) {
-                setTrend((prev) => ({ ...prev, [keyword]: { status: 'error' } }));
-                return;
-            }
-            setTrend((prev) => ({ ...prev, [keyword]: { status: 'done', data: result } }));
-        } catch {
-            setTrend((prev) => ({ ...prev, [keyword]: { status: 'error' } }));
-        }
-    };
+    // '그래프보기' 버튼·상태는 제거(2026-08-19) — 30일 실측이 카드 상단에 자동으로 그려진다.
 
     useEffect(() => {
         let alive = true;
@@ -493,6 +459,12 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         {row.trend && (row.trend.series || []).length >= 2 ? (
                                             <TrendSparkline series={row.trend.series!} label={row.trend.label} />
                                         ) : null}
+                                        {row.whySearch?.text && (
+                                            <p className="lw-why" title={row.whySearch.basis || 'AI 추론'}>
+                                                <em>왜 지금?</em> {row.whySearch.text}
+                                                <small>{row.whySearch.basis || 'AI 추론'}</small>
+                                            </p>
+                                        )}
                                     </div>
 
                                     {/*
@@ -520,6 +492,10 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             <strong title={row.openSlot ? `상위 ${row.openSlot}번째 자리가 비어 있습니다` : '상위 10개는 모두 차 있습니다 — 그 아래는 재지 않았습니다'}>
                                                 {row.openSlot ? `${row.openSlot}위` : '10위 내 없음'}
                                             </strong>
+                                        </div>
+                                        <div title="지식인 질문 수 실측 — 질문이 많으면 사람들이 아직 답을 못 찾고 있다는 신호">
+                                            <span>지식인</span>
+                                            <strong>{typeof row.kinCount === 'number' ? formatCount(row.kinCount) : '—'}</strong>
                                         </div>
                                     </div>
 
@@ -620,15 +596,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             {mindmap[row.keyword]?.status === 'loading' ? '확장 중…' : '마인드맵 확장키워드'}
                                             <small>내 클로드코드 구독</small>
                                         </button>
-                                        {/* 앱과 같은 30일 실측 그래프. 앱이 꺼져 있으면 데이터랩 새 창 폴백. */}
-                                        <button
-                                            type="button"
-                                            onClick={() => openTrend(row)}
-                                            disabled={trend[row.keyword]?.status === 'loading'}
-                                        >
-                                            {trend[row.keyword]?.status === 'loading' ? '불러오는 중…' : '그래프보기'}
-                                            <small>30일 실측</small>
-                                        </button>
+                                        {/* '그래프보기' 버튼은 뺐다(사장님 지시 2026-08-19) — 30일 실측이
+                                            카드 상단 중앙에 자동으로 그려지므로 버튼이 할 일이 없다. */}
                                         {/*
                                           * 'AI 서브 보강' 버튼은 뺐다(사장님 지시 2026-08-18) —
                                           * 서브키워드가 회차 보강에서 이미 구워져 오므로 온디맨드
@@ -646,41 +615,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         >{copied === row.keyword ? '복사됨' : '복사'}</button>
                                     </div>
 
-                                    {trend[row.keyword]?.status === 'error' && (
-                                        <div className="lw-forge lw-forge-ai">
-                                            <div className="lw-forge-subs">
-                                                이 행은 트렌드 실측이 아직 없습니다 — 다음 회차부터 카드 안에 그려집니다.
-                                                지금 보려면 <a href={dataLabUrl(row.keyword)} target="_blank" rel="noreferrer">네이버 데이터랩</a>에서 확인하세요.
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {/* 30일 트렌드 — 데이터랩 상대값(최대일=100). 막대는 실측 그대로다. */}
-                                    {trend[row.keyword]?.status === 'done' && (() => {
-                                        const data = trend[row.keyword]!.data!;
-                                        const series = data.series || [];
-                                        const dates = data.dates || [];
-                                        return (
-                                            <div className="lw-trend">
-                                                <div className="lw-trend-head">
-                                                    📈 30일 트렌드 — 데이터랩 상대값(최대일 100)
-                                                    {data.analysis?.label && <strong>{data.analysis.label}</strong>}
-                                                </div>
-                                                <div className="lw-trend-bars" role="img" aria-label={`${row.keyword} 30일 검색 추이`}>
-                                                    {series.map((value, index) => (
-                                                        <span
-                                                            key={`${dates[index] || index}`}
-                                                            style={{ height: `${Math.max(3, value)}%` }}
-                                                            title={`${dates[index] || ''} · ${Math.round(value)}`}
-                                                        />
-                                                    ))}
-                                                </div>
-                                                {data.analysis?.recommendation && (
-                                                    <p className="lw-trend-note">{data.analysis.recommendation}</p>
-                                                )}
-                                            </div>
-                                        );
-                                    })()}
+                                    {/* 하단 트렌드 뷰는 그래프 자동화(카드 상단 스파크)로 대체 — 버튼과 함께 제거. */}
 
                                     {/* 마인드맵 결과 — 중심 키워드에서 실측 확장어가 갈라져 나온다. */}
                                     {mindmap[row.keyword]?.status === 'offline' && (
