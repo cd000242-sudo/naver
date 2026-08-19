@@ -236,12 +236,13 @@ function LewordStyles() {
 
             /* ── 지식인 황금질문 탭(좌측 메뉴 독립 탭) — 실시간·급상승·숨은 3레인 ── */
             .lw-kg-list { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
-            .lw-kg-list li { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(255,255,255,.025); }
+            .lw-kg-list li { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding: 12px 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(255,255,255,.025); }
             .lw-kg-rank { font-family: Consolas, monospace; font-size: 14px; font-weight: 700; color: #2ecc71; text-align: center; }
             .lw-kg-body { min-width: 0; }
-            .lw-kg-body a { display: block; font-size: 15px; font-weight: 700; color: #ebf2fa; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            /* 제목·요약은 잘라내지 않는다 — "안 짤리게 줄바꿈해서 다 보이게"(사장님 지시). */
+            .lw-kg-body a { display: block; font-size: 15px; font-weight: 700; color: #ebf2fa; text-decoration: none; word-break: keep-all; line-height: 1.5; }
             .lw-kg-body a:hover { color: #fff; text-decoration: underline; }
-            .lw-kg-body p { margin: 3px 0 0; font-size: 12.5px; color: rgba(235,242,250,.5); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .lw-kg-body p { margin: 4px 0 0; font-size: 12.5px; color: rgba(235,242,250,.55); word-break: keep-all; line-height: 1.6; }
             .lw-kg-body small { display: block; margin-top: 3px; font-size: 12px; color: rgba(235,242,250,.6); }
             .lw-kg-body small b { color: #69b7ff; font-weight: 700; }
             .lw-kg-up { font-style: normal; color: #2ecc71; font-weight: 700; }

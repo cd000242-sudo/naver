@@ -77,13 +77,13 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
     },
     {
         /*
-         * 지식인 답변 생성용(사장님 확정 2026-08-20 "내 API 키 연동으로") —
-         * 키가 있으면 앱 없이 서버(Worker)가 바로 생성한다. 둘 중 하나면 되고
-         * Gemini 가 무료 쿼터라 권장이다. 키는 이 브라우저에만 저장된다.
+         * 지식인 답변의 **보조** 경로(사장님 확정 2026-08-20). 1순위는 LEWORD 앱
+         * (클로드코드·코덱스 구독 = 추가 비용 0)이고, 이 키는 앱이 없는 기기에서만
+         * 쓴다. 키는 이 브라우저에만 저장되고 요청에서만 쓰인다.
          */
         id: 'ai',
-        label: 'AI 답변 생성 (지식인 황금질문)',
-        desc: '지식인 답변 초안을 만듭니다. Gemini 키는 무료 쿼터로 충분합니다 — 둘 중 하나만 넣으면 됩니다.',
+        label: 'AI 답변 생성 — 앱 없는 기기용 보조',
+        desc: 'LEWORD 앱이 켜져 있으면 클로드코드·코덱스 구독으로 무료 생성되어 이 키가 필요 없습니다. 앱이 없는 기기에서만 넣으세요(Gemini 는 무료 쿼터).',
         issueUrl: 'https://aistudio.google.com/apikey',
         fields: [
             { key: 'geminiKey', label: 'Gemini API 키 (무료, 권장)', secret: true, placeholder: 'AIzaSy...' , minLength: 30 },

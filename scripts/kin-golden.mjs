@@ -114,7 +114,8 @@ async function fetchRealtime() {
       rank: items.length + 1,
       title: title.trim(),
       link: `https://kin.naver.com${link.replace(/&amp;/g, '&')}`,
-      summary: summary.trim().slice(0, 120),
+      // 요약은 잘라 쓰지 않는다 — 화면이 줄바꿈으로 다 보여준다(사장님 지시).
+      summary: summary.trim().slice(0, 300),
       views: num(views),
       answers: answers === undefined ? null : num(answers),
     });
@@ -183,12 +184,15 @@ async function fetchStats(link) {
     const html = await fetchText(link);
     const views = (html.match(/조회수\s*([\d,]+)/) || [])[1];
     const answers = (html.match(/answerCount"\s*>\s*([\d,]+)\s*</) || [])[1];
+    // 작성일 — "질문에 날짜도 같이"(사장님 지시 2026-08-20). 패턴 실측 검증됨.
+    const asked = html.match(/작성일[\s\S]{0,40}?(\d{4})\.(\d{2})\.(\d{2})/);
     return {
       views: views === undefined ? null : num(views),
       answers: answers === undefined ? null : num(answers),
+      askedAt: asked ? `${asked[1]}.${asked[2]}.${asked[3]}` : null,
     };
   } catch {
-    return { views: null, answers: null };
+    return { views: null, answers: null, askedAt: null };
   }
 }
 
@@ -198,7 +202,14 @@ async function main() {
   try { prev = JSON.parse(fs.readFileSync(DEST, 'utf8')); } catch { /* 첫 회차 */ }
 
   const realtime = await fetchRealtime();
-  console.log(`많이 본 Q&A ${realtime.length}건`);
+  // 실시간에도 작성일을 붙인다 — 어제 질문이 순위권이면 그 자체가 신호다.
+  for (const item of realtime) {
+    const stats = await fetchStats(item.link);
+    if (stats.askedAt) item.askedAt = stats.askedAt;
+    if (typeof stats.answers === 'number') item.answers = stats.answers;
+    await sleep(100);
+  }
+  console.log(`많이 본 Q&A ${realtime.length}건 (작성일 ${realtime.filter((q) => q.askedAt).length}건 실측)`);
 
   const realtimeIds = new Set(realtime.map((q) => docIdOf(q.link)));
 
@@ -221,19 +232,39 @@ async function main() {
     .filter((q) => q.views >= HIDDEN_MIN_VIEWS && typeof q.answers === 'number' && q.answers <= HIDDEN_MAX_ANSWERS)
     .map(({ docId: _docId, ...rest }) => rest);
   /*
-   * 누적 병합 — 시드가 회차마다 회전하므로 교체식이면 직전 발견이 증발한다.
-   * 3일 창 안의 기존 항목은 남기고(그때의 실측값 그대로), 같은 질문은 이번
-   * 실측으로 갱신한다. 하루 96회차가 창 안에 쌓여야 "좀 많은" 목록이 된다.
+   * 누적 병합 + 생기 실측(사장님 지적 2026-08-20 "조회수가 4만이어도 지금 보는
+   * 사람이 없으면 뭔 의미냐"). 조회수 스냅샷을 회차마다 비교해:
+   *   viewsDelta = 직전 수집 대비 증가(두 실측의 차이 — 첫 관측은 null)
+   *   staleRuns  = 증가 0 이 이어진 회차 수 → 12회(약 3시간) 정체면 탈락
+   * "지금 상호작용이 있는" 질문이 앞에 서고, 죽은 질문은 창에서 빠진다.
    */
   const freshFloorMs = Date.now() - HIDDEN_FRESH_DAYS * 24 * 3_600_000;
+  const STALE_RUNS_DROP = 12;
+  const prevHiddenMap = new Map((prev && Array.isArray(prev.hidden) ? prev.hidden : [])
+    .map((q) => [docIdOf(q.link), q]));
   const currentIds = new Set(freshHidden.map((q) => docIdOf(q.link)));
+  const withLife = (q) => {
+    const before = prevHiddenMap.get(docIdOf(q.link));
+    if (!before || typeof before.views !== 'number' || typeof q.views !== 'number') {
+      return { ...q, viewsDelta: null, staleRuns: 0 };
+    }
+    const delta = q.views - before.views;
+    return { ...q, viewsDelta: delta, staleRuns: delta > 0 ? 0 : (before.staleRuns || 0) + 1 };
+  };
   const carried = (prev && Array.isArray(prev.hidden) ? prev.hidden : [])
     .filter((q) => q.askedAt && Date.parse(q.askedAt.replace(/\./g, '-')) >= freshFloorMs)
     .filter((q) => !currentIds.has(docIdOf(q.link)));
-  const hidden = [...freshHidden, ...carried]
-    .sort((a, b) => (b.views ?? 0) - (a.views ?? 0))
+  const hidden = [...freshHidden.map(withLife), ...carried]
+    .filter((q) => (q.staleRuns || 0) < STALE_RUNS_DROP)
+    .sort((a, b) => {
+      // 지금 조회가 붙는 질문 먼저, 그다음 새 관측(아직 못 잰 것), 정체는 뒤로.
+      const ga = typeof a.viewsDelta === 'number' && a.viewsDelta > 0 ? a.viewsDelta : -1;
+      const gb = typeof b.viewsDelta === 'number' && b.viewsDelta > 0 ? b.viewsDelta : -1;
+      if (ga !== gb) return gb - ga;
+      return (b.views ?? 0) - (a.views ?? 0);
+    })
     .slice(0, 60);
-  console.log(`숨은 후보 ${candidates.length}건 실측 → 신규 ${freshHidden.length} + 이월 ${carried.length} = ${hidden.length}건`);
+  console.log(`숨은 후보 ${candidates.length}건 실측 → 신규 ${freshHidden.length} + 이월 ${carried.length} → ${hidden.length}건 (증가 실측 ${hidden.filter((q) => typeof q.viewsDelta === 'number' && q.viewsDelta > 0).length}건)`);
 
   /*
    * 급상승 — 직전 스냅샷의 같은 질문과 조회수를 비교해 시간당 증가로 환산한다.
@@ -266,7 +297,7 @@ async function main() {
     fetchedAt: new Date().toISOString(),
     prevFetchedAt: (prev && prev.fetchedAt) || null,
     criteria: {
-      hidden: `${HIDDEN_FRESH_DAYS}일 안 최신 · 조회 ${HIDDEN_MIN_VIEWS}+ · 답변 ${HIDDEN_MAX_ANSWERS}개 이하 · 전문가답변 전용 제외 · 많이 본 목록 제외`,
+      hidden: `${HIDDEN_FRESH_DAYS}일 안 최신 · 조회 ${HIDDEN_MIN_VIEWS}+ · 답변 ${HIDDEN_MAX_ANSWERS}개 이하 · 전문가답변 제외 · 지금 조회가 붙는 순(15분 스냅샷 비교, 3시간 정체 시 탈락)`,
       rising: `직전 스냅샷 대비 조회 +${RISING_MIN_DELTA} 이상, 시간당 증가 순`,
     },
     realtime,

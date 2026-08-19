@@ -21,11 +21,12 @@ type KinQ = {
     views: number | null;
     answers: number | null;
     rank?: number;
-    /** 질문 작성일(숨은 레인) — "최신"이 조건이므로 화면에 그대로 적는다. */
+    /** 질문 작성일 — "최신"이 조건이므로 화면에 그대로 적는다. */
     askedAt?: string;
-    viewsDelta?: number;
+    /** 직전 수집(15분 전) 대비 조회 증가 — "지금 보는 사람이 있는가"의 실측. */
+    viewsDelta?: number | null;
     perHour?: number;
-    /** 보드에서 온 질문이면 근거 키워드가 붙는다 — 글감으로 바로 잇는다. */
+    /** 근거 키워드가 있으면 글감으로 바로 잇는다. */
     keyword?: string;
 };
 
@@ -67,7 +68,6 @@ function loadLedger(): LedgerEntry[] {
 
 function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) {
     const [data, setData] = useState<KinGoldenData | null>(null);
-    const [boardHidden, setBoardHidden] = useState<KinQ[]>([]);
     const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
     const [lane, setLane] = useState<LaneId>('realtime');
     const [copied, setCopied] = useState('');
@@ -110,32 +110,35 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
             blogUrl: blogUrl.trim(),
         };
         /*
-         * 1순위: '내 API 키' 연동(사장님 확정 2026-08-20) — 키가 있으면 앱 없이
-         * 서버가 바로 생성한다. 키가 없을 때만 LEWORD 앱(본인 구독)을 시도한다.
+         * 1순위는 LEWORD 앱(에이전트) — 클로드코드·코덱스 구독은 이미 내는
+         * 정액이라 추가 비용이 0 이다(사장님 확정 2026-08-20 "에이전트가 있는데
+         * 비용 들이면서 API 키를 왜 쓰냐"). API 키는 앱이 없는 기기용 보조다.
          */
-        const viaKeys = await fetchKinAnswer(input);
-        if (viaKeys.ok && viaKeys.data?.answer) {
+        const viaApp = await bridgeKinAnswer(input);
+        if (viaApp.status === 'ok') {
             setGenerating(false);
+            setDraft(viaApp.answer);
+            return;
+        }
+        if (viaApp.status === 'error') {
+            setGenerating(false);
+            setGenNote(`생성 실패: ${viaApp.message}`);
+            return;
+        }
+        const appProblem = viaApp.status === 'outdated'
+            ? 'LEWORD 앱 버전이 낮습니다 — 앱을 껐다 켜면 자동 업데이트됩니다.'
+            : 'LEWORD 앱이 꺼져 있습니다 — 앱을 켜면 클로드코드·코덱스 구독으로 추가 비용 없이 생성됩니다.';
+        const viaKeys = await fetchKinAnswer(input);
+        setGenerating(false);
+        if (viaKeys.ok && viaKeys.data?.answer) {
             setDraft(viaKeys.data.answer);
             return;
         }
         if (viaKeys.error && viaKeys.error !== 'needs-keys') {
-            setGenerating(false);
-            setGenNote(`생성 실패: ${viaKeys.message || viaKeys.error}`);
+            setGenNote(`${appProblem} (보조 경로도 실패: ${viaKeys.message || viaKeys.error})`);
             return;
         }
-        const result = await bridgeKinAnswer(input);
-        setGenerating(false);
-        if (result.status === 'ok') {
-            setDraft(result.answer);
-            return;
-        }
-        if (result.status === 'error') {
-            setGenNote(`생성 실패: ${result.message}`);
-            return;
-        }
-        // 키도 없고 앱도 없다 — 가장 쉬운 길(무료 키)을 먼저 안내한다.
-        setGenNote('내 API 키 탭에 Gemini 키(무료)를 넣으면 바로 생성됩니다. LEWORD 앱을 켜도 됩니다(내 구독 사용).');
+        setGenNote(`${appProblem} 앱 없는 기기라면 내 API 키 탭의 Gemini 무료 키로도 됩니다.`);
     };
 
     const copyDraft = () => {
@@ -156,27 +159,11 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
             .then((json) => { if (!cancelled) { setData(json); setStatus('ready'); } })
             .catch(() => { if (!cancelled) setStatus('error'); });
         /*
-         * 황금키워드 보드가 이미 실측해 둔 질문(키워드별 최신·조회순)도 숨은
-         * 레인의 재료다 — 근거 키워드가 붙어 있어 글감으로 바로 이어진다.
+         * 보드 출신 질문 합류는 뺐다(사장님 지적 2026-08-20): 작성일이 없어
+         * "최신 질문" 약속과 모순되는 묵은 질문(조회 4만짜리 옵트아웃 등)이
+         * 숨은 레인에 끼었다. 숨은 레인은 날짜·생기(조회 증가)가 실측된
+         * 크롤 수집분만 싣는다.
          */
-        fetch('/data/preemption-board.json')
-            .then((res) => (res.ok ? res.json() : null))
-            .then((board) => {
-                if (cancelled || !board || !Array.isArray(board.rows)) return;
-                const rows = board.rows as Array<{
-                    keyword: string;
-                    kinTop?: Array<{ title: string; link: string; views?: number | null; answers?: number | null }> | null;
-                }>;
-                setBoardHidden(rows
-                    .flatMap((row) => (row.kinTop || []).map((q) => ({
-                        title: q.title, link: q.link,
-                        views: typeof q.views === 'number' ? q.views : null,
-                        answers: typeof q.answers === 'number' ? q.answers : null,
-                        keyword: row.keyword,
-                    })))
-                    .filter((q) => typeof q.views === 'number' && q.views >= 300 && typeof q.answers === 'number' && q.answers <= 2));
-            })
-            .catch(() => { /* 보드 없음 = 크롤 실측만 */ });
         return () => { cancelled = true; };
     }, []);
 
@@ -186,16 +173,9 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
         if (!data) return [];
         if (lane === 'realtime') return data.realtime || [];
         if (lane === 'rising') return data.rising || [];
-        const seen = new Set<string>();
-        return [...(data.hidden || []), ...boardHidden]
-            .filter((q) => {
-                const id = docIdOf(q.link);
-                if (seen.has(id)) return false;
-                seen.add(id);
-                return true;
-            })
-            .sort((a, b) => (b.views ?? 0) - (a.views ?? 0));
-    }, [data, boardHidden, lane]);
+        // 정렬은 수집기가 한다 — 지금 조회가 붙는 순. 화면이 다시 섞지 않는다.
+        return data.hidden || [];
+    }, [data, lane]);
 
     const fetchedLabel = data?.fetchedAt
         ? new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(data.fetchedAt))
@@ -218,7 +198,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                         onClick={() => setLane(item.id)}
                     >{item.label} <em>{item.id === 'realtime' ? (data?.realtime || []).length
                         : item.id === 'rising' ? (data?.rising || []).length
-                            : laneItems.length && lane === 'hidden' ? laneItems.length : ((data?.hidden || []).length + boardHidden.length)}</em></button>
+                            : (data?.hidden || []).length}</em></button>
                 ))}
             </div>
             <p className="lw-write-hint">{LANES.find((item) => item.id === lane)?.hint}</p>
@@ -251,6 +231,9 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                                 {q.summary && <p>{q.summary}</p>}
                                 <small>
                                     {typeof q.views === 'number' && <b>조회 {formatCount(q.views)}</b>}
+                                    {typeof q.viewsDelta === 'number' && q.viewsDelta > 0 && (
+                                        <> · <em className="lw-kg-up">15분간 +{formatCount(q.viewsDelta)}</em></>
+                                    )}
                                     {typeof q.answers === 'number' && <> · 답변 {q.answers}</>}
                                     {q.askedAt && <> · {q.askedAt.slice(5)} 질문</>}
                                     {typeof q.perHour === 'number' && <> · <em className="lw-kg-up">시간당 +{formatCount(q.perHour)}</em></>}
