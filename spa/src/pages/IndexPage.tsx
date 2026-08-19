@@ -1934,7 +1934,18 @@ function IndexPage() {
                 .hero-source-list > ins.adsbygoogle,
                 .hero-source-list > .google-auto-placed,
                 .source-insight-panel > ins.adsbygoogle,
-                .source-insight-panel > .google-auto-placed {
+                .source-insight-panel > .google-auto-placed,
+                /*
+                 * 실시간 검색어판이 차단 목록에서 빠져 있었다 — 자동광고가 판의
+                 * 여백에 스카이스크래퍼를 세웠다(사장님 스크린샷 2026-08-19 23:03).
+                 * 이 판은 자식이 깊어서 직계(>)가 아니라 자손 전체를 막는다.
+                 */
+                .hero-realtime-board ins.adsbygoogle,
+                .hero-realtime-board .google-auto-placed,
+                /* 화면 가장자리에 떠 있는 '사이드 레일' 자동광고 — 앱형 어두운
+                   화면 위에 흰 기둥으로 떠서 고장처럼 보인다. 홈에서는 끈다. */
+                ins.adsbygoogle[data-side-rail-status],
+                .google-side-rail {
                     display: none !important;
                 }
 
