@@ -194,7 +194,7 @@ import { checkGoldenZone } from './publishingStrategy.js';
 import { filterDuplicateAndLowQualityImages } from './main/utils/imageFilters.js';
 // [SPEC-FREEZE-GUARD-001-P2 R5 / v2.10.264] Base64 디코딩 워커 분리 — 사용자 저장 다이얼로그 data URL
 import { decodeBase64Async } from './main/utils/base64Async.js';
-import { attachSelfTest } from './main/selfTest.js';
+import { attachSelfTest, getSelfTestExitCode } from './main/selfTest.js';
 import { ThumbnailGenerator } from './content/thumbnailGenerator.js';
 import { canConsume as canConsumeQuota, consume as consumeQuota, refund as refundQuota, getStatus as getQuotaStatus, resetAll as resetAllQuota, type QuotaLimits, type QuotaType } from './quotaManager.js';
 import { createFreeTrialQuotaLimits } from './freeTrialPolicy.js';
@@ -9601,8 +9601,12 @@ app.on('window-all-closed', async () => {
     app.quit();
     // cron job 등 백그라운드 작업이 있어도 완전 종료 보장
     setTimeout(() => {
-      console.log('[Main] Forcing process exit...');
-      process.exit(0);
+      // [2026-08-19] 셀프테스트 판정을 하드코딩 0 이 덮어쓰고 있었다 —
+      //   렌더러 에러가 있어도 릴리즈 게이트가 통과했다. 판정이 있으면 그것을 쓴다.
+      const selfTestCode = getSelfTestExitCode();
+      const exitCode = selfTestCode === null ? 0 : selfTestCode;
+      console.log(`[Main] Forcing process exit... (code ${exitCode})`);
+      process.exit(exitCode);
     }, 1000);
   }
 });

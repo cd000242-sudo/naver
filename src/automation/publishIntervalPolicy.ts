@@ -15,8 +15,14 @@ export const RECOMMENDED_MIN_PUBLISH_INTERVAL_MINUTES = 60;
 /** 사용자가 아무리 낮춰도 이 아래로는 안 내려간다 — 캡차 방지 하드 플로어. */
 export const ABSOLUTE_MIN_PUBLISH_INTERVAL_SEC = 300;
 
-/** 설정값이 없거나 망가졌을 때 쓰는 값. */
-export const DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES = RECOMMENDED_MIN_PUBLISH_INTERVAL_MINUTES;
+/**
+ * 설정값이 없거나 망가졌을 때 쓰는 값. RECOMMENDED 와 항상 같아야 한다(테스트가 잠근다).
+ *
+ * 왜 참조가 아니라 리터럴인가: 렌더러 번들러(copy-static)가 다른 export 를 그대로
+ * 재export 하는 형태를 버린다. 참조로 두면 번들에 선언이 사라져 런타임에
+ * ReferenceError 가 난다(2026-08-19 실측 — 연속발행이 깨졌다).
+ */
+export const DEFAULT_MIN_PUBLISH_INTERVAL_MINUTES = 60;
 
 /** 설정에서 읽은 분 단위 값을 초로 정규화한다. 0/음수/NaN 은 기본값으로 되돌린다. */
 export function normalizeConfiguredMinIntervalSec(minutes: unknown): number {

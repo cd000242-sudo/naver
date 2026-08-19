@@ -380,6 +380,12 @@ try {
       label: 'shared/categoryTaxonomy.js',
       filePath: path.join(projectRoot, 'dist', 'shared', 'categoryTaxonomy.js'),
     },
+    {
+      // [2026-08-19] continuousPublishing 이 최소 발행 간격 정책을 쓴다.
+      //   여기 등록하지 않으면 번들에서 import 가 걷히고 런타임에 ReferenceError 가 난다.
+      label: 'automation/publishIntervalPolicy.js',
+      filePath: path.join(projectRoot, 'dist', 'automation', 'publishIntervalPolicy.js'),
+    },
   ];
 
   let rendererRuntimeDependencySource = '';

@@ -23,6 +23,20 @@ const HANDSHAKES: ReadonlyArray<{ channel: string; script: string }> = [
 const RENDERER_SETTLE_MS = 4000;
 const CONSOLE_ERROR_LEVEL = 3;
 
+/**
+ * 셀프테스트 판정. FAIL 이면 1 이 남는다.
+ *
+ * 왜 밖에서 읽어야 하나: teardown 이 창을 닫으면 window-all-closed 핸들러가
+ * process.exit(0) 으로 프로세스를 강제 종료해 app.exit(1) 을 덮어썼다.
+ * 그래서 렌더러 에러가 있어도 릴리즈 게이트가 통과했다(2026-08-19 실측 —
+ * 연속발행을 깨뜨리는 ReferenceError 가 이 구멍으로 통과할 뻔했다).
+ */
+let selfTestExitCode: number | null = null;
+
+export function getSelfTestExitCode(): number | null {
+  return selfTestExitCode;
+}
+
 export function isSelfTestMode(): boolean {
   return process.env.SELF_TEST === '1';
 }
@@ -73,6 +87,7 @@ async function runHandshakes(mainWindow: BrowserWindow, rendererErrors: readonly
 }
 
 function teardownSelfTest(exitCode: number): void {
+  selfTestExitCode = exitCode;
   const childProcessIds = new Set(
     app.getAppMetrics()
       .map((metric) => metric.pid)
