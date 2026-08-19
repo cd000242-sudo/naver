@@ -586,14 +586,14 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                     {/* 실측 키워드 풀 — 연관 실측 + AI 검증분, 전부 검색량 확인된 실존 검색어. */}
                                     {(row.keywordPool?.length ?? 0) > 0 && (
                                         <div className="lw-mindmap-branches" style={{ marginTop: 10 }}>
+                                            {/* 클릭 = 키워드 분석기(사장님 지시 2026-08-20 "검색으로 가는 게 아니라 분석기로 가야지"). */}
                                             {(row.keywordPool || []).map((item) => (
-                                                <a
+                                                <button
+                                                    type="button"
                                                     key={item.keyword}
-                                                    href={naverSearchUrl(item.keyword)}
-                                                    target="_blank"
-                                                    rel="noreferrer"
+                                                    onClick={() => onAnalyze?.(item.keyword)}
                                                     className={item.source === 'ai-verified' ? 'lw-mindmap-ai' : ''}
-                                                    title={`월 검색량 ${item.searchVolume?.toLocaleString() ?? '실측'} · 문서수 ${typeof item.documentCount === 'number' ? item.documentCount.toLocaleString() : '미측정'}`}
+                                                    title={`월 검색량 ${item.searchVolume?.toLocaleString() ?? '실측'} · 문서수 ${typeof item.documentCount === 'number' ? item.documentCount.toLocaleString() : '미측정'} · 누르면 분석`}
                                                 >
                                                     {item.keyword}
                                                     {/* 검색량/문서수 — 사장님 지정 표기(177,500 / 2,345). 문서수가 곧 경쟁이다. */}
@@ -601,7 +601,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                         {item.searchVolume ? item.searchVolume.toLocaleString() : '실측'}
                                                         {typeof item.documentCount === 'number' ? ` / ${item.documentCount.toLocaleString()}` : ''}
                                                     </span>
-                                                </a>
+                                                </button>
                                             ))}
                                         </div>
                                     )}
@@ -691,16 +691,16 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             )}
                                             <div className="lw-mindmap-branches">
                                                 {(mindmap[row.keyword]?.data?.expansions || []).map((item) => (
-                                                    <a
+                                                    <button
+                                                        type="button"
                                                         key={item.keyword}
-                                                        href={naverSearchUrl(item.keyword)}
-                                                        target="_blank"
-                                                        rel="noreferrer"
+                                                        onClick={() => onAnalyze?.(item.keyword)}
                                                         className={item.source === 'ai-verified' ? 'lw-mindmap-ai' : ''}
+                                                        title="누르면 키워드 분석기로 갑니다"
                                                     >
                                                         {item.keyword}
                                                         <span>{item.searchVolume ? item.searchVolume.toLocaleString() : '자동완성'}</span>
-                                                    </a>
+                                                    </button>
                                                 ))}
                                             </div>
                                             {(mindmap[row.keyword]?.data?.expansions || []).length === 0 && (

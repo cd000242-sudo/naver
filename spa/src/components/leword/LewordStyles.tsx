@@ -819,7 +819,8 @@ function LewordStyles() {
                 font-weight: 700;
             }
             .lw-mindmap-branches { display: flex; flex-wrap: wrap; gap: 7px; }
-            .lw-mindmap-branches a {
+            /* 칩이 <a>(검색행)에서 <button>(분석기행)으로 바뀌었다 — 겉모습은 동일하게. */
+            .lw-mindmap-branches a, .lw-mindmap-branches button {
                 display: inline-flex;
                 align-items: baseline;
                 gap: 6px;
@@ -831,10 +832,12 @@ function LewordStyles() {
                 font-size: 12.5px;
                 font-weight: 700;
                 text-decoration: none;
+                font-family: inherit;
+                cursor: pointer;
             }
-            .lw-mindmap-branches a span { font-weight: 400; opacity: .62; font-size: 11px; }
-            .lw-mindmap-branches a:hover { background: rgba(255,255,255,.09); color: #fff; }
-            .lw-mindmap-branches a.lw-mindmap-ai {
+            .lw-mindmap-branches a span, .lw-mindmap-branches button span { font-weight: 400; opacity: .62; font-size: 11px; }
+            .lw-mindmap-branches a:hover, .lw-mindmap-branches button:hover { background: rgba(255,255,255,.09); color: #fff; }
+            .lw-mindmap-branches a.lw-mindmap-ai, .lw-mindmap-branches button.lw-mindmap-ai {
                 border-color: rgba(90,169,255,.42);
                 background: rgba(90,169,255,.10);
                 color: #bcdcff;
