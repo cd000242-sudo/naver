@@ -5,6 +5,7 @@ import {
     checkRank,
     fetchPostAnalysis,
     type BlogAuditPost,
+    type EngineExposure,
     type KeywordUsage,
     type PostAnalysis,
     type RankResult,
@@ -48,6 +49,8 @@ type AuditRow = BlogAuditPost & {
     kwRank?: number | null;
     extQuery?: string;
     extRank?: number | null;
+    /** 구글·다음·줌 제목검색 노출 실측(구글은 차단 시 '측정 불가'로 정직하게). */
+    engines?: EngineExposure | null;
 };
 
 function loadTracked(): TrackedRow[] {
@@ -77,6 +80,13 @@ function loadAudit(): AuditState | null {
         return null;
     }
 }
+
+/** 엔진별 수동 확인 링크 — 자동 판정이 애매하면 눈으로 검증하는 문이다. */
+const ENGINE_META: Array<{ id: keyof EngineExposure; label: string; search: (q: string) => string }> = [
+    { id: 'google', label: '구글', search: (q) => `https://www.google.com/search?q=${encodeURIComponent(q)}` },
+    { id: 'daum', label: '다음', search: (q) => `https://search.daum.net/search?w=web&q=${encodeURIComponent(q)}` },
+    { id: 'zum', label: '줌', search: (q) => `https://search.zum.com/search.zum?method=webpage&option=accu&query=${encodeURIComponent(q)}` },
+];
 
 const PLATFORM_LABEL: Record<string, string> = {
     naver: '네이버 블로그',
@@ -115,11 +125,13 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
         const result = await fetchPostAnalysis({
             title: row.title,
             link: row.link,
+            platform: audit?.platform,
             kwQuery: row.kwQuery,
             kwRank: row.kwRank ?? null,
             extQuery: row.extQuery,
             extRank: row.extRank ?? null,
             titleRank: row.rank,
+            engines: row.engines || null,
         });
         if (result.ok && result.data?.analysis) {
             setAnalyzeState({ status: 'done', data: result.data.analysis });
@@ -170,6 +182,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             const payload = checked.ok ? checked.data as (typeof checked.data & {
                 keyword?: { query: string; rank: number | null };
                 extended?: { query: string; rank: number | null };
+                engines?: EngineExposure;
             }) | null : null;
             const done: AuditRow = payload
                 ? {
@@ -177,6 +190,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                     rank: payload.rank, sampled: payload.sampled, sympathy: payload.sympathy,
                     kwQuery: payload.keyword?.query, kwRank: payload.keyword ? payload.keyword.rank : undefined,
                     extQuery: payload.extended?.query, extRank: payload.extended ? payload.extended.rank : undefined,
+                    engines: payload.engines || null,
                 }
                 : { ...post, status: 'error', rank: null, sampled: 0, sympathy: null };
             state = { ...state, rows: state.rows.map((row, i) => (i === index ? done : row)) };
@@ -251,6 +265,17 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                 <button type="submit" disabled={auditLoading || !auditUrl.trim()}>
                     {auditLoading ? `점검 중… ${doneCount}/${audit?.rows.length ?? 0}` : '전체 글 점검'}
                 </button>
+                {audit && !auditLoading && (
+                    <button
+                        type="button"
+                        className="lw-mini lw-mini-ghost"
+                        onClick={() => {
+                            auditRunId.current += 1;
+                            persistAudit(null);
+                            try { localStorage.removeItem(AUDIT_STORE_KEY); } catch { /* 계속 */ }
+                        }}
+                    >점검 초기화</button>
+                )}
             </form>
 
             {auditError && <div className="lw-note lw-note-error"><strong>{auditError}</strong></div>}
@@ -276,6 +301,7 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     <th scope="col">키워드 순위</th>
                                     <th scope="col">확장 순위</th>
                                     <th scope="col" title="그 글의 제목을 그대로 검색했을 때의 자리 — 생존 확인">제목검색</th>
+                                    <th scope="col" title="구글·다음·줌 제목검색에 이 글 주소가 보이는가 — 칩을 누르면 그 검색이 열립니다">다른 검색</th>
                                     <th scope="col" aria-label="분석" />
                                 </tr>
                             </thead>
@@ -317,6 +343,25 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                         </td>
                                         <td className={row.rank === null ? 'lw-rank-out' : 'lw-rank-in'}>
                                             {row.status !== 'done' ? '—' : row.rank !== null ? `${row.rank}위` : `${row.sampled}건 중 없음`}
+                                        </td>
+                                        <td>
+                                            {row.engines ? (
+                                                <span className="lw-engines">
+                                                    {ENGINE_META.map((engine) => {
+                                                        const state = row.engines![engine.id];
+                                                        return (
+                                                            <a
+                                                                key={engine.id}
+                                                                className={`lw-engine lw-engine-${state}`}
+                                                                href={engine.search(row.title)}
+                                                                target="_blank"
+                                                                rel="noreferrer"
+                                                                title={`${engine.label}: ${state === 'found' ? '노출됨' : state === 'blocked' ? '자동 측정 불가 — 눌러서 직접 확인' : '안 보임 — 눌러서 직접 확인'}`}
+                                                            >{engine.label}{state === 'found' ? ' ✓' : state === 'blocked' ? ' ?' : ' —'}</a>
+                                                        );
+                                                    })}
+                                                </span>
+                                            ) : '—'}
                                         </td>
                                         <td className="lw-row-actions">
                                             <button type="button" className="lw-mini" onClick={() => openAnalysis(row)} disabled={row.status !== 'done'}>
@@ -455,6 +500,35 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                             {!analyzeState.data.contentRead && <><br /><small>본문을 가져오지 못해 제목·실측만으로 진단했습니다.</small></>}
                                         </p>
                                     </section>
+
+                                    {(analyzeState.data.titleScore !== null || analyzeState.data.contentScore !== null) && (
+                                        <section>
+                                            <strong>점수 — AI 평가</strong>
+                                            <div className="lw-score-row">
+                                                {analyzeState.data.titleScore !== null && (
+                                                    <div className="lw-score">
+                                                        <em>{analyzeState.data.titleScore}점</em>
+                                                        <span>제목</span>
+                                                        {analyzeState.data.titleNote && <small>{analyzeState.data.titleNote}</small>}
+                                                    </div>
+                                                )}
+                                                {analyzeState.data.contentScore !== null && (
+                                                    <div className="lw-score">
+                                                        <em>{analyzeState.data.contentScore}점</em>
+                                                        <span>글</span>
+                                                        {analyzeState.data.contentNote && <small>{analyzeState.data.contentNote}</small>}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </section>
+                                    )}
+
+                                    {analyzeState.data.missReasons.length > 0 && (
+                                        <section className="lw-plan-caution">
+                                            <strong>누락 원인 심층분석 — 확인 방법 포함</strong>
+                                            <ul>{analyzeState.data.missReasons.map((line) => <li key={line}>{line}</li>)}</ul>
+                                        </section>
+                                    )}
                                     {analyzeState.data.diagnosis.length > 0 && (
                                         <section>
                                             <strong>왜 이런가 — 글에서 보이는 것</strong>

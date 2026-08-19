@@ -298,6 +298,18 @@ function LewordStyles() {
             .lw-audit-q { display: block; margin-top: 3px; font-size: 11px; font-weight: 400; color: rgba(235,242,250,.45); white-space: nowrap; }
             .lw-audit-q-btn { border: 0; background: none; padding: 0; cursor: pointer; text-align: left; text-decoration: underline dotted; }
             .lw-audit-q-btn:hover { color: #69b7ff; }
+            /* 다른 검색엔진 칩 — 누르면 그 엔진 검색이 열린다(자동 판정의 수동 검증문). */
+            .lw-engines { display: flex; gap: 5px; flex-wrap: wrap; }
+            .lw-engine { font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 7px; border: 1px solid rgba(255,255,255,.14); color: rgba(235,242,250,.55); text-decoration: none; white-space: nowrap; }
+            .lw-engine-found { border-color: rgba(46,204,113,.45); color: #2ecc71; }
+            .lw-engine-blocked { border-color: rgba(255,193,7,.4); color: #ffc107; }
+            .lw-engine:hover { color: #fff; }
+            /* AI 평가 점수 — 실측이 아님을 라벨이 말한다. */
+            .lw-score-row { display: flex; gap: 12px; flex-wrap: wrap; }
+            .lw-score { flex: 1; min-width: 200px; padding: 11px 13px; border: 1px solid rgba(255,255,255,.1); border-radius: 10px; background: rgba(255,255,255,.03); }
+            .lw-score em { font-style: normal; font-size: 22px; font-weight: 800; color: #ffa500; margin-right: 7px; }
+            .lw-score span { font-size: 12.5px; font-weight: 700; color: rgba(235,242,250,.7); }
+            .lw-score small { display: block; margin-top: 5px; font-size: 12px; color: rgba(235,242,250,.55); line-height: 1.5; }
             .lw-audit-table td { vertical-align: top; }
 
             /* 차트 호버 십자선 값 — 가리킨 점의 기간·상대값. */

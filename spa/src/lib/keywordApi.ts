@@ -263,26 +263,37 @@ export const fetchMindmapAI = (keyword: string) =>
  * 발행 글 진단(사장님 확정 2026-08-20 "글을 분석해야") — 실측 순위 3종 + 글
  * 전문을 구독 AI 가 읽고 원인·수정안을 사실 기반으로만 짚는다.
  */
+export type EngineExposure = Record<'google' | 'daum' | 'zum', 'found' | 'not-found' | 'blocked'>;
 export type PostAnalysis = {
     verdict: string;
+    /** AI 평가 점수(0~100) — 실측이 아니라 평가임을 화면이 라벨로 밝힌다. */
+    titleScore: number | null;
+    titleNote: string;
+    contentScore: number | null;
+    contentNote: string;
     targetKeyword: string;
+    /** 누락(제목검색 미노출)일 때만 — 원인 후보와 확인 방법. */
+    missReasons: string[];
     diagnosis: string[];
     fixes: string[];
     contentRead: boolean;
 };
 export const fetchPostAnalysis = (input: {
-    title: string; link: string;
+    title: string; link: string; platform?: string;
     kwQuery?: string; kwRank?: number | null;
     extQuery?: string; extRank?: number | null;
     titleRank?: number | null;
+    engines?: EngineExposure | null;
 }) => call<{ analysis: PostAnalysis }>('post-audit-analyze', {
     title: input.title,
     link: input.link,
+    platform: input.platform || '',
     kwQuery: input.kwQuery || '',
     kwRank: input.kwRank == null ? '' : String(input.kwRank),
     extQuery: input.extQuery || '',
     extRank: input.extRank == null ? '' : String(input.extRank),
     titleRank: input.titleRank == null ? '' : String(input.titleRank),
+    engines: input.engines ? JSON.stringify(input.engines) : '',
 }).then((res) => { persistRenewed(res.data); return res; });
 
 /** 승인 코드+검증값 → 구독 토큰 교환. 코드는 승인 화면의 "code#state" 그대로. */
