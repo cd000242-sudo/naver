@@ -21,12 +21,14 @@ export type UserKeyField =
     | 'coupangAccessKey'
     | 'coupangSecretKey'
     | 'coupangSubId'
-    | 'brandconnectSpaceId';
+    | 'brandconnectSpaceId'
+    | 'apihubKeyId'
+    | 'apihubKey';
 
 export type UserKeys = Partial<Record<UserKeyField, string>>;
 
 export type KeyGroup = {
-    id: 'searchad' | 'openapi' | 'youtube' | 'coupang' | 'brandconnect';
+    id: 'searchad' | 'openapi' | 'apihub' | 'youtube' | 'coupang' | 'brandconnect';
     label: string;
     desc: string;
     /** 어디서 발급받는지. 사용자가 바로 갈 수 있어야 한다. */
@@ -47,9 +49,24 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
         ],
     },
     {
+        /*
+         * 개발자센터 신규 발급이 막혀 새 사용자는 API HUB 키만 받을 수 있다(2026-07 개편).
+         * 그래서 이 그룹이 기본이고, 아래 '오픈 API(구키)'는 기존 발급자 전용이다.
+         * 둘 중 하나만 있으면 된다 — 서버가 HUB 키를 먼저 쓴다.
+         */
+        id: 'apihub',
+        label: '네이버 API HUB (신규 발급은 여기)',
+        desc: '블로그 문서수·노출 순위를 조회합니다. 네이버클라우드에서 API HUB 이용 신청 후 발급받은 키 2개를 넣으세요.',
+        issueUrl: 'https://console.ncloud.com/naver-api-hub/application/create',
+        fields: [
+            { key: 'apihubKeyId', label: 'API HUB Key ID', secret: true, placeholder: 'ijh6o1...' , minLength: 8 },
+            { key: 'apihubKey', label: 'API HUB Key', secret: true, placeholder: '••••••••' , minLength: 20 },
+        ],
+    },
+    {
         id: 'openapi',
-        label: '네이버 오픈 API',
-        desc: '블로그 문서수·쇼핑 상품수·노출 순위를 조회합니다.',
+        label: '네이버 오픈 API (기존 발급자용 구키)',
+        desc: '2026년 7월 이전에 개발자센터에서 발급받은 키가 있는 분만 쓰세요. 신규 발급은 위 API HUB 로만 됩니다.',
         issueUrl: 'https://developers.naver.com/apps/#/register',
         fields: [
             { key: 'openApiId', label: '클라이언트 ID', secret: true, placeholder: 'abcdEFGH...' , minLength: 12 },
