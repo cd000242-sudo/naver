@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -68,6 +68,8 @@ export type KeywordMeasured = {
     competition: string;
     adDepth: number | null;
     documentCount: number | null;
+    /** 지식인 질문 수 실측 — 질문이 많으면 사람들이 답을 못 찾고 있다는 신호. */
+    kinCount?: number | null;
     productCount: number | null;
     ratio: number | null;
 };
@@ -81,10 +83,16 @@ export type RelatedKeyword = {
     adDepth: number | null;
 };
 
+export type KeywordTrend = { series: number[]; dates: string[] };
+
 export type KeywordAnalysis = {
     keyword: string;
     measured: KeywordMeasured;
     related: RelatedKeyword[];
+    /** 데이터랩 최근 30일 상대 추이 실측. 못 재면 null — 선을 지어내지 않는다. */
+    trend?: KeywordTrend | null;
+    /** 지식인 상위 질문(추천·채택 순) — 제목·링크 실측. */
+    kinTop?: Array<{ title: string; link: string }>;
     sources: Record<string, string>;
 };
 
@@ -212,8 +220,41 @@ async function call<T>(action: string, params: Record<string, string>): Promise<
 export const analyzeKeyword = (keyword: string) =>
     call<KeywordAnalysis>('keyword-analyze', { keyword });
 
+/** 무료 황금보드 모달용 경량 조회 — 데이터랩 30일 추이 하나만 잰다. */
+export const fetchKeywordTrend = (keyword: string) =>
+    call<{ keyword: string; trend: KeywordTrend }>('keyword-trend', { keyword });
+
 export const checkRank = (keyword: string, target: string) =>
     call<RankResult>('keyword-rank', { keyword, target });
+
+/*
+ * 블로그 노출 감사(2026-08-20) — 주소 하나로 발행 글 전체의 노출·누락·순위.
+ * 글 목록은 플랫폼 피드(네이버·티스토리·워드프레스·블로그스팟 공개 RSS),
+ * 노출·순위는 네이버 블로그검색 상위 100 실측, 공감은 네이버 공개 리액션 API.
+ * 조회수는 어느 플랫폼도 공개 API 가 없어 싣지 않는다.
+ */
+export type BlogAuditPost = { title: string; link: string; publishedAt: string | null; comments: number | null };
+export const auditBlogPosts = (url: string) =>
+    call<{ platform: string; blogId: string | null; posts: BlogAuditPost[]; note?: string }>('blog-audit-posts', { url });
+
+export const auditBlogCheck = (title: string, link: string) =>
+    call<{ rank: number | null; sampled: number; sympathy: number | null }>('blog-audit-check', { title, link });
+
+/** 지식인 질문 전문 — 답변 작업대는 질문이 안 잘리고 끝까지 보여야 한다. */
+export const fetchKinQuestion = (link: string) =>
+    call<{ body: string }>('kin-question', { link });
+
+/**
+ * 지식인 답변 초안 — '내 API 키' 탭의 Gemini/OpenAI 키로 앱 없이 생성한다
+ * (키는 call() 이 자동으로 싣는다). 키가 없으면 needs-keys 가 온다.
+ */
+export const fetchKinAnswer = (input: { title: string; body: string; withLink: boolean; blogUrl: string }) =>
+    call<{ answer: string; provider: string }>('kin-answer', {
+        title: input.title,
+        body: input.body,
+        withLink: input.withLink ? '1' : '',
+        blogUrl: input.blogUrl,
+    });
 
 export const fetchShoppingSignal = (keyword: string) =>
     call<ShoppingSignal>('keyword-shopping', { keyword });
@@ -241,6 +282,9 @@ export async function fetchCoupangProducts(keyword: string) {
 export type AffiliateProduct = {
     name: string;
     keyword: string;
+    /** 니즈 검색어 — 사람들이 실제로 치는 검색어(검색광고 실측 최고 수요). */
+    needKeyword?: string | null;
+    needVolume?: number | null;
     price: number | null;
     wasPrice: number | null;
     discountPercent: number | null;

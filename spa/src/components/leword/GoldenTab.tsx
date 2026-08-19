@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import PreemptionPlan from './PreemptionPlan';
 import { naverSearchUrl, rowMatchesWriteLane } from './preemptionMeta';
-import { bridgeAiSubs, bridgeMindmap, bridgeTrend, type BridgeMindmap, type BridgeTrend } from '../../lib/bridge';
+import { bridgeMindmap, bridgeTrend, type BridgeMindmap, type BridgeTrend } from '../../lib/bridge';
 
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
+import TrendSparkline from './TrendSparkline';
+import DemandChartModal, { pickChartSeries, type DemandPoint } from './DemandChartModal';
 import { formatCount } from '../../lib/keywordApi';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
@@ -59,6 +61,19 @@ type PreemptionRow = {
     adsenseFit?: boolean | null;
     /** 보강이 붙인 수익 결론 — bad 는 애드센스 레인에서 빠진다(이유는 카드에 남는다). */
     monetize?: { verdict: 'good' | 'bad' | 'mixed'; points: Array<{ text: string }>; angle?: string } | null;
+    /** 실측 키워드 풀(연관 실측 + AI 검증분) — 검색량·문서수가 붙은 실존 검색어다. */
+    keywordPool?: Array<{ keyword: string; searchVolume: number | null; documentCount?: number | null; source?: string }> | null;
+    /** 30일 트렌드(데이터랩 상대값 실측) — 회차가 구워 준다. 폰에서도 그려진다. */
+    trend?: { series: number[]; label?: string; recommendation?: string } | null;
+    /** 24개월 실측 시계열(2026-08-19 배선) — 다음 회차부터 채워진다. 클릭 확대용. */
+    demandSeries?: DemandPoint[] | null;
+    demandAsOf?: string | null;
+    /** "지금 왜 검색되는가" — 에이전트 추론 한 문장. 라벨로 실측과 구분한다. */
+    whySearch?: { text: string; basis?: string } | null;
+    /** 지식인 질문 수 실측 — 질문 많음 = 답을 못 찾는 중. */
+    kinCount?: number | null;
+    /** 최신 질문 중 조회수 높은 순(제목·링크·조회수·답변수 실측) — 클릭하면 질문으로 바로 간다. */
+    kinTop?: Array<{ title: string; link: string; views?: number | null; answers?: number | null }> | null;
     adsenseReason?: string;
     /** 회차 실측으로 만든 제목 2종(SEO/홈판). 옛 회차 데이터에는 없다. */
     titles?: {
@@ -115,20 +130,32 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     /** 실행 계획을 펼친 카드. 한 번에 하나만 연다 — 다 펼치면 목록이 안 읽힌다. */
     const [openPlan, setOpenPlan] = useState('');
+    /*
+     * '전체' 탭 주제 로테이션 시드 — 방문마다 주제 순서가 바뀐다(사장님 지시
+     * 2026-08-19: "계속 마키나락스만 먼저 나오니 특별함이 없다. 섞어서, 계속
+     * 바뀌면서 '이런 키워드도 있었어?!' 느낌으로"). 난수는 **섞기에만** 쓴다 —
+     * 등급·점수 계산에 쓰는 것은 이 앱에서 금지다. 주제 안 순서는 등급순 유지.
+     */
+    const [shuffleSeed] = useState(() => Math.random());
+    /*
+     * 점진 렌더 — 보드가 누적형(목표 2,000행)이 되면서 전량 렌더는 폰에서 못 버틴다.
+     * 처음 60행만 그리고 "더 보기"로 늘린다. 필터가 바뀌면 처음으로 돌아간다.
+     */
+    const [visibleCount, setVisibleCount] = useState(60);
     /** 방금 복사한 키워드. 눌렀는지 안 눌렀는지 모르면 두 번 누르게 된다. */
     const [copied, setCopied] = useState('');
+    /** 크게 보는 수요 그래프의 대상 키워드. 한 번에 하나만 연다. */
+    const [chartKeyword, setChartKeyword] = useState('');
     /*
      * AI 서브 보강(2026-08-17 재설계) — API 키가 아니라 **클로드코드 연동**이다.
      * 같은 PC 의 LEWORD 앱 브리지가 사용자의 클로드코드 구독으로 추론 체인
      * (자동완성 실측→규칙 선별→AI 제안→실존 결재)을 통째로 돌려준다.
      * 그래서 결과는 전부 검증된 실존 검색어다. 앱이 꺼져 있으면 안내만 한다.
      */
-    const [aiSubs, setAiSubs] = useState<Record<string, {
-        status: 'loading' | 'done' | 'offline' | 'error';
-        items?: Array<{ keyword: string; searchVolume: number | null; source?: string }>;
-        ai?: { used: boolean; provider: string; proposed: number; verified: number };
-        error?: string;
-    }>>({});
+    /*
+     * [2026-08-18] 'AI 서브 보강' 온디맨드 기능 제거 — 서브키워드가 회차
+     * 보강에서 이미 구워져 오므로 같은 일을 두 번 시키는 군더더기였다.
+     */
     /*
      * 마인드맵 — 앱으로 보내는 링크였던 것을 실제 기능으로 바꾼다.
      * 브리지가 사용자 PC 의 앱을 통해 본인 구독으로 돌린다. 앱이 꺼져 있으면
@@ -138,24 +165,92 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         status: 'loading' | 'done' | 'offline' | 'error';
         data?: BridgeMindmap;
         error?: string;
+        /** 자동 연쇄 — 검색량 상위 연관을 경량 분석한 결과가 순서대로 쌓인다. */
+        related?: Array<{ keyword: string; status: 'loading' | 'done' | 'error'; data?: BridgeMindmap }>;
     }>>({});
 
-    const openMindmap = async (keyword: string) => {
+    const openMindmap = async (row: PreemptionRow) => {
+        const keyword = row.keyword;
         if (mindmap[keyword]?.status === 'done') {
             setMindmap((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
             return;
         }
-        setMindmap((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
+
+        /*
+         * 회차가 구워 준 실측(키워드 풀 + 수익 판정)이 1순위다 — 폰에서도
+         * 즉시 펼쳐진다. 예전엔 브리지(사용자 PC 앱)만 봤는데, 폰에는 브리지가
+         * 없으니 "앱이 꺼져 있다"는 안내가 떴다(사장님: "연동 안 돼 있다고
+         * 헛소리"). 브리지는 있으면 라이브 분석으로 **더** 얹는 보너스다.
+         */
+        const baked: BridgeMindmap | null = (row.keywordPool?.length ?? 0) > 0 ? {
+            keyword,
+            reasons: [],
+            expansions: (row.keywordPool || []).map((p) => ({
+                keyword: p.keyword,
+                searchVolume: p.searchVolume ?? null,
+                source: p.source || 'searchad-related',
+            })),
+            signals: ['검색량', '문서수'],
+            monetize: row.monetize || null,
+            agent: { available: false, provider: '회차 실측', proposed: 0, verified: 0 },
+        } : null;
+
+        if (baked) {
+            setMindmap((prev) => ({ ...prev, [keyword]: { status: 'done', data: baked } }));
+        } else {
+            setMindmap((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
+        }
+
         try {
             const result = await bridgeMindmap(keyword);
             if (!result) {
-                setMindmap((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
+                if (!baked) setMindmap((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
                 return;
             }
             setMindmap((prev) => ({ ...prev, [keyword]: { status: 'done', data: result } }));
+
+            /*
+             * 자동 연쇄(사장님 지시 2026-08-18): "비슷하게 많이 찾는 키워드를
+             * 자동으로 분석해줄 순 없을까". 확장어 중 검색량 상위 2개를 경량
+             * (AI 1콜)으로 이어서 분석한다 — 순차라 부담이 겹치지 않고,
+             * 도착하는 대로 아래에 쌓인다.
+             */
+            const relatedTargets = (result.expansions || [])
+                .filter((e) => typeof e.searchVolume === 'number' && e.searchVolume > 0)
+                .sort((a, b) => (b.searchVolume ?? 0) - (a.searchVolume ?? 0))
+                .slice(0, 2)
+                .map((e) => e.keyword);
+            for (const target of relatedTargets) {
+                setMindmap((prev) => {
+                    const entry = prev[keyword];
+                    if (!entry || entry.status !== 'done') return prev;
+                    return {
+                        ...prev,
+                        [keyword]: { ...entry, related: [...(entry.related || []), { keyword: target, status: 'loading' as const }] },
+                    };
+                });
+                // eslint-disable-next-line no-await-in-loop -- 순차 실행이 의도다(구독 부담 분산)
+                const sub = await bridgeMindmap(target, true).catch(() => null);
+                setMindmap((prev) => {
+                    const entry = prev[keyword];
+                    if (!entry || entry.status !== 'done') return prev;
+                    return {
+                        ...prev,
+                        [keyword]: {
+                            ...entry,
+                            related: (entry.related || []).map((r) => (r.keyword === target
+                                ? (sub ? { keyword: target, status: 'done' as const, data: sub } : { keyword: target, status: 'error' as const })
+                                : r)),
+                        },
+                    };
+                });
+            }
         } catch (error) {
-            const message = error instanceof Error ? error.message : String(error);
-            setMindmap((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
+            // 구운 데이터가 이미 떠 있으면 라이브 실패는 조용히 넘긴다.
+            if (!baked) {
+                const message = error instanceof Error ? error.message : String(error);
+                setMindmap((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
+            }
         }
     };
 
@@ -163,59 +258,41 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
      * 그래프 — 앱의 30일 트렌드와 같은 실측을 웹에 그린다. 앱이 꺼져 있으면
      * 데이터랩 새 창으로 폴백한다 — 링크는 항상 살아 있는 최후의 수단이다.
      */
-    const [trend, setTrend] = useState<Record<string, {
-        status: 'loading' | 'done' | 'offline' | 'error';
-        data?: BridgeTrend;
-    }>>({});
-
-    const openTrend = async (keyword: string) => {
-        if (trend[keyword]?.status === 'done') {
-            setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
-            return;
-        }
-        setTrend((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
-        try {
-            const result = await bridgeTrend(keyword);
-            if (!result || !result.success || !(result.series || []).length) {
-                // 앱이 꺼져 있거나 실측 실패 — 데이터랩으로 폴백(새 창).
-                setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
-                window.open(dataLabUrl(keyword), '_blank', 'noreferrer');
-                return;
-            }
-            setTrend((prev) => ({ ...prev, [keyword]: { status: 'done', data: result } }));
-        } catch {
-            setTrend((prev) => { const next = { ...prev }; delete next[keyword]; return next; });
-            window.open(dataLabUrl(keyword), '_blank', 'noreferrer');
-        }
-    };
-
-    const askAiSubs = async (keyword: string) => {
-        setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'loading' } }));
-        try {
-            const result = await bridgeAiSubs(keyword);
-            if (!result) {
-                setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'offline' } }));
-                return;
-            }
-            setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'done', items: result.subs || [], ai: result.ai } }));
-        } catch (error) {
-            const message = error instanceof Error ? error.message : String(error);
-            setAiSubs((prev) => ({ ...prev, [keyword]: { status: 'error', error: message } }));
-        }
-    };
+    // '그래프보기' 버튼·상태는 제거(2026-08-19) — 30일 실측이 카드 상단에 자동으로 그려진다.
 
     useEffect(() => {
         let alive = true;
-        fetch(BOARD_URL, { cache: 'no-store' })
-            .then((response) => (response.ok ? response.json() : Promise.reject(new Error('no board'))))
-            .then((data) => {
-                if (!alive) return;
-                const rows: PreemptionRow[] = Array.isArray(data?.rows) ? data.rows : [];
-                setBoard({ ...data, rows, reference: Array.isArray(data?.reference) ? data.reference : [] });
-                setStatus(rows.length > 0 ? 'ready' : 'empty');
-            })
-            .catch(() => { if (alive) setStatus('error'); });
-        return () => { alive = false; };
+        let lastEnrichedAt = '';
+        const load = () => {
+            fetch(BOARD_URL, { cache: 'no-store' })
+                .then((response) => (response.ok ? response.json() : Promise.reject(new Error('no board'))))
+                .then((data) => {
+                    if (!alive) return;
+                    // 같은 판이면 화면을 안 건드린다 — 스크롤·펼친 카드가 튀지 않게.
+                    const stamp = String(data?.enrichedAt || data?.publishedAt || '');
+                    if (stamp && stamp === lastEnrichedAt) return;
+                    lastEnrichedAt = stamp;
+                    const rows: PreemptionRow[] = Array.isArray(data?.rows) ? data.rows : [];
+                    setBoard({ ...data, rows, reference: Array.isArray(data?.reference) ? data.reference : [] });
+                    setStatus(rows.length > 0 ? 'ready' : 'empty');
+                })
+                .catch(() => { if (alive && !lastEnrichedAt) setStatus('error'); });
+        };
+        load();
+        /*
+         * 데이터 자동 갱신(2026-08-18). 번들 감시(versionWatch)는 코드 배포만
+         * 잡는다 — 회차·재보강은 데이터만 바뀌므로 열려 있던 탭이 옛 보드를
+         * 계속 보여줬다("사이트 그대론데?" — 사장님 실측). 탭에 돌아온 순간과
+         * 10분 주기로 다시 불러온다.
+         */
+        const interval = window.setInterval(load, 10 * 60_000);
+        const onVisible = () => { if (document.visibilityState === 'visible') load(); };
+        document.addEventListener('visibilitychange', onVisible);
+        return () => {
+            alive = false;
+            window.clearInterval(interval);
+            document.removeEventListener('visibilitychange', onVisible);
+        };
     }, []);
 
     /** 실제로 행이 있는 주제만 칩으로 낸다. 빈 칩을 누르게 하면 안 된다. */
@@ -249,7 +326,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
          * 등급 판정은 preemptionIndex 가 단일 출처다 — 화면이 따로 계산하면
          * 배지와 순서가 어긋난다.
          */
-        return [...filtered].sort((a, b) => {
+        const sorted = [...filtered].sort((a, b) => {
             const rank = (row: PreemptionRow) => TIER_ORDER[preemptionIndex({
                 searchVolume: row.searchVolume, documentCount: row.documentCount,
             }).tier];
@@ -263,11 +340,56 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             if (worth(a) !== worth(b)) return worth(b) - worth(a);
             return (b.searchVolume ?? 0) - (a.searchVolume ?? 0);
         });
-    }, [board, topic, query, writeLane]);
+
+        /*
+         * '전체' 탭(검색 없음)은 주제 로테이션 인터리브 — 결정론 정렬이라 매번
+         * 같은 키워드가 1등이면 "특별함이 없다"(사장님). 각 주제의 1등들이 먼저
+         * 섞여 나오고, 주제 순서는 방문마다 바뀐다. 주제 안은 위의 등급순 그대로라
+         * 품질 순서는 안 무너진다. 주제·검색 필터를 걸면 원래 정렬로 돌아간다.
+         */
+        if (topic !== '전체' || needle) return sorted;
+        const byTopicOrder = new Map<string, PreemptionRow[]>();
+        for (const row of sorted) {
+            const key = row.topic || '?';
+            if (!byTopicOrder.has(key)) byTopicOrder.set(key, []);
+            byTopicOrder.get(key)!.push(row);
+        }
+        const topicKeys = [...byTopicOrder.keys()];
+        // 시드 기반 셔플(Fisher–Yates) — 렌더 안에서는 안정, 방문마다 달라진다.
+        let seedState = Math.floor(shuffleSeed * 2 ** 31);
+        const nextRandom = () => {
+            seedState = (seedState * 1103515245 + 12345) % 2 ** 31;
+            return seedState / 2 ** 31;
+        };
+        for (let i = topicKeys.length - 1; i > 0; i--) {
+            const j = Math.floor(nextRandom() * (i + 1));
+            [topicKeys[i], topicKeys[j]] = [topicKeys[j], topicKeys[i]];
+        }
+        const interleaved: PreemptionRow[] = [];
+        let depth = 0;
+        let added = true;
+        while (added) {
+            added = false;
+            for (const key of topicKeys) {
+                const bucket = byTopicOrder.get(key)!;
+                if (depth < bucket.length) {
+                    interleaved.push(bucket[depth]);
+                    added = true;
+                }
+            }
+            depth += 1;
+        }
+        return interleaved;
+    }, [board, topic, query, writeLane, shuffleSeed]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
 
+    useEffect(() => {
+        setVisibleCount(60);
+    }, [topic, query, writeLane]);
+
+    // '지식인 황금질문'은 좌측 메뉴 독립 탭(KinGoldenTab)으로 옮겨졌다(2026-08-20 정정).
     const publishedLabel = board?.publishedAt
         ? new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
             .format(new Date(board.publishedAt))
@@ -331,11 +453,49 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     )}
 
                     <div className="lw-board-list">
-                        {rows.map((row, index) => {
+                        {rows.slice(0, visibleCount).map((row, index) => {
                             const locked = !unlocked && index >= FREE_BOARD_ROWS;
                             return (
                                 <article key={`${row.topic}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
-                                    <BoardCardHead row={row} rank={index + 1} />
+                                    <BoardCardHead
+                                        row={row}
+                                        rank={index + 1}
+                                        copied={copied === row.keyword}
+                                        onCopy={() => {
+                                            navigator.clipboard?.writeText(row.keyword);
+                                            setCopied(row.keyword);
+                                            window.setTimeout(() => setCopied(''), 1400);
+                                        }}
+                                    />
+
+                                    {/*
+                                      * 30일 추이 자동 표시(사장님 2026-08-19: "그래프가 보여야 이 키워드로
+                                      * 글을 써도 될지 알 수 있다"). 헤드와 지표 사이 빈 공간(스크린샷의
+                                      * 빨간 네모 자리)에 구워진 실측(row.trend)을 그린다 — 클릭 불필요.
+                                      */}
+                                    <div className="lw-card-spark">
+                                        {row.trend && (row.trend.series || []).length >= 2 ? (
+                                            /*
+                                             * 스파크라인 클릭 = 크게 보기(24개월 실측이 있으면 그것,
+                                             * 없으면 이 30일 실측 그대로). 축·정점·기간이 붙은 큰
+                                             * 그래프는 모달이 그린다 — 카드 안에서는 흐름만 본다.
+                                             */
+                                            <button
+                                                type="button"
+                                                className="lw-spark-open"
+                                                onClick={() => setChartKeyword(row.keyword)}
+                                                aria-label={`${row.keyword} 수요 그래프 크게 보기`}
+                                            >
+                                                <TrendSparkline series={row.trend.series!} label={row.trend.label} />
+                                            </button>
+                                        ) : null}
+                                        {row.whySearch?.text && (
+                                            <p className="lw-why" title={row.whySearch.basis || 'AI 추론'}>
+                                                <em>왜 지금?</em> {row.whySearch.text}
+                                                <small>{row.whySearch.basis || 'AI 추론'}</small>
+                                            </p>
+                                        )}
+                                    </div>
 
                                     {/*
                                       * 지표 열. 사장님 지정 4개 — 검색량 · 문서수 · 광고수 · 빈자리.
@@ -363,7 +523,34 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 {row.openSlot ? `${row.openSlot}위` : '10위 내 없음'}
                                             </strong>
                                         </div>
+                                        <div title="지식인 질문 수 실측 — 질문이 많으면 사람들이 아직 답을 못 찾고 있다는 신호">
+                                            <span>지식인</span>
+                                            <strong>{typeof row.kinCount === 'number' ? formatCount(row.kinCount) : '—'}</strong>
+                                        </div>
                                     </div>
+
+                                    {/* 지식인 최신 질문을 조회수 높은 순으로(사장님 지시 2026-08-19).
+                                        조회수는 질문 페이지 실측 — 글감의 원료다: 사람들이 정확히 뭘 묻는지가 여기 있다. */}
+                                    {(row.kinTop || []).length > 0 && (
+                                        <div className="lw-kin">
+                                            <em>지식인 최신 질문 · 조회순</em>
+                                            {/* 번호 목록(사장님 지시 2026-08-19 "최대 5개까지 1. 2. 3. 이런식으로"). */}
+                                            <ol className="lw-kin-list">
+                                                {row.kinTop!.slice(0, 5).map((q) => (
+                                                    <li key={q.link}>
+                                                        <a href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
+                                                        {(typeof q.views === 'number' || typeof q.answers === 'number') && (
+                                                            <span className="lw-kin-views">
+                                                                {typeof q.views === 'number' ? `조회 ${formatCount(q.views)}` : ''}
+                                                                {typeof q.views === 'number' && typeof q.answers === 'number' ? ' · ' : ''}
+                                                                {typeof q.answers === 'number' ? `답변 ${q.answers}` : ''}
+                                                            </span>
+                                                        )}
+                                                    </li>
+                                                ))}
+                                            </ol>
+                                        </div>
+                                    )}
 
                                     {/*
                                       * 대장간 산출물 — 제목 2종 + 문제해결 서브(2026-08-17 재편).
@@ -393,6 +580,29 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                     ))}
                                                 </div>
                                             )}
+                                        </div>
+                                    )}
+
+                                    {/* 실측 키워드 풀 — 연관 실측 + AI 검증분, 전부 검색량 확인된 실존 검색어. */}
+                                    {(row.keywordPool?.length ?? 0) > 0 && (
+                                        <div className="lw-mindmap-branches" style={{ marginTop: 10 }}>
+                                            {/* 클릭 = 키워드 분석기(사장님 지시 2026-08-20 "검색으로 가는 게 아니라 분석기로 가야지"). */}
+                                            {(row.keywordPool || []).map((item) => (
+                                                <button
+                                                    type="button"
+                                                    key={item.keyword}
+                                                    onClick={() => onAnalyze?.(item.keyword)}
+                                                    className={item.source === 'ai-verified' ? 'lw-mindmap-ai' : ''}
+                                                    title={`월 검색량 ${item.searchVolume?.toLocaleString() ?? '실측'} · 문서수 ${typeof item.documentCount === 'number' ? item.documentCount.toLocaleString() : '미측정'} · 누르면 분석`}
+                                                >
+                                                    {item.keyword}
+                                                    {/* 검색량/문서수 — 사장님 지정 표기(177,500 / 2,345). 문서수가 곧 경쟁이다. */}
+                                                    <span>
+                                                        {item.searchVolume ? item.searchVolume.toLocaleString() : '실측'}
+                                                        {typeof item.documentCount === 'number' ? ` / ${item.documentCount.toLocaleString()}` : ''}
+                                                    </span>
+                                                </button>
+                                            ))}
                                         </div>
                                     )}
 
@@ -433,67 +643,24 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                           */}
                                         <button
                                             type="button"
-                                            onClick={() => openMindmap(row.keyword)}
+                                            onClick={() => openMindmap(row)}
                                             disabled={mindmap[row.keyword]?.status === 'loading'}
                                         >
                                             {mindmap[row.keyword]?.status === 'loading' ? '확장 중…' : '마인드맵 확장키워드'}
                                             <small>내 클로드코드 구독</small>
                                         </button>
-                                        {/* 앱과 같은 30일 실측 그래프. 앱이 꺼져 있으면 데이터랩 새 창 폴백. */}
-                                        <button
-                                            type="button"
-                                            onClick={() => openTrend(row.keyword)}
-                                            disabled={trend[row.keyword]?.status === 'loading'}
-                                        >
-                                            {trend[row.keyword]?.status === 'loading' ? '불러오는 중…' : '그래프보기'}
-                                            <small>30일 실측</small>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={() => askAiSubs(row.keyword)}
-                                            disabled={aiSubs[row.keyword]?.status === 'loading'}
-                                        >
-                                            {aiSubs[row.keyword]?.status === 'loading' ? '클로드코드 추론 중…' : '🤖 AI 서브 보강'}
-                                            <small>내 클로드코드 구독</small>
-                                        </button>
-                                        <button
-                                            type="button"
-                                            className="lw-copy"
-                                            title="키워드 복사"
-                                            onClick={() => {
-                                                navigator.clipboard?.writeText(row.keyword);
-                                                setCopied(row.keyword);
-                                                window.setTimeout(() => setCopied(''), 1400);
-                                            }}
-                                        >{copied === row.keyword ? '복사됨' : '복사'}</button>
+                                        {/* '그래프보기' 버튼은 뺐다(사장님 지시 2026-08-19) — 30일 실측이
+                                            카드 상단 중앙에 자동으로 그려지므로 버튼이 할 일이 없다. */}
+                                        {/*
+                                          * 'AI 서브 보강' 버튼은 뺐다(사장님 지시 2026-08-18) —
+                                          * 서브키워드가 회차 보강에서 이미 구워져 오므로 온디맨드
+                                          * 버튼은 같은 일을 두 번 시키는 군더더기였다.
+                                          */}
+                                        {/* '복사'는 키워드 옆 아이콘으로 옮겼다(사장님 지시 2026-08-19
+                                            "복사만 아래에 빠져있으니까 보기싫은데") — 4버튼 한 줄. */}
                                     </div>
 
-                                    {/* 30일 트렌드 — 데이터랩 상대값(최대일=100). 막대는 실측 그대로다. */}
-                                    {trend[row.keyword]?.status === 'done' && (() => {
-                                        const data = trend[row.keyword]!.data!;
-                                        const series = data.series || [];
-                                        const dates = data.dates || [];
-                                        return (
-                                            <div className="lw-trend">
-                                                <div className="lw-trend-head">
-                                                    📈 30일 트렌드 — 데이터랩 상대값(최대일 100)
-                                                    {data.analysis?.label && <strong>{data.analysis.label}</strong>}
-                                                </div>
-                                                <div className="lw-trend-bars" role="img" aria-label={`${row.keyword} 30일 검색 추이`}>
-                                                    {series.map((value, index) => (
-                                                        <span
-                                                            key={`${dates[index] || index}`}
-                                                            style={{ height: `${Math.max(3, value)}%` }}
-                                                            title={`${dates[index] || ''} · ${Math.round(value)}`}
-                                                        />
-                                                    ))}
-                                                </div>
-                                                {data.analysis?.recommendation && (
-                                                    <p className="lw-trend-note">{data.analysis.recommendation}</p>
-                                                )}
-                                            </div>
-                                        );
-                                    })()}
+                                    {/* 하단 트렌드 뷰는 그래프 자동화(카드 상단 스파크)로 대체 — 버튼과 함께 제거. */}
 
                                     {/* 마인드맵 결과 — 중심 키워드에서 실측 확장어가 갈라져 나온다. */}
                                     {mindmap[row.keyword]?.status === 'offline' && (
@@ -524,74 +691,53 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             )}
                                             <div className="lw-mindmap-branches">
                                                 {(mindmap[row.keyword]?.data?.expansions || []).map((item) => (
-                                                    <a
+                                                    <button
+                                                        type="button"
                                                         key={item.keyword}
-                                                        href={naverSearchUrl(item.keyword)}
-                                                        target="_blank"
-                                                        rel="noreferrer"
+                                                        onClick={() => onAnalyze?.(item.keyword)}
                                                         className={item.source === 'ai-verified' ? 'lw-mindmap-ai' : ''}
+                                                        title="누르면 키워드 분석기로 갑니다"
                                                     >
                                                         {item.keyword}
                                                         <span>{item.searchVolume ? item.searchVolume.toLocaleString() : '자동완성'}</span>
-                                                    </a>
+                                                    </button>
                                                 ))}
                                             </div>
                                             {(mindmap[row.keyword]?.data?.expansions || []).length === 0 && (
                                                 <div className="lw-forge-subs">실존이 확인된 확장 검색어가 없습니다.</div>
                                             )}
-                                            {mindmap[row.keyword]?.data?.monetize && (() => {
-                                                const verdict = mindmap[row.keyword]!.data!.monetize!;
-                                                const label = verdict.verdict === 'good' ? '✅ 쓸 만하다'
-                                                    : verdict.verdict === 'bad' ? '⛔ 광고 수익 안 나온다' : '⚖ 각도에 달렸다';
-                                                return (
-                                                    <div className={`lw-mindmap-money lw-mindmap-money-${verdict.verdict}`}>
-                                                        <div className="lw-mindmap-money-head">
-                                                            💰 광고 수익 관점 — 클릭할까 · 무슨 광고가 뜰까 · 머물까
-                                                            <strong>{label}</strong>
+                                            {/* 자동 연쇄 — 많이 찾는 연관을 스스로 이어서 분석한 결과. */}
+                                            {(mindmap[row.keyword]?.related?.length ?? 0) > 0 && (
+                                                <div className="lw-mindmap-chain">
+                                                    <div className="lw-mindmap-chain-head">🔗 많이 찾는 연관 자동 분석</div>
+                                                    {(mindmap[row.keyword]?.related || []).map((rel) => (
+                                                        <div key={rel.keyword} className="lw-mindmap-chain-item">
+                                                            <strong>{rel.keyword}</strong>
+                                                            {rel.status === 'loading' && <span className="lw-chain-wait">분석 중…</span>}
+                                                            {rel.status === 'error' && <span className="lw-chain-wait">실패 — 넘어감</span>}
+                                                            {rel.status === 'done' && rel.data && (
+                                                                <>
+                                                                    {rel.data.monetize && (
+                                                                        <em className={`lw-chain-verdict lw-chain-${rel.data.monetize.verdict}`}>
+                                                                            {rel.data.monetize.verdict === 'good' ? '✅ 쓸 만하다'
+                                                                                : rel.data.monetize.verdict === 'bad' ? '⛔ 수익 안 나옴' : '⚖ 각도에 달림'}
+                                                                        </em>
+                                                                    )}
+                                                                    <ul>
+                                                                        {rel.data.reasons.slice(0, 2).map((reason) => <li key={reason.text}>{reason.text}</li>)}
+                                                                        {rel.data.monetize?.angle && <li><b>쓴다면:</b> {rel.data.monetize.angle}</li>}
+                                                                    </ul>
+                                                                </>
+                                                            )}
                                                         </div>
-                                                        <ul>
-                                                            {verdict.points.map((point) => <li key={point.text}>{point.text}</li>)}
-                                                        </ul>
-                                                        {verdict.angle && <p><strong>쓴다면:</strong> {verdict.angle}</p>}
-                                                    </div>
-                                                );
-                                            })()}
-                                        </div>
-                                    )}
+                                                    ))}
+                                                </div>
+                                            )}
 
-                                    {aiSubs[row.keyword]?.status === 'offline' && (
-                                        <div className="lw-forge lw-forge-ai">
-                                            <div className="lw-forge-subs">
-                                                LEWORD 앱이 꺼져 있습니다 — 앱을 켜면 이 버튼이 <strong>내 클로드코드 구독</strong>으로
-                                                무료 추론합니다. <a href="/download">⬇ 앱 받기</a>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {aiSubs[row.keyword]?.status === 'error' && (
-                                        <div className="lw-forge lw-forge-ai">
-                                            <div className="lw-forge-subs">추론 실패: {aiSubs[row.keyword]?.error}</div>
-                                        </div>
-                                    )}
-                                    {aiSubs[row.keyword]?.status === 'done' && (
-                                        <div className="lw-forge lw-forge-ai">
-                                            <div className="lw-forge-subs">
-                                                {/* 앱의 추론 체인이 실존 결재까지 마친 결과다 — 검증된 검색어만 온다. */}
-                                                <span>🤖 클로드코드 서브 (실측 검증됨)</span>
-                                                {(aiSubs[row.keyword]?.items || []).length === 0 && '검증을 통과한 파생이 없습니다 — 지어내지 않습니다.'}
-                                                {(aiSubs[row.keyword]?.items || []).map((sub) => (
-                                                    <em key={sub.keyword}>
-                                                        <a href={naverSearchUrl(sub.keyword)} target="_blank" rel="noreferrer" title="네이버에서 확인">
-                                                            {sub.keyword}
-                                                        </a>
-                                                        {typeof sub.searchVolume === 'number' ? ` (${sub.searchVolume.toLocaleString()})` : ''}
-                                                    </em>
-                                                ))}
-                                                {aiSubs[row.keyword]?.ai?.used && (
-                                                    <div style={{ fontSize: 11, opacity: .7, marginTop: 4 }}>
-                                                        {aiSubs[row.keyword]?.ai?.provider} 제안 {aiSubs[row.keyword]?.ai?.proposed}건 → 실측 검증 통과 {aiSubs[row.keyword]?.ai?.verified}건
-                                                    </div>
-                                                )}
-                                            </div>
+                                            {/*
+                                              * 수익 결론은 카드 본문에 이미 그려진다 — 마인드맵에서 같은
+                                              * 블록을 또 그리던 중복 제거(사장님 지시 2026-08-19).
+                                              */}
                                         </div>
                                     )}
 
@@ -605,6 +751,16 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         })}
                     </div>
 
+                    {rows.length > visibleCount && (
+                        <button
+                            type="button"
+                            className="lw-more-btn"
+                            onClick={() => setVisibleCount((count) => count + 60)}
+                        >
+                            더 보기 — 남은 {(rows.length - visibleCount).toLocaleString('ko-KR')}개
+                        </button>
+                    )}
+
                     {rows.length === 0 && <div className="lw-note">이 주제에는 통과한 키워드가 없습니다.</div>}
 
                     {/*
@@ -617,6 +773,20 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         onAnalyze={onAnalyze}
                         searchUrl={naverSearchUrl}
                     />
+
+                    {(() => {
+                        const chartRow = rows.find((row) => row.keyword === chartKeyword);
+                        const chart = chartRow ? pickChartSeries(chartRow) : null;
+                        return chartRow && chart ? (
+                            <DemandChartModal
+                                keyword={chartRow.keyword}
+                                series={chart.points}
+                                caption={chart.caption}
+                                asOf={chartRow.demandAsOf}
+                                onClose={() => setChartKeyword('')}
+                            />
+                        ) : null;
+                    })()}
 
                     {planRow && (
                         <PreemptionPlan

@@ -4,6 +4,7 @@ import AffiliateTab from '../components/leword/AffiliateTab';
 import AnalyzeTab from '../components/leword/AnalyzeTab';
 import GoldenTab from '../components/leword/GoldenTab';
 import KeysTab from '../components/leword/KeysTab';
+import KinGoldenTab from '../components/leword/KinGoldenTab';
 import LewordStyles from '../components/leword/LewordStyles';
 import RankTab from '../components/leword/RankTab';
 import YoutubeTab from '../components/leword/YoutubeTab';
@@ -21,6 +22,7 @@ import YoutubeTab from '../components/leword/YoutubeTab';
 const TABS = [
     { id: 'golden', label: '리더남 전용 황금키워드', short: '황금키워드', icon: '◆' },
     { id: 'analyze', label: '키워드 분석', short: '키워드 분석', icon: '◎' },
+    { id: 'kin', label: '지식인 황금질문', short: '황금질문', icon: '✦' },
     { id: 'affiliate', label: '제휴 황금키워드', short: '제휴', icon: '◇' },
     { id: 'youtube', label: '유튜브 실시간·급상승', short: '유튜브', icon: '▶' },
     { id: 'rank', label: '노출 추적', short: '노출 추적', icon: '↗' },
@@ -99,7 +101,7 @@ function LewordPage() {
                                 key={tab.id}
                                 type="button"
                                 role="menuitem"
-                                className={`lw-mobile-item${activeTab === tab.id ? ' on' : ''}`}
+                                className={`lw-mobile-item lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}`}
                                 onClick={() => { selectTab(tab.id); setMobileNavOpen(false); }}
                             >
                                 <span aria-hidden="true">{tab.icon}</span>
@@ -115,7 +117,8 @@ function LewordPage() {
                         <button
                             key={tab.id}
                             type="button"
-                            className={`lw-navi${activeTab === tab.id ? ' on' : ''}`}
+                            // 탭별 고유색(사장님 지정 2026-08-20: 금·파랑·초록·주황·빨강·분홍·은색).
+                            className={`lw-navi lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}`}
                             aria-current={activeTab === tab.id ? 'page' : undefined}
                             onClick={() => selectTab(tab.id)}
                         >
@@ -141,10 +144,11 @@ function LewordPage() {
 
             <section className="lw-main">
                 {activeTab === 'golden' && <GoldenTab onAnalyze={sendToAnalyze} />}
+                {activeTab === 'kin' && <KinGoldenTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
-                {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} />}
+                {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} onAnalyze={sendToAnalyze} />}
                 {activeTab === 'keys' && <KeysTab />}
             </section>
         </div>

@@ -224,10 +224,13 @@ async function collectNaverSports() {
   if (!res.ok) return [];
   // 페이지에는 뉴스 랭킹과 숏폼/영상 랭킹이 섞여 있어 rank 가 중복된다(실측).
   // 언론사(officeName)가 붙은 것만 뉴스다 — 숏폼 제목은 검색어 재료가 못 된다.
-  const entries = [...res.text.matchAll(/\{"rank":(\d+),[^{}]*?"officeName":"[^"]+","newsDateTime":"[^"]+","title":"((?:[^"\\]|\\.){8,160})"/g)]
+  // oid/aid 로 기사 주소를 조립한다(실측 200) — "검색 버튼이 크롤링한 기사로
+  // 바로 가게"(사장님 2026-08-19). URL 필드는 응답에 없고 이 두 값이 기사 좌표다.
+  const entries = [...res.text.matchAll(/\{"rank":(\d+),"section":"([a-z]+)"[^{}]*?"oid":"(\d+)","aid":"(\d+)"[^{}]*?"officeName":"[^"]+","newsDateTime":"[^"]+","title":"((?:[^"\\]|\\.){8,160})"/g)]
     .map((m) => ({
       rank: Number(m[1]),
-      title: m[2]
+      articleUrl: `https://m.sports.naver.com/${m[2]}/article/${m[3]}/${m[4]}`,
+      title: m[5]
         .replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
         .replace(/\\"/g, '"')
         .replace(/\[[^\]]{1,14}\]/g, '')
@@ -239,38 +242,97 @@ async function collectNaverSports() {
   const rows = [];
   const seen = new Set();
   for (const entry of entries) {
-    const entity = entitySeedCandidates(entry.title)[0];
-    if (!entity || seen.has(entity)) continue;
-    seen.add(entity);
-    rows.push({ rank: rows.length + 1, keyword: entity, context: entry.title });
+    // 실존결재 — 후보 중 자동완성이 실제로 아는 검색어만 채택한다.
+    // 후보[0] 무조건 승격이 "신경외과"·"충격파치료" 같은 기사 어휘를 띄운 원인.
+    const picked = await pickRealSearchTerm(entitySeedCandidates(entry.title), seen, entry.title);
+    if (!picked) continue;
+    seen.add(picked.base);
+    // 기사 사건으로 니즈 문구를 조립한다("심권호 간암 투병 마지막 시술" 꼴).
+    // 조립할 사건 토큰이 없으면 자동완성 확장(picked.keyword)으로 물러선다.
+    const need = needPhraseFromTitle(picked.base, entry.title);
+    rows.push({ rank: rows.length + 1, keyword: need || picked.keyword, context: entry.title, articleUrl: entry.articleUrl });
     if (rows.length >= 10) break;
   }
   return rows;
+}
+
+/**
+ * 후보들 중 네이버 자동완성이 결과를 돌려주는 첫 후보 = 사람들이 실제로 치는
+ * 검색어. 아무 후보도 실존하지 않으면 null — 지어내지 않는다.
+ *
+ * 반환은 { keyword, base }:
+ *   base    — 실존이 확인된 개체명(중복 판정용)
+ *   keyword — 화면에 띄울 검색어. "심권호"만 있으면 "심권호 뭐?"가 되므로
+ *             (사장님 지적 2026-08-19) 자동완성 확장 중 **기사 내용과 겹치는
+ *             것**("심권호 간암")을 고른다. 확장은 네이버가 준 실제 검색어라
+ *             조립이 아니고, 선택 기준은 기사 토큰 일치라는 매칭 사실이다.
+ *             겹치는 확장이 없으면 개체명 그대로 — 문장을 만들지 않는다.
+ */
+async function pickRealSearchTerm(candidates, seen, contextTitle) {
+  for (const candidate of candidates || []) {
+    if (!candidate || seen.has(candidate)) continue;
+    await new Promise((resolve) => setTimeout(resolve, 150));
+    const expansions = await fetchNaverExpansions(candidate);
+    if (expansions.length === 0) continue;
+    const contextTokens = String(contextTitle || '')
+      .split(/[^가-힣A-Za-z0-9]+/)
+      .filter((token) => token.length >= 2 && !token.includes(candidate) && !candidate.includes(token));
+    let best = null;
+    let bestScore = 0;
+    for (const expansion of expansions) {
+      if (!expansion.includes(candidate) || expansion.length > 20) continue;
+      const rest = expansion.replace(candidate, ' ');
+      const score = contextTokens.reduce((n, token) => n + (rest.includes(token) ? 1 : 0), 0);
+      if (score > bestScore) { best = expansion; bestScore = score; }
+    }
+    /*
+     * **일반명사는 단독으로 못 뜬다** (2026-08-19 스크린샷 실사고:
+     * '프로야구팀'·'맥주인'·'강속구' — 제목 조각이 자동완성 실존결재를 통과해
+     * 그대로 노출됐다. '맥주인' 은 "맥주인가?" 에서 조사만 뗀 조각이다).
+     *
+     * 금지어 목록을 늘리는 방식은 이 레인에서 이틀 새 세 번 실패했다("우승"·
+     * "신경외과"·"충격파치료"). 목록이 아니라 형태로 거른다:
+     *   인명(3자) — 단독 허용. 이름 자체가 니즈다("황희찬").
+     *   그 외    — 기사 맥락과 겹치는 확장을 찾았을 때만("심권호 간암" 꼴).
+     *              못 찾으면 다음 후보로 넘어간다. 검색어만 봐도 니즈가 읽혀야
+     *              한다는 것이 이 레인의 존재 이유다(사장님 2026-08-19).
+     */
+    if (!best && !isKoreanName(candidate)) continue;
+    return { keyword: best || candidate, base: candidate };
+  }
+  return null;
 }
 
 async function collectNateEntIssues() {
   // 네이트 연예 랭킹은 EUC-KR — 디코딩 지정 필수
   const res = await get('https://news.nate.com/rank/interest?sc=ent&p=day', { encoding: 'euc-kr' });
   if (!res.ok) return [];
-  // 실제 마크업은 <h2 class="tit">제목</h2> (strong 아님 — 초기 정규식이 틀려 0건이었다)
-  const titles = [...res.text.matchAll(/<h2 class="tit">([^<]{5,80})<\/h2>/g)]
-    .map((m) => m[1]
-      .replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")
-      .replace(/\[[^\]]{1,14}\]/g, '')
-      .replace(/…$/, '')
-      .replace(/\s+/g, ' ')
-      .trim())
-    .filter((title) => title.length >= 6);
+  // 실제 마크업은 <h2 class="tit">제목</h2> (strong 아님 — 초기 정규식이 틀려 0건이었다).
+  // 기사 링크(//news.nate.com/view/…)를 같이 캡처한다 — "검색 버튼이 기사로 바로"(2026-08-19).
+  const titles = [...res.text.matchAll(/<a href="(\/\/news\.nate\.com\/view\/[^"]+)"[^>]*>[\s\S]{0,400}?<h2 class="tit">([^<]{5,80})<\/h2>/g)]
+    .map((m) => ({
+      articleUrl: `https:${m[1]}`,
+      title: m[2]
+        .replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")
+        .replace(/\[[^\]]{1,14}\]/g, '')
+        .replace(/…$/, '')
+        .replace(/\s+/g, ' ')
+        .trim(),
+    }))
+    .filter((entry) => entry.title.length >= 6);
   // 기사 제목을 잘라 키워드로 쓰면 "비판에도", "20년팬 등판" 같은 조각이 나온다
   // (정책 레인에서 이미 겪은 실패). 제목은 맥락으로만 두고, 검색어는 제목에서 뽑은
   // 개체명(인물·작품·기관)으로 삼는다. 확장은 그 개체명 기준으로 붙는다.
   const rows = [];
   const seen = new Set();
-  for (const title of titles) {
-    const entity = entitySeedCandidates(title)[0];
-    if (!entity || seen.has(entity)) continue;
-    seen.add(entity);
-    rows.push({ rank: rows.length + 1, keyword: entity, context: title });
+  for (const entry of titles) {
+    // 스포츠 레인과 같은 실존결재 + 맥락 확장 — "심권호"가 아니라 "심권호 간암".
+    const picked = await pickRealSearchTerm(entitySeedCandidates(entry.title), seen, entry.title);
+    if (!picked) continue;
+    seen.add(picked.base);
+    // 스포츠 레인과 같은 니즈 문구 조립 — 확장 폴백도 동일.
+    const need = needPhraseFromTitle(picked.base, entry.title);
+    rows.push({ rank: rows.length + 1, keyword: need || picked.keyword, context: entry.title, articleUrl: entry.articleUrl });
     if (rows.length >= 10) break;
   }
   return rows;
@@ -627,6 +689,8 @@ function toSignalItems(laneId, rows) {
     source: laneId,
     officialUrl: row.officialUrl,
     sourceLabel: row.sourceLabel,
+    // 크롤링한 원본 기사 주소 — 화면의 '검색' 버튼이 기사로 바로 간다(2026-08-19).
+    ...(row.articleUrl ? { articleUrl: row.articleUrl } : {}),
     // 네이버 자동완성 실측 확장(사람들이 실제로 이어서 치는 검색어)
     expansions: row.expansions || [],
     // 확장을 뽑은 시드(헤드라인 전체가 아니라 개체명일 수 있음 — 표시 정직성용)
@@ -1151,6 +1215,54 @@ async function fetchNaverExpansions(keyword) {
  * "규제합리화위 부위원장에 김태유" 전체로는 자동완성이 0건이지만
  * "김태유"로는 실제 검색어가 붙는다. 조사 어미를 떼고 2~6자 토큰을 후보로.
  */
+/*
+ * 한국 인명은 3자(성 1 + 이름 2)만 인정한다. 1자 이름을 허용했더니 스포츠
+ * 레인에서 "우승"(성 우 + 승)이 인명으로 승격되는 실사고(2026-08-19 스크린샷).
+ * pickRealSearchTerm 도 같은 판정을 쓰므로 모듈 스코프에 둔다.
+ */
+const NAME_RE = /^[김이박최정강조윤장임한오서신권황안송류전홍고문양손배백허남심노하곽성차주우구민유][가-힣]{2}$/;
+const NOT_A_NAME = /^(최종|최고|최근|최대|최소|이번|이상|이후|이전|이유|정부|정도|정식|조사|강화|강남|임신|오전|오후|서울|한국|전국|전체|고속|신규|안전|송출|유지|민간|주요|구성|구매|박스|양측|손실|백만|허가|남녀|심각|하락|하루|성공|성장|차량|주가|주식|우려|김치|문제|양국|배송|노동|권리|황금|안내|송금|전망|홍보|고객|박빙|정면|신인왕|우승자)$/;
+const isKoreanName = (token) => NAME_RE.test(token) && !NOT_A_NAME.test(token);
+
+/*
+ * 개체명 + 기사 사건 토큰으로 **니즈가 읽히는 검색어**를 조립한다.
+ *
+ * 사장님(2026-08-19): "'심권호 근황'이 아니라 왜 이게 검색되는지 보고 검색어를
+ * 추론해서 넣어줘야지 — '심권호 간암투병 마지막 시술' 이런 식으로."
+ * 자동완성 확장('근황')은 실존하지만 니즈를 안 담는다. 기사 제목이 이미 사건을
+ * 말하고 있으므로 그 어절로 문구를 만든다 — 검색어만 봐도 무슨 일인지 읽히게.
+ *
+ * 저널리즘 상투어(충격·공개·근황·속보…)와 직책어(국가대표·공격수…)는 뺀다 —
+ * 사건이 아니라 포장이다. 조사는 가볍게 뗀다("중동으로"→"중동", "이적하나"→"이적").
+ */
+const NEED_STOP = /^(충격|대충격|충격적|경악|단독|속보|화제|포착|눈물|심경|고백|논란|파문|이유|모습|소식|초유|사태|결국|전격|공식|확인|근황|공개|며칠|오늘|어제|내일|현재|영상|사진|인터뷰|반응|누리꾼|네티즌|팬들|국가대표|공격수|미드필더|수비수|골키퍼|투수|포수|내야수|외야수|간판타자|감독|코치|선수|해설|중계|대형|쇼크|대참사|이럴|수가|저였으면|얌전히|역대|역사적|최대|최악|최고|최초|끝내|결국엔|와|어머|헉|무려)$/;
+/*
+ * 서술어·인용 어미가 붙은 어절은 사건이 아니라 **말**이다 — "던졌는데", "있었죠",
+ * "됐다" 가 검색어에 섞이면 문구가 인용문 조각이 된다(2026-08-19 1차 실주행에서
+ * '고우석 대형 쇼크 50구나 던졌는데'·'박재현 저였으면 얌전히 2루에 있었죠' 실사고).
+ */
+const NEED_VERBISH = /(는데|었다|았다|였다|졌다|겠다|했다|된다|됐다|한다|하다|어요|네요|아요|습니다|입니다|했죠|었죠|았죠|이죠|겠죠|잖아|구나|라니|다니|가요|나요|까요|쓰나|되나|하려나|인가|일까|할까)$/;
+function needPhraseFromTitle(base, title) {
+  const tokens = String(title || '')
+    .split(/[^가-힣A-Za-z0-9]+/)
+    .map((token) => token.replace(/(에서|으로|에게|부터|까지|라며|하나|한다|했다|이다|였다)$/, ''))
+    // 한 글자 조사는 남으면 인용문 조각처럼 보인다("2루에"·"사과와"·"김도영의" 실사고).
+    // 두 글자 이하 어절은 조사가 아닐 확률이 높아 건드리지 않는다("제주도" 보호).
+    .map((token) => (token.length >= 3 ? token.replace(/[은는이가을를에의와과]$/, '') : token))
+    .filter((token) => token.length >= 2 && token.length <= 8)
+    .filter((token) => !token.includes(base) && !base.includes(token))
+    .filter((token) => !NEED_STOP.test(token) && !NEED_VERBISH.test(token) && !/^\d+$/.test(token));
+  const picked = [];
+  for (const token of tokens) {
+    if (picked.includes(token)) continue;
+    picked.push(token);
+    if (picked.length >= 4) break;
+    if ([base, ...picked].join(' ').length >= 20) break;
+  }
+  while ([base, ...picked].join(' ').length > 24 && picked.length > 1) picked.pop();
+  return picked.length > 0 ? [base, ...picked].join(' ') : '';
+}
+
 function entitySeedCandidates(keyword) {
   const tokens = String(keyword).split(/\s+/)
     // 따옴표·괄호가 붙으면 인명 매칭이 실패한다(예: 황정민" → 미검출)
@@ -1162,14 +1274,15 @@ function entitySeedCandidates(keyword) {
     // 헤드라인 상투어·일반명사 제외("모친"→"모친 뜻", "시청률"→무관 확장)
     .filter((token) => !/^(오늘|내일|전국|긴급|속보|단독|공식|발표|확정|논란|사망|고독사|출연|기록|개장|시청률|반응|이번|바로|여전히|모친|부친|남편|아내|동생|형|누나|어머니|아버지|증조부|조부|장모|시모|가족)$/.test(token));
 
-  // 한국 인명 패턴(성 1자 + 이름 1~2자)을 최우선. 이슈 레인은 인물이 핵심 검색어다.
-  const NAME_RE = /^[김이박최정강조윤장임한오서신권황안송류전홍고문양손배백허남심노하곽성차주우구민유][가-힣]{1,2}$/;
-  // 성씨로 시작하지만 인명이 아닌 흔한 일반어(최종·구성·임신…)는 걸러낸다.
-  const NOT_A_NAME = /^(최종|최고|최근|최대|최소|이번|이상|이후|이전|이유|정부|정도|정식|조사|강화|강남|임신|오전|오후|서울|한국|전국|전체|고속|신규|안전|송출|유지|민간|주요|구성|구매|박스|양측|손실|백만|허가|남녀|심각|하락|하루|성공|성장|차량|주가|주식|우려|김치|문제|양국|배송|노동|권리|황금|안내|송금|전망|홍보|고객)$/;
-  const names = tokens.filter((token) => NAME_RE.test(token) && !NOT_A_NAME.test(token));
+  // 스포츠·사건 기사 상투어 — 첫/끝 토큰 폴백이 이런 일반명사를 승격하면 안 된다
+  // ("신경외과", "충격파치료" 실사고). 검색어가 아니라 기사 어휘다.
+  const HEADLINE_COMMON = /^(우승|패배|역전|결승|연승|연패|부상|수술|치료|외과|내과|병원|감독|선수|구단|이적|계약|은퇴|복귀|데뷔|충격|경악|논란|파문|근황|공개|심경|고백|눈물|분노|응원|화제|포착|목격|인터뷰|단독|속보|충격파치료|신경외과)$/;
+  const names = tokens.filter(isKoreanName);
   // 그 외에는 헤드라인 맨 앞/맨 뒤(고유명사가 주로 오는 자리) 순서로
   const ordered = [...names, tokens[0], tokens[tokens.length - 1], ...tokens];
-  return [...new Set(ordered.filter(Boolean))].slice(0, 2);
+  return [...new Set(ordered.filter(Boolean))]
+    .filter((token) => !HEADLINE_COMMON.test(token))
+    .slice(0, 3);
 }
 
 async function attachExpansions(rows) {

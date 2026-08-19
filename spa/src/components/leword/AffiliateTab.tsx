@@ -24,8 +24,15 @@ type CampaignItem = {
     image: string;
     url: string;
     reward: string;
+    /** 판매가(원). 수집기가 이미 싣고 있었는데 화면이 버리고 있었다 — 2026-08-19 표시. */
+    price?: number | null;
     /** 상품명에서 뽑은 검색어 — 쿠팡 레인과 같은 규칙. */
     keyword?: string;
+    /** 니즈 검색어 — 사람들이 실제로 치는 검색어(실측 최고 수요). 성과의 진짜 입구다. */
+    needKeyword?: string | null;
+    needVolume?: number | null;
+    /** 건당 수익(원) = 가격 × 수수료율 단순 산술. 요율이 없는 레인은 null. */
+    perSaleWon?: number | null;
     /** 브랜드커넥트 상품 ID — 내 스페이스 ID와 합쳐야 링크발급 화면이 열린다. */
     productId?: string;
     searchVolume?: number | null;
@@ -123,7 +130,8 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                     </p>
                     <ol className="lw-product-list">
                         {campaigns.items.map((item, index) => {
-                            const query = item.keyword || item.name;
+                            // 분석·검색은 니즈 검색어가 우선 — 상품명 검색어는 수요가 없다(실측 0~140).
+                            const query = item.needKeyword || item.keyword || item.name;
                             const badge = verdictBadge(item);
                             return (
                                 <li key={item.url || item.name} className="lw-product">
@@ -145,6 +153,17 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         </div>
                                         <a className="lw-product-name" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">{item.name}</a>
                                         <div className="lw-product-metrics">
+                                            {typeof item.price === 'number' && item.price > 0 && (
+                                                <span className="lw-product-price"><strong>{item.price.toLocaleString('ko-KR')}원</strong></span>
+                                            )}
+                                            {item.needKeyword && item.needVolume ? (
+                                                <span className="lw-product-need" title="사람들이 실제로 치는 검색어와 월 검색량(실측). 이 검색어로 글을 써서 상품을 답으로 소개하는 것이 성과의 입구입니다.">
+                                                    니즈 <strong>{item.needKeyword}</strong> 월 <strong>{item.needVolume.toLocaleString('ko-KR')}</strong>
+                                                </span>
+                                            ) : null}
+                                            {typeof item.perSaleWon === 'number' && item.perSaleWon > 0 && (
+                                                <span className="lw-product-persale" title="판매가 × 수수료율 단순 계산">건당 <strong>{item.perSaleWon.toLocaleString('ko-KR')}원</strong></span>
+                                            )}
                                             <span>검색어 <strong>{query}</strong></span>
                                             <span>월 검색량 <strong>{item.searchVolume == null ? '—' : item.searchVolume.toLocaleString('ko-KR')}</strong></span>
                                             <span>문서수 <strong>{item.documentCount == null ? '—' : item.documentCount.toLocaleString('ko-KR')}</strong></span>

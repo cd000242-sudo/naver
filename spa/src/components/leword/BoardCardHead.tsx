@@ -46,7 +46,13 @@ export type CardHeadRow = {
  * '지금이 선점 적기'·경고 배지도 뺐다 — 셋만 두라는 지시가 명시적이었다.
  * 경고에 해당하는 사실은 아래 근거 줄에 그대로 남아 있다.
  */
-function BoardCardHead({ row, rank }: { row: CardHeadRow; rank?: number }) {
+function BoardCardHead({ row, rank, onCopy, copied }: {
+    row: CardHeadRow;
+    rank?: number;
+    /** 키워드 복사 — 액션 줄에서 홀로 밀려나던 버튼을 주인공(키워드) 옆으로 옮겼다. */
+    onCopy?: () => void;
+    copied?: boolean;
+}) {
     const index = preemptionIndex({
         searchVolume: row.searchVolume,
         documentCount: row.documentCount,
@@ -101,6 +107,15 @@ function BoardCardHead({ row, rank }: { row: CardHeadRow; rank?: number }) {
                     {index.label}
                 </span>
                 {row.keyword}
+                {onCopy && (
+                    <button
+                        type="button"
+                        className="lw-copy-mini"
+                        title="키워드 복사"
+                        aria-label={`${row.keyword} 복사`}
+                        onClick={onCopy}
+                    >{copied ? '복사됨' : '⧉'}</button>
+                )}
             </h3>
 
             <ul className="lw-evidence">

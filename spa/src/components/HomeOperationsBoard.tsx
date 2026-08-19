@@ -13,6 +13,8 @@ import {
 import { selectKeywordChartRows, type HomeKeywordRow } from '../lib/homeKeywordBriefing';
 import { keywordSlug, isEvergreenKeyword } from '../lib/keywordDetailContent.mjs';
 import NewBadge from './NewBadge';
+import TrendSparkline from './leword/TrendSparkline';
+import { fetchKeywordTrend } from '../lib/keywordApi';
 import { useNoticeAlerts } from '../lib/useNoticeAlerts';
 
 const numberFormatter = new Intl.NumberFormat('ko-KR');
@@ -264,7 +266,51 @@ function KeywordChart({ rows }: { rows: HomeKeywordRow[] }) {
     );
 }
 
+/**
+ * 30일 추이 모달 — "그래프가 보여야 이 키워드로 글을 써도 될지 알 수 있다"
+ * (사장님 2026-08-19). 데이터랩 실측을 keyword-trend 경량 액션으로 받아 그린다.
+ */
+function TrendModal({ state, onClose }: {
+    state: { keyword: string; status: 'loading' | 'ready' | 'error'; series?: number[]; message?: string };
+    onClose: () => void;
+}) {
+    return (
+        <div className="home-ops-trend-overlay" role="dialog" aria-modal="true" aria-label={`${state.keyword} 최근 30일 검색 추이`} onClick={onClose}>
+            <div className="home-ops-trend-modal" onClick={(event) => event.stopPropagation()}>
+                <div className="home-ops-trend-head">
+                    <strong>{state.keyword}</strong>
+                    <button type="button" onClick={onClose} aria-label="닫기">✕</button>
+                </div>
+                {state.status === 'loading' && <p className="home-ops-trend-note">데이터랩 30일 실측을 불러오는 중…</p>}
+                {state.status === 'ready' && state.series && <TrendSparkline series={state.series} height={90} />}
+                {state.status === 'error' && (
+                    <p className="home-ops-trend-note">{state.message || '추이를 가져오지 못했습니다.'}</p>
+                )}
+                <p className="home-ops-trend-src">네이버 데이터랩 최근 30일 상대 추이 · 실측</p>
+            </div>
+        </div>
+    );
+}
+
 function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
+    const [trendModal, setTrendModal] = useState<{ keyword: string; status: 'loading' | 'ready' | 'error'; series?: number[]; message?: string } | null>(null);
+
+    const openTrend = async (keyword: string) => {
+        setTrendModal({ keyword, status: 'loading' });
+        const response = await fetchKeywordTrend(keyword);
+        if (response.ok && response.data?.trend?.series?.length) {
+            setTrendModal({ keyword, status: 'ready', series: response.data.trend.series });
+        } else {
+            setTrendModal({
+                keyword,
+                status: 'error',
+                message: response.error === 'needs-setup'
+                    ? '내 API 키(네이버 API HUB 또는 오픈 API)를 등록하면 바로 보입니다.'
+                    : response.message || '추이를 가져오지 못했습니다.',
+            });
+        }
+    };
+
     return (
         <div className="home-ops-table-shell" tabIndex={0} aria-label={`부방장 키워드 전체 ${rows.length}행`} aria-describedby="home-ops-table-note">
             <div className="home-ops-copy-all-bar">
@@ -311,11 +357,20 @@ function KeywordTable({ rows }: { rows: HomeKeywordRow[] }) {
                                     {decimalFormatter.format(row.opportunity)}
                                 </KeywordSearchLink>
                             </td>
-                            <td className="home-ops-search-cell"><KeywordSearchLinks row={row} /></td>
+                            <td className="home-ops-search-cell">
+                                <button
+                                    type="button"
+                                    className="home-ops-trend-btn"
+                                    onClick={() => openTrend(row.keyword)}
+                                    title="최근 30일 검색 추이(데이터랩 실측)"
+                                >📈 추이</button>
+                                <KeywordSearchLinks row={row} />
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {trendModal && <TrendModal state={trendModal} onClose={() => setTrendModal(null)} />}
         </div>
     );
 }
@@ -809,6 +864,31 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                 .home-ops-chart-track { grid-column: 1; height: 9px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,0.08); }
                 .home-ops-chart-track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #44d7b6, #f4c95d); }
                 .home-ops-chart-row > small { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: rgba(235,242,250,0.64); font-size: 13px; text-align: right; white-space: nowrap; }
+                .home-ops-trend-btn {
+                    margin-right: 8px; padding: 4px 10px; border-radius: 999px;
+                    border: 1px solid rgba(105,183,255,.4); background: rgba(105,183,255,.1);
+                    color: #69b7ff; font-size: 12px; font-weight: 800; cursor: pointer;
+                }
+                .home-ops-trend-btn:hover { background: rgba(105,183,255,.2); }
+                .home-ops-trend-overlay {
+                    position: fixed; inset: 0; z-index: 1200; display: flex; align-items: center; justify-content: center;
+                    background: rgba(4,8,14,.72); backdrop-filter: blur(6px); padding: 20px;
+                }
+                .home-ops-trend-modal {
+                    width: min(440px, 100%); background: #0d1420; border: 1px solid rgba(105,183,255,.3);
+                    border-radius: 16px; padding: 18px 20px; box-shadow: 0 24px 60px rgba(0,0,0,.5);
+                }
+                .home-ops-trend-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+                .home-ops-trend-head strong { font-size: 17px; color: #fff; }
+                .home-ops-trend-head button { background: transparent; border: none; color: rgba(255,255,255,.6); font-size: 16px; cursor: pointer; }
+                .home-ops-trend-note { margin: 8px 0; font-size: 13px; color: rgba(235,242,250,.7); line-height: 1.5; }
+                .home-ops-trend-src { margin: 10px 0 0; font-size: 11px; color: rgba(235,242,250,.4); }
+                /* 스파크라인은 leword 탭 스타일 시트에 있던 것 — 홈에는 안 실려 여기 복제한다. */
+                .home-ops-trend-modal .lw-spark { display: flex; flex-direction: column; gap: 4px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; background: rgba(255,255,255,.02); }
+                .home-ops-trend-modal .lw-spark svg { width: 100%; height: 90px; display: block; }
+                .home-ops-trend-modal .lw-spark-foot { display: flex; gap: 8px; font-size: 11px; color: rgba(235,242,250,.5); }
+                .home-ops-trend-modal .lw-spark-foot em { font-style: normal; color: rgba(235,242,250,.75); font-weight: 700; }
+                .home-ops-trend-modal .lw-spark-foot .lw-spark-hot { color: #2ecc71; font-weight: 800; }
                 .home-ops-table-title {
                     display: flex;
                     align-items: center;

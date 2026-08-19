@@ -64,8 +64,9 @@ export interface BridgeMindmap {
     /** 광고 수익 관점 결론 — 클릭할까·무슨 광고가 뜰까·머물까를 따진 질적 판단. */
     monetize?: {
         verdict: 'good' | 'bad' | 'mixed';
-        points: Array<{ text: string; basis: string }>;
-        angle: string;
+        // basis 는 브리지 라이브 결과에만 있다 — 회차에 구운 판정은 text 만 싣는다.
+        points: Array<{ text: string; basis?: string }>;
+        angle?: string;
     } | null;
     agent: { available: boolean; provider: string; proposed: number; verified: number; error?: string };
 }
@@ -77,11 +78,11 @@ export interface BridgeMindmap {
  * 뒤로는 그 전제가 사라졌다. 앱이 꺼져 있으면 null 이고, 화면은 앱을 켜라고
  * 안내한다 — 지어낸 확장어를 보여주지 않는다.
  */
-export async function bridgeMindmap(keyword: string): Promise<BridgeMindmap | null> {
+export async function bridgeMindmap(keyword: string, light = false): Promise<BridgeMindmap | null> {
     const body = await bridgeFetch('/v1/bridge/mindmap', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ keyword }),
+        body: JSON.stringify({ keyword, light }),
     }, 90_000) as { result?: BridgeMindmap } | null;
     return body?.result || null;
 }
@@ -102,6 +103,50 @@ export async function bridgeTrend(keyword: string): Promise<BridgeTrend | null> 
         body: JSON.stringify({ keyword }),
     }, 30_000) as { result?: BridgeTrend } | null;
     return body?.result || null;
+}
+
+/**
+ * 지식인 답변 초안 — 답변 교리(AI 티 0 · 깔끔·담백·정확)가 앱 쪽 고정
+ * 템플릿에 박혀 있고, 본인 구독으로 생성된다. 게시는 사용자가 직접 한다.
+ * 앱이 꺼져 있으면 null — 화면은 "앱을 켜세요"로 안내한다.
+ */
+export type BridgeKinAnswerResult =
+    | { status: 'ok'; answer: string; provider: string }
+    /** 연결 자체가 안 됨 — 앱이 꺼져 있거나 설치 전. */
+    | { status: 'offline' }
+    /** 앱은 떠 있는데 이 경로가 없음(404) — 구버전, 업데이트가 답이다. */
+    | { status: 'outdated' }
+    | { status: 'error'; message: string };
+
+export async function bridgeKinAnswer(input: {
+    title: string;
+    body: string;
+    withLink: boolean;
+    blogUrl: string;
+}): Promise<BridgeKinAnswerResult> {
+    const controller = new AbortController();
+    const timer = window.setTimeout(() => controller.abort(), 120_000);
+    try {
+        const response = await fetch(`${BRIDGE_BASE}/v1/bridge/kin-answer`, {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(input),
+            signal: controller.signal,
+        });
+        // 404 = 앱은 살아 있는데 이 기능이 실리기 전 버전이다 — "꺼짐"과 구분해야
+        // 사용자가 헛되이 앱을 껐다 켰다 하지 않는다(사장님 실사고 2026-08-20).
+        if (response.status === 404) return { status: 'outdated' };
+        const body = await response.json().catch(() => null) as
+            { ok?: boolean; error?: string; result?: { answer?: string; provider?: string } } | null;
+        if (response.ok && body?.ok && body.result?.answer) {
+            return { status: 'ok', answer: body.result.answer, provider: body.result.provider || 'unknown' };
+        }
+        return { status: 'error', message: body?.error || `앱 응답 ${response.status}` };
+    } catch {
+        return { status: 'offline' };
+    } finally {
+        window.clearTimeout(timer);
+    }
 }
 
 export async function bridgeAiSubs(keyword: string): Promise<{

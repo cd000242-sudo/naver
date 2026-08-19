@@ -66,6 +66,11 @@ export const WRITE_LANES: ReadonlyArray<{ id: string; label: string; hint: strin
      */
     { id: 'adsense', label: '애드센스 (티스토리·구글)', hint: '정보형 검색 실측 — 광고 게재·클릭이 나오는 수익형 자리' },
     { id: 'wordpress', label: 'SEO (워드프레스·티스토리)', hint: '웹사이트가 블로그보다 위에 뜹니다 — 자체 사이트가 유리한 자리' },
+    /*
+     * '지식인 황금질문'은 보드 서브탭이 아니라 좌측 메뉴의 독립 탭이다
+     * (사장님 정정 2026-08-20 "황금질문탭이 아니라 leword 탭 말하는 건데").
+     * KinGoldenTab.tsx 가 실시간·급상승·숨은 3레인으로 맡는다.
+     */
     { id: 'kin', label: '지식iN', hint: '지식iN 이 위에 뜹니다 — 답변으로 유입을 끌어오는 편이 빠른 자리' },
     { id: 'shopping', label: '상품·제휴', hint: '쇼핑이 맨 위를 먹습니다 — 글보다 상품이 붙는 자리' },
 ];

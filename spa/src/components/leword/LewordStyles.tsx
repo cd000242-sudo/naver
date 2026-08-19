@@ -13,9 +13,13 @@ function LewordStyles() {
                 grid-template-columns: 248px minmax(0, 1fr);
                 min-height: calc(100vh - 72px);
                 padding-top: 72px;
+                /*
+                 * 배경 블룸을 브랜드 골드로(taste: atmospheric bloom — 저채도
+                 * 라디얼이 분위기를 만든다. 보라 블룸은 골드 정체성과 싸웠다).
+                 */
                 background:
-                    radial-gradient(900px 500px at 82% -8%, rgba(124,92,255,.15), transparent 60%),
-                    radial-gradient(700px 500px at -8% 108%, rgba(0,224,198,.08), transparent 55%),
+                    radial-gradient(900px 500px at 82% -8%, rgba(255,165,0,.09), transparent 60%),
+                    radial-gradient(700px 500px at -8% 108%, rgba(0,224,198,.06), transparent 55%),
                     #07090d;
                 color: #ebedf2;
             }
@@ -66,9 +70,22 @@ function LewordStyles() {
             /* 모바일 햄버거 — 데스크톱에서는 존재하지 않는다. */
             .lw-mobile-toggle, .lw-mobile-menu { display: none; }
             .lw-navi:hover { background: rgba(255,255,255,.045); color: #ebedf2; }
+            /*
+             * 탭별 고유색(사장님 지정 2026-08-20): 황금키워드 금 · 분석 파랑 ·
+             * 지식인 초록 · 제휴 주황 · 유튜브 빨강 · 노출추적 분홍 · API 키 은색.
+             * 아이콘은 항상 제 색이고, 활성 탭은 그 색으로 물든다.
+             */
+            .lw-navi-golden { --tabc: #ffd700; --tabc-soft: rgba(255,215,0,.14); --tabc-line: rgba(255,215,0,.4); }
+            .lw-navi-analyze { --tabc: #69b7ff; --tabc-soft: rgba(105,183,255,.14); --tabc-line: rgba(105,183,255,.4); }
+            .lw-navi-kin { --tabc: #2ecc71; --tabc-soft: rgba(46,204,113,.14); --tabc-line: rgba(46,204,113,.4); }
+            .lw-navi-affiliate { --tabc: #ff8a3d; --tabc-soft: rgba(255,138,61,.14); --tabc-line: rgba(255,138,61,.4); }
+            .lw-navi-youtube { --tabc: #ff5b5b; --tabc-soft: rgba(255,91,91,.14); --tabc-line: rgba(255,91,91,.4); }
+            .lw-navi-rank { --tabc: #ff6bb3; --tabc-soft: rgba(255,107,179,.14); --tabc-line: rgba(255,107,179,.4); }
+            .lw-navi-keys { --tabc: #c0c8d4; --tabc-soft: rgba(192,200,212,.12); --tabc-line: rgba(192,200,212,.36); }
+            .lw-navi span { color: var(--tabc, currentColor); }
             .lw-navi.on {
-                background: linear-gradient(135deg, rgba(124,92,255,.20), rgba(124,92,255,.06));
-                border-color: rgba(124,92,255,.32);
+                background: linear-gradient(135deg, var(--tabc-soft, rgba(124,92,255,.20)), transparent);
+                border-color: var(--tabc-line, rgba(124,92,255,.32));
                 color: #fff;
             }
 
@@ -136,7 +153,11 @@ function LewordStyles() {
                 color: rgba(235,242,250,.72);
                 font-size: 13px; font-weight: 800; cursor: pointer;
             }
-            .lw-segment button.on { background: rgba(124,92,255,.2); border-color: rgba(124,92,255,.42); color: #fff; }
+            /*
+             * 활성 칩은 반전이다(taste: selection via inversion — 한 화면에
+             * 반전 하나가 어떤 액센트 테두리보다 강한 앵커가 된다).
+             */
+            .lw-segment button.on { background: #FFA500; border-color: #FFA500; color: #1a1206; }
             .lw-count { margin-left: auto; color: #646b7d; font-size: 13px; font-weight: 800; }
 
             /* ── 사용량 ── */
@@ -166,6 +187,112 @@ function LewordStyles() {
             .lw-note-plain { font-size: 13px; }
             .lw-note-setup { border-color: rgba(124,92,255,.3); background: rgba(124,92,255,.08); }
             .lw-note-limit { border-color: rgba(245,197,24,.32); background: rgba(245,197,24,.07); }
+            .lw-more-btn {
+                display: block; width: 100%; margin: 14px 0 4px; padding: 12px 16px;
+                border: 1px dashed rgba(255,215,0,.4); border-radius: 12px;
+                background: rgba(255,215,0,.06); color: #ffd700;
+                font-size: 14px; font-weight: 700; cursor: pointer;
+                transition: background .2s ease, border-color .2s ease;
+            }
+            .lw-more-btn:hover { background: rgba(255,215,0,.12); border-color: rgba(255,215,0,.65); }
+            .lw-spark { display: flex; flex-direction: column; gap: 4px; padding: 6px 8px; border: 1px solid rgba(255,255,255,.07); border-radius: 10px; background: rgba(255,255,255,.02); }
+            /* 스파크라인 클릭 래퍼 — 버튼 기본 껍데기를 벗기고 그래프가 곧 버튼이 된다. */
+            .lw-spark-open { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: inherit; color: inherit; font: inherit; }
+            .lw-spark-open:hover .lw-spark { border-color: rgba(255,255,255,.18); }
+            .lw-spark-open:focus-visible { outline: 2px solid rgba(124,92,255,.6); outline-offset: 2px; border-radius: 10px; }
+
+            /* ── 수요 그래프 모달 — 중립 격자·정점 한 점 강조·글로우 없음 ── */
+            .lw-chart-backdrop { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 4vh 3vw; background: rgba(4,6,10,.72); }
+            .lw-chart-modal { width: min(860px, 96vw); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; background: #0d1118; padding: 18px 20px 16px; }
+            .lw-chart-modal header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+            .lw-chart-modal h3 { margin: 0; font-size: 19px; font-weight: 800; color: #fff; }
+            .lw-chart-modal header p { margin: 4px 0 0; font-size: 12.5px; color: rgba(235,242,250,.6); }
+            .lw-chart-modal header button { flex: none; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.14); border-radius: 8px; background: none; color: rgba(235,242,250,.7); font-size: 14px; cursor: pointer; }
+            .lw-chart-modal svg { width: 100%; height: auto; display: block; }
+            .lw-chart-tick { font-size: 11px; fill: rgba(235,242,250,.5); }
+            .lw-chart-peak { font-size: 12px; font-weight: 700; fill: #00e0c6; }
+            .lw-chart-modal footer { margin-top: 10px; font-size: 13px; color: rgba(235,242,250,.75); }
+            .lw-spark svg { width: 100%; height: 56px; display: block; }
+            /* 11px 미만 기능 텍스트 금지(impeccable) — 10.5px 가 검문에 걸렸다. */
+            .lw-spark-foot { display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: rgba(235,242,250,.55); }
+            .lw-spark-foot em { font-style: normal; color: rgba(235,242,250,.7); font-weight: 700; }
+            .lw-spark-foot .lw-spark-hot { color: #2ecc71; font-weight: 800; }
+            .lw-why { margin: 8px 0 0; padding: 8px 10px; border-left: 2px solid rgba(255,165,0,.5); background: rgba(255,165,0,.05); border-radius: 0 8px 8px 0; font-size: 12px; line-height: 1.5; color: rgba(235,242,250,.85); }
+            .lw-why em { font-style: normal; color: #ffa500; font-weight: 800; margin-right: 4px; }
+            .lw-why small { display: block; margin-top: 3px; font-size: 10px; color: rgba(235,242,250,.4); }
+            .lw-kin { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; padding: 8px 10px; border: 1px dashed rgba(105,183,255,.25); border-radius: 10px; background: rgba(105,183,255,.04); }
+            .lw-board-list .lw-kin { grid-column: 1 / -1; }
+            .lw-kin em { font-style: normal; color: #69b7ff; font-size: 11px; font-weight: 800; }
+            .lw-kin a { font-size: 12px; color: rgba(235,242,250,.8); text-decoration: none; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); }
+            .lw-kin a:hover { border-color: rgba(105,183,255,.5); color: #fff; }
+            /* 조회수 실측 — 어느 질문이 실제로 읽히는지가 글감 우선순위다. */
+            .lw-kin-views { margin-left: 6px; font-size: 11px; color: #69b7ff; font-weight: 700; white-space: nowrap; }
+            /* 번호 목록(사장님 지시: "1. 2. 3. 이런식으로") — 칩 무더기보다 서열이 읽힌다. */
+            .lw-kin-list { margin: 0; padding: 0; list-style: none; counter-reset: kin; width: 100%; display: flex; flex-direction: column; gap: 5px; }
+            .lw-kin-list li { counter-increment: kin; display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+            .lw-kin-list li::before { content: counter(kin); flex: none; font-size: 11.5px; font-weight: 800; color: #2ecc71; min-width: 14px; }
+            .lw-kin-list a { border: 0; padding: 0; border-radius: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .lw-kin-list a:hover { text-decoration: underline; color: #fff; }
+
+            /* ── 지식인 황금질문 탭(좌측 메뉴 독립 탭) — 실시간·급상승·숨은 3레인 ── */
+            .lw-kg-list { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+            .lw-kg-list li { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 14px 16px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(255,255,255,.025); }
+            .lw-kg-rank { font-family: Consolas, monospace; font-size: 14px; font-weight: 700; color: #2ecc71; text-align: center; padding-top: 2px; }
+            .lw-kg-body { min-width: 0; }
+            /*
+             * 전문은 다 보이되 **읽는 폭은 본문 규격(약 74자)** — 화면 전체 폭으로
+             * 퍼진 200자짜리 줄이 가독성을 죽였다(사장님 지적 2026-08-20).
+             */
+            .lw-kg-body a { display: block; max-width: 74ch; font-size: 15.5px; font-weight: 700; color: #ebf2fa; text-decoration: none; word-break: keep-all; line-height: 1.5; }
+            .lw-kg-body a:hover { color: #fff; text-decoration: underline; }
+            .lw-kg-body p { margin: 6px 0 0; max-width: 74ch; font-size: 13px; color: rgba(235,242,250,.62); word-break: keep-all; line-height: 1.68; }
+            .lw-kg-body small { display: block; margin-top: 7px; font-size: 12px; color: rgba(235,242,250,.6); }
+            .lw-kg-body small b { color: #69b7ff; font-weight: 700; }
+            .lw-kg-up { font-style: normal; color: #2ecc71; font-weight: 700; }
+            .lw-kg-kw { border: 0; background: none; padding: 0; font-size: 12px; color: #69b7ff; cursor: pointer; text-decoration: underline; }
+            .lw-kg-copy { flex: none; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: none; color: rgba(235,242,250,.65); font-size: 11.5px; padding: 6px 10px; cursor: pointer; white-space: nowrap; }
+            .lw-kg-copy:hover { border-color: rgba(255,215,0,.5); color: #fff; }
+            .lw-kg-row-actions { display: flex; gap: 6px; }
+            .lw-kg-answer { flex: none; border: 0; border-radius: 8px; background: #ffa500; color: #14100a; font-size: 11.5px; font-weight: 800; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+            .lw-kg-answer:hover { filter: brightness(1.06); }
+            @media (max-width: 640px) { .lw-kg-list li { grid-template-columns: 24px minmax(0, 1fr); } .lw-kg-row-actions { display: none; } }
+
+            /* ── 답변 작업대 ── */
+            .lw-kg-work-meta { display: block; margin-top: 3px; color: rgba(235,242,250,.55); font-size: 12px; }
+            .lw-kg-work-body { margin: 0; white-space: pre-wrap; color: rgba(235,242,250,.88); font-size: 13.5px; line-height: 1.7; word-break: keep-all; max-height: 220px; overflow-y: auto; padding: 11px 13px; border: 1px solid rgba(255,255,255,.09); border-radius: 10px; background: rgba(255,255,255,.03); }
+            .lw-kg-draft { width: 100%; resize: vertical; padding: 12px 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 10px; background: rgba(255,255,255,.03); color: #ebf2fa; font: inherit; font-size: 14px; line-height: 1.7; }
+            .lw-kg-draft:focus { outline: none; border-color: rgba(255,165,0,.5); }
+            .lw-kg-work-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+            .lw-kg-work-actions button, .lw-kg-open { padding: 9px 14px; border-radius: 9px; border: 1px solid rgba(255,255,255,.16); background: none; color: rgba(235,242,250,.8); font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; }
+            .lw-kg-work-actions button:hover, .lw-kg-open:hover { border-color: rgba(255,165,0,.45); color: #fff; }
+            .lw-kg-work-actions button:disabled { opacity: .5; cursor: default; }
+            .lw-kg-generate { background: #ffa500 !important; border-color: #ffa500 !important; color: #14100a !important; }
+            .lw-kg-linkbox { display: flex; align-items: center; gap: 7px; margin-left: auto; font-size: 13px; color: rgba(235,242,250,.8); cursor: pointer; }
+            .lw-kg-linkbox input { accent-color: #ffa500; width: 15px; height: 15px; }
+            .lw-kg-linkbox.off { opacity: .45; cursor: not-allowed; }
+            .lw-kg-bloginput { width: 100%; margin-top: 8px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; }
+            .lw-kg-bridge { margin: 6px 0 10px; font-size: 12.5px; color: rgba(235,242,250,.6); }
+            .lw-kg-bridge.ok { color: #2ecc71; }
+            .lw-kg-work-note { margin: 8px 0 0; font-size: 12.5px; color: rgba(235,242,250,.6); }
+            .lw-kg-work-note a { color: #69b7ff; }
+            .lw-kg-ledger p { margin: 0; font-size: 13px; color: rgba(235,242,250,.75); }
+            .lw-kg-ledger b { color: #ffa500; }
+
+            /* 키워드 옆 복사 — 액션 줄에서 홀로 밀려나던 버튼의 새 자리. */
+            .lw-copy-mini { flex: none; margin-left: 2px; padding: 2px 8px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: none; color: rgba(235,242,250,.65); font-size: 11.5px; cursor: pointer; }
+            .lw-copy-mini:hover { border-color: rgba(255,215,0,.5); color: #fff; }
+
+            /* ── 노출 추적: 발행 글 전체 감사 표 ── */
+            .lw-audit-badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 800; }
+            .lw-audit-in { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.4); }
+            .lw-audit-out { background: rgba(255,91,91,.14); color: #ff7b7b; border: 1px solid rgba(255,91,91,.4); }
+            .lw-audit-wait { background: rgba(255,255,255,.05); color: rgba(235,242,250,.55); border: 1px solid rgba(255,255,255,.12); }
+            .lw-audit-why { display: block; margin-top: 4px; font-size: 11px; color: rgba(255,123,123,.75); }
+            .lw-audit-table td { vertical-align: top; }
+
+            /* 차트 호버 십자선 값 — 가리킨 점의 기간·상대값. */
+            .lw-chart-hover { font-size: 12px; font-weight: 700; fill: #ebf2fa; }
+            .lw-spark-hover { color: #ebf2fa; font-weight: 700; }
             .lw-note-error { border-color: rgba(255,107,129,.32); background: rgba(255,107,129,.07); }
             .lw-note button {
                 margin-top: 10px; padding: 9px 16px;
@@ -225,20 +352,43 @@ function LewordStyles() {
              *
              * 한 줄 = [근거] [지표 4] [액션 6]. 좁은 화면에서는 아래로 접는다.
              */
-            .lw-board-list { display: flex; flex-direction: column; gap: 10px; }
+            .lw-board-list { display: flex; flex-direction: column; gap: 12px; }
             .lw-board-list .lw-card-pre {
                 display: grid;
                 /*
-                 * 왼쪽이 넓어야 근거 문장이 한 줄에 들어간다. 실측 화면에서 근거가
-                 * 좁은 칸에 들어가 '문서수 3,801' 이 두 줄로 접혔다.
+                 * [2026-08-18 재편] 상단 = [근거 1fr | 지표 230px] 두 칸.
+                 * 제목 대장간·키워드 풀·수익 판정·액션은 하단 풀폭이다 — 예전엔
+                 * 188px 세 번째 열에 제목이 낑겨 갑갑했고, 액션 7개가 세로
+                 * 풀폭 바로 쌓여 카드 하나가 화면 절반을 먹었다(실측 스크린샷).
                  */
-                grid-template-columns: minmax(0, 1fr) 190px 188px;
+                /* [2026-08-19] 3열 — 가운데가 30일 실측 스파크라인 자리다(빨간 네모). */
+                grid-template-columns: minmax(0, 1fr) minmax(200px, 260px) 230px;
                 align-items: start;
-                gap: 20px;
-                padding: 16px 18px;
+                gap: 14px 20px;
+                padding: 18px 20px;
+                border-radius: 16px;
+                transition: border-color .15s ease, background .15s ease;
             }
+            .lw-board-list .lw-card-pre:hover {
+                border-color: rgba(255,165,0,.28);
+                background: rgba(255,255,255,.045);
+            }
+            /* 하단 풀폭 블록들 — 대장간·풀 칩·수익 판정·트렌드·마인드맵·액션 */
+            .lw-board-list .lw-forge,
+            .lw-board-list .lw-forge-ai,
+            .lw-board-list .lw-mindmap,
+            .lw-board-list .lw-mindmap-branches,
+            .lw-board-list .lw-mindmap-money,
+            .lw-board-list .lw-trend,
+            .lw-board-list .lw-card-actions { grid-column: 1 / -1; }
             /* 배지·제목·근거는 한 칸에 세로로 쌓인다(BoardCardHead 가 한 덩어리로 낸다). */
             .lw-card-head { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+            /*
+             * 배지는 조용해야 한다(taste: 초점은 한 곳 — 이 카드의 주인공은
+             * 키워드다). 4색 배지가 제목과 경쟁하던 것을 크기·무게로 눌러
+             * 메타데이터 층위로 내린다. 변형별 색 의미는 그대로 산다.
+             */
+            .lw-card-tags span { font-size: 10.5px; padding: 3px 8px; font-weight: 800; }
             .lw-board-list .lw-card-metrics {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 margin-top: 0; row-gap: 12px; column-gap: 10px;
@@ -246,14 +396,23 @@ function LewordStyles() {
             /* 세로 목록에서는 숫자가 카드 높이를 끌지 않게 조금 줄인다. */
             .lw-board-list .lw-card-metrics strong { font-size: 16px; }
             .lw-board-list .lw-evidence li { font-size: 12.5px; }
-            .lw-board-list .lw-card-actions { flex-direction: column; gap: 6px; }
+            /*
+             * 액션은 컴팩트 그리드다. 세로 풀폭 스택(예전)은 버튼 7개가 카드
+             * 절반을 먹었다. 첫 버튼(어떻게 쓸까)만 골드 프라이머리 — 눌러야
+             * 할 것이 하나로 보여야 손이 간다.
+             */
+            .lw-board-list .lw-card-actions {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 7px;
+                margin-top: 2px;
+            }
             .lw-board-list .lw-card-actions button,
-            .lw-board-list .lw-card-actions a { flex: none; width: 100%; }
+            .lw-board-list .lw-card-actions a { flex: none; width: 100%; padding: 8px 8px; }
             @media (max-width: 860px) {
-                .lw-board-list .lw-card-pre { grid-template-columns: minmax(0, 1fr); }
-                .lw-board-list .lw-card-actions { flex-direction: row; flex-wrap: wrap; }
-                .lw-board-list .lw-card-actions button,
-                .lw-board-list .lw-card-actions a { flex: 1 1 30%; width: auto; }
+                .lw-board-list .lw-card-pre { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+                .lw-card-spark { max-width: 320px; }
+                .lw-board-list .lw-card-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             }
 
             /*
@@ -294,7 +453,7 @@ function LewordStyles() {
             }
             .lw-topic-tabs button em { font-style: normal; opacity: .6; margin-left: 4px; }
             .lw-topic-tabs button:hover { color: #b9c2d4; }
-            .lw-topic-tabs button.on { color: #fff; border-bottom-color: #7c5cff; }
+            .lw-topic-tabs button.on { color: #fff; border-bottom-color: #FFA500; }
 
             /*
              * 등급 색. 사장님 지적 — 예전 '약함' 노랑이 '초황금' 금색과 겹쳐 구분이
@@ -361,16 +520,36 @@ function LewordStyles() {
             .lw-card-actions { display: flex; gap: 7px; }
             /* 좁은 칸에서 '검색결과 확 인' 처럼 두 줄로 깨지던 것을 막는다. */
             .lw-card-actions button, .lw-card-actions a { white-space: nowrap; }
+            /*
+             * 액션 위계(2026-08-18, 브랜드 골드 #FFA500 — tokens.ts 단일출처):
+             *   프라이머리(첫 버튼) = 골드, 나머지 = 중립 고스트.
+             * 예전엔 버튼 전부가 보라 계열 같은 무게라 무엇을 눌러야 할지
+             * 화면이 말해 주지 않았다.
+             */
             .lw-card-actions button, .lw-card-actions a {
                 flex: 1;
                 padding: 9px 10px;
-                border: 1px solid rgba(124,92,255,.32); border-radius: 10px;
-                background: rgba(124,92,255,.14);
-                color: #c9bcff; font-size: 12.5px; font-weight: 800; text-align: center; text-decoration: none;
+                border: 1px solid rgba(255,255,255,.11); border-radius: 10px;
+                background: rgba(255,255,255,.04);
+                color: rgba(235,242,250,.78); font-size: 12.5px; font-weight: 800; text-align: center; text-decoration: none;
                 cursor: pointer;
+                transition: background .12s ease, border-color .12s ease, color .12s ease;
             }
-            .lw-card-actions a { border-color: rgba(255,255,255,.11); background: rgba(255,255,255,.04); color: rgba(235,242,250,.74); }
-            .lw-card-actions button:hover { background: rgba(124,92,255,.24); }
+            .lw-card-actions button:hover, .lw-card-actions a:hover {
+                background: rgba(255,255,255,.09);
+                border-color: rgba(255,165,0,.35);
+                color: #fff;
+            }
+            .lw-card-actions button:first-child {
+                border-color: rgba(255,165,0,.5);
+                background: linear-gradient(180deg, rgba(255,165,0,.2), rgba(255,165,0,.12));
+                color: #ffc46e;
+            }
+            .lw-card-actions button:first-child:hover {
+                background: linear-gradient(180deg, rgba(255,165,0,.3), rgba(255,165,0,.18));
+                color: #ffd79a;
+            }
+            .lw-card-actions button:disabled { opacity: .55; cursor: wait; }
 
             /* ── 유튜브 카드 ── */
             .lw-card-video { padding: 0; overflow: hidden; }
@@ -393,6 +572,8 @@ function LewordStyles() {
             .lw-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
             .lw-table th, .lw-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid rgba(255,255,255,.07); }
             .lw-table thead th { color: #646b7d; font-size: 12px; font-weight: 800; white-space: nowrap; }
+            .lw-table .lw-intent-row th { color: #ffd700; font-size: 12px; font-weight: 800; background: rgba(255,215,0,.05); border-top: 1px solid rgba(255,215,0,.18); }
+            .lw-table .lw-intent-row small { color: rgba(235,242,250,.45); font-weight: 600; margin-left: 6px; }
             .lw-table tbody th { color: #fff; font-weight: 800; }
             .lw-table tbody th small { display: block; margin-top: 3px; color: #646b7d; font-size: 11.5px; font-weight: 600; }
             .lw-table td { color: rgba(235,242,250,.78); white-space: nowrap; }
@@ -527,6 +708,10 @@ function LewordStyles() {
             .lw-product-name:hover { color: #cfc4ff; }
             .lw-product-metrics { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 9px; }
             .lw-product-metrics span { color: rgba(235,242,250,.5); font-size: 11px; }
+            .lw-product-metrics .lw-product-price strong { color: #ffd700; font-size: 14px; }
+            .lw-product-metrics .lw-product-need { padding: 2px 8px; border: 1px solid rgba(46,204,113,.35); border-radius: 999px; background: rgba(46,204,113,.1); }
+            .lw-product-metrics .lw-product-need strong { color: #2ecc71; }
+            .lw-product-metrics .lw-product-persale strong { color: #ffa500; font-size: 13px; }
             .lw-product-metrics strong { color: #fff; font-size: 12px; font-weight: 800; margin-left: 3px; }
             /* 카드 우측 버튼 열 — 사장님 지시: 우측 세로 정렬, 테두리, 기능별 색. */
             .lw-product-actions { display: flex; flex-direction: column; gap: 7px; justify-content: center; }
@@ -629,10 +814,12 @@ function LewordStyles() {
                 border: 1px solid rgba(26,115,232,.55); color: #8ab4f8; background: rgba(26,115,232,.14);
             }
             /* 대장간 산출물 — 제목 2종 + 문제해결 서브 */
+            /* 장식은 하나만(taste: over-decoration 금지) — 좌측 골드 바 + 옅은 바탕. */
             .lw-forge {
-                margin: 10px 0 2px; padding: 10px 13px; border-radius: 10px;
-                background: rgba(255,255,255,.04); border-left: 3px solid rgba(250,204,21,.4);
-                display: flex; flex-direction: column; gap: 5px;
+                margin: 2px 0; padding: 12px 15px; border-radius: 12px;
+                background: rgba(255,165,0,.055);
+                border-left: 3px solid rgba(255,165,0,.55);
+                display: flex; flex-direction: column; gap: 6px;
             }
             .lw-forge-title { font-size: 13px; color: rgba(235,242,250,.9); line-height: 1.5; word-break: keep-all; }
             .lw-forge-title span, .lw-forge-subs span {
@@ -641,7 +828,7 @@ function LewordStyles() {
                 font-size: 10.5px; font-weight: 800; vertical-align: 1px;
             }
             .lw-forge-subs { font-size: 12.5px; color: rgba(235,242,250,.75); line-height: 1.7; }
-            .lw-forge-subs em { font-style: normal; margin-right: 10px; color: #fcd34d; }
+            .lw-forge-subs em { font-style: normal; margin-right: 10px; color: #ffc46e; }
             /* 마인드맵 — 중심 키워드에서 실측 확장어가 갈라진다.
                AI 가 찾아 실측으로 확인된 가지는 색으로 구분한다. */
             .lw-mindmap {
@@ -681,7 +868,8 @@ function LewordStyles() {
                 font-weight: 700;
             }
             .lw-mindmap-branches { display: flex; flex-wrap: wrap; gap: 7px; }
-            .lw-mindmap-branches a {
+            /* 칩이 <a>(검색행)에서 <button>(분석기행)으로 바뀌었다 — 겉모습은 동일하게. */
+            .lw-mindmap-branches a, .lw-mindmap-branches button {
                 display: inline-flex;
                 align-items: baseline;
                 gap: 6px;
@@ -693,10 +881,12 @@ function LewordStyles() {
                 font-size: 12.5px;
                 font-weight: 700;
                 text-decoration: none;
+                font-family: inherit;
+                cursor: pointer;
             }
-            .lw-mindmap-branches a span { font-weight: 400; opacity: .62; font-size: 11px; }
-            .lw-mindmap-branches a:hover { background: rgba(255,255,255,.09); color: #fff; }
-            .lw-mindmap-branches a.lw-mindmap-ai {
+            .lw-mindmap-branches a span, .lw-mindmap-branches button span { font-weight: 400; opacity: .62; font-size: 11px; }
+            .lw-mindmap-branches a:hover, .lw-mindmap-branches button:hover { background: rgba(255,255,255,.09); color: #fff; }
+            .lw-mindmap-branches a.lw-mindmap-ai, .lw-mindmap-branches button.lw-mindmap-ai {
                 border-color: rgba(90,169,255,.42);
                 background: rgba(90,169,255,.10);
                 color: #bcdcff;
@@ -742,6 +932,19 @@ function LewordStyles() {
                 font-size: 12px;
                 line-height: 1.6;
             }
+
+            /* 자동 연쇄 분석 — 본 분석 아래 조용히 쌓인다(taste: 층위 분리). */
+            .lw-mindmap-chain { margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,.12); }
+            .lw-mindmap-chain-head { margin-bottom: 8px; color: rgba(235,242,250,.85); font-size: 12.5px; font-weight: 800; }
+            .lw-mindmap-chain-item { margin-bottom: 10px; font-size: 12.5px; }
+            .lw-mindmap-chain-item strong { color: #ffd79a; font-size: 13px; }
+            .lw-chain-wait { margin-left: 8px; color: #7c8598; font-size: 12px; }
+            .lw-chain-verdict { margin-left: 8px; font-style: normal; font-size: 11px; font-weight: 800; padding: 2px 7px; border-radius: 999px; }
+            .lw-chain-good { background: rgba(74,222,128,.14); color: #4ade80; }
+            .lw-chain-bad { background: rgba(248,113,113,.16); color: #f87171; }
+            .lw-chain-mixed { background: rgba(250,204,21,.14); color: #facc15; }
+            .lw-mindmap-chain-item ul { margin: 6px 0 0 16px; padding: 0; color: rgba(235,242,250,.78); }
+            .lw-mindmap-chain-item li { margin-bottom: 4px; line-height: 1.6; word-break: keep-all; }
 
             /* 수익 관점 결론 — 판정색으로 한눈에. */
             .lw-mindmap-money {
@@ -876,7 +1079,33 @@ function LewordStyles() {
                 word-break: keep-all;
             }
             .lw-plan-rivals li { color: rgba(235,242,250,.6); font-size: 13px; }
+            .lw-plan-rivals a { color: rgba(235,242,250,.8); text-decoration: none; }
+            .lw-plan-rivals a:hover { color: #fff; text-decoration: underline; }
+            .lw-plan-rivals small { margin-left: 6px; font-size: 11.5px; color: #69b7ff; }
             .lw-plan-caution strong { color: #f5c518; }
+
+            /* ── 집필 브리핑 재구성(2026-08-19) — 카드와 안 겹치는 것만 남긴 창 ── */
+            .lw-plan-why { padding: 11px 13px; border-radius: 10px; background: rgba(124,92,255,.1); border: 1px solid rgba(124,92,255,.25); }
+            .lw-plan-why p { margin: 0; color: #ebf2fa; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
+            .lw-plan-why small { display: block; margin-top: 5px; font-size: 11px; color: rgba(235,242,250,.5); }
+            .lw-plan-title-row { display: flex; align-items: center; gap: 9px; padding: 7px 0; min-width: 0; }
+            .lw-plan-title-row span { flex: none; font-size: 11px; font-weight: 800; color: rgba(255,215,0,.85); border: 1px solid rgba(255,215,0,.35); border-radius: 6px; padding: 2px 7px; }
+            .lw-plan-title-row em { font-style: normal; color: #fff; font-size: 14px; font-weight: 700; min-width: 0; }
+            .lw-plan-title-row button { flex: none; margin-left: auto; padding: 4px 10px; border: 1px solid rgba(255,255,255,.16); border-radius: 7px; background: none; color: rgba(235,242,250,.75); font-size: 11.5px; cursor: pointer; }
+            .lw-plan-title-row button:hover { border-color: rgba(255,215,0,.5); color: #fff; }
+            .lw-plan-subs { display: flex; flex-wrap: wrap; gap: 6px; }
+            .lw-plan-subs em { font-style: normal; font-size: 12.5px; color: rgba(235,242,250,.85); border: 1px solid rgba(255,255,255,.12); border-radius: 999px; padding: 3px 10px; }
+            .lw-plan-subs .lw-plan-pool { color: rgba(235,242,250,.6); border-style: dashed; }
+
+            /* 분석 탭 — 보드 회차 실측 결합 패널 */
+            .lw-analyze-why { margin-top: 12px; padding: 11px 13px; border-radius: 10px; background: rgba(124,92,255,.1); border: 1px solid rgba(124,92,255,.25); }
+            .lw-analyze-why strong { display: block; margin-bottom: 5px; font-size: 12px; font-weight: 900; color: #b9a6ff; }
+            .lw-analyze-why p { margin: 0; color: #ebf2fa; font-size: 13.5px; line-height: 1.6; word-break: keep-all; }
+            .lw-analyze-why small { display: block; margin-top: 5px; font-size: 11px; color: rgba(235,242,250,.5); }
+            .lw-analyze-pool { display: flex; flex-wrap: wrap; gap: 7px; }
+            .lw-analyze-pool button { display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; border: 1px solid rgba(255,255,255,.13); border-radius: 999px; background: none; color: #ebf2fa; font-size: 13px; cursor: pointer; }
+            .lw-analyze-pool button:hover { border-color: rgba(0,224,198,.5); color: #fff; }
+            .lw-analyze-pool button span { font-size: 11.5px; color: rgba(235,242,250,.55); }
             .lw-plan-caution li { color: rgba(245,197,24,.86); }
             .lw-plan-foot {
                 display: flex; gap: 9px; padding: 14px 22px 18px;
@@ -1010,12 +1239,12 @@ function LewordStyles() {
                     color: #c6ccd9; font-size: 14.5px; font-weight: 700; text-align: left;
                     cursor: pointer;
                 }
-                .lw-mobile-item span { width: 20px; text-align: center; opacity: .85; }
+                .lw-mobile-item span { width: 20px; text-align: center; opacity: .85; color: var(--tabc, currentColor); }
                 .lw-mobile-item em { font-style: normal; flex: 1; }
-                .lw-mobile-item b { color: #b14cff; font-size: 9px; }
+                .lw-mobile-item b { color: var(--tabc, #b14cff); font-size: 9px; }
                 .lw-mobile-item.on {
                     color: #fff;
-                    background: linear-gradient(135deg, rgba(124,92,255,.26), rgba(177,76,255,.08));
+                    background: linear-gradient(135deg, var(--tabc-soft, rgba(124,92,255,.26)), transparent);
                 }
                 .lw-mobile-item:active { background: rgba(255,255,255,.06); }
                 .lw-navi span { display: none; }

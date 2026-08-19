@@ -4,6 +4,15 @@ import { maskContactText } from './privacy';
 export const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBOGkjVj4p-6XZ4SEFYKhW3FBmo5gt7Fv6djWhB1TljnDDmx_qlfZ4YdlJNohzIZ8NJw/exec';
 
 export type SiteContent = {
+    /** 무료 챗봇 페이지 4타일 (2026-08-19) — 어드민 '사이트 콘텐츠 관리'에서 수정.
+     *  비어 있으면 ChatbotsPage 의 내장 기본값(fallback)이 그대로 쓰인다 — 저장 전에도 페이지는 완전하다. */
+    chatbots?: {
+        chatgpt?: { title?: string; desc?: string };
+        gemini?: { title?: string; desc?: string; url?: string; cta?: string };
+        claude?: { title?: string; desc?: string; skills?: Array<{ title?: string; desc?: string; url?: string }> };
+        cafe?: { title?: string; desc?: string; url?: string };
+        bots?: Array<{ category?: string; title?: string; subtitle?: string; desc?: string; bestFor?: string[]; url?: string; accent?: string }>;
+    };
     hero?: {
         title?: string;
         desc?: string;
