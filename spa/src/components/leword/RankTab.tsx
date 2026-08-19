@@ -36,9 +36,16 @@ type TrackedRow = {
 
 type AuditRow = BlogAuditPost & {
     status: 'wait' | 'checking' | 'done' | 'error';
+    /** 제목검색(생존 확인) 순위 — 노출/누락 판정의 기준. */
     rank: number | null;
     sampled: number;
     sympathy: number | null;
+    /* 순위 3눈(사장님 지시 2026-08-20): 키워드 → 확장 → 제목. 쿼리를 그대로
+       실어 화면에서 "무엇으로 검색했는지"가 검증 가능하다. */
+    kwQuery?: string;
+    kwRank?: number | null;
+    extQuery?: string;
+    extRank?: number | null;
 };
 
 function loadTracked(): TrackedRow[] {
@@ -131,8 +138,17 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
             setAudit(state);
             const post = state.rows[index];
             const checked = await auditBlogCheck(post.title, post.link);
-            const done: AuditRow = checked.ok && checked.data
-                ? { ...post, status: 'done', rank: checked.data.rank, sampled: checked.data.sampled, sympathy: checked.data.sympathy }
+            const payload = checked.ok ? checked.data as (typeof checked.data & {
+                keyword?: { query: string; rank: number | null };
+                extended?: { query: string; rank: number | null };
+            }) | null : null;
+            const done: AuditRow = payload
+                ? {
+                    ...post, status: 'done',
+                    rank: payload.rank, sampled: payload.sampled, sympathy: payload.sympathy,
+                    kwQuery: payload.keyword?.query, kwRank: payload.keyword ? payload.keyword.rank : undefined,
+                    extQuery: payload.extended?.query, extRank: payload.extended ? payload.extended.rank : undefined,
+                }
                 : { ...post, status: 'error', rank: null, sampled: 0, sympathy: null };
             state = { ...state, rows: state.rows.map((row, i) => (i === index ? done : row)) };
             persistAudit(state);
@@ -215,9 +231,9 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                     <div className="lw-panel-head">
                         <h2>{PLATFORM_LABEL[audit.platform] || audit.platform} · 최근 발행 {audit.rows.length}건</h2>
                         <span>
-                            순위 기준 = 그 글의 <strong>제목을 그대로 검색</strong>했을 때 상위 100 중 그 글의 자리.
-                            제 제목으로도 안 잡히면(누락) 어떤 키워드로도 노출될 수 없어, 차단(저품질)을 거르는 기준선입니다.
-                            특정 키워드 순위는 아래 "키워드로 직접 확인"을 쓰세요 · 조회수는 공개 API 가 없어 싣지 않습니다
+                            순위 세 눈(각각 상위 100 실측): <strong>키워드</strong>(제목의 핵심어 검색 — 사람이 실제로 치는 것)
+                            → <strong>확장</strong>(핵심어+한정어) → <strong>제목검색</strong>(제 제목으로도 안 잡히면 차단·저품질 의심).
+                            각 칸 아래 회색 글씨가 실제 사용한 검색어입니다 · 조회수는 공개 API 가 없어 싣지 않습니다
                         </span>
                     </div>
                     <div className="lw-table-scroll">
@@ -228,7 +244,9 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                     <th scope="col">제목</th>
                                     <th scope="col">발행일</th>
                                     <th scope="col">공감·댓글</th>
-                                    <th scope="col" title="그 글의 제목을 그대로 검색했을 때 상위 100 중 자리">제목검색 순위</th>
+                                    <th scope="col">키워드 순위</th>
+                                    <th scope="col">확장 순위</th>
+                                    <th scope="col" title="그 글의 제목을 그대로 검색했을 때의 자리 — 생존 확인">제목검색</th>
                                     <th scope="col" aria-label="분석" />
                                 </tr>
                             </thead>
@@ -256,12 +274,20 @@ function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnal
                                             {row.comments !== null ? `댓글 ${row.comments}` : ''}
                                             {row.sympathy === null && row.comments === null ? '—' : ''}
                                         </td>
+                                        <td className={row.kwRank === null ? 'lw-rank-out' : 'lw-rank-in'}>
+                                            {row.status !== 'done' ? '—' : row.kwRank != null ? `${row.kwRank}위` : row.kwQuery ? '없음' : '—'}
+                                            {row.kwQuery && <small className="lw-audit-q">{row.kwQuery}</small>}
+                                        </td>
+                                        <td className={row.extRank === null ? 'lw-rank-out' : 'lw-rank-in'}>
+                                            {row.status !== 'done' ? '—' : row.extRank != null ? `${row.extRank}위` : row.extQuery ? '없음' : '—'}
+                                            {row.extQuery && row.extQuery !== row.kwQuery && <small className="lw-audit-q">{row.extQuery}</small>}
+                                        </td>
                                         <td className={row.rank === null ? 'lw-rank-out' : 'lw-rank-in'}>
                                             {row.status !== 'done' ? '—' : row.rank !== null ? `${row.rank}위` : `${row.sampled}건 중 없음`}
                                         </td>
                                         <td className="lw-row-actions">
                                             {onAnalyze && (
-                                                <button type="button" className="lw-mini" onClick={() => onAnalyze(row.title)}>
+                                                <button type="button" className="lw-mini" onClick={() => onAnalyze(row.kwQuery || row.title)}>
                                                     글 분석하기
                                                 </button>
                                             )}

@@ -288,6 +288,8 @@ function LewordStyles() {
             .lw-audit-out { background: rgba(255,91,91,.14); color: #ff7b7b; border: 1px solid rgba(255,91,91,.4); }
             .lw-audit-wait { background: rgba(255,255,255,.05); color: rgba(235,242,250,.55); border: 1px solid rgba(255,255,255,.12); }
             .lw-audit-why { display: block; margin-top: 4px; font-size: 11px; color: rgba(255,123,123,.75); }
+            /* 실제 사용한 검색어 — 순위의 기준이 눈에 보여야 신뢰가 생긴다. */
+            .lw-audit-q { display: block; margin-top: 3px; font-size: 11px; font-weight: 400; color: rgba(235,242,250,.45); white-space: nowrap; }
             .lw-audit-table td { vertical-align: top; }
 
             /* 차트 호버 십자선 값 — 가리킨 점의 기간·상대값. */
