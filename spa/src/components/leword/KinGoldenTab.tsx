@@ -20,6 +20,8 @@ type KinQ = {
     views: number | null;
     answers: number | null;
     rank?: number;
+    /** 질문 작성일(숨은 레인) — "최신"이 조건이므로 화면에 그대로 적는다. */
+    askedAt?: string;
     viewsDelta?: number;
     perHour?: number;
     /** 보드에서 온 질문이면 근거 키워드가 붙는다 — 글감으로 바로 잇는다. */
@@ -153,6 +155,7 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                                 <small>
                                     {typeof q.views === 'number' && <b>조회 {formatCount(q.views)}</b>}
                                     {typeof q.answers === 'number' && <> · 답변 {q.answers}</>}
+                                    {q.askedAt && <> · {q.askedAt.slice(5)} 질문</>}
                                     {typeof q.perHour === 'number' && <> · <em className="lw-kg-up">시간당 +{formatCount(q.perHour)}</em></>}
                                     {q.keyword && (
                                         <> · 키워드 {onAnalyze
