@@ -95,6 +95,8 @@ jobs:
             # 황금보드는 실시간 레인 결과를 후보로 쓰므로 그 뒤에 돈다.
             # 자격증명이 없으면 스스로 건너뛴다(기존 파일 유지).
             node scripts/refresh-golden-briefing.mjs || echo "황금보드 갱신 실패 — 기존 파일 유지"
+            # 지식인 황금질문(실시간·급상승·숨은) — 급상승은 직전 스냅샷 대비라 15분 주기가 곧 눈금이다.
+            node scripts/kin-golden.mjs || echo "지식인 황금질문 수집 실패 — 기존 파일 유지"
 
             # 0건이면 커밋하지 않는다. 좋은 데이터를 빈 데이터로 덮지 않기 위한 마지막 가드.
             for f in spa/public/data/source-signals.json spa/public/data/home-notices.json; do

@@ -221,15 +221,21 @@ function LewordStyles() {
             .lw-kin-list a { border: 0; padding: 0; border-radius: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
             .lw-kin-list a:hover { text-decoration: underline; color: #fff; }
 
-            /* ── 지식인 황금질문 탭 — 조회 많고 답변 적은 최신 질문 실측 ── */
-            .lw-kin-golden { margin-top: 12px; }
-            .lw-kin-golden-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
-            .lw-kin-golden-list li { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid rgba(105,183,255,.2); border-radius: 10px; background: rgba(105,183,255,.05); }
-            .lw-kin-golden-rank { flex: none; min-width: 22px; text-align: center; font-size: 13px; font-weight: 800; color: #2ecc71; }
-            .lw-kin-golden-list a { font-size: 14px; font-weight: 700; color: #ebf2fa; text-decoration: none; display: block; }
-            .lw-kin-golden-list a:hover { color: #fff; text-decoration: underline; }
-            .lw-kin-golden-list small { display: block; margin-top: 3px; font-size: 11.5px; color: rgba(235,242,250,.6); }
-            .lw-kin-golden-kw { border: 0; background: none; padding: 0; font-size: 11.5px; color: #69b7ff; cursor: pointer; text-decoration: underline; }
+            /* ── 지식인 황금질문 탭(좌측 메뉴 독립 탭) — 실시간·급상승·숨은 3레인 ── */
+            .lw-kg-list { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+            .lw-kg-list li { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid rgba(255,255,255,.09); border-radius: 12px; background: rgba(255,255,255,.025); }
+            .lw-kg-rank { font-family: Consolas, monospace; font-size: 14px; font-weight: 700; color: #2ecc71; text-align: center; }
+            .lw-kg-body { min-width: 0; }
+            .lw-kg-body a { display: block; font-size: 15px; font-weight: 700; color: #ebf2fa; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .lw-kg-body a:hover { color: #fff; text-decoration: underline; }
+            .lw-kg-body p { margin: 3px 0 0; font-size: 12.5px; color: rgba(235,242,250,.5); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .lw-kg-body small { display: block; margin-top: 3px; font-size: 12px; color: rgba(235,242,250,.6); }
+            .lw-kg-body small b { color: #69b7ff; font-weight: 700; }
+            .lw-kg-up { font-style: normal; color: #2ecc71; font-weight: 700; }
+            .lw-kg-kw { border: 0; background: none; padding: 0; font-size: 12px; color: #69b7ff; cursor: pointer; text-decoration: underline; }
+            .lw-kg-copy { flex: none; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: none; color: rgba(235,242,250,.65); font-size: 11.5px; padding: 6px 10px; cursor: pointer; white-space: nowrap; }
+            .lw-kg-copy:hover { border-color: rgba(255,215,0,.5); color: #fff; }
+            @media (max-width: 640px) { .lw-kg-list li { grid-template-columns: 24px minmax(0, 1fr); } .lw-kg-copy { display: none; } }
 
             /* 키워드 옆 복사 — 액션 줄에서 홀로 밀려나던 버튼의 새 자리. */
             .lw-copy-mini { flex: none; margin-left: 2px; padding: 2px 8px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: none; color: rgba(235,242,250,.65); font-size: 11.5px; cursor: pointer; }

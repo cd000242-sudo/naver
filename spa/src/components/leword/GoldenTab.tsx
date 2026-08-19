@@ -389,26 +389,7 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         setVisibleCount(60);
     }, [topic, query, writeLane]);
 
-    /*
-     * 지식인 황금질문 — 전 행의 지식인 실측(최신 질문·조회수·답변수)에서
-     * "조회 300+ 인데 답변 2개 이하"만 모은다. 조회·답변 둘 다 실측된 질문만
-     * 후보다(못 잰 것을 황금이라 단정하지 않는다). docId 로 중복을 걷어낸다.
-     */
-    const goldenKin = useMemo(() => {
-        const seen = new Set<string>();
-        return (board?.rows || [])
-            .flatMap((row) => (row.kinTop || []).map((q) => ({ ...q, keyword: row.keyword, topic: row.topic })))
-            .filter((q) => typeof q.views === 'number' && typeof q.answers === 'number')
-            .filter((q) => (q.views as number) >= 300 && (q.answers as number) <= 2)
-            .filter((q) => {
-                const docId = (q.link.match(/docId=(\d+)/) || [])[1] || q.link;
-                if (seen.has(docId)) return false;
-                seen.add(docId);
-                return true;
-            })
-            .sort((a, b) => (b.views as number) - (a.views as number));
-    }, [board]);
-
+    // '지식인 황금질문'은 좌측 메뉴 독립 탭(KinGoldenTab)으로 옮겨졌다(2026-08-20 정정).
     const publishedLabel = board?.publishedAt
         ? new Intl.DateTimeFormat('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })
             .format(new Date(board.publishedAt))
@@ -461,43 +442,11 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         onChange={setWriteLane}
                         counts={{
                             total: board.rows.length,
-                            // 황금질문 탭은 행이 아니라 질문을 센다 — 질문 수가 곧 내용물이다.
-                            laneCount: (laneId) => (laneId === 'kin-golden'
-                                ? goldenKin.length
-                                : board.rows.filter((row) => rowMatchesWriteLane(row, laneId)).length),
+                            laneCount: (laneId) => board.rows.filter((row) => rowMatchesWriteLane(row, laneId)).length,
                         }}
                     />
 
-                    {/* 황금질문 탭 — 카드 목록 대신 질문 목록을 그린다. */}
-                    {writeLane === 'kin-golden' && (
-                        <section className="lw-kin-golden" aria-label="지식인 황금질문">
-                            {goldenKin.length === 0 ? (
-                                <div className="lw-note">
-                                    이번 회차 실측에서 조건(조회 300+ · 답변 2개 이하)을 만족한 질문이 없습니다.
-                                    조회수·답변수는 회차 보강이 질문 페이지에서 실측합니다 — 다음 보강 후 다시 확인해 주세요.
-                                </div>
-                            ) : (
-                                <ol className="lw-kin-golden-list">
-                                    {goldenKin.map((q, index) => (
-                                        <li key={q.link}>
-                                            <span className="lw-kin-golden-rank">{index + 1}</span>
-                                            <div>
-                                                <a href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
-                                                <small>
-                                                    조회 {formatCount(q.views as number)} · 답변 {q.answers}
-                                                    · 키워드 <button type="button" className="lw-kin-golden-kw" onClick={() => onAnalyze?.(q.keyword)}>{q.keyword}</button>
-                                                </small>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ol>
-                            )}
-                        </section>
-                    )}
-
-                    {writeLane !== 'kin-golden' && (
-                        <TopicFilter value={topic} onChange={setTopic} topics={topics} total={board.rows.length} />
-                    )}
+                    <TopicFilter value={topic} onChange={setTopic} topics={topics} total={board.rows.length} />
 
                     {!unlocked && rows.length > FREE_BOARD_ROWS && (
                         <LicenseGate onUnlock={() => setUnlocked(true)} />
