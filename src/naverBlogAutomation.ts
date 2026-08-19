@@ -20,7 +20,8 @@ import { extractProsConsWithGemini } from './image/geminiTableExtractor.js';
 import { browserSessionManager, type SessionInfo } from './browserSessionManager.js';
 // [v2.10.113] 명시적 쿠키 파일 저장/복원 — userDataDir 보조 안전망 (캡차 반복 차단)
 import { saveCookies as saveCookiesToFile, restoreCookies as restoreCookiesFromFile, warmupSession } from './sessionPersistence.js';
-import { buildNaverAutomationProfile, hashAutomationAccountId } from './automation/accountProfilePolicy.js';
+import { buildNaverAutomationProfile, hashAutomationAccountId, type NaverAutomationProfile } from './automation/accountProfilePolicy.js';
+import { detectChromeFullVersion } from './automation/chromeVersionDetector.js';
 import { findChromeExecutable } from './automation/chromeExecutablePolicy.js';
 import { performIdleMouseShake } from './automation/humanBehavior.js';
 import { isAiGeneratedImage } from './automation/imageProvenance.js';
@@ -525,17 +526,38 @@ export class NaverBlogAutomation {
   }
 
   // 계정별 고정 프로필 (UA + 해상도)
-  private getAccountConsistentProfile(): {
-    userAgent: string;
-    screen: { width: number; height: number };
-  } {
+  /** 실행될 Chrome 의 실제 전체 버전. 비어 있으면 폴백 풀이 쓰인다. */
+  private detectedChromeVersion = '';
+
+  /**
+   * 브라우저를 띄우기 직전에 호출한다. 실제로 실행할 바이너리를 그대로 넘겨
+   * UA 가 그 브라우저와 어긋나지 않게 한다. 실패해도 진행을 막지 않는다.
+   */
+  private async prepareChromeVersion(executablePath?: string): Promise<void> {
+    if (this.detectedChromeVersion) return;
+    try {
+      const resolved = executablePath || puppeteer.executablePath();
+      this.detectedChromeVersion = await detectChromeFullVersion(async () => resolved);
+      if (this.detectedChromeVersion) {
+        this.log(`🧭 Chrome 실제 버전 감지: ${this.detectedChromeVersion} — UA 를 여기에 맞춥니다`);
+      } else {
+        this.log('⚠️ Chrome 버전 감지 실패 — 폴백 UA 풀 사용 (실제 브라우저와 어긋날 수 있음)');
+      }
+    } catch (error) {
+      this.log(`⚠️ Chrome 버전 감지 오류: ${(error as Error).message}`);
+    }
+  }
+
+  private getAccountConsistentProfile(): NaverAutomationProfile {
     // ✅ [2026-05-25 v2.10.357 P0 FIX] Chrome 버전 풀 최신화 (145~149)
     //   Phase A 5팀 진단 발견: 기존 풀 131~135 vs 사용자 실제 Chrome 148 → 14버전 차이
     //   → 네이버 서버측 UA 파싱에서 즉시 봇 신호 분류 (95% 멈춤·캡차 root cause)
     //   해결: 최근 1~2개월 출시된 안정 버전으로 풀 교체. 미래에는 동적 binary 감지로 전환 예정.
     //   환경 변수 CHROME_VERSION_HINT로 override 가능 (사용자 Chrome 정확한 버전 명시 시)
-    const envHint = (typeof process !== 'undefined' ? process.env.CHROME_VERSION_HINT : '') || '';
-    return buildNaverAutomationProfile(this.options.naverId, envHint);
+    // [2026-08-19] 고정 풀 대신 실제로 실행될 Chrome 버전을 쓴다.
+    //   풀(145~149)은 실측 크롬 151 과 어긋나 있었고, 시스템 크롬을 띄운 위에
+    //   다른 버전이라고 적힌 UA 를 씌우는 상태였다. 감지값은 로그인 전에 채워둔다.
+    return buildNaverAutomationProfile(this.options.naverId, this.detectedChromeVersion);
   }
 
   private randomInt(min: number, max: number): number {
@@ -704,7 +726,8 @@ export class NaverBlogAutomation {
     // CDP UA override + brands
     const userAgent = profile.userAgent;
     const chromeVersion = userAgent.match(/Chrome\/(\d+)/)?.[1] || '134';
-    const fullChromeVersion = userAgent.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/)?.[1] || `${chromeVersion}.0.0.0`;
+    // UA 는 축약형이라 전체 빌드가 없다 — UA-CH 에는 실제 빌드를 넣는다(실제 Chrome 동작).
+    const fullChromeVersion = profile.fullVersion || `${chromeVersion}.0.0.0`;
 
     const seed = parseInt(chromeVersion);
     const brandOrders = [[0,1,2],[0,2,1],[1,0,2],[1,2,0],[2,0,1],[2,1,0]];
@@ -1722,6 +1745,7 @@ export class NaverBlogAutomation {
         }
 
         const chromeExecutablePath = findChromeExecutable();
+        await this.prepareChromeVersion(chromeExecutablePath);
         const profile = this.getAccountConsistentProfile();
         const screenRes = profile.screen;
 
@@ -2003,7 +2027,8 @@ export class NaverBlogAutomation {
       // CDP Network.setUserAgentOverride로 UA + metadata 통합 설정 (Stealth와 동일 메커니즘)
       const userAgent = profile.userAgent;
       const chromeVersion = userAgent.match(/Chrome\/(\d+)/)?.[1] || '134';
-      const fullChromeVersion = userAgent.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/)?.[1] || `${chromeVersion}.0.0.0`;
+      // UA 축약형 대응 — UA-CH 에는 실제 빌드를 넣는다.
+      const fullChromeVersion = profile.fullVersion || `${chromeVersion}.0.0.0`;
 
       // Chrome 공식 brands 순서 알고리즘 (Chromium 소스코드 기반)
       const seed = parseInt(chromeVersion);

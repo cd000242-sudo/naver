@@ -1,8 +1,13 @@
 export interface NaverAutomationProfile {
+  /** 실제 Chrome 과 같은 축약 형태: `Chrome/151.0.0.0`. */
   userAgent: string;
+  /** UA-CH(fullVersionList/uaFullVersion)용 실제 빌드: `151.0.7922.138`. */
+  fullVersion: string;
   screen: { width: number; height: number };
 }
 
+// 감지 실패 시에만 쓰는 최후 폴백. 실제 값은 chromeVersionDetector 가 넘긴다.
+// 여기 값이 낡아도 감지가 되는 한 쓰이지 않는다.
 const CHROME_VERSION_POOL = [
   '145.0.7480.66',
   '145.0.7480.135',
@@ -52,10 +57,13 @@ export function buildNaverAutomationProfile(
 ): NaverAutomationProfile {
   const hash = fnv1aAccountHash(accountId);
   const chromeVersions = chromeVersionHint ? [chromeVersionHint] : CHROME_VERSION_POOL;
-  const version = chromeVersions[hash % chromeVersions.length];
-  const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${version} Safari/537.36`;
+  const fullVersion = chromeVersions[hash % chromeVersions.length];
+  // Chrome 110+ 은 UA 를 축약해 내보낸다 — 실측(2026-08-19) 크롬 151 의 실제 UA 는
+  // `Chrome/151.0.0.0` 이다. 전체 빌드 번호를 UA 에 넣으면 그 자체가 봇 신호가 된다.
+  const majorVersion = fullVersion.split('.')[0];
+  const userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${majorVersion}.0.0.0 Safari/537.36`;
   const hash2 = Math.imul(hash, 0x9e3779b9) >>> 0;
   const screen = SCREEN_CONFIGS[hash2 % SCREEN_CONFIGS.length];
 
-  return { userAgent, screen };
+  return { userAgent, fullVersion, screen };
 }

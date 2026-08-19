@@ -128,7 +128,8 @@ describe('Phase 7.4 characterization - Naver editor automation contracts', () =>
       "from './automation/accountProfilePolicy.js'",
       "from './automation/chromeExecutablePolicy.js'",
       'hashAutomationAccountId(this.options.naverId)',
-      'buildNaverAutomationProfile(this.options.naverId, envHint)',
+      // [2026-08-19] 고정 풀 → 실행될 Chrome 실제 버전으로 교체. 계약은 "계정 ID 로 프로필을 만든다" 는 것.
+      'buildNaverAutomationProfile(this.options.naverId, this.detectedChromeVersion)',
       'isDeviceConfirmUrl(page.url())',
       'isDeviceConfirmBodyText(text)',
       'GoBlogWrite.naver',
