@@ -320,8 +320,9 @@
                     <button type="button" class="pub-mode-tab" data-pubmode="ma">🚀 다중계정 풀오토</button>
                 </div>
 
-                <!-- 네이버 계정 정보 (탭 방식) -->
-                <div class="field"
+                <!-- 네이버 계정 정보 (탭 방식) — 발행 모드 서브탭 3개 모두에서 보여야 하므로
+                     initPublishModeSubtabs 가 단일발행 패널로 옮기지 않도록 id 로 지목한다. -->
+                <div class="field" id="publish-account-block"
                     style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.1)); padding: 1.5rem; border-radius: var(--radius-lg); border: 2px solid rgba(139, 92, 246, 0.3); margin-bottom: 2rem;">
                     <div
                         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">

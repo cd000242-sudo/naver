@@ -2938,9 +2938,16 @@ function initPublishModeSubtabs(): void {
     // 1. 단일 콘텐츠(서브탭 바 이후 형제 전부)를 single 패널로 래핑
     const single = document.createElement('div');
     single.id = 'pub-mode-single-panel';
+    // [2026-08-19] 발행 계정 선택 블록은 세 서브탭에서 모두 필요하다.
+    //   여기서 단일발행 패널로 옮겨 버려서 연속발행·다중계정 탭에선 계정을 고를 수 없었다.
+    //   서브탭 바 바로 아래(패널 바깥)에 그대로 남긴다.
+    const SHARED_ACROSS_MODES = new Set(['publish-account-block']);
     const toMove: Element[] = [];
     let n = subtabs.nextElementSibling;
-    while (n) { toMove.push(n); n = n.nextElementSibling; }
+    while (n) {
+      if (!SHARED_ACROSS_MODES.has(n.id)) toMove.push(n);
+      n = n.nextElementSibling;
+    }
     toMove.forEach((el) => single.appendChild(el));
     formSection.appendChild(single);
 
