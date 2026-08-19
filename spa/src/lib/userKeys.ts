@@ -21,6 +21,7 @@ export type UserKeyField =
     | 'coupangAccessKey'
     | 'coupangSecretKey'
     | 'coupangSubId'
+    | 'claudeToken'
     | 'geminiKey'
     | 'openaiKey'
     | 'brandconnectSpaceId'
@@ -77,16 +78,18 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
     },
     {
         /*
-         * 지식인 답변의 **보조** 경로(사장님 확정 2026-08-20). 1순위는 LEWORD 앱
-         * (클로드코드·코덱스 구독 = 추가 비용 0)이고, 이 키는 앱이 없는 기기에서만
-         * 쓴다. 키는 이 브라우저에만 저장되고 요청에서만 쓰인다.
+         * 지식인 답변 생성(사장님 확정 2026-08-20 "앱 안 켜도 되게") — 1순위는
+         * 클로드코드 **구독 토큰**: 터미널에 `claude setup-token` 한 줄이면 나오고,
+         * 구독 정액이라 추가 과금이 없다. 앱을 켤 필요도 없다. 토큰·키는 이
+         * 브라우저에만 저장되고 요청에서만 쓰인다(서버 저장 없음).
          */
         id: 'ai',
-        label: 'AI 답변 생성 — 앱 없는 기기용 보조',
-        desc: 'LEWORD 앱이 켜져 있으면 클로드코드·코덱스 구독으로 무료 생성되어 이 키가 필요 없습니다. 앱이 없는 기기에서만 넣으세요(Gemini 는 무료 쿼터).',
+        label: 'AI 답변 생성 (지식인 황금질문)',
+        desc: '클로드코드 구독이 있으면 터미널에 claude setup-token 한 줄로 토큰을 만들어 넣으세요 — 앱 없이, 추가 비용 없이 생성됩니다. 구독이 없으면 Gemini 무료 키로도 됩니다.',
         issueUrl: 'https://aistudio.google.com/apikey',
         fields: [
-            { key: 'geminiKey', label: 'Gemini API 키 (무료, 권장)', secret: true, placeholder: 'AIzaSy...' , minLength: 30 },
+            { key: 'claudeToken', label: '클로드코드 토큰 (구독, 권장)', secret: true, placeholder: 'sk-ant-oat...' , minLength: 40 },
+            { key: 'geminiKey', label: 'Gemini API 키 (무료)', secret: true, placeholder: 'AIzaSy...' , minLength: 30 },
             { key: 'openaiKey', label: 'OpenAI API 키 (선택)', secret: true, placeholder: 'sk-...' , minLength: 20 },
         ],
     },

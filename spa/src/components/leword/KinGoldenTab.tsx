@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { fetchKinAnswer, fetchKinQuestion, formatCount } from '../../lib/keywordApi';
 import { bridgeKinAnswer, probeBridge, type BridgeStatus } from '../../lib/bridge';
+import { loadUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -99,6 +100,10 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     };
     const agentReady = typeof bridgeState === 'object' && bridgeState !== null
         && bridgeState.connected && (bridgeState.agents || []).some((agent) => agent.available);
+    /** 키 탭의 토큰/키 — 있으면 앱과 무관하게 생성된다(1순위 경로). */
+    const storedKeys = loadUserKeys();
+    const tokenReady = Boolean(storedKeys.claudeToken);
+    const anyKeyReady = tokenReady || Boolean(storedKeys.geminiKey || storedKeys.openaiKey);
 
     const openWork = (q: KinQ) => {
         probeOnce();
@@ -125,35 +130,32 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
             blogUrl: blogUrl.trim(),
         };
         /*
-         * 1순위는 LEWORD 앱(에이전트) — 클로드코드·코덱스 구독은 이미 내는
-         * 정액이라 추가 비용이 0 이다(사장님 확정 2026-08-20 "에이전트가 있는데
-         * 비용 들이면서 API 키를 왜 쓰냐"). API 키는 앱이 없는 기기용 보조다.
+         * 1순위: 내 API 키 탭의 클로드코드 **구독 토큰**(사장님 확정 2026-08-20
+         * "앱 안 켜도 어드민처럼 되게") — 앱 없이, 추가 비용 없이 서버가 바로
+         * 생성한다. 토큰/키가 없을 때만 LEWORD 앱(브리지)을 시도한다.
          */
-        const viaApp = await bridgeKinAnswer(input);
-        if (viaApp.status === 'ok') {
-            setGenerating(false);
-            setDraft(viaApp.answer);
-            return;
-        }
-        if (viaApp.status === 'error') {
-            setGenerating(false);
-            setGenNote(`생성 실패: ${viaApp.message}`);
-            return;
-        }
-        const appProblem = viaApp.status === 'outdated'
-            ? 'LEWORD 앱 버전이 낮습니다 — 앱을 껐다 켜면 자동 업데이트됩니다.'
-            : 'LEWORD 앱이 꺼져 있습니다 — 앱을 켜면 클로드코드·코덱스 구독으로 추가 비용 없이 생성됩니다.';
         const viaKeys = await fetchKinAnswer(input);
-        setGenerating(false);
         if (viaKeys.ok && viaKeys.data?.answer) {
+            setGenerating(false);
             setDraft(viaKeys.data.answer);
             return;
         }
         if (viaKeys.error && viaKeys.error !== 'needs-keys') {
-            setGenNote(`${appProblem} (보조 경로도 실패: ${viaKeys.message || viaKeys.error})`);
+            setGenerating(false);
+            setGenNote(`생성 실패: ${viaKeys.message || viaKeys.error}`);
             return;
         }
-        setGenNote(`${appProblem} 앱 없는 기기라면 내 API 키 탭의 Gemini 무료 키로도 됩니다.`);
+        const viaApp = await bridgeKinAnswer(input);
+        setGenerating(false);
+        if (viaApp.status === 'ok') {
+            setDraft(viaApp.answer);
+            return;
+        }
+        if (viaApp.status === 'error') {
+            setGenNote(`생성 실패: ${viaApp.message}`);
+            return;
+        }
+        setGenNote('내 API 키 탭에 클로드코드 토큰(터미널에서 claude setup-token 한 줄, 구독이라 무료)을 넣으면 앱 없이 바로 생성됩니다. Gemini 무료 키나 LEWORD 앱 실행으로도 됩니다.');
     };
 
     const copyDraft = () => {
@@ -309,14 +311,16 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                             <section>
                                 <strong>답변 초안 — 깔끔·담백·정확, AI 티 0</strong>
                                 {/* 연동 상태 — 안 된 단계만 짚어 준다. 실측이고, 지어낸 상태 표시는 없다. */}
-                                <p className={`lw-kg-bridge${agentReady ? ' ok' : ''}`}>
-                                    {bridgeState === 'probing' || bridgeState === null
-                                        ? '연동 상태 확인 중…'
-                                        : agentReady
-                                            ? '✅ 내 PC 의 AI 연동됨 — 클로드코드·코덱스 구독으로 추가 비용 없이 생성'
-                                            : typeof bridgeState === 'object' && bridgeState?.connected
-                                                ? 'LEWORD 앱은 연결됐지만 클로드코드·코덱스 로그인이 없습니다 — 내 API 키 탭의 연동 안내를 봐 주세요.'
-                                                : 'LEWORD 앱 연결 안 됨 — 앱을 켜면 내 구독으로 무료 생성됩니다. 앱이 없다면 다운로드 후 연동하세요.'}
+                                <p className={`lw-kg-bridge${anyKeyReady || agentReady ? ' ok' : ''}`}>
+                                    {anyKeyReady
+                                        ? tokenReady
+                                            ? '✅ 클로드코드 토큰 연동됨 — 앱 없이, 구독으로 추가 비용 없이 생성'
+                                            : '✅ AI 키 연동됨 — 앱 없이 생성됩니다'
+                                        : bridgeState === 'probing' || bridgeState === null
+                                            ? '연동 상태 확인 중…'
+                                            : agentReady
+                                                ? '✅ 내 PC 의 LEWORD 앱 연동됨 — 구독으로 추가 비용 없이 생성'
+                                                : '연동 전 — 내 API 키 탭에 클로드코드 토큰(claude setup-token, 구독 무료)을 넣으면 앱 없이 됩니다.'}
                                 </p>
                                 <textarea
                                     className="lw-kg-draft"
