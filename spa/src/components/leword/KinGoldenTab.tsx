@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { fetchKinAnswer, fetchKinQuestion, formatCount } from '../../lib/keywordApi';
-import { bridgeKinAnswer } from '../../lib/bridge';
+import { bridgeKinAnswer, probeBridge, type BridgeStatus } from '../../lib/bridge';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -86,7 +86,22 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     const linksInLast9 = ledger.slice(0, 9).filter((entry) => entry.withLink).length;
     const linkAllowed = linksInLast9 === 0;
 
+    /*
+     * 연동 상태 실측 — 누구나(사장님뿐 아니라) 자기 PC 앱 + 자기 구독으로 쓰는
+     * 구조다. 안 되는 단계(앱 꺼짐/CLI 로그인 전)만 짚어 주면 사용자가 헤매지
+     * 않는다. 첫 작업대 열기에서 한 번만 잰다(상태 조회가 몇 초 걸린다).
+     */
+    const [bridgeState, setBridgeState] = useState<BridgeStatus | 'probing' | null>(null);
+    const probeOnce = () => {
+        if (bridgeState !== null) return;
+        setBridgeState('probing');
+        probeBridge().then(setBridgeState);
+    };
+    const agentReady = typeof bridgeState === 'object' && bridgeState !== null
+        && bridgeState.connected && (bridgeState.agents || []).some((agent) => agent.available);
+
     const openWork = (q: KinQ) => {
+        probeOnce();
         setWork(q);
         setDraft('');
         setGenNote('');
@@ -293,6 +308,16 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
 
                             <section>
                                 <strong>답변 초안 — 깔끔·담백·정확, AI 티 0</strong>
+                                {/* 연동 상태 — 안 된 단계만 짚어 준다. 실측이고, 지어낸 상태 표시는 없다. */}
+                                <p className={`lw-kg-bridge${agentReady ? ' ok' : ''}`}>
+                                    {bridgeState === 'probing' || bridgeState === null
+                                        ? '연동 상태 확인 중…'
+                                        : agentReady
+                                            ? '✅ 내 PC 의 AI 연동됨 — 클로드코드·코덱스 구독으로 추가 비용 없이 생성'
+                                            : typeof bridgeState === 'object' && bridgeState?.connected
+                                                ? 'LEWORD 앱은 연결됐지만 클로드코드·코덱스 로그인이 없습니다 — 내 API 키 탭의 연동 안내를 봐 주세요.'
+                                                : 'LEWORD 앱 연결 안 됨 — 앱을 켜면 내 구독으로 무료 생성됩니다. 앱이 없다면 다운로드 후 연동하세요.'}
+                                </p>
                                 <textarea
                                     className="lw-kg-draft"
                                     value={draft}

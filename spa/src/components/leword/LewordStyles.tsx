@@ -268,6 +268,8 @@ function LewordStyles() {
             .lw-kg-linkbox input { accent-color: #ffa500; width: 15px; height: 15px; }
             .lw-kg-linkbox.off { opacity: .45; cursor: not-allowed; }
             .lw-kg-bloginput { width: 100%; margin-top: 8px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; }
+            .lw-kg-bridge { margin: 6px 0 10px; font-size: 12.5px; color: rgba(235,242,250,.6); }
+            .lw-kg-bridge.ok { color: #2ecc71; }
             .lw-kg-work-note { margin: 8px 0 0; font-size: 12.5px; color: rgba(235,242,250,.6); }
             .lw-kg-work-note a { color: #69b7ff; }
             .lw-kg-ledger p { margin: 0; font-size: 13px; color: rgba(235,242,250,.75); }
