@@ -95,6 +95,76 @@ button { cursor: pointer; font-family: inherit; }
     cursor: zoom-in;
 }
 
+/*
+ * 내비 링크가 9개라 1024px 아래에서는 가로 폭을 초과한다 — 뒤쪽 3개(커뮤니티·
+ * 다운로드·주문조회)가 찌그러져 죽은 버튼처럼 보이던 원인(2026-08-19 사장님 제보).
+ * 넓은 화면에서도 혹시 넘치면 줄바꿈으로 살린다.
+ */
+.nav-links {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.nav-links a {
+    white-space: nowrap;
+}
+
+/*
+ * 769~1024px(좁은 노트북·앱 창)에서도 햄버거로 전환 — 링크 9개가 이 폭에선
+ * 절대 안 들어간다. 내비 규칙만 여기로 옮겼다(다른 모바일 레이아웃 규칙을
+ * 같이 올리면 태블릿 그리드가 1열로 무너지는 부작용이 난다).
+ */
+@media (max-width: 1024px) {
+    .nav-hamburger {
+        display: inline-flex !important;
+        width: 42px !important;
+        height: 42px !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .nav-links {
+        display: none !important;
+    }
+
+    .nav-links.mobile-open {
+        position: fixed;
+        top: 58px;
+        left: 0;
+        right: 0;
+        z-index: 998;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px !important;
+        max-height: calc(100dvh - 58px);
+        overflow-y: auto;
+        padding: 14px 16px 18px;
+        background: rgba(5, 10, 18, 0.96);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.42);
+        backdrop-filter: blur(18px);
+    }
+
+    .nav-links.mobile-open a {
+        width: min(320px, 100%);
+        min-height: 44px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.92) !important;
+        font-size: 16px !important;
+        font-weight: 800 !important;
+    }
+
+    .nav-links.mobile-open a[aria-current="page"],
+    .nav-links.mobile-open a.nav-link-active {
+        color: #F4D03F !important;
+        background: rgba(244, 208, 63, 0.14) !important;
+    }
+}
+
 @media (max-width: 768px) {
     html { scroll-padding-top: 64px; }
 
