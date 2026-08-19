@@ -70,9 +70,22 @@ function LewordStyles() {
             /* 모바일 햄버거 — 데스크톱에서는 존재하지 않는다. */
             .lw-mobile-toggle, .lw-mobile-menu { display: none; }
             .lw-navi:hover { background: rgba(255,255,255,.045); color: #ebedf2; }
+            /*
+             * 탭별 고유색(사장님 지정 2026-08-20): 황금키워드 금 · 분석 파랑 ·
+             * 지식인 초록 · 제휴 주황 · 유튜브 빨강 · 노출추적 분홍 · API 키 은색.
+             * 아이콘은 항상 제 색이고, 활성 탭은 그 색으로 물든다.
+             */
+            .lw-navi-golden { --tabc: #ffd700; --tabc-soft: rgba(255,215,0,.14); --tabc-line: rgba(255,215,0,.4); }
+            .lw-navi-analyze { --tabc: #69b7ff; --tabc-soft: rgba(105,183,255,.14); --tabc-line: rgba(105,183,255,.4); }
+            .lw-navi-kin { --tabc: #2ecc71; --tabc-soft: rgba(46,204,113,.14); --tabc-line: rgba(46,204,113,.4); }
+            .lw-navi-affiliate { --tabc: #ff8a3d; --tabc-soft: rgba(255,138,61,.14); --tabc-line: rgba(255,138,61,.4); }
+            .lw-navi-youtube { --tabc: #ff5b5b; --tabc-soft: rgba(255,91,91,.14); --tabc-line: rgba(255,91,91,.4); }
+            .lw-navi-rank { --tabc: #ff6bb3; --tabc-soft: rgba(255,107,179,.14); --tabc-line: rgba(255,107,179,.4); }
+            .lw-navi-keys { --tabc: #c0c8d4; --tabc-soft: rgba(192,200,212,.12); --tabc-line: rgba(192,200,212,.36); }
+            .lw-navi span { color: var(--tabc, currentColor); }
             .lw-navi.on {
-                background: linear-gradient(135deg, rgba(124,92,255,.20), rgba(124,92,255,.06));
-                border-color: rgba(124,92,255,.32);
+                background: linear-gradient(135deg, var(--tabc-soft, rgba(124,92,255,.20)), transparent);
+                border-color: var(--tabc-line, rgba(124,92,255,.32));
                 color: #fff;
             }
 
@@ -240,6 +253,14 @@ function LewordStyles() {
             /* 키워드 옆 복사 — 액션 줄에서 홀로 밀려나던 버튼의 새 자리. */
             .lw-copy-mini { flex: none; margin-left: 2px; padding: 2px 8px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: none; color: rgba(235,242,250,.65); font-size: 11.5px; cursor: pointer; }
             .lw-copy-mini:hover { border-color: rgba(255,215,0,.5); color: #fff; }
+
+            /* ── 노출 추적: 발행 글 전체 감사 표 ── */
+            .lw-audit-badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11.5px; font-weight: 800; }
+            .lw-audit-in { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.4); }
+            .lw-audit-out { background: rgba(255,91,91,.14); color: #ff7b7b; border: 1px solid rgba(255,91,91,.4); }
+            .lw-audit-wait { background: rgba(255,255,255,.05); color: rgba(235,242,250,.55); border: 1px solid rgba(255,255,255,.12); }
+            .lw-audit-why { display: block; margin-top: 4px; font-size: 11px; color: rgba(255,123,123,.75); }
+            .lw-audit-table td { vertical-align: top; }
 
             /* 차트 호버 십자선 값 — 가리킨 점의 기간·상대값. */
             .lw-chart-hover { font-size: 12px; font-weight: 700; fill: #ebf2fa; }
@@ -1190,12 +1211,12 @@ function LewordStyles() {
                     color: #c6ccd9; font-size: 14.5px; font-weight: 700; text-align: left;
                     cursor: pointer;
                 }
-                .lw-mobile-item span { width: 20px; text-align: center; opacity: .85; }
+                .lw-mobile-item span { width: 20px; text-align: center; opacity: .85; color: var(--tabc, currentColor); }
                 .lw-mobile-item em { font-style: normal; flex: 1; }
-                .lw-mobile-item b { color: #b14cff; font-size: 9px; }
+                .lw-mobile-item b { color: var(--tabc, #b14cff); font-size: 9px; }
                 .lw-mobile-item.on {
                     color: #fff;
-                    background: linear-gradient(135deg, rgba(124,92,255,.26), rgba(177,76,255,.08));
+                    background: linear-gradient(135deg, var(--tabc-soft, rgba(124,92,255,.26)), transparent);
                 }
                 .lw-mobile-item:active { background: rgba(255,255,255,.06); }
                 .lw-navi span { display: none; }

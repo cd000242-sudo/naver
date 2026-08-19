@@ -101,7 +101,7 @@ function LewordPage() {
                                 key={tab.id}
                                 type="button"
                                 role="menuitem"
-                                className={`lw-mobile-item${activeTab === tab.id ? ' on' : ''}`}
+                                className={`lw-mobile-item lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}`}
                                 onClick={() => { selectTab(tab.id); setMobileNavOpen(false); }}
                             >
                                 <span aria-hidden="true">{tab.icon}</span>
@@ -117,7 +117,8 @@ function LewordPage() {
                         <button
                             key={tab.id}
                             type="button"
-                            className={`lw-navi${activeTab === tab.id ? ' on' : ''}`}
+                            // 탭별 고유색(사장님 지정 2026-08-20: 금·파랑·초록·주황·빨강·분홍·은색).
+                            className={`lw-navi lw-navi-${tab.id}${activeTab === tab.id ? ' on' : ''}`}
                             aria-current={activeTab === tab.id ? 'page' : undefined}
                             onClick={() => selectTab(tab.id)}
                         >
@@ -147,7 +148,7 @@ function LewordPage() {
                 {activeTab === 'analyze' && <AnalyzeTab initialKeyword={handoffKeyword} />}
                 {activeTab === 'affiliate' && <AffiliateTab onAnalyze={sendToAnalyze} />}
                 {activeTab === 'youtube' && <YoutubeTab onAnalyze={sendToAnalyze} />}
-                {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} />}
+                {activeTab === 'rank' && <RankTab initialKeyword={handoffKeyword} onAnalyze={sendToAnalyze} />}
                 {activeTab === 'keys' && <KeysTab />}
             </section>
         </div>

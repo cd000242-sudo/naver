@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -226,6 +226,19 @@ export const fetchKeywordTrend = (keyword: string) =>
 
 export const checkRank = (keyword: string, target: string) =>
     call<RankResult>('keyword-rank', { keyword, target });
+
+/*
+ * 블로그 노출 감사(2026-08-20) — 주소 하나로 발행 글 전체의 노출·누락·순위.
+ * 글 목록은 플랫폼 피드(네이버·티스토리·워드프레스·블로그스팟 공개 RSS),
+ * 노출·순위는 네이버 블로그검색 상위 100 실측, 공감은 네이버 공개 리액션 API.
+ * 조회수는 어느 플랫폼도 공개 API 가 없어 싣지 않는다.
+ */
+export type BlogAuditPost = { title: string; link: string; publishedAt: string | null; comments: number | null };
+export const auditBlogPosts = (url: string) =>
+    call<{ platform: string; blogId: string | null; posts: BlogAuditPost[]; note?: string }>('blog-audit-posts', { url });
+
+export const auditBlogCheck = (title: string, link: string) =>
+    call<{ rank: number | null; sampled: number; sympathy: number | null }>('blog-audit-check', { title, link });
 
 export const fetchShoppingSignal = (keyword: string) =>
     call<ShoppingSignal>('keyword-shopping', { keyword });

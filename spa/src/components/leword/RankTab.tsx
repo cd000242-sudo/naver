@@ -1,18 +1,27 @@
-import { useEffect, useState } from 'react';
-import { checkRank, type KeywordUsage, type RankResult } from '../../lib/keywordApi';
+import { useEffect, useRef, useState } from 'react';
+import {
+    auditBlogCheck,
+    auditBlogPosts,
+    checkRank,
+    type BlogAuditPost,
+    type KeywordUsage,
+    type RankResult,
+} from '../../lib/keywordApi';
 import { ErrorNote, TabIntro, UsageBar } from './LewordShared';
 
 /**
- * 노출 추적 — 내 글이 이 키워드 검색에서 몇 번째에 있는지.
+ * 노출 추적 — 블로그 주소 하나로 발행 글 전체의 노출·누락·순위를 실측한다
+ * (사장님 설계 2026-08-20: "상태/제목/발행일/순위/댓글·공감/분석하기 이런식으로").
  *
- * 순위는 네이버가 돌려준 목록에서 **직접 센 자리**다. 예측이 아니다.
- * 100위 안에 없으면 "없다"고 말한다. "곧 오를 것" 같은 말은 하지 않는다.
- *
- * 추적 목록은 이 브라우저에만 저장된다. 서버에 계정을 만들 필요가 없고,
- * 사장님 쿼터도 사용자가 직접 누를 때만 쓴다.
+ * 범용이다: 네이버 블로그·티스토리·워드프레스·블로그스팟 — 글 목록은 각
+ * 플랫폼의 공개 피드에서 온다. 노출·순위는 그 글 제목으로 네이버 블로그검색
+ * 상위 100을 직접 스캔해 그 글이 있는 자리를 센 것이고, 공감은 네이버 공개
+ * 리액션 API 실측이다. 예측·추정은 없다 — 조회수는 어느 플랫폼도 공개 API 가
+ * 없어 싣지 않는다(없는 값을 지어내지 않는다).
  */
 
 const STORE_KEY = 'leaderspro.leword.rankTargets.v1';
+const AUDIT_STORE_KEY = 'leaderspro.leword.blogAudit.v1';
 
 type TrackedRow = {
     id: string;
@@ -23,6 +32,13 @@ type TrackedRow = {
     link: string;
     checkedAt: string;
     scanned: number;
+};
+
+type AuditRow = BlogAuditPost & {
+    status: 'wait' | 'checking' | 'done' | 'error';
+    rank: number | null;
+    sampled: number;
+    sympathy: number | null;
 };
 
 function loadTracked(): TrackedRow[] {
@@ -42,7 +58,25 @@ function saveTracked(rows: TrackedRow[]) {
     }
 }
 
-function RankTab({ initialKeyword }: { initialKeyword: string }) {
+type AuditState = { url: string; platform: string; checkedAt: string; rows: AuditRow[] };
+
+function loadAudit(): AuditState | null {
+    try {
+        const parsed = JSON.parse(localStorage.getItem(AUDIT_STORE_KEY) || 'null');
+        return parsed && Array.isArray(parsed.rows) ? parsed : null;
+    } catch {
+        return null;
+    }
+}
+
+const PLATFORM_LABEL: Record<string, string> = {
+    naver: '네이버 블로그',
+    tistory: '티스토리',
+    wordpress: '워드프레스',
+    blogspot: '블로그스팟',
+};
+
+function RankTab({ initialKeyword, onAnalyze }: { initialKeyword: string; onAnalyze?: (keyword: string) => void }) {
     const [keyword, setKeyword] = useState(initialKeyword);
     const [target, setTarget] = useState('');
     const [rows, setRows] = useState<TrackedRow[]>(() => loadTracked());
@@ -50,13 +84,65 @@ function RankTab({ initialKeyword }: { initialKeyword: string }) {
     const [error, setError] = useState<{ code?: string; message?: string; missing?: string[] }>({});
     const [loading, setLoading] = useState(false);
 
+    /** 블로그 전체 감사 상태 — 새로고침해도 남게 이 브라우저에 저장한다. */
+    const [auditUrl, setAuditUrl] = useState('');
+    const [audit, setAudit] = useState<AuditState | null>(() => loadAudit());
+    const [auditLoading, setAuditLoading] = useState(false);
+    const [auditError, setAuditError] = useState('');
+    /** 진행 중 감사를 새 감사가 밀어내면 이전 루프를 멈춘다. */
+    const auditRunId = useRef(0);
+
     useEffect(() => {
         if (initialKeyword) setKeyword(initialKeyword);
     }, [initialKeyword]);
 
+    const persistAudit = (state: AuditState | null) => {
+        setAudit(state);
+        try {
+            if (state) localStorage.setItem(AUDIT_STORE_KEY, JSON.stringify(state));
+        } catch { /* 저장 실패해도 화면은 산다 */ }
+    };
+
+    const runAudit = async () => {
+        const url = auditUrl.trim();
+        if (!url || auditLoading) return;
+        const runId = auditRunId.current + 1;
+        auditRunId.current = runId;
+        setAuditLoading(true);
+        setAuditError('');
+        const listed = await auditBlogPosts(url);
+        if (!listed.ok || !listed.data) {
+            setAuditLoading(false);
+            setAuditError(listed.message || '피드를 읽지 못했습니다.');
+            return;
+        }
+        let state: AuditState = {
+            url,
+            platform: listed.data.platform,
+            checkedAt: new Date().toISOString(),
+            rows: listed.data.posts.map((post) => ({ ...post, status: 'wait', rank: null, sampled: 0, sympathy: null })),
+        };
+        persistAudit(state);
+
+        // 글 하나씩 순서대로 — 진행이 눈에 보이고, API 를 예의 있게 쓴다.
+        for (let index = 0; index < state.rows.length; index += 1) {
+            if (auditRunId.current !== runId) return;
+            state = { ...state, rows: state.rows.map((row, i) => (i === index ? { ...row, status: 'checking' } : row)) };
+            setAudit(state);
+            const post = state.rows[index];
+            const checked = await auditBlogCheck(post.title, post.link);
+            const done: AuditRow = checked.ok && checked.data
+                ? { ...post, status: 'done', rank: checked.data.rank, sampled: checked.data.sampled, sympathy: checked.data.sympathy }
+                : { ...post, status: 'error', rank: null, sampled: 0, sympathy: null };
+            state = { ...state, rows: state.rows.map((row, i) => (i === index ? done : row)) };
+            persistAudit(state);
+        }
+        if (auditRunId.current === runId) setAuditLoading(false);
+    };
+
     const applyResult = (result: RankResult) => {
         const row: TrackedRow = {
-            id: `${result.keyword}${result.target}`,
+            id: `${result.keyword}${result.target}`,
             keyword: result.keyword,
             target: result.target,
             rank: result.found ? result.found.rank : null,
@@ -96,13 +182,101 @@ function RankTab({ initialKeyword }: { initialKeyword: string }) {
         });
     };
 
+    const doneCount = (audit?.rows || []).filter((row) => row.status === 'done' || row.status === 'error').length;
+
     return (
         <>
             <TabIntro
                 title="노출 추적"
-                desc="내 블로그가 그 키워드 검색 결과 몇 번째에 있는지 직접 세어 봅니다. 100위 안에 없으면 없다고 알려 줍니다."
-                source="네이버 블로그 검색 API 상위 200건 스캔"
+                desc="블로그 주소 하나만 넣으면 발행한 글 전체의 노출·누락·순위를 직접 세어 봅니다. 네이버·티스토리·워드프레스·블로그스팟 전부 됩니다. 100위 안에 없으면 없다고 말합니다."
+                source="플랫폼 공개 피드 + 네이버 블로그검색 상위 100 실측 · 공감은 네이버 공개 API"
             />
+
+            <form
+                className="lw-search"
+                onSubmit={(event) => { event.preventDefault(); runAudit(); }}
+            >
+                <input
+                    type="text"
+                    value={auditUrl}
+                    onChange={(event) => setAuditUrl(event.target.value)}
+                    placeholder="블로그 주소 (blog.naver.com/아이디 · ○○.tistory.com · 워드프레스 · blogspot)"
+                    aria-label="점검할 블로그 주소"
+                />
+                <button type="submit" disabled={auditLoading || !auditUrl.trim()}>
+                    {auditLoading ? `점검 중… ${doneCount}/${audit?.rows.length ?? 0}` : '전체 글 점검'}
+                </button>
+            </form>
+
+            {auditError && <div className="lw-note lw-note-error"><strong>{auditError}</strong></div>}
+
+            {audit && audit.rows.length > 0 && (
+                <section className="lw-panel" aria-label="발행 글 노출 점검">
+                    <div className="lw-panel-head">
+                        <h2>{PLATFORM_LABEL[audit.platform] || audit.platform} · 최근 발행 {audit.rows.length}건</h2>
+                        <span>
+                            노출 = 제목 검색 상위 100 안에서 그 글을 찾은 것 · 누락 = 못 찾은 것(차단·저품질 의심)
+                            · 조회수는 공개 API 가 없어 싣지 않습니다
+                        </span>
+                    </div>
+                    <div className="lw-table-scroll">
+                        <table className="lw-table lw-audit-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">상태</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">발행일</th>
+                                    <th scope="col">공감·댓글</th>
+                                    <th scope="col">순위</th>
+                                    <th scope="col" aria-label="분석" />
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {audit.rows.map((row) => (
+                                    <tr key={row.link}>
+                                        <td>
+                                            {row.status === 'wait' && <span className="lw-audit-badge lw-audit-wait">대기</span>}
+                                            {row.status === 'checking' && <span className="lw-audit-badge lw-audit-wait">확인 중…</span>}
+                                            {row.status === 'error' && <span className="lw-audit-badge lw-audit-wait">확인 실패</span>}
+                                            {row.status === 'done' && (row.rank !== null
+                                                ? <span className="lw-audit-badge lw-audit-in">노출</span>
+                                                : <span className="lw-audit-badge lw-audit-out">누락</span>)}
+                                            {row.status === 'done' && row.rank === null && (
+                                                <small className="lw-audit-why">검색 미노출 · 차단(저품질) 의심</small>
+                                            )}
+                                        </td>
+                                        <td className="lw-rank-title">
+                                            <a href={row.link} target="_blank" rel="noreferrer">{row.title}</a>
+                                        </td>
+                                        <td>{row.publishedAt || '—'}</td>
+                                        <td>
+                                            {row.sympathy !== null ? `공감 ${row.sympathy}` : ''}
+                                            {row.sympathy !== null && row.comments !== null ? ' · ' : ''}
+                                            {row.comments !== null ? `댓글 ${row.comments}` : ''}
+                                            {row.sympathy === null && row.comments === null ? '—' : ''}
+                                        </td>
+                                        <td className={row.rank === null ? 'lw-rank-out' : 'lw-rank-in'}>
+                                            {row.status !== 'done' ? '—' : row.rank !== null ? `${row.rank}위` : `${row.sampled}건 중 없음`}
+                                        </td>
+                                        <td className="lw-row-actions">
+                                            {onAnalyze && (
+                                                <button type="button" className="lw-mini" onClick={() => onAnalyze(row.title)}>
+                                                    글 분석하기
+                                                </button>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            )}
+
+            <div className="lw-panel-head" style={{ marginTop: 26 }}>
+                <h2>키워드로 직접 확인</h2>
+                <span>특정 키워드에서 내 블로그가 몇 위인지 하나씩 볼 때</span>
+            </div>
 
             <form
                 className="lw-search lw-search-two"
@@ -130,9 +304,9 @@ function RankTab({ initialKeyword }: { initialKeyword: string }) {
             <UsageBar usage={usage} />
             <ErrorNote error={error.code} message={error.message} missing={error.missing} />
 
-            {rows.length === 0 && !loading && (
+            {rows.length === 0 && !loading && !audit && (
                 <div className="lw-note">
-                    키워드와 블로그 주소를 넣고 확인하면 여기에 쌓입니다. 목록은 이 브라우저에만 저장됩니다.
+                    블로그 주소를 넣고 전체 글 점검을 누르면 발행 글 전체의 노출 상태가 여기에 쌓입니다. 목록은 이 브라우저에만 저장됩니다.
                 </div>
             )}
 
