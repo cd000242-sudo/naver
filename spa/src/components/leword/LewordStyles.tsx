@@ -212,6 +212,8 @@ function LewordStyles() {
             .lw-kin em { font-style: normal; color: #69b7ff; font-size: 11px; font-weight: 800; }
             .lw-kin a { font-size: 12px; color: rgba(235,242,250,.8); text-decoration: none; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); }
             .lw-kin a:hover { border-color: rgba(105,183,255,.5); color: #fff; }
+            /* 조회수 실측 — 어느 질문이 실제로 읽히는지가 글감 우선순위다. */
+            .lw-kin-views { margin-left: 6px; font-size: 11px; color: #69b7ff; font-weight: 700; }
             .lw-note-error { border-color: rgba(255,107,129,.32); background: rgba(255,107,129,.07); }
             .lw-note button {
                 margin-top: 10px; padding: 9px 16px;

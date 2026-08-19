@@ -72,8 +72,8 @@ type PreemptionRow = {
     whySearch?: { text: string; basis?: string } | null;
     /** 지식인 질문 수 실측 — 질문 많음 = 답을 못 찾는 중. */
     kinCount?: number | null;
-    /** 추천·채택 순 상위 질문(제목·링크) — 클릭하면 질문으로 바로 간다. */
-    kinTop?: Array<{ title: string; link: string }> | null;
+    /** 최신 질문 중 조회수 높은 순(제목·링크·조회수 실측) — 클릭하면 질문으로 바로 간다. */
+    kinTop?: Array<{ title: string; link: string; views?: number | null }> | null;
     adsenseReason?: string;
     /** 회차 실측으로 만든 제목 2종(SEO/홈판). 옛 회차 데이터에는 없다. */
     titles?: {
@@ -519,13 +519,16 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         </div>
                                     </div>
 
-                                    {/* 지식인 상위 질문(추천·채택 순) — 클릭하면 질문으로 바로 간다.
-                                        글감의 원료다: 사람들이 정확히 뭘 묻는지가 여기 있다. */}
+                                    {/* 지식인 최신 질문을 조회수 높은 순으로(사장님 지시 2026-08-19).
+                                        조회수는 질문 페이지 실측 — 글감의 원료다: 사람들이 정확히 뭘 묻는지가 여기 있다. */}
                                     {(row.kinTop || []).length > 0 && (
                                         <div className="lw-kin">
-                                            <em>지식인에서 묻는 것</em>
+                                            <em>지식인 최신 질문 · 조회순</em>
                                             {row.kinTop!.map((q) => (
-                                                <a key={q.link} href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
+                                                <a key={q.link} href={q.link} target="_blank" rel="noreferrer">
+                                                    {q.title}
+                                                    {typeof q.views === 'number' && <span className="lw-kin-views">조회 {formatCount(q.views)}</span>}
+                                                </a>
                                             ))}
                                         </div>
                                     )}
@@ -720,23 +723,10 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 </div>
                                             )}
 
-                                            {mindmap[row.keyword]?.data?.monetize && (() => {
-                                                const verdict = mindmap[row.keyword]!.data!.monetize!;
-                                                const label = verdict.verdict === 'good' ? '✅ 쓸 만하다'
-                                                    : verdict.verdict === 'bad' ? '⛔ 광고 수익 안 나온다' : '⚖ 각도에 달렸다';
-                                                return (
-                                                    <div className={`lw-mindmap-money lw-mindmap-money-${verdict.verdict}`}>
-                                                        <div className="lw-mindmap-money-head">
-                                                            💰 광고 수익 관점 — 클릭할까 · 무슨 광고가 뜰까 · 머물까
-                                                            <strong>{label}</strong>
-                                                        </div>
-                                                        <ul>
-                                                            {verdict.points.map((point) => <li key={point.text}>{point.text}</li>)}
-                                                        </ul>
-                                                        {verdict.angle && <p><strong>쓴다면:</strong> {verdict.angle}</p>}
-                                                    </div>
-                                                );
-                                            })()}
+                                            {/*
+                                              * 수익 결론은 카드 본문에 이미 그려진다 — 마인드맵에서 같은
+                                              * 블록을 또 그리던 중복 제거(사장님 지시 2026-08-19).
+                                              */}
                                         </div>
                                     )}
 
