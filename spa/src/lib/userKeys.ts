@@ -41,6 +41,23 @@ export type KeyGroup = {
 
 export const KEY_GROUPS: readonly KeyGroup[] = [
     {
+        /*
+         * 지식인 답변 생성(사장님 확정 2026-08-20 "앱 안 켜도 되게") — 1순위는
+         * 클로드코드 **구독 토큰**: 터미널에 `claude setup-token` 한 줄이면 나오고,
+         * 구독 정액이라 추가 과금이 없다. 앱을 켤 필요도 없다. 토큰·키는 이
+         * 브라우저에만 저장되고 요청에서만 쓰인다(서버 저장 없음).
+         */
+        id: 'ai',
+        label: 'AI 답변 생성 (지식인 황금질문)',
+        desc: '클로드코드 구독이 있으면 터미널에 claude setup-token 한 줄로 토큰을 만들어 넣으세요 — 앱 없이, 추가 비용 없이 생성됩니다. 구독이 없으면 Gemini 무료 키로도 됩니다.',
+        issueUrl: 'https://aistudio.google.com/apikey',
+        fields: [
+            { key: 'claudeToken', label: '클로드코드 토큰 (구독, 권장)', secret: true, placeholder: 'sk-ant-oat...' , minLength: 40 },
+            { key: 'geminiKey', label: 'Gemini API 키 (무료)', secret: true, placeholder: 'AIzaSy...' , minLength: 30 },
+            { key: 'openaiKey', label: 'OpenAI API 키 (선택)', secret: true, placeholder: 'sk-...' , minLength: 20 },
+        ],
+    },
+    {
         id: 'searchad',
         label: '네이버 검색광고',
         desc: '월간 검색량·경쟁도를 조회합니다.',
@@ -74,23 +91,6 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
         fields: [
             { key: 'openApiId', label: '클라이언트 ID', secret: true, placeholder: 'abcdEFGH...' , minLength: 12 },
             { key: 'openApiSecret', label: '클라이언트 시크릿', secret: true, placeholder: '••••••••' , minLength: 8 },
-        ],
-    },
-    {
-        /*
-         * 지식인 답변 생성(사장님 확정 2026-08-20 "앱 안 켜도 되게") — 1순위는
-         * 클로드코드 **구독 토큰**: 터미널에 `claude setup-token` 한 줄이면 나오고,
-         * 구독 정액이라 추가 과금이 없다. 앱을 켤 필요도 없다. 토큰·키는 이
-         * 브라우저에만 저장되고 요청에서만 쓰인다(서버 저장 없음).
-         */
-        id: 'ai',
-        label: 'AI 답변 생성 (지식인 황금질문)',
-        desc: '클로드코드 구독이 있으면 터미널에 claude setup-token 한 줄로 토큰을 만들어 넣으세요 — 앱 없이, 추가 비용 없이 생성됩니다. 구독이 없으면 Gemini 무료 키로도 됩니다.',
-        issueUrl: 'https://aistudio.google.com/apikey',
-        fields: [
-            { key: 'claudeToken', label: '클로드코드 토큰 (구독, 권장)', secret: true, placeholder: 'sk-ant-oat...' , minLength: 40 },
-            { key: 'geminiKey', label: 'Gemini API 키 (무료)', secret: true, placeholder: 'AIzaSy...' , minLength: 30 },
-            { key: 'openaiKey', label: 'OpenAI API 키 (선택)', secret: true, placeholder: 'sk-...' , minLength: 20 },
         ],
     },
     {
