@@ -239,13 +239,29 @@ async function collectNaverSports() {
   const rows = [];
   const seen = new Set();
   for (const entry of entries) {
-    const entity = entitySeedCandidates(entry.title)[0];
-    if (!entity || seen.has(entity)) continue;
+    // 실존결재 — 후보 중 자동완성이 실제로 아는 검색어만 채택한다.
+    // 후보[0] 무조건 승격이 "신경외과"·"충격파치료" 같은 기사 어휘를 띄운 원인.
+    const entity = await pickRealSearchTerm(entitySeedCandidates(entry.title), seen);
+    if (!entity) continue;
     seen.add(entity);
     rows.push({ rank: rows.length + 1, keyword: entity, context: entry.title });
     if (rows.length >= 10) break;
   }
   return rows;
+}
+
+/**
+ * 후보들 중 네이버 자동완성이 결과를 돌려주는 첫 후보 = 사람들이 실제로 치는
+ * 검색어. 아무 후보도 실존하지 않으면 null — 지어내지 않는다.
+ */
+async function pickRealSearchTerm(candidates, seen) {
+  for (const candidate of candidates || []) {
+    if (!candidate || seen.has(candidate)) continue;
+    await new Promise((resolve) => setTimeout(resolve, 150));
+    const expansions = await fetchNaverExpansions(candidate);
+    if (expansions.length > 0) return candidate;
+  }
+  return null;
 }
 
 async function collectNateEntIssues() {
@@ -267,8 +283,9 @@ async function collectNateEntIssues() {
   const rows = [];
   const seen = new Set();
   for (const title of titles) {
-    const entity = entitySeedCandidates(title)[0];
-    if (!entity || seen.has(entity)) continue;
+    // 스포츠 레인과 같은 실존결재 — 자동완성이 아는 검색어만 승격.
+    const entity = await pickRealSearchTerm(entitySeedCandidates(title), seen);
+    if (!entity) continue;
     seen.add(entity);
     rows.push({ rank: rows.length + 1, keyword: entity, context: title });
     if (rows.length >= 10) break;
@@ -1162,14 +1179,23 @@ function entitySeedCandidates(keyword) {
     // 헤드라인 상투어·일반명사 제외("모친"→"모친 뜻", "시청률"→무관 확장)
     .filter((token) => !/^(오늘|내일|전국|긴급|속보|단독|공식|발표|확정|논란|사망|고독사|출연|기록|개장|시청률|반응|이번|바로|여전히|모친|부친|남편|아내|동생|형|누나|어머니|아버지|증조부|조부|장모|시모|가족)$/.test(token));
 
-  // 한국 인명 패턴(성 1자 + 이름 1~2자)을 최우선. 이슈 레인은 인물이 핵심 검색어다.
-  const NAME_RE = /^[김이박최정강조윤장임한오서신권황안송류전홍고문양손배백허남심노하곽성차주우구민유][가-힣]{1,2}$/;
+  /*
+   * 한국 인명은 3자(성 1 + 이름 2)만 인정한다. 1자 이름을 허용했더니 스포츠
+   * 레인에서 "우승"(성 우 + 승)이 인명으로 승격되는 실사고(2026-08-19 스크린샷).
+   * 2자 실명이 드물게 있지만, 오탐 비용(쓰레기 시드)이 미탐 비용보다 크다.
+   */
+  const NAME_RE = /^[김이박최정강조윤장임한오서신권황안송류전홍고문양손배백허남심노하곽성차주우구민유][가-힣]{2}$/;
   // 성씨로 시작하지만 인명이 아닌 흔한 일반어(최종·구성·임신…)는 걸러낸다.
-  const NOT_A_NAME = /^(최종|최고|최근|최대|최소|이번|이상|이후|이전|이유|정부|정도|정식|조사|강화|강남|임신|오전|오후|서울|한국|전국|전체|고속|신규|안전|송출|유지|민간|주요|구성|구매|박스|양측|손실|백만|허가|남녀|심각|하락|하루|성공|성장|차량|주가|주식|우려|김치|문제|양국|배송|노동|권리|황금|안내|송금|전망|홍보|고객)$/;
+  const NOT_A_NAME = /^(최종|최고|최근|최대|최소|이번|이상|이후|이전|이유|정부|정도|정식|조사|강화|강남|임신|오전|오후|서울|한국|전국|전체|고속|신규|안전|송출|유지|민간|주요|구성|구매|박스|양측|손실|백만|허가|남녀|심각|하락|하루|성공|성장|차량|주가|주식|우려|김치|문제|양국|배송|노동|권리|황금|안내|송금|전망|홍보|고객|박빙|정면|신인왕|우승자)$/;
+  // 스포츠·사건 기사 상투어 — 첫/끝 토큰 폴백이 이런 일반명사를 승격하면 안 된다
+  // ("신경외과", "충격파치료" 실사고). 검색어가 아니라 기사 어휘다.
+  const HEADLINE_COMMON = /^(우승|패배|역전|결승|연승|연패|부상|수술|치료|외과|내과|병원|감독|선수|구단|이적|계약|은퇴|복귀|데뷔|충격|경악|논란|파문|근황|공개|심경|고백|눈물|분노|응원|화제|포착|목격|인터뷰|단독|속보|충격파치료|신경외과)$/;
   const names = tokens.filter((token) => NAME_RE.test(token) && !NOT_A_NAME.test(token));
   // 그 외에는 헤드라인 맨 앞/맨 뒤(고유명사가 주로 오는 자리) 순서로
   const ordered = [...names, tokens[0], tokens[tokens.length - 1], ...tokens];
-  return [...new Set(ordered.filter(Boolean))].slice(0, 2);
+  return [...new Set(ordered.filter(Boolean))]
+    .filter((token) => !HEADLINE_COMMON.test(token))
+    .slice(0, 3);
 }
 
 async function attachExpansions(rows) {
