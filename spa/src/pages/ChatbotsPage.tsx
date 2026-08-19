@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ParticlesCanvas from '../components/ParticlesCanvas';
 import { color } from '../styles/tokens';
+import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 
 type Chatbot = {
     category: string;
@@ -111,7 +112,34 @@ const accentMap: Record<Chatbot['accent'], string> = {
     rose: 'linear-gradient(135deg, #fb7185, #e11d48)',
 };
 
+/** 4타일 기본값 — 어드민(SiteContent.chatbots)이 비어 있어도 페이지는 이 값으로 완전하다 */
+const TILE_DEFAULTS = {
+    chatgpt: { title: '쳇지피티 무료챗봇', desc: '리더남 GPTs 9종 — 초안·애드센스·네이버·외부유입·지식인까지 목적별로 골라 쓰세요.' },
+    gemini: {
+        title: '무료 제미나이 챗봇',
+        desc: '부티크 인포의 글쓰기 프롬프트 탭에서 제미나이 전용 챗봇을 바로 사용합니다.',
+        url: 'https://www.boutique-info.com/?page=prompt',
+        cta: '사용하러 가기',
+    },
+    claude: { title: '클로드 스킬', desc: '클로드용 글쓰기 스킬 모음을 준비하고 있습니다. 공개되면 여기서 바로 받아 쓸 수 있어요.' },
+    cafe: { title: '부방장 협업 카페', desc: '부티크 인포 네이버 카페 — 협업·공지·자료를 한곳에서 확인하세요.', url: 'https://cafe.naver.com/boutiqueinfo' },
+};
+
 function ChatbotsPage() {
+    const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
+    const [openHub, setOpenHub] = useState<null | 'chatgpt' | 'claude'>(null);
+
+    useEffect(() => {
+        fetchSiteContent().then(setSiteContent).catch(() => { /* 폴백으로 충분 */ });
+    }, []);
+
+    useEffect(() => {
+        if (!openHub) return;
+        const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpenHub(null); };
+        document.addEventListener('keydown', onKey);
+        return () => document.removeEventListener('keydown', onKey);
+    }, [openHub]);
+
     useEffect(() => {
         const prev = document.title;
         document.title = '무료 챗봇 — Leaders Pro';
@@ -130,6 +158,15 @@ function ChatbotsPage() {
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         return () => observer.disconnect();
     }, []);
+
+    // 어드민 저장값이 있으면 그걸, 없으면 내장 기본값 — 병합이라 일부만 저장해도 안전
+    const cb = siteContent?.chatbots;
+    const bots = (cb?.bots && cb.bots.length ? cb.bots : CHATBOTS) as Chatbot[];
+    const tChatgpt = { ...TILE_DEFAULTS.chatgpt, ...(cb?.chatgpt || {}) };
+    const tGemini = { ...TILE_DEFAULTS.gemini, ...(cb?.gemini || {}) };
+    const tClaude = { ...TILE_DEFAULTS.claude, ...(cb?.claude || {}) };
+    const tCafe = { ...TILE_DEFAULTS.cafe, ...(cb?.cafe || {}) };
+    const claudeSkills = (cb?.claude?.skills || []).filter((s) => s && s.title);
 
     return (
         <>
@@ -182,55 +219,114 @@ function ChatbotsPage() {
                 <section id="chatbots-list" className="chatbots-section dark">
                     <div className="chatbots-wrap">
                         <div className="chatbots-section-head fade-in">
-                            <span className="chatbots-kicker">CHATGPT GPTS</span>
-                            <h2>쳇지피티 무료챗봇</h2>
-                            <p>각 버튼을 누르면 ChatGPT의 해당 GPTs 페이지가 새 창으로 열립니다.</p>
-                        </div>
-                        <div className="chatbot-grid">
-                            {CHATBOTS.map((bot) => (
-                                <article className="chatbot-card fade-in" key={bot.url}>
-                                    <div className="chatbot-card-top">
-                                        <span style={{ background: accentMap[bot.accent] }}>{bot.category}</span>
-                                        <small>무료 GPTs</small>
-                                    </div>
-                                    <h3>{bot.title}</h3>
-                                    <strong>{bot.subtitle}</strong>
-                                    <p>{bot.desc}</p>
-                                    <div className="chatbot-tags">
-                                        {bot.bestFor.map((item) => <em key={item}>{item}</em>)}
-                                    </div>
-                                    <a className="chatbots-btn launch" href={bot.url} target="_blank" rel="noopener noreferrer">
-                                        챗봇 사용하기
-                                    </a>
-                                </article>
-                            ))}
+                            <span className="chatbots-kicker">FREE CHATBOT HUB</span>
+                            <h2>원하는 챗봇을 골라 바로 시작하세요</h2>
+                            <p>쳇지피티 GPTs·제미나이 챗봇·클로드 스킬·협업 카페를 한 화면에 모았습니다.</p>
                         </div>
 
-                        {/* 제미나이 무료챗봇 — 부티크 인포 글쓰기 프롬프트 탭 딥링크 (2026-08-19).
-                            ?page=prompt 는 해당 사이트의 URLSearchParams→showPage 라우팅을 실측 확인하고 걸었다. */}
-                        <a
-                            className="gemini-band fade-in"
-                            href="https://www.boutique-info.com/?page=prompt"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <div className="gemini-band-text">
-                                <span className="chatbots-kicker gemini-kicker">GEMINI CHATBOT</span>
-                                <h3>무료 제미나이 챗봇 사용하러가기</h3>
-                                <p>부티크 인포의 글쓰기 프롬프트 탭에서 제미나이 전용 챗봇을 바로 쓸 수 있습니다.</p>
-                            </div>
-                            <span className="gemini-band-cta">사용하러 가기 →</span>
-                        </a>
-                        <a
-                            className="cafe-line fade-in"
-                            href="https://cafe.naver.com/boutiqueinfo"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            ☕ 부방장 협업 카페 바로가기 <span>부티크 인포 네이버 카페</span>
-                        </a>
+                        {/* 4타일 허브 (2026-08-19) — 내용은 어드민 '사이트 콘텐츠 관리'(SiteContent.chatbots)에서 수정.
+                            제미나이 ?page=prompt 는 해당 사이트의 URLSearchParams→showPage 라우팅을 실측 확인. */}
+                        <div className="hub-grid">
+                            <button type="button" className="hub-tile fade-in" onClick={() => setOpenHub('chatgpt')}>
+                                <div className="hub-tile-top">
+                                    <span className="hub-emoji">🤖</span>
+                                    <span className="hub-badge">{bots.length}개 GPTs</span>
+                                </div>
+                                <h3>{tChatgpt.title}</h3>
+                                <p>{tChatgpt.desc}</p>
+                                <span className="hub-cta">목록 열기 →</span>
+                            </button>
+
+                            <a className="hub-tile fade-in" href={tGemini.url} target="_blank" rel="noopener noreferrer">
+                                <div className="hub-tile-top">
+                                    <span className="hub-emoji">✨</span>
+                                    <span className="hub-badge purple">바로 사용</span>
+                                </div>
+                                <h3>{tGemini.title}</h3>
+                                <p>{tGemini.desc}</p>
+                                <span className="hub-cta">{tGemini.cta} →</span>
+                            </a>
+
+                            <button type="button" className="hub-tile fade-in" onClick={() => setOpenHub('claude')}>
+                                <div className="hub-tile-top">
+                                    <span className="hub-emoji">🧩</span>
+                                    <span className={claudeSkills.length ? 'hub-badge green' : 'hub-badge dim'}>
+                                        {claudeSkills.length ? `${claudeSkills.length}개 스킬` : '준비 중'}
+                                    </span>
+                                </div>
+                                <h3>{tClaude.title}</h3>
+                                <p>{tClaude.desc}</p>
+                                <span className="hub-cta">{claudeSkills.length ? '목록 열기 →' : '소개 보기 →'}</span>
+                            </button>
+
+                            <a className="hub-tile fade-in" href={tCafe.url} target="_blank" rel="noopener noreferrer">
+                                <div className="hub-tile-top">
+                                    <span className="hub-emoji">☕</span>
+                                    <span className="hub-badge gold">NAVER CAFE</span>
+                                </div>
+                                <h3>{tCafe.title}</h3>
+                                <p>{tCafe.desc}</p>
+                                <span className="hub-cta">카페 바로가기 →</span>
+                            </a>
+                        </div>
                     </div>
                 </section>
+
+                {openHub && (
+                    <div className="hub-modal-backdrop" onClick={() => setOpenHub(null)}>
+                        <div className="hub-modal" role="dialog" aria-modal="true" onClick={(e) => e.stopPropagation()}>
+                            <div className="hub-modal-head">
+                                <h3>{openHub === 'chatgpt' ? tChatgpt.title : tClaude.title}</h3>
+                                <button type="button" className="hub-modal-close" onClick={() => setOpenHub(null)} aria-label="닫기">✕</button>
+                            </div>
+                            {openHub === 'chatgpt' ? (
+                                // 모달 안 카드는 fade-in 을 쓰지 않는다 — 옵저버가 이미 지나가 영영 안 보이게 된다
+                                <div className="chatbot-grid in-modal">
+                                    {bots.map((bot) => (
+                                        <article className="chatbot-card" key={bot.url}>
+                                            <div className="chatbot-card-top">
+                                                <span style={{ background: accentMap[(bot.accent as Chatbot['accent'])] || accentMap.gold }}>{bot.category}</span>
+                                                <small>무료 GPTs</small>
+                                            </div>
+                                            <h3>{bot.title}</h3>
+                                            <strong>{bot.subtitle}</strong>
+                                            <p>{bot.desc}</p>
+                                            <div className="chatbot-tags">
+                                                {(bot.bestFor || []).map((item) => <em key={item}>{item}</em>)}
+                                            </div>
+                                            <a className="chatbots-btn launch" href={bot.url} target="_blank" rel="noopener noreferrer">
+                                                챗봇 사용하기
+                                            </a>
+                                        </article>
+                                    ))}
+                                </div>
+                            ) : claudeSkills.length ? (
+                                <div className="chatbot-grid in-modal">
+                                    {claudeSkills.map((skill) => (
+                                        <article className="chatbot-card" key={skill.title}>
+                                            <div className="chatbot-card-top">
+                                                <span style={{ background: accentMap.purple }}>클로드 스킬</span>
+                                                <small>무료 스킬</small>
+                                            </div>
+                                            <h3>{skill.title}</h3>
+                                            <p>{skill.desc}</p>
+                                            {skill.url ? (
+                                                <a className="chatbots-btn launch" href={skill.url} target="_blank" rel="noopener noreferrer">
+                                                    스킬 받기
+                                                </a>
+                                            ) : null}
+                                        </article>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="hub-empty">
+                                    <p><b>클로드용 글쓰기 스킬을 준비하고 있습니다.</b></p>
+                                    <p>공개되면 이 자리에서 바로 받아 쓸 수 있어요. 공지사항을 지켜봐 주세요.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
 
                 <section className="chatbots-section light">
                     <div className="chatbots-wrap">
@@ -277,58 +373,102 @@ function ChatbotsPage() {
                     background: rgba(5, 8, 12, 0.58);
                 }
 
-                /* 제미나이 밴드 + 협업 카페 (2026-08-19) — 쳇지피티 그리드와 같은 카드 문법, 액센트만 퍼플 */
-                .gemini-band {
+                /* 4타일 허브 + 목록 모달 (2026-08-19) — 기존 카드 문법 확장, 액센트는 accentMap 계열 */
+                .hub-grid {
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 22px;
+                }
+                .hub-tile {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 10px;
+                    padding: 30px 30px 26px;
+                    background: rgba(255, 255, 255, 0.04);
+                    border: 1px solid rgba(255, 255, 255, 0.10);
+                    border-radius: 18px;
+                    text-align: left;
+                    text-decoration: none;
+                    color: inherit;
+                    cursor: pointer;
+                    font: inherit;
+                    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+                }
+                .hub-tile:hover {
+                    transform: translateY(-4px);
+                    border-color: rgba(244, 201, 93, 0.45);
+                    box-shadow: 0 14px 44px rgba(0, 0, 0, 0.45);
+                }
+                .hub-tile-top {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    gap: 20px;
-                    margin-top: 28px;
-                    padding: 26px 30px;
-                    background: linear-gradient(135deg, rgba(139, 92, 246, 0.14), rgba(109, 40, 217, 0.08));
-                    border: 1px solid rgba(167, 139, 250, 0.35);
-                    border-radius: 18px;
-                    text-decoration: none;
-                    color: inherit;
-                    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+                    width: 100%;
                 }
-                .gemini-band:hover {
-                    transform: translateY(-3px);
-                    border-color: rgba(167, 139, 250, 0.65);
-                    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
-                }
-                .gemini-kicker { color: #a78bfa; }
-                .gemini-band-text h3 { margin: 6px 0 8px; font-size: 1.35rem; font-weight: 800; color: #f8fafc; }
-                .gemini-band-text p { margin: 0; color: #b6bcd0; font-size: 0.92rem; line-height: 1.6; }
-                .gemini-band-cta {
-                    flex-shrink: 0;
-                    padding: 13px 22px;
-                    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-                    color: #fff;
-                    border-radius: 12px;
+                .hub-emoji { font-size: 2.1rem; line-height: 1; }
+                .hub-badge {
+                    padding: 5px 12px;
+                    border-radius: 999px;
+                    font-size: 0.75rem;
                     font-weight: 800;
-                    font-size: 0.95rem;
-                    white-space: nowrap;
+                    color: #f4c95d;
+                    background: rgba(244, 201, 93, 0.12);
+                    border: 1px solid rgba(244, 201, 93, 0.35);
                 }
-                .cafe-line {
+                .hub-badge.purple { color: #c4b5fd; background: rgba(139, 92, 246, 0.14); border-color: rgba(167, 139, 250, 0.4); }
+                .hub-badge.green { color: #86efac; background: rgba(34, 197, 94, 0.12); border-color: rgba(74, 222, 128, 0.35); }
+                .hub-badge.gold { color: #f4c95d; background: rgba(244, 201, 93, 0.12); border-color: rgba(244, 201, 93, 0.35); }
+                .hub-badge.dim { color: #9aa3b5; background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.14); }
+                .hub-tile h3 { margin: 6px 0 0; font-size: 1.3rem; font-weight: 800; color: #f8fafc; }
+                .hub-tile p { margin: 0; color: rgba(255, 255, 255, 0.72); font-size: 0.92rem; line-height: 1.65; }
+                .hub-cta { margin-top: 10px; color: #f4c95d; font-weight: 800; font-size: 0.92rem; }
+
+                .hub-modal-backdrop {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 1000;
+                    background: rgba(3, 6, 10, 0.78);
+                    backdrop-filter: blur(6px);
                     display: flex;
                     align-items: center;
-                    gap: 10px;
-                    margin-top: 14px;
-                    padding: 15px 22px;
-                    background: rgba(255, 255, 255, 0.04);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
-                    border-radius: 14px;
-                    text-decoration: none;
-                    color: #e6e8ee;
-                    font-weight: 700;
-                    font-size: 0.95rem;
-                    transition: border-color 0.2s ease, background 0.2s ease;
+                    justify-content: center;
+                    padding: 28px;
                 }
-                .cafe-line:hover { border-color: rgba(201, 168, 76, 0.45); background: rgba(201, 168, 76, 0.08); }
-                .cafe-line span { color: #8b93a7; font-weight: 500; font-size: 0.85rem; }
+                .hub-modal {
+                    width: min(1080px, 100%);
+                    max-height: 86vh;
+                    overflow-y: auto;
+                    background: #0c1017;
+                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    border-radius: 20px;
+                    padding: 26px 28px 30px;
+                    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+                }
+                .hub-modal-head {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+                }
+                .hub-modal-head h3 { margin: 0; font-size: 1.4rem; font-weight: 800; color: #f8fafc; }
+                .hub-modal-close {
+                    width: 38px;
+                    height: 38px;
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.14);
+                    background: rgba(255, 255, 255, 0.05);
+                    color: #e6e8ee;
+                    font-size: 1rem;
+                    cursor: pointer;
+                }
+                .hub-modal-close:hover { border-color: rgba(244, 201, 93, 0.5); color: #f4c95d; }
+                .chatbot-grid.in-modal { margin-top: 4px; }
+                .hub-empty { padding: 26px 6px 10px; color: rgba(255, 255, 255, 0.75); line-height: 1.7; }
+                .hub-empty b { color: #f8fafc; }
                 @media (max-width: 720px) {
-                    .gemini-band { flex-direction: column; align-items: flex-start; }
+                    .hub-grid { grid-template-columns: 1fr; }
+                    .hub-modal { padding: 20px 16px 24px; }
                 }
 
                 .chatbots-wrap {

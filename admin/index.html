@@ -1412,6 +1412,39 @@
                 </div>
 
                 <div id="editor-sub-home" class="editor-subpanel active" role="tabpanel" aria-labelledby="editor-tab-home" aria-hidden="false">
+                    <!-- 무료 챗봇 4타일 (2026-08-19) — ChatbotsPage 가 SiteContent.chatbots 를 읽는다.
+                         비워둔 칸은 저장 patch 에서 빠져(compactObject) 사이트 내장 기본값이 쓰인다. -->
+                    <div class="editor-card">
+                        <h4>무료 챗봇 4타일</h4>
+                        <p class="editor-help">무료 챗봇 페이지의 타일 문구·링크·목록입니다. 비워둔 칸은 사이트 기본값이 그대로 쓰입니다. 저장하면 실제 페이지가 같은 데이터를 읽습니다.</p>
+                        <label>쳇지피티 타일 제목</label>
+                        <input id="edit-cb-chatgpt-title" placeholder="쳇지피티 무료챗봇">
+                        <label>쳇지피티 타일 설명</label>
+                        <textarea id="edit-cb-chatgpt-desc" rows="2" placeholder="리더남 GPTs 9종 — 목적별로 골라 쓰세요."></textarea>
+                        <label>제미나이 타일 제목</label>
+                        <input id="edit-cb-gemini-title" placeholder="무료 제미나이 챗봇">
+                        <label>제미나이 타일 설명</label>
+                        <textarea id="edit-cb-gemini-desc" rows="2" placeholder="부티크 인포의 글쓰기 프롬프트 탭에서 바로 사용합니다."></textarea>
+                        <label>제미나이 이동 주소 / 버튼 문구</label>
+                        <input id="edit-cb-gemini-url" placeholder="https://www.boutique-info.com/?page=prompt">
+                        <input id="edit-cb-gemini-cta" placeholder="사용하러 가기">
+                        <label>클로드 타일 제목</label>
+                        <input id="edit-cb-claude-title" placeholder="클로드 스킬">
+                        <label>클로드 타일 설명</label>
+                        <textarea id="edit-cb-claude-desc" rows="2" placeholder="클로드용 글쓰기 스킬 모음을 준비하고 있습니다."></textarea>
+                        <label>클로드 스킬 목록 — JSON 배열. 넣으면 '준비 중'이 목록으로 바뀝니다</label>
+                        <textarea id="edit-cb-claude-skills" rows="5" placeholder='[
+  { "title": "스킬 이름", "desc": "설명", "url": "https://..." }
+]'></textarea>
+                        <label>협업 카페 제목 / 주소</label>
+                        <input id="edit-cb-cafe-title" placeholder="부방장 협업 카페">
+                        <input id="edit-cb-cafe-url" placeholder="https://cafe.naver.com/boutiqueinfo">
+                        <label>협업 카페 설명</label>
+                        <textarea id="edit-cb-cafe-desc" rows="2" placeholder="부티크 인포 네이버 카페 — 협업·공지·자료."></textarea>
+                        <label>쳇지피티 GPTs 목록 — JSON 배열. 비우면 기본 9종 유지</label>
+                        <textarea id="edit-cb-bots" rows="6" placeholder="[]"></textarea>
+                    </div>
+
                     <!-- 저장원(edit-hero-*)은 그대로 두되 입력 UI 는 숨긴다.
                          Hero 편집은 위쪽 '홈 화면 영역별 바로 수정'(cms-hero-*) 하나로 통일한다.
                          입력칸이 두 벌이면 값이 엇갈려 미리보기가 뒤죽박죽 된다. -->
@@ -6425,6 +6458,23 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             setValue('edit-hero-proofs', proofsToText(hero.proofs));
             void loadKeywordBriefingFromApi();
 
+            // 무료 챗봇 4타일 (2026-08-19) — 비어 있으면 칸도 비워 사이트 기본값이 쓰이게 둔다
+            const chatbots = data.chatbots || {};
+            const jsonOrEmpty = (v) => (Array.isArray(v) && v.length ? JSON.stringify(v, null, 2) : '');
+            setValue('edit-cb-chatgpt-title', chatbots.chatgpt?.title);
+            setValue('edit-cb-chatgpt-desc', chatbots.chatgpt?.desc);
+            setValue('edit-cb-gemini-title', chatbots.gemini?.title);
+            setValue('edit-cb-gemini-desc', chatbots.gemini?.desc);
+            setValue('edit-cb-gemini-url', chatbots.gemini?.url);
+            setValue('edit-cb-gemini-cta', chatbots.gemini?.cta);
+            setValue('edit-cb-claude-title', chatbots.claude?.title);
+            setValue('edit-cb-claude-desc', chatbots.claude?.desc);
+            setValue('edit-cb-claude-skills', jsonOrEmpty(chatbots.claude?.skills));
+            setValue('edit-cb-cafe-title', chatbots.cafe?.title);
+            setValue('edit-cb-cafe-desc', chatbots.cafe?.desc);
+            setValue('edit-cb-cafe-url', chatbots.cafe?.url);
+            setValue('edit-cb-bots', jsonOrEmpty(chatbots.bots));
+
             setValue('pricing-page-eyebrow', pricingPage.eyebrow);
             setValue('pricing-tab-label', pricingPage.tabLabel);
             setValue('pricing-page-title', pricingPage.title);
@@ -6732,6 +6782,37 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
             return downloads;
         }
 
+        /** 무료 챗봇 4타일 수집 (2026-08-19) — 빈 칸은 compactObject 가 걷어내 사이트 기본값이 산다 */
+        function collectChatbotsTiles() {
+            const parseJsonArray = (id, label) => {
+                const raw = getValue(id);
+                if (!raw || !raw.trim()) return undefined;
+                try {
+                    const parsed = JSON.parse(raw);
+                    if (!Array.isArray(parsed)) throw new Error('배열이 아닙니다');
+                    return parsed;
+                } catch (err) {
+                    throw new Error(label + ' JSON 형식을 확인해주세요: ' + (err.message || '파싱 실패'));
+                }
+            };
+            return {
+                chatgpt: { title: getValue('edit-cb-chatgpt-title'), desc: getValue('edit-cb-chatgpt-desc') },
+                gemini: {
+                    title: getValue('edit-cb-gemini-title'),
+                    desc: getValue('edit-cb-gemini-desc'),
+                    url: getValue('edit-cb-gemini-url'),
+                    cta: getValue('edit-cb-gemini-cta')
+                },
+                claude: {
+                    title: getValue('edit-cb-claude-title'),
+                    desc: getValue('edit-cb-claude-desc'),
+                    skills: parseJsonArray('edit-cb-claude-skills', '클로드 스킬 목록')
+                },
+                cafe: { title: getValue('edit-cb-cafe-title'), desc: getValue('edit-cb-cafe-desc'), url: getValue('edit-cb-cafe-url') },
+                bots: parseJsonArray('edit-cb-bots', '쳇지피티 GPTs 목록')
+            };
+        }
+
         function collectEditorPatch() {
             // force:true — 영역 편집기(cms-hero-*) 값을 무조건 저장원(edit-hero-*)에 복사한다.
             // force 없이 두면 영역 편집기에 포커스가 없을 때 동기화가 스킵돼 stale 값이 저장된다.
@@ -6765,6 +6846,7 @@ gh secret set CLAUDE_CODE_OAUTH_TOKEN -R cd000242-sudo/leword-app</code>
                 productsPage: collectProductsPage(),
                 products: collectProducts(),
                 downloads: collectDownloads(),
+                chatbots: collectChatbotsTiles(),
                 theme: {
                     pricingBgImage: getValue('theme-pricing-bg-image'),
                     productsBgImage: getValue('theme-products-bg-image'),
