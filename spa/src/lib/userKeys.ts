@@ -22,6 +22,9 @@ export type UserKeyField =
     | 'coupangSecretKey'
     | 'coupangSubId'
     | 'claudeToken'
+    /** 회전식 refresh 토큰 — 만료 시 서버가 갱신하고 화면이 다시 저장한다. 손입력 UI 없음. */
+    | 'claudeRefresh'
+    | 'claudeExpiresAt'
     | 'geminiKey'
     | 'openaiKey'
     | 'brandconnectSpaceId'

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { exchangeClaudeOauth } from '../../lib/keywordApi';
 import { probeBridge, type BridgeStatus } from '../../lib/bridge';
 import {
     KEY_GROUPS,
@@ -32,6 +33,62 @@ function KeysTab() {
      */
     const [bridge, setBridge] = useState<BridgeStatus | null>(null);
     const [connecting, setConnecting] = useState(false);
+
+    /*
+     * 구독 연결(버튼 한 번) — 클로드코드와 같은 공개 OAuth(PKCE). 승인 화면이
+     * 코드를 보여 주면 그 한 줄만 붙여넣는다(우리 도메인은 리다이렉트 허용목록에
+     * 없어 이게 물리적 최소다). refresh 토큰까지 저장돼 만료는 자동 갱신된다.
+     */
+    const [oauth, setOauth] = useState<{ verifier: string } | null>(null);
+    const [oauthCode, setOauthCode] = useState('');
+    const [oauthBusy, setOauthBusy] = useState(false);
+    const [oauthNote, setOauthNote] = useState('');
+
+    const base64url = (bytes: Uint8Array) => btoa(String.fromCharCode(...bytes))
+        .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+    const startClaudeConnect = async () => {
+        const raw = new Uint8Array(32);
+        crypto.getRandomValues(raw);
+        const verifier = base64url(raw);
+        const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier)));
+        const stateRaw = new Uint8Array(24);
+        crypto.getRandomValues(stateRaw);
+        setOauth({ verifier });
+        setOauthCode('');
+        setOauthNote('');
+        const url = 'https://claude.ai/oauth/authorize?code=true'
+            + '&client_id=9d1c250a-e61b-44d9-88ed-5944d1962f5e'
+            + '&response_type=code'
+            + `&redirect_uri=${encodeURIComponent('https://platform.claude.com/oauth/code/callback')}`
+            + `&scope=${encodeURIComponent('user:profile user:inference')}`
+            + `&code_challenge=${base64url(digest)}`
+            + '&code_challenge_method=S256'
+            + `&state=${base64url(stateRaw)}`;
+        window.open(url, '_blank', 'noreferrer');
+    };
+
+    const finishClaudeConnect = async () => {
+        if (!oauth || !oauthCode.trim() || oauthBusy) return;
+        setOauthBusy(true);
+        setOauthNote('');
+        const result = await exchangeClaudeOauth(oauthCode.trim(), oauth.verifier);
+        setOauthBusy(false);
+        if (!result.ok || !result.data?.accessToken) {
+            setOauthNote(`연결 실패: ${result.message || result.error || '코드를 다시 확인해 주세요'}`);
+            return;
+        }
+        const next = {
+            ...keys,
+            claudeToken: result.data.accessToken,
+            claudeRefresh: result.data.refreshToken || '',
+            claudeExpiresAt: String(result.data.expiresAt || ''),
+        };
+        setKeys(next);
+        saveUserKeys(next);
+        setOauth(null);
+        setOauthNote('✅ 연결됐습니다 — 추론·답변이 전부 구독으로, 앱 없이 돕니다. 만료는 자동 갱신됩니다.');
+    };
     useEffect(() => { probeBridge().then(setBridge); }, []);
     const claudeAgent = bridge?.agents?.find((agent) => agent.provider === 'claude');
     const connected = Boolean(bridge?.connected && claudeAgent?.available);
@@ -113,10 +170,33 @@ function KeysTab() {
                     {!connected && !keys.claudeToken && <a className="lw-key-issue" href="/download">앱 받기 →</a>}
                 </div>
                 <p className="lw-card-note" style={{ marginBottom: 12 }}>
-                    맨 위 <strong>클로드코드 토큰</strong>을 넣었다면 이 연동은 이미 끝난 것입니다 —
-                    마인드맵 추론과 지식인 답변이 전부 그 토큰(구독, 추가 비용 0)으로 돕니다.
-                    토큰이 없을 때만 아래 버튼으로 <strong>LEWORD 앱</strong>을 연결해 같은 일을 시킵니다.
+                    <strong>버튼 한 번</strong>이면 됩니다: 클로드 로그인 확인 → 승인 → 화면에 뜨는 코드
+                    한 줄 붙여넣기. 그러면 마인드맵 추론·지식인 답변이 전부 <strong>내 구독</strong>(추가
+                    비용 0)으로, 앱 없이 돕니다. 만료는 자동 갱신됩니다.
                 </p>
+
+                {!keys.claudeToken && (
+                    <div className="lw-claude-connect">
+                        <button type="button" className="lw-mini" onClick={startClaudeConnect} disabled={oauthBusy}>
+                            🔗 클로드 구독 연결 (버튼 한 번)
+                        </button>
+                        {oauth && (
+                            <div className="lw-claude-code">
+                                <input
+                                    type="text"
+                                    value={oauthCode}
+                                    onChange={(event) => setOauthCode(event.target.value)}
+                                    placeholder="승인 후 화면에 뜬 코드를 여기에 붙여넣기"
+                                    aria-label="클로드 승인 코드"
+                                />
+                                <button type="button" className="lw-mini" onClick={finishClaudeConnect} disabled={oauthBusy || !oauthCode.trim()}>
+                                    {oauthBusy ? '연결 중…' : '연결 완료'}
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                )}
+                {oauthNote && <p className="lw-card-note" style={{ marginBottom: 10 }}>{oauthNote}</p>}
                 {connected ? (
                     <button type="button" className="lw-mini lw-mini-ghost" onClick={connectBridge} disabled={connecting}>연동 상태 다시 확인</button>
                 ) : (
