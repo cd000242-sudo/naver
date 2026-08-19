@@ -6,6 +6,7 @@ import { bridgeMindmap, bridgeTrend, type BridgeMindmap, type BridgeTrend } from
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
 import TrendSparkline from './TrendSparkline';
+import DemandChartModal, { pickChartSeries, type DemandPoint } from './DemandChartModal';
 import { formatCount } from '../../lib/keywordApi';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
@@ -64,6 +65,9 @@ type PreemptionRow = {
     keywordPool?: Array<{ keyword: string; searchVolume: number | null; documentCount?: number | null; source?: string }> | null;
     /** 30일 트렌드(데이터랩 상대값 실측) — 회차가 구워 준다. 폰에서도 그려진다. */
     trend?: { series: number[]; label?: string; recommendation?: string } | null;
+    /** 24개월 실측 시계열(2026-08-19 배선) — 다음 회차부터 채워진다. 클릭 확대용. */
+    demandSeries?: DemandPoint[] | null;
+    demandAsOf?: string | null;
     /** "지금 왜 검색되는가" — 에이전트 추론 한 문장. 라벨로 실측과 구분한다. */
     whySearch?: { text: string; basis?: string } | null;
     /** 지식인 질문 수 실측 — 질문 많음 = 답을 못 찾는 중. */
@@ -140,6 +144,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [visibleCount, setVisibleCount] = useState(60);
     /** 방금 복사한 키워드. 눌렀는지 안 눌렀는지 모르면 두 번 누르게 된다. */
     const [copied, setCopied] = useState('');
+    /** 크게 보는 수요 그래프의 대상 키워드. 한 번에 하나만 연다. */
+    const [chartKeyword, setChartKeyword] = useState('');
     /*
      * AI 서브 보강(2026-08-17 재설계) — API 키가 아니라 **클로드코드 연동**이다.
      * 같은 PC 의 LEWORD 앱 브리지가 사용자의 클로드코드 구독으로 추론 체인
@@ -459,7 +465,19 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                       */}
                                     <div className="lw-card-spark">
                                         {row.trend && (row.trend.series || []).length >= 2 ? (
-                                            <TrendSparkline series={row.trend.series!} label={row.trend.label} />
+                                            /*
+                                             * 스파크라인 클릭 = 크게 보기(24개월 실측이 있으면 그것,
+                                             * 없으면 이 30일 실측 그대로). 축·정점·기간이 붙은 큰
+                                             * 그래프는 모달이 그린다 — 카드 안에서는 흐름만 본다.
+                                             */
+                                            <button
+                                                type="button"
+                                                className="lw-spark-open"
+                                                onClick={() => setChartKeyword(row.keyword)}
+                                                aria-label={`${row.keyword} 수요 그래프 크게 보기`}
+                                            >
+                                                <TrendSparkline series={row.trend.series!} label={row.trend.label} />
+                                            </button>
                                         ) : null}
                                         {row.whySearch?.text && (
                                             <p className="lw-why" title={row.whySearch.basis || 'AI 추론'}>
@@ -754,6 +772,20 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         onAnalyze={onAnalyze}
                         searchUrl={naverSearchUrl}
                     />
+
+                    {(() => {
+                        const chartRow = rows.find((row) => row.keyword === chartKeyword);
+                        const chart = chartRow ? pickChartSeries(chartRow) : null;
+                        return chartRow && chart ? (
+                            <DemandChartModal
+                                keyword={chartRow.keyword}
+                                series={chart.points}
+                                caption={chart.caption}
+                                asOf={chartRow.demandAsOf}
+                                onClose={() => setChartKeyword('')}
+                            />
+                        ) : null;
+                    })()}
 
                     {planRow && (
                         <PreemptionPlan

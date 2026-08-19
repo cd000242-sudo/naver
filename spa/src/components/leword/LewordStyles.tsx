@@ -183,8 +183,25 @@ function LewordStyles() {
             }
             .lw-more-btn:hover { background: rgba(255,215,0,.12); border-color: rgba(255,215,0,.65); }
             .lw-spark { display: flex; flex-direction: column; gap: 4px; padding: 6px 8px; border: 1px solid rgba(255,255,255,.07); border-radius: 10px; background: rgba(255,255,255,.02); }
+            /* 스파크라인 클릭 래퍼 — 버튼 기본 껍데기를 벗기고 그래프가 곧 버튼이 된다. */
+            .lw-spark-open { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; text-align: inherit; color: inherit; font: inherit; }
+            .lw-spark-open:hover .lw-spark { border-color: rgba(255,255,255,.18); }
+            .lw-spark-open:focus-visible { outline: 2px solid rgba(124,92,255,.6); outline-offset: 2px; border-radius: 10px; }
+
+            /* ── 수요 그래프 모달 — 중립 격자·정점 한 점 강조·글로우 없음 ── */
+            .lw-chart-backdrop { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 4vh 3vw; background: rgba(4,6,10,.72); }
+            .lw-chart-modal { width: min(860px, 96vw); border: 1px solid rgba(255,255,255,.14); border-radius: 14px; background: #0d1118; padding: 18px 20px 16px; }
+            .lw-chart-modal header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+            .lw-chart-modal h3 { margin: 0; font-size: 19px; font-weight: 800; color: #fff; }
+            .lw-chart-modal header p { margin: 4px 0 0; font-size: 12.5px; color: rgba(235,242,250,.6); }
+            .lw-chart-modal header button { flex: none; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.14); border-radius: 8px; background: none; color: rgba(235,242,250,.7); font-size: 14px; cursor: pointer; }
+            .lw-chart-modal svg { width: 100%; height: auto; display: block; }
+            .lw-chart-tick { font-size: 11px; fill: rgba(235,242,250,.5); }
+            .lw-chart-peak { font-size: 12px; font-weight: 700; fill: #00e0c6; }
+            .lw-chart-modal footer { margin-top: 10px; font-size: 13px; color: rgba(235,242,250,.75); }
             .lw-spark svg { width: 100%; height: 56px; display: block; }
-            .lw-spark-foot { display: flex; gap: 8px; align-items: center; font-size: 10.5px; color: rgba(235,242,250,.45); }
+            /* 11px 미만 기능 텍스트 금지(impeccable) — 10.5px 가 검문에 걸렸다. */
+            .lw-spark-foot { display: flex; gap: 8px; align-items: center; font-size: 11.5px; color: rgba(235,242,250,.55); }
             .lw-spark-foot em { font-style: normal; color: rgba(235,242,250,.7); font-weight: 700; }
             .lw-spark-foot .lw-spark-hot { color: #2ecc71; font-weight: 800; }
             .lw-why { margin: 8px 0 0; padding: 8px 10px; border-left: 2px solid rgba(255,165,0,.5); background: rgba(255,165,0,.05); border-radius: 0 8px 8px 0; font-size: 12px; line-height: 1.5; color: rgba(235,242,250,.85); }
