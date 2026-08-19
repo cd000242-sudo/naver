@@ -50,14 +50,19 @@ export const KEY_GROUPS: readonly KeyGroup[] = [
          * 구독 정액이라 추가 과금이 없다. 앱을 켤 필요도 없다. 토큰·키는 이
          * 브라우저에만 저장되고 요청에서만 쓰인다(서버 저장 없음).
          */
+        /*
+         * API 키 칸(Gemini/OpenAI)은 뺐다(사장님 확정 2026-08-20 "API 는 비용이
+         * 든다고, 구독돼 있는 걸 쓰면 되잖아"). 코덱스(챗지피티 구독)·안티그래비티
+         * (제미나이 구독)는 LEWORD 앱 브리지의 폴백 체인이 자동으로 쓴다 —
+         * 사이트가 그 구독 인증을 직접 재현하는 것은 안전 경계 밖이라 앱이 다리다.
+         * 저장돼 있던 기존 Gemini/OpenAI 키는 서버 폴백에서 계속 동작한다.
+         */
         id: 'ai',
         label: 'AI 연동 (지식인 답변·마인드맵 추론·글 진단)',
-        desc: '위 "구독 연결" 버튼 한 번이면 여기 토큰이 자동으로 채워집니다 — 앱 없이, 추가 비용 없이 전부 돕니다. 클로드 구독이 없으면 Gemini 무료 키를 직접 넣으세요.',
-        issueUrl: 'https://aistudio.google.com/apikey',
+        desc: '위 "구독 연결" 버튼 한 번이면 클로드 구독으로 전부 돕니다(자동 갱신, 추가 비용 0). 코덱스·안티그래비티 구독을 쓰려면 LEWORD 앱을 켜 두세요 — 앱이 그 구독들로 자동 실행합니다.',
+        issueUrl: 'https://claude.ai/',
         fields: [
-            { key: 'claudeToken', label: '클로드코드 토큰 (구독, 권장)', secret: true, placeholder: 'sk-ant-oat...' , minLength: 40 },
-            { key: 'geminiKey', label: 'Gemini API 키 (무료)', secret: true, placeholder: 'AIzaSy...' , minLength: 30 },
-            { key: 'openaiKey', label: 'OpenAI API 키 (선택)', secret: true, placeholder: 'sk-...' , minLength: 20 },
+            { key: 'claudeToken', label: '클로드코드 토큰 (자동 저장 · 수동 입력도 가능)', secret: true, placeholder: 'sk-ant-oat...' , minLength: 40 },
         ],
     },
     {

@@ -100,9 +100,10 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
     };
     const agentReady = typeof bridgeState === 'object' && bridgeState !== null
         && bridgeState.connected && (bridgeState.agents || []).some((agent) => agent.available);
-    /** 키 탭의 토큰/키 — 있으면 앱과 무관하게 생성된다(1순위 경로). */
+    /** 클로드 구독 토큰 — 있으면 앱과 무관하게 서버가 생성한다(1순위 경로). */
     const storedKeys = loadUserKeys();
     const tokenReady = Boolean(storedKeys.claudeToken);
+    // 기존에 저장돼 있던 Gemini/OpenAI 키가 있으면 서버 폴백으로 여전히 쓰인다.
     const anyKeyReady = tokenReady || Boolean(storedKeys.geminiKey || storedKeys.openaiKey);
 
     const openWork = (q: KinQ) => {
