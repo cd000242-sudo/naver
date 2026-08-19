@@ -207,17 +207,28 @@ describe('applyOrdering — strategy auto-detection', () => {
     expect(ordered[0]!.imageId).toBe('a');
   });
 
-  it('selects location strategy when location_hint is present and no takenAt', () => {
+  it('keeps upload order when there is no takenAt — even if location_hint exists', () => {
+    // [2026-08-16] 자동 선택은 더 이상 location 을 고르지 않는다(ordering.ts detectStrategy).
+    //   업로드 UI 가 썸네일에 번호를 매기고 사용자 메모가 그 번호를 참조하는데
+    //   ("1~4번은 호텔"), 위치 기반 재정렬이 그 대응을 조용히 깨뜨렸기 때문이다.
+    //   이 테스트는 그 이전 동작(a, c, b)을 기대하고 있어 코드 변경 뒤 방치돼 있었다.
     const items: EnrichedInferenceResponse[] = [
       makeEnriched('a', { location_hint: '서울' }, {}),
       makeEnriched('b', { location_hint: '부산' }, {}),
       makeEnriched('c', { location_hint: '서울' }, {}),
     ];
     const ordered = applyOrdering(items);
-    // 서울 group comes first (a, c), then 부산 (b)
-    expect(ordered[0]!.imageId).toBe('a');
-    expect(ordered[1]!.imageId).toBe('c');
-    expect(ordered[2]!.imageId).toBe('b');
+    expect(ordered.map((it) => it.imageId)).toEqual(['a', 'b', 'c']);
+  });
+
+  it('location 정렬은 명시적으로 요청할 때만 쓴다', () => {
+    const items: EnrichedInferenceResponse[] = [
+      makeEnriched('a', { location_hint: '서울' }, {}),
+      makeEnriched('b', { location_hint: '부산' }, {}),
+      makeEnriched('c', { location_hint: '서울' }, {}),
+    ];
+    // 같은 장소끼리 묶인다 — 서울(a, c) 다음 부산(b)
+    expect(applyOrdering(items, 'location').map((it) => it.imageId)).toEqual(['a', 'c', 'b']);
   });
 
   it('uses fallback when no temporal or spatial signals', () => {

@@ -25,7 +25,8 @@ describe('homepage operations layout', () => {
     expect(source).toContain('id="home-ops-panel-income"');
 
     // Income preloads (eager, mounted-while-hidden); realtime stays lazy.
-    expect(source).toContain('loading="eager"');
+    // [2026-08-19] 고정 eager → 첫 장만 eager 인 조건부로 개선됐다. 계약은 "첫 장을 즉시 띄운다".
+    expect(source).toContain("loading={eager ? 'eager' : 'lazy'}");
     expect(source).toContain('preload="metadata"');
     expect(source).toContain("activeTab === 'realtime' ? realtimePanel");
     expect(source).not.toContain("activeTab === 'income' ?");
@@ -113,7 +114,8 @@ describe('homepage operations layout', () => {
     expect(board).not.toContain('proofFallbacks');
     expect(board).not.toContain('proofFallbackToIncomeProof');
     expect(board).toContain('managedProofs?: HomeManagedProof[]');
-    expect(board).toContain('function managedProofToIncomeProof');
+    // [2026-08-19] siteOps.ts 로 옮기며 이름이 바뀌었다(managedHomeProofsToIncomeProofs).
+    expect(board).toContain('managedHomeProofsToIncomeProofs');
     expect(board).toContain('const displayIncomeProofs = incomeProofs.length > 0 ? incomeProofs : managedIncomeProofs;');
     expect(board).toContain('const usingManagedProofs = incomeProofs.length === 0 && managedIncomeProofs.length > 0;');
     expect(board).toContain("usingManagedProofs ? '관리자가 등록한 실제 인증 자료입니다.'");
@@ -132,11 +134,14 @@ describe('admin homepage operations access', () => {
     expect(admin).toContain('function openKeywordBriefingEditor()');
     expect(admin).toContain('부방장 황금키워드 수정');
     expect(admin).toContain('LEWORD API 서버 관리자 ID');
-    expect(admin).toContain('관리자 페이지 로그인 아이디/비밀번호로 서버 저장권한을 자동 연결합니다');
-    expect(admin).toContain('const serverSession = await requestLewordAdminSession(id, pw, { silent: true })');
-    expect(admin).toContain('사이트 로그인 완료 · 서버 저장 권한 자동 연결됨');
+    // [2026-08-19] 연동 UX 최종형에서 같은 뜻의 짧은 문구로 다듬어졌다.
+    expect(admin).toContain('로그인하면 저장 권한이 자동으로 연결됩니다');
+    // [2026-08-19] 변수·인자 이름이 바뀌었다. 계약은 "silent 세션으로 저장 권한을 자동 연결한다".
+    expect(admin).toContain('requestLewordAdminSession(userId, password, { silent: true })');
+    expect(admin).toContain('서버 저장 권한이 연결되었습니다');
     expect(admin).toContain('autocomplete="new-password"');
-    expect(admin).toContain("apiIdInput.value = id");
-    expect(admin).toContain("homeOpsApiIdInput.value = id");
+    // [2026-08-19] 로그인 세션의 userId 로 채우도록 바뀌었다(하드코딩 id 변수 → 세션 값).
+    expect(admin).toContain('apiIdInput.value = existingServerSession.userId');
+    expect(admin).toContain('homeOpsApiIdInput.value = existingServerSession.userId');
   });
 });

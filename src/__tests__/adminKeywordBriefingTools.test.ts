@@ -275,9 +275,13 @@ describe('admin keyword briefing OCR helpers', () => {
     expect(html).toContain("corePath: location.origin + '/admin/vendor/tesseract/core'");
     expect(html).toContain("langPath: location.origin + '/admin/vendor/tesseract/lang'");
     expect(html).not.toContain('cdn.jsdelivr.net/npm/tesseract');
-    expect(html).toContain("fetch(lewordApiUrl('/v1/admin/home-keyword-briefing')");
-    expect(html).toContain("method: 'PUT'");
-    expect(html).toContain('expectedRevision: keywordBriefingEditorState.revision');
+    // [2026-08] 폐지된 Vultr PUT(/v1/admin/home-keyword-briefing) → GAS 저장으로 옮겼다.
+    //   공지와 같은 사고(저장한 내용이 사라짐)를 막기 위한 이관이다.
+    //   revision 추적 계약은 그대로 남아 있어야 한다.
+    expect(html).toContain("gasAdminCall('site-content-save'");
+    expect(html).toContain('content: { keywordBriefing: briefing }');
+    expect(html).not.toContain("fetch(lewordApiUrl('/v1/admin/home-keyword-briefing')");
+    expect(html).toContain('keywordBriefingEditorState.revision = Math.max(1, Number(payload.briefing.revision) || 1)');
     expect(html).toContain('let keywordBriefingLoadGeneration = 0');
     expect(html).toContain('generation !== keywordBriefingLoadGeneration || keywordBriefingEditorState.dirty');
     expect(html).toContain('keywordBriefingEditorState.persisted && !keywordBriefingEditorState.dirty');

@@ -673,7 +673,7 @@ function HomeOperationsBoard({ realtimePanel, managedProofs = [], briefingOnly =
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 2;
                 }
-                .home-ops-income-copy small { display: block; color: rgba(235,242,250,0.67); font-size: 13px; line-height: 1.5; }
+                .home-ops-income-copy small { display: block; color: rgba(235,242,250,0.67); font-size: 16px; line-height: 1.5; }
                 .home-ops-income-copy a { display: inline-block; margin-top: auto; padding-top: 12px; color: #f4c95d; font-size: 14px; font-weight: 850; text-decoration: none; }
                 .home-ops-empty {
                     padding: 34px 22px;

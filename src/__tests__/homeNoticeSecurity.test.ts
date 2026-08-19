@@ -111,7 +111,9 @@ describe('secure home notices', () => {
     vi.stubGlobal('fetch', fetchMock);
 
     await expect(fetchHomeNotices(3)).resolves.toEqual([]);
-    expect(fetchMock).toHaveBeenCalledTimes(1);
+    // [2026-08-12] GAS 가 완전히 비었을 때만 아카이브를 비상용으로 한 번 더 본다.
+    //   (GAS 에 하나라도 있으면 GAS 만 쓴다 — 삭제한 공지가 되살아나는 것을 막는 설계)
+    expect(fetchMock).toHaveBeenCalledTimes(2);
   });
 
   it('uses only the read-only cache when the notice feed is unavailable', async () => {
@@ -130,7 +132,8 @@ describe('secure home notices', () => {
 
     const notices = await fetchHomeNotices(3);
     expect(notices).toEqual([expect.objectContaining({ title: '기존 공지' })]);
-    expect(routes.count('snapshot')).toBe(0);
+    // GAS 가 비면 아카이브를 먼저 확인하고, 그것도 비어야 캐시로 내려간다.
+    expect(routes.count('snapshot')).toBe(1);
     expect(routes.count('legacy')).toBe(1);
     expect(localStorage.getItem(HOME_NOTICE_CACHE_KEY)).toContain('기존 공지');
   });
@@ -178,7 +181,8 @@ describe('secure home notices', () => {
     vi.stubGlobal('fetch', routes.fetchMock);
 
     await expect(fetchHomeNotices(3)).resolves.toEqual([]);
-    expect(routes.order()).toEqual(['legacy']);
+    // 순서 계약: GAS(legacy) 먼저, 비어 있을 때만 아카이브(snapshot).
+    expect(routes.order()).toEqual(['legacy', 'snapshot']);
   });
 
   it('loads only approved home income proofs and removes private or unsafe fields', async () => {
@@ -335,8 +339,13 @@ describe('secure home notices', () => {
     expect(home).toContain('white-space: pre-line');
     expect(home).toContain('hidden={!open}');
     expect(community).not.toContain('function NoticesPanel(');
-    expect(noticeBlock).toContain("lewordApiUrl('/v1/admin/home-notices')");
-    expect(noticeBlock).toContain("Authorization: 'Bearer ' + session.accessToken");
+    // [2026-08] 폐지된 Vultr(/v1/admin/home-notices) PUT 은 공지를 조용히 버렸다.
+    //   GAS 건별 CRUD(submit/update/delete-notice)로 옮겼다 — 그 경로를 잠근다.
+    expect(noticeBlock).toContain('submit-notice');
+    expect(noticeBlock).toContain('update-notice');
+    expect(noticeBlock).toContain('delete-notice');
+    expect(noticeBlock).toContain('GAS_URL');
+    expect(noticeBlock).not.toContain("lewordApiUrl('/v1/admin/home-notices')");
     expect(noticeBlock).not.toContain('adminToken');
     expect(noticeBlock).not.toContain("onclick=\"editNoticeById('");
     expect(noticeBlock).not.toContain("onclick=\"deleteNotice('");
@@ -345,12 +354,16 @@ describe('secure home notices', () => {
     expect(noticeBlock).toContain('if (homeNoticeEditorState.saving) {');
     expect(noticeBlock).toContain('loadGeneration !== homeNoticeLoadGeneration');
     expect(noticeBlock).toContain('#home-notice-editor-form input');
-    expect(loginBlock).toContain('const serverSession = await requestLewordAdminSession(id, pw, { silent: true });');
-    expect(loginBlock).toContain("document.getElementById('login-pw').value = ''");
-    expect(loginBlock).toContain('apiIdInput.value = id');
-    expect(loginBlock).toContain('homeOpsApiIdInput.value = id');
-    expect(loginBlock).toContain('사이트 로그인 완료 · 서버 저장 권한 자동 연결됨');
-    expect(admin).toContain('관리자 페이지 로그인 아이디/비밀번호로 서버 저장권한을 자동 연결합니다.');
+    // [2026-08-19] 로그인이 직접 세션을 받아 저장하도록 바뀌었다(별도 silent 요청 → 로그인 응답의 session).
+    //   계약은 그대로 "로그인하면 저장 권한이 연결된다" 이고, 그 지점을 잠근다.
+    expect(loginBlock).toContain('writeAdminSession(payload.session)');
+    // [2026-08-19] 필드를 변수로 잡아 쓰도록 바뀌었다. 계약은 "로그인 후 비밀번호 칸을 비운다".
+    expect(loginBlock).toContain("passwordField.value = ''");
+    // [2026-08-19] 입력칸 채우기는 세션 복원 경로로 옮겼고(로그인 응답 → writeAdminSession),
+    //   안내 문구는 같은 뜻으로 짧게 다듬어졌다. 계약("로그인 한 번으로 저장 권한 연결")은 그대로.
+    expect(admin).toContain('apiIdInput.value = existingServerSession.userId');
+    expect(admin).toContain('homeOpsApiIdInput.value = existingServerSession.userId');
+    expect(admin).toContain('로그인하면 저장 권한이 자동으로 연결됩니다');
     expect(admin).toContain('관리자 로그인 한 번으로 공지·키워드 저장 권한까지 자동 연결됩니다.');
     expect(admin).not.toContain('사이트 로그인은 화면 접근용입니다.');
     expect(admin).not.toContain('사이트 로그인 계정이 아니라 LEWORD API 서버 관리자 계정');
