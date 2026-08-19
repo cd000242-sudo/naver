@@ -100,6 +100,49 @@ export function detectSmartblock($: cheerio.CheerioAPI): { has: boolean; count: 
  *   - 카드 셀렉터: .total_wrap, .api_subject_bx, .total_area, .blog_area 등
  *   - 인플루언서 표지: "인플루언서" 텍스트 또는 .ifr_inner 등 클래스
  */
+/**
+ * 클래스 이름에 기대지 않고 순위를 얻는다 — 문서 등장 순서로 블로그 글 링크를 뽑는다.
+ *
+ * 왜: 네이버가 검색 화면을 새 디자인시스템(`sds-comps-*`)으로 바꾸면서 기존 카드
+ * 셀렉터(.lst_total/.blog_area/.total_wrap)가 전부 0건이 됐다. 실측(2026-08-19)
+ * HTML 415KB 안에 글 링크는 304개가 그대로 있었는데도 카드가 0개로 잡혔고,
+ * 그 결과 노출 판정 117회가 전부 "상위 0개 중 미발견"으로 기록됐다.
+ * 링크 순서는 디자인이 바뀌어도 남는다.
+ */
+export function extractCardsByLinkOrder($: cheerio.CheerioAPI, maxCards: number = 10): DynamicSerpCard[] {
+  const html = $.html();
+  const linkPattern = /https?:\/\/(?:m\.)?blog\.naver\.com\/([A-Za-z0-9_-]+)\/(\d{6,})/g;
+  const seen = new Set<string>();
+  const cards: DynamicSerpCard[] = [];
+
+  let match: RegExpExecArray | null;
+  while ((match = linkPattern.exec(html)) !== null) {
+    if (cards.length >= maxCards) break;
+    const key = `${match[1]}/${match[2]}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    // 같은 글을 가리키는 앵커가 여럿이다(썸네일·블로그명·제목). 가장 긴 텍스트가 제목이다.
+    let title = '';
+    $(`a[href*="${key}"]`).each((_, el) => {
+      const text = $(el).text().replace(/\s+/g, ' ').trim();
+      if (text.length > title.length) title = text;
+    });
+
+    cards.push({
+      position: cards.length + 1,
+      title: title.slice(0, 100),
+      blogger: match[1].slice(0, 50),
+      url: match[0],
+      snippet: '',
+      // 링크만으로는 인플루언서 표지를 알 수 없다 — 셀렉터 경로에서만 판별된다.
+      isInfluencer: false,
+    });
+  }
+
+  return cards;
+}
+
 export function extractCards($: cheerio.CheerioAPI, maxCards: number = 10): DynamicSerpCard[] {
   const cards: DynamicSerpCard[] = [];
 
@@ -125,7 +168,7 @@ export function extractCards($: cheerio.CheerioAPI, maxCards: number = 10): Dyna
     }
   }
 
-  if (!cardElems) return cards;
+  if (!cardElems) return extractCardsByLinkOrder($, maxCards);
 
   let position = 0;
   cardElems.each((_, el) => {
@@ -170,6 +213,12 @@ export function extractCards($: cheerio.CheerioAPI, maxCards: number = 10): Dyna
     return undefined;
   });
 
+  // 셀렉터가 살아 있어도 카드가 거의 안 잡히면 마크업이 바뀐 것이다 — 링크 순서로 되짚는다.
+  if (cards.length < 3) {
+    const byOrder = extractCardsByLinkOrder($, maxCards);
+    if (byOrder.length > cards.length) return byOrder;
+  }
+
   return cards;
 }
 
@@ -196,6 +245,8 @@ export async function probeDynamicSerp(
     const response = await axios.get(NAVER_SEARCH_URL, {
       params: {
         where: 'blog',
+        // [2026-08-19] 신 블로그탭 파라미터. where=blog 단독은 결과가 적게 온다(실측).
+        ssc: 'tab.blog.all',
         query: keyword,
         sm: 'tab_hty.top',
       },
