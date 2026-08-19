@@ -102,9 +102,11 @@ export const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
   },
   // ────── 정보 계열 (온도 1단계) ──────
   {
-    id: 'hf_simple_summary', name: '⑨간단정리형',
-    instruction: '"달라진 점, 간단히 정리" 구조. 사회/경제/정책 카테고리에 최적. 서브키워드 필수. 28~42자.',
-    example: '2025 최저임금 달라진 점, 알바생 입장에서 정리했어요'
+    // [2026-08-20] was ⑨간단정리형 — "~정리했어요" summary endings shipped press-release
+    // titles with zero click reason (user report). Same id keeps CATEGORY_FORMULA_PRIORITY wiring.
+    id: 'hf_simple_summary', name: '⑨정보갭형',
+    instruction: '핵심 사실 하나는 제목에서 공개하되, 독자가 가장 알고 싶어할 결과·수치·조건 하나를 숨겨 클릭 사유를 남긴다. "~정리/~가이드/~현황" 요약 명사 종결 금지. 사회/경제/정책 카테고리에 최적. 서브키워드 필수. 28~42자.',
+    example: '최저임금 올랐는데 알바생 실수령액이 안 늘어난 이유'
   },
   {
     id: 'hf_miss_loss', name: '⑩놓치면손해형',
@@ -119,7 +121,7 @@ export const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
   {
     id: 'hf_comparison', name: '⑫비교분석형',
     instruction: '두 대상을 직접 비교한 결과 제시. 서브키워드 2개 포함 권장. 28~42자.',
-    example: '아이폰16 카메라 갤럭시25 비교, 직접 찍어보고 정리'
+    example: '아이폰16 갤럭시25 카메라, 밤 사진에서 순위가 뒤집혔다'
   },
   // ────── 공감 계열 (온도 2단계) ──────
   {
@@ -135,7 +137,7 @@ export const HOMEFEED_TITLE_FORMULAS: TitleFormula[] = [
   {
     id: 'hf_common_worry', name: '⑮모두의고민형',
     instruction: '"다들 고민하시죠, 해결법" 구조. 보편적 걱정 → 해결 흐름. 서브키워드 필수. 28~42자.',
-    example: '적금 금리 떨어질 때 다들 고민하시죠, 대안 정리해봤어요'
+    example: '적금 금리 떨어질 때 다들 고민하시죠, 대안은 따로 있어요'
   },
   // ────── 호기심 계열 (온도 2단계) ──────
   {

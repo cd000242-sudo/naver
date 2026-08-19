@@ -42,7 +42,9 @@ describe('이슈픽 — 승자 공식이 감점되지 않는다', () => {
   });
 
   it('클릭베이트는 이슈픽에서도 계속 감점된다', () => {
-    const clean = score('시즌2 팀장 교체 배경 정리', issueArgs);
+    // [2026-08-20] 기준 제목 교체: 기존 "~배경 정리"는 요약 명사 종결 감점(-50) 신설로
+    // 더는 clean 기준이 아니다. 테스트 의도(클릭베이트 < clean)는 그대로다.
+    const clean = score('시즌2 팀장 교체, 배경에 다른 사정이 있었다', issueArgs);
     expect(score('충격 소름 시즌2 팀장 교체 난리', issueArgs)).toBeLessThan(clean);
   });
 });

@@ -538,7 +538,11 @@ async function generateTitleOnlyPatch(
   titleAlternatives?: string[];
 }> {
   const primaryKeyword = getPrimaryKeywordFromSource(source);
-  const articleSnippet = source.rawText ? source.rawText.substring(0, 1000) : '';
+  // [2026-08-20] homefeed gets a larger snippet: the click-reason inference step below
+  // needs enough of the crawled body to find the actual curiosity point, not just the intro.
+  const articleSnippet = source.rawText
+    ? source.rawText.substring(0, mode === 'homefeed' ? 2500 : 1000)
+    : '';
   // ✅ [2026-03-13] affiliate 모드: 상품명 축약 전처리 (키워드 나열 방지)
   let originalTitle = source.title || '';
   if (mode === 'affiliate' && originalTitle.length > 25) {
@@ -662,7 +666,13 @@ async function generateTitleOnlyPatch(
       ? `[제목 방향] {상품명(브랜드+모델명)} + 입력에서 확인된 구매 판단 기준. 단어 나열과 근거 없는 체험 표현 금지.`
       : `[제목 방향] 메인 주제 + 독자의 질문에 답하는 조건·방법·대상 중 입력 근거에 맞는 한 가지. 클릭 트리거와 숫자 개수 강제 금지.`;
 
-  const schema = `Output ONLY valid JSON. NO markdown.\n\n{"selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`;
+  // [2026-08-20] homefeed schema forces a click-reason inference BEFORE any title:
+  // the model must first extract from the crawled snippet why a passerby would click,
+  // then derive every candidate from that reason. Summary-of-keywords titles were the
+  // top user complaint ("~정리/~가이드" — no click reason, instant AI tell).
+  const schema = mode === 'homefeed'
+    ? `Output ONLY valid JSON. NO markdown.\n\n{"clickAnalysis": {"mostSurprisingFact": "string", "readerQuestion": "string", "clickReason": "string"}, "selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`
+    : `Output ONLY valid JSON. NO markdown.\n\n{"selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`;
 
   const subKeywords = Array.isArray((source.metadata as any)?.keywords)
     ? (source.metadata as any).keywords.slice(1).filter((k: any) => String(k).length >= 2 && !/^\d+$/.test(String(k))).slice(0, 5).join(', ')
@@ -681,11 +691,24 @@ ${schema}
 - primaryKeyword: ${primaryKeyword || '(없음)'}
 - subKeywords: ${subKeywords || '(없음)'}
 ${mode === 'homefeed' ? `
+🧲 [0단계 — 클릭 사유 추론. 제목보다 먼저, 반드시 수행]
+아래 [ARTICLE SNIPPET]을 읽고 clickAnalysis 를 먼저 채우세요:
+- mostSurprisingFact: 원문에서 가장 의외이거나 감정을 건드리는 구체 사실 1개.
+  ⛔ 원문에 없는 사실 날조 금지. 원문이 비어 있으면 키워드로 독자 상황을 추론.
+- readerQuestion: 이 소재를 스치듯 본 사람이 답을 알고 싶어질 질문 1개.
+- clickReason: 사람들이 이 글을 클릭할 단 하나의 이유 (한 줄).
+→ 모든 제목 후보는 clickReason 에서 출발해야 합니다.
+→ 원문 내용과 무관하게 키워드를 요약·나열한 제목 = 0점.
+
 ⛔⛔⛔ [홈피드 절대 규칙 — 위반 시 0점]
 1. 같은 단어를 제목에 2번 이상 쓰지 마세요. (예: "침대 배치 공식 침대 배치" → 0점)
 2. 키워드를 나열하지 마세요. 자연스러운 한 문장으로 쓰세요.
 3. 28~42자를 권장하되, 사실과 고유명사를 훼손해 길이를 맞추지 마세요.
 4. 서브키워드는 문장 이해에 실제로 필요할 때만 사용하고 나열하지 마세요.
+5. 요약 명사 종결 금지 — "~정리/~총정리/~가이드/~현황/~포인트/~모음/~대응/~의미/~근황"으로
+   끝나는 제목은 보도자료 문형이라 즉시 0점. 궁금증이 남는 서술이나 의문으로 끝내세요.
+   ❌ "택배사별 재개일 정리" / "매장 확인과 재고 현황" / "개인정보 유출 항목과 대응"
+   ✅ "우리 동네 택배만 안 멈추는 이유가 있었다" / "환불 대신 이걸 챙긴 사람이 이득 봤다"
 ` : ''}
 ${mode === 'affiliate' ? `
 ⛔⛔⛔ [쇼핑커넥트 절대 규칙 — 위반 시 0점]
