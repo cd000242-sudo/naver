@@ -68,6 +68,8 @@ type PreemptionRow = {
     whySearch?: { text: string; basis?: string } | null;
     /** 지식인 질문 수 실측 — 질문 많음 = 답을 못 찾는 중. */
     kinCount?: number | null;
+    /** 추천·채택 순 상위 질문(제목·링크) — 클릭하면 질문으로 바로 간다. */
+    kinTop?: Array<{ title: string; link: string }> | null;
     adsenseReason?: string;
     /** 회차 실측으로 만든 제목 2종(SEO/홈판). 옛 회차 데이터에는 없다. */
     titles?: {
@@ -498,6 +500,17 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             <strong>{typeof row.kinCount === 'number' ? formatCount(row.kinCount) : '—'}</strong>
                                         </div>
                                     </div>
+
+                                    {/* 지식인 상위 질문(추천·채택 순) — 클릭하면 질문으로 바로 간다.
+                                        글감의 원료다: 사람들이 정확히 뭘 묻는지가 여기 있다. */}
+                                    {(row.kinTop || []).length > 0 && (
+                                        <div className="lw-kin">
+                                            <em>지식인에서 묻는 것</em>
+                                            {row.kinTop!.map((q) => (
+                                                <a key={q.link} href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
+                                            ))}
+                                        </div>
+                                    )}
 
                                     {/*
                                       * 대장간 산출물 — 제목 2종 + 문제해결 서브(2026-08-17 재편).

@@ -190,6 +190,11 @@ function LewordStyles() {
             .lw-why { margin: 8px 0 0; padding: 8px 10px; border-left: 2px solid rgba(255,165,0,.5); background: rgba(255,165,0,.05); border-radius: 0 8px 8px 0; font-size: 12px; line-height: 1.5; color: rgba(235,242,250,.85); }
             .lw-why em { font-style: normal; color: #ffa500; font-weight: 800; margin-right: 4px; }
             .lw-why small { display: block; margin-top: 3px; font-size: 10px; color: rgba(235,242,250,.4); }
+            .lw-kin { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; padding: 8px 10px; border: 1px dashed rgba(105,183,255,.25); border-radius: 10px; background: rgba(105,183,255,.04); }
+            .lw-board-list .lw-kin { grid-column: 1 / -1; }
+            .lw-kin em { font-style: normal; color: #69b7ff; font-size: 11px; font-weight: 800; }
+            .lw-kin a { font-size: 12px; color: rgba(235,242,250,.8); text-decoration: none; padding: 2px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); }
+            .lw-kin a:hover { border-color: rgba(105,183,255,.5); color: #fff; }
             .lw-note-error { border-color: rgba(255,107,129,.32); background: rgba(255,107,129,.07); }
             .lw-note button {
                 margin-top: 10px; padding: 9px 16px;

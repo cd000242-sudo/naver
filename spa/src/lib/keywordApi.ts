@@ -91,6 +91,8 @@ export type KeywordAnalysis = {
     related: RelatedKeyword[];
     /** 데이터랩 최근 30일 상대 추이 실측. 못 재면 null — 선을 지어내지 않는다. */
     trend?: KeywordTrend | null;
+    /** 지식인 상위 질문(추천·채택 순) — 제목·링크 실측. */
+    kinTop?: Array<{ title: string; link: string }>;
     sources: Record<string, string>;
 };
 

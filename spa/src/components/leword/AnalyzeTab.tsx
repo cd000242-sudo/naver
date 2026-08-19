@@ -168,6 +168,20 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                         </p>
                     </section>
 
+                    {(result.kinTop || []).length > 0 && (
+                        <section className="lw-panel" aria-label="지식인 상위 질문">
+                            <div className="lw-panel-head">
+                                <h2>지식인에서 묻는 것</h2>
+                                <span>추천·채택 순 상위 {result.kinTop!.length}개 · 클릭하면 질문으로 갑니다</span>
+                            </div>
+                            <div className="lw-kin">
+                                {result.kinTop!.map((q) => (
+                                    <a key={q.link} href={q.link} target="_blank" rel="noreferrer">{q.title}</a>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
                     {result.related.length > 0 && (
                         <section className="lw-panel" aria-label="연관 키워드">
                             <div className="lw-panel-head">
