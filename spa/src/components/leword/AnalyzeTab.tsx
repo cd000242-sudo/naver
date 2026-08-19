@@ -10,6 +10,7 @@ import {
 } from '../../lib/keywordApi';
 import { ErrorNote, MetricCell, TabIntro, UsageBar } from './LewordShared';
 import { groupByIntent } from '../../lib/intentGroups';
+import TrendSparkline from './TrendSparkline';
 
 /**
  * 키워드 분석 — 검색량·문서수·상품수·연관 키워드.
@@ -155,6 +156,12 @@ function AnalyzeTab({ initialKeyword }: { initialKeyword: string }) {
                             <MetricCell label="광고 경쟁도" value={measured.competition || '—'} note="검색광고 표기" />
                             <MetricCell label="광고 노출 depth" value={formatCount(measured.adDepth)} />
                         </div>
+                        {/* 30일 추이 자동 표시 — "그래프가 보여야 이 키워드로 글을 써도 될지 안다". */}
+                        {result.trend && result.trend.series.length >= 2 && (
+                            <div className="lw-analyze-spark">
+                                <TrendSparkline series={result.trend.series} height={72} />
+                            </div>
+                        )}
                         <p className="lw-panel-foot">
                             {Object.entries(result.sources).map(([, label]) => label).join(' · ')}
                         </p>

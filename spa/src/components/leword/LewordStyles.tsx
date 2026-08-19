@@ -182,6 +182,11 @@ function LewordStyles() {
                 transition: background .2s ease, border-color .2s ease;
             }
             .lw-more-btn:hover { background: rgba(255,215,0,.12); border-color: rgba(255,215,0,.65); }
+            .lw-spark { display: flex; flex-direction: column; gap: 4px; padding: 6px 8px; border: 1px solid rgba(255,255,255,.07); border-radius: 10px; background: rgba(255,255,255,.02); }
+            .lw-spark svg { width: 100%; height: 56px; display: block; }
+            .lw-spark-foot { display: flex; gap: 8px; align-items: center; font-size: 10.5px; color: rgba(235,242,250,.45); }
+            .lw-spark-foot em { font-style: normal; color: rgba(235,242,250,.7); font-weight: 700; }
+            .lw-spark-foot .lw-spark-hot { color: #2ecc71; font-weight: 800; }
             .lw-note-error { border-color: rgba(255,107,129,.32); background: rgba(255,107,129,.07); }
             .lw-note button {
                 margin-top: 10px; padding: 9px 16px;
@@ -250,7 +255,8 @@ function LewordStyles() {
                  * 188px 세 번째 열에 제목이 낑겨 갑갑했고, 액션 7개가 세로
                  * 풀폭 바로 쌓여 카드 하나가 화면 절반을 먹었다(실측 스크린샷).
                  */
-                grid-template-columns: minmax(0, 1fr) 230px;
+                /* [2026-08-19] 3열 — 가운데가 30일 실측 스파크라인 자리다(빨간 네모). */
+                grid-template-columns: minmax(0, 1fr) minmax(200px, 260px) 230px;
                 align-items: start;
                 gap: 14px 20px;
                 padding: 18px 20px;
@@ -299,6 +305,7 @@ function LewordStyles() {
             .lw-board-list .lw-card-actions a { flex: none; width: 100%; padding: 8px 8px; }
             @media (max-width: 860px) {
                 .lw-board-list .lw-card-pre { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+                .lw-card-spark { max-width: 320px; }
                 .lw-board-list .lw-card-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             }
 

@@ -5,6 +5,7 @@ import { bridgeMindmap, bridgeTrend, type BridgeMindmap, type BridgeTrend } from
 
 import { TopicFilter, WriteLaneFilter } from './BoardFilters';
 import BoardCardHead from './BoardCardHead';
+import TrendSparkline from './TrendSparkline';
 import { formatCount } from '../../lib/keywordApi';
 import LicenseGate, { FREE_BOARD_ROWS, isUnlocked } from './LicenseGate';
 import { TabIntro } from './LewordShared';
@@ -482,6 +483,17 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                             return (
                                 <article key={`${row.topic}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
                                     <BoardCardHead row={row} rank={index + 1} />
+
+                                    {/*
+                                      * 30일 추이 자동 표시(사장님 2026-08-19: "그래프가 보여야 이 키워드로
+                                      * 글을 써도 될지 알 수 있다"). 헤드와 지표 사이 빈 공간(스크린샷의
+                                      * 빨간 네모 자리)에 구워진 실측(row.trend)을 그린다 — 클릭 불필요.
+                                      */}
+                                    <div className="lw-card-spark">
+                                        {row.trend && (row.trend.series || []).length >= 2 ? (
+                                            <TrendSparkline series={row.trend.series!} label={row.trend.label} />
+                                        ) : null}
+                                    </div>
 
                                     {/*
                                       * 지표 열. 사장님 지정 4개 — 검색량 · 문서수 · 광고수 · 빈자리.

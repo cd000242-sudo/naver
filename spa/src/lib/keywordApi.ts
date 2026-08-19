@@ -81,10 +81,14 @@ export type RelatedKeyword = {
     adDepth: number | null;
 };
 
+export type KeywordTrend = { series: number[]; dates: string[] };
+
 export type KeywordAnalysis = {
     keyword: string;
     measured: KeywordMeasured;
     related: RelatedKeyword[];
+    /** 데이터랩 최근 30일 상대 추이 실측. 못 재면 null — 선을 지어내지 않는다. */
+    trend?: KeywordTrend | null;
     sources: Record<string, string>;
 };
 
@@ -211,6 +215,10 @@ async function call<T>(action: string, params: Record<string, string>): Promise<
 
 export const analyzeKeyword = (keyword: string) =>
     call<KeywordAnalysis>('keyword-analyze', { keyword });
+
+/** 무료 황금보드 모달용 경량 조회 — 데이터랩 30일 추이 하나만 잰다. */
+export const fetchKeywordTrend = (keyword: string) =>
+    call<{ keyword: string; trend: KeywordTrend }>('keyword-trend', { keyword });
 
 export const checkRank = (keyword: string, target: string) =>
     call<RankResult>('keyword-rank', { keyword, target });
