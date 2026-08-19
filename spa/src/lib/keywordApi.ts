@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'post-audit-analyze']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -258,6 +258,32 @@ function persistRenewed(data: unknown) {
 
 export const fetchMindmapAI = (keyword: string) =>
     call<{ result: unknown }>('mindmap-ai', { keyword }).then((res) => { persistRenewed(res.data); return res; });
+
+/**
+ * 발행 글 진단(사장님 확정 2026-08-20 "글을 분석해야") — 실측 순위 3종 + 글
+ * 전문을 구독 AI 가 읽고 원인·수정안을 사실 기반으로만 짚는다.
+ */
+export type PostAnalysis = {
+    verdict: string;
+    targetKeyword: string;
+    diagnosis: string[];
+    fixes: string[];
+    contentRead: boolean;
+};
+export const fetchPostAnalysis = (input: {
+    title: string; link: string;
+    kwQuery?: string; kwRank?: number | null;
+    extQuery?: string; extRank?: number | null;
+    titleRank?: number | null;
+}) => call<{ analysis: PostAnalysis }>('post-audit-analyze', {
+    title: input.title,
+    link: input.link,
+    kwQuery: input.kwQuery || '',
+    kwRank: input.kwRank == null ? '' : String(input.kwRank),
+    extQuery: input.extQuery || '',
+    extRank: input.extRank == null ? '' : String(input.extRank),
+    titleRank: input.titleRank == null ? '' : String(input.titleRank),
+}).then((res) => { persistRenewed(res.data); return res; });
 
 /** 승인 코드+검증값 → 구독 토큰 교환. 코드는 승인 화면의 "code#state" 그대로. */
 export const exchangeClaudeOauth = (code: string, verifier: string) =>
