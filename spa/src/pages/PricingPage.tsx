@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import ProofShowcase from '../components/ProofShowcase';
+import ProductStore from '../components/store/ProductStore';
 import { getScheduledAmount, isNormalPricingActive, PRICING_SWITCH_AT_MS } from '../lib/pricingSchedule';
 import { fetchSiteContent, type SiteContent } from '../lib/siteOps';
 import { gradient, onGold, whiteA } from '../styles/tokens';
@@ -764,99 +765,22 @@ function PricingPage() {
                 `}</style>
 
                 {/* Pricing grid */}
-                <div className="pricing-plan-grid" role="group" aria-label="요금제 선택">
-                    {activePlans.map((p) => {
-                        const isSelected = selected?.id === p.id;
-                        const isFeatured = p.badge?.type === 'best';
-                        const isTrial = p.free;
-                        const activeAmount = getPlanAmount(p, pricingNow);
-                        const activeCardAmount = getPlanCardAmount(p, pricingNow);
-                        const showEventPrice = !normalPricingActive && !!p.futureAmount && !p.free;
-                        const showNormalBadge = normalPricingActive && !!p.futureAmount && !p.free;
-                        return (
-                            <div
-                                key={p.id}
-                                className="pricing-plan-card"
-                                role="button"
-                                tabIndex={0}
-                                aria-pressed={isSelected}
-                                aria-label={`${p.name} 요금제 선택`}
-                                onClick={() => onSelect(p)}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(p); }
-                                }}
-                                style={{
-                                    background: isSelected ? 'linear-gradient(180deg, rgba(255,215,0,0.10), rgba(18,18,26,0.85))' : isFeatured ? 'linear-gradient(180deg, rgba(255,215,0,0.04), rgba(18,18,26,0.7))' : 'rgba(18,18,26,0.6)',
-                                    border: isSelected ? '2px solid #FFD700' : isFeatured ? '1px solid rgba(255,215,0,0.5)' : '1px solid rgba(255,255,255,0.08)',
-                                    borderRadius: 18, padding: '28px 22px',
-                                    cursor: 'pointer', transition: 'all 0.25s',
-                                    position: 'relative', textAlign: 'center',
-                                }}
-                            >
-                                {p.badge && (
-                                    <div style={{
-                                        position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                                        background: p.badge.type === 'best' ? gradient.goldBright : p.badge.type === 'lifetime' ? 'linear-gradient(135deg, #A78BFA, #7C3AED)' : 'linear-gradient(135deg, #44d7b6, #2bb89c)',
-                                        color: p.badge.type === 'trial' ? '#0a0a0f' : '#000',
-                                        padding: '4px 14px', borderRadius: 50,
-                                        fontSize: 11, fontWeight: 800, letterSpacing: 0.5, whiteSpace: 'nowrap',
-                                    }}>{p.badge.text}</div>
-                                )}
-                                <div style={{ marginBottom: 12 }}>
-                                    <h3 style={{ fontSize: 18, fontWeight: 800, marginBottom: 4 }}>{p.name}</h3>
-                                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>{p.desc}</p>
-                                </div>
-                                <div style={{ marginBottom: 10 }}>
-                                    {showEventPrice && p.futureAmount && (
-                                        <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.45)', textDecoration: 'line-through', marginBottom: 4 }}>
-                                            정상가 {p.futureAmount.toLocaleString()}원
-                                        </div>
-                                    )}
-                                    <span style={{ fontSize: 28, fontWeight: 900, background: gradient.goldBright, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                                        {p.free ? '0' : activeAmount.toLocaleString()}
-                                    </span>
-                                    <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', marginLeft: 4 }}>{p.free ? '원' : '원'}</span>
-                                    {showEventPrice && p.eventLabel && (
-                                        <div style={{ margin: '10px auto 0', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 2, padding: '7px 12px', borderRadius: 14, background: 'rgba(255,215,0,0.12)', border: '1px solid rgba(255,215,0,0.26)', color: '#FFD700', fontSize: 12, fontWeight: 900, lineHeight: 1.35 }}>
-                                            <span>지금 이벤트가</span>
-                                            <span style={{ color: '#fff7b0', fontSize: 11 }}>{p.eventLabel}</span>
-                                        </div>
-                                    )}
-                                    {showNormalBadge && (
-                                        <div style={{ margin: '10px auto 0', display: 'inline-flex', padding: '7px 12px', borderRadius: 14, background: 'rgba(68,215,182,0.12)', border: '1px solid rgba(68,215,182,0.28)', color: '#8af5dd', fontSize: 12, fontWeight: 900 }}>
-                                            정상가 적용 중
-                                        </div>
-                                    )}
-                                </div>
-                                <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.55)', marginBottom: 4 }}>
-                                    {p.period}
-                                    {p.monthly && <span style={{ display: 'block', color: '#FFD700', marginTop: 4 }}>({p.monthly})</span>}
-                                </div>
-                                {p.amountCard && (
-                                    <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)', marginTop: 6, lineHeight: 1.6 }}>
-                                        카드 <strong style={{ color: 'rgba(255,255,255,0.75)' }}>{activeCardAmount.toLocaleString()}원</strong> <span style={{ opacity: 0.7 }}>(VAT 10%)</span><br />
-                                        계좌이체 <strong style={{ color: 'rgba(255,255,255,0.75)' }}>{activeAmount.toLocaleString()}원</strong>
-                                    </div>
-                                )}
-                                <ul style={{ listStyle: 'none', textAlign: 'left', marginTop: 18, paddingTop: 16, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-                                    {p.features.map((f, i) => (
-                                        <li key={i} style={{ padding: '5px 0', fontSize: 12, color: 'rgba(255,255,255,0.75)', display: 'flex', gap: 8 }}>
-                                            <span style={{ color: isFeatured ? '#FFD700' : '#44d7b6', fontWeight: 700 }}>✓</span>{f}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <div style={{
-                                    marginTop: 18, padding: '10px 16px', borderRadius: 10,
-                                    background: isTrial ? 'linear-gradient(135deg, rgba(68,215,182,0.2), rgba(68,215,182,0.05))' : isSelected ? gradient.goldBright : whiteA(0.05),
-                                    color: isTrial ? '#44d7b6' : isSelected ? '#000' : 'rgba(255,255,255,0.85)',
-                                    fontSize: 13, fontWeight: 700, border: isTrial ? '1px solid rgba(68,215,182,0.4)' : 'none',
-                                }}>
-                                    {isTrial ? '🚀 체험하기 (다운로드)' : isSelected ? '✓ 선택됨' : '선택하기'}
-                                </div>
-                            </div>
-                        );
-                    })}
-                </div>
+                {/*
+                  * 제품 진열대 — 예전 카드 격자를 갈아엎었다(사장님 2026-08-20
+                  * "너무 정신사나워"). 제품은 productCatalog 가 쥐고, 여기서는
+                  * 담은 결과만 받아 아래 결제 구역에 그대로 넘긴다 —
+                  * 결제 코드는 손대지 않는다.
+                  */}
+                <ProductStore
+                    onPick={(pick) => setSelected(pick ? {
+                        id: pick.id,
+                        name: pick.name,
+                        desc: pick.desc,
+                        amount: pick.amount,
+                        period: '',
+                        features: [],
+                    } : null)}
+                />
 
                 {/* Trust bar */}
                 <div style={{ maxWidth: 720, margin: '36px auto 18px', padding: '18px 22px', background: 'rgba(255,255,255,0.95)', borderRadius: 14, boxShadow: '0 6px 22px rgba(0,0,0,0.14)' }}>
