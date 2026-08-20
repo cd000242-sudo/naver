@@ -40,6 +40,9 @@ type CampaignItem = {
     perSaleWon?: number | null;
     /** 브랜드커넥트 상품 ID — 내 스페이스 ID와 합쳐야 링크발급 화면이 열린다. */
     productId?: string;
+    /** 토스 콘솔 홈에서 이 상품이 떠 있는 구획 제목과 순위 — 발급하러 갔을 때 찾는 지도. */
+    consoleSection?: string;
+    consoleRank?: number | null;
     searchVolume?: number | null;
     documentCount?: number | null;
     /** 블로그 검색 상위 10 정면 대응 실측. 쿠팡 레인과 같은 판정. */
@@ -326,22 +329,27 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             </button>
                                         ) : lane === 'toss' ? (
                                             /*
-                                             * 토스 발급은 앱에서만 된다 — 웹으로 보낼 곳이 없다.
-                                             * 상품명을 복사해 주고 앱 안 경로를 그대로 적는다.
-                                             * 발급하면 다음 수집 때 [제휴링크 복사]로 바뀐다.
+                                             * 발급은 콘솔 홈에서 된다 — 이 목록 자체가 콘솔 홈
+                                             * 구획에서 긁어온 것이라, 같은 카드가 홈에 그대로 떠
+                                             * 있다(실측: 카드 클릭 → 모달 → 발급 버튼). 검색이
+                                             * 없는 대신 구획 제목+순위를 지도 삼아 찾는다.
+                                             * 폰이 편하면 토스 앱 상품 공유(↗)로도 발급된다.
                                              */
-                                            <button
-                                                type="button"
+                                            <a
                                                 className="lw-act lw-act-gold"
-                                                onClick={() => {
-                                                    navigator.clipboard?.writeText(item.name);
-                                                    setCopied(item.productId || item.name);
-                                                    window.setTimeout(() => setCopied(''), 3200);
-                                                }}
+                                                href="https://sharelink.toss.im/home"
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                title="폰이 편하면: 토스 앱 쇼핑 검색 → 상품 → 공유 → 쉐어링크 공유하기"
+                                                onClick={() => navigator.clipboard?.writeText(item.name)}
                                             >
-                                                {copied === (item.productId || item.name) ? '상품명 복사했습니다' : '토스 앱에서 발급'}
-                                                <span className="lw-act-sub">토스 앱 쇼핑 검색 → 상품 → 공유 → 쉐어링크 공유하기</span>
-                                            </button>
+                                                콘솔에서 발급
+                                                <span className="lw-act-sub">
+                                                    {item.consoleSection
+                                                        ? `홈 '${item.consoleSection}' 구획 ${item.consoleRank ? `${item.consoleRank}위` : ''} 카드 클릭 → 발급`
+                                                        : '홈 목록에서 이 상품 카드 클릭 → 발급'}
+                                                </span>
+                                            </a>
                                         ) : (
                                             <a
                                                 className="lw-act lw-act-gold"
