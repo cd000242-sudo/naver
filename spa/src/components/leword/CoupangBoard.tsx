@@ -196,9 +196,19 @@ function CoupangBoard({ onAnalyze, lane = 'coupang' }: { onAnalyze: (keyword: st
                                 </button>
                             )}
                             {lane === 'toss' && (
-                                <a className="lw-act lw-act-gold" href="https://sharelink.toss.im/home" target="_blank" rel="noreferrer">
-                                    토스 콘솔 열기<span className="lw-act-sub">상품명 붙여넣어 검색</span>
-                                </a>
+                                /*
+                                 * 발급은 웹 콘솔이 아니라 토스 앱에서만 된다(공식 가이드
+                                 * 실측 2026-08-21 — 콘솔엔 상품 검색 자체가 없다).
+                                 * 상품명을 복사해 주고 앱 안 경로를 그대로 적는다.
+                                 */
+                                <button
+                                    type="button"
+                                    className="lw-act lw-act-gold"
+                                    onClick={() => copyText(`toss-issue:${row.url}`, row.name)}
+                                >
+                                    {copiedKey === `toss-issue:${row.url}` ? '상품명 복사했습니다' : '토스 앱에서 발급'}
+                                    <span className="lw-act-sub">토스 앱 쇼핑 검색 → 상품 → 공유 → 쉐어링크 공유하기</span>
+                                </button>
                             )}
                             {lane === 'brandconnect' && (
                                 <a className="lw-act lw-act-gold" href="https://brandconnect.naver.com/" target="_blank" rel="noreferrer">
