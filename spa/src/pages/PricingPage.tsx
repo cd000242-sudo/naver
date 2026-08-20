@@ -391,52 +391,6 @@ function PricingPage() {
             } : {}),
         }}>
             <section className="pricing-page-shell" style={{ padding: '140px 20px 80px', maxWidth: 1320, margin: '0 auto' }}>
-                <section className="purchase-proof-showcase" aria-label="실제 발행 영상과 수익 성과 인증">
-                    <div className="purchase-video-side">
-                        <div className="purchase-section-eyebrow">REAL WORKFLOW</div>
-                        <h3>결제 전, 실제로 글이 발행되는 장면부터 확인하세요</h3>
-                        <p>
-                            Better Life Naver와 Leadernam Orbit이 실제로 글을 만들고 각 채널에 발행되는 과정을 영상으로 먼저 보여줍니다.
-                            구매 페이지에서 기능이 말이 아니라 화면으로 증명되도록 배치했습니다.
-                        </p>
-                        <article className="purchase-main-video">
-                            <video
-                                src={PURCHASE_SHOWCASE_VIDEOS[0].src}
-                                controls
-                                muted
-                                loop
-                                playsInline
-                                preload="metadata"
-                                aria-label={PURCHASE_SHOWCASE_VIDEOS[0].title}
-                            />
-                            <div>
-                                <span>{PURCHASE_SHOWCASE_VIDEOS[0].label}</span>
-                                <strong>{PURCHASE_SHOWCASE_VIDEOS[0].title}</strong>
-                                <p>{PURCHASE_SHOWCASE_VIDEOS[0].desc}</p>
-                            </div>
-                        </article>
-                        <div className="purchase-video-grid">
-                            {PURCHASE_SHOWCASE_VIDEOS.slice(1).map((video) => (
-                                <article className="purchase-mini-video" key={video.src}>
-                                    <video
-                                        src={video.src}
-                                        controls
-                                        muted
-                                        playsInline
-                                        preload="metadata"
-                                        aria-label={video.title}
-                                    />
-                                    <div>
-                                        <span>{video.label}</span>
-                                        <strong>{video.title}</strong>
-                                    </div>
-                                </article>
-                            ))}
-                        </div>
-                    </div>
-
-                    <ProofShowcase compact variant="carousel" className="purchase-proof-side" />
-                </section>
 
                 {pricingIntro}
 
@@ -771,6 +725,12 @@ function PricingPage() {
                   * 담은 결과만 받아 아래 결제 구역에 그대로 넘긴다 —
                   * 결제 코드는 손대지 않는다.
                   */}
+                {/*
+                  * 상점은 자기 바닥을 직접 칠한다. 이 페이지 배경이 밝은 해변
+                  * 사진이라(계절 테마) 어두운 잉크가 그대로 얹히면 안 보인다
+                  * (사장님 실측 2026-08-20 "배경이 밝은 색상인 걸 감안해서").
+                  */}
+                <div style={{ background: 'rgba(8, 10, 16, 0.94)', backdropFilter: 'blur(18px)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 22, padding: 'clamp(20px, 4vw, 40px)', marginBottom: 28 }}>
                 <ProductStore
                     onPick={(pick) => setSelected(pick ? {
                         id: pick.id,
@@ -781,6 +741,7 @@ function PricingPage() {
                         features: [],
                     } : null)}
                 />
+                </div>
 
                 {/* Trust bar */}
                 <div style={{ maxWidth: 720, margin: '36px auto 18px', padding: '18px 22px', background: 'rgba(255,255,255,0.95)', borderRadius: 14, boxShadow: '0 6px 22px rgba(0,0,0,0.14)' }}>
@@ -887,6 +848,58 @@ function PricingPage() {
                     🏦 카드 결제가 어려우신가요?{' '}
                     <Link to="/bank-order" style={{ color: '#44d7b6' }}>계좌이체로 결제하기 →</Link>
                 </div>
+
+                {/*
+                  * 발행 영상·성과 인증은 구매창 **아래**로 내렸다(사장님 2026-08-20
+                  * "바로 구매창이 뜨는 게 낫지 않나"). 결정을 굳히는 증거는
+                  * 값을 본 다음에 온다 — 먼저 나오면 진열대를 미루는 벽이 된다.
+                  */}
+                <section className="purchase-proof-showcase" aria-label="실제 발행 영상과 수익 성과 인증">
+                    <div className="purchase-video-side">
+                        <div className="purchase-section-eyebrow">REAL WORKFLOW</div>
+                        <h3>결제 전, 실제로 글이 발행되는 장면부터 확인하세요</h3>
+                        <p>
+                            Better Life Naver와 Leadernam Orbit이 실제로 글을 만들고 각 채널에 발행되는 과정을 영상으로 먼저 보여줍니다.
+                            구매 페이지에서 기능이 말이 아니라 화면으로 증명되도록 배치했습니다.
+                        </p>
+                        <article className="purchase-main-video">
+                            <video
+                                src={PURCHASE_SHOWCASE_VIDEOS[0].src}
+                                controls
+                                muted
+                                loop
+                                playsInline
+                                preload="metadata"
+                                aria-label={PURCHASE_SHOWCASE_VIDEOS[0].title}
+                            />
+                            <div>
+                                <span>{PURCHASE_SHOWCASE_VIDEOS[0].label}</span>
+                                <strong>{PURCHASE_SHOWCASE_VIDEOS[0].title}</strong>
+                                <p>{PURCHASE_SHOWCASE_VIDEOS[0].desc}</p>
+                            </div>
+                        </article>
+                        <div className="purchase-video-grid">
+                            {PURCHASE_SHOWCASE_VIDEOS.slice(1).map((video) => (
+                                <article className="purchase-mini-video" key={video.src}>
+                                    <video
+                                        src={video.src}
+                                        controls
+                                        muted
+                                        playsInline
+                                        preload="metadata"
+                                        aria-label={video.title}
+                                    />
+                                    <div>
+                                        <span>{video.label}</span>
+                                        <strong>{video.title}</strong>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    </div>
+
+                    <ProofShowcase compact variant="carousel" className="purchase-proof-side" />
+                </section>
 
                 <style>{`
                     @keyframes shakePay{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
