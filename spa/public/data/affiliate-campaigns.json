@@ -1,5 +1,5 @@
 {
- "collectedAt": "2026-08-20T14:06:06.197Z",
+ "collectedAt": "2026-08-20T14:21:28.122Z",
  "sites": {
   "toss": {
    "label": "토스쇼핑 쉐어링크",
@@ -23,7 +23,13 @@
      "needVolume": 2550,
      "needDocs": 2239,
      "needRatio": 1.1,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "리벤스 오리지널 플러스 물티슈, 대용량 캡형이 끝까지 안 마르냐가 관건",
+      "axis": "대용량 캡형 물티슈는 뽑는 편의보다 마지막 장까지 마르지 않고 버티느냐, 엠보싱이 물기 머금고도 안 찢어지느냐에서 평가가 갈린다",
+      "whyClick": "대용량 캡형은 다 쓸 때쯤 뻑뻑해진 경험이 흔해서, 이 제품은 그 지점을 넘겼는지부터 확인하고 싶어진다.",
+      "provider": "claude"
+     }
     },
     {
      "name": "푸릇담 젊은농부 양배추즙, 100ml, 30팩",
@@ -44,7 +50,13 @@
      "needVolume": 1090,
      "needDocs": 428,
      "needRatio": 2.5,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "푸릇담 젊은농부 양배추즙, 속 때문에 먹는데 결국 맛에서 갈리더라",
+      "axis": "위 때문에 사는 건강즙이라 효능보다 특유의 풋내·비린맛을 견디고 한 박스를 끝까지 먹을 수 있느냐에서 갈린다",
+      "whyClick": "양배추즙은 남기면 그대로 손해라, 사기 전에 완주 가능한 맛인지가 가장 궁금한 사람이 누른다.",
+      "provider": "claude"
+     }
     },
     {
      "name": "더주 몸통 마른 오징어, 5-9미, 220g 내외, 1개",
@@ -65,7 +77,13 @@
      "needVolume": 1050,
      "needDocs": 647,
      "needRatio": 1.6,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "더주 몸통 마른 오징어, 다리 없이 몸통만인 게 이득인지 손해인지",
+      "axis": "몸통만 든 구성이 다리 섞인 통마리보다 가격 대비 이득인지, 씹는 맛과 손질 편의가 그 값을 하는지에서 갈린다",
+      "whyClick": "몸통만 파는 구성이 통마리보다 나은 선택인지 헷갈리던 사람이 판단 기준을 잡으려고 클릭한다.",
+      "provider": "claude"
+     }
     },
     {
      "name": "일동후디스 소화편한 우유 바나나, 190ml, 24개입, 1박스",
@@ -84,9 +102,15 @@
      },
      "needKeyword": "바나나",
      "needVolume": 19570,
-     "needDocs": 6733271,
+     "needDocs": 6733092,
      "needRatio": 0,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "일동후디스 소화편한 우유 바나나, 우유 마시면 배 아픈 사람 기준",
+      "axis": "소화 편한 우유를 찾는 이유는 유당인데, 바나나 가공유는 당과 첨가물이 붙어 원래 목적과 어긋날 수 있다는 지점에서 갈린다",
+      "whyClick": "유당 때문에 우유를 피하던 사람이 바나나맛으로 가도 속이 편한지, 자기 기준으로 확인하고 싶어서 누른다.",
+      "provider": "claude"
+     }
     },
     {
      "name": "3대째 달인 광천김, 4g, 40봉",
@@ -105,9 +129,15 @@
      },
      "needKeyword": "광천김",
      "needVolume": 15040,
-     "needDocs": 66749,
+     "needDocs": 66745,
      "needRatio": 0.2,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "3대째 달인 광천김, 기름 세기랑 간에서 호불호 갈리는 편",
+      "axis": "조미김은 브랜드보다 기름 세기와 소금 간이 집 입맛에 맞느냐, 밥반찬용인지 그냥 집어먹는 용도인지에서 갈린다",
+      "whyClick": "조미김은 간이 세거나 기름져서 남기면 박스째 애물단지가 되니, 입맛 맞는지부터 걸러보려고 클릭한다.",
+      "provider": "claude"
+     }
     },
     {
      "name": "농가살리기 전통 호박 인절미, 20g, 75개",
@@ -126,9 +156,15 @@
      },
      "needKeyword": "인절미",
      "needVolume": 7820,
-     "needDocs": 1716442,
+     "needDocs": 1716407,
      "needRatio": 0,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "농가살리기 전통 호박 인절미, 떡은 받고 나서 굳는 게 문제라",
+      "axis": "온라인 떡은 맛보다 도착 후 굳음과 해동 방식이 실제 만족도를 결정하고, 콩고물·호박맛 강도에서 호불호가 갈린다",
+      "whyClick": "떡을 인터넷으로 시켰다 딱딱해져 실패한 기억이 있는 사람이 보관·해동 얘기를 확인하려고 누른다.",
+      "provider": "claude"
+     }
     },
     {
      "name": "푸드앳홈 한입 바삭 마늘 바게트, 40g, 10개",
@@ -147,9 +183,15 @@
      },
      "needKeyword": "바게트",
      "needVolume": 7740,
-     "needDocs": 3356626,
+     "needDocs": 3356532,
      "needRatio": 0,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "푸드앳홈 한입 바삭 마늘 바게트, 데우면 눅눅해지는 게 제일 걱정이라면",
+      "axis": "한입 냉동 마늘빵은 '맛'이 아니라 데웠을 때 겉이 바삭하게 살아나는지 아니면 눅눅해지는지에서 만족이 갈린다",
+      "whyClick": "냉동 마늘빵을 사봤다가 재가열 후 축축해져 버린 경험이 있는 사람은 이 제품도 같은 결과일지부터 확인하고 담고 싶어서.",
+      "provider": "claude"
+     }
     },
     {
      "name": "안동맛자반 순살 간고등어, 100g, 10팩",
@@ -168,9 +210,15 @@
      },
      "needKeyword": "간고등어",
      "needVolume": 4380,
-     "needDocs": 1330654,
+     "needDocs": 1330586,
      "needRatio": 0,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "안동맛자반 순살 간고등어, 간고등어 짜서 물에 담그던 사람이 볼 지점",
+      "axis": "간고등어는 뼈 유무보다 간이 얼마나 센지가 갈리는 지점이고, 짜면 결국 물에 담그거나 남기게 된다",
+      "whyClick": "예전에 산 간고등어가 너무 짜서 밥반찬으로 실패한 사람이 이번엔 간 세기를 미리 가늠하고 주문하려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "스페시핏 곰팡이 제거제 플러스, 500ml, 2개",
@@ -189,9 +237,15 @@
      },
      "needKeyword": "플러스",
      "needVolume": 2810,
-     "needDocs": 16792660,
+     "needDocs": 16790835,
      "needRatio": 0,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "스페시핏 곰팡이 제거제 플러스, 락스 냄새 때문에 미루던 욕실 실리콘이라면",
+      "axis": "욕실 곰팡이 제거는 효과보다 락스 냄새와 환기 문제 때문에 미루게 되고, 실리콘 속까지 빠지느냐에서 후기가 갈린다",
+      "whyClick": "창문 없는 욕실이라 독한 냄새가 부담돼 곰팡이 제거를 미뤄온 사람이 이 제품은 견딜 만한지 판단하려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "하루한콩 구운 병아리콩, 군옥수수맛, 15g, 22개입, 1개",
@@ -202,7 +256,7 @@
      "price": 8900,
      "keyword": "하루한콩 구운 병아리콩",
      "searchVolume": 470,
-     "documentCount": 37801,
+     "documentCount": 37798,
      "serpTop": {
       "sampled": 10,
       "exact": 5,
@@ -210,9 +264,15 @@
      },
      "needKeyword": "하루한콩 병아리콩",
      "needVolume": 1300,
-     "needDocs": 143548,
+     "needDocs": 143537,
      "needRatio": 0,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "하루한콩 구운 병아리콩, 병아리콩 간식으로 매일 먹기엔 딱딱하지 않을까",
+      "axis": "매일 먹는 콩 간식은 영양보다 딱딱함과 질림 여부에서 완주할지 서랍에 방치될지가 갈린다",
+      "whyClick": "건강 간식으로 정착시키고 싶은데 너무 단단하면 손이 안 갈 걸 알기에 식감부터 확인하려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "나주 원황배 가정용, 7-10과, 3kg, 1박스",
@@ -231,9 +291,15 @@
      },
      "needKeyword": "가정용",
      "needVolume": 990,
-     "needDocs": 7616172,
+     "needDocs": 7615676,
      "needRatio": 0,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "나주 원황배 가정용, 가정용 배는 흠집만 다른 건지 맛까지 다른 건지",
+      "axis": "'가정용' 표기가 단순 외관 흠집인지 크기·당도까지 떨어지는 등급인지에 따라 이 가격의 체감이 완전히 달라진다",
+      "whyClick": "싼 이유가 겉모습뿐이면 바로 담겠지만 당도까지 낮은 등급이면 안 사려는 사람이 그 경계를 알고 싶어서.",
+      "provider": "claude"
+     }
     },
     {
      "name": "수뜰리에 소프트 섬유유연제 비누향, 2.5L, 4개",
@@ -252,9 +318,15 @@
      },
      "needKeyword": "비누향",
      "needVolume": 410,
-     "needDocs": 1047643,
+     "needDocs": 1047626,
      "needRatio": 0,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "수뜰리에 소프트 섬유유연제, 비누향은 은은한 게 좋은데 향이 금방 날아가면",
+      "axis": "비누향 유연제는 향의 호불호가 아니라 세탁 후 잔향이 며칠 가는지, 아니면 널자마자 날아가는지에서 재구매가 갈린다",
+      "whyClick": "독한 향은 싫지만 개어 넣을 때 아무 냄새도 안 나는 유연제에 실망한 적이 있어 잔향 지속력을 확인하려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "오프라이스 한촌설렁탕 정통설렁탕, 500g, 5개",
@@ -275,7 +347,13 @@
      "needVolume": null,
      "needDocs": null,
      "needRatio": null,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "오프라이스 한촌설렁탕 정통설렁탕, 매장 그 국물이랑 뭐가 다를까",
+      "axis": "프랜차이즈 매장에서 먹던 국물 농도·고기 건더기를 레토르트가 어디까지 따라오느냐",
+      "whyClick": "한촌설렁탕 매장 맛을 이미 아는 사람은 간편식이 그 국물을 얼마나 따라오는지가 살지 말지를 가르기 때문.",
+      "provider": "claude"
+     }
     },
     {
      "name": "농협안심 새청무 탄탄대로 쌀, 상등급, 10kg, 1개",
@@ -286,7 +364,7 @@
      "price": 26900,
      "keyword": "농협안심 새청무 탄탄대로",
      "searchVolume": 10,
-     "documentCount": 114,
+     "documentCount": 115,
      "serpTop": {
       "sampled": 10,
       "exact": 5,
@@ -296,7 +374,43 @@
      "needVolume": null,
      "needDocs": null,
      "needRatio": null,
-     "perSaleWon": null
+     "perSaleWon": null,
+     "aiTitle": {
+      "text": "농협안심 새청무 탄탄대로 쌀, 찰진 밥 좋아하면 갈릴 수 있어요",
+      "axis": "새청무 품종 특유의 식감이 우리 집 밥 취향(찰진 밥 vs 고슬한 밥)과 맞느냐",
+      "whyClick": "쌀은 한 포대 사면 몇 달을 먹어야 해서 품종 식감이 집 입맛과 어긋나면 되돌리기 어렵기 때문.",
+      "provider": "claude"
+     }
+    },
+    {
+     "name": "디핀다트 구슬아이스크림, 레인보우 50ml 4개 + 딸기 50ml 4개 + 초코바나나 50ml 4개 + 쿠키앤크림 50ml 4개, 16개",
+     "url": "https://toss.im/_m/rN8b2tEt",
+     "price": 15600,
+     "reward": "수수료 10%",
+     "image": "",
+     "keyword": "",
+     "issuedOnly": true,
+     "aiTitle": {
+      "text": "디핀다트 구슬아이스크림, 집 냉동실에서 안 뭉치게 두는 게 관건",
+      "axis": "배송·가정용 냉동실 온도에서 구슬이 뭉쳐 굳어버리느냐, 그 식감이 유지되느냐",
+      "whyClick": "놀이공원에서 먹던 알알이 흩어지는 식감이 집에서도 살아있느냐가 이 가격의 값어치를 결정하기 때문.",
+      "provider": "claude"
+     }
+    },
+    {
+     "name": "셰프초이스 제육 불고기, 1.5kg, 1개",
+     "url": "https://toss.im/_m/rK6ymUW",
+     "price": 8600,
+     "reward": "수수료 10%",
+     "image": "",
+     "keyword": "",
+     "issuedOnly": true,
+     "aiTitle": {
+      "text": "셰프초이스 제육 불고기, 양념 단맛이랑 고기 씹는 맛에서 호불호 갈려요",
+      "axis": "양념 단맛 세기와 고기 씹는 질감 — 밥반찬용이냐 안주용이냐가 여기서 갈린다",
+      "whyClick": "양념이 달거나 고기가 질기면 가족 중 누구도 안 먹고 남기게 되니 자기 집 입맛 기준을 먼저 맞춰보려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "랜선식당 연탄불고기, 250g, 4개",
@@ -305,7 +419,13 @@
      "reward": "수수료 10%",
      "image": "",
      "keyword": "",
-     "issuedOnly": true
+     "issuedOnly": true,
+     "aiTitle": {
+      "text": "랜선식당 연탄불고기, 불맛 살리려면 데우는 방법부터 갈려요",
+      "axis": "'연탄' 간판값인 불맛이 데우는 방식에 따라 살아나기도, 그냥 간장불고기가 되기도 한다",
+      "whyClick": "이름값인 불맛이 조리 방법 하나로 살거나 사라진다면, 사기 전에 그 조건부터 확인하고 싶어서.",
+      "provider": "claude"
+     }
     },
     {
      "name": "바리스타룰스 원데이 무라벨, 아메리카노, 350ml, 20개",
@@ -314,7 +434,13 @@
      "reward": "수수료 10%",
      "image": "",
      "keyword": "",
-     "issuedOnly": true
+     "issuedOnly": true,
+     "aiTitle": {
+      "text": "바리스타룰스 원데이 무라벨, 매일 마실 커피로 당도가 부담 없나",
+      "axis": "박스로 쟁여 매일 마시는 커피라 당도·칼로리가 누적 부담이 되느냐",
+      "whyClick": "한 번에 여러 개를 사서 매일 마실 거라 한 병의 단맛이 쌓였을 때 감당되는지가 구매를 가르기 때문.",
+      "provider": "claude"
+     }
     },
     {
      "name": "이롬 황성주 박사의 과채습관 퍼플, 190ml, 16개",
@@ -323,7 +449,13 @@
      "reward": "수수료 10%",
      "image": "",
      "keyword": "",
-     "issuedOnly": true
+     "issuedOnly": true,
+     "aiTitle": {
+      "text": "이롬 황성주 과채습관 퍼플, 채소즙 맛 못 견디는 사람도 넘어갈까",
+      "axis": "채소즙 특유의 풀·흙맛을 베리(퍼플)로 덮은 거라, 채소 싫어하는 사람에겐 입문용이지만 당 걱정하는 사람에겐 감점",
+      "whyClick": "건강즙은 사고 싶은데 매번 맛 때문에 남겨본 사람이라 마실 만한지부터 확인하고 결제하려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "널담 고단백 배꼽 베이글, 맛혼합, 10개",
@@ -332,7 +464,13 @@
      "reward": "수수료 10%",
      "image": "",
      "keyword": "",
-     "issuedOnly": true
+     "issuedOnly": true,
+     "aiTitle": {
+      "text": "널담 고단백 배꼽 베이글, 퍽퍽한 다이어트빵에 질린 사람이 볼 글",
+      "axis": "단백질 붙은 대체빵의 승부처는 단백질 함량이 아니라 퍽퍽함과 해동 후 질감, 그리고 일반 베이글보다 비싼 값을 납득할지",
+      "whyClick": "단백질 빵마다 목 막히는 식감에 실망해왔던 터라 이번엔 다른지가 구매를 결정짓기 때문에.",
+      "provider": "claude"
+     }
     },
     {
      "name": "팬톤 오픈형 블루투스 6.0 무선 이어폰, 베이지, 1개",
@@ -341,7 +479,13 @@
      "reward": "수수료 10%",
      "image": "",
      "keyword": "",
-     "issuedOnly": true
+     "issuedOnly": true,
+     "aiTitle": {
+      "text": "팬톤 오픈형 블루투스 이어폰, 5천원대면 뭘 포기하는 건지 보고 사자",
+      "axis": "5천원대 오픈형은 음질보다 연결 끊김·한쪽 먹통·소리 샘 같은 포기 지점이 어디까지인지가 만족을 가른다",
+      "whyClick": "싸서 지르기 직전인데 서브용으로도 못 쓸 수준인지 아닌지 선은 알고 사고 싶어서.",
+      "provider": "claude"
+     }
     },
     {
      "name": "몽크로스 바디팬, T510, 다크그레이, 2개",
@@ -350,7 +494,13 @@
      "reward": "수수료 10%",
      "image": "",
      "keyword": "",
-     "issuedOnly": true
+     "issuedOnly": true,
+     "aiTitle": {
+      "text": "몽크로스 바디팬, 강풍 켰을 때 소음은 어디까지 참을 만할까",
+      "axis": "바디팬은 풍량을 올릴수록 소음이 따라와서, 세면대·현관·반려동물 앞에서 실제로 몇 단까지 쓰게 되냐가 갈린다",
+      "whyClick": "세게 나와야 쓸모 있는 제품인데 정작 시끄러워서 약풍만 쓰게 될까 봐 미리 가늠하려고.",
+      "provider": "claude"
+     }
     }
    ]
   },
@@ -367,7 +517,7 @@
      "price": 1190000,
      "keyword": "드리미 로봇청소기+악세사리",
      "searchVolume": null,
-     "documentCount": 1021,
+     "documentCount": 1019,
      "serpTop": {
       "sampled": 10,
       "exact": 1,
@@ -375,9 +525,15 @@
      },
      "needKeyword": "드리미 로봇청소기",
      "needVolume": 24940,
-     "needDocs": 44264,
+     "needDocs": 44263,
      "needRatio": 0.6,
-     "perSaleWon": 59500
+     "perSaleWon": 59500,
+     "aiTitle": {
+      "text": "드리미 X60 울트라 로봇청소기, 올인원인데 손 가는 데는 여기",
+      "axis": "119만원 올인원의 실체는 청소력이 아니라 스테이션 유지관리 — 결국 사람이 손대야 하는 지점이 어디까지인지",
+      "whyClick": "119만원짜리를 '알아서 다 한다'는 말만 믿고 지르기 전에, 매주 내가 직접 만져야 할 부분이 뭔지 확인하고 결제하려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "오아 클린이워터B-UV 휴대용 무선 구강세정기 물치실 치아세정기 임플란트 교정 부모님 선물",
@@ -397,9 +553,15 @@
      },
      "needKeyword": "오아 구강세정기",
      "needVolume": 4490,
-     "needDocs": 12270,
+     "needDocs": 12267,
      "needRatio": 0.4,
-     "perSaleWon": 3504
+     "perSaleWon": 3504,
+     "aiTitle": {
+      "text": "오아 클린이워터B-UV 구강세정기, 4천원 더 주고 UV 갈 이유",
+      "axis": "같은 라인 일반형과 4천원 차이 — UV 살균이 그 값을 하는지, 아니면 물탱크 관리 습관으로 대체되는지",
+      "whyClick": "장바구니에 UV형과 일반형을 나란히 담아놓고 고민 중인 사람이, 그 4천원 차이가 자기한테 의미 있는지 결론을 내려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "오아 클린이워터B 휴대용 무선 치아 구강세정기 물치실 칫솔 치간 부모님 선물",
@@ -411,7 +573,7 @@
      "price": 39800,
      "keyword": "오아 치아 구강세정기",
      "searchVolume": null,
-     "documentCount": 10299,
+     "documentCount": 10296,
      "serpTop": {
       "sampled": 10,
       "exact": 2,
@@ -419,9 +581,15 @@
      },
      "needKeyword": "오아 구강세정기",
      "needVolume": 4490,
-     "needDocs": 12270,
+     "needDocs": 12267,
      "needRatio": 0.4,
-     "perSaleWon": 3184
+     "perSaleWon": 3184,
+     "aiTitle": {
+      "text": "오아 클린이워터B 구강세정기, 세면대 물바다부터 잡고 쓰세요",
+      "axis": "성능보다 실사용 동선 — 세면대 물 튀김과 휴대용 물탱크 용량이 한 번 양치에 감당되는지에서 리뷰가 갈림",
+      "whyClick": "구강세정기 후기가 가장 크게 갈리는 지점이 물 튀김과 탱크 용량이라, 우리 집 좁은 화장실에서 계속 쓸 수 있을지 먼저 판단하려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "오아 메가에어라이트 써큘레이터 저소음 공기순환 BLDC 가정용 스탠드 선풍기",
@@ -433,7 +601,7 @@
      "price": 97000,
      "keyword": "오아 스탠드 선풍기",
      "searchVolume": 80,
-     "documentCount": 2468,
+     "documentCount": 2469,
      "serpTop": {
       "sampled": 10,
       "exact": 5,
@@ -443,7 +611,13 @@
      "needVolume": 950,
      "needDocs": 3620,
      "needRatio": 0.3,
-     "perSaleWon": 7760
+     "perSaleWon": 7760,
+     "aiTitle": {
+      "text": "오아 메가에어라이트 써큘레이터, 잘 때 켜두면 소리 거슬릴까요",
+      "axis": "'저소음 BLDC'의 기준이 사람마다 달라, 밤새 침실에 켜둘 수 있는 단수인지가 10만원 가까운 값을 가름",
+      "whyClick": "써큘레이터를 사는 이유가 대부분 취침·환기용인데, 저소음이라는 말만으로는 자기 잠귀에 맞을지 알 수 없어서 그 기준을 보러 들어옴.",
+      "provider": "claude"
+     }
     },
     {
      "name": "한일 가정용 음식물 처리기 분쇄기 건조기 쓰레기 음쓰 4리터 DWPO-4120",
@@ -463,9 +637,15 @@
      },
      "needKeyword": "한일 분쇄기",
      "needVolume": 830,
-     "needDocs": 11466,
+     "needDocs": 11464,
      "needRatio": 0.1,
-     "perSaleWon": 18400
+     "perSaleWon": 18400,
+     "aiTitle": {
+      "text": "한일 DWPO-4120 음식물 분쇄기, 냄새랑 필터값 감당되면 사세요",
+      "axis": "36만원 본체값보다 이후에 계속 나가는 필터 교체비와 분쇄·건조 중 냄새·소음이 만족을 가름",
+      "whyClick": "음식물 처리기는 사놓고 안 쓰게 되는 케이스가 많아서, 사기 전에 유지비와 냄새라는 진짜 탈락 사유부터 확인하려고.",
+      "provider": "claude"
+     }
     },
     {
      "name": "벤딕트 휴대용 선풍기 손선풍기 냉각 미니 손풍기 핸디 쿨링 에어컨 빈다르 플로우",
@@ -477,7 +657,7 @@
      "price": 32900,
      "keyword": "벤딕트 선풍기 손선풍기",
      "searchVolume": null,
-     "documentCount": 3332,
+     "documentCount": 3331,
      "serpTop": {
       "sampled": 10,
       "exact": 5,
@@ -487,7 +667,13 @@
      "needVolume": 340,
      "needDocs": 4179,
      "needRatio": 0.1,
-     "perSaleWon": 1645
+     "perSaleWon": 1645,
+     "aiTitle": {
+      "text": "벤딕트 휴대용 선풍기, 3만원대 냉각 손풍기 차가움 얼마나 갈까",
+      "axis": "일반 손선풍기의 몇 배 가격 — 냉각판이 얼마나 오래 차갑게 유지되는지, 그리고 그만큼 무게·배터리를 감수할지",
+      "whyClick": "만원짜리 손풍기 대신 이걸 고르는 유일한 이유가 냉각 기능이라, 그 차가움이 실제로 지속되는지가 구매를 결정해서.",
+      "provider": "claude"
+     }
     }
    ]
   }
