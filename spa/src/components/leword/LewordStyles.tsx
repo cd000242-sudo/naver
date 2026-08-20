@@ -251,6 +251,25 @@ function LewordStyles() {
             .lw-kg-up { font-style: normal; color: #2ecc71; font-weight: 700; }
             /* 이미 작업한 질문 표시 — 중복 작업을 막는다. */
             .lw-kg-worked { font-style: normal; color: #ffa500; font-weight: 700; }
+            .lw-usage { margin: 10px 0 0; padding: 11px 13px; border: 1px solid rgba(124,92,255,.22); border-radius: 10px; background: rgba(124,92,255,.05); }
+            .lw-usage-head { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
+            .lw-usage-plan { padding: 2px 9px; border-radius: 999px; background: rgba(124,92,255,.2); color: #cfc2ff; font-size: 12px; font-weight: 700; letter-spacing: .2px; }
+            .lw-usage-who { color: #646b7d; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .lw-usage-head button { margin-left: auto; padding: 4px 10px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: transparent; color: rgba(235,242,250,.72); font-size: 12px; cursor: pointer; white-space: nowrap; }
+            .lw-usage-head button:hover:not(:disabled) { border-color: rgba(124,92,255,.5); color: #fff; }
+            .lw-usage-head button:disabled { opacity: .5; cursor: not-allowed; }
+            .lw-usage-row { display: flex; align-items: center; gap: 9px; margin-top: 6px; font-size: 12.5px; }
+            .lw-usage-label { width: 38px; color: rgba(235,242,250,.66); flex: none; }
+            .lw-usage-bar { flex: 1; height: 7px; min-width: 60px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
+            .lw-usage-bar i { display: block; height: 100%; border-radius: 999px; transition: width .3s ease; }
+            .lw-usage-pct { width: 42px; text-align: right; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; flex: none; }
+            .lw-usage-reset { color: #646b7d; white-space: nowrap; flex: none; }
+            .lw-usage-err { margin: 4px 0 0; color: #ff6b81; font-size: 12.5px; }
+            .lw-usage-foot { margin: 9px 0 0; color: #646b7d; font-size: 11.5px; }
+            .lw-usage-foot b { color: rgba(235,242,250,.75); font-weight: 700; }
+            @media (max-width: 560px) {
+                .lw-usage-reset { display: none; }
+            }
             .lw-kg-recent { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: rgba(235,242,250,.7); white-space: nowrap; }
             .lw-kg-recent input { accent-color: #ffa500; width: 15px; height: 15px; }
             .lw-kg-kw { border: 0; background: none; padding: 0; font-size: 12px; color: #69b7ff; cursor: pointer; text-decoration: underline; }

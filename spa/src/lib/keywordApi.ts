@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -312,6 +312,19 @@ export type KinPostIdea = { keyword: string; why: string; clickWhy?: string; seo
 export const fetchKinPostIdeas = (input: { title: string; body: string }) =>
     call<{ ideas: KinPostIdea[] }>('kin-post-ideas', { title: input.title, body: input.body })
         .then((res) => { persistRenewed(res.data); return res; });
+
+/**
+ * 클로드 구독 플랜과 남은 사용량.
+ *
+ * 전부 앤트로픽이 준 값이다 — 플랜은 프로필, 사용률·리셋시각은 응답 헤더.
+ * 우리가 추정하는 값은 하나도 없다. 못 읽으면 null 로 와서 화면에서 빠진다.
+ */
+export type ClaudeUsageWindow = { percent: number | null; resetAt: string | null; status: string };
+export type ClaudeUsage = {
+    plan: string; email: string;
+    fiveHour: ClaudeUsageWindow; sevenDay: ClaudeUsageWindow;
+};
+export const fetchClaudeUsage = (token: string) => call<ClaudeUsage>('claude-usage', { token });
 
 /**
  * 지식인 질문 검색 — 키워드로 실제 질문을 찾고 조회수·답변수를 실측해 돌려준다.

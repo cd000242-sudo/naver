@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { checkClaudeToken, exchangeClaudeOauth } from '../../lib/keywordApi';
+import { useCallback, useEffect, useState } from 'react';
+import { checkClaudeToken, exchangeClaudeOauth, fetchClaudeUsage, type ClaudeUsage } from '../../lib/keywordApi';
 import { bridgeAgentLogin, probeBridge, type BridgeStatus } from '../../lib/bridge';
 import {
     KEY_GROUPS,
@@ -11,6 +11,26 @@ import {
     type UserKeys,
 } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
+
+/*
+ * 앤트로픽은 두 개의 창으로 한도를 센다 — 5시간, 그리고 7일.
+ * 둘 중 하나만 차도 막히므로 둘 다 보여 준다.
+ */
+const USAGE_WINDOWS = [
+    { key: 'fiveHour' as const, label: '5시간' },
+    { key: 'sevenDay' as const, label: '7일' },
+];
+/** 색은 상태 신호다 — 여유 / 조심 / 곧 막힘. */
+const usageColor = (percent: number) => (percent >= 90 ? '#ff6b81' : percent >= 70 ? '#f5c518' : '#7c5cff');
+/** 리셋 시각은 사장님 시계(KST)로 적는다. 오늘이면 시각만, 아니면 날짜까지. */
+const resetText = (iso: string | null) => {
+    if (!iso) return '';
+    const at = new Date(iso);
+    if (Number.isNaN(at.getTime())) return '';
+    const sameDay = at.toDateString() === new Date().toDateString();
+    const time = at.toLocaleTimeString('ko-KR', { hour: 'numeric', minute: '2-digit' });
+    return sameDay ? `${time} 리셋` : `${at.toLocaleDateString('ko-KR', { month: 'numeric', day: 'numeric' })} ${time} 리셋`;
+};
 
 /**
  * 앱 폴백 체인 — 앱 브리지의 kinAnswer 체인 순서(claude→codex→gemini→grok)와
@@ -175,6 +195,21 @@ function KeysTab() {
         setSaved(false);
     };
 
+    /*
+     * 구독 플랜과 남은 사용량 — 토큰이 있으면 자동으로 한 번 잰다.
+     * 확인용 요청이 4토큰짜리라 부담이 없다. 값은 전부 앤트로픽이 준 것이다.
+     */
+    const [usage, setUsage] = useState<{ state: 'idle' | 'loading' | 'done' | 'error'; data?: ClaudeUsage; message?: string }>({ state: 'idle' });
+    const loadUsage = useCallback(async () => {
+        const token = String(loadUserKeys().claudeToken || '').trim();
+        if (!token) { setUsage({ state: 'idle' }); return; }
+        setUsage({ state: 'loading' });
+        const result = await fetchClaudeUsage(token);
+        if (result.ok && result.data) setUsage({ state: 'done', data: result.data });
+        else setUsage({ state: 'error', message: result.message || result.error || '사용량을 못 읽었습니다.' });
+    }, []);
+    useEffect(() => { void loadUsage(); }, [loadUsage]);
+
     const problems = checkKeyShape(keys);
 
     const persist = async () => {
@@ -200,6 +235,7 @@ function KeysTab() {
                 return;
             }
             setOauthNote('✅ 토큰 확인됨 — 저장했습니다.');
+            window.setTimeout(() => { void loadUsage(); }, 0);
         }
         saveUserKeys(keys);
         setKeys(loadUserKeys());
@@ -307,6 +343,33 @@ function KeysTab() {
                                   * 구독 토큰이 존재하지 않아 칸 자체를 두지 않는다(빈 칸을 두면
                                   * 넣을 게 있는 줄 알고 API 키를 넣게 된다 — 그건 과금이다).
                                   */}
+                                {item.id === 'claude' && hasToken && (
+                                    <div className="lw-usage">
+                                        <div className="lw-usage-head">
+                                            <span className="lw-usage-plan">{usage.data?.plan || '플랜 확인 중'}</span>
+                                            {usage.data?.email && <span className="lw-usage-who">{usage.data.email}</span>}
+                                            <button type="button" onClick={() => { void loadUsage(); }} disabled={usage.state === 'loading'}>
+                                                {usage.state === 'loading' ? '재는 중…' : '다시 재기'}
+                                            </button>
+                                        </div>
+                                        {usage.state === 'error' && <p className="lw-usage-err">{usage.message}</p>}
+                                        {usage.data && USAGE_WINDOWS.map((window) => {
+                                            const value = usage.data?.[window.key];
+                                            if (!value || value.percent === null) return null;
+                                            return (
+                                                <div className="lw-usage-row" key={window.key}>
+                                                    <span className="lw-usage-label">{window.label}</span>
+                                                    <span className="lw-usage-bar">
+                                                        <i style={{ width: `${Math.min(100, value.percent)}%`, background: usageColor(value.percent) }} />
+                                                    </span>
+                                                    <span className="lw-usage-pct">{value.percent}%</span>
+                                                    <span className="lw-usage-reset">{resetText(value.resetAt)}</span>
+                                                </div>
+                                            );
+                                        })}
+                                        <p className="lw-usage-foot">앤트로픽이 알려 준 값입니다 — 남은 양이 아니라 <b>쓴 양</b>입니다.</p>
+                                    </div>
+                                )}
                                 {item.id === 'claude' && (
                                     <div className="lw-engine-key">
                                         <label>
