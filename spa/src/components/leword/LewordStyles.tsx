@@ -340,6 +340,11 @@ function LewordStyles() {
                 color: #cfc2ff; border-bottom: 1px solid rgba(207,194,255,.35);
             }
             .lw-metric-verdict { padding: 2px 9px; border-radius: 999px; font-weight: 700; }
+            .lw-linktag {
+                padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 700;
+                background: rgba(255,255,255,.07); color: rgba(235,242,250,.6);
+            }
+            .lw-linktag.on { background: rgba(46,204,113,.15); color: #2ecc71; }
             /* 제휴 제목 만들기 — 세 레인(쿠팡·토스·브랜드커넥트)이 같은 모양을 쓴다. */
             /*
              * 카드(.lw-product)가 4칸 grid 라 이 블록이 5번째 칸으로 밀려

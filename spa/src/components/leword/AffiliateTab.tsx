@@ -186,6 +186,15 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             )}
                                             {item.reward && <span className="lw-discount">{item.reward}</span>}
                                             {item.brand && <span className="lw-goldbox">{item.brand}</span>}
+                                            {/*
+                                              * 링크가 이미 있는지를 눈에 보이게 한다(사장님 실측 2026-08-20:
+                                              * "제휴링크 복사 누르니까 그냥 브랜드커넥트로 들어가는데?").
+                                              * shortenUrl 은 **이미 발급받은 상품에만** 온다 — 7건 중 2건뿐이었다.
+                                              * 버튼만 바뀌면 왜 다른지 알 수가 없어 고장으로 읽힌다.
+                                              */}
+                                            {readyLink(item)
+                                                ? <span className="lw-linktag on">링크 발급됨</span>
+                                                : <span className="lw-linktag">발급 필요</span>}
                                         </div>
                                         <a className="lw-product-name" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">{item.name}</a>
                                         <div className="lw-product-metrics">
@@ -253,8 +262,8 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 rel="noreferrer"
                                                 onClick={() => { if (lane === 'brandconnect') navigator.clipboard?.writeText(item.name); }}
                                             >
-                                                콘솔에서 발급
-                                                <span className="lw-act-sub">상품명 복사됨 — 콘솔에서 검색</span>
+                                                콘솔에서 발급받기
+                                                <span className="lw-act-sub">상품명 복사됨 — 검색창에 붙여넣기</span>
                                             </a>
                                         )}
                                     </div>
