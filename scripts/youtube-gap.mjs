@@ -31,6 +31,22 @@ const YOUTUBE_KEY = String(process.env.YOUTUBE_API_KEY || '').trim();
 /* 카테고리 — 블로그 글감이 나오는 것만. 음악은 글로벌 뮤비라 재료가 안 된다. */
 const CATEGORIES = ['24', '25', '22', '26', '1', '17', '20', '28'];
 
+/**
+ * 숏폼인지 확인한다.
+ *
+ * 재생시간으로는 못 가린다 — 급상승에 오르는 예고편·뮤비가 1~3분이라 짧지만
+ * 숏폼이 아니다(실측). 유튜브가 /shorts/ 주소를 200 으로 받아 주는지가
+ * 유일하게 확실한 신호다. 숏폼이 아니면 watch 로 303 리다이렉트한다.
+ */
+async function isShortForm(videoId) {
+    try {
+        const response = await fetch(`https://www.youtube.com/shorts/${videoId}`, { method: 'HEAD', redirect: 'manual' });
+        return response.status === 200;
+    } catch {
+        return null; // 못 재면 모른다고 둔다 — 짐작으로 분류하지 않는다
+    }
+}
+
 /** 빈자리 판정. 찾는 사람이 있고(검색량), 글이 적어야(문서수) 자리다. */
 const MIN_VOLUME = Number(process.env.YTGAP_MIN_VOLUME || 200);
 const MAX_DOCS = Number(process.env.YTGAP_MAX_DOCS || 5000);
@@ -129,7 +145,14 @@ async function main() {
         }
         await sleep(120);
     }
-    log(`급상승 영상 ${videos.length}편`);
+    // 롱폼·숏폼은 뜨는 방식이 달라 따로 봐야 한다(사장님 지시). 여기서 한 번만 잰다.
+    for (const video of videos) {
+        const short = await isShortForm(video.videoId);
+        video.form = short === null ? '' : (short ? 'short' : 'long');
+        await sleep(80);
+    }
+    const shortCount = videos.filter((video) => video.form === 'short').length;
+    log(`급상승 영상 ${videos.length}편 (숏폼 ${shortCount} · 롱폼 ${videos.length - shortCount})`);
     if (videos.length === 0) return;
 
     // ② 제목 → 자동완성 → 실제 검색어
@@ -188,6 +211,7 @@ async function main() {
             video: {
                 videoId: video.videoId, title: video.title, channel: video.channel,
                 thumbnail: video.thumbnail, viewCount: video.viewCount, publishedAt: video.publishedAt,
+                categoryId: video.categoryId, form: video.form || '',
             },
         });
     }

@@ -42,7 +42,12 @@ function Layout() {
             {!isLewordConsole && <Footer />}
             {!isLewordConsole && isSummerSeason() && <SummerEffect />}
             {!musicOff && <MusicPlayer />}
-            {!isLewordConsole && <FloatStack />}
+            {/*
+              * 문의·단톡방·유튜브 버튼은 콘솔에서도 보인다(사장님 지시 2026-08-20
+              * "우측 하단에 있던 버튼들이 다 어디 갔나요?"). 콘솔이라고 문의 경로를
+              * 없애면 여기서 막힌 사람이 물어볼 데가 사라진다.
+              */}
+            <FloatStack />
             {isHome && <NoticeModal />}
         </>
     );

@@ -272,6 +272,26 @@ function LewordStyles() {
              * 카드가 가운데로 무너졌다(실측). 이 줄은 자기 배경을 직접 갖는다.
              */
             .lw-yt-meta { margin-left: auto; color: #646b7d; font-size: 12px; }
+            .lw-yt-filters { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-top: 12px; }
+            .lw-yt-forms, .lw-yt-cats { display: flex; flex-wrap: wrap; gap: 6px; }
+            .lw-yt-forms button, .lw-yt-cats button {
+                padding: 6px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px;
+                background: transparent; color: rgba(235,242,250,.72); font-size: 12.5px; cursor: pointer;
+            }
+            .lw-yt-forms button em, .lw-yt-cats button em { font-style: normal; color: #646b7d; margin-left: 3px; font-size: 11.5px; }
+            .lw-yt-forms button:hover, .lw-yt-cats button:hover { border-color: rgba(124,92,255,.45); color: #fff; }
+            .lw-yt-forms button.on, .lw-yt-cats button.on { border-color: rgba(124,92,255,.6); background: rgba(124,92,255,.16); color: #fff; font-weight: 700; }
+            .lw-yt-forms button.on em, .lw-yt-cats button.on em { color: #cfc2ff; }
+            /* 형식 고르개는 카테고리보다 위계가 위다 — 세로 구분선으로 갈라 둔다. */
+            .lw-yt-cats { padding-left: 16px; border-left: 1px solid rgba(255,255,255,.09); }
+            .lw-yt-tags { display: flex; gap: 6px; margin: 8px 0 0; }
+            .lw-yt-form, .lw-yt-cat { padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+            .lw-yt-form-short { background: rgba(255,0,80,.16); color: #ff8fb0; }
+            .lw-yt-form-long { background: rgba(124,92,255,.16); color: #cfc2ff; }
+            .lw-yt-cat { background: rgba(255,255,255,.07); color: rgba(235,242,250,.7); font-weight: 400; }
+            @media (max-width: 680px) {
+                .lw-yt-cats { padding-left: 0; border-left: 0; }
+            }
             .lw-yt-gap { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
             .lw-yt-row {
                 display: grid; grid-template-columns: 260px minmax(0, 1fr) minmax(0, 320px);

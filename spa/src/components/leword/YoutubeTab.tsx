@@ -26,8 +26,28 @@ type GapRow = {
     video: {
         videoId: string; title: string; channel: string;
         thumbnail: string; viewCount: number | null; publishedAt: string;
+        categoryId?: string; form?: string;
     };
 };
+
+/*
+ * 유튜브 카테고리 번호 → 사람 말. 급상승에 실제로 오르는 것만 싣는다
+ * (여행 19·교육 27 은 한국 급상승에서 404 다).
+ */
+const CATEGORY_LABEL: Record<string, string> = {
+    24: '스타·연예', 25: '뉴스·이슈', 22: '인물·브이로그', 26: '노하우·스타일',
+    1: '영화·애니', 17: '스포츠', 20: '게임', 28: 'IT·과학',
+};
+
+/*
+ * 롱폼과 숏폼은 뜨는 방식이 다르다 — 섞어 놓으면 어느 쪽 재료인지 모른다
+ * (사장님 지시 2026-08-20). 판정은 수집 때 /shorts/ 응답으로 실측한다.
+ */
+const FORMS = [
+    { id: '', label: '전체' },
+    { id: 'short', label: '숏폼' },
+    { id: 'long', label: '롱폼' },
+];
 
 type GapData = {
     collectedAt: string;
@@ -62,6 +82,8 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     /** 지금 재생 중인 카드. 60개를 한꺼번에 띄우면 화면이 죽는다 — 누른 하나만 iframe 이 된다. */
     const [playing, setPlaying] = useState('');
     const [ideas, setIdeas] = useState<Record<string, IdeaState>>({});
+    const [form, setForm] = useState('');
+    const [category, setCategory] = useState('');
 
     useEffect(() => {
         let cancelled = false;
@@ -84,7 +106,15 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         }));
     };
 
-    const rows = data?.rows || [];
+    const allRows = data?.rows || [];
+    const rows = allRows.filter((row) => (
+        (!form || row.video.form === form)
+        && (!category || String(row.video.categoryId || '') === category)
+    ));
+    /** 지금 고른 형식 안에서 카테고리별 몇 건인지 — 빈 버튼을 누르게 두지 않는다. */
+    const countIn = (categoryId: string) => allRows
+        .filter((row) => (!form || row.video.form === form) && String(row.video.categoryId || '') === categoryId).length;
+    const formCount = (formId: string) => allRows.filter((row) => !formId || row.video.form === formId).length;
 
     return (
         <>
@@ -93,6 +123,34 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                 desc="지금 유튜브에서 터지는 중인데 네이버엔 아직 글이 없는 검색어입니다. 영상 제목을 자른 게 아니라, 네이버 자동완성이 인정한 실제 검색어만 싣습니다."
                 source="유튜브 급상승 + 네이버 자동완성·검색량·문서수 실측"
             />
+
+            <div className="lw-yt-filters">
+                <div className="lw-yt-forms" role="group" aria-label="영상 형식">
+                    {FORMS.map((item) => (
+                        <button
+                            key={item.id || 'all'}
+                            type="button"
+                            className={form === item.id ? 'on' : ''}
+                            onClick={() => setForm(item.id)}
+                        >{item.label} <em>{formCount(item.id)}</em></button>
+                    ))}
+                </div>
+                <div className="lw-yt-cats" role="group" aria-label="카테고리">
+                    <button type="button" className={category === '' ? 'on' : ''} onClick={() => setCategory('')}>전체</button>
+                    {Object.entries(CATEGORY_LABEL).map(([id, label]) => {
+                        const count = countIn(id);
+                        if (count === 0) return null;
+                        return (
+                            <button
+                                key={id}
+                                type="button"
+                                className={category === id ? 'on' : ''}
+                                onClick={() => setCategory(id)}
+                            >{label} <em>{count}</em></button>
+                        );
+                    })}
+                </div>
+            </div>
 
             <div className="lw-toolbar">
                 <span className="lw-count">
@@ -155,6 +213,16 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                 </div>
                                 <p className="lw-yt-from">
                                     {row.video.channel} · 조회 {formatCount(row.video.viewCount)} · {row.video.title}
+                                </p>
+                                <p className="lw-yt-tags">
+                                    {row.video.form && (
+                                        <span className={`lw-yt-form lw-yt-form-${row.video.form}`}>
+                                            {row.video.form === 'short' ? '숏폼' : '롱폼'}
+                                        </span>
+                                    )}
+                                    {CATEGORY_LABEL[String(row.video.categoryId || '')] && (
+                                        <span className="lw-yt-cat">{CATEGORY_LABEL[String(row.video.categoryId)]}</span>
+                                    )}
                                 </p>
                                 <p className="lw-yt-date">
                                     영상 날짜 {dateText(row.video.publishedAt)}
