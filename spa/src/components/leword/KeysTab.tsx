@@ -16,11 +16,35 @@ import { TabIntro } from './LewordShared';
  * 앱 폴백 체인 — 앱 브리지의 kinAnswer 체인 순서(claude→codex→gemini→grok)와
  * 같아야 한다. 화면 순서가 실제 실행 순서와 갈라지면 안내가 거짓말이 된다.
  */
+/**
+ * 엔진 목록. keyField 가 있으면 **앱 없이** 그 값만 넣으면 되고, 없으면
+ * (코덱스 구독 등) 로그인이 이 PC 로 돌아와 앱이 다리를 놓는다.
+ * issue 는 그 값을 어디서 받는지 — 사용자가 바로 갈 수 있어야 한다.
+ */
 const AGENT_CHAIN = [
-    { id: 'claude', label: '클로드코드', sub: '클로드 구독 · 사이트에서 바로 연동(앱 불필요)' },
-    { id: 'codex', label: '코덱스', sub: '챗지피티 구독 · 로그인이 이 PC 로 돌아와 앱이 필요' },
-    { id: 'gemini', label: '제미나이 CLI', sub: '구글/제미나이 구독 · 로그인이 이 PC 로 돌아와 앱이 필요' },
-    { id: 'grok', label: '그록', sub: 'xAI 구독 · 로그인이 이 PC 로 돌아와 앱이 필요' },
+    {
+        id: 'claude', label: '클로드코드',
+        sub: '클로드 구독 · 버튼 한 번이면 끝(앱 불필요)',
+        keyField: 'claudeToken' as const, keyLabel: '구독 토큰', keyPlaceholder: 'sk-ant-oat...', issue: '',
+    },
+    {
+        id: 'gemini', label: '제미나이',
+        sub: '무료 API 키를 넣으면 앱 없이 바로(구독 CLI 를 쓰려면 앱 연동)',
+        keyField: 'geminiKey' as const, keyLabel: 'API 키(무료)', keyPlaceholder: 'AIzaSy...',
+        issue: 'https://aistudio.google.com/apikey',
+    },
+    {
+        id: 'codex', label: '코덱스 · 챗지피티',
+        sub: 'API 키를 넣으면 앱 없이(사용량 과금) · 챗지피티 구독으로 쓰려면 앱 연동',
+        keyField: 'openaiKey' as const, keyLabel: 'OpenAI API 키', keyPlaceholder: 'sk-...',
+        issue: 'https://platform.openai.com/api-keys',
+    },
+    {
+        id: 'grok', label: '그록',
+        sub: 'xAI API 키를 넣으면 앱 없이(사용량 과금) · 구독 CLI 로 쓰려면 앱 연동',
+        keyField: 'xaiKey' as const, keyLabel: 'xAI API 키', keyPlaceholder: 'xai-...',
+        issue: 'https://console.x.ai/',
+    },
 ] as const;
 
 /**
@@ -225,13 +249,12 @@ function KeysTab() {
                 <div className="lw-engines-list">
                     {AGENT_CHAIN.map((item) => {
                         const agent = agentOf(item.id);
-                        const linked = item.id === 'claude'
-                            ? Boolean(keys.claudeToken) || Boolean(agent?.available)
-                            : Boolean(agent?.available);
-                        const state = linked ? '✅ 연동됨'
-                            : item.id !== 'claude' && !bridgeReady ? '앱을 켜야 확인됩니다'
-                                : agent?.installed ? '로그인 필요'
-                                    : item.id === 'claude' ? '미연동' : '미설치';
+                        const hasKey = Boolean(String(keys[item.keyField] || '').trim());
+                        const linked = hasKey || Boolean(agent?.available);
+                        const state = hasKey ? (item.id === 'claude' ? '✅ 연동됨' : '✅ 키 연동됨(앱 불필요)')
+                            : agent?.available ? '✅ 앱으로 연동됨'
+                                : agent?.installed ? '앱: 로그인 필요'
+                                    : '미연동';
                         const active = activeProvider === item.id;
                         return (
                             <div key={item.id} className={`lw-engine-row${active ? ' on' : ''}`}>
@@ -275,6 +298,22 @@ function KeysTab() {
                                         }}
                                     >{active ? '사용 중' : '사용'}</button>
                                 </div>
+                                {/* 앱 없이 쓰는 값 — 클로드는 버튼이 자동으로 채우고, 나머지는 직접 넣는다. */}
+                                {item.id !== 'claude' && (
+                                    <div className="lw-engine-key">
+                                        <label>
+                                            {item.keyLabel}
+                                            <input
+                                                type="password"
+                                                value={String(keys[item.keyField] || '')}
+                                                onChange={(event) => update(item.keyField, event.target.value)}
+                                                placeholder={item.keyPlaceholder}
+                                                autoComplete="new-password"
+                                            />
+                                        </label>
+                                        {item.issue && <a href={item.issue} target="_blank" rel="noreferrer">발급받기 →</a>}
+                                    </div>
+                                )}
                             </div>
                         );
                     })}
@@ -321,10 +360,7 @@ function KeysTab() {
                         <div className="lw-panel-head">
                             <h2>{group.label}</h2>
                             <span className={ready ? 'lw-key-on' : ''}>
-                                {/* AI 그룹은 사장님 키 폴백이 없다 — '사장님 키로 조회'라고 적으면 거짓말이 된다. */}
-                                {ready ? '● 사용 중'
-                                    : group.id === 'ai' ? '미연동 — 위 구독 연결 버튼 한 번'
-                                        : '미입력 — 사장님 키로 조회'}
+                                {ready ? '● 사용 중' : '미입력 — 사장님 키로 조회'}
                             </span>
                             <a className="lw-key-issue" href={group.issueUrl} target="_blank" rel="noreferrer">발급받기 →</a>
                         </div>

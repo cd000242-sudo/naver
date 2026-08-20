@@ -29,6 +29,8 @@ export type UserKeyField =
     | 'claudeExpiresAt'
     | 'geminiKey'
     | 'openaiKey'
+    /** 그록(xAI) API 키 — 앱 없이 서버가 부른다. */
+    | 'xaiKey'
     | 'brandconnectSpaceId'
     | 'apihubKeyId'
     | 'apihubKey';
@@ -36,7 +38,7 @@ export type UserKeyField =
 export type UserKeys = Partial<Record<UserKeyField, string>>;
 
 export type KeyGroup = {
-    id: 'searchad' | 'openapi' | 'apihub' | 'youtube' | 'coupang' | 'brandconnect' | 'ai';
+    id: 'searchad' | 'openapi' | 'apihub' | 'youtube' | 'coupang' | 'brandconnect';
     label: string;
     desc: string;
     /** 어디서 발급받는지. 사용자가 바로 갈 수 있어야 한다. */
@@ -45,28 +47,6 @@ export type KeyGroup = {
 };
 
 export const KEY_GROUPS: readonly KeyGroup[] = [
-    {
-        /*
-         * 지식인 답변 생성(사장님 확정 2026-08-20 "앱 안 켜도 되게") — 1순위는
-         * 클로드코드 **구독 토큰**: 터미널에 `claude setup-token` 한 줄이면 나오고,
-         * 구독 정액이라 추가 과금이 없다. 앱을 켤 필요도 없다. 토큰·키는 이
-         * 브라우저에만 저장되고 요청에서만 쓰인다(서버 저장 없음).
-         */
-        /*
-         * API 키 칸(Gemini/OpenAI)은 뺐다(사장님 확정 2026-08-20 "API 는 비용이
-         * 든다고, 구독돼 있는 걸 쓰면 되잖아"). 코덱스(챗지피티 구독)·안티그래비티
-         * (제미나이 구독)는 LEWORD 앱 브리지의 폴백 체인이 자동으로 쓴다 —
-         * 사이트가 그 구독 인증을 직접 재현하는 것은 안전 경계 밖이라 앱이 다리다.
-         * 저장돼 있던 기존 Gemini/OpenAI 키는 서버 폴백에서 계속 동작한다.
-         */
-        id: 'ai',
-        label: 'AI 연동 (지식인 답변·마인드맵 추론·글 진단)',
-        desc: '위 "구독 연결" 버튼 한 번이면 클로드 구독으로 전부 돕니다(자동 갱신, 추가 비용 0). 코덱스·안티그래비티 구독을 쓰려면 LEWORD 앱을 켜 두세요 — 앱이 그 구독들로 자동 실행합니다.',
-        issueUrl: 'https://claude.ai/',
-        fields: [
-            { key: 'claudeToken', label: '클로드코드 토큰 (자동 저장 · 수동 입력도 가능)', secret: true, placeholder: 'sk-ant-oat...' , minLength: 40 },
-        ],
-    },
     {
         id: 'searchad',
         label: '네이버 검색광고',
@@ -181,13 +161,7 @@ export function clearUserKeys(): void {
 
 /** 그룹 하나가 쓸 수 있는 상태인지(필수 항목이 전부 찼는지). */
 export function isGroupReady(group: KeyGroup, keys: UserKeys): boolean {
-    /*
-     * AI 그룹은 경로가 병렬이다 — 하나만 있어도 전부 돈다(사장님 확정 2026-08-20
-     * "하나만 맞아도 연동완료 뜨게"). 나머지 그룹은 키 세트가 한 몸이라 전부 필요.
-     */
-    if (group.id === 'ai') {
-        return group.fields.some((field) => String(keys[field.key] || '').trim().length > 0);
-    }
+    // 네이버·쿠팡 등은 키 세트가 한 몸이라 전부 있어야 한다(AI 는 위 엔진 목록 소관).
     return group.fields.every((field) => String(keys[field.key] || '').trim().length > 0);
 }
 

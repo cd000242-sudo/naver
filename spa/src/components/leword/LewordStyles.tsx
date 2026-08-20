@@ -294,6 +294,11 @@ function LewordStyles() {
             .lw-engine-state { font-size: 12px; font-weight: 700; color: rgba(235,242,250,.55); white-space: nowrap; }
             .lw-engine-state.ok { color: #2ecc71; }
             .lw-engine-actions { display: flex; gap: 6px; }
+            .lw-engine-key { grid-column: 1 / -1; display: flex; align-items: flex-end; gap: 10px; margin-top: 4px; }
+            .lw-engine-key label { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; color: rgba(235,242,250,.6); }
+            .lw-engine-key input { width: 100%; padding: 8px 11px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; font-family: Consolas, monospace; }
+            .lw-engine-key input:focus { outline: none; border-color: rgba(255,165,0,.5); }
+            .lw-engine-key a { flex: none; font-size: 11.5px; color: #69b7ff; text-decoration: none; padding-bottom: 9px; }
             @media (max-width: 720px) {
                 .lw-engine-row { grid-template-columns: minmax(0, 1fr); }
                 .lw-engine-actions { justify-content: flex-start; }
