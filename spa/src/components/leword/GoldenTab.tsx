@@ -112,6 +112,8 @@ type PreemptionRow = {
 type Board = {
     publishedAt?: string;
     topicsTotal?: number;
+    /** 무료로 여는 5건 — 발행본이 하루 동안 고정한다(새로고침으로 못 바꾼다). */
+    freeSample?: { day: string; keywords: string[] };
     topicsWithRows?: number;
     verified?: number;
     rows: PreemptionRow[];
@@ -126,7 +128,6 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [topic, setTopic] = useState('전체');
     /** 어느 판에 쓸 글인가. 배치 순서 실측으로 가른다. */
     const [writeLane, setWriteLane] = useState('all');
-    const [query, setQuery] = useState('');
     // 라이선스 코드 또는 자기 API 키. 둘 중 하나면 전부 열린다.
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     /** 실행 계획을 펼친 카드. 한 번에 하나만 연다 — 다 펼치면 목록이 안 읽힌다. */
@@ -312,12 +313,11 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
     const rows = useMemo(() => {
         const all = board?.rows || [];
-        const needle = query.trim().toLowerCase();
         const filtered = all.filter((row) => {
             // 레인 판정은 rowMatchesWriteLane 단일 출처 — 애드센스만 실측 의도, 나머지는 배치 순서.
             if (!rowMatchesWriteLane(row, writeLane)) return false;
             if (topic !== '전체' && row.topic !== topic) return false;
-            return !needle || row.keyword.toLowerCase().includes(needle);
+            return true;
         });
         /*
          * 줄 세우기 — **황금키워드끼리 모아 놓고, 그 안에서 광고 많은 순.**
@@ -353,9 +353,9 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
          * '전체' 탭(검색 없음)은 주제 로테이션 인터리브 — 결정론 정렬이라 매번
          * 같은 키워드가 1등이면 "특별함이 없다"(사장님). 각 주제의 1등들이 먼저
          * 섞여 나오고, 주제 순서는 방문마다 바뀐다. 주제 안은 위의 등급순 그대로라
-         * 품질 순서는 안 무너진다. 주제·검색 필터를 걸면 원래 정렬로 돌아간다.
+         * 품질 순서는 안 무너진다. 주제 필터를 걸면 원래 정렬로 돌아간다.
          */
-        if (topic !== '전체' || needle) return sorted;
+        if (topic !== '전체') return sorted;
         const byTopicOrder = new Map<string, PreemptionRow[]>();
         for (const row of sorted) {
             const key = row.topic || '?';
@@ -388,14 +388,14 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             depth += 1;
         }
         return interleaved;
-    }, [board, topic, query, writeLane, shuffleSeed]);
+    }, [board, topic, writeLane, shuffleSeed]);
 
     /** 계획 창에 띄울 행. 목록 밖에 한 개만 둔다 — 카드마다 창을 만들 이유가 없다. */
     const planRow = useMemo(() => rows.find((row) => row.keyword === openPlan) || null, [rows, openPlan]);
 
     useEffect(() => {
         setVisibleCount(60);
-    }, [topic, query, writeLane]);
+    }, [topic, writeLane]);
 
     // '지식인 황금질문'은 좌측 메뉴 독립 탭(KinGoldenTab)으로 옮겨졌다(2026-08-20 정정).
     const publishedLabel = board?.publishedAt
@@ -408,7 +408,8 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             <TabIntro
                 title="리더남 전용 황금키워드"
                 desc="검색결과를 직접 열어 보고 '지금 들어갈 자리가 있는' 것만 남겼습니다. 상위 자리가 비어 있는 것이 맨 앞이고, 그 아래로 자리가 확실한 순서입니다. 블로그 주제 32종을 한 번에 훑었으니 카테고리를 하나씩 뒤질 필요가 없습니다."
-                source={`Bright Data 검색결과 실측${publishedLabel ? ` · ${publishedLabel} 발행` : ''}${board?.verified ? ` · ${board.verified}건 검증` : ''}`}
+                /* 어떤 도구로 재는지는 밝히지 않는다(사장님 2026-08-20) — 잰 사실만 적는다. */
+                source={`검색결과 직접 확인${publishedLabel ? ` · ${publishedLabel} 발행` : ''}${board?.verified ? ` · ${board.verified}건 검증` : ''}`}
             />
 
             {status === 'loading' && <div className="lw-note">발굴 결과를 불러오는 중입니다…</div>}
@@ -432,14 +433,13 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
             {status === 'ready' && board && (
                 <>
+                    {/*
+                      * 검색창을 뺐다(사장님 2026-08-20): "어떤 키워드인 줄 알고
+                      * 찾는다고 필드를 구현해 놓은 거야." 맞다 — 여기는 모르는
+                      * 키워드를 발견하러 오는 곳이지 아는 것을 찾으러 오는 곳이 아니다.
+                      * 주제·레인 고르개가 추리는 일을 한다.
+                      */}
                     <div className="lw-toolbar">
-                        <input
-                            type="search"
-                            value={query}
-                            onChange={(event) => setQuery(event.target.value)}
-                            placeholder="키워드 안에서 찾기"
-                            aria-label="선점 키워드 검색"
-                        />
                         <span className="lw-count">
                             {rows.length}개 · 주제 {board.topicsWithRows ?? topics.length}/{board.topicsTotal ?? 32}종
                         </span>
@@ -462,7 +462,19 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
 
                     <div className="lw-board-list">
                         {rows.slice(0, visibleCount).map((row, index) => {
-                            const locked = !unlocked && index >= FREE_BOARD_ROWS;
+                            /*
+                             * 잠금 판정은 순번이 아니라 **이름**으로 한다.
+                             * 순번으로 자르면 주제·레인 고르개를 바꿀 때마다 5건이
+                             * 갈려서, 무료 사용자가 필터만 돌려 가며 보드를 다 볼 수 있다
+                             * (사장님 지적 2026-08-20 "새로고침하면 새 키워드"와 같은 구멍).
+                             * 발행본이 하루 동안 고정한 다섯 이름만 열린다.
+                             */
+                            const freeNames = board.freeSample?.keywords;
+                            const locked = unlocked
+                                ? false
+                                : (freeNames && freeNames.length > 0
+                                    ? !freeNames.includes(row.keyword)
+                                    : index >= FREE_BOARD_ROWS);
                             return (
                                 <article key={`${row.topic}-${row.keyword}`} className={`lw-card lw-card-pre${locked ? ' locked' : ''}`}>
                                     <BoardCardHead
