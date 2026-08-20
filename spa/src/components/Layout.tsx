@@ -25,8 +25,12 @@ function Layout() {
     };
     // 공지 모달은 홈에서만 띄운다(다른 페이지 작업을 가리지 않게).
     const isHome = pathname === '/';
-    // 관리자 미리보기 iframe 등 무음 컨텍스트에서는 음악 플레이어를 아예 렌더하지 않는다.
-    const musicOff = isLewordConsole || isMusicSuppressed();
+    /*
+     * 관리자 미리보기 iframe 등 무음 컨텍스트에서만 음악 플레이어를 끈다.
+     * 예전엔 LEWORD 콘솔도 함께 껐는데, 콘솔에서 오래 작업하는 사람이야말로
+     * 틀어 놓고 싶어 한다(사장님 2026-08-20 "노래 재생 버튼은 어따 팔아먹었냐").
+     */
+    const musicOff = isMusicSuppressed();
 
     return (
         <>
