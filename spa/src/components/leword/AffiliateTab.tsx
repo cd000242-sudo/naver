@@ -132,16 +132,17 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         return /naver\.me\/|brandconnect\.naver\.com\/affiliates\/|toss\.im\/_m\//.test(url) ? url : '';
     };
 
-    /** 발급된 링크가 없을 때 갈 곳. 상품 딥링크는 만들지 않는다 — 확인할 수 없는 주소다. */
-    const consoleUrl = () => {
-        if (lane === 'brandconnect') {
-            return spaceId
-                ? `https://brandconnect.naver.com/${spaceId}/affiliate/products`
-                : 'https://brandconnect.naver.com/';
-        }
-        // 토스는 쉐어링크 콘솔에서 발급한다.
-        return 'https://sharelink.toss.im/home';
-    };
+    /*
+     * 발급된 링크가 없을 때 갈 곳. 상품 딥링크는 만들지 않는다 — 확인할 수
+     * 없는 주소다. 토스는 여기 안 온다: 발급이 웹 콘솔이 아니라 **토스 앱**
+     * 상품 상세 → 공유 → "쉐어링크 공유하기" 에서만 된다(공식 가이드
+     * sharelink-docs.toss.im 실측 2026-08-21 — 콘솔엔 상품 검색 자체가 없다).
+     */
+    const consoleUrl = () => (
+        spaceId
+            ? `https://brandconnect.naver.com/${spaceId}/affiliate/products`
+            : 'https://brandconnect.naver.com/'
+    );
 
     const campaigns = lane === 'coupang' ? null : (snapshot?.sites?.[lane] ?? null);
     const collectedLabel = snapshot?.collectedAt
@@ -313,13 +314,31 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                     {item.reward || '이미 발급된 링크입니다'}
                                                 </span>
                                             </button>
+                                        ) : lane === 'toss' ? (
+                                            /*
+                                             * 토스 발급은 앱에서만 된다 — 웹으로 보낼 곳이 없다.
+                                             * 상품명을 복사해 주고 앱 안 경로를 그대로 적는다.
+                                             * 발급하면 다음 수집 때 [제휴링크 복사]로 바뀐다.
+                                             */
+                                            <button
+                                                type="button"
+                                                className="lw-act lw-act-gold"
+                                                onClick={() => {
+                                                    navigator.clipboard?.writeText(item.name);
+                                                    setCopied(item.productId || item.name);
+                                                    window.setTimeout(() => setCopied(''), 3200);
+                                                }}
+                                            >
+                                                {copied === (item.productId || item.name) ? '상품명 복사했습니다' : '토스 앱에서 발급'}
+                                                <span className="lw-act-sub">토스 앱 쇼핑 검색 → 상품 → 공유 → 쉐어링크 공유하기</span>
+                                            </button>
                                         ) : (
                                             <a
                                                 className="lw-act lw-act-gold"
                                                 href={consoleUrl()}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                onClick={() => { if (lane === 'brandconnect') navigator.clipboard?.writeText(item.name); }}
+                                                onClick={() => navigator.clipboard?.writeText(item.name)}
                                             >
                                                 콘솔에서 발급받기
                                                 <span className="lw-act-sub">상품명 복사됨 — 검색창에 붙여넣기</span>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { fetchKeywordPostIdeas, formatCount, type KinPostIdea } from '../../lib/keywordApi';
+import { fetchGapTopics, fetchKeywordPostIdeas, formatCount, type KinPostIdea } from '../../lib/keywordApi';
+import { loadUserKeys } from '../../lib/userKeys';
 import { TabIntro } from './LewordShared';
 
 /**
@@ -53,7 +54,7 @@ const CATEGORY_LABEL: Record<string, string> = {
  * 2026-07-31 종료돼 상품수 실측이 불가능하다.
  */
 const TOPICS = [
-    { id: 'shopping', label: '제휴·쇼핑각', hint: '광고 경쟁 실측 높음 — 돈이 걸린 검색어' },
+    { id: 'shopping', label: '제휴·쇼핑각', hint: '광고 경쟁 실측 높음 + AI 에이전트가 "살 수 있는 물건"으로 판정한 검색어' },
     { id: 'policy', label: '복지·정책', hint: '지원금·복지·정책 낱말이 든 검색어' },
     { id: 'ai', label: 'AI', hint: 'AI 관련 검색어' },
 ];
@@ -105,6 +106,8 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [form, setForm] = useState('');
     const [category, setCategory] = useState('');
     const [topic, setTopic] = useState('');
+    /** 에이전트 판정 주제 — 검색어별 추가 주제. 수집분마다 브라우저에 캐시. */
+    const [aiTopics, setAiTopics] = useState<Record<string, string[]>>({});
     /** 방금 복사한 키워드 — 버튼에 "복사됨"을 잠깐 보여준다. */
     const [copied, setCopied] = useState('');
 
@@ -116,6 +119,39 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
             .catch(() => { if (!cancelled) setStatus('error'); });
         return () => { cancelled = true; };
     }, []);
+
+    /*
+     * 에이전트 주제 판정(사장님 지시 2026-08-21 "API 가 아니지, 에이전트가
+     * 있으니까"). 규칙·광고경쟁 실측 위에 얹는다. 같은 수집분은 다시 묻지
+     * 않는다 — 캐시 열쇠가 collectedAt 이라 새 수집이 오면 새로 판정한다.
+     */
+    useEffect(() => {
+        if (!data || data.rows.length === 0) return;
+        const keys = loadUserKeys();
+        if (!keys.claudeToken && !keys.geminiKey && !keys.openaiKey) return;
+        const cacheKey = `leaderspro.ytgap.aitopics.${data.collectedAt}`;
+        try {
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) { setAiTopics(JSON.parse(cached)); return; }
+        } catch { /* 캐시가 깨졌으면 새로 판정 */ }
+        let cancelled = false;
+        fetchGapTopics(data.rows.map((row) => row.keyword)).then((result) => {
+            if (cancelled || !result.ok || !result.data) return;
+            const map: Record<string, string[]> = {};
+            for (const verdict of result.data.topics) {
+                const topics = [];
+                if (verdict.shopping) topics.push('shopping');
+                if (verdict.policy) topics.push('policy');
+                if (verdict.ai) topics.push('ai');
+                if (topics.length > 0) map[verdict.keyword] = topics;
+            }
+            setAiTopics(map);
+            try { localStorage.setItem(cacheKey, JSON.stringify(map)); } catch { /* 저장 실패해도 화면은 동작 */ }
+        });
+        return () => { cancelled = true; };
+    }, [data]);
+
+    const topicsFor = (row: GapRow) => [...new Set([...(row.topics || []), ...(aiTopics[row.keyword] || [])])];
 
     const makeIdeas = async (row: GapRow) => {
         if (ideas[row.keyword]?.status === 'loading') return;
@@ -141,14 +177,14 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const rows = allRows.filter((row) => (
         (!form || row.video.form === form)
         && (!category || String(row.video.categoryId || '') === category)
-        && (!topic || (row.topics || []).includes(topic))
+        && (!topic || topicsFor(row).includes(topic))
     ));
     /** 지금 고른 형식 안에서 카테고리별 몇 건인지 — 빈 버튼을 누르게 두지 않는다. */
     const countIn = (categoryId: string) => allRows
         .filter((row) => (!form || row.video.form === form) && String(row.video.categoryId || '') === categoryId).length;
     const formCount = (formId: string) => allRows.filter((row) => !formId || row.video.form === formId).length;
     const topicCount = (topicId: string) => allRows
-        .filter((row) => (!form || row.video.form === form) && (row.topics || []).includes(topicId)).length;
+        .filter((row) => (!form || row.video.form === form) && topicsFor(row).includes(topicId)).length;
 
     return (
         <>
@@ -274,13 +310,13 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                     {CATEGORY_LABEL[String(row.video.categoryId || '')] && (
                                         <span className="lw-yt-cat">{CATEGORY_LABEL[String(row.video.categoryId)]}</span>
                                     )}
-                                    {(row.topics || []).includes('shopping') && (
-                                        <span className="lw-yt-topic lw-yt-topic-shopping" title="검색광고 경쟁도 실측 '높음' — 광고주가 몰리는 검색어">제휴·쇼핑각</span>
+                                    {topicsFor(row).includes('shopping') && (
+                                        <span className="lw-yt-topic lw-yt-topic-shopping" title="광고 경쟁 실측 '높음' 또는 AI 에이전트가 '살 수 있는 물건'으로 판정">제휴·쇼핑각</span>
                                     )}
-                                    {(row.topics || []).includes('policy') && (
+                                    {topicsFor(row).includes('policy') && (
                                         <span className="lw-yt-topic lw-yt-topic-policy">복지·정책</span>
                                     )}
-                                    {(row.topics || []).includes('ai') && (
+                                    {topicsFor(row).includes('ai') && (
                                         <span className="lw-yt-topic lw-yt-topic-ai">AI</span>
                                     )}
                                 </p>

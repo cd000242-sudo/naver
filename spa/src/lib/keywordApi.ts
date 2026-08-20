@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas', 'kin-search', 'claude-usage', 'keyword-post-ideas', 'radar-analyze', 'radar-search', 'radar-evaluate', 'gap-topics']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -518,3 +518,12 @@ export const fetchRadarEvaluate = (items: RadarCandidate[], articleTitle: string
         articleTitle,
         moneyAngle,
     });
+
+/**
+ * 글감 주제 판정 — 연동된 AI 에이전트가 한다(사장님 지시 2026-08-21).
+ * 쇼핑 검색 API 종료(2026-07-31) 뒤 "살 수 있는 물건인가"를 아는 건
+ * 사전이 아니라 모델이다. 셋 다 예/아니오 분류 — 점수를 만들지 않는다.
+ */
+export type GapTopicVerdict = { keyword: string; shopping: boolean; policy: boolean; ai: boolean };
+export const fetchGapTopics = (keywords: string[]) =>
+    call<{ topics: GapTopicVerdict[] }>('gap-topics', { keywords: JSON.stringify(keywords) });
