@@ -156,14 +156,24 @@ export async function bridgeKinAnswer(input: {
  * 띄우고 브라우저를 연다. 사이트는 자격증명을 만지지 않는다: 시작 신호를
  * 보내고 상태만 돌려받는다. 앱이 꺼져 있으면 null.
  */
-export async function bridgeAgentLogin(provider: 'claude' | 'codex' | 'gemini' | 'grok'): Promise<
+/**
+ * CLI 구독 로그인.
+ *
+ * `switchAccount` 를 주면 기존 자격증명을 먼저 지운다. 안 지우면 CLI 가
+ * "이미 로그인돼 있습니다" 로 끝나 버려 다른 계정으로 갈아탈 수가 없다
+ * (사장님 실측 2026-08-20 — 플랜이 다른 계정으로 바꾸려는데 안 바뀜).
+ */
+export async function bridgeAgentLogin(
+    provider: 'claude' | 'codex' | 'gemini' | 'grok',
+    switchAccount = false,
+): Promise<
     { state: 'already' | 'done' | 'browser-opened' | 'starting' | 'failed'; loggedIn?: boolean; message?: string } | null
 > {
     const body = await bridgeFetch('/v1/bridge/agent-login', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ provider }),
-    }, 20_000) as { result?: { state: 'already' | 'done' | 'browser-opened' | 'starting' | 'failed'; loggedIn?: boolean; message?: string } } | null;
+        body: JSON.stringify({ provider, switchAccount }),
+    }, 30_000) as { result?: { state: 'already' | 'done' | 'browser-opened' | 'starting' | 'failed'; loggedIn?: boolean; message?: string } } | null;
     return body?.result || null;
 }
 

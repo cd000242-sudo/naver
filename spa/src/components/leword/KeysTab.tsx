@@ -174,10 +174,17 @@ function KeysTab() {
     /** 제공자별 로그인 시작 — 앱이 그 PC 에서 로그인 창을 띄운다. */
     const [loginBusy, setLoginBusy] = useState('');
     const [loginNote, setLoginNote] = useState('');
-    const startAgentLogin = async (provider: 'claude' | 'codex' | 'gemini' | 'grok', label: string) => {
+    /**
+     * CLI 구독 로그인. `switchAccount` 면 기존 계정을 먼저 지운다.
+     *
+     * 그냥 다시 누르면 CLI 가 "이미 로그인돼 있습니다" 로 끝난다 — 플랜이 다른
+     * 계정으로 갈아탈 수가 없었다(사장님 실측 2026-08-20).
+     */
+    const startAgentLogin = async (provider: 'claude' | 'codex' | 'gemini' | 'grok', label: string, switchAccount = false) => {
+        if (switchAccount && !window.confirm(`${label}의 지금 계정 연결을 끊고 다른 계정으로 로그인합니다. 계속할까요?`)) return;
         setLoginBusy(provider);
-        setLoginNote('');
-        const result = await bridgeAgentLogin(provider);
+        setLoginNote(switchAccount ? `${label}: 기존 계정 연결을 끊는 중…` : '');
+        const result = await bridgeAgentLogin(provider, switchAccount);
         setLoginBusy('');
         if (!result) {
             setLoginNote(`${label} 로그인을 시작하지 못했습니다 — LEWORD 앱을 켠 뒤 다시 눌러 주세요(이 로그인은 내 PC 에서만 됩니다).`);
@@ -312,9 +319,10 @@ function KeysTab() {
                                                     const next = { ...keys, claudeToken: '', claudeRefresh: '', claudeExpiresAt: '' };
                                                     setKeys(next);
                                                     saveUserKeys(next);
-                                                    setOauthNote('클로드 연동을 해제했습니다.');
+                                                    setUsage({ state: 'idle' });
+                                                    setOauthNote('연결을 끊었습니다 — [연동]을 눌러 다른 계정으로 로그인하세요.');
                                                 }}
-                                            >해제</button>
+                                            >계정 바꾸기</button>
                                         ) : (
                                             <button type="button" className="lw-mini" onClick={startClaudeConnect} disabled={oauthBusy}>연동</button>
                                         )
@@ -322,9 +330,9 @@ function KeysTab() {
                                         <button
                                             type="button"
                                             className="lw-mini"
-                                            onClick={() => startAgentLogin(item.id, item.label)}
+                                            onClick={() => startAgentLogin(item.id, item.label, linked)}
                                             disabled={Boolean(loginBusy)}
-                                        >{loginBusy === item.id ? '여는 중…' : linked ? '다시 로그인' : '연동'}</button>
+                                        >{loginBusy === item.id ? '여는 중…' : linked ? '계정 바꾸기' : '연동'}</button>
                                     )}
                                     <button
                                         type="button"
@@ -367,6 +375,27 @@ function KeysTab() {
                                                 </div>
                                             );
                                         })}
+                                        {/*
+                                          * 한도 경고 — 기준은 제일 낮은 플랜이다(사장님 2026-08-20:
+                                          * "내가 Max 20x 쓰는 게 특이 케이스고 보통은 제일 낮은 플랜").
+                                          * Pro 는 5시간 창이 금방 찬다. 막히고 나서 당황하지 않게
+                                          * 미리 알리고, 그때 할 일(다른 엔진으로 전환)까지 적는다.
+                                          */}
+                                        {usage.data && (() => {
+                                            const hit = USAGE_WINDOWS
+                                                .map((window) => ({ window, value: usage.data?.[window.key] }))
+                                                .find(({ value }) => value && (value.status === 'rejected' || (value.percent !== null && value.percent >= 85)));
+                                            if (!hit || !hit.value) return null;
+                                            const blocked = hit.value.status === 'rejected';
+                                            return (
+                                                <p className={`lw-usage-warn${blocked ? ' hard' : ''}`}>
+                                                    {blocked
+                                                        ? `${hit.window.label} 한도가 찼습니다 — ${resetText(hit.value.resetAt) || '잠시 뒤'}까지 클로드로는 생성이 안 됩니다.`
+                                                        : `${hit.window.label} 한도의 ${hit.value.percent}% 를 썼습니다 — ${resetText(hit.value.resetAt) || '곧'} 까지 아껴 쓰세요.`}
+                                                    {' '}위 목록에서 다른 엔진의 <b>[사용]</b>을 누르면 그 구독으로 계속할 수 있습니다.
+                                                </p>
+                                            );
+                                        })()}
                                         <p className="lw-usage-foot">앤트로픽이 알려 준 값입니다 — 남은 양이 아니라 <b>쓴 양</b>입니다.</p>
                                     </div>
                                 )}

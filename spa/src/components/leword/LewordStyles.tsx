@@ -267,6 +267,9 @@ function LewordStyles() {
             .lw-usage-pct { width: 42px; text-align: right; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; flex: none; }
             .lw-usage-reset { color: #646b7d; white-space: nowrap; flex: none; }
             .lw-usage-err { margin: 4px 0 0; color: #ff6b81; font-size: 12.5px; }
+            .lw-usage-warn { margin: 9px 0 0; padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(245,197,24,.32); background: rgba(245,197,24,.07); color: rgba(235,242,250,.82); font-size: 12.5px; line-height: 1.55; }
+            .lw-usage-warn.hard { border-color: rgba(255,107,129,.36); background: rgba(255,107,129,.08); }
+            .lw-usage-warn b { color: #fff; }
             .lw-usage-foot { margin: 9px 0 0; color: #646b7d; font-size: 11.5px; }
             .lw-usage-foot b { color: rgba(235,242,250,.75); font-weight: 700; }
             @media (max-width: 560px) {
@@ -1053,6 +1056,8 @@ function LewordStyles() {
             .lw-mindmap-money-good { border-color: rgba(74,222,128,.35); }
             .lw-mindmap-money-bad { border-color: rgba(248,113,113,.4); }
             .lw-mindmap-money-mixed { border-color: rgba(250,204,21,.35); }
+            /* 판정 자체를 못 한 행 — 초록도 빨강도 아니다. 중립으로 둔다. */
+            .lw-mindmap-money-unknown { border-color: rgba(255,255,255,.14); }
             .lw-mindmap-money-head {
                 display: flex;
                 align-items: center;
@@ -1066,6 +1071,7 @@ function LewordStyles() {
             .lw-mindmap-money-good .lw-mindmap-money-head strong { color: #4ade80; }
             .lw-mindmap-money-bad .lw-mindmap-money-head strong { color: #f87171; }
             .lw-mindmap-money-mixed .lw-mindmap-money-head strong { color: #facc15; }
+            .lw-mindmap-money-unknown .lw-mindmap-money-head strong { color: rgba(235,242,250,.6); }
             .lw-mindmap-money ul { margin: 0 0 8px; padding-left: 18px; }
             .lw-mindmap-money li {
                 margin-bottom: 5px;

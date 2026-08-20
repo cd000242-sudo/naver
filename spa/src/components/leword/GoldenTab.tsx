@@ -614,7 +614,24 @@ function GoldenTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                         </div>
                                     )}
 
-                                    {/* 수익 결론 — 회차 보강이 붙인 판정. bad 는 애드센스 레인에서 빠진 이유가 이것이다. */}
+                                    {/*
+                                      * 수익 결론 — 어느 카드에나 뜬다.
+                                      *
+                                      * 예전엔 애드센스 후보(88/126)만 이 칸이 있어 "나오는 게 있고 안 나오는 게
+                                      * 있다"(사장님 2026-08-20)로 보였다. 판정을 안 한 행에도 이유는 이미
+                                      * 있었다(adsenseReason) — 안 보여줬을 뿐이다. 빈 칸이 아니라 이유를 적는다.
+                                      */}
+                                    {!row.monetize && row.adsenseReason && (
+                                        <div className={`lw-mindmap-money lw-mindmap-money-${row.adsenseFit === false ? 'bad' : 'unknown'}`}>
+                                            <div className="lw-mindmap-money-head">
+                                                💰 광고 수익 관점
+                                                <strong>
+                                                    {row.adsenseFit === false ? '⛔ 광고 수익 안 나온다 — 애드센스 탈락' : '— 판정하지 않음'}
+                                                </strong>
+                                            </div>
+                                            <ul><li>{row.adsenseReason}</li></ul>
+                                        </div>
+                                    )}
                                     {row.monetize && (
                                         <div className={`lw-mindmap-money lw-mindmap-money-${row.monetize.verdict}`}>
                                             <div className="lw-mindmap-money-head">
