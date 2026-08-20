@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze', 'kin-post-ideas']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -303,6 +303,15 @@ export const exchangeClaudeOauth = (code: string, verifier: string) =>
 /** 저장 전에 그 토큰으로 실제 생성이 되는지 확인 — 죽은 값 저장 방지. */
 export const checkClaudeToken = (token: string) =>
     call<Record<string, never>>('claude-token-check', { token });
+
+/**
+ * 이 질문으로 쓸 수 있는 글감 — 키워드마다 SEO 제목과 홈판(디스커버) 제목.
+ * 홈판 제목은 제목 교리(구어체·답 숨김·AI 티 0)를 서버 프롬프트가 강제한다.
+ */
+export type KinPostIdea = { keyword: string; why: string; seo: string; home: string };
+export const fetchKinPostIdeas = (input: { title: string; body: string }) =>
+    call<{ ideas: KinPostIdea[] }>('kin-post-ideas', { title: input.title, body: input.body })
+        .then((res) => { persistRenewed(res.data); return res; });
 
 /** 지식인 질문 전문 — 답변 작업대는 질문이 안 잘리고 끝까지 보여야 한다. */
 export const fetchKinQuestion = (link: string) =>

@@ -271,6 +271,20 @@ function LewordStyles() {
             .lw-kg-linkbox input { accent-color: #ffa500; width: 15px; height: 15px; }
             .lw-kg-linkbox.off { opacity: .45; cursor: not-allowed; }
             .lw-kg-bloginput { width: 100%; margin-top: 8px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 12.5px; }
+            /* 글감 드롭다운 — 키워드 하나에 SEO·홈판 제목이 접혀 있다. */
+            .lw-ideas { display: flex; flex-direction: column; gap: 7px; }
+            .lw-idea { border: 1px solid rgba(255,255,255,.1); border-radius: 10px; background: rgba(255,255,255,.025); overflow: hidden; }
+            .lw-idea.on { border-color: rgba(255,165,0,.42); }
+            .lw-idea-head { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 13px; border: 0; background: none; color: #ebf2fa; font-size: 14px; font-weight: 700; cursor: pointer; text-align: left; }
+            .lw-idea-head span { color: rgba(235,242,250,.45); font-size: 11px; }
+            .lw-idea-body { padding: 0 13px 12px; display: flex; flex-direction: column; gap: 7px; }
+            .lw-idea-why { margin: 0 0 3px; font-size: 12px; color: rgba(235,242,250,.55); }
+            .lw-idea-title { display: flex; align-items: center; gap: 9px; min-width: 0; }
+            .lw-idea-title span { flex: none; font-size: 11px; font-weight: 800; color: rgba(255,165,0,.9); border: 1px solid rgba(255,165,0,.35); border-radius: 6px; padding: 2px 7px; }
+            .lw-idea-title em { flex: 1; min-width: 0; font-style: normal; font-size: 13.5px; color: #fff; font-weight: 600; }
+            .lw-idea-title button { flex: none; border: 1px solid rgba(255,255,255,.16); border-radius: 7px; background: none; color: rgba(235,242,250,.7); font-size: 11.5px; padding: 3px 9px; cursor: pointer; }
+            .lw-idea-title button:hover { border-color: rgba(255,165,0,.5); color: #fff; }
+
             /* 엔진 선택 목록 — 하나 골라 연동하고 그것으로 쓴다. */
             .lw-engines-list { display: flex; flex-direction: column; gap: 8px; }
             .lw-engine-row { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; background: rgba(255,255,255,.025); }
