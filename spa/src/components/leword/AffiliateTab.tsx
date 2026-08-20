@@ -59,6 +59,8 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [lane, setLane] = useState<LaneId>('coupang');
     const [unlocked, setUnlocked] = useState(() => isUnlocked());
     const [snapshot, setSnapshot] = useState<CampaignSnapshot | null>(null);
+    /** 방금 복사한 상품 — 눌렀는데 아무 반응이 없으면 됐는지 알 수가 없다. */
+    const [copied, setCopied] = useState('');
 
     /*
      * 토스·브랜드커넥트는 공개 API 가 없어 캠페인 목록이 로그인 뒤에 있다.
@@ -83,15 +85,29 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
      */
     const spaceId = String(loadUserKeys().brandconnectSpaceId || '').trim();
 
-    /** 링크를 발급받는 화면. 계정 연결이 돼 있으면 그 상품으로 바로, 아니면 콘솔 홈으로. */
-    const issueUrl = (item: CampaignItem) => {
+    /**
+     * 이미 발급된 제휴링크인가.
+     *
+     * 브랜드커넥트 API 의 shortenUrl 은 **이미 제휴링크다**(실측 2026-08-20:
+     * naver.me/FlB3RnSN → brandconnect.naver.com/affiliates/{id}?channelProductNo=…).
+     * 그동안 이걸 두고 콘솔 주소를 손으로 조립해 "링크발급 하러 가기" 를 시켰다.
+     * 그 주소는 SPA 라 어떤 경로든 200 을 주는 탓에 틀린 걸 눈치채지 못했다.
+     * 발급받으러 갈 필요가 없다 — 링크는 이미 손에 있다.
+     */
+    const readyLink = (item: CampaignItem) => {
+        const url = String(item.url || '');
+        return /naver\.me\/|brandconnect\.naver\.com\/affiliates\//.test(url) ? url : '';
+    };
+
+    /** 발급된 링크가 없을 때 갈 곳. 상품 딥링크는 만들지 않는다 — 확인할 수 없는 주소다. */
+    const consoleUrl = () => {
         if (lane === 'brandconnect') {
-            return spaceId && item.productId
-                ? `https://brandconnect.naver.com/${spaceId}/affiliate/products/${item.productId}`
+            return spaceId
+                ? `https://brandconnect.naver.com/${spaceId}/affiliate/products`
                 : 'https://brandconnect.naver.com/';
         }
-        // 토스는 쉐어링크 콘솔에서 발급한다 — 상품 주소가 있으면 그 상품으로 보낸다.
-        return item.url || 'https://sharelink.toss.im/home';
+        // 토스는 쉐어링크 콘솔에서 발급한다.
+        return 'https://sharelink.toss.im/home';
     };
 
     const campaigns = lane === 'coupang' ? null : (snapshot?.sites?.[lane] ?? null);
@@ -182,20 +198,33 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                             target="_blank"
                                             rel="noreferrer"
                                         >네이버 검색분석</a>
-                                        <a
-                                            className="lw-act lw-act-gold"
-                                            href={issueUrl(item)}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            onClick={() => { if (!spaceId && lane === 'brandconnect') navigator.clipboard?.writeText(item.name); }}
-                                        >
-                                            상품 확인 및 링크발급
-                                            <span className="lw-act-sub">
-                                                {lane === 'brandconnect' && !spaceId
-                                                    ? '상품명 복사됨 — 콘솔에서 검색'
-                                                    : (item.reward || '내 계정으로 열립니다')}
-                                            </span>
-                                        </a>
+                                        {readyLink(item) ? (
+                                            <button
+                                                type="button"
+                                                className="lw-act lw-act-gold"
+                                                onClick={() => {
+                                                    navigator.clipboard?.writeText(readyLink(item));
+                                                    setCopied(item.productId || item.name);
+                                                    window.setTimeout(() => setCopied(''), 2200);
+                                                }}
+                                            >
+                                                {copied === (item.productId || item.name) ? '복사했습니다' : '제휴링크 복사'}
+                                                <span className="lw-act-sub">
+                                                    {item.reward || '이미 발급된 링크입니다'}
+                                                </span>
+                                            </button>
+                                        ) : (
+                                            <a
+                                                className="lw-act lw-act-gold"
+                                                href={consoleUrl()}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                onClick={() => { if (lane === 'brandconnect') navigator.clipboard?.writeText(item.name); }}
+                                            >
+                                                콘솔에서 발급
+                                                <span className="lw-act-sub">상품명 복사됨 — 콘솔에서 검색</span>
+                                            </a>
+                                        )}
                                     </div>
                                 </li>
                             );
