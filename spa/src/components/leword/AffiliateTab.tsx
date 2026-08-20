@@ -196,7 +196,20 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                                 ? <span className="lw-linktag on">링크 발급됨</span>
                                                 : <span className="lw-linktag">발급 필요</span>}
                                         </div>
-                                        <a className="lw-product-name" href={item.url || active.consoleUrl} target="_blank" rel="noreferrer">{item.name}</a>
+                                        {/*
+                                          * 토스는 공개 상품 페이지가 없다 — shopping.toss.im/product/{id} 는
+                                          * 전부 403 AccessDenied 였다(사장님 실측 2026-08-20, 원문 덤프에도
+                                          * 웹 주소 없음). 지어낸 주소로 보내느니 콘솔로 보내고 이름을 복사해
+                                          * 검색하게 한다.
+                                          */}
+                                        <a
+                                            className="lw-product-name"
+                                            href={item.url || active.consoleUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            title={item.url ? undefined : '상품명 복사됨 — 콘솔 검색창에 붙여넣으세요'}
+                                            onClick={() => { if (!item.url) navigator.clipboard?.writeText(item.name); }}
+                                        >{item.name}</a>
                                         <div className="lw-product-metrics">
                                             {typeof item.price === 'number' && item.price > 0 && (
                                                 <span className="lw-product-price"><strong>{item.price.toLocaleString('ko-KR')}원</strong></span>
