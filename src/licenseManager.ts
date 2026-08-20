@@ -1228,9 +1228,19 @@ export async function revalidateLicense(serverUrl?: string): Promise<boolean> {
     return false;
   }
 
-  // ✅ 무료 티어는 서버 재검증 건너뜀 (서버 연동 시 오류 방지)
+  /*
+   * [2026-08-20] 무료 티어도 만료를 본다.
+   *
+   * 예전엔 여기서 무조건 true 를 돌려서, 만료일을 넣어도 무시됐다 — 무료
+   * 체험이 사실상 무기한이었고 유료를 대체했다(사장님 결정: 30일 제한).
+   * 서버 재검증만 건너뛴다. 만료돼도 clearLicense 는 하지 않는다 — 지우면
+   * 재활성화로 30일이 초기화되는 구멍이 된다.
+   *
+   * 기존 사용자 보호: 이미 깔린 FREE-TIER 는 expiresAt 이 없어서
+   * isLicenseExpired 가 영구로 판정한다. 아무것도 잃지 않는다.
+   */
   if (license.licenseType === 'free') {
-    return true;
+    return !isLicenseExpired(license);
   }
 
   // 만료 확인

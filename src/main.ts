@@ -1086,17 +1086,31 @@ async function activateFreeTier(userInfo?: { email: string; nickname: string; ph
       debugLog(`[Main] activateFreeTier: GAS 전송 실패 (오프라인 허용) — ${(gasError as Error).message}`);
     }
 
-    const now = new Date().toISOString();
+    /*
+     * [2026-08-20] 체험은 30일이다(사장님 결정 — "한 달은 사용할 수 있게").
+     *
+     * 만료 기준은 **처음 활성화한 날**이다. 디스크에 무료 라이선스가 이미
+     * 있으면(만료된 것 포함) 그 verifiedAt 을 그대로 쓴다 — 지우고 다시
+     * 활성화해서 30일을 초기화하는 구멍을 막는다.
+     * 기존 사용자는 이 코드를 다시 타지 않으니(라이선스가 이미 있다)
+     * expiresAt 없는 옛 판 그대로 영구다 — 뺏는 것이 없다.
+     */
+    const licenseModule = await import('./licenseManager.js');
+    const existing = await licenseModule.loadLicense().catch(() => null);
+    const firstActivatedAt = existing?.licenseType === 'free' && existing.verifiedAt
+      ? existing.verifiedAt
+      : new Date().toISOString();
+    const trialExpiresAt = new Date(new Date(firstActivatedAt).getTime() + 30 * 24 * 60 * 60 * 1000).toISOString();
     const license: LicenseInfo = {
       licenseCode: 'FREE-TIER',
       deviceId: await getDeviceId(),
-      verifiedAt: now,
-      expiresAt: undefined,
+      verifiedAt: firstActivatedAt,
+      expiresAt: trialExpiresAt,
       isValid: true,
       licenseType: 'free',
       authMethod: 'code',
     };
-    await (await import('./licenseManager.js')).saveLicense(license);
+    await licenseModule.saveLicense(license);
     return { success: true };
   } catch (error) {
     return { success: false, message: (error as Error).message };
