@@ -360,7 +360,7 @@ function KeysTab() {
                                                 <div className="lw-usage-row" key={window.key}>
                                                     <span className="lw-usage-label">{window.label}</span>
                                                     <span className="lw-usage-bar">
-                                                        <i style={{ width: `${Math.min(100, value.percent)}%`, background: usageColor(value.percent) }} />
+                                                        <i style={{ transform: `scaleX(${Math.min(100, value.percent) / 100})`, background: usageColor(value.percent) }} />
                                                     </span>
                                                     <span className="lw-usage-pct">{value.percent}%</span>
                                                     <span className="lw-usage-reset">{resetText(value.resetAt)}</span>

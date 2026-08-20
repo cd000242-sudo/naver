@@ -261,7 +261,9 @@ function LewordStyles() {
             .lw-usage-row { display: flex; align-items: center; gap: 9px; margin-top: 6px; font-size: 12.5px; }
             .lw-usage-label { width: 38px; color: rgba(235,242,250,.66); flex: none; }
             .lw-usage-bar { flex: 1; height: 7px; min-width: 60px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
-            .lw-usage-bar i { display: block; height: 100%; border-radius: 999px; transition: width .3s ease; }
+            /* 채움은 transform 으로 늘린다 — width 를 애니메이션하면 매 프레임 레이아웃을 다시 잰다.
+               둥근 끝은 트랙이 overflow:hidden 으로 깎아 주므로 채움엔 radius 를 두지 않는다. */
+            .lw-usage-bar i { display: block; width: 100%; height: 100%; transform-origin: left center; transition: transform .3s ease; }
             .lw-usage-pct { width: 42px; text-align: right; color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; flex: none; }
             .lw-usage-reset { color: #646b7d; white-space: nowrap; flex: none; }
             .lw-usage-err { margin: 4px 0 0; color: #ff6b81; font-size: 12.5px; }
