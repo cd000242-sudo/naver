@@ -125,10 +125,22 @@ function toFailure(payload: Record<string, unknown>): AuthResult {
     };
 }
 
-/** 로그인. 만료됐으면 LICENSE_EXPIRED 로 돌아온다 — 화면이 재인증으로 넘긴다. */
+/**
+ * 로그인. 만료됐으면 LICENSE_EXPIRED 로 돌아온다 — 화면이 재인증으로 넘긴다.
+ *
+ * verify-web-login 이 아직 배포되지 않은 서버에서는 'Unauthorized' 가 온다
+ * (그 액션이 공개 목록에 없으면 토큰을 요구한다). 그때만 예전 경로로 내려간다 —
+ * 배포가 늦었다고 아무도 로그인 못 하게 두는 것보다 낫다.
+ *
+ * 다만 예전 경로(verify-credentials)는 세션 토큰을 덮어써서 **그 PC 의 데스크톱
+ * 앱이 로그아웃된다.** 그래서 폴백일 뿐이고, 서버가 갱신되면 스스로 안 쓰인다.
+ */
 export async function login(userId: string, userPassword: string): Promise<AuthResult> {
     try {
-        const payload = await callGas({ action: 'verify-web-login', userId, userPassword });
+        let payload = await callGas({ action: 'verify-web-login', userId, userPassword });
+        if (String(payload.error || '') === 'Unauthorized') {
+            payload = await callGas({ action: 'verify-credentials', userId, userPassword });
+        }
         if (!payload.ok || !payload.valid) return toFailure(payload);
         const session = toSession(payload, userId);
         saveSession(session);
