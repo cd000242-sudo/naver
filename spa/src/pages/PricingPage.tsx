@@ -398,23 +398,10 @@ function PricingPage() {
                   * 같은 말을 두 번 하면 화면만 길어진다.
                   */}
 
-                {/* Product tabs */}
-                <div className="pricing-product-tabs" style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 36, flexWrap: 'wrap' }}>
-                    {TAB_KEYS.map((k) => (
-                        <button
-                            key={k}
-                            onClick={() => onTab(k)}
-                            style={{
-                                display: 'flex', alignItems: 'center', gap: 8,
-                                padding: '12px 22px', borderRadius: 50, cursor: 'pointer',
-                                background: tab === k ? 'linear-gradient(135deg, rgba(255,215,0,0.18), rgba(255,215,0,0.06))' : 'rgba(255,255,255,0.04)',
-                                border: tab === k ? '1px solid #FFD700' : '1px solid rgba(255,255,255,0.08)',
-                                color: tab === k ? '#FFD700' : 'rgba(255,255,255,0.7)',
-                                fontWeight: 700, fontSize: 14,
-                            }}
-                        >{pricingPage.tabLabel || TAB_LABELS[k]}</button>
-                    ))}
-                </div>
+                {/*
+                  * 제품 탭 알약("ALL · Leaders Pro 올인원")은 뺐다(사장님 2026-08-20).
+                  * 탭이 하나뿐이라 고를 것이 없는데 버튼처럼 보였다.
+                  */}
 
                 <style>{`
                     .purchase-proof-showcase {

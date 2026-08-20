@@ -1,8 +1,9 @@
 /**
  * 상점 스타일 — 어두운 진열장 위의 금.
  *
- * 값이 카드에서 제일 먼저 눈에 들어와야 한다. 그래서 값만 모노 서체에
- * 금속 그라데이션을 입히고, 나머지는 조용히 둔다. 화려함을 여러 군데
+ * 값이 카드에서 제일 먼저 눈에 들어와야 한다. 값도 본문과 같은 Pretendard 다 —
+ * 모노스페이스를 걸면 Windows 에서 Consolas 로 떨어져 촌스럽다(사장님 지적).
+ * 대신 tabular-nums 로 자릿수를 맞추고 금속 그라데이션만 입힌다. 화려함을 여러 군데
  * 뿌리면 어디를 봐야 할지 몰라 지금 가격표처럼 정신사나워진다.
  */
 function StoreStyles() {
@@ -25,7 +26,7 @@ function StoreStyles() {
             .st *, .st *::before, .st *::after { box-sizing: border-box; }
 
             .st-head { text-align: center; margin-bottom: 28px; }
-            .st-kicker { margin: 0 0 10px; font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #a97b1c; }
+            .st-kicker { margin: 0 0 10px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #a97b1c; }
             .st-head h2 {
                 margin: 0 0 10px; font-size: 34px; font-weight: 700; letter-spacing: -.032em; line-height: 1.22;
                 background: linear-gradient(176deg, #ffffff 24%, #cbb18a 100%);
@@ -52,7 +53,7 @@ function StoreStyles() {
             }
             .st-dday b { color: #ffb3bf; }
             .st-dday-tag { padding: 3px 10px; border-radius: 999px; background: rgba(251,113,133,.18); color: #ffb3bf; font-size: 11.5px; font-weight: 700; }
-            .st-dday-count { font-family: ui-monospace, monospace; font-weight: 700; color: #ffb3bf; }
+            .st-dday-count { font-weight: 700; color: #ffb3bf; }
 
             /*
              * auto-fit 은 넓은 화면에서 4번째 빈 트랙을 만들어 카드 셋이 왼쪽으로
@@ -91,15 +92,15 @@ function StoreStyles() {
             .st-incl li { padding: 4px 11px; border-radius: 8px; background: rgba(255,255,255,.055); font-size: 12px; color: var(--st-dim); }
 
             .st-price { display: flex; align-items: baseline; gap: 8px; border-top: 1px solid var(--st-line); padding-top: 13px; }
-            .st-price s { color: var(--st-mute); font-size: 12.5px; font-family: ui-monospace, monospace; }
+            .st-price s { color: var(--st-mute); font-size: 12.5px; }
             .st-price b {
-                font-family: ui-monospace, monospace; font-size: 25px; font-weight: 700; letter-spacing: -.03em;
+                font-size: 25px; font-weight: 700; letter-spacing: -.03em;
                 font-variant-numeric: tabular-nums;
                 background: linear-gradient(176deg, #ffffff 20%, var(--st-gold-lit) 100%);
                 -webkit-background-clip: text; background-clip: text; color: transparent;
             }
             .st-price i { font-style: normal; font-size: 12.5px; color: var(--st-mute); }
-            .st-permo { margin: 4px 0 0; min-height: 17px; font-size: 11.5px; color: var(--st-mute); font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+            .st-permo { margin: 4px 0 0; min-height: 17px; font-size: 11.5px; color: var(--st-mute); font-variant-numeric: tabular-nums; }
 
             .st-buy {
                 margin-top: 14px; padding: 12px; border: 1px solid var(--st-line-2); border-radius: 11px;
@@ -132,7 +133,7 @@ function StoreStyles() {
             .st-cart-items b { color: var(--st-mute); font-weight: 400; margin-left: 5px; }
             .st-cart-total { margin-left: auto; text-align: right; }
             .st-cart-total em { display: block; font-style: normal; font-size: 11.5px; color: var(--st-mute); }
-            .st-cart-total strong { font-family: ui-monospace, monospace; font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+            .st-cart-total strong { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
             .st-cart-go {
                 padding: 13px 28px; border-radius: 11px; text-decoration: none; white-space: nowrap;
                 background: linear-gradient(180deg, #f7c455, var(--st-gold)); color: #171003;
