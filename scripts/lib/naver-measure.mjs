@@ -87,6 +87,35 @@ export async function fetchVolumes(keywords) {
     }
 }
 
+/**
+ * 검색량 + 광고 경쟁도(compIdx). 한 번에 5개까지.
+ *
+ * compIdx('높음'/'중간'/'낮음')는 검색광고 API 실측 — 광고주가 입찰로 몰리는
+ * 검색어인지의 신호다. 쇼핑 검색 API 가 2026-07-31 종료돼(대체 없음) 상품수
+ * 실측이 불가능해진 뒤, "돈이 걸린 검색어" 판정의 남은 실측 소스가 이것이다.
+ */
+export async function fetchVolumeDetails(keywords) {
+    const path = '/keywordstool';
+    const hint = keywords.map((keyword) => keyword.replace(/\s+/g, '')).join(',');
+    const url = `https://api.searchad.naver.com${path}?hintKeywords=${encodeURIComponent(hint)}&showDetail=1`;
+    try {
+        const response = await fetch(url, { headers: searchAdHeaders('GET', path) });
+        if (!response.ok) return new Map();
+        const data = await response.json();
+        const out = new Map();
+        for (const row of data.keywordList || []) {
+            const name = String(row.relKeyword || '').trim();
+            const pc = Number(row.monthlyPcQcCnt);
+            const mobile = Number(row.monthlyMobileQcCnt);
+            if (!name || !Number.isFinite(pc) || !Number.isFinite(mobile)) continue;
+            out.set(name.replace(/\s+/g, ''), { volume: pc + mobile, compIdx: String(row.compIdx || '') });
+        }
+        return out;
+    } catch {
+        return new Map();
+    }
+}
+
 /** 블로그 문서 총건수 — 이게 곧 경쟁이다. */
 export async function fetchDocumentCount(keyword) {
     const qs = `query=${encodeURIComponent(keyword)}&display=1`;

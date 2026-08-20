@@ -23,6 +23,10 @@ type GapRow = {
     searchVolume: number;
     documentCount: number;
     ratio: number;
+    /** 광고 경쟁도 실측 — '높음'이면 광고주가 몰리는, 돈 걸린 검색어. */
+    compIdx?: string;
+    /** 글감 주제(수집 때 판정): policy(복지·정책) · ai · shopping(제휴각). */
+    topics?: string[];
     video: {
         videoId: string; title: string; channel: string;
         thumbnail: string; viewCount: number | null; publishedAt: string;
@@ -43,6 +47,17 @@ const CATEGORY_LABEL: Record<string, string> = {
  * 롱폼과 숏폼은 뜨는 방식이 다르다 — 섞어 놓으면 어느 쪽 재료인지 모른다
  * (사장님 지시 2026-08-20). 판정은 수집 때 /shorts/ 응답으로 실측한다.
  */
+/*
+ * 글감 주제 — 유튜브 카테고리와 별개의 축(사장님 지시 2026-08-21).
+ * 쇼핑각은 검색광고 경쟁도 실측('높음')이 근거다 — 쇼핑 검색 API 는
+ * 2026-07-31 종료돼 상품수 실측이 불가능하다.
+ */
+const TOPICS = [
+    { id: 'shopping', label: '제휴·쇼핑각', hint: '광고 경쟁 실측 높음 — 돈이 걸린 검색어' },
+    { id: 'policy', label: '복지·정책', hint: '지원금·복지·정책 낱말이 든 검색어' },
+    { id: 'ai', label: 'AI', hint: 'AI 관련 검색어' },
+];
+
 const FORMS = [
     { id: '', label: '전체' },
     { id: 'short', label: '숏폼' },
@@ -89,6 +104,9 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
     const [ideas, setIdeas] = useState<Record<string, IdeaState>>({});
     const [form, setForm] = useState('');
     const [category, setCategory] = useState('');
+    const [topic, setTopic] = useState('');
+    /** 방금 복사한 키워드 — 버튼에 "복사됨"을 잠깐 보여준다. */
+    const [copied, setCopied] = useState('');
 
     useEffect(() => {
         let cancelled = false;
@@ -111,15 +129,26 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
         }));
     };
 
+    const copyKeyword = async (keyword: string) => {
+        try {
+            await navigator.clipboard.writeText(keyword);
+            setCopied(keyword);
+            window.setTimeout(() => setCopied((current) => (current === keyword ? '' : current)), 1500);
+        } catch { /* 클립보드 권한이 없으면 조용히 둔다 — 길게 눌러 복사하면 된다 */ }
+    };
+
     const allRows = data?.rows || [];
     const rows = allRows.filter((row) => (
         (!form || row.video.form === form)
         && (!category || String(row.video.categoryId || '') === category)
+        && (!topic || (row.topics || []).includes(topic))
     ));
     /** 지금 고른 형식 안에서 카테고리별 몇 건인지 — 빈 버튼을 누르게 두지 않는다. */
     const countIn = (categoryId: string) => allRows
         .filter((row) => (!form || row.video.form === form) && String(row.video.categoryId || '') === categoryId).length;
     const formCount = (formId: string) => allRows.filter((row) => !formId || row.video.form === formId).length;
+    const topicCount = (topicId: string) => allRows
+        .filter((row) => (!form || row.video.form === form) && (row.topics || []).includes(topicId)).length;
 
     return (
         <>
@@ -155,6 +184,23 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                         );
                     })}
                 </div>
+                {TOPICS.some((item) => topicCount(item.id) > 0) && (
+                    <div className="lw-yt-cats lw-yt-topics" role="group" aria-label="글감 주제">
+                        {TOPICS.map((item) => {
+                            const count = topicCount(item.id);
+                            if (count === 0) return null;
+                            return (
+                                <button
+                                    key={item.id}
+                                    type="button"
+                                    title={item.hint}
+                                    className={topic === item.id ? 'on' : ''}
+                                    onClick={() => setTopic(topic === item.id ? '' : item.id)}
+                                >{item.label} <em>{count}</em></button>
+                            );
+                        })}
+                    </div>
+                )}
             </div>
 
             <div className="lw-toolbar">
@@ -228,14 +274,40 @@ function YoutubeTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
                                     {CATEGORY_LABEL[String(row.video.categoryId || '')] && (
                                         <span className="lw-yt-cat">{CATEGORY_LABEL[String(row.video.categoryId)]}</span>
                                     )}
+                                    {(row.topics || []).includes('shopping') && (
+                                        <span className="lw-yt-topic lw-yt-topic-shopping" title="검색광고 경쟁도 실측 '높음' — 광고주가 몰리는 검색어">제휴·쇼핑각</span>
+                                    )}
+                                    {(row.topics || []).includes('policy') && (
+                                        <span className="lw-yt-topic lw-yt-topic-policy">복지·정책</span>
+                                    )}
+                                    {(row.topics || []).includes('ai') && (
+                                        <span className="lw-yt-topic lw-yt-topic-ai">AI</span>
+                                    )}
                                 </p>
                                 <p className="lw-yt-date">
                                     영상 날짜 {dateText(row.video.publishedAt)}
                                     <span> · {agoText(row.video.publishedAt, '업로드')}</span>
                                 </p>
-                                <button type="button" className="lw-yt-analyze" onClick={() => onAnalyze(row.keyword)}>
-                                    키워드 분석
-                                </button>
+                                <div className="lw-yt-actions">
+                                    <button type="button" className="lw-yt-analyze" onClick={() => onAnalyze(row.keyword)}>
+                                        키워드 분석
+                                    </button>
+                                    <a
+                                        className="lw-yt-act"
+                                        href={row.video.form === 'short'
+                                            ? `https://www.youtube.com/shorts/${row.video.videoId}`
+                                            : `https://www.youtube.com/watch?v=${row.video.videoId}`}
+                                        target="_blank" rel="noreferrer noopener"
+                                    >YouTube 보기</a>
+                                    <a
+                                        className="lw-yt-act"
+                                        href={`https://search.naver.com/search.naver?query=${encodeURIComponent(row.keyword)}`}
+                                        target="_blank" rel="noreferrer noopener"
+                                    >네이버 검색</a>
+                                    <button type="button" className="lw-yt-act" onClick={() => copyKeyword(row.keyword)}>
+                                        {copied === row.keyword ? '복사됨 ✓' : '키워드 복사'}
+                                    </button>
+                                </div>
                             </div>
 
                             <div className="lw-yt-write">

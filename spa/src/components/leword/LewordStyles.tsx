@@ -409,6 +409,12 @@ function LewordStyles() {
             .lw-yt-form-short { background: rgba(255,0,80,.16); color: #ff8fb0; }
             .lw-yt-form-long { background: rgba(124,92,255,.16); color: #cfc2ff; }
             .lw-yt-cat { background: rgba(255,255,255,.07); color: rgba(235,242,250,.7); font-weight: 400; }
+            /* 글감 주제 배지 — 쇼핑각 금색·복지 초록·AI 청록. 근거는 title 툴팁에. */
+            .lw-yt-topic { padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 800; }
+            .lw-yt-topic-shopping { background: rgba(255,165,0,.16); color: #ffc966; }
+            .lw-yt-topic-policy { background: rgba(46,204,113,.14); color: #7dd87d; }
+            .lw-yt-topic-ai { background: rgba(53,208,186,.14); color: #6fe0d0; }
+            .lw-yt-topics button.on { border-color: rgba(255,165,0,.6); background: rgba(255,165,0,.14); }
             @media (max-width: 680px) {
                 .lw-yt-cats { padding-left: 0; border-left: 0; }
             }
@@ -437,7 +443,14 @@ function LewordStyles() {
             .lw-yt-from { margin: 9px 0 0; color: #646b7d; font-size: 12.5px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
             .lw-yt-date { margin: 5px 0 0; color: #646b7d; font-size: 12px; }
             .lw-yt-date span { color: rgba(235,242,250,.5); }
-            .lw-yt-analyze { margin-top: 11px; padding: 7px 13px; border: 1px solid rgba(124,92,255,.4); border-radius: 8px; background: rgba(124,92,255,.12); color: #cfc2ff; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+            .lw-yt-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 11px; }
+            .lw-yt-analyze { padding: 7px 13px; border: 1px solid rgba(124,92,255,.4); border-radius: 8px; background: rgba(124,92,255,.12); color: #cfc2ff; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+            .lw-yt-act {
+                padding: 7px 13px; border: 1px solid rgba(255,255,255,.14); border-radius: 8px;
+                background: transparent; color: #c0c8d4; font-size: 12.5px; font-weight: 700;
+                cursor: pointer; text-decoration: none; display: inline-flex; align-items: center;
+            }
+            .lw-yt-act:hover { border-color: rgba(124,92,255,.5); color: #fff; }
             .lw-yt-analyze:hover { background: rgba(124,92,255,.22); color: #fff; }
 
             .lw-yt-write { min-width: 0; padding-left: 16px; border-left: 1px solid rgba(255,255,255,.07); }

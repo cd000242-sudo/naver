@@ -19,7 +19,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-    fetchAutocomplete, fetchDocumentCount, fetchVolumes,
+    fetchAutocomplete, fetchDocumentCount, fetchVolumeDetails,
     missingNaverCredentials, sleep,
 } from './lib/naver-measure.mjs';
 
@@ -63,6 +63,39 @@ const STOP_LEADS = new Set([
     '과연', '진짜', '결국', '이제', '오늘', '드디어', '충격', '단독', '속보', '긴급',
     '방금', '역대급', '레전드', '실화', 'full', 'live', 'mv', 'official', 'shorts',
 ]);
+
+/*
+ * 글감 주제 — 유튜브 카테고리와 별개의 축(사장님 지시 2026-08-21: 뉴스·스포츠·
+ * 복지/정책/지원금·AI·쇼핑 위주로 글감을 찾는다). 복지·AI 는 유튜브 분류에
+ * 없으므로 검색어·확장어의 실제 낱말로 판정한다. 판정 근거 낱말만 쓰고,
+ * 없으면 주제를 안 붙인다 — 억지로 분류하지 않는다.
+ */
+const POLICY_TERMS = [
+    '지원금', '보조금', '환급', '정책', '복지', '수당', '연금', '바우처',
+    '소비쿠폰', '민생회복', '신청방법', '신청기간', '지급일', '근로장려금',
+    '기초연금', '청년도약', '내일배움', '육아휴직', '출산지원',
+];
+/*
+ * AI 는 두 글자라 부분일치가 오탐을 만든다 — 실측: 웹툰 검색어의 확장어
+ * "…결혼했다 ai" 하나로 그 행 전체가 AI 글감이 됐다. 그래서 AI 만은
+ * ① 키워드 자체에서 ② 낱말 경계로 판정한다.
+ */
+const AI_RE = /(^|[^a-z0-9])(ai|챗gpt|gpt|인공지능|클로드|제미나이|gemini|미드저니|딥페이크|생성형|오픈ai|openai|코파일럿)([^a-z0-9]|$)/;
+
+/** 검색어(+정책은 확장어까지)에서 주제를 판정한다. 쇼핑은 낱말이 아니라 광고경쟁 실측으로. */
+function topicsOf(keyword, expansions, compIdx) {
+    const haystack = [keyword, ...expansions].join(' ').toLowerCase();
+    const topics = [];
+    if (POLICY_TERMS.some((term) => haystack.includes(term))) topics.push('policy');
+    if (AI_RE.test(keyword.toLowerCase())) topics.push('ai');
+    /*
+     * 제휴·쇼핑각 — 쇼핑 검색 API 가 2026-07-31 종료돼 상품수 실측이 불가능하다.
+     * 남은 실측은 검색광고 경쟁도: 광고주가 입찰로 몰리는 검색어('높음')는
+     * 돈이 걸린 검색어다. 추정이 아니라 네이버가 준 값 그대로다.
+     */
+    if (compIdx === '높음') topics.push('shopping');
+    return topics;
+}
 
 const log = (message) => console.log(message);
 
@@ -185,14 +218,15 @@ async function main() {
     const keywords = [...source.keys()];
     const volumes = new Map();
     for (let index = 0; index < keywords.length; index += 5) {
-        for (const [name, volume] of await fetchVolumes(keywords.slice(index, index + 5))) volumes.set(name, volume);
+        for (const [name, detail] of await fetchVolumeDetails(keywords.slice(index, index + 5))) volumes.set(name, detail);
         await sleep(220);
     }
 
     // ④ 검색량이 기준을 넘은 것만 문서수를 잰다 — 문서수 조회가 더 비싸다
     const rows = [];
     for (const keyword of keywords) {
-        const searchVolume = volumes.get(keyword.replace(/\s+/g, ''));
+        const detail = volumes.get(keyword.replace(/\s+/g, ''));
+        const searchVolume = detail ? detail.volume : null;
         if (!Number.isFinite(searchVolume) || searchVolume < MIN_VOLUME) continue;
         const documentCount = await fetchDocumentCount(keyword);
         await sleep(160);
@@ -214,6 +248,9 @@ async function main() {
             keyword,
             expansions,
             searchVolume,
+            /** 광고 경쟁도 실측('높음'/'중간'/'낮음') — 쇼핑각 판정의 근거. */
+            compIdx: detail.compIdx || '',
+            topics: topicsOf(keyword, expansions, detail.compIdx),
             documentCount,
             ratio: Math.round(ratio * 10) / 10,
             video: {
