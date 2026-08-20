@@ -308,7 +308,7 @@ export const checkClaudeToken = (token: string) =>
  * 이 질문으로 쓸 수 있는 글감 — 키워드마다 SEO 제목과 홈판(디스커버) 제목.
  * 홈판 제목은 제목 교리(구어체·답 숨김·AI 티 0)를 서버 프롬프트가 강제한다.
  */
-export type KinPostIdea = { keyword: string; why: string; seo: string; home: string };
+export type KinPostIdea = { keyword: string; why: string; clickWhy?: string; seo: string; home: string };
 export const fetchKinPostIdeas = (input: { title: string; body: string }) =>
     call<{ ideas: KinPostIdea[] }>('kin-post-ideas', { title: input.title, body: input.body })
         .then((res) => { persistRenewed(res.data); return res; });

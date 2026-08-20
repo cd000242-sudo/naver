@@ -279,6 +279,7 @@ function LewordStyles() {
             .lw-idea-head span { color: rgba(235,242,250,.45); font-size: 11px; }
             .lw-idea-body { padding: 0 13px 12px; display: flex; flex-direction: column; gap: 7px; }
             .lw-idea-why { margin: 0 0 3px; font-size: 12px; color: rgba(235,242,250,.55); }
+            .lw-idea-click { margin: 0 0 5px; font-size: 12px; color: #ffc169; }
             .lw-idea-title { display: flex; align-items: center; gap: 9px; min-width: 0; }
             .lw-idea-title span { flex: none; font-size: 11px; font-weight: 800; color: rgba(255,165,0,.9); border: 1px solid rgba(255,165,0,.35); border-radius: 6px; padding: 2px 7px; }
             .lw-idea-title em { flex: 1; min-width: 0; font-style: normal; font-size: 13.5px; color: #fff; font-weight: 600; }

@@ -450,6 +450,8 @@ function KinGoldenTab({ onAnalyze }: { onAnalyze?: (keyword: string) => void }) 
                                                 {openIdea === idea.keyword && (
                                                     <div className="lw-idea-body">
                                                         {idea.why && <p className="lw-idea-why">{idea.why}</p>}
+                                                        {/* 왜 클릭하는가 — 제목을 짓기 전 세운 동기. 제목이 이걸 지키는지 눈으로 검증한다. */}
+                                                        {idea.clickWhy && <p className="lw-idea-click">왜 클릭하나 · {idea.clickWhy}</p>}
                                                         {[{ tag: 'SEO', text: idea.seo }, { tag: '홈판', text: idea.home }].map(
                                                             (row) => row.text && (
                                                                 <div key={row.tag} className="lw-idea-title">
