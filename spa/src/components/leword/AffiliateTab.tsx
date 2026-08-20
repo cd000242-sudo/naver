@@ -116,7 +116,13 @@ function AffiliateTab({ onAnalyze }: { onAnalyze: (keyword: string) => void }) {
      */
     const readyLink = (item: CampaignItem) => {
         const url = String(item.url || '');
-        return /naver\.me\/|brandconnect\.naver\.com\/affiliates\//.test(url) ? url : '';
+        /*
+         * 토스 발급 링크는 toss.im/_m/{코드} 다(사장님 실측 2026-08-20 —
+         * toss.shopping/t/{id}?referrer=affiliate 로 풀리는 추적 링크).
+         * 콘솔 상품 딥링크는 못 만든다: 수집 API 의 productId 와 상품 페이지
+         * id 가 다른 체계다(교차 확인 3건 전부 404).
+         */
+        return /naver\.me\/|brandconnect\.naver\.com\/affiliates\/|toss\.im\/_m\//.test(url) ? url : '';
     };
 
     /** 발급된 링크가 없을 때 갈 곳. 상품 딥링크는 만들지 않는다 — 확인할 수 없는 주소다. */

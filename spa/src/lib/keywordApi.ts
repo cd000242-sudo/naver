@@ -198,6 +198,21 @@ async function call<T>(action: string, params: Record<string, string>): Promise<
         } catch {
             return { ok: false, data: null, error: 'server-busy', message: '서버가 잠시 붐빕니다. 몇 초 뒤 다시 시도해 주세요.' };
         }
+        /*
+         * 회전된 토큰은 **여기서, 성공이든 실패든** 저장한다.
+         *
+         * 실사고(2026-08-20): 서버가 refresh 회전에 성공한 뒤 파싱 실패로
+         * ok:false 를 돌려줬는데, 아래 실패 분기가 data:null 을 반환해 실려온
+         * 새 토큰이 버려졌다. 재시도가 이미 소모된 옛 refresh 를 다시 쓰자
+         * Anthropic 이 재사용 감지로 토큰 가족 전체를 취소했다
+         * ("OAuth access token has been revoked"). 저장을 각 호출부 .then 에
+         * 매달면 실패 경로가 구멍이 된다 — 응답을 읽는 단 하나의 길목인
+         * 여기서 무조건 저장한다.
+         */
+        const renewed = (payload as { renewed?: Record<string, string> } | null)?.renewed;
+        if (renewed?.claudeToken) {
+            try { saveUserKeys({ ...loadUserKeys(), ...renewed }); } catch { /* 저장 실패해도 응답은 돌려준다 */ }
+        }
         if (!payload?.ok) {
             return {
                 ok: false,
