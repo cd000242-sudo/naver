@@ -353,6 +353,22 @@ function ResultView({ info, copyLicense, licCopyLabel }: { info: ResultInfo; cop
                             <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14 }}>상태</span>
                             <span style={{ color: '#ffc107', fontSize: 14, fontWeight: 600 }}>⏳ 입금 확인 대기 중</span>
                         </div>
+                        {/*
+                          * 입금 확인은 사람이 한다 — 관리자에게 메일이 가고, 확인을 누르면
+                          * 이 화면에 코드가 뜬다. 그 사이가 비어 있으면 "입금했는데 왜
+                          * 안 되지" 가 되므로(사장님 2026-08-20), 기다리지 않아도 되는
+                          * 길(1:1 오픈채팅)을 바로 준다. 주소는 우하단 문의 버튼과 같은 방이다.
+                          */}
+                        <div style={{ marginTop: 14, padding: '12px 14px', background: 'rgba(254,229,0,0.07)', border: '1px solid rgba(254,229,0,0.25)', borderRadius: 10, fontSize: 13, lineHeight: 1.6, color: 'rgba(255,255,255,0.78)' }}>
+                            입금 확인은 관리자에게 알림이 간 뒤 처리됩니다 — <strong>시간이 조금 걸릴 수 있습니다.</strong><br />
+                            급하시면 입금 내역을 캡처해서 1:1 오픈채팅으로 바로 주시면 됩니다.
+                            <a
+                                href="https://open.kakao.com/o/sPcaslwh"
+                                target="_blank"
+                                rel="noopener"
+                                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 10, padding: '9px 16px', background: '#fee500', color: '#1a0a10', borderRadius: 9, fontSize: 13, fontWeight: 800, textDecoration: 'none' }}
+                            >💬 1:1 오픈채팅 바로가기</a>
+                        </div>
                     </div>
                 )}
 
