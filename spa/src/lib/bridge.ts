@@ -149,6 +149,22 @@ export async function bridgeKinAnswer(input: {
     }
 }
 
+/**
+ * CLI 로그인 시작(코덱스·제미나이·그록·클로드) — 앱이 그 PC 에서 로그인을
+ * 띄우고 브라우저를 연다. 사이트는 자격증명을 만지지 않는다: 시작 신호를
+ * 보내고 상태만 돌려받는다. 앱이 꺼져 있으면 null.
+ */
+export async function bridgeAgentLogin(provider: 'claude' | 'codex' | 'gemini' | 'grok'): Promise<
+    { state: 'already' | 'done' | 'browser-opened' | 'starting' | 'failed'; loggedIn?: boolean; message?: string } | null
+> {
+    const body = await bridgeFetch('/v1/bridge/agent-login', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ provider }),
+    }, 20_000) as { result?: { state: 'already' | 'done' | 'browser-opened' | 'starting' | 'failed'; loggedIn?: boolean; message?: string } } | null;
+    return body?.result || null;
+}
+
 export async function bridgeAiSubs(keyword: string): Promise<{
     subs: Array<{ keyword: string; searchVolume: number | null; source?: string }>;
     ai?: { used: boolean; provider: string; proposed: number; verified: number };

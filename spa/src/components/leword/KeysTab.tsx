@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { checkClaudeToken, exchangeClaudeOauth } from '../../lib/keywordApi';
-import { probeBridge, type BridgeStatus } from '../../lib/bridge';
+import { bridgeAgentLogin, probeBridge, type BridgeStatus } from '../../lib/bridge';
 import {
     KEY_GROUPS,
     checkKeyShape,
@@ -122,6 +122,25 @@ function KeysTab() {
     };
     const bridgeReady = typeof bridge === 'object' && bridge !== null;
     const agentOf = (provider: string) => (bridgeReady ? (bridge.agents || []).find((agent) => agent.provider === provider) : undefined);
+
+    /** 제공자별 로그인 시작 — 앱이 그 PC 에서 로그인 창을 띄운다. */
+    const [loginBusy, setLoginBusy] = useState('');
+    const [loginNote, setLoginNote] = useState('');
+    const startAgentLogin = async (provider: 'claude' | 'codex' | 'gemini' | 'grok', label: string) => {
+        setLoginBusy(provider);
+        setLoginNote('');
+        const result = await bridgeAgentLogin(provider);
+        setLoginBusy('');
+        if (!result) {
+            setLoginNote(`${label} 로그인을 시작하지 못했습니다 — LEWORD 앱을 켠 뒤 다시 눌러 주세요(이 로그인은 내 PC 에서만 됩니다).`);
+            return;
+        }
+        if (result.state === 'already') setLoginNote(`${label}: 이미 로그인돼 있습니다.`);
+        else if (result.state === 'done') setLoginNote(`${label}: 로그인 완료.`);
+        else if (result.state === 'failed') setLoginNote(`${label} 로그인 실패: ${result.message || ''}`);
+        else setLoginNote(`${label}: 브라우저가 열렸습니다 — 승인한 뒤 [상태 확인]을 눌러 주세요.`);
+        await refreshAgents();
+    };
 
     const update = (field: string, value: string) => {
         setKeys((previous) => ({ ...previous, [field]: value }));
@@ -262,6 +281,14 @@ function KeysTab() {
                                 return (
                                     <span key={item.id} className={`lw-agent lw-agent-${state}`} title={agent?.detail || ''}>
                                         {item.label} · {text}
+                                        {!agent?.available && (
+                                            <button
+                                                type="button"
+                                                className="lw-agent-login"
+                                                onClick={() => startAgentLogin(item.id, item.label)}
+                                                disabled={Boolean(loginBusy)}
+                                            >{loginBusy === item.id ? '여는 중…' : '로그인'}</button>
+                                        )}
                                     </span>
                                 );
                             })}
@@ -272,6 +299,7 @@ function KeysTab() {
                                 : 'LEWORD 앱이 꺼져 있어 폴백 체인 상태를 못 잽니다 — 앱을 켜고 [상태 확인]을 누르면 네 CLI 의 로그인 여부가 여기 나옵니다.'}
                         </p>
                     )}
+                    {loginNote && <p className="lw-card-note" style={{ marginTop: 9, marginBottom: 0 }}>{loginNote}</p>}
                 </div>
             </section>
 

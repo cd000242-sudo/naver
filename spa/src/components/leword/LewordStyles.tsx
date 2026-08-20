@@ -279,6 +279,9 @@ function LewordStyles() {
             .lw-agent { font-size: 12px; font-weight: 700; padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(255,255,255,.12); color: rgba(235,242,250,.55); white-space: nowrap; }
             .lw-agent-ok { border-color: rgba(46,204,113,.45); color: #2ecc71; background: rgba(46,204,113,.08); }
             .lw-agent-warn { border-color: rgba(255,193,7,.4); color: #ffc107; }
+            .lw-agent-login { margin-left: 7px; padding: 2px 8px; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; background: none; color: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
+            .lw-agent-login:hover { border-color: rgba(255,165,0,.55); color: #fff; }
+            .lw-agent-login:disabled { opacity: .5; cursor: default; }
 
             /* 클로드 구독 연결(버튼 한 번) */
             .lw-claude-connect { display: flex; flex-direction: column; gap: 9px; margin-bottom: 12px; }
