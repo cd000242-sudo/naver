@@ -54,7 +54,13 @@ function StoreStyles() {
             .st-dday-tag { padding: 3px 10px; border-radius: 999px; background: rgba(251,113,133,.18); color: #ffb3bf; font-size: 11.5px; font-weight: 700; }
             .st-dday-count { font-family: ui-monospace, monospace; font-weight: 700; color: #ffb3bf; }
 
-            .st-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); gap: 18px; }
+            /*
+             * auto-fit 은 넓은 화면에서 4번째 빈 트랙을 만들어 카드 셋이 왼쪽으로
+             * 쏠렸다(사장님 실측 2026-08-20). 열 수를 못박는다 — 한 줄에 셋.
+             */
+            .st-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+            @media (max-width: 980px) { .st-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+            @media (max-width: 640px) { .st-grid { grid-template-columns: minmax(0, 1fr); } }
 
             .st-card {
                 position: relative; border: 1px solid var(--st-line); border-radius: 17px; overflow: hidden;
