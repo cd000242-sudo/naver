@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
+import { buildContentJsonOutputFormat } from '../contentJsonPromptFormat';
 import { evaluateTitleQuality } from '../contentTitleEvaluator';
 import { HOMEFEED_TITLE_FORMULAS } from '../contentTitleFormulas';
 
@@ -68,6 +69,53 @@ describe('homefeed formula pool has no summary-noun endings', () => {
       expect(example).not.toMatch(/(?:정리|현황|포인트|모음|리스트|대응|의미|근황|요약)(?:했어요|해봤어요)?\s*$/);
     },
   );
+});
+
+describe('main-path homefeed prompt wires click-reason inference', () => {
+  // 본선 = 본문 생성 1회 호출(buildContentJsonOutputFormat)이 제목까지 만든다.
+  // generateTitleOnlyPatch 는 프로덕션에서 꺼진 수리 경로다 — 본선에 반드시 배선돼야 한다.
+  function mainPrompt(mode: 'homefeed' | 'seo', categoryHint?: string): string {
+    return buildContentJsonOutputFormat({
+      contentMode: mode,
+      mode,
+      source: {
+        rawText: '원본 본문입니다.',
+        title: '제목 참고',
+        metadata: { keywords: [KEYWORD, '서브키워드'] },
+        categoryHint,
+      } as never,
+      title: '제목 참고',
+      rawText: '테스트 원문',
+      primaryKeyword: KEYWORD,
+      subKeywords: '서브키워드',
+      minChars: 2000,
+    });
+  }
+
+  it('homefeed schema carries clickReason axis and per-candidate whyClick', () => {
+    const prompt = mainPrompt('homefeed');
+    expect(prompt).toContain('"clickReason"');
+    expect(prompt).toContain('"whyClick"');
+  });
+
+  it('homefeed issue-pick variant also carries clickReason', () => {
+    const prompt = mainPrompt('homefeed', '연예');
+    expect(prompt).toContain('"clickReason"');
+    expect(prompt).toContain('"curiosityGaps"');
+  });
+
+  it('homefeed directive enforces coherent hooks and bans summary endings', () => {
+    const prompt = mainPrompt('homefeed');
+    expect(prompt).toContain('[whyClick 자가검증]');
+    expect(prompt).toContain('[훅은 말이 되어야 한다]');
+    expect(prompt).toContain('[요약 명사 종결 금지]');
+  });
+
+  it('does not leak homefeed click contract into other modes', () => {
+    const prompt = mainPrompt('seo');
+    expect(prompt).not.toContain('whyClick');
+    expect(prompt).not.toContain('[요약 명사 종결 금지]');
+  });
 });
 
 describe('homefeed title generation wires click-reason inference', () => {

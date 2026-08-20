@@ -671,7 +671,7 @@ async function generateTitleOnlyPatch(
   // then derive every candidate from that reason. Summary-of-keywords titles were the
   // top user complaint ("~정리/~가이드" — no click reason, instant AI tell).
   const schema = mode === 'homefeed'
-    ? `Output ONLY valid JSON. NO markdown.\n\n{"clickAnalysis": {"mostSurprisingFact": "string", "readerQuestion": "string", "clickReason": "string"}, "selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`
+    ? `Output ONLY valid JSON. NO markdown.\n\n{"clickAnalysis": {"mostSurprisingFact": "string", "readerQuestion": "string", "clickReason": "string"}, "selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95, "whyClick": "string"}, {"text": "string", "score": 90, "whyClick": "string"}, {"text": "string", "score": 85, "whyClick": "string"}]}`
     : `Output ONLY valid JSON. NO markdown.\n\n{"selectedTitle": "string", "titleCandidates": [{"text": "string", "score": 95}, {"text": "string", "score": 90}, {"text": "string", "score": 85}]}`;
 
   const subKeywords = Array.isArray((source.metadata as any)?.keywords)
@@ -709,6 +709,12 @@ ${mode === 'homefeed' ? `
    끝나는 제목은 보도자료 문형이라 즉시 0점. 궁금증이 남는 서술이나 의문으로 끝내세요.
    ❌ "택배사별 재개일 정리" / "매장 확인과 재고 현황" / "개인정보 유출 항목과 대응"
    ✅ "우리 동네 택배만 안 멈추는 이유가 있었다" / "환불 대신 이걸 챙긴 사람이 이득 봤다"
+6. [클릭 사유 자가검증 — whyClick] 후보마다 whyClick 에 "이 제목을 본 사람이 클릭하는
+   이유"를 한 문장으로 쓰세요. 이 문장이 자연스럽게 써지지 않는 후보는 버리고 다시 만드세요.
+   → 훅은 반드시 말이 되어야 합니다. 제목만 읽고 0.5초 안에 무슨 이야기인지, 왜 눌러야
+     하는지 파악되지 않으면 0점. 억지 어미·의미 불명 생략·문법이 깨진 훅 = 0점.
+   → whyClick 이 "궁금해서" 같은 빈말이면 실패. "반값인데 빈손으로 나왔다는 모순을
+     해소하고 싶어서"처럼 제목 속 구체 긴장을 짚어야 합니다.
 ` : ''}
 ${mode === 'affiliate' ? `
 ⛔⛔⛔ [쇼핑커넥트 절대 규칙 — 위반 시 0점]

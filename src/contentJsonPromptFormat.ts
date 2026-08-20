@@ -80,8 +80,10 @@ function buildPreWritingAnalysisSchema(mode: PromptMode, usesIssueStorySkeleton:
     modeAxes = usesIssueStorySkeleton ? `
     "confirmed": ["공식 발표·판결 등 확정 사실만"],
     "unconfirmed": ["보도·추측 등 미확정 — 여기 넣은 것은 제목·궁금증 소재로 쓰지 않는다"],
-    "curiosityGaps": ["독자가 멈출 궁금증 갭 후보 2~3개 — 공적 활동(출연·하차·이적·복귀·편성·계약·수상)과 확정 사실 소재만"],` : `
-    "stopReason": "스크롤 중인 독자가 멈출 한 지점 — 자료에 실재하는 장면·조건·반복 지적만, 없으면 자료가 가장 구체적으로 다루는 것",`;
+    "curiosityGaps": ["독자가 멈출 궁금증 갭 후보 2~3개 — 공적 활동(출연·하차·이적·복귀·편성·계약·수상)과 확정 사실 소재만"],
+    "clickReason": "지나가던 사람이 이 글을 클릭할 단 하나의 이유 1문장 — 자료 속 가장 의외의 확정 사실이나 모순에서 도출",` : `
+    "stopReason": "스크롤 중인 독자가 멈출 한 지점 — 자료에 실재하는 장면·조건·반복 지적만, 없으면 자료가 가장 구체적으로 다루는 것",
+    "clickReason": "지나가던 사람이 이 글을 클릭할 단 하나의 이유 1문장 — 자료 속 가장 의외의 사실이나 모순에서 도출, 자료 밖 사실 날조 금지",`;
   } else if (mode === 'affiliate') {
     modeAxes = `
     "purchaseDecision": "구매가 갈리는 구체 조건 1~2개 (자료·후기에서 관찰되는 것만)",
@@ -104,13 +106,23 @@ function buildPreWritingAnalysisDirective(mode: PromptMode, usesIssueStorySkelet
 - unconfirmed 에 넣은 사안은 제목·도입의 궁금증 소재로 쓰지 않는다(홈판 실존 인물 안전 규율과 동일).` : `
 - titleCandidates 3개는 preWritingAnalysis 의 추론(독자 상황·핵심 질문)에서 나와야 하며, 서로 다른 각도를 쓴다.${mode === 'homefeed' ? `
 - 홈판은 검색 결과가 아니라 피드 노출면이다 — 각 후보가 스크롤 중 어느 지점에서 멈춤을 만드는지 titleRationale 에 적는다.` : ''}`;
+  const homefeedClickContract = mode === 'homefeed' ? `
+- [클릭 사유가 제목의 출발점] 모든 titleCandidates 는 preWritingAnalysis.clickReason 에서 출발한다.
+  자료 내용과 무관하게 키워드를 요약·나열한 제목은 0점이다.
+- [whyClick 자가검증] 후보마다 whyClick 에 "이 제목을 본 사람이 클릭하는 이유"를 1문장으로 쓴다.
+  이 문장이 자연스럽게 써지지 않는 후보는 버리고 다시 만든다. "궁금해서" 같은 빈말은 실패 —
+  "반값인데 빈손으로 나왔다는 모순을 해소하고 싶어서"처럼 제목 속 구체 긴장을 짚어야 한다.
+- [훅은 말이 되어야 한다] 제목만 읽고 0.5초 안에 무슨 이야기인지·왜 눌러야 하는지 파악되지
+  않으면 그 후보는 버린다. 억지 어미, 의미 불명 생략, 문법이 깨진 훅 = 0점.
+- [요약 명사 종결 금지] "~정리/~총정리/~가이드/~현황/~포인트/~모음/~대응/~의미/~근황"으로
+  끝나는 제목은 보도자료 문형이라 0점 — 궁금증이 남는 서술이나 의문으로 끝낸다.` : '';
   const modeExtra = (mode === 'seo' || mode === 'mate') ? `
 - headings 소제목은 mustAnswer 의 질문들에 대응한다. 질문에 대응하지 않는 소제목을 만들지 않는다.` : mode === 'affiliate' ? `
 - evidenceMode 판정과 다른 화자·근거를 본문에서 쓰지 않는다. objections 가 비어 있으면 반박 문단을 지어내지 않는다.` : mode === 'business' ? `
 - headings 는 inquiryTrigger 의 상황과 inquiryBarriers 의 장벽 해소에 대응한다 — 비용이 정해지는 조건·진행 절차·문의 전 확인 항목 같은 소제목을 장벽에 맞춰 배치한다. inquiryBarriers 가 비어 있으면 장벽 해소 문단을 지어내지 않는다.` : '';
   return `📌 [모든 모드 — 제목보다 추론이 먼저다]
 - preWritingAnalysis 를 반드시 가장 먼저 채운다. 크롤링 자료를 분석하기 전에 제목부터 쓰지 않는다.
-- whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.${issueExtra}${modeExtra}
+- whyNow 는 주어진 단서(뉴스 시점·상위글 반복 지점·지식iN 질문·검색량 지표)를 실제로 훑어 근거를 명시한다. 크롤링과 검색 API 가 이미 단서를 모아 왔다 — 훑지 않고 건너뛰지 않는다. 자료 밖 트렌드 이유는 지어내지 않는다.${issueExtra}${homefeedClickContract}${modeExtra}
 - 각 headings[].imagePrompt 는 imageDirection 을 따르되 그 소제목 본문의 구체 장면에서 도출한다 — 일반 소품 사진 묘사로 도망가지 않는다.
 - preWritingAnalysis 는 설계 메모다 — 그 문장들을 introduction·headings·conclusion 본문에 옮기지 않는다.
 
@@ -339,10 +351,13 @@ export function buildContentJsonOutputFormat(options: ContentJsonOutputFormatOpt
 
 {${buildPreWritingAnalysisSchema(mode, usesIssueStorySkeleton)}
   "selectedTitle": "제목 1",
-  "titleCandidates": [
+  "titleCandidates": [${isHomefeed ? `
+    {"text": "제목 1", "score": 95, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
+    {"text": "제목 2", "score": 90, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"},
+    {"text": "제목 3", "score": 85, "whyClick": "이 제목을 본 사람이 클릭하는 이유 1문장"}` : `
     {"text": "제목 1", "score": 95},
     {"text": "제목 2", "score": 90},
-    {"text": "제목 3", "score": 85}
+    {"text": "제목 3", "score": 85}`}
   ],
   ${buildHeadingsExample()},
   "introduction": "${isHomefeed ? '도입부 (2~4개의 짧은 문장, 상황 + 읽을 이유)' : isMate ? '도입부 (첫 300자 안에 직접 답변)' : '도입부'}",

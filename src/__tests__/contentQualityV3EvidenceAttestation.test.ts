@@ -170,7 +170,8 @@ describe('Content Quality V3 evidence attestation', () => {
         // [2026-08-14] 모드별 소제목 스펙 2종이 베이스라인에 편입(108→110) + promptLoader 변경으로 재계산
         // [2026-08-19] 노출 글 구조 블록 주입(promptLoader structureGuideBlock)으로 재계산
         // [2026-08-20] 홈판 제목 클릭사유 개편(title/homefeed/base.prompt 0점 패턴 추가)으로 재계산
-        'bf919416123f482b5dc8429457e695509c5de96a31f8dbc9534447acf1d7d471',
+        // [2026-08-20] 본선 배선(contentJsonPromptFormat clickReason·whyClick·훅 계약)으로 재계산
+        '125ab7636b3257ce84dfc571fdb48ec47734e5d180cc7b1cff30241e47a39a28',
       candidateRuntimeSha256: CONTENT_QUALITY_V3_CANDIDATE_RUNTIME_SHA256,
     });
 
