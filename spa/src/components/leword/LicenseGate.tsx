@@ -1,13 +1,11 @@
-import { useState } from 'react';
-import { getStoredLicense, setStoredLicense } from '../../lib/keywordApi';
-import { hasAnyUserKey } from '../../lib/userKeys';
 import { loadSession } from '../../lib/lewordAuth';
 
 /**
- * 라이선스 잠금.
+ * 잠금 안내.
  *
- * 앱과 같은 방식이다 — 라이선스 코드를 사서 넣으면 열린다. 무료로도 맛은 볼 수
- * 있게 두되(황금키워드 5건 · 조회 10회), 그 이상은 코드가 있어야 한다.
+ * 무료로도 맛은 볼 수 있게 두되(황금키워드 5건 · 조회 10회), 그 이상은
+ * 로그인해야 한다. 라이선스 코드는 계정을 만들 때 쓰인다 — 코드만 브라우저에
+ * 적어 두는 길은 없앴다(그건 계정에 묶이지 않은 그냥 글자다).
  *
  * 자기 API 키를 넣은 사람도 연다. 그 경우 사장님 쿼터를 안 쓰기 때문이다 —
  * 막을 이유가 없다.
@@ -16,9 +14,18 @@ import { loadSession } from '../../lib/lewordAuth';
  */
 
 /** 지금 이 브라우저가 잠금을 풀 자격이 있는가. */
+/**
+ * 잠금을 여는 것은 **로그인 하나뿐**이다.
+ *
+ * 예전엔 라이선스 코드 문자열이 들어 있거나 자기 API 키를 넣어 두기만 해도
+ * 열렸다. 그래서 로그인을 붙여 놓고도 전부 보였다(사장님 실측 2026-08-20
+ * "상위 5건만 보인다면서 다 보이는데?"). 두 값은 성격이 다르다 —
+ *   · 라이선스 코드 문자열 : 그냥 브라우저에 적어 둔 글자다. 계정에 묶여야 값이 된다
+ *   · 자기 API 키          : 조회 한도를 자기 몫으로 쓰는 것이지 이용권이 아니다
+ * 코드를 가진 사람은 계정을 만들면 그대로 열린다 — 잃는 것은 없다.
+ */
 export function isUnlocked(): boolean {
-    // 로그인한 사람이 1순위다 — 라이선스 코드가 계정에 이미 묶여 있다.
-    return loadSession() !== null || Boolean(getStoredLicense().trim()) || hasAnyUserKey();
+    return loadSession() !== null;
 }
 
 /**
@@ -35,44 +42,31 @@ export const FREE_BOARD_ROWS = BETA_OPEN ? Number.MAX_SAFE_INTEGER : 5;
 export const FREE_LOOKUPS = BETA_OPEN ? 1000 : 10;
 
 function LicenseGate({ onUnlock }: { onUnlock: () => void }) {
-    const [code, setCode] = useState(getStoredLicense());
-    const [open, setOpen] = useState(false);
-
-    const submit = () => {
-        const trimmed = code.trim();
-        if (!trimmed) return;
-        setStoredLicense(trimmed);
-        onUnlock();
-    };
-
     return (
         <div className="lw-gate">
             <div className="lw-gate-body">
                 <strong>여기까지가 무료입니다</strong>
                 <p>
                     황금키워드 {FREE_BOARD_ROWS}건과 조회 {FREE_LOOKUPS}회까지 그냥 보실 수 있습니다.
-                    전체를 보시려면 <b>라이선스 코드</b>로 로그인해 주세요 — 프로그램에서 쓰시는 그 코드입니다.
+                    나머지 {'{'}남은 건수{'}'}는 로그인하면 열립니다 — 라이선스 코드가 있으면 1분이면 됩니다.
                 </p>
             </div>
 
             <div className="lw-gate-actions">
-                {open
-                    ? (
-                        <div className="lw-gate-form">
-                            <input
-                                type="text"
-                                value={code}
-                                onChange={(event) => setCode(event.target.value)}
-                                onKeyDown={(event) => { if (event.key === 'Enter') submit(); }}
-                                placeholder="라이선스 코드"
-                                aria-label="라이선스 코드"
-                                autoComplete="off"
-                                spellCheck={false}
-                            />
-                            <button type="button" onClick={submit}>로그인</button>
-                        </div>
-                    )
-                    : <button type="button" className="lw-gate-login" onClick={() => setOpen(true)}>라이선스 코드로 로그인</button>}
+                {/*
+                  * 예전엔 여기서 라이선스 코드를 직접 받아 브라우저에 적어 뒀다.
+                  * 이제 코드는 계정에 묶인다 — 코드만 적어 두는 길은 없앴다.
+                  * 계정을 만들면 그 코드가 그대로 쓰인다.
+                  */}
+                <button
+                    type="button"
+                    className="lw-gate-login"
+                    onClick={() => {
+                        // 로그인 화면은 페이지가 갖고 있다. 보드를 거쳐 넘기면 소품이 길어진다.
+                        window.dispatchEvent(new CustomEvent('leword:login'));
+                        onUnlock();
+                    }}
+                >로그인 · 계정 만들기</button>
                 <a className="lw-gate-buy" href="/pricing">라이선스 구매 →</a>
             </div>
         </div>

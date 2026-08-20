@@ -55,6 +55,13 @@ function LewordPage() {
     const left = session ? daysLeft(session) : null;
     const activeMeta = TABS.find((tab) => tab.id === activeTab) ?? TABS[0];
 
+    // 보드 안쪽 잠금 안내가 로그인을 부를 때 — 소품을 길게 넘기지 않는다.
+    useEffect(() => {
+        const open = () => setAuthOpen(true);
+        window.addEventListener('leword:login', open);
+        return () => window.removeEventListener('leword:login', open);
+    }, []);
+
     useEffect(() => {
         const previous = document.title;
         document.title = 'LEWORD 키워드 도구 | Leaders Pro';
