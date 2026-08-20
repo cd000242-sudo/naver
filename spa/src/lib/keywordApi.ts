@@ -213,6 +213,17 @@ async function call<T>(action: string, params: Record<string, string>): Promise<
         if (renewed?.claudeToken) {
             try { saveUserKeys({ ...loadUserKeys(), ...renewed }); } catch { /* 저장 실패해도 응답은 돌려준다 */ }
         }
+        /*
+         * 토큰 사망(갱신까지 실패) — 죽은 토큰을 비우고 재연동 창을 그 자리에서
+         * 띄운다(사장님 요구: "만료되면 알아서 로그인창"). 죽은 토큰을 두면
+         * 누를 때마다 같은 오류만 반복된다.
+         */
+        if ((payload as { claudeTokenDead?: boolean } | null)?.claudeTokenDead) {
+            try {
+                saveUserKeys({ ...loadUserKeys(), claudeToken: '', claudeRefresh: '', claudeExpiresAt: '' });
+            } catch { /* 계속 */ }
+            window.dispatchEvent(new CustomEvent('leword:claude-dead', { detail: { message: String(payload?.message || '') } }));
+        }
         if (!payload?.ok) {
             return {
                 ok: false,

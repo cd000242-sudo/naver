@@ -340,6 +340,19 @@ function LewordStyles() {
                 color: #cfc2ff; border-bottom: 1px solid rgba(207,194,255,.35);
             }
             .lw-metric-verdict { padding: 2px 9px; border-radius: 999px; font-weight: 700; }
+            .lw-reconnect-back { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 4vh 4vw; background: rgba(4,6,10,.78); }
+            .lw-reconnect { width: 100%; max-width: 420px; padding: 22px; border: 1px solid rgba(255,165,0,.35); border-radius: 15px; background: #10131a; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+            .lw-reconnect h3 { margin: 0 0 8px; font-size: 18px; color: #fff; }
+            .lw-reconnect p { margin: 0 0 14px; font-size: 13.5px; color: rgba(235,242,250,.7); line-height: 1.6; }
+            .lw-reconnect-why { display: block; margin-top: 7px; font-style: normal; font-size: 12px; color: #646b7d; font-family: ui-monospace, monospace; }
+            .lw-reconnect ol { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+            .lw-reconnect li span { display: block; margin-bottom: 6px; font-size: 13px; color: rgba(235,242,250,.8); }
+            .lw-reconnect input { width: 100%; padding: 11px 13px; border-radius: 9px; border: 1px solid rgba(255,255,255,.16); background: rgba(255,255,255,.04); color: #ebf2fa; font-family: ui-monospace, monospace; font-size: 13px; }
+            .lw-reconnect-err { color: #ff6b81 !important; }
+            .lw-reconnect-row { display: flex; gap: 9px; }
+            .lw-reconnect-cta { padding: 11px 18px; border: 0; border-radius: 9px; background: linear-gradient(135deg, #ffa500, #ffc247); color: #1a1206; font-size: 13.5px; font-weight: 700; cursor: pointer; font-family: inherit; }
+            .lw-reconnect-cta:disabled { opacity: .55; cursor: not-allowed; }
+            .lw-reconnect-ghost { padding: 11px 16px; border: 1px solid rgba(255,255,255,.16); border-radius: 9px; background: transparent; color: rgba(235,242,250,.7); font-size: 13.5px; cursor: pointer; font-family: inherit; }
             .lw-linktag {
                 padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 700;
                 background: rgba(255,255,255,.07); color: rgba(235,242,250,.6);

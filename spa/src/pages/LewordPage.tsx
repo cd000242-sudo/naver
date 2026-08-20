@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ClaudeReconnect from '../components/leword/ClaudeReconnect';
 import LewordAuth from '../components/leword/LewordAuth';
 import { clearSession, daysLeft, loadSession, type LewordSession } from '../lib/lewordAuth';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -86,6 +87,8 @@ function LewordPage() {
         //     이 화면의 어두운 바탕을 지워서, 관리자 배경 사진이 카드 뒤로 비쳤다.
         <div className="lw-app">
             <LewordStyles />
+            {/* 토큰이 죽는 순간 어느 탭에서든 뜨는 재연동 창. */}
+            <ClaudeReconnect />
 
             <aside className="lw-side" aria-label="LEWORD 기능">
                 <div className="lw-brand">
