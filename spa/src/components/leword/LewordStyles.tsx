@@ -282,6 +282,9 @@ function LewordStyles() {
 
             /* 클로드 구독 연결(버튼 한 번) */
             .lw-claude-connect { display: flex; flex-direction: column; gap: 9px; margin-bottom: 12px; }
+            .lw-claude-steps { padding: 12px 14px; border: 1px solid rgba(255,165,0,.32); border-radius: 11px; background: rgba(255,165,0,.06); }
+            .lw-claude-steps p { margin: 0 0 9px; font-size: 13px; color: #ebf2fa; line-height: 1.6; }
+            .lw-claude-steps b { color: #ffa500; }
             .lw-claude-code { display: flex; gap: 8px; }
             .lw-claude-code input { flex: 1; min-width: 0; padding: 9px 12px; border: 1px solid rgba(255,255,255,.14); border-radius: 9px; background: rgba(255,255,255,.03); color: #ebf2fa; font-size: 13px; }
             .lw-claude-code input:focus { outline: none; border-color: rgba(255,165,0,.5); }

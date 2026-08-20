@@ -20,7 +20,7 @@ const ENDPOINT = GAS_URL;
  * 나머지 액션은 GAS 그대로다 — 한 번에 다 옮기면 장부까지 끌려온다.
  */
 const WORKER_ENDPOINT = 'https://leword-keyword-api.leword.workers.dev/';
-const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'post-audit-analyze']);
+const WORKER_ACTIONS = new Set(['keyword-coupang-board', 'keyword-coupang-deeplink', 'blog-audit-posts', 'blog-audit-check', 'kin-question', 'kin-answer', 'mindmap-ai', 'claude-oauth-exchange', 'claude-token-check', 'post-audit-analyze']);
 const endpointFor = (action: string) => (WORKER_ACTIONS.has(action) ? WORKER_ENDPOINT : ENDPOINT);
 const VISITOR_KEY = 'leaderspro.keyword.visitorId';
 const LICENSE_KEY = 'leaderspro.keyword.licenseCode';
@@ -299,6 +299,10 @@ export const fetchPostAnalysis = (input: {
 /** 승인 코드+검증값 → 구독 토큰 교환. 코드는 승인 화면의 "code#state" 그대로. */
 export const exchangeClaudeOauth = (code: string, verifier: string) =>
     call<{ accessToken: string; refreshToken: string; expiresAt: number }>('claude-oauth-exchange', { code, verifier });
+
+/** 저장 전에 그 토큰으로 실제 생성이 되는지 확인 — 죽은 값 저장 방지. */
+export const checkClaudeToken = (token: string) =>
+    call<Record<string, never>>('claude-token-check', { token });
 
 /** 지식인 질문 전문 — 답변 작업대는 질문이 안 잘리고 끝까지 보여야 한다. */
 export const fetchKinQuestion = (link: string) =>

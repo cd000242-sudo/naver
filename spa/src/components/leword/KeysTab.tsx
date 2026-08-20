@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { exchangeClaudeOauth } from '../../lib/keywordApi';
+import { checkClaudeToken, exchangeClaudeOauth } from '../../lib/keywordApi';
 import { probeBridge, type BridgeStatus } from '../../lib/bridge';
 import {
     KEY_GROUPS,
@@ -70,7 +70,8 @@ function KeysTab() {
             + '&client_id=9d1c250a-e61b-44d9-88ed-5944d1962f5e'
             + '&response_type=code'
             + `&redirect_uri=${encodeURIComponent('https://platform.claude.com/oauth/code/callback')}`
-            + `&scope=${encodeURIComponent('user:profile user:inference')}`
+            // 범위를 줄이면 토큰은 나오는데 추론이 거부된다(무한루프 실사고 2026-08-20).
+            + `&scope=${encodeURIComponent('user:profile user:inference user:sessions:claude_code user:mcp_servers')}`
             + `&code_challenge=${base64url(digest)}`
             + '&code_challenge_method=S256'
             + `&state=${base64url(stateRaw)}`;
@@ -129,10 +130,30 @@ function KeysTab() {
 
     const problems = checkKeyShape(keys);
 
-    const persist = () => {
+    const persist = async () => {
         // 형식이 이상하면 저장하지 않는다. 자동완성으로 들어온 로그인 정보를
         // 그대로 저장하면 다음 조회에서 그게 서버로 간다.
         if (problems.length > 0) return;
+        /*
+         * 클로드 토큰은 저장 전에 **실제로 되는지** 확인한다(사장님 실사고
+         * 2026-08-20: 안 되는 값을 저장 → 생성 실패 → 자동 삭제 → 무한루프).
+         * 승인 코드를 토큰 칸에 넣는 흔한 실수도 여기서 잡아 준다.
+         */
+        const token = String(keys.claudeToken || '').trim();
+        if (token && token !== String(loadUserKeys().claudeToken || '')) {
+            if (!/^sk-ant-/.test(token)) {
+                setOauthNote('이건 토큰이 아니라 승인 코드로 보입니다 — 위 [클로드 구독 연결] 버튼을 누른 뒤 나오는 칸에 넣어 주세요.');
+                return;
+            }
+            setOauthBusy(true);
+            const checked = await checkClaudeToken(token);
+            setOauthBusy(false);
+            if (!checked.ok) {
+                setOauthNote(`이 토큰으로는 생성이 안 됩니다: ${checked.message || checked.error} — [클로드 구독 연결] 버튼으로 새로 연결해 주세요.`);
+                return;
+            }
+            setOauthNote('✅ 토큰 확인됨 — 저장했습니다.');
+        }
         saveUserKeys(keys);
         setKeys(loadUserKeys());
         setSaved(true);
@@ -185,17 +206,25 @@ function KeysTab() {
                             🔗 클로드 구독 연결 (버튼 한 번)
                         </button>
                         {oauth && (
-                            <div className="lw-claude-code">
-                                <input
-                                    type="text"
-                                    value={oauthCode}
-                                    onChange={(event) => setOauthCode(event.target.value)}
-                                    placeholder="승인 후 화면에 뜬 코드를 여기에 붙여넣기"
-                                    aria-label="클로드 승인 코드"
-                                />
-                                <button type="button" className="lw-mini" onClick={finishClaudeConnect} disabled={oauthBusy || !oauthCode.trim()}>
-                                    {oauthBusy ? '연결 중…' : '연결 완료'}
-                                </button>
+                            /*
+                             * 단계를 눈에 보이게 적는다 — 승인 코드를 아래 '토큰' 칸에
+                             * 잘못 넣어 무한루프가 났던 실사고(2026-08-20) 재발 방지.
+                             */
+                            <div className="lw-claude-steps">
+                                <p><b>① 새 탭</b>에서 승인을 누르세요. <b>② 그 화면에 뜬 코드</b>를 아래 칸에 붙여넣고 [연결 완료].</p>
+                                <div className="lw-claude-code">
+                                    <input
+                                        type="text"
+                                        value={oauthCode}
+                                        onChange={(event) => setOauthCode(event.target.value)}
+                                        placeholder="여기에 승인 코드 붙여넣기 (아래 토큰 칸 아님)"
+                                        aria-label="클로드 승인 코드"
+                                        autoFocus
+                                    />
+                                    <button type="button" className="lw-mini" onClick={finishClaudeConnect} disabled={oauthBusy || !oauthCode.trim()}>
+                                        {oauthBusy ? '연결 중…' : '연결 완료'}
+                                    </button>
+                                </div>
                             </div>
                         )}
                     </div>
